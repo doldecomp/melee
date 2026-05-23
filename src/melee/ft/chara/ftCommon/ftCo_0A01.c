@@ -5750,7 +5750,368 @@ void ftCo_800ADC28(Fighter* fp)
     }
 }
 
-/// #ftCo_800ADE48
+void ftCo_800ADE48(Fighter* fp)
+{
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    Vec3 floor_pos;
+    Vec3 floor_normal;
+    int line_id;
+    u32 flags;
+    Item_GObj* item_gobj;
+    Item* ip;
+    ItemKind kind;
+    s32 result;
+    s32 in_bounds;
+    s32 switch_cmd;
+    s32 found;
+    f32 px;
+    f32 py;
+    f32 dx;
+    f32 dy;
+    f32 dist;
+
+    found = 0;
+    px = data->x54.x;
+    py = data->x54.y;
+    line_id = -1;
+    result = mpCheckFloor(px, 5.0 + py, px, py - 5.0, 0.0f, &floor_pos,
+                          &line_id, &flags, &floor_normal, -1, -1, -1, NULL,
+                          NULL);
+    if (result != 0 && ftCo_800A1B38(line_id) != 0) {
+    } else {
+        found = result;
+    }
+    if (found != 0) {
+        px = data->x54.x;
+        py = data->x54.y;
+        if (px < data->half_width + Stage_GetBlastZoneLeftOffset() ||
+            px > Stage_GetBlastZoneRightOffset() - data->half_width ||
+            py < data->half_height + Stage_GetBlastZoneBottomOffset() ||
+            py > Stage_GetBlastZoneTopOffset() - data->half_height)
+        {
+            in_bounds = 0;
+        } else {
+            in_bounds = 1;
+        }
+        if (in_bounds != 0) {
+            goto block_12;
+        }
+    } else {
+    block_12:
+        data->xFA_b2 = false;
+        if (fp->ground_or_air == GA_Air) {
+            px = fp->cur_pos.x;
+            py = fp->cur_pos.y;
+            line_id = -1;
+            result = mpCheckFloor(px, py, px, py - 1000.0f, 0.0f, &floor_pos,
+                                  &line_id, &flags, &floor_normal, -1, -1, -1,
+                                  NULL, NULL);
+            found = 0;
+            if (result != 0 && ftCo_800A1B38(line_id) != 0) {
+            } else {
+                found = result;
+            }
+            if (found != 0) {
+                data->x54.x = floor_pos.x;
+                data->x54.y = floor_pos.y;
+            } else {
+                data->x54.x = fp->cur_pos.x;
+                data->x54.y = fp->cur_pos.y;
+            }
+        } else {
+            data->x54.x = fp->cur_pos.x;
+            data->x54.y = fp->cur_pos.y;
+        }
+    }
+    dy = fp->cur_pos.y - data->x54.y;
+    dx = fp->cur_pos.x - data->x54.x;
+    dist = sqrtf(dx * dx + dy * dy);
+    data->x5C = dist;
+    if (data->x88 > 0) {
+        data->x88 = data->x88 - 1;
+    }
+    if (data->x8C != gm_8016C75C(fp->gobj)) {
+        data->x88 = 0x12C;
+        data->x8C = gm_8016C75C(fp->gobj);
+    }
+    if (data->xC == 0xE) {
+        if (data->x7C % 120 == 0) {
+            if (HSD_Randf() > 0.5f) {
+                data->xF8_b5 = true;
+            } else {
+                data->xF8_b5 = false;
+            }
+        }
+    } else if (data->x7C % 400 == 0) {
+        if (HSD_Randf() > 0.5f) {
+            data->xF8_b5 = true;
+        } else {
+            data->xF8_b5 = false;
+        }
+    }
+    if (!fp->x221B_b5) {
+        data->x94 = 0;
+    }
+    if (data->x18 == 0x12) {
+        return;
+    }
+    if (fp->kind == FTKIND_GKOOPS) {
+        goto check_motion;
+    }
+    if (data->xC == 0xF || data->xC == 0) {
+        goto check_motion;
+    }
+    if (!fp->x221A_b3) {
+        goto check_motion;
+    }
+    data->xF9_b0 = false;
+    if (0.1f * data->level > HSD_Randf()) {
+        data->xFA_b1 = true;
+    } else {
+        data->xFA_b1 = false;
+    }
+    ftCo_800B4A78(fp);
+    data->x18 = 0x12;
+    return;
+check_motion:
+    if (data->x18 != 0x11) {
+        if (fp->motion_id == 0x125) {
+            switch_cmd = 1;
+        } else if (fp->motion_id == 0x154) {
+            switch_cmd = 2;
+        } else {
+            switch_cmd = 0;
+        }
+        if (switch_cmd != 0) {
+            ftCo_800B4A78(fp);
+            data->x18 = 0x11;
+            return;
+        }
+        if (data->x18 != 0x13) {
+            if (fp->motion_id == 0x131) {
+                switch_cmd = 1;
+            } else if (fp->motion_id == 0x132) {
+                switch_cmd = 2;
+            } else {
+                switch_cmd = 0;
+            }
+            if (switch_cmd != 0) {
+                ftCo_800B4A78(fp);
+                data->x18 = 0x13;
+                return;
+            }
+            if (data->x18 != 5) {
+                switch (fp->motion_id) {
+                case 0xBF:
+                case 0xB7:
+                    switch_cmd = 1;
+                    break;
+                case 0xC0:
+                case 0xB8:
+                    switch_cmd = 2;
+                    break;
+                default:
+                    switch_cmd = 0;
+                    break;
+                }
+                if (switch_cmd != 0) {
+                    ftCo_800B4A78(fp);
+                    data->x18 = 5;
+                    return;
+                }
+                if (data->x18 != 6) {
+                    switch (fp->motion_id) {
+                    case 0xFC:
+                        switch_cmd = 1;
+                        break;
+                    case 0xFD:
+                        switch_cmd = 2;
+                        break;
+                    default:
+                        switch_cmd = 0;
+                        break;
+                    }
+                    if (switch_cmd != 0) {
+                        ftCo_800B4A78(fp);
+                        data->x18 = 6;
+                        return;
+                    }
+                    if (data->x18 != 9) {
+                        if (ftCo_IsGrabbing(fp) != 0) {
+                            ftCo_800B4A78(fp);
+                            data->x18 = 9;
+                            return;
+                        }
+                        if (data->x18 != 4) {
+                            if (ftCo_800A2C80(fp) != 0) {
+                                ftCo_800B4A78(fp);
+                                data->x18 = 4;
+                                return;
+                            }
+                        }
+                        if (data->x18 != 0xF) {
+                            if (data->level < 5) {
+                                switch_cmd = 0;
+                            } else if (fp->motion_id == 0x26) {
+                                switch_cmd = 1;
+                            } else {
+                                switch_cmd = 0;
+                            }
+                            if (switch_cmd != 0) {
+                                ftCo_800B4A78(fp);
+                                data->x18 = 0xF;
+                                return;
+                            }
+                            if (data->x18 != 0x10) {
+                                if (fp->motion_id == 0xE0 ||
+                                    fp->motion_id == 0xE3 ||
+                                    (fp->motion_id >= 0x10A &&
+                                     fp->motion_id <= 0x10E))
+                                {
+                                    ftCo_800B4A78(fp);
+                                    data->x18 = 0x10;
+                                    return;
+                                }
+                                if (data->x18 != 7) {
+                                    if (ftCo_800A5ACC(fp) != 0) {
+                                        ftCo_800BB9B4(fp);
+                                        if (fp->x1A88.xF8_b12) {
+                                            ftCo_800B4A78(fp);
+                                            data->x18 = 7;
+                                            return;
+                                        }
+                                    }
+                                    if (data->x18 != 3) {
+                                        if (ftCo_800B9CBC(fp) != 0) {
+                                            ftCo_800B4A78(fp);
+                                            data->x18 = 3;
+                                            return;
+                                        }
+                                        if (data->x18 != 2) {
+                                            if (ftCo_800B8A9C(fp) != 0) {
+                                                ftCo_800B4A78(fp);
+                                                data->x18 = 2;
+                                                return;
+                                            }
+                                            if (data->x18 != 8) {
+                                                data->xF8_b34 =
+                                                    ftCo_800B732C(fp);
+                                                if (data->xF8_b34) {
+                                                    data->x18 = 8;
+                                                    return;
+                                                }
+                                                if (data->x18 != 0xD) {
+                                                    if (ftCo_800A3710(fp) !=
+                                                        0)
+                                                    {
+                                                        data->x18 = 0xD;
+                                                        return;
+                                                    }
+                                                    if (data->x18 != 0xE) {
+                                                        item_gobj =
+                                                            fp->item_gobj;
+                                                        if (item_gobj ==
+                                                            NULL)
+                                                        {
+                                                            found = 0;
+                                                        } else {
+                                                            ip = GET_ITEM(
+                                                                item_gobj);
+                                                            if (data->xC ==
+                                                                0x1D)
+                                                            {
+                                                                found = 1;
+                                                            } else {
+                                                                kind =
+                                                                    ip->kind;
+                                                                if (kind ==
+                                                                    It_Kind_M_Ball)
+                                                                {
+                                                                    found = 1;
+                                                                } else if (
+                                                                    kind <
+                                                                    0x22)
+                                                                {
+                                                                    if (kind <
+                                                                        7)
+                                                                    {
+                                                                        if (kind <
+                                                                            0)
+                                                                        {
+                                                                            found =
+                                                                                ftCo_800A5980(
+                                                                                    (Fighter*)
+                                                                                        ip) !=
+                                                                                        0
+                                                                                    ? 1
+                                                                                    : 0;
+                                                                        } else {
+                                                                            found =
+                                                                                1;
+                                                                        }
+                                                                    } else {
+                                                                        found =
+                                                                            ftCo_800A5980(
+                                                                                (Fighter*)
+                                                                                    ip) !=
+                                                                                    0
+                                                                                ? 1
+                                                                                : 0;
+                                                                    }
+                                                                } else if (
+                                                                    kind !=
+                                                                    It_Kind_EvYoshiEgg)
+                                                                {
+                                                                    found =
+                                                                        ftCo_800A5980(
+                                                                            (Fighter*)
+                                                                                ip) !=
+                                                                                0
+                                                                            ? 1
+                                                                            : 0;
+                                                                } else {
+                                                                    found = 1;
+                                                                }
+                                                            }
+                                                        }
+                                                        if (found != 0) {
+                                                            data->x18 = 0xE;
+                                                            return;
+                                                        }
+                                                        if (data->x18 != 0xA) {
+                                                            if (data->x20 !=
+                                                                    0 &&
+                                                                ftCo_800A3554(
+                                                                    fp, 0.0f) !=
+                                                                    0)
+                                                            {
+                                                                data->x18 =
+                                                                    data->x20;
+                                                                return;
+                                                            }
+                                                            return;
+                                                        }
+                                                        return;
+                                                    }
+                                                    return;
+                                                }
+                                                return;
+                                            }
+                                            return;
+                                        }
+                                        return;
+                                    }
+                                    return;
+                                }
+                                ftCo_800BB9B4(fp);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 void ftCo_800AE7AC(Fighter* fp, Vec3* arg1, int arg2)
 {
