@@ -623,9 +623,36 @@ void fn_800C7890(Fighter_GObj* gobj)
     ftCo_800C7A30(gobj);
 }
 
-UNK_RET ftCo_800C78B0(HSD_GObj* gobj, HSD_GObj* owner)
+void ftCo_800C78B0(HSD_GObj* gobj, HSD_GObj* owner)
 {
-    NOT_IMPLEMENTED;
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCommonData* cd;
+    f32 temp_f31;
+
+    ftCommon_8007DB58(gobj);
+    ftCo_8009750C(gobj);
+    ftCo_800DD168(gobj);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureLikelike, 0x1080, 0.0f, 1.0f,
+                              0.0f, NULL);
+    ftAnim_8006EBA4(gobj);
+    fp->accessory1_cb = fn_800C7AE0;
+    fp->death2_cb = fn_800C7890;
+    fp->take_dmg_cb = ftCo_800C7A30;
+    fp->x221D_b5 = true;
+    fp->mv.co.capturelikelike.x0 = (Item_GObj*) owner;
+    fp->mv.co.capturelikelike.x4 = 0;
+    ftCommon_8007E2FC(gobj);
+    cd = p_ftCommonData;
+    temp_f31 =
+        cd->x74C * (cd->x750 - (f32) (Player_80033BB8(fp->player_id) + 1));
+    ftCommon_InitGrab(
+        fp, 0,
+        fp->dmg.x1830_percent * cd->x754 +
+            (cd->x744 * (cd->x748 - (f32) Player_GetHandicap(fp->player_id)) +
+             cd->x740 + temp_f31));
+    fp->x1988 = 2;
+    fp->invisible = true;
+    ftCommon_8007E2F4(fp, 0x1FF);
 }
 
 void ftCo_800C7A30(Fighter_GObj* gobj)

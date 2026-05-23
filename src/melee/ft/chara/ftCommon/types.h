@@ -370,6 +370,7 @@ union ftCommon_MotionVars {
     } entry;
     struct {
         /* fp+2340 */ Item_GObj* x0;
+        /* fp+2344 */ int x4;
     } capturelikelike;
     struct {
         /* fp+2340 */ HSD_GObjEvent x0;
