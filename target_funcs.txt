@@ -4,7 +4,7 @@ Funcs:
 - [x] gm_801B59AC
 - [x] gm_801B60A4_OnLoad
 - [x] gm_801B5324
-- [ ] gm_801B5624
+- [x] gm_801B5624
 
 File: src/melee/gm/gmcamera.c
 Funcs:
