@@ -66,23 +66,23 @@ s32 fn_803AA790(void)
         entry->x0 = 0;
         return result;
     case 2:
-        sub_state = ((CardState*) arg0)->x28[entry->x8];
+        sub_state = ((s32*) (arg0 + 0x28))[entry->x8];
         switch (sub_state) {
-        case 3:
-            result = fn_803B0120(entry->x4, entry->x8, entry->xC, 1,
-                                 (s32) entry->x14);
-            break;
         case 0:
             result = fn_803AE7F8((struct CardState*) entry->x4, entry->x8,
                                  entry->xC, 1, (s32) entry->x14);
             break;
+        case 1:
+        case 2:
+            result = fn_803AF3F0(entry->x4, entry->x8, entry->xC, 1,
+                                 (s32) entry->x14);
+            break;
+        case 3:
+            result = fn_803B0120(entry->x4, entry->x8, entry->xC, 1,
+                                 (s32) entry->x14);
+            break;
         default:
-            if (sub_state > 0 && sub_state < 3) {
-                result = fn_803AF3F0(entry->x4, entry->x8, entry->xC, 1,
-                                     (s32) entry->x14);
-            } else {
-                result = -0x101;
-            }
+            result = -0x101;
             break;
         }
         if (result < 0) {
