@@ -3855,7 +3855,88 @@ void ftCo_800ADC28(Fighter* fp)
 
 /// #ftCo_800AE7AC
 
-/// #ftCo_800AEA8C
+void ftCo_800AEA8C(Fighter* fp)
+{
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    Item_GObj* item_gobj;
+    s32 is_food;
+    s32 do_floor;
+    s32 found;
+    Vec3 floor_pos;
+    Vec3 floor_normal;
+    int line_id;
+    u32 flags;
+    f32 x;
+    f32 y;
+
+    is_food = 1;
+    data->xF8_b0 = false;
+    data->xF9_b2 = true;
+    data->xF9_b4 = true;
+    data->xF9_b3 = false;
+    data->xF9_b5 = true;
+    data->xF9_b6 = true;
+    data->xF9_b7 = true;
+    data->xF9_b1 = false;
+    data->x44 = ftCo_800A4BEC(fp);
+    item_gobj = fp->item_gobj;
+    if (item_gobj != NULL) {
+        switch (GET_ITEM(item_gobj)->kind) {
+        case It_Kind_Heart:
+            break;
+        case It_Kind_Tomato:
+            break;
+        case It_Kind_Foods:
+            break;
+        default:
+            is_food = 0;
+            break;
+        }
+        if (is_food == 0) {
+            data->x4C = NULL;
+        } else {
+            goto block_10;
+        }
+    } else {
+    block_10:
+        if (fp->x2168 != 0) {
+            data->x4C = NULL;
+        } else {
+            data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
+        }
+    }
+    data->x50 = ftCo_800A648C(fp);
+    if (data->x18 != data->x20 && data->x18 != data->x1C) {
+        data->x60 = 0;
+    }
+    if (data->x18 == 4) {
+        do_floor = 0;
+    } else {
+        data->xFA_b2 = false;
+        do_floor = 1;
+    }
+    if (do_floor != 0) {
+        s32 result;
+        x = fp->cur_pos.x;
+        y = fp->cur_pos.y;
+        found = 0;
+        line_id = -1;
+        result = mpCheckFloor(x, 10.0f + y, x, y - 1000.0f, 0.0f, &floor_pos,
+                              &line_id, &flags, &floor_normal, -1, -1, -1,
+                              NULL, NULL);
+        if (result && ftCo_800A1B38(line_id)) {
+        } else {
+            found = result;
+        }
+        if (found != 0 && data->x60 == 0) {
+            data->x54.x = floor_pos.x;
+            data->x54.y = floor_pos.y;
+            data->x38 = 5.0f;
+            ftCo_800A1CC4(fp, ftCo_803C6594[stage_info.internal_stage_id]);
+        }
+    }
+    ftCo_800ADE48(fp);
+}
 
 /// #ftCo_800AECF0
 
