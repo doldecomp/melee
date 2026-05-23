@@ -8,7 +8,7 @@ Funcs:
 
 File: src/melee/gm/gmcamera.c
 Funcs:
-- [ ] gmCamera_801A2AAC
+- [x] gmCamera_801A2AAC
 - [ ] gmCamera_801A2BF0
 - [ ] gmCamera_801A2D44
 - [ ] gmCamera_801A26C0
