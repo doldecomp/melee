@@ -191,6 +191,7 @@ HSD_Text* gmCamera_801A2334(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4)
     return text;
 }
 
+#pragma dont_inline on
 void gmCamera_801A253C(s32* arg0, s32* arg1)
 {
     gmCameraUnkStruct* gcus = &gmCamera_80479BC8.gcus;
@@ -210,7 +211,9 @@ void gmCamera_801A253C(s32* arg0, s32* arg1)
         *arg1 = MAX(var_r3, var_r6);
     }
 }
+#pragma dont_inline reset
 
+#pragma dont_inline on
 void gmCamera_801A25C8(void)
 {
     s32 i;
@@ -222,11 +225,14 @@ void gmCamera_801A25C8(void)
         }
     }
 }
+#pragma dont_inline reset
 
+#pragma dont_inline on
 s32 gmCamera_801A2640(void)
 {
     return M2C_FIELD(&gmCamera_80479BC8, s32*, 0x54);
 }
+#pragma dont_inline reset
 
 #pragma dont_inline on
 void gmCamera_801A2650(void)

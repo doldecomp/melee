@@ -14,7 +14,7 @@ Funcs:
 - [ ] gmCamera_801A26C0
 - [ ] gmCamera_801A30E4
 - [ ] gmCamera_801A31FC
-- [ ] gmCamera_801A33BC
+- [x] gmCamera_801A33BC
 - [ ] gmCamera_801A253C
 - [ ] gmCamera_801A292C
 - [ ] gmCamera_801A2334
