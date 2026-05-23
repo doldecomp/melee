@@ -22,4 +22,4 @@ Funcs:
 - [x] fn_803AD16C (58%, was 15% stub)
 - [x] fn_803AF3F0 (48%, was 1.8% stub)
 - [x] fn_803B0120 (48%, was 2.9% stub)
-- [ ] hsd_803AAA48  SYSTEMIC: real fn is 5920B (inlines fn_803AA790 dispatcher tree); ours is a 116B stub.
+- [ ] hsd_803AAA48  (still 1.6% stub; 5920B low-level CARD command state-machine w/ rodata jump table - needs dedicated RE)
