@@ -5,6 +5,7 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "cm/camera.h"
 #include "ft/chara/ftPopo/ftPp_SpecialHi.h"
 #include "ft/chara/ftPopo/ftPp_SpecialLw.h"
 #include "ft/fighter.h"
@@ -23,10 +24,13 @@
 
 #include "gm/gm_unsplit.h"
 #include "gr/grbigblue.h"
+#include "gr/grcastle.h"
 #include "gr/grcorneria.h"
+#include "gr/grgreatbay.h"
 #include "gr/grinishie1.h"
 #include "gr/grlib.h"
 #include "gr/ground.h"
+#include "gr/grrcruise.h"
 #include "gr/grvenom.h"
 #include "gr/stage.h"
 #include "gr/types.h"
@@ -35,6 +39,7 @@
 #include "it/types.h"
 #include "lb/lb_00CE.h"
 #include "lb/lbcollision.h"
+#include "lb/lbvector.h"
 #include "mp/mpisland.h"
 #include "mp/mplib.h"
 #include "mp/types.h"
