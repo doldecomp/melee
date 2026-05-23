@@ -67,7 +67,7 @@ void fn_8018A514(int count, float val)
         region = 1;
     }
 
-    src = *(BracketSrcEntry**) ((u8*) entries + region * 4 + 0x3700);
+    src = ((BracketSrcEntry**) ((u8*) entries + 0x3700))[region];
 
     if (count < 9) {
         for (i = 0; i < count; i++) {
