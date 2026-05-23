@@ -727,54 +727,249 @@ s32 fn_803ACFC0(CardState* state, s32 block_idx, s32 file_id, s32 seq_num,
 
 s32 fn_803AD16C(CardState* state)
 {
+    s32 work[64];
+    s32 seq[64];
+    s32 newmap[64];
+    s32 filemap[64];
+    s32 chosen[64];
+    s32 result;
     s32 file_id;
+    s32 i;
     s32 phys;
+    s32 blocks_before;
+    s32 file_blocks;
+
+    result = 0;
+    for (i = 0; i <= state->x460; i++) {
+        newmap[i] = -1;
+        work[i] = state->x170[i];
+        seq[i] = state->x270[i];
+    }
 
     if (state->x460 != fn_803AC7DC(state)) {
         return -257;
     }
 
-    for (phys = 0; phys <= state->x460; phys++) {
-        if (state->x170[phys] < -0x7FFF) {
-            return -257;
+    for (file_id = 0; file_id < 9; file_id++) {
+        file_blocks = fn_803AC634(state, file_id);
+        if (file_blocks <= 0) {
+            continue;
+        }
+
+        if (file_id >= 9 || file_id == 0) {
+            blocks_before = 0;
+        } else {
+            blocks_before = state->x4C[0] > 0 ? fn_803AC634(state, 0) : 1;
+            for (i = 1; i < file_id; i++) {
+                blocks_before += fn_803AC634(state, i);
+            }
+        }
+
+        for (i = 0; i < file_blocks; i++) {
+            filemap[i] = -1;
+        }
+        chosen[0] = -1;
+
+        while (1) {
+            s32 cur_seq = -1;
+
+            for (phys = 0; phys <= state->x460; phys++) {
+                if (work[phys] >= 0) {
+                    s32 logical = work[phys] - blocks_before;
+                    if (logical >= 0 && logical < file_blocks) {
+                        if (cur_seq == -1 ||
+                            fn_803ACB74(cur_seq, seq[phys]) > 0)
+                        {
+                            cur_seq = seq[phys];
+                        }
+                    }
+                }
+            }
+            if (cur_seq < 0) {
+                break;
+            }
+
+            for (phys = 0; phys <= state->x460; phys++) {
+                s32 logical = work[phys] - blocks_before;
+                if (logical >= 0 && logical < file_blocks && cur_seq == seq[phys])
+                {
+                    filemap[logical] = phys;
+                }
+            }
+
+            {
+                s32 count = 0;
+                for (i = 0; i < file_blocks; i++) {
+                    if (filemap[i] >= 0 && cur_seq == seq[filemap[i]]) {
+                        count++;
+                    } else {
+                        break;
+                    }
+                }
+                if (count == file_blocks) {
+                    for (i = 0; i < file_blocks; i++) {
+                        chosen[i] = filemap[i];
+                    }
+                }
+            }
+
+            for (i = 0; i < file_blocks; i++) {
+                if (filemap[i] >= 0) {
+                    work[filemap[i]] = -0x7FFF;
+                }
+            }
+        }
+
+        if (chosen[0] >= 0) {
+            for (i = 0; i < file_blocks; i++) {
+                newmap[blocks_before + i] = chosen[i];
+            }
+        } else {
+            for (i = 0; i < file_blocks; i++) {
+                if (filemap[i] < 0) {
+                    result = -0x103;
+                } else {
+                    newmap[blocks_before + i] = filemap[i];
+                    if (result != -0x103) {
+                        result = -0x104;
+                    }
+                }
+            }
         }
     }
 
     for (file_id = 0; file_id < 9; file_id++) {
-        s32 block_idx;
-        s32 blocks_before;
-        s32 file_blocks;
-
-        if (state->x4C[file_id] <= 0) {
+        if (state->x4C[file_id] <= 0 ||
+            (state->x28[file_id] != 1 && state->x28[file_id] != 2))
+        {
             continue;
         }
 
-        if (file_id == 0) {
+        file_blocks = fn_803AC634(state, file_id);
+        if (file_id >= 9 || file_id == 0) {
             blocks_before = 0;
         } else {
             blocks_before = state->x4C[0] > 0 ? fn_803AC634(state, 0) : 1;
-            for (block_idx = 1; block_idx < file_id; block_idx++) {
-                blocks_before += fn_803AC634(state, block_idx);
+            for (i = 1; i < file_id; i++) {
+                blocks_before += fn_803AC634(state, i);
             }
         }
 
-        file_blocks = fn_803AC634(state, file_id);
-        for (block_idx = 0; block_idx < file_blocks; block_idx++) {
-            s32 found = 0;
-
-            for (phys = 0; phys <= state->x460; phys++) {
-                if (state->x170[phys] == blocks_before + block_idx) {
-                    found++;
+        for (i = 0; i < file_blocks; i++) {
+            s32 logical = blocks_before + i;
+            if (newmap[logical] >= 0) {
+                for (phys = 1; phys <= state->x460; phys++) {
+                    if (phys != newmap[logical] && state->x170[phys] == logical) {
+                        state->x170[phys] = -logical;
+                    }
                 }
-            }
-
-            if (found == 0) {
-                return -259;
             }
         }
     }
 
-    return 0;
+    for (file_id = 0; file_id < 9; file_id++) {
+        if (state->x4C[file_id] <= 0 || state->x28[file_id] != 0) {
+            continue;
+        }
+
+        file_blocks = fn_803AC634(state, file_id);
+        if (file_id >= 9 || file_id == 0) {
+            blocks_before = 0;
+        } else {
+            blocks_before = state->x4C[0] > 0 ? fn_803AC634(state, 0) : 1;
+            for (i = 1; i < file_id; i++) {
+                blocks_before += fn_803AC634(state, i);
+            }
+        }
+
+        for (i = 0; i < file_blocks; i++) {
+            s32 logical = blocks_before + i;
+            s32 src = newmap[logical];
+            s32 dup;
+            s32 target_seq;
+            s32 ret;
+
+            if (src < 0) {
+                continue;
+            }
+
+            target_seq = state->x270[src];
+            dup = -1;
+            for (phys = 1; phys <= state->x460; phys++) {
+                if (phys != src && state->x170[phys] == logical) {
+                    if (dup < 0) {
+                        dup = phys;
+                    } else {
+                        s32 cmd[9] = { 0 };
+                        cmd[0] = 1;
+                        cmd[1] = (s32) state;
+                        cmd[2] = file_id;
+                        cmd[3] = phys;
+                        cmd[4] = 0xFFFF;
+                        cmd[7] = fn_803ACBE8(state, phys);
+                        ret = fn_803AC168(cmd);
+                        if (ret < 0 && result == 0) {
+                            result = -0x10B;
+                        }
+                        state->x170[phys] = -0x7FFF;
+                        state->x270[phys] = 0;
+                    }
+                }
+            }
+
+            if (dup == -1) {
+                for (phys = state->x460; phys > 0; phys--) {
+                    if (state->x170[phys] < 0) {
+                        dup = phys;
+                        break;
+                    }
+                }
+                if (dup >= 0) {
+                    s32 cmd[9] = { 0 };
+                    cmd[0] = 0xF;
+                    cmd[1] = (s32) state;
+                    cmd[3] = src;
+                    cmd[7] = fn_803ACBE8(state, src);
+                    ret = fn_803AC168(cmd);
+                    if (ret >= 0) {
+                        s32 cmd2[9] = { 0 };
+                        cmd2[0] = 0x10;
+                        cmd2[1] = (s32) state;
+                        cmd2[3] = dup;
+                        cmd2[4] = logical;
+                        cmd2[5] = target_seq;
+                        cmd2[7] = fn_803ACBE8(state, dup);
+                        ret = fn_803AC168(cmd2);
+                    }
+                    if (ret < 0 && (result == 0 || result == -0x10B)) {
+                        result = -0x102;
+                    }
+                }
+            } else if (state->x270[dup] != target_seq) {
+                s32 cmd[9] = { 0 };
+                cmd[0] = 0xF;
+                cmd[1] = (s32) state;
+                cmd[3] = src;
+                cmd[7] = fn_803ACBE8(state, src);
+                ret = fn_803AC168(cmd);
+                if (ret >= 0) {
+                    s32 cmd2[9] = { 0 };
+                    cmd2[0] = 0x10;
+                    cmd2[1] = (s32) state;
+                    cmd2[3] = dup;
+                    cmd2[4] = logical;
+                    cmd2[5] = target_seq;
+                    cmd2[7] = fn_803ACBE8(state, dup);
+                    ret = fn_803AC168(cmd2);
+                }
+                if (ret < 0 && (result == 0 || result == -0x10B)) {
+                    result = -0x102;
+                }
+            }
+        }
+    }
+
+    return result;
 }
 
 s32 fn_803ADE4C(s32 card_state, s32 channel, s32 callback)
