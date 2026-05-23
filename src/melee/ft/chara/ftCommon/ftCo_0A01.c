@@ -2148,7 +2148,82 @@ int ftCo_800A648C(Fighter* fp)
 
 /// #ftCo_800A6700
 
-/// #ftCo_800A6A98
+static inline bool ftCo_800A6A98_inline0(int line_id)
+{
+    if (grBigBlue_801EF844(line_id) || grInishie1_801FCAAC(line_id) ||
+        grCorneria_801E2D90(line_id) || grVenom_80206D10(line_id))
+    {
+        return true;
+    }
+    return false;
+}
+
+s32 ftCo_800A6A98(Fighter* fp, Vec3* arg1)
+{
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    mp_UnkStruct0* island;
+    f32 best;
+    Vec3 floor_pos;
+    Vec3 floor_normal;
+    int line_id;
+    u32 flags;
+    Vec3 a;
+    Vec3 b;
+    f32 mx;
+    f32 my;
+    s32 result;
+    s32 blocked;
+    f32 dx;
+    f32 dy;
+    f32 dist;
+
+    best = -1.0f;
+    for (island = mpIsland_80458E88.next; island != NULL;
+         island = island->next)
+    {
+        if (ftCo_800A2718(island) == 0) {
+            blocked = 0;
+            a = island->x8;
+            b = island->x14;
+            line_id = -1;
+            mx = 0.5f * (b.x + a.x);
+            my = 0.5f * (b.y + a.y);
+            result = mpCheckFloor(mx, 5.0f + my, mx, my - 20.0f, 0.0f,
+                                  &floor_pos, &line_id, &flags, &floor_normal,
+                                  -1, -1, -1, NULL, NULL);
+            if (result != 0) {
+                if (ftCo_800A6A98_inline0(line_id)) {
+                    blocked = 1;
+                }
+                if (blocked != 0) {
+                    result = 0;
+                }
+            }
+            if (result != 0 && line_id != -1 &&
+                (mpLineGetFlags(line_id) & LINE_FLAG_PLATFORM))
+            {
+                f32 fx = floor_pos.x;
+                if (!(floor_pos.y < fp->cur_pos.y + data->x568)) {
+                    if (!ftCo_800A4768_inline0(fp, &floor_pos)) {
+                        dx = fx - fp->cur_pos.x;
+                        dy = floor_pos.y - fp->cur_pos.y;
+                        dist = dx * dx + dy * dy;
+                        if (best < 0.0 || dist < best) {
+                            arg1->x = fx;
+                            best = dist;
+                            arg1->y = floor_pos.y;
+                            arg1->z = 0.0f;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if (best < 0.0) {
+        return 0;
+    }
+    return 1;
+}
 
 /// #ftCo_800A6D2C
 
