@@ -4237,7 +4237,100 @@ void ftCo_800ADC28(Fighter* fp)
 
 /// #ftCo_800ADE48
 
-/// #ftCo_800AE7AC
+void ftCo_800AE7AC(Fighter* fp, Vec3* arg1, int arg2)
+{
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    Item_GObj* item_gobj;
+    ItemKind kind;
+    s32 is_food;
+    s32 do_act;
+    Vec2 out;
+    Vec3 dir;
+    f32 left;
+    f32 cx;
+    f32 bottom;
+    f32 sum_y;
+    f32 cy;
+    f32 dy;
+
+    data->xF8_b0 = true;
+    data->xF9_b3 = false;
+    data->xF9_b5 = false;
+    data->xF9_b7 = false;
+    data->xF9_b1 = false;
+    if (arg2 > 1) {
+        data->xF9_b2 = false;
+        data->xF9_b4 = false;
+        data->xF9_b6 = false;
+    } else {
+        data->xF9_b2 = true;
+        data->xF9_b4 = true;
+        data->xF9_b6 = true;
+    }
+    data->x44 = ftCo_800A4BEC(fp);
+    item_gobj = fp->item_gobj;
+    if (item_gobj != NULL) {
+        kind = GET_ITEM(item_gobj)->kind;
+        if (kind == It_Kind_Heart) {
+            is_food = 1;
+        } else if (kind == It_Kind_Tomato) {
+            is_food = 1;
+        } else if (kind == It_Kind_Foods) {
+            is_food = 1;
+        } else {
+            is_food = 0;
+        }
+        if (is_food == 0) {
+            data->x4C = NULL;
+        } else {
+            goto block_13;
+        }
+    } else {
+    block_13:
+        if (fp->x2168 != 0) {
+            data->x4C = NULL;
+        } else {
+            data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
+        }
+    }
+    data->x50 = ftCo_800A648C(fp);
+    if (data->x18 != data->x20 && data->x18 != data->x1C) {
+        data->x60 = 0;
+    }
+    if (data->x18 == 4) {
+        do_act = 0;
+    } else {
+        data->xFA_b2 = false;
+        do_act = 1;
+    }
+    if (do_act != 0) {
+        if (arg2 >= 0) {
+            ftCo_800A8210(fp, arg1);
+        } else if (fp->ground_or_air != GA_Air) {
+            left = Stage_GetBlastZoneLeftOffset();
+            cx = 0.5f * (Stage_GetBlastZoneRightOffset() + left);
+            bottom = Stage_GetBlastZoneBottomOffset();
+            sum_y = Stage_GetBlastZoneTopOffset() + bottom;
+            cy = 0.5f * sum_y;
+            dir.x = cx - fp->cur_pos.x;
+            dy = cy - fp->cur_pos.y;
+            dir.y = dy;
+            dir.z = 0.0f;
+            if (ftCo_800A6FC4(fp, &out, &dir, dy, cy, sum_y) != 0) {
+                if (data->x60 == 0) {
+                    data->x54.x = out.x;
+                    data->x54.y = out.y;
+                    data->x38 = 5.0f;
+                    ftCo_800A1CC4(
+                        fp, ftCo_803C6594[stage_info.internal_stage_id]);
+                }
+            } else {
+                ftCo_800A75DC(fp, data->x44);
+            }
+        }
+    }
+    ftCo_800ADE48(fp);
+}
 
 void ftCo_800AEA8C(Fighter* fp)
 {
