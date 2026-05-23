@@ -63,15 +63,15 @@ Funcs:
 File: src/melee/gm/gmresult.c
 Funcs:
 - [x] fn_80175A94
-- [ ] fn_80175D34
-- [ ] fn_80176D3C
-- [ ] fn_801749B8
+- [x] fn_80175D34
+- [x] fn_80176D3C
+- [x] fn_801749B8
 - [x] fn_801771C0
-- [ ] fn_80174284
-- [ ] fn_80174920
-- [ ] fn_80175240
-- [ ] fn_80175880
-- [ ] gm_80177368_OnEnter
+- [x] fn_80174284
+- [x] fn_80174920
+- [x] fn_80175240
+- [x] fn_80175880
+- [x] gm_80177368_OnEnter
 
 File: src/melee/gm/gmtou.c
 Funcs:
