@@ -376,14 +376,8 @@ u32 fn_803AC634(struct CardState* file_desc, s32 file_idx)
 
 s32 fn_803AC6B8(struct CardState* file_desc, s32 file_count)
 {
-    s32 first_size;
     s32 total;
     s32 i;
-    u32 sector_size;
-    u32 usable;
-    s32 remaining;
-    s32 cur_size;
-    s32 cur_blocks;
 
     if (file_count >= 9) {
         return 0;
@@ -392,42 +386,13 @@ s32 fn_803AC6B8(struct CardState* file_desc, s32 file_count)
         return 0;
     }
 
-    first_size = file_desc->x4C[0];
     total = 1;
-    if (first_size > 0) {
-        sector_size = file_desc->x8;
-        remaining = first_size - (s32) ((sector_size - 0x20) -
-                                        (file_desc->x24 + 0x30) % sector_size);
-        usable = sector_size - 0x20;
-        if (remaining <= 0) {
-            total = 1;
-        } else {
-            total = (u32) (remaining + sector_size - 0x21) / usable + 1;
-        }
+    if (file_desc->x4C[0] > 0) {
+        total = fn_803AC634(file_desc, 0);
     }
 
     for (i = 1; i < file_count; i++) {
-        cur_size = file_desc->x4C[i];
-        if (cur_size <= 0) {
-            cur_blocks = 0;
-        } else if (i == 0) {
-            sector_size = file_desc->x8;
-            remaining =
-                first_size - (s32) ((sector_size - 0x20) -
-                                    (file_desc->x24 + 0x30) % sector_size);
-            usable = sector_size - 0x20;
-            if (remaining <= 0) {
-                cur_blocks = 1;
-            } else {
-                cur_blocks =
-                    (u32) (remaining + sector_size - 0x21) / usable + 1;
-            }
-        } else {
-            sector_size = file_desc->x8;
-            cur_blocks =
-                (u32) (cur_size + sector_size - 0x21) / (sector_size - 0x20);
-        }
-        total += cur_blocks;
+        total += fn_803AC634(file_desc, i);
     }
 
     return total;
