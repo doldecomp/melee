@@ -3,7 +3,7 @@ Funcs:
 - [x] ftCo_800C739C
 - [x] ftCo_800C7434
 - [x] ftCo_800C7CA0
-- [ ] ftCo_800C7B0C
+- [x] ftCo_800C7B0C
 - [ ] ftCo_800C78B0
 - [ ] ftCo_800C7590
 - [ ] fn_800C7DC4

@@ -18,6 +18,7 @@
 
 #include "ftCommon/forward.h"
 
+#include "ftCommon/ftCo_Damage.h"
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_DownBound.h"
 #include "ftCommon/types.h"
@@ -660,10 +661,37 @@ void fn_800C7AE0(Fighter_GObj* gobj)
     it_8026B294(fp->mv.co.captureleadead.x0, &fp->cur_pos);
 }
 
-UNK_RET ftCo_800C7B0C(Fighter_GObj* arg0, void* arg1, void* arg2,
-                      lbColl_80008D30_arg1* arg3, f32 farg0)
+void ftCo_800C7B0C(Fighter_GObj* gobj, Vec3* arg1, Vec3* arg2,
+                   lbColl_80008D30_arg1* arg3, f32 arg4)
 {
-    NOT_IMPLEMENTED;
+    HitCapsule hit;
+    Fighter* fp = GET_FIGHTER(gobj);
+    CollData* coll = &fp->coll_data;
+    f32 angle = arg4;
+
+    fp->coll_data.last_pos = *arg2;
+    mpColl_80043670(coll);
+    coll->cur_pos = *arg1;
+    mpColl_800471F8(coll);
+    fp->cur_pos = coll->cur_pos;
+    lbColl_80008D30(&hit, arg3);
+    ftColl_800788D4(gobj);
+    if (angle < 0.0f) {
+        angle += 360.0f;
+    }
+    if (fp->facing_dir < 0.0f) {
+    } else {
+        angle = 180.0f - angle;
+    }
+    fp->dmg.kb_applied = ftColl_80079EA8(fp, &hit, hit.unk_count);
+    fp->dmg.x1848_kb_angle = angle;
+    fp->dmg.facing_dir_1 = fp->facing_dir;
+    fp->dmg.x184c_damaged_hurtbox = 0;
+    fp->dmg.x1854_collpos = fp->cur_pos;
+    fp->dmg.x1860_element = hit.element;
+    Fighter_UnkTakeDamage_8006CC30(fp, hit.damage);
+    ftCo_Damage_CalcKnockback(fp);
+    ftCo_8008E908(gobj, 0.0f);
 }
 
 void ftCo_800C7C60(Fighter_GObj* gobj, int damage_amount)
