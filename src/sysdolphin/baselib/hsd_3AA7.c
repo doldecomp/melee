@@ -703,11 +703,7 @@ s32 fn_803ACFC0(CardState* state, s32 block_idx, s32 file_id, s32 seq_num,
 
     data = state->x0 + hdr_offset;
     data[0x10] = (u8) (file_id >> 8);
-
-    data = state->x0 + hdr_offset;
     data[0x11] = (u8) file_id;
-
-    data = state->x0 + hdr_offset;
     data[0x12] = (u8) seq_num;
 
     fn_803AC3F8(state, state->x0 + hdr_offset + 0x13, version);
