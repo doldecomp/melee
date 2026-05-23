@@ -399,9 +399,9 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     count_processed = 0;
 
     {
-        u32 start = gm_803DEC4C[arg1].start;
-        opp_data = &gm_803DEBE8[start * 4];
-        count = gm_803DEC4C[arg1].count;
+        u32 start = ((AllstarRoundInfo*) (base + 0x31C))[arg1].start;
+        opp_data = (gm_803DEBE8_t*) (base + 0x2B8) + start;
+        count = ((AllstarRoundInfo*) (base + 0x31C))[arg1].count;
     }
 
     chars[0] = 0x21;
@@ -433,8 +433,9 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
         {
             gm_803DEBE8_t* src2 = &opp_data[count_processed];
             s8* dst2 = &chars[count_processed];
-            s32 remaining = gm_803DEC4C[arg1].count - count_processed;
-            if (count_processed < gm_803DEC4C[arg1].count) {
+            s32 remaining =
+                ((AllstarRoundInfo*) (base + 0x31C))[arg1].count - count_processed;
+            if (count_processed < ((AllstarRoundInfo*) (base + 0x31C))[arg1].count) {
                 do {
                     u8 val = src2->x3;
                     src2++;
