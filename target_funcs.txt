@@ -10,10 +10,10 @@ File: src/melee/gm/gmcamera.c
 Funcs:
 - [x] gmCamera_801A2AAC
 - [x] gmCamera_801A2BF0
-- [ ] gmCamera_801A2D44
-- [ ] gmCamera_801A26C0
-- [ ] gmCamera_801A30E4
-- [ ] gmCamera_801A31FC
+- [x] gmCamera_801A2D44
+- [x] gmCamera_801A26C0
+- [x] gmCamera_801A30E4
+- [x] gmCamera_801A31FC
 - [x] gmCamera_801A33BC
 - [x] gmCamera_801A253C
 - [x] gmCamera_801A292C
