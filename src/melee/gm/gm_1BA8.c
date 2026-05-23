@@ -208,7 +208,37 @@ void gm_801BAB40(PlayerInitData* arg0, int arg1)
     arg0->x20 = src->x20;
 }
 
-/// #gm_801BAC9C
+s32 gm_801BAC9C(GameScene* arg0, s32 arg1)
+{
+    u8 chars[33];
+    struct EventData* ev = &gmMainLib_804D3EE0->unk_530;
+    void* data = gm_801A427C(arg0);
+    struct gm_804D6900_t* entry = gm_804D6900[ev->unk_535];
+    u8* dst = chars;
+    s32 count = 0;
+    s32 i;
+
+    for (i = 0; i < 0x21; i++) {
+        u8 c = ((u8*) entry->x4)[i];
+        if (c == 0x21) {
+            break;
+        }
+        {
+            s32 found = 0;
+            s32 k;
+            for (k = 0; k < arg1; k++) {
+                if (*(s8*) ((u8*) data + 0x60 + k * 0x24) == (s8) c) {
+                    found++;
+                }
+            }
+            if (found == 0) {
+                *dst++ = c;
+                count++;
+            }
+        }
+    }
+    return chars[HSD_Randi(count)];
+}
 
 /// #gm_801BAD70
 

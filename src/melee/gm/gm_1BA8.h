@@ -17,7 +17,7 @@ struct EventData;
 /* 1BAA60 */ void gm_801BAA60(GameScene*);
 /* 1BAAD0 */ void gm_801BAAD0(GameScene*);
 /* 1BAB40 */ UNK_RET gm_801BAB40(PlayerInitData*, int);
-/* 1BAC9C */ UNK_RET gm_801BAC9C(UNK_PARAMS);
+/* 1BAC9C */ s32 gm_801BAC9C(GameScene*, s32);
 /* 1BAD70 */ void gm_801BAD70(GameScene*);
 /* 1BB758 */ void gm_801BB758(GameScene*);
 /* 1BBA60 */ void gm_801BBA60_OnInit(void);
