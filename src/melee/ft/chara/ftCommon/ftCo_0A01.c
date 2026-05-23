@@ -1513,8 +1513,6 @@ Fighter* ftCo_800A4A40(Fighter* fp)
     return cur_fp;
 }
 
-/// #ftCo_800A4BEC
-
 static inline bool ftCo_800A4E8C_inline0(Fighter* fp)
 {
     if (fp->x2219_b1) {
@@ -1530,6 +1528,60 @@ static inline bool ftCo_800A4E8C_inline0(Fighter* fp)
         return true;
     }
     return false;
+}
+
+Fighter* ftCo_800A4BEC(Fighter* fp)
+{
+    HSD_GObj* cur;
+    Fighter* cur_fp;
+    Fighter* closest;
+    f32 best;
+    f32 dx;
+    f32 dy;
+    f32 dist;
+
+    if (fp == NULL) {
+        return NULL;
+    }
+    closest = NULL;
+    for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
+        if (fp->gobj != cur) {
+            cur_fp = GET_FIGHTER(cur);
+            if (!inlineD0(fp, cur_fp) && !ftCo_IsAlly_dontinline(fp, cur_fp)) {
+                if (!ftCo_800A4E8C_inline0(cur_fp)) {
+                    if (!inlineD1(cur_fp)) {
+                        if (fp->x1A88.xF9_b0) {
+                            if (cur_fp == fp->x1A88.x48) {
+                                return cur_fp;
+                            }
+                        } else if (closest == NULL) {
+                            closest = cur_fp;
+                            dy = fp->cur_pos.y - cur_fp->cur_pos.y;
+                            dx = fp->cur_pos.x - cur_fp->cur_pos.x;
+                            best = sqrtf__Ff(dx * dx + dy * dy);
+                        } else {
+                            cur_fp = GET_FIGHTER(cur);
+                            dy = fp->cur_pos.y - cur_fp->cur_pos.y;
+                            dx = fp->cur_pos.x - cur_fp->cur_pos.x;
+                            dist = sqrtf__Ff(dx * dx + dy * dy);
+                            if (best > dist) {
+                                best = dist;
+                                closest = cur_fp;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if (closest == NULL) {
+        fp->x1A88.xF9_b0 = false;
+    } else {
+        fp->x1A88.xF9_b0 = true;
+        fp->x1A88.x30 = 120.0f * (0.5f * (0.5f * HSD_Randf()));
+        fp->x1A88.x48 = closest;
+    }
+    return closest;
 }
 
 Fighter* ftCo_800A4E8C(Fighter* fp, Vec3* arg1)
