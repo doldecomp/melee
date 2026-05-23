@@ -6087,7 +6087,142 @@ void ftCo_800B24B8(Fighter* fp)
     ftCo_800ADE48(fp);
 }
 
-/// #ftCo_800B2790
+void ftCo_800B2790(Fighter* fp)
+{
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    s32 cmd;
+    s32 var_r28;
+    s32 on_ground;
+    s32 line_id;
+
+    if (data->csP == NULL && data->command_duration == 0) {
+        var_r28 = 0;
+        data->x80 += 1;
+        data->xF8_b7 = false;
+        ftCo_800B462C(fp);
+        ftCo_800ADC28(fp);
+        cmd = data->x18;
+        {
+            switch (cmd) {
+            case 1:
+                ftCo_800ABA34(fp);
+                break;
+            case 2:
+                ftCo_800B658C(fp);
+                break;
+            case 3:
+                ftCo_800B9020(fp);
+                break;
+            case 4:
+                ftCo_800A8DE4(fp);
+                if (fp->ground_or_air == GA_Ground) {
+                    line_id = fp->coll_data.floor.index;
+                    if (ftCo_800A6A98_inline0(line_id)) {
+                        var_r28 = 1;
+                    }
+                    if (var_r28 != 0) {
+                        ftCo_800A0148(fp);
+                    } else {
+                        goto block_15;
+                    }
+                } else {
+                block_15:
+                    if (fp->ground_or_air == GA_Ground) {
+                        on_ground = 1;
+                    } else {
+                        on_ground = 0;
+                    }
+                    if (on_ground != 0) {
+                        data->x18 = data->x1C;
+                        ftCo_800B463C(fp, CpuCmd_Done);
+                        data->xFA_b2 = false;
+                    } else {
+                        ftCo_800A9904(fp);
+                    }
+                }
+                break;
+            case 5:
+                ftCo_800AC7D4(fp);
+                break;
+            case 6:
+                ftCo_800ACB44(fp);
+                break;
+            case 7:
+                ftCo_800BA9A0(fp);
+                break;
+            case 8:
+                ftCo_800B7180(fp);
+                break;
+            case 9:
+                ftCo_800B683C(fp);
+                break;
+            case 10:
+                ftCo_800ACD5C(fp);
+                break;
+            case 11:
+                ftCo_800AD42C(fp);
+                break;
+            case 12:
+                ftCo_800AD54C(fp);
+                break;
+            case 13:
+                if (fp->item_gobj != NULL) {
+                    data->x18 = data->x1C;
+                    ftCo_800B463C(fp, CpuCmd_Done);
+                } else {
+                    ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+                    ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+                    ftCo_800B463C(fp, CpuCmd_ReleaseA);
+                    ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+                    ftCo_800B463C(fp, CpuCmd_PressA);
+                    ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+                    ftCo_800B463C(fp, CpuCmd_ReleaseA);
+                    ftCo_800B463C(fp, CpuCmd_Done);
+                    data->x18 = data->x1C;
+                }
+                break;
+            case 14:
+                ftCo_800AD7FC(fp);
+                break;
+            case 15:
+                ftCo_800ABBA8(fp);
+                break;
+            case 16:
+                ftCo_800AC30C(fp);
+                break;
+            case 17:
+                ftCo_800AC434(fp);
+                break;
+            case 19:
+                if (fp->motion_id == 0x131) {
+                    var_r28 = 1;
+                } else if (fp->motion_id == 0x132) {
+                    var_r28 = 2;
+                }
+                if (var_r28 == 0) {
+                    data->x18 = data->x1C;
+                    ftCo_800B463C(fp, CpuCmd_Done);
+                } else {
+                    ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+                    ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+                    ftCo_800B463C(fp, CpuCmd_Done);
+                }
+                break;
+            case 18:
+                ftCo_800AC5A0(fp);
+                break;
+            case 0:
+                ftCo_800B4A78(fp);
+                ftCo_800B463C(fp, CpuCmd_Done);
+                break;
+            default:
+                ftCo_800B463C(fp, CpuCmd_Done);
+                break;
+            }
+        }
+        ftCo_800B49F4(fp);
+    }
+}
 
 void ftCo_800B1DA0(Fighter*); /* static */
 
