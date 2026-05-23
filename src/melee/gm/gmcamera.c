@@ -333,13 +333,11 @@ void gmCamera_801A292C(void)
     gmCameraUnkStruct2* p;
     s32 x44;
 
-    if (gmCamera_80479BC8.gcus.x48[0] != NULL) {
-        i = 0;
-        do {
-            HSD_SisLib_803A5CC4(gmCamera_80479BC8.gcus.x48[i]);
-            i++;
-            gmCamera_80479BC8.gcus.x48[i - 1] = NULL;
-        } while (i < 3);
+    if (texts[0] != NULL) {
+        for (i = 0; i < 3; i++) {
+            HSD_SisLib_803A5CC4(texts[i]);
+            texts[i] = NULL;
+        }
     }
     i = 0;
     p = (gmCameraUnkStruct2*) &gmCamera_80479BC8;
