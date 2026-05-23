@@ -496,8 +496,7 @@ s32 fn_803ACC0C(CardState* state, s32 block_idx, s32 file_id, s32 seq_num,
 
     sector_size = state->x8;
     buf = state->x0;
-    offset = sector_size *
-             (block_idx + (state->x24 + sector_size + 0x2F) / sector_size - 1);
+    offset = fn_803ACBE8(state, block_idx);
 
     for (retries = 0; retries < 10; retries++) {
         result = CARDRead(&state->file_info, buf, sector_size, offset);
