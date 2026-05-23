@@ -1229,7 +1229,138 @@ bool ftCo_800A2C08(Fighter* fp)
     }
 }
 
-/// #ftCo_800A2C80
+s32 ftCo_800A2C80(Fighter* fp)
+{
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    Vec3 floor_pos;
+    Vec3 floor_normal;
+    Vec3 dir;
+    int line_id;
+    u32 flags;
+    f32 ax;
+    f32 ay;
+    f32 ex;
+    f32 ey;
+    f32 mag;
+    f32 v;
+    s32 result;
+    s32 blocked;
+    s32 oob;
+
+    if (fp->x1A88.xFA_b6) {
+        return 0;
+    }
+    if (fp->ground_or_air == GA_Ground) {
+        line_id = fp->coll_data.floor.index;
+        if (grBigBlue_801EF844(line_id) || grInishie1_801FCAAC(line_id) ||
+            grCorneria_801E2D90(line_id) || grVenom_80206D10(line_id))
+        {
+            return 1;
+        }
+        return 0;
+    }
+    if (fp->motion_id == 0xF4) {
+        return 0;
+    }
+    dir.x = fp->pos_delta.x;
+    dir.y = fp->pos_delta.y;
+    dir.z = fp->pos_delta.z;
+    mag = dir.x * dir.x + dir.y * dir.y;
+    if (mag < 0.00001f && mag > -0.00001f) {
+        return 0;
+    }
+    if (dir.y > 0.0f) {
+        return 0;
+    }
+    v = dir.x;
+    if (v < 0.0f) {
+        v = -v;
+    }
+    if (lb_8000D008(dir.y, v) > -1.0471975430846214) {
+        return 0;
+    }
+    if (fp->x1A88.xFA_b5) {
+        return 0;
+    }
+    if (stage_info.internal_stage_id == INISHIE1) {
+        if (fp->cur_pos.y < 5.0f) {
+            return 1;
+        }
+    } else if (stage_info.internal_stage_id == FOURSIDE &&
+               fp->cur_pos.y < -35.0f)
+    {
+        return 1;
+    }
+    lbVector_Normalize(&dir);
+    ax = fp->coll_data.cur_pos.x + fp->coll_data.ecb.bottom.x;
+    ay = fp->coll_data.cur_pos.y + fp->coll_data.ecb.bottom.y;
+    ex = 1000.0f * dir.x + ax;
+    ey = 1000.0f * dir.y + ay;
+    blocked = 0;
+    line_id = -1;
+    result = mpCheckFloor(ax, ay, ex, ey, 0.0f, &floor_pos, &line_id, &flags,
+                          &floor_normal, -1, -1, -1, NULL, NULL);
+    if (result != 0) {
+        if (grBigBlue_801EF844(line_id) || grInishie1_801FCAAC(line_id) ||
+            grCorneria_801E2D90(line_id) || grVenom_80206D10(line_id))
+        {
+            blocked = 1;
+        }
+        if (blocked != 0) {
+            result = 0;
+        }
+    }
+    if (result != 0) {
+        if (floor_pos.x < data->half_width + Stage_GetBlastZoneLeftOffset() ||
+            floor_pos.x > Stage_GetBlastZoneRightOffset() - data->half_width ||
+            floor_pos.y <
+                data->half_height + Stage_GetBlastZoneBottomOffset() ||
+            floor_pos.y > Stage_GetBlastZoneTopOffset() - data->half_height)
+        {
+            oob = 1;
+        } else {
+            oob = 0;
+        }
+        if (oob == 0) {
+            return 0;
+        }
+    }
+    if (mpCheckLeftWall(ax, ay, ex, ey, &floor_pos, &line_id, &flags,
+                        &floor_normal, -1, -1) != 0)
+    {
+        if (floor_pos.x < data->half_width + Stage_GetBlastZoneLeftOffset() ||
+            floor_pos.x > Stage_GetBlastZoneRightOffset() - data->half_width ||
+            floor_pos.y <
+                data->half_height + Stage_GetBlastZoneBottomOffset() ||
+            floor_pos.y > Stage_GetBlastZoneTopOffset() - data->half_height)
+        {
+            oob = 1;
+        } else {
+            oob = 0;
+        }
+        if (oob == 0) {
+            return 0;
+        }
+    }
+    if (mpCheckRightWall(ax, ay, ex, ey, &floor_pos, &line_id, &flags,
+                         &floor_normal, -1, -1) != 0)
+    {
+        if (floor_pos.x < data->half_width + Stage_GetBlastZoneLeftOffset() ||
+            floor_pos.x > Stage_GetBlastZoneRightOffset() - data->half_width ||
+            floor_pos.y <
+                data->half_height + Stage_GetBlastZoneBottomOffset() ||
+            floor_pos.y > Stage_GetBlastZoneTopOffset() - data->half_height)
+        {
+            oob = 1;
+        } else {
+            oob = 0;
+        }
+        if (oob == 0) {
+            return 0;
+        }
+    }
+    return 1;
+}
 
 enum_t ftCo_800A3134(Fighter* fp)
 {

@@ -96,7 +96,7 @@ struct _m2c_stack_ftCo_800A3554 {
 /* 09F614 */ static bool ftCo_800A2718(mp_UnkStruct0*);
 /* 09F850 */ static void ftCo_800AEFB8(Fighter* fp);
 /* 09FB28 */ static void ftCo_800AF290(Fighter*);
-/* 09FB7C */ static UNK_RET ftCo_800A2C80(UNK_PARAMS);
+/* 09FB7C */ static s32 ftCo_800A2C80(Fighter* fp);
 /* 0A0024 */ static void ftCo_800AF78C(Fighter*);
 /* 0A0130 */ static bool ftCo_800A3234(Fighter* fp);
 /* 0A0394 */ static bool ftCo_800A3498(Fighter* fp);
