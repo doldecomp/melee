@@ -13,6 +13,11 @@
 #include "ftswing.h"
 #include "types.h"
 
+#include "ftCrazyHand/ftCh_CaptureCrazyHand.h"
+#include "ftCrazyHand/ftCh_CaptureDamageCrazyHand.h"
+#include "ftCrazyHand/ftCh_CaptureWaitCrazyHand.h"
+#include "ftCrazyHand/ftCh_ThrownCrazyHand.h"
+
 #include <melee/ft/chara/ftCommon/forward.h>
 
 #include <melee/ft/chara/ftCommon/ftCo_AppealS.h>

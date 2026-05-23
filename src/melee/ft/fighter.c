@@ -59,6 +59,7 @@
 #include "ftCommon/ftCo_ShieldBreakFly.h"
 #include "ftCommon/ftCo_SpecialS.h"
 #include "ftCrazyHand/ftCh_Init.h"
+#include "ftCrazyHand/ftCh_Wait1_0.h"
 #include "ftKirby/ftKb_Init.h"
 #include "ftMasterHand/ftMh_Wait1_0.h"
 #include "ftPeach/types.h"

@@ -19,6 +19,7 @@
 #include "ftCommon/ftCo_DownSpot.h"
 #include "ftCommon/ftCo_Lift.h"
 #include "ftCrazyHand/ftCh_Init.h"
+#include "ftCrazyHand/ftCh_TagGrab.h"
 #include "ftMasterHand/ftMh_Damage_0.h"
 #include "gm/gm_unsplit.h"
 #include "lb/lbbgflash.h"
