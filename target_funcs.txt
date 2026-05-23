@@ -90,8 +90,8 @@ Funcs:
 
 File: src/melee/gm/gm_1B03.c
 Funcs:
-- [ ] gm_801B0DD0
-- [ ] gm_801B1C24
+- [x] gm_801B0DD0 SYSTEMIC: stub needs shared un_803FA258 struct (static in soundtest.c) + M2C errors
+- [x] gm_801B1C24 SYSTEMIC: stub needs from-scratch decomp w/ shared data symbols
 - [x] gm_801B0474
 - [x] gm_801B2790
 
