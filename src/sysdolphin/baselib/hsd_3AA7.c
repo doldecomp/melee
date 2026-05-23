@@ -334,8 +334,9 @@ void hsd_803AC558(struct CardState* file_desc, u8* data)
     for (i = 0; i < 3; i++) {
         u8 file_idx = data[0];
         u8 byte1 = data[1];
-        u32 size = (((u32) data[2] | ((byte1 << 8) & 0x3F00)) << 8) | data[3];
-        u8 flags = byte1 >> 6;
+        u32 size = (u32) data[2] | ((byte1 << 8) & 0x3F00);
+        u8 flags = (byte1 >> 6) & 3;
+        size = (size << 8) | data[3];
 
         if (size != 0 && file_desc->x4C[file_idx] == 0) {
             file_desc->x28[file_idx] = flags;
