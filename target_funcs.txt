@@ -25,10 +25,10 @@ Funcs:
 
 File: src/melee/gm/gmmain_lib.c
 Funcs:
-- [ ] gmMainLib_8015D984
-- [ ] gmMainLib_8015EA80
-- [ ] gmMainLib_8015F150
-- [ ] gmMainLib_8015F600
+- [x] gmMainLib_8015D984
+- [x] gmMainLib_8015EA80
+- [x] gmMainLib_8015F150
+- [x] gmMainLib_8015F600
 
 File: src/melee/gm/gmopening.c
 Funcs:
