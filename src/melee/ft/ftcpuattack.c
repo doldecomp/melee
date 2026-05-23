@@ -1664,7 +1664,7 @@ int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
     HitCapsule* hit;
     HitCapsuleState state;
     bool result;
-    struct Fighter_x1A88_t* temp_r31;
+    struct Fighter_x1A88_t* temp_r31 = &fp->x1A88;
 
     if (ip->owner == fp->gobj) {
         return 0;
@@ -1672,16 +1672,19 @@ int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
     if (ftLib_80086960(ip->owner) && ftCo_IsAlly(fp, GET_FIGHTER(ip->owner))) {
         return 0;
     }
-    if (ip->kind == It_Kind_Unk4 || ip->kind == It_Kind_Star) {
+    switch (ip->kind) {
+    case It_Kind_Star:
+    case It_Kind_Unk4:
         result = true;
-    } else {
+        break;
+    default:
         result = ftCo_800A5980((Fighter*) ip);
+        break;
     }
     if (result) {
         return 0;
     }
 
-    temp_r31 = &fp->x1A88;
     if (fp->x1A88.level < 3) {
         count = (s32) (20.0f * HSD_Randf()) + 10;
     } else if (temp_r31->level < 6) {
@@ -1708,9 +1711,12 @@ int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
                     state != HitCapsule_Enabled && !hit->x43_b2 &&
                     hit->element != 0xB && !lbColl_8000ACFC(fp, hit))
                 {
-                    sp94.x = (hit->x4C.x - hit->x58.x) * count + hit->x4C.x;
-                    sp94.y = (hit->x4C.y - hit->x58.y) * count + hit->x4C.y;
-                    sp94.z = (hit->x4C.z - hit->x58.z) * count + hit->x4C.z;
+                    f32 dx = hit->x4C.x - hit->x58.x;
+                    f32 dy = hit->x4C.y - hit->x58.y;
+                    f32 dz = hit->x4C.z - hit->x58.z;
+                    sp94.x = dx * count + hit->x4C.x;
+                    sp94.y = dy * count + hit->x4C.y;
+                    sp94.z = dz * count + hit->x4C.z;
                     if (lbColl_80006094(&hit->x4C, &sp94, arg2, &dst, &spAC,
                                         &spB8, hit->scale, arg3))
                     {
@@ -1730,9 +1736,12 @@ int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
                     state != HitCapsule_Enabled && !hit->x43_b2 &&
                     hit->element != 0xB && !lbColl_8000ACFC(fp, hit))
                 {
-                    sp60.x = (hit->x4C.x - hit->x58.x) * count + hit->x4C.x;
-                    sp60.y = (hit->x4C.y - hit->x58.y) * count + hit->x4C.y;
-                    sp60.z = (hit->x4C.z - hit->x58.z) * count + hit->x4C.z;
+                    f32 dx = hit->x4C.x - hit->x58.x;
+                    f32 dy = hit->x4C.y - hit->x58.y;
+                    f32 dz = hit->x4C.z - hit->x58.z;
+                    sp60.x = dx * count + hit->x4C.x;
+                    sp60.y = dy * count + hit->x4C.y;
+                    sp60.z = dz * count + hit->x4C.z;
                     if (lbColl_80006094(&hit->x4C, &sp60, arg2, &dst, &sp78,
                                         &sp84, hit->scale, arg3))
                     {
@@ -1758,9 +1767,12 @@ int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
                 !hit->x43_b2 && hit->element != 0xB &&
                 !lbColl_8000ACFC(fp, hit))
             {
-                sp2C.x = (hit->x4C.x - hit->x58.x) * count + hit->x4C.x;
-                sp2C.y = (hit->x4C.y - hit->x58.y) * count + hit->x4C.y;
-                sp2C.z = (hit->x4C.z - hit->x58.z) * count + hit->x4C.z;
+                f32 dx = hit->x4C.x - hit->x58.x;
+                f32 dy = hit->x4C.y - hit->x58.y;
+                f32 dz = hit->x4C.z - hit->x58.z;
+                sp2C.x = dx * count + hit->x4C.x;
+                sp2C.y = dy * count + hit->x4C.y;
+                sp2C.z = dz * count + hit->x4C.z;
                 if (lbColl_80006094(&hit->x4C, &sp2C, arg2, &dst, &sp44, &sp50,
                                     hit->scale, arg3))
                 {
