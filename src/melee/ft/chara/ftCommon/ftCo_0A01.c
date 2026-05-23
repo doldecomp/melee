@@ -2257,8 +2257,6 @@ int ftCo_800A648C(Fighter* fp)
     return (int) closest;
 }
 
-/// #ftCo_800A6700
-
 static inline bool ftCo_800A6A98_inline0(int line_id)
 {
     if (grBigBlue_801EF844(line_id) || grInishie1_801FCAAC(line_id) ||
@@ -2267,6 +2265,110 @@ static inline bool ftCo_800A6A98_inline0(int line_id)
         return true;
     }
     return false;
+}
+
+static inline bool ftCo_800A6700_inline0(Fighter* fp, f32 x, f32 y)
+{
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    if (x < data->half_width + Stage_GetBlastZoneLeftOffset() ||
+        x > Stage_GetBlastZoneRightOffset() - data->half_width ||
+        y < data->half_height + Stage_GetBlastZoneBottomOffset() ||
+        y > Stage_GetBlastZoneTopOffset() - data->half_height)
+    {
+        return true;
+    }
+    return false;
+}
+
+bool ftCo_800A6700(Fighter* fp, Vec3* arg1, Vec3* arg2)
+{
+    mp_UnkStruct0* island;
+    f32 best;
+    Vec3 floor_pos;
+    Vec3 floor_normal;
+    int line_id;
+    u32 flags;
+    f32 ax;
+    f32 ay;
+    f32 az;
+    f32 px;
+    s32 result;
+    s32 blocked;
+    f32 dx;
+    f32 dy;
+    f32 dist;
+
+    best = -1.0f;
+    for (island = mpIsland_80458E88.next; island != NULL;
+         island = island->next)
+    {
+        if (ftCo_800A2718(island) == 0) {
+            blocked = 0;
+            ax = island->x8.x;
+            ay = island->x8.y;
+            az = island->x8.z;
+            px = ax + 5.0;
+            line_id = -1;
+            result = mpCheckFloor(px, ay + 5.0, px, ay - 5.0, 0.0f, &floor_pos,
+                                  &line_id, &flags, &floor_normal, -1, -1, -1,
+                                  NULL, NULL);
+            if (result != 0) {
+                if (ftCo_800A6A98_inline0(line_id)) {
+                    blocked = 1;
+                }
+                if (blocked != 0) {
+                    result = 0;
+                }
+            }
+            if (result != 0) {
+                if (!ftCo_800A6700_inline0(fp, px, ay)) {
+                    dy = ay - arg1->y;
+                    dx = px - arg1->x;
+                    dist = dx * dx + dy * dy;
+                    if (dist > best) {
+                        best = dist;
+                        arg2->x = px;
+                        arg2->y = ay;
+                        arg2->z = az;
+                    }
+                }
+            }
+            blocked = 0;
+            ax = island->x14.x;
+            ay = island->x14.y;
+            az = island->x14.z;
+            px = ax - 5.0;
+            line_id = -1;
+            result = mpCheckFloor(px, ay + 5.0, px, ay - 5.0, 0.0f, &floor_pos,
+                                  &line_id, &flags, &floor_normal, -1, -1, -1,
+                                  NULL, NULL);
+            if (result != 0) {
+                if (ftCo_800A6A98_inline0(line_id)) {
+                    blocked = 1;
+                }
+                if (blocked != 0) {
+                    result = 0;
+                }
+            }
+            if (result != 0) {
+                if (!ftCo_800A6700_inline0(fp, px, ay)) {
+                    dy = ay - arg1->y;
+                    dx = px - arg1->x;
+                    dist = dx * dx + dy * dy;
+                    if (dist > best) {
+                        best = dist;
+                        arg2->x = px;
+                        arg2->y = ay;
+                        arg2->z = az;
+                    }
+                }
+            }
+        }
+    }
+    if (best < 0.0) {
+        return 0;
+    }
+    return 1;
 }
 
 s32 ftCo_800A6A98(Fighter* fp, Vec3* arg1)
