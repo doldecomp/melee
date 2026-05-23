@@ -58,32 +58,26 @@ typedef struct CardQueueEntry {
 s32 fn_803AA790(void)
 {
     CardQueueEntry* entry;
-    s32 idx;
     s32 result;
     s32 arg0;
-    s32 sub_state;
-    void (*cb)(s32, s32);
 
-    idx = hsd_804D7990;
-    entry = &((CardQueueEntry*) &hsd_804D2348)[idx];
+    entry = &((CardQueueEntry*) &hsd_804D2348)[hsd_804D7990];
     arg0 = entry->x4;
-    hsd_804D7990 = (idx + 1) % 32;
+    hsd_804D7990 = (hsd_804D7990 + 1) % 32;
 
     switch (entry->x0) {
     case 1:
         result = fn_803ADF90((struct CardState*) entry->x4, entry->x8,
                              entry->xC, 1, (s32) entry->x14);
         if (result < 0) {
-            cb = entry->x14;
-            if (cb != NULL) {
-                cb(entry->x8, result);
+            if (entry->x14 != NULL) {
+                entry->x14(entry->x8, result);
             }
         }
         entry->x0 = 0;
         return result;
     case 2:
-        sub_state = ((s32*) (arg0 + 0x28))[entry->x8];
-        switch (sub_state) {
+        switch (((s32*) (arg0 + 0x28))[entry->x8]) {
         case 0:
             result = fn_803AE7F8((struct CardState*) entry->x4, entry->x8,
                                  entry->xC, 1, (s32) entry->x14);
@@ -102,9 +96,8 @@ s32 fn_803AA790(void)
             break;
         }
         if (result < 0) {
-            cb = entry->x14;
-            if (cb != NULL) {
-                cb(entry->x8, result);
+            if (entry->x14 != NULL) {
+                entry->x14(entry->x8, result);
             }
         }
         entry->x0 = 0;
@@ -113,9 +106,8 @@ s32 fn_803AA790(void)
         result = fn_803B1F78((CardState*) entry->x4, entry->x8, entry->xC,
                              entry->x10, (s32) entry->x14);
         if (result < 0) {
-            cb = entry->x14;
-            if (cb != NULL) {
-                cb(0, result);
+            if (entry->x14 != NULL) {
+                entry->x14(0, result);
             }
         }
         entry->x0 = 0;
@@ -124,9 +116,8 @@ s32 fn_803AA790(void)
         result =
             fn_803B21E8(entry->x4, entry->xC, entry->x10, (s32) entry->x14);
         if (result < 0) {
-            cb = entry->x14;
-            if (cb != NULL) {
-                cb(0, result);
+            if (entry->x14 != NULL) {
+                entry->x14(0, result);
             }
         }
         entry->x0 = 0;
@@ -134,9 +125,8 @@ s32 fn_803AA790(void)
     case 5:
         result = fn_803ADE4C(arg0, entry->x8, (s32) entry->x14);
         if (result < 0) {
-            cb = entry->x14;
-            if (cb != NULL) {
-                cb(0, result);
+            if (entry->x14 != NULL) {
+                entry->x14(0, result);
             }
         }
         entry->x0 = 0;
@@ -145,9 +135,8 @@ s32 fn_803AA790(void)
         result = fn_803B26CC((CardState*) arg0, entry->x8, entry->xC,
                              entry->x10, (s32) entry->x14);
         if (result < 0) {
-            cb = entry->x14;
-            if (cb != NULL) {
-                cb(0, result);
+            if (entry->x14 != NULL) {
+                entry->x14(0, result);
             }
         }
         entry->x0 = 0;
