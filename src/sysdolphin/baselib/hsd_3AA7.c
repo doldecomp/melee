@@ -183,7 +183,7 @@ s32 fn_803AC168(s32* cmd_buf)
     }
 
     {
-        u8* dest = (u8*) hsd_804D1148 + hsd_804D7984 * 36;
+        u8* dest = (u8*) hsd_804D1148[hsd_804D7984];
         hsd_804D7984 = (hsd_804D7984 + 1) % 128;
         memcpy(dest, cmd_buf, 36);
     }
@@ -1925,20 +1925,19 @@ int hsd_803B2550(s32* arg0, const char* arg1, void (*arg2)(int, int))
         retries = hsd_804D7994;
 
         if (read_idx == retries) {
-            u8* entry = base + read_idx * 0x18;
-            if (*(s32*) (entry + 0x1210) != 0) {
+            if (CMD_QUEUE(base)[read_idx].type != 0) {
                 return -265;
             }
         }
     }
 
     {
-        u8* entry = base + retries * 0x18;
+        HsdCmdEntry* entry = &CMD_QUEUE(base)[retries];
         s32 next = retries + 1;
-        *(s32*) (entry + 0x1210) = 5;
-        *(s32*) (entry + 0x1214) = (s32) arg0;
-        *(s32*) (entry + 0x1218) = write_idx;
-        *(s32*) (entry + 0x1224) = (s32) arg2;
+        entry->type = 5;
+        entry->f1 = (s32) arg0;
+        entry->f2 = write_idx;
+        entry->f5 = (s32) arg2;
         hsd_804D7994 = next % 32;
     }
 
