@@ -239,7 +239,36 @@
 /* 3D485C */ extern char ftCh_Init_AnimDatFilename[];
 /* 3D4868 */ extern Fighter_CostumeStrings ftCh_Init_CostumeStrings[];
 
-/* 4DA070 */ extern f32 ftCh_Init_804DA070;
-/* 4DA074 */ extern f32 ftCh_Init_804DA074;
+
+
+typedef struct {
+    u8 a;
+    u8 b;
+} u8_pair;
+
+struct ftCh_Init_803D4878_t {
+    s32 states[18];
+    u8 x48[20];
+    u8_pair x5C[6];
+    u8 x68[32];
+};
+
+extern struct ftCh_Init_803D4878_t ftCh_Init_803D4878;
+
+/* 156198 */ void ftCh_Init_80156198(HSD_GObj* gobj);
+/* 156F6C */ void fn_80156F6C(HSD_GObj* gobj);
+/* 157080 */ void fn_80157080(Fighter_GObj* gobj);
+/* 15746C */ void fn_8015746C(HSD_GObj* gobj);
+/* 15755C */ void fn_8015755C(HSD_GObj* gobj);
+/* 1578E8 */ void fn_801578E8(HSD_GObj* gobj);
+/* 158144 */ void fn_80158144(HSD_GObj* gobj);
+/* 1582D8 */ void fn_801582D8(HSD_GObj* gobj);
+/* 1587B0 */ void fn_801587B0(HSD_GObj* gobj);
+/* 159908 */ void fn_80159908(HSD_GObj* gobj);
+/* 159AA4 */ void fn_80159AA4(HSD_GObj* gobj);
+/* 15ABD0 */ void ftCh_GrabUnk1_8015ABD0(HSD_GObj* gobj);
+/* 15AC50 */ void ftCh_GrabUnk1_8015AC50(HSD_GObj* gobj);
+/* 15B548 */ void fn_8015B548(HSD_GObj* gobj, HSD_GObj* gobj2);
+/* 15B670 */ void ftCh_GrabUnk1_8015B670(HSD_GObj* gobj);
 
 #endif

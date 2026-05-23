@@ -1822,10 +1822,146 @@ melee/ft/chara/ftMasterHand/ftMh_ThrownMasterHand.c:
 	.sdata2     start:0x804DA048 end:0x804DA050
 
 melee/ft/chara/ftCrazyHand/ftCh_Init.c:
-	.text       start:0x80155E18 end:0x8015BD20
+	.text       start:0x80155E18 end:0x80155FCC
 	.data       start:0x803D41F8 end:0x803D49C0
 	.sdata      start:0x804D3EC0 end:0x804D3ED0
-	.sdata2     start:0x804DA050 end:0x804DA1F8
+	.sdata2     start:0x804DA050 end:0x804DA058
+
+melee/ft/chara/ftCrazyHand/ftCh_Wait1_0.c:
+	.text       start:0x80155FCC end:0x80156F6C
+	.sdata2     start:0x804DA058 end:0x804DA068
+
+melee/ft/chara/ftCrazyHand/ftCh_Entry.c:
+	.text       start:0x80156F6C end:0x80157080
+	.sdata2     start:0x804DA068 end:0x804DA070
+
+melee/ft/chara/ftCrazyHand/ftCh_Damage_0.c:
+	.text       start:0x80157080 end:0x8015746C
+	.sdata2     start:0x804DA070 end:0x804DA078
+
+melee/ft/chara/ftCrazyHand/ftCh_Sweep.c:
+	.text       start:0x8015746C end:0x8015755C
+	.sdata2     start:0x804DA078 end:0x804DA080
+
+melee/ft/chara/ftCrazyHand/ftCh_SweepWait.c:
+	.text       start:0x8015755C end:0x801578E8
+	.sdata2     start:0x804DA080 end:0x804DA088
+
+melee/ft/chara/ftCrazyHand/ftCh_Walk.c:
+	.text       start:0x801578E8 end:0x80157C50
+	.sdata2     start:0x804DA088 end:0x804DA090
+
+melee/ft/chara/ftCrazyHand/ftCh_Drill.c:
+	.text       start:0x80157C50 end:0x80157DF8
+	.sdata2     start:0x804DA090 end:0x804DA0A0
+
+melee/ft/chara/ftCrazyHand/ftCh_RockCrush_0.c:
+	.text       start:0x80157DF8 end:0x80158144
+	.sdata2     start:0x804DA0A0 end:0x804DA0C0
+
+melee/ft/chara/ftCrazyHand/ftCh_RockCrush_1.c:
+	.text       start:0x80158144 end:0x801582D8
+	.sdata2     start:0x804DA0C0 end:0x804DA0D8
+
+melee/ft/chara/ftCrazyHand/ftCh_Poke.c:
+	.text       start:0x801582D8 end:0x801587B0
+	.sdata2     start:0x804DA0D8 end:0x804DA0E0
+
+melee/ft/chara/ftCrazyHand/ftCh_FingerBeam_0.c:
+	.text       start:0x801587B0 end:0x80158B3C
+	.sdata2     start:0x804DA0E0 end:0x804DA0E8
+
+melee/ft/chara/ftCrazyHand/ftCh_FingerBeam.c:
+	.text       start:0x80158B3C end:0x801592D4
+	.sdata2     start:0x804DA0E8 end:0x804DA100
+
+melee/ft/chara/ftCrazyHand/ftCh_BackAirplane1.c:
+	.text       start:0x801592D4 end:0x801594D4
+	.sdata2     start:0x804DA100 end:0x804DA108
+
+melee/ft/chara/ftCrazyHand/ftCh_BackAirplane2.c:
+	.text       start:0x801594D4 end:0x80159670
+	.sdata2     start:0x804DA108 end:0x804DA118
+
+melee/ft/chara/ftCrazyHand/ftCh_BackAirplane3.c:
+	.text       start:0x80159670 end:0x801597F0
+	.sdata2     start:0x804DA118 end:0x804DA120
+
+melee/ft/chara/ftCrazyHand/ftCh_BackCrush.c:
+	.text       start:0x801597F0 end:0x80159908
+	.sdata2     start:0x804DA120 end:0x804DA128
+
+melee/ft/chara/ftCrazyHand/ftCh_BackDisappear.c:
+	.text       start:0x80159908 end:0x80159AA4
+	.sdata2     start:0x804DA128 end:0x804DA138
+
+melee/ft/chara/ftCrazyHand/ftCh_Wait1_1.c:
+	.text       start:0x80159AA4 end:0x80159F40
+	.sdata2     start:0x804DA138 end:0x804DA148
+
+melee/ft/chara/ftCrazyHand/ftCh_Grab.c:
+	.text       start:0x80159F40 end:0x8015A030
+	.sdata2     start:0x804DA148 end:0x804DA150
+
+melee/ft/chara/ftCrazyHand/ftCh_Cancel.c:
+	.text       start:0x8015A030 end:0x8015A184
+	.sdata2     start:0x804DA150 end:0x804DA158
+
+melee/ft/chara/ftCrazyHand/ftCh_Squeezing_0.c:
+	.text       start:0x8015A184 end:0x8015A2B0
+	.sdata2     start:0x804DA158 end:0x804DA160
+
+melee/ft/chara/ftCrazyHand/ftCh_Squeezing_1.c:
+	.text       start:0x8015A2B0 end:0x8015A3F4
+	.sdata2     start:0x804DA160 end:0x804DA168
+
+melee/ft/chara/ftCrazyHand/ftCh_Squeeze.c:
+	.text       start:0x8015A3F4 end:0x8015A560
+	.sdata2     start:0x804DA168 end:0x804DA170
+
+melee/ft/chara/ftCrazyHand/ftCh_Throw.c:
+	.text       start:0x8015A560 end:0x8015A6CC
+	.sdata2     start:0x804DA170 end:0x804DA178
+
+melee/ft/chara/ftCrazyHand/ftCh_Slam.c:
+	.text       start:0x8015A6CC end:0x8015AAC8
+	.sdata2     start:0x804DA178 end:0x804DA180
+
+melee/ft/chara/ftCrazyHand/ftCh_TagRockPaper.c:
+	.text       start:0x8015AAC8 end:0x8015ABD0
+	.sdata2     start:0x804DA180 end:0x804DA188
+
+melee/ft/chara/ftCrazyHand/ftCh_FingerGun2.c:
+	.text       start:0x8015ABD0 end:0x8015ADD0
+	.sdata2     start:0x804DA188 end:0x804DA190
+
+melee/ft/chara/ftCrazyHand/ftCh_TagGrab.c:
+	.text       start:0x8015ADD0 end:0x8015B174
+	.sdata2     start:0x804DA190 end:0x804DA198
+
+melee/ft/chara/ftCrazyHand/ftCh_GrabUnk1_B174.c:
+	.text       start:0x8015B174 end:0x8015B548
+	.sdata2     start:0x804DA198 end:0x804DA1D0
+
+melee/ft/chara/ftCrazyHand/ftCh_CaptureCrazyHand.c:
+	.text       start:0x8015B548 end:0x8015B670
+	.sdata2     start:0x804DA1D0 end:0x804DA1D8
+
+melee/ft/chara/ftCrazyHand/ftCh_CaptureDamageCrazyHand.c:
+	.text       start:0x8015B670 end:0x8015B778
+	.sdata2     start:0x804DA1D8 end:0x804DA1E0
+
+melee/ft/chara/ftCrazyHand/ftCh_CaptureWaitCrazyHand.c:
+	.text       start:0x8015B778 end:0x8015B850
+	.sdata2     start:0x804DA1E0 end:0x804DA1E8
+
+melee/ft/chara/ftCrazyHand/ftCh_ThrownCrazyHand.c:
+	.text       start:0x8015B850 end:0x8015B8FC
+	.sdata2     start:0x804DA1E8 end:0x804DA1F0
+
+melee/ft/chara/ftCrazyHand/ftCh_TagCancel.c:
+	.text       start:0x8015B8FC end:0x8015BD20
+	.sdata2     start:0x804DA1F0 end:0x804DA1F8
 
 melee/ft/ftbosslib.c:
 	.text       start:0x8015BD20 end:0x8015CC34
