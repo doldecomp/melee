@@ -531,32 +531,19 @@ void ftCo_800C7414(Fighter_GObj* gobj)
     ft_8008521C(gobj);
 }
 
-static inline void inlineC0(Fighter_GObj* gobj)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, 0xE, 0, 0, 1, 0, NULL);
-    fp->x2219_b1 = true;
-    fp->x2219_b2 = true;
-}
-
-static inline void inlineC1(Fighter_GObj* gobj)
-{
-    inlineC0(gobj);
-}
-
-static inline void inlineC2(Fighter_GObj* gobj)
-{
-    inlineC1(gobj);
-}
-
 void ftCo_800C7434(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
+    ftCommon_MotionState ms;
     if (fp->kind == FTKIND_GKOOPS) {
-        inlineC2(gobj);
+        ms = 0xE;
     } else {
         inlineB2(gobj);
+        return;
     }
+    Fighter_ChangeMotionState(gobj, ms, 0, 0.0F, 1.0F, 0.0F, NULL);
+    fp->x2219_b2 = true;
+    fp->x2219_b1 = true;
 }
 
 void ftCo_800C74AC(Fighter_GObj* gobj)
