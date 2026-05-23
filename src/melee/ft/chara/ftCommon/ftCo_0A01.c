@@ -7890,7 +7890,286 @@ void ftCo_800B2790(Fighter* fp)
 
 void ftCo_800B1DA0(Fighter*); /* static */
 
-/// #ftCo_800B2AFC
+void ftCo_800B2AFC(Fighter* fp)
+{
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    Vec3 floor_pos;
+    Vec3 floor_normal;
+    int line_id;
+    u32 flags;
+    s32 result;
+    s32 found;
+    s32 do_act;
+    f32 px;
+    f32 py;
+
+    switch (data->xC) {
+    case 0:
+        data->xF8_b0 = false;
+        data->xF9_b2 = false;
+        data->xF9_b4 = false;
+        data->xF9_b3 = false;
+        data->xF9_b5 = false;
+        data->xF9_b6 = false;
+        data->xF9_b7 = false;
+        data->xF9_b1 = false;
+        if (data->x18 != data->x20 && data->x18 != data->x1C) {
+            data->x60 = 0;
+        }
+        if (data->x18 == 4) {
+            do_act = 0;
+        } else {
+            data->xFA_b2 = false;
+            do_act = 1;
+        }
+        if (do_act != 0) {
+            px = fp->cur_pos.x;
+            py = fp->cur_pos.y;
+            found = 0;
+            line_id = -1;
+            result = mpCheckFloor(px, 10.0f + py, px, py - 1000.0f, 0.0f,
+                                  &floor_pos, &line_id, &flags, &floor_normal,
+                                  -1, -1, -1, NULL, NULL);
+            if (result != 0 && ftCo_800A1B38(line_id) != 0) {
+            } else {
+                found = result;
+            }
+            if (found != 0) {
+                ftCo_800A1F3C(fp, floor_pos.x, floor_pos.y, 5.0f);
+            }
+        }
+        ftCo_800ADE48(fp);
+        return;
+    case 1:
+        data->xF8_b0 = false;
+        data->xF9_b2 = false;
+        data->xF9_b4 = false;
+        data->xF9_b3 = false;
+        data->xF9_b5 = false;
+        data->xF9_b6 = false;
+        data->xF9_b7 = false;
+        data->xF9_b1 = false;
+        if (data->x18 != data->x20 && data->x18 != data->x1C) {
+            data->x60 = 0;
+        }
+        if (data->x18 == 4) {
+            do_act = 0;
+        } else {
+            data->xFA_b2 = false;
+            do_act = 1;
+        }
+        if (do_act != 0) {
+            px = data->x98.x;
+            py = data->x98.y;
+            found = 0;
+            line_id = -1;
+            result = mpCheckFloor(px, 10.0f + py, px, py - 1000.0f, 0.0f,
+                                  &floor_pos, &line_id, &flags, &floor_normal,
+                                  -1, -1, -1, NULL, NULL);
+            if (result != 0 && ftCo_800A1B38(line_id) != 0) {
+            } else {
+                found = result;
+            }
+            if (found != 0) {
+                ftCo_800A1F3C(fp, floor_pos.x, floor_pos.y, 5.0f);
+            } else {
+                ftCo_800A1F3C(fp, fp->cur_pos.x, fp->cur_pos.y, 5.0f);
+            }
+        }
+        ftCo_800ADE48(fp);
+        return;
+    case 2:
+        ftCo_800B04DC(fp);
+        return;
+    case 3:
+        data->xF8_b0 = false;
+        data->xF9_b2 = false;
+        data->xF9_b4 = false;
+        data->xF9_b3 = false;
+        data->xF9_b5 = false;
+        data->xF9_b6 = false;
+        data->xF9_b7 = false;
+        data->xF9_b1 = false;
+        if (data->x18 != data->x20 && data->x18 != data->x1C) {
+            data->x60 = 0;
+        }
+        if (data->x18 == 4) {
+            do_act = 0;
+        } else {
+            data->xFA_b2 = false;
+            do_act = 1;
+        }
+        if (do_act != 0) {
+            px = fp->cur_pos.x;
+            py = fp->cur_pos.y;
+            found = 0;
+            line_id = -1;
+            result = mpCheckFloor(px, 10.0f + py, px, py - 1000.0f, 0.0f,
+                                  &floor_pos, &line_id, &flags, &floor_normal,
+                                  -1, -1, -1, NULL, NULL);
+            if (result != 0 && ftCo_800A1B38(line_id) != 0) {
+            } else {
+                found = result;
+            }
+            if (found != 0) {
+                ftCo_800A1F3C(fp, floor_pos.x, floor_pos.y, 5.0f);
+            }
+        }
+        ftCo_800ADE48(fp);
+        return;
+    case 6:
+        ftCo_800B101C(fp);
+        return;
+    case 4:
+        ftCo_800B24B8(fp);
+        return;
+    case 7:
+        ftCo_800AF290(fp);
+        return;
+    case 8:
+        ftCo_800AECF0(fp);
+        return;
+    case 9:
+        ftCo_800B00F8(fp);
+        return;
+    case 10:
+        ftCo_800AFC40(fp);
+        return;
+    case 11:
+        ftCo_800B24B8(fp);
+        return;
+    case 12:
+        ftCo_800B24B8(fp);
+        return;
+    case 13:
+        ftCo_800B126C(fp);
+        return;
+    case 14:
+        ftCo_800B1478(fp);
+        return;
+    case 15:
+        data->x18 = 0;
+        return;
+    case 17:
+        ftCo_800B17D0(fp);
+        return;
+    case 18:
+        ftCo_800AF78C(fp);
+        return;
+    case 19:
+        ftCo_800AFE3C(fp, 0);
+        return;
+    case 20:
+        ftCo_800AFE3C(fp, 1);
+        return;
+    case 21:
+        ftCo_800AFE3C(fp, 2);
+        return;
+    case 22:
+        ftCo_800AFE3C(fp, 3);
+        return;
+    case 23:
+        data->xF8_b0 = false;
+        data->xF9_b2 = true;
+        data->xF9_b4 = true;
+        data->xF9_b3 = false;
+        data->xF9_b5 = false;
+        data->xF9_b6 = false;
+        data->xF9_b7 = false;
+        data->xF9_b1 = false;
+        data->x44 = ftCo_800A4BEC(fp);
+        if (data->x18 != data->x20 && data->x18 != data->x1C) {
+            data->x60 = 0;
+        }
+        if (data->x18 == 4) {
+            do_act = 0;
+        } else {
+            data->xFA_b2 = false;
+            do_act = 1;
+        }
+        if (do_act != 0) {
+            ftCo_800A75DC(fp, data->x44);
+        }
+        ftCo_800ADE48(fp);
+        return;
+    case 24:
+        ftCo_800B1DA0(fp);
+        return;
+    case 25:
+        data->xF8_b0 = false;
+        data->xF9_b2 = true;
+        data->xF9_b4 = true;
+        data->xF9_b3 = false;
+        data->xF9_b5 = false;
+        data->xF9_b6 = false;
+        data->xF9_b7 = false;
+        data->xF9_b1 = false;
+        data->x44 = ftCo_800A4BEC(fp);
+        if (data->x18 != data->x20 && data->x18 != data->x1C) {
+            data->x60 = 0;
+        }
+        if (data->x18 == 4) {
+            do_act = 0;
+        } else {
+            data->xFA_b2 = false;
+            do_act = 1;
+        }
+        if (do_act != 0) {
+            ftCo_800A75DC(fp, data->x44);
+        }
+        ftCo_800ADE48(fp);
+        return;
+    case 26:
+        data->xF8_b0 = false;
+        data->xF9_b2 = true;
+        data->xF9_b4 = true;
+        data->xF9_b3 = false;
+        data->xF9_b5 = false;
+        data->xF9_b6 = false;
+        data->xF9_b7 = false;
+        data->xF9_b1 = false;
+        data->x44 = ftCo_800A4BEC(fp);
+        if (data->x18 != data->x20 && data->x18 != data->x1C) {
+            data->x60 = 0;
+        }
+        if (data->x18 == 4) {
+            do_act = 0;
+        } else {
+            data->xFA_b2 = false;
+            do_act = 1;
+        }
+        if (do_act != 0) {
+            px = fp->cur_pos.x;
+            py = fp->cur_pos.y;
+            found = 0;
+            line_id = -1;
+            result = mpCheckFloor(px, 10.0f + py, px, py - 1000.0f, 0.0f,
+                                  &floor_pos, &line_id, &flags, &floor_normal,
+                                  -1, -1, -1, NULL, NULL);
+            if (result != 0 && ftCo_800A1B38(line_id) != 0) {
+            } else {
+                found = result;
+            }
+            if (found != 0) {
+                ftCo_800A1F3C(fp, floor_pos.x, floor_pos.y, 5.0f);
+            }
+        }
+        ftCo_800ADE48(fp);
+        return;
+    case 27:
+        ftCo_800B1EF0(fp);
+        return;
+    case 28:
+        ftCo_800B21C8(fp);
+        return;
+    case 29:
+        ftCo_800B1AB8(fp);
+        return;
+    default:
+        ftCo_800B24B8(fp);
+        break;
+    }
+}
 
 void ftCo_800B33B0(Fighter* fp)
 {

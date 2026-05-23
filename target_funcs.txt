@@ -40,5 +40,5 @@ Funcs:
 - [x] ftCo_800A3908
 - [x] ftCo_800A4038
 - [x] ftCo_800ABBA8
-- [ ] ftCo_800B2AFC
+- [x] ftCo_800B2AFC
 - [ ] ftCo_800ADE48
