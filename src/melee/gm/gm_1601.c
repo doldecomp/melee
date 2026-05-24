@@ -2200,7 +2200,132 @@ bool gm_80164ABC(void)
     return true;
 }
 
-/// #fn_80164B48
+bool fn_80164B48(void)
+{
+    const u8* base = (const u8*) lbl_803B75F8;
+    const u8* es;
+    u16* ptr;
+    s32 i;
+    u8 idx;
+    u8 t;
+    s32 ok;
+
+    ptr = gmMainLib_8015ED8C();
+    t = base[0x2C2];
+    idx = 0xB;
+    es = base + 0x2D0;
+    for (i = 0; i < 0xB; i++) {
+        if (t == es[1]) {
+            idx = (base + i * 6)[0x2D0];
+            break;
+        }
+        es += 6;
+    }
+    ok = 0;
+    if (idx == 0xB || (*ptr & (1LL << idx))) {
+        ok = 1;
+    }
+    if (ok == 0) {
+        return 0;
+    }
+
+    ptr = gmMainLib_8015ED8C();
+    t = base[0x2C5];
+    idx = 0xB;
+    es = base + 0x2D0;
+    for (i = 0; i < 0xB; i++) {
+        if (t == es[1]) {
+            idx = (base + i * 6)[0x2D0];
+            break;
+        }
+        es += 6;
+    }
+    ok = 0;
+    if (idx == 0xB || (*ptr & (1LL << idx))) {
+        ok = 1;
+    }
+    if (ok == 0) {
+        return 0;
+    }
+
+    ptr = gmMainLib_8015ED8C();
+    t = base[0x2C1];
+    idx = 0xB;
+    es = base + 0x2D0;
+    for (i = 0; i < 0xB; i++) {
+        if (t == es[1]) {
+            idx = (base + i * 6)[0x2D0];
+            break;
+        }
+        es += 6;
+    }
+    ok = 0;
+    if (idx == 0xB || (*ptr & (1LL << idx))) {
+        ok = 1;
+    }
+    if (ok == 0) {
+        return 0;
+    }
+
+    ptr = gmMainLib_8015ED8C();
+    t = base[0x2C0];
+    idx = 0xB;
+    es = base + 0x2D0;
+    for (i = 0; i < 0xB; i++) {
+        if (t == es[1]) {
+            idx = (base + i * 6)[0x2D0];
+            break;
+        }
+        es += 6;
+    }
+    ok = 0;
+    if (idx == 0xB || (*ptr & (1LL << idx))) {
+        ok = 1;
+    }
+    if (ok == 0) {
+        return 0;
+    }
+
+    ptr = gmMainLib_8015ED8C();
+    t = base[0x2C4];
+    idx = 0xB;
+    es = base + 0x2D0;
+    for (i = 0; i < 0xB; i++) {
+        if (t == es[1]) {
+            idx = (base + i * 6)[0x2D0];
+            break;
+        }
+        es += 6;
+    }
+    ok = 0;
+    if (idx == 0xB || (*ptr & (1LL << idx))) {
+        ok = 1;
+    }
+    if (ok == 0) {
+        return 0;
+    }
+
+    ptr = gmMainLib_8015ED8C();
+    t = base[0x2C3];
+    idx = 0xB;
+    es = base + 0x2D0;
+    for (i = 0; i < 0xB; i++) {
+        if (t == es[1]) {
+            idx = (base + i * 6)[0x2D0];
+            break;
+        }
+        es += 6;
+    }
+    ok = 0;
+    if (idx == 0xB || (*ptr & (1LL << idx))) {
+        ok = 1;
+    }
+    if (ok == 0) {
+        return 0;
+    }
+
+    return 1;
+}
 
 void gm_80164F18(void)
 {
