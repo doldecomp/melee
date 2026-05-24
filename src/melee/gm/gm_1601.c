@@ -411,6 +411,26 @@ int gm_80160244(s8 arg0)
     return (127.0f * (temp_f2 / 50.0f));
 }
 
+static inline int gm_801601C4_inner(s8 arg0)
+{
+    return gm_801601C4(arg0);
+}
+
+static inline int gm_801601C4_noinline(s8 arg0)
+{
+    return gm_801601C4_inner(arg0);
+}
+
+static inline int gm_80160244_inner(s8 arg0)
+{
+    return gm_80160244(arg0);
+}
+
+static inline int gm_80160244_noinline(s8 arg0)
+{
+    return gm_80160244_inner(arg0);
+}
+
 void gm_801602C0(s8 arg0)
 {
     int a = gm_80160244(arg0);
@@ -422,20 +442,17 @@ void gm_801602C0(s8 arg0)
     lbAudioAx_800245F4(a);
 }
 
-#pragma push
-#pragma dont_inline on
 void gm_801603B0(void)
 {
     int temp_r31;
     s8 temp_r3;
 
     temp_r3 = gmMainLib_8015ED74();
-    temp_r31 = gm_80160244(temp_r3);
+    temp_r31 = gm_80160244_noinline(temp_r3);
 
-    lbAudioAx_80024614(gm_801601C4(temp_r3));
+    lbAudioAx_80024614(gm_801601C4_noinline(temp_r3));
     lbAudioAx_800245F4(temp_r31);
 }
-#pragma pop
 
 u32 fn_80160400(CharacterKind ckind)
 {
@@ -675,7 +692,6 @@ GXColor gm_80160968(u8 arg0)
 }
 
 /// Get SJIS character name for a given CharacterKind
-#pragma dont_inline on
 const char* gm_80160980(u8 ckind)
 {
     if (lbLang_IsSavedLanguageUS()) {
@@ -699,7 +715,6 @@ const char* fn_801609E0(u8 ckind)
         return lbl_803D4D74[ckind];
     }
 }
-#pragma dont_inline reset
 
 const char* gm_80160A60(int arg0)
 {
@@ -2118,6 +2133,16 @@ bool gm_80164840(u8 ckind)
         return true;
     }
     return false;
+}
+
+static inline bool gm_80164840_inner(u8 ckind)
+{
+    return gm_80164840(ckind);
+}
+
+static inline bool gm_80164840_noinline(u8 ckind)
+{
+    return gm_80164840_inner(ckind);
 }
 
 void gm_80164910(int arg0)
@@ -3862,7 +3887,6 @@ s32 fn_80169000(void* arg0, void* arg1)
 }
 
 /// #fn_80169000 done
-#pragma dont_inline on
 u8 gm_80169238(u8 ckind)
 {
     if (ckind >= ARRAY_SIZE(lbl_803D51A0)) {
@@ -3870,7 +3894,26 @@ u8 gm_80169238(u8 ckind)
     }
     return lbl_803D51A0[ckind].ncolors;
 }
-#pragma dont_inline reset
+
+static inline u8 gm_80169238_inner3(u8 ckind)
+{
+    return gm_80169238(ckind);
+}
+
+static inline u8 gm_80169238_inner2(u8 ckind)
+{
+    return gm_80169238_inner3(ckind);
+}
+
+static inline u8 gm_80169238_inner(u8 ckind)
+{
+    return gm_80169238_inner2(ckind);
+}
+
+static inline u8 gm_80169238_noinline(u8 ckind)
+{
+    return gm_80169238_inner(ckind);
+}
 
 u8 gm_80169264(u8 ckind)
 {
@@ -4048,7 +4091,7 @@ s32 fn_801695BC(u8 arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
     u8* var_r6;
     u8* temp_r27;
 
-    temp_r3 = gm_80169238(arg0);
+    temp_r3 = gm_80169238_noinline(arg0);
     if ((s8) arg0 != 0x21) {
         var_r7 = 0;
         if (temp_r3 > 0) {
@@ -4147,11 +4190,10 @@ s32 fn_801695BC(u8 arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
     return (s32) temp_r3;
 }
 
-#pragma dont_inline on
 void fn_801697FC(s8 character, s8 costume, s8 new_character, s8 new_costume,
                  s8* buf)
 {
-    u8 ncolors = gm_80169238(character);
+    u8 ncolors = gm_80169238_noinline(character);
     int i;
 
     if (character == 0x21) {
@@ -4164,7 +4206,6 @@ void fn_801697FC(s8 character, s8 costume, s8 new_character, s8 new_costume,
         buf[i] = costume;
     }
 }
-#pragma dont_inline reset
 
 void fn_8016989C(u8* arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
 {
@@ -4174,8 +4215,6 @@ void fn_8016989C(u8* arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
     };
 }
 
-#pragma push
-#pragma dont_inline on
 void fn_80169900(u8 arg0, struct lbl_8046B488_t* arg1, s8* arg2, s8* arg3)
 {
     s32 var_r28 = 0;
@@ -4214,13 +4253,13 @@ void fn_80169900(u8 arg0, struct lbl_8046B488_t* arg1, s8* arg2, s8* arg3)
             } else {
                 var_r27 = 5;
                 if (HSD_Randi(2) != 0) {
-                    if ((s32) arg1->x1 != 0x21 && gm_80164840(arg1->x1)) {
+                    if ((s32) arg1->x1 != 0x21 && gm_80164840_noinline(arg1->x1)) {
                         arg2[var_r28] = arg1->x1;
                     } else {
                         arg2[var_r28] = arg1->x0;
                     }
                 } else {
-                    if ((s32) arg1->x2 != 0x21 && gm_80164840(arg1->x2)) {
+                    if ((s32) arg1->x2 != 0x21 && gm_80164840_noinline(arg1->x2)) {
                         arg2[var_r28] = arg1->x2;
                     } else {
                         arg2[var_r28] = arg1->x0;
@@ -4233,10 +4272,7 @@ void fn_80169900(u8 arg0, struct lbl_8046B488_t* arg1, s8* arg2, s8* arg3)
     }
     }
 }
-#pragma pop
 
-#pragma push
-#pragma dont_inline on
 long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
 {
     s32 i;
@@ -4254,7 +4290,7 @@ long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
         i = 0;
         p = base + 0x1C0;
         do {
-            if (i != 4 && gm_80164840((u8) i) != 0) {
+            if (i != 4 && gm_80164840_noinline((u8) i) != 0) {
                 *p = i;
             } else {
                 *p = -1;
@@ -4323,7 +4359,6 @@ long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
         return (s32) base;
     }
 }
-#pragma pop
 
 void fn_80169C54(s8 arg0, s8 arg1)
 {
@@ -4352,7 +4387,7 @@ void fn_80169C54(s8 arg0, s8 arg1)
     do {
         if ((s32) *pc == 4) {
             if (st->xB == 0) {
-                count = gm_80169238(4U);
+                count = gm_80169238_noinline(4U);
                 for (k = 0; k < count; k++) {
                     buf[k] = k;
                     n += 1;
@@ -4527,8 +4562,43 @@ void gm_8016A21C(StartMeleeRules* arg0)
     arg0->x54 = (void*) &lbl_8046B488;
 }
 
-#pragma push
-#pragma dont_inline on
+static inline s32 fn_801695BC_inner(u8 arg0, u8 arg1, u8 arg2, u8* arg3,
+                                    u8* arg4)
+{
+    return fn_801695BC(arg0, arg1, arg2, arg3, arg4);
+}
+
+static inline s32 fn_801695BC_noinline(u8 arg0, u8 arg1, u8 arg2, u8* arg3,
+                                       u8* arg4)
+{
+    return fn_801695BC_inner(arg0, arg1, arg2, arg3, arg4);
+}
+
+static inline void fn_801697FC_inner(s8 character, s8 costume,
+                                     s8 new_character, s8 new_costume, s8* buf)
+{
+    fn_801697FC(character, costume, new_character, new_costume, buf);
+}
+
+static inline void fn_801697FC_noinline(s8 character, s8 costume,
+                                        s8 new_character, s8 new_costume,
+                                        s8* buf)
+{
+    fn_801697FC_inner(character, costume, new_character, new_costume, buf);
+}
+
+static inline void fn_80169900_inner(u8 arg0, struct lbl_8046B488_t* arg1,
+                                     s8* arg2, s8* arg3)
+{
+    fn_80169900(arg0, arg1, arg2, arg3);
+}
+
+static inline void fn_80169900_noinline(u8 arg0, struct lbl_8046B488_t* arg1,
+                                        s8* arg2, s8* arg3)
+{
+    fn_80169900_inner(arg0, arg1, arg2, arg3);
+}
+
 s32 gm_8016A22C(s8 k0, s8 k1, s8 k2, u8 a3, u8 a4, int a5, int mode, int a7,
                 u8 color, u8 p87, u8 p8b, int x6, int x7, int x9, int xA,
                 int flag2, int flag1, f32 f1, f32 f2)
@@ -4578,7 +4648,7 @@ s32 gm_8016A22C(s8 k0, s8 k1, s8 k2, u8 a3, u8 a4, int a5, int mode, int a7,
     memzero(lbl_8046B488.x20, lbl_8046B488.x7);
     lbl_8046B488.x20[lbl_8046B488.x7] = (s8) -2;
 
-    fn_80169900(lbl_8046B488.xD, &lbl_8046B488, lbl_8046B488.xA2,
+    fn_80169900_noinline(lbl_8046B488.xD, &lbl_8046B488, lbl_8046B488.xA2,
                 lbl_8046B488.x20);
 
     kinds = (u8*) &lbl_8046B488.x0;
@@ -4586,14 +4656,14 @@ s32 gm_8016A22C(s8 k0, s8 k1, s8 k2, u8 a3, u8 a4, int a5, int mode, int a7,
     switch (lbl_8046B488.xB) {
     case 0:
         for (i = 0; i < 3; i++) {
-            fn_801695BC(kinds[i], p87, p8b, (u8*) lbl_8046B488.xA2,
+            fn_801695BC_noinline(kinds[i], p87, p8b, (u8*) lbl_8046B488.xA2,
                         (u8*) lbl_8046B488.x20);
         }
         break;
 
     case 1:
         for (i = 0; i < 3; i++) {
-            fn_801697FC(
+            fn_801697FC_noinline(
                 kinds[i], lbl_8046B488.xC, p87, p8b,
                 lbl_8046B488
                     .x20); // This was being inlined, hence the no-inline
@@ -4603,7 +4673,6 @@ s32 gm_8016A22C(s8 k0, s8 k1, s8 k2, u8 a3, u8 a4, int a5, int mode, int a7,
 
     return fn_80169A84(lbl_8046B488.xE, lbl_8046B488.x124, lbl_8046B488.x20);
 }
-#pragma pop
 
 void gm_8016A404(s32 arg0)
 {
