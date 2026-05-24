@@ -1294,33 +1294,31 @@ void grIceMt_801F9668(float arg8)
     gp->gv.icemt2.xC4 = arg8;
 }
 
-float grIceMt_801F96E0(Ground_GObj* gobj, float y)
+float grIceMt_801F96E0(HSD_GObj* arg0, float farg0)
 {
-    HSD_GObj* jobj;
-    double dVar3;
-    double dVar4;
-    dVar4 = 0.3;
+    s16* p = (s16*) arg0;
+    HSD_GObj* mgobj;
 
-    jobj = Ground_801C2BA4(4);
-    if (jobj == NULL) {
-        __assert(grIm_803E46F8, 2629, "mgobj");
+    if (p[0] != -1) {
+        mgobj = Ground_801C2BA4(p[0]);
+        if (mgobj == NULL) {
+            __assert(grIm_803E46F8, 0xA45, "mgobj");
+        }
+        if (mgobj->hsd_obj == NULL) {
+            __assert(grIm_803E46F8, 0xA46, "jobj");
+        }
+        HSD_JObjAddTranslationY(mgobj->hsd_obj, farg0);
     }
-    if (jobj->hsd_obj == NULL) {
-        __assert(grIm_803E46F8, 2630, "jobj");
+    if (p[1] != -1) {
+        mgobj = Ground_801C2BA4(p[1]);
+        if (mgobj == NULL) {
+            __assert(grIm_803E46F8, 0xA4B, "mgobj");
+        }
+        if (mgobj->hsd_obj == NULL) {
+            __assert(grIm_803E46F8, 0xA4C, "jobj");
+        }
+        HSD_JObjAddTranslationY(mgobj->hsd_obj, farg0);
     }
-    HSD_JObjAddTranslationY(jobj->hsd_obj, y);
-    jobj = Ground_801C2BA4(7);
-    if (jobj == NULL) {
-        __assert(grIm_803E46F8, 2639, "mgobj");
-    }
-    if (jobj->hsd_obj == NULL) {
-        __assert(grIm_803E46F8, 2630, "jobj");
-    }
-    HSD_JObjAddTranslationY(jobj->hsd_obj, y);
-    // HSD_JObjGetTranslationY(jobj);
-    // dVar4 = Ground_801C0498();
-    // HSD_JObjSetTranslateY(jobj,4);
-    return 0;
 }
 
 /// #grIceMt_801F98A8
