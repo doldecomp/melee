@@ -173,7 +173,7 @@ Funcs:
 
 File: src/melee/gm/gm_1601.c
 Funcs:
-- [ ] fn_8016A4C8
+- [x] fn_8016A4C8
 - [x] fn_80160DE8
 - [x] fn_80161C90
 - [ ] fn_80164B48

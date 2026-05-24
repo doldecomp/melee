@@ -4515,7 +4515,141 @@ void fn_8016A488(s32 arg0)
     }
 }
 
-/// #fn_8016A4C8
+void fn_8016A4C8(void)
+{
+    Vec3 spDC;
+    f32 var_f1;
+    s32 var_r27;
+    s32 i;
+    s32 j;
+    s32 var_r4;
+    s32 var_r23;
+    s32 r;
+    s8 chr;
+    u8 cos;
+    s32 var_r0;
+    void (*fp)(s32, u8);
+
+    var_r27 = 0;
+    if (lbl_8046B488.unk_10_b1) {
+        var_r0 = 1;
+    } else {
+        var_r0 = 0;
+    }
+    if (var_r0 == 0) {
+        return;
+    }
+    for (i = 0; i < 6; i++) {
+        if (Player_GetFlagsBit1(i) != 0 && Player_GetPlayerState(i) == 0 &&
+            (s32) lbl_8046B488.x7 > 0) {
+            if (lbl_8046B488.x7 != 0) {
+                lbl_8046B488.x7 -= 1;
+            }
+            fn_8016B738(1);
+            Player_80036D24(i);
+            lbl_8046B488.x1A6[i] = lbl_8046B488.x7;
+            Player_SetFlagsBit1(i);
+            Player_SetTeam(i, 4);
+            Ground_801C2D24(i + (lbl_8046B488.xA - 1), &spDC);
+            spDC.y = Stage_GetCamBoundsTopOffset();
+            Player_80032768(i, &spDC);
+            Player_SetSlottype(i, Gm_PKind_Cpu);
+            Player_SetPlayerCharacter(
+                i, (CharacterKind) (s8) (u8) lbl_8046B488.xA2[lbl_8046B488.x7]);
+            Player_SetStocks(i, 1);
+            cos = lbl_8046B488.x20[lbl_8046B488.x7];
+            Player_SetCostumeId(i, (s8) cos);
+            chr = Player_GetPlayerCharacter(i);
+            var_r4 = 0;
+            for (j = 0; j < 6; j++) {
+                if (Player_GetPlayerSlotType(j) != Gm_PKind_NA &&
+                    Player_GetFlagsBit1(j) == 0 &&
+                    chr == Player_GetPlayerCharacter(j) &&
+                    (s8) cos == Player_GetCostumeId(j)) {
+                    var_r4 = 1;
+                    break;
+                }
+            }
+            Player_SetControllerIndex(i, var_r4);
+            Player_SetMoreFlagsBit6(i, lbl_8046B488.xF);
+            Player_SetMoreFlagsBit1(i, 0U);
+            if (spDC.x >= 0.0f) {
+                var_f1 = -1.0f;
+            } else {
+                var_f1 = 1.0f;
+            }
+            Player_SetFacingDirection(i, var_f1);
+            Player_SetHUDDamage(i, 0);
+            Player_SetPlayerId(i, i);
+            Player_SetFlagsBit0(i, 0);
+            Player_SetNametagSlotID(i, 0x78);
+            Player_SetPlayerAndEntityCpuLevel(i, (s32) lbl_8046B488.x6);
+            var_r23 = 0x17;
+            if ((s32) lbl_8046B488.x7 != 1) {
+                r = HSD_Randi(4);
+                if (r != 3) {
+                    if (r < 3) {
+                        if (r < 0) {
+                            var_r23 = 0x17;
+                        }
+                    } else {
+                        var_r23 = 0x17;
+                    }
+                } else {
+                    var_r23 = 0x18;
+                }
+            }
+            Player_SetPlayerAndEntityCpuType(i, var_r23);
+            if (lbl_8046B488.unk_10_b4) {
+                Player_SetFlagsBit5(i, 1U);
+                Player_SetPlayerAndEntityCpuType(i, 0x1B);
+            }
+            if (lbl_8046B488.unk_10_b6) {
+                Player_SetFlagsAEBit0(i, 1U);
+            } else {
+                Player_SetFlagsAEBit0(i, 0U);
+            }
+            Player_SetFlagsBit6(i, lbl_8046B488.unk_10_b5);
+            Player_SetModelScale(i, lbl_8046B488.x1C);
+            Player_SetAttackRatio(i, lbl_8046B488.x14);
+            Player_SetDefenseRatio(i, lbl_8046B488.x18);
+            if ((s32) lbl_8046B488.x8 > 1) {
+                Player_SetMoreFlagsBit5(i, 1U);
+            } else {
+                Player_SetMoreFlagsBit5(i, 0U);
+            }
+            if (Player_GetPlayerCharacter(i) == CKIND_KIRBY &&
+                lbl_8046B488.xE != 0) {
+                Player_SetUnk4D(i, (s8) (u8) lbl_8046B488.x124[lbl_8046B488.x7]);
+                Player_SetFlagsAEBit1(i, 1U);
+            }
+            fp = *(void (**)(s32, u8)) ((u8*) &lbl_8046B488 + 0x1BC);
+            if (fp != NULL) {
+                fp(i, lbl_8046B488.x7);
+            }
+            Player_SetStructFunc(i, fn_8016A488);
+            Player_80031AD0(i);
+            ifStatus_802F6508(i);
+            un_802FD28C(i);
+        }
+    }
+    if ((s32) lbl_8046B488.x7 == 0) {
+        for (j = 0; j < 6; j++) {
+            if (Player_GetPlayerSlotType(j) != Gm_PKind_NA &&
+                Player_GetFlagsBit1(j) != 0 && Player_GetStocks(j) != 0) {
+                var_r27 = 1;
+                break;
+            }
+        }
+        if (var_r27 == 0) {
+            lbl_8046B488.unk_10_b0 = 1;
+            lbl_8046B488.unk_10_b1 = 0;
+            if (lbl_8046B488.x1B8 != NULL && lbl_8046B488.x1B8(1) == 1) {
+                lbl_8046B488.x1B8 = NULL;
+            }
+        }
+    }
+}
 
 void gm_8016A92C(StartMeleeRules* arg0)
 {
