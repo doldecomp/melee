@@ -145,7 +145,7 @@ extern f32 grIm_804DB570;
 /* 1F993C */ f32 grIceMt_801F993C(s32, s32);
 /* 1F9ACC */ void grIceMt_801F9ACC(Ground_GObj*, float, GrIceMtSegmentLookup,
                                    Ground_GObj*);
-/* 1FA0BC */ UNK_RET grIceMt_801FA0BC(s16*);
+/* 1FA0BC */ void grIceMt_801FA0BC(s16*);
 /* 1FA364 */ bool grIceMt_801FA364(void* state, float* out, HSD_GObjEvent cb,
                                    Ground_GObj* gobj);
 /* 1FA4CC */ int fn_801FA4CC(int num);

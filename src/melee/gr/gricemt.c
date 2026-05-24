@@ -1475,7 +1475,77 @@ void grIceMt_801F9ACC(Ground_GObj* gobj, float y, GrIceMtSegmentLookup ev,
     grIceMt_801FA854();
 }
 
-/// #grIceMt_801FA0BC
+static inline HSD_GObj* grIceMt_801F71E8_inner(int id)
+{
+    return grIceMt_801F71E8(id);
+}
+static inline HSD_GObj* grIceMt_801F71E8_noinline(int id)
+{
+    return grIceMt_801F71E8_inner(id);
+}
+
+void grIceMt_801FA0BC(s16* arg0)
+{
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+    Ground* gp2;
+    HSD_JObj** ptrs;
+    f32 f;
+    s16 id;
+
+    id = arg0[0];
+    f = grIceMt_801F993C(arg0[0], arg0[1]);
+    if (id != -1) {
+        gobj = grIceMt_801F71E8_noinline(id);
+        if (gobj == NULL) {
+            __assert(grIm_803E46F8, 0xB44, "mgobj");
+        }
+        jobj = gobj->hsd_obj;
+        if (jobj == NULL) {
+            __assert(grIm_803E46F8, 0xB46, "jobj");
+        }
+        HSD_JObjSetTranslateY(jobj, -20.0f * Ground_801C0498() + f);
+        Ground_801C3214(arg0[0]);
+        Ground_801C2FE0(gobj);
+        Ground_801C32AC(arg0[0]);
+    }
+    id = arg0[1];
+    if (id != -1) {
+        gobj = grIceMt_801F71E8_noinline(id);
+        if (gobj == NULL) {
+            __assert(grIm_803E46F8, 0xB50, "mgobj");
+        }
+        jobj = gobj->hsd_obj;
+        if (jobj == NULL) {
+            __assert(grIm_803E46F8, 0xB52, "jobj");
+        }
+        HSD_JObjSetTranslateY(jobj, -20.0f * Ground_801C0498());
+        Ground_801C3214(arg0[1]);
+        Ground_801C2FE0(gobj);
+        Ground_801C32AC(arg0[1]);
+        gp2 = gobj->user_data;
+        ((UnkFlagStruct*) &gp2->gv.icemt2.xC4)->b0 = 1;
+        ((UnkFlagStruct*) &gp2->gv.icemt2.xC4)->b1 = 1;
+        gp2 = gobj->user_data;
+        if (((UnkFlagStruct*) &gp2->gv.icemt2.xC4)->b1) {
+            ((UnkFlagStruct*) &gp2->gv.icemt2.xC4)->b1 = 0;
+            ptrs = &gp2->gv.icemt2.xC8;
+            if (ptrs[0]) {
+                Ground_801C2D0C(0, ptrs[0]);
+            }
+            if (ptrs[1]) {
+                Ground_801C2D0C(1, ptrs[1]);
+            }
+            if (ptrs[2]) {
+                Ground_801C2D0C(2, ptrs[2]);
+            }
+            if (ptrs[3]) {
+                Ground_801C2D0C(3, ptrs[3]);
+            }
+        }
+    }
+    grIceMt_801FA854();
+}
 
 typedef struct grIceMt_FA364_State {
     /* 0x0 */ s16 phase;
