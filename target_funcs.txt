@@ -139,7 +139,7 @@ Funcs:
 - [x] fn_8018FA24
 - [x] fn_8018FBE0
 - [x] fn_8019A71C
-- [ ] fn_8019AF50
+- [x] fn_8019AF50
 - [x] fn_8019B458
 - [x] fn_8019B860
 - [x] fn_80190ABC

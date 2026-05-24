@@ -7042,8 +7042,6 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
     }
 }
 
-/// #fn_8019AF50
-
 extern u8 lbl_804D6680[8];
 extern u8 lbl_803B7D04[20];
 
