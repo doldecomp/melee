@@ -871,7 +871,82 @@ s32 fn_80161004(MatchEnd* match_end)
 
 /// #fn_80161154
 
-/// #fn_80161C90
+struct gm_stats {
+    /* 0x00 */ u16 unk0;
+    /* 0x02 */ u8 pad2[2];
+    /* 0x04 */ u32 unk4;
+    /* 0x08 */ u32 unk8;
+    /* 0x0C */ u32 unkC;
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ u32 unk14;
+    /* 0x18 */ u16 unk18;
+    /* 0x1A */ u16 unk1A;
+    /* 0x1C */ u16 unk1C;
+    /* 0x1E */ u16 unk1E;
+    /* 0x20 */ u32 unk20;
+    /* 0x24 */ u32 unk24;
+    /* 0x28 */ u32 unk28;
+    /* 0x2C */ u32 unk2C;
+    /* 0x30 */ u32 unk30;
+    /* 0x34 */ u32 unk34;
+    /* 0x38 */ u32 unk38;
+    /* 0x3C */ u32 unk3C;
+    /* 0x40 */ u32 unk40;
+};
+
+void fn_80161C90(MatchEnd* arg0, int arg1, u16* arg2)
+{
+    struct gm_stats* s = (struct gm_stats*) arg2;
+    MatchPlayerData* p = &arg0->player_standings[arg1];
+    u32 count;
+
+    s->unk0 = MIN(s->unk0 + p->self_destructs, 0xFFFF);
+    s->unk4 = MIN(s->unk4 + *(u32*) ((u8*) p + 0x38), 0xFFFFFFFFU);
+    s->unk8 = MIN(s->unk8 + *(u32*) ((u8*) p + 0x3C), 0xFFFFFFFFU);
+    s->unkC = MIN(s->unkC + p->x40, 0xFFFFFFFFU);
+    s->unk10 = MIN(s->unk10 + p->x44, 0xFFFFFFFFU);
+    s->unk14 = MIN(s->unk14 + p->x48, 0xFFFFFFFFU);
+    if (s->unk18 < p->x4C) {
+        s->unk18 = p->x4C;
+    }
+    s->unk1A = MIN(s->unk1A + 1, 0xFFFF);
+    if (arg1 == fn_80165548(arg0, fn_80165418(arg0), fn_801654A0(arg0))) {
+        s->unk1C = MIN(s->unk1C + 1, 0xFFFF);
+    }
+    if (arg1 == fn_80161154(arg0)) {
+        s->unk1E = MIN(s->unk1E + 1, 0xFFFF);
+    }
+    s->unk20 = MIN(s->unk20 + arg0->frame_count / 60, 0xFFFFFFFFU);
+    count = 0;
+    if (arg0->player_standings[0].slot_type != 3) {
+        count = 1;
+    }
+    if (arg0->player_standings[1].slot_type != 3) {
+        count += 1;
+    }
+    if (arg0->player_standings[2].slot_type != 3) {
+        count += 1;
+    }
+    if (arg0->player_standings[3].slot_type != 3) {
+        count += 1;
+    }
+    count = s->unk24 + count;
+    if (count > 0xFFFFFFFFU) {
+        count = 0xFFFF;
+    }
+    s->unk24 = count;
+    s->unk28 = MIN(s->unk28 + p->x50, 0xFFFFFFFFU);
+    gmMainLib_8015EDBC()->x10 =
+        MIN(p->x50 + gmMainLib_8015EDBC()->x10, 0xFFFFFFFFU);
+    s->unk2C = MIN(s->unk2C + p->x54, 0xFFFFFFFFU);
+    s->unk30 = MIN(s->unk30 + p->x58, 0xFFFFFFFFU);
+    s->unk34 = MIN(s->unk34 + p->x5C, 0xFFFFFFFFU);
+    if (arg0->x5 == 2) {
+        s->unk38 = MIN(s->unk38 + p->x60, 0xFFFFFFFFU);
+        s->unk3C = MIN(s->unk3C + p->x64, 0xFFFFFFFFU);
+        s->unk40 = MIN(s->unk40 + p->x68, 0xFFFFFFFFU);
+    }
+}
 
 void fn_80162068(MatchEnd* match_end)
 {
