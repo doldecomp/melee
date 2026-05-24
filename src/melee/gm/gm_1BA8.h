@@ -87,7 +87,7 @@ struct EventData;
 /* 1BF040 */ void gm_801BF040(s8);
 /* 1BF050 */ int gm_801BF050(void);
 /* 1BF060 */ void gm_801BF060(GameScene*);
-/* 1BF128 */ UNK_RET gm_801BF128(UNK_PARAMS);
+/* 1BF128 */ void gm_801BF128(void);
 /* 1BF3F8 */ UNK_RET gm_801BF3F8(UNK_PARAMS);
 /* 1BF4DC */ void gm_801BF4DC(GameScene*);
 /* 1BF634 */ void gm_801BF634(s32, s8);

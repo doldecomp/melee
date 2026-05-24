@@ -1960,7 +1960,96 @@ void gm_801BF060(GameScene* arg0)
     }
 }
 
-/// #gm_801BF128
+void gm_801BF128(void)
+{
+    s32 spB8[27];
+    s32 sp40[30];
+    s32 count;
+    s32 i;
+    s32 j;
+    s32 a;
+    s32 b;
+    s32 pick;
+    s32 dup;
+    s32 added;
+    s32 prev;
+    u8 c;
+    u8 cur_id;
+
+    count = 0;
+    c = 0;
+    do {
+        if (gm_80164840(c) != 0) {
+            spB8[count] = c;
+            count += 1;
+        }
+        c += 1;
+    } while ((s32) c < 0x1A);
+    spB8[count] = 0x1A;
+    for (i = 0; i < count; i++) {
+        for (j = i + 1; j < count; j++) {
+            b = spB8[j];
+            a = spB8[i];
+            if ((s32) ((u8*) gmMainLib_804D3EE0)[a + 2] >
+                (s32) ((u8*) gmMainLib_804D3EE0)[b + 2]) {
+                spB8[i] = b;
+                spB8[j] = a;
+            }
+        }
+    }
+    added = 0;
+    do {
+        do {
+            pick = spB8[HSD_Randi(8)];
+            dup = 0;
+            for (j = 0; j < added; j++) {
+                if (pick == gm_801BF648(j) ||
+                    (pick == 0x12 && gm_801BF648(j) == 0x13) ||
+                    (pick == 0x13 && gm_801BF648(j) == 0x12)) {
+                    dup = 1;
+                }
+            }
+        } while (dup != 0);
+        gm_801BF634(added, (s8) pick);
+        gm_801BF65C(added, 0);
+        added += 1;
+        ((u8*) gmMainLib_804D3EE0)[pick + 2] += 1;
+    } while (added < 4);
+    gm_801BF6C8(HSD_Randi(4));
+    do {
+        gm_801BF6E8(HSD_Randi(4));
+        prev = gm_801BF6F8();
+    } while (gm_801BF6D8() == prev);
+
+    count = 0;
+    c = 0;
+    do {
+        if (gm_80164430(gm_801641CC(c)) != 0) {
+            sp40[count] = c;
+            count += 1;
+        }
+        c += 1;
+    } while ((s32) c < 0x1D);
+    sp40[count] = 0x1D;
+    for (i = 0; i < count; i++) {
+        for (j = i + 1; j < count; j++) {
+            b = sp40[j];
+            a = sp40[i];
+            if ((s32) ((u8*) gmMainLib_804D3EE0)[a + 0x1C] >
+                (s32) ((u8*) gmMainLib_804D3EE0)[b + 0x1C]) {
+                sp40[i] = b;
+                sp40[j] = a;
+            }
+        }
+    }
+    do {
+        pick = sp40[HSD_Randi(8)];
+        cur_id = gm_801BF694();
+    } while ((s32) gm_801641CC((u8) pick) == (s32) cur_id);
+    gm_801BF684((s16) gm_801641CC((u8) pick));
+    ((u8*) gmMainLib_804D3EE0)[pick + 0x1C] += 1;
+    gm_801BF6A8(HSD_Randi(4));
+}
 
 void gm_801BF3F8(void)
 {
