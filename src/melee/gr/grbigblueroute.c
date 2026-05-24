@@ -349,10 +349,9 @@ bool grBigBlueRoute_8020BF30(Ground_GObj* arg)
 
 extern f32 grBb_Route_804DB948;
 extern f32 grBb_Route_804DB94C;
-extern s16 grBb_Route_804D49EC;
 
-/// @todo Currently 95.33% match - address caching in counter section,
-/// minor register allocation in loop jobj load
+/// @todo Currently 98.29% match - register allocation only (extra mr through
+/// r0 for first loop jobj load and idx computation)
 void grBigBlueRoute_8020BF38(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
@@ -388,17 +387,17 @@ void grBigBlueRoute_8020BF38(Ground_GObj* gobj)
         }
 
         {
-            s32 idx = *(s16*) ((u8*) gp + 0xC8) + 5;
+            s32 idx = gp->gv.bigblueroute2.xC8 + 5;
             if (idx <= 7) {
                 if (Ground_801C2D24(idx, &checkpoint) != 0) {
                     if (fighter_pos.x > checkpoint.x) {
-                        *(s16*) ((u8*) gp + 0xC8) =
-                            *(s16*) ((u8*) gp + 0xC8) + 1;
+                        gp->gv.bigblueroute2.xC8 =
+                            gp->gv.bigblueroute2.xC8 + 1;
                     }
                 }
             }
         }
-        grBb_Route_804D49EC = *(s16*) ((u8*) gp + 0xC8);
+        stage_info.x6DC = gp->gv.bigblueroute2.xC8;
     }
 
     lb_800115F4();
