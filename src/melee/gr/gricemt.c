@@ -71,6 +71,15 @@ IceMountainParams* grIm_804D69F4;
 
 extern char grIm_803E46F8[];
 
+typedef struct GrIm825C {
+    struct {
+        u32 x0;
+        u32 x4;
+    } hi;
+    u16 x8;
+} GrIm825C;
+extern const GrIm825C grIm_803B825C;
+
 /// @brief Ice Mountain row data - 12 bytes each.
 typedef struct IceMtRowData {
     s32 id; // Row identifier, compared with xAC[i] values
@@ -874,18 +883,13 @@ void grIceMt_801F8608(Ground_GObj* gobj)
     }
 }
 
-/// #grIceMt_801F865C
 void grIceMt_801F865C(Ground_GObj* arg0)
 {
     Ground* gp = GET_GROUND(arg0);
-    HSD_JObj* jobj;
-    HSD_JObj* jobj2;
-    // Ground_801C0498();
+    GrIm825C sp14;
     Ground_801C2ED0(arg0->hsd_obj, gp->map_id);
     grAnime_801C8138(arg0, gp->map_id, 0);
     grAnime_801C77FC(arg0, 0, 7);
-    // jobj = Ground_801C3FA4(arg0,7);
-    // jobj2 = Ground_801C3FA4(arg0,5);
     gp->gv.icemt2.xC8 = Ground_801C3FA4(arg0, 6);
     gp->gv.icemt2.xCC = Ground_801C3FA4(arg0, 7);
     gp->gv.icemt2.xD0 = Ground_801C3FA4(arg0, 8);
@@ -898,7 +902,10 @@ void grIceMt_801F865C(Ground_GObj* arg0)
     gp->gv.icemt2.xEC = Ground_801C3FA4(arg0, 19);
     gp->gv.icemt2.xF0 = Ground_801C3FA4(arg0, 20);
     gp->gv.icemt2.xF4 = Ground_801C3FA4(arg0, 21);
-    // gp->gv.icemt.xD8 = 1;
+    ((UnkFlagStruct*) &gp->gv.icemt2.xC4)->b0 = 0;
+    sp14.hi = grIm_803B825C.hi;
+    sp14.x8 = grIm_803B825C.x8;
+    grIceMt_801F8CDC(arg0, (s16*) &sp14, 5, &gp->gv.icemt.xF8[0]);
 }
 
 bool grIceMt_801F87C0(Ground_GObj* param1)

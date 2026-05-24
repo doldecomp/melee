@@ -11,7 +11,7 @@ Funcs:
 - [x] grIceMt_801F8B10
 - [x] grIceMt_801F8208
 - [x] grIceMt_801F8850
-- [ ] grIceMt_801F865C
+- [x] grIceMt_801F865C
 - [ ] grIceMt_801F8CDC
 - [ ] grIceMt_801F993C
 - [ ] grIceMt_801F96E0
