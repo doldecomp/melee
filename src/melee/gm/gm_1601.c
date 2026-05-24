@@ -2797,7 +2797,58 @@ void fn_8016758C(void)
     }
 }
 
-/// #fn_80167638
+struct lbl_803B7A44_t {
+    f32 x0;
+    f32 x4;
+    f32 x8;
+    f32 xC;
+    f32 x10;
+    f32 x14;
+};
+
+extern struct lbl_803B7A44_t lbl_803B7A44;
+
+s32 fn_80167638(s32 arg0, Vec3* arg1, Vec3* arg2)
+{
+    struct lbl_803B7A44_t sp;
+    lbl_8046B6A0_t* info;
+    s32 idx;
+    s8 chr;
+
+    info = gm_8016AE44();
+    if (info->FighterMatchInfo[0].x8 == 0) {
+        idx = 0;
+    } else if (info->FighterMatchInfo[1].x8 == 0) {
+        idx = 1;
+    } else if (info->FighterMatchInfo[2].x8 == 0) {
+        idx = 2;
+    } else if (info->FighterMatchInfo[3].x8 == 0) {
+        idx = 3;
+    } else if (info->FighterMatchInfo[4].x8 == 0) {
+        idx = 4;
+    } else if (info->FighterMatchInfo[5].x8 == 0) {
+        idx = 5;
+    } else {
+        idx = 0;
+    }
+    chr = Player_GetPlayerCharacter(arg0);
+    if (stage_info.unk8C.b4) {
+        Stage_80224E38(arg1, arg0);
+        arg2->z = 0.0f;
+        arg2->y = 0.0f;
+        arg2->x = 0.0f;
+        return arg0;
+    }
+    Stage_80224E38(arg1, 0);
+    sp = lbl_803B7A44;
+    arg2->x = 16.0f * (&sp.x0)[idx];
+    arg2->z = 0.0f;
+    arg2->y = 0.0f;
+    info = gm_8016AE44();
+    info->FighterMatchInfo[idx].x8 = 0x90;
+    info->FighterMatchInfo[idx].x9 = chr;
+    return 0;
+}
 
 void gm_801677C0(struct gm_801677C0_s* arg0)
 {
