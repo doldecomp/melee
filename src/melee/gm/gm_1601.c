@@ -2401,7 +2401,41 @@ s32 fn_8016588C(lbl_8046B6A0_24C_t* arg0, s32 arg1)
     return v;
 }
 
-/// #fn_80165AC0
+s32 fn_80165AC0(MatchEnd* arg0)
+{
+    s32 max_loser;
+    s32 count;
+    s32 i;
+    s32 j;
+    MatchPlayerData* p;
+
+    max_loser = 0;
+    for (i = 0; i < 6; i++) {
+        p = &arg0->player_standings[i];
+        if (p->slot_type != 3) {
+            for (j = 0; j < 6; j++) {
+                if (arg0->player_standings[j].slot_type != 3 && j != i &&
+                    (s32) p->score < (s32) arg0->player_standings[j].score) {
+                    p->is_big_loser += 1;
+                }
+            }
+            if (max_loser < (s32) p->is_big_loser) {
+                max_loser = p->is_big_loser;
+            }
+        }
+    }
+    arg0->loser = (arg0->loser & ~0xF0) | ((max_loser << 4) & 0xF0);
+    count = 0;
+    for (j = 0; j < 6; j++) {
+        if (arg0->player_standings[j].slot_type != 3 &&
+            arg0->player_standings[j].is_big_loser == 0) {
+            arg0->winners[count] = j;
+            count += 1;
+        }
+    }
+    arg0->n_winners = count;
+    return (s32) arg0;
+}
 
 MatchEnd* fn_80165D60(MatchEnd* arg0)
 {
