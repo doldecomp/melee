@@ -513,22 +513,26 @@ void grIceMt_801F785C(Ground_GObj* gobj)
 /// #grIceMt_801F796C gricemt.c
 bool grIceMt_801F796C(Ground_GObj* arg0)
 {
-    Ground* gp = GET_GROUND(arg0);
-    HSD_GObj* gobj;
-    if (gp->gv.icemt2.xC4 != NULL) {
-        gobj = Ground_801C2BA4(gp->gv.icemt2.xC4);
-        if (gobj == NULL) {
+    Ground* gp = arg0->user_data;
+    HSD_GObj* mgobj;
+    PAD_STACK(8);
+
+    if (gp->gv.icemt.xC4 != -1) {
+        mgobj = Ground_801C2BA4(gp->gv.icemt.xC4);
+        if (mgobj == NULL) {
             __assert("gricemt.c", 0x475, "mgobj");
         }
+        Ground_801C4A08(mgobj);
     }
-    if (gp->gv.icemt.xCC != NULL) {
-        gobj = Ground_801C2BA4(gp->gv.icemt2.xC4);
-        if (gobj == NULL) {
-            __assert("gricemt.c", 0x4A7, "mgobj");
+    if (gp->gv.icemt.xC6 != -1) {
+        mgobj = Ground_801C2BA4(gp->gv.icemt.xC6);
+        if (mgobj == NULL) {
+            __assert("gricemt.c", 0x47A, "mgobj");
         }
+        Ground_801C4A08(mgobj);
     }
-    //__assert("gricemt.c",0x475,"mgobj");
     grIceMt_801F785C(arg0);
+    ((UnkFlagStruct*) &gp->gv.icemt.xD8)->b0 = 0;
     return 0;
 }
 
