@@ -495,60 +495,71 @@ void grPura_80213224(HSD_DObj* dobj)
     }
 }
 
-/// #grPura_80213250
-void grPura_80213250(HSD_JObj* arg0)
+void grPura_80213250(HSD_JObj* jobj)
 {
-    HSD_JObj* jobj = arg0->child;
-    HSD_DObj* dobj; // = arg0->child;
-    if (jobj) {
-        if (jobj->child) {
-            grPura_80213250(jobj->child);
+    HSD_JObj* child = jobj->child;
+    HSD_DObj* dobj;
+    HSD_DObj* iter;
+
+    if (child != NULL) {
+        if (child->child != NULL) {
+            grPura_80213250(child->child);
         }
-        if (jobj->next) {
-            grPura_80213250(jobj->next);
+        if (child->next != NULL) {
+            grPura_80213250(child->next);
         }
-        dobj = jobj->u.dobj;
-        if (jobj->u.ptcl) {
-            grPura_80213128(dobj);
-        }
-        // for(int i = 0;ptcl->next[];i++)
-        if (dobj != 0) {
-            HSD_MObjCompileTev(dobj->mobj);
-        }
-    }
-    jobj = arg0->next;
-    if (jobj) {
-        if (jobj->child) {
-            grPura_80213250(jobj->child);
-        }
-        if (jobj->next) {
-            grPura_80213250(jobj->next);
-        }
-        dobj = jobj->u.dobj;
-        if (jobj->u.ptcl) {
-            grPura_80213128(dobj);
-        }
-        if (dobj != 0) {
-            HSD_MObjCompileTev(dobj->mobj);
+        if (union_type_dobj(child)) {
+            dobj = child->u.dobj;
+            if (dobj != NULL) {
+                if (dobj->next != NULL) {
+                    grPura_80213128(dobj->next);
+                }
+                for (iter = dobj; iter != NULL; iter = iter->next) {
+                    grPura_80213224(iter);
+                }
+                if (dobj->mobj != NULL) {
+                    HSD_MObjCompileTev(dobj->mobj);
+                }
+            }
         }
     }
-    dobj = arg0->u.dobj;
-    if (dobj) {
-        if (jobj->u.ptcl) {
-            grPura_80213128(dobj);
+
+    child = jobj->next;
+    if (child != NULL) {
+        if (child->child != NULL) {
+            grPura_80213250(child->child);
         }
-        if (jobj->next) {
-            grPura_80213250(jobj->next);
+        if (child->next != NULL) {
+            grPura_80213250(child->next);
         }
-        dobj = jobj->u.dobj;
-        if (dobj != 0) {
-            HSD_MObjCompileTev(dobj->mobj);
-        }
-        if (dobj != 0) {
-            HSD_MObjCompileTev(dobj->mobj);
+        if (union_type_dobj(child)) {
+            dobj = child->u.dobj;
+            if (dobj != NULL) {
+                if (dobj->next != NULL) {
+                    grPura_80213128(dobj->next);
+                }
+                for (iter = dobj; iter != NULL; iter = iter->next) {
+                    grPura_80213224(iter);
+                }
+                if (dobj->mobj != NULL) {
+                    HSD_MObjCompileTev(dobj->mobj);
+                }
+            }
         }
     }
-    // HSD_MObjCompileTev();
-    // HSD_MObjCompileTev();
-    // HSD_MObjCompileTev();
+
+    if (union_type_dobj(jobj)) {
+        dobj = jobj->u.dobj;
+        if (dobj != NULL) {
+            if (dobj->next != NULL) {
+                grPura_80213128(dobj->next);
+            }
+            for (iter = dobj; iter != NULL; iter = iter->next) {
+                grPura_80213224(iter);
+            }
+            if (dobj->mobj != NULL) {
+                HSD_MObjCompileTev(dobj->mobj);
+            }
+        }
+    }
 }

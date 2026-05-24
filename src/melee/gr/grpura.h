@@ -45,7 +45,7 @@
 /* 2130D0 */ UNK_RET fn_802130D0(HSD_GObj*, int);
 /* 213128 */ void grPura_80213128(HSD_DObj*);
 /* 213224 */ UNK_RET grPura_80213224(HSD_DObj*);
-/* 213250 */ UNK_RET grPura_80213250(HSD_JObj*);
+/* 213250 */ void grPura_80213250(HSD_JObj*);
 /* 3E6C0C */ extern u16 grPu_803E6C0C[266];
 
 #endif
