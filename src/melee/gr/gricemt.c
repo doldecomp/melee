@@ -121,6 +121,11 @@ StageData grIm_803E4800 = {
 };
 
 const float grIm_804DB574 = 0.0F;
+typedef struct GrIm588 {
+    s16 a;
+    s16 b;
+} GrIm588;
+static const GrIm588 grIm_804DB588 = { 1, 2 };
 const float grIm_804DB5B0 = -1.0F;
 const float grIm_804DB5B4 = 1.0F;
 const float grIm_804DB5B8 = 6.0F;
@@ -646,10 +651,10 @@ void grIceMt_801F7A2C(Ground_GObj* arg0)
 
 void grIceMt_801F7D90(Ground_GObj* arg0) {}
 
-/// #grIceMt_801F7D94
 void grIceMt_801F7D94(Ground_GObj* arg0)
 {
     Ground* gp = GET_GROUND(arg0);
+    GrIm588 sp14;
     Ground_801C2ED0(arg0->hsd_obj, gp->map_id);
     grAnime_801C8138(arg0, gp->map_id, 0);
     grAnime_801C77FC(arg0, 0, 7);
@@ -665,7 +670,9 @@ void grIceMt_801F7D94(Ground_GObj* arg0)
     gp->gv.icemt2.xEC = Ground_801C3FA4(arg0, 15);
     gp->gv.icemt2.xF0 = Ground_801C3FA4(arg0, 16);
     gp->gv.icemt2.xF4 = Ground_801C3FA4(arg0, 17);
-    // gp->gv.icemt.xD8 = 1;
+    ((UnkFlagStruct*) &gp->gv.icemt2.xC4)->b0 = 0;
+    sp14 = grIm_804DB588;
+    grIceMt_801F8CDC(arg0, (s16*) &sp14, 2, &gp->gv.icemt.xF8[0]);
 }
 
 bool grIceMt_801F7EE0(Ground_GObj* arg0)
