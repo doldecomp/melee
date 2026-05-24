@@ -1045,34 +1045,25 @@ s32 grGreens_80215D54(Ground_GObj* gobj, int arg1, int arg2)
 {
     Ground* gp = GET_GROUND(gobj);
     int row;
-    int x = arg1 << 5;
 
     for (row = 1; row < 5; row++) {
-        int offset = row * 0xC0;
-        struct grGreens_BlockVars* blocks = gp->gv.greens.x8_blocks;
-        int status = blocks[offset + x].status;
-
-        if ((status == 1 || status == 2) &&
-            ((blocks[(row - 1) * 0xC0 + x].status == 0)))
+        if ((getBlock(gp, row, arg1)->status == 1 ||
+             getBlock(gp, row, arg1)->status == 2) &&
+            getBlock(gp, row - 1, arg1)->status == 0)
         {
-            int i;
+            int r = row;
             int count = 5 - row;
-
             if (row < 5) {
                 do {
-                    struct grGreens_BlockVars temp =
-                        *(struct grGreens_BlockVars*) (blocks + offset + x);
-                    *(struct grGreens_BlockVars*) (blocks + offset + x) =
-                        *(struct grGreens_BlockVars*) (blocks + offset + x -
-                                                       0xC0);
-                    *(struct grGreens_BlockVars*) (blocks + offset + x -
-                                                   0xC0) = temp;
-                    offset += 0xC0;
+                    struct grGreens_BlockVars temp = *getBlock(gp, r, arg1);
+                    *getBlock(gp, r, arg1) = *getBlock(gp, r - 1, arg1);
+                    *getBlock(gp, r - 1, arg1) = temp;
+                    r += 1;
                     count -= 1;
                 } while (count != 0);
             }
-            if (blocks[(row - 1) * 0xC0 + x].status == 2) {
-                blocks[(row - 1) * 0xC0 + x].status |= 0x10;
+            if (getBlock(gp, row - 1, arg1)->status == 2) {
+                getBlock(gp, row - 1, arg1)->status |= 0x10;
             }
             row = 0;
         }
