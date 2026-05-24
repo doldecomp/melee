@@ -1,0 +1,24 @@
+File: src/melee/gr/gricemt.c
+Funcs:
+- [x] fn_801F9150
+- [ ] grIceMt_801FA7F0
+- [ ] grIceMt_801F796C
+- [ ] grIceMt_801F71E8
+- [ ] fn_801F9338
+- [ ] fn_801F9448
+- [ ] fn_801F9558
+- [ ] grIceMt_801F7D94
+- [ ] grIceMt_801F8B10
+- [ ] grIceMt_801F8208
+- [ ] grIceMt_801F8850
+- [ ] grIceMt_801F865C
+- [ ] grIceMt_801F8CDC
+- [ ] grIceMt_801F993C
+- [ ] grIceMt_801F96E0
+- [ ] grIceMt_801F83EC
+- [ ] grIceMt_801FA500
+- [ ] fn_801F8E58
+- [ ] grIceMt_801F7F70
+- [ ] grIceMt_801FA0BC
+- [ ] grIceMt_801F9ACC
+- [ ] grIceMt_801F686C

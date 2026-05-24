@@ -1083,10 +1083,21 @@ int fn_801F9038(Ground_GObj* gobj)
     return grIm_803E4068[idx].id;
 }
 
-IceMountainParams* fn_801F9150(HSD_GObj* arg0)
+s32 fn_801F9150(HSD_GObj* arg0, s32* out)
 {
-    Ground* gp = GET_GROUND(arg0);
-    return grIm_804D69F4;
+    Ground* gp = arg0->user_data;
+    s16 next = 0;
+    s16 a;
+
+    while (true) {
+        a = grIm_804D69F4->xB0[gp->gv.icemt.xDE];
+        *out = grIm_804D69F4->xB4[gp->gv.icemt.xDE];
+        if (a != -1 && *out != -1) {
+            gp->gv.icemt.xDE++;
+            return a;
+        }
+        gp->gv.icemt.xDE = next;
+    }
 }
 
 void fn_801F91A4(void) {}
