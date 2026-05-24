@@ -668,9 +668,9 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
 
 static const Vec3 grBb_Route_803B83E0 = { 0.0f, 1.0f, 0.0f };
 
-/// @todo Currently 85.77% match - SYSTEMIC: MWCC caches the RouteEntry pointer
-/// (target reloads gp->...xC8 per access), plus float-constant hoisting order
-/// and stack layout differ.
+/// @todo Currently 89.41% match - SYSTEMIC: float-constant hoisting order and
+/// register pressure differ (target spills rot to stack; we keep it in FPRs).
+#define RE_ENTRY ((RouteEntry*) ((u8*) gp->gv.bigblueroute.xC8 + offset))
 void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
@@ -680,7 +680,6 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
     HSD_JObj* jobj;
     int i;
     int offset;
-    RouteEntry* re;
     Vec3 pos;
     Vec3 rot;
 
@@ -701,46 +700,38 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
     i = 0;
     offset = 0;
     do {
-        re = (RouteEntry*) ((u8*) gp->gv.bigblueroute.xC8 + offset);
-        if (re->flags.b0) {
-            re->x4 += re->x8;
-            re = (RouteEntry*) ((u8*) gp->gv.bigblueroute.xC8 + offset);
-            if (re->x4 > 1.0f) {
-                re->x4 = 1.0f;
+        if (RE_ENTRY->flags.b0) {
+            RE_ENTRY->x4 += RE_ENTRY->x8;
+            if (RE_ENTRY->x4 > 1.0f) {
+                RE_ENTRY->x4 = 1.0f;
             }
-            re = (RouteEntry*) ((u8*) gp->gv.bigblueroute.xC8 + offset);
-            re->x14 += re->x18;
-            re = (RouteEntry*) ((u8*) gp->gv.bigblueroute.xC8 + offset);
-            if (re->x14 > 1.0f) {
-                re->x14 = 1.0f;
+            RE_ENTRY->x14 += RE_ENTRY->x18;
+            if (RE_ENTRY->x14 > 1.0f) {
+                RE_ENTRY->x14 = 1.0f;
             }
 
-            re = (RouteEntry*) ((u8*) gp->gv.bigblueroute.xC8 + offset);
-            switch (re->flags.b2_5) {
+            switch (RE_ENTRY->flags.b2_5) {
             case 0: {
-                f32 t = re->x4;
+                f32 t = RE_ENTRY->x4;
                 f32 frac;
                 Vec3 p0;
                 Vec3 p1;
                 Vec3 tangent;
 
-                if (re->xC < re->x10) {
-                    re->xC += 0.01f;
-                    re = (RouteEntry*) ((u8*) gp->gv.bigblueroute.xC8 + offset);
-                    if (re->xC > re->x10) {
-                        re->xC = re->x10;
+                if (RE_ENTRY->xC < RE_ENTRY->x10) {
+                    RE_ENTRY->xC += 0.01f;
+                    if (RE_ENTRY->xC > RE_ENTRY->x10) {
+                        RE_ENTRY->xC = RE_ENTRY->x10;
                     }
-                } else if (re->xC > re->x10) {
-                    re->xC -= 0.01f;
-                    re = (RouteEntry*) ((u8*) gp->gv.bigblueroute.xC8 + offset);
-                    if (re->xC < re->x10) {
-                        re->xC = re->x10;
+                } else if (RE_ENTRY->xC > RE_ENTRY->x10) {
+                    RE_ENTRY->xC -= 0.01f;
+                    if (RE_ENTRY->xC < RE_ENTRY->x10) {
+                        RE_ENTRY->xC = RE_ENTRY->x10;
                     }
                 }
 
-                re = (RouteEntry*) ((u8*) gp->gv.bigblueroute.xC8 + offset);
-                t = re->x4;
-                frac = re->xC;
+                t = RE_ENTRY->x4;
+                frac = RE_ENTRY->xC;
                 splGetSplinePoint(&p0, gp->gv.bigblueroute.xD0, t);
                 splGetSplinePoint(&p1, gp->gv.bigblueroute.xD4, t);
                 lbShadow_8000E9F0(&tangent, gp->gv.bigblueroute.xD0, t);
@@ -753,14 +744,12 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                 rot.y = 1.5707964f;
                 rot.z = 0.0f;
 
-                re = (RouteEntry*) ((u8*) gp->gv.bigblueroute.xC8 + offset);
-                if (re->x4 > 0.966f) {
-                    re->flags.b2_5 = 2;
-                    re->x14 = 0.0f;
-                    re->x1C = 0.0f;
-                    re->x20 = 5.2359877f * HSD_Randf() - 2.6179938f;
-                    re = (RouteEntry*) ((u8*) gp->gv.bigblueroute.xC8 + offset);
-                    re->x24 = re->x4;
+                if (RE_ENTRY->x4 > 0.966f) {
+                    RE_ENTRY->flags.b2_5 = 2;
+                    RE_ENTRY->x14 = 0.0f;
+                    RE_ENTRY->x1C = 0.0f;
+                    RE_ENTRY->x20 = 5.2359877f * HSD_Randf() - 2.6179938f;
+                    RE_ENTRY->x24 = RE_ENTRY->x4;
                 }
                 break;
             }
@@ -772,23 +761,20 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                 Vec3 side;
                 Vec3 orient;
 
-                if (re->x1C < re->x20) {
-                    re->x1C += 0.017453292f;
-                    re = (RouteEntry*) ((u8*) gp->gv.bigblueroute.xC8 + offset);
-                    if (re->x1C > re->x20) {
-                        re->x1C = re->x20;
+                if (RE_ENTRY->x1C < RE_ENTRY->x20) {
+                    RE_ENTRY->x1C += 0.017453292f;
+                    if (RE_ENTRY->x1C > RE_ENTRY->x20) {
+                        RE_ENTRY->x1C = RE_ENTRY->x20;
                     }
-                } else if (re->x1C > re->x20) {
-                    re->x1C -= 0.017453292f;
-                    re = (RouteEntry*) ((u8*) gp->gv.bigblueroute.xC8 + offset);
-                    if (re->x1C < re->x20) {
-                        re->x1C = re->x20;
+                } else if (RE_ENTRY->x1C > RE_ENTRY->x20) {
+                    RE_ENTRY->x1C -= 0.017453292f;
+                    if (RE_ENTRY->x1C < RE_ENTRY->x20) {
+                        RE_ENTRY->x1C = RE_ENTRY->x20;
                     }
                 }
 
-                re = (RouteEntry*) ((u8*) gp->gv.bigblueroute.xC8 + offset);
-                t = re->x14;
-                angle = re->x1C;
+                t = RE_ENTRY->x14;
+                angle = RE_ENTRY->x1C;
                 up = grBb_Route_803B83E0;
                 splGetSplinePoint(&pos, gp->gv.bigblueroute.xCC, t);
                 lbShadow_8000E9F0(&tangent, gp->gv.bigblueroute.xCC, t);
@@ -810,17 +796,14 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                 }
                 lbVector_Add(&pos, &up);
 
-                re = (RouteEntry*) ((u8*) gp->gv.bigblueroute.xC8 + offset);
-                if (re->x14 > 0.967f) {
-                    re->flags.b2_5 = 3;
-                    re->x4 = 0.0f;
-                    re->xC = 0.5f;
-                    re->x10 = HSD_Randf();
-                    re = (RouteEntry*) ((u8*) gp->gv.bigblueroute.xC8 + offset);
-                    re->x24 = re->x14;
-                    re = (RouteEntry*) ((u8*) gp->gv.bigblueroute.xC8 + offset);
-                    re->flags.b6 = 0;
-                    if (re->flags.b1) {
+                if (RE_ENTRY->x14 > 0.967f) {
+                    RE_ENTRY->flags.b2_5 = 3;
+                    RE_ENTRY->x4 = 0.0f;
+                    RE_ENTRY->xC = 0.5f;
+                    RE_ENTRY->x10 = HSD_Randf();
+                    RE_ENTRY->x24 = RE_ENTRY->x14;
+                    RE_ENTRY->flags.b6 = 0;
+                    if (RE_ENTRY->flags.b1) {
                         gp->gv.bigblue.x0 &= ~0x40;
                     }
                 }
@@ -841,11 +824,11 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                 Vec3 side;
                 Vec3 orient;
 
-                prog = (re->x4 - re->x24) / (1.0f - re->x24);
-                frac = ((1.0f - prog) * (re->xC - 0.5f)) + 0.5f;
-                splGetSplinePoint(&p0, gp->gv.bigblueroute.xD0, re->x4);
-                splGetSplinePoint(&p1, gp->gv.bigblueroute.xD4, re->x4);
-                lbShadow_8000E9F0(&road_tan, gp->gv.bigblueroute.xD0, re->x4);
+                prog = (RE_ENTRY->x4 - RE_ENTRY->x24) / (1.0f - RE_ENTRY->x24);
+                frac = ((1.0f - prog) * (RE_ENTRY->xC - 0.5f)) + 0.5f;
+                splGetSplinePoint(&p0, gp->gv.bigblueroute.xD0, RE_ENTRY->x4);
+                splGetSplinePoint(&p1, gp->gv.bigblueroute.xD4, RE_ENTRY->x4);
+                lbShadow_8000E9F0(&road_tan, gp->gv.bigblueroute.xD0, RE_ENTRY->x4);
                 lbVector_Diff(&p1, &p0, &road);
                 road.x *= frac;
                 road.y *= frac;
@@ -855,9 +838,8 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                 rot.y = 1.5707964f;
                 rot.z = 0.0f;
 
-                re = (RouteEntry*) ((u8*) gp->gv.bigblueroute.xC8 + offset);
-                t = re->x14;
-                angle = re->x1C;
+                t = RE_ENTRY->x14;
+                angle = RE_ENTRY->x1C;
                 up = grBb_Route_803B83E0;
                 splGetSplinePoint(&air, gp->gv.bigblueroute.xCC, t);
                 lbShadow_8000E9F0(&tangent, gp->gv.bigblueroute.xCC, t);
@@ -884,9 +866,8 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                 rot.y = 1.5707964f;
                 rot.z = 0.0f;
 
-                re = (RouteEntry*) ((u8*) gp->gv.bigblueroute.xC8 + offset);
-                if (re->x4 == 1.0f) {
-                    re->flags.b2_5 = 1;
+                if (RE_ENTRY->x4 == 1.0f) {
+                    RE_ENTRY->flags.b2_5 = 1;
                 }
                 break;
             }
@@ -905,11 +886,11 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                 Vec3 road_tan;
                 Vec3 road;
 
-                prog = (re->x14 - re->x24) / (1.0f - re->x24);
+                prog = (RE_ENTRY->x14 - RE_ENTRY->x24) / (1.0f - RE_ENTRY->x24);
                 up = grBb_Route_803B83E0;
-                angle = (1.0f - prog) * re->x1C;
-                splGetSplinePoint(&air, gp->gv.bigblueroute.xCC, re->x14);
-                lbShadow_8000E9F0(&tangent, gp->gv.bigblueroute.xCC, re->x14);
+                angle = (1.0f - prog) * RE_ENTRY->x1C;
+                splGetSplinePoint(&air, gp->gv.bigblueroute.xCC, RE_ENTRY->x14);
+                lbShadow_8000E9F0(&tangent, gp->gv.bigblueroute.xCC, RE_ENTRY->x14);
                 grBigBlueRoute_8020DD64(&tangent);
                 PSVECCrossProduct(&up, &tangent, &side);
                 lbVector_RotateAboutUnitAxis(&side, &tangent, angle);
@@ -928,9 +909,8 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                 }
                 lbVector_Add(&air, &up);
 
-                re = (RouteEntry*) ((u8*) gp->gv.bigblueroute.xC8 + offset);
-                t = re->x4;
-                frac = re->xC;
+                t = RE_ENTRY->x4;
+                frac = RE_ENTRY->xC;
                 splGetSplinePoint(&p0, gp->gv.bigblueroute.xD0, t);
                 splGetSplinePoint(&p1, gp->gv.bigblueroute.xD4, t);
                 lbShadow_8000E9F0(&road_tan, gp->gv.bigblueroute.xD0, t);
@@ -946,39 +926,35 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                 pos.z *= prog;
                 lbVector_Add(&pos, &air);
 
-                re = (RouteEntry*) ((u8*) gp->gv.bigblueroute.xC8 + offset);
-                if (re->x14 == 1.0f) {
-                    re->flags.b2_5 = 0;
+                if (RE_ENTRY->x14 == 1.0f) {
+                    RE_ENTRY->flags.b2_5 = 0;
                 }
                 break;
             }
             }
 
-            re = (RouteEntry*) ((u8*) gp->gv.bigblueroute.xC8 + offset);
-            if (!re->flags.b1) {
+            if (!RE_ENTRY->flags.b1) {
                 HSD_JObjSetTranslate(jobj, &pos);
                 HSD_JObjSetRotationX(jobj, rot.x);
                 HSD_JObjSetRotationY(jobj, rot.y);
                 HSD_JObjSetRotationZ(jobj, rot.z);
             }
 
-            re = (RouteEntry*) ((u8*) gp->gv.bigblueroute.xC8 + offset);
             if (pos.x - 260.0f < fighter_pos.x &&
                 fighter_pos.x < 260.0f + pos.x &&
                 pos.z - 260.0f < fighter_pos.z &&
-                fighter_pos.z < 260.0f + pos.z && !re->flags.b1) {
+                fighter_pos.z < 260.0f + pos.z && !RE_ENTRY->flags.b1) {
                 if (!((gp->gv.bigblue.x0 >> 6) & 1)) {
                     gp->gv.bigblue.x0 |= 0x40;
                     Ground_801C53EC(0x77A16);
                 }
             }
 
-            re = (RouteEntry*) ((u8*) gp->gv.bigblueroute.xC8 + offset);
             if (pos.x - 100.0f < fighter_pos.x &&
                 fighter_pos.x < 100.0f + pos.x &&
                 pos.z - 100.0f < fighter_pos.z &&
                 fighter_pos.z < 100.0f + pos.z) {
-                if (re->flags.b1) {
+                if (RE_ENTRY->flags.b1) {
                     if (!((gp->gv.bigblue.x0 >> 7) & 1)) {
                         un_802FD604((s32) grBb_Route_804D6A68->x4C);
                         Ground_801C53EC(0x77A11);
@@ -986,8 +962,8 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                     }
                 } else {
                     Camera_80030E44(1, NULL);
-                    if (!re->flags.b6) {
-                        re->flags.b6 = 1;
+                    if (!RE_ENTRY->flags.b6) {
+                        RE_ENTRY->flags.b6 = 1;
                         if (HSD_Randi(100) < 40) {
                             switch (HSD_Randi(3)) {
                             case 0:
@@ -1003,7 +979,7 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                         }
                     }
                 }
-            } else if (re->flags.b1) {
+            } else if (RE_ENTRY->flags.b1) {
                 if ((gp->gv.bigblue.x0 >> 7) & 1) {
                     gp->gv.bigblue.x0 &= ~0x80;
                 }
@@ -1018,6 +994,7 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                    : NULL;
     } while (i < 31);
 }
+#undef RE_ENTRY
 
 int grBigBlueRoute_8020DA9C(struct grBigBlueRoute_8020DA9C_t* desc)
 {
