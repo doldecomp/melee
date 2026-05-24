@@ -6,7 +6,7 @@ Funcs:
 - [x] grIceMt_801F71E8
 - [x] fn_801F9338
 - [x] fn_801F9448
-- [ ] fn_801F9558
+- [x] fn_801F9558
 - [ ] grIceMt_801F7D94
 - [ ] grIceMt_801F8B10
 - [ ] grIceMt_801F8208
