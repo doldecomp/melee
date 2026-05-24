@@ -4609,7 +4609,7 @@ struct ItemLogicTable it_803F4D20[ARRAY_SIZE(it_803F4CA8)] = {
 };
 
 char it_803F5428[] = "can t init zako pos\n";
-char it_803F5440[0x28] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
+static char it_803F5440[0x28] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
 RandomItemSpawner it_804A0E30;
 ItemPickTable it_804A0E50;
 ItemPickTable it_804A0E60;
