@@ -18,8 +18,13 @@
 #include "gr/inlines.h"
 #include "gr/stage.h"
 #include "lb/lb_00F9.h"
+#include "lb/lbvector.h"
 #include "lb/types.h"
 #include "mp/mplib.h"
+
+#include <math_ppc.h>
+
+extern Vec3 grPushOn_803B844C;
 #include "sysdolphin/baselib/lobj.h"
 
 #include <baselib/gobjgxlink.h>
@@ -341,7 +346,6 @@ bool grPushOn_80218880(Ground_GObj* arg)
     return false;
 }
 
-/// #grPushOn_80218888
 
 void grPushOn_80218ED0(Ground_GObj* arg) {}
 
@@ -468,6 +472,167 @@ int grPushOn_80219230(int arg0)
         i++;
     }
     __assert("grpushon.c", 0x35DU, "0");
+}
+
+void grPushOn_80218888(Ground_GObj* arg0)
+{
+    Vec3 sp10C;
+    Vec3 sp100;
+    Vec3 sp54;
+    Vec3 sp48;
+    Vec3 sp3C;
+    GXColor sp38;
+    Vec3 sp2C;
+    s32 sp24;
+    s32 spB0[20];
+    f32 sp60[20];
+    Ground* gp = arg0->user_data;
+    HSD_GObj* fighter;
+    s32 i;
+    s32 j;
+    PAD_STACK(0x10);
+
+    fighter = Ground_801C57A4();
+    if (fighter != NULL) {
+        ftLib_80086644(fighter, &sp10C);
+    } else {
+        sp10C.z = 0.0f;
+        sp10C.y = 0.0f;
+        sp10C.x = 0.0f;
+    }
+
+    if (gp->u.pushon.gobj != NULL) {
+        for (i = 0; i < gp->u.pushon.count; i++) {
+            HSD_LObj* lobj = gp->u.pushon.lobjs[i];
+            s32 type = lobj->flags & 3;
+            if (type == 0) {
+                sp60[i] = -100.0f;
+            } else if ((u32) (type - 1) <= 1) {
+                f32 dx;
+                f32 dy;
+                f32 d2;
+                HSD_LObjGetPosition(lobj, &sp54);
+                dx = sp10C.x - sp54.x;
+                dy = sp10C.y - sp54.y;
+                d2 = (dx * dx) + (dy * dy);
+                if (d2 > 0.0f) {
+                    d2 = sqrtf(d2);
+                }
+                sp60[i] = d2;
+            } else if (type == 3) {
+                f32 dx;
+                HSD_LObjGetPosition(lobj, &sp48);
+                dx = sp10C.x - sp48.x;
+                if (dx < 0.0f) {
+                    dx = -dx;
+                }
+                sp60[i] = dx;
+            } else {
+                __assert("grpushon.c", 0x1C5, "0");
+            }
+            if (sp60[i] < 10.0f) {
+                sp60[i] = 10.0f;
+            }
+            spB0[i] = i;
+        }
+
+        for (i = 0; i < gp->u.pushon.count; i++) {
+            f32 best = 3.4028235e38f;
+            s32 best_j = 0;
+            s32 tmp;
+            for (j = i; j < gp->u.pushon.count; j++) {
+                f32 d = sp60[spB0[j]];
+                if (best > d) {
+                    best_j = j;
+                    best = d;
+                }
+            }
+            tmp = spB0[i];
+            spB0[i] = spB0[best_j];
+            spB0[best_j] = tmp;
+        }
+
+        for (i = 0; i < gp->u.pushon.count; i++) {
+            if (i < 5) {
+                HSD_LObjClearFlags(gp->u.pushon.lobjs[spB0[i]], 0x20);
+            } else {
+                HSD_LObjSetFlags(gp->u.pushon.lobjs[spB0[i]], 0x20);
+            }
+        }
+
+        {
+            f32 mindist = sp60[spB0[1]];
+            f32 sumsq;
+            sp3C = grPushOn_803B844C;
+            for (i = 1; i < gp->u.pushon.count; i++) {
+                if (HSD_LObjGetPosition(gp->u.pushon.lobjs[spB0[i]],
+                                        &sp100) != 0) {
+                    f32 w = mindist / sp60[spB0[i]];
+                    lbVector_Sub(&sp100, &sp10C);
+                    if (sp100.y < 100.0f) {
+                        if (sp100.y < 0.0f) {
+                            w = 0.0f;
+                        } else {
+                            w *= sp100.y / 100.0f;
+                        }
+                    }
+                    lbVector_Normalize(&sp100);
+                    sp100.x *= w;
+                    sp100.y *= w;
+                    sp100.z *= w;
+                    lbVector_Add(&sp3C, &sp100);
+                }
+            }
+            sumsq = (sp3C.z * sp3C.z) + ((sp3C.x * sp3C.x) + (sp3C.y * sp3C.y));
+            if (sumsq > 0.0f) {
+                sumsq = sqrtf(sumsq);
+            }
+            if (sumsq < 0.01f) {
+                sp3C.y = 100.0f;
+            }
+            lbVector_Normalize(&sp3C);
+            sp3C.x *= 20.0f;
+            sp3C.y *= 20.0f;
+            sp3C.z *= 20.0f;
+            lbVector_Add(&sp3C, &sp10C);
+            HSD_LObjSetPosition(gp->u.pushon.point_light, &sp3C);
+            HSD_LObjSetInterest(gp->u.pushon.point_light, &sp10C);
+            HSD_LObjSetFlags(gp->u.pushon.point_light, 0x400);
+
+            {
+                f32 diff = sp60[spB0[2]] - sp60[spB0[1]];
+                HSD_LObjGetColor(gp->u.pushon.lobjs[spB0[1]], &sp38);
+                if (diff < 50.0f) {
+                    f32 t = diff / 50.0f;
+                    sp38.r = (s8) ((f32) (u8) sp38.r * t);
+                    sp38.g = (u8) (s32) ((f32) sp38.g * t);
+                    sp38.b = (u8) (s32) ((f32) sp38.b * t);
+                }
+                sp24 = *(s32*) &sp38;
+                HSD_LObjSetColor(gp->u.pushon.spot_light, *(GXColor*) &sp24);
+                if (HSD_LObjGetPosition(gp->u.pushon.lobjs[spB0[1]], &sp2C) ==
+                    0) {
+                    sp2C.z = 0.0f;
+                    sp2C.y = 0.0f;
+                    sp2C.x = 0.0f;
+                }
+                HSD_LObjSetPosition(gp->u.pushon.spot_light, &sp2C);
+                if (HSD_LObjGetInterest(gp->u.pushon.lobjs[spB0[1]], &sp2C) ==
+                    0) {
+                    sp2C.z = 0.0f;
+                    sp2C.y = 0.0f;
+                    sp2C.x = 0.0f;
+                }
+                HSD_LObjSetInterest(gp->u.pushon.spot_light, &sp2C);
+                gp->u.pushon.spot_light->flags =
+                    gp->u.pushon.lobjs[spB0[1]]->flags;
+                gp->u.pushon.spot_light->flags =
+                    gp->u.pushon.spot_light->flags & 0xFFFB;
+                gp->u.pushon.spot_light->flags =
+                    gp->u.pushon.spot_light->flags | 8;
+            }
+        }
+    }
 }
 
 struct grPushOn_Region {
