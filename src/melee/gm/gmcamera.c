@@ -213,7 +213,6 @@ void gmCamera_801A253C(s32* arg0, s32* arg1)
 }
 #pragma dont_inline reset
 
-#pragma dont_inline on
 void gmCamera_801A25C8(void)
 {
     s32 i;
@@ -225,7 +224,11 @@ void gmCamera_801A25C8(void)
         }
     }
 }
-#pragma dont_inline reset
+
+static inline void gmCamera_801A25C8_noinline(void)
+{
+    gmCamera_801A25C8();
+}
 
 #pragma dont_inline on
 s32 gmCamera_801A2640(void)
@@ -234,7 +237,6 @@ s32 gmCamera_801A2640(void)
 }
 #pragma dont_inline reset
 
-#pragma dont_inline on
 void gmCamera_801A2650(void)
 {
     gmCamera_80479BC8.gcus.x20 = 2;
@@ -242,7 +244,11 @@ void gmCamera_801A2650(void)
     gmCamera_80479BC8.gcus.x54 =
         HSD_SisLib_803A611C(3, 0, 9, 13, 0, 14, 0, 11);
 }
-#pragma dont_inline reset
+
+static inline void gmCamera_801A2650_noinline(void)
+{
+    gmCamera_801A2650();
+}
 
 void gmCamera_801A26C0(void)
 {
@@ -605,7 +611,7 @@ void gmCamera_801A33BC(void)
     s32 sp10;
     s32 spC;
 
-    gmCamera_801A25C8();
+    gmCamera_801A25C8_noinline();
     gmCamera_80479C20.slot_a =
         gmCamera_801A2334(0, gmCamera_803DA758[2], gmCamera_803DA758[3],
                           gmCamera_803DA758[0], gmCamera_803DA758[1]);
@@ -684,7 +690,7 @@ void gmCamera_801A3634_OnEnter(UNK_T arg0)
     PAD_STACK(8);
 
     gmCamera_80479C20.x0 = (u32*) arg0;
-    gmCamera_801A2650();
+    gmCamera_801A2650_noinline();
     gmCamera_80479C20.slot_a = NULL;
     gmCamera_80479C20.slot_b = NULL;
     gmCamera_80479C20.bottom_text = NULL;

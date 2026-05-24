@@ -31,8 +31,6 @@ MatchEnd* fn_80174274(void)
     return lbl_8046DBE8.x94;
 }
 
-#pragma push
-#pragma dont_inline on
 s32 fn_80174284(u8 slot)
 {
     bool do_call;
@@ -58,7 +56,6 @@ s32 fn_80174284(u8 slot)
 
     return count;
 }
-#pragma pop
 
 void fn_80174338(void)
 {

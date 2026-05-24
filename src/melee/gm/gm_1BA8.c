@@ -121,8 +121,6 @@ void gm_801BA938(struct EventData* arg0, int lo, int hi, bool arg3)
     lbAudioAx_80027168();
 }
 
-#pragma push
-#pragma dont_inline on
 void gm_801BAA60(GameScene* arg0)
 {
     struct EventData* temp_r31 = &gmMainLib_804D3EE0->unk_530;
@@ -135,7 +133,6 @@ void gm_801BAA60(GameScene* arg0)
         gm_801BA938(temp_r31, 1, 4, true);
     }
 }
-#pragma pop
 
 void gm_801BAAD0(GameScene* arg0)
 {
@@ -2159,26 +2156,60 @@ void gm_801BEF84(GameScene* arg)
 
 /* 49C178 */ static u8 gm_8049C178[16];
 
-#pragma push
-#pragma dont_inline on
 void gm_801BEFA4(int ckind)
 {
     gm_8049C178[0] = ckind;
 }
-#pragma pop
+
+static inline void gm_801BEFA4_inner3(int ckind)
+{
+    gm_801BEFA4(ckind);
+}
+
+static inline void gm_801BEFA4_inner2(int ckind)
+{
+    gm_801BEFA4_inner3(ckind);
+}
+
+static inline void gm_801BEFA4_inner(int ckind)
+{
+    gm_801BEFA4_inner2(ckind);
+}
+
+static inline void gm_801BEFA4_noinline(int ckind)
+{
+    gm_801BEFA4_inner(ckind);
+}
 
 CharacterKind gm_801BEFB0(void)
 {
     return gm_8049C178[0];
 }
 
-#pragma push
-#pragma dont_inline on
 void gm_801BEFC0(int arg0)
 {
     gm_8049C178[1] = arg0;
 }
-#pragma pop
+
+static inline void gm_801BEFC0_inner3(int arg0)
+{
+    gm_801BEFC0(arg0);
+}
+
+static inline void gm_801BEFC0_inner2(int arg0)
+{
+    gm_801BEFC0_inner3(arg0);
+}
+
+static inline void gm_801BEFC0_inner(int arg0)
+{
+    gm_801BEFC0_inner2(arg0);
+}
+
+static inline void gm_801BEFC0_noinline(int arg0)
+{
+    gm_801BEFC0_inner(arg0);
+}
 
 int gm_801BEFD0(void)
 {
@@ -2504,8 +2535,8 @@ void gm_801BF728(GameScene* arg)
     un_804D6FD8[1] = HSD_Randi(4);
     un_8031F980(0xE, HSD_Randi(4));
     un_803204B0(0xE, HSD_Randi(4));
-    gm_801BEFA4(8);
-    gm_801BEFC0(HSD_Randi(4));
+    gm_801BEFA4_noinline(8);
+    gm_801BEFC0_noinline(HSD_Randi(4));
 }
 
 void gm_801BF834(GameScene* arg)
