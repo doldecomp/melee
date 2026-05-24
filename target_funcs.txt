@@ -5,6 +5,6 @@ Funcs:
 - [x] grAnime_801C8578
 - [x] grAnime_801C6A54
 - [x] grAnime_801C752C
-- [ ] grAnime_801C6C0C
+- [x] grAnime_801C6C0C
 - [ ] grAnime_801C7228
 - [ ] grAnime_801C7C1C
