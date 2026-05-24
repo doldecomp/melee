@@ -6,6 +6,7 @@
 
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
 #include <melee/cm/camera.h>
@@ -741,8 +742,8 @@ s32 gm_801BC00C(void)
         lbBgFlash_80021A10(0.2f);
     }
     Camera_80030E34(ev->x1C);
-    return HSD_GObj_SetupProc(GObj_Create(0xF, 0x11, 0), gm_803DF94C[idx]->x0,
-                             0x15);
+    return (s32) HSD_GObj_SetupProc(GObj_Create(0xF, 0x11, 0),
+                                    gm_803DF94C[idx]->x0, 0x15);
 }
 
 static u8 gm_803DF918[] = {
