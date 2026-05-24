@@ -1433,9 +1433,17 @@ void grIceMt_801FA728(Vec3* arg0)
 void grIceMt_801FA7F0(Ground* gp, s32 arg1, CollData* arg2, s32 arg3,
                       mpLib_GroundEnum arg4, float arg8)
 {
-    HSD_GObj* playerGObj = Ground_801C57A4();
-    if ((Ground_801C2BA4(10)) && (playerGObj->user_data))
-    { // && playerGObj->userdata) {
+    HSD_GObj* gobj;
+    Ground* gp2;
+    PAD_STACK(8);
+    if (Ground_801C57A4() == arg2->x0_gobj) {
+        gobj = Ground_801C2BA4(0xA);
+        if (gobj != NULL) {
+            gp2 = gobj->user_data;
+            if (gp2 != NULL) {
+                ((UnkFlagStruct*) &gp2->gv.icemt.xD8)->b4 = 1;
+            }
+        }
     }
 }
 
