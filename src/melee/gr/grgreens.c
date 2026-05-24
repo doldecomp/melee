@@ -706,18 +706,26 @@ void grGreens_80214804(Ground_GObj* gobj)
     HSD_Free((void*) gp->gv.corneria.xCC);
 }
 
+extern f32 grGr_804DBA80; // 1.0
+extern f32 grGr_804DBA84; // 0.0
+extern f32 grGr_804DBA88; // 0.5
+extern f32 grGr_804DBAA0; // -FLT_MAX
+extern f32 grGr_804DBAA4; // FLT_MAX
+extern f32 grGr_804DBAA8; // 0.25
+extern f32 grGr_804DBAAC; // 2.0
+
 void grGreens_8021483C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     Vec vec;
-    float left_max = -F32_MAX;
-    float left_min = F32_MAX;
-    float left_top = -F32_MAX;
-    float left_bottom = F32_MAX;
-    float right_max = -F32_MAX;
-    float right_top = -F32_MAX;
-    float right_min = F32_MAX;
-    float right_bottom = F32_MAX;
+    float left_max = grGr_804DBAA0;
+    float left_min = grGr_804DBAA4;
+    float left_top = grGr_804DBAA0;
+    float left_bottom = grGr_804DBAA4;
+    float right_max = grGr_804DBAA0;
+    float right_top = grGr_804DBAA0;
+    float right_min = grGr_804DBAA4;
+    float right_bottom = grGr_804DBAA4;
     int i;
 
     for (i = 0; i < 30; i++) {
@@ -753,33 +761,33 @@ void grGreens_8021483C(Ground_GObj* gobj)
             }
         }
     }
-    left_max = (left_max - left_min) * 0.5f;
+    left_max = (left_max - left_min) * grGr_804DBA88;
     for (i = 0; i < 5; i++) {
-        float y = ((left_top - left_bottom) * 0.25f * i) + left_bottom;
+        float y = ((left_top - left_bottom) * grGr_804DBAA8 * i) + left_bottom;
         Vec* row = &gp->gv.greens.x4[i * 6];
 
-        row[0].x = (left_max * 0.0f) + left_min;
+        row[0].x = (left_max * grGr_804DBA84) + left_min;
         row[0].y = y;
         row[0].z = 0.0f;
-        row[1].x = (left_max * 1.0f) + left_min;
+        row[1].x = (left_max * grGr_804DBA80) + left_min;
         row[1].y = y;
         row[1].z = 0.0f;
-        row[2].x = (left_max * 2.0f) + left_min;
+        row[2].x = (left_max * grGr_804DBAAC) + left_min;
         row[2].y = y;
         row[2].z = 0.0f;
     }
-    right_max = (right_max - right_min) * 0.5f;
+    right_max = (right_max - right_min) * grGr_804DBA88;
     for (i = 0; i < 5; i++) {
-        float y = ((right_top - right_bottom) * 0.25f * i) + right_bottom;
+        float y = ((right_top - right_bottom) * grGr_804DBAA8 * i) + right_bottom;
         Vec* row = &gp->gv.greens.x4[i * 6];
 
-        row[3].x = (right_max * 0.0f) + right_min;
+        row[3].x = (right_max * grGr_804DBA84) + right_min;
         row[3].y = y;
         row[3].z = 0.0f;
-        row[4].x = (right_max * 1.0f) + right_min;
+        row[4].x = (right_max * grGr_804DBA80) + right_min;
         row[4].y = y;
         row[4].z = 0.0f;
-        row[5].x = (right_max * 2.0f) + right_min;
+        row[5].x = (right_max * grGr_804DBAAC) + right_min;
         row[5].y = y;
         row[5].z = 0.0f;
     }
