@@ -15,7 +15,9 @@
 #include <baselib/mobj.h>
 #include <baselib/robj.h>
 #include <baselib/tobj.h>
+#include <dolphin/os.h>
 #include <Runtime/Gecko_setjmp.h>
+#include <stdarg.h>
 
 /* 1C6620 */ static void grAnime_801C6620(HSD_PObj* arg0, HSD_ShapeAnim* arg1);
 /* 1C6710 */ static void grAnime_801C6710(HSD_TObj* tobj,
@@ -515,7 +517,66 @@ void grAnime_801C7228(HSD_JObj* obj, int flags, void* func, u32 type,
     }
 }
 
-/// #grAnime_801C752C
+void grAnime_801C752C(HSD_JObj* obj, s32 arg1, s32 flags, void* func,
+                      u32 type, ...)
+{
+    HSD_RObj* robj;
+    HSD_JObj* child;
+    va_list ap;
+    callbackArg arg;
+
+    if (obj == NULL) {
+        return;
+    }
+    va_start(ap, type);
+    switch (type) {
+    case AOBJ_ARG_A:
+    case AOBJ_ARG_AO:
+    case AOBJ_ARG_AOT:
+        break;
+    case AOBJ_ARG_AF:
+    case AOBJ_ARG_AOF:
+    case AOBJ_ARG_AOTF:
+        arg.f = va_arg(ap, f64);
+        break;
+    case AOBJ_ARG_AV:
+    case AOBJ_ARG_AOV:
+    case AOBJ_ARG_AOTV:
+        arg.v = va_arg(ap, void*);
+        break;
+    case AOBJ_ARG_AU:
+    case AOBJ_ARG_AOU:
+    case AOBJ_ARG_AOTU:
+        arg.d = va_arg(ap, u32);
+        break;
+    default:
+        OSReport("not match arg_type\n");
+        __assert("granime.c", 0x36F, "0");
+        break;
+    }
+    if (obj == NULL) {
+        __assert("granime.c", 0x33A, "obj");
+    }
+    if (flags & 0x20) {
+        if (obj->aobj != NULL) {
+            grAnime_801C6F50(obj->aobj, obj, 6, func, type, &arg);
+        }
+    }
+    if ((obj->flags & 0x4020) ? false : true) {
+        grAnime_801C70E0(obj->u.dobj, flags, func, type, &arg);
+    }
+    for (robj = obj->robj; robj != NULL; robj = robj->next) {
+        if ((flags & 0x200) && robj->aobj != NULL) {
+            grAnime_801C6F50(robj->aobj, robj, 0xA, func, type, &arg);
+        }
+    }
+    if (arg1 != 0 && !(obj->flags & 0x1000)) {
+        for (child = obj->child; child != NULL; child = child->next) {
+            grAnime_801C7228(child, flags, func, type, &arg, arg1);
+        }
+    }
+    va_end(ap);
+}
 
 void grAnime_801C775C(HSD_GObj* gobj, int arg1, u32 arg2, f32 arg8, f32 arg9)
 {
