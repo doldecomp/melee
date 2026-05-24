@@ -3845,7 +3845,95 @@ void fn_80169900(u8 arg0, struct lbl_8046B488_t* arg1, s8* arg2, s8* arg3)
 }
 #pragma pop
 
-/// #fn_80169A84
+#pragma push
+#pragma dont_inline on
+long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
+{
+    s32 i;
+    s32 count;
+    s8* base;
+    s8* p;
+    s8* q;
+    s8* dst;
+    s8* src;
+    u8 tmp;
+    s8 result;
+
+    base = (s8*) &lbl_8046B488;
+    if ((s32) arg0 == 1) {
+        i = 0;
+        p = base + 0x1C0;
+        do {
+            if (i != 4 && gm_80164840((u8) i) != 0) {
+                *p = i;
+            } else {
+                *p = -1;
+            }
+            i += 1;
+            p += 1;
+        } while (i < 0x1A);
+
+        i = 0;
+        p = base + 0x1C0;
+        do {
+            q = base + HSD_Randi(0x1B);
+            tmp = q[0x1C0];
+            i += 1;
+            q[0x1C0] = (u8) *p;
+            *p = tmp;
+            p += 1;
+        } while (i < 0x1A);
+
+        count = 0;
+        p = base + 0x1C0;
+        i = 0xD;
+        do {
+            if ((s8) p[0] != -1) {
+                count += 1;
+                if (count > 0x10) {
+                    p[0] = -1;
+                }
+            }
+            if ((s8) p[1] != -1) {
+                count += 1;
+                if (count > 0x10) {
+                    p[1] = -1;
+                }
+            }
+            p += 2;
+            i -= 1;
+        } while (i != 0);
+
+        dst = arg1;
+        src = arg2;
+        i = 0;
+        while ((s8) *src != -2) {
+            while ((s8) base[i + 0x1C0] == -1) {
+                i = (i + 1) % 27;
+            }
+            result = Player_800325C8((CharacterKind) (s8) base[i + 0x1C0], 0);
+            *dst = result;
+            i += 1;
+            src += 1;
+            dst += 1;
+        }
+        return (s32) result;
+    } else if ((s8) arg0 >= 1) {
+        return (s32) base;
+    } else if ((s8) arg0 >= 0) {
+        dst = arg1;
+        src = arg2;
+        while ((s8) *src != -2) {
+            *dst = -1;
+            src += 1;
+            dst += 1;
+        }
+        return (s32) src;
+    } else {
+        return (s32) base;
+    }
+}
+#pragma pop
 
 /// #fn_80169C54
 
