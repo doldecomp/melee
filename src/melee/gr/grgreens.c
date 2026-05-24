@@ -169,7 +169,7 @@ static inline int randrange(int min, int max)
 static inline struct grGreens_BlockVars* getBlock(Ground* gp, int i, int j);
 static inline struct grGreens_BlockVars* getBlock(Ground* gp, int i, int j)
 {
-    return &gp->gv.greens.x8_blocks[i * 6 + j];
+    return &((struct grGreens_BlockVars(*)[6]) gp->gv.greens.x8_blocks)[i][j];
 }
 
 static inline Vec* getVec(Ground* gp, int i, int j);
