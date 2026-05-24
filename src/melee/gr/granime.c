@@ -883,8 +883,9 @@ void grAnime_801C86D4(s32 arg0, HSD_GObj* arg1, s32 arg2)
     if (archive == NULL) {
         __assert("granime.c", 0x602, "archive");
     }
-    sp.x0 = arg2;
-    joint = (HSD_Joint*) grAnime_801C8578(archive->unk4->unk8[arg0].unk0, &sp);
+    sp.x4 = arg2;
+    joint =
+        (HSD_Joint*) grAnime_801C8578(archive->unk4->unk8[arg0].unk0, &sp.x4);
     HSD_JObjResetRST(Ground_801C3FA4(arg1, arg2), joint);
 }
 
