@@ -281,8 +281,8 @@ void grBigBlueRoute_8020BC34(Ground_GObj* gobj)
     gp->gv.bigblueroute.xC4 = grBigBlueRoute_8020B9D4(4);
 }
 
-/// @todo Currently 90.72% match - HSD_JObjGetTranslation inline hoists dest
-/// pointer to r27 (target uses r0 for addic. + r30+offset for stores)
+/// @todo Currently 99.83% match - remaining diffs are anonymous string-pool
+/// symbols (translate/reb0_jobj) vs the target's single grBb_Route_803E61D4
 void grBigBlueRoute_8020BC68(Ground_GObj* gobj)
 {
     Vec3 origin;
@@ -293,50 +293,50 @@ void grBigBlueRoute_8020BC68(Ground_GObj* gobj)
     gp->x8_callback = NULL;
     gp->xC_callback = NULL;
     gp->x10_flags.b5 = 1;
-    *(s16*) ((u8*) gp + 0xC8) = 0;
+    gp->gv.bigblueroute2.xC8 = 0;
 
     if (Ground_801C2D24(148, &origin)) {
         jobj = Ground_801C2CF4(127);
-        *(HSD_JObj**) ((u8*) gp + 0xE4) = jobj;
+        gp->gv.bigblueroute2.xE4 = jobj;
         if (jobj != NULL) {
-            jobj = *(HSD_JObj**) ((u8*) gp + 0xE4);
-            HSD_JObjGetTranslation(jobj, (Vec3*) ((u8*) gp + 0xD8));
-            lbVector_Sub((Vec3*) ((u8*) gp + 0xD8), &origin);
+            jobj = gp->gv.bigblueroute2.xE4;
+            HSD_JObjGetTranslation(jobj, &gp->gv.bigblueroute2.xD8);
+            lbVector_Sub(&gp->gv.bigblueroute2.xD8, &origin);
         }
 
         jobj = Ground_801C2CF4(128);
-        *(HSD_JObj**) ((u8*) gp + 0xF4) = jobj;
+        gp->gv.bigblueroute2.xF4 = jobj;
         if (jobj != NULL) {
-            jobj = *(HSD_JObj**) ((u8*) gp + 0xF4);
-            HSD_JObjGetTranslation(jobj, (Vec3*) ((u8*) gp + 0xE8));
-            lbVector_Sub((Vec3*) ((u8*) gp + 0xE8), &origin);
+            jobj = gp->gv.bigblueroute2.xF4;
+            HSD_JObjGetTranslation(jobj, &gp->gv.bigblueroute2.xE8);
+            lbVector_Sub(&gp->gv.bigblueroute2.xE8, &origin);
         }
 
         jobj = Ground_801C2CF4(129);
-        *(HSD_JObj**) ((u8*) gp + 0x104) = jobj;
+        gp->gv.bigblueroute2.x104 = jobj;
         if (jobj != NULL) {
-            jobj = *(HSD_JObj**) ((u8*) gp + 0x104);
-            HSD_JObjGetTranslation(jobj, (Vec3*) ((u8*) gp + 0xF8));
-            lbVector_Sub((Vec3*) ((u8*) gp + 0xF8), &origin);
+            jobj = gp->gv.bigblueroute2.x104;
+            HSD_JObjGetTranslation(jobj, &gp->gv.bigblueroute2.xF8);
+            lbVector_Sub(&gp->gv.bigblueroute2.xF8, &origin);
         }
 
         jobj = Ground_801C2CF4(130);
-        *(HSD_JObj**) ((u8*) gp + 0x114) = jobj;
+        gp->gv.bigblueroute2.x114 = jobj;
         if (jobj != NULL) {
-            jobj = *(HSD_JObj**) ((u8*) gp + 0x114);
-            HSD_JObjGetTranslation(jobj, (Vec3*) ((u8*) gp + 0x108));
-            lbVector_Sub((Vec3*) ((u8*) gp + 0x108), &origin);
+            jobj = gp->gv.bigblueroute2.x114;
+            HSD_JObjGetTranslation(jobj, &gp->gv.bigblueroute2.x108);
+            lbVector_Sub(&gp->gv.bigblueroute2.x108, &origin);
         }
     } else {
-        *(HSD_JObj**) ((u8*) gp + 0xE4) = NULL;
-        *(HSD_JObj**) ((u8*) gp + 0xF4) = NULL;
-        *(HSD_JObj**) ((u8*) gp + 0x104) = NULL;
-        *(HSD_JObj**) ((u8*) gp + 0x114) = NULL;
+        gp->gv.bigblueroute2.xE4 = NULL;
+        gp->gv.bigblueroute2.xF4 = NULL;
+        gp->gv.bigblueroute2.x104 = NULL;
+        gp->gv.bigblueroute2.x114 = NULL;
     }
 
     jobj = Ground_801C2CF4(4);
     HSD_ASSERT(452, jobj != NULL);
-    HSD_JObjGetTranslation(jobj, (Vec3*) ((u8*) gp + 0xCC));
+    HSD_JObjGetTranslation(jobj, &gp->gv.bigblueroute2.xCC);
     Ground_801C10B8(gobj, grBigBlueRoute_8020BC34);
 }
 
