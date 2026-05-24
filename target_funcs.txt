@@ -99,7 +99,7 @@ File: src/melee/gm/gm_1BA8.c
 Funcs:
 - [x] gm_801BAC9C
 - [x] gm_801BB758
-- [ ] gm_801BBB64
+- [x] gm_801BBB64
 - [x] gm_801BC00C
 - [x] gm_801BCC9C
 - [x] gm_801BD028

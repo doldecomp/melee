@@ -398,7 +398,124 @@ void gm_801BBA60_OnInit(void)
     }
 }
 
-/// #gm_801BBB64
+s32 gm_801BBB64(void)
+{
+    struct EventData* ev = &gmMainLib_804D3EE0->unk_530;
+    struct gm_804D6900_t** pp;
+    s32 idx = gmMainLib_804D3EE0->unk_530.unk_535;
+    s8* p;
+    void* cd;
+    u8* inner;
+    s32 var_r3;
+
+    if (*gm_804D6900[idx]->x14 != 0x21) {
+        ev->x44 = 0;
+    } else {
+        ev->x44 = 1;
+    }
+    pp = &gm_804D6900[idx];
+    ev->x48 = (InternalStageId) *(u16*) ((u8*) (*pp)->x8 + 6);
+    p = (*pp)->x14;
+    if (p != NULL) {
+        ev->x4C[0] = *(u8*) p;
+        ev->x50[0] = ((u8*) p)[3];
+    } else {
+        ev->x4C[0] = 0x21;
+        ev->x50[0] = 0;
+    }
+    p = (*pp)->x18;
+    if (p != NULL) {
+        ev->x4C[1] = *(u8*) p;
+        ev->x50[1] = ((u8*) p)[3];
+    } else {
+        ev->x4C[1] = 0x21;
+        ev->x50[1] = 0;
+    }
+    p = *(s8**) ((u8*) *pp + 0x1C);
+    if (p != NULL) {
+        ev->x4C[2] = *p;
+        ev->x50[2] = ((u8*) p)[3];
+    } else {
+        ev->x4C[2] = 0x21;
+        ev->x50[2] = 0;
+    }
+    p = *(s8**) ((u8*) *pp + 0x20);
+    if (p != NULL) {
+        ev->x4C[3] = *p;
+        ev->x50[3] = ((u8*) p)[3];
+    } else {
+        ev->x4C[3] = 0x21;
+        ev->x50[3] = 0;
+    }
+    if (*(u8*) *pp == 1) {
+        ev->x4C[1] = (s8) (*pp)->xC->unk0[0];
+        if ((*pp)->xC->unk0[5] == 1) {
+            ev->x50[1] = (*pp)->xC->unk0[6];
+        } else {
+            ev->x50[1] = 0xFF;
+        }
+        if (((u8*) (*pp)->xC)[0x17] == 1) {
+            ev->x45 = 1;
+        } else {
+            ev->x45 = 0;
+        }
+    } else {
+        ev->x45 = 0;
+    }
+
+    var_r3 = idx;
+    switch (idx) {
+    case 9:
+    case 19:
+    case 29:
+    case 39:
+    case 48:
+        if (ev->x20 == 0) {
+            ev->x44 = 3;
+        } else {
+            ev->x44 = 4;
+        }
+        cd = ((void**) ((u8*) (*pp)->x10 + 0x10))[ev->x20];
+        ev->x4C[1] = *(u8*) cd;
+        ev->x50[1] = ((u8*) cd)[3];
+        return (s32) cd;
+    case 35:
+        if (ev->x20 == 0) {
+            ev->x44 = 2;
+            inner = (u8*) (*pp)->x10;
+            cd = ((void**) (inner + 0x10))[0];
+            ev->x4C[1] = *(u8*) cd;
+            ev->x50[1] = ((u8*) cd)[3];
+            cd = ((void**) (inner + 0x10))[2];
+            ev->x4C[2] = *(u8*) cd;
+            ev->x50[2] = ((u8*) cd)[3];
+            cd = ((void**) (inner + 0x10))[3];
+            ev->x4C[3] = *(u8*) cd;
+            ev->x50[3] = ((u8*) cd)[3];
+            return (s32) cd;
+        }
+        if (ev->x20 == 1) {
+            ev->x44 = 4;
+            inner = (u8*) (*pp)->x10;
+            cd = ((void**) (inner + 0x10))[1];
+            ev->x4C[1] = *(u8*) cd;
+            ev->x50[1] = ((u8*) cd)[3];
+            cd = ((void**) (inner + 0x10))[4];
+            ev->x4C[2] = *(u8*) cd;
+            ev->x50[2] = ((u8*) cd)[3];
+            return (s32) cd;
+        }
+        return var_r3;
+    case 43:
+        cd = (void*) (*pp)->x4->x4;
+        ev->x4C[2] = *(s8*) cd;
+        ev->x50[2] = ((u8*) cd)[3];
+        var_r3 = (s32) cd;
+        /* fallthrough */
+    default:
+        return var_r3;
+    }
+}
 
 void gm_801BBEA8_OnLoad(void)
 {
