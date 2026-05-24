@@ -3895,14 +3895,9 @@ u8 gm_80169238(u8 ckind)
     return lbl_803D51A0[ckind].ncolors;
 }
 
-static inline u8 gm_80169238_inner3(u8 ckind)
-{
-    return gm_80169238(ckind);
-}
-
 static inline u8 gm_80169238_inner2(u8 ckind)
 {
-    return gm_80169238_inner3(ckind);
+    return gm_80169238(ckind);
 }
 
 static inline u8 gm_80169238_inner(u8 ckind)
@@ -4562,41 +4557,23 @@ void gm_8016A21C(StartMeleeRules* arg0)
     arg0->x54 = (void*) &lbl_8046B488;
 }
 
-static inline s32 fn_801695BC_inner(u8 arg0, u8 arg1, u8 arg2, u8* arg3,
-                                    u8* arg4)
-{
-    return fn_801695BC(arg0, arg1, arg2, arg3, arg4);
-}
-
 static inline s32 fn_801695BC_noinline(u8 arg0, u8 arg1, u8 arg2, u8* arg3,
                                        u8* arg4)
 {
-    return fn_801695BC_inner(arg0, arg1, arg2, arg3, arg4);
-}
-
-static inline void fn_801697FC_inner(s8 character, s8 costume,
-                                     s8 new_character, s8 new_costume, s8* buf)
-{
-    fn_801697FC(character, costume, new_character, new_costume, buf);
+    return fn_801695BC(arg0, arg1, arg2, arg3, arg4);
 }
 
 static inline void fn_801697FC_noinline(s8 character, s8 costume,
                                         s8 new_character, s8 new_costume,
                                         s8* buf)
 {
-    fn_801697FC_inner(character, costume, new_character, new_costume, buf);
-}
-
-static inline void fn_80169900_inner(u8 arg0, struct lbl_8046B488_t* arg1,
-                                     s8* arg2, s8* arg3)
-{
-    fn_80169900(arg0, arg1, arg2, arg3);
+    fn_801697FC(character, costume, new_character, new_costume, buf);
 }
 
 static inline void fn_80169900_noinline(u8 arg0, struct lbl_8046B488_t* arg1,
                                         s8* arg2, s8* arg3)
 {
-    fn_80169900_inner(arg0, arg1, arg2, arg3);
+    fn_80169900(arg0, arg1, arg2, arg3);
 }
 
 s32 gm_8016A22C(s8 k0, s8 k1, s8 k2, u8 a3, u8 a4, int a5, int mode, int a7,
