@@ -86,9 +86,7 @@ struct HSD_ImageDesc grPu_803E7620 = { &grPu_803E6E20, 32, 32, 4, 0, 0, 0 };
 
 void grPura_80211CFC(bool num) {}
 
-/// #grPura_80211D00
-
-const f32 grPu_804DBA58 = 0.8;
+extern f32 grPu_804DBA58;
 const f32 grPu_804DBA5C = 3600.0;
 const f32 grPu_804DBA70 = 0.0;
 const f32 grPu_804DBA74 = 2.0;
@@ -99,6 +97,7 @@ const f32 grPu_804DBA7C = -30.0;
 
 void grPura_80211D00(void)
 {
+    UNUSED u8 _[8];
     Vec3 cam_offset;
     f32 fVar1;
 
