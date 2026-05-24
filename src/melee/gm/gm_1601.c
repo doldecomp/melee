@@ -3471,7 +3471,66 @@ void gm_80168FC4(void)
     lbAudioAx_80027648();
 }
 
-/// #fn_80169000
+s32 fn_80169000(void* arg0, void* arg1)
+{
+    u8 handicaps[4];
+    u8 positions[4];
+    u8* p = (u8*) arg0;
+    u8* hp = handicaps;
+    u8* sp = (u8*) arg1;
+    u8* hb = (u8*) arg1;
+    s32 count;
+    s32 i;
+    u8* cur;
+    u8 v;
+    u8 t;
+
+    count = 0;
+    for (i = 0; i < 4; i++) {
+        if (p[0x58] != 3) {
+            count += 1;
+            positions[p[0x5E]] = i;
+        }
+        *hp = *sp;
+        hp += 1;
+        sp += 1;
+        p += 0xA8;
+    }
+
+    cur = &handicaps[positions[0]];
+    v = *cur;
+    t = 0;
+    if (v >= 2 && handicaps[positions[count - 1]] <= 8) {
+        *cur = v - 1;
+        t = handicaps[positions[count - 1]];
+        handicaps[positions[count - 1]] = t + 1;
+    } else if (v == 1 && handicaps[positions[count - 1]] <= 7) {
+        handicaps[positions[count - 1]] += 2;
+    } else if (v >= 3 && handicaps[positions[count - 1]] == 9) {
+        *cur -= 2;
+    } else if (count >= 3) {
+        if (v == 1 && handicaps[positions[count - 1]] == 8) {
+            handicaps[positions[count - 1]] += 1;
+            t = handicaps[positions[1]];
+            if (t >= 2) {
+                handicaps[positions[1]] = t - 1;
+            }
+        } else if (v == 2 && handicaps[positions[count - 1]] == 9) {
+            *cur -= 1;
+            t = handicaps[positions[1]];
+            if (t >= 2) {
+                handicaps[positions[1]] = t - 1;
+            }
+        }
+    }
+    hb[0] = handicaps[0];
+    hb[1] = handicaps[1];
+    hb[2] = handicaps[2];
+    hb[3] = handicaps[3];
+    return (s32) t;
+}
+
+/// #fn_80169000 done
 #pragma dont_inline on
 u8 gm_80169238(u8 ckind)
 {
