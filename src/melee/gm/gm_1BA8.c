@@ -452,7 +452,181 @@ void fn_801BBFE8(void)
     gm_801BC00C();
 }
 
-/// #gm_801BC00C
+s32 gm_801BC00C(void)
+{
+    struct gm_804D6900_t** var_r29 = gm_804D6900;
+    struct EventData* ev = &gmMainLib_804D3EE0->unk_530;
+    s32 idx = gmMainLib_804D3EE0->unk_530.unk_535;
+    u8* inner;
+    void* cd;
+    u8 ckind;
+    u8 costume;
+    lbl_8046B6A0_t* mi;
+    s32 i;
+    s8 chr;
+
+    gmMainLib_804D3EE0->unk_530.xB_1 = 0;
+    ev->x10 = 0;
+    ev->x14 = 0;
+    ev->x18 = 0;
+
+    switch (idx) {
+    case 4:
+    case 9:
+    case 12:
+    case 15:
+    case 19:
+    case 21:
+    case 23:
+    case 27:
+    case 29:
+    case 35:
+    case 39:
+    case 43:
+    case 44:
+    case 48:
+        lbArchive_LoadSymbols("GmEvent.dat", &gm_804D6900,
+                              "sqEventInitDataLevelTbl", 0);
+        var_r29 = gm_804D6900;
+        break;
+    }
+
+    switch (idx) {
+    case 35:
+        if (ev->x20 == 0) {
+            inner = (u8*) var_r29[idx]->x10;
+            cd = ((void**) (inner + 0x10))[2];
+            ftLib_80087508(
+                Player_800325C8((CharacterKind) (s8) *(u8*) cd, 0),
+                *((u8*) cd + 3));
+            cd = ((void**) (inner + 0x10))[3];
+            ftLib_80087508(
+                Player_800325C8((CharacterKind) (s8) *(u8*) cd, 0),
+                *((u8*) cd + 3));
+        } else {
+            cd = ((void**) ((u8*) var_r29[idx]->x10 + 0x10))[4];
+            ftLib_80087508(
+                Player_800325C8((CharacterKind) (s8) *(u8*) cd, 0),
+                *((u8*) cd + 3));
+        }
+        break;
+    case 43:
+        chr = Player_800325C8(
+            (CharacterKind) (s8) *(u8*) var_r29[idx]->x4->x4, 0);
+        ftLib_80087508(chr, ev->x50[2]);
+        if (ev->x0 == 4) {
+            Player_80031DA8(chr, ev->x1);
+        }
+        break;
+    }
+
+    switch (idx) {
+    case 9:
+    case 19:
+    case 29:
+    case 35:
+    case 39:
+    case 48:
+        if (ev->x20 > 0) {
+            mi = gm_8016AE44();
+            mi->timer_seconds = ev->x2C;
+            mi->unk_2C = ev->x30;
+        }
+        break;
+    }
+
+    switch (idx) {
+    case 9:
+    case 19:
+    case 29:
+    case 39:
+    case 48:
+        for (i = ev->x20; i < (s32) *(u8*) var_r29[idx]->x10; i++) {
+            cd = ((void**) ((u8*) var_r29[idx]->x10 + 0x10))[i];
+            ckind = *(u8*) cd;
+            costume = *((u8*) cd + 3);
+            if ((s8) ev->x0 == (s8) ckind && (u8) ev->x1 == costume) {
+                if (costume <= 2) {
+                    costume += 1;
+                } else {
+                    costume = 0;
+                }
+            }
+            gm_8016A9E8(ckind, (s8) costume);
+        }
+        break;
+    case 35:
+        if (ev->x20 == 0) {
+            inner = (u8*) var_r29[idx]->x10;
+            cd = ((void**) (inner + 0x10))[0];
+            ckind = *(u8*) cd;
+            costume = *((u8*) cd + 3);
+            if ((s8) ev->x0 == (s8) ckind && (u8) ev->x1 == costume) {
+                if (costume <= 2) {
+                    costume += 1;
+                } else {
+                    costume = 0;
+                }
+            }
+            gm_8016A9E8(ckind, (s8) costume);
+            cd = ((void**) (inner + 0x10))[2];
+            ckind = *(u8*) cd;
+            costume = *((u8*) cd + 3);
+            if ((s8) ev->x0 == (s8) ckind && (u8) ev->x1 == costume) {
+                if (costume <= 2) {
+                    costume += 1;
+                } else {
+                    costume = 0;
+                }
+            }
+            gm_8016A9E8(ckind, (s8) costume);
+            cd = ((void**) (inner + 0x10))[3];
+            ckind = *(u8*) cd;
+            costume = *((u8*) cd + 3);
+            if ((s8) ev->x0 == (s8) ckind && (u8) ev->x1 == costume) {
+                if (costume <= 2) {
+                    costume += 1;
+                } else {
+                    costume = 0;
+                }
+            }
+            gm_8016A9E8(ckind, (s8) costume);
+        }
+        if (ev->x20 <= 1) {
+            inner = (u8*) var_r29[idx]->x10;
+            cd = ((void**) (inner + 0x10))[1];
+            ckind = *(u8*) cd;
+            costume = *((u8*) cd + 3);
+            if ((s8) ev->x0 == (s8) ckind && (u8) ev->x1 == costume) {
+                if (costume <= 2) {
+                    costume += 1;
+                } else {
+                    costume = 0;
+                }
+            }
+            gm_8016A9E8(ckind, (s8) costume);
+            cd = ((void**) (inner + 0x10))[4];
+            ckind = *(u8*) cd;
+            costume = *((u8*) cd + 3);
+            if ((s8) ev->x0 == (s8) ckind && (u8) ev->x1 == costume) {
+                if (costume <= 2) {
+                    costume += 1;
+                } else {
+                    costume = 0;
+                }
+            }
+            gm_8016A9E8(ckind, (s8) costume);
+        }
+        break;
+    }
+
+    if (idx == 0x24) {
+        lbBgFlash_80021A10(0.2f);
+    }
+    Camera_80030E34(ev->x1C);
+    return HSD_GObj_SetupProc(GObj_Create(0xF, 0x11, 0), gm_803DF94C[idx]->x0,
+                             0x15);
+}
 
 static u8 gm_803DF918[] = {
     0x00, 0x11, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A,

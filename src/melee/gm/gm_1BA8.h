@@ -25,7 +25,7 @@ struct EventData;
 /* 1BBEA8 */ void gm_801BBEA8_OnLoad(void);
 /* 1BBFE4 */ void gm_801BBFE4_OnUnload(void);
 /* 1BBFE8 */ void fn_801BBFE8(void);
-/* 1BC00C */ UNK_RET gm_801BC00C(UNK_PARAMS);
+/* 1BC00C */ s32 gm_801BC00C(void);
 /* 1BC488 */ int gm_801BC488(UNK_PARAMS);
 /* 1BC4F4 */ UNK_RET gm_801BC4F4(HSD_GObj*);
 /* 1BC670 */ void gm_801BC670(HSD_GObj*);
