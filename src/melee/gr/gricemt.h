@@ -125,7 +125,7 @@ extern f32 grIm_804DB570;
 /* 1F8C64 */ // void fn_801F8C64(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32);
 /* 1F8CDC */ void grIceMt_801F8CDC(Ground_GObj*, s16* joint_indices, int count,
                                    HSD_GObj** output_array);
-/* 1F8E58 */ UNK_RET fn_801F8E58(Ground_GObj*);
+/* 1F8E58 */ s32 fn_801F8E58(Ground_GObj*, s32*);
 /* 1F9038 */ int fn_801F9038(Ground_GObj*);
 /* 1F9150 */ s32 fn_801F9150(HSD_GObj*, s32*);
 /* 1F91A4 */ void fn_801F91A4(void);

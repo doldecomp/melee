@@ -473,7 +473,8 @@ void grIceMt_801F7728(Ground_GObj* gobj)
     u32 unused2;
     Ground* gp = gobj->user_data;
     if (gp->gv.icemt.xD8 == 0) {
-        grIceMt_801FA364(&gp->gv.corneria.xC8, &y, fn_801F8E58, gobj);
+        grIceMt_801FA364(&gp->gv.corneria.xC8, &y, (HSD_GObjEvent) fn_801F8E58,
+                         gobj);
         grIceMt_801F9ACC(
             (HSD_GObj*) &gp->gv.corneria.xC4,
             grIceMt_801F96E0((HSD_GObj*) &gp->gv.corneria.xC4, -y),
@@ -1116,7 +1117,67 @@ void grIceMt_801F8CDC(Ground_GObj* gobj, s16* joint_indices, int count,
     }
 }
 
-/// #fn_801F8E58
+s32 fn_801F8E58(Ground_GObj* arg0, s32* out)
+{
+    s32 list[12];
+    s32 count;
+    s32 i;
+    s32 pick;
+    s32 chosen;
+    Ground* gp;
+    s16* timer;
+    s16 a;
+    s16 b;
+    s32 d;
+
+    count = 0;
+    gp = arg0->user_data;
+    timer = &gp->gv.icemt.xDC;
+
+    {
+        Ground* g = gp;
+        i = 0;
+        do {
+            if (g->gv.icemt.xDC == 0 &&
+                (Stage_80225194() != 0xD4 || i >= 4))
+            {
+                list[count] = i;
+                count++;
+            }
+            i++;
+            g = (Ground*) ((u8*) g + 2);
+        } while (i < 12);
+    }
+
+    if (count == 0) {
+        __assert(grIm_803E46F8, 0x81D, "max");
+    }
+    pick = count != 0 ? HSD_Randi(count) : 0;
+    chosen = list[pick];
+
+    {
+        Ground* g = gp;
+        for (i = 0; i < 12; i++) {
+            if (g->gv.icemt.xDC > 0) {
+                g->gv.icemt.xDC--;
+            }
+            g = (Ground*) ((u8*) g + 2);
+        }
+    }
+
+    timer[chosen] = *(s16*) ((u8*) grIm_804D69F4 + 2);
+    a = *(s16*) ((u8*) grIm_804D69F4 + 0x36);
+    b = *(s16*) ((u8*) grIm_804D69F4 + 0x38);
+    if (a > b) {
+        d = a - b;
+        a = b + (d != 0 ? HSD_Randi(d) : 0);
+    } else if (a < b) {
+        d = b - a;
+        a = a + (d != 0 ? HSD_Randi(d) : 0);
+    }
+    *out = a;
+    return chosen;
+}
 
 int fn_801F9038(Ground_GObj* gobj)
 {
