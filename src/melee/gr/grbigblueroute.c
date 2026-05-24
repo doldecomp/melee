@@ -345,9 +345,6 @@ bool grBigBlueRoute_8020BF30(Ground_GObj* arg)
     return false;
 }
 
-extern f32 grBb_Route_804DB948;
-extern f32 grBb_Route_804DB94C;
-
 /// @todo Currently 98.29% match - register allocation only (extra mr through
 /// r0 for first loop jobj load and idx computation)
 void grBigBlueRoute_8020BF38(Ground_GObj* gobj)
@@ -361,7 +358,7 @@ void grBigBlueRoute_8020BF38(Ground_GObj* gobj)
     HSD_JObj* jobj;
 
     fighter = Ground_801C57A4();
-    Ground_801C3D44(0, grBb_Route_804DB948, grBb_Route_804DB94C);
+    Ground_801C3D44(0, 30.0f, 4000.0f);
 
     if (fighter != NULL) {
         ftLib_80086644(fighter, &fighter_pos);
