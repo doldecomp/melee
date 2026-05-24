@@ -129,6 +129,8 @@ typedef struct GrIm588 {
     s16 b;
 } GrIm588;
 static const GrIm588 grIm_804DB588 = { 1, 2 };
+extern u32 grIm_804DB590;
+extern u32 grIm_804DB594;
 extern f32 grIm_804DB5A8;
 extern f32 grIm_804DB5AC;
 extern f32 grIm_804DB5B0;
@@ -760,12 +762,14 @@ void grIceMt_801F81B4(Ground_GObj* gobj)
     }
 }
 
-/// #grIceMt_801F8208
 void grIceMt_801F8208(Ground_GObj* arg0)
 {
     Ground* gp = GET_GROUND(arg0);
-    HSD_JObj* jobj;
-    HSD_JObj* jobj2;
+    struct {
+        u32 x0;
+        u32 x4;
+    } sp14;
+    PAD_STACK(4);
     Ground_801C2ED0(arg0->hsd_obj, gp->map_id);
     grAnime_801C8138(arg0, gp->map_id, 0);
     grAnime_801C77FC(arg0, 0, 7);
@@ -781,7 +785,10 @@ void grIceMt_801F8208(Ground_GObj* arg0)
     gp->gv.icemt2.xEC = Ground_801C3FA4(arg0, 18);
     gp->gv.icemt2.xF0 = Ground_801C3FA4(arg0, 19);
     gp->gv.icemt2.xF4 = Ground_801C3FA4(arg0, 20);
-    // gp->gv.icemt.xD8 = 1;
+    ((UnkFlagStruct*) &gp->gv.icemt2.xC4)->b0 = 0;
+    sp14.x0 = grIm_804DB590;
+    sp14.x4 = grIm_804DB594;
+    grIceMt_801F8CDC(arg0, (s16*) &sp14, 4, &gp->gv.icemt.xF8[0]);
 }
 
 bool grIceMt_801F835C(Ground_GObj* param1)
