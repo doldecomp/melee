@@ -111,8 +111,6 @@ static struct {
     "%s:%d: couldn t get gobj(id=%d)\n",
 };
 
-char grBb_Route_803E61D4[] = "grbigblueroute.c";
-
 static struct {
     int x0;
     f32 x4;
@@ -214,7 +212,7 @@ HSD_GObj* grBigBlueRoute_8020B9D4(int gobj_id)
         }
 
     } else {
-        OSReport(grBb_Route_803E617C.fmt, grBb_Route_803E61D4, 0x117, gobj_id);
+        OSReport(grBb_Route_803E617C.fmt, __FILE__, 0x117, gobj_id);
     }
 
     return gobj;
@@ -680,7 +678,7 @@ int grBigBlueRoute_8020DA9C(struct grBigBlueRoute_8020DA9C_t* desc)
     return desc->x8;
 }
 
-/// @todo Currently 97.71% match - needs register allocation fix (r27/r30 swap
+/// @todo Currently 97.73% match - needs register allocation fix (r27/r30 swap
 /// for arr/jobj)
 void grBigBlueRoute_8020DAB4(HSD_JObj** jobjs, f32 scale, int count)
 {

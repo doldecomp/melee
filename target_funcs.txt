@@ -2,7 +2,7 @@ File: src/melee/gr/grbigblueroute.c
 Funcs:
 - [x] grBigBlueRoute_8020DD64
 - [x] grBigBlueRoute_8020BF38
-- [ ] grBigBlueRoute_8020DAB4
+- [x] grBigBlueRoute_8020DAB4
 - [ ] grBigBlueRoute_8020BC68
 - [ ] grBigBlueRoute_8020C530
 - [ ] grBigBlueRoute_8020C85C
