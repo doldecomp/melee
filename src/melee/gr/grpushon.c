@@ -470,7 +470,31 @@ int grPushOn_80219230(int arg0)
     __assert("grpushon.c", 0x35DU, "0");
 }
 
-/// #fn_802192A4
+struct grPushOn_Region {
+    f32 x0;
+    f32 x4;
+    f32 x8;
+};
+
+s32 fn_802192A4(HSD_GObj* arg1, s32* arg2)
+{
+    Vec3 sp14;
+    f32 scale = Ground_801C0498();
+    struct grPushOn_Region* r;
+    s32 i;
+
+    ftLib_80086644(arg1, &sp14);
+    r = (struct grPushOn_Region*) grPushOn_803E7CCC;
+    for (i = 0; i < 4; i++, r++) {
+        if ((scale * r->x0 < sp14.x) && (scale * r->x4 > sp14.x) &&
+            (scale * (-50.0f + r->x8) < sp14.y) && (scale * r->x8 > sp14.y))
+        {
+            *arg2 = grPushOn_804D6AB8->x0;
+            return 1;
+        }
+    }
+    return 0;
+}
 
 DynamicsDesc* grPushOn_80219458(enum_t arg0)
 {
