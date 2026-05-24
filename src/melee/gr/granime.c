@@ -453,6 +453,8 @@ void grAnime_801C7228(HSD_JObj* obj, int flags, void* func, u32 type,
                     grAnime_801C6F50(temp_r20->aobj, temp_r20, 8, func, type,
                                      param);
                 }
+#pragma push
+#pragma dont_inline on
                 grAnime_801C706C(temp_r20->tobj, flags, func, type, param);
             }
             temp_r4 = phi_r23->pobj;
@@ -516,6 +518,7 @@ void grAnime_801C7228(HSD_JObj* obj, int flags, void* func, u32 type,
         }
     }
 }
+#pragma pop
 
 void grAnime_801C752C(HSD_JObj* obj, s32 arg1, s32 flags, void* func,
                       u32 type, ...)
