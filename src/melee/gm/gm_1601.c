@@ -2324,7 +2324,32 @@ u8 fn_80165548(MatchEnd* me, s8 arg1, u8 team)
     return ret;
 }
 
-/// #fn_801656A8
+u8 fn_801656A8(MatchEnd* arg0, s8 arg1)
+{
+    u8 ret = 0;
+
+    if (arg0->player_standings[arg1].slot_type != 3) {
+        s32 cnt_gt = 0;
+        s32 cnt_lt = 0;
+        s32 j;
+        for (j = 0; j < 6; j++) {
+            if (arg0->player_standings[j].slot_type != 3 &&
+                (u32) arg0->player_standings[arg1].x20 >
+                    (u32) arg0->player_standings[j].x20) {
+                cnt_gt += 1;
+            }
+        }
+        for (j = 0; j < 6; j++) {
+            if (arg0->player_standings[j].slot_type != 3 &&
+                (u32) arg0->player_standings[arg1].x24 <
+                    (u32) arg0->player_standings[j].x24) {
+                cnt_lt += 1;
+            }
+        }
+        ret = ((cnt_gt * 0x10) + cnt_lt) * 0x10 + (6 - arg1);
+    }
+    return ret;
+}
 
 s32 fn_8016588C(lbl_8046B6A0_24C_t* arg0, s32 arg1)
 {
