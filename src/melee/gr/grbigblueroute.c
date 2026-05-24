@@ -21,6 +21,8 @@
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
+#include <trigf.h>
+
 #include <dolphin/os.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -666,6 +668,9 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
 
 static const Vec3 grBb_Route_803B83E0 = { 0.0f, 1.0f, 0.0f };
 
+/// @todo Currently 85.77% match - SYSTEMIC: MWCC caches the RouteEntry pointer
+/// (target reloads gp->...xC8 per access), plus float-constant hoisting order
+/// and stack layout differ.
 void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
