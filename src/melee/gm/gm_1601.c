@@ -2716,7 +2716,85 @@ u8 fn_80166CBC(struct fn_80166CBC_arg0_t* arg0, ssize_t index)
     return arg0[index].x5E;
 }
 
-/// #gm_80166CCC
+void gm_80166CCC(MatchEnd* arg0, MatchEnd* arg1)
+{
+    s32 i;
+    s32 player_count;
+    s32 team_count;
+    u8 result;
+
+    result = arg1->result;
+    player_count = 0;
+    team_count = 0;
+    if (result == 7 || result == 8) {
+        arg0->result = result;
+    }
+    if (arg1->n_winners > 1) {
+        for (i = 0; i < 6; i++) {
+            if (arg1->player_standings[i].slot_type != 3) {
+                arg1->player_standings[i].is_big_loser =
+                    arg0->player_standings[i].is_big_loser +
+                    arg1->player_standings[i].is_small_loser;
+            }
+        }
+    }
+    if (arg1->n_team_winners > 1) {
+        for (i = 0; i < 5; i++) {
+            if (arg1->team_standings[i].active != 0) {
+                arg1->team_standings[i].is_big_loser =
+                    arg0->team_standings[i].is_big_loser +
+                    arg1->team_standings[i].is_small_loser;
+            }
+        }
+    }
+    for (i = 0; i < 6; i++) {
+        if (arg1->player_standings[i].slot_type != 3) {
+            player_count += 1;
+        }
+    }
+    if (arg0->n_winners > 1) {
+        for (i = 0; i < 6; i++) {
+            if (arg0->player_standings[i].slot_type != 3) {
+                arg0->player_standings[i].character_id =
+                    arg1->player_standings[i].character_id;
+                arg0->player_standings[i].xE += arg1->player_standings[i].xE;
+                if (arg0->player_standings[i].is_big_loser == 0) {
+                    if (arg1->player_standings[i].slot_type == 3) {
+                        arg0->player_standings[i].is_big_loser += player_count;
+                        arg0->player_standings[i].is_small_loser += player_count;
+                    } else {
+                        arg0->player_standings[i].is_big_loser =
+                            arg1->player_standings[i].is_big_loser;
+                        arg0->player_standings[i].is_small_loser =
+                            arg1->player_standings[i].is_big_loser;
+                    }
+                }
+            }
+        }
+    }
+    for (i = 0; i < 5; i++) {
+        if (arg1->team_standings[i].active != 0) {
+            team_count += 1;
+        }
+    }
+    if (arg0->n_team_winners > 1) {
+        for (i = 0; i < 5; i++) {
+            if (arg0->team_standings[i].active != 0) {
+                if (arg0->team_standings[i].is_big_loser == 0) {
+                    if (arg1->team_standings[i].active != 0) {
+                        arg0->team_standings[i].is_big_loser =
+                            arg1->team_standings[i].is_big_loser;
+                        arg0->team_standings[i].is_small_loser =
+                            arg1->team_standings[i].is_big_loser;
+                    } else {
+                        arg0->team_standings[i].is_big_loser += team_count;
+                        arg0->team_standings[i].is_small_loser += team_count;
+                    }
+                }
+            }
+        }
+    }
+}
 
 bool gm_80167140(MatchEnd* me)
 {
