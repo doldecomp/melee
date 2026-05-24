@@ -3,6 +3,7 @@
 #include <platform.h>
 
 #include "it/inlines.h"
+#include "it/itzako.h"
 #include "it/itCommonItems.h"
 #include "it/types.h"
 
@@ -10,8 +11,6 @@
 #include <melee/gr/ground.h>
 #include <melee/it/item.h>
 #include <melee/lb/lb_00B0.h>
-
-extern void it_8027B730(void);
 
 ItemStateTable it_803F83E0[] = {
     {
@@ -25,7 +24,7 @@ ItemStateTable it_803F83E0[] = {
 void it_802D84F8(Item_GObj* item_gobj)
 {
     Item* it = GET_ITEM(item_gobj);
-    it_8027B730();
+    it_8027B730(item_gobj);
     it->facing_dir = 0;
     it->xD5C = 0;
     it->xDCC_flag.b3 = 0;
