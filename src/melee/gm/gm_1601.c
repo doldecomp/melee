@@ -2501,7 +2501,41 @@ void fn_80165E7C(MatchEnd* arg0)
     }
 }
 
-/// #fn_80165FA4
+s32 fn_80165FA4(MatchEnd* arg0)
+{
+    s32 max_loser;
+    s32 count;
+    s32 i;
+    s32 j;
+    struct MatchTeamData* t;
+
+    max_loser = 0;
+    for (i = 0; i < 5; i++) {
+        t = &arg0->team_standings[i];
+        if (t->active != 0) {
+            for (j = 0; j < 5; j++) {
+                if (j != i && arg0->team_standings[j].active != 0 &&
+                    (s32) t->score < (s32) arg0->team_standings[j].score) {
+                    t->is_big_loser += 1;
+                }
+            }
+            if (max_loser < (s32) t->is_big_loser) {
+                max_loser = t->is_big_loser;
+            }
+        }
+    }
+    arg0->loser = (arg0->loser & ~0xF) | (max_loser & 0xF);
+    count = 0;
+    for (j = 0; j < 5; j++) {
+        if (arg0->team_standings[j].active != 0 &&
+            arg0->team_standings[j].is_big_loser == 0) {
+            arg0->team_winners[count] = j;
+            count += 1;
+        }
+    }
+    arg0->n_team_winners = count;
+    return (s32) arg0;
+}
 
 s32 fn_801661E0(MatchEnd* arg0)
 {
