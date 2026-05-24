@@ -1227,20 +1227,20 @@ void grGreens_802166C4(Ground_GObj* gobj)
                     Gr_Greens_Block_Status_None)
                 {
                     switch (row) {
-                    case 4:
-                        weights[col] = grGr_params->x8_blockBombChance;
-                        break;
-                    case 3:
-                        weights[col] = grGr_params->xC;
-                        break;
-                    case 2:
-                        weights[col] = grGr_params->x10;
+                    case 0:
+                        weights[col] = grGr_params->x18;
                         break;
                     case 1:
                         weights[col] = grGr_params->x14;
                         break;
-                    default:
-                        weights[col] = grGr_params->x18;
+                    case 2:
+                        weights[col] = grGr_params->x10;
+                        break;
+                    case 3:
+                        weights[col] = grGr_params->xC;
+                        break;
+                    case 4:
+                        weights[col] = grGr_params->x8_blockBombChance;
                         break;
                     }
                     break;
