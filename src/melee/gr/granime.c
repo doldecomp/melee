@@ -864,8 +864,30 @@ bool grAnime_801C84A4(HSD_GObj* gobj, s32 arg1, s32 arg2)
     return false;
 }
 
-/// #grAnime_801C8578
+HSD_Joint* grAnime_801C8578(HSD_Joint* joint, s32* counter)
+{
+    if (*counter == 0) {
+        return joint;
+    }
+    if (joint->child != NULL) {
+        *counter -= 1;
+        joint = grAnime_801C8578(joint->child, counter);
+        if (*counter == 0) {
+            return joint;
+        }
+    }
+    if (joint->next != NULL) {
+        *counter -= 1;
+        joint = grAnime_801C8578(joint->next, counter);
+        if (*counter == 0) {
+            return joint;
+        }
+    }
+    return joint;
+}
 
+#pragma push
+#pragma dont_inline on
 void grAnime_801C86D4(s32 arg0, HSD_GObj* arg1, s32 arg2)
 {
     struct {
@@ -888,6 +910,7 @@ void grAnime_801C86D4(s32 arg0, HSD_GObj* arg1, s32 arg2)
         (HSD_Joint*) grAnime_801C8578(archive->unk4->unk8[arg0].unk0, &sp.x4);
     HSD_JObjResetRST(Ground_801C3FA4(arg1, arg2), joint);
 }
+#pragma pop
 
 void grAnime_801C8780(HSD_GObj* gobj, u32 arg1, u32 arg2, f32 arg3, f32 arg4)
 {

@@ -2,7 +2,7 @@ File: src/melee/gr/granime.c
 Funcs:
 - [x] grAnime_801C86D4
 - [x] grAnime_801C84A4
-- [ ] grAnime_801C8578
+- [x] grAnime_801C8578
 - [ ] grAnime_801C6A54
 - [ ] grAnime_801C752C
 - [ ] grAnime_801C6C0C
