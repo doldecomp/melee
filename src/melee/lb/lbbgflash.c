@@ -61,7 +61,6 @@ extern BgFlashData lbl_80433658;
 #include <MSL/math.h>
 #include <MSL/trigf.h>
 
-/* 021A10 */ static void lbBgFlash_80021A10(f32 arg8);
 /* 021C18 */ static void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd,
                                      int arg2);
 
@@ -932,7 +931,7 @@ typedef struct {
 extern BgFlashGlobal* lbl_804D63E0;
 extern struct Fighter_804D653C_t* lbl_804D63DC;
 
-static void lbBgFlash_80021A10(f32 arg8)
+void lbBgFlash_80021A10(f32 arg8)
 {
     lbl_804D63D8 = arg8;
 }
