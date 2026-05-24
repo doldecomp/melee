@@ -83,11 +83,14 @@ extern const GrIm825C grIm_803B825C;
 /// @brief Ice Mountain row data - 12 bytes each.
 typedef struct IceMtRowData {
     s32 id; // Row identifier, compared with xAC[i] values
-    u32 x4;
-    u32 x8;
+    f32 x4;
+    f32 x8;
 } IceMtRowData;
 
-IceMtRowData grIm_803E4068[6];
+IceMtRowData grIm_803E4068[6] = {
+    { 1, 180.0f, -180.0f }, { 2, 190.0f, -180.0f }, { 3, 190.0f, -195.0f },
+    { 4, 195.0f, -185.0f }, { 5, 190.0f, -200.0f }, { 6, 180.0f, -190.0f },
+};
 
 S16Vec3 grIm_803E40B0[] = {
     { 0, 0, 0 }, { 1, 0, 0 }, { 0, 1, 0 }, { 0, 0, 0 }, { 2, 0, 0 }
@@ -1345,7 +1348,29 @@ void grIceMt_801F98A8(Ground_GObj* param1)
     }
 }
 
-/// #grIceMt_801F993C
+f32 grIceMt_801F993C(s32 arg0, s32 arg1)
+{
+    f32 t = Ground_801C0498();
+    u32 upper_ix;
+    u32 under_ix;
+
+    for (upper_ix = 0; upper_ix < ICEMT_FIELD_MAX; upper_ix++) {
+        if (arg0 == grIm_803E4068[upper_ix].id) {
+            break;
+        }
+    }
+    HSD_ASSERTMSG(0xA9D, upper_ix < ICEMT_FIELD_MAX, "upper_ix<ICEMT_FIELD_MAX");
+
+    for (under_ix = 0; under_ix < ICEMT_FIELD_MAX; under_ix++) {
+        if (arg1 == grIm_803E4068[under_ix].id) {
+            break;
+        }
+    }
+    HSD_ASSERTMSG(0xAA2, under_ix < ICEMT_FIELD_MAX, "under_ix<ICEMT_FIELD_MAX");
+
+    return -((t * grIm_803E4068[upper_ix].x8) -
+             (t * grIm_803E4068[under_ix].x4 + grIm_804D69F4->x40));
+}
 
 void grIceMt_801F9ACC(Ground_GObj* gobj, float y, GrIceMtSegmentLookup ev,
                       Ground_GObj* arg3)
