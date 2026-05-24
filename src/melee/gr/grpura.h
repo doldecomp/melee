@@ -37,7 +37,7 @@
 /* 21231C */ void grPura_8021231C(Ground_GObj*);
 /* 2125EC */ void grPura_802125EC(Ground_GObj*);
 /* 2125F0 */ UNK_RET grPura_802125F0(HSD_GObj*);
-/* 212CD4 */ UNK_RET grPura_80212CD4(HSD_GObj*);
+/* 212CD4 */ void grPura_80212CD4(HSD_GObj*);
 /* 212EF4 */ void grPura_80212EF4(HSD_GObj*);
 /* 212FC0 */ void grPura_80212FC0(HSD_GObj*);
 /* 2130C0 */ DynamicsDesc* grPura_802130C0(enum_t);
