@@ -908,7 +908,40 @@ void fn_80162068(MatchEnd* match_end)
     }
 }
 
-/// #fn_80162170
+s32 fn_80162170(MatchEnd* arg0)
+{
+    s32 i;
+    s32 j;
+    MatchPlayerData* p;
+
+    for (i = 0; i < 4; i++) {
+        p = &arg0->player_standings[i];
+        if (p->slot_type != 3) {
+            u8 ck = p->x4;
+            if (ck != 0x78) {
+                struct NameTagData* nt = GetPersistentNameData(ck);
+                for (j = 0; j < 4; j++) {
+                    if (j != i && arg0->player_standings[j].slot_type != 3) {
+                        u8 ock = arg0->player_standings[j].x4;
+                        if (ock != 0x78) {
+                            s32 v = p->kills[j] + nt->vs_kos[ock];
+                            if (v > 0xFFFF) {
+                                v = 0xFFFF;
+                            }
+                            nt->vs_kos[ock] = v;
+                        }
+                    }
+                }
+                {
+                    u32* pt = &nt->play_time_by_fighter[gm_80164024(
+                        p->character_kind)];
+                    *pt = MIN(*pt + arg0->frame_count / 60, 0xFFFFFFFFU);
+                }
+                fn_80161C90(arg0, i, &nt->sd_count);
+            }
+        }
+    }
+}
 
 s32 gm_801623A4(MatchEnd* arg0)
 {
