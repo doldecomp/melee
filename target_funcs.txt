@@ -21,4 +21,4 @@ Funcs:
 - [x] grIceMt_801F7F70
 - [x] grIceMt_801FA0BC
 - [x] grIceMt_801F9ACC
-- [ ] grIceMt_801F686C
+- [x] grIceMt_801F686C

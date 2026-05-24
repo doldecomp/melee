@@ -58,11 +58,11 @@
     Vec3 unk24;
     Vec3 unk40;
 } grIm_803B8220;*/
-static Vec3 grIm_803B8220[] = { { 0.0, 0.0, 0.0 },
-                                { -8.0, 15.0, 0.0 },
-                                { 8.0, 15.0, 0.0 },
-                                { -24.0, 15.0, 0.0 },
-                                { 24.0, 15.0, 0.0 } };
+static const Vec3 grIm_803B8220[] = { { 0.0, 0.0, 0.0 },
+                                      { -8.0, 15.0, 0.0 },
+                                      { 8.0, 15.0, 0.0 },
+                                      { -24.0, 15.0, 0.0 },
+                                      { 24.0, 15.0, 0.0 } };
 
 HSD_GObj* grIm_804D69E8;
 HSD_GObj* grIm_804D69EC;
@@ -173,6 +173,7 @@ void grIceMt_801F686C(void)
     f32 y_pos4;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
+    PAD_STACK(0x10);
 
     grIm_804D69F4 = Ground_801C49F8();
     stage_info.unk8C.b4 = true;
