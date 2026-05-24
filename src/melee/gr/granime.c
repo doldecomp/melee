@@ -754,7 +754,114 @@ void grAnime_801C7BA0(HSD_GObj* gobj, int arg1, u32 arg2, f32 arg8)
     HSD_JObjReqAnimByFlags(jobj, var_r31, arg8);
 }
 
-/// #grAnime_801C7C1C
+void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
+                      int arg5, f32 farg0, f32 farg1)
+{
+    UnkArchiveStruct* archive;
+    HSD_AnimJoint** ajp;
+    HSD_MatAnimJoint** mjp;
+    HSD_ShapeAnimJoint** sjp;
+    HSD_AnimJoint* aj_t;
+    HSD_MatAnimJoint* mj_t;
+    HSD_ShapeAnimJoint* sj_t;
+    HSD_AnimJoint* aj;
+    HSD_MatAnimJoint* mj;
+    HSD_ShapeAnimJoint* sj;
+    HSD_JObj* child;
+    HSD_AnimJoint* caj;
+    HSD_MatAnimJoint* cmj;
+    HSD_ShapeAnimJoint* csj;
+    u8* eflags;
+    u32 var_r30 = 0;
+    s32 var_r29 = 0;
+
+    if (jobj == NULL) {
+        return;
+    }
+    archive = grDatFiles_801C6330(map_id);
+    if (archive == NULL) {
+        __assert("granime.c", 0x4DE, "archive");
+    }
+    if ((arg3 & 1) &&
+        (ajp = archive->unk4->unk8[map_id].unk4, ajp != NULL) &&
+        (aj_t = ajp[arg4], aj_t != NULL))
+    {
+        aj = &aj_t[arg2];
+        var_r30 |= 0x81;
+        var_r29 |= 0x220;
+    } else {
+        aj = NULL;
+    }
+    if ((arg3 & 2) &&
+        (mjp = archive->unk4->unk8[map_id].unk8, mjp != NULL) &&
+        (mj_t = mjp[arg4], mj_t != NULL))
+    {
+        mj = &mj_t[arg2];
+        var_r30 |= 0x416;
+        var_r29 |= 0x7484;
+    } else {
+        mj = NULL;
+    }
+    if ((arg3 & 4) &&
+        (sjp = archive->unk4->unk8[map_id].unkC, sjp != NULL) &&
+        (sj_t = sjp[arg4], sj_t != NULL))
+    {
+        sj = &sj_t[arg2];
+        var_r30 |= 8;
+        var_r29 |= 0x100;
+    } else {
+        sj = NULL;
+    }
+    if (arg5 != 0) {
+#pragma push
+#pragma dont_inline on
+        grAnime_801C6A54(jobj, aj, mj, sj);
+        if (!(jobj->flags & 0x1000)) {
+            child = jobj->child;
+            caj = aj != NULL ? aj->child : NULL;
+            cmj = mj != NULL ? mj->child : NULL;
+            csj = sj != NULL ? sj->child : NULL;
+            while (child != NULL) {
+                grAnime_801C6C0C(child, caj, cmj, csj);
+                child = child->next;
+                caj = caj != NULL ? caj->next : NULL;
+                cmj = cmj != NULL ? cmj->next : NULL;
+                csj = csj != NULL ? csj->next : NULL;
+            }
+        }
+        HSD_JObjReqAnimAllByFlags(jobj, var_r30, farg0);
+    } else {
+        if (aj != NULL) {
+            if (aj->aobjdesc != NULL) {
+                if (jobj->aobj != NULL) {
+                    HSD_AObjRemove(jobj->aobj);
+                }
+                jobj->aobj = HSD_AObjLoadDesc(aj->aobjdesc);
+                grAnime_801C69FC(jobj->aobj);
+            }
+            grAnime_801C6960(jobj->robj, aj->robj_anim);
+        }
+        if ((jobj->flags & 0x4020) ? false : true) {
+            HSD_ShapeAnimDObj* sdobj = sj != NULL ? sj->shapeanimdobj : NULL;
+            HSD_MatAnim* manim = mj != NULL ? mj->matanim : NULL;
+            grAnime_801C683C(jobj->u.dobj, manim, sdobj);
+        }
+        HSD_JObjReqAnimByFlags(jobj, var_r30, farg0);
+    }
+    grAnime_801C752C(jobj, arg5, var_r29, HSD_AObjSetRate, 1, farg1);
+    archive = grDatFiles_801C6330(map_id);
+    if (archive == NULL) {
+        __assert("granime.c", 0x148, "archive");
+    }
+    eflags = (u8*) archive->unk4->unk8[map_id].x28;
+    if (eflags != NULL) {
+        if (eflags[arg4] != 0) {
+            grAnime_801C752C(jobj, arg5, var_r29, HSD_AObjSetFlags, 3,
+                             0x20000000);
+        }
+    }
+}
+#pragma pop
 
 void grAnime_801C7FF8(Ground_GObj* gobj, int arg1, int arg2, int arg3,
                       float arg4, float arg5)

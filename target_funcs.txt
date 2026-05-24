@@ -7,4 +7,4 @@ Funcs:
 - [x] grAnime_801C752C
 - [x] grAnime_801C6C0C
 - [x] grAnime_801C7228
-- [ ] grAnime_801C7C1C
+- [x] grAnime_801C7C1C

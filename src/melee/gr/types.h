@@ -1781,7 +1781,9 @@ struct UnkStageDatInternal {
 
 struct UnkStageDat_x8_t {
     /*  +0 */ struct HSD_Joint* unk0;
-    /*  +4 */ u8 _4[0x10 - 0x4];
+    /*  +4 */ HSD_AnimJoint** unk4;
+    /*  +8 */ HSD_MatAnimJoint** unk8;
+    /*  +C */ HSD_ShapeAnimJoint** unkC;
     /* +10 */ HSD_CameraDescPerspective* x10;
     /* +14 */ UNK_T x14;
     /* +18 */ UNK_T x18;
