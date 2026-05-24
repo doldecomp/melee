@@ -1389,9 +1389,9 @@ struct grCastle_GroundVars12 {
 };
 
 struct grPura_GroundVars {
-    /*  +0 gp+C4:0 */ u16 xC4;
+    /*  +0 gp+C4:0 */ s16 xC4;
     /*  +0 gp+C6:0 */ s16 xC6;
-    /*  +0 gp+C8:0 */ HSD_JObj* xC8;
+    /*  +0 gp+C8:0 */ s16 xC8;
 };
 
 struct grPura_GroundVars2 {
