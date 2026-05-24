@@ -2326,7 +2326,55 @@ u8 fn_80165548(MatchEnd* me, s8 arg1, u8 team)
 
 /// #fn_801656A8
 
-/// #fn_8016588C
+s32 fn_8016588C(lbl_8046B6A0_24C_t* arg0, s32 arg1)
+{
+    s32 v;
+    s32 lim;
+
+    if (gm_801A4310() == 0x1F) {
+        if (*(u32*) ((u8*) arg0 + arg1 * 0xA8 + 0x80) != 0) {
+            v = (u8) (*(u32*) ((u8*) arg0 + arg1 * 0xA8 + 0x80) / 60 +
+                      0xFF000001);
+        } else {
+            v = ((u8*) arg0 + arg1 * 0xA8)[0x61];
+        }
+    } else {
+        switch (arg0->x5) {
+        case 2:
+            v = ((u8*) arg0 + arg1 * 0xA8)[0x74];
+            break;
+        case 1:
+            if ((s8) ((u8*) arg0 + arg1 * 0xA8)[0x60] != 0) {
+                v = (u8) (s8) ((u8*) arg0 + arg1 * 0xA8)[0x60];
+            } else {
+                v = (u8) (*(u32*) ((u8*) arg0 + arg1 * 0xA8 + 0x80) / 60 +
+                          0xFF000001);
+            }
+            break;
+        case 3:
+            pl_80039450(arg1);
+            v = (u8) fn_8016FFD4(arg0, 2, (u8) arg1);
+            break;
+        default: {
+            u16 a = arg0->x58[arg1].xA;
+            v = (u8) ((arg0->x58[arg1].x20 - (arg0->x58[arg1].x24 - a)) +
+                      a * (s8) arg0->xC);
+            break;
+        }
+        }
+    }
+    lim = (1 << 24) - 1;
+    if (lim < 0) {
+        lim = -lim;
+    }
+    if (v > lim) {
+        return lim;
+    }
+    if (v < -lim) {
+        return -lim;
+    }
+    return v;
+}
 
 /// #fn_80165AC0
 
