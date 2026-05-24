@@ -862,7 +862,7 @@ void gm_801BC670(HSD_GObj* arg0)
 {
     struct EventData* temp_r31 = &gmMainLib_804D3EE0->unk_530;
     struct gm_804D6900_x4_t* temp_r30 = gm_804D6900[0]->x4;
-    PAD_STACK(0x18);
+    PAD_STACK(0x10);
 
     temp_r31->xB_2 = true;
     temp_r31->x10 = 0x78 - temp_r30->x4;
