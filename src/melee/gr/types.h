@@ -1399,6 +1399,18 @@ struct grPura_GroundVars2 {
     /*  +0 gp+C8 */ HSD_JObj* xC8;
 };
 
+struct grPura_Sub {
+    /* 0x00 */ u8 pad_0[8];
+    /* 0x08 */ s32 x8;
+    /* 0x0C */ u8 pad_C[4];
+    /* 0x10 */ Vec3 x10;
+};
+
+struct grPura_GroundVars3 {
+    /* +0 gp+C4 */ HSD_JObj* xC4[25];
+    /* +64 gp+128 */ struct grPura_Sub* x128[25];
+};
+
 struct Randall {
     /* +0 gp+C4 */ s16 timer;
     /* +4 gp+C8 */ HSD_JObj* jobj;
@@ -1665,6 +1677,7 @@ struct Ground {
             struct grOnett_Car_GroundVars onettcar;
             struct grPura_GroundVars pura;
             struct grPura_GroundVars2 pura2;
+            struct grPura_GroundVars3 pura3;
             struct grRCruise_GroundVars rcruise;
             struct grRCruise_GroundVars2 rcruise2;
             struct grShrineroute_GroundVars shrineroute;

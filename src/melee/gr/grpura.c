@@ -346,11 +346,24 @@ void grPura_802125F0(HSD_GObj* arg0)
 
 /// #grPura_80212CD4
 
-/// #grPura_80212EF4
 void grPura_80212EF4(HSD_GObj* arg0)
 {
+    s32 i;
     Ground* gp = GET_GROUND(arg0);
-    // HSD_JObjGetFlags();
+    Ground* gp2 = gp;
+    Vec3 spC;
+
+    for (i = 0; i < 25; i++) {
+        if (gp->gv.pura3.xC4[i] != NULL && gp->gv.pura3.x128[i] != NULL) {
+            lb_8000B1CC(gp2->gv.pura3.xC4[i], NULL, &spC);
+            gp->gv.pura3.x128[i]->x10 = spC;
+            if (HSD_JObjGetFlags(gp2->gv.pura3.xC4[i]) & 0x10) {
+                gp->gv.pura3.x128[i]->x8 = 1;
+            } else {
+                gp->gv.pura3.x128[i]->x8 = 0;
+            }
+        }
+    }
 }
 
 void grPura_80212FC0(HSD_GObj* arg0)
