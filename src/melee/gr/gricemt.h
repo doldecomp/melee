@@ -149,7 +149,7 @@ extern f32 grIm_804DB570;
 /* 1FA364 */ bool grIceMt_801FA364(void* state, float* out, HSD_GObjEvent cb,
                                    Ground_GObj* gobj);
 /* 1FA4CC */ int fn_801FA4CC(int num);
-/* 1FA500 */ int grIceMt_801FA500(HSD_GObj*);
+/* 1FA500 */ int grIceMt_801FA500(HSD_GObj*, HSD_JObj*);
 /* 1FA6D8 */ void grIceMt_801FA6D8(HSD_GObj*);
 /* 1FA728 */ void grIceMt_801FA728(Vec3*);
 /* 1FA7F0 */ void grIceMt_801FA7F0(Ground*, s32, CollData*, s32,

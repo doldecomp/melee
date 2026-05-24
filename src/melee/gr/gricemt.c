@@ -865,9 +865,10 @@ void grIceMt_801F83EC(Ground_GObj* arg0)
     sp14.x0 = grIm_804DB598;
     sp14.x4 = grIm_804DB59C;
     grIceMt_801F8CDC(arg0, (s16*) &sp14, 4, &gp->gv.icemt.xF8[0]);
-    r = grIceMt_801FA500(arg0);
-    grIceMt_801F91EC(arg0, (s16*) ((u8*) gp + 0x108), grIceMt_801FA500(arg0), r,
-                     0x75, 0x109, 0x27E, (mpLib_Callback) fn_801F9558);
+    r = grIceMt_801FA500(arg0, jobj2);
+    grIceMt_801F91EC(arg0, (s16*) ((u8*) gp + 0x108),
+                     grIceMt_801FA500(arg0, jobj), r, 0x75, 0x109, 0x27E,
+                     (mpLib_Callback) fn_801F9558);
 }
 
 bool grIceMt_801F85BC(Ground_GObj* param1)
@@ -1473,24 +1474,42 @@ int fn_801FA4CC(int num)
     return num;
 }
 
-int grIceMt_801FA500(HSD_GObj* param1)
+int grIceMt_801FA500(HSD_GObj* arg0, HSD_JObj* arg1)
 {
-    int iVar1 = NULL;
-    int iVar2;
-    int iVar3;
-    iVar3 = 0;
-    if (param1->hsd_obj == NULL) {
-        __assert(grIm_803E46F8, 2993, "jobj");
-        iVar1 = 0;
-        //} else {
-        //	ivar1 = param1->hsd_obj
+    s32 count = 0;
+    HSD_JObj* node;
+
+    node = arg0->hsd_obj;
+    if (node == NULL) {
+        __assert(grIm_803E46F8, 0xBB1, "jobj");
     }
-    do {
-        if (iVar1 == 0) {
-            return iVar3;
+    node = HSD_JObjGetChild(node);
+    if (node == NULL) {
+        __assert(grIm_803E46F8, 0xBB2, "jobj");
+    }
+
+    while (node != NULL) {
+        if (node == arg1) {
+            break;
         }
-        iVar3++;
-    } while (true);
+        if (!(node->flags & 0x1000) && HSD_JObjGetChild(node) != NULL) {
+            node = HSD_JObjGetChild(node);
+        } else if (HSD_JObjGetNext(node) != NULL) {
+            node = HSD_JObjGetNext(node);
+        } else {
+            while (HSD_JObjGetParent(node) != NULL &&
+                   HSD_JObjGetNext(HSD_JObjGetParent(node)) == NULL)
+            {
+                node = HSD_JObjGetParent(node);
+            }
+            node = HSD_JObjGetNext(HSD_JObjGetParent(node));
+        }
+        count++;
+    }
+    if (node != NULL) {
+        return count;
+    }
+    return -1;
 }
 
 /// #grIceMt_801FA6D8
