@@ -4,7 +4,7 @@ Funcs:
 - [x] grIceMt_801FA7F0
 - [x] grIceMt_801F796C
 - [x] grIceMt_801F71E8
-- [ ] fn_801F9338
+- [x] fn_801F9338
 - [ ] fn_801F9448
 - [ ] fn_801F9558
 - [ ] grIceMt_801F7D94
