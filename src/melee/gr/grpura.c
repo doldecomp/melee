@@ -87,7 +87,7 @@ struct HSD_ImageDesc grPu_803E7620 = { &grPu_803E6E20, 32, 32, 4, 0, 0, 0 };
 void grPura_80211CFC(bool num) {}
 
 extern f32 grPu_804DBA58;
-const f32 grPu_804DBA5C = 3600.0;
+extern f32 grPu_804DBA5C;
 const f32 grPu_804DBA70 = 0.0;
 const f32 grPu_804DBA74 = 2.0;
 const f32 grPu_804DBA78 = 30.0;
@@ -231,7 +231,36 @@ bool grPura_802120D8(Ground_GObj* arg0)
     return false;
 }
 
-/// #grPura_802120E0
+void grPura_802120E0(Ground_GObj* arg0)
+{
+    GXColor spilC;
+    GXColor sp18;
+    Ground* gp = arg0->user_data;
+    f32 t;
+    s16 cur;
+    unsigned int uVar1;
+    UNUSED u8 _pad4[4];
+    PAD_STACK(8);
+
+    if ((s16) gp->gv.pura.xC8 < 0xE10) {
+        spilC = grPu_803E6AA0[gp->gv.pura.xC6];
+        sp18 = grPu_803E6AA0[gp->gv.pura.xC4];
+        cur = gp->gv.pura.xC8;
+        gp->gv.pura.xC8 = cur + 1;
+        t = (f32) cur / grPu_804DBA5C;
+        sp18.r = (s8) (t * (f32) ((u8) spilC.r - (u8) sp18.r) + (f32) (u8) sp18.r);
+        sp18.g = (s8) (t * (f32) ((u8) spilC.g - (u8) sp18.g) + (f32) (u8) sp18.g);
+        sp18.b = (s8) (t * (f32) ((u8) spilC.b - (u8) sp18.b) + (f32) (u8) sp18.b);
+        Ground_801C205C(&sp18);
+        Camera_SetBackgroundColor(sp18.r, sp18.g, sp18.b);
+        return;
+    }
+    gp->gv.pura.xC4 = gp->gv.pura.xC6;
+    do {
+        uVar1 = HSD_Randi(4);
+    } while ((s16) gp->gv.pura.xC4 == (gp->gv.pura.xC6 = uVar1));
+    gp->gv.pura.xC8 = 0;
+}
 
 void grPura_8021228C(Ground_GObj* arg0) {}
 
