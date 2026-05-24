@@ -4,6 +4,6 @@ Funcs:
 - [x] grBigBlueRoute_8020BF38
 - [x] grBigBlueRoute_8020DAB4
 - [x] grBigBlueRoute_8020BC68
-- [ ] grBigBlueRoute_8020C530
+- [x] grBigBlueRoute_8020C530
 - [ ] grBigBlueRoute_8020C85C
 - [ ] grBigBlueRoute_8020CD20

@@ -504,7 +504,6 @@ s32 grBigBlueRoute_8020C530(Ground_GObj* arg0)
 {
     Ground* gp = arg0->user_data;
     s32 count;
-    s32 idx;
     s32 i;
 
     count = 0;
@@ -524,10 +523,10 @@ s32 grBigBlueRoute_8020C530(Ground_GObj* arg0)
         count = 0;
     }
 
-    for (idx = 0; idx < 30; idx++) {
-        if (!(*((u8*) gp->gv.bigblueroute.xC8 + idx * 0x2C) >> 7 & 1)) {
+    for (i = 0; i < 30; i++) {
+        if (!(*((u8*) gp->gv.bigblueroute.xC8 + i * 0x2C) >> 7 & 1)) {
             if (--count < 0) {
-                return idx;
+                return i;
             }
         }
     }
