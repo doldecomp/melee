@@ -4147,4 +4147,35 @@ int gm_8016A9E8(u8 arg0, s8 arg1)
     return found;
 }
 
-/// #gm_8016AC44
+s32 gm_8016AC44(s8 ckind, s8 costume_id)
+{
+    s32 idx;
+    s32 i;
+    s32 found;
+    s8* arr = (s8*) &lbl_8046B668;
+
+    found = 0;
+    if (gm_8016AE50()->x58 != NULL) {
+        found = 1;
+    }
+    if (found == 1) {
+        idx = -1;
+        for (i = 0; i < 27; i++) {
+            if (arr[i + 0x1C] == -2) {
+                idx = i;
+                break;
+            }
+        }
+        if (idx != -1) {
+            s8* p = &arr[idx];
+            for (i = idx; i >= 0; i--) {
+                if (p[0x1C] == costume_id && ckind == p[0]) {
+                    p[0x1C] = -1;
+                    return 1;
+                }
+                p -= 1;
+            }
+        }
+    }
+    return 0;
+}
