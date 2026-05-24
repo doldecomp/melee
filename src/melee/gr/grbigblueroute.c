@@ -532,15 +532,15 @@ s32 grBigBlueRoute_8020C530(Ground_GObj* arg0)
     __assert(__FILE__, 0x2E5, "0");
 }
 
-/// @todo Currently 91.71% match - register allocation (gp in r30 vs r31)
-/// and cror+beq vs bge for float >= comparison.
+/// @todo Currently 92.06% match - register allocation (gp in r30 vs r31)
+/// and addressing-mode choices for RouteEntry stores.
 void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     s32 route_idx;
     PAD_STACK(8);
 
-    if ((f32) gp->gv.bigblueroute.x108 >= 1.0f + grBb_Route_804D6A68->x40) {
+    if (!((f32) gp->gv.bigblueroute.x108 < 1.0f + grBb_Route_804D6A68->x40)) {
         return;
     }
 
