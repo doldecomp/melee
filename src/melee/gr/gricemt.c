@@ -69,6 +69,8 @@ HSD_GObj* grIm_804D69EC;
 HSD_GObj* grIm_804D69F0;
 IceMountainParams* grIm_804D69F4;
 
+extern char grIm_803E46F8[];
+
 /// @brief Ice Mountain row data - 12 bytes each.
 typedef struct IceMtRowData {
     s32 id; // Row identifier, compared with xAC[i] values
@@ -120,15 +122,18 @@ StageData grIm_803E4800 = {
     3,
 };
 
-const float grIm_804DB574 = 0.0F;
+extern f32 grIm_804DB574;
+extern f32 grIm_804DB578;
 typedef struct GrIm588 {
     s16 a;
     s16 b;
 } GrIm588;
 static const GrIm588 grIm_804DB588 = { 1, 2 };
-const float grIm_804DB5B0 = -1.0F;
-const float grIm_804DB5B4 = 1.0F;
-const float grIm_804DB5B8 = 6.0F;
+extern f32 grIm_804DB5A8;
+extern f32 grIm_804DB5AC;
+extern f32 grIm_804DB5B0;
+extern f32 grIm_804DB5B4;
+extern f32 grIm_804DB5B8;
 
 void grIceMt_801F6868(bool id) {}
 
@@ -231,11 +236,11 @@ void grIceMt_801F686C(void)
         // Set up first topi (grIm_804D69E8)
         gobj = grIceMt_801F71E8(grIm_803E4068[xAC[2]].id);
         if (gobj == NULL) {
-            __assert("gricemt.c", 0x27C, "bg_gobj");
+            __assert(grIm_803E46F8, 0x27C, "bg_gobj");
         }
         jobj = gobj->hsd_obj;
         if (jobj == NULL) {
-            __assert("gricemt.c", 0x27D, "jobj");
+            __assert(grIm_803E46F8, 0x27D, "jobj");
         }
         HSD_JObjSetTranslateY(jobj, y_pos2);
         grIm_804D69E8 = gobj;
@@ -243,11 +248,11 @@ void grIceMt_801F686C(void)
         // Set up second topi (grIm_804D69EC)
         gobj = grIceMt_801F71E8(grIm_803E4068[xAC[3]].id);
         if (gobj == NULL) {
-            __assert("gricemt.c", 0x281, "bg_gobj");
+            __assert(grIm_803E46F8, 0x281, "bg_gobj");
         }
         jobj = gobj->hsd_obj;
         if (jobj == NULL) {
-            __assert("gricemt.c", 0x282, "jobj");
+            __assert(grIm_803E46F8, 0x282, "jobj");
         }
         HSD_JObjSetTranslateY(jobj, y_pos3);
         grIm_804D69EC = gobj;
@@ -255,11 +260,11 @@ void grIceMt_801F686C(void)
         // Set up third topi (grIm_804D69F0)
         gobj = grIceMt_801F71E8(grIm_803E4068[xAC[4]].id);
         if (gobj == NULL) {
-            __assert("gricemt.c", 0x286, "bg_gobj");
+            __assert(grIm_803E46F8, 0x286, "bg_gobj");
         }
         jobj = gobj->hsd_obj;
         if (jobj == NULL) {
-            __assert("gricemt.c", 0x287, "jobj");
+            __assert(grIm_803E46F8, 0x287, "jobj");
         }
         HSD_JObjSetTranslateY(jobj, y_pos4);
         grIm_804D69F0 = gobj;
@@ -525,14 +530,14 @@ bool grIceMt_801F796C(Ground_GObj* arg0)
     if (gp->gv.icemt.xC4 != -1) {
         mgobj = Ground_801C2BA4(gp->gv.icemt.xC4);
         if (mgobj == NULL) {
-            __assert("gricemt.c", 0x475, "mgobj");
+            __assert(grIm_803E46F8, 0x475, "mgobj");
         }
         Ground_801C4A08(mgobj);
     }
     if (gp->gv.icemt.xC6 != -1) {
         mgobj = Ground_801C2BA4(gp->gv.icemt.xC6);
         if (mgobj == NULL) {
-            __assert("gricemt.c", 0x47A, "mgobj");
+            __assert(grIm_803E46F8, 0x47A, "mgobj");
         }
         Ground_801C4A08(mgobj);
     }
@@ -596,11 +601,11 @@ void grIceMt_801F7A2C(Ground_GObj* arg0)
     } else {
         mgobj = Ground_801C2BA4(gp->gv.icemt.xC6);
         if (mgobj == NULL) {
-            __assert("gricemt.c", 0x4C3, "mgobj");
+            __assert(grIm_803E46F8, 0x4C3, "mgobj");
         }
         jobj = mgobj->hsd_obj;
         if (jobj == NULL) {
-            __assert("gricemt.c", 0x4C5, "jobj");
+            __assert(grIm_803E46F8, 0x4C5, "jobj");
         }
         dist = HSD_JObjGetTranslationY(jobj) -
                (f32) ((s16*) grIm_804D69F4)[0xA8 / 2];
@@ -988,14 +993,23 @@ bool grIceMt_801F8B08(Ground_GObj* arg0)
 
 void grIceMt_801F8B10(Ground_GObj* arg0)
 {
+    Ground* gp = GET_GROUND(arg0);
     HSD_JObj* jobj;
-    double dVar3;
-    double dVar4;
-    dVar4 = 0.3;
+    f32 mul;
+    f32 cur;
+    mul = grIm_804DB5A8 * gp->gv.icemt2.xC4;
     jobj = Ground_801C3FA4(arg0, 8);
-    HSD_JObjGetTranslationY(jobj);
-    dVar4 = Ground_801C0498();
-    HSD_JObjSetTranslateY(jobj, 4);
+    if (jobj == NULL) {
+        __assert(grIm_803E46F8, 0x78F, "jobj");
+    }
+    cur = HSD_JObjGetTranslationY(jobj);
+    cur = cur - mul;
+    if (cur > grIm_804DB578 * (grIm_804DB5AC * Ground_801C0498())) {
+        cur = -(grIm_804DB5AC * Ground_801C0498() - cur);
+    } else if (cur < grIm_804DB578 * -(grIm_804DB5AC * Ground_801C0498())) {
+        cur += grIm_804DB5AC * Ground_801C0498();
+    }
+    HSD_JObjSetTranslateY(jobj, cur);
 }
 
 void grIceMt_801F8C60(Ground_GObj* arg0) {}
@@ -1035,7 +1049,7 @@ void grIceMt_801F8CDC(Ground_GObj* gobj, s16* joint_indices, int count,
     jobj_desc = archive->unk4->unk8[7].unk0;
 
     if (count > 20) {
-        __assert("gricemt.c", 0x7D4, "count <= 20");
+        __assert(grIm_803E46F8, 0x7D4, "count <= 20");
     }
 
     for (i = 0; i < count; i++) {
@@ -1045,12 +1059,12 @@ void grIceMt_801F8CDC(Ground_GObj* gobj, s16* joint_indices, int count,
     for (i = 0; i < count; i++) {
         parent_jobj = parent_jobjs[i];
         if (parent_jobj == NULL) {
-            __assert("gricemt.c", 0x7E3, "parent_jobj");
+            __assert(grIm_803E46F8, 0x7E3, "parent_jobj");
         }
 
         child_jobj = HSD_JObjLoadJoint(jobj_desc);
         if (child_jobj == NULL) {
-            __assert("gricemt.c", 0x7E6, "child_jobj");
+            __assert(grIm_803E46F8, 0x7E6, "child_jobj");
         }
 
         HSD_JObjAddChild(parent_jobj, child_jobj);
@@ -1249,11 +1263,11 @@ void grIceMt_801F9668(float arg8)
 
     gobj = Ground_801C2BA4(8);
     if (gobj == NULL) {
-        __assert("gricemt.c", 0xA37, "bg_gobj");
+        __assert(grIm_803E46F8, 0xA37, "bg_gobj");
     }
     gp = GET_GROUND(gobj);
     if (gp == NULL) {
-        __assert("gricemt.c", 0xA38, "bg_gp");
+        __assert(grIm_803E46F8, 0xA38, "bg_gp");
     }
 
     gp->gv.icemt2.xC4 = arg8;
@@ -1268,18 +1282,18 @@ float grIceMt_801F96E0(Ground_GObj* gobj, float y)
 
     jobj = Ground_801C2BA4(4);
     if (jobj == NULL) {
-        __assert("gricemt.c", 2629, "mgobj");
+        __assert(grIm_803E46F8, 2629, "mgobj");
     }
     if (jobj->hsd_obj == NULL) {
-        __assert("gricemt.c", 2630, "jobj");
+        __assert(grIm_803E46F8, 2630, "jobj");
     }
     HSD_JObjAddTranslationY(jobj->hsd_obj, y);
     jobj = Ground_801C2BA4(7);
     if (jobj == NULL) {
-        __assert("gricemt.c", 2639, "mgobj");
+        __assert(grIm_803E46F8, 2639, "mgobj");
     }
     if (jobj->hsd_obj == NULL) {
-        __assert("gricemt.c", 2630, "jobj");
+        __assert(grIm_803E46F8, 2630, "jobj");
     }
     HSD_JObjAddTranslationY(jobj->hsd_obj, y);
     // HSD_JObjGetTranslationY(jobj);
@@ -1325,7 +1339,7 @@ void grIceMt_801F9ACC(Ground_GObj* gobj, float y, GrIceMtSegmentLookup ev,
 
     jobj = Ground_801C2BA4(4);
     if (jobj == NULL) {
-        __assert("gricemt.c", 2629, "mgobj");
+        __assert(grIm_803E46F8, 2629, "mgobj");
     }
     HSD_JObjGetTranslationY(jobj->hsd_obj);
     dVar4 = Ground_801C0498();
@@ -1413,7 +1427,7 @@ int grIceMt_801FA500(HSD_GObj* param1)
     int iVar3;
     iVar3 = 0;
     if (param1->hsd_obj == NULL) {
-        __assert("gricemt.c", 2993, "jobj");
+        __assert(grIm_803E46F8, 2993, "jobj");
         iVar1 = 0;
         //} else {
         //	ivar1 = param1->hsd_obj

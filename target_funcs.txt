@@ -8,7 +8,7 @@ Funcs:
 - [x] fn_801F9448
 - [x] fn_801F9558
 - [x] grIceMt_801F7D94
-- [ ] grIceMt_801F8B10
+- [x] grIceMt_801F8B10
 - [ ] grIceMt_801F8208
 - [ ] grIceMt_801F8850
 - [ ] grIceMt_801F865C
