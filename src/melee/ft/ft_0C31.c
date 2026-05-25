@@ -662,9 +662,8 @@ void fn_800C7890(Fighter_GObj* gobj)
 
 void ftCo_800C78B0(HSD_GObj* gobj, HSD_GObj* owner)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
     ftCommonData* cd;
-    f32 temp_f31;
+    Fighter* fp = GET_FIGHTER(gobj);
 
     ftCommon_8007DB58(gobj);
     ftCo_8009750C(gobj);
@@ -680,13 +679,15 @@ void ftCo_800C78B0(HSD_GObj* gobj, HSD_GObj* owner)
     fp->mv.co.capturelikelike.x4 = 0;
     ftCommon_8007E2FC(gobj);
     cd = p_ftCommonData;
-    temp_f31 =
-        cd->x74C * (cd->x750 - (f32) (Player_80033BB8(fp->player_id) + 1));
-    ftCommon_InitGrab(
-        fp, 0,
-        fp->dmg.x1830_percent * cd->x754 +
-            (cd->x744 * (cd->x748 - (f32) Player_GetHandicap(fp->player_id)) +
-             cd->x740 + temp_f31));
+
+    {
+        f32 tmp1 =
+            cd->x74C * (cd->x750 - (f32) (Player_80033BB8(fp->player_id) + 1));
+        f32 tmp2 = (cd->x744 * (cd->x748 - Player_GetHandicap(fp->player_id)) +
+                    cd->x740);
+        tmp2 += tmp1;
+        ftCommon_InitGrab(fp, 0, fp->dmg.x1830_percent * cd->x754 + tmp2);
+    }
     fp->x1988 = 2;
     fp->invisible = true;
     ftCommon_8007E2F4(fp, 0x1FF);
