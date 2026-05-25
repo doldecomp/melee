@@ -68,14 +68,20 @@ struct un_803F9D48 {
     unsigned char xA;
     unsigned char xB;
     int xC;
-    char x10[0x28 - 0x10];
+    HSD_JObj* x10;
+    HSD_GObj* x14;
+    HSD_GObj* x18;
+    HSD_GObj* x1C;
+    HSD_Text* x20;
+    HSD_Text* x24;
     void* x28;
     int x2C;
     int x30;
     int x34;
     int x38;
 } un_803F9D48 = {
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, { 0 }, 0, 0, 0x43, 0x44, 0x45,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0x43, 0x44, 0x45,
 };
 
 /// .sbss
@@ -128,19 +134,18 @@ void un_802FE6A8(void)
     HSD_GObj* gobj_light;
     HSD_GObj* gobj_ui;
     HSD_JObj* jobj_ui;
-    GXColor color = { 0x5A, 0x5A, 0x5A, 0xFF };
-    HSD_Text* text;
-    HSD_Text* text2;
-    PAD_STACK(24);
+    PAD_STACK(16);
     gobj_camera = GObj_Create(HSD_GOBJ_CLASS_CAMERA, 20, 0);
     HSD_GObjObject_80390A70(gobj_camera, HSD_GObj_804D784B,
                             HSD_CObjLoadDesc(un_804D6D9C->cameras[0].desc));
     GObj_SetupGXLinkMax(gobj_camera, HSD_GObj_803910D8, 8);
     gobj_camera->gxlink_prios = 0xC00;
+    un_803F9D48.x18 = gobj_camera;
     gobj_light = GObj_Create(HSD_GOBJ_CLASS_LIGHT, 3, 0);
     HSD_GObjObject_80390A70(gobj_light, HSD_GObj_804D784A,
                             lb_80011AC4(un_804D6D9C->lights));
     GObj_SetupGXLink(gobj_light, HSD_GObj_LObjCallback, 10, 0);
+    un_803F9D48.x1C = gobj_light;
     gobj_ui = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
     jobj_ui = HSD_JObjLoadJoint(un_804D6D9C->models[0]->joint);
     HSD_GObjObject_80390A70(gobj_ui, HSD_GObj_804D7849, jobj_ui);
@@ -149,15 +154,20 @@ void un_802FE6A8(void)
     gm_8016895C(jobj_ui, un_804D6D9C->models[0], 0);
     HSD_JObjReqAnimAll(jobj_ui, 0.0);
     HSD_JObjAnimAll(jobj_ui);
-    lb_80011E24(jobj_ui, 0, 2, -1);
-    HSD_SisLib_803A611C(2, 0, 9, 20, 0, 14, 0, 18);
-    text = HSD_SisLib_803A5ACC(2, 0, 105.0, 202.0, 0.0, 435.0, 75.0);
-    text->default_fitting = 1;
-    text->default_alignment = 1;
-    text2 = HSD_SisLib_803A6754(2, 0);
-    text2->default_alignment = 1;
-    text2->default_kerning = 1;
-    text2->text_color = color;
+    lb_80011E24(jobj_ui, &un_803F9D48.x10, 2, -1);
+    un_803F9D48.x14 = gobj_ui;
+    {
+        GXColor color = { 0x5A, 0x5A, 0x5A, 0xFF };
+        HSD_SisLib_803A611C(2, 0, 9, 20, 0, 14, 0, 18);
+        un_803F9D48.x20 =
+            HSD_SisLib_803A5ACC(2, 0, 105.0, 202.0, 0.0, 435.0, 75.0);
+        un_803F9D48.x20->default_fitting = 1;
+        un_803F9D48.x20->default_alignment = 1;
+        un_803F9D48.x24 = HSD_SisLib_803A6754(2, 0);
+        un_803F9D48.x24->default_alignment = 1;
+        un_803F9D48.x24->default_kerning = 1;
+        un_803F9D48.x24->text_color = color;
+    }
 }
 
 void un_802FE8CC(void)
