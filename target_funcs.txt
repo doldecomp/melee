@@ -10,7 +10,7 @@ Funcs:
 - [x] mnDiagram_80241310
 - [x] mnDiagram_CursorProc
 - [x] mnDiagram_802427B4
-- [ ] mnDiagram_80243434
+- [x] mnDiagram_80243434
 - [ ] mnDiagram_80241E78
 - [ ] mnDiagram_80242C0C
 - [ ] mnDiagram_8024227C

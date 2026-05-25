@@ -90,7 +90,9 @@ static Point3d mnDiagram_803EE728[3] = {
 /// data the popup/cursor procs read at fixed offsets.
 typedef struct mnDiagram_AnimTable {
     /* 0x00 */ Point3d points[3];
-    /* 0x24 */ u8 pad_24[0x34];
+    /* 0x24 */ u8 pad_24[0x1C];
+    /* 0x40 */ AnimLoopSettings x40;
+    /* 0x4C */ u8 pad_4C[0xC];
     /* 0x58 */ AnimLoopSettings x58;
     /* 0x64 */ AnimLoopSettings x64;
     /* 0x70 */ char x70[0x18];
@@ -2180,6 +2182,7 @@ void mnDiagram_80243434(u8 arg0)
     Diagram* data;
     void** joint_data;
     HSD_GObjProc* proc;
+    mnDiagram_AnimTable* tbl = (mnDiagram_AnimTable*) &mnDiagram_803EE728;
     int i;
     int count;
     u16 indices;
@@ -2197,20 +2200,24 @@ void mnDiagram_80243434(u8 arg0)
     HSD_JObjReqAnimAll(jobj, 0.0f);
 
     data = HSD_MemAlloc(sizeof(Diagram));
+    if (data == NULL) {
+        OSReport(tbl->x70);
+        __assert(tbl->x88, 0x90E, tbl->x94);
+    }
     data->saved_menu = mn_804A04F0.cur_menu;
     data->saved_selection = mn_804A04F0.hovered_selection;
     data->anim_state = arg0;
     data->fighter_cursor_pos = 0;
     data->name_cursor_pos = 0;
     data->popup_gobj = NULL;
-    data->col_header_text = NULL;
     data->row_header_text = NULL;
+    data->col_header_text = NULL;
 
     if (GetNameCount() != 0) {
         data->is_name_mode = gmMainLib_8015CC34()->xD;
     } else {
         gmMainLib_8015CC34()->xD = 0;
-        data->is_name_mode = 0;
+        data->is_name_mode = gmMainLib_8015CC34()->xD;
     }
 
     GObj_InitUserData(gobj, 0, HSD_Free, data);
@@ -2223,13 +2230,13 @@ void mnDiagram_80243434(u8 arg0)
         HSD_GObj_SetupProc(gobj, (void (*)(HSD_GObj*)) mnDiagram_OnFrame, 0);
 
     if (arg0 == 0) {
-        HSD_JObjReqAnimAll(data->jobjs[3], 9.0f);
+        HSD_JObjReqAnimAll(data->jobjs[3], tbl->x40.end_frame);
         HSD_JObjAnimAll(data->jobjs[3]);
 
         cursor_gobj = GObj_Create(6, 7, 0x80);
         HSD_GObjObject_80390A70(
             cursor_gobj, HSD_GObj_804D7849,
-            HSD_JObjLoadJoint((HSD_Joint*) mnDiagram_804A0814));
+            HSD_JObjLoadJoint(mnDiagram_804A0814[0]));
         GObj_SetupGXLink(cursor_gobj, HSD_GObj_JObjCallback, 4, 0x80);
         HSD_GObj_SetupProc(cursor_gobj, mnDiagram_CursorProc, 0);
 
@@ -2260,14 +2267,16 @@ void mnDiagram_80243434(u8 arg0)
             col_idx = (u8) indices;
             row_idx = indices >> 8;
             mnDiagram_80241668(gobj);
-            mnDiagram_8024227C(gobj, col_idx, row_idx, 1);
+            mnDiagram_8024227C(gobj, col_idx, row_idx,
+                               (u8) (data->is_name_mode == 1));
             mnDiagram_802427B4(gobj, col_idx, row_idx);
         } else {
             indices = data->fighter_cursor_pos;
             col_idx = (u8) indices;
             row_idx = indices >> 8;
             mnDiagram_80241668(gobj);
-            mnDiagram_8024227C(gobj, col_idx, row_idx, 0);
+            mnDiagram_8024227C(gobj, col_idx, row_idx,
+                               (u8) (data->is_name_mode == 1));
             mnDiagram_80242C0C(gobj, col_idx, row_idx);
         }
     }
