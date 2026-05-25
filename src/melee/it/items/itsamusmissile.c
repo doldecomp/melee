@@ -110,6 +110,29 @@ Item_GObj* it_802B62D0(Item_GObj* gobj, Vec3* pos, int arg2, f32 facing_dir)
     return NULL;
 }
 
+static inline void itSamusMissile_ClampTurn(Item* ip,
+                                            itSamusMissileAttributes* sa)
+{
+    f32 turn = ip->xDD4_itemVar.samusmissile.x8;
+    f32 abs_turn;
+    f32 max_turn;
+
+    if (turn < 0.0f) {
+        abs_turn = -turn;
+    } else {
+        abs_turn = turn;
+    }
+
+    max_turn = sa->x1C;
+    if (abs_turn > max_turn) {
+        if (turn > 0.0f) {
+            ip->xDD4_itemVar.samusmissile.x8 = max_turn;
+        } else {
+            ip->xDD4_itemVar.samusmissile.x8 = -max_turn;
+        }
+    }
+}
+
 void it_802B64FC(Item_GObj* gobj)
 {
     Vec3 vec3;
@@ -119,8 +142,6 @@ void it_802B64FC(Item_GObj* gobj)
     HSD_GObj* temp_r3;
     HSD_GObj* temp_ret;
     Item* ip;
-    f32 temp_f2;
-    f32 var_f0;
     f32 var_f1;
     itSamusMissileAttributes* sa;
 
@@ -169,27 +190,7 @@ block_6:
     }
     ip->xDD4_itemVar.samusmissile.x8 += sa->x18;
 block_11:
-    var_f1 = ip->xDD4_itemVar.samusmissile.x8;
-    if (!(var_f1 < 0.0f)) {
-        goto block_13;
-    }
-    var_f0 = -var_f1;
-    goto block_14;
-block_13:
-    var_f0 = var_f1;
-block_14:
-    temp_f2 = M2C_FIELD(sa, f32*, 0x1C);
-    if (!(var_f0 > temp_f2)) {
-        goto block_18;
-    }
-    if (!(var_f1 > 0.0f)) {
-        goto block_17;
-    }
-    ip->xDD4_itemVar.samusmissile.x8 = temp_f2;
-    return;
-    // return M2C_BITWISE(Item_GObj*, var_f1);
-block_17:
-    ip->xDD4_itemVar.samusmissile.x8 = -temp_f2;
+    itSamusMissile_ClampTurn(ip, sa);
 block_18:
     return;
     // return M2C_BITWISE(Item_GObj*, var_f1);
@@ -240,37 +241,44 @@ s32 itSamusmissile_UnkMotion0_Anim(Item_GObj* gobj)
     return false;
 }
 
-static void inlineA0(Item_GObj* gobj)
+static inline void inlineA0(Item_GObj* gobj, Vec3* vec)
 {
     Item* ip = GET_ITEM(gobj);
     itSamusMissileAttributes* sa1 = ip->xC4_article_data->x4_specialAttributes;
-    Vec3 vec;
-    vec.x = sa1->xC * ip->facing_dir;
-    vec.y = 0.0f;
-    vec.z = 0.0f;
-    lbVector_Rotate(&vec, 4,
+    vec->x = sa1->xC * ip->facing_dir;
+    vec->y = 0.0f;
+    vec->z = 0.0f;
+    lbVector_Rotate(vec, 4,
                     ip->xDD4_itemVar.samusmissile.x8 * -ip->facing_dir);
-    ip->x40_vel.x = vec.x;
-    ip->x40_vel.y = vec.y;
+    ip->x40_vel.x = vec->x;
+    ip->x40_vel.y = vec->y;
+}
+
+static inline void itSamusmissile_SetRotationX(Item_GObj* gobj)
+{
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* child = HSD_JObjGetChild(jobj);
+
+    HSD_JObjSetRotationX(child, ip->xDD4_itemVar.samusmissile.x8);
 }
 
 void itSamusmissile_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itSamusMissileAttributes* sa0 = ip->xC4_article_data->x4_specialAttributes;
-    u8 _padA[24];
+    Vec3 vec;
+    PAD_STACK(8);
     if (ip->xDAC_itcmd_var0 != 0) {
         it_802B64FC(gobj);
-        inlineA0(gobj);
-        HSD_JObjSetRotationX(HSD_JObjGetChild(GET_JOBJ(gobj)),
-                             GET_ITEM(gobj)->xDD4_itemVar.samusmissile.x8);
+        inlineA0(gobj, &vec);
+        itSamusmissile_SetRotationX(gobj);
     } else {
         if (VEC2_SQ_LEN(ip->x40_vel) > SQ(sa0->x14)) {
             ip->x40_vel.x *= sa0->x10;
             ip->x40_vel.y *= sa0->x10;
         }
-        HSD_JObjSetRotationX(HSD_JObjGetChild(GET_JOBJ(gobj)),
-                             GET_ITEM(gobj)->xDD4_itemVar.samusmissile.x8);
+        itSamusmissile_SetRotationX(gobj);
     }
 }
 
@@ -373,12 +381,14 @@ bool it_2725_Logic52_ShieldBounced(Item_GObj* arg0)
         {
             f32 temp_f1 = atan2f(ip->x40_vel.x, ip->x40_vel.y);
             f32 var_f31;
+            HSD_JObj* child;
             if (ip->facing_dir == +1.0f) {
-                var_f31 = temp_f1 - M_PI_2;
+                var_f31 = temp_f1 - M_PI_2_F;
             } else {
                 var_f31 = 270 * deg_to_rad - temp_f1;
             }
-            HSD_JObjSetRotationX(HSD_JObjGetChild(jobj), var_f31);
+            child = HSD_JObjGetChild(jobj);
+            HSD_JObjSetRotationX(child, var_f31);
         }
     }
     return false;
