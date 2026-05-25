@@ -2062,23 +2062,54 @@ HSD_JObj* mnDiagram_80242B38(int idx, int arg1)
 void mnDiagram_80242C0C(void* arg0, int arg1, int arg2)
 {
     Diagram* data = ((HSD_GObj*) arg0)->user_data;
-    void** joint_data;
+    mnDiagram_Assets* assets = (mnDiagram_Assets*) &mnDiagram_804A0750;
+    void** joint_data = assets->ConB3;
     HSD_JObj* jobj;
     HSD_JObj* sp_jobj;
     int i;
+    int k;
     int count;
+    s32 idx;
+    s32 remaining;
     u8 fighter_id;
+    u8* p;
+    u8* p2;
     f32 x_spacing;
     f32 y_spacing;
     PAD_STACK(80);
 
-    joint_data = (void**) &mnDiagram_804A0834;
-
     // Column headers (fighter icons)
     for (i = 0; i < 7; i++) {
-        count = mnDiagram_CountUnlockedFighters();
+        count = 0;
+        for (k = 0; k < 0x19; k++) {
+            if (mn_IsFighterUnlocked(k) != 0) {
+                count++;
+            }
+        }
         if (count > i) {
-            fighter_id = mnDiagram_804A0750.sorted_fighters[arg2 + i];
+            idx = arg2;
+            remaining = i;
+            p = &assets->sorted_fighters[arg2];
+            while (remaining >= 0) {
+                if (remaining == 0) {
+                    fighter_id = assets->sorted_fighters[idx];
+                    goto col_found;
+                }
+                p2 = p;
+            col_inner:
+                idx++;
+                p2++;
+                p++;
+                if (idx >= 0x19) {
+                    fighter_id = 0x19;
+                    goto col_found;
+                }
+                if (mn_IsFighterUnlocked(*p2) == 0) {
+                    goto col_inner;
+                }
+                remaining--;
+            }
+        col_found:
             jobj = HSD_JObjLoadJoint(joint_data[0]);
             HSD_JObjAddAnimAll(jobj, joint_data[1], joint_data[2],
                                joint_data[3]);
@@ -2087,21 +2118,45 @@ void mnDiagram_80242C0C(void* arg0, int arg1, int arg2)
             lb_80011E24(jobj, &sp_jobj, 2, -1);
             HSD_JObjReqAnimAll(sp_jobj, (f32) fighter_id);
             HSD_JObjAnimAll(sp_jobj);
-
-            if (data->jobjs[9] != NULL && data->jobjs[10] != NULL) {
-                x_spacing =
-                    data->jobjs[10]->translate.x - data->jobjs[9]->translate.x;
-                HSD_JObjSetTranslateX(jobj, x_spacing * (f32) i);
-            }
-            HSD_JObjAddChild(data->jobjs[9], jobj);
+            x_spacing = HSD_JObjGetTranslationX(data->jobjs[8]) -
+                        HSD_JObjGetTranslationX(data->jobjs[7]);
+            HSD_JObjSetTranslateX(jobj, x_spacing * i);
+            HSD_JObjAddChild(data->jobjs[7], jobj);
         }
     }
 
     // Row headers (fighter icons)
     for (i = 0; i < 0xA; i++) {
-        count = mnDiagram_CountUnlockedFighters();
+        count = 0;
+        for (k = 0; k < 0x19; k++) {
+            if (mn_IsFighterUnlocked(k) != 0) {
+                count++;
+            }
+        }
         if (count > i) {
-            fighter_id = mnDiagram_804A0750.sorted_fighters[arg1 + i];
+            idx = arg1;
+            remaining = i;
+            p = &assets->sorted_fighters[arg1];
+            while (remaining >= 0) {
+                if (remaining == 0) {
+                    fighter_id = assets->sorted_fighters[idx];
+                    goto row_found;
+                }
+                p2 = p;
+            row_inner:
+                idx++;
+                p2++;
+                p++;
+                if (idx >= 0x19) {
+                    fighter_id = 0x19;
+                    goto row_found;
+                }
+                if (mn_IsFighterUnlocked(*p2) == 0) {
+                    goto row_inner;
+                }
+                remaining--;
+            }
+        row_found:
             jobj = HSD_JObjLoadJoint(joint_data[0]);
             HSD_JObjAddAnimAll(jobj, joint_data[1], joint_data[2],
                                joint_data[3]);
@@ -2110,13 +2165,10 @@ void mnDiagram_80242C0C(void* arg0, int arg1, int arg2)
             lb_80011E24(jobj, &sp_jobj, 2, -1);
             HSD_JObjReqAnimAll(sp_jobj, (f32) fighter_id);
             HSD_JObjAnimAll(sp_jobj);
-
-            if (data->jobjs[11] != NULL && data->jobjs[12] != NULL) {
-                y_spacing = data->jobjs[12]->translate.y -
-                            data->jobjs[11]->translate.y;
-                HSD_JObjSetTranslateY(jobj, y_spacing * (f32) i);
-            }
-            HSD_JObjAddChild(data->jobjs[11], jobj);
+            y_spacing = HSD_JObjGetTranslationY(data->jobjs[10]) -
+                        HSD_JObjGetTranslationY(data->jobjs[9]);
+            HSD_JObjSetTranslateY(jobj, y_spacing * i);
+            HSD_JObjAddChild(data->jobjs[9], jobj);
         }
     }
 }

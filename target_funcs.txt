@@ -12,7 +12,7 @@ Funcs:
 - [x] mnDiagram_802427B4
 - [x] mnDiagram_80243434
 - [x] mnDiagram_80241E78
-- [ ] mnDiagram_80242C0C
+- [x] mnDiagram_80242C0C
 - [ ] mnDiagram_8024227C
 - [ ] mnDiagram_80240D94
 - [ ] mnDiagram_InputProc
