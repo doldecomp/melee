@@ -5,7 +5,7 @@ Funcs:
 - [x] mnDiagram_8023FA6C
 - [x] mnDiagram_PopupAnimProc
 - [x] mnDiagram_802437E8
-- [ ] mnDiagram_OnFrame
+- [x] mnDiagram_OnFrame
 - [ ] mnDiagram_802417D0
 - [ ] mnDiagram_80241310
 - [ ] mnDiagram_CursorProc
