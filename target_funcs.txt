@@ -2,7 +2,7 @@ File: src/sysdolphin/baselib/sislib.c
 Funcs:
 - [x] HSD_SisLib_803A594C
 - [x] HSD_SisLib_803A5798
-- [ ] HSD_SisLib_803A7F0C
+- [x] HSD_SisLib_803A7F0C
 - [ ] HSD_SisLib_803A8134
 - [ ] HSD_SisLib_803A67EC
 - [ ] HSD_SisLib_803A70A0

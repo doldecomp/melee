@@ -1389,111 +1389,101 @@ loop_36:
     }
 }
 
-void static inline HSD_SisLib_803A7F0C_inline(HSD_Text* text, s32 flags,
-                                              s32* out_remove_size,
-                                              u32* stack_pos, s32* out_value)
+s32 HSD_SisLib_803A7F0C(HSD_Text* text, s32 flags)
 {
-    s32* buf;
     u8 entry;
     s32 entry_type;
     s32 entry_flags;
     s32 target_type;
     s32 flag_hi;
+    s32 result;
+    s32 remove_size;
+    s32 pos;
+
     flag_hi = flags & 0x80;
     target_type = flags & 0x7F;
-    while (*stack_pos >= 0) {
-        buf = (s32*) text->string_buffer;
-        entry = *(buf + *stack_pos);
+    pos = text->x6C;
+    result = 0;
+    remove_size = 0;
+    while (pos >= 0) {
+        entry = ((u8*) text->string_buffer)[pos];
         entry_type = entry & 0x7F;
         entry_flags = entry & 0x80;
         switch (entry_type) { /* irregular */
         case 1:
-            *stack_pos -= 4;
+            pos -= 4;
             if (target_type == 1) {
-                text->x78.x = (f32) * (buf + *stack_pos) * 0.00390625F;
-                text->x78.y = (f32) * (buf + (*stack_pos + 2)) * 0.00390625F;
+                text->x78.x =
+                    (f32) * (s16*) ((u8*) text->string_buffer + pos) *
+                    0.00390625F;
+                text->x78.y =
+                    (f32) * (s16*) ((u8*) text->string_buffer + pos + 2) *
+                    0.00390625F;
                 if (flag_hi == entry_flags) {
-                    *out_remove_size = 5;
+                    remove_size = 5;
                 }
-            } else {
-                break;
+                goto done;
             }
-            return;
+            break;
         case 2:
-            *stack_pos -= 3;
+            pos -= 3;
             if (target_type == 2) {
-                text->active_color.r =
-                    ((GXColor*) text->string_buffer + *stack_pos)->r;
-                text->active_color.g =
-                    ((GXColor*) text->string_buffer + *stack_pos)->g;
-                text->active_color.b =
-                    ((GXColor*) text->string_buffer + *stack_pos)->b;
+                text->active_color.r = ((u8*) text->string_buffer)[pos];
+                text->active_color.g = ((u8*) text->string_buffer)[pos + 1];
+                text->active_color.b = ((u8*) text->string_buffer)[pos + 2];
                 if (flag_hi == entry_flags) {
-                    *out_remove_size = 4;
+                    remove_size = 4;
                 }
-            } else {
-                break;
+                goto done;
             }
-            return;
+            break;
         case 3:
-            *stack_pos -= 4;
+            pos -= 4;
             if (target_type == 3) {
-                text->x80.x = (f32) * (buf + *stack_pos) * 0.00390625F;
-                text->x80.y = (f32) * (buf + (*stack_pos + 2)) * 0.00390625F;
+                text->x80.x =
+                    (f32) * (u16*) ((u8*) text->string_buffer + pos) *
+                    0.00390625F;
+                text->x80.y =
+                    (f32) * (u16*) ((u8*) text->string_buffer + pos + 2) *
+                    0.00390625F;
                 if (flag_hi == entry_flags) {
-                    *out_remove_size = 5;
+                    remove_size = 5;
                 }
-            } else {
-                break;
+                goto done;
             }
-            return;
+            break;
         case 4:
-            *stack_pos -= 1;
+            pos -= 1;
             if (target_type == 4) {
-                text->alignment = *(buf + *stack_pos);
+                text->alignment = ((u8*) text->string_buffer)[pos];
                 if (flag_hi == entry_flags) {
-                    *out_remove_size = 2;
+                    remove_size = 2;
                 }
-            } else {
-                break;
+                goto done;
             }
-            return;
+            break;
         case 5:
-            *stack_pos -= 4;
+            pos -= 4;
             if (target_type == 5) {
-                *out_value = *(buf + *stack_pos);
+                result = *(s32*) ((u8*) text->string_buffer + pos);
                 if (flag_hi == entry_flags) {
-                    *out_remove_size = 5;
+                    remove_size = 5;
                 }
-            } else {
-                break;
+                goto done;
             }
-            return;
+            break;
         }
-        *stack_pos -= 1;
+        pos -= 1;
     }
-}
-
-s32 HSD_SisLib_803A7F0C(HSD_Text* text, s32 flags)
-{
-    s32 unused_r7_2;
-    s32 result;
-    s32 remove_size;
-    u16 unused_r6_2;
-    u32 pos;
-
-    pos = text->x6C;
-    result = 0;
-    remove_size = 0;
-    HSD_SisLib_803A7F0C_inline(text, flags, &remove_size, &pos, &result);
+done:
     if (remove_size != 0) {
-        while ((s32) (pos + remove_size) < (s32) text->x6C) {
-            *((s32*) text->string_buffer + pos) =
-                *((s32*) text->string_buffer + pos + remove_size);
+        while ((pos + remove_size) < (s32) text->x6C) {
+            ((u8*) text->string_buffer)[pos] =
+                ((u8*) text->string_buffer)[pos + remove_size];
             pos += 1;
         }
-        while ((s32) pos < (s32) text->x6C) {
-            *((s32*) text->string_buffer + pos) = 0;
+        while (pos < (s32) text->x6C) {
+            ((u8*) text->string_buffer)[pos] = 0;
             pos += 1;
         }
         text->x6C -= remove_size;
