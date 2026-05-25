@@ -221,7 +221,53 @@ void ifStatus_PercentOnDeathAnimationThink(UnkX* value, s32 arg1, s32 arg2)
 
 void ifStatus_802F4B84(IfDamageState* state, s32 is_stamina)
 {
-    NOT_IMPLEMENTED;
+    s32 i;
+    f32 mag;
+    f32 ox;
+    f32 oy;
+    f32 rx;
+    f32 ry;
+    u8 frames;
+
+    frames = state->frames_of_shake_remaining;
+    if (frames != 0) {
+        if (frames == 1) {
+            for (i = 0; i < 4; i++) {
+                HSD_JObjSetTranslateX(state->jobjs[i],
+                                      state->translation_x[i]);
+                HSD_JObjSetTranslateY(state->jobjs[i],
+                                      state->translation_y[i]);
+            }
+            state->frames_of_shake_remaining = 0;
+            return;
+        }
+        mag = 0.1014f * (f32) state->damage_from_last_attack;
+        if (mag < 0.1014f) {
+            mag = 0.1014f;
+        } else if (mag > 1.5207f) {
+            mag = 1.5207f;
+        }
+        for (i = 0; i < 4; i++) {
+            rx = mag * (2.0f * (HSD_Randf() - 0.5f));
+            ry = mag * (2.0f * (HSD_Randf() - 0.5f));
+            if (rx < 0.0f) {
+                ox = rx - 0.2028f;
+            } else {
+                ox = rx + 0.2028f;
+            }
+            if (ry < 0.0f) {
+                oy = ry - 0.2028f;
+            } else {
+                oy = ry + 0.2028f;
+            }
+            HSD_JObjSetTranslateX(state->jobjs[i],
+                                  state->translation_x[i] + ox);
+            HSD_JObjSetTranslateY(state->jobjs[i],
+                                  state->translation_y[i] + oy);
+        }
+        state->frames_of_shake_remaining -= 1;
+    }
+    PAD_STACK(8);
 }
 
 /* Color endpoints for damage percentage interpolation (extern from .sdata2) */
