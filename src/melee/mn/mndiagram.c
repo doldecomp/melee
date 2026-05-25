@@ -666,14 +666,14 @@ void mnDiagram_8023FA6C(void)
     int i, j;
     u8* src = mnDiagram_803EE74C;
     u8* dst = mnDiagram_804A0750.sorted_fighters;
-    PAD_STACK(8);
+    PAD_STACK(16);
 
     for (i = 0; i < 0x19; i++) {
         u32 total = 0;
         dst[i] = src[i];
         for (j = 0; j < 0x19; j++) {
             if (mn_IsFighterUnlocked(j) != 0) {
-                total += GetPersistentFighterData(src[i])->fighter_kos[j];
+                total += GetPersistentFighterData(src[i])->fighter_kos[(u8) j];
             }
         }
         totals[src[i]] = total;
@@ -684,7 +684,8 @@ void mnDiagram_8023FA6C(void)
         for (j = i + 1; j < 0x19; j++) {
             if ((mn_IsFighterUnlocked(dst[j]) != 0) &&
                 ((totals[dst[max_idx]] < totals[dst[j]]) ||
-                 (mn_IsFighterUnlocked(dst[max_idx]) == 0)))
+                 ((mn_IsFighterUnlocked(dst[max_idx]) == 0) &&
+                  (mn_IsFighterUnlocked(dst[j]) != 0))))
             {
                 max_idx = j;
             }

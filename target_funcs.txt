@@ -2,7 +2,7 @@ File: src/melee/mn/mndiagram.c
 Funcs:
 - [x] mnDiagram_GetLeastPlayedFighter
 - [x] mnDiagram_8023FC28
-- [ ] mnDiagram_8023FA6C
+- [x] mnDiagram_8023FA6C
 - [ ] mnDiagram_PopupAnimProc
 - [ ] mnDiagram_802437E8
 - [ ] mnDiagram_OnFrame
