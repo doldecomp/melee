@@ -1108,9 +1108,6 @@ void fn_8020DEAC(void)
     Ground_801C53EC(0x77A12);
 }
 
-extern f32 grBb_Route_804DB994;
-extern f32 grBb_Route_804DB998;
-extern f32 grBb_Route_804DB99C;
 
 /* Clamp camera position to stage bounds */
 void grBigBlueRoute_8020DED4(Vec3* pos)
@@ -1118,14 +1115,14 @@ void grBigBlueRoute_8020DED4(Vec3* pos)
     f32 x = pos->x;
     f32 y = pos->y;
 
-    if (x < grBb_Route_804DB994 * Ground_801C0498()) {
-        x = grBb_Route_804DB994 * Ground_801C0498();
+    if (x < 20.0f * Ground_801C0498()) {
+        x = 20.0f * Ground_801C0498();
     }
 
-    if (y < grBb_Route_804DB998 * Ground_801C0498()) {
-        y = grBb_Route_804DB998 * Ground_801C0498();
-    } else if (y > grBb_Route_804DB99C * Ground_801C0498()) {
-        y = grBb_Route_804DB99C * Ground_801C0498();
+    if (y < 250.0f * Ground_801C0498()) {
+        y = 250.0f * Ground_801C0498();
+    } else if (y > -3.0f * Ground_801C0498()) {
+        y = -3.0f * Ground_801C0498();
     }
 
     Ground_801C38BC(x, y);
