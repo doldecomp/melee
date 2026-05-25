@@ -2064,7 +2064,8 @@ void mnDiagram_8024227C(void* arg0, s32 arg1, s32 arg2, u8 arg3)
     register s32 arg1_r = arg1;
     register s32 arg2_r = arg2;
     register u8 is_name = arg3;
-    register u8* base = (u8*) &mnDiagram_804A0750;
+    register mnDiagram_Assets* assets =
+        (mnDiagram_Assets*) &mnDiagram_804A0750;
     register s32 cap = 0xF423F;
     s32 var_r16_6;
     s32 var_r17_10;
@@ -2127,10 +2128,10 @@ void mnDiagram_8024227C(void* arg0, s32 arg1, s32 arg2, u8 arg3)
                     if (var_r3 > var_r22) {
                         var_r18 = var_r22;
                         var_r19 = arg2_r;
-                        var_r16 = base + arg2_r + 0x1C;
+                        var_r16 = &assets->sorted_names[arg2_r];
                     loop_11:
                         if (var_r18 <= 0) {
-                            var_r0 = *(base + var_r19 + 0x1C);
+                            var_r0 = assets->sorted_names[var_r19];
                         } else {
                             var_r17 = var_r16;
                         loop_7:
@@ -2176,11 +2177,11 @@ void mnDiagram_8024227C(void* arg0, s32 arg1, s32 arg2, u8 arg3)
                     if (var_r18_3 > var_r22) {
                         var_r19_4 = var_r22;
                         var_r18_4 = arg2_r;
-                        var_r17_2 = base + arg2_r;
+                        var_r17_2 = &assets->sorted_fighters[arg2_r];
                     loop_33:
                         if (var_r19_4 >= 0) {
                             if (var_r19_4 == 0) {
-                                var_r21 = *(base + var_r18_4);
+                                var_r21 = assets->sorted_fighters[var_r18_4];
                             } else {
                                 var_r16_2 = var_r17_2;
                             loop_29:
@@ -2226,10 +2227,10 @@ void mnDiagram_8024227C(void* arg0, s32 arg1, s32 arg2, u8 arg3)
                     {
                         var_r19_6 = var_r30;
                         var_r18_6 = arg1_r;
-                        var_r17_3 = base + arg1_r + 0x1C;
+                        var_r17_3 = &assets->sorted_names[arg1_r];
                     loop_52:
                         if (var_r19_6 <= 0) {
-                            var_r0_2 = *(base + var_r18_6 + 0x1C);
+                            var_r0_2 = assets->sorted_names[var_r18_6];
                         } else {
                             var_r16_3 = var_r17_3;
                         loop_48:
@@ -2262,10 +2263,10 @@ void mnDiagram_8024227C(void* arg0, s32 arg1, s32 arg2, u8 arg3)
                         } else {
                             var_r18_8 = var_r22_2;
                             var_r17_5 = arg2_r;
-                            var_r15 = base + arg2_r + 0x1C;
+                            var_r15 = &assets->sorted_names[arg2_r];
                         loop_66:
                             if (var_r18_8 <= 0) {
-                                var_r17_6 = *(base + var_r17_5 + 0x1C);
+                                var_r17_6 = assets->sorted_names[var_r17_5];
                             } else {
                                 var_r16_4 = var_r15;
                             loop_62:
@@ -2322,11 +2323,11 @@ void mnDiagram_8024227C(void* arg0, s32 arg1, s32 arg2, u8 arg3)
                     block_83:
                         var_r18_11 = var_r30;
                         var_r17_9 = arg1_r;
-                        var_r16_5 = base + arg1_r;
+                        var_r16_5 = &assets->sorted_fighters[arg1_r];
                     loop_91:
                         if (var_r18_11 >= 0) {
                             if (var_r18_11 == 0) {
-                                var_r23 = *(base + var_r17_9);
+                                var_r23 = assets->sorted_fighters[var_r17_9];
                             } else {
                                 var_r15_2 = var_r16_5;
                             loop_87:
@@ -2365,11 +2366,11 @@ void mnDiagram_8024227C(void* arg0, s32 arg1, s32 arg2, u8 arg3)
                         } else {
                             var_r18_12 = var_r22_3;
                             var_r17_11 = arg2_r;
-                            var_r16_7 = base + arg2_r;
+                            var_r16_7 = &assets->sorted_fighters[arg2_r];
                         loop_108:
                             if (var_r18_12 >= 0) {
                                 if (var_r18_12 == 0) {
-                                    var_r24 = *(base + var_r17_11);
+                                    var_r24 = assets->sorted_fighters[var_r17_11];
                                 } else {
                                     var_r15_3 = var_r16_7;
                                 loop_104:
