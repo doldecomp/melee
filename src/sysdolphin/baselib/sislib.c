@@ -884,189 +884,110 @@ s32 HSD_SisLib_803A67EC(u8* data, u8* string)
 
 int HSD_SisLib_803A6B98(HSD_Text* text, float x, float y, const char* fmt, ...)
 {
-    s8 dead_sp10C;
-    HSD_Text** dead_sp88;
-    f64* dead_sp84;
-    s32 dead_sp80;
-    f64 dead_line_width;
-    f64 dead_sp58;
-    f64 dead_sp50;
-    f64 dead_sp48;
-    f64 dead_sp40;
-    f64 dead_sp38;
-    f64 dead_sp30;
-    f64 dead_sp28;
-    s32 dead_sp24;
-    s32 dead_sp20;
-    s32 dead_sp1C;
-    s32 dead_sp18;
-    s32 dead_sp14;
-    s32 dead_sp10;
-    void* dead_spC;
-    HSD_Text* dead_sp8;
+    u8 buffer[256];
+    u8 encoded[128];
     s16 y_coord;
     s16 x_coord;
-    s32 remaining_len;
-    s32 tail_count;
     s32 encoded_len;
     s32 copied_bytes;
     s32 copy_idx;
+    s32 i;
+    s32 tail_count;
     sislib_UnkAllocData* alloc;
-    sislib_UnkAllocData* dead_r3_10;
-    sislib_UnkAllocData* dead_r3_11;
-    sislib_UnkAllocData* dead_r3_12;
-    sislib_UnkAllocData* dead_r3_13;
-    sislib_UnkAllocData* dead_r3_14;
-    sislib_UnkAllocData* dead_r3_15;
-    sislib_UnkAllocData* dead_r3_17;
-    sislib_UnkAllocData* dead_r3_18;
-    sislib_UnkAllocData* dead_r3_2;
-    sislib_UnkAllocData* dead_r3_3;
-    sislib_UnkAllocData* dead_r3_4;
-    sislib_UnkAllocData* dead_r3_5;
-    sislib_UnkAllocData* dead_r3_6;
-    sislib_UnkAllocData* dead_r3_7;
-    sislib_UnkAllocData* dead_r3_8;
-    sislib_UnkAllocData* dead_r3_9;
-    sislib_UnkAllocData* dead_r4_3;
-    sislib_UnkAllocData* dead_r5;
-    sislib_UnkAllocData* dead_r5_2;
-    sislib_UnkAllocData* dead_r5_3;
-    sislib_UnkAllocData* dead_r5_4;
-    sislib_UnkAllocData* dead_r5_5;
-    sislib_UnkAllocData* dead_r5_6;
-    sislib_UnkAllocData* dead_r5_7;
-    sislib_UnkAllocData* dead_r5_8;
-    HSD_Text* dead_r31;
+    HSD_Text* old_buf;
     u8* new_buf;
     u8* copy_dst;
     u8* copy_src;
+    u8* bulk_src;
+    u8* tail_src;
     u32 required_size;
     u32 old_size;
     u32 bulk_count;
-    u8* bulk_src;
-    u8* tail_src;
-    u8 copy_byte;
-    u8 dead_r4_2;
-    u8 dead_r6;
-    u8* playhead;
-    va_list args; ///< @todo what size is this?
-    u8 sis_buf;
+    u8** cur;
+    va_list args;
 
-    encoded_len = 0; // some type of size
+    encoded_len = 0;
     alloc = text->alloc_data;
-    sis_buf = 0;
-    if (fmt) { ///< @todo is this the correct usage of vaargs?
-        u8 buffer[256];
+    if (fmt) {
         va_start(args, fmt);
         vsnprintf((char*) buffer, -1, fmt, args);
         va_end(args);
-        encoded_len = HSD_SisLib_803A67EC(&sis_buf, buffer);
+        encoded_len = HSD_SisLib_803A67EC(encoded, buffer);
     }
 
-    // some sort of copy of a dynamically-sized struct
-    {
-        // It would appear that data_1 is allocated right after data_0 in
-        // memory.
-        u8* dead_r31 = (u8*) alloc->data_1;
-        old_size = alloc->size;
-        required_size =
-            encoded_len + (((u8*) alloc->data_0 - dead_r31) + 0x11);
-        if (old_size < required_size) {
-            // make sure that this unsigned subtract doesn't overflow?
-            alloc->size =
-                old_size +
-                ((((u32) (required_size - old_size) >> 7U) + 1) << 7);
-            new_buf = HSD_SisLib_803A5798((s32) alloc->size);
-            // clearly a handwritten memory copy
-            {
-                copy_src = dead_r31;
-                copy_dst = new_buf;
-                copy_idx = 0;
-                while (copy_idx <
-                       (s32) (((u8*) alloc->data_0 - (u8*) alloc->data_1) + 1))
-                {
-                    copy_byte = *copy_src;
-                    copy_idx += 1;
-                    copy_src += 1;
-                    *copy_dst = copy_byte;
-                    copy_dst += 1;
-                }
-            }
-            alloc->data_1 = (HSD_Text*) new_buf;
-            text->sis_buffer = (SIS*) new_buf;
-            alloc->data_0 =
-                (sislib_UnkAllocData*) (new_buf +
-                                        ((u8*) alloc->data_0 - dead_r31));
-            HSD_SisLib_803A594C(dead_r31);
+    old_buf = alloc->data_1;
+    old_size = alloc->size;
+    required_size = encoded_len + (((u8*) alloc->data_0 - (u8*) old_buf) + 0x11);
+    if (old_size < required_size) {
+        alloc->size =
+            old_size + ((((u32) (required_size - old_size) >> 7U) + 1) << 7);
+        new_buf = HSD_SisLib_803A5798((s32) alloc->size);
+        copy_src = (u8*) old_buf;
+        copy_dst = new_buf;
+        copy_idx = 0;
+        while (copy_idx <
+               (s32) (((u8*) alloc->data_0 - (u8*) alloc->data_1) + 1))
+        {
+            *copy_dst = *copy_src;
+            copy_idx += 1;
+            copy_src += 1;
+            copy_dst += 1;
         }
+        alloc->data_1 = (HSD_Text*) new_buf;
+        text->sis_buffer = (SIS*) new_buf;
+        alloc->data_0 =
+            (sislib_UnkAllocData*) (new_buf +
+                                    ((u8*) alloc->data_0 - (u8*) old_buf));
+        HSD_SisLib_803A594C(old_buf);
     }
 
-    playhead = (u8*) alloc;
-    *(playhead++) = 7;
+    cur = (u8**) &alloc->data_0;
+    *(*cur)++ = 7;
+    x_coord = (s16) x;
+    *(*cur)++ = (u8) (x_coord >> 8);
+    *(*cur)++ = (u8) x_coord;
+    y_coord = (s16) y;
+    *(*cur)++ = (u8) (y_coord >> 8);
+    *(*cur)++ = (u8) y_coord;
+    *(*cur)++ = 0xC;
+    *(*cur)++ = text->text_color.r;
+    *(*cur)++ = text->text_color.g;
+    *(*cur)++ = text->text_color.b;
+    *(*cur)++ = 0xE;
+    *(*cur)++ = (u8) (s32) text->x34.x;
+    *(*cur)++ = (u8) (s32) (256.0F * text->x34.x);
+    *(*cur)++ = (u8) (s32) text->x34.y;
+    *(*cur)++ = (u8) (s32) (256.0F * text->x34.y);
+
     copied_bytes = 0;
-
-    // @note: Is it just assuming these are always passed in?
-    x_coord = *((s16*) args + 8);
-    *((s16*) playhead++) = x_coord >> 8;
-    *playhead++ = x_coord;
-
-    y_coord = *((s16*) fmt + 9);
-    // *((s16 *)playhead)++ = y_coord >> 8;
-    *playhead++ = y_coord;
-
-    *playhead++ = 0xC;
-
-    *playhead++ = text->text_color.a;
-    *playhead++ = text->text_color.b;
-    *playhead++ = text->text_color.g;
-    *playhead++ = 0xE;
-    *playhead++ = text->text_color.r;
-    *playhead++ = (u8) (s32) (text->x34.x);
-    *playhead++ = (u8) (s32) (256.0F * text->x34.x);
-    *playhead++ = (u8) (s32) (text->x34.y);
-    *playhead++ = (u8) (s32) (256.0F * text->x34.y);
-
     if (encoded_len > 0) {
-        /*
-        This copies sets of 8 bytes individually, presumably from
-        whatever HSD_SisLib_803A67EC returned. The second part of
-        the loop copies any remaining bytes that aren't modulo 8.
-        Maybe they had intended for the first part to be a "fast"
-        copy, only for the compiler to output essentially the
-        same operations for both?
-        */
-        remaining_len = encoded_len - 8;
         if (encoded_len > 8) {
-            bulk_count = (u32) (remaining_len + 7) >> 3U;
-            bulk_src = &sis_buf;
-            if (remaining_len > 0) {
+            bulk_count = (u32) ((encoded_len - 8) + 7) >> 3U;
+            bulk_src = encoded;
+            if ((encoded_len - 8) > 0) {
                 do {
-                    int i;
                     copied_bytes += 8;
                     for (i = 0; i < 8; i++) {
-                        *playhead++ = bulk_src[i];
+                        *(*cur)++ = bulk_src[i];
                     }
                     bulk_src += 8;
                     bulk_count -= 1;
                 } while (bulk_count != 0);
             }
         }
-        tail_src = &sis_buf + copied_bytes;
+        tail_src = encoded + copied_bytes;
         tail_count = encoded_len - copied_bytes;
         if (copied_bytes < encoded_len) {
             do {
-                *playhead++ = *tail_src++;
+                *(*cur)++ = *tail_src++;
                 tail_count -= 1;
             } while (tail_count != 0);
         }
     }
-    *playhead++ = 0xF;
-    *playhead++ = 0xD;
-    *playhead = 0;
-    *((s32*) playhead + 2) = *((s32*) playhead + 2) + 1;
-
-    return (int) playhead;
+    *(*cur)++ = 0xF;
+    *(*cur)++ = 0xD;
+    **cur = 0;
+    return ((sisLib_803A7664_t*) alloc)->xC++;
 }
 
 /// @todo there seems to be a file boundary before this function,
@@ -1129,7 +1050,7 @@ end:
 s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
 {
     u8 buffer[256];
-    u8 encoded;
+    u8 encoded[128];
     s32 old_size;
     s32 result;
     s32 new_size;
@@ -1164,7 +1085,7 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
             va_start(args, fmt);
             vsnprintf((char*) buffer, -1, fmt, args);
             va_end(args);
-            new_size = HSD_SisLib_803A67EC(&encoded, buffer);
+            new_size = HSD_SisLib_803A67EC(encoded, buffer);
         } else {
             new_size = 0;
         }
@@ -1268,7 +1189,7 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
         if (new_size > 0) {
             if (new_size > 8) {
                 bulk_count = (u32) ((new_size - 8) + 7) >> 3U;
-                src = &encoded;
+                src = encoded;
                 if ((new_size - 8) > 0) {
                     do {
                         i += 8;
@@ -1281,7 +1202,7 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
                     } while (bulk_count != 0);
                 }
             }
-            tail_src = &encoded + i;
+            tail_src = encoded + i;
             remainder = new_size - i;
             if (i < new_size) {
                 do {
