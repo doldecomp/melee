@@ -570,3 +570,202 @@ void mnDiagram3_8024714C(void* arg0)
         proc->flags_3 = HSD_GObj_804D783C;
     }
 }
+
+void fn_802461BC(HSD_GObj* gobj)
+{
+    Diagram3* data = mnDiagram3_804D6C20->user_data;
+    char* base = (char*) &mnDiagram3_803EEC10;
+    u32 input = Menu_GetAllInputs();
+    Vec3 spDC;
+    Vec3 spC0;
+    Vec3 spA4;
+    int i;
+    u8 limit;
+    int v;
+
+    if ((u32) input & 0x20) {
+        lbAudioAx_80024030(0);
+        mn_804A04F0.entering_menu = 0;
+        gmMainLib_8015CC34()->xD = data->is_name_mode;
+        mnDiagram2_ClearDetailView(mnDiagram3_804D6C20);
+        HSD_GObjPLink_80390228(data->popup_gobj);
+        data = mnDiagram3_804D6C20->user_data;
+        for (i = 0; i < 0xA; i++) {
+            if (data->row_labels[i] != NULL) {
+                HSD_SisLib_803A5CC4(data->row_labels[i]);
+                data->row_labels[i] = NULL;
+            }
+        }
+        mn_80229894(0x1C, 0, 3);
+        return;
+    }
+    if (input & 0xC0) {
+        lbAudioAx_80024030(1);
+        gmMainLib_8015CC34()->xD = data->is_name_mode;
+        mnDiagram2_ClearDetailView(mnDiagram3_804D6C20);
+        HSD_GObjPLink_80390228(data->popup_gobj);
+        data = mnDiagram3_804D6C20->user_data;
+        for (i = 0; i < 0xA; i++) {
+            if (data->row_labels[i] != NULL) {
+                HSD_SisLib_803A5CC4(data->row_labels[i]);
+                data->row_labels[i] = NULL;
+            }
+        }
+        HSD_GObjPLink_80390228(gobj);
+        if (input & 0x40) {
+            mnDiagram2_Init();
+            return;
+        }
+        mnDiagram_802437E8(0, 0);
+        return;
+    }
+    if (input & 0xC00) {
+        if (GetNameCount() == 0) {
+            lbAudioAx_80024030(3);
+            return;
+        }
+        lbAudioAx_80024030(1);
+        data->is_name_mode = (data->is_name_mode == 0) ? 1 : 0;
+        if ((data->is_name_mode == 0) &&
+            ((s32) (data->scroll_offset + 0xA) >= 0x15)) {
+            data->scroll_offset = 0;
+        }
+        data = mnDiagram3_804D6C20->user_data;
+        for (i = 0; i < 0xA; i++) {
+            if (data->row_labels[i] != NULL) {
+                HSD_SisLib_803A5CC4(data->row_labels[i]);
+                data->row_labels[i] = NULL;
+            }
+        }
+        {
+            u8 base_idx = data->scroll_offset;
+            f32 spacing = HSD_JObjGetTranslationY(data->jobjs[9]) -
+                          HSD_JObjGetTranslationY(data->jobjs[8]);
+            lb_8000B1CC(data->jobjs[8], (Vec3*) (base + 0x18), &spDC);
+            for (i = 0; i < 0xA; i++) {
+                HSD_Text* t = HSD_SisLib_803A5ACC(
+                    0, 1, spDC.x - 6.5f, -spacing * (f32) i + -spDC.y, spDC.z,
+                    6.5f, 240.0f);
+                data->row_labels[i] = t;
+                limit = (data->is_name_mode != 0) ? 0x18 : 0x15;
+                v = base_idx + (u8) i;
+                if (v >= limit) {
+                    v = v - limit;
+                } else {
+                    v = (u8) v;
+                }
+                HSD_SisLib_803A6368(t, ((u16*) (base + 0x3C))[v]);
+            }
+        }
+        mnDiagram2_ClearDetailView(mnDiagram3_804D6C20);
+        mnDiagram3_80245BA4(mnDiagram3_804D6C20);
+        return;
+    }
+    if (input & 1) {
+        if (data->saved_selection != 0) {
+            HSD_JObj* popup = data->popup_gobj->hsd_obj;
+            s32 n;
+            f32 spacing;
+            lbAudioAx_80024030(2);
+            data->saved_selection = data->saved_selection - 1;
+            n = data->saved_selection;
+            spacing = HSD_JObjGetTranslationY(data->jobjs[9]) -
+                      HSD_JObjGetTranslationY(data->jobjs[8]);
+            HSD_JObjSetTranslateX(popup, HSD_JObjGetTranslationX(data->jobjs[8]));
+            HSD_JObjSetTranslateY(popup, spacing * (f32) n +
+                                             HSD_JObjGetTranslationY(
+                                                 data->jobjs[8]));
+            HSD_JObjSetTranslateZ(popup, HSD_JObjGetTranslationZ(data->jobjs[8]));
+            mnDiagram2_ClearDetailView(mnDiagram3_804D6C20);
+            mnDiagram3_80245BA4(mnDiagram3_804D6C20);
+            return;
+        }
+        if (data->scroll_offset != 0) {
+            u8 base_idx;
+            f32 spacing;
+            lbAudioAx_80024030(2);
+            data->scroll_offset = data->scroll_offset - 1;
+            data = mnDiagram3_804D6C20->user_data;
+            for (i = 0; i < 0xA; i++) {
+                if (data->row_labels[i] != NULL) {
+                    HSD_SisLib_803A5CC4(data->row_labels[i]);
+                    data->row_labels[i] = NULL;
+                }
+            }
+            base_idx = data->scroll_offset;
+            spacing = HSD_JObjGetTranslationY(data->jobjs[9]) -
+                      HSD_JObjGetTranslationY(data->jobjs[8]);
+            lb_8000B1CC(data->jobjs[8], (Vec3*) (base + 0x18), &spC0);
+            for (i = 0; i < 0xA; i++) {
+                HSD_Text* t = HSD_SisLib_803A5ACC(
+                    0, 1, spC0.x - 6.5f, -spacing * (f32) i + -spC0.y, spC0.z,
+                    6.5f, 240.0f);
+                data->row_labels[i] = t;
+                limit = (data->is_name_mode != 0) ? 0x18 : 0x15;
+                v = base_idx + (u8) i;
+                if (v >= limit) {
+                    v = v - limit;
+                } else {
+                    v = (u8) v;
+                }
+                HSD_SisLib_803A6368(t, ((u16*) (base + 0x3C))[v]);
+            }
+            mnDiagram2_ClearDetailView(mnDiagram3_804D6C20);
+            mnDiagram3_80245BA4(mnDiagram3_804D6C20);
+        }
+    } else if (input & 2) {
+        u32 down_limit;
+        if (data->saved_selection < 9) {
+            HSD_JObj* popup = data->popup_gobj->hsd_obj;
+            s32 n;
+            f32 spacing;
+            lbAudioAx_80024030(2);
+            data->saved_selection = data->saved_selection + 1;
+            n = data->saved_selection;
+            spacing = HSD_JObjGetTranslationY(data->jobjs[9]) -
+                      HSD_JObjGetTranslationY(data->jobjs[8]);
+            HSD_JObjSetTranslateX(popup, HSD_JObjGetTranslationX(data->jobjs[8]));
+            HSD_JObjSetTranslateY(popup, spacing * (f32) n +
+                                             HSD_JObjGetTranslationY(
+                                                 data->jobjs[8]));
+            HSD_JObjSetTranslateZ(popup, HSD_JObjGetTranslationZ(data->jobjs[8]));
+            mnDiagram2_ClearDetailView(mnDiagram3_804D6C20);
+            mnDiagram3_80245BA4(mnDiagram3_804D6C20);
+            return;
+        }
+        down_limit = (data->is_name_mode != 0) ? 0x18 : 0x15;
+        if ((u32) (data->scroll_offset + 0xA) < down_limit) {
+            u8 base_idx;
+            f32 spacing;
+            lbAudioAx_80024030(2);
+            data->scroll_offset = data->scroll_offset + 1;
+            data = mnDiagram3_804D6C20->user_data;
+            for (i = 0; i < 0xA; i++) {
+                if (data->row_labels[i] != NULL) {
+                    HSD_SisLib_803A5CC4(data->row_labels[i]);
+                    data->row_labels[i] = NULL;
+                }
+            }
+            base_idx = data->scroll_offset;
+            spacing = HSD_JObjGetTranslationY(data->jobjs[9]) -
+                      HSD_JObjGetTranslationY(data->jobjs[8]);
+            lb_8000B1CC(data->jobjs[8], (Vec3*) (base + 0x18), &spA4);
+            for (i = 0; i < 0xA; i++) {
+                HSD_Text* t = HSD_SisLib_803A5ACC(
+                    0, 1, spA4.x - 6.5f, -spacing * (f32) i + -spA4.y, spA4.z,
+                    6.5f, 240.0f);
+                data->row_labels[i] = t;
+                limit = (data->is_name_mode != 0) ? 0x18 : 0x15;
+                v = base_idx + (u8) i;
+                if (v >= limit) {
+                    v = v - limit;
+                } else {
+                    v = (u8) v;
+                }
+                HSD_SisLib_803A6368(t, ((u16*) (base + 0x3C))[v]);
+            }
+            mnDiagram2_ClearDetailView(mnDiagram3_804D6C20);
+            mnDiagram3_80245BA4(mnDiagram3_804D6C20);
+        }
+    }
+}

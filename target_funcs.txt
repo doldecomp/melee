@@ -20,4 +20,4 @@ File: src/melee/mn/mndiagram3.c
 Funcs:
 - [x] mnDiagram3_8024714C
 - [x] mnDiagram3_80245BA4
-- [ ] fn_802461BC
+- [x] fn_802461BC
