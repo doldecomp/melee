@@ -1877,7 +1877,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                     cursor->x10 = -21.5f;
                     cursor->xA = 0;
                     if ((u8) cursor->x5 == 1) {
-                        u8 grabbed = cursor->x6;
+                        int grabbed = cursor->x6;
                         if (grabbed <= 3U) {
                             cursor->x5 = 2;
                             if (mnCharSel_8025FDEC(grabbed) != 0) {
@@ -2001,7 +2001,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
             CSSTagData* tag = mnCharSel_803F0DFC.tags[port].data;
             if ((u8) tag->state == 0) {
                 if ((u8) cursor->x5 == 1) {
-                    u8 grabbed = cursor->x6;
+                    int grabbed = cursor->x6;
                     if ((s32) grabbed < 8) {
                         if ((s32) grabbed < 4) {
                             if ((s32) grabbed >= 0) {
