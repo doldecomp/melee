@@ -699,6 +699,12 @@ f32 ftCo_800A1AB4(Fighter* fp0, Fighter* fp1)
     return sqrtf(SQ(dx) + SQ(dy));
 }
 
+bool ftCo_800A1B38_noinline(enum_t arg0);
+bool ftCo_800A1B38_noinline(enum_t arg0)
+{
+    return ftCo_800A1B38(arg0);
+}
+
 bool ftCo_800A1B38(enum_t arg0)
 {
     if (grBigBlue_801EF844(arg0) || grInishie1_801FCAAC(arg0) ||
@@ -829,6 +835,18 @@ static void ftCo_800A1CC4(Fighter* fp, ftCo_803C6594_t* var_r29)
             }
         }
     }
+}
+
+void ftCo_800A1F3C_noinline(Fighter* fp, float arg1, float arg2, float arg3);
+void ftCo_800A1F3C_noinline(Fighter* fp, float arg1, float arg2, float arg3)
+{
+    ftCo_800A1F3C(fp, arg1, arg2, arg3);
+}
+
+void ftCo_800A1F3C_noinline2(Fighter* fp, float arg1, float arg2, float arg3);
+void ftCo_800A1F3C_noinline2(Fighter* fp, float arg1, float arg2, float arg3)
+{
+    ftCo_800A1F3C_noinline(fp, arg1, arg2, arg3);
 }
 
 void ftCo_800A1F3C(Fighter* fp, float arg1, float arg2, float arg3)
@@ -1125,10 +1143,21 @@ bool ftCo_800A2718(mp_UnkStruct0* arg0)
     }
     return inlineL0(arg0) || inlineL1(arg0);
 }
-
 static inline bool ftCo_800A2718_dontinline(mp_UnkStruct0* arg0)
 {
     return ftCo_800A2718(arg0);
+}
+
+static inline bool ftCo_800A2718_dontinline2(mp_UnkStruct0* arg0);
+static inline bool ftCo_800A2718_dontinline2(mp_UnkStruct0* arg0)
+{
+    return ftCo_800A2718_dontinline(arg0);
+}
+
+static inline bool ftCo_800A2718_dontinline3(mp_UnkStruct0* arg0);
+static inline bool ftCo_800A2718_dontinline3(mp_UnkStruct0* arg0)
+{
+    return ftCo_800A2718_dontinline2(arg0);
 }
 
 bool ftCo_800A28D0(Fighter* fp, float arg1)
@@ -3833,7 +3862,7 @@ void ftCo_800A8940(Fighter* fp)
     for (island = mpIsland_80458E88.next; island != NULL;
          island = island->next)
     {
-        if (cur_island != island && ftCo_800A2718(island) == 0) {
+        if (cur_island != island && ftCo_800A2718_dontinline3(island) == 0) {
             if (!ftCo_800A6700_inline0(fp, island->x14.x, island->x14.y)) {
                 if (!ftCo_800A6700_inline0(fp, island->x8.x, island->x8.y)) {
                     total += island->x14.x - island->x8.x;
@@ -7855,6 +7884,18 @@ void ftCo_800B1AB8(Fighter* fp)
     ftCo_800ADE48(fp);
 }
 
+void ftCo_800B1DA0_noinline(Fighter* fp);
+void ftCo_800B1DA0_noinline(Fighter* fp)
+{
+    ftCo_800B1DA0(fp);
+}
+
+void ftCo_800B1DA0_noinline2(Fighter* fp);
+void ftCo_800B1DA0_noinline2(Fighter* fp)
+{
+    ftCo_800B1DA0_noinline(fp);
+}
+
 void ftCo_800B1DA0(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
@@ -8348,12 +8389,12 @@ void ftCo_800B2AFC(Fighter* fp)
             result = mpCheckFloor(px, 10.0f + py, px, py - 1000.0f, 0.0f,
                                   &floor_pos, &line_id, &flags, &floor_normal,
                                   -1, -1, -1, NULL, NULL);
-            if (result != 0 && ftCo_800A1B38(line_id) != 0) {
+            if (result != 0 && ftCo_800A1B38_noinline(line_id) != 0) {
             } else {
                 found = result;
             }
             if (found != 0) {
-                ftCo_800A1F3C(fp, floor_pos.x, floor_pos.y, 5.0f);
+                ftCo_800A1F3C_noinline2(fp, floor_pos.x, floor_pos.y, 5.0f);
             }
         }
         ftCo_800ADE48(fp);
@@ -8384,14 +8425,15 @@ void ftCo_800B2AFC(Fighter* fp)
             result = mpCheckFloor(px, 10.0f + py, px, py - 1000.0f, 0.0f,
                                   &floor_pos, &line_id, &flags, &floor_normal,
                                   -1, -1, -1, NULL, NULL);
-            if (result != 0 && ftCo_800A1B38(line_id) != 0) {
+            if (result != 0 && ftCo_800A1B38_noinline(line_id) != 0) {
             } else {
                 found = result;
             }
             if (found != 0) {
-                ftCo_800A1F3C(fp, floor_pos.x, floor_pos.y, 5.0f);
+                ftCo_800A1F3C_noinline2(fp, floor_pos.x, floor_pos.y, 5.0f);
             } else {
-                ftCo_800A1F3C(fp, fp->cur_pos.x, fp->cur_pos.y, 5.0f);
+                ftCo_800A1F3C_noinline2(fp, fp->cur_pos.x, fp->cur_pos.y,
+                                        5.0f);
             }
         }
         ftCo_800ADE48(fp);
@@ -8425,12 +8467,12 @@ void ftCo_800B2AFC(Fighter* fp)
             result = mpCheckFloor(px, 10.0f + py, px, py - 1000.0f, 0.0f,
                                   &floor_pos, &line_id, &flags, &floor_normal,
                                   -1, -1, -1, NULL, NULL);
-            if (result != 0 && ftCo_800A1B38(line_id) != 0) {
+            if (result != 0 && ftCo_800A1B38_noinline(line_id) != 0) {
             } else {
                 found = result;
             }
             if (found != 0) {
-                ftCo_800A1F3C(fp, floor_pos.x, floor_pos.y, 5.0f);
+                ftCo_800A1F3C_noinline2(fp, floor_pos.x, floor_pos.y, 5.0f);
             }
         }
         ftCo_800ADE48(fp);
@@ -8511,7 +8553,7 @@ void ftCo_800B2AFC(Fighter* fp)
         ftCo_800ADE48(fp);
         return;
     case 24:
-        ftCo_800B1DA0(fp);
+        ftCo_800B1DA0_noinline2(fp);
         return;
     case 25:
         data->xF8_b0 = false;
@@ -8564,12 +8606,12 @@ void ftCo_800B2AFC(Fighter* fp)
             result = mpCheckFloor(px, 10.0f + py, px, py - 1000.0f, 0.0f,
                                   &floor_pos, &line_id, &flags, &floor_normal,
                                   -1, -1, -1, NULL, NULL);
-            if (result != 0 && ftCo_800A1B38(line_id) != 0) {
+            if (result != 0 && ftCo_800A1B38_noinline(line_id) != 0) {
             } else {
                 found = result;
             }
             if (found != 0) {
-                ftCo_800A1F3C(fp, floor_pos.x, floor_pos.y, 5.0f);
+                ftCo_800A1F3C_noinline2(fp, floor_pos.x, floor_pos.y, 5.0f);
             }
         }
         ftCo_800ADE48(fp);
