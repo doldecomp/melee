@@ -230,6 +230,7 @@ static inline void ftCo_800C6AFC_dontinline(HSD_JObj* jobj)
     ftCo_800C6AFC_please_dontinline(jobj);
 }
 
+/// @todo figure out proper inlining for this function
 /// Mirrors jobj.h's HSD_JObjSetTranslate but routes the mtx-dirty call through
 /// the fighter-local ftCo_800C6AFC (a bl), which is what the target emits here.
 /// The asserts keep jobj.h's file/line/cond so they match HSD_JObjSetTranslate.
