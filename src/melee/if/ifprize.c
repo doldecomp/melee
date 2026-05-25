@@ -55,6 +55,13 @@
     { 60, 60 }, { 61, 61 }, { 62, 63 }, { 63, 67 }, { 64, 68 }, { 65, 62 },
     { 66, 0 }
 };
+struct un_802FEBE0_OnEnter_arg0 {
+    unsigned short x0;
+    unsigned short x2;
+    int x4;
+    struct un_802FEBE0_OnEnter_arg0* x8;
+};
+
 struct un_803F9D48 {
     unsigned char x0a : 4;
     unsigned char x0b : 4;
@@ -74,8 +81,8 @@ struct un_803F9D48 {
     HSD_GObj* x1C;
     HSD_Text* x20;
     HSD_Text* x24;
-    void* x28;
-    int x2C;
+    struct un_802FEBE0_OnEnter_arg0* x28;
+    struct un_802FEBE0_OnEnter_arg0* x2C;
     int x30;
     int x34;
     int x38;
@@ -113,19 +120,56 @@ void un_802FE3F8(int a, int b, short* c, short* d)
 
 void fn_802FE470(HSD_GObj* gobj)
 {
-    un_802FE918(0, 0, 0);
-    gm_801A36A0(4);
-    un_802FE8CC();
-    un_802FE918(0, 0, 0);
-    HSD_GObjPLink_80390228(0);
-    HSD_GObjPLink_80390228(0);
-    HSD_GObjPLink_80390228(0);
-    lbArchive_80016EFC(0);
-    gm_801A4B60();
-    HSD_JObjReqAnimAll(0, 0);
-    HSD_DObjReqAnimAll(0, 0);
-    HSD_DObjReqAnimAll(0, 0);
-    HSD_JObjAnimAll(0);
+    HSD_JObj* jobj;
+
+    if (un_803F9D48.x1 != 4) {
+        jobj = HSD_GObjGetHSDObj(gobj);
+        switch (un_803F9D48.x1) {
+        case 0:
+            if (un_803F9D48.x2 < 5) {
+                un_803F9D48.x2++;
+            } else {
+                un_802FE918(un_803F9D48.x28->x0, un_803F9D48.x28->x2,
+                            un_803F9D48.x28->x4);
+                un_803F9D48.x1 = 1;
+            }
+            break;
+        case 1:
+            un_803F9D48.x2 = 0xA;
+            if (gm_801A36A0(4) & 0x1100) {
+                if (un_803F9D48.x2C == NULL) {
+                    un_802FE8CC();
+                } else {
+                    un_802FE918(un_803F9D48.x2C->x0, un_803F9D48.x2C->x2,
+                                un_803F9D48.x2C->x4);
+                    un_803F9D48.x2C = un_803F9D48.x2C->x8;
+                }
+            }
+            break;
+        case 2:
+            if (un_803F9D48.x2 < 0xF) {
+                un_803F9D48.x2++;
+            } else {
+                un_803F9D48.x1 = 3;
+            }
+            break;
+        case 3:
+            HSD_GObjPLink_80390228(un_803F9D48.x18);
+            HSD_GObjPLink_80390228(un_803F9D48.x1C);
+            HSD_GObjPLink_80390228(un_803F9D48.x14);
+            lbArchive_80016EFC(un_804D6D98);
+            un_803F9D48.x1 = 4;
+            un_803F9D48.x0a = 0;
+            un_803F9D48.x0b = 0;
+            gm_801A4B60();
+            return;
+        }
+        HSD_JObjReqAnimAll(jobj, (f32) (s8) un_803F9D48.x2);
+        HSD_DObjReqAnimAll(un_803F9D48.x10->u.dobj, (f32) un_803F9D48.x4);
+        HSD_DObjReqAnimAll(HSD_JObjGetChild(un_803F9D48.x10)->u.dobj,
+                           (f32) un_803F9D48.x4);
+        HSD_JObjAnimAll(jobj);
+    }
 }
 
 void un_802FE6A8(void)
@@ -202,12 +246,6 @@ void un_802FE918(int a, int b, int c)
     HSD_SisLib_803A7664(0);
     HSD_SisLib_803A6B98(0, 0, 0, 0);
 }
-
-struct un_802FEBE0_OnEnter_arg0 {
-    unsigned short x0;
-    int x4;
-    int x8;
-};
 
 void un_802FEBE0_OnEnter(void* arg0_)
 {
