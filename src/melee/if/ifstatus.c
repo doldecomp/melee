@@ -281,7 +281,6 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     HSD_JObj* jobj;
     HSD_JObj* digit_jobj;
     s32 is_stamina;
-    HSD_MatAnimJoint** anim_base;
     HSD_TObj* tobj;
     HSD_MObj* mobj;
     HSD_DObj* dobj;
@@ -301,27 +300,16 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
 
     PAD_STACK(96);
     hud = &ifStatus_HudInfo;
-    var_ctr = 6;
 
-    /* Find matching player state via bdnz loop */
-    {
-        IfDamageState* ptr;
-
-        ptr = hud->players;
-        i = 0;
-        jobj = gobj->hsd_obj;
-        do {
-            if (ptr->HUD_parent_entity == gobj) {
-                state = hud->players + i;
-                goto found_player;
-            }
-            ptr++;
-            i++;
-        } while (--var_ctr != 0);
-        state = NULL;
-    found_player:
-        (void) 0;
+    jobj = gobj->hsd_obj;
+    for (i = 0; i < 6; i++) {
+        if (hud->players[i].HUD_parent_entity == gobj) {
+            state = hud->players + i;
+            goto found_player;
+        }
     }
+    state = NULL;
+found_player:;
 
     /* Check for death animation flag (bit 7 of flags byte at offset 0x10) */
     if (state->flags.explode_animation) {
@@ -339,25 +327,18 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
 
         HSD_JObjRemoveAnim(jobj);
 
-        /* Cache pointer to animation base at offset 0x260 */
-        anim_base = (HSD_MatAnimJoint**) &hud->janim_selection_joints;
-
         lb_8000C07C(jobj, 1, (HSD_AnimJoint**) hud->jobj_desc_parent,
-                    (HSD_MatAnimJoint**) anim_base[0],
-                    (HSD_ShapeAnimJoint**) anim_base[1]);
+                    (HSD_MatAnimJoint**) hud->janim_selection_joints,
+                    (HSD_ShapeAnimJoint**) hud->janim_selection_textures);
         HSD_JObjReqAnimAll(jobj, 0.0F);
 
-        /* Set up TObj animation for Percent sign */
         digit_jobj = state->jobjs[Percent];
         if (digit_jobj != NULL) {
-            HSD_MatAnimJoint* mat_anim;
-            HSD_TexAnim* tex_anim;
-
             tobj = digit_jobj->u.dobj->mobj->tobj;
-            mat_anim =
-                ((HSD_MatAnimJoint*) anim_base[0])->child->next->next->next;
-            tex_anim = mat_anim->matanim->texanim;
-            HSD_TObjAddAnimAll(tobj, tex_anim);
+            HSD_TObjAddAnimAll(tobj,
+                               (HSD_TexAnim*) hud->janim_selection_joints->child
+                                   ->child->next->next->next->aobjdesc
+                                   ->fobjdesc);
             if (Player_GetMoreFlagsBit2((s8) state->player_slot)) {
                 HSD_TObjReqAnimAll(tobj, 1.0F);
             } else {
@@ -369,88 +350,75 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
 
         mn_8022F3D8(jobj, 1, 0x400);
 
-        /* Set up TObj animations for digit JObjs */
-        {
-            HSD_MatAnimJoint* mat_anim;
+        digit_jobj = state->jobjs[Ones];
+        ones_digit = state->damage_percent % 10;
+        HSD_TObjAddAnimAll(
+            digit_jobj->u.dobj->mobj->tobj,
+            (HSD_TexAnim*) hud->janim_selection_joints->child->child->aobjdesc
+                ->fobjdesc);
+        HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * ones_digit);
+        HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
 
-            mat_anim = ((HSD_MatAnimJoint*) anim_base[0])->child->next->next;
+        digit_jobj = state->jobjs[Tens];
+        tens_digit = (state->damage_percent % 100) / 10;
+        HSD_TObjAddAnimAll(
+            digit_jobj->u.dobj->mobj->tobj,
+            (HSD_TexAnim*) hud->janim_selection_joints->child->child->aobjdesc
+                ->fobjdesc);
+        HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * tens_digit);
+        HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
 
-            /* Ones digit */
-            digit_jobj = state->jobjs[Ones];
-            tobj = digit_jobj->u.dobj->mobj->tobj;
-            ones_digit = state->damage_percent % 10;
-            HSD_TObjAddAnimAll(tobj, mat_anim->matanim->texanim);
-            HSD_TObjReqAnimAll(tobj, 2.0F * ones_digit);
-            HSD_AObjSetRate(tobj->aobj, 0.0F);
-
-            /* Tens digit */
-            digit_jobj = state->jobjs[Tens];
-            tobj = digit_jobj->u.dobj->mobj->tobj;
-            tens_digit = (state->damage_percent % 100) / 10;
-            HSD_TObjAddAnimAll(tobj, mat_anim->matanim->texanim);
-            HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj,
-                               2.0F * tens_digit);
-            HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
-
-            /* Hundreds digit */
-            digit_jobj = state->jobjs[Hundreds];
-            tobj = digit_jobj->u.dobj->mobj->tobj;
-            hundreds_digit = (state->damage_percent % 1000) / 100;
-            HSD_TObjAddAnimAll(tobj, mat_anim->matanim->texanim);
-            HSD_TObjReqAnimAll(tobj, 2.0F * hundreds_digit);
-            HSD_AObjSetRate(tobj->aobj, 0.0F);
-        }
+        digit_jobj = state->jobjs[Hundreds];
+        hundreds_digit = (state->damage_percent % 1000) / 100;
+        HSD_TObjAddAnimAll(
+            digit_jobj->u.dobj->mobj->tobj,
+            (HSD_TexAnim*) hud->janim_selection_joints->child->child->aobjdesc
+                ->fobjdesc);
+        HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj,
+                           2.0F * hundreds_digit);
+        HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
     }
 
     HSD_JObjAnimAll(jobj);
 
-    /* Update TObj animations for all digits */
-    anim_base = (HSD_MatAnimJoint**) &hud->janim_selection_joints;
-    {
-        HSD_MatAnimJoint* mat_anim;
-        HSD_TexAnim* tex_anim;
+    digit_jobj = state->jobjs[Ones];
+    ones_digit = state->damage_percent % 10;
+    HSD_TObjAddAnimAll(
+        digit_jobj->u.dobj->mobj->tobj,
+        (HSD_TexAnim*) hud->janim_selection_joints->child->child->aobjdesc
+            ->fobjdesc);
+    HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * ones_digit);
+    HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
 
-        mat_anim = ((HSD_MatAnimJoint*) anim_base[0])->child->next->next;
-        tex_anim = mat_anim->matanim->texanim;
+    digit_jobj = state->jobjs[Tens];
+    tens_digit = (state->damage_percent % 100) / 10;
+    HSD_TObjAddAnimAll(
+        digit_jobj->u.dobj->mobj->tobj,
+        (HSD_TexAnim*) hud->janim_selection_joints->child->child->aobjdesc
+            ->fobjdesc);
+    HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * tens_digit);
+    HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
 
-        /* Ones digit */
-        digit_jobj = state->jobjs[Ones];
-        tobj = digit_jobj->u.dobj->mobj->tobj;
-        ones_digit = state->damage_percent % 10;
-        HSD_TObjAddAnimAll(tobj, tex_anim);
-        HSD_TObjReqAnimAll(tobj, 2.0F * ones_digit);
-        HSD_AObjSetRate(tobj->aobj, 0.0F);
+    hundreds_digit = (state->damage_percent % 1000) / 100;
+    if (hundreds_digit == 0 && tens_digit == 0) {
+        HSD_JObjSetFlagsAll(state->jobjs[Tens], 0x10);
+    } else {
+        HSD_JObjClearFlagsAll(state->jobjs[Tens], 0x10);
+    }
 
-        /* Tens digit */
-        digit_jobj = state->jobjs[Tens];
-        tobj = digit_jobj->u.dobj->mobj->tobj;
-        tens_digit = (state->damage_percent % 100) / 10;
-        HSD_TObjAddAnimAll(tobj, tex_anim);
-        HSD_TObjReqAnimAll(tobj, 2.0F * tens_digit);
-        HSD_AObjSetRate(tobj->aobj, 0.0F);
+    digit_jobj = state->jobjs[Hundreds];
+    hundreds_digit = (state->damage_percent % 1000) / 100;
+    HSD_TObjAddAnimAll(
+        digit_jobj->u.dobj->mobj->tobj,
+        (HSD_TexAnim*) hud->janim_selection_joints->child->child->aobjdesc
+            ->fobjdesc);
+    HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * hundreds_digit);
+    HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
 
-        /* Hide tens digit if value < 10 */
-        hundreds_digit = (state->damage_percent % 1000) / 100;
-        if (hundreds_digit == 0 && tens_digit == 0) {
-            HSD_JObjSetFlagsAll(state->jobjs[Tens], 0x10);
-        } else {
-            HSD_JObjClearFlagsAll(state->jobjs[Tens], 0x10);
-        }
-
-        /* Hundreds digit */
-        digit_jobj = state->jobjs[Hundreds];
-        tobj = digit_jobj->u.dobj->mobj->tobj;
-        hundreds_digit = (state->damage_percent % 1000) / 100;
-        HSD_TObjAddAnimAll(tobj, tex_anim);
-        HSD_TObjReqAnimAll(tobj, 2.0F * hundreds_digit);
-        HSD_AObjSetRate(tobj->aobj, 0.0F);
-
-        /* Hide hundreds digit if value < 100 */
-        if (hundreds_digit == 0) {
-            HSD_JObjSetFlagsAll(state->jobjs[Hundreds], 0x10);
-        } else {
-            HSD_JObjClearFlagsAll(state->jobjs[Hundreds], 0x10);
-        }
+    if (hundreds_digit == 0) {
+        HSD_JObjSetFlagsAll(state->jobjs[Hundreds], 0x10);
+    } else {
+        HSD_JObjClearFlagsAll(state->jobjs[Hundreds], 0x10);
     }
 
     /* Update colors when damage changes */
