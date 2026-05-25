@@ -643,7 +643,32 @@ void ifStatus_802F665C(int arg0)
 
 void ifStatus_802F66A4(void)
 {
-    NOT_IMPLEMENTED;
+    HudIndex* hud = &ifStatus_HudInfo;
+    s32 pad0;
+    s32 pad1;
+    DynamicModelDesc** mrk;
+    DynamicModelDesc** num;
+    HSD_Archive** arch;
+    s32 reset;
+
+    if (0) {
+        reset = 0;
+    }
+    arch = ifAll_802F3690();
+    lbArchive_LoadSections(*arch, (void**) &num, "DmgNum_scene_models",
+                           (void**) &mrk, "DmgMrk_scene_models", 0);
+    hud->unk258 = (*num)->joint;
+    hud->jobj_desc_parent = (*num)->anims;
+    hud->janim_selection_joints = (HSD_AnimJoint*) (*num)->matanims;
+    hud->janim_selection_textures = (*num)->shapeanims;
+    hud->unk268 = (*mrk)->joint;
+    hud->unk26C = (*mrk)->anims;
+    hud->unk270 = (*mrk)->matanims;
+    hud->unk274 = (*mrk)->shapeanims;
+    if (reset != 0) {
+        ifStatus_804D6D60 = 0;
+        memzero(hud, 0x258);
+    }
 }
 
 void ifStatus_802F6788(u8 player_idx)
