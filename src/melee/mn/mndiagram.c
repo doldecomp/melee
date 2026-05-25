@@ -86,6 +86,15 @@ static Point3d mnDiagram_803EE728[3] = {
     { -1.0F, 0.7F, 0.0F },
 };
 
+/// Overlay over &mnDiagram_803EE728 to reach the trailing animation/text-layout
+/// data the popup/cursor procs read at fixed offsets.
+typedef struct mnDiagram_AnimTable {
+    /* 0x00 */ Point3d points[3];
+    /* 0x24 */ u8 pad_24[0x34];
+    /* 0x58 */ AnimLoopSettings x58;
+    /* 0x64 */ AnimLoopSettings x64;
+} mnDiagram_AnimTable;
+
 static s32 mnDiagram_804D4FA0 = 0xFF;
 
 /// @brief Gets the fighter ID at the given sorted index.
@@ -907,7 +916,7 @@ void mnDiagram_PopupAnimProc(void* arg0)
 {
     mnDiagram_PopupData* data = ((HSD_GObj*) arg0)->user_data;
     HSD_Text* text;
-    char* base = (char*) mnDiagram_803EE728;
+    mnDiagram_AnimTable* tbl = (mnDiagram_AnimTable*) &mnDiagram_803EE728;
     Point3d pos;
     f32 anim_frame;
     PAD_STACK(24);
@@ -915,52 +924,89 @@ void mnDiagram_PopupAnimProc(void* arg0)
     HSD_JObjAnimAll(data->jobjs[5]);
 
     text = data->text[0];
-    lb_8000B1CC(data->jobjs[8], (Point3d*) base, &pos);
-    text->pos_x = pos.x;
-    text->pos_y = -pos.y;
-    text->pos_z = pos.z;
+    lb_8000B1CC(data->jobjs[8], &tbl->points[0], &pos);
+    {
+        f32 y = pos.y;
+        f32 z = pos.z;
+        text->pos_x = pos.x;
+        text->pos_y = -y;
+        text->pos_z = z;
+    }
     text->default_alignment = 0;
 
     HSD_JObjAnim(data->jobjs[9]);
     if (data->text[1] != NULL) {
-        lb_8000B1CC(data->jobjs[11], (Point3d*) (base + 0xC), &pos);
-        data->text[1]->pos_x = pos.x;
-        data->text[1]->pos_y = -pos.y;
-        data->text[1]->pos_z = pos.z;
+        HSD_Text* t;
+        f32 y;
+        f32 z;
+        lb_8000B1CC(data->jobjs[11], &tbl->points[1], &pos);
+        y = pos.y;
+        z = pos.z;
+        t = data->text[1];
+        t->pos_x = pos.x;
+        t->pos_y = -y;
+        t->pos_z = z;
         text->default_alignment = 1;
     }
     if (data->text[2] != NULL) {
-        lb_8000B1CC(data->jobjs[10], (Point3d*) (base + 0x18), &pos);
-        data->text[2]->pos_x = pos.x;
-        data->text[2]->pos_y = -pos.y;
-        data->text[2]->pos_z = pos.z;
+        HSD_Text* t;
+        f32 y;
+        f32 z;
+        lb_8000B1CC(data->jobjs[10], &tbl->points[2], &pos);
+        y = pos.y;
+        z = pos.z;
+        t = data->text[2];
+        t->pos_x = pos.x;
+        t->pos_y = -y;
+        t->pos_z = z;
         text->default_alignment = 1;
     }
 
     HSD_JObjAnim(data->jobjs[1]);
-    lb_8000B1CC(data->jobjs[3], (Point3d*) (base + 0xC), &pos);
-    data->text[3]->pos_x = pos.x;
-    data->text[3]->pos_y = -pos.y;
-    data->text[3]->pos_z = pos.z;
+    {
+        HSD_Text* t;
+        f32 y;
+        f32 z;
+        lb_8000B1CC(data->jobjs[3], &tbl->points[1], &pos);
+        y = pos.y;
+        z = pos.z;
+        t = data->text[3];
+        t->pos_x = pos.x;
+        t->pos_y = -y;
+        t->pos_z = z;
+    }
     text->default_alignment = 1;
 
     if (data->text[4] != NULL) {
-        lb_8000B1CC(data->jobjs[2], (Point3d*) (base + 0x18), &pos);
-        data->text[4]->pos_x = pos.x;
-        data->text[4]->pos_y = -pos.y;
-        data->text[4]->pos_z = pos.z;
+        HSD_Text* t;
+        f32 y;
+        f32 z;
+        lb_8000B1CC(data->jobjs[2], &tbl->points[2], &pos);
+        y = pos.y;
+        z = pos.z;
+        t = data->text[4];
+        t->pos_x = pos.x;
+        t->pos_y = -y;
+        t->pos_z = z;
         text->default_alignment = 1;
     }
 
-    anim_frame =
-        mn_8022EFD8(data->jobjs[12], (AnimLoopSettings*) (base + 0x64));
-    lb_8000B1CC(data->jobjs[13], (Point3d*) (base + 0xC), &pos);
-    data->text[3]->pos_x = pos.x;
-    data->text[3]->pos_y = -pos.y;
-    data->text[3]->pos_z = pos.z;
+    anim_frame = mn_8022EFD8(data->jobjs[12], &tbl->x64);
+    {
+        HSD_Text* t;
+        f32 y;
+        f32 z;
+        lb_8000B1CC(data->jobjs[13], &tbl->points[1], &pos);
+        y = pos.y;
+        z = pos.z;
+        t = data->text[3];
+        t->pos_x = pos.x;
+        t->pos_y = -y;
+        t->pos_z = z;
+    }
     text->default_alignment = 1;
 
-    if (anim_frame == *(f32*) (base + 0x68)) {
+    if (anim_frame == tbl->x64.end_frame) {
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
     }
 }
