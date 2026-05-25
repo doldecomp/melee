@@ -7,6 +7,7 @@
 #include "gm/gm_unsplit.h"
 #include "gm/types.h"
 #include "if/if_2F72.h"
+#include "if/ifcoget.h"
 #include "if/ifstock.h"
 #include "if/types.h"
 #include "lb/lb_00B0.h"
@@ -539,9 +540,92 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     }
 }
 
-void ifStatus_802F5B48(void)
+void ifStatus_802F5B48(HSD_GObj* gobj)
 {
-    NOT_IMPLEMENTED;
+    IfDamageState* p;
+    s32 i;
+    s32 diff;
+    u8 t;
+
+    for (i = 0; i < 6; i++) {
+        if (ifStatus_HudInfo.players[i].HUD_parent_entity == gobj) {
+            p = &ifStatus_HudInfo.players[i];
+            goto found;
+        }
+    }
+    p = NULL;
+found:
+    t = p->unk9;
+    if (t != 0) {
+        t = t + 1;
+        p->unk9 = t;
+        if (t > 0xC8U) {
+            ifStatus_802F6788(p->player_slot);
+            return;
+        }
+    }
+    if (Player_GetEntity((s8) p->player_slot) == NULL) {
+        return;
+    }
+    p->old_damage = p->damage_percent;
+    if (Player_GetMoreFlagsBit2((s8) p->player_slot) != 0) {
+        p->damage_percent = Player_GetRemainingHP((s8) p->player_slot);
+        if ((s16) p->damage_percent > 0x3E7) {
+            p->damage_percent = 0x3E7;
+        } else if ((s16) p->damage_percent < 0) {
+            p->damage_percent = 0;
+        }
+        if ((s16) p->old_damage != -1 &&
+            (s16) p->damage_percent < (s16) p->old_damage)
+        {
+            p->flags.force_digit_shake = 1;
+            diff = (s16) p->old_damage - (s16) p->damage_percent;
+            if (diff < 0) {
+                diff = -diff;
+            }
+            p->damage_from_last_attack = diff;
+        } else {
+            p->flags.force_digit_shake = 0;
+        }
+        if ((s16) p->old_damage != -1 &&
+            (s16) p->damage_percent > (s16) p->old_damage)
+        {
+            p->flags.unk10 = 1;
+        } else {
+            p->flags.unk10 = 0;
+        }
+        if ((s16) p->old_damage == 0) {
+            if (gm_8016AE44()->FighterMatchInfo[(s8) p->player_slot].x4_b5) {
+                ifStatus_802F6948((s8) p->player_slot);
+            }
+        }
+    } else {
+        p->damage_percent = Player_GetDamage((s8) p->player_slot);
+        if ((s16) p->damage_percent > 0x3E7) {
+            p->damage_percent = 0x3E7;
+        } else if ((s16) p->damage_percent < 0) {
+            p->damage_percent = 0;
+        }
+        if ((s16) p->old_damage != -1 &&
+            (s16) p->damage_percent < (s16) p->old_damage)
+        {
+            p->flags.unk10 = 1;
+        } else {
+            p->flags.unk10 = 0;
+        }
+        if ((s16) p->old_damage != -1 &&
+            (s16) p->damage_percent > (s16) p->old_damage)
+        {
+            p->flags.force_digit_shake = 1;
+            diff = (s16) p->old_damage - (s16) p->damage_percent;
+            if (diff < 0) {
+                diff = -diff;
+            }
+            p->damage_from_last_attack = diff;
+            return;
+        }
+        p->flags.force_digit_shake = 0;
+    }
 }
 
 inline IfDamageState* getPlayerByHUDParent(HSD_GObj* parent)
@@ -581,7 +665,7 @@ void ifStatus_802F5E50(HSD_GObj* gobj, s32 arg1)
     }
 }
 
-void ifStatus_802F5EC0(void)
+void ifStatus_802F5EC0(IfDamageState* state, s32 player_idx)
 {
     NOT_IMPLEMENTED;
 }
@@ -623,12 +707,48 @@ check_done:
     return gx_cur;
 }
 
-void ifStatus_802F61FC(void)
+void ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
 {
     NOT_IMPLEMENTED;
 }
 
-void ifStatus_802F6508(s32 arg0);
+void ifStatus_802F6508(s32 arg0)
+{
+    IfDamageState* hud_player;
+    StartMeleeRules* rules;
+    u32 mode;
+
+    if (Player_GetPlayerSlotType(arg0) != Gm_PKind_NA &&
+        (s32) ifStatus_804D6D60 > arg0 &&
+        (rules = gm_8016AE50(), rules->x2_6))
+    {
+        hud_player = &ifStatus_HudInfo.players[(u8) arg0];
+        hud_player->damage_percent = -1;
+        hud_player->old_damage = -1;
+        hud_player->frames_of_shake_remaining = 0;
+        hud_player->flags.explode_animation = 0;
+        hud_player->flags.randomize_velocity = 0;
+        hud_player->flags.force_digit_shake = 0;
+        hud_player->flags.unk10 = 0;
+        hud_player->player_slot = (u8) arg0;
+        hud_player->unk9 = 0;
+        ifStatus_802F61FC(hud_player, (u8) arg0);
+        ifStatus_802F5EC0(hud_player, (u8) arg0);
+        if (rules->x3_0 && gm_8016B238() == 0) {
+            un_802FF364(arg0);
+        }
+        mode = rules->x0_0;
+        if (mode == 1 || rules->x4_2) {
+            ifStock_802F98E8((u8) arg0, 0);
+            return;
+        }
+        if (mode == 2) {
+            ifStock_802F98E8((u8) arg0, 2);
+            return;
+        }
+        ifStock_802F98E8((u8) arg0, 1);
+    }
+}
 
 void ifStatus_802F665C(int arg0)
 {
