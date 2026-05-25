@@ -168,8 +168,9 @@ void* HSD_SisLib_803A5798(s32 size)
     return best->data_1;
 }
 
-/// @todo Currently 92.39% match - needs register allocation fix in
-/// coalesce block (new_size/old_next register assignment differs)
+/// @todo Currently 92.57% match - register allocation/scheduling in coalesce
+/// block: compiler reassociates new_size add and reuses free_cur reg for
+/// old_next instead of the alloc_cur->size reg
 void HSD_SisLib_803A594C(void* ptr)
 {
     sislib_UnkAllocData* free_cur;
