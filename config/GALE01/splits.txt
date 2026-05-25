@@ -841,10 +841,50 @@ melee/ft/chara/ftCommon/ftCo_DemoCallback0.c:
 	.sdata2     start:0x804D8DC0 end:0x804D8DC8
 
 melee/ft/ft_0C31.c:
-	.text       start:0x800C61B0 end:0x800C8170
+	.text       start:0x800C61B0 end:0x800C703C
 	.sdata      start:0x804D3C78 end:0x804D3C90
+	.sdata2     start:0x804D8DC8 end:0x804D8DE8
+
+melee/ft/ftCo_800C703C.c:
+	.text       start:0x800C703C end:0x800C7070
+	.sdata2     start:0x804D8DE8 end:0x804D8DF0
+
+melee/ft/ftCo_800C7070.c:
+	.text       start:0x800C7070 end:0x800C70D0
+	.sdata2     start:0x804D8DF0 end:0x804D8DF8
+
+melee/ft/ftCo_800C70D0.c:
+	.text       start:0x800C70D0 end:0x800C7178
+	.sdata2     start:0x804D8DF8 end:0x804D8E00
+
+melee/ft/ftCo_800C7178.c:
+	.text       start:0x800C7178 end:0x800C7220
+	.sdata2     start:0x804D8E00 end:0x804D8E08
+
+melee/ft/ftCo_800C7220.c:
+	.text       start:0x800C7220 end:0x800C739C
+	.sdata2     start:0x804D8E08 end:0x804D8E10
+
+melee/ft/ftCo_800C739C.c:
+	.text       start:0x800C739C end:0x800C7434
+	.sdata2     start:0x804D8E10 end:0x804D8E18
+
+melee/ft/ftCo_800C7434.c:
+	.text       start:0x800C7434 end:0x800C7590
+	.sdata2     start:0x804D8E18 end:0x804D8E20
+
+melee/ft/ftCo_800C7590.c:
+	.text       start:0x800C7590 end:0x800C78B0
+	.sdata2     start:0x804D8E20 end:0x804D8E30
+
+melee/ft/ftCo_800C78B0.c:
+	.text       start:0x800C78B0 end:0x800C7CA0
+	.sdata2     start:0x804D8E30 end:0x804D8E48
+
+melee/ft/ftCo_800C7CA0.c:
+	.text       start:0x800C7CA0 end:0x800C8170
 	.sbss       start:0x804D6580 end:0x804D6590
-	.sdata2     start:0x804D8DC8 end:0x804D8E58
+	.sdata2     start:0x804D8E48 end:0x804D8E58
 
 melee/ft/ftmetal.c:
 	.text       start:0x800C8170 end:0x800C884C
