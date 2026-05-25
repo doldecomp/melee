@@ -757,7 +757,60 @@ check_done:
 
 void ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
 {
-    NOT_IMPLEMENTED;
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+    HSD_TObj* tobj;
+    Vec3* vec;
+    HSD_MObj* mobj;
+    GXColor color;
+    CharacterKind chara;
+    u8 slot;
+    u8 team;
+    u8 hud_color;
+    HudIndex* hud = &ifStatus_HudInfo;
+    s32 idx = (u8) player_idx;
+
+    chara = Player_GetPlayerCharacter(idx);
+    if (state->next == NULL) {
+        ifAll_802F3690();
+        gobj = GObj_Create(0xE, 0xF, 0);
+        if (gobj == NULL) {
+            OSReport("Error : gobj dont't get (ifAddMark)\n");
+            __assert("ifstatus.c", 0x30A, "0");
+        }
+        jobj = HSD_JObjLoadJoint((HSD_Joint*) hud->unk268);
+        if (jobj == NULL) {
+            OSReport("Error : jobj dont't get (ifAddMark)\n");
+            __assert("ifstatus.c", 0x30E, "0");
+        }
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        GObj_SetupGXLink(gobj, ifStatus_802F5E50, 0xB, 0);
+        state->next = gobj;
+    } else {
+        jobj = state->next->hsd_obj;
+    }
+    tobj = jobj->child->u.dobj->mobj->tobj;
+    lb_8000C07C(jobj, 0, (HSD_AnimJoint**) hud->unk26C,
+                (HSD_MatAnimJoint**) hud->unk270,
+                (HSD_ShapeAnimJoint**) hud->unk274);
+    if (chara == CKIND_MASTERH || (u32) (chara - CKIND_GKOOPS) <= 1) {
+        chara = CKIND_BOY;
+    }
+    HSD_TObjReqAnimAll(tobj, 0.5f + gm_80168B34(chara, 0, 0));
+    HSD_AObjSetRate(tobj->aobj, 0.1f);
+    HSD_TObjAnim(tobj);
+    vec = ifAll_802F3424(idx);
+    HSD_JObjSetTranslate(jobj, vec);
+    HSD_JObjAddTranslationX(jobj, 0.25f);
+    slot = Player_GetPlayerSlotType(idx);
+    hud_color = gm_8016B168();
+    team = Player_GetTeam(idx);
+    color = gm_80160968(gm_80160854(Player_GetPlayerId(idx), team,
+                                    hud_color, slot));
+    mobj = HSD_JObjGetChild(jobj)->u.dobj->mobj;
+    mobj->mat->diffuse.r = color.r;
+    mobj->mat->diffuse.g = color.g;
+    mobj->mat->diffuse.b = color.b;
 }
 
 void ifStatus_802F6508(s32 arg0)
