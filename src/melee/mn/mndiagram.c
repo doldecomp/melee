@@ -707,7 +707,8 @@ void mnDiagram_8023FC28(void)
 {
     u32 totals[0x78];
     int i, j;
-    u8* dst = ((mnDiagram_Assets*) &mnDiagram_804A0750)->sorted_names;
+    mnDiagram_Assets* assets = (mnDiagram_Assets*) &mnDiagram_804A0750;
+    u8* dst = assets->sorted_names;
     PAD_STACK(16);
 
     for (i = 0; i < 0x78; i++) {
@@ -724,15 +725,17 @@ void mnDiagram_8023FC28(void)
     for (i = 0; i < 0x78; i++) {
         int max_idx = i;
         for (j = i + 1; j < 0x78; j++) {
-            if ((GetNameText(dst[j]) != NULL) &&
-                ((totals[dst[max_idx]] < totals[dst[j]]) ||
-                 (GetNameText(dst[max_idx]) == NULL)))
+            if ((GetNameText(assets->sorted_names[j]) != NULL) &&
+                ((totals[assets->sorted_names[max_idx]] <
+                  totals[assets->sorted_names[j]]) ||
+                 ((GetNameText(assets->sorted_names[max_idx]) == NULL) &&
+                  (GetNameText(assets->sorted_names[j]) != NULL))))
             {
                 max_idx = j;
             }
         }
         if (max_idx != i) {
-            u8* p = &dst[max_idx];
+            u8* p = &assets->sorted_names[max_idx];
             int n = max_idx - i;
             u8 temp = *p;
             while (n > 0) {
