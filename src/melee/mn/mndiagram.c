@@ -93,6 +93,9 @@ typedef struct mnDiagram_AnimTable {
     /* 0x24 */ u8 pad_24[0x34];
     /* 0x58 */ AnimLoopSettings x58;
     /* 0x64 */ AnimLoopSettings x64;
+    /* 0x70 */ char x70[0x18];
+    /* 0x88 */ char x88[0xC];
+    /* 0x94 */ char x94[0x14];
 } mnDiagram_AnimTable;
 
 static s32 mnDiagram_804D4FA0 = 0xFF;
@@ -909,7 +912,7 @@ void mnDiagram_PopupCleanup(void* arg0)
 
 typedef struct mnDiagram_PopupData {
     /* 0x00 */ HSD_JObj* jobjs[14];
-    /* 0x38 */ HSD_Text* text[6];
+    /* 0x38 */ HSD_Text* text[5];
 } mnDiagram_PopupData;
 
 void mnDiagram_PopupAnimProc(void* arg0)
@@ -1112,7 +1115,7 @@ void mnDiagram_80240D94(void* arg0, s32 arg1, s32 arg2, s32 arg3)
 void mnDiagram_80241310(s32 arg0, s32 arg1, s32 arg2)
 {
     Diagram* data;
-    char* base;
+    mnDiagram_AnimTable* tbl;
     void** joint_data;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
@@ -1121,7 +1124,7 @@ void mnDiagram_80241310(s32 arg0, s32 arg1, s32 arg2)
     PAD_STACK(8);
 
     data = mnDiagram_804D6C10->user_data;
-    base = (char*) &mnDiagram_803EE728;
+    tbl = (mnDiagram_AnimTable*) &mnDiagram_803EE728;
     joint_data = mnDiagram_804A07E4;
 
     gobj = GObj_Create(6, 7, 0x80);
@@ -1135,8 +1138,8 @@ void mnDiagram_80241310(s32 arg0, s32 arg1, s32 arg2)
 
     popup_data = HSD_MemAlloc(sizeof(mnDiagram_PopupData));
     if (popup_data == NULL) {
-        OSReport(base + 0x70);
-        __assert(base + 0x88, 0x5F8, base + 0x94);
+        OSReport(tbl->x70);
+        __assert(tbl->x88, 0x5F8, tbl->x94);
     }
     GObj_InitUserData(gobj, 0, mnDiagram_PopupCleanup, popup_data);
     popup_data->text[4] = NULL;
