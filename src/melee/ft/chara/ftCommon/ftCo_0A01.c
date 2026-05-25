@@ -3871,6 +3871,12 @@ void ftCo_800A8940(Fighter* fp)
     }
 }
 
+void ftCo_800A8DE4_noinline(Fighter* fp);
+void ftCo_800A8DE4_noinline(Fighter* fp)
+{
+    ftCo_800A8DE4(fp);
+}
+
 void ftCo_800A8DE4(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
@@ -5165,6 +5171,11 @@ static inline bool inlineG0(Fighter* fp)
         ret = false;
     }
     return ret;
+}
+void ftCo_800AC30C_noinline(Fighter* fp);
+void ftCo_800AC30C_noinline(Fighter* fp)
+{
+    ftCo_800AC30C(fp);
 }
 
 void ftCo_800AC30C(Fighter* fp)
@@ -8144,13 +8155,10 @@ void ftCo_800B2790(Fighter* fp)
                 ftCo_800B9020(fp);
                 break;
             case 4:
-                ftCo_800A8DE4(fp);
+                ftCo_800A8DE4_noinline(fp);
                 if (fp->ground_or_air == GA_Ground) {
                     line_id = fp->coll_data.floor.index;
                     if (ftCo_800A6A98_inline0(line_id)) {
-                        var_r28 = 1;
-                    }
-                    if (var_r28 != 0) {
                         ftCo_800A0148(fp);
                     } else {
                         goto block_15;
@@ -8218,7 +8226,7 @@ void ftCo_800B2790(Fighter* fp)
                 ftCo_800ABBA8(fp);
                 break;
             case 16:
-                ftCo_800AC30C(fp);
+                ftCo_800AC30C_noinline(fp);
                 break;
             case 17:
                 ftCo_800AC434(fp);
