@@ -1410,6 +1410,12 @@ enum_t ftCo_800A3134(Fighter* fp)
     }
 }
 
+bool ftCo_IsGrabbing_dontinline(Fighter* fp);
+bool ftCo_IsGrabbing_dontinline(Fighter* fp)
+{
+    return ftCo_IsGrabbing(fp);
+}
+
 bool ftCo_IsGrabbing(Fighter* fp)
 {
     if (fp->motion_id == ftCo_MS_CatchWait) {
@@ -1736,7 +1742,7 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
                     result = mpCheckFloor(px, 5.0f + ey, px, ey - 5.0f, 0.0f,
                                           &sp58, &line_id, &flags, &sp64, -1,
                                           -1, -1, NULL, NULL);
-                    if (result != 0 && ftCo_800A1B38(line_id) != 0) {
+                    if (result != 0 && ftCo_800A1B38_noinline(line_id) != 0) {
                     } else {
                         valid = result;
                     }
@@ -1779,7 +1785,7 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
                 result = mpCheckFloor(px, 5.0f + ey, px, ey - 5.0f, 0.0f,
                                       &sp38, &line_id, &flags, &sp44, -1, -1,
                                       -1, NULL, NULL);
-                if (result != 0 && ftCo_800A1B38(line_id) != 0) {
+                if (result != 0 && ftCo_800A1B38_noinline(line_id) != 0) {
                 } else {
                     valid = result;
                 }
@@ -2497,6 +2503,11 @@ bool ftCo_800A5944(Item* ip)
         return true;
     }
     return false;
+}
+bool ftCo_800A5980_dontinline(Fighter* fp);
+bool ftCo_800A5980_dontinline(Fighter* fp)
+{
+    return ftCo_800A5980(fp);
 }
 
 bool ftCo_800A5980(Fighter* fp)
@@ -5845,7 +5856,7 @@ void ftCo_800ADE48(Fighter* fp)
     result = mpCheckFloor(px, 5.0 + py, px, py - 5.0, 0.0f, &floor_pos,
                           &line_id, &flags, &floor_normal, -1, -1, -1, NULL,
                           NULL);
-    if (result != 0 && ftCo_800A1B38(line_id) != 0) {
+    if (result != 0 && ftCo_800A1B38_noinline(line_id) != 0) {
     } else {
         found = result;
     }
@@ -5875,7 +5886,7 @@ void ftCo_800ADE48(Fighter* fp)
                                   &line_id, &flags, &floor_normal, -1, -1, -1,
                                   NULL, NULL);
             found = 0;
-            if (result != 0 && ftCo_800A1B38(line_id) != 0) {
+            if (result != 0 && ftCo_800A1B38_noinline(line_id) != 0) {
             } else {
                 found = result;
             }
@@ -6005,7 +6016,7 @@ check_motion:
                         return;
                     }
                     if (data->x18 != 9) {
-                        if (ftCo_IsGrabbing(fp) != 0) {
+                        if (ftCo_IsGrabbing_dontinline(fp) != 0) {
                             ftCo_800B4A78(fp);
                             data->x18 = 9;
                             return;
@@ -6107,7 +6118,7 @@ check_motion:
                                                                             0)
                                                                         {
                                                                             found =
-                                                                                ftCo_800A5980(
+                                                                                ftCo_800A5980_dontinline(
                                                                                     (Fighter*)
                                                                                         ip) !=
                                                                                         0
@@ -6119,7 +6130,7 @@ check_motion:
                                                                         }
                                                                     } else {
                                                                         found =
-                                                                            ftCo_800A5980(
+                                                                            ftCo_800A5980_dontinline(
                                                                                 (Fighter*)
                                                                                     ip) !=
                                                                                     0
