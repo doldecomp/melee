@@ -8,6 +8,7 @@
 
 #include "cm/camera.h"
 #include "ef/efasync.h"
+#include "ft/chara/ftKirby/ftKb_Init.h"
 #include "ft/fighter.h"
 
 #include "ft/forward.h"
@@ -35,8 +36,8 @@
 #include "mp/mpcoll.h"
 #include "pl/player.h"
 
-#include <dolphin/mtx.h>
 #include <trigf.h>
+#include <dolphin/mtx.h>
 #include <baselib/dobj.h>
 #include <baselib/jobj.h>
 
