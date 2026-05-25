@@ -213,6 +213,18 @@ static void getColorMatAmb(HSD_Particle* pp, GXColor* matCol, GXColor* ambCol)
     }
 }
 
+static inline void getColorMatAmb_inner(HSD_Particle* pp, GXColor* matCol,
+                                        GXColor* ambCol)
+{
+    getColorMatAmb(pp, matCol, ambCol);
+}
+
+static inline void getColorMatAmb_noinline(HSD_Particle* pp, GXColor* matCol,
+                                           GXColor* ambCol)
+{
+    getColorMatAmb_inner(pp, matCol, ambCol);
+}
+
 HSD_Particle* particleSort(s32 arg0, u8 arg1, HSD_Particle** arg2,
                            HSD_Particle** arg3)
 {
@@ -996,30 +1008,31 @@ void psDispParticles(s32 arg0, u32 arg1)
                 psSetupTev((u32*) pp);
                 chan_state = pp->kind & 0x80100000;
                 if ((u32) HSD_PSDisp_804D7930 != chan_state) {
-                    GXAttnFn attn_fn = HSD_LObjGetLightMaskAttnFunc() != 0 ? GX_AF_SPOT : GX_AF_NONE;
                     HSD_PSDisp_804D7930 = chan_state;
                     GXSetNumChans(1U);
-                    switch (chan_state) {
-                    case 0:
-                    case DispLighting:
-                        GXSetChanCtrl(GX_COLOR0, GX_TRUE, GX_SRC_REG, GX_SRC_REG, HSD_LObjGetLightMaskDiffuse(), GX_DF_NONE, attn_fn);
-                        GXSetChanCtrl(GX_ALPHA0, GX_FALSE, GX_SRC_REG, GX_SRC_REG, 0U, GX_DF_NONE, GX_AF_NONE);
-                        break;
-                    case Trail:
-                        GXSetChanCtrl(GX_COLOR0A0, GX_FALSE, GX_SRC_VTX, GX_SRC_VTX, 0U, GX_DF_NONE, GX_AF_NONE);
-                        break;
-                    case DispLighting | Trail:
+                    if (chan_state != (DispLighting | Trail)) {
+                        if ((s32) chan_state < (s32) (DispLighting | Trail)) {
+                            if ((s32) chan_state < 0x80000001) {
+                                GXAttnFn attn_fn = HSD_LObjGetLightMaskAttnFunc() != 0 ? GX_AF_SPOT : GX_AF_NONE;
+                                GXSetChanCtrl(GX_COLOR0, GX_TRUE, GX_SRC_REG, GX_SRC_REG, HSD_LObjGetLightMaskDiffuse(), GX_DF_NONE, attn_fn);
+                                GXSetChanCtrl(GX_ALPHA0, GX_FALSE, GX_SRC_REG, GX_SRC_REG, 0U, GX_DF_NONE, GX_AF_NONE);
+                            } else {
+                                GXSetChanCtrl(GX_COLOR0A0, GX_FALSE, GX_SRC_REG, GX_SRC_REG, 0U, GX_DF_NONE, GX_AF_NONE);
+                            }
+                        } else if (chan_state != Trail) {
+                            GXSetChanCtrl(GX_COLOR0A0, GX_FALSE, GX_SRC_REG, GX_SRC_REG, 0U, GX_DF_NONE, GX_AF_NONE);
+                        } else {
+                            GXSetChanCtrl(GX_COLOR0A0, GX_FALSE, GX_SRC_VTX, GX_SRC_VTX, 0U, GX_DF_NONE, GX_AF_NONE);
+                        }
+                    } else {
+                        GXAttnFn attn_fn = HSD_LObjGetLightMaskAttnFunc() != 0 ? GX_AF_SPOT : GX_AF_NONE;
                         GXSetChanCtrl(GX_COLOR0, GX_TRUE, GX_SRC_REG, GX_SRC_REG, HSD_LObjGetLightMaskDiffuse(), GX_DF_NONE, attn_fn);
                         GXSetChanCtrl(GX_ALPHA0, GX_FALSE, GX_SRC_VTX, GX_SRC_VTX, 0U, GX_DF_NONE, GX_AF_NONE);
-                        break;
-                    default:
-                        GXSetChanCtrl(GX_COLOR0A0, GX_FALSE, GX_SRC_REG, GX_SRC_REG, 0U, GX_DF_NONE, GX_AF_NONE);
-                        break;
                     }
                 }
 
                 if (pp->kind & DispLighting) {
-                    getColorMatAmb(pp, &mat_color, &amb_color);
+                    getColorMatAmb_noinline(pp, &mat_color, &amb_color);
                     if (pp->kind & PrimEnv) {
                         prim_color.r = 0xFF;
                         prim_color.g = 0xFF;
@@ -1027,9 +1040,9 @@ void psDispParticles(s32 arg0, u32 arg1)
                         prim_color.a = 0xFF;
                     } else {
                         getColorPrimEnv(pp, &prim_color, &env_color);
-                        amb_color.r = (u8) (((u32) amb_color.r * prim_color.r) >> 8);
-                        amb_color.g = (u8) (((u32) amb_color.g * prim_color.g) >> 8);
-                        amb_color.b = (u8) (((u32) amb_color.b * prim_color.b) >> 8);
+                        amb_color.r = (u8) (((s32) (amb_color.r * prim_color.r)) >> 8);
+                        amb_color.g = (u8) (((s32) (amb_color.g * prim_color.g)) >> 8);
+                        amb_color.b = (u8) (((s32) (amb_color.b * prim_color.b)) >> 8);
                     }
                     if ((prim_color.r != HSD_PSDisp_804D7934.r) || (prim_color.g != HSD_PSDisp_804D7934.g) || (prim_color.b != HSD_PSDisp_804D7934.b)) {
                         HSD_PSDisp_804D7934.r = prim_color.r;
@@ -1078,9 +1091,9 @@ void psDispParticles(s32 arg0, u32 arg1)
                     }
                 }
                 if (pp->kind & DispLighting) {
-                    getColorMatAmb(pp, &mat_color, &amb_color);
+                    getColorMatAmb_noinline(pp, &mat_color, &amb_color);
                     if (!(pp->kind & PrimEnv)) {
-                        mat_color.a = (u8) (((u32) mat_color.a * prim_color.a) >> 8);
+                        mat_color.a = (u8) (((s32) (mat_color.a * prim_color.a)) >> 8);
                     }
                     if ((HSD_PSDisp_804D7944.r != mat_color.r) || (HSD_PSDisp_804D7944.g != mat_color.g) || (HSD_PSDisp_804D7944.b != mat_color.b) || (HSD_PSDisp_804D7944.a != mat_color.a)) {
                         HSD_PSDisp_804D7944 = mat_color;
@@ -1421,13 +1434,89 @@ void psDispParticles(s32 arg0, u32 arg1)
                         bx = ax;
                         ay = -by;
                     }
-                    if (pp->kind & (Trail | DirVec)) {
-                        f32 dx = cur_pos.x - prev_pos.x;
-                        f32 dy = cur_pos.y - prev_pos.y;
-                        if (fabsf(dx) < (f32) sp898) {
-                            angle = (dy >= 0.0f) ? 1.5707964f : -1.5707964f;
+                    if ((pp->kind & Trail) || (pp->kind & DirVec)) {
+                        f32 vf1 = 0.0f;
+                        f32 vf2 = 0.0f;
+                        if ((f32) sp8B0 == cache[0x18]) {
+                            Vec3 d;
+                            f32 x84 = appsrt->x84;
+                            f32 x88 = appsrt->x88;
+                            f32 x8C = appsrt->x8C;
+                            f32 x90 = appsrt->x90;
+                            f32 x74 = appsrt->x74;
+                            f32 x78 = appsrt->x78;
+                            f32 x7C = appsrt->x7C;
+                            f32 x80 = appsrt->x80;
+                            f64 d830 = (f64) (cache[0x1A] * x90);
+                            f64 d840 = (f64) (cache[0x1C] * x84);
+                            f64 d850 = (f64) (cache[0x1C] * x88);
+                            f64 d860 = (f64) (cache[0x1C] * x8C);
+                            f64 d870 = (f64) (cache[0x1C] * x90);
+                            f32 w0 = x90 + (x8C * pp->pos.z +
+                                            (x84 * pp->pos.x + x88 * pp->pos.y));
+                            f32 f16 = cache[0x19] * appsrt->x6C + cache[0x1A] * x8C;
+                            f32 s808 =
+                                cache[0x19] * appsrt->ssx + cache[0x1A] * x84;
+                            f32 s804 =
+                                cache[0x19] * appsrt->ssy + cache[0x1A] * x88;
+                            f32 f20 = cache[0x19] * appsrt->x70 + (f32) d830;
+                            f32 f12 = cache[0x1B] * x74 + (f32) d840;
+                            f32 f8 = cache[0x1B] * x78 + (f32) d850;
+                            f32 f11 = cache[0x1B] * x7C + (f32) d860;
+                            f32 f13 = cache[0x1B] * x80 + (f32) d870;
+                            if (pp->kind & Tornado) {
+                                calcTornadoLastPos(pp, &d.x, &d.y, &d.z);
+                            } else {
+                                d.x = pp->pos.x - pp->vel.x;
+                                d.y = pp->pos.y - pp->vel.y;
+                                d.z = pp->pos.z - pp->vel.z;
+                            }
+                            if (cache[0x18] != w0) {
+                                f32 w0inv = (f32) sp878 / w0;
+                                f32 w1 = x90 + (x8C * d.z + (x84 * d.x + x88 * d.y));
+                                if (cache[0x18] != w1) {
+                                    f32 w1inv = (f32) sp878 / w1;
+                                    vf1 = w0inv * (f20 + (f16 * pp->pos.z +
+                                                          (s808 * pp->pos.x +
+                                                           s804 * pp->pos.y))) -
+                                          w1inv * (f20 + (f16 * d.z +
+                                                          (s808 * d.x + s804 * d.y)));
+                                    vf2 = w0inv * (f13 + (f11 * pp->pos.z +
+                                                          (f12 * pp->pos.x +
+                                                           f8 * pp->pos.y))) -
+                                          w1inv * (f13 + (f11 * d.z +
+                                                          (f12 * d.x + f8 * d.y)));
+                                }
+                            }
                         } else {
-                            angle = atan2f(dy, dx);
+                            f32 s800 = cache[0x19] * appsrt->ssx + cache[0x1A];
+                            f32 s7FC = cache[0x19] * appsrt->ssy + cache[0x1A];
+                            f32 s7F8 = cache[0x19] * appsrt->x6C + cache[0x1A];
+                            f32 f17 = cache[0x1B] * appsrt->x74 + cache[0x1C];
+                            f32 f18 = cache[0x1B] * appsrt->x78 + cache[0x1C];
+                            f32 f20 = cache[0x1B] * appsrt->x7C + cache[0x1C];
+                            if (pp->kind & Tornado) {
+                                Vec3 t;
+                                calcTornadoLastPos(pp, &t.x, &t.y, &t.z);
+                                {
+                                    f32 dy = pp->pos.y - t.y;
+                                    f32 dx = pp->pos.x - t.x;
+                                    f32 dz = pp->pos.z - t.z;
+                                    vf1 = s7F8 * dz + (s800 * dx + s7FC * dy);
+                                    vf2 = f20 * dz + (f17 * dx + f18 * dy);
+                                }
+                            } else {
+                                f32 vy = pp->vel.y;
+                                f32 vx = pp->vel.x;
+                                f32 vz = pp->vel.z;
+                                vf1 = s7F8 * vz + (s800 * vx + s7FC * vy);
+                                vf2 = f20 * vz + (f17 * vx + f18 * vy);
+                            }
+                        }
+                        if (fabsf(vf2) < (f32) sp898) {
+                            angle = (-vf1 >= 0.0f) ? 1.5707964f : -1.5707964f;
+                        } else {
+                            angle = atan2f(-vf1, vf2);
                         }
                         if (pp->kind & DirVec) {
                             angle += pp->rotate;
@@ -1439,13 +1528,11 @@ void psDispParticles(s32 arg0, u32 arg1)
                         f32 c = cosf(angle);
                         f32 s = sinf(angle);
                         f32 old_ax = ax;
-                        f32 old_ay = ay;
                         f32 old_bx = bx;
-                        f32 old_by = by;
-                        ax = c * old_ax - s * old_ay;
-                        ay = s * old_ax + c * old_ay;
-                        bx = c * old_bx - s * old_by;
-                        by = s * old_bx + c * old_by;
+                        ax = c * ax - s * ay;
+                        ay = s * old_ax + c * ay;
+                        bx = c * bx - s * by;
+                        by = s * old_bx + c * by;
                     }
                     if (pp->kind & Trail) {
                         draw_color = prim_color;
@@ -1573,29 +1660,94 @@ void psDispParticles(s32 arg0, u32 arg1)
                         }
                     }
                 } else {
-                    right.x = cache[0xC] * pp->size;
-                    right.y = cache[0x10] * pp->size;
-                    right.z = cache[0x14] * pp->size;
-                    up.x = -cache[0xD] * pp->size;
-                    up.y = -cache[0x11] * pp->size;
-                    up.z = -cache[0x15] * pp->size;
                     cur_pos = pp->pos;
                     prev_pos = last_pos;
-                    if (HSD_PSDisp_804D7948 != 0) {
-                        HSD_PSDisp_804D7948 = 0;
-                        GXSetCurrentMtx(0U);
+                    if (form != NULL) {
+                        right.x = cache[0xC] * pp->size;
+                        right.y = cache[0x10] * pp->size;
+                        right.z = cache[0x14] * pp->size;
+                        up.x = -cache[0xD] * pp->size;
+                        up.y = -cache[0x11] * pp->size;
+                        up.z = -cache[0x15] * pp->size;
+                    } else {
+                        right.x = HSD_PSDisp_804D7914 * pp->size;
+                        right.y = HSD_PSDisp_804D791C * pp->size;
+                        right.z = HSD_PSDisp_804D7924 * pp->size;
+                        up.x = HSD_PSDisp_804D7918 * pp->size;
+                        up.y = HSD_PSDisp_804D7920 * pp->size;
+                        up.z = HSD_PSDisp_804D7928 * pp->size;
                     }
-                    if (pp->kind & (Trail | DirVec)) {
-                        view_cur.x = cache[0] * cur_pos.x + cache[1] * cur_pos.y + cache[2] * cur_pos.z + cache[3];
-                        view_cur.y = cache[4] * cur_pos.x + cache[5] * cur_pos.y + cache[6] * cur_pos.z + cache[7];
-                        view_cur.z = cache[8] * cur_pos.x + cache[9] * cur_pos.y + cache[10] * cur_pos.z + cache[11];
-                        view_prev.x = cache[0] * prev_pos.x + cache[1] * prev_pos.y + cache[2] * prev_pos.z + cache[3];
-                        view_prev.y = cache[4] * prev_pos.x + cache[5] * prev_pos.y + cache[6] * prev_pos.z + cache[7];
-                        view_prev.z = cache[8] * prev_pos.x + cache[9] * prev_pos.y + cache[10] * prev_pos.z + cache[11];
-                        if (fabsf(view_cur.x - view_prev.x) < (f32) sp898) {
-                            angle = ((view_cur.y - view_prev.y) >= 0.0f) ? 1.5707964f : -1.5707964f;
+                    if ((pp->kind & Trail) || (pp->kind & DirVec)) {
+                        f32 vf1 = 0.0f;
+                        f32 vf2 = 0.0f;
+                        if ((f32) sp8B0 == cache[0x18]) {
+                            Vec3 d;
+                            if (pp->kind & Tornado) {
+                                calcTornadoLastPos(pp, &d.x, &d.y, &d.z);
+                            } else {
+                                d.x = pp->pos.x - pp->vel.x;
+                                d.y = pp->pos.y - pp->vel.y;
+                                d.z = pp->pos.z - pp->vel.z;
+                            }
+                            {
+                                f32 w0 = cache[0xB] + (cache[0xA] * pp->pos.z +
+                                                       (cache[8] * pp->pos.x +
+                                                        cache[9] * pp->pos.y));
+                                if (cache[0x18] != w0) {
+                                    f32 w0inv = (f32) sp878 / w0;
+                                    f32 w1 = cache[0xB] +
+                                             (cache[0xA] * d.z +
+                                              (cache[8] * d.x + cache[9] * d.y));
+                                    if (cache[0x18] != w1) {
+                                        f32 w1inv = (f32) sp878 / w1;
+                                        f64 t888 = (f64) (cache[0x20] * pp->pos.y);
+                                        f64 t890 = (f64) (cache[0x1F] * d.x +
+                                                          cache[0x20] * d.y);
+                                        vf1 = w0inv * (cache[0x22] +
+                                                       (cache[0x21] * pp->pos.z +
+                                                        (cache[0x1F] * pp->pos.x +
+                                                         (f32) t888))) -
+                                              w1inv * (cache[0x22] +
+                                                       (cache[0x21] * d.z +
+                                                        (f32) t890));
+                                        vf2 = w0inv * (cache[0x26] +
+                                                       (cache[0x25] * pp->pos.z +
+                                                        (cache[0x23] * pp->pos.x +
+                                                         cache[0x24] * pp->pos.y))) -
+                                              w1inv * (cache[0x26] +
+                                                       (cache[0x25] * d.z +
+                                                        (cache[0x23] * d.x +
+                                                         cache[0x24] * d.y)));
+                                    }
+                                }
+                            }
                         } else {
-                            angle = atan2f(view_cur.y - view_prev.y, view_cur.x - view_prev.x);
+                            if (pp->kind & Tornado) {
+                                Vec3 t;
+                                calcTornadoLastPos(pp, &t.x, &t.y, &t.z);
+                                {
+                                    f32 dy = pp->pos.y - t.y;
+                                    f32 dx = pp->pos.x - t.x;
+                                    f32 dz = pp->pos.z - t.z;
+                                    vf1 = cache[0x21] * dz +
+                                          (cache[0x1F] * dx + cache[0x20] * dy);
+                                    vf2 = cache[0x25] * dz +
+                                          (cache[0x23] * dx + cache[0x24] * dy);
+                                }
+                            } else {
+                                f32 vy = pp->vel.y;
+                                f32 vx = pp->vel.x;
+                                f32 vz = pp->vel.z;
+                                vf1 = cache[0x21] * vz +
+                                      (cache[0x1F] * vx + cache[0x20] * vy);
+                                vf2 = cache[0x25] * vz +
+                                      (cache[0x23] * vx + cache[0x24] * vy);
+                            }
+                        }
+                        if (fabsf(vf2) < (f32) sp898) {
+                            angle = (vf1 >= 0.0f) ? 1.5707964f : -1.5707964f;
+                        } else {
+                            angle = atan2f(vf1, vf2);
                         }
                         if (pp->kind & DirVec) {
                             angle += pp->rotate;
@@ -1604,75 +1756,204 @@ void psDispParticles(s32 arg0, u32 arg1)
                         angle = pp->rotate;
                     }
                     if (fabsf(angle) > (f32) sp8A0) {
-                        f32 c = cosf(angle);
-                        f32 s = sinf(angle);
-                        Vec3 old_right = right;
-                        Vec3 old_up = up;
-                        right.x = c * old_right.x - s * old_up.x;
-                        right.y = c * old_right.y - s * old_up.y;
-                        right.z = c * old_right.z - s * old_up.z;
-                        up.x = s * old_right.x + c * old_up.x;
-                        up.y = s * old_right.y + c * old_up.y;
-                        up.z = s * old_right.z + c * old_up.z;
+                        Vec3 axis;
+                        f32 t1;
+                        f32 t2;
+                        f32 t3;
+                        f32 t4;
+                        axis.x = right.y * up.z - right.z * up.y;
+                        axis.y = right.z * up.x - right.x * up.z;
+                        axis.z = right.x * up.y - right.y * up.x;
+                        PSMTXRotAxisRad(temp_mtx, &axis, angle);
+                        t1 = temp_mtx[1][0] * right.x + temp_mtx[1][1] * right.y;
+                        t2 = temp_mtx[1][0] * up.x + temp_mtx[1][1] * up.y;
+                        t3 = temp_mtx[2][0] * right.x + temp_mtx[2][1] * right.y;
+                        t4 = temp_mtx[2][0] * up.x + temp_mtx[2][1] * up.y;
+                        right.x = temp_mtx[0][2] * right.z +
+                                  (temp_mtx[0][0] * right.x + temp_mtx[0][1] * right.y);
+                        right.y = temp_mtx[1][2] * right.z + t1;
+                        right.z = temp_mtx[2][2] * right.z + t3;
+                        up.x = temp_mtx[0][2] * up.z +
+                               (temp_mtx[0][0] * up.x + temp_mtx[0][1] * up.y);
+                        up.y = temp_mtx[1][2] * up.z + t2;
+                        up.z = temp_mtx[2][2] * up.z + t4;
+                    }
+                    if (HSD_PSDisp_804D7948 != 0) {
+                        HSD_PSDisp_804D7948 = 0;
+                        GXSetCurrentMtx(0U);
                     }
                     if (pp->kind & Trail) {
-                        draw_color = prim_color;
                         if (pp->kind & PrimEnv) {
                             draw_color.r = 0xFF;
                             draw_color.g = 0xFF;
                             draw_color.b = 0xFF;
                             draw_color.a = 0xFF;
-                        }
-                        tail_color = draw_color;
-                        tail_color.a = (u8) ((f32) tail_color.a * pp->trail);
-                        if (pp->kind & DispTexture) {
-                            setVtxDesc(2);
-                            GXBegin(GX_QUADS, GX_VTXFMT2, 4U);
                         } else {
-                            setVtxDesc(3);
-                            GXBegin(GX_QUADS, GX_VTXFMT3, 4U);
+                            getColorPrimEnv(pp, &draw_color, &env_color);
                         }
-                        GXWGFifo.f32 = prev_pos.x - right.x - up.x;
-                        GXWGFifo.f32 = prev_pos.y - right.y - up.y;
-                        GXWGFifo.f32 = prev_pos.z - right.z - up.z;
-                        GXWGFifo.u8 = tail_color.r;
-                        GXWGFifo.u8 = tail_color.g;
-                        GXWGFifo.u8 = tail_color.b;
-                        GXWGFifo.u8 = tail_color.a;
+                        if (form == NULL) {
+                            if (pp->kind & DispTexture) {
+                                setVtxDesc(2);
+                                GXBegin(GX_QUADS, GX_VTXFMT2, 4U);
+                            } else {
+                                setVtxDesc(3);
+                                GXBegin(GX_QUADS, GX_VTXFMT3, 4U);
+                            }
+                            GXWGFifo.f32 = prev_pos.x - right.x;
+                            GXWGFifo.f32 = prev_pos.y - right.y;
+                            GXWGFifo.f32 = prev_pos.z - right.z;
+                            GXWGFifo.u8 = draw_color.r;
+                            GXWGFifo.u8 = draw_color.g;
+                            GXWGFifo.u8 = draw_color.b;
+                            GXWGFifo.u8 = (s8) ((f32) draw_color.a * pp->trail);
+                            if (pp->kind & DispTexture) {
+                                GXWGFifo.u8 = tex_base + 0;
+                            }
+                            GXWGFifo.f32 = cur_pos.x - up.x;
+                            GXWGFifo.f32 = cur_pos.y - up.y;
+                            GXWGFifo.f32 = cur_pos.z - up.z;
+                            GXWGFifo.u8 = draw_color.r;
+                            GXWGFifo.u8 = draw_color.g;
+                            GXWGFifo.u8 = draw_color.b;
+                            GXWGFifo.u8 = draw_color.a;
+                            if (pp->kind & DispTexture) {
+                                GXWGFifo.u8 = tex_base + 1;
+                            }
+                            GXWGFifo.f32 = cur_pos.x + right.x;
+                            GXWGFifo.f32 = cur_pos.y + right.y;
+                            GXWGFifo.f32 = cur_pos.z + right.z;
+                            GXWGFifo.u8 = draw_color.r;
+                            GXWGFifo.u8 = draw_color.g;
+                            GXWGFifo.u8 = draw_color.b;
+                            GXWGFifo.u8 = draw_color.a;
+                            if (pp->kind & DispTexture) {
+                                GXWGFifo.u8 = tex_base + 2;
+                            }
+                            GXWGFifo.f32 = prev_pos.x + up.x;
+                            GXWGFifo.f32 = prev_pos.y + up.y;
+                            GXWGFifo.f32 = prev_pos.z + up.z;
+                            GXWGFifo.u8 = draw_color.r;
+                            GXWGFifo.u8 = draw_color.g;
+                            GXWGFifo.u8 = draw_color.b;
+                            GXWGFifo.u8 = (s8) ((f32) draw_color.a * pp->trail);
+                            if (pp->kind & DispTexture) {
+                                GXWGFifo.u8 = tex_base + 3;
+                            }
+                        } else {
+                            f32 trailA = 255.0f * (1.0f - pp->trail);
+                            f32 upLen =
+                                up.x * up.x + up.y * up.y + up.z * up.z;
+                            if (upLen > (f32) sp8B0) {
+                                double e = __frsqrte((double) upLen);
+                                e = 0.5 * e * (3.0 - (double) upLen * e * e);
+                                e = 0.5 * e * (3.0 - (double) upLen * e * e);
+                                e = 0.5 * e * (3.0 - (double) upLen * e * e);
+                                upLen = (f32) ((double) upLen * e);
+                            }
+                            if ((f32) sp8B0 != upLen) {
+                                f32 sdx = cur_pos.x - prev_pos.x;
+                                f32 sdy = cur_pos.y - prev_pos.y;
+                                f32 sdz = cur_pos.z - prev_pos.z;
+                                f32 segLen = sdx * sdx + sdy * sdy + sdz * sdz;
+                                f32 ratio;
+                                u8* it;
+                                u32 primitive_count;
+                                if (segLen > (f32) sp8B0) {
+                                    double e = __frsqrte((double) segLen);
+                                    e = 0.5 * e * (3.0 - (double) segLen * e * e);
+                                    e = 0.5 * e * (3.0 - (double) segLen * e * e);
+                                    e = 0.5 * e * (3.0 - (double) segLen * e * e);
+                                    segLen = (f32) ((double) segLen * e);
+                                }
+                                ratio = segLen / upLen;
+                                it = form;
+                                primitive_count = *(u32*) it;
+                                it += sizeof(u32);
+                                while (primitive_count-- != 0) {
+                                    GXPrimitive prim = it[0];
+                                    u8 count = it[1];
+                                    u8 vtx_count = count;
+                                    it += 4;
+                                    if (pp->kind & DispTexture) {
+                                        setVtxDesc(5);
+                                        GXBegin(prim, GX_VTXFMT5, count);
+                                    } else {
+                                        setVtxDesc(3);
+                                        GXBegin(prim, GX_VTXFMT3, count);
+                                    }
+                                    while (vtx_count-- != 0) {
+                                        f32 s = *(f32*) &it[0];
+                                        f32 sx = 2.0f * (s - 0.5f);
+                                        f32 t;
+                                        f32 tx;
+                                        s32 a;
+                                        if (pp->kind & TexFlipS) {
+                                            s = 1.0f - s;
+                                        }
+                                        t = *(f32*) &it[4];
+                                        it += 8;
+                                        a = (s8) (255.0f - t * trailA);
+                                        if (a < 0) {
+                                            a = 0;
+                                        }
+                                        if (a > 0xFF) {
+                                            a = 0xFF;
+                                        }
+                                        tx = 2.0f * (t - 0.5f);
+                                        if (pp->kind & TexFlipT) {
+                                            t = 1.0f - t;
+                                        }
+                                        GXWGFifo.f32 = up.x * ratio * tx +
+                                                       (right.x * sx + cur_pos.x);
+                                        GXWGFifo.f32 = up.y * ratio * tx +
+                                                       (right.y * sx + cur_pos.y);
+                                        GXWGFifo.f32 = up.z * ratio * tx +
+                                                       (right.z * sx + cur_pos.z);
+                                        GXWGFifo.u8 = draw_color.r;
+                                        GXWGFifo.u8 = draw_color.g;
+                                        GXWGFifo.u8 = draw_color.b;
+                                        GXWGFifo.u8 = a;
+                                        if (pp->kind & DispTexture) {
+                                            GXWGFifo.f32 = s;
+                                            GXWGFifo.f32 = t;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else if (form == NULL) {
+                        if (pp->kind & DispTexture) {
+                            setVtxDesc(0);
+                            GXBegin(GX_QUADS, GX_VTXFMT0, 4U);
+                        } else {
+                            setVtxDesc(1);
+                            GXBegin(GX_QUADS, GX_VTXFMT1, 4U);
+                        }
+                        GXWGFifo.f32 = cur_pos.x - right.x;
+                        GXWGFifo.f32 = cur_pos.y - right.y;
+                        GXWGFifo.f32 = cur_pos.z - right.z;
                         if (pp->kind & DispTexture) {
                             GXWGFifo.u8 = tex_base + 0;
                         }
-                        GXWGFifo.f32 = cur_pos.x - right.x + up.x;
-                        GXWGFifo.f32 = cur_pos.y - right.y + up.y;
-                        GXWGFifo.f32 = cur_pos.z - right.z + up.z;
-                        GXWGFifo.u8 = draw_color.r;
-                        GXWGFifo.u8 = draw_color.g;
-                        GXWGFifo.u8 = draw_color.b;
-                        GXWGFifo.u8 = draw_color.a;
+                        GXWGFifo.f32 = cur_pos.x - up.x;
+                        GXWGFifo.f32 = cur_pos.y - up.y;
+                        GXWGFifo.f32 = cur_pos.z - up.z;
                         if (pp->kind & DispTexture) {
                             GXWGFifo.u8 = tex_base + 1;
                         }
-                        GXWGFifo.f32 = cur_pos.x + right.x + up.x;
-                        GXWGFifo.f32 = cur_pos.y + right.y + up.y;
-                        GXWGFifo.f32 = cur_pos.z + right.z + up.z;
-                        GXWGFifo.u8 = draw_color.r;
-                        GXWGFifo.u8 = draw_color.g;
-                        GXWGFifo.u8 = draw_color.b;
-                        GXWGFifo.u8 = draw_color.a;
+                        GXWGFifo.f32 = cur_pos.x + right.x;
+                        GXWGFifo.f32 = cur_pos.y + right.y;
+                        GXWGFifo.f32 = cur_pos.z + right.z;
                         if (pp->kind & DispTexture) {
                             GXWGFifo.u8 = tex_base + 2;
                         }
-                        GXWGFifo.f32 = prev_pos.x + right.x - up.x;
-                        GXWGFifo.f32 = prev_pos.y + right.y - up.y;
-                        GXWGFifo.f32 = prev_pos.z + right.z - up.z;
-                        GXWGFifo.u8 = tail_color.r;
-                        GXWGFifo.u8 = tail_color.g;
-                        GXWGFifo.u8 = tail_color.b;
-                        GXWGFifo.u8 = tail_color.a;
+                        GXWGFifo.f32 = cur_pos.x + up.x;
+                        GXWGFifo.f32 = cur_pos.y + up.y;
+                        GXWGFifo.f32 = cur_pos.z + up.z;
                         if (pp->kind & DispTexture) {
                             GXWGFifo.u8 = tex_base + 3;
                         }
-                    } else if (form != NULL) {
+                    } else {
                         u8* it = form;
                         u32 primitive_count = *(u32*) it;
                         it += sizeof(u32);
@@ -1710,38 +1991,6 @@ void psDispParticles(s32 arg0, u32 arg1)
                                     GXWGFifo.f32 = t;
                                 }
                             }
-                        }
-                    } else {
-                        if (pp->kind & DispTexture) {
-                            setVtxDesc(0);
-                            GXBegin(GX_QUADS, GX_VTXFMT0, 4U);
-                        } else {
-                            setVtxDesc(1);
-                            GXBegin(GX_QUADS, GX_VTXFMT1, 4U);
-                        }
-                        GXWGFifo.f32 = cur_pos.x - right.x - up.x;
-                        GXWGFifo.f32 = cur_pos.y - right.y - up.y;
-                        GXWGFifo.f32 = cur_pos.z - right.z - up.z;
-                        if (pp->kind & DispTexture) {
-                            GXWGFifo.u8 = tex_base + 0;
-                        }
-                        GXWGFifo.f32 = cur_pos.x - right.x + up.x;
-                        GXWGFifo.f32 = cur_pos.y - right.y + up.y;
-                        GXWGFifo.f32 = cur_pos.z - right.z + up.z;
-                        if (pp->kind & DispTexture) {
-                            GXWGFifo.u8 = tex_base + 1;
-                        }
-                        GXWGFifo.f32 = cur_pos.x + right.x + up.x;
-                        GXWGFifo.f32 = cur_pos.y + right.y + up.y;
-                        GXWGFifo.f32 = cur_pos.z + right.z + up.z;
-                        if (pp->kind & DispTexture) {
-                            GXWGFifo.u8 = tex_base + 2;
-                        }
-                        GXWGFifo.f32 = cur_pos.x + right.x - up.x;
-                        GXWGFifo.f32 = cur_pos.y + right.y - up.y;
-                        GXWGFifo.f32 = cur_pos.z + right.z - up.z;
-                        if (pp->kind & DispTexture) {
-                            GXWGFifo.u8 = tex_base + 3;
                         }
                     }
                 }
