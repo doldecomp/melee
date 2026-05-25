@@ -453,10 +453,10 @@ void mnCharSel_8025D1C4(int arg0, int arg1)
 
     if (var_r0) {
         stars = &data2.ko_stars[arg0];
-        temp_r31 = &data2.ko_stars[arg0].joint2;
         temp_r30 = data2.ko_stars[arg0].text;
-        temp_r29 = css->ko_star_counts[arg0];
+        temp_r31 = &data2.ko_stars[arg0].joint2;
         var_f31 = data2.ko_stars[arg0].x4;
+        temp_r29 = css->ko_star_counts[arg0];
 
         joint = stars->joint;
         lb_80011E24(mnCharSel_804D6CC0, &sp10, joint, -1);
