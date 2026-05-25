@@ -87,8 +87,6 @@ struct HSD_ImageDesc grPu_803E7620 = { &grPu_803E6E20, 32, 32, 4, 0, 0, 0 };
 
 void grPura_80211CFC(bool num) {}
 
-extern f32 grPu_804DBA58;
-extern f32 grPu_804DBA5C;
 const f32 grPu_804DBA70 = 0.0;
 const f32 grPu_804DBA74 = 2.0;
 const f32 grPu_804DBA78 = 30.0;
@@ -114,13 +112,13 @@ void grPura_80211D00(void)
     Ground_801C3BB4();
     Stage_UnkSetVec3TCam_Offset(&cam_offset);
     fVar1 = Stage_GetCamBoundsTopOffset();
-    Ground_801C3880(grPu_804DBA58 * (fVar1 - cam_offset.y));
+    Ground_801C3880(0.8f * (fVar1 - cam_offset.y));
     fVar1 = Stage_GetCamBoundsBottomOffset();
-    Ground_801C3890(grPu_804DBA58 * (fVar1 - cam_offset.y));
+    Ground_801C3890(0.8f * (fVar1 - cam_offset.y));
     fVar1 = Stage_GetCamBoundsLeftOffset();
-    Ground_801C38A0(grPu_804DBA58 * (fVar1 - cam_offset.x));
+    Ground_801C38A0(0.8f * (fVar1 - cam_offset.x));
     fVar1 = Stage_GetCamBoundsRightOffset();
-    Ground_801C38AC(grPu_804DBA58 * (fVar1 - cam_offset.x));
+    Ground_801C38AC(0.8f * (fVar1 - cam_offset.x));
 }
 
 void grPura_80211DD8(void) {}
@@ -248,7 +246,7 @@ void grPura_802120E0(Ground_GObj* arg0)
         sp18 = grPu_803E6AA0[gp->gv.pura.xC4];
         cur = gp->gv.pura.xC8;
         gp->gv.pura.xC8 = cur + 1;
-        t = (f32) cur / grPu_804DBA5C;
+        t = (f32) cur / 3600.0f;
         sp18.r = (s8) (t * (f32) ((u8) spilC.r - (u8) sp18.r) + (f32) (u8) sp18.r);
         sp18.g = (s8) (t * (f32) ((u8) spilC.g - (u8) sp18.g) + (f32) (u8) sp18.g);
         sp18.b = (s8) (t * (f32) ((u8) spilC.b - (u8) sp18.b) + (f32) (u8) sp18.b);
