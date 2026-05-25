@@ -1,0 +1,23 @@
+File: src/melee/mn/mndiagram.c
+Funcs:
+- [x] mnDiagram_GetLeastPlayedFighter
+- [ ] mnDiagram_8023FC28
+- [ ] mnDiagram_8023FA6C
+- [ ] mnDiagram_PopupAnimProc
+- [ ] mnDiagram_802437E8
+- [ ] mnDiagram_OnFrame
+- [ ] mnDiagram_802417D0
+- [ ] mnDiagram_80241310
+- [ ] mnDiagram_CursorProc
+- [ ] mnDiagram_802427B4
+- [ ] mnDiagram_80243434
+- [ ] mnDiagram_80241E78
+- [ ] mnDiagram_80242C0C
+- [ ] mnDiagram_8024227C
+- [ ] mnDiagram_80240D94
+- [ ] mnDiagram_InputProc
+File: src/melee/mn/mndiagram3.c
+Funcs:
+- [ ] mnDiagram3_8024714C
+- [ ] mnDiagram3_80245BA4
+- [ ] fn_802461BC
