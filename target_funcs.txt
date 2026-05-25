@@ -7,5 +7,5 @@ Funcs:
 - [x] HSD_SisLib_803A67EC
 - [x] HSD_SisLib_803A70A0
 - [x] HSD_SisLib_803A6B98
-- [ ] HSD_SisLib_803A7684
+- [x] HSD_SisLib_803A7684
 - [ ] HSD_SisLib_803A84BC
