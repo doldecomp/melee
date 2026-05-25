@@ -7974,6 +7974,7 @@ void ftCo_800B1EF0(Fighter* fp)
 
 void ftCo_800B21C8(Fighter* fp)
 {
+    struct Fighter_x1A88_t* data2 = &fp->x1A88;
     struct Fighter_x1A88_t* data = &fp->x1A88;
     Vec3 sp20;
     s32 cmd;
@@ -7982,6 +7983,7 @@ void ftCo_800B21C8(Fighter* fp)
     s32 do_act;
     f32 dx;
     f32 dy;
+    PAD_STACK(0x14);
 
     cmd = ftCo_800A229C(fp, &sp20);
     if (cmd != 0) {
@@ -8023,15 +8025,16 @@ void ftCo_800B21C8(Fighter* fp)
     data->xF9_b6 = true;
     data->xF9_b7 = false;
     data->xF9_b1 = false;
-    data->x44 = ftCo_800A4BEC(fp);
-    data->x50 = ftCo_800A648C(fp);
+    fp->x1A88.x44 = ftCo_800A4BEC(fp);
+    fp->x1A88.x50 = ftCo_800A648C(fp);
     if (ftCo_800A1C44_dontinline(fp)) {
         data->xF8_b6 = false;
     } else {
         target = data->x44;
         if (target != NULL && fp->ground_or_air == GA_Ground) {
             dy = fp->cur_pos.y - target->cur_pos.y;
-            dx = fp->cur_pos.x - target->cur_pos.x;
+            dx = fp->cur_pos.x;
+            dx = dx - target->cur_pos.x;
             if (sqrtf__Ff(dx * dx + dy * dy) <
                 Fighter_804D64FC->x20[fp->kind])
             {
@@ -8043,13 +8046,15 @@ void ftCo_800B21C8(Fighter* fp)
             data->xF8_b6 = false;
         }
     }
-    if (data->x18 != data->x20 && data->x18 != data->x1C) {
-        data->x60 = 0;
+
+    data2 = &fp->x1A88;
+    if (data2->x18 != data2->x20 && data2->x18 != data2->x1C) {
+        data2->x60 = 0;
     }
-    if (data->x18 == 4) {
+    if (data2->x18 == 4) {
         do_act = 0;
     } else {
-        data->xFA_b2 = false;
+        data2->xFA_b2 = false;
         do_act = 1;
     }
     if (do_act != 0) {
