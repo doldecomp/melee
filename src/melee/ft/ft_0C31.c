@@ -233,8 +233,6 @@ static inline void ftCo_800C6AFC_dontinline(HSD_JObj* jobj)
 /// @todo figure out proper inlining for this function
 inline void fake_HSD_JObjSetTranslate(HSD_JObj* jobj, Vec3* translate)
 {
-#undef __FILE__
-#define __FILE__ "jobj.h"
     HSD_ASSERT(916, jobj);
     HSD_ASSERT(917, translate);
     jobj->translate = *translate;
