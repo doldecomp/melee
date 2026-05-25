@@ -8,7 +8,7 @@ Funcs:
 - [x] mnDiagram_OnFrame
 - [x] mnDiagram_802417D0
 - [x] mnDiagram_80241310
-- [ ] mnDiagram_CursorProc
+- [x] mnDiagram_CursorProc
 - [ ] mnDiagram_802427B4
 - [ ] mnDiagram_80243434
 - [ ] mnDiagram_80241E78
