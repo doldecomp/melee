@@ -14,7 +14,7 @@ Funcs:
 - [x] mnDiagram_80241E78
 - [x] mnDiagram_80242C0C
 - [x] mnDiagram_8024227C
-- [ ] mnDiagram_80240D94
+- [x] mnDiagram_80240D94
 - [ ] mnDiagram_InputProc
 File: src/melee/mn/mndiagram3.c
 Funcs:
