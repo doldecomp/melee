@@ -875,8 +875,8 @@ void mnCharSel_8025DB34(u8 arg0)
                 break;
             case 1: {
                 if (gmMainLib_8015CC34()->handicap != 0) {
-                    u8 hval;
-                    u8 hval2;
+                    s32 hval;
+                    s32 hval2;
 
                     if (gmMainLib_8015CC34()->handicap == 2) {
                         var_f1 = 20.0f;
@@ -886,14 +886,14 @@ void mnCharSel_8025DB34(u8 arg0)
                     HSD_ForeachAnim(sp90, JOBJ_TYPE, ALL_TYPE_MASK,
                                     HSD_AObjReqAnim, AOBJ_ARG_AF, var_f1);
                     if (gmMainLib_8015CC34()->handicap == 1) {
-                        hval = gm_801685D4(
+                        hval = (u8) gm_801685D4(
                             arg0,
                             mnCharSel_804D6CB0->data.data.players[arg0].xA);
                     } else {
                         hval = (u8) mnCharSel_804D6CB0->data.data.players[arg0]
                                    .handicap;
                     }
-                    if ((int) hval != 0) {
+                    if (hval != 0) {
                     } else {
                         hval = 1;
                     }
@@ -908,7 +908,7 @@ void mnCharSel_8025DB34(u8 arg0)
                                     HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
                     sp90 = sp68;
                     if (gmMainLib_8015CC34()->handicap == 1) {
-                        hval2 = gm_801685D4(
+                        hval2 = (u8) gm_801685D4(
                             arg0,
                             mnCharSel_804D6CB0->data.data.players[arg0].xA);
                     } else {
@@ -916,7 +916,7 @@ void mnCharSel_8025DB34(u8 arg0)
                             (u8) mnCharSel_804D6CB0->data.data.players[arg0]
                                 .handicap;
                     }
-                    if ((int) hval2 != 0) {
+                    if (hval2 != 0) {
                     } else {
                         hval2 = 1;
                     }
@@ -952,8 +952,8 @@ void mnCharSel_8025DB34(u8 arg0)
             }
             case 3: {
                 if (gmMainLib_8015CC34()->handicap != 0) {
-                    u8 hval3;
-                    u8 hval4;
+                    s32 hval3;
+                    s32 hval4;
 
                     if (mnCharSel_803F0DFC.doors[arg0].p_kind !=
                         mnCharSel_803F0DFC.doors[arg0].p_kind_prev)
@@ -967,7 +967,7 @@ void mnCharSel_8025DB34(u8 arg0)
                                         HSD_AObjReqAnim, AOBJ_ARG_AF, var_f1);
                     }
                     if (gmMainLib_8015CC34()->handicap == 1) {
-                        hval3 = gm_801685D4(
+                        hval3 = (u8) gm_801685D4(
                             arg0,
                             mnCharSel_804D6CB0->data.data.players[arg0].xA);
                     } else {
@@ -975,7 +975,7 @@ void mnCharSel_8025DB34(u8 arg0)
                             (u8) mnCharSel_804D6CB0->data.data.players[arg0]
                                 .handicap;
                     }
-                    if ((int) hval3 != 0) {
+                    if (hval3 != 0) {
                     } else {
                         hval3 = 1;
                     }
@@ -990,7 +990,7 @@ void mnCharSel_8025DB34(u8 arg0)
                                     HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
                     sp90 = sp58;
                     if (gmMainLib_8015CC34()->handicap == 1) {
-                        hval4 = gm_801685D4(
+                        hval4 = (u8) gm_801685D4(
                             arg0,
                             mnCharSel_804D6CB0->data.data.players[arg0].xA);
                     } else {
@@ -998,7 +998,7 @@ void mnCharSel_8025DB34(u8 arg0)
                             (u8) mnCharSel_804D6CB0->data.data.players[arg0]
                                 .handicap;
                     }
-                    if ((int) hval4 != 0) {
+                    if (hval4 != 0) {
                     } else {
                         hval4 = 1;
                     }
