@@ -3205,9 +3205,10 @@ void fn_80262648(HSD_GObj* gobj)
     struct CSSCharModel* model = gobj->user_data;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     u8 prev_port = model->x6;
-    u8 n_doors;
+    CSSData* css = mnCharSel_804D6CB0;
+    int n_doors;
 
-    if ((u8) mnCharSel_804D6CB0->match_type == 0x17) {
+    if ((u8) css->match_type == 0x17) {
         n_doors = 2;
     } else {
         n_doors = mnCharSel_804D6CF5;
@@ -3215,10 +3216,11 @@ void fn_80262648(HSD_GObj* gobj)
 
     {
         u8 door = model->x4;
-        CSSDoor* d = &mnCharSel_803F0DFC.doors[door];
-        u8 p_kind = d->p_kind;
+        u8 p_kind = mnCharSel_803F0DFC.doors[door].p_kind;
 
-        if (p_kind == 3 || (u8) d->sel_icon >= 0x19U) {
+        if (p_kind == 3 ||
+            (u8) mnCharSel_803F0DFC.doors[door].sel_icon >= 0x19U)
+        {
             HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             return;
         }
@@ -3229,16 +3231,19 @@ void fn_80262648(HSD_GObj* gobj)
             } else {
                 model->x6 = (u8) mnCharSel_804D6CF0;
             }
-        } else if ((u8) mnCharSel_804D6CB0->data.data.rules.is_teams == 0) {
+        } else if ((u8) css->data.data.rules.is_teams == 0) {
             if (p_kind == 1) {
                 model->x6 = 8;
             } else {
                 model->x6 = door;
             }
         } else if (p_kind == 1) {
-            model->x6 = (u8) (mnCharSel_804D50E0[d->team] + 4);
+            model->x6 =
+                (u8) (mnCharSel_804D50E0[mnCharSel_803F0DFC.doors[door].team] +
+                      4);
         } else {
-            model->x6 = (u8) mnCharSel_804D50E0[d->team];
+            model->x6 =
+                (u8) mnCharSel_804D50E0[mnCharSel_803F0DFC.doors[door].team];
         }
     }
 
@@ -3408,8 +3413,8 @@ void fn_80262648(HSD_GObj* gobj)
                 }
             }
         } else {
-            model->x8 = 2.7f + mnCharSel_804A0BD0[status - 1]->xC;
-            model->xC = -2.0f + mnCharSel_804A0BD0[model->x5 - 1]->x10;
+            model->x8 = 2.7f + mnCharSel_804A0BC0[status - 1]->xC;
+            model->xC = -2.0f + mnCharSel_804A0BC0[model->x5 - 1]->x10;
         }
     }
 
