@@ -1959,11 +1959,14 @@ static inline bool ftCo_800A4768_inline0(Fighter* fp, Vec3* p)
 
 s32 ftCo_800A4768(Fighter* fp, Vec3* arg1)
 {
+    u32 pad;
     mp_UnkStruct0* island;
     f32 best;
     Vec3 pt;
     f32 dx;
+    f32 tmp_y;
     f32 dy;
+    f32 tmp_x;
     f32 dist;
 
     best = -1.0f;
@@ -1971,6 +1974,7 @@ s32 ftCo_800A4768(Fighter* fp, Vec3* arg1)
          island = island->next)
     {
         pt = island->x14;
+        tmp_y = pt.y;
         if (!ftCo_800A4768_inline0(fp, &pt)) {
             dx = fp->cur_pos.x - pt.x;
             if (dx > 0.0f) {
@@ -1978,8 +1982,9 @@ s32 ftCo_800A4768(Fighter* fp, Vec3* arg1)
                 dist = dx * dx + dy * dy;
                 if (best < 0.0 || best > dist) {
                     best = dist;
-                    arg1->x = pt.x - 5.0;
-                    arg1->y = pt.y;
+                    tmp_x = pt.x - 5.0;
+                    arg1->x = tmp_x;
+                    arg1->y = tmp_y;
                     arg1->z = pt.z;
                 }
             }
