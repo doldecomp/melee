@@ -69,9 +69,8 @@ struct un_803F9D48 {
     char x2;
     unsigned char x3;
     unsigned short x4;
-    short x6;
-    unsigned char x8;
-    unsigned char x9;
+    unsigned short x6;
+    unsigned short x8;
     unsigned char xA;
     unsigned char xB;
     int xC;
@@ -83,21 +82,16 @@ struct un_803F9D48 {
     HSD_Text* x24;
     struct un_802FEBE0_OnEnter_arg0* x28;
     struct un_802FEBE0_OnEnter_arg0* x2C;
-    int x30;
-    int x34;
-    int x38;
+    int x30[3];
 } un_803F9D48 = {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0x43, 0x44, 0x45,
+    0, 0, 0, 0, 0, 0, 0, { 0x43, 0x44, 0x45 },
 };
 
 /// .sbss
 /* 4D6D98 */ static HSD_Archive* un_804D6D98;
 /* 4D6D9C */ static SceneDesc* un_804D6D9C;
 
-/// un_802FEBE0_OnEnter will try to inline this otherwise
-#pragma push
-#pragma dont_inline on
 void un_802FE3F8(int a, int b, short* c, short* d)
 {
     struct un_803F9B30* x;
@@ -116,7 +110,17 @@ void un_802FE3F8(int a, int b, short* c, short* d)
         }
     }
 }
-#pragma pop
+
+static inline void un_802FE3F8_inner(int a, int b, short* c, short* d)
+{
+    un_802FE3F8(a, b, c, d);
+}
+
+/// un_802FEBE0_OnEnter will inline un_802FE3F8 otherwise
+static inline void un_802FE3F8_noinline(int a, int b, short* c, short* d)
+{
+    un_802FE3F8_inner(a, b, c, d);
+}
 
 void fn_802FE470(HSD_GObj* gobj)
 {
@@ -229,22 +233,58 @@ execute:
 
 void un_802FE918(int a, int b, int c)
 {
+    struct un_803F9B30* x;
+    int new_x3;
+    int r;
+    int k;
+    int i;
+    char sp1C[0x104];
+    datetime sp14;
+
     lbAudioAx_800236DC();
-    lbAudioAx_80023F28(0);
-    HSD_Randi(2);
-    gmMainLib_8015D8B0(0);
-    HSD_SisLib_803A6530(0, 0, 0);
-    un_803063D4(0, 0, 0);
-    HSD_SisLib_803A660C(0, 0, 0);
-    HSD_SisLib_803A660C(0, 0, 0);
-    HSD_SisLib_803A6368(0, 0);
-    HSD_SisLib_803A6368(0, 0);
-    gm_801692E8(0, 0);
-    lbLang_IsSavedLanguageUS();
-    sprintf(0, 0);
-    sprintf(0, 0);
-    HSD_SisLib_803A7664(0);
-    HSD_SisLib_803A6B98(0, 0, 0, 0);
+    lbAudioAx_80023F28(un_803F9D48.x30[un_803F9D48.x3]);
+    r = HSD_Randi(2);
+    for (k = 0; k < 3; k++) {
+        if (k == un_803F9D48.x3) {
+            r++;
+        } else if (r == k) {
+            new_x3 = r;
+            break;
+        }
+    }
+    un_803F9D48.x3 = new_x3;
+    gmMainLib_8015D8B0(a);
+    for (x = &un_803F9B30[0]; x->x0 != 66; x++) {
+        if (x->x0 == a) {
+            i = un_803F9A00[x->x4];
+            goto found;
+        }
+    }
+    i = 0;
+found:
+    un_803F9D48.x4 = i;
+    if (a == 0x3E) {
+        unsigned short v_x8;
+        un_802FE3F8(a, 2, (short*) &un_803F9D48.x6, (short*) &un_803F9D48.x8);
+        v_x8 = un_803F9D48.x8;
+        HSD_SisLib_803A6530(2, 0x4A, un_803F9D48.x6);
+        HSD_SisLib_803A660C(2, 0x4A, un_803063D4(b, 0x4E, 0x174));
+        HSD_SisLib_803A660C(2, 0x4A, v_x8);
+        HSD_SisLib_803A6368(un_803F9D48.x20, 0x4A);
+    } else {
+        un_802FE3F8(a, 2, (short*) &un_803F9D48.x6, NULL);
+        HSD_SisLib_803A6368(un_803F9D48.x20, un_803F9D48.x6);
+    }
+    gm_801692E8(c, &sp14);
+    if (lbLang_IsSavedLanguageUS()) {
+        sprintf(sp1C, "%2d.%2d.%04d  %02d:%02d:%02d", sp14.month, sp14.day,
+                sp14.year, sp14.hour, sp14.minute, sp14.second);
+    } else {
+        sprintf(sp1C, "%04d.%2d.%2d  %02d:%02d:%02d", sp14.year, sp14.month,
+                sp14.day, sp14.hour, sp14.minute, sp14.second);
+    }
+    HSD_SisLib_803A7664(un_803F9D48.x24);
+    HSD_SisLib_803A6B98(un_803F9D48.x24, 320.0f, 316.0f, sp1C);
 }
 
 void un_802FEBE0_OnEnter(void* arg0_)
@@ -272,7 +312,7 @@ void un_802FEBE0_OnEnter(void* arg0_)
     i = 0;
 found:
     un_803F9D48.x4 = i;
-    un_802FE3F8(arg0x0, 2, &un_803F9D48.x6, NULL);
+    un_802FE3F8_noinline(arg0x0, 2, (short*) &un_803F9D48.x6, NULL);
     un_803F9D48.x2 = -1;
     un_803F9D48.x1 = 0;
     un_803F9D48.xC = arg0x4;
