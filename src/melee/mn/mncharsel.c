@@ -4477,10 +4477,12 @@ s32 mnCharSel_802640A0(void)
                             "\x6d\x82\x73\x82\x71\x82\x78");
         color = spE8;
         HSD_SisLib_803A74F0(text, 1, &color);
-        for (found = 0; found < 9; found++) {
+        found = 0;
+        do {
             HSD_SisLib_803A6B98(text, 10.0f, 0.0f,
                                 "\x81\x45\x81\x45\x81\x45\x81\x45");
-        }
+            found++;
+        } while (found < 9);
         for (found = 0; found < 0x78; found++) {
             if (GetNameText(found) == NULL) {
                 break;
@@ -4681,7 +4683,7 @@ s32 mnCharSel_802640A0(void)
             HSD_SisLib_803A6B98(text, 0.0f, 0.0f, NULL);
             lb_80011E24(mnCharSel_804D6CC8, &sp108, 3, -1);
             HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
-            goto hide_extra;
+            /* fallthrough */
         case EVENT_MATCH:
         hide_extra:
             lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x2E, -1);
@@ -4907,7 +4909,8 @@ s32 mnCharSel_802640A0(void)
                 } else {
                     hval = mnCharSel_804D6CB0->data.data.players[i].handicap;
                 }
-                if ((s32) hval == 0) {
+                if ((s32) hval != 0) {
+                } else {
                     hval = 1;
                 }
                 HSD_JObjSetTranslateX(sp108, 1.25f * (f32) (hval - 1));
