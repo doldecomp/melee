@@ -1248,9 +1248,9 @@ void mnDiagram_802417D0(HSD_GObj* gobj)
 {
     u8 result2;
     Diagram* data = gobj->user_data;
-    char* base = (char*) mnDiagram_803EE728;
+    mnDiagram_AnimTable* tbl = (mnDiagram_AnimTable*) &mnDiagram_803EE728;
     HSD_JObj* jobj;
-    u8* sorted = (u8*) &mnDiagram_804A0750;
+    u8* sorted = mnDiagram_804A0750.sorted_fighters;
     s32 i;
     u8* ptr;
     u8* ptr2;
@@ -1261,7 +1261,7 @@ void mnDiagram_802417D0(HSD_GObj* gobj)
 
     // Right arrow (jobjs[3])
     jobj = data->jobjs[3];
-    mn_8022ED6C(jobj, (AnimLoopSettings*) (base + 0x58));
+    mn_8022ED6C(jobj, &tbl->x58);
     if (data->is_name_mode != 0) {
         // Name mode - check if 10 more names exist
         count = 10;
@@ -1324,7 +1324,7 @@ void mnDiagram_802417D0(HSD_GObj* gobj)
 
     // Left arrow (jobjs[4])
     jobj2 = data->jobjs[4];
-    mn_8022ED6C(jobj2, (AnimLoopSettings*) (base + 0x58));
+    mn_8022ED6C(jobj2, &tbl->x58);
     if (data->is_name_mode != 0) {
         result = (u8) data->name_cursor_pos;
     } else {
@@ -1338,7 +1338,7 @@ void mnDiagram_802417D0(HSD_GObj* gobj)
 
     // Up arrow (jobjs[5])
     jobj2 = data->jobjs[5];
-    mn_8022ED6C(jobj2, (AnimLoopSettings*) (base + 0x58));
+    mn_8022ED6C(jobj2, &tbl->x58);
     if (data->is_name_mode != 0) {
         i = data->name_cursor_pos >> 8;
     } else {
@@ -1352,7 +1352,7 @@ void mnDiagram_802417D0(HSD_GObj* gobj)
 
     // Down arrow (jobjs[6])
     jobj = data->jobjs[6];
-    mn_8022ED6C(jobj, (AnimLoopSettings*) (base + 0x58));
+    mn_8022ED6C(jobj, &tbl->x58);
     if (data->is_name_mode != 0) {
         // Name mode - check if 7 more rows exist
         count = 7;
