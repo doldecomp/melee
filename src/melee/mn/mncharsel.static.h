@@ -9,8 +9,24 @@ extern u8 mnCharSel_804D50D8[8];
 extern u8 mnCharSel_804D50E0[3];
 extern u8 mnCharSel_804D5100;
 
+typedef struct CSSSceneModels {
+    /* 0x00 */ HSD_CObjDesc* cam;
+    /* 0x04 */ HSD_LightDesc* light0;
+    /* 0x08 */ HSD_LightDesc* light1;
+    /* 0x0C */ HSD_FogDesc* fog;
+} CSSSceneModels;
+
+typedef struct CSSAnimSet {
+    /* 0x00 */ HSD_Joint* joint;
+    /* 0x04 */ HSD_AnimJoint* anim;
+    /* 0x08 */ HSD_MatAnimJoint* matanim;
+    /* 0x0C */ HSD_ShapeAnimJoint* shapeanim;
+} CSSAnimSet;
+
 static CSSData* volatile mnCharSel_804D6CB0;
 static void* mnCharSel_804D6CB4;
+static HSD_GObj* mnCharSel_804D6CB8;
+static HSD_GObj* mnCharSel_804D6CBC;
 static HSD_JObj* mnCharSel_804D6CC0;
 static HSD_JObj* mnCharSel_804D6CC4;
 static HSD_JObj* mnCharSel_804D6CC8;
@@ -236,7 +252,7 @@ static CSSDoorsData mnCharSel_803F0DFC = {
     0,
     0,
     0,
-    0.0F,
+    NULL,
     -10.9,
     -4.2,
     12.5,
