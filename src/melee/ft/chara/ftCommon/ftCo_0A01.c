@@ -8179,11 +8179,11 @@ void ftCo_800B2790(Fighter* fp)
     s32 var_r28;
     s32 on_ground;
     s32 line_id;
+    PAD_STACK(0x18);
 
     if (data->csP == NULL && data->command_duration == 0) {
-        var_r28 = 0;
         data->x80 += 1;
-        data->xF8_b7 = false;
+        data->xF8_b7 = 0;
         ftCo_800B462C(fp);
         ftCo_800ADC28(fp);
         cmd = data->x18;
