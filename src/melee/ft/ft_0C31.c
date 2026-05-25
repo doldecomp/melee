@@ -731,10 +731,11 @@ void ftCo_800C7B0C(Fighter_GObj* gobj, Vec3* arg1, Vec3* arg2,
     HitCapsule hit;
     Fighter* fp = GET_FIGHTER(gobj);
     CollData* coll = &fp->coll_data;
-    f32 angle = arg4;
+    f32 angle;
 
     fp->coll_data.last_pos = *arg2;
     mpColl_80043670(coll);
+    angle = arg4;
     coll->cur_pos = *arg1;
     mpColl_800471F8(coll);
     fp->cur_pos = coll->cur_pos;
@@ -743,10 +744,7 @@ void ftCo_800C7B0C(Fighter_GObj* gobj, Vec3* arg1, Vec3* arg2,
     if (angle < 0.0f) {
         angle += 360.0f;
     }
-    if (fp->facing_dir < 0.0f) {
-    } else {
-        angle = 180.0f - angle;
-    }
+    angle = fp->facing_dir < 0.0f ? angle : 180.0f - angle;
     fp->dmg.kb_applied = ftColl_80079EA8(fp, &hit, hit.unk_count);
     fp->dmg.x1848_kb_angle = angle;
     fp->dmg.facing_dir_1 = fp->facing_dir;
