@@ -1259,11 +1259,11 @@ void HSD_SisLib_803A8134(void* sis_data, HSD_Text* text, f32* out_width,
     u16 scale_val;
     u16 saved_x6C;
     u16 glyph_code;
-    u16 clear_idx;
+    s32 clear_idx;
     u32 pop_result;
     u8* kern_data_2;
     u8 opcode;
-    u8 kern_enabled;
+    u16 kern_enabled;
     u8* kern_data;
     u8* cursor;
     PAD_STACK(16);
@@ -1286,21 +1286,19 @@ loop_3:
     case 0:
         pop_result = HSD_SisLib_803A7F0C(text, 0x85);
         if (pop_result != 0U) {
-            *cursor = pop_result + 4;
-        block_33:
-            cursor += 1;
-            goto loop_3;
+            cursor = (u8*) (pop_result + 4);
+            goto block_33;
         }
         break;
     case 9:
-        HSD_SisLib_803A7684(text, *cursor, 0x85U);
+        HSD_SisLib_803A7684(text, cursor, 0x85U);
         /* fallthrough */
     case 8:
-        cursor = cursor - 1;
+        cursor = (u8*) *(s32*) (cursor + 1) - 1;
         goto block_33;
     case 14:
-        HSD_SisLib_803A7684(text, *cursor, 0x83U);
-        text->x80.x = *((f32*) ((u16*) cursor + 1)) * 0.00390625F;
+        HSD_SisLib_803A7684(text, cursor, 0x83U);
+        text->x80.x = (f32) * (u16*) (cursor + 1) * 0.00390625F;
         scale_val = *(u16*) (cursor + 3);
         cursor += 4;
         text->x80.y = (f32) scale_val * 0.00390625F;
@@ -1313,16 +1311,16 @@ loop_3:
         goto block_33;
     case 10:
         if (((sislib_UnkAllocData*) text->alloc_data == NULL) ||
-            ((s16) kern_enabled == 0))
+            (kern_enabled == 0))
         {
-            HSD_SisLib_803A7684(text, *cursor, 0x81U);
-            text->x78.x = (f32) (s16) * (cursor + 1) * 0.00390625F;
+            HSD_SisLib_803A7684(text, cursor, 0x81U);
+            text->x78.x = (f32) * (s16*) (cursor + 1) * 0.00390625F;
         }
         cursor += 4;
         goto block_33;
     case 11:
         if (((sislib_UnkAllocData*) text->alloc_data == NULL) ||
-            ((s16) kern_enabled == 0))
+            (kern_enabled == 0))
         {
             HSD_SisLib_803A7F0C(text, 0x81);
         }
@@ -1349,13 +1347,13 @@ loop_3:
     default:
         if (opcode >= 0x20U) {
             *out_width += text->x80.x * (32.0F + text->x78.x);
-            if ((s16) kern_enabled != 0) {
-                glyph_code = (u16) *cursor;
+            if (kern_enabled != 0) {
+                glyph_code = *(u16*) cursor;
                 if (glyph_code < 0x4000U) {
                     kern_data = (u8*) &HSD_SisLib_8040CB00 +
                                 (((glyph_code - 0x2000) * 2) & 0x1FFFE);
                     *out_width = -((text->x80.x *
-                                    (f32) (*kern_data + (kern_data[1] - 2))) -
+                                    (f32) (kern_data[0] + (kern_data[1] - 2))) -
                                    *out_width);
                 } else {
                     kern_data_2 =
@@ -1363,7 +1361,7 @@ loop_3:
                              ->data[((glyph_code - 0x4000) * 2) & 0x1FFFE];
                     *out_width =
                         -((text->x80.x *
-                           (f32) (*kern_data_2 + (kern_data_2[1] - 2))) -
+                           (f32) (kern_data_2[0] + (kern_data_2[1] - 2))) -
                           *out_width);
                 }
             }
@@ -1375,17 +1373,20 @@ loop_3:
         }
         goto block_33;
     }
+    goto block_done;
+block_33:
+    cursor += 1;
+    goto loop_3;
+block_done:
     *out_width -= text->x78.x;
     text->x80.x = saved_scale_x;
     text->x80.y = saved_scale_y;
     text->x78.x = saved_spacing;
     text->x6C = saved_x6C;
     clear_idx = text->x6C;
-loop_36:
-    if ((s32) clear_idx < (s32) text->x6E) {
-        *((u8*) text->string_buffer + clear_idx) = 0;
+    while (clear_idx < (s32) text->x6E) {
+        ((u8*) text->string_buffer)[clear_idx] = 0;
         clear_idx += 1;
-        goto loop_36;
     }
 }
 
@@ -1760,14 +1761,14 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                             text->current_height = (f32) ((f32) y_offset * text->font_size.y);
                             break;
                         case 9:
-                            HSD_SisLib_803A7684(text, *sis_cursor, 5U);
+                            HSD_SisLib_803A7684(text, sis_cursor, 5U);
                             /* fallthrough */
                         case 8:
                             sis_cursor -= 4;
                             break;
                         case 10:
                             if (((u32) text->alloc_data == 0U) || (saved_kerning == 0)) {
-                                HSD_SisLib_803A7684(text, *sis_cursor, 1U);
+                                HSD_SisLib_803A7684(text, sis_cursor, 1U);
                                 text->x78.x = (f32) ((f32) (s16)sis_cursor[1] * 0.00390625F);
                                 text->x78.y = (f32) ((f32) (s16)sis_cursor[3] * 0.00390625F);
                             }
@@ -1779,7 +1780,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                             }
                             break;
                         case 12:
-                            HSD_SisLib_803A7684(text, *sis_cursor, 2U);
+                            HSD_SisLib_803A7684(text, sis_cursor, 2U);
                             text->active_color.r = sis_cursor[1];
                             text->active_color.g = sis_cursor[2];
                             text->active_color.b = sis_cursor[3];
@@ -1789,7 +1790,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                             HSD_SisLib_803A7F0C(text, 2);
                             break;
                         case 14:
-                            HSD_SisLib_803A7684(text, *sis_cursor, 3U);
+                            HSD_SisLib_803A7684(text, sis_cursor, 3U);
                             text->x80.x = (f32) ((f32) (s16)sis_cursor[1] * 0.00390625F);
                             text->x80.y = (f32) ((f32) (s16)sis_cursor[2] * 0.00390625F);
                             sis_cursor += 4;
@@ -1798,15 +1799,15 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                             HSD_SisLib_803A7F0C(text, 3);
                             break;
                         case 16:
-                            HSD_SisLib_803A7684(text, *sis_cursor, 4U);
+                            HSD_SisLib_803A7684(text, sis_cursor, 4U);
                             text->alignment = 1U;
                             break;
                         case 18:
-                            HSD_SisLib_803A7684(text, *sis_cursor, 4U);
+                            HSD_SisLib_803A7684(text, sis_cursor, 4U);
                             text->alignment = 0U;
                             break;
                         case 20:
-                            HSD_SisLib_803A7684(text, *sis_cursor, 4U);
+                            HSD_SisLib_803A7684(text, sis_cursor, 4U);
                             text->alignment = 2U;
                             break;
                         case 17:

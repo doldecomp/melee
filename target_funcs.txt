@@ -3,7 +3,7 @@ Funcs:
 - [x] HSD_SisLib_803A594C
 - [x] HSD_SisLib_803A5798
 - [x] HSD_SisLib_803A7F0C
-- [ ] HSD_SisLib_803A8134
+- [x] HSD_SisLib_803A8134
 - [ ] HSD_SisLib_803A67EC
 - [ ] HSD_SisLib_803A70A0
 - [ ] HSD_SisLib_803A6B98
