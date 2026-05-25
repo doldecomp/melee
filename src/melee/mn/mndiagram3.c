@@ -41,7 +41,7 @@ void mnDiagram3_80245BA4(HSD_GObj* gobj)
     HSD_Text* title_text;
     HSD_Text* value_text;
     HSD_JObj* icon;
-    u8 entity;
+    s32 entity;
     u32 max_distance;
     u32 max_time;
     u32 max_percentage;
