@@ -849,7 +849,6 @@ void fn_8018DF68(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
 }
 
 /// @todo Currently 98.8% match - permuter couldn't improve beyond score 140
-extern f32 lbl_804DA6A0; // 0.5f
 
 void fn_8018E46C(HSD_GObj* gobj, int unused)
 {
@@ -871,25 +870,25 @@ void fn_8018E46C(HSD_GObj* gobj, int unused)
     hsd_80391A04(1.0F, 1.0F, 1);
     switch (data->x3) {
     case 0:
-        fn_8018C8D4(data, data->xC - (s32) (lbl_804DA6A0 * data->x1C),
+        fn_8018C8D4(data, data->xC - (s32) (0.5f * data->x1C),
                     -data->x10, data->x14, -data->x18, r30, data->xC,
-                    lbl_804DA6A0);
+                    0.5f);
         break;
     case 1:
-        fn_8018D50C(data, data->xC - (s32) (lbl_804DA6A0 * data->x1C),
+        fn_8018D50C(data, data->xC - (s32) (0.5f * data->x1C),
                     -data->x10, data->x14, -data->x18, r30, data->xC,
-                    lbl_804DA6A0);
+                    0.5f);
         break;
     case 2:
-        fn_8018DC18(data, data->xC - (s32) (lbl_804DA6A0 * data->x1C),
+        fn_8018DC18(data, data->xC - (s32) (0.5f * data->x1C),
                     -data->x10, data->x14, -data->x18, r30, data->xC,
-                    lbl_804DA6A0);
+                    0.5f);
         break;
     case 3:
         new_var = -data->x18;
-        fn_8018DF68(data, data->xC - (s32) (lbl_804DA6A0 * data->x1C),
+        fn_8018DF68(data, data->xC - (s32) (0.5f * data->x1C),
                     -data->x10, data->x14, new_var, r30, data->xC,
-                    lbl_804DA6A0);
+                    0.5f);
         break;
     }
 }
@@ -1766,7 +1765,6 @@ void fn_801904D0(void)
 
 #pragma push
 #pragma auto_inline off
-extern f32 lbl_804DA6D4;
 
 void fn_80190520(f32 x, f32 y, f32 z)
 {
@@ -1783,7 +1781,7 @@ void fn_80190520(f32 x, f32 y, f32 z)
         sp14.y = y;
         sp14.z = z;
         HSD_CObjSetInterest(tmp->cobj, &sp14);
-        sp14.z = lbl_804DA6D4 + z;
+        sp14.z = 415.6922f + z;
         HSD_CObjSetEyePosition(tmp->cobj, &sp14);
     }
 }
@@ -1941,10 +1939,6 @@ struct Lbl804799B8_t {
 static struct Lbl804799B8_t lbl_804799B8;
 
 extern u8 lbl_803D9F80[];
-extern f32 lbl_804DA6EC; // 537.0f
-extern f32 lbl_804DA6F0; // 149.0f
-extern f32 lbl_804DA6F4; // 409.0f
-extern f32 lbl_804DA6F8; // 47.0f
 extern f32 lbl_804DA6FC; // 143.0f
 extern f32 lbl_804DA700; // 183.0f
 extern f32 lbl_804DA704; // 48.6f
@@ -2017,10 +2011,10 @@ void fn_80190ABC(int mode)
     case 4: {
         HSD_SisLib_803A7664(tm->x518[0]);
         {
-            f32 f_col_mul = lbl_804DA6F0;
-            f32 f_col_add = lbl_804DA6EC;
-            f32 f_row_mul = lbl_804DA6F8;
-            f32 f_row_add = lbl_804DA6F4;
+            f32 f_col_mul = 149.0f;
+            f32 f_col_add = 537.0f;
+            f32 f_row_mul = 47.0f;
+            f32 f_row_add = 409.0f;
             for (i = 0; i < 0x24; i++) {
                 s32 col = i % 4;
                 s32 row = i / 4;

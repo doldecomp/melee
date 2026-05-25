@@ -64,10 +64,10 @@ extern BgFlashData lbl_80433658;
 /* 021C18 */ static void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd,
                                      int arg2);
 
-extern GXColor lbl_804D3840;
-extern GXColor lbl_804D3844;
-extern GXColor lbl_804D3848;
-extern GXColor lbl_804D384C;
+static GXColor lbl_804D3840 = { 0, 0, 0, 255 };
+static GXColor lbl_804D3844 = { 0, 0, 0, 0 };
+static GXColor lbl_804D3848 = { 255, 255, 255, 255 };
+static GXColor lbl_804D384C = { 0, 0, 0, 0 };
 
 extern HSD_CObjDesc lbl_803BB028;
 
