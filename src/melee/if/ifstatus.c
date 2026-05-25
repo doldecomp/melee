@@ -21,7 +21,10 @@
 #include <baselib/aobj.h>
 #include <baselib/dobj.h>
 #include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
+#include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 #include <baselib/mobj.h>
 #include <baselib/mtx.h>
@@ -690,7 +693,8 @@ void ifStatus_802F5EC0(IfDamageState* state, s32 player_idx)
         gobj = GObj_Create(0xE, 0xF, 0);
         jobj = HSD_JObjLoadJoint(hud->unk258);
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
-        GObj_SetupGXLink(gobj, ifStatus_802F5DE0, 0xB, 0);
+        GObj_SetupGXLink(gobj, (void (*)(HSD_GObj*, int)) ifStatus_802F5DE0,
+                         0xB, 0);
         HSD_GObj_SetupProc(gobj, ifStatus_802F5B48, 0x11);
         HSD_GObj_SetupProc(gobj, ifStatus_802F4EDC, 0x11);
         state->HUD_parent_entity = gobj;
@@ -796,7 +800,8 @@ void ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
             __assert("ifstatus.c", 0x30E, "0");
         }
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
-        GObj_SetupGXLink(gobj, ifStatus_802F5E50, 0xB, 0);
+        GObj_SetupGXLink(gobj, (void (*)(HSD_GObj*, int)) ifStatus_802F5E50,
+                         0xB, 0);
         state->next = gobj;
     } else {
         jobj = state->next->hsd_obj;
