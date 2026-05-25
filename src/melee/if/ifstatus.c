@@ -11,7 +11,9 @@
 #include "if/ifstock.h"
 #include "if/types.h"
 #include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
+#include "lb/lbaudio_ax.h"
 #include "mn/mnmain.h"
 #include "pl/player.h"
 #include "sc/types.h"
@@ -1131,7 +1133,53 @@ void ifStatus_802F6E3C(s32 player_num)
     ifStock_802FB6AC(player_num);
 }
 
-/// #ifStatus_802F6EA4
+void ifStatus_802F6EA4(int arg0, int arg1, int arg2, int arg3, Event arg4,
+                       Event arg5)
+{
+    Element_803F9628* e;
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+
+    if (arg0 == 8) {
+        if (arg4 != NULL) {
+            ((IfStatusCb) arg4)(-1);
+        }
+        if (arg5 != NULL) {
+            ((IfStatusCb) arg5)(-1);
+        }
+        if (arg1 >= 0) {
+            lbAudioAx_800237A8(arg1, 0x7F, 0x40);
+        }
+        if (arg1 >= 0) {
+            lbAudioAx_800237A8(arg2, 0x7F, 0x40);
+        }
+    } else {
+        e = &ifStatus_803F9628[arg0];
+        e->x20 = arg1;
+        e->x24 = arg2;
+        e->x11 = arg3;
+        if (e->x0 != NULL) {
+            HSD_GObjPLink_80390228(e->x0);
+        }
+        gobj = GObj_Create(0xE, 0xE, 0);
+        jobj = HSD_JObjLoadJoint(e->x14->joint);
+        lb_80011C18(jobj, 0x08000000);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
+        if (e->x8 != NULL) {
+            HSD_GObj_SetupProc(gobj, e->x8, 0);
+        }
+        lb_8000C0E8(jobj, 0, e->x14);
+        HSD_JObjReqAnimAll(jobj, 0.0f);
+        HSD_JObjAnimAll(jobj);
+        e->x12.x0 = 0;
+        e->x12.x1 = 0;
+        e->x12.x2 = 0;
+        e->x0 = gobj;
+        e->x18 = (IfStatusCb) arg4;
+        e->x1C = (IfStatusCb) arg5;
+    }
+}
 
 void ifStatus_802F7034(UNK_T arg0)
 {

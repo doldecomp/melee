@@ -2,7 +2,7 @@ File: src/melee/if/ifstatus.c
 Funcs:
 - [x] ifStatus_802F66A4
 - [x] ifStatus_802F6508
-- [ ] ifStatus_802F6EA4
+- [x] ifStatus_802F6EA4
 - [x] ifStatus_802F5B48
 - [x] ifStatus_802F5EC0
 - [x] ifStatus_802F61FC
