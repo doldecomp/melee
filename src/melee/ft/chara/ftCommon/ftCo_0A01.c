@@ -6567,11 +6567,12 @@ void ftCo_800AEFB8(Fighter* fp)
 
 void ftCo_800AF290(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct Fighter_x1A88_t* data2;
     Vec3 sp54;
     Vec3 sp30;
     s32 cmd;
     Fighter* target;
+    int tmp;
     s32 do_act;
     s32 is_food;
     s32 redirect;
@@ -6580,6 +6581,8 @@ void ftCo_800AF290(Fighter* fp)
     f32 dx;
     f32 dy;
     f32 dist;
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    PAD_STACK(0x30);
 
     cmd = ftCo_800A229C(fp, &sp54);
     if (cmd != 0) {
@@ -6624,8 +6627,8 @@ void ftCo_800AF290(Fighter* fp)
         ftCo_800AECF0(fp);
         return;
     }
-    is_food = 1;
-    data->xF8_b0 = true;
+
+    data->xF8_b0 = (is_food = 1);
     data->xF9_b2 = true;
     data->xF9_b4 = true;
     data->xF9_b3 = false;
@@ -6652,16 +6655,18 @@ void ftCo_800AF290(Fighter* fp)
             goto block_30;
         }
     } else {
+        tmp = fp->x2168;
     block_30:
-        if (fp->x2168 != 0) {
+        if (tmp != 0) {
             data->x4C = NULL;
         } else {
             data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
         }
     }
-    data->x50 = ftCo_800A648C(fp);
+    fp->x1A88.x50 = ftCo_800A648C(fp);
+    data2 = &fp->x1A88;
     if (ftCo_800A1C44_dontinline(fp)) {
-        data->xF8_b6 = false;
+        data2->xF8_b6 = false;
     } else {
         target = data->x44;
         if (target != NULL && fp->ground_or_air == GA_Ground) {
@@ -6687,8 +6692,9 @@ void ftCo_800AF290(Fighter* fp)
             return;
         }
     }
-    if (data->x18 != data->x20 && data->x18 != data->x1C) {
-        data->x60 = 0;
+    data2 = &fp->x1A88;
+    if (data2->x18 != data2->x20 && data2->x18 != data2->x1C) {
+        data2->x60 = 0;
     }
     if (data->x18 == 4) {
         do_act = 0;
