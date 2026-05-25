@@ -8053,6 +8053,7 @@ void ftCo_800B21C8(Fighter* fp)
 
 void ftCo_800B24B8(Fighter* fp)
 {
+    struct Fighter_x1A88_t* data2 = &fp->x1A88;
     struct Fighter_x1A88_t* data = &fp->x1A88;
     Vec3 sp28;
     s32 cmd;
@@ -8062,6 +8063,7 @@ void ftCo_800B24B8(Fighter* fp)
     s32 is_food;
     Item_GObj* item_gobj;
     ItemKind kind;
+    PAD_STACK(0x18);
 
     cmd = ftCo_800A229C(fp, &sp28);
     if (cmd != 0) {
@@ -8096,15 +8098,14 @@ void ftCo_800B24B8(Fighter* fp)
         return;
     }
     data->xF8_b0 = false;
-    is_food = 1;
-    data->xF9_b2 = true;
+    data->xF9_b2 = (is_food = 1);
     data->xF9_b4 = true;
     data->xF9_b3 = true;
     data->xF9_b5 = true;
     data->xF9_b6 = true;
     data->xF9_b7 = true;
     data->xF9_b1 = false;
-    data->x44 = ftCo_800A4BEC(fp);
+    fp->x1A88.x44 = ftCo_800A4BEC(fp);
     item_gobj = fp->item_gobj;
     if (item_gobj != NULL) {
         kind = GET_ITEM(item_gobj)->kind;
@@ -8130,14 +8131,15 @@ void ftCo_800B24B8(Fighter* fp)
             data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
         }
     }
-    data->x50 = ftCo_800A648C(fp);
-    if (data->x18 != data->x20 && data->x18 != data->x1C) {
-        data->x60 = 0;
+    fp->x1A88.x50 = ftCo_800A648C(fp);
+    data2 = &fp->x1A88;
+    if (data2->x18 != data2->x20 && data2->x18 != data2->x1C) {
+        data2->x60 = 0;
     }
-    if (data->x18 == 4) {
+    if (data2->x18 == 4) {
         do_act = 0;
     } else {
-        data->xFA_b2 = false;
+        data2->xFA_b2 = false;
         do_act = 1;
     }
     if (do_act != 0) {
