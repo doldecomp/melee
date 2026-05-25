@@ -918,8 +918,8 @@ void fn_80161C90(MatchEnd* arg0, int arg1, u16* arg2)
     u32 count;
 
     s->unk0 = MIN(s->unk0 + p->self_destructs, 0xFFFF);
-    s->unk4 = MIN(s->unk4 + *(u32*) ((u8*) p + 0x38), 0xFFFFFFFFU);
-    s->unk8 = MIN(s->unk8 + *(u32*) ((u8*) p + 0x3C), 0xFFFFFFFFU);
+    s->unk4 = MIN(s->unk4 + p->x38, 0xFFFFFFFFU);
+    s->unk8 = MIN(s->unk8 + p->x3C, 0xFFFFFFFFU);
     s->unkC = MIN(s->unkC + p->x40, 0xFFFFFFFFU);
     s->unk10 = MIN(s->unk10 + p->x44, 0xFFFFFFFFU);
     s->unk14 = MIN(s->unk14 + p->x48, 0xFFFFFFFFU);
@@ -1135,7 +1135,7 @@ void gm_80162574(u8 arg0, u8 arg1)
     *ptr = val;
 
     // Second counter
-    ptr = (u16*) ((u8*) gmMainLib_8015EDBC() + gm_80164024(arg0) * 2 + 0x18);
+    ptr = &gmMainLib_8015EDBC()->x18[gm_80164024(arg0)];
     val = *ptr + 1;
     if (val > 0xFFFF) {
         val = 0xFFFF;
@@ -2584,22 +2584,22 @@ s32 fn_8016588C(lbl_8046B6A0_24C_t* arg0, s32 arg1)
     s32 lim;
 
     if (gm_801A4310() == 0x1F) {
-        if (*(u32*) ((u8*) arg0 + arg1 * 0xA8 + 0x80) != 0) {
-            v = (u8) (*(u32*) ((u8*) arg0 + arg1 * 0xA8 + 0x80) / 60 +
+        if (arg0->x58[arg1].x28 != 0) {
+            v = (u8) (arg0->x58[arg1].x28 / 60 +
                       0xFF000001);
         } else {
-            v = ((u8*) arg0 + arg1 * 0xA8)[0x61];
+            v = arg0->x58[arg1].x9;
         }
     } else {
         switch (arg0->x5) {
         case 2:
-            v = ((u8*) arg0 + arg1 * 0xA8)[0x74];
+            v = arg0->x58[arg1].x1C;
             break;
         case 1:
-            if ((s8) ((u8*) arg0 + arg1 * 0xA8)[0x60] != 0) {
-                v = (u8) (s8) ((u8*) arg0 + arg1 * 0xA8)[0x60];
+            if ((s8) arg0->x58[arg1].x8 != 0) {
+                v = (u8) (s8) arg0->x58[arg1].x8;
             } else {
-                v = (u8) (*(u32*) ((u8*) arg0 + arg1 * 0xA8 + 0x80) / 60 +
+                v = (u8) (arg0->x58[arg1].x28 / 60 +
                           0xFF000001);
             }
             break;
