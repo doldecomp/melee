@@ -1949,6 +1949,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
         {
             f32 line_width;
             f32 line_width_out = 0;
+            f32 line_height_out;
             f64 half_glyph = 16.0;
 
             u32 line_started = 0U;
@@ -2038,20 +2039,20 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                 skip_count -= 1;
                             } else {
                                 text->x98 = (u32) (text->x98 + 1);
-                                text->x94 = *((u8 *)sis_cursor + 1);
+                                text->x94 = *(u16*) (sis_cursor + 1);
                                 text->x60 = (void *) (sis_cursor + 3);
                             }
                             sis_cursor += 2;
                             break;
                         case 6:
-                            line_delay = *((u8 *)sis_cursor + 1);
-                            char_delay = *((u8 *)sis_cursor + 3);
+                            line_delay = *(u16*) (sis_cursor + 1);
+                            char_delay = *(u16*) (sis_cursor + 3);
                             sis_cursor += 4;
                             break;
                         case 7:
                             line_started = 1U;
-                            // HSD_SisLib_803A8134();
-                            x_origin = (f32) *((u8 *)sis_cursor + 1);
+                            HSD_SisLib_803A8134((void*) (sis_cursor + 5), text, &line_width_out, &line_height_out);
+                            x_origin = (f32) *(s16*) (sis_cursor + 1);
                             if (((u8) text->fitting == 1) && (text->box_size_x < line_width_out) != 0) {
                                 text->x88 = (f32) (text->box_size_x / line_width_out);
                             } else {
@@ -2068,7 +2069,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                 text->current_width = x_origin;
                                 break;
                             }
-                            y_offset = *((u8 *)sis_cursor + 3);
+                            y_offset = *(s16*) (sis_cursor + 3);
                             sis_cursor += 4;
                             text->current_height = (f32) ((f32) y_offset * text->font_size.y);
                             break;
@@ -2081,8 +2082,8 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                         case 10:
                             if (((u32) text->alloc_data == 0U) || (saved_kerning == 0)) {
                                 HSD_SisLib_803A7684(text, sis_cursor, 1U);
-                                text->x78.x = (f32) ((f32) (s16)sis_cursor[1] * 0.00390625F);
-                                text->x78.y = (f32) ((f32) (s16)sis_cursor[3] * 0.00390625F);
+                                text->x78.x = (f32) ((f32) *(s16*) (sis_cursor + 1) * 0.00390625F);
+                                text->x78.y = (f32) ((f32) *(s16*) (sis_cursor + 3) * 0.00390625F);
                             }
                             sis_cursor += 4;
                             break;
@@ -2103,8 +2104,8 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                             break;
                         case 14:
                             HSD_SisLib_803A7684(text, sis_cursor, 3U);
-                            text->x80.x = (f32) ((f32) (s16)sis_cursor[1] * 0.00390625F);
-                            text->x80.y = (f32) ((f32) (s16)sis_cursor[2] * 0.00390625F);
+                            text->x80.x = (f32) ((f32) *(u16*) (sis_cursor + 1) * 0.00390625F);
+                            text->x80.y = (f32) ((f32) *(u16*) (sis_cursor + 3) * 0.00390625F);
                             sis_cursor += 4;
                             break;
                         case 15:
