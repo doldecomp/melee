@@ -1688,9 +1688,10 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
 s32 mnCharSel_8025FDEC(u8 door)
 {
     HSD_JObj* sp10;
-    s8 player;
-    u8 c_kind;
-    u8 icon_idx;
+    int player;
+    s8 c_kind;
+    int icon_idx;
+    CSSIcon* icons = (CSSIcon*) (&mnCharSel_803F0A48 + 1);
 
     if (mnCharSel_804D6CF5 == 1) {
         if (door != 0) {
@@ -1699,23 +1700,21 @@ s32 mnCharSel_8025FDEC(u8 door)
             player = mnCharSel_804D6CF0;
         }
     } else {
-        player = (s8) door;
+        player = door;
     }
 
     c_kind = mnCharSel_804D6CB0->data.data.players[player].c_kind;
 
-    if ((s8) c_kind >= 0x1A) {
+    if (c_kind >= 0x1A) {
         return 1;
     }
 
-    if ((s8) c_kind !=
-        (s8) icons[mnCharSel_803F0DFC.doors[door].sel_icon].char_kind)
-    {
+    if (c_kind != icons[mnCharSel_803F0DFC.doors[door].sel_icon].char_kind) {
         mnCharSel_803F0DFC.doors[door].costume = 0;
     }
 
     for (icon_idx = 0; icon_idx < 0x19; icon_idx++) {
-        if ((s8) c_kind == (s8) icons[icon_idx].char_kind) {
+        if (c_kind == icons[icon_idx].char_kind) {
             break;
         }
     }
@@ -1727,7 +1726,7 @@ s32 mnCharSel_8025FDEC(u8 door)
     mnCharSel_803F0DFC.doors[door].sel_icon = icon_idx;
 
     HSD_GObjGXLink_803909D8(mnCharSel_804A0BD0[door]->gobj,
-                            mnCharSel_804A0BC0[door]->gobj);
+                            mnCharSel_804A0BC0[mnCharSel_804D6CF5 - 1]->gobj);
 
     mnCharSel_804A0BD0[door]->x5 = 0;
 
