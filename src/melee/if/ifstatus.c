@@ -283,7 +283,6 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     s32 is_stamina;
     HSD_TObj* tobj;
     HSD_MObj* mobj;
-    HSD_DObj* dobj;
     s32 i;
     s32 var_ctr;
     u8 ones_digit;
@@ -399,8 +398,9 @@ found_player:;
     HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * tens_digit);
     HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
 
-    hundreds_digit = (state->damage_percent % 1000) / 100;
-    if (hundreds_digit == 0 && tens_digit == 0) {
+    if ((state->damage_percent % 1000) / 100 == 0 &&
+        (state->damage_percent % 100) / 10 == 0)
+    {
         HSD_JObjSetFlagsAll(state->jobjs[Tens], 0x10);
     } else {
         HSD_JObjClearFlagsAll(state->jobjs[Tens], 0x10);
@@ -415,7 +415,7 @@ found_player:;
     HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * hundreds_digit);
     HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
 
-    if (hundreds_digit == 0) {
+    if ((state->damage_percent % 1000) / 100 == 0) {
         HSD_JObjSetFlagsAll(state->jobjs[Hundreds], 0x10);
     } else {
         HSD_JObjClearFlagsAll(state->jobjs[Hundreds], 0x10);
@@ -444,38 +444,34 @@ found_player:;
         }
 
         /* Interpolate color */
-        color.r = (u8) (factor * (f32) (ifStatus_804D57AC[0] -
+        color.r = (s8) (factor * (f32) (ifStatus_804D57AC[0] -
                                         ifStatus_804D57A8[0]) +
                         (f32) ifStatus_804D57A8[0]);
-        color.g = (u8) (factor * (f32) (ifStatus_804D57AC[1] -
+        color.g = (s8) (factor * (f32) (ifStatus_804D57AC[1] -
                                         ifStatus_804D57A8[1]) +
                         (f32) ifStatus_804D57A8[1]);
-        color.b = (u8) (factor * (f32) (ifStatus_804D57AC[2] -
+        color.b = (s8) (factor * (f32) (ifStatus_804D57AC[2] -
                                         ifStatus_804D57A8[2]) +
                         (f32) ifStatus_804D57A8[2]);
         color.a = 255;
 
         /* Apply color to all digit materials */
-        dobj = state->jobjs[Hundreds]->u.dobj;
-        mobj = dobj->mobj;
+        mobj = state->jobjs[Hundreds]->u.dobj->mobj;
         mobj->mat->diffuse.r = color.r;
         mobj->mat->diffuse.g = color.g;
         mobj->mat->diffuse.b = color.b;
 
-        dobj = state->jobjs[Tens]->u.dobj;
-        mobj = dobj->mobj;
+        mobj = state->jobjs[Tens]->u.dobj->mobj;
         mobj->mat->diffuse.r = color.r;
         mobj->mat->diffuse.g = color.g;
         mobj->mat->diffuse.b = color.b;
 
-        dobj = state->jobjs[Ones]->u.dobj;
-        mobj = dobj->mobj;
+        mobj = state->jobjs[Ones]->u.dobj->mobj;
         mobj->mat->diffuse.r = color.r;
         mobj->mat->diffuse.g = color.g;
         mobj->mat->diffuse.b = color.b;
 
-        dobj = state->jobjs[Percent]->u.dobj;
-        mobj = dobj->mobj;
+        mobj = state->jobjs[Percent]->u.dobj->mobj;
         mobj->mat->diffuse.r = color.r;
         mobj->mat->diffuse.g = color.g;
         mobj->mat->diffuse.b = color.b;
