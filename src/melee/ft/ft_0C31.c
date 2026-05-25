@@ -586,9 +586,9 @@ void fn_800C7568(Fighter_GObj* gobj)
 
 void ftCo_800C7590(Fighter_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
     ftCommonData* cd;
     f32 temp_f31;
+    Fighter* fp = gobj->user_data;
 
     ftCommon_8007DB58(gobj);
     ftCo_8009750C(gobj);
@@ -602,17 +602,18 @@ void ftCo_800C7590(Fighter_GObj* gobj)
     fp->mv.co.captureleadead.x0 = (Item_GObj*) fp->dmg.x1868_source;
     ftCommon_8007E2FC(gobj);
     cd = p_ftCommonData;
-    temp_f31 =
-        cd->x728 * (cd->x72C - (f32) (Player_80033BB8(fp->player_id) + 1));
-    ftCommon_InitGrab(
-        fp, 1,
-        fp->dmg.x1830_percent * cd->x730 +
-            (cd->x720 * (cd->x724 - (f32) Player_GetHandicap(fp->player_id)) +
-             cd->x71C + temp_f31));
+    {
+        f32 tmp1 =
+            cd->x728 * (cd->x72C - (f32) (Player_80033BB8(fp->player_id) + 1));
+        f32 tmp2 = (cd->x720 * (cd->x724 - Player_GetHandicap(fp->player_id)) +
+                    cd->x71C);
+        tmp2 += tmp1;
+        ftCommon_InitGrab(fp, 1, fp->dmg.x1830_percent * cd->x730 + tmp2);
+    }
     ftCommon_8007E2F4(fp, 0x1FF);
     fp->x221D_b5 = true;
     fp->x2220_b3 = true;
-    it_802EAAEC(fp->mv.co.captureleadead.x0, gobj, 0);
+    it_802EAAEC(fp->mv.co.captureleadead.x0, gobj, 0, 0.0f);
     ftCommon_8007EBAC(fp, 0xC, 0);
     Camera_80030E44(2, &fp->cur_pos);
 }
