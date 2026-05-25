@@ -225,9 +225,8 @@ HSD_Particle* particleSort(s32 arg0, u8 arg1, HSD_Particle** arg2,
     HSD_Particle** temp_r29;
     HSD_Particle** var_r6_2;
     HSD_Particle** var_r7_2;
-    psdisp_ParticleSortBucket* temp_r3_4;
-    psdisp_ParticleSortBucket* temp_r3_10;
     psdisp_ParticleSortCache* cache;
+    s32 i;
     u32 temp_r3;
     u32 temp_r3_2;
     s32 temp_r4;
@@ -292,136 +291,26 @@ HSD_Particle* particleSort(s32 arg0, u8 arg1, HSD_Particle** arg2,
     var_r7_2 = NULL;
     var_r5 = NULL;
 
-    temp_r3_4 = buckets;
-    if (temp_r3_4->head != NULL) {
-        if (var_r4 == NULL) {
-            var_r4 = temp_r3_4->head;
-        } else {
-            *var_r6_2 = temp_r3_4->head;
+    for (i = 0; i < 8; i++) {
+        if (buckets[i].head != NULL) {
+            if (var_r4 == NULL) {
+                var_r4 = buckets[i].head;
+            } else {
+                *var_r6_2 = buckets[i].head;
+            }
+            var_r6_2 = &buckets[i].tail->next;
         }
-        var_r6_2 = &temp_r3_4->tail->next;
-    }
-    if ((++temp_r3_4)->head != NULL) {
-        if (var_r4 == NULL) {
-            var_r4 = temp_r3_4->head;
-        } else {
-            *var_r6_2 = temp_r3_4->head;
-        }
-        var_r6_2 = &temp_r3_4->tail->next;
-    }
-    if ((++temp_r3_4)->head != NULL) {
-        if (var_r4 == NULL) {
-            var_r4 = temp_r3_4->head;
-        } else {
-            *var_r6_2 = temp_r3_4->head;
-        }
-        var_r6_2 = &temp_r3_4->tail->next;
-    }
-    if ((++temp_r3_4)->head != NULL) {
-        if (var_r4 == NULL) {
-            var_r4 = temp_r3_4->head;
-        } else {
-            *var_r6_2 = temp_r3_4->head;
-        }
-        var_r6_2 = &temp_r3_4->tail->next;
-    }
-    if ((++temp_r3_4)->head != NULL) {
-        if (var_r4 == NULL) {
-            var_r4 = temp_r3_4->head;
-        } else {
-            *var_r6_2 = temp_r3_4->head;
-        }
-        var_r6_2 = &temp_r3_4->tail->next;
-    }
-    if ((++temp_r3_4)->head != NULL) {
-        if (var_r4 == NULL) {
-            var_r4 = temp_r3_4->head;
-        } else {
-            *var_r6_2 = temp_r3_4->head;
-        }
-        var_r6_2 = &temp_r3_4->tail->next;
-    }
-    if ((++temp_r3_4)->head != NULL) {
-        if (var_r4 == NULL) {
-            var_r4 = temp_r3_4->head;
-        } else {
-            *var_r6_2 = temp_r3_4->head;
-        }
-        var_r6_2 = &temp_r3_4->tail->next;
-    }
-    if ((++temp_r3_4)->head != NULL) {
-        if (var_r4 == NULL) {
-            var_r4 = temp_r3_4->head;
-        } else {
-            *var_r6_2 = temp_r3_4->head;
-        }
-        var_r6_2 = &temp_r3_4->tail->next;
     }
 
-    temp_r3_10 = &buckets[8];
-    if (temp_r3_10->head != NULL) {
-        if (var_r5 == NULL) {
-            var_r5 = temp_r3_10->head;
-        } else {
-            *var_r7_2 = temp_r3_10->head;
+    for (i = 8; i < 16; i++) {
+        if (buckets[i].head != NULL) {
+            if (var_r5 == NULL) {
+                var_r5 = buckets[i].head;
+            } else {
+                *var_r7_2 = buckets[i].head;
+            }
+            var_r7_2 = &buckets[i].tail->next;
         }
-        var_r7_2 = &temp_r3_10->tail->next;
-    }
-    if ((++temp_r3_10)->head != NULL) {
-        if (var_r5 == NULL) {
-            var_r5 = temp_r3_10->head;
-        } else {
-            *var_r7_2 = temp_r3_10->head;
-        }
-        var_r7_2 = &temp_r3_10->tail->next;
-    }
-    if ((++temp_r3_10)->head != NULL) {
-        if (var_r5 == NULL) {
-            var_r5 = temp_r3_10->head;
-        } else {
-            *var_r7_2 = temp_r3_10->head;
-        }
-        var_r7_2 = &temp_r3_10->tail->next;
-    }
-    if ((++temp_r3_10)->head != NULL) {
-        if (var_r5 == NULL) {
-            var_r5 = temp_r3_10->head;
-        } else {
-            *var_r7_2 = temp_r3_10->head;
-        }
-        var_r7_2 = &temp_r3_10->tail->next;
-    }
-    if ((++temp_r3_10)->head != NULL) {
-        if (var_r5 == NULL) {
-            var_r5 = temp_r3_10->head;
-        } else {
-            *var_r7_2 = temp_r3_10->head;
-        }
-        var_r7_2 = &temp_r3_10->tail->next;
-    }
-    if ((++temp_r3_10)->head != NULL) {
-        if (var_r5 == NULL) {
-            var_r5 = temp_r3_10->head;
-        } else {
-            *var_r7_2 = temp_r3_10->head;
-        }
-        var_r7_2 = &temp_r3_10->tail->next;
-    }
-    if ((++temp_r3_10)->head != NULL) {
-        if (var_r5 == NULL) {
-            var_r5 = temp_r3_10->head;
-        } else {
-            *var_r7_2 = temp_r3_10->head;
-        }
-        var_r7_2 = &temp_r3_10->tail->next;
-    }
-    if ((++temp_r3_10)->head != NULL) {
-        if (var_r5 == NULL) {
-            var_r5 = temp_r3_10->head;
-        } else {
-            *var_r7_2 = temp_r3_10->head;
-        }
-        var_r7_2 = &temp_r3_10->tail->next;
     }
 
     var_r3 = NULL;
