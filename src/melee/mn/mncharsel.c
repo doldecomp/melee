@@ -3610,13 +3610,12 @@ void fn_802633B0(HSD_GObj* gobj)
     GXColor sp54;
     HSD_JObj* sp30;
     CSSTagData* tag;
-    u8 port;
+    int port;
     s32 num_entries;
     u32 trigger;
     s32 i;
     s32 row;
     u8 match_type;
-    u8 sel_icon;
     s32 val;
     f32 temp_f0;
     f32 vel;
@@ -3658,15 +3657,18 @@ void fn_802633B0(HSD_GObj* gobj)
     switch ((s32) tag->state) {
     case 1:
         mnCharSel_8025D1C4((s32) tag->port, 1);
-        sel_icon = mnCharSel_803F0DFC.doors[tag->port].sel_icon;
-        if ((u8) sel_icon < 0x19U) {
-            if (lbLang_IsSavedLanguageUS() != 0 && (u8) sel_icon == 0x16) {
+        if ((u8) mnCharSel_803F0DFC.doors[tag->port].sel_icon < 0x19U) {
+            if (lbLang_IsSavedLanguageUS() != 0 &&
+                (u8) mnCharSel_803F0DFC.doors[tag->port].sel_icon == 0x16)
+            {
                 HSD_SisLib_803A70A0((HSD_Text*) tag->name_ls, 0,
                                     (char*) &mnCharSel_803F0A48);
             } else {
                 HSD_SisLib_803A70A0(
                     (HSD_Text*) tag->name_ls, 0,
-                    (char*) gm_80160980(icons[sel_icon].char_kind));
+                    (char*) gm_80160980(
+                        icons[mnCharSel_803F0DFC.doors[tag->port].sel_icon]
+                            .char_kind));
             }
         } else {
             HSD_SisLib_803A70A0((HSD_Text*) tag->name_ls, 0,
@@ -3791,8 +3793,8 @@ void fn_802633B0(HSD_GObj* gobj)
                         ddata = mnCharSel_804D6CB0;
                         for (p2 = 0; p2 < (s32) mnCharSel_804D6CF5; p2++) {
                             if (p2 != (s32) tag->port &&
-                                (s32) mnCharSel_804D6CB0->data.data.players[p2]
-                                        .xA == row_idx)
+                                (s32) ddata->data.data.players[p2].xA ==
+                                    row_idx)
                             {
                                 sp58 = sp74;
                                 HSD_SisLib_803A74F0((HSD_Text*) tag->name_ls,
@@ -3827,17 +3829,20 @@ void fn_802633B0(HSD_GObj* gobj)
                          (tag->x8 * 0.03125f));
 
             if (row == 0) {
-                sel_icon = mnCharSel_803F0DFC.doors[tag->port].sel_icon;
-                if (lbLang_IsSavedLanguageUS() != 0 && (u8) sel_icon == 0x16) {
+                if (lbLang_IsSavedLanguageUS() != 0 &&
+                    (u8) mnCharSel_803F0DFC.doors[tag->port].sel_icon == 0x16)
+                {
                     HSD_SisLib_803A70A0((HSD_Text*) tag->text, 0,
                                         (char*) &mnCharSel_803F0A48);
                 } else {
                     HSD_SisLib_803A70A0(
                         (HSD_Text*) tag->text, 0,
-                        (char*) gm_80160980(icons[sel_icon].char_kind));
+                        (char*) gm_80160980(
+                            icons[mnCharSel_803F0DFC.doors[tag->port].sel_icon]
+                                .char_kind));
                 }
                 ((HSD_Text*) tag->text)->default_kerning = 1;
-                if ((u8) sel_icon < 0x19U) {
+                if ((u8) mnCharSel_803F0DFC.doors[tag->port].sel_icon < 0x19U) {
                     ((HSD_Text*) tag->text)->hidden = 0;
                 } else {
                     ((HSD_Text*) tag->text)->hidden = 1;
@@ -3901,7 +3906,7 @@ void fn_802633B0(HSD_GObj* gobj)
                 {
                     s32 p;
                     for (p = 0; p < (s32) mnCharSel_804D6CF5; p++) {
-                        if (p == (s32) port &&
+                        if (p != (s32) port &&
                             (s32) mnCharSel_804D6CB0->data.data.players[p]
                                     .xA == (s32) (row - 1))
                         {
