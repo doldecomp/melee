@@ -1283,7 +1283,7 @@ void fn_8025F0E0(HSD_GObj* gobj)
     int i;
     int door_offset;
     u8 timer;
-    u8 val;
+    s32 val;
     int anim;
     float fval;
 
@@ -1390,7 +1390,7 @@ void fn_8025F0E0(HSD_GObj* gobj)
 
                         rules = gmMainLib_8015CC34();
                         if ((u8) rules->handicap == 1) {
-                            val = gm_801685D4(
+                            val = (u8) gm_801685D4(
                                 (u8) i,
                                 mnCharSel_804D6CB0->data.data.players[i].xA);
                         } else {
@@ -1399,8 +1399,7 @@ void fn_8025F0E0(HSD_GObj* gobj)
                         }
                         {
                             f32 val_f;
-                            if ((s32) val != 0) {
-                            } else {
+                            if (val == 0) {
                                 val = 1;
                             }
                             val_f = (f32) val;
@@ -1459,32 +1458,28 @@ void fn_8025F0E0(HSD_GObj* gobj)
             i += 1;
         }
     } else {
-        u8* scroll_flag = &mnCharSel_803F0DFC.scroll_flag;
-        u8* page_target = &mnCharSel_803F0DFC.xcd;
-        u8* page_current = &mnCharSel_803F0DFC.xce;
-
-        if (*scroll_flag != 0) {
-            if (*page_target != *page_current) {
-                if (*page_target < *page_current) {
+        if (mnCharSel_803F0DFC.scroll_flag != 0) {
+            if (mnCharSel_803F0DFC.xcd != mnCharSel_803F0DFC.xce) {
+                if (mnCharSel_803F0DFC.xcd < mnCharSel_803F0DFC.xce) {
                     mnCharSel_803F0DFC.xcf = mnCharSel_803F0DFC.xcf + 31.0f;
                     if (mnCharSel_803F0DFC.xcf >=
-                        -(248.0f * (f32) *page_target - 124.0f))
+                        -(248.0f * (f32) mnCharSel_803F0DFC.xcd - 124.0f))
                     {
-                        *page_current = *page_target;
+                        mnCharSel_803F0DFC.xce = mnCharSel_803F0DFC.xcd;
                     }
                 } else {
                     mnCharSel_803F0DFC.xcf = mnCharSel_803F0DFC.xcf - 31.0f;
                     if (mnCharSel_803F0DFC.xcf <=
-                        -(248.0f * (f32) *page_target - 124.0f))
+                        -(248.0f * (f32) mnCharSel_803F0DFC.xcd - 124.0f))
                     {
-                        *page_current = *page_target;
+                        mnCharSel_803F0DFC.xce = mnCharSel_803F0DFC.xcd;
                     }
                 }
             }
-            if (*page_target == *page_current) {
-                *scroll_flag = 0;
+            if (mnCharSel_803F0DFC.xcd == mnCharSel_803F0DFC.xce) {
+                mnCharSel_803F0DFC.scroll_flag = 0;
                 mnCharSel_803F0DFC.xcf =
-                    -(248.0f * (f32) *page_target - 124.0f);
+                    -(248.0f * (f32) mnCharSel_803F0DFC.xcd - 124.0f);
             }
             {
                 int j;
