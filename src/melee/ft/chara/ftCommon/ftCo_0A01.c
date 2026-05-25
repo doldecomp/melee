@@ -2175,8 +2175,8 @@ Fighter* ftCo_800A4BEC(Fighter* fp)
 Fighter* ftCo_800A4E8C(Fighter* fp, Vec3* arg1)
 {
     Fighter* cur_fp;
-    HSD_GObj* cur;
     Fighter* closest_fp;
+    HSD_GObj* cur;
     f32 closest;
     f32 distance;
     f32 dx;
@@ -2197,15 +2197,16 @@ Fighter* ftCo_800A4E8C(Fighter* fp, Vec3* arg1)
                     if (!inlineD1(cur_fp)) {
                         if (closest_fp == NULL) {
                             closest_fp = cur_fp;
+                            distance = (dx = cur_fp->cur_pos.x) - arg1->x;
                             dy = cur_fp->cur_pos.y - arg1->y;
-                            dx = cur_fp->cur_pos.x - arg1->x;
+                            dx = distance;
                             dz = cur_fp->cur_pos.z - arg1->z;
                             closest =
                                 sqrtf__Ff(dz * dz + (dx * dx + dy * dy));
                         } else {
-                            dy = cur_fp->cur_pos.y - arg1->y;
                             dx = cur_fp->cur_pos.x - arg1->x;
                             dz = cur_fp->cur_pos.z - arg1->z;
+                            dy = cur_fp->cur_pos.y - arg1->y;
                             distance =
                                 sqrtf__Ff(dz * dz + (dx * dx + dy * dy));
                             if (closest > distance) {
