@@ -204,18 +204,17 @@ void un_802FEBE0_OnEnter(void* arg0_)
     struct un_802FEBE0_OnEnter_arg0* arg0 = arg0_;
     struct un_803F9B30* x;
     int i;
-    unsigned short arg0x0;
     int arg0x4;
-    PAD_STACK(8);
+    int arg0x0;
 
     un_803124BC();
     un_803F9D48.x28 = arg0;
     un_803F9D48.x2C = arg0->x8;
     un_803F9D48.x3 = HSD_Randi(3);
     arg0x4 = arg0->x4;
+    i = 0;
     arg0x0 = arg0->x0;
     un_803F9D48.x0b = 1;
-    i = 0;
     for (x = &un_803F9B30[0]; x->x0 != 66; x++) {
         if (x->x0 == arg0x0) {
             i = un_803F9A00[x->x4];
