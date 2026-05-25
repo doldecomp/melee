@@ -4,7 +4,7 @@ Funcs:
 - [ ] ifStatus_802F6508
 - [ ] ifStatus_802F6EA4
 - [x] ifStatus_802F5B48
-- [ ] ifStatus_802F5EC0
+- [x] ifStatus_802F5EC0
 - [ ] ifStatus_802F61FC
 - [ ] ifStatus_802F4B84
 - [ ] ifStatus_802F4EDC

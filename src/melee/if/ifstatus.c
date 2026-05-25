@@ -667,7 +667,55 @@ void ifStatus_802F5E50(HSD_GObj* gobj, s32 arg1)
 
 void ifStatus_802F5EC0(IfDamageState* state, s32 player_idx)
 {
-    NOT_IMPLEMENTED;
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+    Vec3* vec;
+    s32 i;
+    HSD_TObj* tobj;
+    HudIndex* hud = &ifStatus_HudInfo;
+
+    if (state->HUD_parent_entity == NULL) {
+        gobj = GObj_Create(0xE, 0xF, 0);
+        jobj = HSD_JObjLoadJoint(hud->unk258);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        GObj_SetupGXLink(gobj, ifStatus_802F5DE0, 0xB, 0);
+        HSD_GObj_SetupProc(gobj, ifStatus_802F5B48, 0x11);
+        HSD_GObj_SetupProc(gobj, ifStatus_802F4EDC, 0x11);
+        state->HUD_parent_entity = gobj;
+    } else {
+        jobj = state->HUD_parent_entity->hsd_obj;
+    }
+    state->flags.animation_status_id = 0;
+    HSD_JObjRemoveAnim(jobj);
+    lb_8000C07C(jobj, 0, (HSD_AnimJoint**) hud->jobj_desc_parent,
+                (HSD_MatAnimJoint**) hud->janim_selection_joints,
+                (HSD_ShapeAnimJoint**) hud->janim_selection_textures);
+    HSD_JObjReqAnimAll(jobj, 0.0f);
+    HSD_JObjAnimAll(jobj);
+    vec = ifAll_802F3424((u8) player_idx);
+    HSD_JObjSetTranslate(jobj, vec);
+    for (i = 0; i < 4; i++) {
+        state->jobjs[i] = (HSD_JObj*) ifStatus_802F6194((HSD_GObj*) jobj, i);
+        state->translation_x[i] = HSD_JObjGetTranslationX(state->jobjs[i]);
+        state->translation_y[i] = HSD_JObjGetTranslationY(state->jobjs[i]);
+    }
+    if (state->jobjs[3] != NULL) {
+        tobj = state->jobjs[3]->u.dobj->mobj->tobj;
+        HSD_TObjAddAnimAll(
+            tobj, (HSD_TexAnim*) hud->janim_selection_joints->child->child->next
+                      ->next->next->aobjdesc->fobjdesc);
+        if (Player_GetMoreFlagsBit2((s8) state->player_slot) != 0) {
+            HSD_TObjReqAnimAll(tobj, 1.0f);
+        } else {
+            HSD_TObjReqAnimAll(tobj, 0.0f);
+        }
+        HSD_AObjSetRate(tobj->aobj, 0.0f);
+        HSD_TObjAnim(tobj);
+    }
+    ifStatus_802F5B48(state->HUD_parent_entity);
+    state->old_damage = !state->damage_percent;
+    ifStatus_802F4EDC(state->HUD_parent_entity);
+    PAD_STACK(0x18);
 }
 
 HSD_GObj* ifStatus_802F6194(HSD_GObj* node, s32 n)
