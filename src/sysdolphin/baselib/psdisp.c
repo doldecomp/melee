@@ -565,6 +565,7 @@ void psDispParticles(s32 arg0, u32 arg1)
     sp79C = NULL;
     sp7B0 = NULL;
     sp7B4 = 0;
+    cache = (f32*) &HSD_PSDisp_804D0FC0;
     do {
         if (sp794 & (1 << sp7B4)) {
             particleSort(sp7B4, HSD_PSDisp_804D6380[0], &sp760, &sp75C);
@@ -666,7 +667,6 @@ void psDispParticles(s32 arg0, u32 arg1)
                     GXSetTevColor(GX_TEVREG2, *(GXColor*) sp7D4);
                     HSD_PSDisp_804D792C = -1;
                     GXSetZCompLoc(GX_FALSE);
-                    cache = (f32*) &HSD_PSDisp_804D0FC0;
                     HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(), (MtxPtr) cache);
                     PSMTXInverse((MtxPtr) cache, (MtxPtr) (cache + 0xC));
                     GXGetProjectionv(&cache[0x18]);
@@ -992,7 +992,6 @@ void psDispParticles(s32 arg0, u32 arg1)
                     prev_pos = last_pos;
                     appsrt = pp->appsrt;
                     if (appsrt != NULL) {
-                        cache = (f32*) &HSD_PSDisp_804D0FC0;
                         if (appsrt->frameNum != HSD_PSDisp_804D6380[0]) {
                             if (appsrt->status != 2) {
                                 HSD_MtxSRT(appsrt->mmtx, &appsrt->scale, (Point3d*) &appsrt->rot, &appsrt->translate, NULL);
@@ -1114,7 +1113,6 @@ void psDispParticles(s32 arg0, u32 arg1)
                     }
                 } else if (pp->appsrt != NULL) {
                     appsrt = pp->appsrt;
-                    cache = (f32*) &HSD_PSDisp_804D0FC0;
                     if (appsrt->frameNum != HSD_PSDisp_804D6380[0]) {
                         if (appsrt->status != 2) {
                             HSD_MtxSRT(appsrt->mmtx, &appsrt->scale, (Point3d*) &appsrt->rot, &appsrt->translate, NULL);
@@ -1337,7 +1335,6 @@ void psDispParticles(s32 arg0, u32 arg1)
                         }
                     }
                 } else {
-                    cache = (f32*) &HSD_PSDisp_804D0FC0;
                     right.x = cache[0xC] * pp->size;
                     right.y = cache[0x10] * pp->size;
                     right.z = cache[0x14] * pp->size;
