@@ -1126,6 +1126,178 @@ end:
     return sis_data;
 }
 
+s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
+{
+    u8 buffer[256];
+    u8 encoded;
+    s32 old_size;
+    s32 result;
+    s32 new_size;
+    s32 grow_diff;
+    s32 shrink_diff;
+    s32 tail_len;
+    s32 copy_idx;
+    s32 i;
+    s32 remainder;
+    u32 required_size;
+    u32 cur_size;
+    u32 bulk_count;
+    u8* entry;
+    u8* playhead;
+    u8* new_buf;
+    u8* copy_src;
+    u8* copy_dst;
+    u8* src;
+    u8* dst;
+    u8* tail_src;
+    sislib_UnkAllocData* alloc;
+    HSD_Text* old_buf;
+    sislib_UnkAllocData* old_end;
+    va_list args;
+
+    result = 0;
+    entry = fn_803A6FEC((u8*) text->sis_buffer, entry_idx, &old_size);
+    if (entry != NULL) {
+        alloc = text->alloc_data;
+        playhead = entry + 0xE;
+        if (fmt != NULL) {
+            va_start(args, fmt);
+            vsnprintf((char*) buffer, -1, fmt, args);
+            va_end(args);
+            new_size = HSD_SisLib_803A67EC(&encoded, buffer);
+        } else {
+            new_size = 0;
+        }
+        if (old_size < new_size) {
+            old_end = alloc->data_0;
+            grow_diff = new_size - old_size;
+            old_buf = alloc->data_1;
+            cur_size = alloc->size;
+            tail_len = (u8*) old_end - playhead;
+            required_size = new_size + (((u8*) old_end - (u8*) old_buf) + 1);
+            if (cur_size < required_size) {
+                alloc->size =
+                    cur_size +
+                    ((((u32) (required_size - cur_size) >> 7U) + 1) << 7);
+                new_buf = HSD_SisLib_803A5798((s32) alloc->size);
+                copy_src = (u8*) old_buf;
+                copy_dst = new_buf;
+                copy_idx = 0;
+                while (copy_idx <
+                       (s32) (((u8*) alloc->data_0 - (u8*) alloc->data_1) + 1))
+                {
+                    *copy_dst = *copy_src;
+                    copy_idx += 1;
+                    copy_src += 1;
+                    copy_dst += 1;
+                }
+                alloc->data_1 = (HSD_Text*) new_buf;
+                text->sis_buffer = (SIS*) new_buf;
+                alloc->data_0 = (sislib_UnkAllocData*) (new_buf +
+                                                        ((u8*) old_end -
+                                                         (u8*) old_buf));
+                HSD_SisLib_803A594C(old_buf);
+                playhead = (u8*) alloc->data_0 - tail_len;
+            }
+            dst = &playhead[grow_diff + tail_len];
+            src = &playhead[tail_len];
+            if (tail_len > 0) {
+                bulk_count = (u32) tail_len >> 3U;
+                if (bulk_count != 0) {
+                    do {
+                        for (i = 0; i < 8; i++) {
+                            dst[-i] = src[-i];
+                        }
+                        src -= 8;
+                        dst -= 8;
+                        bulk_count -= 1;
+                    } while (bulk_count != 0);
+                    remainder = tail_len & 7;
+                    if (remainder == 0) {
+                        goto grow_done;
+                    }
+                } else {
+                    remainder = tail_len;
+                }
+                do {
+                    *dst = *src;
+                    src -= 1;
+                    dst -= 1;
+                    remainder -= 1;
+                } while (remainder != 0);
+            }
+        grow_done:
+            alloc->data_0 =
+                (sislib_UnkAllocData*) ((u8*) alloc->data_0 + grow_diff);
+        } else if (old_size > new_size) {
+            shrink_diff = old_size - new_size;
+            i = 0;
+            tail_len = (u8*) alloc->data_0 - playhead;
+            if (tail_len > 0) {
+                if (tail_len > 8) {
+                    bulk_count = (u32) ((tail_len - 8) + 7) >> 3U;
+                    src = &playhead[shrink_diff];
+                    if ((tail_len - 8) > 0) {
+                        do {
+                            dst = &playhead[i];
+                            i += 8;
+                            for (copy_idx = 0; copy_idx < 8; copy_idx++) {
+                                dst[copy_idx] = src[copy_idx];
+                            }
+                            src += 8;
+                            bulk_count -= 1;
+                        } while (bulk_count != 0);
+                    }
+                }
+                tail_src = &playhead[shrink_diff + i];
+                remainder = tail_len - i;
+                dst = &playhead[i];
+                if (i < tail_len) {
+                    do {
+                        *dst = *tail_src;
+                        tail_src += 1;
+                        dst += 1;
+                        remainder -= 1;
+                    } while (remainder != 0);
+                }
+            }
+            alloc->data_0 =
+                (sislib_UnkAllocData*) ((u8*) alloc->data_0 - shrink_diff);
+        }
+        i = 0;
+        if (new_size > 0) {
+            if (new_size > 8) {
+                bulk_count = (u32) ((new_size - 8) + 7) >> 3U;
+                src = &encoded;
+                if ((new_size - 8) > 0) {
+                    do {
+                        i += 8;
+                        for (copy_idx = 0; copy_idx < 8; copy_idx++) {
+                            playhead[copy_idx] = src[copy_idx];
+                        }
+                        src += 8;
+                        playhead += 8;
+                        bulk_count -= 1;
+                    } while (bulk_count != 0);
+                }
+            }
+            tail_src = &encoded + i;
+            remainder = new_size - i;
+            if (i < new_size) {
+                do {
+                    *playhead = *tail_src;
+                    tail_src += 1;
+                    playhead += 1;
+                    remainder -= 1;
+                } while (remainder != 0);
+            }
+        }
+        *playhead = 0xF;
+        result = 1;
+    }
+    return result;
+}
+
 void HSD_SisLib_803A746C(HSD_Text* text, s32 entry_idx, f32 new_x, f32 new_y)
 {
     s32 x;
