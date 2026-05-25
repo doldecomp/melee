@@ -1,7 +1,7 @@
 File: src/melee/mn/mncharsel.c
 Funcs:
 - [x] mnCharSel_80266D70_OnLeave
-- [ ] mnCharSel_8025FB50
+- [x] mnCharSel_8025FB50
 - [ ] mnCharSel_8025FDEC
 - [ ] mnCharSel_8025D1C4
 - [ ] fn_80262648

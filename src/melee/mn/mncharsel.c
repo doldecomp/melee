@@ -1620,8 +1620,9 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
 {
     HSD_JObj* sp18;
     s32 icon_idx;
-    s8 player;
-    PAD_STACK(16);
+    int player;
+    CSSIcon* icons = (CSSIcon*) (&mnCharSel_803F0A48 + 1);
+    PAD_STACK(8);
 
     do {
         icon_idx = HSD_Randi(0x19);
@@ -1634,7 +1635,7 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
             player = mnCharSel_804D6CF0;
         }
     } else {
-        player = (s8) door;
+        player = door;
     }
 
     mnCharSel_804D6CB0->data.data.players[player].c_kind =
@@ -1645,10 +1646,12 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
         mnCharSel_803F0DFC.doors[door].sel_icon_prev)
     {
         u8 costume = 0;
-        mnCharSel_803F0DFC.doors[door].costume = costume;
-        while (isDuplicateCostume(door)) {
-            costume++;
+        while (1) {
             mnCharSel_803F0DFC.doors[door].costume = costume;
+            if (!isDuplicateCostume(door)) {
+                break;
+            }
+            costume++;
         }
     }
 
