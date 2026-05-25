@@ -69,7 +69,6 @@ HSD_GObj* grIm_804D69EC;
 HSD_GObj* grIm_804D69F0;
 IceMountainParams* grIm_804D69F4;
 
-extern char grIm_803E46F8[];
 
 typedef struct GrIm825C {
     struct {
@@ -134,8 +133,6 @@ StageData grIm_803E4800 = {
     3,
 };
 
-extern f32 grIm_804DB574;
-extern f32 grIm_804DB578;
 typedef struct GrIm588 {
     s16 a;
     s16 b;
@@ -148,11 +145,6 @@ extern u32 grIm_804DB598;
 extern u32 grIm_804DB59C;
 extern u32 grIm_804DB5A0;
 extern u32 grIm_804DB5A4;
-extern f32 grIm_804DB5A8;
-extern f32 grIm_804DB5AC;
-extern f32 grIm_804DB5B0;
-extern f32 grIm_804DB5B4;
-extern f32 grIm_804DB5B8;
 
 void grIceMt_801F6868(bool id) {}
 
@@ -256,11 +248,11 @@ void grIceMt_801F686C(void)
         // Set up first topi (grIm_804D69E8)
         gobj = grIceMt_801F71E8(grIm_803E4068[xAC[2]].id);
         if (gobj == NULL) {
-            __assert(grIm_803E46F8, 0x27C, "bg_gobj");
+            __assert(__FILE__, 0x27C, "bg_gobj");
         }
         jobj = gobj->hsd_obj;
         if (jobj == NULL) {
-            __assert(grIm_803E46F8, 0x27D, "jobj");
+            __assert(__FILE__, 0x27D, "jobj");
         }
         HSD_JObjSetTranslateY(jobj, y_pos2);
         grIm_804D69E8 = gobj;
@@ -268,11 +260,11 @@ void grIceMt_801F686C(void)
         // Set up second topi (grIm_804D69EC)
         gobj = grIceMt_801F71E8(grIm_803E4068[xAC[3]].id);
         if (gobj == NULL) {
-            __assert(grIm_803E46F8, 0x281, "bg_gobj");
+            __assert(__FILE__, 0x281, "bg_gobj");
         }
         jobj = gobj->hsd_obj;
         if (jobj == NULL) {
-            __assert(grIm_803E46F8, 0x282, "jobj");
+            __assert(__FILE__, 0x282, "jobj");
         }
         HSD_JObjSetTranslateY(jobj, y_pos3);
         grIm_804D69EC = gobj;
@@ -280,11 +272,11 @@ void grIceMt_801F686C(void)
         // Set up third topi (grIm_804D69F0)
         gobj = grIceMt_801F71E8(grIm_803E4068[xAC[4]].id);
         if (gobj == NULL) {
-            __assert(grIm_803E46F8, 0x286, "bg_gobj");
+            __assert(__FILE__, 0x286, "bg_gobj");
         }
         jobj = gobj->hsd_obj;
         if (jobj == NULL) {
-            __assert(grIm_803E46F8, 0x287, "jobj");
+            __assert(__FILE__, 0x287, "jobj");
         }
         HSD_JObjSetTranslateY(jobj, y_pos4);
         grIm_804D69F0 = gobj;
@@ -528,13 +520,13 @@ void grIceMt_801F785C(Ground_GObj* gobj)
     ((UnkFlagStruct*) &gp->gv.icemt.xD8)->b4 = 0;
 
     gp->gv.icemt.xDA = 0;
-    gp->gv.icemt.xE4 = grIm_804DB574;
+    gp->gv.icemt.xE4 = 0.0f;
     gp->gv.icemt.xC8 = 0;
     gp->gv.icemt.xCE = 0;
     gp->gv.icemt.xCA = 0;
     gp->gv.icemt.xCC = 0;
     gp->gv.icemt.xD0 = -1;
-    gp->gv.icemt.xD4 = grIm_804DB574;
+    gp->gv.icemt.xD4 = 0.0f;
 
     ((UnkFlagStruct*) &gp->gv.icemt.xD8)->b0 = 1;
 
@@ -551,14 +543,14 @@ bool grIceMt_801F796C(Ground_GObj* arg0)
     if (gp->gv.icemt.xC4 != -1) {
         mgobj = Ground_801C2BA4(gp->gv.icemt.xC4);
         if (mgobj == NULL) {
-            __assert(grIm_803E46F8, 0x475, "mgobj");
+            __assert(__FILE__, 0x475, "mgobj");
         }
         Ground_801C4A08(mgobj);
     }
     if (gp->gv.icemt.xC6 != -1) {
         mgobj = Ground_801C2BA4(gp->gv.icemt.xC6);
         if (mgobj == NULL) {
-            __assert(grIm_803E46F8, 0x47A, "mgobj");
+            __assert(__FILE__, 0x47A, "mgobj");
         }
         Ground_801C4A08(mgobj);
     }
@@ -614,24 +606,24 @@ void grIceMt_801F7A2C(Ground_GObj* arg0)
             }
         } else {
             gp->gv.icemt.xE4 -= grIm_804D69F4->xA0;
-            if (gp->gv.icemt.xE4 < grIm_804DB574) {
-                gp->gv.icemt.xE4 = grIm_804DB574;
+            if (gp->gv.icemt.xE4 < 0.0f) {
+                gp->gv.icemt.xE4 = 0.0f;
             }
         }
         sp30 += gp->gv.icemt.xE4;
     } else {
         mgobj = Ground_801C2BA4(gp->gv.icemt.xC6);
         if (mgobj == NULL) {
-            __assert(grIm_803E46F8, 0x4C3, "mgobj");
+            __assert(__FILE__, 0x4C3, "mgobj");
         }
         jobj = mgobj->hsd_obj;
         if (jobj == NULL) {
-            __assert(grIm_803E46F8, 0x4C5, "jobj");
+            __assert(__FILE__, 0x4C5, "jobj");
         }
         dist = HSD_JObjGetTranslationY(jobj) -
                (f32) ((s16*) grIm_804D69F4)[0xA8 / 2];
-        if (dist < grIm_804DB574) {
-            gp->gv.icemt.xD4 = grIm_804DB574;
+        if (dist < 0.0f) {
+            gp->gv.icemt.xD4 = 0.0f;
         } else {
             ratio = gp->gv.icemt.xD4 / grIm_804D69F4->xA0;
             if ((gp->gv.icemt.xD4 * ratio) -
@@ -1041,17 +1033,17 @@ void grIceMt_801F8B10(Ground_GObj* arg0)
     HSD_JObj* jobj;
     f32 mul;
     f32 cur;
-    mul = grIm_804DB5A8 * gp->gv.icemt2.xC4;
+    mul = 0.3f * gp->gv.icemt2.xC4;
     jobj = Ground_801C3FA4(arg0, 8);
     if (jobj == NULL) {
-        __assert(grIm_803E46F8, 0x78F, "jobj");
+        __assert(__FILE__, 0x78F, "jobj");
     }
     cur = HSD_JObjGetTranslationY(jobj);
     cur = cur - mul;
-    if (cur > grIm_804DB578 * (grIm_804DB5AC * Ground_801C0498())) {
-        cur = -(grIm_804DB5AC * Ground_801C0498() - cur);
-    } else if (cur < grIm_804DB578 * -(grIm_804DB5AC * Ground_801C0498())) {
-        cur += grIm_804DB5AC * Ground_801C0498();
+    if (cur > 0.5f * (3500.0f * Ground_801C0498())) {
+        cur = -(3500.0f * Ground_801C0498() - cur);
+    } else if (cur < 0.5f * -(3500.0f * Ground_801C0498())) {
+        cur += 3500.0f * Ground_801C0498();
     }
     HSD_JObjSetTranslateY(jobj, cur);
 }
@@ -1093,7 +1085,7 @@ void grIceMt_801F8CDC(Ground_GObj* gobj, s16* joint_indices, int count,
     jobj_desc = archive->unk4->unk8[7].unk0;
 
     if (count > 20) {
-        __assert(grIm_803E46F8, 0x7D4, "count <= 20");
+        __assert(__FILE__, 0x7D4, "count <= 20");
     }
 
     for (i = 0; i < count; i++) {
@@ -1103,12 +1095,12 @@ void grIceMt_801F8CDC(Ground_GObj* gobj, s16* joint_indices, int count,
     for (i = 0; i < count; i++) {
         parent_jobj = parent_jobjs[i];
         if (parent_jobj == NULL) {
-            __assert(grIm_803E46F8, 0x7E3, "parent_jobj");
+            __assert(__FILE__, 0x7E3, "parent_jobj");
         }
 
         child_jobj = HSD_JObjLoadJoint(jobj_desc);
         if (child_jobj == NULL) {
-            __assert(grIm_803E46F8, 0x7E6, "child_jobj");
+            __assert(__FILE__, 0x7E6, "child_jobj");
         }
 
         HSD_JObjAddChild(parent_jobj, child_jobj);
@@ -1116,9 +1108,9 @@ void grIceMt_801F8CDC(Ground_GObj* gobj, s16* joint_indices, int count,
         item = grMaterial_801C8CFC(8, 0, gp, parent_jobj, NULL, fn_801F8C64,
                                    NULL);
         if (item != NULL) {
-            grMaterial_801C8DE0(item, grIm_804DB574, grIm_804DB5B0,
-                                grIm_804DB574, grIm_804DB574, grIm_804DB5B4,
-                                grIm_804DB574, grIm_804DB5B8);
+            grMaterial_801C8DE0(item, 0.0f, -1.0f,
+                                0.0f, 0.0f, 1.0f,
+                                0.0f, 6.0f);
             grMaterial_801C8E08(item);
             grMaterial_801C8E68(item, 0);
         }
@@ -1159,7 +1151,7 @@ s32 fn_801F8E58(Ground_GObj* arg0, s32* out)
     }
 
     if (count == 0) {
-        __assert(grIm_803E46F8, 0x81D, "max");
+        __assert(__FILE__, 0x81D, "max");
     }
     pick = count != 0 ? HSD_Randi(count) : 0;
     chosen = list[pick];
@@ -1304,12 +1296,12 @@ void fn_801F9338(Ground* gp, int arg1, CollData* arg2, s32 arg3,
         gobj = Ground_801C2BA4(2);
         s->active = 1;
         s->counter = 0;
-        grAnime_801C7A04(gobj, s->joint0, 7, grIm_804DB5B4);
-        grAnime_801C7B24(gobj, s->joint0, 7, grIm_804DB574);
+        grAnime_801C7A04(gobj, s->joint0, 7, 1.0f);
+        grAnime_801C7B24(gobj, s->joint0, 7, 0.0f);
         grAnime_801C78FC(gobj, s->joint0, 7);
         if (s->joint1 != -1) {
-            grAnime_801C7A04(gobj, s->joint1, 7, grIm_804DB5B4);
-            grAnime_801C7B24(gobj, s->joint1, 7, grIm_804DB574);
+            grAnime_801C7A04(gobj, s->joint1, 7, 1.0f);
+            grAnime_801C7B24(gobj, s->joint1, 7, 0.0f);
             grAnime_801C78FC(gobj, s->joint1, 7);
         }
     }
@@ -1326,12 +1318,12 @@ void fn_801F9448(Ground* gp, int arg1, CollData* arg2, s32 arg3,
         gobj = Ground_801C2BA4(2);
         s->active = 1;
         s->counter = 0;
-        grAnime_801C7A04(gobj, s->joint0, 7, grIm_804DB5B4);
-        grAnime_801C7B24(gobj, s->joint0, 7, grIm_804DB574);
+        grAnime_801C7A04(gobj, s->joint0, 7, 1.0f);
+        grAnime_801C7B24(gobj, s->joint0, 7, 0.0f);
         grAnime_801C78FC(gobj, s->joint0, 7);
         if (s->joint1 != -1) {
-            grAnime_801C7A04(gobj, s->joint1, 7, grIm_804DB5B4);
-            grAnime_801C7B24(gobj, s->joint1, 7, grIm_804DB574);
+            grAnime_801C7A04(gobj, s->joint1, 7, 1.0f);
+            grAnime_801C7B24(gobj, s->joint1, 7, 0.0f);
             grAnime_801C78FC(gobj, s->joint1, 7);
         }
     }
@@ -1348,12 +1340,12 @@ void fn_801F9558(Ground* gp, int arg1, CollData* arg2, s32 arg3,
         gobj = Ground_801C2BA4(4);
         s->active = 1;
         s->counter = 0;
-        grAnime_801C7A04(gobj, s->joint0, 7, grIm_804DB5B4);
-        grAnime_801C7B24(gobj, s->joint0, 7, grIm_804DB574);
+        grAnime_801C7A04(gobj, s->joint0, 7, 1.0f);
+        grAnime_801C7B24(gobj, s->joint0, 7, 0.0f);
         grAnime_801C78FC(gobj, s->joint0, 7);
         if (s->joint1 != -1) {
-            grAnime_801C7A04(gobj, s->joint1, 7, grIm_804DB5B4);
-            grAnime_801C7B24(gobj, s->joint1, 7, grIm_804DB574);
+            grAnime_801C7A04(gobj, s->joint1, 7, 1.0f);
+            grAnime_801C7B24(gobj, s->joint1, 7, 0.0f);
             grAnime_801C78FC(gobj, s->joint1, 7);
         }
     }
@@ -1367,11 +1359,11 @@ void grIceMt_801F9668(float arg8)
 
     gobj = Ground_801C2BA4(8);
     if (gobj == NULL) {
-        __assert(grIm_803E46F8, 0xA37, "bg_gobj");
+        __assert(__FILE__, 0xA37, "bg_gobj");
     }
     gp = GET_GROUND(gobj);
     if (gp == NULL) {
-        __assert(grIm_803E46F8, 0xA38, "bg_gp");
+        __assert(__FILE__, 0xA38, "bg_gp");
     }
 
     gp->gv.icemt2.xC4 = arg8;
@@ -1385,20 +1377,20 @@ float grIceMt_801F96E0(HSD_GObj* arg0, float farg0)
     if (p[0] != -1) {
         mgobj = Ground_801C2BA4(p[0]);
         if (mgobj == NULL) {
-            __assert(grIm_803E46F8, 0xA45, "mgobj");
+            __assert(__FILE__, 0xA45, "mgobj");
         }
         if (mgobj->hsd_obj == NULL) {
-            __assert(grIm_803E46F8, 0xA46, "jobj");
+            __assert(__FILE__, 0xA46, "jobj");
         }
         HSD_JObjAddTranslationY(mgobj->hsd_obj, farg0);
     }
     if (p[1] != -1) {
         mgobj = Ground_801C2BA4(p[1]);
         if (mgobj == NULL) {
-            __assert(grIm_803E46F8, 0xA4B, "mgobj");
+            __assert(__FILE__, 0xA4B, "mgobj");
         }
         if (mgobj->hsd_obj == NULL) {
-            __assert(grIm_803E46F8, 0xA4C, "jobj");
+            __assert(__FILE__, 0xA4C, "jobj");
         }
         HSD_JObjAddTranslationY(mgobj->hsd_obj, farg0);
     }
@@ -1482,11 +1474,11 @@ void grIceMt_801F9ACC(Ground_GObj* gobj, float y, GrIceMtSegmentLookup ev,
     f = grIceMt_801F993C(seg[0], seg[1]);
     mgobj = Ground_801C2BA4(seg[1]);
     if (mgobj == NULL) {
-        __assert(grIm_803E46F8, 0xAB9, "mgobj");
+        __assert(__FILE__, 0xAB9, "mgobj");
     }
     jobj = mgobj->hsd_obj;
     if (jobj == NULL) {
-        __assert(grIm_803E46F8, 0xABA, "jobj");
+        __assert(__FILE__, 0xABA, "jobj");
     }
     cur = HSD_JObjGetTranslationY(jobj);
     if (ABS(cur) < 10.0f) {
@@ -1530,7 +1522,7 @@ void grIceMt_801F9ACC(Ground_GObj* gobj, float y, GrIceMtSegmentLookup ev,
         if (id != -1) {
             mgobj = Ground_801C2BA4(id);
             if (mgobj == NULL) {
-                __assert(grIm_803E46F8, 0xAF3, "mgobj");
+                __assert(__FILE__, 0xAF3, "mgobj");
             }
             Ground_801C4A08(mgobj);
         }
@@ -1540,11 +1532,11 @@ void grIceMt_801F9ACC(Ground_GObj* gobj, float y, GrIceMtSegmentLookup ev,
             f2 = grIceMt_801F993C(seg[0], seg[1]);
             mgobj = grIceMt_801F71E8_noinline2(seg[1]);
             if (mgobj == NULL) {
-                __assert(grIm_803E46F8, 0xAFE, "mgobj");
+                __assert(__FILE__, 0xAFE, "mgobj");
             }
             jobj = mgobj->hsd_obj;
             if (jobj == NULL) {
-                __assert(grIm_803E46F8, 0xAFF, "jobj");
+                __assert(__FILE__, 0xAFF, "jobj");
             }
             HSD_JObjSetTranslateY(jobj, cur - f2);
             Ground_801C32AC(seg[1]);
@@ -1581,7 +1573,7 @@ void grIceMt_801F9ACC(Ground_GObj* gobj, float y, GrIceMtSegmentLookup ev,
         if (id != -1) {
             mgobj = Ground_801C2BA4(id);
             if (mgobj == NULL) {
-                __assert(grIm_803E46F8, 0xB13, "mgobj");
+                __assert(__FILE__, 0xB13, "mgobj");
             }
             Ground_801C4A08(mgobj);
         }
@@ -1591,11 +1583,11 @@ void grIceMt_801F9ACC(Ground_GObj* gobj, float y, GrIceMtSegmentLookup ev,
             f2 = grIceMt_801F993C(seg[0], seg[1]);
             mgobj = grIceMt_801F71E8_noinline2(seg[0]);
             if (mgobj == NULL) {
-                __assert(grIm_803E46F8, 0xB1E, "mgobj");
+                __assert(__FILE__, 0xB1E, "mgobj");
             }
             jobj = mgobj->hsd_obj;
             if (jobj == NULL) {
-                __assert(grIm_803E46F8, 0xB1F, "jobj");
+                __assert(__FILE__, 0xB1F, "jobj");
             }
             HSD_JObjSetTranslateY(jobj, f2 + (cur + f));
             Ground_801C32AC(seg[0]);
@@ -1656,11 +1648,11 @@ void grIceMt_801FA0BC(s16* arg0)
     if (id != -1) {
         gobj = grIceMt_801F71E8_noinline(id);
         if (gobj == NULL) {
-            __assert(grIm_803E46F8, 0xB44, "mgobj");
+            __assert(__FILE__, 0xB44, "mgobj");
         }
         jobj = gobj->hsd_obj;
         if (jobj == NULL) {
-            __assert(grIm_803E46F8, 0xB46, "jobj");
+            __assert(__FILE__, 0xB46, "jobj");
         }
         HSD_JObjSetTranslateY(jobj, -20.0f * Ground_801C0498() + f);
         Ground_801C3214(arg0[0]);
@@ -1671,11 +1663,11 @@ void grIceMt_801FA0BC(s16* arg0)
     if (id != -1) {
         gobj = grIceMt_801F71E8_noinline(id);
         if (gobj == NULL) {
-            __assert(grIm_803E46F8, 0xB50, "mgobj");
+            __assert(__FILE__, 0xB50, "mgobj");
         }
         jobj = gobj->hsd_obj;
         if (jobj == NULL) {
-            __assert(grIm_803E46F8, 0xB52, "jobj");
+            __assert(__FILE__, 0xB52, "jobj");
         }
         HSD_JObjSetTranslateY(jobj, -20.0f * Ground_801C0498());
         Ground_801C3214(arg0[1]);
@@ -1778,11 +1770,11 @@ int grIceMt_801FA500(HSD_GObj* arg0, HSD_JObj* arg1)
 
     node = arg0->hsd_obj;
     if (node == NULL) {
-        __assert(grIm_803E46F8, 0xBB1, "jobj");
+        __assert(__FILE__, 0xBB1, "jobj");
     }
     node = HSD_JObjGetChild(node);
     if (node == NULL) {
-        __assert(grIm_803E46F8, 0xBB2, "jobj");
+        __assert(__FILE__, 0xBB2, "jobj");
     }
 
     while (node != NULL) {
@@ -1825,8 +1817,6 @@ void grIceMt_801FA6D8(HSD_GObj* param1)
         }
     }
 }
-
-/// extern f32 grIm_804DB574;
 
 void grIceMt_801FA728(Vec3* arg0)
 {
