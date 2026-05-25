@@ -42,6 +42,5 @@
 /* 2A9D4C */ bool itLinkArrow_Logic98_Reflected(Item_GObj*);
 /* 2AA034 */ void itLinkArrow_Logic98_EvtUnk(Item_GObj*, Item_GObj*);
 /* 3F6A28 */ extern ItemStateTable it_803F6A28[];
-/* 3F6A78 */ extern f32 it_803F6A78[];
 
 #endif
