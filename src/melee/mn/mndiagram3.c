@@ -15,6 +15,8 @@
 #include <melee/gm/gmmain_lib.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/mn/inlines.h>
 #include <melee/mn/mndiagram.h>
 #include <melee/mn/mndiagram2.h>
 #include <melee/mn/mnmain.h>
