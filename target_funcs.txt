@@ -10,4 +10,4 @@ Funcs:
 - [x] mnCharSel_8025C020
 - [x] mnCharSel_8025DB34
 - [x] mnCharSel_CursorThink
-- [ ] mnCharSel_802640A0
+- [x] mnCharSel_802640A0
