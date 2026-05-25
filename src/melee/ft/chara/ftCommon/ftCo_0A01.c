@@ -2118,6 +2118,15 @@ static inline bool ftCo_800A4E8C_inline0(Fighter* fp)
     return false;
 }
 
+static inline f32 ftCo_800A4BEC_inline0(Fighter* fp, Fighter* arg1)
+{
+    f32 dx;
+    f32 dy;
+    dx = fp->cur_pos.x - arg1->cur_pos.x;
+    dy = fp->cur_pos.y - arg1->cur_pos.y;
+    return sqrtf(dx * dx + dy * dy);
+}
+
 Fighter* ftCo_800A4BEC(Fighter* fp)
 {
     HSD_GObj* cur;
@@ -2144,14 +2153,10 @@ Fighter* ftCo_800A4BEC(Fighter* fp)
                             }
                         } else if (closest == NULL) {
                             closest = cur_fp;
-                            dy = fp->cur_pos.y - cur_fp->cur_pos.y;
-                            dx = fp->cur_pos.x - cur_fp->cur_pos.x;
-                            best = sqrtf__Ff(dx * dx + dy * dy);
+                            best = ftCo_800A4BEC_inline0(fp, cur_fp);
                         } else {
                             cur_fp = GET_FIGHTER(cur);
-                            dy = fp->cur_pos.y - cur_fp->cur_pos.y;
-                            dx = fp->cur_pos.x - cur_fp->cur_pos.x;
-                            dist = sqrtf__Ff(dx * dx + dy * dy);
+                            dist = ftCo_800A4BEC_inline0(fp, cur_fp);
                             if (best > dist) {
                                 best = dist;
                                 closest = cur_fp;
