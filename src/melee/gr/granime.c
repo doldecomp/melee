@@ -1130,23 +1130,21 @@ static inline HSD_Joint* grAnime_801C8578_noinline(HSD_Joint* joint,
 
 void grAnime_801C86D4(s32 arg0, HSD_GObj* arg1, s32 arg2)
 {
-    struct {
-        s32 x0;
-        s32 x4;
-        s32 x8;
-        s32 xC;
-        s32 x10;
-    } sp;
+    s32 sp2;
+    s32 sp3;
+    s32 sp;
+    s32 sp4;
     HSD_Joint* joint;
     UnkArchiveStruct* archive;
 
     Ground_801C3FA4(arg1, arg2);
     archive = grDatFiles_801C6330(arg0);
-    if (archive == NULL) {
-        __assert("granime.c", 0x602, "archive");
+    HSD_ASSERT(0x602, archive);
+    {
+        HSD_Joint* root = archive->unk4->unk8[arg0].unk0;
+        sp = arg2;
+        joint = grAnime_801C8578_noinline(root, &sp);
     }
-    sp.x4 = arg2;
-    joint = grAnime_801C8578_noinline(archive->unk4->unk8[arg0].unk0, &sp.x4);
     HSD_JObjResetRST(Ground_801C3FA4(arg1, arg2), joint);
 }
 
