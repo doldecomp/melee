@@ -988,9 +988,9 @@ void grAnime_801C8138(HSD_GObj* gobj, enum_t arg1, bool arg2)
     }
     grMaterial_801C8B68(jobj, 0);
     HSD_JObjRemoveAnimAll(jobj);
-    sap = *(HSD_ShapeAnimJoint***) ((u8*) &archive->unk4->unk8[arg1] + 0xC);
-    ajp = *(HSD_AnimJoint***) ((u8*) &archive->unk4->unk8[arg1] + 0x4);
-    mjp = *(HSD_MatAnimJoint***) ((u8*) &archive->unk4->unk8[arg1] + 0x8);
+    sap = archive->unk4->unk8[arg1].unkC;
+    ajp = archive->unk4->unk8[arg1].unk4;
+    mjp = archive->unk4->unk8[arg1].unk8;
     if (sap != NULL) {
         sa = sap[arg2];
     } else {
