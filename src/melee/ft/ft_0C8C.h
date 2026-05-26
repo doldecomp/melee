@@ -6,6 +6,8 @@
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 
+extern HSD_MObj* ft_804D6588;
+
 /* 0C8C84 */ bool ftCo_800C8C84(Fighter_GObj* gobj);
 /* 0C8D00 */ void ftCo_800C8D00(Fighter_GObj* gobj);
 /* 0C8E40 */ void fn_800C8E40(Fighter* fp, FtSFX* sfx);

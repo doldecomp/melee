@@ -31,6 +31,7 @@
 #include "ft/ft_0DF0.h"
 #include "ft/ftafterimage.h"
 #include "ft/ftchangeparam.h"
+#include "ft/ftCo_800C7CA0.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftdata.h"
 #include "ft/ftdevice.h"
