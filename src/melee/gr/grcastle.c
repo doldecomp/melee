@@ -447,7 +447,7 @@ void grCastle_801CD658(Ground_GObj* gobj)
     gp->gv.castle9.xC4 = 0;
     gp->gv.castle9.xC8 = 0;
     gp->gv.castle9.xCC = 0;
-    gp->gv.castle9.xDE &= ~0x80;
+    gp->gv.castle9.xDE_b0 = false;
     gp->x10_flags.b5 = 1;
 }
 
@@ -667,8 +667,6 @@ bool grCastle_801CDF54(Vec3* vec)
 void grCastle_801CDFD8(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    register u8 byte;
-    register s32 one;
     grCastleParams* params;
     s32 random_range;
     s32 rand_result;
@@ -679,14 +677,7 @@ void grCastle_801CDFD8(Ground_GObj* gobj)
     s16 final_value;
 
     // Set bit 7 at offset 0xDE
-    one = 1;
-    byte = gp->gv.castle9.xDE;
-#ifdef MWERKS_GEKKO
-    asm { rlwimi byte, one, 7, 24, 24 }
-#else
-    NOT_IMPLEMENTED;
-#endif
-    gp->gv.castle9.xDE = byte;
+    gp->gv.castle9.xDE_b0 = true;
 
     // Get random range from params
     params = grCs_804D6970;
@@ -768,27 +759,15 @@ s32 grCastle_801CE054(Ground_GObj* gobj)
 
 void grCastle_801CE19C(Ground_GObj* gobj)
 {
-    Ground* gp;
-    Ground* tmp = GET_GROUND(gobj);
-    PAD_STACK(8);
-    gp = tmp;
-    if (tmp->gv.castle9.xDE >> 7 & 1) {
-        s16 timer;
-        timer = gp->gv.castle9.xD4;
+    Ground* gp = GET_GROUND(gobj);
+    PAD_STACK(4);
+    if (gp->gv.castle9.xDE_b0) {
+        s16 timer = gp->gv.castle9.xD4;
         gp->gv.castle9.xD4 = timer - 1;
         if (timer < 0) {
             HSD_GObj* new_gobj =
                 grCastle_801CD4D0(grCastle_801CE054(gobj) + 8);
-            {
-                register u8 byte = gp->gv.castle9.xDE;
-                register s32 zero = 0;
-#ifdef MWERKS_GEKKO
-                asm { rlwimi byte, zero, 7, 24, 24 }
-#else
-                NOT_IMPLEMENTED;
-#endif
-                gp->gv.castle9.xDE = byte;
-            }
+            gp->gv.castle9.xDE_b0 = false;
             if (new_gobj != NULL) {
                 Ground* new_gp = new_gobj->user_data;
                 Ground_801C5440(gp, 0, 0x53021U);
@@ -900,6 +879,7 @@ void grCastle_801CE578(Ground_GObj* gobj)
     Vec3 pos;
     Vec3 jpos;
     new_var4 = 0;
+    PAD_STACK(4);
     do {
         unsigned char _[44];
     } while (new_var4);
@@ -966,13 +946,7 @@ void grCastle_801CE578(Ground_GObj* gobj)
                     s32 rand;
                     s32 range;
 
-                    {
-                        struct {
-                            u8 b0 : 1;
-                            u8 : 7;
-                        }* flags = (void*) &sat->gv.castle9.xDE;
-                        flags->b0 = 1;
-                    }
+                    sat->gv.castle9.xDE_b0 = true;
 
                     range = grCs_804D6970->xE;
                     if (range != 0) {
