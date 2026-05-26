@@ -4459,7 +4459,7 @@ MetroTRK/targimpl.c:
 	.data       start:0x80400848 end:0x80400878
 	.bss        start:0x804A4B48 end:0x804A50C8
 
-MetroTRK/__exception.s:
+MetroTRK/__exception.s: comment:0
 	.init       start:0x80003298 end:0x800051CC
 
 MetroTRK/dolphin_trk.c:
