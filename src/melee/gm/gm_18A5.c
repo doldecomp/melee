@@ -55,9 +55,8 @@ void fn_8018A514(int count, float val)
     BracketEntry* entries = lbl_80473AB8;
     s32 region;
     BracketSrcEntry* src;
-    s32 i;
+    int i;
     s32 n;
-    BracketEntry* entry;
 
     if (count < 9) {
         region = 0;
@@ -84,44 +83,42 @@ void fn_8018A514(int count, float val)
     }
 
     n = lbl_803D9D20.x0[count + 0x20];
-    entry = entries;
 
     for (i = 0; i < n; i++) {
-        entry->x0 = src->x0;
-        entry->x1 = src->x1;
-        entry->x2 = src->x2;
-        entry->x3 = src->x3;
-        entry->x4 = src->x4;
-        entry->x5 = src->x5;
-        entry->x6 = src->x6;
-        entry->x1C = val;
-        entry->xC = src->x8;
-        entry->x14 = src->xC;
-        entry->x10 = src->x10;
-        entry->x18 = src->x14;
-        entry->x20.r = src->x18;
-        entry->x20.g = src->x1A;
-        entry->x20.b = src->x1C;
-        entry->x20.a = src->x1E;
-        entry->x24 = src->x19;
-        entry->x25 = src->x1B;
-        entry->x26 = src->x1D;
-        entry->x27 = src->x1F;
-        entry->x28 = src->x20;
-        entry->x52 = 9;
-        entry->x32 = 0;
-        entry->x7E = 9;
-        entry->x5E = 0;
-        entry->xAA = 9;
-        entry->x8A = 0;
-        entry->xD6 = 9;
-        entry->xB6 = 0;
-        entry->x30 = src->x21;
-        entry->x5C = src->x22;
-        entry->x88 = src->x23;
-        entry->xB4 = src->x24;
+        entries[i].x0 = src->x0;
+        entries[i].x1 = src->x1;
+        entries[i].x2 = src->x2;
+        entries[i].x3 = src->x3;
+        entries[i].x4 = src->x4;
+        entries[i].x5 = src->x5;
+        entries[i].x6 = src->x6;
+        entries[i].x1C = val;
+        entries[i].xC = src->x8;
+        entries[i].x14 = src->xC;
+        entries[i].x10 = src->x10;
+        entries[i].x18 = src->x14;
+        entries[i].x20.r = src->x18;
+        entries[i].x20.g = src->x1A;
+        entries[i].x20.b = src->x1C;
+        entries[i].x20.a = src->x1E;
+        entries[i].x24 = src->x19;
+        entries[i].x25 = src->x1B;
+        entries[i].x26 = src->x1D;
+        entries[i].x27 = src->x1F;
+        entries[i].x28 = src->x20;
+        entries[i].x52 = 9;
+        entries[i].x32 = 0;
+        entries[i].x7E = 9;
+        entries[i].x5E = 0;
+        entries[i].xAA = 9;
+        entries[i].x8A = 0;
+        entries[i].xD6 = 9;
+        entries[i].xB6 = 0;
+        entries[i].x30 = src->x21;
+        entries[i].x5C = src->x22;
+        entries[i].x88 = src->x23;
+        entries[i].xB4 = src->x24;
         src++;
-        entry++;
     }
 
     if (region == 0) {
