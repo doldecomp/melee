@@ -768,26 +768,20 @@ s32 grCastle_801CE054(Ground_GObj* gobj)
 
 void grCastle_801CE19C(Ground_GObj* gobj)
 {
-    Ground* gp;
-    Ground* tmp = GET_GROUND(gobj);
-    PAD_STACK(8);
-    gp = tmp;
-    if (tmp->gv.castle9.xDE >> 7 & 1) {
-        s16 timer;
-        timer = gp->gv.castle9.xD4;
+    Ground* gp = GET_GROUND(gobj);
+    PAD_STACK(4);
+    if (gp->gv.castle9.xDE >> 7 & 1) {
+        s16 timer = gp->gv.castle9.xD4;
         gp->gv.castle9.xD4 = timer - 1;
         if (timer < 0) {
             HSD_GObj* new_gobj =
                 grCastle_801CD4D0(grCastle_801CE054(gobj) + 8);
             {
-                register u8 byte = gp->gv.castle9.xDE;
-                register s32 zero = 0;
-#ifdef MWERKS_GEKKO
-                asm { rlwimi byte, zero, 7, 24, 24 }
-#else
-                NOT_IMPLEMENTED;
-#endif
-                gp->gv.castle9.xDE = byte;
+                struct {
+                    u8 b0 : 1;
+                    u8 : 7;
+                }* xDE_bits = (void*) &gp->gv.castle9.xDE;
+                xDE_bits->b0 = 0;
             }
             if (new_gobj != NULL) {
                 Ground* new_gp = new_gobj->user_data;
