@@ -245,9 +245,22 @@ void gmCamera_801A2650(void)
         HSD_SisLib_803A611C(3, 0, 9, 13, 0, 14, 0, 11);
 }
 
-static inline void gmCamera_801A2650_noinline(void)
+static void gmCamera_801A2650_noinline(void);
+static void gmCamera_801A2650_noinline(void)
 {
     gmCamera_801A2650();
+}
+
+static void gmCamera_801A2650_noinline2(void);
+static void gmCamera_801A2650_noinline2(void)
+{
+    gmCamera_801A2650_noinline();
+}
+
+static void gmCamera_801A2650_noinline3(void);
+static void gmCamera_801A2650_noinline3(void)
+{
+    gmCamera_801A2650_noinline2();
 }
 
 void gmCamera_801A26C0(void)
@@ -690,7 +703,7 @@ void gmCamera_801A3634_OnEnter(UNK_T arg0)
     PAD_STACK(8);
 
     gmCamera_80479C20.x0 = (u32*) arg0;
-    gmCamera_801A2650_noinline();
+    gmCamera_801A2650_noinline3();
     gmCamera_80479C20.slot_a = NULL;
     gmCamera_80479C20.slot_b = NULL;
     gmCamera_80479C20.bottom_text = NULL;
