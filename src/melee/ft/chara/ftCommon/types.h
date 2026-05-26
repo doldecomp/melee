@@ -225,6 +225,10 @@ union ftCommon_MotionVars {
         /* fp+2344 */ float anim_start;
     } rebound;
     struct {
+        /* fp+2340 */ u8 pad_x0[4];
+        /* fp+2344 */ u8 x4;
+    } downreflect;
+    struct {
         /* fp+2340 */ bool x0;
         /* fp+2344 */ float x4;
     } pass;
@@ -366,6 +370,7 @@ union ftCommon_MotionVars {
     } entry;
     struct {
         /* fp+2340 */ Item_GObj* x0;
+        /* fp+2344 */ int x4;
     } capturelikelike;
     struct {
         /* fp+2340 */ HSD_GObjEvent x0;

@@ -6,7 +6,7 @@
 #include <platform.h>
 
 #include "cm/camera.h"
-#include "ft/ft_0C31.h"
+#include "ft/ftCo_800C78B0.h"
 #include "ft/ftlib.h"
 
 #include "it/forward.h"
