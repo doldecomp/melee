@@ -645,26 +645,18 @@ void gmCamera_801A33BC(void)
         text->font_size.y = fy;
     }
     HSD_SisLib_803A6368(text, 0x15);
-    if (sp10 == 2) {
-        goto label_13;
+    switch (sp10) {
+    case 0:
+    case 1:
+        gmCamera_801A2224(HSD_SisLib_803A6530(3, 0x15, 0x11), spC);
+        HSD_SisLib_803A660C(3, 0x15, 0x12);
+        break;
+    case 2:
+        HSD_SisLib_803A6530(3, 0x15, 0x13);
+        break;
+    default:
+        HSD_SisLib_803A6530(3, 0x15, 0x14);
     }
-    if (sp10 >= 2) {
-        goto label_14;
-    }
-    if (sp10 >= 0) {
-        goto label_11;
-    }
-    goto label_14;
-label_11:
-    HSD_SisLib_803A6530(3, 0x15, 0x11);
-    gmCamera_801A2224((u8*) spC, spC);
-    HSD_SisLib_803A660C(3, 0x15, 0x12);
-    return;
-label_13:
-    HSD_SisLib_803A6530(3, 0x15, 0x13);
-    return;
-label_14:
-    HSD_SisLib_803A6530(3, 0x15, 0x14);
 }
 
 void gmCamera_801A34FC_OnFrame(void)
