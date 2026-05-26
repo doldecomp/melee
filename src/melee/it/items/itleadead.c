@@ -4,7 +4,7 @@
 #include <platform.h>
 
 #include "cm/camera.h"
-#include "ft/ft_0C31.h"
+#include "ft/ftCo_800C7590.h"
 #include "ft/ftlib.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"

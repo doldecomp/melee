@@ -1,12 +1,13 @@
+#include "ftCo_800C7590.h"
+
 #include "ft_081B.h"
-#include "ft_0C31.h"
+#include "ftCo_800C78B0.h"
 #include "ftcommon.h"
 
 #include <placeholder.h>
 
 #include "cm/camera.h"
 #include "ft/fighter.h"
-#include "ft/ftcolanim.h"
 #include "ft/types.h"
 
 #include "ftCommon/forward.h"
@@ -22,6 +23,11 @@
 /* 0C7568 */ void fn_800C7568(Fighter_GObj* gobj);
 
 /* 0C77E0 */ static void fn_800C77E0(Fighter_GObj* arg0);
+
+static void orderTest(Vec3* ptr)
+{
+    ptr->y = (s32) ptr->x;
+}
 
 void ftCo_800C7590(Fighter_GObj* gobj)
 {
@@ -72,14 +78,14 @@ void ftCo_CaptureLeadead_IASA(Fighter_GObj* gobj) {}
 
 void ftCo_CaptureLeadead_Phys(Fighter_GObj* gobj) {}
 
-static void fn_800C77E0(Fighter_GObj* arg0)
-{
-    ftCo_80090780(arg0);
-}
-
 void ftCo_CaptureLeadead_Coll(Fighter_GObj* gobj)
 {
     ft_8008403C(gobj, fn_800C77E0);
+}
+
+static void fn_800C77E0(Fighter_GObj* arg0)
+{
+    ftCo_80090780(arg0);
 }
 
 void ftCo_800C7800(Fighter_GObj* gobj)

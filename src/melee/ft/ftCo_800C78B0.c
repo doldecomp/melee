@@ -1,4 +1,5 @@
-#include "ft_0C31.h"
+#include "ftCo_800C78B0.h"
+
 #include "ftcommon.h"
 
 #include <placeholder.h>
@@ -20,6 +21,11 @@
 #include "pl/player.h"
 
 /* 0C7890 */ void fn_800C7890(Fighter_GObj* gobj);
+
+static void orderTest(Vec3* ptr)
+{
+    ptr->y = (s32) ptr->x;
+}
 
 void ftCo_800C78B0(HSD_GObj* gobj, HSD_GObj* owner)
 {
