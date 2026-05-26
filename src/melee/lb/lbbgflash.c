@@ -61,14 +61,13 @@ extern BgFlashData lbl_80433658;
 #include <MSL/math.h>
 #include <MSL/trigf.h>
 
-/* 021A10 */ static void lbBgFlash_80021A10(f32 arg8);
 /* 021C18 */ static void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd,
                                      int arg2);
 
-extern GXColor lbl_804D3840;
-extern GXColor lbl_804D3844;
-extern GXColor lbl_804D3848;
-extern GXColor lbl_804D384C;
+static GXColor lbl_804D3840 = { 0, 0, 0, 255 };
+static GXColor lbl_804D3844 = { 0, 0, 0, 0 };
+static GXColor lbl_804D3848 = { 255, 255, 255, 255 };
+static GXColor lbl_804D384C = { 0, 0, 0, 0 };
 
 extern HSD_CObjDesc lbl_803BB028;
 
@@ -418,8 +417,6 @@ void fn_800208B0(u8 arg0)
     data->xC.r = 0;
     data->xC.a = arg0;
 }
-#pragma push
-#pragma dont_inline on
 void lbBgFlash_800208EC(int arg0)
 {
     BgFlashData* flash = &lbl_80433658;
@@ -452,7 +449,6 @@ void lbBgFlash_800208EC(int arg0)
     lbl_80433658.state.active = 1;
     lbl_80433658.state.mode = 0;
 }
-#pragma pop
 
 void lbBgFlash_800209F4(void)
 {
@@ -932,7 +928,7 @@ typedef struct {
 extern BgFlashGlobal* lbl_804D63E0;
 extern struct Fighter_804D653C_t* lbl_804D63DC;
 
-static void lbBgFlash_80021A10(f32 arg8)
+void lbBgFlash_80021A10(f32 arg8)
 {
     lbl_804D63D8 = arg8;
 }

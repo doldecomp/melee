@@ -4,7 +4,7 @@
 #include <platform.h>
 
 #include "cm/camera.h"
-#include "ft/ft_0C31.h"
+#include "ft/ftCo_800C7590.h"
 #include "ft/ftlib.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
@@ -1041,14 +1041,18 @@ Item_GObj* it_802EA9FC(Vec3* pos, s32 facing_dir)
     return gobj;
 }
 
-void it_802EAAEC(Item_GObj* gobj, Fighter_GObj* fobj, int part)
+inline f32 it_802EAAEC_inline(Item* ip2)
+{
+    return ip2->xDD4_itemVar.leadead.x3C;
+}
+
+void it_802EAAEC(Item_GObj* gobj, Fighter_GObj* fobj, int part, f32 ignored)
 {
     Vec3 sp24;
     Item* ip2;
     Item* ip;
     HSD_JObj* jobj;
     s32 facing;
-    PAD_STACK(8);
 
     ip = GET_ITEM(gobj);
     ip->xDD4_itemVar.leadead.x3C = -12.0f;
@@ -1058,7 +1062,7 @@ void it_802EAAEC(Item_GObj* gobj, Fighter_GObj* fobj, int part)
     it_80275258(gobj);
     Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
     jobj = it_80272CC0(gobj, 1);
-    HSD_JObjSetTranslateZ(jobj, ip2->xDD4_itemVar.leadead.x3C);
+    HSD_JObjSetTranslateZ(jobj, it_802EAAEC_inline(ip2));
     it_80274ECC(gobj, 1);
     Item_8026AE84(ip, 0x135, 0x7F, 0x40);
     ftLib_80086644(fobj, &sp24);
