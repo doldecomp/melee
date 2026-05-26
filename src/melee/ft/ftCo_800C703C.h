@@ -3,4 +3,6 @@
 
 #include "ft/forward.h"
 
+/* 703C */ void ftCo_800C703C(Fighter_GObj* gobj);
+
 #endif
