@@ -31,6 +31,12 @@ MatchEnd* fn_80174274(void)
     return lbl_8046DBE8.x94;
 }
 
+s32 fn_80174284_noinline(u8 slot);
+s32 fn_80174284_noinline(u8 slot)
+{
+    return fn_80174284(slot);
+}
+
 s32 fn_80174284(u8 slot)
 {
     bool do_call;
@@ -1497,7 +1503,7 @@ void gm_80177368_OnEnter(void* arg0_)
     if (fn_801701B8() == 0) {
         for (i = 0; i < 4; i++) {
             lbl_8046E190[i].x0 = 2;
-            lbl_8046E190[i].x1 = fn_80174284(i) * 2 + 2;
+            lbl_8046E190[i].x1 = fn_80174284_noinline(i) * 2 + 2;
         }
     } else {
         for (i = 0; i < 4; i++) {
