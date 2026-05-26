@@ -652,7 +652,7 @@ config.libs = [
             Object(Matching, "melee/ft/ftCo_800C7434.c"),
             Object(Matching, "melee/ft/ftCo_800C7590.c"),
             Object(Matching, "melee/ft/ftCo_800C78B0.c"),
-            Object(NonMatching, "melee/ft/ftCo_800C7CA0.c"), # Almost matching
+            Object(Matching, "melee/ft/ftCo_800C7CA0.c"),
             Object(NonMatching, "melee/ft/ftmetal.c"),
             Object(Matching, "melee/ft/ft_0C88.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_DownSpot.c"),

@@ -24,7 +24,6 @@
 #include <baselib/jobj.h>
 
 HSD_MObj* ft_804D6580;
-HSD_MObj* ft_804D6588;
 
 bool ftCo_800C7CA0(Fighter_GObj* gobj)
 {

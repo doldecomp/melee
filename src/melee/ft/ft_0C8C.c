@@ -25,6 +25,8 @@
 #include "lb/lbbgflash.h"
 #include "pl/player.h"
 
+HSD_MObj* ft_804D6588;
+
 bool ftCo_800C8C84(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

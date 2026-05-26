@@ -7,7 +7,6 @@
 #include <baselib/jobj.h>
 
 extern HSD_MObj* ft_804D6580;
-extern HSD_MObj* ft_804D6588;
 
 /* 7CA0 */ bool ftCo_800C7CA0(Fighter_GObj* gobj);
 /* 7DC4 */ void fn_800C7DC4(HSD_GObj* gobj, s32 motion_state, Vec3* normal,

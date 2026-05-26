@@ -883,7 +883,7 @@ melee/ft/ftCo_800C78B0.c:
 
 melee/ft/ftCo_800C7CA0.c:
 	.text       start:0x800C7CA0 end:0x800C8170
-	.sbss       start:0x804D6580 end:0x804D6590
+	.sbss       start:0x804D6580 end:0x804D6588
 	.sdata2     start:0x804D8E48 end:0x804D8E58
 
 melee/ft/ftmetal.c:
@@ -893,6 +893,7 @@ melee/ft/ftmetal.c:
 
 melee/ft/ft_0C88.c:
 	.text       start:0x800C884C end:0x800C8B74
+	.sbss       start:0x804D6588 end:0x804D6590
 
 melee/ft/chara/ftCommon/ftCo_DownSpot.c:
 	.text       start:0x800C8B74 end:0x800C8C84
