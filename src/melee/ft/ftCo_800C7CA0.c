@@ -1,5 +1,4 @@
 #include "ft_0C31.h"
-
 #include "ftcommon.h"
 
 #include <placeholder.h>
@@ -7,10 +6,15 @@
 #include "cm/camera.h"
 #include "ef/efasync.h"
 #include "ft/fighter.h"
+#include "ft/ft_081B.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/types.h"
+
 #include "ftCommon/forward.h"
+
+#include "ftCommon/ftCo_DamageFall.h"
+#include "ftCommon/ftCo_DownBound.h"
 #include "ftKirby/ftKb_Init.h"
 #include "lb/lbaudio_ax.h"
 

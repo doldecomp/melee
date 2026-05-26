@@ -1,6 +1,5 @@
-#include "ft_0C31.h"
-
 #include "ft_081B.h"
+#include "ft_0C31.h"
 #include "ftcommon.h"
 
 #include <placeholder.h>
@@ -9,8 +8,13 @@
 #include "ft/fighter.h"
 #include "ft/ftcolanim.h"
 #include "ft/types.h"
+
 #include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_Damage.h"
+#include "ftCommon/ftCo_DamageFall.h"
+#include "ftCommon/ftCo_Lift.h"
+#include "ftCommon/ftCo_Throw.h"
 #include "it/items/itleadead.h"
 #include "pl/player.h"
 

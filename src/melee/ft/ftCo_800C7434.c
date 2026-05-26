@@ -1,13 +1,15 @@
-#include "ft_0C31.h"
-
 #include "ft_0852.h"
+#include "ft_0C31.h"
 #include "ftcommon.h"
 
 #include <placeholder.h>
 
 #include "ft/fighter.h"
 #include "ft/types.h"
+
 #include "ftCommon/forward.h"
+
+#include "it/items/itgreatfoxlaser.h"
 #include "it/items/itleadead.h"
 
 static inline void inlineB0(Fighter_GObj* gobj)

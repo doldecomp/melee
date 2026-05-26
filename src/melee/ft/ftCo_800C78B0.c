@@ -1,14 +1,18 @@
 #include "ft_0C31.h"
-
 #include "ftcommon.h"
 
 #include <placeholder.h>
 
 #include "ft/fighter.h"
 #include "ft/ftanim.h"
+#include "ft/ftcoll.h"
 #include "ft/types.h"
+
 #include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_Damage.h"
+#include "ftCommon/ftCo_Lift.h"
+#include "ftCommon/ftCo_Throw.h"
 #include "it/it_26B1.h"
 #include "it/items/itlikelike.h"
 #include "lb/lbcollision.h"
