@@ -667,40 +667,26 @@ bool grCastle_801CDF54(Vec3* vec)
 void grCastle_801CDFD8(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    grCastleParams* params;
-    s32 random_range;
+    s32 range;
     s32 rand_result;
-    grCastleParams* params2;
-    s32 neg_one;
-    s32 zero;
-    s32 base_value;
-    s16 final_value;
 
     // Set bit 7 at offset 0xDE
     gp->gv.castle9.xDE_b0 = true;
 
     // Get random range from params
-    params = grCs_804D6970;
-    random_range = params->xA;
-
-    if (random_range != 0) {
-        rand_result = HSD_Randi(random_range);
+    range = grCs_804D6970->xA;
+    if (range != 0) {
+        rand_result = HSD_Randi(range);
     } else {
         rand_result = 0;
     }
 
     // Add base value and set various shorts
-    params2 = grCs_804D6970;
-    neg_one = -1;
-    zero = 0;
-    base_value = params2->x8;
-    final_value = (s16) (base_value + rand_result);
-
-    gp->gv.castle9.xD4 = final_value;
-    gp->gv.castle9.xDC = neg_one;
-    gp->gv.castle9.xDA = neg_one;
-    gp->gv.castle9.xD8 = neg_one;
-    gp->gv.castle9.xD6 = zero;
+    gp->gv.castle9.xD4 = grCs_804D6970->x8 + rand_result;
+    gp->gv.castle9.xDC = -1;
+    gp->gv.castle9.xDA = -1;
+    gp->gv.castle9.xD8 = -1;
+    gp->gv.castle9.xD6 = 0;
 }
 
 s32 grCastle_801CE054(Ground_GObj* gobj)
