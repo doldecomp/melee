@@ -11,6 +11,7 @@
 
 #include <dolphin/mtx.h>
 
+/* 2759DC */ void it_802759DC(Item_GObj*, Item_GObj*);
 /* 275BC8 */ void it_80275BC8(Item_GObj*, HSD_GObj*);
 /* 275D5C */ void it_80275D5C(Item_GObj*, itECB*);
 /* 275DFC */ void it_80275DFC(Item_GObj*);

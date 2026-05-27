@@ -4136,6 +4136,40 @@ void it_8027AAA0(Item_GObj* item1_gobj, Item* item2, s32 arg2)
     }
 }
 
+#if 0
+static inline s32 it_8027AB64_SpawnWeight(itPokemonSpawn_DatAttrs* attr,
+                                          s32 index)
+{
+    return attr->pokemon_spawn_weights[index - Pokemon_Tosakinto];
+}
+
+static inline s32 it_8027AB64_SelectKind(Item* item)
+{
+    itPokemonSpawn_DatAttrs* attr =
+        item->xC4_article_data->x4_specialAttributes;
+    s32 rand_int = HSD_Randi(it_8027A364(item));
+    s32 recent_y_val = Item_804A0E24.y;
+    s32 recent_x_val = Item_804A0E24.x;
+    s32 index;
+    s32 var_r4;
+    s32 var_ctr;
+
+    var_r4 = 0;
+    index = Pokemon_Tosakinto;
+    for (var_ctr = 30; var_ctr != 0; var_ctr--) {
+        if (recent_x_val != index && recent_y_val != index) {
+            var_r4 += it_8027AB64_SpawnWeight(attr, index);
+            if (var_r4 >= rand_int) {
+                Item_804A0E24.y = recent_x_val;
+                Item_804A0E24.x = index;
+                return index - Pokemon_Tosakinto;
+            }
+        }
+        index++;
+    }
+    return 0;
+}
+#else
 static inline s32 it_8027AB64_SelectKind(Item* item)
 {
     itPokemonSpawn_DatAttrs* attr =
@@ -4165,6 +4199,7 @@ static inline s32 it_8027AB64_SelectKind(Item* item)
     }
     return 0;
 }
+#endif
 
 bool it_8027AB64(Item_GObj* item_gobj)
 {

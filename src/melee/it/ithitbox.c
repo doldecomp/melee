@@ -1,6 +1,7 @@
 #include "ithitbox.h"
 
 #include "it_2725.h"
+#include "it_3F14.h"
 #include "itmaplib.h"
 
 #include "it/inlines.h"
@@ -8,8 +9,6 @@
 #include "it/itcoll.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
-
-extern f32 it_804DC73C;
 
 void it_802753DC(Item_GObj* item_gobj)
 {
@@ -270,65 +269,4 @@ f32 it_802758D4(Item_GObj* item_gobj)
         }
     }
     return damage;
-}
-
-void it_802759DC(Item_GObj* item_gobj1, Item_GObj* item_gobj2)
-{
-    Vec3 sp44;
-    f32 sp40;
-    Vec3 sp34;
-    CollData* coll1;
-    CollData* coll2;
-    Item* item1;
-    f32 temp_f31;
-    bool chk;
-    s32 temp_r3_2;
-    u8 _1[12];
-    Vec3 sp1C;
-    u8 _2[8];
-
-    chk = false;
-    item1 = GET_ITEM(item_gobj1);
-    sp44 = item1->pos;
-    coll2 = it_8026C100(item_gobj2);
-    coll1 = &item1->x378_itemColl;
-    if (coll2 != NULL) {
-        if (mpLib_80054ED8(coll2->floor.index)) {
-            int floor_index;
-            temp_r3_2 = mpLib_8005199C_Floor(&sp44, -1, -1);
-            if (temp_r3_2 != -1 && (floor_index = coll2->floor.index,
-                                    mpLinesConnected(temp_r3_2, floor_index)))
-            {
-                coll1->floor.index = temp_r3_2;
-                mpLib_8004DD90_Floor(temp_r3_2, &sp44, &sp40, 0, NULL);
-                // if (sp40 >= (f32) ((u8) it_804D6D28 + 0xF0)) {
-                // if (sp40 >= (f32) it_804D6D28->filler[12]) {
-                if (sp40 >= it_804D6D28->xF0) {
-                    item1->pos.x = sp44.x;
-                    item1->pos.y = sp44.y + sp40;
-                    item1->pos.z = sp44.z;
-                    mpColl_80043680(coll1, &item1->pos);
-                    chk = true;
-                    it_802762B0(item1);
-                }
-            }
-        }
-        if (!chk) {
-            temp_f31 = 0.5f * (coll2->ecb.top.y + coll2->ecb.bottom.y);
-            it_8026BC90(item_gobj2, &sp1C);
-            sp34.x = sp1C.x + it_804DC73C;
-            sp34.y = sp1C.y + temp_f31;
-            sp34.z = sp1C.z + it_804DC73C;
-            coll1->last_pos = sp34;
-            mpColl_80043670(coll1);
-            coll1->cur_pos = sp44;
-            if (mpColl_800471F8(coll1)) {
-                it_802762B0(item1);
-                item1->pos = coll1->cur_pos;
-                return;
-            }
-            it_802762BC(item1);
-            item1->pos = sp44;
-        }
-    }
 }
