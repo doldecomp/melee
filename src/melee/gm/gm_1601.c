@@ -2548,7 +2548,7 @@ u8 fn_801654A0(MatchEnd* match_end)
     return winner;
 }
 
-u8 fn_80165548(MatchEnd* me, s8 arg1, u8 team)
+u8 fn_80165548(MatchEnd* me, s8 arg1, s32 team)
 {
     s8 ret;
     MatchPlayerData* p;
