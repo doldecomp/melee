@@ -214,17 +214,21 @@ void grYorster_802022A4(HSD_GObj* gobj)
 void grYorster_80202428(HSD_GObj* item_gobj, Ground* gp, Vec3* pos,
                         HSD_GObj* fighter_gobj, f32 value)
 {
+    s32 temp;
     int i;
 
     if (ftLib_80086960(fighter_gobj)) {
         ftLib_80086A4C(fighter_gobj, grYt_804D6A20.x0->x14);
     }
 
-    for (i = 0; i < 9; i++) {
-        if (item_gobj == gp->gv.yorster.elements[i].x1C) {
-            gp->gv.yorster.elements[i].x04 += value;
+    for (i = (s32)0; i < 9;) { // Use a for loop with manual increment
+        temp = *(s32*)&gp->gv.yorster.elements[i].x1C;
+        if ((u32)item_gobj == (u32)temp) { // Cast to u32 for matching
+            f32 newValue = gp->gv.yorster.elements[i].x04 + value;
+            gp->gv.yorster.elements[i].x04 = newValue;
             break;
         }
+        i++;
     }
 }
 
