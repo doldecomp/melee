@@ -857,11 +857,9 @@ void fn_80160DE8(HSD_JObj* arg0, u8 arg1, s32 arg2, u8 arg3, f32 farg0,
     if (is_us != 0) {
         ((u8*) arg0)[0x49] = 1;
     }
-    if (arg3 != 0) {
-        str = fn_801609E0(arg1);
-    } else {
-        str = gm_80160980(arg1);
-    }
+    str = ((u8) arg2) ? fn_801609E0_noinline3(arg3)
+                      : gm_80160980_noinline3(arg3);
+
     if (is_us != 0) {
         if (arg3 != 0 && lbl_803D50E4[arg1] != NULL) {
             size = lbl_803B75F8[arg1 + 0x63];
