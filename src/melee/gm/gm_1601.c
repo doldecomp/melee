@@ -2625,6 +2625,16 @@ s32 fn_8016588C(lbl_8046B6A0_24C_t* arg0, s32 arg1)
         switch (arg0->x5) {
         case 2:
             v = arg0->x58[arg1].x1C;
+            lim = (1 << 24) - 1;
+            if (lim < 0) {
+                lim = -lim;
+            }
+            if (v > lim) {
+                return lim;
+            }
+            if (v < -lim) {
+                return -lim;
+            }
             break;
         case 1:
             if ((s8) arg0->x58[arg1].x8 != 0) {
@@ -2633,16 +2643,46 @@ s32 fn_8016588C(lbl_8046B6A0_24C_t* arg0, s32 arg1)
                 v = (u8) (arg0->x58[arg1].x28 / 60 +
                           0xFF000001);
             }
+            lim = (1 << 24) - 1;
+            if (lim < 0) {
+                lim = -lim;
+            }
+            if (v > lim) {
+                return lim;
+            }
+            if (v < -lim) {
+                return -lim;
+            }
             break;
         case 3:
             pl_80039450(arg1);
             v = (u8) fn_8016FFD4(arg0, 2, (u8) arg1);
+            lim = (1 << 24) - 1;
+            if (lim < 0) {
+                lim = -lim;
+            }
+            if (v > lim) {
+                return lim;
+            }
+            if (v < -lim) {
+                return -lim;
+            }
             break;
         default: {
             u16 a = arg0->x58[arg1].xA;
             v = (u8) ((arg0->x58[arg1].x20 - (arg0->x58[arg1].x24 - a)) +
                       a * (s8) arg0->xC);
             break;
+            lim = (1 << 24) - 1;
+            if (lim < 0) {
+                lim = -lim;
+            }
+            if (v > lim) {
+                return lim;
+            }
+            if (v < -lim) {
+                return -lim;
+            }
         }
         }
     }
