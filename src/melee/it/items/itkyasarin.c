@@ -10,6 +10,9 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/ithitbox.h"
+#include "it/itzako.h"
+#include "it/itmaplib.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
 
@@ -268,36 +271,40 @@ bool itKyasarin_UnkMotion4_Anim(Item_GObj* gobj)
     return false;
 }
 
-static inline void itKyasarin_UnkMotion4_Coll_inline(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    itKyasarinAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
-    s32 rand = HSD_Randi(attr->x14);
-    ip->xDD4_itemVar.kyasarin.x2C = attr->x10 + rand;
-    rand = HSD_Randi(attr->x1C);
-    ip->xDD4_itemVar.kyasarin.x28 = attr->x18 + rand;
-    it_80273454(gobj);
-    if (HSD_Randi(2) != 0) {
-        ip->xDD4_itemVar.kyasarin.x34 = attr->x48;
-    } else {
-        ip->xDD4_itemVar.kyasarin.x34 = 0;
-    }
-    it_802ED4F8(gobj);
-}
-
 bool itKyasarin_UnkMotion4_Coll(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
+    Item_GObj* item_gobj = gobj;
+    Item* ip = GET_ITEM(item_gobj);
     itKyasarinAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
-    PAD_STACK(16);
+    PAD_STACK(24);
 
     if (ip->facing_dir == 1.0f) {
         if (ip->pos.x >= attr->x2C) {
-            itKyasarin_UnkMotion4_Coll_inline(gobj);
+            s32 rand = HSD_Randi(attr->x14);
+            ip->xDD4_itemVar.kyasarin.x2C = attr->x10 + rand;
+            rand = HSD_Randi(attr->x1C);
+            ip->xDD4_itemVar.kyasarin.x28 = attr->x18 + rand;
+            it_80273454(item_gobj);
+            if (HSD_Randi(2) != 0) {
+                ip->xDD4_itemVar.kyasarin.x34 = attr->x48;
+            } else {
+                ip->xDD4_itemVar.kyasarin.x34 = 0;
+            }
+            it_802ED4F8(item_gobj);
         }
     } else {
         if (ip->pos.x <= attr->x28) {
-            itKyasarin_UnkMotion4_Coll_inline(gobj);
+            s32 rand = HSD_Randi(attr->x14);
+            ip->xDD4_itemVar.kyasarin.x2C = attr->x10 + rand;
+            rand = HSD_Randi(attr->x1C);
+            ip->xDD4_itemVar.kyasarin.x28 = attr->x18 + rand;
+            it_80273454(item_gobj);
+            if (HSD_Randi(2) != 0) {
+                ip->xDD4_itemVar.kyasarin.x34 = attr->x48;
+            } else {
+                ip->xDD4_itemVar.kyasarin.x34 = 0;
+            }
+            it_802ED4F8(item_gobj);
         }
     }
     return false;
@@ -478,15 +485,17 @@ bool itKyasarin_UnkMotion10_Coll(Item_GObj* gobj)
     return it_8027C79C(gobj);
 }
 
-static inline void fake_HSD_JObjSetRotationX(HSD_JObj* jobj, f32 x)
-{
-    HSD_ASSERT(639, jobj);
-    HSD_ASSERT(640, !(jobj->flags & JOBJ_USE_QUATERNION));
-    jobj->rotate.x = x;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        ftCo_800C6AFC(jobj);
+#define fake_HSD_JObjSetRotationX(jobj, val)                                 \
+    {                                                                         \
+        ((jobj) ? ((void) 0) : __assert("jobj.h", 0x27F, "jobj"));            \
+        ((!((jobj)->flags & JOBJ_USE_QUATERNION))                             \
+             ? ((void) 0)                                                     \
+             : __assert("jobj.h", 0x280, (char*) it_803F90D0 + 0xB0));        \
+        (jobj)->rotate.x = val;                                               \
+        if (!((jobj)->flags & JOBJ_MTX_INDEP_SRT)) {                          \
+            ftCo_800C6AFC(jobj);                                              \
+        }                                                                     \
     }
-}
 
 static inline void itKyasarin_FlipAndFall(Item_GObj* gobj)
 {

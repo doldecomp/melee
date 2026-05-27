@@ -8,6 +8,7 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/ithitbox.h"
 #include "it/itCharItems.h"
 #include "it/item.h"
 
@@ -52,6 +53,7 @@ Item_GObj* it_802B1DF8(Item_GObj* owner, Vec3* pos, Vec3* vel, s32 count,
     u8 _pad[4];
     u32 x40 = Item_8026AE60();
     Item_GObj* first;
+    void* new_var;
     Item_GObj* item_gobj;
     s32 cur_delay;
     Item_GObj* prev = NULL;
@@ -76,7 +78,7 @@ Item_GObj* it_802B1DF8(Item_GObj* owner, Vec3* pos, Vec3* vel, s32 count,
             first = item_gobj;
         }
         if (item_gobj != NULL) {
-            Item* ip = GET_ITEM(item_gobj);
+            Item* ip = (Item*) (new_var = HSD_GObjGetUserData(item_gobj));
             itPikachuthunderAttributes* attrs =
                 ip->xC4_article_data->x4_specialAttributes;
             if (prev != NULL) {

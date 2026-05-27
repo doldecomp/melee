@@ -18,6 +18,7 @@
 
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itmaplib.h"
 #include "it/item.h"
 #include "it/items/it_2E5A.h"
 #include "lb/lb_00F9.h"
@@ -37,7 +38,6 @@
 #include <baselib/tev.h>
 
 extern HSD_ObjAllocUnk Item_804A0C64;
-extern ItemCommonData* it_804D6D28;
 
 extern u64 __shr2u(u32, u32, s32);
 
@@ -313,17 +313,21 @@ bool it_8026CB3C(Vec3* vec)
 void it_8026CB9C(s32* counts, u64 mask, f32 weight)
 {
     RandomItemSpawner* spawner = &it_804A0E30;
-    s32 cnt;
+    u8** item_kinds;
+    u16** weights;
     s32* p;
+    s32 cnt;
     ItemKind it_kind;
-    s32 j;
+    s32 cnt2;
+    ItemKind it_kind2;
+    s32* p2;
     s32 cumulative;
     u64 backup;
 
     backup = mask;
-    cnt = 0;
     p = counts;
     it_kind = 0;
+    cnt = 0;
     while (it_kind < It_Kind_L_Gun_Ray) {
         if ((mask & 1) && *p != 0) {
             cnt++;
@@ -333,25 +337,23 @@ void it_8026CB9C(s32* counts, u64 mask, f32 weight)
         mask >>= 1;
     }
     spawner->x4.x0 = cnt;
-    spawner->x4.x4 = HSD_MemAlloc(cnt * 4);
-    spawner->x4.xC = HSD_MemAlloc(cnt * 4);
+    *(item_kinds = &spawner->x4.x4) = HSD_MemAlloc(cnt * 4);
+    *(weights = &spawner->x4.xC) = HSD_MemAlloc(cnt * 4);
 
-    cnt = 0;
+    cnt2 = 0;
     mask = backup;
-    p = counts;
-    j = 0;
-    it_kind = 0;
+    p2 = counts;
+    it_kind2 = 0;
     cumulative = 0;
-    while (it_kind < It_Kind_L_Gun_Ray) {
-        if ((mask & 1) && *p != 0) {
-            spawner->x4.x4[cnt] = it_kind;
-            cnt++;
-            spawner->x4.xC[j] = cumulative;
-            j++;
-            cumulative = (cumulative + ((weight * *p) + 0.99f));
+    while (it_kind2 < It_Kind_L_Gun_Ray) {
+        if ((mask & 1) && *p2 != 0) {
+            (*item_kinds)[cnt2] = it_kind2;
+            (*weights)[cnt2] = cumulative;
+            cnt2++;
+            cumulative = (cumulative + ((weight * *p2) + 0.99f));
         }
-        p++;
-        it_kind++;
+        p2++;
+        it_kind2++;
         mask >>= 1;
     }
 }
@@ -563,8 +565,11 @@ bool it_8026D324(ItemKind kind)
 
 bool it_8026D3CC(void)
 {
-    return it_8026D324(It_Kind_Tomato) | it_8026D324(It_Kind_Foods) |
-           it_8026D324(It_Kind_Heart);
+    bool result = it_8026D324(It_Kind_Heart);
+
+    result |= it_8026D324(It_Kind_Tomato);
+    result |= it_8026D324(It_Kind_Foods);
+    return result;
 }
 
 bool it_8026D564(Item_GObj* item_gobj)
@@ -1070,7 +1075,6 @@ bool it_8026E32C(Item_GObj* item_gobj, HSD_GObjEvent arg1)
     CollData* coll;
     Item* item;
     bool chk;
-    bool chk2;
     bool new_var;
     PAD_STACK(42);
 
@@ -1088,6 +1092,7 @@ bool it_8026E32C(Item_GObj* item_gobj, HSD_GObjEvent arg1)
     if (new_var & 0xF) {
         it_80276FC4(item_gobj, new_var);
         if (new_var & 1) {
+            bool chk2;
             item = item_gobj->user_data;
             item->xD50_landNum += 1;
             if (it_8026DC24(item_gobj)) {

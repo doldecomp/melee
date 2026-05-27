@@ -2,6 +2,7 @@
 
 #include "it/inlines.h"
 #include "it/it_2725.h"
+#include "it/it_279C.h"
 
 #include <melee/ef/eflib.h>
 #include <melee/it/it_266F.h>

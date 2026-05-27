@@ -14,6 +14,12 @@
 #include "gr/stage.h"
 #include "it/inlines.h"
 #include "it/it_2725.h"
+#include "it/ithitbox.h"
+#include "it/it_279C.h"
+#include "it/itanimlist.h"
+#include "it/iteffect.h"
+#include "it/itmaplib.h"
+#include "it/itmaterial.h"
 #include "it/itcoll.h"
 #include "it/types.h"
 
@@ -745,7 +751,6 @@ void Item_802680CC(HSD_GObj* gobj)
 }
 
 extern HSD_DObj* HSD_JObjGetDObj(HSD_JObj*);
-extern void* it_803F1F90[];
 
 static void Item_8026814C(HSD_GObj* gobj)
 {
@@ -896,10 +901,6 @@ static void Item_80268560(HSD_GObj* gobj)
 }
 
 extern void ftLib_8008702C(s32);
-extern struct sdata_ItemGXLink it_803F1418[];
-extern struct sdata_ItemGXLink it_803F2310[];
-extern struct sdata_ItemGXLink it_803F2F28[];
-extern struct sdata_ItemGXLink it_803F4CA8[];
 
 static void foobar(HSD_GObj* gobj)
 {
@@ -1161,8 +1162,6 @@ void Item_80268E40(Item* item_data, struct ItemStateDesc* itemStateDesc)
     item_data->x524_cmd.loop_count = 0;
     item_data->x524_cmd.timer = 0.0f;
 }
-
-extern struct Fighter_804D653C_t* it_804D6D04;
 
 /// Change item state
 void Item_80268E5C(HSD_GObj* gobj, enum_t msid, Item_StateChangeFlags flags)

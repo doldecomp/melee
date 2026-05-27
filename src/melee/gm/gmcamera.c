@@ -191,6 +191,7 @@ HSD_Text* gmCamera_801A2334(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4)
     return text;
 }
 
+#pragma dont_inline on
 void gmCamera_801A253C(s32* arg0, s32* arg1)
 {
     gmCameraUnkStruct* gcus = &gmCamera_80479BC8.gcus;
@@ -199,8 +200,8 @@ void gmCamera_801A253C(s32* arg0, s32* arg1)
         *arg0 = gcus->x44;
     }
     if (arg1 != NULL) {
-        u32 var_r3 = 0;
-        u32 var_r6 = 0;
+        s32 var_r3 = 0;
+        s32 var_r6 = 0;
         if (gcus->x30 == 1) {
             var_r3 = gcus->x28;
         }
@@ -210,6 +211,7 @@ void gmCamera_801A253C(s32* arg0, s32* arg1)
         *arg1 = MAX(var_r3, var_r6);
     }
 }
+#pragma dont_inline reset
 
 void gmCamera_801A25C8(void)
 {
@@ -223,12 +225,18 @@ void gmCamera_801A25C8(void)
     }
 }
 
+static inline void gmCamera_801A25C8_noinline(void)
+{
+    gmCamera_801A25C8();
+}
+
+#pragma dont_inline on
 s32 gmCamera_801A2640(void)
 {
     return M2C_FIELD(&gmCamera_80479BC8, s32*, 0x54);
 }
+#pragma dont_inline reset
 
-#pragma dont_inline on
 void gmCamera_801A2650(void)
 {
     gmCamera_80479BC8.gcus.x20 = 2;
@@ -236,7 +244,24 @@ void gmCamera_801A2650(void)
     gmCamera_80479BC8.gcus.x54 =
         HSD_SisLib_803A611C(3, 0, 9, 13, 0, 14, 0, 11);
 }
-#pragma dont_inline reset
+
+static void gmCamera_801A2650_noinline(void);
+static void gmCamera_801A2650_noinline(void)
+{
+    gmCamera_801A2650();
+}
+
+static void gmCamera_801A2650_noinline2(void);
+static void gmCamera_801A2650_noinline2(void)
+{
+    gmCamera_801A2650_noinline();
+}
+
+static void gmCamera_801A2650_noinline3(void);
+static void gmCamera_801A2650_noinline3(void)
+{
+    gmCamera_801A2650_noinline2();
+}
 
 void gmCamera_801A26C0(void)
 {
@@ -327,13 +352,11 @@ void gmCamera_801A292C(void)
     gmCameraUnkStruct2* p;
     s32 x44;
 
-    if (gmCamera_80479BC8.gcus.x48[0] != NULL) {
-        i = 0;
-        do {
-            HSD_SisLib_803A5CC4(gmCamera_80479BC8.gcus.x48[i]);
-            i++;
-            gmCamera_80479BC8.gcus.x48[i - 1] = NULL;
-        } while (i < 3);
+    if (texts[0] != NULL) {
+        for (i = 0; i < 3; i++) {
+            HSD_SisLib_803A5CC4(texts[i]);
+            texts[i] = NULL;
+        }
     }
     i = 0;
     p = (gmCameraUnkStruct2*) &gmCamera_80479BC8;
@@ -601,7 +624,7 @@ void gmCamera_801A33BC(void)
     s32 sp10;
     s32 spC;
 
-    gmCamera_801A25C8();
+    gmCamera_801A25C8_noinline();
     gmCamera_80479C20.slot_a =
         gmCamera_801A2334(0, gmCamera_803DA758[2], gmCamera_803DA758[3],
                           gmCamera_803DA758[0], gmCamera_803DA758[1]);
@@ -622,26 +645,18 @@ void gmCamera_801A33BC(void)
         text->font_size.y = fy;
     }
     HSD_SisLib_803A6368(text, 0x15);
-    if (sp10 == 2) {
-        goto label_13;
+    switch (sp10) {
+    case 0:
+    case 1:
+        gmCamera_801A2224(HSD_SisLib_803A6530(3, 0x15, 0x11), spC);
+        HSD_SisLib_803A660C(3, 0x15, 0x12);
+        break;
+    case 2:
+        HSD_SisLib_803A6530(3, 0x15, 0x13);
+        break;
+    default:
+        HSD_SisLib_803A6530(3, 0x15, 0x14);
     }
-    if (sp10 >= 2) {
-        goto label_14;
-    }
-    if (sp10 >= 0) {
-        goto label_11;
-    }
-    goto label_14;
-label_11:
-    HSD_SisLib_803A6530(3, 0x15, 0x11);
-    gmCamera_801A2224((u8*) spC, spC);
-    HSD_SisLib_803A660C(3, 0x15, 0x12);
-    return;
-label_13:
-    HSD_SisLib_803A6530(3, 0x15, 0x13);
-    return;
-label_14:
-    HSD_SisLib_803A6530(3, 0x15, 0x14);
 }
 
 void gmCamera_801A34FC_OnFrame(void)
@@ -680,7 +695,7 @@ void gmCamera_801A3634_OnEnter(UNK_T arg0)
     PAD_STACK(8);
 
     gmCamera_80479C20.x0 = (u32*) arg0;
-    gmCamera_801A2650();
+    gmCamera_801A2650_noinline3();
     gmCamera_80479C20.slot_a = NULL;
     gmCamera_80479C20.slot_b = NULL;
     gmCamera_80479C20.bottom_text = NULL;
