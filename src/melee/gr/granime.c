@@ -2,6 +2,7 @@
 
 #include <platform.h>
 
+#include "baselib/debug.h"
 #include "gr/grdatfiles.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
@@ -10,14 +11,14 @@
 #include "lb/lbarchive.h"
 #include "lb/lbheap.h"
 
+#include <stdarg.h>
+#include <dolphin/os.h>
 #include <baselib/aobj.h>
 #include <baselib/dobj.h>
 #include <baselib/mobj.h>
 #include <baselib/robj.h>
 #include <baselib/tobj.h>
-#include <dolphin/os.h>
 #include <Runtime/Gecko_setjmp.h>
-#include <stdarg.h>
 
 /* 1C6620 */ static void grAnime_801C6620(HSD_PObj* arg0, HSD_ShapeAnim* arg1);
 /* 1C6710 */ static void grAnime_801C6710(HSD_TObj* tobj,
@@ -478,6 +479,18 @@ arg4);
     }
 }*/
 
+inline bool grAnime_801C6F50_wrapped(HSD_JObj* obj, int flags, void* func,
+                                     u32 type, void* param)
+{
+    HSD_ASSERT(0x33A, obj);
+    if (flags & 0x20) {
+        if (obj->aobj != NULL) {
+            grAnime_801C6F50(obj->aobj, obj, 6, func, type, param);
+        }
+    }
+    return ((obj->flags & 0x4020) ? false : true);
+}
+
 void grAnime_801C7228(HSD_JObj* obj, int flags, void* func, u32 type,
                       void* param, int arg5)
 {
@@ -491,16 +504,7 @@ void grAnime_801C7228(HSD_JObj* obj, int flags, void* func, u32 type,
     HSD_RObj* phi_r22;
     HSD_JObj* phi_r20;
 
-    if (obj == NULL) {
-        __assert("granime.c", 0x33AU, "obj");
-    }
-    if (flags & 0x20) {
-        if (obj->aobj != NULL) {
-            grAnime_801C6F50(obj->aobj, obj, 6, func, type, param);
-        }
-    }
-    phi_r0 = ((obj->flags & 0x4020) ? false : true);
-    if (phi_r0 != 0) {
+    if (grAnime_801C6F50_wrapped(obj, flags, func, type, param)) {
 #if 0
         grAnime_801C70E0(obj->u.dobj, arg1, arg2, arg3, arg4);
 #else
@@ -547,14 +551,8 @@ void grAnime_801C7228(HSD_JObj* obj, int flags, void* func, u32 type,
 #if 0
             grAnime_801C7228(phi_r24, arg1, arg2, arg3, arg4, arg5);
 #else
-            if (phi_r24 == NULL) {
-                __assert("granime.c", 0x33AU, "obj");
-            }
-            if ((flags & 0x20) && (phi_r24->aobj != NULL)) {
-                grAnime_801C6F50(phi_r24->aobj, phi_r24, 6, func, type, param);
-            }
-            phi_r0_2 = phi_r24->flags & 0x4020 ? false : true;
-            if (phi_r0_2 != 0) {
+
+            if (grAnime_801C6F50_wrapped(phi_r24, flags, func, type, param)) {
                 grAnime_801C70E0(phi_r24->u.dobj, flags, func, type, param);
             }
             phi_r22 = phi_r24->robj;
@@ -583,7 +581,9 @@ void grAnime_801C7228(HSD_JObj* obj, int flags, void* func, u32 type,
 void grAnime_801C752C(HSD_JObj* obj, s32 arg1, s32 flags, void* func,
                       u32 type, ...)
 {
+    HSD_JObj* obj_tmp;
     HSD_RObj* robj;
+    int flags2;
     HSD_JObj* child;
     va_list ap;
     callbackArg arg;
@@ -592,6 +592,7 @@ void grAnime_801C752C(HSD_JObj* obj, s32 arg1, s32 flags, void* func,
         return;
     }
     va_start(ap, type);
+    obj_tmp = obj;
     switch (type) {
     case AOBJ_ARG_A:
     case AOBJ_ARG_AO:
@@ -613,23 +614,15 @@ void grAnime_801C752C(HSD_JObj* obj, s32 arg1, s32 flags, void* func,
         arg.d = va_arg(ap, u32);
         break;
     default:
-        OSReport("not match arg_type\n");
-        __assert("granime.c", 0x36F, "0");
+        HSD_ASSERTREPORT(0x36F, NULL, "not match arg_type\n");
         break;
     }
-    if (obj == NULL) {
-        __assert("granime.c", 0x33A, "obj");
-    }
-    if (flags & 0x20) {
-        if (obj->aobj != NULL) {
-            grAnime_801C6F50(obj->aobj, obj, 6, func, type, &arg);
-        }
-    }
-    if ((obj->flags & 0x4020) ? false : true) {
+    if (grAnime_801C6F50_wrapped(obj_tmp, flags, func, type, &arg)) {
         grAnime_801C70E0(obj->u.dobj, flags, func, type, &arg);
     }
-    for (robj = obj->robj; robj != NULL; robj = robj->next) {
-        if ((flags & 0x200) && robj->aobj != NULL) {
+    flags2 = flags & 0x200;
+    for (robj = obj->robj; robj != 0L; robj = robj->next) {
+        if (flags2 && (robj->aobj != 0L)) {
             grAnime_801C6F50(robj->aobj, robj, 0xA, func, type, &arg);
         }
     }
