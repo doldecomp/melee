@@ -220,14 +220,7 @@ inline void grAnime_801C6960(HSD_RObj* robj, HSD_RObjAnimJoint* arg1)
     phi_r31 = robj;
     phi_r30 = arg1;
     while ((phi_r31 != NULL) && (phi_r30 != NULL)) {
-        if ((phi_r31 != NULL) && (phi_r30 != NULL) &&
-            (phi_r30->aobjdesc != NULL))
-        {
-            if (phi_r31->aobj != NULL) {
-                HSD_AObjRemove(phi_r31->aobj);
-            }
-            phi_r31->aobj = HSD_AObjLoadDesc(phi_r30->aobjdesc);
-        }
+        grAnime_801C68F4(phi_r31, phi_r30);
         phi_r31 = phi_r31->next;
         phi_r30 = phi_r30->next;
     }
@@ -281,7 +274,6 @@ void grAnime_801C6A54(HSD_JObj* jobj, HSD_AnimJoint* animjoint,
                       HSD_MatAnimJoint* matanimjoint,
                       HSD_ShapeAnimJoint* shapeanimjoint)
 {
-    PAD_STACK(16);
     if (jobj == NULL) {
         return;
     }
