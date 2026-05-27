@@ -1,20 +1,64 @@
-#ifndef GALE01_272560
-#define GALE01_272560
+#ifndef GALE01_IT_2725
+#define GALE01_IT_2725
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "ft/forward.h"
 #include "it/forward.h"
 
 #include "it/itCharItems.h"
-#include "it/items/itcrazyhandbomb.h"
 #include "it/items/types.h"
-#include "lb/types.h"
+#include "it/types.h"
 
 #include <baselib/forward.h>
 
-#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
+
+struct lb_80014638_arg1_t;
+
+typedef struct it_804D6D40_t {
+    /* 0x00 */ s32 x0;
+    /* 0x04 */ f32 x4;
+    /* 0x08 */ f32 x8;
+    /* 0x0C */ f32 xC;
+    /* 0x10 */ f32 x10;
+    /* 0x14 */ f32 x14;
+    /* 0x18 */ f32 x18;
+} it_804D6D40_t;
+
+typedef struct it_804D6D20_t {
+    ItemCommonData* x0;
+    Article** x4;
+    Article** x8;
+    Article** xC;
+    it_804D6D40_t* x10;
+    Fighter_804D653C_t* x14;
+} it_804D6D20_t;
+
+/* 3F1418 */ extern struct sdata_ItemGXLink it_803F1418[43];
+/* 3F14C4 */ extern struct ItemLogicTable it_803F14C4[43];
+/* 3F1ED8 */ extern char it_803F1ED8[];
+/* 3F1EE4 */ extern char it_803F1EE4[];
+/* 3F1EF0 */ extern char it_803F1EF0[];
+/* 4A0E30 */ extern RandomItemSpawner it_804A0E30;
+/* 4A0E50 */ extern ItemPickTable it_804A0E50;
+/* 4A0E60 */ extern ItemPickTable it_804A0E60;
+/* 4A0E70 */ extern DamageLogEntry it_804A0E70[15];
+/* 4A0F60 */ extern Article* it_804A0F60[30];
+/* 4D6D00 */ extern s8 it_804D6D00;
+/* 4D6D04 */ extern Fighter_804D653C_t* it_804D6D04;
+/* 4D6D08 */ extern s32 it_804D6D08;
+/* 4D6D0C */ extern s32 it_804D6D0C;
+/* 4D6D10 */ extern u32 it_804D6D10;
+/* 4D6D14 */ extern u32 it_804D6D14;
+/* 4D6D18 */ extern u32 it_804D6D18;
+/* 4D6D1C */ extern u8 it_804D6D1C[4];
+/* 4D6D20 */ extern it_804D6D20_t* it_804D6D20;
+/* 4D6D24 */ extern Article** it_804D6D24;
+/* 4D6D28 */ extern ItemCommonData* it_804D6D28;
+/* 4D6D30 */ extern Article** it_804D6D30;
+/* 4D6D38 */ extern Article** it_804D6D38;
+/* 4D6D40 */ extern it_804D6D40_t* it_804D6D40;
 
 /* 272560 */ void it_80272560(Item_GObj*, s32);
 /* 2725D4 */ void it_802725D4(Item_GObj*);
@@ -25,7 +69,6 @@
 /* 272860 */ void it_80272860(Item_GObj*, f32, f32);
 /* 2728C8 */ void it_802728C8(Item_GObj*);
 /* 272940 */ void it_80272940(Item_GObj*);
-/// /* 272980 */ void it_80272980(Item_GObj*, f32);
 /* 272980 */ void it_80272980(Item_GObj*);
 /* 272A18 */ void it_80272A18(HSD_JObj* item_jobj);
 /* 272A3C */ void it_80272A3C(HSD_JObj* item_jobj);
@@ -52,7 +95,6 @@
 /* 27327C */ void it_8027327C(Item_GObj*, enum_t ID1, enum_t ID2);
 /* 2732E4 */ void it_802732E4(Item*, s32);
 /* 273318 */ void it_80273318(Item_GObj*, HSD_Joint*);
-/// /* 273318 */ void it_80273318(Item_GObj*, HSD_Joint*);
 /* 273408 */ void it_80273408(Item_GObj*);
 /* 273454 */ void it_80273454(Item_GObj*);
 /* 27346C */ void it_8027346C(Item_GObj*);
@@ -114,177 +156,4 @@
 /* 275328 */ void it_80275328(HSD_GObj*, ItemLink*);
 /* 275390 */ void it_80275390(Item_GObj*);
 /* 2753BC */ void it_802753BC(Item_GObj*, s16);
-/* 2753DC */ void it_802753DC(Item_GObj*);
-/* 275414 */ void it_80275414(Item_GObj*);
-/* 27542C */ void it_8027542C(Item_GObj*);
-/* 275444 */ void it_80275444(Item_GObj*);
-/* 275474 */ void it_80275474(Item_GObj*);
-/* 2754A4 */ void it_802754A4(Item_GObj*);
-/* 2754BC */ void it_802754BC(Item_GObj*);
-/* 2754D4 */ void it_802754D4(Item_GObj*);
-/* 275504 */ void it_80275504(Item_GObj*);
-/* 275534 */ void it_80275534(Item_GObj*, f32);
-/* 275594 */ void it_80275594(Item_GObj*, s32, f32);
-/* 2755C0 */ void it_802755C0(Item_GObj*, f32);
-/* 275640 */ void it_80275640(Item_GObj*, f32);
-/* 2756D0 */ void it_802756D0(Item_GObj*);
-/* 2756E0 */ void it_802756E0(Item_GObj*);
-/* 27570C */ void it_8027570C(Item_GObj*, s32);
-/* 27572C */ void it_8027572C(Item_GObj*, s32);
-/* 27574C */ void it_8027574C(Item_GObj*);
-/* 275788 */ void it_80275788(Item_GObj*);
-/* 275820 */ void it_80275820(Item_GObj*, Vec3*, Vec3*, s32);
-/* 275870 */ bool it_80275870(Item_GObj*);
-/* 2758D4 */ float it_802758D4(Item_GObj*);
-/* 2759DC */ void it_802759DC(Item_GObj*, Item_GObj*);
-/* 275BC8 */ void it_80275BC8(Item_GObj*, HSD_GObj*);
-/* 275D5C */ void it_80275D5C(Item_GObj*, itECB*);
-/* 275DFC */ void it_80275DFC(Item_GObj*);
-/* 275E98 */ void it_80275E98(Item_GObj*, SpawnItem*);
-/* 276100 */ void it_80276100(Item_GObj*, Vec3*);
-/* 276174 */ void it_80276174(Item_GObj*, Vec3*);
-/* 276214 */ void it_80276214(Item_GObj*);
-/* 276278 */ void it_80276278(Item_GObj*);
-/* 2762B0 */ void it_802762B0(Item*);
-/* 2762BC */ void it_802762BC(Item*);
-/* 2762D8 */ bool it_802762D8(Item_GObj*);
-/* 276308 */ s32 it_80276308(Item_GObj*);
-/* 276348 */ s32 it_80276348(Item_GObj*, Vec3*);
-/* 2763B8 */ bool it_802763B8(Item_GObj*);
-/* 2763E0 */ s32 it_802763E0(Item_GObj*);
-/* 276408 */ void it_80276408(Item_GObj*, CollData*, Vec3*);
-/* 27649C */ f32 it_8027649C(Item_GObj*);
-/* 2765BC */ void it_802765BC(Item_GObj*, enum_t);
-/* 276934 */ void it_80276934(Item_GObj*, enum_t);
-/* 276CB8 */ void it_80276CB8(Item_GObj*);
-/* 276CEC */ void it_80276CEC(Item_GObj*);
-/* 276D9C */ bool it_80276D9C(Item_GObj*, enum_t);
-/* 276FC4 */ void it_80276FC4(Item_GObj*, s32);
-/* 277040 */ bool it_80277040(Item_GObj*);
-/* 27737C */ void it_8027737C(Item_GObj*, Vec3*);
-/* 277544 */ bool it_80277544(Item_GObj*);
-/* 2775F0 */ void it_802775F0(Item_GObj*, Vec3*);
-/* 27770C */ bool it_8027770C(Item_GObj*);
-/* 27781C */ bool it_8027781C(Item_GObj*);
-/* 277C40 */ void it_80277C40(Item_GObj*, s32);
-/* 277D08 */ void it_80277D08(void);
-/* 277D8C */ void fn_80277D8C(HSD_MObj*, u32);
-/* 277F90 */ HSD_TExp* it_80277F90(Item*, HSD_MObj*, HSD_TExp*);
-/* 278108 */ void it_80278108(Item*, HSD_MObj*, HSD_TExp*);
-/* 278574 */ void it_80278574(HSD_GObj*, GXColor*);
-/* 27870C */ void it_8027870C(s32);
-/* 2787B4 */ void it_802787B4(Item_GObj*, s32);
-/* 278800 */ void it_80278800(Item_GObj*, s32, s32, Vec3*, Vec3*, s32, f32);
-/* 278F2C */ void it_80278F2C(Item_GObj*, CommandInfo*);
-/* 2790C0 */ void it_802790C0(Item_GObj*, CommandInfo*);
-/* 279544 */ void it_80279544(Item_GObj*, CommandInfo*);
-/* 2795EC */ void it_802795EC(Item_GObj*, CommandInfo*);
-/* 279680 */ void it_80279680(Item_GObj*, CommandInfo*);
-/* 2796C4 */ void it_802796C4(Item_GObj*, CommandInfo*);
-/* 2796FC */ void it_802796FC(Item_GObj*, CommandInfo*);
-/* 279720 */ void it_80279720(Item_GObj*, CommandInfo*);
-/* 279744 */ void it_80279744(Item_GObj*, CommandInfo*);
-/* 279768 */ void it_80279768(Item_GObj*, CommandInfo*);
-/* 27978C */ void it_8027978C(Item_GObj*, CommandInfo*);
-/* 279888 */ void it_80279888(Item_GObj*, CommandInfo*);
-/* 2798D4 */ void it_802798D4(Item_GObj*, CommandInfo*);
-/* 27990C */ void it_8027990C(Item_GObj*, CommandInfo*);
-/* 279958 */ void it_80279958(Item_GObj*, CommandInfo*);
-/* 2799A8 */ void it_802799A8(Item_GObj*, CommandInfo*);
-/* 2799E4 */ void it_802799E4(Item_GObj*);
-/* 279AF0 */ void it_80279AF0(Item_GObj*, CommandInfo*);
-/* 279B10 */ void it_80279B10(Item_GObj*, CommandInfo*);
-/* 279B30 */ void fn_80279B30(Item_GObj*, CommandInfo*, int arg2);
-/* 279B64 */ void it_80279B64(Item*);
-/* 279B88 */ void it_80279B88(Item*, s32, s32);
-/* 279BBC */ void it_80279BBC(Item*);
-/* 279BE0 */ void it_80279BE0(Item_GObj*);
-/* 279C48 */ void it_80279C48(Item_GObj*);
-/* 279CDC */ void it_80279CDC(Item_GObj*, f32);
-/* 279D38 */ void it_80279D38(Item_GObj*);
-/* 279D5C */ void it_80279D5C(Item_GObj*, f32);
-/* 279E24 */ void it_80279E24(Item_GObj*);
-/* 279FF8 */ void it_80279FF8(Item_GObj*);
-/* 27A09C */ bool it_8027A09C(Item_GObj*);
-/* 27A118 */ bool it_8027A118(Item_GObj*, HSD_GObjEvent);
-/* 27A13C */ void it_8027A13C(Item_GObj*);
-/* 27A160 */ void it_8027A160(HSD_JObj*, Item*);
-/* 27A344 */ void it_8027A344(Item_GObj*);
-/* 27A364 */ s32 it_8027A364(Item*);
-/* 27A4D4 */ s32 it_8027A4D4(Item*);
-/* 27A780 */ s32 it_8027A780(Item*, void*);
-/* 27A9B8 */ s32 it_8027A9B8(Item*);
-/* 27AAA0 */ void it_8027AAA0(Item_GObj*, Item*, s32);
-/* 27AB64 */ bool it_8027AB64(Item_GObj*);
-/* 27ADEC */ void it_8027ADEC(int, Item_GObj*, HSD_JObj*, f32);
-/* 27AE34 */ bool it_8027AE34(Item_GObj*);
-/* 27AF50 */ bool it_8027AF50(Item_GObj*);
-/* 27B070 */ void it_8027B070(Item_GObj*, Fighter_GObj*);
-/* 27B0C4 */ void it_8027B0C4(Item_GObj*, SpawnItem*);
-/* 27B1F4 */ void it_8027B1F4(Item_GObj*);
-/// /* 27B1F4 */ void it_8027B1F4(Item_GObj*, int);
-/* 27B288 */ void it_8027B288(Item_GObj*, u32);
-/* 27B330 */ void it_8027B330(Item_GObj*, u32);
-/* 27B378 */ void it_8027B378(Fighter_GObj*, Item_GObj*, f32);
-/* 27B408 */ void it_8027B408(Item_GObj*, Item_GObj*, f32);
-/* 27B4A4 */ void it_8027B4A4(Fighter_GObj*, Item_GObj*);
-/* 27B508 */ void it_8027B508(Item_GObj*, Item_GObj*);
-/* 27B564 */ void it_8027B564(Item_GObj*);
-/* 27B5B0 */ Item_GObj* it_8027B5B0(ItemKind, Vec3*, HSD_JObj*, Vec3*, bool);
-/* 27B730 */ void it_8027B730(Item_GObj*);
-/* 27B798 */ bool it_8027B798(Item_GObj*, Vec3*);
-/* 27B964 */ void it_8027B964(Item_GObj*, bool);
-/* 27BA54 */ int it_8027BA54(HSD_GObj*, Vec3*);
-/* 27BB1C */ void it_8027BB1C(Vec3*, Vec3*);
-/* 27BBF4 */ void it_8027BBF4(Item_GObj*, bool, f64, f32);
-/* 27C0A8 */ void it_8027C0A8(Item_GObj*, f32, f32);
-/* 27C0CC */ void it_8027C0CC(Item_GObj*, f32, f32);
-/* 27C0F0 */ void it_8027C0F0(Item_GObj*, Vec3*, f64, f32);
-/* 27C56C */ void it_8027C56C(Item_GObj*, f32);
-/* 27C794 */ bool it_8027C794(Item_GObj*);
-/* 27C79C */ bool it_8027C79C(Item_GObj*);
-/* 27C824 */ bool it_8027C824(Item_GObj*, s32 (*arg1)(Item_GObj*));
-/* 27C8B0 */ void it_2725_Logic9_Destroyed(Item_GObj*);
-/* 27C8D0 */ void it_8027C8D0(Vec3*, Vec3*, f32);
-/* 27C9D8 */ void it_8027C9D8(Item*);
-/* 27CA7C */ bool it_8027CA7C(HSD_GObj*);
-/* 27CAD8 */ void it_8027CAD8(Item_GObj*);
-/* 27CB3C */ void it_8027CB3C(Item_GObj*);
-/* 27CBA4 */ void it_8027CBA4(Item_GObj*);
-/* 27CBFC */ f32 it_8027CBFC(Item_GObj*);
-/* 27CC88 */ Item_GObj* it_8027CC88(Item_GObj*);
-/* 27CE18 */ void it_8027CE18(Item_GObj*);
-/* 27CE44 */ void it_8027CE44(Item_GObj*);
-/* 27CE64 */ void it_8027CE64(Item_GObj*, HSD_GObj*, void*);
-/* 3F14C4 */ extern struct ItemLogicTable it_803F14C4[43];
-/* 3F23CC */ extern struct ItemLogicTable it_803F23CC[47];
-/* 3F3100 */ extern struct ItemLogicTable it_803F3100[118];
-/* 3F4D20 */ extern struct ItemLogicTable it_803F4D20[30];
-/* 4A0E30 */ extern RandomItemSpawner it_804A0E30;
-/* 4A0E50 */ extern ItemPickTable it_804A0E50;
-/* 4A0E60 */ extern ItemPickTable it_804A0E60;
-/* 4A0F60 */ extern Article* it_804A0F60[];
-/* 4D6D00 */ extern s8 it_804D6D00;
-/* 4D6D08 */ extern s32 it_804D6D08;
-/* 4D6D0C */ extern s32 it_804D6D0C;
-/* 4D6D10 */ extern u32 it_804D6D10;
-/* 4D6D14 */ extern u32 it_804D6D14;
-/* 4D6D18 */ extern u32 it_804D6D18;
-/* 4D6D24 */ extern Article** it_804D6D24;
-/* 4D6D28 */ extern ItemCommonData* it_804D6D28;
-/* 4D6D30 */ extern Article** it_804D6D30;
-/* 4D6D38 */ extern Article** it_804D6D38;
-
-typedef struct it_804D6D40_t {
-    /* 0x00 */ s32 x0;
-    /* 0x04 */ f32 x4;
-    /* 0x08 */ f32 x8;
-    /* 0x0C */ f32 xC;
-    /* 0x10 */ f32 x10;
-    /* 0x14 */ f32 x14;
-    /* 0x18 */ f32 x18;
-} it_804D6D40_t;
-
-/* 4D6D40 */ extern it_804D6D40_t* it_804D6D40;
-
 #endif

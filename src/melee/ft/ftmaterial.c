@@ -6,8 +6,9 @@
 
 #include "ft/forward.h"
 
-#include "ft/ft_0C31.h"
+#include "ft/ft_0C8C.h"
 #include "ft/ft_0D4D.h"
+#include "ft/ftCo_800C7CA0.h"
 #include "ft/ftdevice.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_09F4.h"

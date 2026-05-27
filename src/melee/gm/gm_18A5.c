@@ -55,9 +55,8 @@ void fn_8018A514(int count, float val)
     BracketEntry* entries = lbl_80473AB8;
     s32 region;
     BracketSrcEntry* src;
-    s32 i;
+    int i;
     s32 n;
-    BracketEntry* entry;
 
     if (count < 9) {
         region = 0;
@@ -67,7 +66,7 @@ void fn_8018A514(int count, float val)
         region = 1;
     }
 
-    src = *(BracketSrcEntry**) ((u8*) entries + region * 4 + 0x3700);
+    src = ((BracketSrcEntry**) ((u8*) entries + 0x3700))[region];
 
     if (count < 9) {
         for (i = 0; i < count; i++) {
@@ -84,44 +83,42 @@ void fn_8018A514(int count, float val)
     }
 
     n = lbl_803D9D20.x0[count + 0x20];
-    entry = entries;
 
     for (i = 0; i < n; i++) {
-        entry->x0 = src->x0;
-        entry->x1 = src->x1;
-        entry->x2 = src->x2;
-        entry->x3 = src->x3;
-        entry->x4 = src->x4;
-        entry->x5 = src->x5;
-        entry->x6 = src->x6;
-        entry->x1C = val;
-        entry->xC = src->x8;
-        entry->x14 = src->xC;
-        entry->x10 = src->x10;
-        entry->x18 = src->x14;
-        entry->x20.r = src->x18;
-        entry->x20.g = src->x1A;
-        entry->x20.b = src->x1C;
-        entry->x20.a = src->x1E;
-        entry->x24 = src->x19;
-        entry->x25 = src->x1B;
-        entry->x26 = src->x1D;
-        entry->x27 = src->x1F;
-        entry->x28 = src->x20;
-        entry->x52 = 9;
-        entry->x32 = 0;
-        entry->x7E = 9;
-        entry->x5E = 0;
-        entry->xAA = 9;
-        entry->x8A = 0;
-        entry->xD6 = 9;
-        entry->xB6 = 0;
-        entry->x30 = src->x21;
-        entry->x5C = src->x22;
-        entry->x88 = src->x23;
-        entry->xB4 = src->x24;
+        entries[i].x0 = src->x0;
+        entries[i].x1 = src->x1;
+        entries[i].x2 = src->x2;
+        entries[i].x3 = src->x3;
+        entries[i].x4 = src->x4;
+        entries[i].x5 = src->x5;
+        entries[i].x6 = src->x6;
+        entries[i].x1C = val;
+        entries[i].xC = src->x8;
+        entries[i].x14 = src->xC;
+        entries[i].x10 = src->x10;
+        entries[i].x18 = src->x14;
+        entries[i].x20.r = src->x18;
+        entries[i].x20.g = src->x1A;
+        entries[i].x20.b = src->x1C;
+        entries[i].x20.a = src->x1E;
+        entries[i].x24 = src->x19;
+        entries[i].x25 = src->x1B;
+        entries[i].x26 = src->x1D;
+        entries[i].x27 = src->x1F;
+        entries[i].x28 = src->x20;
+        entries[i].x52 = 9;
+        entries[i].x32 = 0;
+        entries[i].x7E = 9;
+        entries[i].x5E = 0;
+        entries[i].xAA = 9;
+        entries[i].x8A = 0;
+        entries[i].xD6 = 9;
+        entries[i].xB6 = 0;
+        entries[i].x30 = src->x21;
+        entries[i].x5C = src->x22;
+        entries[i].x88 = src->x23;
+        entries[i].xB4 = src->x24;
         src++;
-        entry++;
     }
 
     if (region == 0) {
@@ -849,7 +846,6 @@ void fn_8018DF68(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
 }
 
 /// @todo Currently 98.8% match - permuter couldn't improve beyond score 140
-extern f32 lbl_804DA6A0; // 0.5f
 
 void fn_8018E46C(HSD_GObj* gobj, int unused)
 {
@@ -871,25 +867,25 @@ void fn_8018E46C(HSD_GObj* gobj, int unused)
     hsd_80391A04(1.0F, 1.0F, 1);
     switch (data->x3) {
     case 0:
-        fn_8018C8D4(data, data->xC - (s32) (lbl_804DA6A0 * data->x1C),
+        fn_8018C8D4(data, data->xC - (s32) (0.5f * data->x1C),
                     -data->x10, data->x14, -data->x18, r30, data->xC,
-                    lbl_804DA6A0);
+                    0.5f);
         break;
     case 1:
-        fn_8018D50C(data, data->xC - (s32) (lbl_804DA6A0 * data->x1C),
+        fn_8018D50C(data, data->xC - (s32) (0.5f * data->x1C),
                     -data->x10, data->x14, -data->x18, r30, data->xC,
-                    lbl_804DA6A0);
+                    0.5f);
         break;
     case 2:
-        fn_8018DC18(data, data->xC - (s32) (lbl_804DA6A0 * data->x1C),
+        fn_8018DC18(data, data->xC - (s32) (0.5f * data->x1C),
                     -data->x10, data->x14, -data->x18, r30, data->xC,
-                    lbl_804DA6A0);
+                    0.5f);
         break;
     case 3:
         new_var = -data->x18;
-        fn_8018DF68(data, data->xC - (s32) (lbl_804DA6A0 * data->x1C),
+        fn_8018DF68(data, data->xC - (s32) (0.5f * data->x1C),
                     -data->x10, data->x14, new_var, r30, data->xC,
-                    lbl_804DA6A0);
+                    0.5f);
         break;
     }
 }
@@ -1766,7 +1762,6 @@ void fn_801904D0(void)
 
 #pragma push
 #pragma auto_inline off
-extern f32 lbl_804DA6D4;
 
 void fn_80190520(f32 x, f32 y, f32 z)
 {
@@ -1783,7 +1778,7 @@ void fn_80190520(f32 x, f32 y, f32 z)
         sp14.y = y;
         sp14.z = z;
         HSD_CObjSetInterest(tmp->cobj, &sp14);
-        sp14.z = lbl_804DA6D4 + z;
+        sp14.z = 415.6922f + z;
         HSD_CObjSetEyePosition(tmp->cobj, &sp14);
     }
 }
@@ -1941,10 +1936,6 @@ struct Lbl804799B8_t {
 static struct Lbl804799B8_t lbl_804799B8;
 
 extern u8 lbl_803D9F80[];
-extern f32 lbl_804DA6EC; // 537.0f
-extern f32 lbl_804DA6F0; // 149.0f
-extern f32 lbl_804DA6F4; // 409.0f
-extern f32 lbl_804DA6F8; // 47.0f
 extern f32 lbl_804DA6FC; // 143.0f
 extern f32 lbl_804DA700; // 183.0f
 extern f32 lbl_804DA704; // 48.6f
@@ -2017,10 +2008,10 @@ void fn_80190ABC(int mode)
     case 4: {
         HSD_SisLib_803A7664(tm->x518[0]);
         {
-            f32 f_col_mul = lbl_804DA6F0;
-            f32 f_col_add = lbl_804DA6EC;
-            f32 f_row_mul = lbl_804DA6F8;
-            f32 f_row_add = lbl_804DA6F4;
+            f32 f_col_mul = 149.0f;
+            f32 f_col_add = 537.0f;
+            f32 f_row_mul = 47.0f;
+            f32 f_row_add = 409.0f;
             for (i = 0; i < 0x24; i++) {
                 s32 col = i % 4;
                 s32 row = i / 4;
@@ -7041,8 +7032,6 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
         }
     }
 }
-
-/// #fn_8019AF50
 
 extern u8 lbl_804D6680[8];
 extern u8 lbl_803B7D04[20];

@@ -446,6 +446,30 @@ s32 it_802BF28C(ItemLink* link, Vec3* target, itYoyoAttributes* attrs,
     }
 }
 
+static inline void it_802BF4A0_adjust_tail(ItemLink* cur, Vec3* target,
+                                           Vec3* dir2, f32 size)
+{
+    ItemLink* tail;
+    ItemLink* prev;
+
+    prev = cur->prev;
+    tail = cur;
+    it_802A3C98(&tail->pos, target, dir2);
+    cur->pos.x = (dir2->x * size) + target->x;
+    cur->pos.y = (dir2->y * size) + target->y;
+    cur->pos.z = (dir2->z * size) + target->z;
+
+    while (prev != NULL) {
+        if (it_802A3C98(&prev->pos, &tail->pos, dir2) > size) {
+            prev->pos.x = (dir2->x * size) + tail->pos.x;
+            prev->pos.y = (dir2->y * size) + tail->pos.y;
+            prev->pos.z = (dir2->z * size) + tail->pos.z;
+        }
+        tail = prev;
+        prev = prev->prev;
+    }
+}
+
 s32 it_802BF4A0(ItemLink* link, Vec3* target, itYoyoAttributes* attrs,
                 Item* ip)
 {
@@ -455,8 +479,6 @@ s32 it_802BF4A0(ItemLink* link, Vec3* target, itYoyoAttributes* attrs,
     Vec3 dir2;
     ItemLink* cur;
     ItemLink* next;
-    ItemLink* tail;
-    ItemLink* prev;
     s32 coll_flags;
     s32 count;
     f32 size;
@@ -528,22 +550,7 @@ s32 it_802BF4A0(ItemLink* link, Vec3* target, itYoyoAttributes* attrs,
         next = next->next;
     }
 
-    prev = cur->prev;
-    tail = cur;
-    it_802A3C98(&tail->pos, target, &dir2);
-    cur->pos.x = (dir2.x * size) + target->x;
-    cur->pos.y = (dir2.y * size) + target->y;
-    cur->pos.z = (dir2.z * size) + target->z;
-
-    while (prev != NULL) {
-        if (it_802A3C98(&prev->pos, &tail->pos, &dir2) > size) {
-            prev->pos.x = (dir2.x * size) + tail->pos.x;
-            prev->pos.y = (dir2.y * size) + tail->pos.y;
-            prev->pos.z = (dir2.z * size) + tail->pos.z;
-        }
-        tail = prev;
-        prev = prev->prev;
-    }
+    it_802BF4A0_adjust_tail(cur, target, &dir2, size);
 
     link->vel.x *= 0.9f;
     return 2;
@@ -789,38 +796,12 @@ void it_802C0010(Item_GObj* gobj, Vec3* vel)
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
 }
 
-#ifdef MWERKS_GEKKO
-
-#pragma push
-asm void it_2725_Logic59_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
-{
-    // clang-format off
-    nofralloc
-    mflr r0
-    stw r0, 0x4(r1)
-    stwu r1, -0x20(r1)
-    stw r31, 0x1c(r1)
-    stw r30, 0x18(r1)
-    mr r30, r4
-    lwz r31, 0x2c(r3)
-    bl it_8026B894
-    lwz r0, 0xde4(r31)
-    cmplw r0, r30
-    lwz r0, 0x24(r1)
-    lwz r31, 0x1c(r1)
-    lwz r30, 0x18(r1)
-    addi r1, r1, 0x20
-    mtlr r0
-    blr
-    // clang-format on
-}
-#pragma pop
-
-#else
-
 void it_2725_Logic59_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
-    NOT_IMPLEMENTED;
+    Item* ip = GET_ITEM(gobj);
+    it_8026B894(gobj, ref_gobj);
+    {
+        HSD_GObj* volatile* owner_ptr = &ip->xDD4_itemVar.nessyoyo.x10;
+        (void) ((*owner_ptr == ref_gobj) ? 0 : 0);
+    }
 }
-
-#endif
