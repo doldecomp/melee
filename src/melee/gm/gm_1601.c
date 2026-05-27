@@ -5,6 +5,7 @@
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
 #include "gmstamina.h"
+#include "placeholder.h"
 #include "stddef.h"
 
 #include "baselib/gobjplink.h"
@@ -25,8 +26,8 @@
 #include "lb/lblanguage.h"
 #include "lb/lbtime.h"
 #include "mn/mnstagesel.h"
-#include "pl/plbonus.h"
 #include "pl/player.h"
+#include "pl/plbonus.h"
 #include "sc/types.h"
 #include "ty/toy.h"
 
@@ -3001,7 +3002,8 @@ void gm_80166CCC(MatchEnd* arg0, MatchEnd* arg1)
             }
         }
     }
-    for (i = 0; i < 5; i++) {
+
+    for (i = 0; i < 6; i++) {
         if (arg1->team_standings[i].active != 0) {
             team_count += 1;
         }
@@ -3599,7 +3601,6 @@ void gm_80168638(MatchEnd* arg0)
     u8 spC[4];
     s32 i;
     s8* temp_r3;
-
     if ((u8) gmMainLib_8015CC34()->handicap == 1) {
         for (i = 0; i < 4; i++) {
             temp_r3 = gmMainLib_8015CE44(i, arg0->player_standings[i].x4);
