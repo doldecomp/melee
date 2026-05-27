@@ -18,6 +18,7 @@
 
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itmaplib.h"
 #include "it/item.h"
 #include "it/items/it_2E5A.h"
 #include "lb/lb_00F9.h"
@@ -37,7 +38,6 @@
 #include <baselib/tev.h>
 
 extern HSD_ObjAllocUnk Item_804A0C64;
-extern ItemCommonData* it_804D6D28;
 
 extern u64 __shr2u(u32, u32, s32);
 
