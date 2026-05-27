@@ -3139,13 +3139,51 @@ melee/it/itcoll.c:
 	.sdata2     start:0x804DC6C8 end:0x804DC708
 
 melee/it/it_2725.c:
-	.text       start:0x80272560 end:0x8027CF00
-	.rodata     start:0x803B85F0 end:0x803B8600
-	.data       start:0x803F1418 end:0x803F5468
+	.text       start:0x80272560 end:0x802753DC
+	.data       start:0x803F1418 end:0x803F1F38
 	.bss        start:0x804A0E30 end:0x804A0FD8
-	.sdata      start:0x804D5188 end:0x804D51F0
+	.sdata      start:0x804D5188 end:0x804D5198
 	.sbss       start:0x804D6D00 end:0x804D6D48
-	.sdata2     start:0x804DC708 end:0x804DC830
+	.sdata2     start:0x804DC708 end:0x804DC730
+
+melee/it/ithitbox.c:
+	.text       start:0x802753DC end:0x80275BC8
+	.sdata2     start:0x804DC730 end:0x804DC73C
+
+melee/it/itmaplib.c:
+	.text       start:0x80275BC8 end:0x80277D08
+	.data       start:0x803F1F38 end:0x803F1F90
+	.sdata      start:0x804D5198 end:0x804D51B0
+	.sdata2     start:0x804DC73C end:0x804DC770
+
+melee/it/itmaterial.c:
+	.text       start:0x80277D08 end:0x8027870C
+	.data       start:0x803F1F90 end:0x803F20E0
+	.sdata      start:0x804D51B0 end:0x804D51C0
+
+melee/it/iteffect.c:
+	.text       start:0x8027870C end:0x80278F2C
+	.data       start:0x803F20E0 end:0x803F22A8
+	.sdata2     start:0x804DC770 end:0x804DC790
+
+melee/it/itanimlist.c:
+	.text       start:0x80278F2C end:0x80279C48
+	.data       start:0x803F22A8 end:0x803F2310
+	.sdata      start:0x804D51C0 end:0x804D51D0
+	.sdata2     start:0x804DC790 end:0x804DC7B8
+
+melee/it/it_279C.c:
+	.text       start:0x80279C48 end:0x8027B5B0
+	.data       start:0x803F2310 end:0x803F5428
+	.sdata      start:0x804D51D0 end:0x804D51E0
+	.sdata2     start:0x804DC7B8 end:0x804DC7D0
+
+melee/it/itzako.c:
+	.text       start:0x8027B5B0 end:0x8027CF00
+	.rodata     start:0x803B85F0 end:0x803B8600
+	.data       start:0x803F5428 end:0x803F5468
+	.sdata      start:0x804D51E0 end:0x804D51F0
+	.sdata2     start:0x804DC7D0 end:0x804DC830
 
 melee/it/items/itcapsule.c:
 	.text       start:0x8027CF00 end:0x8027D670
