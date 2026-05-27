@@ -691,6 +691,24 @@ GXColor gm_80160968(u8 arg0)
     return lbl_803B7864[arg0];
 }
 
+const char* gm_80160980_noinline(u8 ckind);
+const char* gm_80160980_noinline(u8 ckind)
+{
+    return gm_80160980(ckind);
+}
+
+const char* gm_80160980_noinline2(u8 ckind);
+const char* gm_80160980_noinline2(u8 ckind)
+{
+    return gm_80160980_noinline(ckind);
+}
+
+const char* gm_80160980_noinline3(u8 ckind);
+const char* gm_80160980_noinline3(u8 ckind)
+{
+    return gm_80160980_noinline2(ckind);
+}
+
 /// Get SJIS character name for a given CharacterKind
 const char* gm_80160980(u8 ckind)
 {
@@ -699,6 +717,24 @@ const char* gm_80160980(u8 ckind)
     } else {
         return lbl_803D4D74[ckind];
     }
+}
+
+const char* fn_801609E0_noinline(u8 ckind);
+const char* fn_801609E0_noinline(u8 ckind)
+{
+    return fn_801609E0(ckind);
+}
+
+const char* fn_801609E0_noinline2(u8 ckind);
+const char* fn_801609E0_noinline2(u8 ckind)
+{
+    return fn_801609E0_noinline(ckind);
+}
+
+const char* fn_801609E0_noinline3(u8 ckind);
+const char* fn_801609E0_noinline3(u8 ckind)
+{
+    return fn_801609E0_noinline2(ckind);
 }
 
 const char* fn_801609E0(u8 ckind)
@@ -779,11 +815,8 @@ void gm_80160C90(HSD_Text* text, u8 fighter_id, bool arg2)
         text->default_kerning = 1;
     }
 
-    if ((u8) arg2) {
-        var_r29 = fn_801609E0(fighter_id);
-    } else {
-        var_r29 = gm_80160980(fighter_id);
-    }
+    var_r29 = ((u8) arg2) ? fn_801609E0_noinline3(fighter_id)
+                          : gm_80160980_noinline3(fighter_id);
 
     if (lbLang_IsSavedLanguageUS() != 0) {
         var_r5 = 0;
