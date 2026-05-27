@@ -4185,10 +4185,12 @@ s32 fn_801695BC(u8 arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
     return (s32) temp_r3;
 }
 
+#pragma push
+#pragma dont_inline on
 void fn_801697FC(s8 character, s8 costume, s8 new_character, s8 new_costume,
                  s8* buf)
 {
-    u8 ncolors = gm_80169238_noinline(character);
+    u8 ncolors = gm_80169238(character);
     int i;
 
     if (character == 0x21) {
@@ -4201,6 +4203,7 @@ void fn_801697FC(s8 character, s8 costume, s8 new_character, s8 new_costume,
         buf[i] = costume;
     }
 }
+#pragma pop
 
 void fn_8016989C(u8* arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
 {
@@ -4210,6 +4213,8 @@ void fn_8016989C(u8* arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
     };
 }
 
+#pragma push
+#pragma dont_inline on
 void fn_80169900(u8 arg0, struct lbl_8046B488_t* arg1, s8* arg2, s8* arg3)
 {
     s32 var_r28 = 0;
@@ -4248,13 +4253,13 @@ void fn_80169900(u8 arg0, struct lbl_8046B488_t* arg1, s8* arg2, s8* arg3)
             } else {
                 var_r27 = 5;
                 if (HSD_Randi(2) != 0) {
-                    if ((s32) arg1->x1 != 0x21 && gm_80164840_noinline(arg1->x1)) {
+                    if ((s32) arg1->x1 != 0x21 && gm_80164840(arg1->x1)) {
                         arg2[var_r28] = arg1->x1;
                     } else {
                         arg2[var_r28] = arg1->x0;
                     }
                 } else {
-                    if ((s32) arg1->x2 != 0x21 && gm_80164840_noinline(arg1->x2)) {
+                    if ((s32) arg1->x2 != 0x21 && gm_80164840(arg1->x2)) {
                         arg2[var_r28] = arg1->x2;
                     } else {
                         arg2[var_r28] = arg1->x0;
@@ -4267,6 +4272,7 @@ void fn_80169900(u8 arg0, struct lbl_8046B488_t* arg1, s8* arg2, s8* arg3)
     }
     }
 }
+#pragma pop
 
 long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
 {
