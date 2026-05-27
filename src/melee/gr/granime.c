@@ -832,9 +832,7 @@ void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
         return;
     }
     archive = grDatFiles_801C6330(map_id);
-    if (archive == NULL) {
-        __assert("granime.c", 0x4DE, "archive");
-    }
+    HSD_ASSERT(0x4DE, "archive");
     if ((arg3 & 1) &&
         (ajp = archive->unk4->unk8[map_id].unk4, ajp != NULL) &&
         (aj_t = ajp[arg4], aj_t != NULL))
@@ -901,9 +899,7 @@ void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
     }
     grAnime_801C752C(jobj, arg5, var_r29, HSD_AObjSetRate, 1, farg1);
     archive = grDatFiles_801C6330(map_id);
-    if (archive == NULL) {
-        __assert("granime.c", 0x148, "archive");
-    }
+    HSD_ASSERT(0x148, archive);
     eflags = (u8*) archive->unk4->unk8[map_id].x28;
     if (eflags != NULL) {
         if (eflags[arg4] != 0) {
@@ -961,9 +957,7 @@ void grAnime_801C8138(HSD_GObj* gobj, enum_t arg1, bool arg2)
         return;
     }
     archive = grDatFiles_801C6330(arg1);
-    if (archive == NULL) {
-        __assert("granime.c", 0x556, "archive");
-    }
+    HSD_ASSERT(0x556, archive);
     joint = archive->unk4->unk8[arg1].unk0;
     if (HSD_JObjGetChild(jobj) != NULL) {
         jobj = HSD_JObjGetChild(jobj);
@@ -994,9 +988,7 @@ void grAnime_801C8138(HSD_GObj* gobj, enum_t arg1, bool arg2)
     HSD_JObjAddAnimAll(jobj, aj, ma, sa);
     HSD_JObjReqAnimAll(jobj, 0.0f);
     archive = grDatFiles_801C6330(arg1);
-    if (archive == NULL) {
-        __assert("granime.c", 0x148, "archive");
-    }
+    HSD_ASSERT(0x148, archive);
     flags = (u8*) archive->unk4->unk8[arg1].x28;
     if (flags != NULL) {
         flag = flags[arg2];
@@ -1139,7 +1131,5 @@ void grAnime_801C8780(HSD_GObj* gobj, u32 arg1, u32 arg2, f32 arg3, f32 arg4)
 
     Ground_801C498C();
     archive = grDatFiles_801C6330(arg1);
-    if (archive == NULL) {
-        __assert("granime.c", 0x617, "0");
-    }
+    HSD_ASSERT(0x617, archive);
 }
