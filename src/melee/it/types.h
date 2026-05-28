@@ -907,8 +907,4 @@ struct it_8026F3D4_arg1_t {
     Item_GObj* x8;
 };
 
-struct it_8026F3D4_body_t {
-    ItemKind x0[8]; // This array length was a guess
-};
-
 #endif

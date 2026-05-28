@@ -23,7 +23,11 @@
 #include "pl/plbonuslib.h"
 #include "ty/tydisplay.h"
 
-extern const Vec3 it_803B85A8[6];
+const Vec3 it_803B85A8[6] = {
+    { 1.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 1.0f },
+    { 0.0f, 1.0f, 0.0f }, { 0.0f, 1.0f, 0.0f },
+    { 0.0f, 1.0f, 0.0f }, { 0.0f, 1.0f, 0.0f },
+};
 
 static f32 sdata2_ordering(void)
 {
