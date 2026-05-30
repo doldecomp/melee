@@ -155,7 +155,6 @@ Short|Full|Notes
 `pl`|Player|As in users.
 `sc`|Scene|Menu, versus mode, single-player, etc. The game mode.
 `ty`|Toy|Trophies.
-`un`|Unknown|This isn't an actual folder in the original code.
 `vi`|Visual|Cutscenes, etc.
 
 #### `melee/ft/chara`
