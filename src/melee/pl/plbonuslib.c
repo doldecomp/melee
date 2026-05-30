@@ -1268,7 +1268,7 @@ void pl_80040688(int arg0, int arg1, int arg2)
         bits = &temp_r3->x0_staleMoveTable.xCBC;
         xCC0 = &temp_r3->x0_staleMoveTable.xCC0;
 
-        if (!unk_cond(arg1, arg2)) {
+        if (!unk_cond(arg1, temp_r0)) {
             temp_r0_2 = bits->x3;
             if (temp_r0_2 >= 0x33 && temp_r0_2 <= 0x3D) {
                 pl_80038788(temp_r0, 0x2A, 1);
