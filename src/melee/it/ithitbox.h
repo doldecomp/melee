@@ -30,6 +30,5 @@
 /* 275820 */ void it_80275820(Item_GObj*, Vec3*, Vec3*, s32);
 /* 275870 */ bool it_80275870(Item_GObj*);
 /* 2758D4 */ float it_802758D4(Item_GObj*);
-/* 2759DC */ void it_802759DC(Item_GObj*, Item_GObj*);
 
 #endif

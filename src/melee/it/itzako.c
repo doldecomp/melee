@@ -2,6 +2,7 @@
 
 #include "it_266F.h"
 #include "it_2725.h"
+#include "it_3F14.h"
 #include "ithitbox.h"
 #include "itmaplib.h"
 #include "itmaterial.h"

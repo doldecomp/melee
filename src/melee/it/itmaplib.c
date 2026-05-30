@@ -1,6 +1,7 @@
 #include "itmaplib.h"
 
 #include "it_2725.h"
+#include "it_3F14.h"
 #include "iteffect.h"
 #include "ithitbox.h"
 #include "math.h"
@@ -11,10 +12,85 @@
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
-#include <math_ppc.h>
-
 extern const Vec3 it_803B8570;
 extern const Vec3 it_803B857C;
+
+void it_802759DC(Item_GObj* item_gobj1, Item_GObj* item_gobj2)
+{
+    Vec3 sp44;
+    f32 sp40;
+    Vec3 sp34;
+    CollData* coll1;
+    CollData* coll2;
+    Item* item1;
+    f32 temp_f31;
+    bool chk;
+    s32 temp_r3_2;
+    f32 zero;
+    u8 _1[8];
+    Vec3 sp1C;
+    u8 _2[8];
+
+    chk = false;
+    item1 = GET_ITEM(item_gobj1);
+    sp44 = item1->pos;
+    coll2 = it_8026C100(item_gobj2);
+    coll1 = &item1->x378_itemColl;
+    if (coll2 != NULL) {
+        if (mpLib_80054ED8(coll2->floor.index)) {
+            int floor_index;
+            temp_r3_2 = mpLib_8005199C_Floor(&sp44, -1, -1);
+            if (temp_r3_2 != -1 && (floor_index = coll2->floor.index,
+                                    mpLinesConnected(temp_r3_2, floor_index)))
+            {
+                coll1->floor.index = temp_r3_2;
+                mpLib_8004DD90_Floor(temp_r3_2, &sp44, &sp40, 0, NULL);
+                if (sp40 >= it_804D6D28->xF0) {
+                    item1->pos.x = sp44.x;
+                    item1->pos.y = sp44.y + sp40;
+                    item1->pos.z = sp44.z;
+                    mpColl_80043680(coll1, &item1->pos);
+                    chk = true;
+                    it_802762B0(item1);
+                }
+            }
+        }
+        if (!chk) {
+            temp_f31 = 0.5f * (coll2->ecb.top.y + coll2->ecb.bottom.y);
+            it_8026BC90(item_gobj2, &sp1C);
+            zero = 0.0f;
+            sp34.x = sp1C.x + zero;
+            sp34.y = sp1C.y + temp_f31;
+            sp34.z = sp1C.z + zero;
+            coll1->last_pos = sp34;
+            mpColl_80043670(coll1);
+            coll1->cur_pos = sp44;
+            if (mpColl_800471F8(coll1)) {
+                it_802762B0(item1);
+                item1->pos = coll1->cur_pos;
+                return;
+            }
+            it_802762BC(item1);
+            item1->pos = sp44;
+        }
+    }
+}
+
+static f32 sdata2_ordering(void)
+{
+    volatile f32 data_0 = -1.0f;
+    volatile f32 data_1 = 1.0f;
+    volatile f64 data_2 = 4503601774854144.0;
+    volatile f32 data_3 = 1.5f;
+    volatile f32 data_4 = 0.00001f;
+    volatile f64 data_5 = 0.5;
+    volatile f64 data_6 = 3.0;
+    volatile f32 data_7 = 0.85f;
+    volatile f32 data_8 = 0.01f;
+
+    return data_0 + data_1 + data_2 + data_3 + data_4 + data_5 + data_6 +
+           data_7 + data_8;
+}
 
 void it_80275BC8(Item_GObj* item_gobj, HSD_GObj* arg_gobj)
 {
@@ -196,7 +272,6 @@ void it_80276174(Item_GObj* item_gobj, Vec3* pos)
     }
 }
 
-/// bool it_80276214(Item_GObj* item_gobj) {}
 void it_80276214(Item_GObj* item_gobj)
 {
     Item* item;
@@ -316,8 +391,6 @@ s32 it_802763E0(Item_GObj* item_gobj)
     return result;
 }
 
-#pragma push
-#pragma dont_inline on
 void it_80276408(Item_GObj* item_gobj, CollData* coll, Vec3* vec)
 {
     if (coll->env_flags & Collide_LeftWallMask) {
@@ -333,10 +406,10 @@ void it_80276408(Item_GObj* item_gobj, CollData* coll, Vec3* vec)
         *vec = coll->floor.normal;
     }
 }
-#pragma pop
 
 f32 it_8027649C(Item_GObj* item_gobj)
 {
+    u8 _pad[4];
     Vec3 sp20;
     Vec3 sp14;
     f32 angle;
@@ -349,18 +422,7 @@ f32 it_8027649C(Item_GObj* item_gobj)
     sp14.z = 0.0f;
     sp14.x = 0.0f;
     sp14.y = 1.0f;
-    if (coll->env_flags & Collide_LeftWallMask) {
-        sp20 = coll->left_facing_wall.normal;
-    }
-    if (coll->env_flags & Collide_RightWallMask) {
-        sp20 = coll->right_facing_wall.normal;
-    }
-    if (coll->env_flags & Collide_CeilingMask) {
-        sp20 = coll->ceiling.normal;
-    }
-    if (coll->env_flags & Collide_FloorMask) {
-        sp20 = coll->floor.normal;
-    }
+    it_80276408(item_gobj, coll, &sp20);
     angle = lbVector_Angle(&sp20, &sp14);
     if (sp20.x < 0.0f) {
         int_dir = -1;
@@ -371,78 +433,52 @@ f32 it_8027649C(Item_GObj* item_gobj)
     return ret = item->facing_dir * (angle * int_dir);
 }
 
+static inline f32 it_8027649C_ref(Item_GObj* item_gobj, Vec3* sp14, Vec3* sp20)
+{
+    f32 angle;
+    s32 int_dir;
+    Item* item = GET_ITEM(item_gobj);
+    f32 ret; // permuterslop
+    CollData* coll = &item->x378_itemColl;
+    PAD_STACK(4);
+
+    sp14->z = 0.0f;
+    sp14->x = 0.0f;
+    sp14->y = 1.0f;
+    it_80276408(item_gobj, coll, sp20);
+    angle = lbVector_Angle(sp20, sp14);
+    if (sp20->x < 0.0f) {
+        int_dir = -1;
+    } else {
+        int_dir = 1;
+    }
+
+    return ret = item->facing_dir * (angle * int_dir);
+}
+
 void it_802765BC(Item_GObj* item_gobj, enum_t arg1)
 {
-    u8 pad[16];
-    Vec3 sp74;
-    Vec3 sp68;
-    Vec3 sp5C;
-    Vec3 sp50;
-    Vec3 sp44;
-    Vec3 sp38;
+    u8 pad[12];
     HSD_JObj* jobj;
-    Item* item1;
-    Item* item2;
-    Item* item3;
-    Item* item4;
-    f32 angle1;
-    f32 angle2;
-    f32 angle3;
-    f32 rotate_angle1;
-    f32 rotate_angle2;
-    f32 rotate_angle3;
-    s32 dir1;
-    s32 dir2;
-    s32 dir3;
+    Item* ip;
+    f32 angle;
     u32 bit_chk;
-    PAD_STACK(40);
+    Vec3 v00, v01, v10, v11, v20, v21;
+    PAD_STACK(28);
 
-    item1 = item_gobj->user_data;
+    ip = item_gobj->user_data;
     jobj = it_80272CC0(item_gobj, arg1);
-    bit_chk = item1->xDC8_word.flags.x17;
+    bit_chk = ip->xDC8_word.flags.x17;
     if (bit_chk == 0) {
-        item2 = item_gobj->user_data;
-        sp74.z = 0.0f;
-        sp74.x = 0.0f;
-        sp74.y = 1.0f;
-        it_80276408(item_gobj, &item2->x378_itemColl, &sp68);
-        angle1 = lbVector_Angle(&sp68, &sp74);
-        if (sp68.x < 0.0f) {
-            dir1 = -1;
-        } else {
-            dir1 = 1;
-        }
-        rotate_angle1 =
-            -item1->facing_dir * (item2->facing_dir * (angle1 * dir1));
-        HSD_JObjSetRotationZ(jobj, rotate_angle1);
+        angle = it_8027649C_ref(item_gobj, &v00, &v01);
+        angle = -ip->facing_dir * angle;
+        HSD_JObjSetRotationZ(jobj, angle);
     } else if (bit_chk == 1) {
-        item3 = item_gobj->user_data;
-        sp5C.z = 0.0f;
-        sp5C.x = 0.0f;
-        sp5C.y = 1.0f;
-        it_80276408(item_gobj, &item3->x378_itemColl, &sp50);
-        angle2 = lbVector_Angle(&sp50, &sp5C);
-        if (sp50.x < 0.0f) {
-            dir2 = -1;
-        } else {
-            dir2 = 1;
-        }
-        rotate_angle2 = item3->facing_dir * (angle2 * dir2);
-        HSD_JObjSetRotationX(jobj, rotate_angle2);
+        angle = it_8027649C_ref(item_gobj, &v10, &v11);
+        HSD_JObjSetRotationX(jobj, angle);
     } else {
-        item4 = item_gobj->user_data;
-        sp44.z = 0.0f;
-        sp44.x = 0.0f;
-        sp44.y = 1.0f;
-        it_80276408(item_gobj, &item4->x378_itemColl, &sp38);
-        angle3 = lbVector_Angle(&sp38, &sp44);
-        if (sp38.x < 0.0f) {
-            dir3 = -1;
-        } else {
-            dir3 = 1;
-        }
-        rotate_angle3 = item4->facing_dir * (angle3 * dir3);
-        HSD_JObjSetRotationY(jobj, rotate_angle3);
+        angle = it_8027649C_ref(item_gobj, &v20, &v21);
+        HSD_JObjSetRotationY(jobj, angle);
     }
 }
 
@@ -454,6 +490,7 @@ void it_80276934(Item_GObj* item_gobj, enum_t arg1)
     u8 _pad1[4];
     Vec3 sp64;
     Vec3 sp58;
+    u8 _pad2[4];
     Vec3 sp48;
     Vec3 sp3C;
     HSD_JObj* jobj;
@@ -471,7 +508,7 @@ void it_80276934(Item_GObj* item_gobj, enum_t arg1)
     s32 dir2;
     s32 dir3;
     u32 bit_chk;
-    PAD_STACK(48);
+    PAD_STACK(44);
 
     item1 = item_gobj->user_data;
     jobj = it_80272CC0(item_gobj, arg1);
@@ -488,8 +525,9 @@ void it_80276934(Item_GObj* item_gobj, enum_t arg1)
         } else {
             dir1 = 1;
         }
-        rotate_angle1 =
-            -item1->facing_dir * (item2->facing_dir * (angle1 * dir1));
+        rotate_angle1 = angle1 * dir1;
+        angle1 = item2->facing_dir * rotate_angle1;
+        rotate_angle1 = -item1->facing_dir * angle1;
         HSD_JObjSetRotationZ(jobj, rotate_angle1);
     } else if (bit_chk == 1) {
         item3 = item_gobj->user_data;
@@ -522,12 +560,19 @@ void it_80276934(Item_GObj* item_gobj, enum_t arg1)
     }
 }
 
+#pragma push
+#pragma dont_inline on
+
 void it_80276CB8(Item_GObj* item_gobj)
 {
-    if (GET_ITEM(item_gobj)->x378_itemColl.env_flags & Collide_FloorMask) {
+    Item* item = item_gobj->user_data;
+
+    if (item->x378_itemColl.env_flags & Collide_FloorMask) {
         it_802765BC(item_gobj, 0);
     }
 }
+
+#pragma pop
 
 void it_80276CEC(Item_GObj* item_gobj)
 {
@@ -639,6 +684,9 @@ void it_80276FC4(Item_GObj* item_gobj, s32 arg1)
 
 #pragma pop
 
+#pragma push
+#pragma dont_inline on
+
 bool it_80277040(Item_GObj* item_gobj)
 {
     UNUSED u8 frame_pad[8];
@@ -649,12 +697,13 @@ bool it_80277040(Item_GObj* item_gobj)
     UNUSED u8 pad[12];
     Vec3 sp20;
     Vec3 sp14;
+    UNUSED u8 low_pad[4];
     CollData* coll;
     Item* item2;
     Item* item1;
-    f32 temp_f30;
-    f32 temp_f31;
     f32 temp_f3;
+    f32 temp_f31;
+    f32 temp_f30;
     f32 angle1;
     f32 angle2;
     bool chk;
@@ -666,7 +715,7 @@ bool it_80277040(Item_GObj* item_gobj)
     PAD_STACK(4);
 
     ret_val = true;
-    item1 = GET_ITEM(item_gobj);
+    item1 = item_gobj->user_data;
     coll = &item1->x378_itemColl;
     if (ABS(item1->xCC_item_attr->x50) < 0.00001f) {
         item1->x88.y = 0.0f;
@@ -718,7 +767,8 @@ bool it_80277040(Item_GObj* item_gobj)
             chk = false;
         }
         if (!chk) {
-            if (item1->x94.x || item1->x94.y) {
+            temp_f3 = 0.0f;
+            if (item1->x94.x != temp_f3 || item1->x94.y != temp_f3) {
                 if (sp38.x < 0.0f) {
                     int_dir1 = -1;
                 } else {
@@ -765,6 +815,8 @@ bool it_80277040(Item_GObj* item_gobj)
     return ret_val;
 }
 
+#pragma pop
+
 static inline float sqrtf_accurate_store(float x, volatile float* y)
 {
     if (x > 0.0f) {
@@ -785,33 +837,34 @@ void it_8027737C(Item_GObj* item_gobj, Vec3* pos)
     Item* item;
     f32 temp_f1;
     volatile f32 sqrt_0;
-    u8 _[4];
+    PAD_STACK(4);
 
     item = GET_ITEM(item_gobj);
-    if (item->xDC8_word.flags.x1F && item->xD5C != 0U) {
-        PSVECAdd(&item->x88, &item->x7C, &item->x7C);
-        item->x7C.x *= item->xCC_item_attr->x54;
-        item->x7C.y *= item->xCC_item_attr->x54;
-        if (sqrtf_accurate_store(SQ(item->x7C.x) + SQ(item->x7C.y), &sqrt_0) >
-            it_804D6D28->xC8)
-        {
-            lbVector_NormalizeXY(&item->x7C);
-            temp_f1 = it_804D6D28->xC8;
-            item->x7C.x *= temp_f1;
-            item->x7C.y *= temp_f1;
-        }
-        if (SQ(item->x7C.x) + SQ(item->x7C.y) < it_804D6D28->xCC) {
-            item->xDC8_word.flags.x1F = 0;
-            item->x7C.y = 0.0f;
-            item->x7C.x = 0.0f;
-            return;
-        }
-
-        it_802775F0(item_gobj, &item->x7C);
-        it_80274A64(item_gobj);
-        PSVECAdd(&item->x7C, pos, &sp1C);
-        *pos = sp1C;
+    if (item->xDC8_word.flags.x1F == 0 || item->xD5C == 0) {
+        return;
     }
+    PSVECAdd(&item->x88, &item->x7C, &item->x7C);
+    item->x7C.x *= item->xCC_item_attr->x54;
+    item->x7C.y *= item->xCC_item_attr->x54;
+    if (sqrtf_accurate_store(SQ(item->x7C.x) + SQ(item->x7C.y), &sqrt_0) >
+        it_804D6D28->xC8)
+    {
+        lbVector_NormalizeXY(&item->x7C);
+        temp_f1 = it_804D6D28->xC8;
+        item->x7C.x *= temp_f1;
+        item->x7C.y *= temp_f1;
+    }
+    if (SQ(item->x7C.x) + SQ(item->x7C.y) < it_804D6D28->xCC) {
+        item->xDC8_word.flags.x1F = 0;
+        item->x7C.y = 0.0f;
+        item->x7C.x = 0.0f;
+        return;
+    }
+
+    it_802775F0(item_gobj, &item->x7C);
+    it_80274A64(item_gobj);
+    PSVECAdd(&item->x7C, pos, &sp1C);
+    *pos = sp1C;
 }
 
 bool it_80277544(Item_GObj* item_gobj)
@@ -855,10 +908,13 @@ void it_802775F0(Item_GObj* item_gobj, Vec3* arg1)
     f32 temp_sqrt;
     Item* item = GET_ITEM(item_gobj);
 
-    if (item->spin_spd) {
+    temp_sqrt = 0.0f;
+    if (item->spin_spd != temp_sqrt) {
         temp_sqrt = sqrtf_accurate_sp18(SQ(arg1->x) + SQ(arg1->y));
         item->xD3C_spinSpeed = 0.85f * (temp_sqrt / item->xC1C.bottom);
-        if ((arg1->x < 0 ? -1 : 1) != (item->facing_dir < 0 ? -1 : 1)) {
+        if ((arg1->x < 0.0f ? -1 : 1) !=
+            (item->facing_dir < 0.0f ? -1 : 1))
+        {
             item->xD3C_spinSpeed = -item->xD3C_spinSpeed;
         }
         if (item->xDC8_word.flags.x19 != 1) {
@@ -913,9 +969,25 @@ static inline float product_xy(Vec3* a, Vec3* b)
     return (a->x * b->x + a->y * b->y);
 }
 
+static inline float sqrtf_accurate_local(float x)
+{
+    volatile float y;
+
+    if (x > 0.0f) {
+        double guess = __frsqrte((double) x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        y = (float) (x * guess);
+        return y;
+    }
+    return x;
+}
+
 static inline float return_sqrt_value(Vec3* v)
 {
-    return sqrtf_accurate(product_xy(v, v));
+    return sqrtf_accurate_local(product_xy(v, v));
 }
 
 bool it_8027781C(Item_GObj* item_gobj)
@@ -1034,6 +1106,7 @@ void it_80277C40(Item_GObj* item_gobj, s32 arg1)
         sp20.y = coll->ecb.bottom.y;
     }
     if (!item->xDCF_flag.b0) {
-        it_80278800(item_gobj, 0x405, 0, &sp20, &sp14, 0U, 0.0f);
+        it_80278800(item_gobj, 0x405, 0, &sp20, &sp14, 0U,
+                    0.0f);
     }
 }

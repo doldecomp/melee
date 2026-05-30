@@ -18,6 +18,7 @@
 #include "gm/gm_unsplit.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/it_3F14.h"
 #include "it/it_279C.h"
 #include "it/item.h"
 #include "it_2725.h"

@@ -3138,23 +3138,26 @@ melee/it/itcoll.c:
 	.sdata      start:0x804D5170 end:0x804D5188
 	.sdata2     start:0x804DC6C8 end:0x804DC708
 
+melee/it/it_3F14.c:
+	.data       start:0x803F1418 end:0x803F1F00
+	.bss        start:0x804A0E30 end:0x804A0FD8
+	.sbss       start:0x804D6D00 end:0x804D6D48
+
 melee/it/it_2725.c:
 	.text       start:0x80272560 end:0x802753DC
-	.data       start:0x803F1418 end:0x803F1F38
-	.bss        start:0x804A0E30 end:0x804A0FD8
+	.data       start:0x803F1F00 end:0x803F1F38
 	.sdata      start:0x804D5188 end:0x804D5198
-	.sbss       start:0x804D6D00 end:0x804D6D48
 	.sdata2     start:0x804DC708 end:0x804DC730
 
 melee/it/ithitbox.c:
-	.text       start:0x802753DC end:0x80275BC8
-	.sdata2     start:0x804DC730 end:0x804DC73C
+	.text       start:0x802753DC end:0x802759DC
+	.sdata2     start:0x804DC730 end:0x804DC738
 
 melee/it/itmaplib.c:
-	.text       start:0x80275BC8 end:0x80277D08
+	.text       start:0x802759DC end:0x80277D08
 	.data       start:0x803F1F38 end:0x803F1F90
 	.sdata      start:0x804D5198 end:0x804D51B0
-	.sdata2     start:0x804DC73C end:0x804DC770
+	.sdata2     start:0x804DC738 end:0x804DC770
 
 melee/it/itmaterial.c:
 	.text       start:0x80277D08 end:0x8027870C
