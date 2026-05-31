@@ -40,6 +40,7 @@
 /* 3F9FDC */ static float un_803F9FDC;
 /* 3FA070 */ static int un_803FA070;
 /* 3FA090 */ static int un_803FA090;
+/* 3FA098 */ static float un_803FA098;
 /* 3FA09C */ static float un_803FA09C;
 /* 3FA0B0 */ static int un_803FA0B0;
 /* 3FA128 */ static struct {
@@ -242,7 +243,22 @@ int un_802FF99C(int arg0)
     return 0;
 }
 
-/// #un_802FF9DC
+s32 un_802FF9DC(void)
+{
+    struct SmStData {
+        u8 pad0[0x18];
+        s32* x18;
+    }* d = (struct SmStData*) un_804D6DA8;
+    s32 i;
+
+    un_804D6DB4 = 0;
+    for (i = 0; i < un_804D6DB0; i++) {
+        un_804D6DB4 += d->x18[i];
+    }
+    un_803FA098 = (f32) un_804D6DB4;
+    un_803FA09C = (f32) (un_804D6DB4 + d->x18[un_804D6DB0]);
+    return 0;
+}
 
 int un_802FFB58(int arg0)
 {

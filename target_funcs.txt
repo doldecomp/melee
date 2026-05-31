@@ -67,7 +67,7 @@ Funcs:
 
 File: src/melee/if/soundtest.c
 Funcs:
-- [ ] un_802FF9DC
+- [x] un_802FF9DC
 - [ ] un_802FFF2C
 
 File: src/melee/if/textdraw.c
