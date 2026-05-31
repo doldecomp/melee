@@ -64,10 +64,10 @@ typedef struct _ftSamusAttributes {
     /* +A0 */ s32 xA0;
     /* +A4 */ s32 xA4;
     /* +A8 */ s32 xA8;
-    /* +AC */ UNK_T xAC;
+    /* +AC */ s32 xAC;
     /* +B0 */ s32 xB0;
-    /* +B4 */ UNK_T xB4;
-    /* +B8 */ UNK_T xB8;
+    /* +B4 */ s32 xB4;
+    /* +B8 */ s32 xB8;
     /* +BC */ int xBC;
     /* +C0 */ int xC0;
     /* +C4 */ int xC4;
