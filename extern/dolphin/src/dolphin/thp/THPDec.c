@@ -461,6 +461,66 @@ void THPDec_803300E0(u32* data)
     }
 }
 
+s32 THPDec_80330158(THPFileInfo* info)
+{
+    u8 jfif[] = "JFIF";
+    u8* start;
+    u8* p;
+    u8* p2;
+    u8* sig;
+    u8 b1;
+    u8 b2;
+    u32 len;
+
+    start = info->file;
+    len = (u16) ((start[0] << 8) | start[1]);
+    info->file = start + 2;
+    sig = jfif;
+    p = info->file;
+    info->file = p + 1;
+    if (*p != *sig) {
+        return 3;
+    }
+    p = info->file;
+    info->file = p + 1;
+    if (*p != *++sig) {
+        return 3;
+    }
+    p = info->file;
+    info->file = p + 1;
+    if (*p != *++sig) {
+        return 3;
+    }
+    p = info->file;
+    info->file = p + 1;
+    if (*p != *++sig) {
+        return 3;
+    }
+    p = info->file;
+    info->file = p + 1;
+    if (*p != *++sig) {
+        return 3;
+    }
+    info->file += 2;
+    info->file += 1;
+    info->file += 1;
+    info->file += 1;
+    info->file += 1;
+    p = info->file;
+    info->file = p + 1;
+    p2 = info->file;
+    info->file = p2 + 1;
+    b1 = *p;
+    b2 = *p2;
+    if (b1 != 0 || b2 != 0) {
+        return 7;
+    }
+    if (len + 4 != (u32) (info->file - info->x0C)) {
+        return 8;
+    }
+    return 0;
+}
+
 s32 THPDec_8032FD40(THPDec_8032FD40_Data* data, u16 num)
 {
     s32 base = data->val0 + 0x4028;

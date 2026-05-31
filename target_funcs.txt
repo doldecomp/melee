@@ -1,7 +1,7 @@
 File: src/dolphin/thp/THPDec.c
 Funcs:
 - [x] THPDec_8032F8D4
-- [ ] THPDec_80330158
+- [x] THPDec_80330158
 - [ ] THPDec_803310CC
 - [ ] THPDec_80331340
 - [ ] THPDec_803313D0
