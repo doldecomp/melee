@@ -31,8 +31,12 @@ MatchEnd* fn_80174274(void)
     return lbl_8046DBE8.x94;
 }
 
-#pragma push
-#pragma dont_inline on
+s32 fn_80174284_noinline(u8 slot);
+s32 fn_80174284_noinline(u8 slot)
+{
+    return fn_80174284(slot);
+}
+
 s32 fn_80174284(u8 slot)
 {
     bool do_call;
@@ -58,7 +62,6 @@ s32 fn_80174284(u8 slot)
 
     return count;
 }
-#pragma pop
 
 void fn_80174338(void)
 {
@@ -1436,77 +1439,23 @@ void fn_801771C0(ResultsData* data)
         }
 
         result = i;
-        j = 0;
-
-        /* Check player 0 */
-        if (me->player_standings[0].slot_type == Gm_PKind_NA) {
-            goto check1;
-        }
-        if (me->player_standings[0].team != our_team) {
-            goto check1;
-        }
-        if (i == j) {
-            goto check1;
-        }
-        if (p->is_small_loser > me->player_standings[0].is_small_loser) {
-            result = -1;
-            goto check_result;
-        }
-
-    check1:
-        q = &me->player_standings[1];
-        j = 1;
-        /* Check player 1 */
-        if (me->player_standings[1].slot_type == Gm_PKind_NA) {
-            goto check2;
-        }
-        if (q->team != our_team) {
-            goto check2;
-        }
-        if (i == j) {
-            goto check2;
-        }
-        if (p->is_small_loser > q->is_small_loser) {
-            result = -1;
-            goto check_result;
+        q = me->player_standings;
+        for (j = 0; j < 4; j++, q++) {
+            if (q->slot_type == Gm_PKind_NA) {
+                continue;
+            }
+            if (q->team != our_team) {
+                continue;
+            }
+            if (i == j) {
+                continue;
+            }
+            if (p->is_small_loser > q->is_small_loser) {
+                result = -1;
+                break;
+            }
         }
 
-    check2:
-        j = 2;
-        q++;
-        /* Check player 2 */
-        if (me->player_standings[2].slot_type == Gm_PKind_NA) {
-            goto check3;
-        }
-        if (q->team != our_team) {
-            goto check3;
-        }
-        if (i == j) {
-            goto check3;
-        }
-        if (p->is_small_loser > q->is_small_loser) {
-            result = -1;
-            goto check_result;
-        }
-
-    check3:
-        j = 3;
-        q++;
-        /* Check player 3 */
-        if (me->player_standings[3].slot_type == Gm_PKind_NA) {
-            goto check_result;
-        }
-        if (q->team != our_team) {
-            goto check_result;
-        }
-        if (i == j) {
-            goto check_result;
-        }
-        if (p->is_small_loser > q->is_small_loser) {
-            result = -1;
-        }
-
-    check_result:
         if (result >= 0) {
             data->x6 = result;
             return;
@@ -1554,7 +1503,7 @@ void gm_80177368_OnEnter(void* arg0_)
     if (fn_801701B8() == 0) {
         for (i = 0; i < 4; i++) {
             lbl_8046E190[i].x0 = 2;
-            lbl_8046E190[i].x1 = fn_80174284(i) * 2 + 2;
+            lbl_8046E190[i].x1 = fn_80174284_noinline(i) * 2 + 2;
         }
     } else {
         for (i = 0; i < 4; i++) {
