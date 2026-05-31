@@ -559,6 +559,15 @@ found_player:;
     }
 }
 
+static inline IfDamageState *find_player_by_entity(HSD_GObj *gobj) {
+    s32 i;
+    for (i = 0; i < 6; i++) {
+        if (ifStatus_HudInfo.players[i].HUD_parent_entity == gobj)
+            return &ifStatus_HudInfo.players[i];
+    }
+    return NULL;
+}
+
 void ifStatus_802F5B48(HSD_GObj* gobj)
 {
     IfDamageState* p;
@@ -566,14 +575,7 @@ void ifStatus_802F5B48(HSD_GObj* gobj)
     s32 diff;
     u8 t;
 
-    for (i = 0; i < 6; i++) {
-        if (ifStatus_HudInfo.players[i].HUD_parent_entity == gobj) {
-            p = &ifStatus_HudInfo.players[i];
-            goto found;
-        }
-    }
-    p = NULL;
-found:
+    p = find_player_by_entity(gobj);
     t = p->unk9;
     if (t != 0) {
         t = t + 1;
@@ -589,16 +591,16 @@ found:
     p->old_damage = p->damage_percent;
     if (Player_GetMoreFlagsBit2((s8) p->player_slot) != 0) {
         p->damage_percent = Player_GetRemainingHP((s8) p->player_slot);
-        if ((s16) p->damage_percent > 0x3E7) {
+        if (p->damage_percent > 0x3E7) {
             p->damage_percent = 0x3E7;
-        } else if ((s16) p->damage_percent < 0) {
+        } else if (p->damage_percent < 0) {
             p->damage_percent = 0;
         }
-        if ((s16) p->old_damage != -1 &&
-            (s16) p->damage_percent < (s16) p->old_damage)
+        if (p->old_damage != -1 &&
+            p->damage_percent < p->old_damage)
         {
             p->flags.force_digit_shake = 1;
-            diff = (s16) p->old_damage - (s16) p->damage_percent;
+            diff = p->old_damage - p->damage_percent;
             if (diff < 0) {
                 diff = -diff;
             }
@@ -606,37 +608,37 @@ found:
         } else {
             p->flags.force_digit_shake = 0;
         }
-        if ((s16) p->old_damage != -1 &&
-            (s16) p->damage_percent > (s16) p->old_damage)
+        if (p->old_damage != -1 &&
+            p->damage_percent > p->old_damage)
         {
             p->flags.unk10 = 1;
         } else {
             p->flags.unk10 = 0;
         }
-        if ((s16) p->old_damage == 0) {
+        if (p->old_damage == 0) {
             if (gm_8016AE44()->FighterMatchInfo[(s8) p->player_slot].x4_b5) {
                 ifStatus_802F6948((s8) p->player_slot);
             }
         }
     } else {
         p->damage_percent = Player_GetDamage((s8) p->player_slot);
-        if ((s16) p->damage_percent > 0x3E7) {
+        if (p->damage_percent > 0x3E7) {
             p->damage_percent = 0x3E7;
-        } else if ((s16) p->damage_percent < 0) {
+        } else if (p->damage_percent < 0) {
             p->damage_percent = 0;
         }
-        if ((s16) p->old_damage != -1 &&
-            (s16) p->damage_percent < (s16) p->old_damage)
+        if (p->old_damage != -1 &&
+            p->damage_percent < p->old_damage)
         {
             p->flags.unk10 = 1;
         } else {
             p->flags.unk10 = 0;
         }
-        if ((s16) p->old_damage != -1 &&
-            (s16) p->damage_percent > (s16) p->old_damage)
+        if (p->old_damage != -1 &&
+            p->damage_percent > p->old_damage)
         {
             p->flags.force_digit_shake = 1;
-            diff = (s16) p->old_damage - (s16) p->damage_percent;
+            diff = p->old_damage - p->damage_percent;
             if (diff < 0) {
                 diff = -diff;
             }
