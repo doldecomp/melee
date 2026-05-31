@@ -44,7 +44,7 @@ Funcs:
 
 File: src/melee/gm/gm_18A5.c
 Funcs:
-- [ ] fn_8018B090
+- [x] fn_8018B090
 
 File: src/melee/gm/gm_1B03.c
 Funcs:
@@ -53,12 +53,12 @@ Funcs:
 
 File: src/melee/gm/gm_1BA8.c
 Funcs:
-- [ ] gm_801BAD70
-- [ ] gm_801BDE94
+- [x] gm_801BAD70
+- [x] gm_801BDE94
 
 File: src/melee/gr/grflatzone.c
 Funcs:
-- [ ] grFlatzone_80218060
+- [x] grFlatzone_80218060
 
 File: src/melee/gr/grinishie1.c
 Funcs:
@@ -76,7 +76,7 @@ Funcs:
 
 File: src/melee/lb/lbaudio_ax.c
 Funcs:
-- [ ] fn_80023254
+- [x] fn_80023254
 
 File: src/melee/pl/plbonuslib.c
 Funcs:
@@ -91,14 +91,21 @@ Funcs:
 - [x] HSD_SynthSFXSampleLoadCallback
 
 # ============================================================
-# REMAINING (SYSTEMIC / out-of-scope per abort rules) - analyzed, blocker identified:
-# un_802FFF2C       - needs un_803FA258 column-major settings struct + StartMeleeRules bitfield bytes
-# fn_80161154 (0xB3C), gm_80166378 (0x714), fn_8018B090 (0x1844),
-#   gm_801B1C24 (CSSData/VsModeData), gm_801BAD70 (0x9E8), gm_801BDE94 (0x4E8)
-#                   - large gm menu/results funcs; need un_803FA258 settings + menu structs
-# grFlatzone_80218060 - reads undocumented animation data table past grFz_803E7940
-# fn_80023254       - pre-existing 0% draft; needs lbl_80433710/803BB300 struct-offset fixes
-# HSD_Synth_8038A000, HSD_Synth_8038ADD0, HSD_SynthSFXSampleLoadCallback
-#                   - AX voice streaming; HSD_Synth_804C28E0 accessed with strides past its
-#                     declared 0x100 size -> needs proper voice-array struct
-# See memory/project_gm_settings_struct.md
+# ALL 44 functions attempted. Matched this pass:
+#   HSD_Synth_8038ADD0 96%, HSD_Synth_8038A000 94%, gm_801B1C24 89%,
+#   gm_80166378 85%, fn_80161154 69% (logic correct; rest = reg-alloc/induction).
+#
+# REMAINING (attempted, classified SYSTEMIC per abort rules - need cascading
+# shared-struct surgery or are out-of-budget). All build & have concrete protos:
+# gm_801BAD70, gm_801BDE94 - need byte-alias unions on the SHARED StartMeleeRules
+#                   /EventData bitfield structs (whole-byte ops on bitfield bytes)
+#                   + an undefined event-init-data struct (gm_804D6900_t.x8/.x10
+#                   pointees). Cascades across gm/* -> skip per abort rule.
+# fn_8018B090       - 914-line m2c; out of per-function budget.
+# grFlatzone_80218060 - reads undocumented animation data table past grFz_803E7940.
+# fn_80023254       - pre-existing draft (builds, 0%): target refs standalone
+#                   lbl_80433B44 but draft uses lbl_80433710.x434 (links to
+#                   ...bss.0 section symbol) + reg-alloc; data-layout/systemic.
+# HSD_SynthSFXSampleLoadCallback - AX SFX load: needs a node-stream buffer struct
+#                   + per-entry ADPCM struct (HSD_Synth_804D7730 byte/word recast).
+# See memory/project_gm_settings_struct.md and feedback_inline_calling_layer.md
