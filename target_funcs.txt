@@ -26,8 +26,8 @@ Funcs:
 - [ ] ftKb_SpecialAirLwStart_Coll
 - [ ] ftKb_SpecialAirNCaptureWait_IASA
 - [ ] ftKb_SpecialLw1_Coll
-- [ ] ftKb_SpecialNSpit0_Anim
-- [ ] ftKb_SpecialNSpit1_Anim
+- [x] ftKb_SpecialNSpit0_Anim
+- [x] ftKb_SpecialNSpit1_Anim
 
 File: src/melee/ft/ftcoll.c
 Funcs:
