@@ -222,9 +222,13 @@ void ifStatus_PercentOnDeathAnimationThink(UnkX* value, s32 arg1, s32 arg2)
     }
 }
 
+inline f32 offset_rand(){
+    return HSD_Randf() - 0.5f;
+}
 void ifStatus_802F4B84(IfDamageState* state, s32 is_stamina)
 {
     s32 i;
+    u8 new_var;
     f32 mag;
     f32 ox;
     f32 oy;
@@ -244,15 +248,15 @@ void ifStatus_802F4B84(IfDamageState* state, s32 is_stamina)
             state->frames_of_shake_remaining = 0;
             return;
         }
-        mag = 0.1014f * (f32) state->damage_from_last_attack;
+        mag = 0.1014f * ((f32) (new_var = state->damage_from_last_attack));
         if (mag < 0.1014f) {
             mag = 0.1014f;
         } else if (mag > 1.5207f) {
             mag = 1.5207f;
         }
         for (i = 0; i < 4; i++) {
-            rx = mag * (2.0f * (HSD_Randf() - 0.5f));
-            ry = mag * (2.0f * (HSD_Randf() - 0.5f));
+            rx = mag * (2.0f * offset_rand());
+            ry = mag * (2.0f * offset_rand());
             if (rx < 0.0f) {
                 ox = rx - 0.2028f;
             } else {
