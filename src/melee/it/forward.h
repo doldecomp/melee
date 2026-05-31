@@ -15,7 +15,7 @@ typedef struct Item_FtTrack Item_FtTrack;
 typedef struct RandomItemSpawner RandomItemSpawner;
 typedef struct HSD_ObjAllocUnk5 HSD_ObjAllocUnk5;
 typedef struct ItemPickTable ItemPickTable;
-typedef struct it_2F28_DatAttrs it_2F28_DatAttrs;
+typedef struct itUnk2_DatAttrs itUnk2_DatAttrs;
 typedef struct Item Item;
 typedef struct Item_DynamicBones Item_DynamicBones;
 typedef struct ItemAttr ItemAttr;

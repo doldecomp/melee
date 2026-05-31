@@ -1109,7 +1109,7 @@ typedef struct it_2728_DatAttrs {
     Fighter* fighter;
 } it_2728_DatAttrs;
 
-typedef struct it_279D_ItemVars {
+typedef struct itPokemonSpawn_ItemVars {
     /* ip+DD4 */ s32 x0;
     /* ip+DD8 */ Vec3 x4;
     /* ip+DE4 */ Vec3 x10;
@@ -1130,7 +1130,7 @@ typedef struct it_279D_ItemVars {
     /* ip+E28 */ s32 x54;
     /* ip+E2C */ s32 x58; // used as an index back into this struct?
     /* ip+E30 */ s32 x5C;
-} it_279D_ItemVars;
+} itPokemonSpawn_ItemVars;
 
 typedef struct itMewtwoShadowball_ItemVars {
     /* ip+DD4 */ f32 x0;
@@ -1174,7 +1174,7 @@ typedef struct itMewtwoShadowball_DatAttrs {
     f32 x3C;
 } itMewtwoShadowball_DatAttrs;
 
-typedef struct it_279D_DatAttrs {
+typedef struct itPokemonSpawn_DatAttrs {
     f32 x0;
     f32 x4;
     f32 x8;
@@ -1183,31 +1183,16 @@ typedef struct it_279D_DatAttrs {
     f32 x14;
     f32 x18;
     f32 x1C[6];
-    // f32 x20;
-    // f32 x24;
-    // f32 x28;
-    // f32 x2C;
-    // f32 x30;
     f32 x34;
     s32 x38;
-    s32 x3C[160];
-    // f32 x3C;
-    // f32 x40;
-    // f32 x44;
-    // f32 x48;
-    // f32 x4C;
-    // f32 x50;
-    // f32 x54;
-    // f32 x58;
-    // f32 x5C;
-    // s32 x60[160];
-    // f32 padding[0x248 - 0x4C];
-    // f32 x248;
-} it_279D_DatAttrs;
+    s32 pokemon_spawn_weights[Pokemon_Chicorita_Leaf - Pokemon_Tosakinto];
+    u8 _pad[520];
+} itPokemonSpawn_DatAttrs;
+STATIC_ASSERT(sizeof(itPokemonSpawn_DatAttrs) == 0x2BC);
 
-typedef struct it_27B5_ItemVars {
-    /* ip+DD4 */ HSD_JObj* x0;
-    /* ip+DD8 */ s32 x4;
+typedef struct itZako_ItemVars {
+    /* ip+DD4 */ HSD_JObj* jobj;
+    /* ip+DD8 */ s32 idx;
     /* ip+DDC */ Vec3 x8;
     /* ip+DE8 */ S32Vec3 x14;
     /* ip+DF4 */ s32 x20;
@@ -1226,22 +1211,21 @@ typedef struct it_27B5_ItemVars {
     /* ip+E28 */ s32 x54;
     /* ip+E2C */ s32 x58;
     /* ip+E30 */ s32 x5C;
-} it_27B5_ItemVars;
+} itZako_ItemVars;
 
-typedef struct it_27B5_DatAttrs {
+typedef struct itZako_DatAttrs {
     f32 scale;
-} it_27B5_DatAttrs;
+} itZako_DatAttrs;
 
-typedef struct it_27CE_ItemVars {
+typedef struct itGamewatch_ItemVars {
     /* ip+DD4 */ void* attr;
-} it_27CE_ItemVars;
+} itGamewatch_ItemVars;
 
-/// Should it_2F28 and it_27CF use the same structs?
-typedef struct it_27CF_ItemVars {
+typedef struct itYoshiEggLay_ItemVars {
     f32 x0;
-} it_27CF_ItemVars;
+} itYoshiEggLay_ItemVars;
 
-typedef struct it_27CF_DatAttrs {
+typedef struct itYoshiEggLay_DatAttrs {
     Vec3 pos;
     Vec3 vel;
     float lifetime; // lifetime
@@ -1249,13 +1233,13 @@ typedef struct it_27CF_DatAttrs {
     float float3; // item var x0
     float x24;    // item->xC98
     ItemKind kind;
-} it_27CF_DatAttrs;
+} itYoshiEggLay_DatAttrs;
 
-typedef struct it_2F28_ItemVars {
+typedef struct itUnk2_ItemVars {
     f32 x0;
-} it_2F28_ItemVars;
+} itUnk2_ItemVars;
 
-struct it_2F28_DatAttrs {
+struct itUnk2_DatAttrs {
     Vec3 pos;
     Vec3 vel;
     f32 float1; // lifetime
@@ -1326,7 +1310,7 @@ typedef struct it_802E5FXX_struct { // used for it_802E5F00 and it_802E5F8C
     s32 x18;      // non-float assignment (gm_8016C6C0)
 } it_802E5FXX_struct;
 
-typedef struct it_2E6A_ItemVars_1 {
+typedef struct itYaku_ItemVars {
     /*  +0 ip+DD4 */ s16 x0;
     /*  +2 ip+DD6 */ s16 x2; // type of union: 1=jobj, 2=vec
     union {
@@ -1337,7 +1321,7 @@ typedef struct it_2E6A_ItemVars_1 {
     /* +14 ip+DE8 */ void (*x14)(Item_GObj*, Ground*);
     /* +18 ip+DEC */ void (*x18)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32);
     /* +1C ip+DF0 */ void (*x1C)(Item_GObj*, Ground*, HSD_GObj*);
-} it_2E6A_ItemVars_1;
+} itYaku_ItemVars;
 
 typedef struct itWhiteBea_ItemVars {
     /*  +0 ip+DD4 */ char pad_0[0x18];
