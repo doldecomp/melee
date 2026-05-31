@@ -7318,23 +7318,21 @@ do_life:
 
 void hsd_8039CEAC(u32 mask)
 {
-    void** bins;
     void* cur;
     void* prev;
     s32 i;
     u32 bits;
     void* next;
 
-    bins = hsd_804D0908;
     bits = mask;
     for (i = 0; i < 16; i++) {
         if (!(bits & 0x10000)) {
-            cur = *bins;
+            cur = hsd_804D0908[i];
             prev = NULL;
             while (cur != NULL) {
                 next = hsd_8039930C(cur, prev);
                 if (prev == NULL) {
-                    if (*bins != next) {
+                    if (hsd_804D0908[i] != next) {
                         prev = cur;
                     }
                 } else {
@@ -7346,7 +7344,6 @@ void hsd_8039CEAC(u32 mask)
             }
         }
         bits >>= 1;
-        bins++;
     }
 }
 

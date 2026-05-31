@@ -554,19 +554,23 @@ void gmCamera_801A3098(void)
 
 void gmCamera_801A30E4(void)
 {
+    gmCameraUnkStruct* gcus = &gmCamera_80479BC8.gcus;
+    s32* pxc = &gcus->xC;
+    HSD_JObj** px8;
     s32 i;
-    if ((gmCamera_803DA6B4[gmCamera_80479BC8.gcus.xC].flags.x0 != 0) &&
-        (gmCamera_80479BC8.gcus.x14 != 0) && (gm_801A45E8(1) == 0))
+    if ((gmCamera_803DA6B4[*pxc].flags.x0 != 0) && (gcus->x14 != 0) &&
+        (gm_801A45E8(1) == 0))
     {
-        HSD_JObjClearFlagsAll(gmCamera_80479BC8.gcus.x4, JOBJ_HIDDEN);
+        HSD_JObjClearFlagsAll(gcus->x4, JOBJ_HIDDEN);
     } else {
-        HSD_JObjSetFlagsAll(gmCamera_80479BC8.gcus.x4, JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(gcus->x4, JOBJ_HIDDEN);
     }
-    HSD_JObjSetFlagsAll(gmCamera_80479BC8.gcus.x8, JOBJ_HIDDEN);
+    px8 = &gcus->x8;
+    HSD_JObjSetFlagsAll((0, gcus->x8), JOBJ_HIDDEN);
     for (i = 0; i < 16; i++) {
-        if ((1 << i) & gmCamera_803DA6B4[gmCamera_80479BC8.gcus.xC].flags.x2) {
+        if ((1 << i) & gmCamera_803DA6B4[*pxc].flags.x2) {
             HSD_JObj* jobj;
-            lb_80011E24(gmCamera_80479BC8.gcus.x8, &jobj, i, -1);
+            lb_80011E24(*px8, &jobj, i, -1);
             HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         }
     }
