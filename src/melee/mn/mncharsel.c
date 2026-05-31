@@ -4,6 +4,8 @@
 
 #include "types.h"
 
+#include "baselib/forward.h"
+
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
@@ -460,10 +462,10 @@ void mnCharSel_8025D1C4(int arg0, int arg1)
 
     if (var_r0) {
         stars = &data2.ko_stars[arg0];
-        temp_r30 = data2.ko_stars[arg0].text;
         temp_r31 = &data2.ko_stars[arg0].joint2;
-        var_f31 = data2.ko_stars[arg0].x4;
         temp_r29 = css->ko_star_counts[arg0];
+        var_f31 = data2.ko_stars[arg0].x4;
+        temp_r30 = data2.ko_stars[arg0].text;
 
         joint = stars->joint;
         lb_80011E24(mnCharSel_804D6CC0, &sp10, joint, -1);
@@ -530,7 +532,7 @@ void mnCharSel_8025D1C4(int arg0, int arg1)
                 temp_r30->text_color.a = 0xA0;
             }
             {
-                UNK_T tmp = HSD_SisLib_803A6478(
+                TextKerning* tmp = (TextKerning*) HSD_SisLib_803A6478(
                     temp_r31, &HSD_SisLib_804D1124[0][43].kerning->left);
                 mnCharSel_8025BC20(tmp, temp_r29);
             }
