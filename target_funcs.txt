@@ -89,3 +89,16 @@ Funcs:
 - [ ] HSD_Synth_8038A000
 - [ ] HSD_Synth_8038ADD0
 - [ ] HSD_SynthSFXSampleLoadCallback
+
+# ============================================================
+# REMAINING (SYSTEMIC / out-of-scope per abort rules) - analyzed, blocker identified:
+# un_802FFF2C       - needs un_803FA258 column-major settings struct + StartMeleeRules bitfield bytes
+# fn_80161154 (0xB3C), gm_80166378 (0x714), fn_8018B090 (0x1844),
+#   gm_801B1C24 (CSSData/VsModeData), gm_801BAD70 (0x9E8), gm_801BDE94 (0x4E8)
+#                   - large gm menu/results funcs; need un_803FA258 settings + menu structs
+# grFlatzone_80218060 - reads undocumented animation data table past grFz_803E7940
+# fn_80023254       - pre-existing 0% draft; needs lbl_80433710/803BB300 struct-offset fixes
+# HSD_Synth_8038A000, HSD_Synth_8038ADD0, HSD_SynthSFXSampleLoadCallback
+#                   - AX voice streaming; HSD_Synth_804C28E0 accessed with strides past its
+#                     declared 0x100 size -> needs proper voice-array struct
+# See memory/project_gm_settings_struct.md
