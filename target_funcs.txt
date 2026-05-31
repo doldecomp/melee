@@ -39,7 +39,7 @@ Funcs:
 
 File: src/melee/gm/gm_1601.c
 Funcs:
-- [ ] fn_80161154
+- [x] fn_80161154
 - [x] gm_80166378
 
 File: src/melee/gm/gm_18A5.c
