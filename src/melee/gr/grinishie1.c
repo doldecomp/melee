@@ -931,8 +931,12 @@ void grInishie1_801FC664(HSD_GObj* gobj)
     Ground* gp = gobj->user_data;
     f32 t;
     f32 bottom;
+    UNUSED u32 unused1;
     Vec3 sp24;
     Vec3 sp18;
+    UNUSED u32 unused2;
+    UNUSED u32 unused3;
+    UNUSED u32 unused4;
 
     switch (gp->gv.inishie1.xEE) {
     case 0:
@@ -955,7 +959,6 @@ void grInishie1_801FC664(HSD_GObj* gobj)
             gp->gv.inishie1.xEE = 2;
             gp->gv.inishie1.xF4 = 0.0f;
             gp->gv.inishie1.xEC = grI1_804D69F8->unk4C;
-            return;
         }
         return;
     case 2:
