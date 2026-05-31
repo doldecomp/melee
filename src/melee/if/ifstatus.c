@@ -857,7 +857,7 @@ void ifStatus_802F6508(s32 arg0)
         hud_player->player_slot = (u8) arg0;
         hud_player->unk9 = 0;
         ifStatus_802F61FC(hud_player, (u8) arg0);
-        ifStatus_802F5EC0(hud_player, (u8) arg0);
+        ifStatus_802F5EC0(hud_player, (u8) ((unsigned long long)arg0));
         if (rules->x3_0 && gm_8016B238() == 0) {
             un_802FF364(arg0);
         }
