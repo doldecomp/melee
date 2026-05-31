@@ -740,26 +740,28 @@ void mnDataDel_8024FE4C(u8 arg0)
 void mnDataDel_80250170(void)
 {
     HSD_GObjProc* proc;
+    HSD_Archive* archive;
+    StaticModelDesc* assets;
 
+    assets = &mnDataDel_804A0918;
     mn_804D6BC8.cooldown = 5;
     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
     mn_804A04F0.cur_menu = 0x18;
     mn_804A04F0.hovered_selection = 0;
     mnDataDel_804D6C6C = NULL;
+    archive = mn_804D6BB8;
     lbArchive_LoadSections(
-        mn_804D6BB8, (void**) &mnDataDel_804A0918.joint,
-        "MenMainConDl_Top_joint", &mnDataDel_804A0918.animjoint,
-        "MenMainConDl_Top_animjoint", &mnDataDel_804A0918.matanim_joint,
-        "MenMainConDl_Top_matanim_joint", &mnDataDel_804A0918.shapeanim_joint,
-        "MenMainConDl_Top_shapeanim_joint", &mnDataDel_804A0928.joint,
-        "MenMainCursorDl_Top_joint", &mnDataDel_804A0928.animjoint,
-        "MenMainCursorDl_Top_animjoint", &mnDataDel_804A0928.matanim_joint,
-        "MenMainCursorDl_Top_matanim_joint",
-        &mnDataDel_804A0928.shapeanim_joint,
-        "MenMainCursorDl_Top_shapeanim_joint", &mnDataDel_804A0938.joint,
-        "MenMainWarCmn_Top_joint", &mnDataDel_804A0938.animjoint,
-        "MenMainWarCmn_Top_animjoint", &mnDataDel_804A0938.matanim_joint,
-        "MenMainWarCmn_Top_matanim_joint", &mnDataDel_804A0938.shapeanim_joint,
+        archive, (void**) &assets[0].joint, "MenMainConDl_Top_joint",
+        &assets[0].animjoint, "MenMainConDl_Top_animjoint",
+        &assets[0].matanim_joint, "MenMainConDl_Top_matanim_joint",
+        &assets[0].shapeanim_joint, "MenMainConDl_Top_shapeanim_joint",
+        &assets[1].joint, "MenMainCursorDl_Top_joint", &assets[1].animjoint,
+        "MenMainCursorDl_Top_animjoint", &assets[1].matanim_joint,
+        "MenMainCursorDl_Top_matanim_joint", &assets[1].shapeanim_joint,
+        "MenMainCursorDl_Top_shapeanim_joint", &assets[2].joint,
+        "MenMainWarCmn_Top_joint", &assets[2].animjoint,
+        "MenMainWarCmn_Top_animjoint", &assets[2].matanim_joint,
+        "MenMainWarCmn_Top_matanim_joint", &assets[2].shapeanim_joint,
         "MenMainWarCmn_Top_shapeanim_joint", 0);
     mnDataDel_8024FE4C(0U);
     proc = HSD_GObj_SetupProc(GObj_Create(0U, 1U, 0x80U), fn_8024F840, 0U);

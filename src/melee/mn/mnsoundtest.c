@@ -134,24 +134,26 @@ static char mnSoundTest_803EF57C[] = "MenMainConTs_Top_shapeanim_joint";
 
 void mnSoundTest_8024A790(HSD_GObj* arg0)
 {
-    f32 temp_f30;
     f32 temp_f31;
+    f32 temp_f30;
+    soundtest_user_data* temp_r31;
     s32 temp_r30;
     s32 temp_r30_2;
     s32 temp_r3;
     s32 temp_r3_2;
 
-    soundtest_user_data* temp_r31 = (soundtest_user_data*) arg0->user_data;
+    temp_r31 = (soundtest_user_data*) arg0->user_data;
     // control the volume by holding down L trigger
-    temp_f31 = 1.0f * (1.0f - HSD_PadCopyStatus->nml_analogL) *
-               (1.0f - HSD_PadCopyStatus[1].nml_analogL) *
-               (1.0f - HSD_PadCopyStatus[2].nml_analogL) *
-               (1.0f - HSD_PadCopyStatus[3].nml_analogL);
+    temp_f30 = 1.0f;
+    temp_f31 = temp_f30 * (1.0f - HSD_PadCopyStatus->nml_analogL);
+    temp_f30 *= 1.0f - HSD_PadCopyStatus->nml_analogR;
+    temp_f31 *= 1.0f - HSD_PadCopyStatus[1].nml_analogL;
+    temp_f30 *= 1.0f - HSD_PadCopyStatus[1].nml_analogR;
+    temp_f31 *= 1.0f - HSD_PadCopyStatus[2].nml_analogL;
+    temp_f30 *= 1.0f - HSD_PadCopyStatus[2].nml_analogR;
+    temp_f31 *= 1.0f - HSD_PadCopyStatus[3].nml_analogL;
     // R trigger doesn't seem to do anything
-    temp_f30 = 1.0f * (1.0f - HSD_PadCopyStatus->nml_analogR) *
-               (1.0f - HSD_PadCopyStatus[1].nml_analogR) *
-               (1.0f - HSD_PadCopyStatus[2].nml_analogR) *
-               (1.0f - HSD_PadCopyStatus[3].nml_analogR);
+    temp_f30 *= 1.0f - HSD_PadCopyStatus[3].nml_analogR;
     PAD_STACK(24);
     if ((temp_f31 < 0.9f) || (temp_r31->unk8 < 1.0f)) {
         temp_r30 =
