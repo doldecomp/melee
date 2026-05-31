@@ -438,6 +438,60 @@ void ftCo_800D71D8(Fighter_GObj* gobj)
     }
 }
 
+bool ftCo_800D730C(Fighter_GObj* gobj, bool arg1)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    struct Fighter_x2D0_t* x2d0 = fp->x2D0;
+    Vec3 vel;
+    s32 canJump;
+    s32 r29;
+    s32 r4;
+    s32 result;
+
+    if (fp->motion_id == 0x9B) {
+        if (ft_did_jump(fp, arg1)) {
+            ftCo_800D74A4(gobj);
+            return 1;
+        }
+        return 0;
+    }
+    if (fp->x1968_jumpsUsed == 1) {
+        if (ft_did_jump(fp, arg1)) {
+            if (ft_800D2D0C(gobj)) {
+                vel.x = fp->input.lstick.x * x2d0->x8;
+                vel.y = x2d0->x14[0];
+                vel.z = 0.0f;
+                ft_800D2E7C(gobj, &vel);
+            } else {
+                ftCommon_8007D5D4(fp);
+                ftCo_800D74A4(gobj);
+            }
+            return 1;
+        }
+        return 0;
+    }
+    r29 = 1;
+    canJump = fp->x1968_jumpsUsed < fp->co_attrs.max_jumps;
+    if (ftCo_800D72A0(fp) && fp->cmd_vars[0] == 0) {
+        r29 = 0;
+    }
+    r4 = 1;
+    if (!(fp->input.lstick.y >= p_ftCommonData->tap_jump_threshold) &&
+        !(fp->input.held_inputs & 0xC00)) {
+        r4 = 0;
+    }
+    if (canJump && r29 && r4) {
+        result = 1;
+    } else {
+        result = 0;
+    }
+    if (result) {
+        ftCo_800D74A4(gobj);
+        return 1;
+    }
+    return 0;
+}
+
 bool ftCo_800D72A0(Fighter* fp)
 {
     if (fp->x2D0->x2C != -1) {

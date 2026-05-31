@@ -14,7 +14,7 @@ Funcs:
 - [x] fn_800D9CE8
 - [x] fn_800DA054
 - [x] fn_800DA8E4
-- [ ] ftCo_800D730C
+- [x] ftCo_800D730C
 - [ ] ftCo_CapturePulledHi_Phys
 
 File: src/melee/ft/chara/ftKirby/ftKb_SpecialN.c
