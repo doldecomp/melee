@@ -2343,6 +2343,27 @@ static bool fn_800DAD18(Fighter_GObj* gobj)
     return var_r3;
 }
 
+void ftCo_CapturePulledHi_Phys(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    Vec3 tmp;
+    Vec3 sp2C;
+    Vec3 sp20;
+
+    PAD_STACK(8);
+
+    lb_8000B1CC(GET_FIGHTER(fp->victim_gobj)->mv.co.capturedamage.x18, NULL,
+                &sp20);
+    lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint, NULL,
+                &sp2C);
+    tmp.x = sp20.x - sp2C.x;
+    tmp.y = sp20.y - sp2C.y;
+    tmp.z = sp20.z - sp2C.z;
+    fp->cur_pos.x += tmp.x;
+    fp->cur_pos.y += tmp.y;
+    fp->cur_pos.z += tmp.z;
+}
+
 void ftCo_CapturePulledHi_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
