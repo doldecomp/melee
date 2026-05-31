@@ -7,8 +7,9 @@
 #include "ftMr_Strings.h"
 #include "types.h"
 
-#include "ft/ft_0C31.h"
 #include "ft/ftcamera.h"
+#include "ft/ftCo_800C70D0.h"
+#include "ft/ftCo_800C7178.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"

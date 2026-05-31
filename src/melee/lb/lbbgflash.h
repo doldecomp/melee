@@ -28,6 +28,7 @@
 /* 02113C */ void fn_8002113C(HSD_JObj*, Vec3*, f32);
 /* 021410 */ void lbBgFlash_80021410(void*);
 /* 0219E4 */ void fn_800219E4(void*);
+/* 021A10 */ void lbBgFlash_80021A10(f32);
 /* 021A18 */ void lbBgFlash_80021A18(int);
 /* 021B04 */ void fn_80021B04(HSD_GObj*);
 /* 021C1C */ void fn_80021C1C(void);

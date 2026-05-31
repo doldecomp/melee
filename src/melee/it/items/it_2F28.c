@@ -6,6 +6,9 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/ithitbox.h"
+#include "it/it_279C.h"
+#include "it/itzako.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
 #include "it/items/types.h"
@@ -18,7 +21,6 @@
 #include <melee/it/item.h>
 #include <MetroTRK/intrinsics.h>
 
-extern float it_802758D4(Item_GObj*);            /* extern */
 static void it_802F2A58(Item_GObj*);             /* static */
 static bool it_2F28_UnkMotion0_Anim(Item_GObj*); /* static */
 static void it_2F28_UnkMotion0_Phys(HSD_GObj*);  /* static */
@@ -46,7 +48,7 @@ void it_802F28C8(Item_GObj* item_gobj, int arg1, float arg2)
     Item_8026A8EC(item_gobj);
 }
 
-float it_802F295C(HSD_GObj* owner_gobj, it_2F28_DatAttrs* attr)
+float it_802F295C(HSD_GObj* owner_gobj, itUnk2_DatAttrs* attr)
 {
     SpawnItem spawn;
 
@@ -71,7 +73,7 @@ float it_802F295C(HSD_GObj* owner_gobj, it_2F28_DatAttrs* attr)
 
     if (item_gobj != NULL) {
         item = item_gobj->user_data;
-        item->xDD4_itemVar.it_2F28.x0 = attr->float2;
+        item->xDD4_itemVar.unk2.x0 = attr->float2;
         it_80275158((HSD_GObj*) item_gobj, attr->float1);
         it_802F2A58(item_gobj);
         var_f31 = it_802758D4(item_gobj);
@@ -105,12 +107,12 @@ void it_2F28_UnkMotion0_Phys(HSD_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     f32 var_f4 = sqrtf(SQ(item->x40_vel.x) + SQ(item->x40_vel.y));
-    if (var_f4 > item->xDD4_itemVar.it_2F28.x0) {
+    if (var_f4 > item->xDD4_itemVar.unk2.x0) {
         item->x40_vel.x =
-            (item->x40_vel.x * (var_f4 - item->xDD4_itemVar.it_2F28.x0)) /
+            (item->x40_vel.x * (var_f4 - item->xDD4_itemVar.unk2.x0)) /
             var_f4;
         item->x40_vel.y =
-            (item->x40_vel.y * (var_f4 - item->xDD4_itemVar.it_2F28.x0)) /
+            (item->x40_vel.y * (var_f4 - item->xDD4_itemVar.unk2.x0)) /
             var_f4;
     } else {
         item->x40_vel.x = 0.0f;
