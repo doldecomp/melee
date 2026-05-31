@@ -1,6 +1,7 @@
 #include "mndiagram3.h"
 
 #include "mndiagram3.static.h"
+#include "baselib/debug.h"
 
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -380,11 +381,10 @@ void mnDiagram3_80246F2C(Diagram3* data, int arg1)
 
 void mnDiagram3_80247008(int arg0)
 {
-    char* base = (char*) &mnDiagram3_803EEC10;
     mnDiagram_ArchiveData* archive = &mnDiagram_804A0844;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
-    Diagram3* data;
+    Diagram3* user_data;
     int i;
 
     gobj = GObj_Create(6, 7, 0x80);
@@ -396,16 +396,15 @@ void mnDiagram3_80247008(int arg0)
     HSD_JObjReqAnimAll(jobj, mnDiagram3_804DC00C);
     HSD_JObjAnimAll(jobj);
 
-    data = (Diagram3*) HSD_MemAlloc(0x78);
-    if (data == NULL) {
-        OSReport(base + 0x9C);
-        __assert(base + 0xB4, 0x3FC, base + 0xC4);
+    user_data = (Diagram3*) HSD_MemAlloc(0x78);
+    if (user_data == NULL) {
+        HSD_ASSERTREPORT(0x3FC, user_data, "Can't get user_data.\n");
     }
-    mnDiagram3_80246F2C(data, arg0);
-    GObj_InitUserData(gobj, 0, (void (*)(void*)) fn_80246F0C, data);
+    mnDiagram3_80246F2C(user_data, arg0);
+    GObj_InitUserData(gobj, 0, (void (*)(void*)) fn_80246F0C, user_data);
 
     for (i = 0; i < 10; i++) {
-        lb_80011E24(jobj, (HSD_JObj**) ((u8*) data + (i << 2) + 8), i, -1);
+        lb_80011E24(jobj, (HSD_JObj**) ((u8*) user_data + (i << 2) + 8), i, -1);
     }
 
     HSD_GObj_SetupProc(gobj, fn_80246E64, 0);

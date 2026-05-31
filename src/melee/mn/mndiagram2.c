@@ -627,7 +627,7 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
 
     f30 = jobj30->translate.y - f31;
 
-    lb_8000B1CC(data->row0_ref, (Vec3*) (base + 0xC), &sp20);
+    lb_8000B1CC(data->row0_ref, (Vec3*) &mnDiagram2_803EEAD0[0xC], &sp20);
 
     {
         u32 r22 = (u8) row_idx;
@@ -650,7 +650,7 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                     if (r21 != 0xFFFF) {
                         HSD_Text* text2;
                         int var_r3;
-                        lb_8000B1CC(data->row0_ref, (Vec3*) (base + 0xC),
+                        lb_8000B1CC(data->row0_ref, (Vec3*) &mnDiagram2_803EEAD0[0xC],
                                     &sp20);
                         text2 = HSD_SisLib_803A5ACC(
                             0, 1, mnDiagram2_804DBFD8 + sp20.x,
@@ -701,10 +701,10 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                             (u8) mnDiagram2_GetStatValue(
                                 is_name_mode, stat_type, entity_idx),
                             0);
-                        HSD_JObjSetTranslateX(jobj, *(f32*) (base + 0x24));
+                        HSD_JObjSetTranslateX(jobj, -2.0f);
                         HSD_JObjSetTranslateY(jobj, (f30 * (f32) row_idx) +
-                                                        *(f32*) (base + 0x28));
-                        HSD_JObjSetTranslateZ(jobj, *(f32*) (base + 0x2C));
+                                                        0.0f);
+                        HSD_JObjSetTranslateZ(jobj, 0.0f);
 
                         HSD_JObjAddChild(data->icon_parent, jobj);
                         return;
@@ -716,7 +716,7 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                     temp_r22->row_values[0] = text3;
                     text3->font_size.x = mnDiagram2_804DBFE0;
                     text3->font_size.y = mnDiagram2_804DBFE4;
-                    lb_8000B1CC(data->icon_parent, (Vec3*) (base + 0x18),
+                    lb_8000B1CC(data->icon_parent, (Vec3*) &mnDiagram2_803EEAD0[0x18],
                                 &sp20);
                     text3->pos_x = sp20.x;
                     text3->pos_y = -sp20.y + temp_f31;
@@ -862,7 +862,7 @@ void mnDiagram2_OnAnimComplete(HSD_GObj* gobj)
 
     data = gobj->user_data;
     jobj = data->jobj;
-    table = &mnDiagram2_803EEB60;
+    table = mnDiagram2_803EEB60;
     pad = 0;
     if (mn_8022ED6C(jobj, table) >= table->end_frame) {
         HSD_GObjPLink_80390228(gobj);
@@ -879,13 +879,10 @@ void mnDiagram2_UpdateScrollArrows(HSD_GObj* gobj)
 {
     Diagram2* data;
     HSD_JObj* jobj;
-    u8* base;
-
-    base = (u8*) &mnDiagram2_803EEAD0;
     data = gobj->user_data;
 
     jobj = data->down_arrow;
-    mn_8022ED6C(jobj, (AnimLoopSettings*) (base + 0x9C));
+    mn_8022ED6C(jobj, &mnDiagram2_803EEB60[1]);
     if (data->is_name_mode) {
         if (data->scroll_offset + 10 < 0x18) {
             HSD_JObjClearFlagsAll(jobj, 0x10);
@@ -901,7 +898,7 @@ void mnDiagram2_UpdateScrollArrows(HSD_GObj* gobj)
     }
 
     jobj = data->up_arrow;
-    mn_8022ED6C(jobj, (AnimLoopSettings*) (base + 0x9C));
+    mn_8022ED6C(jobj, &mnDiagram2_803EEB60[1]);
     if (data->scroll_offset) {
         HSD_JObjClearFlagsAll(jobj, 0x10);
     } else {
@@ -909,7 +906,7 @@ void mnDiagram2_UpdateScrollArrows(HSD_GObj* gobj)
     }
 
     jobj = data->left_arrow;
-    mn_8022ED6C(jobj, (AnimLoopSettings*) (base + 0x9C));
+    mn_8022ED6C(jobj, &mnDiagram2_803EEB60[1]);
     if (data->is_name_mode) {
         if (data->selected_name_idx) {
             HSD_JObjClearFlagsAll(jobj, 0x10);
@@ -925,7 +922,7 @@ void mnDiagram2_UpdateScrollArrows(HSD_GObj* gobj)
     }
 
     jobj = data->right_arrow;
-    mn_8022ED6C(jobj, (AnimLoopSettings*) (base + 0x9C));
+    mn_8022ED6C(jobj, &mnDiagram2_803EEB60[1]);
     if (data->is_name_mode != 0) {
         if (data->selected_name_idx !=
             (u8) mnDiagram_GetNextNameIndex(data->selected_name_idx))
@@ -1015,7 +1012,6 @@ void mnDiagram2_InitUserData(void* arg, int unused)
 void mnDiagram2_Create(int arg0)
 {
     HSD_JObj* jobj;
-    char* base = (char*) &mnDiagram2_803EEAD0;
     mnDiagram_ArchiveData* archive = &mnDiagram_804A0834;
     HSD_GObj* gobj;
     Diagram2* data;
@@ -1039,8 +1035,8 @@ void mnDiagram2_Create(int arg0)
 
     data = (Diagram2*) HSD_MemAlloc(0xC8);
     if (data == NULL) {
-        OSReport(base + 0x108);
-        __assert(base + 0x120, 0x3E6, base + 0x130);
+        OSReport("Can't get user_data.\n");
+        __assert("mndiagram2.c", 0x3E6, "user_data");
     }
     mnDiagram2_InitUserData(data, arg0);
     GObj_InitUserData(gobj, 0, (void (*)(void*)) mnDiagram2_FreeUserData,
