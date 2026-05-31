@@ -321,7 +321,7 @@ struct pl_804D6470_t {
     /*  +D8 */ float xD8;
     /*  +DC */ u32 xDC;
     /*  +E0 */ unsigned int xE0;
-    /*  +E4 */ UNK_T xE4;
+    /*  +E4 */ unsigned int xE4;
     /*  +E8 */ float xE8;
     /*  +EC */ int xEC;
     /*  +F0 */ u32 xF0;

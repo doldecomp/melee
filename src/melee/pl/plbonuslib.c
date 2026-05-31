@@ -883,7 +883,55 @@ void fn_8003EE2C(int arg0, int arg1)
     }
 }
 
-/// fn_8003F294
+void fn_8003F294(int arg0, int arg1)
+{
+    plActionStats* stats;
+    pl_StaleMoveTableExt_t* t = Player_GetStaleMoveTableIndexPtr2(arg0);
+    pl_StaleMoveTableExt_t* t2;
+    f32 dx;
+    f32 dy;
+    u32 thresh;
+
+    Player_GetEntityAtIndex(arg0, arg1);
+    stats = Player_GetActionStats(arg0);
+    if (arg1 != 1) {
+        pl_8003906C(arg0, 0x3B, NULL, pl_804D6470->x70, pl_804D6470->x74,
+                    pl_800386D8(stats, 0x6B), &t->xD9C);
+        pl_8003906C(arg0, 0x45, NULL, pl_804D6470->x90, pl_804D6470->x94,
+                    pl_800386D8(stats, 0x70), &t->xDA0);
+        pl_8003906C(arg0, 0x49, NULL, pl_804D6470->xA8, pl_804D6470->xAC,
+                    pl_800386E8((pl_800386E8_arg0_t*) stats), &t->xDA4);
+        pl_8003906C(arg0, 0x54, NULL, pl_804D6470->xC4, pl_804D6470->xC8,
+                    pl_800386D8(stats, 0x6F), &t->xDA8);
+        pl_8003906C(arg0, -1, (unsigned int*) &t->xDC8, pl_804D6470->x18,
+                    pl_804D6470->x1C, stats->hits.total, &t->xDAC);
+        pl_8003906C(arg0, 0x13, NULL, pl_804D6470->x2C, pl_804D6470->x30,
+                    stats->attacks.total, &t->xDB0);
+        pl_8003906C(arg0, 0x5C, NULL, pl_804D6470->xE0, pl_804D6470->xE4,
+                    t->xD70, &t->xDB4);
+        pl_8003906C(arg0, 0x99, NULL, pl_804D6470->x130, pl_804D6470->x134,
+                    t->xD34, &t->xDB8);
+        pl_8003906C(arg0, 0x3D, NULL, pl_804D6470->x7C, pl_804D6470->x80,
+                    t->x0_staleMoveTable.xCD8, &t->xDBC);
+        t2 = Player_GetStaleMoveTableIndexPtr2(arg0);
+        dx = t2->x0_staleMoveTable.xCDC;
+        dy = t2->x0_staleMoveTable.xCE0;
+        pl_80039238(arg0, 0x44, NULL, pl_804D6470->x88, &t->xDC0,
+                    *(f32*) &pl_804D6470->x8C, sqrtf(dx * dx + dy * dy));
+        if (pl_8003906C(arg0, -1, (unsigned int*) &t->xDCC, pl_804D6470->xB8,
+                        pl_804D6470->xBC, t->xCF4, &t->xDC4)) {
+            thresh = pl_804D6470->xB8;
+            if (thresh == gm_8016AEDC()) {
+                if (t->xD5C <= thresh) {
+                    t->xDD1.xDD1_value |= 4;
+                }
+            } else if ((t->xDD1.xDD1_value & 4) && t->xD5C > thresh) {
+                t->xDD1.xDD1_value &= ~4;
+            }
+            t->xD5C = -1;
+        }
+    }
+}
 
 void fn_8003F53C(int arg0, int arg1)
 {
