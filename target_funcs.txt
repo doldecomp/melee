@@ -62,7 +62,7 @@ Funcs:
 
 File: src/melee/gr/grinishie1.c
 Funcs:
-- [ ] grInishie1_801FC4A0
+- [x] grInishie1_801FC4A0
 - [ ] grInishie1_801FC664
 
 File: src/melee/if/soundtest.c
