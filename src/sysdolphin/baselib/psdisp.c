@@ -229,6 +229,7 @@ HSD_Particle* particleSort(s32 arg0, u8 arg1, HSD_Particle** arg2,
                            HSD_Particle** arg3)
 {
     psdisp_ParticleSortBucket buckets[16];
+    HSD_Particle** new_var;
     HSD_Particle* var_r28;
     HSD_Particle* var_r3;
     HSD_Particle* var_r4;
@@ -248,7 +249,7 @@ HSD_Particle* particleSort(s32 arg0, u8 arg1, HSD_Particle** arg2,
     u8* temp_r9;
 
     temp_r9 = (u8*) &HSD_PSDisp_8040C360 + arg0;
-    temp_r29 = &hsd_804D0908[arg0];
+    temp_r29 = (new_var = &hsd_804D0908[arg0]);
     cache = &HSD_PSDisp_804D0FC0;
     var_r28 = *temp_r29;
     if (*temp_r9 == arg1) {
