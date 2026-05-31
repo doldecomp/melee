@@ -1904,6 +1904,54 @@ void fn_800DA004(Fighter_GObj* gobj)
     ftCo_Fall_Enter(victim);
 }
 
+void fn_800DA054(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* victim = GET_FIGHTER(fp->victim_gobj);
+    Vec3 selfPos;
+    Vec3 victimPos;
+    f32 facing;
+    f32 dx;
+    f32 dy;
+    f32 v;
+    f32 spd;
+
+    if (!victim->x2226_b2) {
+        lb_8000B1CC(fp->mv.co.capturedamage.x18, NULL, &selfPos);
+        lb_8000B1CC(
+            victim->parts[ftParts_GetBoneIndex(victim, FtPart_XRotN)].joint,
+            NULL, &victimPos);
+        facing = fp->facing_dir;
+        dx = victimPos.x - selfPos.x;
+        dy = (victimPos.y - selfPos.y) + fp->x2170;
+        if (!(dx * facing > p_ftCommonData->x34C)) {
+            if (dy < 0.0f) {
+                dy = -dy;
+            }
+            if (dy > p_ftCommonData->x350) {
+                ftCo_800DA698(gobj, 1);
+            } else if (dx * facing < 0.0f) {
+                if (dx < 0.0f) {
+                    v = -dx;
+                } else {
+                    v = dx;
+                }
+                spd = fp->co_attrs.walk_max_vel;
+                if (v > spd) {
+                    v = spd;
+                }
+                if (dx > 0.0f) {
+                    fp->gr_vel = v;
+                } else {
+                    fp->gr_vel = -v;
+                }
+            }
+        } else {
+            ftCo_800DA698(gobj, 1);
+        }
+    }
+}
+
 void fn_800DA190(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
