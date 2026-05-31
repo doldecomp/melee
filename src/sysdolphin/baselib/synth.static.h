@@ -64,7 +64,8 @@ static u8 lbl_804C4524[0x1C];
 static struct {
     /* 00 */ s32 x0;
     /* 04 */ s32 x4;
-    /* 08 */ char pad[0x18];
+    /* 08 */ s32 x8;
+    /* 0C */ char pad[0x14];
 } lbl_804C4540[3];
 
 static int hsd_SynthSFXBankNum;
@@ -83,8 +84,8 @@ static int hsd_SynthSFXBankNum;
 /* 4D7758 */ static u32 HSD_Synth_804D7758;
 /* 4D7754 */ static int HSD_Synth_804D775C;
 /* 4D7760 */ static int HSD_Synth_804D7760;
-/* 4D7768 */ static int HSD_Synth_804D7768;
-/* 4D776C */ static int HSD_Synth_804D776C;
+/* 4D7768 */ static u32 HSD_Synth_804D7768;
+/* 4D776C */ static u32 HSD_Synth_804D776C;
 /* 4D7778 */ static volatile u8 HSD_Synth_804D7778;
 /* 4D777C */ static s32 HSD_Synth_804D777C;
 /* 4D7780 */ static u32 HSD_Synth_804D7780;
