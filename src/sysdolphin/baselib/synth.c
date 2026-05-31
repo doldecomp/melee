@@ -30,9 +30,115 @@ void HSD_AudioFree(void* ptr)
     OSFreeToHeap(HSD_Synth_804D6018, ptr);
 }
 
-/// #HSD_SynthSFXSampleLoadCallback
-
 extern void* HSD_Synth_804D7730;
+extern u32* HSD_Synth_804D7734;
+
+struct SfxLoadStreamNode {
+    /* 0x00 */ struct SfxLoadStreamNode* x0;
+    /* 0x04 */ s32 x4;
+    /* 0x08 */ s32 x8;
+    /* 0x0C */ s32 xC;
+    /* 0x10 */ s32 x10;
+    /* 0x14 */ s32 x14;
+};
+
+void HSD_SynthSFXSampleLoadCallback(int result, int length, void* addr,
+                                    int cancelflag)
+{
+    BOOL intr;
+    s32 i;
+
+    if (HSD_Synth_804D7738 == 0) {
+        int bankID = HSD_Synth_804C2A60[0].bankID;
+        u32* buf = (u32*) HSD_Synth_804D7730;
+        u32 data_bytes = hsd_SynthSFXLoadBuf[0] - 0x10;
+        s32 src_idx = (data_bytes >> 2) - 1;
+        u32 total = (hsd_SynthSFXLoadBuf[2] * 8 + hsd_SynthSFXLoadBuf[0] + 0x37) &
+                    ~0x1F;
+        u32 shift = (total - data_bytes) >> 2;
+        u32 dnw;
+        AXVPB** pp;
+        struct SfxLoadStreamNode* node;
+        u8* cur;
+        s32 count;
+        s32 base;
+        s32 bank2;
+
+        for (i = src_idx; i >= 0; i--) {
+            buf[i + shift] = buf[i];
+        }
+        dnw = (total - hsd_SynthSFXLoadBuf[0]) >> 2;
+        buf[dnw] = hsd_SynthSFXLoadBuf[4];
+        buf[dnw + 1] = hsd_SynthSFXLoadBuf[5];
+        buf[dnw + 2] = hsd_SynthSFXLoadBuf[6];
+        buf[dnw + 3] = hsd_SynthSFXLoadBuf[7];
+        HSD_Synth_804D7734 = &buf[dnw];
+
+        pp = &HSD_Synth_804C2AE0[bankID];
+        while (*pp != NULL) {
+            pp = &(*pp)->next;
+        }
+        *pp = (AXVPB*) buf;
+
+        node = (struct SfxLoadStreamNode*) buf;
+        node->x0 = NULL;
+        node->x4 = HSD_Synth_804C2A60[0].entrynum;
+        node->x10 = hsd_SynthSFXBank[bankID];
+        node->x14 = hsd_SynthSFXLoadBuf[1];
+        count = hsd_SynthSFXLoadBuf[2];
+        base = hsd_SynthSFXLoadBuf[3];
+        node->x8 = base;
+        node->xC = count;
+        bank2 = hsd_SynthSFXBank[bankID] * 2;
+
+        cur = (u8*) buf + 0x18;
+        for (i = 0; i < count; i++) {
+            s32 n = *HSD_Synth_804D7734;
+            s32 nbytes = (n << 6) + 8;
+            s32 k;
+            s32 id;
+            struct SfxLoadStreamNode* nn;
+            void** bucket;
+
+            memcpy(cur + 8, HSD_Synth_804D7734, nbytes);
+            for (k = 0; k < n; k++) {
+                u8* e = cur + k * 0x40;
+                if (*(u32*) (e + 0x10) != 0) {
+                    *(u32*) (e + 0x14) += bank2;
+                } else {
+                    *(u32*) (e + 0x14) = HSD_Synth_804D7784;
+                }
+                *(u32*) (e + 0x18) += bank2;
+                *(u32*) (e + 0x1C) += bank2;
+            }
+            nn = (struct SfxLoadStreamNode*) cur;
+            id = base + i;
+            nn->x4 = id;
+            bucket = &HSD_Synth_804C29E0[id & 0x1F];
+            nn->x0 = (struct SfxLoadStreamNode*) *bucket;
+            *bucket = nn;
+            HSD_Synth_804D7734 += ((u32) nbytes & ~3) >> 2;
+            cur += ((n << 6) + 0x10) & ~3;
+        }
+        if (HSD_Synth_804C2A60[0].x8 != 0) {
+            ((void (*)(s32, s32)) HSD_Synth_804C2A60[0].x8)(
+                HSD_Synth_804C2A60[0].entrynum, HSD_Synth_804C2A60[0].xC);
+        }
+        hsd_SynthSFXBank[bankID] += hsd_SynthSFXLoadBuf[1];
+    } else {
+        if (HSD_Synth_804D7730 != NULL) {
+            OSFreeToHeap(HSD_Synth_804D6018, HSD_Synth_804D7730);
+        }
+        HSD_Synth_804D7738 = 0;
+    }
+    intr = OSDisableInterrupts();
+    HSD_Synth_804D772C -= 1;
+    for (i = 0; i < HSD_Synth_804D772C; i++) {
+        HSD_Synth_804C2A60[i] = HSD_Synth_804C2A60[i + 1];
+    }
+    HSD_SynthSFXLoadNewProc();
+    OSRestoreInterrupts(intr);
+}
 
 static void HSD_SynthSFXHeaderLoadCallback(int result, int length, void* addr,
                                            int cancelflag)
