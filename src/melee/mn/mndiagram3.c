@@ -76,20 +76,17 @@ void mnDiagram3_80245BA4(HSD_GObj* gobj)
             stat_type = (u8) val;
         }
     }
-    ((row0) ? ((void) 0)
-            : __assert("jobj.h", 0x3EE, "jobj"));
 
     row1 = data->jobjs[7];
     {
-        f32 row0_y = row0->translate.y;
-        ((row1) ? ((void) 0)
-                : __assert("jobj.h", 0x3EE, "jobj"));
+        f32 row0_y = HSD_JObjGetTranslationY(row0);
+        f32 row1_y = HSD_JObjGetTranslationY(row1);
 
         {
             u16* stat_table;
             stat_table = (u16*) (base + ((int) stat_type << 1));
             icon_x_offset = mnDiagram3_804DC010;
-            row_spacing = row1->translate.y - row0_y;
+            row_spacing = row1_y - row0_y;
             max_distance = 0x5F5E0FF;
             max_percentage = 0x98967F;
             divider = mnDiagram3_804DC008;
@@ -131,14 +128,7 @@ void mnDiagram3_80245BA4(HSD_GObj* gobj)
                 } else {
                     entity = mnDiagram2_GetRankedFighter(stat_type, (u8) i);
                     icon = mnDiagram_80242B38(entity, 0);
-                    if (icon == NULL) {
-                        __assert("jobj.h", 0x3B3,
-                                 "jobj");
-                    }
-                    icon->translate.y = row_spacing * (f32) i;
-                    if (!(icon->flags & (1 << 25))) {
-                        HSD_JObjSetMtxDirty(icon);
-                    }
+                    HSD_JObjSetTranslateY(icon, row_spacing * (f32) i);
                     HSD_JObjAddChild(data->jobjs[6], icon);
                 }
 
@@ -168,14 +158,7 @@ void mnDiagram3_80245BA4(HSD_GObj* gobj)
                     mnDiagram2_GetAggregatedFighterRank(sp38, stat_type,
                                                         (u8) i);
                     icon = mnDiagram_80242B38(sp38[0], 0);
-                    if (icon == NULL) {
-                        __assert("jobj.h", 0x3B3,
-                                 "jobj");
-                    }
-                    icon->translate.y = row_spacing * (f32) i;
-                    if (!(icon->flags & (1 << 25))) {
-                        HSD_JObjSetMtxDirty(icon);
-                    }
+                    HSD_JObjSetTranslateY(icon, row_spacing * (f32) i);
                     HSD_JObjAddChild(data->jobjs[6], icon);
 
                     mnDiagram2_GetAggregatedFighterRank(sp28, stat_type,
@@ -408,6 +391,37 @@ void mnDiagram3_80247008(int arg0)
     HSD_GObj_SetupProc(gobj, fn_80246E64, 0);
 }
 
+#undef __FILE__
+#define __FILE__ "jobj.h"
+static inline void HSD_JObjSetTranslateX_Fake(HSD_JObj* jobj, f32 x)
+{
+    HSD_ASSERT(932, jobj);
+    jobj->translate.x = x;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        ftCo_800C6AFC(jobj);
+    }
+}
+
+static inline void HSD_JObjSetTranslateY_Fake(HSD_JObj* jobj, f32 y)
+{
+    HSD_ASSERT(947, jobj);
+    jobj->translate.y = y;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        ftCo_800C6AFC(jobj);
+    }
+}
+
+static inline void HSD_JObjSetTranslateZ_Fake(HSD_JObj* jobj, f32 z)
+{
+    HSD_ASSERT(962, jobj);
+    jobj->translate.z = z;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        ftCo_800C6AFC(jobj);
+    }
+}
+#undef __FILE__
+#define __FILE__ "mndiagram3.c"
+
 void mnDiagram3_8024714C(void* arg0)
 {
     Vec3 sp48;
@@ -448,56 +462,20 @@ void mnDiagram3_8024714C(void* arg0)
 
         data = gobj->user_data;
         row0 = data->jobjs[8];
-        ((row0) ? ((void) 0)
-                : __assert("jobj.h", 0x3EE, "jobj"));
-
         row1 = data->jobjs[9];
-        row_spacing = row0->translate.y;
-        ((row1) ? ((void) 0)
-                : __assert("jobj.h", 0x3EE, "jobj"));
-        row_spacing = row1->translate.y - row_spacing;
+        row_spacing =
+            HSD_JObjGetTranslationY(row1) - HSD_JObjGetTranslationY(row0);
 
         row0 = data->jobjs[8];
-        ((row0) ? ((void) 0)
-                : __assert("jobj.h", 0x3E1, "jobj"));
-        {
-            f32 tx = row0->translate.x;
-            ((popup_jobj)
-                 ? ((void) 0)
-                 : __assert("jobj.h", 0x3A4, "jobj"));
-            popup_jobj->translate.x = tx;
-        }
-        if (!(popup_jobj->flags & 0x02000000)) {
-            ftCo_800C6AFC(popup_jobj);
-        }
+        HSD_JObjSetTranslateX_Fake(popup_jobj, HSD_JObjGetTranslationX(row0));
 
         row0 = data->jobjs[8];
-        ((row0) ? ((void) 0)
-                : __assert("jobj.h", 0x3EE, "jobj"));
-        {
-            f32 ty = row_spacing * mnDiagram3_804DC00C + row0->translate.y;
-            ((popup_jobj)
-                 ? ((void) 0)
-                 : __assert("jobj.h", 0x3B3, "jobj"));
-            popup_jobj->translate.y = ty;
-        }
-        if (!(popup_jobj->flags & 0x02000000)) {
-            ftCo_800C6AFC(popup_jobj);
-        }
+        HSD_JObjSetTranslateY_Fake(popup_jobj,
+                                   row_spacing * mnDiagram3_804DC00C +
+                                       HSD_JObjGetTranslationY(row0));
 
         row0 = data->jobjs[8];
-        ((row0) ? ((void) 0)
-                : __assert("jobj.h", 0x3FB, "jobj"));
-        {
-            f32 tz = row0->translate.z;
-            ((popup_jobj)
-                 ? ((void) 0)
-                 : __assert("jobj.h", 0x3C2, "jobj"));
-            popup_jobj->translate.z = tz;
-        }
-        if (!(popup_jobj->flags & 0x02000000)) {
-            ftCo_800C6AFC(popup_jobj);
-        }
+        HSD_JObjSetTranslateZ_Fake(popup_jobj, HSD_JObjGetTranslationZ(row0));
     }
 
     {
@@ -510,14 +488,10 @@ void mnDiagram3_8024714C(void* arg0)
         d = gobj->user_data;
         row0 = d->jobjs[8];
         scroll = d->scroll_offset;
-        ((row0) ? ((void) 0)
-                : __assert("jobj.h", 0x3EE, "jobj"));
 
         row1 = d->jobjs[9];
-        row_spacing = row0->translate.y;
-        ((row1) ? ((void) 0)
-                : __assert("jobj.h", 0x3EE, "jobj"));
-        row_spacing = row1->translate.y - row_spacing;
+        row_spacing =
+            HSD_JObjGetTranslationY(row1) - HSD_JObjGetTranslationY(row0);
 
         lb_8000B1CC(d->jobjs[8], &mnDiagram3_803EEC28.x0, &sp48);
 
