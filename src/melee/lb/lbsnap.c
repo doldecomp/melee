@@ -285,11 +285,15 @@ static inline int lbSnap_GetSaveDataOffset(struct Unk80433380_0* snap)
 
 int lbSnap_8001DF20(void)
 {
-    struct Unk80433380_0* snap = lbSnap_80433380.x0;
+    struct Unk803BACC8* descPtr = &lbSnap_803BACC8;
+    int offset;
 
-    lbSnap_803BACC8.x14 = lbSnap_GetSaveDataOffset(snap);
-    lbSnap_803BACC8.x1C = snap;
-    return lb_8001C4A8(&lbSnap_803BACC8.x14, &lbSnap_803BACC8);
+    struct Unk80433380_0* snap = lbSnap_80433380.x0;
+    
+    offset = lbSnap_GetSaveDataOffset(snap);
+    descPtr->x14 = offset;
+    descPtr->x1C = snap;
+    return lb_8001C4A8(&descPtr->x14, descPtr);
 }
 
 int lbSnap_8001DF6C(int chan)
