@@ -114,26 +114,9 @@ void fn_80023254(s32 arg0)
     char* base;
 
     arr_b44 = lbl_80433B44;
-    local_ptr = local_arr;
-    for (i = 0; i < 7; i++) {
-        arr_b44[0] = 0x37;
-        local_ptr[0] = 0;
-        arr_b44[1] = 0x37;
-        local_ptr[1] = 0;
-        arr_b44[2] = 0x37;
-        local_ptr[2] = 0;
-        arr_b44[3] = 0x37;
-        local_ptr[3] = 0;
-        arr_b44[4] = 0x37;
-        local_ptr[4] = 0;
-        arr_b44[5] = 0x37;
-        local_ptr[5] = 0;
-        arr_b44[6] = 0x37;
-        local_ptr[6] = 0;
-        arr_b44[7] = 0x37;
-        arr_b44 += 8;
-        local_ptr[7] = 0;
-        local_ptr += 8;
+    for (i = 0; i < 0x38; i++) {
+        arr_b44[i] = 0x37;
+        local_arr[i] = 0;
     }
 
     arr_b44 = lbl_80433B44;
@@ -161,33 +144,12 @@ void fn_80023254(s32 arg0)
 
             if (count < 0x37) {
                 shift_ptr = &lbl_80433B44[0x37];
-                n = 0x37 - count;
-
-                if ((n >> 3) != 0) {
-                    for (i = n >> 3; i != 0; i--) {
-                        shift_ptr[0] = shift_ptr[-1];
-                        shift_ptr[-1] = shift_ptr[-2];
-                        shift_ptr[-2] = shift_ptr[-3];
-                        shift_ptr[-3] = shift_ptr[-4];
-                        shift_ptr[-4] = shift_ptr[-5];
-                        shift_ptr[-5] = shift_ptr[-6];
-                        shift_ptr[-6] = shift_ptr[-7];
-                        shift_ptr[-7] = shift_ptr[-8];
-                        shift_ptr -= 8;
-                    }
-                    n &= 7;
-                    if (n == 0) {
-                        goto insert;
-                    }
-                }
-
-                for (i = n; i != 0; i--) {
+                for (n = 0x37 - count; n != 0; n--) {
                     shift_ptr[0] = shift_ptr[-1];
                     shift_ptr--;
-                };
+                }
             }
 
-        insert:
             *arr_b44 = j;
             *local_ptr = 1;
 
