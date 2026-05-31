@@ -2181,7 +2181,37 @@ float ftCo_800DA824(Fighter* fp)
     return fp->dmg.x1830_percent * co->x368 + temp;
 }
 
-/// #fn_800DA8E4
+void fn_800DA8E4(Fighter_GObj* gobj, Fighter_GObj* victim_gobj, s32 arg2)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* victim = GET_FIGHTER(victim_gobj);
+    f32 v;
+    ftCommonData* cd;
+
+    ftCommon_8007DB58(gobj);
+    ftCo_8009750C(gobj);
+    ftCo_800DD168(gobj);
+    fp->x1A5C = victim_gobj;
+    fp->victim_gobj = victim_gobj;
+    fp->x221B_b5 = 0;
+    fp->x221B_b7 = 0;
+    fp->facing_dir = -victim->facing_dir;
+    cd = p_ftCommonData;
+    v = cd->x360 * (cd->x364 - (f32) (Player_80033BB8(fp->player_id) + 1));
+    ftCommon_InitGrab(
+        fp, 0,
+        fp->dmg.x1830_percent * cd->x368 +
+            (cd->x358 * (cd->x35C - (f32) Player_GetHandicap(fp->player_id)) +
+             cd->x354 + v));
+    fp->mv.ca.specials.grav = 0.0f;
+    fp->mv._[0xC] = 0;
+    fp->mv.ca.specialhi.vel.x = 0.0f;
+    fp->mv.ca.specialhi.vel.y = 0.0f;
+    Fighter_ChangeMotionState(gobj, arg2, 0, 0.0f, 1.0f, 0.0f, NULL);
+    ftAnim_8006EBA4(gobj);
+    ftCommon_8007E2FC(gobj);
+    ftCommon_8007E2F4(fp, 0x1FF);
+}
 
 void fn_800DAA40(Fighter_GObj* arg0, Fighter_GObj* arg1)
 {

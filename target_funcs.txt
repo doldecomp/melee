@@ -13,7 +13,7 @@ Funcs:
 - [x] fn_800D9930
 - [x] fn_800D9CE8
 - [x] fn_800DA054
-- [ ] fn_800DA8E4
+- [x] fn_800DA8E4
 - [ ] ftCo_800D730C
 - [ ] ftCo_CapturePulledHi_Phys
 
