@@ -106,6 +106,11 @@ Vec3 grI1_803B8268;
         }                                                                     \
     }
 
+s16 grI1_803E48C8[22] = {
+    13, 3, 3, 14, 3, 14, 15, 3, 15, 16, 3, 16,
+    17, 3, 17, 18, 3, 18, 19, 3, 19, 0,
+};
+
 StageCallbacks grI1_803E48F4[] = {
     {
         grInishie1_801FAAA0,
@@ -136,6 +141,34 @@ StageCallbacks grI1_803E48F4[] = {
         0xC0000000,
     },
 };
+
+char grI1_803E4944[] = "/GrI1.dat";
+
+typedef struct grInishie1_StageData {
+    StageData stage_data;
+    char report_fmt_get_gobj[0x24];
+} grInishie1_StageData;
+
+grInishie1_StageData grI1_803E4950 = {
+    {
+        INISHIE1,
+        NULL,
+        grI1_803E4944,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        1,
+        (S16Vec3*) grI1_803E48C8,
+        7,
+    },
+    "%s:%d: couldn t get gobj(id=%d)\n",
+};
+
+char grI1_803E49A8[] = "grinishie1.c";
 
 void grInishie1_801FA908(bool arg) {}
 
@@ -176,8 +209,10 @@ bool grInishie1_801FA9AC(void)
 
 HSD_GObj* grInishie1_801FA9B4(s32 arg0)
 {
-    StageCallbacks* cb = &grI1_803E48F4[arg0];
-    HSD_GObj* gobj = Ground_GetStageGObj(arg0);
+    HSD_GObj* gobj;
+    StageCallbacks* cb = (StageCallbacks*) ((char*) grI1_803E48C8 + 0x2c) + arg0;
+
+    gobj = Ground_GetStageGObj(arg0);
 
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;
@@ -199,8 +234,7 @@ HSD_GObj* grInishie1_801FA9B4(s32 arg0)
             HSD_GObj_SetupProc(gobj, cb->callback2, 4U);
         }
     } else {
-        OSReport("%s:%d: couldn't get gobj(id=%d)\n", "grinishie1.c", 0xE7,
-                 arg0);
+        OSReport(grI1_803E4950.report_fmt_get_gobj, grI1_803E49A8, 0xE7, arg0);
     }
 
     return gobj;
