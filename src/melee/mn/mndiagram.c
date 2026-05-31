@@ -1359,24 +1359,31 @@ typedef struct mnDiagram_PopupData {
     /* 0x38 */ HSD_Text* text[6];
 } mnDiagram_PopupData;
 
+inline Vec3* mnDiagram_PopupAnimProc_Inline(mnDiagram_AnimTable* arg0,
+                                            int arg1)
+{
+    return &arg0->points[arg1];
+}
+
 void mnDiagram_PopupAnimProc(void* arg0)
 {
     mnDiagram_PopupData* data = ((HSD_GObj*) arg0)->user_data;
     HSD_Text* text;
     mnDiagram_AnimTable* tbl = (mnDiagram_AnimTable*) &mnDiagram_803EE728;
-    Point3d pos;
+    Vec3 pos;
+    float new_var;
     f32 anim_frame;
-    PAD_STACK(24);
+    PAD_STACK(0x18);
 
     HSD_JObjAnimAll(data->jobjs[5]);
 
     text = data->text[0];
-    lb_8000B1CC(data->jobjs[8], &tbl->points[0], &pos);
+    lb_8000B1CC(data->jobjs[8], mnDiagram_PopupAnimProc_Inline(tbl, 0), &pos);
     {
         f32 y = pos.y;
         f32 z = pos.z;
         text->pos_x = pos.x;
-        text->pos_y = -y;
+        text->pos_y = (new_var = -y);
         text->pos_z = z;
     }
     text->default_alignment = 0;
@@ -1386,12 +1393,13 @@ void mnDiagram_PopupAnimProc(void* arg0)
         HSD_Text* t;
         f32 y;
         f32 z;
-        lb_8000B1CC(data->jobjs[11], &tbl->points[1], &pos);
+        lb_8000B1CC(data->jobjs[11], mnDiagram_PopupAnimProc_Inline(tbl, 1),
+                    &pos);
         y = pos.y;
         z = pos.z;
         t = data->text[1];
         t->pos_x = pos.x;
-        t->pos_y = -y;
+        t->pos_y = (new_var = -y);
         t->pos_z = z;
         text->default_alignment = 1;
     }
@@ -1399,12 +1407,13 @@ void mnDiagram_PopupAnimProc(void* arg0)
         HSD_Text* t;
         f32 y;
         f32 z;
-        lb_8000B1CC(data->jobjs[10], &tbl->points[2], &pos);
+        lb_8000B1CC(data->jobjs[10], mnDiagram_PopupAnimProc_Inline(tbl, 2),
+                    &pos);
         y = pos.y;
         z = pos.z;
         t = data->text[2];
         t->pos_x = pos.x;
-        t->pos_y = -y;
+        t->pos_y = (new_var = -y);
         t->pos_z = z;
         text->default_alignment = 1;
     }
@@ -1414,12 +1423,13 @@ void mnDiagram_PopupAnimProc(void* arg0)
         HSD_Text* t;
         f32 y;
         f32 z;
-        lb_8000B1CC(data->jobjs[3], &tbl->points[1], &pos);
+        lb_8000B1CC(data->jobjs[3], mnDiagram_PopupAnimProc_Inline(tbl, 1),
+                    &pos);
         y = pos.y;
         z = pos.z;
         t = data->text[3];
         t->pos_x = pos.x;
-        t->pos_y = -y;
+        t->pos_y = (new_var = -y);
         t->pos_z = z;
     }
     text->default_alignment = 1;
@@ -1428,12 +1438,13 @@ void mnDiagram_PopupAnimProc(void* arg0)
         HSD_Text* t;
         f32 y;
         f32 z;
-        lb_8000B1CC(data->jobjs[2], &tbl->points[2], &pos);
+        lb_8000B1CC(data->jobjs[2], mnDiagram_PopupAnimProc_Inline(tbl, 2),
+                    &pos);
         y = pos.y;
         z = pos.z;
         t = data->text[4];
         t->pos_x = pos.x;
-        t->pos_y = -y;
+        t->pos_y = (new_var = -y);
         t->pos_z = z;
         text->default_alignment = 1;
     }
@@ -1443,12 +1454,13 @@ void mnDiagram_PopupAnimProc(void* arg0)
         HSD_Text* t;
         f32 y;
         f32 z;
-        lb_8000B1CC(data->jobjs[13], &tbl->points[1], &pos);
+        lb_8000B1CC(data->jobjs[13], mnDiagram_PopupAnimProc_Inline(tbl, 1),
+                    &pos);
         y = pos.y;
         z = pos.z;
         t = data->text[3];
         t->pos_x = pos.x;
-        t->pos_y = -y;
+        t->pos_y = (new_var = -y);
         t->pos_z = z;
     }
     text->default_alignment = 1;
