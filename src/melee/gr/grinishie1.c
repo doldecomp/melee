@@ -676,7 +676,8 @@ void grInishie1_801FBAA0(HSD_GObj* gobj, s32 index)
 void grInishie1_801FBC4C(HSD_GObj* gobj, u32 index)
 {
     Ground* gp = GET_GROUND(gobj);
-    DOBJ_CLEAR_LOOP(gp->gv.inishie1.blocks[index].jobj2);
+    HSD_JObj* jobj2 = gp->gv.inishie1.blocks[index].jobj2;
+    DOBJ_CLEAR_LOOP(jobj2);
     Ground_801C4A08(gp->gv.inishie1.blocks[index].hatena_gobj);
     gp->gv.inishie1.blocks[index].hatena_gobj = NULL;
 }
