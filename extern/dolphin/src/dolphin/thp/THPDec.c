@@ -96,6 +96,89 @@ void __THPPrepBitStream(THPFileInfo* info)
     }
 }
 
+s32 THPDec_8032F8D4(u32 file_arg, void* out_arg)
+{
+    u8* p = (u8*) file_arg;
+    THPDec_8032FD40_Data* out = (THPDec_8032FD40_Data*) out_arg;
+    u8 sH[8];
+    u8 sV[8];
+    char jfif[] = "JFIF";
+    u8 found_jfif;
+    u8 marker;
+    u32 i;
+    u32 ncomp;
+    u32 len;
+
+    found_jfif = 0;
+    memset(out, 0, 0xC);
+    if (p[0] != 0xFF || p[1] != 0xD8) {
+        return 0;
+    }
+    p += 2;
+
+    do {
+        if (*p != 0xFF) {
+            return 0;
+        }
+        p++;
+        while ((s8) *p == 0xFF) {
+            p++;
+        }
+        marker = *p;
+        p++;
+
+        if (marker == 0xC0) {
+            out->_pad = (p[3] << 8) | p[4];
+            out->val1 = (p[5] << 8) | p[6];
+            ncomp = p[7];
+            p += 8;
+            if (ncomp != 3) {
+                return 0;
+            }
+            for (i = 0; i < ncomp; i++) {
+                sH[i] = p[i * 3 + 1] >> 4;
+                sV[i] = p[i * 3 + 1] & 0xF;
+            }
+            if (sH[0] / sH[1] == 2 && sH[0] / sH[2] == 2) {
+                if (sV[0] / sV[1] == 2 && sV[0] / sV[2] == 2) {
+                    out->val2 = 4;
+                } else if (sV[0] == sV[1] && sV[0] == sV[2]) {
+                    out->val2 = 2;
+                }
+            } else if (sH[0] == sH[1] && sH[0] == sH[2]) {
+                if (sV[0] == sV[1] && sV[0] == sV[2]) {
+                    out->val2 = 1;
+                }
+            } else {
+                return 0;
+            }
+        } else if (marker == 0xE0) {
+            len = (p[0] << 8) | p[1];
+            p += 2;
+            for (i = 0; i < 5; i++) {
+                if (*p != jfif[i]) {
+                    return 0;
+                }
+                p++;
+            }
+            found_jfif = 1;
+            for (i = 0; i < len - 7; i++) {
+                p++;
+            }
+        } else if (marker == 0xDA) {
+            return 1;
+        } else if (marker >= 0xC0 && marker <= 0xFE) {
+            len = (p[0] << 8) | p[1];
+            p += 2;
+            for (i = 0; i < len - 2; i++) {
+                p++;
+            }
+        }
+    } while (!(out->val2 != 0 && found_jfif != 0));
+
+    return 1;
+}
+
 static inline void __THPGQRSetup(void)
 {
     register u32 tmp1, tmp2;

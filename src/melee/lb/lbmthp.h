@@ -12,7 +12,7 @@
 
 /* THPDec function declarations */
 BOOL THPInit(void);
-void THPDec_8032F8D4(u32, void*);
+s32 THPDec_8032F8D4(u32, void*);
 s32 THPDec_8032FD40(THPDec_8032FD40_Data* arg0, u16 height);
 void THPDec_80331340(s32, void*, void*, void*, s32);
 void THPDec_803313D0(s32, void*, void*, void*);

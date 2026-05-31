@@ -1,0 +1,91 @@
+File: src/dolphin/thp/THPDec.c
+Funcs:
+- [x] THPDec_8032F8D4
+- [ ] THPDec_80330158
+- [ ] THPDec_803310CC
+- [ ] THPDec_80331340
+- [ ] THPDec_803313D0
+
+File: src/melee/ft/chara/ftCommon/ftCo_Attack100.c
+Funcs:
+- [ ] fn_800D8EC8
+- [ ] fn_800D9558
+- [ ] fn_800D9930
+- [ ] fn_800D9CE8
+- [ ] fn_800DA054
+- [ ] fn_800DA8E4
+- [ ] ftCo_800D730C
+- [ ] ftCo_CapturePulledHi_Phys
+
+File: src/melee/ft/chara/ftKirby/ftKb_SpecialN.c
+Funcs:
+- [ ] fn_800F9260
+- [ ] ftKb_EatWait_IASA
+- [ ] ftKb_SpecialAirLw_Coll
+- [ ] ftKb_SpecialAirLwEnd_Coll
+- [ ] ftKb_SpecialAirLwStart_Coll
+- [ ] ftKb_SpecialAirNCaptureWait_IASA
+- [ ] ftKb_SpecialLw1_Coll
+- [ ] ftKb_SpecialNSpit0_Anim
+- [ ] ftKb_SpecialNSpit1_Anim
+
+File: src/melee/ft/ftcoll.c
+Funcs:
+- [ ] ftColl_8007861C
+
+File: src/melee/ft/ftdynamics.c
+Funcs:
+- [ ] ftCo_8009E7B4
+
+File: src/melee/gm/gm_1601.c
+Funcs:
+- [ ] fn_80161154
+- [ ] gm_80166378
+
+File: src/melee/gm/gm_18A5.c
+Funcs:
+- [ ] fn_8018B090
+
+File: src/melee/gm/gm_1B03.c
+Funcs:
+- [ ] gm_801B0DD0
+- [ ] gm_801B1C24
+
+File: src/melee/gm/gm_1BA8.c
+Funcs:
+- [ ] gm_801BAD70
+- [ ] gm_801BDE94
+
+File: src/melee/gr/grflatzone.c
+Funcs:
+- [ ] grFlatzone_80218060
+
+File: src/melee/gr/grinishie1.c
+Funcs:
+- [ ] grInishie1_801FC4A0
+- [ ] grInishie1_801FC664
+
+File: src/melee/if/soundtest.c
+Funcs:
+- [ ] un_802FF9DC
+- [ ] un_802FFF2C
+
+File: src/melee/if/textdraw.c
+Funcs:
+- [ ] DevText_Setup
+
+File: src/melee/lb/lbaudio_ax.c
+Funcs:
+- [ ] fn_80023254
+
+File: src/melee/pl/plbonuslib.c
+Funcs:
+- [ ] fn_8003F294
+- [ ] fn_8003F654
+- [ ] pl_8003E4A4
+
+File: src/sysdolphin/baselib/synth.c
+Funcs:
+- [ ] HSD_Synth_8038A000
+- [ ] HSD_Synth_8038ADD0
+- [ ] HSD_SynthSFXSampleLoadCallback
