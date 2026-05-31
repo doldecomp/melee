@@ -443,6 +443,7 @@ void ftCo_800D71D8(Fighter_GObj* gobj)
 
 bool ftCo_800D730C(Fighter_GObj* gobj, bool arg1)
 {
+    s32 unused1;
     Fighter* fp = GET_FIGHTER(gobj);
     struct Fighter_x2D0_t* x2d0 = fp->x2D0;
     Vec3 vel;
@@ -450,6 +451,12 @@ bool ftCo_800D730C(Fighter_GObj* gobj, bool arg1)
     s32 r29;
     s32 r4;
     s32 result;
+    s32 unused2;
+    s32 unused3;
+    s32 unused4;
+    s32 unused5;
+    s32 unused6;
+    s32 unused7;
 
     if (fp->motion_id == 0x9B) {
         if (ft_did_jump(fp, arg1)) {
