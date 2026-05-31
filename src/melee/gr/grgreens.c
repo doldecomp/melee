@@ -822,8 +822,8 @@ void grGreens_80214B58(Ground_GObj* gobj)
 
 void grGreens_80214FA8(Ground_GObj* gobj)
 {
-    unsigned int i;
     int j;
+    unsigned int i;
     Ground* gp = GET_GROUND(gobj);
     int k;
 
