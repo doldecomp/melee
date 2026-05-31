@@ -1213,7 +1213,7 @@ s32 fn_801F9150(HSD_GObj* arg0, s32* out)
 {
     Ground* gp = arg0->user_data;
     s16 next = 0;
-    s16 a;
+    s32 a;
 
     while (true) {
         a = grIm_804D69F4->xB0[gp->gv.icemt.xDE];
@@ -1225,8 +1225,6 @@ s32 fn_801F9150(HSD_GObj* arg0, s32* out)
         gp->gv.icemt.xDE = next;
     }
 }
-
-void fn_801F91A4(void) {}
 
 int fn_801F91A8(Ground_GObj* gobj)
 {
