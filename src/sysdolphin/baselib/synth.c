@@ -754,7 +754,135 @@ void HSD_SynthSFXSetPriority(int id, int prio)
     }
 }
 
-/// #HSD_Synth_8038A000
+s32 HSD_Synth_8038A000(void)
+{
+    BOOL intr;
+    int i;
+    struct HSD_SynthSFXNode* node;
+    struct HSD_SynthSFXNode** pnode;
+
+    intr = OSDisableInterrupts();
+    if (HSD_Synth_804D7758 != 0) {
+        int ch;
+        for (ch = 0; ch < 16; ch++) {
+            int mask = 1 << ch;
+            if (HSD_Synth_804D7758 & mask) {
+                int cnt = HSD_Synth_804C28E0_1784[ch].x178C;
+                if (cnt != 0) {
+                    HSD_Synth_804C28E0_1784[ch].x1784 =
+                        (HSD_Synth_804C28E0_1784[ch].x1784 * ((f32) cnt - 1.0f)) /
+                            (f32) cnt +
+                        HSD_Synth_804C28E0_1784[ch].x1788 / (f32) cnt;
+                    HSD_Synth_804C28E0_1784[ch].x178C -= 1;
+                }
+                if (HSD_Synth_804C28E0_1784[ch].x178C == 0) {
+                    HSD_Synth_804C28E0_1784[ch].x1784 =
+                        HSD_Synth_804C28E0_1784[ch].x1788;
+                    HSD_Synth_804D7758 &= ~mask;
+                }
+            }
+        }
+    }
+    pnode = &HSD_Synth_804D774C;
+    while ((node = *pnode) != NULL) {
+        int active = 0;
+        s16 vol;
+        s32 delta;
+
+        if (node->x0 <= 0) {
+            node->volume_update_pending = 0;
+            *pnode = node->x20;
+            continue;
+        }
+        if (node->user_vol[0].x4 != 0) {
+            int c = node->user_vol[0].x4;
+            node->unk28 = (node->unk28 * ((f32) c - 1.0f)) / (f32) c +
+                          node->user_vol[0].volume / (f32) c;
+            node->user_vol[0].x4 -= 1;
+            if (node->user_vol[0].x4 != 0) {
+                active = 1;
+            }
+        }
+        if (node->user_vol[1].x4 != 0) {
+            int c = node->user_vol[1].x4;
+            node->user_vol[0].x8_float =
+                (node->user_vol[0].x8_float * ((f32) c - 1.0f)) / (f32) c +
+                node->user_vol[1].volume / (f32) c;
+            node->user_vol[1].x4 -= 1;
+            if (node->user_vol[1].x4 != 0) {
+                active = 1;
+            }
+        }
+        if (HSD_Synth_804C28E0_1784[node->xB].x178C != 0) {
+            active = 1;
+        }
+        if (!(node->flags & 3)) {
+            vol = (s16) (32767.0f *
+                         (node->user_vol[0].x8_float *
+                          (node->unk28 *
+                           (HSD_Synth_804D6030 *
+                            HSD_Synth_804C28E0_1784[node->xB].x1784))));
+        } else {
+            vol = 0;
+            active = 0;
+        }
+        delta = (vol - node->x24) / 160;
+        if (delta > 0x14) {
+            delta = 0x14;
+        } else if (delta < -0x14) {
+            delta = -0x14;
+        }
+        for (i = 0; i < node->voice_count; i++) {
+            AXSetVoiceVeDelta(node->voice[i], (s16) delta);
+        }
+        node->x24 += delta * 0xA0;
+        if (delta == 0 && (active == 0 || (f32) vol == 0.0f)) {
+            AXPBVE ve;
+            node->x24 = (u16) vol;
+            ve.currentVolume = vol;
+            ve.currentDelta = 0;
+            for (i = 0; i < node->voice_count; i++) {
+                node->voice[i]->sync &= 0xFFFFFBFF;
+                AXSetVoiceVe(node->voice[i], &ve);
+            }
+            if (active == 0) {
+                u8 flags;
+                node->volume_update_pending = 0;
+                *pnode = node->x20;
+                flags = node->flags;
+                if (flags & 1) {
+                    for (i = 0; i < node->voice_count; i++) {
+                        AXFreeVoice(node->voice[i]);
+                        hsd_SynthSFXNodes[node->voice[i]->index].x0 = 0;
+                    }
+                } else if ((flags & 6) == 2) {
+                    node->flags = flags | 6;
+                    for (i = 0; i < node->voice_count; i++) {
+                        f32 ratio;
+                        u8 flags2 = node->flags;
+                        if (flags2 & 4) {
+                            ratio = 0.0f;
+                        } else {
+                            ratio = node->x18[1] * (node->x14 * node->x18[0]);
+                        }
+                        if (!(flags2 & 8)) {
+                            int j;
+                            for (j = 0; j < node->voice_count; j++) {
+                                AXSetVoiceSrcRatio(node->voice[j], ratio);
+                            }
+                        }
+                    }
+                    if (driverPauseCallback != NULL && node->x27 == 1) {
+                        driverPauseCallback(node->x0);
+                    }
+                }
+                continue;
+            }
+        }
+        pnode = &node->x20;
+    }
+    return OSRestoreInterrupts(intr);
+}
 
 void HSD_SynthSFXUpdateVolume(struct HSD_SynthSFXNode* node)
 {
@@ -902,7 +1030,7 @@ void HSD_SynthSFXSetDriverMasterClockCallback(UNK_T callback)
     driverMasterClockCallback = callback;
 }
 
-void HSD_SynthSFXSetDriverPauseCallback(UNK_T callback)
+void HSD_SynthSFXSetDriverPauseCallback(void (*callback)(s32))
 {
     driverPauseCallback = callback;
 }

@@ -86,7 +86,7 @@ Funcs:
 
 File: src/sysdolphin/baselib/synth.c
 Funcs:
-- [ ] HSD_Synth_8038A000
+- [x] HSD_Synth_8038A000
 - [x] HSD_Synth_8038ADD0
 - [ ] HSD_SynthSFXSampleLoadCallback
 

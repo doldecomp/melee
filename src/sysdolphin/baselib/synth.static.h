@@ -77,7 +77,7 @@ static int hsd_SynthSFXBankNum;
 /* 4D773C */ static volatile int sfxGroupDataReaddressCounter;
 /* 4D7740 */ static void (*driverInactivatedCallback)(int);
 /* 4D7744 */ static void (*driverMasterClockCallback)(int);
-/* 4D7748 */ static UNK_T driverPauseCallback;
+/* 4D7748 */ static void (*driverPauseCallback)(s32);
 /* 4D774C */ static struct HSD_SynthSFXNode* HSD_Synth_804D774C;
 /* 4D7750 */ static int HSD_Synth_804D7750;
 /* 4D7754 */ static u32 HSD_Synth_804D7754; // sound mode
