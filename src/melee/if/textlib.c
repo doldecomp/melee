@@ -165,25 +165,37 @@ void DevText_80302AC0(DevText* text)
     text->flags |= (1 << 5);
 }
 
+#pragma push
+#pragma dont_inline on
 void DevText_ShowBackground(DevText* text)
 {
     text->flags &= ~(1 << 6);
 }
+#pragma pop
 
+#pragma push
+#pragma dont_inline on
 void DevText_HideBackground(DevText* text)
 {
     text->flags |= (1 << 6);
 }
+#pragma pop
 
+#pragma push
+#pragma dont_inline on
 void DevText_ShowText(DevText* text)
 {
     text->flags &= ~(1 << 7);
 }
+#pragma pop
 
+#pragma push
+#pragma dont_inline on
 void DevText_HideText(DevText* text)
 {
     text->flags |= (1 << 7);
 }
+#pragma pop
 
 void DevText_SetScale(DevText* text, f32 x, f32 y)
 {
@@ -225,10 +237,13 @@ GXColor DevText_SetBGColor(DevText* text, GXColor color)
     return old;
 }
 
+#pragma push
+#pragma dont_inline on
 void DevText_Erase(DevText* text)
 {
     memzero(text->buf, 2 * text->w * text->h);
 }
+#pragma pop
 
 inline void DevText_AdvanceLine(DevText* text)
 {
