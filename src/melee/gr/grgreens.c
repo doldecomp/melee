@@ -147,6 +147,11 @@ static s16 grGr_803E7840[30] = {
     0xF,  0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18,
     0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F, 0x20, 0x21, 0x22,
 };
+static s16 grGr_803E787C[30] = { 0,    1,    2,    3,    4,    5,
+                                 6,    7,    8,    9,    0xA,  0xB,
+                                 0xC,  0xD,  0xE,  0xF,  0x10, 0x11,
+                                 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
+                                 0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D };
 static u8 grGr_8049F9E0[0x20];
 
 static inline int randrange(int min, int max);
@@ -830,7 +835,7 @@ void grGreens_80214FA8(Ground_GObj* gobj)
     int k;
 
     for (i = 0; i < 30; i++) {
-        mpJointSetCb2(grGr_803E7840[i], gp, fn_80216DE4);
+        mpJointSetCb2(grGr_803E787C[i], gp, fn_80216DE4);
     }
     for (j = 0; j < 30; j++) {
         HSD_JObj* jobj = Ground_801C3FA4(gobj, grGr_803E7840[j]);
