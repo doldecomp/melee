@@ -88,7 +88,7 @@ File: src/sysdolphin/baselib/synth.c
 Funcs:
 - [x] HSD_Synth_8038A000
 - [x] HSD_Synth_8038ADD0
-- [ ] HSD_SynthSFXSampleLoadCallback
+- [x] HSD_SynthSFXSampleLoadCallback
 
 # ============================================================
 # REMAINING (SYSTEMIC / out-of-scope per abort rules) - analyzed, blocker identified:
