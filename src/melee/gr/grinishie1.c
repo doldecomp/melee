@@ -14,6 +14,7 @@
 #include "gr/grmaterial.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
+#include "gr/stage.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"

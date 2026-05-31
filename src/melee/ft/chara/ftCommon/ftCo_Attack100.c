@@ -14,6 +14,7 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
+#include "ft/ft_0D27.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
@@ -21,6 +22,7 @@
 #include "ftCommon/forward.h"
 
 #include "ftCommon/ftCo_CaptureCut.h"
+#include "ftCommon/ftCo_ItemScrew.h"
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_Throw.h"
 #include "ftCommon/types.h"
@@ -28,6 +30,7 @@
 #include "it/items/itlinkhookshot.h"
 #include "it/items/itsamusgrapple.h"
 #include "it/items/itsscope.h"
+#include "mp/mplib.h"
 
 #include <math.h>
 #include <baselib/gobj.h>

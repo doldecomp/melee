@@ -3,6 +3,7 @@
 
 #include <placeholder.h>
 
+#include "cm/camera.h"
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"

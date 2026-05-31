@@ -28,6 +28,7 @@
 #include "mn/mnstagesel.h"
 #include "pl/player.h"
 #include "pl/plbonus.h"
+#include "pl/plbonuslib.h"
 #include "sc/types.h"
 #include "ty/toy.h"
 
