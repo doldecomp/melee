@@ -18,7 +18,11 @@
 #include "gm/gm_unsplit.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/it_3F14.h"
+#include "it/it_279C.h"
 #include "it/item.h"
+#include "it_2725.h"
+#include "it_279C.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbcollision.h"
@@ -56,10 +60,6 @@ static inline bool itColl_chkECBOverlap(f32 pos_x, f32 pos_y, itECB* ecb_a,
         return false;
     }
 }
-
-extern u8 it_804D6D1C[4];
-
-extern DamageLogEntry it_804A0E70[15];
 
 extern Quaternion it_803B8560;
 

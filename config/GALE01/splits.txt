@@ -841,10 +841,50 @@ melee/ft/chara/ftCommon/ftCo_DemoCallback0.c:
 	.sdata2     start:0x804D8DC0 end:0x804D8DC8
 
 melee/ft/ft_0C31.c:
-	.text       start:0x800C61B0 end:0x800C8170
+	.text       start:0x800C61B0 end:0x800C703C
 	.sdata      start:0x804D3C78 end:0x804D3C90
-	.sbss       start:0x804D6580 end:0x804D6590
-	.sdata2     start:0x804D8DC8 end:0x804D8E58
+	.sdata2     start:0x804D8DC8 end:0x804D8DE8
+
+melee/ft/ftCo_800C703C.c:
+	.text       start:0x800C703C end:0x800C7070
+	.sdata2     start:0x804D8DE8 end:0x804D8DF0
+
+melee/ft/ftCo_800C7070.c:
+	.text       start:0x800C7070 end:0x800C70D0
+	.sdata2     start:0x804D8DF0 end:0x804D8DF8
+
+melee/ft/ftCo_800C70D0.c:
+	.text       start:0x800C70D0 end:0x800C7178
+	.sdata2     start:0x804D8DF8 end:0x804D8E00
+
+melee/ft/ftCo_800C7178.c:
+	.text       start:0x800C7178 end:0x800C7220
+	.sdata2     start:0x804D8E00 end:0x804D8E08
+
+melee/ft/ftCo_800C7220.c:
+	.text       start:0x800C7220 end:0x800C739C
+	.sdata2     start:0x804D8E08 end:0x804D8E10
+
+melee/ft/ftCo_800C739C.c:
+	.text       start:0x800C739C end:0x800C7434
+	.sdata2     start:0x804D8E10 end:0x804D8E18
+
+melee/ft/ftCo_800C7434.c:
+	.text       start:0x800C7434 end:0x800C7590
+	.sdata2     start:0x804D8E18 end:0x804D8E20
+
+melee/ft/ftCo_800C7590.c:
+	.text       start:0x800C7590 end:0x800C78B0
+	.sdata2     start:0x804D8E20 end:0x804D8E30
+
+melee/ft/ftCo_800C78B0.c:
+	.text       start:0x800C78B0 end:0x800C7CA0
+	.sdata2     start:0x804D8E30 end:0x804D8E48
+
+melee/ft/ftCo_800C7CA0.c:
+	.text       start:0x800C7CA0 end:0x800C8170
+	.sbss       start:0x804D6580 end:0x804D6588
+	.sdata2     start:0x804D8E48 end:0x804D8E58
 
 melee/ft/ftmetal.c:
 	.text       start:0x800C8170 end:0x800C884C
@@ -853,6 +893,7 @@ melee/ft/ftmetal.c:
 
 melee/ft/ft_0C88.c:
 	.text       start:0x800C884C end:0x800C8B74
+	.sbss       start:0x804D6588 end:0x804D6590
 
 melee/ft/chara/ftCommon/ftCo_DownSpot.c:
 	.text       start:0x800C8B74 end:0x800C8C84
@@ -3097,14 +3138,55 @@ melee/it/itcoll.c:
 	.sdata      start:0x804D5170 end:0x804D5188
 	.sdata2     start:0x804DC6C8 end:0x804DC708
 
-melee/it/it_2725.c:
-	.text       start:0x80272560 end:0x8027CF00
-	.rodata     start:0x803B85F0 end:0x803B8600
-	.data       start:0x803F1418 end:0x803F5468
+melee/it/it_3F14.c:
+	.data       start:0x803F1418 end:0x803F1F00
 	.bss        start:0x804A0E30 end:0x804A0FD8
-	.sdata      start:0x804D5188 end:0x804D51F0
 	.sbss       start:0x804D6D00 end:0x804D6D48
-	.sdata2     start:0x804DC708 end:0x804DC830
+
+melee/it/it_2725.c:
+	.text       start:0x80272560 end:0x802753DC
+	.data       start:0x803F1F00 end:0x803F1F38
+	.sdata      start:0x804D5188 end:0x804D5198
+	.sdata2     start:0x804DC708 end:0x804DC730
+
+melee/it/ithitbox.c:
+	.text       start:0x802753DC end:0x802759DC
+	.sdata2     start:0x804DC730 end:0x804DC738
+
+melee/it/itmaplib.c:
+	.text       start:0x802759DC end:0x80277D08
+	.data       start:0x803F1F38 end:0x803F1F90
+	.sdata      start:0x804D5198 end:0x804D51B0
+	.sdata2     start:0x804DC738 end:0x804DC770
+
+melee/it/itmaterial.c:
+	.text       start:0x80277D08 end:0x8027870C
+	.data       start:0x803F1F90 end:0x803F20E0
+	.sdata      start:0x804D51B0 end:0x804D51C0
+
+melee/it/iteffect.c:
+	.text       start:0x8027870C end:0x80278F2C
+	.data       start:0x803F20E0 end:0x803F22A8
+	.sdata2     start:0x804DC770 end:0x804DC790
+
+melee/it/itanimlist.c:
+	.text       start:0x80278F2C end:0x80279C48
+	.data       start:0x803F22A8 end:0x803F2310
+	.sdata      start:0x804D51C0 end:0x804D51D0
+	.sdata2     start:0x804DC790 end:0x804DC7B8
+
+melee/it/it_279C.c:
+	.text       start:0x80279C48 end:0x8027B5B0
+	.data       start:0x803F2310 end:0x803F5428
+	.sdata      start:0x804D51D0 end:0x804D51E0
+	.sdata2     start:0x804DC7B8 end:0x804DC7D0
+
+melee/it/itzako.c:
+	.text       start:0x8027B5B0 end:0x8027CF00
+	.rodata     start:0x803B85F0 end:0x803B8600
+	.data       start:0x803F5428 end:0x803F5468
+	.sdata      start:0x804D51E0 end:0x804D51F0
+	.sdata2     start:0x804DC7D0 end:0x804DC830
 
 melee/it/items/itcapsule.c:
 	.text       start:0x8027CF00 end:0x8027D670
@@ -4417,6 +4499,9 @@ MetroTRK/targimpl.c:
 	.rodata     start:0x803B93C0 end:0x803B9410
 	.data       start:0x80400848 end:0x80400878
 	.bss        start:0x804A4B48 end:0x804A50C8
+
+MetroTRK/__exception.s: comment:0
+	.init       start:0x80003298 end:0x800051CC
 
 MetroTRK/dolphin_trk.c:
 	.init       start:0x800051CC end:0x800051EC

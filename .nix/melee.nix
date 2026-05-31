@@ -52,6 +52,7 @@ stdenv.mkDerivation {
     python3 ./configure.py --wrapper ${wibo}/bin/wibo \
       --dtk ${decomp-toolkit}/bin/dtk \
       --objdiff ${objdiff}/bin/objdiff-cli \
+      --binutils ${devkitppc}/bin \
       --sjiswrap ${sjiswrap} \
       --compilers ${mwcc}
     runHook postConfigure
