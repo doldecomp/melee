@@ -521,6 +521,73 @@ s32 THPDec_80330158(THPFileInfo* info)
     return 0;
 }
 
+typedef struct THPScanComp {
+    /* 0x00 */ u8 x00;
+    /* 0x01 */ u8 samplingH;
+    /* 0x02 */ u8 samplingV;
+    /* 0x03 */ u8 pad03[3];
+    /* 0x06 */ u16 x06;
+    /* 0x08 */ u8 pad08[0x14 - 0x08];
+    /* 0x14 */ s32 x14;
+    /* 0x18 */ s32 x18;
+    /* 0x1C */ s32 x1C;
+    /* 0x20 */ s32 x20;
+    /* 0x24 */ s32 x24;
+    /* 0x28 */ s32 x28;
+} THPScanComp;
+
+typedef struct THPScanInfo {
+    /* 0x000 */ u8 pad00[0x70];
+    /* 0x070 */ u16 x70;
+    /* 0x072 */ u16 x72;
+    /* 0x074 */ u8 pad74[0x7A - 0x74];
+    /* 0x07A */ u8 x7A;
+    /* 0x07B */ u8 x7B;
+    /* 0x07C */ u8 x7C;
+    /* 0x07D */ u8 pad7D[0x838 - 0x7D];
+    /* 0x838 */ THPScanComp components[3];
+    /* 0x8BC */ u8 x8BC[0x10];
+    /* 0x8CC */ u16 x8CC;
+    /* 0x8CE */ u16 x8CE;
+    /* 0x8D0 */ u16 x8D0;
+} THPScanInfo;
+
+s32 THPDec_803310CC(THPScanInfo* info);
+
+s32 THPDec_803310CC(THPScanInfo* info)
+{
+    u8 i;
+    s32 count;
+    s32 j;
+    THPScanComp* c;
+
+    info->x8CC = (info->x7A * 8 + info->x70 - 1) / (info->x7A * 8);
+    info->x8D0 = (info->x7B * 8 + info->x72 - 1) / (info->x7B * 8);
+    info->x8CE = 0;
+    for (i = 0; i < info->x7C; i++) {
+        c = &info->components[i];
+        c->x28 = (info->x7A * 8 + info->x70 * c->samplingH - 1) / (info->x7A * 8);
+        c->x24 = (info->x7B * 8 + info->x72 * c->samplingV - 1) / (info->x7B * 8);
+        c->x14 = c->samplingH;
+        c->x18 = c->samplingV;
+        c->x1C = c->x14 * c->x18;
+        c->x20 = c->x14 * 8;
+        count = c->x1C;
+        if (info->x8CE + count > 0x10) {
+            return 0x11;
+        }
+        for (j = 0; j < count; j++) {
+            info->x8BC[info->x8CE++] = i;
+        }
+        if (info->x8CE > 6) {
+            OSReport("THP does not support anything other than 4:2:0!\n");
+            return 0;
+        }
+        c->x06 = 0;
+    }
+    return 0;
+}
+
 s32 THPDec_8032FD40(THPDec_8032FD40_Data* data, u16 num)
 {
     s32 base = data->val0 + 0x4028;
