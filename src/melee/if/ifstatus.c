@@ -1153,7 +1153,6 @@ void ifStatus_802F6E3C(s32 player_num)
 void ifStatus_802F6EA4(int arg0, int arg1, int arg2, int arg3, Event arg4,
                        Event arg5)
 {
-    Element_803F9628* e;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
 
@@ -1171,6 +1170,7 @@ void ifStatus_802F6EA4(int arg0, int arg1, int arg2, int arg3, Event arg4,
             lbAudioAx_800237A8(arg2, 0x7F, 0x40);
         }
     } else {
+        Element_803F9628* e;
         e = &ifStatus_803F9628[arg0];
         e->x20 = arg1;
         e->x24 = arg2;
