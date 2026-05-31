@@ -1671,7 +1671,6 @@ static inline HSD_JObj* mnDiagram_GetJObjChild(HSD_JObj* jobj)
 void mnDiagram_80241668(void* arg0)
 {
     mnDiagram_PopupData* data = mnDiagram_GetUserData(arg0);
-    HSD_Text** texts = data->text;
     HSD_JObj* child;
 
     child = mnDiagram_GetJObjChild(data->jobjs[9]);
@@ -1689,13 +1688,13 @@ void mnDiagram_80241668(void* arg0)
         HSD_JObjRemoveAll(child);
     }
 
-    if (texts[4] != NULL) {
-        HSD_SisLib_803A5CC4(texts[4]);
-        texts[4] = NULL;
+    if (data->text[4] != NULL) {
+        HSD_SisLib_803A5CC4(data->text[4]);
+        data->text[4] = NULL;
     }
-    if (texts[5] != NULL) {
-        HSD_SisLib_803A5CC4(texts[5]);
-        texts[5] = NULL;
+    if (data->text[5] != NULL) {
+        HSD_SisLib_803A5CC4(data->text[5]);
+        data->text[5] = NULL;
     }
 }
 

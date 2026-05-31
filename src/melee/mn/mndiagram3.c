@@ -380,6 +380,7 @@ void mnDiagram3_80246F2C(Diagram3* data, int arg1)
 
 void mnDiagram3_80247008(int arg0)
 {
+    char* base = (char*) &mnDiagram3_803EEC10;
     mnDiagram_ArchiveData* archive = &mnDiagram_804A0844;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
@@ -397,8 +398,8 @@ void mnDiagram3_80247008(int arg0)
 
     data = (Diagram3*) HSD_MemAlloc(0x78);
     if (data == NULL) {
-        OSReport(mnDiagram3_803EEC4C.x50);
-        __assert(mnDiagram3_803EEC4C.x68, 0x3FC, mnDiagram3_803EEC4C.x78);
+        OSReport(base + 0x9C);
+        __assert(base + 0xB4, 0x3FC, base + 0xC4);
     }
     mnDiagram3_80246F2C(data, arg0);
     GObj_InitUserData(gobj, 0, (void (*)(void*)) fn_80246F0C, data);
