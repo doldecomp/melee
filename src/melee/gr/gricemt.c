@@ -3,6 +3,10 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "baselib/debug.h"
+
+#include "baselib/forward.h"
+
 #include "baselib/gobjproc.h"
 #include "baselib/random.h"
 #include "cm/camera.h"
@@ -467,12 +471,11 @@ void grIceMt_801F7728(Ground_GObj* gobj)
     u32 unused2;
     Ground* gp = gobj->user_data;
     if (gp->gv.icemt.xD8 == 0) {
-        grIceMt_801FA364(&gp->gv.corneria.xC8, &y, (HSD_GObjEvent) fn_801F8E58,
+        grIceMt_801FA364(&gp->gv.icemt.xC8, &y, (HSD_GObjEvent) fn_801F8E58,
                          gobj);
-        grIceMt_801F9ACC(
-            (HSD_GObj*) &gp->gv.corneria.xC4,
-            grIceMt_801F96E0((HSD_GObj*) &gp->gv.corneria.xC4, -y),
-            fn_801F9038, gobj);
+        grIceMt_801F9ACC((HSD_GObj*) &gp->gv.icemt.xC4,
+                         grIceMt_801F96E0(&gp->gv.icemt, -y), fn_801F9038,
+                         gobj);
         grIceMt_801F9668(y);
     }
 }
@@ -580,7 +583,7 @@ void grIceMt_801F7A2C(Ground_GObj* arg0)
         return;
     }
     if (!((UnkFlagStruct*) &gp->gv.icemt.xD8)->b2) {
-        var_r30 = grIceMt_801FA364(&gp->gv.corneria.xC8, &sp30,
+        var_r30 = grIceMt_801FA364(&gp->gv.icemt.xC8, &sp30,
                                    (HSD_GObjEvent) fn_801F9150, arg0);
         if (((UnkFlagStruct*) &gp->gv.icemt.xD8)->b4) {
             fighter = Ground_801C57A4();
@@ -639,8 +642,8 @@ void grIceMt_801F7A2C(Ground_GObj* arg0)
         sp30 = gp->gv.icemt.xD4;
     }
     grIceMt_801F9ACC((Ground_GObj*) &gp->gv.icemt.xC4,
-                     grIceMt_801F96E0((HSD_GObj*) &gp->gv.icemt.xC4, -sp30),
-                     fn_801F91A8, arg0);
+                     grIceMt_801F96E0(&gp->gv.icemt, -sp30), fn_801F91A8,
+                     arg0);
     grIceMt_801F9668(sp30);
     if (gp->gv.icemt.xC4 == -1) {
         ((UnkFlagStruct*) &gp->gv.icemt.xD8)->b2 = 1;
@@ -1369,30 +1372,26 @@ void grIceMt_801F9668(float arg8)
     gp->gv.icemt2.xC4 = arg8;
 }
 
-float grIceMt_801F96E0(HSD_GObj* arg0, float farg0)
+float grIceMt_801F96E0(struct grIceMt_GroundVars* arg0, float farg0)
 {
-    s16* p = (s16*) arg0;
     HSD_GObj* mgobj;
-
-    if (p[0] != -1) {
-        mgobj = Ground_801C2BA4(p[0]);
-        if (mgobj == NULL) {
-            __assert(__FILE__, 0xA45, "mgobj");
-        }
-        if (mgobj->hsd_obj == NULL) {
-            __assert(__FILE__, 0xA46, "jobj");
-        }
-        HSD_JObjAddTranslationY(mgobj->hsd_obj, farg0);
+    HSD_JObj* jobj2;
+    if (arg0->xC4 != -1) {
+        HSD_JObj* jobj;
+        mgobj = Ground_801C2BA4(arg0->xC4);
+        HSD_ASSERT(0xA45, mgobj);
+        jobj = GET_JOBJ(mgobj);
+        HSD_ASSERT(0xA46, jobj);
+        HSD_JObjAddTranslationY(jobj, farg0);
     }
-    if (p[1] != -1) {
-        mgobj = Ground_801C2BA4(p[1]);
-        if (mgobj == NULL) {
-            __assert(__FILE__, 0xA4B, "mgobj");
-        }
-        if (mgobj->hsd_obj == NULL) {
-            __assert(__FILE__, 0xA4C, "jobj");
-        }
-        HSD_JObjAddTranslationY(mgobj->hsd_obj, farg0);
+    if (arg0->xC6 != -1) {
+        HSD_JObj* jobj;
+        mgobj = Ground_801C2BA4(arg0->xC6);
+        HSD_ASSERT(0xA4B, mgobj);
+        jobj = GET_JOBJ(mgobj);
+        jobj2 = jobj;
+        HSD_ASSERT(0xA4C, jobj);
+        HSD_JObjAddTranslationY(jobj2, farg0);
     }
 }
 

@@ -140,7 +140,7 @@ extern f32 grIm_804DB570;
 /* 1F9558 */ void fn_801F9558(Ground*, int, CollData*, s32, mpLib_GroundEnum,
                               float);
 /* 1F9668 */ void grIceMt_801F9668(float);
-/* 1F96E0 */ float grIceMt_801F96E0(HSD_GObj*, float);
+/* 1F96E0 */ float grIceMt_801F96E0(struct grIceMt_GroundVars*, float);
 /* 1F98A8 */ void grIceMt_801F98A8(HSD_GObj* param1);
 /* 1F993C */ f32 grIceMt_801F993C(s32, s32);
 /* 1F9ACC */ void grIceMt_801F9ACC(Ground_GObj*, float, GrIceMtSegmentLookup,
