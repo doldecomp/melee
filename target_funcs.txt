@@ -72,7 +72,7 @@ Funcs:
 
 File: src/melee/if/textdraw.c
 Funcs:
-- [ ] DevText_Setup
+- [x] DevText_Setup
 
 File: src/melee/lb/lbaudio_ax.c
 Funcs:

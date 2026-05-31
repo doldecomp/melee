@@ -114,6 +114,30 @@ HSD_GObj* DevText_GetGObj(void)
     return devtext_gobj;
 }
 
+HSD_GObj* DevText_Setup(int classifier, int p_link, int priority, int gx_link,
+                        int render_priority, u8 camera_priority)
+{
+    HSD_GObj* gobj;
+
+    devtext_setup_render_priority = render_priority;
+    devtext_setup_classifier = classifier;
+    devtext_setup_p_link = p_link;
+    devtext_setup_priority = priority;
+    devtext_setup_gx_link = gx_link;
+    devtext_cobj = NULL;
+
+    DevText_CreateCObj(classifier, p_link, priority, gx_link, camera_priority);
+    DevText_InitPool();
+    gobj = GObj_Create(devtext_setup_classifier, devtext_setup_p_link,
+                       devtext_setup_priority);
+    if (gobj != NULL) {
+        GObj_SetupGXLink(gobj, DevText_DrawAll, devtext_setup_gx_link,
+                         devtext_setup_render_priority);
+    }
+    devtext_gobj = gobj;
+    return devtext_gobj;
+}
+
 void DevText_InitPool(void)
 {
     DevText* text = devtext_pool;
@@ -266,30 +290,6 @@ void DevText_CreateCObj(int classifier, int p_link, int gobj_priority,
             HSD_GObjPLink_80390228(gobj);
         }
     }
-}
-
-HSD_GObj* DevText_Setup(int classifier, int p_link, int priority, int gx_link,
-                        int render_priority, u8 camera_priority)
-{
-    HSD_GObj* gobj;
-
-    devtext_setup_classifier = classifier;
-    devtext_setup_p_link = p_link;
-    devtext_setup_priority = priority;
-    devtext_setup_gx_link = gx_link;
-    devtext_setup_render_priority = render_priority;
-    devtext_cobj = NULL;
-
-    DevText_CreateCObj(classifier, p_link, priority, gx_link, camera_priority);
-    DevText_InitPool();
-    gobj = GObj_Create(devtext_setup_classifier, devtext_setup_p_link,
-                       devtext_setup_priority);
-    if (gobj) {
-        GObj_SetupGXLink(gobj, DevText_DrawAll, devtext_setup_gx_link,
-                         devtext_setup_render_priority);
-    }
-    devtext_gobj = gobj;
-    return devtext_gobj;
 }
 
 void DevText_AddToList(DevText** list, DevText* text)
