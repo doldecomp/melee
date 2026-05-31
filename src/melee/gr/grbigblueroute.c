@@ -1001,9 +1001,9 @@ int grBigBlueRoute_8020DA9C(struct grBigBlueRoute_8020DA9C_t* desc)
 /// for arr/jobj)
 void grBigBlueRoute_8020DAB4(HSD_JObj** jobjs, f32 scale, int count)
 {
+    HSD_JObj** arr;
     int i;
     int countdown = 30;
-    HSD_JObj** arr;
     HSD_JObj* jobj;
     HSD_GObj* gobj;
 
@@ -1022,12 +1022,12 @@ void grBigBlueRoute_8020DAB4(HSD_JObj** jobjs, f32 scale, int count)
         int random_idx;
 
         if (*arr == NULL) {
-            continue;
+            break;
         }
 
         random_idx = (countdown != 0) ? HSD_Randi(countdown) : 0;
 
-        jobj = gobj->hsd_obj;
+        jobj = HSD_GObjGetHSDObj(gobj);
         HSD_ASSERT(1434, jobj);
 
         jobj = HSD_JObjGetChild(jobj);
