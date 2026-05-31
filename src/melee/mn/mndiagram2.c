@@ -2,6 +2,8 @@
 
 #include "mndiagram2.static.h"
 
+#include "baselib/debug.h"
+
 #include "baselib/forward.h"
 
 #include <stdbool.h>
@@ -602,8 +604,7 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
     u8 str[4];
     int pad[4];
     Diagram2* data;
-    HSD_JObj* jobj2C;
-    HSD_JObj* jobj30;
+    HSD_JObj* jobj;
     char* base;
     u16* table;
     HSD_Text* text;
@@ -614,18 +615,13 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
     data = gobj->user_data;
     base = (char*) &mnDiagram2_803EEAD0;
 
-    jobj2C = data->row0_ref;
-    if (jobj2C == NULL) {
-        __assert(mnDiagram2_804D4FC0, 0x3EE, mnDiagram2_804D4FC8);
-    }
+    jobj = data->row0_ref;
+    HSD_ASSERT(0x3EE, jobj);
+    f31 = jobj->translate.y;
 
-    jobj30 = data->row1_ref;
-    f31 = jobj2C->translate.y;
-    if (jobj30 == NULL) {
-        __assert(mnDiagram2_804D4FC0, 0x3EE, mnDiagram2_804D4FC8);
-    }
-
-    f30 = jobj30->translate.y - f31;
+    jobj = data->row1_ref;
+    HSD_ASSERT(0x3EE, jobj);
+    f30 = jobj->translate.y - f31;
 
     lb_8000B1CC(data->row0_ref, (Vec3*) &mnDiagram2_803EEAD0[0xC], &sp20);
 
@@ -1014,7 +1010,7 @@ void mnDiagram2_Create(int arg0)
     HSD_JObj* jobj;
     mnDiagram_ArchiveData* archive = &mnDiagram_804A0834;
     HSD_GObj* gobj;
-    Diagram2* data;
+    Diagram2* user_data;
     u32 is_name;
     u8 entity_idx;
     u8 scroll;
@@ -1023,7 +1019,7 @@ void mnDiagram2_Create(int arg0)
     int j;
     int i;
     int offset;
-    Diagram2* user_data;
+    Diagram2* user_data2;
 
     gobj = GObj_Create(6, 7, 0x80);
     mnDiagram2_804D6C18 = gobj;
@@ -1033,28 +1029,26 @@ void mnDiagram2_Create(int arg0)
     HSD_JObjAddAnimAll(jobj, archive->x4, archive->x8, archive->xC);
     HSD_JObjReqAnimAll(jobj, mnDiagram2_804DBFCC);
 
-    data = (Diagram2*) HSD_MemAlloc(0xC8);
-    if (data == NULL) {
-        OSReport("Can't get user_data.\n");
-        __assert("mndiagram2.c", 0x3E6, "user_data");
-    }
-    mnDiagram2_InitUserData(data, arg0);
+    user_data = (Diagram2*) HSD_MemAlloc(0xC8);
+    HSD_ASSERTREPORT(0x3E6, user_data, "Can't get user_data.\n");
+    mnDiagram2_InitUserData(user_data, arg0);
     GObj_InitUserData(gobj, 0, (void (*)(void*)) mnDiagram2_FreeUserData,
-                      data);
+                      user_data);
 
     for (i = 0; i < 15; i++) {
-        lb_80011E24(jobj, (HSD_JObj**) ((u8*) data + (i << 2) + 8), i, -1);
+        lb_80011E24(jobj, (HSD_JObj**) ((u8*) user_data + (i << 2) + 8), i,
+                    -1);
     }
 
     HSD_GObj_SetupProc(gobj, mnDiagram2_Think, 0);
 
-    is_name = data->is_name_mode;
+    is_name = user_data->is_name_mode;
     if (is_name) {
-        entity_idx = data->selected_name_idx;
+        entity_idx = user_data->selected_name_idx;
     } else {
-        entity_idx = data->selected_fighter_idx;
+        entity_idx = user_data->selected_fighter_idx;
     }
-    scroll = (u8) data->scroll_offset;
+    scroll = (u8) user_data->scroll_offset;
     if (is_name) {
         entity_val = mnDiagram_GetNameByIndex(entity_idx);
     } else {
@@ -1078,20 +1072,20 @@ void mnDiagram2_Create(int arg0)
         scroll++;
     } while (j < 10);
 
-    is_name = data->is_name_mode;
-    user_data = gobj->user_data;
+    is_name = user_data->is_name_mode;
+    user_data2 = gobj->user_data;
     if (is_name) {
-        HSD_JObjSetFlagsAll(user_data->fighter_mode_header, 0x10);
-        HSD_JObjClearFlagsAll(user_data->name_mode_header, 0x10);
+        HSD_JObjSetFlagsAll(user_data2->fighter_mode_header, 0x10);
+        HSD_JObjClearFlagsAll(user_data2->name_mode_header, 0x10);
     } else {
-        HSD_JObjClearFlagsAll(user_data->fighter_mode_header, 0x10);
-        HSD_JObjSetFlagsAll(user_data->name_mode_header, 0x10);
+        HSD_JObjClearFlagsAll(user_data2->fighter_mode_header, 0x10);
+        HSD_JObjSetFlagsAll(user_data2->name_mode_header, 0x10);
     }
 
     if (is_name) {
-        entity_idx = user_data->selected_name_idx;
+        entity_idx = user_data2->selected_name_idx;
     } else {
-        entity_idx = user_data->selected_fighter_idx;
+        entity_idx = user_data2->selected_fighter_idx;
     }
     mnDiagram2_UpdateHeader(gobj, is_name, entity_idx);
 }
