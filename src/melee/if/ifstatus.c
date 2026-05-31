@@ -232,8 +232,6 @@ void ifStatus_802F4B84(IfDamageState* state, s32 is_stamina)
     f32 mag;
     f32 ox;
     f32 oy;
-    f32 rx;
-    f32 ry;
     u8 frames;
 
     frames = state->frames_of_shake_remaining;
@@ -255,17 +253,17 @@ void ifStatus_802F4B84(IfDamageState* state, s32 is_stamina)
             mag = 1.5207f;
         }
         for (i = 0; i < 4; i++) {
-            rx = mag * (2.0f * offset_rand());
-            ry = mag * (2.0f * offset_rand());
-            if (rx < 0.0f) {
-                ox = rx - 0.2028f;
+            ox = mag * (2.0f * offset_rand());
+            oy = mag * (2.0f * offset_rand());
+            if (ox < 0.0f) {
+                ox -= 0.2028f;
             } else {
-                ox = rx + 0.2028f;
+                ox += 0.2028f;
             }
-            if (ry < 0.0f) {
-                oy = ry - 0.2028f;
+            if (oy < 0.0f) {
+                oy -= 0.2028f;
             } else {
-                oy = ry + 0.2028f;
+                oy += 0.2028f;
             }
             HSD_JObjSetTranslateX(state->jobjs[i],
                                   state->translation_x[i] + ox);
