@@ -1543,9 +1543,9 @@ int pl_80040A9C(int arg0)
     return sum;
 }
 
-void pl_80040AF0(int arg0)
+u32 pl_80040AF0(int arg0)
 {
-    pl_800386D8(Player_GetActionStats(arg0), 0x70);
+    return pl_800386D8(Player_GetActionStats(arg0), 0x70);
 }
 
 int pl_80040B18(int arg0)
