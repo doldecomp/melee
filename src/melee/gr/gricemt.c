@@ -909,6 +909,7 @@ void grIceMt_801F865C(Ground_GObj* arg0)
 {
     Ground* gp = GET_GROUND(arg0);
     GrIm825C sp14;
+    PAD_STACK(0x4);
     Ground_801C2ED0(arg0->hsd_obj, gp->map_id);
     grAnime_801C8138(arg0, gp->map_id, 0);
     grAnime_801C77FC(arg0, 0, 7);
