@@ -1,1 +1,0 @@
-- [gm settings struct blocker](project_gm_settings_struct.md) — un_803FA258 column-major match settings; array-index don't struct-chase
