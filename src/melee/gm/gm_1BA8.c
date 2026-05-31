@@ -239,7 +239,344 @@ s32 gm_801BAC9C(GameScene* arg0, s32 arg1)
     return chars[HSD_Randi(count)];
 }
 
-/// #gm_801BAD70
+struct gm_evspawn {
+    /* 0x0 */ s8 unk0;
+    /* 0x1 */ u8 pad1[2];
+    /* 0x3 */ u8 unk3;
+};
+
+struct gm_evx10 {
+    u8 pad[0x10];
+    struct gm_evspawn* unk10;
+    struct gm_evspawn* unk14;
+    struct gm_evspawn* unk18;
+    struct gm_evspawn* unk1C;
+    struct gm_evspawn* unk20;
+};
+
+struct gm_evinit {
+    /* 0x00 */ u8 unk0;
+    /* 0x01 */ u8 unk1;
+    /* 0x02 */ u8 unk2;
+    /* 0x03 */ s8 unk3;
+    /* 0x04 */ s8 unk4;
+    /* 0x05 */ u8 unk5;
+    /* 0x06 */ u16 unk6;
+    /* 0x08 */ u32 unk8;
+    /* 0x0C */ u8 padC[4];
+    /* 0x10 */ u32 x10;
+    /* 0x14 */ s32 unk14;
+    /* 0x18 */ s32 x18;
+    /* 0x1C */ f32 x1C;
+    /* 0x20 */ f32 unk20;
+    /* 0x24 */ f32 unk24;
+};
+
+void gm_801BAD70(GameScene* arg0)
+{
+    struct EventData* ev = &gmMainLib_804D3EE0->unk_530;
+    StartMeleeData* md = gm_801A427C(arg0);
+    u8* r3b = (u8*) md;
+    u8 level = ev->unk_535;
+    struct gm_804D6900_t** lvlpp;
+    struct gm_evinit* x8;
+    s32 var_r24;
+    s32 var_r22;
+    s32 var_r21;
+    u8* lvl;
+    u8* e;
+    void* sd;
+
+    lbArchive_LoadSymbols("GmEvent.dat", &gm_804D6900, "sqEventInitDataLevelTbl",
+                          0, (f32) (intptr_t) md);
+    lvlpp = &gm_804D6900[level];
+    gm_80167A64(&md->rules);
+    x8 = (struct gm_evinit*) (*lvlpp)->x8;
+
+    r3b[0] = (r3b[0] & ~0xE0) | (x8->unk0 & 0xE0);
+    r3b[0] = (r3b[0] & ~0x1C) | (x8->unk0 & 0x1C);
+    r3b[0] = (r3b[0] & ~2) | (x8->unk0 & 2);
+    r3b[0] = (r3b[0] & ~1) | (x8->unk0 & 1);
+    r3b[1] |= 0x80;
+    r3b[1] &= ~0x40;
+    r3b[1] &= ~0x20;
+    r3b[1] &= ~0x10;
+    r3b[1] &= ~2;
+    r3b[1] = (r3b[1] & ~1) | ((x8->unk1 >> 6) & 1);
+    r3b[2] &= ~0x20;
+    r3b[2] &= ~0x10;
+    r3b[2] &= ~8;
+    r3b[2] = (r3b[2] & ~4) | ((x8->unk1 >> 3) & 4);
+    r3b[3] |= 0x40;
+    r3b[3] |= 0x20;
+    r3b[3] |= 0x10;
+    r3b[3] |= 8;
+    r3b[3] |= 4;
+    r3b[3] &= ~1;
+    r3b[4] &= ~0x20;
+    r3b[4] |= 0x10;
+    r3b[4] &= ~8;
+    r3b[4] &= ~2;
+    r3b[4] &= ~1;
+    r3b[5] |= 0x80;
+    r3b[5] &= ~0x40;
+    r3b[5] = (r3b[5] & ~0x20) | ((x8->unk1 << 1) & 0x20);
+    r3b[5] = (r3b[5] & ~0x10) | ((x8->unk1 << 1) & 0x10);
+    md->rules.x7 = 0;
+    md->rules.is_teams = x8->unk2;
+    md->rules.x9 = 0;
+    md->rules.xA = 0;
+    md->rules.xB = x8->unk3;
+    md->rules.xC = x8->unk4;
+    md->rules.xD = 0x6E;
+    md->rules.xE = x8->unk6;
+    md->rules.x10 = x8->unk8;
+    md->rules.x14 = 0;
+    md->rules.x18 = 0;
+    *(s32*) (r3b + 0x24) = x8->unk14;
+    *(u32*) (r3b + 0x20) = x8->x10;
+    md->rules.x28 = x8->x18;
+    md->rules.x30 = x8->x1C;
+    md->rules.x34 = x8->unk20;
+    md->rules.x44 = fn_801BBFE8;
+    if (r3b[0] & 1) {
+        ev->xB_0 = 1;
+    }
+    if ((x8->unk1 >> 7) & 1) {
+        ev->xB_6 = 1;
+    }
+    if (x8->unk24 != 1.0f) {
+        ev->x1C = x8->unk24;
+    }
+    if (((u8*) *lvlpp)[0] == 2) {
+        u16 stage = *(u16*) ((u8*) ((struct gm_evx10*) (*lvlpp)->x10 +
+                                    ev->x20 * 2) +
+                             2);
+        ev->xB_4 = 1;
+        md->rules.xE = stage;
+        ev->x48 = (InternalStageId) stage;
+        if (ev->x20 > 0) {
+            r3b[1] |= 0x20;
+            r3b[1] |= 0x10;
+            md->rules.x10 = ev->x2C;
+        }
+        gm_8016A92C(&md->rules);
+    }
+    r3b[0x61] = 3;
+    var_r24 = 0;
+    var_r22 = 0;
+    r3b[0x85] = 3;
+    var_r21 = 0;
+    r3b[0xA9] = 3;
+    r3b[0xCD] = 3;
+    r3b[0xF1] = 3;
+    r3b[0x115] = 3;
+
+loop_40:
+    lvl = (u8*) *lvlpp;
+    if (var_r24 < (s32) ((lvl[1] >> 5) & 7)) {
+        e = lvl + var_r21;
+        while (*(u32*) (e + 0x14) == 0) {
+            e += 4;
+            var_r24 += 1;
+            var_r22 += 0x24;
+            var_r21 += 4;
+        }
+        sd = *(void**) (e + 0x14);
+        gm_801BAB40((PlayerInitData*) (r3b + var_r22 + 0x60), (int) sd);
+        if (var_r24 == 0) {
+            gm_801B05F4((PlayerInitData*) (r3b + 0x60), ev->x6);
+            ev->x7 = r3b[0x69];
+            if (r3b[0x60] == 0x21) {
+                r3b[0x60] = ev->x2;
+                r3b[0x63] = ev->x3;
+                r3b[0x6A] = ev->x4;
+            }
+            ev->x0 = r3b[0x60];
+            ev->x4C[0] = (s8) r3b[0x60];
+            ev->x1 = r3b[0x63];
+            ev->x50[0] = r3b[0x63];
+            r3b[0x6C] = (r3b[0x6C] & ~0x80) |
+                        ((gm_801677F8(ev->x6, r3b[0x6A]) << 7) & 0x80);
+        } else {
+            if (*(u8*) ((u8*) sd + 6) == 0) {
+                r3b[var_r22 + 0x69] = r3b[0x69];
+                r3b[var_r22 + 0x6D] |= 0x40;
+            }
+            if (*(s8*) sd == 0x21) {
+                u8* t = (u8*) ev + var_r24 + 7;
+                u8 v = *t;
+                if ((s8) v == -1) {
+                    u8 nv = gm_801BAC9C(arg0, var_r24);
+                    r3b[var_r22 + 0x60] = nv;
+                    *t = nv;
+                } else {
+                    r3b[var_r22 + 0x60] = v;
+                }
+            }
+            if ((s8) r3b[var_r22 + 0x60] == (s8) r3b[0x60]) {
+                u8 c = r3b[var_r22 + 0x63];
+                if (c == r3b[0x63]) {
+                    if (c <= 2) {
+                        c += 1;
+                    } else {
+                        c = 0;
+                    }
+                    r3b[var_r22 + 0x63] = c;
+                }
+            }
+            if (r3b[0x60] == 0x13 && r3b[var_r22 + 0x60] == 0x12) {
+                u8 c = r3b[var_r22 + 0x63];
+                if (c == r3b[0x63]) {
+                    if (c <= 2) {
+                        c += 1;
+                    } else {
+                        c = 0;
+                    }
+                    r3b[var_r22 + 0x63] = c;
+                }
+            }
+            if (var_r24 < 4) {
+                ev->x4C[var_r24] = (s8) r3b[var_r22 + 0x60];
+                ev->x50[var_r24] = r3b[var_r22 + 0x63];
+            }
+        }
+        var_r24 += 1;
+        var_r22 += 0x24;
+        var_r21 += 4;
+        goto loop_40;
+    }
+
+    if (((u8*) *lvlpp)[0] == 2) {
+        if (ev->x20 > 0) {
+            r3b[0x62] = (s8) ev->x24;
+            *(s16*) (r3b + 0x70) = (s16) ev->x28;
+            r3b[0x6C] &= ~0x40;
+            if (ev->x38 != 0x21) {
+                r3b[0x60] = ev->x38;
+                ev->x0 = ev->x38;
+                ev->x4C[0] = (s8) ev->x38;
+            }
+        }
+        gm_801BAB40(
+            (PlayerInitData*) (r3b + 0x84),
+            (int) ((struct gm_evx10*) (*lvlpp)->x10 + ev->x20 * 4)->unk10);
+        if ((s8) r3b[0x84] == (s8) r3b[0x60]) {
+            u8 c = r3b[0x87];
+            if (c == r3b[0x63]) {
+                if (c <= 2) {
+                    c += 1;
+                } else {
+                    c = 0;
+                }
+                r3b[0x87] = c;
+            }
+        }
+        if (r3b[0x60] == 0x13 && r3b[0x84] == 0x12) {
+            u8 c = r3b[0x87];
+            if (c == r3b[0x63]) {
+                if (c <= 2) {
+                    c += 1;
+                } else {
+                    c = 0;
+                }
+                r3b[0x87] = c;
+            }
+        }
+        ev->x4C[1] = (s8) r3b[0x84];
+        ev->x50[1] = r3b[0x87];
+    }
+    if (level == 0x2B) {
+        u8 c = ev->x50[2];
+        if ((s8) (u8) ev->x4C[0] == (s8) (u8) ev->x4C[2] &&
+            (u8) ev->x50[0] == c) {
+            if (c <= 2) {
+                c += 1;
+            } else {
+                c = 0;
+            }
+            ev->x50[2] = c;
+        }
+    }
+    if (level == 0x31) {
+        r3b[0x8A] = 1;
+        r3b[0xAE] = (u8) -1;
+        r3b[0x91] |= 0x80;
+        r3b[0xB5] |= 0x80;
+        r3b[0x91] |= 0x20;
+        r3b[0xB5] |= 0x20;
+    }
+    if (((u8*) *lvlpp)[0] == 1) {
+        u8* xc = (u8*) (*lvlpp)->xC;
+        int var_r9;
+        s8 k;
+        s32 sp8;
+        ev->xB_3 = 1;
+        if (xc[5] == 1) {
+            var_r9 = 1;
+            if ((s8) ev->x0 == (s8) xc[0]) {
+                u8 c = xc[6];
+                if ((u8) ev->x1 == c) {
+                    if (c <= 2) {
+                        c += 1;
+                    } else {
+                        c = 0;
+                    }
+                    ev->x50[1] = c;
+                }
+            }
+        } else {
+            var_r9 = 0;
+        }
+        xc = (u8*) (*lvlpp)->xC;
+        k = xc[0];
+        sp8 = (k == 4) ? xc[0x17] : 0;
+        gm_8016A22C(k, 0x21, 0x21, ev->x50[1], 0, 0, var_r9, 0, sp8, ev->x0,
+                    ev->x1, xc[1], xc[2], xc[3], xc[4], 0, 1,
+                    *(f32*) (xc + 8), *(f32*) (xc + 0xC));
+        gm_8016A414(*(f32*) ((u8*) (*lvlpp)->xC + 0x10));
+        gm_8016A21C(&md->rules);
+        if ((((u8*) (*lvlpp)->xC)[0x14] >> 7) & 1) {
+            gm_8016A434();
+        }
+        if (gm_803DF94C[level]->x4 != NULL) {
+            gm_8016A404((s32) gm_803DF94C[level]->x4);
+        }
+        if (((u8*) (*lvlpp)->xC)[0x15] != 0) {
+            gm_8016A424((s8) ((u8*) (*lvlpp)->xC)[0x15]);
+        }
+    }
+    {
+        PreloadCacheScene* cache = lbDvd_8001822C();
+        switch ((s8) (u8) ev->x44) {
+        case 0:
+        case 1:
+            gm_801BA938(ev, 0, 4, 1);
+            break;
+        case 2:
+            cache->game_cache.entries[0].char_id = (s8) ev->x4C[0];
+            cache->game_cache.entries[0].color = ev->x50[0];
+            lbDvd_80018254();
+            lbDvd_80018C2C(0xC7);
+            gm_801BA938(ev, 1, 4, 1);
+            break;
+        case 3:
+            lbDvd_80018C2C(0xC7);
+            gm_801BA938(ev, 1, 4, 1);
+            break;
+        case 4:
+            lbDvd_80018C6C();
+            cache->game_cache.entries[0].char_id = (s8) ev->x4C[0];
+            cache->game_cache.entries[0].color = ev->x50[0];
+            lbDvd_80018254();
+            lbDvd_80017700(4);
+            gm_801BA938(ev, 1, 4, 1);
+            break;
+        }
+    }
+    gm_8016F088(md);
+    gm_80168F88();
+}
 
 void gm_801BB758(GameScene* arg0)
 {
@@ -1726,21 +2063,6 @@ void gm_801BDD44(HSD_GObj* arg0)
         HSD_GObjPLink_80390228(arg0);
     }
 }
-
-struct gm_evspawn {
-    /* 0x0 */ s8 unk0;
-    /* 0x1 */ u8 pad1[2];
-    /* 0x3 */ u8 unk3;
-};
-
-struct gm_evx10 {
-    u8 pad[0x10];
-    struct gm_evspawn* unk10;
-    struct gm_evspawn* unk14;
-    struct gm_evspawn* unk18;
-    struct gm_evspawn* unk1C;
-    struct gm_evspawn* unk20;
-};
 
 void gm_801BDE94(HSD_GObj* arg0)
 {
