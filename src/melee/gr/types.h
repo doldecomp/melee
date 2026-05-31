@@ -1256,7 +1256,7 @@ struct grBigBlue_GroundVars {
 
 struct grBigBlueRoute_GroundVars {
     /* +0 gp+C4 */ HSD_GObj* xC4;
-    /* +4 gp+C8 */ void* xC8;
+    /* +4 gp+C8 */ void* car_info;
     /* +8 gp+CC */ HSD_Spline* xCC;
     /* +C gp+D0 */ HSD_Spline* xD0;
     /* +10 gp+D4 */ HSD_Spline* xD4;
@@ -1618,7 +1618,6 @@ struct Ground {
             char pad_0[0x204 - 0xC4];
             struct grArwing_GroundVars arwing;
             struct grBigBlue_GroundVars bigblue;
-            struct grBigBlueRoute_GroundVars bigblueroute;
             struct grBigBlueRoute_GroundVars2 bigblueroute2;
             struct grCastle_GroundVars castle;
             struct grCastle_GroundVars2 castle2;
@@ -1735,6 +1734,7 @@ struct Ground {
             struct Map_GroundVars map;
             struct grPushOn_GroundVars pushon;
             struct ScrollVars scroll;
+            struct grBigBlueRoute_GroundVars car;
         } u;
     };
 };

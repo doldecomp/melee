@@ -2,6 +2,7 @@
 
 #include <platform.h>
 
+#include "baselib/debug.h"
 #include "baselib/memory.h"
 #include "cm/camera.h"
 #include "ft/ftlib.h"
@@ -23,7 +24,6 @@
 #include "mp/mplib.h"
 
 #include <trigf.h>
-
 #include <dolphin/os.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -281,7 +281,7 @@ void grBigBlueRoute_8020BC30(Ground_GObj* arg) {}
 void grBigBlueRoute_8020BC34(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    gp->gv.bigblueroute.xC4 = grBigBlueRoute_8020B9D4(4);
+    gp->u.car.xC4 = grBigBlueRoute_8020B9D4(4);
 }
 
 /// @todo Currently 99.83% match - remaining diffs are anonymous string-pool
@@ -411,11 +411,11 @@ void grBigBlueRoute_8020C140(Ground_GObj* gobj)
     Ground* gp = gobj->user_data;
 
     grFZeroCar_801CAFBC(gobj, grBb_Route_803E6200, 30, 0);
-    gp->gv.bigblueroute.xCC = (HSD_Spline*) Ground_801C247C(33, 1);
-    gp->gv.bigblueroute.xD0 = (HSD_Spline*) Ground_801C247C(33, 0);
-    gp->gv.bigblueroute.xD4 = (HSD_Spline*) Ground_801C247C(33, 2);
+    gp->u.car.xCC = (HSD_Spline*) Ground_801C247C(33, 1);
+    gp->u.car.xD0 = (HSD_Spline*) Ground_801C247C(33, 0);
+    gp->u.car.xD4 = (HSD_Spline*) Ground_801C247C(33, 2);
     grBigBlueRoute_8020C238(gobj);
-    ((UnkFlagStruct*) &gp->gv.bigblueroute.xC4)->b0 = 0;
+    ((UnkFlagStruct*) &gp->u.car.xC4)->b0 = 0;
 }
 
 bool grBigBlueRoute_8020C1D4(Ground_GObj* arg)
@@ -432,7 +432,7 @@ void grBigBlueRoute_8020C1DC(Ground_GObj* gobj)
 void grBigBlueRoute_8020C210(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    HSD_Free((void*) gp->gv.bigblueroute.xC8);
+    HSD_Free((void*) gp->u.car.car_info);
 }
 
 void grBigBlueRoute_8020C238(Ground_GObj* gobj)
@@ -472,33 +472,31 @@ void grBigBlueRoute_8020C238(Ground_GObj* gobj)
         }
     }
 
-    gp->gv.bigblueroute.xC8 = HSD_MemAlloc(0x554);
-    ((gp->gv.bigblueroute.xC8)
-         ? ((void) 0)
-         : __assert(__FILE__, 674, "gp->u.car.car_info"));
-    memzero(gp->gv.bigblueroute.xC8, 0x554);
+    gp->u.car.car_info = HSD_MemAlloc(0x554);
+    HSD_ASSERT(0x2A2, gp->u.car.car_info);
+    memzero(gp->u.car.car_info, 0x554);
 
-    gp->gv.bigblueroute.x10A = 0;
-    gp->gv.bigblueroute.x108 = 0;
+    gp->u.car.x10A = 0;
+    gp->u.car.x108 = 0;
 
-    splGetSplinePoint(&gp->gv.bigblueroute.xD8, gp->gv.bigblueroute.xCC, 0.0F);
-    splGetSplinePoint(&gp->gv.bigblueroute.xE4, gp->gv.bigblueroute.xCC, 1.0F);
+    splGetSplinePoint(&gp->u.car.xD8, gp->u.car.xCC, 0.0F);
+    splGetSplinePoint(&gp->u.car.xE4, gp->u.car.xCC, 1.0F);
 
-    splGetSplinePoint(&gp->gv.bigblueroute.xF0, gp->gv.bigblueroute.xD0, 0.0F);
-    splGetSplinePoint(&spline_pt, gp->gv.bigblueroute.xD4, 0.0F);
-    lbVector_Add(&gp->gv.bigblueroute.xF0, &spline_pt);
+    splGetSplinePoint(&gp->u.car.xF0, gp->u.car.xD0, 0.0F);
+    splGetSplinePoint(&spline_pt, gp->u.car.xD4, 0.0F);
+    lbVector_Add(&gp->u.car.xF0, &spline_pt);
 
-    gp->gv.bigblueroute.xF0.x *= 0.5F;
-    gp->gv.bigblueroute.xF0.y *= 0.5F;
-    gp->gv.bigblueroute.xF0.z *= 0.5F;
+    gp->u.car.xF0.x *= 0.5F;
+    gp->u.car.xF0.y *= 0.5F;
+    gp->u.car.xF0.z *= 0.5F;
 
-    splGetSplinePoint(&gp->gv.bigblueroute.xFC, gp->gv.bigblueroute.xD0, 1.0F);
-    splGetSplinePoint(&spline_pt, gp->gv.bigblueroute.xD4, 1.0F);
-    lbVector_Add(&gp->gv.bigblueroute.xFC, &spline_pt);
+    splGetSplinePoint(&gp->u.car.xFC, gp->u.car.xD0, 1.0F);
+    splGetSplinePoint(&spline_pt, gp->u.car.xD4, 1.0F);
+    lbVector_Add(&gp->u.car.xFC, &spline_pt);
 
-    gp->gv.bigblueroute.xFC.x *= 0.5F;
-    gp->gv.bigblueroute.xFC.y *= 0.5F;
-    gp->gv.bigblueroute.xFC.z *= 0.5F;
+    gp->u.car.xFC.x *= 0.5F;
+    gp->u.car.xFC.y *= 0.5F;
+    gp->u.car.xFC.z *= 0.5F;
 }
 
 s32 grBigBlueRoute_8020C530(Ground_GObj* arg0)
@@ -509,7 +507,7 @@ s32 grBigBlueRoute_8020C530(Ground_GObj* arg0)
 
     count = 0;
     for (i = 0; i < 30; i++) {
-        if (!((RouteEntry*) gp->gv.bigblueroute.xC8)[i].flags.b0) {
+        if (!((RouteEntry*) gp->u.car.car_info)[i].flags.b0) {
             count++;
         }
     }
@@ -525,13 +523,13 @@ s32 grBigBlueRoute_8020C530(Ground_GObj* arg0)
     }
 
     for (i = 0; i < 30; i++) {
-        if (!((RouteEntry*) gp->gv.bigblueroute.xC8)[i].flags.b0) {
+        if (!((RouteEntry*) gp->u.car.car_info)[i].flags.b0) {
             if (--count < 0) {
                 return i;
             }
         }
     }
-    __assert(__FILE__, 0x2E5, "0");
+    HSD_ASSERT(0X2E5, NULL);
 }
 
 /// @todo Currently 92.06% match - register allocation (gp in r30 vs r31)
@@ -542,18 +540,18 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
     s32 route_idx;
     PAD_STACK(8);
 
-    if (!((f32) gp->gv.bigblueroute.x108 < 1.0f + grBb_Route_804D6A68->x40)) {
+    if (!((f32) gp->u.car.x108 < 1.0f + grBb_Route_804D6A68->x40)) {
         return;
     }
 
-    if (gp->gv.bigblueroute.x10A-- >= 0) {
+    if (gp->u.car.x10A-- >= 0) {
         return;
     }
 
-    if (gp->gv.bigblueroute.x108 == 0) {
+    if (gp->u.car.x108 == 0) {
         route_idx = 30;
-        ((RouteEntry*) gp->gv.bigblueroute.xC8)[30].flags.b1 = 1;
-        gp->gv.bigblueroute.x10A = grBb_Route_804D6A68->x4C;
+        ((RouteEntry*) gp->u.car.car_info)[30].flags.b1 = 1;
+        gp->u.car.x10A = grBb_Route_804D6A68->x4C;
     } else {
         s32 min_val;
         s32 max_val;
@@ -561,7 +559,7 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
 
         route_idx = grBigBlueRoute_8020C530(gobj);
 
-        ((RouteEntry*) gp->gv.bigblueroute.xC8)[route_idx].flags.b1 = 0;
+        ((RouteEntry*) gp->u.car.car_info)[route_idx].flags.b1 = 0;
 
         min_val = (s32) grBb_Route_804D6A68->x44;
         max_val = (s32) grBb_Route_804D6A68->x48;
@@ -575,48 +573,48 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
         } else {
             new_timer = max_val;
         }
-        gp->gv.bigblueroute.x10A = (s16) new_timer;
+        gp->u.car.x10A = (s16) new_timer;
     }
 
     if (route_idx != -1) {
         // probably an inline of some sort
-        RouteEntry* re = &((RouteEntry*) gp->gv.bigblueroute.xC8)[route_idx];
+        RouteEntry* re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
 
-        (&((RouteEntry*) gp->gv.bigblueroute.xC8)[route_idx])->flags.b0 = 1;
-        (&((RouteEntry*) gp->gv.bigblueroute.xC8)[route_idx])->flags.b6 = 0;
-        (&((RouteEntry*) gp->gv.bigblueroute.xC8)[route_idx])->flags.b2_5 = 1;
+        (&((RouteEntry*) gp->u.car.car_info)[route_idx])->flags.b0 = 1;
+        (&((RouteEntry*) gp->u.car.car_info)[route_idx])->flags.b6 = 0;
+        (&((RouteEntry*) gp->u.car.car_info)[route_idx])->flags.b2_5 = 1;
 
-        re = &((RouteEntry*) gp->gv.bigblueroute.xC8)[route_idx];
+        re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
         re->x4 = 0.0F;
 
-        re = &((RouteEntry*) gp->gv.bigblueroute.xC8)[route_idx];
+        re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
         re->x8 = grBb_Route_804D6A68->x20;
 
-        re = &((RouteEntry*) gp->gv.bigblueroute.xC8)[route_idx];
+        re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
         re->xC = 0.0F;
 
         {
             f32 rand = HSD_Randf();
-            re = &((RouteEntry*) gp->gv.bigblueroute.xC8)[route_idx];
+            re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
             re->x10 = rand;
         }
 
-        re = &((RouteEntry*) gp->gv.bigblueroute.xC8)[route_idx];
+        re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
         re->x14 = 0.0F;
 
-        re = &((RouteEntry*) gp->gv.bigblueroute.xC8)[route_idx];
+        re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
         re->x18 = grBb_Route_804D6A68->x3C;
 
-        re = &((RouteEntry*) gp->gv.bigblueroute.xC8)[route_idx];
+        re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
         re->x1C = 0.0F;
 
         {
             f32 rand = HSD_Randf();
-            re = &((RouteEntry*) gp->gv.bigblueroute.xC8)[route_idx];
+            re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
             re->x20 = 5.2359877f * rand - 2.6179938f;
         }
 
-        if (!((RouteEntry*) gp->gv.bigblueroute.xC8)[route_idx].flags.b1) {
+        if (!((RouteEntry*) gp->u.car.car_info)[route_idx].flags.b1) {
             HSD_JObj* root = gobj->hsd_obj;
             if (root != NULL) {
                 HSD_JObj* jobj;
@@ -649,7 +647,7 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
                             0, 1, gp, jobj,
                             (void (*)(Item_GObj*, Ground*)) fn_8020DEAC, NULL,
                             NULL);
-                        re = &((RouteEntry*) gp->gv.bigblueroute.xC8)[route_idx];
+                        re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
                         re->x28 = (void*) item;
                         if (item != NULL) {
                             grMaterial_801C8E28((HSD_GObj*) item);
@@ -660,14 +658,14 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
         }
     }
 
-    gp->gv.bigblueroute.x108++;
+    gp->u.car.x108++;
 }
 
 static const Vec3 grBb_Route_803B83E0 = { 0.0f, 1.0f, 0.0f };
 
 /// @todo Currently 89.41% match - SYSTEMIC: float-constant hoisting order and
 /// register pressure differ (target spills rot to stack; we keep it in FPRs).
-#define RE_ENTRY (&((RouteEntry*) gp->gv.bigblueroute.xC8)[i])
+#define RE_ENTRY (&((RouteEntry*) gp->u.car.car_info)[i])
 void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
@@ -727,9 +725,9 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
 
                 t = RE_ENTRY->x4;
                 frac = RE_ENTRY->xC;
-                splGetSplinePoint(&p0, gp->gv.bigblueroute.xD0, t);
-                splGetSplinePoint(&p1, gp->gv.bigblueroute.xD4, t);
-                lbShadow_8000E9F0(&tangent, gp->gv.bigblueroute.xD0, t);
+                splGetSplinePoint(&p0, gp->u.car.xD0, t);
+                splGetSplinePoint(&p1, gp->u.car.xD4, t);
+                lbShadow_8000E9F0(&tangent, gp->u.car.xD0, t);
                 lbVector_Diff(&p1, &p0, &pos);
                 pos.x *= frac;
                 pos.y *= frac;
@@ -771,8 +769,8 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                 t = RE_ENTRY->x14;
                 angle = RE_ENTRY->x1C;
                 up = grBb_Route_803B83E0;
-                splGetSplinePoint(&pos, gp->gv.bigblueroute.xCC, t);
-                lbShadow_8000E9F0(&tangent, gp->gv.bigblueroute.xCC, t);
+                splGetSplinePoint(&pos, gp->u.car.xCC, t);
+                lbShadow_8000E9F0(&tangent, gp->u.car.xCC, t);
                 grBigBlueRoute_8020DD64(&tangent);
                 PSVECCrossProduct(&up, &tangent, &side);
                 lbVector_RotateAboutUnitAxis(&side, &tangent, angle);
@@ -821,9 +819,9 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
 
                 prog = (RE_ENTRY->x4 - RE_ENTRY->x24) / (1.0f - RE_ENTRY->x24);
                 frac = ((1.0f - prog) * (RE_ENTRY->xC - 0.5f)) + 0.5f;
-                splGetSplinePoint(&p0, gp->gv.bigblueroute.xD0, RE_ENTRY->x4);
-                splGetSplinePoint(&p1, gp->gv.bigblueroute.xD4, RE_ENTRY->x4);
-                lbShadow_8000E9F0(&road_tan, gp->gv.bigblueroute.xD0, RE_ENTRY->x4);
+                splGetSplinePoint(&p0, gp->u.car.xD0, RE_ENTRY->x4);
+                splGetSplinePoint(&p1, gp->u.car.xD4, RE_ENTRY->x4);
+                lbShadow_8000E9F0(&road_tan, gp->u.car.xD0, RE_ENTRY->x4);
                 lbVector_Diff(&p1, &p0, &road);
                 road.x *= frac;
                 road.y *= frac;
@@ -836,8 +834,8 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                 t = RE_ENTRY->x14;
                 angle = RE_ENTRY->x1C;
                 up = grBb_Route_803B83E0;
-                splGetSplinePoint(&air, gp->gv.bigblueroute.xCC, t);
-                lbShadow_8000E9F0(&tangent, gp->gv.bigblueroute.xCC, t);
+                splGetSplinePoint(&air, gp->u.car.xCC, t);
+                lbShadow_8000E9F0(&tangent, gp->u.car.xCC, t);
                 grBigBlueRoute_8020DD64(&tangent);
                 PSVECCrossProduct(&up, &tangent, &side);
                 lbVector_RotateAboutUnitAxis(&side, &tangent, angle);
@@ -884,8 +882,8 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                 prog = (RE_ENTRY->x14 - RE_ENTRY->x24) / (1.0f - RE_ENTRY->x24);
                 up = grBb_Route_803B83E0;
                 angle = (1.0f - prog) * RE_ENTRY->x1C;
-                splGetSplinePoint(&air, gp->gv.bigblueroute.xCC, RE_ENTRY->x14);
-                lbShadow_8000E9F0(&tangent, gp->gv.bigblueroute.xCC, RE_ENTRY->x14);
+                splGetSplinePoint(&air, gp->u.car.xCC, RE_ENTRY->x14);
+                lbShadow_8000E9F0(&tangent, gp->u.car.xCC, RE_ENTRY->x14);
                 grBigBlueRoute_8020DD64(&tangent);
                 PSVECCrossProduct(&up, &tangent, &side);
                 lbVector_RotateAboutUnitAxis(&side, &tangent, angle);
@@ -906,9 +904,9 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
 
                 t = RE_ENTRY->x4;
                 frac = RE_ENTRY->xC;
-                splGetSplinePoint(&p0, gp->gv.bigblueroute.xD0, t);
-                splGetSplinePoint(&p1, gp->gv.bigblueroute.xD4, t);
-                lbShadow_8000E9F0(&road_tan, gp->gv.bigblueroute.xD0, t);
+                splGetSplinePoint(&p0, gp->u.car.xD0, t);
+                splGetSplinePoint(&p1, gp->u.car.xD4, t);
+                lbShadow_8000E9F0(&road_tan, gp->u.car.xD0, t);
                 lbVector_Diff(&p1, &p0, &road);
                 road.x *= frac;
                 road.y *= frac;
