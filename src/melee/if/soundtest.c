@@ -393,7 +393,89 @@ void un_802FFEE0(s32* arg0)
     arg0[2] = 0;
 }
 
-/// #un_802FFF2C
+void un_802FFF2C(StartMeleeData* arg0)
+{
+    StartMeleeRules* r = &arg0->rules;
+    int* s = (int*) &un_803FA258;
+    int* col;
+    PlayerInitData* p;
+    s32 i;
+    s32 timer;
+
+    gm_80167A64(r);
+    r->x2_2 = 0;
+    r->is_teams = s[3];
+    switch (s[0x32]) {
+    case 0:
+        r->x0_0 = 0;
+        timer = s[0x34] + s[0x33] * 0x3C;
+        if (timer != 0) {
+            r->x10 = timer;
+            r->x0_6 = 1;
+        } else {
+            r->x0_6 = 0;
+        }
+        break;
+    case 1:
+        r->x0_0 = 1;
+        r->x0_6 = 0;
+        break;
+    case 2:
+        r->x0_0 = 2;
+        timer = s[0x34] + s[0x33] * 0x3C;
+        if (timer != 0) {
+            r->x10 = timer;
+            r->x0_6 = 1;
+        } else {
+            r->x0_6 = 0;
+        }
+        break;
+    default:
+        r->x0_0 = 0;
+        r->x0_6 = 0;
+        break;
+    }
+    r->xE = s[2];
+    r->x20 = -1;
+    r->xB = s[0x36] - 1;
+    r->xC = -1;
+    r->x30 = s[0x3B];
+    gm_80167A14(arg0->players);
+    col = s;
+    p = arg0->players;
+    for (i = 0; i < 2; i++) {
+        p[0].c_kind = col[4];
+        p[0].slot_type = col[9];
+        p[0].color = col[0xE];
+        p[0].sub_color = col[0x12];
+        p[0].team = col[0x16];
+        p[0].xC_b0 = col[0x37];
+        p[0].x12 = col[0x1A];
+        p[0].x18 = ((f32*) col)[0x1E];
+        p[0].x1C = ((f32*) col)[0x22];
+        p[0].xE = col[0x2A];
+        p[0].cpu_level = col[0x2E];
+        p[0].stocks = s[0x35];
+        p[0].xC_b1 = 0;
+        p[0].x20 = ((f32*) col)[0x26];
+        p[1].c_kind = col[5];
+        p[1].slot_type = col[0xA];
+        p[1].color = col[0xF];
+        p[1].sub_color = col[0x13];
+        p[1].team = col[0x17];
+        p[1].xC_b0 = col[0x38];
+        p[1].x12 = col[0x1B];
+        p[1].x18 = ((f32*) col)[0x1F];
+        p[1].x1C = ((f32*) col)[0x23];
+        p[1].xE = col[0x2B];
+        p[1].cpu_level = col[0x2F];
+        p[1].stocks = s[0x35];
+        p[1].xC_b1 = 0;
+        p[1].x20 = ((f32*) col)[0x27];
+        col += 2;
+        p += 2;
+    }
+}
 
 bool un_803001DC(bool update_scene)
 {
