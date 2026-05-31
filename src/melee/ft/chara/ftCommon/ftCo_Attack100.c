@@ -1840,6 +1840,7 @@ static void fn_800D9CE8(Fighter_GObj* gobj)
     f32 rate;
     f32 startFrame;
     s32 nextMotion;
+    PAD_STACK(0x18);
 
     fp->gr_vel = 0.0f;
     frame = fp->cur_anim_frame;
