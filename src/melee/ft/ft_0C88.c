@@ -6,7 +6,7 @@
 
 #include "ft/forward.h"
 
-#include "ft/ft_0C31.h"
+#include "ft/ftCo_800C7CA0.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftmetal.h"
 #include "ft/ftparts.h"

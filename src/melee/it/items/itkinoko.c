@@ -4,6 +4,8 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/it_3F14.h"
+#include "it/itmaplib.h"
 #include "it/item.h"
 
 ItemStateTable it_803F6110[] = {

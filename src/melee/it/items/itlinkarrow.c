@@ -11,12 +11,18 @@
 #include "ft/chara/ftCommon/ftCo_Guard.h"
 #include "ft/chara/ftKirby/ftKb_Init.h"
 #include "ft/chara/ftLink/ftLk_SpecialN.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_0C31.h"
 #include "ft/ftlib.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/ithitbox.h"
+#include "it/itanimlist.h"
+#include "it/iteffect.h"
 #include "it/itCharItems.h"
 #include "it/itcoll.h"
 #include "it/item.h"
@@ -133,8 +139,10 @@ void it_802A7E40(Item_GObj* gobj)
     }
 }
 
-f32 it_803F6A78[] = { 2, 4, 6, 8, 10, 12, 14, 16 };
-f32 it_803F6A98[] = { 2, 3, 4, 5, 6, 7, 8, 9 };
+f32 it_803F6A84[] = {
+    2.0f, 4.0f, 6.0f, 8.0f, 10.0f, 12.0f, 14.0f, 16.0f,
+    2.0f, 3.0f, 4.0f, 5.0f, 6.0f,  7.0f,  8.0f,  9.0f,
+};
 
 HSD_GObj* it_802A83E0(f32 facing_dir, Fighter_GObj* arg1, Vec3* arg2,
                       Fighter_Part arg3, s32 arg4)
@@ -288,52 +296,50 @@ void it_802A850C(Item_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3, f32 arg4,
     u32 sp60;
     u8 _pad4[4];
     Quaternion quat;
-    HSD_GObj* fighter;
     PAD_STACK(12);
 
     ip->xDD4_itemVar.linkarrow.x94 = arg3;
     it_80275158(gobj, attr->x0 + attr->x18);
     ip->xDD4_itemVar.linkarrow.xAC = arg4;
 
-    fighter = ip->xDD4_itemVar.linkarrow.xE0;
-    if (fighter != NULL) {
-        if (ip->owner == fighter) {
-            it_802A8C7C(gobj);
-            HSD_MtxGetRotation(
-                ftLib_80086630(ip->xDD4_itemVar.linkarrow.xE0, ip->xDC4)->mtx,
-                &rot);
-            pos.x = pos.y = pos.z = 0.0f;
-            it_8027429C(gobj, &pos);
-            ip->xDC8_word.flags.x14 = 0;
-            it_8026B3A8(gobj);
-            ip->xDD4_itemVar.linkarrow.xA8 =
-                (arg4 * ((attr->x8 - attr->x4) / arg5)) + attr->x4;
-            ip->xDD4_itemVar.linkarrow.xA4 =
-                (arg4 * ((attr->x10 - attr->xC) / arg5)) + attr->xC;
-            ip->facing_dir = ftLib_800865C0(ip->xDD4_itemVar.linkarrow.xE0);
-            HSD_JObjSetRotationY(jobj, M_PI_2 * ip->facing_dir);
-            ip->pos = *arg1;
-            ip->xDD4_itemVar.linkarrow.x18 = *arg2;
-            ip->x40_vel.x =
-                ip->facing_dir * (ip->xDD4_itemVar.linkarrow.xA8 *
-                                  cosf(ip->xDD4_itemVar.linkarrow.x94));
-            ip->x40_vel.y = ip->xDD4_itemVar.linkarrow.xA8 *
-                            sinf(ip->xDD4_itemVar.linkarrow.x94);
-            ip->x40_vel.z = 0.0f;
-            HSD_JObjSetRotationZ(jobj, ip->xDD4_itemVar.linkarrow.x94);
-            ip->xDD4_itemVar.linkarrow.xA0 = 1;
+    if ((ip->xDD4_itemVar.linkarrow.xE0 != NULL) &&
+        (ip->owner == ip->xDD4_itemVar.linkarrow.xE0))
+    {
+        it_802A8C7C(gobj);
+        HSD_MtxGetRotation(
+            ftLib_80086630(ip->xDD4_itemVar.linkarrow.xE0, ip->xDC4)->mtx,
+            &rot);
+        pos.x = pos.y = pos.z = 0.0f;
+        it_8027429C(gobj, &pos);
+        ip->xDC8_word.flags.x14 = 0;
+        it_8026B3A8(gobj);
+        ip->xDD4_itemVar.linkarrow.xA8 =
+            (arg4 * ((attr->x8 - attr->x4) / arg5)) + attr->x4;
+        ip->xDD4_itemVar.linkarrow.xA4 =
+            (arg4 * ((attr->x10 - attr->xC) / arg5)) + attr->xC;
+        ip->facing_dir = ftLib_800865C0(ip->xDD4_itemVar.linkarrow.xE0);
+        HSD_JObjSetRotationY(jobj, M_PI_2 * ip->facing_dir);
+        ip->pos = *arg1;
+        ip->xDD4_itemVar.linkarrow.x18 = *arg2;
+        ip->x40_vel.x =
+            ip->facing_dir * (ip->xDD4_itemVar.linkarrow.xA8 *
+                              cosf(ip->xDD4_itemVar.linkarrow.x94));
+        ip->x40_vel.y = ip->xDD4_itemVar.linkarrow.xA8 *
+                        sinf(ip->xDD4_itemVar.linkarrow.x94);
+        ip->x40_vel.z = 0.0f;
+        HSD_JObjSetRotationZ(jobj, ip->xDD4_itemVar.linkarrow.x94);
+        ip->xDD4_itemVar.linkarrow.xA0 = 1;
 
-            it_802A850C_inline_2(gobj, &quat);
+        it_802A850C_inline_2(gobj, &quat);
 
-            attr = ip->xC4_article_data->x4_specialAttributes;
-            ip->xDD4_itemVar.linkarrow.xB4[0] = it_802A850C_inline(attr->x24);
-            attr = ip->xC4_article_data->x4_specialAttributes;
-            ip->xDD4_itemVar.linkarrow.xB4[1] = it_802A850C_inline(attr->x28);
+        attr = ip->xC4_article_data->x4_specialAttributes;
+        ip->xDD4_itemVar.linkarrow.xB4[0] = it_802A850C_inline(attr->x24);
+        attr = ip->xC4_article_data->x4_specialAttributes;
+        ip->xDD4_itemVar.linkarrow.xB4[1] = it_802A850C_inline(attr->x28);
 
-            ip->xDD4_itemVar.linkarrow.xB0 = 0;
-            it_8026EA20(gobj, &ip->xDD4_itemVar.linkarrow.x18, &ip->pos, &sp68,
-                        &ip->xDD4_itemVar.linkarrow.xE4, &sp60);
-        }
+        ip->xDD4_itemVar.linkarrow.xB0 = 0;
+        it_8026EA20(gobj, &ip->xDD4_itemVar.linkarrow.x18, &ip->pos, &sp68,
+                    &ip->xDD4_itemVar.linkarrow.xE4, &sp60);
     }
 }
 
@@ -457,11 +463,11 @@ static bool inline it_802A8330_inline(Item_GObj* gobj)
     return false;
 }
 
-static void inline itLinkarrow_UnkMotion1_Anim_inline(HSD_GObj* gobj, int i)
+static void inline itLinkarrow_UnkMotion1_Anim_inline(HSD_GObj* gobj, int i,
+                                                      Vec3* scale)
 {
     Item* item;
     HSD_JObj* jobj;
-    Vec3 scale;
     item = GET_ITEM(gobj);
     jobj = HSD_GObjGetHSDObj(gobj);
     if (item->xDD4_itemVar.linkarrow.xB4[i] != NULL) {
@@ -470,12 +476,13 @@ static void inline itLinkarrow_UnkMotion1_Anim_inline(HSD_GObj* gobj, int i)
                                   &item->xDD4_itemVar.linkarrow.x30 + i);
         fake_HSD_JObjSetRotation(item->xDD4_itemVar.linkarrow.xB4[i],
                                  &item->xDD4_itemVar.linkarrow.x64 + i);
-        HSD_JObjGetScale(jobj, &scale);
-        fake_HSD_JObjSetScale(item->xDD4_itemVar.linkarrow.xB4[i], &scale);
+        HSD_JObjGetScale(jobj, scale);
+        fake_HSD_JObjSetScale(item->xDD4_itemVar.linkarrow.xB4[i], scale);
     }
 }
 
-static inline void itLinkarrow_UnkMotion1_Anim_inline2(HSD_GObj* gobj)
+static inline void
+itLinkarrow_UnkMotion1_Anim_inline2(HSD_GObj* gobj, Vec3* scale1, Vec3* scale2)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->xDD4_itemVar.linkarrow.xB0 > 0) {
@@ -485,28 +492,34 @@ static inline void itLinkarrow_UnkMotion1_Anim_inline2(HSD_GObj* gobj)
         ip->xDB0_itcmd_var1 = 1;
     }
     if (ip->xDAC_itcmd_var0 == 1) {
-        itLinkarrow_UnkMotion1_Anim_inline(gobj, 0);
+        itLinkarrow_UnkMotion1_Anim_inline(gobj, 0, scale1);
     }
     if (ip->xDB0_itcmd_var1 == 1) {
-        itLinkarrow_UnkMotion1_Anim_inline(gobj, 1);
+        itLinkarrow_UnkMotion1_Anim_inline(gobj, 1, scale2);
     }
     ip->xDD4_itemVar.linkarrow.xB0 += 1;
 }
 
 bool itLinkarrow_UnkMotion1_Anim(HSD_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    HSD_JObj* jobj = gobj->hsd_obj;
+    Item* ip = gobj->user_data;
     Vec3 scale;
-    scale.x = scale.y = scale.z = ip->xDD4_itemVar.linkarrow.xC0;
-    HSD_JObjSetScale(jobj, &scale);
+    u8 _pad[4];
+    Vec3 scale1;
+    Vec3 scale2;
+    {
+        HSD_JObj* jobj = HSD_GObjGetHSDObj(gobj);
+        scale.x = scale.y = scale.z = ip->xDD4_itemVar.linkarrow.xC0;
+        HSD_JObjSetScale(jobj, &scale);
+    }
 
     if (ip->xDB4_itcmd_var2 == 0) {
         it_80272460(&ip->x5D4_hitboxes[0].hit, ip->xDD4_itemVar.linkarrow.xA4,
                     gobj);
         ip->xDB4_itcmd_var2 = 1;
     }
-    itLinkarrow_UnkMotion1_Anim_inline2(gobj);
+
+    itLinkarrow_UnkMotion1_Anim_inline2(gobj, &scale1, &scale2);
     return it_802A8330_inline(gobj);
 }
 
@@ -672,12 +685,18 @@ bool itLinkarrow_UnkMotion4_Anim(Item_GObj* gobj)
 {
     // this is just fn_802A81C4, but I can't get it to inline
     f32 var_f31;
+    int zero;
     f32 var_f32;
-    Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
+    register Item* ip = GET_ITEM(gobj);
     f32 rand;
     f32* temp_r3;
-    PAD_STACK(8);
+
+    zero = 0;
+    do {
+        UNUSED unsigned char _[8];
+    } while (zero);
+
     switch (ip->xDD4_itemVar.linkarrow.x9C) {
     case 0:
     case 2:
@@ -703,8 +722,8 @@ bool itLinkarrow_UnkMotion4_Anim(Item_GObj* gobj)
     HSD_JObjSetRotationZ(jobj, var_f31);
     ip->xDD4_itemVar.linkarrow.x9C -= 1;
 
-    if (itlinkarrow_inline_bool(gobj) != 0) {
-        if (ip->xDD4_itemVar.linkarrow.xF0 == 0) {
+    if (itlinkarrow_inline_bool(gobj) != zero) {
+        if (ip->xDD4_itemVar.linkarrow.xF0 == zero) {
             it_802787B4(gobj, 0x421);
             it_802756D0(gobj);
         }
@@ -715,7 +734,7 @@ bool itLinkarrow_UnkMotion4_Anim(Item_GObj* gobj)
             return true;
         }
     }
-    return false;
+    return zero;
 }
 
 void itLinkarrow_UnkMotion4_Phys(HSD_GObj* gobj)

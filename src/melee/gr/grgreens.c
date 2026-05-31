@@ -25,6 +25,8 @@
 #include <melee/gr/types.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/items/itwhispyapple.h>
+#include "it/it_2725.h"
+#include "it/ithitbox.h"
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbaudio_ax.h>
