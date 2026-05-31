@@ -33,7 +33,7 @@
 /* 2190D0 */ void grPushOn_802190D0(HSD_GObj*);
 /* 219204 */ void grPushOn_80219204(int arg0, int* out1, int* out2);
 /* 219230 */ int grPushOn_80219230(int);
-/* 2192A4 */ s32 fn_802192A4(HSD_GObj*, s32*);
+/* 2192A4 */ s32 fn_802192A4(void*, HSD_GObj*, s32*);
 /* 219458 */ DynamicsDesc* grPushOn_80219458(enum_t);
 /* 219528 */ bool grPushOn_80219528(Vec3*, int arg, HSD_JObj* jobj);
 

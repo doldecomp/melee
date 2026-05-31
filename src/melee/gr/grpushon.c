@@ -635,26 +635,20 @@ void grPushOn_80218888(Ground_GObj* arg0)
     }
 }
 
-struct grPushOn_Region {
-    f32 x0;
-    f32 x4;
-    f32 x8;
-};
-
-s32 fn_802192A4(HSD_GObj* arg1, s32* arg2)
+s32 fn_802192A4(void* arg0, HSD_GObj* gobj, s32* result)
 {
     Vec3 sp14;
     f32 scale = Ground_801C0498();
-    struct grPushOn_Region* r;
     s32 i;
 
-    ftLib_80086644(arg1, &sp14);
-    r = (struct grPushOn_Region*) grPushOn_803E7CCC;
-    for (i = 0; i < 4; i++, r++) {
-        if ((scale * r->x0 < sp14.x) && (scale * r->x4 > sp14.x) &&
-            (scale * (-50.0f + r->x8) < sp14.y) && (scale * r->x8 > sp14.y))
+    ftLib_80086644(gobj, &sp14);
+    for (i = 0; i < 4; i++) {
+        if ((scale * grPushOn_803E7CCC[i * 3] < sp14.x) &&
+            (scale * grPushOn_803E7CCC[i * 3 + 1] > sp14.x) &&
+            (scale * (-50.0f + grPushOn_803E7CCC[i * 3 + 2]) < sp14.y) &&
+            (scale * grPushOn_803E7CCC[i * 3 + 2] > sp14.y))
         {
-            *arg2 = grPushOn_804D6AB8->x0;
+            *result = grPushOn_804D6AB8->x0;
             return 1;
         }
     }
