@@ -588,6 +588,70 @@ s32 THPDec_803310CC(THPScanInfo* info)
     return 0;
 }
 
+typedef struct THPDecodeInfo {
+    /* 0x000 */ u8 pad00[0x76];
+    /* 0x076 */ u16 x76;
+    /* 0x078 */ u8 pad78[0x8D4 - 0x78];
+    /* 0x8D4 */ u16 x8D4;
+    /* 0x8D6 */ u8 pad8D6[0x8EA - 0x8D6];
+    /* 0x8EA */ u16 x8EA;
+    /* 0x8EC */ u16 pad8EC;
+    /* 0x8EE */ u16 x8EE;
+    /* 0x8F0 */ void* x8F0;
+    /* 0x8F4 */ void* x8F4;
+    /* 0x8F8 */ void* x8F8;
+} THPDecodeInfo;
+
+void THPDec_80331340(s32 arg0, void* arg1, void* arg2, void* arg3, s32 arg4)
+{
+    THPDecodeInfo* info = (THPDecodeInfo*) arg0;
+    info->x8F0 = arg1;
+    info->x8F4 = arg2;
+    info->x8F8 = arg3;
+
+#ifdef __MWERKS__ // clang-format off
+    asm {
+        li      r3, 0x0007
+        oris    r3, r3, 0x0007
+        mtspr   GQR5, r3
+        li      r3, 0x3D04
+        oris    r3, r3, 0x3D04
+        mtspr   GQR6, r3
+    }
+#endif // clang-format on
+
+    __THPPrepBitStream((THPFileInfo*) info);
+    while (info->x8EE < info->x8EA + info->x76) {
+        __THPDecompressiMCURow640x480();
+        info->x8EE += info->x8D4;
+    }
+}
+
+void THPDec_803313D0(s32 arg0, void* arg1, void* arg2, void* arg3)
+{
+    THPDecodeInfo* info = (THPDecodeInfo*) arg0;
+    info->x8F0 = arg1;
+    info->x8F4 = arg2;
+    info->x8F8 = arg3;
+
+#ifdef __MWERKS__ // clang-format off
+    asm {
+        li      r3, 0x0007
+        oris    r3, r3, 0x0007
+        mtspr   GQR5, r3
+        li      r3, 0x3D04
+        oris    r3, r3, 0x3D04
+        mtspr   GQR6, r3
+    }
+#endif // clang-format on
+
+    __THPPrepBitStream((THPFileInfo*) info);
+    while (info->x8EE < info->x8EA + info->x76) {
+        __THPDecompressiMCURowNxN();
+        info->x8EE += info->x8D4;
+    }
+}
+
 s32 THPDec_8032FD40(THPDec_8032FD40_Data* data, u16 num)
 {
     s32 base = data->val0 + 0x4028;

@@ -3,8 +3,8 @@ Funcs:
 - [x] THPDec_8032F8D4
 - [x] THPDec_80330158
 - [x] THPDec_803310CC
-- [ ] THPDec_80331340
-- [ ] THPDec_803313D0
+- [x] THPDec_80331340
+- [x] THPDec_803313D0
 
 File: src/melee/ft/chara/ftCommon/ftCo_Attack100.c
 Funcs:
