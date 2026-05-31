@@ -369,8 +369,8 @@ void grBigBlueRoute_8020BF38(Ground_GObj* gobj)
             grBigBlueRoute_8020DED4(&fighter_pos);
 
             for (i = 0; i < 3; i++) {
-                jobj = gp->gv.bigblueroute2.tracks[i].jobj;
-                if (jobj != NULL) {
+                if (gp->gv.bigblueroute2.tracks[i].jobj != NULL) {
+                    jobj = gp->gv.bigblueroute2.tracks[i].jobj;
                     HSD_JObjSetTranslateX(jobj,
                         gp->gv.bigblueroute2.tracks[i].offset.x +
                             fighter_pos.x);
@@ -387,7 +387,7 @@ void grBigBlueRoute_8020BF38(Ground_GObj* gobj)
 
         {
             s32 idx = gp->gv.bigblueroute2.xC8 + 5;
-            if (idx <= 7) {
+            if (gp->gv.bigblueroute2.xC8 + 5 <= 7) {
                 if (Ground_801C2D24(idx, &checkpoint) != 0) {
                     if (fighter_pos.x > checkpoint.x) {
                         gp->gv.bigblueroute2.xC8 =
