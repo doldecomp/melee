@@ -111,8 +111,9 @@ void fn_80023254(s32 arg0)
     int n;
     int* shift_ptr;
     int i;
+    char* base;
 
-    arr_b44 = lbl_80433710.x434;
+    arr_b44 = lbl_80433B44;
     local_ptr = local_arr;
     for (i = 0; i < 7; i++) {
         arr_b44[0] = 0x37;
@@ -135,12 +136,13 @@ void fn_80023254(s32 arg0)
         local_ptr += 8;
     }
 
-    arr_b44 = lbl_80433710.x434;
+    arr_b44 = lbl_80433B44;
+    base = lbl_803BB300;
 
     for (count = 0; count <= 0x37; count++) {
         local_ptr = local_arr;
-        arr_5d0 = s32_arr_803BB5D0;
-        arr_4e4 = offsets_arr_803BC4E4;
+        arr_5d0 = (s8(*)[4]) (base + 0x2D0);
+        arr_4e4 = (int(*)[2]) (base + 0x11E4);
         j = 0;
 
         do {
@@ -151,13 +153,14 @@ void fn_80023254(s32 arg0)
                 goto next;
             }
 
-            if ((u32) offsets_arr_803BC4E4[*arr_b44][0] >= (u32) (*arr_4e4)[0])
+            if ((u32) ((int(*)[2]) (base + 0x11E4))[*arr_b44][0] >=
+                (u32) (*arr_4e4)[0])
             {
                 goto next;
             }
 
             if (count < 0x37) {
-                shift_ptr = &lbl_80433710.x434[0x37];
+                shift_ptr = &lbl_80433B44[0x37];
                 n = 0x37 - count;
 
                 if ((n >> 3) != 0) {
