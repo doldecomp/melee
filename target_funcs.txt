@@ -8,7 +8,7 @@ Funcs:
 
 File: src/melee/ft/chara/ftCommon/ftCo_Attack100.c
 Funcs:
-- [ ] fn_800D8EC8
+- [x] fn_800D8EC8
 - [ ] fn_800D9558
 - [ ] fn_800D9930
 - [ ] fn_800D9CE8

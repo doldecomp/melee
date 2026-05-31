@@ -1348,6 +1348,86 @@ void ftCo_800D8C54(Fighter_GObj* gobj, FtMotionId msid)
     ftCommon_8007E2D0(fp, 1, fn_800D9CE8, fn_800D8BFC, fn_800DAADC);
 }
 
+bool fn_800D8EC8(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    struct ftLk_DatAttrs* attrs;
+    HSD_JObj* jobj;
+    itLinkHookshotAttributes* hookAttrs;
+    Item_GObj* item;
+    Vec3 bonePos;
+    Vec3 vel;
+    f32 grav;
+    f32 var_f3;
+    f32 mtxY;
+
+    if (fp->kind != FTKIND_LINK && fp->kind != FTKIND_CLINK) {
+        return 0;
+    }
+
+    attrs = fp->dat_attrs;
+    fp->mv.ca.specials.grav += 1.0;
+    grav = fp->mv.ca.specials.grav;
+    if (grav == (f32) attrs->x84) {
+        lb_8000B1CC(
+            fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint, NULL,
+            &bonePos);
+        fp->fv.lk.xC =
+            it_802A2BA4(gobj, &bonePos, fp->facing_dir, attrs->xBC);
+        if (fp->fv.lk.xC == NULL) {
+            ft_8008A2BC(gobj);
+            return 1;
+        }
+        fp->accessory2_cb = it_802A7AF0;
+        fp->death1_cb = it_802A7AAC;
+        fp->accessory3_cb = it_802A7B34;
+    } else if (grav > (f32) attrs->x84) {
+        if (grav <= (f32) attrs->x90) {
+            item = fp->fv.lk.xC;
+            hookAttrs = GET_ITEM(item)->xC4_article_data->x4_specialAttributes;
+            if (grav == (f32) attrs->x88) {
+                jobj =
+                    fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint;
+                HSD_JObjSetupMatrix(jobj);
+                if (fp->kind == FTKIND_LINK) {
+                    var_f3 = 8.0 * fp->facing_dir * fp->x34_scale.y +
+                             jobj->mtx[0][3];
+                } else {
+                    var_f3 = 8.0 * fp->facing_dir * fp->x34_scale.y +
+                             jobj->mtx[0][3];
+                }
+                mtxY = jobj->mtx[1][3];
+                if (mpCheckAllRemap(NULL, NULL, NULL, NULL, -1, -1,
+                                    fp->coll_data.cur_pos.x, mtxY, var_f3,
+                                    mtxY)) {
+                    it_802A2B10(fp->fv.lk.xC);
+                    ft_8008A2BC(gobj);
+                    return 1;
+                }
+                vel.x = hookAttrs->x38 * fp->facing_dir;
+                vel.y = 0.0f;
+                vel.z = 0.0f;
+                it_802A78B8((HSD_GObj*) item, &vel);
+                if (fp->kind == FTKIND_CLINK) {
+                    ft_PlaySFX(fp, 0x111B9, 0x7F, 0x40);
+                } else {
+                    ft_PlaySFX(fp, 0x27149, 0x7F, 0x40);
+                }
+            } else if (grav == (f32) attrs->x8C) {
+                it_802A77DC(item);
+                if (fp->kind == FTKIND_CLINK) {
+                    ft_PlaySFX(fp, 0x111BC, 0x7F, 0x40);
+                } else {
+                    ft_PlaySFX(fp, 0x2714C, 0x7F, 0x40);
+                }
+            } else if (grav == (f32) attrs->x90) {
+                it_802A2B10(item);
+            }
+        }
+    }
+    return 0;
+}
+
 void ftCo_Catch_Anim(Fighter_GObj* gobj)
 {
     u8 _[8];
