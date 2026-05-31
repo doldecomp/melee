@@ -7,8 +7,8 @@
 #include "ft/forward.h"
 
 #include "ft/ft_0877.h"
-#include "ft/ft_0C31.h"
 #include "ft/ft_0D4D.h"
+#include "ft/ftCo_800C7CA0.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
@@ -24,6 +24,8 @@
 #include "gm/gm_unsplit.h"
 #include "lb/lbbgflash.h"
 #include "pl/player.h"
+
+HSD_MObj* ft_804D6588;
 
 bool ftCo_800C8C84(Fighter_GObj* gobj)
 {

@@ -13,6 +13,9 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/it_3F14.h"
+#include "it/ithitbox.h"
+#include "it/itmaplib.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
 #include "sysdolphin/baselib/random.h"
@@ -162,14 +165,17 @@ static inline ItemKind it_80289BE8_spawn(Item_GObj* gobj, ItemKind kind,
 
 void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3)
 {
+    ItemKind prev_kind;
     ItemKind spawned[15];
     Vec3 pos;
     Vec3 vel;
+    itKusudamaAttributes* attr;
     Item* ip = GET_ITEM(gobj);
-    itKusudamaAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
     s32 count;
     int i;
     PAD_STACK(8);
+
+    attr = ip->xC4_article_data->x4_specialAttributes;
 
     pos = ip->pos;
     pos.y -= 5.0f;
@@ -196,7 +202,6 @@ void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3)
 
     i = HSD_Randi(arg1 + arg2 + arg3);
     if (i < arg1) {
-        ItemKind prev_kind;
         ItemKind kind = attr->x10;
         count = attr->x14;
         if (kind == It_Kind_M_Ball && it_8026C704() == true) {
@@ -255,7 +260,6 @@ void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3)
                 }
             }
         } else {
-            ItemKind prev_kind;
             Vec3 vel;
             Vec3 pos;
             count = HSD_Randi(2) + 3;

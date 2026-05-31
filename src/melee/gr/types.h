@@ -1334,18 +1334,18 @@ struct grCastle_GroundVars8 {
 };
 
 struct grCastle_GroundVars9 {
-    /* +00 gp+C4 */ u32 xC4;
-    /* +04 gp+C8 */ u32 xC8;
-    /* +08 gp+CC */ u32 xCC;
-    /* +0C gp+D0 */ u8 pad_xD0[4];
-    /* +10 gp+D4 */ s16 xD4;
-    /* +12 gp+D6 */ s16 xD6;
-    /* +14 gp+D8 */ s16 xD8;
-    /* +16 gp+DA */ s16 xDA;
-    /* +18 gp+DC */ s16 xDC;
-    /* +1A gp+DE */ u8 xDE;
-    /* +1B gp+DF */ u8 pad_xDF[1];
-    /* +1C gp+E0 */ DynamicsDesc dynamics[12];
+    /* +00   gp+C4 */ u32 xC4;
+    /* +04   gp+C8 */ u32 xC8;
+    /* +08   gp+CC */ u32 xCC;
+    /* +0C   gp+D0 */ u8 pad_xD0[4];
+    /* +10   gp+D4 */ s16 xD4;
+    /* +12   gp+D6 */ s16 xD6;
+    /* +14   gp+D8 */ s16 xD8;
+    /* +16   gp+DA */ s16 xDA;
+    /* +18   gp+DC */ s16 xDC;
+    /* +1A:0 gp+DE:0 */ u8 xDE_b0 : 1;
+    /* +1B   gp+DF */ u8 pad_xDF[1];
+    /* +1C   gp+E0 */ DynamicsDesc dynamics[12];
 };
 
 struct grCastle_GroundVars10 {
@@ -1783,7 +1783,9 @@ struct UnkStageDatInternal {
 
 struct UnkStageDat_x8_t {
     /*  +0 */ struct HSD_Joint* unk0;
-    /*  +4 */ u8 _4[0x10 - 0x4];
+    /*  +4 */ HSD_AnimJoint** unk4;
+    /*  +8 */ HSD_MatAnimJoint** unk8;
+    /*  +C */ HSD_ShapeAnimJoint** unkC;
     /* +10 */ HSD_CameraDescPerspective* x10;
     /* +14 */ UNK_T x14;
     /* +18 */ UNK_T x18;

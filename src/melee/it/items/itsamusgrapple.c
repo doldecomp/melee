@@ -133,55 +133,54 @@ void itSamusGrapple_Logic53_Spawned(Item_GObj* gobj)
 
 void it_802B7160(Fighter_GObj* gobj, itSamusGrapple_HitboxData* data)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-    u32 hit_group = data->create_hitbox.create_hitbox_0.hit_group;
-    HitCapsule* hitbox = &fp->x914[data->create_hitbox.create_hitbox_0.id];
-    struct spawn_hitbox_0* hitbox0;
-    struct spawn_hitbox_1* hitbox1;
-    struct spawn_hitbox_2* hitbox2;
-    struct spawn_hitbox_3* hitbox3;
-    struct spawn_hitbox_4* hitbox4;
+    u16* damage;
+    Fighter* fp;
+    u32 hit_group;
+    HitCapsule* hitbox;
     PAD_STACK(8);
+
+    fp = GET_FIGHTER(gobj);
+    hit_group = data->create_hitbox.create_hitbox_0.hit_group;
+    hitbox = &fp->x914[data->create_hitbox.create_hitbox_0.id];
     if (hitbox->state == HitCapsule_Disabled || hitbox->x4 != hit_group) {
         hitbox->x4 = hit_group;
         hitbox->state = HitCapsule_Enabled;
         fp->x2219_b3 = 1;
         ftColl_800768A0(fp, hitbox);
     }
-    hitbox0 = &data->create_hitbox.create_hitbox_0;
-    hitbox1 = &data->create_hitbox.create_hitbox_1;
-    hitbox2 = &data->create_hitbox.create_hitbox_2;
+    damage = (u16*) ((u8*) data + 2);
     {
-        u32 bone = hitbox0->bone;
-        if (hitbox0->use_common_bone_ids) {
+        u32 bone = data->create_hitbox.create_hitbox_0.bone;
+        if (data->create_hitbox.create_hitbox_0.use_common_bone_ids) {
             bone = ftParts_GetBoneIndex(fp, bone);
             hitbox->jobj = fp->parts[bone].joint;
         } else {
             hitbox->jobj = fp->parts[bone].joint;
         }
     }
-    ftColl_8007ABD0(hitbox, hitbox0->damage, gobj);
-    hitbox->scale = hitbox1->size * 0.003906f;
-    hitbox->b_offset.x = hitbox1->z_offset * 0.003906f;
-    hitbox->b_offset.y = hitbox2->y_offset * 0.003906f;
+    ftColl_8007ABD0(hitbox, *damage & 0x3FF, gobj);
+    hitbox->scale = data->create_hitbox.create_hitbox_1.size * 0.003906f;
+    hitbox->b_offset.x =
+        data->create_hitbox.create_hitbox_1.z_offset * 0.003906f;
+    hitbox->b_offset.y =
+        data->create_hitbox.create_hitbox_2.y_offset * 0.003906f;
     hitbox->b_offset.z =
         data->create_hitbox.create_hitbox_2.x_offset * 0.003906f;
     ftColl_8007AC9C(hitbox, data->create_hitbox.create_hitbox_3.angle, gobj);
     hitbox->x24 = data->create_hitbox.create_hitbox_3.knockback_growth;
     hitbox->x28 = data->create_hitbox.create_hitbox_3.weight_set_knockback;
-    hitbox3 = &data->create_hitbox.create_hitbox_3;
-    hitbox4 = &data->create_hitbox.create_hitbox_4;
-    hitbox->x43_b0 = hitbox3->item_hit_interaction;
-    hitbox->x43_b1 = hitbox3->ignore_fighter_scale;
-    hitbox->x40_b0 = hitbox3->clank;
-    hitbox->x40_b1 = hitbox3->rebound;
-    hitbox->x2C = hitbox4->base_knockback;
-    hitbox->element = hitbox4->element;
-    hitbox->x34 = hitbox4->shield_damage;
-    hitbox->sfx_severity = hitbox4->hit_sfx_severity;
-    hitbox->sfx_kind = hitbox4->hit_sfx_kind;
-    hitbox->x40_b2 = hitbox4->hit_aerial;
-    hitbox->x40_b3 = hitbox4->hit_grounded;
+    hitbox->x43_b0 = data->create_hitbox.create_hitbox_3.item_hit_interaction;
+    hitbox->x43_b1 = data->create_hitbox.create_hitbox_3.ignore_fighter_scale;
+    hitbox->x40_b0 = data->create_hitbox.create_hitbox_3.clank;
+    hitbox->x40_b1 = data->create_hitbox.create_hitbox_3.rebound;
+    hitbox->x2C = data->create_hitbox.create_hitbox_4.base_knockback;
+    hitbox->element = data->create_hitbox.create_hitbox_4.element;
+    hitbox->x34 = data->create_hitbox.create_hitbox_4.shield_damage;
+    hitbox->sfx_severity =
+        data->create_hitbox.create_hitbox_4.hit_sfx_severity;
+    hitbox->sfx_kind = data->create_hitbox.create_hitbox_4.hit_sfx_kind;
+    hitbox->x40_b2 = data->create_hitbox.create_hitbox_4.hit_aerial;
+    hitbox->x40_b3 = data->create_hitbox.create_hitbox_4.hit_grounded;
     hitbox->x42_b5 = 1;
     hitbox->x42_b7 = 1;
     hitbox->x41_b4 = 0;
@@ -271,15 +270,16 @@ void it_802B743C(HSD_GObj* gobj, Item* ip, s32 type)
 
 static inline void it_802B75FC_inline(ItemLink* link, Vec* zero, f32 f)
 {
+    CollData* cd = &link->coll_data;
     link->vel = *zero;
     link->pos = *zero;
     link->x2C_b0 = 0;
     link->x2C_b1 = 0;
     link->x2C_b2 = 0;
-    link->coll_data.cur_pos = link->pos;
-    link->coll_data.last_pos = link->coll_data.cur_pos;
-    mpColl_80041EE4(&link->coll_data);
-    mpColl_SetECBSource_Fixed(&link->coll_data, NULL, f, f, f, f);
+    cd->cur_pos = link->pos;
+    cd->last_pos = cd->cur_pos;
+    mpColl_80041EE4(cd);
+    mpColl_SetECBSource_Fixed(cd, NULL, f, f, f, f);
 }
 
 HSD_JObj* it_802B75FC(Item* ip, HSD_JObj* jobj_arg, s32 arg2, f32 scale)
@@ -291,9 +291,6 @@ HSD_JObj* it_802B75FC(Item* ip, HSD_JObj* jobj_arg, s32 arg2, f32 scale)
     ItemLink* head_link;
     ItemLink* tail_link;
     s32 i;
-    HSD_AnimJoint* anim;
-    HSD_MatAnimJoint* matanim;
-    HSD_ShapeAnimJoint* shapeanim;
     itSamusGrappleAttributes* attrs =
         ip->xC4_article_data->x4_specialAttributes;
     Vec3 zero_vel = it_803B8674;
@@ -328,6 +325,7 @@ HSD_JObj* it_802B75FC(Item* ip, HSD_JObj* jobj_arg, s32 arg2, f32 scale)
     }
     ip->xDD4_itemVar.samusgrapple.x15 = attrs->x34;
 
+    prev_link = NULL;
     for (i = 0; i < attrs->x34; i++) {
         HSD_GObj* link_gobj = GObj_Create(7, 0xA, 0);
         ItemLink* link;
@@ -362,8 +360,8 @@ HSD_JObj* it_802B75FC(Item* ip, HSD_JObj* jobj_arg, s32 arg2, f32 scale)
             tail_jobj = HSD_JObjLoadJoint(attrs2->x70);
             HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849, tail_jobj);
             GObj_SetupGXLink(link_gobj, it_802A24A0, 6, 0);
-            anim = (attrs2->x98 != NULL) ? *attrs2->x98 : NULL;
-            HSD_JObjAddAnimAll(tail_jobj->child, anim,
+            HSD_JObjAddAnimAll(tail_jobj->child,
+                               (attrs2->x98 != NULL) ? *attrs2->x98 : NULL,
                                (attrs2->x9C != NULL) ? *attrs2->x9C : NULL,
                                (attrs2->xA0 != NULL) ? *attrs2->xA0 : NULL);
             HSD_JObjReqAnimAll(tail_jobj->child, 0.0f);
@@ -1281,6 +1279,7 @@ void it_802B9CE8(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
 
 bool it_802B9FD4(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs)
 {
+    Vec3* pos_ptr = pos;
     Vec3 dir;
     ItemLink* next;
     Vec3* dir_ptr;
@@ -1289,7 +1288,6 @@ bool it_802B9FD4(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs)
     next = link->next;
 
     while (next != NULL) {
-        Vec3* pos_ptr = pos;
         if (next->x2C_b0) {
             next->vel.y -= samus_grapple_calc_grav(next->vel.y);
             it_802A4420(next);
@@ -1481,18 +1479,19 @@ void it_802BA5DC(ItemLink* tail, ItemLink* head, Vec3* pos,
                  itSamusGrappleAttributes* attrs)
 {
     Vec3 saved_pos;
-    Vec3 dir;
-    Vec3* dir_ptr;
     ItemLink* link;
+    ItemLink* head_link;
+    Vec3* dir_ptr;
     ItemLink* next;
     ItemLink* cur;
     bool retracted;
     Vec3* pos_ptr;
     u8 _padA[8];
 
-    it_802A4454(head);
+    head_link = head;
+    it_802A4454(head_link);
     cur = tail;
-    saved_pos = head->pos;
+    saved_pos = head_link->pos;
     next = tail->prev;
 
     while (next != NULL && !cur->x2C_b0) {
@@ -1502,29 +1501,38 @@ void it_802BA5DC(ItemLink* tail, ItemLink* head, Vec3* pos,
 
     it_802B91C4(cur, pos, attrs, attrs->x38);
     retracted = false;
-    head->pos = saved_pos;
+    head_link->pos = saved_pos;
 
-    link = head->next;
-    while (link != NULL && link->x2C_b0) {
-        if (!retracted) {
-            if (it_802A3C98(&link->pos, &head->pos, &dir) > attrs->x38) {
-                dir_ptr = &dir;
-                link->pos.x = (dir_ptr->x * attrs->x38) + head->pos.x;
-                link->pos.y = (dir_ptr->y * attrs->x38) + head->pos.y;
-                link->pos.z = (dir_ptr->z * attrs->x38) + head->pos.z;
-            } else {
-                retracted = true;
+    {
+        Vec3 dir;
+
+        link = head_link->next;
+        while (link != NULL && link->x2C_b0) {
+            if (!retracted) {
+                if (it_802A3C98(&link->pos, &head_link->pos, &dir) >
+                    attrs->x38)
+                {
+                    dir_ptr = &dir;
+                    link->pos.x =
+                        (dir_ptr->x * attrs->x38) + head_link->pos.x;
+                    link->pos.y =
+                        (dir_ptr->y * attrs->x38) + head_link->pos.y;
+                    link->pos.z =
+                        (dir_ptr->z * attrs->x38) + head_link->pos.z;
+                } else {
+                    retracted = true;
+                }
             }
+            head_link = link;
+            link = link->next;
         }
-        head = link;
-        link = link->next;
-    }
 
-    if (it_802A3C98(pos_ptr = pos, &head->pos, &dir) > attrs->x38) {
-        dir_ptr = &dir;
-        pos_ptr->x = (dir_ptr->x * attrs->x38) + head->pos.x;
-        pos->y = (dir_ptr->y * attrs->x38) + head->pos.y;
-        pos_ptr->z = (dir_ptr->z * attrs->x38) + head->pos.z;
+        if (it_802A3C98(pos_ptr = pos, &head_link->pos, &dir) > attrs->x38) {
+            dir_ptr = &dir;
+            pos_ptr->x = (dir_ptr->x * attrs->x38) + head_link->pos.x;
+            pos->y = (dir_ptr->y * attrs->x38) + head_link->pos.y;
+            pos_ptr->z = (dir_ptr->z * attrs->x38) + head_link->pos.z;
+        }
     }
 }
 

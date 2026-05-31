@@ -18,7 +18,11 @@
 #include "gm/gm_unsplit.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/it_3F14.h"
+#include "it/it_279C.h"
 #include "it/item.h"
+#include "it_2725.h"
+#include "it_279C.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbcollision.h"
@@ -57,11 +61,19 @@ static inline bool itColl_chkECBOverlap(f32 pos_x, f32 pos_y, itECB* ecb_a,
     }
 }
 
-extern u8 it_804D6D1C[4];
-
-extern DamageLogEntry it_804A0E70[15];
-
 extern Quaternion it_803B8560;
+
+typedef struct ItCollDynamicsDesc {
+    s32 bone_id;
+    Vec3 offset;
+    f32 size;
+} ItCollDynamicsDesc;
+
+typedef struct ItCollDynamics {
+    u8 _pad[8];
+    s32 count;
+    ItCollDynamicsDesc* descs;
+} ItCollDynamics;
 
 void it_8026F9AC(s32 arg0, void* fighter, HitCapsule* hit, Item* arg_item,
                  HurtCapsule* hurt)
@@ -524,6 +536,7 @@ void it_802703E8(Item_GObj* arg_item_gobj)
 
 void it_802706D0(Item_GObj* arg_item_gobj)
 {
+    Item* arg_item;
     HSD_GObj* item_gobj;
     HitCapsule* hit;
     HitCapsule* arg_hit;
@@ -541,7 +554,6 @@ void it_802706D0(Item_GObj* arg_item_gobj)
     u32 hit_index;
     u8* cnt;
     Item* item;
-    Item* arg_item;
     HurtCapsule* arg_hurt;
     PAD_STACK(8);
 
@@ -851,10 +863,6 @@ void it_80270E30(Item_GObj* arg_item_gobj)
                     hurt_coll_pos = &hit2->hurt_coll_pos;
                     element = *(&it_803F1384[hit2->element]);
                     switch (element) {
-                    case 0x3ED:
-                        efSync_Spawn(it_803F1384[hit2->element], arg_item_gobj,
-                                     hurt_coll_pos, &arg_item2->facing_dir);
-                        break;
                     case 0x3E8:
                         efSync_Spawn(0x3E8, arg_item_gobj, hurt_coll_pos,
                                      &sp18);
@@ -863,7 +871,11 @@ void it_80270E30(Item_GObj* arg_item_gobj)
                     case 0x416:
                     case 0x3EB:
                         efSync_Spawn(it_803F1384[hit2->element], arg_item_gobj,
-                                     &hit2->hurt_coll_pos, arg_item2);
+                                     hurt_coll_pos, arg_item2);
+                        break;
+                    case 0x3ED:
+                        efSync_Spawn(it_803F1384[hit2->element], arg_item_gobj,
+                                     hurt_coll_pos, &arg_item2->facing_dir);
                         break;
                     }
                 } else {
@@ -877,6 +889,7 @@ void it_80270E30(Item_GObj* arg_item_gobj)
                 var_f28 = var_f27;
                 index2 = index;
             }
+            var_r29++;
             index++;
         }
         temp_r29 = &it_804A0E70[index2];
@@ -1072,20 +1085,18 @@ void it_8027163C(Item_GObj* item_gobj)
     Item* item;
     Article* article;
     ItHurtBoneList* it_hurtbox;
-    ItemDynamics* it_dynams;
+    ItCollDynamics* it_dynams;
     HurtCapsule* hurt;
     u32 cnt;
     ItHurtBoneDesc* hurt_dyn_desc;
-    BoneDynamicsDesc* bone_dyn_desc;
+    ItCollDynamicsDesc* bone_dyn_desc;
     s32 index;
-    s32 bone_id;
-    struct AbsorbDesc* absorb;
     PAD_STACK(16);
 
     item = item_gobj->user_data;
     article = item->xC4_article_data;
     it_hurtbox = article->x8_hurtbones;
-    it_dynams = article->x14_dynamics;
+    it_dynams = (ItCollDynamics*) article->x14_dynamics;
     if (it_hurtbox != NULL) {
         if (it_hurtbox->count > 2) {
             OSReport("item hit num over!\n");
@@ -1126,14 +1137,12 @@ void it_8027163C(Item_GObj* item_gobj)
         item->xB68 = it_dynams->count;
         index = 0;
         while (cnt < it_dynams->count) {
-            bone_dyn_desc = &it_dynams->dyn_descs[index];
-            bone_id = bone_dyn_desc->bone_id;
-            item->xB6C_vars[cnt].xB90 = bone_id;
-            absorb = &bone_dyn_desc->dyn_desc.data->desc.absorb;
+            bone_dyn_desc = &it_dynams->descs[index];
+            item->xB6C_vars[cnt].xB90 = bone_dyn_desc->bone_id;
             item->xB6C_vars[cnt].xB7C =
-                item->xBBC_dynamicBoneTable->bones[bone_id];
-            item->xB6C_vars[cnt].xB6C = absorb->x4_offset;
-            item->xB6C_vars[cnt].xB78 = absorb->x10_size;
+                item->xBBC_dynamicBoneTable->bones[bone_dyn_desc->bone_id];
+            item->xB6C_vars[cnt].xB6C = bone_dyn_desc->offset;
+            item->xB6C_vars[cnt].xB78 = bone_dyn_desc->size;
             index++;
             cnt++;
         }
@@ -1300,6 +1309,9 @@ void it_80271B60(Item_GObj* item_gobj)
 
 void it_80271D2C(Item_GObj* arg_item_gobj)
 {
+    u8 _pad[12];
+    HSD_JObj* arg_item_jobj = GET_JOBJ(arg_item_gobj);
+    Item* arg_item = GET_ITEM(arg_item_gobj);
     Vec3 sp34;
     Vec3 sp28;
     HSD_GObj* item_gobj;
@@ -1308,12 +1320,8 @@ void it_80271D2C(Item_GObj* arg_item_gobj)
     f32 dir;
     HSD_JObj* item_jobj;
     Item* item;
-    HSD_JObj* arg_item_jobj;
-    Item* arg_item;
-    PAD_STACK(16);
+    PAD_STACK(4);
 
-    arg_item_jobj = GET_JOBJ(arg_item_gobj);
-    arg_item = GET_ITEM(arg_item_gobj);
     HSD_JObjGetTranslation(arg_item_jobj, &sp34);
     item_gobj = HSD_GObj_Entities->items;
 
@@ -1324,7 +1332,7 @@ void it_80271D2C(Item_GObj* arg_item_gobj)
             (item->ground_or_air == GA_Ground) && !item->xDD1_flag.b0 &&
             ((item->hold_kind != 3) ||
              ((item->hold_kind == 3) &&
-              item->xDC8_word.flags
+              arg_item->xDC8_word.flags
                   .x1E)) // hold_kind 3 is open palm, facing down(?)
         )
         {

@@ -377,7 +377,7 @@ static inline void inlineB0(Fighter_GObj* gobj, HSD_GObjEvent on_anim_end)
     FORCE_PAD_STACK_32;
     FORCE_PAD_STACK_16;
     {
-        it_27CF_DatAttrs item_attrs;
+        itYoshiEggLay_DatAttrs item_attrs;
         FORCE_PAD_STACK_8;
         {
             if (fp->cmd_vars[1]) {

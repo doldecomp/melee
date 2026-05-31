@@ -8,6 +8,7 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/ithitbox.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
 #include "it/items/types.h"
@@ -26,7 +27,7 @@ ItemStateTable it_803F94A0[] = {
     { -1, it_27CF_UnkMotion2_Anim, NULL, NULL },
 };
 
-void it_802F2F34(HSD_GObj* gobj, it_27CF_DatAttrs* attr)
+void it_802F2F34(HSD_GObj* gobj, itYoshiEggLay_DatAttrs* attr)
 {
     Item* item;
     Item_GObj* item_gobj;
@@ -46,7 +47,7 @@ void it_802F2F34(HSD_GObj* gobj, it_27CF_DatAttrs* attr)
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {
         item = GET_ITEM(item_gobj);
-        item->xDD4_itemVar.it_27CF.x0 = attr->float3;
+        item->xDD4_itemVar.yoshiegglay.x0 = attr->float3;
         item->xC98 = attr->x24;
         it_80275158(item_gobj, attr->lifetime);
         it_802F3020(item_gobj);
@@ -174,7 +175,7 @@ bool it_27CF_Logic114_DmgReceived(Item_GObj* item_gobj)
     Item* item;
 
     item = GET_ITEM(item_gobj);
-    item->xD44_lifeTimer -= item->xCA0 * item->xDD4_itemVar.it_27CF.x0;
+    item->xD44_lifeTimer -= item->xCA0 * item->xDD4_itemVar.yoshiegglay.x0;
     return false;
 }
 
