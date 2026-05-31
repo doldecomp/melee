@@ -1268,19 +1268,17 @@ struct grBigBlueRoute_GroundVars {
     /* +46 gp+10A */ s16 x10A;
 };
 
+struct grBigBlueRoute_Track {
+    Vec3 offset;
+    HSD_JObj* jobj;
+};
+
 struct grBigBlueRoute_GroundVars2 {
     /* +00 gp+C4 */ u8 pad_C4[0xC8 - 0xC4];
     /* +04 gp+C8 */ s16 xC8;
     /* +06 gp+CA */ u8 pad_CA[0xCC - 0xCA];
     /* +08 gp+CC */ Vec3 xCC;
-    /* +14 gp+D8 */ Vec3 xD8;
-    /* +20 gp+E4 */ HSD_JObj* xE4;
-    /* +24 gp+E8 */ Vec3 xE8;
-    /* +30 gp+F4 */ HSD_JObj* xF4;
-    /* +34 gp+F8 */ Vec3 xF8;
-    /* +40 gp+104 */ HSD_JObj* x104;
-    /* +44 gp+108 */ Vec3 x108;
-    /* +50 gp+114 */ HSD_JObj* x114;
+    /* +14 gp+D8 */ struct grBigBlueRoute_Track tracks[4];
 };
 
 struct grCastle_GroundVars {
