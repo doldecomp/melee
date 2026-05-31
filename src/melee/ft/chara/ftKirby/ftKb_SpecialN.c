@@ -1351,7 +1351,82 @@ void ftKb_SpecialLwEnd_Coll(Fighter_GObj* gobj)
     ftPartSetRotX(fp, 0, 0.0f);
 }
 
-/// #ftKb_SpecialAirLwStart_Coll
+void ftKb_SpecialAirLwStart_Coll(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftKb_DatAttrs* da = fp->dat_attrs;
+    Fighter* fp2;
+    Fighter* fp3;
+    s32 temp;
+    f32 angle;
+    struct ftKb_Init_803CB490_layout* p =
+        (struct ftKb_Init_803CB490_layout*) ftKb_Init_803CB490;
+
+    if (ft_80081D0C(gobj) == GA_Air) {
+        ftKb_SpecialHi_800F3570(gobj);
+        ftKb_SpecialHi_800F37EC(gobj);
+        fp->self_vel.y = 0.0f;
+        ftCommon_8007D7FC(fp);
+        temp = fp->x221C_b4;
+        Fighter_ChangeMotionState(gobj, 0x189, 0x0C4C5092U,
+                                  fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+        fp->x221C_b4 = temp;
+        fp2 = GET_FIGHTER(gobj);
+        fp2->take_dmg_cb = ftKb_Init_800EE7B8;
+        fp2->death2_cb = ftKb_Init_800EE74C;
+        ft_PlaySFX(fp, 0x222E7, 0x7F, 0x40);
+        Camera_80030E44(4, &fp->cur_pos);
+        ftCommon_8007EBAC(fp, 0xE, 0x14);
+        fp3 = GET_FIGHTER(gobj);
+        fp3->mv.kb.speciallw.x24 = fp->mv.kb.speciallw.x18;
+        fp3->mv.kb.speciallw.x54 = fp->mv.kb.speciallw.x18;
+        fp3->mv.kb.speciallw.x88[0] = fp->mv.kb.specialhi.xC4;
+        fp3->mv.kb.speciallw.x88[4] = fp->mv.kb.specialhi.xC4;
+        fp3->mv.kb.speciallw.x30 = fp->mv.kb.speciallw.x18;
+        fp3->mv.kb.speciallw.x60 = fp->mv.kb.speciallw.x18;
+        fp3->mv.kb.speciallw.x88[1] = fp->mv.kb.specialhi.xC4;
+        fp3->mv.kb.speciallw.x88[5] = fp->mv.kb.specialhi.xC4;
+        fp3->mv.kb.speciallw.x3C = fp->mv.kb.speciallw.x18;
+        fp3->mv.kb.speciallw.x6C = fp->mv.kb.speciallw.x18;
+        fp3->mv.kb.speciallw.x88[2] = fp->mv.kb.specialhi.xC4;
+        fp3->mv.kb.speciallw.x88[6] = fp->mv.kb.specialhi.xC4;
+        fp3->mv.kb.speciallw.x48 = fp->mv.kb.speciallw.x18;
+        fp3->mv.kb.speciallw.x78 = fp->mv.kb.speciallw.x18;
+        fp3->mv.kb.speciallw.x88[3] = fp->mv.kb.specialhi.xC4;
+        fp3->mv.kb.speciallw.x88[7] = fp->mv.kb.specialhi.xC4;
+        fp3->mv.kb.speciallw.x18 = fp->mv.kb.speciallw.x18;
+        fp3->mv.kb.specialhi.xC4 = fp->mv.kb.specialhi.xC4;
+        angle = fp->mv.kb.specialhi.xC4;
+        if (angle < 0.0f) {
+            angle = -angle;
+        }
+        if (angle >= da->speciallw_min_slant_angle_slide) {
+            fp->gr_vel =
+                fp->mv.co.common.x18 * da->speciallw_slide_max_speed;
+        }
+    } else {
+        fp2 = GET_FIGHTER(gobj);
+        fp2->mv.kb.speciallw.x24 = p->vec;
+        fp2->mv.kb.speciallw.x54 = fp2->mv.kb.speciallw.x24;
+        fp2->mv.kb.speciallw.x88[0] = 0.0f;
+        fp2->mv.kb.speciallw.x88[4] = 0.0f;
+        fp2->mv.kb.speciallw.x30 = p->vec;
+        fp2->mv.kb.speciallw.x60 = fp2->mv.kb.speciallw.x30;
+        fp2->mv.kb.speciallw.x88[1] = 0.0f;
+        fp2->mv.kb.speciallw.x88[5] = 0.0f;
+        fp2->mv.kb.speciallw.x3C = p->vec;
+        fp2->mv.kb.speciallw.x6C = fp2->mv.kb.speciallw.x3C;
+        fp2->mv.kb.speciallw.x88[2] = 0.0f;
+        fp2->mv.kb.speciallw.x88[6] = 0.0f;
+        fp2->mv.kb.speciallw.x48 = p->vec;
+        fp2->mv.kb.speciallw.x78 = fp2->mv.kb.speciallw.x48;
+        fp2->mv.kb.speciallw.x88[3] = 0.0f;
+        fp2->mv.kb.speciallw.x88[7] = 0.0f;
+        fp2->mv.kb.speciallw.x18 = p->vec;
+        fp2->mv.kb.speciallw.x84 = 0.0f;
+        ftPartSetRotX(fp, 0, 0.0f);
+    }
+}
 
 /// #ftKb_SpecialAirLw_Coll
 
