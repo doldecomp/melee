@@ -16,10 +16,7 @@ static struct gm_804D6900_t {
         u8 unk0[0x16];
         u8 x16;
     }* xC;
-    struct {
-        u8 pad[0x10];
-        UNK_T x10;
-    }** x10;
+    void* x10;
     s8* x14;
     s8* x18;
 }** gm_804D6900;

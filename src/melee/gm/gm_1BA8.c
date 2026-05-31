@@ -1727,7 +1727,168 @@ void gm_801BDD44(HSD_GObj* arg0)
     }
 }
 
-/// #gm_801BDE94
+struct gm_evspawn {
+    /* 0x0 */ s8 unk0;
+    /* 0x1 */ u8 pad1[2];
+    /* 0x3 */ u8 unk3;
+};
+
+struct gm_evx10 {
+    u8 pad[0x10];
+    struct gm_evspawn* unk10;
+    struct gm_evspawn* unk14;
+    struct gm_evspawn* unk18;
+    struct gm_evspawn* unk1C;
+    struct gm_evspawn* unk20;
+};
+
+void gm_801BDE94(HSD_GObj* arg0)
+{
+    PlayerInitData sp50;
+    struct EventData* ev = &gmMainLib_804D3EE0->unk_530;
+    u8 level = gmMainLib_804D3EE0->unk_530.unk_535;
+    struct gm_804D6900_t** tbl = gm_804D6900;
+    struct gm_804D6900_x4_t* x4 = (*tbl)->x4;
+    struct gm_evx10* x10v;
+    u64 mask;
+
+    if (!ev->xB_5) {
+        ev->xB_5 = 1;
+        x10v = (struct gm_evx10*) tbl[level]->x10;
+        if (gmMainLib_804D3EE0->unk_530.x20 == 0) {
+            mask = lbAudioAx_80026E84(
+                (enum CharacterKind) (s8) (u8) *tbl[level]->x14);
+            mask |= lbAudioAx_80026E84((enum CharacterKind) x10v->unk10->unk0);
+            mask |= lbAudioAx_80026E84((enum CharacterKind) x10v->unk18->unk0);
+            mask |= lbAudioAx_80026E84((enum CharacterKind) x10v->unk1C->unk0);
+        } else {
+            mask = lbAudioAx_80026E84(
+                (enum CharacterKind) (s8) (u8) *tbl[level]->x14);
+            mask |= lbAudioAx_80026E84((enum CharacterKind) x10v->unk14->unk0);
+            mask |= lbAudioAx_80026E84((enum CharacterKind) x10v->unk20->unk0);
+        }
+        lbAudioAx_80026F2C(0x14);
+        lbAudioAx_8002702C(4, mask);
+        lbAudioAx_80027168();
+        lbAudioAx_80027648();
+    }
+
+    x10v = (struct gm_evx10*) tbl[level]->x10;
+    if (ev->xB_2) {
+        ev->x10 -= 1;
+        if (ev->x10 < 0) {
+            lbBgFlash_8002063C(x4->x4);
+            HSD_GObjPLink_80390228(arg0);
+        }
+    } else if (ev->x20 == 0) {
+        switch (ev->x18) {
+        case 0:
+            if (Player_GetStocks(1) <= 0) {
+                ev->x18 = 1;
+                gm_801BAB40(&sp50, (int) x10v->unk18);
+                gm_8016EDDC(2, &sp50);
+            }
+            goto block_41;
+        case 1:
+            if (Player_GetStocks(2) <= 0) {
+                ev->x18 = 2;
+                gm_801BAB40(&sp50, (int) x10v->unk1C);
+                gm_8016EDDC(3, &sp50);
+            }
+            goto block_41;
+        case 2:
+            if (Player_GetStocks(3) <= 0) {
+                struct gm_evspawn* sp = x10v->unk1C;
+                s8 ckind = sp->unk0;
+                u8 color = sp->unk3;
+                if ((s8) ev->x0 == ckind && (u8) ev->x1 == color) {
+                    if (color <= 2) {
+                        color += 1;
+                    } else {
+                        color = 0;
+                    }
+                }
+                gm_8016AC44(ckind, color);
+                if (Player_GetP1Stock() <= 0) {
+                    ev->xB_1 = 0;
+                    lbAudioAx_80028B90();
+                    gm_SetGameSpeed(1.0f);
+                    gm_8016B33C(6);
+                    gm_8016B364(0x148);
+                    gm_8016B378(0x28);
+                    gm_8016B328();
+                    HSD_GObjPLink_80390228(arg0);
+                    return;
+                }
+                gm_801BC670(arg0);
+                return;
+            }
+            goto block_41;
+        }
+    } else {
+        switch (ev->x18) {
+        case 0:
+            if (Player_GetStocks(1) <= 0) {
+                ev->x18 = 1;
+                gm_801BAB40(&sp50, (int) x10v->unk20);
+                gm_8016EDDC(2, &sp50);
+            }
+        block_41:
+            if (Player_GetP1Stock() <= 0) {
+                ev->xB_1 = 0;
+                lbAudioAx_80028B90();
+                gm_SetGameSpeed(1.0f);
+                gm_8016B33C(6);
+                gm_8016B364(0x148);
+                gm_8016B378(0x28);
+                gm_8016B328();
+                HSD_GObjPLink_80390228(arg0);
+                return;
+            }
+            {
+                struct EventData* ev2 = &gmMainLib_804D3EE0->unk_530;
+                lbl_8046B6A0_t* info = gm_8016AE38();
+                int do_end;
+                if (ev2->xB_0) {
+                    do_end = 0;
+                } else if (info->x24C8.x0_6 && gm_8016AEEC() == 0 &&
+                           gm_8016AEFC() == 0x3B) {
+                    do_end = 1;
+                } else {
+                    do_end = 0;
+                }
+                if (do_end != 0) {
+                    ev2->xB_1 = 0;
+                    lbAudioAx_80028B90();
+                    gm_SetGameSpeed(1.0f);
+                    gm_8016B33C(6);
+                    gm_8016B364(0x148);
+                    gm_8016B378(0x28);
+                    gm_8016B328();
+                    HSD_GObjPLink_80390228(arg0);
+                }
+            }
+            return;
+        case 1:
+            if (Player_GetStocks(2) <= 0) {
+                struct gm_evspawn* sp = x10v->unk20;
+                s8 ckind = sp->unk0;
+                u8 color = sp->unk3;
+                if ((s8) ev->x0 == ckind && (u8) ev->x1 == color) {
+                    if (color <= 2) {
+                        color += 1;
+                    } else {
+                        color = 0;
+                    }
+                }
+                gm_8016AC44(ckind, color);
+                gm_801BC4F4(arg0);
+                return;
+            }
+            goto block_41;
+        }
+    }
+}
 
 void gm_801BE37C(HSD_GObj* gobj)
 {
