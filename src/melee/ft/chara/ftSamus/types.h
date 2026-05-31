@@ -60,10 +60,10 @@ typedef struct _ftSamusAttributes {
     /* +74 */ Vec3 x74_vec;
     /* +80 */ float x80;
     /* +84 */ ftCollisionBox height_attributes;
-    /* +9C */ UNK_T x9C;
+    /* +9C */ s32 x9C;
     /* +A0 */ s32 xA0;
-    /* +A4 */ UNK_T xA4;
-    /* +A8 */ UNK_T xA8;
+    /* +A4 */ s32 xA4;
+    /* +A8 */ s32 xA8;
     /* +AC */ UNK_T xAC;
     /* +B0 */ s32 xB0;
     /* +B4 */ UNK_T xB4;
