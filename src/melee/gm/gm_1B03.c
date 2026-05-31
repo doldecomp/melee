@@ -413,6 +413,12 @@ void gm_801B06B0(CSSData* css_data, u8 type, s8 c_kind, s8 stocks, s8 color,
     css_data->data.data.players[0].stocks = stocks;
 }
 
+static void gm_801B07E8_layer(CSSData* css_data, s8* c_kind, s8* stocks,
+                              s8* color, s8* arg4, u8* level)
+{
+    gm_801B07E8(css_data, c_kind, stocks, color, arg4, level);
+}
+
 #pragma push
 #pragma dont_inline on
 void gm_801B0730(CSSData* css_data, s8* c_kind, u8* stocks, u8* color,
@@ -1537,7 +1543,71 @@ void gm_801B1B74(GameScene* arg0)
 }
 #pragma dont_inline reset
 
-/// #gm_801B1C24
+void gm_801B1C24(GameScene* arg0)
+{
+    VsModeData* vs = &gmMainLib_804D3EE0->unk_D10;
+    CSSData* css = gm_801A4284(arg0);
+    s32 i;
+    u64 mask;
+    PreloadCacheScene* cache;
+
+    if (css->pending_scene_change == 2) {
+        gm_801A42F8(GM_MENU);
+        return;
+    }
+    gm_80167A14(vs->data.players);
+    gm_801B0730(css, &vs->data.players[0].c_kind, NULL,
+                &vs->data.players[0].color, &vs->data.players[0].xA, NULL);
+    gm_801B07E8_layer(css, &vs->data.players[1].c_kind, NULL,
+                      (s8*) &vs->data.players[1].color,
+                      (s8*) &vs->data.players[1].xA, NULL);
+    vs->data.players[1].xE = 0;
+    for (i = 2; i < 4; i++) {
+        vs->data.players[i] = vs->data.players[1];
+        vs->data.players[i].color = (vs->data.players[i - 1].color + 1) %
+                                    gm_80169238(vs->data.players[i].c_kind);
+        if (vs->data.players[i].color == vs->data.players[0].color) {
+            vs->data.players[i].color = (vs->data.players[i].color + 1) %
+                                        gm_80169238(vs->data.players[i].c_kind);
+        }
+        vs->data.players[i].slot_type = 3;
+    }
+    if (gm_804D68C0 == 0) {
+        vs->data.players[1].slot = 0;
+        vs->data.players[2].slot = 0;
+        vs->data.players[3].slot = 0;
+    } else {
+        PlayerInitData* p = &vs->data.players[1];
+        if (gm_804D68C0 != 0) {
+            vs->data.players[1].slot = 1;
+            p++;
+        }
+        if (gm_804D68C0 != 1) {
+            p->slot = 2;
+            p++;
+        }
+        if (gm_804D68C0 != 2) {
+            p->slot = 3;
+            p++;
+        }
+        if (gm_804D68C0 != 3) {
+            p->slot = 4;
+        }
+    }
+    cache = lbDvd_8001822C();
+    cache->game_cache.entries[2].char_id = (s8) vs->data.players[2].c_kind;
+    cache->game_cache.entries[2].color = vs->data.players[2].color;
+    cache->game_cache.entries[3].char_id = (s8) vs->data.players[3].c_kind;
+    cache->game_cache.entries[3].color = vs->data.players[3].color;
+    lbDvd_80018254();
+    mask = 0;
+    for (i = 0; i < 4; i++) {
+        mask |= lbAudioAx_80026E84(vs->data.players[i].c_kind);
+    }
+    lbAudioAx_80026F2C(0x14);
+    lbAudioAx_8002702C(4, mask);
+    lbAudioAx_80027168();
+}
 
 void gm_801B1EB8(GameScene* arg0)
 {

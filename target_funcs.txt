@@ -49,7 +49,7 @@ Funcs:
 File: src/melee/gm/gm_1B03.c
 Funcs:
 - [x] gm_801B0DD0
-- [ ] gm_801B1C24
+- [x] gm_801B1C24
 
 File: src/melee/gm/gm_1BA8.c
 Funcs:
