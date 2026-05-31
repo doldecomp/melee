@@ -30,8 +30,8 @@ struct IfDamageState {
     /* +04 */ HSD_GObj* next;
     /* +08 */ u8 player_slot;
     /* +09 */ u8 unk9;
-    /* +0A */ u16 damage_percent;
-    /* +0C */ u16 old_damage;
+    /* +0A */ s16 damage_percent;
+    /* +0C */ s16 old_damage;
     /* +0E */ u8 damage_from_last_attack;
     /* +0F */ u8 frames_of_shake_remaining;
     /* +10 */ IfDamageFlags flags;
