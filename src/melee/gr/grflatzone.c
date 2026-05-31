@@ -688,67 +688,49 @@ void grFlatzone_8021805C(Ground_GObj* gobj)
     return;
 }
 
-#if 0
-void grFlatzone_80218060(s32 arg0) {
-    HSD_GObj *temp_r3;
-    s32 temp_r28;
-    s32 temp_r3_3;
-    s32 temp_r3_4;
-    s32 var_r27;
-    s32 var_r3;
-    s32 var_r3_2;
-    u8 temp_r0;
-    u8 temp_r3_2;
-    void *temp_r29;
-
-    temp_r3 = Ground_801C2BA4(5);
-    if (temp_r3 != NULL) {
-        temp_r29 = temp_r3->user_data;
-        if (temp_r29 != NULL) {
+void grFlatzone_80218060(s32 arg0)
+{
+    HSD_GObj* gobj = Ground_801C2BA4(5);
+    if (gobj != NULL) {
+        u8* ud = gobj->user_data;
+        s16* tbl = grFz_803E7A68;
+        if (ud != NULL) {
             if (arg0 != 0) {
-                temp_r29->unkC7 = 2U;
-                temp_r29->unkC9 = 1U;
+                ud[0xC7] = 2;
+                ud[0xC9] = 1;
             } else {
+                u8 v;
                 do {
-loop_4:
-                    temp_r29->unkC7 = HSD_Randi(8);
-                    temp_r3_2 = temp_r29->unkC7;
-                    if (temp_r3_2 == (u8) temp_r29->unkC8) {
+                loop_4:
+                    ud[0xC7] = HSD_Randi(8);
+                    v = ud[0xC7];
+                    if (v == ud[0xC8]) {
                         goto loop_4;
                     }
-                } while ((s16) (grFz_803E7940 + (temp_r3_2 * 0xA))->unk12A == -1);
+                } while (tbl[v * 5 + 1] == -1);
                 do {
-                    temp_r0 = HSD_Randi(4) + 1;
-                    temp_r29->unkC9 = temp_r0;
-                } while ((s16) (grFz_803E7940 + (temp_r29->unkC7 * 0xA) + ((temp_r0 * 2) & 0x1FE))->unk128 == -1);
+                    v = HSD_Randi(4) + 1;
+                    ud[0xC9] = v;
+                } while (tbl[ud[0xC7] * 5 + v] == -1);
             }
-            temp_r29->unkCA = 0;
-            var_r27 = grFz_804D6AB0->unkC;
-            temp_r28 = grFz_804D6AB0->unk8;
-            if (var_r27 > temp_r28) {
-                temp_r3_3 = var_r27 - temp_r28;
-                if (temp_r3_3 != 0) {
-                    var_r3 = HSD_Randi(temp_r3_3);
-                } else {
-                    var_r3 = 0;
+            *(s16*) (ud + 0xCA) = 0;
+            {
+                s32 cur = grFz_804D6AB0->unkC;
+                s32 base = grFz_804D6AB0->unk8;
+                if (cur > base) {
+                    s32 d = cur - base;
+                    cur = base + (d != 0 ? HSD_Randi(d) : 0);
+                } else if (cur < base) {
+                    s32 d = base - cur;
+                    cur += d != 0 ? HSD_Randi(d) : 0;
                 }
-                var_r27 = temp_r28 + var_r3;
-            } else if (var_r27 < temp_r28) {
-                temp_r3_4 = temp_r28 - var_r27;
-                if (temp_r3_4 != 0) {
-                    var_r3_2 = HSD_Randi(temp_r3_4);
-                } else {
-                    var_r3_2 = 0;
-                }
-                var_r27 += var_r3_2;
+                *(s16*) (ud + 0xCC) = (s16) cur;
             }
-            temp_r29->unkCC = (s16) var_r27;
-            temp_r29->unkC5 = (u8) (grFz_803E7940 + (temp_r29->unkC7 * 0xA) + (temp_r29->unkC9 * 2))->unk128;
-            grAnime_801C8138(temp_r3, temp_r29->unk14, (s32) temp_r29->unkC5);
+            ud[0xC5] = (u8) tbl[ud[0xC7] * 5 + ud[0xC9]];
+            grAnime_801C8138(gobj, *(s32*) (ud + 0x14), (s32) ud[0xC5]);
         }
     }
 }
-#endif
 
 void grFlatzone_802181B4(void)
 {
