@@ -3494,6 +3494,57 @@ static inline void fn_800F9260_DrMario(HSD_GObj* gobj, Fighter* fp, Vec3* pos)
                         fp->facing_dir);
 }
 
+void fn_800F9260(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp2;
+    Vec3 sp44;
+    s32 candidates[9];
+    s32* p;
+    s32 count;
+    s32 i;
+    s32 pick;
+    s32 bone;
+    s32 doit;
+
+    if (fp->fv.kb.hat.kind != 4) {
+        if (fp->throw_flags_b0) {
+            fp->throw_flags_b0 = 0;
+            doit = 1;
+        } else {
+            doit = 0;
+        }
+        if (doit) {
+            lb_8000B1CC(
+                fp->parts[ftParts_GetBoneIndex(fp, FtPart_LHandN)].joint,
+                NULL, &sp44);
+            if (fp->fv.kb.hat.kind == FTKIND_MARIO) {
+                it_8029B6F8((Item_GObj*) gobj, &sp44,
+                            It_Kind_Kirby_MarioFire, fp->facing_dir);
+                bone = ftParts_GetBoneIndex(fp, FtPart_LHandN);
+                efSync_Spawn(0x49F, gobj, fp->parts[bone].joint,
+                             &fp->facing_dir);
+                return;
+            }
+            count = 0;
+            fp2 = GET_FIGHTER(gobj);
+            p = candidates;
+            for (i = 0; i < 9; i++) {
+                if (i != fp2->fv.kb.x68 && i != fp2->fv.kb.x6C) {
+                    *p = i;
+                    p++;
+                    count++;
+                }
+            }
+            pick = candidates[HSD_Randi(count)];
+            fp2->fv.kb.x6C = fp2->fv.kb.x68;
+            fp2->fv.kb.x68 = pick;
+            itDrMarioPill_Spawn((Item_GObj*) gobj, &sp44, pick,
+                                It_Kind_Kirby_DrMarioVitamin, fp->facing_dir);
+        }
+    }
+}
+
 void ftKb_SpecialNMr_800F93CC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

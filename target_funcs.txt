@@ -19,7 +19,7 @@ Funcs:
 
 File: src/melee/ft/chara/ftKirby/ftKb_SpecialN.c
 Funcs:
-- [ ] fn_800F9260
+- [x] fn_800F9260
 - [x] ftKb_EatWait_IASA
 - [x] ftKb_SpecialAirLw_Coll
 - [x] ftKb_SpecialAirLwEnd_Coll
