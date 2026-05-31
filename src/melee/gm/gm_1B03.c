@@ -686,7 +686,44 @@ void gm_801B0CF0(GameScene* arg0)
     }
 }
 
-/// #gm_801B0DD0
+typedef struct GmB03MatchData {
+    /* 0x0 */ u8 x0;
+    /* 0x1 */ s8 x1;
+    /* 0x2 */ s8 x2;
+    /* 0x3 */ s8 x3;
+    /* 0x4 */ s8 x4;
+    /* 0x5 */ u8 pad5[3];
+    /* 0x8 */ MatchEnd me;
+} GmB03MatchData;
+
+void gm_801B0DD0(GameScene* arg0)
+{
+    GmB03MatchData* data = gm_801A427C(arg0);
+    MatchEnd* me = &data->me;
+    s32 i;
+
+    data->x0 = (data->x0 & ~0x80) | ((un_803FA258[0x178 / 4] << 7) & 0x80);
+    data->x0 = (data->x0 & ~0x40) | ((un_803FA258[0x17C / 4] << 6) & 0x40);
+    data->x1 = un_803FA258[0x168 / 4];
+    data->x2 = un_803FA258[0x16C / 4];
+    data->x3 = un_803FA258[0x170 / 4];
+    data->x4 = un_803FA258[0x174 / 4];
+    gm_80166A98(me, un_803FA258[0x180 / 4], un_803FA258[0x144 / 4],
+                un_803FA258[0x158 / 4] - 1, un_803FA258[0x148 / 4],
+                un_803FA258[0x15C / 4] - 1, un_803FA258[0x14C / 4],
+                un_803FA258[0x160 / 4] - 1, un_803FA258[0x150 / 4],
+                un_803FA258[0x164 / 4] - 1);
+    for (i = 0; i < 4; i++) {
+        if (me->player_standings[i].slot_type != 3 &&
+            me->player_standings[i].is_big_loser == 0) {
+            lbAudioAx_80026E84(me->player_standings[i].character_kind);
+        }
+    }
+    lbAudioAx_80026F2C(0x14);
+    lbAudioAx_8002702C(4, 0);
+    gm_80168FC4();
+    gm_801701A0();
+}
 
 void gm_801B0F1C(GameScene* arg0)
 {
