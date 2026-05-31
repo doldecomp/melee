@@ -795,20 +795,25 @@ void grGreens_8021483C(Ground_GObj* gobj)
 
 static inline void BOMB(int idx)
 {
-    int c = grGr_params->x20;
-    int r = (c != 0) ? HSD_Randi(c) : 0;
-    grGr_8049F9E0[idx] = (r != 0) ? 1 : 2;
+    grGr_8049F9E0[idx] =
+        (((grGr_params->x20 != 0) ? HSD_Randi(grGr_params->x20) : 0) != 0) ? 1
+                                                                           : 2;
 }
 
 void grGreens_80214B58(Ground_GObj* gobj)
 {
     int i;
-    int c;
-    int r;
-
-    for (i = 0; i < 0x20; i++) {
+    for (i = 0; i < 24; i++) {
         grGr_8049F9E0[i] = 0;
     }
+
+    grGr_8049F9E0[0x18] = 0;
+    grGr_8049F9E0[0x19] = 0;
+    grGr_8049F9E0[0x1A] = 0;
+    grGr_8049F9E0[0x1B] = 0;
+    grGr_8049F9E0[0x1C] = 0;
+    grGr_8049F9E0[0x1D] = 0;
+
     BOMB(0x12);
     BOMB(0x0C);
     BOMB(0x0D);

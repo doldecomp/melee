@@ -1,30 +1,11 @@
 #include "ftCo_CaptureWaitKirby.h"
 
-#include <placeholder.h>
-#include <platform.h>
-
 #include "ft/fighter.h"
-#include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
-#include "ft/types.h"
-
-#include "ftCommon/forward.h"
-
 #include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_CaptureCut.h"
-#include "ftCommon/ftCo_Throw.h"
-#include "ftCommon/types.h"
 #include "ftKirby/ftKb_Init.h"
-
-#include <dolphin/mtx.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
-
-static float const ftCo_804D8BB8 = 0;
-static float const ftCo_804D8BBC = 1;
-static double const ftCo_804D8BC0 = U32_TO_F32;
-static double const ftCo_804D8BC8 = S32_TO_F32;
 
 void ftCo_800BD620(Fighter_GObj* gobj)
 {
@@ -52,6 +33,12 @@ static inline void inlineA0(Fighter* fp, int arg1)
 }
 
 void ftCo_CaptureWaitKirby_Anim(Fighter_GObj* gobj) {}
+void ftCo_800BD6EC_noinline(Fighter_GObj* gobj);
+void ftCo_800BD6EC_noinline(Fighter_GObj* gobj)
+{
+    ftCo_800BD6EC(gobj);
+}
+
 #pragma push
 #pragma force_active on
 void ftCo_800BD6EC(Fighter_GObj* gobj)
@@ -76,6 +63,7 @@ void ftCo_800BD6EC(Fighter_GObj* gobj)
 static inline void inlineB0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
+    s32 value;
     float lstick_x = fp->input.lstick.x;
     if (lstick_x < 0) {
         lstick_x = -lstick_x;
@@ -85,19 +73,23 @@ static inline void inlineB0(Fighter_GObj* gobj)
             p_ftCommonData->x40 + p_ftCommonData->x44)
     {
         fp->x670_timer_lstick_tilt_x = 254;
-        if (fp->input.lstick.x < 0) {
-            ftKb_SpecialN_800F5A04(fp->victim_gobj, lstick_x);
+        if (fp->input.lstick.x < 0.0f) {
+            value = -1;
+        } else {
+            value = 1;
         }
+        ftKb_SpecialN_800F5A04(fp->victim_gobj, value);
     }
 }
 
 void ftCo_CaptureWaitKirby_IASA(Fighter_GObj* gobj)
 {
+    s32 pad;
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    if (ftKb_SpecialN_800F5A38(fp->victim_gobj, fp)) {
+    if (ftKb_SpecialN_800F5A38(fp->victim_gobj, gobj->user_data)) {
+        ftCo_800BD6EC_noinline(gobj);
         inlineB0(gobj);
-        ftCo_800BD6EC(gobj);
     }
     fp->grab_timer -= ftKb_SpecialN_800F5B00(fp->victim_gobj);
     fp->mv.co.capturekirby.x18 =
@@ -105,7 +97,7 @@ void ftCo_CaptureWaitKirby_IASA(Fighter_GObj* gobj)
     if (fp->grab_timer <= 0) {
         Fighter_GObj* victim_gobj = fp->victim_gobj;
         fp->facing_dir = ftKb_SpecialN_800F5A60(victim_gobj);
-        HSD_JObjSetScale(jobj, &jobj->scale);
+        HSD_JObjSetScale(jobj, &fp->mv.co.capturekirby.scale);
         ftCo_CaptureCut_Enter(gobj);
         ftCo_800DA698(victim_gobj, 0);
     }
