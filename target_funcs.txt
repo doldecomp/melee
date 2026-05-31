@@ -11,7 +11,7 @@ Funcs:
 - [x] fn_800D8EC8
 - [x] fn_800D9558
 - [x] fn_800D9930
-- [ ] fn_800D9CE8
+- [x] fn_800D9CE8
 - [ ] fn_800DA054
 - [ ] fn_800DA8E4
 - [ ] ftCo_800D730C

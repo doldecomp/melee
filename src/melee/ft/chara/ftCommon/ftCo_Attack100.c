@@ -1773,7 +1773,61 @@ void ftCo_800D9C98(Fighter_GObj* gobj)
     fp->take_dmg_cb = NULL;
 }
 
-/// #fn_800D9CE8
+static void fn_800D9CE8(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftYoshiAttributes* yattrs;
+    Item_GObj* item;
+    Item* it;
+    f32 frame;
+    f32 rate;
+    f32 startFrame;
+    s32 nextMotion;
+
+    fp->gr_vel = 0.0f;
+    frame = fp->cur_anim_frame;
+    startFrame = frame;
+    if (fp->motion_id == 0xD4) {
+        nextMotion = 0xD5;
+        if (fp->kind == FTKIND_YOSHI) {
+            yattrs = fp->dat_attrs;
+            if (frame >= yattrs->x124 && frame < yattrs->x128) {
+                rate = frame - yattrs->x124;
+                ftAnim_SetAnimRate(gobj, rate);
+                ftAnim_8006EBA4(gobj);
+                startFrame = (f32) yattrs->x12C[(s32) rate];
+            }
+        }
+    } else {
+        nextMotion = 0xD7;
+    }
+
+    switch (fp->kind) {
+    case FTKIND_CLINK:
+    case FTKIND_LINK:
+        item = fp->fv.lk.xC;
+        it = GET_ITEM(item);
+        it_802A7840((HSD_GObj*) item);
+        fp->mv.co.capturedamage.x18 = it->xDD4_itemVar.linkhookshot.xC;
+        break;
+    case FTKIND_SAMUS:
+        item = fp->fv.ss.x223C;
+        it = GET_ITEM(item);
+        it_802BAA94(item);
+        fp->mv.co.capturedamage.x18 = it->xDD4_itemVar.samusgrapple.xC;
+        break;
+    default:
+        fp->mv.co.capturedamage.x18 =
+            fp->parts[fp->ft_data->x8->x11].joint;
+        break;
+    }
+
+    fp->throw_flags = 0;
+    Fighter_ChangeMotionState(gobj, nextMotion, 0x4000, startFrame, 1.0f, 0.0f,
+                              NULL);
+    fp->accessory1_cb = fn_800DA190;
+    fp->x221B_b7 = 0;
+}
 
 void ftCo_CatchPull_Anim(Fighter_GObj* gobj)
 {
