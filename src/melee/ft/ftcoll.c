@@ -1357,7 +1357,42 @@ void ftColl_80078538(Fighter_GObj* gobj, Vec3* pos, u32 dmg, float ignored,
 
 void ftColl_8007861C(Fighter_GObj* arg0, Fighter_GObj* gobj, int arg2,
                      int arg3, int arg4, UNK_T arg5, int arg6, UNK_T arg7,
-                     int arg8);
+                     int arg8)
+{
+    Fighter* attacker;
+    Fighter* victim = GET_FIGHTER(gobj);
+    s32 grounded = 0;
+
+    if (arg0 != NULL) {
+        attacker = arg0->user_data;
+    } else {
+        attacker = NULL;
+    }
+
+    if (attacker != NULL) {
+        if (attacker == victim) {
+            victim->dmg.x18C0 = 0;
+        } else {
+            victim->dmg.x18C0 = attacker->x8_spawnNum;
+        }
+        victim->dmg.x18c4_source_ply = attacker->player_id;
+        victim->dmg.x18C8 = -1;
+        victim->x221F_b5 = attacker->x221F_b4;
+    } else {
+        victim->dmg.x18C0 = 0;
+        victim->dmg.x18C8 = -1;
+        if (arg8 == 0) {
+            victim->dmg.x18c4_source_ply = 6;
+        }
+    }
+    victim->dmg.x18CC = arg2;
+    victim->dmg.x18D0 = arg3;
+    if (arg7 != NULL && ((s32*) arg7)[2] == 0) {
+        grounded = 1;
+    }
+    pl_80038144(arg0, gobj, arg4, arg5, arg6, grounded,
+                victim->dmg.x18c4_source_ply);
+}
 
 void ftColl_80078710(Fighter_GObj* arg0, Fighter_GObj* arg1, UNK_T arg2)
 {

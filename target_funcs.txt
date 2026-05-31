@@ -31,7 +31,7 @@ Funcs:
 
 File: src/melee/ft/ftcoll.c
 Funcs:
-- [ ] ftColl_8007861C
+- [x] ftColl_8007861C
 
 File: src/melee/ft/ftdynamics.c
 Funcs:
