@@ -786,24 +786,23 @@ void ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
     HSD_MObj* mobj;
     GXColor color;
     CharacterKind chara;
-    u8 slot;
+    s32 slot;
     u8 team;
     u8 hud_color;
     HudIndex* hud = &ifStatus_HudInfo;
-    s32 idx = (u8) player_idx;
+    u8 idx = player_idx;
+    PAD_STACK(0x10);
 
     chara = Player_GetPlayerCharacter(idx);
     if (state->next == NULL) {
         ifAll_802F3690();
         gobj = GObj_Create(0xE, 0xF, 0);
         if (gobj == NULL) {
-            OSReport("Error : gobj dont't get (ifAddMark)\n");
-            __assert("ifstatus.c", 0x30A, "0");
+            HSD_ASSERTREPORT(0x30A, 0, "Error : gobj dont't get (ifAddMark)\n");
         }
         jobj = HSD_JObjLoadJoint((HSD_Joint*) hud->unk268);
         if (jobj == NULL) {
-            OSReport("Error : jobj dont't get (ifAddMark)\n");
-            __assert("ifstatus.c", 0x30E, "0");
+            HSD_ASSERTREPORT(0x30E, 0, "Error : jobj dont't get (ifAddMark)\n");
         }
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
         GObj_SetupGXLink(gobj, (void (*)(HSD_GObj*, int)) ifStatus_802F5E50,
