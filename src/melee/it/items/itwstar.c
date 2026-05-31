@@ -8,6 +8,9 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/it_3F14.h"
+#include "it/ithitbox.h"
+#include "it/it_279C.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
 #include "lb/lb_00F9.h"
@@ -19,16 +22,17 @@ HSD_AnimJoint* it_80294364(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itWstarAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
-    s32 candidates[8];
-    s32* p = candidates;
+    s32 candidates[7];
+    volatile s32 pad;
     s32 i = 0;
-    s32 count = i;
+    s32 count = 0;
     s32 picked;
     s32 end = it_804D6D00;
     s32 var_ctr = attr->x24_count;
+
     for (; i < var_ctr; i++) {
         if (i != end) {
-            *p++ = i;
+            candidates[count] = i;
             count++;
         }
     }
