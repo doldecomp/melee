@@ -82,7 +82,7 @@ File: src/melee/pl/plbonuslib.c
 Funcs:
 - [ ] fn_8003F294
 - [ ] fn_8003F654
-- [ ] pl_8003E4A4
+- [x] pl_8003E4A4
 
 File: src/sysdolphin/baselib/synth.c
 Funcs:

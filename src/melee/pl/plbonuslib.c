@@ -508,7 +508,53 @@ u32 pl_8003E420(int arg0)
     return sum;
 }
 
-/// pl_8003E4A4
+static inline s32 pl_8003E4A4_map(s32 id)
+{
+    if (id >= 0 && id < 0x23) {
+        return id;
+    }
+    switch (id) {
+    case 0xCD:
+        return 0x23;
+    case 0xE1:
+        return 0x24;
+    case 0xE2:
+        return 0x25;
+    case 0x28:
+        return 0x26;
+    }
+    return -1;
+}
+
+void pl_8003E4A4(u8 slot, int arg1, void* arg2, int arg3)
+{
+    pl_StaleMoveTableExt_t* table = Player_GetStaleMoveTableIndexPtr2(slot);
+    s32* ids = arg2;
+    s32 used[0x27];
+    s32 i;
+
+    for (i = 0; i < 0x27; i++) {
+        used[i] = 0;
+    }
+    if (arg3 > 0) {
+        for (i = 0; i < arg3; i++) {
+            if (pl_8003E4A4_map(ids[i]) < 0x27) {
+                used[pl_8003E4A4_map(ids[i])] = 1;
+            }
+        }
+    }
+    for (i = 0; i < 0x27; i++) {
+        if (used[i] == 1) {
+            table->x0_staleMoveTable.x7AC[i]++;
+            if (table->x0_staleMoveTable.x7AC[i] == pl_804D6470->x138) {
+                pl_80038788(slot, 0x9D, 1);
+                table->x0_staleMoveTable.x7AC[i] = 0;
+            }
+        } else {
+            table->x0_staleMoveTable.x7AC[i] = 0;
+        }
+    }
+}
 
 void pl_8003E70C(Item_GObj* igobj)
 {

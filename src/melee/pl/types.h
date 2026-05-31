@@ -342,7 +342,7 @@ struct pl_804D6470_t {
     /* +12C */ int x12C;
     /* +130 */ unsigned int x130;
     /* +134 */ unsigned int x134;
-    /* +138 */ u8 x138[0x13C - 0x138];
+    /* +138 */ u32 x138;
     /* +13C */ unsigned int x13C;
     /* +140 */ unsigned int x140;
     /* +144 */ unsigned int x144;
