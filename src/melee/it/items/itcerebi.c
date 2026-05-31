@@ -8,6 +8,8 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/it_279C.h"
+#include "it/itmaplib.h"
 #include "it/item.h"
 
 /* 2D3F6C */ static void it_802D3F6C(Item_GObj* gobj);

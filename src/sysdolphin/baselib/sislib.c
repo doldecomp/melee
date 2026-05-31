@@ -662,10 +662,10 @@ u8* HSD_SisLib_803A6478(u8* dst, u8* src)
     return dst;
 }
 
-void HSD_SisLib_803A6530(s32 font_idx, s32 dst_idx, s32 src_idx)
+u8* HSD_SisLib_803A6530(s32 font_idx, s32 dst_idx, s32 src_idx)
 {
     u8** sis_table = (u8**) HSD_SisLib_804D1124[font_idx];
-    HSD_SisLib_803A6478(sis_table[dst_idx], sis_table[src_idx]);
+    return HSD_SisLib_803A6478(sis_table[dst_idx], sis_table[src_idx]);
 }
 
 void HSD_SisLib_803A660C(s32 font_idx, s32 dst_idx, s32 src_idx)
