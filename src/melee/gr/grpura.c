@@ -438,36 +438,30 @@ void grPura_80212EF4(HSD_GObj* arg0)
 
 void grPura_80212FC0(HSD_GObj* arg0)
 {
-    u16* var_r31 = grPu_803E6C0C;
-    u32 var_r30 = 0;
-    do {
-        if ((s16) var_r31[0] != -1) {
-            HSD_GObj* temp_r3 = Ground_801C2BA4((s32) (s16) var_r31[1]);
+    u32 var_r30;
+    for (var_r30 = 0; var_r30 < 0x2A; var_r30++) {
+        if (grPu_803E6C0C[var_r30].x00 != -1) {
+            HSD_GObj* temp_r3 = Ground_801C2BA4(grPu_803E6C0C[var_r30].x02);
             if (temp_r3 != NULL) {
-                M2C_FIELD(var_r31, HSD_JObj**, 8) =
-                    Ground_801C3FA4(temp_r3, (s32) (s16) var_r31[2]);
+                grPu_803E6C0C[var_r30].x08 =
+                    Ground_801C3FA4(temp_r3, grPu_803E6C0C[var_r30].x04);
             }
         }
-        var_r30 += 1;
-        var_r31 += 6;
-    } while (var_r30 < 0x2A);
+    }
 }
 
 void grPura_80213030(Ground_GObj* arg0)
 {
-    UNUSED unsigned char _[8];
+    UNUSED u32 unused1;
     Point3d spC;
-    u16* var_r31 = grPu_803E6C0C;
-    u32 var_r30 = 0;
+    u32 var_r30;
 
-    do {
-        if (M2C_FIELD(var_r31, HSD_JObj**, 8) != NULL) {
-            lb_8000B1CC(M2C_FIELD(var_r31, HSD_JObj**, 8), NULL, &spC);
-            mpVtxSetPos(M2C_FIELD(var_r31, s16*, 0), spC.x, spC.y);
+    for (var_r30 = 0; var_r30 < 0x2A; var_r30++) {
+        if (grPu_803E6C0C[var_r30].x08 != NULL) {
+            lb_8000B1CC(grPu_803E6C0C[var_r30].x08, NULL, &spC);
+            mpVtxSetPos(grPu_803E6C0C[var_r30].x00, spC.x, spC.y);
         }
-        var_r30 += 1;
-        var_r31 += 6;
-    } while (var_r30 < 0x2A);
+    }
     mpJointUpdateBounding(0);
     mpJointUpdateBounding(9);
     mpJointUpdateBounding(0x18);

@@ -46,6 +46,14 @@
 /* 213128 */ void grPura_80213128(HSD_DObj*);
 /* 213224 */ UNK_RET grPura_80213224(HSD_DObj*);
 /* 213250 */ void grPura_80213250(HSD_JObj*);
-/* 3E6C0C */ extern u16 grPu_803E6C0C[266];
+typedef struct {
+    /* 0x00 */ s16 x00;
+    /* 0x02 */ s16 x02;
+    /* 0x04 */ s16 x04;
+    /* 0x06 */ s16 x06;
+    /* 0x08 */ HSD_JObj* x08;
+} GrPuVtxMapEntry; // size = 0x0C
+
+/* 3E6C0C */ extern GrPuVtxMapEntry grPu_803E6C0C[42];
 
 #endif
