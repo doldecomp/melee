@@ -890,7 +890,8 @@ void ifStatus_802F66A4(void)
     DynamicModelDesc** mrk;
     DynamicModelDesc** num;
     HSD_Archive** arch;
-    s32 reset = 0;
+    s32 reset = 0; // = 0 should go away, but that requires configure to be ran
+                   // with --no-warn-error
     arch = ifAll_802F3690();
     lbArchive_LoadSections(*arch, (void**) &num, "DmgNum_scene_models",
                            (void**) &mrk, "DmgMrk_scene_models", 0);
