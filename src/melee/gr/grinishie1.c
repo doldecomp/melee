@@ -896,11 +896,11 @@ void fn_801FBEB8(Ground* gr, s32 block_id, CollData* arg2, s32 arg3,
 
 void grInishie1_801FC4A0(HSD_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
+    Ground* gp = GET_GROUND(gobj);
     s32 reached = 0;
     f32 v = gp->gv.inishie1.xF0;
 
-    if (v != 0.0f) {
+    if (v) {
         if (v < 0.0f) {
             gp->gv.inishie1.xF0 = v + grI1_804D69F8->unk50;
             if (gp->gv.inishie1.xF0 >= 0.0f) {
