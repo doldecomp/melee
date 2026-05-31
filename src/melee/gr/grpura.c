@@ -419,7 +419,7 @@ void grPura_80212CD4(HSD_GObj* arg0)
 void grPura_80212EF4(HSD_GObj* arg0)
 {
     s32 i;
-    Ground* gp = GET_GROUND(arg0);
+    Ground* gp = arg0->user_data;
     Ground* gp2 = gp;
     Vec3 spC;
 
