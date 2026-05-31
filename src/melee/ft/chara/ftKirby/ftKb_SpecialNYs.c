@@ -544,7 +544,7 @@ void ftKb_YsSpecialAirCapture1_Anim(Fighter_GObj* gobj)
 void ftKb_YsSpecialNCapture2_0_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    it_27CF_DatAttrs item_attrs;
+    itYoshiEggLay_DatAttrs item_attrs;
     FORCE_PAD_STACK(0x4C);
     PAD_STACK(8);
     HSD_JObjAnimAll(fp->fv.kb.hat.jobj);
@@ -621,7 +621,7 @@ void ftKb_YsSpecialNCapture2_1_Anim(Fighter_GObj* gobj)
 void ftKb_YsSpecialAirN2_1_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    it_27CF_DatAttrs item_attrs;
+    itYoshiEggLay_DatAttrs item_attrs;
     FORCE_PAD_STACK(0x4C);
     PAD_STACK(8);
     HSD_JObjAnimAll(fp->fv.kb.hat.jobj);

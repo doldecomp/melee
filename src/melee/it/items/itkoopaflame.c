@@ -17,6 +17,7 @@
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
+#include "it/it_2725.h"
 #include <melee/lb/lbvector.h>
 #include <MSL/math.h>
 #include <MSL/trigf.h>
