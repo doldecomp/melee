@@ -2,6 +2,7 @@
 
 #include <platform.h>
 
+#include "baselib/debug.h"
 #include "baselib/gobjgxlink.h"
 #include "baselib/gobjproc.h"
 #include "baselib/random.h"
@@ -118,7 +119,6 @@ void grPura_80211D00(void)
 
 void grPura_80211DD8(void) {}
 
-/// #grPura_80211DDC
 void grPura_80211DDC(void)
 {
     grZakoGenerator_801CAE04(NULL);
@@ -128,6 +128,18 @@ bool grPura_80211E00(void)
 {
     return false;
 }
+
+HSD_GObj* grPura_80211E08_noinline(int gobj_id);
+HSD_GObj* grPura_80211E08_noinline(int gobj_id)
+{
+    return grPura_80211E08(gobj_id);
+};
+
+HSD_GObj* grPura_80211E08_noinline2(int gobj_id);
+HSD_GObj* grPura_80211E08_noinline2(int gobj_id)
+{
+    return grPura_80211E08_noinline(gobj_id);
+};
 
 HSD_GObj* grPura_80211E08(int gobj_id)
 {
@@ -146,7 +158,6 @@ HSD_GObj* grPura_80211E08(int gobj_id)
     return gobj;
 }
 
-/// #grPura_80211EF0
 void grPura_80211EF0(Ground_GObj* arg0)
 {
     Ground* gp = arg0->user_data;
@@ -162,7 +173,6 @@ void grPura_80211F24(Ground_GObj* arg0) {}
 
 void grPura_80211F28(Ground_GObj* arg0) {}
 
-/// #grPura_80211F2C
 void grPura_80211F2C(Ground_GObj* arg0)
 {
     Ground* gp = arg0->user_data;
@@ -258,7 +268,6 @@ void grPura_802120E0(Ground_GObj* arg0)
 
 void grPura_8021228C(Ground_GObj* arg0) {}
 
-/// #grPura_80212290
 void grPura_80212290(Ground_GObj* arg0)
 {
     Ground* gp = GET_GROUND(arg0);
@@ -305,7 +314,6 @@ void grPura_8021231C(Ground_GObj* arg0)
 
 void grPura_802125EC(Ground_GObj* arg0) {}
 
-/// #grPura_802125F0
 void grPura_802125F0(HSD_GObj* arg0)
 {
     struct _GXColor thingy = grPu_803E6AA0[5];
@@ -318,18 +326,13 @@ void grPura_802125F0(HSD_GObj* arg0)
     Ground* gp;
     HSD_JObj* jobj;
     do {
-        gobj = grPura_80211E08(1);
+        gobj = grPura_80211E08_noinline2(1);
 
-        if (gobj == NULL) {
-            __assert("grpura.c", 0x291, "gobj");
-        }
+        HSD_ASSERT(0x291, gobj);
         gp = GET_GROUND(gobj);
-        if (gp == NULL) {
-            __assert("grpura.c", 0x291, "gp");
-        }
-        // uVar3 = Ground_801C33C0(4,gp->gv.pura2.xC4);
+        HSD_ASSERT(0x292, gp);
+        uVar3 = Ground_801C33C0(4, gp->gv.pura2.xC4);
         gp->gv.pura2.xC8 = Ground_801C3FA4(arg0, gp->gv.pura.xC4);
-        // uVar3 = Ground_801C3FA4(arg0,uVar3);
 
         HSD_JObjSetTranslateX(arg0->hsd_obj,
                               HSD_JObjGetTranslationX(gp->gv.pura2.xC8));
@@ -523,7 +526,6 @@ void grPura_80213128(HSD_DObj* dobj)
     }
 }
 
-/// #grPura_80213224
 void grPura_80213224(HSD_DObj* dobj)
 {
     if (dobj != 0) {
