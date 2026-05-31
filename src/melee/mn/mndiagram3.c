@@ -404,7 +404,7 @@ void mnDiagram3_80247008(int arg0)
     GObj_InitUserData(gobj, 0, (void (*)(void*)) fn_80246F0C, user_data);
 
     for (i = 0; i < 10; i++) {
-        lb_80011E24(jobj, (HSD_JObj**) ((u8*) user_data + (i << 2) + 8), i, -1);
+        lb_80011E24(jobj, &user_data->jobjs[i], i, -1);
     }
 
     HSD_GObj_SetupProc(gobj, fn_80246E64, 0);
