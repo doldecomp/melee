@@ -22,7 +22,7 @@ Funcs:
 - [ ] fn_800F9260
 - [ ] ftKb_EatWait_IASA
 - [x] ftKb_SpecialAirLw_Coll
-- [ ] ftKb_SpecialAirLwEnd_Coll
+- [x] ftKb_SpecialAirLwEnd_Coll
 - [x] ftKb_SpecialAirLwStart_Coll
 - [ ] ftKb_SpecialAirNCaptureWait_IASA
 - [x] ftKb_SpecialLw1_Coll
