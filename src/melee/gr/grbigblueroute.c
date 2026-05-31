@@ -579,11 +579,12 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
     }
 
     if (route_idx != -1) {
+        // probably an inline of some sort
         RouteEntry* re = &((RouteEntry*) gp->gv.bigblueroute.xC8)[route_idx];
 
-        re->flags.b0 = 1;
-        re->flags.b6 = 0;
-        re->flags.b2_5 = 1;
+        (&((RouteEntry*) gp->gv.bigblueroute.xC8)[route_idx])->flags.b0 = 1;
+        (&((RouteEntry*) gp->gv.bigblueroute.xC8)[route_idx])->flags.b6 = 0;
+        (&((RouteEntry*) gp->gv.bigblueroute.xC8)[route_idx])->flags.b2_5 = 1;
 
         re = &((RouteEntry*) gp->gv.bigblueroute.xC8)[route_idx];
         re->x4 = 0.0F;
