@@ -1,5 +1,7 @@
 #include "ifprize.h"
 
+#include "placeholder.h"
+
 #include "gm/gm_unsplit.h"
 #include "gm/gmmain_lib.h"
 #include "lb/lb_00F9.h"
@@ -182,15 +184,14 @@ void un_802FE6A8(void)
     HSD_GObj* gobj_light;
     HSD_GObj* gobj_ui;
     HSD_JObj* jobj_ui;
-    PAD_STACK(16);
     gobj_camera = GObj_Create(HSD_GOBJ_CLASS_CAMERA, 20, 0);
-    HSD_GObjObject_80390A70(gobj_camera, HSD_GObj_804D784B,
+    HSD_GObjObject_80390A70(gobj_camera, HSD_GObj_804D784B & 0xFF,
                             HSD_CObjLoadDesc(un_804D6D9C->cameras[0].desc));
     GObj_SetupGXLinkMax(gobj_camera, HSD_GObj_803910D8, 8);
     gobj_camera->gxlink_prios = 0xC00;
     un_803F9D48.x18 = gobj_camera;
     gobj_light = GObj_Create(HSD_GOBJ_CLASS_LIGHT, 3, 0);
-    HSD_GObjObject_80390A70(gobj_light, HSD_GObj_804D784A,
+    HSD_GObjObject_80390A70(gobj_light, HSD_GObj_804D784A & 0xFF,
                             lb_80011AC4(un_804D6D9C->lights));
     GObj_SetupGXLink(gobj_light, HSD_GObj_LObjCallback, 10, 0);
     un_803F9D48.x1C = gobj_light;
@@ -206,6 +207,8 @@ void un_802FE6A8(void)
     un_803F9D48.x14 = gobj_ui;
     {
         GXColor color = { 0x5A, 0x5A, 0x5A, 0xFF };
+        PAD_STACK(0x14);
+
         HSD_SisLib_803A611C(2, 0, 9, 20, 0, 14, 0, 18);
         un_803F9D48.x20 =
             HSD_SisLib_803A5ACC(2, 0, 105.0, 202.0, 0.0, 435.0, 75.0);
@@ -245,7 +248,7 @@ void un_802FE918(int a, int b, int c)
     lbAudioAx_80023F28(un_803F9D48.x30[un_803F9D48.x3]);
     r = HSD_Randi(2);
     for (k = 0; k < 3; k++) {
-        if (k == un_803F9D48.x3) {
+        if (un_803F9D48.x3 == k) {
             r++;
         } else if (r == k) {
             new_x3 = r;
