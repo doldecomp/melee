@@ -35,7 +35,7 @@ Funcs:
 
 File: src/melee/ft/ftdynamics.c
 Funcs:
-- [ ] ftCo_8009E7B4
+- [x] ftCo_8009E7B4
 
 File: src/melee/gm/gm_1601.c
 Funcs:
