@@ -25,7 +25,7 @@ Funcs:
 - [ ] ftKb_SpecialAirLwEnd_Coll
 - [ ] ftKb_SpecialAirLwStart_Coll
 - [ ] ftKb_SpecialAirNCaptureWait_IASA
-- [ ] ftKb_SpecialLw1_Coll
+- [x] ftKb_SpecialLw1_Coll
 - [x] ftKb_SpecialNSpit0_Anim
 - [x] ftKb_SpecialNSpit1_Anim
 
