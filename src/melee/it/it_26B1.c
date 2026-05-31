@@ -8,6 +8,9 @@
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_2725.h"
+#include "it/it_3F14.h"
+#include "it/ithitbox.h"
+#include "it/itanimlist.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
 #include "it/items/itbat.h"
@@ -25,6 +28,8 @@
 #include "it/items/itsword.h"
 #include "it/items/ittomato.h"
 #include "it/types.h"
+#include "it_2725.h"
+#include "itanimlist.h"
 
 #include <baselib/forward.h>
 
@@ -435,8 +440,6 @@ s32 it_8026B7D8(void) // Get unknown var from global data
 {
     return it_804D6D0C;
 }
-
-extern s32 it_804D6D08;
 
 s32 it_8026B7E0(void) // Get unknown var from global data
 {

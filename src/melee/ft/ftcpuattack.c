@@ -2,6 +2,7 @@
 
 #include "ftcmdscript.h"
 
+#include "baselib/debug.h"
 #include "ft/ftlib.h"
 
 #include <melee/ft/chara/ftDonkey/forward.h>
@@ -263,7 +264,7 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
         }
         sel++;
     }
-    __assert("ftcpuattack.c", 0xFA, "0");
+    HSD_ASSERT(0xFA, NULL);
 }
 
 int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
@@ -467,7 +468,7 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
         }
         sel++;
     }
-    __assert("ftcpuattack.c", 0x1C5, "0");
+    HSD_ASSERT(0x1C5, NULL);
 }
 
 int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
@@ -658,7 +659,7 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
         }
         sel++;
     }
-    __assert("ftcpuattack.c", 0x26A, "0");
+    HSD_ASSERT(0x26A, NULL);
 }
 
 int ftCo_800B6208(ftCo_AttackEntry* arr)
@@ -702,7 +703,7 @@ int ftCo_800B6208(ftCo_AttackEntry* arr)
         }
         p++;
     }
-    __assert("ftcpuattack.c", 0x28A, "0");
+    HSD_ASSERT(0x28A, NULL);
 }
 
 /// Return true if the fighter is currently in any attacking motion state

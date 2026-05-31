@@ -428,11 +428,14 @@ struct lbl_8046B6A0_24C_t {
         u8 x5;
         u8 x6;
         u8 x7;
-        u8 pad8[2];
+        u8 x8;
+        u8 x9;
         u16 xA;
         u8 padC[2];
         u16 xE;
-        u8 pad10[0x20 - 0x10];
+        u8 pad10[0x1C - 0x10];
+        u8 x1C;
+        u8 pad1D[0x20 - 0x1D];
         u32 x20;
         u32 x24;
         u32 x28;
@@ -612,7 +615,9 @@ struct MatchPlayerData {
     int score;
     u32 x30;
     u8 x34;
-    u8 x35_pad[0x40 - 0x35];
+    u8 x35_pad[0x38 - 0x35];
+    u32 x38;
+    u32 x3C;
     u32 x40;
     u32 x44;
     u32 x48;
