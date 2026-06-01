@@ -2889,7 +2889,7 @@ s32 lbAudioAx_80028690(void)
     }
 
     {
-        s32 i;
+        int i;
         for (i = 0; i < 17; i++) {
             lbl_80433710.x2C[i] = 0x83D60;
             lbl_80433710.x70[i] = 0;
