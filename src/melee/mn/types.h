@@ -395,7 +395,7 @@ struct CSSDoorsData {
     u8 xce;
     u8 scroll_flag;
     float xcf;
-    float xd3;
+    HSD_Text* xd3;
     float xd7;
     float xdb;
     float xdf;

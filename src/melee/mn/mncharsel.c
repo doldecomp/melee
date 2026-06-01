@@ -4,12 +4,21 @@
 
 #include "types.h"
 
+#include "baselib/forward.h"
+
 #include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/fog.h>
+#include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/lobj.h>
+#include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
@@ -454,9 +463,9 @@ void mnCharSel_8025D1C4(int arg0, int arg1)
     if (var_r0) {
         stars = &data2.ko_stars[arg0];
         temp_r31 = &data2.ko_stars[arg0].joint2;
-        temp_r30 = data2.ko_stars[arg0].text;
         temp_r29 = css->ko_star_counts[arg0];
         var_f31 = data2.ko_stars[arg0].x4;
+        temp_r30 = data2.ko_stars[arg0].text;
 
         joint = stars->joint;
         lb_80011E24(mnCharSel_804D6CC0, &sp10, joint, -1);
@@ -523,7 +532,7 @@ void mnCharSel_8025D1C4(int arg0, int arg1)
                 temp_r30->text_color.a = 0xA0;
             }
             {
-                UNK_T tmp = HSD_SisLib_803A6478(
+                TextKerning* tmp = (TextKerning*) HSD_SisLib_803A6478(
                     temp_r31, &HSD_SisLib_804D1124[0][43].kerning->left);
                 mnCharSel_8025BC20(tmp, temp_r29);
             }
@@ -875,8 +884,8 @@ void mnCharSel_8025DB34(u8 arg0)
                 break;
             case 1: {
                 if (gmMainLib_8015CC34()->handicap != 0) {
-                    u8 hval;
-                    u8 hval2;
+                    s32 hval;
+                    s32 hval2;
 
                     if (gmMainLib_8015CC34()->handicap == 2) {
                         var_f1 = 20.0f;
@@ -886,14 +895,14 @@ void mnCharSel_8025DB34(u8 arg0)
                     HSD_ForeachAnim(sp90, JOBJ_TYPE, ALL_TYPE_MASK,
                                     HSD_AObjReqAnim, AOBJ_ARG_AF, var_f1);
                     if (gmMainLib_8015CC34()->handicap == 1) {
-                        hval = gm_801685D4(
+                        hval = (u8) gm_801685D4(
                             arg0,
                             mnCharSel_804D6CB0->data.data.players[arg0].xA);
                     } else {
                         hval = (u8) mnCharSel_804D6CB0->data.data.players[arg0]
                                    .handicap;
                     }
-                    if ((int) hval != 0) {
+                    if (hval != 0) {
                     } else {
                         hval = 1;
                     }
@@ -908,7 +917,7 @@ void mnCharSel_8025DB34(u8 arg0)
                                     HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
                     sp90 = sp68;
                     if (gmMainLib_8015CC34()->handicap == 1) {
-                        hval2 = gm_801685D4(
+                        hval2 = (u8) gm_801685D4(
                             arg0,
                             mnCharSel_804D6CB0->data.data.players[arg0].xA);
                     } else {
@@ -916,7 +925,7 @@ void mnCharSel_8025DB34(u8 arg0)
                             (u8) mnCharSel_804D6CB0->data.data.players[arg0]
                                 .handicap;
                     }
-                    if ((int) hval2 != 0) {
+                    if (hval2 != 0) {
                     } else {
                         hval2 = 1;
                     }
@@ -952,8 +961,8 @@ void mnCharSel_8025DB34(u8 arg0)
             }
             case 3: {
                 if (gmMainLib_8015CC34()->handicap != 0) {
-                    u8 hval3;
-                    u8 hval4;
+                    s32 hval3;
+                    s32 hval4;
 
                     if (mnCharSel_803F0DFC.doors[arg0].p_kind !=
                         mnCharSel_803F0DFC.doors[arg0].p_kind_prev)
@@ -967,7 +976,7 @@ void mnCharSel_8025DB34(u8 arg0)
                                         HSD_AObjReqAnim, AOBJ_ARG_AF, var_f1);
                     }
                     if (gmMainLib_8015CC34()->handicap == 1) {
-                        hval3 = gm_801685D4(
+                        hval3 = (u8) gm_801685D4(
                             arg0,
                             mnCharSel_804D6CB0->data.data.players[arg0].xA);
                     } else {
@@ -975,7 +984,7 @@ void mnCharSel_8025DB34(u8 arg0)
                             (u8) mnCharSel_804D6CB0->data.data.players[arg0]
                                 .handicap;
                     }
-                    if ((int) hval3 != 0) {
+                    if (hval3 != 0) {
                     } else {
                         hval3 = 1;
                     }
@@ -990,7 +999,7 @@ void mnCharSel_8025DB34(u8 arg0)
                                     HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
                     sp90 = sp58;
                     if (gmMainLib_8015CC34()->handicap == 1) {
-                        hval4 = gm_801685D4(
+                        hval4 = (u8) gm_801685D4(
                             arg0,
                             mnCharSel_804D6CB0->data.data.players[arg0].xA);
                     } else {
@@ -998,7 +1007,7 @@ void mnCharSel_8025DB34(u8 arg0)
                             (u8) mnCharSel_804D6CB0->data.data.players[arg0]
                                 .handicap;
                     }
-                    if ((int) hval4 != 0) {
+                    if (hval4 != 0) {
                     } else {
                         hval4 = 1;
                     }
@@ -1283,7 +1292,7 @@ void fn_8025F0E0(HSD_GObj* gobj)
     int i;
     int door_offset;
     u8 timer;
-    u8 val;
+    s32 val;
     int anim;
     float fval;
 
@@ -1390,7 +1399,7 @@ void fn_8025F0E0(HSD_GObj* gobj)
 
                         rules = gmMainLib_8015CC34();
                         if ((u8) rules->handicap == 1) {
-                            val = gm_801685D4(
+                            val = (u8) gm_801685D4(
                                 (u8) i,
                                 mnCharSel_804D6CB0->data.data.players[i].xA);
                         } else {
@@ -1399,8 +1408,7 @@ void fn_8025F0E0(HSD_GObj* gobj)
                         }
                         {
                             f32 val_f;
-                            if ((s32) val != 0) {
-                            } else {
+                            if (val == 0) {
                                 val = 1;
                             }
                             val_f = (f32) val;
@@ -1459,38 +1467,34 @@ void fn_8025F0E0(HSD_GObj* gobj)
             i += 1;
         }
     } else {
-        u8* scroll_flag = &mnCharSel_803F0DFC.scroll_flag;
-        u8* page_target = &mnCharSel_803F0DFC.xcd;
-        u8* page_current = &mnCharSel_803F0DFC.xce;
-
-        if (*scroll_flag != 0) {
-            if (*page_target != *page_current) {
-                if (*page_target < *page_current) {
+        if (mnCharSel_803F0DFC.scroll_flag != 0) {
+            if (mnCharSel_803F0DFC.xcd != mnCharSel_803F0DFC.xce) {
+                if (mnCharSel_803F0DFC.xcd < mnCharSel_803F0DFC.xce) {
                     mnCharSel_803F0DFC.xcf = mnCharSel_803F0DFC.xcf + 31.0f;
                     if (mnCharSel_803F0DFC.xcf >=
-                        -(248.0f * (f32) *page_target - 124.0f))
+                        -(248.0f * (f32) mnCharSel_803F0DFC.xcd - 124.0f))
                     {
-                        *page_current = *page_target;
+                        mnCharSel_803F0DFC.xce = mnCharSel_803F0DFC.xcd;
                     }
                 } else {
                     mnCharSel_803F0DFC.xcf = mnCharSel_803F0DFC.xcf - 31.0f;
                     if (mnCharSel_803F0DFC.xcf <=
-                        -(248.0f * (f32) *page_target - 124.0f))
+                        -(248.0f * (f32) mnCharSel_803F0DFC.xcd - 124.0f))
                     {
-                        *page_current = *page_target;
+                        mnCharSel_803F0DFC.xce = mnCharSel_803F0DFC.xcd;
                     }
                 }
             }
-            if (*page_target == *page_current) {
-                *scroll_flag = 0;
+            if (mnCharSel_803F0DFC.xcd == mnCharSel_803F0DFC.xce) {
+                mnCharSel_803F0DFC.scroll_flag = 0;
                 mnCharSel_803F0DFC.xcf =
-                    -(248.0f * (f32) *page_target - 124.0f);
+                    -(248.0f * (f32) mnCharSel_803F0DFC.xcd - 124.0f);
             }
             {
                 int j;
                 for (j = 0; j < 5; j++) {
                     HSD_SisLib_803A746C(
-                        *(HSD_Text**) &mnCharSel_803F0DFC.xd3, j,
+                        mnCharSel_803F0DFC.xd3, j,
                         248.0f * (f32) j + mnCharSel_803F0DFC.xcf, 0.0f);
                 }
             }
@@ -1620,8 +1624,9 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
 {
     HSD_JObj* sp18;
     s32 icon_idx;
-    s8 player;
-    PAD_STACK(16);
+    int player;
+    CSSIcon* icons = (CSSIcon*) (&mnCharSel_803F0A48 + 1);
+    PAD_STACK(8);
 
     do {
         icon_idx = HSD_Randi(0x19);
@@ -1634,7 +1639,7 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
             player = mnCharSel_804D6CF0;
         }
     } else {
-        player = (s8) door;
+        player = door;
     }
 
     mnCharSel_804D6CB0->data.data.players[player].c_kind =
@@ -1645,10 +1650,12 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
         mnCharSel_803F0DFC.doors[door].sel_icon_prev)
     {
         u8 costume = 0;
-        mnCharSel_803F0DFC.doors[door].costume = costume;
-        while (isDuplicateCostume(door)) {
-            costume++;
+        while (1) {
             mnCharSel_803F0DFC.doors[door].costume = costume;
+            if (!isDuplicateCostume(door)) {
+                break;
+            }
+            costume++;
         }
     }
 
@@ -1685,9 +1692,10 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
 s32 mnCharSel_8025FDEC(u8 door)
 {
     HSD_JObj* sp10;
-    s8 player;
-    u8 c_kind;
-    u8 icon_idx;
+    int player;
+    s8 c_kind;
+    int icon_idx;
+    CSSIcon* icons = (CSSIcon*) (&mnCharSel_803F0A48 + 1);
 
     if (mnCharSel_804D6CF5 == 1) {
         if (door != 0) {
@@ -1696,23 +1704,21 @@ s32 mnCharSel_8025FDEC(u8 door)
             player = mnCharSel_804D6CF0;
         }
     } else {
-        player = (s8) door;
+        player = door;
     }
 
     c_kind = mnCharSel_804D6CB0->data.data.players[player].c_kind;
 
-    if ((s8) c_kind >= 0x1A) {
+    if (c_kind >= 0x1A) {
         return 1;
     }
 
-    if ((s8) c_kind !=
-        (s8) icons[mnCharSel_803F0DFC.doors[door].sel_icon].char_kind)
-    {
+    if (c_kind != icons[mnCharSel_803F0DFC.doors[door].sel_icon].char_kind) {
         mnCharSel_803F0DFC.doors[door].costume = 0;
     }
 
     for (icon_idx = 0; icon_idx < 0x19; icon_idx++) {
-        if ((s8) c_kind == (s8) icons[icon_idx].char_kind) {
+        if (c_kind == icons[icon_idx].char_kind) {
             break;
         }
     }
@@ -1724,7 +1730,7 @@ s32 mnCharSel_8025FDEC(u8 door)
     mnCharSel_803F0DFC.doors[door].sel_icon = icon_idx;
 
     HSD_GObjGXLink_803909D8(mnCharSel_804A0BD0[door]->gobj,
-                            mnCharSel_804A0BC0[door]->gobj);
+                            mnCharSel_804A0BC0[mnCharSel_804D6CF5 - 1]->gobj);
 
     mnCharSel_804A0BD0[door]->x5 = 0;
 
@@ -1880,7 +1886,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                     cursor->x10 = -21.5f;
                     cursor->xA = 0;
                     if ((u8) cursor->x5 == 1) {
-                        u8 grabbed = cursor->x6;
+                        int grabbed = cursor->x6;
                         if (grabbed <= 3U) {
                             cursor->x5 = 2;
                             if (mnCharSel_8025FDEC(grabbed) != 0) {
@@ -2004,7 +2010,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
             CSSTagData* tag = mnCharSel_803F0DFC.tags[port].data;
             if ((u8) tag->state == 0) {
                 if ((u8) cursor->x5 == 1) {
-                    u8 grabbed = cursor->x6;
+                    int grabbed = cursor->x6;
                     if ((s32) grabbed < 8) {
                         if ((s32) grabbed < 4) {
                             if ((s32) grabbed >= 0) {
@@ -3203,9 +3209,10 @@ void fn_80262648(HSD_GObj* gobj)
     struct CSSCharModel* model = gobj->user_data;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     u8 prev_port = model->x6;
-    u8 n_doors;
+    CSSData* css = mnCharSel_804D6CB0;
+    int n_doors;
 
-    if ((u8) mnCharSel_804D6CB0->match_type == 0x17) {
+    if ((u8) css->match_type == 0x17) {
         n_doors = 2;
     } else {
         n_doors = mnCharSel_804D6CF5;
@@ -3213,10 +3220,11 @@ void fn_80262648(HSD_GObj* gobj)
 
     {
         u8 door = model->x4;
-        CSSDoor* d = &mnCharSel_803F0DFC.doors[door];
-        u8 p_kind = d->p_kind;
+        u8 p_kind = mnCharSel_803F0DFC.doors[door].p_kind;
 
-        if (p_kind == 3 || (u8) d->sel_icon >= 0x19U) {
+        if (p_kind == 3 ||
+            (u8) mnCharSel_803F0DFC.doors[door].sel_icon >= 0x19U)
+        {
             HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             return;
         }
@@ -3227,16 +3235,19 @@ void fn_80262648(HSD_GObj* gobj)
             } else {
                 model->x6 = (u8) mnCharSel_804D6CF0;
             }
-        } else if ((u8) mnCharSel_804D6CB0->data.data.rules.is_teams == 0) {
+        } else if ((u8) css->data.data.rules.is_teams == 0) {
             if (p_kind == 1) {
                 model->x6 = 8;
             } else {
                 model->x6 = door;
             }
         } else if (p_kind == 1) {
-            model->x6 = (u8) (mnCharSel_804D50E0[d->team] + 4);
+            model->x6 =
+                (u8) (mnCharSel_804D50E0[mnCharSel_803F0DFC.doors[door].team] +
+                      4);
         } else {
-            model->x6 = (u8) mnCharSel_804D50E0[d->team];
+            model->x6 =
+                (u8) mnCharSel_804D50E0[mnCharSel_803F0DFC.doors[door].team];
         }
     }
 
@@ -3406,8 +3417,8 @@ void fn_80262648(HSD_GObj* gobj)
                 }
             }
         } else {
-            model->x8 = 2.7f + mnCharSel_804A0BD0[status - 1]->xC;
-            model->xC = -2.0f + mnCharSel_804A0BD0[model->x5 - 1]->x10;
+            model->x8 = 2.7f + mnCharSel_804A0BC0[status - 1]->xC;
+            model->xC = -2.0f + mnCharSel_804A0BC0[model->x5 - 1]->x10;
         }
     }
 
@@ -3608,13 +3619,12 @@ void fn_802633B0(HSD_GObj* gobj)
     GXColor sp54;
     HSD_JObj* sp30;
     CSSTagData* tag;
-    u8 port;
+    int port;
     s32 num_entries;
     u32 trigger;
     s32 i;
     s32 row;
     u8 match_type;
-    u8 sel_icon;
     s32 val;
     f32 temp_f0;
     f32 vel;
@@ -3656,15 +3666,18 @@ void fn_802633B0(HSD_GObj* gobj)
     switch ((s32) tag->state) {
     case 1:
         mnCharSel_8025D1C4((s32) tag->port, 1);
-        sel_icon = mnCharSel_803F0DFC.doors[tag->port].sel_icon;
-        if ((u8) sel_icon < 0x19U) {
-            if (lbLang_IsSavedLanguageUS() != 0 && (u8) sel_icon == 0x16) {
+        if ((u8) mnCharSel_803F0DFC.doors[tag->port].sel_icon < 0x19U) {
+            if (lbLang_IsSavedLanguageUS() != 0 &&
+                (u8) mnCharSel_803F0DFC.doors[tag->port].sel_icon == 0x16)
+            {
                 HSD_SisLib_803A70A0((HSD_Text*) tag->name_ls, 0,
                                     (char*) &mnCharSel_803F0A48);
             } else {
                 HSD_SisLib_803A70A0(
                     (HSD_Text*) tag->name_ls, 0,
-                    (char*) gm_80160980(icons[sel_icon].char_kind));
+                    (char*) gm_80160980(
+                        icons[mnCharSel_803F0DFC.doors[tag->port].sel_icon]
+                            .char_kind));
             }
         } else {
             HSD_SisLib_803A70A0((HSD_Text*) tag->name_ls, 0,
@@ -3789,8 +3802,8 @@ void fn_802633B0(HSD_GObj* gobj)
                         ddata = mnCharSel_804D6CB0;
                         for (p2 = 0; p2 < (s32) mnCharSel_804D6CF5; p2++) {
                             if (p2 != (s32) tag->port &&
-                                (s32) mnCharSel_804D6CB0->data.data.players[p2]
-                                        .xA == row_idx)
+                                (s32) ddata->data.data.players[p2].xA ==
+                                    row_idx)
                             {
                                 sp58 = sp74;
                                 HSD_SisLib_803A74F0((HSD_Text*) tag->name_ls,
@@ -3825,17 +3838,20 @@ void fn_802633B0(HSD_GObj* gobj)
                          (tag->x8 * 0.03125f));
 
             if (row == 0) {
-                sel_icon = mnCharSel_803F0DFC.doors[tag->port].sel_icon;
-                if (lbLang_IsSavedLanguageUS() != 0 && (u8) sel_icon == 0x16) {
+                if (lbLang_IsSavedLanguageUS() != 0 &&
+                    (u8) mnCharSel_803F0DFC.doors[tag->port].sel_icon == 0x16)
+                {
                     HSD_SisLib_803A70A0((HSD_Text*) tag->text, 0,
                                         (char*) &mnCharSel_803F0A48);
                 } else {
                     HSD_SisLib_803A70A0(
                         (HSD_Text*) tag->text, 0,
-                        (char*) gm_80160980(icons[sel_icon].char_kind));
+                        (char*) gm_80160980(
+                            icons[mnCharSel_803F0DFC.doors[tag->port].sel_icon]
+                                .char_kind));
                 }
                 ((HSD_Text*) tag->text)->default_kerning = 1;
-                if ((u8) sel_icon < 0x19U) {
+                if ((u8) mnCharSel_803F0DFC.doors[tag->port].sel_icon < 0x19U) {
                     ((HSD_Text*) tag->text)->hidden = 0;
                 } else {
                     ((HSD_Text*) tag->text)->hidden = 1;
@@ -3899,7 +3915,7 @@ void fn_802633B0(HSD_GObj* gobj)
                 {
                     s32 p;
                     for (p = 0; p < (s32) mnCharSel_804D6CF5; p++) {
-                        if (p == (s32) port &&
+                        if (p != (s32) port &&
                             (s32) mnCharSel_804D6CB0->data.data.players[p]
                                     .xA == (s32) (row - 1))
                         {
@@ -4037,6 +4053,890 @@ void fn_8026407C(HSD_GObj* gobj)
 {
     HSD_FogSet(GET_FOG(gobj));
 }
+
+extern HSD_CObjDesc* MenMain_cam;
+
+static GXColor mnCharSel_804DC580 = { 255, 255, 0, 255 };
+static GXColor mnCharSel_804DC584 = { 20, 80, 160, 255 };
+static GXColor mnCharSel_804DC588 = { 60, 140, 80, 255 };
+static GXColor mnCharSel_804DC58C = { 160, 160, 0, 255 };
+static GXColor mnCharSel_804DC590 = { 180, 80, 0, 255 };
+static GXColor mnCharSel_804DC594 = { 220, 0, 0, 255 };
+
+#define MODELS ((CSSSceneModels*) mnCharSel_804D6CB4)
+#define ANIM ((CSSAnimSet*) mnCharSel_804D6CD8)
+
+s32 mnCharSel_802640A0(void)
+{
+    HSD_JObj* sp108;
+    Point3d spEC;
+    GXColor spE8;
+    GXColor spE4;
+    GXColor spE0;
+    GXColor spDC;
+    GXColor spD8;
+    GXColor spD4;
+    GXColor color;
+    HSD_JObj* spA4;
+    HSD_JObj* sp9C;
+    HSD_JObj* sp70;
+    HSD_JObj* sp64;
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+    HSD_Text* text;
+    CSSIcon* icons;
+    s32 ctx;
+    s32 num_players;
+    s32 row_a;
+    s32 row_b;
+    s32 i;
+    u8 match_type = mnCharSel_804D6CB0->match_type;
+
+    if (match_type != 0) {
+        lbAudioAx_800237A8(mnCharSel_803F0A48.mode_info[match_type].enter_sfx,
+                           0x7F, 0x40);
+    } else {
+        switch (gmMainLib_8015CC34()->mode) {
+        case 0:
+            lbAudioAx_800237A8(0x7535, 0x7F, 0x40);
+            break;
+        case 1:
+            lbAudioAx_800237A8(0x7538, 0x7F, 0x40);
+            break;
+        case 2:
+            lbAudioAx_800237A8(0x7537, 0x7F, 0x40);
+            break;
+        case 3:
+            lbAudioAx_800237A8(0x7536, 0x7F, 0x40);
+            break;
+        }
+    }
+
+    mnCharSel_804D6CE0 = NULL;
+    mnCharSel_804D6CDC = NULL;
+    mnCharSel_804D6CE8 = NULL;
+    mnCharSel_804D6CE4 = NULL;
+    mnCharSel_804D6CF2 = 0x1E;
+    mnCharSel_804D6CF3 = 0;
+
+    if ((u8) mnCharSel_804D6CB0->match_type >= 0xBU) {
+        mnCharSel_804D6CF5 = 1;
+        num_players = 1;
+    } else {
+        mnCharSel_804D6CF5 = 4;
+        num_players = 4;
+    }
+    if ((u8) mnCharSel_804D6CB0->match_type == 0x17) {
+        num_players = 2;
+    }
+    mnCharSel_804D6CF6 = 0;
+    if ((u8) mnCharSel_804D6CF5 == 1 && mnCharSel_804D6CF0 < 0) {
+        mnCharSel_804D6CF0 = 0;
+    }
+    if (mnCharSel_804D6CF0 == 0) {
+        mnCharSel_804D6CF1 = 1;
+    } else {
+        mnCharSel_804D6CF1 = 0;
+    }
+
+    if ((u8) mnCharSel_804D6CF4 != 0) {
+        mnCharSel_804D6CF4 = 0;
+        for (i = 0; i < num_players; i++) {
+            mnCharSel_804D6CB0->data.data.players[i].handicap = 9;
+        }
+    }
+
+    gobj = GObj_Create(2, 3, 0x80);
+    mnCharSel_804D6CB8 = gobj;
+    MenMain_cam = MODELS->cam;
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B,
+                            HSD_CObjLoadDesc(MODELS->cam));
+    GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 0);
+    gobj->gxlink_prios = 0x1F;
+    HSD_GObj_SetupProc(gobj, mn_8022BA1C, 5);
+    ctx = HSD_SisLib_803A611C(0, gobj, 7, 8, 0x80, 1, 0x80, 0);
+
+    gobj = GObj_Create(3, 4, 0x80);
+    {
+        HSD_LObj* lobj0 = HSD_LObjLoadDesc(MODELS->light0);
+        HSD_LObj* lobj1 = HSD_LObjLoadDesc(MODELS->light1);
+        HSD_LObjSetNext(lobj0, lobj1);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj0);
+    }
+    GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0x80);
+
+    gobj = GObj_Create(0xE, 2, 0);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848,
+                            HSD_FogLoadDesc(MODELS->fog));
+    GObj_SetupGXLink(gobj, (GObj_RenderFunc) fn_8026407C, 0, 0x80);
+
+    gobj = GObj_Create(4, 5, 0x80);
+    jobj = HSD_JObjLoadJoint(ANIM[0].joint);
+    HSD_JObjAddAnimAll(jobj, ANIM[0].anim, ANIM[0].matanim, ANIM[0].shapeanim);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 1, 0x80);
+    HSD_GObj_SetupProc(gobj, fn_80263354, 4);
+    HSD_JObjReqAnimAll(jobj, 0.0f);
+    HSD_JObjAnimAll(jobj);
+
+    mnCharSel_804D6CBC = GObj_Create(4, 5, 0x80);
+    if ((u8) mnCharSel_804D6CF5 == 1) {
+        mnCharSel_804D6CC0 = HSD_JObjLoadJoint(ANIM[6].joint);
+        HSD_JObjAddAnimAll(mnCharSel_804D6CC0, ANIM[6].anim, ANIM[6].matanim,
+                           ANIM[6].shapeanim);
+    } else {
+        mnCharSel_804D6CC0 = HSD_JObjLoadJoint(ANIM[3].joint);
+        HSD_JObjAddAnimAll(mnCharSel_804D6CC0, ANIM[3].anim, ANIM[3].matanim,
+                           ANIM[3].shapeanim);
+    }
+    HSD_GObjObject_80390A70(mnCharSel_804D6CBC, HSD_GObj_804D7849,
+                            mnCharSel_804D6CC0);
+    GObj_SetupGXLink(mnCharSel_804D6CBC, HSD_GObj_JObjCallback, 1, 0x80);
+    HSD_GObj_SetupProc(mnCharSel_804D6CBC, fn_8025F0E0, 4);
+    HSD_JObjReqAnimAll(mnCharSel_804D6CC0, 0.0f);
+    HSD_JObjAnimAll(mnCharSel_804D6CC0);
+    HSD_ForeachAnim(mnCharSel_804D6CC0, JOBJ_TYPE, ALL_TYPE_MASK,
+                    HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+
+    icons = (CSSIcon*) (&mnCharSel_803F0A48 + 1);
+    if (gm_80164840(7) == 0) {
+        row_a = 2;
+        row_b = 0x13;
+    } else {
+        row_a = 0x13;
+        row_b = 2;
+    }
+    if ((u8) mnCharSel_804D6CF5 == 1) {
+        lb_80011E24(mnCharSel_804D6CC0, &sp108, icons[row_a].joint_id_1p, -1);
+    } else {
+        lb_80011E24(mnCharSel_804D6CC0, &sp108, icons[row_a].joint_id_vs, -1);
+    }
+    HSD_JObjSetTranslateY(sp108, 5.8f);
+    icons[row_a].bound_u = ICONROWHT_BTM_TOP;
+    icons[row_a].bound_d = ICONROWHT_BTM_BTM;
+    if ((u8) mnCharSel_804D6CF5 == 1) {
+        lb_80011E24(mnCharSel_804D6CC0, &sp108, icons[row_b].joint_id_1p, -1);
+    } else {
+        lb_80011E24(mnCharSel_804D6CC0, &sp108, icons[row_b].joint_id_vs, -1);
+    }
+    HSD_JObjSetTranslateY(sp108, ICONROWHT_TOP_TOP);
+    icons[row_b].bound_u = ICONROWHT_TOP_TOP;
+    icons[row_b].bound_d = ICONROWHT_MID_TOP;
+
+    for (i = 0; i < 0x19; i++) {
+        icons[i].state = gm_80164840(icons[i].char_kind);
+        icons[i].anim_timer = 0;
+        if ((u8) mnCharSel_804D6CF5 == 1) {
+            lb_80011E24(mnCharSel_804D6CC0, &sp108, icons[i].joint_id_1p, -1);
+        } else {
+            lb_80011E24(mnCharSel_804D6CC0, &sp108, icons[i].joint_id_vs, -1);
+        }
+        switch (i) {
+        case 0:
+        case 8:
+        case 9:
+        case 17:
+        case 18:
+        case 24:
+            if ((u8) icons[i].state == 0) {
+                HSD_JObjSetFlags(sp108, JOBJ_HIDDEN);
+            } else {
+                sp108 = HSD_JObjGetParent(sp108);
+                icons[i].state = 2;
+                HSD_ForeachAnim(sp108, JOBJ_TYPE, ALL_TYPE_MASK,
+                                HSD_AObjReqAnim, AOBJ_ARG_AF, 20.0);
+                HSD_JObjAnimAll(sp108);
+            }
+            break;
+        default:
+            if ((u8) icons[i].state == 0) {
+                HSD_ForeachAnim(sp108, JOBJ_TYPE, ALL_TYPE_MASK,
+                                HSD_AObjReqAnim, AOBJ_ARG_AF, 30.0);
+                HSD_JObjAnimAll(sp108);
+            } else {
+                icons[i].state = 2;
+            }
+            break;
+        }
+    }
+
+    if ((u8) mnCharSel_804D6CB0->match_type >= 0xFU && (u8) mnCharSel_804D6CB0->match_type <= 0x16U) {
+        gobj = GObj_Create(4, 5, 0x80);
+        mnCharSel_804D6CC8 = HSD_JObjLoadJoint(ANIM[7].joint);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, mnCharSel_804D6CC8);
+        GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 1, 0x80);
+        HSD_GObj_SetupProc(gobj, fn_8025FB2C, 4);
+        HSD_JObjAddAnimAll(mnCharSel_804D6CC8, ANIM[7].anim, ANIM[7].matanim,
+                           ANIM[7].shapeanim);
+        HSD_JObjReqAnimAll(mnCharSel_804D6CC8, 0.0f);
+        HSD_ForeachAnim(mnCharSel_804D6CC8, JOBJ_TYPE, ALL_TYPE_MASK,
+                        HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+    }
+
+    if ((u8) mnCharSel_804D6CB0->match_type == 0x17) {
+        u8 ck;
+        gobj = GObj_Create(4, 5, 0x80);
+        mnCharSel_804D6CC4 = HSD_JObjLoadJoint(ANIM[8].joint);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, mnCharSel_804D6CC4);
+        GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 1, 0x80);
+        HSD_GObj_SetupProc(gobj, fn_8025FB2C, 4);
+        HSD_JObjAddAnimAll(mnCharSel_804D6CC4, ANIM[8].anim, ANIM[8].matanim,
+                           ANIM[8].shapeanim);
+        HSD_JObjReqAnimAll(mnCharSel_804D6CC4, 0.0f);
+        HSD_ForeachAnim(mnCharSel_804D6CC4, JOBJ_TYPE, ALL_TYPE_MASK,
+                        HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+        ck = mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF1].c_kind;
+        if ((s8) ck >= 0x1A || gm_80164840(ck) == 0) {
+            do {
+                i = HSD_Randi(0x19);
+            } while ((u8) icons[i].state == 0);
+            mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF1].c_kind =
+                icons[i].char_kind;
+            mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF1].color =
+                HSD_Randi((s32) gm_80169238(icons[i].char_kind));
+        }
+    }
+
+    if ((u8) mnCharSel_804D6CB0->match_type == 1) {
+        gobj = GObj_Create(4, 5, 0x80);
+        mnCharSel_804D6CCC = HSD_JObjLoadJoint(ANIM[5].joint);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, mnCharSel_804D6CCC);
+        GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
+        HSD_GObj_SetupProc(gobj, fn_8025FAC0, 4);
+        HSD_JObjAddAnimAll(mnCharSel_804D6CCC, ANIM[5].anim, ANIM[5].matanim,
+                           ANIM[5].shapeanim);
+        HSD_JObjReqAnimAll(mnCharSel_804D6CCC, 0.0f);
+    }
+
+    for (i = mnCharSel_804D6CF5 - 1; i >= 0; i--) {
+        struct CSSCursorData* cursor;
+        gobj = GObj_Create(4, 5, 0x80);
+        jobj = HSD_JObjLoadJoint(ANIM[1].joint);
+        cursor = HSD_MemAlloc(0x14);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 3, 0x80);
+        HSD_GObj_SetupProc(gobj, mnCharSel_CursorThink, 1);
+        GObj_InitUserData(gobj, 4, HSD_Free, cursor);
+        HSD_JObjAddAnimAll(jobj, ANIM[1].anim, ANIM[1].matanim,
+                           ANIM[1].shapeanim);
+        HSD_JObjReqAnimAll(jobj, 0.0f);
+        HSD_JObjAnimAll(jobj);
+        HSD_ForeachAnim(jobj, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjStopAnim,
+                        AOBJ_ARG_AOV, 0, 0);
+        mnCharSel_804A0BC0[i] = cursor;
+        cursor->gobj = gobj;
+        cursor->x4 = i;
+        cursor->x8 = 0;
+        cursor->xA = 0;
+        cursor->x7 = 0;
+        cursor->x6 = 0;
+        cursor->x5 = 2;
+        cursor->xC = (f32) ((15.0f * (f32) i) - 31.0f);
+        cursor->x10 = -21.5f;
+    }
+
+    for (i = 0; i < num_players; i++) {
+        struct CSSCharModel* model;
+        int player;
+        s32 found;
+        gobj = GObj_Create(4, 5, 0x80);
+        jobj = HSD_JObjLoadJoint(ANIM[2].joint);
+        model = HSD_MemAlloc(0x18);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        GObj_InitUserData(gobj, 4, HSD_Free, model);
+        GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 2, 0x80);
+        HSD_GObj_SetupProc(gobj, fn_80262648, 2);
+        HSD_JObjAddAnimAll(jobj, ANIM[2].anim, ANIM[2].matanim,
+                           ANIM[2].shapeanim);
+        HSD_JObjReqAnimAll(jobj, 0.0f);
+        HSD_ForeachAnim(jobj, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
+                        AOBJ_ARG_AOV, 0, 0);
+        mnCharSel_804A0BD0[i] = model;
+        model->gobj = gobj;
+        model->x4 = i;
+        model->x5 = 0;
+        model->x6 = 0xFF;
+        model->x7 = 0;
+        if ((u8) mnCharSel_804D6CF5 == 1) {
+            if (i != 0) {
+                player = mnCharSel_804D6CF1;
+            } else {
+                player = mnCharSel_804D6CF0;
+            }
+        } else {
+            player = i;
+        }
+        for (found = 0; found < 0x19; found++) {
+            u8 ck = mnCharSel_804D6CB0->data.data.players[player].c_kind;
+            if ((s8) ck == (s8) icons[found].char_kind &&
+                gm_80164840(ck) != 0)
+            {
+                break;
+            }
+        }
+        if (found >= 0x19) {
+            mnCharSel_804D6CB0->data.data.players[player].c_kind = 0x1A;
+            if ((u8) mnCharSel_804D6CB0->data.data.players[player].slot_type == 1) {
+                mnCharSel_804D6CB0->data.data.players[player].slot_type = 3;
+            }
+        }
+        mnCharSel_803F0DFC.doors[i].sel_icon = found;
+        model->x10 = model->x8 = 3.4f + icons[found].bound_l;
+        model->x14 = model->xC = -3.0f + icons[found].bound_u;
+    }
+
+    spE8 = mnCharSel_804DC580;
+    for (i = 0; i < num_players; i++) {
+        CSSTag* tag = &mnCharSel_803F0DFC.tags[i];
+        CSSTagData* td;
+        int player;
+        s32 found;
+        gobj = GObj_Create(4, 5, 0x80);
+        td = HSD_MemAlloc(0x1C);
+        tag->data = td;
+        GObj_InitUserData(gobj, 4, HSD_Free, td);
+        HSD_GObj_SetupProc(gobj, fn_802633B0, 4);
+        td->use_tag = 0;
+        td->timer = 0;
+        td->state = 0;
+        td->x8 = 0.0f;
+        td->scroll_amt = 0.0f;
+        td->scroll_force = 0.0f;
+        td->port = i;
+        text = HSD_SisLib_803A6754(0, ctx);
+        td->text = (TextGlyphTexture*) text;
+        text->x4C = 1;
+        text->default_fitting = 1;
+        text->default_alignment = 1;
+        text->font_size.x = 0.058f;
+        text->font_size.y = 0.055f;
+        if ((u8) mnCharSel_804D6CF5 == 1) {
+            if (i != 0) {
+                text->pos_x = 15.6f;
+                text->pos_y = 20.2f;
+                text->pos_z = 0.0f;
+            } else {
+                lb_80011E24(mnCharSel_804D6CC0, &spA4,
+                            mnCharSel_803F0DFC.tag_box_joint, -1);
+                HSD_ForeachAnim(spA4, JOBJ_TYPE, JOBJ_MASK, HSD_AObjReqAnim,
+                                AOBJ_ARG_AF, 2.0);
+                HSD_JObjAnimAll(spA4);
+                HSD_ForeachAnim(spA4, JOBJ_TYPE, JOBJ_MASK, HSD_AObjStopAnim,
+                                AOBJ_ARG_AOV, 0, 0);
+                sp108 = spA4;
+                lb_8000B1CC(sp108, NULL, &spEC);
+                text->pos_x = spEC.x - 0.1f;
+                text->pos_y = 20.2f;
+                text->pos_z = 0.0f;
+            }
+            text->box_size_x = 200.0f;
+            text->box_size_y = 32.0f;
+            HSD_SisLib_803A6B98(text, 100.0f, 0.0f,
+                                "\x81\x45\x81\x45\x81\x45\x81\x45");
+            lb_80011E24(mnCharSel_804D6CC0, &sp108,
+                        mnCharSel_803F0DFC.name_list_joint, -1);
+        } else {
+            lb_80011E24(mnCharSel_804D6CC0, &sp9C, tag->name_jointl, -1);
+            HSD_ForeachAnim(sp9C, JOBJ_TYPE, JOBJ_MASK, HSD_AObjReqAnim,
+                            AOBJ_ARG_AF, 2.0);
+            HSD_JObjAnimAll(sp9C);
+            HSD_ForeachAnim(sp9C, JOBJ_TYPE, JOBJ_MASK, HSD_AObjStopAnim,
+                            AOBJ_ARG_AOV, 0, 0);
+            sp108 = sp9C;
+            lb_8000B1CC(sp108, NULL, &spEC);
+            text->pos_x = 0.5f + spEC.x;
+            text->pos_y = -0.4f - spEC.y;
+            text->pos_z = spEC.z;
+            text->box_size_x = 160.0f;
+            text->box_size_y = 32.0f;
+            HSD_SisLib_803A6B98(text, 80.0f, 0.0f,
+                                "\x81\x45\x81\x45\x81\x45\x81\x45");
+            lb_80011E24(mnCharSel_804D6CC0, &sp108, tag->list_joint, -1);
+            if (i == 3) {
+                HSD_JObjSetTranslateX(sp108, 16.7f);
+            }
+        }
+        lb_8000B1CC(sp108, NULL, &spEC);
+        text = HSD_SisLib_803A6754(0, ctx);
+        td->name_ls = (TextGlyphTexture*) text;
+        text->default_fitting = 1;
+        text->box_size_x = 154.0f;
+        text->box_size_y = 256.0f;
+        text->pos_x = spEC.x - 0.6f;
+        text->pos_y = (0.8f - spEC.y) - 1.0f;
+        text->pos_z = spEC.z;
+        text->font_size.x = 0.065f;
+        text->font_size.y = 0.065f;
+        text->x4E = 1;
+        text->hidden = 1;
+        HSD_SisLib_803A6B98(text, 0.0f, 0.0f,
+                            "\x81\x45\x81\x45\x81\x45\x81\x45\x81\x45\x81\x45"
+                            "\x81\x45\x81\x45\x81\x45\x81\x45\x81\x45");
+        color = spE8;
+        HSD_SisLib_803A74F0(text, 0, &color);
+        HSD_SisLib_803A6B98(text, 0.0f, 0.0f,
+                            "\x82\x6d\x82\x60\x82\x6c\x82\x64\x20\x82\x64\x82"
+                            "\x6d\x82\x73\x82\x71\x82\x78");
+        color = spE8;
+        HSD_SisLib_803A74F0(text, 1, &color);
+        found = 0;
+        do {
+            HSD_SisLib_803A6B98(text, 10.0f, 0.0f,
+                                "\x81\x45\x81\x45\x81\x45\x81\x45");
+            found++;
+        } while (found < 9);
+        for (found = 0; found < 0x78; found++) {
+            if (GetNameText(found) == NULL) {
+                break;
+            }
+        }
+        td->next_tag = (u8) (found + 1);
+        lb_80011E24(mnCharSel_804D6CC0, &sp108, tag->x7, -1);
+        HSD_JObjSetFlags(sp108, JOBJ_HIDDEN);
+        lb_80011E24(mnCharSel_804D6CC0, &sp108, tag->kostar_text_joint, -1);
+        if ((u8) td->next_tag > 7U) {
+            HSD_JObjClearFlags(sp108, JOBJ_HIDDEN);
+        } else {
+            HSD_JObjSetFlags(sp108, JOBJ_HIDDEN);
+        }
+        if ((u8) mnCharSel_804D6CF5 == 1) {
+            if (i != 0) {
+                player = mnCharSel_804D6CF1;
+            } else {
+                player = mnCharSel_804D6CF0;
+            }
+        } else {
+            player = i;
+        }
+        if (player == mnCharSel_804D6CF9 &&
+            (u8) mnCharSel_804D6CF8 < (u8) td->next_tag)
+        {
+            u8 mt = mnCharSel_804D6CB0->match_type;
+            s32 clear;
+            if ((s32) mt < 3) {
+                clear = ((s32) mt == 0);
+            } else {
+                clear = ((s32) mt < 0xB);
+            }
+            if (clear != 0) {
+                mnCharSel_804D6CB0->ko_star_counts[player] = 0;
+            }
+            mnCharSel_804D6CB0->data.data.players[player].xA = mnCharSel_804D6CF8 - 1;
+            mnCharSel_804D6CF8 = td->next_tag;
+        }
+        if ((u8) mnCharSel_804D6CB0->data.data.players[player].xA != 0x78) {
+            char* name;
+            td->use_tag = 1;
+            name = GetNameText(mnCharSel_804D6CB0->data.data.players[player].xA);
+            HSD_SisLib_803A70A0((HSD_Text*) td->text, 0, name);
+            ((HSD_Text*) td->text)->default_kerning = 0;
+        }
+    }
+
+    if ((u8) mnCharSel_804D6CF5 == 1) {
+        switch (mnCharSel_804D6CB0->match_type) {
+        case REG_CLASSIC:
+        case REG_ADVENTURE:
+        case REG_ALLSTAR:
+            spE4 = mnCharSel_804DC584;
+            spE0 = mnCharSel_804DC588;
+            spDC = mnCharSel_804DC58C;
+            spD8 = mnCharSel_804DC590;
+            spD4 = mnCharSel_804DC594;
+            mnCharSel_803F0DFC.xce =
+                mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0].cpu_level;
+            mnCharSel_803F0DFC.xcd =
+                mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0].cpu_level;
+            mnCharSel_803F0DFC.xcf = 124.0f;
+            mnCharSel_803F0DFC.xd3 = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_803F0DFC.scroll_flag = 1;
+            mnCharSel_803F0DFC.xd3->pos_x = -0.5f;
+            mnCharSel_803F0DFC.xd3->pos_y = 9.0f;
+            mnCharSel_803F0DFC.xd3->pos_z = 0.0f;
+            mnCharSel_803F0DFC.xd3->box_size_x = 248.0f;
+            mnCharSel_803F0DFC.xd3->box_size_y = 32.0f;
+            mnCharSel_803F0DFC.xd3->font_size.x = 0.08f;
+            mnCharSel_803F0DFC.xd3->font_size.y = 0.09f;
+            mnCharSel_803F0DFC.xd3->x4E = 1;
+            mnCharSel_803F0DFC.xd3->default_kerning = 1;
+            mnCharSel_803F0DFC.xd3->default_alignment = 1;
+            mnCharSel_803F0DFC.xd3->x4C = 1;
+            HSD_SisLib_803A6B98(mnCharSel_803F0DFC.xd3, 0.0f, 0.0f,
+                                "\x82\x75\x82\x64\x82\x71\x82\x78\x20\x82\x64"
+                                "\x82\x60\x82\x72\x82\x78");
+            color = spE4;
+            HSD_SisLib_803A74F0(mnCharSel_803F0DFC.xd3, 0, &color);
+            HSD_SisLib_803A6B98(mnCharSel_803F0DFC.xd3, 0.0f, 0.0f,
+                                "\x82\x64\x82\x60\x82\x72\x82\x78");
+            color = spE0;
+            HSD_SisLib_803A74F0(mnCharSel_803F0DFC.xd3, 1, &color);
+            HSD_SisLib_803A6B98(mnCharSel_803F0DFC.xd3, 0.0f, 0.0f,
+                                "\x82\x6d\x82\x6e\x82\x71\x82\x6c\x82\x60\x82"
+                                "\x6b");
+            color = spDC;
+            HSD_SisLib_803A74F0(mnCharSel_803F0DFC.xd3, 2, &color);
+            HSD_SisLib_803A6B98(mnCharSel_803F0DFC.xd3, 0.0f, 0.0f,
+                                "\x82\x67\x82\x60\x82\x71\x82\x63");
+            color = spD8;
+            HSD_SisLib_803A74F0(mnCharSel_803F0DFC.xd3, 3, &color);
+            HSD_SisLib_803A6B98(mnCharSel_803F0DFC.xd3, 0.0f, 0.0f,
+                                "\x82\x75\x82\x64\x82\x71\x82\x78\x20\x82\x67"
+                                "\x82\x60\x82\x71\x82\x63");
+            color = spD4;
+            HSD_SisLib_803A74F0(mnCharSel_803F0DFC.xd3, 4, &color);
+            HSD_GObjGXLink_803909D8(mnCharSel_803F0DFC.xd3->entity,
+                                    mnCharSel_804D6CBC);
+            if ((u8) mnCharSel_804D6CB0->match_type == 0xD) {
+                lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x34, -1);
+                HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
+                lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x3D, -1);
+                HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
+                lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x45, -1);
+                HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
+                lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x46, -1);
+                HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
+            } else {
+                data2.stocks =
+                    mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0].stocks;
+                lb_80011E24(mnCharSel_804D6CC0, &sp70, data2.xf0[0], -1);
+                HSD_JObjSetTranslateX(sp70, 7.5f);
+                for (i = 1; i < 5; i++) {
+                    lb_80011E24(mnCharSel_804D6CC0, &sp70, data2.xf0[i], -1);
+                    if ((s32) data2.stocks <= i) {
+                        HSD_JObjSetFlags(sp70, JOBJ_HIDDEN);
+                    } else {
+                        HSD_JObjClearFlags(sp70, JOBJ_HIDDEN);
+                    }
+                }
+                mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0].stocks =
+                    data2.stocks;
+            }
+            lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x40, -1);
+            lb_8000B1CC(sp108, NULL, &spEC);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CDC = text;
+            text->pos_x = 13.5f + spEC.x;
+            text->pos_y = -spEC.y;
+            text->pos_z = spEC.z;
+            text->font_size.x = 0.07f;
+            text->font_size.y = 0.055f;
+            text->default_alignment = 2;
+            HSD_SisLib_803A6B98(text, 0.0f, 0.0f, NULL);
+            lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x42, -1);
+            HSD_JObjSetFlags(sp108, JOBJ_HIDDEN);
+            lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x41, -1);
+            lb_8000B1CC(sp108, NULL, &spEC);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CE4 = text;
+            text->pos_x = 13.5f + spEC.x;
+            text->pos_y = -spEC.y;
+            text->pos_z = spEC.z;
+            text->font_size.x = 0.07f;
+            text->font_size.y = 0.055f;
+            text->default_alignment = 2;
+            HSD_SisLib_803A6B98(text, 0.0f, 0.0f, NULL);
+            lb_80011E24(mnCharSel_804D6CC0, &sp64, 0x43, -1);
+            HSD_ForeachAnim(sp64, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
+                            AOBJ_ARG_AF, 0.0);
+            HSD_JObjAnimAll(sp64);
+            HSD_ForeachAnim(sp64, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
+                            AOBJ_ARG_AOV, 0, 0);
+            sp108 = sp64;
+            HSD_JObjSetFlags(sp108, JOBJ_HIDDEN);
+            break;
+        case STADIUM_TARGET:
+            lb_80011E24(mnCharSel_804D6CC8, &sp108, 4, -1);
+            lb_8000B1CC(sp108, NULL, &spEC);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CDC = text;
+            text->pos_x = 10.9f + spEC.x;
+            text->pos_y = -spEC.y;
+            text->pos_z = spEC.z;
+            text->default_alignment = 2;
+            text->font_size.x = 0.07f;
+            text->font_size.y = 0.055f;
+            HSD_SisLib_803A6B98(text, 0.0f, 0.0f, NULL);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CE0 = text;
+            text->pos_x = 11.6f + spEC.x;
+            text->pos_y = 0.3f - spEC.y;
+            text->pos_z = spEC.z;
+            text->font_size.x = 0.06f;
+            text->font_size.y = 0.045f;
+            HSD_SisLib_803A6B98(text, 0.0f, 0.0f, NULL);
+            lb_80011E24(mnCharSel_804D6CC8, &sp108, 5, -1);
+            lb_8000B1CC(sp108, NULL, &spEC);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CE4 = text;
+            text->pos_x = 10.9f + spEC.x;
+            text->pos_y = -spEC.y;
+            text->pos_z = spEC.z;
+            text->font_size.x = 0.07f;
+            text->font_size.y = 0.055f;
+            text->default_alignment = 2;
+            HSD_SisLib_803A6B98(text, 0.0f, 0.0f, NULL);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CE8 = text;
+            text->pos_x = 11.6f + spEC.x;
+            text->pos_y = 0.3f - spEC.y;
+            text->pos_z = spEC.z;
+            text->font_size.x = 0.06f;
+            text->font_size.y = 0.045f;
+            HSD_SisLib_803A6B98(text, 0.0f, 0.0f, NULL);
+            lb_80011E24(mnCharSel_804D6CC8, &sp108, 3, -1);
+            HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
+            /* fallthrough */
+        case EVENT_MATCH:
+        hide_extra:
+            lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x2E, -1);
+            HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
+            lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x34, -1);
+            HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
+            lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x3A, -1);
+            HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
+            lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x44, -1);
+            HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
+            break;
+        case STADIUM_HOMERUN:
+            lb_80011E24(mnCharSel_804D6CC8, &sp108, 4, -1);
+            lb_8000B1CC(sp108, NULL, &spEC);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CDC = text;
+            text->pos_x = 11.0f + spEC.x;
+            text->pos_y = -spEC.y;
+            text->pos_z = spEC.z;
+            text->font_size.x = 0.07f;
+            text->font_size.y = 0.055f;
+            text->default_alignment = 2;
+            HSD_SisLib_803A6B98(text, 0.0f, 0.0f, NULL);
+            text = HSD_SisLib_803A6754(0, ctx);
+            text->pos_x = 12.0f + spEC.x;
+            text->pos_y = -spEC.y;
+            text->pos_z = spEC.z;
+            text->font_size.x = 0.07f;
+            text->font_size.y = 0.055f;
+            text->default_kerning = 1;
+            if (lbLang_IsSavedLanguageJP() != 0) {
+                HSD_SisLib_803A6B98(text, 0.0f, 0.0f, "\x82\x8d");
+                HSD_SisLib_803A6B98(text, 0.0f, 35.0f, "\x82\x8d");
+            } else {
+                HSD_SisLib_803A6B98(text, 0.0f, 0.0f, "\x82\x65\x82\x94\x81\x44");
+                HSD_SisLib_803A6B98(text, 0.0f, 35.0f, "\x82\x65\x82\x94\x81\x44");
+            }
+            lb_80011E24(mnCharSel_804D6CC8, &sp108, 5, -1);
+            lb_8000B1CC(sp108, NULL, &spEC);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CE4 = text;
+            text->pos_x = 11.0f + spEC.x;
+            text->pos_y = -spEC.y;
+            text->pos_z = spEC.z;
+            text->font_size.x = 0.07f;
+            text->font_size.y = 0.055f;
+            text->default_alignment = 2;
+            HSD_SisLib_803A6B98(text, 0.0f, 0.0f, NULL);
+            goto hide_extra;
+        case STADIUM_MULTIMAN_10:
+        case STADIUM_MULTIMAN_100:
+            lb_80011E24(mnCharSel_804D6CC8, &sp108, 4, -1);
+            lb_8000B1CC(sp108, NULL, &spEC);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CDC = text;
+            text->pos_x = 10.9f + spEC.x;
+            text->pos_y = -spEC.y;
+            text->pos_z = spEC.z;
+            text->font_size.x = 0.07f;
+            text->font_size.y = 0.055f;
+            text->default_alignment = 2;
+            HSD_SisLib_803A6B98(text, 0.0f, 0.0f, NULL);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CE0 = text;
+            text->pos_x = 11.6f + spEC.x;
+            text->pos_y = 0.3f - spEC.y;
+            text->pos_z = spEC.z;
+            text->font_size.x = 0.06f;
+            text->font_size.y = 0.045f;
+            HSD_SisLib_803A6B98(text, 0.0f, 0.0f, NULL);
+            lb_80011E24(mnCharSel_804D6CC8, &sp108, 5, -1);
+            lb_8000B1CC(sp108, NULL, &spEC);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CE4 = text;
+            text->pos_x = 10.9f + spEC.x;
+            text->pos_y = -spEC.y;
+            text->pos_z = spEC.z;
+            text->font_size.x = 0.07f;
+            text->font_size.y = 0.055f;
+            text->default_alignment = 2;
+            HSD_SisLib_803A6B98(text, 0.0f, 0.0f, NULL);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CE8 = text;
+            text->pos_x = 11.6f + spEC.x;
+            text->pos_y = 0.3f - spEC.y;
+            text->pos_z = spEC.z;
+            text->font_size.x = 0.06f;
+            text->font_size.y = 0.045f;
+            HSD_SisLib_803A6B98(text, 0.0f, 0.0f, NULL);
+            lb_80011E24(mnCharSel_804D6CC8, &sp108, 3, -1);
+            HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
+            goto hide_extra;
+        case STADIUM_3_MIN_MELEE:
+        case STADIUM_15_MIN_MELEE:
+        case STADIUM_ENDLESS_MELEE:
+        case STADIUM_CRUEL_MELEE:
+            lb_80011E24(mnCharSel_804D6CC8, &sp108, 4, -1);
+            lb_8000B1CC(sp108, NULL, &spEC);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CDC = text;
+            text->pos_x = 16.0f + spEC.x;
+            text->pos_y = -spEC.y;
+            text->pos_z = spEC.z;
+            text->font_size.x = 0.07f;
+            text->font_size.y = 0.055f;
+            text->default_alignment = 2;
+            HSD_SisLib_803A6B98(text, 0.0f, 0.0f, NULL);
+            lb_80011E24(mnCharSel_804D6CC8, &sp108, 5, -1);
+            lb_8000B1CC(sp108, NULL, &spEC);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CE4 = text;
+            text->pos_x = 16.0f + spEC.x;
+            text->pos_y = -spEC.y;
+            text->pos_z = spEC.z;
+            text->font_size.x = 0.07f;
+            text->font_size.y = 0.055f;
+            text->default_alignment = 2;
+            HSD_SisLib_803A6B98(text, 0.0f, 0.0f, NULL);
+            goto hide_extra;
+        case TRAINING_MODE:
+            lb_80011E24(mnCharSel_804D6CC4, &sp108, 9, -1);
+            lb_8000B1CC(sp108, NULL, &spEC);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CDC = text;
+            text->pos_x = 10.0f + spEC.x;
+            text->pos_y = -spEC.y;
+            text->pos_z = spEC.z;
+            text->font_size.x = 0.13f;
+            text->font_size.y = 0.055f;
+            text->default_alignment = 2;
+            HSD_SisLib_803A6B98(text, 0.0f, 0.0f, NULL);
+            goto hide_extra;
+        }
+    } else {
+        u8 mt;
+        s32 clear;
+        mnCharSel_803F0DFC.scroll_flag = 0;
+        text = HSD_SisLib_803A5ACC(0, ctx, -12.0f, -23.3f, 0.0f, 450.0f, 32.0f);
+        text->default_alignment = 1;
+        text->default_kerning = 1;
+        text->default_fitting = 1;
+        text->font_size.x = 0.07f;
+        text->font_size.y = 0.07f;
+        HSD_SisLib_803A6368(text, 0x4A);
+        mnCharSel_8025BD30();
+        mt = mnCharSel_804D6CB0->match_type;
+        if ((s32) mt < 3) {
+            clear = ((s32) mt == 0);
+        } else {
+            clear = ((s32) mt < 0xB);
+        }
+        if (clear != 0) {
+            for (i = 0; i < (s32) mnCharSel_804D6CF5; i++) {
+                lb_80011E24(mnCharSel_804D6CC0, &sp108,
+                            data2.ko_stars[i].joint, -1);
+                lb_8000B1CC(sp108, NULL, &spEC);
+                text = HSD_SisLib_803A5ACC(0, ctx, spEC.x, -spEC.y - 0.9f,
+                                           spEC.z, 32.0f, 32.0f);
+                data2.ko_stars[i].text = text;
+                text->font_size.x = 0.07f;
+                text->font_size.y = 0.07f;
+                mnCharSel_8025D1C4(i, 0);
+            }
+        } else {
+            for (i = 0; i < (s32) mnCharSel_804D6CF5; i++) {
+                lb_80011E24(mnCharSel_804D6CC0, &sp108,
+                            data2.ko_stars[i].joint, -1);
+                HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
+            }
+        }
+    }
+
+    gobj = GObj_Create(4, 5, 0x80);
+    jobj = HSD_JObjLoadJoint(ANIM[4].joint);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
+    HSD_GObj_SetupProc(gobj, fn_80262F44, 3);
+    HSD_JObjAddAnimAll(jobj, ANIM[4].anim, ANIM[4].matanim, ANIM[4].shapeanim);
+    HSD_JObjReqAnimAll(jobj, 0.0f);
+    HSD_ForeachAnim(jobj, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjStopAnim,
+                    AOBJ_ARG_AOV, 0, 0);
+
+    mnCharSel_804D6CF7 = 0;
+    if ((u8) mnCharSel_804D6CF5 == 1) {
+        mnCharSel_804D6CB0->data.data.players[3].slot_type = 3;
+        mnCharSel_804D6CB0->data.data.players[2].slot_type = 3;
+        mnCharSel_804D6CB0->data.data.players[1].slot_type = 3;
+        mnCharSel_804D6CB0->data.data.players[0].slot_type = 3;
+        mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0].slot_type = 0;
+        mnCharSel_803F0DFC.doors[0].p_kind = 0;
+        mnCharSel_803F0DFC.doors[0].costume =
+            mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0].color;
+        mnCharSel_803F0DFC.doors[0].sel_icon_prev =
+            mnCharSel_803F0DFC.doors[0].sel_icon;
+        if ((u8) mnCharSel_804D6CB0->match_type == 0x17) {
+            mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF1].slot_type = 1;
+            mnCharSel_803F0DFC.doors[1].p_kind = 1;
+            mnCharSel_803F0DFC.doors[1].costume =
+                mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF1].color;
+            mnCharSel_803F0DFC.doors[1].sel_icon_prev =
+                mnCharSel_803F0DFC.doors[1].sel_icon;
+        }
+    } else {
+        for (i = 0; i < (s32) mnCharSel_804D6CF5; i++) {
+            CSSDoor* door = &mnCharSel_803F0DFC.doors[i];
+            GameRules* rules;
+            door->p_kind = mnCharSel_804D6CB0->data.data.players[i].slot_type;
+            door->costume = mnCharSel_804D6CB0->data.data.players[i].color;
+            door->p_kind_prev = 3;
+            door->dooranim_timer = 0;
+            door->slideranim_timer = 0;
+            door->is_hold_handicap_slider = 0;
+            door->is_hold_cpu_slider = 0;
+            door->sel_icon_prev = door->sel_icon;
+            rules = gmMainLib_8015CC34();
+            if ((u8) rules->handicap != 0) {
+                u8 hval;
+                lb_80011E24(mnCharSel_804D6CC0, &sp108, door->cpuslider_joint,
+                            -1);
+                if ((u8) gmMainLib_8015CC34()->handicap == 1) {
+                    hval = gm_801685D4((u8) i,
+                                       mnCharSel_804D6CB0->data.data.players[i].xA);
+                } else {
+                    hval = mnCharSel_804D6CB0->data.data.players[i].handicap;
+                }
+                if ((s32) hval != 0) {
+                } else {
+                    hval = 1;
+                }
+                HSD_JObjSetTranslateX(sp108, 1.25f * (f32) (hval - 1));
+                lb_80011E24(mnCharSel_804D6CC0, &sp108, door->cpuslider2_joint,
+                            -1);
+            } else {
+                lb_80011E24(mnCharSel_804D6CC0, &sp108, door->cpuslider_joint,
+                            -1);
+            }
+            if ((u8) mnCharSel_804D6CB0->data.data.players[i].cpu_level == 0) {
+                mnCharSel_804D6CB0->data.data.players[i].cpu_level = 1;
+            }
+            HSD_JObjSetTranslateX(
+                sp108,
+                1.25f * (f32) (mnCharSel_804D6CB0->data.data.players[i].cpu_level - 1));
+        }
+    }
+
+    mnCharSel_8025EE8C(mnCharSel_804D6CB0->match_type);
+    return lbAudioAx_80023F28(gmMainLib_8015ECB0());
+}
+
+#undef MODELS
+#undef ANIM
 
 static u8 data_pad[0x138] = { 0 };
 

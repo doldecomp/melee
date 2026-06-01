@@ -776,16 +776,15 @@ void grFlatzone_80218260(void)
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);
         if (gp != NULL) {
+            HSD_JObj* jobj;
             gp->gv.flatzone.xC7 = 8;
-            {
-                HSD_JObj* jobj = GET_JOBJ(gobj);
-                if (jobj != NULL) {
-                    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-                }
+            if ((jobj = GET_JOBJ(gobj)) != NULL) {
+                HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             }
         }
     }
 }
+
 DynamicsDesc* grFlatzone_802182B4(enum_t arg0)
 {
     return NULL;

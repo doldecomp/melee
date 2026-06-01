@@ -147,6 +147,11 @@ static s16 grGr_803E7840[30] = {
     0xF,  0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18,
     0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F, 0x20, 0x21, 0x22,
 };
+static s16 grGr_803E787C[30] = { 0,    1,    2,    3,    4,    5,
+                                 6,    7,    8,    9,    0xA,  0xB,
+                                 0xC,  0xD,  0xE,  0xF,  0x10, 0x11,
+                                 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
+                                 0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D };
 static u8 grGr_8049F9E0[0x20];
 
 static inline int randrange(int min, int max);
@@ -171,7 +176,7 @@ static inline int randrange(int min, int max)
 static inline struct grGreens_BlockVars* getBlock(Ground* gp, int i, int j);
 static inline struct grGreens_BlockVars* getBlock(Ground* gp, int i, int j)
 {
-    return &gp->gv.greens.x8_blocks[i * 6 + j];
+    return &((struct grGreens_BlockVars(*)[6]) gp->gv.greens.x8_blocks)[i][j];
 }
 
 static inline Vec* getVec(Ground* gp, int i, int j);
@@ -708,18 +713,19 @@ void grGreens_80214804(Ground_GObj* gobj)
     HSD_Free((void*) gp->gv.corneria.xCC);
 }
 
+
 void grGreens_8021483C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     Vec vec;
-    float left_max = -F32_MAX;
-    float left_min = F32_MAX;
-    float left_top = -F32_MAX;
-    float left_bottom = F32_MAX;
-    float right_max = -F32_MAX;
-    float right_top = -F32_MAX;
-    float right_min = F32_MAX;
-    float right_bottom = F32_MAX;
+    float left_max = -3.4028235e38f;
+    float left_min = 3.4028235e38f;
+    float left_top = -3.4028235e38f;
+    float left_bottom = 3.4028235e38f;
+    float right_max = -3.4028235e38f;
+    float right_top = -3.4028235e38f;
+    float right_min = 3.4028235e38f;
+    float right_bottom = 3.4028235e38f;
     int i;
 
     for (i = 0; i < 30; i++) {
@@ -787,35 +793,56 @@ void grGreens_8021483C(Ground_GObj* gobj)
     }
 }
 
+static inline void BOMB(int idx)
+{
+    grGr_8049F9E0[idx] =
+        (((grGr_params->x20 != 0) ? HSD_Randi(grGr_params->x20) : 0) != 0) ? 1
+                                                                           : 2;
+}
+
 void grGreens_80214B58(Ground_GObj* gobj)
 {
-    static const u8 indices[] = {
-        0x12, 0x0C, 0x0D, 0x06, 0x07, 0x08, 0x00, 0x01, 0x02,
-        0x17, 0x10, 0x11, 0x09, 0x0A, 0x0B, 0x03, 0x04, 0x05,
-    };
     int i;
-
-    memset(grGr_8049F9E0, 0, sizeof(grGr_8049F9E0));
-    for (i = 0; i < sizeof(indices) / sizeof(indices[0]); i++) {
-        int chance = grGr_params->x8_blockBombChance;
-
-        if (chance != 0 && HSD_Randi(chance) != 0) {
-            grGr_8049F9E0[indices[i]] = 1;
-        } else {
-            grGr_8049F9E0[indices[i]] = 2;
-        }
+    for (i = 0; i < 24; i++) {
+        grGr_8049F9E0[i] = 0;
     }
+
+    grGr_8049F9E0[0x18] = 0;
+    grGr_8049F9E0[0x19] = 0;
+    grGr_8049F9E0[0x1A] = 0;
+    grGr_8049F9E0[0x1B] = 0;
+    grGr_8049F9E0[0x1C] = 0;
+    grGr_8049F9E0[0x1D] = 0;
+
+    BOMB(0x12);
+    BOMB(0x0C);
+    BOMB(0x0D);
+    BOMB(0x06);
+    BOMB(0x07);
+    BOMB(0x08);
+    BOMB(0x00);
+    BOMB(0x01);
+    BOMB(0x02);
+    BOMB(0x17);
+    BOMB(0x10);
+    BOMB(0x11);
+    BOMB(0x09);
+    BOMB(0x0A);
+    BOMB(0x0B);
+    BOMB(0x03);
+    BOMB(0x04);
+    BOMB(0x05);
 }
 
 void grGreens_80214FA8(Ground_GObj* gobj)
 {
-    unsigned int i;
     int j;
+    unsigned int i;
     Ground* gp = GET_GROUND(gobj);
     int k;
 
     for (i = 0; i < 30; i++) {
-        mpJointSetCb2(grGr_803E7840[i], gp, fn_80216DE4);
+        mpJointSetCb2(grGr_803E787C[i], gp, fn_80216DE4);
     }
     for (j = 0; j < 30; j++) {
         HSD_JObj* jobj = Ground_801C3FA4(gobj, grGr_803E7840[j]);
@@ -984,25 +1011,25 @@ void fn_802159B4(Item_GObj* item_gobj, Ground* gp)
 
 void grGreens_802159B8(Ground* gp, int i, int j, int value)
 {
-    HSD_GObj* gobj = getBlock(gp, i, j)->x10;
+    HSD_GObj* gobj = getBlock(gp, j, i)->x10;
     Vec vec;
     float f;
-    if (gobj != NULL && !getBlock(gp, i, j)->x1_7) {
-        getBlock(gp, i, j)->x1_7 = 1;
+    if (gobj != NULL && !getBlock(gp, j, i)->x1_7) {
+        getBlock(gp, j, i)->x1_7 = 1;
         grMaterial_801C8E28(gobj);
-        getBlock(gp, i, j)->x1C = value;
+        getBlock(gp, j, i)->x1C = value;
 
-        if (getBlock(gp, i, j)->x1_1) {
-            HSD_JObjSetFlagsAll(getBlock(gp, i, j)->xC->hsd_obj, JOBJ_HIDDEN);
+        if (getBlock(gp, j, i)->x1_1) {
+            HSD_JObjSetFlagsAll(getBlock(gp, j, i)->xC->hsd_obj, JOBJ_HIDDEN);
             grMaterial_801C8D98(gobj, 1);
             it_80275414(gobj);
-            getBlock(gp, i, j)->x1_2 = 1;
+            getBlock(gp, j, i)->x1_2 = 1;
             HSD_JObjGetTranslation(gobj->hsd_obj, &vec);
             vec.y += 5.0f * Ground_801C0498();
             efSync_Spawn(1039, gobj, &vec);
         } else {
             f = 0.0f;
-            getBlock(gp, i, j)->x1_3 = 1;
+            getBlock(gp, j, i)->x1_3 = 1;
             Camera_80030E44(2, NULL);
             HSD_JObjGetTranslation(gobj->hsd_obj, &vec);
             vec.y += 5.0f * Ground_801C0498();
@@ -1047,34 +1074,25 @@ s32 grGreens_80215D54(Ground_GObj* gobj, int arg1, int arg2)
 {
     Ground* gp = GET_GROUND(gobj);
     int row;
-    int x = arg1 << 5;
 
     for (row = 1; row < 5; row++) {
-        int offset = row * 0xC0;
-        struct grGreens_BlockVars* blocks = gp->gv.greens.x8_blocks;
-        int status = blocks[offset + x].status;
-
-        if ((status == 1 || status == 2) &&
-            ((blocks[(row - 1) * 0xC0 + x].status == 0)))
+        if ((getBlock(gp, row, arg1)->status == 1 ||
+             getBlock(gp, row, arg1)->status == 2) &&
+            getBlock(gp, row - 1, arg1)->status == 0)
         {
-            int i;
+            int r = row;
             int count = 5 - row;
-
             if (row < 5) {
                 do {
-                    struct grGreens_BlockVars temp =
-                        *(struct grGreens_BlockVars*) (blocks + offset + x);
-                    *(struct grGreens_BlockVars*) (blocks + offset + x) =
-                        *(struct grGreens_BlockVars*) (blocks + offset + x -
-                                                       0xC0);
-                    *(struct grGreens_BlockVars*) (blocks + offset + x -
-                                                   0xC0) = temp;
-                    offset += 0xC0;
+                    struct grGreens_BlockVars temp = *getBlock(gp, r, arg1);
+                    *getBlock(gp, r, arg1) = *getBlock(gp, r - 1, arg1);
+                    *getBlock(gp, r - 1, arg1) = temp;
+                    r += 1;
                     count -= 1;
                 } while (count != 0);
             }
-            if (blocks[(row - 1) * 0xC0 + x].status == 2) {
-                blocks[(row - 1) * 0xC0 + x].status |= 0x10;
+            if (getBlock(gp, row - 1, arg1)->status == 2) {
+                getBlock(gp, row - 1, arg1)->status |= 0x10;
             }
             row = 0;
         }
@@ -1216,20 +1234,20 @@ void grGreens_802166C4(Ground_GObj* gobj)
                     Gr_Greens_Block_Status_None)
                 {
                     switch (row) {
-                    case 4:
-                        weights[col] = grGr_params->x8_blockBombChance;
-                        break;
-                    case 3:
-                        weights[col] = grGr_params->xC;
-                        break;
-                    case 2:
-                        weights[col] = grGr_params->x10;
+                    case 0:
+                        weights[col] = grGr_params->x18;
                         break;
                     case 1:
                         weights[col] = grGr_params->x14;
                         break;
-                    default:
-                        weights[col] = grGr_params->x18;
+                    case 2:
+                        weights[col] = grGr_params->x10;
+                        break;
+                    case 3:
+                        weights[col] = grGr_params->xC;
+                        break;
+                    case 4:
+                        weights[col] = grGr_params->x8_blockBombChance;
                         break;
                     }
                     break;
