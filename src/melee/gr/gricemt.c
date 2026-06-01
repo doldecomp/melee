@@ -341,6 +341,7 @@ bool grIceMt_801F71E0(void)
     return false;
 }
 
+#pragma auto_inline off
 HSD_GObj* grIceMt_801F71E8(int gobj_id)
 {
     HSD_GObj* gobj;
@@ -1341,18 +1342,26 @@ float grIceMt_801F96E0(struct grIceMt_GroundVars* arg0, float farg0)
     if (arg0->xC4 != -1) {
         HSD_JObj* jobj;
         mgobj = Ground_801C2BA4(arg0->xC4);
-        HSD_ASSERT(0xA45, mgobj);
+        if (mgobj == NULL) {
+            __assert((char*) &grIm_803E4068 + 0x690, 0xA45, "mgobj");
+        }
         jobj = GET_JOBJ(mgobj);
-        HSD_ASSERT(0xA46, jobj);
+        if (jobj == NULL) {
+            __assert((char*) &grIm_803E4068 + 0x690, 0xA46, "jobj");
+        }
         HSD_JObjAddTranslationY(jobj, farg0);
     }
     if (arg0->xC6 != -1) {
         HSD_JObj* jobj;
         mgobj = Ground_801C2BA4(arg0->xC6);
-        HSD_ASSERT(0xA4B, mgobj);
+        if (mgobj == NULL) {
+            __assert((char*) &grIm_803E4068 + 0x690, 0xA4B, "mgobj");
+        }
         jobj = GET_JOBJ(mgobj);
         jobj2 = jobj;
-        HSD_ASSERT(0xA4C, jobj);
+        if (jobj == NULL) {
+            __assert((char*) &grIm_803E4068 + 0x690, 0xA4C, "jobj");
+        }
         HSD_JObjAddTranslationY(jobj2, farg0);
     }
 }
@@ -1393,14 +1402,20 @@ f32 grIceMt_801F993C(s32 arg0, s32 arg1)
             break;
         }
     }
-    HSD_ASSERTMSG(0xA9D, upper_ix < ICEMT_FIELD_MAX, "upper_ix<ICEMT_FIELD_MAX");
+    if (!(upper_ix < ICEMT_FIELD_MAX)) {
+        __assert((char*) &grIm_803E4068 + 0x690, 0xA9D,
+                 (char*) &grIm_803E4068 + 0x828);
+    }
 
     for (under_ix = 0; under_ix < ICEMT_FIELD_MAX; under_ix++) {
         if (arg1 == grIm_803E4068[under_ix].id) {
             break;
         }
     }
-    HSD_ASSERTMSG(0xAA2, under_ix < ICEMT_FIELD_MAX, "under_ix<ICEMT_FIELD_MAX");
+    if (!(under_ix < ICEMT_FIELD_MAX)) {
+        __assert((char*) &grIm_803E4068 + 0x690, 0xAA2,
+                 (char*) &grIm_803E4068 + 0x844);
+    }
 
     return -((t * grIm_803E4068[upper_ix].x8) -
              (t * grIm_803E4068[under_ix].x4 + grIm_804D69F4->x40));
@@ -1570,64 +1585,70 @@ void grIceMt_801F9ACC(Ground_GObj* gobj, float y, GrIceMtSegmentLookup ev,
     }
 }
 
-static inline HSD_GObj* grIceMt_801F71E8_inner(int id)
+static inline HSD_JObj** grIceMt_FA0BC_jobjs(Ground* g)
 {
-    return grIceMt_801F71E8(id);
-}
-static inline HSD_GObj* grIceMt_801F71E8_noinline(int id)
-{
-    return grIceMt_801F71E8_inner(id);
+    return &g->gv.icemt2.xC8;
 }
 
 void grIceMt_801FA0BC(s16* arg0)
 {
-    HSD_GObj* mgobj;
+    HSD_GObj* gobj;
     HSD_JObj* jobj;
-    Ground* gp2;
-    HSD_JObj** ptrs;
-    f32 f;
-    s16 id;
+    Ground* gp;
+    f32 frame;
+    PAD_STACK(24);
 
-    id = arg0[0];
-    f = grIceMt_801F993C(arg0[0], arg0[1]);
-    if (id != -1) {
-        mgobj = grIceMt_801F71E8_noinline(id);
-        HSD_ASSERT(0xB44, mgobj);
-        jobj = mgobj->hsd_obj;
-        HSD_ASSERT(0xB46, jobj);
-        HSD_JObjSetTranslateY(jobj, -20.0f * Ground_801C0498() + f);
+    frame = grIceMt_801F993C(arg0[0], arg0[1]);
+
+    if (arg0[0] != -1) {
+        gobj = grIceMt_801F71E8(arg0[0]);
+        if (gobj == NULL) {
+            __assert((char*) &grIm_803E4068 + 0x690, 0xB44, "mgobj");
+        }
+        jobj = gobj->hsd_obj;
+        if (jobj == NULL) {
+            __assert((char*) &grIm_803E4068 + 0x690, 0xB46, "jobj");
+        }
+        HSD_JObjSetTranslateY(jobj, grIm_804DB570 * Ground_801C0498() + frame);
         Ground_801C3214(arg0[0]);
-        Ground_801C2FE0(mgobj);
+        Ground_801C2FE0(gobj);
         Ground_801C32AC(arg0[0]);
     }
-    id = arg0[1];
-    if (id != -1) {
-        mgobj = grIceMt_801F71E8_noinline(id);
-        HSD_ASSERT(0xB50, mgobj);
-        jobj = mgobj->hsd_obj;
-        HSD_ASSERT(0xB52, jobj);
-        HSD_JObjSetTranslateY(jobj, -20.0f * Ground_801C0498());
+
+    if (arg0[1] != -1) {
+        gobj = grIceMt_801F71E8(arg0[1]);
+        if (gobj == NULL) {
+            __assert((char*) &grIm_803E4068 + 0x690, 0xB50, "mgobj");
+        }
+        jobj = gobj->hsd_obj;
+        if (jobj == NULL) {
+            __assert((char*) &grIm_803E4068 + 0x690, 0xB52, "jobj");
+        }
+        HSD_JObjSetTranslateY(jobj, grIm_804DB570 * Ground_801C0498());
         Ground_801C3214(arg0[1]);
-        Ground_801C2FE0(mgobj);
+        Ground_801C2FE0(gobj);
         Ground_801C32AC(arg0[1]);
-        gp2 = mgobj->user_data;
-        ((UnkFlagStruct*) &gp2->gv.icemt2.xC4)->b0 = 1;
-        ((UnkFlagStruct*) &gp2->gv.icemt2.xC4)->b1 = 1;
-        gp2 = mgobj->user_data;
-        if (((UnkFlagStruct*) &gp2->gv.icemt2.xC4)->b1) {
-            ((UnkFlagStruct*) &gp2->gv.icemt2.xC4)->b1 = 0;
-            ptrs = &gp2->gv.icemt2.xC8;
-            if (ptrs[0]) {
-                Ground_801C2D0C(0, ptrs[0]);
-            }
-            if (ptrs[1]) {
-                Ground_801C2D0C(1, ptrs[1]);
-            }
-            if (ptrs[2]) {
-                Ground_801C2D0C(2, ptrs[2]);
-            }
-            if (ptrs[3]) {
-                Ground_801C2D0C(3, ptrs[3]);
+
+        gp = gobj->user_data;
+        ((UnkFlagStruct*) &gp->gv.icemt2.xC4)->b0 = 1;
+        ((UnkFlagStruct*) &gp->gv.icemt2.xC4)->b1 = 1;
+        gp = gobj->user_data;
+        {
+            HSD_JObj** jobjs = grIceMt_FA0BC_jobjs(gp);
+            if (((UnkFlagStruct*) &gp->gv.icemt2.xC4)->b1) {
+                ((UnkFlagStruct*) &gp->gv.icemt2.xC4)->b1 = 0;
+                if (jobjs[0] != NULL) {
+                    Ground_801C2D0C(0, jobjs[0]);
+                }
+                if (jobjs[1] != NULL) {
+                    Ground_801C2D0C(1, jobjs[1]);
+                }
+                if (jobjs[2] != NULL) {
+                    Ground_801C2D0C(2, jobjs[2]);
+                }
+                if (jobjs[3] != NULL) {
+                    Ground_801C2D0C(3, jobjs[3]);
+                }
             }
         }
     }
