@@ -2589,26 +2589,30 @@ static inline void ftKb_SpecialNSpit_Anim_inline(Fighter_GObj* gobj,
 
 void ftKb_SpecialNSpit0_Anim(Fighter_GObj* gobj)
 {
+    UNUSED u32 unused1;
     Fighter* fp = getFighter(gobj);
     Item_GObj* item_gobj;
     ftKb_DatAttrs* da;
     itUnk2_DatAttrs attr;
-    PAD_STACK(0x4C);
+    PAD_STACK(0x40);
 
     if (fp->cmd_vars[0] != 0 && (item_gobj = fp->target_item_gobj) != NULL) {
         ftCommon_8007E2F4(fp, 0);
         lb_8000B1CC(
             fp->parts[ftParts_GetBoneIndex(fp, FtPart_TransN2)].joint, NULL,
             &attr.pos);
-        da = getFighter(gobj)->dat_attrs;
-        attr.vel.x = -(-fp->facing_dir) *
-                     da->specialn_ground_spit_initial_horizontal_velocity;
-        attr.vel.z = 0.0f;
-        attr.vel.y = 0.0f;
-        attr.float2 = da->specialn_spit_deceleration_rate;
-        attr.float1 = ((ftKb_DatAttrs*) getFighter(gobj)->dat_attrs)
-                          ->specialn_star_base_duration;
-        it_802F28C8(item_gobj, 0, it_802F295C(gobj, &attr));
+        {
+            f32 neg_facing = -fp->facing_dir;
+            da = getFighter(gobj)->dat_attrs;
+            attr.vel.x = -neg_facing *
+                         da->specialn_ground_spit_initial_horizontal_velocity;
+            attr.vel.z = 0.0f;
+            attr.vel.y = 0.0f;
+            attr.float2 = da->specialn_spit_deceleration_rate;
+            attr.float1 = ((ftKb_DatAttrs*) getFighter(gobj)->dat_attrs)
+                              ->specialn_star_base_duration;
+            it_802F28C8(item_gobj, 0, it_802F295C(gobj, &attr));
+        }
         fp->x1A64 = NULL;
         fp->target_item_gobj = NULL;
         fp->cmd_vars[0] = 0;

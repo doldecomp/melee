@@ -2375,7 +2375,7 @@ void ftCo_CapturePulledHi_Phys(Fighter_GObj* gobj)
     lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint, NULL,
                 &sp2C);
     tmp.x = sp20.x;
-    tmp.x = (new_var = tmp.x - sp2C.x); 
+    tmp.x = (new_var = tmp.x - sp2C.x);
     tmp.y = sp20.y - sp2C.y;
     tmp.z = sp20.z - sp2C.z;
     fp->cur_pos.x += tmp.x;
