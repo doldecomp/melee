@@ -111,36 +111,21 @@ void fn_80023254(s32 arg0)
     int n;
     int* shift_ptr;
     int i;
+    char* base;
 
-    arr_b44 = lbl_80433710.x434;
-    local_ptr = local_arr;
-    for (i = 0; i < 7; i++) {
-        arr_b44[0] = 0x37;
-        local_ptr[0] = 0;
-        arr_b44[1] = 0x37;
-        local_ptr[1] = 0;
-        arr_b44[2] = 0x37;
-        local_ptr[2] = 0;
-        arr_b44[3] = 0x37;
-        local_ptr[3] = 0;
-        arr_b44[4] = 0x37;
-        local_ptr[4] = 0;
-        arr_b44[5] = 0x37;
-        local_ptr[5] = 0;
-        arr_b44[6] = 0x37;
-        local_ptr[6] = 0;
-        arr_b44[7] = 0x37;
-        arr_b44 += 8;
-        local_ptr[7] = 0;
-        local_ptr += 8;
+    arr_b44 = lbl_80433B44;
+    for (i = 0; i < 0x38; i++) {
+        arr_b44[i] = 0x37;
+        local_arr[i] = 0;
     }
 
-    arr_b44 = lbl_80433710.x434;
+    arr_b44 = lbl_80433B44;
+    base = lbl_803BB300;
 
     for (count = 0; count <= 0x37; count++) {
         local_ptr = local_arr;
-        arr_5d0 = s32_arr_803BB5D0;
-        arr_4e4 = offsets_arr_803BC4E4;
+        arr_5d0 = (s8(*)[4]) (base + 0x2D0);
+        arr_4e4 = (int(*)[2]) (base + 0x11E4);
         j = 0;
 
         do {
@@ -151,40 +136,20 @@ void fn_80023254(s32 arg0)
                 goto next;
             }
 
-            if ((u32) offsets_arr_803BC4E4[*arr_b44][0] >= (u32) (*arr_4e4)[0])
+            if ((u32) ((int(*)[2]) (base + 0x11E4))[*arr_b44][0] >=
+                (u32) (*arr_4e4)[0])
             {
                 goto next;
             }
 
             if (count < 0x37) {
-                shift_ptr = &lbl_80433710.x434[0x37];
-                n = 0x37 - count;
-
-                if ((n >> 3) != 0) {
-                    for (i = n >> 3; i != 0; i--) {
-                        shift_ptr[0] = shift_ptr[-1];
-                        shift_ptr[-1] = shift_ptr[-2];
-                        shift_ptr[-2] = shift_ptr[-3];
-                        shift_ptr[-3] = shift_ptr[-4];
-                        shift_ptr[-4] = shift_ptr[-5];
-                        shift_ptr[-5] = shift_ptr[-6];
-                        shift_ptr[-6] = shift_ptr[-7];
-                        shift_ptr[-7] = shift_ptr[-8];
-                        shift_ptr -= 8;
-                    }
-                    n &= 7;
-                    if (n == 0) {
-                        goto insert;
-                    }
-                }
-
-                for (i = n; i != 0; i--) {
+                shift_ptr = &lbl_80433B44[0x37];
+                for (n = 0x37 - count; n != 0; n--) {
                     shift_ptr[0] = shift_ptr[-1];
                     shift_ptr--;
-                };
+                }
             }
 
-        insert:
             *arr_b44 = j;
             *local_ptr = 1;
 
@@ -2852,15 +2817,14 @@ s32 lbAudioAx_80028690(void)
         var_r29 = 0;
     }
 
-    strcpy(lbl_803BB380, lbl_803BB300 + 0x179C);
+    strcpy(lbl_803BB380, "/audio/");
     lbl_804D38D4 = 7;
 
     if (lbl_804D3878 == -1) {
         HSD_AudioSFXKeyOffAll();
         HSD_SynthSFXUnloadBank(0);
         if (st->x274[0] < 1) {
-            strcpy(&lbl_803BB340[lbl_804D38D0],
-                   *(char**) (lbl_803BB340 + 0x9FC));
+            strcpy(&lbl_803BB340[lbl_804D38D0], "main.ssm");
             st->x354[0] = HSD_SynthSFXLoad(lbl_803BB340, 0, 0, 0);
             HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
             st->x274[0] = 2;
@@ -2876,7 +2840,7 @@ s32 lbAudioAx_80028690(void)
 
         lbl_804D3878 = var_r29;
         AXDriver_8038DCFC();
-        strcpy(&lbl_803BB340[lbl_804D38D0], lbl_803BB340 + 0x17A8);
+        strcpy(&lbl_803BB340[lbl_804D38D0], "smash2.sem");
         AXDriver_8038DA70(lbl_803BB340, lb_800195D0);
 
         a = st->x354;
@@ -2896,32 +2860,28 @@ s32 lbAudioAx_80028690(void)
         HSD_SynthSFXUnloadBank(2);
 
         if (st->x274[0x33] < 1) {
-            strcpy(&lbl_803BB340[lbl_804D38D0],
-                   *(char**) (lbl_803BB340 + 0xAC8));
+            strcpy(&lbl_803BB340[lbl_804D38D0], "nr_name.ssm");
             st->x354[0x33] = HSD_SynthSFXLoad(lbl_803BB340, 1, 0, 0);
             HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
             st->x274[0x33] = 2;
         }
 
         if (st->x274[1] < 1) {
-            strcpy(&lbl_803BB340[lbl_804D38D0],
-                   *(char**) (lbl_803BB340 + 0xA00));
+            strcpy(&lbl_803BB340[lbl_804D38D0], "pokemon.ssm");
             st->x354[1] = HSD_SynthSFXLoad(lbl_803BB340, 1, 0, 0);
             HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
             st->x274[1] = 2;
         }
 
         if (st->x274[0x36] < 1) {
-            strcpy(&lbl_803BB340[lbl_804D38D0],
-                   *(char**) (lbl_803BB340 + 0xAD4));
+            strcpy(&lbl_803BB340[lbl_804D38D0], "end.ssm");
             st->x354[0x36] = HSD_SynthSFXLoad(lbl_803BB340, 1, 0, 0);
             HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
             st->x274[0x36] = 2;
         }
 
         if (st->x274[2] < 1) {
-            strcpy(&lbl_803BB340[lbl_804D38D0],
-                   *(char**) (lbl_803BB340 + 0xA04));
+            strcpy(&lbl_803BB340[lbl_804D38D0], "nr_title.ssm");
             st->x354[2] = HSD_SynthSFXLoad(lbl_803BB340, 2, 0, 0);
             HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
             st->x274[2] = 2;
@@ -2929,7 +2889,7 @@ s32 lbAudioAx_80028690(void)
     }
 
     {
-        s32 i;
+        int i;
         for (i = 0; i < 17; i++) {
             lbl_80433710.x2C[i] = 0x83D60;
             lbl_80433710.x70[i] = 0;

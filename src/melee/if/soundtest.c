@@ -40,6 +40,7 @@
 /* 3F9FDC */ static float un_803F9FDC;
 /* 3FA070 */ static int un_803FA070;
 /* 3FA090 */ static int un_803FA090;
+/* 3FA098 */ static float un_803FA098;
 /* 3FA09C */ static float un_803FA09C;
 /* 3FA0B0 */ static int un_803FA0B0;
 /* 3FA128 */ static struct {
@@ -51,17 +52,25 @@
     u8 x226;
     u8 x227;
 } un_803FA128;
-/* 3FA258 */ static struct {
+/* 3FA258 */ static struct un_803FA258_t {
     int x0;
-    int x4;
-    int x8;
-    int xC;
-    int x10;
-    u8 _pad14[0x14];
-    int x28;
-    int x2C;
-    int x30;
-    u8 _pad34[0xC4];
+    int x4[4];
+    int x14[4];
+    int x24[4];
+    int x34_pad;
+    int x38[4];
+    int x48[4];
+    int x58[4];
+    int x68[4];
+    f32 x78[4];
+    f32 x88[4];
+    f32 x98[4];
+    int xA8[4];
+    int xB8[4];
+    int xC8;
+    int xCC[4];
+    int xDC[4];
+    int xEC[3];
     int xF8;
     int xFC;
     int x100;
@@ -85,6 +94,7 @@
 } un_803FA258;
 /* 3FA348 */ static u16 un_803FA348;
 /* 3FA34C */ static u8 un_803FA34C;
+/* 3FA32C */ static u8 un_803FA32C;
 /* 3FA658 */ static u8 un_803FA658[0x290];
 /* 3FA8E8 */ static u8 un_803FA8E8[0x15C];
 /* 3FAA44 */ static u8 un_803FAA44[0xC0];
@@ -242,7 +252,22 @@ int un_802FF99C(int arg0)
     return 0;
 }
 
-/// #un_802FF9DC
+s32 un_802FF9DC(void)
+{
+    struct SmStData {
+        u8 pad0[0x18];
+        s32* x18;
+    }* d = (struct SmStData*) un_804D6DA8;
+    s32 i;
+
+    un_804D6DB4 = 0;
+    for (i = 0; i < un_804D6DB0; i++) {
+        un_804D6DB4 += d->x18[i];
+    }
+    un_803FA098 = (f32) un_804D6DB4;
+    un_803FA09C = (f32) (un_804D6DB4 + d->x18[un_804D6DB0]);
+    return 0;
+}
 
 int un_802FFB58(int arg0)
 {
@@ -377,7 +402,84 @@ void un_802FFEE0(s32* arg0)
     arg0[2] = 0;
 }
 
-/// #un_802FFF2C
+void un_802FFF2C(StartMeleeData* arg0)
+{
+    StartMeleeRules* r = &arg0->rules;
+    struct un_803FA258_t* s = &un_803FA258;
+    PlayerInitData* p;
+    s32 i;
+    s32 timer;
+
+    gm_80167A64(r);
+    r->x2_2 = 0;
+    r->is_teams = s->x4[1];
+    switch (s->xC8) {
+    case 0:
+        r->x0_0 = 0;
+        timer = s->xCC[1] + s->xCC[0] * 0x3C;
+        if (timer != 0) {
+            r->x10 = timer;
+            r->x0_6 = 1;
+        } else {
+            r->x0_6 = 0;
+        }
+        break;
+    case 1:
+        r->x0_0 = 1;
+        r->x0_6 = 0;
+        break;
+    case 2:
+        r->x0_0 = 2;
+        timer = s->xCC[1] + s->xCC[0] * 0x3C;
+        if (timer != 0) {
+            r->x10 = timer;
+            r->x0_6 = 1;
+        } else {
+            r->x0_6 = 0;
+        }
+        break;
+    default:
+        r->x0_0 = 0;
+        r->x0_6 = 0;
+        break;
+    }
+    r->xE = s->x4[1];
+    r->x20 = -1;
+    r->xB = s->xDC[0] - 1;
+    r->xC = -1;
+    r->x30 = s->xEC[0];
+    gm_80167A14(arg0->players);
+    for (i = 0; i < 2; i++) {
+        arg0->players[2 * i].c_kind = s->x4[2 * i];
+        arg0->players[2 * i].slot_type = s->x24[2 * i];
+        arg0->players[2 * i].color = s->x38[2 * i];
+        arg0->players[2 * i].sub_color = s->x48[2 * i];
+        arg0->players[2 * i].team = s->x58[2 * i];
+        arg0->players[2 * i].xC_b0 = un_803FA32C;
+        arg0->players[2 * i].x12 = s->x68[2 * i];
+        arg0->players[2 * i].x18 = s->x78[2 * i];
+        arg0->players[2 * i].x1C = s->x88[2 * i];
+        arg0->players[2 * i].xE = s->xA8[2 * i];
+        arg0->players[2 * i].cpu_level = s->xB8[2 * i];
+        arg0->players[2 * i].stocks = un_803FA32C;
+        arg0->players[2 * i].xC_b1 = 0;
+        arg0->players[2 * i].x20 = s->x98[2 * i];
+        arg0->players[2 * i + 1].c_kind = s->x4[2 * i + 1];
+        arg0->players[2 * i + 1].slot_type = s->x24[2 * i + 1];
+        arg0->players[2 * i + 1].color = s->x38[2 * i + 1];
+        arg0->players[2 * i + 1].sub_color = s->x48[2 * i + 1];
+        arg0->players[2 * i + 1].team = s->x58[2 * i + 1];
+        arg0->players[2 * i + 1].xC_b0 = un_803FA32C;
+        arg0->players[2 * i + 1].x12 = s->x68[2 * i + 1];
+        arg0->players[2 * i + 1].x18 = s->x78[2 * i + 1];
+        arg0->players[2 * i + 1].x1C = s->x88[2 * i + 1];
+        arg0->players[2 * i + 1].xE = s->xA8[2 * i + 1];
+        arg0->players[2 * i + 1].cpu_level = s->xB8[2 * i + 1];
+        arg0->players[2 * i + 1].stocks = un_803FA32C;
+        arg0->players[2 * i + 1].xC_b1 = 0;
+        arg0->players[2 * i + 1].x20 = s->x98[2 * i + 1];
+    }
+}
 
 bool un_803001DC(bool update_scene)
 {
@@ -398,7 +500,7 @@ int un_80300218(void)
 
 int un_80300248(int arg0)
 {
-    if (un_803FA258.x4 && arg0 == 1) {
+    if (un_803FA258.x4[0] && arg0 == 1) {
         lbAudioAx_80024030(1);
         gmMainLib_8015FB68();
     }
@@ -716,11 +818,11 @@ bool un_80300AF4(int arg0)
 {
     if (arg0 == 1) {
         lbAudioAx_80024030(1);
-        un_803FA258.x8 = 0x3F;
-        un_803FA258.x10 = 0xE;
-        un_803FA258.x28 = 3;
-        un_803FA258.x2C = 3;
-        un_803FA258.x30 = 3;
+        un_803FA258.x4[1] = 0x3F;
+        un_803FA258.x4[2] = 0xE;
+        un_803FA258.x24[1] = 3;
+        un_803FA258.x24[2] = 3;
+        un_803FA258.x24[3] = 3;
         gm_SetPendingScene(4);
         gm_801A4B60();
     }
@@ -731,11 +833,10 @@ bool un_80300B58(int arg0)
 {
     if (arg0 == 1) {
         lbAudioAx_80024030(1);
-        un_803FA258.x8 = 0x3B;
-        un_803FA258.x10 = 0x2;
-        un_803FA258.x28 = 3;
-        un_803FA258.x2C = 3;
-        un_803FA258.x30 = 3;
+        un_803FA258.x4[1] = 0x3B;
+        un_803FA258.x4[2] = 0x2;
+        un_803FA258.x24[1] = 3;
+        un_803FA258.x24[2] = 3;
         gm_SetPendingScene(4);
         gm_801A4B60();
     }

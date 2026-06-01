@@ -96,6 +96,89 @@ void __THPPrepBitStream(THPFileInfo* info)
     }
 }
 
+s32 THPDec_8032F8D4(u32 file_arg, void* out_arg)
+{
+    u8* p = (u8*) file_arg;
+    THPDec_8032FD40_Data* out = (THPDec_8032FD40_Data*) out_arg;
+    u8 sH[8];
+    u8 sV[8];
+    char jfif[] = "JFIF";
+    u8 found_jfif;
+    u8 marker;
+    u32 i;
+    u32 ncomp;
+    u32 len;
+
+    found_jfif = 0;
+    memset(out, 0, 0xC);
+    if (p[0] != 0xFF || p[1] != 0xD8) {
+        return 0;
+    }
+    p += 2;
+
+    do {
+        if (*p != 0xFF) {
+            return 0;
+        }
+        p++;
+        while ((s8) *p == 0xFF) {
+            p++;
+        }
+        marker = *p;
+        p++;
+
+        if (marker == 0xC0) {
+            out->_pad = (p[3] << 8) | p[4];
+            out->val1 = (p[5] << 8) | p[6];
+            ncomp = p[7];
+            p += 8;
+            if (ncomp != 3) {
+                return 0;
+            }
+            for (i = 0; i < ncomp; i++) {
+                sH[i] = p[i * 3 + 1] >> 4;
+                sV[i] = p[i * 3 + 1] & 0xF;
+            }
+            if (sH[0] / sH[1] == 2 && sH[0] / sH[2] == 2) {
+                if (sV[0] / sV[1] == 2 && sV[0] / sV[2] == 2) {
+                    out->val2 = 4;
+                } else if (sV[0] == sV[1] && sV[0] == sV[2]) {
+                    out->val2 = 2;
+                }
+            } else if (sH[0] == sH[1] && sH[0] == sH[2]) {
+                if (sV[0] == sV[1] && sV[0] == sV[2]) {
+                    out->val2 = 1;
+                }
+            } else {
+                return 0;
+            }
+        } else if (marker == 0xE0) {
+            len = (p[0] << 8) | p[1];
+            p += 2;
+            for (i = 0; i < 5; i++) {
+                if (*p != jfif[i]) {
+                    return 0;
+                }
+                p++;
+            }
+            found_jfif = 1;
+            for (i = 0; i < len - 7; i++) {
+                p++;
+            }
+        } else if (marker == 0xDA) {
+            return 1;
+        } else if (marker >= 0xC0 && marker <= 0xFE) {
+            len = (p[0] << 8) | p[1];
+            p += 2;
+            for (i = 0; i < len - 2; i++) {
+                p++;
+            }
+        }
+    } while (!(out->val2 != 0 && found_jfif != 0));
+
+    return 1;
+}
+
 static inline void __THPGQRSetup(void)
 {
     register u32 tmp1, tmp2;
@@ -375,6 +458,197 @@ void THPDec_803300E0(u32* data)
         buffer[11] = offset - 128;
         buffer += 8;
         count += 8;
+    }
+}
+
+s32 THPDec_80330158(THPFileInfo* info)
+{
+    u8 jfif[] = "JFIF";
+    u8* start;
+    u8* p;
+    u8* p2;
+    u8* sig;
+    u8 b1;
+    u8 b2;
+    u32 len;
+
+    start = info->file;
+    len = (u16) ((start[0] << 8) | start[1]);
+    info->file = start + 2;
+    sig = jfif;
+    p = info->file;
+    info->file = p + 1;
+    if (*p != *sig) {
+        return 3;
+    }
+    p = info->file;
+    info->file = p + 1;
+    if (*p != *++sig) {
+        return 3;
+    }
+    p = info->file;
+    info->file = p + 1;
+    if (*p != *++sig) {
+        return 3;
+    }
+    p = info->file;
+    info->file = p + 1;
+    if (*p != *++sig) {
+        return 3;
+    }
+    p = info->file;
+    info->file = p + 1;
+    if (*p != *++sig) {
+        return 3;
+    }
+    info->file += 2;
+    info->file += 1;
+    info->file += 1;
+    info->file += 1;
+    info->file += 1;
+    p = info->file;
+    info->file = p + 1;
+    p2 = info->file;
+    info->file = p2 + 1;
+    b1 = *p;
+    b2 = *p2;
+    if (b1 != 0 || b2 != 0) {
+        return 7;
+    }
+    if (len + 4 != (u32) (info->file - info->x0C)) {
+        return 8;
+    }
+    return 0;
+}
+
+typedef struct THPScanComp {
+    /* 0x00 */ u8 x00;
+    /* 0x01 */ u8 samplingH;
+    /* 0x02 */ u8 samplingV;
+    /* 0x03 */ u8 pad03[3];
+    /* 0x06 */ u16 x06;
+    /* 0x08 */ u8 pad08[0x14 - 0x08];
+    /* 0x14 */ s32 x14;
+    /* 0x18 */ s32 x18;
+    /* 0x1C */ s32 x1C;
+    /* 0x20 */ s32 x20;
+    /* 0x24 */ s32 x24;
+    /* 0x28 */ s32 x28;
+} THPScanComp;
+
+typedef struct THPScanInfo {
+    /* 0x000 */ u8 pad00[0x70];
+    /* 0x070 */ u16 x70;
+    /* 0x072 */ u16 x72;
+    /* 0x074 */ u8 pad74[0x7A - 0x74];
+    /* 0x07A */ u8 x7A;
+    /* 0x07B */ u8 x7B;
+    /* 0x07C */ u8 x7C;
+    /* 0x07D */ u8 pad7D[0x838 - 0x7D];
+    /* 0x838 */ THPScanComp components[3];
+    /* 0x8BC */ u8 x8BC[0x10];
+    /* 0x8CC */ u16 x8CC;
+    /* 0x8CE */ u16 x8CE;
+    /* 0x8D0 */ u16 x8D0;
+} THPScanInfo;
+
+s32 THPDec_803310CC(THPScanInfo* info);
+
+s32 THPDec_803310CC(THPScanInfo* info)
+{
+    u8 i;
+    s32 count;
+    s32 j;
+    THPScanComp* c;
+
+    info->x8CC = (info->x7A * 8 + info->x70 - 1) / (info->x7A * 8);
+    info->x8D0 = (info->x7B * 8 + info->x72 - 1) / (info->x7B * 8);
+    info->x8CE = 0;
+    for (i = 0; i < info->x7C; i++) {
+        c = &info->components[i];
+        c->x28 = (info->x7A * 8 + info->x70 * c->samplingH - 1) / (info->x7A * 8);
+        c->x24 = (info->x7B * 8 + info->x72 * c->samplingV - 1) / (info->x7B * 8);
+        c->x14 = c->samplingH;
+        c->x18 = c->samplingV;
+        c->x1C = c->x14 * c->x18;
+        c->x20 = c->x14 * 8;
+        count = c->x1C;
+        if (info->x8CE + count > 0x10) {
+            return 0x11;
+        }
+        for (j = 0; j < count; j++) {
+            info->x8BC[info->x8CE++] = i;
+        }
+        if (info->x8CE > 6) {
+            OSReport("THP does not support anything other than 4:2:0!\n");
+            return 0;
+        }
+        c->x06 = 0;
+    }
+    return 0;
+}
+
+typedef struct THPDecodeInfo {
+    /* 0x000 */ u8 pad00[0x76];
+    /* 0x076 */ u16 x76;
+    /* 0x078 */ u8 pad78[0x8D4 - 0x78];
+    /* 0x8D4 */ u16 x8D4;
+    /* 0x8D6 */ u8 pad8D6[0x8EA - 0x8D6];
+    /* 0x8EA */ u16 x8EA;
+    /* 0x8EC */ u16 pad8EC;
+    /* 0x8EE */ u16 x8EE;
+    /* 0x8F0 */ void* x8F0;
+    /* 0x8F4 */ void* x8F4;
+    /* 0x8F8 */ void* x8F8;
+} THPDecodeInfo;
+
+void THPDec_80331340(s32 arg0, void* arg1, void* arg2, void* arg3, s32 arg4)
+{
+    THPDecodeInfo* info = (THPDecodeInfo*) arg0;
+    info->x8F0 = arg1;
+    info->x8F4 = arg2;
+    info->x8F8 = arg3;
+
+#ifdef __MWERKS__ // clang-format off
+    asm {
+        li      r3, 0x0007
+        oris    r3, r3, 0x0007
+        mtspr   GQR5, r3
+        li      r3, 0x3D04
+        oris    r3, r3, 0x3D04
+        mtspr   GQR6, r3
+    }
+#endif // clang-format on
+
+    __THPPrepBitStream((THPFileInfo*) info);
+    while (info->x8EE < info->x8EA + info->x76) {
+        __THPDecompressiMCURow640x480();
+        info->x8EE += info->x8D4;
+    }
+}
+
+void THPDec_803313D0(s32 arg0, void* arg1, void* arg2, void* arg3)
+{
+    THPDecodeInfo* info = (THPDecodeInfo*) arg0;
+    info->x8F0 = arg1;
+    info->x8F4 = arg2;
+    info->x8F8 = arg3;
+
+#ifdef __MWERKS__ // clang-format off
+    asm {
+        li      r3, 0x0007
+        oris    r3, r3, 0x0007
+        mtspr   GQR5, r3
+        li      r3, 0x3D04
+        oris    r3, r3, 0x3D04
+        mtspr   GQR6, r3
+    }
+#endif // clang-format on
+
+    __THPPrepBitStream((THPFileInfo*) info);
+    while (info->x8EE < info->x8EA + info->x76) {
+        __THPDecompressiMCURowNxN();
+        info->x8EE += info->x8D4;
     }
 }
 

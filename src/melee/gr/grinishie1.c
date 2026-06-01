@@ -14,6 +14,7 @@
 #include "gr/grmaterial.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
+#include "gr/stage.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
@@ -927,7 +928,6 @@ void fn_801FBEB8(Ground* gr, s32 block_id, CollData* arg2, s32 arg3,
     }
 }
 
-/// #grInishie1_801FC4A0
 void grInishie1_801FC4A0(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
@@ -960,7 +960,59 @@ void grInishie1_801FC4A0(HSD_GObj* gobj)
                           gp->gv.inishie1.xFC - gp->gv.inishie1.xF0);
 }
 
-/// #grInishie1_801FC664
+void grInishie1_801FC664(HSD_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    f32 t;
+    f32 bottom;
+    UNUSED u32 unused1;
+    Vec3 sp24;
+    Vec3 sp18;
+    UNUSED u32 unused2;
+    UNUSED u32 unused3;
+    UNUSED u32 unused4;
+
+    switch (gp->gv.inishie1.xEE) {
+    case 0:
+        grInishie1_801FC110(gobj);
+        return;
+    case 1:
+        gp->gv.inishie1.xF4 += grI1_804D69F8->unk44;
+        t = grI1_804D69F8->unk48;
+        if (gp->gv.inishie1.xF4 > t) {
+            gp->gv.inishie1.xF4 = t;
+        }
+        HSD_JObjAddTranslationY(gp->gv.inishie1.x100,
+                                -gp->gv.inishie1.xF4);
+        HSD_JObjAddTranslationY(gp->gv.inishie1.x104,
+                                -gp->gv.inishie1.xF4);
+        bottom = -30.0f + Stage_GetBlastZoneBottomOffset();
+        lb_8000B1CC(gp->gv.inishie1.x100, NULL, &sp18);
+        lb_8000B1CC(gp->gv.inishie1.x104, NULL, &sp24);
+        if (sp18.y < bottom && sp24.y < bottom) {
+            gp->gv.inishie1.xEE = 2;
+            gp->gv.inishie1.xF4 = 0.0f;
+            gp->gv.inishie1.xEC = grI1_804D69F8->unk4C;
+        }
+        return;
+    case 2:
+        gp->gv.inishie1.xEC--;
+        if (gp->gv.inishie1.xEC == 0) {
+            gp->gv.inishie1.xEE = 3;
+            HSD_JObjSetTranslateY(gp->gv.inishie1.x100, 0.0f);
+            HSD_JObjSetTranslateY(gp->gv.inishie1.x104, 0.0f);
+            mpLib_80055E9C(0x14);
+            mpLib_80055E9C(0x15);
+            mpLib_80057424(0x14);
+            mpLib_80057424(0x15);
+            return;
+        }
+        break;
+    case 3:
+        grInishie1_801FC4A0(gobj);
+        break;
+    }
+}
 
 void fn_801FC9AC(Ground* gr, s32 block_id, s32 arg2, s32 dist,
                  enum mpLib_GroundEnum arg4)

@@ -413,6 +413,12 @@ void gm_801B06B0(CSSData* css_data, u8 type, s8 c_kind, s8 stocks, s8 color,
     css_data->data.data.players[0].stocks = stocks;
 }
 
+static void gm_801B07E8_layer(CSSData* css_data, s8* c_kind, s8* stocks,
+                              s8* color, s8* arg4, u8* level)
+{
+    gm_801B07E8(css_data, c_kind, stocks, color, arg4, level);
+}
+
 #pragma push
 #pragma dont_inline on
 void gm_801B0730(CSSData* css_data, s8* c_kind, u8* stocks, u8* color,
@@ -686,7 +692,44 @@ void gm_801B0CF0(GameScene* arg0)
     }
 }
 
-/// #gm_801B0DD0
+typedef struct GmB03MatchData {
+    /* 0x0 */ u8 x0;
+    /* 0x1 */ s8 x1;
+    /* 0x2 */ s8 x2;
+    /* 0x3 */ s8 x3;
+    /* 0x4 */ s8 x4;
+    /* 0x5 */ u8 pad5[3];
+    /* 0x8 */ MatchEnd me;
+} GmB03MatchData;
+
+void gm_801B0DD0(GameScene* arg0)
+{
+    GmB03MatchData* data = gm_801A427C(arg0);
+    MatchEnd* me = &data->me;
+    s32 i;
+
+    data->x0 = (data->x0 & ~0x80) | ((un_803FA258[0x178 / 4] << 7) & 0x80);
+    data->x0 = (data->x0 & ~0x40) | ((un_803FA258[0x17C / 4] << 6) & 0x40);
+    data->x1 = un_803FA258[0x168 / 4];
+    data->x2 = un_803FA258[0x16C / 4];
+    data->x3 = un_803FA258[0x170 / 4];
+    data->x4 = un_803FA258[0x174 / 4];
+    gm_80166A98(me, un_803FA258[0x180 / 4], un_803FA258[0x144 / 4],
+                un_803FA258[0x158 / 4] - 1, un_803FA258[0x148 / 4],
+                un_803FA258[0x15C / 4] - 1, un_803FA258[0x14C / 4],
+                un_803FA258[0x160 / 4] - 1, un_803FA258[0x150 / 4],
+                un_803FA258[0x164 / 4] - 1);
+    for (i = 0; i < 4; i++) {
+        if (me->player_standings[i].slot_type != 3 &&
+            me->player_standings[i].is_big_loser == 0) {
+            lbAudioAx_80026E84(me->player_standings[i].character_kind);
+        }
+    }
+    lbAudioAx_80026F2C(0x14);
+    lbAudioAx_8002702C(4, 0);
+    gm_80168FC4();
+    gm_801701A0();
+}
 
 void gm_801B0F1C(GameScene* arg0)
 {
@@ -1500,7 +1543,71 @@ void gm_801B1B74(GameScene* arg0)
 }
 #pragma dont_inline reset
 
-/// #gm_801B1C24
+void gm_801B1C24(GameScene* arg0)
+{
+    VsModeData* vs = &gmMainLib_804D3EE0->unk_D10;
+    CSSData* css = gm_801A4284(arg0);
+    s32 i;
+    u64 mask;
+    PreloadCacheScene* cache;
+
+    if (css->pending_scene_change == 2) {
+        gm_801A42F8(GM_MENU);
+        return;
+    }
+    gm_80167A14(vs->data.players);
+    gm_801B0730(css, &vs->data.players[0].c_kind, NULL,
+                &vs->data.players[0].color, &vs->data.players[0].xA, NULL);
+    gm_801B07E8_layer(css, &vs->data.players[1].c_kind, NULL,
+                      (s8*) &vs->data.players[1].color,
+                      (s8*) &vs->data.players[1].xA, NULL);
+    vs->data.players[1].xE = 0;
+    for (i = 2; i < 4; i++) {
+        vs->data.players[i] = vs->data.players[1];
+        vs->data.players[i].color = (vs->data.players[i - 1].color + 1) %
+                                    gm_80169238(vs->data.players[i].c_kind);
+        if (vs->data.players[i].color == vs->data.players[0].color) {
+            vs->data.players[i].color = (vs->data.players[i].color + 1) %
+                                        gm_80169238(vs->data.players[i].c_kind);
+        }
+        vs->data.players[i].slot_type = 3;
+    }
+    if (gm_804D68C0 == 0) {
+        vs->data.players[1].slot = 0;
+        vs->data.players[2].slot = 0;
+        vs->data.players[3].slot = 0;
+    } else {
+        PlayerInitData* p = &vs->data.players[1];
+        if (gm_804D68C0 != 0) {
+            vs->data.players[1].slot = 1;
+            p++;
+        }
+        if (gm_804D68C0 != 1) {
+            p->slot = 2;
+            p++;
+        }
+        if (gm_804D68C0 != 2) {
+            p->slot = 3;
+            p++;
+        }
+        if (gm_804D68C0 != 3) {
+            p->slot = 4;
+        }
+    }
+    cache = lbDvd_8001822C();
+    cache->game_cache.entries[2].char_id = (s8) vs->data.players[2].c_kind;
+    cache->game_cache.entries[2].color = vs->data.players[2].color;
+    cache->game_cache.entries[3].char_id = (s8) vs->data.players[3].c_kind;
+    cache->game_cache.entries[3].color = vs->data.players[3].color;
+    lbDvd_80018254();
+    mask = 0;
+    for (i = 0; i < 4; i++) {
+        mask |= lbAudioAx_80026E84(vs->data.players[i].c_kind);
+    }
+    lbAudioAx_80026F2C(0x14);
+    lbAudioAx_8002702C(4, mask);
+    lbAudioAx_80027168();
+}
 
 void gm_801B1EB8(GameScene* arg0)
 {

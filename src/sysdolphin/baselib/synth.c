@@ -30,9 +30,115 @@ void HSD_AudioFree(void* ptr)
     OSFreeToHeap(HSD_Synth_804D6018, ptr);
 }
 
-/// #HSD_SynthSFXSampleLoadCallback
-
 extern void* HSD_Synth_804D7730;
+extern u32* HSD_Synth_804D7734;
+
+struct SfxLoadStreamNode {
+    /* 0x00 */ struct SfxLoadStreamNode* x0;
+    /* 0x04 */ s32 x4;
+    /* 0x08 */ s32 x8;
+    /* 0x0C */ s32 xC;
+    /* 0x10 */ s32 x10;
+    /* 0x14 */ s32 x14;
+};
+
+void HSD_SynthSFXSampleLoadCallback(int result, int length, void* addr,
+                                    int cancelflag)
+{
+    BOOL intr;
+    s32 i;
+
+    if (HSD_Synth_804D7738 == 0) {
+        int bankID = HSD_Synth_804C2A60[0].bankID;
+        u32* buf = (u32*) HSD_Synth_804D7730;
+        u32 data_bytes = hsd_SynthSFXLoadBuf[0] - 0x10;
+        s32 src_idx = (data_bytes >> 2) - 1;
+        u32 total = (hsd_SynthSFXLoadBuf[2] * 8 + hsd_SynthSFXLoadBuf[0] + 0x37) &
+                    ~0x1F;
+        u32 shift = (total - data_bytes) >> 2;
+        u32 dnw;
+        AXVPB** pp;
+        struct SfxLoadStreamNode* node;
+        u8* cur;
+        s32 count;
+        s32 base;
+        s32 bank2;
+
+        for (i = src_idx; i >= 0; i--) {
+            buf[i + shift] = buf[i];
+        }
+        dnw = (total - hsd_SynthSFXLoadBuf[0]) >> 2;
+        buf[dnw] = hsd_SynthSFXLoadBuf[4];
+        buf[dnw + 1] = hsd_SynthSFXLoadBuf[5];
+        buf[dnw + 2] = hsd_SynthSFXLoadBuf[6];
+        buf[dnw + 3] = hsd_SynthSFXLoadBuf[7];
+        HSD_Synth_804D7734 = &buf[dnw];
+
+        pp = &HSD_Synth_804C2AE0[bankID];
+        while (*pp != NULL) {
+            pp = &(*pp)->next;
+        }
+        *pp = (AXVPB*) buf;
+
+        node = (struct SfxLoadStreamNode*) buf;
+        node->x0 = NULL;
+        node->x4 = HSD_Synth_804C2A60[0].entrynum;
+        node->x10 = hsd_SynthSFXBank[bankID];
+        node->x14 = hsd_SynthSFXLoadBuf[1];
+        count = hsd_SynthSFXLoadBuf[2];
+        base = hsd_SynthSFXLoadBuf[3];
+        node->x8 = base;
+        node->xC = count;
+        bank2 = hsd_SynthSFXBank[bankID] * 2;
+
+        cur = (u8*) buf + 0x18;
+        for (i = 0; i < count; i++) {
+            s32 n = *HSD_Synth_804D7734;
+            s32 nbytes = (n << 6) + 8;
+            s32 k;
+            s32 id;
+            struct SfxLoadStreamNode* nn;
+            void** bucket;
+
+            memcpy(cur + 8, HSD_Synth_804D7734, nbytes);
+            for (k = 0; k < n; k++) {
+                u8* e = cur + k * 0x40;
+                if (*(u32*) (e + 0x10) != 0) {
+                    *(u32*) (e + 0x14) += bank2;
+                } else {
+                    *(u32*) (e + 0x14) = HSD_Synth_804D7784;
+                }
+                *(u32*) (e + 0x18) += bank2;
+                *(u32*) (e + 0x1C) += bank2;
+            }
+            nn = (struct SfxLoadStreamNode*) cur;
+            id = base + i;
+            nn->x4 = id;
+            bucket = &HSD_Synth_804C29E0[id & 0x1F];
+            nn->x0 = (struct SfxLoadStreamNode*) *bucket;
+            *bucket = nn;
+            HSD_Synth_804D7734 += ((u32) nbytes & ~3) >> 2;
+            cur += ((n << 6) + 0x10) & ~3;
+        }
+        if (HSD_Synth_804C2A60[0].x8 != 0) {
+            ((void (*)(s32, s32)) HSD_Synth_804C2A60[0].x8)(
+                HSD_Synth_804C2A60[0].entrynum, HSD_Synth_804C2A60[0].xC);
+        }
+        hsd_SynthSFXBank[bankID] += hsd_SynthSFXLoadBuf[1];
+    } else {
+        if (HSD_Synth_804D7730 != NULL) {
+            OSFreeToHeap(HSD_Synth_804D6018, HSD_Synth_804D7730);
+        }
+        HSD_Synth_804D7738 = 0;
+    }
+    intr = OSDisableInterrupts();
+    HSD_Synth_804D772C -= 1;
+    for (i = 0; i < HSD_Synth_804D772C; i++) {
+        HSD_Synth_804C2A60[i] = HSD_Synth_804C2A60[i + 1];
+    }
+    HSD_SynthSFXLoadNewProc();
+    OSRestoreInterrupts(intr);
+}
 
 static void HSD_SynthSFXHeaderLoadCallback(int result, int length, void* addr,
                                            int cancelflag)
@@ -754,7 +860,135 @@ void HSD_SynthSFXSetPriority(int id, int prio)
     }
 }
 
-/// #HSD_Synth_8038A000
+s32 HSD_Synth_8038A000(void)
+{
+    BOOL intr;
+    int i;
+    struct HSD_SynthSFXNode* node;
+    struct HSD_SynthSFXNode** pnode;
+
+    intr = OSDisableInterrupts();
+    if (HSD_Synth_804D7758 != 0) {
+        int ch;
+        for (ch = 0; ch < 16; ch++) {
+            int mask = 1 << ch;
+            if (HSD_Synth_804D7758 & mask) {
+                int cnt = HSD_Synth_804C28E0_1784[ch].x178C;
+                if (cnt != 0) {
+                    HSD_Synth_804C28E0_1784[ch].x1784 =
+                        (HSD_Synth_804C28E0_1784[ch].x1784 * ((f32) cnt - 1.0f)) /
+                            (f32) cnt +
+                        HSD_Synth_804C28E0_1784[ch].x1788 / (f32) cnt;
+                    HSD_Synth_804C28E0_1784[ch].x178C -= 1;
+                }
+                if (HSD_Synth_804C28E0_1784[ch].x178C == 0) {
+                    HSD_Synth_804C28E0_1784[ch].x1784 =
+                        HSD_Synth_804C28E0_1784[ch].x1788;
+                    HSD_Synth_804D7758 &= ~mask;
+                }
+            }
+        }
+    }
+    pnode = &HSD_Synth_804D774C;
+    while ((node = *pnode) != NULL) {
+        int active = 0;
+        s16 vol;
+        s32 delta;
+
+        if (node->x0 <= 0) {
+            node->volume_update_pending = 0;
+            *pnode = node->x20;
+            continue;
+        }
+        if (node->user_vol[0].x4 != 0) {
+            int c = node->user_vol[0].x4;
+            node->unk28 = (node->unk28 * ((f32) c - 1.0f)) / (f32) c +
+                          node->user_vol[0].volume / (f32) c;
+            node->user_vol[0].x4 -= 1;
+            if (node->user_vol[0].x4 != 0) {
+                active = 1;
+            }
+        }
+        if (node->user_vol[1].x4 != 0) {
+            int c = node->user_vol[1].x4;
+            node->user_vol[0].x8_float =
+                (node->user_vol[0].x8_float * ((f32) c - 1.0f)) / (f32) c +
+                node->user_vol[1].volume / (f32) c;
+            node->user_vol[1].x4 -= 1;
+            if (node->user_vol[1].x4 != 0) {
+                active = 1;
+            }
+        }
+        if (HSD_Synth_804C28E0_1784[node->xB].x178C != 0) {
+            active = 1;
+        }
+        if (!(node->flags & 3)) {
+            vol = (s16) (32767.0f *
+                         (node->user_vol[0].x8_float *
+                          (node->unk28 *
+                           (HSD_Synth_804D6030 *
+                            HSD_Synth_804C28E0_1784[node->xB].x1784))));
+        } else {
+            vol = 0;
+            active = 0;
+        }
+        delta = (vol - node->x24) / 160;
+        if (delta > 0x14) {
+            delta = 0x14;
+        } else if (delta < -0x14) {
+            delta = -0x14;
+        }
+        for (i = 0; i < node->voice_count; i++) {
+            AXSetVoiceVeDelta(node->voice[i], (s16) delta);
+        }
+        node->x24 += delta * 0xA0;
+        if (delta == 0 && (active == 0 || (f32) vol == 0.0f)) {
+            AXPBVE ve;
+            node->x24 = (u16) vol;
+            ve.currentVolume = vol;
+            ve.currentDelta = 0;
+            for (i = 0; i < node->voice_count; i++) {
+                node->voice[i]->sync &= 0xFFFFFBFF;
+                AXSetVoiceVe(node->voice[i], &ve);
+            }
+            if (active == 0) {
+                u8 flags;
+                node->volume_update_pending = 0;
+                *pnode = node->x20;
+                flags = node->flags;
+                if (flags & 1) {
+                    for (i = 0; i < node->voice_count; i++) {
+                        AXFreeVoice(node->voice[i]);
+                        hsd_SynthSFXNodes[node->voice[i]->index].x0 = 0;
+                    }
+                } else if ((flags & 6) == 2) {
+                    node->flags = flags | 6;
+                    for (i = 0; i < node->voice_count; i++) {
+                        f32 ratio;
+                        u8 flags2 = node->flags;
+                        if (flags2 & 4) {
+                            ratio = 0.0f;
+                        } else {
+                            ratio = node->x18[1] * (node->x14 * node->x18[0]);
+                        }
+                        if (!(flags2 & 8)) {
+                            int j;
+                            for (j = 0; j < node->voice_count; j++) {
+                                AXSetVoiceSrcRatio(node->voice[j], ratio);
+                            }
+                        }
+                    }
+                    if (driverPauseCallback != NULL && node->x27 == 1) {
+                        driverPauseCallback(node->x0);
+                    }
+                }
+                continue;
+            }
+        }
+        pnode = &node->x20;
+    }
+    return OSRestoreInterrupts(intr);
+}
 
 void HSD_SynthSFXUpdateVolume(struct HSD_SynthSFXNode* node)
 {
@@ -902,7 +1136,7 @@ void HSD_SynthSFXSetDriverMasterClockCallback(UNK_T callback)
     driverMasterClockCallback = callback;
 }
 
-void HSD_SynthSFXSetDriverPauseCallback(UNK_T callback)
+void HSD_SynthSFXSetDriverPauseCallback(void (*callback)(s32))
 {
     driverPauseCallback = callback;
 }
@@ -964,7 +1198,82 @@ void HSD_Synth_8038AD74(u32 offset, uintptr_t src)
                       HSD_SynthResetStreamCounters, 0);
 }
 
-/// #HSD_Synth_8038ADD0(void)
+extern s32 HSD_Synth_804D7764;
+extern u32 HSD_Synth_804D7770;
+extern u32 HSD_Synth_804D7774;
+
+void HSD_Synth_8038ADD0(void)
+{
+    struct HSD_SynthSFXNode* node = getNode(HSD_Synth_804D7760);
+    s32 pos;
+    s32 i;
+    BOOL intr;
+    s32 src;
+
+    if (node == NULL) {
+        return;
+    }
+    if (node->flags & 8) {
+        return;
+    }
+    pos = (u32) (*(u32*) ((u8*) node->voice[0] + 0x1B2) -
+                 HSD_Synth_804D7780 * 2) >>
+          0x11;
+    if (pos != HSD_Synth_804D7774) {
+        HSD_Synth_804D7774 = pos;
+        for (i = 0; i < node->voice_count; i++) {
+            AXSetVoiceEndAddr(
+                node->voice[i],
+                (HSD_Synth_804D7780 + (HSD_Synth_804D7774 << 0x10)) * 2 +
+                    (i * lbl_804C4540[HSD_Synth_804D7774].x0 +
+                     lbl_804C4540[HSD_Synth_804D7774].x4));
+        }
+    }
+    if (pos == HSD_Synth_804D7770 && pos != HSD_Synth_804D776C) {
+        if ((u32) (lbl_804C4540[HSD_Synth_804D7770].x8 + 0x10000) == -1U) {
+            HSD_Synth_804D7770 = (HSD_Synth_804D7770 + 1) % 3;
+            for (i = 0; i < node->voice_count; i++) {
+                AXSetVoiceLoop(node->voice[i], 0);
+                AXSetVoiceLoopAddr(node->voice[i], HSD_Synth_804D7784);
+            }
+        } else {
+            HSD_Synth_804D7770 = (HSD_Synth_804D7770 + 1) % 3;
+            for (i = 0; i < node->voice_count; i++) {
+                AXSetVoiceLoopAddr(
+                    node->voice[i],
+                    (HSD_Synth_804D7780 + (HSD_Synth_804D7770 << 0x10)) * 2 +
+                        (i * lbl_804C4540[HSD_Synth_804D7770].x0 + 2));
+                AXSetVoiceAdpcmLoop(
+                    node->voice[i],
+                    (AXPBADPCMLOOP*) ((u8*) &lbl_804C4540[HSD_Synth_804D7770] +
+                                      0xC + i * 8));
+            }
+        }
+    }
+    if ((s32) ((HSD_Synth_804D776C + 1) % 3) != pos) {
+        intr = OSDisableInterrupts();
+        if (HSD_Synth_804D7778 != 0 ||
+            HSD_Synth_804D7768 != HSD_Synth_804D776C) {
+            OSRestoreInterrupts(intr);
+            return;
+        }
+        if (getNode(HSD_Synth_804D7760) != NULL) {
+            src = lbl_804C4540[HSD_Synth_804D776C].x8;
+            if (src == -1) {
+                HSD_Synth_804D776C = (HSD_Synth_804D776C + 1) % 3;
+            } else {
+                HSD_Synth_804D7768 = (HSD_Synth_804D776C + 1) % 3;
+                HSD_Synth_804D7778 = 1;
+                HSD_DevComRequest(
+                    HSD_Synth_804D7764, src,
+                    (uintptr_t) &lbl_804C4540[HSD_Synth_804D7768], 0x20, 0x21,
+                    0, (HSD_DevComCallback) HSD_Synth_8038AD74,
+                    (void*) (src + 0x20));
+            }
+        }
+        OSRestoreInterrupts(intr);
+    }
+}
 
 void HSD_Synth_8038B120(void)
 {
@@ -1036,7 +1345,7 @@ void HSD_SynthPStreamFirstHakoHeaderCallback(void)
                       (HSD_DevComCallback) HSD_Synth_8038B120, 0);
 }
 
-extern s32 HSD_Synth_804D7770;
+extern u32 HSD_Synth_804D7770;
 extern u32 HSD_Synth_804D7774;
 
 void HSD_SynthPStreamHeaderCallback(int arg0, int arg1, void* arg2,

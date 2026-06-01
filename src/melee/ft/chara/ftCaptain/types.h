@@ -73,6 +73,7 @@ union ftCaptain_MotionVars {
         /* fp+2340 */ u16 x0;
         /* fp+2342 */ u16 x2;
         /* fp+2344 */ float friction;
+        /* fp+2348 */ s32 x4;
     } speciallw;
 };
 
