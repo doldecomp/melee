@@ -30,6 +30,16 @@
 #include <dolphin/os.h>
 typedef char* GlyphRow[4];
 
+typedef struct MnNameNewDataLayout {
+    AnimLoopSettings anim[3];
+    u16 key_jobj_ids[8];
+    char* x34[50];
+    char* xFC[50];
+    char* character_bytes[50];
+    GlyphRow lower_glyphs[50];
+    GlyphRow upper_glyphs[50];
+} MnNameNewDataLayout;
+
 extern volatile char mnNameNew_NullCharacter;
 extern u8 mnNameNew_PortInUse;
 extern char mnNameNew_CurrentNameText[0x10];
@@ -456,12 +466,12 @@ bool NameContainsOnlySpaces(void)
     for (i = 0; i < 4; i++) {
         if (null_char != text[0]) {
             if (space0 != text[0] || sp[1] != text[1]) {
-                return FALSE;
+                return false;
             }
         }
         text += 3;
     }
-    return TRUE;
+    return true;
 }
 
 s32 WriteCharactersForNameAtIndex(u8 arg0, s32 arg1)
@@ -524,8 +534,10 @@ char* AddCharacterToName(char* arg0, u8 arg1, u8 arg2, u8 arg3)
     char ch;
     char* var_r4;
     char** table;
+    MnNameNewDataLayout* layout;
     u32 temp;
 
+    layout = (MnNameNewDataLayout*) mnNameNew_803EDA58;
     if ((s32) arg3 != 2) {
         if (((((s32) (temp = arg3)) < ((unsigned short) 2)) & 0xFFFFFFFF) &&
             (((s32) ((unsigned long) arg3)) >= 0))
@@ -535,22 +547,24 @@ char* AddCharacterToName(char* arg0, u8 arg1, u8 arg2, u8 arg3)
 
             if ((u8) (arg1 - 0x30) <= 1U) {
                 if ((arg2 % 2) != 0) {
-                    table =
-                        AddCharacterToName_getGlyphs(mnNameNew_803EE004, arg1);
+                    table = AddCharacterToName_getGlyphs(layout->upper_glyphs,
+                                                         arg1);
                 } else {
-                    table =
-                        AddCharacterToName_getGlyphs(mnNameNew_803EDCE4, arg1);
+                    table = AddCharacterToName_getGlyphs(layout->lower_glyphs,
+                                                         arg1);
                 }
             } else if ((arg3 == 0 && (arg2 % 2) == 0) ||
                        (arg3 == 1 && (arg2 % 2) != 0))
             {
-                table = AddCharacterToName_getGlyphs(mnNameNew_803EDCE4, arg1);
+                table =
+                    AddCharacterToName_getGlyphs(layout->lower_glyphs, arg1);
             } else {
-                table = AddCharacterToName_getGlyphs(mnNameNew_803EE004, arg1);
+                table =
+                    AddCharacterToName_getGlyphs(layout->upper_glyphs, arg1);
             }
             var_r4 = arg0;
 
-            for (idx = mnNameNew_803EDC1C[arg1][1] * 0;
+            for (idx = layout->character_bytes[arg1][1] * 0;
                  (null = (mnNameNew_NullCharacter & 0xFFFF) & 0xFFFF) !=
                  (ch = table[arg2 / 2][idx] & (0xFF & 0xFFu));
                  idx++)
@@ -561,9 +575,9 @@ char* AddCharacterToName(char* arg0, u8 arg1, u8 arg2, u8 arg3)
         }
         return arg0;
     }
-    arg0[0] = mnNameNew_803EDC1C[arg1][0];
-    arg0[1] = mnNameNew_803EDC1C[arg1][1];
-    arg0[2] = mnNameNew_803EDC1C[arg1][2];
+    arg0[0] = layout->character_bytes[arg1][0];
+    arg0[1] = layout->character_bytes[arg1][1];
+    arg0[2] = layout->character_bytes[arg1][2];
     return arg0;
 }
 
@@ -1528,19 +1542,24 @@ void fn_8023DBE8(HSD_GObj* arg0)
 
 void mnNameNew_8023E0D8(NameNewEntry* arg0)
 {
+    MnNameNewDataLayout* layout;
+    AnimLoopSettings* anim;
     HSD_JObj* jobj;
+    u16* jobj_ids;
     s32 i;
 
+    layout = (MnNameNewDataLayout*) mnNameNew_803EDA58;
+    anim = layout->anim;
     jobj = arg0->jobjs[12];
-    HSD_JObjReqAnim(jobj, mnNameNew_803EDA58[2].start_frame);
+    HSD_JObjReqAnim(jobj, anim[2].start_frame);
     HSD_JObjAnim(jobj);
 
     jobj = arg0->jobjs[13];
-    HSD_JObjReqAnim(jobj, mnNameNew_803EDA58[2].start_frame);
+    HSD_JObjReqAnim(jobj, anim[2].start_frame);
     HSD_JObjAnim(jobj);
 
     jobj = arg0->jobjs[4];
-    HSD_JObjReqAnim(jobj, mnNameNew_803EDA58[0].start_frame);
+    HSD_JObjReqAnim(jobj, anim[0].start_frame);
     HSD_JObjAnim(jobj);
 
     jobj = arg0->jobjs[5];
@@ -1548,7 +1567,7 @@ void mnNameNew_8023E0D8(NameNewEntry* arg0)
     HSD_JObjAnimAll(jobj);
 
     jobj = arg0->jobjs[2];
-    HSD_JObjReqAnim(jobj, mnNameNew_803EDA58[0].start_frame);
+    HSD_JObjReqAnim(jobj, anim[0].start_frame);
     HSD_JObjAnim(jobj);
 
     jobj = arg0->jobjs[5];
@@ -1556,12 +1575,13 @@ void mnNameNew_8023E0D8(NameNewEntry* arg0)
     HSD_JObjAnimAll(jobj);
 
     jobj = arg0->jobjs[6];
-    HSD_JObjReqAnim(jobj, mnNameNew_803EDA58[0].start_frame);
+    HSD_JObjReqAnim(jobj, anim[0].start_frame);
     HSD_JObjAnim(jobj);
 
+    jobj_ids = layout->key_jobj_ids;
     for (i = 0x32; i < 0x3A; i++) {
-        jobj = arg0->jobjs[mnNameNew_803EDA7C[i - 0x32]];
-        HSD_JObjReqAnimAll(jobj, (f32) (i == arg0->x1));
+        jobj = arg0->jobjs[jobj_ids[i - 0x32]];
+        HSD_JObjReqAnimAll(jobj, (f32) (arg0->x1 == i));
         HSD_JObjAnimAll(jobj);
     }
 }

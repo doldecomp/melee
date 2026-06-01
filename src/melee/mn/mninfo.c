@@ -31,6 +31,13 @@ typedef struct MnInfoTextCursor {
     /* +18 */ HSD_Text* right;
 } MnInfoTextCursor;
 
+typedef struct MnInfoDataLayout {
+    AnimLoopSettings anim;
+    u32 sis_ids[4];
+    char date_format[0xC];
+    char time_format[0xC];
+} MnInfoDataLayout;
+
 StaticModelDesc mnInfo_804A0958;
 u8 mnInfo_804A0968[0x48];
 HSD_GObj* mnInfo_804D6C78;
@@ -110,9 +117,30 @@ s32 mnInfo_80251AFC(void)
     return 0;
 }
 
+static AnimLoopSettings mnInfo_803EFC08[0x12] = {
+    { 0.0f, 199.0f, 0.0f },
+    { 1.8e-42f, 1.802e-42f, 1.803e-42f },
+    { 1.805e-42f, 2.1092525e-16f, 1.379729e31f },
+    { 0.0f, 2.109659e-16f, 1.4748028e31f },
+    { 0.0f, 225.43028f, 5.083402e31f },
+    { 5.085142e31f, 7.153577e22f, 2.817505e20f },
+    { 6.162976e-33f, 4.6115556e27f, 2.8237532e23f },
+    { 0.0f, 3.0854143e32f, 1.6456562e19f },
+    { 1.4757395e20f, 2.405757e8f, 2.6912729e20f },
+    { 7.3738955e28f, 1.5307577e19f, 1.6892836e19f },
+    { 1.8878586e28f, 2.405757e8f, 2.6912729e20f },
+    { 7.3738955e28f, 1.5307577e19f, 1.6244036e19f },
+    { 4.5346362e27f, 1.8878586e28f, 2.405757e8f },
+    { 2.6912729e20f, 7.3738955e28f, 1.5307577e19f },
+    { 1.710508e19f, 2.7487011e20f, 1.6892836e19f },
+    { 1.8878586e28f, 2.405757e8f, 2.6912729e20f },
+    { 7.3738955e28f, 1.5307577e19f, 1.7539375e19f },
+    { 2.8395941e29f, 1.7935375e25f, 7.2243537e28f },
+};
+
 #pragma push
 #pragma dont_inline on
-s32 mnInfo_80251D58(MenuInfo_GObj* arg0, s32 arg1, u32 arg3)
+s32 mnInfo_80251D58(MenuInfo_GObj* arg0, s32 arg1, u32 arg2, u32 arg3)
 {
     char sp34[5];
     char sp30[3];
@@ -121,14 +149,16 @@ s32 mnInfo_80251D58(MenuInfo_GObj* arg0, s32 arg1, u32 arg3)
     char sp24[3];
     char sp20[3];
     datetime sp18;
-    HSD_Text* text;
     HSD_Text** slot;
+    HSD_Text* text;
     MnInfoData* data;
+    MnInfoDataLayout* layout;
 
     data = arg0->user_data;
-    slot = &data->left_column[arg1];
-    if (*slot != NULL) {
-        HSD_SisLib_803A5CC4(*slot);
+    layout = (MnInfoDataLayout*) mnInfo_803EFC08;
+    slot = (HSD_Text**) ((u8*) data + (arg1 * 4));
+    if (*(slot += 2) != NULL) {
+        HSD_SisLib_803A5CC4(data->left_column[arg1]);
     }
     text = HSD_SisLib_803A6754(0, 1);
     *slot = text;
@@ -147,39 +177,55 @@ s32 mnInfo_80251D58(MenuInfo_GObj* arg0, s32 arg1, u32 arg3)
     mn_8022EA78(sp24, 2, sp18.month);
     mn_8022EA78(sp20, 2, sp18.day);
     if (lbLang_IsSavedLanguageUS() != 0) {
-        HSD_SisLib_803A6B98(text, 0.0f, 0.0f, "%s.%s.%s", sp24, sp20, sp34);
+        HSD_SisLib_803A6B98(text, 0.0f, 0.0f, layout->date_format, sp24, sp20,
+                            sp34);
     } else {
-        HSD_SisLib_803A6B98(text, 0.0f, 0.0f, "%s.%s.%s", sp34, sp24, sp20);
+        HSD_SisLib_803A6B98(text, 0.0f, 0.0f, layout->date_format, sp34, sp24,
+                            sp20);
     }
-    return HSD_SisLib_803A6B98(text, 0.0f, 40.0f, "%s:%s:%s", sp30, sp2C,
-                               sp28);
+    return HSD_SisLib_803A6B98(text, 0.0f, 40.0f, layout->time_format, sp30,
+                               sp2C, sp28);
 }
 #pragma pop
 
 #pragma push
 #pragma dont_inline on
-void mnInfo_80251F04(MenuInfo_GObj* arg0, u32 arg1, u32 arg2)
+void mnInfo_80251F04(MenuInfo_GObj* arg0, s32 arg1, u32 arg2)
 {
     s16 sp16;
-    HSD_Text* temp_r3_2;
-    HSD_Text** temp_r31;
-    MnInfoData* temp_r3;
+    s16 unused;
+    HSD_Text** slot;
+    HSD_Text* text;
+    MnInfoData* data;
 
-    temp_r3 = arg0->user_data;
-    temp_r31 = &temp_r3->right_column[arg1];
-    if (temp_r3->right_column[arg1] != NULL) {
-        HSD_SisLib_803A5CC4(temp_r3->right_column[arg1]);
+    data = arg0->user_data;
+    slot = (HSD_Text**) ((u8*) data + (arg1 * 4));
+    if (*(slot += 6) != NULL) {
+        HSD_SisLib_803A5CC4(data->right_column[arg1]);
     }
-    temp_r3_2 = HSD_SisLib_803A5ACC(0, 0, -5.0f, (3.45f * (f32) arg1) + -5.9f,
-                                    17.0f, 514.2857f, 142.85715f);
-    *temp_r31 = temp_r3_2;
-    temp_r3_2->font_size.x = 0.035f;
-    temp_r3_2->font_size.y = 0.035f;
-    temp_r3_2->default_fitting = 1;
+    text = HSD_SisLib_803A5ACC(0, 0, -5.0f, (3.45f * (f32) arg1) + -5.9f,
+                               17.0f, 514.2857f, 142.85715f);
+    *slot = text;
+    text->font_size.x = 0.035f;
+    text->font_size.y = 0.035f;
+    text->default_fitting = 1;
     un_802FE3F8((s32) arg2, 0x4BD, &sp16, NULL);
-    HSD_SisLib_803A6368(temp_r3_2, (s32) (u16) sp16);
+    HSD_SisLib_803A6368(text, (s32) (u16) sp16);
 }
 #pragma pop
+
+static inline s32 mnInfo_CountUnlocked(void)
+{
+    s32 i;
+    s32 count = 0;
+
+    for (i = 0; i < 0x42; i++) {
+        if (mnInfo_80251A08(i) != 0) {
+            count += 1;
+        }
+    }
+    return count;
+}
 
 void fn_80251FE4(void)
 {
@@ -233,8 +279,7 @@ void fn_80251FE4(void)
                 if (mnInfo_80251A08(*trophy) != 0) {
                     u8 id = *trophy;
 
-                    gmMainLib_8015D804(id);
-                    mnInfo_80251D58(gobj, i, id);
+                    mnInfo_80251D58(gobj, i, id, *gmMainLib_8015D804(id));
                     mnInfo_80251F04(gobj, i, id);
                 }
                 trophy++;
@@ -272,8 +317,7 @@ void fn_80251FE4(void)
                 if (mnInfo_80251A08(*trophy) != 0) {
                     u8 id = *trophy;
 
-                    gmMainLib_8015D804(id);
-                    mnInfo_80251D58(gobj, i, id);
+                    mnInfo_80251D58(gobj, i, id, *gmMainLib_8015D804(id));
                     mnInfo_80251F04(gobj, i, id);
                 }
                 trophy++;
@@ -282,37 +326,15 @@ void fn_80251FE4(void)
     }
 }
 
-static AnimLoopSettings mnInfo_803EFC08[0x12] = {
-    { 0.0f, 199.0f, 0.0f },
-    { 1.8e-42f, 1.802e-42f, 1.803e-42f },
-    { 1.805e-42f, 2.1092525e-16f, 1.379729e31f },
-    { 0.0f, 2.109659e-16f, 1.4748028e31f },
-    { 0.0f, 225.43028f, 5.083402e31f },
-    { 5.085142e31f, 7.153577e22f, 2.817505e20f },
-    { 6.162976e-33f, 4.6115556e27f, 2.8237532e23f },
-    { 0.0f, 3.0854143e32f, 1.6456562e19f },
-    { 1.4757395e20f, 2.405757e8f, 2.6912729e20f },
-    { 7.3738955e28f, 1.5307577e19f, 1.6892836e19f },
-    { 1.8878586e28f, 2.405757e8f, 2.6912729e20f },
-    { 7.3738955e28f, 1.5307577e19f, 1.6244036e19f },
-    { 4.5346362e27f, 1.8878586e28f, 2.405757e8f },
-    { 2.6912729e20f, 7.3738955e28f, 1.5307577e19f },
-    { 1.710508e19f, 2.7487011e20f, 1.6892836e19f },
-    { 1.8878586e28f, 2.405757e8f, 2.6912729e20f },
-    { 7.3738955e28f, 1.5307577e19f, 1.7539375e19f },
-    { 2.8395941e29f, 1.7935375e25f, 7.2243537e28f },
-};
-
 #pragma push
-#pragma dont_inline on
+#pragma auto_inline off
 void mnInfo_802522B8(HSD_GObj* gobj)
 {
     s32 count;
-    s32 i;
     MnInfoData* data;
     HSD_JObj* jobj;
     HSD_JObj* child;
-    PAD_STACK(12);
+    PAD_STACK(4);
 
     jobj = gobj->hsd_obj;
     data = gobj->user_data;
@@ -323,19 +345,14 @@ void mnInfo_802522B8(HSD_GObj* gobj)
         HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
     }
     lb_80011E24(jobj, &child, 1, -1);
-    count = 0;
-    for (i = 0; i < 0x42; i++) {
-        if (mnInfo_80251A08(i) != 0) {
-            count++;
-        }
-    }
+    count = mnInfo_CountUnlocked();
 
     if ((data->scroll_idx + 4) < count) {
         HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
     } else {
         HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
     }
-    mn_8022ED6C(jobj, mnInfo_803EFC08);
+    mn_8022ED6C(jobj, (AnimLoopSettings*) mnInfo_803EFC08);
 }
 #pragma pop
 
@@ -394,7 +411,7 @@ void fn_802523D8(HSD_GObj* gobj)
     } else {
         HSD_JObjSetFlagsAll(sp1C, JOBJ_HIDDEN);
     }
-    mn_8022ED6C(temp_r28, mnInfo_803EFC08);
+    mn_8022ED6C(temp_r28, (AnimLoopSettings*) mnInfo_803EFC08);
 }
 
 void fn_80252548(HSD_GObj* gobj)
@@ -406,6 +423,8 @@ void fn_80252548(HSD_GObj* gobj)
     MnInfoData* data;
     MnInfoTextCursor* left;
     MnInfoTextCursor* right;
+    u32 date;
+    PAD_STACK(24);
 
     data = gobj->user_data;
     if (mn_804A04F0.cur_menu != MENU_KIND_DATA_SPECIAL) {
@@ -413,8 +432,8 @@ void fn_80252548(HSD_GObj* gobj)
         proc = HSD_GObj_SetupProc(gobj, fn_802523B8, 0);
         proc->flags_3 = HSD_GObj_804D783C;
         i = 0;
-        left = (MnInfoTextCursor*) data;
-        right = (MnInfoTextCursor*) data;
+        left = (MnInfoTextCursor*) gobj->user_data;
+        right = (MnInfoTextCursor*) gobj->user_data;
         do {
             if (left->left != NULL) {
                 HSD_SisLib_803A5CC4(right->left);
@@ -440,8 +459,8 @@ void fn_80252548(HSD_GObj* gobj)
         if (mnInfo_80251A08(*trophy) != 0) {
             u8 id = *trophy;
 
-            gmMainLib_8015D804(id);
-            mnInfo_80251D58((MenuInfo_GObj*) gobj, i, id);
+            date = *gmMainLib_8015D804(id);
+            mnInfo_80251D58((MenuInfo_GObj*) gobj, i, id, date);
             mnInfo_80251F04((MenuInfo_GObj*) gobj, i, id);
         }
         trophy++;

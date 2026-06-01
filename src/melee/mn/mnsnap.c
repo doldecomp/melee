@@ -409,9 +409,8 @@ void mnSnap_80253AE4(s32 mode)
 /// @returns 0 if no movement, 1 if moved within page, 2 if page changed.
 s32 mnSnap_80253BE0(u64 buttons, s32* cursor, s32 count)
 {
-    s32 cur = *cursor;
-    s32 next = cur;
-    PAD_STACK(8);
+    s32 next = *cursor;
+    s32 cur = next;
 
     if (buttons & 1) {
         if ((next & 1) == 1) {
@@ -436,7 +435,7 @@ s32 mnSnap_80253BE0(u64 buttons, s32* cursor, s32 count)
         if (next >= 4) {
             next -= 4;
         } else {
-            next = ((count - 1) & ~3) + (cur % 4);
+            next = ((count - 1) & ~3) + (next % 4);
             if (next >= count) {
                 next &= ~3;
             }
@@ -2322,21 +2321,27 @@ void fn_80257D7C(void)
                 HSD_GObjPLink_80390228(mnSnap_804A0A10.sub_gobj);
             }
             if (snap->cursor_gobj != NULL) {
-                HSD_GObjPLink_80390228(mnSnap_804A0A10.cursor_gobj);
+                HSD_GObjPLink_80390228(snap->cursor_gobj);
             }
             if (mnSnap_804A0A10.warn_gobj != NULL) {
                 HSD_GObjPLink_80390228(mnSnap_804A0A10.warn_gobj);
             }
 
-            for (i = 0; i < 4; i++) {
-                if (mnSnap_804A0A10.thumb_labels[i] != NULL) {
-                    HSD_SisLib_803A5CC4(mnSnap_804A0A10.thumb_labels[i]);
+            {
+                HSD_Text** text_p;
+                for (text_p = (HSD_Text**) snap, i = 0; i < 4; i++, text_p++) {
+                    if (text_p[0x3E] != NULL) {
+                        HSD_SisLib_803A5CC4(text_p[0x3E]);
+                    }
                 }
             }
 
-            for (i = 0; i < 2; i++) {
-                if (mnSnap_804A0A10.count_texts[i] != NULL) {
-                    HSD_SisLib_803A5CC4(mnSnap_804A0A10.count_texts[i]);
+            {
+                HSD_Text** text_p;
+                for (i = 0, text_p = (HSD_Text**) snap; i < 2; i++, text_p++) {
+                    if (text_p[0x42] != NULL) {
+                        HSD_SisLib_803A5CC4(text_p[0x42]);
+                    }
                 }
             }
 

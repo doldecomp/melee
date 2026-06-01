@@ -19,7 +19,7 @@
 /* 03E334 */ u32 pl_8003E334(int, int pl_itemlog_kind);
 /* 03E39C */ int pl_8003E39C(int);
 /* 03E420 */ u32 pl_8003E420(int);
-/* 03E4A4 */ void pl_8003E4A4(u8 slot, bool, void*, int);
+/* 03E4A4 */ void pl_8003E4A4(int slot, bool, void*, int);
 /* 03E70C */ void pl_8003E70C(Item_GObj* igobj);
 /* 03E7D4 */ u32 pl_8003E7D4(int, int kind);
 /* 03E854 */ void pl_8003E854(int, int, Item_GObj*);

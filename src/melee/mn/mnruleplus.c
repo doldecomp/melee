@@ -39,7 +39,7 @@ extern MenuKindData mn_803EB6B0[];
 extern HSD_GObj* mn_804D6BE0;
 extern f32 mn_804D6BE4;
 
-static mn_803ED1D0_t mn_803ED1D0 = {
+mn_803ED1D0_t mn_803ED1D0 = {
     { 3, 4, 5, 6, 7, 8, 9 },
     { 7, 2, 2, 2, 2, 0 },
     { 20.0f, 21.0f, 22.0f, 23.0f, 24.0f, 25.0f, 26.0f, 27.0f, 28.0f, 29.0f,
@@ -61,16 +61,58 @@ AnimLoopSettings mn_803ED294[7] = {
     { 50.0f, 69.0f, -0.1f },
 };
 
-u8 mn_803ED2E8[16][2] = { 0 };
+struct {
+    /* 0x00 */ u8 stat[6][2];
+    /* 0x0C */ u8 desc[6][3];
+    /* 0x1E */ u8 pad[2];
+} mn_803ED2E8 = {
+    { { 0, 99 }, { 0, 1 }, { 0, 1 }, { 0, 1 }, { 0, 2 }, { 0, 0 } },
+    { { 0x37, 0x00, 0x00 },
+      { 0x38, 0x39, 0x00 },
+      { 0x3A, 0x3B, 0x00 },
+      { 0x3D, 0x3C, 0x00 },
+      { 0x3F, 0x3E, 0x40 },
+      { 0x41, 0x00, 0x00 } },
+    { 0x00, 0x00 },
+};
+
+char mn_803ED308[0x18] = "Can't get user_data.\n";
+char mn_803ED320[0x10] = "mnruleplus.c";
+char mn_803ED330[0x10] = "user_data";
 
 typedef union {
     s32 packed;
     u8 idx[4];
 } JObjIndices;
 
-static JObjIndices mn_804DBE40 = { 0x02030506 };
-static f32 mn_804DBE44 = 0.0f;
-static JObjIndices mn_804DBE48 = { 0x02030506 };
+f32 mn_804D4B98 = 1.0f;
+volatile const f64 mn_804DBE38 = 4503599627370496.0;
+const JObjIndices mn_804DBE40 = { 0x02030506 };
+volatile f32 mn_804DBE44 = 0.0f;
+const JObjIndices mn_804DBE48 = { 0x02030506 };
+const f32 mn_804DBE4C = -9.5f;
+const f32 mn_804DBE50 = 8.0f;
+const f32 mn_804DBE54 = 17.0f;
+const f32 mn_804DBE58 = 364.68332f;
+const f32 mn_804DBE5C = 76.77544f;
+const f32 mn_804DBE60 = 0.0521f;
+volatile const f64 mn_804DBE68 = 4503599627370496.0;
+
+static inline void SisLib_ClearText(HSD_Text** text)
+{
+    if (*text != NULL) {
+        HSD_SisLib_803A5CC4(*text);
+        *text = NULL;
+    }
+}
+
+static inline u8 mnRulePlus_GetDescIdx(u8 sel, u8 confirmed)
+{
+    if ((s32) sel == 0 || (s32) sel == 5) {
+        return mn_803ED2E8.desc[sel][0];
+    }
+    return mn_803ED2E8.desc[sel][confirmed];
+}
 
 /// @brief Copy rule values from menu data to the global game rules.
 static inline void mnRulePlus_SaveRules(void)
@@ -175,7 +217,7 @@ void fn_8023201C(HSD_GObj* gobj)
         return;
     } else if ((u16) mn_804A04F0.hovered_selection != 5) {
         /// D-Pad Left/Right: adjust value for non-stage options
-        u8* bounds = mn_803ED2E8[mn_804A04F0.hovered_selection];
+        u8* bounds = mn_803ED2E8.stat[mn_804A04F0.hovered_selection];
         if (buttons & 4) {
             lbAudioAx_80024030(2);
             if ((u8) mn_804A04F0.confirmed_selection > (u8) bounds[0]) {
@@ -206,7 +248,7 @@ AnimLoopSettings* mn_80232458(u8 option, u8 value, u8 direction)
         return NULL;
     }
 
-    count = mn_803ED2E8[option][1];
+    count = mn_803ED2E8.stat[option][1];
 
     if (direction != 0) {
         if (value == 0) {
@@ -503,71 +545,55 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
 void mn_80232D4C(HSD_GObj* gobj, u32 arg1, u32 arg2)
 {
     MenuRulesPlusData* data = gobj->user_data;
-    u16 selection;
+    u32 raw_selection;
+    u8 selection;
     u8 confirmed;
     u8 desc_idx;
     HSD_Text* text;
     PAD_STACK(8);
 
     if ((s32) arg1 != 0) {
-        selection = mn_804A04F0.hovered_selection;
+        raw_selection = mn_804A04F0.hovered_selection;
     } else {
-        selection = (u16) data->hovered_selection;
+        raw_selection = data->hovered_selection;
     }
+    selection = (u8) raw_selection;
 
     switch ((s32) data->state) {
+    case 2:
     case 4:
-        text = data->description;
-        if (text != NULL) {
-            HSD_SisLib_803A5CC4(text);
-            data->description = NULL;
-            return;
-        }
+        SisLib_ClearText(&data->description);
     case 5:
         return;
     case 3:
     case 1:
-        text = data->description;
-        if (text == NULL) {
+        if (data->description == NULL) {
             confirmed = mn_804A04F0.confirmed_selection;
-            if (text != NULL) {
-                HSD_SisLib_803A5CC4(text);
-                data->description = NULL;
-            }
-            if ((s32) (u8) selection == 0 || (s32) (u8) selection == 5) {
-                desc_idx = mn_803ED2E8[(u8) selection][0];
-            } else {
-                desc_idx = mn_803ED2E8[(u8) selection][confirmed];
-            }
-            text = HSD_SisLib_803A5ACC(0, 1, -9.5f, 8.0f, 17.0f, 364.68332f,
-                                       76.77544f);
+            SisLib_ClearText(&data->description);
+            desc_idx = mnRulePlus_GetDescIdx(selection, confirmed);
+            text = HSD_SisLib_803A5ACC(0, 1, mn_804DBE4C, mn_804DBE50,
+                                       mn_804DBE54, mn_804DBE58, mn_804DBE5C);
             data->description = text;
-            text->font_size.x = 0.0521f;
-            text->font_size.y = 0.0521f;
+            text->font_size.y = text->font_size.x = mn_804DBE60;
             HSD_SisLib_803A6368(text, (s32) desc_idx);
             return;
         }
         break;
     case 0:
         if ((s32) arg1 != 0 ||
-            ((s32) arg2 != 0 && (u8) selection != 0 && (u8) selection != 5))
+            ((s32) arg2 != 0 && selection != 0 && selection != 5))
         {
-            text = data->description;
             confirmed = mn_804A04F0.confirmed_selection;
-            if (text != NULL) {
-                HSD_SisLib_803A5CC4(text);
-                data->description = NULL;
-            }
-            if ((s32) (u8) selection == 0 || (s32) (u8) selection == 5) {
-                desc_idx = mn_803ED2E8[(u8) selection][0];
+            SisLib_ClearText(&data->description);
+            if ((s32) selection == 0 || (s32) selection == 5) {
+                desc_idx = mn_803ED2E8.desc[selection][0];
             } else {
-                desc_idx = mn_803ED2E8[(u8) selection][confirmed];
+                desc_idx = mn_803ED2E8.desc[selection][confirmed];
             }
-            text = HSD_SisLib_803A5ACC(0, 1, -9.5f, 8.0f, 17.0f, 364.68332f,
-                                       76.77544f);
+            text = HSD_SisLib_803A5ACC(0, 1, mn_804DBE4C, mn_804DBE50,
+                                       mn_804DBE54, mn_804DBE58, mn_804DBE5C);
             data->description = text;
-            text->font_size.x = 0.0521f;
-            text->font_size.y = 0.0521f;
+            text->font_size.y = text->font_size.x = mn_804DBE60;
             HSD_SisLib_803A6368(text, (s32) desc_idx);
         }
         break;
@@ -881,7 +907,7 @@ HSD_GObj* mn_80233218(MenuState state)
                         {
                             val_als = NULL;
                         } else if (val == 0) {
-                            val_als = &mn_803ED270[mn_803ED2E8[i][1]];
+                            val_als = &mn_803ED270[mn_803ED2E8.stat[i][1]];
                         } else {
                             val_als = &mn_803ED270[val - 1];
                         }
@@ -911,23 +937,15 @@ HSD_GObj* mn_80233218(MenuState state)
     }
 
     {
-        HSD_Text* text = user_data->description;
+        HSD_Text* text;
         u8 desc_idx;
         confirmed = mn_804A04F0.confirmed_selection;
-        if (text != NULL) {
-            HSD_SisLib_803A5CC4(text);
-            user_data->description = NULL;
-        }
-        if ((s32) selected == 0 || (s32) selected == 5) {
-            desc_idx = mn_803ED2E8[selected][0];
-        } else {
-            desc_idx = mn_803ED2E8[selected][confirmed];
-        }
-        text = HSD_SisLib_803A5ACC(0, 1, -9.5f, 8.0f, 17.0f, 364.68332f,
-                                   76.77544f);
+        SisLib_ClearText(&user_data->description);
+        desc_idx = mnRulePlus_GetDescIdx(selected, confirmed);
+        text = HSD_SisLib_803A5ACC(0, 1, mn_804DBE4C, mn_804DBE50, mn_804DBE54,
+                                   mn_804DBE58, mn_804DBE5C);
         user_data->description = text;
-        text->font_size.x = 0.0521f;
-        text->font_size.y = 0.0521f;
+        text->font_size.y = text->font_size.x = mn_804DBE60;
         HSD_SisLib_803A6368(text, (s32) desc_idx);
     }
 

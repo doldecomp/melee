@@ -377,22 +377,40 @@ s32 mnCount_8025092C(s32 rank, u32 (*getVal)(s32), bool mode)
     return NUM_CHARACTERS;
 }
 
+static inline int mnCount_CountUnlockedChars(void)
+{
+    int i;
+    int c = 0;
+    for (i = 0; i < NUM_CHARACTERS; i++) {
+        if (gm_80164840(gm_8016400C((u8) i))) {
+            c += 1;
+        }
+    }
+    return c;
+}
+
+static inline int mnCount_CountUnlockedMaps(void)
+{
+    int i;
+    int c = 0;
+    for (i = 0; i < NUM_STAGES; i++) {
+        if (gm_80164430(gm_801641CC((u8) i))) {
+            c += 1;
+        }
+    }
+    return c;
+}
+
 int mnCount_GetRowValue_Character(mnCount_row row)
 {
     int c;
-    int i;
     switch (row) {
     case LONGEST_TIME:
         return mnCount_8025035C(0, mnCount_GetMatchTime);
     case SECOND_LONGEST_TIME:
         return mnCount_8025035C(1, mnCount_GetMatchTime);
     case SHORTEST_TIME:
-        c = 0;
-        for (i = 0; i < NUM_CHARACTERS; i++) {
-            if (gm_80164840(gm_8016400C(i))) {
-                c += 1;
-            }
-        }
+        c = mnCount_CountUnlockedChars();
         if (c < 3) {
             return NUM_CHARACTERS;
         }
@@ -419,7 +437,6 @@ int mnCount_GetRowValue_Character(mnCount_row row)
 unsigned int mnCount_GetRowValue_Number(int row)
 {
     unsigned int ret;
-    PAD_STACK(8);
     switch (row) {
     case POWER_COUNT:
         ret = *(unsigned int*) gmMainLib_GetPowerCount();
@@ -469,26 +486,12 @@ unsigned int mnCount_GetRowValue_Number(int row)
     case SELFDESTRUCT_TOTAL:
         ret = *(unsigned int*) gmMainLib_GetSelfDestructTotal();
         break;
-    case AVAILABLE_CHARACTERS: {
-        int i, c;
-        c = 0;
-        for (i = 0; i < NUM_CHARACTERS; i++) {
-            if (gm_80164840(gm_8016400C(i))) {
-                c++;
-            }
-        }
-        ret = c;
-    } break;
-    case AVAILABLE_MAPS: {
-        int i, c;
-        c = 0;
-        for (i = 0; i < NUM_STAGES; i++) {
-            if (gm_80164430(gm_801641CC(i))) {
-                c++;
-            }
-        }
-        ret = c;
-    } break;
+    case AVAILABLE_CHARACTERS:
+        ret = mnCount_CountUnlockedChars();
+        break;
+    case AVAILABLE_MAPS:
+        ret = mnCount_CountUnlockedMaps();
+        break;
     case TROPHY_TOTAL:
         ret = un_GetTrophyTotal();
         break;

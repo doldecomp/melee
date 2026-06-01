@@ -1,3 +1,4 @@
+#define MNDIAGRAM_SOURCE
 #include "mndiagram.static.h"
 #include "mndiagram2.static.h"
 
@@ -162,12 +163,12 @@ u32 mnDiagram_ConvertDistanceForDisplay(u32 distance)
     return distance / 100;
 }
 
-s32 mnDiagram_GetHitPercentage(u8 is_name_mode, u8 player_index)
+s32 mnDiagram_GetHitPercentage(int is_name_mode, u8 player_index)
 {
     f32 player_attacks;
     f32 tag_player_attacks;
 
-    if (is_name_mode != 0) {
+    if ((u8) is_name_mode != 0) {
         if (GetPersistentNameData(player_index)->attacks_total != 0) {
             tag_player_attacks =
                 GetPersistentNameData(player_index)->attacks_total;
@@ -194,7 +195,7 @@ s32 mnDiagram_GetPlayPercentage(u8 is_name_mode, u8 player_index)
     s32 i;
     f32 zero = 0.0f;
 
-    if (is_name_mode != 0) {
+    if ((u8) is_name_mode != 0) {
         total_play_time = 0.0f;
         i = 0;
         do {
@@ -224,12 +225,12 @@ s32 mnDiagram_GetPlayPercentage(u8 is_name_mode, u8 player_index)
     return 0;
 }
 
-s32 mnDiagram_GetAveragePlayerCount(u8 is_name_mode, u8 player_index)
+s32 mnDiagram_GetAveragePlayerCount(int is_name_mode, u8 player_index)
 {
     f32 temp_f31;
     f32 temp_f31_2;
 
-    if (is_name_mode != 0) {
+    if ((u8) is_name_mode != 0) {
         if ((u16) GetPersistentNameData((s32) player_index)->match_count != 0)
         {
             temp_f31_2 =
