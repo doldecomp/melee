@@ -1431,67 +1431,69 @@ bool fn_800D9558(Fighter_GObj* gobj)
     s32 frame;
     PAD_STACK(0x14);
     if (fp->kind == FTKIND_SAMUS) {
-    attrs = fp->dat_attrs;
-    fp->mv.ca.specials.grav += 1.0;
-    grav = fp->mv.ca.specials.grav;
-    if (grav == (f32) attrs->x9C) {
-        lb_8000B1CC(fp->parts[51].joint, NULL, &bonePos);
-        fp->fv.ss.x223C = it_802B7C18(gobj, &bonePos, fp->facing_dir);
-        if (fp->fv.ss.x223C == NULL) {
-            ft_8008A2BC(gobj);
-            return 1;
-        }
-        fp->accessory2_cb = (void (*)(HSD_GObj*)) it_802BAC80;
-        fp->death1_cb = (void (*)(HSD_GObj*)) it_802BAC3C;
-        fp->accessory3_cb = (void (*)(HSD_GObj*)) it_802BACC4;
-    } else if (grav > (f32) attrs->x9C) {
-        if (grav <= (f32) attrs->xA8) {
-            item = fp->fv.ss.x223C;
-            it = GET_ITEM(item);
-            grappleAttrs = it->xC4_article_data->x4_specialAttributes;
-            if (item != NULL) {
-                for (i = 0, frame = 0x14; i < 6; i++, frame += 3) {
-                    if (fp->mv.ca.specials.grav == (f32) frame) {
-                        segGobj = it->xDD4_itemVar.samusgrapple.x0->gobj;
-                        jobj = (HSD_JObj*) segGobj->hsd_obj;
-                        HSD_JObjSetupMatrix(jobj);
-                        effPos.x = jobj->mtx[0][3];
-                        effPos.y = jobj->mtx[1][3];
-                        effPos.z = jobj->mtx[2][3];
-                        effPos.x = 4.0 * (HSD_Randf() - 0.5f) + effPos.x;
-                        effPos.y = 4.0 * (HSD_Randf() - 0.5f) + effPos.y;
-                        r = HSD_Randf() - 0.5f;
-                        effPos.z = 4.0 * r + effPos.z;
-                        efSync_Spawn(0x3F3, segGobj, &effPos, r);
+        attrs = fp->dat_attrs;
+        fp->mv.ca.specials.grav += 1.0;
+        grav = fp->mv.ca.specials.grav;
+        if (grav == (f32) attrs->x9C) {
+            lb_8000B1CC(fp->parts[51].joint, NULL, &bonePos);
+            fp->fv.ss.x223C = it_802B7C18(gobj, &bonePos, fp->facing_dir);
+            if (fp->fv.ss.x223C == NULL) {
+                ft_8008A2BC(gobj);
+                return 1;
+            }
+            fp->accessory2_cb = (void (*)(HSD_GObj*)) it_802BAC80;
+            fp->death1_cb = (void (*)(HSD_GObj*)) it_802BAC3C;
+            fp->accessory3_cb = (void (*)(HSD_GObj*)) it_802BACC4;
+        } else if (grav > (f32) attrs->x9C) {
+            if (grav <= (f32) attrs->xA8) {
+                item = fp->fv.ss.x223C;
+                it = GET_ITEM(item);
+                grappleAttrs = it->xC4_article_data->x4_specialAttributes;
+                if (item != NULL) {
+                    for (i = 0, frame = 0x14; i < 6; i++, frame += 3) {
+                        if (fp->mv.ca.specials.grav == (f32) frame) {
+                            segGobj = it->xDD4_itemVar.samusgrapple.x0->gobj;
+                            jobj = (HSD_JObj*) segGobj->hsd_obj;
+                            HSD_JObjSetupMatrix(jobj);
+                            effPos.x = jobj->mtx[0][3];
+                            effPos.y = jobj->mtx[1][3];
+                            effPos.z = jobj->mtx[2][3];
+                            effPos.x = 4.0 * (HSD_Randf() - 0.5f) + effPos.x;
+                            effPos.y = 4.0 * (HSD_Randf() - 0.5f) + effPos.y;
+                            r = HSD_Randf() - 0.5f;
+                            effPos.z = 4.0 * r + effPos.z;
+                            efSync_Spawn(0x3F3, segGobj, &effPos, r);
+                        }
                     }
                 }
-            }
-            grav = fp->mv.ca.specials.grav;
-            if (grav == (f32) attrs->xA0) {
-                jobj = fp->parts[51].joint;
-                HSD_JObjSetupMatrix(jobj);
-                my = jobj->mtx[1][3];
-                if (mpCheckAllRemap(NULL, NULL, NULL, NULL, -1, -1,
-                                    fp->coll_data.cur_pos.x, my,
-                                    2.0 * fp->facing_dir * fp->x34_scale.y +
-                                        jobj->mtx[0][3],
-                                    my)) {
+                grav = fp->mv.ca.specials.grav;
+                if (grav == (f32) attrs->xA0) {
+                    jobj = fp->parts[51].joint;
+                    HSD_JObjSetupMatrix(jobj);
+                    my = jobj->mtx[1][3];
+                    if (mpCheckAllRemap(NULL, NULL, NULL, NULL, -1, -1,
+                                        fp->coll_data.cur_pos.x, my,
+                                        2.0 * fp->facing_dir *
+                                                fp->x34_scale.y +
+                                            jobj->mtx[0][3],
+                                        my))
+                    {
+                        it_802B7B84(fp->fv.ss.x223C);
+                        ft_8008A2BC(gobj);
+                        return 1;
+                    }
+                    vel.x = grappleAttrs->x40;
+                    vel.y = 0.0f;
+                    vel.z = 0.0f;
+                    vel.x = vel.x * fp->facing_dir;
+                    it_802BAAE4(item, &vel);
+                } else if (grav == (f32) attrs->xA4) {
+                    it_802BAA58(item);
+                } else if (grav == (f32) attrs->xA8) {
                     it_802B7B84(fp->fv.ss.x223C);
-                    ft_8008A2BC(gobj);
-                    return 1;
                 }
-                vel.x = grappleAttrs->x40;
-                vel.y = 0.0f;
-                vel.z = 0.0f;
-                vel.x = vel.x * fp->facing_dir;
-                it_802BAAE4(item, &vel);
-            } else if (grav == (f32) attrs->xA4) {
-                it_802BAA58(item);
-            } else if (grav == (f32) attrs->xA8) {
-                it_802B7B84(fp->fv.ss.x223C);
             }
         }
-    }
     }
     return 0;
 }
@@ -1760,56 +1762,55 @@ bool fn_800D9930(Fighter_GObj* gobj)
     f32 r;
     s32 i;
     s32 frame;
+    PAD_STACK(0x8);
 
-    if (fp->kind != FTKIND_SAMUS) {
-        return 0;
-    }
-
-    attrs = fp->dat_attrs;
-    fp->mv.ca.specials.grav += 1.0;
-    grav = fp->mv.ca.specials.grav;
-    if (grav == (f32) attrs->xAC) {
-        lb_8000B1CC(fp->parts[51].joint, NULL, &bonePos);
-        fp->fv.ss.x223C = it_802B7C18(gobj, &bonePos, fp->facing_dir);
-        if (fp->fv.ss.x223C == NULL) {
-            ft_8008A2BC(gobj);
-            return 1;
-        }
-        fp->accessory2_cb = (void (*)(HSD_GObj*)) it_802BAC80;
-        fp->death1_cb = (void (*)(HSD_GObj*)) it_802BAC3C;
-        fp->accessory3_cb = (void (*)(HSD_GObj*)) it_802BACC4;
-    } else if (grav > (f32) attrs->xAC) {
-        if (grav <= (f32) attrs->xB8) {
-            item = fp->fv.ss.x223C;
-            it = GET_ITEM(item);
-            grappleAttrs = it->xC4_article_data->x4_specialAttributes;
-            if (item != NULL) {
-                for (i = 0, frame = 0x14; i < 4; i++, frame += 3) {
-                    if (fp->mv.ca.specials.grav == (f32) frame) {
-                        segGobj = it->xDD4_itemVar.samusgrapple.x0->gobj;
-                        jobj = (HSD_JObj*) segGobj->hsd_obj;
-                        HSD_JObjSetupMatrix(jobj);
-                        effPos.x = jobj->mtx[0][3];
-                        effPos.y = jobj->mtx[1][3];
-                        effPos.z = jobj->mtx[2][3];
-                        effPos.x = 4.0 * (HSD_Randf() - 0.5f) + effPos.x;
-                        effPos.y = 4.0 * (HSD_Randf() - 0.5f) + effPos.y;
-                        r = HSD_Randf() - 0.5f;
-                        effPos.z = 4.0 * r + effPos.z;
-                        efSync_Spawn(0x3F3, segGobj, &effPos, r);
+    if (fp->kind == FTKIND_SAMUS) {
+        attrs = fp->dat_attrs;
+        fp->mv.ca.specials.grav += 1.0;
+        grav = fp->mv.ca.specials.grav;
+        if (grav == (f32) attrs->xAC) {
+            lb_8000B1CC(fp->parts[51].joint, NULL, &bonePos);
+            fp->fv.ss.x223C = it_802B7C18(gobj, &bonePos, fp->facing_dir);
+            if (fp->fv.ss.x223C == NULL) {
+                ft_8008A2BC(gobj);
+                return 1;
+            }
+            fp->accessory2_cb = (void (*)(HSD_GObj*)) it_802BAC80;
+            fp->death1_cb = (void (*)(HSD_GObj*)) it_802BAC3C;
+            fp->accessory3_cb = (void (*)(HSD_GObj*)) it_802BACC4;
+        } else if (grav > (f32) attrs->xAC) {
+            if (grav <= (f32) attrs->xB8) {
+                item = fp->fv.ss.x223C;
+                it = GET_ITEM(item);
+                grappleAttrs = it->xC4_article_data->x4_specialAttributes;
+                if (item != NULL) {
+                    for (i = 0, frame = 0x14; i < 4; i++, frame += 3) {
+                        if (fp->mv.ca.specials.grav == (f32) frame) {
+                            segGobj = it->xDD4_itemVar.samusgrapple.x0->gobj;
+                            jobj = (HSD_JObj*) segGobj->hsd_obj;
+                            HSD_JObjSetupMatrix(jobj);
+                            effPos.x = jobj->mtx[0][3];
+                            effPos.y = jobj->mtx[1][3];
+                            effPos.z = jobj->mtx[2][3];
+                            effPos.x = 4.0 * (HSD_Randf() - 0.5f) + effPos.x;
+                            effPos.y = 4.0 * (HSD_Randf() - 0.5f) + effPos.y;
+                            r = HSD_Randf() - 0.5f;
+                            effPos.z = 4.0 * r + effPos.z;
+                            efSync_Spawn(0x3F3, segGobj, &effPos, r);
+                        }
                     }
                 }
-            }
-            grav = fp->mv.ca.specials.grav;
-            if (grav == (f32) attrs->xB0) {
-                vel = lbl_803B7510;
-                vel.x = grappleAttrs->x40;
-                vel.x *= fp->facing_dir;
-                it_802BAAE4(item, &vel);
-            } else if (grav == (f32) attrs->xB4) {
-                it_802BAA58(item);
-            } else if (grav == (f32) attrs->xB8) {
-                it_802B7B84(fp->fv.ss.x223C);
+                grav = fp->mv.ca.specials.grav;
+                if (grav == (f32) attrs->xB0) {
+                    vel = lbl_803B7510;
+                    vel.x = grappleAttrs->x40;
+                    vel.x *= fp->facing_dir;
+                    it_802BAAE4(item, &vel);
+                } else if (grav == (f32) attrs->xB4) {
+                    it_802BAA58(item);
+                } else if (grav == (f32) attrs->xB8) {
+                    it_802B7B84(fp->fv.ss.x223C);
+                }
             }
         }
     }
@@ -1975,13 +1976,20 @@ void fn_800DA054(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter* victim = GET_FIGHTER(fp->victim_gobj);
-    Vec3 selfPos;
+    UNUSED u32 unused1;
+    UNUSED u32 unused2;
+    UNUSED u32 unused3;
+    UNUSED u32 unused4;
+    UNUSED u32 unused5;
+    UNUSED u32 unused6;
     Vec3 victimPos;
+    Vec3 selfPos;
     f32 facing;
     f32 dx;
     f32 dy;
     f32 v;
     f32 spd;
+    PAD_STACK(0x20);
 
     if (!victim->x2226_b2) {
         lb_8000B1CC(fp->mv.co.capturedamage.x18, NULL, &selfPos);
@@ -2007,11 +2015,7 @@ void fn_800DA054(Fighter_GObj* gobj)
                 if (v > spd) {
                     v = spd;
                 }
-                if (dx > 0.0f) {
-                    fp->gr_vel = v;
-                } else {
-                    fp->gr_vel = -v;
-                }
+                fp->gr_vel = (dx > 0.0f) ? v : -v;
             }
         } else {
             ftCo_800DA698(gobj, 1);
