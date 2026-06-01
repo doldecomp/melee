@@ -17,7 +17,7 @@
 /* 23BFE4 */ s32 WriteCharactersForNameAtIndex(u8 arg0, s32 arg1);
 /* 23C148 */ char* AddCharacterToName(char* arg0, u8 arg1, u8 arg2, u8 arg3);
 /* 23C290 */ void mnNameNew_GlyphVariantInput(void);
-/* 23C54C */ UNK_RET mnNameNew_MainInput(HSD_GObj*);
+/* 23C54C */ void mnNameNew_MainInput(HSD_GObj*);
 /* 23CE4C */ void mnNameNew_8023CE4C(void);
 /* 23CFC8 */ void fn_8023CFC8(HSD_GObj* arg0);
 /* 23D0F8 */ void fn_8023D0F8(void*);

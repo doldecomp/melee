@@ -452,6 +452,7 @@ int mnDiagram2_GetStatValue(int is_name_mode, u8 stat_type, u8 entity_idx)
 {
     u8 typeVal;
     u8 idxVal;
+    u16 val16;
 
     typeVal = stat_type;
     idxVal = entity_idx;
@@ -471,12 +472,14 @@ int mnDiagram2_GetStatValue(int is_name_mode, u8 stat_type, u8 entity_idx)
 
     case VSSTAT_SD_COUNT:
         if ((u8) is_name_mode) {
-            return GetPersistentNameData(idxVal)->sd_count;
+            val16 = GetPersistentNameData(idxVal)->sd_count;
+        } else {
+            val16 = GetPersistentFighterData(idxVal)->sd_count;
         }
-        return GetPersistentFighterData(idxVal)->sd_count;
+        return val16;
 
     case VSSTAT_HIT_PERCENTAGE:
-        return mnDiagram_GetHitPercentage((u8) is_name_mode, idxVal);
+        return mnDiagram_GetHitPercentage(is_name_mode, idxVal);
 
     case VSSTAT_DAMAGE_DEALT:
         if ((u8) is_name_mode) {
@@ -498,27 +501,35 @@ int mnDiagram2_GetStatValue(int is_name_mode, u8 stat_type, u8 entity_idx)
 
     case VSSTAT_PEAK_DAMAGE:
         if ((u8) is_name_mode) {
-            return GetPersistentNameData(idxVal)->peak_damage;
+            val16 = GetPersistentNameData(idxVal)->peak_damage;
+        } else {
+            val16 = GetPersistentFighterData(idxVal)->peak_damage;
         }
-        return GetPersistentFighterData(idxVal)->peak_damage;
+        return val16;
 
     case VSSTAT_MATCH_COUNT:
         if ((u8) is_name_mode) {
-            return GetPersistentNameData(idxVal)->match_count;
+            val16 = GetPersistentNameData(idxVal)->match_count;
+        } else {
+            val16 = GetPersistentFighterData(idxVal)->match_count;
         }
-        return GetPersistentFighterData(idxVal)->match_count;
+        return val16;
 
     case VSSTAT_VICTORIES:
         if ((u8) is_name_mode) {
-            return GetPersistentNameData(idxVal)->victories;
+            val16 = GetPersistentNameData(idxVal)->victories;
+        } else {
+            val16 = GetPersistentFighterData(idxVal)->victories;
         }
-        return GetPersistentFighterData(idxVal)->victories;
+        return val16;
 
     case VSSTAT_LOSSES:
         if ((u8) is_name_mode) {
-            return GetPersistentNameData(idxVal)->losses;
+            val16 = GetPersistentNameData(idxVal)->losses;
+        } else {
+            val16 = GetPersistentFighterData(idxVal)->losses;
         }
-        return GetPersistentFighterData(idxVal)->losses;
+        return val16;
 
     case VSSTAT_PLAY_TIME:
         if ((u8) is_name_mode) {
@@ -527,10 +538,10 @@ int mnDiagram2_GetStatValue(int is_name_mode, u8 stat_type, u8 entity_idx)
         return GetPersistentFighterData(idxVal)->play_time;
 
     case VSSTAT_PLAY_PERCENTAGE:
-        return mnDiagram_GetPlayPercentage((u8) is_name_mode, idxVal);
+        return mnDiagram_GetPlayPercentage(is_name_mode, idxVal);
 
     case VSSTAT_AVG_PLAYERS:
-        return mnDiagram_GetAveragePlayerCount((u8) is_name_mode, idxVal);
+        return mnDiagram_GetAveragePlayerCount(is_name_mode, idxVal);
 
     case VSSTAT_WALK_DISTANCE:
         if ((u8) is_name_mode) {
@@ -588,7 +599,7 @@ int mnDiagram2_GetStatValue(int is_name_mode, u8 stat_type, u8 entity_idx)
     default:
         break;
     }
-    return 0;
+    return is_name_mode;
 }
 
 /// @brief Creates a single stat row entry in the VS Records display.
@@ -848,6 +859,11 @@ typedef struct {
     /* 0x0C */ HSD_JObj* jobj;
 } mnDiagram2_AnimCompleteData;
 
+typedef struct MnDiagram2DataLayout {
+    u8 stat_name_ids[0x90];
+    AnimLoopSettings anim[2];
+} MnDiagram2DataLayout;
+
 /// @brief Animation completion callback - destroys GObj when animation ends.
 void mnDiagram2_OnAnimComplete(HSD_GObj* gobj)
 {
@@ -875,10 +891,13 @@ void mnDiagram2_UpdateScrollArrows(HSD_GObj* gobj)
 {
     Diagram2* data;
     HSD_JObj* jobj;
-    data = gobj->user_data;
+    MnDiagram2DataLayout* base;
+
+    base = (MnDiagram2DataLayout*) &mnDiagram2_803EEAD0;
+    data = HSD_GObjGetUserData(gobj);
 
     jobj = data->down_arrow;
-    mn_8022ED6C(jobj, &mnDiagram2_803EEB60[1]);
+    mn_8022ED6C(jobj, &base->anim[1]);
     if (data->is_name_mode) {
         if (data->scroll_offset + 10 < 0x18) {
             HSD_JObjClearFlagsAll(jobj, 0x10);
@@ -894,7 +913,7 @@ void mnDiagram2_UpdateScrollArrows(HSD_GObj* gobj)
     }
 
     jobj = data->up_arrow;
-    mn_8022ED6C(jobj, &mnDiagram2_803EEB60[1]);
+    mn_8022ED6C(jobj, &base->anim[1]);
     if (data->scroll_offset) {
         HSD_JObjClearFlagsAll(jobj, 0x10);
     } else {
@@ -902,7 +921,7 @@ void mnDiagram2_UpdateScrollArrows(HSD_GObj* gobj)
     }
 
     jobj = data->left_arrow;
-    mn_8022ED6C(jobj, &mnDiagram2_803EEB60[1]);
+    mn_8022ED6C(jobj, &base->anim[1]);
     if (data->is_name_mode) {
         if (data->selected_name_idx) {
             HSD_JObjClearFlagsAll(jobj, 0x10);
@@ -918,7 +937,7 @@ void mnDiagram2_UpdateScrollArrows(HSD_GObj* gobj)
     }
 
     jobj = data->right_arrow;
-    mn_8022ED6C(jobj, &mnDiagram2_803EEB60[1]);
+    mn_8022ED6C(jobj, &base->anim[1]);
     if (data->is_name_mode != 0) {
         if (data->selected_name_idx !=
             (u8) mnDiagram_GetNextNameIndex(data->selected_name_idx))

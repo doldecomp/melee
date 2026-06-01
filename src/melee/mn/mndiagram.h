@@ -9,9 +9,14 @@
 /* 23EA40 */ u8 mnDiagram_GetNameByIndex(int idx);
 /* 23EA54 */ bool mnDiagram_IsDistanceOverflow(u32 distance);
 /* 23EAC4 */ u32 mnDiagram_ConvertDistanceForDisplay(u32 distance);
-/* 23EB84 */ s32 mnDiagram_GetHitPercentage(u8 is_name_mode, u8 player_index);
+/* 23EB84 */ s32 mnDiagram_GetHitPercentage(int is_name_mode, u8 player_index);
+#ifdef MNDIAGRAM_SOURCE
 /* 23ECC4 */ s32 mnDiagram_GetPlayPercentage(u8 is_name_mode, u8 player_index);
-/* 23EE38 */ s32 mnDiagram_GetAveragePlayerCount(u8 is_name_mode,
+#else
+/* 23ECC4 */ s32 mnDiagram_GetPlayPercentage(int is_name_mode,
+                                             u8 player_index);
+#endif
+/* 23EE38 */ s32 mnDiagram_GetAveragePlayerCount(int is_name_mode,
                                                  u8 player_index);
 /* 23EF70 */ int mnDiagram_GetNameTotalKOs(u8 field_index);
 /* 23EFE4 */ int mnDiagram_GetNameTotalFalls(u8 field_index);
