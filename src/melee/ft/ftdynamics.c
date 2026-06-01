@@ -789,10 +789,9 @@ bool ftCo_8009E714(Fighter_GObj* gobj, Fighter_Part bone_id, int arg2, float x,
 void ftCo_8009E7B4(Fighter* fp, u8 (*arg1)[2])
 {
     s32 i;
-    Fighter* var_r3 = fp;
+    s32 var_r3;
     FigaTree*** dyn;
     FigaTree** tree;
-    FigaTree** p;
 
     if (fp->anim_id != -1) {
         if (fp->x2227_b6) {
@@ -807,13 +806,13 @@ void ftCo_8009E7B4(Fighter* fp, u8 (*arg1)[2])
             }
         } else {
             if (fp->kind != FTKIND_MARS && fp->kind != FTKIND_EMBLEM) {
-                var_r3 = NULL;
-            } else if (lb_80011ABC() > 0) {
-                var_r3 = (Fighter*) 1;
+                var_r3 = 0;
+            } else if (fp->x2227_b6 || lb_80011ABC() > 0) {
+                var_r3 = 1;
             } else {
-                var_r3 = NULL;
+                var_r3 = 0;
             }
-            if (var_r3 != NULL) {
+            if (var_r3) {
                 if (fp->kind != FTKIND_KIRBY) {
                     if (fp->kind == FTKIND_PURIN) {
                         ftCo_8009CB40(fp, 0, 1, NULL);
@@ -824,6 +823,7 @@ void ftCo_8009E7B4(Fighter* fp, u8 (*arg1)[2])
                     }
                 }
             } else if (fp->x594_b4) {
+                u8 blend_slot = arg1[0][1];
                 dyn = fp->ft_data->x2C->x10;
                 if (dyn == NULL) {
                     for (i = 0; i < fp->dynamics_num; i++) {
@@ -831,17 +831,15 @@ void ftCo_8009E7B4(Fighter* fp, u8 (*arg1)[2])
                     }
                     return;
                 }
-                tree = dyn[arg1[0][1]];
+                tree = dyn[blend_slot];
                 if (tree == NULL) {
                     for (i = 0; i < fp->dynamics_num; i++) {
                         ftCo_8009CB40(fp, i, 0, NULL);
                     }
                     return;
                 }
-                p = tree;
                 for (i = 0; i < fp->dynamics_num; i++) {
-                    ftCo_8009CB40(fp, i, 1, *p);
-                    p++;
+                    ftCo_8009CB40(fp, i, 1, tree[i]);
                 }
                 return;
             } else if (fp->x594_b3) {
