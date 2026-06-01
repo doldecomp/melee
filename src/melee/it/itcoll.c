@@ -61,7 +61,7 @@ static inline bool itColl_chkECBOverlap(f32 pos_x, f32 pos_y, itECB* ecb_a,
     }
 }
 
-extern Quaternion it_803B8560;
+const Quaternion it_803B8560 = { 0.0f, 0.0f, 1.0f, 0.0f };
 
 typedef struct ItCollDynamicsDesc {
     s32 bone_id;
@@ -74,6 +74,11 @@ typedef struct ItCollDynamics {
     s32 count;
     ItCollDynamicsDesc* descs;
 } ItCollDynamics;
+
+void it_8026F9A0(void)
+{
+    it_804D6D18 = 0;
+}
 
 void it_8026F9AC(s32 arg0, void* fighter, HitCapsule* hit, Item* arg_item,
                  HurtCapsule* hurt)

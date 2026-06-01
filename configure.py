@@ -1151,7 +1151,10 @@ config.libs = [
             # Main
             Object(Matching, "melee/it/item.c"),
             Object(Matching, "melee/it/it_26B1.c"),
-            Object(NonMatching, "melee/it/it_266F.c"),
+            Object(NonMatching, "melee/it/itspawn.c"),
+            Object(Matching, "melee/it/itgroundcoll.c"),
+            Object(NonMatching, "melee/it/itdraw.c"),
+            Object(NonMatching, "melee/it/itdrop.c"),
             Object(NonMatching, "melee/it/itcoll.c"),
             Object(Matching, "melee/it/it_3F14.c"),
             Object(Matching, "melee/it/it_2725.c"),
