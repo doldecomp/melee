@@ -306,8 +306,6 @@ void HSD_SynthSFXUnloadBank(int bank_id)
     hsd_SynthSFXBank[bank_id] = hsd_SynthSFXBankHead[bank_id];
 }
 
-/// @todo Currently 97.2% match - add instruction uses r4 instead of r5
-/// as destination (register allocation swap for prev/cur)
 void HSD_Synth_80388DC8(int sfx_id)
 {
     void* cur;
