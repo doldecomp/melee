@@ -52,17 +52,25 @@
     u8 x226;
     u8 x227;
 } un_803FA128;
-/* 3FA258 */ static struct {
+/* 3FA258 */ static struct un_803FA258_t {
     int x0;
-    int x4;
-    int x8;
-    int xC;
-    int x10;
-    u8 _pad14[0x14];
-    int x28;
-    int x2C;
-    int x30;
-    u8 _pad34[0xC4];
+    int x4[4];
+    int x14[4];
+    int x24[4];
+    int x34_pad;
+    int x38[4];
+    int x48[4];
+    int x58[4];
+    int x68[4];
+    f32 x78[4];
+    f32 x88[4];
+    f32 x98[4];
+    int xA8[4];
+    int xB8[4];
+    int xC8;
+    int xCC[4];
+    int xDC[4];
+    int xEC[3];
     int xF8;
     int xFC;
     int x100;
@@ -86,6 +94,7 @@
 } un_803FA258;
 /* 3FA348 */ static u16 un_803FA348;
 /* 3FA34C */ static u8 un_803FA34C;
+/* 3FA32C */ static u8 un_803FA32C;
 /* 3FA658 */ static u8 un_803FA658[0x290];
 /* 3FA8E8 */ static u8 un_803FA8E8[0x15C];
 /* 3FAA44 */ static u8 un_803FAA44[0xC0];
@@ -396,19 +405,18 @@ void un_802FFEE0(s32* arg0)
 void un_802FFF2C(StartMeleeData* arg0)
 {
     StartMeleeRules* r = &arg0->rules;
-    int* s = (int*) &un_803FA258;
-    int* col;
+    struct un_803FA258_t* s = &un_803FA258;
     PlayerInitData* p;
     s32 i;
     s32 timer;
 
     gm_80167A64(r);
     r->x2_2 = 0;
-    r->is_teams = s[3];
-    switch (s[0x32]) {
+    r->is_teams = s->x4[1];
+    switch (s->xC8) {
     case 0:
         r->x0_0 = 0;
-        timer = s[0x34] + s[0x33] * 0x3C;
+        timer = s->xCC[1] + s->xCC[0] * 0x3C;
         if (timer != 0) {
             r->x10 = timer;
             r->x0_6 = 1;
@@ -422,7 +430,7 @@ void un_802FFF2C(StartMeleeData* arg0)
         break;
     case 2:
         r->x0_0 = 2;
-        timer = s[0x34] + s[0x33] * 0x3C;
+        timer = s->xCC[1] + s->xCC[0] * 0x3C;
         if (timer != 0) {
             r->x10 = timer;
             r->x0_6 = 1;
@@ -435,45 +443,41 @@ void un_802FFF2C(StartMeleeData* arg0)
         r->x0_6 = 0;
         break;
     }
-    r->xE = s[2];
+    r->xE = s->x4[1];
     r->x20 = -1;
-    r->xB = s[0x36] - 1;
+    r->xB = s->xDC[0] - 1;
     r->xC = -1;
-    r->x30 = s[0x3B];
+    r->x30 = s->xEC[0];
     gm_80167A14(arg0->players);
-    col = s;
-    p = arg0->players;
     for (i = 0; i < 2; i++) {
-        p[0].c_kind = col[4];
-        p[0].slot_type = col[9];
-        p[0].color = col[0xE];
-        p[0].sub_color = col[0x12];
-        p[0].team = col[0x16];
-        p[0].xC_b0 = col[0x37];
-        p[0].x12 = col[0x1A];
-        p[0].x18 = ((f32*) col)[0x1E];
-        p[0].x1C = ((f32*) col)[0x22];
-        p[0].xE = col[0x2A];
-        p[0].cpu_level = col[0x2E];
-        p[0].stocks = s[0x35];
-        p[0].xC_b1 = 0;
-        p[0].x20 = ((f32*) col)[0x26];
-        p[1].c_kind = col[5];
-        p[1].slot_type = col[0xA];
-        p[1].color = col[0xF];
-        p[1].sub_color = col[0x13];
-        p[1].team = col[0x17];
-        p[1].xC_b0 = col[0x38];
-        p[1].x12 = col[0x1B];
-        p[1].x18 = ((f32*) col)[0x1F];
-        p[1].x1C = ((f32*) col)[0x23];
-        p[1].xE = col[0x2B];
-        p[1].cpu_level = col[0x2F];
-        p[1].stocks = s[0x35];
-        p[1].xC_b1 = 0;
-        p[1].x20 = ((f32*) col)[0x27];
-        col += 2;
-        p += 2;
+        arg0->players[2 * i].c_kind = s->x4[2 * i];
+        arg0->players[2 * i].slot_type = s->x24[2 * i];
+        arg0->players[2 * i].color = s->x38[2 * i];
+        arg0->players[2 * i].sub_color = s->x48[2 * i];
+        arg0->players[2 * i].team = s->x58[2 * i];
+        arg0->players[2 * i].xC_b0 = un_803FA32C;
+        arg0->players[2 * i].x12 = s->x68[2 * i];
+        arg0->players[2 * i].x18 = s->x78[2 * i];
+        arg0->players[2 * i].x1C = s->x88[2 * i];
+        arg0->players[2 * i].xE = s->xA8[2 * i];
+        arg0->players[2 * i].cpu_level = s->xB8[2 * i];
+        arg0->players[2 * i].stocks = un_803FA32C;
+        arg0->players[2 * i].xC_b1 = 0;
+        arg0->players[2 * i].x20 = s->x98[2 * i];
+        arg0->players[2 * i + 1].c_kind = s->x4[2 * i + 1];
+        arg0->players[2 * i + 1].slot_type = s->x24[2 * i + 1];
+        arg0->players[2 * i + 1].color = s->x38[2 * i + 1];
+        arg0->players[2 * i + 1].sub_color = s->x48[2 * i + 1];
+        arg0->players[2 * i + 1].team = s->x58[2 * i + 1];
+        arg0->players[2 * i + 1].xC_b0 = un_803FA32C;
+        arg0->players[2 * i + 1].x12 = s->x68[2 * i + 1];
+        arg0->players[2 * i + 1].x18 = s->x78[2 * i + 1];
+        arg0->players[2 * i + 1].x1C = s->x88[2 * i + 1];
+        arg0->players[2 * i + 1].xE = s->xA8[2 * i + 1];
+        arg0->players[2 * i + 1].cpu_level = s->xB8[2 * i + 1];
+        arg0->players[2 * i + 1].stocks = un_803FA32C;
+        arg0->players[2 * i + 1].xC_b1 = 0;
+        arg0->players[2 * i + 1].x20 = s->x98[2 * i + 1];
     }
 }
 
@@ -814,11 +818,11 @@ bool un_80300AF4(int arg0)
 {
     if (arg0 == 1) {
         lbAudioAx_80024030(1);
-        un_803FA258.x8 = 0x3F;
-        un_803FA258.x10 = 0xE;
-        un_803FA258.x28 = 3;
-        un_803FA258.x2C = 3;
-        un_803FA258.x30 = 3;
+        un_803FA258.x4[1] = 0x3F;
+        un_803FA258.x4[2] = 0xE;
+        un_803FA258.x24[1] = 3;
+        un_803FA258.x24[2] = 3;
+        un_803FA258.x24[3] = 3;
         gm_SetPendingScene(4);
         gm_801A4B60();
     }
@@ -829,11 +833,10 @@ bool un_80300B58(int arg0)
 {
     if (arg0 == 1) {
         lbAudioAx_80024030(1);
-        un_803FA258.x8 = 0x3B;
-        un_803FA258.x10 = 0x2;
-        un_803FA258.x28 = 3;
-        un_803FA258.x2C = 3;
-        un_803FA258.x30 = 3;
+        un_803FA258.x4[1] = 0x3B;
+        un_803FA258.x4[2] = 0x2;
+        un_803FA258.x24[1] = 3;
+        un_803FA258.x24[2] = 3;
         gm_SetPendingScene(4);
         gm_801A4B60();
     }
