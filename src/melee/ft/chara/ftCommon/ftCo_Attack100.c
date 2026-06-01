@@ -1429,11 +1429,8 @@ bool fn_800D9558(Fighter_GObj* gobj)
     f32 r;
     s32 i;
     s32 frame;
-
-    if (fp->kind != FTKIND_SAMUS) {
-        return 0;
-    }
-
+    PAD_STACK(0x14);
+    if (fp->kind == FTKIND_SAMUS) {
     attrs = fp->dat_attrs;
     fp->mv.ca.specials.grav += 1.0;
     grav = fp->mv.ca.specials.grav;
@@ -1494,6 +1491,7 @@ bool fn_800D9558(Fighter_GObj* gobj)
                 it_802B7B84(fp->fv.ss.x223C);
             }
         }
+    }
     }
     return 0;
 }
