@@ -1506,15 +1506,17 @@ bool fn_800D8EC8(Fighter_GObj* gobj)
     itLinkHookshotAttributes* hookAttrs;
     Item_GObj* item;
     Vec3 bonePos;
+    UNUSED u32 unused5;
     Vec3 vel;
     f32 grav;
     f32 var_f3;
     f32 mtxY;
+    UNUSED u32 unused1;
+    UNUSED u32 unused2;
+    UNUSED u32 unused3;
+    UNUSED u32 unused4;
 
-    if (fp->kind != FTKIND_LINK && fp->kind != FTKIND_CLINK) {
-        return 0;
-    }
-
+    if (fp->kind == FTKIND_LINK || fp->kind == FTKIND_CLINK) {
     attrs = fp->dat_attrs;
     fp->mv.ca.specials.grav += 1.0;
     grav = fp->mv.ca.specials.grav;
@@ -1574,6 +1576,7 @@ bool fn_800D8EC8(Fighter_GObj* gobj)
                 it_802A2B10(item);
             }
         }
+    }
     }
     return 0;
 }
