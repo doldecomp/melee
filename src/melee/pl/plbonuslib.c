@@ -549,7 +549,7 @@ void pl_8003E4A4(int slot, bool arg1, void* arg2, int count)
         if (seen[i] == 1) {
             table->x0_staleMoveTable.x7AC[i]++;
             if ((u32) table->x0_staleMoveTable.x7AC[i] ==
-                *(u32*) pl_804D6470->x138)
+                pl_804D6470->x138)
             {
                 pl_80038788(slot, 0x9D, 1);
                 table->x0_staleMoveTable.x7AC[i] = 0;
