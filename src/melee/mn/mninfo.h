@@ -4,6 +4,7 @@
 #include "placeholder.h"
 
 #include "baselib/forward.h"
+#include "sc/forward.h"
 
 /// seems like each menu probably has its own struct, and isnt just the 'Menu'
 /// in types.h
@@ -44,11 +45,14 @@ struct MenuInfo_GObj {
 typedef struct HSD_GObj MenuInfo_GObj;
 #endif
 
+extern StaticModelDesc mnInfo_804A0958;
+extern u8 mnInfo_804A0968[0x48];
+
 /* 251A08 */ s32 mnInfo_80251A08(s32);
 /* 251AA4 */ s32 mnInfo_80251AA4(void);
 /* 251AFC */ s32 mnInfo_80251AFC(void);
-/* 251D58 */ s32 mnInfo_80251D58(MenuInfo_GObj*, s32, u32);
-/* 251F04 */ void mnInfo_80251F04(MenuInfo_GObj*, u32, u32);
+/* 251D58 */ s32 mnInfo_80251D58(MenuInfo_GObj*, s32, u32, u32);
+/* 251F04 */ void mnInfo_80251F04(MenuInfo_GObj*, s32, u32);
 /* 251FE4 */ void fn_80251FE4(void);
 /* 2522B8 */ void mnInfo_802522B8(HSD_GObj*);
 /* 2523B8 */ void fn_802523B8(HSD_GObj*);
