@@ -478,26 +478,26 @@ bool ftCo_800D730C(Fighter_GObj* gobj, bool arg1)
             }
             return 1;
         }
-        return 0;
-    }
-    r29 = 1;
-    canJump = fp->x1968_jumpsUsed < fp->co_attrs.max_jumps;
-    if (ftCo_800D72A0(fp) && fp->cmd_vars[0] == 0) {
-        r29 = 0;
-    }
-    r4 = 1;
-    if (!(fp->input.lstick.y >= p_ftCommonData->tap_jump_threshold) &&
-        !(fp->input.held_inputs & 0xC00)) {
-        r4 = 0;
-    }
-    if (canJump && r29 && r4) {
-        result = 1;
     } else {
-        result = 0;
-    }
-    if (result) {
-        ftCo_800D74A4(gobj);
-        return 1;
+        r29 = 1;
+        canJump = fp->x1968_jumpsUsed < fp->co_attrs.max_jumps;
+        if (ftCo_800D72A0(fp) && fp->cmd_vars[0] == 0) {
+            r29 = 0;
+        }
+        r4 = 1;
+        if (!(fp->input.lstick.y >= p_ftCommonData->tap_jump_threshold) &&
+            !(fp->input.held_inputs & 0xC00)) {
+            r4 = 0;
+        }
+        if (canJump && r29 && r4) {
+            result = 1;
+        } else {
+            result = 0;
+        }
+        if (result) {
+            ftCo_800D74A4(gobj);
+            return 1;
+        }
     }
     return 0;
 }
