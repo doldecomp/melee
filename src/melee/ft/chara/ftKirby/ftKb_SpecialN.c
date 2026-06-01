@@ -3,6 +3,8 @@
 
 #include <placeholder.h>
 
+#include "baselib/forward.h"
+
 #include "cm/camera.h"
 #include "ef/efasync.h"
 #include "ef/eflib.h"
@@ -3503,27 +3505,48 @@ static inline void fn_800F9260_DrMario(HSD_GObj* gobj, Fighter* fp, Vec3* pos)
                         fp->facing_dir);
 }
 
+inline s32 fn_800F9260_inline(HSD_GObj* gobj)
+{
+    Fighter* fp2;
+    s32 candidates[9];
+    s32* p;
+    s16 i;
+    s32 count = 0;
+    s32 pick;
+
+    fp2 = GET_FIGHTER(gobj);
+    p = candidates;
+    for (i = 0; i < 9; i++) {
+        if (i != fp2->fv.kb.x68 && i != fp2->fv.kb.x6C) {
+            *p = i;
+            p++;
+            count++;
+        }
+    }
+    pick = candidates[HSD_Randi(count)];
+    fp2->fv.kb.x6C = fp2->fv.kb.x68;
+    fp2->fv.kb.x68 = pick;
+    return pick;
+}
+
 void fn_800F9260(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter* fp2;
+    s32 found = 0;
     Vec3 sp44;
-    s32 candidates[9];
-    s32* p;
-    s32 count;
-    s32 i;
-    s32 pick;
     s32 bone;
-    s32 doit;
+    s32 pick;
+    HSD_JObj* joint;
+    PAD_STACK(0x8);
 
     if (fp->fv.kb.hat.kind != 4) {
         if (fp->throw_flags_b0) {
             fp->throw_flags_b0 = 0;
-            doit = 1;
+            found = 1;
         } else {
-            doit = 0;
+            found = 0;
         }
-        if (doit) {
+        if (found) {
             lb_8000B1CC(
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_LHandN)].joint,
                 NULL, &sp44);
@@ -3531,23 +3554,13 @@ void fn_800F9260(HSD_GObj* gobj)
                 it_8029B6F8((Item_GObj*) gobj, &sp44,
                             It_Kind_Kirby_MarioFire, fp->facing_dir);
                 bone = ftParts_GetBoneIndex(fp, FtPart_LHandN);
-                efSync_Spawn(0x49F, gobj, fp->parts[bone].joint,
-                             &fp->facing_dir);
+                joint = fp->parts[bone].joint;
+                efSync_Spawn(0x49F, gobj, joint, fp->facing_dir);
                 return;
             }
-            count = 0;
-            fp2 = GET_FIGHTER(gobj);
-            p = candidates;
-            for (i = 0; i < 9; i++) {
-                if (i != fp2->fv.kb.x68 && i != fp2->fv.kb.x6C) {
-                    *p = i;
-                    p++;
-                    count++;
-                }
-            }
-            pick = candidates[HSD_Randi(count)];
-            fp2->fv.kb.x6C = fp2->fv.kb.x68;
-            fp2->fv.kb.x68 = pick;
+
+            pick = fn_800F9260_inline(gobj);
+
             itDrMarioPill_Spawn((Item_GObj*) gobj, &sp44, pick,
                                 It_Kind_Kirby_DrMarioVitamin, fp->facing_dir);
         }
