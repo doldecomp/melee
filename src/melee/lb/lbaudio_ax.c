@@ -2817,15 +2817,14 @@ s32 lbAudioAx_80028690(void)
         var_r29 = 0;
     }
 
-    strcpy(lbl_803BB380, lbl_803BB300 + 0x179C);
+    strcpy(lbl_803BB380, "/audio/");
     lbl_804D38D4 = 7;
 
     if (lbl_804D3878 == -1) {
         HSD_AudioSFXKeyOffAll();
         HSD_SynthSFXUnloadBank(0);
         if (st->x274[0] < 1) {
-            strcpy(&lbl_803BB340[lbl_804D38D0],
-                   *(char**) (lbl_803BB340 + 0x9FC));
+            strcpy(&lbl_803BB340[lbl_804D38D0], "main.ssm");
             st->x354[0] = HSD_SynthSFXLoad(lbl_803BB340, 0, 0, 0);
             HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
             st->x274[0] = 2;
@@ -2841,7 +2840,7 @@ s32 lbAudioAx_80028690(void)
 
         lbl_804D3878 = var_r29;
         AXDriver_8038DCFC();
-        strcpy(&lbl_803BB340[lbl_804D38D0], lbl_803BB340 + 0x17A8);
+        strcpy(&lbl_803BB340[lbl_804D38D0], "smash2.sem");
         AXDriver_8038DA70(lbl_803BB340, lb_800195D0);
 
         a = st->x354;
@@ -2861,32 +2860,28 @@ s32 lbAudioAx_80028690(void)
         HSD_SynthSFXUnloadBank(2);
 
         if (st->x274[0x33] < 1) {
-            strcpy(&lbl_803BB340[lbl_804D38D0],
-                   *(char**) (lbl_803BB340 + 0xAC8));
+            strcpy(&lbl_803BB340[lbl_804D38D0], "nr_name.ssm");
             st->x354[0x33] = HSD_SynthSFXLoad(lbl_803BB340, 1, 0, 0);
             HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
             st->x274[0x33] = 2;
         }
 
         if (st->x274[1] < 1) {
-            strcpy(&lbl_803BB340[lbl_804D38D0],
-                   *(char**) (lbl_803BB340 + 0xA00));
+            strcpy(&lbl_803BB340[lbl_804D38D0], "pokemon.ssm");
             st->x354[1] = HSD_SynthSFXLoad(lbl_803BB340, 1, 0, 0);
             HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
             st->x274[1] = 2;
         }
 
         if (st->x274[0x36] < 1) {
-            strcpy(&lbl_803BB340[lbl_804D38D0],
-                   *(char**) (lbl_803BB340 + 0xAD4));
+            strcpy(&lbl_803BB340[lbl_804D38D0], "end.ssm");
             st->x354[0x36] = HSD_SynthSFXLoad(lbl_803BB340, 1, 0, 0);
             HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
             st->x274[0x36] = 2;
         }
 
         if (st->x274[2] < 1) {
-            strcpy(&lbl_803BB340[lbl_804D38D0],
-                   *(char**) (lbl_803BB340 + 0xA04));
+            strcpy(&lbl_803BB340[lbl_804D38D0], "nr_title.ssm");
             st->x354[2] = HSD_SynthSFXLoad(lbl_803BB340, 2, 0, 0);
             HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
             st->x274[2] = 2;
