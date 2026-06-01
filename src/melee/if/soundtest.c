@@ -500,7 +500,7 @@ int un_80300218(void)
 
 int un_80300248(int arg0)
 {
-    if (un_803FA258.x4 && arg0 == 1) {
+    if (un_803FA258.x4[0] && arg0 == 1) {
         lbAudioAx_80024030(1);
         gmMainLib_8015FB68();
     }
