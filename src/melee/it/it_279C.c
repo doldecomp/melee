@@ -139,8 +139,8 @@
 
 #define IT_M_PI_2 1.5707963267948966
 
-extern Quaternion it_803B8588; //{ 0.0f, 0.0f, 0.0f, 0.0f }
-extern Quaternion it_803B8598; //{ 0.0f, 0.0f, 0.0f, 0.0f }
+const Quaternion it_803B8588 = { 0.0f, 0.0f, 0.0f, 0.0f };
+const Quaternion it_803B8598 = { 0.0f, 0.0f, 0.0f, 0.0f };
 
 /// Pokemon items
 struct sdata_ItemGXLink it_803F2310[47] = {

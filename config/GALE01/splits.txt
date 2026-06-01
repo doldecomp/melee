@@ -3126,14 +3126,26 @@ melee/it/it_26B1.c:
 	.data       start:0x803F12E0 end:0x803F1360
 	.sdata2     start:0x804DC658 end:0x804DC698
 
-melee/it/it_266F.c:
-	.text       start:0x8026C47C end:0x8026F9AC
-	.rodata     start:0x803B8560 end:0x803B85F0
+melee/it/itspawn.c:
+	.text       start:0x8026C47C end:0x8026D564
+	.sdata2     start:0x804DC698 end:0x804DC6A8
+
+melee/it/itgroundcoll.c:
+	.text       start:0x8026D564 end:0x8026EB18
+	.sdata2     start:0x804DC6A8 end:0x804DC6B0
+
+melee/it/itdraw.c:
+	.text       start:0x8026EB18 end:0x8026F3AC
 	.sdata      start:0x804D5168 end:0x804D5170
-	.sdata2     start:0x804DC698 end:0x804DC6C8
+	.sdata2     start:0x804DC6B0 end:0x804DC6B8
+
+melee/it/itdrop.c:
+	.text       start:0x8026F3AC end:0x8026F9A0
+	.sdata2     start:0x804DC6B8 end:0x804DC6C8
 
 melee/it/itcoll.c:
-	.text       start:0x8026F9AC end:0x80272560
+	.text       start:0x8026F9A0 end:0x80272560
+	.rodata     start:0x803B8560 end:0x803B8570
 	.data       start:0x803F1360 end:0x803F1418
 	.sdata      start:0x804D5170 end:0x804D5188
 	.sdata2     start:0x804DC6C8 end:0x804DC708
@@ -3155,6 +3167,7 @@ melee/it/ithitbox.c:
 
 melee/it/itmaplib.c:
 	.text       start:0x802759DC end:0x80277D08
+	.rodata     start:0x803B8570 end:0x803B8588
 	.data       start:0x803F1F38 end:0x803F1F90
 	.sdata      start:0x804D5198 end:0x804D51B0
 	.sdata2     start:0x804DC738 end:0x804DC770
@@ -3177,13 +3190,14 @@ melee/it/itanimlist.c:
 
 melee/it/it_279C.c:
 	.text       start:0x80279C48 end:0x8027B5B0
+	.rodata     start:0x803B8588 end:0x803B85A8
 	.data       start:0x803F2310 end:0x803F5428
 	.sdata      start:0x804D51D0 end:0x804D51E0
 	.sdata2     start:0x804DC7B8 end:0x804DC7D0
 
 melee/it/itzako.c:
 	.text       start:0x8027B5B0 end:0x8027CF00
-	.rodata     start:0x803B85F0 end:0x803B8600
+	.rodata     start:0x803B85A8 end:0x803B8600
 	.data       start:0x803F5428 end:0x803F5468
 	.sdata      start:0x804D51E0 end:0x804D51F0
 	.sdata2     start:0x804DC7D0 end:0x804DC830

@@ -12,8 +12,8 @@
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
-extern const Vec3 it_803B8570;
-extern const Vec3 it_803B857C;
+const Vec3 it_803B8570 = { 0.0f, 0.0f, 0.0f };
+const Vec3 it_803B857C = { 0.0f, 0.0f, 0.0f };
 
 void it_802759DC(Item_GObj* item_gobj1, Item_GObj* item_gobj2)
 {
