@@ -508,7 +508,57 @@ u32 pl_8003E420(int arg0)
     return sum;
 }
 
-/// pl_8003E4A4
+inline int match_item_kind(int kind)
+{
+    if (kind >= 0 && kind < 0x23) {
+        return kind;
+    } else {
+        switch (kind) {
+        case 0xCD:
+            return 0x23;
+        case 0xE1:
+            return 0x24;
+        case 0xE2:
+            return 0x25;
+        case 0x28:
+            return 0x26;
+        default:
+            return -1;
+        }
+    }
+}
+
+void pl_8003E4A4(int slot, bool arg1, void* arg2, int count)
+{
+    pl_StaleMoveTableExt_t* table = Player_GetStaleMoveTableIndexPtr2(slot);
+    int* moves = arg2;
+    u32 seen[0x27];
+    int i;
+
+    for (i = 0; i < 0x27; i++) {
+        seen[i] = 0;
+    }
+
+    for (i = 0; i < count; i++) {
+        if (match_item_kind(moves[i]) < 0x27) {
+            seen[match_item_kind(moves[i])] = 1;
+        }
+    }
+
+    for (i = 0; i < 0x27; i++) {
+        if (seen[i] == 1) {
+            table->x0_staleMoveTable.x7AC[i]++;
+            if ((u32) table->x0_staleMoveTable.x7AC[i] ==
+                *(u32*) pl_804D6470->x138)
+            {
+                pl_80038788(slot, 0x9D, 1);
+                table->x0_staleMoveTable.x7AC[i] = 0;
+            }
+        } else {
+            table->x0_staleMoveTable.x7AC[i] = 0;
+        }
+    }
+}
 
 void pl_8003E70C(Item_GObj* igobj)
 {
@@ -694,26 +744,6 @@ void pl_8003ED0C(int arg0, int arg1, int r5, int arg3, float arg2)
 
     total = temp_r4;
     temp_r3->x0_staleMoveTable.xCA0 = pl_CalculateAverage(temp_f30, total);
-}
-
-inline int match_item_kind(int kind)
-{
-    if (kind >= 0 && kind < 0x23) {
-        return kind;
-    } else {
-        switch (kind) {
-        case 0xCD:
-            return 0x23;
-        case 0xE1:
-            return 0x24;
-        case 0xE2:
-            return 0x25;
-        case 0x28:
-            return 0x26;
-        default:
-            return -1;
-        }
-    }
 }
 
 void fn_8003EE2C(int arg0, int arg1)
@@ -1311,7 +1341,7 @@ void pl_80040688(int arg0, int arg1, int arg2)
         bits = &temp_r3->x0_staleMoveTable.xCBC;
         xCC0 = &temp_r3->x0_staleMoveTable.xCC0;
 
-        if (!unk_cond(arg1, arg2)) {
+        if (!unk_cond(arg1, temp_r0)) {
             temp_r0_2 = bits->x3;
             if (temp_r0_2 >= 0x33 && temp_r0_2 <= 0x3D) {
                 pl_80038788(temp_r0, 0x2A, 1);
@@ -1333,8 +1363,8 @@ float pl_800407C8(int arg0)
     temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
     temp_r5 = temp_r3->x0_staleMoveTable.xCEC;
     if (temp_r5 != 0) {
-        float tmp = temp_r3->x0_staleMoveTable.xCEC;
-        temp_f31 = temp_r3->x0_staleMoveTable.xCF0;
+        float tmp = (u32) temp_r3->x0_staleMoveTable.xCEC;
+        temp_f31 = (u32) temp_r3->x0_staleMoveTable.xCF0;
         return pl_CalculateAverage(temp_f31, tmp);
     }
     return 0.0f;

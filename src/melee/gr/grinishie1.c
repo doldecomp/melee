@@ -83,6 +83,10 @@ typedef struct {
     f32 unk24;
     f32 unk28;
     Vec3 unk2C[2];
+    f32 unk44;
+    f32 unk48;
+    f32 unk4C;
+    f32 unk50;
 } grInishie1_stuff;
 
 grInishie1_stuff* grI1_804D69F8;
@@ -105,6 +109,11 @@ Vec3 grI1_803B8268;
             dobj = (dobj != NULL) ? dobj->next : NULL;                        \
         }                                                                     \
     }
+
+s16 grI1_803E48C8[22] = {
+    13, 3, 3, 14, 3, 14, 15, 3, 15, 16, 3, 16,
+    17, 3, 17, 18, 3, 18, 19, 3, 19, 0,
+};
 
 StageCallbacks grI1_803E48F4[] = {
     {
@@ -136,6 +145,34 @@ StageCallbacks grI1_803E48F4[] = {
         0xC0000000,
     },
 };
+
+char grI1_803E4944[] = "/GrI1.dat";
+
+typedef struct grInishie1_StageData {
+    StageData stage_data;
+    char report_fmt_get_gobj[0x24];
+} grInishie1_StageData;
+
+grInishie1_StageData grI1_803E4950 = {
+    {
+        INISHIE1,
+        NULL,
+        grI1_803E4944,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        1,
+        (S16Vec3*) grI1_803E48C8,
+        7,
+    },
+    "%s:%d: couldn t get gobj(id=%d)\n",
+};
+
+char grI1_803E49A8[] = "grinishie1.c";
 
 void grInishie1_801FA908(bool arg) {}
 
@@ -176,8 +213,10 @@ bool grInishie1_801FA9AC(void)
 
 HSD_GObj* grInishie1_801FA9B4(s32 arg0)
 {
-    StageCallbacks* cb = &grI1_803E48F4[arg0];
-    HSD_GObj* gobj = Ground_GetStageGObj(arg0);
+    HSD_GObj* gobj;
+    StageCallbacks* cb = (StageCallbacks*) ((char*) grI1_803E48C8 + 0x2c) + arg0;
+
+    gobj = Ground_GetStageGObj(arg0);
 
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;
@@ -199,8 +238,7 @@ HSD_GObj* grInishie1_801FA9B4(s32 arg0)
             HSD_GObj_SetupProc(gobj, cb->callback2, 4U);
         }
     } else {
-        OSReport("%s:%d: couldn't get gobj(id=%d)\n", "grinishie1.c", 0xE7,
-                 arg0);
+        OSReport(grI1_803E4950.report_fmt_get_gobj, grI1_803E49A8, 0xE7, arg0);
     }
 
     return gobj;
@@ -890,6 +928,37 @@ void fn_801FBEB8(Ground* gr, s32 block_id, CollData* arg2, s32 arg3,
 }
 
 /// #grInishie1_801FC4A0
+void grInishie1_801FC4A0(HSD_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    s32 reached = 0;
+    f32 zero = 0.0f;
+
+    if (gp->gv.inishie1.xF0 != zero) {
+        if (gp->gv.inishie1.xF0 < zero) {
+            gp->gv.inishie1.xF0 += grI1_804D69F8->unk50;
+            if (gp->gv.inishie1.xF0 >= zero) {
+                reached = 1;
+            }
+        } else {
+            gp->gv.inishie1.xF0 -= grI1_804D69F8->unk50;
+            if (gp->gv.inishie1.xF0 <= zero) {
+                reached = 1;
+            }
+        }
+    }
+    if (reached) {
+        gp->gv.inishie1.xF0 = 0.0f;
+        gp->gv.inishie1.xF4 = 0.0f;
+        gp->gv.inishie1.xE0 = 0.0f;
+        gp->gv.inishie1.xE4 = 0.0f;
+        gp->gv.inishie1.xEE = 0;
+    }
+    HSD_JObjSetTranslateY(gp->gv.inishie1.x108,
+                          gp->gv.inishie1.xFC + gp->gv.inishie1.xF0);
+    HSD_JObjSetTranslateY(gp->gv.inishie1.x10C,
+                          gp->gv.inishie1.xFC - gp->gv.inishie1.xF0);
+}
 
 /// #grInishie1_801FC664
 
