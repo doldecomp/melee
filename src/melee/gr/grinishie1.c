@@ -83,6 +83,10 @@ typedef struct {
     f32 unk24;
     f32 unk28;
     Vec3 unk2C[2];
+    f32 unk44;
+    f32 unk48;
+    f32 unk4C;
+    f32 unk50;
 } grInishie1_stuff;
 
 grInishie1_stuff* grI1_804D69F8;
@@ -890,6 +894,37 @@ void fn_801FBEB8(Ground* gr, s32 block_id, CollData* arg2, s32 arg3,
 }
 
 /// #grInishie1_801FC4A0
+void grInishie1_801FC4A0(HSD_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    s32 reached = 0;
+    f32 zero = 0.0f;
+
+    if (gp->gv.inishie1.xF0 != zero) {
+        if (gp->gv.inishie1.xF0 < zero) {
+            gp->gv.inishie1.xF0 += grI1_804D69F8->unk50;
+            if (gp->gv.inishie1.xF0 >= zero) {
+                reached = 1;
+            }
+        } else {
+            gp->gv.inishie1.xF0 -= grI1_804D69F8->unk50;
+            if (gp->gv.inishie1.xF0 <= zero) {
+                reached = 1;
+            }
+        }
+    }
+    if (reached) {
+        gp->gv.inishie1.xF0 = 0.0f;
+        gp->gv.inishie1.xF4 = 0.0f;
+        gp->gv.inishie1.xE0 = 0.0f;
+        gp->gv.inishie1.xE4 = 0.0f;
+        gp->gv.inishie1.xEE = 0;
+    }
+    HSD_JObjSetTranslateY(gp->gv.inishie1.x108,
+                          gp->gv.inishie1.xFC + gp->gv.inishie1.xF0);
+    HSD_JObjSetTranslateY(gp->gv.inishie1.x10C,
+                          gp->gv.inishie1.xFC - gp->gv.inishie1.xF0);
+}
 
 /// #grInishie1_801FC664
 
