@@ -18,11 +18,28 @@
 #include <it/it_26B1.h>
 #include <MetroTRK/intrinsics.h>
 #include <MSL/math.h>
-#include <MSL/math_ppc.h>
 
 /// @todo Lots of 6s in here
 /// pl_8004049C seems to indicate it might have actually been
 /// `Gm_Player_NumMax`
+
+static inline float my_sqrtf(float x)
+{
+    u8 _[4] = { 0 };
+    volatile float y;
+    const double half = 0.5;
+    const double three = 3.0;
+
+    if (x > 0.0f) {
+        double guess = __frsqrte((double) x);
+        guess = half * guess * (three - guess * guess * x);
+        guess = half * guess * (three - guess * guess * x);
+        guess = half * guess * (three - guess * guess * x);
+        y = (float) (x * guess);
+        return y;
+    }
+    return x;
+}
 
 /* 03D514 */ static void plBonusLib_8003D514(int);
 
@@ -972,98 +989,118 @@ void fn_8003F53C(int arg0, int arg1)
 
 void fn_8003F654(int slot, int index, Vec3* pos, Vec3* prevPos)
 {
-    pl_StaleMoveTableExt_t* t = Player_GetStaleMoveTableIndexPtr2(slot);
-    HSD_GObj* gobj = Player_GetEntityAtIndex(slot, index);
-    s32 enabled;
-    s32 type;
-    s32 srcType;
+    f32 new_var;
+    s32 b34_result;
+    pl_StaleMoveTableExt_t* table = Player_GetStaleMoveTableIndexPtr2(slot);
+    Fighter_GObj* entity = Player_GetEntityAtIndex(slot, index);
+    int b34;
+    int teammate_slot;
+    float avg_sum;
+    int i;
+    int count;
+    Vec3* prev_pos2;
     f32 dist;
-    f32 dx;
-    f32 dy;
     f32 sum;
-    f32 d;
-    s32 count;
-    s32 j;
-    Vec3 sp44;
-    Vec3 sp38;
-    pl_StaleMoveTableExt_t* t3;
+    f32 abs;
+    f32 pos_x2;
+    f32 y_delta;
+    Vec3 other_pos;
+    Vec3 cam_pos;
 
-    if (gm_8016AEDC() != 0 && (u32) (gm_8016AEDC() + 0x10000) != -2U) {
-        enabled = 1;
-    } else {
-        enabled = 0;
-    }
-    if (enabled && index != 1) {
-        if (ftLib_8008732C(gobj)) {
+    if (pl_Verify_gm_8016AEDC() && (index != 1)) {
+        prev_pos2 = prevPos;
+        switch (ftLib_8008732C(entity)) {
+        case 0:
+            break;
+        default:
             return;
         }
-        type = ft_80087B34(gobj);
-        if (type == 1) {
-            dx = prevPos->x - pos->x;
-            dy = prevPos->y - pos->y;
-            dist = dx * dx + dy * dy;
-            if (dist > 0.0f) {
-                dist = sqrtf(dist);
+
+        b34_result = ft_80087B34(entity);
+        b34 = b34_result;
+        if (b34 == 1) {
+            dist = my_sqrtf(((prevPos->x - pos->x) * (prevPos->x - pos->x)) +
+                            ((prev_pos2->y - pos->y) * (prevPos->y - pos->y)));
+            teammate_slot = ftLib_80087300(entity);
+            table->xD80 += dist;
+            if (dist > table->xD84) {
+                table->xD84 = dist;
             }
-            srcType = ftLib_80087300(gobj);
-            t->xD80 += dist;
-            if (dist > t->xD84) {
-                t->xD84 = dist;
-            }
-            if (srcType != 6) {
-                t3 = Player_GetStaleMoveTableIndexPtr2(srcType);
-                if (dist > t3->xD88) {
-                    t3->xD88 = dist;
+            if (teammate_slot != 6) {
+                pl_StaleMoveTableExt_t* teammate_table =
+                    Player_GetStaleMoveTableIndexPtr2(teammate_slot);
+                if (dist > teammate_table->xD88) {
+                    teammate_table->xD88 = dist;
                 }
             }
-        } else if (type == 0) {
-            if (ftLib_800865CC(gobj) == 0) {
-                dx = pos->x - prevPos->x;
-                t->xD74 += (dx < 0.0f) ? -dx : dx;
-            } else {
-                dy = pos->y - prevPos->y;
-                if (dy > 0.0f) {
-                    t->xD78 += (dy < 0.0f) ? -dy : dy;
+        } else {
+            if (b34 == 0) {
+                if (ftLib_800865CC(entity) == 0) {
+                    abs = pos->x - prevPos->x;
+                    if (abs < 0.0f) {
+                        abs = -abs;
+                    } else {
+                        abs = +abs;
+                    }
+                    table->xD74 += abs;
                 } else {
-                    t->xD7C += (dy < 0.0f) ? -dy : dy;
+                    y_delta = pos->y - prevPos->y;
+                    abs = y_delta;
+                    if (y_delta > 0.0f) {
+                        if (abs < 0.0f) {
+                            abs = -abs;
+                        } else {
+                            abs = +abs;
+                        }
+                        table->xD78 += abs;
+                    } else {
+                        if (abs < 0.0f) {
+                            abs = -abs;
+                        } else {
+                            abs = +abs;
+                        }
+                        table->xD7C += abs;
+                    }
                 }
             }
         }
+
         sum = 0.0f;
         count = 0;
-        for (j = 0; j < 6; j++) {
-            if (j != slot) {
-                s32 sameTeam;
-                if (gm_8016B168() != 0 &&
-                    Player_GetTeam(j) == Player_GetTeam(slot)) {
-                    sameTeam = 1;
-                } else {
-                    sameTeam = 0;
-                }
-                if (!sameTeam && Player_8003221C(j) &&
-                    ftLib_8008732C(Player_GetEntity(j)) == 0) {
-                    Player_LoadPlayerCoords(j, &sp44);
-                    d = pos->x - sp44.x;
-                    if (d < 0.0f) {
-                        d = -d;
+        {
+            for (i = 0; 6 > i; i++) {
+                if ((((i != slot) && (!pl_CheckIfSameTeam(slot, i))) &&
+                     Player_8003221C(i)) &&
+                    (!ftLib_8008732C(Player_GetEntity(i))))
+                {
+                    Player_LoadPlayerCoords(i, &other_pos);
+                    pos_x2 = pos->x;
+                    abs = other_pos.x;
+                    abs = pos_x2 - abs;
+                    if (abs < 0.0f) {
+                        abs = -abs;
                     }
-                    sum += d;
+                    sum += abs;
                     count++;
                 }
             }
         }
+
         if (count != 0) {
-            t->xD90++;
-            t->xD8C = (t->xD8C * (f32) (t->xD90 - 1) + sum / (f32) count) /
-                      (f32) t->xD90;
+            table->xD90++;
+            avg_sum = pl_CalculateAverage(sum, count);
+            avg_sum = (table->xD8C * (table->xD90 - 1)) + avg_sum;
+            table->xD8C = pl_CalculateAverage(avg_sum, table->xD90);
         }
-        t->xD98++;
-        Stage_UnkSetVec3TCam_Offset(&sp38);
-        d = pos->x - sp38.x;
-        if (d < 0.0f) {
-            d = -d;
+
+        table->xD98++;
+        Stage_UnkSetVec3TCam_Offset(&cam_pos);
+        abs = pos->x - cam_pos.x;
+        if (abs < 0.0f) {
+            abs = -abs;
         }
-        t->xD94 = (t->xD94 * (f32) (t->xD98 - 1) + d) / (f32) t->xD98;
+        dist = (table->xD94 * (table->xD98 - 1)) + (new_var = abs);
+        table->xD94 = pl_CalculateAverage(dist, table->xD98);
     }
 }
 
