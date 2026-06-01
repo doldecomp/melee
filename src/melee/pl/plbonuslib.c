@@ -508,7 +508,57 @@ u32 pl_8003E420(int arg0)
     return sum;
 }
 
-/// pl_8003E4A4
+inline int match_item_kind(int kind)
+{
+    if (kind >= 0 && kind < 0x23) {
+        return kind;
+    } else {
+        switch (kind) {
+        case 0xCD:
+            return 0x23;
+        case 0xE1:
+            return 0x24;
+        case 0xE2:
+            return 0x25;
+        case 0x28:
+            return 0x26;
+        default:
+            return -1;
+        }
+    }
+}
+
+void pl_8003E4A4(int slot, bool arg1, void* arg2, int count)
+{
+    pl_StaleMoveTableExt_t* table = Player_GetStaleMoveTableIndexPtr2(slot);
+    int* moves = arg2;
+    u32 seen[0x27];
+    int i;
+
+    for (i = 0; i < 0x27; i++) {
+        seen[i] = 0;
+    }
+
+    for (i = 0; i < count; i++) {
+        if (match_item_kind(moves[i]) < 0x27) {
+            seen[match_item_kind(moves[i])] = 1;
+        }
+    }
+
+    for (i = 0; i < 0x27; i++) {
+        if (seen[i] == 1) {
+            table->x0_staleMoveTable.x7AC[i]++;
+            if ((u32) table->x0_staleMoveTable.x7AC[i] ==
+                *(u32*) pl_804D6470->x138)
+            {
+                pl_80038788(slot, 0x9D, 1);
+                table->x0_staleMoveTable.x7AC[i] = 0;
+            }
+        } else {
+            table->x0_staleMoveTable.x7AC[i] = 0;
+        }
+    }
+}
 
 void pl_8003E70C(Item_GObj* igobj)
 {
@@ -696,26 +746,6 @@ void pl_8003ED0C(int arg0, int arg1, int r5, int arg3, float arg2)
     temp_r3->x0_staleMoveTable.xCA0 = pl_CalculateAverage(temp_f30, total);
 }
 
-inline int match_item_kind(int kind)
-{
-    if (kind >= 0 && kind < 0x23) {
-        return kind;
-    } else {
-        switch (kind) {
-        case 0xCD:
-            return 0x23;
-        case 0xE1:
-            return 0x24;
-        case 0xE2:
-            return 0x25;
-        case 0x28:
-            return 0x26;
-        default:
-            return -1;
-        }
-    }
-}
-
 void fn_8003EE2C(int arg0, int arg1)
 {
     pl_StaleMoveTableExt_t* temp_r31;
@@ -837,7 +867,80 @@ void fn_8003EE2C(int arg0, int arg1)
     }
 }
 
-/// fn_8003F294
+inline unsigned int plBonusLib_8003F294_inline(plActionStats* stats,
+                                               int attack)
+{
+    return pl_800386D8(stats, attack);
+}
+
+void fn_8003F294(int slot, int index)
+{
+    pl_StaleMoveTableExt_t* table = Player_GetStaleMoveTableIndexPtr2(slot);
+    unsigned int new_var;
+    unsigned int threshold;
+    plActionStats* stats;
+    int threshold2;
+
+    PAD_STACK(24);
+
+    Player_GetEntityAtIndex(slot, index);
+    stats = Player_GetActionStats(slot);
+
+    do {
+        if (index == 1) {
+            return;
+        }
+    } while (0);
+
+    pl_8003906C(slot, 0x3B, 0L, pl_804D6470->x70,
+                threshold2 = pl_804D6470->x74,
+                plBonusLib_8003F294_inline(stats, 0x6B), &table->xD9C);
+    pl_8003906C(slot, 0x45, 0L, pl_804D6470->x90, threshold = pl_804D6470->x94,
+                plBonusLib_8003F294_inline(stats, 0x70), &table->xDA0);
+    {
+        int e8 = pl_800386E8((pl_800386E8_arg0_t*) stats);
+        pl_8003906C(slot, 0x49, 0L, pl_804D6470->xA8,
+                    threshold = pl_804D6470->xAC, e8, &table->xDA4);
+    }
+    pl_8003906C(slot, 0x54, 0L, pl_804D6470->xC4, threshold = pl_804D6470->xC8,
+                plBonusLib_8003F294_inline(stats, 0x6F), &table->xDA8);
+    pl_8003906C(slot, -1, (unsigned int*) &table->xDC8, pl_804D6470->x18,
+                threshold = pl_804D6470->x1C, stats->hits.total, &table->xDAC);
+    pl_8003906C(slot, 0x13, 0L, pl_804D6470->x2C, threshold = pl_804D6470->x30,
+                stats->attacks.total, &table->xDB0);
+    threshold = (unsigned int) pl_804D6470->xE4;
+    pl_8003906C(slot, 0x5C, 0L, pl_804D6470->xE0, threshold, table->xD70,
+                &table->xDB4);
+    pl_8003906C(slot, 0x99, 0L, pl_804D6470->x130,
+                threshold = pl_804D6470->x134, table->xD34, &table->xDB8);
+    threshold = pl_804D6470->x80;
+    pl_8003906C(slot, 0x3D, 0L, pl_804D6470->x7C, threshold,
+                table->x0_staleMoveTable.xCD8, &table->xDBC);
+
+    {
+        pl_StaleMoveTableExt_t* t2 = Player_GetStaleMoveTableIndexPtr2(slot);
+        f32 mag =
+            sqrtf__Ff(t2->x0_staleMoveTable.xCDC * t2->x0_staleMoveTable.xCDC +
+                      t2->x0_staleMoveTable.xCE0 * t2->x0_staleMoveTable.xCE0);
+        f32 x8c = *((f32*) &pl_804D6470->x8C);
+        pl_80039238(slot, 0x44, 0L, pl_804D6470->x88, &table->xDC0, x8c, mag);
+    }
+
+    if (pl_8003906C(slot, -1, (unsigned int*) &table->xDCC, pl_804D6470->xB8,
+                    new_var = pl_804D6470->xBC, table->xCF4, &table->xDC4))
+    {
+        u32 v = gm_8016AEDC();
+        u32 xb8 = pl_804D6470->xB8;
+        if (xb8 == v) {
+            if (table->xD5C <= xb8) {
+                table->xDD1.bit5 = 1;
+            }
+        } else if (table->xDD1.bit5 && table->xD5C > xb8) {
+            table->xDD1.bit5 = 0;
+        }
+        table->xD5C = -1;
+    }
+}
 
 void fn_8003F53C(int arg0, int arg1)
 {
@@ -1238,7 +1341,7 @@ void pl_80040688(int arg0, int arg1, int arg2)
         bits = &temp_r3->x0_staleMoveTable.xCBC;
         xCC0 = &temp_r3->x0_staleMoveTable.xCC0;
 
-        if (!unk_cond(arg1, arg2)) {
+        if (!unk_cond(arg1, temp_r0)) {
             temp_r0_2 = bits->x3;
             if (temp_r0_2 >= 0x33 && temp_r0_2 <= 0x3D) {
                 pl_80038788(temp_r0, 0x2A, 1);
@@ -1260,8 +1363,8 @@ float pl_800407C8(int arg0)
     temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
     temp_r5 = temp_r3->x0_staleMoveTable.xCEC;
     if (temp_r5 != 0) {
-        float tmp = temp_r3->x0_staleMoveTable.xCEC;
-        temp_f31 = temp_r3->x0_staleMoveTable.xCF0;
+        float tmp = (u32) temp_r3->x0_staleMoveTable.xCEC;
+        temp_f31 = (u32) temp_r3->x0_staleMoveTable.xCF0;
         return pl_CalculateAverage(temp_f31, tmp);
     }
     return 0.0f;
