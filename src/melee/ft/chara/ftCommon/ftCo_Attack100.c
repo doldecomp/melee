@@ -1975,50 +1975,56 @@ void fn_800DA004(Fighter_GObj* gobj)
 void fn_800DA054(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter* victim = GET_FIGHTER(fp->victim_gobj);
-    UNUSED u32 unused1;
-    UNUSED u32 unused2;
-    UNUSED u32 unused3;
-    UNUSED u32 unused4;
-    UNUSED u32 unused5;
-    UNUSED u32 unused6;
+    Fighter* victim = HSD_GObjGetUserData(fp->victim_gobj);
+    Fighter* new_var2;
+    u32 pad1;
+    u32 pad2;
+    u32 pad3;
+    float tmp;
+    u32 pad4;
+    u32 pad5;
+    u32 pad6;
     Vec3 victimPos;
     Vec3 selfPos;
     f32 facing;
     f32 dx;
+    HSD_JObj* new_var;
     f32 dy;
+    float new_var3;
     f32 v;
     f32 spd;
     PAD_STACK(0x20);
 
     if (!victim->x2226_b2) {
-        lb_8000B1CC(fp->mv.co.capturedamage.x18, NULL, &selfPos);
+        new_var = fp->mv.co.capturedamage.x18;
+        lb_8000B1CC(new_var, 0L, &selfPos);
+        new_var2 = victim;
         lb_8000B1CC(
-            victim->parts[ftParts_GetBoneIndex(victim, FtPart_XRotN)].joint,
-            NULL, &victimPos);
-        facing = fp->facing_dir;
+            victim->parts[ftParts_GetBoneIndex(new_var2, FtPart_XRotN)].joint,
+            0L, &victimPos);
+        facing = (new_var3 = fp->facing_dir);
+        new_var3 = victimPos.y - selfPos.y;
         dx = victimPos.x - selfPos.x;
-        dy = (victimPos.y - selfPos.y) + fp->x2170;
-        if (!(dx * facing > p_ftCommonData->x34C)) {
-            if (dy < 0.0f) {
-                dy = -dy;
-            }
-            if (dy > p_ftCommonData->x350) {
-                ftCo_800DA698(gobj, 1);
-            } else if (dx * facing < 0.0f) {
-                if (dx < 0.0f) {
-                    v = -dx;
-                } else {
-                    v = dx;
-                }
-                spd = fp->co_attrs.walk_max_vel;
-                if (v > spd) {
-                    v = spd;
-                }
-                fp->gr_vel = (dx > 0.0f) ? v : -v;
-            }
-        } else {
+        dy = new_var3 + fp->x2170;
+
+        if ((dx * facing > p_ftCommonData->x34C)) {
+            goto jmp;
+        }
+
+        if (dy < 0.0f) {
+            dy = -dy;
+        }
+        if (dy > p_ftCommonData->x350) {
+        jmp:
             ftCo_800DA698(gobj, 1);
+        } else if (dx * facing < 0.0f) {
+            v = (dx < 0.0f ? -dx : dx);
+            spd = (tmp = fp->co_attrs.walk_max_vel);
+
+            if (v > spd) {
+                v = spd;
+            }
+            fp->gr_vel = (dx > 0.0f) ? (v) : (-v);
         }
     }
 }
