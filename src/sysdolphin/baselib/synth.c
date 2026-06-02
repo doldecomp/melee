@@ -355,8 +355,10 @@ void HSD_SynthSFXGroupDataReaddress(AXVPB* arg0, void* callback)
 {
     u8* q;
     int i;
+    int count;
     int delta;
     u8* p;
+    int j;
 
     p = (u8*) arg0 + 0x18;
     sfxGroupDataReaddressCounter += 1;
@@ -367,19 +369,17 @@ void HSD_SynthSFXGroupDataReaddress(AXVPB* arg0, void* callback)
     i = 0;
     delta = ((u8*) callback - (u8*) arg0->callback) * 2;
     while (i < arg0->priority) {
-        int count = *(int*) (p + 8);
+        count = *(int*) (p + 8);
         q = p;
-        if (count > 0) {
-            do {
-                if (*(u16*) (q + 0x10) != 0) {
-                    *(u32*) (q + 0x14) += delta;
-                }
-                *(u32*) (q + 0x18) += delta;
-                *(u32*) (q + 0x1C) += delta;
-                q += 0x40;
-            } while (--count != 0);
+        for (j = 0; j < count; j++) {
+            if (*(u16*) (q + 0x10) != 0) {
+                *(u32*) (q + 0x14) += delta;
+            }
+            *(u32*) (q + 0x18) += delta;
+            *(u32*) (q + 0x1C) += delta;
+            q += 0x40;
         }
-        p += (count << 6);
+        p = (u8*) ((count << 6) + (uintptr_t) p);
         p += 0x10;
         i++;
     }
