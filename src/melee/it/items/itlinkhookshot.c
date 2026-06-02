@@ -465,6 +465,22 @@ static void inline it_802A2EE4_inline_alt(ItemLink* item_link, Vec3* pos)
     pos->z = m[2][3];
 }
 
+static void inline it_802A2EE4_inline_alt_pad(ItemLink* item_link, Vec3* pos)
+{
+    f32 zero = 0.0F;
+    UNUSED f32 pad = zero;
+    Mtx m;
+    PSMTXIdentity((MtxPtr) &m);
+    m[0][3] = zero;
+    m[1][3] = zero;
+    m[2][3] = it_804D6D48;
+    HSD_JObjSetupMatrix(item_link->jobj);
+    PSMTXConcat(item_link->jobj->mtx, (MtxPtr) &m, (MtxPtr) &m);
+    pos->x = m[0][3];
+    pos->y = m[1][3];
+    pos->z = m[2][3];
+}
+
 void it_802A2EE4(Item_GObj* arg0)
 {
     Vec3 pos;
@@ -1206,31 +1222,34 @@ s32 it_802A4BFC(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* attr,
     ItemLink* link_1;
     Vec3 vec;
     f64 len;
+    UNUSED u8 frame_pad[8];
+    Vec3 pos0;
+    UNUSED u8 pad0[8];
+    Vec3 pos1;
+    UNUSED u8 pad1[8];
+    Vec3 pos2;
     ftLk_DatAttrs* lk_attr = fp->ft_data->ext_attr;
-    PAD_STACK(14 * 4);
+    PAD_STACK(7 * 4);
     if (fp->motion_id == 0xD4) {
         if (fp->mv.ca.specials.grav == lk_attr->x88) {
-            Vec3 pos;
-            it_802A2EE4_inline_alt(link_0, &pos);
-            link_0->pos = pos;
+            it_802A2EE4_inline_alt(link_0, &pos0);
+            link_0->pos = pos0;
             link_0->coll_data.cur_pos = link_0->pos;
             link_0->coll_data.last_pos = link_0->coll_data.cur_pos;
             link_0->x2C_b0 = 1;
         }
     } else if (fp->motion_id == 0xD6) {
         if (fp->mv.ca.specials.grav == lk_attr->x98) {
-            Vec3 pos;
-            it_802A2EE4_inline_alt(link_0, &pos);
-            link_0->pos = pos;
+            it_802A2EE4_inline_alt(link_0, &pos1);
+            link_0->pos = pos1;
             link_0->coll_data.cur_pos = link_0->pos;
             link_0->coll_data.last_pos = link_0->coll_data.cur_pos;
             link_0->x2C_b0 = 1;
         }
     } else if (fp->motion_id == 0x168) {
         if (fp->mv.ca.specials.grav == lk_attr->xA8) {
-            Vec3 pos;
-            it_802A2EE4_inline_alt(link_0, &pos);
-            link_0->pos = pos;
+            it_802A2EE4_inline_alt_pad(link_0, &pos2);
+            link_0->pos = pos2;
             link_0->coll_data.cur_pos = link_0->pos;
             link_0->coll_data.last_pos = link_0->coll_data.cur_pos;
             link_0->x2C_b0 = 1;

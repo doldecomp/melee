@@ -680,8 +680,8 @@ bool gmMainLib_8015D984(u32 arg0)
 
     if (gmMainLib_8015DA90(arg0) == 0) {
         u32* base = &gmMainLib_804D3EE0->unk_6C[0];
-        u32* qwe = &base[arg0];
-        *qwe = lbTime_8000AFBC();
+        u32* temp_r31 = &base[arg0];
+        *temp_r31 = lbTime_8000AFBC();
 
         gmMainLib_8015D9F4(arg0);
         gmMainLib_8015DA40(arg0);
