@@ -177,6 +177,7 @@ void grKongo_801D55D8(Ground_GObj* arg0)
     Vec3 sp14;
     Ground* temp_r31;
     void* temp_r28;
+    PAD_STACK(8);
 
     temp_r31 = arg0->user_data;
     temp_r28 = arg0->hsd_obj;
@@ -194,9 +195,9 @@ void grKongo_801D55D8(Ground_GObj* arg0)
     temp_r31->gv.kongo3.xE0 = 0.0f;
     temp_r31->gv.kongo.xE8 = grKg_804D6980->unk60;
     temp_r31->gv.kongo2.xCC =
-        random_adder_f(grKg_804D6980->unk2C, grKg_804D6980->unk30);
+        rand_range((s32) grKg_804D6980->unk30, (s32) grKg_804D6980->unk2C);
     temp_r31->gv.kongo2.xCE =
-        random_adder(grKg_804D6980->unk68, grKg_804D6980->unk64);
+        rand_range(grKg_804D6980->unk68, grKg_804D6980->unk64);
     lb_8000B1CC(Ground_801C3FA4(arg0, 1), NULL, &sp14);
     Ground_801C4D70(arg0, &sp14, temp_r31->gv.kongo.xD8);
 #if 0

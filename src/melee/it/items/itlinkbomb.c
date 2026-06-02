@@ -15,10 +15,10 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_3F14.h"
-#include "it/ithitbox.h"
-#include "it/itmaplib.h"
 #include "it/itCharItems.h"
 #include "it/item.h"
+#include "it/ithitbox.h"
+#include "it/itmaplib.h"
 #include "lb/lb_00F9.h"
 #include "mp/mpcoll.h"
 #include "MSL/math.h"
@@ -433,16 +433,14 @@ bool itLinkbomb_UnkMotion3_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itLinkBombAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
-    bool ok = it_80272C6C(gobj);
-    PAD_STACK(8);
-
-    if (!ok) {
+    PAD_STACK(12);
+    if (!it_80272C6C(gobj)) {
         itLinkbomb_UnkMotion3_Anim_inline1(gobj);
     }
     // permuterslop
     if (attrs != NULL) {
     }
-    if (ok != 0) {
+    if (ip != NULL) {
     }
     itLinkbomb_UnkMotion3_Anim_inline2(gobj);
     return false;
