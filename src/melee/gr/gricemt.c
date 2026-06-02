@@ -1456,8 +1456,13 @@ static inline HSD_GObj* grIceMt_801F71E8_noinline2(int id)
     return grIceMt_801F71E8_inner2(id);
 }
 
-void grIceMt_801F9ACC(Ground_GObj* gobj, float y, GrIceMtSegmentLookup ev,
-                      Ground_GObj* arg3)
+static inline void* grIceMt_GetUserData(HSD_GObj* gobj)
+{
+    return gobj->user_data;
+}
+
+int grIceMt_801F9ACC(Ground_GObj* gobj, float y, GrIceMtSegmentLookup ev,
+                     Ground_GObj* arg3)
 {
     s16* seg = (s16*) gobj;
     s32 did = 0;
@@ -1468,10 +1473,12 @@ void grIceMt_801F9ACC(Ground_GObj* gobj, float y, GrIceMtSegmentLookup ev,
     f32 cur;
     f32 f;
     f32 f2;
+    HSD_JObj** new_var;
     s16 id;
+    PAD_STACK(16);
 
     if (seg[0] == -1 || seg[1] == -1) {
-        return;
+        return 0;
     }
     f = grIceMt_801F993C(seg[0], seg[1]);
     mgobj = Ground_801C2BA4(seg[1]);
@@ -1480,16 +1487,16 @@ void grIceMt_801F9ACC(Ground_GObj* gobj, float y, GrIceMtSegmentLookup ev,
     HSD_ASSERT(0xABA, jobj);
     cur = HSD_JObjGetTranslationY(jobj);
     if (ABS(cur) < 10.0f) {
-        gp = Ground_801C2BA4(seg[1])->user_data;
+        gp = grIceMt_GetUserData(Ground_801C2BA4(seg[1]));
         ((UnkFlagStruct*) &gp->gv.icemt2.xC4)->b1 = 1;
     } else if (ABS(cur + f) < 10.0f) {
-        gp = Ground_801C2BA4(seg[0])->user_data;
+        gp = grIceMt_GetUserData(Ground_801C2BA4(seg[0]));
         ((UnkFlagStruct*) &gp->gv.icemt2.xC4)->b1 = 1;
     }
     if (cur < 0.5f * -f) {
         id = seg[0];
         if (id != -1) {
-            gp = Ground_801C2BA4(id)->user_data;
+            gp = grIceMt_GetUserData(Ground_801C2BA4(id));
             if (!((UnkFlagStruct*) &gp->gv.icemt2.xC4)->b0) {
                 ((UnkFlagStruct*) &gp->gv.icemt2.xC4)->b0 = 1;
                 ((UnkFlagStruct*) &gp->gv.icemt2.xC4)->b1 = 1;
@@ -1497,13 +1504,13 @@ void grIceMt_801F9ACC(Ground_GObj* gobj, float y, GrIceMtSegmentLookup ev,
         }
         id = seg[1];
         if (id != -1) {
-            gp = Ground_801C2BA4(id)->user_data;
+            gp = grIceMt_GetUserData(Ground_801C2BA4(id));
             ((UnkFlagStruct*) &gp->gv.icemt2.xC4)->b0 = 0;
         }
     } else {
         id = seg[1];
         if (id != -1) {
-            gp = Ground_801C2BA4(id)->user_data;
+            gp = grIceMt_GetUserData(Ground_801C2BA4(id));
             if (!((UnkFlagStruct*) &gp->gv.icemt2.xC4)->b0) {
                 ((UnkFlagStruct*) &gp->gv.icemt2.xC4)->b0 = 1;
                 ((UnkFlagStruct*) &gp->gv.icemt2.xC4)->b1 = 1;
@@ -1511,7 +1518,7 @@ void grIceMt_801F9ACC(Ground_GObj* gobj, float y, GrIceMtSegmentLookup ev,
         }
         id = seg[0];
         if (id != -1) {
-            gp = Ground_801C2BA4(id)->user_data;
+            gp = grIceMt_GetUserData(Ground_801C2BA4(id));
             ((UnkFlagStruct*) &gp->gv.icemt2.xC4)->b0 = 0;
         }
     }
@@ -1537,13 +1544,14 @@ void grIceMt_801F9ACC(Ground_GObj* gobj, float y, GrIceMtSegmentLookup ev,
         }
         mgobj = Ground_801C2BA4(seg[0]);
         if (mgobj != NULL) {
-            gp = mgobj->user_data;
+            gp = grIceMt_GetUserData(mgobj);
             if (gp != NULL) {
                 ((UnkFlagStruct*) &gp->gv.icemt2.xC4)->b1 = 1;
-                gp = mgobj->user_data;
+                gp = grIceMt_GetUserData(mgobj);
+                new_var = &gp->gv.icemt2.xC8;
                 if (((UnkFlagStruct*) &gp->gv.icemt2.xC4)->b1) {
                     ((UnkFlagStruct*) &gp->gv.icemt2.xC4)->b1 = 0;
-                    ptrs = &gp->gv.icemt2.xC8;
+                    ptrs = new_var;
                     if (ptrs[0]) {
                         Ground_801C2D0C(0, ptrs[0]);
                     }
@@ -1582,13 +1590,14 @@ void grIceMt_801F9ACC(Ground_GObj* gobj, float y, GrIceMtSegmentLookup ev,
         }
         mgobj = Ground_801C2BA4(seg[1]);
         if (mgobj != NULL) {
-            gp = mgobj->user_data;
+            gp = grIceMt_GetUserData(mgobj);
             if (gp != NULL) {
                 ((UnkFlagStruct*) &gp->gv.icemt2.xC4)->b1 = 1;
-                gp = mgobj->user_data;
+                gp = grIceMt_GetUserData(mgobj);
+                new_var = &gp->gv.icemt2.xC8;
                 if (((UnkFlagStruct*) &gp->gv.icemt2.xC4)->b1) {
                     ((UnkFlagStruct*) &gp->gv.icemt2.xC4)->b1 = 0;
-                    ptrs = &gp->gv.icemt2.xC8;
+                    ptrs = new_var;
                     if (ptrs[0]) {
                         Ground_801C2D0C(0, ptrs[0]);
                     }
@@ -1609,6 +1618,7 @@ void grIceMt_801F9ACC(Ground_GObj* gobj, float y, GrIceMtSegmentLookup ev,
     if (did != 0) {
         grIceMt_801FA854();
     }
+    return did;
 }
 
 static inline HSD_JObj** grIceMt_FA0BC_jobjs(Ground* g)

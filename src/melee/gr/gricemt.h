@@ -142,8 +142,8 @@ extern f32 grIm_804DB570;
 /* 1F96E0 */ float grIceMt_801F96E0(struct grIceMt_GroundVars*, float);
 /* 1F98A8 */ void grIceMt_801F98A8(HSD_GObj* param1);
 /* 1F993C */ f32 grIceMt_801F993C(s32, s32);
-/* 1F9ACC */ void grIceMt_801F9ACC(Ground_GObj*, float, GrIceMtSegmentLookup,
-                                   Ground_GObj*);
+/* 1F9ACC */ int grIceMt_801F9ACC(Ground_GObj*, float, GrIceMtSegmentLookup,
+                                  Ground_GObj*);
 /* 1FA0BC */ void grIceMt_801FA0BC(s16*);
 /* 1FA364 */ bool grIceMt_801FA364(void* state, float* out, HSD_GObjEvent cb,
                                    Ground_GObj* gobj);
