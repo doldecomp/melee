@@ -1474,7 +1474,7 @@ int grIceMt_801F9ACC(Ground_GObj* gobj, float y, GrIceMtSegmentLookup ev,
     f32 f;
     f32 f2;
     HSD_JObj** new_var;
-    s16 id;
+    s32 id;
     PAD_STACK(16);
 
     if (seg[0] == -1 || seg[1] == -1) {
