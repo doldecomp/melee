@@ -469,19 +469,17 @@ void if_802F7E24(void)
 
 void if_802F7E7C(void)
 {
-    HSD_GObj** data = (HSD_GObj**) lbl_804A1340;
-    s32 i = 0;
+    s32 i;
     HSD_GObj** base = (HSD_GObj**) lbl_804A1340;
 
-    do {
-        if (data[1] != NULL) {
-            HSD_GObjPLink_80390228(data[1]);
+    for (i = 0; i < 6; i++) {
+        if (base[i * 2 + 1] != NULL) {
+            HSD_GObjPLink_80390228(base[i * 2 + 1]);
         }
-        if (data[2] != NULL) {
-            HSD_GObjPLink_80390228(data[2]);
+        if (base[i * 2 + 2] != NULL) {
+            HSD_GObjPLink_80390228(base[i * 2 + 2]);
         }
-        i++;
-        data += 2;
-    } while (i < 6);
+    }
+
     memzero(base, 0x34);
 }
