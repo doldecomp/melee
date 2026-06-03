@@ -22,10 +22,6 @@ float ftCo_800BD19C(Fighter_GObj* gobj, Vec3* pos)
            SQ(fp->cur_pos.z - pos->z);
 }
 
-float const ftCo_804D8BA8 = 0;
-float const ftCo_804D8BAC = 1;
-double const ftCo_804D8BB0 = S32_TO_F32;
-
 static inline void inlineA0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

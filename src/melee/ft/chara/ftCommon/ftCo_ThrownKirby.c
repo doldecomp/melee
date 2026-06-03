@@ -39,10 +39,6 @@ typedef float (*GetFloatFunc)(Fighter_GObj* gobj);
 /* literal */ double const ftCo_804D8BE8 = 3;
 /* literal */ float const ftCo_804D8BF0 = -1;
 /* literal */ float const ftCo_804D8BF4 = +1;
-/* literal */ extern char* ftCo_804D3BE0;
-/* literal */ extern char* ftCo_804D3BE8;
-/* literal */ extern char* ftCo_804D3BF0;
-
 FighterKind ftCo_800BD9E0(Fighter_GObj* gobj, Fighter_GObj* victim_gobj)
 {
     ftKb_Fighter* fp = GET_FIGHTER(gobj);
