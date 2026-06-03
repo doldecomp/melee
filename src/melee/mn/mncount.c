@@ -319,8 +319,8 @@ static inline bool mnCount_8025092C_inline(void)
 s32 mnCount_8025092C(s32 rank, u32 (*getVal)(s32), bool mode)
 {
     CountEntry entries[NUM_CHARACTERS];
+    CountEntry tmp;
     int i, j, min;
-    PAD_STACK(8);
     if (mnCount_8025092C_inline()) {
         return NUM_CHARACTERS;
     }
@@ -331,12 +331,12 @@ s32 mnCount_8025092C(s32 rank, u32 (*getVal)(s32), bool mode)
     for (i = 0; i < NUM_CHARACTERS; i++) {
         min = i;
         for (j = i + 1; j < NUM_CHARACTERS; j++) {
-            if (entries[j].val < entries[min].val) {
+            if (entries[min].val < entries[j].val) {
                 min = j;
             }
         }
         if (min != i) {
-            CountEntry tmp = entries[min];
+            tmp = entries[min];
             for (j = min; j > i; j--) {
                 entries[j] = entries[j - 1];
             }
