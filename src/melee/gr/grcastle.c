@@ -845,18 +845,6 @@ void grCastle_801CE3AC(Ground_GObj* gobj)
     }
 }
 
-inline void fake_HSD_JObjSetTranslate(HSD_JObj* jobj, Vec3* translate)
-{
-#undef __FILE__
-#define __FILE__ "jobj.h"
-    HSD_ASSERT(916, jobj);
-    HSD_ASSERT(917, translate);
-    jobj->translate = *translate;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        ftCo_800C6AFC(jobj);
-    }
-}
-
 void grCastle_801CE578(Ground_GObj* gobj)
 {
     Ground* new_var2;
@@ -923,7 +911,7 @@ void grCastle_801CE578(Ground_GObj* gobj)
                     if (newobj != NULL) {
                         HSD_JObj* jobj = HSD_GObjGetHSDObj(newobj);
                         lb_8000B1CC(Ground_801C3FA4(gobj, 0), NULL, &jpos);
-                        fake_HSD_JObjSetTranslate(jobj, &jpos);
+                        HSD_JObjSetTranslateWithMtxDirty(jobj, &jpos);
                         lb_800119DC(&jpos, 0xB4, 20.0f, 0.1f, 1.0471976f);
                     }
                 }

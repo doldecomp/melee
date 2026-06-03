@@ -1,7 +1,5 @@
 #include "gm_1A4C.h"
 
-#include "gm/gmregtyfall.static.h"
-
 #include "gm_unsplit.h"
 
 #include "ft/forward.h"
@@ -119,20 +117,20 @@ void gm_801A7B00(void)
     }
 
     val = -un_803060BC(char_idx, 0);
-    fake_tyfall_HSD_JObjSetTranslateX(child, val);
+    HSD_JObjSetTranslateXWithMtxDirty(child, val);
     val = -un_803060BC(char_idx, 1);
-    fake_tyfall_HSD_JObjSetTranslateY(child, val);
+    HSD_JObjSetTranslateYWithMtxDirty(child, val);
     val = -un_803060BC(char_idx, 2);
-    fake_tyfall_HSD_JObjSetTranslateZ(child, val);
+    HSD_JObjSetTranslateZWithMtxDirty(child, val);
 
     val = -(0.017453292f * un_803060BC(char_idx, 5));
-    fake_tyfall_HSD_JObjSetRotationY(child, val);
+    HSD_JObjSetRotationYWithMtxDirty(child, val);
 
     scale = 1.0f / un_803060BC(char_idx, 3);
     scale = un_803060BC(char_idx, 4) * scale;
-    fake_tyfall_HSD_JObjSetScaleX(child, scale);
-    fake_tyfall_HSD_JObjSetScaleY(child, scale);
-    fake_tyfall_HSD_JObjSetScaleZ(child, scale);
+    HSD_JObjSetScaleXWithMtxDirty(child, scale);
+    HSD_JObjSetScaleYWithMtxDirty(child, scale);
+    HSD_JObjSetScaleZWithMtxDirty(child, scale);
 
     HSD_GObj_SetupProc(gobj, fn_801A7A68, 0x17);
 

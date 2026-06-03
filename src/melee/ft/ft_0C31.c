@@ -223,31 +223,6 @@ void ftCo_EntryStart_Coll(Fighter_GObj* gobj)
     }
 }
 
-/// you have to ask the compiler nicely for it to work
-static inline void ftCo_800C6AFC_please_dontinline(HSD_JObj* jobj)
-{
-    ftCo_800C6AFC(jobj);
-}
-
-static inline void ftCo_800C6AFC_dontinline(HSD_JObj* jobj)
-{
-    ftCo_800C6AFC_please_dontinline(jobj);
-}
-
-/// @todo figure out proper inlining for this function
-/// Mirrors jobj.h's HSD_JObjSetTranslate but routes the mtx-dirty call through
-/// the fighter-local ftCo_800C6AFC (a bl), which is what the target emits here.
-/// The asserts keep jobj.h's file/line/cond so they match HSD_JObjSetTranslate.
-inline void fake_HSD_JObjSetTranslate(HSD_JObj* jobj, Vec3* translate)
-{
-    ((jobj) ? ((void) 0) : __assert("jobj.h", 916, "jobj"));
-    ((translate) ? ((void) 0) : __assert("jobj.h", 917, "translate"));
-    jobj->translate = *translate;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        ftCo_800C6AFC_dontinline(jobj);
-    }
-}
-
 void fn_800C69F4(Fighter_GObj* gobj)
 {
     u8 _[8];
@@ -273,7 +248,8 @@ void fn_800C69F4(Fighter_GObj* gobj)
                    temp_r31_2->cur_pos.x);
         sp20.y = temp_r31_2->cur_pos.y;
         sp20.z = temp_r31_2->cur_pos.z;
-        fake_HSD_JObjSetTranslate(temp_r31_2->x20A0_accessory, &sp20);
+        HSD_JObjSetTranslateWithMtxDirtyOutOfLine(
+            temp_r31_2->x20A0_accessory, &sp20);
     } else {
         HSD_GObj* gobj = Player_GetEntityAtIndex(temp_r31->player_id, 0);
         Fighter* fp2 = GET_FIGHTER(gobj);
@@ -282,7 +258,7 @@ void fn_800C69F4(Fighter_GObj* gobj)
     }
 }
 
-void ftCo_800C6AFC(HSD_JObj* jobj)
+void (HSD_JObjSetMtxDirty)(HSD_JObj* jobj)
 {
     if (jobj == NULL || HSD_JObjMtxIsDirty(jobj)) {
         return;
@@ -392,11 +368,10 @@ void fn_800C6F34(Fighter_GObj* gobj)
         sp20.y = fp->cur_pos.y;
         sp20.z = fp->cur_pos.z;
 
-        fake_HSD_JObjSetTranslate(fp->x20A0_accessory, &sp20);
+        HSD_JObjSetTranslateWithMtxDirtyOutOfLine(fp->x20A0_accessory, &sp20);
     } else {
         HSD_GObj* gobj2 = Player_GetEntityAtIndex(fp->player_id, 0);
         Fighter* fp2 = GET_FIGHTER(gobj2);
         fp->cur_pos.y = fp2->cur_pos.y;
     }
 }
-

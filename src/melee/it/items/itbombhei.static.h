@@ -1,35 +1,12 @@
 #ifndef ITBOMBHEI_STATIC_H
 #define ITBOMBHEI_STATIC_H
 
-#include "ft/ft_0C31.h"
-
 #include "it/forward.h"
 
 #include "it/inlines.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "it/items/itbombhei.h"
-
-static inline void fake_HSD_JObjSetTranslateY(HSD_JObj* jobj, f32 y)
-{
-    ((jobj) ? ((void) 0) : __assert("jobj.h", 947, "jobj"));
-    jobj->translate.y = y;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        ftCo_800C6AFC(jobj);
-    }
-}
-
-static inline void fake_HSD_JObjSetRotationX(HSD_JObj* jobj, f32 x)
-{
-    ((jobj) ? ((void) 0) : __assert("jobj.h", 639, "jobj"));
-    ((!(jobj->flags & JOBJ_USE_QUATERNION))
-         ? ((void) 0)
-         : __assert("jobj.h", 640, "!(jobj->flags & JOBJ_USE_QUATERNION)"));
-    jobj->rotate.x = x;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        ftCo_800C6AFC(jobj);
-    }
-}
 
 static inline HSD_JObj* itGetDynamicBone(Item_GObj* igp, u32 bone_id)
 {
@@ -62,8 +39,8 @@ itBombhei_UpdateStatePreserveBoneFake(Item_GObj* igp, int anim_id, int flags)
     y = HSD_JObjGetTranslationY(jobj);
     x = HSD_JObjGetRotationX(jobj);
     Item_80268E5C((HSD_GObj*) igp, anim_id, flags);
-    fake_HSD_JObjSetTranslateY(jobj, y);
-    fake_HSD_JObjSetRotationX(jobj, x);
+    HSD_JObjSetTranslateYWithMtxDirty(jobj, y);
+    HSD_JObjSetRotationXWithMtxDirty(jobj, x);
 }
 
 static inline void inline1_UnkMotion0_Anim(Item_GObj* igp)

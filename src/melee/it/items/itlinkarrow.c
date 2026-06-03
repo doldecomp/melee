@@ -1,9 +1,5 @@
 #include "itlinkarrow.h"
 
-#include "placeholder.h"
-
-#include "baselib/forward.h"
-
 #include "baselib/gobj.h"
 #include "baselib/mtx.h"
 #include "db/db.h"
@@ -11,65 +7,21 @@
 #include "ft/chara/ftCommon/ftCo_Guard.h"
 #include "ft/chara/ftKirby/ftKb_Init.h"
 #include "ft/chara/ftLink/ftLk_SpecialN.h"
-
-#include "ft/forward.h"
-
-#include "ft/ft_0C31.h"
 #include "ft/ftlib.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/ithitbox.h"
-#include "it/itanimlist.h"
-#include "it/iteffect.h"
-#include "it/itCharItems.h"
 #include "it/itcoll.h"
+#include "it/iteffect.h"
 #include "it/item.h"
+#include "it/ithitbox.h"
 #include "lb/lbrefract.h"
-#include "lb/lbvector.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
-#include "sysdolphin/baselib/random.h"
 
 #include <math.h>
-
-/// @todo Remove these once lbcoll is matched.
-#undef __FILE__
-#define __FILE__ "jobj.h"
-
-static inline void fake_HSD_JObjSetRotation(HSD_JObj* jobj, Quaternion* rotate)
-{
-    HSD_ASSERT(618, jobj);
-    HSD_ASSERT(619, rotate);
-    jobj->rotate = *rotate;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        ftCo_800C6AFC(jobj);
-    }
-}
-
-static inline void fake_HSD_JObjSetScale(HSD_JObj* jobj, Vec3* scale)
-{
-    HSD_ASSERT(760, jobj);
-    HSD_ASSERT(761, scale);
-    jobj->scale = *scale;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        ftCo_800C6AFC(jobj);
-    }
-}
-
-static inline void fake_HSD_JObjSetTranslate(HSD_JObj* jobj, Vec3* translate)
-{
-    HSD_ASSERT(916, jobj);
-    HSD_ASSERT(917, translate);
-    jobj->translate = *translate;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        ftCo_800C6AFC(jobj);
-    }
-}
-
-#undef __FILE__
-#define __FILE__ "itlinkarrow.c"
+#include <sysdolphin/baselib/random.h>
 
 ItemStateTable it_803F6A28[5] = {
     { -1, itLinkarrow_UnkMotion0_Anim, itLinkarrow_UnkMotion0_Phys,
@@ -472,12 +424,13 @@ static void inline itLinkarrow_UnkMotion1_Anim_inline(HSD_GObj* gobj, int i,
     jobj = HSD_GObjGetHSDObj(gobj);
     if (item->xDD4_itemVar.linkarrow.xB4[i] != NULL) {
         it_80272A18(item->xDD4_itemVar.linkarrow.xB4[i]);
-        fake_HSD_JObjSetTranslate(item->xDD4_itemVar.linkarrow.xB4[i],
-                                  &item->xDD4_itemVar.linkarrow.x30 + i);
-        fake_HSD_JObjSetRotation(item->xDD4_itemVar.linkarrow.xB4[i],
-                                 &item->xDD4_itemVar.linkarrow.x64 + i);
+        HSD_JObjSetTranslateWithMtxDirty(item->xDD4_itemVar.linkarrow.xB4[i],
+                                         &item->xDD4_itemVar.linkarrow.x30 + i);
+        HSD_JObjSetRotationWithMtxDirty(item->xDD4_itemVar.linkarrow.xB4[i],
+                                        &item->xDD4_itemVar.linkarrow.x64 + i);
         HSD_JObjGetScale(jobj, scale);
-        fake_HSD_JObjSetScale(item->xDD4_itemVar.linkarrow.xB4[i], scale);
+        HSD_JObjSetScaleWithMtxDirty(item->xDD4_itemVar.linkarrow.xB4[i],
+                                     scale);
     }
 }
 

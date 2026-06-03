@@ -54,8 +54,8 @@ static inline void itBombhei_UpdateStatePreserveBoneMotion10(Item_GObj* igp,
     y = HSD_JObjGetTranslationY(jobj);
     x = HSD_JObjGetRotationX(jobj);
     Item_80268E5C(igp, anim_id, flags);
-    fake_HSD_JObjSetTranslateY(jobj, y);
-    fake_HSD_JObjSetRotationX(jobj, x);
+    HSD_JObjSetTranslateYWithMtxDirty(jobj, y);
+    HSD_JObjSetRotationXWithMtxDirty(jobj, x);
 }
 
 static inline void fn_80280974_inline(Item_GObj* gobj)

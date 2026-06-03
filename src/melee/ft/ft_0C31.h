@@ -18,7 +18,6 @@
 /* 0C6740 */ void ftCo_EntryStart_Phys(Fighter_GObj* gobj);
 /* 0C6950 */ void ftCo_EntryStart_Coll(Fighter_GObj* gobj);
 /* 0C69F4 */ void fn_800C69F4(Fighter_GObj* gobj);
-/* 0C6AFC */ void ftCo_800C6AFC(HSD_JObj* jobj);
 /* 0C6B6C */ void ftCo_800C6B6C(Fighter_GObj* gobj);
 /* 0C6CC8 */ void ftCo_EntryEnd_Anim(Fighter_GObj* gobj);
 /* 0C6D34 */ void ftCo_EntryEnd_IASA(Fighter_GObj* gobj);

@@ -61,7 +61,7 @@ typedef struct MnVibrationDataLayout {
     char panel_top_joint[0x20];
 } MnVibrationDataLayout;
 
-// Local inline JObj functions using ftCo_800C6AFC pattern
+// Local inline JObj functions using the weak HSD_JObjSetMtxDirty pattern
 static inline f32 mnVibration_JObjGetTranslationX(HSD_JObj* jobj)
 {
     ((jobj) ? ((void) 0)
@@ -90,7 +90,7 @@ static inline void mnVibration_JObjSetTranslateX(HSD_JObj* jobj, f32 x)
             : __assert(mnVibration_804D4FF4, 0x3A4, mnVibration_804D4FFC));
     jobj->translate.x = x;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        ftCo_800C6AFC(temp);
+        (HSD_JObjSetMtxDirty)(temp);
     }
 }
 
@@ -101,7 +101,7 @@ static inline void mnVibration_JObjSetTranslateY(HSD_JObj* jobj, f32 y)
             : __assert(mnVibration_804D4FF4, 0x3B3, mnVibration_804D4FFC));
     jobj->translate.y = y;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        ftCo_800C6AFC(temp);
+        (HSD_JObjSetMtxDirty)(temp);
     }
 }
 
@@ -112,7 +112,7 @@ static inline void mnVibration_JObjSetTranslateZ(HSD_JObj* jobj, f32 z)
             : __assert(mnVibration_804D4FF4, 0x3C2, mnVibration_804D4FFC));
     jobj->translate.z = z;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        ftCo_800C6AFC(temp);
+        (HSD_JObjSetMtxDirty)(temp);
     }
 }
 
