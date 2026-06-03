@@ -2949,8 +2949,7 @@ static inline void ps_remove_node(struct ParticleScreenState* sp, void* node)
     if (node == NULL) {
         return;
     }
-    head_ptr = &sp->xD0;
-    if (*head_ptr == NULL) {
+    if (*(head_ptr = &sp->xD0) == NULL) {
         return;
     }
     while ((cur = *head_ptr) != NULL && cur != node) {
@@ -3248,9 +3247,9 @@ s32 hsd_803962A8(void* data)
     return 0;
 }
 
-// @TODO: Currently 96.49% match - needs minor register allocation fix
 s32 hsd_803966A0(void* data)
 {
+    struct ParticleScreenState* sp = &hsd_804CF810;
     s32 result;
 
     result = hsd_80395550(data);
@@ -3261,32 +3260,32 @@ s32 hsd_803966A0(void* data)
         u32 cmd = *(u32*) ((u8*) data + 0x14);
         switch (cmd) {
         case 0:
-            (&hsd_804CF810)->xBC = 8;
+            sp->xBC = 8;
             break;
         case 1:
-            (&hsd_804CF810)->xBC = 4;
+            sp->xBC = 4;
             break;
         case 2:
-            (&hsd_804CF810)->xBC = 1;
+            sp->xBC = 1;
             break;
         case 3:
-            (&hsd_804CF810)->xBC = 2;
+            sp->xBC = 2;
             break;
         case 4:
-            (&hsd_804CF810)->xBC = 0x100;
+            sp->xBC = 0x100;
             break;
         case 5:
-            (&hsd_804CF810)->xBC = 0x400;
+            sp->xBC = 0x400;
             break;
         case 6:
-            (&hsd_804CF810)->xBC = 0x200;
+            sp->xBC = 0x200;
             break;
         }
-        ps_remove_node(&hsd_804CF810, data);
+        ps_remove_node(sp, data);
         return 0;
     }
     case -1:
-        ps_remove_node(&hsd_804CF810, data);
+        ps_remove_node(sp, data);
         return 1;
     default:
         return 0;
@@ -3403,8 +3402,6 @@ s32 hsd_80396A20(void* data)
     return 0;
 }
 
-// @TODO: Currently 96.49% match - ps_remove_node inline scheduling (addi/lwz
-// order)
 s32 hsd_80396C78(void* data)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
@@ -3697,36 +3694,34 @@ void hsd_80397110(void)
     *px50 = saved;
 }
 
-// @TODO: Currently 98.13% match - ps_remove_node inline scheduling (addi/lwz
-// order)
 s32 fn_80397374(void* data)
 {
-    struct ParticleScreenState* sp;
+    struct ParticleScreenState* sp = &hsd_804CF810;
     extern u8 lbl_8040BEC4[];
     u32 bit = 1;
     u32 spr_off = *(u32*) (lbl_8040BEC4 + 0x10);
     u32 sel = *(u32*) (lbl_8040BEC4 + 0x14);
 
-    while (bit <= (&hsd_804CF810)->xBC) {
-        switch ((&hsd_804CF810)->xBC & bit) {
+    while (bit <= sp->xBC) {
+        switch (sp->xBC & bit) {
         case 0x8:
             if (sel != 0) {
                 sel--;
             } else if (spr_off != 0) {
                 spr_off--;
             } else {
-                u32 max = (&hsd_804CF810)->x1C - 4;
+                u32 max = sp->x1C - 4;
                 sel = max;
                 spr_off = 0x44;
                 spr_off = spr_off - max;
             }
             *(u32*) (lbl_8040BEC4 + 0x10) = spr_off;
             *(u32*) (lbl_8040BEC4 + 0x14) = sel;
-            if ((&hsd_804CF810)->x1C) {
+            if (sp->x1C) {
             }
             return 1;
         case 0x4:
-            if (sel < (u32) ((&hsd_804CF810)->x1C - 4)) {
+            if (sel < (u32) (sp->x1C - 4)) {
                 sel++;
             } else if (spr_off + sel < 0x43) {
                 spr_off++;
@@ -3745,7 +3740,7 @@ s32 fn_80397374(void* data)
         case 0x1000:
             return 1;
         case 0x200:
-            ps_remove_node(&hsd_804CF810, data);
+            ps_remove_node(sp, data);
             return 1;
         default:
             bit <<= 1;
