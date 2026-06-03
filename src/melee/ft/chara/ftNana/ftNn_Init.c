@@ -720,12 +720,14 @@ void ftNn_Init_801238E4(Fighter_GObj* gobj)
 
 bool ftNn_Init_80123954(Fighter_GObj* nana_gobj, GroundOrAir pp_ga)
 {
+    Fighter* nana_fp;
     bool ret;
-    PAD_STACK(24);
     if (nana_gobj != NULL) {
-        Fighter* nana_fp = GET_FIGHTER(nana_gobj);
-        Fighter* popo_fp =
-            GET_FIGHTER(Player_GetEntityAtIndex(nana_fp->player_id, 0));
+        Fighter* popo_fp;
+        ftIceClimberAttributes* attrs;
+        nana_fp = GET_FIGHTER(nana_gobj);
+        popo_fp = GET_FIGHTER(Player_GetEntityAtIndex(nana_fp->player_id, 0));
+        attrs = nana_fp->dat_attrs;
         switch (nana_fp->x2070.x2071_b0_3) {
         case 1:
         case 2:
@@ -740,22 +742,26 @@ bool ftNn_Init_80123954(Fighter_GObj* nana_gobj, GroundOrAir pp_ga)
         case 11:
         case 12:
         case 13:
-        case 14:
             nana_fp->x1A5C = NULL;
             ret = true;
             break;
-        case 0:
         default: {
-            ftIceClimberAttributes* attrs = nana_fp->dat_attrs;
             float dd = attrs->xD0;
             float dx = nana_fp->cur_pos.x - popo_fp->cur_pos.x;
             float dy = nana_fp->cur_pos.y - popo_fp->cur_pos.y;
-            if (dx * dx + dy * dy < popo_fp->x34_scale.y * dd * dd) {
+            float dxsq = dx * dx;
+            float dysq = dy * dy;
+            if (dxsq + dysq < (s32) (popo_fp->x34_scale.y * (dd * dd))) {
                 ret = false;
                 if (pp_ga == GA_Air) {
                     if (pp_ga != nana_fp->ground_or_air) {
-                        ft_800849EC(nana_fp, popo_fp);
-                        ftCommon_8007D7FC(popo_fp);
+                        ftCommon_8007D5D4(nana_fp);
+                    }
+                    ftNn_Init_80123BF0(nana_gobj);
+                } else {
+                    if (pp_ga != nana_fp->ground_or_air) {
+                        ft_800849EC(popo_fp, nana_fp);
+                        ftCommon_8007D7FC(nana_fp);
                     }
                     ftNn_Init_80123B3C(nana_gobj);
                 }

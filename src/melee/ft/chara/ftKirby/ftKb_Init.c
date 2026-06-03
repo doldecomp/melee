@@ -3334,7 +3334,7 @@ void ftKb_SpecialN_800EED50(s32 arg0, s32 arg1)
                 }
             }
         }
-        efAsync_LoadSync(ftKb_Init_803CB46C[arg0]);
+        efAsync_LoadSync((u8) ftKb_Init_803CB46C[arg0]);
     }
 }
 

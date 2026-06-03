@@ -4767,14 +4767,13 @@ void Camera_80030E34(f32 arg8)
 
 void Camera_80030E44(enum_t arg0, Vec3* arg1)
 {
-    Camera* camera = &cm_80452C68;
     HSD_GObj** pgobj;
     s32 result;
 
     switch (arg0) {
     case 1:
-        pgobj = &camera->xA0;
-        if (camera->xA0 == NULL) {
+        pgobj = &cm_80452C68.xA0;
+        if (cm_80452C68.xA0 == NULL) {
             *pgobj = (HSD_GObj*) grLib_801C9CEC(arg0);
         }
         result = 10;
@@ -4793,19 +4792,19 @@ void Camera_80030E44(enum_t arg0, Vec3* arg1)
         break;
     }
 
-    camera->_8C[arg0] = result;
+    cm_80452C68._8C[arg0] = result;
 
     {
         s32 i;
         for (i = 0; i < 16; i++) {
-            if (camera->_B0[0][i].type == 0) {
-                camera->_B0[0][i].type = arg0;
+            if (cm_80452C68._B0[0][i].type == 0) {
+                cm_80452C68._B0[0][i].type = arg0;
                 if (arg1 != NULL) {
-                    camera->_B0[0][i].x0 = *arg1;
+                    cm_80452C68._B0[0][i].x0 = *arg1;
                 } else {
-                    camera->_B0[0][i].x0.z = 0.0f;
-                    camera->_B0[0][i].x0.y = 0.0f;
-                    camera->_B0[0][i].x0.x = 0.0f;
+                    cm_80452C68._B0[0][i].x0.z = 0.0f;
+                    cm_80452C68._B0[0][i].x0.y = 0.0f;
+                    cm_80452C68._B0[0][i].x0.x = 0.0f;
                 }
             }
         }

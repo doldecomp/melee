@@ -635,21 +635,22 @@ void grInishie2_801FD824(HSD_GObj* gobj)
 
 void grInishie2_801FD9EC(HSD_GObj* gobj)
 {
+    HSD_JObj* jobj;
     Ground* gp;
+    Vec3* temp_vec;
     u8 temp_u8;
     s32 var_r0;
     s32 var_r3;
     s32 var_r3_2;
     s16 temp_r0;
-    HSD_JObj* jobj;
-    Vec3* temp_vec;
     PAD_STACK(72);
 
     gp = gobj->user_data;
 
     if (grAnime_801C83D0(gobj, 1, 1) != 0) {
         if (gp->gv.inishie23.xC8_flags.b1) {
-            f32 temp_f = gp->gv.inishie23.xD8.x + gp->gv.inishie23.xCC.x;
+            f32 temp_f = GET_GROUND(gobj)->gv.inishie23.xD8.x +
+                         GET_GROUND(gobj)->gv.inishie23.xCC.x;
 
             if (temp_f > Stage_GetCamBoundsRightOffset()) {
                 var_r0 = 2;
@@ -668,8 +669,8 @@ void grInishie2_801FD9EC(HSD_GObj* gobj)
                 if ((s16) gp->gv.inishie23.xCA < 2) {
                     gp->gv.inishie23.xC8_flags.b3 ^= 1;
                 } else {
-                    f32 temp_f =
-                        gp->gv.inishie23.xD8.x + gp->gv.inishie23.xCC.x;
+                    f32 temp_f = GET_GROUND(gobj)->gv.inishie23.xD8.x +
+                                 GET_GROUND(gobj)->gv.inishie23.xCC.x;
 
                     if (temp_f > Stage_GetCamBoundsRightOffset()) {
                         var_r3 = 2;
@@ -699,19 +700,22 @@ void grInishie2_801FD9EC(HSD_GObj* gobj)
 
         grAnime_801C8138(gobj, gp->map_id, gp->gv.inishie23.xC8_flags.b3);
 
+        gp = GET_GROUND(gobj);
+        temp_vec = &gp->gv.inishie23.xD8;
         jobj = Ground_801C3FA4(gobj, 0);
-        HSD_JObjSetTranslate(jobj, &gp->gv.inishie23.xD8);
+        HSD_JObjSetTranslate(jobj, temp_vec);
         HSD_JObjAddTranslationX(jobj, gp->gv.inishie23.xCC.x);
         HSD_JObjAddTranslationY(jobj, gp->gv.inishie23.xCC.y);
         HSD_JObjAddTranslationZ(jobj, gp->gv.inishie23.xCC.z);
-        HSD_JObjGetTranslation(jobj, &gp->gv.inishie23.xD8);
+        HSD_JObjGetTranslation(jobj, temp_vec);
 
         return;
     }
 
-    gp = gobj->user_data;
+    gp = GET_GROUND(gobj);
     jobj = Ground_801C3FA4(gobj, 1);
-    HSD_JObjGetTranslation(jobj, &gp->gv.inishie23.xCC);
+    temp_vec = &gp->gv.inishie23.xCC;
+    HSD_JObjGetTranslation(jobj, temp_vec);
 }
 
 void grInishie2_801FDE8C(Ground_GObj* gobj)

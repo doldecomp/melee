@@ -255,10 +255,13 @@ void un_802FF4FC(void)
 void un_802FF570(void)
 {
     int i;
+    struct un_804A1F58_x8_t* thing;
+    HSD_Text* text;
     for (i = 0; i < 6; i++) {
         un_804A1F58[i + 1].x4 = 1;
-        if (un_804A1F58[i].x8.x4) {
-            un_804A1F58[i].x8.x4->hidden = 1;
+        text = (thing = &un_804A1F58[i].x8)->x4;
+        if (text) {
+            text->hidden = 1;
         }
     }
 }

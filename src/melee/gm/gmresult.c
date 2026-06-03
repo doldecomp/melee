@@ -1029,64 +1029,63 @@ end_common:
 void fn_80175A94(s32 slot, Vec3* position)
 {
     MatchEnd* me;
-    HSD_Text* text;
     f32 x_pos;
+    f32 new_var3;
     s32 var_r29;
+    HSD_Text* new_var2;
     GXColor sp14;
+    ResultsData* new_var;
     GXColor sp18;
+    f32 new_var4;
     GXColor* color_ptr;
     Vec3 sp24;
     PAD_STACK(16);
 
     me = lbl_8046DBE8.x94;
     if (me->x5 == 3) {
-        lb_8000B1CC(lbl_8046DBE8.player_data[slot].jobjs[10], NULL, &sp24);
+        lb_8000B1CC(lbl_8046DBE8.player_data[slot].jobjs[12], NULL, &sp24);
         x_pos = 5.5F + sp24.x;
     } else {
-        x_pos = lbl_8046DBE8.x4C[slot].y;
+        x_pos = lbl_8046DBE8.x4C[slot].x;
     }
 
-    lbl_8046DBE8.player_data[slot].ko_time = HSD_SisLib_803A6754(0, 0);
-    text = lbl_8046DBE8.player_data[slot].ko_time;
-    text->pos_x = x_pos;
-    text->pos_y = -position->y;
-    text->pos_z = position->z;
-    lbl_8046DBE8.player_data[slot].ko_time->default_alignment = 1;
-    lbl_8046DBE8.player_data[slot].ko_time->default_kerning = 1;
+    new_var = &lbl_8046DBE8;
+    new_var->player_data[slot].ko_time = HSD_SisLib_803A6754(0, 0);
+    new_var3 = position->z;
+    new_var2 = new_var->player_data[slot].ko_time;
+    new_var4 = -position->y;
+    new_var2->pos_x = x_pos;
+    new_var2->pos_y = new_var4;
+    new_var2->pos_z = new_var3;
+    new_var->player_data[slot].ko_time->default_alignment = 1;
+    new_var->player_data[slot].ko_time->default_kerning = 1;
 
-    switch (me->x5) {
-    case 2:
+    if (me->x5 == 2) {
         me = lbl_8046DBE8.x94;
         sp14 = fn_8017507C(slot);
         if (me->player_standings[slot].slot_type != 3) {
-            fn_8017ADA8(slot);
-            var_r29 =
-                HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time,
-                                    0.0F, -30.0F, "%d", fn_8017AD78(slot));
+            var_r29 = HSD_SisLib_803A6B98(new_var->player_data[slot].ko_time,
+                                          0.0F, -30.0F, "%d",
+                                          fn_8017AD78(fn_8017ADA8(slot)));
         } else {
             sp14.r = 0xA0;
             sp14.g = 0xA0;
             sp14.b = 0xA0;
-            var_r29 =
-                HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time,
-                                    0.0F, -30.0F, "%s", &lbl_804D3FA0);
+            var_r29 = HSD_SisLib_803A6B98(new_var->player_data[slot].ko_time,
+                                          0.0F, -30.0F, "%s", &lbl_804D3FA0);
         }
-        HSD_SisLib_803A7548(lbl_8046DBE8.player_data[slot].ko_time, var_r29,
-                            0.09F, 0.08F);
+        HSD_SisLib_803A7548(new_var->player_data[slot].ko_time, var_r29, 0.09F,
+                            0.08F);
         sp18 = sp14;
         color_ptr = &sp18;
-        HSD_SisLib_803A74F0(lbl_8046DBE8.player_data[slot].ko_time, var_r29,
+        HSD_SisLib_803A74F0(new_var->player_data[slot].ko_time, var_r29,
                             color_ptr);
-        break;
-    case 1:
+    } else if (me->x5 == 1) {
         fn_80175880(slot);
-        break;
-    case 3:
+    } else if (me->x5 == 3) {
         fn_801756E0(slot);
-        break;
-    default:
+    } else {
         fn_8017556C(slot);
-        break;
     }
 }
 

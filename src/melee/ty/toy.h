@@ -95,7 +95,7 @@
 /* 3FE880 */ extern char un_803FE880[];
 /* 4D6ED4 */ extern void* un_804D6ED4;
 /* 4D6ED8 */ extern void* un_804D6ED8;
-/* 4D5A8C */ extern char un_804D5A8C[];
+/* 4D5A8C */ extern char un_804D5A8C[4];
 /* 4DDE60 */ extern float un_804DDE60;
 /* 4DDE4C */ extern float un_804DDE4C;
 /* 4DDE48 */ extern float un_804DDE48;
