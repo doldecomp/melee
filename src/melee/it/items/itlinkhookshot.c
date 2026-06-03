@@ -620,12 +620,19 @@ void itLinkhookshot_UnkMotion3_Phys(Item_GObj* arg0)
 }
 
 void fn_802A33A0(Item_GObj* arg0);
+
+// permuterslop
+static inline Fighter* fn_802A33A0_GetFighter(Item* item)
+{
+    return item->owner->user_data;
+}
+
 void fn_802A33A0(Item_GObj* arg0)
 {
-    ItemLink* item_link;
     Item* item;
-    Fighter* fp;
     itLinkHookshotAttributes* attr;
+    Fighter* fp;
+    ItemLink* item_link;
     Vec3 vec;
     u8 _padA[4];
     Mtx m;
@@ -633,12 +640,13 @@ void fn_802A33A0(Item_GObj* arg0)
 
     item = GET_ITEM(arg0);
     attr = item->xC4_article_data->x4_specialAttributes;
-    fp = item->owner->user_data;
+    fp = fn_802A33A0_GetFighter(item);
+
     item_link = item->xDD4_itemVar.linkhookshot.x4;
 
     it_802A2EE4_inline((MtxPtr) &m, item_link, &vec);
 
-    if (it_802A5E28(item_link, &vec, attr, fp->x40) != 0) {
+    if (it_802A5E28(item_link, &vec, attr, attr->x40) != 0) {
         if (!link_fighter_compare(fp)) {
             it_802A2B10(arg0);
             return;
@@ -797,26 +805,25 @@ void itLinkhookshot_UnkMotion7_Phys(Item_GObj* arg0)
 
 void it_802A39FC(Item_GObj* gobj)
 {
-    Item* item;
+    Item* item = gobj->user_data;
     Fighter* fp;
-    itLinkHookshotAttributes* attr;
-    ItemLink* item_link;
+    itLinkHookshotAttributes* attr =
+        item->xC4_article_data->x4_specialAttributes;
+    f32 temp_f30_2;
     Vec3 pos;
     Vec3 pos_2;
     u8 _padA[16];
     Mtx m;
-    int var_r0;
+    bool chk;
     Vec3* item_link_pos;
     f32 temp_f30;
-    f32 temp_f30_2;
+    ItemLink* item_link;
     f32 temp_f31;
     f32 temp_f0;
     f32 temp_f0_2;
-    PAD_STACK(4);
-
-    item = gobj->user_data;
-    attr = item->xC4_article_data->x4_specialAttributes;
     fp = item->owner->user_data;
+
+    // it_802A39FC_InitState(gobj, &item, &attr, &fp);
     item_link = item->xDD4_itemVar.linkhookshot.x4;
 
     it_802A2EE4_inline((MtxPtr) &m, item_link, &pos);
@@ -827,16 +834,16 @@ void it_802A39FC(Item_GObj* gobj)
     if (mpCheckAllRemap(0, 0, 0, 0, -1, -1, pos.x, pos.y, item_link->pos.x,
                         item_link->pos.y) != 0)
     {
-        var_r0 = 1;
+        chk = true;
     } else if (mpCheckAllRemap(0, 0, 0, 0, -1, -1, fp->cur_pos.x,
                                fp->cur_pos.y, item_link_pos->x,
                                item_link_pos->y) != 0)
     {
-        var_r0 = 1;
+        chk = true;
     } else {
-        var_r0 = 0;
+        chk = false;
     }
-    if (var_r0 != 0) {
+    if (chk) {
         ftCo_80090780(item->owner);
         it_802A2B10(gobj);
         return;
@@ -844,7 +851,10 @@ void it_802A39FC(Item_GObj* gobj)
 
     {
         f32 new_var = fp->cur_pos.x - pos.x;
-        temp_f30 = fp->cur_pos.y - pos.y;
+        {
+            f32 y_delta = fp->cur_pos.y - pos.y;
+            temp_f30 = y_delta;
+        }
         temp_f31 = new_var;
     }
     pos_2 = fp->cur_pos;
@@ -1155,6 +1165,11 @@ static inline void test_comp(Vec3* vec0, Vec3* vec1, Vec3* vec2, f32* arg2)
     vec0->z = (vec2->z * *arg2) + vec1->z;
 }
 
+static inline Vec3* it_802A4758_permuterslop(ItemLink* link_0)
+{
+    return &link_0->pos;
+}
+
 void it_802A4758(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
                  f32 arg8)
 {
@@ -1165,8 +1180,7 @@ void it_802A4758(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
     ItemLink* link_1 = link_0->prev;
 
     len = it_802A3C98(&link_0->pos, arg1, &vec);
-
-    test_comp(&link_0->pos, arg1, &vec, &arg8);
+    test_comp(it_802A4758_permuterslop(link_0), arg1, &vec, &arg8);
 
     while (link_1 != NULL) {
         link_1->vel.y -= arg2->x3C;
