@@ -61,6 +61,8 @@ static struct {
     s32 x6C;
 }* grOk_804D6A90;
 
+u8 grOk_803E6580[0xC] = { 0 };
+
 StageCallbacks grOk_803E658C[4] = {
     { grOldKongo_8020F618, grOldKongo_8020F644, grOldKongo_8020F64C,
       grOldKongo_8020F650, 0 },
@@ -71,6 +73,34 @@ StageCallbacks grOk_803E658C[4] = {
     { grOldKongo_8020F654, grOldKongo_8020F6B4, grOldKongo_8020F6BC,
       grOldKongo_8020F6E0, 0xC0000000 },
 };
+
+char grOk_803E65DC[] = "/GrOk.dat";
+
+typedef struct grOk_StageData {
+    StageData stage_data;
+    char report_format[0x24];
+} grOk_StageData;
+
+grOk_StageData grOk_803E65E8 = {
+    {
+        OLDKONGO,
+        grOk_803E658C,
+        grOk_803E65DC,
+        grOldKongo_8020F46C,
+        grOldKongo_8020F468,
+        grOldKongo_8020F4E4,
+        grOldKongo_8020F4E8,
+        grOldKongo_8020F524,
+        grOldKongo_80210780,
+        grOldKongo_80210788,
+        1,
+        (S16Vec3*) grOk_803E6580,
+        2,
+    },
+    "%s:%d: couldn t get gobj(id=%d)\n",
+};
+
+char grOk_803E6640[] = "groldkongo.c";
 
 static struct {
     s32 x0;
@@ -137,7 +167,8 @@ HSD_GObj* grOldKongo_8020F52C(int arg0)
             HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0xD5, arg0);
+        OSReport((char*) grOk_803E6580 + 0x9C,
+                 (char*) grOk_803E6580 + 0xC0, 0xD5, arg0);
     }
 
     return gobj;

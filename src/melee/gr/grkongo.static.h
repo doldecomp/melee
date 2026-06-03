@@ -15,7 +15,8 @@
 /* 1D8134 */ static int fn_801D8134(HSD_GObj* arg0, HSD_GObj* arg1);
 /* 1D8444 */ static DynamicsDesc* grKongo_801D8444(enum_t);
 
-static StageCallbacks* grKg_803E16E0;
+extern S16Vec3 grKg_803E16E0[6];
+extern StageCallbacks grKg_803E1704[12];
 
 static struct {
     f32 unk0;

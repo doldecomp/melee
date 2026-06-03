@@ -149,8 +149,8 @@ u32 it_8026ECE0(Item_GObj* gobj, u32 arg1)
 
 static inline void it_8026EECC_inline_1(HSD_GObj* gobj, s32 arg1, Vec3* pos)
 {
-    Item* ip = gobj->user_data;
     Vec3* new_pos = NULL;
+    Item* ip = gobj->user_data;
 
     ip->xDCF_flag.b4 = 1;
     ip->xDCF_flag.b5 = 0;

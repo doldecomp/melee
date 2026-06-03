@@ -39,12 +39,12 @@
 #include <MetroTRK/intrinsics.h>
 #include <MSL/trigf.h>
 
-const unkCastleCallback grCs_803B7F28[5] = {
+static const unkCastleCallback grCs_803B7F28[5] = {
     grCastle_801D0550, grCastle_801D059C, grCastle_801D05E8,
     grCastle_801D0634, grCastle_801D0680,
 };
 
-const unkCastleCallback2 grCs_803B7F3C[5] = {
+static const unkCastleCallback2 grCs_803B7F3C[5] = {
     grCastle_801D06CC, grCastle_801D0744, grCastle_801D07BC,
     grCastle_801D0834, grCastle_801D08AC,
 };
@@ -98,10 +98,12 @@ StageCallbacks grCs_803E0FF4[21] = {
       grCastle_801CF74C, 0 },
 };
 
+char grCs_803E1198[] = "/GrCs.dat";
+
 StageData grCs_803E11A4 = {
     CASTLE,
     grCs_803E0FF4,
-    "/GrCs.dat",
+    grCs_803E1198,
     grCastle_801CD37C,
     grCastle_801CD338,
     grCastle_801CD4A0,

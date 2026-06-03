@@ -123,6 +123,34 @@ static StageCallbacks grGr_callbacks[] = {
     },
 };
 
+char grGr_803E76C4[] = "/GrGr.dat";
+
+typedef struct grGr_StageData {
+    StageData stage_data;
+    char report_format[0x24];
+} grGr_StageData;
+
+grGr_StageData grGr_803E76D0 = {
+    {
+        GREENS,
+        grGr_callbacks,
+        grGr_803E76C4,
+        grGreens_Init,
+        grGreens_80213458,
+        grGreens_802134F4,
+        grGreens_802134F8,
+        grGreens_8021351C,
+        grGreens_80216E64,
+        grGreens_80216E6C,
+        1,
+        NULL,
+        0,
+    },
+    "%s:%d: couldn t get gobj(id=%d)\n",
+};
+
+char grGr_803E7728[] = "grgreens.c";
+
 static const s32 grGr_803E7734[] = {
     0, 1, 0, 1, 0, 2, 0, 1, 0, 2,
 };
@@ -239,7 +267,7 @@ Ground_GObj* grGreens_80213524(int id)
             HSD_GObj_SetupProc(gobj, cbs->callback2, 4);
         }
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 281, id);
+        OSReport((char*) grGr_callbacks + 0xCC, grGr_803E7728, 281, id);
     }
     return gobj;
 }
