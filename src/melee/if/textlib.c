@@ -775,30 +775,35 @@ void fn_80303EF4(HSD_GObj* gobj)
     }
 }
 
+#pragma push
+#pragma dont_inline on
 void un_80303FD4(HSD_GObj* arg0, struct un_80304138_objalloc_t* arg1,
                  struct un_80304138_objalloc_t_x8* arg2, int arg3, int arg4,
                  int arg5)
 {
+    struct un_80304138_objalloc_t_x8* new_var2;
     int i;
     int count;
+    int new_var;
     int count2 = 0;
     int size;
+    int v;
     void* buf;
     struct un_80304138_objalloc_t* un;
     PAD_STACK(8);
 
     arg1->x8 = arg2;
-    arg1->x1 = 0;
+    count = (arg1->x1 = 0);
     arg1->prev = NULL;
     arg1->next = NULL;
+    new_var = 0;
     arg1->x10 = arg0;
 
-    count = 0;
     while (arg1->x8[count].x0 != 9) {
         count++;
     }
 
-    size = un_80302EA4(arg1->x8);
+    size = un_80302EA4(new_var2 = arg1->x8);
     un_804D6E44 = arg1;
     buf = HSD_MemAlloc(size * count * 2);
     if (buf != NULL) {
@@ -810,8 +815,8 @@ void un_80303FD4(HSD_GObj* arg0, struct un_80304138_objalloc_t* arg1,
         arg1->x4 = DevText_Create(count2 + 0x78, arg4, arg5, size, count, buf);
         if (arg1->x4 != NULL) {
             DevText_Show(arg0, arg1->x4);
-            for (i = 0; arg1->x8[i].x0 != 0; i++) {
-                if (arg1->x8[i].x0 == 9) {
+            for (i = new_var; (v = arg1->x8[i].x0) != 0; i++) {
+                if (v == 9) {
                     i = 0;
                     break;
                 }
@@ -821,12 +826,17 @@ void un_80303FD4(HSD_GObj* arg0, struct un_80304138_objalloc_t* arg1,
             DevText_HideCursor(arg1->x4);
             DevText_SetScale(arg1->x4, 10.0f, 17.0f);
             un_804D6E48 = NULL;
-            for (i = 0; arg1->x8[i].x0 != 9; i++) {
-                un_80302E00(&arg1->x8[i], 4);
+            {
+                struct un_80304138_objalloc_t_x8* p = arg1->x8;
+                while (p->x0 != 9) {
+                    un_80302E00(p, 4);
+                    p++;
+                }
             }
         }
     }
 }
+#pragma pop
 
 void un_80304138(void)
 {

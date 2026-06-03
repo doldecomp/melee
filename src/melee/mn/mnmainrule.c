@@ -306,6 +306,7 @@ void mn_8022FB88(u8 arg0, void* arg1)
     HSD_JObj* temp_r29;
     HSD_JObj* temp_r29_2;
     HSD_JObj* temp_r29_3;
+    int new_var;
     HSD_JObj* temp_r31;
     HSD_JObj* temp_r28;
     s32 var_r27;
@@ -341,11 +342,12 @@ void mn_8022FB88(u8 arg0, void* arg1)
     HSD_JObjAnimAll(temp_r28);
     temp_r27_2 = data->x58;
     temp_r27_2 = data->x58;
+    new_var = arg0;
     temp_r31 = temp_r27_2[2];
-    HSD_JObjReqAnimAll(temp_r31, (f32) (u8) (arg0 / 10));
+    HSD_JObjReqAnimAll(temp_r31, (f32) (u8) (new_var / 10));
     HSD_JObjAnimAll(temp_r31);
     temp_r29 = temp_r27_2[3];
-    HSD_JObjReqAnimAll(temp_r29, (f32) (u8) (arg0 % 10));
+    HSD_JObjReqAnimAll(temp_r29, (f32) (u8) (new_var % 10));
     HSD_JObjAnimAll(temp_r29);
     temp_r29_2 = temp_r27_2[5];
     HSD_JObjReqAnimAll(temp_r29_2, mn_804DBE00);

@@ -291,7 +291,7 @@ void un_80318B1C(s32 arg0)
                     check = un_8031B9DC(rand_id);
                 }
                 grid->sort[start].key = rand_id;
-                grid->sort[start].val =
+                *(s32*) &grid->sort[start].val =
                     (s32) un_803060BC(grid->sort[start].key, 7);
                 start++;
                 if (start >= arg0) {
@@ -302,7 +302,7 @@ void un_80318B1C(s32 arg0)
                 check = un_8031B9DC(i);
                 if (check->x00 != -1) {
                     grid->sort[start].key = i;
-                    grid->sort[start].val = (s32) un_803060BC(i, 7);
+                    *(s32*) &grid->sort[start].val = (s32) un_803060BC(i, 7);
                     start++;
                     if (start >= arg0) {
                         start = 0;
@@ -318,7 +318,7 @@ void un_80318B1C(s32 arg0)
             if (un_803048C0(i) != 0) {
                 un_8031B9DC(i);
                 grid->sort[start].key = i;
-                grid->sort[start].val = (s32) un_803060BC(i, 7);
+                *(s32*) &grid->sort[start].val = (s32) un_803060BC(i, 7);
                 start++;
                 if (start >= arg0) {
                     start = 0;

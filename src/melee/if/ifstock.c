@@ -687,7 +687,7 @@ void fn_802FA6C4(HSD_GObj* arg)
             ifStock_804A1774.x0 = 1;
             q = gm_80169520();
             w = gm_80169530();
-            for (i = 0; i < 130; i++) {
+            for (i = 0; i != 130; i++) {
                 ifStock_804A1774.x10C[i + 1] = NULL;
                 ifStock_804A1774.x1[i] = q[i];
                 ifStock_804A1774.x83[i] = w[i];
@@ -704,7 +704,7 @@ void fn_802FA6C4(HSD_GObj* arg)
         }
     } else {
         if (ifStock_804A1774.x0 == 1) {
-            for (i = 0; i < 130; i++) {
+            for (i = 129; i >= 0; i--) {
                 if (ifStock_804A1774.x10C[1 + i]) {
                     HSD_GObjPLink_80390228(ifStock_804A1774.x10C[1 + i]);
                     ifStock_804A1774.x10C[1 + i] = NULL;

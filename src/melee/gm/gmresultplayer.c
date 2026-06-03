@@ -1577,12 +1577,17 @@ Fighter_GObj* fn_8017A67C(CharacterKind c_kind, int arg1, int arg2)
     return (Fighter_GObj*) gobj;
 }
 
+static inline void inline1(HSD_ImageDesc* imgs, int slot, u16* w, u16* h)
+{
+    imgs[slot].image_ptr = NULL;
+    lb_800121FC(&imgs[slot], *w, *h, 5, 0);
+}
+
 void fn_8017A9B4(int slot)
 {
     ResultsDisplayData* disp = &lbl_8046E1B0;
     MatchEnd* match_end = &disp->state.match_end;
     int lookup;
-    HSD_ImageDesc* desc;
 
     if (match_end->is_teams == 0) {
         lookup = match_end->player_standings[slot].is_big_loser;
@@ -1591,15 +1596,10 @@ void fn_8017A9B4(int slot)
         lookup = match_end->team_standings[idx].is_big_loser;
     }
 
-    desc = &disp->player_img1[slot];
-    desc->image_ptr = NULL;
-    lb_800121FC(desc, disp->state.dim_w1[lookup], disp->state.dim_h1[lookup],
-                5, 0);
-
-    desc = &disp->player_img2[slot];
-    desc->image_ptr = NULL;
-    lb_800121FC(desc, disp->state.dim_w2[lookup], disp->state.dim_h2[lookup],
-                5, 0);
+    inline1(disp->player_img1, slot, (u16*) disp->state.dim_w1 + lookup,
+            (u16*) disp->state.dim_h1 + lookup);
+    inline1(disp->player_img2, slot, (u16*) disp->state.dim_w2 + lookup,
+            (u16*) disp->state.dim_h2 + lookup);
 }
 
 extern u32 lbl_803D7018[];

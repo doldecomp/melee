@@ -30,43 +30,50 @@ static PerfLabelLine gm_80480B38[4];
 static const Vec3 gm_803B7D68 = { 0.0f, 0.0f, 1.0f };
 static const Vec3 gm_803B7D74 = { 0.0f, 0.0f, 0.0f };
 
-void gm_801A9DD0(HSD_GObj* arg0, u16 arg1, int arg2, int arg3, int arg4)
+void gm_801A9DD0(HSD_GObj* arg0, u16 arg1, u16 arg2, int arg3, int arg4)
 {
-    Vec3 eye;
-    Vec3 interest;
-    HSD_RectS16 viewport;
-    Scissor scissor;
     HSD_CObj* cobj;
+    f32 roll = 0.0f;
+    f32 far_val;
+    f32 near_val = 0.0f;
+    f32 top;
+    f32 bottom;
     f32 left;
     f32 right;
+    Scissor viewport;
+    Scissor scissor;
+    Vec3 eye = gm_803B7D68;
+    Vec3 interest = gm_803B7D74;
 
-    eye = gm_803B7D68;
-    left = 0.0f;
-    interest = gm_803B7D74;
+    far_val = 2.0f;
+    bottom = (f32) (-(s32) (u16) arg2);
     right = (f32) arg1;
+    top = 0.0f;
+    left = 0.0f;
+
     if (arg4 != 0) {
         s32 temp = (s32) (arg1 - 0x248) / 2;
         left = (f32) temp;
         right = (f32) (temp + 0x248);
     }
-    viewport.xmin = 0;
+    viewport.left = 0;
     scissor.left = 0;
-    viewport.xmax = arg1;
+    viewport.right = arg1;
     scissor.right = arg1;
-    viewport.ymin = 0;
+    viewport.top = 0;
     scissor.top = 0;
-    viewport.ymax = (s16) arg2;
-    scissor.bottom = (s16) arg2;
+    viewport.bottom = arg2;
+    scissor.bottom = arg2;
     cobj = HSD_CObjAlloc();
     HSD_CObjSetProjectionType(cobj, PROJ_ORTHO);
-    HSD_CObjSetViewport(cobj, &viewport);
+    HSD_CObjSetViewport(cobj, (HSD_RectS16*) &viewport);
     HSD_CObjSetScissor(cobj, &scissor);
     HSD_CObjSetEyePosition(cobj, &eye);
     HSD_CObjSetInterest(cobj, &interest);
-    HSD_CObjSetRoll(cobj, 0.0f);
-    HSD_CObjSetNear(cobj, 0.0f);
-    HSD_CObjSetFar(cobj, 2.0f);
-    HSD_CObjSetOrtho(cobj, 0.0f, (f32) -(s32) (u16) arg2, left, right);
+    HSD_CObjSetRoll(cobj, roll);
+    HSD_CObjSetNear(cobj, near_val);
+    HSD_CObjSetFar(cobj, far_val);
+    HSD_CObjSetOrtho(cobj, top, bottom, left, right);
     HSD_GObjObject_80390A70(arg0, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(arg0, HSD_SObjLib_803A54EC, (u32) arg3);
 }

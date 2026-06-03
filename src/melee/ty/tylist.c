@@ -1221,14 +1221,15 @@ void un_803147C4(void)
     char* strs = un_803FE880;
     TyArchiveData* archive;
     LightList** jobj;
+    u8 new_var;
     HSD_GObj** gobj;
     PAD_STACK(8);
 
     memzero(data + 0x2AC, 0x18);
     un_8031457C();
-    gobj = (HSD_GObj**) (data + 0x2C4);
-    memzero(gobj, 0x14);
+    memzero(data + 0x2C4, 0x14);
 
+    gobj = (HSD_GObj**) (data + 0x2C4);
     archive = un_804D6ED8;
 
     if (archive->data == NULL) {
@@ -1239,7 +1240,7 @@ void un_803147C4(void)
     jobj = HSD_ArchiveGetPublicAddress(archive->data, strs + 0x170);
     if (jobj != NULL) {
         *gobj = GObj_Create(2, 3, 0);
-        HSD_GObjObject_80390A70(*gobj, (u8) HSD_GObj_804D784A,
+        HSD_GObjObject_80390A70(*gobj, new_var = (u8) HSD_GObj_804D784A,
                                 Toy_LoadLObjList(jobj, 0));
         GObj_SetupGXLink(*gobj, HSD_GObj_LObjCallback, 0x34, 0);
     }

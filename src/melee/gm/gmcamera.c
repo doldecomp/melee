@@ -348,48 +348,32 @@ void gmCamera_801A292C(void)
 {
     HSD_Text* text;
     s32 i;
-    HSD_Text** texts = &gmCamera_80479BC8.gcus.x48[0];
-    gmCameraUnkStruct2* p;
-    s32 x44;
+    f32 new_var;
+    gmCameraUnkStruct* unk = &gmCamera_80479BC8.gcus;
+    HSD_Text** texts = unk->x48;
+    f32* tbl = gmCamera_803DA630;
 
-    if (texts[0] != NULL) {
+    if (unk->x48[0] != NULL) {
         for (i = 0; i < 3; i++) {
-            HSD_SisLib_803A5CC4(texts[i]);
-            texts[i] = NULL;
+            HSD_SisLib_803A5CC4(unk->x48[i]);
+            unk->x48[i] = NULL;
         }
     }
-    i = 0;
-    p = (gmCameraUnkStruct2*) &gmCamera_80479BC8;
-    do {
-        p->x24 = lbSnap_8001D40C(i);
-        if ((s32) p->x24 == 0) {
-            p->x28 = lbSnap_8001D3B0(i);
-            p->x2C = lbSnap_8001D3CC(i);
-        }
-        i++;
-        p = (gmCameraUnkStruct2*) ((u8*) p + 0x10);
-    } while (i < 2);
-    text = HSD_SisLib_803A5ACC(3, (s32) gmCamera_80479BC8.gcus.x54,
-                               gmCamera_803DA630[10], gmCamera_803DA630[11],
-                               0.0f, 640.0f, 32.0f);
-    text->font_size.x = gmCamera_803DA630[8];
-    text->font_size.y = gmCamera_803DA630[9];
+    gmCamera_801A25C8();
+    text = HSD_SisLib_803A5ACC(3, (s32) unk->x54, tbl[10], tbl[11], 0.0f,
+                               640.0f, 32.0f);
+    new_var = tbl[9];
+    text->font_size.x = tbl[8];
+    text->font_size.y = new_var;
     text->default_kerning = 1;
     HSD_SisLib_803A6530(3, 3, 4);
-    gmCamera_801A2224((u8*) text, gmCamera_80479BC8.gcus.x20);
+    gmCamera_801A2224((u8*) text, unk->x20);
     HSD_SisLib_803A660C(3, 3, 5);
     HSD_SisLib_803A6368(text, 3);
-    texts[2] = text;
-    texts[0] = gmCamera_801A2334(0, gmCamera_803DA630[2], gmCamera_803DA630[3],
-                                 gmCamera_803DA630[0], gmCamera_803DA630[1]);
-    gmCamera_80479BC8.gcus.x48[1] =
-        gmCamera_801A2334(1, gmCamera_803DA630[6], gmCamera_803DA630[7],
-                          gmCamera_803DA630[4], gmCamera_803DA630[5]);
-    x44 = gmCamera_80479BC8.gcus.x30;
-    if (x44 >= (s32) gmCamera_80479BC8.gcus.x40) {
-        x44 = gmCamera_80479BC8.gcus.x40;
-    }
-    gmCamera_80479BC8.gcus.x44 = x44;
+    unk->x48[2] = text;
+    texts[0] = gmCamera_801A2334(0, tbl[2], tbl[3], tbl[0], tbl[1]);
+    unk->x48[1] = gmCamera_801A2334(1, tbl[6], tbl[7], tbl[4], tbl[5]);
+    unk->x44 = MIN(unk->x30, unk->x40);
 }
 
 void gmCamera_801A2AAC(void)

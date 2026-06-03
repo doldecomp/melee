@@ -1246,20 +1246,18 @@ void ftAction_80072FE0(Fighter_GObj* gobj, CommandInfo* cmd)
 
 void ftAction_80073008(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    /// @todo cant seem to get the float to int, and there is a
-    // bunch of unused stack...
     f32 charge_frames;
     f32 charge_rate;
-    u32 color_anim;
-    PAD_STACK(20);
+    f32 color_anim;
+    f32 dmg_mult;
 
-    charge_frames = cmd->u->smash_charge_0.charge_frames;
     charge_rate = cmd->u->smash_charge_0.charge_rate;
+    charge_frames = cmd->u->smash_charge_0.charge_frames;
+    dmg_mult = (1 / 256.0f) * charge_rate;
     NEXT_CMD(cmd);
     color_anim = cmd->u->smash_charge_1.color_anim;
     NEXT_CMD(cmd);
-    ftCo_800DEE84(gobj, color_anim, charge_rate,
-                  (1.0f / 256.0f) * charge_frames);
+    ftCo_800DEE84(gobj, (s32) color_anim, charge_frames, dmg_mult);
 }
 
 void ftAction_8007309C(Fighter_GObj* gobj, CommandInfo* cmd)
