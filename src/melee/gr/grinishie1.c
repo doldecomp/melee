@@ -34,7 +34,7 @@
 #include <baselib/gobj.h>
 
 #define invalid_state(line)                                                   \
-    OSReport("%s:%d: oioi...", "grinishie1.c", line);                         \
+    OSReport("%s:%d: oioi..\n", "i!=HATENA_APPEAR_CHECKLOOP", line);                         \
     while (true) {                                                            \
     }
 
@@ -157,15 +157,15 @@ typedef struct grInishie1_StageData {
 grInishie1_StageData grI1_803E4950 = {
     {
         INISHIE1,
-        NULL,
+        grI1_803E48F4,
         grI1_803E4944,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
+        grInishie1_801FA90C,
+        grInishie1_801FA908,
+        grInishie1_801FA984,
+        grInishie1_801FA988,
+        grInishie1_801FA9AC,
+        grInishie1_801FCBB0,
+        grInishie1_801FCBB8,
         1,
         (S16Vec3*) grI1_803E48C8,
         7,
@@ -173,7 +173,7 @@ grInishie1_StageData grI1_803E4950 = {
     "%s:%d: couldn t get gobj(id=%d)\n",
 };
 
-char grI1_803E49A8[] = "grinishie1.c";
+//char grI1_803E49A8[] = "grinishie1.c";
 
 void grInishie1_801FA908(bool arg) {}
 
@@ -239,7 +239,7 @@ HSD_GObj* grInishie1_801FA9B4(s32 arg0)
             HSD_GObj_SetupProc(gobj, cb->callback2, 4U);
         }
     } else {
-        OSReport(grI1_803E4950.report_fmt_get_gobj, grI1_803E49A8, 0xE7, arg0);
+        OSReport(grI1_803E4950.report_fmt_get_gobj, "grinishie1.c", 0xE7, arg0);
     }
 
     return gobj;
@@ -529,7 +529,7 @@ inline void grInishie1_801FB3F0_inline(HSD_GObj* gobj, s16* countdown,
                      attempts < 0x14);
 
             if (attempts == 0x14) {
-                __assert("grinishie1.c", 0x2D0U, "%s:%d: oioi...");
+                __assert("grinishie1.c", 0x2D0U, "%s:%d: oioi..\n");
             }
 
             *last_index = index;
@@ -782,7 +782,7 @@ void fn_801FBF6C(Item_GObj* item_gobj, Ground* gp, Vec3* pos, HSD_GObj* arg3,
 
     gobj = Ground_801C2BA4(3);
     if (gobj == NULL) {
-        __assert("grinishie1.c", 0x425, "new_gobj");
+        __assert("grinishie1.c", 0x425, "map_gobj");
     }
 
     grInishie1_801FB0AC(gobj, i);
