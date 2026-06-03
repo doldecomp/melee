@@ -59,19 +59,33 @@ StageCallbacks grPu_803E6800[] = {
       0x80000000 }
 };
 
-StageData grPu_803E6A3C = { 0x11,
-                            grPu_803E6800,
-                            "/GrPu.dat",
-                            grPura_80211D00,
-                            grPura_80211CFC,
-                            grPura_80211DD8,
-                            grPura_80211DDC,
-                            grPura_80211E00,
-                            grPura_802130C0,
-                            grPura_802130C8,
-                            1,
-                            0,
-                            0 };
+char grPu_803E6A30[] = "/GrPu.dat";
+
+typedef struct grPu_StageData {
+    StageData stage_data;
+    char report_format[0x24];
+    char filename[0xC];
+} grPu_StageData;
+
+grPu_StageData grPu_803E6A3C = {
+    {
+        0x11,
+        grPu_803E6800,
+        grPu_803E6A30,
+        grPura_80211D00,
+        grPura_80211CFC,
+        grPura_80211DD8,
+        grPura_80211DDC,
+        grPura_80211E00,
+        grPura_802130C0,
+        grPura_802130C8,
+        1,
+        0,
+        0,
+    },
+    "%s:%d: couldn t get gobj(id=%d)\n",
+    "grpura.c",
+};
 
 GXColor grPu_803E6AA0[] = {
     { 0x00, 0x00, 0x00, 0xFF }, { 0x00, 0x00, 0x50, 0xFF },
@@ -151,8 +165,8 @@ HSD_GObj* grPura_80211E08(int gobj_id)
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grpura.c", 0x108,
-                 gobj_id);
+        OSReport((char*) grPu_803E6800 + 0x270,
+                 (char*) grPu_803E6800 + 0x294, 0x108, gobj_id);
     }
 
     return gobj;

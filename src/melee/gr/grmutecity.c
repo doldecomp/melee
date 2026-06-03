@@ -31,6 +31,7 @@
 #include "sysdolphin/baselib/spline.h"
 
 #include <baselib/gobj.h>
+#include <baselib/debug.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/lobj.h>
@@ -61,7 +62,9 @@ extern grMc_TrackInitData grMc_803E3B7C[];
 
 static s32 grMc_8049F440[30];
 
-static StageCallbacks grMc_803E30C4[39] = {
+u8 grMc_803E30B0[0x14] = { 0 };
+
+StageCallbacks grMc_803E30C4[39] = {
     {
         NULL,
         NULL,
@@ -337,21 +340,36 @@ static StageCallbacks grMc_803E30C4[39] = {
     },
 };
 
-StageData grMc_803E33DC = {
-    MUTECITY,
-    grMc_803E30C4,
-    "/GrMc.dat",
-    grMuteCity_801EFC6C,
-    grMuteCity_801EFC68,
-    grMuteCity_801EFCDC,
-    grMuteCity_801EFCE0,
-    grMuteCity_801EFD04,
-    grMuteCity_801F2BBC,
-    grMuteCity_801F2C10,
-    0x00000001,
-    NULL,
-    3,
+char grMc_803E33D0[] = "/GrMc.dat";
+
+typedef struct grMc_StageData {
+    StageData stage_data;
+    char report_format[0x24];
+} grMc_StageData;
+
+grMc_StageData grMc_803E33DC = {
+    {
+        MUTECITY,
+        grMc_803E30C4,
+        grMc_803E33D0,
+        grMuteCity_801EFC6C,
+        grMuteCity_801EFC68,
+        grMuteCity_801EFCDC,
+        grMuteCity_801EFCE0,
+        grMuteCity_801EFD04,
+        grMuteCity_801F2BBC,
+        grMuteCity_801F2C10,
+        0x00000001,
+        (S16Vec3*) grMc_803E30B0,
+        3,
+    },
+    "%s:%d: couldn t get gobj(id=%d)\n",
 };
+
+char grMc_803E3434[0x48] =
+    "grmutecity.c\0\0\0\0"
+    "not found car spline (R)\n\0\0\0"
+    "not found car spline (L)\n";
 
 static struct {
     int x0;
@@ -429,7 +447,7 @@ HSD_GObj* grMuteCity_801EFD0C(int gobj_id)
         }
 
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 292, gobj_id);
+        OSReport((char*) grMc_803E30B0 + 0x360, grMc_803E3434, 292, gobj_id);
     }
 
     return gobj;
@@ -454,12 +472,12 @@ void grMuteCity_801EFDF8(Ground_GObj* gobj)
     gp->gv.mutecity.xDC = Ground_801C3FA4(gobj, 5);
     gp->gv.mutecity.xE0 = Ground_801C3FA4(gobj, 9);
     if (gp->gv.mutecity.xE0->u.spline == NULL) {
-        OSReport("not found car spline (R)\n");
-        HSD_ASSERT(0x15F, 0);
+        OSReport(grMc_803E3434 + 0x10);
+        __assert(grMc_803E3434, 0x15F, "0");
     }
     if (gp->gv.mutecity.xDC->u.spline == NULL) {
-        OSReport("not found car spline (L)\n");
-        HSD_ASSERT(0x163, 0);
+        OSReport(grMc_803E3434 + 0x2C);
+        __assert(grMc_803E3434, 0x163, "0");
     }
     gp->gv.mutecity.xD0_flags.b23 = 2;
     gp->gv.mutecity.xE4.x = gp->gv.mutecity.xE4.y = gp->gv.mutecity.xE4.z =

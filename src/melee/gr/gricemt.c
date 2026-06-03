@@ -99,6 +99,12 @@ S16Vec3 grIm_803E40B0[] = {
     { 0, 0, 0 }, { 1, 0, 0 }, { 0, 1, 0 }, { 0, 0, 0 }, { 2, 0, 0 }
 };
 
+static u8 grIm_data_pad[0x628] = { 1 };
+
+char grIm_803E46F8[0x20] =
+    "gricemt.c\0\0\0"
+    "i<ICEMT_FIELD_MAX";
+
 StageCallbacks grIm_803E4718[] = { { grIceMt_801F72D4, grIceMt_801F75DC,
                                      grIceMt_801F75E4, grIceMt_801F75E4, 0 },
                                    { grIceMt_801F7D94, grIceMt_801F7EE0,
@@ -121,20 +127,40 @@ StageCallbacks grIm_803E4718[] = { { grIceMt_801F72D4, grIceMt_801F75DC,
                                    { grIceMt_801F785C, grIceMt_801F796C,
                                      grIceMt_801F7A2C, grIceMt_801F7D90, 0 } };
 
-StageData grIm_803E4800 = {
-    0x16,
-    grIm_803E4718,
-    "/GrIm.dat",
-    grIceMt_801F686C,
-    grIceMt_801F6868,
-    grIceMt_801F7080,
-    grIceMt_801F71DC,
-    grIceMt_801F71E0,
-    grIceMt_801FA8F8,
-    grIceMt_801FA900,
-    1,
-    grIm_803E40B0,
-    3,
+char grIm_803E47F4[] = "/GrIm.dat";
+
+typedef struct grIm_StageData {
+    StageData stage_data;
+    char report_format[0x24];
+    char block_num_msg[0x20];
+    char coll_jobj[0xC];
+    char block_jobj[0xC];
+    char upper_msg[0x1C];
+    char under_msg[0x1C];
+} grIm_StageData;
+
+grIm_StageData grIm_803E4800 = {
+    {
+        0x16,
+        grIm_803E4718,
+        grIm_803E47F4,
+        grIceMt_801F686C,
+        grIceMt_801F6868,
+        grIceMt_801F7080,
+        grIceMt_801F71DC,
+        grIceMt_801F71E0,
+        grIceMt_801FA8F8,
+        grIceMt_801FA900,
+        1,
+        grIm_803E40B0,
+        3,
+    },
+    "%s:%d: couldn t get gobj(id=%d)\n",
+    "block_num<=BLOCK_COLL_JOBJ_MAX",
+    "coll_jobj",
+    "block_jobj",
+    "upper_ix<ICEMT_FIELD_MAX",
+    "under_ix<ICEMT_FIELD_MAX",
 };
 
 typedef struct GrIm588 {
@@ -352,7 +378,7 @@ HSD_GObj* grIceMt_801F71E8(int gobj_id)
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "gricemt.c", 0x35C,
+        OSReport(grIm_803E4800.report_format, grIm_803E46F8, 0x35C,
                  gobj_id);
     }
 

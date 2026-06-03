@@ -459,6 +459,10 @@ StageCallbacks grCn_803E1D8C[19] = {
       grCorneria_801DE8E0, 0 },
 };
 
+static u8 grCn_report_pad[0x68] = { 1 };
+char grCn_803E1F3C[0x24] = "%s:%d: couldn t get gobj(id=%d)\n";
+char grCn_803E1F60[0x10] = "grcorneria.c";
+
 #pragma push
 #pragma dont_inline on
 HSD_GObj* grCorneria_801DD534(int arg0)
@@ -483,7 +487,7 @@ HSD_GObj* grCorneria_801DD534(int arg0)
             HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0x26A, arg0);
+        OSReport(grCn_803E1F3C, grCn_803E1F60, 0x26A, arg0);
     }
 
     return gobj;

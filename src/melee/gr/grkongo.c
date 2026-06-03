@@ -35,6 +35,65 @@
 #include <baselib/random.h>
 #include <baselib/spline.h>
 
+S16Vec3 grKg_803E16E0[6] = {
+    { 2, 10, 19 }, { 3, 10, 22 }, { 5, 10, 43 },
+    { 6, 10, 44 }, { 0, 1, 0 },   { 1, 2, 2 },
+};
+
+StageCallbacks grKg_803E1704[12] = {
+    { NULL, NULL, NULL, NULL, 0 },
+    { grKongo_801D6074, grKongo_801D6190, grKongo_801D6198,
+      grKongo_801D6378, 0 },
+    { grKongo_801D6074, grKongo_801D6190, grKongo_801D6198,
+      grKongo_801D6378, 0 },
+    { grKongo_801D6038, grKongo_801D6064, grKongo_801D606C,
+      grKongo_801D6070, 0 },
+    { grKongo_801D5FA8, grKongo_801D5FD4, grKongo_801D5FDC,
+      grKongo_801D5FE0, 0 },
+    { grKongo_801D55D8, grKongo_801D5774, grKongo_801D577C,
+      grKongo_801D5FA4, 0 },
+    { grKongo_801D5FE4, grKongo_801D6028, grKongo_801D6030,
+      grKongo_801D6034, 0 },
+    { grKongo_801D637C, grKongo_801D64B4, grKongo_801D64BC,
+      grKongo_801D6518, 0 },
+    { grKongo_801D637C, grKongo_801D64B4, grKongo_801D64BC,
+      grKongo_801D6518, 0 },
+    { grKongo_801D637C, grKongo_801D64B4, grKongo_801D64BC,
+      grKongo_801D6518, 0 },
+    { grKongo_801D5490, grKongo_801D5574, grKongo_801D557C,
+      grKongo_801D55D4, 0xC0000000 },
+    { grKongo_801D651C, grKongo_801D6660, grKongo_801D6668,
+      grKongo_801D69AC, 0 },
+};
+
+char grKg_803E17F4[] = "/GrKg.dat";
+
+typedef struct grKg_StageData {
+    StageData stage_data;
+    char report_format[0x24];
+} grKg_StageData;
+
+grKg_StageData grKg_803E1800 = {
+    {
+        KONGO,
+        grKg_803E1704,
+        grKg_803E17F4,
+        grKongo_801D523C,
+        grKongo_801D5238,
+        grKongo_801D52F8,
+        grKongo_801D52FC,
+        grKongo_801D5338,
+        grKongo_801D8444,
+        grKongo_801D844C,
+        1,
+        grKg_803E16E0,
+        6,
+    },
+    "%s:%d: couldn t get gobj(id=%d)\n",
+};
+
+char grKg_803E1858[] = "grkongo.c";
+
 void grKongo_801D5490(Ground_GObj* arg0)
 {
     Ground* temp_r31;
@@ -1308,7 +1367,7 @@ bool grKongo_801D5338(void)
 HSD_GObj* grKongo_801D5340(s32 gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grKg_803E16E0[gobj_id + 1];
+    StageCallbacks* callbacks = &grKg_803E1704[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 
@@ -1329,7 +1388,7 @@ HSD_GObj* grKongo_801D5340(s32 gobj_id)
             HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grstory.c", 220,
+        OSReport((char*) grKg_803E16E0 + 0x154, grKg_803E1858, 0x10E,
                  gobj_id);
     }
     return gobj;

@@ -706,15 +706,17 @@ melee/ft/chara/ftCommon/ftCo_ThrownMewtwo.c:
 
 melee/ft/chara/ftCommon/ftCo_CaptureKirby.c:
 	.text       start:0x800BD19C end:0x800BD620
-	.sdata      start:0x804D3BB0 end:0x804D3BF8
+	.sdata      start:0x804D3BB0 end:0x804D3BC8
 	.sdata2     start:0x804D8BA8 end:0x804D8BB8
 
 melee/ft/chara/ftCommon/ftCo_CaptureWaitKirby.c:
 	.text       start:0x800BD620 end:0x800BD9E0
+	.sdata      start:0x804D3BC8 end:0x804D3BE0
 	.sdata2     start:0x804D8BB8 end:0x804D8BD0
 
 melee/ft/chara/ftCommon/ftCo_ThrownKirby.c:
 	.text       start:0x800BD9E0 end:0x800BE7E0
+	.sdata      start:0x804D3BE0 end:0x804D3BF8
 	.sdata2     start:0x804D8BD0 end:0x804D8BF8
 
 melee/ft/ftdemo.c:
