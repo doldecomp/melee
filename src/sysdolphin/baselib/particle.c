@@ -1674,19 +1674,23 @@ void fn_80393C14(const u8* buf, size_t size)
     hsd_804CF7E8.x11 = line_len;
 }
 
+#pragma push
+#pragma dont_inline on
 s32 hsd_80393D2C(s32 enable)
 {
-    s32 old = hsd_804CF7E8.x0_b1;
+    struct ParticleConsoleState* sp = &hsd_804CF7E8;
+    s32 old = sp->x0_b1;
 
     if (enable != 0) {
-        hsd_804CF7E8.x0_b1 = 1;
+        sp->x0_b1 = 1;
         HSD_SetReportCallback(fn_80393C14);
     } else {
-        hsd_804CF7E8.x0_b1 = 0;
+        sp->x0_b1 = 0;
         HSD_SetReportCallback(NULL);
     }
     return old;
 }
+#pragma pop
 
 void hsd_80393DA0(u8* buf, size_t size)
 {
