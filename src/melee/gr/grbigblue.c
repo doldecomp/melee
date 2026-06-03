@@ -117,6 +117,32 @@ StageCallbacks grBb_803E29E0[] = {
     { NULL, NULL, NULL, NULL, 0 }
 };
 
+char grBb_803E2D14[] = "/GrBb.dat";
+
+typedef struct grBb_StageData {
+    StageData stage_data;
+    char report_format[0x24];
+} grBb_StageData;
+
+grBb_StageData grBb_803E2D20 = {
+    {
+        BIGBLUE,
+        grBb_803E29E0,
+        grBb_803E2D14,
+        grBigBlue_801E57C0,
+        grBigBlue_801E57BC,
+        grBigBlue_801E59C8,
+        grBigBlue_801E59CC,
+        grBigBlue_801E59F0,
+        grBigBlue_801EFC0C,
+        grBigBlue_801EFC14,
+        1,
+        (S16Vec3*) grBb_803E2938,
+        0x1C,
+    },
+    "%s:%d: couldn t get gobj(id=%d)\n",
+};
+
 static const Vec3 grBb_803B8108 = { -1.0F, 0.0F, 0.0F };
 static const Vec3 grBb_803B8114 = { 56.0F, 40.0F, 24.0F };
 
@@ -222,8 +248,8 @@ HSD_GObj* grBigBlue_801E59F8(s32 id)
             HSD_GObj_SetupProc(gobj, cbs->callback2, 4U);
         }
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grbigblue.c", 0x17E,
-                 id);
+        OSReport((char*) grBb_803E2938 + 0x41C,
+                 (char*) grBb_803E2938 + 0x440, 0x17E, id);
     }
     return gobj;
 }

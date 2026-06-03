@@ -36,6 +36,8 @@ int grHr_804D6ADC;
 f32 grHr_804D6AE0;
 f32 grHr_804D6AE4;
 static void* grHr_804D6AE8;
+static int grHr_804D4998[2] = { 0xA, 0 };
+static char grHr_804D49A0[] = "/GrHr";
 static char grHr_804D49D0[] = "%d";
 extern GXColor grHr_804DBC74;
 extern f32 grHr_804DBC78;
@@ -90,6 +92,32 @@ StageCallbacks grHr_803E8140[11] = {
       grHomeRun_8021DEB0, 0xC0000000 },
 };
 
+typedef struct grHr_StageData {
+    StageData stage_data;
+    char report_format[0x24];
+    char filename[0xC];
+} grHr_StageData;
+
+grHr_StageData grHr_803E821C = {
+    {
+        HOMERUN,
+        grHr_803E8140,
+        grHr_804D49A0,
+        grHomeRun_8021C754,
+        grHomeRun_8021C750,
+        grHomeRun_8021C7FC,
+        grHomeRun_8021C800,
+        grHomeRun_8021C824,
+        grHomeRun_8021EEB4,
+        grHomeRun_8021EEBC,
+        1,
+        (S16Vec3*) grHr_804D4998,
+        1,
+    },
+    "%s:%d: couldn t get gobj(id=%d)\n",
+    "grhomerun.c",
+};
+
 void grHomeRun_8021C750(bool arg) {}
 
 void grHomeRun_8021C754(void)
@@ -142,8 +170,8 @@ HSD_GObj* grHomeRun_8021C82C(int gobj_id)
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grhomerun.c", 0x131,
-                 gobj_id);
+        OSReport((char*) grHr_803E8140 + 0x110,
+                 (char*) grHr_803E8140 + 0x134, 0x131, gobj_id);
     }
 
     return gobj;

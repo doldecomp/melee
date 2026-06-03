@@ -84,20 +84,30 @@ StageCallbacks grOp_803E6688[9] = {
 
 char grOp_803E673C[] = "/GrOp.dat";
 
-StageData grOp_803E6748 = {
-    OLDPUPUPU,
-    grOp_803E6688,
-    grOp_803E673C,
-    grOldPupupu_802107E0,
-    grOldPupupu_802107DC,
-    grOldPupupu_80210884,
-    grOldPupupu_80210888,
-    grOldPupupu_802108AC,
-    grOldPupupu_80211CA0,
-    grOldPupupu_80211CA8,
-    1,
-    0,
-    0,
+typedef struct grOp_StageData {
+    StageData stage_data;
+    char report_format[0x24];
+    char filename[0x10];
+} grOp_StageData;
+
+grOp_StageData grOp_803E6748 = {
+    {
+        OLDPUPUPU,
+        grOp_803E6688,
+        grOp_803E673C,
+        grOldPupupu_802107E0,
+        grOldPupupu_802107DC,
+        grOldPupupu_80210884,
+        grOldPupupu_80210888,
+        grOldPupupu_802108AC,
+        grOldPupupu_80211CA0,
+        grOldPupupu_80211CA8,
+        1,
+        0,
+        0,
+    },
+    "%s:%d: couldn t get gobj(id=%d)\n",
+    "groldpupupu.c",
 };
 
 static grOldPupupuSpawnDesc grOp_803E67B0[10] = {
@@ -161,8 +171,8 @@ HSD_GObj* grOldPupupu_802108B4(int arg0)
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "groldpupupu.c", 0xD9,
-                 arg0);
+        OSReport((char*) grOp_803E6688 + 0xF4,
+                 (char*) grOp_803E6688 + 0x118, 0xD9, arg0);
     }
 
     return gobj;
