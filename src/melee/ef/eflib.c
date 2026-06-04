@@ -682,7 +682,7 @@ void efLib_particles_proc_aux(HSD_GObj* gobj)
 HSD_Generator* efLib_CreateGenerator(s32 gfx_id, Vec3* pos)
 {
     HSD_Generator* generator;
-    u8 linkNo;
+    int linkNo;
 
     linkNo = 0;
     switch (gfx_id) {
