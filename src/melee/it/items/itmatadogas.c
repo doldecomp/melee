@@ -142,7 +142,7 @@ void itMatadogas_UnkMotion2_Phys(Item_GObj* gobj)
                         "!(jobj->flags & JOBJ_USE_QUATERNION)"));
         jobj->rotate.y = 0.0f;
         if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-            ftCo_800C6AFC(jobj);
+            (HSD_JObjSetMtxDirty)(jobj);
         }
         item2->on_accessory = (HSD_GObjEvent) it_802CB2B0;
         item->xDD1_flag.b1 = 1;

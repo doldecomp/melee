@@ -1,7 +1,5 @@
 #include "gmregtyfall.h"
 
-#include "gm/gmregtyfall.static.h"
-
 #include "gm_unsplit.h"
 
 #include "baselib/jobj.h"
@@ -18,7 +16,6 @@
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
-#include <melee/ft/ft_0C31.h>
 #include <melee/ft/ftdemo.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/stage.h>
@@ -515,20 +512,20 @@ void gm_801A7070_OnEnter(void* unused)
     temp_r29 = gm_801A659C(gm_801BEFB0());
     var_r27_2 = HSD_JObjGetChild(temp_r3_7);
     temp_f31_2 = -un_803060BC(temp_r29, 0);
-    fake_tyfall_HSD_JObjSetTranslateX(var_r27_2, temp_f31_2);
+    HSD_JObjSetTranslateXWithMtxDirty(var_r27_2, temp_f31_2);
     temp_f31_3 = -un_803060BC(temp_r29, 1);
-    fake_tyfall_HSD_JObjSetTranslateY(var_r27_2, temp_f31_3);
+    HSD_JObjSetTranslateYWithMtxDirty(var_r27_2, temp_f31_3);
     temp_f31_4 = -un_803060BC(temp_r29, 2);
-    fake_tyfall_HSD_JObjSetTranslateZ(var_r27_2, temp_f31_4);
+    HSD_JObjSetTranslateZWithMtxDirty(var_r27_2, temp_f31_4);
 
     temp_f31_5 = -(0.017453292f * un_803060BC(temp_r29, 5));
-    fake_tyfall_HSD_JObjSetRotationY(var_r27_2, temp_f31_5);
+    HSD_JObjSetRotationYWithMtxDirty(var_r27_2, temp_f31_5);
     temp_f31_6 = 1.0f / un_803060BC(temp_r29, 3);
     temp_f31_7 = un_803060BC(temp_r29, 4);
     temp_f31_7 = temp_f31_7 * temp_f31_6;
-    fake_tyfall_HSD_JObjSetScaleX(var_r27_2, temp_f31_7);
-    fake_tyfall_HSD_JObjSetScaleY(var_r27_2, temp_f31_7);
-    fake_tyfall_HSD_JObjSetScaleZ(var_r27_2, temp_f31_7);
+    HSD_JObjSetScaleXWithMtxDirty(var_r27_2, temp_f31_7);
+    HSD_JObjSetScaleYWithMtxDirty(var_r27_2, temp_f31_7);
+    HSD_JObjSetScaleZWithMtxDirty(var_r27_2, temp_f31_7);
     temp_f31_8 = gm_803DB2EC[gm_801BEFB0()];
     HSD_JObjSetScaleX(temp_r3_7, temp_f31_8);
     HSD_JObjSetScaleY(temp_r3_7, temp_f31_8);

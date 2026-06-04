@@ -2,8 +2,6 @@
 
 #include "placeholder.h"
 
-#include "ft/ft_0C31.h"
-
 #include "gr/forward.h"
 
 #include "gr/grinishie2.h"
@@ -486,18 +484,6 @@ bool itKyasarin_UnkMotion10_Coll(Item_GObj* gobj)
     return it_8027C79C(gobj);
 }
 
-#define fake_HSD_JObjSetRotationX(jobj, val)                                 \
-    {                                                                         \
-        ((jobj) ? ((void) 0) : __assert("jobj.h", 0x27F, "jobj"));            \
-        ((!((jobj)->flags & JOBJ_USE_QUATERNION))                             \
-             ? ((void) 0)                                                     \
-             : __assert("jobj.h", 0x280, (char*) it_803F90D0 + 0xB0));        \
-        (jobj)->rotate.x = val;                                               \
-        if (!((jobj)->flags & JOBJ_MTX_INDEP_SRT)) {                          \
-            ftCo_800C6AFC(jobj);                                              \
-        }                                                                     \
-    }
-
 static inline void itKyasarin_FlipAndFall(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -505,7 +491,7 @@ static inline void itKyasarin_FlipAndFall(Item_GObj* gobj)
     CollData* coll = &ip->x378_itemColl;
     Vec3 pos;
 
-    fake_HSD_JObjSetRotationX(jobj, M_PI);
+    HSD_JObjSetRotationXWithMtxDirty(jobj, M_PI);
     it_802762BC(ip);
     coll->cur_pos = ip->pos;
     pos = ip->pos;

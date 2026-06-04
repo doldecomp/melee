@@ -76,7 +76,7 @@ static inline void itDosei_SetRotX(HSD_JObj* jobj, f32 x)
         : __assert("jobj.h", 640, "!(jobj->flags & JOBJ_USE_QUATERNION)");
     jobj->rotate.x = x;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        ftCo_800C6AFC(jobj);
+        (HSD_JObjSetMtxDirty)(jobj);
     }
 }
 
@@ -88,7 +88,7 @@ static inline void itDosei_SetRotY(HSD_JObj* jobj, f32 y)
         : __assert("jobj.h", 661, "!(jobj->flags & JOBJ_USE_QUATERNION)");
     jobj->rotate.y = y;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        ftCo_800C6AFC(jobj);
+        (HSD_JObjSetMtxDirty)(jobj);
     }
 }
 
@@ -100,7 +100,7 @@ static inline void itDosei_SetRotZ(HSD_JObj* jobj, f32 z)
         : __assert("jobj.h", 682, "!(jobj->flags & JOBJ_USE_QUATERNION)");
     jobj->rotate.z = z;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        ftCo_800C6AFC(jobj);
+        (HSD_JObjSetMtxDirty)(jobj);
     }
 }
 
@@ -115,7 +115,7 @@ static inline void itDosei_SetFacingAngleFC(Item_GObj* gobj, f32 m)
         : __assert("jobj.h", 661, "!(jobj->flags & JOBJ_USE_QUATERNION)");
     jobj->rotate.y = angle;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        ftCo_800C6AFC(jobj);
+        (HSD_JObjSetMtxDirty)(jobj);
     }
 }
 

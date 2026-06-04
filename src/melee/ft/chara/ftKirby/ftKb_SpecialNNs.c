@@ -38,6 +38,7 @@
 #include <common_structs.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
+#include <baselib/jobj.h>
 #include <baselib/random.h>
 #include <MSL/math.h>
 
@@ -45,61 +46,6 @@
 
 extern float ftKb_Init_803CB710[4];
 extern float ftKb_Init_803CB720[4];
-extern char ftKb_Init_804D3DD0[7];
-extern char ftKb_Init_804D3DD8[5];
-extern char ftKb_Init_804D3DE0[6];
-
-// fake HSD_JObj helpers
-
-static inline void ftKb_JObjGetScale(HSD_JObj* jobj, Vec3* scale)
-{
-    (jobj) ? ((void) 0)
-           : __assert(ftKb_Init_804D3DD0, 0x337, ftKb_Init_804D3DD8);
-    (scale) ? ((void) 0)
-            : __assert(ftKb_Init_804D3DD0, 0x338, ftKb_Init_804D3DE0);
-    *scale = jobj->scale;
-}
-
-static inline bool ftKb_JObjMtxIsDirty(HSD_JObj* jobj)
-{
-    bool result;
-    (jobj) ? ((void) 0)
-           : __assert(ftKb_Init_804D3DD0, 0x234, ftKb_Init_804D3DD8);
-    result = false;
-    if (!(jobj->flags & JOBJ_USER_DEF_MTX) && (jobj->flags & JOBJ_MTX_DIRTY)) {
-        result = true;
-    }
-    return result;
-}
-
-static inline void ftKb_JObjSetScale(HSD_JObj* jobj, Vec3* scale)
-{
-    (jobj) ? ((void) 0)
-           : __assert(ftKb_Init_804D3DD0, 0x2F8, ftKb_Init_804D3DD8);
-    (scale) ? ((void) 0)
-            : __assert(ftKb_Init_804D3DD0, 0x2F9, ftKb_Init_804D3DE0);
-    jobj->scale = *scale;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        if (jobj != NULL && !ftKb_JObjMtxIsDirty(jobj)) {
-            HSD_JObjSetMtxDirtySub(jobj);
-        }
-    }
-}
-
-static inline void ftKb_JObjSetRotationY(HSD_JObj* jobj, f32 y, f32* base)
-{
-    (jobj) ? ((void) 0)
-           : __assert(ftKb_Init_804D3DD0, 0x294, ftKb_Init_804D3DD8);
-    (!(jobj->flags & JOBJ_USE_QUATERNION))
-        ? ((void) 0)
-        : __assert(ftKb_Init_804D3DD0, 0x295, (char*) &base[8]);
-    jobj->rotate.y = y;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        if (jobj != NULL && !ftKb_JObjMtxIsDirty(jobj)) {
-            HSD_JObjSetMtxDirtySub(jobj);
-        }
-    }
-}
 
 static inline void ftKb_AirScaleAnimStep(Fighter_GObj* gobj, Vec3* scale,
                                          f32* scale_base)
@@ -111,10 +57,10 @@ static inline void ftKb_AirScaleAnimStep(Fighter_GObj* gobj, Vec3* scale,
         scale->x = fp->fv.kb.x8C.x;
         scale->y = fp->fv.kb.x8C.y * scale_base[frame];
         scale->z = fp->fv.kb.x8C.z * scale_base[frame + 4];
-        ftKb_JObjSetScale(jobj, scale);
+        HSD_JObjSetScale(jobj, scale);
         fp->mv.pr.specialn.x8 += 1;
     } else {
-        ftKb_JObjSetScale(jobj, &fp->fv.kb.x8C);
+        HSD_JObjSetScale(jobj, &fp->fv.kb.x8C);
     }
 }
 
@@ -1112,10 +1058,10 @@ static inline void ftKb_PrScaleAnimStep(Fighter_GObj* gobj, Vec3* scale)
         scale->x = fp->fv.kb.x8C.x;
         scale->y = fp->fv.kb.x8C.y * ftKb_Init_803CB710[frame];
         scale->z = fp->fv.kb.x8C.z * ftKb_Init_803CB720[frame];
-        ftKb_JObjSetScale(jobj, scale);
+        HSD_JObjSetScale(jobj, scale);
         fp->mv.pr.specialn.x8 += 1;
     } else {
-        ftKb_JObjSetScale(jobj, &fp->fv.kb.x8C);
+        HSD_JObjSetScale(jobj, &fp->fv.kb.x8C);
     }
 }
 
@@ -1123,7 +1069,7 @@ static inline void ftKb_PrRestoreScale(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    ftKb_JObjSetScale(jobj, &fp->fv.kb.x8C);
+    HSD_JObjSetScale(jobj, &fp->fv.kb.x8C);
     ftPartSetRotY(fp, FtPart_TopN, M_PI_2 * fp->facing_dir);
     if (fp->mv.pr.specialn.facing_dir != 0) {
         fp->facing_dir = fp->mv.pr.specialn.facing_dir;
@@ -1260,7 +1206,7 @@ void ftKb_SpecialNPr_8010131C(Fighter_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
-    ftKb_JObjGetScale(jobj, &fp->fv.kb.x8C);
+    HSD_JObjGetScale(jobj, &fp->fv.kb.x8C);
     fp->gr_vel = 0;
     fp->mv.pr.specialn.x0 = da->specialn_pr_duration;
     fp->mv.pr.specialn.x4 = -1;
@@ -1626,8 +1572,8 @@ void ftKb_PrSpecialAirN_Anim(Fighter_GObj* gobj)
                         ftKb_SpecialNPr_801010D4(gobj, true, 0x40012, 0);
                         return;
                     }
-                    ftKb_JObjSetRotationY(fp->parts[FtPart_TopN].joint, M_PI_2,
-                                          scale_base);
+                    HSD_JObjSetRotationY(fp->parts[FtPart_TopN].joint,
+                                         M_PI_2);
                     return;
                 }
                 if (fp->mv.pr.specialn.x14 < M_PI && old_angle > M_PI) {
@@ -1635,12 +1581,10 @@ void ftKb_PrSpecialAirN_Anim(Fighter_GObj* gobj)
                     ftKb_SpecialNPr_801010D4(gobj, true, 0x40012, 0);
                     return;
                 }
-                ftKb_JObjSetRotationY(fp->parts[FtPart_TopN].joint, M_PI_2,
-                                      scale_base);
+                HSD_JObjSetRotationY(fp->parts[FtPart_TopN].joint, M_PI_2);
                 return;
             }
-            ftKb_JObjSetRotationY(fp->parts[FtPart_TopN].joint, M_PI_2,
-                                  scale_base);
+            HSD_JObjSetRotationY(fp->parts[FtPart_TopN].joint, M_PI_2);
             return;
         }
         ftPartSetRotY(fp, FtPart_TopN, M_PI_2);

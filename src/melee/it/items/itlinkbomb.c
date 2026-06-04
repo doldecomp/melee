@@ -3,10 +3,10 @@
 #include "placeholder.h"
 
 #include "baselib/forward.h"
+#include "baselib/jobj.h"
 
 #include "baselib/random.h"
 #include "ft/chara/ftLink/ftLk_AttackAir.h"
-#include "ft/ft_0C31.h"
 
 #include "it/forward.h"
 
@@ -41,24 +41,6 @@ ItemStateTable it_803F6888[] = {
       itLinkbomb_UnkMotion6_Coll },
 };
 
-static inline void fake_HSD_JObjAddTranslationY(HSD_JObj* jobj, float y)
-{
-    ((jobj) ? ((void) 0) : __assert("jobj.h", 1114, "jobj"));
-    jobj->translate.y += y;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        ftCo_800C6AFC(jobj);
-    }
-}
-
-static inline void fake_HSD_JObjAddRotationX(HSD_JObj* jobj, float x)
-{
-    ((jobj) ? ((void) 0) : __assert("jobj.h", 1029, "jobj"));
-    jobj->rotate.x += x;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        ftCo_800C6AFC(jobj);
-    }
-}
-
 void it_8029D968(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
@@ -90,7 +72,7 @@ static inline void it_8029DB5C_Inline_Matching(HSD_GObj* gobj, Item* item,
                                                Article* article,
                                                itLinkBombAttributes* sa);
 
-static inline void it_8029DB5C_Inline_AnimAdd_Fake(HSD_GObj* gobj)
+static inline void it_8029DB5C_Inline_AnimAddWithMtxDirty(HSD_GObj* gobj)
 {
     Item* item_2;
     f32 temp_f31;
@@ -101,9 +83,9 @@ static inline void it_8029DB5C_Inline_AnimAdd_Fake(HSD_GObj* gobj)
     if (item_2->xDD4_itemVar.linkbomb.x0.b0 == 0) {
         temp_f31 = item_2->xDD4_itemVar.linkbomb.x8;
         temp_r31_2 = item_2->xBBC_dynamicBoneTable->bones[3];
-        fake_HSD_JObjAddTranslationY(temp_r31_2, temp_f31);
+        HSD_JObjAddTranslationYWithMtxDirty(temp_r31_2, temp_f31);
         temp_f31_2 = item_2->xDD4_itemVar.linkbomb.xC;
-        fake_HSD_JObjAddRotationX(temp_r31_2, temp_f31_2);
+        HSD_JObjAddRotationXWithMtxDirty(temp_r31_2, temp_f31_2);
     }
 }
 
@@ -127,7 +109,7 @@ static inline void it_8029DB5C_Inline_Matching(HSD_GObj* gobj, Item* item,
         item->xDD4_itemVar.linkbomb.x0.b0 = true;
     }
     item->xD44_lifeTimer = item->xD44_lifeTimer - 1.0f;
-    it_8029DB5C_Inline_AnimAdd_Fake(gobj);
+    it_8029DB5C_Inline_AnimAddWithMtxDirty(gobj);
 }
 
 static inline void it_8029DB5C_Inline_AnimAdd_Part(HSD_GObj* gobj)
@@ -142,15 +124,9 @@ static inline void it_8029DB5C_Inline_AnimAdd_Part(HSD_GObj* gobj)
     if (item_2->xDD4_itemVar.linkbomb.x0.b0 == 0) {
         temp_f31 = item_2->xDD4_itemVar.linkbomb.x8;
         temp_r31_2 = item_2->xBBC_dynamicBoneTable->bones[3];
-#if 0
-        fake_HSD_JObjAddTranslationY(temp_r31_2, temp_f31);
-        temp_f31_2 = item_2->xDD4_itemVar.linkbomb.xC;
-        fake_HSD_JObjAddRotationX(temp_r31_2, temp_f31_2);
-#else
         HSD_JObjAddTranslationY(temp_r31_2, temp_f31);
         temp_f31_2 = item_2->xDD4_itemVar.linkbomb.xC;
         HSD_JObjAddRotationX(temp_r31_2, temp_f31_2);
-#endif
     }
 }
 
