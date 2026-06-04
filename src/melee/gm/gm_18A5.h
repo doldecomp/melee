@@ -18,7 +18,7 @@
 /* 18DC18 */ void fn_8018DC18(void*, s32, s32, s32, s32, s32, s32, f32);
 /* 18DF68 */ void fn_8018DF68(void*, s32, s32, s32, s32, s32, s32, f32);
 /* 18E46C */ void fn_8018E46C(HSD_GObj*, int);
-/* 18E618 */ void fn_8018E618(int, int, float);
+/* 18E618 */ void fn_8018E618(int, float, int);
 /* 18E85C */ void fn_8018E85C(DynamicModelDesc*, s32);
 /* 18EC48 */ UNK_RET fn_8018EC48(UNK_PARAMS);
 /* 18EC7C */ UNK_RET fn_8018EC7C(UNK_PARAMS);
