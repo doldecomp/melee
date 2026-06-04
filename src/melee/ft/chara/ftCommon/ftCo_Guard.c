@@ -245,14 +245,10 @@ void ftCo_80091E78(HSD_GObj* gobj, float arg1)
 
 void ftCo_80092158(Fighter_GObj* gobj, int arg1, HSD_JObj* arg2)
 {
-    u8 temp_ret = Player_GetUnk45(GET_FIGHTER(gobj)->player_id);
-    u8* temp_r7 = &Fighter_804D650C[temp_ret];
-    u8 temp_r7_2 = M2C_FIELD(temp_r7, u8*, 2);
+    int offset = Player_GetUnk45(GET_FIGHTER(gobj)->player_id) << 2;
+    u8* color = Fighter_804D650C + offset;
     efSync_Spawn(arg1, gobj, arg2,
-                 temp_r7_2 |
-                     (((M2C_FIELD(temp_r7, u8*, 1) << 8) & ~0xFF0000) |
-                      ((M2C_FIELD(temp_r7, u8*, 0) << 0x10) & 0xFF0000)),
-                 temp_r7_2, M2C_BITWISE(float, temp_ret));
+                 (color[0] << 16) | (color[1] << 8) | color[2]);
 }
 void ftCo_800921DC(HSD_GObj* gobj)
 {
@@ -721,14 +717,12 @@ void ftCo_8009370C(Fighter_GObj* gobj, HSD_GObjEvent on_reflect)
 
 void ftCo_80093790(Fighter_GObj* gobj)
 {
+    u8 _[8] = { 0 };
     Fighter* fp = gobj->user_data;
     ftCommon_8007DB24(gobj);
-    {
-        HSD_JObj* jobj = fp->parts[fp->ft_data->x8->x11].joint;
-        ftCo_80092158(gobj, 1050, jobj);
-        fp->x2219_b0 = true;
-        ft_PlaySFX(fp, 128, 127, 64);
-    }
+    ftCo_80092158(gobj, 1050, fp->parts[fp->ft_data->x8->x11].joint);
+    fp->x2219_b0 = true;
+    ft_PlaySFX(fp, 128, 127, 64);
 }
 
 void ftCo_80093850(Fighter_GObj* gobj)

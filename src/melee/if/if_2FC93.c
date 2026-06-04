@@ -35,12 +35,12 @@
     unsigned char x28[4];
     unsigned char x2C[4];
     unsigned char x30;
-    unsigned char x31;
+    signed char x31;
     unsigned char x32;
 } un_804A1F10;
 
 /// .sdata2
-/* 4DDBA8 */ static char un_804DDBA8[4] = { 0, 1, 2, 3 };
+/* 4DDBA8 */ static char const un_804DDBA8[4] = { 0, 1, 2, 3 };
 
 /// .sbss
 /* 4D6D90 */ static int un_804D6D90;
@@ -107,75 +107,88 @@ void fn_802FDA4C(HSD_GObj* gobj, int pass)
 
 void fn_802FDA78(HSD_GObj* gobj)
 {
-    int i, j, k;
+    struct un_804A1F10_t* p = &un_804A1F10;
+    int i;
     float v[] = { 0.0, -1.3, -2.6, -3.9 };
     HSD_JObj* jobj = gobj->hsd_obj;
     unsigned char* pslot = gobj->user_data;
     unsigned char slot = *pslot;
+    u8 j = 0;
+    u8 k = 0;
     HSD_JObjSetTranslateZ(jobj, 0.0);
-    PAD_STACK(24);
-    jobj->child->u.dobj->mobj->mat->diffuse = un_804A1F10.x14[slot];
-    jobj->child->u.dobj->next->mobj->mat->diffuse = un_804A1F10.x14[slot];
-    jobj->child->u.dobj->next->next->mobj->mat->diffuse =
-        un_804A1F10.x14[slot];
-    if (!un_804A1F10.x28[0] && !un_804A1F10.x28[1] && !un_804A1F10.x28[2] &&
-        !un_804A1F10.x28[3])
     {
-        un_804A1F10.x31 = 0xFF;
-        un_804A1F10.x32 = 0;
+        HSD_MObj* m = jobj->child->u.dobj->mobj;
+        m->mat->diffuse.r = p->x14[slot].r;
+        m->mat->diffuse.g = p->x14[slot].g;
+        m->mat->diffuse.b = p->x14[slot].b;
+        m->mat->diffuse.a = p->x14[slot].a;
     }
-    switch (un_804A1F10.x28[slot]) {
+    {
+        HSD_MObj* m = jobj->child->u.dobj->next->mobj;
+        m->mat->diffuse.r = p->x14[slot].r;
+        m->mat->diffuse.g = p->x14[slot].g;
+        m->mat->diffuse.b = p->x14[slot].b;
+        m->mat->diffuse.a = p->x14[slot].a;
+    }
+    {
+        HSD_MObj* m = jobj->child->u.dobj->next->next->mobj;
+        m->mat->diffuse.r = p->x14[slot].r;
+        m->mat->diffuse.g = p->x14[slot].g;
+        m->mat->diffuse.b = p->x14[slot].b;
+        m->mat->diffuse.a = p->x14[slot].a;
+    }
+    if (!p->x28[0] && !p->x28[1] && !p->x28[2] && !p->x28[3]) {
+        p->x31 = -1;
+        p->x32 = 0;
+    }
+    switch (p->x28[slot]) {
     case 0:
         HSD_JObjSetTranslateZ(jobj, 10000.0);
         break;
     case 1:
-        if (un_804A1F10.x31 == 0xFF) {
-            un_804A1F10.x31 = slot;
-        } else if (un_804A1F10.x28[un_804A1F10.x31] == 1) {
-            if (un_804A1F10.x32 == 0 && un_804A1F10.x30 == 0) {
+        if (p->x31 == -1) {
+            p->x31 = slot;
+        } else if (p->x28[p->x31] == 1) {
+            if (p->x32 == 0 && p->x30 == 0) {
                 lbAudioAx_80024030(4);
             }
-            un_804A1F10.x32 = (un_804A1F10.x32 + 1) % 51;
+            p->x32 = (p->x32 + 1) % 51;
         }
-        j = 0;
         for (i = 0; i < slot; i++) {
-            if (un_804A1F10.x28[i] == 1) {
+            if (p->x28[i] == 1) {
                 j++;
             }
         }
-        k = 0;
         for (i = 0; i < 4; i++) {
-            if (un_804A1F10.x28[i] == 1) {
+            if (p->x28[i] == 1) {
                 k++;
             }
         }
         HSD_JObjSetRotationZ(jobj, 0.0);
-        HSD_JObjSetTranslateY(jobj, 2.6 * j + v[k == 0 ? 0 : k - 1]);
+        HSD_JObjSetTranslateY(jobj, 2.6f * j + v[k == 0 ? 0 : k - 1]);
         HSD_JObjSetTranslateX(jobj, -25.0);
         break;
     case 2:
-        if (un_804A1F10.x31 == 0xFF) {
-            un_804A1F10.x31 = slot;
-        } else if (un_804A1F10.x28[un_804A1F10.x31] == 2) {
-            if (un_804A1F10.x32 == 0 && un_804A1F10.x30 == 0) {
+        if (p->x31 == -1) {
+            p->x31 = slot;
+        } else if (p->x28[p->x31] == 2) {
+            if (p->x32 == 0 && p->x30 == 0) {
                 lbAudioAx_80024030(4);
             }
-            un_804A1F10.x32 = (un_804A1F10.x32 + 1) % 51;
+            p->x32 = (p->x32 + 1) % 51;
         }
-        j = 0;
         for (i = 0; i < slot; i++) {
-            if (un_804A1F10.x28[i] == 2) {
+            if (p->x28[i] == 2) {
                 j++;
             }
         }
-        k = 0;
         for (i = 0; i < 4; i++) {
-            if (un_804A1F10.x28[i] == 2) {
+            if (p->x28[i] == 2) {
                 k++;
             }
         }
         HSD_JObjSetRotationZ(jobj, 3.1415927);
-        HSD_JObjSetTranslateY(jobj, 2.6 * j + v[k == 0 ? 0 : k - 1]);
+        HSD_JObjSetTranslateY(jobj, 2.6f * j + v[k == 0 ? 0 : k - 1]);
         HSD_JObjSetTranslateX(jobj, 25.0);
         break;
     }
@@ -184,9 +197,10 @@ void fn_802FDA78(HSD_GObj* gobj)
 
 void un_802FE260(void)
 {
+    struct un_804A1F10_t* p = &un_804A1F10;
+    int i;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
-    int i;
 
     un_804D6D90 = 0;
     lbArchive_LoadSections(*ifAll_802F3690(), (void*) &un_804A1F10.x0,
@@ -194,16 +208,16 @@ void un_802FE260(void)
     for (i = 0; i < 4; i++) {
         gobj = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
         jobj = HSD_JObjLoadJoint(un_804A1F10.x0[0]->joint);
-        gobj->user_data = &un_804DDBA8[i];
+        gobj->user_data = (void*) &un_804DDBA8[i];
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
         GObj_SetupGXLink(gobj, fn_802FDA4C, 11, 0);
         gm_8016895C(jobj, un_804A1F10.x0[0], 0);
         HSD_GObj_SetupProc(gobj, fn_802FDA78, 17);
         HSD_JObjReqAnimAll(jobj, 0.0);
         HSD_JObjAnimAll(jobj);
-        un_804A1F10.x24[i] = 0;
-        un_804A1F10.x28[i] = 0;
-        un_804A1F10.x4[i] = gobj;
+        p->x24[i] = 0;
+        p->x28[i] = 0;
+        p->x4[i] = gobj;
     }
     un_804A1F10.x31 = -1;
     un_804A1F10.x32 = 0;
