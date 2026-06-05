@@ -596,7 +596,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
             struct lbl_8046B6A0_24C_58_t* p = x58;
             int i;
             for (i = 0; i < 4; i++) {
-                if (p->x0 != 3 && arg1 != i && rankings[i] == 0) {
+                if (p->x0 != 3 && i != arg1 && rankings[i] == 0) {
                     return 0;
                 }
                 p++;
@@ -615,7 +615,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
             struct lbl_8046B6A0_24C_58_t* p = x58;
             int i;
             for (i = 0; i < 4; i++) {
-                if (p->x0 != 3 && arg1 != i && rankings[i] == rankings[6]) {
+                if (p->x0 != 3 && i != arg1 && rankings[i] == rankings[6]) {
                     return 0;
                 }
                 p++;
@@ -656,51 +656,52 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
 
     case 0xDB: {
         s32 vals[4];
+        s32* base = vals;
         int i, j;
-        if (x58[arg1].x20 < 3) {
-            return 0;
-        }
-        vals[0] = zeroes->x0[0];
-        vals[1] = zeroes->x0[1];
-        vals[2] = zeroes->x0[2];
-        vals[3] = zeroes->x0[3];
-        {
-            struct lbl_8046B6A0_24C_58_t* p = x58;
-            s32* vp = vals;
-            for (i = 0; i < 4; i++) {
-                if (p->x0 != 3) {
-                    *vp = p->x20;
-                }
-                p++;
-                vp++;
+        if (x58[arg1].x20 >= 3) {
+            {
+                typedef struct {
+                    s32 a, b, c, d;
+                } copy_t;
+                *(copy_t*) base = *(copy_t*) zeroes->x0;
             }
-        }
-        for (j = 3; j >= 1; j--) {
-            s32* p = vals;
-            for (i = j; i > 0; i--) {
-                if (p[0] < p[1]) {
-                    s32 tmp = p[0];
-                    p[0] = p[1];
-                    p[1] = tmp;
+            {
+                struct lbl_8046B6A0_24C_58_t* p = x58;
+                s32* vp = base;
+                for (i = 0; i < 4; i++) {
+                    if (p->x0 != 3) {
+                        *vp = p->x20;
+                    }
+                    p++;
+                    vp++;
                 }
-                p++;
             }
-        }
-        if (vals[0] == x58[arg1].x20 && vals[0] >= vals[1] * 2) {
-            return 1;
+            for (j = 3; j >= 1; j--) {
+                s32* p = base;
+                for (i = j; i > 0; i--) {
+                    if (p[0] < p[1]) {
+                        s32 tmp = p[0];
+                        p[0] = p[1];
+                        p[1] = tmp;
+                    }
+                    p++;
+                }
+            }
+            if (base[0] == x58[arg1].x20 && base[0] >= base[1] * 2) {
+                return 1;
+            }
         }
         return 0;
     }
 
     case 0xDC: {
         if ((unsigned) fn_801701C0(arg0, arg1, 0xDB) == 0) {
-            s32 player_kills = x58[arg1].x20;
             {
                 struct lbl_8046B6A0_24C_58_t* p = x58;
                 int i;
                 for (i = 0; i < 4; i++) {
-                    if (p->x0 != 3 && arg1 != i &&
-                        (u32) p->x20 >= (u32) player_kills)
+                    if (p->x0 != 3 && i != arg1 &&
+                        (u32) p->x20 >= (u32) x58[arg1].x20)
                     {
                         return 0;
                     }
@@ -716,51 +717,52 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
 
     case 0xDD: {
         s32 vals[4];
+        s32* base = vals;
         int i, j;
-        if (x58[arg1].x40 < 3) {
-            return 0;
-        }
-        vals[0] = zeroes->x10[0];
-        vals[1] = zeroes->x10[1];
-        vals[2] = zeroes->x10[2];
-        vals[3] = zeroes->x10[3];
-        {
-            struct lbl_8046B6A0_24C_58_t* p = x58;
-            s32* vp = vals;
-            for (i = 0; i < 4; i++) {
-                if (p->x0 != 3) {
-                    *vp = p->x40;
-                }
-                p++;
-                vp++;
+        if (x58[arg1].x40 >= 3) {
+            {
+                typedef struct {
+                    s32 a, b, c, d;
+                } copy_t;
+                *(copy_t*) base = *(copy_t*) zeroes->x10;
             }
-        }
-        for (j = 3; j >= 1; j--) {
-            s32* p = vals;
-            for (i = j; i > 0; i--) {
-                if (p[0] < p[1]) {
-                    s32 tmp = p[0];
-                    p[0] = p[1];
-                    p[1] = tmp;
+            {
+                struct lbl_8046B6A0_24C_58_t* p = x58;
+                s32* vp = base;
+                for (i = 0; i < 4; i++) {
+                    if (p->x0 != 3) {
+                        *vp = p->x40;
+                    }
+                    p++;
+                    vp++;
                 }
-                p++;
             }
-        }
-        if (vals[0] == x58[arg1].x40 && vals[0] >= vals[1] * 2) {
-            return 1;
+            for (j = 3; j >= 1; j--) {
+                s32* p = base;
+                for (i = j; i > 0; i--) {
+                    if (p[0] < p[1]) {
+                        s32 tmp = p[0];
+                        p[0] = p[1];
+                        p[1] = tmp;
+                    }
+                    p++;
+                }
+            }
+            if (base[0] == x58[arg1].x40 && base[0] >= base[1] * 2) {
+                return 1;
+            }
         }
         return 0;
     }
 
     case 0xDE: {
         if ((unsigned) fn_801701C0(arg0, arg1, 0xDD) == 0) {
-            s32 player_deaths = x58[arg1].x40;
             {
                 struct lbl_8046B6A0_24C_58_t* p = x58;
                 int i;
                 for (i = 0; i < 4; i++) {
-                    if (p->x0 != 3 && arg1 != i &&
-                        (u32) p->x40 >= (u32) player_deaths)
+                    if (p->x0 != 3 && i != arg1 &&
+                        (u32) p->x40 >= (u32) x58[arg1].x40)
                     {
                         return 0;
                     }
@@ -776,54 +778,56 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
 
     case 0xDF: {
         s32 vals[4];
+        s32* base = vals;
         int i, j;
         s32 player_net = x58[arg1].x24 - x58[arg1].xA;
-        if ((u32) player_net < 3) {
-            return 0;
-        }
-        vals[0] = zeroes->x20[0];
-        vals[1] = zeroes->x20[1];
-        vals[2] = zeroes->x20[2];
-        vals[3] = zeroes->x20[3];
-        {
-            struct lbl_8046B6A0_24C_58_t* p = x58;
-            s32* vp = vals;
-            for (i = 0; i < 4; i++) {
-                if (p->x0 != 3) {
-                    *vp = p->x24 - p->xA;
-                }
-                p++;
-                vp++;
+        if ((u32) player_net >= 3) {
+            {
+                typedef struct {
+                    s32 a, b, c, d;
+                } copy_t;
+                *(copy_t*) base = *(copy_t*) zeroes->x20;
             }
-        }
-        for (j = 3; j >= 1; j--) {
-            s32* p = vals;
-            for (i = j; i > 0; i--) {
-                if (p[0] < p[1]) {
-                    s32 tmp = p[0];
-                    p[0] = p[1];
-                    p[1] = tmp;
+            {
+                struct lbl_8046B6A0_24C_58_t* p = x58;
+                s32* vp = base;
+                for (i = 0; i < 4; i++) {
+                    if (p->x0 != 3) {
+                        *vp = p->x24 - p->xA;
+                    }
+                    p++;
+                    vp++;
                 }
-                p++;
             }
-        }
-        if (vals[0] == (s32) (x58[arg1].x24 - x58[arg1].xA) &&
-            vals[0] >= vals[1] * 2)
-        {
-            return 1;
+            for (j = 3; j >= 1; j--) {
+                s32* p = base;
+                for (i = j; i > 0; i--) {
+                    if (p[0] < p[1]) {
+                        s32 tmp = p[0];
+                        p[0] = p[1];
+                        p[1] = tmp;
+                    }
+                    p++;
+                }
+            }
+            if (base[0] == (s32) (x58[arg1].x24 - x58[arg1].xA) &&
+                base[0] >= base[1] * 2)
+            {
+                return 1;
+            }
         }
         return 0;
     }
 
     case 0xE0: {
         if ((unsigned) fn_801701C0(arg0, arg1, 0xDF) == 0) {
-            s32 player_net = x58[arg1].x24 - x58[arg1].xA;
             {
                 struct lbl_8046B6A0_24C_58_t* p = x58;
                 int i;
                 for (i = 0; i < 4; i++) {
-                    if (p->x0 != 3 && arg1 != i &&
-                        (u32) (p->x24 - p->xA) >= (u32) player_net)
+                    if (p->x0 != 3 && i != arg1 &&
+                        (u32) (p->x24 - p->xA) >=
+                            (u32) (x58[arg1].x24 - x58[arg1].xA))
                     {
                         return 0;
                     }
@@ -839,50 +843,53 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
 
     case 0xE1: {
         s32 vals[4];
+        s32* base = vals;
         int i, j;
-        if (x58[arg1].xA < 3) {
-            return 0;
-        }
-        vals[0] = zeroes->x30[0];
-        vals[1] = zeroes->x30[1];
-        vals[2] = zeroes->x30[2];
-        vals[3] = zeroes->x30[3];
-        {
-            struct lbl_8046B6A0_24C_58_t* p = x58;
-            s32* vp = vals;
-            for (i = 0; i < 4; i++) {
-                if (p->x0 != 3) {
-                    *vp = p->xA;
-                }
-                p++;
-                vp++;
+        if (x58[arg1].xA >= 3) {
+            {
+                typedef struct {
+                    s32 a, b, c, d;
+                } copy_t;
+                *(copy_t*) base = *(copy_t*) zeroes->x30;
             }
-        }
-        for (j = 3; j >= 1; j--) {
-            s32* p = vals;
-            for (i = j; i > 0; i--) {
-                if (p[0] < p[1]) {
-                    s32 tmp = p[0];
-                    p[0] = p[1];
-                    p[1] = tmp;
+            {
+                struct lbl_8046B6A0_24C_58_t* p = x58;
+                s32* vp = base;
+                for (i = 0; i < 4; i++) {
+                    if (p->x0 != 3) {
+                        *vp = p->xA;
+                    }
+                    p++;
+                    vp++;
                 }
-                p++;
             }
-        }
-        if ((u32) vals[0] == (u32) x58[arg1].xA && vals[0] >= vals[1] * 2) {
-            return 1;
+            for (j = 3; j >= 1; j--) {
+                s32* p = base;
+                for (i = j; i > 0; i--) {
+                    if (p[0] < p[1]) {
+                        s32 tmp = p[0];
+                        p[0] = p[1];
+                        p[1] = tmp;
+                    }
+                    p++;
+                }
+            }
+            if ((u32) base[0] == (u32) x58[arg1].xA &&
+                base[0] >= base[1] * 2)
+            {
+                return 1;
+            }
         }
         return 0;
     }
 
     case 0xE2: {
         if ((unsigned) fn_801701C0(arg0, arg1, 0xE1) == 0) {
-            u16 player_sds = x58[arg1].xA;
             {
                 struct lbl_8046B6A0_24C_58_t* p = x58;
                 int i;
                 for (i = 0; i < 4; i++) {
-                    if (p->x0 != 3 && arg1 != i && p->xA >= player_sds) {
+                    if (p->x0 != 3 && i != arg1 && p->xA >= x58[arg1].xA) {
                         return 0;
                     }
                     p++;
@@ -1034,20 +1041,21 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
 
     case 0xF9: {
         f32 vals[4];
+        f32* base = vals;
         int i, j;
         {
             typedef struct {
                 s32 a, b, c, d;
             } copy_t;
-            *(copy_t*) vals = *(copy_t*) zeroes->x40;
+            *(copy_t*) base = *(copy_t*) zeroes->x40;
         }
         for (i = 0; i < 4; i++) {
             if (x58[i].x0 != 3) {
-                vals[i] = pl_800407C8(i);
+                base[i] = pl_800407C8(i);
             }
         }
         for (j = 3; j >= 1; j--) {
-            f32* p = vals;
+            f32* p = base;
             for (i = j; i > 0; i--) {
                 if (p[0] < p[1]) {
                     f32 tmp = p[0];
@@ -1057,7 +1065,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 p++;
             }
         }
-        if (vals[0] == pl_800407C8(arg1) && vals[0] > 2.0f * vals[1]) {
+        if (base[0] == pl_800407C8(arg1) && base[0] > 2.0f * base[1]) {
             return 1;
         }
         return 0;
@@ -1090,7 +1098,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
             struct lbl_8046B6A0_24C_58_t* p = x58;
             int i;
             for (i = 0; i < 4; i++) {
-                if (p->x0 != 3 && arg1 != i && (p->x3 & 1)) {
+                if (p->x0 != 3 && i != arg1 && (p->x3 & 1)) {
                     return 0;
                 }
                 p++;
@@ -1101,7 +1109,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 struct lbl_8046B6A0_24C_58_t* p = x58;
                 int i;
                 for (i = 0; i < 4; i++) {
-                    if (p->x0 != 3 && arg1 != i && rankings[i] == 0) {
+                    if (p->x0 != 3 && i != arg1 && rankings[i] == 0) {
                         return 0;
                     }
                     p++;
@@ -1124,7 +1132,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                     struct lbl_8046B6A0_24C_58_t* p = x58;
                     int i;
                     for (i = 0; i < 4; i++) {
-                        if (p->x0 != 3 && arg1 != i && p->x5 == 0) {
+                        if (p->x0 != 3 && i != arg1 && p->x5 == 0) {
                             return 0;
                         }
                         p++;
@@ -1168,10 +1176,12 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 mode = 6;
             }
             if (mode == 0) {
-                vals[0] = zeroes->x50[0];
-                vals[1] = zeroes->x50[1];
-                vals[2] = zeroes->x50[2];
-                vals[3] = zeroes->x50[3];
+                {
+                    typedef struct {
+                        u32 a, b, c, d;
+                    } copy_t;
+                    *(copy_t*) vals = *(copy_t*) zeroes->x50;
+                }
                 for (i = 0; i < 4; i++) {
                     if (x58[i].x0 != 3 && pl_800408B8(i) != 0) {
                         vals[i] = pl_800408B8(i);
@@ -1211,10 +1221,12 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 mode = 6;
             }
             if (mode == 0) {
-                vals[0] = zeroes->x60[0];
-                vals[1] = zeroes->x60[1];
-                vals[2] = zeroes->x60[2];
-                vals[3] = zeroes->x60[3];
+                {
+                    typedef struct {
+                        u32 a, b, c, d;
+                    } copy_t;
+                    *(copy_t*) vals = *(copy_t*) zeroes->x60;
+                }
                 for (i = 0; i < 4; i++) {
                     if (x58[i].x0 != 3) {
                         vals[i] = pl_80040894(i);

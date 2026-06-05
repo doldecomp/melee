@@ -418,6 +418,8 @@ bool grCorneria_801DD52C(void)
     return false;
 }
 
+static u8 grCn_callback_pad[0x34] = { 0 };
+
 StageCallbacks grCn_803E1D8C[19] = {
     { grCorneria_801DD620, grCorneria_801DD64C, grCorneria_801DD654,
       grCorneria_801DD658, 0 },
@@ -459,7 +461,7 @@ StageCallbacks grCn_803E1D8C[19] = {
       grCorneria_801DE8E0, 0 },
 };
 
-static u8 grCn_report_pad[0x68] = { 1 };
+static u8 grCn_report_pad[0x34] = { 1 };
 char grCn_803E1F3C[0x24] = "%s:%d: couldn t get gobj(id=%d)\n";
 char grCn_803E1F60[0x10] = "grcorneria.c";
 
@@ -1049,7 +1051,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Vec3 pos = grCn_803B80B4;
-    PAD_STACK(16);
+    PAD_STACK(12);
 
     if (grCn_804D69AC == 0) {
         s32 idx = gp->gv.corneria2.xC8;
@@ -1061,17 +1063,22 @@ void grCorneria_801DED50(Ground_GObj* gobj)
             {
                 s32 type = data->arwing_type[gp->gv.corneria2.xC8];
                 if (type < 10) {
-                    if (type >= 1) {
+                    if (type < 1) {
+                        goto arwing_type_done;
+                    }
+                } else {
+                    if (type < 14) {
+                        goto arwing_far_type;
+                    }
+                    goto arwing_type_done;
+                }
+                {
                         HSD_JObjSetRotationY(jobj, -1.5707964f);
                         {
                             s32 anim_state = gp->gv.corneria2.xF4;
                             if (anim_state != 0) {
                                 if (anim_state > 0 && anim_state < 5) {
-                                    if (grAnime_801C83D0(gobj, 0, 7) != 0) {
-                                        gp->gv.corneria2.xF4 = 0;
-                                        gp->gv.corneria2.xF8 =
-                                            (s32) grCn_804D69A0->x68;
-                                    }
+                                    goto check_arwing_anim;
                                 }
                             } else {
                                 if (gp->gv.corneria2.xF8 <= 0) {
@@ -1085,7 +1092,9 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                                         switch (g) {
                                         case 0:
                                             break;
-                                        default:
+                                        case 1:
+                                        case 2:
+                                        case 3:
                                             grp_off = 0;
                                             break;
                                         case 4:
@@ -1098,8 +1107,8 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                                         data->x478[data->arwing_group
                                                        [gp->gv.corneria2.xC8]],
                                         7,
-                                        (data->x3D8)[new_state * 2 + grp_off +
-                                                     15],
+                                        (&data->x3D8[gp->gv.corneria2.xF4 * 2 +
+                                                     15])[grp_off],
                                         0.0f, 1.0f);
                                 } else {
                                     HSD_JObjSetRotationZ(
@@ -1112,6 +1121,14 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                                 }
                                 gp->gv.corneria2.xF8 -= 1;
                             }
+                            goto arwing_anim_done;
+                        check_arwing_anim:
+                            if (grAnime_801C83D0(gobj, 0, 7) != 0) {
+                                gp->gv.corneria2.xF4 = 0;
+                                gp->gv.corneria2.xF8 =
+                                    (s32) grCn_804D69A0->x68;
+                            }
+                        arwing_anim_done:;
                         }
                         {
                             HSD_GObj* arwing =
@@ -1150,11 +1167,8 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                                                                   .xC8]]),
                             NULL, &pos);
                         {
-                            f32 rot_z = HSD_JObjGetRotationZ(Ground_801C3FA4(
-                                gobj,
-                                data->x478[data->arwing_group[gp->gv.corneria2
-                                                                  .xC8]]));
-                            f32 angle = rot_z;
+                            f32 rot_z;
+                            f32 angle;
                             {
                                 HSD_GObj* item = gp->gv.corneria2.xDC;
                                 if (item != NULL) {
@@ -1164,6 +1178,11 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                                     }
                                 }
                             }
+                            rot_z = HSD_JObjGetRotationZ(Ground_801C3FA4(
+                                gobj,
+                                data->x478[data->arwing_group[gp->gv.corneria2
+                                                                  .xC8]]));
+                            angle = rot_z;
                             {
                                 HSD_GObj* item = gp->gv.corneria2.xDC;
                                 if (item != NULL) {
@@ -1183,12 +1202,11 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                                                      : 0) == 0)
                                     {
                                         gp->gv.corneria2.xFC = 1;
-                                    } else {
-                                        gp->gv.corneria2.xFC = 0;
+                                        goto arwing_near_chance_done;
                                     }
-                                } else {
-                                    gp->gv.corneria2.xFC = 0;
                                 }
+                                gp->gv.corneria2.xFC = 0;
+                            arwing_near_chance_done:;
                             } else {
                                 s32 frame = gp->gv.corneria2.xF0;
                                 s32 period = grCn_804D69A0->x7C;
@@ -1199,12 +1217,11 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                                                      : 0) == 0)
                                     {
                                         gp->gv.corneria2.xFC = 1;
-                                    } else {
-                                        gp->gv.corneria2.xFC = 0;
+                                        goto arwing_near_alt_chance_done;
                                     }
-                                } else {
-                                    gp->gv.corneria2.xFC = 0;
                                 }
+                                gp->gv.corneria2.xFC = 0;
+                            arwing_near_alt_chance_done:;
                             }
                             if (gp->gv.corneria2.xFC != 0) {
                                 s32 out = 0;
@@ -1236,9 +1253,10 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                                         if (abs_a < 0.05235988f ||
                                             ABS(angle) > 3.0892327f)
                                         {
-                                            s32 grp_off = -1;
+                                            s32 grp_off;
                                             lbAudioAx_800237A8(0x55733, 0x7F,
                                                                0x40);
+                                            grp_off = -1;
                                             {
                                                 s32 g = data->arwing_group
                                                             [GET_GROUND(gobj)
@@ -1247,7 +1265,9 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                                                 switch (g) {
                                                 case 0:
                                                     break;
-                                                default:
+                                                case 1:
+                                                case 2:
+                                                case 3:
                                                     grp_off = 0;
                                                     break;
                                                 case 4:
@@ -1276,7 +1296,9 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                             }
                         }
                     }
-                } else if (type < 14) {
+                goto arwing_type_done;
+            arwing_far_type:
+                {
                     if (grCn_804D69B0 == 0) {
                         s32 frame = gp->gv.corneria2.xF0;
                         s32 period = grCn_804D69A0->x74;
@@ -1284,12 +1306,11 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                             s32 chance = grCn_804D69A0->x78;
                             if ((chance != 0 ? HSD_Randi(chance) : 0) == 0) {
                                 gp->gv.corneria2.xFC = 1;
-                            } else {
-                                gp->gv.corneria2.xFC = 0;
+                                goto arwing_far_chance_done;
                             }
-                        } else {
-                            gp->gv.corneria2.xFC = 0;
                         }
+                        gp->gv.corneria2.xFC = 0;
+                    arwing_far_chance_done:;
                     } else {
                         s32 frame = gp->gv.corneria2.xF0;
                         s32 period = grCn_804D69A0->x7C;
@@ -1297,12 +1318,11 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                             s32 chance = grCn_804D69A0->x80;
                             if ((chance != 0 ? HSD_Randi(chance) : 0) == 0) {
                                 gp->gv.corneria2.xFC = 1;
-                            } else {
-                                gp->gv.corneria2.xFC = 0;
+                                goto arwing_far_alt_chance_done;
                             }
-                        } else {
-                            gp->gv.corneria2.xFC = 0;
                         }
+                        gp->gv.corneria2.xFC = 0;
+                    arwing_far_alt_chance_done:;
                     }
                     {
                         HSD_GObj* arwing =
@@ -1363,7 +1383,9 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                                 switch (g) {
                                 case 0:
                                     break;
-                                default:
+                                case 1:
+                                case 2:
+                                case 3:
                                     grp_off = 0;
                                     break;
                                 case 4:
@@ -1391,6 +1413,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                         grMaterial_801C9604(gobj, grCn_804D69A0->x84, 0);
                     }
                 }
+            arwing_type_done:;
             }
             gp->gv.corneria2.xF0 += 1;
             return;

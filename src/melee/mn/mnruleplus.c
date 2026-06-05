@@ -342,16 +342,16 @@ void mn_80232660(HSD_GObj* gobj, HSD_JObj* jobj, u8 option)
 
 void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
 {
-    u16 jobj_map[17];
-    HSD_JObj* jobj_parts[17];
     HSD_JObj* option_roots[6];
+    HSD_JObj* jobj_parts[17];
+    u16 jobj_map[17];
     MenuRulesPlusData* data = gobj->user_data;
     u8 num_options = mn_803EB6B0[15].selection_count;
     s32 i, j, vis_count;
     s32 visible;
     HSD_JObj** root_ptr;
     u16 selected;
-    PAD_STACK(24);
+    PAD_STACK(16);
 
     jobj_map[0] = 0;
     jobj_map[1] = 1;
@@ -413,11 +413,13 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
             }
             {
                 HSD_JObj* root = data->xC[mn_803ED1D0.x0[vis_count]];
-                if (root != NULL) {
-                    *root_ptr = root->child;
+                HSD_JObj* child;
+                if (root == NULL) {
+                    child = NULL;
                 } else {
-                    *root_ptr = NULL;
+                    child = root->child;
                 }
+                *root_ptr = child;
             }
         }
         root_ptr++;
@@ -465,30 +467,33 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
     }
 
     if ((s32) arg2 != 0) {
-        HSD_JObj* tree = data->x34[(u16) mn_804A04F0.hovered_selection][0];
-        if ((s32) (u8) mn_804A04F0.hovered_selection != 5 &&
-            (s32) (u8) mn_804A04F0.hovered_selection < 5)
-        {
-            if ((s32) (u8) mn_804A04F0.hovered_selection != 0) {
-                if ((s32) (u8) mn_804A04F0.hovered_selection >= 0) {
+        u16 hovered = mn_804A04F0.hovered_selection;
+        u8 hovered_u8 = hovered;
+        u8 confirmed = mn_804A04F0.confirmed_selection;
+        HSD_JObj* tree = data->x34[hovered][0];
+        if ((s32) hovered_u8 != 5 && (s32) hovered_u8 < 5) {
+            if ((s32) hovered_u8 != 0) {
+                if ((s32) hovered_u8 >= 0) {
                     if ((mn_804A04F0.buttons & 4) != 0) {
                         HSD_JObjReqAnimAll(
                             tree,
-                            mn_80232458((u8) mn_804A04F0.hovered_selection,
-                                        mn_804A04F0.confirmed_selection, 0)
-                                ->start_frame);
-                    } else {
+                            mn_803ED294[mn_803ED2E8.stat[hovered][1] -
+                                         confirmed]
+                                .start_frame);
+                    } else if (confirmed == 0) {
                         HSD_JObjReqAnimAll(
                             tree,
-                            mn_80232458((u8) mn_804A04F0.hovered_selection,
-                                        mn_804A04F0.confirmed_selection, 1)
-                                ->start_frame);
+                            mn_803ED270[mn_803ED2E8.stat[hovered][1]]
+                                .start_frame);
+                    } else {
+                        HSD_JObjReqAnimAll(tree,
+                                           mn_803ED270[confirmed - 1]
+                                               .start_frame);
                     }
                     HSD_JObjAnimAll(tree);
                 }
             } else {
-                mn_802324E4(mn_804A04F0.confirmed_selection,
-                            (MenuRulesPlusData*) gobj->user_data);
+                mn_802324E4(confirmed, (MenuRulesPlusData*) gobj->user_data);
             }
         }
     }
@@ -716,8 +721,8 @@ void fn_80232F44(HSD_GObj* gobj)
 
 HSD_GObj* mn_80233218(MenuState state)
 {
-    u16 jobj_map[17];
     HSD_JObj* jobj_parts[17];
+    u16 jobj_map[17];
     HSD_GObj* gobj;
     MenuRulesPlusData* user_data;
     u8 num_options;
@@ -736,14 +741,14 @@ HSD_GObj* mn_80233218(MenuState state)
     f32* frame_ptr;
     u16* sub_count_ptr;
     GameRules* rules;
-    PAD_STACK(16);
+    PAD_STACK(8);
+
+    selected = (u8) mn_804A04F0.hovered_selection;
+    num_options = mn_803EB6B0[15].selection_count;
 
     for (i = 0; i < 17; i++) {
         jobj_map[i] = (u16) i;
     }
-
-    selected = (u8) mn_804A04F0.hovered_selection;
-    num_options = mn_803EB6B0[15].selection_count;
 
     gobj = GObj_Create(6, 7, 0x80);
     mn_804D6BE0 = gobj;
@@ -845,7 +850,7 @@ HSD_GObj* mn_80233218(MenuState state)
 
             lb_8001204C(cursor_jobj, jobj_parts, jobj_map, 17);
 
-            HSD_JObjReqAnim(jobj_parts[7], frame_ptr[i + (s32) selected == i]);
+            HSD_JObjReqAnim(jobj_parts[7], frame_ptr[selected == i]);
             HSD_JObjAnim(jobj_parts[7]);
 
             if ((s32) selected != i) {

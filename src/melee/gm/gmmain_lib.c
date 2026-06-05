@@ -771,10 +771,36 @@ void gmMainLib_8015DB80(void)
 s32 gmMainLib_8015DBF4(s32 arg0)
 {
     extern VsModeData gm_80497618;
+    struct gmm_x0* gmm = gmMainLib_804D3EE0;
+    struct gmm_x0_528_t* unk_51C = &gmm->unk_51C;
     s32 j;
     u8 val;
 
-#define ADJ_NAMETAG_78(field)                                                 \
+#define ADJ_NAMETAG_78_PTR_ONCE(ptr)                                          \
+    do {                                                                      \
+        u8* nametag = (ptr);                                                  \
+        val = *nametag;                                                       \
+        if (val == (u8) arg0) {                                               \
+            *nametag = 0x78;                                                  \
+        } else if (val > (u8) arg0 && val != 0x78) {                          \
+            *nametag = val - 1;                                               \
+        }                                                                     \
+    } while (0)
+
+#define ADJ_NAMETAG_78_PTR(ptr)                                               \
+    do {                                                                      \
+        u8* nametag = (ptr);                                                  \
+        if (*nametag == (u8) arg0) {                                          \
+            *nametag = 0x78;                                                  \
+        } else {                                                              \
+            val = *nametag;                                                   \
+            if (val > (u8) arg0 && val != 0x78) {                             \
+                *nametag = val - 1;                                           \
+            }                                                                 \
+        }                                                                     \
+    } while (0)
+
+#define ADJ_NAMETAG_78_VMD(field)                                             \
     do {                                                                      \
         val = (field);                                                        \
         if (val == (u8) arg0) {                                               \
@@ -787,32 +813,35 @@ s32 gmMainLib_8015DBF4(s32 arg0)
 #define ADJ_VMD(vmd)                                                          \
     do {                                                                      \
         for (j = 0; j < 6; j++) {                                             \
-            ADJ_NAMETAG_78((vmd)->data.players[j].xA);                        \
+            ADJ_NAMETAG_78_VMD((vmd)->data.players[j].xA);                    \
         }                                                                     \
     } while (0)
 
-    ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_51C.x4);
-    ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_522.x4);
-    ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_528.x4);
-    ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_530.x4);
-    ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_530.unk_584.unk_586);
+    ADJ_NAMETAG_78_PTR_ONCE(&unk_51C->x4);
+    ADJ_NAMETAG_78_PTR_ONCE(&gmm->unk_522.x4);
+    ADJ_NAMETAG_78_PTR_ONCE(&gmm->unk_528.x4);
+    ADJ_NAMETAG_78_PTR_ONCE(&gmm->unk_530.x4);
+    ADJ_NAMETAG_78_PTR_ONCE(&gmm->unk_530.unk_584.unk_586);
 
-    ADJ_VMD(&gm_80497618);
+    {
+        VsModeData* vmd = &gm_80497618;
+        ADJ_VMD(vmd);
+    }
 
-    ADJ_VMD(&gmMainLib_804D3EE0->unk_1490);
-    ADJ_VMD(&gmMainLib_804D3EE0->unk_D10);
-    ADJ_VMD(&gmMainLib_804D3EE0->unk_590);
-    ADJ_VMD(&gmMainLib_804D3EE0->unk_6D0);
-    ADJ_VMD(&gmMainLib_804D3EE0->unk_810);
-    ADJ_VMD(&gmMainLib_804D3EE0->unk_950);
-    ADJ_VMD(&gmMainLib_804D3EE0->unk_A90);
-    ADJ_VMD(&gmMainLib_804D3EE0->unk_BD0);
-    ADJ_VMD(&gmMainLib_804D3EE0->unk_E50);
-    ADJ_VMD(&gmMainLib_804D3EE0->unk_F90);
-    ADJ_VMD(&gmMainLib_804D3EE0->unk_10D0);
-    ADJ_VMD(&gmMainLib_804D3EE0->unk_1210);
-    ADJ_VMD(&gmMainLib_804D3EE0->unk_1350);
-    ADJ_VMD(&gmMainLib_804D3EE0->unk_1490);
+    ADJ_VMD(&gmm->unk_1490);
+    ADJ_VMD(&gmm->unk_D10);
+    ADJ_VMD(&gmm->unk_590);
+    ADJ_VMD(&gmm->unk_6D0);
+    ADJ_VMD(&gmm->unk_810);
+    ADJ_VMD(&gmm->unk_950);
+    ADJ_VMD(&gmm->unk_A90);
+    ADJ_VMD(&gmm->unk_BD0);
+    ADJ_VMD(&gmm->unk_E50);
+    ADJ_VMD(&gmm->unk_F90);
+    ADJ_VMD(&gmm->unk_10D0);
+    ADJ_VMD(&gmm->unk_1210);
+    ADJ_VMD(&gmm->unk_1350);
+    ADJ_VMD(&gmm->unk_1490);
 
     {
         GameRules* gr = &gmMainLib_804D3EE0->x1850;
@@ -840,7 +869,9 @@ s32 gmMainLib_8015DBF4(s32 arg0)
     }
 
 #undef ADJ_VMD
-#undef ADJ_NAMETAG_78
+#undef ADJ_NAMETAG_78_VMD
+#undef ADJ_NAMETAG_78_PTR
+#undef ADJ_NAMETAG_78_PTR_ONCE
 
     return arg0;
 }

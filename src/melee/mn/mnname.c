@@ -907,19 +907,19 @@ void mnName_80238C34(HSD_GObj* arg0, u8 arg1, u8 arg2)
     }
 
     {
-        HSD_JObj* jobj = mnName_802388D4((HSD_GObj*) data, 0x18U);
+        HSD_JObj* jobj = *(HSD_JObj**) ((u8*) data + 0x24);
         found = mnName_FindAnimLoop(tableBase, mn_8022F298(jobj));
         mn_8022ED6C(jobj, found);
     }
 
     {
-        HSD_JObj* jobj = mnName_802388D4((HSD_GObj*) data, 0x19U);
+        HSD_JObj* jobj = *(HSD_JObj**) ((u8*) data + 0x18);
         found = mnName_FindAnimLoop(tableBase, mn_8022F298(jobj));
         mn_8022ED6C(jobj, found);
     }
 
     {
-        HSD_JObj* jobj = mnName_802388D4((HSD_GObj*) data, 0x1AU);
+        HSD_JObj* jobj = *(HSD_JObj**) ((u8*) data + 0x1C);
         found = mnName_FindAnimLoop(tableBase, mn_8022F298(jobj));
         mn_8022ED6C(jobj, found);
     }

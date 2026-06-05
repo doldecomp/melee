@@ -1281,6 +1281,7 @@ int ftCo_800B7638(Fighter* fp)
 void ftCo_800B77E8(Fighter* fp)
 {
     struct Fighter_x1A88_t* cpu = &fp->x1A88;
+    u8 _[0x28];
     u32 f1;
     int L1;
     Vec3 n1;
@@ -1328,13 +1329,15 @@ void ftCo_800B77E8(Fighter* fp)
     f32 x;
     f32 y;
 
+    PAD_STACK(0x28);
+
     if ((cpu->xC == 7 || ftCo_800A1C44(fp)) && cpu->xEC < 8U) {
-        cpu->xCC_array[cpu->xEC] = 0x34;
-        cpu->xEC++;
+        fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x34;
+        fp->x1A88.xEC++;
     }
     switch (fp->kind) {
     case FTKIND_MARIO:
-        target = cpu->x44;
+        target = fp->x1A88.x44;
         if (target != NULL &&
             mpCheckAll(&p1, &L1, &f1, &n1, -1, -1, fp->cur_pos.x,
                        fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
@@ -1362,14 +1365,14 @@ void ftCo_800B77E8(Fighter* fp)
             }
         }
         if (var_r0 != 0 && cpu->xEC < 8U) {
-            cpu->xCC_array[cpu->xEC] = 0x1F;
-            cpu->xEC++;
+            fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x1F;
+            fp->x1A88.xEC++;
             return;
         }
         break;
     case FTKIND_FOX:
     case FTKIND_FALCO:
-        target = cpu->x44;
+        target = fp->x1A88.x44;
         if (target != NULL &&
             mpCheckAll(&p2, &L2, &f2, &n2, -1, -1, fp->cur_pos.x,
                        fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
@@ -1397,14 +1400,14 @@ void ftCo_800B77E8(Fighter* fp)
             }
         }
         if (var_r0 != 0 && cpu->xEC < 8U) {
-            cpu->xCC_array[cpu->xEC] = 0x1B;
-            cpu->xEC++;
+            fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x1B;
+            fp->x1A88.xEC++;
             return;
         }
         break;
     case FTKIND_CAPTAIN:
     case FTKIND_GANON:
-        target = cpu->x44;
+        target = fp->x1A88.x44;
         if (target != NULL &&
             mpCheckAll(&p3, &L3, &f3, &n3, -1, -1, fp->cur_pos.x,
                        fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
@@ -1432,10 +1435,10 @@ void ftCo_800B77E8(Fighter* fp)
             }
         }
         if (var_r0 != 0 && cpu->xEC < 8U) {
-            cpu->xCC_array[cpu->xEC] = 0x26;
-            cpu->xEC++;
+            fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x26;
+            fp->x1A88.xEC++;
         }
-        target = cpu->x44;
+        target = fp->x1A88.x44;
         if (target != NULL &&
             mpCheckAll(&p4, &L4, &f4, &n4, -1, -1, fp->cur_pos.x,
                        fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
@@ -1464,23 +1467,23 @@ void ftCo_800B77E8(Fighter* fp)
         }
         if (var_r0 != 0) {
             if (cpu->xEC < 8U) {
-                cpu->xCC_array[cpu->xEC] = 0x1B;
-                cpu->xEC++;
+                fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x1B;
+                fp->x1A88.xEC++;
             }
             if (cpu->xEC < 8U) {
-                cpu->xCC_array[cpu->xEC] = 0x37;
-                cpu->xEC++;
+                fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x37;
+                fp->x1A88.xEC++;
             }
             if (cpu->xEC < 8U) {
-                cpu->xCC_array[cpu->xEC] = 0x38;
-                cpu->xEC++;
+                fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x38;
+                fp->x1A88.xEC++;
                 return;
             }
         }
         break;
     case FTKIND_PIKACHU:
     case FTKIND_PICHU:
-        target = cpu->x44;
+        target = fp->x1A88.x44;
         if (target != NULL &&
             mpCheckAll(&p5, &L5, &f5, &n5, -1, -1, fp->cur_pos.x,
                        fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
@@ -1508,14 +1511,14 @@ void ftCo_800B77E8(Fighter* fp)
             }
         }
         if (var_r0 != 0 && cpu->xEC < 8U) {
-            cpu->xCC_array[cpu->xEC] = 0x1B;
-            cpu->xEC++;
+            fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x1B;
+            fp->x1A88.xEC++;
             return;
         }
         break;
     case FTKIND_KOOPA:
         if (fp->ground_or_air == GA_Ground) {
-            target = cpu->x44;
+            target = fp->x1A88.x44;
             if (target != NULL &&
                 mpCheckAll(&p6, &L6, &f6, &n6, -1, -1, fp->cur_pos.x,
                            fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
@@ -1543,19 +1546,19 @@ void ftCo_800B77E8(Fighter* fp)
                 }
             }
             if (var_r0 != 0 && cpu->xEC < 8U) {
-                cpu->xCC_array[cpu->xEC] = 0x26;
-                cpu->xEC++;
+                fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x26;
+                fp->x1A88.xEC++;
                 return;
             }
         } else if (!cpu->xFA_b2 && cpu->xEC < 8U) {
-            cpu->xCC_array[cpu->xEC] = 0x26;
-            cpu->xEC++;
+            fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x26;
+            fp->x1A88.xEC++;
             return;
         }
         break;
     case FTKIND_GKOOPS:
         if (fp->ground_or_air == GA_Ground) {
-            target = cpu->x44;
+            target = fp->x1A88.x44;
             if (target != NULL &&
                 mpCheckAll(&p7, &L7, &f7, &n7, -1, -1, fp->cur_pos.x,
                            fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
@@ -1583,19 +1586,19 @@ void ftCo_800B77E8(Fighter* fp)
                 }
             }
             if (var_r0 != 0 && cpu->xEC < 8U) {
-                cpu->xCC_array[cpu->xEC] = 0x26;
-                cpu->xEC++;
+                fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x26;
+                fp->x1A88.xEC++;
                 return;
             }
         } else if (!cpu->xFA_b2 && cpu->xEC < 8U) {
-            cpu->xCC_array[cpu->xEC] = 0x26;
-            cpu->xEC++;
+            fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x26;
+            fp->x1A88.xEC++;
             return;
         }
         break;
     case FTKIND_YOSHI:
         if (fp->ground_or_air == GA_Ground) {
-            target = cpu->x44;
+            target = fp->x1A88.x44;
             if (target != NULL &&
                 mpCheckAll(&p8, &L8, &f8, &n8, -1, -1, fp->cur_pos.x,
                            fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
@@ -1623,18 +1626,18 @@ void ftCo_800B77E8(Fighter* fp)
                 }
             }
             if (var_r0 != 0 && cpu->xEC < 8U) {
-                cpu->xCC_array[cpu->xEC] = 0x26;
-                cpu->xEC++;
+                fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x26;
+                fp->x1A88.xEC++;
                 return;
             }
         } else if (!cpu->xFA_b2 && cpu->xEC < 8U) {
-            cpu->xCC_array[cpu->xEC] = 0x26;
-            cpu->xEC++;
+            fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x26;
+            fp->x1A88.xEC++;
             return;
         }
         break;
     case FTKIND_LUIGI:
-        target = cpu->x44;
+        target = fp->x1A88.x44;
         if (target != NULL &&
             mpCheckAll(&p9, &L9, &f9, &n9, -1, -1, fp->cur_pos.x,
                        fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
@@ -1662,13 +1665,13 @@ void ftCo_800B77E8(Fighter* fp)
             }
         }
         if (var_r0 != 0 && cpu->xEC < 8U) {
-            cpu->xCC_array[cpu->xEC] = 0x26;
-            cpu->xEC++;
+            fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x26;
+            fp->x1A88.xEC++;
             return;
         }
         break;
     case FTKIND_PEACH:
-        target = cpu->x44;
+        target = fp->x1A88.x44;
         if (target != NULL &&
             mpCheckAll(&p10, &L10, &f10, &n10, -1, -1, fp->cur_pos.x,
                        fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
@@ -1696,31 +1699,31 @@ void ftCo_800B77E8(Fighter* fp)
             }
         }
         if (var_r0 != 0 && cpu->xEC < 8U) {
-            cpu->xCC_array[cpu->xEC] = 0x26;
-            cpu->xEC++;
+            fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x26;
+            fp->x1A88.xEC++;
             return;
         }
         break;
     case FTKIND_KIRBY:
         if (fp->ground_or_air == GA_Air && !cpu->xFA_b2 && cpu->xEC < 8U) {
-            cpu->xCC_array[cpu->xEC] = 0x26;
-            cpu->xEC++;
+            fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x26;
+            fp->x1A88.xEC++;
         }
         charge = fp->fv.gw.x2238_panicCharge;
         if (charge == 3 || charge == 0xD || charge == 0x10) {
             if (cpu->xEC < 8U) {
-                cpu->xCC_array[cpu->xEC] = 0x11;
-                cpu->xEC++;
+                fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x11;
+                fp->x1A88.xEC++;
                 return;
             }
         } else {
             if (cpu->xEC < 8U) {
-                cpu->xCC_array[cpu->xEC] = 0x12;
-                cpu->xEC++;
+                fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x12;
+                fp->x1A88.xEC++;
             }
             if (fp->x34_scale.y < temp_r30->x34_scale.y && cpu->xEC < 8U) {
-                cpu->xCC_array[cpu->xEC] = 0x11;
-                cpu->xEC++;
+                fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x11;
+                fp->x1A88.xEC++;
             }
         }
         break;

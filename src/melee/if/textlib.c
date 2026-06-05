@@ -215,13 +215,18 @@ void DevText_SetXY(DevText* text, int x, int y)
     text->y = y;
 }
 
+#pragma push
+#pragma dont_inline on
 u8 DevText_StoreColorIndex(DevText* text, u8 index)
 {
     u8 old = text->current_color;
     text->current_color = index;
     return old;
 }
+#pragma pop
 
+#pragma push
+#pragma dont_inline on
 GXColor DevText_SetTextColor(DevText* text, GXColor color)
 {
     int index = text->current_color;
@@ -229,13 +234,17 @@ GXColor DevText_SetTextColor(DevText* text, GXColor color)
     text->text_colors[index] = color;
     return old;
 }
+#pragma pop
 
+#pragma push
+#pragma dont_inline on
 GXColor DevText_SetBGColor(DevText* text, GXColor color)
 {
     GXColor old = text->bg_color;
     text->bg_color = color;
     return old;
 }
+#pragma pop
 
 #pragma push
 #pragma dont_inline on
@@ -277,12 +286,15 @@ void DevText_Print(DevText* text, char* str)
     }
 }
 
+#pragma push
+#pragma dont_inline on
 void DevText_PrintInt(DevText* text, int num)
 {
     char str[16];
     DevText_NumToStr(num, str);
     DevText_Print(text, str);
 }
+#pragma pop
 
 void DevText_Printf(DevText* text, char* format, ...)
 {
@@ -412,7 +424,7 @@ void un_80302FFC(struct un_80304138_objalloc_t* arg0)
         DevText_SetBGColor(arg0->x4, color_08);
     }
     for (cursor_y = 0; cursor_y < arg0->x4->h; cursor_y++) {
-        if (arg0->x0 == 0) {
+        if (x8->x0 == 0) {
             DevText_StoreColorIndex(arg0->x4, 2);
         } else if (arg0->x0 == cursor_y) {
             DevText_StoreColorIndex(arg0->x4, 1);
@@ -445,7 +457,7 @@ void un_80302FFC(struct un_80304138_objalloc_t* arg0)
             DevText_Printf(arg0->x4, "%3.2f", *(float*) x8->x10);
             break;
         }
-        arg0++;
+        x8++;
     }
 }
 

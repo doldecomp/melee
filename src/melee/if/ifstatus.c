@@ -52,8 +52,7 @@ typedef struct UnkX {
     HSD_JObj* x54_jobj[4];
 } UnkX; // HudIndex
 
-/* 2F491C */ static void ifStatus_PercentOnDeathAnimationThink(UnkX* value,
-                                                               s32, s32);
+/* 2F491C */ static void ifStatus_PercentOnDeathAnimationThink(UnkX* value);
 /* 3F9628 */ Element_803F9628 ifStatus_803F9628[8] = {
     { NULL, 0, if_802F74D0, 0x7C860U, 8, 0, { 0 }, 0, NULL, NULL, 0, 0 },
     { NULL, 0, if_802F73C4, 0xC351U, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
@@ -175,12 +174,12 @@ inline void jobj_unk(UnkX* value)
     }
 }
 
-inline void* jobj_get(HSD_JObj* jobj_r30, UnkX* value, s32 i)
+inline HSD_JObj* jobj_get(UnkX* value, s32 i)
 {
     return value->x54_jobj[i];
 }
 
-void ifStatus_PercentOnDeathAnimationThink(UnkX* value, s32 arg1, s32 arg2)
+void ifStatus_PercentOnDeathAnimationThink(UnkX* value)
 {
     s32 i;
 
@@ -202,18 +201,18 @@ void ifStatus_PercentOnDeathAnimationThink(UnkX* value, s32 arg1, s32 arg2)
         if (fabsf_bitwise(jobj_r30->translate.x) < 100.0f)
         { // 100.0f @ lbl_804DDA6C
             float f = (&value->x34_vec.x)[i];
-            jobj_r30 = (void*) jobj_get(jobj_r30, value, i);
+            jobj_r30 = jobj_get(value, i);
             ASSERT_NOT_NULL(jobj_r30, 1102);
             jobj_r30->translate.x += f;
             jobj_flagCheckSetMtxDirtySub(jobj_r30);
         }
-        jobj_r30 = (void*) jobj_get(jobj_r30, value, i);
+        jobj_r30 = jobj_get(value, i);
         ASSERT_NOT_NULL(jobj_r30, 1006);
 
         if (jobj_r30->translate.y > -100.0f) {
             float f = (&value->x44_vec.x)[i];
-            jobj_r30 = (void*) jobj_get(jobj_r30, value, i);
-            jobj_r30 = (void*) jobj_get(jobj_r30, value, i);
+            jobj_r30 = jobj_get(value, i);
+            jobj_r30 = jobj_get(value, i);
             ASSERT_NOT_NULL(jobj_r30, 1114);
             jobj_r30->translate.y += f;
             jobj_flagCheckSetMtxDirtySub(jobj_r30);
@@ -276,8 +275,8 @@ void ifStatus_802F4B84(IfDamageState* state, s32 is_stamina)
 }
 
 /* Color endpoints for damage percentage interpolation (extern from .sdata2) */
-extern u8 ifStatus_804D57A8[3]; /* Start color (low damage) */
-extern u8 ifStatus_804D57AC[3]; /* End color (high damage) */
+extern u8 ifStatus_804D57A8; /* Start color (low damage) */
+extern u8 ifStatus_804D57AC; /* End color (high damage) */
 
 void ifStatus_802F4EDC(HSD_GObj* gobj)
 {
@@ -288,6 +287,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     s32 is_stamina;
     HSD_TObj* tobj;
     HSD_MObj* mobj;
+    HSD_MatAnimJoint** anim_base;
     s32 i;
     s32 var_ctr;
     u8 ones_digit;
@@ -302,22 +302,28 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     f32 factor;
     GXColor color;
 
-    PAD_STACK(96);
+    PAD_STACK(64);
     hud = &ifStatus_HudInfo;
 
-    jobj = gobj->hsd_obj;
-    for (i = 0; i < 6; i++) {
-        if (hud->players[i].HUD_parent_entity == gobj) {
-            state = hud->players + i;
-            goto found_player;
+    {
+        IfDamageState* ptr;
+
+        ptr = hud->players;
+        jobj = gobj->hsd_obj;
+        for (i = 0; i < 6; ptr++, i++) {
+            if (ptr->HUD_parent_entity == gobj) {
+                state = hud->players + i;
+                goto found_player;
+            }
         }
+        state = NULL;
+    found_player:
+        (void) 0;
     }
-    state = NULL;
-found_player:;
 
     /* Check for death animation flag (bit 7 of flags byte at offset 0x10) */
     if (state->flags.explode_animation) {
-        ifStatus_PercentOnDeathAnimationThink((UnkX*) state, 0, 0);
+        ifStatus_PercentOnDeathAnimationThink((UnkX*) state);
         return;
     }
 
@@ -331,18 +337,18 @@ found_player:;
 
         HSD_JObjRemoveAnim(jobj);
 
+        anim_base = (HSD_MatAnimJoint**) &hud->janim_selection_joints;
         lb_8000C07C(jobj, 1, (HSD_AnimJoint**) hud->jobj_desc_parent,
-                    (HSD_MatAnimJoint**) hud->janim_selection_joints,
-                    (HSD_ShapeAnimJoint**) hud->janim_selection_textures);
+                    (HSD_MatAnimJoint**) anim_base[0],
+                    (HSD_ShapeAnimJoint**) anim_base[1]);
         HSD_JObjReqAnimAll(jobj, 0.0F);
 
         digit_jobj = state->jobjs[Percent];
         if (digit_jobj != NULL) {
             tobj = digit_jobj->u.dobj->mobj->tobj;
-            HSD_TObjAddAnimAll(tobj,
-                               (HSD_TexAnim*) hud->janim_selection_joints->child
-                                   ->child->next->next->next->aobjdesc
-                                   ->fobjdesc);
+            HSD_TObjAddAnimAll(
+                tobj, (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])->child
+                          ->child->next->next->next->aobjdesc->fobjdesc);
             if (Player_GetMoreFlagsBit2((s8) state->player_slot)) {
                 HSD_TObjReqAnimAll(tobj, 1.0F);
             } else {
@@ -358,8 +364,8 @@ found_player:;
         ones_digit = state->damage_percent % 10;
         HSD_TObjAddAnimAll(
             digit_jobj->u.dobj->mobj->tobj,
-            (HSD_TexAnim*) hud->janim_selection_joints->child->child->aobjdesc
-                ->fobjdesc);
+            (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])->child->child
+                ->aobjdesc->fobjdesc);
         HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * ones_digit);
         HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
 
@@ -367,8 +373,8 @@ found_player:;
         tens_digit = (state->damage_percent % 100) / 10;
         HSD_TObjAddAnimAll(
             digit_jobj->u.dobj->mobj->tobj,
-            (HSD_TexAnim*) hud->janim_selection_joints->child->child->aobjdesc
-                ->fobjdesc);
+            (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])->child->child
+                ->aobjdesc->fobjdesc);
         HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * tens_digit);
         HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
 
@@ -376,8 +382,8 @@ found_player:;
         hundreds_digit = (state->damage_percent % 1000) / 100;
         HSD_TObjAddAnimAll(
             digit_jobj->u.dobj->mobj->tobj,
-            (HSD_TexAnim*) hud->janim_selection_joints->child->child->aobjdesc
-                ->fobjdesc);
+            (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])->child->child
+                ->aobjdesc->fobjdesc);
         HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj,
                            2.0F * hundreds_digit);
         HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
@@ -385,12 +391,13 @@ found_player:;
 
     HSD_JObjAnimAll(jobj);
 
+    anim_base = (HSD_MatAnimJoint**) &hud->janim_selection_joints;
     digit_jobj = state->jobjs[Ones];
     ones_digit = state->damage_percent % 10;
     HSD_TObjAddAnimAll(
         digit_jobj->u.dobj->mobj->tobj,
-        (HSD_TexAnim*) hud->janim_selection_joints->child->child->aobjdesc
-            ->fobjdesc);
+        (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])->child->child
+            ->aobjdesc->fobjdesc);
     HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * ones_digit);
     HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
 
@@ -398,8 +405,8 @@ found_player:;
     tens_digit = (state->damage_percent % 100) / 10;
     HSD_TObjAddAnimAll(
         digit_jobj->u.dobj->mobj->tobj,
-        (HSD_TexAnim*) hud->janim_selection_joints->child->child->aobjdesc
-            ->fobjdesc);
+        (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])->child->child
+            ->aobjdesc->fobjdesc);
     HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * tens_digit);
     HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
 
@@ -415,8 +422,8 @@ found_player:;
     hundreds_digit = (state->damage_percent % 1000) / 100;
     HSD_TObjAddAnimAll(
         digit_jobj->u.dobj->mobj->tobj,
-        (HSD_TexAnim*) hud->janim_selection_joints->child->child->aobjdesc
-            ->fobjdesc);
+        (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])->child->child
+            ->aobjdesc->fobjdesc);
     HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * hundreds_digit);
     HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
 
@@ -437,6 +444,16 @@ found_player:;
                 clamped_damage = 0;
             }
             factor = 1.0F - ((f32) clamped_damage / 100.0F);
+            color.r = (s8) (factor * (f32) ((&ifStatus_804D57AC)[0] -
+                                            (&ifStatus_804D57A8)[0]) +
+                            (f32) (&ifStatus_804D57A8)[0]);
+            color.g = (s8) (factor * (f32) ((&ifStatus_804D57AC)[1] -
+                                            (&ifStatus_804D57A8)[1]) +
+                            (f32) (&ifStatus_804D57A8)[1]);
+            color.b = (s8) (factor * (f32) ((&ifStatus_804D57AC)[2] -
+                                            (&ifStatus_804D57A8)[2]) +
+                            (f32) (&ifStatus_804D57A8)[2]);
+            color.a = 255;
         } else {
             /* Normal mode: 0-300% range */
             clamped_damage = state->damage_percent;
@@ -446,19 +463,17 @@ found_player:;
                 clamped_damage = 0;
             }
             factor = (f32) clamped_damage / 300.0F;
+            color.r = (s8) (factor * (f32) ((&ifStatus_804D57AC)[0] -
+                                            (&ifStatus_804D57A8)[0]) +
+                            (f32) (&ifStatus_804D57A8)[0]);
+            color.g = (s8) (factor * (f32) ((&ifStatus_804D57AC)[1] -
+                                            (&ifStatus_804D57A8)[1]) +
+                            (f32) (&ifStatus_804D57A8)[1]);
+            color.b = (s8) (factor * (f32) ((&ifStatus_804D57AC)[2] -
+                                            (&ifStatus_804D57A8)[2]) +
+                            (f32) (&ifStatus_804D57A8)[2]);
+            color.a = 255;
         }
-
-        /* Interpolate color */
-        color.r = (s8) (factor * (f32) (ifStatus_804D57AC[0] -
-                                        ifStatus_804D57A8[0]) +
-                        (f32) ifStatus_804D57A8[0]);
-        color.g = (s8) (factor * (f32) (ifStatus_804D57AC[1] -
-                                        ifStatus_804D57A8[1]) +
-                        (f32) ifStatus_804D57A8[1]);
-        color.b = (s8) (factor * (f32) (ifStatus_804D57AC[2] -
-                                        ifStatus_804D57A8[2]) +
-                        (f32) ifStatus_804D57A8[2]);
-        color.a = 255;
 
         /* Apply color to all digit materials */
         mobj = state->jobjs[Hundreds]->u.dobj->mobj;
@@ -484,28 +499,18 @@ found_player:;
 
     /* Update JObj positions when animating */
     if (lb_8000B09C(jobj)) {
-        f32* tx;
-        f32* ty;
-        HSD_JObj** jp;
-
-        tx = state->translation_x;
-        ty = state->translation_y;
-        jp = state->jobjs;
         for (i = 0; i < 4; i++) {
-            digit_jobj = *jp;
+            digit_jobj = state->jobjs[i];
             if (digit_jobj == NULL) {
                 __assert("jobj.h", 993, "jobj");
             }
-            *tx = digit_jobj->translate.x;
+            state->translation_x[i] = digit_jobj->translate.x;
 
-            digit_jobj = *jp;
+            digit_jobj = state->jobjs[i];
             if (digit_jobj == NULL) {
                 __assert("jobj.h", 1006, "jobj");
             }
-            *ty = digit_jobj->translate.y;
-            tx++;
-            ty++;
-            jp++;
+            state->translation_y[i] = digit_jobj->translate.y;
         }
     }
 

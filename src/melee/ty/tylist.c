@@ -716,28 +716,43 @@ HSD_JObj* un_80313508(void* parent, void* symbol, float x, float y, float z)
 void un_80313774(void)
 {
     TyListState* state = (TyListState*) un_804A2AC0;
-    TyArchiveData* archive = un_804D6ED8;
+    TyModeState* mode = (TyModeState*) un_804A284C;
     ToyGlobalsS_* disp = un_804D6EE0;
+    TyArchiveData* archive = un_804D6ED8;
+    s8* state_tail = (s8*) &state->gobj_2AC;
+    char* strs = un_803FE880;
     TyListArg* entry;
     HSD_JObj* root_jobj;
     f32 step;
     f32 pos;
+    f32 y;
     s16 idx;
     s32 i;
+    s32 trophy_total;
+
+    PAD_STACK(0x40);
 
     state->selectedIdx = un_804A284C[0x12A];
-    state->x29B = un_804A284C[1];
-    state->x29C = un_804A284C[2];
-    state->x2B8 = un_804A284C[3];
-    *(u8*) ((u8*) state + 0x2B9) = un_804A284C[3];
+    state->x29B = mode->x1;
+    state->x29C = mode->x2;
 
     if (un_GetTrophyTotal() <= 0xA) {
-        state->entryCount = un_GetTrophyTotal() + 2;
+        state_tail[0xD] = mode->x3;
+        state_tail[0xC] = mode->x3;
     } else {
-        state->entryCount = 0xC;
+        state_tail[0xD] = mode->x3;
+        state_tail[0xC] = mode->x3;
     }
 
-    idx = un_803062BC(disp->x140->x10);
+    trophy_total = un_GetTrophyTotal();
+    if (un_GetTrophyTotal() <= 0xA) {
+        state->entryCount = trophy_total + 2;
+        idx = un_803062BC(disp->x140->x10);
+    } else {
+        state->entryCount = 0xC;
+        idx = un_803062BC(disp->x140->x10);
+    }
+
     for (i = 0; i < state->entryCount; i++) {
         entry = &state->entries[i];
         if (i == 0) {
@@ -757,23 +772,25 @@ void un_80313774(void)
     state->x274 = &state->entries[state->entryCount - 1];
 
     state->gobj =
-        (HSD_GObj*) un_80313508(NULL, un_803FE880 + 0xAC, 0.0f, 0.0f, 0.0f);
-    root_jobj = (HSD_JObj*) state->gobj;
-    HSD_ASSERTMSG(0x3E1, root_jobj != NULL, "jobj");
+        (HSD_GObj*) un_80313508(NULL, strs + 0xAC, 0.0f, 0.0f, 0.0f);
+    root_jobj = state->gobj->hsd_obj;
+    HSD_JObjGetTranslationX(root_jobj);
 
-    step = 5.11f - root_jobj->translate.y;
+    y = HSD_JObjGetTranslationY(root_jobj);
+    HSD_JObjGetTranslationZ(root_jobj);
+    step = 5.11f - y;
     pos = -step;
     state->x2A8 = step;
 
     entry = &state->entries[0];
     for (i = 0; i < state->entryCount; i++) {
-        entry->x28 = i;
+        *(s32*) &entry->x28 = i;
         entry->jobjs[0] =
-            un_80313508(state->gobj, un_803FE880 + 0xCC, 0.0f, pos, 0.0f);
+            un_80313508(state->gobj, strs + 0xCC, 0.0f, pos, 0.0f);
         entry->jobjs[2] =
             entry->jobjs[0] != NULL ? entry->jobjs[0]->child : NULL;
-        un_80306A48(entry->jobjs[0], NULL, un_803FE880 + 0xE8, NULL,
-                    archive->data, 0);
+        un_80306A48(entry->jobjs[0], NULL, strs + 0xE8, NULL, archive->data,
+                    0);
         entry->texts[0] = HSD_SisLib_803A5ACC(0, un_804D6EE8, 0.0f, 0.0f,
                                               17.2f, 640.0f, 64.0f);
         entry->texts[1] = HSD_SisLib_803A5ACC(0, un_804D6EE8, 0.0f, 0.0f,
@@ -792,19 +809,26 @@ void un_80313774(void)
     }
 
     state->selectedIdx = state->x278->idx;
-    state->jobj = un_80313508(state->gobj, un_803FE880 + 0x10C, 0.0f,
-                              state->x278->x30, 0.0f);
-    state->x288 = un_80313508(state->gobj, un_803FE880 + 0x12C, 0.0f,
-                              state->entries[state->x2B8].x30, 0.0f);
+    state->jobj = un_80313508(state->gobj, strs + 0x10C, 0.0f,
+                              state->entries[0].x30, 0.0f);
+    if (un_GetTrophyTotal() <= 0xA) {
+        state->x288 = un_80313508(state->gobj, strs + 0x12C, 0.0f,
+                                  state->entries[state_tail[0xC] + 1].x30,
+                                  0.0f);
+    } else {
+        state->x288 = un_80313508(state->gobj, strs + 0x12C, 0.0f,
+                                  state->entries[state_tail[0xC] + 1].x30,
+                                  0.0f);
+    }
 
-    for (i = 0; i < state->x2B8; i++) {
+    for (i = 0; i < state_tail[0xC]; i++) {
         un_80313358(state, 0, 1, 1);
-        un_8031305C(NULL, state, 0);
+        un_8031305C(state_tail, state, 0);
     }
 
     entry = &state->entries[0];
     for (i = 0; i < state->entryCount; i++) {
-        if (entry->x24 == state->x2B8) {
+        if (entry->x24 == state_tail[0xC]) {
             state->selectedIdx = entry->idx;
             state->x278 = entry;
             break;
@@ -812,7 +836,7 @@ void un_80313774(void)
         entry++;
     }
 
-    un_80312BAC(state, state->x2B8);
+    un_80312BAC(state, state_tail[0xC]);
 }
 
 extern s32 un_804D6EE8;

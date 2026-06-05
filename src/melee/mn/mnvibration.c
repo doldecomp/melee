@@ -209,6 +209,8 @@ inline u8 mnVibration_GetNameRumble(s32 name_idx)
     return GetPersistentNameData(name_idx)->x1A1;
 }
 
+#pragma push
+#pragma dont_inline on
 HSD_JObj* mnVibration_802474C4(s32 count)
 {
     HSD_JObj* temp_r4;
@@ -231,11 +233,12 @@ HSD_JObj* mnVibration_802474C4(s32 count)
     }
     return var_r4;
 }
+#pragma pop
 
 void fn_80247510(HSD_GObj* gobj)
 {
     MnVibrationData* data = mnVibration_804D6C28->user_data;
-    u8 var_ctr;
+    s32 var_ctr;
     s32 i;
     u64 inputs;
     u64 inputs_repeat;
@@ -244,10 +247,10 @@ void fn_80247510(HSD_GObj* gobj)
     u8 cursor_row;
     u8 scroll_offset;
     s32 name_count;
-    s32 name_idx;
+    u8 name_idx;
     u8 rumble_setting;
     HSD_JObj* jobj;
-    PAD_STACK(136);
+    PAD_STACK(128);
 
     if (mn_804D6BC8.cooldown != 0) {
         Menu_DecrementAnimTimer();
@@ -278,7 +281,7 @@ void fn_80247510(HSD_GObj* gobj)
     }
 
     // Check animation timer
-    if (data->x0[0] < ((AnimLoopSettings*) &mnVibration_803EECE0)->end_frame) {
+    if (data->x0[0] <= ((AnimLoopSettings*) &mnVibration_803EECE0)->end_frame) {
         data->x0[0]++;
         return;
     }
@@ -291,6 +294,7 @@ void fn_80247510(HSD_GObj* gobj)
                 HSD_JObj* temp_jobj;
                 lbAudioAx_80024030(1);
                 if (GetRumbleSettingOfPort(i) != 0) {
+                    HSD_JObj* panel_jobj2;
                     gmMainLib_8015ED4C(i, 0);
                     rumble_setting = GetRumbleSettingOfPort(i);
                     temp_jobj =
@@ -301,25 +305,21 @@ void fn_80247510(HSD_GObj* gobj)
                     } else {
                         jobj = temp_jobj->child;
                     }
-                    var_ctr = i;
-                    if ((s32) i > 0) {
-                        do {
-                            if (jobj == NULL) {
-                                jobj = NULL;
-                            } else {
-                                jobj = jobj->next;
-                            }
-                            var_ctr -= 1;
-                        } while (var_ctr != 0);
+                    for (var_ctr = i; var_ctr > 0; var_ctr--) {
+                        if (jobj == NULL) {
+                            jobj = NULL;
+                        } else {
+                            jobj = jobj->next;
+                        }
                     }
-                    lb_80011E24(jobj, &panel_jobj, 2, -1,
-                                (f32) rumble_setting);
-                    HSD_JObjReqAnimAll(panel_jobj, (f32) rumble_setting);
-                    HSD_JObjAnimAll(panel_jobj);
+                    lb_80011E24(jobj, &panel_jobj2, 2, -1);
+                    HSD_JObjReqAnimAll(panel_jobj2, (f32) rumble_setting);
+                    HSD_JObjAnimAll(panel_jobj2);
                     HSD_PadRumbleRemoveAll();
                     HSD_PadRumbleOffN(i);
                     return;
                 } else {
+                    HSD_JObj* panel_jobj2;
                     gmMainLib_8015ED4C(i, 1);
                     rumble_setting = GetRumbleSettingOfPort(i);
                     temp_jobj =
@@ -330,21 +330,16 @@ void fn_80247510(HSD_GObj* gobj)
                     } else {
                         jobj = temp_jobj->child;
                     }
-                    var_ctr = i;
-                    if ((s32) i > 0) {
-                        do {
-                            if (jobj == NULL) {
-                                jobj = NULL;
-                            } else {
-                                jobj = jobj->next;
-                            }
-                            var_ctr -= 1;
-                        } while (var_ctr != 0);
+                    for (var_ctr = i; var_ctr > 0; var_ctr--) {
+                        if (jobj == NULL) {
+                            jobj = NULL;
+                        } else {
+                            jobj = jobj->next;
+                        }
                     }
-                    lb_80011E24(jobj, &panel_jobj, 2, -1,
-                                (f32) rumble_setting);
-                    HSD_JObjReqAnimAll(panel_jobj, (f32) rumble_setting);
-                    HSD_JObjAnimAll(panel_jobj);
+                    lb_80011E24(jobj, &panel_jobj2, 2, -1);
+                    HSD_JObjReqAnimAll(panel_jobj2, (f32) rumble_setting);
+                    HSD_JObjAnimAll(panel_jobj2);
                     HSD_PadRumbleAdd(i, 0, 14, 0, &mnVibration_804D4FF0);
                     return;
                 }
@@ -363,14 +358,14 @@ void fn_80247510(HSD_GObj* gobj)
         if ((inputs & 0x40) && data->x0[i + 2] == 1) {
             lbAudioAx_80024030(2);
             data->x0[i + 2] = 0;
-            panel_jobj = data->jobjs[mnVibration_804D4FE8[i]];
+            panel_jobj = data->jobjs[mnVibration_804D4FE8[(u8) i]];
             HSD_JObjReqAnimAll(panel_jobj, (f32) data->x0[i + 2]);
             HSD_JObjAnimAll(panel_jobj);
         } else if (inputs & 0x80) {
             if (data->x0[i + 2] == 0) {
                 lbAudioAx_80024030(2);
                 data->x0[i + 2] = 1;
-                panel_jobj = data->jobjs[mnVibration_804D4FE8[i]];
+                panel_jobj = data->jobjs[mnVibration_804D4FE8[(u8) i]];
                 HSD_JObjReqAnimAll(panel_jobj, (f32) data->x0[i + 2]);
                 HSD_JObjAnimAll(panel_jobj);
             }
@@ -426,18 +421,31 @@ void fn_80247510(HSD_GObj* gobj)
                 }
             }
             if (name_idx != 0xFF) {
+                MnVibrationData* data2;
+                HSD_JObj* jobj17;
+                HSD_JObj* jobj18;
+                f32 base_y;
+                f32 spacing;
+                f32 temp_x;
+                f32 temp_y;
+                f32 temp_z;
                 lbAudioAx_80024030(2);
                 data->x0[1]--;
+                data2 = mnVibration_804D6C28->user_data;
                 cursor_jobj = data->cursor_gobj->hsd_obj;
-                HSD_JObjSetTranslateX(
-                    cursor_jobj, HSD_JObjGetTranslationX(data->jobjs[17]));
-                HSD_JObjSetTranslateY(
-                    cursor_jobj, (HSD_JObjGetTranslationY(data->jobjs[18]) -
-                                  HSD_JObjGetTranslationY(data->jobjs[17])) *
-                                         (f32) data->x0[1] +
-                                     HSD_JObjGetTranslationY(data->jobjs[17]));
-                HSD_JObjSetTranslateZ(
-                    cursor_jobj, HSD_JObjGetTranslationZ(data->jobjs[17]));
+                jobj17 = data2->jobjs[17];
+                base_y = HSD_JObjGetTranslationY(jobj17);
+                jobj18 = data2->jobjs[18];
+                spacing = HSD_JObjGetTranslationY(jobj18) - base_y;
+                temp_x = HSD_JObjGetTranslationX(jobj17);
+                HSD_JObjSetTranslateX(cursor_jobj, temp_x);
+                jobj17 = data2->jobjs[17];
+                temp_y = (spacing * (f32) data->x0[1]) +
+                         HSD_JObjGetTranslationY(jobj17);
+                HSD_JObjSetTranslateY(cursor_jobj, temp_y);
+                jobj17 = data2->jobjs[17];
+                temp_z = HSD_JObjGetTranslationZ(jobj17);
+                HSD_JObjSetTranslateZ(cursor_jobj, temp_z);
             }
         } else if (GetNameCount() > 8 && data->scroll_offset != 0) {
             lbAudioAx_80024030(2);
@@ -447,7 +455,7 @@ void fn_80247510(HSD_GObj* gobj)
     }
 
     // Handle down navigation
-    if (inputs_repeat & 0x20) {
+    else if (inputs_repeat & 0x20) {
         cursor_row = data->x0[1];
         if (cursor_row < 7) {
             scroll_offset = data->scroll_offset;
@@ -461,18 +469,31 @@ void fn_80247510(HSD_GObj* gobj)
                 }
             }
             if (name_idx != 0xFF) {
+                MnVibrationData* data2;
+                HSD_JObj* jobj17;
+                HSD_JObj* jobj18;
+                f32 base_y;
+                f32 spacing;
+                f32 temp_x;
+                f32 temp_y;
+                f32 temp_z;
                 lbAudioAx_80024030(2);
                 data->x0[1]++;
+                data2 = mnVibration_804D6C28->user_data;
                 cursor_jobj = data->cursor_gobj->hsd_obj;
-                HSD_JObjSetTranslateX(
-                    cursor_jobj, HSD_JObjGetTranslationX(data->jobjs[17]));
-                HSD_JObjSetTranslateY(
-                    cursor_jobj, (HSD_JObjGetTranslationY(data->jobjs[18]) -
-                                  HSD_JObjGetTranslationY(data->jobjs[17])) *
-                                         (f32) data->x0[1] +
-                                     HSD_JObjGetTranslationY(data->jobjs[17]));
-                HSD_JObjSetTranslateZ(
-                    cursor_jobj, HSD_JObjGetTranslationZ(data->jobjs[17]));
+                jobj17 = data2->jobjs[17];
+                base_y = HSD_JObjGetTranslationY(jobj17);
+                jobj18 = data2->jobjs[18];
+                spacing = HSD_JObjGetTranslationY(jobj18) - base_y;
+                temp_x = HSD_JObjGetTranslationX(jobj17);
+                HSD_JObjSetTranslateX(cursor_jobj, temp_x);
+                jobj17 = data2->jobjs[17];
+                temp_y = (spacing * (f32) data->x0[1]) +
+                         HSD_JObjGetTranslationY(jobj17);
+                HSD_JObjSetTranslateY(cursor_jobj, temp_y);
+                jobj17 = data2->jobjs[17];
+                temp_z = HSD_JObjGetTranslationZ(jobj17);
+                HSD_JObjSetTranslateZ(cursor_jobj, temp_z);
             }
         } else if (GetNameCount() > 8) {
             scroll_offset = data->scroll_offset;

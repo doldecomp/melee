@@ -8,6 +8,7 @@
 #include "ef/efsync.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
+#include "ftCommon/ftCo_BarrelWait.h"
 #include "gm/gm_unsplit.h"
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
@@ -93,6 +94,10 @@ grKg_StageData grKg_803E1800 = {
 };
 
 char grKg_803E1858[] = "grkongo.c";
+static const lbColl_80008D30_arg1 grKg_803B7FB0 = {
+    1, 1, 361, 0, 0, 180, 0, 0, 0,
+};
+extern char grKg_803E1A00[];
 
 void grKongo_801D5490(Ground_GObj* arg0)
 {
@@ -337,7 +342,11 @@ void grKongo_801D577C(Ground_GObj* arg0)
     f32 var_f1;
     f32 var_f0;
     HSD_GObj* temp_r3_9;
+    s16 val2;
     Vec3 vec;
+    lbColl_80008D30_arg1 hit;
+    f32 angle;
+    HSD_GObj* kept_gobj;
 
     switch (temp_r31->gv.kongo3.xC4) {
     default:
@@ -349,7 +358,7 @@ void grKongo_801D577C(Ground_GObj* arg0)
         } else if (temp_f3 < 0.0f) {
             var_f30 = temp_r31->gv.kongo3.xD8 - temp_r31->gv.kongo3.xD4;
         } else {
-            __assert("grkongo.c", 505, "0");
+            __assert(grKg_803E1858, 505, "0");
         }
         if (var_f30 < 0.0f) {
             var_f30 = (f32) ((f64) var_f30 + M_TAU);
@@ -464,56 +473,48 @@ void grKongo_801D577C(Ground_GObj* arg0)
     case 1:
         if (temp_r31->gv.kongo.u.taru.keep == NULL) {
             temp_r31->gv.kongo3.xC6 = 0;
-#if 0
             goto block_124;
-#endif
         }
-        temp_r31->gv.kongo3.xCA -= 1;
-        if (temp_r31->gv.kongo3.xCA < 0) {
-            temp_r31->gv.kongo3.xC6 = 2;
-        case 2: /* switch 2 */
-#if 0
-block_124:
-            sp10 = grKg_803B7FB0.unk0;
-            sp14 = grKg_803B7FB0.unk4;
-            sp18 = grKg_803B7FB0.unk8;
-            sp1C = grKg_803B7FB0.unkC;
-            sp20 = grKg_803B7FB0.unk10;
-            sp24 = grKg_803B7FB0.unk14;
-            sp28 = grKg_803B7FB0.unk18;
-            sp2C = grKg_803B7FB0.unk1C;
-            sp30 = grKg_803B7FB0.unk20;
-            sp10 = 1;
-            sp14 = grKg_804D6980->unk6C;
-            sp18 = grKg_804D6980->unk70;
-            sp1C = grKg_804D6980->unk74;
-            sp20 = grKg_804D6980->unk78;
-            sp24 = grKg_804D6980->unk7C;
-            sp28 = grKg_804D6980->unk80;
-            temp_f1_3 = (f32) (1.5707963267948966 + (f64) temp_r31->gv.kongo3.xD8);
-            if (temp_f1_3 < 0.0f) {
-
-            } else if (temp_f1_3 > (bitwise f32) M_TAU) {
-
-            }
-            temp_r0_4 = temp_r31->gv.kongo3.u.taru.keep->unk2;
-            if (temp_r0_4 == 8) {
-                ftCo_8009EC70(&sp38, &sp10);
-            } else if (temp_r0_4 == 9) {
-                it_802E2330(&sp38, &sp10);
-            }
-            temp_r31->gv.kongo3.xC6 = 3;
-            grMaterial_801C95C4(arg0);
-            return;
-        }
-#endif
-            break;
-        case 3: /* switch 2 */
-            if (grKongo_801D8078(arg0) == NULL) {
-                temp_r31->gv.kongo3.xC6 = 0;
-            }
+        val2 = temp_r31->gv.kongo3.xCA;
+        temp_r31->gv.kongo3.xCA = val2 - 1;
+        if (val2 >= 0) {
             break;
         }
+        temp_r31->gv.kongo3.xC6 = 2;
+    case 2: /* switch 2 */
+    block_124:
+        ;
+        hit = grKg_803B7FB0;
+        hit.state = 1;
+        hit.damage = *(u32*) &grKg_804D6980->unk6C;
+        hit.kb_angle = *(u32*) &grKg_804D6980->unk70;
+        hit.unkC = *(u32*) &grKg_804D6980->unk74;
+        hit.unk10 = *(u32*) &grKg_804D6980->unk78;
+        hit.unk14 = *(u32*) &grKg_804D6980->unk7C;
+        hit.element = *(u32*) &grKg_804D6980->unk80;
+        angle = (f32) (1.5707963267948966 +
+                       (f64) temp_r31->gv.kongo3.xD8);
+        if (angle < 0.0f) {
+            angle = (f32) ((f64) angle + M_TAU);
+        } else if (angle > (f32) M_TAU) {
+            angle = (f32) ((f64) angle - M_TAU);
+        }
+        kept_gobj = temp_r31->gv.kongo.u.taru.keep;
+        angle *= 57.29578f;
+        if (kept_gobj->p_link == 8) {
+            ftCo_8009EC70((Fighter_GObj*) kept_gobj, &vec, &hit, angle);
+        } else if (kept_gobj->p_link == 9) {
+            it_802E2330((Item_GObj*) kept_gobj, &vec, &hit, angle);
+        }
+        temp_r31->gv.kongo3.xC6 = 3;
+        Ground_801C5440(temp_r31, 0, 0x12AU);
+        grMaterial_801C95C4(arg0);
+        return;
+    case 3: /* switch 2 */
+        if (grKongo_801D8078(arg0) == NULL) {
+            temp_r31->gv.kongo3.xC6 = 0;
+        }
+        break;
     }
 }
 
@@ -659,7 +660,9 @@ void grKongo_801D828C(HSD_GObj* gobj)
     if (gp->gv.kongo3.xC6 != 1) {
         return;
     }
-    HSD_ASSERT(1719, gp->gv.kongo.u.taru.keep);
+    if (gp->gv.kongo.u.taru.keep == NULL) {
+        __assert(grKg_803E1858, 1719, grKg_803E1A00);
+    }
     if (((u8*) gp->gv.kongo.u.taru.keep)[2] == 8) {
         gp->gv.kongo3.xC6 = 0;
         gp->gv.kongo.u.taru.keep = NULL;
@@ -837,7 +840,8 @@ void grKongo_801D6668(Ground_GObj* arg0)
 void grKongo_801D69AC(Ground_GObj* arg) {}
 
 typedef struct _struct_grKg_803E188C_0x18 {
-    /* 0x00 */ s32 unk0;
+    /* 0x00 */ s16 unk0;
+    /* 0x02 */ s16 unk2;
     /* 0x04 */ HSD_JObj* unk4;
     /* 0x08 */ f32 unk8;
     /* 0x0C */ f32 unkC;
@@ -846,22 +850,24 @@ typedef struct _struct_grKg_803E188C_0x18 {
 } _struct_grKg_803E188C_0x18;
 
 static struct _struct_grKg_803E188C_0x18 grKg_803E188C[0xF] = {
-    { 8, NULL, 0.06981317f, 0.0f, 0.0f },
-    { 9, NULL, 0.0f, 0.0f, 0.0f },
-    { 0xA, NULL, -0.05235988f, 0.0f, 0.0f },
-    { 0x17, NULL, -0.10471976f, 0.0f, 0.0f },
-    { 0x18, NULL, -0.13962634f, 0.0f, 0.0f },
-    { 0x19, NULL, -0.15707964f, 0.0f, 0.0f },
-    { 0x1A, NULL, -0.20943952f, 0.0f, 0.0f },
-    { 0x1B, NULL, -0.23561944f, 0.0f, 0.0f },
-    { 0x1C, NULL, -0.18325958f, 0.0f, 0.0f },
-    { 0x1D, NULL, -0.1308997f, 0.0f, 0.0f },
-    { 0x1E, NULL, -0.07853982f, 0.0f, 0.0f },
-    { 0x1F, NULL, -0.02617994f, 0.0f, 0.0f },
-    { 0x20, NULL, 0.0f, 0.0f, 0.0f },
-    { 7, NULL, 0.05235988f, 0.0f, 0.0f },
-    { 0x2D, NULL, 0.10471976f, 0.0f, 0.0f },
+    { 8, 0, NULL, 0.06981317f, 0.0f, 0.0f },
+    { 9, 0, NULL, 0.0f, 0.0f, 0.0f },
+    { 0xA, 0, NULL, -0.05235988f, 0.0f, 0.0f },
+    { 0x17, 0, NULL, -0.10471976f, 0.0f, 0.0f },
+    { 0x18, 0, NULL, -0.13962634f, 0.0f, 0.0f },
+    { 0x19, 0, NULL, -0.15707964f, 0.0f, 0.0f },
+    { 0x1A, 0, NULL, -0.20943952f, 0.0f, 0.0f },
+    { 0x1B, 0, NULL, -0.23561944f, 0.0f, 0.0f },
+    { 0x1C, 0, NULL, -0.18325958f, 0.0f, 0.0f },
+    { 0x1D, 0, NULL, -0.1308997f, 0.0f, 0.0f },
+    { 0x1E, 0, NULL, -0.07853982f, 0.0f, 0.0f },
+    { 0x1F, 0, NULL, -0.02617994f, 0.0f, 0.0f },
+    { 0x20, 0, NULL, 0.0f, 0.0f, 0.0f },
+    { 7, 0, NULL, 0.05235988f, 0.0f, 0.0f },
+    { 0x2D, 0, NULL, 0.10471976f, 0.0f, 0.0f },
 };
+
+char grKg_803E1A00[] = "gp->u.taru.keep";
 
 struct _struct_grKg_804D6984 {
     HSD_JObj* unk0;
@@ -943,24 +949,24 @@ typedef struct unk_struct_x14 {
 
 void grKongo_801D6AFC(void)
 {
-    unk_struct_x14 sp44;
-    f32 sp8;
-    unk_struct_x14* var_r3;
-    unk_struct_x14* var_r5;
+    f32 sp44[15];
+    f32 sp8[15];
+    f32* var_r5;
+    f32* var_r7;
     _struct_grKg_803E188C_0x18* var_r6;
 
     s32 var_ctr = 3;
-    var_r5 = &sp44;
-    var_r3 = var_r5;
+    var_r5 = sp44;
     do {
-        var_r3->unk0 = 0.0f;
-        var_r3->unk4 = 0.0f;
-        var_r3->unk8 = 0.0f;
-        var_r3->unkC = 0.0f;
-        var_r3->unk10 = 0.0f;
-        var_r3 += 1;
+        var_r5[0] = 0.0f;
+        var_r5[1] = 0.0f;
+        var_r5[2] = 0.0f;
+        var_r5[3] = 0.0f;
+        var_r5[4] = 0.0f;
+        var_r5 += 5;
         var_ctr -= 1;
     } while (var_ctr != 0);
+    var_r5 = sp44;
     var_r6 = grKg_803E188C;
     {
         s32 var_ctr_2 = 5;
@@ -980,14 +986,14 @@ void grKongo_801D6AFC(void)
         _struct_grKg_803E188C_0x18* var_r3_3 = grKg_803E188C;
         f32 temp_f0;
         do {
-            var_r3_3->unk10 += var_r5->unk0;
-            var_r3_3[1].unk10 += var_r5->unk4;
-            var_r3_3[2].unk10 += var_r5->unk8;
-            var_r3_3[3].unk10 += var_r5->unkC;
-            temp_f0 = var_r5->unk10;
-            var_r5 += 0x14;
+            var_r3_3->unk10 += var_r5[0];
+            var_r3_3[1].unk10 += var_r5[1];
+            var_r3_3[2].unk10 += var_r5[2];
+            var_r3_3[3].unk10 += var_r5[3];
+            temp_f0 = var_r5[4];
+            var_r5 += 5;
             var_r3_3[4].unk10 += temp_f0;
-            var_r3_3 += 0x78;
+            var_r3_3 += 5;
             var_ctr_3 -= 1;
         } while (var_ctr_3 != 0);
     }
@@ -1018,75 +1024,77 @@ void grKongo_801D6AFC(void)
             var_ctr_5 -= 1;
         } while (var_ctr_5 != 0);
     }
-#if 0
-    var_r7 = &sp8;
+    var_r7 = sp8;
     {
-        var_ctr_6 = 3;
-        var_r3_6 = var_r7;
+        s32 var_ctr_6 = 3;
+        f32* var_r3_6 = var_r7;
         do {
-            var_r3_6->unk0 = 0.0f;
-            var_r3_6->unk4 = 0.0f;
-            var_r3_6->unk8 = 0.0f;
-            var_r3_6->unkC = 0.0f;
-            var_r3_6->unk10 = 0.0f;
-            var_r3_6 += 0x14;
+            var_r3_6[0] = 0.0f;
+            var_r3_6[1] = 0.0f;
+            var_r3_6[2] = 0.0f;
+            var_r3_6[3] = 0.0f;
+            var_r3_6[4] = 0.0f;
+            var_r3_6 += 5;
             var_ctr_6 -= 1;
         } while (var_ctr_6 != 0);
     }
-    var_ctr_7 = 0xF;
-    var_r3_7 = grKg_803E188C;
-    var_r4 = var_r7;
-    var_r8 = 0;
-    do {
-        if ((s16) var_r3_7->unk2 == 0) {
-            if ((var_r8 != 0) && ((s16) var_r3_7->unk-16 == 0)) {
-                rad_compare_c(var_r3_7[1]->unkC - var_r3_7->unkC, grKg_804D6980->unk9C,
-                       grKg_804D6980->unkA0, var_r4);
+    {
+        s32 var_ctr_7 = 0xF;
+        _struct_grKg_803E188C_0x18* var_r3_7 = grKg_803E188C;
+        f32* var_r4 = var_r7;
+        s32 var_r8 = 0;
+        do {
+            if (var_r3_7->unk2 == 0) {
+                if ((var_r8 != 0) && (var_r3_7[-1].unk2 == 0)) {
+                    rad_compare_c(var_r3_7[-1].unkC - var_r3_7->unkC,
+                                  grKg_804D6980->unk9C, grKg_804D6980->unkA0,
+                                  var_r4);
+                }
+                if (((u32) var_r8 != 0xEU) && (var_r3_7[1].unk2 == 0)) {
+                    rad_compare_c(var_r3_7[1].unkC - var_r3_7->unkC,
+                                  grKg_804D6980->unk9C, grKg_804D6980->unkA0,
+                                  var_r4);
+                }
             }
-            if (((u32) var_r8 != 0xEU) && ((s16) var_r3_7[1].unk2 == 0)) {
-                rad_compare_c(var_r3_7[1]->unkC - var_r3_7->unkC, grKg_804D6980->unk9C,
-                       grKg_804D6980->unkA0, var_r4);
+            var_r3_7 += 1;
+            var_r4 += 1;
+            var_r8 += 1;
+            var_ctr_7 -= 1;
+        } while (var_ctr_7 != 0);
+    }
+    {
+        s32 var_ctr_8 = 3;
+        f32* var_r7_2 = var_r7;
+        do {
+            f32 temp_f2 = *var_r7_2;
+            if (temp_f2 != 0.0) {
+                var_r6->unkC += temp_f2;
             }
-        }
-        var_r3_7 += 0x18;
-        var_r4 += 4;
-        var_r8 += 1;
-        var_ctr_7 -= 1;
-    } while (var_ctr_7 != 0);
-    var_ctr_8 = 3;
-    do {
-        temp_f2_11 = var_r7->unk0;
-        if ((bitwise f32) 0.0 != temp_f2_11) {
-            var_r6->unkC += temp_f2_11;
-        }
-        temp_f2_12 = var_r7->unk4;
-        temp_r7 = var_r7 + 4;
-        temp_r6 = &var_r6[1];
-        if ((bitwise f32) 0.0 != temp_f2_12) {
-            temp_r6->unkC += temp_f2_12;
-        }
-        temp_f2_13 = temp_r7->unk4;
-        temp_r7_2 = temp_r7 + 4;
-        temp_r6_2 = temp_r6 + 0x18;
-        if ((bitwise f32) 0.0 != temp_f2_13) {
-            temp_r6_2->unkC += temp_f2_13;
-        }
-        temp_f2_14 = temp_r7_2->unk4;
-        temp_r7_3 = temp_r7_2 + 4;
-        temp_r6_3 = temp_r6_2 + 0x18;
-        if ((bitwise f32) 0.0 != temp_f2_14) {
-            temp_r6_3->unkC += temp_f2_14;
-        }
-        temp_f2_15 = temp_r7_3->unk4;
-        temp_r6_4 = temp_r6_3 + 0x18;
-        if ((bitwise f32) 0.0 != temp_f2_15) {
-            temp_r6_4->unkC += temp_f2_15;
-        }
-        var_r7 = temp_r7_3 + 4 + 4;
-        var_r6 = temp_r6_4 + 0x18;
-        var_ctr_8 -= 1;
-    } while (var_ctr_8 != 0);
-#endif
+            temp_f2 = *++var_r7_2;
+            var_r6 += 1;
+            if (temp_f2 != 0.0) {
+                var_r6->unkC += temp_f2;
+            }
+            temp_f2 = *++var_r7_2;
+            var_r6 += 1;
+            if (temp_f2 != 0.0) {
+                var_r6->unkC += temp_f2;
+            }
+            temp_f2 = *++var_r7_2;
+            var_r6 += 1;
+            if (temp_f2 != 0.0) {
+                var_r6->unkC += temp_f2;
+            }
+            temp_f2 = *++var_r7_2;
+            var_r6 += 1;
+            if (temp_f2 != 0.0) {
+                var_r6->unkC += temp_f2;
+            }
+            var_r7_2 += 1;
+            var_r6 += 1;
+            var_ctr_8 -= 1;
+        } while (var_ctr_8 != 0);
+    }
 }
 
 #if 0
@@ -1134,135 +1142,113 @@ extern ? grKg_804D6984;
 static ? grKg_803B7FB0;                             /* unable to generate initializer: unknown type; const */
 #endif
 
-static f64 pi_over_4 = M_PI / 4.0F;
-
 void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
 {
-    HSD_JObj** temp_r29_3;
+    Ground* gp;
+    _struct_grKg_803E188C_0x18* table;
+    _struct_grKg_803E188C_0x18* entry;
     HSD_JObj* jobj;
-    HSD_JObj* jobj_1;
-    HSD_JObj* jobj_2;
-    HSD_JObj* jobj_3;
-    HSD_JObj* jobj_4;
-    HSD_JObj* jobj_5;
-    HSD_JObj* jobj_6;
-    f32 temp_f0;
-    f32 temp_f0_2;
-    f32 temp_f0_3;
-    f32 temp_f0_4;
-    f32 temp_f30;
-    f32 temp_f30_2;
-    f32 temp_f30_3;
-    f32 temp_f30_4;
-    f32 temp_f30_5;
-    f32 temp_f31;
-    f32 temp_f3;
-    f32 temp_f3_2;
-    f32 var_f2;
-    f32 var_f2_2;
-    f32 var_f31;
-    f32 var_f31_2;
-    s32 temp_cr0_eq;
-    s32 temp_cr0_eq_2;
-    s32 temp_cr0_eq_3;
-    s32 temp_cr0_eq_4;
-    s32 temp_cr0_eq_5;
-    s32 var_r28;
-    s32 var_r29_3;
-    s32 var_r3;
-    s32 var_r3_2;
-    s32 var_r3_3;
-    s32 var_r3_4;
-    s32 var_r3_5;
-    u32 temp_r4;
-    u32 temp_r4_2;
-    u32 temp_r4_3;
-    u32 temp_r4_4;
-    u32 temp_r4_5;
-    u32 var_r27;
-    u32 var_r27_2;
-    void* var_r29;
-    void* var_r29_2;
-    void* var_r30;
+    f32 angle;
+    f32 old_angle;
+    f32 angular_vel;
+    f32 temp;
+    f32 limit;
+    f32 displacement;
+    s32 line_id;
+    u32 i;
+    PAD_STACK(0x20);
 
-#if 0
-    Ground *gp = GET_GROUND(gobj);
+    gp = gobj->user_data;
     grKongo_801D6AFC();
-    var_r27 = 0U;
-    var_r29 = &grKg_803E16E0 + (0 * 0x18) + 0x1AC;
+
+    i = 0U;
+    entry = (_struct_grKg_803E188C_0x18*) ((u8*) grKg_803E16E0 +
+                                           (i * 0x18) + 0x1AC);
+    table = entry;
     do {
-        var_r27 += 1;
-        var_r29->unk14 = (f32) (37.8 * tanf(-grKg_803E16E0[i + 1]->xC));
-        var_r29 += 0x18;
-    } while (var_r27 < 0xFU);
+        entry->unk14 = (f32) (37.8 * tanf(-entry->unkC));
+        i += 1;
+        entry++;
+    } while (i < 15U);
+
+    displacement = grKg_803E188C[2].unkC *
+                   (((deg_to_rad * grKg_804D6980->unkA8) /
+                     (deg_to_rad * grKg_804D6980->unk90)) -
+                    1.0f);
+    angle = (f32) (0.7853981633974483 *
+                   (0.5 * (f64) (((grKg_803E188C[2].unk14 -
+                                    grKg_803E188C[1].unk14) /
+                                   6.0f) +
+                                  ((grKg_803E188C[3].unk14 -
+                                    grKg_803E188C[2].unk14) /
+                                   6.0f))));
+    limit = deg_to_rad * grKg_804D6980->unkAC;
+    if (angle > limit) {
+        angle = limit;
+    } else if (angle < -limit) {
+        angle = -limit;
+    }
+    HSD_JObjSetRotationX(grKg_804D6984.unk0, displacement);
+    old_angle = HSD_JObjGetRotationZ(grKg_804D6984.unk0);
+    HSD_JObjSetRotationZ(grKg_804D6984.unk0, angle);
+    angular_vel = angle - old_angle;
+    temp = ABS(angular_vel);
+    if (temp > (deg_to_rad * grKg_804D6980->unkB0)) {
+        gp->gv.kongo.xC8 = -angular_vel;
+    }
+
+    displacement = grKg_803E188C[12].unkC *
+                   (((deg_to_rad * grKg_804D6980->unkA8) /
+                     (deg_to_rad * grKg_804D6980->unk90)) -
+                    1.0f);
+    angle = (f32) (0.7853981633974483 *
+                   (0.5 * (f64) (((grKg_803E188C[12].unk14 -
+                                    grKg_803E188C[11].unk14) /
+                                   6.0f) +
+                                  ((grKg_803E188C[13].unk14 -
+                                    grKg_803E188C[12].unk14) /
+                                   6.0f))));
+    limit = deg_to_rad * grKg_804D6980->unkAC;
+    if (angle > limit) {
+        angle = limit;
+    } else if (angle < -limit) {
+        angle = -limit;
+    }
     {
-        temp_f0 = deg_to_rad * grKg_804D6980->unkAC;
-        var_f31 = (f32) (0.7853981633974483 * (0.5 * (f64) (((grKg_803E16E0.unk1F0 - grKg_803E16E0.unk1D8) / 6.0f) + ((grKg_803E16E0.unk208 - grKg_803E16E0.unk1F0) / 6.0f))));
-        temp_f30 = grKg_803E16E0.unk1E8 * (((deg_to_rad * grKg_804D6980->unkA8) / (deg_to_rad * grKg_804D6980->unk90)) - 1.0f);
-        compare(var_f31, temp_f0, var_f31);
-        HSD_JObjSetRotationX(grKg_804D6984.unk0, temp_f30);
-        HSD_JObjGetRotationZ(temp_f30_2, grKg_804D6984.unk0);
-        HSD_JObjSetRotationZ(grKg_804D6984.unk0, var_f31);
-        temp_f3 = var_f31 - temp_f30_2;
-        if (ABS(temp_f3) > (deg_to_rad * grKg_804D6980->unkB0)) {
-            gp->gv.kongo2.xC8 = -temp_f3;
-        }
+        HSD_JObj** jobj_p = &grKg_804D6984.unk4;
+        jobj = *jobj_p;
+        HSD_JObjSetRotationX(jobj, displacement);
+        jobj = *jobj_p;
+        old_angle = HSD_JObjGetRotationZ(jobj);
+        jobj = *jobj_p;
+        HSD_JObjSetRotationZ(jobj, angle);
     }
-    temp_f0_3 = deg_to_rad * grKg_804D6980->unkAC;
-    var_f31_2 = (f32) (0.7853981633974483 * (0.5 * (f64) (((grKg_803E16E0.unk2E0 - grKg_803E16E0.unk2C8) / 6.0f) + ((grKg_803E16E0.unk2F8 - grKg_803E16E0.unk2E0) / 6.0f))));
-    temp_f30_3 = grKg_803E16E0.unk2D8 * (((deg_to_rad * grKg_804D6980->unkA8) / (deg_to_rad * grKg_804D6980->unk90)) - 1.0f);
-    if (var_f31_2 > temp_f0_3) {
-        var_f31_2 = temp_f0_3;
-    } else {
-        temp_f0_4 = -temp_f0_3;
-        if (var_f31_2 < temp_f0_4) {
-            var_f31_2 = temp_f0_4;
-        }
+    angular_vel = angle - old_angle;
+    temp = ABS(angular_vel);
+    if (temp > (deg_to_rad * grKg_804D6980->unkB0)) {
+        gp->gv.kongo.xD8 = -angular_vel;
     }
-    jobj_1 = grKg_804D6984.unk4;
-    temp_r29_3 = &grKg_804D6984 + 4;
-    HSD_JObjSetRotationX(jobj_1, temp_f30_3);
-    jobj_2 = *temp_r29_3;
-   HSD_JObjGetRotationZ(temp_f30_4, jobj_2);
-    jobj_6 = *temp_r29_3;
-    HSD_JObjSetRotationZ(jobj_6, var_f31_2);
-    temp_f3_2 = var_f31_2 - temp_f30_4;
-    if (temp_f3_2 < 0.0f) {
-        var_f2_2 = -temp_f3_2;
-    } else {
-        var_f2_2 = temp_f3_2;
+
+    entry = (_struct_grKg_803E188C_0x18*) ((u8*) grKg_803E16E0 + 0x1AC);
+    for (i = 0; i < 15; i++) {
+        HSD_JObjSetRotationX(entry->unk4, entry->unkC);
+        entry++;
     }
-#endif
-#if 0
-    if (var_f2_2 > (0.017453292f * grKg_804D6980->unkB0)) {
-        gp->gv.kongo.xD8 = -temp_f3_2;
-    }
-    var_r30 = &grKg_803E16E0 + 0x1AC;
-    var_r29_2 = var_r30;
-    var_r27_2 = 0U;
-    do {
-        jobj_3 = var_r29_2->unk4;
-        temp_f31 = var_r29_2->unkC;
-        HSD_JObjSetRotationX(jobj_3, temp_f31);
-        var_r27_2 += 1;
-        var_r29_2 += 0x18;
-    } while (var_r27_2 < 0xFU);
+
     mpLib_80057424(4);
-    var_r28 = 0;
-    var_r29_3 = 0x28;
-    do {
-        temp_f30_5 = var_r30->unk14;
-        mpLib_80056758(var_r29_3, 0, temp_f30_5, 0, temp_f30_5);
-        if (var_r28 == 0) {
-            mpLib_80056758(var_r29_3 - 1, 0, temp_f30_5, 0, temp_f30_5);
-        } else if ((u32) var_r28 == 0xEU) {
-            mpLib_80056758(var_r29_3 + 1, 0, temp_f30_5, 0, temp_f30_5);
+    entry = (_struct_grKg_803E188C_0x18*) ((u8*) grKg_803E16E0 + 0x1AC);
+    line_id = 0x28;
+    for (i = 0; i < 15; i++) {
+        temp = entry->unk14;
+        mpLib_80056758(line_id, 0.0f, temp, 0.0f, temp);
+        if (i == 0) {
+            mpLib_80056758(line_id - 1, 0.0f, temp, 0.0f, temp);
+        } else if (i == 14) {
+            mpLib_80056758(line_id + 1, 0.0f, temp, 0.0f, temp);
         }
-        var_r28 += 1;
-        var_r29_3 += 2;
-        var_r30 += 0x18;
-    } while ((u32) var_r28 < 0xFU);
-#endif
+        line_id += 2;
+        entry++;
+    }
 }
 
 f32 grKongo_801D8314(void)
