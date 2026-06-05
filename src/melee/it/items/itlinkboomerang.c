@@ -282,7 +282,8 @@ void it_802A0534(Item_GObj* gobj, Vec3* arg1, f32 angle)
     Item* ip = gobj->user_data;
     itLinkBoomerangAttributes* attrs =
         ip->xC4_article_data->x4_specialAttributes;
-    HSD_JObj* jobj = gobj->hsd_obj;
+    HSD_JObj* jobj_tmp = gobj->hsd_obj;
+    HSD_JObj* jobj = jobj_tmp;
     HSD_JObj* child;
     MtxPtr mtx;
 
