@@ -168,7 +168,6 @@ void ft_800895E0(Fighter* fp, int arg1)
     union Struct2070 val;
     union Struct2070 sp18;
     union Struct2070 sp14;
-    Item_GObj* temp;
     union Struct2070 spC;
 
     spC.x2070_int = arg1;
@@ -181,8 +180,7 @@ void ft_800895E0(Fighter* fp, int arg1)
         val = sp18;
     }
     if (val.x2073 == 0x62) {
-        temp = fp->item_gobj;
-        if (temp != NULL && it_8026B6C8(temp) != 0) {
+        if (fp->item_gobj != NULL && it_8026B6C8(fp->item_gobj) != 0) {
             sp14.x2070_int = 0x44003D;
             val = sp14;
         }
