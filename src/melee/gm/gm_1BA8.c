@@ -278,86 +278,86 @@ void gm_801BAD70(GameScene* arg0)
     StartMeleeData* md = gm_801A427C(arg0);
     u8* r3b = (u8*) md;
     u8 level = ev->unk_535;
+    gm_803DF94C_t** event_info = gm_803DF94C;
+    struct gm_804D6900_t** levels;
     struct gm_804D6900_t** lvlpp;
-    struct gm_evinit* x8;
     s32 var_r24;
     s32 var_r22;
     s32 var_r21;
     u8* lvl;
     u8* e;
     void* sd;
+    PAD_STACK(0x20);
 
     lbArchive_LoadSymbols("GmEvent.dat", &gm_804D6900, "sqEventInitDataLevelTbl",
-                          0, (f32) (intptr_t) md);
-    lvlpp = &gm_804D6900[level];
+                          0);
+    levels = gm_804D6900;
     gm_80167A64(&md->rules);
-    x8 = (struct gm_evinit*) (*lvlpp)->x8;
-
-    r3b[0] = (r3b[0] & ~0xE0) | (x8->unk0 & 0xE0);
-    r3b[0] = (r3b[0] & ~0x1C) | (x8->unk0 & 0x1C);
-    r3b[0] = (r3b[0] & ~2) | (x8->unk0 & 2);
-    r3b[0] = (r3b[0] & ~1) | (x8->unk0 & 1);
-    r3b[1] |= 0x80;
-    r3b[1] &= ~0x40;
-    r3b[1] &= ~0x20;
-    r3b[1] &= ~0x10;
-    r3b[1] &= ~2;
-    r3b[1] = (r3b[1] & ~1) | ((x8->unk1 >> 6) & 1);
-    r3b[2] &= ~0x20;
-    r3b[2] &= ~0x10;
-    r3b[2] &= ~8;
-    r3b[2] = (r3b[2] & ~4) | ((x8->unk1 >> 3) & 4);
-    r3b[3] |= 0x40;
-    r3b[3] |= 0x20;
-    r3b[3] |= 0x10;
-    r3b[3] |= 8;
-    r3b[3] |= 4;
-    r3b[3] &= ~1;
-    r3b[4] &= ~0x20;
-    r3b[4] |= 0x10;
-    r3b[4] &= ~8;
-    r3b[4] &= ~2;
-    r3b[4] &= ~1;
-    r3b[5] |= 0x80;
-    r3b[5] &= ~0x40;
-    r3b[5] = (r3b[5] & ~0x20) | ((x8->unk1 << 1) & 0x20);
-    r3b[5] = (r3b[5] & ~0x10) | ((x8->unk1 << 1) & 0x10);
+    lvlpp = &levels[level];
+    md->rules.x0_0 = (*lvlpp)->x8->x0_0;
+    md->rules.x0_3 = (*lvlpp)->x8->x0_3;
+    md->rules.x0_6 = (*lvlpp)->x8->x0_6;
+    md->rules.x0_7 = (*lvlpp)->x8->x0_7;
+    md->rules.x1_0 = 1;
+    md->rules.x1_1 = 0;
+    md->rules.x1_2 = 0;
+    md->rules.x1_3 = 0;
+    md->rules.timer_shows_hours = 0;
+    md->rules.x1_7 = (*lvlpp)->x8->x1_1;
+    md->rules.x2_2 = 0;
+    md->rules.x2_3 = 0;
+    md->rules.x2_4 = 0;
+    md->rules.x2_5 = (*lvlpp)->x8->x1_2;
+    md->rules.x3_1 = 1;
+    md->rules.x3_2 = 1;
+    md->rules.x3_3 = 1;
+    md->rules.x3_4 = 1;
+    md->rules.x3_5 = 1;
+    md->rules.x3_7 = 0;
+    md->rules.x4_2 = 0;
+    md->rules.x4_3 = 1;
+    md->rules.x4_4 = 0;
+    md->rules.x4_6 = 0;
+    md->rules.x4_7 = 0;
+    md->rules.x5_0 = 1;
+    md->rules.x5_1 = 0;
+    md->rules.x5_2 = (*lvlpp)->x8->x1_3;
+    md->rules.x5_3 = (*lvlpp)->x8->x1_4;
     md->rules.x7 = 0;
-    md->rules.is_teams = x8->unk2;
+    md->rules.is_teams = ((struct gm_evinit*) (*lvlpp)->x8)->unk2;
     md->rules.x9 = 0;
     md->rules.xA = 0;
-    md->rules.xB = x8->unk3;
-    md->rules.xC = x8->unk4;
+    md->rules.xB = ((struct gm_evinit*) (*lvlpp)->x8)->unk3;
+    md->rules.xC = ((struct gm_evinit*) (*lvlpp)->x8)->unk4;
     md->rules.xD = 0x6E;
-    md->rules.xE = x8->unk6;
-    md->rules.x10 = x8->unk8;
+    md->rules.xE = ((struct gm_evinit*) (*lvlpp)->x8)->unk6;
+    md->rules.x10 = ((struct gm_evinit*) (*lvlpp)->x8)->unk8;
     md->rules.x14 = 0;
     md->rules.x18 = 0;
-    *(s32*) (r3b + 0x24) = x8->unk14;
-    *(u32*) (r3b + 0x20) = x8->x10;
-    md->rules.x28 = x8->x18;
-    md->rules.x30 = x8->x1C;
-    md->rules.x34 = x8->unk20;
+    *(s32*) (r3b + 0x24) = ((struct gm_evinit*) (*lvlpp)->x8)->unk14;
+    *(u32*) (r3b + 0x20) = ((struct gm_evinit*) (*lvlpp)->x8)->x10;
+    md->rules.x28 = ((struct gm_evinit*) (*lvlpp)->x8)->x18;
+    md->rules.x30 = ((struct gm_evinit*) (*lvlpp)->x8)->x1C;
+    md->rules.x34 = ((struct gm_evinit*) (*lvlpp)->x8)->unk20;
     md->rules.x44 = fn_801BBFE8;
     if (r3b[0] & 1) {
         ev->xB_0 = 1;
     }
-    if ((x8->unk1 >> 7) & 1) {
+    if ((((struct gm_evinit*) (*lvlpp)->x8)->unk1 >> 7) & 1) {
         ev->xB_6 = 1;
     }
-    if (x8->unk24 != 1.0f) {
-        ev->x1C = x8->unk24;
+    if (((struct gm_evinit*) (*lvlpp)->x8)->unk24 != 1.0f) {
+        ev->x1C = ((struct gm_evinit*) (*lvlpp)->x8)->unk24;
     }
     if (((u8*) *lvlpp)[0] == 2) {
-        u16 stage = *(u16*) ((u8*) ((struct gm_evx10*) (*lvlpp)->x10 +
-                                    ev->x20 * 2) +
-                             2);
+        u16 stage;
         ev->xB_4 = 1;
+        stage = *(u16*) ((u8*) (*lvlpp)->x10 + ev->x20 * 2 + 2);
         md->rules.xE = stage;
         ev->x48 = (InternalStageId) stage;
         if (ev->x20 > 0) {
-            r3b[1] |= 0x20;
-            r3b[1] |= 0x10;
+            md->rules.x1_2 = 1;
+            md->rules.x1_3 = 1;
             md->rules.x10 = ev->x2C;
         }
         gm_8016A92C(&md->rules);
@@ -387,7 +387,7 @@ loop_40:
         if (var_r24 == 0) {
             gm_801B05F4((PlayerInitData*) (r3b + 0x60), ev->x6);
             ev->x7 = r3b[0x69];
-            if (r3b[0x60] == 0x21) {
+            if ((s8) r3b[0x60] == 0x21) {
                 r3b[0x60] = ev->x2;
                 r3b[0x63] = ev->x3;
                 r3b[0x6A] = ev->x4;
@@ -425,7 +425,8 @@ loop_40:
                     r3b[var_r22 + 0x63] = c;
                 }
             }
-            if (r3b[0x60] == 0x13 && r3b[var_r22 + 0x60] == 0x12) {
+            if ((s8) r3b[0x60] == 0x13 &&
+                (s8) r3b[var_r22 + 0x60] == 0x12) {
                 u8 c = r3b[var_r22 + 0x63];
                 if (c == r3b[0x63]) {
                     if (c <= 2) {
@@ -472,7 +473,7 @@ loop_40:
                 r3b[0x87] = c;
             }
         }
-        if (r3b[0x60] == 0x13 && r3b[0x84] == 0x12) {
+        if ((s8) r3b[0x60] == 0x13 && (s8) r3b[0x84] == 0x12) {
             u8 c = r3b[0x87];
             if (c == r3b[0x63]) {
                 if (c <= 2) {
@@ -539,8 +540,8 @@ loop_40:
         if ((((u8*) (*lvlpp)->xC)[0x14] >> 7) & 1) {
             gm_8016A434();
         }
-        if (gm_803DF94C[level]->x4 != NULL) {
-            gm_8016A404((s32) gm_803DF94C[level]->x4);
+        if (event_info[level]->x4 != NULL) {
+            gm_8016A404((s32) event_info[level]->x4);
         }
         if (((u8*) (*lvlpp)->xC)[0x15] != 0) {
             gm_8016A424((s8) ((u8*) (*lvlpp)->xC)[0x15]);
@@ -2067,27 +2068,36 @@ void gm_801BDD44(HSD_GObj* arg0)
 void gm_801BDE94(HSD_GObj* arg0)
 {
     PlayerInitData sp50;
-    struct EventData* ev = &gmMainLib_804D3EE0->unk_530;
-    u8 level = gmMainLib_804D3EE0->unk_530.unk_535;
     struct gm_804D6900_t** tbl = gm_804D6900;
-    struct gm_804D6900_x4_t* x4 = (*tbl)->x4;
-    struct gm_evx10* x10v;
+    struct EventData* ev = &gmMainLib_804D3EE0->unk_530;
+    u8 level = ev->unk_535;
     u64 mask;
+    struct gm_804D6900_x4_t* x4 = (*tbl)->x4;
+    PAD_STACK(0x44);
 
     if (!ev->xB_5) {
         ev->xB_5 = 1;
-        x10v = (struct gm_evx10*) tbl[level]->x10;
-        if (gmMainLib_804D3EE0->unk_530.x20 == 0) {
+        if (ev->x20 == 0) {
             mask = lbAudioAx_80026E84(
                 (enum CharacterKind) (s8) (u8) *tbl[level]->x14);
-            mask |= lbAudioAx_80026E84((enum CharacterKind) x10v->unk10->unk0);
-            mask |= lbAudioAx_80026E84((enum CharacterKind) x10v->unk18->unk0);
-            mask |= lbAudioAx_80026E84((enum CharacterKind) x10v->unk1C->unk0);
+            mask |= lbAudioAx_80026E84(
+                (enum CharacterKind) ((struct gm_evx10*) tbl[level]->x10)
+                    ->unk10->unk0);
+            mask |= lbAudioAx_80026E84(
+                (enum CharacterKind) ((struct gm_evx10*) tbl[level]->x10)
+                    ->unk18->unk0);
+            mask |= lbAudioAx_80026E84(
+                (enum CharacterKind) ((struct gm_evx10*) tbl[level]->x10)
+                    ->unk1C->unk0);
         } else {
             mask = lbAudioAx_80026E84(
                 (enum CharacterKind) (s8) (u8) *tbl[level]->x14);
-            mask |= lbAudioAx_80026E84((enum CharacterKind) x10v->unk14->unk0);
-            mask |= lbAudioAx_80026E84((enum CharacterKind) x10v->unk20->unk0);
+            mask |= lbAudioAx_80026E84(
+                (enum CharacterKind) ((struct gm_evx10*) tbl[level]->x10)
+                    ->unk14->unk0);
+            mask |= lbAudioAx_80026E84(
+                (enum CharacterKind) ((struct gm_evx10*) tbl[level]->x10)
+                    ->unk20->unk0);
         }
         lbAudioAx_80026F2C(0x14);
         lbAudioAx_8002702C(4, mask);
@@ -2095,7 +2105,6 @@ void gm_801BDE94(HSD_GObj* arg0)
         lbAudioAx_80027648();
     }
 
-    x10v = (struct gm_evx10*) tbl[level]->x10;
     if (ev->xB_2) {
         ev->x10 -= 1;
         if (ev->x10 < 0) {
@@ -2107,20 +2116,20 @@ void gm_801BDE94(HSD_GObj* arg0)
         case 0:
             if (Player_GetStocks(1) <= 0) {
                 ev->x18 = 1;
-                gm_801BAB40(&sp50, (int) x10v->unk18);
+                gm_801BAB40(&sp50, (int) ((struct gm_evx10*) tbl[level]->x10)->unk18);
                 gm_8016EDDC(2, &sp50);
             }
             goto block_41;
         case 1:
             if (Player_GetStocks(2) <= 0) {
                 ev->x18 = 2;
-                gm_801BAB40(&sp50, (int) x10v->unk1C);
+                gm_801BAB40(&sp50, (int) ((struct gm_evx10*) tbl[level]->x10)->unk1C);
                 gm_8016EDDC(3, &sp50);
             }
             goto block_41;
         case 2:
             if (Player_GetStocks(3) <= 0) {
-                struct gm_evspawn* sp = x10v->unk1C;
+                struct gm_evspawn* sp = ((struct gm_evx10*) tbl[level]->x10)->unk1C;
                 s8 ckind = sp->unk0;
                 u8 color = sp->unk3;
                 if ((s8) ev->x0 == ckind && (u8) ev->x1 == color) {
@@ -2132,7 +2141,7 @@ void gm_801BDE94(HSD_GObj* arg0)
                 }
                 gm_8016AC44(ckind, color);
                 if (Player_GetP1Stock() <= 0) {
-                    ev->xB_1 = 0;
+                    gmMainLib_804D3EE0->unk_530.xB_1 = false;
                     lbAudioAx_80028B90();
                     gm_SetGameSpeed(1.0f);
                     gm_8016B33C(6);
@@ -2152,12 +2161,12 @@ void gm_801BDE94(HSD_GObj* arg0)
         case 0:
             if (Player_GetStocks(1) <= 0) {
                 ev->x18 = 1;
-                gm_801BAB40(&sp50, (int) x10v->unk20);
+                gm_801BAB40(&sp50, (int) ((struct gm_evx10*) tbl[level]->x10)->unk20);
                 gm_8016EDDC(2, &sp50);
             }
         block_41:
             if (Player_GetP1Stock() <= 0) {
-                ev->xB_1 = 0;
+                gmMainLib_804D3EE0->unk_530.xB_1 = false;
                 lbAudioAx_80028B90();
                 gm_SetGameSpeed(1.0f);
                 gm_8016B33C(6);
@@ -2180,7 +2189,7 @@ void gm_801BDE94(HSD_GObj* arg0)
                     do_end = 0;
                 }
                 if (do_end != 0) {
-                    ev2->xB_1 = 0;
+                    gmMainLib_804D3EE0->unk_530.xB_1 = false;
                     lbAudioAx_80028B90();
                     gm_SetGameSpeed(1.0f);
                     gm_8016B33C(6);
@@ -2193,7 +2202,7 @@ void gm_801BDE94(HSD_GObj* arg0)
             return;
         case 1:
             if (Player_GetStocks(2) <= 0) {
-                struct gm_evspawn* sp = x10v->unk20;
+                struct gm_evspawn* sp = ((struct gm_evx10*) tbl[level]->x10)->unk20;
                 s8 ckind = sp->unk0;
                 u8 color = sp->unk3;
                 if ((s8) ev->x0 == ckind && (u8) ev->x1 == color) {

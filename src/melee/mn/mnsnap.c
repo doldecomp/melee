@@ -1052,8 +1052,8 @@ void fn_802545C4(void)
                                     0x98)));
             }
 
-            if (((mnSnap_804A0A10.active_slot == 0) &&
-                 (mnSnap_804A0A10.card_status[1] != 0)) &&
+            slot = mnSnap_804A0A10.active_slot;
+            if (((slot == 0) && (mnSnap_804A0A10.card_status[1] != 0)) &&
                 (buttons & 8))
             {
                 lbAudioAx_80024030(2);
@@ -1083,8 +1083,7 @@ void fn_802545C4(void)
                                       0x98)));
                 }
 
-            } else if (((1 == mnSnap_804A0A10.active_slot) &&
-                        (mnSnap_804A0A10.card_status[0] != 0)) &&
+            } else if (((1 == slot) && (mnSnap_804A0A10.card_status[0] != 0)) &&
                        (buttons & 4))
             {
                 lbAudioAx_80024030(2);
@@ -1114,10 +1113,7 @@ void fn_802545C4(void)
                                       0x98)));
                 }
 
-            } else if ((mnSnap_804A0A10.active_slot >= 0) && (buttons & 0x200))
-            {
-                slot = mnSnap_804A0A10.active_slot;
-
+            } else if ((slot >= 0) && (buttons & 0x200)) {
                 if (mnSnap_804A0A10.card_status[slot] != 1) {
                     mnSnap_804A0A10.state = 3;
                     lbAudioAx_80024030(3);
@@ -1459,7 +1455,7 @@ void fn_802545C4(void)
                     translate = &mnSnap_804A0A10
                                      .thumb_jobjs[mnSnap_804A0A10.move_idx % 4]
                                      ->translate;
-                    HSD_JObjSetTranslate(jobj, translate);
+                    HSD_JObjSetTranslateWithMtxDirty(jobj, translate);
                     HSD_JObjClearFlagsAll(mnSnap_804A0A10.move_jobj, 0x10);
                 } else {
                     HSD_JObjSetFlagsAll(mnSnap_804A0A10.move_jobj, 0x10);
@@ -2367,13 +2363,27 @@ void fn_80257D7C(void)
 void mnSnap_80257F24(void)
 {
     mnSnap_State* snap = &mnSnap_804A0A10;
+    s32 zero = 0;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
     HSD_JObj* jobj2;
     HSD_JObj* pos_start;
     HSD_JObj* pos_end;
+    HSD_JObj** move_jobj_ptr;
     HSD_GObjProc* proc;
     HSD_Text* text;
+    void** main_joint;
+    void** main_animjoint;
+    void** main_matanim;
+    void** main_shapeanim;
+    void** arrows_joint;
+    void** arrows_animjoint;
+    void** arrows_matanim;
+    void** arrows_shapeanim;
+    void** warn_joint;
+    void** warn_animjoint;
+    void** warn_matanim;
+    void** warn_shapeanim;
     Vec3 start_pos;
     Vec3 end_pos;
     Vec3 pos;
@@ -2382,23 +2392,36 @@ void mnSnap_80257F24(void)
     mn_804D6BC8.cooldown = 5;
     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
     mn_804A04F0.cur_menu = 0x19;
-    mn_804A04F0.hovered_selection = 0;
+    mn_804A04F0.hovered_selection = zero;
 
     lb_8001CDB4();
     memzero(&mnSnap_804A0A10, sizeof(mnSnap_State));
 
-    snap->state = 0;
+    snap->state = zero;
     snap->timer = 6;
-    snap->photo_count[0] = 0;
-    snap->photo_count[1] = 0;
-    snap->card_status[0] = 0;
-    snap->card_status[1] = 0;
+    snap->photo_count[0] = zero;
+    snap->photo_count[1] = zero;
+    snap->card_status[0] = zero;
+    snap->card_status[1] = zero;
+
+    main_joint = &snap->main_joint;
+    main_animjoint = &snap->main_animjoint;
+    main_matanim = &snap->main_matanim;
+    main_shapeanim = &snap->main_shapeanim;
+    arrows_joint = &snap->arrows_joint;
+    arrows_animjoint = &snap->arrows_animjoint;
+    arrows_matanim = &snap->arrows_matanim;
+    arrows_shapeanim = &snap->arrows_shapeanim;
+    warn_joint = &snap->warn_joint;
+    warn_animjoint = &snap->warn_animjoint;
+    warn_matanim = &snap->warn_matanim;
+    warn_shapeanim = &snap->warn_shapeanim;
 
     lbArchive_LoadSections(
-        mn_804D6BB8, (void**) &snap->main_joint, "MenMainConSn_Top_joint",
-        (void**) &snap->main_animjoint, "MenMainConSn_Top_animjoint",
-        (void**) &snap->main_matanim, "MenMainConSn_Top_matanim_joint",
-        (void**) &snap->main_shapeanim, "MenMainConSn_Top_shapeanim_joint",
+        mn_804D6BB8, main_joint, "MenMainConSn_Top_joint",
+        main_animjoint, "MenMainConSn_Top_animjoint",
+        main_matanim, "MenMainConSn_Top_matanim_joint",
+        main_shapeanim, "MenMainConSn_Top_shapeanim_joint",
         (void**) &snap->csr_joint, "MenMainSubCsrSn_Top_joint",
         (void**) &snap->csr_animjoint, "MenMainSubCsrSn_Top_animjoint",
         (void**) &snap->csr_matanim, "MenMainSubCsrSn_Top_matanim_joint",
@@ -2411,30 +2434,31 @@ void mnSnap_80257F24(void)
         (void**) &snap->load_joint, "MenMainLoadSn_Top_joint",
         (void**) &snap->load_animjoint, "MenMainLoadSn_Top_animjoint",
         (void**) &snap->load_matanim, "MenMainLoadSn_Top_matanim_joint",
-        (void**) &snap->arrows_joint, "MenMainSubSn_Top_joint",
-        (void**) &snap->arrows_animjoint, "MenMainSubSn_Top_animjoint",
-        (void**) &snap->arrows_matanim, "MenMainSubSn_Top_matanim_joint",
-        (void**) &snap->arrows_shapeanim, "MenMainSubSn_Top_shapeanim_joint",
-        (void**) &snap->warn_joint, "MenMainWarCmn_Top_joint",
-        (void**) &snap->warn_animjoint, "MenMainWarCmn_Top_animjoint",
-        (void**) &snap->warn_matanim, "MenMainWarCmn_Top_matanim_joint",
-        (void**) &snap->warn_shapeanim, "MenMainWarCmn_Top_shapeanim_joint",
+        arrows_joint, "MenMainSubSn_Top_joint",
+        arrows_animjoint, "MenMainSubSn_Top_animjoint",
+        arrows_matanim, "MenMainSubSn_Top_matanim_joint",
+        arrows_shapeanim, "MenMainSubSn_Top_shapeanim_joint",
+        warn_joint, "MenMainWarCmn_Top_joint",
+        warn_animjoint, "MenMainWarCmn_Top_animjoint",
+        warn_matanim, "MenMainWarCmn_Top_matanim_joint",
+        warn_shapeanim, "MenMainWarCmn_Top_shapeanim_joint",
         0);
 
     /* Main GObj */
     gobj = GObj_Create(6, 7, 0x80);
     snap->main_gobj = gobj;
-    jobj = HSD_JObjLoadJoint((HSD_Joint*) snap->main_joint);
+    jobj = HSD_JObjLoadJoint((HSD_Joint*) *main_joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, (GObj_RenderFunc) fn_80253DB4, 4, 0x80);
-    HSD_JObjAddAnimAll(jobj, (HSD_AnimJoint*) snap->main_animjoint,
-                       (HSD_MatAnimJoint*) snap->main_matanim,
-                       (HSD_ShapeAnimJoint*) snap->main_shapeanim);
+    HSD_JObjAddAnimAll(jobj, (HSD_AnimJoint*) *main_animjoint,
+                       (HSD_MatAnimJoint*) *main_matanim,
+                       (HSD_ShapeAnimJoint*) *main_shapeanim);
     HSD_JObjReqAnimAll(jobj, 0.0F);
     lb_80011E24(jobj, (HSD_JObj**) &snap->thumb_jobjs[0], 8, 9, 0xA, 0xB, 0xC,
                 0xD);
 
-    snap->blank_img = *(void**) (snap->slot_a_jobj)->u.dobj->next->next->aobj;
+    snap->blank_img =
+        *(void**) (snap->slot_a_jobj)->u.dobj->mobj->tobj->imagedesc;
 
     if (snap->photo_count[snap->active_slot] <= 4) {
         HSD_JObjSetFlagsAll(snap->arrow_jobj, 0x10);
@@ -2442,24 +2466,25 @@ void mnSnap_80257F24(void)
         HSD_JObjClearFlagsAll(snap->arrow_jobj, 0x10);
     }
 
-    HSD_AObjSetFlags((snap->select_jobj)->u.dobj->next->next->aobj,
+    HSD_AObjSetFlags((snap->select_jobj)->u.dobj->mobj->tobj->aobj,
                      0x20000000);
 
-    HSD_JObjSetFlagsAll(snap->move_jobj, 0x10);
-    HSD_AObjSetFlags((snap->move_jobj)->u.dobj->next->next->aobj, 0x20000000);
+    move_jobj_ptr = &snap->move_jobj;
+    HSD_JObjSetFlagsAll(*move_jobj_ptr, 0x10);
+    HSD_AObjSetFlags((*move_jobj_ptr)->u.dobj->mobj->tobj->aobj, 0x20000000);
 
     HSD_GObj_SetupProc(gobj, (HSD_GObjEvent) fn_802545C4, 0);
 
     /* Sub GObj (arrows/cursor) */
     gobj = GObj_Create(6, 7, 0x80);
     snap->sub_gobj = gobj;
-    jobj = HSD_JObjLoadJoint((HSD_Joint*) snap->arrows_joint);
+    jobj = HSD_JObjLoadJoint((HSD_Joint*) *arrows_joint);
     HSD_JObjSetTranslateX(jobj, 3.3F);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, (GObj_RenderFunc) fn_80253DE8, 4, 0x80);
-    HSD_JObjAddAnimAll(jobj, (HSD_AnimJoint*) snap->arrows_animjoint,
-                       (HSD_MatAnimJoint*) snap->arrows_matanim,
-                       (HSD_ShapeAnimJoint*) snap->arrows_shapeanim);
+    HSD_JObjAddAnimAll(jobj, (HSD_AnimJoint*) *arrows_animjoint,
+                       (HSD_MatAnimJoint*) *arrows_matanim,
+                       (HSD_ShapeAnimJoint*) *arrows_shapeanim);
     HSD_JObjReqAnimAll(jobj, 0.0F);
     HSD_JObjAnimAll(jobj);
     lb_80011E24(jobj, (HSD_JObj**) &snap->slot_a_jobj, 1, 2, 3, 4, -1);
@@ -2589,12 +2614,12 @@ void mnSnap_80257F24(void)
     /* Warning cmn GObj */
     gobj = GObj_Create(6, 7, 0x80);
     snap->warn_gobj = gobj;
-    jobj = HSD_JObjLoadJoint((HSD_Joint*) snap->warn_joint);
+    jobj = HSD_JObjLoadJoint((HSD_Joint*) *warn_joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, (GObj_RenderFunc) fn_80253E5C, 6, 0x80);
-    HSD_JObjAddAnimAll(jobj, (HSD_AnimJoint*) snap->warn_animjoint,
-                       (HSD_MatAnimJoint*) snap->warn_matanim,
-                       (HSD_ShapeAnimJoint*) snap->warn_shapeanim);
+    HSD_JObjAddAnimAll(jobj, (HSD_AnimJoint*) *warn_animjoint,
+                       (HSD_MatAnimJoint*) *warn_matanim,
+                       (HSD_ShapeAnimJoint*) *warn_shapeanim);
     HSD_JObjReqAnimAll(jobj, 10.0F);
     HSD_JObjAnimAll(jobj);
     lb_80011E24(jobj, (HSD_JObj**) &snap->dlg_root, 0, 2, 4, 5, 6, 7);

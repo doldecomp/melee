@@ -196,27 +196,35 @@ void DevText_SetupCObj(void)
 
 void DevText_Draw(DevText* text)
 {
-    PAD_STACK(24);
+    PAD_STACK(8);
     hsd_80391A04(text->scale_x, text->scale_y, text->line_width);
     if ((text->flags & DEVTEXT_FLAG_HIDEBACKGROUND) == 0) {
+        GXColor color = text->bg_color;
         DrawRectangle(text->x - 8, text->y - 8, text->scale_x * text->w + 8,
-                      text->scale_y * text->h + 8, &text->bg_color);
-        DrawRectangle(text->x - 4, text->y - 4, text->scale_x * text->w + 4,
-                      text->scale_y * text->h + 4, &text->bg_color);
+                      text->scale_y * text->h + 8, &color);
+        {
+            GXColor color = text->bg_color;
+            DrawRectangle(text->x - 4, text->y - 4,
+                          text->scale_x * text->w + 4,
+                          text->scale_y * text->h + 4, &color);
+        }
     }
     if ((text->flags & DEVTEXT_FLAG_HIDETEXT) == 0) {
-        int row = 0;
+        GXColor color;
+        GXColor* color_ptr = &color;
         int y = text->y;
+        int row = 0;
         while (row < text->h) {
-            int col = 0;
             int x = text->x;
+            int col = 0;
             while (col < text->w) {
                 int index = (col + text->w * row) * 2;
-                int chr = text->buf[index];
-                if (chr) {
-                    GXColor* color =
-                        &text->text_colors[text->buf[index + 1] >> 6];
-                    DrawASCII(chr, x, y, color);
+                u8* buf = (u8*) &text->buf[index];
+                u8 chr = buf[0];
+                u8 color_idx = (buf[1] & 0xC0) >> 6;
+                if ((s8) chr) {
+                    color = text->text_colors[color_idx];
+                    DrawASCII((s8) chr, x, y, color_ptr);
                 }
                 x += text->scale_x;
                 col++;
@@ -225,17 +233,15 @@ void DevText_Draw(DevText* text)
             row++;
         }
     }
-    if ((text->flags & DEVTEXT_FLAG_SHOWCURSOR) == 1) {
+    if (text->flags & DEVTEXT_FLAG_SHOWCURSOR) {
         text->unk++;
-        if (text->unk < 16) {
-            if (8 < text->unk) {
-                GXColor color = { 0xFF, 0xFF, 0xFF, 0xC0 };
-                DrawRectangle(text->x + text->scale_x * text->cursor_x,
-                              text->y + text->scale_y * text->cursor_y,
-                              text->scale_x, text->scale_y, &color);
-            }
-        } else {
+        if (text->unk > 16) {
             text->unk = 0;
+        } else if (8 < text->unk) {
+            GXColor color = { 0xFF, 0xFF, 0xFF, 0xC0 };
+            DrawRectangle(text->x + text->scale_x * text->cursor_x,
+                          text->y + text->scale_y * text->cursor_y - 4,
+                          text->scale_x, text->scale_y, &color);
         }
     }
 }

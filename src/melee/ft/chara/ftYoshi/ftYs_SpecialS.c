@@ -161,9 +161,9 @@ static inline void ftYs_SpecialS_WrapAndSetRotX(Fighter_GObj* gobj)
 
 static inline s32 ftYs_SpecialS_CheckButtonPressure(Fighter_GObj* gobj)
 {
-    s32 result = 0;
     Fighter* fp = GET_FIGHTER(gobj);
     ftYoshiAttributes* attrs = fp->dat_attrs;
+    s32 result = 0;
     if ((u8) fp->x673 < attrs->x98) {
         result = 1;
     }

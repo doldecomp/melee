@@ -671,11 +671,12 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
     Ground* gp = gobj->user_data;
     HSD_JObj* root_jobj = gobj->hsd_obj;
     HSD_GObj* fighter;
-    Vec3 fighter_pos;
     HSD_JObj* jobj;
     int i;
     Vec3 pos;
-    Vec3 rot;
+    volatile Vec3 rot;
+    Vec3 fighter_pos;
+    PAD_STACK(0x4C);
 
     fighter = Ground_801C57A4();
     if (fighter == NULL) {
@@ -686,7 +687,11 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
     if (root_jobj == NULL) {
         return;
     }
-    jobj = HSD_JObjGetChild(root_jobj);
+    if (root_jobj == NULL) {
+        jobj = NULL;
+    } else {
+        jobj = root_jobj->child;
+    }
     if (jobj == NULL) {
         return;
     }

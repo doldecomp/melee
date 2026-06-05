@@ -653,7 +653,7 @@ void mn_80229860(s8 pending_mode)
     gm_801A4B60();
 }
 
-static char null_terminator[1] = "\0";
+extern char null_terminator[1];
 
 void mn_8022EA08(char* buf, u32 num)
 {
@@ -2912,6 +2912,8 @@ void mn_8022DDA8_OnEnter(MenuEnterData* data)
     lbAudioAx_80023F28(gmMainLib_8015ECB0());
     lb_8001CE00();
 }
+
+char null_terminator[1] = "\0";
 
 bool mn_IsFighterUnlocked(int arg0)
 {

@@ -425,13 +425,13 @@ void fn_80039618(int player)
     u32 aerials = stats->hits.aerials_count;
     u32 atk_thrown = stats->attacks.thrown_item_count;
     u32* atk_counts = stats->attacks.by_attack_counts;
-    u32 hit_x1A8 = stats->hits.x1A8;
     u32 atk_x1A8 = stats->attacks.x1A8;
     u32* hit_counts = stats->hits.by_attack_counts;
     u32 hit_thrown = stats->hits.thrown_item_count;
     u32* x358_counts = stats->x358_hits.by_attack_counts;
     u32 hit_specials = stats->hits.specials_count;
     u32 hit_x1A0 = stats->hits.x1A0_count;
+    u32 hit_x1A8 = stats->hits.x1A8;
     u32 x358_x1A8 = stats->x358_hits.x1A8;
     u32 attacks_total = stats->attacks.total;
     u32 hits_total = stats->hits.total;
@@ -528,9 +528,12 @@ void fn_80039618(int player)
     }
     {
         u32* p = &x358_counts[1];
-        int count = 0;
-        s32 max = 0;
-        s32 min = 0;
+        s32 max;
+        s32 min;
+        int count;
+        count = 0;
+        min = 0;
+        max = 0;
         for (i = 99; i != 0; i--) {
             u32 c = *p;
             if (c != 0) {
@@ -729,7 +732,7 @@ void fn_80039618(int player)
             setFlag(player, 0x68);
         }
     }
-    PAD_STACK(16);
+    PAD_STACK(20);
 }
 
 void fn_8003B044(int player)

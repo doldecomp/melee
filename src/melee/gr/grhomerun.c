@@ -226,17 +226,17 @@ void grHomeRun_8021CB20(Ground_GObj* gobj)
     f32 gobjs_num;
     HSD_GObj** gobjs;
     HSD_GObj** jobjs;
-    PAD_STACK(8);
+    PAD_STACK(24);
 
     Ground_801C2ED0(jobj, gp->map_id);
 
-    gobjs = HSD_MemAlloc(0x100);
-    HSD_ASSERT(0x17A, gobjs);
-    vars->gobjs = gobjs;
+    vars->gobjs = HSD_MemAlloc(0x100);
+    HSD_ASSERT(0x17A, vars->gobjs);
+    gobjs = vars->gobjs;
 
-    jobjs = HSD_MemAlloc(0x40);
-    HSD_ASSERT(0x17B, jobjs);
-    vars->jobj_gobjs = jobjs;
+    vars->jobj_gobjs = HSD_MemAlloc(0x40);
+    HSD_ASSERT(0x17B, vars->jobj_gobjs);
+    jobjs = vars->jobj_gobjs;
 
     HSD_JObjSetScaleX(jobj, grHr_804D6AE4 * HSD_JObjGetScaleX(jobj));
     HSD_JObjSetScaleY(jobj, grHr_804D6AE4 * HSD_JObjGetScaleY(jobj));

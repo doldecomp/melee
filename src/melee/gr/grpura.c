@@ -331,57 +331,68 @@ void grPura_802125EC(Ground_GObj* arg0) {}
 
 void grPura_802125F0(HSD_GObj* arg0)
 {
-    struct _GXColor thingy = grPu_803E6AA0[5];
-    float dVar1 = grPu_804DBA70;
-    float dVar2 = grPu_804DBA74;
-    int uVar3 = 0;
-    int uVar5;
-    int uVar6 = 0;
+    struct Pura_UnkModelDesc {
+        s16 x0;
+        s16 x2;
+        f32 x4;
+        s32 x8;
+    }* desc = (void*) ((char*) grPu_803E6800 + 0x2B0);
+    f32 scale;
+    s32 i;
+    s32 joint;
     HSD_GObj* gobj;
     Ground* gp;
     HSD_JObj* jobj;
-    do {
-        gobj = grPura_80211E08_noinline2(1);
+    HSD_JObj* child;
 
-        HSD_ASSERT(0x291, gobj);
-        gp = GET_GROUND(gobj);
-        HSD_ASSERT(0x292, gp);
-        uVar3 = Ground_801C33C0(4, gp->gv.pura2.xC4);
-        gp->gv.pura2.xC8 = Ground_801C3FA4(arg0, gp->gv.pura.xC4);
+    for (i = 0; i < 27; i++, desc++) {
+        if (desc->x8 != -1) {
+            gobj = grPura_80211E08(desc->x8);
+            HSD_ASSERT(0x291, gobj);
+            gp = GET_GROUND(gobj);
+            HSD_ASSERT(0x292, gp);
 
-        HSD_JObjSetTranslateX(arg0->hsd_obj,
-                              HSD_JObjGetTranslationX(gp->gv.pura2.xC8));
-        HSD_JObjSetTranslateY(arg0->hsd_obj,
-                              HSD_JObjGetTranslationY(gp->gv.pura2.xC8));
-        HSD_JObjSetTranslateZ(arg0->hsd_obj,
-                              HSD_JObjGetTranslationZ(gp->gv.pura2.xC8));
+            gp->gv.pura2.xC4 = desc->x0;
+            joint = Ground_801C33C0(4, gp->gv.pura2.xC4);
+            gp->gv.pura2.xC8 = Ground_801C3FA4(arg0, gp->gv.pura2.xC4);
 
-        if (HSD_JObjGetFlags(gp->gv.pura2.xC8) & 0x10) {
-            HSD_JObjSetFlagsAll(arg0->hsd_obj, 0x10);
+            jobj = gobj->hsd_obj;
+            HSD_JObjSetTranslateX(
+                jobj, HSD_JObjGetTranslationX(gp->gv.pura2.xC8));
+            HSD_JObjSetTranslateY(
+                jobj, HSD_JObjGetTranslationY(gp->gv.pura2.xC8));
+            HSD_JObjSetTranslateZ(
+                jobj, HSD_JObjGetTranslationZ(gp->gv.pura2.xC8));
+
+            if (HSD_JObjGetFlags(gp->gv.pura2.xC8) & 0x10) {
+                HSD_JObjSetFlagsAll(jobj, 0x10);
+            }
+
+            jobj = gobj->hsd_obj;
+            if (jobj == NULL) {
+                child = NULL;
+            } else {
+                child = jobj->child;
+            }
+            HSD_JObjSetTranslateX(child, 0.0f);
+            HSD_JObjSetTranslateY(child, 0.0f);
+            HSD_JObjSetTranslateZ(child, 0.0f);
+
+            jobj = gp->gv.pura2.xC8;
+            scale = HSD_JObjGetScaleX(jobj);
+            if (scale < 2.0f) {
+                scale *= desc->x4;
+            }
+            HSD_JObjSetScaleX(jobj, scale);
+            HSD_JObjSetScaleY(jobj, scale);
+            HSD_JObjSetScaleZ(jobj, scale);
+
+            jobj = gobj->hsd_obj;
+            HSD_JObjSetScaleX(jobj, scale);
+            HSD_JObjSetScaleY(jobj, scale);
+            HSD_JObjSetScaleZ(jobj, scale);
         }
-        jobj = gobj->hsd_obj;
-        // if (jobj->child) {
-
-        //}
-        // everything after this point is very much not done
-        HSD_JObjSetTranslateX(arg0->hsd_obj,
-                              HSD_JObjGetTranslationX(jobj->child));
-        HSD_JObjSetTranslateY(arg0->hsd_obj,
-                              HSD_JObjGetTranslationY(jobj->child));
-        HSD_JObjSetTranslateZ(arg0->hsd_obj,
-                              HSD_JObjGetTranslationZ(jobj->child));
-
-        HSD_JObjSetTranslateX(
-            arg0->hsd_obj,
-            HSD_JObjGetTranslationX(Ground_801C3FA4(arg0, uVar3)));
-        HSD_JObjSetTranslateY(
-            arg0->hsd_obj,
-            HSD_JObjGetTranslationY(Ground_801C3FA4(arg0, uVar3)));
-        HSD_JObjSetTranslateZ(
-            arg0->hsd_obj,
-            HSD_JObjGetTranslationZ(Ground_801C3FA4(arg0, uVar3)));
-        uVar6++;
-    } while (uVar6 < 27);
+    }
 }
 
 void grPura_80212CD4(HSD_GObj* arg0)

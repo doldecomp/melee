@@ -873,13 +873,13 @@ void lbBgFlash_80021410(void* arg0)
                    (sum_len *
                     (sum_len *
                      (sum_len * (sum_len * (sum_len * sum_len)))))))))) /
-             (10.0f *
-              (len_ab *
+              (10.0f *
                (len_ab *
                 (len_ab *
                  (len_ab *
                   (len_ab *
-                   (len_ab * (len_ab * (len_ab * (len_ab * len_ab)))))))))));
+                   (len_ab *
+                    (len_ab * (len_ab * (len_ab * (len_ab * len_ab)))))))))));
     }
 
     cos1 = ((a2 + b2) - c2) / (two_a * len_ab);

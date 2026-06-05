@@ -455,6 +455,8 @@ s32 PickAutoName(HSD_GObj* arg0)
     return (s32) (s8) mnNameNew_NullCharacter;
 }
 
+#pragma push
+#pragma dont_inline on
 bool NameContainsOnlySpaces(void)
 {
     char* text = mnNameNew_CurrentNameText;
@@ -473,6 +475,7 @@ bool NameContainsOnlySpaces(void)
     }
     return true;
 }
+#pragma pop
 
 s32 WriteCharactersForNameAtIndex(u8 arg0, s32 arg1)
 {
@@ -680,8 +683,9 @@ void mnNameNew_GlyphVariantInput(void)
 void mnNameNew_MainInput(HSD_GObj* arg0)
 {
     u8 sp24[16];
-    NameNewEntry* data;
     char* name_text;
+    NameNewEntry* data;
+    MnNameNewDataLayout* layout;
     u32 buttons;
     s32 var_r29;
     s32 key_off;
@@ -693,10 +697,11 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
     u8 cursor;
     s32 n;
 
-    PAD_STACK(24);
+    PAD_STACK(12);
 
     name_text = mnNameNew_CurrentNameText;
     data = ((HSD_GObj*) mnNameNew_804D6C08)->user_data;
+    layout = (MnNameNewDataLayout*) mnNameNew_803EDA58;
 
     if (data->variant_gobj != NULL) {
         mnNameNew_GlyphVariantInput();
@@ -713,7 +718,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
         if (sel < 0x32U) {
             if (data->mode != 2 && sel < 0x32U) {
                 key_off = (((u8) sel) << 4) & 0xFF0;
-                key_char = *(u8**) ((u8*) mnNameNew_803EDCE4 + key_off);
+                key_char = *(u8**) ((u8*) layout->lower_glyphs + key_off);
                 if ((s8) mnNameNew_SpaceCharacter[0] == (s8) key_char[0] &&
                     (s8) mnNameNew_SpaceCharacter[1] == (s8) key_char[1])
                 {
@@ -727,7 +732,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                     n = 0;
                     {
                         u16 sel2 = mn_804A04F0.hovered_selection;
-                        u8** ptrs = (u8**) ((u8*) mnNameNew_803EDCE4 +
+                        u8** ptrs = (u8**) ((u8*) layout->lower_glyphs +
                                             ((((u8) sel2) << 4) & 0xFF0));
                         null_char = (s8) mnNameNew_NullCharacter;
                         while (null_char != (s8) *ptrs[0]) {

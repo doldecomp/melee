@@ -110,12 +110,13 @@ void fn_802FDA78(HSD_GObj* gobj)
     struct un_804A1F10_t* p = &un_804A1F10;
     int i;
     float v[] = { 0.0, -1.3, -2.6, -3.9 };
-    HSD_JObj* jobj = gobj->hsd_obj;
+    HSD_JObj* jobj = HSD_GObjGetHSDObj(gobj);
     unsigned char* pslot = gobj->user_data;
     unsigned char slot = *pslot;
     u8 j = 0;
     u8 k = 0;
     HSD_JObjSetTranslateZ(jobj, 0.0);
+    PAD_STACK(12);
     {
         HSD_MObj* m = jobj->child->u.dobj->mobj;
         m->mat->diffuse.r = p->x14[slot].r;
@@ -165,7 +166,7 @@ void fn_802FDA78(HSD_GObj* gobj)
             }
         }
         HSD_JObjSetRotationZ(jobj, 0.0);
-        HSD_JObjSetTranslateY(jobj, 2.6f * j + v[k == 0 ? 0 : k - 1]);
+        HSD_JObjSetTranslateY(jobj, 2.6f * j + v[k != 0 ? k - 1 : 0]);
         HSD_JObjSetTranslateX(jobj, -25.0);
         break;
     case 2:
@@ -188,7 +189,7 @@ void fn_802FDA78(HSD_GObj* gobj)
             }
         }
         HSD_JObjSetRotationZ(jobj, 3.1415927);
-        HSD_JObjSetTranslateY(jobj, 2.6f * j + v[k == 0 ? 0 : k - 1]);
+        HSD_JObjSetTranslateY(jobj, 2.6f * j + v[k != 0 ? k - 1 : 0]);
         HSD_JObjSetTranslateX(jobj, 25.0);
         break;
     }

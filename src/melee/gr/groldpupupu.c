@@ -542,6 +542,7 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
                 grAnime_801C8138(
                     gobj, gp->map_id,
                     grOp_804D48C8[gp->gv.oldpupupu.xCC][gp->gv.oldpupupu.xD8]);
+                gp = gobj->user_data;
                 other_gp = Ground_801C2BA4(1)->user_data;
                 other_gp->gv.oldpupupu.xC4 = gp->gv.oldpupupu.xC4;
                 other_gp->gv.oldpupupu.xC8 = gp->gv.oldpupupu.xC8;

@@ -55,30 +55,744 @@
                              __FILE__, line, line_id);                        \
     } while (0)
 
-static Vec2 mpLib_803BF718[2] = { { -1.0F, -400.0F }, { 1.0F, -400.0F } };
-static MapLine mpLib_803BF728 = { 0, 1, -1, -1, -1, -1, 1, 0 };
-static MapJoint mpLib_803BF738 = {
-    1, 0, 0, 0, 0, -9.0F, -408.0F, 9.0F, -392.0F, 2,
+struct mpLib_803BF248_t_x4 {
+    float x0;
+    int x4[4];
+    int x14[3];
+    int x20[4];
+    int x30[3];
+    int x3C[4];
+    int x4C[3];
 };
-static MapCollData mpLib_803BF760 = {
-    /*  +0 */ mpLib_803BF718,
-    /*  +4 */ 2,
-    /*  +8 */ &mpLib_803BF728,
-    /*  +C */ 0x00000001,
-    /* +10 */ 0,
-    /* +12 */ 1,
-    /* +14 */ 0,
-    /* +16 */ 0,
-    /* +18 */ 0,
-    /* +1A */ 0,
-    /* +1C */ 0,
-    /* +1E */ 0,
-    /* +20 */ 0,
-    /* +22 */ 0,
-    /* +24 */ &mpLib_803BF738,
-    /* +28 */ 0x00000001,
-    /* +2C */ 0x00000000,
+
+struct mpLib_803BF248_t {
+    InternalStageId id;
+    struct mpLib_803BF248_t_x4* (*x4)[20];
 };
+struct mpLib_803BF248_t_x4 mpLib_803BD3D8 = {
+    1.0F,         { -1, -1, -1, -1 }, { 0, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { -1, -1, -1, -1 }, { 0, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD430 = {
+    1.0F,         { 0x161, 0x161, 0x161, 0x161 },
+    { 1, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { 0x036, 0x037, 0x038, 0x039 },
+    { 1, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD488 = {
+    1.5F,         { 0x152, 0x152, 0x152, 0x152 },
+    { 1, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { 0x01D, 0x01E, 0x01F, 0x020 },
+    { 1, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD4E0 = {
+    1.0F,         { 0x155, 0x155, 0x155, 0x155 },
+    { 1, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { 0x022, 0x023, 0x024, 0x025 },
+    { 1, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD538 = {
+    1.0F,         { 0x16D, 0x16D, 0x16D, 0x16D },
+    { 1, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { 0x00E, 0x00F, 0x010, 0x011 },
+    { 0, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD590 = {
+    1.0F,         { 0x15B, 0x15B, 0x15B, 0x15B },
+    { 1, -1, 0 }, { 0x04B, 0x04B, 0x04C, 0x04C },
+    { 1, -1, 0 }, { 0x02C, 0x02D, 0x02E, 0x02F },
+    { 1, -1, 1 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD5E8 = {
+    1.0F,         { 0x158, 0x158, 0x158, 0x158 },
+    { 1, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { 0x027, 0x028, 0x029, 0x02A },
+    { 1, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD640 = {
+    1.0F,         { 0x16A, 0x16A, 0x16A, 0x16A },
+    { 1, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { 0x03B, 0x03C, 0x03D, 0x03E },
+    { 1, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD698 = {
+    1.0F,         { 0x15E, 0x15E, 0x15E, 0x15E },
+    { 0, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { 0x031, 0x032, 0x033, 0x034 },
+    { 0, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD6F0 = {
+    1.0F,         { -1, -1, -1, -1 }, { 0, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { -1, -1, -1, -1 }, { 0, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD748 = {
+    1.0F,         { 0x14F, 0x14F, 0x14F, 0x14F },
+    { 1, -1, 0 }, { 0x20E, 0x20E, 0x20E, 0x20E },
+    { 0, -1, 0 }, { 0x018, 0x019, 0x01A, 0x01B },
+    { 1, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD7A0 = {
+    1.0F,
+    { 0x14F, 0x14F, 0x14F, 0x14F },
+    { 1, 0x00007537, 0 },
+    { 0x20E, 0x20E, 0x20E, 0x20E },
+    { 0, 0x00007538, 0 },
+    { 0x018, 0x019, 0x01A, 0x01B },
+    { 1, 0x0000753B, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD7F8 = {
+    1.0F,
+    { 0x14F, 0x14F, 0x14F, 0x14F },
+    { 1, 0x00007539, 0 },
+    { 0x20E, 0x20E, 0x20E, 0x20E },
+    { 0, 0x00007533, 0 },
+    { 0x018, 0x019, 0x01A, 0x01B },
+    { 1, 0x0000753A, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD850 = {
+    1.0F,
+    { 0x14F, 0x14F, 0x14F, 0x14F },
+    { 1, 0x0000754A, 0 },
+    { 0x20E, 0x20E, 0x20E, 0x20E },
+    { 0, 0x00007539, 0 },
+    { 0x018, 0x019, 0x01A, 0x01B },
+    { 1, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD8A8 = {
+    1.0F,         { -1, -1, -1, -1 }, { 0, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { -1, -1, -1, -1 }, { 0, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD900 = {
+    0.1F,         { -1, -1, -1, -1 }, { 0, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { -1, -1, -1, -1 }, { 0, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD958 = {
+    0.9F,         { -1, -1, -1, -1 }, { 0, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { -1, -1, -1, -1 }, { 0, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD9B0 = {
+    1.0F,         { 0x14C, 0x14C, 0x14C, 0x14C },
+    { 1, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { 0x013, 0x014, 0x015, 0x016 },
+    { 1, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BDA08 = {
+    1.0F,
+    { 0x14C, 0x14C, 0x14C, 0x14C },
+    { 1, 0x00007531, 0 },
+    { -1, -1, -1, -1 },
+    { 0, 0x00007532, 0 },
+    { 0x013, 0x014, 0x015, 0x016 },
+    { 1, 0x00007533, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BDA60 = {
+    0.2F,         { 0x164, 0x164, 0x164, 0x164 },
+    { 1, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { 0x036, 0x037, 0x038, 0x039 },
+    { 1, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BDAB8 = {
+    1.0F,         { 0x170, 0x170, 0x170, 0x170 },
+    { 0, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { 0x040, 0x041, 0x042, 0x043 },
+    { 0, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BDB10 = {
+    0.1F,         { 0x15E, 0x15E, 0x15E, 0x15E },
+    { 1, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { 0x031, 0x032, 0x033, 0x034 },
+    { 1, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BDB68 = {
+    1.0F,         { 0x167, 0x167, 0x167, 0x167 },
+    { 1, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { 0x03B, 0x03C, 0x03D, 0x03E },
+    { 1, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BDBC0 = {
+    1.0F,         { -1, -1, -1, -1 }, { 0, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { -1, -1, -1, -1 }, { 0, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BDC18[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BDC68[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BDCB8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BDD08[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BDD58[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BDDA8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BDDF8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BDE48[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BDE98[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BDEE8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BDF38[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BDF88[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BDFD8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD7A0, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE028[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE078[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE0C8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE118[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD850, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE168[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE1B8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE208[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE258[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE2A8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE2F8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BDA08, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE348[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE398[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE3E8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE438[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE488[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE4D8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE528[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE578[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE5C8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE618[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD7F8, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE668[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE6B8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE708[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE758[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE7A8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE7F8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE848[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE898[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE8E8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE938[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE988[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE9D8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEA28[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEA78[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEAC8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEB18[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEB68[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEBB8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEC08[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEC58[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BECA8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BECF8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BED48[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BED98[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEDE8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEE38[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEE88[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEED8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEF28[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEF78[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEFC8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BF018[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BF068[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BF0B8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BF108[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BF158[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BF1A8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BF1F8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+
+/// clang-format off
+static struct mpLib_803BF248_t mpLib_803BF248[0x47] = {
+    { InternalStageID_Unk00, &mpLib_803BDC18 },
+    { TEST, &mpLib_803BDC68 },
+    { CASTLE, &mpLib_803BDCB8 },
+    { RCRUISE, &mpLib_803BDD08 },
+    { KONGO, &mpLib_803BDD58 },
+    { GARDEN, &mpLib_803BDDA8 },
+    { GREATBAY, &mpLib_803BDDF8 },
+    { SHRINE, &mpLib_803BDE48 },
+    { ZEBES, &mpLib_803BDE98 },
+    { KRAID, &mpLib_803BDEE8 },
+    { STORY, &mpLib_803BDF38 },
+    { YORSTER, &mpLib_803BDF88 },
+    { IZUMI, &mpLib_803BDFD8 },
+    { GREENS, &mpLib_803BE028 },
+    { CORNERIA, &mpLib_803BE078 },
+    { VENOM, &mpLib_803BE0C8 },
+    { PSTADIUM, &mpLib_803BE118 },
+    { PURA, &mpLib_803BE168 },
+    { MUTECITY, &mpLib_803BE1B8 },
+    { BIGBLUE, &mpLib_803BE208 },
+    { ONETT, &mpLib_803BE258 },
+    { FOURSIDE, &mpLib_803BE2A8 },
+    { ICEMTN, &mpLib_803BE2F8 },
+    { InternalStageID_Unk23, &mpLib_803BE348 },
+    { INISHIE1, &mpLib_803BE398 },
+    { INISHIE2, &mpLib_803BE3E8 },
+    { InternalStageID_Unk26, &mpLib_803BE438 },
+    { FLATZONE, &mpLib_803BE488 },
+    { OLDPUPUPU, &mpLib_803BE4D8 },
+    { OLDYOSHI, &mpLib_803BE528 },
+    { OLDKONGO, &mpLib_803BE578 },
+    { KINOKOROUTE, &mpLib_803BE5C8 },
+    { SHRINEROUTE, &mpLib_803BE618 },
+    { ZEBESROUTE, &mpLib_803BE668 },
+    { BIGBLUEROUTE, &mpLib_803BE6B8 },
+    { InternalStageID_Unk35, &mpLib_803BE708 },
+    { BATTLE, &mpLib_803BE758 },
+    { LAST, &mpLib_803BE7A8 },
+    { FIGUREGET, &mpLib_803BE7F8 },
+    { PUSHON, &mpLib_803BE848 },
+    { TMARIO, &mpLib_803BE898 },
+    { TCAPTAIN, &mpLib_803BE8E8 },
+    { TCLINK, &mpLib_803BE938 },
+    { TDONKEY, &mpLib_803BE988 },
+    { TDRMARIO, &mpLib_803BE9D8 },
+    { TFALCO, &mpLib_803BEA28 },
+    { TFOX, &mpLib_803BEA78 },
+    { TICECLIMBER, &mpLib_803BEAC8 },
+    { TKIRBY, &mpLib_803BEB18 },
+    { TKOOPA, &mpLib_803BEB68 },
+    { TLINK, &mpLib_803BEBB8 },
+    { TLUIGI, &mpLib_803BEC08 },
+    { TMARS, &mpLib_803BEC58 },
+    { TMEWTWO, &mpLib_803BECA8 },
+    { TNESS, &mpLib_803BECF8 },
+    { TPEACH, &mpLib_803BED48 },
+    { TPICHU, &mpLib_803BED98 },
+    { TPIKACHU, &mpLib_803BEDE8 },
+    { TPURIN, &mpLib_803BEE38 },
+    { TSAMUS, &mpLib_803BEE88 },
+    { TSEAK, &mpLib_803BEED8 },
+    { TYOSHI, &mpLib_803BEF28 },
+    { TZELDA, &mpLib_803BEF78 },
+    { TGAMEWATCH, &mpLib_803BEFC8 },
+    { TEMBLEM, &mpLib_803BF018 },
+    { TGANON, &mpLib_803BF068 },
+    { HEAL, &mpLib_803BF0B8 },
+    { HOMERUN, &mpLib_803BF108 },
+    { FIGURE1, &mpLib_803BF158 },
+    { FIGURE2, &mpLib_803BF1A8 },
+    { FIGURE3, &mpLib_803BF1F8 },
+};
+/// clang-format on
+
+
+
+extern Vec2 mpLib_803BF718[2];
+extern MapLine mpLib_803BF728;
+extern MapJoint mpLib_803BF738;
+extern MapCollData mpLib_803BF760;
 
 MapCollData* mpLib_8004D164(void)
 {
@@ -4053,737 +4767,31 @@ bool mpGetSpeed(int line_id, Vec3* pos, Vec3* speed)
     return true;
 }
 
-struct mpLib_803BF248_t_x4 {
-    float x0;
-    int x4[4];
-    int x14[3];
-    int x20[4];
-    int x30[3];
-    int x3C[4];
-    int x4C[3];
+Vec2 mpLib_803BF718[2] = { { -1.0F, -400.0F }, { 1.0F, -400.0F } };
+MapLine mpLib_803BF728 = { 0, 1, -1, -1, -1, -1, 1, 0 };
+MapJoint mpLib_803BF738 = {
+    1, 0, 0, 0, 0, -9.0F, -408.0F, 9.0F, -392.0F, 2,
+};
+MapCollData mpLib_803BF760 = {
+    /*  +0 */ mpLib_803BF718,
+    /*  +4 */ 2,
+    /*  +8 */ &mpLib_803BF728,
+    /*  +C */ 0x00000001,
+    /* +10 */ 0,
+    /* +12 */ 1,
+    /* +14 */ 0,
+    /* +16 */ 0,
+    /* +18 */ 0,
+    /* +1A */ 0,
+    /* +1C */ 0,
+    /* +1E */ 0,
+    /* +20 */ 0,
+    /* +22 */ 0,
+    /* +24 */ &mpLib_803BF738,
+    /* +28 */ 0x00000001,
+    /* +2C */ 0x00000000,
 };
 
-struct mpLib_803BF248_t {
-    InternalStageId id;
-    struct mpLib_803BF248_t_x4* (*x4)[20];
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD3D8 = {
-    1.0F,         { -1, -1, -1, -1 }, { 0, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { -1, -1, -1, -1 }, { 0, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD430 = {
-    1.0F,         { 0x161, 0x161, 0x161, 0x161 },
-    { 1, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { 0x036, 0x037, 0x038, 0x039 },
-    { 1, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD488 = {
-    1.5F,         { 0x152, 0x152, 0x152, 0x152 },
-    { 1, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { 0x01D, 0x01E, 0x01F, 0x020 },
-    { 1, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD4E0 = {
-    1.0F,         { 0x155, 0x155, 0x155, 0x155 },
-    { 1, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { 0x022, 0x023, 0x024, 0x025 },
-    { 1, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD538 = {
-    1.0F,         { 0x16D, 0x16D, 0x16D, 0x16D },
-    { 1, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { 0x00E, 0x00F, 0x010, 0x011 },
-    { 0, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD590 = {
-    1.0F,         { 0x15B, 0x15B, 0x15B, 0x15B },
-    { 1, -1, 0 }, { 0x04B, 0x04B, 0x04C, 0x04C },
-    { 1, -1, 0 }, { 0x02C, 0x02D, 0x02E, 0x02F },
-    { 1, -1, 1 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD5E8 = {
-    1.0F,         { 0x158, 0x158, 0x158, 0x158 },
-    { 1, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { 0x027, 0x028, 0x029, 0x02A },
-    { 1, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD640 = {
-    1.0F,         { 0x16A, 0x16A, 0x16A, 0x16A },
-    { 1, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { 0x03B, 0x03C, 0x03D, 0x03E },
-    { 1, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD698 = {
-    1.0F,         { 0x15E, 0x15E, 0x15E, 0x15E },
-    { 0, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { 0x031, 0x032, 0x033, 0x034 },
-    { 0, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD6F0 = {
-    1.0F,         { -1, -1, -1, -1 }, { 0, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { -1, -1, -1, -1 }, { 0, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD748 = {
-    1.0F,         { 0x14F, 0x14F, 0x14F, 0x14F },
-    { 1, -1, 0 }, { 0x20E, 0x20E, 0x20E, 0x20E },
-    { 0, -1, 0 }, { 0x018, 0x019, 0x01A, 0x01B },
-    { 1, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD7A0 = {
-    1.0F,
-    { 0x14F, 0x14F, 0x14F, 0x14F },
-    { 1, 0x00007537, 0 },
-    { 0x20E, 0x20E, 0x20E, 0x20E },
-    { 0, 0x00007538, 0 },
-    { 0x018, 0x019, 0x01A, 0x01B },
-    { 1, 0x0000753B, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD7F8 = {
-    1.0F,
-    { 0x14F, 0x14F, 0x14F, 0x14F },
-    { 1, 0x00007539, 0 },
-    { 0x20E, 0x20E, 0x20E, 0x20E },
-    { 0, 0x00007533, 0 },
-    { 0x018, 0x019, 0x01A, 0x01B },
-    { 1, 0x0000753A, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD850 = {
-    1.0F,
-    { 0x14F, 0x14F, 0x14F, 0x14F },
-    { 1, 0x0000754A, 0 },
-    { 0x20E, 0x20E, 0x20E, 0x20E },
-    { 0, 0x00007539, 0 },
-    { 0x018, 0x019, 0x01A, 0x01B },
-    { 1, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD8A8 = {
-    1.0F,         { -1, -1, -1, -1 }, { 0, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { -1, -1, -1, -1 }, { 0, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD900 = {
-    0.1F,         { -1, -1, -1, -1 }, { 0, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { -1, -1, -1, -1 }, { 0, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD958 = {
-    0.9F,         { -1, -1, -1, -1 }, { 0, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { -1, -1, -1, -1 }, { 0, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD9B0 = {
-    1.0F,         { 0x14C, 0x14C, 0x14C, 0x14C },
-    { 1, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { 0x013, 0x014, 0x015, 0x016 },
-    { 1, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BDA08 = {
-    1.0F,
-    { 0x14C, 0x14C, 0x14C, 0x14C },
-    { 1, 0x00007531, 0 },
-    { -1, -1, -1, -1 },
-    { 0, 0x00007532, 0 },
-    { 0x013, 0x014, 0x015, 0x016 },
-    { 1, 0x00007533, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BDA60 = {
-    0.2F,         { 0x164, 0x164, 0x164, 0x164 },
-    { 1, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { 0x036, 0x037, 0x038, 0x039 },
-    { 1, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BDAB8 = {
-    1.0F,         { 0x170, 0x170, 0x170, 0x170 },
-    { 0, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { 0x040, 0x041, 0x042, 0x043 },
-    { 0, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BDB10 = {
-    0.1F,         { 0x15E, 0x15E, 0x15E, 0x15E },
-    { 1, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { 0x031, 0x032, 0x033, 0x034 },
-    { 1, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BDB68 = {
-    1.0F,         { 0x167, 0x167, 0x167, 0x167 },
-    { 1, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { 0x03B, 0x03C, 0x03D, 0x03E },
-    { 1, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BDBC0 = {
-    1.0F,         { -1, -1, -1, -1 }, { 0, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { -1, -1, -1, -1 }, { 0, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BDC18[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BDC68[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BDCB8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BDD08[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BDD58[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BDDA8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BDDF8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BDE48[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BDE98[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BDEE8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BDF38[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BDF88[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BDFD8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD7A0, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE028[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE078[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE0C8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE118[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD850, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE168[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE1B8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE208[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE258[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE2A8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE2F8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BDA08, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE348[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE398[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE3E8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE438[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE488[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE4D8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE528[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE578[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE5C8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE618[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD7F8, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE668[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE6B8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE708[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE758[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE7A8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE7F8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE848[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE898[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE8E8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE938[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE988[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE9D8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEA28[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEA78[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEAC8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEB18[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEB68[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEBB8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEC08[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEC58[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BECA8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BECF8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BED48[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BED98[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEDE8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEE38[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEE88[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEED8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEF28[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEF78[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEFC8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BF018[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BF068[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BF0B8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BF108[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BF158[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BF1A8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BF1F8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-
-/// clang-format off
-static struct mpLib_803BF248_t mpLib_803BF248[0x47] = {
-    { InternalStageID_Unk00, &mpLib_803BDC18 },
-    { TEST, &mpLib_803BDC68 },
-    { CASTLE, &mpLib_803BDCB8 },
-    { RCRUISE, &mpLib_803BDD08 },
-    { KONGO, &mpLib_803BDD58 },
-    { GARDEN, &mpLib_803BDDA8 },
-    { GREATBAY, &mpLib_803BDDF8 },
-    { SHRINE, &mpLib_803BDE48 },
-    { ZEBES, &mpLib_803BDE98 },
-    { KRAID, &mpLib_803BDEE8 },
-    { STORY, &mpLib_803BDF38 },
-    { YORSTER, &mpLib_803BDF88 },
-    { IZUMI, &mpLib_803BDFD8 },
-    { GREENS, &mpLib_803BE028 },
-    { CORNERIA, &mpLib_803BE078 },
-    { VENOM, &mpLib_803BE0C8 },
-    { PSTADIUM, &mpLib_803BE118 },
-    { PURA, &mpLib_803BE168 },
-    { MUTECITY, &mpLib_803BE1B8 },
-    { BIGBLUE, &mpLib_803BE208 },
-    { ONETT, &mpLib_803BE258 },
-    { FOURSIDE, &mpLib_803BE2A8 },
-    { ICEMTN, &mpLib_803BE2F8 },
-    { InternalStageID_Unk23, &mpLib_803BE348 },
-    { INISHIE1, &mpLib_803BE398 },
-    { INISHIE2, &mpLib_803BE3E8 },
-    { InternalStageID_Unk26, &mpLib_803BE438 },
-    { FLATZONE, &mpLib_803BE488 },
-    { OLDPUPUPU, &mpLib_803BE4D8 },
-    { OLDYOSHI, &mpLib_803BE528 },
-    { OLDKONGO, &mpLib_803BE578 },
-    { KINOKOROUTE, &mpLib_803BE5C8 },
-    { SHRINEROUTE, &mpLib_803BE618 },
-    { ZEBESROUTE, &mpLib_803BE668 },
-    { BIGBLUEROUTE, &mpLib_803BE6B8 },
-    { InternalStageID_Unk35, &mpLib_803BE708 },
-    { BATTLE, &mpLib_803BE758 },
-    { LAST, &mpLib_803BE7A8 },
-    { FIGUREGET, &mpLib_803BE7F8 },
-    { PUSHON, &mpLib_803BE848 },
-    { TMARIO, &mpLib_803BE898 },
-    { TCAPTAIN, &mpLib_803BE8E8 },
-    { TCLINK, &mpLib_803BE938 },
-    { TDONKEY, &mpLib_803BE988 },
-    { TDRMARIO, &mpLib_803BE9D8 },
-    { TFALCO, &mpLib_803BEA28 },
-    { TFOX, &mpLib_803BEA78 },
-    { TICECLIMBER, &mpLib_803BEAC8 },
-    { TKIRBY, &mpLib_803BEB18 },
-    { TKOOPA, &mpLib_803BEB68 },
-    { TLINK, &mpLib_803BEBB8 },
-    { TLUIGI, &mpLib_803BEC08 },
-    { TMARS, &mpLib_803BEC58 },
-    { TMEWTWO, &mpLib_803BECA8 },
-    { TNESS, &mpLib_803BECF8 },
-    { TPEACH, &mpLib_803BED48 },
-    { TPICHU, &mpLib_803BED98 },
-    { TPIKACHU, &mpLib_803BEDE8 },
-    { TPURIN, &mpLib_803BEE38 },
-    { TSAMUS, &mpLib_803BEE88 },
-    { TSEAK, &mpLib_803BEED8 },
-    { TYOSHI, &mpLib_803BEF28 },
-    { TZELDA, &mpLib_803BEF78 },
-    { TGAMEWATCH, &mpLib_803BEFC8 },
-    { TEMBLEM, &mpLib_803BF018 },
-    { TGANON, &mpLib_803BF068 },
-    { HEAL, &mpLib_803BF0B8 },
-    { HOMERUN, &mpLib_803BF108 },
-    { FIGURE1, &mpLib_803BF158 },
-    { FIGURE2, &mpLib_803BF1A8 },
-    { FIGURE3, &mpLib_803BF1F8 },
-};
-/// clang-format on
 
 float mpLib_800569EC(u32 unk)
 {

@@ -72,7 +72,7 @@ StageData grNKr_803E584C = {
     grKinokoRoute_80207544,
     grKinokoRoute_80208754,
     grKinokoRoute_8020875C,
-    0,
+    1,
     NULL,
     0,
 };
@@ -318,7 +318,8 @@ void grKinokoRoute_80207C88(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     HSD_GObj* fighter;
     HSD_GObj* ground_gobj;
-    HSD_JObj* jobj;
+    HSD_JObj* reb0_jobj;
+    HSD_JObj* eve_jobj;
     PAD_STACK(32);
 
     scale = Ground_801C0498();
@@ -397,13 +398,12 @@ void grKinokoRoute_80207C88(Ground_GObj* gobj)
         cam_target = fighter_pos;
         Camera_80030AE0(false);
         stage_info.x6DC = 0;
-        jobj = Ground_801C2CF4(4);
-        if (jobj == NULL || Ground_801C2CF4(0xBD) == NULL) {
-            HSD_ASSERT(617, jobj != NULL && Ground_801C2CF4(0xBD) != NULL);
-        }
-        HSD_JObjGetTranslation(Ground_801C2CF4(0xBD), &translate);
+        reb0_jobj = Ground_801C2CF4(4);
+        eve_jobj = Ground_801C2CF4(0xBD);
+        HSD_ASSERT(617, reb0_jobj&&eve_jobj);
+        HSD_JObjGetTranslation(eve_jobj, &translate);
         translate.y += 50.0f;
-        HSD_JObjSetTranslate(jobj, &translate);
+        HSD_JObjSetTranslate(reb0_jobj, &translate);
         if (gp->gv.kinokoroute2.cam_timer == 0) {
             grKinokoRoute_8020836C(gobj, 0);
         }
@@ -412,9 +412,9 @@ void grKinokoRoute_80207C88(Ground_GObj* gobj)
             gp->gv.kinokoroute2.cam_timer = 0x3C;
             grKinokoRoute_8020836C(gobj, 1);
             grZakoGenerator_801CAEF0(true);
-            jobj = Ground_801C2CF4(4);
-            HSD_ASSERT(654, jobj != NULL);
-            HSD_JObjSetTranslate(jobj, &gp->gv.kinokoroute2.reb0_pos);
+            reb0_jobj = Ground_801C2CF4(4);
+            HSD_ASSERT(654, reb0_jobj);
+            HSD_JObjSetTranslate(reb0_jobj, &gp->gv.kinokoroute2.reb0_pos);
             ground_gobj = Ground_801C2BA4(0);
             if (ground_gobj != NULL) {
                 Ground_801C4A08(ground_gobj);

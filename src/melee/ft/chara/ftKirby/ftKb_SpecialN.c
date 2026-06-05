@@ -1364,6 +1364,7 @@ void ftKb_SpecialAirLwStart_Coll(Fighter_GObj* gobj)
     f32 angle;
     struct ftKb_Init_803CB490_layout* p =
         (struct ftKb_Init_803CB490_layout*) ftKb_Init_803CB490;
+    PAD_STACK(16);
 
     if (ft_80081D0C(gobj) == GA_Air) {
         ftKb_SpecialHi_800F3570(gobj);
@@ -1381,25 +1382,43 @@ void ftKb_SpecialAirLwStart_Coll(Fighter_GObj* gobj)
         Camera_80030E44(4, &fp->cur_pos);
         ftCommon_8007EBAC(fp, 0xE, 0x14);
         fp3 = GET_FIGHTER(gobj);
-        fp3->mv.kb.speciallw.x24 = fp->mv.kb.speciallw.x18;
-        fp3->mv.kb.speciallw.x54 = fp->mv.kb.speciallw.x18;
-        fp3->mv.kb.speciallw.x88[0] = fp->mv.kb.specialhi.xC4;
-        fp3->mv.kb.speciallw.x88[4] = fp->mv.kb.specialhi.xC4;
-        fp3->mv.kb.speciallw.x30 = fp->mv.kb.speciallw.x18;
-        fp3->mv.kb.speciallw.x60 = fp->mv.kb.speciallw.x18;
-        fp3->mv.kb.speciallw.x88[1] = fp->mv.kb.specialhi.xC4;
-        fp3->mv.kb.speciallw.x88[5] = fp->mv.kb.specialhi.xC4;
-        fp3->mv.kb.speciallw.x3C = fp->mv.kb.speciallw.x18;
-        fp3->mv.kb.speciallw.x6C = fp->mv.kb.speciallw.x18;
-        fp3->mv.kb.speciallw.x88[2] = fp->mv.kb.specialhi.xC4;
-        fp3->mv.kb.speciallw.x88[6] = fp->mv.kb.specialhi.xC4;
-        fp3->mv.kb.speciallw.x48 = fp->mv.kb.speciallw.x18;
-        fp3->mv.kb.speciallw.x78 = fp->mv.kb.speciallw.x18;
-        fp3->mv.kb.speciallw.x88[3] = fp->mv.kb.specialhi.xC4;
-        fp3->mv.kb.speciallw.x88[7] = fp->mv.kb.specialhi.xC4;
-        fp3->mv.kb.speciallw.x18 = fp->mv.kb.speciallw.x18;
-        fp3->mv.kb.specialhi.xC4 = fp->mv.kb.specialhi.xC4;
         angle = fp->mv.kb.specialhi.xC4;
+        fp3->mv.kb.speciallw.x24.x = fp->mv.kb.speciallw.x18.x;
+        fp3->mv.kb.speciallw.x54.x = fp->mv.kb.speciallw.x18.x;
+        fp3->mv.kb.speciallw.x24.y = fp->mv.kb.speciallw.x18.y;
+        fp3->mv.kb.speciallw.x54.y = fp->mv.kb.speciallw.x18.y;
+        fp3->mv.kb.speciallw.x24.z = fp->mv.kb.speciallw.x18.z;
+        fp3->mv.kb.speciallw.x54.z = fp->mv.kb.speciallw.x18.z;
+        fp3->mv.kb.speciallw.x88[0] = angle;
+        fp3->mv.kb.speciallw.x88[4] = angle;
+        fp3->mv.kb.speciallw.x30.x = fp->mv.kb.speciallw.x18.x;
+        fp3->mv.kb.speciallw.x60.x = fp->mv.kb.speciallw.x18.x;
+        fp3->mv.kb.speciallw.x30.y = fp->mv.kb.speciallw.x18.y;
+        fp3->mv.kb.speciallw.x60.y = fp->mv.kb.speciallw.x18.y;
+        fp3->mv.kb.speciallw.x30.z = fp->mv.kb.speciallw.x18.z;
+        fp3->mv.kb.speciallw.x60.z = fp->mv.kb.speciallw.x18.z;
+        fp3->mv.kb.speciallw.x88[1] = angle;
+        fp3->mv.kb.speciallw.x88[5] = angle;
+        fp3->mv.kb.speciallw.x3C.x = fp->mv.kb.speciallw.x18.x;
+        fp3->mv.kb.speciallw.x6C.x = fp->mv.kb.speciallw.x18.x;
+        fp3->mv.kb.speciallw.x3C.y = fp->mv.kb.speciallw.x18.y;
+        fp3->mv.kb.speciallw.x6C.y = fp->mv.kb.speciallw.x18.y;
+        fp3->mv.kb.speciallw.x3C.z = fp->mv.kb.speciallw.x18.z;
+        fp3->mv.kb.speciallw.x6C.z = fp->mv.kb.speciallw.x18.z;
+        fp3->mv.kb.speciallw.x88[2] = angle;
+        fp3->mv.kb.speciallw.x88[6] = angle;
+        fp3->mv.kb.speciallw.x48.x = fp->mv.kb.speciallw.x18.x;
+        fp3->mv.kb.speciallw.x78.x = fp->mv.kb.speciallw.x18.x;
+        fp3->mv.kb.speciallw.x48.y = fp->mv.kb.speciallw.x18.y;
+        fp3->mv.kb.speciallw.x78.y = fp->mv.kb.speciallw.x18.y;
+        fp3->mv.kb.speciallw.x48.z = fp->mv.kb.speciallw.x18.z;
+        fp3->mv.kb.speciallw.x78.z = fp->mv.kb.speciallw.x18.z;
+        fp3->mv.kb.speciallw.x88[3] = angle;
+        fp3->mv.kb.speciallw.x88[7] = angle;
+        fp3->mv.kb.speciallw.x18.x = fp->mv.kb.speciallw.x18.x;
+        fp3->mv.kb.speciallw.x18.y = fp->mv.kb.speciallw.x18.y;
+        fp3->mv.kb.speciallw.x18.z = fp->mv.kb.speciallw.x18.z;
+        fp3->mv.kb.specialhi.xC4 = angle;
         if (angle < 0.0f) {
             angle = -angle;
         }
@@ -1440,6 +1459,7 @@ void ftKb_SpecialAirLw_Coll(Fighter_GObj* gobj)
     f32 angle;
     struct ftKb_Init_803CB490_layout* p =
         (struct ftKb_Init_803CB490_layout*) ftKb_Init_803CB490;
+    PAD_STACK(16);
 
     if (ft_80081D0C(gobj) == GA_Air) {
         ftKb_SpecialHi_800F3570(gobj);
@@ -1458,25 +1478,43 @@ void ftKb_SpecialAirLw_Coll(Fighter_GObj* gobj)
         Camera_80030E44(4, &fp->cur_pos);
         ftCommon_8007EBAC(fp, 0xE, 0x14);
         fp3 = GET_FIGHTER(gobj);
-        fp3->mv.kb.speciallw.x24 = fp->mv.kb.speciallw.x18;
-        fp3->mv.kb.speciallw.x54 = fp->mv.kb.speciallw.x18;
-        fp3->mv.kb.speciallw.x88[0] = fp->mv.kb.specialhi.xC4;
-        fp3->mv.kb.speciallw.x88[4] = fp->mv.kb.specialhi.xC4;
-        fp3->mv.kb.speciallw.x30 = fp->mv.kb.speciallw.x18;
-        fp3->mv.kb.speciallw.x60 = fp->mv.kb.speciallw.x18;
-        fp3->mv.kb.speciallw.x88[1] = fp->mv.kb.specialhi.xC4;
-        fp3->mv.kb.speciallw.x88[5] = fp->mv.kb.specialhi.xC4;
-        fp3->mv.kb.speciallw.x3C = fp->mv.kb.speciallw.x18;
-        fp3->mv.kb.speciallw.x6C = fp->mv.kb.speciallw.x18;
-        fp3->mv.kb.speciallw.x88[2] = fp->mv.kb.specialhi.xC4;
-        fp3->mv.kb.speciallw.x88[6] = fp->mv.kb.specialhi.xC4;
-        fp3->mv.kb.speciallw.x48 = fp->mv.kb.speciallw.x18;
-        fp3->mv.kb.speciallw.x78 = fp->mv.kb.speciallw.x18;
-        fp3->mv.kb.speciallw.x88[3] = fp->mv.kb.specialhi.xC4;
-        fp3->mv.kb.speciallw.x88[7] = fp->mv.kb.specialhi.xC4;
-        fp3->mv.kb.speciallw.x18 = fp->mv.kb.speciallw.x18;
-        fp3->mv.kb.specialhi.xC4 = fp->mv.kb.specialhi.xC4;
         angle = fp->mv.kb.specialhi.xC4;
+        fp3->mv.kb.speciallw.x24.x = fp->mv.kb.speciallw.x18.x;
+        fp3->mv.kb.speciallw.x54.x = fp->mv.kb.speciallw.x18.x;
+        fp3->mv.kb.speciallw.x24.y = fp->mv.kb.speciallw.x18.y;
+        fp3->mv.kb.speciallw.x54.y = fp->mv.kb.speciallw.x18.y;
+        fp3->mv.kb.speciallw.x24.z = fp->mv.kb.speciallw.x18.z;
+        fp3->mv.kb.speciallw.x54.z = fp->mv.kb.speciallw.x18.z;
+        fp3->mv.kb.speciallw.x88[0] = angle;
+        fp3->mv.kb.speciallw.x88[4] = angle;
+        fp3->mv.kb.speciallw.x30.x = fp->mv.kb.speciallw.x18.x;
+        fp3->mv.kb.speciallw.x60.x = fp->mv.kb.speciallw.x18.x;
+        fp3->mv.kb.speciallw.x30.y = fp->mv.kb.speciallw.x18.y;
+        fp3->mv.kb.speciallw.x60.y = fp->mv.kb.speciallw.x18.y;
+        fp3->mv.kb.speciallw.x30.z = fp->mv.kb.speciallw.x18.z;
+        fp3->mv.kb.speciallw.x60.z = fp->mv.kb.speciallw.x18.z;
+        fp3->mv.kb.speciallw.x88[1] = angle;
+        fp3->mv.kb.speciallw.x88[5] = angle;
+        fp3->mv.kb.speciallw.x3C.x = fp->mv.kb.speciallw.x18.x;
+        fp3->mv.kb.speciallw.x6C.x = fp->mv.kb.speciallw.x18.x;
+        fp3->mv.kb.speciallw.x3C.y = fp->mv.kb.speciallw.x18.y;
+        fp3->mv.kb.speciallw.x6C.y = fp->mv.kb.speciallw.x18.y;
+        fp3->mv.kb.speciallw.x3C.z = fp->mv.kb.speciallw.x18.z;
+        fp3->mv.kb.speciallw.x6C.z = fp->mv.kb.speciallw.x18.z;
+        fp3->mv.kb.speciallw.x88[2] = angle;
+        fp3->mv.kb.speciallw.x88[6] = angle;
+        fp3->mv.kb.speciallw.x48.x = fp->mv.kb.speciallw.x18.x;
+        fp3->mv.kb.speciallw.x78.x = fp->mv.kb.speciallw.x18.x;
+        fp3->mv.kb.speciallw.x48.y = fp->mv.kb.speciallw.x18.y;
+        fp3->mv.kb.speciallw.x78.y = fp->mv.kb.speciallw.x18.y;
+        fp3->mv.kb.speciallw.x48.z = fp->mv.kb.speciallw.x18.z;
+        fp3->mv.kb.speciallw.x78.z = fp->mv.kb.speciallw.x18.z;
+        fp3->mv.kb.speciallw.x88[3] = angle;
+        fp3->mv.kb.speciallw.x88[7] = angle;
+        fp3->mv.kb.speciallw.x18.x = fp->mv.kb.speciallw.x18.x;
+        fp3->mv.kb.speciallw.x18.y = fp->mv.kb.speciallw.x18.y;
+        fp3->mv.kb.speciallw.x18.z = fp->mv.kb.speciallw.x18.z;
+        fp3->mv.kb.specialhi.xC4 = angle;
         if (angle < 0.0f) {
             angle = -angle;
         }

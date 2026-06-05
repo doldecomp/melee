@@ -546,6 +546,7 @@ void mnDiagram3_8024714C(void* arg0)
 
 void fn_802461BC(HSD_GObj* gobj)
 {
+    char* base = (char*) &mnDiagram3_803EEC10;
     Diagram3* data = mnDiagram3_804D6C20->user_data;
     u32 input = Menu_GetAllInputs();
     Vec3 spDC;
@@ -554,34 +555,47 @@ void fn_802461BC(HSD_GObj* gobj)
     int i;
     u8 limit;
     int v;
+    PAD_STACK(72);
 
     if ((u32) input & 0x20) {
         lbAudioAx_80024030(0);
         mn_804A04F0.entering_menu = 0;
-        gmMainLib_8015CC34()->xD = data->is_name_mode;
+        gmMainLib_8015CC34()->xD =
+            ((Diagram3*) mnDiagram3_804D6C20->user_data)->is_name_mode;
         mnDiagram2_ClearDetailView(mnDiagram3_804D6C20);
         HSD_GObjPLink_80390228(data->popup_gobj);
         data = mnDiagram3_804D6C20->user_data;
-        for (i = 0; i < 0xA; i++) {
-            if (data->row_labels[i] != NULL) {
-                HSD_SisLib_803A5CC4(data->row_labels[i]);
-                data->row_labels[i] = NULL;
-            }
+        {
+            Diagram3* check_data = data;
+            Diagram3* text_data = data;
+            i = 0;
+            do {
+                if (check_data->row_labels[i] != NULL) {
+                    HSD_SisLib_803A5CC4(text_data->row_labels[i]);
+                    check_data->row_labels[i] = NULL;
+                }
+            } while (++i < 0xA);
         }
         mn_80229894(0x1C, 0, 3);
         return;
     }
     if (input & 0xC0) {
         lbAudioAx_80024030(1);
-        gmMainLib_8015CC34()->xD = data->is_name_mode;
+        gmMainLib_8015CC34()->xD =
+            ((Diagram3*) mnDiagram3_804D6C20->user_data)->is_name_mode;
         mnDiagram2_ClearDetailView(mnDiagram3_804D6C20);
         HSD_GObjPLink_80390228(data->popup_gobj);
         data = mnDiagram3_804D6C20->user_data;
-        for (i = 0; i < 0xA; i++) {
-            if (data->row_labels[i] != NULL) {
-                HSD_SisLib_803A5CC4(data->row_labels[i]);
-                data->row_labels[i] = NULL;
-            }
+        {
+            Diagram3* check_data = data;
+            Diagram3* text_data = data;
+            i = 0;
+            do {
+                if (check_data->row_labels[i] != NULL) {
+                    HSD_SisLib_803A5CC4(text_data->row_labels[i]);
+                    check_data->row_labels[i] = NULL;
+                }
+            } while (++i < 0xA);
         }
         HSD_GObjPLink_80390228(gobj);
         if (input & 0x40) {
@@ -603,141 +617,203 @@ void fn_802461BC(HSD_GObj* gobj)
             data->scroll_offset = 0;
         }
         data = mnDiagram3_804D6C20->user_data;
-        for (i = 0; i < 0xA; i++) {
-            if (data->row_labels[i] != NULL) {
-                HSD_SisLib_803A5CC4(data->row_labels[i]);
-                data->row_labels[i] = NULL;
-            }
+        {
+            Diagram3* check_data = data;
+            Diagram3* text_data = data;
+            i = 0;
+            do {
+                if (check_data->row_labels[i] != NULL) {
+                    HSD_SisLib_803A5CC4(text_data->row_labels[i]);
+                    check_data->row_labels[i] = NULL;
+                }
+            } while (++i < 0xA);
         }
         {
-            u8 base_idx = data->scroll_offset;
-            f32 spacing = HSD_JObjGetTranslationY(data->jobjs[9]) -
+            int base_idx;
+            u8 base_idx_u8;
+            u8 i_u8;
+            f32 spacing;
+            data = mnDiagram3_804D6C20->user_data;
+            base_idx = data->scroll_offset;
+            base_idx_u8 = base_idx;
+            spacing = HSD_JObjGetTranslationY(data->jobjs[9]) -
                           HSD_JObjGetTranslationY(data->jobjs[8]);
-            lb_8000B1CC(data->jobjs[8], &mnDiagram3_803EEC28.x0, &spDC);
+            lb_8000B1CC(data->jobjs[8], (Vec3*) (base + 0x18), &spDC);
             for (i = 0; i < 0xA; i++) {
                 HSD_Text* t = HSD_SisLib_803A5ACC(
                     0, 1, spDC.x - 6.5f, -spacing * (f32) i + -spDC.y, spDC.z,
                     6.5f, 240.0f);
                 data->row_labels[i] = t;
+                i_u8 = i;
                 limit = (data->is_name_mode != 0) ? 0x18 : 0x15;
-                v = base_idx + (u8) i;
+                v = base_idx_u8 + i_u8;
                 if (v >= limit) {
                     v = v - limit;
                 } else {
                     v = (u8) v;
                 }
-                HSD_SisLib_803A6368(t, mnDiagram3_803EEC4C.indices[v]);
+                {
+                    u8 idx = v;
+                    HSD_SisLib_803A6368(t, ((u16*) (base + 0x3C))[idx]);
+                }
             }
         }
-        mnDiagram2_ClearDetailView(mnDiagram3_804D6C20);
-        mnDiagram3_80245BA4(mnDiagram3_804D6C20);
+        {
+            HSD_GObj* diagram_gobj = mnDiagram3_804D6C20;
+            mnDiagram2_ClearDetailView(diagram_gobj);
+            mnDiagram3_80245BA4(diagram_gobj);
+        }
         return;
     }
     if (input & 1) {
         if (data->saved_selection != 0) {
-            HSD_JObj* popup = data->popup_gobj->hsd_obj;
-            s32 n;
+            HSD_JObj* popup;
+            Diagram3* cur;
+            u8 n;
             f32 spacing;
             lbAudioAx_80024030(2);
             data->saved_selection = data->saved_selection - 1;
+            cur = mnDiagram3_804D6C20->user_data;
+            popup = data->popup_gobj->hsd_obj;
             n = data->saved_selection;
-            spacing = HSD_JObjGetTranslationY(data->jobjs[9]) -
-                      HSD_JObjGetTranslationY(data->jobjs[8]);
-            HSD_JObjSetTranslateX(popup, HSD_JObjGetTranslationX(data->jobjs[8]));
+            spacing = HSD_JObjGetTranslationY(cur->jobjs[9]) -
+                      HSD_JObjGetTranslationY(cur->jobjs[8]);
+            HSD_JObjSetTranslateX(popup, HSD_JObjGetTranslationX(cur->jobjs[8]));
             HSD_JObjSetTranslateY(popup, spacing * (f32) n +
                                              HSD_JObjGetTranslationY(
-                                                 data->jobjs[8]));
-            HSD_JObjSetTranslateZ(popup, HSD_JObjGetTranslationZ(data->jobjs[8]));
-            mnDiagram2_ClearDetailView(mnDiagram3_804D6C20);
-            mnDiagram3_80245BA4(mnDiagram3_804D6C20);
+                                                 cur->jobjs[8]));
+            HSD_JObjSetTranslateZ(popup, HSD_JObjGetTranslationZ(cur->jobjs[8]));
+            {
+                HSD_GObj* diagram_gobj = mnDiagram3_804D6C20;
+                mnDiagram2_ClearDetailView(diagram_gobj);
+                mnDiagram3_80245BA4(diagram_gobj);
+            }
             return;
         }
         if (data->scroll_offset != 0) {
-            u8 base_idx;
+            int base_idx;
+            u8 base_idx_u8;
+            u8 i_u8;
             f32 spacing;
             lbAudioAx_80024030(2);
             data->scroll_offset = data->scroll_offset - 1;
             data = mnDiagram3_804D6C20->user_data;
-            for (i = 0; i < 0xA; i++) {
-                if (data->row_labels[i] != NULL) {
-                    HSD_SisLib_803A5CC4(data->row_labels[i]);
-                    data->row_labels[i] = NULL;
-                }
+            {
+                Diagram3* check_data = data;
+                Diagram3* text_data = data;
+                i = 0;
+                do {
+                    if (check_data->row_labels[i] != NULL) {
+                        HSD_SisLib_803A5CC4(text_data->row_labels[i]);
+                        check_data->row_labels[i] = NULL;
+                    }
+                } while (++i < 0xA);
             }
+            data = mnDiagram3_804D6C20->user_data;
             base_idx = data->scroll_offset;
+            base_idx_u8 = base_idx;
             spacing = HSD_JObjGetTranslationY(data->jobjs[9]) -
                       HSD_JObjGetTranslationY(data->jobjs[8]);
-            lb_8000B1CC(data->jobjs[8], &mnDiagram3_803EEC28.x0, &spC0);
+            lb_8000B1CC(data->jobjs[8], (Vec3*) (base + 0x18), &spC0);
             for (i = 0; i < 0xA; i++) {
                 HSD_Text* t = HSD_SisLib_803A5ACC(
                     0, 1, spC0.x - 6.5f, -spacing * (f32) i + -spC0.y, spC0.z,
                     6.5f, 240.0f);
                 data->row_labels[i] = t;
+                i_u8 = i;
                 limit = (data->is_name_mode != 0) ? 0x18 : 0x15;
-                v = base_idx + (u8) i;
+                v = base_idx_u8 + i_u8;
                 if (v >= limit) {
                     v = v - limit;
                 } else {
                     v = (u8) v;
                 }
-                HSD_SisLib_803A6368(t, mnDiagram3_803EEC4C.indices[v]);
+                {
+                    u8 idx = v;
+                    HSD_SisLib_803A6368(t, ((u16*) (base + 0x3C))[idx]);
+                }
             }
-            mnDiagram2_ClearDetailView(mnDiagram3_804D6C20);
-            mnDiagram3_80245BA4(mnDiagram3_804D6C20);
+            {
+                HSD_GObj* diagram_gobj = mnDiagram3_804D6C20;
+                mnDiagram2_ClearDetailView(diagram_gobj);
+                mnDiagram3_80245BA4(diagram_gobj);
+            }
         }
     } else if (input & 2) {
         u32 down_limit;
         if (data->saved_selection < 9) {
-            HSD_JObj* popup = data->popup_gobj->hsd_obj;
-            s32 n;
+            HSD_JObj* popup;
+            Diagram3* cur;
+            u8 n;
             f32 spacing;
             lbAudioAx_80024030(2);
             data->saved_selection = data->saved_selection + 1;
+            cur = mnDiagram3_804D6C20->user_data;
+            popup = data->popup_gobj->hsd_obj;
             n = data->saved_selection;
-            spacing = HSD_JObjGetTranslationY(data->jobjs[9]) -
-                      HSD_JObjGetTranslationY(data->jobjs[8]);
-            HSD_JObjSetTranslateX(popup, HSD_JObjGetTranslationX(data->jobjs[8]));
+            spacing = HSD_JObjGetTranslationY(cur->jobjs[9]) -
+                      HSD_JObjGetTranslationY(cur->jobjs[8]);
+            HSD_JObjSetTranslateX(popup, HSD_JObjGetTranslationX(cur->jobjs[8]));
             HSD_JObjSetTranslateY(popup, spacing * (f32) n +
                                              HSD_JObjGetTranslationY(
-                                                 data->jobjs[8]));
-            HSD_JObjSetTranslateZ(popup, HSD_JObjGetTranslationZ(data->jobjs[8]));
-            mnDiagram2_ClearDetailView(mnDiagram3_804D6C20);
-            mnDiagram3_80245BA4(mnDiagram3_804D6C20);
+                                                 cur->jobjs[8]));
+            HSD_JObjSetTranslateZ(popup, HSD_JObjGetTranslationZ(cur->jobjs[8]));
+            {
+                HSD_GObj* diagram_gobj = mnDiagram3_804D6C20;
+                mnDiagram2_ClearDetailView(diagram_gobj);
+                mnDiagram3_80245BA4(diagram_gobj);
+            }
             return;
         }
         down_limit = (data->is_name_mode != 0) ? 0x18 : 0x15;
         if ((u32) (data->scroll_offset + 0xA) < down_limit) {
-            u8 base_idx;
+            int base_idx;
+            u8 base_idx_u8;
+            u8 i_u8;
             f32 spacing;
             lbAudioAx_80024030(2);
             data->scroll_offset = data->scroll_offset + 1;
             data = mnDiagram3_804D6C20->user_data;
-            for (i = 0; i < 0xA; i++) {
-                if (data->row_labels[i] != NULL) {
-                    HSD_SisLib_803A5CC4(data->row_labels[i]);
-                    data->row_labels[i] = NULL;
-                }
+            {
+                Diagram3* check_data = data;
+                Diagram3* text_data = data;
+                i = 0;
+                do {
+                    if (check_data->row_labels[i] != NULL) {
+                        HSD_SisLib_803A5CC4(text_data->row_labels[i]);
+                        check_data->row_labels[i] = NULL;
+                    }
+                } while (++i < 0xA);
             }
+            data = mnDiagram3_804D6C20->user_data;
             base_idx = data->scroll_offset;
+            base_idx_u8 = base_idx;
             spacing = HSD_JObjGetTranslationY(data->jobjs[9]) -
                       HSD_JObjGetTranslationY(data->jobjs[8]);
-            lb_8000B1CC(data->jobjs[8], &mnDiagram3_803EEC28.x0, &spA4);
+            lb_8000B1CC(data->jobjs[8], (Vec3*) (base + 0x18), &spA4);
             for (i = 0; i < 0xA; i++) {
                 HSD_Text* t = HSD_SisLib_803A5ACC(
                     0, 1, spA4.x - 6.5f, -spacing * (f32) i + -spA4.y, spA4.z,
                     6.5f, 240.0f);
                 data->row_labels[i] = t;
+                i_u8 = i;
                 limit = (data->is_name_mode != 0) ? 0x18 : 0x15;
-                v = base_idx + (u8) i;
+                v = base_idx_u8 + i_u8;
                 if (v >= limit) {
                     v = v - limit;
                 } else {
                     v = (u8) v;
                 }
-                HSD_SisLib_803A6368(t, mnDiagram3_803EEC4C.indices[v]);
+                {
+                    u8 idx = v;
+                    HSD_SisLib_803A6368(t, ((u16*) (base + 0x3C))[idx]);
+                }
             }
-            mnDiagram2_ClearDetailView(mnDiagram3_804D6C20);
-            mnDiagram3_80245BA4(mnDiagram3_804D6C20);
+            {
+                HSD_GObj* diagram_gobj = mnDiagram3_804D6C20;
+                mnDiagram2_ClearDetailView(diagram_gobj);
+                mnDiagram3_80245BA4(diagram_gobj);
+            }
         }
     }
 }

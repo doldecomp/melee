@@ -55,24 +55,17 @@ range
 void ftCo_8009F834(Fighter_GObj* gobj, int arg1, enum Fighter_Part arg2,
                    int arg3, int arg4, Vec3* arg5, Vec3* arg6, f32 arg7)
 {
-    f32 spB0;
-    f32 spAC;
-    f32 spA8;
-    f32 spA4;
-    f32 spA0;
-    f32 sp9C;
+    Vec3 spA8;
+    Vec3 sp9C;
     f32 sp98;
     f32 sp94;
     f32 sp90;
-    f32 sp8C;
-    f32 sp88;
-    f32 sp84;
+    Vec3 sp84;
     f32 sp80;
     f32 sp7C;
     Fighter* temp_r30;
     Fighter* temp_r9;
     Fighter* temp_r9_2;
-    enum Fighter_Part temp_ret;
     enum Fighter_Part var_r27;
     f32 temp_f1;
     f32 temp_f1_2;
@@ -83,7 +76,6 @@ void ftCo_8009F834(Fighter_GObj* gobj, int arg1, enum Fighter_Part arg2,
     u8 temp_r3;
     PAD_STACK(72);
 
-    var_f1 = arg7;
     var_r27 = arg2;
     temp_r30 = gobj->user_data;
     if (arg4 == 0) {
@@ -95,7 +87,7 @@ block_2:
         goto block_5;
     }
 
-    var_r27 = temp_r30->ft_data->x54 + temp_r30->x2220_b0;
+    var_r27 = ((int*) temp_r30->ft_data->x54)[temp_r30->x2220_b0];
 
     temp_r30->x2220_b0++;
     if (temp_r30->x2220_b0 < 5) {
@@ -113,9 +105,7 @@ block_7:
     if (arg3 == 0) {
         goto block_9;
     }
-    temp_ret = ftParts_GetBoneIndex(temp_r30, var_r27);
-    var_f1 = M2C_BITWISE(f32, temp_ret);
-    var_r27 = temp_ret;
+    var_r27 = ftParts_GetBoneIndex(temp_r30, var_r27);
 block_9:
     if (arg1 < 0x250) {
         goto block_11;
@@ -124,18 +114,15 @@ block_9:
         goto block_12;
     }
 block_11:
-    spA8 = arg5->x;
-    spAC = arg5->y;
-    spB0 = arg5->z;
-    spA8 += 2.0f * arg6->x * (HSD_Randf() - 0.5f);
-    spAC += 2.0f * arg6->y * (HSD_Randf() - 0.5f);
+    spA8 = *arg5;
+    spA8.x += 2.0f * arg6->x * (HSD_Randf() - 0.5f);
+    spA8.y += 2.0f * arg6->y * (HSD_Randf() - 0.5f);
     temp_f1 = HSD_Randf() - 0.5f;
     temp_f2 = 2.0f * arg6->z;
-    spB0 += temp_f2 * temp_f1;
+    spA8.z += temp_f2 * temp_f1;
     temp_r9 = gobj->user_data;
     efAsync_Spawn(gobj, &temp_r9->x60C, 2, arg1,
-                  temp_r30->parts[var_r27].joint, &spA8, temp_r9, temp_f1,
-                  temp_f2, 2.0f);
+                  temp_r30->parts[var_r27].joint, &spA8);
     return;
 block_12:
     if (arg1 == 0x487) {
@@ -275,37 +262,34 @@ block_58:
     goto block_70;
 block_61:
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 0, arg1,
-                  temp_r30->parts[var_r27].joint, var_f1);
+                  temp_r30->parts[var_r27].joint);
     return;
 block_62:
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 7, arg1,
-                  temp_r30->parts[var_r27].joint, arg5, var_f1);
+                  temp_r30->parts[var_r27].joint, arg5);
     return;
 block_63:
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3, arg1,
-                  temp_r30->parts[var_r27].joint, &temp_r30->ft_data->x0->x168,
-                  var_f1);
+                  temp_r30->parts[var_r27].joint,
+                  &temp_r30->ft_data->x0->x168);
     return;
 block_64:
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3, arg1,
-                  temp_r30->parts[var_r27].joint, &temp_r30->facing_dir,
-                  var_f1);
+                  temp_r30->parts[var_r27].joint, &temp_r30->facing_dir);
     return;
 block_65:
-    sp9C = arg5->x;
-    spA0 = arg5->y;
-    spA4 = arg5->z;
+    sp9C = *arg5;
     sp98 = 0.017453292f * (256.0f * arg6->x);
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 6, arg1,
-                  temp_r30->parts[var_r27].joint, &sp9C, &temp_r30->facing_dir,
-                  &sp98, 256.0f, 0.017453292f);
+                  temp_r30->parts[var_r27].joint, &sp9C,
+                  &temp_r30->facing_dir, &sp98);
     return;
 block_66:
     temp_f1_2 = temp_r30->x34_scale.y;
     sp94 = temp_f1_2 * temp_r30->co_attrs.x144;
     temp_r9_2 = gobj->user_data;
     efAsync_Spawn(gobj, &temp_r9_2->x60C, 3, 0x438,
-                  temp_r30->parts[var_r27].joint, &sp94, temp_r9_2, temp_f1_2);
+                  temp_r30->parts[var_r27].joint, &sp94);
     return;
 block_67:
     sp90 = 0.0f;
@@ -317,17 +301,15 @@ block_67:
     sp90 = var_f1;
 block_69:
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3, arg1,
-                  temp_r30->parts[var_r27].joint, &sp90, var_f1);
+                  temp_r30->parts[var_r27].joint, &sp90);
     return;
 block_70:
-    sp84 = arg5->x;
-    sp88 = arg5->y;
-    sp8C = arg5->z;
-    sp84 += 2.0f * arg6->x * (HSD_Randf() - 0.5f);
-    sp88 += 2.0f * arg6->y * (HSD_Randf() - 0.5f);
+    sp84 = *arg5;
+    sp84.x += 2.0f * arg6->x * (HSD_Randf() - 0.5f);
+    sp84.y += 2.0f * arg6->y * (HSD_Randf() - 0.5f);
     var_f1_2 = HSD_Randf() - 0.5f;
     temp_f2_2 = 2.0f * arg6->z;
-    sp8C += temp_f2_2 * var_f1_2;
+    sp84.z += temp_f2_2 * var_f1_2;
     if (arg1 >= 0x412) {
         goto block_98;
     }
@@ -471,13 +453,12 @@ block_119:
     goto block_128;
 block_122:
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, arg1,
-                  temp_r30->parts[var_r27].joint, &sp84, &p_ftCommonData->x564,
-                  var_f1_2, temp_f2_2, 2.0f);
+                  temp_r30->parts[var_r27].joint, &sp84,
+                  &p_ftCommonData->x564);
     return;
 block_123:
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 2, arg1,
-                  temp_r30->parts[var_r27].joint, &sp84, var_f1_2, temp_f2_2,
-                  2.0f);
+                  temp_r30->parts[var_r27].joint, &sp84);
     return;
 block_124:
     sp80 = 0.0f;
@@ -489,27 +470,24 @@ block_124:
     sp80 = var_f1_2;
 block_126:
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, arg1,
-                  temp_r30->parts[var_r27].joint, &sp84, &sp80, var_f1_2);
+                  temp_r30->parts[var_r27].joint, &sp84, &sp80);
     return;
 block_127:
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 8, 2,
-                  temp_r30->parts[var_r27].joint, &sp84, var_f1_2, temp_f2_2,
-                  2.0f);
+                  temp_r30->parts[var_r27].joint, &sp84);
     return;
 block_128:
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 8, 3,
-                  temp_r30->parts[var_r27].joint, &sp84, var_f1_2, temp_f2_2,
-                  2.0f);
+                  temp_r30->parts[var_r27].joint, &sp84);
     return;
 block_129:
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 8, 4,
-                  temp_r30->parts[var_r27].joint, &sp84, var_f1_2, temp_f2_2,
-                  2.0f);
+                  temp_r30->parts[var_r27].joint, &sp84);
     return;
 block_130:
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, arg1,
-                  temp_r30->parts[var_r27].joint, &sp84, &temp_r30->facing_dir,
-                  var_f1_2, temp_f2_2, 2.0f);
+                  temp_r30->parts[var_r27].joint, &sp84,
+                  &temp_r30->facing_dir);
     return;
 block_131:
     sp7C = 0.0f;
@@ -521,8 +499,8 @@ block_131:
     sp7C = var_f1_2;
 block_133:
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 6, arg1,
-                  temp_r30->parts[var_r27].joint, &sp84, &temp_r30->facing_dir,
-                  &sp7C, var_f1_2);
+                  temp_r30->parts[var_r27].joint, &sp84,
+                  &temp_r30->facing_dir, &sp7C);
     return;
 block_134:
     OSReport("no effect from animlist %d\n", arg1);
