@@ -115,60 +115,51 @@ void ftCo_80091B9C(Fighter_GObj* gobj)
     fp->mv.co.guard.x24 = p_ftCommonData->x68;
 }
 
-static inline float normalizeAngle180(float deg)
-{
-    if (deg > 180) {
-        deg -= 360;
-    } else if (deg < -180) {
-        deg += 360;
-    }
-    return deg;
-}
-
-static inline float normalizeAngle0(float deg)
-{
-    if (deg > 360) {
-        deg -= 360;
-    } else if (deg < 0) {
-        deg += 360;
-    }
-    return deg;
-}
-
 void ftCo_80091BC4(Fighter* fp)
 {
-    float lstick_x = fp->input.lstick.x * fp->facing_dir;
-    float lstick_rad = lb_8000D008(fp->input.lstick.y, lstick_x);
-    if (lstick_rad < 0) {
-        lstick_rad += 2 * (float) M_PI;
+    float stick_rad, stick_deg, deg_delta, guard_deg, smoothed_deg, stick_mag;
+
+    stick_rad =
+        lb_8000D008(fp->input.lstick.y, fp->input.lstick.x * fp->facing_dir);
+    if (stick_rad < 0) {
+        stick_rad += 2 * (float) M_PI;
     }
-    {
-        float lstick_deg = rad_to_deg * lstick_rad;
-        if (lstick_deg < 0) {
-            lstick_deg = 0;
-        }
-        if (lstick_deg > 359) {
-            lstick_deg = 359;
-        }
-        {
-            Fighter* fp0;
-            float offset = (fp0 = fp)->mv.co.guard.x8 - 10;
-            float deg = lstick_deg - offset;
-            lstick_x = normalizeAngle180(deg);
-            fp->mv.co.guard.x8 =
-                10 + normalizeAngle0(lstick_x * p_ftCommonData->x44C + offset);
-            {
-                float lstick_mag =
-                    sqrtf(SQ(fp0->input.lstick.x) + SQ(fp0->input.lstick.y));
-                if (lstick_mag > 1) {
-                    lstick_mag = 1;
-                }
-                fp->mv.co.guard.x4 = (lstick_rad = p_ftCommonData->x44C) *
-                                         (lstick_mag - fp->mv.co.guard.x4) +
-                                     fp->mv.co.guard.x4;
-            }
+
+    stick_deg = rad_to_deg * stick_rad;
+    if (stick_deg < 0) {
+        stick_deg = 0;
+    }
+    if (stick_deg > 359) {
+        stick_deg = 359;
+    }
+
+    guard_deg = fp->mv.co.guard.x8 - 10;
+    deg_delta = stick_deg - guard_deg;
+    if (deg_delta > 180) {
+        deg_delta -= 360;
+    } else if (deg_delta < -180) {
+        deg_delta += 360;
+    }
+
+    smoothed_deg = deg_delta * p_ftCommonData->x44C + guard_deg;
+    if (smoothed_deg > 360) {
+        guard_deg = smoothed_deg;
+        guard_deg -= 360;
+    } else {
+        guard_deg = smoothed_deg;
+        if (guard_deg < 0) {
+            guard_deg += 360;
         }
     }
+    fp->mv.co.guard.x8 = 10 + guard_deg;
+
+    stick_mag = sqrtf(fp->input.lstick.x * fp->input.lstick.x +
+                      fp->input.lstick.y * fp->input.lstick.y);
+    if (stick_mag > 1) {
+        stick_mag = 1;
+    }
+    fp->mv.co.guard.x4 +=
+        p_ftCommonData->x44C * (stick_mag - fp->mv.co.guard.x4);
 }
 
 static inline float inlineB0(Fighter* fp)
