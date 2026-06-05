@@ -6,17 +6,15 @@
 #include <MSL/math_ppc.h>
 #include <MSL/trigf.h>
 
-/// @todo Currently 95.55% match - stack frame 8 bytes too large (80 vs 72)
+/// @todo Currently 99.9% match - stack frame is 8 bytes too large.
 s32 MatToQuat(Mtx m, Quaternion* q)
 {
+    f32 q3[3];
     int nxt[] = { 1, 2, 0 };
     f32 lenCol[3];
-    f32 q3[3];
-    f32 tr;
     f32 s;
-    f32 sc0;
-    f32 sc1;
-    f32 sc2;
+    f32 scale;
+    f32 tr;
     int i;
     int j;
     int k;
@@ -28,37 +26,33 @@ s32 MatToQuat(Mtx m, Quaternion* q)
     lenCol[2] =
         sqrtf(m[0][2] * m[0][2] + m[1][2] * m[1][2] + m[2][2] * m[2][2]);
 
-    sc0 = m[0][0] / lenCol[0];
-    sc1 = m[1][1] / lenCol[1];
-    sc2 = m[2][2] / lenCol[2];
-
-    tr = sc0 + sc1 + sc2;
+    tr = m[0][0] / lenCol[0] + m[1][1] / lenCol[1] + m[2][2] / lenCol[2];
 
     if (tr > 0.0F) {
         s = sqrtf(1.0F + tr);
         q->w = 0.5F * s;
-        sc0 = 0.5F / s;
-        q->x = sc0 * ((m[2][1] / lenCol[1]) - (m[1][2] / lenCol[2]));
-        q->y = sc0 * ((m[0][2] / lenCol[2]) - (m[2][0] / lenCol[0]));
-        q->z = sc0 * ((m[1][0] / lenCol[0]) - (m[0][1] / lenCol[1]));
+        scale = 0.5F / s;
+        q->x = scale * ((m[2][1] / lenCol[1]) - (m[1][2] / lenCol[2]));
+        q->y = scale * ((m[0][2] / lenCol[2]) - (m[2][0] / lenCol[0]));
+        q->z = scale * ((m[1][0] / lenCol[0]) - (m[0][1] / lenCol[1]));
     } else {
         i = 0;
-        if (sc1 > sc0) {
+        if (m[1][1] / lenCol[1] > m[0][0] / lenCol[0]) {
             i = 1;
         }
-        if (sc2 > m[i][i] / lenCol[i]) {
+        if (m[2][2] / lenCol[2] > m[i][i] / lenCol[i]) {
             i = 2;
         }
         j = nxt[i];
         k = nxt[j];
 
-        s = sqrtf(1.0F + ((m[i][i] / lenCol[i]) - (m[j][j] / lenCol[j])) -
-                  (m[k][k] / lenCol[k]));
-        sc0 = 0.5F / s;
+        s = sqrtf(1.0F + (((m[i][i] / lenCol[i]) - (m[j][j] / lenCol[j])) -
+                          (m[k][k] / lenCol[k])));
+        scale = 0.5F / s;
         q3[i] = 0.5F * s;
-        q->w = sc0 * ((m[k][j] / lenCol[j]) - (m[j][k] / lenCol[k]));
-        q3[j] = sc0 * ((m[j][i] / lenCol[i]) + (m[i][j] / lenCol[j]));
-        q3[k] = sc0 * ((m[k][i] / lenCol[i]) + (m[i][k] / lenCol[k]));
+        q->w = scale * ((m[k][j] / lenCol[j]) - (m[j][k] / lenCol[k]));
+        q3[j] = scale * ((m[j][i] / lenCol[i]) + (m[i][j] / lenCol[j]));
+        q3[k] = scale * ((m[k][i] / lenCol[i]) + (m[i][k] / lenCol[k]));
         q->x = q3[0];
         q->y = q3[1];
         q->z = q3[2];
