@@ -311,12 +311,11 @@ static inline bool itNessyoyo_UnkMotion3_Anim_inline(Item_GObj* gobj)
     return true;
 }
 
-bool itNessyoyo_UnkMotion3_Anim(Item_GObj* gobj)
+static inline void itNessyoyo_UnkMotion3_Anim_UpdateRotation(Item* ip)
 {
-    Item* ip = GET_ITEM(gobj);
     Fighter* fp = GET_FIGHTER(ip->xDD4_itemVar.nessyoyo.x10);
     HSD_JObj* child;
-    PAD_STACK(24);
+    PAD_STACK(16);
     // probably should be HSD_JObjGetChild
     if (ip->xDD4_itemVar.nessyoyo.x18 == NULL) {
         child = NULL;
@@ -329,6 +328,13 @@ bool itNessyoyo_UnkMotion3_Anim(Item_GObj* gobj)
         rot += fp->fv.ns.x223C;
         HSD_JObjSetRotationX(child, rot);
     }
+}
+
+bool itNessyoyo_UnkMotion3_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(16);
+    itNessyoyo_UnkMotion3_Anim_UpdateRotation(ip);
     if (itNessyoyo_UnkMotion3_Anim_inline(gobj)) {
         it_802BE958_inline(gobj);
         return true;
