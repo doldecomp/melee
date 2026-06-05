@@ -63,9 +63,9 @@ void ftCo_8009C744(Fighter_GObj* gobj)
     Fighter_GObj* vic_gobj = fp->victim_gobj;
     Fighter* vic_fp = vic_gobj->user_data;
     Vec3 pos;
-    u8 _[12] = { 0 };
     HitCapsule* hit = &vic_fp->xDF4[1];
-    ftCo_800DC920(vic_gobj, gobj);
+    PAD_STACK(8);
+    ftCo_800DC920(fp->victim_gobj, gobj);
     lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint, NULL,
                 &pos);
     fp->dmg.kb_applied = ftColl_80079C70(fp, vic_fp, hit, hit->unk_count);
@@ -74,7 +74,7 @@ void ftCo_8009C744(Fighter_GObj* gobj)
     fp->dmg.x184c_damaged_hurtbox = 1;
     fp->dmg.x1854_collpos = pos;
     fp->dmg.x1860_element = hit->element;
-    // ftColl_80078710(gobj);
+    ftColl_80078710(vic_gobj, gobj, &fp->dmg.facing_dir_1);
     Fighter_UnkTakeDamage_8006CC30(fp, hit->damage);
     ftCo_Damage_CalcKnockback(fp);
     ftCo_8008E908(gobj, 0);
