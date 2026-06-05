@@ -4834,7 +4834,6 @@ void hsd_80398A08(u32 unused)
     base[7] = 0;
 }
 
-// @TODO: Currently 99.63% match - asm bytes identical, relocation differences
 HSD_Particle* hsd_80398C04(HSD_Particle** head, int linkNo, int bank, u32 kind,
                            u16 texGroup, u8* list, int life, int palflag,
                            f32 x, f32 y, f32 z, f32 vx, f32 vy, f32 vz,
@@ -4870,7 +4869,7 @@ HSD_Particle* hsd_80398C04(HSD_Particle** head, int linkNo, int bank, u32 kind,
     }
 
     if (head == NULL) {
-        slot = (HSD_Particle**) ((s32*) hsd_804D08E8 + 0x20 / 4 + linkNo);
+        slot = (HSD_Particle**) &hsd_804D0908[linkNo];
         pp->next = *slot;
         *slot = pp;
     } else {
@@ -4908,14 +4907,14 @@ HSD_Particle* hsd_80398C04(HSD_Particle** head, int linkNo, int bank, u32 kind,
     pp->cmdWait = cmd_wait;
     pp->poseNum = 0;
     pp->palNum = 0xFF;
-    pp->envCol.a = 0xFF;
-    pp->envCol.b = 0xFF;
-    pp->envCol.g = 0xFF;
-    pp->envCol.r = 0xFF;
-    pp->envColTarget.a = 0;
-    pp->envColTarget.b = 0;
-    pp->envColTarget.g = 0;
-    pp->envColTarget.r = 0;
+    pp->primCol.a = 0xFF;
+    pp->primCol.b = 0xFF;
+    pp->primCol.g = 0xFF;
+    pp->primCol.r = 0xFF;
+    pp->envCol.a = 0;
+    pp->envCol.b = 0;
+    pp->envCol.g = 0;
+    pp->envCol.r = 0;
     pp->envColCount = 0;
     pp->primColCount = 0;
     pp->sizeCount = 0;
@@ -4927,7 +4926,7 @@ HSD_Particle* hsd_80398C04(HSD_Particle** head, int linkNo, int bank, u32 kind,
     pp->aCmpRemain = 0;
     pp->aCmpCount = 0;
     pp->rotateCount = 0;
-    pp->sizeTarget = 0.0F;
+    pp->rotateTarget = 0.0F;
     pp->rotate = 0.0F;
     pp->gen = gp;
     if (gp != NULL) {
