@@ -334,9 +334,9 @@ void un_80318CB4(s32 arg0)
     TyDspConfig* cfg = un_804D6F18;
     HSD_JObj** jobjArr;
     s32 prev_ring_size;
-    s32 ring_count;
-    s32 ring_max;
-    f32 angle;
+    s32 ring_count = 0;
+    s32 ring_max = 6;
+    f32 angle = 0.0f;
     f32 radius;
     f32 base_step;
     s32 i;
@@ -349,13 +349,10 @@ void un_80318CB4(s32 arg0)
     PAD_STACK(0x50);
 
     memzero(grid, 0x12E4);
-    ring_count = 0;
-    ring_max = 6;
     grid->x08_min_z = -3.5f;
     grid->x04_min_x = -3.5f;
     grid->x10_max_z = 3.5f;
     grid->x0C_max_x = 3.5f;
-    angle = 0.0f;
 
     if (arg0 != 0) {
         base_step = 9.0f;
@@ -392,7 +389,7 @@ void un_80318CB4(s32 arg0)
 
                 collided = 0;
             retry:
-                {
+                if (collided == 0) {
                     s32 k;
                     grid->pos[i].x = mag * cosf(theta);
                     grid->pos[i].z = mag * sinf(theta);
@@ -419,8 +416,9 @@ void un_80318CB4(s32 arg0)
                     if (tries != 0) {
                         if (collided == 0) {
                             mag -= 0.1f;
-                            goto retry;
                         }
+                        collided = 0;
+                        goto retry;
                     }
                 }
             }

@@ -582,7 +582,7 @@ void grZebes_801D881C(HSD_GObj* gobj)
 
 void grZebes_801D90FC(Ground_GObj* arg) {}
 
-u8 grZe_803E1C80[0x60] = { 0 };
+u8 grZe_803E1C80[0x6C] = { 0 };
 
 void grZebes_801D9100(HSD_GObj* gobj)
 {
@@ -716,12 +716,6 @@ bool grZebes_801D95B0(Ground_GObj* arg)
 {
     return false;
 }
-
-grZe_ColorEntry grZe_803E1CF8[3] = {
-    { -320.0f, 0.0f, 0.0f, 0.0f },
-    { -80.0f, 1.0f, 20.0f, 30.0f },
-    { 90.0f, 90.0f, 75.0f, 0.0f },
-};
 
 void grZebes_801D95B8(Ground_GObj* gobj)
 {
@@ -1077,7 +1071,11 @@ void grZebes_801DA0C0(Ground_GObj* arg) {}
 void grZebes_801DA0C4(f32 level)
 {
     GXColor color;
-    grZe_ColorEntry* table = grZe_803E1CF8;
+    grZe_ColorEntry table[3] = {
+        { -320.0f, 0.0f, 0.0f, 0.0f },
+        { -80.0f, 1.0f, 20.0f, 30.0f },
+        { 90.0f, 90.0f, 75.0f, 0.0f },
+    };
     u32 idx = 0;
 
     while (idx < 3U && level > table[idx].threshold) {
@@ -1875,14 +1873,13 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
 
 s32 grZebes_801DBB60(s32 arg)
 {
-    HSD_GObj* yaku;
+    HSD_GObj* yaku = (HSD_GObj*) arg;
     grZe_BubbleEntry* bubbles = grZe_8049F170;
     s32 count = 0;
     s32 last_idx;
     f32 max_dist_sq = -1.0f;
 
-    HSD_ASSERT(0x898, arg);
-    yaku = (HSD_GObj*) arg;
+    HSD_ASSERT(0x898, yaku);
 
     {
         grZe_BubbleEntry* p = bubbles;

@@ -38,16 +38,6 @@ typedef struct MnStageSwData {
     HSD_Text* x40[NUM_STAGES];
 } MnStageSwData;
 
-AnimLoopSettings mnStageSw_803ED488[5] = {
-    { 0.0f, 199.0f, 0.0f },
-    { 0.0f, 9.0f, -0.1f },
-    { 0.0f, 0.0f, -0.1f },
-    { 0.0f, 0.0f, -0.1f },
-    { 0.0f, 0.0f, -0.1f },
-};
-
-static f32 mnStageSw_804D4BB8[2] = { 0.0f, 1.0f };
-
 /// Stage switch toggle indices - maps menu position to internal stage ID
 static u8 mnStageSw_803ED4C4[NUM_STAGES] = {
     0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
@@ -64,6 +54,7 @@ static u8 mnStageSw_stageIcons[NUM_STAGES] = {
 
 static HSD_GObj* mnStageSw_804D6BF0;
 static s8 mnStageSw_804D6BF4;
+extern AnimLoopSettings mnStageSw_803ED488[5];
 extern u8 mn_804D6BB5;
 extern StaticModelDesc MenMainConSs_Top;
 extern StaticModelDesc MenMainCursorSs_Top;
@@ -682,7 +673,7 @@ static HSD_GObj* mnStageSw_80236CBC(s8 arg0)
                            MenMainCursorSs_Top.shapeanim_joint);
         enabled = user_data->x2[i];
         lb_80011E24(cursor_jobj, &sp44, 2, -1);
-        HSD_JObjReqAnimAll(sp44, mnStageSw_804D4BB8[enabled]);
+        HSD_JObjReqAnimAll(sp44, enabled);
         HSD_JObjAnimAll(sp44);
         lb_80011E24(cursor_jobj, &sp48, 3, -1);
         if ((u8) i == hovered) {

@@ -725,7 +725,6 @@ void un_80313774(void)
     HSD_JObj* root_jobj;
     f32 step;
     f32 pos;
-    f32 y;
     s16 idx;
     s32 i;
     s32 trophy_total;
@@ -773,12 +772,10 @@ void un_80313774(void)
 
     state->gobj =
         (HSD_GObj*) un_80313508(NULL, strs + 0xAC, 0.0f, 0.0f, 0.0f);
-    root_jobj = state->gobj->hsd_obj;
-    HSD_JObjGetTranslationX(root_jobj);
+    root_jobj = (HSD_JObj*) state->gobj;
+    HSD_ASSERTMSG(0x3E1, root_jobj != NULL, "jobj");
 
-    y = HSD_JObjGetTranslationY(root_jobj);
-    HSD_JObjGetTranslationZ(root_jobj);
-    step = 5.11f - y;
+    step = 5.11f - root_jobj->translate.y;
     pos = -step;
     state->x2A8 = step;
 

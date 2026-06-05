@@ -806,7 +806,10 @@ void lbBgFlash_80021410(void* arg0)
     dx = data->pos0.x - data->pos4.x;
     dy = data->pos0.y - data->pos4.y;
     dz = data->pos0.z - data->pos4.z;
-    len_ab = (dz * dz) + ((dx * dx) + (dy * dy));
+    dx *= dx;
+    dy *= dy;
+    dz *= dz;
+    len_ab = dz + (dx + dy);
     if (len_ab > 0.0f) {
         f64 e = __frsqrte(len_ab);
         e = 0.5 * e * -(((f64) len_ab * (e * e)) - 3.0);
@@ -819,7 +822,10 @@ void lbBgFlash_80021410(void* arg0)
     dx = data->pos0.x - data->pos1.x;
     dy = data->pos0.y - data->pos1.y;
     dz = data->pos0.z - data->pos1.z;
-    len_bc = (dz * dz) + ((dx * dx) + (dy * dy));
+    dx *= dx;
+    dy *= dy;
+    dz *= dz;
+    len_bc = dz + (dx + dy);
     if (len_bc > 0.0f) {
         f64 e = __frsqrte(len_bc);
         e = 0.5 * e * -(((f64) len_bc * (e * e)) - 3.0);
@@ -833,7 +839,10 @@ void lbBgFlash_80021410(void* arg0)
     dx = data->pos1.x - data->pos3.x;
     dy = data->pos1.y - data->pos3.y;
     dz = data->pos1.z - data->pos3.z;
-    len_ac = (dz * dz) + ((dx * dx) + (dy * dy));
+    dx *= dx;
+    dy *= dy;
+    dz *= dz;
+    len_ac = dz + (dx + dy);
     if (len_ac > 0.0f) {
         f64 e = __frsqrte(len_ac);
         e = 0.5 * e * -(((f64) len_ac * (e * e)) - 3.0);
@@ -847,6 +856,11 @@ void lbBgFlash_80021410(void* arg0)
     len_bc = data->len0;
     len_ac = data->len1;
 
+    a2 = len_bc * len_bc;
+    b2 = len_ab * len_ab;
+    two_a = 2.0f * len_bc;
+    c2 = len_ac * len_ac;
+
     sum_len = (10.0f * (len_bc + len_ac)) / 11.0f;
     if (len_ab > sum_len) {
         len_ab =
@@ -859,19 +873,14 @@ void lbBgFlash_80021410(void* arg0)
                    (sum_len *
                     (sum_len *
                      (sum_len * (sum_len * (sum_len * sum_len)))))))))) /
-             (10.0f *
-              (len_ab *
+              (10.0f *
                (len_ab *
                 (len_ab *
                  (len_ab *
                   (len_ab *
-                   (len_ab * (len_ab * (len_ab * (len_ab * len_ab)))))))))));
+                   (len_ab *
+                    (len_ab * (len_ab * (len_ab * (len_ab * len_ab)))))))))));
     }
-
-    a2 = len_bc * len_bc;
-    b2 = len_ab * len_ab;
-    two_a = 2.0f * len_bc;
-    c2 = len_ac * len_ac;
 
     cos1 = ((a2 + b2) - c2) / (two_a * len_ab);
     cos2 = ((a2 + c2) - b2) / (two_a * len_ac);

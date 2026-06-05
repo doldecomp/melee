@@ -705,7 +705,6 @@ bool ftCo_800A1B38_noinline(enum_t arg0)
     return ftCo_800A1B38(arg0);
 }
 
-#pragma dont_inline on
 bool ftCo_800A1B38(enum_t arg0)
 {
     if (grBigBlue_801EF844(arg0) || grInishie1_801FCAAC(arg0) ||
@@ -715,7 +714,6 @@ bool ftCo_800A1B38(enum_t arg0)
     }
     return false;
 }
-#pragma dont_inline reset
 
 bool ftCo_800A1BA8(Fighter* fp)
 {
@@ -799,7 +797,7 @@ static void ftCo_800A1CC4(Fighter* fp, ftCo_803C6594_t* var_r29)
 {
     struct Fighter_x1A88_t* data;
 
-    PAD_STACK(0x18);
+    PAD_STACK(0x10);
 
     data = &fp->x1A88;
     if (var_r29 != NULL && data->x60 == 0 && data->xC != 0 &&
@@ -4037,7 +4035,7 @@ void ftCo_800A8DE4_noinline(Fighter* fp)
 void ftCo_800A8DE4(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
-    PAD_STACK(0x18);
+    PAD_STACK(0x20);
     if (!fp->x1A88.xFA_b2) {
         data->xFA_b2 = true;
         data->x5C = 10000.0f;
@@ -4334,7 +4332,7 @@ void ftCo_800A9904(Fighter* fp)
     int sp3C;
     u32 sp38;
 
-    PAD_STACK(0x18);
+    PAD_STACK(0x24);
 
     if (ftCo_800A3498(fp) != 0) {
         if (fp->co_attrs.max_jumps > fp->x1968_jumpsUsed) {
@@ -4442,7 +4440,7 @@ void ftCo_800A9CB4(Fighter* fp)
     enum_t var_r0_2;
     int var_r0_6;
 
-    PAD_STACK(0x18);
+    PAD_STACK(0x58);
 
     if (ftCo_800A1CA8(fp)) {
         ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
@@ -5805,7 +5803,7 @@ void ftCo_800AD7FC(Fighter* fp)
     Item* item;
     f32 angle;
 
-    PAD_STACK(0x18);
+    PAD_STACK(0x10);
 
     data = &fp->x1A88;
     if (fp->item_gobj == NULL) {
@@ -6305,7 +6303,7 @@ void ftCo_800AE7AC(Fighter* fp, Vec3* arg1, int arg2)
     f32 sum_y;
     f32 cy;
     f32 dy;
-    PAD_STACK(0x18);
+    PAD_STACK(0x10);
 
     data->xF8_b0 = true;
     data->xF9_b3 = false;
@@ -6691,7 +6689,7 @@ void ftCo_800AF290(Fighter* fp)
     f32 dy;
     f32 dist;
     struct Fighter_x1A88_t* data = &fp->x1A88;
-    PAD_STACK(0x18);
+    PAD_STACK(0x30);
 
     cmd = ftCo_800A229C(fp, &sp54);
     if (cmd != 0) {
@@ -6989,7 +6987,7 @@ void ftCo_800AFC40(Fighter* fp)
     s32 var_r0;
     struct Fighter_x1A88_t* temp_r4;
 
-    PAD_STACK(0x18);
+    PAD_STACK(0x10);
 
     temp_r31 = &fp->x1A88;
     if (fp->x221D_b6) {
@@ -7045,7 +7043,7 @@ void ftCo_800AFE3C(Fighter* fp, int arg1)
     Fighter* temp_r3_6;
     s32 temp_r3;
 
-    PAD_STACK(0x10);
+    PAD_STACK(0x14);
 
     temp_r31 = &fp->x1A88;
     temp_r3 = ftCo_800A229C(fp, &sp2C);
@@ -7694,7 +7692,7 @@ void ftCo_800B126C(Fighter* fp)
     data->x2C = 1;
     data->xF9_b1 = false;
 
-    PAD_STACK(0x18);
+    PAD_STACK(0x10);
 
     fp->x1A88.x44 = ftCo_800A4BEC(fp);
     if (fp->item_gobj != NULL && !ftCo_800A5908(GET_ITEM(fp->item_gobj))) {

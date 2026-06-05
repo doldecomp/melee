@@ -52,7 +52,8 @@ typedef struct UnkX {
     HSD_JObj* x54_jobj[4];
 } UnkX; // HudIndex
 
-/* 2F491C */ static void ifStatus_PercentOnDeathAnimationThink(UnkX* value);
+/* 2F491C */ static void ifStatus_PercentOnDeathAnimationThink(UnkX* value,
+                                                               s32, s32);
 /* 3F9628 */ Element_803F9628 ifStatus_803F9628[8] = {
     { NULL, 0, if_802F74D0, 0x7C860U, 8, 0, { 0 }, 0, NULL, NULL, 0, 0 },
     { NULL, 0, if_802F73C4, 0xC351U, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
@@ -174,12 +175,12 @@ inline void jobj_unk(UnkX* value)
     }
 }
 
-inline HSD_JObj* jobj_get(UnkX* value, s32 i)
+inline void* jobj_get(HSD_JObj* jobj_r30, UnkX* value, s32 i)
 {
     return value->x54_jobj[i];
 }
 
-void ifStatus_PercentOnDeathAnimationThink(UnkX* value)
+void ifStatus_PercentOnDeathAnimationThink(UnkX* value, s32 arg1, s32 arg2)
 {
     s32 i;
 
@@ -201,18 +202,18 @@ void ifStatus_PercentOnDeathAnimationThink(UnkX* value)
         if (fabsf_bitwise(jobj_r30->translate.x) < 100.0f)
         { // 100.0f @ lbl_804DDA6C
             float f = (&value->x34_vec.x)[i];
-            jobj_r30 = jobj_get(value, i);
+            jobj_r30 = (void*) jobj_get(jobj_r30, value, i);
             ASSERT_NOT_NULL(jobj_r30, 1102);
             jobj_r30->translate.x += f;
             jobj_flagCheckSetMtxDirtySub(jobj_r30);
         }
-        jobj_r30 = jobj_get(value, i);
+        jobj_r30 = (void*) jobj_get(jobj_r30, value, i);
         ASSERT_NOT_NULL(jobj_r30, 1006);
 
         if (jobj_r30->translate.y > -100.0f) {
             float f = (&value->x44_vec.x)[i];
-            jobj_r30 = jobj_get(value, i);
-            jobj_r30 = jobj_get(value, i);
+            jobj_r30 = (void*) jobj_get(jobj_r30, value, i);
+            jobj_r30 = (void*) jobj_get(jobj_r30, value, i);
             ASSERT_NOT_NULL(jobj_r30, 1114);
             jobj_r30->translate.y += f;
             jobj_flagCheckSetMtxDirtySub(jobj_r30);
@@ -323,7 +324,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
 
     /* Check for death animation flag (bit 7 of flags byte at offset 0x10) */
     if (state->flags.explode_animation) {
-        ifStatus_PercentOnDeathAnimationThink((UnkX*) state);
+        ifStatus_PercentOnDeathAnimationThink((UnkX*) state, 0, 0);
         return;
     }
 

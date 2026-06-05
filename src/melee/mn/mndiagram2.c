@@ -634,7 +634,7 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
     HSD_ASSERT(0x3EE, jobj);
     f30 = jobj->translate.y - f31;
 
-    lb_8000B1CC(data->row0_ref, (Vec3*) (base + 0xC), &sp20);
+    lb_8000B1CC(data->row0_ref, (Vec3*) &mnDiagram2_803EEAD0[0xC], &sp20);
 
     {
         u32 r22 = (u8) row_idx;
@@ -657,7 +657,7 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                     if (r21 != 0xFFFF) {
                         HSD_Text* text2;
                         int var_r3;
-                        lb_8000B1CC(data->row0_ref, (Vec3*) (base + 0xC),
+                        lb_8000B1CC(data->row0_ref, (Vec3*) &mnDiagram2_803EEAD0[0xC],
                                     &sp20);
                         text2 = HSD_SisLib_803A5ACC(
                             0, 1, mnDiagram2_804DBFD8 + sp20.x,
@@ -708,10 +708,10 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                             (u8) mnDiagram2_GetStatValue(
                                 is_name_mode, stat_type, entity_idx),
                             0);
-                        HSD_JObjSetTranslateX(jobj, *(f32*) (base + 0x24));
+                        HSD_JObjSetTranslateX(jobj, -2.0f);
                         HSD_JObjSetTranslateY(jobj, (f30 * (f32) row_idx) +
-                                                        *(f32*) (base + 0x28));
-                        HSD_JObjSetTranslateZ(jobj, *(f32*) (base + 0x2C));
+                                                        0.0f);
+                        HSD_JObjSetTranslateZ(jobj, 0.0f);
 
                         HSD_JObjAddChild(data->icon_parent, jobj);
                         return;
@@ -723,7 +723,7 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                     temp_r22->row_values[0] = text3;
                     text3->font_size.x = mnDiagram2_804DBFE0;
                     text3->font_size.y = mnDiagram2_804DBFE4;
-                    lb_8000B1CC(data->icon_parent, (Vec3*) (base + 0x18),
+                    lb_8000B1CC(data->icon_parent, (Vec3*) &mnDiagram2_803EEAD0[0x18],
                                 &sp20);
                     text3->pos_x = sp20.x;
                     text3->pos_y = -sp20.y + temp_f31;
