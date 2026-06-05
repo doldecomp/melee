@@ -36,6 +36,13 @@ static THPCoeff* __THPMCUBuffer[6];
 static THPFileInfo* __THPInfo;
 static BOOL __THPInitFlag = FALSE;
 
+typedef struct THPRestartFields {
+    u8 pad[0x8FC];
+    u16 nMCU;
+    u16 currMCU;
+    u8 RST;
+} THPRestartFields;
+
 #define THPROUNDUP(a, b) ((((s32) (a)) + ((s32) (b) - 1L)) / ((s32) (b)))
 
 void __THPPrepBitStream(THPFileInfo* info)
@@ -886,11 +893,12 @@ static int __THPHuffGenerateDecoderTables(THPFileInfo* info, u8 tabIndex)
 
 static u8 __THPRestartDefinition(THPFileInfo* info)
 {
-    info->RST = TRUE;
+    THPRestartFields* restart = (THPRestartFields*) info;
+    restart->RST = TRUE;
     info->file += 2;
-    info->nMCU = (u16) ((info->file)[0] << 8 | (info->file)[1]);
+    restart->nMCU = (u16) ((info->file)[0] << 8 | (info->file)[1]);
     info->file += 2;
-    info->currMCU = info->nMCU;
+    restart->currMCU = restart->nMCU;
     return 0;
 }
 
