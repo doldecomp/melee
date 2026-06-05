@@ -403,7 +403,7 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
     Vec3 cross_vec, local_axis;
     Vec3 gnd_norm;
     Quaternion angle_quat, euler_quat, result_quat;
-    Vec3 euler_angles;
+    Quaternion euler_angles;
     Vec3 collision_point;
     Vec3 floor_point, floor_normal;
     int line_id;
@@ -884,17 +884,11 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                 euler_angles.x = jobj->rotate.x;
                 euler_angles.y = jobj->rotate.y;
                 euler_angles.z = jobj->rotate.z;
-                EulerToQuat(&euler_angles, &euler_quat);
+                EulerToQuat((Vec3*) &euler_angles, &euler_quat);
                 HSD_QuatLib_8037EC4C(&angle_quat, &euler_quat, &result_quat);
                 PSMTXQuat(bone_mtx, &result_quat);
-                HSD_QuatLib_8037EB28(bone_mtx, &euler_angles);
-                if (jobj == NULL) {
-                    __assert("jobj.h", 618, "jobj");
-                }
-                jobj->rotate = *(Quaternion*) &euler_angles;
-                if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-                    HSD_JObjSetMtxDirty(jobj);
-                }
+                HSD_QuatLib_8037EB28(bone_mtx, (Vec3*) &euler_angles);
+                HSD_JObjSetRotation(jobj, &euler_angles);
                 HSD_JObjClearFlagsAll(jobj, 0x20000U);
             }
         }

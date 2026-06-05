@@ -1126,15 +1126,22 @@ void fn_80175D34(void)
     }
 }
 
-static const u8 lbl_803B7B18[40][2] = {
-    { 0x00, 0x0 }, { 0x01, 0x1 },  { 0x02, 0x2 }, { 0x03, 0x3 }, { 0x04, 0x5 },
-    { 0x05, 0x6 }, { 0x06, 0xD },  { 0x07, 0x6 }, { 0x08, 0x6 }, { 0x09, 0x7 },
-    { 0x0A, 0x9 }, { 0x0B, 0x8 },  { 0x0C, 0x6 }, { 0x0D, 0x9 }, { 0x0E, 0x4 },
-    { 0x0F, 0x9 }, { 0x10, 0xA },  { 0x11, 0xC }, { 0x12, 0xD }, { 0x13, 0xD },
-    { 0x14, 0x2 }, { 0x15, 0xD },  { 0x16, 0x6 }, { 0x17, 0x7 }, { 0x18, 0x9 },
-    { 0x19, 0xD }, { 0 },          { 0 },         { 0 },         { 0 },
-    { 0 },         { 0 },          { 0 },         { 0 },         { 0 },
-    { 0 },         { 0x40, 0x80 },
+static const struct {
+    u8 lookup[34][2];
+    Vec3 translate;
+} lbl_803B7B18 = {
+    {
+        { 0x00, 0x0 }, { 0x01, 0x1 }, { 0x02, 0x2 }, { 0x03, 0x3 },
+        { 0x04, 0x5 }, { 0x05, 0x6 }, { 0x06, 0xD }, { 0x07, 0x6 },
+        { 0x08, 0x6 }, { 0x09, 0x7 }, { 0x0A, 0x9 }, { 0x0B, 0x8 },
+        { 0x0C, 0x6 }, { 0x0D, 0x9 }, { 0x0E, 0x4 }, { 0x0F, 0x9 },
+        { 0x10, 0xA }, { 0x11, 0xC }, { 0x12, 0xD }, { 0x13, 0xD },
+        { 0x14, 0x2 }, { 0x15, 0xD }, { 0x16, 0x6 }, { 0x17, 0x7 },
+        { 0x18, 0x9 }, { 0x19, 0xD }, { 0 },         { 0 },
+        { 0 },         { 0 },         { 0 },         { 0 },
+        { 0 },         { 0 },
+    },
+    { 0.0F, 4.0F, 0.0F },
 };
 
 void fn_80175DC8(HSD_GObj* gobj)
@@ -1158,21 +1165,13 @@ void fn_80175DC8(HSD_GObj* gobj)
     HSD_JObj* sp94;
     HSD_JObj* sp8C;
     HSD_JObj* sp84;
-    s32 sp80;
-    s32 sp7C;
-    s32 sp78;
+    Vec3 sp78;
     Point3d sp6C;
-    s32 sp68;
-    s32 sp64;
-    s32 sp60;
+    Vec3 sp60;
     Point3d sp54;
-    s32 sp50;
-    s32 sp4C;
-    s32 sp48;
+    Vec3 sp48;
     Point3d sp3C;
-    s32 sp38;
-    s32 sp34;
-    s32 sp30;
+    Vec3 sp30;
     Point3d sp24;
     DynamicModelDesc* model;
     HSD_JObj* jobj;
@@ -1442,52 +1441,44 @@ void fn_80175DC8(HSD_GObj* gobj)
     fn_801785B0(gobj);
     switch (me->x5) {
     case 0:
-        sp78 = M2C_FIELD(&lbl_803B7B18, s32*, 0x44);
-        sp7C = M2C_FIELD(&lbl_803B7B18, s32*, 0x48);
-        sp80 = M2C_FIELD(&lbl_803B7B18, s32*, 0x4C);
+        sp78 = lbl_803B7B18.translate;
         if (lbl_8046DBE8.x2C != NULL) {
             HSD_SisLib_803A5CC4(lbl_8046DBE8.x2C);
         }
-        lb_8000B1CC(lbl_8046DBE8.x28, (Vec3*) &sp78, &sp6C);
+        lb_8000B1CC(lbl_8046DBE8.x28, &sp78, &sp6C);
         HSD_SisLib_803A6368(
             HSD_SisLib_803A5ACC(0, 0, sp6C.x, -sp6C.y, sp6C.z, 12.0F,
                                 300.0F),
             2);
         break;
     case 1:
-        sp60 = M2C_FIELD(&lbl_803B7B18, s32*, 0x44);
-        sp64 = M2C_FIELD(&lbl_803B7B18, s32*, 0x48);
-        sp68 = M2C_FIELD(&lbl_803B7B18, s32*, 0x4C);
+        sp60 = lbl_803B7B18.translate;
         if (lbl_8046DBE8.x2C != NULL) {
             HSD_SisLib_803A5CC4(lbl_8046DBE8.x2C);
         }
-        lb_8000B1CC(lbl_8046DBE8.x28, (Vec3*) &sp60, &sp54);
+        lb_8000B1CC(lbl_8046DBE8.x28, &sp60, &sp54);
         HSD_SisLib_803A6368(
             HSD_SisLib_803A5ACC(0, 0, sp54.x, -sp54.y, sp54.z, 12.0F,
                                 300.0F),
             3);
         break;
     case 2:
-        sp48 = M2C_FIELD(&lbl_803B7B18, s32*, 0x44);
-        sp4C = M2C_FIELD(&lbl_803B7B18, s32*, 0x48);
-        sp50 = M2C_FIELD(&lbl_803B7B18, s32*, 0x4C);
+        sp48 = lbl_803B7B18.translate;
         if (lbl_8046DBE8.x2C != NULL) {
             HSD_SisLib_803A5CC4(lbl_8046DBE8.x2C);
         }
-        lb_8000B1CC(lbl_8046DBE8.x28, (Vec3*) &sp48, &sp3C);
+        lb_8000B1CC(lbl_8046DBE8.x28, &sp48, &sp3C);
         HSD_SisLib_803A6368(
             HSD_SisLib_803A5ACC(0, 0, sp3C.x, -sp3C.y, sp3C.z, 12.0F,
                                 300.0F),
             4);
         break;
     case 3:
-        sp30 = M2C_FIELD(&lbl_803B7B18, s32*, 0x44);
-        sp34 = M2C_FIELD(&lbl_803B7B18, s32*, 0x48);
-        sp38 = M2C_FIELD(&lbl_803B7B18, s32*, 0x4C);
+        sp30 = lbl_803B7B18.translate;
         if (lbl_8046DBE8.x2C != NULL) {
             HSD_SisLib_803A5CC4(lbl_8046DBE8.x2C);
         }
-        lb_8000B1CC(lbl_8046DBE8.x28, (Vec3*) &sp30, &sp24);
+        lb_8000B1CC(lbl_8046DBE8.x28, &sp30, &sp24);
         HSD_SisLib_803A6368(
             HSD_SisLib_803A5ACC(0, 0, sp24.x, -sp24.y, sp24.z, 12.0F,
                                 300.0F),
@@ -1539,8 +1530,8 @@ static inline int fn_80176BF0_inline(u8 arg1)
 {
     int i;
     for (i = 0; i < 0x21; i++) {
-        if (arg1 == lbl_803B7B18[i][0]) {
-            return lbl_803B7B18[i][1];
+        if (arg1 == lbl_803B7B18.lookup[i][0]) {
+            return lbl_803B7B18.lookup[i][1];
         }
     }
     return -1;

@@ -1063,37 +1063,13 @@ void grKongo_801D6AFC(void)
         } while (var_ctr_7 != 0);
     }
     {
-        s32 var_ctr_8 = 3;
-        f32* var_r7_2 = var_r7;
-        do {
-            f32 temp_f2 = *var_r7_2;
+        int i;
+        for (i = 0; i < 0xF; i++) {
+            f32 temp_f2 = var_r7[i];
             if (temp_f2 != 0.0) {
-                var_r6->unkC += temp_f2;
+                var_r6[i].unkC += temp_f2;
             }
-            temp_f2 = *++var_r7_2;
-            var_r6 += 1;
-            if (temp_f2 != 0.0) {
-                var_r6->unkC += temp_f2;
-            }
-            temp_f2 = *++var_r7_2;
-            var_r6 += 1;
-            if (temp_f2 != 0.0) {
-                var_r6->unkC += temp_f2;
-            }
-            temp_f2 = *++var_r7_2;
-            var_r6 += 1;
-            if (temp_f2 != 0.0) {
-                var_r6->unkC += temp_f2;
-            }
-            temp_f2 = *++var_r7_2;
-            var_r6 += 1;
-            if (temp_f2 != 0.0) {
-                var_r6->unkC += temp_f2;
-            }
-            var_r7_2 += 1;
-            var_r6 += 1;
-            var_ctr_8 -= 1;
-        } while (var_ctr_8 != 0);
+        }
     }
 }
 

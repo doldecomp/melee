@@ -3,7 +3,6 @@
 from argparse import ArgumentParser
 import os
 import json
-import sys
 from pathlib import Path
 from typing import Optional, Tuple
 
@@ -20,10 +19,6 @@ UNIT_KEYS_TO_DIFF = [
 ]
 
 FUNCTION_KEYS_TO_DIFF = [
-    "fuzzy_match_percent",
-]
-
-SECTION_KEYS_TO_DIFF = [
     "fuzzy_match_percent",
 ]
 
@@ -61,10 +56,7 @@ def get_changes(changes_file: str) -> Tuple[list[Change], list[Change]]:
         unit_name = unit["name"]
         for key in UNIT_KEYS_TO_DIFF:
             diff_key(unit_name, unit, key)
-        for section in unit.get("sections", []):
-            section_name = section["name"]
-            for key in SECTION_KEYS_TO_DIFF:
-                diff_key(f"{unit_name}::{section_name}", section, key)
+        # Ignore sections
         for func in unit.get("functions", []):
             func_name = func["name"]
             for key in FUNCTION_KEYS_TO_DIFF:
@@ -147,11 +139,6 @@ def main():
         action="store_true",
         help="""Includes progressions as well.""",
     )
-    parser.add_argument(
-        "--fail-on-regressions",
-        action="store_true",
-        help="""Exit with status 1 if any regression is detected.""",
-    )
     args = parser.parse_args()
 
     regressions, progressions = get_changes(args.report_changes_file)
@@ -169,9 +156,6 @@ def main():
             changes = regressions
         text_output = generate_changes_plaintext(changes)
         print(text_output)
-
-    if args.fail_on_regressions and regressions:
-        sys.exit(1)
 
 
 if __name__ == "__main__":

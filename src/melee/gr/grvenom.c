@@ -1501,25 +1501,7 @@ void grVenom_80205F30(Ground_GObj* gobj)
                             s32 idx0 = base[gp->gv.venom.xC8 + 14];
                             s32 anim_id = base[idx0 * 4 + 0xD6];
                             tmp_jobj = Ground_801C3FA4((HSD_GObj*) gobj, anim_id);
-                            if (tmp_jobj == NULL) {
-                                __assert("jobj.h", 0x2A9, "jobj");
-                            }
-                            if (tmp_jobj->flags & 0x20000) {
-                                __assert("jobj.h", 0x2AA, (char*) base + 0x2D4);
-                            }
-                            tmp_jobj->rotate.z = 0.0F;
-                            if (!(tmp_jobj->flags & 0x02000000)) {
-                                if (tmp_jobj != NULL) {
-                                    s32 dirty = 0;
-                                    u32 f = tmp_jobj->flags;
-                                    if (!(f & 0x800000) && (f & 0x40)) {
-                                        dirty = 1;
-                                    }
-                                    if (dirty == 0) {
-                                        HSD_JObjSetMtxDirtySub(tmp_jobj);
-                                    }
-                                }
-                            }
+                            HSD_JObjSetRotationZ(tmp_jobj, 0.0F);
                         }
                         gp->gv.venom.xF8 = gp->gv.venom.xF8 - 1;
                     }

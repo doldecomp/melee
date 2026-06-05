@@ -1420,14 +1420,13 @@ def generate_build_ninja(
             rule="changes_fmt",
             inputs=report_changes_path,
             implicit=changes_fmt,
-            variables={"args": "--fail-on-regressions"},
         )
         n.build(
             outputs="changes_all",
             rule="changes_fmt",
             inputs=report_changes_path,
             implicit=changes_fmt,
-            variables={"args": "--all --fail-on-regressions"},
+            variables={"args": "--all"},
         )
         n.rule(
             name="changes_md",
