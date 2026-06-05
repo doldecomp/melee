@@ -115,60 +115,51 @@ void ftCo_80091B9C(Fighter_GObj* gobj)
     fp->mv.co.guard.x24 = p_ftCommonData->x68;
 }
 
-static inline float normalizeAngle180(float deg)
-{
-    if (deg > 180) {
-        deg -= 360;
-    } else if (deg < -180) {
-        deg += 360;
-    }
-    return deg;
-}
-
-static inline float normalizeAngle0(float deg)
-{
-    if (deg > 360) {
-        deg -= 360;
-    } else if (deg < 0) {
-        deg += 360;
-    }
-    return deg;
-}
-
 void ftCo_80091BC4(Fighter* fp)
 {
-    float lstick_x = fp->input.lstick.x * fp->facing_dir;
-    float lstick_rad = lb_8000D008(fp->input.lstick.y, lstick_x);
-    if (lstick_rad < 0) {
-        lstick_rad += 2 * (float) M_PI;
+    float stick_rad, stick_deg, deg_delta, guard_deg, smoothed_deg, stick_mag;
+
+    stick_rad =
+        lb_8000D008(fp->input.lstick.y, fp->input.lstick.x * fp->facing_dir);
+    if (stick_rad < 0) {
+        stick_rad += 2 * (float) M_PI;
     }
-    {
-        float lstick_deg = rad_to_deg * lstick_rad;
-        if (lstick_deg < 0) {
-            lstick_deg = 0;
-        }
-        if (lstick_deg > 359) {
-            lstick_deg = 359;
-        }
-        {
-            Fighter* fp0;
-            float offset = (fp0 = fp)->mv.co.guard.x8 - 10;
-            float deg = lstick_deg - offset;
-            lstick_x = normalizeAngle180(deg);
-            fp->mv.co.guard.x8 =
-                10 + normalizeAngle0(lstick_x * p_ftCommonData->x44C + offset);
-            {
-                float lstick_mag =
-                    sqrtf(SQ(fp0->input.lstick.x) + SQ(fp0->input.lstick.y));
-                if (lstick_mag > 1) {
-                    lstick_mag = 1;
-                }
-                fp->mv.co.guard.x4 = (lstick_rad = p_ftCommonData->x44C) *
-                                         (lstick_mag - fp->mv.co.guard.x4) +
-                                     fp->mv.co.guard.x4;
-            }
+
+    stick_deg = rad_to_deg * stick_rad;
+    if (stick_deg < 0) {
+        stick_deg = 0;
+    }
+    if (stick_deg > 359) {
+        stick_deg = 359;
+    }
+
+    guard_deg = fp->mv.co.guard.x8 - 10;
+    deg_delta = stick_deg - guard_deg;
+    if (deg_delta > 180) {
+        deg_delta -= 360;
+    } else if (deg_delta < -180) {
+        deg_delta += 360;
+    }
+
+    smoothed_deg = deg_delta * p_ftCommonData->x44C + guard_deg;
+    if (smoothed_deg > 360) {
+        guard_deg = smoothed_deg;
+        guard_deg -= 360;
+    } else {
+        guard_deg = smoothed_deg;
+        if (guard_deg < 0) {
+            guard_deg += 360;
         }
     }
+    fp->mv.co.guard.x8 = 10 + guard_deg;
+
+    stick_mag = sqrtf(fp->input.lstick.x * fp->input.lstick.x +
+                      fp->input.lstick.y * fp->input.lstick.y);
+    if (stick_mag > 1) {
+        stick_mag = 1;
+    }
+    fp->mv.co.guard.x4 +=
+        p_ftCommonData->x44C * (stick_mag - fp->mv.co.guard.x4);
 }
 
 static inline float inlineB0(Fighter* fp)
@@ -245,14 +236,10 @@ void ftCo_80091E78(HSD_GObj* gobj, float arg1)
 
 void ftCo_80092158(Fighter_GObj* gobj, int arg1, HSD_JObj* arg2)
 {
-    u8 temp_ret = Player_GetUnk45(GET_FIGHTER(gobj)->player_id);
-    u8* temp_r7 = &Fighter_804D650C[temp_ret];
-    u8 temp_r7_2 = M2C_FIELD(temp_r7, u8*, 2);
+    int offset = Player_GetUnk45(GET_FIGHTER(gobj)->player_id) << 2;
+    u8* color = Fighter_804D650C + offset;
     efSync_Spawn(arg1, gobj, arg2,
-                 temp_r7_2 |
-                     (((M2C_FIELD(temp_r7, u8*, 1) << 8) & ~0xFF0000) |
-                      ((M2C_FIELD(temp_r7, u8*, 0) << 0x10) & 0xFF0000)),
-                 temp_r7_2, M2C_BITWISE(float, temp_ret));
+                 (color[0] << 16) | (color[1] << 8) | color[2]);
 }
 void ftCo_800921DC(HSD_GObj* gobj)
 {
@@ -721,14 +708,12 @@ void ftCo_8009370C(Fighter_GObj* gobj, HSD_GObjEvent on_reflect)
 
 void ftCo_80093790(Fighter_GObj* gobj)
 {
+    u8 _[8] = { 0 };
     Fighter* fp = gobj->user_data;
     ftCommon_8007DB24(gobj);
-    {
-        HSD_JObj* jobj = fp->parts[fp->ft_data->x8->x11].joint;
-        ftCo_80092158(gobj, 1050, jobj);
-        fp->x2219_b0 = true;
-        ft_PlaySFX(fp, 128, 127, 64);
-    }
+    ftCo_80092158(gobj, 1050, fp->parts[fp->ft_data->x8->x11].joint);
+    fp->x2219_b0 = true;
+    ft_PlaySFX(fp, 128, 127, 64);
 }
 
 void ftCo_80093850(Fighter_GObj* gobj)
