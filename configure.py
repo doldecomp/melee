@@ -1685,7 +1685,7 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/shadow.c"),
             Object(Matching, "sysdolphin/baselib/archive.c"),
             Object(Matching, "sysdolphin/baselib/random.c"),
-            Object(NonMatching, "sysdolphin/baselib/bytecode.c"),
+            Object(Matching, "sysdolphin/baselib/bytecode.c"),
             Object(Matching, "sysdolphin/baselib/class.c"),
             Object(Matching, "sysdolphin/baselib/hash.c"),
             Object(NonMatching, "sysdolphin/baselib/texp.c"),
