@@ -973,7 +973,7 @@ void grGreens_80215358(Ground_GObj* gobj, int col, int row, int arg3, int arg4)
     Vec vec;
     float f;
     PAD_STACK(0x10);
-    HSD_ASSERT(1305, block->status == Gr_Greens_Block_Status_None);
+    HSD_ASSERT(1305, block->status==Gr_Greens_Block_Status_None);
     for (n = 0; n < 30; n++) {
         arr[n] = 0;
     }
@@ -989,7 +989,7 @@ void grGreens_80215358(Ground_GObj* gobj, int col, int row, int arg3, int arg4)
             break;
         }
     }
-    HSD_ASSERT(1316, num < Gr_Greens_Block_Max);
+    HSD_ASSERT(1316, num<Gr_Greens_Block_Max);
     if (arg3 == 1) {
         type = 1;
     } else if (arg3 == 2) {

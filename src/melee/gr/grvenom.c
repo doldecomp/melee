@@ -1289,9 +1289,9 @@ void grVenom_80205AD4(Ground_GObj* gobj)
     *(s32*) &gp->gv.venom.xE4 = zero;
     *(s32*) &gp->gv.venom.xE0 = zero;
 
-    grAnime_801C7FF8(gobj, 7, 7, 0, grVe_804DB740, grVe_804DB73C);
-    grAnime_801C7FF8(gobj, 8, 7, 0, grVe_804DB740, grVe_804DB73C);
-    grAnime_801C8098(gobj, 2, 7, 3, grVe_804DB740, grVe_804DB73C);
+    grAnime_801C7FF8(gobj, 7, 7, 0, 0.0F, 1.0F);
+    grAnime_801C7FF8(gobj, 8, 7, 0, 0.0F, 1.0F);
+    grAnime_801C8098(gobj, 2, 7, 3, 0.0F, 1.0F);
 
     data = base + gp->gv.venom.xC8;
     type = data[11];
