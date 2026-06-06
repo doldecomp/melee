@@ -2246,17 +2246,14 @@ void hsd_80394950(OSContext* ctx)
     OSRestoreInterrupts(irq);
 }
 
-extern u8 lbl_8040AB00[];
-
 // @TODO: Currently 99.94% match - minor relocation difference
 void Exception_ReportStackTrace(OSContext* ctx, int max_depth)
 {
     u32 i;
     u32* sp;
-    char* strings = (char*) lbl_8040AB00;
 
-    OSReport(strings + 0x8CC);
-    OSReport(strings + 0x904);
+    OSReport("- STACK ---------------------------------\n");
+    OSReport(" Address:  Back Chain  LR Save\n");
 
     sp = (u32*) ctx->gpr[1];
     i = 0;
@@ -2269,7 +2266,7 @@ void Exception_ReportStackTrace(OSContext* ctx, int max_depth)
         if ((s64) (u32) sp >= (s64) OSGetPhysicalMemSize() + 0x800000000) {
             break;
         }
-        OSReport(strings + 0x924, sp, sp[0], sp[1]);
+        OSReport("%08X:   %08X   %08X\n", sp, sp[0], sp[1]);
         sp = (u32*) sp[0];
         i++;
     }
