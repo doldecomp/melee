@@ -229,18 +229,6 @@ void fn_80320A1C(HSD_GObj* gobj)
     HSD_FogInterpretAnim(gobj->hsd_obj);
 }
 
-static void HSD_JObjSetRotationY_2(HSD_JObj* jobj, f32 y)
-{
-    ((jobj) ? ((void) 0) : __assert("jobj.h", 660, "jobj"));
-    ((!(jobj->flags & JOBJ_USE_QUATERNION))
-         ? ((void) 0)
-         : __assert("jobj.h", 661, (char*) &un_804002F8 + 0x18));
-    jobj->rotate.y = y;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        (HSD_JObjSetMtxDirty)(jobj);
-    }
-}
-
 void un_80320A40_OnEnter(void* arg)
 {
     u8* input = arg;
@@ -311,7 +299,7 @@ void un_80320A40_OnEnter(void* arg)
     HSD_JObjSetTranslateXWithMtxDirty(child, -un_803060BC(0x1E, 0));
     HSD_JObjSetTranslateYWithMtxDirty(child, -un_803060BC(0x1E, 1));
     HSD_JObjSetTranslateZWithMtxDirty(child, -un_803060BC(0x1E, 2));
-    HSD_JObjSetRotationY_2(child, -un_803060BC(0x1E, 5));
+    HSD_JObjSetRotationYWithMtxDirty(child, -un_803060BC(0x1E, 5));
 
     scale = 0.55f * (un_803060BC(0x1E, 4) * (1.0f / un_803060BC(0x1E, 3)));
 
