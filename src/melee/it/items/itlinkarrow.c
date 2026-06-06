@@ -96,6 +96,77 @@ f32 it_803F6A84[] = {
     2.0f, 3.0f, 4.0f, 5.0f, 6.0f,  7.0f,  8.0f,  9.0f,
 };
 
+static f32 sdata2_ordering(void)
+{
+    volatile f32 zero = 0.0f;
+
+    return zero;
+}
+
+s32 itLinkArrow_802A81C4(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    f32 z, rand, temp;
+    f32* lookup_table;
+
+    switch (ip->xDD4_itemVar.linkarrow.x9C) {
+    case 0:
+    case 2:
+    case 4:
+    case 6:
+        rand = HSD_Randf();
+        lookup_table = &it_803F6A84[ip->xDD4_itemVar.linkarrow.x9C];
+        temp = deg_to_rad * ((lookup_table[8] * rand) + lookup_table[0]);
+        z = ip->xDD4_itemVar.linkarrow.x94 + temp;
+        break;
+    case 1:
+    case 3:
+    case 5:
+        rand = HSD_Randf();
+        lookup_table = &it_803F6A84[ip->xDD4_itemVar.linkarrow.x9C];
+        temp = deg_to_rad * ((lookup_table[8] * rand) + lookup_table[0]);
+        z = ip->xDD4_itemVar.linkarrow.x94 - temp;
+        break;
+    default:
+        z = ip->xDD4_itemVar.linkarrow.x94;
+        break;
+    }
+    HSD_JObjSetRotationZ(jobj, z);
+    ip->xDD4_itemVar.linkarrow.x9C -= 1;
+}
+
+void it_802A8330(HSD_GObj* gobj)
+{
+    Item* item;
+    f32 pad;
+    if (gobj != NULL) {
+        item = GET_ITEM(gobj);
+        if (item != NULL) {
+            if (item->xDD4_itemVar.linkarrow.xB4[0] != NULL) {
+                HSD_JObjRemoveAll(item->xDD4_itemVar.linkarrow.xB4[0]);
+                item->xDD4_itemVar.linkarrow.xB4[0] = NULL;
+            }
+            if (item->xDD4_itemVar.linkarrow.xB4[1] != NULL) {
+                HSD_JObjRemoveAll(item->xDD4_itemVar.linkarrow.xB4[1]);
+                item->xDD4_itemVar.linkarrow.xB4[1] = NULL;
+            }
+        }
+    }
+}
+
+void it_802A8398(Item_GObj* gobj, Vec3* pos, Vec3* pos2)
+{
+    Item* item;
+    if (gobj != NULL) {
+        item = GET_ITEM(gobj);
+        if (item != NULL) {
+            item->pos = *pos;
+            item->xDD4_itemVar.linkarrow.x18 = *pos2;
+        }
+    }
+}
+
 HSD_GObj* it_802A83E0(f32 facing_dir, Fighter_GObj* arg1, Vec3* arg2,
                       Fighter_Part arg3, s32 arg4)
 {
@@ -139,72 +210,6 @@ HSD_GObj* it_802A83E0(f32 facing_dir, Fighter_GObj* arg1, Vec3* arg2,
         db_80225DD8(gobj, (Fighter_GObj*) arg1);
     }
     return gobj;
-}
-
-s32 fn_802A81C4(Item_GObj* gobj)
-{
-    f32 var_f31;
-    f32 var_f32;
-    Item* ip = GET_ITEM(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-    f32 rand;
-    f32* temp_r3;
-
-    switch (ip->xDD4_itemVar.linkarrow.x9C) {
-    case 0:
-    case 2:
-    case 4:
-    case 6:
-        rand = HSD_Randf();
-        temp_r3 = (f32*) &it_803F6A28 + ip->xDD4_itemVar.linkarrow.x9C;
-        var_f32 = deg_to_rad * ((temp_r3[31] * rand) + temp_r3[23]);
-        var_f31 = ip->xDD4_itemVar.linkarrow.x94 + var_f32;
-        break;
-    case 1:
-    case 3:
-    case 5:
-        rand = HSD_Randf();
-        temp_r3 = (f32*) &it_803F6A28 + ip->xDD4_itemVar.linkarrow.x9C;
-        var_f32 = deg_to_rad * ((temp_r3[31] * rand) + temp_r3[23]);
-        var_f31 = ip->xDD4_itemVar.linkarrow.x94 - var_f32;
-        break;
-    default:
-        var_f31 = ip->xDD4_itemVar.linkarrow.x94;
-        break;
-    }
-    HSD_JObjSetRotationZ(jobj, var_f31);
-    ip->xDD4_itemVar.linkarrow.x9C -= 1;
-}
-
-void it_802A8330(HSD_GObj* gobj)
-{
-    Item* item;
-    f32 pad;
-    if (gobj != NULL) {
-        item = GET_ITEM(gobj);
-        if (item != NULL) {
-            if (item->xDD4_itemVar.linkarrow.xB4[0] != NULL) {
-                HSD_JObjRemoveAll(item->xDD4_itemVar.linkarrow.xB4[0]);
-                item->xDD4_itemVar.linkarrow.xB4[0] = NULL;
-            }
-            if (item->xDD4_itemVar.linkarrow.xB4[1] != NULL) {
-                HSD_JObjRemoveAll(item->xDD4_itemVar.linkarrow.xB4[1]);
-                item->xDD4_itemVar.linkarrow.xB4[1] = NULL;
-            }
-        }
-    }
-}
-
-void it_802A8398(Item_GObj* gobj, Vec3* pos, Vec3* pos2)
-{
-    Item* item;
-    if (gobj != NULL) {
-        item = GET_ITEM(gobj);
-        if (item != NULL) {
-            item->pos = *pos;
-            item->xDD4_itemVar.linkarrow.x18 = *pos2;
-        }
-    }
 }
 
 inline HSD_JObj* itLinkArrow_802A850C_inline(HSD_Joint* joint)
@@ -639,7 +644,7 @@ static bool inline itlinkarrow_inline_bool(Item_GObj* gobj)
 
 bool itLinkarrow_UnkMotion4_Anim(Item_GObj* gobj)
 {
-    // this is just fn_802A81C4, but I can't get it to inline
+    // this is just itLinkArrow_802A81C4, but I can't get it to inline
     f32 var_f31;
     int zero;
     f32 var_f32;
@@ -690,7 +695,7 @@ bool itLinkarrow_UnkMotion4_Anim(Item_GObj* gobj)
             return true;
         }
     }
-    return zero;
+    return false;
 }
 
 void itLinkarrow_UnkMotion4_Phys(HSD_GObj* gobj)
@@ -743,13 +748,6 @@ bool itLinkArrow_Logic98_DmgDealt(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     itLinkArrowAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
     ip->x40_vel.x *= attr->x14;
-    it_802A8330(gobj);
-    return true;
-}
-
-bool itLinkArrow_Logic98_Clanked(Item_GObj* gobj)
-{
-    f32 pad;
     it_802A8330(gobj);
     return true;
 }
@@ -808,6 +806,13 @@ bool itLinkArrow_Logic98_HitShield(Item_GObj* gobj)
     return true;
 end:
     return false;
+}
+
+bool itLinkArrow_Logic98_Clanked(Item_GObj* gobj)
+{
+    f32 pad;
+    it_802A8330(gobj);
+    return true;
 }
 
 bool itLinkArrow_Logic98_Reflected(Item_GObj* gobj)
