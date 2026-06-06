@@ -1380,8 +1380,14 @@ config.libs = [
             Object(Matching, "melee/vi/vi1101.c"),
             Object(NonMatching, "melee/vi/vi1201v1.c"),
             Object(NonMatching, "melee/vi/vi1201v2.c"),
-            Object(NonMatching, "melee/vi/vi1202.c"),
+            Object(Matching, "melee/vi/vi1202.c"),
         ],
+    ),
+    MeleeLib(
+        "sfx (Sound effects)",
+        [
+            Object(NonMatching, "melee/sfx/crowdsfx.c"),
+        ]
     ),
     RuntimeLib(
         "Gekko runtime",

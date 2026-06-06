@@ -44,7 +44,7 @@
 #include "mp/mplib.h"
 #include "pl/player.h"
 #include "pl/plbonuslib.h"
-#include "vi/vi1202.h"
+#include "sfx/crowdsfx.h"
 
 #include <common_structs.h>
 #include <math.h>
