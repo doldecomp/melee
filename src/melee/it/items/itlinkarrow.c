@@ -233,7 +233,7 @@ inline void itLinkArrow_802A850C_inline_2(Item_GObj* gobj, Quaternion* quat)
     }
 }
 
-void itLinkArrow_802A850C(Item_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3,
+bool itLinkArrow_802A850C(Item_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3,
                           f32 arg4, f32 arg5)
 {
     Item* ip = GET_ITEM(gobj);
@@ -292,8 +292,8 @@ void itLinkArrow_802A850C(Item_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3,
             itLinkArrow_802A850C_inline(attr->x28);
 
         ip->xDD4_itemVar.linkarrow.xB0 = 0;
-        it_8026EA20(gobj, &ip->xDD4_itemVar.linkarrow.x18, &ip->pos, &sp68,
-                    &ip->xDD4_itemVar.linkarrow.xE4, &flags);
+        return it_8026EA20(gobj, &ip->xDD4_itemVar.linkarrow.x18, &ip->pos,
+                           &sp68, &ip->xDD4_itemVar.linkarrow.xE4, &flags);
     }
 }
 
