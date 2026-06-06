@@ -1493,7 +1493,7 @@ void gm_80162B4C(s32 amount)
 void gm_IncrementPowerCount(void)
 {
     u32 result;
-    u32 val;
+    s32 val;
     u32* ptr;
 
     ptr = gmMainLib_GetPowerCount();

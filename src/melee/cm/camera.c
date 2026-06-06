@@ -2141,6 +2141,7 @@ void Camera_8002CB0C(CameraBounds* bounds)
     Camera* camera;
     CameraInputs inputs;
     s32 valid;
+    s32 selected_slot;
     s8* slot;
     s32 dir;
     Vec3* x308_ptr;
@@ -2163,8 +2164,7 @@ void Camera_8002CB0C(CameraBounds* bounds)
         Camera_8002B694(&inputs, pauser_slot);
     }
 
-    zoom_dir = 0.0f;
-    y_val = x_val = zoom_dir;
+    zoom_dir = x_val = y_val = 0.0f;
     dir = 0;
 
     stick_x = inputs.stick_x;
@@ -2253,7 +2253,7 @@ void Camera_8002CB0C(CameraBounds* bounds)
             }
         }
 
-        valid = (s8) *slot;
+        selected_slot = (s8) *slot;
         z_init = Stage_GetPauseCamZPosInit();
 
         camera->x314.x = camera->x314.y = camera->x314.z = 0.0f;
@@ -2264,7 +2264,7 @@ void Camera_8002CB0C(CameraBounds* bounds)
         camera->pause_up.y = 1.0f;
         camera->pause_up.z = 0.0f;
 
-        if (valid == 0xA) {
+        if (selected_slot == 0xA) {
             camera->pause_eye_distance = 3.0f * z_init;
         } else {
             camera->pause_eye_distance = z_init;

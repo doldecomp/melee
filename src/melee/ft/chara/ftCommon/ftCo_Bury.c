@@ -278,6 +278,11 @@ void ftCo_Bury_Anim(Fighter_GObj* gobj)
 
 void ftCo_Bury_IASA(Fighter_GObj* gobj) {}
 
+static inline Vec3* ftCo_Bury_GetTranslate(Fighter* fp)
+{
+    return &fp->mv.co.bury.translate;
+}
+
 void ftCo_800C0FCC(HSD_GObj* arg0, Fighter_GObj* arg1)
 {
     Fighter* fp = GET_FIGHTER(arg1);
@@ -290,7 +295,7 @@ void ftCo_800C0FCC(HSD_GObj* arg0, Fighter_GObj* arg1)
         if (mpGetSpeed(fp->coll_data.floor.index, &fp->mv.co.bury.translate,
                        &offset))
         {
-            PSVECAdd(&fp->mv.co.bury.translate, &offset,
+            PSVECAdd(ftCo_Bury_GetTranslate(fp), &offset,
                      &fp->mv.co.bury.translate);
             HSD_JObjSetTranslate(jobj, &fp->mv.co.bury.translate);
         }

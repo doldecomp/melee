@@ -1050,7 +1050,9 @@ void grIceMt_801F8B10(Ground_GObj* arg0)
     f32 cur;
     mul = 0.3f * gp->gv.icemt2.xC4;
     jobj = Ground_801C3FA4(arg0, 8);
-    HSD_ASSERT(0x78F, jobj);
+    if (jobj == NULL) {
+        __assert(grIm_803E46F8, 0x78F, &grIm_804D4718);
+    }
     cur = HSD_JObjGetTranslationY(jobj);
     cur = cur - mul;
     if (cur > 0.5f * (3500.0f * Ground_801C0498())) {

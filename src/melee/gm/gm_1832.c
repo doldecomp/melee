@@ -93,6 +93,15 @@ static struct {
     u8 pad_104[0x54];
 } lbl_804735E8;
 
+typedef struct gm_1832_8047368C_t {
+    /* 0x00 */ s32 model_scale_kind;
+    /* 0x04 */ s32 game_type;
+    /* 0x08 */ u8 pad_8[0x1C];
+} gm_1832_8047368C_t;
+STATIC_ASSERT(sizeof(gm_1832_8047368C_t) == 0x24);
+
+extern gm_1832_8047368C_t lbl_8047368C;
+
 static HSD_Archive* lbl_804D65F4;
 static HSD_Archive* lbl_804D65F8;
 static HSD_GObj* lbl_804D65F0;
@@ -953,19 +962,19 @@ void fn_80186080(void)
     HSD_SisLib_803A62A0(0, "SdIntro.dat", "SIS_IntroData");
     lbl_804735A8.x4[6] = (HSD_JObj*) HSD_SisLib_803A5ACC(
         0, temp_r31, 0.0f, 0.0f, 0.0f, 640.0f, 480.0f);
-    if (lbl_804735E8.xE8 == 1) {
+    if (lbl_8047368C.game_type == 1) {
         if (lbLang_IsSavedLanguageUS()) {
             HSD_SisLib_803A6368((HSD_Text*) lbl_804735A8.x4[6], 5);
             return;
         }
         HSD_SisLib_803A6368((HSD_Text*) lbl_804735A8.x4[6], 2);
-    } else if (lbl_804735E8.xE8 == 3) {
+    } else if (lbl_8047368C.game_type == 3) {
         if (lbLang_IsSavedLanguageUS()) {
             HSD_SisLib_803A6368((HSD_Text*) lbl_804735A8.x4[6], 6);
             return;
         }
         HSD_SisLib_803A6368((HSD_Text*) lbl_804735A8.x4[6], 3);
-    } else if (lbl_804735E8.xE8 == 2) {
+    } else if (lbl_8047368C.game_type == 2) {
         if (lbLang_IsSavedLanguageUS()) {
             HSD_SisLib_803A6368((HSD_Text*) lbl_804735A8.x4[6], 7);
             return;
@@ -1268,14 +1277,16 @@ void fn_80186EFC(HSD_GObj* gobj)
     }
 }
 
-static struct {
+typedef struct gm_80186F6C_Entry {
     /* 0x00 */ f32 x0;
     /* 0x04 */ f32 x4;
     /* 0x08 */ f32 x8;
     /* 0x0C */ f32 xC;
     /* 0x10 */ f32 x10;
     /* 0x14 */ f32 x14;
-} lbl_803D9498[] = {
+} gm_80186F6C_Entry;
+
+static gm_80186F6C_Entry lbl_803D9498[] = {
     { 0.0f, -4.5f, 0.0f, 1.0f, 1.0f, 1.0f },
     { 0.0f, 1.5f, 0.0f, 0.6f, 0.6f, 0.6f },
     { 0.0f, -5.3f, 0.0f, 1.3f, 1.3f, 1.3f },
@@ -1311,20 +1322,21 @@ void fn_80186F6C(HSD_GObj* arg0)
     Vec3 pos;
     HSD_JObj* jobj = arg0->hsd_obj;
     HSD_JObj* child = lbl_804736B0.x8;
+    gm_80186F6C_Entry* entry = lbl_803D9498;
     PAD_STACK(4);
 
     HSD_JObjGetTranslation(child, &pos);
 
     pos.x -= 7.0f;
-    pos.x += lbl_803D9498[lbl_804D6618.x0].x0;
-    pos.y += lbl_803D9498[lbl_804D6618.x0].x4;
-    pos.z += lbl_803D9498[lbl_804D6618.x0].x8;
+    pos.x += entry[lbl_804D6618.x0].x0;
+    pos.y += entry[lbl_804D6618.x0].x4;
+    pos.z += entry[lbl_804D6618.x0].x8;
 
     HSD_JObjSetTranslate(jobj, &pos);
 
-    HSD_JObjSetScaleX(jobj, lbl_803D9498[lbl_804D6618.x0].xC);
-    HSD_JObjSetScaleY(jobj, lbl_803D9498[lbl_804D6618.x0].x10);
-    HSD_JObjSetScaleZ(jobj, lbl_803D9498[lbl_804D6618.x0].x14);
+    HSD_JObjSetScaleX(jobj, entry[lbl_804D6618.x0].xC);
+    HSD_JObjSetScaleY(jobj, entry[lbl_804D6618.x0].x10);
+    HSD_JObjSetScaleZ(jobj, entry[lbl_804D6618.x0].x14);
 
     {
         HSD_GObj* entity2 = Player_GetEntityAtIndex(0, 1);

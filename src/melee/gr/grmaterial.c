@@ -41,9 +41,25 @@ static inline ColorOverlay* grMaterial_GetOverlay(Ground* gp)
     return (ColorOverlay*) ((u8*) gp + 0x40);
 }
 
-/* 3E0A20 */ static HSD_MObjInfo grMaterial_803E0A20 = { 0 };
+struct grMaterial_MObjInfo {
+    /*   +0 */ HSD_ClassInfo parent;
+    /*  +3C */ HSD_MObjSetupFunc setup;
+    /*  +40 */ int (*load)(HSD_MObj* mobj, HSD_MObjDesc* desc);
+    /*  +44 */ HSD_TExp* (*make_texp)(HSD_MObj* mobj, HSD_TObj* tobj_top,
+                                      HSD_TExp** list);
+    /*  +48 */ void (*setup_tev)(HSD_MObj* mobj, HSD_TObj* tobj,
+                                 u32 rendermode);
+    /*  +4C */ void (*unset)(HSD_MObj* mobj, u32 rendermode);
+    /*  +50 */ u8 pad_x50[0xDC - 0x50];
+    /*  +DC */ char library_name[0xF4 - 0xDC];
+};
+
+/* 3E0A20 */ static struct grMaterial_MObjInfo grMaterial_803E0A20 = { 0 };
+/* 4D4560 */ static char grMaterial_804D4560[] = "gr_mobj";
 /* 4D4568 */ static char grMaterial_804D4568[] = "0";
-/* 4D456C */ static ItCmd grMaterial_804D456C[1];
+/* 4D456C */ static ItCmd grMaterial_804D456C[1] = {
+    grMaterial_801C9470,
+};
 
 static u32 data_section_pad[35] = { 0 };
 
@@ -248,7 +264,8 @@ void grMaterial_801C8E68(HSD_GObj* gobj, GroundOrAir ground_or_air)
 void grMaterial_801C8E74(void)
 {
     hsdInitClassInfo(HSD_CLASS_INFO(&grMaterial_803E0A20),
-                     HSD_CLASS_INFO(&hsdMObj), "sysdolphin_base_library",
+                     HSD_CLASS_INFO(&hsdMObj),
+                     grMaterial_803E0A20.library_name,
                      "gr_mobj", sizeof(HSD_MObjInfo), sizeof(HSD_MObj));
     HSD_CLASS_INFO(&grMaterial_803E0A20)->release =
         HSD_CLASS_INFO(&hsdMObj)->release;

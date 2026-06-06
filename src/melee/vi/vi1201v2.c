@@ -146,7 +146,7 @@ void un_8032074C(HSD_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
     char pad[24];
     HSD_JObjAnimAll(jobj);
-    if (mn_8022F298(jobj) == 1.0F) {
+    if (mn_8022F298(jobj) == 251.0F) {
         if (un_804D7030 != NULL) {
             HSD_GObjPLink_80390228(un_804D7030);
             un_804D7030 = NULL;

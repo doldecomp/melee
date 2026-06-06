@@ -28,6 +28,9 @@
 #include <MSL/stdio.h>
 #include <MSL/string.h>
 
+/* 4DDC28 */ extern float un_804DDC28;
+/* 4DDC2C */ extern float un_804DDC2C;
+
 /// .data
 /* 3F9E08 */ static struct {
     struct {
@@ -68,6 +71,9 @@ struct un_804A1F58_x8_t {
 /// .sbss
 /* 4D6DA0 */ static void* un_804D6DA0;
 /* 4D6DA4 */ static SceneDesc* un_804D6DA4;
+
+/// .sdata2
+/* 4DDC20 */ extern float un_804DDC20;
 
 void fn_802FED14(HSD_GObj* gobj)
 {
@@ -122,7 +128,7 @@ void un_802FEFAC(void)
     HSD_GObj_SetupProc(gobj_ui, fn_802FED14, 17);
     gm_8016895C(jobj_ui, un_804D6DA4->models[0], 0);
     HSD_JObjSetFlagsAll(jobj_ui, 0x10);
-    HSD_JObjReqAnimAll(jobj_ui, 0.0);
+    HSD_JObjReqAnimAll(jobj_ui, un_804DDC20);
     HSD_JObjAnimAll(jobj_ui);
     un_803F9E08.xC = gobj_ui;
 }
@@ -222,8 +228,9 @@ void un_802FF364(int slot)
         s = 9999;
     }
     thing->x8 =
-        HSD_SisLib_803A6B98(thing->x4, ifAll->x, ifAll->y + 3.2f, "%d", s);
-    HSD_SisLib_803A7548(thing->x4, thing->x8, 0.06, 0.06);
+        HSD_SisLib_803A6B98(thing->x4, ifAll->x, un_804DDC28 + ifAll->y, "%d",
+                            s);
+    HSD_SisLib_803A7548(thing->x4, thing->x8, un_804DDC2C, un_804DDC2C);
     thing->x4->render_callback = fn_802FF360;
     thing->x0 = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
     HSD_GObj_SetupProc(thing->x0, fn_802FF218, 17);

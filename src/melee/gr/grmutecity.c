@@ -392,7 +392,8 @@ static s32 grMc_804D69D4;
 
 static f32 light_ref_br = 40000.0f;
 static f32 light_ref_dist = 0.99f;
-static s32 light_dist_func = 0x1;
+static s32 grMc_804D46CC = 0x1;
+#define light_dist_func grMc_804D46CC
 
 void grMuteCity_801EFC68(bool arg) {}
 
@@ -542,8 +543,8 @@ void grMuteCity_801F0120(Ground_GObj* gobj)
 
     ground = GET_GROUND(gobj);
     if (ground->gv.mutecity.x110 != NULL) {
-        HSD_LObjSetDistAttn(ground->gv.mutecity.x110, light_ref_dist,
-                            light_ref_br, light_dist_func);
+        HSD_LObjSetDistAttn(ground->gv.mutecity.x110, light_ref_br,
+                            light_ref_dist, light_dist_func);
     }
     grMuteCity_801F04B8(gobj);
     grMuteCity_801F0948(gobj);
@@ -580,10 +581,15 @@ bool grMuteCity_801F0288(Ground_GObj* arg)
     return false;
 }
 
+static inline f32 grMuteCity_801F0290_get_target(Ground* gp)
+{
+    return gp->gv.mutecity2.xCC;
+}
+
 void grMuteCity_801F0290(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    f32 target = gp->gv.mutecity2.xCC;
+    f32 target = grMuteCity_801F0290_get_target(gp);
     f32 current = gp->gv.mutecity2.xD0;
     f32 diff = target - current;
 
@@ -591,7 +597,7 @@ void grMuteCity_801F0290(Ground_GObj* gobj)
         if (diff < 0.001f) {
             gp->gv.mutecity2.xD0 = target;
         } else {
-            gp->gv.mutecity2.xD0 = current + 0.001f;
+            gp->gv.mutecity2.xD0 += 0.001f;
         }
     } else if (diff < 0.0f) {
         if (diff > -0.001f) {
@@ -1655,7 +1661,9 @@ DynamicModelDesc* grMuteCity_801F28A8(void)
 {
     UnkArchiveStruct* archive = grDatFiles_801C6330(0x26);
     UnkStageDat* dat;
-    HSD_ASSERT(2135, archive);
+    if (archive == NULL) {
+        __assert(grMc_803E3434, 2135, "archive");
+    }
     dat = archive->unk4;
     if (dat != NULL) {
         return (DynamicModelDesc*) ((char*) dat->unk8 + 0x7B8);

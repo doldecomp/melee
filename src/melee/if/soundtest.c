@@ -95,35 +95,35 @@
 /* 3FA348 */ static u16 un_803FA348;
 /* 3FA34C */ static u8 un_803FA34C;
 /* 3FA32C */ static u8 un_803FA32C;
-/* 3FA658 */ static u8 un_803FA658[0x290];
-/* 3FA8E8 */ static u8 un_803FA8E8[0x15C];
-/* 3FAA44 */ static u8 un_803FAA44[0xC0];
-/* 3FB168 */ static u8 un_803FB168[0x4A4];
-/* 3FB60C */ static u8 un_803FB60C[0xE0];
-/* 3FB728 */ static u8 un_803FB728[0xC0];
-/* 3FB870 */ static u8 un_803FB870[0xE0];
-/* 3FB98C */ static u8 un_803FB98C[0xC0];
-/* 3FBA9C */ static u8 un_803FBA9C[0xC0];
-/* 3FBB98 */ static u8 un_803FBB98[0xC0];
-/* 3FBCAC */ static u8 un_803FBCAC[0xC0];
-/* 3FBDC0 */ static u8 un_803FBDC0[0xC0];
-/* 3FBFFC */ static u8 un_803FBFFC[0xC0];
-/* 3FC0FC */ static u8 un_803FC0FC[0xC0];
-/* 3FC22C */ static u8 un_803FC22C[0x1F4];
-/* 3FC63C */ static u8 un_803FC63C[0x80];
-/* 3FC70C */ static u8 un_803FC70C[0x11C];
-/* 3FC828 */ static u8 un_803FC828[0xA0];
-/* 3FC8C8 */ static u8 un_803FC8C8[0x168];
-/* 3FCA40 */ static u8 un_803FCA40[0x1A0];
-/* 3FCC38 */ static u8 un_803FCC38[0xFC];
-/* 3FCD34 */ static u8 un_803FCD34[0x118];
-/* 3FCE4C */ static u8 un_803FCE4C[0xE0];
-/* 3FD064 */ static u8 un_803FD064[0x1C0];
-/* 3FD310 */ static u8 un_803FD310[0x27C];
-/* 3FD58C */ static u8 un_803FD58C[0x2D8];
-/* 3FD864 */ static u8 un_803FD864[0x294];
-/* 3FDAF8 */ static u8 un_803FDAF8[0x80];
-/* 3FDB9C */ static u8 un_803FDB9C[0x84];
+/* 3FA658 */ static u8 un_803FA658[0x290] = { 0 };
+/* 3FA8E8 */ static u8 un_803FA8E8[0x15C] = { 0 };
+/* 3FAA44 */ static u8 un_803FAA44[0xC0] = { 0 };
+/* 3FB168 */ static u8 un_803FB168[0x4A4] = { 0 };
+/* 3FB60C */ static u8 un_803FB60C[0xE0] = { 0 };
+/* 3FB728 */ static u8 un_803FB728[0xC0] = { 0 };
+/* 3FB870 */ static u8 un_803FB870[0xE0] = { 0 };
+/* 3FB98C */ static u8 un_803FB98C[0xC0] = { 0 };
+/* 3FBA9C */ static u8 un_803FBA9C[0xC0] = { 0 };
+/* 3FBB98 */ static u8 un_803FBB98[0xC0] = { 0 };
+/* 3FBCAC */ static u8 un_803FBCAC[0xC0] = { 0 };
+/* 3FBDC0 */ static u8 un_803FBDC0[0xC0] = { 0 };
+/* 3FBFFC */ static u8 un_803FBFFC[0xC0] = { 0 };
+/* 3FC0FC */ static u8 un_803FC0FC[0xC0] = { 0 };
+/* 3FC22C */ static u8 un_803FC22C[0x1F4] = { 0 };
+/* 3FC63C */ static u8 un_803FC63C[0x80] = { 0 };
+/* 3FC70C */ static u8 un_803FC70C[0x11C] = { 0 };
+/* 3FC828 */ static u8 un_803FC828[0xA0] = { 0 };
+/* 3FC8C8 */ static u8 un_803FC8C8[0x168] = { 0 };
+/* 3FCA40 */ static u8 un_803FCA40[0x1A0] = { 0 };
+/* 3FCC38 */ static u8 un_803FCC38[0xFC] = { 0 };
+/* 3FCD34 */ static u8 un_803FCD34[0x118] = { 0 };
+/* 3FCE4C */ static u8 un_803FCE4C[0xE0] = { 0 };
+/* 3FD064 */ static u8 un_803FD064[0x1C0] = { 0 };
+/* 3FD310 */ static u8 un_803FD310[0x27C] = { 0 };
+/* 3FD58C */ static u8 un_803FD58C[0x2D8] = { 0 };
+/* 3FD864 */ static u8 un_803FD864[0x294] = { 0 };
+/* 3FDAF8 */ static u8 un_803FDAF8[0x80] = { 0 };
+/* 3FDB9C */ static u8 un_803FDB9C[0x84] = { 0 };
 /* 3FD224 */ extern char un_803FD224[];
 /* 3FD230 */ extern char un_803FD230[];
 /* 3FD23C */ extern char un_803FD23C[];
@@ -182,6 +182,8 @@
 /* 45A6C0 */ extern u8 gmMainLib_8045A6C0[];
 
 /// .sdata2 (extern)
+/* 4DDC38 */ extern float un_804DDC38;
+/* 4DDC3C */ extern float un_804DDC3C;
 /* 4DDC48 */ extern float un_804DDC48;
 /* 4DDC4C */ extern float un_804DDC4C;
 /* 4DDC50 */ extern float un_804DDC50;
@@ -222,8 +224,8 @@ int un_802FF88C(void)
     }
     {
         un_80304138_objalloc_t* x = un_80302DF0();
-        x->x4->scale_x = 16.0f;
-        x->x4->scale_y = 32.0f;
+        x->x4->scale_x = un_804DDC38;
+        x->x4->scale_y = un_804DDC3C;
     }
     return 1;
 }

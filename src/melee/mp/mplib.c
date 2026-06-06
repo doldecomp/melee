@@ -4391,12 +4391,10 @@ void mpJointUnhide(int joint_id)
         line++;
     }
 
-    count = joint->inner->vtx_count;
     vtx = &groundCollVtx[joint->inner->vtx_start];
-    while (count-- > 0) {
+    for (i = joint->inner->vtx_count; i > 0; i--, vtx++) {
         vtx->x10 = vtx->pos.x;
         vtx->x14 = vtx->pos.y;
-        vtx++;
     }
 }
 

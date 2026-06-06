@@ -260,16 +260,16 @@ void ftAction_80071028(Fighter_GObj* gobj, CommandInfo* cmd)
             /// @todo i believe they are actually read in reverse order, maybe
             // ftCo_8009F834 also reads them in reverse.
             // double check this in-game eventually...
-            offset.x = (1 / 256.0f) * cmd->u->spawn_gfx_2.offsetZ;
-            offset.y = (1 / 256.0f) * cmd->u->spawn_gfx_2.offsetY;
+            offset.x = 0.003906f * cmd->u->spawn_gfx_2.offsetZ;
+            offset.y = 0.003906f * cmd->u->spawn_gfx_2.offsetY;
 
             NEXT_CMD(cmd);
-            offset.z = (1 / 256.0f) * cmd->u->spawn_gfx_3.offsetX;
-            range.x = (1 / 256.0f) * cmd->u->spawn_gfx_3.rangeZ;
+            offset.z = 0.003906f * cmd->u->spawn_gfx_3.offsetX;
+            range.x = 0.003906f * cmd->u->spawn_gfx_3.rangeZ;
 
             NEXT_CMD(cmd);
-            range.y = (1 / 256.0f) * cmd->u->spawn_gfx_4.rangeY;
-            range.z = (1 / 256.0f) * cmd->u->spawn_gfx_4.rangeX;
+            range.y = 0.003906f * cmd->u->spawn_gfx_4.rangeY;
+            range.z = 0.003906f * cmd->u->spawn_gfx_4.rangeX;
 
             NEXT_CMD(cmd);
             ftCo_8009F834(gobj, gfx_id, bone, use_common_bone_id,
@@ -400,7 +400,7 @@ void ftAction_8007169C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HitCapsule* hit = &fp->x914[cmd->u->set_hitbox_scale.idx];
-    hit->scale = (1 / 256.0f) * cmd->u->set_hitbox_scale.value;
+    hit->scale = 0.003906f * cmd->u->set_hitbox_scale.value;
     NEXT_CMD(cmd);
 }
 
@@ -1253,7 +1253,7 @@ void ftAction_80073008(Fighter_GObj* gobj, CommandInfo* cmd)
 
     charge_rate = cmd->u->smash_charge_0.charge_rate;
     charge_frames = cmd->u->smash_charge_0.charge_frames;
-    dmg_mult = (1 / 256.0f) * charge_rate;
+    dmg_mult = 0.003906f * charge_rate;
     NEXT_CMD(cmd);
     color_anim = cmd->u->smash_charge_1.color_anim;
     NEXT_CMD(cmd);
