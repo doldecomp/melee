@@ -40,7 +40,7 @@
 #include <melee/pl/player.h>
 #include <melee/pl/plbonus.h>
 #include <melee/pl/plbonuslib.h>
-#include <melee/vi/vi1202.h>
+#include <melee/sfx/crowdsfx.h>
 
 lbl_8046B6A0_t* gm_8016AE38(void)
 {
