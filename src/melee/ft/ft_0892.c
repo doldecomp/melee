@@ -170,8 +170,7 @@ void ft_800895E0(Fighter* fp, int arg1)
     union Struct2070 sp14;
     union Struct2070 spC;
 
-    spC.x2070_int = arg1;
-    val = spC;
+    val = *(union Struct2070*) &arg1;
     if (val.x2073 == 0 || val.x2073 != fp->x2070.x2073) {
         fp->x2074.x2088 = plAttack_80037B08();
     }

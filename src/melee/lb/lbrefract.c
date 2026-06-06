@@ -111,9 +111,10 @@ extern float MSL_TrigF_80400770[], MSL_TrigF_80400774[];
 void lbRefract_80021CE8(void* arg0, s32 arg1)
 {
     lbRefract_CallbackData* cb = arg0;
+    u32 param_idx;
     u32 col, row;
     f32 x_step, y_step;
-    f32 x, y, y_sq;
+    f32 y, x, y_sq;
     f32 dist_sq;
     f32 dist;
     f32 param0;
@@ -123,6 +124,7 @@ void lbRefract_80021CE8(void* arg0, s32 arg1)
 
     PAD_STACK(20);
 
+    param_idx = arg1 * 2;
     x_step = 2.0f / (f32) (u32) (cb->width - 1);
     y_step = 2.0f / (f32) (u32) (cb->height - 1);
     y = -1.0f;
@@ -146,7 +148,7 @@ void lbRefract_80021CE8(void* arg0, s32 arg1)
                 dist = 1.0f;
             }
             params = *(f32**) (lbl_804D63E8 + 4);
-            param0 = params[arg1 * 2];
+            param0 = params[param_idx];
             if (param0 != 0.0f) {
                 f32 rem;
                 if (__fabsf(param0) > __fabsf(dist)) {
@@ -159,7 +161,7 @@ void lbRefract_80021CE8(void* arg0, s32 arg1)
                 param0 = dist;
             }
             params = *(f32**) (lbl_804D63E8 + 4);
-            param0 *= params[arg1 * 2 + 1];
+            param0 *= params[param_idx + 1];
             if (param0 > 1.0f) {
                 param0 = 1.0f;
             }

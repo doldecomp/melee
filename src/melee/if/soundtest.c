@@ -52,7 +52,7 @@
     u8 x226;
     u8 x227;
 } un_803FA128;
-/* 3FA258 */ static struct un_803FA258_t {
+/* 3FA258 */ struct un_803FA258_t {
     int x0;
     int x4[4];
     int x14[4];
@@ -130,7 +130,7 @@
 /* 3FD24C */ extern char un_803FD24C[];
 /* 3FD258 */ extern char un_803FD258[];
 /* 3FD264 */ extern char un_803FD264[];
-/* 3FD274 */ extern void* un_803FD274;
+/* 3FD274 */ extern void* un_803FD274[];
 /* 3FD28C */ extern char un_803FD28C[];
 /* 3FD29C */ extern char un_803FD29C[];
 /* 3FD2AC */ extern char un_803FD2AC[];
@@ -176,7 +176,7 @@
 /* 4D590C */ extern s32 un_804D590C;
 /* 4D5910 */ extern s32 un_804D5910;
 
-/* 4D5990 */ extern char un_804D5990[];
+/* 4D5990 */ extern SDATA char un_804D5990[];
 
 /// .bss (extern)
 /* 45A6C0 */ extern u8 gmMainLib_8045A6C0[];
@@ -584,11 +584,12 @@ s32 un_80300410(s32 arg0)
     if (arg0 == 1) {
         u8* dst;
         lbAudioAx_80024030(1);
-        dst = &gmMainLib_8045A6C0[un_803FA128.x220 + 0x1868];
-        dst[0] = un_803FA128.x224;
-        dst[1] = un_803FA128.x225;
-        dst[2] = un_803FA128.x226;
-        dst[3] = un_803FA128.x227;
+        dst = gmMainLib_8045A6C0;
+        dst += un_803FA128.x220;
+        dst[0x1868] = un_803FA128.x224;
+        dst[0x1869] = un_803FA128.x225;
+        dst[0x186A] = un_803FA128.x226;
+        dst[0x186B] = un_803FA128.x227;
     }
     return 0;
 }
@@ -1413,7 +1414,7 @@ int un_80301964(int arg0)
 
             gobj = GObj_Create(0xE, 0xF, 0);
             GObj_SetupGXLink(gobj, HSD_SObjLib_803A49E0, 0x12, 0);
-            un_803FD274 = un_804D6E04;
+            un_803FD274[0] = un_804D6E04;
             sobj =
                 HSD_SObjLib_803A477C(gobj, (int) un_804D5990, 0, 0, 0x80, 0);
             sobj->x10 = un_804DDC4C;

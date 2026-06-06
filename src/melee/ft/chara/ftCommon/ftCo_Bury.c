@@ -256,7 +256,7 @@ void ftCo_800C0D0C(Fighter_GObj* gobj)
         float y = hip_pos.y - joint_pos.y;
         fp->mv.co.bury.x1C = y / p_ftCommonData->x5F4;
         fp->mv.co.bury.translate = fp->cur_pos;
-        efSync_Spawn(1095, gobj, &fp->cur_pos, &fp->x34_scale.y, y);
+        efSync_Spawn(1095, gobj, &fp->cur_pos, &fp->x34_scale.y);
     }
     fp->x2219_b0 = true;
 }

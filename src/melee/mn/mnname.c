@@ -1406,9 +1406,9 @@ void mnName_8023A290(void)
 
 HSD_GObj* mnName_8023A59C(u8 arg0)
 {
+    HSD_JObj* root_jobj;
     char* base = (char*) &mnName_803ED538;
     HSD_GObj* gobj;
-    HSD_JObj* root_jobj;
     MnName_GObj* user_data;
     HSD_JObj* jobj5;
     MnNameArchive* archive = &mnName_804A06E0;

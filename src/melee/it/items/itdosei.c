@@ -343,7 +343,8 @@ static inline void itDosei_SetupWalk_FC(Item_GObj* gobj)
     ip->owner = NULL;
     it_802762B0(ip);
     Item_80268E5C(gobj, 1, 0xB);
-    itDosei_SetSpeed(gobj, ip, 1.0f);
+    ip->x5D0_animFrameSpeed = 1.0f;
+    lb_8000BA0C(jobj, 1.0f);
     {
         HSD_JObj* j = gobj->hsd_obj;
         itDosei_SetRotX(j, 0.0f);
@@ -359,6 +360,7 @@ static inline void itDosei_SetupWalk_FC(Item_GObj* gobj)
 bool itDosei_UnkMotion2_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
+    PAD_STACK(16);
     it_8026D62C(gobj, it_80282074);
     if (ip->xDD4_itemVar.dosei.xDD8 == 2) {
         itDosei_SetupWalk_FC(gobj);
@@ -653,6 +655,7 @@ void itDosei_UnkMotion9_Phys(Item_GObj* gobj) {}
 bool itDosei_UnkMotion9_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
+    PAD_STACK(16);
     it_8026D62C(gobj, it_80282074);
     if (ip->xDD4_itemVar.dosei.xDD8 == 2) {
         f32 frame = ip->x5CC_currentAnimFrame;

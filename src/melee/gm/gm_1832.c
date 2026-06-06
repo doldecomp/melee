@@ -184,7 +184,6 @@ void fn_8018325C(HSD_GObj* arg0, int arg1)
     HSD_JObj* jobj = arg0->hsd_obj;
     HSD_JObj* src = lbl_804735A8.x4[0];
     int i;
-    HSD_JObj* arrow;
 
     HSD_JObjGetTranslation(src, &pos);
     HSD_JObjSetTranslate(jobj, &pos);
@@ -193,23 +192,21 @@ void fn_8018325C(HSD_GObj* arg0, int arg1)
     case 1:
         HSD_JObjAddTranslationZ(jobj, -10.0f);
         if (lbl_804735A8.x38 > 0x50U) {
-            arrow = lbl_804735A8.x4[2];
-            HSD_JObjSetTranslateX(arrow, -1.0f);
-            HSD_JObjSetTranslateY(arrow, 0.0f);
-            HSD_JObjSetTranslateZ(arrow, 5.0f);
-            HSD_JObjSetScaleX(arrow, 2.8f);
-            HSD_JObjSetScaleY(arrow, 2.8f);
+            HSD_JObjSetTranslateX(lbl_804735A8.x4[2], -1.0f);
+            HSD_JObjSetTranslateY(lbl_804735A8.x4[2], 0.0f);
+            HSD_JObjSetTranslateZ(lbl_804735A8.x4[2], 5.0f);
+            HSD_JObjSetScaleX(lbl_804735A8.x4[2], 2.8f);
+            HSD_JObjSetScaleY(lbl_804735A8.x4[2], 2.8f);
         }
         break;
     case 2:
         HSD_JObjAddTranslationZ(jobj, -30.0f);
         if (lbl_804735A8.x38 > 0x5AU) {
-            arrow = lbl_804735A8.x4[3];
-            HSD_JObjSetTranslateX(arrow, -0.5f);
-            HSD_JObjSetTranslateY(arrow, 3.0f);
-            HSD_JObjSetTranslateZ(arrow, 5.0f);
-            HSD_JObjSetScaleX(arrow, 2.2f);
-            HSD_JObjSetScaleY(arrow, 2.2f);
+            HSD_JObjSetTranslateX(lbl_804735A8.x4[3], -0.5f);
+            HSD_JObjSetTranslateY(lbl_804735A8.x4[3], 3.0f);
+            HSD_JObjSetTranslateZ(lbl_804735A8.x4[3], 5.0f);
+            HSD_JObjSetScaleX(lbl_804735A8.x4[3], 2.2f);
+            HSD_JObjSetScaleY(lbl_804735A8.x4[3], 2.2f);
         }
         break;
     }
@@ -240,18 +237,15 @@ void fn_8018325C(HSD_GObj* arg0, int arg1)
             jobj, lbl_804D6604->x6C[lbl_804735E8.xF1[arg1]].x04 +
                       lbl_804D6604->x18[lbl_804735E8.xEF].vals[arg1]);
 
-        {
-            f32 scale_factor = lbl_804D6604->x3C[lbl_804735E8.xEF].vals[arg1];
-            HSD_JObjSetScaleX(jobj,
-                              lbl_804D6604->x6C[lbl_804735E8.xF1[arg1]].x08.x *
-                                  scale_factor);
-            HSD_JObjSetScaleY(jobj,
-                              lbl_804D6604->x6C[lbl_804735E8.xF1[arg1]].x08.y *
-                                  scale_factor);
-            HSD_JObjSetScaleZ(jobj,
-                              lbl_804D6604->x6C[lbl_804735E8.xF1[arg1]].x08.z *
-                                  scale_factor);
-        }
+        HSD_JObjSetScaleX(jobj,
+                          lbl_804D6604->x6C[lbl_804735E8.xF1[arg1]].x08.x *
+                              lbl_804D6604->x3C[lbl_804735E8.xEF].vals[arg1]);
+        HSD_JObjSetScaleY(jobj,
+                          lbl_804D6604->x6C[lbl_804735E8.xF1[arg1]].x08.y *
+                              lbl_804D6604->x3C[lbl_804735E8.xEF].vals[arg1]);
+        HSD_JObjSetScaleZ(jobj,
+                          lbl_804D6604->x6C[lbl_804735E8.xF1[arg1]].x08.z *
+                              lbl_804D6604->x3C[lbl_804735E8.xEF].vals[arg1]);
     }
 
     for (i = 0; i < 6; i++) {
@@ -384,6 +378,9 @@ static char lbl_803D9414[] = { 0x82, 0x73, 0x82, 0x85, 0x82, 0x81,
                                0x82, 0x8D, 0,    0,    0,    0 };
 
 static char lbl_804D40A0[] = { 0x8C, 0x52, 0x92, 0x63, 0x00 };
+
+static const char* const lbl_803B7C58[] = { "IrAls", "IrEzTarg", "IrEzTuki",
+                                            "IrEzFigG" };
 
 void fn_80184AB8(HSD_GObj* arg0)
 {
@@ -747,27 +744,28 @@ void fn_8018575C(HSD_GObj* gobj)
 /// images. Distributes 10 image tiles across a grid with random offsets.
 void fn_801857C4(HSD_GObj* arg0)
 {
-    Vec3 pos;
-    Vec3 pos_copy;
     HSD_ImageDesc* descs[3];
+    Vec3 pos_copy;
+    Vec3 pos;
     HSD_SObj* sobj;
     u64 num_cols;
     s32 row;
     u32 total_tiles;
+    u8* img_idx;
     u32 delay;
     s32 i;
-    u8* img_idx;
 
     PAD_STACK(0x10);
 
     if (lbl_804735E8.xE1 != 0) {
         HSD_GObjPLink_80390228(lbl_804D65F0);
-        img_idx = lbl_804735E8.xD0;
+        img_idx = (u8*) lbl_804735E8.x40;
+        i = 0;
         delay = 1;
-        for (i = 0; i < 10; i++, img_idx++) {
-            descs[0] = &lbl_804735E8.x40[*img_idx];
+        for (; i < 10; i++, img_idx++) {
+            descs[0] = &lbl_804735E8.x40[img_idx[0x90]];
             descs[1] = 0;
-            descs[2] = &lbl_804735E8.x88[*img_idx];
+            descs[2] = &lbl_804735E8.x88[img_idx[0x90]];
             sobj = HSD_SObjLib_803A477C(lbl_804735E8.xDC, (s32) &descs[0], 0,
                                         0, 0x80, 1);
             total_tiles = 10;
@@ -1056,9 +1054,6 @@ void fn_80186400(void)
         HSD_JObjSetTranslateZ(lbl_804735A8.x4[3], 10000.0F);
     }
 }
-
-static const char* const lbl_803B7C58[] = { "IrAls", "IrEzTarg", "IrEzTuki",
-                                            "IrEzFigG" };
 
 static char lbl_804D40B0[] = "IrRdMap";
 

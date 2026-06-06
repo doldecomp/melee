@@ -572,7 +572,10 @@ void fn_80039618(int player)
     {
         int hit_count = 0;
         for (i = 1; i < 100; i++) {
-            if (hit_counts[i] != 0 && i >= 0x11 && i <= 0x30) {
+            if (hit_counts[i] != 0) {
+                if (i < 0x11 || i > 0x30) {
+                    goto skip_hit_count;
+                }
                 hit_count++;
             }
         }
@@ -583,6 +586,7 @@ void fn_80039618(int player)
                 setFlag(player, 0x17);
             }
         }
+    skip_hit_count:;
     }
     if (hits_total != 0) {
         if (pl_CalculateAverage(stats->x56C, hits_total) >= pl_804D6470->x8) {

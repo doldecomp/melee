@@ -314,16 +314,20 @@ void grZebes_801D8644(HSD_GObj* gobj)
     grMaterial_801C8DE0(mat_gobj, 0.0f, -7.0f, 0.0f, 0.0f, 7.0f, 0.0f, 3.0f);
     grMaterial_801C8E08(mat_gobj);
     gp->gv.zebes5.xC4 = 0;
-    gp->gv.zebes5.xC8 = 0xFF;
-    gp->gv.zebes5.xCC = HSD_JObjGetTranslationX(child_jobj);
-    gp->gv.zebes5.xD0 = 0.0f;
-    gp->gv.zebes5.xD4 = 0.0f;
-    gp->gv.zebes5.xD8 = 0.0f;
-    gp->gv.zebes5.xDC = (u32) child_jobj;
-    gp->gv.zebes5.xE0 = (u32) Ground_801C3FA4(gobj, 0x20);
-    gp->gv.zebes5.xE4 = (u32) (mat_gobj2 = mat_gobj);
+    ((grZe_AcidState*) &gp->gv.zebes5.xC8)->x00_state = 0xFF;
+    ((grZe_AcidState*) &gp->gv.zebes5.xC8)->x01_next = 0;
+    ((grZe_AcidState*) &gp->gv.zebes5.xC8)->x02_timer = 0;
+    ((grZe_AcidState*) &gp->gv.zebes5.xC8)->x04_base_x =
+        HSD_JObjGetTranslationX(child_jobj);
+    ((grZe_AcidState*) &gp->gv.zebes5.xC8)->x08_offset = 0.0f;
+    ((grZe_AcidState*) &gp->gv.zebes5.xC8)->x0C_velocity = 0.0f;
+    ((grZe_AcidState*) &gp->gv.zebes5.xC8)->x10_damage = 0.0f;
+    ((grZe_AcidState*) &gp->gv.zebes5.xC8)->x14_jobj1 = child_jobj;
+    ((grZe_AcidState*) &gp->gv.zebes5.xC8)->x18_jobj2 =
+        Ground_801C3FA4(gobj, 0x20);
+    ((grZe_AcidState*) &gp->gv.zebes5.xC8)->x1C_mat = mat_gobj2 = mat_gobj;
 
-    gp->gv.zebes5.xE8 = 0x1C;
+    ((grZe_AcidState*) &gp->gv.zebes5.xC8)->x20_anim_idx = 0x1C;
     gp->gv.zebes5.xEC = 0;
     gp->gv.zebes5.xF4 = 0;
     pos = grZe_803B7FF0.x00;
@@ -759,8 +763,7 @@ void grZebes_801D9758(Ground_GObj* gobj)
 void grZebes_801D9798(HSD_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    grZe_AcidLevelEntry* entry;
-    s16 delay_max, delay_min;
+    s32 delay_max, delay_min;
     f32 rand;
     s32 j;
     HSD_JObj* jobj;
@@ -769,9 +772,8 @@ void grZebes_801D9798(HSD_GObj* gobj)
 
     gp->gv.zebes5.xC4 = 0;
 
-    entry = &grZe_804D6990->xA0_entries[gp->gv.zebes5.xC4];
-    delay_max = entry->x4_delay_max;
-    delay_min = entry->x2_delay_min;
+    delay_max = grZe_804D6990->xA0_entries[gp->gv.zebes5.xC4].x4_delay_max;
+    delay_min = grZe_804D6990->xA0_entries[gp->gv.zebes5.xC4].x2_delay_min;
 
     if (delay_max > delay_min) {
         s32 diff = delay_max - delay_min;
@@ -790,14 +792,14 @@ void grZebes_801D9798(HSD_GObj* gobj)
     gp->gv.zebes5.xDC = 0;
     gp->x11_flags.b012 = 1;
 
+    for (j = 0; j < 0x1D &&
+                (grZe_804D6990->xA0_entries[j + 1].x0_base != 0 ||
+                 grZe_804D6990->xA0_entries[j + 1].x2_delay_min != 0 ||
+                 grZe_804D6990->xA0_entries[j + 1].x4_delay_max != 0 ||
+                 grZe_804D6990->xA0_entries[j + 1].x6_level != 0);
+         j++)
     {
-        grZe_AcidLevelEntry* ep = &grZe_804D6990->xA0_entries[0];
-        for (j = 0; j < 0x1D && (ep->x0_base != 0 || ep->x2_delay_min != 0 ||
-                                 ep->x4_delay_max != 0 || ep->x6_level != 0);
-             j++)
-        {
-            ep = &grZe_804D6990->xA0_entries[j];
-        }
+        ;
     }
 
     rand = HSD_Randf();
@@ -1067,6 +1069,16 @@ void grZebes_801D9F84(Ground_GObj* gobj)
 }
 
 void grZebes_801DA0C0(Ground_GObj* arg) {}
+
+const grZe_BubbleConfig grZe_803B8044 = {
+    { 1.0f, 1.1f, 1.0f, 1.2f, 1.1f, 1.0f, 1.0f },
+    {
+        { 7.59f, 2.5f, 0.0f },
+        { 24.05f, 2.2f, 0.0f },
+        { 8.2f, -4.55f, 0.0f },
+        { 24.1f, -4.6f, 0.0f },
+    },
+};
 
 void grZebes_801DA0C4(f32 level)
 {
@@ -2234,16 +2246,6 @@ void grZebes_801DC744(s32 arg0, u8 arg1)
                          1.0f);
     }
 }
-
-const grZe_BubbleConfig grZe_803B8044 = {
-    { 1.0f, 1.1f, 1.0f, 1.2f, 1.1f, 1.0f, 1.0f },
-    {
-        { 7.59f, 2.5f, 0.0f },
-        { 24.05f, 2.2f, 0.0f },
-        { 8.2f, -4.55f, 0.0f },
-        { 24.1f, -4.6f, 0.0f },
-    },
-};
 
 void grZebes_801DC9DC(s32 arg0)
 {

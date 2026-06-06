@@ -217,10 +217,9 @@ void tyFigupon_80314BE4(HSD_GObj* gobj, int unused)
 
 void tyFigupon_80314C5C(HSD_GObj* gobj)
 {
-    // 3-way regswap (r29-r30-r31) to 100%
     Toy* tp1 = GET_TOY(gobj);
-    struct un_804D6EF4_t* temp_r29 = un_804D6EF4;
     HSD_JObj* jobj = GET_JOBJ(gobj);
+    struct un_804D6EF4_t* temp_r29 = un_804D6EF4;
     PAD_STACK(40);
     if (tp1 != NULL) {
         if (tp1->x8 % 30 == 0) {

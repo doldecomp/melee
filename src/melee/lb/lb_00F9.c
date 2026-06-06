@@ -1237,7 +1237,7 @@ int lb_80011E24(HSD_JObj* root, HSD_JObj** result, ...)
                         break;
                     }
                     if (HSD_JObjGetNext(HSD_JObjGetParent(saved)) != NULL) {
-                        next_node = HSD_JObjGetNext(HSD_JObjGetParent(saved));
+                        next_node = saved = HSD_JObjGetNext(HSD_JObjGetParent(saved));
                         break;
                     }
                     saved = HSD_JObjGetParent(saved);
@@ -1717,8 +1717,8 @@ void fn_80013614(HSD_GObj* gobj)
     struct CameraBlurData* data = gobj->user_data;
     Mtx view_mtx;
     Mtx view_mtx2;
-    GXTexObj tex_obj;
     GXColor color;
+    GXTexObj tex_obj;
     PAD_STACK(16);
 
     if (data->x18 != NULL) {
@@ -1727,14 +1727,23 @@ void fn_80013614(HSD_GObj* gobj)
 
     if (data->x12 == 1) {
         HSD_CObj* cobj = (HSD_CObj*) gobj->hsd_obj;
-        f32 alpha = data->x20;
-        u8 x11 = data->x11;
-        u8 x10 = data->x10;
-        f32 xC = data->xC;
-        f32 x8 = data->x8;
-        f32 x4 = data->x4;
-        f32 x0 = data->x0;
-        HSD_ImageDesc* image = data->x1C;
+        HSD_ImageDesc* image;
+        f32 x0;
+        f32 x4;
+        f32 x8;
+        f32 xC;
+        u8 x10;
+        u8 x11;
+        f32 alpha;
+
+        alpha = data->x20;
+        x11 = data->x11;
+        x10 = data->x10;
+        xC = data->xC;
+        x8 = data->x8;
+        x4 = data->x4;
+        x0 = data->x0;
+        image = data->x1C;
 
         HSD_CObjSetCurrent(cobj);
         HSD_StateSetZMode(0, 7, 0);
@@ -1754,14 +1763,21 @@ void fn_80013614(HSD_GObj* gobj)
         lb_80012994(image, x10, x11, x0, x4, x8, xC, alpha);
     } else {
         HSD_CObj* cobj = (HSD_CObj*) gobj->hsd_obj;
-        u8 x10 = data->x10;
-        f32 xC = data->xC;
-        f32 x8 = data->x8;
-        f32 x4 = data->x4;
-        f32 x0 = data->x0;
-        HSD_ImageDesc* image = data->x1C;
+        HSD_ImageDesc* image;
+        f32 x0;
+        f32 x4;
+        f32 x8;
+        f32 xC;
+        u8 x10;
         u16 width;
         u16 height;
+
+        x10 = data->x10;
+        xC = data->xC;
+        x8 = data->x8;
+        x4 = data->x4;
+        x0 = data->x0;
+        image = data->x1C;
 
         HSD_CObjSetCurrent(cobj);
         HSD_StateSetZMode(0, 7, 0);

@@ -303,9 +303,9 @@ void ftAction_8007121C(Fighter_GObj* gobj, CommandInfo* cmd)
     if ((skip->xF_b4) && (fp->x1064_thrownHitbox.owner == NULL)) {
         ftAction_800715EC(gobj, cmd);
     } else {
-        hitbox = &fp->x914[cmd->u->create_hitbox_0.id];
         hit_group = cmd->u->create_hitbox_0.hit_group;
-        if ((hitbox->state == HitCapsule_Disabled) ||
+        if (((hitbox = &fp->x914[cmd->u->create_hitbox_0.id])->state ==
+             HitCapsule_Disabled) ||
             (hitbox->x4 != hit_group))
         {
             hitbox->x4 = hit_group;
@@ -832,8 +832,8 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
     s32 sp8;
     enum FighterKind ft_kind;
     s32 sfx;
+    u32 behavior;
     u32 sfx_base;
-    u8 behavior;
     f32 direction;
     s32 temp_r8;
     s32 temp_r9;
@@ -841,8 +841,8 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
 
     fp = GET_FIGHTER(gobj);
     pitch_select = cmd->u->stage_sfx_0.pitch_select;
-    sfx_base = cmd->u->stage_sfx_0.sfx_base;
-    behavior = cmd->u->stage_sfx_0.x2_b0_7;
+    behavior = cmd->u->stage_sfx_0.sfx_base;
+    sfx_base = cmd->u->stage_sfx_0.x2_b0_7;
 
     switch (pitch_select) {
     case 0:
@@ -886,7 +886,7 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
         break;
 
     case 2:
-        if (!fp->x2225_b0) {
+        if (!fp->x2225_b6) {
             sp8 = fp->player_id + 0x1E + fp->x221F_b4;
             spC = -1;
             fp->x2144 = lbAudioAx_800264E4(
@@ -894,17 +894,20 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
                                    temp_r8, temp_r9, temp_r10, sp8, spC));
             break;
         }
-        /// @todo cant get the b instruction to generate here and in case 6
         ft_kind = fp->kind;
-        if (ft_kind == FTKIND_GAMEWATCH ||
-            (ft_kind < FTKIND_GAMEWATCH && (ft_kind != FTKIND_SAMUS)))
-        {
-            sp8 = fp->player_id + 0x1E + fp->x221F_b4;
-            spC = -1;
-            fp->x2144 = lbAudioAx_800264E4(
-                lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127,
-                                   temp_r8, temp_r9, temp_r10, sp8, spC));
+        if (ft_kind != FTKIND_GAMEWATCH) {
+            if (ft_kind >= FTKIND_GAMEWATCH) {
+                break;
+            }
+            if (ft_kind == FTKIND_SAMUS) {
+                break;
+            }
         }
+        sp8 = fp->player_id + 0x1E + fp->x221F_b4;
+        spC = -1;
+        fp->x2144 = lbAudioAx_800264E4(
+            lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127,
+                               temp_r8, temp_r9, temp_r10, sp8, spC));
         break;
 
     case 3:
@@ -932,7 +935,7 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
         break;
 
     case 6:
-        if (!fp->x2225_b0) {
+        if (!fp->x2225_b6) {
             sp8 = fp->player_id + 0x2A + fp->x221F_b4;
             spC = -1;
             fp->x2148 = lbAudioAx_800264E4(
@@ -942,15 +945,19 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
         }
 
         ft_kind = fp->kind;
-        if (ft_kind == FTKIND_GAMEWATCH ||
-            (ft_kind < FTKIND_GAMEWATCH && (ft_kind != FTKIND_SAMUS)))
-        {
-            sp8 = fp->player_id + 0x2A + fp->x221F_b4;
-            spC = -1;
-            fp->x2148 = lbAudioAx_800264E4(
-                lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127,
-                                   temp_r8, temp_r9, temp_r10, sp8, spC));
+        if (ft_kind != FTKIND_GAMEWATCH) {
+            if (ft_kind >= FTKIND_GAMEWATCH) {
+                break;
+            }
+            if (ft_kind == FTKIND_SAMUS) {
+                break;
+            }
         }
+        sp8 = fp->player_id + 0x2A + fp->x221F_b4;
+        spC = -1;
+        fp->x2148 = lbAudioAx_800264E4(
+            lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127,
+                               temp_r8, temp_r9, temp_r10, sp8, spC));
         break;
     }
 }

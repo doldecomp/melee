@@ -126,12 +126,8 @@ struct lbl_80472E48_t {
     /* 0x10 */ u8 x10;
     /* 0x11 */ char pad_11[3];
     /* 0x14 */ s32 x14[0x1B];
-    /* 0x80 */ s32 x80;
-    /* 0x84 */ s32 x84;
-    /* 0x88 */ s32 x88;
-    /* 0x8C */ s32 x8C;
-}; /* size = 0x90 */
-STATIC_ASSERT(sizeof(struct lbl_80472E48_t) == 0x90);
+}; /* size = 0x80 */
+STATIC_ASSERT(sizeof(struct lbl_80472E48_t) == 0x80);
 
 /// Adventure mode stage data table entry (size 0x1A)
 /// Table has 110 entries: 22 stages × 5 difficulty levels
@@ -1904,8 +1900,8 @@ s32 fn_8017F2A4(HSD_Text** arg0, f32 farg0, f32 farg1)
     HSD_Text* text;
     HSD_Text** ptr;
     u8* data;
-    f32 x_end;
     f32 y;
+    f32 x_end;
     s32 temp;
     s32 i;
 
@@ -2319,11 +2315,12 @@ void fn_8017FBA4(void* arg0)
 void fn_8017FE54(HSD_GObj* gobj)
 {
     RegClearEv* ev = gobj->user_data;
+    struct lbl_80472D28_t* state = &lbl_80472D28;
 
     lb_800122C8(ev->x1C, 0, 0, 1);
-    lb_800138D8(lbl_80472D28.x2C, (int) (120.0F * lbl_80472D28.x10C) + 1);
+    lb_800138D8(state->x2C, (int) (120.0F * state->x10C) + 1);
 
-    ev->x20 = 0.0225F * (f32) lbl_80472D28.x110 - 0.175F;
+    ev->x20 = 0.0225F * (f32) state->x110 - 0.175F;
 
     if (ev->x20 < 0.05F) {
         ev->x20 = 0.0F;
@@ -2764,17 +2761,17 @@ void fn_80180C60(HSD_GObj* gobj)
         dist = 0;
     }
 
-    lbl_80472E48.x80 = dist;
+    lbl_80472EC8[0] = dist;
     b76 = ((u8) lbl_80472E48.x0 >> 6) & 3;
 
     if (b76 != 0 && (((u8) lbl_80472E48.x0 >> 4) & 3)) {
         ifTime_HideTimers();
-        if (lbl_80472E48.x80 == lbl_80472E48.x84) {
-            lbl_80472E48.x8C = lbl_80472E48.x8C + 1;
+        if (lbl_80472EC8[0] == lbl_80472EC8[1]) {
+            lbl_80472EC8[3] = lbl_80472EC8[3] + 1;
         } else {
-            lbl_80472E48.x8C = 0;
+            lbl_80472EC8[3] = 0;
         }
-        if (lbl_80472E48.x8C > 0x3C) {
+        if (lbl_80472EC8[3] > 0x3C) {
             ((x0_2bits*) &lbl_80472E48.x0)->b32 = 1;
             if (dist == 0 && !(lbl_80472E48.x0 & 3)) {
                 ((x0_2bits*) &lbl_80472E48.x0)->b10 = 1;
@@ -2783,12 +2780,12 @@ void fn_80180C60(HSD_GObj* gobj)
     } else {
         if (b76 != 0) {
             ifTime_HideTimers();
-            if (lbl_80472E48.x80 == lbl_80472E48.x84) {
-                lbl_80472E48.x8C = lbl_80472E48.x8C + 1;
+            if (lbl_80472EC8[0] == lbl_80472EC8[1]) {
+                lbl_80472EC8[3] = lbl_80472EC8[3] + 1;
             } else {
-                lbl_80472E48.x8C = 0;
+                lbl_80472EC8[3] = 0;
             }
-            if (lbl_80472E48.x8C > 0x78) {
+            if (lbl_80472EC8[3] > 0x78) {
                 ((x0_2bits*) &lbl_80472E48.x0)->b32 = 1;
                 if (!(lbl_80472E48.x0 & 3)) {
                     ((x0_2bits*) &lbl_80472E48.x0)->b10 = 1;
@@ -2809,7 +2806,7 @@ void fn_80180C60(HSD_GObj* gobj)
                 ((x0_2bits*) &lbl_80472E48.x0)->b54 = 1;
                 Player_80031790(0);
             }
-            lbl_80472E48.x8C = 0;
+            lbl_80472EC8[3] = 0;
         }
     }
 
@@ -2893,9 +2890,9 @@ void fn_80180C60(HSD_GObj* gobj)
     }
 
     HSD_JObjAnimAll(jobj);
-    lbl_80472E48.x84 = lbl_80472E48.x80;
-    if (lbl_80472E48.x80 > lbl_80472E48.x88 + 0xA) {
-        lbl_80472E48.x88 = lbl_80472E48.x80;
+    lbl_80472EC8[1] = lbl_80472EC8[0];
+    if (lbl_80472EC8[0] > lbl_80472EC8[2] + 0xA) {
+        lbl_80472EC8[2] = lbl_80472EC8[0];
         lbAudioAx_80023870(0xBB, 0x7F, 0x40, 0x8A);
     }
 }
@@ -2904,6 +2901,9 @@ extern s32 lbl_804D65D8;
 
 void fn_80181598(void)
 {
+    typedef struct {
+        u8 b76 : 2, b54 : 2, b32 : 2, b10 : 2;
+    } x0_2bits;
     u32 mode;
 
     PAD_STACK(0x20);
@@ -2918,8 +2918,7 @@ void fn_80181598(void)
         if (mode == 1) {
             lbAudioAx_800237A8(0xC0, 0x7F, 0x40);
             lbAudioAx_800237A8(0x148, 0x7F, 0x40);
-            mode = 2;
-            lbl_80472E48.x0 = (lbl_80472E48.x0 & ~3) | mode;
+            ((x0_2bits*) &lbl_80472E48.x0)->b10 = 2;
         }
         lbl_804D65D8 += 1;
         if (lbl_804D65D8 >= 0xF0 ||
@@ -2939,11 +2938,11 @@ void fn_80181598(void)
             (lbl_80472E48.xC >= 0xF0 ||
              (HSD_PadCopyStatus[lbl_80472E48.x10].trigger & 0x100)))
         {
-            if (lbl_80472E48.x80 >
+            if (lbl_80472EC8[0] >
                 lbl_80472E48.x14[gm_80164024((u8) lbl_80472E48.unk_4)])
             {
                 lbl_80472E48.x14[gm_80164024((u8) lbl_80472E48.unk_4)] =
-                    lbl_80472E48.x80;
+                    lbl_80472EC8[0];
             }
             gm_8016B328();
         }
@@ -2963,10 +2962,10 @@ void fn_80181708(void)
     HSD_JObj* jobj;
     HSD_GObj* gobj;
 
-    lbl_80472E48.x80 = 0;
-    lbl_80472E48.x84 = 0;
-    lbl_80472E48.x88 = 0;
-    lbl_80472E48.x8C = 0;
+    lbl_80472EC8[0] = 0;
+    lbl_80472EC8[1] = 0;
+    lbl_80472EC8[2] = 0;
+    lbl_80472EC8[3] = 0;
     ((x0_2bits*) &lbl_80472E48.x0)->b76 = 0;
     ((x0_2bits*) &lbl_80472E48.x0)->b54 = 0;
     ((x0_2bits*) &lbl_80472E48.x0)->b32 = 0;
@@ -3154,26 +3153,26 @@ int fn_80181BFC(int* arg0)
 
 s32 fn_80181C80(s32 arg0)
 {
-    s32 var_r29;
     s32 var_r30;
+    s32 var_r29;
     volatile s32 sp38;
     PlayerInitData sp10;
 
     gm_801A4310();
-    var_r30 = 0;
+    var_r29 = 0;
     sp10 = lbl_80472ED8.xC;
 
-    for (var_r29 = 1; var_r29 < 6; var_r29++) {
-        if (Player_GetFalls(var_r29) == 0 &&
-            Player_GetPlayerSlotType(var_r29) != Gm_PKind_NA)
+    for (var_r30 = 1; var_r30 < 6; var_r30++) {
+        if (Player_GetFalls(var_r30) == 0 &&
+            Player_GetPlayerSlotType(var_r30) != Gm_PKind_NA)
         {
-            var_r30++;
+            var_r29++;
         } else {
-            sp38 = var_r29;
+            sp38 = var_r30;
         }
     }
 
-    if ((s32) lbl_80472ED8.x54[arg0].x4 > var_r30 && lbl_80472ED8.x8 > 0x5A) {
+    if ((s32) lbl_80472ED8.x54[arg0].x4 > var_r29 && lbl_80472ED8.x8 > 0x5A) {
         if (Player_GetPlayerSlotType(sp38) != Gm_PKind_NA) {
             Player_SetFalls(sp38, 0);
             Player_SetSuicideCount(sp38, 0);
@@ -3191,7 +3190,6 @@ s32 fn_80181C80(s32 arg0)
         un_802FD28C(sp38);
         lbl_80472ED8.x0 += 1;
     }
-    return lbl_80472ED8.x0;
     PAD_STACK(8);
 }
 

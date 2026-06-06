@@ -405,8 +405,8 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
         if (result != -1) {
             s32 ix = result - 0xBD;
             if (!(gp->gv.shrineroute.xC6 & (1 << ix))) {
-                gp->gv.shrineroute.xC8 = (u16) result;
                 HSD_ASSERT(0x213, gp->gv.shrineroute.symbols[ix]);
+                gp->gv.shrineroute.xC8 = (u16) result;
                 {
                     s32 mid =
                         ((Ground*) gp->gv.shrineroute.symbols[ix]->user_data)

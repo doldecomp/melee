@@ -788,11 +788,6 @@ bool ftCo_8009E714(Fighter_GObj* gobj, Fighter_Part bone_id, int arg2, float x,
 
 void ftCo_8009E7B4(Fighter* fp, u8 (*arg1)[2])
 {
-    s32 i;
-    s32 var_r3;
-    FigaTree*** dyn;
-    FigaTree** tree;
-
     if (fp->anim_id != -1) {
         if (fp->x2227_b6) {
             if (fp->kind != FTKIND_KIRBY) {
@@ -800,11 +795,15 @@ void ftCo_8009E7B4(Fighter* fp, u8 (*arg1)[2])
                     ftCo_8009CB40(fp, 0, 0, NULL);
                     return;
                 }
-                for (i = 0; i < fp->dynamics_num; i++) {
-                    ftCo_8009CB40(fp, i, 0, NULL);
+                {
+                    s32 i;
+                    for (i = 0; i < fp->dynamics_num; i++) {
+                        ftCo_8009CB40(fp, i, 0, NULL);
+                    }
                 }
             }
         } else {
+            s32 var_r3;
             if (fp->kind != FTKIND_MARS && fp->kind != FTKIND_EMBLEM) {
                 var_r3 = 0;
             } else if (fp->x2227_b6 || lb_80011ABC() > 0) {
@@ -818,14 +817,20 @@ void ftCo_8009E7B4(Fighter* fp, u8 (*arg1)[2])
                         ftCo_8009CB40(fp, 0, 1, NULL);
                         return;
                     }
-                    for (i = 0; i < fp->dynamics_num; i++) {
-                        ftCo_8009CB40(fp, i, 1, NULL);
+                    {
+                        s32 i;
+                        for (i = 0; i < fp->dynamics_num; i++) {
+                            ftCo_8009CB40(fp, i, 1, NULL);
+                        }
                     }
                 }
             } else if (fp->x594_b4) {
+                FigaTree*** dyn;
+                FigaTree** tree;
                 u8 blend_slot = arg1[0][1];
                 dyn = fp->ft_data->x2C->x10;
                 if (dyn == NULL) {
+                    s32 i;
                     for (i = 0; i < fp->dynamics_num; i++) {
                         ftCo_8009CB40(fp, i, 0, NULL);
                     }
@@ -833,13 +838,17 @@ void ftCo_8009E7B4(Fighter* fp, u8 (*arg1)[2])
                 }
                 tree = dyn[blend_slot];
                 if (tree == NULL) {
+                    s32 i;
                     for (i = 0; i < fp->dynamics_num; i++) {
                         ftCo_8009CB40(fp, i, 0, NULL);
                     }
                     return;
                 }
-                for (i = 0; i < fp->dynamics_num; i++) {
-                    ftCo_8009CB40(fp, i, 1, tree[i]);
+                {
+                    s32 i;
+                    for (i = 0; i < fp->dynamics_num; i++) {
+                        ftCo_8009CB40(fp, i, 1, tree[i]);
+                    }
                 }
                 return;
             } else if (fp->x594_b3) {
@@ -848,8 +857,11 @@ void ftCo_8009E7B4(Fighter* fp, u8 (*arg1)[2])
                         ftCo_8009CB40(fp, 0, 0, NULL);
                         return;
                     }
-                    for (i = 0; i < fp->dynamics_num; i++) {
-                        ftCo_8009CB40(fp, i, 0, NULL);
+                    {
+                        s32 i;
+                        for (i = 0; i < fp->dynamics_num; i++) {
+                            ftCo_8009CB40(fp, i, 0, NULL);
+                        }
                     }
                 }
             } else {
@@ -858,8 +870,11 @@ void ftCo_8009E7B4(Fighter* fp, u8 (*arg1)[2])
                         ftCo_8009CB40(fp, 0, 1, NULL);
                         return;
                     }
-                    for (i = 0; i < fp->dynamics_num; i++) {
-                        ftCo_8009CB40(fp, i, 1, NULL);
+                    {
+                        s32 i;
+                        for (i = 0; i < fp->dynamics_num; i++) {
+                            ftCo_8009CB40(fp, i, 1, NULL);
+                        }
                     }
                 }
             }
@@ -869,8 +884,11 @@ void ftCo_8009E7B4(Fighter* fp, u8 (*arg1)[2])
             ftCo_8009CB40(fp, 0, 0, NULL);
             return;
         }
-        for (i = 0; i < fp->dynamics_num; i++) {
-            ftCo_8009CB40(fp, i, 0, NULL);
+        {
+            s32 i;
+            for (i = 0; i < fp->dynamics_num; i++) {
+                ftCo_8009CB40(fp, i, 0, NULL);
+            }
         }
     }
 }

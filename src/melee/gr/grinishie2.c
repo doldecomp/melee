@@ -509,16 +509,16 @@ void grInishie2_801FD4F0(Ground_GObj* gobj)
 {
     Vec3 vec;
     s32 spawn_side;
-    HSD_JObj* temp_r28;
-    HSD_JObj* temp_r29;
-    void* temp_r30;
-    void* temp_r3;
     Ground* gp;
-    PAD_STACK(8);
+    HSD_JObj* jobj;
+    HSD_JObj* temp_r29;
+    HSD_JObj* temp_r30;
+    PAD_STACK(16);
 
-    temp_r29 = GET_JOBJ(gobj);
+    jobj = GET_JOBJ(gobj);
     gp = GET_GROUND(gobj);
-    temp_r28 = temp_r29;
+    temp_r29 = jobj;
+    temp_r30 = jobj;
     spawn_side = HSD_Randi(2);
     mpJointListAdd(0xE);
     if (spawn_side == 0) {
@@ -532,7 +532,7 @@ void grInishie2_801FD4F0(Ground_GObj* gobj)
     vec.z = grI2_804D6A00->unk14[spawn_side].z;
     HSD_JObjSetTranslate(temp_r29, &vec);
     gp->gv.inishie22.xC4 = it_802ECD3C(gobj, &vec, sign_inline(spawn_side));
-    Ground_801C2ED0(temp_r28, gp->map_id);
+    Ground_801C2ED0(temp_r30, gp->map_id);
 }
 
 bool grInishie2_801FD64C(Ground_GObj* gobj)
@@ -643,7 +643,7 @@ void grInishie2_801FD9EC(HSD_GObj* gobj)
     s32 var_r3;
     s32 var_r3_2;
     s16 temp_r0;
-    PAD_STACK(72);
+    PAD_STACK(48);
 
     gp = gobj->user_data;
 
@@ -682,7 +682,7 @@ void grInishie2_801FD9EC(HSD_GObj* gobj)
 
                     if (var_r3 != 0) {
                         gp->gv.inishie23.xC8_flags.b2 = 1;
-                        gp->gv.inishie23.xC8_flags.b3 = (var_r3 == 2);
+                        gp->gv.inishie23.xC8_flags.b3 = var_r3;
                         gp->gv.inishie23.xC8_flags.b0 = 1;
                     } else {
                         temp_r0 = grI2_804D6A00->unk48 + grI2_804D6A00->unk4A;
@@ -701,8 +701,8 @@ void grInishie2_801FD9EC(HSD_GObj* gobj)
         grAnime_801C8138(gobj, gp->map_id, gp->gv.inishie23.xC8_flags.b3);
 
         gp = GET_GROUND(gobj);
-        temp_vec = &gp->gv.inishie23.xD8;
         jobj = Ground_801C3FA4(gobj, 0);
+        temp_vec = &gp->gv.inishie23.xD8;
         HSD_JObjSetTranslate(jobj, temp_vec);
         HSD_JObjAddTranslationX(jobj, gp->gv.inishie23.xCC.x);
         HSD_JObjAddTranslationY(jobj, gp->gv.inishie23.xCC.y);

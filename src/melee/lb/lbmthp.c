@@ -125,8 +125,8 @@ s32 fn_8001EB14(THPDecComp* data, const char* path)
 s32 fn_8001EBF0(THPDecComp* data)
 {
     s32 size = 0;
-    u32 aligned_100;
     u32 unk_104_val;
+    u32 aligned_100;
     u32 width;
     u32 height;
     u32 wh;
@@ -196,7 +196,7 @@ void fn_8001ECF4(THPDecComp* data, void* buf)
     width = data->width;
     height = data->height;
     data->frame_buffers = (u32*) buf;
-    y_size = width * height;
+    y_size = height * width;
     count = data->unk_104;
     data->unk_64 = 0;
     uv_size = y_size >> 2U;

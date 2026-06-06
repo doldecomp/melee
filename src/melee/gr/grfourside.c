@@ -443,21 +443,21 @@ bool grFourside_801F388C(Ground_GObj* arg)
 void grFourside_801F3894(Ground_GObj* arg0)
 {
     Ground* gp = arg0->user_data;
-    HSD_JObj* jobj = arg0->hsd_obj;
     u8 state = gp->gv.foursideUfo.x0;
     u8 prev_building = gp->gv.foursideUfo.x1;
+    HSD_JObj* jobj = arg0->hsd_obj;
+    PAD_STACK(8);
     switch (state) {
     case 0: {
         s32 timer = gp->gv.foursideUfo.x4;
         if (timer <= 0) {
-            s16 prob = 0;
+            s32 prob = 0;
             if (gp->gv.foursideUfo.x8 != 0) {
-                prob = grFs_804D69D8->x46;
+                prob = (s16) grFs_804D69D8->x46;
             }
-            if ((s16) gp->gv.foursideUfo.x2 >=
-                (s16) grFs_804D69D8->ufo_challenge)
+            if (gp->gv.foursideUfo.x2 >= (s16) grFs_804D69D8->ufo_challenge)
             {
-                prob = grFs_804D69D8->x48;
+                prob = (s16) grFs_804D69D8->x48;
             }
             if (prob != 0 && HSD_Randi(prob) == 0) {
                 s32 building;

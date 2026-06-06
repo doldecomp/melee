@@ -628,12 +628,13 @@ void grCorneria_801DDAC0(Ground_GObj* arg) {}
 
 void grCorneria_801DDAC4(Ground_GObj* gobj)
 {
+    u32 slot = grCn_804D69A4;
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     f32 scale;
 
-    gp->gv.arwing.xC8 = grCn_804D69A4;
-    grCn_803E1D38.arwing_gobj[grCn_804D69A4] = gobj;
+    gp->gv.arwing.xC8 = slot;
+    grCn_803E1D38.arwing_gobj[slot] = gobj;
     {
         s32 idx = grCn_803E1D38.arwing_group[gp->gv.arwing.xC8];
         HSD_GObj* arwing = grCorneria_801DD534(grCn_803E1D38.x3D8[idx]);
@@ -2053,8 +2054,9 @@ void grCorneria_801E1348(Ground_GObj* gobj)
                 gp->gv.corneria.x10C = grCn_804D69A0->x28;
                 Ground_801C53EC(0x55739);
             } else {
+                s32 imax;
                 s32 imin = grCn_804D69A0->x30;
-                s32 imax = grCn_804D69A0->x34;
+                imax = grCn_804D69A0->x34;
                 if (imax > imin) {
                     s32 range = imax - imin;
                     imax = imin + (range != 0 ? HSD_Randi(range) : 0);
@@ -2182,8 +2184,8 @@ void grCorneria_801E1878(Ground_GObj* gobj)
 {
     Vec3 pos;
     Ground* gr = GET_GROUND(gobj);
-    HSD_JObj* jobj = gobj->hsd_obj;
     HSD_JObj* target_jobj = gr->gv.corneria.x128->hsd_obj;
+    HSD_JObj* jobj = gobj->hsd_obj;
 
     HSD_JObjGetTranslation(jobj, &pos);
     HSD_JObjSetTranslate(target_jobj, &pos);

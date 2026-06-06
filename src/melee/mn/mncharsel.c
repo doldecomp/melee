@@ -4142,8 +4142,8 @@ s32 mnCharSel_802640A0(void)
     }
 
     gobj = GObj_Create(2, 3, 0x80);
-    mnCharSel_804D6CB8 = gobj;
     MenMain_cam = MODELS->cam;
+    mnCharSel_804D6CB8 = gobj;
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B,
                             HSD_CObjLoadDesc(MODELS->cam));
     GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 0);
@@ -4955,7 +4955,7 @@ s32 mnCharSel_802640A0(void)
 #undef MODELS
 #undef ANIM
 
-static u8 data_pad[0x138] = { 0 };
+static u8 data_pad[0x18] = { 0 };
 
 void mnCharSel_8026688C_OnEnter(void* arg0)
 {

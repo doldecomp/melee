@@ -252,7 +252,7 @@ int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list)
     j = 0;
 loop_22:
     if (j < num) {
-        HSD_ASSERT(0xF6U, j < HSD_TEXP_MAX_NUM);
+        HSD_ASSERT(0xF6U, j<HSD_TEXP_MAX_NUM);
         cur = *p;
         i = 0;
         tmp = cur;
@@ -534,8 +534,6 @@ void make_full_dependancy_mtx(int num, u32* dep, u32* full)
     } while (changed != false);
 }
 
-static u8 pad[0x44] = { 0 };
-
 void HSD_TExpSchedule(int num, HSD_TExpDag* list, HSD_TExp** result,
                       HSD_TExpRes* resource)
 {
@@ -599,6 +597,8 @@ int SimplifySrc(HSD_TExp* arg0)
     HSD_TEArg* a_arg;
     HSD_TExp* src;
     HSD_TObj* tobj;
+    u32 clear_arg;
+    HSD_TExp* clear_exp;
     int result;
     int i;
     u8 sel;
@@ -617,8 +617,10 @@ int SimplifySrc(HSD_TExp* arg0)
                 case 0xFF:
                     HSD_TExpUnref(src, sel);
                     result = 1;
-                    *(u32*) c_arg = HSD_TExpDag_804D5FF8;
-                    c_arg->exp = HSD_TExpDag_804D5FFC;
+                    clear_exp = HSD_TExpDag_804D5FFC;
+                    clear_arg = HSD_TExpDag_804D5FF8;
+                    *(u32*) c_arg = clear_arg;
+                    c_arg->exp = clear_exp;
                     break;
                 case GX_TEV_ADD:
                     if (src->tev.c_in[0].sel == HSD_TE_0 &&
@@ -679,8 +681,10 @@ int SimplifySrc(HSD_TExp* arg0)
                 case 0xFF:
                     HSD_TExpUnref(src, sel);
                     result = 1;
-                    *(u32*) c_arg = HSD_TExpDag_804D5FF8;
-                    c_arg->exp = HSD_TExpDag_804D5FFC;
+                    clear_exp = HSD_TExpDag_804D5FFC;
+                    clear_arg = HSD_TExpDag_804D5FF8;
+                    *(u32*) c_arg = clear_arg;
+                    c_arg->exp = clear_exp;
                     break;
                 }
             }
@@ -698,8 +702,10 @@ int SimplifySrc(HSD_TExp* arg0)
             case 0xFF:
                 HSD_TExpUnref(src, sel);
                 result = 1;
-                *(u32*) a_arg = HSD_TExpDag_804D5FF8;
-                a_arg->exp = HSD_TExpDag_804D5FFC;
+                clear_exp = HSD_TExpDag_804D5FFC;
+                clear_arg = HSD_TExpDag_804D5FF8;
+                *(u32*) a_arg = clear_arg;
+                a_arg->exp = clear_exp;
                 break;
             case GX_TEV_ADD:
                 if (src->tev.a_in[0].sel == HSD_TE_0 &&

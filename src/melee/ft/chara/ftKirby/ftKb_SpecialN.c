@@ -849,26 +849,33 @@ void ftKb_SpecialHi_800F3570(Fighter_GObj* gobj)
     }
 }
 
+struct ftKb_Init_803CB490_layout {
+    char pad[0x74];
+    Vec3 vec;
+};
+
 void ftKb_SpecialHi_800F36DC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->mv.kb.speciallw.x24 = ftKb_Init_803CB4EC.vec;
+    struct ftKb_Init_803CB490_layout* p =
+        (struct ftKb_Init_803CB490_layout*) ftKb_Init_803CB490;
+    fp->mv.kb.speciallw.x24 = p->vec;
     fp->mv.kb.speciallw.x54 = fp->mv.kb.speciallw.x24;
     fp->mv.kb.speciallw.x88[0] = 0.0f;
     fp->mv.kb.speciallw.x88[4] = 0.0f;
-    fp->mv.kb.speciallw.x30 = ftKb_Init_803CB4EC.vec;
+    fp->mv.kb.speciallw.x30 = p->vec;
     fp->mv.kb.speciallw.x60 = fp->mv.kb.speciallw.x30;
     fp->mv.kb.speciallw.x88[1] = 0.0f;
     fp->mv.kb.speciallw.x88[5] = 0.0f;
-    fp->mv.kb.speciallw.x3C = ftKb_Init_803CB4EC.vec;
+    fp->mv.kb.speciallw.x3C = p->vec;
     fp->mv.kb.speciallw.x6C = fp->mv.kb.speciallw.x3C;
     fp->mv.kb.speciallw.x88[2] = 0.0f;
     fp->mv.kb.speciallw.x88[6] = 0.0f;
-    fp->mv.kb.speciallw.x48 = ftKb_Init_803CB4EC.vec;
+    fp->mv.kb.speciallw.x48 = p->vec;
     fp->mv.kb.speciallw.x78 = fp->mv.kb.speciallw.x48;
     fp->mv.kb.speciallw.x88[3] = 0.0f;
     fp->mv.kb.speciallw.x88[7] = 0.0f;
-    fp->mv.kb.speciallw.x18 = ftKb_Init_803CB4EC.vec;
+    fp->mv.kb.speciallw.x18 = p->vec;
     fp->mv.kb.speciallw.x84 = 0.0f;
 }
 
@@ -1225,11 +1232,6 @@ void ftKb_SpecialAirLwEnd_Phys(Fighter_GObj* gobj)
 {
     ft_80085134(gobj);
 }
-
-struct ftKb_Init_803CB490_layout {
-    char pad[0x74];
-    Vec3 vec;
-};
 
 void ftKb_SpecialLw1_Coll(Fighter_GObj* gobj)
 {

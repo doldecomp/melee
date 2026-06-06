@@ -41,7 +41,7 @@ struct ParticleScreenState {
     /* 0xC8 */ s32 xC8;
     /* 0xCC */ s32 xCC;
     /* 0xD0 */ void* xD0;
-    /* 0xD4 */ void* xD4;
+    /* 0xD4 */ OSContext* xD4;
 };
 
 struct ParticleConsoleState {

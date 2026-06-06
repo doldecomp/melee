@@ -1652,7 +1652,7 @@ void mnDiagram_80241310(s32 arg0, s32 arg1, s32 arg2)
     HSD_JObjReqAnimAll(jobj, 0.0f);
     HSD_JObjAnimAll(jobj);
 
-    user_data = HSD_MemAlloc(sizeof(mnDiagram_PopupData));
+    user_data = HSD_MemAlloc(sizeof(mnDiagram_PopupData) - sizeof(HSD_Text*));
     HSD_ASSERTREPORT(0x5F8, user_data, "Can't get user_data\n");
 
     GObj_InitUserData(gobj, 0, mnDiagram_PopupCleanup, user_data);
@@ -1977,8 +1977,10 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
     Diagram* data = gobj->user_data;
     Diagram* data2;
     HSD_GObjProc* proc;
-    u8 col_idx;
+    HSD_JObj* jobj;
+    f32 anim_frame;
     s32 row_idx;
+    u8 col_idx;
     int count;
     PAD_STACK(8);
 
@@ -1997,10 +1999,10 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
     }
 
     if (data->anim_state == 1) {
-        if (mn_8022ED6C(data->jobjs[1], &mnDiagram_803EE768) >=
-            mnDiagram_803EE768.end_frame)
-        {
-            HSD_JObjClearFlagsAll(data->jobjs[2], 0x10);
+        anim_frame = mn_8022ED6C(data->jobjs[1], &mnDiagram_803EE768);
+        jobj = data->jobjs[2];
+        if (anim_frame >= mnDiagram_803EE768.end_frame) {
+            HSD_JObjClearFlagsAll(jobj, 0x10);
             data->anim_state = 0;
             mnDiagram_802433AC();
             if (data->is_name_mode != 0) {
@@ -2037,7 +2039,7 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
             }
             mnDiagram_UpdateScrollArrowVisibility(gobj, count);
         } else {
-            HSD_JObjSetFlagsAll(data->jobjs[2], 0x10);
+            HSD_JObjSetFlagsAll(jobj, 0x10);
         }
     }
     mnDiagram_802417D0(gobj);

@@ -49,7 +49,7 @@ extern u8 mn_804D6BB4;
 extern u8 mn_804D6BB5;
 extern u8 mnNameNew_804D4F7C[4];
 extern char mnNameNew_SpaceCharacter[2];
-extern GlyphRow* mnNameNew_803EDCE4;
+extern GlyphRow mnNameNew_803EDCE4[];
 extern void* mnNameNew_804A06F0[];
 extern void* mnNameNew_804A0700[];
 extern void* mnNameNew_804A0710[];
@@ -592,7 +592,7 @@ void mnNameNew_GlyphVariantInput(void)
     u16 old_hover;
     u8 old_sel;
     u8 cur_pos;
-    GlyphRow* table;
+    char** table;
     s32 total;
     s8 null_ch;
 
@@ -639,8 +639,8 @@ void mnNameNew_GlyphVariantInput(void)
             return;
         }
         null_ch = (s8) mnNameNew_NullCharacter;
-        table = &mnNameNew_803EDCE4[data->x1 * 4];
-        while (null_ch != (s8) * **table) {
+        table = (char**) &mnNameNew_803EDCE4[data->x1];
+        while (null_ch != (s8) **table) {
             table++;
             count++;
         }

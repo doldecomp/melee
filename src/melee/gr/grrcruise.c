@@ -377,7 +377,7 @@ void grRCruise_801FF924(Ground_GObj* gobj)
     HSD_ASSERT(0x2B2, gp->u.scroll.cam_jobj);
 
     gp->u.scroll.ctr_jobj = Ground_801C3FA4(gobj, 1);
-    HSD_ASSERT(0x2B2, gp->u.scroll.ctr_jobj);
+    HSD_ASSERT(0x2B4, gp->u.scroll.ctr_jobj);
 
     HSD_JObjGetTranslation(gp->u.scroll.ctr_jobj, &gp->u.scroll.x04);
     gp->u.scroll.x10.z = 0.0f;
@@ -407,9 +407,9 @@ void grRCruise_801FFADC(Ground_GObj* arg0)
     Vec3 sp18;
     Ground* gp;
     HSD_GObj* gobj;
-    HSD_JObj* temp_r29_2;
     HSD_JObj* temp_r30;
     HSD_JObj* temp_r31;
+    HSD_JObj* temp_r29_2;
     f32 temp_f31;
     f32 temp_f4;
 

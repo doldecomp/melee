@@ -621,6 +621,8 @@ void it_802706D0(Item_GObj* arg_item_gobj)
 {
     Item* arg_item;
     HSD_GObj* item_gobj;
+    Item* item;
+    HitCapsule* hit;
     s32 count;
     bool chk;
     u32 hit_index;
@@ -631,7 +633,7 @@ void it_802706D0(Item_GObj* arg_item_gobj)
     for (item_gobj = HSD_GObj_Entities->items; item_gobj != NULL;
          item_gobj = item_gobj->next)
     {
-        Item* item = item_gobj->user_data;
+        item = item_gobj->user_data;
         if (arg_item_gobj == item_gobj) {
             chk = true;
         } else if (((arg_item->owner == NULL) && (item->owner == NULL) &&
@@ -650,7 +652,7 @@ void it_802706D0(Item_GObj* arg_item_gobj)
             count = it_802706D0_sub2(item, arg_item);
         }
         for (hit_index = 0; hit_index < 4; hit_index++) {
-            HitCapsule* hit = &item->x5D4_hitboxes[hit_index].hit;
+            hit = &item->x5D4_hitboxes[hit_index].hit;
             if ((hit->state == HitCapsule_Disabled) || (hit->x42_b7 != 1) ||
                 ((!hit->x40_b2 || (arg_item->ground_or_air != GA_Air)) &&
                  (!hit->x40_b3 || (arg_item->ground_or_air != GA_Ground))) ||
@@ -798,7 +800,7 @@ void it_80270E30(Item_GObj* arg_item_gobj)
                     hit2 = var_r29->x8;
                     arg_item2 = arg_item_gobj->user_data;
                     hurt_coll_pos = &hit2->hurt_coll_pos;
-                    element = *(&it_803F1384[hit2->element]);
+                    element = it_803F1384[hit2->element];
                     switch (element) {
                     case 0x3E8:
                         efSync_Spawn(0x3E8, arg_item_gobj, hurt_coll_pos,

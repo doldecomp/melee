@@ -2105,25 +2105,28 @@ void fn_80307E84(HSD_GObj* gobj)
 void un_80307F64(s32 arg0, s32 arg1)
 {
     s8 idx;
+    s32 kind = arg0;
     char* data;
+    s32* base;
     ToyAnimState* state;
     HSD_JObj* jobj1;
     HSD_JObj* jobj2;
 
     data = un_803FDD18;
-    state = (ToyAnimState*) ((u8*) un_804A26B8 + 0x3F0);
+    base = (s32*) un_804A26B8;
+    state = (ToyAnimState*) ((u8*) base + 0x3F0);
     idx = state->x0E;
-    jobj1 = state->jobj[idx];
-    jobj2 = state->jobj[idx ^ 1];
+    jobj1 = (HSD_JObj*) base[idx + (0x3F4 / 4)];
+    jobj2 = (HSD_JObj*) base[(idx ^ 1) + (0x3F4 / 4)];
 
     if (state->x0F == 0) {
         if (arg1 != 0) {
-            if (arg0 != state->x11) {
+            if (kind != state->x11) {
                 HSD_JObjRemoveAnimAll(jobj1);
                 HSD_JObjRemoveAnimAll(jobj2);
-                state->x11 = arg0;
-                state->x10 = arg0;
-                if (arg0 == 1) {
+                state->x11 = kind;
+                state->x10 = kind;
+                if (kind == 1) {
                     un_80306A48(jobj1, 0, data + 0x438, 0, un_804D6EC8, 0);
                     un_80306A48(jobj2, 0, data + 0x438, 0, un_804D6EC8, 0);
                 } else {
@@ -2136,7 +2139,7 @@ void un_80307F64(s32 arg0, s32 arg1)
                 HSD_GObj_80390CD4(state->gobj);
             }
         } else {
-            if (arg0 == 1) {
+            if (kind == 1) {
                 un_80306A48(jobj1, 0, data + 0x438, 0, un_804D6EC8, 0xA);
                 un_80306A48(jobj2, 0, data + 0x438, 0, un_804D6EC8, 0xA);
             } else {
@@ -2771,7 +2774,7 @@ void fn_80309404(HSD_GObj* gobj)
     Vec3 transition_interest;
     ToyCameraControl* ed4;
     HSD_CObj* cobj;
-    u8* base;
+    Toy26B8* base;
     void* ed8;
     Toy6E68* state;
     ToyAnimState* anim;
@@ -2791,10 +2794,10 @@ void fn_80309404(HSD_GObj* gobj)
     PAD_STACK(264);
 
     cobj = gobj->hsd_obj;
-    base = (u8*) un_804A26B8;
+    base = (Toy26B8*) un_804A26B8;
     ed8 = un_804D6ED8;
     state = (Toy6E68*) un_804D6E68;
-    anim = (ToyAnimState*) (base + 0x3F0);
+    anim = &base->anim;
     ed4 = un_804D6ED4;
     rotate_update = 0.0f;
     movement_update = 0.0f;
@@ -2893,7 +2896,7 @@ void fn_80309404(HSD_GObj* gobj)
         un_80310660(1);
         HSD_GObj_80390CD4(gobj);
         mn_8022F268();
-        ((Toy26B8*) base)->x198 = 1;
+        base->x198 = 1;
         return;
     }
 
@@ -2912,7 +2915,7 @@ void fn_80309404(HSD_GObj* gobj)
         }
 
         if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC)) {
-            trophy_count = ((Toy26B8*) base)->trophy_count;
+            trophy_count = base->trophy_count;
         } else {
             trophy_count = *gmMainLib_8015CC90();
         }
@@ -3030,11 +3033,11 @@ void fn_80309404(HSD_GObj* gobj)
             HSD_CObjGetEyePosition(cobj, &eye_pos);
             transition_eye.y = 8.0f;
             HSD_CObjGetInterest(cobj, &transition_interest);
-            ((Toy26B8*) base)->x0.x =
+            base->x0.x =
                 (transition_eye.x - transition_interest.x) / 10.0f;
-            ((Toy26B8*) base)->x0.y =
+            base->x0.y =
                 (transition_eye.y - transition_interest.y) / 10.0f;
-            ((Toy26B8*) base)->x0.z =
+            base->x0.z =
                 (transition_eye.z - transition_interest.z) / 10.0f;
             un_804D6E90 = (state->x20 - 38.0f) / 10.0f;
             un_804D6E94 = state->x18 / 10.0f;
@@ -3172,7 +3175,7 @@ void fn_80309404(HSD_GObj* gobj)
             s16 trophy_count;
 
             if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC)) {
-                trophy_count = ((Toy26B8*) base)->trophy_count;
+                trophy_count = base->trophy_count;
             } else {
                 trophy_count = *gmMainLib_8015CC90();
             }
@@ -3194,7 +3197,7 @@ void fn_80309404(HSD_GObj* gobj)
                         if (new_idx < 0) {
                             if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC))
                             {
-                                total = ((Toy26B8*) base)->trophy_count;
+                                total = base->trophy_count;
                             } else {
                                 total = *gmMainLib_8015CC90();
                             }
@@ -3202,7 +3205,7 @@ void fn_80309404(HSD_GObj* gobj)
                                 (s16) (total - 1);
                         }
                         if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC)) {
-                            total = ((Toy26B8*) base)->trophy_count;
+                            total = base->trophy_count;
                         } else {
                             total = *gmMainLib_8015CC90();
                         }
@@ -3218,7 +3221,7 @@ void fn_80309404(HSD_GObj* gobj)
                                 if ((gm_8016B498() != 0) ||
                                     (gm_801A4310() == 0xC))
                                 {
-                                    cnt = ((Toy26B8*) base)->trophy_count;
+                                    cnt = base->trophy_count;
                                 } else {
                                     cnt = *gmMainLib_8015CC90();
                                 }
@@ -3288,7 +3291,7 @@ void fn_80309404(HSD_GObj* gobj)
                         display->selectedIdx =
                             display->selectedIdx + 1;
                         if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC)) {
-                            total = ((Toy26B8*) base)->trophy_count;
+                            total = base->trophy_count;
                         } else {
                             total = *gmMainLib_8015CC90();
                         }
@@ -3296,7 +3299,7 @@ void fn_80309404(HSD_GObj* gobj)
                             display->selectedIdx = 0;
                         }
                         if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC)) {
-                            total = ((Toy26B8*) base)->trophy_count;
+                            total = base->trophy_count;
                         } else {
                             total = *gmMainLib_8015CC90();
                         }
@@ -3305,7 +3308,7 @@ void fn_80309404(HSD_GObj* gobj)
 
                             if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC))
                             {
-                                cnt = ((Toy26B8*) base)->trophy_count;
+                                cnt = base->trophy_count;
                             } else {
                                 cnt = *gmMainLib_8015CC90();
                             }
@@ -3321,7 +3324,7 @@ void fn_80309404(HSD_GObj* gobj)
                                 if ((gm_8016B498() != 0) ||
                                     (gm_801A4310() == 0xC))
                                 {
-                                    cnt2 = ((Toy26B8*) base)->trophy_count;
+                                    cnt2 = base->trophy_count;
                                 } else {
                                     cnt2 = *gmMainLib_8015CC90();
                                 }
@@ -5137,7 +5140,7 @@ void un_803102D0(void)
 
 void un_80310324(void)
 {
-    char* toy;
+    Toy26B8* toy;
     char* data;
     ToyGlobalsS_* tg;
     ToyGlobalsS_* tg2;
@@ -5160,11 +5163,11 @@ void un_80310324(void)
     PAD_STACK(4);
 
     data = un_803FDD18;
-    toy = (char*) un_804A26B8;
+    toy = TOY_DATA;
     tg = un_804D6ED8;
 
     un_8030663C();
-    un_803067BC((s8) toy[0x195], (s8) toy[0x196]);
+    un_803067BC(toy->x195, toy->x196);
 
     if (tg->x50 == NULL) {
         if (lbLang_IsSavedLanguageJP() != 0) {
@@ -5215,13 +5218,13 @@ void un_80310324(void)
     }
 
     if (gm_8016B498() != 0 || (u8) gm_801A4310() == 0xC) {
-        var_r0 = *(s16*) (toy + 0x3EC);
+        var_r0 = toy->trophy_count;
     } else {
         var_r0 = *gmMainLib_8015CC90();
     }
 
     if (var_r0 != 0) {
-        memzero(toy + 0x3F0, 0x14);
+        memzero(&toy->anim, 0x14);
         un_8030FE48(un_804D6EE0, 0);
         tg6 = un_804D6EE0;
         un_803087F4(tg6->x140);
@@ -5230,7 +5233,7 @@ void un_80310324(void)
         idx = un_804D6EDC[tg6->x154];
 
         if (gm_8016B498() != 0 || (u8) gm_801A4310() == 0xC) {
-            flags = (u16*) (toy + 0x19E);
+            flags = toy->trophy_flags;
         } else {
             flags = gmMainLib_8015CC78();
         }
@@ -5240,7 +5243,7 @@ void un_80310324(void)
             idx = un_804D6EDC[tg6->x154];
 
             if (gm_8016B498() != 0 || (u8) gm_801A4310() == 0xC) {
-                flags = (u16*) (toy + 0x19E);
+                flags = toy->trophy_flags;
             } else {
                 flags = gmMainLib_8015CC78();
             }

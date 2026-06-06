@@ -521,9 +521,11 @@ bool it_802EDDC0(Item_GObj* gobj)
         ip->x5D0_animFrameSpeed = attr->x24;
         itKyasarin_TurnAround(gobj);
     } else {
-        Item* ip = GET_ITEM(gobj);
-        if (ip->xDD4_itemVar.kyasarin.x20 != NULL) {
-            grInishie2_801FD4CC(ip->xDD4_itemVar.kyasarin.x20);
+        {
+            Item* ip = GET_ITEM(gobj);
+            if (ip->xDD4_itemVar.kyasarin.x20 != NULL) {
+                grInishie2_801FD4CC(ip->xDD4_itemVar.kyasarin.x20);
+            }
         }
         ip->xDCC_flag.b3 = 1;
         if (HSD_Randf() < it_804D6D40->x8) {

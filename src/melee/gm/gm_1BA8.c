@@ -2349,6 +2349,8 @@ void gm_801BE638(HSD_GObj* gobj)
             temp_r30->x10 = 0;
         }
         break;
+    case 2:
+        break;
     }
     if (Player_GetRemainingHP(1) <= 0 && Player_GetRemainingHP(2) <= 0) {
         temp_r28_2 = temp_r31 + temp_r29;

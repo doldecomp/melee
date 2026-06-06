@@ -89,7 +89,6 @@ struct un_803F9D48 {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, { 0x43, 0x44, 0x45 },
 };
-
 /// .sbss
 /* 4D6D98 */ static HSD_Archive* un_804D6D98;
 /* 4D6D9C */ static SceneDesc* un_804D6D9C;
@@ -242,6 +241,7 @@ void un_802FE918(int a, int b, int c)
     int k;
     int i;
     char sp1C[0x104];
+    HSD_Text** text;
     datetime sp14;
 
     lbAudioAx_800236DC();
@@ -286,8 +286,9 @@ found:
         sprintf(sp1C, "%04d.%2d.%2d  %02d:%02d:%02d", sp14.year, sp14.month,
                 sp14.day, sp14.hour, sp14.minute, sp14.second);
     }
-    HSD_SisLib_803A7664(un_803F9D48.x24);
-    HSD_SisLib_803A6B98(un_803F9D48.x24, 320.0f, 316.0f, sp1C);
+    text = &un_803F9D48.x24;
+    HSD_SisLib_803A7664(*text);
+    HSD_SisLib_803A6B98(*text, 320.0f, 316.0f, sp1C);
 }
 
 void un_802FEBE0_OnEnter(void* arg0_)

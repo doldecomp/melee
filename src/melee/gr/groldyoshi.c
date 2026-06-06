@@ -241,8 +241,7 @@ void grOldYoshi_8020EC10(Ground_GObj* arg)
     int i = 0;
     Ground* gp = arg->user_data;
     HSD_JObj* jobj = arg->user_data;
-    PAD_STACK(8);
-    do {
+    for (i = 0; i < 3; i++) {
         // int test = HSD_Randi(3);
         switch (gp->gv.oldyoshicloud.cloud[i].xC4_0123) {
         case 0:
@@ -320,8 +319,7 @@ void grOldYoshi_8020EC10(Ground_GObj* arg)
                               gp->gv.oldyoshicloud.cloud[i].xCC -
                                   gp->gv.oldyoshicloud.cloud[i].xD0);
         gp->gv.oldyoshicloud.cloud[i].xC4_4 = 0;
-        i++;
-    } while (i < 3);
+    }
     Ground_801C2FE0(arg);
     return;
 }

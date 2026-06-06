@@ -407,7 +407,7 @@ struct lbDvd_803B72C0_t {
     int x8;
 };
 
-static void inline1(void)
+static inline void inline1(void)
 {
     struct lbDvd_803B72C0_t spA0 = { 2, "LbRb.dat" };
     if (preloadCache.new_scene.is_heap_persistent[0]) {
@@ -419,7 +419,7 @@ static void inline1(void)
     }
 }
 
-static void inline2(void)
+static inline void inline2(void)
 {
     int i;
     int temp_r3_6;
@@ -471,7 +471,7 @@ void lbDvd_80018254(void)
     struct lbDvd_803B72C0_t* var_r26;
     int i;
 
-    u8 _[0x18];
+    PAD_STACK(0x18);
 
     if (memcmp(&preloadCache.new_scene, &preloadCache.scene,
                sizeof(PreloadCacheScene)) == 0)

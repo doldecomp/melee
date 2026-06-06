@@ -920,7 +920,7 @@ void mpLibLoad(MapCollData* coll_data)
 
     count = coll_data->floor_count;
     start = coll_data->floor_start;
-    while (count-- > 0) {
+    for (; count > 0; count--) {
         groundCollLine[start].flags =
             coll_data->lines[start].hi_flags | LINE_FLAG_ENABLED;
         groundCollLine[start].x0 = &coll_data->lines[start];
@@ -1582,6 +1582,7 @@ bool mpCheckFloor(float ax, float ay, float bx, float by, float y_offset,
     int i_r28;
     bool result_r27;
     bool already_checked;
+    PAD_STACK(8);
 
     result_r27 = false;
     min_dist2_f30 = F32_MAX;
@@ -5947,8 +5948,7 @@ void mpLib_DrawSnapping(void)
         }
     }
 
-    item_r28 = HSD_GObj_Entities->items;
-    if (item_r28 != NULL) {
+    if ((item_r28 = HSD_GObj_Entities->items) != NULL) {
         if (!var_r31) {
             Mtx sp7C;
             PAD_STACK(0x40);

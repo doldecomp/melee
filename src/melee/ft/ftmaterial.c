@@ -46,9 +46,9 @@ void ftMaterial_800BF2B8(HSD_MObj* mobj, u32 rendermode)
     HSD_TObj* tobj;
     HSD_TExp texp;
     HSD_PEDesc pe;
-    u32 mobj_rendermode;
     HSD_TObj** cur_tobj;
     HSD_TExp* texp1;
+    u32 mobj_rendermode;
     HSD_PEDesc* pe_p;
     u32 unused;
 
@@ -219,10 +219,9 @@ void ftMaterial_800BF6BC(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp)
             if (overlay->x7C_color_enable) {
                 u32 temp_alpha;
                 s32 inv_alpha;
-                GXColor* color_hex = &overlay->x2C_hex;
                 GXColor* fp_color = &fp->x610_color_rgba[0];
-                u8 temp_r8;
-                s32 temp_r8_2;
+                GXColor* color_hex = &overlay->x2C_hex;
+                s32 temp_r8;
                 s32 temp_r7;
                 s32 temp_r4;
 
@@ -233,16 +232,15 @@ void ftMaterial_800BF6BC(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp)
                 } else {
                     inv_alpha = 0xFF - temp_alpha;
                     temp_r8 = fp_color->r;
-                    temp_r8_2 =
-                        temp_r8 +
-                        ((color_hex->a * (color_hex->r - temp_r8)) / 255);
-                    temp_r7 = temp_r8_2 * 0xFF;
+                    temp_r8 +=
+                        (color_hex->a * (color_hex->r - temp_r8)) / 255;
+                    temp_r7 = temp_r8 * 0xFF;
                     temp_r4 = temp_r7 / inv_alpha;
                     sp168.r = (u8) temp_r4;
                     if (sp168.r != 0) {
                         sp168.a = temp_r7 / sp168.r;
                     } else {
-                        sp168.a = ((inv_alpha - temp_r8_2) * 0xFF) / 255;
+                        sp168.a = ((inv_alpha - temp_r8) * 0xFF) / 255;
                     }
                     {
                         u8 temp_r8_3 = fp_color->g;

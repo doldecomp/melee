@@ -186,7 +186,7 @@ void grIceMt_801F686C(void)
     s32 field30;
     s32 field29;
     s32 field28;
-    u32 row_idx;
+    u32 i;
     s16* xAC;
     s32 id;
     f32 y_pos;
@@ -211,24 +211,24 @@ void grIceMt_801F686C(void)
 
     if (Stage_80225194() == 76) {
         // First loop: find row where neither xAC[0] nor xAC[1] matches
-        for (row_idx = 0; row_idx < ICEMT_FIELD_MAX; row_idx++) {
+        for (i = 0; i < ICEMT_FIELD_MAX; i++) {
             xAC = grIm_804D69F4->xAC;
-            id = grIm_803E4068[row_idx].id;
+            id = grIm_803E4068[i].id;
             if (xAC[0] == id) {
                 continue;
             }
             if (xAC[1] == id) {
                 continue;
             }
-            field30 = grIm_803E4068[row_idx].id;
+            field30 = grIm_803E4068[i].id;
             break;
         }
-        HSD_ASSERTMSG(0x258, row_idx < ICEMT_FIELD_MAX, "<ICEMT_FIELD_MAX>");
+        HSD_ASSERT(0x258, i<ICEMT_FIELD_MAX);
 
         // Second loop: find row where xAC[0], xAC[1], and field30 don't match
-        for (row_idx = 0; row_idx < ICEMT_FIELD_MAX; row_idx++) {
+        for (i = 0; i < ICEMT_FIELD_MAX; i++) {
             xAC = grIm_804D69F4->xAC;
-            id = grIm_803E4068[row_idx].id;
+            id = grIm_803E4068[i].id;
             if (xAC[0] == id) {
                 continue;
             }
@@ -238,16 +238,16 @@ void grIceMt_801F686C(void)
             if (field30 == id) {
                 continue;
             }
-            field29 = grIm_803E4068[row_idx].id;
+            field29 = grIm_803E4068[i].id;
             break;
         }
-        HSD_ASSERTMSG(0x261, row_idx < ICEMT_FIELD_MAX, "<ICEMT_FIELD_MAX>");
+        HSD_ASSERT(0x261, i<ICEMT_FIELD_MAX);
 
         // Third loop: find row where xAC[0], xAC[1], field30, and field29
         // don't match
-        for (row_idx = 0; row_idx < ICEMT_FIELD_MAX; row_idx++) {
+        for (i = 0; i < ICEMT_FIELD_MAX; i++) {
             xAC = grIm_804D69F4->xAC;
-            id = grIm_803E4068[row_idx].id;
+            id = grIm_803E4068[i].id;
             if (xAC[0] == id) {
                 continue;
             }
@@ -260,10 +260,10 @@ void grIceMt_801F686C(void)
             if (field29 == id) {
                 continue;
             }
-            field28 = grIm_803E4068[row_idx].id;
+            field28 = grIm_803E4068[i].id;
             break;
         }
-        HSD_ASSERTMSG(0x26B, row_idx < ICEMT_FIELD_MAX, "<ICEMT_FIELD_MAX>");
+        HSD_ASSERT(0x26B, i<ICEMT_FIELD_MAX);
 
         // Calculate Y positions for the 3 topi platforms
         y_pos = Ground_801C0498();
@@ -1467,10 +1467,10 @@ int grIceMt_801F9ACC(Ground_GObj* gobj, float y, GrIceMtSegmentLookup ev,
     HSD_JObj* jobj;
     Ground* gp;
     HSD_JObj** ptrs;
+    HSD_JObj** new_var;
     f32 cur;
     f32 f;
     f32 f2;
-    HSD_JObj** new_var;
     s32 id;
     PAD_STACK(16);
 

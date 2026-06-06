@@ -470,61 +470,11 @@ loop:
     if (i == 2) {
         goto next;
     }
-    {
-        float pos = arg->x30;
-        if (jobj == NULL) {
-            __assert(&un_804D5A78, 0x3B3, &un_804D5A80);
-        }
-        jobj->translate.y = pos;
-    }
-
-    if ((jobj->flags & 0x02000000) == 0) {
-        if (jobj == NULL) {
-            goto skip_dirty;
-        }
-        if (jobj == NULL) {
-            __assert(&un_804D5A78, 0x234, &un_804D5A80);
-        }
-        {
-            u32 flags = jobj->flags;
-            s32 skip = 0;
-            if ((flags & 0x800000) == 0 && (flags & 0x40)) {
-                skip = 1;
-            }
-            if (skip == 0) {
-                HSD_JObjSetMtxDirtySub(jobj);
-            }
-        }
-    }
-skip_dirty:
+    HSD_JObjSetTranslateY(jobj, arg->x30);
 
     if (arg->idx == un_GetTrophyTotal() - 1) {
-        float pos;
         jobj = ((TyListState*) data)->jobj;
-        pos = arg->x30;
-        if (jobj == NULL) {
-            __assert(&un_804D5A78, 0x3B3, &un_804D5A80);
-        }
-        jobj->translate.y = pos;
-
-        if ((jobj->flags & 0x02000000) == 0) {
-            if (jobj == NULL) {
-                goto next;
-            }
-            if (jobj == NULL) {
-                __assert(&un_804D5A78, 0x234, &un_804D5A80);
-            }
-            {
-                u32 flags = jobj->flags;
-                s32 skip = 0;
-                if ((flags & 0x800000) == 0 && (flags & 0x40)) {
-                    skip = 1;
-                }
-                if (skip == 0) {
-                    HSD_JObjSetMtxDirtySub(jobj);
-                }
-            }
-        }
+        HSD_JObjSetTranslateY(jobj, arg->x30);
     }
 
 next:
@@ -859,13 +809,11 @@ void un_80312BAC(TyListState* state, s8 arg1);
 void fn_80313BD8(HSD_GObj* gobj)
 {
     TyListState* state = (TyListState*) un_804A2AC0;
+    TyListArg* p;
     s8* g = ((s8*) state) + 0x2AC;
     f32 f30;
     f32 f31;
-    HSD_JObj* jobj;
-    f32 ftmp;
     s32 i;
-    TyListArg* p;
     s8 v;
 
     if (un_GetTrophyTotal() > 10) {
@@ -1055,24 +1003,7 @@ void fn_80313BD8(HSD_GObj* gobj)
                 state->selectedIdx = p->idx;
                 state->entries[10].links[0] = (TyListArg*) p;
                 lbAudioAx_80024030(2);
-                jobj = state->jobj;
-                ftmp = p->x30;
-                if (jobj == NULL) {
-                    __assert(&un_804D5A78, 0x3B3, &un_804D5A80);
-                }
-                jobj->translate.y = ftmp;
-                if (!(jobj->flags & 0x02000000)) {
-                    if (jobj != NULL) {
-                        u32 flags = jobj->flags;
-                        s32 skip = 0;
-                        if (!(flags & 0x800000) && (flags & 0x40)) {
-                            skip = 1;
-                        }
-                        if (skip == 0) {
-                            HSD_JObjSetMtxDirtySub(jobj);
-                        }
-                    }
-                }
+                HSD_JObjSetTranslateY(state->jobj, p->x30);
             }
             un_80312904(p, state->x2B8);
         }

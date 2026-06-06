@@ -152,12 +152,14 @@ void it_802B64FC(Item_GObj* gobj)
         goto block_4;
     }
     temp_ret = it_8026C258(&ip->pos, ip->facing_dir);
-    // var_f1 = M2C_BITWISE(f32, temp_ret);
     temp_r3 = temp_ret;
     if (temp_r3 == NULL) {
-        goto block_18;
+        goto block_17;
     }
     it_8026BB88(temp_r3, &vec3);
+    goto block_4;
+block_17:
+    goto block_18;
 block_4:
     var_f1 = 0.0f;
     if (vec3.x != 0.0f) {
@@ -182,7 +184,7 @@ block_6:
     vec0 = vec1;
     lbVector_Sub(&vec0, &vec2);
     if ((vec0.y > 0.001f)) {
-        ip->xDD4_itemVar.samusmissile.x8 -= M2C_FIELD(sa, f32*, 0x18);
+        ip->xDD4_itemVar.samusmissile.x8 -= sa->x18;
         goto block_11;
     }
     if (!(vec0.y < 0.001f)) {
@@ -193,7 +195,6 @@ block_11:
     itSamusMissile_ClampTurn(ip, sa);
 block_18:
     return;
-    // return M2C_BITWISE(Item_GObj*, var_f1);
 }
 
 void* it_802B66A8(Item_GObj* gobj)

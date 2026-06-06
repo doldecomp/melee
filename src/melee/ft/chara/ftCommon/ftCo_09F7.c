@@ -63,6 +63,7 @@ void ftCo_8009F834(Fighter_GObj* gobj, int arg1, enum Fighter_Part arg2,
     Vec3 sp84;
     f32 sp80;
     f32 sp7C;
+    int gfx_id;
     Fighter* temp_r30;
     Fighter* temp_r9;
     Fighter* temp_r9_2;
@@ -74,8 +75,9 @@ void ftCo_8009F834(Fighter_GObj* gobj, int arg1, enum Fighter_Part arg2,
     f32 var_f1;
     f32 var_f1_2;
     u8 temp_r3;
-    PAD_STACK(72);
+    PAD_STACK(68);
 
+    gfx_id = arg1;
     var_r27 = arg2;
     temp_r30 = gobj->user_data;
     if (arg4 == 0) {
@@ -107,10 +109,10 @@ block_7:
     }
     var_r27 = ftParts_GetBoneIndex(temp_r30, var_r27);
 block_9:
-    if (arg1 < 0x250) {
+    if (gfx_id < 0x250) {
         goto block_11;
     }
-    if ((arg1 / 1000) != 0x1E) {
+    if ((gfx_id / 1000) != 0x1E) {
         goto block_12;
     }
 block_11:
@@ -121,166 +123,75 @@ block_11:
     temp_f2 = 2.0f * arg6->z;
     spA8.z += temp_f2 * temp_f1;
     temp_r9 = gobj->user_data;
-    efAsync_Spawn(gobj, &temp_r9->x60C, 2, arg1,
+    efAsync_Spawn(gobj, &temp_r9->x60C, 2, gfx_id,
                   temp_r30->parts[var_r27].joint, &spA8);
     return;
 block_12:
-    if (arg1 == 0x487) {
+    switch (gfx_id) {
+    case 0x402:
+    case 0x403:
+    case 0x409:
+    case 0x412:
+    case 0x413:
+    case 0x414:
+    case 0x422:
+    case 0x487:
+    case 0x4D1:
+    case 0x4E5:
+    case 0x4E6:
+    case 0x4FE:
+    case 0x500:
+    case 0x501:
+    case 0x502:
         goto block_61;
-    }
-    if (arg1 >= 0x487) {
-        goto block_40;
-    }
-    if (arg1 == 0x422) {
-        goto block_61;
-    }
-    if (arg1 >= 0x422) {
-        goto block_27;
-    }
-    if (arg1 >= 0x412) {
-        goto block_22;
-    }
-    if (arg1 == 0x409) {
-        goto block_61;
-    }
-    if (arg1 >= 0x409) {
-        goto block_70;
-    }
-    if (arg1 >= 0x404) {
-        goto block_70;
-    }
-    if (arg1 >= 0x402) {
-        goto block_61;
-    }
-    goto block_70;
-block_22:
-    if (arg1 == 0x41E) {
-        goto block_63;
-    }
-    if (arg1 >= 0x41E) {
-        goto block_70;
-    }
-    if (arg1 == 0x415) {
-        goto block_63;
-    }
-    if (arg1 >= 0x415) {
-        goto block_70;
-    }
-    goto block_61;
-block_27:
-    if (arg1 >= 0x43A) {
-        goto block_34;
-    }
-    if (arg1 >= 0x42B) {
-        goto block_32;
-    }
-    if (arg1 >= 0x428) {
-        goto block_63;
-    }
-    if (arg1 >= 0x425) {
-        goto block_70;
-    }
-    goto block_67;
-block_32:
-    if (arg1 >= 0x438) {
-        goto block_66;
-    }
-    goto block_70;
-block_34:
-    if (arg1 == 0x447) {
-        goto block_70;
-    }
-    if (arg1 >= 0x447) {
-        goto block_38;
-    }
-    if (arg1 >= 0x446) {
+    case 0x446:
+    case 0x448:
+    case 0x4E1:
         goto block_62;
-    }
-    goto block_70;
-block_38:
-    if (arg1 >= 0x449) {
-        goto block_70;
-    }
-    goto block_62;
-block_40:
-    if (arg1 == 0x4D1) {
-        goto block_61;
-    }
-    if (arg1 >= 0x4D1) {
-        goto block_51;
-    }
-    if (arg1 >= 0x4C1) {
-        goto block_47;
-    }
-    if (arg1 == 0x49D) {
-        goto block_65;
-    }
-    if (arg1 >= 0x49D) {
-        goto block_70;
-    }
-    if (arg1 == 0x495) {
+    case 0x415:
+    case 0x41E:
+    case 0x428:
+    case 0x429:
+    case 0x42A:
+        goto block_63;
+    case 0x495:
         goto block_64;
-    }
-    goto block_70;
-block_47:
-    if (arg1 == 0x4C3) {
-        goto block_70;
-    }
-    if (arg1 < 0x4C3) {
+    case 0x49D:
+        goto block_65;
+    case 0x438:
+    case 0x439:
+        goto block_66;
+    case 0x423:
+    case 0x424:
+    case 0x4C1:
+    case 0x4C2:
+    case 0x4C4:
+    case 0x4C5:
         goto block_67;
-    }
-    if (arg1 >= 0x4C6) {
+    default:
         goto block_70;
     }
-    goto block_67;
-block_51:
-    if (arg1 == 0x4FE) {
-        goto block_61;
-    }
-    if (arg1 >= 0x4FE) {
-        goto block_58;
-    }
-    if (arg1 >= 0x4E5) {
-        goto block_56;
-    }
-    if (arg1 == 0x4E1) {
-        goto block_62;
-    }
-    goto block_70;
-block_56:
-    if (arg1 >= 0x4E7) {
-        goto block_70;
-    }
-    goto block_61;
-block_58:
-    if (arg1 >= 0x503) {
-        goto block_70;
-    }
-    if (arg1 >= 0x500) {
-        goto block_61;
-    }
-    goto block_70;
 block_61:
-    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 0, arg1,
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 0, gfx_id,
                   temp_r30->parts[var_r27].joint);
     return;
 block_62:
-    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 7, arg1,
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 7, gfx_id,
                   temp_r30->parts[var_r27].joint, arg5);
     return;
 block_63:
-    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3, arg1,
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3, gfx_id,
                   temp_r30->parts[var_r27].joint,
                   &temp_r30->ft_data->x0->x168);
     return;
 block_64:
-    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3, arg1,
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3, gfx_id,
                   temp_r30->parts[var_r27].joint, &temp_r30->facing_dir);
     return;
 block_65:
     sp9C = *arg5;
     sp98 = 0.017453292f * (256.0f * arg6->x);
-    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 6, arg1,
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 6, gfx_id,
                   temp_r30->parts[var_r27].joint, &sp9C,
                   &temp_r30->facing_dir, &sp98);
     return;
@@ -300,7 +211,7 @@ block_67:
                     temp_r30->coll_data.floor.normal.y);
     sp90 = var_f1;
 block_69:
-    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3, arg1,
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3, gfx_id,
                   temp_r30->parts[var_r27].joint, &sp90);
     return;
 block_70:
@@ -310,154 +221,154 @@ block_70:
     var_f1_2 = HSD_Randf() - 0.5f;
     temp_f2_2 = 2.0f * arg6->z;
     sp84.z += temp_f2_2 * var_f1_2;
-    if (arg1 >= 0x412) {
+    if (gfx_id >= 0x412) {
         goto block_98;
     }
-    if (arg1 == 0x3FD) {
+    if (gfx_id == 0x3FD) {
         goto block_131;
     }
-    if (arg1 >= 0x3FD) {
+    if (gfx_id >= 0x3FD) {
         goto block_87;
     }
-    if (arg1 >= 0x3F3) {
+    if (gfx_id >= 0x3F3) {
         goto block_81;
     }
-    if (arg1 == 0x3ED) {
+    if (gfx_id == 0x3ED) {
         goto block_130;
     }
-    if (arg1 >= 0x3ED) {
+    if (gfx_id >= 0x3ED) {
         goto block_79;
     }
-    if (arg1 == 0x3E8) {
+    if (gfx_id == 0x3E8) {
         goto block_122;
     }
-    if (arg1 >= 0x3E8) {
+    if (gfx_id >= 0x3E8) {
         goto block_123;
     }
     goto block_134;
 block_79:
-    if (arg1 >= 0x3EF) {
+    if (gfx_id >= 0x3EF) {
         goto block_130;
     }
     goto block_134;
 block_81:
-    if (arg1 == 0x3F6) {
+    if (gfx_id == 0x3F6) {
         goto block_123;
     }
-    if (arg1 >= 0x3F6) {
+    if (gfx_id >= 0x3F6) {
         goto block_85;
     }
-    if (arg1 >= 0x3F5) {
+    if (gfx_id >= 0x3F5) {
         goto block_130;
     }
     goto block_123;
 block_85:
-    if (arg1 >= 0x3FA) {
+    if (gfx_id >= 0x3FA) {
         goto block_123;
     }
     goto block_131;
 block_87:
-    if (arg1 == 0x405) {
+    if (gfx_id == 0x405) {
         goto block_123;
     }
-    if (arg1 >= 0x405) {
+    if (gfx_id >= 0x405) {
         goto block_94;
     }
-    if (arg1 >= 0x402) {
+    if (gfx_id >= 0x402) {
         goto block_92;
     }
-    if (arg1 == 0x3FF) {
+    if (gfx_id == 0x3FF) {
         goto block_131;
     }
     goto block_130;
 block_92:
-    if (arg1 >= 0x404) {
+    if (gfx_id >= 0x404) {
         goto block_124;
     }
     goto block_134;
 block_94:
-    if (arg1 == 0x407) {
+    if (gfx_id == 0x407) {
         goto block_123;
     }
-    if (arg1 < 0x407) {
+    if (gfx_id < 0x407) {
         goto block_124;
     }
-    if (arg1 >= 0x40C) {
+    if (gfx_id >= 0x40C) {
         goto block_123;
     }
     goto block_134;
 block_98:
-    if (arg1 == 0x44B) {
+    if (gfx_id == 0x44B) {
         goto block_123;
     }
-    if (arg1 >= 0x44B) {
+    if (gfx_id >= 0x44B) {
         goto block_112;
     }
-    if (arg1 == 0x41F) {
+    if (gfx_id == 0x41F) {
         goto block_123;
     }
-    if (arg1 >= 0x41F) {
+    if (gfx_id >= 0x41F) {
         goto block_107;
     }
-    if (arg1 >= 0x41C) {
+    if (gfx_id >= 0x41C) {
         goto block_105;
     }
-    if (arg1 == 0x416) {
+    if (gfx_id == 0x416) {
         goto block_123;
     }
     goto block_134;
 block_105:
-    if (arg1 >= 0x41E) {
+    if (gfx_id >= 0x41E) {
         goto block_134;
     }
     goto block_123;
 block_107:
-    if (arg1 >= 0x425) {
+    if (gfx_id >= 0x425) {
         goto block_110;
     }
-    if (arg1 == 0x421) {
+    if (gfx_id == 0x421) {
         goto block_123;
     }
     goto block_134;
 block_110:
-    if (arg1 >= 0x427) {
+    if (gfx_id >= 0x427) {
         goto block_134;
     }
     goto block_123;
 block_112:
-    if (arg1 == 0x513) {
+    if (gfx_id == 0x513) {
         goto block_127;
     }
-    if (arg1 >= 0x513) {
+    if (gfx_id >= 0x513) {
         goto block_119;
     }
-    if (arg1 >= 0x4E2) {
+    if (gfx_id >= 0x4E2) {
         goto block_117;
     }
-    if (arg1 == 0x4D9) {
+    if (gfx_id == 0x4D9) {
         goto block_130;
     }
     goto block_134;
 block_117:
-    if (arg1 >= 0x4E5) {
+    if (gfx_id >= 0x4E5) {
         goto block_134;
     }
     goto block_123;
 block_119:
-    if (arg1 == 0x515) {
+    if (gfx_id == 0x515) {
         goto block_129;
     }
-    if (arg1 >= 0x515) {
+    if (gfx_id >= 0x515) {
         goto block_134;
     }
     goto block_128;
 block_122:
-    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, arg1,
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, gfx_id,
                   temp_r30->parts[var_r27].joint, &sp84,
                   &p_ftCommonData->x564);
     return;
 block_123:
-    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 2, arg1,
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 2, gfx_id,
                   temp_r30->parts[var_r27].joint, &sp84);
     return;
 block_124:
@@ -469,7 +380,7 @@ block_124:
                       temp_r30->coll_data.floor.normal.y);
     sp80 = var_f1_2;
 block_126:
-    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, arg1,
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, gfx_id,
                   temp_r30->parts[var_r27].joint, &sp84, &sp80);
     return;
 block_127:
@@ -485,7 +396,7 @@ block_129:
                   temp_r30->parts[var_r27].joint, &sp84);
     return;
 block_130:
-    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, arg1,
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, gfx_id,
                   temp_r30->parts[var_r27].joint, &sp84,
                   &temp_r30->facing_dir);
     return;
@@ -498,12 +409,12 @@ block_131:
                       temp_r30->coll_data.floor.normal.y);
     sp7C = var_f1_2;
 block_133:
-    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 6, arg1,
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 6, gfx_id,
                   temp_r30->parts[var_r27].joint, &sp84,
                   &temp_r30->facing_dir, &sp7C);
     return;
 block_134:
-    OSReport("no effect from animlist %d\n", arg1);
+    OSReport("no effect from animlist %d\n", gfx_id);
     return;
 }
 

@@ -215,7 +215,7 @@ HSD_GObj* it_802A013C(f32 facing_dir, Fighter_GObj* owner_gobj, Vec3* pos,
                 anim_bundle = &attrs->x4C_anim;
             } else {
                 joint = attrs->x48;
-                anim_bundle = &attrs->x58_anim;
+                anim_bundle = (AnimBundle*) &attrs->x50_matanim;
             }
             jobj = HSD_JObjLoadJoint(joint);
             HSD_JObjAddAnimAll(jobj, anim_bundle->anim, anim_bundle->matanim,
@@ -708,14 +708,16 @@ void it_802A1948(Item_GObj* gobj, s32 arg1)
 void it_802A19E0(Item_GObj* gobj)
 {
     HSD_JObj* hobj;
+    HSD_JObj* hobj_tmp;
     HSD_JObj* child;
     Item* ip;
     itLinkBoomerangAttributes* attrs;
     Quaternion quat;
     s32 i;
 
-    hobj = gobj->hsd_obj;
-    child = HSD_JObjGetChild(hobj);
+    hobj_tmp = gobj->hsd_obj;
+    hobj = hobj_tmp;
+    child = HSD_JObjGetChild(hobj_tmp);
     ip = gobj->user_data;
     attrs = ip->xC4_article_data->x4_specialAttributes;
     HSD_JObjGetRotation(child, &quat);

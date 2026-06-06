@@ -127,7 +127,8 @@ void gm_801A7B00(void)
     HSD_JObjSetRotationYWithMtxDirty(child, val);
 
     scale = 1.0f / un_803060BC(char_idx, 3);
-    scale = un_803060BC(char_idx, 4) * scale;
+    val = un_803060BC(char_idx, 4);
+    scale = val * scale;
     HSD_JObjSetScaleXWithMtxDirty(child, scale);
     HSD_JObjSetScaleYWithMtxDirty(child, scale);
     HSD_JObjSetScaleZWithMtxDirty(child, scale);
@@ -140,7 +141,11 @@ void gm_801A7B00(void)
     target = HSD_JObjGetChild(target);
     target = HSD_JObjGetChild(target);
     target = HSD_JObjGetChild(target);
-    target = HSD_JObjGetNext(target);
+    if (target == NULL) {
+        target = NULL;
+    } else {
+        target = target->next;
+    }
 
     lb_8000C1C0((HSD_JObj*) gobj->hsd_obj, target);
     lb_8000C290((HSD_JObj*) gobj->hsd_obj, target);
@@ -250,15 +255,16 @@ void fn_801A851C(HSD_GObj* gobj)
 void gm_801A85E4(HSD_JObj* jobj, s32 arg1, s32 arg2)
 {
     s32 idx;
+    s32 temp_idx;
     f32 angle;
     f32 x;
-    f32 z;
     PAD_STACK(0x20);
 
     if (arg1 <= 4) {
         arg2 = 4 - arg1;
-        idx = arg2 + 2;
-        if (idx > 4) {
+        temp_idx = arg2 + 2;
+        idx = temp_idx;
+        if (temp_idx > 4) {
             arg2 = 4 - idx;
             idx = arg2 + 2;
         }
@@ -266,12 +272,13 @@ void gm_801A85E4(HSD_JObj* jobj, s32 arg1, s32 arg2)
             0.017453292f * ((45.0f * (f32) idx) + (2.0f * HSD_Randf()) - 1.0f);
         x = 25.0f * cosf(angle);
         HSD_JObjSetTranslateX(jobj, x);
-        z = 0.9f * ((25.0f * -sinf(angle)) + -18.0f);
-        HSD_JObjSetTranslateZ(jobj, z);
+        x = 0.9f * ((25.0f * -sinf(angle)) + -18.0f);
+        HSD_JObjSetTranslateZ(jobj, x);
     } else if (arg1 <= 0xC) {
         arg2 = 0xC - arg1;
-        idx = arg2 + 8;
-        if (idx > 0xC) {
+        temp_idx = arg2 + 8;
+        idx = temp_idx;
+        if (temp_idx > 0xC) {
             arg2 = 0xC - idx;
             idx = arg2 + 8;
         }
@@ -279,12 +286,13 @@ void gm_801A85E4(HSD_JObj* jobj, s32 arg1, s32 arg2)
                 ((25.714285f * (f32) (idx - 5)) + (4.0f * HSD_Randf()) - 2.0f);
         x = 50.0f * cosf(angle);
         HSD_JObjSetTranslateX(jobj, x);
-        z = 0.9f * ((50.0f * -sinf(angle)) + -18.0f);
-        HSD_JObjSetTranslateZ(jobj, z);
+        x = 0.9f * ((50.0f * -sinf(angle)) + -18.0f);
+        HSD_JObjSetTranslateZ(jobj, x);
     } else if (arg1 <= 0x15) {
         arg2 = 0x15 - arg1;
-        idx = arg2 + 0x11;
-        if (idx > 0x15) {
+        temp_idx = arg2 + 0x11;
+        idx = temp_idx;
+        if (temp_idx > 0x15) {
             arg2 = 0x15 - idx;
             idx = arg2 + 0x11;
         }
@@ -292,8 +300,8 @@ void gm_801A85E4(HSD_JObj* jobj, s32 arg1, s32 arg2)
             0.017453292f * ((22.5f * (f32) (idx - 0xD)) + HSD_Randf() - 0.5f);
         x = 75.0f * cosf(angle);
         HSD_JObjSetTranslateX(jobj, x);
-        z = 0.8f * ((75.0f * -sinf(angle)) + -18.0f);
-        HSD_JObjSetTranslateZ(jobj, z);
+        x = 0.8f * ((75.0f * -sinf(angle)) + -18.0f);
+        HSD_JObjSetTranslateZ(jobj, x);
     } else if (arg1 == 0x16) {
         HSD_JObjSetTranslateX(jobj, -80.0f);
         HSD_JObjSetTranslateZ(jobj, -70.0f);
@@ -372,8 +380,8 @@ void gm_801A9094(void)
     s32 i;
     TyDspEntry* dsp;
     HSD_Joint* joint;
-    HSD_MatAnimJoint* matanim;
     HSD_Joint* bg_joint;
+    HSD_MatAnimJoint* matanim;
     HSD_GObj* gobj;
     HSD_JObj* root;
     HSD_JObj* child;
@@ -490,6 +498,7 @@ void gm_801A9630(void)
     HSD_LObj* lobj;
     HSD_JObj* jobj;
     HSD_JObj* child;
+    HSD_JObj* target;
     s32 i;
     PAD_STACK(8);
 
@@ -577,11 +586,11 @@ void gm_801A9630(void)
 
     // Walk JObj tree to find constraint target (3 levels deep)
     child = HSD_JObjGetChild(GET_JOBJ(gm_804D67BC));
-    child = HSD_JObjGetChild(child);
-    child = HSD_JObjGetChild(child);
+    target = HSD_JObjGetChild(child);
+    target = HSD_JObjGetChild(target);
 
-    lb_8000C1C0(jobj, child);
-    lb_8000C290(jobj, child);
+    lb_8000C1C0(jobj, target);
+    lb_8000C290(jobj, target);
     HSD_GObj_SetupProc(gobj, fn_801A80F0, 0x17);
 }
 

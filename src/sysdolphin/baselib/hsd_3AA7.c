@@ -1238,12 +1238,12 @@ s32 fn_803ACD58(CardState* state, void* icon_data, void* file_data)
 
     {
         s32 retries;
+        u8* buf;
+        s32 offset;
         s32 size;
         for (i = 0; size = state->x8, i < (0x2F + state->x24 + size) / size;
              i++)
         {
-            s32 offset;
-            u8* buf;
             s32 result;
 
             offset = i * size;

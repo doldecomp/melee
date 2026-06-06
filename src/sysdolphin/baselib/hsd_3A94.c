@@ -32,7 +32,7 @@ typedef struct CardBlock {
 #define CMD_PTR(off) ((void*) CMD_S32(off))
 #define CMD_TYPE (((CardBufEntry*) hsd_804D1138)[hsd_804D7980].x10)
 
-static s32 hsd_803A949C_Close(CardState* state)
+static inline s32 hsd_803A949C_Close(CardState* state)
 {
     s32 i;
     s32 result;
@@ -49,7 +49,7 @@ static s32 hsd_803A949C_Close(CardState* state)
     return result;
 }
 
-static s32 hsd_803A949C_IconSize(CardState* state)
+static inline s32 hsd_803A949C_IconSize(CardState* state)
 {
     switch (state->x3B0) {
     case 2:
@@ -61,7 +61,7 @@ static s32 hsd_803A949C_IconSize(CardState* state)
     }
 }
 
-static s32 hsd_803A949C_FileId(CardBlock* block)
+static inline s32 hsd_803A949C_FileId(CardBlock* block)
 {
     return (block->x10 << 8) | block->x11;
 }

@@ -44,12 +44,14 @@ s32 fn_80174284(u8 slot)
     s32 i;
     u8* buf;
     struct UnkResultPlayerData* tmp = lbl_8046DBE8.x94->x44C;
+    PAD_STACK(8);
 
     count = 0;
-    do_call =
-        (lbl_8046DBE8.x94->player_standings[slot].slot_type == Gm_PKind_Human)
-            ? true
-            : false;
+    if (lbl_8046DBE8.x94->player_standings[slot].slot_type == Gm_PKind_Human) {
+        do_call = true;
+    } else {
+        do_call = false;
+    }
 
     for (i = 0; i < 0x100; i++) {
         if (tmp[slot].x0[i] != 0) {
@@ -1767,9 +1769,9 @@ extern HSD_Archive* lbl_804D65B8;
 void gm_80177368_OnEnter(void* arg0_)
 {
     ResultsMatchInfo* arg0 = arg0_;
+    HSD_LObj* temp_r3_3;
     HSD_GObj* temp_r3_2;
     HSD_GObj* temp_r3_4;
-    HSD_LObj* temp_r3_3;
     MatchEnd* temp_r29;
     ResultsData* data = &lbl_8046DBE8;
     int i;
@@ -1829,12 +1831,12 @@ void gm_80177368_OnEnter(void* arg0_)
     temp_r3_2 = GObj_Create(0xB, 3, 0);
     if (temp_r3_2 == NULL) {
         OSReport("Error : gobj dont't get (gmResultAddLight)\n");
-        __assert("gmresult.c", 0x68C, "0");
+        HSD_ASSERT(0x68C, 0);
     }
     temp_r3_3 = lb_80011AC4(data->pnlsce->lights);
     if (temp_r3_3 == NULL) {
         OSReport("Error : lobj dont't get (gmResultAddLight)\n");
-        __assert("gmresult.c", 0x68F, "0");
+        HSD_ASSERT(0x68F, 0);
     }
     HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D784A, temp_r3_3);
     GObj_SetupGXLink(temp_r3_2, HSD_GObj_LObjCallback, 0xA, 0);
@@ -1842,7 +1844,7 @@ void gm_80177368_OnEnter(void* arg0_)
     data->x18 = temp_r3_4;
     if (temp_r3_4 == NULL) {
         OSReport("Error : gobj dont't get (gmResultAddModel)\n");
-        __assert("gmresult.c", 0x6A2, "0");
+        HSD_ASSERT(0x6A2, 0);
     }
     HSD_GObj_SetupProc(temp_r3_4, fn_80179350, 0);
     fn_80176F60();

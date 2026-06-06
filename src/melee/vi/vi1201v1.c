@@ -227,7 +227,7 @@ static void HSD_JObjSetTranslateZ_2(HSD_JObj* jobj, f32 z)
 void un_8031FD18_OnEnter(void* arg)
 {
     u8* input = arg;
-    s32 i = 0;
+    s32 i;
     u8 char_index;
     HSD_CObj* cobj;
     HSD_GObj* gobj;
@@ -240,7 +240,7 @@ void un_8031FD18_OnEnter(void* arg)
 
     un_804D6FFC = input[0];
     un_804D6FFD = input[1];
-    un_804D7000 = (void*) i;
+    un_804D7000 = (void*) 0U;
 
     lbAudioAx_800236DC();
     efLib_Init();
@@ -268,7 +268,7 @@ void un_8031FD18_OnEnter(void* arg)
     HSD_CObjAnim(cobj);
     HSD_GObj_SetupProc(gobj, fn_8031FC30, 0);
 
-    for (; un_804D6FE0->models[i] != NULL; i++) {
+    for (i = 0; un_804D6FE0->models[i] != NULL; i++) {
         gobj = GObj_Create(0xE, 0xF, 0);
         jobj = HSD_JObjLoadJoint(un_804D6FE0->models[i]->joint);
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);

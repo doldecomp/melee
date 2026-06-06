@@ -28,21 +28,21 @@ extern HSD_LeakChecker HSD_Leak_80407B58;
 static char HSD_Leak_804D6000[] = " ";
 static char HSD_Leak_804D6004[] = "done.\n";
 
-/* @todo Currently ~97.2% match - register allocation differences
- * remain: r28/r29 swap (scan_copy/cap_ptr), r21/r23 swap (heap_start_phys),
- * and r22/r27 swap (ofs/loop counter) in second half. */
+/* @todo Currently ~97.3% match - register allocation differences
+ * remain: r28/r29 swap (scan_copy/cap_ptr) and loop/local register swaps
+ * in the allocation table scan and report indentation loops. */
 int HSD_Leak_80387DF8(int indent)
 {
     u32 val;
     HSD_LeakChecker* lc;
-    u32* cap_ptr;
     u32* scan;
+    u32* heap_start_phys;
+    u32* cap_ptr;
     u32 heap_start_align;
     int leak_count;
     u32 i;
     u32 j;
     u32 ofs;
-    u32* heap_start_phys;
 
     scan = (u32*) lbCommand_803B9840;
     lc = &HSD_Leak_80407B58;
@@ -85,7 +85,7 @@ int HSD_Leak_80387DF8(int indent)
                     if (phys_addr >= heap_start_align && val > phys_addr) {
                         u32 virt = phys_addr | 0x80000000;
                         u32* hdr = (u32*) (virt - 0x20);
-                        if ((u32) (*hdr + 0xFEDD0000) == 0x4567) {
+                        if (*hdr == HEAP_MAGIC) {
                             u32 reg_idx = hdr[1];
                             if ((u32) (reg_idx + 0x10000) != 0xFFFF &&
                                 reg_idx < *cap_ptr)
@@ -120,7 +120,7 @@ int HSD_Leak_80387DF8(int indent)
         } else if ((u32*) val <= heap_start_phys && heap_start_phys < scan) {
         } else if (heap_start_phys != NULL) {
             u32* block = (u32*) heap_start_phys;
-            if ((u32) (block[0] + 0xFEDD0000) == 0x4567) {
+            if (block[0] == HEAP_MAGIC) {
                 u32 reg_idx = block[1];
                 if ((u32) (reg_idx + 0x10000) != 0xFFFF && reg_idx < *cap_ptr)
                 {

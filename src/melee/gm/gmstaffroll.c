@@ -831,7 +831,6 @@ void fn_801AB200(HSD_GObj* gobj)
 
         if (gm_804D6814 >= 0x1285 && gm_804D680C == NULL) {
             tally_count = 0;
-            tally_color = gm_804DAAEC;
             for (j = 0; j < 6; j++) {
                 HSD_SisLib_803A5CC4(gm_80480D58[j]);
                 gm_80480D58[j] = NULL;
@@ -854,7 +853,7 @@ void fn_801AB200(HSD_GObj* gobj)
             line_num = HSD_SisLib_803A6B98(
                 gm_804D680C, 0.0f, 0.0f, (char*) ((u8*) gm_803DBFD8 + 0x1264),
                 tally_count);
-            tally_color2 = tally_color;
+            tally_color2 = gm_804DAAEC;
             HSD_SisLib_803A74F0(gm_804D680C, line_num,
                                 (GXColor*) &tally_color2);
 

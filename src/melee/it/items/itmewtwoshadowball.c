@@ -248,7 +248,7 @@ void it_802C53F0(Item_GObj* gobj, Vec3* pos, float angle, float charge,
     ip->xDD4_itemVar.mewtwoshadowball.x18 = charge;
     ip->xDD4_itemVar.mewtwoshadowball.x1C = max_charge;
 
-    if (ip->xDD4_itemVar.mewtwoshadowball.x2C != NULL &&
+    if (NULL != ip->xDD4_itemVar.mewtwoshadowball.x2C &&
         ip->owner == ip->xDD4_itemVar.mewtwoshadowball.x2C)
     {
         it_802C5B18(gobj);

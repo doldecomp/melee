@@ -2165,19 +2165,18 @@ void grStadium_801D4548(Ground_GObj* gobj)
         if (temp_r3_6 != NULL) {
             temp_r0_2 = temp_r31->u.stadium.xDE;
 
-            var_r29 = temp_r0_2;
-            if (var_r29 == 3) {
+            if (temp_r0_2 == 3) {
                 var_r29 = 3;
-            } else if (var_r29 == 4) {
+            } else if (temp_r0_2 == 4) {
                 var_r29 = 4;
-            } else if (var_r29 == 9) {
+            } else if (temp_r0_2 == 9) {
                 var_r29 = 5;
-            } else if (var_r29 == 6) {
+            } else if (temp_r0_2 == 6) {
                 var_r29 = 6;
-            } else if (var_r29 == 5) {
+            } else if (temp_r0_2 == 5) {
                 var_r29 = 2;
             } else {
-                HSD_ASSERT(0xA44, 0);
+                HSD_ASSERT(0xA67, 0);
             }
 
             grStadium_801D2528(temp_r3_6, var_r29, 0);
@@ -2267,50 +2266,12 @@ void grStadium_801D4548(Ground_GObj* gobj)
         temp_r3_9->u.stadium.xC4_b0 = true;
         mpLib_80058560();
         if (temp_r31->u.stadium.xDE == 5) {
-            var_r28 = yaku->x4;
-            temp_r27_6 = yaku->x0;
-            if (var_r28 > temp_r27_6) {
-                temp_r3_10 = var_r28 - temp_r27_6;
-                if (temp_r3_10 != 0) {
-                    var_r3_10 = HSD_Randi(temp_r3_10);
-                } else {
-                    var_r3_10 = 0;
-                }
-                var_r28 = temp_r27_6 + var_r3_10;
-            } else if (var_r28 < temp_r27_6) {
-                temp_r3_11 = temp_r27_6 - var_r28;
-                if (temp_r3_11 != 0) {
-                    var_r3_11 = HSD_Randi(temp_r3_11);
-                } else {
-                    var_r3_11 = 0;
-                }
-                var_r28 += var_r3_11;
-            }
-            temp_r31->u.stadium.xD8 = var_r28;
+            temp_r31->u.stadium.xD8 = randi_between_2(yaku->x0, yaku->x4);
             grAnime_801C65B0((void*) temp_r31->u.stadium.xCC);
             mpLib_800575B0(0x55);
             mpLib_800575B0(0x6F);
         } else {
-            var_r28_2 = yaku->xC;
-            temp_r27_7 = yaku->x8;
-            if (var_r28_2 > temp_r27_7) {
-                temp_r3_12 = var_r28_2 - temp_r27_7;
-                if (temp_r3_12 != 0) {
-                    var_r3_12 = HSD_Randi(temp_r3_12);
-                } else {
-                    var_r3_12 = 0;
-                }
-                var_r28_2 = temp_r27_7 + var_r3_12;
-            } else if (var_r28_2 < temp_r27_7) {
-                temp_r3_13 = temp_r27_7 - var_r28_2;
-                if (temp_r3_13 != 0) {
-                    var_r3_13 = HSD_Randi(temp_r3_13);
-                } else {
-                    var_r3_13 = 0;
-                }
-                var_r28_2 += var_r3_13;
-            }
-            temp_r31->u.stadium.xD8 = var_r28_2;
+            temp_r31->u.stadium.xD8 = randi_between_2(yaku->x8, yaku->xC);
         }
         temp_r31->u.stadium.xDC = 0;
         break;

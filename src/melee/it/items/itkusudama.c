@@ -171,8 +171,8 @@ void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3)
     Vec3 vel;
     itKusudamaAttributes* attr;
     Item* ip = GET_ITEM(gobj);
-    s32 count;
     int i;
+    s32 count;
     PAD_STACK(8);
 
     attr = ip->xC4_article_data->x4_specialAttributes;

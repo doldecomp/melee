@@ -170,6 +170,7 @@ static Vec3 grGr_803E780C[] = {
     { -1.0f, 0.0f, 0.0f },
     { 1.0f, 0.0f, 0.0f },
 };
+static u8 grGr_803E7824[0x1C] = { 0 };
 static s16 grGr_803E7840[30] = {
     5,    6,    7,    8,    9,    0xA,  0xB,  0xC,  0xD,  0xE,
     0xF,  0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18,
@@ -971,6 +972,7 @@ void grGreens_80215358(Ground_GObj* gobj, int col, int row, int arg3, int arg4)
     float grMaterial_801C8DE0_paramB;
     Vec vec;
     float f;
+    PAD_STACK(0x10);
     HSD_ASSERT(1305, block->status==Gr_Greens_Block_Status_None);
     for (n = 0; n < 30; n++) {
         arr[n] = 0;
