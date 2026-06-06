@@ -76,45 +76,113 @@ def write(args):
         md = args.wiki_path.read_text()
         assignees = read_wiki(md)
 
-    print("""# Translation Units
+    def friendly_size(value: int) -> str:
+        # Non-breaking space so sizes like "1.18 KB" do not wrap in a cell.
+        size = humanfriendly.format_size(value).replace("bytes", "B")
+        return size.replace(" ", "&nbsp;")
 
-Edit this page and fill in your own username to assign yourself to a file.
+    def percent_cell(matched: int, total: int, reported: Optional[float]) -> str:
+        # A TU with no section of this kind has nothing to match.
+        if total == 0:
+            return "&mdash;"
+        pct = reported if reported is not None else (100.0 * matched / total)
+        return f"`{humanfriendly.round_number(float(pct))}%`"
 
-Just write your username as plaintext and it will be formatted automatically later.
+    def file_of(unit) -> str:
+        # Strip the leading module ("main/") by splitting and recombining.
+        return "/".join((unit["name"] or "/").split("/")[1:])
 
-File|Matched|Total|%|:grey_question:|Assignee<br>Discord|Assignee<br>GitHub
--|-|-|-|-|-|-""")
-    for unit in data["units"] or []:
-
-        def friendly_size(value: int) -> str:
-            return f"`{humanfriendly.format_size(value).replace('bytes', 'B')}`"
-
-        # Strip "main/" by splitting on "/" and recombining
-        file = "/".join((unit["name"] or "/").split("/")[1:])
-        # Link to source file
-        file_link = f"[`{file}`](../blob/master/src/{file}.c)"
-
-        matched_code = int(unit["measures"].get("matched_code") or 0)
-        total_code = int(unit["measures"].get("total_code") or 0)
-        code_percent = float(unit["measures"].get("matched_code_percent") or 0)
-        matched = f"{friendly_size(matched_code)}"
-        total = f"{friendly_size(total_code)}"
-        percent = f"`{humanfriendly.round_number(code_percent)}%`"
-        linked = ":heavy_check_mark:" if unit["metadata"].get("complete") else ":x:"
-
+    def assignee_cells(file: str):
         assignee = assignees.get(file, {})
-
         if "discord" in assignee:
-            discord = f"`{assignee['discord']}`"
+            # Exactly one leading "@", whether or not the parsed value had one.
+            discord = f"`@{assignee['discord'].lstrip('@')}`"
         else:
             discord = "<!-- Discord -->"
-
         if "github" in assignee:
             github = f"[{assignee['github']}](../commits?author={assignee['github']})"
         else:
             github = "<!-- GitHub -->"
+        return discord, github
 
-        print(f"{file_link}|{matched}|{total}|{percent}|{linked}|{discord}|{github}")
+    def percent_cells(unit):
+        measures = unit["measures"]
+        text = percent_cell(
+            int(measures.get("matched_code") or 0),
+            int(measures.get("total_code") or 0),
+            measures.get("matched_code_percent"),
+        )
+        data = percent_cell(
+            int(measures.get("matched_data") or 0),
+            int(measures.get("total_data") or 0),
+            measures.get("matched_data_percent"),
+        )
+        return text, data
+
+    def row_full(unit) -> str:
+        file = file_of(unit)
+        file_link = f"[`{file}`](../blob/master/src/{file}.c)"
+        matched = friendly_size(int(unit["measures"].get("matched_code") or 0))
+        total = friendly_size(int(unit["measures"].get("total_code") or 0))
+        text, data = percent_cells(unit)
+        discord, github = assignee_cells(file)
+        return f"{file_link}|{matched}|{total}|{text}|{data}|{discord}|{github}"
+
+    def row_slim(unit) -> str:
+        file = file_of(unit)
+        file_link = f"[`{file}`](../blob/master/src/{file}.c)"
+        text, data = percent_cells(unit)
+        return f"{file_link}|{text}|{data}"
+
+    # Bucket each TU by how far it has progressed. "complete" (fully linked) is
+    # the canonical done flag -- it drives the official completed-unit count --
+    # so it wins; otherwise split on whether .text is fully matched.
+    in_progress = []
+    data_left = []
+    linked = []
+    for unit in data["units"] or []:
+        if unit["metadata"].get("complete"):
+            linked.append(unit)
+        elif float(unit["measures"].get("matched_code_percent") or 0) >= 100:
+            data_left.append(unit)
+        else:
+            in_progress.append(unit)
+
+    full_header = (
+        "File|Matched|Total|.text %|data %|Assignee<br>Discord|Assignee<br>GitHub\n"
+        "-|-|-|-|-|-|-"
+    )
+    slim_header = "File|.text %|data %\n-|-|-"
+
+    print(
+        "# Translation Units\n\n"
+        "Edit this page and fill in your own username to assign yourself to a file.\n\n"
+        "Just write your username as plaintext and it will be formatted "
+        "automatically later.\n\n"
+        "Each TU has two matching signals: **.text %** (code) and **data %**. "
+        "A TU moves into **Fully linked** once it is marked complete "
+        "(`.text` and data matched and linked into the build)."
+    )
+
+    # The count goes on its own line below each header so the header text --
+    # and therefore the section's anchor URL -- stays stable as counts change.
+    print("\n## .text in progress\n")
+    print(f"{len(in_progress)} translation units\n")
+    print(full_header)
+    for unit in in_progress:
+        print(row_full(unit))
+
+    print("\n## .text matched - data / linking left\n")
+    print(f"{len(data_left)} translation units\n")
+    print(full_header)
+    for unit in data_left:
+        print(row_full(unit))
+
+    print("\n## Fully linked\n")
+    print(f"{len(linked)} translation units\n")
+    print(slim_header)
+    for unit in linked:
+        print(row_slim(unit))
 
 
 def main():
