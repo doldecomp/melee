@@ -1077,8 +1077,8 @@ void ftKb_SpecialNLk800FB6DC(Fighter_GObj* gobj)
             max = da->specialn_cl_max_charge;
             break;
         }
-        it_802A850C(fp->fv.kb.x74, &pos1, &pos2, 0.08726646f,
-                    fp->mv.lk.specialn.x0.y, max);
+        itLinkArrow_802A850C(fp->fv.kb.x74, &pos1, &pos2, 0.08726646f,
+                             fp->mv.lk.specialn.x0.y, max);
         ftKb_SpecialNLk_UnsetArrow(gobj);
         fp->item_gobj = saved_item;
         ftpickupitem_80094818(gobj, 0);

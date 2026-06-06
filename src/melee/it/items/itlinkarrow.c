@@ -207,16 +207,16 @@ void it_802A8398(Item_GObj* gobj, Vec3* pos, Vec3* pos2)
     }
 }
 
-inline HSD_JObj* it_802A850C_inline(HSD_Joint* joint)
+inline HSD_JObj* itLinkArrow_802A850C_inline(HSD_Joint* joint)
 {
-    HSD_JObj* var_r30;
+    HSD_JObj* jobj;
     if (joint != NULL) {
-        var_r30 = HSD_JObjLoadJoint(joint);
+        jobj = HSD_JObjLoadJoint(joint);
     }
-    return var_r30;
+    return jobj;
 }
 
-inline void it_802A850C_inline_2(Item_GObj* gobj, Quaternion* quat)
+inline void itLinkArrow_802A850C_inline_2(Item_GObj* gobj, Quaternion* quat)
 {
     int i;
     Item* item;
@@ -233,8 +233,8 @@ inline void it_802A850C_inline_2(Item_GObj* gobj, Quaternion* quat)
     }
 }
 
-void it_802A850C(Item_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3, f32 arg4,
-                 f32 arg5)
+void itLinkArrow_802A850C(Item_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3,
+                          f32 arg4, f32 arg5)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = gobj->hsd_obj;
@@ -245,7 +245,7 @@ void it_802A850C(Item_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3, f32 arg4,
     Vec3 pos;
     Vec3 sp68;
     u8 _pad3[4];
-    u32 sp60;
+    u32 flags;
     u8 _pad4[4];
     Quaternion quat;
     PAD_STACK(12);
@@ -282,16 +282,18 @@ void it_802A850C(Item_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3, f32 arg4,
         HSD_JObjSetRotationZ(jobj, ip->xDD4_itemVar.linkarrow.x94);
         ip->xDD4_itemVar.linkarrow.xA0 = 1;
 
-        it_802A850C_inline_2(gobj, &quat);
+        itLinkArrow_802A850C_inline_2(gobj, &quat);
 
         attr = ip->xC4_article_data->x4_specialAttributes;
-        ip->xDD4_itemVar.linkarrow.xB4[0] = it_802A850C_inline(attr->x24);
+        ip->xDD4_itemVar.linkarrow.xB4[0] =
+            itLinkArrow_802A850C_inline(attr->x24);
         attr = ip->xC4_article_data->x4_specialAttributes;
-        ip->xDD4_itemVar.linkarrow.xB4[1] = it_802A850C_inline(attr->x28);
+        ip->xDD4_itemVar.linkarrow.xB4[1] =
+            itLinkArrow_802A850C_inline(attr->x28);
 
         ip->xDD4_itemVar.linkarrow.xB0 = 0;
         it_8026EA20(gobj, &ip->xDD4_itemVar.linkarrow.x18, &ip->pos, &sp68,
-                    &ip->xDD4_itemVar.linkarrow.xE4, &sp60);
+                    &ip->xDD4_itemVar.linkarrow.xE4, &flags);
     }
 }
 
@@ -418,14 +420,14 @@ static bool inline it_802A8330_inline(Item_GObj* gobj)
 static void inline itLinkarrow_UnkMotion1_Anim_inline(HSD_GObj* gobj, int i,
                                                       Vec3* scale)
 {
-    Item* item;
-    HSD_JObj* jobj;
-    item = GET_ITEM(gobj);
-    jobj = gobj->hsd_obj;
+    Item* item = GET_ITEM(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+
     if (item->xDD4_itemVar.linkarrow.xB4[i] != NULL) {
         it_80272A18(item->xDD4_itemVar.linkarrow.xB4[i]);
         HSD_JObjSetTranslateWithMtxDirty(item->xDD4_itemVar.linkarrow.xB4[i],
-                                         &item->xDD4_itemVar.linkarrow.x30 + i);
+                                         &item->xDD4_itemVar.linkarrow.x30 +
+                                             i);
         HSD_JObjSetRotationWithMtxDirty(item->xDD4_itemVar.linkarrow.xB4[i],
                                         &item->xDD4_itemVar.linkarrow.x64 + i);
         HSD_JObjGetScale(jobj, scale);
@@ -455,12 +457,12 @@ itLinkarrow_UnkMotion1_Anim_inline2(HSD_GObj* gobj, Vec3* scale1, Vec3* scale2)
 
 bool itLinkarrow_UnkMotion1_Anim(HSD_GObj* gobj)
 {
-    Item* ip = gobj->user_data;
+    Item* ip = GET_ITEM(gobj);
     Vec3 scale;
-    u8 _pad[4];
+    u8 pad[4];
     Vec3 scale1;
     Vec3 scale2;
-    PAD_STACK(16);
+    u8 _pad[4];
     {
         HSD_JObj* jobj = HSD_GObjGetHSDObj(gobj);
         scale.x = scale.y = scale.z = ip->xDD4_itemVar.linkarrow.xC0;
