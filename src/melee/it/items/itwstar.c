@@ -8,11 +8,11 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/it_3F14.h"
-#include "it/ithitbox.h"
 #include "it/it_279C.h"
+#include "it/it_3F14.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
+#include "it/ithitbox.h"
 #include "lb/lb_00F9.h"
 
 #include <baselib/jobj.h>
@@ -74,7 +74,7 @@ void itWStar_Logic29_Spawned(Item_GObj* gobj)
     ip->xDCE_flag.b7 = 0;
     ip->xDD4_itemVar.wstar.xDD8 = 1.0f;
     ip->xDD4_itemVar.wstar.xDD4 = 1.0f;
-    it_80294364(gobj);
+    it_80294624(gobj);
 }
 
 void it_8029455C(Item_GObj* gobj)
