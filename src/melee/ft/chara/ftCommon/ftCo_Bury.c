@@ -256,7 +256,7 @@ void ftCo_800C0D0C(Fighter_GObj* gobj)
         float y = hip_pos.y - joint_pos.y;
         fp->mv.co.bury.x1C = y / p_ftCommonData->x5F4;
         fp->mv.co.bury.translate = fp->cur_pos;
-        efSync_Spawn(1095, gobj, &fp->cur_pos, &fp->x34_scale.y, y);
+        efSync_Spawn(1095, gobj, &fp->cur_pos, &fp->x34_scale.y);
     }
     fp->x2219_b0 = true;
 }
@@ -289,7 +289,7 @@ void ftCo_800C0FCC(HSD_GObj* arg0, Fighter_GObj* arg1)
     if (mpLib_80054ED8(fp->mv.co.bury.x20)) {
         Vec3 normal;
         Vec3 offset;
-        HSD_JObj* jobj = GET_JOBJ(arg0);
+        register HSD_JObj* jobj = GET_JOBJ(arg0);
         mpLineGetNormal(fp->mv.co.bury.x20, &normal);
         HSD_JObjSetRotationZ(jobj, atan2f(-normal.x, normal.y));
         if (mpGetSpeed(fp->coll_data.floor.index, &fp->mv.co.bury.translate,

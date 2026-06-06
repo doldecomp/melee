@@ -294,21 +294,21 @@ static inline int hexval(int ch)
 {
     if (ch < 0x47) {
         if (ch < 0x0A) {
-            if (ch < 0) {
-                goto ret_zero;
+            if (ch >= 0) {
+                goto sub_30;
             }
-            goto sub_30;
-        }
-        if (ch < 0x41) {
             goto ret_zero;
         }
-        goto sub_37;
+        if (ch >= 0x41) {
+            goto sub_37;
+        }
+        goto ret_zero;
     }
     if (ch < 0x67) {
-        if (ch < 0x61) {
-            goto ret_zero;
+        if (ch >= 0x61) {
+            goto sub_57;
         }
-        goto sub_57;
+        goto ret_zero;
     }
     goto ret_zero;
 sub_30:
@@ -2246,14 +2246,17 @@ void hsd_80394950(OSContext* ctx)
     OSRestoreInterrupts(irq);
 }
 
+extern u8 lbl_8040AB00[];
+
 // @TODO: Currently 99.94% match - minor relocation difference
 void Exception_ReportStackTrace(OSContext* ctx, int max_depth)
 {
     u32 i;
     u32* sp;
+    char* strings = (char*) lbl_8040AB00;
 
-    OSReport("- STACK ---------------------------------\n");
-    OSReport(" Address:  Back Chain  LR Save\n");
+    OSReport(strings + 0x8CC);
+    OSReport(strings + 0x904);
 
     sp = (u32*) ctx->gpr[1];
     i = 0;
@@ -2266,7 +2269,7 @@ void Exception_ReportStackTrace(OSContext* ctx, int max_depth)
         if ((s64) (u32) sp >= (s64) OSGetPhysicalMemSize() + 0x800000000) {
             break;
         }
-        OSReport("%08X:   %08X   %08X\n", sp, sp[0], sp[1]);
+        OSReport(strings + 0x924, sp, sp[0], sp[1]);
         sp = (u32*) sp[0];
         i++;
     }
@@ -2969,8 +2972,8 @@ static inline void ps_remove_node(struct ParticleScreenState* sp, void* node)
 // allocation
 s32 hsd_80395D88(void* data)
 {
-    struct ParticleScreenState* sp = &hsd_804CF810;
     char* msg = (char*) lbl_8040AB00;
+    struct ParticleScreenState* sp = &hsd_804CF810;
     s32 result;
 
     result = hsd_80395550(data);
@@ -3001,13 +3004,16 @@ s32 hsd_80395D88(void* data)
         remove_return_0:
             ps_remove_node(sp, data);
             return 0;
-        case 6:
-            if (sp->xD4 != NULL) {
-                OSContext* ctx = sp->xD4;
-                s32 saved;
-                s32 i;
+        case 6: {
+            OSContext* ctx;
+            OSContext** ctx_ptr;
+            s32 saved;
+            s32 i;
 
+            ctx_ptr = &sp->xD4;
+            if (*ctx_ptr != NULL) {
                 saved = hsd_80393D2C(1);
+                ctx = *ctx_ptr;
                 OSReport(msg + 0x728);
                 i = 0;
                 do {
@@ -3016,7 +3022,8 @@ s32 hsd_80395D88(void* data)
                              ((u32*) ctx)[i + 0x10]);
                     i++;
                 } while (i < 0x10);
-                hsd_80394950(ctx);
+                hsd_80394950(*ctx_ptr);
+                ctx = *ctx_ptr;
                 OSReport(msg + 0x828);
                 OSReport(msg + 0x860, ((u32*) ctx)[0x198 / 4],
                          ((u32*) ctx)[0x19C / 4]);
@@ -3035,6 +3042,7 @@ s32 hsd_80395D88(void* data)
             }
             ps_remove_node(sp, data);
             return 1;
+        }
         case 7:
             hsd_80394E8C(lbl_8040BEC4);
             return 1;
@@ -3373,10 +3381,7 @@ s32 hsd_80396A20(void* data)
                 hsd_80394E8C(lbl_8040BC3C.x18);
                 return 1;
             }
-            /* fallthrough */
-        default:
-            bit <<= 1;
-            break;
+            goto default_case;
         case 0x400:
             lbl_8040BC3C.x10 = val & ~mask;
             return 1;
@@ -3385,18 +3390,21 @@ s32 hsd_80396A20(void* data)
             return 1;
         case 0x1000: {
             extern u8 lbl_8040BD74[];
-            ExcptNode* node = (ExcptNode*) lbl_8040BD74;
-            if (node != NULL) {
-                fn_80394DF4(node);
-                node->next = sp->xD0;
-                sp->xD0 = node;
-                if (node->callback != NULL) {
-                    node->callback(node);
+            data = (ExcptNode*) lbl_8040BD74;
+            if (data != NULL) {
+                fn_80394DF4(data);
+                ((ExcptNode*) data)->next = sp->xD0;
+                sp->xD0 = data;
+                if (((ExcptNode*) data)->callback != NULL) {
+                    ((ExcptNode*) data)->callback(data);
                 }
                 sp->x0_b5 = 1;
             }
             return 1;
         }
+        default: default_case:
+            bit <<= 1;
+            break;
         }
     }
     return 0;

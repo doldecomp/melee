@@ -223,7 +223,7 @@ void grIceMt_801F686C(void)
             field30 = grIm_803E4068[row_idx].id;
             break;
         }
-        HSD_ASSERTMSG(0x258, row_idx < ICEMT_FIELD_MAX, "<ICEMT_FIELD_MAX>");
+        HSD_ASSERTMSG(0x258, row_idx < ICEMT_FIELD_MAX, "i<ICEMT_FIELD_MAX");
 
         // Second loop: find row where xAC[0], xAC[1], and field30 don't match
         for (row_idx = 0; row_idx < ICEMT_FIELD_MAX; row_idx++) {
@@ -241,7 +241,7 @@ void grIceMt_801F686C(void)
             field29 = grIm_803E4068[row_idx].id;
             break;
         }
-        HSD_ASSERTMSG(0x261, row_idx < ICEMT_FIELD_MAX, "<ICEMT_FIELD_MAX>");
+        HSD_ASSERTMSG(0x261, row_idx < ICEMT_FIELD_MAX, "i<ICEMT_FIELD_MAX");
 
         // Third loop: find row where xAC[0], xAC[1], field30, and field29
         // don't match
@@ -263,7 +263,7 @@ void grIceMt_801F686C(void)
             field28 = grIm_803E4068[row_idx].id;
             break;
         }
-        HSD_ASSERTMSG(0x26B, row_idx < ICEMT_FIELD_MAX, "<ICEMT_FIELD_MAX>");
+        HSD_ASSERTMSG(0x26B, row_idx < ICEMT_FIELD_MAX, "i<ICEMT_FIELD_MAX");
 
         // Calculate Y positions for the 3 topi platforms
         y_pos = Ground_801C0498();
@@ -1467,10 +1467,10 @@ int grIceMt_801F9ACC(Ground_GObj* gobj, float y, GrIceMtSegmentLookup ev,
     HSD_JObj* jobj;
     Ground* gp;
     HSD_JObj** ptrs;
+    HSD_JObj** new_var;
     f32 cur;
     f32 f;
     f32 f2;
-    HSD_JObj** new_var;
     s32 id;
     PAD_STACK(16);
 

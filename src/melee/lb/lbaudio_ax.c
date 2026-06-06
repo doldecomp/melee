@@ -1265,162 +1265,212 @@ ret_true:
 bool fn_800253D8(HSD_GObj* gobj)
 {
     lbAudioAx_UserData* ud;
+    s32 target;
+    s32 current;
+    s32 end_frame;
+    s32 current_frame;
+    s32 result;
+    f32 f_result;
 
-    if (gobj != NULL) {
-        ud = gobj->user_data;
-        if (ud != NULL) {
-            if (ud->x3C == 1.0f) {
-                int end_frame = ud->end_frame;
-                int cur_frame = ud->current_frame;
-                int pan_right = ud->pan_right;
-                int pan_left = ud->pan_left;
-                int result;
-                float val;
-
-                if (cur_frame > end_frame) {
-                    cur_frame = end_frame;
-                }
-                if (pan_left != pan_right) {
-                    if (pan_left <= pan_right) {
-                        val = (float) pan_left +
-                              ((float) cur_frame *
-                               ((float) pan_right - (float) pan_left)) /
-                                  (float) end_frame;
-                    } else {
-                        val = (float) pan_right +
-                              ((float) cur_frame *
-                               ((float) pan_left - (float) pan_right)) /
-                                  (float) end_frame;
-                    }
-                    if (val < 0.0f) {
-                        val = 0.0f;
-                    }
-                    if (val > 127.0f) {
-                        val = 127.0f;
-                    }
-                    result = (int) val;
-                } else {
-                    result = 0x40;
-                }
-                ud->x2C.pan = result;
-            } else {
-                int end_frame = ud->end_frame;
-                int cur_frame = ud->current_frame;
-                int pan_right = ud->pan_right;
-                int pan_left = ud->pan_left;
-                int result;
-                float val;
-
-                if (cur_frame > end_frame) {
-                    cur_frame = end_frame;
-                }
-                if (pan_left != pan_right) {
-                    if (pan_left <= pan_right) {
-                        val = (float) pan_left +
-                              ((float) cur_frame *
-                               ((float) pan_right - (float) pan_left)) /
-                                  (float) end_frame;
-                    } else {
-                        val = (float) pan_right +
-                              ((float) cur_frame *
-                               ((float) pan_left - (float) pan_right)) /
-                                  (float) end_frame;
-                    }
-                    if (val < 0.0f) {
-                        val = 0.0f;
-                    }
-                    if (val > 127.0f) {
-                        val = 127.0f;
-                    }
-                    result = (int) val;
-                } else {
-                    result = 0x40;
-                }
-                ud->x2C.pan = 0x7F - result;
-            }
-        }
+    if (gobj == NULL) {
+        goto end;
     }
+
+    gobj = gobj->user_data;
+    if (gobj == NULL) {
+        goto end;
+    }
+    ud = (lbAudioAx_UserData*) gobj;
+
+    if (ud->x3C == 1.0f) {
+        end_frame = ud->end_frame;
+        current_frame = ud->current_frame;
+        if (ud && ud) {
+        }
+        target = ud->pan_right;
+        current = ud->pan_left;
+
+        if (current_frame > end_frame) {
+            current_frame = end_frame;
+        }
+
+        if (ud->pan_left != target) {
+            if (current <= target) {
+                f_result =
+                    (f32) current +
+                    ((f32) current_frame * ((f32) target - (f32) current)) /
+                        (f32) end_frame;
+            } else {
+                f_result =
+                    (f32) target +
+                    ((f32) current_frame * ((f32) current - (f32) target)) /
+                        (f32) end_frame;
+            }
+            if (f_result < 0.0f) {
+                f_result = 0.0f;
+            }
+            if (f_result > 127.0f) {
+                f_result = 127.0f;
+            }
+            result = (s32) f_result;
+        } else {
+            result = 0x40;
+        }
+
+        ud->x2C.pan = result;
+    } else {
+        s32 target2;
+        s32 current2;
+        s32 end_frame2;
+        s32 current_frame2;
+        s32 result2;
+        f32 f_result2;
+
+        end_frame2 = ud->end_frame;
+        current_frame2 = ud->current_frame;
+        if (ud && ud) {
+        }
+        target2 = ud->pan_right;
+        current2 = ud->pan_left;
+
+        if (current_frame2 > end_frame2) {
+            current_frame2 = end_frame2;
+        }
+
+        if (ud->pan_left != target2) {
+            if (current2 <= target2) {
+                f_result2 =
+                    (f32) current2 +
+                    ((f32) current_frame2 *
+                     ((f32) target2 - (f32) current2)) /
+                        (f32) end_frame2;
+            } else {
+                f_result2 =
+                    (f32) target2 +
+                    ((f32) current_frame2 *
+                     ((f32) current2 - (f32) target2)) /
+                        (f32) end_frame2;
+            }
+            if (f_result2 < 0.0f) {
+                f_result2 = 0.0f;
+            }
+            if (f_result2 > 127.0f) {
+                f_result2 = 127.0f;
+            }
+            result2 = (s32) f_result2;
+        } else {
+            result2 = 0x40;
+        }
+
+        ud->x2C.pan = 0x7F - result2;
+    }
+end:
     return false;
 }
 
 bool fn_800256BC(HSD_GObj* gobj)
 {
     lbAudioAx_UserData* ud;
+    s32 target;
+    s32 current;
+    s32 end_frame;
+    s32 current_frame;
+    s32 result;
+    f32 f_result;
 
-    if (gobj != NULL) {
-        ud = gobj->user_data;
-        if (ud != NULL) {
-            if (ud->x3C == 1.0f) {
-                int end_frame = ud->end_frame;
-                int cur_frame = ud->current_frame;
-                int pan_right = ud->pan_right;
-                int pan_left = ud->pan_left;
-                int result;
-                float val;
-
-                if (cur_frame > end_frame) {
-                    cur_frame = end_frame;
-                }
-                if (pan_left != pan_right) {
-                    if (pan_left <= pan_right) {
-                        val = (float) pan_left +
-                              ((float) cur_frame *
-                               ((float) pan_right - (float) pan_left)) /
-                                  (float) end_frame;
-                    } else {
-                        val = (float) pan_right +
-                              ((float) cur_frame *
-                               ((float) pan_left - (float) pan_right)) /
-                                  (float) end_frame;
-                    }
-                    if (val < 0.0f) {
-                        val = 0.0f;
-                    }
-                    if (val > 127.0f) {
-                        val = 127.0f;
-                    }
-                    result = (int) val;
-                } else {
-                    result = 0x40;
-                }
-                ud->x2C.pan = result;
-            } else {
-                int end_frame = ud->end_frame;
-                int cur_frame = ud->current_frame;
-                int pan_right = ud->pan_right;
-                int pan_left = ud->pan_left;
-                int result;
-                float val;
-
-                if (cur_frame > end_frame) {
-                    cur_frame = end_frame;
-                }
-                if (pan_left != pan_right) {
-                    if (pan_left <= pan_right) {
-                        val = (float) pan_left +
-                              ((float) cur_frame *
-                               ((float) pan_right - (float) pan_left)) /
-                                  (float) end_frame;
-                    } else {
-                        val = (float) pan_right +
-                              ((float) cur_frame *
-                               ((float) pan_left - (float) pan_right)) /
-                                  (float) end_frame;
-                    }
-                    if (val < 0.0f) {
-                        val = 0.0f;
-                    }
-                    if (val > 127.0f) {
-                        val = 127.0f;
-                    }
-                    result = (int) val;
-                } else {
-                    result = 0x40;
-                }
-                ud->x2C.pan = 0x7F - result;
-            }
-        }
+    if (gobj == NULL) {
+        goto end;
     }
+
+    gobj = gobj->user_data;
+    if (gobj == NULL) {
+        goto end;
+    }
+    ud = (lbAudioAx_UserData*) gobj;
+
+    if (ud->x3C == 1.0f) {
+        end_frame = ud->end_frame;
+        current_frame = ud->current_frame;
+        if (ud && ud) {
+        }
+        target = ud->pan_right;
+        current = ud->pan_left;
+
+        if (current_frame > end_frame) {
+            current_frame = end_frame;
+        }
+
+        if (ud->pan_left != target) {
+            if (current <= target) {
+                f_result =
+                    (f32) current +
+                    ((f32) current_frame * ((f32) target - (f32) current)) /
+                        (f32) end_frame;
+            } else {
+                f_result =
+                    (f32) target +
+                    ((f32) current_frame * ((f32) current - (f32) target)) /
+                        (f32) end_frame;
+            }
+            if (f_result < 0.0f) {
+                f_result = 0.0f;
+            }
+            if (f_result > 127.0f) {
+                f_result = 127.0f;
+            }
+            result = (s32) f_result;
+        } else {
+            result = 0x40;
+        }
+
+        ud->x2C.pan = result;
+    } else {
+        s32 target2;
+        s32 current2;
+        s32 end_frame2;
+        s32 current_frame2;
+        s32 result2;
+        f32 f_result2;
+
+        end_frame2 = ud->end_frame;
+        current_frame2 = ud->current_frame;
+        if (ud && ud) {
+        }
+        target2 = ud->pan_right;
+        current2 = ud->pan_left;
+
+        if (current_frame2 > end_frame2) {
+            current_frame2 = end_frame2;
+        }
+
+        if (ud->pan_left != target2) {
+            if (current2 <= target2) {
+                f_result2 =
+                    (f32) current2 +
+                    ((f32) current_frame2 *
+                     ((f32) target2 - (f32) current2)) /
+                        (f32) end_frame2;
+            } else {
+                f_result2 =
+                    (f32) target2 +
+                    ((f32) current_frame2 *
+                     ((f32) current2 - (f32) target2)) /
+                        (f32) end_frame2;
+            }
+            if (f_result2 < 0.0f) {
+                f_result2 = 0.0f;
+            }
+            if (f_result2 > 127.0f) {
+                f_result2 = 127.0f;
+            }
+            result2 = (s32) f_result2;
+        } else {
+            result2 = 0x40;
+        }
+
+        ud->x2C.pan = 0x7F - result2;
+    }
+end:
     return false;
 }
 
@@ -2446,7 +2496,7 @@ s32 lbAudioAx_8002785C(void)
         result = lbAudioAx_80026E84(Player_GetPlayerCharacter(0));
         for (i = 0; i < 3; i++) {
             if ((s8) gm_80169370(i) != (s8) CHKIND_MAX) {
-                s8 opp = (s8) gm_80169370(i);
+                s32 opp = (s8) gm_80169370(i);
                 result |= lbAudioAx_80026E84(opp);
                 if (opp == 4) {
                     result |= 0x200004000ULL;
@@ -2472,7 +2522,7 @@ s32 lbAudioAx_8002785C(void)
     lbl_804D38D8 = (s32) s32_arr_803BB6B0[Stage_8022519C(stage)][1];
     result |= lbAudioAx_80026EBC(stage);
 
-    if (result != 0) {
+    if (result) {
         lbAudioAx_80026F2C(0xC);
         lbAudioAx_8002702C(0xC, result);
         lbAudioAx_80027168();

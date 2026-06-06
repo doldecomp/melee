@@ -1271,8 +1271,6 @@ s32 gm_8016247C(s32 arg0)
     u32* temp_r5;
     u32* temp_r30_2;
     u32* temp_r3;
-    u32 temp_r0;
-    u32 temp_r0_2;
     s32 temp_r29 = *gmMainLib_8015CCF0();
     u32* temp_r30 = gmMainLib_8015CCFC();
     s32 ret;
@@ -1285,7 +1283,11 @@ s32 gm_8016247C(s32 arg0)
     var_r3 = MAX(-1U, *temp_r5 + arg0);
     *temp_r5 = var_r3;
 
-    var_r28 = MIN(0x270FU, temp_r29 + arg0);
+    var_r28 = temp_r29;
+    var_r28 += arg0;
+    if (var_r28 > 0x270FU) {
+        var_r28 = 0x270FU;
+    }
     ret = (s32) var_r28;
     var_r29 = var_r28;
 
@@ -2343,8 +2345,8 @@ static inline bool gm_80164840_noinline(u8 ckind)
 void gm_80164910(int arg0)
 {
     u16* char_unlock_mask;
-    u8 internal_id;
-    s32 i;
+    s32 internal_id;
+    int i;
     u8 unlock_idx;
     u8 notify_val;
 
@@ -2869,30 +2871,34 @@ s32 fn_8016588C(lbl_8046B6A0_24C_t* arg0, s32 arg1)
     return v;
 }
 
+struct fn_80165AC0_loser_bits {
+    u8 hi : 4;
+    u8 lo : 4;
+};
+
 s32 fn_80165AC0(MatchEnd* arg0)
 {
-    s32 max_loser;
-    s32 count;
     s32 i;
     s32 j;
-    MatchPlayerData* p;
+    s32 max_loser;
+    s32 count;
 
     max_loser = 0;
     for (i = 0; i < 6; i++) {
-        p = &arg0->player_standings[i];
-        if (p->slot_type != 3) {
+        if (arg0->player_standings[i].slot_type != 3) {
             for (j = 0; j < 6; j++) {
-                if (arg0->player_standings[j].slot_type != 3 && j != i &&
-                    (s32) p->score < (s32) arg0->player_standings[j].score) {
-                    p->is_big_loser += 1;
+                if (arg0->player_standings[j].slot_type != 3 && i != j &&
+                    arg0->player_standings[i].score <
+                        arg0->player_standings[j].score) {
+                    arg0->player_standings[i].is_big_loser += 1;
                 }
             }
-            if (max_loser < (s32) p->is_big_loser) {
-                max_loser = p->is_big_loser;
+            if (max_loser < arg0->player_standings[i].is_big_loser) {
+                max_loser = arg0->player_standings[i].is_big_loser;
             }
         }
     }
-    arg0->loser = (arg0->loser & ~0xF0) | ((max_loser << 4) & 0xF0);
+    ((struct fn_80165AC0_loser_bits*) &arg0->loser)->hi = max_loser;
     count = 0;
     for (j = 0; j < 6; j++) {
         if (arg0->player_standings[j].slot_type != 3 &&

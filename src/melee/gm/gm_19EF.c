@@ -96,7 +96,7 @@ static void fn_8019F2D4(u32 arg0);
 
 static void fn_8019EFC4(HSD_PadStatus* pad)
 {
-    HSD_JObj* child_next;
+    register HSD_JObj* child_next;
 
     child_next = lbl_80479A98.x28->hsd_obj;
     if ((u8) lbl_80479A98.x60 != 0) {
@@ -414,8 +414,7 @@ void fn_8019F9C4(u32 arg0)
     cam_gobj = GObj_Create(0x13, 0x14, 0);
     HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(cam_gobj, HSD_GObj_803910D8, 0);
-    cam_gobj->gx_link = (u8) 0x801; // TODO fix this, 0x801 doesnt fit in an u8
-    cam_gobj->p_link = 0;
+    cam_gobj->gxlink_prios = 0x801;
 
     gobj = GObj_Create(0xB, 0xF, 0);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A,

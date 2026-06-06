@@ -22,6 +22,25 @@
 #include <MSL/math.h>
 #include <MSL/trigf.h>
 
+itSeakNeedleThrownData it_803F6F50 = {
+    {
+        { 0, NULL, NULL, NULL },
+        { 1, NULL, NULL, NULL },
+        { 2, NULL, NULL, NULL },
+        { 3, NULL, NULL, NULL },
+        { 4, NULL, NULL, NULL },
+    },
+    { -2.0f, -2.1f, -2.2f, -2.3f, -2.4f, -2.5f, -2.6f, -2.7f },
+    { -0.1f, -0.12f, -0.14f, -0.18f, -0.2f, -0.22f, -0.24f, -0.26f },
+    { 0.20943952f, 0.2443461f, 0.27925268f, 0.31415927f, 0.34906584f,
+      0.38397244f, 0.41887903f, 0.4537856f },
+    { 0.0f, 0.2f, 0.4f, 0.6f, 0.8f, 1.0f, 1.2f, 1.4f },
+    { -2.0f, -2.1f, -2.2f, -2.3f, -2.4f, -2.5f, -2.6f, -2.7f },
+    { -0.1f, -0.12f, -0.14f, -0.18f, -0.2f, -0.22f, -0.24f, -0.26f },
+    { 0.5235988f, 0.61086524f, 0.6981317f, 0.7853982f, 0.87266463f,
+      0.9599311f, 1.0471976f, 1.134464f },
+};
+
 Item_GObj* it_802AFD8C(Item_GObj* parent, Vec3* pos, u32 kind,
                        float facing_dir)
 {
@@ -328,9 +347,9 @@ bool itSeakneedlethrown_UnkMotion0_Coll(Item_GObj* gobj)
 bool itSeakneedlethrown_UnkMotion1_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
+    itSeakNeedleThrownData* data = &it_803F6F50;
     itSeakNeedleThrownAttributes* attr =
         ip->xC4_article_data->x4_specialAttributes;
-    itSeakNeedleThrownData* data = &it_803F6F50;
     if (itSeakNeedleThrown_CheckGroundHit(gobj)) {
         it_80275158(gobj, attr->x4);
         ip->x40_vel.y = ABS(ip->x40_vel.y);
@@ -529,9 +548,9 @@ bool it_2725_Logic109_HitShield(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itSeakNeedleThrownData* data = &it_803F6F50;
-    itSeakNeedleThrownAttributes* attr =
-        ip->xC4_article_data->x4_specialAttributes;
+    itSeakNeedleThrownAttributes* attr;
 
+    attr = ip->xC4_article_data->x4_specialAttributes;
     if (HSD_Randi(3) == 0) {
         it_80272560(gobj, 0);
         it_80275158(gobj, attr->x4);

@@ -83,10 +83,10 @@ static struct grOnett_StageParam {
     /* 0x38 */ f32 x38;
     /* 0x3C */ f32 x3C;
     /* 0x40 */ f32 x40;
-    /* 0x44 */ s32 x44;
-    /* 0x48 */ s32 x48;
-    /* 0x4C */ s32 x4C;
-    /* 0x50 */ s32 x50;
+    /* 0x44 */ f32 x44;
+    /* 0x48 */ f32 x48;
+    /* 0x4C */ f32 x4C;
+    /* 0x50 */ f32 x50;
     /* 0x54 */ f32 x54;
     /* 0x58 */ f32 x58;
     /* 0x5C */ f32 x5C;
@@ -453,9 +453,8 @@ void grOnett_801E41C8(Ground_GObj* gobj)
     gp->gv.onettcar.unk_jobj2 = Ground_801C3FA4(gobj, 0x14);
 
     for (i = 0; i < 4; i++) {
-        HSD_JObj* jobj = gp->gv.onettcar.car_jobjs[i];
-        HSD_JObjSetTranslateX(jobj, 726.0f);
-        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+        HSD_JObjSetTranslateX(gp->gv.onettcar.car_jobjs[i], 726.0f);
+        HSD_JObjSetFlagsAll(gp->gv.onettcar.car_jobjs[i], JOBJ_HIDDEN);
         gp->gv.onettcar.car_items[i] =
             grMaterial_801C8CFC(0, 0, gp, gp->gv.onettcar.car_jobjs[i],
                                 grOnett_801E5030, NULL, NULL);
@@ -482,7 +481,7 @@ bool grOnett_801E43D8(Ground_GObj* gobj)
 void grOnett_801E43E0(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    s8 saved_car = gp->gv.onettcar.curr_car;
+    u8 saved_car = gp->gv.onettcar.curr_car;
     Vec3 pos = { 0.0f, 0.0f, 0.0f };
     f32 cam_x, cam_y, cam_z;
     PAD_STACK(32);

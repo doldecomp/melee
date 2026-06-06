@@ -955,8 +955,8 @@ void ftColl_80077970(Item* item, HitCapsule* hit1, Fighter* fp,
 {
     Vec3 midpoint;
     int dmg1_int, dmg2_int;
+    u32 i;
     int dmg_count;
-    int i;
     PAD_STACK(16);
 
     midpoint.x =
@@ -1043,7 +1043,8 @@ void ftColl_80077970(Item* item, HitCapsule* hit1, Fighter* fp,
             item->xCF4_fighterGObjUnk = fp->gobj;
             item->xC48 = dmg_count;
 
-            vel_x = item->x40_vel.x;
+            vel_x_mag = item->x40_vel.x;
+            vel_x = vel_x_mag;
             if (vel_x < 0.0f) {
                 vel_x_mag = -vel_x;
             } else {
@@ -1577,7 +1578,6 @@ void ftColl_80078A2C(Fighter_GObj* this_gobj)
 
 void ftColl_80078C70(Fighter_GObj* this_gobj)
 { // clang-format off
-    const static u32 hit_sfx[20];
     Fighter* this_fp;
     HSD_GObj* victim_gobj;
     bool is_same_gobj;
@@ -1658,7 +1658,7 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
                                     if (this_fp->x221B_b0) {
                                         var_r3 = true;
                                         if (this_fp->x221B_b3) {
-                                            if (-1.0f == this_fp->facing_dir) {
+                                            if (ftColl_804D82F0 == this_fp->facing_dir) {
                                                 if (this_fp->cur_pos .x < victim_fp->cur_pos .x) {
                                                     var_r3 = false;
                                                 }
@@ -1688,7 +1688,7 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
                                                     if ((u32) temp_r23->element != (u32) HitElement_Inert) {
                                       if (ftColl_80076ED8((Fighter*) victim_fp, temp_r23, this_fp, (HitCapsule*)&this_fp ->hurt_capsules [n]) != false) {
                                                             if (((int) this_fp ->x1988 != 0) || ((int) this_fp ->x198C != 0) || this_fp ->x221D_b6 || ((&this_fp->hurt_capsules[n].capsule)->state != 0)) {
-                                                                ft_PlaySFX(this_fp, hit_sfx [temp_r23 ->sfx_severity], 0x7FU, 0x40U);
+                                                                ft_PlaySFX(this_fp, ftColl_803C0C40[temp_r23 ->sfx_severity], 0x7FU, 0x40U);
                                                                 var_r0_2 = true;
                                                             } else {
                                                                 var_r0_2 = false;

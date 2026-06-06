@@ -7,6 +7,8 @@
 #include "ef/efsync.h"
 #include "gm/gm_unsplit.h"
 
+#include "m2c_macros.h"
+
 #include "gr/forward.h"
 
 #include "gr/grdisplay.h"
@@ -464,45 +466,45 @@ void grInishie1_801FAD84(HSD_GObj* gobj)
 void grInishie1_801FB0AC(HSD_GObj* gobj, u32 index)
 {
     Ground* gp = gobj->user_data;
-    if (gp->gv.inishie12.blocks[index].status == 1) {
-        grInishie1_801FBA34(gobj, gp->gv.inishie12.blocks[index].jobj);
-        gp->gv.inishie12.blocks[index].status = 0;
+    if (gp->gv.inishie1.blocks[index].status == 1) {
+        grInishie1_801FBA34(gobj, gp->gv.inishie1.blocks[index].jobj2);
+        gp->gv.inishie1.blocks[index].status = 0;
         grInishie1_801FBC4C(gobj, index);
 
-        gp->gv.inishie12.xC6 =
+        M2C_FIELD(gp, s16*, 0xC6) =
             randi_between(grI1_804D69F8->unk0, grI1_804D69F8->unk4);
-    } else if (gp->gv.inishie12.blocks[index].status == 2) {
-        grInishie1_801FBA34(gobj, gp->gv.inishie12.blocks[index].jobj);
-        gp->gv.inishie12.blocks[index].status = 0;
+    } else if (gp->gv.inishie1.blocks[index].status == 2) {
+        grInishie1_801FBA34(gobj, gp->gv.inishie1.blocks[index].jobj2);
+        gp->gv.inishie1.blocks[index].status = 0;
         grInishie1_801FBC4C(gobj, index);
 
-        gp->gv.inishie12.xC8 =
+        M2C_FIELD(gp, s16*, 0xC8) =
             randi_between(grI1_804D69F8->unk8, grI1_804D69F8->unkC);
-    } else if (gp->gv.inishie12.blocks[index].status == 3) {
-        grInishie1_801FBA34(gobj, gp->gv.inishie12.blocks[index].jobj);
-        gp->gv.inishie12.blocks[index].status = 0;
+    } else if (gp->gv.inishie1.blocks[index].status == 3) {
+        grInishie1_801FBA34(gobj, gp->gv.inishie1.blocks[index].jobj2);
+        gp->gv.inishie1.blocks[index].status = 0;
         grInishie1_801FBC4C(gobj, index);
 
         {
             int i;
             bool match = false;
             for (i = 0; i < 0x13; i++) {
-                if (gp->gv.inishie12.blocks[i].status == 3) {
+                if (gp->gv.inishie1.blocks[i].status == 3) {
                     match = true;
                     break;
                 }
             }
             if (!match) {
-                gp->gv.inishie12.xC6 =
+                M2C_FIELD(gp, s16*, 0xC6) =
                     randi_between(grI1_804D69F8->unk0, grI1_804D69F8->unk4);
-                gp->gv.inishie12.xC8 =
+                M2C_FIELD(gp, s16*, 0xC8) =
                     randi_between(grI1_804D69F8->unk8, grI1_804D69F8->unkC);
             }
         }
 
-        gp->gv.inishie12.xD8 = grI1_804D69F8->unk10;
+        gp->gv.inishie1.xD8 = grI1_804D69F8->unk10;
     } else {
-        if (gp->gv.inishie12.blocks[index].hatena_gobj != NULL) {
+        if (gp->gv.inishie1.blocks[index].hatena_gobj != NULL) {
             __assert("grinishie1.c", 0x29D, "0");
         }
     }

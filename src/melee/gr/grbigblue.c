@@ -619,7 +619,7 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                     right_y = grBigBlue_801EC58C(&pos, NULL, 500.0f);
                     left_y = grBigBlue_801EC58C(&neg_pos, NULL, 500.0f);
 
-                    if (right_y != -3.4028235e38f || left_y != -3.4028235e38f)
+                    if (right_y != -F32_MAX || left_y != -F32_MAX)
                     {
                         f32 height_range;
                         s32 height_rand;
@@ -711,7 +711,7 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                         if (found != 0) {
                             pos.y = 10.0f + Stage_GetCamBoundsTopOffset();
                         }
-                        if (pos.y == -3.4028235e38f) {
+                        if (pos.y == -F32_MAX) {
                             pos.y = 10.0f + Stage_GetCamBoundsTopOffset();
                         }
 
@@ -815,7 +815,7 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
 
             HSD_JObjGetTranslation(jobj, &cur_pos);
             surface_y = grBigBlue_801EC58C(&cur_pos, &normal, 500.0f);
-            if (surface_y == -3.4028235e38f) {
+            if (surface_y == -F32_MAX) {
                 normal.z = 0.0f;
                 *(f32*) &normal = 0.0f;
                 normal.y = 1.0f;
@@ -1050,7 +1050,7 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                     (coll_result == 1 && cur_pos.y < coll_y))
                 {
                     if (target_y <= probe_y) {
-                        if (probe_y == -3.4028235e38f) {
+                        if (probe_y == -F32_MAX) {
                             gp->gv.bigblue.data[i].xC.z = fwd.y;
                         } else {
                             gp->gv.bigblue.data[i].xC.z =

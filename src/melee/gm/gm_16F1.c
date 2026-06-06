@@ -2031,12 +2031,29 @@ bool fn_80172FAC(void)
     return var_r31;
 }
 
+static inline s32 fn_80173098_CountUnlocked(void)
+{
+    s32 i;
+    s32 count;
+
+    count = 0;
+    for (i = 0; i < 0x19; i++) {
+        if (gmMainLib_8015D0F4(i) != 0) {
+            count++;
+        } else if (gmMainLib_8015D21C(i) != 0) {
+            count++;
+        } else if (gmMainLib_8015D344(i) != 0) {
+            count++;
+        }
+    }
+    return count;
+}
+
 u8 fn_80173098(int arg0)
 {
     Unk1PData* temp_r3;
     UnkAdventureData* temp_r31;
     int var_r31;
-    int i;
 
     temp_r3 = fn_8017DEC8(arg0);
     if (temp_r3->xC.xD == 0) {
@@ -2047,16 +2064,7 @@ u8 fn_80173098(int arg0)
             return CKIND_DRMARIO;
         }
     }
-    var_r31 = 0;
-    for (i = 0; i < 0x19; i++) {
-        if (gmMainLib_8015D0F4(i) != 0) {
-            var_r31++;
-        } else if (gmMainLib_8015D21C(i) != 0) {
-            var_r31++;
-        } else if (gmMainLib_8015D344(i) != 0) {
-            var_r31++;
-        }
-    }
+    var_r31 = fn_80173098_CountUnlocked();
     if (var_r31 >= 10 && !gm_80164840(CKIND_CLINK)) {
         return CKIND_CLINK;
     }

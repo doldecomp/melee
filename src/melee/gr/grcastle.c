@@ -818,10 +818,9 @@ void grCastle_801CE3AC_dontinline(Ground_GObj* gobj)
 void grCastle_801CE3AC(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    HSD_GObj* entity_gobj = gp->gv.castle5.xCC;
 
-    if (entity_gobj != NULL) {
-        HSD_JObj* jobj = GET_JOBJ(entity_gobj);
+    if (gp->gv.castle5.xCC != NULL) {
+        HSD_JObj* jobj = GET_JOBJ(gp->gv.castle5.xCC);
         Quaternion rot;
         Vec3 pos;
         Vec3 offset;

@@ -421,7 +421,7 @@ static void inline itLinkarrow_UnkMotion1_Anim_inline(HSD_GObj* gobj, int i,
     Item* item;
     HSD_JObj* jobj;
     item = GET_ITEM(gobj);
-    jobj = HSD_GObjGetHSDObj(gobj);
+    jobj = gobj->hsd_obj;
     if (item->xDD4_itemVar.linkarrow.xB4[i] != NULL) {
         it_80272A18(item->xDD4_itemVar.linkarrow.xB4[i]);
         HSD_JObjSetTranslateWithMtxDirty(item->xDD4_itemVar.linkarrow.xB4[i],
@@ -460,6 +460,7 @@ bool itLinkarrow_UnkMotion1_Anim(HSD_GObj* gobj)
     u8 _pad[4];
     Vec3 scale1;
     Vec3 scale2;
+    PAD_STACK(16);
     {
         HSD_JObj* jobj = HSD_GObjGetHSDObj(gobj);
         scale.x = scale.y = scale.z = ip->xDD4_itemVar.linkarrow.xC0;

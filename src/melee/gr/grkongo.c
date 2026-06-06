@@ -1202,14 +1202,14 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
         gp->gv.kongo.xD8 = -angular_vel;
     }
 
-    entry = (_struct_grKg_803E188C_0x18*) ((u8*) grKg_803E16E0 + 0x1AC);
+    entry = grKg_803E188C;
     for (i = 0; i < 15; i++) {
         HSD_JObjSetRotationX(entry->unk4, entry->unkC);
         entry++;
     }
 
     mpLib_80057424(4);
-    entry = (_struct_grKg_803E188C_0x18*) ((u8*) grKg_803E16E0 + 0x1AC);
+    entry = grKg_803E188C;
     line_id = 0x28;
     for (i = 0; i < 15; i++) {
         temp = entry->unk14;

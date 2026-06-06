@@ -646,7 +646,7 @@ static float upvec2roll(HSD_CObj* cobj, Vec3* up)
     return dot;
 }
 
-static inline f64 fabsf_p(f32* v)
+static inline f64 cobj_fabsf_p(f32* v)
 {
     return __fabsf(*v);
 }
@@ -662,7 +662,7 @@ static int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll)
     if (res != 0) {
         return res;
     }
-    if (1.0 - fabsf_p(&eye.y) < 0.0001) {
+    if (1.0 - cobj_fabsf_p(&eye.y) < 0.0001) {
         v0.x = sqrtf(eye.y * eye.y + eye.z * eye.z);
         v0.y = eye.y * (-eye.x / v0.x);
         v0.z = eye.z * (-eye.x / v0.x);
@@ -807,7 +807,7 @@ MtxPtr HSD_CObjGetInvViewingMtxPtr(HSD_CObj* cobj)
 void HSD_CObjSetRoll(HSD_CObj* cobj, float roll)
 {
     Vec3 up;
-    PAD_STACK(8);
+    PAD_STACK(4);
 
     if (!cobj) {
         return;

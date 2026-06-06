@@ -1016,8 +1016,9 @@ void mn_8022A440(HSD_GObj* gp, HSD_JObj* root, MainMenuSelection selection)
     mn_8022F3D8(r29, 0x12, TOBJ_MASK);
     mn_8022F3D8(r29, 0x13, TOBJ_MASK);
     HSD_JObjAnim(r29);
-    f = (mn_8022F298(sp24[0]) - mn_803EB360[1].start_frame);
-    HSD_JObjReqAnimAll(sp24[0], f + mn_803EB360[0].start_frame);
+    f = mn_8022F298(sp24[0]);
+    HSD_JObjReqAnimAll(sp24[0], (f - mn_803EB360[1].start_frame) +
+                                     mn_803EB360[0].start_frame);
     HSD_JObjAnimAll(sp24[0]);
     mn_8022F298(sp24[2]);
     HSD_JObjReqAnimAll(sp24[2], mn_803EB378[0].start_frame);
@@ -1217,19 +1218,20 @@ void fn_8022AF10(HSD_GObj* gp)
 void fn_8022AFEC(HSD_GObj* gp)
 {
     /// @todo figure out the inlines
+    AnimLoopSettings* anim_loop;
+    HSD_JObj* jobj;
     MainMenuData* data;
     MainMenuData* data2;
     HSD_GObjProc* think;
     bool selection_changed;
-    HSD_JObj* jobj;
     HSD_JObj* temp_jobj;
     u8 var_r26;
-    AnimLoopSettings* anim_loop;
     MainMenuSelection hovered_selection;
     u8 state;
     u8 option_count;
+    u8 pad[0x20];
     HSD_JObj* sp20[4];
-    PAD_STACK(50);
+    PAD_STACK(18);
 
     var_r26 = 0;
     selection_changed = false;
@@ -1637,9 +1639,9 @@ void fn_8022BDB4(HSD_GObj* gobj, int unused)
 
 HSD_GObj* mn_8022BE34(void)
 {
-    Vec3 pos;
     HSD_GObj* gobj = GObj_Create(2, 3, 0x80);
     HSD_CObj* cobj;
+    Vec3 pos;
 
     mn_804D6BAC = gobj;
     cobj = HSD_CObjLoadDesc(MenMain_cam);

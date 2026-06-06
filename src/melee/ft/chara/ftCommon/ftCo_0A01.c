@@ -2880,14 +2880,18 @@ static inline f32 ftCo_800A648C_inline0(Fighter* fp, Item* ip)
 
 Item* ftCo_800A61D8(Fighter* fp)
 {
+    struct Fighter_x1A88_t* data;
     HSD_GObj* cur;
-    Item* ip;
     Item* closest;
+    Item* ip;
     f32 best;
     f32 dist;
     s32 relevant;
     s32 prio;
 
+    PAD_STACK(8);
+
+    data = &fp->x1A88;
     if (fp == NULL) {
         return NULL;
     }
@@ -2908,7 +2912,7 @@ Item* ftCo_800A61D8(Fighter* fp)
                 if (!inlineD0_it(fp, ip)) {
                     if (ip->kind < 0x23) {
                         prio = ftCo_803C5A68[ip->kind];
-                        if (prio >= fp->x1A88.x2C) {
+                        if (prio >= data->x2C) {
                             if (closest == NULL) {
                                 closest = ip;
                                 best = ftCo_800A648C_inline0(fp, ip);
@@ -4325,8 +4329,6 @@ void ftCo_800A9904(Fighter* fp)
     f32 var_f4;
     f32 var_f5;
 
-    f32* temp_r3;
-
     Vec3 sp4C;
     Vec3 sp40;
     int sp3C;
@@ -4351,7 +4353,6 @@ void ftCo_800A9904(Fighter* fp)
         } else {
             var_f0 = dx / fp->pos_delta.x;
         }
-        temp_r3 = &fp->co_attrs.grav;
         if (is_small(fp->co_attrs.grav)) {
             var_f5 = 1000.0F;
         } else {
@@ -4362,11 +4363,11 @@ void ftCo_800A9904(Fighter* fp)
             var_f4 = (fp->pos_delta.y * var_f0) + fp->cur_pos.y;
         } else if (var_f0 < var_f5) {
             var_f4 = fp->cur_pos.y + (fp->pos_delta.y * var_f0 -
-                                      0.5 * (*temp_r3 * sqrtf(var_f0)));
+                                      0.5 * (fp->co_attrs.grav * sqrtf(var_f0)));
         } else {
             var_f4 =
                 fp->cur_pos.y +
-                (fp->pos_delta.y * var_f5 - 0.5 * (*temp_r3 * sqrtf(var_f5)) -
+                (fp->pos_delta.y * var_f5 - 0.5 * (fp->co_attrs.grav * sqrtf(var_f5)) -
                  ((var_f0 - var_f5) * fp->co_attrs.terminal_vel));
         }
         {
@@ -6674,6 +6675,7 @@ void ftCo_800AEFB8(Fighter* fp)
 
 void ftCo_800AF290(Fighter* fp)
 {
+    struct Fighter_x1A88_t* temp_r27;
     struct Fighter_x1A88_t* data2;
     Vec3 sp54;
     Vec3 sp30;
@@ -6743,7 +6745,8 @@ void ftCo_800AF290(Fighter* fp)
     data->xF9_b6 = true;
     data->xF9_b7 = true;
     data->xF9_b1 = false;
-    data->x44 = ftCo_800A4BEC(fp);
+    fp->x1A88.x44 = ftCo_800A4BEC(fp);
+    temp_r27 = &fp->x1A88;
     item_gobj = fp->item_gobj;
     if (item_gobj != NULL) {
         kind = GET_ITEM(item_gobj)->kind;
@@ -6757,7 +6760,7 @@ void ftCo_800AF290(Fighter* fp)
             is_food = 0;
         }
         if (is_food == 0) {
-            data->x4C = NULL;
+            temp_r27->x4C = NULL;
         } else {
             goto block_30;
         }
@@ -6765,9 +6768,9 @@ void ftCo_800AF290(Fighter* fp)
         tmp = fp->x2168;
     block_30:
         if (tmp != 0) {
-            data->x4C = NULL;
+            temp_r27->x4C = NULL;
         } else {
-            data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
+            temp_r27->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
         }
     }
     fp->x1A88.x50 = ftCo_800A648C(fp);

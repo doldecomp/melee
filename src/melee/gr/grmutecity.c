@@ -460,6 +460,7 @@ void grMuteCity_801EFDF8(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     HSD_GObj* lgobj;
     HSD_LObj* lobj;
+    HSD_LObj* next_lobj;
     PAD_STACK(12);
 
     grAnime_801C8138(gobj, gp->map_id, 0);
@@ -514,18 +515,18 @@ void grMuteCity_801EFDF8(Ground_GObj* gobj)
     lgobj = Ground_801C498C();
     gp->gv.mutecity.x110 = NULL;
     if (lgobj != NULL) {
-        lobj = (HSD_LObj*) lgobj->hsd_obj;
-        if (lobj != NULL) {
+        if ((lobj = (HSD_LObj*) lgobj->hsd_obj) != NULL) {
             while (lobj != NULL) {
                 if ((u32) (lobj->flags & 3) == LOBJ_POINT) {
                     gp->gv.mutecity.x110 = lobj;
                     HSD_LObjSetFlags(gp->gv.mutecity.x110, LOBJ_HIDDEN);
                 }
                 if (lobj == NULL) {
-                    lobj = NULL;
+                    next_lobj = NULL;
                 } else {
-                    lobj = lobj->next;
+                    next_lobj = lobj->next;
                 }
+                lobj = next_lobj;
             }
         }
     }
@@ -1327,7 +1328,7 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
     HSD_Spline* spline;
 
     Ground_801C0498();
-    PAD_STACK(8);
+    PAD_STACK(16);
     track_mid = 0.5f * (gp->gv.mutecity.xD4 + gp->gv.mutecity.xD8);
     Camera_GetTransformPosition(&spE8);
 

@@ -203,7 +203,7 @@ void fn_8026C88C(HSD_GObj* gobj)
                     spawn.x3C_damage = 0;
                     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
                     spawn.x0_parent_gobj = NULL;
-                    spawn.x4_parent_gobj2 = NULL;
+                    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
                     spawn.x44_flag.b0 = 1;
                     spawn.x40 = 0;
                     chk = true;
@@ -219,10 +219,9 @@ void fn_8026C88C(HSD_GObj* gobj)
                 }
             } ///< @todo Make a FLT_RAND(min, max) define or inline
             {
-                s32* temp_r29 =
-                    ((s32*) it_804D6D28) + (gm_8016AE80() * 2) + 0x3F;
+                s32* range = &it_804D6D28->xFC[gm_8016AE80() * 2];
                 f32 randf = HSD_Randf();
-                *alloc_x0 = (temp_r29[1] - temp_r29[0]) * randf + temp_r29[0];
+                *alloc_x0 = (range[1] - range[0]) * randf + range[0];
                 *alloc_x0 *= Ground_801C2AE8(Stage_80225194());
             }
         }

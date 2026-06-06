@@ -1496,7 +1496,7 @@ inline void mnDiagram_FormatPopupNumber(char* buf, u32 val)
 void mnDiagram_80240D94(void* arg0, s32 arg1, s32 arg2, s32 arg3)
 {
     mnDiagram_PopupData* data = ((HSD_GObj*) arg0)->user_data;
-    mnDiagram_AnimTable* tbl = (mnDiagram_AnimTable*) &mnDiagram_803EE728;
+    mnDiagram_AnimTable* tbl;
     Point3d pos;
     char buf[8];
     u32 kos;
@@ -1504,6 +1504,7 @@ void mnDiagram_80240D94(void* arg0, s32 arg1, s32 arg2, s32 arg3)
 
     HSD_Text* text = HSD_SisLib_803A6754(0, 1);
     PAD_STACK(24);
+    tbl = (mnDiagram_AnimTable*) &mnDiagram_803EE728;
     data->text[0] = text;
     lb_8000B1CC(data->jobjs[8], &tbl->points[0], &pos);
     text->font_size.x = 0.0521f;
@@ -1652,7 +1653,7 @@ void mnDiagram_80241310(s32 arg0, s32 arg1, s32 arg2)
     HSD_JObjReqAnimAll(jobj, 0.0f);
     HSD_JObjAnimAll(jobj);
 
-    user_data = HSD_MemAlloc(sizeof(mnDiagram_PopupData));
+    user_data = HSD_MemAlloc(sizeof(mnDiagram_PopupData) - sizeof(HSD_Text*));
     HSD_ASSERTREPORT(0x5F8, user_data, "Can't get user_data\n");
 
     GObj_InitUserData(gobj, 0, mnDiagram_PopupCleanup, user_data);
@@ -1977,8 +1978,10 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
     Diagram* data = gobj->user_data;
     Diagram* data2;
     HSD_GObjProc* proc;
-    u8 col_idx;
+    HSD_JObj* jobj;
+    f32 anim_frame;
     s32 row_idx;
+    u8 col_idx;
     int count;
     PAD_STACK(8);
 
@@ -1997,10 +2000,10 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
     }
 
     if (data->anim_state == 1) {
-        if (mn_8022ED6C(data->jobjs[1], &mnDiagram_803EE768) >=
-            mnDiagram_803EE768.end_frame)
-        {
-            HSD_JObjClearFlagsAll(data->jobjs[2], 0x10);
+        anim_frame = mn_8022ED6C(data->jobjs[1], &mnDiagram_803EE768);
+        jobj = data->jobjs[2];
+        if (anim_frame >= mnDiagram_803EE768.end_frame) {
+            HSD_JObjClearFlagsAll(jobj, 0x10);
             data->anim_state = 0;
             mnDiagram_802433AC();
             if (data->is_name_mode != 0) {
@@ -2037,7 +2040,7 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
             }
             mnDiagram_UpdateScrollArrowVisibility(gobj, count);
         } else {
-            HSD_JObjSetFlagsAll(data->jobjs[2], 0x10);
+            HSD_JObjSetFlagsAll(jobj, 0x10);
         }
     }
     mnDiagram_802417D0(gobj);

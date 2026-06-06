@@ -222,12 +222,14 @@ void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj, s32 x18d4_int,
     s32 h_player;
     s32 x18d4_x3;
     s32 var_r0;
+    volatile s32 x18d4_word;
     union Struct2070 ev;
     union Struct2070 ev_reload;
     union Struct2070 ev_best;
     union Struct2070 ev_hits;
     PAD_STACK(16);
 
+    x18d4_word = x18d4_int;
     if (attacker_gobj != NULL) {
         attacker_fp = GET_FIGHTER(attacker_gobj);
     } else {
@@ -236,7 +238,7 @@ void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj, s32 x18d4_int,
 
     victim_fp = GET_FIGHTER(victim_gobj);
     attacked_from_behind = 0;
-    ev.x2070_int = x18d4_int;
+    ev.x2070_int = x18d4_word;
 
     if (attacker_fp != NULL && ev.x2073 != 0) {
         f32 facing_dir = victim_fp->facing_dir;
@@ -338,9 +340,10 @@ void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj, s32 x18d4_int,
                 pl_8003ED0C(attacker_fp->player_id, attacker_fp->x221F_b4,
                             victim_fp->player_id, victim_fp->x221F_b4,
                             victim_fp->dmg.x1830_percent);
+                x18d4_x3 = ev_data->xC;
                 pl_8003EA40(attacker_fp->player_id, attacker_fp->x221F_b4,
                             victim_fp->player_id, victim_fp->x221F_b4,
-                            ev_data->xC);
+                            x18d4_x3);
                 pl_800403FC(attacker_fp->player_id, attacker_fp->x221F_b4,
                             victim_fp->player_id, victim_fp->x221F_b4,
                             victim_fp->dmg.x18d4.x3);

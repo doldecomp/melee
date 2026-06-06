@@ -44,6 +44,18 @@
 
 #define SIGNF(x) ((x) > 0.0f ? 1.0f : -1.0f)
 
+static inline void ftKb_JObjSetRotationY(HSD_JObj* jobj, f32 y, f32* base)
+{
+    ((jobj) ? ((void) 0) : __assert("jobj.h", 660, "jobj"));
+    ((!(jobj->flags & JOBJ_USE_QUATERNION))
+         ? ((void) 0)
+         : __assert("jobj.h", 661, (char*) &base[8]));
+    jobj->rotate.y = y;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
 extern float ftKb_Init_803CB710[4];
 extern float ftKb_Init_803CB720[4];
 
@@ -1572,8 +1584,8 @@ void ftKb_PrSpecialAirN_Anim(Fighter_GObj* gobj)
                         ftKb_SpecialNPr_801010D4(gobj, true, 0x40012, 0);
                         return;
                     }
-                    HSD_JObjSetRotationY(fp->parts[FtPart_TopN].joint,
-                                         M_PI_2);
+                    ftKb_JObjSetRotationY(fp->parts[FtPart_TopN].joint,
+                                          M_PI_2, scale_base);
                     return;
                 }
                 if (fp->mv.pr.specialn.x14 < M_PI && old_angle > M_PI) {
@@ -1581,10 +1593,12 @@ void ftKb_PrSpecialAirN_Anim(Fighter_GObj* gobj)
                     ftKb_SpecialNPr_801010D4(gobj, true, 0x40012, 0);
                     return;
                 }
-                HSD_JObjSetRotationY(fp->parts[FtPart_TopN].joint, M_PI_2);
+                ftKb_JObjSetRotationY(fp->parts[FtPart_TopN].joint, M_PI_2,
+                                      scale_base);
                 return;
             }
-            HSD_JObjSetRotationY(fp->parts[FtPart_TopN].joint, M_PI_2);
+            ftKb_JObjSetRotationY(fp->parts[FtPart_TopN].joint, M_PI_2,
+                                  scale_base);
             return;
         }
         ftPartSetRotY(fp, FtPart_TopN, M_PI_2);

@@ -160,18 +160,15 @@ void mnDataDel_8024EBC8(HSD_JObj* root, u8 unused, u8 a, u8 b)
 /// @brief animates the warning modal
 void fn_8024ECCC(HSD_GObj* arg0)
 {
+    struct WarnCmnData* data;
     HSD_JObj* root;
     HSD_JObj* panel;
-    HSD_JObj* exclaim;
-    HSD_JObj* cursor_no;
-    HSD_JObj* cursor_yes;
     u8 _pad[10];
     f32 curr_frame;
     HSD_Text* text;
     s32 sis_id;
     u8 visible;
     u8 cursor_idx;
-    struct WarnCmnData* data;
     PAD_STACK(16);
 
     root = GET_JOBJ(arg0);
@@ -182,6 +179,7 @@ void fn_8024ECCC(HSD_GObj* arg0)
         if ((mnDataDel_803EF8A0.start_frame <= curr_frame) &&
             (curr_frame < mnDataDel_803EF8A0.end_frame))
         {
+            HSD_JObj* exclaim;
             curr_frame = mn_8022EFD8(panel, &mnDataDel_803EF8A0);
             lb_80011E24(root, &exclaim, WARN_JOINT_EXCLAIM, -1);
             mn_8022EFD8(exclaim, &mnDataDel_803EF8A0);
@@ -205,6 +203,8 @@ void fn_8024ECCC(HSD_GObj* arg0)
                 HSD_SisLib_803A6368(text, sis_id);
             }
         } else {
+            HSD_JObj* cursor_no;
+            HSD_JObj* cursor_yes;
             cursor_idx = data->cursor_idx;
             lb_80011E24(root, &cursor_yes, WARN_JOINT_CURSOR_YES, -1);
             lb_80011E24(root, &cursor_no, WARN_JOINT_CURSOR_NO, -1);
@@ -233,9 +233,6 @@ void mnDataDel_8024EEC0(void)
     HSD_JObj* no;
     HSD_JObj* yes;
     HSD_JObj* root;
-    f32 no_pos;
-    f32 yes_pos;
-    s32 is_english;
     s32 cursor;
     HSD_GObj* wrn_modal;
     struct WarnCmnData* data;
@@ -268,14 +265,15 @@ void mnDataDel_8024EEC0(void)
     HSD_JObjAnimAll(yes);
     HSD_JObjAnimAll(no);
 
-    is_english = lbLang_IsSavedLanguageUS();
-    if (is_english != false) {
+    if (lbLang_IsSavedLanguageUS() != false) {
         lb_80011E24(root, &cursor_yes, WARN_JOINT_CURSOR_YES, -1);
         lb_80011E24(root, &cursor_no, WARN_JOINT_CURSOR_NO, -1);
-        yes_pos = HSD_JObjGetTranslationX(cursor_yes);
-        no_pos = HSD_JObjGetTranslationX(cursor_no);
-        HSD_JObjSetTranslateX(cursor_yes, no_pos);
-        HSD_JObjSetTranslateX(cursor_no, yes_pos);
+        {
+            f32 yes_pos = HSD_JObjGetTranslationX(cursor_yes);
+            f32 no_pos = HSD_JObjGetTranslationX(cursor_no);
+            HSD_JObjSetTranslateX(cursor_yes, no_pos);
+            HSD_JObjSetTranslateX(cursor_no, yes_pos);
+        }
     }
 }
 
@@ -674,6 +672,7 @@ void mnDataDel_8024FE4C(u8 arg0)
     u16 sis_id;
     u8 is_enabled;
     struct MnDataDelGObjUserData* user_data;
+    PAD_STACK(0x18);
 
     gobj = GObj_Create(6U, 7U, 0x80U);
     mnDataDel_804D6C68 = gobj;
@@ -708,8 +707,8 @@ void mnDataDel_8024FE4C(u8 arg0)
         HSD_JObjReqAnimAll(joint, (f32) i);
         HSD_JObjAnimAll(joint);
         HSD_JObjAddChild(user_data->x10[mnDataDel_803EF8AC[i]], joint);
-        mnDataDel_8024EBC8(joint, i, user_data->x0 == i, 1U);
-        is_enabled = ((u8*) &user_data->x3)[i];
+        mnDataDel_8024EBC8(joint, i, i == user_data->x0, 1U);
+        is_enabled = user_data->x3[i];
         lb_80011E24(joint, &child, 1, -1);
         frame = mn_8022F298(child);
         if (is_enabled != 0) {

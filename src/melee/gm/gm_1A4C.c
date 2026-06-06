@@ -127,7 +127,8 @@ void gm_801A7B00(void)
     HSD_JObjSetRotationYWithMtxDirty(child, val);
 
     scale = 1.0f / un_803060BC(char_idx, 3);
-    scale = un_803060BC(char_idx, 4) * scale;
+    val = un_803060BC(char_idx, 4);
+    scale = val * scale;
     HSD_JObjSetScaleXWithMtxDirty(child, scale);
     HSD_JObjSetScaleYWithMtxDirty(child, scale);
     HSD_JObjSetScaleZWithMtxDirty(child, scale);
@@ -140,7 +141,11 @@ void gm_801A7B00(void)
     target = HSD_JObjGetChild(target);
     target = HSD_JObjGetChild(target);
     target = HSD_JObjGetChild(target);
-    target = HSD_JObjGetNext(target);
+    if (target == NULL) {
+        target = NULL;
+    } else {
+        target = target->next;
+    }
 
     lb_8000C1C0((HSD_JObj*) gobj->hsd_obj, target);
     lb_8000C290((HSD_JObj*) gobj->hsd_obj, target);
@@ -250,15 +255,16 @@ void fn_801A851C(HSD_GObj* gobj)
 void gm_801A85E4(HSD_JObj* jobj, s32 arg1, s32 arg2)
 {
     s32 idx;
+    s32 temp_idx;
     f32 angle;
     f32 x;
-    f32 z;
     PAD_STACK(0x20);
 
     if (arg1 <= 4) {
         arg2 = 4 - arg1;
-        idx = arg2 + 2;
-        if (idx > 4) {
+        temp_idx = arg2 + 2;
+        idx = temp_idx;
+        if (temp_idx > 4) {
             arg2 = 4 - idx;
             idx = arg2 + 2;
         }
@@ -266,12 +272,13 @@ void gm_801A85E4(HSD_JObj* jobj, s32 arg1, s32 arg2)
             0.017453292f * ((45.0f * (f32) idx) + (2.0f * HSD_Randf()) - 1.0f);
         x = 25.0f * cosf(angle);
         HSD_JObjSetTranslateX(jobj, x);
-        z = 0.9f * ((25.0f * -sinf(angle)) + -18.0f);
-        HSD_JObjSetTranslateZ(jobj, z);
+        x = 0.9f * ((25.0f * -sinf(angle)) + -18.0f);
+        HSD_JObjSetTranslateZ(jobj, x);
     } else if (arg1 <= 0xC) {
         arg2 = 0xC - arg1;
-        idx = arg2 + 8;
-        if (idx > 0xC) {
+        temp_idx = arg2 + 8;
+        idx = temp_idx;
+        if (temp_idx > 0xC) {
             arg2 = 0xC - idx;
             idx = arg2 + 8;
         }
@@ -279,12 +286,13 @@ void gm_801A85E4(HSD_JObj* jobj, s32 arg1, s32 arg2)
                 ((25.714285f * (f32) (idx - 5)) + (4.0f * HSD_Randf()) - 2.0f);
         x = 50.0f * cosf(angle);
         HSD_JObjSetTranslateX(jobj, x);
-        z = 0.9f * ((50.0f * -sinf(angle)) + -18.0f);
-        HSD_JObjSetTranslateZ(jobj, z);
+        x = 0.9f * ((50.0f * -sinf(angle)) + -18.0f);
+        HSD_JObjSetTranslateZ(jobj, x);
     } else if (arg1 <= 0x15) {
         arg2 = 0x15 - arg1;
-        idx = arg2 + 0x11;
-        if (idx > 0x15) {
+        temp_idx = arg2 + 0x11;
+        idx = temp_idx;
+        if (temp_idx > 0x15) {
             arg2 = 0x15 - idx;
             idx = arg2 + 0x11;
         }
@@ -292,8 +300,8 @@ void gm_801A85E4(HSD_JObj* jobj, s32 arg1, s32 arg2)
             0.017453292f * ((22.5f * (f32) (idx - 0xD)) + HSD_Randf() - 0.5f);
         x = 75.0f * cosf(angle);
         HSD_JObjSetTranslateX(jobj, x);
-        z = 0.8f * ((75.0f * -sinf(angle)) + -18.0f);
-        HSD_JObjSetTranslateZ(jobj, z);
+        x = 0.8f * ((75.0f * -sinf(angle)) + -18.0f);
+        HSD_JObjSetTranslateZ(jobj, x);
     } else if (arg1 == 0x16) {
         HSD_JObjSetTranslateX(jobj, -80.0f);
         HSD_JObjSetTranslateZ(jobj, -70.0f);
@@ -372,8 +380,8 @@ void gm_801A9094(void)
     s32 i;
     TyDspEntry* dsp;
     HSD_Joint* joint;
-    HSD_MatAnimJoint* matanim;
     HSD_Joint* bg_joint;
+    HSD_MatAnimJoint* matanim;
     HSD_GObj* gobj;
     HSD_JObj* root;
     HSD_JObj* child;
@@ -490,6 +498,7 @@ void gm_801A9630(void)
     HSD_LObj* lobj;
     HSD_JObj* jobj;
     HSD_JObj* child;
+    HSD_JObj* target;
     s32 i;
     PAD_STACK(8);
 
@@ -577,104 +586,183 @@ void gm_801A9630(void)
 
     // Walk JObj tree to find constraint target (3 levels deep)
     child = HSD_JObjGetChild(GET_JOBJ(gm_804D67BC));
-    child = HSD_JObjGetChild(child);
-    child = HSD_JObjGetChild(child);
+    target = HSD_JObjGetChild(child);
+    target = HSD_JObjGetChild(target);
 
-    lb_8000C1C0(jobj, child);
-    lb_8000C290(jobj, child);
+    lb_8000C1C0(jobj, target);
+    lb_8000C290(jobj, target);
     HSD_GObj_SetupProc(gobj, fn_801A80F0, 0x17);
 }
 
 static u8 gm_804D67C8;
 static u8 gm_804D67C9;
 
+char gm_803DB640[] = "GmRegendSimpleCaptain.thp";
+char gm_803DB65C[] = "GmRegendSimpleDonkey.thp";
+char gm_803DB678[] = "GmRegendSimpleFox.thp";
+char gm_803DB690[] = "GmRegendSimpleGamewatch.thp";
+char gm_803DB6AC[] = "GmRegendSimpleKirby.thp";
+char gm_803DB6C4[] = "GmRegendSimpleKoopa.thp";
+char gm_803DB6DC[] = "GmRegendSimpleLink.thp";
+char gm_803DB6F4[] = "GmRegendSimpleLuigi.thp";
+char gm_803DB70C[] = "GmRegendSimpleMario.thp";
+char gm_803DB724[] = "GmRegendSimpleMarth.thp";
+char gm_803DB73C[] = "GmRegendSimpleMewtwo.thp";
+char gm_803DB758[] = "GmRegendSimpleNess.thp";
+char gm_803DB770[] = "GmRegendSimplePeach.thp";
+char gm_803DB788[] = "GmRegendSimplePikachu.thp";
+char gm_803DB7A4[] = "GmRegendSimplePoponana.thp";
+char gm_803DB7C0[] = "GmRegendSimplePurin.thp";
+char gm_803DB7D8[] = "GmRegendSimpleSamus.thp";
+char gm_803DB7F0[] = "GmRegendSimpleYoshi.thp";
+char gm_803DB808[] = "GmRegendSimpleZeldaseak.thp";
+char gm_803DB824[] = "GmRegendSimpleFalco.thp";
+char gm_803DB83C[] = "GmRegendSimpleClink.thp";
+char gm_803DB854[] = "GmRegendSimpleDrmario.thp";
+char gm_803DB870[] = "GmRegendSimpleRoy.thp";
+char gm_803DB888[] = "GmRegendSimplePichu.thp";
+char gm_803DB8A0[] = "GmRegendSimpleGanon.thp";
+char gm_803DB920[] = "GmRegendAdventureCaptain.thp";
+char gm_803DB940[] = "GmRegendAdventureDonkey.thp";
+char gm_803DB95C[] = "GmRegendAdventureFox.thp";
+char gm_803DB978[] = "GmRegendAdventureGamewatch.thp";
+char gm_803DB998[] = "GmRegendAdventureKirby.thp";
+char gm_803DB9B4[] = "GmRegendAdventureKoopa.thp";
+char gm_803DB9D0[] = "GmRegendAdventureLink.thp";
+char gm_803DB9EC[] = "GmRegendAdventureLuigi.thp";
+char gm_803DBA08[] = "GmRegendAdventureMario.thp";
+char gm_803DBA24[] = "GmRegendAdventureMarth.thp";
+char gm_803DBA40[] = "GmRegendAdventureMewtwo.thp";
+char gm_803DBA5C[] = "GmRegendAdventureNess.thp";
+char gm_803DBA78[] = "GmRegendAdventurePeach.thp";
+char gm_803DBA94[] = "GmRegendAdventurePikachu.thp";
+char gm_803DBAB4[] = "GmRegendAdventurePoponana.thp";
+char gm_803DBAD4[] = "GmRegendAdventurePurin.thp";
+char gm_803DBAF0[] = "GmRegendAdventureSamus.thp";
+char gm_803DBB0C[] = "GmRegendAdventureYoshi.thp";
+char gm_803DBB28[] = "GmRegendAdventureZeldaseak.thp";
+char gm_803DBB48[] = "GmRegendAdventureFalco.thp";
+char gm_803DBB64[] = "GmRegendAdventureClink.thp";
+char gm_803DBB80[] = "GmRegendAdventureDrmario.thp";
+char gm_803DBBA0[] = "GmRegendAdventureRoy.thp";
+char gm_803DBBBC[] = "GmRegendAdventurePichu.thp";
+char gm_803DBBD8[] = "GmRegendAdventureGanon.thp";
+char gm_803DBC5C[] = "GmRegendAllstarCaptain.thp";
+char gm_803DBC78[] = "GmRegendAllstarDonkey.thp";
+char gm_803DBC94[] = "GmRegendAllstarFox.thp";
+char gm_803DBCAC[] = "GmRegendAllstarGamewatch.thp";
+char gm_803DBCCC[] = "GmRegendAllstarKirby.thp";
+char gm_803DBCE8[] = "GmRegendAllstarKoopa.thp";
+char gm_803DBD04[] = "GmRegendAllstarLink.thp";
+char gm_803DBD1C[] = "GmRegendAllstarLuigi.thp";
+char gm_803DBD38[] = "GmRegendAllstarMario.thp";
+char gm_803DBD54[] = "GmRegendAllstarMarth.thp";
+char gm_803DBD70[] = "GmRegendAllstarMewtwo.thp";
+char gm_803DBD8C[] = "GmRegendAllstarNess.thp";
+char gm_803DBDA4[] = "GmRegendAllstarPeach.thp";
+char gm_803DBDC0[] = "GmRegendAllstarPikachu.thp";
+char gm_803DBDDC[] = "GmRegendAllstarPoponana.thp";
+char gm_803DBDF8[] = "GmRegendAllstarPurin.thp";
+char gm_803DBE14[] = "GmRegendAllstarSamus.thp";
+char gm_803DBE30[] = "GmRegendAllstarYoshi.thp";
+char gm_803DBE4C[] = "GmRegendAllstarZeldaseak.thp";
+char gm_803DBE6C[] = "GmRegendAllstarFalco.thp";
+char gm_803DBE88[] = "GmRegendAllstarClink.thp";
+char gm_803DBEA4[] = "GmRegendAllstarDrmario.thp";
+char gm_803DBEC0[] = "GmRegendAllstarRoy.thp";
+char gm_803DBED8[] = "GmRegendAllstarPichu.thp";
+char gm_803DBEF4[] = "GmRegendAllstarGanon.thp";
+
 char* gm_803DB8B8[] = {
     // clang-format off
-    "GmRegendSimpleCaptain.thp",
-    "GmRegendSimpleDonkey.thp",
-    "GmRegendSimpleFox.thp",
-    "GmRegendSimpleGamewatch.thp",
-    "GmRegendSimpleKirby.thp",
-    "GmRegendSimpleKoopa.thp",
-    "GmRegendSimpleLink.thp",
-    "GmRegendSimpleLuigi.thp",
-    "GmRegendSimpleMario.thp",
-    "GmRegendSimpleMarth.thp",
-    "GmRegendSimpleMewtwo.thp",
-    "GmRegendSimpleNess.thp",
-    "GmRegendSimplePeach.thp",
-    "GmRegendSimplePikachu.thp",
-    "GmRegendSimplePoponana.thp",
-    "GmRegendSimplePurin.thp",
-    "GmRegendSimpleSamus.thp",
-    "GmRegendSimpleYoshi.thp",
-    "GmRegendSimpleZeldaseak.thp",
-    "GmRegendSimpleFalco.thp",
-    "GmRegendSimpleClink.thp",
-    "GmRegendSimpleDrmario.thp",
-    "GmRegendSimpleRoy.thp",
-    "GmRegendSimplePichu.thp",
-    "GmRegendSimpleGanon.thp",
+    gm_803DB640,
+    gm_803DB65C,
+    gm_803DB678,
+    gm_803DB690,
+    gm_803DB6AC,
+    gm_803DB6C4,
+    gm_803DB6DC,
+    gm_803DB6F4,
+    gm_803DB70C,
+    gm_803DB724,
+    gm_803DB73C,
+    gm_803DB758,
+    gm_803DB770,
+    gm_803DB788,
+    gm_803DB7A4,
+    gm_803DB7C0,
+    gm_803DB7D8,
+    gm_803DB7F0,
+    gm_803DB808,
+    gm_803DB808,
+    gm_803DB824,
+    gm_803DB83C,
+    gm_803DB854,
+    gm_803DB870,
+    gm_803DB888,
+    gm_803DB8A0,
     // clang-format on
 };
 
 char* gm_803DBBF4[] = {
     // clang-format off
-    "GmRegendAdventureCaptain.thp",
-    "GmRegendAdventureDonkey.thp",
-    "GmRegendAdventureFox.thp",
-    "GmRegendAdventureGamewatch.thp",
-    "GmRegendAdventureKirby.thp",
-    "GmRegendAdventureKoopa.thp",
-    "GmRegendAdventureLink.thp",
-    "GmRegendAdventureLuigi.thp",
-    "GmRegendAdventureMario.thp",
-    "GmRegendAdventureMarth.thp",
-    "GmRegendAdventureMewtwo.thp",
-    "GmRegendAdventureNess.thp",
-    "GmRegendAdventurePeach.thp",
-    "GmRegendAdventurePikachu.thp",
-    "GmRegendAdventurePoponana.thp",
-    "GmRegendAdventurePurin.thp",
-    "GmRegendAdventureSamus.thp",
-    "GmRegendAdventureYoshi.thp",
-    "GmRegendAdventureZeldaseak.thp",
-    "GmRegendAdventureFalco.thp",
-    "GmRegendAdventureClink.thp",
-    "GmRegendAdventureDrmario.thp",
-    "GmRegendAdventureRoy.thp",
-    "GmRegendAdventurePichu.thp",
-    "GmRegendAdventureGanon.thp",
+    gm_803DB920,
+    gm_803DB940,
+    gm_803DB95C,
+    gm_803DB978,
+    gm_803DB998,
+    gm_803DB9B4,
+    gm_803DB9D0,
+    gm_803DB9EC,
+    gm_803DBA08,
+    gm_803DBA24,
+    gm_803DBA40,
+    gm_803DBA5C,
+    gm_803DBA78,
+    gm_803DBA94,
+    gm_803DBAB4,
+    gm_803DBAD4,
+    gm_803DBAF0,
+    gm_803DBB0C,
+    gm_803DBB28,
+    gm_803DBB28,
+    gm_803DBB48,
+    gm_803DBB64,
+    gm_803DBB80,
+    gm_803DBBA0,
+    gm_803DBBBC,
+    gm_803DBBD8,
     // clang-format on
 };
 
 char* gm_803DBF10[] = {
     // clang-format off
-    "GmRegendAllstarCaptain.thp",
-    "GmRegendAllstarDonkey.thp",
-    "GmRegendAllstarFox.thp",
-    "GmRegendAllstarGamewatch.thp",
-    "GmRegendAllstarKirby.thp",
-    "GmRegendAllstarKoopa.thp",
-    "GmRegendAllstarLink.thp",
-    "GmRegendAllstarLuigi.thp",
-    "GmRegendAllstarMario.thp",
-    "GmRegendAllstarMarth.thp",
-    "GmRegendAllstarMewtwo.thp",
-    "GmRegendAllstarNess.thp",
-    "GmRegendAllstarPeach.thp",
-    "GmRegendAllstarPikachu.thp",
-    "GmRegendAllstarPoponana.thp",
-    "GmRegendAllstarPurin.thp",
-    "GmRegendAllstarSamus.thp",
-    "GmRegendAllstarYoshi.thp",
-    "GmRegendAllstarZeldaseak.thp",
-    "GmRegendAllstarFalco.thp",
-    "GmRegendAllstarClink.thp",
-    "GmRegendAllstarDrmario.thp",
-    "GmRegendAllstarRoy.thp",
-    "GmRegendAllstarPichu.thp",
-    "GmRegendAllstarGanon.thp",
+    gm_803DBC5C,
+    gm_803DBC78,
+    gm_803DBC94,
+    gm_803DBCAC,
+    gm_803DBCCC,
+    gm_803DBCE8,
+    gm_803DBD04,
+    gm_803DBD1C,
+    gm_803DBD38,
+    gm_803DBD54,
+    gm_803DBD70,
+    gm_803DBD8C,
+    gm_803DBDA4,
+    gm_803DBDC0,
+    gm_803DBDDC,
+    gm_803DBDF8,
+    gm_803DBE14,
+    gm_803DBE30,
+    gm_803DBE4C,
+    gm_803DBE4C,
+    gm_803DBE6C,
+    gm_803DBE88,
+    gm_803DBEA4,
+    gm_803DBEC0,
+    gm_803DBED8,
+    gm_803DBEF4,
     // clang-format on
 };
 

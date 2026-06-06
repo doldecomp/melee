@@ -194,7 +194,7 @@ u32 AXDriver_8038C678(u32 param_type, u32 param_value)
 
 void AXDriver_8038BF6C(HSD_SM* v)
 {
-    int flag;
+    u32 flag;
     int i;
 
     for (i = 0; i <= 9; i++) {
@@ -262,7 +262,7 @@ void AXDriver_8038BF6C(HSD_SM* v)
                 float right_inv_sqrt = sqrtf(1.0F - right_vol);
 
                 HSD_SynthSFXSetMix(
-                    v->vID, left_inv_sqrt * left_inv_sqrt * right_inv_sqrt,
+                    v->vID, left_inv_sqrt * (left_inv_sqrt * right_inv_sqrt),
                     left_sqrt, right_sqrt * left_inv_sqrt);
                 break;
             }
@@ -290,6 +290,7 @@ void AXDriver_8038C6C0(HSD_SM* v)
     u32 cmd_type;
     u32 cmd_word;
     int cmd_size;
+    int cmd_val;
     PAD_STACK(8);
 
     while (v->x30 == (s32) AXDriver_804D778C) {
@@ -310,7 +311,7 @@ void AXDriver_8038C6C0(HSD_SM* v)
             break;
         case 3:
             if ((v->flags & 0x100000) || v->x2A != 0) {
-                v->cmd_stream -= *v->cmd_stream;
+                v->cmd_stream -= *v->cmd_stream & 0xFFFFFF;
                 v->x2A--;
             }
             break;
@@ -324,7 +325,8 @@ void AXDriver_8038C6C0(HSD_SM* v)
             break;
         case 5:
             v->flags |= 2;
-            v->pri = CLAMP(5, v->pri + (s8) (u8) *v->cmd_stream, 0x1C);
+            cmd_val = v->pri + (s8) (u8) *v->cmd_stream;
+            v->pri = CLAMP(5, cmd_val, 0x1C);
             break;
         case 6:
             v->flags |= 4;

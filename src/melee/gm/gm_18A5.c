@@ -1476,7 +1476,6 @@ void fn_8018E85C(DynamicModelDesc* model, s32 flag)
     u8* ptr;
     HSD_JObj* jobj;
     HSD_GObj* gobj;
-    DynamicModelDesc* mdl = model;
     s32 anim_frame;
     f32 pos_multiplier;
     f32 pos;
@@ -1517,10 +1516,10 @@ void fn_8018E85C(DynamicModelDesc* model, s32 flag)
             gobj = GObj_Create(0xE, 0x1B, 0);
             *(HSD_GObj**) (sub + 0x2C) = gobj;
             gobj = *(HSD_GObj**) (sub + 0x2C);
-            jobj = HSD_JObjLoadJoint(mdl->joint);
+            jobj = HSD_JObjLoadJoint(model->joint);
             HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
             GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 2);
-            gm_8016895C(jobj, mdl, 0);
+            gm_8016895C(jobj, model, 0);
 
             anim_frame = sub[0x4D] + sub[0x4F] * 0x1E;
             HSD_JObjReqAnimAll(jobj, (f32) anim_frame);
@@ -2281,13 +2280,15 @@ void gm_801905F0(StartMeleeData* arg0)
 {
     u8 _padA[8];
     GameRules* temp_r31 = gmMainLib_8015CC34();
+    TmData* tm;
     int i;
     TmVsData sp18;
 
+    tm = &gm_804771C4;
     gm_80168FC4();
     gm_80167A64(&arg0->rules);
     arg0->rules.is_teams = false;
-    arg0->rules.xE = gm_804771C4.x28;
+    arg0->rules.xE = tm->x28;
     fn_801640B0(&arg0->rules.x20);
     arg0->rules.x0_0 = temp_r31->mode;
     if (temp_r31->mode != 1) {
@@ -2343,7 +2344,7 @@ void gm_801905F0(StartMeleeData* arg0)
     } else {
         arg0->rules.x2_4 = true;
     }
-    if (temp_r31->score_display != 0 && !arg0->rules.x0_3) {
+    if (temp_r31->score_display != 0 && !arg0->rules.x0_0) {
         arg0->rules.x3_0 = true;
     } else {
         arg0->rules.x3_0 = false;
@@ -2351,32 +2352,31 @@ void gm_801905F0(StartMeleeData* arg0)
     gm_80167A14(arg0->players);
 
     for (i = 0; i < 4; i++) {
-        if (i < gm_804771C4.x30) {
+        if (i < tm->x30) {
             arg0->players[i].x20 = 1.0f;
-            arg0->players[i].xA = (u8) MIN(gm_804771C4.x4B8[i].x6, 0x78);
-            if (gm_804771C4.x4B8[i].x2 != 0) {
+            arg0->players[i].xA = (u8) MIN(tm->x4B8[i].x6, 0x78);
+            if (tm->x4B8[i].x2 != 0) {
                 arg0->players[i].c_kind = gm_801905F0_inline0(fn_8018F410());
                 arg0->players[i].color =
                     HSD_Randi(gm_80169238(arg0->players[i].c_kind));
             } else {
-                arg0->players[i].c_kind =
-                    gm_801905F0_inline0(gm_804771C4.x4B8[i].x1);
-                arg0->players[i].color = gm_804771C4.x4B8[i].x3;
+                arg0->players[i].c_kind = gm_801905F0_inline0(tm->x4B8[i].x1);
+                arg0->players[i].color = tm->x4B8[i].x3;
             }
-            arg0->players[i].slot_type = gm_804771C4.x4B8[i].x0;
+            arg0->players[i].slot_type = tm->x4B8[i].x0;
             arg0->players[i].stocks = temp_r31->stock_count;
             arg0->players[i].sub_color = 0;
             arg0->players[i].team = 0xFF;
             arg0->players[i].xC_b0 = gm_801677F8(i, arg0->players[i].xA);
-            if (gm_804771C4.x4B8[i].x0 == 1) {
+            if (tm->x4B8[i].x0 == 1) {
                 arg0->players[i].xC_b0 = false;
             }
             arg0->players[i].xE = 4;
-            arg0->players[i].cpu_level = gm_804771C4.x4B8[i].x4;
+            arg0->players[i].cpu_level = tm->x4B8[i].x4;
             arg0->players[i].x12 = 0;
             if (gmMainLib_8015CC34()->handicap != 0) {
-                arg0->players[i].x18 = fn_8016419C(gm_804771C4.x4B8[i].x5);
-                arg0->players[i].x1C = fn_801641B4(gm_804771C4.x4B8[i].x5);
+                arg0->players[i].x18 = fn_8016419C(tm->x4B8[i].x5);
+                arg0->players[i].x1C = fn_801641B4(tm->x4B8[i].x5);
             } else {
                 arg0->players[i].x18 = arg0->players[i].x1C = 1.0F;
             }
@@ -4602,10 +4602,36 @@ void fn_80194D84(s32* state, u32 buttons, u32 trigger)
 
 s32 lbl_804D6654;
 
+#pragma pack(push, 1)
+typedef struct TmData_80194F30 {
+    u8 pad_x0[0x2E];
+    u8 x2E;
+    u8 pad_x2F[0x37 - 0x2F];
+    struct {
+        u8 x0;
+        u8 x1;
+        u8 x2;
+        u8 x3;
+        u8 x4;
+        u8 x5;
+        u8 x6;
+        u8 x7;
+        u8 x8;
+        u16 x9;
+        u16 xB;
+        u8 xD;
+        u8 xE;
+        u8 xF;
+        u8 pad_X10[0x12 - 0x10];
+    } x37[64];
+} TmData_80194F30;
+#pragma pack(pop)
+
 /// Handles tournament settings menu input (entrant configuration).
 void fn_80194F30(s32* state_ptr, u32 buttons, u32 trigger)
 {
     TmData* tm = (TmData*) state_ptr;
+    TmData_80194F30* tm_alt = (TmData_80194F30*) state_ptr;
     s32 idx;
 
     if (trigger & 0x1000) {
@@ -4698,7 +4724,7 @@ void fn_80194F30(s32* state_ptr, u32 buttons, u32 trigger)
             idx = lbl_804799B8.x2 + lbl_804799B8.x3;
             tm->x37[idx].x8 = tm->x37[idx].x7;
             idx = lbl_804799B8.x2 + lbl_804799B8.x3;
-            tm->x37[idx].xB = tm->x37[idx].x9;
+            tm_alt->x37[idx].xB = tm->x37[idx].x9;
             idx = lbl_804799B8.x2 + lbl_804799B8.x3;
             tm->x37[idx].x6 = tm->x37[idx].x5;
             tm->cur_option += 1;
@@ -6389,7 +6415,8 @@ void fn_80198824(HSD_GObj* gobj)
     s32 in_range;
 
     gm_8018F634();
-    jobj = gobj->hsd_obj;
+    gobj = gobj->hsd_obj;
+    jobj = (HSD_JObj*) gobj;
 
     if ((s32) gm_8018F634()->cur_option >= 0x1F &&
         (s32) gm_8018F634()->cur_option <= 0x27)
@@ -6579,7 +6606,7 @@ void fn_80198EBC(void)
     HSD_JObj* jobj;
     HSD_JObj* jobj2;
     HSD_JObj* c;
-    struct lbl_803DA0D0_t* da0d0;
+    struct lbl_803DA0D0_t* da0d0 = &lbl_803DA0D0;
     s32 i, j;
     f32 anim_rate;
     f32 pos;
@@ -6588,8 +6615,8 @@ void fn_80198EBC(void)
     f32 f_858, f_834, f_85C;
     f32 f_7E4, f_7E0, f_7E8, f_7EC;
     f32 f_864;
+    PAD_STACK(8);
 
-    da0d0 = &lbl_803DA0D0;
     td = gm_8018F634();
     gm_8018F634();
 
@@ -7206,14 +7233,14 @@ void fn_8019A158(void)
 
 /// #fn_8019A158_end
 
-/// @todo Currently 98.36% match - needs branch pattern fix (beq+b vs bne)
-#pragma dont_inline on
 void fn_8019A71C(s32* state, u32 unused1, u32 unused2)
 {
     u32* counter = &lbl_804799D8.x0;
 
-    if (*state == 0x13) {
+    switch (*state) {
+    case 0x13:
         fn_8019B458(state);
+        break;
     }
 
     if (*state > 0x14) {
@@ -7251,8 +7278,6 @@ void fn_8019A71C(s32* state, u32 unused1, u32 unused2)
         *state = 0x1B;
     }
 }
-#pragma dont_inline reset
-
 extern s32 lbl_804D6678;
 
 void gm_8019A828(void)

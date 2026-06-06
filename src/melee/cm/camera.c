@@ -708,7 +708,7 @@ inline float get_max_bounds_length(CameraBounds* bounds)
 
 void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
 {
-    u8 _padA[16];
+    u8 _padA[8];
     f32 len;
     Vec3 scroll_offset;
     Vec3 scroll_offset2;
@@ -719,12 +719,12 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
     f32 fov_r;
     f32 fov_l;
     f32 tan_fov_u;
-    f32 temp_f26;
     f32 temp_f28;
     f32 temp_f29;
     f32 temp_f31;
     f32 mid_x;
     f32 temp_f31_3;
+    f32 temp_f26;
     f32 var_f28;
     f32 vert_frustum_dist;
     f32 pitch_angle;
@@ -1385,7 +1385,6 @@ void Camera_8002B3D4(void* arg0)
     f32 temp_f31;
     f32 var_f1;
     f32 var_f1_2;
-    BOOL var_r0;
 
     Camera_80030DF8();
     Camera_800293E0();
@@ -1395,23 +1394,11 @@ void Camera_8002B3D4(void* arg0)
     total_dist = cm_80452C68.transform.target_fov - cm_80452C68.transform.fov;
     cm_80452C68.transform.fov += total_dist * cm_803BCCA0.x44;
     Camera_80029BC4(&bounds, &cm_80452C68.transform);
-    if ((Camera_80030AF8() != 0) &&
-        ((p1_fgp = Ground_801C57A4(), p1_fgp != NULL)))
+    if (!((Camera_80030AF8() != 0) &&
+          ((p1_fgp = Ground_801C57A4(), p1_fgp != NULL)) &&
+          (ftLib_80086644(p1_fgp, &fighter_pos),
+           abs_threshold_inline(fighter_pos.z, 30.0f))))
     {
-        ftLib_80086644(p1_fgp, &fighter_pos);
-        /// @todo inline?
-        var_f1 = fighter_pos.z;
-        var_r0 = abs_threshold_inline(var_f1, 30.0f);
-        // if (var_f1 < 0.0f) {
-        //     var_f1 = -var_f1;
-        // }
-        // if (var_f1 > 30.0f) {
-        //     var_r0 = 1;
-        // } else {
-        //     var_r0 = 0;
-        // }
-    }
-    if (var_r0 == 0) {
         Camera_80029CF8(&bounds, &cm_80452C68.transform);
         Camera_8002A768(&cm_80452C68.transform, 0);
     }
@@ -1421,21 +1408,11 @@ void Camera_8002B3D4(void* arg0)
         cm_80452C68.transform_copy.target_fov - cm_80452C68.transform_copy.fov;
     cm_80452C68.transform_copy.fov += temp_f31 * cm_803BCCA0.x44;
     Camera_80029BC4(&sp2C, &cm_80452C68.transform_copy);
-    if ((Camera_80030AF8() != 0) &&
-        ((p1_fgp = Ground_801C57A4(), p1_fgp != NULL)))
+    if (!((Camera_80030AF8() != 0) &&
+          ((p1_fgp = Ground_801C57A4(), p1_fgp != NULL)) &&
+          (ftLib_80086644(p1_fgp, &fighter_pos),
+           abs_threshold_inline(fighter_pos.z, 30.0f))))
     {
-        ftLib_80086644(p1_fgp, &fighter_pos);
-        var_f1_2 = fighter_pos.z;
-        if (var_f1_2 < 0.0f) {
-            var_f1_2 = -var_f1_2;
-        }
-        if (var_f1_2 > 30.0f) {
-            var_r0 = 1;
-        } else {
-            var_r0 = 0;
-        }
-    }
-    if (var_r0 == 0) {
         Camera_80029CF8(&sp2C, &cm_80452C68.transform_copy);
         Camera_8002A768(&cm_80452C68.transform_copy, 0);
     }
@@ -2405,11 +2382,11 @@ after_loop:
             f32 coeff;
 
             tgt_interest = &transform->target_interest;
-            transform->target_interest = cam->x308;
+            cam->transform.target_interest = cam->x308;
             lbVector_Add(tgt_interest, &cam->x314);
 
             tgt_position = &transform->target_position;
-            transform->target_position = *tgt_interest;
+            cam->transform.target_position = *tgt_interest;
             lbVector_Add(tgt_position, &cam->pause_eye_offset);
 
             position = &transform->position;
@@ -2429,9 +2406,9 @@ after_loop:
             sp60.z *= coeff;
             lbVector_Add(&transform->interest, &sp60);
 
-            transform->target_fov = globals->x6C;
-            transform->fov +=
-                (transform->target_fov - transform->fov) * globals->x70;
+            cam->transform.target_fov = globals->x6C;
+            cam->transform.fov +=
+                (cam->transform.target_fov - cam->transform.fov) * globals->x70;
         }
     }
     return;
@@ -2449,8 +2426,9 @@ fallback_path: {
     Camera_8002958C(&bounds3, transform);
 
     globals = &cm_803BCCA0;
-    transform->target_fov = globals->x40;
-    transform->fov += (transform->target_fov - transform->fov) * globals->x44;
+    cam->transform.target_fov = globals->x40;
+    cam->transform.fov +=
+        (cam->transform.target_fov - cam->transform.fov) * globals->x44;
     Camera_80029BC4(&bounds3, transform);
 
     if (Camera_80030AF8()) {
@@ -2476,9 +2454,9 @@ check_done:
 
     transform_copy = &cam->transform_copy;
     Camera_8002958C(&bounds2, transform_copy);
-    transform_copy->target_fov = globals->x40;
-    transform_copy->fov +=
-        (transform_copy->target_fov - transform_copy->fov) * globals->x44;
+    cam->transform_copy.target_fov = globals->x40;
+    cam->transform_copy.fov +=
+        (cam->transform_copy.target_fov - cam->transform_copy.fov) * globals->x44;
     Camera_80029BC4(&bounds2, transform_copy);
 
     if (Camera_80030AF8()) {
@@ -4271,6 +4249,10 @@ Vec3* Camera_8003019C(void)
 
 static void fn_800301D0(HSD_GObj* gobj, int arg1)
 {
+    s64 var_r4;
+    s64 var_r0;
+    s64 var_r3;
+    s64 var_r5;
     HSD_CObj* cobj;
     PAD_STACK(56);
 
@@ -4291,117 +4273,83 @@ static void fn_800301D0(HSD_GObj* gobj, int arg1)
         HSD_LObjDeleteCurrentAll(NULL);
 
         Camera_800310A0(2);
-        {
-            s64 var_r4;
-            s64 var_r0;
-
-            if (cm_80452C68.x398_b2) {
-                var_r4 = 0;
-            } else {
-                var_r4 = 8;
-            }
-            if (cm_80452C68.x398_b4) {
-                var_r0 = 0;
-            } else {
-                var_r0 = 1;
-            }
-            gobj->gxlink_prios = var_r0 | var_r4;
-            HSD_GObj_80390ED0(gobj, 7);
+        if (cm_80452C68.x398_b2) {
+            var_r4 = 0;
+        } else {
+            var_r4 = 8;
         }
+        if (cm_80452C68.x398_b4) {
+            var_r0 = 0;
+        } else {
+            var_r0 = 1;
+        }
+        gobj->gxlink_prios = var_r0 | var_r4;
+        HSD_GObj_80390ED0(gobj, 7);
 
         Camera_800310A0(1);
-        {
-            s64 var_r3;
-
-            if (cm_80452C68.x398_b2) {
-                var_r3 = 0;
-            } else {
-                var_r3 = 8;
-            }
-            gobj->gxlink_prios = var_r3;
-            HSD_GObj_80390ED0(gobj, 7);
+        if (cm_80452C68.x398_b2) {
+            var_r3 = 0;
+        } else {
+            var_r3 = 8;
         }
+        gobj->gxlink_prios = var_r3;
+        HSD_GObj_80390ED0(gobj, 7);
 
         Camera_800310A0(0);
-        {
-            s64 var_r3;
-
-            if (cm_80452C68.x398_b2) {
-                var_r3 = 0;
-            } else {
-                var_r3 = 8;
-            }
-            gobj->gxlink_prios = var_r3;
-            HSD_GObj_80390ED0(gobj, 3);
+        if (cm_80452C68.x398_b2) {
+            var_r3 = 0;
+        } else {
+            var_r3 = 8;
         }
+        gobj->gxlink_prios = var_r3;
+        HSD_GObj_80390ED0(gobj, 3);
 
         lbRefract_80022560();
-        {
-            s64 prios;
-
-            if (cm_80452C68.x398_b4) {
-                prios = 0;
-            } else {
-                prios = 1;
-            }
-            Camera_800311EC(gobj, prios);
+        if (cm_80452C68.x398_b4) {
+            var_r5 = 0;
+        } else {
+            var_r5 = 1;
         }
+        Camera_800311EC(gobj, var_r5);
 
         Camera_80031074(0);
-        {
-            s64 var_r4;
-            s64 var_r0;
-
-            if (cm_80452C68.x398_b2) {
-                var_r4 = 0;
-            } else {
-                var_r4 = 8;
-            }
-            if (cm_80452C68.x398_b4) {
-                var_r0 = 0;
-            } else {
-                var_r0 = 1;
-            }
-            gobj->gxlink_prios = var_r0 | var_r4;
-            HSD_GObj_80390ED0(gobj, 4);
+        if (cm_80452C68.x398_b2) {
+            var_r4 = 0;
+        } else {
+            var_r4 = 8;
         }
-
-        {
-            s64 arg2;
-
-            if (cm_80452C68.x398_b4) {
-                arg2 = 0;
-            } else {
-                arg2 = 1;
-            }
-            Camera_80031328(gobj, arg2);
+        if (cm_80452C68.x398_b4) {
+            var_r0 = 0;
+        } else {
+            var_r0 = 1;
         }
+        gobj->gxlink_prios = var_r0 | var_r4;
+        HSD_GObj_80390ED0(gobj, 4);
+
+        if (cm_80452C68.x398_b4) {
+            var_r5 = 0;
+        } else {
+            var_r5 = 1;
+        }
+        Camera_80031328(gobj, var_r5);
 
         HSD_FogSet(NULL);
-        {
-            s64 var_r3;
-
-            if (cm_80452C68.x398_b3) {
-                var_r3 = 0;
-            } else {
-                var_r3 = 0x80;
-            }
-            gobj->gxlink_prios = var_r3;
-            HSD_GObj_80390ED0(gobj, 7);
+        if (cm_80452C68.x398_b3) {
+            var_r3 = 0;
+        } else {
+            var_r3 = 0x80;
         }
+        gobj->gxlink_prios = var_r3;
+        HSD_GObj_80390ED0(gobj, 7);
 
         Camera_800310A0(3);
-        {
-            s64 var_r3;
-
-            if (cm_80452C68.x398_b2) {
-                var_r3 = 0;
-            } else {
-                var_r3 = 8;
-            }
-            gobj->gxlink_prios = var_r3;
-            HSD_GObj_80390ED0(gobj, 7);
+        if (cm_80452C68.x398_b2) {
+            var_r3 = 0;
+        } else {
+            var_r3 = 8;
         }
+        gobj->gxlink_prios = var_r3;
+        HSD_GObj_80390ED0(gobj, 7);
 
         if (Camera_80030AC4() != 0) {
             if (Camera_80030A78() != 0) {
