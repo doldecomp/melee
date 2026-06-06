@@ -252,3 +252,62 @@ jobs:
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
     - run: nix-build
     - run: nix-shell --run "echo OK"
+
+  update-wiki:
+    name: Update wiki TU list
+    runs-on: ubuntu-latest
+    needs: build-ninja
+    if: >-
+      github.event_name == 'push' &&
+      github.ref_name == github.event.repository.default_branch &&
+      github.repository == 'doldecomp/melee'
+    permissions:
+      contents: write
+      actions: read
+    concurrency:
+      group: update-wiki
+      cancel-in-progress: false
+    steps:
+    - name: Checkout Melee repository
+      uses: actions/checkout@v4
+      with:
+        sparse-checkout: |
+          tools
+          reqs
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.x"
+    - name: Install generator dependencies
+      run: pip install -r reqs/misc.txt
+    - name: Download report
+      uses: actions/download-artifact@v4
+      with:
+        name: GALE01_report
+        path: report
+    - name: Regenerate and push the Translation Units page
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        set -euo pipefail
+
+        repo='${{ github.repository }}'
+        page='Translation-Units.md'
+
+        # GITHUB_TOKEN with `contents: write` can push to this repo's own wiki.
+        git clone --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/${repo}.wiki.git" wiki
+
+        python tools/wiki_tu.py write report/report.json "wiki/${page}" > "wiki/${page}.new"
+        mv "wiki/${page}.new" "wiki/${page}"
+
+        cd wiki
+        if git diff --quiet -- "${page}"; then
+          echo 'Translation Units page already up to date.'
+          exit 0
+        fi
+
+        git config user.name 'github-actions[bot]'
+        git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+        git add "${page}"
+        git commit -m "Update Translation Units list for ${{ github.sha }}"
+        git push origin HEAD:master
