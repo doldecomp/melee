@@ -49,6 +49,11 @@ static HSD_GObj* un_804A2E98[4];
 
 static Vec3 initial_pos = { 0.0f, 0.0f, 0.0f };
 
+static f32 getScale()
+{
+    return 1.4285715f * un_804D6F80;
+}
+
 void un_8031D9E4(int arg0, int arg1, int arg2)
 {
     un_804D6F84[0] = arg0;
@@ -71,7 +76,6 @@ void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
     f32 scale;
     Vec3 v;
 
-    PAD_STACK(4);
     Camera_80028B9C(6);
     lb_8000FCDC();
     mpColl_80041C78();
@@ -113,7 +117,7 @@ void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
         HSD_JObjReqAnimAll(jobj, 140.0f);
         HSD_JObjAnimAll(jobj);
         HSD_JObjGetTranslation2(GET_JOBJ(un_804A2E98[i - 1]), &v);
-        scale = 1.4285715f * un_804D6F80;
+        scale = getScale();
         v.x *= scale;
         v.y *= scale;
         v.z *= scale;

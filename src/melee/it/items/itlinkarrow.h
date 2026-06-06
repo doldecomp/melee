@@ -10,12 +10,12 @@
 
 /* 2A7D8C */ void it_802A7D8C(HSD_GObj*, int);
 /* 2A7E40 */ void it_802A7E40(Item_GObj*);
-/* 2A81C4 */ s32 fn_802A81C4(Item_GObj*);
+/* 2A81C4 */ s32 itLinkArrow_802A81C4(Item_GObj*);
 /* 2A8330 */ void it_802A8330(HSD_GObj*);
 /* 2A8398 */ void it_802A8398(Item_GObj*, Vec3*, Vec3*);
 /* 2A83E0 */ HSD_GObj* it_802A83E0(f32, Fighter_GObj*, Vec3*, Fighter_Part,
                                    s32);
-/* 2A850C */ void itLinkArrow_802A850C(Item_GObj*, Vec3*, Vec3*, f32, f32,
+/* 2A850C */ bool itLinkArrow_802A850C(Item_GObj*, Vec3*, Vec3*, f32, f32,
                                        f32);
 /* 2A8984 */ void itLinkArrow_Logic98_Destroyed(Item_GObj*);
 /* 2A8A7C */ void it_802A8A7C(Item_GObj*);
