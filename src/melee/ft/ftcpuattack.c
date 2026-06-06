@@ -703,7 +703,7 @@ int ftCo_800B6208(ftCo_AttackEntry* arr)
         }
         p++;
     }
-    HSD_ASSERT(0x28A, NULL);
+    HSD_ASSERT(0x28A, 0);
 }
 
 /// Return true if the fighter is currently in any attacking motion state

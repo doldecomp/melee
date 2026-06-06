@@ -917,22 +917,10 @@ int fn_80179350_inline(void)
     return fn_801791E4();
 }
 
-void fn_80179350(HSD_GObj* arg0)
+static inline void fn_80179350_update(ResultsData* data, MatchEnd* match_end,
+                                      HSD_GObj* arg0)
 {
-    ResultsData* data = &lbl_8046DBE8;
-    MatchEnd* match_end;
-    int i;
-
     PAD_STACK(8);
-
-    match_end = fn_80174274();
-
-    for (i = 0; i < 6; i++) {
-        if (data->player_data[i].jobjs[12] != NULL) {
-            lb_8000B1CC(data->player_data[i].jobjs[12], NULL,
-                        &data->player_data[i].stats_position);
-        }
-    }
 
     if ((u32) data->x8 == 0 && data->x0_4) {
         gm_801A4634(0);
@@ -996,6 +984,21 @@ void fn_80179350(HSD_GObj* arg0)
             break;
         }
     }
+}
+void fn_80179350(HSD_GObj* arg0)
+{
+    ResultsData* data = &lbl_8046DBE8;
+    MatchEnd* match_end;
+    int i;
+    PAD_STACK(8);
+    match_end = fn_80174274();
+    for (i = 0; i < 6; i++) {
+        if (data->player_data[i].jobjs[12] != NULL) {
+            lb_8000B1CC(data->player_data[i].jobjs[12], NULL,
+                        &data->player_data[i].stats_position);
+        }
+    }
+    fn_80179350_update(data, match_end, arg0);
 
     if ((u32) data->x8 < (u32) -1) {
         data->x8++;

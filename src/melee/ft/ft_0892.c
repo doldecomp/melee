@@ -213,7 +213,7 @@ void ft_80089768(Vec2* ptr)
     UnkStruct89768* s = (UnkStruct89768*) ptr;
     s->x0 = 0;
     s->x4 = 0;
-    s->x8 = 1.0f;
+    s->x8 = 0.0f;
     s->xC = 6;
     s->x10_b7 = 0;
     s->x11_b4 = 0;

@@ -3633,24 +3633,24 @@ void fn_80193230(void)
 }
 #pragma pop
 
-static s32 lbl_804DA78C = 0x46DC46FF;
+/// .sdata2
+/* 4DA78C */ extern s32 lbl_804DA78C;
 
 void fn_80193308(void)
 {
-    // Extra vars are permuter slop, but 100% is 100%
-    HSD_Text* new_var3;
-    s32* new_var4;
+    HSD_Text* created_text2;
+    s32* text_color_word;
     s32 color;
     TmData* tm;
     HSD_Text* text;
-    GXColor* new_var5;
+    GXColor* text_color;
     HSD_Text** ptr;
     f32 y;
     s32 i;
     s32 idx;
-    s32* new_var;
+    s32* color_word;
     s32 count;
-    HSD_Text* new_var2;
+    HSD_Text* created_text;
 
     color = lbl_804DA78C;
     tm = gm_8018F634();
@@ -3695,17 +3695,17 @@ void fn_80193308(void)
     idx = 1;
     if ((!tm) && (!tm)) {
     }
-    new_var = &color;
+    color_word = &color;
     do {
-        new_var2 = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
+        created_text = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
         ptr = &tm->x518[idx];
-        *ptr = new_var2;
+        *ptr = created_text;
         text = *ptr;
         text->font_size.x = 0.58f;
         text->font_size.y = 0.55f;
         (*ptr)->default_kerning = 1;
         if (count != 0) {
-            *(new_var4 = (s32*) (&(*ptr)->text_color)) = *new_var;
+            *(text_color_word = (s32*) (&(*ptr)->text_color)) = *color_word;
         }
         count += 1;
         idx = 2;
@@ -3714,16 +3714,16 @@ void fn_80193308(void)
     count = 0;
     idx = 3;
     do {
-        new_var3 = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
+        created_text2 = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
         ptr = &tm->x518[idx];
-        *ptr = new_var3;
+        *ptr = created_text2;
         text = *ptr;
         text->font_size.x = 0.85f;
         text->font_size.y = 1.35f;
         (*ptr)->default_kerning = 1;
         (*ptr)->default_alignment = 1;
         if (count) {
-            *((s32*) (new_var5 = &(*ptr)->text_color)) = *new_var;
+            *((s32*) (text_color = &(*ptr)->text_color)) = *color_word;
             ;
         }
         count += 1;

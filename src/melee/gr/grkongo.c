@@ -43,28 +43,28 @@ S16Vec3 grKg_803E16E0[6] = {
 
 StageCallbacks grKg_803E1704[12] = {
     { NULL, NULL, NULL, NULL, 0 },
-    { grKongo_801D6074, grKongo_801D6190, grKongo_801D6198,
-      grKongo_801D6378, 0 },
-    { grKongo_801D6074, grKongo_801D6190, grKongo_801D6198,
-      grKongo_801D6378, 0 },
-    { grKongo_801D6038, grKongo_801D6064, grKongo_801D606C,
-      grKongo_801D6070, 0 },
-    { grKongo_801D5FA8, grKongo_801D5FD4, grKongo_801D5FDC,
-      grKongo_801D5FE0, 0 },
-    { grKongo_801D55D8, grKongo_801D5774, grKongo_801D577C,
-      grKongo_801D5FA4, 0 },
-    { grKongo_801D5FE4, grKongo_801D6028, grKongo_801D6030,
-      grKongo_801D6034, 0 },
-    { grKongo_801D637C, grKongo_801D64B4, grKongo_801D64BC,
-      grKongo_801D6518, 0 },
-    { grKongo_801D637C, grKongo_801D64B4, grKongo_801D64BC,
-      grKongo_801D6518, 0 },
-    { grKongo_801D637C, grKongo_801D64B4, grKongo_801D64BC,
-      grKongo_801D6518, 0 },
-    { grKongo_801D5490, grKongo_801D5574, grKongo_801D557C,
-      grKongo_801D55D4, 0xC0000000 },
-    { grKongo_801D651C, grKongo_801D6660, grKongo_801D6668,
-      grKongo_801D69AC, 0 },
+    { grKongo_801D6074, grKongo_801D6190, grKongo_801D6198, grKongo_801D6378,
+      0 },
+    { grKongo_801D6074, grKongo_801D6190, grKongo_801D6198, grKongo_801D6378,
+      0 },
+    { grKongo_801D6038, grKongo_801D6064, grKongo_801D606C, grKongo_801D6070,
+      0 },
+    { grKongo_801D5FA8, grKongo_801D5FD4, grKongo_801D5FDC, grKongo_801D5FE0,
+      0 },
+    { grKongo_801D55D8, grKongo_801D5774, grKongo_801D577C, grKongo_801D5FA4,
+      0 },
+    { grKongo_801D5FE4, grKongo_801D6028, grKongo_801D6030, grKongo_801D6034,
+      0 },
+    { grKongo_801D637C, grKongo_801D64B4, grKongo_801D64BC, grKongo_801D6518,
+      0 },
+    { grKongo_801D637C, grKongo_801D64B4, grKongo_801D64BC, grKongo_801D6518,
+      0 },
+    { grKongo_801D637C, grKongo_801D64B4, grKongo_801D64BC, grKongo_801D6518,
+      0 },
+    { grKongo_801D5490, grKongo_801D5574, grKongo_801D557C, grKongo_801D55D4,
+      0xC0000000 },
+    { grKongo_801D651C, grKongo_801D6660, grKongo_801D6668, grKongo_801D69AC,
+      0 },
 };
 
 char grKg_803E17F4[] = "/GrKg.dat";
@@ -482,8 +482,7 @@ void grKongo_801D577C(Ground_GObj* arg0)
         }
         temp_r31->gv.kongo3.xC6 = 2;
     case 2: /* switch 2 */
-    block_124:
-        ;
+    block_124:;
         hit = grKg_803B7FB0;
         hit.state = 1;
         hit.damage = *(u32*) &grKg_804D6980->unk6C;
@@ -492,8 +491,7 @@ void grKongo_801D577C(Ground_GObj* arg0)
         hit.unk10 = *(u32*) &grKg_804D6980->unk78;
         hit.unk14 = *(u32*) &grKg_804D6980->unk7C;
         hit.element = *(u32*) &grKg_804D6980->unk80;
-        angle = (f32) (1.5707963267948966 +
-                       (f64) temp_r31->gv.kongo3.xD8);
+        angle = (f32) (1.5707963267948966 + (f64) temp_r31->gv.kongo3.xD8);
         if (angle < 0.0f) {
             angle = (f32) ((f64) angle + M_TAU);
         } else if (angle > (f32) M_TAU) {
@@ -661,7 +659,7 @@ void grKongo_801D828C(HSD_GObj* gobj)
         return;
     }
     if (gp->gv.kongo.u.taru.keep == NULL) {
-        __assert(grKg_803E1858, 1719, grKg_803E1A00);
+        __assert(grKg_803E1858, 1719, "gp->u.taru.keep");
     }
     if (((u8*) gp->gv.kongo.u.taru.keep)[2] == 8) {
         gp->gv.kongo3.xC6 = 0;
@@ -1138,8 +1136,8 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
     grKongo_801D6AFC();
 
     i = 0U;
-    entry = (_struct_grKg_803E188C_0x18*) ((u8*) grKg_803E16E0 +
-                                           (i * 0x18) + 0x1AC);
+    entry = (_struct_grKg_803E188C_0x18*) ((u8*) grKg_803E16E0 + (i * 0x18) +
+                                           0x1AC);
     table = entry;
     do {
         entry->unk14 = (f32) (37.8 * tanf(-entry->unkC));
@@ -1147,17 +1145,16 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
         entry++;
     } while (i < 15U);
 
-    displacement = grKg_803E188C[2].unkC *
-                   (((deg_to_rad * grKg_804D6980->unkA8) /
-                     (deg_to_rad * grKg_804D6980->unk90)) -
-                    1.0f);
+    displacement =
+        grKg_803E188C[2].unkC * (((deg_to_rad * grKg_804D6980->unkA8) /
+                                  (deg_to_rad * grKg_804D6980->unk90)) -
+                                 1.0f);
     angle = (f32) (0.7853981633974483 *
-                   (0.5 * (f64) (((grKg_803E188C[2].unk14 -
-                                    grKg_803E188C[1].unk14) /
-                                   6.0f) +
-                                  ((grKg_803E188C[3].unk14 -
-                                    grKg_803E188C[2].unk14) /
-                                   6.0f))));
+                   (0.5 *
+                    (f64) (((grKg_803E188C[2].unk14 - grKg_803E188C[1].unk14) /
+                            6.0f) +
+                           ((grKg_803E188C[3].unk14 - grKg_803E188C[2].unk14) /
+                            6.0f))));
     limit = deg_to_rad * grKg_804D6980->unkAC;
     if (angle > limit) {
         angle = limit;
@@ -1173,17 +1170,17 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
         gp->gv.kongo.xC8 = -angular_vel;
     }
 
-    displacement = grKg_803E188C[12].unkC *
-                   (((deg_to_rad * grKg_804D6980->unkA8) /
-                     (deg_to_rad * grKg_804D6980->unk90)) -
-                    1.0f);
-    angle = (f32) (0.7853981633974483 *
-                   (0.5 * (f64) (((grKg_803E188C[12].unk14 -
-                                    grKg_803E188C[11].unk14) /
-                                   6.0f) +
-                                  ((grKg_803E188C[13].unk14 -
-                                    grKg_803E188C[12].unk14) /
-                                   6.0f))));
+    displacement =
+        grKg_803E188C[12].unkC * (((deg_to_rad * grKg_804D6980->unkA8) /
+                                   (deg_to_rad * grKg_804D6980->unk90)) -
+                                  1.0f);
+    angle =
+        (f32) (0.7853981633974483 *
+               (0.5 *
+                (f64) (((grKg_803E188C[12].unk14 - grKg_803E188C[11].unk14) /
+                        6.0f) +
+                       ((grKg_803E188C[13].unk14 - grKg_803E188C[12].unk14) /
+                        6.0f))));
     limit = deg_to_rad * grKg_804D6980->unkAC;
     if (angle > limit) {
         angle = limit;
@@ -1350,8 +1347,7 @@ HSD_GObj* grKongo_801D5340(s32 gobj_id)
             HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
-        OSReport((char*) grKg_803E16E0 + 0x154, grKg_803E1858, 0x10E,
-                 gobj_id);
+        OSReport((char*) grKg_803E16E0 + 0x154, grKg_803E1858, 0x10E, gobj_id);
     }
     return gobj;
 }

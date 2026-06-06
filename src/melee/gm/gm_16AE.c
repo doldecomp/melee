@@ -1425,7 +1425,8 @@ static inline void fn_8016D634_inline(struct lbl_8046B6A0_24C_t* dst)
 void fn_8016D634(void)
 {
     lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
-    struct lbl_8046B6A0_24C_t* temp_r6;
+    struct lbl_8046B6A0_24C_t* dst;
+    struct lbl_8046B6A0_24C_t* copied_dst;
 
     PAD_STACK(8);
 
@@ -1444,22 +1445,23 @@ void fn_8016D634(void)
         gm_801A4674(4);
         gm_801A4634(5);
         lbl_8046B6A0.unk_9 = 1;
-        temp_r6 = &tmp->x24C;
+        dst = &tmp->x24C;
+        copied_dst = dst;
         if (lbl_8046B6A0.match_over == 0) {
-            *temp_r6 = tmp->x24C;
-            temp_r6->is_teams = lbl_8046B6A0.x24C8.is_teams;
-            temp_r6->x4 = tmp->match_result;
-            gm_80166378(temp_r6);
-            fn_8016C46C_dontinline((int) temp_r6);
+            *copied_dst = tmp->x24C;
+            copied_dst->is_teams = lbl_8046B6A0.x24C8.is_teams;
+            copied_dst->x4 = tmp->match_result;
+            gm_80166378(copied_dst);
+            fn_8016C46C_dontinline((int) copied_dst);
             if (tmp->match_result != 7 && tmp->match_result != 8) {
-                fn_8016C4F4(temp_r6);
+                fn_8016C4F4(copied_dst);
             }
             tmp->match_over = 1;
         } else {
-            *temp_r6 = tmp->x24C;
+            *copied_dst = tmp->x24C;
         }
         fn_80180630(tmp->x24C8.x18, 0, tmp->x24C8.x9, tmp->x24C8.x4_5,
-                    temp_r6);
+                    copied_dst);
         lbl_8046B6A0.unk_0 = 2;
     } else {
         lbl_8046B6A0.unk_0 = 3;

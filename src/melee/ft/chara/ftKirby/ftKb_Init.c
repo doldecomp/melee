@@ -1,83 +1,23 @@
 #include "ftKb_Init.static.h"
 
-#include "types.h"
-
-#include <placeholder.h>
-
-#include "baselib/forward.h"
-
-#include "cm/camera.h"
 #include "ef/efasync.h"
-#include "ef/eflib.h"
-#include "ef/efsync.h"
-#include "ft/chara/ftCommon/ftCo_Bury.h"
-#include "ft/chara/ftCommon/ftCo_Damage.h"
-#include "ft/chara/ftCommon/ftCo_Escape.h"
-#include "ft/chara/ftCommon/ftCo_FallSpecial.h"
-#include "ft/chara/ftCommon/ftCo_Jump.h"
-#include "ft/chara/ftCommon/ftCo_KneeBend.h"
-#include "ft/chara/ftCommon/ftCo_Lift.h"
-#include "ft/chara/ftCommon/ftCo_Throw.h"
-#include "ft/chara/ftCommon/ftCo_Wait.h"
-#include "ft/chara/ftCommon/ftpickupitem.h"
 #include "ft/fighter.h"
-
-#include "ft/forward.h"
-
-#include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
-#include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcamera.h"
-#include "ft/ftcliffcommon.h"
 #include "ft/ftCo_800C7220.h"
 #include "ft/ftCo_800C739C.h"
 #include "ft/ftcolanim.h"
-#include "ft/ftcoll.h"
-#include "ft/ftcommon.h"
-#include "ft/ftdata.h"
 #include "ft/ftdynamics.h"
 #include "ft/ftmaterial.h"
 #include "ft/ftparts.h"
-#include "ft/ftwalkcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_CaptureKirby.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/ftCo_Landing.h"
-
-#include "ftKirby/forward.h"
-
-#include "ftLink/types.h"
 #include "it/it_26B1.h"
-#include "it/item.h"
-#include "it/items/it_2ADA.h"
-#include "it/items/it_2F28.h"
-#include "it/items/itclimbersice.h"
-#include "it/items/itkirby_2F23.h"
-#include "it/items/itkirbycutterbeam.h"
-#include "it/items/itkirbygamewatchchefpan.h"
-#include "it/items/itkirbyhammer.h"
-#include "it/items/itkirbyyoshispecialn.h"
-#include "it/items/itlinkarrow.h"
-#include "it/items/itlinkbow.h"
-#include "it/items/itluigifireball.h"
-#include "it/items/itmewtwoshadowball.h"
-#include "it/items/itnesspkflash.h"
-#include "it/items/itpeachtoad.h"
-#include "it/items/itpeachtoadspore.h"
-#include "it/items/itpikachutjoltground.h"
-#include "it/items/itsamuschargeshot.h"
-#include "it/items/itseakneedleheld.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbanim.h"
 #include "lb/lbarchive.h"
 #include "lb/lbdvd.h"
-#include "lb/lbvector.h"
-#include "mp/mpcoll.h"
-#include "mp/mplib.h"
 #include "pl/player.h"
 
 #include <common_structs.h>
@@ -3858,7 +3798,7 @@ void ftKb_SpecialN_800EFD64(Fighter_GObj* gobj)
         ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
         ftParts_8007487C(&hat->desc, &fp->fv.kb.hat.x24, 0, &fp->fv.kb.hat.x14,
                          &fp->fv.kb.hat.x14);
-        ftCo_8009D704(fp);
+        ftCo_8009D4D4(fp);
     }
 }
 
@@ -3883,7 +3823,7 @@ void ftKb_SpecialN_800EFE80(Fighter_GObj* gobj)
         ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
         ftParts_8007487C(&hat->desc, &fp->fv.kb.hat.x24, 0, &fp->fv.kb.hat.x14,
                          &fp->fv.kb.hat.x14);
-        ftCo_8009D704(fp);
+        ftCo_8009D074(fp);
     }
 }
 
@@ -3999,7 +3939,7 @@ void ftKb_SpecialN_800F03DC(Fighter_GObj* gobj)
         ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
         ftParts_8007487C(&hat->desc, &fp->fv.kb.hat.x24, 0, &fp->fv.kb.hat.x14,
                          &fp->fv.kb.hat.x14);
-        ftCo_8009D704(fp);
+        ftCo_8009D2A4(fp);
     }
 }
 
@@ -4090,7 +4030,7 @@ void ftKb_SpecialN_800F081C(Fighter_GObj* gobj)
         ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
         ftParts_8007487C(&hat->desc, &fp->fv.kb.hat.x24, 0, &fp->fv.kb.hat.x14,
                          &fp->fv.kb.hat.x14);
-        ftCo_8009D704(fp);
+        ftCo_8009D920(fp);
     }
 }
 
@@ -4115,7 +4055,7 @@ void ftKb_SpecialN_800F0938(Fighter_GObj* gobj)
         ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
         ftParts_8007487C(&hat->desc, &fp->fv.kb.hat.x24, 0, &fp->fv.kb.hat.x14,
                          &fp->fv.kb.hat.x14);
-        ftCo_8009D704(fp);
+        ftCo_8009D5EC(fp);
     }
 }
 
@@ -4140,7 +4080,7 @@ void ftKb_SpecialN_800F0A54(Fighter_GObj* gobj)
         ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
         ftParts_8007487C(&hat->desc, &fp->fv.kb.hat.x24, 0, &fp->fv.kb.hat.x14,
                          &fp->fv.kb.hat.x14);
-        ftCo_8009D704(fp);
+        ftCo_8009D18C(fp);
     }
 }
 
@@ -4187,7 +4127,7 @@ void ftKb_SpecialN_800F0C7C(Fighter_GObj* gobj)
         ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
         ftParts_8007487C(&hat->desc, &fp->fv.kb.hat.x24, 0, &fp->fv.kb.hat.x14,
                          &fp->fv.kb.hat.x14);
-        ftCo_8009D704(fp);
+        ftCo_8009D3BC(fp);
     }
 }
 
@@ -4234,7 +4174,7 @@ void ftKb_SpecialN_800F0EA4(Fighter_GObj* gobj)
         ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
         ftParts_8007487C(&hat->desc, &fp->fv.kb.hat.x24, 0, &fp->fv.kb.hat.x14,
                          &fp->fv.kb.hat.x14);
-        ftCo_8009D704(fp);
+        ftCo_8009DA38(fp);
     }
 }
 

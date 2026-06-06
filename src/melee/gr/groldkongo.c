@@ -741,7 +741,9 @@ void grOldKongo_802105C8(HSD_GObj* gobj)
     if (gp->gv.oldkongo.xC6 != 1) {
         return;
     }
-    HSD_ASSERT(751, gp->gv.oldkongo.xD4);
+    if (gp->gv.oldkongo.xD4 == NULL) {
+        __assert(grOk_803E6640, 751, "gp->u.taru.keep");
+    }
     if (((u8*) gp->gv.oldkongo.xD4)[2] == 8) {
         gp->gv.oldkongo.xC6 = 0;
         gp->gv.oldkongo.xD4 = NULL;

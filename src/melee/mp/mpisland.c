@@ -31,7 +31,7 @@
     { -1, { 0x00, 0x00, 0x00, 0x00 } },
 } };
 
-/* 4D8158 */ static float mpIsland_804D8158;
+/* 4D8158 */ const float mpIsland_804D8158 = 0.0F;
 /* 458E88 */ struct mpIsland_80458E88_t mpIsland_80458E88;
 
 void mpIsland_8005A6F8(void)

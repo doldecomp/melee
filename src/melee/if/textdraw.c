@@ -55,15 +55,18 @@
 /* 4A1FD8 */ static DevText devtext_pool[32];
 
 /// .sbss
-/* 4D6E18 */ static DevText* devtext_drawlist;
-/* 4D6E1C */ static HSD_GObj* devtext_gobj;
+/* 4D6E18 */ static DevText* un_804D6E18;
+#define devtext_drawlist un_804D6E18
+/* 4D6E1C */ static HSD_GObj* un_804D6E1C;
+#define devtext_gobj un_804D6E1C
 /* 4D6E20 */ static HSD_CObj* devtext_cobj;
 /* 4D6E24 */ static int devtext_setup_classifier;
 /* 4D6E28 */ static int devtext_setup_p_link;
 /* 4D6E2C */ static int devtext_setup_priority;
 /* 4D6E30 */ static int devtext_setup_gx_link;
 /* 4D6E34 */ static int devtext_setup_render_priority;
-/* 4D6E38 */ static DevText* devtext_poolhead;
+/* 4D6E38 */ static DevText* un_804D6E38;
+#define devtext_poolhead un_804D6E38
 
 int DevText_StrLen(char* str)
 {
@@ -134,17 +137,17 @@ void DevText_InitPool(void)
 void DevText_Remove(DevText** ptext)
 {
     DevText* text = *ptext;
-    struct DevText* new_var; // Permuter slop
-    DevText* new_var3;       // Permuter slop
-    new_var = text->next;
-    if (new_var) {
-        new_var->prev = text->prev;
+    DevText* next;
+    DevText* cur;
+    next = text->next;
+    if (next) {
+        next->prev = text->prev;
     }
-    new_var3 = *ptext;
+    cur = *ptext;
     if ((*ptext)->prev) {
         (*ptext)->prev->next = (*ptext)->next;
     } else {
-        if (new_var3->next != 0) {
+        if (cur->next != 0) {
             *ptext = (*ptext)->next;
         } else {
             *ptext = NULL;

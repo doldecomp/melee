@@ -470,10 +470,9 @@ void fn_8019CDBC(HSD_GObj* gobj)
     TmData* tmd = gm_8018F634();
     HSD_JObj* jobj = HSD_GObjGetHSDObj(gobj);
     u32 idx = fn_8018F62C(gobj);
-    PAD_STACK(20);
+    PAD_STACK(12);
 
-    HSD_ASSERT(993, jobj);
-    sp28 = jobj->translate.x;
+    sp28 = HSD_JObjGetTranslationX(jobj);
     temp_r27 = tmd->x37[idx].xE;
     sp24 = (5.999997f * temp_r27) - 21.5f;
     mn_8022F410(&sp28, &sp24, 0.4f);

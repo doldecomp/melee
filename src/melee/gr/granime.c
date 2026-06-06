@@ -630,7 +630,7 @@ void grAnime_801C752C(HSD_JObj* obj, s32 arg1, s32 flags, void* func,
         arg.d = va_arg(ap, u32);
         break;
     default:
-        HSD_ASSERTREPORT(0x36F, NULL, "not match arg_type\n");
+        HSD_ASSERTREPORT(0x36F, 0, "unexpected argument format.\n");
         break;
     }
     if (grAnime_801C6F50_wrapped(obj_tmp, flags, func, type, &arg)) {

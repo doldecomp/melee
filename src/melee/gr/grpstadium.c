@@ -1135,14 +1135,14 @@ void grStadium_801D2A60(Ground_GObj* gobj)
         do {
             val =
                 HSD_Randf() * (yaku->x48 + yaku->x4A + yaku->x4C + yaku->x4E);
-            if (val - yaku->x48 < 0) {
+            val -= yaku->x48;
+            if (val < 0) {
                 var_r4 = 8;
-            } else if (val - yaku->x48 - yaku->x4C < 0) {
+            } else if ((val -= yaku->x4C) < 0) {
                 var_r4 = 7;
-            } else if (val - yaku->x48 - yaku->x4C - yaku->x4A < 0) {
+            } else if ((val -= yaku->x4A) < 0) {
                 var_r4 = 1;
-            } else if (val - yaku->x48 - yaku->x4C - yaku->x4A - yaku->x4E < 0)
-            {
+            } else if ((val -= yaku->x4E) < 0) {
                 var_r4 = 15;
             } else {
                 var_r4 = 1;

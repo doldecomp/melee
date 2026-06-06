@@ -137,10 +137,10 @@ void fn_8031FC30(HSD_GObj* gobj)
 {
     HSD_CObj* cobj = GET_COBJ(gobj);
     HSD_CObjAnim(cobj);
-    if (cobj->aobj->curr_frame == 1.0F) {
+    if (cobj->aobj->curr_frame == 120.0F) {
         vi_8031C9B4(0xD, 0);
     }
-    if (cobj->aobj->curr_frame == 30.0F) {
+    if (cobj->aobj->curr_frame == 100.0F) {
         un_8031F9D8(un_804D6FFC, un_804D6FFD);
     }
     if (cobj->aobj->curr_frame == cobj->aobj->end_frame) {
@@ -151,7 +151,7 @@ void fn_8031FC30(HSD_GObj* gobj)
 
 void fn_8031FCBC(HSD_GObj* gobj)
 {
-    if ((f32) un_804D6FF8 >= 30.0F) {
+    if ((f32) un_804D6FF8 >= 100.0F) {
         HSD_GObjPLink_80390228(gobj);
     } else {
         un_804D6FF8 = un_804D6FF8 + 1;

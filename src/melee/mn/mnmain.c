@@ -1651,6 +1651,22 @@ HSD_GObj* mn_8022BE34(void)
     return gobj;
 }
 
+static inline HSD_GObj* mn_8022BE34_OnEnter(void)
+{
+    Vec3 pos;
+    HSD_GObj* gobj = GObj_Create(2, 3, 0x80);
+    HSD_CObj* cobj;
+
+    mn_804D6BAC = gobj;
+    cobj = HSD_CObjLoadDesc(MenMain_cam);
+    HSD_CObjGetEyePosition(cobj, (Vec3*) ((u8*) &pos + 0x14));
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    GObj_SetupGXLinkMax(gobj, fn_8022BDB4, 0);
+    gobj->gxlink_prios = 0x7F;
+    HSD_GObj_SetupProc(gobj, mn_8022BA1C, 0);
+    return gobj;
+}
+
 void mn_8022BEDC(HSD_GObj* gobj)
 {
     HSD_GObj* temp_r3;
@@ -2889,7 +2905,7 @@ void mn_8022DDA8_OnEnter(MenuEnterData* data)
 
     mn_8022DDA8_inline(hovered_selection);
     mn_8022BCF8();
-    mn_8022BEDC(mn_8022BE34());
+    mn_8022BEDC(mn_8022BE34_OnEnter());
     mn_80229B2C();
     mn_80229DC0();
 

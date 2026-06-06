@@ -1516,23 +1516,41 @@ HSD_GObj* mnName_8023A59C(u8 arg0)
     return gobj;
 }
 
-void mnName_8023A9B4(u8 arg0)
+static inline struct mn_80231634_t* mnName_8023A9B4_GetUserData(
+    MnName_GObj* gobj2)
+{
+    return (struct mn_80231634_t*) gobj2->gobj.user_data_remove_func;
+}
+
+static inline void mnName_8023A9B4_ResetDisplayOrder(void)
 {
     u32 i;
-    MnName_GObj* gobj2;
-    HSD_JObj* jobj;
-    mn_804A04F0.hovered_selection = 0x18;
-    mn_804A04F0.x10 = (i = 0);
     PAD_STACK(0x8);
 
     for (i = 0; i < 0x78; i++) {
         mnName_NameDisplayOrder[i] = (u8) i;
     }
     HSD_GObj_80390CD4(mnName_8023A59C(3));
-    gobj2 = (0, (MnName_GObj*) ((HSD_GObj*) mnName_804D6BF8)->user_data);
+}
+
+static inline MnName_GObj* mnName_8023A9B4_GetGObj(void)
+{
+    return (MnName_GObj*) ((HSD_GObj*) mnName_804D6BF8)->user_data;
+}
+
+void mnName_8023A9B4(u8 arg0)
+{
+    u32 i;
+    MnName_GObj* gobj2;
+    HSD_JObj* jobj;
+
+    mn_804A04F0.hovered_selection = 0x18;
+    mn_804A04F0.x10 = (i = 0);
+    mnName_8023A9B4_ResetDisplayOrder();
+    gobj2 = (0, mnName_8023A9B4_GetGObj());
     if ((u8) mn_804A04F0.x10 == 1) {
         struct mn_80231634_t* p =
-            (struct mn_80231634_t*) gobj2->gobj.user_data_remove_func;
+            mnName_8023A9B4_GetUserData(gobj2);
         if (p == NULL) {
             jobj = NULL;
         } else {
