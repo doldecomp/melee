@@ -7,8 +7,6 @@
 #include "ef/efsync.h"
 #include "gm/gm_unsplit.h"
 
-#include "m2c_macros.h"
-
 #include "gr/forward.h"
 
 #include "gr/grdisplay.h"
@@ -471,14 +469,14 @@ void grInishie1_801FB0AC(HSD_GObj* gobj, u32 index)
         gp->gv.inishie1.blocks[index].status = 0;
         grInishie1_801FBC4C(gobj, index);
 
-        M2C_FIELD(gp, s16*, 0xC6) =
+        gp->gv.inishie1.xC6 =
             randi_between(grI1_804D69F8->unk0, grI1_804D69F8->unk4);
     } else if (gp->gv.inishie1.blocks[index].status == 2) {
         grInishie1_801FBA34(gobj, gp->gv.inishie1.blocks[index].jobj2);
         gp->gv.inishie1.blocks[index].status = 0;
         grInishie1_801FBC4C(gobj, index);
 
-        M2C_FIELD(gp, s16*, 0xC8) =
+        gp->gv.inishie1.xC8 =
             randi_between(grI1_804D69F8->unk8, grI1_804D69F8->unkC);
     } else if (gp->gv.inishie1.blocks[index].status == 3) {
         grInishie1_801FBA34(gobj, gp->gv.inishie1.blocks[index].jobj2);
@@ -495,9 +493,9 @@ void grInishie1_801FB0AC(HSD_GObj* gobj, u32 index)
                 }
             }
             if (!match) {
-                M2C_FIELD(gp, s16*, 0xC6) =
+                gp->gv.inishie1.xC6 =
                     randi_between(grI1_804D69F8->unk0, grI1_804D69F8->unk4);
-                M2C_FIELD(gp, s16*, 0xC8) =
+                gp->gv.inishie1.xC8 =
                     randi_between(grI1_804D69F8->unk8, grI1_804D69F8->unkC);
             }
         }

@@ -2952,9 +2952,6 @@ void fn_80181598(void)
 static DynamicModelDesc** lbl_804D65CC;
 static DynamicModelDesc** lbl_804D65D0;
 extern HSD_Archive* lbl_804D65C8;
-char lbl_803D8CD8[] = "IfHrNoCn";
-char lbl_803D8CE4[] = "ScInfCnt_scene_models";
-char lbl_803D8CFC[] = "IfHrReco";
 
 void fn_80181708(void)
 {
@@ -3012,10 +3009,10 @@ void fn_80181708(void)
 
 void gm_80181998(void)
 {
-    lbl_804D65C8 = lbArchive_80016DBC(lbl_803D8CD8, &lbl_804D65CC,
-                                      lbl_803D8CE4, 0);
-    lbl_804D65C8 = lbArchive_80016DBC(lbl_803D8CFC, &lbl_804D65D0,
-                                      lbl_803D8CE4, 0);
+    lbl_804D65C8 = lbArchive_80016DBC("IfHrNoCn", &lbl_804D65CC,
+                                      "ScInfCnt_scene_models", 0);
+    lbl_804D65C8 = lbArchive_80016DBC("IfHrReco", &lbl_804D65D0,
+                                      "ScInfCnt_scene_models", 0);
     fn_80181708();
 }
 

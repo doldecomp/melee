@@ -89,14 +89,6 @@ struct un_803F9D48 {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, { 0x43, 0x44, 0x45 },
 };
-static char lbl_803F9D84[] =
-    "ScInfPrize_scene_data\0\0"
-    "SdPrize.usd\0"
-    "SIS_PrizeData\0\0"
-    "SdPrize.dat\0\0\0\0"
-    "%2d.%2d.%04d  %02d:%02d:%02d\0\0\0"
-    "%04d.%2d.%2d  %02d:%02d:%02d\0\0\0\0\0\0\0";
-
 /// .sbss
 /* 4D6D98 */ static HSD_Archive* un_804D6D98;
 /* 4D6D9C */ static SceneDesc* un_804D6D9C;
@@ -288,10 +280,10 @@ found:
     }
     gm_801692E8(c, &sp14);
     if (lbLang_IsSavedLanguageUS()) {
-        sprintf(sp1C, lbl_803F9D84 + 0x40, sp14.month, sp14.day,
+        sprintf(sp1C, "%2d.%2d.%04d  %02d:%02d:%02d", sp14.month, sp14.day,
                 sp14.year, sp14.hour, sp14.minute, sp14.second);
     } else {
-        sprintf(sp1C, lbl_803F9D84 + 0x60, sp14.year, sp14.month,
+        sprintf(sp1C, "%04d.%2d.%2d  %02d:%02d:%02d", sp14.year, sp14.month,
                 sp14.day, sp14.hour, sp14.minute, sp14.second);
     }
     text = &un_803F9D48.x24;
@@ -330,11 +322,11 @@ found:
     un_803F9D48.xC = arg0x4;
     un_803F9D48.x0a = 1;
     un_804D6D98 = lbArchive_80016DBC("IfPrize", &un_804D6D9C,
-                                     lbl_803F9D84, 0);
+                                     "ScInfPrize_scene_data", 0);
     if (lbLang_IsSavedLanguageUS()) {
-        HSD_SisLib_803A62A0(2, lbl_803F9D84 + 0x18, lbl_803F9D84 + 0x24);
+        HSD_SisLib_803A62A0(2, "SdPrize.usd", "SIS_PrizeData");
     } else {
-        HSD_SisLib_803A62A0(2, lbl_803F9D84 + 0x34, lbl_803F9D84 + 0x24);
+        HSD_SisLib_803A62A0(2, "SdPrize.dat", "SIS_PrizeData");
     }
     un_802FE6A8();
 }

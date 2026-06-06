@@ -96,7 +96,7 @@ static void fn_8019F2D4(u32 arg0);
 
 static void fn_8019EFC4(HSD_PadStatus* pad)
 {
-    register HSD_JObj* child_next;
+    HSD_JObj* child_next;
 
     child_next = lbl_80479A98.x28->hsd_obj;
     if ((u8) lbl_80479A98.x60 != 0) {

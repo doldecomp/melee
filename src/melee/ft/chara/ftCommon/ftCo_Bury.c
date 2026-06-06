@@ -289,7 +289,7 @@ void ftCo_800C0FCC(HSD_GObj* arg0, Fighter_GObj* arg1)
     if (mpLib_80054ED8(fp->mv.co.bury.x20)) {
         Vec3 normal;
         Vec3 offset;
-        register HSD_JObj* jobj = GET_JOBJ(arg0);
+        HSD_JObj* jobj = GET_JOBJ(arg0);
         mpLineGetNormal(fp->mv.co.bury.x20, &normal);
         HSD_JObjSetRotationZ(jobj, atan2f(-normal.x, normal.y));
         if (mpGetSpeed(fp->coll_data.floor.index, &fp->mv.co.bury.translate,

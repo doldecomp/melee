@@ -1496,7 +1496,7 @@ inline void mnDiagram_FormatPopupNumber(char* buf, u32 val)
 void mnDiagram_80240D94(void* arg0, s32 arg1, s32 arg2, s32 arg3)
 {
     mnDiagram_PopupData* data = ((HSD_GObj*) arg0)->user_data;
-    mnDiagram_AnimTable* tbl;
+    mnDiagram_AnimTable* tbl = (mnDiagram_AnimTable*) &mnDiagram_803EE728;
     Point3d pos;
     char buf[8];
     u32 kos;
@@ -1504,7 +1504,6 @@ void mnDiagram_80240D94(void* arg0, s32 arg1, s32 arg2, s32 arg3)
 
     HSD_Text* text = HSD_SisLib_803A6754(0, 1);
     PAD_STACK(24);
-    tbl = (mnDiagram_AnimTable*) &mnDiagram_803EE728;
     data->text[0] = text;
     lb_8000B1CC(data->jobjs[8], &tbl->points[0], &pos);
     text->font_size.x = 0.0521f;

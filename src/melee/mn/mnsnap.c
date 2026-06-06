@@ -876,8 +876,11 @@ void fn_802545C4(void)
             HSD_JObjReqAnim(mnSnap_804A0A10.dlg_pos,
                             (f32) (9 - mnSnap_804A0A10.dlg_timer));
             HSD_JObjAnim(mnSnap_804A0A10.dlg_pos);
-            mnSnap_804A0A10.dlg_text->pos_x =
-                HSD_JObjGetTranslationX(mnSnap_804A0A10.dlg_pos) - 6.0F;
+            jobj = mnSnap_804A0A10.dlg_pos;
+            if (jobj == NULL) {
+                __assert("jobj.h", 0x3E1, "jobj");
+            }
+            mnSnap_804A0A10.dlg_text->pos_x = jobj->translate.x - 6.0F;
         }
     }
     state = mnSnap_804A0A10.state;

@@ -597,172 +597,93 @@ void gm_801A9630(void)
 static u8 gm_804D67C8;
 static u8 gm_804D67C9;
 
-char gm_803DB640[] = "GmRegendSimpleCaptain.thp";
-char gm_803DB65C[] = "GmRegendSimpleDonkey.thp";
-char gm_803DB678[] = "GmRegendSimpleFox.thp";
-char gm_803DB690[] = "GmRegendSimpleGamewatch.thp";
-char gm_803DB6AC[] = "GmRegendSimpleKirby.thp";
-char gm_803DB6C4[] = "GmRegendSimpleKoopa.thp";
-char gm_803DB6DC[] = "GmRegendSimpleLink.thp";
-char gm_803DB6F4[] = "GmRegendSimpleLuigi.thp";
-char gm_803DB70C[] = "GmRegendSimpleMario.thp";
-char gm_803DB724[] = "GmRegendSimpleMarth.thp";
-char gm_803DB73C[] = "GmRegendSimpleMewtwo.thp";
-char gm_803DB758[] = "GmRegendSimpleNess.thp";
-char gm_803DB770[] = "GmRegendSimplePeach.thp";
-char gm_803DB788[] = "GmRegendSimplePikachu.thp";
-char gm_803DB7A4[] = "GmRegendSimplePoponana.thp";
-char gm_803DB7C0[] = "GmRegendSimplePurin.thp";
-char gm_803DB7D8[] = "GmRegendSimpleSamus.thp";
-char gm_803DB7F0[] = "GmRegendSimpleYoshi.thp";
-char gm_803DB808[] = "GmRegendSimpleZeldaseak.thp";
-char gm_803DB824[] = "GmRegendSimpleFalco.thp";
-char gm_803DB83C[] = "GmRegendSimpleClink.thp";
-char gm_803DB854[] = "GmRegendSimpleDrmario.thp";
-char gm_803DB870[] = "GmRegendSimpleRoy.thp";
-char gm_803DB888[] = "GmRegendSimplePichu.thp";
-char gm_803DB8A0[] = "GmRegendSimpleGanon.thp";
-char gm_803DB920[] = "GmRegendAdventureCaptain.thp";
-char gm_803DB940[] = "GmRegendAdventureDonkey.thp";
-char gm_803DB95C[] = "GmRegendAdventureFox.thp";
-char gm_803DB978[] = "GmRegendAdventureGamewatch.thp";
-char gm_803DB998[] = "GmRegendAdventureKirby.thp";
-char gm_803DB9B4[] = "GmRegendAdventureKoopa.thp";
-char gm_803DB9D0[] = "GmRegendAdventureLink.thp";
-char gm_803DB9EC[] = "GmRegendAdventureLuigi.thp";
-char gm_803DBA08[] = "GmRegendAdventureMario.thp";
-char gm_803DBA24[] = "GmRegendAdventureMarth.thp";
-char gm_803DBA40[] = "GmRegendAdventureMewtwo.thp";
-char gm_803DBA5C[] = "GmRegendAdventureNess.thp";
-char gm_803DBA78[] = "GmRegendAdventurePeach.thp";
-char gm_803DBA94[] = "GmRegendAdventurePikachu.thp";
-char gm_803DBAB4[] = "GmRegendAdventurePoponana.thp";
-char gm_803DBAD4[] = "GmRegendAdventurePurin.thp";
-char gm_803DBAF0[] = "GmRegendAdventureSamus.thp";
-char gm_803DBB0C[] = "GmRegendAdventureYoshi.thp";
-char gm_803DBB28[] = "GmRegendAdventureZeldaseak.thp";
-char gm_803DBB48[] = "GmRegendAdventureFalco.thp";
-char gm_803DBB64[] = "GmRegendAdventureClink.thp";
-char gm_803DBB80[] = "GmRegendAdventureDrmario.thp";
-char gm_803DBBA0[] = "GmRegendAdventureRoy.thp";
-char gm_803DBBBC[] = "GmRegendAdventurePichu.thp";
-char gm_803DBBD8[] = "GmRegendAdventureGanon.thp";
-char gm_803DBC5C[] = "GmRegendAllstarCaptain.thp";
-char gm_803DBC78[] = "GmRegendAllstarDonkey.thp";
-char gm_803DBC94[] = "GmRegendAllstarFox.thp";
-char gm_803DBCAC[] = "GmRegendAllstarGamewatch.thp";
-char gm_803DBCCC[] = "GmRegendAllstarKirby.thp";
-char gm_803DBCE8[] = "GmRegendAllstarKoopa.thp";
-char gm_803DBD04[] = "GmRegendAllstarLink.thp";
-char gm_803DBD1C[] = "GmRegendAllstarLuigi.thp";
-char gm_803DBD38[] = "GmRegendAllstarMario.thp";
-char gm_803DBD54[] = "GmRegendAllstarMarth.thp";
-char gm_803DBD70[] = "GmRegendAllstarMewtwo.thp";
-char gm_803DBD8C[] = "GmRegendAllstarNess.thp";
-char gm_803DBDA4[] = "GmRegendAllstarPeach.thp";
-char gm_803DBDC0[] = "GmRegendAllstarPikachu.thp";
-char gm_803DBDDC[] = "GmRegendAllstarPoponana.thp";
-char gm_803DBDF8[] = "GmRegendAllstarPurin.thp";
-char gm_803DBE14[] = "GmRegendAllstarSamus.thp";
-char gm_803DBE30[] = "GmRegendAllstarYoshi.thp";
-char gm_803DBE4C[] = "GmRegendAllstarZeldaseak.thp";
-char gm_803DBE6C[] = "GmRegendAllstarFalco.thp";
-char gm_803DBE88[] = "GmRegendAllstarClink.thp";
-char gm_803DBEA4[] = "GmRegendAllstarDrmario.thp";
-char gm_803DBEC0[] = "GmRegendAllstarRoy.thp";
-char gm_803DBED8[] = "GmRegendAllstarPichu.thp";
-char gm_803DBEF4[] = "GmRegendAllstarGanon.thp";
-
 char* gm_803DB8B8[] = {
     // clang-format off
-    gm_803DB640,
-    gm_803DB65C,
-    gm_803DB678,
-    gm_803DB690,
-    gm_803DB6AC,
-    gm_803DB6C4,
-    gm_803DB6DC,
-    gm_803DB6F4,
-    gm_803DB70C,
-    gm_803DB724,
-    gm_803DB73C,
-    gm_803DB758,
-    gm_803DB770,
-    gm_803DB788,
-    gm_803DB7A4,
-    gm_803DB7C0,
-    gm_803DB7D8,
-    gm_803DB7F0,
-    gm_803DB808,
-    gm_803DB808,
-    gm_803DB824,
-    gm_803DB83C,
-    gm_803DB854,
-    gm_803DB870,
-    gm_803DB888,
-    gm_803DB8A0,
+    "GmRegendSimpleCaptain.thp",
+    "GmRegendSimpleDonkey.thp",
+    "GmRegendSimpleFox.thp",
+    "GmRegendSimpleGamewatch.thp",
+    "GmRegendSimpleKirby.thp",
+    "GmRegendSimpleKoopa.thp",
+    "GmRegendSimpleLink.thp",
+    "GmRegendSimpleLuigi.thp",
+    "GmRegendSimpleMario.thp",
+    "GmRegendSimpleMarth.thp",
+    "GmRegendSimpleMewtwo.thp",
+    "GmRegendSimpleNess.thp",
+    "GmRegendSimplePeach.thp",
+    "GmRegendSimplePikachu.thp",
+    "GmRegendSimplePoponana.thp",
+    "GmRegendSimplePurin.thp",
+    "GmRegendSimpleSamus.thp",
+    "GmRegendSimpleYoshi.thp",
+    "GmRegendSimpleZeldaseak.thp",
+    "GmRegendSimpleFalco.thp",
+    "GmRegendSimpleClink.thp",
+    "GmRegendSimpleDrmario.thp",
+    "GmRegendSimpleRoy.thp",
+    "GmRegendSimplePichu.thp",
+    "GmRegendSimpleGanon.thp",
     // clang-format on
 };
 
 char* gm_803DBBF4[] = {
     // clang-format off
-    gm_803DB920,
-    gm_803DB940,
-    gm_803DB95C,
-    gm_803DB978,
-    gm_803DB998,
-    gm_803DB9B4,
-    gm_803DB9D0,
-    gm_803DB9EC,
-    gm_803DBA08,
-    gm_803DBA24,
-    gm_803DBA40,
-    gm_803DBA5C,
-    gm_803DBA78,
-    gm_803DBA94,
-    gm_803DBAB4,
-    gm_803DBAD4,
-    gm_803DBAF0,
-    gm_803DBB0C,
-    gm_803DBB28,
-    gm_803DBB28,
-    gm_803DBB48,
-    gm_803DBB64,
-    gm_803DBB80,
-    gm_803DBBA0,
-    gm_803DBBBC,
-    gm_803DBBD8,
+    "GmRegendAdventureCaptain.thp",
+    "GmRegendAdventureDonkey.thp",
+    "GmRegendAdventureFox.thp",
+    "GmRegendAdventureGamewatch.thp",
+    "GmRegendAdventureKirby.thp",
+    "GmRegendAdventureKoopa.thp",
+    "GmRegendAdventureLink.thp",
+    "GmRegendAdventureLuigi.thp",
+    "GmRegendAdventureMario.thp",
+    "GmRegendAdventureMarth.thp",
+    "GmRegendAdventureMewtwo.thp",
+    "GmRegendAdventureNess.thp",
+    "GmRegendAdventurePeach.thp",
+    "GmRegendAdventurePikachu.thp",
+    "GmRegendAdventurePoponana.thp",
+    "GmRegendAdventurePurin.thp",
+    "GmRegendAdventureSamus.thp",
+    "GmRegendAdventureYoshi.thp",
+    "GmRegendAdventureZeldaseak.thp",
+    "GmRegendAdventureFalco.thp",
+    "GmRegendAdventureClink.thp",
+    "GmRegendAdventureDrmario.thp",
+    "GmRegendAdventureRoy.thp",
+    "GmRegendAdventurePichu.thp",
+    "GmRegendAdventureGanon.thp",
     // clang-format on
 };
 
 char* gm_803DBF10[] = {
     // clang-format off
-    gm_803DBC5C,
-    gm_803DBC78,
-    gm_803DBC94,
-    gm_803DBCAC,
-    gm_803DBCCC,
-    gm_803DBCE8,
-    gm_803DBD04,
-    gm_803DBD1C,
-    gm_803DBD38,
-    gm_803DBD54,
-    gm_803DBD70,
-    gm_803DBD8C,
-    gm_803DBDA4,
-    gm_803DBDC0,
-    gm_803DBDDC,
-    gm_803DBDF8,
-    gm_803DBE14,
-    gm_803DBE30,
-    gm_803DBE4C,
-    gm_803DBE4C,
-    gm_803DBE6C,
-    gm_803DBE88,
-    gm_803DBEA4,
-    gm_803DBEC0,
-    gm_803DBED8,
-    gm_803DBEF4,
+    "GmRegendAllstarCaptain.thp",
+    "GmRegendAllstarDonkey.thp",
+    "GmRegendAllstarFox.thp",
+    "GmRegendAllstarGamewatch.thp",
+    "GmRegendAllstarKirby.thp",
+    "GmRegendAllstarKoopa.thp",
+    "GmRegendAllstarLink.thp",
+    "GmRegendAllstarLuigi.thp",
+    "GmRegendAllstarMario.thp",
+    "GmRegendAllstarMarth.thp",
+    "GmRegendAllstarMewtwo.thp",
+    "GmRegendAllstarNess.thp",
+    "GmRegendAllstarPeach.thp",
+    "GmRegendAllstarPikachu.thp",
+    "GmRegendAllstarPoponana.thp",
+    "GmRegendAllstarPurin.thp",
+    "GmRegendAllstarSamus.thp",
+    "GmRegendAllstarYoshi.thp",
+    "GmRegendAllstarZeldaseak.thp",
+    "GmRegendAllstarFalco.thp",
+    "GmRegendAllstarClink.thp",
+    "GmRegendAllstarDrmario.thp",
+    "GmRegendAllstarRoy.thp",
+    "GmRegendAllstarPichu.thp",
+    "GmRegendAllstarGanon.thp",
     // clang-format on
 };
 

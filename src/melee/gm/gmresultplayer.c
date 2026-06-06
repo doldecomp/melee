@@ -94,8 +94,6 @@ typedef struct {
 
 extern CameraKindData lbl_803D6A08;
 
-extern f32 lbl_804DA378;
-extern f32 lbl_804DA37C;
 extern s32 lbl_804DA3F0;
 extern s32 lbl_804DA3F4;
 
@@ -961,11 +959,11 @@ static inline void fn_80179350_update(ResultsData* data, MatchEnd* match_end,
             ResultsData* d = &lbl_8046DBE8;
             HSD_JObj* jobj = (HSD_JObj*) arg0->hsd_obj;
             float frame = lbGetJObjCurrFrame(jobj);
-            if (frame >= lbl_804DA378 && !d->x0_1) {
+            if (frame >= 10.0f && !d->x0_1) {
                 fn_80177748();
                 d->x0_1 = 1;
             }
-            if (frame >= lbl_804DA37C) {
+            if (frame >= 40.0f) {
                 lb_8000BA0C(jobj, 0.0f);
                 d->x1 = 2;
             }

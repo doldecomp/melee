@@ -127,141 +127,50 @@ block_11:
                   temp_r30->parts[var_r27].joint, &spA8);
     return;
 block_12:
-    if (gfx_id == 0x487) {
+    switch (gfx_id) {
+    case 0x402:
+    case 0x403:
+    case 0x409:
+    case 0x412:
+    case 0x413:
+    case 0x414:
+    case 0x422:
+    case 0x487:
+    case 0x4D1:
+    case 0x4E5:
+    case 0x4E6:
+    case 0x4FE:
+    case 0x500:
+    case 0x501:
+    case 0x502:
         goto block_61;
-    }
-    if (gfx_id >= 0x487) {
-        goto block_40;
-    }
-    if (gfx_id == 0x422) {
-        goto block_61;
-    }
-    if (gfx_id >= 0x422) {
-        goto block_27;
-    }
-    if (gfx_id >= 0x412) {
-        goto block_22;
-    }
-    if (gfx_id == 0x409) {
-        goto block_61;
-    }
-    if (gfx_id >= 0x409) {
-        goto block_70;
-    }
-    if (gfx_id >= 0x404) {
-        goto block_70;
-    }
-    if (gfx_id >= 0x402) {
-        goto block_61;
-    }
-    goto block_70;
-block_22:
-    if (gfx_id == 0x41E) {
-        goto block_63;
-    }
-    if (gfx_id >= 0x41E) {
-        goto block_70;
-    }
-    if (gfx_id == 0x415) {
-        goto block_63;
-    }
-    if (gfx_id >= 0x415) {
-        goto block_70;
-    }
-    goto block_61;
-block_27:
-    if (gfx_id >= 0x43A) {
-        goto block_34;
-    }
-    if (gfx_id >= 0x42B) {
-        goto block_32;
-    }
-    if (gfx_id >= 0x428) {
-        goto block_63;
-    }
-    if (gfx_id >= 0x425) {
-        goto block_70;
-    }
-    goto block_67;
-block_32:
-    if (gfx_id >= 0x438) {
-        goto block_66;
-    }
-    goto block_70;
-block_34:
-    if (gfx_id == 0x447) {
-        goto block_70;
-    }
-    if (gfx_id >= 0x447) {
-        goto block_38;
-    }
-    if (gfx_id >= 0x446) {
+    case 0x446:
+    case 0x448:
+    case 0x4E1:
         goto block_62;
-    }
-    goto block_70;
-block_38:
-    if (gfx_id >= 0x449) {
-        goto block_70;
-    }
-    goto block_62;
-block_40:
-    if (gfx_id == 0x4D1) {
-        goto block_61;
-    }
-    if (gfx_id >= 0x4D1) {
-        goto block_51;
-    }
-    if (gfx_id >= 0x4C1) {
-        goto block_47;
-    }
-    if (gfx_id == 0x49D) {
-        goto block_65;
-    }
-    if (gfx_id >= 0x49D) {
-        goto block_70;
-    }
-    if (gfx_id == 0x495) {
+    case 0x415:
+    case 0x41E:
+    case 0x428:
+    case 0x429:
+    case 0x42A:
+        goto block_63;
+    case 0x495:
         goto block_64;
-    }
-    goto block_70;
-block_47:
-    if (gfx_id == 0x4C3) {
-        goto block_70;
-    }
-    if (gfx_id < 0x4C3) {
+    case 0x49D:
+        goto block_65;
+    case 0x438:
+    case 0x439:
+        goto block_66;
+    case 0x423:
+    case 0x424:
+    case 0x4C1:
+    case 0x4C2:
+    case 0x4C4:
+    case 0x4C5:
         goto block_67;
-    }
-    if (gfx_id >= 0x4C6) {
+    default:
         goto block_70;
     }
-    goto block_67;
-block_51:
-    if (gfx_id == 0x4FE) {
-        goto block_61;
-    }
-    if (gfx_id >= 0x4FE) {
-        goto block_58;
-    }
-    if (gfx_id >= 0x4E5) {
-        goto block_56;
-    }
-    if (gfx_id == 0x4E1) {
-        goto block_62;
-    }
-    goto block_70;
-block_56:
-    if (gfx_id >= 0x4E7) {
-        goto block_70;
-    }
-    goto block_61;
-block_58:
-    if (gfx_id >= 0x503) {
-        goto block_70;
-    }
-    if (gfx_id >= 0x500) {
-        goto block_61;
-    }
-    goto block_70;
 block_61:
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 0, gfx_id,
                   temp_r30->parts[var_r27].joint);

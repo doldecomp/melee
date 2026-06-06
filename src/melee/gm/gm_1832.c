@@ -382,8 +382,6 @@ static char lbl_804D40A0[] = { 0x8C, 0x52, 0x92, 0x63, 0x00 };
 static const char* const lbl_803B7C58[] = { "IrAls", "IrEzTarg", "IrEzTuki",
                                             "IrEzFigG" };
 
-static char lbl_803D9438[] = "ScItrAllstar_scene_data";
-
 void fn_80184AB8(HSD_GObj* arg0)
 {
     HSD_JObj* sp110;
@@ -1088,9 +1086,9 @@ void fn_80186634(void* arg0)
     names[2] = lbl_803B7C58[2];
     names[3] = lbl_803B7C58[3];
     lbl_804D65F4 = lbArchive_80016DBC(names[lbl_804735E8.xE8], &lbl_804D65FC,
-                                      lbl_803D9438, 0);
+                                      "ScItrAllstar_scene_data", 0);
     lbl_804D65F8 = lbArchive_80016DBC(lbl_804D40B0, &lbl_804D6600,
-                                      lbl_803D9438, 0);
+                                      "ScItrAllstar_scene_data", 0);
 
     gobj = GObj_Create(0xB, 3, 0);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A,
@@ -1608,8 +1606,6 @@ void fn_80187C9C(HSD_GObj* gobj, int arg1)
     HSD_StateInvalidate(0x40);
 }
 
-#pragma push
-#pragma global_optimizer off
 void fn_80187CF4(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -1673,7 +1669,6 @@ void fn_80187CF4(HSD_GObj* gobj)
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
-#pragma pop
 static char lbl_804D4138[] = "IrNml";
 
 static char* lbl_803D9750[] = {
