@@ -20,6 +20,7 @@
 #include "ftCrazyHand/ftCh_CaptureDamageCrazyHand.h"
 #include "ftCrazyHand/ftCh_CaptureWaitCrazyHand.h"
 #include "ftCrazyHand/ftCh_ThrownCrazyHand.h"
+#include "ftKirby/ftkirbycaptureyoshi.h"
 
 #include <melee/ft/chara/ftCommon/forward.h>
 

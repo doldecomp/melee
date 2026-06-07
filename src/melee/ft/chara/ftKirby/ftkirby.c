@@ -2,6 +2,7 @@
 
 #include "ftKb_Init.static.h"
 
+#include "ftkirbycaptureyoshi.h"
 #include "ftkirbyspecialdonkey.h"
 #include "ftkirbyspecialiceclimber.h"
 #include "ftkirbyspecialpikachu.h"
@@ -47,7 +48,6 @@ static void fn_80109680(HSD_GObj*);
 static void fn_80109714(HSD_GObj*);
 static void fn_801097B8(HSD_GObj*);
 void fn_800F64C8(Fighter_GObj*, float);
-void fn_8010A930(Fighter_GObj*, Fighter_GObj*);
 
 MotionState ftKb_Init_MotionStateTable[ftKb_MS_SelfCount] = {
     {

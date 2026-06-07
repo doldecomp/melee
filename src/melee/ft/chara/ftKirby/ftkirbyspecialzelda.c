@@ -27,7 +27,6 @@
 #include <baselib/random.h>
 #include <MSL/math.h>
 
-extern f32 ftKb_Init_804D9558;
 extern float ftKb_Init_803CB770[];
 
 /// Forward declarations for functions called before definition

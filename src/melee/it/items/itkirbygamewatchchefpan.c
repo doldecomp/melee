@@ -1,9 +1,9 @@
 #include "itkirbygamewatchchefpan.h"
 
+#include "ftKirby/ftkirbycaptureyoshi.h"
 #include "it/itzako.h"
 
 #include <melee/db/db.h>
-#include <melee/ft/chara/ftKirby/ftkirbyspecialdonkey.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>
