@@ -1244,7 +1244,7 @@ melee/ft/chara/ftLink/ftLk_SpecialN.c:
 
 melee/ft/chara/ftKirby/ftKb_Init.c:
 	.text       start:0x800EE528 end:0x800F1FDC
-	.rodata     start:0x803B7548 end:0x803B7588
+	.rodata     start:0x803B7548 end:0x803B7570
 	.data       start:0x803C8368 end:0x803CB6D8
 	.sdata2     start:0x804D9350 end:0x804D9364
 
@@ -1293,8 +1293,14 @@ melee/ft/chara/ftKirby/ftkirbyspecialzelda.c:
 	.sdata2     start:0x804D94F0 end:0x804D94F8
 
 melee/ft/chara/ftKirby/ftkirbyspecialseak.c:
-	.text       start:0x80105FEC end:0x80109290
-	.sdata2     start:0x804D94F8 end:0x804D9554
+	.text       start:0x80105FEC end:0x80106F44
+	.data       start:0x803CB770 end:0x803CB828
+	.sdata2     start:0x804D94F8 end:0x804D9508
+
+melee/ft/chara/ftKirby/ftkirbyspecialmewtwo.c:
+	.text       start:0x80106F44 end:0x80109290
+	.rodata     start:0x803B7570 end:0x803B7588
+	.sdata2     start:0x804D9508 end:0x804D9554
 
 melee/ft/chara/ftKirby/ftKb_SpecialNYs.c:
 	.text       start:0x80109290 end:0x8010D740

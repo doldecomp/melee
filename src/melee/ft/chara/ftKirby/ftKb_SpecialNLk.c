@@ -13,7 +13,7 @@
 
 #include <lb/lbrefract.h>
 
-static inline void ftKirbyDmgInline(Fighter_GObj* gobj)
+static inline void ftKb_SpecialN_set_cbs(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->death2_cb = ftKb_Init_800EE74C;
@@ -205,7 +205,7 @@ bool ftKb_SpecialNLk800FB500(Fighter_GObj* gobj)
         if ((fp->fv.kb.x74 = it_802A83E0(fp->facing_dir, gobj, &pos,
                                          FtPart_RHandN, loader_id)) != NULL)
         {
-            ftKirbyDmgInline(gobj);
+            ftKb_SpecialN_set_cbs(gobj);
         } else {
             return true;
         }
@@ -233,7 +233,7 @@ bool ftKb_SpecialNLk800FB5F4(Fighter_GObj* gobj)
         if ((fp->fv.kb.x78 = it_802AF1A4(fp->facing_dir, gobj, &pos,
                                          FtPart_R3rdNa, item_id)) != NULL)
         {
-            ftKirbyDmgInline(gobj);
+            ftKb_SpecialN_set_cbs(gobj);
         } else {
             return true;
         }
@@ -321,7 +321,7 @@ void ftKb_SpecialNLk800FB880(Fighter_GObj* gobj)
         break;
     }
     Fighter_ChangeMotionState(gobj, msid, 0, 0.0F, 1.0F, 0.0F, NULL);
-    ftKirbyDmgInline(gobj);
+    ftKb_SpecialN_set_cbs(gobj);
     switch (fp->fv.kb.hat.kind) {
     case FTKIND_LINK:
         anim_rate = da->specialn_lk_arrow_charge_speed;
@@ -361,7 +361,7 @@ void ftKb_SpecialNLk800FBA00(Fighter_GObj* gobj)
         break;
     }
     Fighter_ChangeMotionState(gobj, msid, 0, 0.0F, 1.0F, 0.0F, NULL);
-    ftKirbyDmgInline(gobj);
+    ftKb_SpecialN_set_cbs(gobj);
     switch (fp->fv.kb.hat.kind) {
     case FTKIND_LINK:
         anim_rate = da->specialn_lk_arrow_charge_speed;
@@ -437,7 +437,7 @@ void ftKb_LkSpecialNStart_Anim(Fighter_GObj* gobj)
             }
             Fighter_ChangeMotionState(gobj, msid, 0x40010, 0.0F, 1.0F, 0.0F,
                                       NULL);
-            ftKirbyDmgInline(gobj);
+            ftKb_SpecialN_set_cbs(gobj);
             ftAnim_8006EBA4(gobj);
         }
     } else {
@@ -510,7 +510,7 @@ void ftKb_LkSpecialAirNStart_Anim(Fighter_GObj* gobj)
             }
             Fighter_ChangeMotionState(gobj, msid, 0x40010, 0.0F, 1.0F, 0.0F,
                                       NULL);
-            ftKirbyDmgInline(gobj);
+            ftKb_SpecialN_set_cbs(gobj);
             ftAnim_8006EBA4(gobj);
         }
     } else {
@@ -603,7 +603,7 @@ void ftKb_LkSpecialNStart_IASA(Fighter_GObj* gobj)
             }
             Fighter_ChangeMotionState(gobj, msid, 0x40010, 0.0f, 1.0f, 0.0f,
                                       NULL);
-            ftKirbyDmgInline(gobj);
+            ftKb_SpecialN_set_cbs(gobj);
         }
     }
 }
@@ -631,7 +631,7 @@ void ftKb_LkSpecialNLoop_IASA(Fighter_GObj* gobj)
             break;
         }
         Fighter_ChangeMotionState(gobj, msid, 0x40010, 0.0f, 1.0f, 0.0f, NULL);
-        ftKirbyDmgInline(gobj);
+        ftKb_SpecialN_set_cbs(gobj);
     }
 }
 
@@ -667,7 +667,7 @@ void ftKb_LkSpecialAirNStart_IASA(Fighter_GObj* gobj)
             }
             Fighter_ChangeMotionState(gobj, msid, 0x40010, 0.0f, 1.0f, 0.0f,
                                       NULL);
-            ftKirbyDmgInline(gobj);
+            ftKb_SpecialN_set_cbs(gobj);
         }
     }
 }
@@ -695,7 +695,7 @@ void ftKb_LkSpecialAirNLoop_IASA(Fighter_GObj* gobj)
             break;
         }
         Fighter_ChangeMotionState(gobj, msid, 0x40010, 0.0f, 1.0f, 0.0f, NULL);
-        ftKirbyDmgInline(gobj);
+        ftKb_SpecialN_set_cbs(gobj);
     }
 }
 
@@ -750,7 +750,7 @@ void ftKb_LkSpecialNStart_Coll(Fighter_GObj* gobj)
             Fighter_ChangeMotionState(gobj, msid, 0x0C4C5090, anim_frame, 1.0f,
                                       0.0f, NULL);
         }
-        ftKirbyDmgInline(gobj);
+        ftKb_SpecialN_set_cbs(gobj);
         ftAnim_8006EBA4(gobj);
     }
 }
@@ -774,7 +774,7 @@ void ftKb_LkSpecialNLoop_Coll(Fighter_GObj* gobj)
             Fighter_ChangeMotionState(gobj, msid, 0x0C4C5090, anim_frame, 1.0f,
                                       0.0f, NULL);
         }
-        ftKirbyDmgInline(gobj);
+        ftKb_SpecialN_set_cbs(gobj);
         ftAnim_8006EBA4(gobj);
     }
 }
@@ -799,7 +799,7 @@ void ftKb_LkSpecialNEnd_Coll(Fighter_GObj* gobj)
             Fighter_ChangeMotionState(gobj, msid, 0x0C4C5090, anim_frame, 1.0f,
                                       0.0f, NULL);
         }
-        ftKirbyDmgInline(gobj);
+        ftKb_SpecialN_set_cbs(gobj);
         ftAnim_8006EBA4(gobj);
     }
 }
@@ -823,7 +823,7 @@ void ftKb_LkSpecialAirNStart_Coll(Fighter_GObj* gobj)
             Fighter_ChangeMotionState(gobj, msid, 0x0C4C5090, anim_frame, 1.0f,
                                       0.0f, NULL);
         }
-        ftKirbyDmgInline(gobj);
+        ftKb_SpecialN_set_cbs(gobj);
         ftAnim_8006EBA4(gobj);
     }
 }
@@ -847,7 +847,7 @@ void ftKb_LkSpecialAirNLoop_Coll(Fighter_GObj* gobj)
             Fighter_ChangeMotionState(gobj, msid, 0x0C4C5090, anim_frame, 1.0f,
                                       0.0f, NULL);
         }
-        ftKirbyDmgInline(gobj);
+        ftKb_SpecialN_set_cbs(gobj);
         ftAnim_8006EBA4(gobj);
     }
 }
@@ -872,7 +872,7 @@ void ftKb_LkSpecialAirNEnd_Coll(Fighter_GObj* gobj)
             Fighter_ChangeMotionState(gobj, msid, 0x0C4C5090, anim_frame, 1.0f,
                                       0.0f, NULL);
         }
-        ftKirbyDmgInline(gobj);
+        ftKb_SpecialN_set_cbs(gobj);
         ftAnim_8006EBA4(gobj);
     }
 }

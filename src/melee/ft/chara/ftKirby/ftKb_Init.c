@@ -7,6 +7,7 @@
 #include "ftkirbyspecialzelda.h"
 
 #include "ef/efasync.h"
+#include "ft/chara/ftKirby/ftkirbyspecialmewtwo.h"
 #include "ft/fighter.h"
 #include "ft/ft_0877.h"
 #include "ft/ftanim.h"
