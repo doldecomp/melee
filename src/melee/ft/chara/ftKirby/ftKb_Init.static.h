@@ -1,7 +1,7 @@
 #ifndef __GALE01_0EE528
 #define __GALE01_0EE528
 
-#include "ftKb_Init.h" // IWYU pragma: export
+#include "ftkirby.h" // IWYU pragma: export
 
 #include <placeholder.h>
 

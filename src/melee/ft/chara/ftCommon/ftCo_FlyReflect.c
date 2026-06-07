@@ -9,7 +9,7 @@
 #include "cm/camera.h"
 #include "ft/ft_081B.h"
 #include "ftCommon/inlines.h"
-#include "ftKirby/ftKb_Init.h"
+#include "ftKirby/ftkirby.h"
 #include "lb/lbrefract.h"
 #include "lb/lbvector.h"
 

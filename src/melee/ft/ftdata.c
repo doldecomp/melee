@@ -156,7 +156,7 @@
 #include "ftGameWatch/ftGw_SpecialS.h"
 #include "ftGanon/ftGn_Init.h"
 #include "ftGigaKoopa/ftGk_Init.h"
-#include "ftKirby/ftKb_Init.h"
+#include "ftKirby/ftkirby.h"
 #include "ftKoopa/ftKp_Init.h"
 #include "ftKoopa/ftKp_SpecialHi.h"
 #include "ftKoopa/ftKp_SpecialLw.h"

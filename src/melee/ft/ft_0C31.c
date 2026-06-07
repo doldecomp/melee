@@ -8,7 +8,7 @@
 
 #include "cm/camera.h"
 #include "ef/efasync.h"
-#include "ft/chara/ftKirby/ftKb_Init.h"
+#include "ft/chara/ftKirby/ftkirby.h"
 #include "ft/fighter.h"
 
 #include "ft/forward.h"
@@ -26,7 +26,7 @@
 #include "ftCommon/ftCo_Lift.h"
 #include "ftCommon/ftCo_Throw.h"
 #include "ftCommon/types.h"
-#include "ftKirby/ftKb_Init.h"
+#include "ftKirby/ftkirby.h"
 #include "it/it_26B1.h"
 #include "it/items/itgreatfoxlaser.h"
 #include "it/items/itleadead.h"
@@ -248,8 +248,8 @@ void fn_800C69F4(Fighter_GObj* gobj)
                    temp_r31_2->cur_pos.x);
         sp20.y = temp_r31_2->cur_pos.y;
         sp20.z = temp_r31_2->cur_pos.z;
-        HSD_JObjSetTranslateWithMtxDirtyOutOfLine(
-            temp_r31_2->x20A0_accessory, &sp20);
+        HSD_JObjSetTranslateWithMtxDirtyOutOfLine(temp_r31_2->x20A0_accessory,
+                                                  &sp20);
     } else {
         HSD_GObj* gobj = Player_GetEntityAtIndex(temp_r31->player_id, 0);
         Fighter* fp2 = GET_FIGHTER(gobj);
@@ -258,7 +258,7 @@ void fn_800C69F4(Fighter_GObj* gobj)
     }
 }
 
-void (HSD_JObjSetMtxDirty)(HSD_JObj* jobj)
+void(HSD_JObjSetMtxDirty)(HSD_JObj* jobj)
 {
     if (jobj == NULL || HSD_JObjMtxIsDirty(jobj)) {
         return;

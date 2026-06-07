@@ -16,7 +16,7 @@
 
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_DownBound.h"
-#include "ftKirby/ftKb_Init.h"
+#include "ftKirby/ftkirby.h"
 #include "lb/lbaudio_ax.h"
 
 #include <trigf.h>

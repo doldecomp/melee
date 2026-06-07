@@ -1242,13 +1242,13 @@ melee/ft/chara/ftLink/ftLk_SpecialN.c:
 	.rodata     start:0x803B7520 end:0x803B7544
 	.sdata2     start:0x804D9340 end:0x804D9350
 
-melee/ft/chara/ftKirby/ftKb_Init.c:
+melee/ft/chara/ftKirby/ftkirby.c:
 	.text       start:0x800EE528 end:0x800F1FDC
 	.rodata     start:0x803B7548 end:0x803B7570
 	.data       start:0x803C8368 end:0x803CB6D8
 	.sdata2     start:0x804D9350 end:0x804D9364
 
-melee/ft/chara/ftKirby/ftKb_SpecialN.c:
+melee/ft/chara/ftKirby/ftkirbyspecialn.c:
 	.text       start:0x800F1FDC end:0x800F9FD4
 	.sdata2     start:0x804D9364 end:0x804D93E4
 
@@ -1256,15 +1256,15 @@ melee/ft/chara/ftKirby/ftkirbyspecialpikachu.c:
 	.text       start:0x800F9FD4 end:0x800FA588
 	.sdata2     start:0x804D93E8 end:0x804D93F0
 
-melee/ft/chara/ftKirby/ftKb_SpecialNKp.c:
+melee/ft/chara/ftKirby/ftkirbyspecialkoopa.c:
 	.text       start:0x800FA588 end:0x800FB394
 	.sdata2     start:0x804D93F0 end:0x804D9408
 
-melee/ft/chara/ftKirby/ftKb_SpecialNLk.c:
+melee/ft/chara/ftKirby/ftkirbyspeciallink.c:
 	.text       start:0x800FB394 end:0x800FCC14
 	.sdata2     start:0x804D9408 end:0x804D9414
 
-melee/ft/chara/ftKirby/ftKb_SpecialNSs.c:
+melee/ft/chara/ftKirby/ftkirbyspecialsamus.c:
 	.text       start:0x800FCC14 end:0x800FDC00
 	.sdata2     start:0x804D9418 end:0x804D944C
 
@@ -1302,7 +1302,7 @@ melee/ft/chara/ftKirby/ftkirbyspecialmewtwo.c:
 	.rodata     start:0x803B7570 end:0x803B7588
 	.sdata2     start:0x804D9508 end:0x804D9554
 
-melee/ft/chara/ftKirby/ftKb_SpecialNYs.c:
+melee/ft/chara/ftKirby/ftkirbyspecialyoshi.c:
 	.text       start:0x80109290 end:0x8010D740
 	.sdata2     start:0x804D9554 end:0x804D95B0
 

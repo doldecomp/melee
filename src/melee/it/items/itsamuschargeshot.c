@@ -3,7 +3,7 @@
 #include "baselib/mtx.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
-#include "ft/chara/ftKirby/ftKb_Init.h"
+#include "ft/chara/ftKirby/ftkirby.h"
 #include "ft/chara/ftSamus/ftSs_SpecialLw_0.h"
 #include "ft/chara/ftSamus/ftSs_SpecialN.h"
 #include "ft/ftlib.h"

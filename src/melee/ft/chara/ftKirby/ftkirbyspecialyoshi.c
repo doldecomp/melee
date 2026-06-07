@@ -27,7 +27,7 @@
 
 #include "ftKirby/forward.h"
 
-#include "ftKirby/ftKb_Init.h"
+#include "ftKirby/ftkirby.h"
 #include "it/items/itgamewatchchef.h"
 #include "it/items/itkirbygamewatchchefpan.h"
 #include "it/items/itkirbyyoshispecialn.h"

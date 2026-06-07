@@ -5,7 +5,7 @@
 #include "db/db.h"
 #include "ef/efsync.h"
 #include "ft/chara/ftCommon/ftCo_Guard.h"
-#include "ft/chara/ftKirby/ftKb_Init.h"
+#include "ft/chara/ftKirby/ftkirby.h"
 #include "ft/chara/ftLink/ftLk_SpecialN.h"
 #include "ft/ftlib.h"
 #include "it/inlines.h"

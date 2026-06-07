@@ -128,7 +128,7 @@
 #include <melee/ft/chara/ftCommon/ftCo_YoshiEgg.h>
 #include <melee/ft/chara/ftCommon/ftpickupitem.h>
 #include <melee/ft/chara/ftCrazyHand/ftCh_Init.h>
-#include <melee/ft/chara/ftKirby/ftKb_Init.h>
+#include <melee/ft/chara/ftKirby/ftkirby.h>
 #include <melee/ft/chara/ftKirby/ftkirbyspecialdonkey.h>
 #include <melee/ft/chara/ftMasterHand/ftMh_CaptureDamageMasterHand.h>
 #include <melee/ft/chara/ftMasterHand/ftMh_CaptureMasterHand.h>

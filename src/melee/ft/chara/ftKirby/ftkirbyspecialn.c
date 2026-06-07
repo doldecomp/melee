@@ -1,4 +1,4 @@
-#include "ftKb_Init.h"
+#include "ftkirby.h"
 #include "types.h"
 
 #include <placeholder.h>
@@ -62,7 +62,7 @@
 #include <baselib/random.h>
 #include <MSL/math.h>
 
-/// External variables from ftKb_Init.c
+/// External variables from ftkirby.c
 extern bool ftKb_Init_803CB490[];
 
 struct ftKb_Init_803CB4EC_t {

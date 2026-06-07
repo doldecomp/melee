@@ -1,4 +1,4 @@
-#include "ftKb_Init.h"
+#include "ftkirby.h"
 
 #include "cm/camera.h"
 #include "ft/fighter.h"
