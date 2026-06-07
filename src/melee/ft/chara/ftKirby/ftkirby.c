@@ -3,6 +3,7 @@
 #include "ftKb_Init.static.h"
 
 #include "ftkirbyspecialdonkey.h"
+#include "ftkirbyspecialiceclimber.h"
 #include "ftkirbyspecialpikachu.h"
 #include "ftkirbyspecialzelda.h"
 
