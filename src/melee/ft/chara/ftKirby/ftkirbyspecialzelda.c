@@ -28,8 +28,6 @@
 #include <MSL/math.h>
 
 extern f32 ftKb_Init_804D9558;
-extern Vec3 const ftKb_Init_803B7570;
-extern Vec3 const ftKb_Init_803B757C;
 extern float ftKb_Init_803CB770[];
 
 /// Forward declarations for functions called before definition

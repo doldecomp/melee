@@ -751,7 +751,8 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspecialdonkey.c"),
             Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspecialpurin.c"),
             Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspecialzelda.c"),
-            Object(NonMatching, "melee/ft/chara/ftKirby/ftkirbyspecialseak.c"),
+            Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspecialseak.c"),
+            Object(NonMatching, "melee/ft/chara/ftKirby/ftkirbyspecialmewtwo.c"),
             Object(NonMatching, "melee/ft/chara/ftKirby/ftKb_SpecialNYs.c"),
             # Donkey Kong
             Object(Matching, "melee/ft/chara/ftDonkey/ftDk_Init.c"),

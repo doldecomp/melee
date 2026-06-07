@@ -3,7 +3,7 @@
 #include "baselib/jobj.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
-#include "ft/chara/ftKirby/ftkirbyspecialdonkey.h"
+#include "ft/chara/ftKirby/ftkirbyspecialmewtwo.h"
 #include "ft/chara/ftMewtwo/ftMt_SpecialN.h"
 #include "ft/ftlib.h"
 #include "it/inlines.h"
