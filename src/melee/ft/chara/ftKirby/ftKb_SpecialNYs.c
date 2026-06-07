@@ -50,23 +50,20 @@ extern f32 ftKb_Init_804D9594;
 extern f32 ftKb_Init_804D9598;
 extern f64 ftKb_Init_804D95A0;
 
-/// Forward declarations for static functions
-static void fn_801095DC(HSD_GObj*);
-static void fn_80109680(HSD_GObj*);
-static void fn_80109714(HSD_GObj*);
-static void fn_801097B8(HSD_GObj*);
-static void fn_8010C288(HSD_GObj* gobj);
-static void fn_8010AA64(HSD_GObj* gobj);
-void fn_8010C44C(HSD_GObj* gobj);
-void fn_8010CD88(HSD_GObj* gobj);
-
-/// Forward declarations for local functions
-void fn_8010A930(Fighter_GObj*, Fighter_GObj*);
-void fn_8010B1F4(Fighter_GObj* gobj);
-void fn_8010B2E8(Fighter_GObj* gobj);
-void fn_8010C344(HSD_GObj* arg0);
-void fn_8010CE5C(Fighter_GObj* gobj);
-void fn_8010CFB0(Fighter_GObj* gobj);
+/* 1095DC */ static void fn_801095DC(HSD_GObj*);
+/* 109680 */ static void fn_80109680(HSD_GObj*);
+/* 109714 */ static void fn_80109714(HSD_GObj*);
+/* 1097B8 */ static void fn_801097B8(HSD_GObj*);
+/* 10A930 */ void fn_8010A930(Fighter_GObj*, Fighter_GObj*);
+/* 10AA64 */ static void fn_8010AA64(HSD_GObj* gobj);
+/* 10B1F4 */ void fn_8010B1F4(Fighter_GObj* gobj);
+/* 10B2E8 */ void fn_8010B2E8(Fighter_GObj* gobj);
+/* 10C288 */ static void fn_8010C288(HSD_GObj* gobj);
+/* 10C344 */ void fn_8010C344(HSD_GObj* arg0);
+/* 10C44C */ static void fn_8010C44C(HSD_GObj* gobj);
+/* 10CD88 */ static void fn_8010CD88(HSD_GObj* gobj);
+/* 10CE5C */ void fn_8010CE5C(Fighter_GObj* gobj);
+/* 10CFB0 */ void fn_8010CFB0(Fighter_GObj* gobj);
 
 void ftKb_SpecialNYs_80109260(Fighter_GObj* gobj, Vec3* vec)
 {

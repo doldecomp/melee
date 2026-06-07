@@ -36,8 +36,6 @@
 #include <melee/ef/efsync.h>
 #include <melee/mp/mplib.h>
 
-#define SIGNF(x) ((x) > 0.0f ? 1.0f : -1.0f)
-
 static float sdata2_ordering(void)
 {
     double data_0 = M_PI_2;

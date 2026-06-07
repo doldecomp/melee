@@ -1,7 +1,9 @@
+#include "ftkirbyspecialzelda.h"
 
 #include <placeholder.h>
 
 #include "ef/eflib.h"
+#include "ef/efsync.h"
 #include "ft/chara/ftCommon/ftCo_Throw.h"
 #include "ft/fighter.h"
 
@@ -31,13 +33,12 @@ extern Vec3 const ftKb_Init_803B757C;
 extern float ftKb_Init_803CB770[];
 
 /// Forward declarations for functions called before definition
-void fn_80105AB0(Fighter_GObj*);
-void fn_80105A34(Fighter_GObj*);
-static void fn_801095DC(HSD_GObj*);
-static void fn_80109680(HSD_GObj*);
-static void fn_80109714(HSD_GObj*);
-static void fn_801097B8(HSD_GObj*);
-void fn_8010A930(Fighter_GObj*, Fighter_GObj*);
+/* 105AB0 */ static void fn_80105AB0(Fighter_GObj*);
+/* 105A34 */ static void fn_80105A34(Fighter_GObj*);
+/* 1095DC */ static void fn_801095DC(HSD_GObj*);
+/* 109680 */ static void fn_80109680(HSD_GObj*);
+/* 109714 */ static void fn_80109714(HSD_GObj*);
+/* 1097B8 */ static void fn_801097B8(HSD_GObj*);
 
 static inline void ftKb_SpecialNZd_Helper(Fighter_GObj* gobj)
 {
@@ -48,6 +49,33 @@ static inline void ftKb_SpecialNZd_Helper(Fighter_GObj* gobj)
     fighter2->cmd_vars[0] = 0;
     fighter2->mv.zd.specialn.x0 =
         attributes->specialn_zd_frames_before_gravity;
+}
+
+void fn_80105A34(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (!fp->x2219_b0) {
+        FighterBone* bone = fp->parts;
+        efSync_Spawn(0x4B6, gobj, bone[1].joint);
+        fp->x2219_b0 = true;
+    }
+
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = NULL;
+}
+
+void fn_80105AB0(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (!fp->x2219_b0) {
+        efSync_Spawn(0x4B7, gobj, fp->parts[1].joint);
+        fp->x2219_b0 = true;
+    }
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = NULL;
 }
 
 void ftKb_SpecialNZd_80105B2C(Fighter_GObj* gobj)

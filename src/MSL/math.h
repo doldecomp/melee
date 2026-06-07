@@ -22,6 +22,8 @@
 #define M_PI_2_L (M_PI_L / 2.0L)
 #define M_PI_3_L (M_PI_L / 3.0L)
 
+#define SIGNF(x) ((x) > 0.0f ? 1.0f : -1.0f)
+
 static float const deg_to_rad = M_PI / 180;
 static float const rad_to_deg = 180 / M_PI;
 
