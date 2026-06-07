@@ -32,6 +32,7 @@
 #include "ft/ftwalkcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_AttackDash.h"
 #include "ftCommon/ftCo_CaptureKirby.h"
 #include "ftCommon/ftCo_CaptureWaitKirby.h"
 #include "ftCommon/ftCo_Fall.h"
@@ -43,7 +44,6 @@
 #include "it/items/it_2ADA.h"
 #include "it/items/it_2F28.h"
 #include "it/items/itdrmariopill.h"
-#include "it/items/itfoxblaster.h"
 #include "it/items/itkirby_2F23.h"
 #include "it/items/itkirbycutterbeam.h"
 #include "it/items/itkirbyhammer.h"
@@ -52,12 +52,12 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbanim.h"
 #include "lb/lbvector.h"
-#include "melee/lb/lbrefract.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
 #include <common_structs.h>
 #include <stddef.h>
+#include <trigf.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
 #include <MSL/math.h>
@@ -71,8 +71,6 @@ struct ftKb_Init_803CB4EC_t {
 };
 extern struct ftKb_Init_803CB4EC_t ftKb_Init_803CB4EC;
 
-extern f32 ftKb_Init_804D93E8;
-extern f32 ftKb_Init_804D93EC;
 extern char ftKb_Init_803CB510[];
 extern char ftKb_Init_803CB52C[];
 extern char* ftKb_Init_804D3DB0;
@@ -2633,7 +2631,7 @@ void ftKb_SpecialNSpit0_Anim(Fighter_GObj* gobj)
     Fighter* fp = getFighter(gobj);
     Item_GObj* item_gobj;
     ftKb_DatAttrs* da;
-    itUnk2_DatAttrs attr;
+    struct itUnk2_DatAttrs attr;
     PAD_STACK(0x40);
 
     if (fp->cmd_vars[0] != 0 && (item_gobj = fp->target_item_gobj) != NULL) {
@@ -4020,25 +4018,4 @@ void ftKb_CaSpecialAirN_Coll(Fighter_GObj* gobj)
         fp2->pre_hitlag_cb = efLib_PauseAll;
         fp2->post_hitlag_cb = efLib_ResumeAll;
     }
-}
-
-void ftKb_SpecialNPk_800F9FD4(Fighter_GObj* gobj)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    s32 msid = ftKb_MS_PkSpecialN;
-    PAD_STACK(8);
-    switch (fp->fv.kb.hat.kind) {
-    case FTKIND_PIKACHU:
-        break;
-    case FTKIND_PICHU:
-        msid = ftKb_MS_PcSpecialN;
-        break;
-    }
-    Fighter_ChangeMotionState(gobj, msid, 0, ftKb_Init_804D93E8,
-                              ftKb_Init_804D93EC, ftKb_Init_804D93E8, NULL);
-    fp->cmd_vars[3] = 0;
-    fp->cmd_vars[2] = 0;
-    fp->cmd_vars[1] = 0;
-    fp->cmd_vars[0] = 0;
-    ftAnim_8006EBA4(gobj);
 }

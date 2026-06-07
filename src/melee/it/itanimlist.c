@@ -12,6 +12,7 @@
 #include "it/item.h"
 #include "lb/inlines.h"
 #include "lb/lb_00F9.h"
+#include "lb/lbcommand.h"
 
 #include <baselib/gobjproc.h>
 

@@ -13,34 +13,37 @@
 #define FIGHTERVARS_SIZE 0xF8
 
 typedef enum_t FtMotionId;
-typedef struct DObjList DObjList;
+typedef struct ArticleDynamicBones ArticleDynamicBones;
 typedef struct CostumeTObjList CostumeTObjList;
+typedef struct DObjList DObjList;
 typedef struct Fighter Fighter;
 typedef struct Fighter_804D653C_t Fighter_804D653C_t;
-typedef struct FtPartsVis FtPartsVis;
-typedef struct FtPartsVisLookup FtPartsVisLookup;
-typedef struct TempS TempS;
-typedef struct Fighter_x1670_t Fighter_x1670_t;
 typedef struct Fighter_CostumeStrings Fighter_CostumeStrings;
 typedef struct Fighter_DemoStrings Fighter_DemoStrings;
+typedef struct Fighter_x1670_t Fighter_x1670_t;
 typedef struct FighterBone FighterBone;
 typedef struct FighterPartsTable FighterPartsTable;
-typedef struct UnkPlBonusBits UnkPlBonusBits;
 typedef struct ft_800898B4_t ft_800898B4_t;
-typedef struct IKState IKState;
 typedef struct ftCo_DatAttrs_xBC_t ftCo_DatAttrs_xBC_t;
 typedef struct ftCommonData ftCommonData;
-typedef struct ftData_x8 ftData_x8;
-typedef struct ftData_x8_x8 ftData_x8_x8;
-typedef struct FtPartsDesc FtPartsDesc;
 typedef struct ftData ftData;
 typedef struct ftData_UnkCountStruct ftData_UnkCountStruct;
+typedef struct ftData_x8 ftData_x8;
+typedef struct ftData_x8_x8 ftData_x8_x8;
+typedef struct ftDynamics ftDynamics;
 typedef struct ftLk_SpecialN_Vec3Group ftLk_SpecialN_Vec3Group;
 typedef struct ftMaterial_UnkTevStruct ftMaterial_UnkTevStruct;
+typedef struct FtPartsDesc FtPartsDesc;
+typedef struct FtPartsVis FtPartsVis;
+typedef struct FtPartsVisLookup FtPartsVisLookup;
 typedef struct FtSFX FtSFX;
 typedef struct gmScriptEventDefault gmScriptEventDefault;
+typedef struct IKState IKState;
+typedef struct KirbyHatStruct KirbyHatStruct;
 typedef struct MotionState MotionState;
+typedef struct TempS TempS;
 typedef struct UnkFloat6_Camera UnkFloat6_Camera;
+typedef struct UnkPlBonusBits UnkPlBonusBits;
 typedef u32 MotionFlags;
 
 #ifdef M2C

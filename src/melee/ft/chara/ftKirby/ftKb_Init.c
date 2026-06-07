@@ -1,4 +1,8 @@
+#include "ftKb_Init.h"
+
 #include "ftKb_Init.static.h"
+
+#include "ftkirbyspecialpikachu.h"
 
 #include "ef/efasync.h"
 #include "ft/fighter.h"

@@ -38,6 +38,27 @@
 
 #define SIGNF(x) ((x) > 0.0f ? 1.0f : -1.0f)
 
+static float sdata2_ordering(void)
+{
+    double data_0 = M_PI_2;
+    float data_1 = 0.0f;
+    float data_2 = M_PI_2;
+    float data_3 = 1.0f;
+    float data_4 = 0.5f;
+    double data_5 = M_TAU;
+    float data_6 = -1.0f;
+    float data_7 = 0.0001f;
+    float data_8 = 0.017453292f;
+    double data_9 = 4503601774854144.0;
+    double data_10 = 0.2;
+    double data_11 = 3 * M_PI_2;
+    double data_12 = M_PI;
+    float data_13 = -0.05f;
+
+    return data_12 + data_13 + data_11 + data_10 + data_9 + data_8 + data_7 +
+           data_6 + data_5 + data_4 + data_3 + data_2 + data_1 + data_0;
+}
+
 static inline void ftPr_JObjSetRotationY(HSD_JObj* jobj, f32 y, f32* base)
 {
     ((jobj) ? ((void) 0) : __assert("jobj.h", 660, "jobj"));
