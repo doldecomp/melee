@@ -1,5 +1,7 @@
 #include "it/itdrop.h"
 
+#include "inlines.h"
+
 #include "ft/ftlib.h"
 #include "gm/gm_unsplit.h"
 #include "it/it_26B1.h"
@@ -51,7 +53,7 @@ bool it_8026F3D4(Item_GObj* item_gobj, struct it_8026F3D4_arg1_t* arg1,
     it_kind = -1;
     new_var = arg3 & 1;
     cnt = 0;
-    item = item_gobj->user_data;
+    item = GET_ITEM(item_gobj);
     cnt2 = 0;
     for (cnt = 0; cnt < num; cnt++) {
         if ((new_var == 0) || (it_kind == -1)) {
@@ -147,7 +149,7 @@ Item_GObj* it_8026F6BC(Item_GObj* item_gobj, Vec3* arg1, Vec3* vel, bool chk)
     spawned_item_gobj =
         it_8026F5C8(item_gobj, it_8026C65C(&it_804A0E60), arg1);
     if (spawned_item_gobj != NULL) {
-        spawned_item = spawned_item_gobj->user_data;
+        spawned_item = GET_ITEM(spawned_item_gobj);
         if (chk == false) {
             vel->x = it_804D6D28->x54_float * (2.0f * (HSD_Randf() - 0.5f));
             vel->y = spawned_item->xCC_item_attr->x18;
@@ -174,7 +176,7 @@ Item_GObj* it_8026F7C8(Vec3* arg0, Vec3* vel, bool chk)
     }
     spawned_item_gobj = it_8026F5C8(NULL, it_kind, arg0);
     if (spawned_item_gobj != NULL) {
-        spawned_item = spawned_item_gobj->user_data;
+        spawned_item = GET_ITEM(spawned_item_gobj);
         if (chk == false) {
             vel->x = it_804D6D28->x54_float * (2.0f * (HSD_Randf() - 0.5f));
             vel->y = spawned_item->xCC_item_attr->x18;

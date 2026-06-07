@@ -29,7 +29,7 @@ HSD_MObjInfo ftMObj = { ftMaterial_800BF260 };
 
 void ftMaterial_800BF260(void)
 {
-    hsdInitClassInfo(&ftMObj.parent, &ftMObj.parent, "sysdolphin_base_library",
+    hsdInitClassInfo(&ftMObj.parent, &hsdMObj.parent, "sysdolphin_base_library",
                      "ft_mobj", sizeof(HSD_MObjInfo), sizeof(HSD_MObj));
     ftMObj.setup = ftMaterial_800BF2B8;
 }
