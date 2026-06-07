@@ -1,9 +1,10 @@
 #include "grmaterial.h"
 
+#include "gr/types.h"
 #include "it/it_2725.h"
-#include "it/ithitbox.h"
 #include "it/item.h"
 #include "it/items/it_2E6A.h"
+#include "it/ithitbox.h"
 #include "it/types.h"
 
 #include "lb/forward.h"
@@ -265,8 +266,8 @@ void grMaterial_801C8E74(void)
 {
     hsdInitClassInfo(HSD_CLASS_INFO(&grMaterial_803E0A20),
                      HSD_CLASS_INFO(&hsdMObj),
-                     grMaterial_803E0A20.library_name,
-                     "gr_mobj", sizeof(HSD_MObjInfo), sizeof(HSD_MObj));
+                     grMaterial_803E0A20.library_name, "gr_mobj",
+                     sizeof(HSD_MObjInfo), sizeof(HSD_MObj));
     HSD_CLASS_INFO(&grMaterial_803E0A20)->release =
         HSD_CLASS_INFO(&hsdMObj)->release;
     HSD_CLASS_INFO(&grMaterial_803E0A20)->amnesia =

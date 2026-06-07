@@ -82,7 +82,7 @@ function gen_header {
 
 function rename_tu {
     for ext in c s h dox; do
-        find asm src docs -name "$1.$ext" | while read -r file; do
+        find src docs -name "$1.$ext" | while read -r file; do
             new_file="$(dirname "$file")/$2.$ext"
             mv "$file" "$new_file"
         done
