@@ -53,13 +53,17 @@ Do:
 - Map expanded header asserts back to the inline helper in the owning header.
 - For `jobj.h` asserts, use the line number to identify the matching
   `HSD_JObj*` inline.
-- Prefer existing `HSD_JObjSet*`, `HSD_JObjGet*`, and `GET_JOBJ` forms when they
-  represent the source-level operation.
+- Prefer existing `HSD_JObjSet*` and `HSD_JObjGet*` forms when they represent
+  the source-level operation.
+- Use `GET_JOBJ` only when surrounding source shape or objdiff evidence shows it
+  is the right source-level form.
 
 Do not:
 
 - Keep expanded `__assert("jobj.h", line, ...)` code when the header inline is
   identifiable.
+- Treat `GET_JOBJ` as automatically correct; some sites need it, and some need
+  an explicit JObj access form instead.
 - Redefine header macros or local helper names just to force an inline.
 - Manually expand an inline without objdiff evidence.
 
