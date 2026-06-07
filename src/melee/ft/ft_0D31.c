@@ -273,7 +273,7 @@ void ftCo_DeadLeft_Anim(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.co.unk_deadleft.x40 -= 1;
     if (!fp->mv.co.unk_deadleft.x40) {
-        ftMaterial_800BFD9C(gobj);
+        ftCo_800BFD9C(gobj);
     }
 }
 
@@ -367,7 +367,7 @@ void ftCo_DeadRight_Anim(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.co.unk_deadleft.x40 -= 1;
     if (!fp->mv.co.unk_deadleft.x40) {
-        ftMaterial_800BFD9C(gobj);
+        ftCo_800BFD9C(gobj);
     }
 }
 
@@ -462,7 +462,7 @@ void ftCo_DeadDown_Anim(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.co.unk_deadleft.x40 -= 1;
     if (!fp->mv.co.unk_deadleft.x40) {
-        ftMaterial_800BFD9C(gobj);
+        ftCo_800BFD9C(gobj);
     }
 }
 
@@ -557,7 +557,7 @@ void ftCo_DeadUp_Anim(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.co.unk_deadleft.x40 -= 1;
     if (!fp->mv.co.unk_deadleft.x40) {
-        ftMaterial_800BFD9C(gobj);
+        ftCo_800BFD9C(gobj);
     }
 }
 
@@ -673,7 +673,7 @@ void ftCo_DeadUpStar_Anim(Fighter_GObj* gobj)
             fp->mv.co.unk_deadup.x44 = 2;
             return;
         case 2:
-            ftMaterial_800BFD9C(gobj);
+            ftCo_800BFD9C(gobj);
             break;
         }
     }
@@ -859,7 +859,7 @@ void ftCo_DeadUpFall_Anim(Fighter_GObj* gobj)
             fp->mv.co.unk_deadup.x44 = 4;
             return;
         case 4:
-            ftMaterial_800BFD9C(gobj);
+            ftCo_800BFD9C(gobj);
             break;
         }
     }
