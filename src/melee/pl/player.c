@@ -10,7 +10,7 @@
 #include "ft/ftdemo.h"
 #include "ft/ftlib.h"
 #include "ft/types.h"
-#include "ftKirby/ftKb_Init.h"
+#include "ftKirby/ftkirby.h"
 #include "gm/gm_unsplit.h"
 #include "if/ifstatus.h"
 #include "lb/lbarchive.h"

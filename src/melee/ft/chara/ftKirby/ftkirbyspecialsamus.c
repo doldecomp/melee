@@ -1,4 +1,4 @@
-#include "ftKb_Init.h"
+#include "ftkirby.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"

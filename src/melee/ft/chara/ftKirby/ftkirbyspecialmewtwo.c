@@ -1,6 +1,6 @@
 #include "ftkirbyspecialmewtwo.h"
 
-#include "ftKb_Init.h"
+#include "ftkirby.h"
 #include "inlines.h"
 #include "types.h"
 

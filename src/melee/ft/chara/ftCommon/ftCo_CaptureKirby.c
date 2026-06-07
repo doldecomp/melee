@@ -2,7 +2,7 @@
 
 #include "ftCo_Lift.h"
 
-#include "ft/chara/ftKirby/ftKb_Init.h"
+#include "ft/chara/ftKirby/ftkirby.h"
 #include "ft/fighter.h"
 
 #include "ft/forward.h"

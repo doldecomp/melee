@@ -25,7 +25,7 @@
 #include "ftCommon/ftCo_Guard.h"
 #include "ftCommon/ftCo_SpecialS.h"
 #include "ftDrMario/ftDr_Init.h"
-#include "ftKirby/ftKb_Init.h"
+#include "ftKirby/ftkirby.h"
 #include "ftPeach/ftPe_Init.h"
 #include "ftZelda/ftZd_Init.h"
 #include "lb/lb_00B0.h"

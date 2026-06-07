@@ -19,7 +19,7 @@
 
 #include "ftKirby/forward.h"
 
-#include "ftKirby/ftKb_Init.h"
+#include "ftKirby/ftkirby.h"
 #include "it/items/itpikachutjoltground.h"
 
 #include <common_structs.h>

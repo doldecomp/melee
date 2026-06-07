@@ -1,6 +1,6 @@
 #include "ftkirbyspecialdonkey.h"
 
-#include "ftKb_Init.h"
+#include "ftkirby.h"
 #include "types.h"
 
 #include <placeholder.h>

@@ -32,7 +32,7 @@
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_Throw.h"
 #include "ftCommon/types.h"
-#include "ftKirby/ftKb_Init.h"
+#include "ftKirby/ftkirby.h"
 
 #include "lb/forward.h"
 

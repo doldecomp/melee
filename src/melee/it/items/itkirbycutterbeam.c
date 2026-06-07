@@ -1,13 +1,13 @@
 #include "itkirbycutterbeam.h"
 
 #include "db/db.h"
-#include "ft/chara/ftKirby/ftKb_Init.h"
+#include "ft/chara/ftKirby/ftkirby.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/itmaplib.h"
 #include "it/item.h"
+#include "it/itmaplib.h"
 #include "lb/lbvector.h"
 
 #include <math.h>

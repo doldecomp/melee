@@ -19,7 +19,7 @@
 
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/types.h"
-#include "ftKirby/ftKb_Init.h"
+#include "ftKirby/ftkirby.h"
 #include "ftKirby/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"

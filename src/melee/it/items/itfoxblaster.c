@@ -13,7 +13,7 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <melee/ft/chara/ftFox/ftFx_SpecialN.h>
-#include <melee/ft/chara/ftKirby/ftKb_Init.h>
+#include <melee/ft/chara/ftKirby/ftkirby.h>
 #include <melee/it/item.h>
 #include <melee/lb/lbrefract.h>
 

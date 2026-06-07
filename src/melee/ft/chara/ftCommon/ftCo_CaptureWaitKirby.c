@@ -5,7 +5,7 @@
 #include "ft/ftcommon.h"
 #include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_CaptureCut.h"
-#include "ftKirby/ftKb_Init.h"
+#include "ftKirby/ftkirby.h"
 
 void ftCo_800BD620(Fighter_GObj* gobj)
 {

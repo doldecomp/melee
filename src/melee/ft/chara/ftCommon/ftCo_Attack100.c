@@ -57,7 +57,7 @@
 #include <melee/ft/chara/ftCommon/ftCo_SpecialS.h>
 #include <melee/ft/chara/ftCommon/ftpickupitem.h>
 #include <melee/ft/chara/ftGameWatch/ftGw_Attack100.h>
-#include <melee/ft/chara/ftKirby/ftKb_Init.h>
+#include <melee/ft/chara/ftKirby/ftkirby.h>
 #include <melee/ft/chara/ftLink/ftLk_Init.h>
 #include <melee/ft/chara/ftYoshi/ftYs_Init.h>
 #include <melee/ft/ft_0877.h>
@@ -486,7 +486,8 @@ bool ftCo_800D730C(Fighter_GObj* gobj, bool arg1)
         }
         r4 = 1;
         if (!(fp->input.lstick.y >= p_ftCommonData->tap_jump_threshold) &&
-            !(fp->input.held_inputs & 0xC00)) {
+            !(fp->input.held_inputs & 0xC00))
+        {
             r4 = 0;
         }
         if (canJump && r29 && r4) {
@@ -1885,8 +1886,7 @@ static void fn_800D9CE8(Fighter_GObj* gobj)
         fp->mv.co.capturedamage.x18 = it->xDD4_itemVar.samusgrapple.xC;
         break;
     default:
-        fp->mv.co.capturedamage.x18 =
-            fp->parts[fp->ft_data->x8->x11].joint;
+        fp->mv.co.capturedamage.x18 = fp->parts[fp->ft_data->x8->x11].joint;
         break;
     }
 

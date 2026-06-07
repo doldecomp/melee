@@ -4,7 +4,7 @@
 #include <placeholder.h>
 
 #include "ft/inlines.h"
-#include "ftKirby/ftKb_Init.h"
+#include "ftKirby/ftkirby.h"
 
 static inline void ftKb_SpecialN_set_cbs(Fighter_GObj* gobj)
 {

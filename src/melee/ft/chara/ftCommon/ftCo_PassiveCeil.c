@@ -17,7 +17,7 @@
 #include "ftCommon/forward.h"
 
 #include "ftCommon/ftCo_Fall.h"
-#include "ftKirby/ftKb_Init.h"
+#include "ftKirby/ftkirby.h"
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>
