@@ -1298,12 +1298,16 @@ melee/ft/chara/ftKirby/ftkirbyspecialseak.c:
 	.sdata2     start:0x804D94F8 end:0x804D9508
 
 melee/ft/chara/ftKirby/ftkirbyspecialmewtwo.c:
-	.text       start:0x80106F44 end:0x80109290
+	.text       start:0x80106F44 end:0x80108CE8
 	.rodata     start:0x803B7570 end:0x803B7588
-	.sdata2     start:0x804D9508 end:0x804D9554
+	.sdata2     start:0x804D9508 end:0x804D9548
+
+melee/ft/chara/ftKirby/ftkirbyspecialiceclimber.c:
+	.text       start:0x80108CE8 end:0x80109260
+	.sdata2     start:0x804D9548 end:0x804D9554
 
 melee/ft/chara/ftKirby/ftkirbyspecialyoshi.c:
-	.text       start:0x80109290 end:0x8010D740
+	.text       start:0x80109260 end:0x8010D740
 	.sdata2     start:0x804D9554 end:0x804D95B0
 
 melee/ft/chara/ftDonkey/ftDk_Init.c:

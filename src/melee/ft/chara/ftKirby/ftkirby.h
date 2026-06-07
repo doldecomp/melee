@@ -10,7 +10,6 @@
 #include "ftFox/forward.h"
 #include "ftKirby/forward.h"
 #include "ftLink/forward.h"
-#include "it/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
