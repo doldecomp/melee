@@ -484,7 +484,7 @@ config.libs = [
         [
             Object(Matching, "melee/pl/player.c"),
             Object(Matching, "melee/pl/plstale.c"),
-            Object(NonMatching, "melee/pl/plattack.c"),
+            Object(Matching, "melee/pl/plattack.c"),
             Object(NonMatching, "melee/pl/pltrick.c"),
             Object(Matching, "melee/pl/plbonus.c"),
             Object(Matching, "melee/pl/plbonuslib.c"),
