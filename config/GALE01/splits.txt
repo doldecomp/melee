@@ -1307,8 +1307,12 @@ melee/ft/chara/ftKirby/ftkirbyspecialiceclimber.c:
 	.sdata2     start:0x804D9548 end:0x804D9554
 
 melee/ft/chara/ftKirby/ftkirbyspecialyoshi.c:
-	.text       start:0x80109260 end:0x8010D740
-	.sdata2     start:0x804D9554 end:0x804D95B0
+	.text       start:0x80109260 end:0x8010A930
+	.sdata2     start:0x804D9558 end:0x804D9560
+
+melee/ft/chara/ftKirby/ftkirbycaptureyoshi.c:
+	.text       start:0x8010A930 end:0x8010D740
+	.sdata2     start:0x804D9560 end:0x804D95B0
 
 melee/ft/chara/ftDonkey/ftDk_Init.c:
 	.text       start:0x8010D740 end:0x8010DC80
