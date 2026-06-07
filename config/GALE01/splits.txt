@@ -1279,12 +1279,16 @@ melee/ft/chara/ftKirby/ftkirbyspecialness.c:
 	.sdata2     start:0x804D9478 end:0x804D9484
 
 melee/ft/chara/ftKirby/ftkirbyspecialdonkey.c:
-	.text       start:0x800FF8EC end:0x80105BA8
+	.text       start:0x800FF8EC end:0x80105B2C
 	.data       start:0x803CB720 end:0x803CB730
 
-melee/ft/chara/ftKirby/ftKb_SpecialNZd.c:
-	.text       start:0x80105BA8 end:0x80109290
-	.sdata2     start:0x804D94EC end:0x804D9554
+melee/ft/chara/ftKirby/ftkirbyspecialzelda.c:
+	.text       start:0x80105B2C end:0x80105FEC
+	.sdata2     start:0x804D94F0 end:0x804D94F8
+
+melee/ft/chara/ftKirby/ftkirbyspecialseak.c:
+	.text       start:0x80105FEC end:0x80109290
+	.sdata2     start:0x804D94F8 end:0x804D9554
 
 melee/ft/chara/ftKirby/ftKb_SpecialNYs.c:
 	.text       start:0x80109290 end:0x8010D740

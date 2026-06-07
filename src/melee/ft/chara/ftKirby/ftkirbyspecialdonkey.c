@@ -46,8 +46,6 @@
 /* 3CB710 */ float ftKb_Init_803CB710[] = { 0.65F, 0.7F, 0.8F, 1.0F };
 /* 3CB720 */ float ftKb_Init_803CB720[] = { 1.1F, 1.35F, 1.3F, 1.2F };
 /* 3CB758 */ extern ftCollisionBox ftKb_Init_803CB758;
-/* 4D94F0 */ extern f32 ftKb_Init_804D94F0;
-/* 4D94F4 */ extern f32 ftKb_Init_804D94F4;
 
 #define SIGNF(x) ((x) > 0.0f ? 1.0f : -1.0f)
 
@@ -2041,15 +2039,4 @@ static inline void ftKb_SpecialNZd_Helper(Fighter_GObj* gobj)
     fighter2->cmd_vars[0] = 0;
     fighter2->mv.zd.specialn.x0 =
         attributes->specialn_zd_frames_before_gravity;
-}
-
-void ftKb_SpecialNZd_80105B2C(Fighter_GObj* gobj)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    PAD_STACK(8);
-    Fighter_ChangeMotionState(gobj, ftKb_MS_ZdSpecialN, 0, ftKb_Init_804D94F0,
-                              ftKb_Init_804D94F4, ftKb_Init_804D94F0, NULL);
-    ftAnim_8006EBA4(gobj);
-    ftKb_SpecialNZd_Helper(gobj);
-    fp->accessory4_cb = fn_80105A34;
 }

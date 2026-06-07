@@ -38,7 +38,6 @@ void ftAnim_80070458(Fighter* fp, CostumeTObjList*, u32 tobj_idx, float frame);
 void fn_800F9260(HSD_GObj*);
 void ftCommon_8007D9A0(Fighter* fp);
 void fn_8010B1F4(Fighter_GObj*);
-void fn_801090D4(Fighter_GObj*);
 static void fn_801095DC(HSD_GObj*);
 static void fn_80109680(HSD_GObj*);
 static void fn_80109714(HSD_GObj*);
@@ -2939,10 +2938,6 @@ Vec3 ftKb_Init_803CB758[] = {
     { +4, +4, +4 },
 };
 
-float ftKb_Init_803CB770[] = {
-    -1, -0.75, -0.5, -0.25, 0, +0.25, +0.5, +0.75, +1,
-};
-
 /* static */ void ftKb_SpecialNSk_80106464(void);
 /* static */ void ftKb_SpecialNSk_80106474(void);
 
@@ -2986,8 +2981,6 @@ jtbl_t ftKb_Init_803CB7DC = {
 u32 ftKb_Init_803CB828[] = { 0x00030DB9, 0x00030DBC, 0x00030DBF, 0x00030DC2 };
 
 float const ftKb_Init_803B7548[10] = { 0 };
-Vec3 const ftKb_Init_803B7570 = { 0, 4, 0 };
-Vec3 const ftKb_Init_803B757C = { 0, 4, 0 };
 
 void ftKb_Init_800EE528(void)
 {
