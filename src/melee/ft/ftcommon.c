@@ -1380,7 +1380,7 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
         it_8026B9A8(src->item_gobj, dst_gobj, dst->ft_data->x8->x10);
     }
     un_80322314();
-    ftMaterial_800BFD04(gobj);
+    ftCo_800BFD04(gobj);
     arg1(dst_gobj);
 }
 

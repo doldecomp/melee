@@ -925,7 +925,7 @@ Fighter_GObj* Fighter_Create(struct plAllocInfo* input)
     } else if (fp->kind == FTKIND_CREZYH) {
         ftCh_Init_80155FCC(gobj);
     } else if (input->has_transformation) {
-        ftMaterial_800BFD04(gobj);
+        ftCo_800BFD04(gobj);
     } else if (Player_GetFlagsBit3(fp->player_id) != 0) {
         ftCo_800C61B0(gobj);
     } else {

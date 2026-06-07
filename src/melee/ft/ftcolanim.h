@@ -5,6 +5,8 @@
 
 #include "ft/forward.h"
 
+/* 0BFD04 */ void ftCo_800BFD04(Fighter_GObj* gobj);
+/* 0BFD9C */ void ftCo_800BFD9C(Fighter_GObj* gobj);
 /* 0BFE6C */ void ftCo_Sleep_Anim(Fighter_GObj* gobj);
 /* 0BFE70 */ void ftCo_Sleep_IASA(Fighter_GObj* gobj);
 /* 0BFFAC */ void ftCo_800BFFAC(Fighter* fp);

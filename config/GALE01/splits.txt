@@ -738,15 +738,15 @@ melee/ft/ft_0BF0.c:
 	.sdata2     start:0x804D8C18 end:0x804D8C20
 
 melee/ft/ftmaterial.c:
-	.text       start:0x800BF260 end:0x800BFE6C
+	.text       start:0x800BF260 end:0x800BFD04
 	.data       start:0x803C6980 end:0x803C6AD0
 	.sdata      start:0x804D3C00 end:0x804D3C10
-	.sdata2     start:0x804D8C20 end:0x804D8C28
 
 melee/ft/ftcolanim.c:
-	.text       start:0x800BFE6C end:0x800C0658
+	.text       start:0x800BFD04 end:0x800C0658
 	.data       start:0x803C6AD0 end:0x803C6B18
 	.sdata      start:0x804D3C10 end:0x804D3C18
+	.sdata2     start:0x804D8C20 end:0x804D8C28
 
 melee/ft/ftdevice.c:
 	.text       start:0x800C0658 end:0x800C0874
