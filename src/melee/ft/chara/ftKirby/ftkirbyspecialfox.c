@@ -1,40 +1,24 @@
 #include "ftKb_Init.h"
-#include "types.h"
-
-#include <placeholder.h>
-
-#include "baselib/debug.h"
-
-#include "baselib/forward.h"
 
 #include "ft/chara/ftCommon/ftCo_FallSpecial.h"
 #include "ft/chara/ftCommon/ftpickupitem.h"
 #include "ft/fighter.h"
-
-#include "ft/forward.h"
-
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ftcommon.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
-
-#include "ftKirby/forward.h"
-
 #include "it/items/itfoxblaster.h"
 #include "it/items/itfoxlaser.h"
 #include "it/items/itnesspkflash.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbrefract.h"
 
-#include <common_structs.h>
-#include <stddef.h>
-#include <baselib/gobj.h>
-#include <baselib/random.h>
 #include <MSL/math.h>
+
+extern char ftKb_Init_803CB6D8[];
+extern char ftKb_Init_803CB6F8[];
+extern SDATA char ftKb_Init_804D3DC8[];
 
 void ftKb_SpecialNFx_800FDC70(Fighter_GObj* gobj, Vec3* vec)
 {
@@ -323,8 +307,8 @@ void ftKb_SpecialNFx_800FE100(HSD_GObj* gobj)
         return;
     }
 
-    OSReport("ftToSpecialNFox::Caution!!!\n");
-    HSD_ASSERT(429, 0);
+    OSReport(ftKb_Init_803CB6D8);
+    __assert(ftKb_Init_803CB6F8, 429, ftKb_Init_804D3DC8);
 }
 
 inline FtMotionId ftKbGetAirStartMotionId(HSD_GObj* gobj)
@@ -379,8 +363,8 @@ void ftKb_SpecialNFx_800FE240(HSD_GObj* gobj)
         return;
     }
 
-    OSReport("ftToSpecialNFox::Caution!!!\n");
-    HSD_ASSERT(465, 0);
+    OSReport(ftKb_Init_803CB6D8);
+    __assert(ftKb_Init_803CB6F8, 465, ftKb_Init_804D3DC8);
 }
 
 inline FtMotionId ftKbGetLoopMotionId(HSD_GObj* gobj)
