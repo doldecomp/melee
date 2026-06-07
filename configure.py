@@ -748,7 +748,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftKirby/ftKb_SpecialNFx.c"),
             Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspecialfox.c"),
             Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspecialness.c"),
-            Object(NonMatching, "melee/ft/chara/ftKirby/ftkirbyspecialdonkey.c"),
+            Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspecialdonkey.c"),
             Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspecialpurin.c"),
             Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspecialzelda.c"),
             Object(NonMatching, "melee/ft/chara/ftKirby/ftkirbyspecialseak.c"),
