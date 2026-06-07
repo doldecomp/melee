@@ -681,7 +681,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemParasolFall.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemParasolFallSpecial.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemParasolDamageFall.c"),
-            Object(NonMatching, "melee/ft/ftchangeparam.c"),
+            Object(Matching, "melee/ft/ftchangeparam.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_KinokoGiantStart.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_KinokoGiantEnd.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_KinokoSmallStart.c"),
