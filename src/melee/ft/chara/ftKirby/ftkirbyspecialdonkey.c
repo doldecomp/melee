@@ -34,6 +34,13 @@
 #include <baselib/random.h>
 #include <MSL/math.h>
 
+/// @todo This is some kind of inline within #ftKb_DkSpecialN_Anim that's
+///       shared by #ftKb_DkSpecialAirN_Anim
+static double sdata2_order0(void)
+{
+    return S32_TO_F32;
+}
+
 void ftKb_SpecialNDk_800FF8EC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -109,8 +116,8 @@ void ftKb_SpecialNDk_800FFA10(Fighter_GObj* gobj)
 static inline void ftKb_DkSpecialNStart_Coll_inline(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->death2_cb = (void (*)(HSD_GObj*)) ftKb_Init_800EE74C;
-    fp->take_dmg_cb = (void (*)(HSD_GObj*)) ftKb_Init_800EE7B8;
+    fp->death2_cb = ftKb_Init_800EE74C;
+    fp->take_dmg_cb = ftKb_Init_800EE7B8;
     fp->pre_hitlag_cb = efLib_PauseAll;
     fp->post_hitlag_cb = efLib_ResumeAll;
 }

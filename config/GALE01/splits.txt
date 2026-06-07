@@ -1280,6 +1280,7 @@ melee/ft/chara/ftKirby/ftkirbyspecialness.c:
 
 melee/ft/chara/ftKirby/ftkirbyspecialdonkey.c:
 	.text       start:0x800FF8EC end:0x80100E0C
+	.sdata2     start:0x804D9488 end:0x804D9498
 
 melee/ft/chara/ftKirby/ftkirbyspecialpurin.c:
 	.text       start:0x80100E0C end:0x80105A34
