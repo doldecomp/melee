@@ -68,6 +68,15 @@ void fn_8010C344(HSD_GObj* arg0);
 void fn_8010CE5C(Fighter_GObj* gobj);
 void fn_8010CFB0(Fighter_GObj* gobj);
 
+void ftKb_SpecialNYs_80109260(Fighter_GObj* gobj, Vec3* vec)
+{
+    Fighter* ft = GET_FIGHTER(gobj);
+    ftKb_DatAttrs* da = ft->dat_attrs;
+    vec->x = -ft->facing_dir * da->specialn_ys_initial_horizontal_momentum;
+    vec->y = da->specialn_ys_initial_vertical_momentum;
+    vec->z = ftKb_Init_804D9558;
+}
+
 float ftKb_SpecialNYs_80109290(Fighter_GObj* gobj)
 {
     return GET_FIGHTER(gobj)->facing_dir;
