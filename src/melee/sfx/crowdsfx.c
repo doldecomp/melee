@@ -2,41 +2,18 @@
 
 #include "ft/ftlib.h"
 #include "lb/lbaudio_ax.h"
+
+#include "mp/forward.h"
+
+#include "mp/mplib.h"
 #include "pl/player.h"
 #include "pl/plbonuslib.h"
 
 #include <baselib/gobj.h>
 #include <baselib/gobjproc.h>
 
-extern char mpLib_80458868[];
-
-CrowdSFX_UnkStruct un_804A2F08;
-
-static CrowdSFX_UnkStruct* un_804D7050;
-
-void un_80321900(void)
-{
-    HSD_GObj* gobj = GObj_Create(0x16, 0x17, 0);
-    HSD_GObj_SetupProc(gobj, fn_803219AC, 0x13);
-    un_804D7050 = &un_804A2F08;
-    un_80321950(un_804D7050);
-}
-
-void un_80321950(CrowdSFX_UnkStruct* s)
-{
-    s->x0 = 0;
-    s->x4 = 0x10000;
-    s->x8 = 0.0f;
-    s->xC = 0;
-    s->x10 = gCrowdConfig->cheer_limit;
-    s->x14 = 0x83D60;
-    s->x18 = gCrowdConfig->max_gasp_count;
-    s->x1C = 0;
-    s->x20 = 0;
-    s->x24 = 0;
-    s->x2C = -1;
-    s->x28 = -1;
-}
+/* 4A2F08 */ CrowdSFX_UnkStruct un_804A2F08;
+/* 4D7050 */ CrowdSFX_UnkStruct* un_804D7050;
 
 void fn_803219AC(HSD_GObj* gobj)
 {
@@ -89,7 +66,7 @@ void un_80321A00(HSD_GObj* gobj)
 
 void un_80321AF4(HSD_GObj* gobj)
 {
-    char* mpLib = mpLib_80458868;
+    mpCollisionBox* box = mpLib_80458868;
     HSD_GObj* cur;
     CrowdSFX_UnkStruct* data = un_804D7050;
     s32 old_x24 = data->x24;
@@ -105,9 +82,7 @@ void un_80321AF4(HSD_GObj* gobj)
             if (ftLib_8008731C(cur) == 0) {
                 ftLib_80086644(cur, &pos);
 
-                if (pos.y <
-                    gCrowdConfig->blastzone_y_offset + *(f32*) (mpLib + 0x14))
-                {
+                if (pos.y < gCrowdConfig->blastzone_y_offset + box[1].bottom) {
                     data->x24 = data->x24 + 1;
                 } else {
                     if (data->xC == ftLib_80087460(cur)) {

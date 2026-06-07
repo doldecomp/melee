@@ -4390,11 +4390,15 @@ melee/vi/vi1202.c:
 MSL/ansi_files.c:
 	.data       start:0x80400430 end:0x80400508
 
+melee/sfx/sfx_unk.c:
+	.text       start:0x80321900 end:0x803219AC
+	.sdata2     start:0x804DE148 end:0x804DE14C
+
 melee/sfx/crowdsfx.c:
-	.text       start:0x80321900 end:0x80322620
+	.text       start:0x803219AC end:0x80322620
 	.bss        start:0x804A2F08 end:0x804A2F38
 	.sbss       start:0x804D7050 end:0x804D7054
-	.sdata2     start:0x804DE148 end:0x804DE160
+	.sdata2     start:0x804DE150 end:0x804DE160
 
 Runtime/__va_arg.c:
 	.text       start:0x80322620 end:0x80322714
