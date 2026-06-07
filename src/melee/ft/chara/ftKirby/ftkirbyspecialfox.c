@@ -765,29 +765,3 @@ void ftKb_SpecialNNs_800FECE8(HSD_GObj* gobj)
         }
     }
 }
-
-void ftKb_SpecialNNs_800FED38(HSD_GObj* gobj)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftKb_MS_NsSpecialNStart, Ft_MF_None,
-                              ftKb_Init_804D9478, ftKb_Init_804D9480,
-                              ftKb_Init_804D9478, NULL);
-    fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
-    {
-        /// @todo @c da can't move below @c fp
-        ftKb_DatAttrs* da;
-        Fighter* fp = GET_FIGHTER(gobj);
-        PAD_STACK(4 * 4);
-        da = fp->dat_attrs;
-        fp->mv.kb.specialn_ns.frames_to_loop_charge_ground =
-            da->specialn_ns_frames_to_loop_charge_ground;
-        fp->mv.kb.specialn_ns.frames_to_loop_charge_air =
-            da->specialn_ns_frames_to_loop_charge_air;
-        fp->mv.kb.specialn_ns.falling_acceleration_delay =
-            da->specialn_ns_falling_acceleration_delay;
-        fp->fv.kb.ns_flash_gobj = NULL;
-        fp->mv.kb.specialn_ns.charge_release_delay =
-            da->specialn_ns_charge_release_delay;
-        ftAnim_8006EBA4(gobj);
-    }
-}
