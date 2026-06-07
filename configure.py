@@ -484,9 +484,9 @@ config.libs = [
         [
             Object(Matching, "melee/pl/player.c"),
             Object(Matching, "melee/pl/plstale.c"),
-            Object(NonMatching, "melee/pl/plattack.c"),
+            Object(Matching, "melee/pl/plattack.c"),
             Object(NonMatching, "melee/pl/pltrick.c"),
-            Object(NonMatching, "melee/pl/plbonus.c"),
+            Object(Matching, "melee/pl/plbonus.c"),
             Object(Matching, "melee/pl/plbonuslib.c"),
             Object(Matching, "melee/pl/pl_040D.c"),
         ],
@@ -614,7 +614,6 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureKirby.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureWaitKirby.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_ThrownKirby.c"),
-            Object(NonMatching, "melee/ft/ft_3C61.c"),
             # Main again
             Object(Matching, "melee/ft/ftdemo.c"),
             Object(Matching, "melee/ft/ft_0BEC.c"),
@@ -681,7 +680,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemParasolFall.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemParasolFallSpecial.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemParasolDamageFall.c"),
-            Object(NonMatching, "melee/ft/ftchangeparam.c"),
+            Object(Matching, "melee/ft/ftchangeparam.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_KinokoGiantStart.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_KinokoGiantEnd.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_KinokoSmallStart.c"),
@@ -784,7 +783,6 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftPopo/ftPp_SpecialS.c"),
             Object(Matching, "melee/ft/chara/ftPopo/ftPp_SpecialHi.c"),
             Object(Matching, "melee/ft/chara/ftPopo/ftPp_SpecialLw.c"),
-            Object(NonMatching, "melee/ft/chara/ftPp_SpecialS.c"),
             # Nana
             Object(NonMatching, "melee/ft/chara/ftNana/ftNn_Init.c"),
             Object(Matching, "melee/ft/chara/ftNana/ftNn_Unk0.c"),
