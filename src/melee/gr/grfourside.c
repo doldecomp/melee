@@ -6,12 +6,12 @@
 #include <platform.h>
 
 #include "cm/camera.h"
+#include "cm/types.h"
 
 #include "forward.h"
 
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
-#include "gr/grlib.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
@@ -455,8 +455,7 @@ void grFourside_801F3894(Ground_GObj* arg0)
             if (gp->gv.foursideUfo.x8 != 0) {
                 prob = (s16) grFs_804D69D8->x46;
             }
-            if (gp->gv.foursideUfo.x2 >= (s16) grFs_804D69D8->ufo_challenge)
-            {
+            if (gp->gv.foursideUfo.x2 >= (s16) grFs_804D69D8->ufo_challenge) {
                 prob = (s16) grFs_804D69D8->x48;
             }
             if (prob != 0 && HSD_Randi(prob) == 0) {

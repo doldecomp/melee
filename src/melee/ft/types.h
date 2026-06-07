@@ -33,12 +33,9 @@
 #include "ftYoshi/types.h"
 #include "ftZakoBoy/types.h"
 #include "ftZelda/types.h"
-#include "gr/types.h"
 
 #include "it/forward.h"
 
-#include "lb/lbanim.h"
-#include "lb/lbcommand.h"
 #include "lb/types.h"
 
 #include <baselib/forward.h>
@@ -1853,11 +1850,11 @@ struct ftData_80085FD4_ret {
     /* +14 */ u32 x14;
 };
 
-typedef struct ArticleDynamicBones {
+struct ArticleDynamicBones {
     BoneDynamicsDesc array[Ft_Dynamics_NumMax];
-} ArticleDynamicBones;
+};
 
-typedef struct ftDynamics {
+struct ftDynamics {
     /// @todo Very similar to #ItemDynamics.
     struct {
         /*  +0 */ int dynamicsNum;
@@ -1866,13 +1863,13 @@ typedef struct ftDynamics {
     /*  +8 */ int x4;
     /*  +C */ struct ftData_x38* x8;
     /* +10 */ FigaTree*** x10;
-} ftDynamics;
+};
 
-typedef struct KirbyHatStruct {
+struct KirbyHatStruct {
     /*  +0 */ HSD_Joint* hat_joint;
     /*  +4 */ FtPartsDesc desc;
     /*  +C */ ftDynamics* hat_dynamics[5];
-} KirbyHatStruct;
+};
 
 typedef struct Kirby_Unk {
     /*  +0 */ HSD_Joint* x0;

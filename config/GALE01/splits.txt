@@ -1250,14 +1250,12 @@ melee/ft/chara/ftKirby/ftKb_Init.c:
 	.sdata2     start:0x804D9350 end:0x804D9364
 
 melee/ft/chara/ftKirby/ftKb_SpecialN.c:
-	.text       start:0x800F1FDC end:0x800FA064
+	.text       start:0x800F1FDC end:0x800F9FD4
 	.sdata2     start:0x804D9364 end:0x804D93E4
 
-melee/ft/chara/ftKirby/ftKb_SpecialNPk_Data.c:
-	.sdata2     start:0x804D93E4 end:0x804D93F0
-
-melee/ft/chara/ftKirby/ftKb_SpecialNPk.c:
-	.text       start:0x800FA064 end:0x800FA588
+melee/ft/chara/ftKirby/ftkirbyspecialpikachu.c:
+	.text       start:0x800F9FD4 end:0x800FA588
+	.sdata2     start:0x804D93E8 end:0x804D93F0
 
 melee/ft/chara/ftKirby/ftKb_SpecialNKp.c:
 	.text       start:0x800FA588 end:0x800FB394

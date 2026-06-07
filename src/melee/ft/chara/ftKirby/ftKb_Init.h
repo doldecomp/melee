@@ -4,15 +4,12 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "ft/forward.h"
-
 #include "ft/types.h"
 
 #include "ftCommon/forward.h"
-
-#include "ftCommon/ftCo_AttackDash.h"
-
+#include "ftFox/forward.h"
 #include "ftKirby/forward.h"
+#include "ftLink/forward.h"
 #include "it/forward.h"
 #include <baselib/forward.h>
 
@@ -398,16 +395,6 @@
 /* 0F9D40 */ void ftKb_CaSpecialAirN_Phys(Fighter_GObj* gobj);
 /* 0F9E8C */ void ftKb_CaSpecialN_Coll(Fighter_GObj* gobj);
 /* 0F9F34 */ void ftKb_CaSpecialAirN_Coll(Fighter_GObj* gobj);
-/* 0F9FD4 */ void ftKb_SpecialNPk_800F9FD4(Fighter_GObj* gobj);
-/* 0FA064 */ void ftKb_SpecialNPk_800FA064(Fighter_GObj* gobj);
-/* 0FA0F4 */ void ftKb_PkSpecialN_Anim(Fighter_GObj* gobj);
-/* 0FA254 */ void ftKb_PkSpecialAirN_Anim(Fighter_GObj* gobj);
-/* 0FA418 */ void ftKb_PkSpecialN_IASA(Fighter_GObj* gobj);
-/* 0FA41C */ void ftKb_PkSpecialAirN_IASA(Fighter_GObj* gobj);
-/* 0FA420 */ void ftKb_PkSpecialN_Phys(Fighter_GObj* gobj);
-/* 0FA440 */ void ftKb_PkSpecialAirN_Phys(Fighter_GObj* gobj);
-/* 0FA460 */ void ftKb_PkSpecialN_Coll(Fighter_GObj* gobj);
-/* 0FA4F0 */ void ftKb_PkSpecialAirN_Coll(Fighter_GObj* gobj);
 /* 0FA588 */ void ftKb_SpecialNKp_800FA588(Fighter_GObj* gobj);
 /* 0FA7D4 */ void ftKb_SpecialNKp_800FA7D4(Fighter_GObj* gobj);
 /* 0FA83C */ int ftKb_SpecialNKp_800FA83C(Fighter_GObj* gobj);
