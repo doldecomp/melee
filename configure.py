@@ -614,7 +614,6 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureKirby.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureWaitKirby.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_ThrownKirby.c"),
-            Object(NonMatching, "melee/ft/ft_3C61.c"),
             # Main again
             Object(Matching, "melee/ft/ftdemo.c"),
             Object(Matching, "melee/ft/ft_0BEC.c"),
@@ -784,7 +783,6 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftPopo/ftPp_SpecialS.c"),
             Object(Matching, "melee/ft/chara/ftPopo/ftPp_SpecialHi.c"),
             Object(Matching, "melee/ft/chara/ftPopo/ftPp_SpecialLw.c"),
-            Object(NonMatching, "melee/ft/chara/ftPp_SpecialS.c"),
             # Nana
             Object(NonMatching, "melee/ft/chara/ftNana/ftNn_Init.c"),
             Object(Matching, "melee/ft/chara/ftNana/ftNn_Unk0.c"),
