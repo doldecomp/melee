@@ -1435,7 +1435,7 @@ config.libs = [
             Object(Matching, "MSL/math_1.c"),
             Object(Matching, "MSL/float.c"),
             Object(Matching, "MSL/trigf.c"),
-            Object(NonMatching, "MSL/math.c"),
+            Object(Matching, "MSL/math.c"),
             Object(Matching, "MSL/math_data.c"),
         ],
     ),
