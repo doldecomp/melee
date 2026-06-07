@@ -21,6 +21,7 @@
 #include "ftCrazyHand/ftCh_CaptureWaitCrazyHand.h"
 #include "ftCrazyHand/ftCh_ThrownCrazyHand.h"
 #include "ftKirby/ftkirbycaptureyoshi.h"
+#include "ftKirby/ftkirbyyoshiegg.h"
 
 #include <melee/ft/chara/ftCommon/forward.h>
 
