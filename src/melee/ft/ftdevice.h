@@ -18,10 +18,10 @@
 /* 0C06E8 */ void ftCo_800C06E8(Ground_GObj*, int, void*);
 /* 0C0764 */ void ftCo_800C0764(Ground_GObj*, u32, void*);
 /* 0C07F8 */ void ftCo_800C07F8(Ground_GObj*, u32, void*);
-
 /* 459A68 */ extern struct ftDeviceUnk3 ft_80459A68[4];
 /* 459A74 */ extern struct ftDeviceUnk5 ftDevice_BuryThings[2];
 /* 459A8C */ extern struct ftDeviceUnk3 ft_80459A8C;
+/* 4D6570 */ extern int ft_804D6570;
 /* 4D6574 */ extern int ftDevice_BuryThingCount;
 /* 4D6578 */ extern struct ftDeviceUnk4 ft_804D6578;
 

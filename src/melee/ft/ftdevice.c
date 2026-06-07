@@ -7,18 +7,10 @@
 #include <dolphin/os/OSError.h>
 #include <baselib/debug.h>
 
-#pragma force_active on
-
-/* literal */ extern char ftDevice_803C6B18[];
-/* literal */ extern char ftDevice_803C6B40[];
-/* literal */ extern char ftDevice_803C6B4C[];
-/* literal */ extern char ftDevice_803C6B78[];
-/* literal */ extern char ftCo_804D3C18[];
-
 struct ftDeviceUnk3 ft_80459A68[4];
-static int ft_804D6570;
 struct ftDeviceUnk4 ft_804D6578;
 int ftDevice_BuryThingCount;
+int ft_804D6570;
 
 ColorOverlay* ftCo_800C0658(Fighter* fp)
 {
