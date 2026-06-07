@@ -149,57 +149,42 @@ u32 it_8026ECE0(Item_GObj* gobj, u32 arg1)
 
 static inline void it_8026EECC_inline_1(HSD_GObj* gobj, s32 arg1, Vec3* pos)
 {
-    Vec3* new_pos = NULL;
-    Item* ip = gobj->user_data;
+    Item* ip = GET_ITEM(gobj);
 
     ip->xDCF_flag.b4 = 1;
     ip->xDCF_flag.b5 = 0;
     it_8026EC54(gobj, it_8026EECC_VARS(ip)->x0, it_8026EECC_VARS(ip)->x4);
     it_8026EBC8(gobj, it_8026EECC_VARS(ip)->x8, it_8026EECC_VARS(ip)->xC);
-    if (ip->xDCF_flag.b7) {
-        new_pos = pos;
-    }
-    it_8026EB18(gobj, arg1, new_pos);
+    it_8026EB18(gobj, arg1, ip->xDCF_flag.b7 ? pos : NULL);
     it_8026EBC8(gobj, it_8026EECC_VARS(ip)->x0, it_8026EECC_VARS(ip)->x4);
     it_8026EC54(gobj, it_8026EECC_VARS(ip)->x8, it_8026EECC_VARS(ip)->xC);
 }
 
 static inline void it_8026EECC_inline_2(HSD_GObj* gobj, s32 arg1, Vec3* pos)
 {
-    Item* ip = gobj->user_data;
-    Vec3* new_pos = NULL;
+    Item* ip = GET_ITEM(gobj);
 
     ip->xDCF_flag.b4 = 0;
     ip->xDCF_flag.b5 = 0;
-    if (ip->xDCF_flag.b7) {
-        new_pos = pos;
-    }
-    it_8026EB18(gobj, arg1, new_pos);
+    it_8026EB18(gobj, arg1, ip->xDCF_flag.b7 ? pos : NULL);
 }
 
 static inline void it_8026EECC_inline_3(HSD_GObj* gobj, s32 arg1, Vec3* pos)
 {
-    Item* ip = gobj->user_data;
-    Vec3* new_pos = NULL;
+    Item* ip = GET_ITEM(gobj);
 
     ip->xDCF_flag.b4 = 1;
     ip->xDCF_flag.b5 = 1;
     it_8026EC54(gobj, it_8026EECC_VARS(ip)->x0, it_8026EECC_VARS(ip)->x4);
     it_8026EBC8(gobj, it_8026EECC_VARS(ip)->x8, it_8026EECC_VARS(ip)->xC);
-    if (ip->xDCF_flag.b7) {
-        new_pos = pos;
-    } else {
-        new_pos = NULL;
-    }
-
-    it_8026EB18(gobj, arg1, new_pos);
+    it_8026EB18(gobj, arg1, ip->xDCF_flag.b7 ? pos : NULL);
     it_8026EBC8(gobj, it_8026EECC_VARS(ip)->x0, it_8026EECC_VARS(ip)->x4);
     it_8026EC54(gobj, it_8026EECC_VARS(ip)->x8, it_8026EECC_VARS(ip)->xC);
 }
 
 static inline Item* it_8026EECC_inline_0(HSD_GObj* gobj, Vec3* pos)
 {
-    Item* ip = gobj->user_data;
+    Item* ip = GET_ITEM(gobj);
     ip->xDCF_flag.b7 = 0;
     if ((ip->owner != NULL) && ftLib_80086960(ip->owner)) {
         if (ftLib_80087074(ip->owner, pos)) {
@@ -208,14 +193,32 @@ static inline Item* it_8026EECC_inline_0(HSD_GObj* gobj, Vec3* pos)
     } else {
         pos->x = pos->y = pos->z = 0.0F;
     }
-    return gobj->user_data;
+    return GET_ITEM(gobj);
+}
+
+static inline void it_8026EECC_inline_sw(HSD_GObj* gobj, s32 arg1, Vec3* pos)
+{
+    Item* ip = gobj->user_data;
+    switch (Camera_80031060()) {
+    case 1:
+        if (ip->xDCF_flag.b3) {
+            it_8026EECC_inline_1(gobj, arg1, pos);
+            it_8026EECC_inline_2(gobj, arg1, pos);
+            it_8026EECC_inline_3(gobj, arg1, pos);
+        }
+        break;
+    case 0:
+        if (!ip->xDCF_flag.b3) {
+            it_8026EECC_inline_2(gobj, arg1, pos);
+        }
+        break;
+    }
 }
 
 void it_8026EECC(HSD_GObj* gobj, int arg1)
 {
-    Item* ip = gobj->user_data;
+    Item* ip = GET_ITEM(gobj);
     Vec3 pos;
-    PAD_STACK(48);
 
     if (ip->xDAA_flag.b7) {
         pos.x = pos.y = pos.z = 0.0F;
@@ -224,37 +227,10 @@ void it_8026EECC(HSD_GObj* gobj, int arg1)
                 ftLib_800868D4(ip->owner, gobj))
             {
                 ip = it_8026EECC_inline_0(gobj, &pos);
-                switch (Camera_80031060()) {
-                case 1:
-                    if (ip->xDCF_flag.b3) {
-                        it_8026EECC_inline_1(gobj, arg1, &pos);
-                        it_8026EECC_inline_2(gobj, arg1, &pos);
-                        it_8026EECC_inline_3(gobj, arg1, &pos);
-                    }
-                    break;
-                case 0:
-                    if (!ip->xDCF_flag.b3) {
-                        it_8026EECC_inline_2(gobj, arg1, &pos);
-                    }
-                    break;
-                }
+                it_8026EECC_inline_sw(gobj, arg1, &pos);
             }
         } else {
-            ip = gobj->user_data;
-            switch (Camera_80031060()) {
-            case 1:
-                if (ip->xDCF_flag.b3) {
-                    it_8026EECC_inline_1(gobj, arg1, &pos);
-                    it_8026EECC_inline_2(gobj, arg1, &pos);
-                    it_8026EECC_inline_3(gobj, arg1, &pos);
-                }
-                break;
-            case 0:
-                if (!ip->xDCF_flag.b3) {
-                    it_8026EECC_inline_2(gobj, arg1, &pos);
-                }
-                break;
-            }
+            it_8026EECC_inline_sw(gobj, arg1, &pos);
         }
     }
     if (it_8026ECE0((Item_GObj*) gobj, arg1) != 0U) {
