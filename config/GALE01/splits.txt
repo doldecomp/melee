@@ -751,7 +751,7 @@ melee/ft/ftcolanim.c:
 melee/ft/ftdevice.c:
 	.text       start:0x800C0658 end:0x800C0874
 	.data       start:0x803C6B18 end:0x803C6BA0
-	.bss        start:0x80459A68 end:0x8045A6C0
+	.bss        start:0x80459A68 end:0x80459A98
 	.sdata      start:0x804D3C18 end:0x804D3C20
 	.sbss       start:0x804D6570 end:0x804D6580
 
