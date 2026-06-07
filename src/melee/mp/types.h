@@ -138,4 +138,11 @@ struct MapCollData {
     /* +2C */ int x2C; /* inferred */
 };
 
+struct mpCollisionBox {
+    float top;
+    float bottom;
+    float left;
+    float right;
+};
+
 #endif

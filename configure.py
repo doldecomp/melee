@@ -1395,7 +1395,8 @@ config.libs = [
     MeleeLib(
         "sfx (Sound effects)",
         [
-            Object(NonMatching, "melee/sfx/crowdsfx.c"),
+            Object(Matching, "melee/sfx/sfx_unk.c"),
+            Object(Matching, "melee/sfx/crowdsfx.c"),
         ]
     ),
     RuntimeLib(

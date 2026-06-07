@@ -7,17 +7,18 @@
 #include "gr/forward.h"
 #include "lb/forward.h"
 
-typedef struct mpIsland_PaletteEntry mpIsland_PaletteEntry;
-typedef struct mpIsland_Palette mpIsland_Palette;
-typedef struct mp_UnkStruct0 mp_UnkStruct0;
-typedef struct MapLine MapLine;
-typedef struct CollLine CollLine;
-typedef struct mp_UnkStruct3 mp_UnkStruct3;
-typedef struct mpisland mpisland;
-typedef struct CollVtx CollVtx;
-typedef struct MapJoint MapJoint;
 typedef struct CollJoint CollJoint;
+typedef struct CollLine CollLine;
+typedef struct CollVtx CollVtx;
 typedef struct MapCollData MapCollData;
+typedef struct MapJoint MapJoint;
+typedef struct MapLine MapLine;
+typedef struct mp_UnkStruct0 mp_UnkStruct0;
+typedef struct mp_UnkStruct3 mp_UnkStruct3;
+typedef struct mpCollisionBox mpCollisionBox;
+typedef struct mpisland mpisland;
+typedef struct mpIsland_Palette mpIsland_Palette;
+typedef struct mpIsland_PaletteEntry mpIsland_PaletteEntry;
 
 typedef enum mp_Terrain {
     mp_Terrain_Basic,

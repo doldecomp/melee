@@ -9,7 +9,9 @@
 #include "ft/forward.h"
 #include "gr/forward.h"
 #include "lb/forward.h"
-#include "mp/forward.h"
+
+#include "mp/types.h"
+
 #include <baselib/forward.h>
 
 #include <common_structs.h>
@@ -201,5 +203,6 @@
 /* 05A220 */ void mpLib_DrawSpecialPoints(void);
 /* 05A2DC */ void mpLib_8005A2DC(void);
 /* 05A340 */ void mpLib_DrawZones(void);
+/* 458868 */ extern mpCollisionBox mpLib_80458868[2];
 
 #endif

@@ -69,6 +69,9 @@ struct mpLib_803BF248_t {
     InternalStageId id;
     struct mpLib_803BF248_t_x4* (*x4)[20];
 };
+
+/* 458868 */ mpCollisionBox mpLib_80458868[2];
+
 struct mpLib_803BF248_t_x4 mpLib_803BD3D8 = {
     1.0F,         { -1, -1, -1, -1 }, { 0, -1, 0 }, { -1, -1, -1, -1 },
     { 0, -1, 0 }, { -1, -1, -1, -1 }, { 0, -1, 0 },
@@ -786,8 +789,6 @@ static struct mpLib_803BF248_t mpLib_803BF248[0x47] = {
     { FIGURE3, &mpLib_803BF1F8 },
 };
 /// clang-format on
-
-
 
 extern Vec2 mpLib_803BF718[2];
 extern MapLine mpLib_803BF728;
@@ -4790,7 +4791,6 @@ MapCollData mpLib_803BF760 = {
     /* +28 */ 0x00000001,
     /* +2C */ 0x00000000,
 };
-
 
 float mpLib_800569EC(u32 unk)
 {
