@@ -23,6 +23,8 @@
 #include <baselib/tev.h>
 #include <baselib/tobj.h>
 
+HSD_MObjInfo ftMObj = { ftMaterial_800BF260 };
+
 #pragma force_active on
 
 void ftMaterial_800BF260(void)
