@@ -2,6 +2,7 @@
 
 #include "ftKb_Init.static.h"
 
+#include "ftkirbyspecialdonkey.h"
 #include "ftkirbyspecialpikachu.h"
 
 #include "ef/efasync.h"
@@ -2930,9 +2931,6 @@ u32 ftKb_Init_803CB6C0[] = { 260006, 260009, 260012, 260015, 260018, 0 };
 
 char ftKb_Init_803CB6D8[] = "ftToSpecialNFox::Caution!!!\n";
 char ftKb_Init_803CB6F8[] = "ftkirbyspecialfox.c\0\0\0\0";
-
-Vec4 ftKb_Init_803CB710 = { 0.65F, 0.7F, 0.8F, 1.0F };
-Vec4 ftKb_Init_803CB720 = { 1.1F, 1.35F, 1.3F, 1.2F };
 
 char ftKb_Init_assert_msg_3[] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
 

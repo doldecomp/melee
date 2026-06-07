@@ -1,4 +1,4 @@
-#include "ftKb_Init.h"
+#include "ftkirbyspecialdonkey.h"
 #include "types.h"
 
 #include <placeholder.h>
@@ -27,6 +27,7 @@
 
 #include "ftKirby/forward.h"
 
+#include "ftKirby/ftKb_Init.h"
 #include "it/items/itgamewatchchef.h"
 #include "it/items/itkirbygamewatchchefpan.h"
 #include "it/items/itkirbyyoshispecialn.h"
