@@ -1,4 +1,5 @@
 #include "ftkirbyspecialdonkey.h"
+#include "ftkirbyyoshiegg.h"
 #include "types.h"
 
 #include <placeholder.h>
@@ -38,7 +39,6 @@
 /* 10AA64 */ static void fn_8010AA64(HSD_GObj* gobj);
 /* 10C288 */ static void fn_8010C288(HSD_GObj* gobj);
 /* 10C344 */ void fn_8010C344(HSD_GObj* arg0);
-/* 10CFB0 */ void fn_8010CFB0(Fighter_GObj* gobj);
 
 void ftKb_SpecialNYs_80109260(Fighter_GObj* gobj, Vec3* vec)
 {

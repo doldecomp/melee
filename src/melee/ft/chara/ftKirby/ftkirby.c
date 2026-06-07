@@ -2,11 +2,11 @@
 
 #include "ftKb_Init.static.h"
 
-#include "ftkirbycaptureyoshi.h"
 #include "ftkirbyspecialdonkey.h"
 #include "ftkirbyspecialiceclimber.h"
 #include "ftkirbyspecialpikachu.h"
 #include "ftkirbyspecialzelda.h"
+#include "ftkirbyyoshiegg.h"
 
 #include "ef/efasync.h"
 #include "ft/chara/ftKirby/ftkirbyspecialmewtwo.h"

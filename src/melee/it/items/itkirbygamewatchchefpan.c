@@ -1,6 +1,6 @@
 #include "itkirbygamewatchchefpan.h"
 
-#include "ftKirby/ftkirbycaptureyoshi.h"
+#include "ftKirby/ftkirbyyoshiegg.h"
 #include "it/itzako.h"
 
 #include <melee/db/db.h>
