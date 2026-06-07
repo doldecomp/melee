@@ -4,6 +4,7 @@
 
 #include "ftkirbyspecialdonkey.h"
 #include "ftkirbyspecialpikachu.h"
+#include "ftkirbyspecialzelda.h"
 
 #include "ef/efasync.h"
 #include "ft/fighter.h"
@@ -19,6 +20,7 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Attack100.h"
+#include "ftKirby/ftkirbyspecialpurin.h"
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbarchive.h"
@@ -2932,11 +2934,6 @@ char ftKb_Init_803CB6D8[] = "ftToSpecialNFox::Caution!!!\n";
 char ftKb_Init_803CB6F8[] = "ftkirbyspecialfox.c\0\0\0\0";
 
 char ftKb_Init_assert_msg_3[] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
-
-Vec3 ftKb_Init_803CB758[] = {
-    { +8, +0, -4 },
-    { +4, +4, +4 },
-};
 
 /* static */ void ftKb_SpecialNSk_80106464(void);
 /* static */ void ftKb_SpecialNSk_80106474(void);
