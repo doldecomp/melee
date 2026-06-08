@@ -983,10 +983,10 @@ void hsd_803B46D4(void)
     u8* temp_r4_8;
     u8* temp_r4_9;
 
-    jmp_buf = &hsd_804D2648;
-    temp_r4 = hsd_804D79A0;
     sp8 = *(s32*) lbl_804DEB88;
     spC = lbl_804DEB88[4];
+    jmp_buf = &hsd_804D2648;
+    temp_r4 = hsd_804D79A0;
     if (temp_r4 < &hsd_804D79A4[hsd_804D79A8]) {
         hsd_804D79A0 = temp_r4 + 1;
         *temp_r4 = 0xFF;

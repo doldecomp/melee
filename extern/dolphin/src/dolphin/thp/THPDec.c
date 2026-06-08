@@ -1925,42 +1925,53 @@ static void __THPDecompressiMCURowNxN(void)
     u32 x_pos, x;
     THPComponent* comp;
     THPFileInfo* info = __THPInfo;
-    THPCoeff** mcuBuffer = (THPCoeff**) ((u8*) info + 0x10);
 
-    x = __THPInfo->xPixelSize;
+    x = info->xPixelSize;
 
     LCQueueWait(3);
 
     for (cl_num = 0; cl_num < ((THPMCURowFields*) info)->MCUsPerRow;
          cl_num++) {
-        __THPHuffDecodeDCTCompY(info, mcuBuffer[0]);
-        __THPHuffDecodeDCTCompY(info, mcuBuffer[1]);
-        __THPHuffDecodeDCTCompY(info, mcuBuffer[2]);
-        __THPHuffDecodeDCTCompY(info, mcuBuffer[3]);
-        __THPHuffDecodeDCTCompU(info, mcuBuffer[4]);
-        __THPHuffDecodeDCTCompV(info, mcuBuffer[5]);
+        __THPHuffDecodeDCTCompY(
+            info, ((THPFileInfoMCUBufferView*) info)->mcuBuffer[0]);
+        __THPHuffDecodeDCTCompY(
+            info, ((THPFileInfoMCUBufferView*) info)->mcuBuffer[1]);
+        __THPHuffDecodeDCTCompY(
+            info, ((THPFileInfoMCUBufferView*) info)->mcuBuffer[2]);
+        __THPHuffDecodeDCTCompY(
+            info, ((THPFileInfoMCUBufferView*) info)->mcuBuffer[3]);
+        __THPHuffDecodeDCTCompU(
+            info, ((THPFileInfoMCUBufferView*) info)->mcuBuffer[4]);
+        __THPHuffDecodeDCTCompV(
+            info, ((THPFileInfoMCUBufferView*) info)->mcuBuffer[5]);
 
-        comp = &__THPInfo->components[0];
+        comp = &info->components[0];
         Gbase = __THPLCWork672[0];
         Gwid = x;
-        Gq = __THPInfo->quantTabs[comp->quantizationTableSelector];
+        Gq = info->quantTabs[comp->quantizationTableSelector];
         x_pos = (u32) (cl_num * 16);
-        __THPInverseDCTNoYPos(mcuBuffer[0], x_pos);
-        __THPInverseDCTNoYPos(mcuBuffer[1], x_pos + 8);
-        __THPInverseDCTY8(mcuBuffer[2], x_pos);
-        __THPInverseDCTY8(mcuBuffer[3], x_pos + 8);
+        __THPInverseDCTNoYPos(
+            ((THPFileInfoMCUBufferView*) info)->mcuBuffer[0], x_pos);
+        __THPInverseDCTNoYPos(
+            ((THPFileInfoMCUBufferView*) info)->mcuBuffer[1], x_pos + 8);
+        __THPInverseDCTY8(
+            ((THPFileInfoMCUBufferView*) info)->mcuBuffer[2], x_pos);
+        __THPInverseDCTY8(
+            ((THPFileInfoMCUBufferView*) info)->mcuBuffer[3], x_pos + 8);
 
-        comp = &__THPInfo->components[1];
+        comp = &info->components[1];
         Gbase = __THPLCWork672[1];
         Gwid = x / 2;
-        Gq = __THPInfo->quantTabs[comp->quantizationTableSelector];
+        Gq = info->quantTabs[comp->quantizationTableSelector];
         x_pos /= 2;
-        __THPInverseDCTNoYPos(mcuBuffer[4], x_pos);
+        __THPInverseDCTNoYPos(
+            ((THPFileInfoMCUBufferView*) info)->mcuBuffer[4], x_pos);
 
-        comp = &__THPInfo->components[2];
+        comp = &info->components[2];
         Gbase = __THPLCWork672[2];
-        Gq = __THPInfo->quantTabs[comp->quantizationTableSelector];
-        __THPInverseDCTNoYPos(mcuBuffer[5], x_pos);
+        Gq = info->quantTabs[comp->quantizationTableSelector];
+        __THPInverseDCTNoYPos(
+            ((THPFileInfoMCUBufferView*) info)->mcuBuffer[5], x_pos);
 
         if (((THPRestartFields*) info)->RST != 0) {
             ((THPRestartFields*) info)->currMCU--;
