@@ -4,9 +4,10 @@
 
 #include "ftkirbyspecialdonkey.h"
 #include "ftkirbyspecialiceclimber.h"
+#include "ftkirbyspecialmars.h"
+#include "ftkirbyspecialpeach.h"
 #include "ftkirbyspecialpikachu.h"
 #include "ftkirbyspecialzelda.h"
-#include "ftkirbyyoshiegg.h"
 
 #include "ef/efasync.h"
 #include "ft/chara/ftKirby/ftkirbyspecialmewtwo.h"
@@ -23,6 +24,7 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Attack100.h"
+#include "ftKirby/ftkirbyspecialgamewatch.h"
 #include "ftKirby/ftkirbyspecialpurin.h"
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
