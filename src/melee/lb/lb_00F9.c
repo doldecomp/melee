@@ -1189,20 +1189,19 @@ void lb_80011C18(HSD_JObj* jobj, u32 flags)
 int lb_80011E24(HSD_JObj* root, HSD_JObj** result, ...)
 {
     va_list ap;
-    HSD_JObj** out;
+    int found;
+    int prev;
     HSD_JObj* jobj;
     HSD_JObj* saved;
     HSD_JObj* next_node;
-    int found;
-    int prev;
     int cur;
     s32 target;
+    PAD_STACK(4);
 
-    out = result;
     found = 0;
     prev = -1;
 
-    if (root == NULL || out == NULL) {
+    if (root == NULL || result == NULL) {
         return 0;
     }
 
@@ -1247,9 +1246,9 @@ int lb_80011E24(HSD_JObj* root, HSD_JObj** result, ...)
             cur++;
         }
 
-        *out = jobj;
+        *result = jobj;
         prev = cur;
-        out++;
+        result++;
         if (jobj != NULL) {
             found++;
         }
@@ -1522,7 +1521,7 @@ void lb_80012994(HSD_ImageDesc* img, u8 alpha, u8 blur_size, f32 x, f32 y,
     u16 h = img->height;
     f32 x_p1, x_m1, y_p1, y_m1;
     f32 x_p2, x_m2, y_p2, y_m2;
-    f32 off1 = (f32) blur_size * 0.015625f;
+    f32 off1 = (f32) blur_size / 64.0f;
     f32 off2 = 2.0f * off1;
 
     lb_800122F0(img, &tex, color_factor);

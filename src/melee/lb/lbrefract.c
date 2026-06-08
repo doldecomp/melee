@@ -112,13 +112,13 @@ void lbRefract_80021CE8(void* arg0, s32 arg1)
 {
     lbRefract_CallbackData* cb = arg0;
     u32 param_idx;
+    u32 y_tex;
     u32 col, row;
     f32 x_step, y_step;
     f32 y, x, y_sq;
     f32 dist_sq;
     f32 dist;
     f32 param0;
-    u32 y_tex;
     f32* params;
     volatile f32 sp18;
 
@@ -133,8 +133,7 @@ void lbRefract_80021CE8(void* arg0, s32 arg1)
         y_sq = y * y;
         x = -1.0f;
         for (row = 0; row < (u32) cb->width; row++) {
-            dist_sq = x * x + y_sq;
-            if (dist_sq > 0.0f) {
+            if ((dist_sq = x * x + y_sq) > 0.0f) {
                 f64 est = __frsqrte((f64) dist_sq);
                 est = 0.5 * est * -(((f64) dist_sq * (est * est)) - 3.0);
                 est = 0.5 * est * -(((f64) dist_sq * (est * est)) - 3.0);
@@ -151,10 +150,15 @@ void lbRefract_80021CE8(void* arg0, s32 arg1)
             param0 = params[param_idx];
             if (param0 != 0.0f) {
                 f32 rem;
-                if (__fabsf(param0) > __fabsf(dist)) {
-                    rem = dist;
-                } else {
-                    rem = -(param0 * (f32) (s64) (u64) (dist / param0) - dist);
+                {
+                    f32 abs_dist = __fabsf(dist);
+                    f32 abs_param0 = __fabsf(param0);
+                    if (abs_param0 > abs_dist) {
+                        rem = dist;
+                    } else {
+                        rem = -(param0 * (f32) (s64) (u64) (dist / param0) -
+                                dist);
+                    }
                 }
                 param0 = dist * rem;
             } else {

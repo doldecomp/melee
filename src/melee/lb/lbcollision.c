@@ -1482,12 +1482,12 @@ void lbColl_800077A0(Vec3* a, MtxPtr arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
 
         offset_dist = dist + dist_offset;
 
-        dot_diff_cb = diff_cb.x * diff_cb.x + diff_cb.y * diff_cb.y +
-                      diff_cb.z * diff_cb.z;
-
         diff_ba.x = b->x - a->x;
         diff_ba.y = b->y - a->y;
         diff_ba.z = b->z - a->z;
+
+        dot_diff_cb = diff_cb.x * diff_cb.x + diff_cb.y * diff_cb.y +
+                      diff_cb.z * diff_cb.z;
 
         if (nearzero(dot_diff_cb)) {
             scl = 0.0f;
