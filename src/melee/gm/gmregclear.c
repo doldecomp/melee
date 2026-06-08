@@ -1902,8 +1902,8 @@ s32 fn_8017F2A4(HSD_Text** arg0, f32 farg0, f32 farg1)
     u8* data;
     f32 y;
     f32 x_end;
-    s32 temp;
     s32 i;
+    s32 temp;
 
     temp = HSD_SisLib_803A611C(3, NULL, 9U, 0xDU, 0U, 0x14U, 0U, 0x13U);
     if (lbLang_IsSavedLanguageUS()) {

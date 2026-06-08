@@ -4667,9 +4667,10 @@ bool Camera_80030CFC(CmSubject* cam_box, f32 tolerance)
     Vec3 eye_pos;
     Vec3 interest;
     Vec3 sp38;
+    u8 _PAD[12];
     Vec3 sp20;
     f32 range;
-    PAD_STACK(14);
+    PAD_STACK(2);
 
     cobj = GET_COBJ(cm_80452C68.gobj);
     HSD_CObjGetEyePosition(cobj, &eye_pos);

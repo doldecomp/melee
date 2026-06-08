@@ -367,7 +367,6 @@ void mnItemSw_80234104(HSD_GObj* gobj)
 
 void mnItemSw_8023453C(HSD_GObj* gobj, u8 arg1, u8 arg2)
 {
-    s32 sp40;
     HSD_JObj* sp44;
     HSD_JObj* sp3C;
     f32 anim_val;
@@ -375,8 +374,10 @@ void mnItemSw_8023453C(HSD_GObj* gobj, u8 arg1, u8 arg2)
     HSD_JObj* cjobj;
     MnItemSwData* data = gobj->user_data;
     struct MnItemSwTable* tbl = &mnItemSw_803ED340;
+    u8 arg1_ = arg1;
+    u8 arg2_ = arg2;
 
-    if (arg1 != 0) {
+    if (arg1_ != 0) {
         u8 old_cursor = data->cursor;
 
         if (old_cursor == 0x1F || old_cursor == 0x20) {
@@ -457,7 +458,7 @@ void mnItemSw_8023453C(HSD_GObj* gobj, u8 arg1, u8 arg2)
         }
     }
 
-    if (arg2 != 0) {
+    if (arg2_ != 0) {
         if (mn_804A04F0.hovered_selection == 0x1F ||
             mn_804A04F0.hovered_selection == 0x20)
         {

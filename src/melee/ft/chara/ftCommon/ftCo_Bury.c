@@ -54,6 +54,13 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
+#pragma force_active on
+const double ftCo_804D8C28 = 4503599627370496.0;
+const double ftCo_804D8C30 = 4503601774854144.0;
+const float ftCo_804D8C38 = 0.0F;
+const float ftCo_804D8C3C = 1.0F;
+#pragma force_active reset
+
 void ftCo_800C0874(Fighter_GObj* gobj, UNK_T arg1, ftCommon_BuryType arg2)
 {
     switch (arg2) {
@@ -221,7 +228,6 @@ bool ftCo_800C0CB8(Fighter_GObj* gobj)
 
 void ftCo_800C0D0C(Fighter_GObj* gobj)
 {
-    u8 _[8] = { 0 };
     Vec3 joint_pos;
     Vec3 hip_pos;
     Fighter* fp = GET_FIGHTER(gobj);

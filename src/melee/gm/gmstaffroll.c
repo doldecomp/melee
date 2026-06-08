@@ -952,8 +952,8 @@ void fn_801AC67C(HSD_GObj* gobj)
 void gm_801AC6D8_OnEnter(void* unused)
 {
     HSD_JObj* jobj_arr[2];
-    HSD_GObj* gobj;
     HSD_CObj* cobj;
+    HSD_GObj* gobj;
     int i;
     int const gx_link = 11;
     PAD_STACK(0x10);
