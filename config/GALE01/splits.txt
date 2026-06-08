@@ -4258,18 +4258,21 @@ melee/if/ifhazard.c:
 
 melee/if/if_2FC93.c:
 	.text       start:0x802FD910 end:0x802FE3F8
-	.rodata     start:0x803B8780 end:0x803B8810
+	.rodata     start:0x803B8780 end:0x803B8790
 	.data       start:0x803F99C8 end:0x803F9A00
-	.bss        start:0x804A1F10 end:0x804A1F58
+	.bss        start:0x804A1F10 end:0x804A1F48
 	.sdata      start:0x804D5820 end:0x804D5830
 	.sbss       start:0x804D6D90 end:0x804D6D98
-	.sdata2     start:0x804DDBA8 end:0x804DDCC8
+	.sdata2     start:0x804DDBA8 end:0x804DDBD0
 
 melee/if/ifprize.c:
 	.text       start:0x802FE3F8 end:0x802FED14
+	.rodata     start:0x803B8790 end:0x803B8810
 	.data       start:0x803F9A00 end:0x803F9E08
+	.bss        start:0x804A1F48 end:0x804A1F58
 	.sdata      start:0x804D5830 end:0x804D5838
 	.sbss       start:0x804D6D98 end:0x804D6DA0
+	.sdata2     start:0x804DDBD0 end:0x804DDCC8
 
 melee/if/ifcoget.c:
 	.text       start:0x802FED14 end:0x802FF7DC
