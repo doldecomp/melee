@@ -1252,9 +1252,13 @@ melee/ft/chara/ftKirby/ftkirbyattackdash.c:
 	.text       start:0x800F1F68 end:0x800F21E8
 	.sdata2     start:0x804D9368 end:0x804D9370
 
+melee/ft/chara/ftKirby/ftkirbyspecialhi.c:
+	.text       start:0x800F21E8 end:0x800F331C
+	.sdata2     start:0x804D9370 end:0x804D9388
+
 melee/ft/chara/ftKirby/ftkirbyspecialn.c:
-	.text       start:0x800F21E8 end:0x800F9FD4
-	.sdata2     start:0x804D9370 end:0x804D93E4
+	.text       start:0x800F331C end:0x800F9FD4
+	.sdata2     start:0x804D9388 end:0x804D93E4
 
 melee/ft/chara/ftKirby/ftkirbyspecialpikachu.c:
 	.text       start:0x800F9FD4 end:0x800FA588
