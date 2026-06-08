@@ -96,7 +96,18 @@ static struct {
 typedef struct gm_1832_8047368C_t {
     /* 0x00 */ s32 model_scale_kind;
     /* 0x04 */ s32 game_type;
-    /* 0x08 */ u8 pad_8[0x1C];
+    /* 0x08 */ u8 xEC;
+    /* 0x09 */ u8 xED;
+    /* 0x0A */ u8 xEE;
+    /* 0x0B */ u8 xEF;
+    /* 0x0C */ u8 xF0;
+    /* 0x0D */ u8 xF1[3];
+    /* 0x10 */ u8 xF4[3];
+    /* 0x13 */ u8 xF7[3];
+    /* 0x16 */ u8 xFA[3];
+    /* 0x19 */ u8 xFD[3];
+    /* 0x1C */ u8 x100[3];
+    /* 0x1F */ u8 pad_1F[5];
 } gm_1832_8047368C_t;
 STATIC_ASSERT(sizeof(gm_1832_8047368C_t) == 0x24);
 
@@ -181,6 +192,7 @@ extern ClassicStageEntry lbl_803D9910[65];
 void fn_8018325C(HSD_GObj* arg0, int arg1)
 {
     Vec3 pos;
+    Vec3 scale;
     HSD_JObj* jobj = arg0->hsd_obj;
     HSD_JObj* src = lbl_804735A8.x4[0];
     int i;
@@ -255,8 +267,8 @@ void fn_8018325C(HSD_GObj* arg0, int arg1)
                 HSD_JObj* jobj2 = entity2->hsd_obj;
                 HSD_JObjGetTranslation(jobj, &pos);
                 HSD_JObjSetTranslate(jobj2, &pos);
-                HSD_JObjGetScale(jobj, &pos);
-                HSD_JObjSetScale(jobj2, &pos);
+                HSD_JObjGetScale(jobj, &scale);
+                HSD_JObjSetScale(jobj2, &scale);
             }
         }
     }
@@ -906,17 +918,17 @@ s32 fn_80185E34(void)
     int player_slot = 0;
     local = lbl_803B7C28;
 
-    for (i = 0; i < lbl_804735E8.xEF; i++) {
-        if (lbl_804735E8.xF1[i] != 0x21) {
+    for (i = 0; i < lbl_8047368C.xEF; i++) {
+        if (lbl_8047368C.xF1[i] != 0x21) {
             Player_80036CF0(player_slot);
             Player_SetPlayerCharacter(player_slot,
-                                      (CharacterKind) lbl_804735E8.xF1[i]);
-            Player_SetCostumeId(player_slot, (s32) lbl_804735E8.xF7[i]);
+                                      (CharacterKind) lbl_8047368C.xF1[i]);
+            Player_SetCostumeId(player_slot, (s32) lbl_8047368C.xF7[i]);
             Player_SetPlayerId(player_slot, 0);
             Player_SetSlottype(player_slot, Gm_PKind_Demo);
             Player_SetFacingDirection(player_slot, 0.0f);
             Player_SetModelScale(player_slot, 1.0f);
-            Player_SetFlagsBit5(player_slot, lbl_804735E8.xFD[i]);
+            Player_SetFlagsBit5(player_slot, lbl_8047368C.xFD[i]);
             Player_80036F34(player_slot, 5);
             HSD_GObj_SetupProc(Player_GetEntity(player_slot),
                                (HSD_GObjEvent) local.v[i], 0x16);

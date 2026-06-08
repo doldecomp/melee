@@ -2179,7 +2179,6 @@ bool fn_801642A0(void)
 bool gm_80164330(s32 arg0)
 {
     s32 total_stages_on;
-    struct gmm_x1CB0* temp_ret;
     s32 i;
     u8 var_r0;
 
@@ -2193,8 +2192,7 @@ bool gm_80164330(s32 arg0)
     total_stages_on = 0;
     i = 0;
     for (i = 0; i < 0x1D; i++) {
-        temp_ret = gmMainLib_8015CC58();
-        if (temp_ret->stage_mask & (1 << (u16) i)) {
+        if ((1 << (u16) i) & gmMainLib_8015CC58()->stage_mask) {
             var_r0 = 1;
         } else {
             var_r0 = 0;
@@ -2206,10 +2204,7 @@ bool gm_80164330(s32 arg0)
     if (total_stages_on == 0) {
         OSReport("RandomStageSwitch All-Off!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
     }
-    if ((1 << (u16) arg0) & gmMainLib_8015CC58()->stage_mask) {
-        return true;
-    }
-    return false;
+    return ((1 << (u16) arg0) & gmMainLib_8015CC58()->stage_mask) ? true : false;
 }
 
 bool gm_80164430(u16 arg0)
@@ -2353,15 +2348,8 @@ void gm_80164910(int arg0)
     char_unlock_mask = gmMainLib_8015ED8C();
     internal_id = lbl_803B78A4[(u8) arg0];
 
-    for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
-        if ((s32) internal_id == (s32) lbl_803B78C8[i].ckind) {
-            unlock_idx = lbl_803B78C8[i].idx;
-            goto found_char;
-        }
-    }
-    unlock_idx = NUM_UNLOCKABLE_CHARACTERS;
+    unlock_idx = fn_801605EC(internal_id);
 
-found_char:
     if (unlock_idx != NUM_UNLOCKABLE_CHARACTERS) {
         for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
             if ((s32) unlock_idx == (s32) lbl_803B78C8[i].idx) {
