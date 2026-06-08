@@ -484,10 +484,9 @@ bool itKyasarin_UnkMotion10_Coll(Item_GObj* gobj)
     return it_8027C79C(gobj);
 }
 
-static inline void itKyasarin_FlipAndFall(Item_GObj* gobj)
+static inline void itKyasarin_FlipAndFall(Item_GObj* gobj, HSD_JObj* jobj,
+                                          Item* ip)
 {
-    Item* ip = GET_ITEM(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
     CollData* coll = &ip->x378_itemColl;
     Vec3 pos;
 
@@ -529,11 +528,11 @@ bool it_802EDDC0(Item_GObj* gobj)
         }
         ip->xDCC_flag.b3 = 1;
         if (HSD_Randf() < it_804D6D40->x8) {
-            itKyasarin_FlipAndFall(gobj);
+            itKyasarin_FlipAndFall(gobj, GET_JOBJ(gobj), GET_ITEM(gobj));
             it_8027BA54(gobj, &ip->x40_vel);
             Item_80268E5C(gobj, 9, ITEM_ANIM_UPDATE);
         } else {
-            itKyasarin_FlipAndFall(gobj);
+            itKyasarin_FlipAndFall(gobj, GET_JOBJ(gobj), GET_ITEM(gobj));
             it_8027B964(gobj, 0);
             ip->xDD4_itemVar.kyasarin.x18 = 0;
             Item_80268E5C(gobj, 0xA, ITEM_ANIM_UPDATE);
