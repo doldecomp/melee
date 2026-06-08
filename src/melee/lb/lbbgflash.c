@@ -626,8 +626,7 @@ void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
         }
 
         if (!(jobj->flags & JOBJ_USE_QUATERNION)) {
-            f32 z = angle + HSD_JObjGetRotationZ(jobj);
-            HSD_JObjSetRotationZ(jobj, z);
+            HSD_JObjSetRotationZ(jobj, angle + HSD_JObjGetRotationZ(jobj));
         } else {
             Mtx quatMtx;
             Mtx rotMtx;

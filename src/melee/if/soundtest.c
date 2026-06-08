@@ -91,7 +91,7 @@
     u8 _pad13C[0x8];
     u8 x144[0x44];
     s32 x188;
-} un_803FA258;
+} un_803FA258 = { 0 };
 /* 3FA348 */ static u16 un_803FA348;
 /* 3FA34C */ static u8 un_803FA34C;
 /* 3FA32C */ static u8 un_803FA32C;
