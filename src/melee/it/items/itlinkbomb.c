@@ -3,8 +3,8 @@
 #include "placeholder.h"
 
 #include "baselib/forward.h"
-#include "baselib/jobj.h"
 
+#include "baselib/jobj.h"
 #include "baselib/random.h"
 #include "ft/chara/ftLink/ftLk_AttackAir.h"
 
@@ -233,7 +233,7 @@ bool itLinkbomb_UnkMotion0_Anim(HSD_GObj* gobj)
     itLinkBombAttributes* sa;
     int pad[5];
 
-    if (it_80272C6C(gobj) == 0) {
+    if (!it_80272C6C(gobj)) {
         it_8029DEB0(gobj);
     }
     item = GET_ITEM(gobj);
@@ -265,7 +265,7 @@ bool itLinkbomb_UnkMotion1_Anim(HSD_GObj* gobj)
     itLinkBombAttributes* sa;
     f32 pad[2];
 
-    if (it_80272C6C(gobj) == 0) {
+    if (!it_80272C6C(gobj)) {
         fn_8029E21C(gobj);
     }
 
@@ -314,7 +314,7 @@ bool itLinkbomb_UnkMotion2_Anim(HSD_GObj* gobj)
     Article* article;
     itLinkBombAttributes* sa;
 
-    if (it_80272C6C(gobj) == 0) {
+    if (!it_80272C6C(gobj)) {
         item = GET_ITEM(gobj);
         it_8029E5D0(gobj);
     }
@@ -385,22 +385,10 @@ void it_8029EC34(HSD_GObj* gobj)
     }
 }
 
-static inline void itLinkbomb_UnkMotion3_Anim_inline1(HSD_GObj* gobj)
-{
-    Item* item = gobj->user_data;
-    it_80275414(gobj);
-    it_802754A4(gobj);
-    if (item->msid != 3) {
-        it_8029D9A4(gobj, 3, ITEM_DROP_UPDATE);
-    } else {
-        it_8029D9A4(gobj, 3, ITEM_HIT_PRESERVE | ITEM_DROP_UPDATE);
-    }
-}
-
 static inline void itLinkbomb_UnkMotion3_Anim_inline2(HSD_GObj* gobj)
 {
-    if (it_80272C6C(gobj) == 0) {
-        it_8029D9A4(gobj, 1, 0);
+    if (!it_80272C6C(gobj)) {
+        fn_8029E21C(gobj);
     }
     it_8029DB5C(gobj);
 }
@@ -411,7 +399,7 @@ bool itLinkbomb_UnkMotion3_Anim(Item_GObj* gobj)
     itLinkBombAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
     PAD_STACK(12);
     if (!it_80272C6C(gobj)) {
-        itLinkbomb_UnkMotion3_Anim_inline1(gobj);
+        it_8029EC34(gobj);
     }
     // permuterslop
     if (attrs != NULL) {
@@ -481,7 +469,7 @@ void it_8029F18C(HSD_GObj* gobj)
 
 bool itLinkbomb_UnkMotion4_Anim(HSD_GObj* gobj)
 {
-    if (it_80272C6C(gobj) == 0) {
+    if (!it_80272C6C(gobj)) {
         it_8029F18C(gobj);
     }
     {
@@ -639,7 +627,7 @@ bool itLinkbomb_UnkMotion6_Anim(HSD_GObj* gobj)
     Article* article;
     itLinkBombAttributes* sa;
 
-    if (it_80272C6C(gobj) == 0) {
+    if (!it_80272C6C(gobj)) {
         Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
     }
 
