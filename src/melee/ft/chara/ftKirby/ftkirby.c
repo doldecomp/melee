@@ -2,6 +2,7 @@
 
 #include "ftKb_Init.static.h"
 
+#include "ftkirbyattackdash.h"
 #include "ftkirbyspecialdonkey.h"
 #include "ftkirbyspecialiceclimber.h"
 #include "ftkirbyspecialmars.h"
@@ -4767,17 +4768,4 @@ void ftKb_SpecialN_800F1F1C(Fighter_GObj* gobj, Vec3* pos)
     if (fp->kind == FTKIND_KIRBY) {
         efAsync_Spawn(gobj, &fp->x60C, 2, 0x49E, fp->parts[0].joint, pos);
     }
-}
-
-extern const f32 ftKb_Init_804D9368;
-extern const f32 ftKb_Init_804D936C;
-
-void ftKb_SpecialN_800F1F68(Fighter_GObj* gobj)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    fp->allow_interrupt = false;
-    Fighter_ChangeMotionState(gobj, ftKb_MS_AttackDash, 0, ftKb_Init_804D9368,
-                              ftKb_Init_804D936C, ftKb_Init_804D9368, NULL);
-    ftAnim_8006EBA4(gobj);
-    fp->mv.co.attackdash.x0 = 0;
 }

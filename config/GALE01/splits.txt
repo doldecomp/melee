@@ -1243,14 +1243,18 @@ melee/ft/chara/ftLink/ftLk_SpecialN.c:
 	.sdata2     start:0x804D9340 end:0x804D9350
 
 melee/ft/chara/ftKirby/ftkirby.c:
-	.text       start:0x800EE528 end:0x800F1FDC
+	.text       start:0x800EE528 end:0x800F1F68
 	.rodata     start:0x803B7548 end:0x803B7570
 	.data       start:0x803C8368 end:0x803CB6D8
 	.sdata2     start:0x804D9350 end:0x804D9364
 
+melee/ft/chara/ftKirby/ftkirbyattackdash.c:
+	.text       start:0x800F1F68 end:0x800F21E8
+	.sdata2     start:0x804D9368 end:0x804D9370
+
 melee/ft/chara/ftKirby/ftkirbyspecialn.c:
-	.text       start:0x800F1FDC end:0x800F9FD4
-	.sdata2     start:0x804D9364 end:0x804D93E4
+	.text       start:0x800F21E8 end:0x800F9FD4
+	.sdata2     start:0x804D9370 end:0x804D93E4
 
 melee/ft/chara/ftKirby/ftkirbyspecialpikachu.c:
 	.text       start:0x800F9FD4 end:0x800FA588
