@@ -1361,7 +1361,7 @@ config.libs = [
             Object(NonMatching, "melee/if/ifmagnify.c"),
             Object(Matching, "melee/if/ifnametag.c"),
             Object(Matching, "melee/if/ifhazard.c"),
-            Object(NonMatching, "melee/if/if_2FC93.c"),
+            Object(Matching, "melee/if/if_2FC93.c"),
             Object(NonMatching, "melee/if/ifprize.c"),
             Object(NonMatching, "melee/if/ifcoget.c"),
             Object(NonMatching, "melee/if/soundtest.c"),
