@@ -468,7 +468,6 @@ void lbDvd_80018254(void)
 {
     bool enabled;
     PreloadEntry* entry;
-    struct lbDvd_803B72C0_t* var_r26;
     int i;
 
     PAD_STACK(0x18);
