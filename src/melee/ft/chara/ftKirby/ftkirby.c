@@ -4,6 +4,7 @@
 
 #include "ftkirbyattackdash.h"
 #include "ftkirbyspecialdonkey.h"
+#include "ftkirbyspecialhi.h"
 #include "ftkirbyspecialiceclimber.h"
 #include "ftkirbyspecialmars.h"
 #include "ftkirbyspecialpeach.h"
