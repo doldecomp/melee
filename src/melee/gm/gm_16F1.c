@@ -450,18 +450,16 @@ int fn_8016FFD4(struct lbl_8046B6A0_24C_t* arg0, int arg1, u8 arg2)
 {
     int i;
     int count = 0;
-    u8 flags;
 
     for (i = 0; (u32) i < 0x101U; i++) {
         if ((s16) lbl_803D5A4C[i].kind < 0xD7) {
-            flags = fn_8016F180(i);
-            if ((u8) arg1 & flags && pl_80039418((u8) arg2, i) != 0) {
+            if ((u8) arg1 & (u8) fn_8016F180(i) &&
+                pl_80039418((u8) arg2, i) != 0)
+            {
                 count += fn_8016FAD4(arg0, i, arg1, arg2);
             }
         } else {
-            flags = fn_8016F180(i);
-
-            if ((u8) arg1 & flags) {
+            if ((u8) arg1 & (u8) fn_8016F180(i)) {
                 if ((unsigned) fn_801701C0(arg0, (u8) arg2, i) != 0) {
                     count += fn_8016FAD4(arg0, i, arg1, arg2);
                 }
@@ -528,61 +526,33 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
     if (rules->x5 == 3) {
         fn_80171B64((struct lbl_804D65A8_t*) rankings);
     } else {
-        s32* score_ptr = scores;
+        int k;
 
-        if (x58[0].x0 != 3) {
-            u16 xA = x58[0].xA;
-            scores[0] =
-                (x58[0].x20 - (x58[0].x24 - xA)) + ((s8) rules->xC * xA);
-        }
-        {
-            int k;
-            struct lbl_8046B6A0_24C_58_t* p = &x58[1];
-            s32* sp = score_ptr + 1;
-            for (k = 1; k < 6; k++) {
-                if (p->x0 != 3) {
-                    u16 xA = p->xA;
-                    *sp = (p->x20 - (p->x24 - xA)) + ((s8) rules->xC * xA);
-                }
-                p++;
-                sp++;
+        for (k = 0; k < 6; k++) {
+            if (x58[k].x0 != 3) {
+                u16 xA = x58[k].xA;
+                scores[k] = (x58[k].x20 - (x58[k].x24 - xA)) +
+                            ((s8) rules->xC * xA);
             }
         }
 
         {
-            struct lbl_8046B6A0_24C_58_t* x58_p = x58;
-            s32* sc_p = score_ptr;
-            u8* rk_p = rankings;
             int idx;
             for (idx = 0; idx < 6; idx++) {
-                if (x58_p->x0 != 3) {
-                    s32 my_score = *sc_p;
+                if (x58[idx].x0 != 3) {
+                    s32 my_score = scores[idx];
+                    int j;
 
-                    if (x58[0].x0 != 3 && idx != 0 && my_score < scores[0]) {
-                        *rk_p = *rk_p + 1;
-                    }
-
-                    {
-                        struct lbl_8046B6A0_24C_58_t* q = &x58[1];
-                        s32* sq = score_ptr + 1;
-                        int j;
-                        for (j = 1; j < 6; j++) {
-                            if (q->x0 != 3 && idx != j && my_score < *sq) {
-                                *rk_p = *rk_p + 1;
-                            }
-                            q++;
-                            sq++;
+                    for (j = 0; j < 6; j++) {
+                        if (x58[j].x0 != 3 && idx != j && my_score < scores[j]) {
+                            rankings[idx]++;
                         }
                     }
 
-                    if (rankings[6] < *rk_p) {
-                        rankings[6] = *rk_p;
+                    if (rankings[6] < rankings[idx]) {
+                        rankings[6] = rankings[idx];
                     }
                 }
-
-                x58_p++;
-                sc_p++;
-                rk_p++;
             }
         }
     }
@@ -2531,7 +2501,7 @@ void gm_80173EEC(void)
     u16* temp_r29;
 
     for (i = 0; i < 0x19; i++) {
-        temp_r29 = &gmMainLib_8015EDBC()->x18[i];
+        temp_r29 = &gmMainLib_8015EDBC()->x18[(u32) i];
         if (*temp_r29 >= 100) {
             ckind = gm_8016400C(i);
             fn_80172C78(gm_80160474(ckind, GM_CLASSIC));

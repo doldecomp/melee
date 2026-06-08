@@ -1347,24 +1347,27 @@ void fn_8018E46C(HSD_GObj* gobj, int unused)
     hsd_80391A04(1.0F, 1.0F, 1);
     switch (data->x3) {
     case 0:
+        new_var = data->x18;
         fn_8018C8D4(data, data->xC - (s32) (0.5f * data->x1C),
-                    -data->x10, data->x14, -data->x18, r30, data->xC,
+                    -data->x10, data->x14, -new_var, r30, data->xC,
                     0.5f);
         break;
     case 1:
+        new_var = data->x18;
         fn_8018D50C(data, data->xC - (s32) (0.5f * data->x1C),
-                    -data->x10, data->x14, -data->x18, r30, data->xC,
+                    -data->x10, data->x14, -new_var, r30, data->xC,
                     0.5f);
         break;
     case 2:
+        new_var = data->x18;
         fn_8018DC18(data, data->xC - (s32) (0.5f * data->x1C),
-                    -data->x10, data->x14, -data->x18, r30, data->xC,
+                    -data->x10, data->x14, -new_var, r30, data->xC,
                     0.5f);
         break;
     case 3:
-        new_var = -data->x18;
+        new_var = data->x18;
         fn_8018DF68(data, data->xC - (s32) (0.5f * data->x1C),
-                    -data->x10, data->x14, new_var, r30, data->xC,
+                    -data->x10, data->x14, -new_var, r30, data->xC,
                     0.5f);
         break;
     }
@@ -1466,20 +1469,20 @@ void fn_8018E618(int arg0, int arg1, f32 farg0)
 
 void fn_8018E85C(DynamicModelDesc* model, s32 flag)
 {
-    TmData* td;
-    BracketEntry* entry;
     u8* sub;
-    s32 bracket_idx;
+    BracketEntry* entry;
+    TmData* td;
+    HSD_JObj* jobj;
     s32 outer_idx;
     s32 inner_idx;
+    s32 bracket_idx;
     s32 j;
     u8* ptr;
-    HSD_JObj* jobj;
     HSD_GObj* gobj;
     s32 anim_frame;
-    f32 pos_multiplier;
-    f32 pos;
     f32 final_pos;
+    f32 pos;
+    f32 pos_multiplier;
 
     td = gm_8018F634();
     bracket_idx = 0;
@@ -1489,8 +1492,9 @@ void fn_8018E85C(DynamicModelDesc* model, s32 flag)
         if (entry->x0 == 0) {
             goto next_entry;
         }
+        inner_idx = 0;
         sub = (u8*) entry;
-        for (inner_idx = 0; inner_idx < 4; inner_idx++) {
+        for (; inner_idx < 4; inner_idx++) {
             if (sub[0x30] == 0) {
                 goto next_sub;
             }
@@ -1533,11 +1537,11 @@ void fn_8018E85C(DynamicModelDesc* model, s32 flag)
 
             pos = 0.0083f * (f32) (0x40 - (s32) td->x2E) + 1.0f;
             final_pos = pos_multiplier * pos;
-            HSD_JObjSetTranslateX(jobj, final_pos);
+            HSD_JObjSetScaleX(jobj, final_pos);
 
             pos = 0.0083f * (f32) (0x40 - (s32) td->x2E) + 1.0f;
             final_pos = pos_multiplier * pos;
-            HSD_JObjSetTranslateY(jobj, final_pos);
+            HSD_JObjSetScaleY(jobj, final_pos);
 
             if (td->cur_option < 0x1F) {
                 fn_8018AA74(jobj, outer_idx, inner_idx);
@@ -2279,12 +2283,11 @@ static inline int gm_801905F0_inline0(int c_kind)
 void gm_801905F0(StartMeleeData* arg0)
 {
     u8 _padA[8];
+    TmData* tm = &gm_804771C4;
     GameRules* temp_r31 = gmMainLib_8015CC34();
-    TmData* tm;
     int i;
     TmVsData sp18;
 
-    tm = &gm_804771C4;
     gm_80168FC4();
     gm_80167A64(&arg0->rules);
     arg0->rules.is_teams = false;
@@ -6415,8 +6418,7 @@ void fn_80198824(HSD_GObj* gobj)
     s32 in_range;
 
     gm_8018F634();
-    gobj = gobj->hsd_obj;
-    jobj = (HSD_JObj*) gobj;
+    jobj = gobj->hsd_obj;
 
     if ((s32) gm_8018F634()->cur_option >= 0x1F &&
         (s32) gm_8018F634()->cur_option <= 0x27)
@@ -6431,7 +6433,7 @@ void fn_80198824(HSD_GObj* gobj)
     } else {
         HSD_JObjSetTranslateZ(jobj, 0.0f);
 
-        if (lbl_804D667C == 0) {
+        if (lbl_804D667C != 0) {
             HSD_JObjSetTranslateZ(jobj, 10000.0f);
         } else {
             u32* frame_ctr = &lbl_804799D8.x4;
@@ -6610,9 +6612,10 @@ void fn_80198EBC(void)
     s32 i, j;
     f32 anim_rate;
     f32 pos;
-    f32 hide_z, show_z;
+    f32 hide_z;
     f32 f_848, f_850, f_84C, f_854, f_7F0;
     f32 f_858, f_834, f_85C;
+    f32 show_z;
     f32 f_7E4, f_7E0, f_7E8, f_7EC;
     f32 f_864;
     PAD_STACK(8);
@@ -6791,6 +6794,7 @@ void fn_80198EBC(void)
                        lbl_804DA808);
     {
         HSD_JObj* j16;
+        f32* bounce_y = da0d0->bounce_y;
         j16 = GET_JOBJ(gobj);
 
         j16 = HSD_JObjGetChild(j16);
@@ -6799,9 +6803,9 @@ void fn_80198EBC(void)
         j16 = HSD_JObjGetNext(j16);
         j16 = HSD_JObjGetNext(j16);
         j16 = HSD_JObjGetNext(j16);
-        for (j = 0; j <= 40; j++) {
+        for (j = 0; j <= 40; j++, bounce_y++) {
             fn_8019044C(j16, (f32) (j + 10));
-            da0d0->bounce_y[j] = HSD_JObjGetTranslationY(j16);
+            *bounce_y = HSD_JObjGetTranslationY(j16);
         }
     }
 

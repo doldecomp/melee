@@ -1293,9 +1293,10 @@ void gm_8019ECAC_OnEnter(void* arg0)
         CharacterKind char_id[4];
         u32 color[4];
     } local;
-    s32 i;
     u64 audio_mask;
+    s32 i;
     TmData* tmd;
+    s32 j;
     PAD_STACK(4);
 
     tmd = gm_8018F634();
@@ -1330,9 +1331,9 @@ void gm_8019ECAC_OnEnter(void* arg0)
     lbDvd_800174BC();
 
     audio_mask = 0;
-    for (i = 0; i < 4; i++) {
-        if (tmd->x4B8[i].x0 != 3) {
-            audio_mask |= lbAudioAx_80026E84(local.char_id[i]);
+    for (j = 0; j < 4; j++) {
+        if (tmd->x4B8[j].x0 != 3) {
+            audio_mask |= lbAudioAx_80026E84(local.char_id[j]);
         }
     }
     audio_mask |= lbAudioAx_80026EBC(local.stage_id);
