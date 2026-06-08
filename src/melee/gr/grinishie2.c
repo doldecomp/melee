@@ -707,6 +707,7 @@ void grInishie2_801FD9EC(HSD_GObj* gobj)
         HSD_JObjAddTranslationX(jobj, gp->gv.inishie23.xCC.x);
         HSD_JObjAddTranslationY(jobj, gp->gv.inishie23.xCC.y);
         HSD_JObjAddTranslationZ(jobj, gp->gv.inishie23.xCC.z);
+        temp_vec = &gp->gv.inishie23.xD8;
         HSD_JObjGetTranslation(jobj, temp_vec);
 
         return;

@@ -1048,10 +1048,10 @@ extern Vec3 grCn_803B80B4;
 
 void grCorneria_801DED50(Ground_GObj* gobj)
 {
-    grCn_Data* data = &grCn_803E1D38;
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Vec3 pos = grCn_803B80B4;
+    grCn_Data* data = &grCn_803E1D38;
     PAD_STACK(12);
 
     if (grCn_804D69AC == 0) {
@@ -2134,9 +2134,10 @@ void grCorneria_801E1348(Ground_GObj* gobj)
         if (gp->gv.corneria.x118 != 0) {
             if (gp->gv.corneria.x110 == 0) {
                 HSD_JObj* cannon;
+                s32 side = gp->gv.corneria.x11A;
                 sp40.x = 20.0f + data->cannon_x;
                 sp40.y = 2.0f + data->cannon_y;
-                if (gp->gv.corneria.x11A != 0) {
+                if (side != 0) {
                     sp40.z = 9.0f;
                     cannon = Ground_801C3FA4(gobj, 2);
                 } else {
