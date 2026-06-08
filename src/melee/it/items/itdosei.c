@@ -1,22 +1,32 @@
 #include "itdosei.h"
 
-#include <placeholder.h>
-#include <platform.h>
-
-#include "ft/ft_0C31.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_3F14.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "it/itmaplib.h"
 #include "lb/lb_00B0.h"
 
 #include <math.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
 #include <baselib/random.h>
+
+static f32 sdata2_ordering(void)
+{
+    volatile f32 data_0 = 1.0f;
+    volatile f32 data_1 = 0.5f;
+    volatile f32 data_2 = 0.0f;
+    volatile f64 data_3 = M_PI_2;
+    volatile f32 data_4 = (f32) M_PI / 4.0f;
+    volatile f32 data_5 = M_PI_2;
+    volatile f64 data_6 = M_PI;
+    volatile f64 data_7 = 4503601774854144.0;
+    volatile f32 data_8 = 60.0f;
+
+    return data_0 + data_1 + data_2 + data_3 + data_4 + data_5 + data_6 +
+           data_7 + data_8;
+}
 
 const f32 it_804DC878 = 0.0f;
 
@@ -61,70 +71,19 @@ static inline void HSD_JObjSetRotationZero(Item_GObj* gobj)
     HSD_JObjSetRotationZ(jobj, 0.0f);
 }
 
-static inline void itDosei_SetFacingAngle(Item_GObj* gobj, f32 m)
-{
-    f32 facing_dir = GET_ITEM(gobj)->facing_dir;
-    f32 angle = (facing_dir * M_PI_2) + (facing_dir * m);
-    HSD_JObjSetRotationY(gobj->hsd_obj, angle);
-}
-
-static inline void itDosei_SetRotX(HSD_JObj* jobj, f32 x)
-{
-    (jobj) ? ((void) 0) : __assert("jobj.h", 639, "jobj");
-    (!(jobj->flags & JOBJ_USE_QUATERNION))
-        ? ((void) 0)
-        : __assert("jobj.h", 640, "!(jobj->flags & JOBJ_USE_QUATERNION)");
-    jobj->rotate.x = x;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        (HSD_JObjSetMtxDirty)(jobj);
-    }
-}
-
-static inline void itDosei_SetRotY(HSD_JObj* jobj, f32 y)
-{
-    (jobj) ? ((void) 0) : __assert("jobj.h", 660, "jobj");
-    (!(jobj->flags & JOBJ_USE_QUATERNION))
-        ? ((void) 0)
-        : __assert("jobj.h", 661, "!(jobj->flags & JOBJ_USE_QUATERNION)");
-    jobj->rotate.y = y;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        (HSD_JObjSetMtxDirty)(jobj);
-    }
-}
-
-static inline void itDosei_SetRotZ(HSD_JObj* jobj, f32 z)
-{
-    (jobj) ? ((void) 0) : __assert("jobj.h", 681, "jobj");
-    (!(jobj->flags & JOBJ_USE_QUATERNION))
-        ? ((void) 0)
-        : __assert("jobj.h", 682, "!(jobj->flags & JOBJ_USE_QUATERNION)");
-    jobj->rotate.z = z;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        (HSD_JObjSetMtxDirty)(jobj);
-    }
-}
-
-static inline void itDosei_SetFacingAngleFC(Item_GObj* gobj, f32 m)
+static inline void HSD_JObjSetRotationZeroWithMtxDirty(Item_GObj* gobj)
 {
     HSD_JObj* jobj = gobj->hsd_obj;
-    f32 facing_dir = GET_ITEM(gobj)->facing_dir;
-    f32 angle = (facing_dir * M_PI_2) + (facing_dir * m);
-    (jobj) ? ((void) 0) : __assert("jobj.h", 660, "jobj");
-    (!(jobj->flags & JOBJ_USE_QUATERNION))
-        ? ((void) 0)
-        : __assert("jobj.h", 661, "!(jobj->flags & JOBJ_USE_QUATERNION)");
-    jobj->rotate.y = angle;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        (HSD_JObjSetMtxDirty)(jobj);
-    }
+    HSD_JObjSetRotationXWithMtxDirty(jobj, 0.0f);
+    HSD_JObjSetRotationYWithMtxDirty(jobj, 0.0f);
+    HSD_JObjSetRotationZWithMtxDirty(jobj, 0.0f);
 }
 
-static inline void itDosei_UnkMotion4_Rotate(HSD_JObj* jobj, Item_GObj* gobj)
+static inline f32 itDosei_FacingAngle(Item_GObj* gobj, f32 m)
 {
-    itDosei_SetRotX(jobj, 0.0f);
-    itDosei_SetRotY(jobj, 0.0f);
-    itDosei_SetRotZ(jobj, 0.0f);
-    itDosei_SetFacingAngleFC(gobj, it_804DC878);
+    f32 facing_dir = GET_ITEM(gobj)->facing_dir;
+    f32 angle = (facing_dir * M_PI_2) + (facing_dir * m);
+    return angle;
 }
 
 /* 282DE4 */ static void it_80282DE4(Item_GObj* gobj);
@@ -157,11 +116,12 @@ void fn_80281390(Item_GObj* gobj)
 bool itDosei_UnkMotion0_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    PAD_STACK(8);
 
     ip->xDD4_itemVar.dosei.xDE4 = ip->pos;
     HSD_JObjSetRotationZero(gobj);
-    itDosei_SetFacingAngle(gobj, it_804DC878);
+
+    HSD_JObjSetRotationY(gobj->hsd_obj,
+                         itDosei_FacingAngle(gobj, it_804DC878));
     ip->xDD4_itemVar.dosei.xDF0--;
     if (ip->xDD4_itemVar.dosei.xDF0 <= 0) {
         ip->xDD4_itemVar.dosei.xDF0 = 0;
@@ -203,7 +163,6 @@ void it_802817A0(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = gobj->hsd_obj;
     itDoseiAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
-    PAD_STACK(8);
 
     ip->xD5C = 0;
     ip->xDC8_word.flags.x17 = 1;
@@ -214,7 +173,9 @@ void it_802817A0(Item_GObj* gobj)
     ip->x5D0_animFrameSpeed = 1.0f;
     lb_8000BA0C(jobj, 1.0f);
     HSD_JObjSetRotationZero(gobj);
-    itDosei_SetFacingAngle(gobj, it_804DC878);
+
+    HSD_JObjSetRotationY(gobj->hsd_obj,
+                         itDosei_FacingAngle(gobj, it_804DC878));
     ip->x40_vel.x = ip->facing_dir * attr->unk8;
     ip->x40_vel.z = 0.0f;
     ip->x40_vel.y = 0.0f;
@@ -298,13 +259,14 @@ void it_80281C6C(Item_GObj* gobj)
 bool itDosei_UnkMotion2_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    PAD_STACK(8);
 
     ip->xDD4_itemVar.dosei.xDE4 = ip->pos;
     if (it_80272C6C(gobj) == 0) {
         Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
         ip->facing_dir = -ip->facing_dir;
-        itDosei_SetFacingAngle(gobj, it_804DC878);
+
+        HSD_JObjSetRotationY(gobj->hsd_obj,
+                             itDosei_FacingAngle(gobj, it_804DC878));
     }
     return false;
 }
@@ -325,7 +287,9 @@ static inline void itDosei_SetupWalk_Inline(Item_GObj* gobj)
     Item_80268E5C(gobj, 1, 0xB);
     itDosei_SetSpeed(gobj, ip, 1.0f);
     HSD_JObjSetRotationZero(gobj);
-    itDosei_SetFacingAngle(gobj, it_804DC878);
+
+    HSD_JObjSetRotationY(gobj->hsd_obj,
+                         itDosei_FacingAngle(gobj, it_804DC878));
     ip->x40_vel.x = ip->facing_dir * attr->unk8;
     ip->x40_vel.z = 0.0f;
     ip->x40_vel.y = 0.0f;
@@ -345,13 +309,11 @@ static inline void itDosei_SetupWalk_FC(Item_GObj* gobj)
     Item_80268E5C(gobj, 1, 0xB);
     ip->x5D0_animFrameSpeed = 1.0f;
     lb_8000BA0C(jobj, 1.0f);
-    {
-        HSD_JObj* j = gobj->hsd_obj;
-        itDosei_SetRotX(j, 0.0f);
-        itDosei_SetRotY(j, 0.0f);
-        itDosei_SetRotZ(j, 0.0f);
-    }
-    itDosei_SetFacingAngleFC(gobj, it_804DC878);
+
+    HSD_JObjSetRotationZeroWithMtxDirty(gobj);
+    HSD_JObjSetRotationYWithMtxDirty(gobj->hsd_obj,
+                                     itDosei_FacingAngle(gobj, it_804DC878));
+
     ip->x40_vel.x = ip->facing_dir * attr->unk8;
     ip->x40_vel.z = 0.0f;
     ip->x40_vel.y = 0.0f;
@@ -360,7 +322,6 @@ static inline void itDosei_SetupWalk_FC(Item_GObj* gobj)
 bool itDosei_UnkMotion2_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    PAD_STACK(16);
     it_8026D62C(gobj, it_80282074);
     if (ip->xDD4_itemVar.dosei.xDD8 == 2) {
         itDosei_SetupWalk_FC(gobj);
@@ -403,7 +364,7 @@ bool itDosei_UnkMotion5_Coll(Item_GObj* gobj)
 void it_3F14_Logic7_PickedUp(Item_GObj* gobj)
 {
     HSD_JObj* jobj = gobj->hsd_obj;
-    Item* ip = GET_ITEM(gobj);
+    Item* ip = gobj->user_data;
     itDoseiAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
 
     if (ip->msid != 4) {
@@ -419,31 +380,63 @@ void it_3F14_Logic7_PickedUp(Item_GObj* gobj)
         int not_msid_4 = ip->msid != 4;
         if (not_msid_4) {
             HSD_JObjSetRotationZero(gobj);
-            itDosei_SetFacingAngle(gobj, it_804DC878);
+
+            HSD_JObjSetRotationY(gobj->hsd_obj,
+                                 itDosei_FacingAngle(gobj, it_804DC878));
         }
     }
 }
 
+static inline void itDosei_UnkMotion4_Anim_inline(Item_GObj* gobj,
+                                                  HSD_JObj* jobj)
+{
+    f32 angle;
+    {
+        HSD_JObjSetRotationXWithMtxDirty(jobj, 0.0f);
+        HSD_JObjSetRotationYWithMtxDirty(jobj, 0.0f);
+        HSD_JObjSetRotationZWithMtxDirty(jobj, 0.0f);
+    }
+    angle = itDosei_FacingAngle(gobj, it_804DC878);
+
+    // HSD_JObjSetRotationZeroWithMtxDirty(gobj);
+    HSD_JObjSetRotationYWithMtxDirty(GET_JOBJ(gobj), angle);
+}
+
+static inline f32 itDosei_UnkMotion4_GetAnimSpeed(itDoseiAttributes* attr)
+{
+    return attr->unk0;
+}
+
+static inline itDoseiAttributes* itDosei_UnkMotion4_GetAttrs(Item* ip)
+{
+    return ip->xC4_article_data->x4_specialAttributes;
+}
+
 bool itDosei_UnkMotion4_Anim(Item_GObj* gobj)
 {
-    PAD_STACK(24);
     if (!it_80272C6C(gobj)) {
         itDoseiAttributes* attr;
         Item* ip = GET_ITEM(gobj);
         HSD_JObj* jobj = gobj->hsd_obj;
-        attr = ip->xC4_article_data->x4_specialAttributes;
+        attr = itDosei_UnkMotion4_GetAttrs(ip);
+        // permuterslop
+        if (jobj == NULL) {
+            if (jobj == NULL) {
+            }
+        }
 
         if (ip->msid != 4) {
             Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
             HSD_JObjClearFlagsAll(HSD_JObjGetChild(jobj), JOBJ_HIDDEN);
-            lb_8000BA0C(jobj, ip->x5D0_animFrameSpeed = attr->unk0);
+            lb_8000BA0C(jobj, ip->x5D0_animFrameSpeed =
+                                  itDosei_UnkMotion4_GetAnimSpeed(attr));
             ip->xDC8_word.flags.x17 = 1;
             ip->xDC8_word.flags.x19 = 1;
         } else {
             Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
         }
         if (ip->msid != 4) {
-            itDosei_UnkMotion4_Rotate(gobj->hsd_obj, gobj);
+            itDosei_UnkMotion4_Anim_inline(gobj, gobj->hsd_obj);
         }
     }
     return false;
@@ -458,7 +451,7 @@ static inline HSD_JObj* itDosei_GetJObj(Item_GObj* gobj)
 
 void it_3F14_Logic7_Dropped(Item_GObj* gobj)
 {
-    Item* item = GET_ITEM(gobj);
+    Item* item = gobj->user_data;
     Item* ip = item;
     HSD_JObj* obj = itDosei_GetJObj(gobj);
     HSD_JObj* jobj = obj;
@@ -471,7 +464,9 @@ void it_3F14_Logic7_Dropped(Item_GObj* gobj)
     Item_80268E5C(gobj, 5, 6);
     lb_8000BA0C(jobj, ip->x5D0_animFrameSpeed = attr->unk0);
     HSD_JObjSetRotationZero(gobj);
-    itDosei_SetFacingAngle(gobj, it_804DC878);
+
+    HSD_JObjSetRotationY(gobj->hsd_obj,
+                         itDosei_FacingAngle(gobj, it_804DC878));
 }
 
 void it_3F14_Logic7_Thrown(Item_GObj* gobj)
@@ -614,7 +609,6 @@ static void it_80282DE4(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = gobj->hsd_obj;
-    PAD_STACK(8);
 
     ip->xDD4_itemVar.dosei.xDD8 = 1;
     ip->xDD4_itemVar.dosei.xDDC = M_PI_2;
@@ -625,20 +619,26 @@ static void it_80282DE4(Item_GObj* gobj)
     Item_80268E5C(gobj, 9, 3);
     ip->x5D0_animFrameSpeed = 1.0f;
     lb_8000BA0C(jobj, 1.0f);
+
     HSD_JObjSetRotationZero(gobj);
-    itDosei_SetFacingAngle(gobj, -ip->xDD4_itemVar.dosei.xDDC);
+
+    HSD_JObjSetRotationY(
+        gobj->hsd_obj,
+        itDosei_FacingAngle(gobj, -ip->xDD4_itemVar.dosei.xDDC));
 }
 
 bool itDosei_UnkMotion9_Anim(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
+    Item* ip = gobj->user_data;
     itDoseiAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
 
     ip->xDD4_itemVar.dosei.xDE4 = ip->pos;
     ip->xDD4_itemVar.dosei.xDDC =
         (ip->xDD4_itemVar.dosei.xDDC - (M_PI / attr->unkC));
     if (ip->xDD4_itemVar.dosei.xDD8 == 1) {
-        itDosei_SetFacingAngle(gobj, -ip->xDD4_itemVar.dosei.xDDC);
+        HSD_JObjSetRotationY(
+            gobj->hsd_obj,
+            itDosei_FacingAngle(gobj, -ip->xDD4_itemVar.dosei.xDDC));
         if (ip->xDD4_itemVar.dosei.xDDC <= 0.0f) {
             ip->xDD4_itemVar.dosei.xDD8 = 2;
             ip->x40_vel.x = ip->facing_dir * attr->unk8;
@@ -655,7 +655,6 @@ void itDosei_UnkMotion9_Phys(Item_GObj* gobj) {}
 bool itDosei_UnkMotion9_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    PAD_STACK(16);
     it_8026D62C(gobj, it_80282074);
     if (ip->xDD4_itemVar.dosei.xDD8 == 2) {
         f32 frame = ip->x5CC_currentAnimFrame;
@@ -663,14 +662,6 @@ bool itDosei_UnkMotion9_Coll(Item_GObj* gobj)
         Item_80268DD4(gobj, frame);
     }
     it_80276CB8(gobj);
-    return false;
-}
-
-void itDosei_UnkMotion10_Phys(Item_GObj* gobj) {}
-
-bool itDosei_UnkMotion10_Coll(Item_GObj* gobj)
-{
-    it_8026E8C4(gobj, fn_80282CD4, it_80282BFC);
     return false;
 }
 
@@ -686,9 +677,17 @@ bool itDosei_UnkMotion10_Anim(Item_GObj* gobj)
     return false;
 }
 
+void itDosei_UnkMotion10_Phys(Item_GObj* gobj) {}
+
+bool itDosei_UnkMotion10_Coll(Item_GObj* gobj)
+{
+    it_8026E8C4(gobj, fn_80282CD4, it_80282BFC);
+    return false;
+}
+
 bool it_3F14_Logic7_DmgReceived(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
+    Item* ip = gobj->user_data;
     itDoseiAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
 
     {
@@ -706,7 +705,9 @@ bool it_3F14_Logic7_DmgReceived(Item_GObj* gobj)
     ip->xDC8_word.flags.x19 = 1;
     ip->xDD4_itemVar.dosei.xDF0 = 20;
     HSD_JObjSetRotationZero(gobj);
-    itDosei_SetFacingAngle(gobj, it_804DC878);
+
+    HSD_JObjSetRotationY(gobj->hsd_obj,
+                         itDosei_FacingAngle(gobj, it_804DC878));
     ip->owner = NULL;
     ip->xD44_lifeTimer -= 60.0f;
     return it_80273130(gobj);
