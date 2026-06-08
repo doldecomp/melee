@@ -1016,6 +1016,61 @@ s32 fn_80392CCC(s32 channel)
     return 0;
 }
 
+static char lbl_8040A540[] = {
+    0x4D, 0x43, 0x43, 0x20, 0x69, 0x73, 0x20, 0x6E, 0x6F, 0x20, 0x69, 0x6E,
+    0x69, 0x74, 0x69, 0x61, 0x6C, 0x69, 0x7A, 0x65, 0x00, 0x00, 0x00, 0x00,
+    0x4E, 0x6F, 0x20, 0x72, 0x65, 0x73, 0x70, 0x6F, 0x6E, 0x63, 0x65, 0x00,
+    0x50, 0x49, 0x4E, 0x47, 0x20, 0x65, 0x72, 0x72, 0x6F, 0x72, 0x00, 0x00,
+    0x43, 0x6F, 0x75, 0x6C, 0x64, 0x20, 0x6E, 0x6F, 0x74, 0x20, 0x69, 0x6E,
+    0x69, 0x74, 0x69, 0x61, 0x6C, 0x69, 0x7A, 0x65, 0x20, 0x48, 0x49, 0x4F,
+    0x00, 0x00, 0x00, 0x00, 0x43, 0x6F, 0x75, 0x6C, 0x64, 0x20, 0x6E, 0x6F,
+    0x74, 0x20, 0x72, 0x65, 0x61, 0x64, 0x20, 0x48, 0x49, 0x4F, 0x20, 0x6D,
+    0x61, 0x69, 0x6C, 0x62, 0x6F, 0x78, 0x00, 0x00, 0x43, 0x6F, 0x75, 0x6C,
+    0x64, 0x20, 0x6E, 0x6F, 0x74, 0x20, 0x77, 0x72, 0x69, 0x74, 0x65, 0x20,
+    0x48, 0x49, 0x4F, 0x20, 0x6D, 0x61, 0x69, 0x6C, 0x62, 0x6F, 0x78, 0x00,
+    0x43, 0x6F, 0x75, 0x6C, 0x64, 0x20, 0x6E, 0x6F, 0x74, 0x20, 0x72, 0x65,
+    0x61, 0x64, 0x20, 0x48, 0x49, 0x4F, 0x20, 0x6D, 0x65, 0x6D, 0x6F, 0x72,
+    0x79, 0x00, 0x00, 0x00, 0x43, 0x6F, 0x75, 0x6C, 0x64, 0x20, 0x6E, 0x6F,
+    0x74, 0x20, 0x77, 0x72, 0x69, 0x74, 0x65, 0x20, 0x48, 0x49, 0x4F, 0x20,
+    0x6D, 0x65, 0x6D, 0x6F, 0x72, 0x79, 0x00, 0x00, 0x43, 0x6F, 0x75, 0x6C,
+    0x64, 0x20, 0x6E, 0x6F, 0x74, 0x20, 0x72, 0x65, 0x61, 0x64, 0x20, 0x48,
+    0x49, 0x4F, 0x20, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x00, 0x00, 0x00,
+    0x43, 0x6F, 0x75, 0x6C, 0x64, 0x20, 0x6E, 0x6F, 0x74, 0x20, 0x66, 0x6C,
+    0x75, 0x73, 0x68, 0x20, 0x63, 0x68, 0x61, 0x6E, 0x6E, 0x65, 0x6C, 0x49,
+    0x6E, 0x66, 0x6F, 0x00, 0x43, 0x6F, 0x75, 0x6C, 0x64, 0x20, 0x6E, 0x6F,
+    0x74, 0x20, 0x6C, 0x6F, 0x61, 0x64, 0x20, 0x63, 0x68, 0x61, 0x6E, 0x6E,
+    0x65, 0x6C, 0x49, 0x6E, 0x66, 0x6F, 0x00, 0x00, 0x4E, 0x6F, 0x74, 0x20,
+    0x65, 0x6E, 0x6F, 0x75, 0x67, 0x68, 0x20, 0x6D, 0x65, 0x6D, 0x6F, 0x72,
+    0x79, 0x20, 0x62, 0x6C, 0x6F, 0x63, 0x6B, 0x00, 0x49, 0x6E, 0x76, 0x61,
+    0x6C, 0x69, 0x64, 0x20, 0x66, 0x75, 0x6E, 0x63, 0x74, 0x69, 0x6F, 0x6E,
+    0x20, 0x70, 0x61, 0x72, 0x61, 0x6D, 0x65, 0x74, 0x65, 0x72, 0x00, 0x00,
+    0x49, 0x6E, 0x76, 0x61, 0x6C, 0x69, 0x64, 0x20, 0x63, 0x68, 0x61, 0x6E,
+    0x6E, 0x65, 0x6C, 0x20, 0x70, 0x61, 0x72, 0x61, 0x6D, 0x65, 0x74, 0x65,
+    0x72, 0x00, 0x00, 0x00, 0x49, 0x6E, 0x76, 0x61, 0x6C, 0x69, 0x64, 0x20,
+    0x64, 0x61, 0x74, 0x61, 0x20, 0x73, 0x69, 0x7A, 0x65, 0x00, 0x00, 0x00,
+    0x49, 0x6E, 0x76, 0x61, 0x6C, 0x69, 0x64, 0x20, 0x6F, 0x66, 0x66, 0x73,
+    0x65, 0x74, 0x20, 0x70, 0x61, 0x72, 0x61, 0x6D, 0x65, 0x74, 0x65, 0x72,
+    0x00, 0x00, 0x00, 0x00, 0x43, 0x68, 0x61, 0x6E, 0x6E, 0x65, 0x6C, 0x20,
+    0x77, 0x61, 0x73, 0x20, 0x28, 0x61, 0x6C, 0x72, 0x65, 0x61, 0x64, 0x79,
+    0x29, 0x20, 0x6F, 0x70, 0x65, 0x6E, 0x65, 0x64, 0x00, 0x00, 0x00, 0x00,
+    0x43, 0x68, 0x61, 0x6E, 0x6E, 0x65, 0x6C, 0x20, 0x77, 0x61, 0x73, 0x20,
+    0x28, 0x61, 0x6C, 0x72, 0x65, 0x61, 0x64, 0x79, 0x29, 0x20, 0x63, 0x6C,
+    0x6F, 0x73, 0x65, 0x64, 0x00, 0x00, 0x00, 0x00, 0x43, 0x68, 0x61, 0x6E,
+    0x6E, 0x65, 0x6C, 0x20, 0x77, 0x61, 0x73, 0x20, 0x28, 0x61, 0x6C, 0x72,
+    0x65, 0x61, 0x64, 0x79, 0x29, 0x20, 0x6C, 0x6F, 0x63, 0x6B, 0x65, 0x64,
+    0x00, 0x00, 0x00, 0x00, 0x43, 0x68, 0x61, 0x6E, 0x6E, 0x65, 0x6C, 0x20,
+    0x77, 0x61, 0x73, 0x20, 0x28, 0x61, 0x6C, 0x72, 0x65, 0x61, 0x64, 0x79,
+    0x29, 0x20, 0x75, 0x6E, 0x6C, 0x6F, 0x63, 0x6B, 0x65, 0x64, 0x00, 0x00,
+    0x43, 0x68, 0x61, 0x6E, 0x6E, 0x65, 0x6C, 0x20, 0x28, 0x72, 0x65, 0x61,
+    0x64, 0x2F, 0x77, 0x72, 0x69, 0x74, 0x65, 0x29, 0x20, 0x62, 0x75, 0x73,
+    0x79, 0x00, 0x00, 0x00, 0x55, 0x6E, 0x6B, 0x6E, 0x6F, 0x77, 0x6E, 0x20,
+    0x65, 0x72, 0x72, 0x6F, 0x72, 0x00, 0x00, 0x00, 0x25, 0x73, 0x3A, 0x20,
+    0x4D, 0x43, 0x43, 0x20, 0x45, 0x72, 0x72, 0x6F, 0x72, 0x2C, 0x20, 0x25,
+    0x73, 0x20, 0x28, 0x25, 0x64, 0x29, 0x0A, 0x00, 0x4D, 0x43, 0x43, 0x20,
+    0x45, 0x72, 0x72, 0x6F, 0x72, 0x2C, 0x20, 0x25, 0x73, 0x20, 0x28, 0x25,
+    0x64, 0x29, 0x0A, 0x00,
+};
+
 u8 fn_80392CD8(char* caller)
 {
     char* msg;
@@ -1027,77 +1082,77 @@ u8 fn_80392CD8(char* caller)
     case 0:
         return err;
     case 1:
-        msg = "MCC is no initialize";
+        msg = lbl_8040A540;
         break;
     case 2:
-        msg = "No responce";
+        msg = lbl_8040A540 + 0x18;
         break;
     case 3:
-        msg = "PING error";
+        msg = lbl_8040A540 + 0x24;
         break;
     case 4:
-        msg = "Could not initialize HIO";
+        msg = lbl_8040A540 + 0x30;
         break;
     case 5:
-        msg = "Could not read HIO mailbox";
+        msg = lbl_8040A540 + 0x4C;
         break;
     case 6:
-        msg = "Could not write HIO mailbox";
+        msg = lbl_8040A540 + 0x68;
         break;
     case 7:
-        msg = "Could not read HIO memory";
+        msg = lbl_8040A540 + 0x84;
         break;
     case 8:
-        msg = "Could not write HIO memory";
+        msg = lbl_8040A540 + 0xA0;
         break;
     case 9:
-        msg = "Could not read HIO status";
+        msg = lbl_8040A540 + 0xBC;
         break;
     case 10:
-        msg = "Could not flush channelInfo";
+        msg = lbl_8040A540 + 0xD8;
         break;
     case 11:
-        msg = "Could not load channelInfo";
+        msg = lbl_8040A540 + 0xF4;
         break;
     case 12:
-        msg = "Not enough memory block";
+        msg = lbl_8040A540 + 0x110;
         break;
     case 13:
-        msg = "Invalid function parameter";
+        msg = lbl_8040A540 + 0x128;
         break;
     case 14:
-        msg = "Invalid channel parameter";
+        msg = lbl_8040A540 + 0x144;
         break;
     case 15:
-        msg = "Invalid data size";
+        msg = lbl_8040A540 + 0x160;
         break;
     case 16:
-        msg = "Invalid offset parameter";
+        msg = lbl_8040A540 + 0x174;
         break;
     case 17:
-        msg = "Channel was (already) opened";
+        msg = lbl_8040A540 + 0x190;
         break;
     case 18:
-        msg = "Channel was (already) closed";
+        msg = lbl_8040A540 + 0x1B0;
         break;
     case 19:
-        msg = "Channel was (already) locked";
+        msg = lbl_8040A540 + 0x1D0;
         break;
     case 20:
-        msg = "Channel was (already) unlocked";
+        msg = lbl_8040A540 + 0x1F0;
         break;
     case 21:
-        msg = "Channel (read/write) busy";
+        msg = lbl_8040A540 + 0x210;
         break;
     default:
-        msg = "Unknown error";
+        msg = lbl_8040A540 + 0x22C;
         break;
     }
 
     if (caller != NULL) {
-        OSReport("%s: MCC Error, %s (%d)\n", caller, msg, err);
+        OSReport(lbl_8040A540 + 0x23C, caller, msg, err);
     } else {
-        OSReport("MCC Error, %s (%d)\n", msg, err);
+        OSReport(lbl_8040A540 + 0x254, msg, err);
     }
     return err;
 }
@@ -1249,6 +1304,9 @@ void hsd_80392E80(void)
     }
 }
 
+extern char lbl_8040A8E0[];
+extern char lbl_8040A904[];
+
 // @TODO: Currently 99.75% match - BSS relocation encoding difference
 bool hsd_803931A4(s32 exi_channel)
 {
@@ -1295,12 +1353,11 @@ bool hsd_803931A4(s32 exi_channel)
     hsd_804D78B8 = 0;
 
     if (MCCInit(hsd_804D7890, 0, (MCC_CBSysEvent) fn_80392E2C) == 0) {
-        OSReport("EXI_%d:not support USB (Error=%d)\n", channel,
-                 MCCGetLastError());
+        OSReport(lbl_8040A8E0, channel, MCCGetLastError());
         return 0;
     }
 
-    OSReport("EXI initialized (EXI_%d)\n", channel);
+    OSReport(lbl_8040A904, channel);
     return 1;
 }
 
@@ -2249,11 +2306,13 @@ void hsd_80394950(OSContext* ctx)
 // @TODO: Currently 99.94% match - minor relocation difference
 void Exception_ReportStackTrace(OSContext* ctx, int max_depth)
 {
+    extern u8 lbl_8040AB00[];
+    char* msg = (char*) lbl_8040AB00;
     u32 i;
     u32* sp;
 
-    OSReport("- STACK ---------------------------------\n");
-    OSReport(" Address:  Back Chain  LR Save\n");
+    OSReport(msg + 0x8CC);
+    OSReport(msg + 0x904);
 
     sp = (u32*) ctx->gpr[1];
     i = 0;
@@ -2266,120 +2325,116 @@ void Exception_ReportStackTrace(OSContext* ctx, int max_depth)
         if ((s64) (u32) sp >= (s64) OSGetPhysicalMemSize() + 0x800000000) {
             break;
         }
-        OSReport("%08X:   %08X   %08X\n", sp, sp[0], sp[1]);
+        OSReport(msg + 0x924, sp, sp[0], sp[1]);
         sp = (u32*) sp[0];
         i++;
     }
 }
 
+extern u8 lbl_8040AB00[];
+
 // @TODO: Currently 99.81% match - instructions match, string relocations
 // differ
 void Exception_ReportCodeline(u16 error, int dsisr, int dar, OSContext* ctx)
 {
+    char* msg = (char*) lbl_8040AB00;
     char* exception_type;
     char* around_or_at;
     int srr1;
 
-    OSReport("- UNHANDLED EXCEPTION -------------------------------\n");
-    OSReport("DSISR=%08X DAR=%08X\n", dsisr, dar);
+    OSReport(msg + 0x93C);
+    OSReport(msg + 0x974, dsisr, dar);
     error = (u16) error;
-    OSReport("ERROR %d: ", error);
+    OSReport(msg + 0x98C, error);
 
     switch (error) {
     case 0:
-        OSReport("(SYSTEM RESET)\n");
+        OSReport(msg + 0x998);
         return;
     case 1:
-        OSReport("(MACHINE CHECK)\n");
+        OSReport(msg + 0x9A8);
         return;
     case 2:
         OSReport("(DSI)\n");
-        OSReport("Instruction at %08X (read from SRR0) attempted\n"
-                 "to access invalid address %08X (read from DAR)\n",
-                 ctx->srr0, dar);
+        OSReport(msg + 0x9BC, ctx->srr0, dar);
         if (dsisr & 0x02000000) {
-            OSReport("Store operation.\n");
+            OSReport(msg + 0xA1C);
         } else {
-            OSReport("Load operation.\n");
+            OSReport(msg + 0xA30);
         }
         if (dsisr & 0x40000000) {
-            OSReport("No appropriate page entry or DBAT exist.\n");
+            OSReport(msg + 0xA44);
         }
         if (dsisr & 0x08000000) {
-            OSReport("Memory access is not permitted by the page or DBAT.\n");
+            OSReport(msg + 0xA70);
         }
         if (dsisr & 0x400000) {
-            OSReport("DABR match occurs.\n");
+            OSReport(msg + 0xAA8);
         }
         return;
     case 3:
         OSReport("(ISI)\n");
-        OSReport("Attempted to fetch instruction from invalid address\n"
-                 "%08X (read from SRR0)\n",
-                 ctx->srr0);
+        OSReport(msg + 0xABC, ctx->srr0);
         if (ctx->srr1 & 0x40000000) {
-            OSReport("No appropriate page entry or IBAT exist.\n");
+            OSReport(msg + 0xB08);
         }
         if (ctx->srr1 & 0x10000000) {
-            OSReport("Illegal address.\n");
+            OSReport(msg + 0xB34);
         }
         if (ctx->srr1 & 0x08000000) {
-            OSReport("Memory access is not permitted by the page or IBAT.\n");
+            OSReport(msg + 0xB48);
         }
         break;
     case 4:
-        OSReport("(EXTERNAL INTERRUPT)\n");
+        OSReport(msg + 0xB80);
         return;
     case 5:
-        OSReport("(ALIGNMNET)\n");
-        OSReport("Instruction at %08X (read from SRR0) attempted\n"
-                 "to access unaligned address %08X (read from DAR)\n",
-                 ctx->srr0, dar);
+        OSReport(msg + 0xB98);
+        OSReport(msg + 0xBA8, ctx->srr0, dar);
         return;
     case 6:
-        OSReport("(PROGRAM)\n");
+        OSReport(msg + 0xC0C);
         srr1 = ctx->srr1;
         around_or_at = (srr1 & 0x10000) ? "around" : "at";
         if (srr1 & 0x100000) {
-            exception_type = "IEEE floating point enabled program exception";
+            exception_type = msg + 0xC18;
         } else if (srr1 & 0x80000) {
-            exception_type = "Illegal instruction";
+            exception_type = msg + 0xC48;
         } else if (srr1 & 0x40000) {
-            exception_type = "Privileged instruction";
+            exception_type = msg + 0xC5C;
         } else if (srr1 & 0x20000) {
-            exception_type = "Trap program exception";
+            exception_type = msg + 0xC74;
         } else {
-            exception_type = "Unknown type of program exception";
+            exception_type = msg + 0xC8C;
         }
-        OSReport("%s %s %08X (read from SRR0)\n", exception_type, around_or_at,
-                 ctx->srr0);
+        OSReport(msg + 0xCB0, exception_type, around_or_at, ctx->srr0);
         return;
     case 7:
-        OSReport("(FLOATING POINT)\n");
+        OSReport(msg + 0xCD0);
         return;
     case 8:
-        OSReport("(DECREMENTER)\n");
+        OSReport(msg + 0xCE4);
         return;
     case 9:
-        OSReport("(SYSTEM CALL)\n");
+        OSReport(msg + 0xCF4);
         return;
     case 10:
-        OSReport("(TRACE)\n");
+        OSReport(msg + 0xD04);
         return;
     case 11:
-        OSReport("(PERFORMANCE MONITOR)\n");
+        OSReport(msg + 0xD10);
         return;
     case 12:
-        OSReport("(BREAKPOINT)\n");
+        OSReport(msg + 0xD28);
         return;
     case 13:
-        OSReport("(SYSTEM INTERRPUT)\n");
+        OSReport(msg + 0xD38);
         return;
     case 14:
-        OSReport("(THERMAL INTERRPUT)\n");
+        OSReport(msg + 0xD4C);
         return;
     default:
-        OSReport("(UNKNOWN)\n");
+        OSReport(msg + 0xD64);
         break;
     }
 }
@@ -3003,14 +3058,12 @@ s32 hsd_80395D88(void* data)
             return 0;
         case 6: {
             OSContext* ctx;
-            OSContext** ctx_ptr;
             s32 saved;
             s32 i;
 
-            ctx_ptr = &sp->xD4;
-            if (*ctx_ptr != NULL) {
+            if (sp->xD4 != NULL) {
                 saved = hsd_80393D2C(1);
-                ctx = *ctx_ptr;
+                ctx = sp->xD4;
                 OSReport(msg + 0x728);
                 i = 0;
                 do {
@@ -3019,8 +3072,8 @@ s32 hsd_80395D88(void* data)
                              ((u32*) ctx)[i + 0x10]);
                     i++;
                 } while (i < 0x10);
-                hsd_80394950(*ctx_ptr);
-                ctx = *ctx_ptr;
+                hsd_80394950(sp->xD4);
+                ctx = sp->xD4;
                 OSReport(msg + 0x828);
                 OSReport(msg + 0x860, ((u32*) ctx)[0x198 / 4],
                          ((u32*) ctx)[0x19C / 4]);

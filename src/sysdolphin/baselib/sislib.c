@@ -97,7 +97,7 @@ void* HSD_SisLib_803A5798(s32 size)
     alloc_cur = HSD_SisLib_804D7974;
     if (size == 0) {
         OSReport("ZERO byte alloc\n");
-        OSPanic("sislib.c", 0x3C, "");
+        OSPanic("sislib.c", 0x3C, (char*) HSD_SisLib_804D6390);
     }
     remainder = size % 4;
     if (remainder != 0) {
@@ -128,7 +128,7 @@ void* HSD_SisLib_803A5798(s32 size)
     }
     if (best == NULL) {
         OSReport("Memory Empty\n");
-        OSPanic("sislib.c", 0x56, "");
+        OSPanic("sislib.c", 0x56, (char*) HSD_SisLib_804D6390);
     }
 
     search = HSD_SisLib_804D7970;
@@ -145,7 +145,7 @@ void* HSD_SisLib_803A5798(s32 size)
                          (sizeof(sislib_UnkAllocData));
         if (remaining_size < 0) {
             OSReport("Memory Empty\n");
-            OSPanic("sislib.c", 0x5F, "");
+            OSPanic("sislib.c", 0x5F, (char*) HSD_SisLib_804D6390);
         }
 
         HSD_SisLib_804D7970 = (sislib_UnkAllocData*) (data_ptr + size);
