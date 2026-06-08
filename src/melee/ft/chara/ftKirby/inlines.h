@@ -13,4 +13,11 @@ static inline void ftKb_SpecialN_set_cbs(Fighter_GObj* gobj)
     fp->take_dmg_cb = ftKb_Init_800EE7B8;
 }
 
+static inline void ftKb_SpecialN_set_cbs2(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->take_dmg_cb = ftKb_Init_800EE7B8;
+    fp->death2_cb = ftKb_Init_800EE74C;
+}
+
 #endif

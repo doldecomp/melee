@@ -1103,14 +1103,14 @@ bool ftColl_80077C60(Item* item, HitCapsule* hit, Fighter* fp,
                 break;
             }
         }
-        pl_8003E17C(fp->x221F_b4, fp->player_id, item->entity);
+        pl_8003E17C(fp->player_id, fp->x221F_b4, item->entity);
         return false;
     }
 
     {
+        float scaled_dmg;
         float raw_dmg = it_8026B1D4(item->entity, hit);
         float f3 = raw_dmg;
-        float scaled_dmg;
 
         if (fp->victim_gobj != NULL && !fp->x221B_b5 &&
             fp->victim_gobj != NULL)
@@ -1123,7 +1123,7 @@ bool ftColl_80077C60(Item* item, HitCapsule* hit, Fighter* fp,
         scaled_dmg = f3 * fp->dmg.x182c_behavior;
 
         if (inlineB1(hit)) {
-            if (dmg_log0_idx == 0 && fp->dmg.x189C_unk_num_frames == 0.0f) {
+            if (dmg_log0_idx == 0 && !fp->dmg.x189C_unk_num_frames) {
                 HitCapsuleState state = checkTipLog(fp, hit);
                 if (state == HitCapsule_Disabled) {
                     int mode;

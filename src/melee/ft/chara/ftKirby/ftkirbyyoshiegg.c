@@ -5,8 +5,6 @@
 #include <placeholder.h>
 
 #include "ef/efasync.h"
-#include "ef/eflib.h"
-#include "ef/efsync.h"
 #include "ft/chara/ftCommon/ftCo_Bury.h"
 #include "ft/fighter.h"
 
@@ -14,23 +12,13 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_0892.h"
-#include "ft/ftcolanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
-
-#include "ftKirby/forward.h"
-
-#include "ftKirby/ftkirby.h"
 #include "ftKirby/ftkirbyspecialdonkey.h"
-#include "it/items/itgamewatchchef.h"
-#include "it/items/itkirbygamewatchchefpan.h"
-#include "it/items/itpeachtoad.h"
-#include "it/items/itpeachtoadspore.h"
 #include "lb/lb_00B0.h"
 
 #include <common_structs.h>
@@ -74,13 +62,17 @@ static inline void inlineB0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftHurtboxInit hurt;
+    ftCo_DatAttrs_xBC_t* xBCp;
+    PAD_STACK(16);
+
     ftColl_8007B0C0(gobj, Intangible);
+    xBCp = &fp->co_attrs.xBC;
     hurt.bone_idx = ftParts_GetBoneIndex(fp, FtPart_TransN);
     hurt.height = HurtHeight_Mid;
     hurt.is_grabbable = false;
-    hurt.a_offset = fp->co_attrs.xBC.x4;
-    hurt.b_offset = fp->co_attrs.xBC.x10;
-    hurt.scale = fp->co_attrs.xBC.x1C;
+    hurt.a_offset = xBCp->x4;
+    hurt.b_offset = xBCp->x10;
+    hurt.scale = xBCp->x1C;
     ftColl_HurtboxInit(fp, fp->hurt_capsules, &hurt);
 }
 
