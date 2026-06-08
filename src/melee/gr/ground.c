@@ -1059,12 +1059,16 @@ inline HSD_FogDesc* foo(void)
 {
     StageCallbacks* phi_r29;
     StageCallbacks* temp_r29;
+    UnkArchiveStruct* archive;
     int temp_r30;
+    int stage_id;
     int i;
 
     grDatFiles_801C6324();
-    temp_r30 = grDatFiles_801C6324()->unk4->unkC;
-    temp_r29 = Ground_803DFEDC[stage_info.internal_stage_id]->callbacks;
+    archive = grDatFiles_801C6324();
+    stage_id = stage_info.internal_stage_id;
+    temp_r29 = Ground_803DFEDC[stage_id]->callbacks;
+    temp_r30 = archive->unk4->unkC;
     grDatFiles_801C6324();
     for (i = 0; i < temp_r30; i++) {
         phi_r29 = &temp_r29[i];
@@ -1095,7 +1099,7 @@ void Ground_801C1E94(void)
         if (temp_r3 != NULL) {
             phi_f1 = temp_r3->x0;
         } else {
-            phi_f1 = 1;
+            phi_f1 = 1.0F;
         }
         temp_r29_2->start *= phi_f1;
         temp_r29_2->end *= phi_f1;
@@ -2643,9 +2647,9 @@ void Ground_801C466C(void)
     LightList** var_r3;
     float var_f31;
     int temp_r28;
+    Vec3* sp10p;
 
-    var_r28_2 = Ground_801C466C_inline();
-    if (var_r28_2 == NULL) {
+    if ((var_r28_2 = Ground_801C466C_inline()) == NULL) {
         var_r28_2 = Ground_803E06C8;
     }
     temp_r3 = GObj_Create(0xD, 3, 0);
@@ -2668,18 +2672,19 @@ void Ground_801C466C(void)
     } else {
         var_f31 = 1.0F;
     }
+    sp10p = &sp10;
     while (var_r27 != NULL) {
         if (HSD_LObjGetPosition(var_r27, &sp10) != 0) {
             sp10.x *= var_f31;
             sp10.y *= var_f31;
             sp10.z *= var_f31;
-            HSD_LObjSetPosition(var_r27, &sp10);
+            HSD_LObjSetPosition(var_r27, sp10p);
         }
         if (HSD_LObjGetInterest(var_r27, &sp10) != 0) {
             sp10.x *= var_f31;
             sp10.y *= var_f31;
             sp10.z *= var_f31;
-            HSD_LObjSetInterest(var_r27, &sp10);
+            HSD_LObjSetInterest(var_r27, sp10p);
         }
         if (var_r27 == NULL) {
             var_r27 = NULL;

@@ -1532,11 +1532,12 @@ s32 grCastle_801CFBD4(Ground_GObj* gobj, s32 arg1)
     s32 i = 0;
     s32 result = 1;
     Ground* gp = (Ground*) gobj->user_data;
-    u8 _pad_top[8];
     unkCastleCallback cb1[5];
     unkCastleCallback2 cb2[5];
     Vec3 pos;
     Vec3 target_pos;
+    const unkCastleCallback* cb1_src = grCs_803B7F28;
+    const unkCastleCallback2* cb2_src = grCs_803B7F3C;
     PAD_STACK(12);
 
     do {
@@ -1605,16 +1606,16 @@ s32 grCastle_801CFBD4(Ground_GObj* gobj, s32 arg1)
                             if (eff_a != NULL &&
                                 !(HSD_JObjGetFlags(eff_a) & 0x10))
                             {
-                                cb1[0] = grCs_803B7F28[0];
-                                cb1[1] = grCs_803B7F28[1];
-                                cb1[2] = grCs_803B7F28[2];
-                                cb1[3] = grCs_803B7F28[3];
-                                cb1[4] = grCs_803B7F28[4];
-                                cb2[0] = grCs_803B7F3C[0];
-                                cb2[1] = grCs_803B7F3C[1];
-                                cb2[2] = grCs_803B7F3C[2];
-                                cb2[3] = grCs_803B7F3C[3];
-                                cb2[4] = grCs_803B7F3C[4];
+                                cb1[0] = cb1_src[0];
+                                cb1[1] = cb1_src[1];
+                                cb1[2] = cb1_src[2];
+                                cb1[3] = cb1_src[3];
+                                cb1[4] = cb1_src[4];
+                                cb2[0] = cb2_src[0];
+                                cb2[1] = cb2_src[1];
+                                cb2[2] = cb2_src[2];
+                                cb2[3] = cb2_src[3];
+                                cb2[4] = cb2_src[4];
                                 gp->gv.castle10.x10C[i] =
                                     (u32) grMaterial_801C8CFC(
                                         0, 2, gp, target, NULL,

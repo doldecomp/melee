@@ -211,8 +211,8 @@ void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj, s32 x18d4_int,
                  ft_800898B4_t* ev_data, u16 attack_instance, s32 arg5,
                  s32 source_ply)
 {
-    Fighter* attacker_fp;
     Fighter* victim_fp;
+    Fighter* attacker_fp;
     Fighter* attacker_fp2;
     plActionStats* acp;
     plActionStats* acp2;
