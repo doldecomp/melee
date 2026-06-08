@@ -15,20 +15,27 @@
 #include <melee/lb/lbmthp.h>
 #include <melee/mn/types.h>
 
-static struct {
-    /* 0x00 */ f32 data[9];
-    /* 0x24 */ char x24[12];
-    /* 0x30 */ char x30[12];
-} gm_803DBF78 = {
-    { 0, 1600.0F, 400.0F, 0, 1330.0F, 130.0F, 0, -3.0F, 0 },
-    "\\cfff00%2d",
-    "\\cfff00%3d",
-};
+/* 3B7D68 */ static const Vec3 gm_803B7D68 = { 0.0f, 0.0f, 1.0f };
+/* 3B7D74 */ static const Vec3 gm_803B7D74 = { 0.0f, 0.0f, 0.0f };
+/* 480B38 */ static PerfLabelLine gm_80480B38[4];
+/* 4D67D0 */ static bool gm_804D67D0;
+/* 4D67D4 */ static HSD_GObj* gm_804D67D4;
+/* 4D67D8 */ static HSD_GObj* gm_804D67D8;
+/* 4D67DC */ static bool gm_804D67DC;
+/* 4D67E0 */ static u8 gm_804D67E0;
+/* 4D67E1 */ static u8 gm_804D67E1;
+/* 4D67E2 */ static u8 gm_804D67E2;
+/* 4D67E4 */ static u32 gm_804D67E4;
+/* 4D67E8 */ static HSD_GObj* gm_804D67E8;
+/* 4D67EC */ u32 gm_804D67EC;
+/* 4D67F0 */ int gm_804D67F0;
+/* 4D67F4 */ static HSD_GObj* gm_804D67F4;
 
-static PerfLabelLine gm_80480B38[4];
-
-static const Vec3 gm_803B7D68 = { 0.0f, 0.0f, 1.0f };
-static const Vec3 gm_803B7D74 = { 0.0f, 0.0f, 0.0f };
+static void sdata2_order(void)
+{
+    (void) 82.0f;
+    (void) 290.0f;
+}
 
 void gm_801A9DD0(HSD_GObj* arg0, u16 arg1, u16 arg2, int arg3, int arg4)
 {
@@ -78,24 +85,30 @@ void gm_801A9DD0(HSD_GObj* arg0, u16 arg1, u16 arg2, int arg3, int arg4)
     GObj_SetupGXLinkMax(arg0, HSD_SObjLib_803A54EC, (u32) arg3);
 }
 
+#pragma push
+#pragma force_active on
+static float unused_floats[] = {
+    0.0f, 1600.0, 400.0f, 0.0f, 1330.0f, 130.0f, 0.0f, -3.0f, 0.0f,
+};
+#pragma pop
+
 void* fn_801A9FCC(void)
 {
     u32 ms;
     s32 idx;
     PerfLabelLine* lines = gm_80480B38;
-    u8* data = (u8*) &gm_803DBF78;
 
     lines[0].unk_04 = 0;
 
     idx = 0;
-    sprintf(lines[idx].text, (char*) (data + 0x24), lbMthp_8001F5F4());
+    sprintf(lines[idx].text, "\\cffff00%2d", lbMthp_8001F5F4());
 
     lines[0].next = &lines[1];
     lines[1].unk_04 = 0;
 
     ms = lbMthp_8001F5E4();
     idx = 1;
-    sprintf(lines[idx].text, (char*) (data + 0x24), ms);
+    sprintf(lines[idx].text, "\\cffff00%2d", ms);
 
     lines[1].next = &lines[2];
     lines[2].unk_04 = 0;
@@ -103,7 +116,7 @@ void* fn_801A9FCC(void)
     ms = (u32) ((f32) (u32) lbMthp_8001F5D4() /
                 (f32) (*(u32*) 0x800000F8 / 4 / 1000));
     idx = 2;
-    sprintf(lines[idx].text, (char*) (data + 0x30), ms);
+    sprintf(lines[idx].text, "\\cffff00%3d", ms);
 
     lines[2].next = &lines[3];
     lines[2].next = NULL;
@@ -116,20 +129,7 @@ void fn_801AA0E8(void)
     hsd_80392528((Event) fn_801A9FCC);
 }
 
-static bool gm_804D67D0;
-static HSD_GObj* gm_804D67D4;
-static HSD_GObj* gm_804D67D8;
-static bool gm_804D67DC;
-static u8 gm_804D67E0;
-static u8 gm_804D67E1;
-static u8 gm_804D67E2;
-static u32 gm_804D67E4;
-static HSD_GObj* gm_804D67E8;
-u32 gm_804D67EC;
-int gm_804D67F0;
-static HSD_GObj* gm_804D67F4;
-
-static int gm_803DBFB4[] = {
+/* 3DBFB4 */ static int gm_803DBFB4[] = {
     0x000004E2, 0x00000002, 0x0000018A, 0x00000001, 0x00010000, 0x00000002,
 };
 
