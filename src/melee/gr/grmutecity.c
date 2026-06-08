@@ -1321,7 +1321,6 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
     HSD_JObj* var_r20;
     s32 var_r27;
     grMc_CarEntry* car;
-    grMc_SpeedFn* fn_ptr;
     f32 track_mid;
     f32 var_f31;
     f32 var_f21;
@@ -1347,7 +1346,6 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
 
     var_r27 = 0;
     car = grMc_8049F4B8;
-    fn_ptr = (grMc_SpeedFn*) &grMc_803E3B7C[30];
 
     do {
         car->x4 += car->x8;
@@ -1547,16 +1545,13 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
                             HSD_JObjSetTranslate(new_jobj, &spawn_pos);
                         }
                     }
-                    {
-                        HSD_GObj* item = (HSD_GObj*) car->x24;
-                        if (item != NULL) {
-                            grMaterial_801C8CDC(item);
-                            car->x24 = 0;
-                        }
+                    if ((u32) car->x24 != 0) {
+                        grMaterial_801C8CDC((HSD_GObj*) car->x24);
+                        car->x24 = 0;
                     }
                     car->x22_flags.b0 = 1;
                 }
-            } else if (age > grMc_804D69D0->x2C && car->x28 == 0) {
+            } else if (age > grMc_804D69D0->x2C && (u32) car->x28 == 0) {
                 grMuteCity_801F2AB0(0x116, jobj);
                 car->x28 = (s32) jobj;
             }
@@ -1572,13 +1567,13 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
             }
 
             if (dist_t < 0.2f && dist_t > -0.2f) {
-                if (car_pos.x > -200.0f && car_pos.x < 200.0f &&
-                    car_pos.y > -200.0f && car_pos.y < 200.0f &&
+                if (-200.0f < car_pos.x && car_pos.x < 200.0f &&
+                    -200.0f < car_pos.y && car_pos.y < 200.0f &&
                     -1350.0f < car_pos.z && car_pos.z < 50.0f)
                 {
                     Camera_80030E44(1, NULL);
                     if (!car->x22_flags.b1) {
-                        if ((gp->gv.mutecity.xD0_flags.b6)) {
+                        if (gp->gv.mutecity.xD0_flags.b1) {
                             switch (HSD_Randi(3)) {
                             case 0:
                                 Ground_801C53EC(0x5CC66);
@@ -1612,14 +1607,14 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
                 }
             }
 
-            if (car_pos.x > -200.0f && car_pos.x < 200.0f &&
-                car_pos.y > -200.0f && car_pos.y < 200.0f &&
+            if (-200.0f < car_pos.x && car_pos.x < 200.0f &&
+                -200.0f < car_pos.y && car_pos.y < 200.0f &&
                 -100.0f < car_pos.z && car_pos.z < 50.0f)
             {
-                if (!car->x22_flags.b0 && car->x24 == 0) {
+                if (!car->x22_flags.b0 && (u32) car->x24 == 0) {
                     Item_GObj* item_gobj = grMaterial_801C8CFC(
-                        0, 2, car_gp, jobj, grMuteCity_801F1A0C, *fn_ptr,
-                        NULL);
+                        0, 2, car_gp, jobj, grMuteCity_801F1A0C,
+                        ((grMc_SpeedFn*) &grMc_803E3B7C[30])[var_r27], NULL);
                     if (item_gobj != NULL) {
                         grMaterial_801C8DE0(item_gobj, 0.0f, 0.0f, -12.0f,
                                             0.0f, 0.0f, 2.0f, 15.0f);
@@ -1628,27 +1623,25 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
                     }
                 }
             } else {
-                HSD_GObj* item = (HSD_GObj*) car->x24;
-                if (item != NULL) {
-                    grMaterial_801C8CDC(item);
+                if ((u32) car->x24 != 0) {
+                    grMaterial_801C8CDC((HSD_GObj*) car->x24);
                     car->x24 = 0;
                 }
             }
         } else {
             if (car_pos.z > spE8.z || car_pos.z > 5000.0f ||
                 car_pos.z < -1500.0f) {
-                if (car->x28 != 0) {
+                if ((u32) car->x28 != 0) {
                     grLib_801C98A0(jobj);
                     car->x28 = 0;
                 }
-            } else if (car->x28 == 0) {
+            } else if ((u32) car->x28 == 0) {
                 grMuteCity_801F2AB0(0x119, jobj);
                 car->x28 = (s32) jobj;
             }
         }
 
         car++;
-        fn_ptr++;
         var_r27 += 1;
         if (jobj == NULL) {
             jobj = NULL;
@@ -1715,24 +1708,27 @@ void grMuteCity_801F290C(Ground_GObj* gobj)
             lgobj = lgobj->next;
         }
         if (lgobj != NULL) {
-            i = 0;
-            lobj = GET_LOBJ(lgobj);
-            while (lobj != NULL) {
-                if (HSD_LObjGetFlags(lobj) & 4) {
+            HSD_LObj* lobj2;
+            s32 j;
+
+            j = 0;
+            lobj2 = GET_LOBJ(lgobj);
+            while (lobj2 != NULL) {
+                if (HSD_LObjGetFlags(lobj2) & 4) {
                     if (!gp->gv.mutecity2.xC4_flags.b0) {
-                        HSD_LObjGetColor(lobj,
-                                         &gp->gv.mutecity2.saved_colors[i]);
+                        HSD_LObjGetColor(lobj2,
+                                         &gp->gv.mutecity2.saved_colors[j]);
                     }
-                    HSD_LObjSetColor(lobj, gp->x6C);
-                    i++;
-                    if (i >= 4) {
+                    HSD_LObjSetColor(lobj2, gp->x6C);
+                    j++;
+                    if (j >= 4) {
                         break;
                     }
                 }
-                if (lobj == NULL) {
-                    lobj = NULL;
+                if (lobj2 == NULL) {
+                    lobj2 = NULL;
                 } else {
-                    lobj = lobj->next;
+                    lobj2 = lobj2->next;
                 }
             }
         }

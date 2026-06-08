@@ -949,29 +949,26 @@ void fn_80313BD8(HSD_GObj* gobj)
 
     if (un_GetTrophyTotal() > 10) {
         if (un_80305C44() & 0x400) {
-            HSD_JObjSetFlagsAll(state->jobj, 0x10);
-            if (state->entries[0].idx == 0 ||
-                state->entries[0].links[0]->idx + 9 < un_GetTrophyTotal())
+            HSD_JObjSetFlagsAll(state->x288, 0x10);
+            if (state->x274->idx == 0 ||
+                state->x274->links[0]->idx + 9 < un_GetTrophyTotal())
             {
                 un_80313358(state, 9, 4, 0);
             } else {
-                un_80313358(state,
-                            (s8) (un_GetTrophyTotal() - state->entries[0].idx),
+                un_80313358(state, (s8) (un_GetTrophyTotal() - state->x274->idx),
                             4, 0);
             }
             state->pad_29D = state->x29E;
             return;
         }
         if (un_80305C44() & 0x800) {
-            s16 idx;
-            HSD_JObjSetFlagsAll(state->jobj, 0x10);
-            idx = state->entries[0].idx;
-            if (idx == un_GetTrophyTotal() - 1 ||
-                state->entries[0].links[1]->idx - 9 > 0)
+            HSD_JObjSetFlagsAll(state->x288, 0x10);
+            if (state->x270->idx == un_GetTrophyTotal() - 1 ||
+                state->x270->links[1]->idx - 9 > 0)
             {
                 un_80313358(state, 9, 4, 1);
             } else {
-                un_80313358(state, (s8) idx, 4, 1);
+                un_80313358(state, (s8) state->x270->idx, 4, 1);
             }
             state->pad_29D = state->x29E;
             return;
@@ -1001,9 +998,9 @@ void fn_80313BD8(HSD_GObj* gobj)
         for (; i < (s8) state->entryCount; i++, p++) {
             if (((s8*) p)[0x24] == g[0xC]) {
                 state->selectedIdx = p->idx;
-                state->entries[10].links[0] = (TyListArg*) p;
+                state->x278 = p;
                 lbAudioAx_80024030(2);
-                HSD_JObjSetTranslateY(state->jobj, p->x30);
+                HSD_JObjSetTranslateY(state->x288, p->x30);
             }
             un_80312904(p, state->x2B8);
         }
@@ -1035,7 +1032,7 @@ void fn_80313BD8(HSD_GObj* gobj)
     for (i = 0; i < (s8) state->entryCount; i++, p++) {
         un_80312904(p, state->entryCount);
     }
-    HSD_JObjSetFlagsAll(state->jobj, 0x10);
+    HSD_JObjSetFlagsAll(state->x288, 0x10);
     if (f31 > un_804DDE48) {
         un_80313358(state, 1, 6, 0);
     } else {

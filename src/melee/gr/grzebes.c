@@ -772,10 +772,11 @@ void grZebes_801D9798(HSD_GObj* gobj)
 
     gp->gv.zebes5.xC4 = 0;
 
-    delay_max = grZe_804D6990->xA0_entries[gp->gv.zebes5.xC4].x4_delay_max;
     delay_min = grZe_804D6990->xA0_entries[gp->gv.zebes5.xC4].x2_delay_min;
 
-    if (delay_max > delay_min) {
+    if ((delay_max = grZe_804D6990->xA0_entries[gp->gv.zebes5.xC4]
+                         .x4_delay_max) > delay_min)
+    {
         s32 diff = delay_max - delay_min;
         delay_max = delay_min + ((diff != 0) ? HSD_Randi(diff) : 0);
     } else if (delay_max < delay_min) {

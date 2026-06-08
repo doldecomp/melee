@@ -882,7 +882,8 @@ void grGreens_80214FA8(Ground_GObj* gobj)
     int j;
     unsigned int i;
     Ground* gp = GET_GROUND(gobj);
-    int k;
+    int row;
+    int col;
 
     for (i = 0; i < 30; i++) {
         mpJointSetCb2(grGr_803E787C[i], gp, fn_80216DE4);
@@ -895,12 +896,13 @@ void grGreens_80214FA8(Ground_GObj* gobj)
             HSD_ASSERT(1203, NULL);
         }
     }
-    for (k = 0; k < 5; k++) {
-        for (j = 0; j < 6; j++) {
-            switch (grGr_8049F9E0[k * 6 + j]) {
+    for (row = 0; row < 5; row++) {
+        for (col = 0; col < 6; col++) {
+            switch (grGr_8049F9E0[row * 6 + col]) {
             case 1:
             case 2:
-                grGreens_80215358(gobj, j, k, grGr_8049F9E0[k * 6 + j], 3);
+                grGreens_80215358(gobj, col, row,
+                                   grGr_8049F9E0[row * 6 + col], 3);
                 break;
             }
         }
@@ -973,7 +975,7 @@ void grGreens_80215358(Ground_GObj* gobj, int col, int row, int arg3, int arg4)
     Vec vec;
     float f;
     PAD_STACK(0x10);
-    HSD_ASSERT(1305, block->status==Gr_Greens_Block_Status_None);
+    HSD_ASSERT(1305, block->status == Gr_Greens_Block_Status_None);
     for (n = 0; n < 30; n++) {
         arr[n] = 0;
     }
@@ -989,7 +991,7 @@ void grGreens_80215358(Ground_GObj* gobj, int col, int row, int arg3, int arg4)
             break;
         }
     }
-    HSD_ASSERT(1316, num<Gr_Greens_Block_Max);
+    HSD_ASSERT(1316, num < Gr_Greens_Block_Max);
     if (arg3 == 1) {
         type = 1;
     } else if (arg3 == 2) {
