@@ -71,8 +71,8 @@ int it_802BAF2C(Item* ip, HSD_JObj* jobj)
     ItemLink* head_link;
     ItemLink* tail_link;
     HSD_JObj* result;
-    itSeakChain_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
     int i;
+    itSeakChain_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
     Vec3 zero = it_803B8680;
 
     prev_link = NULL;
@@ -591,32 +591,30 @@ void it_802BC080(ItemLink* link, Vec3* target, Item* ip)
         }
     }
 
-    {
-        f32 stick_x = fp->fv.sk.lstick_delta.x;
-        if (ABS(stick_x) > attrs->x48) {
-            s32 sign = (stick_x < 0.0f) ? -1 : 1;
-            if (ip->facing_dir == sign) {
-                ip->xDD4_itemVar.seakchain.history[0].x = stick_x * attrs->x38;
-            } else {
-                ip->xDD4_itemVar.seakchain.history[0].x = stick_x * attrs->x3C;
-            }
+    if (ABS(fp->fv.sk.lstick_delta.x) > attrs->x48) {
+        s32 sign = (fp->fv.sk.lstick_delta.x < 0.0f) ? -1 : 1;
+        if (ip->facing_dir == sign) {
+            ip->xDD4_itemVar.seakchain.history[0].x =
+                fp->fv.sk.lstick_delta.x * attrs->x38;
         } else {
-            ip->xDD4_itemVar.seakchain.history[0].x = 0.0f;
+            ip->xDD4_itemVar.seakchain.history[0].x =
+                fp->fv.sk.lstick_delta.x * attrs->x3C;
         }
+    } else {
+        ip->xDD4_itemVar.seakchain.history[0].x = 0.0f;
     }
 
-    {
-        f32 stick_y = fp->fv.sk.lstick_delta.y;
-        if (ABS(stick_y) > attrs->x48) {
-            s32 sign = (stick_y < 0.0f) ? -1 : 1;
-            if (sign > 0.0f) {
-                ip->xDD4_itemVar.seakchain.history[0].y = stick_y * attrs->x40;
-            } else {
-                ip->xDD4_itemVar.seakchain.history[0].y = stick_y * attrs->x44;
-            }
+    if (ABS(fp->fv.sk.lstick_delta.y) > attrs->x48) {
+        s32 sign = (fp->fv.sk.lstick_delta.y < 0.0f) ? -1 : 1;
+        if (sign > 0.0f) {
+            ip->xDD4_itemVar.seakchain.history[0].y =
+                fp->fv.sk.lstick_delta.y * attrs->x40;
         } else {
-            ip->xDD4_itemVar.seakchain.history[0].y = 0.0f;
+            ip->xDD4_itemVar.seakchain.history[0].y =
+                fp->fv.sk.lstick_delta.y * attrs->x44;
         }
+    } else {
+        ip->xDD4_itemVar.seakchain.history[0].y = 0.0f;
     }
 
     ip->xDD4_itemVar.seakchain.x18 = *(s32*) &fp->mv.co.common.x1C;
@@ -631,14 +629,10 @@ void it_802BC080(ItemLink* link, Vec3* target, Item* ip)
             cur->vel.x = -attrs->x24;
         }
     }
-    {
-        f32 vy_limit = attrs->x18;
-        f32 vy_bias = attrs->x28;
-        if (cur->vel.y > vy_limit - vy_bias) {
-            cur->vel.y -= vy_limit;
-        } else if (cur->vel.y < -vy_limit - vy_bias) {
-            cur->vel.y += vy_limit;
-        }
+    if (cur->vel.y > attrs->x18 - attrs->x28) {
+        cur->vel.y -= attrs->x18;
+    } else if (cur->vel.y < -attrs->x18 - attrs->x28) {
+        cur->vel.y += attrs->x18;
     }
     if (ABS(cur->vel.y) > attrs->x2C) {
         if (cur->vel.y > 0.0f) {
@@ -704,10 +698,9 @@ void it_802BC080(ItemLink* link, Vec3* target, Item* ip)
         }
         {
             f32 vy_lim = attrs->x18 * scale;
-            f32 vy_bias = attrs->x28;
-            if (iter->vel.y > vy_lim - vy_bias) {
+            if (iter->vel.y > vy_lim - attrs->x28) {
                 iter->vel.y -= vy_lim;
-            } else if (iter->vel.y < -attrs->x18 * scale - vy_bias) {
+            } else if (iter->vel.y < -attrs->x18 * scale - attrs->x28) {
                 iter->vel.y += vy_lim;
             }
         }

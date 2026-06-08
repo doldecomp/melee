@@ -2061,7 +2061,7 @@ void it_802A7384(Item* item, Vec3* arg1, f32 arg8)
         } else {
             prev_pos = link->pos;
         }
-        jobj = link->gobj->hsd_obj;
+        jobj = GET_JOBJ(link->gobj);
         cur_pos = link->pos;
         HSD_JObjSetTranslate(jobj, &cur_pos);
         dir.x = prev_pos.x - next_pos.x;
@@ -2070,7 +2070,7 @@ void it_802A7384(Item* item, Vec3* arg1, f32 arg8)
         it_802A6F80(jobj, &cur_pos, &dir, arg8);
         link = link->prev;
     }
-    jobj = link->gobj->hsd_obj;
+    jobj = GET_JOBJ(link->gobj);
     cur_pos = link->pos;
     HSD_JObjSetTranslate(jobj, &cur_pos);
     if (fp->facing_dir > (f64) 0.0F) {
