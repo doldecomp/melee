@@ -443,12 +443,13 @@ void ftCo_800D71D8(Fighter_GObj* gobj)
 
 bool ftCo_800D730C(Fighter_GObj* gobj, bool arg1)
 {
+    extern f32 ftCo_804D9018;
     s32 unused1;
-    Fighter* fp = GET_FIGHTER(gobj);
-    struct Fighter_x2D0_t* x2d0 = fp->x2D0;
-    Vec3 vel;
+    struct Fighter_x2D0_t* x2d0;
     s32 canJump;
     s32 r29;
+    Fighter* fp;
+    Vec3 vel;
     s32 r4;
     s32 result;
     s32 unused2;
@@ -458,6 +459,8 @@ bool ftCo_800D730C(Fighter_GObj* gobj, bool arg1)
     s32 unused6;
     s32 unused7;
 
+    fp = GET_FIGHTER(gobj);
+    x2d0 = fp->x2D0;
     if (fp->motion_id == 0x9B) {
         if (ft_did_jump(fp, arg1)) {
             ftCo_800D74A4(gobj);
@@ -470,7 +473,7 @@ bool ftCo_800D730C(Fighter_GObj* gobj, bool arg1)
             if (ft_800D2D0C(gobj)) {
                 vel.x = fp->input.lstick.x * x2d0->x8;
                 vel.y = x2d0->x14[0];
-                vel.z = 0.0f;
+                vel.z = ftCo_804D9018;
                 ft_800D2E7C(gobj, &vel);
             } else {
                 ftCommon_8007D5D4(fp);
@@ -1502,10 +1505,10 @@ bool fn_800D9558(Fighter_GObj* gobj)
 bool fn_800D8EC8(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    struct ftLk_DatAttrs* attrs;
+    ftCo_LinkCatchAttrs* attrs;
+    Item_GObj* item;
     HSD_JObj* jobj;
     itLinkHookshotAttributes* hookAttrs;
-    Item_GObj* item;
     Vec3 bonePos;
     f32 grav;
     Vec3 vel;
@@ -1575,7 +1578,7 @@ bool fn_800D8EC8(Fighter_GObj* gobj)
                         ft_PlaySFX(fp, 0x2714C, 0x7F, 0x40);
                     }
                 } else if (grav == (f32) attrs->x90) {
-                    it_802A2B10(item);
+                    it_802A2B10(fp->fv.lk.xC);
                 }
             }
         }

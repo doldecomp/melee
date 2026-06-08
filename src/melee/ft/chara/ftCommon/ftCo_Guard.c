@@ -428,6 +428,7 @@ void ftCo_80092908(Fighter_GObj* gobj)
         HSD_JObj* jobj = fp->parts[fp->ft_data->x8->x11].joint;
         ftCo_80092158(gobj, 1048, jobj);
         fp->x2219_b0 = true;
+        PAD_STACK(8);
         ftCo_80092450(gobj);
         ftCo_80091E78(gobj, 1);
     }
@@ -786,7 +787,7 @@ void ftCo_80093A50(Fighter_GObj* gobj)
 
 void ftCo_80093BC0(Fighter_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x221C_b3) {
         fp->x221C_b3 = false;
     }
@@ -808,7 +809,7 @@ void ftCo_80093BC0(Fighter_GObj* gobj)
 
 void ftCo_GuardReflect_Anim(HSD_GObj* gobj)
 {
-    PAD_STACK(16);
+    PAD_STACK(12);
     ftCo_80093BC0(gobj);
     ftCo_GuardOn_Anim(gobj);
 }
