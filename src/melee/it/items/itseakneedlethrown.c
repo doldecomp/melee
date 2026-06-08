@@ -547,17 +547,18 @@ bool it_2725_Logic109_ShieldBounced(Item_GObj* gobj)
 bool it_2725_Logic109_HitShield(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
+    Item* ip2 = ip;
+    itSeakNeedleThrownAttributes* attr =
+        ip->xC4_article_data->x4_specialAttributes;
     itSeakNeedleThrownData* data = &it_803F6F50;
-    itSeakNeedleThrownAttributes* attr;
 
-    attr = ip->xC4_article_data->x4_specialAttributes;
     if (HSD_Randi(3) == 0) {
         it_80272560(gobj, 0);
         it_80275158(gobj, attr->x4);
-        ip->x40_vel.z = 0.0f;
-        ip->x40_vel.x = 0.0f;
-        ip->x40_vel.y = ABS(data->xD0[HSD_Randi(8)]);
-        it_802762BC(ip);
+        ip2->x40_vel.z = 0.0f;
+        ip2->x40_vel.x = 0.0f;
+        ip2->x40_vel.y = ABS(data->xD0[HSD_Randi(8)]);
+        it_802762BC(ip2);
         itSeakNeedleThrown_SetupBounce(gobj, data);
         Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
         return false;
