@@ -699,7 +699,6 @@ int HSD_CObjGetUpVector(HSD_CObj* cobj, Vec3* up)
 void HSD_CObjSetUpVector(HSD_CObj* cobj, Vec3* up)
 {
     Vec3 v;
-
     if (!cobj || !up) {
         return;
     }
