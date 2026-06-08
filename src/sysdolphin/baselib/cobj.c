@@ -728,22 +728,7 @@ int HSD_CObjGetLeftVector(HSD_CObj* cobj, Vec3* left)
 
     if (cobj != NULL && left != NULL) {
         if (HSD_CObjGetEyeVector(cobj, &eye) == 0) {
-            if (cobj != NULL && &up != NULL) {
-                if ((cobj->flags & 1) != 0) {
-                    res = 0;
-                    up = cobj->u.up;
-                } else if (roll2upvec(cobj, &up, cobj->u.roll) == 0) {
-                    res = 0;
-                } else {
-                    goto set_up;
-                }
-            } else {
-            set_up:
-                res = -1;
-                up.x = 0.0f;
-                up.y = 1.0f;
-                up.z = 0.0f;
-            }
+            res = HSD_CObjGetUpVector(cobj, &up);
             if (res == 0) {
                 PSVECCrossProduct(&up, &eye, left);
                 if (!vec_normalize_check(left, left)) {
