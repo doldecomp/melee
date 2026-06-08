@@ -24,6 +24,32 @@ HSD_TExpType HSD_TExpGetType(HSD_TExp* texp)
     return texp->type;
 }
 
+static HSD_TExp* TevAlloc(void)
+{
+    HSD_TExp* texp = hsdAllocMemPiece(sizeof(HSD_TETev));
+    HSD_ASSERT(62, texp);
+    return texp;
+}
+
+static HSD_TExp* CnstAlloc(void)
+{
+    HSD_TExp* texp = hsdAllocMemPiece(sizeof(HSD_TECnst));
+    HSD_ASSERT(70, texp);
+    return texp;
+}
+
+void HSD_TExpFree(HSD_TExp* texp)
+{
+    switch (HSD_TExpGetType(texp)) {
+    case HSD_TE_TEV:
+        hsdFreeMemPiece(texp, sizeof(HSD_TETev));
+        break;
+    case HSD_TE_CNST:
+        hsdFreeMemPiece(texp, sizeof(HSD_TECnst));
+        break;
+    }
+}
+
 void HSD_TExpRef(HSD_TExp* texp, u8 sel)
 {
     HSD_TExpType type = HSD_TExpGetType(texp);
@@ -72,32 +98,6 @@ void HSD_TExpUnref(HSD_TExp* texp, u8 sel)
     if (texp->cnst.ref != 0) {
         texp->cnst.ref -= 1;
         return;
-    }
-}
-
-static HSD_TExp* TevAlloc(void)
-{
-    HSD_TExp* texp = hsdAllocMemPiece(sizeof(HSD_TETev));
-    HSD_ASSERT(62, texp);
-    return texp;
-}
-
-static HSD_TExp* CnstAlloc(void)
-{
-    HSD_TExp* texp = hsdAllocMemPiece(sizeof(HSD_TECnst));
-    HSD_ASSERT(70, texp);
-    return texp;
-}
-
-void HSD_TExpFree(HSD_TExp* texp)
-{
-    switch (HSD_TExpGetType(texp)) {
-    case HSD_TE_TEV:
-        hsdFreeMemPiece(texp, sizeof(HSD_TETev));
-        break;
-    case HSD_TE_CNST:
-        hsdFreeMemPiece(texp, sizeof(HSD_TECnst));
-        break;
     }
 }
 
