@@ -1228,7 +1228,7 @@ void HSD_Synth_8038ADD0(void)
         }
     }
     if (pos == HSD_Synth_804D7770 && pos != HSD_Synth_804D776C) {
-        if ((u32) (lbl_804C4540[HSD_Synth_804D7770].x8 + 0x10000) == -1U) {
+        if (lbl_804C4540[HSD_Synth_804D7770].x8 == -0x10001) {
             HSD_Synth_804D7770 = (HSD_Synth_804D7770 + 1) % 3;
             for (i = 0; i < node->voice_count; i++) {
                 AXSetVoiceLoop(node->voice[i], 0);
