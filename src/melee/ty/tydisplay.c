@@ -1373,6 +1373,7 @@ void fn_8031A94C(HSD_GObj* arg0)
     }
 }
 
+static char un_803FEFF0[] = "ToyDspPanel_Top_joint";
 static u16 un_804D5ABC = 0x15;
 
 void un_8031B1FC(void)
@@ -1423,8 +1424,8 @@ void un_8031B1FC(void)
     HSD_ASSERT(0x43E, 0);
 }
 
-static s32 un_804DE018 = (s32) 0xC8C8C8FF;
-static f32 un_804DE01C = 0.6f;
+static const s32 un_804DE018 = (s32) 0xC8C8C8FF;
+static const f32 un_804DE01C = 0.6f;
 
 void un_8031B328(void)
 {
@@ -1468,8 +1469,6 @@ void un_8031B328(void)
         GObj_SetupGXLink(scene->x08, un_80306930, 0x35, 0);
     }
 }
-
-static char un_803FEFF0[] = "ToyDspPanel_Top_joint";
 
 void un_8031B460_OnEnter(void* arg0)
 {
@@ -1905,17 +1904,18 @@ s32 un_8031BBF4(s8 arg0)
 HSD_GObj* un_8031BC54(s32 arg0)
 {
     char buf[44];
-    TyDspArchNames jobj_names;
-    TyDspArchNames matanim_names;
+    s32 id = arg0;
     HSD_GObj* gobj;
     TyDspEntry* entry;
     TyDspBgData* data = un_804D6F1C;
+    TyDspArchNames jobj_names;
+    TyDspArchNames matanim_names;
     HSD_JObj* root;
     HSD_JObj* child;
     u8 cat;
     u32 c;
 
-    entry = un_8031B9DC(arg0);
+    entry = un_8031B9DC(id);
     gobj = GObj_Create(6, 7, 0);
     root = HSD_JObjAlloc();
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, root);
@@ -1960,7 +1960,7 @@ HSD_GObj* un_8031BC54(s32 arg0)
         DevText_SetCursorXY(un_804D6F24, 0, 0);
         sprintf(buf, un_803FF19C, entry->x08, entry->x0C);
         DevText_Print(un_804D6F24, buf);
-        un_8031BF34(arg0);
+        un_8031BF34(id);
     }
 
     return gobj;

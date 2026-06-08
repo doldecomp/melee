@@ -4437,7 +4437,6 @@ void ftCo_800A9CB4(Fighter* fp)
     f32 var_f2;
     f32 var_f5;
 
-    f32* temp_r3;
     enum_t var_r0_2;
     int var_r0_6;
 
@@ -4516,7 +4515,6 @@ void ftCo_800A9CB4(Fighter* fp)
     } else {
         var_f0 = 0.0F;
     }
-    temp_r3 = &fp->co_attrs.grav;
     if (is_small(fp->co_attrs.grav)) {
         var_f5 = 1000.0F;
     } else {
@@ -4527,10 +4525,12 @@ void ftCo_800A9CB4(Fighter* fp)
         var_f2 = (fp->pos_delta.y * var_f0) + fp->cur_pos.y;
     } else if (var_f0 < var_f5) {
         var_f2 = fp->cur_pos.y +
-                 (fp->pos_delta.y * var_f0 - 0.5 * (*temp_r3 * sqrtf(var_f0)));
+                 (fp->pos_delta.y * var_f0 -
+                  0.5 * (fp->co_attrs.grav * sqrtf(var_f0)));
     } else {
         var_f2 = fp->cur_pos.y +
-                 (fp->pos_delta.y * var_f5 - 0.5 * (*temp_r3 * sqrtf(var_f5)) -
+                 (fp->pos_delta.y * var_f5 -
+                  0.5 * (fp->co_attrs.grav * sqrtf(var_f5)) -
                   ((var_f0 - var_f5) * fp->co_attrs.terminal_vel));
     }
     if (var_f0 < 0.0) {
@@ -5002,15 +5002,7 @@ void ftCo_800AB224(Fighter* fp)
     temp_r31 = &fp->x1A88;
     if (temp_r31->xFA_b6) {
         if (fp->facing_dir > 0.0) {
-            ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
-            ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
-            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-            ftCo_800B46B8(fp, CpuCmd_LstickXForward, 0xB0);
-            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-            ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
-            ftCo_800B46B8(fp, CpuCmd_WaitFor, 0xA);
-            ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
-            ftCo_800B463C(fp, CpuCmd_Done);
+            ftCo_800AD54C_inline0(fp);
             return;
         }
         if (!ftCo_800A28D0(fp, 1.0F)) {
@@ -6675,8 +6667,8 @@ void ftCo_800AEFB8(Fighter* fp)
 
 void ftCo_800AF290(Fighter* fp)
 {
-    struct Fighter_x1A88_t* temp_r27;
     struct Fighter_x1A88_t* data2;
+    struct Fighter_x1A88_t* temp_r27;
     Vec3 sp54;
     Vec3 sp30;
     s32 cmd;
@@ -6780,11 +6772,7 @@ void ftCo_800AF290(Fighter* fp)
     } else {
         target = data->x44;
         if (target != NULL && fp->ground_or_air == GA_Ground) {
-            dy = fp->cur_pos.y - target->cur_pos.y;
-            dx = fp->cur_pos.x - target->cur_pos.x;
-            if (sqrtf__Ff(dx * dx + dy * dy) <
-                Fighter_804D64FC->x20[fp->kind])
-            {
+            if (ftCo_800A1AB4(fp, target) < Fighter_804D64FC->x20[fp->kind]) {
                 data->xF8_b6 = true;
             } else {
                 data->xF8_b6 = false;
@@ -6872,7 +6860,7 @@ static inline void ftCo_800AF78C_inline0(Fighter* fp)
     } else {
         if ((data->x44 != NULL) && (fp->ground_or_air == GA_Ground)) {
             if (ftCo_800A1AB4(fp, data->x44) <
-                M2C_FIELD(Fighter_804D64FC, float**, 0x20)[fp->kind])
+                Fighter_804D64FC->x20[fp->kind])
             {
                 data->xF8_b6 = true;
             } else {

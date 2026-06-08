@@ -1768,7 +1768,7 @@ void mnDiagram_802417D0(HSD_GObj* gobj)
     mnDiagram_AnimTable* tbl = (mnDiagram_AnimTable*) &mnDiagram_803EE728;
     HSD_JObj* jobj;
     u8* sorted = mnDiagram_804A0750.sorted_fighters;
-    s32 i;
+    int i;
     u8* ptr;
     u8* ptr2;
     s32 count;

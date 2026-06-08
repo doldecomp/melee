@@ -32,8 +32,10 @@
 #include <MSL/string.h>
 
 /// ?
-/* 4D6E18 */ extern DevText* devtext_drawlist;
-/* 4D6E38 */ extern DevText* devtext_poolhead;
+/* 4D6E18 */ extern DevText* un_804D6E18;
+/* 4D6E38 */ extern DevText* un_804D6E38;
+#define devtext_drawlist un_804D6E18
+#define devtext_poolhead un_804D6E38
 unsigned short un_804A26B8[1000];
 unsigned short un_804A284C[1000];
 short* un_804D6EB4;
@@ -52,10 +54,16 @@ unsigned char un_804D6E4C;
 /// .sbss
 /* 4D6E44 */ static struct un_80304138_objalloc_t* un_804D6E44;
 
-GXColor white = { 0xFF, 0xFF, 0xFF, 0xFF };
-GXColor red = { 0xFF, 0x80, 0x80, 0xFF };
-GXColor green = { 0x80, 0xFF, 0x80, 0xFF };
-GXColor blue = { 0x80, 0x80, 0xFF, 0xFF };
+GXColor un_804DDC88 = { 0x60, 0xD0, 0xB0, 0x70 };
+GXColor un_804DDC8C = { 0xFF, 0xFF, 0xFF, 0xFF };
+GXColor un_804DDC90 = { 0xFF, 0x80, 0x80, 0xFF };
+GXColor un_804DDC94 = { 0x80, 0xFF, 0x80, 0xFF };
+GXColor un_804DDC98 = { 0x80, 0x80, 0xFF, 0xFF };
+#define devtext_default_bg un_804DDC88
+#define devtext_white un_804DDC8C
+#define devtext_red un_804DDC90
+#define devtext_green un_804DDC94
+#define devtext_blue un_804DDC98
 
 GXColor color_08 = { 0x40, 0x50, 0x80, 0x80 };
 GXColor color_0C = { 0xE2, 0xE2, 0xE2, 0xFF };
@@ -76,7 +84,7 @@ static inline DevText* find_by_id(char id)
 DevText* DevText_Create(char id, int x, int y, int w, int h, char* buf)
 {
     DevText* text;
-    GXColor bg = { 0x60, 0xD0, 0xB0, 0x70 };
+    GXColor bg = devtext_default_bg;
     PAD_STACK(0x60 - 0x48);
 
     if ((text = find_by_id(id))) {
@@ -103,10 +111,10 @@ DevText* DevText_Create(char id, int x, int y, int w, int h, char* buf)
         text->scale_x = 10.0;
         text->scale_y = 16.0;
         text->bg_color = bg;
-        text->text_colors[0] = white;
-        text->text_colors[1] = red;
-        text->text_colors[2] = green;
-        text->text_colors[3] = blue;
+        text->text_colors[0] = devtext_white;
+        text->text_colors[1] = devtext_red;
+        text->text_colors[2] = devtext_green;
+        text->text_colors[3] = devtext_blue;
         text->id = (int) id;
         text->line_width = 10;
         text->flags = DEVTEXT_FLAG_SHOWCURSOR;

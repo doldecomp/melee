@@ -2100,8 +2100,8 @@ bool gm_8016EDDC(int arg0, PlayerInitData* arg1)
     lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
     Vec3 sp18;
     float var_f1;
-    u8 temp_r30;
     u8 temp_r29;
+    u8 temp_r30;
     bool is_teams;
     PAD_STACK(4);
 

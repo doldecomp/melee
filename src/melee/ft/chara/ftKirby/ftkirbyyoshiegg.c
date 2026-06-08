@@ -74,13 +74,17 @@ static inline void inlineB0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftHurtboxInit hurt;
+    ftCo_DatAttrs_xBC_t* xBCp;
+    PAD_STACK(16);
+
     ftColl_8007B0C0(gobj, Intangible);
+    xBCp = &fp->co_attrs.xBC;
     hurt.bone_idx = ftParts_GetBoneIndex(fp, FtPart_TransN);
     hurt.height = HurtHeight_Mid;
     hurt.is_grabbable = false;
-    hurt.a_offset = fp->co_attrs.xBC.x4;
-    hurt.b_offset = fp->co_attrs.xBC.x10;
-    hurt.scale = fp->co_attrs.xBC.x1C;
+    hurt.a_offset = xBCp->x4;
+    hurt.b_offset = xBCp->x10;
+    hurt.scale = xBCp->x1C;
     ftColl_HurtboxInit(fp, fp->hurt_capsules, &hurt);
 }
 

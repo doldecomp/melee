@@ -513,7 +513,7 @@ void grInishie2_801FD4F0(Ground_GObj* gobj)
     HSD_JObj* jobj;
     HSD_JObj* temp_r29;
     HSD_JObj* temp_r30;
-    PAD_STACK(16);
+    PAD_STACK(12);
 
     jobj = GET_JOBJ(gobj);
     gp = GET_GROUND(gobj);
@@ -707,6 +707,7 @@ void grInishie2_801FD9EC(HSD_GObj* gobj)
         HSD_JObjAddTranslationX(jobj, gp->gv.inishie23.xCC.x);
         HSD_JObjAddTranslationY(jobj, gp->gv.inishie23.xCC.y);
         HSD_JObjAddTranslationZ(jobj, gp->gv.inishie23.xCC.z);
+        temp_vec = &gp->gv.inishie23.xD8;
         HSD_JObjGetTranslation(jobj, temp_vec);
 
         return;

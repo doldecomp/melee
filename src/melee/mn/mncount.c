@@ -318,63 +318,66 @@ static inline bool mnCount_8025092C_inline(void)
 
 s32 mnCount_8025092C(s32 rank, u32 (*getVal)(s32), bool mode)
 {
-    CountEntry entries[NUM_CHARACTERS];
-    CountEntry tmp;
-    int i, j, min;
-    if (mnCount_8025092C_inline()) {
-        return NUM_CHARACTERS;
-    }
-    for (i = 0; i < NUM_CHARACTERS; i++) {
-        entries[i].id = i;
-        entries[i].val = getVal(i);
-    }
-    for (i = 0; i < NUM_CHARACTERS; i++) {
-        min = i;
-        for (j = i + 1; j < NUM_CHARACTERS; j++) {
-            if (entries[min].val < entries[j].val) {
-                min = j;
-            }
+    PAD_STACK(8);
+    {
+        CountEntry entries[NUM_CHARACTERS];
+        CountEntry tmp;
+        int i, j, min;
+        if (mnCount_8025092C_inline()) {
+            return NUM_CHARACTERS;
         }
-        if (min != i) {
-            tmp = entries[min];
-            for (j = min; j > i; j--) {
-                entries[j] = entries[j - 1];
-            }
-            entries[i] = tmp;
+        for (i = 0; i < NUM_CHARACTERS; i++) {
+            entries[i].id = i;
+            entries[i].val = getVal(i);
         }
-    }
-    for (i = 0; i < NUM_CHARACTERS; i++) {
-        if (!gm_80164840(gm_8016400C(entries[i].id))) {
-            continue;
-        }
-        if (rank != 0) {
-            rank--;
+        for (i = 0; i < NUM_CHARACTERS; i++) {
+            min = i;
             for (j = i + 1; j < NUM_CHARACTERS; j++) {
-                if (!gm_80164840(gm_8016400C(entries[j].id))) {
-                    continue;
+                if (entries[min].val < entries[j].val) {
+                    min = j;
                 }
-                if (getVal(entries[i].id) == getVal(entries[j].id)) {
-                    i++;
-                    if (rank != 0) {
-                        rank--;
-                    } else {
-                        return NUM_CHARACTERS;
+            }
+            if (min != i) {
+                tmp = entries[min];
+                for (j = min; j > i; j--) {
+                    entries[j] = entries[j - 1];
+                }
+                entries[i] = tmp;
+            }
+        }
+        for (i = 0; i < NUM_CHARACTERS; i++) {
+            if (!gm_80164840(gm_8016400C(entries[i].id))) {
+                continue;
+            }
+            if (rank != 0) {
+                rank--;
+                for (j = i + 1; j < NUM_CHARACTERS; j++) {
+                    if (!gm_80164840(gm_8016400C(entries[j].id))) {
+                        continue;
+                    }
+                    if (getVal(entries[i].id) == getVal(entries[j].id)) {
+                        i++;
+                        if (rank != 0) {
+                            rank--;
+                        } else {
+                            return NUM_CHARACTERS;
+                        }
                     }
                 }
-            }
-        } else {
-            for (j = i + 1; j < NUM_CHARACTERS; j++) {
-                if (!gm_80164840(gm_8016400C(entries[j].id))) {
-                    continue;
+            } else {
+                for (j = i + 1; j < NUM_CHARACTERS; j++) {
+                    if (!gm_80164840(gm_8016400C(entries[j].id))) {
+                        continue;
+                    }
+                    if (getVal(entries[i].id) == getVal(entries[j].id)) {
+                        return mnCount_8025072C(entries, i, mode);
+                    }
                 }
-                if (getVal(entries[i].id) == getVal(entries[j].id)) {
-                    return mnCount_8025072C(entries, i, mode);
-                }
+                return entries[i].id;
             }
-            return entries[i].id;
         }
+        return NUM_CHARACTERS;
     }
-    return NUM_CHARACTERS;
 }
 
 static inline int mnCount_CountUnlockedChars(void)

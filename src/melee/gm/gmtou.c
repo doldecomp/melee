@@ -48,11 +48,18 @@ extern HSD_Archive* lbl_804D6688;
 extern HSD_Archive* lbl_804D668C;
 extern s32 lbl_804D663C;
 
+static u8 lbl_803DA0D0[0xCC] = { 0 };
+
 struct lbl_803DA2E0_t {
     u8 x0[0x20];
     f32 x20[0x29];
 };
-extern struct lbl_803DA2E0_t lbl_803DA2E0;
+static struct lbl_803DA2E0_t lbl_803DA2E0 = {
+    {
+        0, 1, 2, 3, 5, 6, 12, 6, 6, 7, 9, 8,
+        6, 9, 4, 9, 10, 11, 12, 2, 12, 6, 7, 9,
+    },
+};
 
 extern MatchEnd gm_80477738;
 extern s32 lbl_803B7D3C[4];
@@ -776,7 +783,6 @@ void gm_8019DF8C_OnFrame(void)
 {
     TmVsData vsdata;
     TmData* tmd;
-    s32 confirmed;
     s32 i, j;
     u32 buttons;
     u32 pressed;
@@ -794,25 +800,27 @@ void gm_8019DF8C_OnFrame(void)
         return;
     }
 
-    confirmed = 0;
-    for (i = 0; i < (s32) tmd->x30; i++) {
-        if (lbl_80479A58.x1D[i].x0 == 2 && lbl_80479A58.x1D[i].b >= 0x3CU &&
-            (s8) (u8) HSD_PadMasterStatus[(u8) i].err == 0)
-        {
-            confirmed += 1;
-        }
-    }
-
-    if (confirmed == (s32) tmd->x30) {
-        lbl_80479A58.x0 += 1;
-        if ((u32) lbl_80479A58.x0 >= 0x1EU) {
-            for (j = 0; j < (s32) tmd->x2E; j++) {
-                tmd->x37[j].xF = tmd->x37[j].xE;
+    {
+        s32 confirmed = 0;
+        for (i = 0; i < (s32) tmd->x30; i++) {
+            if (lbl_80479A58.x1D[i].x0 == 2 &&
+                lbl_80479A58.x1D[i].b >= 0x3CU &&
+                (s8) (u8) HSD_PadMasterStatus[(u8) i].err == 0)
+            {
+                confirmed += 1;
             }
-            fn_801965C4();
         }
-    } else {
-        lbl_80479A58.x0 = 0;
+
+        if (confirmed == (s32) tmd->x30) {
+            lbl_80479A58.x0 += 1;
+            if ((u32) lbl_80479A58.x0 >= 0x1EU) {
+                for (j = 0; j < (s32) tmd->x2E; j++) {
+                    tmd->x37[j].xF = tmd->x37[j].xE;
+                }
+                fn_801965C4();
+            }
+        } else {
+            lbl_80479A58.x0 = 0;
 
         for (i = 0; i < (s32) tmd->x30; i++) {
             if ((s8) (u8) HSD_PadMasterStatus[(u8) i].err == 0) {
@@ -1049,6 +1057,7 @@ void gm_8019DF8C_OnFrame(void)
             vsdata.color[i] = (u32) tmd->x4B8[i].x3;
         }
         fn_8019EE80(&vsdata);
+        }
     }
 }
 
@@ -1293,9 +1302,10 @@ void gm_8019ECAC_OnEnter(void* arg0)
         CharacterKind char_id[4];
         u32 color[4];
     } local;
-    s32 i;
     u64 audio_mask;
+    s32 i;
     TmData* tmd;
+    s32 j;
     PAD_STACK(4);
 
     tmd = gm_8018F634();
@@ -1330,9 +1340,9 @@ void gm_8019ECAC_OnEnter(void* arg0)
     lbDvd_800174BC();
 
     audio_mask = 0;
-    for (i = 0; i < 4; i++) {
-        if (tmd->x4B8[i].x0 != 3) {
-            audio_mask |= lbAudioAx_80026E84(local.char_id[i]);
+    for (j = 0; j < 4; j++) {
+        if (tmd->x4B8[j].x0 != 3) {
+            audio_mask |= lbAudioAx_80026E84(local.char_id[j]);
         }
     }
     audio_mask |= lbAudioAx_80026EBC(local.stage_id);

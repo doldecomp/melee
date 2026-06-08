@@ -1065,8 +1065,10 @@ int fn_80179854(void)
     MatchEnd* match_end = &disp->state.match_end;
     GXColor color1 = { 0, 0, 0, 0 };
     GXColor color2 = { 0, 0, 0, 0x3C };
-    int i;
     int lookup;
+    int i;
+
+    PAD_STACK(8);
 
     lbBgFlash_800206D4(&color1, &color2, 0x1E);
 
@@ -1084,8 +1086,6 @@ int fn_80179854(void)
             disp->state.x0_6 = 1;
         }
     }
-
-    return lookup;
 }
 
 extern s32 ftLib_800876B4(HSD_GObj*);

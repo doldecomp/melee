@@ -856,7 +856,7 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                 if (sub_state == 0 || phase == 3) {
                     if (gp->gv.bigblue.data[i].x30 == 0 && sub_state != 0) {
                         gp->gv.bigblue.data[i].xC.y = cur_pos.y;
-                        gp->gv.bigblue.data[i].x8 = grBb_804D69C8->xB0;
+                        gp->gv.bigblue.data[i].x4 = grBb_804D69C8->xB0;
                         gp->gv.bigblue.data[i].x34 = 1;
                     }
                     gp->gv.bigblue.data[i].xC.x = euler.x;
@@ -894,7 +894,7 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
 
                     if (gp->gv.bigblue.data[i].x30 == 0) {
                         gp->gv.bigblue.data[i].xC.y = cur_pos.y;
-                        gp->gv.bigblue.data[i].x8 = grBb_804D69C8->xB0;
+                        gp->gv.bigblue.data[i].x4 = grBb_804D69C8->xB0;
                         gp->gv.bigblue.data[i].x34 = 1;
                     }
                     if (gp->gv.bigblue.data[i].x24 <
@@ -905,7 +905,7 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                         dir_val = -1;
                     }
                     if (gp->gv.bigblue.data[i].x18.y != (f32) dir_val) {
-                        gp->gv.bigblue.data[i].x8 = grBb_804D69C8->xB0;
+                        gp->gv.bigblue.data[i].x4 = grBb_804D69C8->xB0;
                         gp->gv.bigblue.data[i].x34 = 1;
                     }
                     gp->gv.bigblue.data[i].x18.y = (f32) dir_val;
@@ -948,9 +948,9 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                             gp->gv.bigblue.data[i].x18.y = 0.0f;
                             gp->gv.bigblue.data[i].x34 = 4;
                         }
-                    } else if (gp->gv.bigblue.data[i].x8 <= 0) {
+                    } else if (gp->gv.bigblue.data[i].x4 <= 0) {
                         gp->gv.bigblue.data[i].x44.y = grBb_804D69C8->xAC;
-                        gp->gv.bigblue.data[i].x8 = grBb_804D69C8->xB4;
+                        gp->gv.bigblue.data[i].x4 = grBb_804D69C8->xB4;
                         gp->gv.bigblue.data[i].x34 = 3;
                     } else {
                         f32 prev_x = gp->gv.bigblue.data[i].x24;
@@ -1000,7 +1000,7 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                                 HSD_JObjSetRotationZ(jobj, -1.1344640f);
                             }
                         }
-                        gp->gv.bigblue.data[i].x8 -= 1;
+                        gp->gv.bigblue.data[i].x4 -= 1;
                     }
                 }
             }
@@ -1025,12 +1025,14 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                 {
                     Vec3 speeds4;
                     f32 speed_off4;
+                    f32 left_x = cur_pos.x - (20.0f + speed3);
+                    f32 right_x;
                     speeds4 = grBb_803B8114;
                     speed_off4 =
                         ((f32*) &speeds4)[(s8) idx] * Ground_801C0498();
-                    target_y = grBigBlue_801E8B84(
-                        cam_top, cam_bot, cur_pos.x - (20.0f + speed3),
-                        cur_pos.x + (20.0f + speed_off4));
+                    right_x = cur_pos.x + (20.0f + speed_off4);
+                    target_y = grBigBlue_801E8B84(cam_top, cam_bot, left_x,
+                                                  right_x);
                 }
 
                 probe_pos = cur_pos;
@@ -1366,6 +1368,7 @@ void grBigBlue_801E8D64(Ground_GObj* gobj)
     HSD_JObj* jobj = gobj->hsd_obj;
     Vec3 pos;
     Vec3 scale;
+    volatile u8 pad[4];
     Vec3 translate;
     f32 y_pos;
     PAD_STACK(0xC);
@@ -1394,7 +1397,7 @@ void grBigBlue_801E8D64(Ground_GObj* gobj)
 
     HSD_JObjSetTranslateZ(jobj, 0.0F);
 
-    *(f32*) ((u8*) gp + 0xD8) = 0.0F;
+    *(f32*) ((u8*) gp + 0xD8) = grBb_804DB2F4;
     *(s32*) ((u8*) gp + 0xC8) = (s32) (grBb_804D69C8->xD8);
     *(u8*) ((u8*) gp + 0xC4) = 2;
 
@@ -1402,7 +1405,7 @@ void grBigBlue_801E8D64(Ground_GObj* gobj)
 
     HSD_JObjGetTranslation2(jobj, &pos);
     {
-        f32 inv = 1.0F / Ground_801C0498();
+        f32 inv = grBb_804DB2F0 / Ground_801C0498();
         pos.x *= inv;
         pos.y *= inv;
         pos.z *= inv;

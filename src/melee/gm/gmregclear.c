@@ -158,6 +158,8 @@ STATIC_ASSERT(sizeof(AllstarStageEntry) == 0x1A);
 extern AdventureStageEntry lbl_803D7AC0[110];
 extern AllstarStageEntry lbl_803D85F0[55];
 u16 lbl_803D8B88[] = { 0x18, 0x16, 0x12, 0x3, 0x5, 0x4, 0x6, 0x1a, 0x19, 0x7 };
+extern f32 lbl_804DA478;
+extern f32 lbl_804DA4E0;
 
 typedef struct RegClearEv {
     /* 0x00 */ char pad_0[0x1C];
@@ -2497,7 +2499,7 @@ s32 fn_801803FC(void* arg0)
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xBU, 0U);
     HSD_GObj_SetupProc(gobj, (HSD_GObjEvent) fn_8017FF1C, 0x11U);
     fn_801689E4(jobj, mdl, 0);
-    HSD_JObjReqAnimAll(jobj, 0.0f);
+    HSD_JObjReqAnimAll(jobj, lbl_804DA478);
     HSD_JObjAnimAll(jobj);
     {
         lb_8001204C(jobj, &p->x4, lbl_803D8B88, 0xA);
@@ -2521,12 +2523,12 @@ s32 fn_801803FC(void* arg0)
     }
     temp = p->x4;
     if (p->x114 != 0) {
-        frame = 1.0f;
+        frame = lbl_804DA4E0;
     } else {
-        frame = 0.0f;
+        frame = lbl_804DA478;
     }
     HSD_AObjSetCurrentFrame(temp->u.dobj->mobj->tobj->aobj, frame);
-    HSD_AObjSetRate(temp->u.dobj->mobj->tobj->aobj, 0.0f);
+    HSD_AObjSetRate(temp->u.dobj->mobj->tobj->aobj, lbl_804DA478);
     if (p->x118 == 0) {
         fn_8017F608(arg0);
     }

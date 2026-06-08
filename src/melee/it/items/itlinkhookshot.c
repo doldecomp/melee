@@ -695,7 +695,7 @@ void itLinkhookshot_UnkMotion5_Phys(Item_GObj* arg0)
     item->xDD4_itemVar.linkhookshot.x10 = it_802A3500;
 }
 
-static inline bool it_802A3630_inline(Item* item, Vec3* cur_pos, Vec3* pos)
+static inline bool it_802A3630_inline(Item* item, Fighter* fp, Vec3* pos)
 {
     ItemLink* item_link;
     Vec3* item_link_pos;
@@ -706,8 +706,9 @@ static inline bool it_802A3630_inline(Item* item, Vec3* cur_pos, Vec3* pos)
                         item_link->pos.y) != 0)
     {
         return 1;
-    } else if (mpCheckAllRemap(0, 0, 0, 0, -1, -1, cur_pos->x, cur_pos->y,
-                               item_link_pos->x, item_link_pos->y) != 0)
+    } else if (mpCheckAllRemap(0, 0, 0, 0, -1, -1, fp->cur_pos.x,
+                               fp->cur_pos.y, item_link_pos->x,
+                               item_link_pos->y) != 0)
     {
         return 1;
     } else {
@@ -717,16 +718,21 @@ static inline bool it_802A3630_inline(Item* item, Vec3* cur_pos, Vec3* pos)
 
 void it_802A3630(Item_GObj* arg0)
 {
-    Vec3 pos;
     Item* item = GET_ITEM(arg0);
     itLinkHookshotAttributes* attr =
         item->xC4_article_data->x4_specialAttributes;
     Fighter* fp = item->owner->user_data;
     ItemLink* item_link = item->xDD4_itemVar.linkhookshot.x4;
+    Vec3 pos;
+    Fighter* fp2;
+    u8 _pad[4];
+    Mtx m;
+    PAD_STACK(4);
 
-    it_802A2EE4_inline_alt(item->xDD4_itemVar.linkhookshot.x4, &pos);
+    fp2 = fp;
+    it_802A2EE4_inline((MtxPtr) &m, item_link, &pos);
 
-    if (it_802A3630_inline(item, &fp->cur_pos, &pos) != 0) {
+    if (it_802A3630_inline(item, fp2, &pos) != 0) {
         ftCo_80090780(item->owner);
         it_802A2B10(arg0);
         return;
@@ -734,15 +740,15 @@ void it_802A3630(Item_GObj* arg0)
 
     if (it_802A5AE0(item->xDD4_itemVar.linkhookshot.x0, &pos, attr) != 0) {
         it_802A7A04(arg0);
-        it_802A7168(item, &pos, fp->x34_scale.y);
+        it_802A7168(item, &pos, fp2->x34_scale.y);
         return;
     }
-    it_802A7384(item, &pos, fp->x34_scale.y);
-    if (fp->ground_or_air != 1) {
+    it_802A7384(item, &pos, fp2->x34_scale.y);
+    if (fp2->ground_or_air != 1) {
         it_802A77DC(arg0);
         return;
     }
-    if (fp->input.x668 & HSD_PAD_A) {
+    if (fp2->input.x668 & HSD_PAD_A) {
         it_802A79A0(arg0);
     }
 }
@@ -2039,7 +2045,7 @@ void it_802A7384(Item* item, Vec3* arg1, f32 arg8)
     ItemLink* link;
     Fighter* fp;
     HSD_JObj* jobj;
-    PAD_STACK(0x1C);
+    PAD_STACK(0x0C);
 
     link = item->xDD4_itemVar.linkhookshot.x4;
     fp = item->owner->user_data;
@@ -2061,7 +2067,7 @@ void it_802A7384(Item* item, Vec3* arg1, f32 arg8)
         } else {
             prev_pos = link->pos;
         }
-        jobj = link->gobj->hsd_obj;
+        jobj = GET_JOBJ(link->gobj);
         cur_pos = link->pos;
         HSD_JObjSetTranslate(jobj, &cur_pos);
         dir.x = prev_pos.x - next_pos.x;
@@ -2070,7 +2076,7 @@ void it_802A7384(Item* item, Vec3* arg1, f32 arg8)
         it_802A6F80(jobj, &cur_pos, &dir, arg8);
         link = link->prev;
     }
-    jobj = link->gobj->hsd_obj;
+    jobj = GET_JOBJ(link->gobj);
     cur_pos = link->pos;
     HSD_JObjSetTranslate(jobj, &cur_pos);
     if (fp->facing_dir > (f64) 0.0F) {

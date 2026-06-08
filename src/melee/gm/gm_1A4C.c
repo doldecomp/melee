@@ -257,7 +257,6 @@ void gm_801A85E4(HSD_JObj* jobj, s32 arg1, s32 arg2)
     s32 idx;
     s32 temp_idx;
     f32 angle;
-    f32 x;
     PAD_STACK(0x20);
 
     if (arg1 <= 4) {
@@ -270,10 +269,9 @@ void gm_801A85E4(HSD_JObj* jobj, s32 arg1, s32 arg2)
         }
         angle =
             0.017453292f * ((45.0f * (f32) idx) + (2.0f * HSD_Randf()) - 1.0f);
-        x = 25.0f * cosf(angle);
-        HSD_JObjSetTranslateX(jobj, x);
-        x = 0.9f * ((25.0f * -sinf(angle)) + -18.0f);
-        HSD_JObjSetTranslateZ(jobj, x);
+        HSD_JObjSetTranslateX(jobj, 25.0f * cosf(angle));
+        HSD_JObjSetTranslateZ(jobj,
+                              0.9f * ((25.0f * -sinf(angle)) + -18.0f));
     } else if (arg1 <= 0xC) {
         arg2 = 0xC - arg1;
         temp_idx = arg2 + 8;
@@ -284,10 +282,9 @@ void gm_801A85E4(HSD_JObj* jobj, s32 arg1, s32 arg2)
         }
         angle = 0.017453292f *
                 ((25.714285f * (f32) (idx - 5)) + (4.0f * HSD_Randf()) - 2.0f);
-        x = 50.0f * cosf(angle);
-        HSD_JObjSetTranslateX(jobj, x);
-        x = 0.9f * ((50.0f * -sinf(angle)) + -18.0f);
-        HSD_JObjSetTranslateZ(jobj, x);
+        HSD_JObjSetTranslateX(jobj, 50.0f * cosf(angle));
+        HSD_JObjSetTranslateZ(jobj,
+                              0.9f * ((50.0f * -sinf(angle)) + -18.0f));
     } else if (arg1 <= 0x15) {
         arg2 = 0x15 - arg1;
         temp_idx = arg2 + 0x11;
@@ -298,10 +295,9 @@ void gm_801A85E4(HSD_JObj* jobj, s32 arg1, s32 arg2)
         }
         angle =
             0.017453292f * ((22.5f * (f32) (idx - 0xD)) + HSD_Randf() - 0.5f);
-        x = 75.0f * cosf(angle);
-        HSD_JObjSetTranslateX(jobj, x);
-        x = 0.8f * ((75.0f * -sinf(angle)) + -18.0f);
-        HSD_JObjSetTranslateZ(jobj, x);
+        HSD_JObjSetTranslateX(jobj, 75.0f * cosf(angle));
+        HSD_JObjSetTranslateZ(jobj,
+                              0.8f * ((75.0f * -sinf(angle)) + -18.0f));
     } else if (arg1 == 0x16) {
         HSD_JObjSetTranslateX(jobj, -80.0f);
         HSD_JObjSetTranslateZ(jobj, -70.0f);
@@ -491,6 +487,7 @@ void gm_801A8114_inline(HSD_JObj* arg0, int arg1)
 
 void gm_801A9630(void)
 {
+    int i;
     HSD_GObj* gobj;
     HSD_GObj* cam_gobj;
     HSD_CObj* cobj;
@@ -499,7 +496,6 @@ void gm_801A9630(void)
     HSD_JObj* jobj;
     HSD_JObj* child;
     HSD_JObj* target;
-    s32 i;
     PAD_STACK(8);
 
     for (i = 0; i < 0x1A; i++) {
@@ -624,6 +620,7 @@ char* gm_803DB8B8[] = {
     "GmRegendSimpleRoy.thp",
     "GmRegendSimplePichu.thp",
     "GmRegendSimpleGanon.thp",
+    NULL,
     // clang-format on
 };
 
@@ -654,6 +651,7 @@ char* gm_803DBBF4[] = {
     "GmRegendAdventureRoy.thp",
     "GmRegendAdventurePichu.thp",
     "GmRegendAdventureGanon.thp",
+    NULL,
     // clang-format on
 };
 
@@ -684,8 +682,22 @@ char* gm_803DBF10[] = {
     "GmRegendAllstarRoy.thp",
     "GmRegendAllstarPichu.thp",
     "GmRegendAllstarGanon.thp",
+    NULL,
     // clang-format on
 };
+
+typedef struct GmRegendThpTable {
+    u8 pad_278[0x278];
+    char* simple[0x1A];
+    u8 pad_5B4[0x2D4];
+    char* adventure[0x1A];
+    u8 pad_8D0[0x2B4];
+    char* allstar[0x1A];
+} GmRegendThpTable;
+
+extern GmRegendThpTable gm_803DB640;
+extern f32 gm_804DAAA0;
+extern f32 gm_804DAAA4;
 
 void gm_801A9B30_OnEnter(UNK_T unused)
 {
@@ -703,9 +715,11 @@ void gm_801A9B30_OnEnter(UNK_T unused)
     HSD_GObj* gobj;
     HSD_GObj* temp_r29;
     const char* thpfile;
+    GmRegendThpTable* thps;
     s32 var_r3_3;
     int var_r3;
 
+    thps = &gm_803DB640;
     gm_804D67C8 = 0x1E;
     gm_804D67C9 = 0;
     temp_r29 = GObj_Create(0x13, 0x14, 0);
@@ -726,13 +740,13 @@ void gm_801A9B30_OnEnter(UNK_T unused)
     }
     switch (var_r3) {
     case GM_CLASSIC_GOVER:
-        thpfile = gm_803DB8B8[temp_r31];
+        thpfile = thps->simple[temp_r31];
         break;
     case GM_ADVENTURE_GOVER:
-        thpfile = gm_803DBBF4[temp_r31];
+        thpfile = thps->adventure[temp_r31];
         break;
     default:
-        thpfile = gm_803DBF10[temp_r31];
+        thpfile = thps->allstar[temp_r31];
         break;
     }
     lbMthp8001FAA0(thpfile, 0x230, 0x1A0);

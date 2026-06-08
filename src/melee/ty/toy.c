@@ -5549,7 +5549,7 @@ void un_80310B48(HSD_GObj* gobj)
     s32 slot;
     s32 maxVal;
 
-    PAD_STACK(72);
+    PAD_STACK(64);
 
     changed = 0;
     editor = (ToyParamEditor*) un_804D6E5C;

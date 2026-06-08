@@ -2170,14 +2170,14 @@ bool mpColl_80046224_LeftWall(CollData* coll)
             (mpLineGetKind(line_id) & CollLine_Ceiling))
         {
             Vec3 vec;
+            Vec3 nrm;
+            PAD_STACK(0x44);
             mpLeftWallGetTop(wall_id, &vec);
             if (pos.y > vec.y) {
                 line_id = mpLinePrevNonCeiling(line_id);
                 if (line_id != -1 && mpLib_80054ED8(line_id) &&
                     (mpLineGetKind(line_id) & CollLine_LeftWall))
                 {
-                    Vec3 nrm;
-                    PAD_STACK(0x44);
                     mpLineGetNormal(line_id, &nrm);
                     x = (pos.y - vec.y) / -nrm.x * nrm.y + vec.x - pos.x -
                         0.5F;

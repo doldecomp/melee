@@ -137,6 +137,7 @@ void it_802B7160(Fighter_GObj* gobj, itSamusGrapple_HitboxData* data)
     Fighter* fp;
     u32 hit_group;
     HitCapsule* hitbox;
+    struct spawn_hitbox_4* hitbox_data4;
     PAD_STACK(8);
 
     fp = GET_FIGHTER(gobj);
@@ -169,20 +170,20 @@ void it_802B7160(Fighter_GObj* gobj, itSamusGrapple_HitboxData* data)
     hitbox->b_offset.z =
         data->create_hitbox.create_hitbox_2.x_offset * 0.003906f;
     ftColl_8007AC9C(hitbox, data->create_hitbox.create_hitbox_3.angle, gobj);
+    hitbox_data4 = &data->create_hitbox.create_hitbox_4;
     hitbox->x24 = data->create_hitbox.create_hitbox_3.knockback_growth;
     hitbox->x28 = data->create_hitbox.create_hitbox_3.weight_set_knockback;
     hitbox->x43_b0 = data->create_hitbox.create_hitbox_3.item_hit_interaction;
     hitbox->x43_b1 = data->create_hitbox.create_hitbox_3.ignore_fighter_scale;
     hitbox->x40_b0 = data->create_hitbox.create_hitbox_3.clank;
     hitbox->x40_b1 = data->create_hitbox.create_hitbox_3.rebound;
-    hitbox->x2C = data->create_hitbox.create_hitbox_4.base_knockback;
-    hitbox->element = data->create_hitbox.create_hitbox_4.element;
-    hitbox->x34 = data->create_hitbox.create_hitbox_4.shield_damage;
-    hitbox->sfx_severity =
-        data->create_hitbox.create_hitbox_4.hit_sfx_severity;
-    hitbox->sfx_kind = data->create_hitbox.create_hitbox_4.hit_sfx_kind;
-    hitbox->x40_b2 = data->create_hitbox.create_hitbox_4.hit_aerial;
-    hitbox->x40_b3 = data->create_hitbox.create_hitbox_4.hit_grounded;
+    hitbox->x2C = hitbox_data4->base_knockback;
+    hitbox->element = hitbox_data4->element;
+    hitbox->x34 = hitbox_data4->shield_damage;
+    hitbox->sfx_severity = hitbox_data4->hit_sfx_severity;
+    hitbox->sfx_kind = hitbox_data4->hit_sfx_kind;
+    hitbox->x40_b2 = hitbox_data4->hit_aerial;
+    hitbox->x40_b3 = hitbox_data4->hit_grounded;
     hitbox->x42_b5 = 1;
     hitbox->x42_b7 = 1;
     hitbox->x41_b4 = 0;
@@ -527,10 +528,17 @@ void fn_802B7E34(Item_GObj* gobj)
     Mtx m;
     Item* ip = GET_ITEM(gobj);
     Fighter* fp = GET_FIGHTER(ip->owner);
+    ItemLink* link;
     PAD_STACK(20);
     samus_grapple_state_sync(fp);
     fn_802B7E34_inline(ip, m);
-    samus_grapple_anim(gobj);
+    ip = GET_ITEM(gobj);
+    HSD_JObjAnimAll(GET_JOBJ(gobj));
+    link = ip->xDD4_itemVar.samusgrapple.x4;
+    while (link != NULL) {
+        HSD_JObjAnimAll(link->gobj->hsd_obj);
+        link = link->prev;
+    }
     if (samus_grapple_fighter_compare(fp->motion_id)) {
         return;
     }
@@ -621,14 +629,16 @@ void fn_802B8384(Item_GObj* gobj)
     Fighter_GObj* owner = ip->owner;
     itSamusGrappleAttributes* attrs =
         ip->xC4_article_data->x4_specialAttributes;
-    ItemLink* link = ip->xDD4_itemVar.samusgrapple.x0;
-    Fighter* fp = owner->user_data;
+    ItemLink* link;
+    Fighter* fp;
     Vec3 pos;
     Vec3 sp5C;
     u8 _pad[4];
     Mtx m;
     PAD_STACK(20);
 
+    fp = owner->user_data;
+    link = ip->xDD4_itemVar.samusgrapple.x0;
     samus_grapple_setup_pos(link, &pos, m);
 
     switch (it_802B99A0(link, &pos, attrs, fp)) {

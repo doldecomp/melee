@@ -1497,13 +1497,13 @@ void fn_80176A6C(void)
     gobj = GObj_Create(0x13U, 0x14U, 0U);
     if (gobj == NULL) {
         OSReport("Error : gobj dont\'t get (gmResultAddPanelCamera)\n");
-        HSD_ASSERT(0x662, 0);
+        HSD_ASSERTMSG(0x662, 0, (char*) &lbl_804D3FB0);
     }
 
     cobj = HSD_CObjLoadDesc(lbl_8046DBE8.pnlsce->cameras->desc);
     if (cobj == NULL) {
         OSReport("Error : cobj dont\'t get (gmResultAddPanelCamera)\n");
-        HSD_ASSERT(0x668, 0);
+        HSD_ASSERTMSG(0x668, 0, (char*) &lbl_804D3FB0);
     }
 
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);

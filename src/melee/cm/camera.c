@@ -710,6 +710,7 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
 {
     u8 _padA[8];
     f32 len;
+    f32 pitch_angle;
     Vec3 scroll_offset;
     Vec3 scroll_offset2;
     f32 min_v;
@@ -727,7 +728,6 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
     f32 temp_f26;
     f32 var_f28;
     f32 vert_frustum_dist;
-    f32 pitch_angle;
     f32 temp_f30;
     f32 var_f3;
 
@@ -745,10 +745,9 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
             cm_803BCCA0.x1C;
     }
 
-    pitch_angle = ((bounds->y_min - scroll_offset.y) +
-                   (bounds->y_max - scroll_offset.y)) *
-                      (0.5f - var_f3) +
-                  scroll_offset.y;
+    temp_f31 = (bounds->y_min - scroll_offset.y) +
+               (bounds->y_max - scroll_offset.y);
+    pitch_angle = (temp_f31 * (0.5f - var_f3)) + scroll_offset.y;
     {
         f32 info_x24 = Stage_GetCamInfoX24();
         pitch_angle += cm_803BCCA0.x8;
@@ -766,10 +765,14 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
     temp_f29 = pitch_angle;
 
     fov_u = (0.5f * (deg_to_rad * transform->fov)) + temp_f29;
-    HSD_ASSERTMSG(0x4FA, fov_u < (f32) M_PI_2, "fov_u<MTXDegToRad(90.0F)");
+    if (!(fov_u < (f32) M_PI_2)) {
+        __assert(cm_803BCBD0, 0x4FA, cm_803BCBDC);
+    }
 
     fov_d = (0.5f * (deg_to_rad * transform->fov)) - temp_f29;
-    HSD_ASSERTMSG(0x4FB, fov_d < (f32) M_PI_2, "fov_d<MTXDegToRad(90.0F)");
+    if (!(fov_d < (f32) M_PI_2)) {
+        __assert(cm_803BCBD0, 0x4FB, cm_803BCBF8);
+    }
 
     tan_fov_u = tanf(fov_u);
     vert_frustum_dist =
@@ -796,9 +799,13 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
     }
 
     fov_r = (0.5f * (deg_to_rad * transform->fov)) - temp_f29;
-    HSD_ASSERTMSG(0x508, fov_r < (f32) M_PI_2, "fov_r<MTXDegToRad(90.0F)");
+    if (!(fov_r < (f32) M_PI_2)) {
+        __assert(cm_803BCBD0, 0x508, cm_803BCC14);
+    }
     fov_l = (0.5f * (deg_to_rad * transform->fov)) + temp_f29;
-    HSD_ASSERTMSG(0x509, fov_l < (f32) M_PI_2, "fov_l<MTXDegToRad(90.0F)");
+    if (!(fov_l < (f32) M_PI_2)) {
+        __assert(cm_803BCBD0, 0x509, cm_803BCC30);
+    }
 
     temp_f26 = cm_803BCB64.aspect * tanf(fov_r);
     {
@@ -4667,9 +4674,10 @@ bool Camera_80030CFC(CmSubject* cam_box, f32 tolerance)
     Vec3 eye_pos;
     Vec3 interest;
     Vec3 sp38;
+    u8 _PAD[12];
     Vec3 sp20;
     f32 range;
-    PAD_STACK(14);
+    PAD_STACK(2);
 
     cobj = GET_COBJ(cm_80452C68.gobj);
     HSD_CObjGetEyePosition(cobj, &eye_pos);

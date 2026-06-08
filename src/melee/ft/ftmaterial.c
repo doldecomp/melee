@@ -25,6 +25,23 @@
 
 HSD_MObjInfo ftMObj = { ftMaterial_800BF260 };
 
+static HSD_TevDesc ftMaterial_803C69D0 = {
+    NULL,
+    TEVCONF_MODE,
+    0,
+    HSD_TE_UNDEF,
+    HSD_TE_UNDEF,
+    HSD_TE_UNDEF,
+    { {
+        0, 0, 15, 15, 15, 0, 0, true, 0, 0, 7, 7, 7, 0, 0, false,
+        0, 0, 0, 0, 0, 0, 0,
+    } },
+};
+
+static HSD_TECnst ftMaterial_803C6A44 = {
+    HSD_TE_CNST, NULL, NULL, HSD_TE_RGB, HSD_TE_U8, 0xFF, 0xFF, 0, 0,
+};
+
 #pragma force_active on
 
 void ftMaterial_800BF260(void)

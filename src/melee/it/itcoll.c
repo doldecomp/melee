@@ -619,13 +619,13 @@ static inline void it_802706D0_sub3(Item* item, Item* arg_item,
 
 void it_802706D0(Item_GObj* arg_item_gobj)
 {
-    Item* arg_item;
     HSD_GObj* item_gobj;
+    Item* arg_item;
     Item* item;
-    HitCapsule* hit;
+    u32 hit_index;
     s32 count;
     bool chk;
-    u32 hit_index;
+    HitCapsule* hit;
     PAD_STACK(8);
 
     chk = false;
