@@ -939,7 +939,10 @@ static inline void ftPp_SpecialS_0_Coll_inline3(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
     ftNn_Init_80123B3C_inline(gobj);
-    ftCommon_8007D5D4(fp);
+    {
+        Fighter* fp2 = fp;
+        ftCommon_8007D5D4(fp2);
+    }
     Fighter_ChangeMotionState(gobj, 360, 0x0C4C528A, fp->cur_anim_frame, 1.0f,
                               0.0f, NULL);
     ftNn_Init_80123B3C_inline(gobj);

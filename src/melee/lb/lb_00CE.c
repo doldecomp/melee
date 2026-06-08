@@ -166,21 +166,21 @@ s32 lb_8000D148(f32 point0_x, f32 point0_y, f32 point1_x, f32 point1_y,
     }
 
     if ((var_f0 / dist_01) <= threshold) {
-        f32 diff_02_y = point0_y - point2_y;
         f32 diff_02_x = point0_x - point2_x;
-        f32 diff_12_y = point1_y - point2_y;
+        f32 diff_02_y = point0_y - point2_y;
         f32 diff_12_x = point1_x - point2_x;
+        f32 diff_12_y = point1_y - point2_y;
         f32 threshold_squared;
         f32 dist_squared_02;
         f32 dist_squared_12;
 
-        dist_squared_02 = diff_02_x * diff_02_x;
+        diff_02_x *= diff_02_x;
         diff_02_y *= diff_02_y;
+        dist_squared_02 = diff_02_x + diff_02_y;
         threshold_squared = threshold * threshold;
-        dist_squared_02 += diff_02_y;
-        dist_squared_12 = diff_12_x * diff_12_x;
+        diff_12_x *= diff_12_x;
         diff_12_y *= diff_12_y;
-        dist_squared_12 += diff_12_y;
+        dist_squared_12 = diff_12_x + diff_12_y;
         if (dist_squared_02 < threshold_squared) {
             if (dist_squared_12 > threshold_squared) {
                 return 1;

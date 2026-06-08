@@ -185,10 +185,14 @@ static inline void JObjRotMtx(Mtx mtx, HSD_JObj* jobj)
 
 void ftCo_DamageIce_Init(Fighter_GObj* gobj)
 {
-    Fighter* fp;
     HSD_JObj *xrotn, *yrotn;
+    Fighter* fp;
     Vec3 pos;
-    Mtx spEC, sp11C, sp14C, sp17C;
+    Mtx sp17C, sp14C, sp11C, spEC;
+    Quaternion rot_y;
+    Mtx rot_mtx_y;
+    Quaternion rot_x;
+    Mtx rot_mtx_x;
     PAD_STACK(16);
 
     fp = GET_FIGHTER(gobj);
@@ -212,8 +216,21 @@ void ftCo_DamageIce_Init(Fighter_GObj* gobj)
     pos.z = fp->co_attrs.x150_damageice_unk;
     PSMTXTrans(spEC, pos.x, pos.y, pos.z);
 
-    JObjRotMtx(sp11C, yrotn);
-    JObjRotMtx(sp14C, xrotn);
+    HSD_JObjGetRotation(yrotn, &rot_y);
+    if ((yrotn->flags & JOBJ_USE_QUATERNION) == 0) {
+        HSD_MkRotationMtx(rot_mtx_y, (Vec3*) &rot_y);
+    } else {
+        HSD_MtxQuat(rot_mtx_y, &rot_y);
+    }
+    PSMTXTranspose(rot_mtx_y, sp11C);
+
+    HSD_JObjGetRotation(xrotn, &rot_x);
+    if ((xrotn->flags & JOBJ_USE_QUATERNION) == 0) {
+        HSD_MkRotationMtx(rot_mtx_x, (Vec3*) &rot_x);
+    } else {
+        HSD_MtxQuat(rot_mtx_x, &rot_x);
+    }
+    PSMTXTranspose(rot_mtx_x, sp14C);
 
     PSMTXConcat(spEC, sp11C, sp17C);
     PSMTXConcat(sp17C, sp14C, sp17C);
