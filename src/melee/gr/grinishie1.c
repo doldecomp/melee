@@ -323,12 +323,12 @@ bool grInishie1_801FAC50(Ground_GObj* gobj)
 void grInishie1_801FAC58(Ground_GObj* gobj)
 {
     Vec3 vec;
+    Ground* gp;
     HSD_JObj* jobj;
     HSD_Joint* joint;
-    Ground* gp;
 
-    gp = GET_GROUND(gobj);
     jobj = GET_JOBJ(gobj);
+    gp = GET_GROUND(gobj);
 
     if (gp && jobj) {
         if (gp->gv.inishie12.xCC == 0) {
@@ -484,15 +484,13 @@ void grInishie1_801FB0AC(HSD_GObj* gobj, u32 index)
         grInishie1_801FBC4C(gobj, index);
 
         {
-            int i;
-            bool match = false;
+            u32 i;
             for (i = 0; i < 0x13; i++) {
                 if (gp->gv.inishie1.blocks[i].status == 3) {
-                    match = true;
                     break;
                 }
             }
-            if (!match) {
+            if (i == 0x13) {
                 gp->gv.inishie1.xC6 =
                     randi_between(grI1_804D69F8->unk0, grI1_804D69F8->unk4);
                 gp->gv.inishie1.xC8 =

@@ -440,44 +440,38 @@ void grRCruise_801FFADC(Ground_GObj* arg0)
         sp64.y *= -1.0f;
         sp64.z *= -1.0f;
         lbVector_Add(&sp64, &cam_offset);
-        temp_r29_2 = arg0->hsd_obj;
-        if (temp_r29_2 != NULL) {
+        if ((temp_r29_2 = arg0->hsd_obj) != NULL) {
             HSD_JObjSetTranslate(temp_r29_2, &sp64);
             temp_f31 = -350.0f * Ground_801C0498();
             HSD_JObjAddTranslationZ(temp_r29_2, temp_f31);
         }
         gobj = Ground_801C2BA4(2);
         if (gobj != NULL) {
-            jobj = gobj->hsd_obj;
-            if (jobj != NULL) {
+            if ((jobj = gobj->hsd_obj) != NULL) {
                 HSD_JObjSetTranslate(jobj, &sp64);
             }
         }
         gobj = Ground_801C2BA4(1);
         if (gobj != NULL) {
-            jobj = gobj->hsd_obj;
-            if (jobj != NULL) {
+            if ((jobj = gobj->hsd_obj) != NULL) {
                 HSD_JObjSetTranslate(jobj, &sp64);
             }
         }
         gobj = Ground_801C2BA4(5);
         if (gobj != NULL) {
-            jobj = gobj->hsd_obj;
-            if (jobj != NULL) {
+            if ((jobj = gobj->hsd_obj) != NULL) {
                 HSD_JObjSetTranslate(jobj, &sp64);
             }
         }
         gobj = Ground_801C2BA4(6);
         if (gobj != NULL) {
-            jobj = gobj->hsd_obj;
-            if (jobj != NULL) {
+            if ((jobj = gobj->hsd_obj) != NULL) {
                 HSD_JObjSetTranslate(jobj, &sp64);
             }
         }
         gobj = Ground_801C2BA4(4);
         if (gobj != NULL) {
-            jobj = gobj->hsd_obj;
-            if (jobj != NULL) {
+            if ((jobj = gobj->hsd_obj) != NULL) {
                 HSD_JObjSetTranslate(jobj, &sp64);
             }
         }
