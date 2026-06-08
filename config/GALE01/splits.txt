@@ -1315,8 +1315,21 @@ melee/ft/chara/ftKirby/ftkirbycaptureyoshi.c:
 	.sdata2     start:0x804D9560 end:0x804D9568
 
 melee/ft/chara/ftKirby/ftkirbyyoshiegg.c:
-	.text       start:0x8010AA64 end:0x8010D740
-	.sdata2     start:0x804D9568 end:0x804D95B0
+	.text       start:0x8010AA64 end:0x8010B1F4
+	.sdata      start:0x804D3DE8 end:0x804D3E00
+	.sdata2     start:0x804D9568 end:0x804D9570
+
+melee/ft/chara/ftKirby/ftkirbyspecialmars.c:
+	.text       start:0x8010B1F4 end:0x8010C288
+	.sdata2     start:0x804D9570 end:0x804D9580
+
+melee/ft/chara/ftKirby/ftkirbyspecialpeach.c:
+	.text       start:0x8010C288 end:0x8010CE5C
+	.sdata2     start:0x804D9580 end:0x804D9590
+
+melee/ft/chara/ftKirby/ftkirbyspecialgamewatch.c:
+	.text       start:0x8010CE5C end:0x8010D740
+	.sdata2     start:0x804D9590 end:0x804D95B0
 
 melee/ft/chara/ftDonkey/ftDk_Init.c:
 	.text       start:0x8010D740 end:0x8010DC80
@@ -3771,7 +3784,7 @@ melee/it/items/itmewtwodisable.c:
 
 melee/it/items/itmewtwoshadowball.c:
 	.text       start:0x802C4D10 end:0x802C61F4
-	.data       start:0x803F7760 end:0x803F7898
+	.data       start:0x803F7880 end:0x803F7898
 	.sdata      start:0x804D5570 end:0x804D557D
 	.sdata2     start:0x804DD258 end:0x804DD290
 
