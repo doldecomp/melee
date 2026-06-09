@@ -4314,16 +4314,16 @@ void ftKb_SpecialN_800F13F0(Fighter_GObj* gobj)
     ftKb_SpecialN_800EF69C(gobj, 0x16, ft_80459B88.hats[FTKIND_DRMARIO]);
 }
 
-void ftKb_SpecialN_800F1420(Fighter_GObj* gobj, u32* arg1)
+u8* ftKb_SpecialN_800F1420(Fighter_GObj* gobj, u32* arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     FtPartsVisLookup* lookup = fp->x5AC.xC[4];
     int i;
-
+    u8* p;
     for (i = 0; i < lookup->x0; i++) {
-        TempS* entry = &lookup->x4[i];
-        u8* p = entry->x4;
         int j;
+        TempS* entry = &lookup->x4[i];
+        p = entry->x4;
 
         for (j = 0; j < entry->x0; j++, p++) {
             HSD_DObj* dobj = fp->fv.kb.hat.x14.data[*p];
@@ -4343,6 +4343,7 @@ void ftKb_SpecialN_800F1420(Fighter_GObj* gobj, u32* arg1)
             }
         }
     }
+    return p;
 }
 
 #pragma push
