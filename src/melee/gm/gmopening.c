@@ -27,9 +27,9 @@
 /* 4D67E2 */ static u8 gm_804D67E2;
 /* 4D67E4 */ static u32 gm_804D67E4;
 /* 4D67E8 */ static HSD_GObj* gm_804D67E8;
-/* 4D67EC */ u32 gm_804D67EC;
+/* 4D67F4 */ HSD_GObj* gm_804D67F4;
 /* 4D67F0 */ int gm_804D67F0;
-/* 4D67F4 */ static HSD_GObj* gm_804D67F4;
+/* 4D67EC */ u32 gm_804D67EC;
 
 static void sdata2_order(void)
 {
