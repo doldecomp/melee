@@ -3,6 +3,7 @@
 
 #include <platform.h>
 
+#include "baselib/debug.h"
 #include "cm/camera.h"
 #include "ef/efsync.h"
 #include "gm/gm_unsplit.h"
@@ -761,7 +762,7 @@ void fn_801FBF6C(Item_GObj* item_gobj, Ground* gp, Vec3* pos, HSD_GObj* arg3,
 {
     HSD_GObj* new_var;
     s32 i;
-    HSD_GObj* gobj;
+    HSD_GObj* map_gobj;
     Item* ip = GET_ITEM2(item_gobj);
 
     for (i = 0; i < 19; i++) {
@@ -776,13 +777,11 @@ void fn_801FBF6C(Item_GObj* item_gobj, Ground* gp, Vec3* pos, HSD_GObj* arg3,
         return;
     }
 
-    gobj = Ground_801C2BA4(3);
-    if (gobj == NULL) {
-        __assert("grinishie1.c", 0x425, "map_gobj");
-    }
+    map_gobj = Ground_801C2BA4(3);
+    HSD_ASSERT(0x425, map_gobj);
 
-    new_var = gobj;
-    grInishie1_801FB0AC(gobj, i);
+    new_var = map_gobj;
+    grInishie1_801FB0AC(map_gobj, i);
     grInishie1_801FBCEC(new_var, i);
     PAD_STACK(16);
 }
