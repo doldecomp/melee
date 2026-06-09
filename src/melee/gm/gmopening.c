@@ -27,9 +27,9 @@
 /* 4D67E2 */ static u8 gm_804D67E2;
 /* 4D67E4 */ static u32 gm_804D67E4;
 /* 4D67E8 */ static HSD_GObj* gm_804D67E8;
-/* 4D67EC */ u32 gm_804D67EC;
+/* 4D67F4 */ HSD_GObj* gm_804D67F4;
 /* 4D67F0 */ int gm_804D67F0;
-/* 4D67F4 */ static HSD_GObj* gm_804D67F4;
+/* 4D67EC */ u32 gm_804D67EC;
 
 static void sdata2_order(void)
 {
@@ -132,6 +132,7 @@ void fn_801AA0E8(void)
 /* 3DBFB4 */ static int gm_803DBFB4[] = {
     0x000004E2, 0x00000002, 0x0000018A, 0x00000001, 0x00010000, 0x00000002,
 };
+/* 3DBFCC */ char gm_803DBFCC[] = "MvOpen.mth";
 
 void gm_801AA110_OnEnter(UNK_T arg0)
 {
@@ -175,7 +176,7 @@ void gm_801AA110_OnEnter(UNK_T arg0)
     lbAudioAx_80027648();
     lbAudioAx_80023F28(0x3E);
     lbAudioAx_80024E50(1);
-    lbMthp_8001F410("MvOpen.mth", gm_803DBFB4, 0, 0, 0);
+    lbMthp_8001F410(gm_803DBFCC, gm_803DBFB4, 0, 0, 0);
     lbAudioAx_80024E50(0);
     gm_804D6724 = fn_801AA0E8;
 }
