@@ -1337,7 +1337,7 @@ void fn_8022AFEC(HSD_GObj* gp)
             mn_8022A440(gp,
                         sp20[mn_80229A04_dontinline(mn_804A04F0.cur_menu,
                                                     data->hovered_selection)],
-                        mn_804A04F0.prev_menu);
+                        data->hovered_selection);
         }
         if ((u8) selection_changed != false) {
             hovered_selection = mn_804A04F0.hovered_selection;
@@ -1386,9 +1386,10 @@ HSD_GObj* mn_8022B3A0(u8 state)
 {
     HSD_JObj* sp48[12];
     HSD_JObj* sp2C[7];
+    StaticModelDesc* top = &MenMainConTop_Top;
+    HSD_GObj* gobj;
     HSD_JObj* cursor_jobj;
     int temp_r31;
-    HSD_GObj* gobj;
     HSD_JObj* temp_r16_2;
     u8 hovered_selection;
     int idx;
@@ -1405,7 +1406,6 @@ HSD_GObj* mn_8022B3A0(u8 state)
     u8 var_r17;
     u32 var_r17_int;
     HSD_JObj* root_jobj;
-    StaticModelDesc* top = &MenMainConTop_Top;
     PAD_STACK(16);
 
     cur_menu = mn_804A04F0.cur_menu;

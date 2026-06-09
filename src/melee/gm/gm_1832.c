@@ -197,6 +197,8 @@ void fn_8018325C(HSD_GObj* arg0, int arg1)
     HSD_JObj* src = lbl_804735A8.x4[0];
     int i;
 
+    PAD_STACK(4);
+
     HSD_JObjGetTranslation(src, &pos);
     HSD_JObjSetTranslate(jobj, &pos);
 
@@ -1957,14 +1959,15 @@ inline int fn_801884F8_inline(void)
 int fn_801884F8(void)
 {
     int result;
+    int* ptr = (int*) &lbl_80473700;
 
     result = pl_80041300(0);
     if (result != 0) {
-        lbl_80473700.result_cache[0] = result;
-        lbl_80473700.result_cache[1] = 1;
+        ptr[65] = result;
+        ptr[66] = 1;
     }
-    if (lbl_80473700.result_cache[1] != 0) {
-        result = lbl_80473700.result_cache[0];
+    if (ptr[66] != 0) {
+        result = ptr[65];
     }
     return result;
 }

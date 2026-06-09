@@ -1695,7 +1695,8 @@ s32 hsd_80393D2C(s32 enable)
 void hsd_80393DA0(u8* buf, size_t size)
 {
     PAD_STACK(4);
-    memset(&hsd_804CF7E8, 0, sizeof(hsd_804CF7E8));
+    memset(&hsd_804CF7E8, 0,
+           sizeof(hsd_804CF7E8) - sizeof(hsd_804CF7E8.x24));
     hsd_804CF7E8.out_buf = buf;
     hsd_804CF7E8.buf_size = size;
     memset(buf, 0, size);

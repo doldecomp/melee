@@ -209,7 +209,7 @@ void AXDriver_8038BF6C(HSD_SM* v)
                 float left_inv_sqrt = sqrtf(1.0F - left_vol);
                 float right_sqrt = sqrtf(right_vol);
                 float right_inv_sqrt = sqrtf(1.0F - right_vol);
-                float tmp2 = left_inv_sqrt * right_sqrt;
+                float tmp2 = left_inv_sqrt * right_inv_sqrt;
                 float pitch1 = powf(2.0F, v->x20 / 1200.0F);
                 float pitch2 = powf(2.0F, v->fadetime / 1200.0F);
 
@@ -217,7 +217,7 @@ void AXDriver_8038BF6C(HSD_SM* v)
                     v->fid, v->x1A, v->volume,
                     (v->flags & 0x20000) ? v->pan : v->x1C, v->pri, v->itdflag,
                     v->track, pitch1, pitch2, left_inv_sqrt * tmp2, left_sqrt,
-                    left_inv_sqrt * right_inv_sqrt);
+                    right_sqrt * left_inv_sqrt);
 
                 if (v->vID != -1) {
                     AXDriver_804C5920[v->vID & 0x3F] = v;

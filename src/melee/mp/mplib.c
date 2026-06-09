@@ -1615,10 +1615,12 @@ bool mpCheckFloor(float ax, float ay, float bx, float by, float y_offset,
         for (; i_r28 < var_r25; i_r28 += 1, line_r26 += 1) {
             float px_sp54;
             float py_sp50;
+            u8 pad[4];
             float x0_sp48;
             float y0_sp44;
             float x1_sp40;
             float y1_sp3C;
+            float dist2;
         block_8:
             if (cb != NULL && !cb(gobj, line_r26 - groundCollLine)) {
                 continue;
@@ -1643,11 +1645,7 @@ bool mpCheckFloor(float ax, float ay, float bx, float by, float y_offset,
                 if (mpLineIntersection(x0_sp48, y0_sp44, x1_sp40, y1_sp3C, ax,
                                        ay, bx, by, &px_sp54, &py_sp50))
                 {
-                    float dx = px_sp54 - ax;
-                    float dy = py_sp50 - ay;
-                    float dx2 = dx * dx;
-                    float dy2 = dy * dy;
-                    float dist2 = dx2 + dy2;
+                    dist2 = SQ(px_sp54 - ax) + SQ(py_sp50 - ay);
                     if (min_dist2_f30 > dist2) {
                         min_dist2_f30 = dist2;
                         if (vec_out != NULL) {
@@ -1675,11 +1673,7 @@ bool mpCheckFloor(float ax, float ay, float bx, float by, float y_offset,
                     mpLineIntersectionH(&px_sp54, &py_sp50, x0_sp48, y0_sp44,
                                         x1_sp40, ax, ay, bx, by))
                 {
-                    float dx = px_sp54 - ax;
-                    float dx2 = dx * dx;
-                    float dy = py_sp50 - ay;
-                    float dy2 = dy * dy;
-                    float dist2 = dx2 + dy2;
+                    dist2 = SQ(px_sp54 - ax) + SQ(py_sp50 - ay);
                     if (min_dist2_f30 > dist2) {
                         min_dist2_f30 = dist2;
                         if (vec_out != NULL) {
