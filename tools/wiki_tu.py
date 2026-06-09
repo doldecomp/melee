@@ -4,7 +4,8 @@ import argparse
 import json
 import sys
 from pathlib import Path
-from typing import Dict, Optional, cast
+from typing import cast
+from urllib.parse import quote
 
 import humanfriendly
 import mistletoe
@@ -13,7 +14,7 @@ from mistletoe.span_token import RawText
 from mistletoe.token import Token
 
 
-def read_wiki(lines) -> Dict[str, Dict[str, str]]:
+def read_wiki(lines) -> dict[str, dict[str, str]]:
     assignees = {}
 
     def read_text(token: Token) -> str:
@@ -72,7 +73,7 @@ def write(args):
         data = json.load(path.open("r"))
 
     assignees = {}
-    if cast(Optional[Path], args.wiki_path):
+    if cast(Path | None, args.wiki_path):
         md = args.wiki_path.read_text()
         assignees = read_wiki(md)
 
@@ -81,16 +82,12 @@ def write(args):
         size = humanfriendly.format_size(value).replace("bytes", "B")
         return size.replace(" ", "&nbsp;")
 
-    def percent_cell(matched: int, total: int, reported: Optional[float]) -> str:
+    def percent_cell(matched: int, total: int, reported: float | None) -> str:
         # A TU with no section of this kind has nothing to match.
         if total == 0:
             return "&mdash;"
         pct = reported if reported is not None else (100.0 * matched / total)
         return f"`{humanfriendly.round_number(float(pct))}%`"
-
-    def file_of(unit) -> str:
-        # Strip the leading module ("main/") by splitting and recombining.
-        return "/".join((unit["name"] or "/").split("/")[1:])
 
     def assignee_cells(file: str):
         assignee = assignees.get(file, {})
@@ -119,20 +116,29 @@ def write(args):
         )
         return text, data
 
+    def file_link(unit) -> tuple[str, str]:
+        name = unit["name"]
+
+        # Strip the leading module ("main/") by splitting and recombining.
+        file = "/".join((name or "/").split("/")[1:])
+
+        url = f"https://decomp.dev/doldecomp/melee?unit={quote(unit['name'], safe='')}"
+        link = f"[`{file}`]({url})"
+
+        return file, link
+
     def row_full(unit) -> str:
-        file = file_of(unit)
-        file_link = f"[`{file}`](../blob/master/src/{file}.c)"
+        file, link = file_link(unit)
         matched = friendly_size(int(unit["measures"].get("matched_code") or 0))
         total = friendly_size(int(unit["measures"].get("total_code") or 0))
         text, data = percent_cells(unit)
         discord, github = assignee_cells(file)
-        return f"{file_link}|{matched}|{total}|{text}|{data}|{discord}|{github}"
+        return f"{link}|{matched}|{total}|{text}|{data}|{discord}|{github}"
 
     def row_slim(unit) -> str:
-        file = file_of(unit)
-        file_link = f"[`{file}`](../blob/master/src/{file}.c)"
+        _, link = file_link(unit)
         text, data = percent_cells(unit)
-        return f"{file_link}|{text}|{data}"
+        return f"{link}|{text}|{data}"
 
     # Bucket each TU by how far it has progressed. "complete" (fully linked) is
     # the canonical done flag -- it drives the official completed-unit count --
