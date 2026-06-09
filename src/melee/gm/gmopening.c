@@ -132,7 +132,6 @@ void fn_801AA0E8(void)
 /* 3DBFB4 */ static int gm_803DBFB4[] = {
     0x000004E2, 0x00000002, 0x0000018A, 0x00000001, 0x00010000, 0x00000002,
 };
-/* 3DBFCC */ char gm_803DBFCC[] = "MvOpen.mth";
 
 void gm_801AA110_OnEnter(UNK_T arg0)
 {
@@ -176,7 +175,7 @@ void gm_801AA110_OnEnter(UNK_T arg0)
     lbAudioAx_80027648();
     lbAudioAx_80023F28(0x3E);
     lbAudioAx_80024E50(1);
-    lbMthp_8001F410(gm_803DBFCC, gm_803DBFB4, 0, 0, 0);
+    lbMthp_8001F410("MvOpen.mth", gm_803DBFB4, 0, 0, 0);
     lbAudioAx_80024E50(0);
     gm_804D6724 = fn_801AA0E8;
 }
