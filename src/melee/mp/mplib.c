@@ -4995,9 +4995,8 @@ void mpLib_80057424(int joint_id)
     CollJoint* joint = &groundCollJoint[joint_id];
     MapJoint* j_inner = joint->inner;
     u32 count = j_inner->vtx_count;
-    s16 start = j_inner->vtx_start;
     int new_var;
-    CollVtx* vtx = &groundCollVtx[start];
+    CollVtx* vtx = &groundCollVtx[j_inner->vtx_start];
     for (joint_id = 0; joint_id < (new_var = count); joint_id++) {
         vtx->x10 = vtx->pos.x;
         vtx->x14 = vtx->pos.y;

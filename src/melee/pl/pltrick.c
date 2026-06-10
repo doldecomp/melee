@@ -55,19 +55,15 @@ static inline void pl_80037BC0_inline(struct plAttackStats* stats,
 
 void pl_80037C60(Fighter_GObj* fgp, s32 prev2070_int)
 {
-    /// @todo stack is still misaligned for this volatile hack...
-    // maybe an inline somewhere? idk
     Fighter* fp;
     plActionStats* acp;
     u8 attack_id;
-    volatile s32 prev2070_word;
     union Struct2070 prev_union;
     union Struct2070 ev;
 
-    prev2070_word = prev2070_int;
     fp = GET_FIGHTER(fgp);
     acp = Player_GetActionStats(fp->player_id);
-    prev_union.x2070_int = (s32) prev2070_word;
+    prev_union = *(union Struct2070*) &prev2070_int;
 
     if ((int) fp->x2070.x2072_b2) {
         acp->x5BC_b0 = 1;
