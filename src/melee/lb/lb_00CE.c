@@ -1,13 +1,28 @@
 #include "lb/lb_00CE.h"
 
-#include <platform.h>
+#include "placeholder.h"
 
-#include "MSL/math_ppc.h"
+#include <platform.h>
 
 #include <baselib/forward.h>
 
 #include <math.h>
+#include <math_ppc.h>
 #include <trigf.h>
+
+static void sdata2_order(void)
+{
+    (void) M_PI_2;
+    (void) M_PI;
+    (void) 1.0f;
+    (void) 2.0f;
+    (void) S32_TO_F32;
+    (void) 0.0f;
+    (void) 0.5;
+    (void) 3.0;
+    (void) 0.00001f;
+    (void) -0.00001f;
+}
 
 f32 expf(f32 arg8)
 {
@@ -166,21 +181,15 @@ s32 lb_8000D148(f32 point0_x, f32 point0_y, f32 point1_x, f32 point1_y,
     }
 
     if ((var_f0 / dist_01) <= threshold) {
-        f32 diff_02_x = point0_x - point2_x;
-        f32 diff_02_y = point0_y - point2_y;
-        f32 diff_12_x = point1_x - point2_x;
-        f32 diff_12_y = point1_y - point2_y;
         f32 threshold_squared;
         f32 dist_squared_02;
         f32 dist_squared_12;
 
-        diff_02_x *= diff_02_x;
-        diff_02_y *= diff_02_y;
-        dist_squared_02 = diff_02_x + diff_02_y;
+        dist_squared_02 = (point0_x - point2_x) * (point0_x - point2_x) +
+                          (point0_y - point2_y) * (point0_y - point2_y);
         threshold_squared = threshold * threshold;
-        diff_12_x *= diff_12_x;
-        diff_12_y *= diff_12_y;
-        dist_squared_12 = diff_12_x + diff_12_y;
+        dist_squared_12 = (point1_x - point2_x) * (point1_x - point2_x) +
+                          (point1_y - point2_y) * (point1_y - point2_y);
         if (dist_squared_02 < threshold_squared) {
             if (dist_squared_12 > threshold_squared) {
                 return 1;
