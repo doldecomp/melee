@@ -3,6 +3,7 @@
 import argparse
 import json
 import sys
+from enum import IntEnum, auto
 from pathlib import Path
 from typing import cast
 from urllib.parse import quote
@@ -12,6 +13,17 @@ import mistletoe
 from mistletoe.block_token import BlockToken, Table, TableRow, re
 from mistletoe.span_token import RawText
 from mistletoe.token import Token
+
+
+class ColumnIndex(IntEnum):
+    FILE = auto()
+    MATCHED = auto()
+    TOTAL = auto()
+    REMAINING = auto()
+    TEXT_PERCENT = auto()
+    DATA_PERCENT = auto()
+    DISCORD = auto()
+    GITHUB = auto()
 
 
 def read_wiki(lines) -> dict[str, dict[str, str]]:
@@ -29,13 +41,13 @@ def read_wiki(lines) -> dict[str, dict[str, str]]:
         td = list(map(read_text, token.children))
 
         assignee = {}
-        if len(td) > 5 and td[5]:
-            assignee["discord"] = td[5]
-        if len(td) > 6 and td[6]:
-            assignee["github"] = td[6]
+        if len(td) > ColumnIndex.DISCORD and td[ColumnIndex.DISCORD]:
+            assignee["discord"] = td[ColumnIndex.DISCORD]
+        if len(td) > ColumnIndex.GITHUB and td[ColumnIndex.GITHUB]:
+            assignee["github"] = td[ColumnIndex.GITHUB]
 
         if assignee:
-            assignees[td[0]] = assignee
+            assignees[td[ColumnIndex.FILE]] = assignee
 
     def read_table(token: Table):
         assert token.children is not None
