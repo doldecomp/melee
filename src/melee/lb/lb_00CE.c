@@ -9,8 +9,8 @@
 
 static void float_order(Vec3* temp, s32 in1)
 {
-    f64 tmp1 = 3.14159265358979323846 / 2;
-    f64 tmp2 = 3.14159265358979323846;
+    f64 tmp1 = M_PI / 2;
+    f64 tmp2 = M_PI;
     temp->y = tmp1;
     temp->y = tmp2;
     temp->y = 1.0f;
@@ -154,7 +154,7 @@ f32 lb_8000D008(f32 point_y_in, f32 point_x)
         } else {
             var_r0 = 1;
         }
-        return (f32) ((3.14159265358979323846 / 2) * (f64) var_r0);
+        return (f32) ((M_PI / 2) * (f64) var_r0);
     }
     if (point_x > 0.0f) {
         return atanf(point_y / point_x);
@@ -169,8 +169,7 @@ f32 lb_8000D008(f32 point_y_in, f32 point_x)
         } else {
             var_r31 = 1;
         }
-        point_y =
-            (f32) ((f64) var_r31 * (3.14159265358979323846 - atanf(var_f2)));
+        point_y = (f32) ((f64) var_r31 * (M_PI - atanf(var_f2)));
     }
     return point_y;
 }
