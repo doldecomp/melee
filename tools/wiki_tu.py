@@ -16,7 +16,7 @@ from mistletoe.token import Token
 
 
 class ColumnIndex(IntEnum):
-    FILE = auto()
+    FILE = 0
     MATCHED = auto()
     TOTAL = auto()
     REMAINING = auto()
