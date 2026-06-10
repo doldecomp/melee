@@ -513,7 +513,7 @@ void grInishie2_801FD4F0(Ground_GObj* gobj)
     HSD_JObj* jobj;
     HSD_JObj* temp_r29;
     HSD_JObj* temp_r30;
-    PAD_STACK(16);
+    PAD_STACK(12);
 
     jobj = GET_JOBJ(gobj);
     gp = GET_GROUND(gobj);
