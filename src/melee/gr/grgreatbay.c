@@ -389,12 +389,13 @@ void grGreatBay_801F499C(Ground_GObj* gobj)
         break;
     }
     case 2: {
+        Vec3 pos2;
         HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         gp->gv.greatbay.xC6++;
         if (gp->gv.greatbay.xC6 == 60) {
             Ground_801C53EC(0x57E41);
-            lb_8000B1CC(jobj, NULL, &pos);
-            gp->gv.greatbay.xC8 = grLib_801C96F8(0x7531, 0x1E, &pos);
+            lb_8000B1CC(jobj, NULL, &pos2);
+            gp->gv.greatbay.xC8 = grLib_801C96F8(0x7531, 0x1E, &pos2);
         }
         {
             if (gp->gv.greatbay.xC6 == 60 || gp->gv.greatbay.xC6 == 120) {
@@ -441,9 +442,10 @@ void grGreatBay_801F499C(Ground_GObj* gobj)
                 grGreatBay_801F62F8(gp->gv.greatbay.xC5.b0123456);
             switch (gp->gv.greatbay.xC5.b0123456) {
             case 1: {
-                s32 max_x = rand_range(grGb_804D69E0.x0->kame_x_fb_offset_b,
-                                       grGb_804D69E0.x0->kame_x_fb_offset_a);
-                HSD_JObjSetTranslateX(jobj, grGb_804D69E0.x0->kame_x + max_x);
+                HSD_JObjSetTranslateX(
+                    jobj, grGb_804D69E0.x0->kame_x +
+                              rand_range(grGb_804D69E0.x0->kame_x_fb_offset_b,
+                                         grGb_804D69E0.x0->kame_x_fb_offset_a));
                 mpLib_80057BC0(2);
                 mpLib_80057BC0(3);
                 mpLib_80057BC0(4);
@@ -454,9 +456,10 @@ void grGreatBay_801F499C(Ground_GObj* gobj)
                 HSD_ASSERT(652, 0);
                 break;
             case 0: {
-                s32 max_x = rand_range(grGb_804D69E0.x0->kame_x_lr_offset_b,
-                                       grGb_804D69E0.x0->kame_x_lr_offset_a);
-                HSD_JObjSetTranslateX(jobj, grGb_804D69E0.x0->kame_x + max_x);
+                HSD_JObjSetTranslateX(
+                    jobj, grGb_804D69E0.x0->kame_x +
+                              rand_range(grGb_804D69E0.x0->kame_x_lr_offset_b,
+                                         grGb_804D69E0.x0->kame_x_lr_offset_a));
                 mpJointListAdd(2);
                 mpJointListAdd(3);
                 mpJointListAdd(4);
@@ -464,9 +467,10 @@ void grGreatBay_801F499C(Ground_GObj* gobj)
                 break;
             }
             case 3: {
-                s32 max_x = rand_range(grGb_804D69E0.x0->kame_x_fb_offset_b,
-                                       grGb_804D69E0.x0->kame_x_fb_offset_a);
-                HSD_JObjSetTranslateX(jobj, grGb_804D69E0.x0->kame_x + max_x);
+                HSD_JObjSetTranslateX(
+                    jobj, grGb_804D69E0.x0->kame_x +
+                              rand_range(grGb_804D69E0.x0->kame_x_fb_offset_b,
+                                         grGb_804D69E0.x0->kame_x_fb_offset_a));
                 mpLib_80057BC0(2);
                 mpLib_80057BC0(3);
                 mpLib_80057BC0(4);
