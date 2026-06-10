@@ -2602,7 +2602,7 @@ melee/gr/grinishie1.c:
 
 melee/gr/grinishie2.c:
 	.text       start:0x801FCBC0 end:0x801FDFF8
-	.data       start:0x803E4A60 end:0x803E4C78
+	.data       start:0x803E4A60 end:0x803E4C72
 	.sdata      start:0x804D4760 end:0x804D4770
 	.sbss       start:0x804D6A00 end:0x804D6A08
 	.sdata2     start:0x804DB610 end:0x804DB620
