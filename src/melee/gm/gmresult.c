@@ -486,7 +486,8 @@ void* fn_801748EC(void* list_, s32 mode, s32 idx)
     return &lbl_8046E190[idx];
 }
 
-void fn_80174920(struct ResultsPlayerData* data)
+// Return clearly wrong but match is match
+u8 fn_80174920(struct ResultsPlayerData* data)
 {
     s32 i;
 
@@ -508,20 +509,24 @@ void fn_80174920(struct ResultsPlayerData* data)
 
 void fn_801749B8(HSD_GObj* unused)
 {
+    struct ResultsData* new_var2;
     Vec3 sp24;
     Vec3 sp18;
+    u16 new_var;
+    u16 new_var4;
+    s32 new_var3;
     Vec3 spC;
     u32 temp_r4;
-
-    if (lbl_8046DBE8.cobj != NULL) {
+    if (0L != lbl_8046DBE8.cobj) {
         lbVector_WorldToScreen(lbl_8046DBE8.cobj,
-                               &lbl_8046DBE8.player_data[0].stats_position,
+                               &(&lbl_8046DBE8)->player_data[0].stats_position,
                                &sp24, 0);
-        lb_8000B1CC(lbl_8046DBE8.player_data[0].jobjs[0xD], NULL, &sp18);
-        lbVector_WorldToScreen(lbl_8046DBE8.cobj, &sp18, &spC, 0);
-        temp_r4 = (s32) sp24.y & 0xFFFC;
-        GXSetScissor(0U, temp_r4, 0x27FU,
-                     (u16) ((s32) spC.y & 0xFFDC) - temp_r4);
+        new_var2 = &lbl_8046DBE8;
+        lb_8000B1CC((*new_var2).player_data[0].jobjs[0xD], 0L, &sp18);
+        lbVector_WorldToScreen((*new_var2).cobj, &sp18, &spC, 0);
+        temp_r4 = (new_var4 = (s32) sp24.y) & 0xFFFC;
+        new_var = (u16) ((new_var3 = (s32) spC.y) & 0xFFDC);
+        GXSetScissor(0U, temp_r4, 0x27FU, new_var - temp_r4);
     }
 }
 

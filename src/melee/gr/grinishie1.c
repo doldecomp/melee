@@ -3,6 +3,7 @@
 
 #include <platform.h>
 
+#include "baselib/debug.h"
 #include "cm/camera.h"
 #include "ef/efsync.h"
 #include "gm/gm_unsplit.h"
@@ -15,6 +16,7 @@
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/stage.h"
+#include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
@@ -750,12 +752,18 @@ void grInishie1_801FBCEC(HSD_GObj* gobj, u32 index)
     Camera_80030E44(2, &effect_pos);
 }
 
+inline Item* GET_ITEM2(Item_GObj* arg0)
+{
+    return arg0->user_data;
+}
+
 void fn_801FBF6C(Item_GObj* item_gobj, Ground* gp, Vec3* pos, HSD_GObj* arg3,
                  f32 arg4)
 {
+    HSD_GObj* new_var;
     s32 i;
-    HSD_GObj* gobj;
-    Item* ip = item_gobj->user_data;
+    HSD_GObj* map_gobj;
+    Item* ip = GET_ITEM2(item_gobj);
 
     for (i = 0; i < 19; i++) {
         if (gp->gv.inishie1.blocks[i].jobj2 ==
@@ -769,13 +777,12 @@ void fn_801FBF6C(Item_GObj* item_gobj, Ground* gp, Vec3* pos, HSD_GObj* arg3,
         return;
     }
 
-    gobj = Ground_801C2BA4(3);
-    if (gobj == NULL) {
-        __assert("grinishie1.c", 0x425, "map_gobj");
-    }
+    map_gobj = Ground_801C2BA4(3);
+    HSD_ASSERT(0x425, map_gobj);
 
-    grInishie1_801FB0AC(gobj, i);
-    grInishie1_801FBCEC(gobj, i);
+    new_var = map_gobj;
+    grInishie1_801FB0AC(map_gobj, i);
+    grInishie1_801FBCEC(new_var, i);
     PAD_STACK(16);
 }
 
