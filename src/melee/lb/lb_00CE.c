@@ -7,6 +7,7 @@
 #include <baselib/forward.h>
 
 #include <math.h>
+#include <math_ppc.h>
 #include <trigf.h>
 
 static void sdata2_order(void)
@@ -21,20 +22,6 @@ static void sdata2_order(void)
     (void) 3.0;
     (void) 0.00001f;
     (void) -0.00001f;
-}
-
-inline float sqrtf(float x)
-{
-    volatile float y;
-    if (x > 0.0f) {
-        double guess = __frsqrte((double) x); // returns an approximation to
-        guess = .5 * guess * (3.0 - guess * guess * x); // now have 12 sig bits
-        guess = .5 * guess * (3.0 - guess * guess * x); // now have 24 sig bits
-        guess = .5 * guess * (3.0 - guess * guess * x); // now have 32 sig bits
-        y = (float) (x * guess);
-        return y;
-    }
-    return x;
 }
 
 f32 expf(f32 arg8)
