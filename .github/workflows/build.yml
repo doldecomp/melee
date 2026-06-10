@@ -25,7 +25,7 @@ jobs:
         mode: ["link", "diff"]
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v6
       with:
         fetch-depth: 2
         sparse-checkout: |
@@ -109,13 +109,13 @@ jobs:
         esac
     - name: Upload map
       if: matrix.mode == 'link'
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: ${{matrix.version}}_maps
         path: build/${{matrix.version}}/**/*.MAP
     - name: Upload report
       if: matrix.mode == 'diff' && (success() || failure())
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: ${{matrix.version}}_report
         path: build/${{matrix.version}}/report.json
@@ -134,10 +134,10 @@ jobs:
         echo "IMAGE=$IMAGE_REPO/$IMAGE_SUFFIX" >> $GITHUB_ENV
 
     - name: Checkout Melee repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v6
 
     - name: Log into container registry
-      uses: docker/login-action@v2.1.0
+      uses: docker/login-action@v4
       with:
         registry: ${{ env.REGISTRY }}
         username: ${{ github.actor }}
@@ -168,10 +168,10 @@ jobs:
           echo "IMAGE=$IMAGE_REPO/$IMAGE_SUFFIX" >> $GITHUB_ENV
 
       - name: Checkout Melee repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - name: Log into container registry
-        uses: docker/login-action@v2
+        uses: docker/login-action@v4
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -190,7 +190,7 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.IMAGE }}
 
       - name: Upload GitHub Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ${{ env.OUTPUT }}
 
@@ -208,11 +208,11 @@ jobs:
 
     steps:
       - name: Set up GitHub Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v6
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 
   build-nix:
     name: Nix
@@ -222,7 +222,7 @@ jobs:
       REGISTRY: ghcr.io
       IMAGE: doldecomp/build-melee:main
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         fetch-depth: 1
         sparse-checkout: |
@@ -232,7 +232,7 @@ jobs:
           config
           .nix
     - name: Log into container registry
-      uses: docker/login-action@v2
+      uses: docker/login-action@v4
       with:
         registry: ${{ env.REGISTRY }}
         username: ${{ github.actor }}
@@ -243,10 +243,10 @@ jobs:
         docker pull "$image"
         container_id=$(docker create "$image")
         docker cp "$container_id":/orig .
-    - uses: cachix/install-nix-action@v25
+    - uses: cachix/install-nix-action@v31
       with:
         nix_path: nixpkgs=channel:nixos-unstable
-    - uses: cachix/cachix-action@v16
+    - uses: cachix/cachix-action@v17
       with:
         name: doldecomp-melee
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
