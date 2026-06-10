@@ -1,5 +1,7 @@
 #include "lb/lb_00CE.h"
 
+#include "placeholder.h"
+
 #include <platform.h>
 
 #include <baselib/forward.h>
@@ -7,20 +9,20 @@
 #include <math.h>
 #include <trigf.h>
 
-static void float_order(Vec3* temp, s32 in1)
+static void sdata2_order(void)
 {
-    f64 tmp1 = M_PI / 2;
-    f64 tmp2 = M_PI;
-    temp->y = tmp1;
-    temp->y = tmp2;
-    temp->y = 1.0f;
-    temp->y = 2.0f;
-    temp->y = temp->y * in1;
+    (void) M_PI_2;
+    (void) M_PI;
+    (void) 1.0f;
+    (void) 2.0f;
+    (void) S32_TO_F32;
+    (void) 0.0f;
+    (void) 0.5;
+    (void) 3.0;
+    (void) 0.00001f;
+    (void) -0.00001f;
 }
-static void float_order2(Vec3* temp)
-{
-    temp->y = 0.0f;
-}
+
 inline float sqrtf(float x)
 {
     volatile float y;
@@ -33,12 +35,6 @@ inline float sqrtf(float x)
         return y;
     }
     return x;
-}
-static void float_order3(Vec3* temp, f32 in)
-{
-    temp->y = sqrtf(in);
-    temp->y = 0.00001f;
-    temp->y = -0.00001f;
 }
 
 f32 expf(f32 arg8)
