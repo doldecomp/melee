@@ -76,11 +76,6 @@ static HSD_Archive* HSD_SisLib_804D1110[5];
 SIS* HSD_SisLib_804D1124[5];
 s8 HSD_SisLib_804D6390[4] = { 0, 0, 0, 0 };
 
-/// @todo Currently 99.40% match - remaining diffs are register allocation
-/// (free_head ptr in r3 instead of r4) plus the "" literal pooling
-/// to HSD_SisLib_804D6390, both link/regalloc-resolved
-/// a generic allocator used by multiple
-/// data types
 void* HSD_SisLib_Alloc(s32 size)
 {
     SisBlock* best;
@@ -169,9 +164,6 @@ void* HSD_SisLib_Alloc(s32 size)
     return best->data;
 }
 
-/// @todo Currently 92.57% match - register allocation/scheduling in coalesce
-/// block: compiler reassociates new_size add and reuses free_cur reg for
-/// old_next instead of the alloc_cur->size reg
 void HSD_SisLib_Free(void* ptr)
 {
     SisBlock* free_cur;
