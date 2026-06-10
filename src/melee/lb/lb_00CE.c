@@ -2,12 +2,44 @@
 
 #include <platform.h>
 
-#include "MSL/math_ppc.h"
-
 #include <baselib/forward.h>
 
 #include <math.h>
 #include <trigf.h>
+
+static void float_order(Vec3* temp, s32 in1)
+{
+    f64 tmp1 = 3.14159265358979323846 / 2;
+    f64 tmp2 = 3.14159265358979323846;
+    temp->y = tmp1;
+    temp->y = tmp2;
+    temp->y = 1.0f;
+    temp->y = 2.0f;
+    temp->y = temp->y * in1;
+}
+static void float_order2(Vec3* temp)
+{
+    temp->y = 0.0f;
+}
+inline float sqrtf(float x)
+{
+    volatile float y;
+    if (x > 0.0f) {
+        double guess = __frsqrte((double) x); // returns an approximation to
+        guess = .5 * guess * (3.0 - guess * guess * x); // now have 12 sig bits
+        guess = .5 * guess * (3.0 - guess * guess * x); // now have 24 sig bits
+        guess = .5 * guess * (3.0 - guess * guess * x); // now have 32 sig bits
+        y = (float) (x * guess);
+        return y;
+    }
+    return x;
+}
+static void float_order3(Vec3* temp, f32 in)
+{
+    temp->y = sqrtf(in);
+    temp->y = 0.00001f;
+    temp->y = -0.00001f;
+}
 
 f32 expf(f32 arg8)
 {
@@ -122,7 +154,7 @@ f32 lb_8000D008(f32 point_y_in, f32 point_x)
         } else {
             var_r0 = 1;
         }
-        return (f32) ((M_PI / 2) * (f64) var_r0);
+        return (f32) ((3.14159265358979323846 / 2) * (f64) var_r0);
     }
     if (point_x > 0.0f) {
         return atanf(point_y / point_x);
@@ -137,7 +169,8 @@ f32 lb_8000D008(f32 point_y_in, f32 point_x)
         } else {
             var_r31 = 1;
         }
-        point_y = (f32) ((f64) var_r31 * (M_PI - atanf(var_f2)));
+        point_y =
+            (f32) ((f64) var_r31 * (3.14159265358979323846 - atanf(var_f2)));
     }
     return point_y;
 }
