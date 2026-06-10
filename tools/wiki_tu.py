@@ -102,16 +102,19 @@ def write(args):
             github = "<!-- GitHub -->"
         return discord, github
 
+    def get_measure_int(unit, key: str) -> int:
+        return int(unit["measures"].get(key) or 0)
+
     def percent_cells(unit):
         measures = unit["measures"]
         text = percent_cell(
-            int(measures.get("matched_code") or 0),
-            int(measures.get("total_code") or 0),
+            get_measure_int(unit, "matched_code"),
+            get_measure_int(unit, "total_code"),
             measures.get("matched_code_percent"),
         )
         data = percent_cell(
-            int(measures.get("matched_data") or 0),
-            int(measures.get("total_data") or 0),
+            get_measure_int(unit, "matched_data"),
+            get_measure_int(unit, "total_data"),
             measures.get("matched_data_percent"),
         )
         return text, data
@@ -129,11 +132,13 @@ def write(args):
 
     def row_full(unit) -> str:
         file, link = file_link(unit)
-        matched = friendly_size(int(unit["measures"].get("matched_code") or 0))
-        total = friendly_size(int(unit["measures"].get("total_code") or 0))
+        matched = friendly_size(get_measure_int(unit, "matched_code"))
+        total = friendly_size(get_measure_int(unit, "total_code"))
+        remaining_code = get_measure_int(unit, "remaining_code")
+        remaining = friendly_size(remaining_code) if remaining_code else "&mdash;"
         text, data = percent_cells(unit)
         discord, github = assignee_cells(file)
-        return f"{link}|{matched}|{total}|{text}|{data}|{discord}|{github}"
+        return f"{link}|{matched}|{total}|{remaining}|{text}|{data}|{discord}|{github}"
 
     def row_slim(unit) -> str:
         _, link = file_link(unit)
@@ -147,6 +152,9 @@ def write(args):
     data_left = []
     linked = []
     for unit in data["units"] or []:
+        matched_code = get_measure_int(unit, "matched_code")
+        total_code = get_measure_int(unit, "total_code")
+        unit["measures"]["remaining_code"] = total_code - matched_code
         if unit["metadata"].get("complete"):
             linked.append(unit)
         elif float(unit["measures"].get("matched_code_percent") or 0) >= 100:
@@ -154,9 +162,14 @@ def write(args):
         else:
             in_progress.append(unit)
 
+    def by_remaining(unit):
+        return get_measure_int(unit, "remaining_code")
+
+    in_progress.sort(key=by_remaining)
+    data_left.sort(key=by_remaining)
     full_header = (
-        "File|Matched|Total|.text %|data %|Assignee<br>Discord|Assignee<br>GitHub\n"
-        "-|-|-|-|-|-|-"
+        "File|Matched|Total|Remaining|.text %|data %|Assignee<br>Discord|Assignee<br>GitHub\n"
+        "-|-|-|-|-|-|-|-"
     )
     slim_header = "File|.text %|data %\n-|-|-"
 
