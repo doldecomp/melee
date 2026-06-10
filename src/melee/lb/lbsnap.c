@@ -288,10 +288,11 @@ static inline int lbSnap_GetSaveDataOffset(struct Unk80433380_0* snap)
 int lbSnap_8001DF20(void)
 {
     struct Unk80433380_0* snap = lbSnap_80433380.x0;
-
+    struct Unk803BACC8* tmp;
     lbSnap_803BACC8.x14 = lbSnap_GetSaveDataOffset(snap);
+    tmp = &lbSnap_803BACC8;
     lbSnap_803BACC8.x1C = snap;
-    return lb_8001C4A8(&lbSnap_803BACC8.x14, &lbSnap_803BACC8);
+    return lb_8001C4A8(&tmp->x14, &lbSnap_803BACC8);
 }
 #pragma pop
 

@@ -259,6 +259,7 @@ void un_802FF4FC(void)
     }
 }
 
+// Same issue as un_802FF620
 void un_802FF570(void)
 {
     int i;
@@ -273,19 +274,21 @@ void un_802FF570(void)
     }
 }
 
+// Same issue as un_802FF570
 void un_802FF620(void)
 {
     int i;
     struct un_804A1F58_t* base = un_804A1F58;
-    PAD_STACK(8);
+
     for (i = 0; i < 6; i++) {
+        struct un_804A1F58_x8_t* thing = (0, &base[i].x8);
         base[i + 1].x4 = 0;
-        if (base[i].x8.x4) {
+
+        if (thing->x4) {
             un_802FF364(i);
-            base[i].x8.x4->hidden = 0;
+            thing->x4->hidden = 0;
         }
     }
-    base[i].x8 = base[i].x8;
 }
 
 void un_802FF6A0(void)

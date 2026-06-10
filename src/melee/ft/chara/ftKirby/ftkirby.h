@@ -96,7 +96,7 @@
 /* 0F12C8 */ void ftKb_SpecialN_800F12C8(Fighter_GObj* gobj);
 /* 0F130C */ void ftKb_SpecialN_800F130C(Fighter_GObj* gobj);
 /* 0F13F0 */ void ftKb_SpecialN_800F13F0(Fighter_GObj* gobj);
-/* 0F1420 */ void ftKb_SpecialN_800F1420(Fighter_GObj* gobj, u32* arg1);
+/* 0F1420 */ u8* ftKb_SpecialN_800F1420(Fighter_GObj* gobj, u32* arg1);
 /* 0F14B4 */ void ftKb_SpecialN_800F14B4(Fighter_GObj* gobj);
 /* 0F15D8 */ void ftKb_SpecialN_800F15D8(Fighter_GObj* gobj);
 /* 0F1630 */ void ftKb_SpecialN_Enter(Fighter_GObj* gobj);
