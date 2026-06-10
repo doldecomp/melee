@@ -305,9 +305,8 @@ s32 mnCount_8025072C(CountEntry* entries, s32 start_idx, bool mode)
 #undef GET_KOS
 #undef GET_FALLS
 
-static inline bool mnCount_8025092C_inline(void)
+static inline bool mnCount_8025092C_inline(int i)
 {
-    int i;
     for (i = 0; i < NUM_CHARACTERS; i++) {
         if (mnCount_GetMatchTime(i) != 0) {
             return false;
@@ -318,12 +317,12 @@ static inline bool mnCount_8025092C_inline(void)
 
 s32 mnCount_8025092C(s32 rank, u32 (*getVal)(s32), bool mode)
 {
-    PAD_STACK(4);
+    PAD_STACK(12);
     {
         CountEntry entries[NUM_CHARACTERS];
         CountEntry tmp;
         int i, j, min;
-        if (mnCount_8025092C_inline()) {
+        if (mnCount_8025092C_inline(0)) {
             return NUM_CHARACTERS;
         }
         for (i = 0; i < NUM_CHARACTERS; i++) {
