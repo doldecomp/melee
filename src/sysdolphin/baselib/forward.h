@@ -96,7 +96,7 @@ typedef struct PadLibData PadLibData;
 typedef struct RumbleCommand RumbleCommand;
 typedef struct RumbleInfo RumbleInfo;
 typedef struct sislib_UnkAlloc3 sislib_UnkAlloc3;
-typedef struct sislib_UnkAllocData sislib_UnkAllocData;
+typedef struct SisBlock SisBlock;
 typedef struct TextKerning TextKerning;
 typedef union HSD_CObjDesc HSD_CObjDesc;
 typedef union HSD_ObjData HSD_ObjData;
