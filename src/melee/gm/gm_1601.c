@@ -3357,10 +3357,7 @@ void fn_8016719C(s32 slot, s32 subchar)
     match_info = gm_8016AE44();
     stage_id = gm_8016B004();
     if (Stage_80224DC8(stage_id) != 0) {
-        {
-            extern s32 Ground_801C5774();
-            var_r30 = Ground_801C5774();
-        }
+        var_r30 = Ground_801C5774();
         Stage_80224E38(&respawn_pos, var_r30);
         offset.z = 0.0f;
         offset.y = 0.0f;
