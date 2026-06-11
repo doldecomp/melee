@@ -137,11 +137,6 @@ typedef struct TyDspConfig {
     /* 0x7C */ s32 x7C;
 } TyDspConfig;
 extern TyDspConfig* un_804D6F18;
-extern char un_803FF074[0xA8];
-
-char un_803FEFF0[0x2C] = "ToyDspPanel_Top_joint\0\0\0ToyDspBg_Top_joint";
-char un_803FF01C[0x2C] = "ToyDspStand_Top_joint\0\0\0ScMenDisplay_fog";
-static char un_804D5AA8[2] = "0";
 
 void un_803182D4_OnFrame(void)
 {
@@ -1002,7 +997,7 @@ void un_80319EF0(void)
             }
         }
         if (scale > 2.1474836e9f || scale < -2.1474836e9f) {
-            OSReport(un_803FF074);
+            OSReport("*** tyDisplay Table Scale Irregul!\n");
             HSD_ASSERT(0x28C, 0);
         }
         if ((s32) scale != 0) {
@@ -1378,7 +1373,6 @@ void fn_8031A94C(HSD_GObj* arg0)
     }
 }
 
-char un_803FF074[0xA8] = "*** tyDisplay Table Scale Irregul!\n\0TyMnDisp.dat\0\0\0\0TyMnDisp.usd\0\0\0\0*** BG data aren't being loaded!\n\0\0\0*** Can not Load Panel Label(%s)\n\0\0\0ScMenDisplay_scene_lights";
 static u16 un_804D5ABC = 0x15;
 
 void un_8031B1FC(void)
@@ -1390,7 +1384,6 @@ void un_8031B1FC(void)
     int zero;
     u8 temp;
     HSD_JObj* jobj;
-    char* strbase = un_803FEFF0;
     gobj4 = ptr->gobj4;
     zero = 0;
     do {
@@ -1398,8 +1391,8 @@ void un_8031B1FC(void)
     } while (zero);
 
     if (ptr->archive == NULL) {
-        OSReport(strbase + 0xC8);
-        __assert(strbase + 0x78, 0x3FD, un_804D5AA8);
+        OSReport("*** BG data aren't being loaded!\n");
+        HSD_ASSERT(0x3FD, 0);
     }
 
     gobj = ptr->gobj0;
@@ -1416,7 +1409,7 @@ void un_8031B1FC(void)
         ptr->gobj4 = NULL;
     }
 
-    joint = HSD_ArchiveGetPublicAddress(ptr->archive, strbase + 0x18);
+    joint = HSD_ArchiveGetPublicAddress(ptr->archive, "ToyDspBg_Top_joint");
     if (joint != NULL) {
         ptr->gobj4 = GObj_Create(9, 9, zero);
         jobj = HSD_JObjLoadJoint(joint);
@@ -1426,8 +1419,8 @@ void un_8031B1FC(void)
         return;
     }
 
-    OSReport(strbase + 0xEC, strbase + 0x18);
-    __assert(strbase + 0x78, 0x43E, un_804D5AA8);
+    OSReport("*** Can not Load Panel Label(%s)\n", "ToyDspBg_Top_joint");
+    HSD_ASSERT(0x43E, 0);
 }
 
 static s32 un_804DE018 = (s32) 0xC8C8C8FF;
@@ -1435,7 +1428,6 @@ static f32 un_804DE01C = 0.6f;
 
 void un_8031B328(void)
 {
-    char* strbase = un_803FEFF0;
     TyDspBgData* ptr = un_804D6F1C;
     TyDspSceneGfx* scene = (TyDspSceneGfx*) un_804D6ED4;
     LightList** lightData;
@@ -1448,12 +1440,12 @@ void un_8031B328(void)
     PAD_STACK(24);
 
     if ((temp3 = ptr)->archive == NULL) {
-        OSReport(strbase + 0xC8);
-        OSPanic(strbase + 0x78, 0x459, "");
+        OSReport("*** BG data aren't being loaded!\n");
+        OSPanic(__FILE__, 0x459, "0");
     }
 
-    if ((lightData = HSD_ArchiveGetPublicAddress(temp3->archive,
-                                                 strbase + 0x110)) != NULL)
+    if ((lightData = HSD_ArchiveGetPublicAddress(
+             temp3->archive, "ScMenDisplay_scene_lights")) != NULL)
     {
         scene->x00 = GObj_Create(2, 3, 0);
         lobj = Toy_LoadLObjList(lightData, 0);
@@ -1466,8 +1458,8 @@ void un_8031B328(void)
         HSD_LObjSetColor(lobj, *(GXColor*) &un_804DE018);
     }
 
-    if ((fogDesc = HSD_ArchiveGetPublicAddress(temp3->archive, strbase + 0x44)) !=
-        NULL)
+    if ((fogDesc = HSD_ArchiveGetPublicAddress(temp3->archive,
+                                               "ScMenDisplay_fog")) != NULL)
     {
         scene->x08 = GObj_Create(3, 4, 0);
         HSD_GObjObject_80390A70(scene->x08, temp2 = HSD_GObj_804D7848,
@@ -1475,6 +1467,8 @@ void un_8031B328(void)
         GObj_SetupGXLink(scene->x08, un_80306930, 0x35, 0);
     }
 }
+
+static char un_803FEFF0[] = "ToyDspPanel_Top_joint";
 
 void un_8031B460_OnEnter(void* arg0)
 {
