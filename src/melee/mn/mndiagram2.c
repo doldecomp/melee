@@ -293,6 +293,7 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
     u8 var_r6;
     u8 var_r5;
     int var_r28;
+    HSD_GObj* d2;
     PAD_STACK(40);
 
     data = mnDiagram2_804D6C18->user_data;
@@ -356,7 +357,7 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
         mnDiagram2_UpdateHeader(mnDiagram2_804D6C18, data->is_name_mode,
                                 var_r5);
         x48 = data->is_name_mode;
-        data2 = mnDiagram2_804D6C18->user_data;
+        data2 = (d2 = mnDiagram2_804D6C18)->user_data;
         if (x48 != 0) {
             HSD_JObjSetFlagsAll(data2->fighter_mode_header, 0x10);
             HSD_JObjClearFlagsAll(data2->name_mode_header, 0x10);
@@ -369,7 +370,7 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
         } else {
             var_r5 = data2->selected_fighter_idx;
         }
-        mnDiagram2_UpdateHeader(mnDiagram2_804D6C18, x48, var_r5);
+        mnDiagram2_UpdateHeader(d2, x48, var_r5);
         return;
     }
 
