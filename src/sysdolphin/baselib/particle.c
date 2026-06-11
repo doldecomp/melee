@@ -1016,32 +1016,6 @@ s32 fn_80392CCC(s32 channel)
     return 0;
 }
 
-static char lbl_8040A540[0x268] =
-    "MCC is no initialize\0\0\0\0"
-    "No responce\0"
-    "PING error\0\0"
-    "Could not initialize HIO\0\0\0\0"
-    "Could not read HIO mailbox\0\0"
-    "Could not write HIO mailbox\0"
-    "Could not read HIO memory\0\0\0"
-    "Could not write HIO memory\0\0"
-    "Could not read HIO status\0\0\0"
-    "Could not flush channelInfo\0"
-    "Could not load channelInfo\0\0"
-    "Not enough memory block\0"
-    "Invalid function parameter\0\0"
-    "Invalid channel parameter\0\0\0"
-    "Invalid data size\0\0\0"
-    "Invalid offset parameter\0\0\0\0"
-    "Channel was (already) opened\0\0\0\0"
-    "Channel was (already) closed\0\0\0\0"
-    "Channel was (already) locked\0\0\0\0"
-    "Channel was (already) unlocked\0\0"
-    "Channel (read/write) busy\0\0\0"
-    "Unknown error\0\0\0"
-    "%s: MCC Error, %s (%d)\n\0"
-    "MCC Error, %s (%d)\n";
-
 u8 fn_80392CD8(char* caller)
 {
     char* msg;
@@ -1053,77 +1027,77 @@ u8 fn_80392CD8(char* caller)
     case 0:
         return err;
     case 1:
-        msg = lbl_8040A540;
+        msg = "MCC is no initialize";
         break;
     case 2:
-        msg = lbl_8040A540 + 0x18;
+        msg = "No responce";
         break;
     case 3:
-        msg = lbl_8040A540 + 0x24;
+        msg = "PING error";
         break;
     case 4:
-        msg = lbl_8040A540 + 0x30;
+        msg = "Could not initialize HIO";
         break;
     case 5:
-        msg = lbl_8040A540 + 0x4C;
+        msg = "Could not read HIO mailbox";
         break;
     case 6:
-        msg = lbl_8040A540 + 0x68;
+        msg = "Could not write HIO mailbox";
         break;
     case 7:
-        msg = lbl_8040A540 + 0x84;
+        msg = "Could not read HIO memory";
         break;
     case 8:
-        msg = lbl_8040A540 + 0xA0;
+        msg = "Could not write HIO memory";
         break;
     case 9:
-        msg = lbl_8040A540 + 0xBC;
+        msg = "Could not read HIO status";
         break;
     case 10:
-        msg = lbl_8040A540 + 0xD8;
+        msg = "Could not flush channelInfo";
         break;
     case 11:
-        msg = lbl_8040A540 + 0xF4;
+        msg = "Could not load channelInfo";
         break;
     case 12:
-        msg = lbl_8040A540 + 0x110;
+        msg = "Not enough memory block";
         break;
     case 13:
-        msg = lbl_8040A540 + 0x128;
+        msg = "Invalid function parameter";
         break;
     case 14:
-        msg = lbl_8040A540 + 0x144;
+        msg = "Invalid channel parameter";
         break;
     case 15:
-        msg = lbl_8040A540 + 0x160;
+        msg = "Invalid data size";
         break;
     case 16:
-        msg = lbl_8040A540 + 0x174;
+        msg = "Invalid offset parameter";
         break;
     case 17:
-        msg = lbl_8040A540 + 0x190;
+        msg = "Channel was (already) opened";
         break;
     case 18:
-        msg = lbl_8040A540 + 0x1B0;
+        msg = "Channel was (already) closed";
         break;
     case 19:
-        msg = lbl_8040A540 + 0x1D0;
+        msg = "Channel was (already) locked";
         break;
     case 20:
-        msg = lbl_8040A540 + 0x1F0;
+        msg = "Channel was (already) unlocked";
         break;
     case 21:
-        msg = lbl_8040A540 + 0x210;
+        msg = "Channel (read/write) busy";
         break;
     default:
-        msg = lbl_8040A540 + 0x22C;
+        msg = "Unknown error";
         break;
     }
 
     if (caller != NULL) {
-        OSReport(lbl_8040A540 + 0x23C, caller, msg, err);
+        OSReport("%s: MCC Error, %s (%d)\n", caller, msg, err);
     } else {
-        OSReport(lbl_8040A540 + 0x254, msg, err);
+        OSReport("MCC Error, %s (%d)\n", msg, err);
     }
     return err;
 }
