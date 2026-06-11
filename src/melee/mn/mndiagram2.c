@@ -279,6 +279,7 @@ static inline void mnDiagram2_RefreshStatRows(void)
 void mnDiagram2_HandleInput(HSD_GObj* gobj)
 {
     Diagram2* data;
+    Diagram2* data3;
     int result;
     Diagram2* data2;
     u8 x46;
@@ -368,76 +369,77 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
         return;
     }
 
-    if (data->is_name_mode != 0) {
+    data3 = mnDiagram2_804D6C18->user_data;
+    if (data3->is_name_mode != 0) {
         GetNameCount();
         if (result & 1) {
-            if (data->scroll_offset != 0) {
+            if (data3->scroll_offset != 0) {
                 lbAudioAx_80024030(2);
-                data->scroll_offset = data->scroll_offset - 1;
+                data3->scroll_offset = data3->scroll_offset - 1;
                 mnDiagram2_RefreshStatRows();
             }
         } else if (result & 2) {
-            if ((s32) (data->scroll_offset + 10) < 0x18) {
+            if ((s32) (data3->scroll_offset + 10) < 0x18) {
                 lbAudioAx_80024030(2);
-                data->scroll_offset = data->scroll_offset + 1;
+                data3->scroll_offset = data3->scroll_offset + 1;
                 mnDiagram2_RefreshStatRows();
             }
         } else if (result & 4) {
-            new_val = mnDiagram_GetPrevNameIndex(data->selected_name_idx);
-            if ((s32) data->selected_name_idx != (s32) new_val) {
+            new_val = mnDiagram_GetPrevNameIndex(data3->selected_name_idx);
+            if ((s32) data3->selected_name_idx != (s32) new_val) {
                 lbAudioAx_80024030(2);
-                data->selected_name_idx = new_val;
+                data3->selected_name_idx = new_val;
                 mnDiagram2_RefreshStatRows();
                 mnDiagram2_UpdateHeader(mnDiagram2_804D6C18,
-                                        data->is_name_mode,
-                                        data->selected_name_idx);
+                                        data3->is_name_mode,
+                                        data3->selected_name_idx);
             }
         } else if (result & 8) {
-            new_val = mnDiagram_GetNextNameIndex(data->selected_name_idx);
-            if ((s32) data->selected_name_idx != (s32) new_val) {
+            new_val = mnDiagram_GetNextNameIndex(data3->selected_name_idx);
+            if ((s32) data3->selected_name_idx != (s32) new_val) {
                 lbAudioAx_80024030(2);
-                data->selected_name_idx = new_val;
+                data3->selected_name_idx = new_val;
                 mnDiagram2_RefreshStatRows();
                 mnDiagram2_UpdateHeader(mnDiagram2_804D6C18,
-                                        data->is_name_mode,
-                                        data->selected_name_idx);
+                                        data3->is_name_mode,
+                                        data3->selected_name_idx);
             }
         }
     } else {
         mnDiagram_CountUnlockedFighters();
         if (result & 1) {
-            if (data->scroll_offset != 0) {
+            if (data3->scroll_offset != 0) {
                 lbAudioAx_80024030(2);
-                data->scroll_offset = data->scroll_offset - 1;
+                data3->scroll_offset = data3->scroll_offset - 1;
                 mnDiagram2_RefreshStatRows();
             }
         } else if (result & 2) {
-            if ((s32) (data->scroll_offset + 10) < 0x15) {
+            if ((s32) (data3->scroll_offset + 10) < 0x15) {
                 lbAudioAx_80024030(2);
-                data->scroll_offset = data->scroll_offset + 1;
+                data3->scroll_offset = data3->scroll_offset + 1;
                 mnDiagram2_RefreshStatRows();
             }
         } else if (result & 4) {
             new_val =
-                mnDiagram_GetPrevFighterIndex(data->selected_fighter_idx);
-            if ((s32) data->selected_fighter_idx != (s32) new_val) {
+                mnDiagram_GetPrevFighterIndex(data3->selected_fighter_idx);
+            if ((s32) data3->selected_fighter_idx != (s32) new_val) {
                 lbAudioAx_80024030(2);
-                data->selected_fighter_idx = new_val;
+                data3->selected_fighter_idx = new_val;
                 mnDiagram2_RefreshStatRows();
                 mnDiagram2_UpdateHeader(mnDiagram2_804D6C18,
-                                        data->is_name_mode,
-                                        data->selected_fighter_idx);
+                                        data3->is_name_mode,
+                                        data3->selected_fighter_idx);
             }
         } else if (result & 8) {
             new_val =
-                mnDiagram_GetNextFighterIndex(data->selected_fighter_idx);
-            if ((s32) data->selected_fighter_idx != (s32) new_val) {
+                mnDiagram_GetNextFighterIndex(data3->selected_fighter_idx);
+            if ((s32) data3->selected_fighter_idx != (s32) new_val) {
                 lbAudioAx_80024030(2);
-                data->selected_fighter_idx = new_val;
+                data3->selected_fighter_idx = new_val;
                 mnDiagram2_RefreshStatRows();
                 mnDiagram2_UpdateHeader(mnDiagram2_804D6C18,
-                                        data->is_name_mode,
-                                        data->selected_fighter_idx);
+                                        data3->is_name_mode,
+                                        data3->selected_fighter_idx);
             }
         }
     }
