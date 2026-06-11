@@ -1510,6 +1510,7 @@ bool fn_800D8EC8(Fighter_GObj* gobj)
     HSD_JObj* jobj;
     itLinkHookshotAttributes* hookAttrs;
     Vec3 bonePos;
+    UNUSED u32 unused0;
     f32 grav;
     Vec3 vel;
     f32 var_f3;
@@ -1755,7 +1756,8 @@ bool fn_800D9930(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* attrs;
     Item_GObj* item;
-    Item* it;
+    s32 frame;
+    s32 i;
     itSamusGrappleAttributes* grappleAttrs;
     HSD_GObj* segGobj;
     HSD_JObj* jobj;
@@ -1764,9 +1766,7 @@ bool fn_800D9930(Fighter_GObj* gobj)
     Vec3 vel;
     f32 grav;
     f32 r;
-    s32 i;
-    s32 frame;
-    PAD_STACK(0x8);
+    PAD_STACK(4);
 
     if (fp->kind == FTKIND_SAMUS) {
         attrs = fp->dat_attrs;
@@ -1784,8 +1784,9 @@ bool fn_800D9930(Fighter_GObj* gobj)
             fp->accessory3_cb = (void (*)(HSD_GObj*)) it_802BACC4;
         } else if (grav > (f32) attrs->xAC) {
             if (grav <= (f32) attrs->xB8) {
+                Item* it;
+                it = GET_ITEM(fp->fv.ss.x223C);
                 item = fp->fv.ss.x223C;
-                it = GET_ITEM(item);
                 grappleAttrs = it->xC4_article_data->x4_specialAttributes;
                 if (item != NULL) {
                     for (i = 0, frame = 0x14; i < 4; i++, frame += 3) {
