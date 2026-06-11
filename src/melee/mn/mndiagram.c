@@ -72,6 +72,42 @@ typedef struct mnDiagram_AnimData {
     /* 0x0C */ HSD_JObj* jobj;             ///< JObj for exit animation
 } mnDiagram_AnimData;
 
+struct mnDiagram_DataTailHeader {
+    /* 0x00 */ f32 exit_anim[3];
+    /* 0x0C */ f32 arrow_anim[3];
+    /* 0x18 */ f32 cursor_anim[3];
+    /* 0x24 */ char user_data_error[0x18];
+    /* 0x3C */ char file_name[0xC];
+    /* 0x48 */ char user_data_name[0xC];
+    /* 0x54 */ char ConB1_joint[0x18];
+    /* 0x6C */ char ConB1_animjoint[0x1C];
+    /* 0x88 */ char ConB1_matanim_joint[0x20];
+    /* 0xA8 */ char ConB1_shapeanim_joint[0x24];
+    /* 0xCC */ char CursorB1_joint[0x1C];
+    /* 0xE8 */ char FaceB_joint[0x18];
+    /* 0x100 */ char FaceB_animjoint[0x1C];
+    /* 0x11C */ char FaceB_matanim_joint[0x20];
+    /* 0x13C */ char FaceB_shapeanim_joint[0x24];
+    /* 0x160 */ char NmB_joint[0x18];
+    /* 0x178 */ char NmB_animjoint[0x1C];
+    /* 0x194 */ char NmB_matanim_joint[0x20];
+    /* 0x1B4 */ char NmB_shapeanim_joint[0x20];
+    /* 0x1D4 */ char SubB1_joint[0x18];
+    /* 0x1EC */ char SubB1_animjoint[0x1C];
+    /* 0x208 */ char SubB1_matanim_joint[0x20];
+    /* 0x228 */ char SubB1_shapeanim_joint[0x24];
+    /* 0x24C */ char ConB2_joint[0x18];
+    /* 0x264 */ char ConB2_animjoint[0x1C];
+    /* 0x280 */ char ConB2_matanim_joint[0x20];
+    /* 0x2A0 */ char ConB2_shapeanim_joint[0x24];
+    /* 0x2C4 */ char ConB3_joint[0x18];
+    /* 0x2DC */ char ConB3_animjoint[0x1C];
+    /* 0x2F8 */ char ConB3_matanim_joint[0x20];
+    /* 0x318 */ char ConB3_shapeanim_joint[0x24];
+    /* 0x33C */ char CursorB3_joint[0x20];
+};
+STATIC_ASSERT(sizeof(mnDiagram_DataTailHeader) == 0x35C);
+
 /// Data and BSS variables - sorted player arrays
 Point3d mnDiagram_803EE728[3] = {
     { 4.0F, 1.0F, 0.0F },
@@ -86,6 +122,41 @@ u8 mnDiagram_803EE74C[0x1C] = {
 };
 
 AnimLoopSettings mnDiagram_803EE768 = { 0.0f, 9.0f, -0.1f };
+
+mnDiagram_DataTailHeader mnDiagram_803EE774 = {
+    { 10.0F, 19.0F, -0.1F },
+    { 0.0F, 199.0F, 0.0F },
+    { 0.0F, 10.0F, -0.1F },
+    "Can't get user_data.\n",
+    "mndiagram.c",
+    "user_data",
+    "MenMainConB1_Top_joint",
+    "MenMainConB1_Top_animjoint",
+    "MenMainConB1_Top_matanim_joint",
+    "MenMainConB1_Top_shapeanim_joint",
+    "MenMainCursorB1_Top_joint",
+    "MenMainFaceB_Top_joint",
+    "MenMainFaceB_Top_animjoint",
+    "MenMainFaceB_Top_matanim_joint",
+    "MenMainFaceB_Top_shapeanim_joint",
+    "MenMainNmB_Top_joint",
+    "MenMainNmB_Top_animjoint",
+    "MenMainNmB_Top_matanim_joint",
+    "MenMainNmB_Top_shapeanim_joint",
+    "MenMainSubB1_Top_joint",
+    "MenMainSubB1_Top_animjoint",
+    "MenMainSubB1_Top_matanim_joint",
+    "MenMainSubB1_Top_shapeanim_joint",
+    "MenMainConB2_Top_joint",
+    "MenMainConB2_Top_animjoint",
+    "MenMainConB2_Top_matanim_joint",
+    "MenMainConB2_Top_shapeanim_joint",
+    "MenMainConB3_Top_joint",
+    "MenMainConB3_Top_animjoint",
+    "MenMainConB3_Top_matanim_joint",
+    "MenMainConB3_Top_shapeanim_joint",
+    "MenMainCursorB3_Top_joint",
+};
 
 /// Overlay over &mnDiagram_803EE728 to reach the trailing animation/text-layout
 /// data the popup/cursor procs read at fixed offsets.
@@ -2166,7 +2237,7 @@ void mnDiagram_ExitAnimProc(HSD_GObj* gobj)
     data = gobj->user_data;
     mnDiagram_802417D0(gobj);
     jobj = data->jobj;
-    table = mnDiagram_803EE774;
+    table = mnDiagram_803EE774.exit_anim;
     if (mn_8022ED6C(jobj, (AnimLoopSettings*) table) >= table[1]) {
         HSD_GObjPLink_80390228(gobj);
     }
@@ -2646,7 +2717,7 @@ void mnDiagram_80242C0C(void* arg0, int arg1, int arg2)
     int fighter_id;
     Diagram* data = GET_DIAGRAM(arg0);
     mnDiagram_Assets* assets = (mnDiagram_Assets*) &mnDiagram_804A0750;
-    void** joint_data = assets->ConB3;
+    void** joint_data = assets->FaceB;
     HSD_JObj* jobj;
     HSD_JObj* sp_jobj;
     int i;

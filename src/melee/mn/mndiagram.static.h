@@ -16,7 +16,8 @@
 extern char mnDiagram_804D4FA4;
 extern char mnDiagram_804D4FA8[7];
 extern char mnDiagram_804D4FB0[5];
-extern f32 mnDiagram_803EE774[];
+typedef struct mnDiagram_DataTailHeader mnDiagram_DataTailHeader;
+extern mnDiagram_DataTailHeader mnDiagram_803EE774;
 extern f32 mnDiagram_803EE758[];
 extern void* mnDiagram_804A0814[4];
 extern void* mnDiagram_804A07E4[4];
