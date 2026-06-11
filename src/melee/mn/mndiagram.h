@@ -44,7 +44,7 @@
 /* 240D94 */ void mnDiagram_80240D94(void* arg0, s32 arg1, s32 arg2, s32 arg3);
 /* 241310 */ void mnDiagram_80241310(s32 arg0, s32 arg1, s32 arg2);
 /* 241668 */ void mnDiagram_80241668(void* arg0);
-/* 241730 */ void mnDiagram_80241730(void* arg0, int arg1, int arg2);
+/* 241730 */ void mnDiagram_80241730(HSD_GObj* arg0, int arg1, int arg2);
 /* 2417D0 */ void mnDiagram_802417D0(HSD_GObj* gobj);
 /* 241AE8 */ void mnDiagram_ExitAnimProc(HSD_GObj* gobj);
 /* 241B4C */ void mnDiagram_UpdateScrollArrowVisibility(void* gobj, int count);
