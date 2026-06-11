@@ -23,15 +23,14 @@ HSD_AnimJoint* it_80294364(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     itWstarAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
     s32 candidates[7];
-    volatile s32 pad;
-    s32 i = 0;
-    s32 count = 0;
+    int i;
+    int count;
     s32 picked;
     s32 end = it_804D6D00;
     s32 var_ctr = attr->x24_count;
 
-    for (; i < var_ctr; i++) {
-        if (i != end) {
+    for (i = count = 0; i < var_ctr; i++) {
+        if (i != it_804D6D00) {
             candidates[count] = i;
             count++;
         }
@@ -43,6 +42,19 @@ HSD_AnimJoint* it_80294364(Item_GObj* gobj)
                   0x7f, 0x40);
     return attr->x28_entries[picked].x0_anim_joint;
 }
+
+ItemStateTable it_803F61B0[] = {
+    { 0, itWstar_UnkMotion0_Anim, itWstar_UnkMotion0_Phys,
+      itWstar_UnkMotion0_Coll },
+    { -1, itWstar_UnkMotion1_Anim, itWstar_UnkMotion1_Phys,
+      itWstar_UnkMotion1_Coll },
+    { -1, itWstar_UnkMotion3_Anim, NULL, NULL },
+    { 2, itWstar_UnkMotion3_Anim, NULL, NULL },
+    { -1, itWstar_UnkMotion4_Anim, itWstar_UnkMotion4_Phys,
+      itWstar_UnkMotion4_Coll },
+    { 1, itWstar_UnkMotion5_Anim, itWstar_UnkMotion5_Phys,
+      itWstar_UnkMotion5_Coll },
+};
 
 void it_80294430(Item_GObj* gobj, f32 arg1, f32 arg2)
 {

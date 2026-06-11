@@ -14,10 +14,10 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_3F14.h"
-#include "it/ithitbox.h"
-#include "it/itmaplib.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
+#include "it/ithitbox.h"
+#include "it/itmaplib.h"
 #include "sysdolphin/baselib/random.h"
 
 HSD_GObj* it_802896CC(Vec3* arg0)
@@ -202,9 +202,10 @@ void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3)
 
     i = HSD_Randi(arg1 + arg2 + arg3);
     if (i < arg1) {
-        ItemKind kind = attr->x10;
+        ItemKind kind;
         count = attr->x14;
-        if (kind == It_Kind_M_Ball && it_8026C704() == true) {
+        kind = (ItemKind) attr->x10;
+        if (attr->x10 == It_Kind_M_Ball && it_8026C704() == true) {
             i = HSD_Randi(arg2 + arg3);
             goto food_or_random;
         }

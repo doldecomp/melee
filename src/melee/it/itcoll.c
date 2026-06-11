@@ -476,10 +476,9 @@ void it_802703E8(Item_GObj* arg_item_gobj)
             for (hurt_index = 0; hurt_index < arg_item->xAC8_hurtboxNum;
                  hurt_index++)
             {
-                if (!lbColl_8000805C(hit,
-                                     &arg_item->xACC_itemHurtbox[hurt_index],
-                                     NULL, 0, fighter->x34_scale.y,
-                                     arg_item->scl, 0.0f))
+                if (!lbColl_8000805C(
+                        hit, &arg_item->xACC_itemHurtbox[hurt_index], NULL, 0,
+                        fighter->x34_scale.y, arg_item->scl, 0.0f))
                 {
                     continue;
                 }
@@ -680,7 +679,8 @@ void it_802706D0(Item_GObj* arg_item_gobj)
                 u32 i;
                 for (i = 0; i < arg_item->xAC8_hurtboxNum; i++) {
                     if (lbColl_8000805C(hit, &arg_item->xACC_itemHurtbox[i],
-                                        NULL, 0, item->scl, arg_item->scl, 0.0f))
+                                        NULL, 0, item->scl, arg_item->scl,
+                                        0.0f))
                     {
                         it_802706D0_sub3(item, arg_item, hit,
                                          &arg_item->xACC_itemHurtbox[i]);
@@ -697,7 +697,6 @@ f32 it_80270CD8(Item* ip, HitCapsule* hit)
     ItemAttr* attr = ip->xCC_item_attr;
     f32 f0;
     f32 f1;
-    f32 x24_f;
 
     if (hit->x28 != 0) {
         f1 = (0.01f * hit->x24 *
@@ -709,18 +708,14 @@ f32 it_80270CD8(Item* ip, HitCapsule* hit)
                it_804D6D28->x80_float[12])) +
              hit->x2C;
     } else {
-        f32 x2C_f;
-
-        x2C_f = hit->x2C;
-        x24_f = 0.01f;
-        x24_f *= hit->x24;
-        f0 = ip->xC9C + (f32) ip->xCA0;
-        f1 = (x24_f * ((it_804D6D28->x80_float[11] *
-                        (attr->x1C_damage_mul *
-                         ((it_804D6D28->x80_float[8] * f0) +
-                          (it_804D6D28->x80_float[9] * (hit->damage * f0))))) +
-                       it_804D6D28->x80_float[12])) +
-             x2C_f;
+        f1 = ((0.01f * hit->x24) *
+              ((it_804D6D28->x80_float[11] *
+                (attr->x1C_damage_mul *
+                 ((it_804D6D28->x80_float[8] * (ip->xC9C + (f32) ip->xCA0)) +
+                  (it_804D6D28->x80_float[9] *
+                   (hit->damage * (ip->xC9C + (f32) ip->xCA0)))))) +
+               it_804D6D28->x80_float[12])) +
+             hit->x2C;
     }
     if (f1 >= it_804D6D28->x80_float[7]) {
         f1 = it_804D6D28->x80_float[7];
@@ -1025,10 +1020,9 @@ void it_8027163C(Item_GObj* item_gobj)
     Article* article;
     ItHurtBoneList* it_hurtbox;
     ItCollDynamics* it_dynams;
-    HurtCapsule* hurt;
     u32 cnt;
+    HurtCapsule* hurt;
     ItHurtBoneDesc* hurt_dyn_desc;
-    ItCollDynamicsDesc* bone_dyn_desc;
     s32 index;
     PAD_STACK(16);
 
@@ -1076,19 +1070,20 @@ void it_8027163C(Item_GObj* item_gobj)
         item->xB68 = it_dynams->count;
         index = 0;
         while (cnt < it_dynams->count) {
-            bone_dyn_desc = &it_dynams->descs[index];
-            item->xB6C_vars[cnt].xB90 = bone_dyn_desc->bone_id;
-            item->xB6C_vars[cnt].xB7C =
+            struct xB6C_t* vars = &item->xB6C_vars[cnt];
+            ItCollDynamicsDesc* bone_dyn_desc = &it_dynams->descs[index];
+            vars->xB90 = bone_dyn_desc->bone_id;
+            vars->xB7C =
                 item->xBBC_dynamicBoneTable->bones[bone_dyn_desc->bone_id];
-            item->xB6C_vars[cnt].xB6C = bone_dyn_desc->offset;
-            item->xB6C_vars[cnt].xB78 = bone_dyn_desc->size;
+            vars->xB6C = bone_dyn_desc->offset;
+            vars->xB78 = bone_dyn_desc->size;
             index++;
             cnt++;
         }
     }
 }
 
-void it_80271830(Item* item, f32 arg_angle)
+void it_80271830(Item* item, f32 angle)
 {
     Vec3 sp68;
     Vec3 sp5C;
@@ -1100,8 +1095,6 @@ void it_80271830(Item* item, f32 arg_angle)
     f32 top_pos;
     f32 right_pos;
     f32 bottom_pos;
-    f32 angle = arg_angle;
-    PAD_STACK(16);
 
     while (angle < 0.0f) {
         angle += M_TAU;
@@ -1121,54 +1114,21 @@ void it_80271830(Item* item, f32 arg_angle)
     sp44.x = item->xBEC.left;
     sp44.y = sp44.z = 0.0f;
     lbVector_RotateAboutUnitAxis(&sp44, &sp20, angle);
-    if (sp68.x > sp5C.x) {
-        left_pos = sp5C.x;
-    } else {
-        left_pos = sp68.x;
-    }
-    if (left_pos > sp50.x) {
-        left_pos = sp50.x;
-    } else {
-        // silence self-assignment warning
-        left_pos = (true) ? left_pos : left_pos;
-    }
-    left_pos = (left_pos > sp44.x) ? sp44.x : left_pos;
+    left_pos = (sp68.x > sp5C.x) ? sp68.x : sp5C.x;
+    left_pos = (left_pos > sp50.x) ? left_pos : sp50.x;
+    left_pos = (left_pos > sp44.x) ? left_pos : sp44.x;
     item->xBEC.left = left_pos;
-    if (sp68.y > sp5C.y) {
-        top_pos = sp5C.y;
-    } else {
-        top_pos = sp68.y;
-    }
-    if (top_pos > sp50.y) {
-        top_pos = sp50.y;
-    } else {
-        top_pos = (true) ? top_pos : top_pos;
-    }
-    top_pos = (top_pos > sp44.y) ? sp44.y : top_pos;
+    top_pos = (sp68.y > sp5C.y) ? sp68.y : sp5C.y;
+    top_pos = (top_pos > sp50.y) ? top_pos : sp50.y;
+    top_pos = (top_pos > sp44.y) ? top_pos : sp44.y;
     item->xBEC.top = top_pos;
-    if (sp68.x < sp5C.x) {
-        right_pos = sp5C.x;
-    } else {
-        right_pos = sp68.x;
-    }
-    if (right_pos < sp50.x) {
-        right_pos = sp50.x;
-    } else {
-        right_pos = (true) ? right_pos : right_pos;
-    }
-    right_pos = (right_pos < sp44.x) ? sp44.x : right_pos;
+    right_pos = (sp68.x < sp5C.x) ? sp68.x : sp5C.x;
+    right_pos = (right_pos < sp50.x) ? right_pos : sp50.x;
+    right_pos = (right_pos < sp44.x) ? right_pos : sp44.x;
     item->xBEC.right = right_pos;
-    if (sp68.y < sp5C.y) {
-        bottom_pos = sp5C.y;
-    } else {
-        bottom_pos = sp68.y;
-    }
-    if (bottom_pos < sp50.y) {
-        bottom_pos = sp50.y;
-    } else {
-        bottom_pos = (true) ? bottom_pos : bottom_pos;
-    }
-    bottom_pos = (bottom_pos < sp44.y) ? sp44.y : bottom_pos;
+    bottom_pos = (sp68.y < sp5C.y) ? sp68.y : sp5C.y;
+    bottom_pos = (bottom_pos < sp50.y) ? bottom_pos : sp50.y;
+    bottom_pos = (bottom_pos < sp44.y) ? bottom_pos : sp44.y;
     item->xBEC.bottom = bottom_pos;
 }
 

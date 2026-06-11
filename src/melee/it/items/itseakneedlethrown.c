@@ -11,8 +11,8 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/itmaplib.h"
 #include "it/item.h"
+#include "it/itmaplib.h"
 #include "lb/lbvector.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
@@ -22,23 +22,25 @@
 #include <MSL/math.h>
 #include <MSL/trigf.h>
 
-itSeakNeedleThrownData it_803F6F50 = {
-    {
-        { 0, NULL, NULL, NULL },
-        { 1, NULL, NULL, NULL },
-        { 2, NULL, NULL, NULL },
-        { 3, NULL, NULL, NULL },
-        { 4, NULL, NULL, NULL },
-    },
-    { -2.0f, -2.1f, -2.2f, -2.3f, -2.4f, -2.5f, -2.6f, -2.7f },
-    { -0.1f, -0.12f, -0.14f, -0.18f, -0.2f, -0.22f, -0.24f, -0.26f },
-    { 0.20943952f, 0.2443461f, 0.27925268f, 0.31415927f, 0.34906584f,
-      0.38397244f, 0.41887903f, 0.4537856f },
-    { 0.0f, 0.2f, 0.4f, 0.6f, 0.8f, 1.0f, 1.2f, 1.4f },
-    { -2.0f, -2.1f, -2.2f, -2.3f, -2.4f, -2.5f, -2.6f, -2.7f },
-    { -0.1f, -0.12f, -0.14f, -0.18f, -0.2f, -0.22f, -0.24f, -0.26f },
-    { 0.5235988f, 0.61086524f, 0.6981317f, 0.7853982f, 0.87266463f,
-      0.9599311f, 1.0471976f, 1.134464f },
+ItemStateTable it_803F6F50[] = {
+    { 0, NULL, NULL, NULL }, { 1, NULL, NULL, NULL }, { 2, NULL, NULL, NULL },
+    { 3, NULL, NULL, NULL }, { 4, NULL, NULL, NULL },
+};
+static f32 it_803F6FA0[8] = { -2.0f, -2.1f, -2.2f, -2.3f,
+                              -2.4f, -2.5f, -2.6f, -2.7f };
+static f32 it_803F6FC0[8] = { -0.1f, -0.12f, -0.14f, -0.18f,
+                              -0.2f, -0.22f, -0.24f, -0.26f };
+static f32 it_803F6FE0[8] = { 0.20943952f, 0.2443461f,  0.27925268f,
+                              0.31415927f, 0.34906584f, 0.38397244f,
+                              0.41887903f, 0.4537856f };
+static f32 it_803F7000[8] = { 0.0f, 0.2f, 0.4f, 0.6f, 0.8f, 1.0f, 1.2f, 1.4f };
+static f32 it_803F7020[8] = { -2.0f, -2.1f, -2.2f, -2.3f,
+                              -2.4f, -2.5f, -2.6f, -2.7f };
+static f32 it_803F7040[8] = { -0.1f, -0.12f, -0.14f, -0.18f,
+                              -0.2f, -0.22f, -0.24f, -0.26f };
+static f32 it_803F7060[8] = {
+    0.5235988f,  0.61086524f, 0.6981317f, 0.7853982f,
+    0.87266463f, 0.9599311f,  1.0471976f, 1.134464f
 };
 
 Item_GObj* it_802AFD8C(Item_GObj* parent, Vec3* pos, u32 kind,
@@ -137,29 +139,27 @@ void it_802AFF08(Item_GObj* gobj, Fighter_GObj* owner)
     db_80225DD8(gobj, owner);
 }
 
-static inline void itSeakNeedleThrown_SetupBounce(Item_GObj* gobj,
-                                                  itSeakNeedleThrownData* data)
+static inline void itSeakNeedleThrown_SetupBounce(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     f32 rand_sign = (HSD_Randi(2) == 0) ? 1.0f : -1.0f;
-    ip->xDD4_itemVar.seakneedlethrown.xDD4 =
-        data->x110[HSD_Randi(8)] * rand_sign;
+    f32 v = it_803F7060[HSD_Randi(8)];
+    ip->xDD4_itemVar.seakneedlethrown.xDD4 = v * rand_sign;
     rand_sign = (HSD_Randi(2) == 0) ? 1.0f : -1.0f;
-    ip->xDD4_itemVar.seakneedlethrown.xDD8 =
-        data->xB0[HSD_Randi(8)] * rand_sign;
-    ip->xDD4_itemVar.seakneedlethrown.xDDC = data->xD0[HSD_Randi(8)];
-    ip->xDD4_itemVar.seakneedlethrown.xDE0 = data->xF0[HSD_Randi(8)];
+    v = it_803F7000[HSD_Randi(8)];
+    ip->xDD4_itemVar.seakneedlethrown.xDD8 = v * rand_sign;
+    ip->xDD4_itemVar.seakneedlethrown.xDDC = it_803F7020[HSD_Randi(8)];
+    ip->xDD4_itemVar.seakneedlethrown.xDE0 = it_803F7040[HSD_Randi(8)];
 }
 
-static inline void itSeakNeedleThrown_SetupDrop(Item_GObj* gobj,
-                                                itSeakNeedleThrownData* data)
+static inline void itSeakNeedleThrown_SetupDrop(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     ip->xDD4_itemVar.seakneedlethrown.xDD4 =
-        data->x90[HSD_Randi(8)] * ((HSD_Randi(2) == 0) ? 1.0f : -1.0f);
+        it_803F6FE0[HSD_Randi(8)] * ((HSD_Randi(2) == 0) ? 1.0f : -1.0f);
     ip->xDD4_itemVar.seakneedlethrown.xDD8 = 0.0f;
-    ip->xDD4_itemVar.seakneedlethrown.xDDC = data->x50[HSD_Randi(8)];
-    ip->xDD4_itemVar.seakneedlethrown.xDE0 = data->x70[HSD_Randi(8)];
+    ip->xDD4_itemVar.seakneedlethrown.xDDC = it_803F6FA0[HSD_Randi(8)];
+    ip->xDD4_itemVar.seakneedlethrown.xDE0 = it_803F6FC0[HSD_Randi(8)];
 }
 
 void it_802B00F4(Item_GObj* gobj, Fighter_GObj* owner)
@@ -167,7 +167,6 @@ void it_802B00F4(Item_GObj* gobj, Fighter_GObj* owner)
     Item* ip = GET_ITEM(gobj);
     itSeakNeedleThrownAttributes* attr =
         ip->xC4_article_data->x4_specialAttributes;
-    itSeakNeedleThrownData* data = &it_803F6F50;
     PAD_STACK(8);
 
     ip->owner = owner;
@@ -179,7 +178,7 @@ void it_802B00F4(Item_GObj* gobj, Fighter_GObj* owner)
     it_80275158(gobj, attr->x0);
     itResetVelocity(ip);
 
-    itSeakNeedleThrown_SetupDrop(gobj, data);
+    itSeakNeedleThrown_SetupDrop(gobj);
     db_80225DD8(gobj, owner);
 }
 
@@ -313,7 +312,6 @@ bool itSeakneedlethrown_UnkMotion0_Coll(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     itSeakNeedleThrownAttributes* attr =
         ip->xC4_article_data->x4_specialAttributes;
-    itSeakNeedleThrownData* data = &it_803F6F50;
     HSD_JObj* child = HSD_JObjGetChild(gobj->hsd_obj);
     f32 rot = -ip->facing_dir *
               atan2f(ip->pos.y - ip->xDD4_itemVar.seakneedlethrown.xDE4.y,
@@ -334,9 +332,9 @@ bool itSeakneedlethrown_UnkMotion0_Coll(Item_GObj* gobj)
         case 3:
         case 4:
             it_80275158(gobj, attr->x4);
-            ip->x40_vel.y = ABS(data->xD0[HSD_Randi(8)]);
+            ip->x40_vel.y = ABS(it_803F7020[HSD_Randi(8)]);
             it_802762BC(ip);
-            itSeakNeedleThrown_SetupBounce(gobj, data);
+            itSeakNeedleThrown_SetupBounce(gobj);
             Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
             break;
         }
@@ -347,14 +345,13 @@ bool itSeakneedlethrown_UnkMotion0_Coll(Item_GObj* gobj)
 bool itSeakneedlethrown_UnkMotion1_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itSeakNeedleThrownData* data = &it_803F6F50;
     itSeakNeedleThrownAttributes* attr =
         ip->xC4_article_data->x4_specialAttributes;
     if (itSeakNeedleThrown_CheckGroundHit(gobj)) {
         it_80275158(gobj, attr->x4);
         ip->x40_vel.y = ABS(ip->x40_vel.y);
         it_802762BC(ip);
-        itSeakNeedleThrown_SetupBounce(gobj, data);
+        itSeakNeedleThrown_SetupBounce(gobj);
         Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
         Item_8026AE84(ip, 0x41F39, 127, 64);
     }
@@ -428,16 +425,15 @@ bool it_2725_Logic109_DmgDealt(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     itSeakNeedleThrownAttributes* attr =
         ip->xC4_article_data->x4_specialAttributes;
-    itSeakNeedleThrownData* data = &it_803F6F50;
 
     if (HSD_Randi(3) == 0) {
         it_80272560(gobj, 0);
         it_80275158(gobj, attr->x4);
         ip->x40_vel.z = 0.0f;
         ip->x40_vel.x = 0.0f;
-        ip->x40_vel.y = ABS(data->xD0[HSD_Randi(8)]);
+        ip->x40_vel.y = ABS(it_803F7020[HSD_Randi(8)]);
         it_802762BC(ip);
-        itSeakNeedleThrown_SetupBounce(gobj, data);
+        itSeakNeedleThrown_SetupBounce(gobj);
         Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
         return false;
     }
@@ -449,16 +445,15 @@ bool it_2725_Logic109_Clanked(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     itSeakNeedleThrownAttributes* attr =
         ip->xC4_article_data->x4_specialAttributes;
-    itSeakNeedleThrownData* data = &it_803F6F50;
 
     if (HSD_Randi(3) == 0) {
         it_80272560(gobj, 0);
         it_80275158(gobj, attr->x4);
         ip->x40_vel.z = 0.0f;
         ip->x40_vel.x = 0.0f;
-        ip->x40_vel.y = ABS(data->xD0[HSD_Randi(8)]);
+        ip->x40_vel.y = ABS(it_803F7020[HSD_Randi(8)]);
         it_802762BC(ip);
-        itSeakNeedleThrown_SetupBounce(gobj, data);
+        itSeakNeedleThrown_SetupBounce(gobj);
         Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
         return false;
     }
@@ -470,16 +465,15 @@ bool it_2725_Logic109_DmgReceived(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     itSeakNeedleThrownAttributes* attr =
         ip->xC4_article_data->x4_specialAttributes;
-    itSeakNeedleThrownData* data = &it_803F6F50;
 
     if (HSD_Randi(3) == 0) {
         it_80272560(gobj, 0);
         it_80275158(gobj, attr->x4);
         ip->x40_vel.z = 0.0f;
         ip->x40_vel.x = 0.0f;
-        ip->x40_vel.y = ABS(data->xD0[HSD_Randi(8)]);
+        ip->x40_vel.y = ABS(it_803F7020[HSD_Randi(8)]);
         it_802762BC(ip);
-        itSeakNeedleThrown_SetupBounce(gobj, data);
+        itSeakNeedleThrown_SetupBounce(gobj);
         Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
         return false;
     }
@@ -544,26 +538,28 @@ bool it_2725_Logic109_ShieldBounced(Item_GObj* gobj)
     return false;
 }
 
-bool it_2725_Logic109_HitShield(Item_GObj* gobj)
+static bool it_2725_Logic109_HitShield_inline(Item_GObj* gobj, Item* ip)
 {
-    Item* ip = GET_ITEM(gobj);
-    Item* ip2 = ip;
     itSeakNeedleThrownAttributes* attr =
         ip->xC4_article_data->x4_specialAttributes;
-    itSeakNeedleThrownData* data = &it_803F6F50;
 
     if (HSD_Randi(3) == 0) {
         it_80272560(gobj, 0);
         it_80275158(gobj, attr->x4);
-        ip2->x40_vel.z = 0.0f;
-        ip2->x40_vel.x = 0.0f;
-        ip2->x40_vel.y = ABS(data->xD0[HSD_Randi(8)]);
-        it_802762BC(ip2);
-        itSeakNeedleThrown_SetupBounce(gobj, data);
+        ip->x40_vel.z = 0.0f;
+        ip->x40_vel.x = 0.0f;
+        ip->x40_vel.y = ABS(it_803F7020[HSD_Randi(8)]);
+        it_802762BC(ip);
+        itSeakNeedleThrown_SetupBounce(gobj);
         Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
         return false;
     }
     return true;
+}
+
+bool it_2725_Logic109_HitShield(Item_GObj* gobj)
+{
+    return it_2725_Logic109_HitShield_inline(gobj, GET_ITEM(gobj));
 }
 
 void itSeakNeedleThrown_Logic109_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)

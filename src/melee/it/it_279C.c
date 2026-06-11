@@ -1702,7 +1702,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
     },
     {
         // Sheik needle thrown
-        it_803F6F50.states,
+        it_803F6F50,
         NULL,
         itSeakNeedleThrown_Logic109_Destroyed,
         NULL,
@@ -2993,7 +2993,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         itSamusChargeshot_Logic108_EvtUnk,
     },
     {
-        it_803F6F50.states,
+        it_803F6F50,
         NULL,
         itSeakNeedleThrown_Logic109_Destroyed,
         NULL,

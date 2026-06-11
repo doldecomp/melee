@@ -555,18 +555,18 @@ void it_802BC080(ItemLink* link, Vec3* target, Item* ip)
         Vec3 dir;
         u8 pad[16];
     } stack;
-    Fighter* fp;
+    f32 lstick_x, lstick_y;
     ItemLink* iter = link->prev;
     ItemLink* cur = link;
     itSeakChain_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
     s32 last_idx = (s32) (0.5f * attrs->x0 - 1.0f);
-    s32 mode;
+    Fighter* fp;
     s32 env_flags;
     s32 use_arg = 0;
-    s32 coll_arg;
     s32 counter;
+    s32 coll_arg;
     f32 scale;
-    f32 lstick_x, lstick_y;
+    s32 mode;
     int i;
     PAD_STACK(12);
 
@@ -582,13 +582,11 @@ void it_802BC080(ItemLink* link, Vec3* target, Item* ip)
     }
     fp = GET_FIGHTER(ip->xDD4_itemVar.seakchain.parent_gobj);
 
-    if (last_idx > 0) {
-        for (i = 0; i < last_idx; i++) {
-            ip->xDD4_itemVar.seakchain.history[last_idx - i].x =
-                ip->xDD4_itemVar.seakchain.history[last_idx - 1 - i].x;
-            ip->xDD4_itemVar.seakchain.history[last_idx - i].y =
-                ip->xDD4_itemVar.seakchain.history[last_idx - 1 - i].y;
-        }
+    for (i = 0; last_idx > i; i++) {
+        ip->xDD4_itemVar.seakchain.history[last_idx - i].x =
+            ip->xDD4_itemVar.seakchain.history[last_idx - 1 - i].x;
+        ip->xDD4_itemVar.seakchain.history[last_idx - i].y =
+            ip->xDD4_itemVar.seakchain.history[last_idx - 1 - i].y;
     }
 
     if (ABS(fp->fv.sk.lstick_delta.x) > attrs->x48) {
@@ -799,6 +797,11 @@ void it_802BCA30(Item* ip)
     HSD_JObjSetMtxDirty(jobj0);
 }
 
+static inline ItemLink* it_802BCB88_prev(ItemLink* link)
+{
+    return link->prev;
+}
+
 void it_802BCB88(Item* ip, Vec3* vec)
 {
     ItemLink* link = ip->xDD4_itemVar.seakchain.x4;
@@ -825,7 +828,7 @@ void it_802BCB88(Item* ip, Vec3* vec)
             } else {
                 pos0 = *vec;
             }
-            prev = link->prev;
+            prev = it_802BCB88_prev(link);
             {
                 Vec3 pos1;
                 if (prev != NULL) {

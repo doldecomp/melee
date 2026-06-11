@@ -18,6 +18,8 @@
 #include <baselib/random.h>
 #include <MSL/trigf.h>
 
+/* 2C5B18 */ static void it_802C5B18(Item_GObj*, Item_GObj*);
+
 s32 it_803F7880[] = {
     0x00030DAA,
     0x00030DAD,
@@ -29,7 +31,7 @@ void it_802C4D10(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     itMewtwoShadowball_DatAttrs* attr =
         ip->xC4_article_data->x4_specialAttributes;
-    HSD_JObj* child = HSD_JObjGetChild(HSD_JObjGetChild(GET_JOBJ(gobj)));
+    HSD_JObj* child = itGetJObjGrandchild(gobj);
 
     if (ip->xDD4_itemVar.mewtwoshadowball.x4C > 0) {
         ip->xDD4_itemVar.mewtwoshadowball.x48++;
@@ -248,10 +250,10 @@ void it_802C53F0(Item_GObj* gobj, Vec3* pos, float angle, float charge,
     ip->xDD4_itemVar.mewtwoshadowball.x18 = charge;
     ip->xDD4_itemVar.mewtwoshadowball.x1C = max_charge;
 
-    if (NULL != ip->xDD4_itemVar.mewtwoshadowball.x2C &&
+    if (ip->xDD4_itemVar.mewtwoshadowball.x2C &&
         ip->owner == ip->xDD4_itemVar.mewtwoshadowball.x2C)
     {
-        it_802C5B18(gobj);
+        it_802C5B18(gobj, ip->xDD4_itemVar.mewtwoshadowball.x2C);
         HSD_MtxGetRotation(
             ftLib_80086630(ip->xDD4_itemVar.mewtwoshadowball.x2C, ip->xDC4)
                 ->mtx,
@@ -431,9 +433,9 @@ bool itMewtwoshadowball_UnkMotion0_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_802C5B18(Item_GObj* gobj)
+void it_802C5B18(Item_GObj* gobj, Item_GObj* arg1)
 {
-    Item* ip = gobj->user_data;
+    Item* ip = GET_ITEM(gobj);
     itMewtwoShadowball_DatAttrs* attr =
         ip->xC4_article_data->x4_specialAttributes;
     it_80275158(gobj, attr->x0);
@@ -455,7 +457,6 @@ void it_802C5B18(Item_GObj* gobj)
         0.5F * ((f32) ip->xDD4_itemVar.mewtwoshadowball.x18 /
                 ip->xDD4_itemVar.mewtwoshadowball.x1C) +
         0.5F;
-    PAD_STACK(8);
 }
 
 bool itMewtwoshadowball_UnkMotion8_Anim(Item_GObj* gobj)
