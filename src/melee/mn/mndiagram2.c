@@ -254,16 +254,17 @@ void mnDiagram2_UpdateHeader(HSD_GObj* gobj, u8 is_name_mode, u8 entity_idx)
 /// @details Reads is_name_mode to determine which entity index to use.
 static inline void mnDiagram2_RefreshStatRows(void)
 {
-    Diagram2* data = mnDiagram2_804D6C18->user_data;
+    HSD_GObj* d = mnDiagram2_804D6C18;
+    Diagram2* data = d->user_data;
     u8 entity_idx;
 
-    mnDiagram2_ClearStatRows(mnDiagram2_804D6C18);
+    mnDiagram2_ClearStatRows(d);
     if (data->is_name_mode != 0) {
         entity_idx = data->selected_name_idx;
     } else {
         entity_idx = data->selected_fighter_idx;
     }
-    mnDiagram2_PopulateStatRows(mnDiagram2_804D6C18, (u8) data->scroll_offset,
+    mnDiagram2_PopulateStatRows(d, (u8) data->scroll_offset,
                                 data->is_name_mode, entity_idx);
 }
 
