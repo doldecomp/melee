@@ -2,10 +2,6 @@
 
 #include "math.h"
 
-#include <placeholder.h>
-
-#include "baselib/forward.h"
-
 #include "ft/chara/ftNess/ftNs_AttackHi4.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
@@ -19,12 +15,19 @@
 #include "lb/lbvector.h"
 #include "mp/mpcoll.h"
 
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
-#include <baselib/gobjuserdata.h>
 
-extern double __frsqrte(double);
+ItemStateTable it_803F7558[] = {
+    { -1, itNessyoyo_UnkMotion3_Anim, itNessyoyo_UnkMotion0_Phys, NULL },
+    { -1, itNessyoyo_UnkMotion3_Anim, itNessyoyo_UnkMotion1_Phys, NULL },
+    { -1, itNessyoyo_UnkMotion3_Anim, itNessyoyo_UnkMotion2_Phys, NULL },
+    { -1, itNessyoyo_UnkMotion3_Anim, itNessyoyo_UnkMotion3_Phys, NULL },
+};
+
+const Vec3 it_803B8698 = { 0.0f, 0.0f, 0.0f };
+
+static const f32 it_zero = 0.0f;
 
 void it_802BE598(Item_GObj* gobj)
 {
@@ -44,12 +47,14 @@ void it_802BE5D8(void* arg, float frame)
     HSD_JObj* jobj = ip->xDD4_itemVar.nessyoyo.x18;
     HSD_JObjRemoveAnimAll(jobj);
     HSD_JObjAddAnimAll(jobj, NULL, attrs->x58_yoyo_matanim, NULL);
+    /// @todo Eliminate this no-op branch (pools 0.0f into .sdata2 slot 0).
+    if (frame == 0.0f) {
+    }
     lb_8000BA0C(jobj, 1.0F);
     HSD_JObjReqAnimAll(jobj, frame);
     HSD_JObjAnimAll(jobj);
 }
 
-extern const Vec3 it_803B8698;
 
 static inline HSD_JObj* it_802BE65C_LoadString(Item* ip)
 {
@@ -218,8 +223,6 @@ void itNessyoyo_UnkMotion0_Phys(Item_GObj* gobj)
     it_802BF900(GET_ITEM(gobj));
 }
 
-extern const f32 it_804DD150;
-
 void itNessyoyo_UnkMotion1_Phys(Item_GObj* gobj)
 {
     Vec3 pos;
@@ -230,9 +233,9 @@ void itNessyoyo_UnkMotion1_Phys(Item_GObj* gobj)
     ItemLink* link1 = ip->xDD4_itemVar.nessyoyo.x8;
 
     PSMTXIdentity(m);
-    m[0][3] = it_804DD150;
-    m[1][3] = it_804DD150;
-    m[2][3] = it_804DD150;
+    m[0][3] = 0.0f;
+    m[1][3] = 0.0f;
+    m[2][3] = 0.0f;
     HSD_JObjSetupMatrix(link1->jobj);
     PSMTXConcat(link1->jobj->mtx, m, m);
     pos.x = m[0][3];
@@ -252,9 +255,9 @@ void itNessyoyo_UnkMotion2_Phys(Item_GObj* gobj)
     ItemLink* link1 = ip->xDD4_itemVar.nessyoyo.x8;
 
     PSMTXIdentity(m);
-    m[0][3] = it_804DD150;
-    m[1][3] = it_804DD150;
-    m[2][3] = it_804DD150;
+    m[0][3] = 0.0f;
+    m[1][3] = 0.0f;
+    m[2][3] = 0.0f;
     HSD_JObjSetupMatrix(link1->jobj);
     PSMTXConcat(link1->jobj->mtx, m, m);
     pos.x = m[0][3];
@@ -275,18 +278,18 @@ void itNessyoyo_UnkMotion3_Phys(Item_GObj* gobj)
     ItemLink* link2 = ip->xDD4_itemVar.nessyoyo.xC;
 
     PSMTXIdentity(m);
-    m[0][3] = it_804DD150;
-    m[1][3] = it_804DD150;
-    m[2][3] = it_804DD150;
+    m[0][3] = 0.0f;
+    m[1][3] = 0.0f;
+    m[2][3] = 0.0f;
     HSD_JObjSetupMatrix(link2->jobj);
     PSMTXConcat(link2->jobj->mtx, m, m);
     pos.x = m[0][3];
     pos.y = m[1][3];
     pos.z = m[2][3];
     if (it_802BF800(link2, &pos, attrs, ip, ip->xDD4_itemVar.nessyoyo.x4)) {
-        zero_vec.z = it_804DD150;
-        zero_vec.y = it_804DD150;
-        zero_vec.x = it_804DD150;
+        zero_vec.z = 0.0f;
+        zero_vec.y = 0.0f;
+        zero_vec.x = 0.0f;
         it_802C0010(gobj, &zero_vec);
         {
             HSD_GObj* owner = ip->xDD4_itemVar.nessyoyo.x10;
@@ -562,7 +565,7 @@ s32 it_802BF4A0(ItemLink* link, Vec3* target, itYoyoAttributes* attrs,
     return 2;
 }
 
-bool it_802BF800(ItemLink* cur, Vec3* pos, itYoyoAttributes* attrs, Item* ip,
+bool it_802BF800(ItemLink* item, Vec3* pos, itYoyoAttributes* attrs, Item* ip,
                  f32 dist)
 {
     u8 _padA[16];
@@ -570,7 +573,8 @@ bool it_802BF800(ItemLink* cur, Vec3* pos, itYoyoAttributes* attrs, Item* ip,
     f32 len;
     f32 step;
     f32 size = attrs->xC_SIZE * ftLib_80086A0C(ip->owner);
-    ItemLink* prev = cur->prev;
+    ItemLink* prev = item->prev;
+    ItemLink* cur = item;
     while (prev != NULL && !cur->x2C_b0) {
         cur = prev;
         prev = prev->prev;
@@ -594,7 +598,7 @@ bool it_802BF800(ItemLink* cur, Vec3* pos, itYoyoAttributes* attrs, Item* ip,
     return true;
 }
 
-extern const Vec3 it_803B86A4;
+const Vec3 it_803B86A4 = { 0.0f, 0.0f, 1.8f };
 
 void it_802BF900(Item* ip)
 {
@@ -644,7 +648,7 @@ void it_802BFAFC(Item* ip, Vec3* target)
     u8 _pad[4];
     Mtx m;
     f32 scale;
-    u8 _pad2[16];
+    u8 _pad2[8];
 
     while (!link->x2C_b0) {
         link = link->prev;
@@ -667,7 +671,7 @@ void it_802BFAFC(Item* ip, Vec3* target)
             prev_pos = link->pos;
         }
 
-        jobj = link->gobj->hsd_obj;
+        jobj = GET_JOBJ(link->gobj);
         link_pos = link->pos;
         HSD_JObjSetTranslate(jobj, &link_pos);
 
@@ -740,7 +744,7 @@ static inline float my_sqrtf(float x)
     static const double _half = .5;
     static const double _three = 3.0;
 
-    u8 _[12] = { 0 };
+    u32 _0 = 0, _1 = 0, _2 = 0;
 
     volatile float y;
     if (x > 0) {
@@ -765,9 +769,9 @@ void it_802BFEC4(Item_GObj* gobj)
     ItemLink* link1 = ip->xDD4_itemVar.nessyoyo.x8;
 
     PSMTXIdentity(m);
-    m[0][3] = it_804DD150;
-    m[1][3] = it_804DD150;
-    m[2][3] = it_804DD150;
+    m[0][3] = 0.0f;
+    m[1][3] = 0.0f;
+    m[2][3] = 0.0f;
     HSD_JObjSetupMatrix(link2->jobj);
     PSMTXConcat(link2->jobj->mtx, m, m);
     ip->xDD4_itemVar.nessyoyo.x4 =
@@ -786,9 +790,9 @@ void it_802C0010(Item_GObj* gobj, Vec3* vel)
     ItemLink* link1 = GET_ITEM(gobj)->xDD4_itemVar.nessyoyo.x8;
 
     PSMTXIdentity(m);
-    m[0][3] = it_804DD150;
-    m[1][3] = it_804DD150;
-    m[2][3] = it_804DD150;
+    m[0][3] = 0.0f;
+    m[1][3] = 0.0f;
+    m[2][3] = 0.0f;
     HSD_JObjSetupMatrix(link1->jobj);
     PSMTXConcat(link1->jobj->mtx, m, m);
     pos.x = m[0][3];

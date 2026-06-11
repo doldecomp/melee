@@ -7,6 +7,7 @@
 #include "it/forward.h"
 
 #include "it/items/types.h"
+#include "it/types.h"
 
 #include <dolphin/mtx.h>
 
@@ -15,17 +16,6 @@ typedef struct itSeakNeedleThrownAttributes {
     f32 x4;
     f32 x8;
 } itSeakNeedleThrownAttributes;
-
-typedef struct itSeakNeedleThrownData {
-    ItemStateTable states[5];
-    f32 x50[8];
-    f32 x70[8];
-    f32 x90[8];
-    f32 xB0[8];
-    f32 xD0[8];
-    f32 xF0[8];
-    f32 x110[8];
-} itSeakNeedleThrownData;
 
 /* 2AFD8C */ Item_GObj* it_802AFD8C(Item_GObj*, Vec3*, u32, float);
 /* 2AFEA8 */ void it_802AFEA8(Item_GObj* gobj, Fighter_GObj* owner_gobj, u32);
@@ -54,6 +44,6 @@ typedef struct itSeakNeedleThrownData {
 /* 2B14DC */ bool it_2725_Logic109_ShieldBounced(Item_GObj*);
 /* 2B16E4 */ bool it_2725_Logic109_HitShield(Item_GObj*);
 /* 2B1890 */ void itSeakNeedleThrown_Logic109_EvtUnk(Item_GObj*, Item_GObj*);
-/* 3F6F50 */ extern itSeakNeedleThrownData it_803F6F50;
+/* 3F6F50 */ extern ItemStateTable it_803F6F50[];
 
 #endif

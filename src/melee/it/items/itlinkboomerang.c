@@ -161,6 +161,10 @@ static inline void it_802A013C_inline(Item_GObj* gobj)
     }
 }
 
+static inline HSD_JObj* it_802A013C_LoadJoint(HSD_Joint* joint)
+{
+    return HSD_JObjLoadJoint(joint);
+}
 HSD_GObj* it_802A013C(f32 facing_dir, Fighter_GObj* owner_gobj, Vec3* pos,
                       Fighter_Part part, s32 kind)
 {
@@ -217,9 +221,12 @@ HSD_GObj* it_802A013C(f32 facing_dir, Fighter_GObj* owner_gobj, Vec3* pos,
                 joint = attrs->x48;
                 anim_bundle = (AnimBundle*) &attrs->x50_matanim;
             }
-            jobj = HSD_JObjLoadJoint(joint);
-            HSD_JObjAddAnimAll(jobj, anim_bundle->anim, anim_bundle->matanim,
-                               anim_bundle->shapeanim);
+            jobj = it_802A013C_LoadJoint(joint);
+            {
+                HSD_AnimJoint* anim = anim_bundle->anim;
+                HSD_JObjAddAnimAll(jobj, anim, anim_bundle->matanim,
+                                   anim_bundle->shapeanim);
+            }
             HSD_JObjReqAnimAll(jobj, 0.0f);
             ip->xDD4_itemVar.linkboomerang.xF90[i] = jobj;
         }
@@ -228,18 +235,6 @@ HSD_GObj* it_802A013C(f32 facing_dir, Fighter_GObj* owner_gobj, Vec3* pos,
         Item_8026AB54(gobj, owner_gobj, part);
     }
     return gobj;
-}
-
-static void loop_lb_8000BA0C(Item* ip, HSD_JObj* hobj, f32 arg1)
-{
-    s32 i;
-    lb_8000BA0C(hobj, arg1);
-    for (i = 0; i < 2; i++) {
-        hobj = ip->xDD4_itemVar.linkboomerang.xF90[i];
-        if (hobj != NULL) {
-            lb_8000BA0C(hobj, arg1);
-        }
-    }
 }
 
 static void loop_lb_8000BA0C_gobj(Item_GObj* gobj, HSD_JObj* hobj,
@@ -261,14 +256,11 @@ static void loop_lb_8000BA0C_gobj(Item_GObj* gobj, HSD_JObj* hobj,
 static void loop_lb_8000BA0C_gobj_1(Item_GObj* gobj, HSD_JObj* hobj)
 {
     s32 i;
-    lb_8000BA0C(hobj, 1.0f);
-    {
-        Item* ip = GET_ITEM(gobj);
-        for (i = 0; i < 2; i++) {
-            hobj = ip->xDD4_itemVar.linkboomerang.xF90[i];
-            if (hobj != NULL) {
-                lb_8000BA0C(hobj, 1.0f);
-            }
+    Item* ip = GET_ITEM(gobj);
+    for (i = 0; i < 2; i++) {
+        hobj = ip->xDD4_itemVar.linkboomerang.xF90[i];
+        if (hobj != NULL) {
+            lb_8000BA0C(hobj, 1.0f);
         }
     }
 }
@@ -536,9 +528,12 @@ void it_802A10E4(Item_GObj* gobj)
     Item* ip;
     itLinkBoomerangAttributes* attrs;
     Quaternion quat;
-    PAD_STACK(12);
+    PAD_STACK(4);
 
-    hobj = gobj->hsd_obj;
+    {
+        HSD_JObj* jobj = gobj->hsd_obj;
+        hobj = jobj;
+    }
     ip = gobj->user_data;
     child = HSD_JObjGetChild(hobj);
     attrs = ip->xC4_article_data->x4_specialAttributes;
@@ -546,7 +541,8 @@ void it_802A10E4(Item_GObj* gobj)
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
     HSD_JObjSetRotationZ(hobj, ip->xDD4_itemVar.linkboomerang.xF78);
     HSD_JObjSetRotation(child, &quat);
-    loop_lb_8000BA0C(ip, child, attrs->x30);
+    lb_8000BA0C(child, attrs->x30);
+    loop_lb_8000BA0C_gobj(gobj, child, attrs);
 }
 
 bool itLinkboomerang_UnkMotion2_Anim(Item_GObj* gobj)
@@ -730,6 +726,7 @@ void it_802A19E0(Item_GObj* gobj)
     }
     HSD_JObjSetRotationZ(hobj, ip->xDD4_itemVar.linkboomerang.xF78);
     HSD_JObjSetRotation(child, &quat);
+    lb_8000BA0C(child, 1.0f);
     loop_lb_8000BA0C_gobj_1(gobj, child);
 }
 
@@ -787,7 +784,7 @@ void itLinkboomerang_UnkMotion3_Phys(Item_GObj* gobj)
     if (ip->xDD4_itemVar.linkboomerang.xDE8 != 1) {
         length = attrs->xC;
         speed = VEC_XY_LENGTH(&ip->x40_vel);
-        length += speed;
+        length = speed + length;
         if (length > attrs->x14) {
             length = attrs->x14;
         }

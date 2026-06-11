@@ -501,7 +501,7 @@ Item_GObj* it_802B7C18(Fighter_GObj* owner, Vec3* pos, f32 facing_dir)
     return item_gobj;
 }
 
-static inline void fn_802B7E34_inline(Item* ip, Mtx m)
+static inline Item* fn_802B7E34_inline(Item_GObj* gobj, Item* ip, Mtx m)
 {
     HSD_JObj* jobj;
     ItemLink* link = ip->xDD4_itemVar.samusgrapple.x0;
@@ -512,11 +512,14 @@ static inline void fn_802B7E34_inline(Item* ip, Mtx m)
     HSD_JObjCopyMtx(jobj, m);
     jobj->flags |= 0x03800000;
     HSD_JObjSetMtxDirty(jobj);
+    return GET_ITEM(gobj);
 }
 
-static inline void link_all(HSD_JObj* jobj, ItemLink* link)
+static inline void link_all(Item_GObj* gobj, Item* ip)
 {
-    HSD_JObjAnimAll(jobj);
+    ItemLink* link;
+    HSD_JObjAnimAll(GET_JOBJ(gobj));
+    link = ip->xDD4_itemVar.samusgrapple.x4;
     while (link != NULL) {
         HSD_JObjAnimAll(link->gobj->hsd_obj);
         link = link->prev;
@@ -528,17 +531,11 @@ void fn_802B7E34(Item_GObj* gobj)
     Mtx m;
     Item* ip = GET_ITEM(gobj);
     Fighter* fp = GET_FIGHTER(ip->owner);
-    ItemLink* link;
     PAD_STACK(20);
+
     samus_grapple_state_sync(fp);
-    fn_802B7E34_inline(ip, m);
-    ip = GET_ITEM(gobj);
-    HSD_JObjAnimAll(GET_JOBJ(gobj));
-    link = ip->xDD4_itemVar.samusgrapple.x4;
-    while (link != NULL) {
-        HSD_JObjAnimAll(link->gobj->hsd_obj);
-        link = link->prev;
-    }
+    ip = fn_802B7E34_inline(gobj, ip, m);
+    link_all(gobj, ip);
     if (samus_grapple_fighter_compare(fp->motion_id)) {
         return;
     }
@@ -1714,7 +1711,6 @@ void it_802BACC4(Fighter_GObj* gobj)
     u8 _pad[8];
     Mtx m;
     Mtx m2;
-    PAD_STACK(4);
 
     if (fp->fv.ss.x223C != NULL) {
         Item* ip = GET_ITEM(fp->fv.ss.x223C);
@@ -1725,7 +1721,7 @@ void it_802BACC4(Fighter_GObj* gobj)
         samus_grapple_setup_pos(link, &pos, m);
 
         if (it_802BA760(link, &pos, attrs, fp)) {
-            fn_802B7E34_inline(ip, m2);
+            fn_802B7E34_inline(fp->fv.ss.x223C, ip, m2);
         } else {
             it_802A7168(ip, &pos, fp->x34_scale.y);
         }
