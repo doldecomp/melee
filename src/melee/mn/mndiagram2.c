@@ -256,6 +256,7 @@ static inline void mnDiagram2_RefreshStatRows(void)
 {
     HSD_GObj* d = mnDiagram2_804D6C18;
     Diagram2* data = d->user_data;
+    Diagram2* new_var;
     u8 entity_idx;
 
     mnDiagram2_ClearStatRows(d);
@@ -264,8 +265,9 @@ static inline void mnDiagram2_RefreshStatRows(void)
     } else {
         entity_idx = data->selected_fighter_idx;
     }
+    new_var = data;
     mnDiagram2_PopulateStatRows(d, (u8) data->scroll_offset,
-                                data->is_name_mode, entity_idx);
+                                new_var->is_name_mode, entity_idx);
 }
 
 /// @brief Handles input for the VS Records character details page.
