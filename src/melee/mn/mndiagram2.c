@@ -303,8 +303,7 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
         gmMainLib_8015CC34()->x12 = x46;
         x47 = data2->selected_name_idx;
         gmMainLib_8015CC34()->x13 = x47;
-        x48 = data2->is_name_mode;
-        gmMainLib_8015CC34()->xD = x48;
+        gmMainLib_8015CC34()->xD = (x48 = data2->is_name_mode);
         mn_80229894(0x1C, 0, 3);
         mnDiagram2_ClearStatRows(mnDiagram2_804D6C18);
         return;
