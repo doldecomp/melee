@@ -48,15 +48,15 @@ typedef struct mnDiagram_Assets {
     /* 0x19 */ u8 pad_19[3];
     /* 0x1C */ u8 sorted_names[0x78];
     /* 0x94 */ void* SubB1[4];
-    /* 0xA4 */ void* ConB2[4];
-    /* 0xB4 */ void* ConB3[4];
-    /* 0xC4 */ void* CursorB3[4];
+    /* 0xA4 */ void* NmB[4];
+    /* 0xB4 */ void* FaceB[4];
+    /* 0xC4 */ void* CursorB1[4];
     /* 0xD4 */ void* ConB1[4];
-    /* 0xE4 */ void* CursorB1_FaceB[4];
-    /* 0xF4 */ void* FaceB_NmB[4];
-    /* 0x104 */ void* NmB_shape[1];
+    /* 0xE4 */ void* ConB2[4];
+    /* 0xF4 */ void* ConB3[4];
+    /* 0x104 */ void* CursorB3[5];
 } mnDiagram_Assets;
-STATIC_ASSERT(sizeof(mnDiagram_Assets) == 0x108);
+STATIC_ASSERT(sizeof(mnDiagram_Assets) == 0x118);
 
 /// User data structure for mnDiagram_PopupCleanup callback.
 /// Overlay of Diagram - only accesses text array.
@@ -72,23 +72,20 @@ typedef struct mnDiagram_AnimData {
     /* 0x0C */ HSD_JObj* jobj;             ///< JObj for exit animation
 } mnDiagram_AnimData;
 
-/// BSS variables - sorted player arrays
-mnDiagram_804A0750_t mnDiagram_804A0750;
-mnDiagram_804A076C_t mnDiagram_804A076C;
+/// Data and BSS variables - sorted player arrays
+Point3d mnDiagram_803EE728[3] = {
+    { 4.0F, 1.0F, 0.0F },
+    { -3.0F, 0.8F, 0.0F },
+    { -1.0F, 0.7F, 0.0F },
+};
 
-static AnimLoopSettings mnDiagram_803EE768 = { 0.0f, 9.0f, -0.1f };
-
-static u8 mnDiagram_803EE74C[0x1C] = {
+u8 mnDiagram_803EE74C[0x1C] = {
     8,    1,    6,    0x10, 0x11, 4,   2,   0xD, 0xB, 0,
     5,    0xC,  0xE,  0x12, 7,    0xF, 0xA, 9,   3,   0x15,
     0x18, 0x13, 0x14, 0x17, 0x16, 0,   0,   0,
 };
 
-static Point3d mnDiagram_803EE728[3] = {
-    { 4.0F, 1.0F, 0.0F },
-    { -3.0F, 0.8F, 0.0F },
-    { -1.0F, 0.7F, 0.0F },
-};
+AnimLoopSettings mnDiagram_803EE768 = { 0.0f, 9.0f, -0.1f };
 
 /// Overlay over &mnDiagram_803EE728 to reach the trailing animation/text-layout
 /// data the popup/cursor procs read at fixed offsets.
@@ -96,13 +93,43 @@ typedef struct mnDiagram_AnimTable {
     /* 0x00 */ Point3d points[3];
     /* 0x24 */ u8 pad_24[0x1C];
     /* 0x40 */ AnimLoopSettings x40;
-    /* 0x4C */ u8 pad_4C[0xC];
+    /* 0x4C */ AnimLoopSettings exit_anim;
     /* 0x58 */ AnimLoopSettings arrow_anim;
     /* 0x64 */ AnimLoopSettings cursor_anim;
-    /* 0x70 */ char x70[0x18];
-    /* 0x88 */ char x88[0xC];
-    /* 0x94 */ char x94[0x14];
+    /* 0x70 */ char user_data_error[0x18];
+    /* 0x88 */ char file_name[0xC];
+    /* 0x94 */ char user_data_name[0xC];
+    /* 0xA0 */ char ConB1_joint[0x18];
+    /* 0xB8 */ char ConB1_animjoint[0x1C];
+    /* 0xD4 */ char ConB1_matanim_joint[0x20];
+    /* 0xF4 */ char ConB1_shapeanim_joint[0x24];
+    /* 0x118 */ char CursorB1_joint[0x1C];
+    /* 0x134 */ char FaceB_joint[0x18];
+    /* 0x14C */ char FaceB_animjoint[0x1C];
+    /* 0x168 */ char FaceB_matanim_joint[0x20];
+    /* 0x188 */ char FaceB_shapeanim_joint[0x24];
+    /* 0x1AC */ char NmB_joint[0x18];
+    /* 0x1C4 */ char NmB_animjoint[0x1C];
+    /* 0x1E0 */ char NmB_matanim_joint[0x20];
+    /* 0x200 */ char NmB_shapeanim_joint[0x20];
+    /* 0x220 */ char SubB1_joint[0x18];
+    /* 0x238 */ char SubB1_animjoint[0x1C];
+    /* 0x254 */ char SubB1_matanim_joint[0x20];
+    /* 0x274 */ char SubB1_shapeanim_joint[0x24];
+    /* 0x298 */ char ConB2_joint[0x18];
+    /* 0x2B0 */ char ConB2_animjoint[0x1C];
+    /* 0x2CC */ char ConB2_matanim_joint[0x20];
+    /* 0x2EC */ char ConB2_shapeanim_joint[0x24];
+    /* 0x310 */ char ConB3_joint[0x18];
+    /* 0x328 */ char ConB3_animjoint[0x1C];
+    /* 0x344 */ char ConB3_matanim_joint[0x20];
+    /* 0x364 */ char ConB3_shapeanim_joint[0x24];
+    /* 0x388 */ char CursorB3_joint[0x20];
 } mnDiagram_AnimTable;
+STATIC_ASSERT(sizeof(mnDiagram_AnimTable) == 0x3A8);
+
+mnDiagram_804A0750_t mnDiagram_804A0750;
+mnDiagram_804A076C_t mnDiagram_804A076C;
 
 static s32 mnDiagram_804D4FA0 = 0xFF;
 
@@ -1848,8 +1875,8 @@ void mnDiagram_80241310(s32 arg0, s32 arg1, s32 arg2)
 
     user_data = HSD_MemAlloc(sizeof(mnDiagram_PopupData));
     if (user_data == NULL) {
-        OSReport(tbl->x70);
-        __assert(tbl->x88, 0x5F8, tbl->x94);
+        OSReport(tbl->user_data_error);
+        __assert(tbl->file_name, 0x5F8, tbl->user_data_name);
     }
 
     GObj_InitUserData(gobj, 0, mnDiagram_PopupCleanup, user_data);
@@ -2894,52 +2921,51 @@ void mnDiagram_80243434(u8 arg0)
 /// Initialize VS Records diagram screen.
 /// @param arg0 If non-zero, load DAT archive symbols
 /// @param arg1 Initial mode (passed to mnDiagram_80243434)
-void mnDiagram_802437E8(s32 arg0, s32 arg1)
+void mnDiagram_802437E8(u8 arg0, u8 arg1)
 {
+    mnDiagram_AnimTable* tbl = (mnDiagram_AnimTable*) &mnDiagram_803EE728;
     mnDiagram_Assets* assets = (mnDiagram_Assets*) &mnDiagram_804A0750;
+    HSD_GObj* gobj;
     HSD_GObjProc* proc;
-    PAD_STACK(24);
+    HSD_Archive* archive;
+    u8 mode_storage[4];
 
+    mode_storage[0] = arg1;
     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
     mn_804A04F0.cur_menu = 0x1E;
     mn_804A04F0.x10 = 0;
     mn_804A04F0.hovered_selection = 0;
 
     if (arg0) {
+        archive = mn_804D6BB8;
         lbArchive_LoadSections(
-            mn_804D6BB8, &assets->ConB1[0], "MenMainConB1_Top_joint",
-            &assets->ConB1[1], "MenMainConB1_Top_animjoint", &assets->ConB1[2],
-            "MenMainConB1_Top_matanim_joint", &assets->ConB1[3],
-            "MenMainConB1_Top_shapeanim_joint", &assets->CursorB1_FaceB[0],
-            "MenMainCursorB1_Top_joint", &assets->CursorB1_FaceB[1],
-            "MenMainFaceB_Top_joint", &assets->CursorB1_FaceB[2],
-            "MenMainFaceB_Top_animjoint", &assets->CursorB1_FaceB[3],
-            "MenMainFaceB_Top_matanim_joint", &assets->FaceB_NmB[0],
-            "MenMainFaceB_Top_shapeanim_joint", &assets->FaceB_NmB[1],
-            "MenMainNmB_Top_joint", &assets->FaceB_NmB[2],
-            "MenMainNmB_Top_animjoint", &assets->FaceB_NmB[3],
-            "MenMainNmB_Top_matanim_joint", &assets->NmB_shape[0],
-            "MenMainNmB_Top_shapeanim_joint", &assets->SubB1[0],
-            "MenMainSubB1_Top_joint", &assets->SubB1[1],
-            "MenMainSubB1_Top_animjoint", &assets->SubB1[2],
-            "MenMainSubB1_Top_matanim_joint", &assets->SubB1[3],
-            "MenMainSubB1_Top_shapeanim_joint", &assets->ConB2[0],
-            "MenMainConB2_Top_joint", &assets->ConB2[1],
-            "MenMainConB2_Top_animjoint", &assets->ConB2[2],
-            "MenMainConB2_Top_matanim_joint", &assets->ConB2[3],
-            "MenMainConB2_Top_shapeanim_joint", &assets->ConB3[0],
-            "MenMainConB3_Top_joint", &assets->ConB3[1],
-            "MenMainConB3_Top_animjoint", &assets->ConB3[2],
-            "MenMainConB3_Top_matanim_joint", &assets->ConB3[3],
-            "MenMainConB3_Top_shapeanim_joint", &assets->CursorB3[0],
-            "MenMainCursorB3_Top_joint", 0);
+            archive, &assets->ConB1[0], tbl->ConB1_joint, &assets->ConB1[1],
+            tbl->ConB1_animjoint, &assets->ConB1[2], tbl->ConB1_matanim_joint,
+            &assets->ConB1[3], tbl->ConB1_shapeanim_joint,
+            &assets->CursorB1[0], tbl->CursorB1_joint, &assets->FaceB[0],
+            tbl->FaceB_joint, &assets->FaceB[1], tbl->FaceB_animjoint,
+            &assets->FaceB[2], tbl->FaceB_matanim_joint, &assets->FaceB[3],
+            tbl->FaceB_shapeanim_joint, &assets->NmB[0], tbl->NmB_joint,
+            &assets->NmB[1], tbl->NmB_animjoint, &assets->NmB[2],
+            tbl->NmB_matanim_joint, &assets->NmB[3], tbl->NmB_shapeanim_joint,
+            &assets->SubB1[0], tbl->SubB1_joint, &assets->SubB1[1],
+            tbl->SubB1_animjoint, &assets->SubB1[2], tbl->SubB1_matanim_joint,
+            &assets->SubB1[3], tbl->SubB1_shapeanim_joint, &assets->ConB2[0],
+            tbl->ConB2_joint, &assets->ConB2[1], tbl->ConB2_animjoint,
+            &assets->ConB2[2], tbl->ConB2_matanim_joint, &assets->ConB2[3],
+            tbl->ConB2_shapeanim_joint, &assets->ConB3[0], tbl->ConB3_joint,
+            &assets->ConB3[1], tbl->ConB3_animjoint, &assets->ConB3[2],
+            tbl->ConB3_matanim_joint, &assets->ConB3[3],
+            tbl->ConB3_shapeanim_joint, &assets->CursorB3[0],
+            tbl->CursorB3_joint, 0);
     }
 
     mnDiagram_8023FA6C();
     mnDiagram_8023FC28();
-    mnDiagram_80243434((u8) arg1);
+    mnDiagram_80243434(mode_storage[0]);
 
-    proc = HSD_GObj_SetupProc(GObj_Create(0, 1, 0x80),
-                              (void (*)(HSD_GObj*)) mnDiagram_InputProc, 0);
+    gobj = GObj_Create(0, 1, 0x80);
+    proc =
+        HSD_GObj_SetupProc(gobj, (void (*)(HSD_GObj*)) mnDiagram_InputProc, 0);
     proc->flags_3 = HSD_GObj_804D783C;
 }

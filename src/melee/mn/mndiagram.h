@@ -57,6 +57,6 @@
 /* 243038 */ void mnDiagram_CursorProc(HSD_GObj* gobj);
 /* 2433AC */ void mnDiagram_802433AC(void);
 /* 243434 */ void mnDiagram_80243434(u8 arg0);
-/* 2437E8 */ void mnDiagram_802437E8(s32 arg0, s32 arg1);
+/* 2437E8 */ void mnDiagram_802437E8(u8 arg0, u8 arg1);
 
 #endif
