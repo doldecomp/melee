@@ -1016,6 +1016,32 @@ s32 fn_80392CCC(s32 channel)
     return 0;
 }
 
+static char lbl_8040A540[0x268] =
+    "MCC is no initialize\0\0\0\0"
+    "No responce\0"
+    "PING error\0\0"
+    "Could not initialize HIO\0\0\0\0"
+    "Could not read HIO mailbox\0\0"
+    "Could not write HIO mailbox\0"
+    "Could not read HIO memory\0\0\0"
+    "Could not write HIO memory\0\0"
+    "Could not read HIO status\0\0\0"
+    "Could not flush channelInfo\0"
+    "Could not load channelInfo\0\0"
+    "Not enough memory block\0"
+    "Invalid function parameter\0\0"
+    "Invalid channel parameter\0\0\0"
+    "Invalid data size\0\0\0"
+    "Invalid offset parameter\0\0\0\0"
+    "Channel was (already) opened\0\0\0\0"
+    "Channel was (already) closed\0\0\0\0"
+    "Channel was (already) locked\0\0\0\0"
+    "Channel was (already) unlocked\0\0"
+    "Channel (read/write) busy\0\0\0"
+    "Unknown error\0\0\0"
+    "%s: MCC Error, %s (%d)\n\0"
+    "MCC Error, %s (%d)\n";
+
 u8 fn_80392CD8(char* caller)
 {
     char* msg;
@@ -1027,77 +1053,77 @@ u8 fn_80392CD8(char* caller)
     case 0:
         return err;
     case 1:
-        msg = "MCC is no initialize";
+        msg = lbl_8040A540;
         break;
     case 2:
-        msg = "No responce";
+        msg = lbl_8040A540 + 0x18;
         break;
     case 3:
-        msg = "PING error";
+        msg = lbl_8040A540 + 0x24;
         break;
     case 4:
-        msg = "Could not initialize HIO";
+        msg = lbl_8040A540 + 0x30;
         break;
     case 5:
-        msg = "Could not read HIO mailbox";
+        msg = lbl_8040A540 + 0x4C;
         break;
     case 6:
-        msg = "Could not write HIO mailbox";
+        msg = lbl_8040A540 + 0x68;
         break;
     case 7:
-        msg = "Could not read HIO memory";
+        msg = lbl_8040A540 + 0x84;
         break;
     case 8:
-        msg = "Could not write HIO memory";
+        msg = lbl_8040A540 + 0xA0;
         break;
     case 9:
-        msg = "Could not read HIO status";
+        msg = lbl_8040A540 + 0xBC;
         break;
     case 10:
-        msg = "Could not flush channelInfo";
+        msg = lbl_8040A540 + 0xD8;
         break;
     case 11:
-        msg = "Could not load channelInfo";
+        msg = lbl_8040A540 + 0xF4;
         break;
     case 12:
-        msg = "Not enough memory block";
+        msg = lbl_8040A540 + 0x110;
         break;
     case 13:
-        msg = "Invalid function parameter";
+        msg = lbl_8040A540 + 0x128;
         break;
     case 14:
-        msg = "Invalid channel parameter";
+        msg = lbl_8040A540 + 0x144;
         break;
     case 15:
-        msg = "Invalid data size";
+        msg = lbl_8040A540 + 0x160;
         break;
     case 16:
-        msg = "Invalid offset parameter";
+        msg = lbl_8040A540 + 0x174;
         break;
     case 17:
-        msg = "Channel was (already) opened";
+        msg = lbl_8040A540 + 0x190;
         break;
     case 18:
-        msg = "Channel was (already) closed";
+        msg = lbl_8040A540 + 0x1B0;
         break;
     case 19:
-        msg = "Channel was (already) locked";
+        msg = lbl_8040A540 + 0x1D0;
         break;
     case 20:
-        msg = "Channel was (already) unlocked";
+        msg = lbl_8040A540 + 0x1F0;
         break;
     case 21:
-        msg = "Channel (read/write) busy";
+        msg = lbl_8040A540 + 0x210;
         break;
     default:
-        msg = "Unknown error";
+        msg = lbl_8040A540 + 0x22C;
         break;
     }
 
     if (caller != NULL) {
-        OSReport("%s: MCC Error, %s (%d)\n", caller, msg, err);
+        OSReport(lbl_8040A540 + 0x23C, caller, msg, err);
     } else {
-        OSReport("MCC Error, %s (%d)\n", msg, err);
+        OSReport(lbl_8040A540 + 0x254, msg, err);
     }
     return err;
 }
@@ -1631,6 +1657,8 @@ int hsd_80393A5C(char* filename, int data, int size)
     return size;
 }
 
+#pragma push
+#pragma pool_data off
 void fn_80393C14(const u8* buf, size_t size)
 {
     int i;
@@ -1673,6 +1701,7 @@ void fn_80393C14(const u8* buf, size_t size)
     hsd_804CF7E8.xC = write_pos;
     hsd_804CF7E8.x11 = line_len;
 }
+#pragma pop
 
 #pragma push
 #pragma dont_inline on
