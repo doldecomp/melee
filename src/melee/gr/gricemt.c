@@ -1087,13 +1087,13 @@ void grIceMt_801F8CDC(Ground_GObj* gobj, s16* joint_indices, int count,
                       HSD_GObj** output_array)
 {
     Ground* gp = gobj->user_data;
-    UnkArchiveStruct* archive;
+    int i;
     void* jobj_desc;
     HSD_JObj* parent_jobjs[20];
     HSD_JObj* parent_jobj;
     HSD_JObj* child_jobj;
     Item_GObj* item;
-    int i;
+    UnkArchiveStruct* archive;
     u8 unused[24];
 
     archive = grDatFiles_801C6324();
@@ -1135,23 +1135,23 @@ s32 fn_801F8E58(Ground_GObj* arg0, s32* out)
     s32 pick;
     s32 chosen;
     Ground* gp;
-    s16* timer;
     s16 a;
     s16 b;
     s32 d;
 
     max = 0;
     gp = arg0->user_data;
-    timer = &gp->gv.icemt.xDC;
 
     {
         Ground* g = gp;
+        s32* p = &list[max];
         i = 0;
         do {
             if (g->gv.icemt.xDC == 0 &&
                 (Stage_80225194() != 0xD4 || i >= 4))
             {
-                list[max] = i;
+                *p = i;
+                p++;
                 max++;
             }
             i++;
@@ -1173,7 +1173,7 @@ s32 fn_801F8E58(Ground_GObj* arg0, s32* out)
         }
     }
 
-    timer[chosen] = *(s16*) ((u8*) grIm_804D69F4 + 2);
+    (&gp->gv.icemt.xDC)[chosen] = *(s16*) ((u8*) grIm_804D69F4 + 2);
     a = *(s16*) ((u8*) grIm_804D69F4 + 0x36);
     b = *(s16*) ((u8*) grIm_804D69F4 + 0x38);
     if (a > b) {
@@ -1479,9 +1479,13 @@ int grIceMt_801F9ACC(Ground_GObj* gobj, float y, GrIceMtSegmentLookup ev,
     }
     f = grIceMt_801F993C(seg[0], seg[1]);
     mgobj = Ground_801C2BA4(seg[1]);
-    HSD_ASSERT(0xAB9, mgobj);
+    if (mgobj == NULL) {
+        __assert(grIm_803E46F8, 0xAB9, "mgobj");
+    }
     jobj = mgobj->hsd_obj;
-    HSD_ASSERT(0xABA, jobj);
+    if (jobj == NULL) {
+        __assert(grIm_803E46F8, 0xABA, "jobj");
+    }
     cur = HSD_JObjGetTranslationY(jobj);
     if (ABS(cur) < 10.0f) {
         gp = GET_GROUND(Ground_801C2BA4(seg[1]));
@@ -1523,17 +1527,23 @@ int grIceMt_801F9ACC(Ground_GObj* gobj, float y, GrIceMtSegmentLookup ev,
         id = seg[0];
         if (id != -1) {
             mgobj = Ground_801C2BA4(id);
-            HSD_ASSERT(0xAF3, mgobj);
+            if (mgobj == NULL) {
+                __assert(grIm_803E46F8, 0xAF3, "mgobj");
+            }
             Ground_801C4A08(mgobj);
         }
         seg[0] = seg[1];
         seg[1] = ev(arg3);
         if (seg[1] != -1) {
             f2 = grIceMt_801F993C(seg[0], seg[1]);
-            mgobj = grIceMt_801F71E8_noinline2(seg[1]);
-            HSD_ASSERT(0xAFE, mgobj);
+            mgobj = grIceMt_801F71E8(seg[1]);
+            if (mgobj == NULL) {
+                __assert(grIm_803E46F8, 0xAFE, "mgobj");
+            }
             jobj = mgobj->hsd_obj;
-            HSD_ASSERT(0xAFF, jobj);
+            if (jobj == NULL) {
+                __assert(grIm_803E46F8, 0xAFF, "jobj");
+            }
             HSD_JObjSetTranslateY(jobj, cur - f2);
             Ground_801C32AC(seg[1]);
             Ground_801C2FE0(mgobj);
@@ -1569,17 +1579,23 @@ int grIceMt_801F9ACC(Ground_GObj* gobj, float y, GrIceMtSegmentLookup ev,
         id = seg[1];
         if (id != -1) {
             mgobj = Ground_801C2BA4(id);
-            HSD_ASSERT(0xB13, mgobj);
+            if (mgobj == NULL) {
+                __assert(grIm_803E46F8, 0xB13, "mgobj");
+            }
             Ground_801C4A08(mgobj);
         }
         seg[1] = seg[0];
         seg[0] = ev(arg3);
         if (seg[0] != -1) {
             f2 = grIceMt_801F993C(seg[0], seg[1]);
-            mgobj = grIceMt_801F71E8_noinline2(seg[0]);
-            HSD_ASSERT(0xB1E, mgobj);
+            mgobj = grIceMt_801F71E8(seg[0]);
+            if (mgobj == NULL) {
+                __assert(grIm_803E46F8, 0xB1E, "mgobj");
+            }
             jobj = mgobj->hsd_obj;
-            HSD_ASSERT(0xB1F, jobj);
+            if (jobj == NULL) {
+                __assert(grIm_803E46F8, 0xB1F, "jobj");
+            }
             HSD_JObjSetTranslateY(jobj, f2 + (cur + f));
             Ground_801C32AC(seg[0]);
             Ground_801C2FE0(mgobj);
@@ -1754,12 +1770,17 @@ int fn_801FA4CC(int num)
     return num;
 }
 
+static inline HSD_JObj* grIceMt_801FA500_get_jobj(HSD_GObj* gobj)
+{
+    return gobj->hsd_obj;
+}
+
 int grIceMt_801FA500(HSD_GObj* arg0, HSD_JObj* arg1)
 {
     s32 count = 0;
     HSD_JObj* jobj;
 
-    jobj = arg0->hsd_obj;
+    jobj = grIceMt_801FA500_get_jobj(arg0);
     HSD_ASSERT(0xBB1, jobj);
     jobj = HSD_JObjGetChild(jobj);
     HSD_ASSERT(0xBB2, jobj);
