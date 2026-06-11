@@ -1228,13 +1228,11 @@ static struct enterdata {
     int x0, x4;
 } lbl_804D6618;
 
-typedef struct gm_1832_804736B0_t {
+static struct {
     int x0, x4;
     HSD_JObj* x8;
     HSD_JObj* xC;
-} gm_1832_804736B0_t;
-
-static gm_1832_804736B0_t lbl_804736B0;
+} lbl_804736B0;
 
 /// Classic Mode intro scene enter data (0x20 bytes)
 typedef struct ClassicModeEnterData {
@@ -1274,19 +1272,16 @@ void gm_80186E30_OnEnter(void* arg0_)
     gm_80168F88();
 }
 
-extern f32 lbl_804DA5C8;
-
 void fn_80186EFC(HSD_GObj* gobj)
 {
-    gm_1832_804736B0_t* data = &lbl_804736B0;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     PAD_STACK(8);
-    HSD_JObjReqAnimAll(data->xC, lbl_804DA5C8);
+    HSD_JObjReqAnimAll(lbl_804736B0.xC, 0.0F);
     HSD_JObjAnimAll(jobj);
     if (lbl_804736B0.x4 < 0x8C) {
         lbl_804736B0.x4++;
     } else {
-        data->x0 = 1;
+        lbl_804736B0.x0 = 1;
     }
 }
 
@@ -1916,7 +1911,6 @@ bool gm_8018841C(void)
 }
 
 static TrainingModeState lbl_80473700;
-extern const f32 lbl_804DA60C;
 
 int gm_80188454(int idx)
 {
@@ -2034,7 +2028,7 @@ void fn_80188644(void)
 
     saved_count = lbl_80473700.count;
     lbl_80473700.count = 1;
-    Player_SetFacingDirection(0, lbl_804DA60C);
+    Player_SetFacingDirection(0, 1.0f);
     Player_SetHUDDamage(0, 0);
     Stage_80224E64(0, &sp10);
     Player_800328D4(0, &sp10);
@@ -2287,7 +2281,7 @@ void fn_80188EE8(HSD_GObj* gobj)
     HSD_JObjAnimAll(jobj);
 }
 
-#pragma dont_inline on
+#pragma dont_inline off
 void fn_801891F4(void)
 {
     CssSubStruct* sub;
@@ -2384,10 +2378,7 @@ void fn_801891F4(void)
                 lbAudioAx_80024030(8);
                 item = *(s16*) &((s32*) lbl_803D9828)[sub->menu_values[1]];
                 jobj = Player_GetEntity(0)->hsd_obj;
-                if (jobj == NULL) {
-                    __assert("jobj.h", 979, "jobj");
-                }
-                pos = jobj->translate;
+                HSD_JObjGetTranslation2(jobj, &pos);
                 pos.y += 10.0f;
                 it_8026D258(&pos, (ItemKind) item);
                 return;
@@ -2704,8 +2695,6 @@ HSD_Text* fn_8018A000(void)
     sub->text->default_alignment = 2;
     return text;
 }
-
-const f32 lbl_804DA60C = 1.0f;
 
 u8 gm_8018A160(u8 difficulty, u8 stage_slot)
 {
