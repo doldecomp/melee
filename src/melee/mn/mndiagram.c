@@ -2804,7 +2804,12 @@ void mnDiagram_802433AC(void)
 
 void mnDiagram_80243434(u8 arg0)
 {
+    int col_idx;
     s32 row_idx;
+    Diagram* d;
+    int col_idx2;
+    s32 row_idx2;
+    Diagram* d2;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
     HSD_JObj* anim_jobj;
@@ -2815,7 +2820,6 @@ void mnDiagram_80243434(u8 arg0)
     mnDiagram_AnimTable* tbl = GET_DIAGRAM_ANIM_TABLE();
     int i;
     u16 indices;
-    int col_idx;
     u8 stack_obj[8];
 
     (void) &stack_obj;
@@ -2893,12 +2897,28 @@ void mnDiagram_80243434(u8 arg0)
             indices = user_data->name_cursor_pos;
             row_idx = indices >> 8;
             col_idx = indices & 0xFF;
-            mnDiagram_80241730(gobj, col_idx, row_idx);
+            d = GET_DIAGRAM(gobj);
+            mnDiagram_80241668(gobj);
+            mnDiagram_8024227C(gobj, col_idx, row_idx,
+                               (u8) (d->is_name_mode == 1));
+            if (d->is_name_mode == 0) {
+                mnDiagram_80242C0C(gobj, col_idx, row_idx);
+            } else {
+                mnDiagram_802427B4(gobj, col_idx, row_idx);
+            }
         } else {
             indices = user_data->fighter_cursor_pos;
-            row_idx = indices >> 8;
-            col_idx = indices & 0xFF;
-            mnDiagram_80241730(gobj, col_idx, row_idx);
+            row_idx2 = indices >> 8;
+            col_idx2 = indices & 0xFF;
+            d2 = GET_DIAGRAM(gobj);
+            mnDiagram_80241668(gobj);
+            mnDiagram_8024227C(gobj, col_idx2, row_idx2,
+                               (u8) (d2->is_name_mode == 1));
+            if (d2->is_name_mode == 0) {
+                mnDiagram_80242C0C(gobj, col_idx2, row_idx2);
+            } else {
+                mnDiagram_802427B4(gobj, col_idx2, row_idx2);
+            }
         }
     }
 }
