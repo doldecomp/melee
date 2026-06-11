@@ -1265,7 +1265,6 @@ s32 gm_8016247C(s32 arg0)
 {
     u32 var_r4;
     u32 var_r3;
-    u32 var_r28;
     u32 var_r29;
     u32* temp_r31;
     u32* temp_r5;
@@ -1273,7 +1272,6 @@ s32 gm_8016247C(s32 arg0)
     u32* temp_r3;
     s32 temp_r29 = *gmMainLib_8015CCF0();
     u32* temp_r30 = gmMainLib_8015CCFC();
-    s32 ret;
 
     temp_r5 = &gmMainLib_8015EDBC()->x14;
 
@@ -1283,29 +1281,27 @@ s32 gm_8016247C(s32 arg0)
     var_r3 = MAX(-1U, *temp_r5 + arg0);
     *temp_r5 = var_r3;
 
-    var_r28 = temp_r29;
-    var_r28 += arg0;
-    if (var_r28 > 0x270FU) {
-        var_r28 = 0x270FU;
+    arg0 = temp_r29 + arg0;
+    if ((u32) arg0 > 0x270FU) {
+        arg0 = 0x270FU;
     }
-    ret = (s32) var_r28;
-    var_r29 = var_r28;
+    var_r29 = arg0;
 
     temp_r30_2 = gmMainLib_8015CCF0();
     temp_r31 = gmMainLib_8015CCFC();
     temp_r3 = &gmMainLib_8015EDBC()->x14;
 
-    if (var_r28 > (u32) *temp_r31) {
-        *temp_r31 = var_r28;
+    if ((u32) arg0 > (u32) *temp_r31) {
+        *temp_r31 = arg0;
     }
-    if (var_r28 > (u32) *temp_r3) {
-        *temp_r3 = var_r28;
+    if ((u32) arg0 > (u32) *temp_r3) {
+        *temp_r3 = arg0;
     }
-    if (var_r28 > 0x270FU) {
+    if ((u32) arg0 > 0x270FU) {
         var_r29 = 0x270FU;
     }
     *temp_r30_2 = var_r29;
-    return (s32) ret;
+    return arg0;
 }
 
 void gm_80162574(u8 arg0, u8 arg1)
@@ -2340,7 +2336,7 @@ static inline bool gm_80164840_noinline(u8 ckind)
 void gm_80164910(int arg0)
 {
     u16* char_unlock_mask;
-    s32 internal_id;
+    u8 internal_id;
     int i;
     u8 unlock_idx;
     u8 notify_val;
@@ -3030,124 +3026,124 @@ void gm_80166378(lbl_8046B6A0_24C_t* arg0_raw)
     Vec3 sp48;
     s32 i;
     s32 j;
-    s32 cnt;
-    MatchPlayerData* p;
-    MatchPlayerData* q;
-    u16* kw;
+    u32 cnt;
+
+    PAD_STACK(56);
 
     memzero(arg0->player_standings, 0x3F0);
     memzero(arg0->team_standings, 0x3C);
     memzero(arg0->_x448, 4);
     arg0->frame_count = gm_8016AEDC();
     arg0->x7 = fn_8016B728();
-    p = arg0->player_standings;
-    for (i = 0; i < 6; i++, p++) {
-        p->slot_type = Player_GetPlayerSlotType(i);
-        if (p->slot_type != 3) {
-            p->character_kind = Player_GetPlayerCharacter(i);
-            p->character_id = Player_80036394(i);
-            p->stocks = Player_GetStocks(i);
-            p->x3 = Player_GetCostumeId(i);
-            p->x4 = Player_GetNametagSlotID(i);
-            p->x1C = Player_GetCoins(i);
-            p->x28 = Player_GetMatchFrameCount(i);
-            if ((u32) (p->x28 + 0x10000) == -1U) {
-                p->x28 = gm_8016AEDC();
+    for (i = 0; i < 6; i++) {
+        arg0->player_standings[i].slot_type = Player_GetPlayerSlotType(i);
+        if (arg0->player_standings[i].slot_type != 3) {
+            arg0->player_standings[i].character_kind =
+                Player_GetPlayerCharacter(i);
+            arg0->player_standings[i].character_id = Player_80036394(i);
+            arg0->player_standings[i].stocks = Player_GetStocks(i);
+            arg0->player_standings[i].x3 = Player_GetCostumeId(i);
+            arg0->player_standings[i].x4 = Player_GetNametagSlotID(i);
+            arg0->player_standings[i].x1C = Player_GetCoins(i);
+            arg0->player_standings[i].x28 = Player_GetMatchFrameCount(i);
+            if (arg0->player_standings[i].x28 == -1U) {
+                arg0->player_standings[i].x28 = gm_8016AEDC();
             }
-            p->self_destructs = Player_GetSuicideCount(i);
-            p->x24 = Player_GetFalls(i);
-            p->team = Player_GetTeam(i);
-            p->percent = Player_GetDamage(i);
-            p->x3_6 = Player_800353BC(i);
-            p->x3_7 = Player_GetMoreFlagsBit2(i);
-            p->x9 = Player_GetRemainingHP(i);
+            arg0->player_standings[i].self_destructs =
+                Player_GetSuicideCount(i);
+            arg0->player_standings[i].x24 = Player_GetFalls(i);
+            arg0->player_standings[i].team = Player_GetTeam(i);
+            arg0->player_standings[i].percent = Player_GetDamage(i);
+            arg0->player_standings[i].x3_6 = Player_800353BC(i);
+            arg0->player_standings[i].x3_7 = Player_GetMoreFlagsBit2(i);
+            arg0->player_standings[i].x9 = (s8) Player_GetRemainingHP(i);
             cnt = Player_GetJoystickCountByIndex(i, 0);
             sp48.y = 0.031f * ((f32) cnt * fn_8016B5B0());
-            fn_80166A8C((Vec3*) &sp48.y, &sp48);
-            p->xE = (u16) sp48.x;
-            p->x34 = (s8) (100.0f * pl_80040948(i));
-            p->x38 = pl_80040900(i);
-            p->x3C = pl_80040924(i);
-            p->x40 = pl_80040B3C(i);
-            p->x44 = pl_80040B64(i);
-            p->x48 = pl_80040BD8(i);
-            p->x4C = pl_80040BFC(i);
-            p->x50 = (u32) pl_80040C24(i) * 0xA;
-            p->x54 = (u32) pl_80040C48(i) * 0xA;
-            p->x58 = (u32) pl_80040C6C(i) * 0xA;
-            p->x5C = (u32) pl_80040C90(i) * 0xA;
-            p->x60 = Player_GetTotalCoins(i);
-            p->x64 = Player_GetUnk98(i);
-            p->x68 = Player_GetUnk9C(i);
-            p->x6C = pl_80040CB4(i) / 60;
-            p->x70 = pl_80040CD8(i) / 60;
-            p->x74 = pl_80040A04(i);
-            p->x78 = pl_80040A30(i);
-            p->x7C = pl_80040A54(i);
-            p->x80 = pl_80040B18(i);
-            p->x84 = pl_80040A78(i);
-            p->x88 = pl_80040A9C(i);
-            p->x8C = pl_80040AF0(i);
-            p->x90 = pl_8003E39C(i);
-            p->x94 = (u32) (60.0f * (10.0f * pl_80040D44(i)));
-            p->x98 = (u32) (60.0f * (10.0f * pl_80040D68(i)));
-            p->x9C = pl_80040CFC(i) / 60;
-            p->xA0 = pl_80040D20(i) / 60;
-            p->xA4 = pl_80040DB8(i);
-            q = arg0->player_standings;
-            kw = p->kills;
-            for (j = 0; j < 6; j++, q++) {
-                if (q->slot_type != 3) {
-                    kw[j] = Player_GetKOsByPlayerIndex(i, j);
+            fn_80166A8C((Vec3*) ((u8*) &sp48 + 4), (Vec3*) ((u8*) &sp48));
+            arg0->player_standings[i].xE = *(u16*) &sp48;
+            arg0->player_standings[i].x34 = (s8) (100.0f * pl_80040948(i));
+            arg0->player_standings[i].x38 = pl_80040900(i);
+            arg0->player_standings[i].x3C = pl_80040924(i);
+            arg0->player_standings[i].x40 = pl_80040B3C(i);
+            arg0->player_standings[i].x44 = pl_80040B64(i);
+            arg0->player_standings[i].x48 = pl_80040BD8(i);
+            arg0->player_standings[i].x4C = pl_80040BFC(i);
+            arg0->player_standings[i].x50 = (u32) pl_80040C24(i) * 0xA;
+            arg0->player_standings[i].x54 = (u32) pl_80040C48(i) * 0xA;
+            arg0->player_standings[i].x58 = (u32) pl_80040C6C(i) * 0xA;
+            arg0->player_standings[i].x5C = (u32) pl_80040C90(i) * 0xA;
+            arg0->player_standings[i].x60 = Player_GetTotalCoins(i);
+            arg0->player_standings[i].x64 = Player_GetUnk98(i);
+            arg0->player_standings[i].x68 = Player_GetUnk9C(i);
+            arg0->player_standings[i].x6C = (u32) pl_80040CB4(i) / 60U;
+            arg0->player_standings[i].x70 = (u32) pl_80040CD8(i) / 60U;
+            arg0->player_standings[i].x74 = pl_80040A04(i);
+            arg0->player_standings[i].x78 = pl_80040A30(i);
+            arg0->player_standings[i].x7C = pl_80040A54(i);
+            arg0->player_standings[i].x80 = pl_80040B18(i);
+            arg0->player_standings[i].x84 = pl_80040A78(i);
+            arg0->player_standings[i].x88 = pl_80040A9C(i);
+            arg0->player_standings[i].x8C = pl_80040AF0(i);
+            arg0->player_standings[i].x90 = pl_8003E39C(i);
+            arg0->player_standings[i].x94 =
+                (u32) (60.0f * (10.0f * pl_80040D44(i)));
+            arg0->player_standings[i].x98 =
+                (u32) (60.0f * (10.0f * pl_80040D68(i)));
+            arg0->player_standings[i].x9C = (u32) pl_80040CFC(i) / 60U;
+            arg0->player_standings[i].xA0 = (u32) pl_80040D20(i) / 60U;
+            arg0->player_standings[i].xA4 = pl_80040DB8(i);
+            for (j = 0; j < 6; j++) {
+                if (arg0->player_standings[j].slot_type != 3) {
+                    arg0->player_standings[i].kills[j] =
+                        Player_GetKOsByPlayerIndex(i, j);
                 }
             }
         }
     }
     if (arg0->is_teams == 1) {
-        p = arg0->player_standings;
-        for (i = 0; i < 6; i++, p++) {
-            if (p->slot_type != 3) {
-                u8 team_i = p->team;
-                q = arg0->player_standings;
-                kw = p->kills;
-                for (j = 0; j < 6; j++, q++) {
-                    if (q->slot_type != 3) {
-                        if (q->team != team_i) {
+        for (i = 0; i < 6; i++) {
+            if (arg0->player_standings[i].slot_type != 3) {
+                s32 team_i = arg0->player_standings[i].team;
+                for (j = 0; j < 6; j++) {
+                    if (arg0->player_standings[j].slot_type != 3) {
+                        if (arg0->player_standings[j].team != team_i) {
                             if (i != j) {
-                                p->x20 += kw[j];
+                                arg0->player_standings[i].x20 +=
+                                    arg0->player_standings[i].kills[j];
                             }
                         } else {
-                            p->self_destructs += kw[j];
-                            p->x24 += kw[j];
+                            arg0->player_standings[i].self_destructs +=
+                                arg0->player_standings[i].kills[j];
+                            arg0->player_standings[i].x24 +=
+                                arg0->player_standings[i].kills[j];
                         }
                     }
                 }
             }
         }
     } else {
-        p = arg0->player_standings;
-        for (i = 0; i < 6; i++, p++) {
-            if (p->slot_type != 3) {
-                q = arg0->player_standings;
-                kw = p->kills;
-                for (j = 0; j < 6; j++, q++) {
-                    if (q->slot_type != 3) {
+        for (i = 0; i < 6; i++) {
+            if (arg0->player_standings[i].slot_type != 3) {
+                for (j = 0; j < 6; j++) {
+                    if (arg0->player_standings[j].slot_type != 3) {
                         if (i != j) {
-                            p->x20 += kw[j];
+                            arg0->player_standings[i].x20 +=
+                                arg0->player_standings[i].kills[j];
                         } else {
-                            p->self_destructs += kw[j];
-                            p->x24 += kw[j];
+                            arg0->player_standings[i].self_destructs +=
+                                arg0->player_standings[i].kills[j];
+                            arg0->player_standings[i].x24 +=
+                                arg0->player_standings[i].kills[j];
                         }
                     }
                 }
             }
         }
     }
-    p = arg0->player_standings;
-    for (i = 0; i < 6; i++, p++) {
-        if (p->slot_type != 3) {
-            p->score = fn_8016588C(arg0_raw, i);
-            p->x30 = fn_801656A8(arg0, i);
+    for (i = 0; i < 6; i++) {
+        if (arg0->player_standings[i].slot_type != 3) {
+            arg0->player_standings[i].score = fn_8016588C(arg0_raw, i);
+            arg0->player_standings[i].x30 = fn_801656A8(arg0, i);
         }
     }
     fn_80165AC0(arg0);
@@ -3338,21 +3334,33 @@ int fn_80167194(MatchEnd* me)
     return me->n_winners;
 }
 
+struct fn_8016719C_xC_bits {
+    u8 b0 : 1;
+    u8 b1 : 1;
+    u8 b2 : 1;
+    u8 b3 : 1;
+    u8 b4 : 1;
+    u8 b5 : 1;
+    u8 b6 : 1;
+    u8 b7 : 1;
+};
+
 void fn_8016719C(s32 slot, s32 subchar)
 {
     Vec3 respawn_pos;
     Vec3 offset;
-    f32 var_f1;
     lbl_8046B6A0_t* match_info;
     s32 var_r30;
     s32 stage_id;
-    u8* temp_r4;
-    u8 temp_r3;
+    struct fn_8016719C_xC_bits* temp_r4;
 
     match_info = gm_8016AE44();
     stage_id = gm_8016B004();
     if (Stage_80224DC8(stage_id) != 0) {
-        var_r30 = Ground_801C5774();
+        {
+            extern s32 Ground_801C5774();
+            var_r30 = Ground_801C5774();
+        }
         Stage_80224E38(&respawn_pos, var_r30);
         offset.z = 0.0f;
         offset.y = 0.0f;
@@ -3367,27 +3375,23 @@ void fn_8016719C(s32 slot, s32 subchar)
     respawn_pos.x += offset.x;
     Player_SetSpawnPlatformPos(slot, &respawn_pos);
 
-    if (!(((u8) stage_info.unk8C.b0 >> 2U) & 1)) {
+    if (!stage_info.unk8C.b5) {
         Player_80032FA4(slot, var_r30);
         Player_SetSomePos(slot, &offset);
     }
 
     respawn_pos.y = Stage_GetCamBoundsTopOffset();
     Player_80032768(slot, &respawn_pos);
-    if (respawn_pos.x >= 0.0f) {
-        var_f1 = -1.0f;
-    } else {
-        var_f1 = 1.0f;
-    }
-    Player_SetFacingDirection(slot, var_f1);
+    Player_SetFacingDirection(slot,
+                              respawn_pos.x >= 0.0f ? -1.0f : 1.0f);
     Player_SetHPByIndex(slot, subchar, match_info->FighterMatchInfo[slot].x6);
     Player_80032070(slot, subchar);
     if (subchar != 1) {
         ifStatus_802F6508(slot);
-        temp_r4 = (u8*) &match_info->FighterMatchInfo[slot].xC;
-        temp_r3 = *temp_r4;
-        if ((temp_r3 >> 7U) & 1) {
-            *temp_r4 &= 0x80;
+        temp_r4 = (struct fn_8016719C_xC_bits*)
+            &match_info->FighterMatchInfo[slot].xC;
+        if (temp_r4->b0) {
+            temp_r4->b0 = true;
             Camera_800310E8();
         }
     }
@@ -4898,14 +4902,19 @@ void fn_8016A09C(void)
 void gm_8016A164(void)
 {
     int i;
+    struct lbl_8046B488_t* gp = &lbl_8046B488;
     lbl_8046B6A0_t* match_info = gm_8016AE44();
     PAD_STACK(4);
+    if (gp == 0) {
+        if (match_info == 0) {
+        }
+    }
 
     match_info->is_singleplayer = false;
-    lbl_8046B488.x8 = 0;
-    lbl_8046B488.x7 = 0;
-    lbl_8046B488.unk_10_b1 = false;
-    lbl_8046B488.unk_10_b0 = false;
+    gp->x8 = 0;
+    gp->x7 = 0;
+    gp->unk_10_b1 = false;
+    gp->unk_10_b0 = false;
     fn_8016B138();
 
     for (i = 1; i < 6; i++) {

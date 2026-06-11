@@ -198,7 +198,7 @@ typedef struct RegClearCharEntry {
     /* 0x08 */ f32 x8;
 } RegClearCharEntry;
 
-struct {
+typedef struct lbl_80472ED8_t {
     /* 0x000 */ s32 x0;
     /* 0x004 */ s32 x4;
     /* 0x008 */ s32 x8;
@@ -219,7 +219,9 @@ struct {
     /* 0x6C8 */ int x6C8;
     /* 0x6CC */ s8 x6CC;
     /* 0x6CD */ u8 x6CD;
-} lbl_80472ED8;
+} lbl_80472ED8_t;
+
+lbl_80472ED8_t lbl_80472ED8;
 
 void fn_8017C0C8(void)
 {
@@ -1938,9 +1940,9 @@ s32 fn_8017F2A4(HSD_Text** arg0, f32 farg0, f32 farg1)
 s32 fn_8017F47C(HSD_Text** arg0, int arg1)
 {
     s32* p;
-    s32 prev_idx;
-    int entry;
     s32 i;
+    int entry;
+    s32 prev_idx;
     u8 mask;
     s32 idx;
     s32 val;
@@ -3153,44 +3155,47 @@ int fn_80181BFC(int* arg0)
 
 s32 fn_80181C80(s32 arg0)
 {
-    s32 var_r30;
+    lbl_80472ED8_t* data = &lbl_80472ED8;
     s32 var_r29;
+    s32 var_r30;
     volatile s32 sp38;
+    volatile s32 sp3C;
     PlayerInitData sp10;
 
     gm_801A4310();
-    var_r29 = 0;
-    sp10 = lbl_80472ED8.xC;
-
-    for (var_r30 = 1; var_r30 < 6; var_r30++) {
-        if (Player_GetFalls(var_r30) == 0 &&
-            Player_GetPlayerSlotType(var_r30) != Gm_PKind_NA)
+    var_r29 = 1;
+    var_r30 = 0;
+    sp10 = data->xC;
+    do {
+        if (Player_GetFalls(var_r29) == 0 &&
+            Player_GetPlayerSlotType(var_r29) != Gm_PKind_NA)
         {
-            var_r29++;
+            var_r30++;
         } else {
-            sp38 = var_r30;
+            sp38 = var_r29;
         }
-    }
+        var_r29++;
+    } while (var_r29 < 6);
 
-    if ((s32) lbl_80472ED8.x54[arg0].x4 > var_r29 && lbl_80472ED8.x8 > 0x5A) {
+    if ((s32) data->x54[arg0].x4 > var_r30 && data->x8 > 0x5A) {
         if (Player_GetPlayerSlotType(sp38) != Gm_PKind_NA) {
             Player_SetFalls(sp38, 0);
             Player_SetSuicideCount(sp38, 0);
             fn_8016EF98(sp38);
         }
-        lbl_80472ED8.x54[arg0].x0 = -2;
+        data->x54[arg0].x0 = -2;
         sp10.team = !Player_GetTeam(0);
-        sp10.c_kind = lbl_80472ED8.x54[arg0].x5;
-        sp10.cpu_level = lbl_80472ED8.x54[arg0].x6;
-        sp10.xE = lbl_80472ED8.x54[arg0].x7;
-        sp10.x18 = lbl_80472ED8.x54[arg0].x8;
-        sp10.x1C = lbl_80472ED8.x54[arg0].xC;
+        sp10.c_kind = data->x54[arg0].x5;
+        sp10.cpu_level = data->x54[arg0].x6;
+        sp10.xE = data->x54[arg0].x7;
+        sp10.x18 = data->x54[arg0].x8;
+        sp10.x1C = data->x54[arg0].xC;
         gm_8016EDDC(sp38, &sp10);
         Player_SetNametagSlotID(sp38, 0x78);
         un_802FD28C(sp38);
-        lbl_80472ED8.x0 += 1;
+        data->x0 += 1;
     }
-    PAD_STACK(8);
+    PAD_STACK(4);
 }
 
 void fn_80181E18(void)
