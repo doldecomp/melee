@@ -26,6 +26,9 @@ class ColumnIndex(IntEnum):
     GITHUB = auto()
 
 
+BYTES_RE = re.compile(r"\bbytes?\b")
+
+
 def read_wiki(lines) -> dict[str, dict[str, str]]:
     assignees = {}
 
@@ -91,7 +94,7 @@ def write(args):
 
     def friendly_size(value: int) -> str:
         # Non-breaking space so sizes like "1.18 KB" do not wrap in a cell.
-        size = humanfriendly.format_size(value).replace("bytes", "B")
+        size = BYTES_RE.sub("B", humanfriendly.format_size(value))
         return size.replace(" ", "&nbsp;")
 
     def percent_cell(matched: int, total: int, reported: float | None) -> str:
@@ -117,17 +120,19 @@ def write(args):
     def get_measure_int(unit, key: str) -> int:
         return int(unit["measures"].get(key) or 0)
 
+    def get_measure_float(unit, key: str) -> float:
+        return float(unit["measures"].get(key) or 0)
+
     def percent_cells(unit):
-        measures = unit["measures"]
         text = percent_cell(
-            get_measure_int(unit, "matched_code"),
+            get_measure_int(unit, "fuzzy_code"),
             get_measure_int(unit, "total_code"),
-            measures.get("matched_code_percent"),
+            get_measure_float(unit, "fuzzy_match_percent"),
         )
         data = percent_cell(
             get_measure_int(unit, "matched_data"),
             get_measure_int(unit, "total_data"),
-            measures.get("matched_data_percent"),
+            get_measure_float(unit, "matched_data_percent"),
         )
         return text, data
 
@@ -144,7 +149,7 @@ def write(args):
 
     def row_full(unit) -> str:
         file, link = file_link(unit)
-        matched = friendly_size(get_measure_int(unit, "matched_code"))
+        matched = friendly_size(get_measure_int(unit, "fuzzy_code"))
         total = friendly_size(get_measure_int(unit, "total_code"))
         remaining_code = get_measure_int(unit, "remaining_code")
         remaining = friendly_size(remaining_code) if remaining_code else "&mdash;"
@@ -164,12 +169,14 @@ def write(args):
     data_left = []
     linked = []
     for unit in data["units"] or []:
-        matched_code = get_measure_int(unit, "matched_code")
+        fuzzy_percent = get_measure_float(unit, "fuzzy_match_percent")
         total_code = get_measure_int(unit, "total_code")
-        unit["measures"]["remaining_code"] = total_code - matched_code
+        fuzzy_code = int(total_code * fuzzy_percent / 100)
+        unit["measures"]["fuzzy_code"] = fuzzy_code
+        unit["measures"]["remaining_code"] = total_code - fuzzy_code
         if unit["metadata"].get("complete"):
             linked.append(unit)
-        elif float(unit["measures"].get("matched_code_percent") or 0) >= 100:
+        elif fuzzy_percent >= 100:
             data_left.append(unit)
         else:
             in_progress.append(unit)
