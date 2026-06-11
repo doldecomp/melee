@@ -1003,7 +1003,6 @@ void mn_8022A440(HSD_GObj* gp, HSD_JObj* root, MainMenuSelection selection)
     lb_8001204C(root, sp24, mn_803EAE7C, 7);
     r29 = sp24[1];
     flow = &mn_804A04F0;
-    flow = flow; // Permuter slop
     HSD_JObjReqAnimAll(r29, 0.0F);
     HSD_JObjAnimAll(r29);
     HSD_JObjReqAnim(r29,
