@@ -254,7 +254,8 @@ void un_80312904(void* arg0, s8 arg1)
     f32 f31;
     s32 skip;
     u8* digits;
-    PAD_STACK(0x78);
+    HSD_Text* text;
+    PAD_STACK(0x60);
 
     if (row->idx == -1) {
         return;
@@ -292,19 +293,23 @@ void un_80312904(void* arg0, s8 arg1)
         }
     }
 
-    row->text0->pos_x = f30;
-    row->text0->pos_y = f29;
-    row->text0->pos_z = f31;
-    row->text0->font_size.x = un_804DDE30;
-    row->text0->font_size.y = un_804DDE34;
+    text = row->text0;
+    text->pos_x = f30;
+    text->pos_y = f29;
+    text->pos_z = f31;
+    text = row->text0;
+    text->font_size.x = un_804DDE30;
+    text->font_size.y = un_804DDE34;
     row->text0->default_kerning = 1;
     HSD_SisLib_803A6368(row->text0, un_80308354(row->idx));
 
-    row->text1->pos_x = un_804DDE38 + f30;
-    row->text1->pos_y = f29;
-    row->text1->pos_z = f31;
-    row->text1->font_size.x = un_804DDE30;
-    row->text1->font_size.y = un_804DDE34;
+    text = row->text1;
+    text->pos_x = un_804DDE38 + f30;
+    text->pos_y = f29;
+    text->pos_z = f31;
+    text = row->text1;
+    text->font_size.x = un_804DDE30;
+    text->font_size.y = un_804DDE34;
     HSD_SisLib_803A6368(row->text1, 0x13B);
 
     digits = ((u8**) ((char*) HSD_SisLib_804D1124[0] + 0x4B8))[row->x28];
@@ -312,20 +317,22 @@ void un_80312904(void* arg0, s8 arg1)
 
     row->text2->default_alignment = 2;
     row->text2->default_kerning = 1;
-    row->text2->pos_x = un_804DDE3C + f30;
-    row->text2->pos_y = f29;
-    row->text2->pos_z = f31;
-    row->text2->font_size.x = un_804DDE40;
-    row->text2->font_size.y = un_804DDE34;
+    text = row->text2;
+    text->pos_x = un_804DDE3C + f30;
+    text->pos_y = f29;
+    text->pos_z = f31;
+    text = row->text2;
+    text->font_size.x = un_804DDE40;
+    text->font_size.y = un_804DDE34;
     HSD_SisLib_803A6368(row->text2, row->x28 + 0x12E);
 }
 
 void un_80312BAC(TyListState* state, s8 arg1)
 {
-    void* archive = un_804D6ED8;
+    s32 i;
     s16 old_idx;
     s32 var_r28;
-    s32 i;
+    void* archive = un_804D6ED8;
     TyListArg* row;
     HSD_JObj* jobj;
 
@@ -427,7 +434,7 @@ done_first_dirty:
     i = 0;
     while (i < 3) {
         HSD_JObj* anim_jobj = *((HSD_JObj**) ((u8*) archive + i * 4 + 0x18));
-        if (i == (s8) state->x29B) {
+        if (i == state->x29B) {
             HSD_JObjReqAnim(anim_jobj, un_804DDE44);
         } else {
             HSD_JObjReqAnim(anim_jobj, un_804DDE48);
@@ -809,11 +816,11 @@ void un_80312BAC(TyListState* state, s8 arg1);
 void fn_80313BD8(HSD_GObj* gobj)
 {
     TyListState* state = (TyListState*) un_804A2AC0;
+    s32 i;
     TyListArg* p;
     s8* g = ((s8*) state) + 0x2AC;
     f32 f30;
     f32 f31;
-    s32 i;
     s8 v;
 
     if (un_GetTrophyTotal() > 10) {
@@ -1112,16 +1119,17 @@ void un_8031457C(void)
     TyArchiveData* archive = un_804D6ED8;
     HSD_CameraDescPerspective* desc;
     HSD_CObj* cobj;
+    HSD_RectS16 viewport;
+    Scissor scissor;
     Vec3 interest;
     Vec3 eye;
-    Scissor scissor;
-    HSD_RectS16 viewport;
+    PAD_STACK(8);
 
     desc = HSD_ArchiveGetPublicAddress(archive->data, un_803FE5E8);
     if (desc != NULL) {
         entry->x0 = GObj_Create(1, 2, 0);
-        HSD_GObjObject_80390A70(entry->x0, HSD_GObj_804D784B,
-                                lb_80013B14(desc));
+        cobj = lb_80013B14(desc);
+        HSD_GObjObject_80390A70(entry->x0, HSD_GObj_804D784B, cobj);
         GObj_SetupGXLinkMax(entry->x0, (GObj_RenderFunc) un_80306954, 0);
         entry->x0->gxlink_prios = 0x9010000000000000ULL;
         HSD_GObj_SetupProc(entry->x0, fn_8031438C, 0);
@@ -1144,8 +1152,8 @@ void un_8031457C(void)
         eye.z = un_804DDE98;
         HSD_CObjSetEyePosition(cobj, &eye);
         viewport.xmin = 0x76;
-        viewport.xmax = 0x230;
         viewport.ymin = 0x4E;
+        viewport.xmax = 0x230;
         viewport.ymax = 0x19C;
         HSD_CObjSetViewport(cobj, &viewport);
         viewport.ymin = 0x60;
@@ -1205,28 +1213,36 @@ void un_803147C4(void)
 void un_803148E4(s32 arg0)
 {
     TyListState* state = (TyListState*) un_804A2AC0;
-    TyModeState* mode = (TyModeState*) un_804A284C;
-    TyArchiveData* archive = un_804D6ED8;
+    TyListGobjEntry* entry = (TyListGobjEntry*) &state->gobj_2AC;
+    TyArchiveData* archive;
+    HSD_GObj** gobj_2C4;
     PAD_STACK(8);
+
+    gobj_2C4 = &state->gobj_2C4;
+    archive = un_804D6ED8;
 
     if (un_GetTrophyTotal() != 0) {
         if (arg0 != 0) {
-            un_804A284C[0x12A] = state->selectedIdx;
-            un_804A284C[0x12B] = un_804D6EDC[state->selectedIdx];
+            TyModeState* mode = (TyModeState*) un_804A284C;
+            ((s16*) un_804A284C)[0x12A] = state->selectedIdx;
+            ((s16*) un_804A284C)[0x12B] = un_804D6EDC[state->selectedIdx];
             mode->x1 = state->x29B;
             mode->x2 = state->x29C;
-            mode->x3 = state->x2B8;
+            mode->x3 = entry->x0C;
         } else {
             if (un_GetTrophyTotal() != 0) {
                 s16 val = un_804D6EDC[state->selectedIdx];
                 un_803067BC(0, 0);
                 state->selectedIdx = un_803062BC(val);
             }
-            un_804A284C[0x12A] = state->selectedIdx;
-            un_804A284C[0x12B] = un_804D6EDC[state->selectedIdx];
-            mode->x1 = 0;
-            mode->x2 = 0;
-            mode->x3 = 0;
+            {
+                TyModeState* mode = (TyModeState*) un_804A284C;
+                ((s16*) un_804A284C)[0x12A] = state->selectedIdx;
+                ((s16*) un_804A284C)[0x12B] = un_804D6EDC[state->selectedIdx];
+                mode->x1 = 0;
+                mode->x2 = 0;
+                mode->x3 = 0;
+            }
         }
 
         if (un_80304924(un_804D6EDC[state->selectedIdx]) != 0) {
@@ -1252,18 +1268,18 @@ void un_803148E4(s32 arg0)
         archive->gobj = NULL;
     }
 
-    if (state->gobj_2C4 != NULL && arg0 != 0) {
-        HSD_GObjPLink_80390228(state->gobj_2C4);
+    if (*gobj_2C4 != NULL && arg0 != 0) {
+        HSD_GObjPLink_80390228(*gobj_2C4);
     }
 
-    if (state->gobj_2AC != NULL) {
-        HSD_GObjProc_8038FED4(state->gobj_2AC);
+    if (entry->x0 != NULL) {
+        HSD_GObjProc_8038FED4(entry->x0);
         if (arg0 != 0) {
-            HSD_GObjPLink_80390228(state->gobj_2AC);
+            HSD_GObjPLink_80390228(entry->x0);
         }
     }
 
-    if (state->gobj_2B0 != NULL && arg0 != 0) {
-        HSD_GObjPLink_80390228(state->gobj_2B0);
+    if (entry->x4 != NULL && arg0 != 0) {
+        HSD_GObjPLink_80390228(entry->x4);
     }
 }

@@ -1003,6 +1003,7 @@ void mn_8022A440(HSD_GObj* gp, HSD_JObj* root, MainMenuSelection selection)
     lb_8001204C(root, sp24, mn_803EAE7C, 7);
     r29 = sp24[1];
     flow = &mn_804A04F0;
+    flow = flow; // Permuter slop
     HSD_JObjReqAnimAll(r29, 0.0F);
     HSD_JObjAnimAll(r29);
     HSD_JObjReqAnim(r29,
@@ -1235,7 +1236,10 @@ void fn_8022AFEC(HSD_GObj* gp)
 
     var_r26 = 0;
     selection_changed = false;
-    data = gp->user_data;
+    {
+        MainMenuData* tmp_data = gp->user_data;
+        data = tmp_data;
+    }
     state = data->state;
     if ((state == MENU_STATE_5 || state <= MENU_STATE_ENTER_TO ||
          state == MENU_STATE_EXIT_TO) &&
@@ -1329,15 +1333,21 @@ void fn_8022AFEC(HSD_GObj* gp)
         }
         if ((u8) selection_changed != false) {
             /// @todo problem spot
-            mn_80229F60(
-                gp,
-                sp20[mn_80229A04_dontinline(mn_804A04F0.cur_menu,
-                                            mn_804A04F0.hovered_selection)],
-                mn_804A04F0.hovered_selection);
-            mn_8022A440(gp,
-                        sp20[mn_80229A04_dontinline(mn_804A04F0.cur_menu,
-                                                    data->hovered_selection)],
-                        data->hovered_selection);
+            {
+                MenuKind cur_menu = mn_804A04F0.cur_menu;
+                mn_80229F60(
+                    gp,
+                    sp20[mn_80229A04_dontinline(
+                        cur_menu, mn_804A04F0.hovered_selection)],
+                    mn_804A04F0.hovered_selection);
+            }
+            {
+                MenuKind cur_menu = mn_804A04F0.cur_menu;
+                mn_8022A440(gp,
+                            sp20[mn_80229A04_dontinline(
+                                cur_menu, data->hovered_selection)],
+                            data->hovered_selection);
+            }
         }
         if ((u8) selection_changed != false) {
             hovered_selection = mn_804A04F0.hovered_selection;

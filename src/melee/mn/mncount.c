@@ -31,6 +31,10 @@
 #define NUM_CHARACTERS 25
 #define MAX_SCROLL 20
 
+AnimLoopSettings mnCount_803EFA88[2] = {
+    { 0.0f, 19.0f, -0.1f },
+    { 20.0f, 29.0f, -0.1f },
+};
 static AnimLoopSettings mnCount_803EFAA0 = { 0.0f, 199.0f, 0.0f };
 static StaticModelDesc model_desc;
 static HSD_GObj* menu_gobj;
@@ -103,9 +107,8 @@ static inline void inline_free_text(HSD_GObj* gobj)
     HSD_SisLib_803A5CC4(userdata->title);
 }
 
-static inline void mnCount_8025186C_inline(HSD_GObj* gobj)
+static inline void mnCount_8025186C_inline(MnCountData* userdata)
 {
-    MnCountData* userdata = GET_MNCOUNT(gobj);
     HSD_Text* text;
     if (userdata->title != NULL) {
         HSD_SisLib_803A5CC4(userdata->title);
@@ -436,6 +439,11 @@ int mnCount_GetRowValue_Character(mnCount_row row)
     }
 }
 
+static inline unsigned int mnCount_GetCombinedVSPlayTimeValue(void)
+{
+    return *(unsigned int*) gmMainLib_GetCombinedVSPlayTime();
+}
+
 unsigned int mnCount_GetRowValue_Number(int row)
 {
     unsigned int ret;
@@ -456,7 +464,7 @@ unsigned int mnCount_GetRowValue_Number(int row)
         ret = *(unsigned int*) gmMainLib_GetVsPlayTime();
         break;
     case COMBINED_VS_PLAY_TIME:
-        ret = *(unsigned int*) gmMainLib_GetCombinedVSPlayTime();
+        ret = mnCount_GetCombinedVSPlayTimeValue();
         break;
     case VS_PLAY_MATCH_TOTAL:
         ret = gm_GetVsPlayMatchTotal();
@@ -526,7 +534,6 @@ void mnCount_CreateRow(HSD_GObj* gobj, int visible_row, mnCount_row data_row)
     unsigned int row_value;
     int row_value_2;
     float y;
-    char buf1[8];
     char buf2[8];
     static GXColor text_color = { 0xAA, 0xAA, 0xAA, 0xFF };
     if (userdata->labels[visible_row] != NULL) {
@@ -541,7 +548,10 @@ void mnCount_CreateRow(HSD_GObj* gobj, int visible_row, mnCount_row data_row)
     text->text_color = text_color;
     HSD_SisLib_803A6368(text, mnCount_sis_idx[data_row]);
     if (userdata->values[visible_row] != NULL) {
-        HSD_SisLib_803A5CC4(userdata->values[visible_row]);
+        {
+            HSD_Text* volatile value_text = userdata->values[visible_row];
+            HSD_SisLib_803A5CC4(value_text);
+        }
         userdata->values[visible_row] = NULL;
     }
     text = HSD_SisLib_803A6754(0, 1);
@@ -552,6 +562,7 @@ void mnCount_CreateRow(HSD_GObj* gobj, int visible_row, mnCount_row data_row)
     text->text_color = mn_804D4B64;
     text->default_alignment = 2;
     if (inline_is_row_time(data_row)) {
+        char buf1[8];
         text->font_size.x = 0.03f;
         text->font_size.y = 0.03f;
         row_value = mnCount_GetRowValue_Number(data_row);
@@ -564,7 +575,7 @@ void mnCount_CreateRow(HSD_GObj* gobj, int visible_row, mnCount_row data_row)
         text->font_size.y = 0.03f;
         row_value_2 = mnCount_GetRowValue_Character(data_row);
         if (row_value_2 == NUM_CHARACTERS) {
-            HSD_SisLib_803A6B98(text, 0.0f, 0.0f, "－");
+            HSD_SisLib_803A6B98(text, 0.0f, 0.0f, "\201| ");
         } else {
             gm_80160B40(text, gm_8016400C(row_value_2), 0);
         }
@@ -768,36 +779,77 @@ static void mnCount_InitUserData_noinline(MnCountData* userdata)
     mnCount_InitUserData(userdata);
 }
 
+static char lbl_803EFB60[0xA8] =
+    "Can't get user_data.\n\0\0\0"
+    "mncount.c\0\0\0"
+    "user_data\0\0\0"
+    "MenMainConCo_Top_joint\0\0"
+    "MenMainConCo_Top_animjoint\0\0"
+    "MenMainConCo_Top_matanim_joint\0\0"
+    "MenMainConCo_Top_shapeanim_joint";
+
+#define mnCount_UserDataAllocError (lbl_803EFB60)
+#define mnCount_AssertFile (lbl_803EFB60 + 0x18)
+#define mnCount_UserDataAssert (lbl_803EFB60 + 0x24)
+#define mnCount_AssetJoint (lbl_803EFB60 + 0x30)
+#define mnCount_AssetAnimJoint (lbl_803EFB60 + 0x48)
+#define mnCount_AssetMatAnimJoint (lbl_803EFB60 + 0x64)
+#define mnCount_AssetShapeAnimJoint (lbl_803EFB60 + 0x84)
+
+static inline HSD_GObj* mnCount_CreateMenuGObj(void)
+{
+    return GObj_Create(6, 7, 0x80);
+}
+
+static inline void mnCount_InitGObjUserData(HSD_GObj* gobj)
+{
+    MnCountData* user_data;
+
+    user_data = HSD_MemAlloc(sizeof(MnCountData));
+    if (user_data == NULL) {
+        OSReport(mnCount_UserDataAllocError);
+        __assert(mnCount_AssertFile, 0x512, mnCount_UserDataAssert);
+    }
+    mnCount_InitUserData_noinline(user_data);
+    GObj_InitUserData(gobj, 0, HSD_Free, user_data);
+}
+
 void mnCount_Create(void)
 {
     HSD_GObj* gobj;
-    MnCountData* userdata;
     HSD_GObjProc* proc;
+    HSD_Archive* archive;
 
     mn_804D6BC8.cooldown = 5;
     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
     mn_804A04F0.cur_menu = MENU_KIND_RECORDS_MISC;
     mn_804A04F0.hovered_selection = 0;
 
+    archive = mn_804D6BB8;
     lbArchive_LoadSections(
-        mn_804D6BB8, (void**) &model_desc.joint, "MenMainConCo_Top_joint",
-        &model_desc.animjoint, "MenMainConCo_Top_animjoint",
-        &model_desc.matanim_joint, "MenMainConCo_Top_matanim_joint",
-        &model_desc.shapeanim_joint, "MenMainConCo_Top_shapeanim_joint", 0);
+        archive, (void**) &model_desc.joint, mnCount_AssetJoint,
+        &model_desc.animjoint, mnCount_AssetAnimJoint,
+        &model_desc.matanim_joint, mnCount_AssetMatAnimJoint,
+        &model_desc.shapeanim_joint, mnCount_AssetShapeAnimJoint, 0);
 
-    gobj = GObj_Create(6, 7, 0x80);
+    gobj = mnCount_CreateMenuGObj();
     menu_gobj = gobj;
 
-    userdata = HSD_MemAlloc(sizeof(MnCountData));
-    HSD_ASSERTREPORT(0x512, userdata, "Can't get user_data.\n");
-    mnCount_InitUserData_noinline(userdata);
-    GObj_InitUserData(gobj, 0, HSD_Free, userdata);
+    mnCount_InitGObjUserData(gobj);
 
     proc = HSD_GObj_SetupProc(gobj, fn_80251640, 0);
     proc->flags_3 = HSD_GObj_804D783C;
-    mnCount_8025186C_inline(gobj);
+    mnCount_8025186C_inline(GET_MNCOUNT(gobj));
 
     gobj = GObj_Create(0, 1, 0x80);
     proc = HSD_GObj_SetupProc(gobj, mnCount_HandleUserInput, 0);
     proc->flags_3 = HSD_GObj_804D783C;
 }
+
+#undef mnCount_UserDataAllocError
+#undef mnCount_AssertFile
+#undef mnCount_UserDataAssert
+#undef mnCount_AssetJoint
+#undef mnCount_AssetAnimJoint
+#undef mnCount_AssetMatAnimJoint
+#undef mnCount_AssetShapeAnimJoint
