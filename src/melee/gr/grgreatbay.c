@@ -523,7 +523,8 @@ void grGreatBay_801F545C(Ground_GObj* gobj)
 
 void grGreatBay_801F5460(Ground_GObj* gobj)
 {
-    HSD_JObj* jobj = gobj->hsd_obj;
+    HSD_JObj* jobj_tmp = gobj->hsd_obj;
+    HSD_JObj* jobj = jobj_tmp;
     Ground* gp = GET_GROUND(gobj);
 
     Ground_801C2ED0(jobj, gp->map_id);

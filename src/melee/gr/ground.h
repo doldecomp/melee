@@ -139,7 +139,7 @@
 /* 1C5740 */ void Ground_801C5740(s32);
 /* 1C5750 */ void Ground_801C5750(void);
 /* 1C5764 */ s32 Ground_801C5764(void);
-/* 1C5774 */ s16 Ground_801C5774(void);
+/* 1C5774 */ s32 Ground_801C5774(void);
 /* 1C5784 */ void Ground_801C5784(s32);
 /* 1C5794 */ s32 Ground_801C5794(void);
 /* 1C57A4 */ HSD_GObj* Ground_801C57A4(void);
