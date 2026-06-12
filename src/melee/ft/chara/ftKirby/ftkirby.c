@@ -2905,7 +2905,7 @@ Fighter_CostumeStrings* ftKb_Init_803CB3E8[] = {
     NULL,
 };
 
-s8 ftKb_Init_803CB46C[FTKIND_MAX] = {
+u8 ftKb_Init_803CB46C[FTKIND_MAX] = {
     32, 33, 38, 39, -1, 41, 35, 21, 42, 45, 46, 46, 36, 34, 40, 43, 44,
     37, 20, 21, 35, 32, 33, 36, -1, 47, 48, -1, -1, -1, -1, -1, -1,
 };
@@ -3240,14 +3240,14 @@ void ftKb_SpecialN_800EEC34(int arg0, int arg1, int arg2)
     }
 }
 
-void ftKb_SpecialN_800EED50(s32 arg0, s32 arg1)
+static inline void ftKb_SpecialN_800EED50_inline(s32 arg0, s32 arg1)
 {
     if (arg0 != -1 && arg0 != 4) {
-        ftKirby_CopyName* copy = &ftKb_Init_803CA9D0[arg0];
-        if (copy->filename != NULL) {
+        if (ftKb_Init_803CA9D0[arg0].filename != NULL) {
             HSD_Archive** entry = &((HSD_Archive**) &ft_80459B88)[arg0];
             if (*entry == NULL) {
-                lbArchive_80017040(NULL, copy->filename, entry, copy->name, 0);
+                lbArchive_80017040(NULL, ftKb_Init_803CA9D0[arg0].filename,
+                                   entry, ftKb_Init_803CA9D0[arg0].name, 0);
             }
         }
         {
@@ -3274,6 +3274,11 @@ void ftKb_SpecialN_800EED50(s32 arg0, s32 arg1)
         }
         efAsync_LoadSync((u8) ftKb_Init_803CB46C[arg0]);
     }
+}
+
+void ftKb_SpecialN_800EED50(s32 arg0, s32 arg1)
+{
+    ftKb_SpecialN_800EED50_inline(arg0, arg1);
 }
 
 void ftKb_Init_UnkMotionStates5(void)
@@ -3348,6 +3353,28 @@ void ftKb_SpecialN_800EF040(Fighter_GObj* gobj, int arg1, KirbyHatStruct* hat)
 
 extern char ftKb_Init_804D3DAC[2];
 
+static inline void ftKb_SpecialN_800EF0E4_insert_joint_refs(
+    s32 total_dobjs, HSD_Joint* root, Fighter* fp, s32* part_off,
+    HSD_Joint** sp28, s32* sp24)
+{
+    *part_off = total_dobjs << 4;
+    *sp28 = root;
+    *sp24 = 0;
+    while (*sp28 != NULL) {
+        FighterBone* parts = fp->parts;
+        FighterBone* bone = (FighterBone*) ((u8*) parts + *part_off);
+        while (!bone->flags_b1) {
+            bone = (FighterBone*) ((u8*) bone + 0x10);
+            *part_off += 0x10;
+        }
+        HSD_IDInsertToTable(NULL, (u32) *sp28,
+                            ((FighterBone*) ((u8*) parts + *part_off))->joint);
+        *part_off += 0x10;
+        ftAnim_GetNextJointInTree(sp28, sp24);
+    }
+    *sp28 = root;
+}
+
 void ftKb_SpecialN_800EF0E4(Fighter_GObj* gobj, int arg1, u8* arg2)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -3368,22 +3395,8 @@ void ftKb_SpecialN_800EF0E4(Fighter_GObj* gobj, int arg1, u8* arg2)
     ftPartsPObjSetDefaultClass();
     root = ((HSD_Joint**) ftKb_Init_803C9FC8[arg1])[fp->x619_costume_id * 2];
     total_dobjs = 0;
-    part_off = total_dobjs << 4;
-    sp28 = root;
-    sp24 = 0;
-    while (sp28 != NULL) {
-        FighterBone* parts = fp->parts;
-        FighterBone* bone = (FighterBone*) ((u8*) parts + part_off);
-        while (!bone->flags_b1) {
-            bone = (FighterBone*) ((u8*) bone + 0x10);
-            part_off += 0x10;
-        }
-        HSD_IDInsertToTable(NULL, (u32) sp28,
-                            ((FighterBone*) ((u8*) parts + part_off))->joint);
-        part_off += 0x10;
-        ftAnim_GetNextJointInTree(&sp28, &sp24);
-    }
-    sp28 = root;
+    ftKb_SpecialN_800EF0E4_insert_joint_refs(total_dobjs, root, fp, &part_off,
+                                             &sp28, &sp24);
     sp24 = 0;
     byte_off = total_dobjs << 2;
     part_off = 0;
@@ -3446,7 +3459,7 @@ void ftKb_SpecialN_800EF0E4(Fighter_GObj* gobj, int arg1, u8* arg2)
     }
     fp->fv.gw.x2240_chefVar1 = total_dobjs;
     ftPartsPObjClearDefaultClass();
-    PAD_STACK(8);
+    PAD_STACK(4);
 }
 
 void ftKb_SpecialN_800EF35C(Fighter_GObj* gobj, int arg1, u8* arg2)
@@ -3457,8 +3470,9 @@ void ftKb_SpecialN_800EF35C(Fighter_GObj* gobj, int arg1, u8* arg2)
         HSD_MatAnimJoint* matanim;
     }* costume_data = (void*) ftKb_Init_803C9FC8[arg1];
     HSD_MatAnimJoint* matanimjoint = costume_data[fp->x619_costume_id].matanim;
-    int idx = 0;
     int i = 0;
+    int idx = 0;
+    PAD_STACK(4);
     while (matanimjoint != NULL) {
         if (ftParts_8007506C(fp->kind, i) != 0) {
             i++;
@@ -3473,7 +3487,6 @@ void ftKb_SpecialN_800EF35C(Fighter_GObj* gobj, int arg1, u8* arg2)
             ftAnim_GetNextMatAnimJointInTree(&matanimjoint, &idx);
         }
     }
-    PAD_STACK(8);
 }
 
 void ftKb_SpecialN_800EF438(Fighter_GObj* gobj, KirbyHatStruct* hat)

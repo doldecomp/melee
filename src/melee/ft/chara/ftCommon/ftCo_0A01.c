@@ -2886,8 +2886,6 @@ Item* ftCo_800A61D8(Fighter* fp)
     Item* ip;
     f32 best;
     f32 dist;
-    s32 relevant;
-    s32 prio;
 
     PAD_STACK(8);
 
@@ -2898,35 +2896,31 @@ Item* ftCo_800A61D8(Fighter* fp)
     closest = NULL;
     for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
         ip = GET_ITEM(cur);
-        if (Item_IsGrabbable((Item_GObj*) cur)) {
-            if (ip->kind == It_Kind_Heart) {
-                relevant = 1;
-            } else if (ip->kind == It_Kind_Tomato) {
-                relevant = 1;
-            } else if (ip->kind == It_Kind_Foods) {
-                relevant = 1;
-            } else {
-                relevant = 0;
-            }
-            if (relevant != 0) {
-                if (!inlineD0_it(fp, ip)) {
-                    if (ip->kind < 0x23) {
-                        prio = ftCo_803C5A68[ip->kind];
-                        if (prio >= data->x2C) {
-                            if (closest == NULL) {
-                                closest = ip;
-                                best = ftCo_800A648C_inline0(fp, ip);
-                            } else if (prio >=
-                                       ftCo_803C5A68[closest->kind]) {
-                                dist = ftCo_800A648C_inline0(fp, ip);
-                                if (best > dist) {
-                                    best = dist;
-                                    closest = ip;
-                                }
-                            }
-                        }
-                    }
-                }
+        if (!Item_IsGrabbable((Item_GObj*) cur)) {
+            continue;
+        }
+        if (!ftCo_800A5908(ip)) {
+            continue;
+        }
+        if (inlineD0_it(fp, ip)) {
+            continue;
+        }
+        if (ip->kind >= 0x23) {
+            continue;
+        }
+        if (ftCo_803C5A68[ip->kind] < data->x2C) {
+            continue;
+        }
+        if (closest == NULL) {
+            closest = ip;
+            best = itemDist(fp, ip);
+            continue;
+        }
+        if (ftCo_803C5A68[ip->kind] >= ftCo_803C5A68[closest->kind]) {
+            dist = itemDist(fp, ip);
+            if (best > dist) {
+                best = dist;
+                closest = ip;
             }
         }
     }
@@ -4320,6 +4314,11 @@ static inline bool is_small(float x)
     return false;
 }
 
+static inline float ftCo_800A9904_inline0(Fighter* fp)
+{
+    return fp->co_attrs.terminal_vel;
+}
+
 void ftCo_800A9904(Fighter* fp)
 {
     struct Fighter_x1A88_t* temp_r31 = &fp->x1A88;
@@ -4368,7 +4367,7 @@ void ftCo_800A9904(Fighter* fp)
             var_f4 =
                 fp->cur_pos.y +
                 (fp->pos_delta.y * var_f5 - 0.5 * (fp->co_attrs.grav * sqrtf(var_f5)) -
-                 ((var_f0 - var_f5) * fp->co_attrs.terminal_vel));
+                 ((var_f0 - var_f5) * ftCo_800A9904_inline0(fp)));
         }
         {
             int stick = 4.7000003F * (temp_r31->level + 1) + 80.0f;
@@ -4987,17 +4986,20 @@ void ftCo_800AB224(Fighter* fp)
     f32 var_f31;
 
     Fighter* temp_r0;
+    mp_UnkStruct0* temp_r29;
+    struct Fighter_x1A88_t* temp_r28;
     s32 var_r0_5;
     s32 var_r0_6;
 
-    u8 _[0x48];
+    u8 _[0x3C];
+    Vec3 sp44;
 
     u32 sp40;
     int sp3C;
     Vec3 sp30;
     Vec3 sp24;
 
-    PAD_STACK(0xC);
+    PAD_STACK(0x18);
 
     temp_r31 = &fp->x1A88;
     if (temp_r31->xFA_b6) {
@@ -5036,7 +5038,25 @@ void ftCo_800AB224(Fighter* fp)
         }
     } else {
     block_49:
-        if (ftCo_800A21FC(fp)) {
+        temp_r28 = &fp->x1A88;
+        if (fp->ground_or_air == GA_Air) {
+            var_r0_5 = 0;
+        } else {
+            temp_r29 = mpIsland_8005AB54(fp->coll_data.floor.index);
+            if (temp_r29 == NULL) {
+                var_r0_5 = 0;
+            } else {
+                sp44.x = temp_r28->x54.x;
+                sp44.y = 5.0 + temp_r28->x54.y;
+                sp44.z = 0.0f;
+                if (mpIsland_8005AC14(&sp44, -10.0f) == temp_r29) {
+                    var_r0_5 = 1;
+                } else {
+                    var_r0_5 = 0;
+                }
+            }
+        }
+        if (var_r0_5 != 0) {
             ftCo_800AA42C(fp);
             return;
         }
