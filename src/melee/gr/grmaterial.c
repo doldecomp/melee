@@ -285,12 +285,12 @@ static void fn_801C8EF8(HSD_MObj* mobj, u32 rendermode)
     Ground* gp;
     HSD_TObj* tobj;
     HSD_TObj** cur_tobj;
-    s32 reg1;
-    s32 reg2;
-    s32 alpha_reg;
-    s32 var_r24;
     s32 var_r23;
     s32 var_r0;
+    s32 alpha_reg;
+    s32 reg2;
+    s32 var_r24;
+    s32 reg1;
     u32 mobj_rendermode;
     char* base = (char*) &grMaterial_803E0A20;
     PAD_STACK(0x74);
@@ -336,13 +336,13 @@ static void fn_801C8EF8(HSD_MObj* mobj, u32 rendermode)
                 OSReport(base + 0x114);
                 __assert(base + 0xF4, 0x7A, grMaterial_804D4568);
             }
-            var_r24 = 1;
-            sp_cnst.comp = 1;
-            sp_cnst.ctype = 0;
+            sp_cnst.comp = var_r24 = 1;
+            sp_cnst.ctype = var_r0 = 0;
             sp_cnst.reg = (u8) reg1;
             sp_cnst.val = &gp->x6C;
             HSD_TExpSetReg((HSD_TExp*) &sp_cnst);
             if (reg1 < 4) {
+                !reg1;
             } else {
                 var_r24 = 0;
             }
@@ -356,9 +356,8 @@ static void fn_801C8EF8(HSD_MObj* mobj, u32 rendermode)
                 OSReport(base + 0x114);
                 __assert(base + 0xF4, 0x88, grMaterial_804D4568);
             }
-            var_r23 = 1;
-            sp_cnst.comp = 1;
-            sp_cnst.ctype = 0;
+            sp_cnst.comp = var_r23 = 1;
+            sp_cnst.ctype = var_r0 = 0;
             sp_cnst.reg = (u8) reg2;
             sp114.r = gp->x6C.a;
             sp114.g = gp->x6C.a;
@@ -368,6 +367,7 @@ static void fn_801C8EF8(HSD_MObj* mobj, u32 rendermode)
             sp_tevdesc.u.tevconf.clr_b = lb_8000CC8C(reg1);
             sp_tevdesc.u.tevconf.clr_c = lb_8000CC8C(reg2);
             if (reg1 < 4) {
+                !reg1;
             } else {
                 var_r23 = 0;
             }

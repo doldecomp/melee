@@ -784,6 +784,12 @@ static inline void inlineB2(Fighter_GObj* gobj)
     ftCommon_800804FC(fp);
 }
 
+/// @todo Inline depth.
+static inline bool inlineB3(Fighter_GObj* gobj)
+{
+    return inlineB0(gobj);
+}
+
 void ftCo_8008EC90(Fighter_GObj* gobj)
 {
     bool ret0 = false;
@@ -866,7 +872,7 @@ void ftCo_8008EC90(Fighter_GObj* gobj)
                                 fp->dmg.x183C_applied;
                             other_fp->x1960_vibrateMult =
                                 fp->x1960_vibrateMult;
-                            if (inlineB0(gobj)) {
+                            if (inlineB3(gobj)) {
                                 ftCo_8008E9D0(gobj);
                             }
                             fp->x1828 = 2;

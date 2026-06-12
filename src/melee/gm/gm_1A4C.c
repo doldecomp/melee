@@ -238,6 +238,42 @@ void gm_801A8114(HSD_JObj* arg0, int arg1)
     HSD_JObjSetScaleZ(transJobj, scale);
 }
 
+static char lbl_803DB49C[][0xC] = {
+    "Captain  ",
+    "Donkey   ",
+    "Fox      ",
+    "GameWatch",
+    "Kirby    ",
+    "Koopa    ",
+    "Link     ",
+    "Luigi    ",
+    "Mario    ",
+    "Mars     ",
+    "Mewtwo   ",
+    "Ness     ",
+    "Peach    ",
+    "Pikachu  ",
+    "PopoNana ",
+    "Purin    ",
+    "Samus    ",
+    "Yoshi    ",
+    "Ze->Se   ",
+    "Se->Ze   ",
+    "Falco    ",
+    "Clink    ",
+    "Drmario  ",
+    "Emblem   ",
+    "Pichu    ",
+    "Ganon    ",
+    "MasterH  ",
+    "Boy      ",
+    "Girl     ",
+    "GKoops   ",
+    "CrezyH   ",
+    "Sandbag  ",
+    "POPO     ",
+};
+
 void fn_801A851C(HSD_GObj* gobj)
 {
     HSD_JObjAnimAll(GET_JOBJ(gobj));
@@ -258,8 +294,8 @@ void gm_801A85E4(HSD_JObj* jobj, s32 arg1, s32 arg2)
 
     if (arg1 <= 4) {
         arg2 = 4 - arg1;
-        temp_idx = arg2 + 2;
-        idx = temp_idx;
+        idx = arg2 + 2;
+        temp_idx = idx;
         if (temp_idx > 4) {
             arg2 = 4 - idx;
             idx = arg2 + 2;
@@ -378,7 +414,7 @@ void gm_801A9094(void)
     HSD_GObj* gobj;
     HSD_JObj* root;
     HSD_JObj* child;
-    PAD_STACK(0x88);
+    PAD_STACK(0x84);
 
     gm_801A8D54(sp8C);
     i = 0x19;
@@ -400,11 +436,11 @@ void gm_801A9094(void)
             HSD_JObjSetScaleY(root, 1.8f);
             HSD_JObjSetScaleZ(root, 1.8f);
             if (joint == NULL) {
-                __assert("jobj.h", 0x2F5U, "joint");
+                __assert("gmregenddisp.c", 0x2F5U, "joint");
             }
             child = HSD_JObjLoadJoint(joint);
             if (child == NULL) {
-                __assert("jobj.h", 0x2F7U, "jobj");
+                __assert("gmregenddisp.c", 0x2F7U, "jobj");
             }
             HSD_JObjAddChild(root, child);
             HSD_JObjAddAnimAll(child, NULL, matanim, NULL);
@@ -473,14 +509,14 @@ void gm_801A8114_inline(HSD_JObj* arg0, int arg1)
 void gm_801A9630(void)
 {
     int i;
-    HSD_GObj* gobj;
-    HSD_GObj* cam_gobj;
     HSD_CObj* cobj;
     HSD_Fog* fog;
-    HSD_LObj* lobj;
+    HSD_GObj* cam_gobj;
+    HSD_GObj* gobj;
     HSD_JObj* jobj;
     HSD_JObj* child;
     HSD_JObj* target;
+    HSD_LObj* lobj;
     PAD_STACK(8);
 
     for (i = 0; i < 0x1A; i++) {
@@ -568,7 +604,11 @@ void gm_801A9630(void)
     // Walk JObj tree to find constraint target (3 levels deep)
     child = HSD_JObjGetChild(GET_JOBJ(gm_804D67BC));
     target = HSD_JObjGetChild(child);
-    target = HSD_JObjGetChild(target);
+    if (target == NULL) {
+        target = NULL;
+    } else {
+        target = target->child;
+    }
 
     lb_8000C1C0(jobj, target);
     lb_8000C290(jobj, target);

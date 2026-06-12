@@ -70,7 +70,7 @@ static struct {
     s32 unk18;
     s32 unk1C;
     s32 unk20;
-    s32 unk24;
+    f32 unk24;
     f32 unk28;
     s32 unk2C;
     s32 unk30;
@@ -331,10 +331,11 @@ bool grFlatzone_802174E4(Ground_GObj* gobj)
 
 void grFlatzone_802176BC(Ground_GObj* gobj)
 {
-    s32 var_r29 = 0;
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
+    s32 var_r29 = 0;
     Vec3 pos = grFz_803B8430;
+    PAD_STACK(4);
     if (gp->gv.flatzone.xC4 != 0) {
         if (gp->gv.flatzone.xD0 == 3) {
             HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
@@ -344,10 +345,10 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
             }
         }
         gp->gv.flatzone.xC4 = 0;
-        gp->gv.flatzone.xC8 = SIGN_RANDOM();
+        gp->gv.flatzone2.xC8 = SIGN_RANDOM();
         gp->gv.flatzone.xD0 = 0;
         gp->gv.flatzone.xD4 = grFz_804D6AB0->unk20;
-        if (gp->gv.flatzone.xC8 == 1.0f) {
+        if (gp->gv.flatzone2.xC8 == 1.0f) {
             pos.x = grFz_804D6AB0->unk24;
             gp->gv.flatzone.xD4 = (s32) ((f32) gp->gv.flatzone.xD4 * 0.5f);
         } else {
@@ -383,7 +384,7 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
                 grFz_804D6AB0->unk2C *
                 (grFz_804D6AB0->unk30 +
                  rand_int_inner(grFz_804D6AB0->unk34 - grFz_804D6AB0->unk30));
-            if (gp->gv.unk.xC8 == 1.0f) {
+            if (gp->gv.flatzone2.xC8 == 1.0f) {
                 grAnime_801C8138(gobj, gp->map_id, 0);
             } else {
                 grAnime_801C8138(gobj, gp->map_id, 2);
@@ -417,12 +418,12 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
             gp->gv.unk.xD0 = 3;
             gp->gv.unk.xD4 = grFz_804D6AB0->unk3C;
             HSD_JObjGetTranslation(jobj, &pos);
-            other_x = (36.0f * gp->gv.unk.xC8) + pos.x;
+            other_x = (36.0f * gp->gv.flatzone2.xC8) + pos.x;
             pos.x = other_x;
             pos.y -= 27.0f;
-            other_z = 5.0f + pos.z;
-            pos.z -= 5.0f;
-            if (mpCheckMultiple(other_x, other_z, pos.x, pos.z, &pos_2, &ret,
+            other_z = 5.0f + pos.y;
+            pos.y -= 5.0f;
+            if (mpCheckMultiple(other_x, other_z, pos.x, pos.y, &pos_2, &ret,
                                 0, 0, 1, -1, 0x32) != 0)
             {
                 var_r0 = ret;
@@ -456,7 +457,7 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
             if (gobj != NULL) {
                 Ground* gp = GET_GROUND(gobj);
                 if (gp != NULL) {
-                    gp->gv.flatzone.xC4 = 1;
+                    gp->gv.flatzone.xC7 = 1;
                 }
             }
         }

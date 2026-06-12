@@ -53,6 +53,7 @@ struct lbl_803DA2E0_t {
     f32 x20[0x29];
 };
 extern struct lbl_803DA2E0_t lbl_803DA2E0;
+extern char lbl_803DA0D0[];
 
 extern MatchEnd gm_80477738;
 extern s32 lbl_803B7D3C[4];
@@ -66,22 +67,24 @@ static inline TmData* GetTmData(void)
 
 void gm_8019B8C4_OnEnter(void* arg0)
 {
+    char* strbase = lbl_803DA0D0;
+
     lbl_804D6668 = NULL;
     lbl_804D6664 = NULL;
     lbl_804D6680[0] = 0;
     lbl_804D6680[2] = 0;
     gm_8018F634();
     lbl_804D6660 = lbArchive_80016DBC("GmTou1p", &lbl_804D666C,
-                                      "ScGamTour_scene_data", 0);
+                                      strbase + 0x190, 0);
     lbl_804D6638 = lbArchive_80016DBC(
-        "TmBox.dat", &lbl_804771B8.box2, "tournament_box2_array",
-        &lbl_804771B8.box3, "tournament_box3_array", &lbl_804771B8.box4,
-        "tournament_box4_array", 0);
+        strbase + 0x1A8, &lbl_804771B8.box2, strbase + 0x1B4,
+        &lbl_804771B8.box3, strbase + 0x1CC, &lbl_804771B8.box4,
+        strbase + 0x1E4, 0);
     lbl_804D6664 = lbArchive_80016DBC("GmTou3p", &lbl_804D6670,
-                                      "ScGamTour_scene_data", 0);
+                                      strbase + 0x190, 0);
     lbl_804D6668 = lbArchive_80016DBC("GmTou4p", &lbl_804D6674,
-                                      "ScGamTour_scene_data", 0);
-    HSD_SisLib_803A62A0(0, fn_8018F5F0(), "SIS_TournamentData");
+                                      strbase + 0x190, 0);
+    HSD_SisLib_803A62A0(0, fn_8018F5F0(), strbase + 0x1FC);
     if (HSD_Randi(2) != 0) {
         lbAudioAx_80023F28(0x5D);
         return;

@@ -58,15 +58,15 @@ struct un_804A1F58_x8_t {
     HSD_GObj* x0;
     HSD_Text* x4;
     unsigned int x8;
+    unsigned int xC;
+    unsigned char x10;
 };
 
-// TODO: sizeof(un_804A1F58) should be 0x80, see un_802FF498
-// change 0x80 to sizeof(un_804A1F58) when done
 /* 4A1F58 */ static struct un_804A1F58_t {
     unsigned int x0;
-    unsigned char x4;
-    struct un_804A1F58_x8_t x8;
-} un_804A1F58[7];
+    char pad_x4[4];
+    struct un_804A1F58_x8_t x8[6];
+} un_804A1F58;
 
 /// .sbss
 /* 4D6DA0 */ static void* un_804D6DA0;
@@ -169,9 +169,10 @@ void fn_802FF218(HSD_GObj* arg0)
 {
     int x;
     int y;
+    struct un_804A1F58_x8_t* thing;
     PAD_STACK(24);
     for (x = 0; x < 6; x++) {
-        if (un_804A1F58[x].x8.x0 == arg0) {
+        if (un_804A1F58.x8[x].x0 == arg0) {
             y = x;
             goto _done;
         }
@@ -179,9 +180,9 @@ void fn_802FF218(HSD_GObj* arg0)
     y = -1;
 _done:
     if (y >= 0) {
-        if (un_804A1F58[y].x0 == 1) {
-            HSD_SisLib_803A70A0(un_804A1F58[y].x8.x4, un_804A1F58[y].x8.x8,
-                                "");
+        thing = &un_804A1F58.x8[y];
+        if (thing->x10 == 1) {
+            HSD_SisLib_803A70A0(thing->x4, thing->x8, "");
         } else {
             int s;
             gm_8016B774();
@@ -189,10 +190,9 @@ _done:
             if (s > 9999) {
                 s = 9999;
             }
-            if (un_804A1F58[y].x0 != s) {
-                HSD_SisLib_803A70A0(un_804A1F58[y].x8.x4, un_804A1F58[y].x8.x8,
-                                    "%d", s);
-                un_804A1F58[y].x0 = s;
+            if (thing->xC != s) {
+                HSD_SisLib_803A70A0(thing->x4, thing->x8, "%d", s);
+                thing->xC = s;
             }
         }
     }
@@ -206,9 +206,9 @@ void un_802FF364(int slot)
     Vec3* ifAll;
     struct un_804A1F58_x8_t* thing;
     HSD_GObj* gobj;
-    struct un_804A1F58_t* base = un_804A1F58;
+    struct un_804A1F58_t* base = &un_804A1F58;
     PAD_STACK(0x10);
-    thing = &base[slot].x8;
+    thing = &base->x8[slot];
     ifAll = ifAll_802F3424(slot);
     gobj = thing->x0;
     if ((thing && thing) && thing) {
@@ -239,9 +239,8 @@ void un_802FF364(int slot)
 void un_802FF498(void)
 {
     PAD_STACK(8);
-    memzero(un_804A1F58,
-            0x80); // TODO: change to sizeof(un_802FF498) when size fixed
-    un_804A1F58->x0 =
+    memzero(&un_804A1F58, sizeof(un_804A1F58));
+    un_804A1F58.x0 =
         HSD_SisLib_803A611C(2, ifAll_802F3404(), 14, 15, 0, 11, 0, 19);
 }
 
@@ -250,39 +249,37 @@ void un_802FF4FC(void)
     int i;
     PAD_STACK(8);
     for (i = 0; i < 6; i++) {
-        if (un_804A1F58[i].x8.x0) {
-            HSD_GObjPLink_80390228(un_804A1F58[i].x8.x0);
+        if (un_804A1F58.x8[i].x0) {
+            HSD_GObjPLink_80390228(un_804A1F58.x8[i].x0);
         }
-        if (un_804A1F58[i].x8.x4) {
-            HSD_SisLib_803A5CC4(un_804A1F58[i].x8.x4);
+        if (un_804A1F58.x8[i].x4) {
+            HSD_SisLib_803A5CC4(un_804A1F58.x8[i].x4);
         }
     }
 }
 
-// Same issue as un_802FF620
 void un_802FF570(void)
 {
     int i;
     struct un_804A1F58_x8_t* thing;
     HSD_Text* text;
     for (i = 0; i < 6; i++) {
-        un_804A1F58[i + 1].x4 = 1;
-        text = (thing = &un_804A1F58[i].x8)->x4;
+        thing = &un_804A1F58.x8[i];
+        thing->x10 = 1;
+        text = thing->x4;
         if (text) {
             text->hidden = 1;
         }
     }
 }
 
-// Same issue as un_802FF570
 void un_802FF620(void)
 {
     int i;
-    struct un_804A1F58_t* base = un_804A1F58;
-
+    struct un_804A1F58_t* base = &un_804A1F58;
     for (i = 0; i < 6; i++) {
-        struct un_804A1F58_x8_t* thing = (0, &base[i].x8);
-        base[i + 1].x4 = 0;
+        struct un_804A1F58_x8_t* thing = (0, &base->x8[i]);
+        thing->x10 = 0;
 
         if (thing->x4) {
             un_802FF364(i);

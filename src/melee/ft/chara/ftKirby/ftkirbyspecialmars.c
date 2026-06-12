@@ -32,6 +32,8 @@
 #include <MSL/math.h>
 
 /* 10B2E8 */ static void fn_8010B2E8(Fighter_GObj* gobj);
+/* 4D3E00 */ extern char ftKb_Init_804D3E00;
+/* 4D3E08 */ extern char ftKb_Init_804D3E08;
 /* 4D9570 */ extern f32 ftKb_Init_804D9570;
 /* 4D9574 */ extern f32 ftKb_Init_804D9574;
 
@@ -120,9 +122,59 @@ void ftKb_SpecialNMs_8010B2FC(HSD_GObj* gobj)
     }
 }
 
+inline bool setupMtxIsDirty(HSD_JObj* jobj)
+{
+    bool result;
+
+    if (jobj == NULL) {
+        __assert(&ftKb_Init_804D3E00, 0x234, &ftKb_Init_804D3E08);
+    }
+
+    result = false;
+    if (!(jobj->flags & JOBJ_USER_DEF_MTX) &&
+        (jobj->flags & JOBJ_MTX_DIRTY)) {
+        result = true;
+    }
+    return result;
+}
+
+inline void setupStartAccessory(HSD_GObj* gobj, Vec3* scale)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    HSD_JObj* jobj;
+    KirbyHatStruct* mars_hat;
+    KirbyHatStruct* fe_hat;
+
+    mars_hat = ft_80459B88.hats[FTKIND_MARS - 1];
+    fe_hat = ft_80459B88.hats[FTKIND_EMBLEM - 1];
+
+    if (fp->fv.kb.hat.kind == FTKIND_MARS) {
+        ftCommon_SetAccessory(fp, (HSD_Joint*) mars_hat->hat_dynamics[0]);
+    } else {
+        ftCommon_SetAccessory(fp, (HSD_Joint*) fe_hat->hat_dynamics[0]);
+    }
+
+    scale->x = scale->y = scale->z = ftCommon_GetModelScale(fp);
+    jobj = fp->x20A0_accessory;
+    if (jobj == NULL) {
+        __assert(&ftKb_Init_804D3E00, 0x2F8, &ftKb_Init_804D3E08);
+    }
+    jobj->scale = *scale;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        if (jobj != NULL && !setupMtxIsDirty(jobj)) {
+            HSD_JObjSetMtxDirtySub(jobj);
+        }
+    }
+    lb_8000C2F8(
+        fp->x20A0_accessory,
+        fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint);
+}
+
 void ftKb_SpecialNMs_8010B4A0(HSD_GObj* gobj)
 {
-    PAD_STACK(4 * 6);
+    UNUSED u64 pad;
+    Vec3 scale;
+    PAD_STACK(4 * 2);
     {
         ftKb_DatAttrs* da;
         struct ftKb_SpecialNMs_DatAttrs* ms_da;
@@ -160,24 +212,7 @@ void ftKb_SpecialNMs_8010B4A0(HSD_GObj* gobj)
 
     ftAnim_8006EBA4(gobj);
 
-    {
-        Fighter* fp = GET_FIGHTER(gobj);
-        Vec3 scale;
-        KirbyHatStruct* mars_hat = ft_80459B88.hats[FTKIND_MARS - 1];
-        KirbyHatStruct* fe_hat = ft_80459B88.hats[FTKIND_EMBLEM - 1];
-
-        if (fp->fv.kb.hat.kind == FTKIND_MARS) {
-            ftCommon_SetAccessory(fp, (HSD_Joint*) mars_hat->hat_dynamics[0]);
-        } else {
-            ftCommon_SetAccessory(fp, (HSD_Joint*) fe_hat->hat_dynamics[0]);
-        }
-
-        scale.x = scale.y = scale.z = ftCommon_GetModelScale(fp);
-        HSD_JObjSetScale(fp->x20A0_accessory, &scale);
-        lb_8000C2F8(
-            fp->x20A0_accessory,
-            fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint);
-    }
+    setupStartAccessory(gobj, &scale);
 }
 
 void ftKb_MsSpecialNStart_Anim(HSD_GObj* gobj)

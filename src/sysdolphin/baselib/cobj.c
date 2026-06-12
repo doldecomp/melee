@@ -677,14 +677,24 @@ static int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll)
     return 0;
 }
 
+static inline f32 cobj_get_roll(HSD_CObj* cobj)
+{
+    return cobj->u.roll;
+}
+
+static inline f32 cobj_get_up_x(Vec3* up)
+{
+    return up->x;
+}
+
 int HSD_CObjGetUpVector(HSD_CObj* cobj, Vec3* up)
 {
-    if (cobj && up) {
+    if (cobj != NULL && up != NULL) {
         if ((cobj->flags & 1) != 0) {
             *up = cobj->u.up;
             return 0;
         }
-        if (roll2upvec(cobj, up, cobj->u.roll) == 0) {
+        if (roll2upvec(cobj, up, cobj_get_roll(cobj)) == 0) {
             return 0;
         }
     }
@@ -709,7 +719,7 @@ void HSD_CObjSetUpVector(HSD_CObj* cobj, Vec3* up)
             up = &v;
         }
 
-        if (cobj->u.up.x != up->x || cobj->u.up.y != up->y ||
+        if (cobj->u.up.x != cobj_get_up_x(up) || cobj->u.up.y != up->y ||
             cobj->u.up.z != up->z)
         {
             HSD_CObjSetMtxDirty(cobj);
@@ -774,15 +784,43 @@ MtxPtr HSD_CObjGetInvViewingMtxPtrDirect(HSD_CObj* cobj)
 
 MtxPtr HSD_CObjGetViewingMtxPtr(HSD_CObj* cobj)
 {
-    HSD_CObjSetupViewingMtx(cobj);
+    extern int HSD_CObjGetUpVector();
+    Vec3 interest;
+    Vec3 up_vec;
+    Vec3 eyepos;
     PAD_STACK(24);
+
+    if (!(cobj->flags & 2) && HSD_CObjMtxIsDirty(cobj)) {
+        HSD_CObjGetEyePosition(cobj, &eyepos);
+        HSD_CObjGetUpVector(cobj, &up_vec);
+        HSD_CObjGetInterest(cobj, &interest);
+        C_MTXLookAt(cobj->view_mtx, &eyepos, &up_vec, &interest);
+        HSD_WObjClearFlags(cobj->eyepos, 2);
+        HSD_WObjClearFlags(cobj->interest, 2);
+        HSD_CObjClearFlags(cobj, 0x40000000);
+        HSD_CObjSetFlags(cobj, 0x80000000);
+    }
     return HSD_CObjGetViewingMtxPtrDirect(cobj);
 }
 
 MtxPtr HSD_CObjGetInvViewingMtxPtr(HSD_CObj* cobj)
 {
-    HSD_CObjSetupViewingMtx(cobj);
+    extern int HSD_CObjGetUpVector();
+    Vec3 interest;
+    Vec3 up_vec;
+    Vec3 eyepos;
     PAD_STACK(24);
+
+    if (!(cobj->flags & 2) && HSD_CObjMtxIsDirty(cobj)) {
+        HSD_CObjGetEyePosition(cobj, &eyepos);
+        HSD_CObjGetUpVector(cobj, &up_vec);
+        HSD_CObjGetInterest(cobj, &interest);
+        C_MTXLookAt(cobj->view_mtx, &eyepos, &up_vec, &interest);
+        HSD_WObjClearFlags(cobj->eyepos, 2);
+        HSD_WObjClearFlags(cobj->interest, 2);
+        HSD_CObjClearFlags(cobj, 0x40000000);
+        HSD_CObjSetFlags(cobj, 0x80000000);
+    }
     return HSD_CObjGetInvViewingMtxPtrDirect(cobj);
 }
 

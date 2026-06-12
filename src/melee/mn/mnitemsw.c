@@ -310,8 +310,9 @@ HSD_JObj* mnItemSw_8023405C(MnItemSwData* data, u8 idx)
 void mnItemSw_80234104(HSD_GObj* gobj)
 {
     HSD_JObj* sp38;
-    u8* order;
     s32 i;
+    s32 item_anim;
+    u8* order;
     u8 cursor;
     HSD_JObj* cjobj;
     f32 y_spacing;
@@ -330,7 +331,8 @@ void mnItemSw_80234104(HSD_GObj* gobj)
         }
 
         lb_80011E24(jobj, &sp38, 3, -1);
-        HSD_JObjReqAnimAll(sp38, (f32) mnItemSw_80233A98((s32) *order));
+        item_anim = mnItemSw_80233A98((s32) *order);
+        HSD_JObjReqAnimAll(sp38, (f32) item_anim);
         HSD_JObjAnimAll(sp38);
         HSD_JObjReqAnimAll(sp38, mnItemSw_803ED340.x30[0]);
         mn_8022F3D8(sp38, 1, TOBJ_MASK);

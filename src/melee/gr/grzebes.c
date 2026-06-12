@@ -763,7 +763,7 @@ void grZebes_801D9758(Ground_GObj* gobj)
 void grZebes_801D9798(HSD_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    s32 delay_max, delay_min;
+    s32 delay_min, delay_max;
     f32 rand;
     s32 j;
     HSD_JObj* jobj;
@@ -772,10 +772,10 @@ void grZebes_801D9798(HSD_GObj* gobj)
 
     gp->gv.zebes5.xC4 = 0;
 
-    delay_min = grZe_804D6990->xA0_entries[gp->gv.zebes5.xC4].x2_delay_min;
-
     if ((delay_max = grZe_804D6990->xA0_entries[gp->gv.zebes5.xC4]
-                         .x4_delay_max) > delay_min)
+                         .x4_delay_max) >
+        (delay_min = grZe_804D6990->xA0_entries[gp->gv.zebes5.xC4]
+                         .x2_delay_min))
     {
         s32 diff = delay_max - delay_min;
         delay_max = delay_min + ((diff != 0) ? HSD_Randi(diff) : 0);
@@ -1133,6 +1133,16 @@ void grZebes_801DA0C4(f32 level)
     }
 }
 
+static inline void grZebes_801DA254_inline1(HSD_LObj* lobj, GXColor color)
+{
+    HSD_LObjSetColor(lobj, color);
+}
+
+static inline void grZebes_801DA254_inline2(HSD_LObj* lobj, GXColor color)
+{
+    grZebes_801DA254_inline1(lobj, color);
+}
+
 void grZebes_801DA254(Ground_GObj* gobj, f32 level)
 {
     Ground* gp = GET_GROUND(gobj);
@@ -1164,9 +1174,8 @@ void grZebes_801DA254(Ground_GObj* gobj, f32 level)
         result.g = (u8) (t * (f32) (c1.g - c2.g) + (f32) c2.g);
         result.b = (u8) (t * (f32) (c1.b - c2.b) + (f32) c2.b);
         result.a = 0xFF;
-        HSD_LObjSetColor(lobj, result);
+        grZebes_801DA254_inline2(lobj, result);
     }
-    PAD_STACK(8);
 }
 
 void grZebes_801DA3E8(void)

@@ -93,7 +93,7 @@ typedef struct StatsEntry {
     /* 0x02 */ u8 pad_2[2];
     /* 0x04 */ s32 (*check)(s32);
     /* 0x08 */ u32 (*get)(s32);
-    /* 0x0C */ u8 pad_C[4];
+    /* 0x0C */ void* xC;
 } StatsEntry;
 
 typedef struct StatsList {
@@ -551,12 +551,87 @@ s32 fn_80174A60(StatsList* list, s32 slot)
 }
 
 /// Static data for stats lists
-static StatsList lbl_803D6878[] = {
-    { 0, 0x0D, NULL },
-    { 1, 0x30, NULL },
-    { 2, 0x02, NULL },
-    { 3, 0x00, NULL },
+static StatsEntry lbl_803D6488[13] = {
+    { 8, { 0 }, NULL, NULL, NULL },
+    { 8, { 0 }, NULL, NULL, NULL },
+    { -1, { 0 }, fn_8017AE70, (u32 (*)(s32)) fn_8017BB94, NULL },
+    { -1, { 0 }, fn_8017AED8, (u32 (*)(s32)) fn_8017BC50, NULL },
+    { -1, { 0 }, fn_8017AF40, (u32 (*)(s32)) fn_8017BD0C, NULL },
+    { -1, { 0 }, fn_8017AFA8, (u32 (*)(s32)) fn_8017BDC8, NULL },
+    { 9, { 0 }, NULL, NULL, NULL },
+    { -1, { 0 }, fn_8017B07C, (u32 (*)(s32)) fn_8017BB94, NULL },
+    { -1, { 0 }, fn_8017B0E4, (u32 (*)(s32)) fn_8017BC50, NULL },
+    { -1, { 0 }, fn_8017B14C, (u32 (*)(s32)) fn_8017BD0C, NULL },
+    { -1, { 0 }, fn_8017B1B4, (u32 (*)(s32)) fn_8017BDC8, NULL },
+    { 12, { 0 }, fn_8017B21C, NULL, NULL },
+    { 12, { 0 }, NULL, NULL, NULL },
 };
+
+static StatsEntry lbl_803D6558[48] = {
+    { 10, { 0 }, NULL, NULL, NULL },
+    { 10, { 0 }, NULL, NULL, NULL },
+    { 11, { 0 }, fn_8017AE0C, NULL, NULL },
+    { 14, { 0 }, NULL, NULL, NULL },
+    { 15, { 0 }, fn_8017B010, NULL, NULL },
+    { 12, { 0 }, NULL, NULL, NULL },
+    { 13, { 0 }, fn_8017B21C, NULL, NULL },
+    { 16, { 0 }, NULL, NULL, NULL },
+    { 17, { 0 }, fn_8017B280, NULL, NULL },
+    { 18, { 0 }, NULL, NULL, NULL },
+    { 19, { 0 }, fn_8017B2E4, NULL, NULL },
+    { 20, { 0 }, NULL, NULL, NULL },
+    { 21, { 0 }, fn_8017B348, NULL, NULL },
+    { 22, { 0 }, NULL, NULL, NULL },
+    { 23, { 0 }, fn_8017B3AC, NULL, NULL },
+    { 24, { 0 }, NULL, NULL, NULL },
+    { 25, { 0 }, fn_8017B410, NULL, NULL },
+    { 26, { 0 }, NULL, NULL, NULL },
+    { 27, { 0 }, fn_8017B4D0, NULL, NULL },
+    { 28, { 0 }, NULL, NULL, NULL },
+    { 29, { 0 }, fn_8017B534, NULL, NULL },
+    { 30, { 0 }, NULL, NULL, NULL },
+    { 31, { 0 }, fn_8017B598, NULL, NULL },
+    { 32, { 0 }, NULL, NULL, NULL },
+    { 33, { 0 }, fn_8017B5FC, NULL, NULL },
+    { 34, { 0 }, NULL, NULL, NULL },
+    { 35, { 0 }, fn_8017B660, NULL, NULL },
+    { 36, { 0 }, NULL, NULL, NULL },
+    { 37, { 0 }, fn_8017B6C4, NULL, NULL },
+    { 38, { 0 }, NULL, NULL, NULL },
+    { 39, { 0 }, fn_8017B728, NULL, NULL },
+    { 40, { 0 }, NULL, NULL, NULL },
+    { 41, { 0 }, fn_8017B78C, NULL, NULL },
+    { 42, { 0 }, NULL, NULL, NULL },
+    { 43, { 0 }, fn_8017B7F0, NULL, NULL },
+    { 44, { 0 }, NULL, NULL, NULL },
+    { 45, { 0 }, fn_8017B854, NULL, NULL },
+    { 46, { 0 }, NULL, NULL, NULL },
+    { 47, { 0 }, fn_8017B8B8, NULL, NULL },
+    { 48, { 0 }, NULL, NULL, NULL },
+    { 49, { 0 }, fn_8017B91C, NULL, NULL },
+    { 50, { 0 }, NULL, NULL, NULL },
+    { 51, { 0 }, fn_8017B9F4, NULL, NULL },
+    { 52, { 0 }, NULL, NULL, NULL },
+    { 53, { 0 }, (s32 (*)(s32)) fn_8017BACC, NULL, NULL },
+    { 54, { 0 }, NULL, NULL, NULL },
+    { 55, { 0 }, (s32 (*)(s32)) fn_8017BB30, NULL, NULL },
+    { 54, { 0 }, NULL, NULL, NULL },
+};
+
+static StatsEntry lbl_803D6858[2] = {
+    { 8, { 0 }, NULL, NULL, NULL },
+    { 8, { 0 }, NULL, NULL, NULL },
+};
+
+static StatsList lbl_803D6878[] = {
+    { 0, 0x0D, { 0 }, lbl_803D6488 },
+    { 1, 0x30, { 0 }, lbl_803D6558 },
+    { 2, 0x02, { 0 }, lbl_803D6858 },
+    { 3, 0x00, { 0 }, NULL },
+};
+
+static char lbl_803D6898[] =
+    "Error : Cannot read archive file (File Name : %s).";
 
 void fn_80174B4C(ResultsData* data, s32 slot)
 {
@@ -1002,7 +1077,8 @@ void fn_80175880(s32 slot)
     new_var2 = minutes * 60;
     var_r30 =
         HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time, 0.0F,
-                            -30.0F, "%02d:%02d", minutes, seconds - new_var2);
+                            -30.0F, "%d\x81\x46%02d", minutes,
+                            seconds - new_var2);
     goto end_common;
 
 show_normal:
@@ -1025,6 +1101,10 @@ end_common:
     HSD_SisLib_803A74F0(lbl_8046DBE8.player_data[slot].ko_time, var_r30,
                         new_var);
 }
+
+static char lbl_803D68D8[] = "SdRst.usd";
+static char lbl_803D68E4[] = "SIS_ResultData";
+static char lbl_803D68F4[] = "SdRst.dat";
 
 void fn_80175A94(s32 slot, Vec3* position)
 {
@@ -1510,13 +1590,13 @@ void fn_80176A6C(void)
     gobj = GObj_Create(0x13U, 0x14U, 0U);
     if (gobj == NULL) {
         OSReport("Error : gobj dont\'t get (gmResultAddPanelCamera)\n");
-        HSD_ASSERT(0x662, 0);
+        HSD_ASSERTMSG(0x662, 0, (char*) &lbl_804D3FB0);
     }
 
     cobj = HSD_CObjLoadDesc(lbl_8046DBE8.pnlsce->cameras->desc);
     if (cobj == NULL) {
         OSReport("Error : cobj dont\'t get (gmResultAddPanelCamera)\n");
-        HSD_ASSERT(0x668, 0);
+        HSD_ASSERTMSG(0x668, 0, (char*) &lbl_804D3FB0);
     }
 
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
@@ -1529,12 +1609,16 @@ void fn_80176A6C(void)
 
     HSD_SisLib_803A611C(0, gobj, 9U, 0xDU, 0U, 0xEU, 0U, 0x13U);
     if (lbLang_IsSavedLanguageUS() != 0) {
-        HSD_SisLib_803A62A0(0, "SdRst.usd", "SIS_ResultData");
+        HSD_SisLib_803A62A0(0, lbl_803D68D8, lbl_803D68E4);
     } else {
-        HSD_SisLib_803A62A0(0, "SdRst.dat", "SIS_ResultData");
+        HSD_SisLib_803A62A0(0, lbl_803D68F4, lbl_803D68E4);
     }
     lbl_8046DBE8.cobj = cobj;
 }
+
+static char lbl_803D6974[] = "Error : gobj dont't get (gmResultAddLight)\n";
+static char lbl_803D69A0[] = "Error : lobj dont't get (gmResultAddLight)\n";
+static char lbl_803D69CC[] = "Error : gobj dont't get (gmResultAddModel)\n";
 
 void fn_80176BCC(HSD_GObj* gobj)
 {
@@ -1590,17 +1674,28 @@ void fn_80176D3C(Vec3* positions)
     ResultsData* data = &lbl_8046DBE8;
     MatchEnd* me;
     Vec3* pos;
-    MatchPlayerData* p;
+    struct ResultsMatchPlayerIter {
+        u8 pad_0[0x58];
+        u8 slot_type;
+        u8 pad_59[4];
+        u8 is_big_loser;
+        u8 pad_5E;
+        u8 team;
+        u8 pad_60[0xA8 - 0x60];
+    }* p;
+    u8 _[8];
     DynamicModelDesc* models[3];
-    HSD_JObj* jobj;
-    HSD_GObj* gobj;
-    s32 winner;
     s32 i;
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+    s32 winner;
     PAD_STACK(8);
 
     me = data->x94;
     pos = positions;
-    p = me->player_standings;
+    p = (struct ResultsMatchPlayerIter*) me;
+    if (p && p) {
+    }
     models[0] = data->flmsce->models[3];
     models[1] = data->flmsce->models[2];
     models[2] = data->flmsce->models[1];
@@ -1764,11 +1859,33 @@ void fn_801771C0(ResultsData* data)
 
 extern HSD_Archive* lbl_804D65B8;
 
+typedef struct ResultsMatchEndPlayerIter {
+    u8 pad_0[0x58];
+    u8 slot_type;
+    s8 character_kind;
+    s8 character_id;
+    u8 x3 : 6;
+    u8 x3_6 : 1;
+    u8 x3_7 : 1;
+    u8 pad_5C[0xA8 - 0x5C];
+} ResultsMatchEndPlayerIter;
+
+typedef struct ResultsDataPlayerIter {
+    u8 pad_0[0xA0];
+    HSD_GObj* fighter_gobj;
+    HSD_GObj* camera;
+    u8 pad_A8[0xD8 - 0xA8];
+} ResultsDataPlayerIter;
+
+static char lbl_804D3F70[] = "GmRst";
+static char lbl_804D3F78[] = "pnlsce";
+static char lbl_804D3F80[] = "flmsce";
+
 void gm_80177368_OnEnter(void* arg0_)
 {
     ResultsMatchInfo* arg0 = arg0_;
-    HSD_LObj* temp_r3_3;
     HSD_GObj* temp_r3_2;
+    HSD_LObj* temp_r3_3;
     HSD_GObj* temp_r3_4;
     MatchEnd* temp_r29;
     ResultsData* data = &lbl_8046DBE8;
@@ -1796,9 +1913,10 @@ void gm_80177368_OnEnter(void* arg0_)
         }
     }
     if (fn_801701B8() == 0) {
-        for (i = 0; i < 4; i++) {
-            lbl_8046E190[i].x0 = 2;
-            lbl_8046E190[i].x1 = fn_80174284_noinline(i) * 2 + 2;
+        ResultsStatsInfo* stats_info = lbl_8046E190;
+        for (i = 0; i < 4; i++, stats_info++) {
+            stats_info->x0 = 2;
+            stats_info->x1 = fn_80174284_noinline(i) * 2 + 2;
         }
     } else {
         for (i = 0; i < 4; i++) {
@@ -1815,34 +1933,33 @@ void gm_80177368_OnEnter(void* arg0_)
         }
     }
     un_802FF1B4();
-    lbl_804D65B8 = lbArchive_80016DBC("GmRst", &data->pnlsce, "pnlsce",
-                                      &data->flmsce, "flmsce", 0);
+    lbl_804D65B8 = lbArchive_80016DBC(lbl_804D3F70, &data->pnlsce,
+                                      lbl_804D3F78, &data->flmsce,
+                                      lbl_804D3F80, 0);
     if (data->pnlsce == NULL) {
-        OSReport("Error : Cannot read archive file (File Name : %s).",
-                 "GmRst");
+        OSReport(lbl_803D6898, lbl_804D3F70);
     }
     if (data->flmsce == NULL) {
-        OSReport("Error : Cannot read archive file (File Name : %s).",
-                 "GmRst");
+        OSReport(lbl_803D6898, lbl_804D3F70);
     }
     fn_80176A6C();
     temp_r3_2 = GObj_Create(0xB, 3, 0);
     if (temp_r3_2 == NULL) {
-        OSReport("Error : gobj dont't get (gmResultAddLight)\n");
-        HSD_ASSERT(0x68C, 0);
+        OSReport(lbl_803D6974);
+        HSD_ASSERTMSG(0x68C, 0, (char*) &lbl_804D3FB0);
     }
     temp_r3_3 = lb_80011AC4(data->pnlsce->lights);
     if (temp_r3_3 == NULL) {
-        OSReport("Error : lobj dont't get (gmResultAddLight)\n");
-        HSD_ASSERT(0x68F, 0);
+        OSReport(lbl_803D69A0);
+        HSD_ASSERTMSG(0x68F, 0, (char*) &lbl_804D3FB0);
     }
     HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D784A, temp_r3_3);
     GObj_SetupGXLink(temp_r3_2, HSD_GObj_LObjCallback, 0xA, 0);
     temp_r3_4 = GObj_Create(0xE, 0xF, 0);
     data->x18 = temp_r3_4;
     if (temp_r3_4 == NULL) {
-        OSReport("Error : gobj dont't get (gmResultAddModel)\n");
-        HSD_ASSERT(0x6A2, 0);
+        OSReport(lbl_803D69CC);
+        HSD_ASSERTMSG(0x6A2, 0, (char*) &lbl_804D3FB0);
     }
     HSD_GObj_SetupProc(temp_r3_4, fn_80179350, 0);
     fn_80176F60();
@@ -1853,13 +1970,17 @@ void gm_80177368_OnEnter(void* arg0_)
             fn_80160400(temp_r29->player_standings[data->x6].character_kind));
     }
 
-    for (i = 0; i < 4; i++) {
-        if (temp_r29->player_standings[i].slot_type != Gm_PKind_NA) {
-            fn_8017A9B4(i);
-            data->player_data[i].fighter_gobj =
-                fn_8017A67C(temp_r29->player_standings[i].character_kind,
-                            temp_r29->player_standings[i].x3, i);
-            data->player_data[i].camera = fn_8017A318(i);
+    {
+        ResultsMatchEndPlayerIter* p =
+            (ResultsMatchEndPlayerIter*) temp_r29;
+        ResultsDataPlayerIter* result_data = (ResultsDataPlayerIter*) data;
+        for (i = 0; i < 4; i++, p++, result_data++) {
+            if (p->slot_type != Gm_PKind_NA) {
+                fn_8017A9B4(i);
+                result_data->fighter_gobj =
+                    fn_8017A67C(p->character_kind, p->x3, i);
+                result_data->camera = fn_8017A318(i);
+            }
         }
     }
 }

@@ -136,6 +136,7 @@ Item_GObj* it_802E72E0(Item_GObj* parent, HSD_JObj* bone, s32 type, f32 scale,
     SpawnItem spawn;
     Vec3 sp24;
     Item_GObj* new_gobj;
+    f32 z;
 
     lb_8000B1CC(bone, NULL, &sp24);
     switch (type) {
@@ -145,7 +146,6 @@ Item_GObj* it_802E72E0(Item_GObj* parent, HSD_JObj* bone, s32 type, f32 scale,
         break;
     case 4:
     case 5: {
-        f32 z;
         if (type == 4) {
             z = sp24.z;
             if (z < 0.0f) {
@@ -162,8 +162,7 @@ Item_GObj* it_802E72E0(Item_GObj* parent, HSD_JObj* bone, s32 type, f32 scale,
         break;
     }
     }
-    spawn.pos = sp24;
-    spawn.prev_pos = spawn.pos;
+    spawn.prev_pos = spawn.pos = sp24;
     spawn.kind = 0xEA;
     spawn.facing_dir = scale;
     spawn.x3C_damage = 0;
@@ -213,7 +212,6 @@ Item_GObj* it_802E72E0(Item_GObj* parent, HSD_JObj* bone, s32 type, f32 scale,
             break;
         case 4:
         case 5: {
-            f32 z;
             ip->xDD4_itemVar.arwinglaser.xE40 = NULL;
             ip->xDD4_itemVar.arwinglaser.xE44 = NULL;
             ip->xDD4_itemVar.arwinglaser.xE00 = 0.0f;
@@ -224,13 +222,11 @@ Item_GObj* it_802E72E0(Item_GObj* parent, HSD_JObj* bone, s32 type, f32 scale,
                     z = -z;
                 }
             } else {
-                f32 z_abs;
                 z = ip->pos.z;
-                z_abs = z;
                 if (z < 0.0f) {
-                    z_abs = -z;
+                    z = -z;
                 }
-                z = -z_abs;
+                z = -z;
             }
             ip->xDD4_itemVar.arwinglaser.xE08 = z;
             it_802E7A4C(new_gobj);

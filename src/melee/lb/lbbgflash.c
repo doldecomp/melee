@@ -164,7 +164,7 @@ void fn_8001FEC4(HSD_GObj* gobj, s32 code)
     BgFlashData* data = &lbl_80433658;
     s32 mode;
     s32 y;
-    PAD_STACK(24);
+    PAD_STACK(8);
 
     if (data->state.active) {
         return;
@@ -174,10 +174,15 @@ void fn_8001FEC4(HSD_GObj* gobj, s32 code)
     mode = data->state.mode;
 
     if (mode == 5 || mode >= 5 || mode < 3) {
-        u8 a = data->xC.a;
-        u8 b = data->xC.b;
-        u8 g = data->xC.g;
-        u8 r = data->xC.r;
+        u8 r;
+        u8 g;
+        u8 b;
+        u8 a;
+
+        a = data->xC.a;
+        b = data->xC.b;
+        g = data->xC.g;
+        r = data->xC.r;
 
         GXBegin(GX_QUADS, GX_VTXFMT0, 4);
         GXPosition2f32(0.0f, 0.0f);
@@ -206,90 +211,99 @@ void fn_8001FEC4(HSD_GObj* gobj, s32 code)
         return;
     }
 
-    if (data->x30 != 0) {
-        return;
-    }
+    switch ((s32) data->x30) {
+    case 0:
+        if ((u32) mode == 3U) {
+            y = 0;
+            while (y <= (s32) data->x38) {
+                if (y == (s32) data->x38) {
+                    s32 width;
+                    u8 strip_h;
+                    s32 neg_y;
+                    s32 neg_yh;
 
-    if ((u32) mode == 3U) {
-        y = 0;
-        while (y <= (s32) data->x38) {
-            if (y == (s32) data->x38) {
-                u8 strip_h = data->x32;
-                s32 width = data->x34;
-                s32 neg_y;
-                s32 neg_yh;
+                    strip_h = data->x32;
+                    width = data->x34;
+                    GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+                    neg_y = -y;
+                    neg_yh = -(y + strip_h);
+                    GXPosition2f32(0.0f, (f32) neg_y);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                    GXPosition2f32((f32) width, (f32) neg_y);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                    GXPosition2f32((f32) width, (f32) neg_yh);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                    GXPosition2f32(0.0f, (f32) neg_yh);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                } else {
+                    u8 strip_h = data->x32;
+                    s32 neg_y;
+                    s32 neg_yh;
 
-                GXBegin(GX_QUADS, GX_VTXFMT0, 4);
-                neg_y = -y;
-                neg_yh = -(y + strip_h);
-                GXPosition2f32(0.0f, (f32) neg_y);
-                GXColor4u8(0, 0, 0, 0xFF);
-                GXPosition2f32((f32) width, (f32) neg_y);
-                GXColor4u8(0, 0, 0, 0xFF);
-                GXPosition2f32((f32) width, (f32) neg_yh);
-                GXColor4u8(0, 0, 0, 0xFF);
-                GXPosition2f32(0.0f, (f32) neg_yh);
-                GXColor4u8(0, 0, 0, 0xFF);
-            } else {
-                u8 strip_h = data->x32;
-                s32 neg_y;
-                s32 neg_yh;
-
-                GXBegin(GX_QUADS, GX_VTXFMT0, 4);
-                neg_y = -y;
-                neg_yh = -(y + strip_h);
-                GXPosition2f32(0.0f, (f32) neg_y);
-                GXColor4u8(0, 0, 0, 0xFF);
-                GXPosition2f32(640.0f, (f32) neg_y);
-                GXColor4u8(0, 0, 0, 0xFF);
-                GXPosition2f32(640.0f, (f32) neg_yh);
-                GXColor4u8(0, 0, 0, 0xFF);
-                GXPosition2f32(0.0f, (f32) neg_yh);
-                GXColor4u8(0, 0, 0, 0xFF);
+                    GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+                    neg_y = -y;
+                    neg_yh = -(y + strip_h);
+                    GXPosition2f32(0.0f, (f32) neg_y);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                    GXPosition2f32(640.0f, (f32) neg_y);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                    GXPosition2f32(640.0f, (f32) neg_yh);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                    GXPosition2f32(0.0f, (f32) neg_yh);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                }
+                y += data->x32;
             }
-            y += data->x32;
-        }
-    } else {
-        y = data->x38;
-        while (y <= 0x1E0) {
-            if (y == (s32) data->x38) {
-                s32 x34 = data->x34;
-                u8 strip_h = data->x32;
-                s32 right = 0x280 - x34;
-                s32 neg_y;
-                s32 xr = x34 + right;
-                s32 neg_yh;
+        } else {
+            s32* pY;
+            s32 y2;
 
-                GXBegin(GX_QUADS, GX_VTXFMT0, 4);
-                neg_y = -y;
-                neg_yh = -(y + strip_h);
-                GXPosition2f32((f32) x34, (f32) neg_y);
-                GXColor4u8(0, 0, 0, 0xFF);
-                GXPosition2f32((f32) xr, (f32) neg_y);
-                GXColor4u8(0, 0, 0, 0xFF);
-                GXPosition2f32((f32) xr, (f32) neg_yh);
-                GXColor4u8(0, 0, 0, 0xFF);
-                GXPosition2f32((f32) x34, (f32) neg_yh);
-                GXColor4u8(0, 0, 0, 0xFF);
-            } else {
-                u8 strip_h = data->x32;
-                s32 neg_y;
-                s32 neg_yh;
+            for (pY = &data->x38, y2 = data->x38; y2 <= 0x1E0;
+                 y2 += data->x32) {
+                if (y2 == *pY) {
+                    s32 x34;
+                    u8 strip_h;
+                    s32 right;
+                    s32 neg_y;
+                    s32 xr;
+                    s32 neg_yh;
 
-                GXBegin(GX_QUADS, GX_VTXFMT0, 4);
-                neg_y = -y;
-                neg_yh = -(y + strip_h);
-                GXPosition2f32(0.0f, (f32) neg_y);
-                GXColor4u8(0, 0, 0, 0xFF);
-                GXPosition2f32(640.0f, (f32) neg_y);
-                GXColor4u8(0, 0, 0, 0xFF);
-                GXPosition2f32(640.0f, (f32) neg_yh);
-                GXColor4u8(0, 0, 0, 0xFF);
-                GXPosition2f32(0.0f, (f32) neg_yh);
-                GXColor4u8(0, 0, 0, 0xFF);
+                    x34 = data->x34;
+                    strip_h = data->x32;
+                    right = 0x280;
+                    right -= x34;
+                    GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+                    neg_y = -y2;
+                    xr = right + x34;
+                    neg_yh = -(y2 + strip_h);
+                    GXPosition2f32((f32) x34, (f32) neg_y);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                    GXPosition2f32((f32) xr, (f32) neg_y);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                    GXPosition2f32((f32) xr, (f32) neg_yh);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                    GXPosition2f32((f32) x34, (f32) neg_yh);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                } else {
+                    s32 neg_y;
+                    u8 strip_h = data->x32;
+                    s32 neg_yh;
+
+                    GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+                    neg_y = -y2;
+                    neg_yh = -(y2 + strip_h);
+                    GXPosition2f32(0.0f, (f32) neg_y);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                    GXPosition2f32(640.0f, (f32) neg_y);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                    GXPosition2f32(640.0f, (f32) neg_yh);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                    GXPosition2f32(0.0f, (f32) neg_yh);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                }
             }
-            y += data->x32;
         }
+        break;
     }
 }
 
@@ -308,7 +322,10 @@ void fn_800204C8(void)
     if (mode >= 3) {
         goto case_3_4;
     }
-    if (mode >= 0) {
+    switch (mode) {
+    case 0:
+    case 1:
+    case 2:
         goto case_0_1_2;
     }
     return;
@@ -322,7 +339,9 @@ case_0_1_2:
     return;
 
 case_3_4:
-    if ((s32) data->x30 == 0) {
+    switch ((s32) data->x30) {
+    case 0:
+    {
         s32* pX;
         s32* pY;
         s32 i;
@@ -341,6 +360,8 @@ case_3_4:
                 return;
             }
         }
+        break;
+    }
     }
 }
 
@@ -480,31 +501,46 @@ void lbBgFlash_800209F4(void)
     lbl_80433658.state.mode = 0;
 }
 
+static inline HSD_JObj* jobj_parent(HSD_JObj* jobj)
+{
+    if (jobj == NULL) {
+        return NULL;
+    }
+    return jobj->parent;
+}
+
 #pragma inline_depth(1)
 void fn_80020AEC(HSD_JObj* jobj, Mtx out)
 {
+    MtxPtr out_mtx = out;
     HSD_JObj* parent;
     HSD_JObj* cur;
     s32 i;
+    Mtx tmp;
+    Vec3 col;
+    volatile f32 sp28;
+    u8 _[16];
 
-    parent = jobj ? jobj->parent : NULL;
+    if (jobj == NULL) {
+        parent = NULL;
+    } else {
+        parent = jobj->parent;
+    }
 
     {
         MtxPtr jobj_mtx = HSD_JObjGetMtxPtr(jobj);
         HSD_JObjGetMtxPtr(parent);
-        HSD_MtxInverseConcat(parent->mtx, jobj_mtx, out);
+        HSD_MtxInverseConcat(parent->mtx, jobj_mtx, out_mtx);
     }
 
     for (i = 0; i < 3; i++) {
-        Vec3 col;
         f32 mag;
         f32 scale_sq;
-        f32 sp28;
         f32 factor;
 
-        col.x = out[0][i];
-        col.y = out[1][i];
-        col.z = out[2][i];
+        col.x = out_mtx[0][i];
+        col.y = out_mtx[1][i];
+        col.z = out_mtx[2][i];
 
         mag = PSVECMag(&col);
         if (mag > 1e-10f) {
@@ -512,10 +548,17 @@ void fn_80020AEC(HSD_JObj* jobj, Mtx out)
         }
 
         {
-            f32 sy = jobj->mtx[1][i];
-            f32 sx = jobj->mtx[0][i];
-            f32 sz = jobj->mtx[2][i];
-            scale_sq = sz * sz + sy * sy + sx * sx;
+            f32 sx;
+            f32 sy;
+            f32 sz;
+            sy = jobj->mtx[1][i];
+            sx = jobj->mtx[0][i];
+            sz = jobj->mtx[2][i];
+            sy *= sy;
+            sx *= sx;
+            sz *= sz;
+            scale_sq = sy + sx;
+            scale_sq = sz + scale_sq;
         }
 
         if (scale_sq > 0.0f) {
@@ -531,19 +574,20 @@ void fn_80020AEC(HSD_JObj* jobj, Mtx out)
         col.x *= factor;
         col.y *= factor;
         col.z *= factor;
-        out[0][i] = col.x;
-        out[1][i] = col.y;
-        out[2][i] = col.z;
+        out_mtx[0][i] = col.x;
+        out_mtx[1][i] = col.y;
+        out_mtx[2][i] = col.z;
     }
 
-    cur = jobj ? jobj->parent : NULL;
+    cur = jobj_parent(jobj);
     while (cur != NULL) {
-        HSD_JObj* grandpar;
-        Mtx tmp;
-
-        grandpar = cur ? cur->parent : NULL;
-
-        if (grandpar != NULL) {
+        if (jobj_parent(cur) != NULL) {
+            HSD_JObj* grandpar;
+            if (cur == NULL) {
+                grandpar = NULL;
+            } else {
+                grandpar = cur->parent;
+            }
             HSD_JObjGetMtxPtr(cur);
             HSD_JObjGetMtxPtr(grandpar);
             HSD_MtxInverseConcat(grandpar->mtx, cur->mtx, tmp);
@@ -553,7 +597,6 @@ void fn_80020AEC(HSD_JObj* jobj, Mtx out)
         }
 
         for (i = 0; i < 3; i++) {
-            Vec3 col;
             f32 mag;
 
             col.x = tmp[0][i];
@@ -573,8 +616,8 @@ void fn_80020AEC(HSD_JObj* jobj, Mtx out)
             tmp[2][i] = col.z;
         }
 
-        PSMTXConcat(tmp, out, out);
-        cur = cur ? cur->parent : NULL;
+        PSMTXConcat(tmp, out_mtx, out_mtx);
+        cur = jobj_parent(cur);
     }
 }
 #pragma inline_depth(8)
@@ -582,6 +625,11 @@ void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
                         f32 min_angle)
 {
     u8 _1[16];
+    Mtx quatMtx;
+    Mtx rotMtx;
+    Mtx resultMtx;
+    volatile f32 tmp;
+    f32 z_col_z;
     f32 dx = dir->x;
     f32 dy = dir->y;
     f32 dz = dir->z;
@@ -589,11 +637,9 @@ void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
     f32 angle;
     f32 z_col_y;
     f32 z_col_x;
-    f32 z_col_z;
     f32 dx2 = dx * dx;
     f32 dy2 = dy * dy;
     f32 dz2 = dz * dz;
-    volatile f32 tmp;
     if (dx2 + dy2 + dz2 == 0.0f) {
         return;
     }
@@ -603,8 +649,7 @@ void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
     z_col_y = jobj->mtx[1][2];
     z_col_x = jobj->mtx[0][2];
     z_col_z = jobj->mtx[2][2];
-    mag_sq = z_col_y * z_col_y;
-    mag_sq = z_col_x * z_col_x + mag_sq;
+    mag_sq = z_col_x * z_col_x + z_col_y * z_col_y;
     mag_sq = z_col_z * z_col_z + mag_sq;
     if (mag_sq > 0.0f) {
         f64 e = __frsqrte(mag_sq);
@@ -616,7 +661,10 @@ void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
     }
 
     if (mag_sq != 0.0f) {
-        angle = atan2f(-dir->x * (z_col_z / mag_sq), dir->y);
+        {
+            f32 z_div_mag = z_col_z / mag_sq;
+            angle = atan2f(-dir->x * z_div_mag, dir->y);
+        }
 
         if (angle > max_angle) {
             angle = max_angle;
@@ -628,9 +676,6 @@ void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
         if (!(jobj->flags & JOBJ_USE_QUATERNION)) {
             HSD_JObjSetRotationZ(jobj, angle + HSD_JObjGetRotationZ(jobj));
         } else {
-            Mtx quatMtx;
-            Mtx rotMtx;
-            Mtx resultMtx;
             PSMTXQuat(quatMtx, &jobj->rotate);
             MTXRotRad(rotMtx, 'z', angle);
             PSMTXConcat(quatMtx, rotMtx, resultMtx);
@@ -644,33 +689,18 @@ void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
 
 #define fake_HSD_ASSERT(line, cond)                                           \
     ((cond) ? ((void) 0) : __assert("jobj.h", line, #cond))
-
-static inline void FakeHSD_JObjSetRotation(HSD_JObj* jobj, Quaternion* rotate)
-{
-    fake_HSD_ASSERT(618, jobj);
-    fake_HSD_ASSERT(619, rotate); // These get opimized away, I am unsure why.
-    jobj->rotate = *rotate;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        HSD_JObjSetMtxDirty(jobj);
-    }
-}
-
-static inline void Fake_HSD_JObjGetRotation(HSD_JObj* jobj, Quaternion* quat)
-{
-    fake_HSD_ASSERT(699, jobj);
-    fake_HSD_ASSERT(700, quat); // These get opimized away, I am unsure why.
-    *quat = jobj->rotate;
-}
+#define fake_HSD_ASSERTMSG(line, cond, msg)                                   \
+    ((cond) ? ((void) 0) : __assert("jobj.h", line, msg))
 
 void fn_8002113C(HSD_JObj* jobj, Vec3* axis, f32 angle)
 {
-    Mtx mtx;
-    Mtx rotMtx;
     Mtx tmpMtx;
+    Mtx rotMtx;
     Mtx result;
-    Vec3 localAxis;
-    Quaternion rot;
+    Vec3 rot;
     Quaternion rot2;
+    Vec3 localAxis;
+    Mtx mtx;
 
     PAD_STACK(0x10);
 
@@ -681,12 +711,18 @@ void fn_8002113C(HSD_JObj* jobj, Vec3* axis, f32 angle)
     PSMTXRotAxisRad(rotMtx, (Vec*) &localAxis, -angle);
 
     if (!(jobj->flags & JOBJ_USE_QUATERNION)) {
-        Quaternion* volatile rot_ptr = &rot;
-        Fake_HSD_JObjGetRotation(jobj, rot_ptr);
-        HSD_MkRotationMtx(tmpMtx, (Vec3*) rot_ptr);
+        fake_HSD_ASSERT(699, jobj);
+        fake_HSD_ASSERTMSG(700, (u32) &rot, "rotate");
+        *(Quaternion*) &rot = jobj->rotate;
+        HSD_MkRotationMtx(tmpMtx, &rot);
         PSMTXConcat(tmpMtx, rotMtx, result);
-        HSD_QuatLib_8037EB28(result, (Vec3*) rot_ptr);
-        FakeHSD_JObjSetRotation(jobj, rot_ptr);
+        HSD_QuatLib_8037EB28(result, &rot);
+        fake_HSD_ASSERT(618, jobj);
+        fake_HSD_ASSERTMSG(619, (u32) &rot, "rotate");
+        jobj->rotate = *(Quaternion*) &rot;
+        if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+            HSD_JObjSetMtxDirty(jobj);
+        }
     } else {
         HSD_JObjGetRotation(jobj, &rot2);
         HSD_MtxQuat(tmpMtx, &rot2);
@@ -712,19 +748,17 @@ typedef struct IKChainData {
 void lbBgFlash_80021410(void* arg0)
 {
     IKChainData* data = arg0;
+    u8 pad_hi[32];
     Vec3 axis;
-    Vec3 sp2C;
-    Vec3 sp38;
+    u8 pad_mid[16];
     Vec3 sp44;
-    f32 sp28;
-    f32 sp24;
-    f32 sp20;
-    f32 sp1C;
-    f32 nx;
-    f32 ny;
-    f32 nz;
+    Vec3 sp38;
+    Vec3 sp2C;
+    volatile f32 sp28;
+    volatile f32 sp24;
+    volatile f32 sp20;
+    volatile f32 sp1C;
     f32 dot;
-    f32 d;
     f32 sin_val;
     f32 len_ab;
     f32 len_bc;
@@ -732,58 +766,69 @@ void lbBgFlash_80021410(void* arg0)
     f32 angle1;
     f32 angle2;
     f32 sum_len;
+    f32 sum_pow;
+    f32 len_pow;
+    f32 c2;
     f32 a2;
     f32 b2;
-    f32 c2;
     f32 two_a;
     f32 cos1;
     f32 cos2;
     f32 acos1;
     f32 acos2;
-    f32 rem;
+    f64 rem;
     f32 dx;
     f32 dy;
     f32 dz;
-    HSD_JObj* jobj;
     Vec3* pDiff;
-    PAD_STACK(64);
+    PAD_STACK(16);
 
-    jobj = data->jobj1;
-    HSD_JObjSetupMatrix(jobj);
+    HSD_JObjSetupMatrix(data->jobj1);
 
     axis.x = data->jobj1->mtx[0][2];
     axis.y = data->jobj1->mtx[1][2];
     axis.z = data->jobj1->mtx[2][2];
     lbVector_Normalize(&axis);
 
-    nx = axis.x;
-    ny = axis.y;
-    nz = axis.z;
+    {
+        f32 nx = axis.x;
+        f32 nz = axis.z;
+        f32 ny = axis.y;
+        f32 dot;
+        f32 d;
+        f32 x = data->pos4.x;
 
-    dot = -((nz * data->pos1.z) + ((nx * data->pos1.x) + (ny * data->pos1.y)));
+        dot = -((nz * data->pos1.z) +
+                ((nx * data->pos1.x) + (ny * data->pos1.y)));
 
-    d = -(dot +
-          ((data->pos4.z * nz) + ((data->pos4.x * nx) + (data->pos4.y * ny))));
-    data->pos4.x = (d * nx) + data->pos4.x;
-    data->pos4.y = (d * ny) + data->pos4.y;
-    data->pos4.z = (d * nz) + data->pos4.z;
+        d = -(dot + ((data->pos4.z * nz) +
+                     ((x * nx) + (data->pos4.y * ny))));
+        data->pos4.x = (d * nx) + x;
+        data->pos4.y = (d * ny) + data->pos4.y;
+        data->pos4.z = (d * nz) + data->pos4.z;
 
-    d = -(dot +
-          ((data->pos0.z * nz) + ((data->pos0.x * nx) + (data->pos0.y * ny))));
-    data->pos0.x = (d * nx) + data->pos0.x;
-    data->pos0.y = (d * ny) + data->pos0.y;
-    data->pos0.z = (d * nz) + data->pos0.z;
+        {
+            f32 x = data->pos0.x;
+            d = -(dot + ((data->pos0.z * nz) +
+                         ((x * nx) + (data->pos0.y * ny))));
+            data->pos0.x = (d * nx) + x;
+        }
+        data->pos0.y = (d * ny) + data->pos0.y;
+        data->pos0.z = (d * nz) + data->pos0.z;
 
-    d = -(dot +
-          ((data->pos1.z * nz) + ((data->pos1.x * nx) + (data->pos1.y * ny))));
-    data->pos1.x = (d * nx) + data->pos1.x;
-    data->pos1.y = (d * ny) + data->pos1.y;
-    data->pos1.z = (d * nz) + data->pos1.z;
+        {
+            f32 x = data->pos1.x;
+            d = -(dot + ((data->pos1.z * nz) +
+                         ((x * nx) + (data->pos1.y * ny))));
+            data->pos1.x = (d * nx) + x;
+        }
+        data->pos1.y = (d * ny) + data->pos1.y;
+        data->pos1.z = (d * nz) + data->pos1.z;
+    }
 
     pDiff = lbVector_Diff(&data->pos0, &data->pos1, &sp44);
-    dot = (nz * pDiff->z) + ((nx * pDiff->x) + (ny * pDiff->y));
-    sin_val = -((dot * dot) - 1.0f);
-    if (sin_val > 0.0f) {
+    dot = (axis.z * pDiff->z) + ((axis.x * pDiff->x) + (axis.y * pDiff->y));
+    if ((sin_val = 1.0f - (dot * dot)) > 0.0f) {
         f64 e = __frsqrte(sin_val);
         e = 0.5 * e * -(((f64) sin_val * (e * e)) - 3.0);
         e = 0.5 * e * -(((f64) sin_val * (e * e)) - 3.0);
@@ -801,13 +846,12 @@ void lbBgFlash_80021410(void* arg0)
     angle2 = (f32) (3.141592653589793 - lbVector_Angle(&sp2C, &sp38));
 
     dx = data->pos0.x - data->pos4.x;
-    dy = data->pos0.y - data->pos4.y;
     dz = data->pos0.z - data->pos4.z;
+    dy = data->pos0.y - data->pos4.y;
     dx *= dx;
     dy *= dy;
     dz *= dz;
-    len_ab = dz + (dx + dy);
-    if (len_ab > 0.0f) {
+    if ((len_ab = dz + (dx + dy)) > 0.0f) {
         f64 e = __frsqrte(len_ab);
         e = 0.5 * e * -(((f64) len_ab * (e * e)) - 3.0);
         e = 0.5 * e * -(((f64) len_ab * (e * e)) - 3.0);
@@ -817,13 +861,12 @@ void lbBgFlash_80021410(void* arg0)
     }
 
     dx = data->pos0.x - data->pos1.x;
-    dy = data->pos0.y - data->pos1.y;
     dz = data->pos0.z - data->pos1.z;
+    dy = data->pos0.y - data->pos1.y;
     dx *= dx;
     dy *= dy;
     dz *= dz;
-    len_bc = dz + (dx + dy);
-    if (len_bc > 0.0f) {
+    if ((len_bc = dz + (dx + dy)) > 0.0f) {
         f64 e = __frsqrte(len_bc);
         e = 0.5 * e * -(((f64) len_bc * (e * e)) - 3.0);
         e = 0.5 * e * -(((f64) len_bc * (e * e)) - 3.0);
@@ -834,13 +877,12 @@ void lbBgFlash_80021410(void* arg0)
     data->len0 = len_bc;
 
     dx = data->pos1.x - data->pos3.x;
-    dy = data->pos1.y - data->pos3.y;
     dz = data->pos1.z - data->pos3.z;
+    dy = data->pos1.y - data->pos3.y;
     dx *= dx;
     dy *= dy;
     dz *= dz;
-    len_ac = dz + (dx + dy);
-    if (len_ac > 0.0f) {
+    if ((len_ac = dz + (dx + dy)) > 0.0f) {
         f64 e = __frsqrte(len_ac);
         e = 0.5 * e * -(((f64) len_ac * (e * e)) - 3.0);
         e = 0.5 * e * -(((f64) len_ac * (e * e)) - 3.0);
@@ -853,31 +895,35 @@ void lbBgFlash_80021410(void* arg0)
     len_bc = data->len0;
     len_ac = data->len1;
 
+    sum_len = (10.0f * (len_bc + len_ac)) / 11.0f;
+    sum_pow = sum_len * sum_len;
+    sum_pow = sum_len * sum_pow;
+    sum_pow = sum_len * sum_pow;
+    sum_pow = sum_len * sum_pow;
+    sum_pow = sum_len * sum_pow;
+    sum_pow = sum_len * sum_pow;
+    sum_pow = sum_len * sum_pow;
+    sum_pow = sum_len * sum_pow;
+    sum_pow = sum_len * sum_pow;
+    sum_pow = sum_len * sum_pow;
+    len_pow = len_ab * len_ab;
+    len_pow = len_ab * len_pow;
+    len_pow = len_ab * len_pow;
+    len_pow = len_ab * len_pow;
+    len_pow = len_ab * len_pow;
+    len_pow = len_ab * len_pow;
+    len_pow = len_ab * len_pow;
+    len_pow = len_ab * len_pow;
+    len_pow = len_ab * len_pow;
+    if (len_ab > sum_len) {
+        len_ab = ((11.0f * sum_len) / 10.0f) +
+                 (-(sum_pow) / (10.0f * len_pow));
+    }
+
     a2 = len_bc * len_bc;
     b2 = len_ab * len_ab;
     two_a = 2.0f * len_bc;
     c2 = len_ac * len_ac;
-
-    sum_len = (10.0f * (len_bc + len_ac)) / 11.0f;
-    if (len_ab > sum_len) {
-        len_ab =
-            ((11.0f * sum_len) / 10.0f) +
-            (-(sum_len *
-               (sum_len *
-                (sum_len *
-                 (sum_len *
-                  (sum_len *
-                   (sum_len *
-                    (sum_len *
-                     (sum_len * (sum_len * (sum_len * sum_len)))))))))) /
-              (10.0f *
-               (len_ab *
-                (len_ab *
-                 (len_ab *
-                  (len_ab *
-                   (len_ab *
-                    (len_ab * (len_ab * (len_ab * (len_ab * len_ab)))))))))));
-    }
 
     cos1 = ((a2 + b2) - c2) / (two_a * len_ab);
     cos2 = ((a2 + c2) - b2) / (two_a * len_ac);
@@ -896,16 +942,18 @@ void lbBgFlash_80021410(void* arg0)
 
     acos1 = acosf(cos1);
     acos2 = acosf(cos2);
-    rem = (f32) (3.141592653589793 - (f64) acos2);
-    if (rem < 0.1745329201221466f) {
+    rem = 3.141592653589793 - (f64) acos2;
+    if (rem < 0.1745329201221466) {
         acos2 = (f32) (2.9670597334676465 +
-                       (f64) (f32) ((f64) (f32) (fabs((f64) rem) /
+                       (f64) (f32) ((f64) (f32) (fabs(rem) /
                                                  0.1745329201221466) *
                                     ((f64) acos2 - 2.9670597334676465)));
     }
 
-    fn_8002113C(data->jobj0, &axis, acos1 - angle1);
-    fn_8002113C(data->jobj1, &axis, acos2 - angle2);
+    acos1 -= angle1;
+    acos2 -= angle2;
+    fn_8002113C(data->jobj0, &axis, acos1);
+    fn_8002113C(data->jobj1, &axis, acos2);
 }
 
 extern HSD_ObjAllocData lbl_804336A0;

@@ -668,6 +668,10 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     f32 temp_f28;
     u8* var_r26;
     s32 sp8;
+    typedef struct PlayerInitDataWrapper {
+        char pad[0x60];
+        PlayerInitData player;
+    } PlayerInitDataWrapper;
 
     PAD_STACK(24);
 
@@ -904,8 +908,9 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
                 }
             } else {
                 if (arg1->x4C != NULL) {
-                    var_r22 =
+                    u8 enemy_level =
                         arg1->x4C((u8) count, arg1->x0.cpu_level, var_r23_2);
+                    var_r22 = enemy_level;
                 }
                 if (arg1->x50 != NULL) {
                     var_r21 =
@@ -913,46 +918,46 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
                 }
             }
             {
-                PlayerInitData* p =
-                    (PlayerInitData*) ((u8*) arg0 + var_r25_3 + 0x60);
-                gm_8016795C(p);
-                p->slot_type = 1;
-                p->c_kind = (s8) (u8) temp_r24[0];
-                p->stocks = 1;
-                p->cpu_level = var_r22;
-                p->xE = var_r21;
-                p->x18 = temp_f29;
-                p->x1C = temp_f28;
-                p->color = *var_r26;
+                PlayerInitDataWrapper* p =
+                    (PlayerInitDataWrapper*) ((u8*) arg0 + var_r25_3);
+                gm_8016795C(&p->player);
+                p->player.slot_type = 1;
+                p->player.c_kind = (s8) (u8) temp_r24[0];
+                p->player.stocks = 1;
+                p->player.cpu_level = var_r22;
+                p->player.xE = var_r21;
+                p->player.x18 = temp_f29;
+                p->player.x1C = temp_f28;
+                p->player.color = *var_r26;
                 if (arg1->x0.x8 & 2) {
-                    p->x20 = 2.0f;
-                    p->xB = 2;
+                    p->player.x20 = 2.0f;
+                    p->player.xB = 2;
                 } else {
-                    p->x20 = 1.0f;
-                    p->xB = 0;
+                    p->player.x20 = 1.0f;
+                    p->player.xB = 0;
                 }
                 if (arg1->x0.x8 & 4) {
-                    p->xC_b2 = 1;
-                    p->xE = 0x1B;
+                    p->player.xC_b2 = 1;
+                    p->player.xE = 0x1B;
                 }
-                if ((s32) p->c_kind == 0x1D) {
-                    p->xC_b1 = 0;
+                if ((s32) p->player.c_kind == 0x1D) {
+                    p->player.xC_b1 = 0;
                 }
-                temp_r0_2 = (u8) p->c_kind;
+                temp_r0_2 = (u8) p->player.c_kind;
                 if (((s8) temp_r0_2 == 0x1A) || ((s8) temp_r0_2 == 0x1E)) {
-                    p->xC_b7 = 1;
-                    p->hp = 0x12C;
-                    p->xD_b2 = 1;
-                    p->xD_b0 = 1;
-                    p->xD_b2 = 1;
-                    p->spawn_dir = -1;
-                    if ((s32) p->c_kind == 0x1E) {
-                        p->slot_type = 3;
+                    p->player.xC_b7 = 1;
+                    p->player.hp = 0x12C;
+                    p->player.xD_b2 = 1;
+                    p->player.xD_b0 = 1;
+                    p->player.xD_b2 = 1;
+                    p->player.spawn_dir = -1;
+                    if ((s32) p->player.c_kind == 0x1E) {
+                        p->player.slot_type = 3;
                     }
                     var_r20 += 1;
                 }
                 if ((u8) arg0->rules.is_teams == 1) {
-                    p->team = 4;
+                    p->player.team = 4;
                 }
             }
             var_r28 += 1;
@@ -962,8 +967,8 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
             }
         } else {
             if (((s32) var_r23_2 == 0) && ((s32) temp_r24[1] == 0x1A)) {
-                ((PlayerInitData*) ((u8*) arg0 + var_r25_3 + 0x60))
-                    ->slot_type = 3;
+                ((PlayerInitDataWrapper*) ((u8*) arg0 + var_r25_3))
+                    ->player.slot_type = 3;
                 var_r28 += 1;
                 var_r25_3 += 0x24;
             }
@@ -2954,6 +2959,7 @@ void fn_80181598(void)
 static DynamicModelDesc** lbl_804D65CC;
 static DynamicModelDesc** lbl_804D65D0;
 extern HSD_Archive* lbl_804D65C8;
+extern char lbl_803D8CD8[];
 
 void fn_80181708(void)
 {
@@ -3011,12 +3017,17 @@ void fn_80181708(void)
 
 void gm_80181998(void)
 {
-    lbl_804D65C8 = lbArchive_80016DBC("IfHrNoCn", &lbl_804D65CC,
-                                      "ScInfCnt_scene_models", 0);
-    lbl_804D65C8 = lbArchive_80016DBC("IfHrReco", &lbl_804D65D0,
-                                      "ScInfCnt_scene_models", 0);
+    lbl_804D65C8 = lbArchive_80016DBC(lbl_803D8CD8, &lbl_804D65CC,
+                                      lbl_803D8CD8 + 0xC, 0);
+    lbl_804D65C8 = lbArchive_80016DBC(lbl_803D8CD8 + (u32) 0x24,
+                                      &lbl_804D65D0,
+                                      lbl_803D8CD8 + (u32) 0xC, 0);
     fn_80181708();
 }
+
+char lbl_803D8CD8[] = "IfHrNoCn";
+char lbl_803D8CE4[] = "ScInfCnt_scene_models";
+char lbl_803D8CFC[] = "IfHrReco";
 
 void gm_80181A00(s32 arg0, s32 arg1)
 {
@@ -3313,19 +3324,29 @@ void fn_80181E18(void)
 void gm_80182174(void)
 {
     u8* data = lbl_803D8D08;
-    s32 mode;
     s32 i;
     RegClearSpawnEntry* src;
     RegClearSpawnEntry* dst;
+    RegClearSpawnEntry** spawn_table_22;
+    RegClearSpawnEntry** spawn_table_23;
+    RegClearSpawnEntry** spawn_table_24;
+    RegClearSpawnEntry** spawn_table_25;
+    RegClearSpawnEntry** spawn_table_26;
+    s32 mode;
 
     mode = gm_801A4310();
+    spawn_table_25 = &lbl_80472ED8.x6B4;
+    spawn_table_22 = &lbl_80472ED8.x6A8;
+    spawn_table_23 = &lbl_80472ED8.x6AC;
+    spawn_table_26 = &lbl_80472ED8.x6B8;
+    spawn_table_24 = &lbl_80472ED8.x6B0;
 
     lbArchive_80016DBC((const char*) &data[0x480], &lbl_80472ED8.x6A4,
-                       (const char*) &data[0x490], &lbl_80472ED8.x6A8,
-                       (const char*) &data[0x4AC], &lbl_80472ED8.x6AC,
-                       (const char*) &data[0x4C8], &lbl_80472ED8.x6B0,
-                       (const char*) &data[0x4E4], &lbl_80472ED8.x6B4,
-                       (const char*) &data[0x500], &lbl_80472ED8.x6B8,
+                       (const char*) &data[0x490], spawn_table_22,
+                       (const char*) &data[0x4AC], spawn_table_23,
+                       (const char*) &data[0x4C8], spawn_table_24,
+                       (const char*) &data[0x4E4], spawn_table_25,
+                       (const char*) &data[0x500], spawn_table_26,
                        (const char*) &data[0x51C], 0);
 
     lbl_80472ED8.x0 = 0;
@@ -3334,14 +3355,14 @@ void gm_80182174(void)
 
     gm_8016795C(&lbl_80472ED8.xC);
 
-    lbl_80472ED8.xC.c_kind = 0x1B;
-    lbl_80472ED8.xC.slot_type = 1;
-    lbl_80472ED8.xC.stocks = 1;
-    lbl_80472ED8.xC.xD_b4 = 1;
+    ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.c_kind = 0x1B;
+    ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.slot_type = 1;
+    ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.stocks = 1;
+    ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.xD_b4 = 1;
 
     switch (mode) {
     case 0x21:
-        src = lbl_80472ED8.x6A4;
+        src = ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->x6A4;
         dst = lbl_80472ED8.x54;
         for (i = 0; i < 101; i++) {
             dst->x0 = src->x0;
@@ -3359,7 +3380,7 @@ void gm_80182174(void)
         }
         break;
     case 0x22:
-        src = lbl_80472ED8.x6A8;
+        src = *spawn_table_22;
         dst = lbl_80472ED8.x54;
         for (i = 0; i < 101; i++) {
             dst->x0 = src->x0;
@@ -3377,7 +3398,7 @@ void gm_80182174(void)
         }
         break;
     case 0x23:
-        src = lbl_80472ED8.x6AC;
+        src = *spawn_table_23;
         dst = lbl_80472ED8.x54;
         for (i = 0; i < 101; i++) {
             dst->x0 = src->x0;
@@ -3395,7 +3416,7 @@ void gm_80182174(void)
         }
         break;
     case 0x24:
-        src = lbl_80472ED8.x6B0;
+        src = *spawn_table_24;
         dst = lbl_80472ED8.x54;
         for (i = 0; i < 101; i++) {
             dst->x0 = src->x0;
@@ -3413,7 +3434,7 @@ void gm_80182174(void)
         }
         break;
     case 0x25:
-        src = lbl_80472ED8.x6B4;
+        src = *spawn_table_25;
         dst = lbl_80472ED8.x54;
         for (i = 0; i < 101; i++) {
             dst->x0 = src->x0;
@@ -3431,7 +3452,7 @@ void gm_80182174(void)
         }
         break;
     case 0x26:
-        src = lbl_80472ED8.x6B8;
+        src = *spawn_table_26;
         dst = lbl_80472ED8.x54;
         for (i = 0; i < 101; i++) {
             dst->x0 = src->x0;
@@ -3474,11 +3495,11 @@ bool gm_80182510(void)
 
 void gm_80182554(int arg0, int arg1)
 {
-    lbl_80472ED8.x6C8 = arg0;
-    lbl_80472ED8.x6C4 = arg1;
-    lbl_80472ED8.x6BC = 0;
-    lbl_80472ED8.x6C0 = 0;
-    lbl_80472ED8.x6BE = 0;
+    lbl_80473594.xC = arg0;
+    lbl_80473594.x8 = arg1;
+    lbl_80473594.x0 = 0;
+    lbl_80473594.x4 = 0;
+    lbl_80473594.x2 = 0;
 }
 
 typedef struct {
@@ -3544,133 +3565,146 @@ s32 gm_80182578(void)
     }
 
     if (mode < 0x25) {
-        if (mode < 0x23) {
-            if (mode < 0x21) {
-                return mode;
+        if (mode >= 0x23) {
+            goto mode_35_36;
+        }
+        if (mode >= 0x21) {
+            goto mode_33_34;
+        }
+        goto done;
+    }
+    if (mode >= 0x27) {
+        goto done;
+    }
+    goto mode_37_38;
+
+mode_33_34:
+    if (mode == 0x21) {
+        mode = gmMainLib_8015D6BC(gm_80164024((u8) idx));
+    } else {
+        mode = gmMainLib_8015D710(gm_80164024((u8) idx));
+    }
+    if ((u8) lbl_80472ED8.x6BC != 0) {
+        u32 score_store = (u32) lbl_80472ED8.x6C0;
+        if (score_store < score_val) {
+            int m = lbl_80472ED8.x6C4;
+            int i = lbl_80472ED8.x6C8;
+            switch (m) {
+            case 33:
+                blocks[0].icons[i] = (u8) lbl_80472ED8.x6BC;
+                break;
+            case 34:
+                blocks[1].icons[i] = (u8) lbl_80472ED8.x6BC;
+                break;
+            case 35:
+                blocks[2].icons[i] = (u8) lbl_80472ED8.x6BC;
+                break;
+            case 36:
+                blocks[3].icons[i] = (u8) lbl_80472ED8.x6BC;
+                break;
+            case 37:
+                blocks[4].icons[i] = (u8) lbl_80472ED8.x6BC;
+                break;
+            case 38:
+                blocks[5].icons[i] = (u8) lbl_80472ED8.x6BC;
+                break;
             }
-            if (mode == 0x21) {
-                mode = gmMainLib_8015D6BC(gm_80164024((u8) idx));
-            } else {
-                mode = gmMainLib_8015D710(gm_80164024((u8) idx));
+            switch (m) {
+            case 33:
+                blocks[0].scores[i] = score_store;
+                break;
+            case 34:
+                blocks[1].scores[i] = score_store;
+                break;
+            case 35:
+                blocks[2].scores[i] = score_store;
+                break;
+            case 36:
+                blocks[3].scores[i] = score_store;
+                break;
+            case 37:
+                blocks[4].scores[i] = score_store;
+                break;
+            case 38:
+                blocks[5].scores[i] = score_store;
+                break;
             }
-            if ((u8) lbl_80472ED8.x6BC != 0) {
-                u32 score_store = (u32) lbl_80472ED8.x6C0;
-                if (score_store < score_val) {
-                    int m = lbl_80472ED8.x6C4;
-                    int i = lbl_80472ED8.x6C8;
-                    switch (m) {
-                    case 33:
-                        blocks[0].icons[i] = (u8) lbl_80472ED8.x6BC;
-                        break;
-                    case 34:
-                        blocks[1].icons[i] = (u8) lbl_80472ED8.x6BC;
-                        break;
-                    case 35:
-                        blocks[2].icons[i] = (u8) lbl_80472ED8.x6BC;
-                        break;
-                    case 36:
-                        blocks[3].icons[i] = (u8) lbl_80472ED8.x6BC;
-                        break;
-                    case 37:
-                        blocks[4].icons[i] = (u8) lbl_80472ED8.x6BC;
-                        break;
-                    case 38:
-                        blocks[5].icons[i] = (u8) lbl_80472ED8.x6BC;
-                        break;
-                    }
-                    switch (m) {
-                    case 33:
-                        blocks[0].scores[i] = score_store;
-                        break;
-                    case 34:
-                        blocks[1].scores[i] = score_store;
-                        break;
-                    case 35:
-                        blocks[2].scores[i] = score_store;
-                        break;
-                    case 36:
-                        blocks[3].scores[i] = score_store;
-                        break;
-                    case 37:
-                        blocks[4].scores[i] = score_store;
-                        break;
-                    case 38:
-                        blocks[5].scores[i] = score_store;
-                        break;
-                    }
-                    {
-                        u16 time_store = lbl_80472ED8.x6BE;
-                        switch (m) {
-                        case 33:
-                            blocks[0].times[i] = time_store;
-                            break;
-                        case 34:
-                            blocks[1].times[i] = time_store;
-                            break;
-                        case 35:
-                            blocks[2].times[i] = time_store;
-                            break;
-                        case 36:
-                            blocks[3].times[i] = time_store;
-                            break;
-                        case 37:
-                            blocks[4].times[i] = time_store;
-                            break;
-                        case 38:
-                            blocks[5].times[i] = time_store;
-                            break;
-                        }
-                    }
-                }
-                return mode;
-            }
-            if ((s32) lbl_80472ED8.x6BE > (s32) time_val && mode == 0) {
-                int m = lbl_80472ED8.x6C4;
-                int i = lbl_80472ED8.x6C8;
+            {
+                u16 time_store = lbl_80472ED8.x6BE;
                 switch (m) {
                 case 33:
-                    blocks[0].times[i] = (u16) lbl_80472ED8.x6BE;
+                    blocks[0].times[i] = time_store;
                     break;
                 case 34:
-                    blocks[1].times[i] = (u16) lbl_80472ED8.x6BE;
+                    blocks[1].times[i] = time_store;
                     break;
                 case 35:
-                    blocks[2].times[i] = (u16) lbl_80472ED8.x6BE;
+                    blocks[2].times[i] = time_store;
                     break;
                 case 36:
-                    blocks[3].times[i] = (u16) lbl_80472ED8.x6BE;
+                    blocks[3].times[i] = time_store;
                     break;
                 case 37:
-                    blocks[4].times[i] = (u16) lbl_80472ED8.x6BE;
+                    blocks[4].times[i] = time_store;
                     break;
                 case 38:
-                    blocks[5].times[i] = (u16) lbl_80472ED8.x6BE;
+                    blocks[5].times[i] = time_store;
                     break;
                 }
             }
-            return mode;
         }
-        if ((u8) lbl_80472ED8.x6BC != 0) {
+        goto done;
+    }
+    if ((s32) lbl_80472ED8.x6BE > (s32) time_val && mode == 0) {
+        int m = lbl_80472ED8.x6C4;
+        int i = lbl_80472ED8.x6C8;
+        switch (m) {
+        case 33:
+            blocks[0].times[i] = (u16) lbl_80472ED8.x6BE;
+            break;
+        case 34:
+            blocks[1].times[i] = (u16) lbl_80472ED8.x6BE;
+            break;
+        case 35:
+            blocks[2].times[i] = (u16) lbl_80472ED8.x6BE;
+            break;
+        case 36:
+            blocks[3].times[i] = (u16) lbl_80472ED8.x6BE;
+            break;
+        case 37:
+            blocks[4].times[i] = (u16) lbl_80472ED8.x6BE;
+            break;
+        case 38:
+            blocks[5].times[i] = (u16) lbl_80472ED8.x6BE;
+            break;
+        }
+    }
+    goto done;
+
+mode_35_36:
+    {
+        u8 icon = lbl_80472ED8.x6BC;
+        if (icon != 0) {
             u16 time_store = lbl_80472ED8.x6BE;
             if ((s32) time_store > (s32) time_val) {
                 switch (mode) {
                 case 33:
-                    blocks[0].icons[idx] = (u8) lbl_80472ED8.x6BC;
+                    blocks[0].icons[idx] = icon;
                     break;
                 case 34:
-                    blocks[1].icons[idx] = (u8) lbl_80472ED8.x6BC;
+                    blocks[1].icons[idx] = icon;
                     break;
                 case 35:
-                    blocks[2].icons[idx] = (u8) lbl_80472ED8.x6BC;
+                    blocks[2].icons[idx] = icon;
                     break;
                 case 36:
-                    blocks[3].icons[idx] = (u8) lbl_80472ED8.x6BC;
+                    blocks[3].icons[idx] = icon;
                     break;
                 case 37:
-                    blocks[4].icons[idx] = (u8) lbl_80472ED8.x6BC;
+                    blocks[4].icons[idx] = icon;
                     break;
                 case 38:
-                    blocks[5].icons[idx] = (u8) lbl_80472ED8.x6BC;
+                    blocks[5].icons[idx] = icon;
                     break;
                 }
                 switch (mode) {
@@ -3695,32 +3729,34 @@ s32 gm_80182578(void)
                 }
             }
         }
-        return mode;
-    } else if (mode < 0x27) {
-        if ((s32) lbl_80472ED8.x6BE > (s32) time_val) {
-            switch (mode) {
-            case 33:
-                blocks[0].times[idx] = (u16) lbl_80472ED8.x6BE;
-                break;
-            case 34:
-                blocks[1].times[idx] = (u16) lbl_80472ED8.x6BE;
-                break;
-            case 35:
-                blocks[2].times[idx] = (u16) lbl_80472ED8.x6BE;
-                break;
-            case 36:
-                blocks[3].times[idx] = (u16) lbl_80472ED8.x6BE;
-                break;
-            case 37:
-                blocks[4].times[idx] = (u16) lbl_80472ED8.x6BE;
-                break;
-            case 38:
-                blocks[5].times[idx] = (u16) lbl_80472ED8.x6BE;
-                break;
-            }
-        }
-        return mode;
     }
+    goto done;
+
+mode_37_38:
+    if ((s32) lbl_80472ED8.x6BE > (s32) time_val) {
+        switch (mode) {
+        case 33:
+            blocks[0].times[idx] = (u16) lbl_80472ED8.x6BE;
+            break;
+        case 34:
+            blocks[1].times[idx] = (u16) lbl_80472ED8.x6BE;
+            break;
+        case 35:
+            blocks[2].times[idx] = (u16) lbl_80472ED8.x6BE;
+            break;
+        case 36:
+            blocks[3].times[idx] = (u16) lbl_80472ED8.x6BE;
+            break;
+        case 37:
+            blocks[4].times[idx] = (u16) lbl_80472ED8.x6BE;
+            break;
+        case 38:
+            blocks[5].times[idx] = (u16) lbl_80472ED8.x6BE;
+            break;
+        }
+    }
+
+done:
     return mode;
     PAD_STACK(0x48);
 }

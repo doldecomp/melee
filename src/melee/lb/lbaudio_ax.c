@@ -2534,15 +2534,14 @@ s32 lbAudioAx_8002785C(void)
 
 void lbAudioAx_80027AB0(s32 arg0)
 {
-    lbAudioAx_PoolAlloc* st = &lbl_80433710;
     s32 lang;
 
     if (lbLang_IsSavedLanguageUS()) {
-        strcpy(lbl_803BB340, "/audio/us/");
+        strcpy(lbl_803BB340, lbl_803BB300 + 0x1790);
         lbl_804D38D0 = 10;
         lang = 1;
     } else {
-        strcpy(lbl_803BB340, "/audio/");
+        strcpy(lbl_803BB340, lbl_803BB300 + 0x179C);
         lbl_804D38D0 = 7;
         lang = 0;
     }
@@ -2550,11 +2549,9 @@ void lbAudioAx_80027AB0(s32 arg0)
     HSD_AudioSFXKeyOffAll();
 
     if (lbl_804D3878 != lang) {
-        int idx;
-
         lbl_804D3878 = lang;
         AXDriver_8038DCFC();
-        strcpy(&lbl_803BB340[lbl_804D38D0], "smash2.sem");
+        strcpy(&lbl_803BB340[lbl_804D38D0], lbl_803BB300 + 0x17A8);
         AXDriver_8038DA70(lbl_803BB340, lb_800195D0);
 
         if (arg0 != 0x83D61) {
@@ -2562,16 +2559,17 @@ void lbAudioAx_80027AB0(s32 arg0)
         }
 
         {
-            int* a = st->x354;
-            int* b = st->xB4;
-            int* c = st->x194;
-            int* d = st->x274;
-            for (idx = 0; idx < 55; idx++) {
+            int* a = lbl_80433710.x354;
+            int* b = lbl_80433710.xB4;
+            int* c = lbl_80433710.x194;
+            int* d = lbl_80433710.x274;
+            int idx;
+            for (idx = 0; idx < 55; a++, b++, c++, d++, idx++) {
                 if (idx != 0) {
-                    a[idx] = -1;
-                    b[idx] = -1;
-                    c[idx] = -1;
-                    d[idx] = -1;
+                    *a = -1;
+                    *b = -1;
+                    *c = -1;
+                    *d = -1;
                 }
             }
         }
@@ -2579,28 +2577,28 @@ void lbAudioAx_80027AB0(s32 arg0)
         HSD_SynthSFXUnloadBank(1);
         HSD_SynthSFXUnloadBank(2);
 
-        if (st->x274[0x33] < 1) {
+        if (lbl_80433710.x274[0x33] < 1) {
             strcpy(&lbl_803BB340[lbl_804D38D0],
                    *(char**) (lbl_803BB300 + 0xAC8));
-            st->x354[0x33] = HSD_SynthSFXLoad(lbl_803BB340, 1, 0, 0);
+            lbl_80433710.x354[0x33] = HSD_SynthSFXLoad(lbl_803BB340, 1, 0, 0);
             HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
-            st->x274[0x33] = 2;
+            lbl_80433710.x274[0x33] = 2;
         }
 
-        if (st->x274[1] < 1) {
+        if (lbl_80433710.x274[1] < 1) {
             strcpy(&lbl_803BB340[lbl_804D38D0],
                    *(char**) (lbl_803BB300 + 0xA00));
-            st->x354[1] = HSD_SynthSFXLoad(lbl_803BB340, 1, 0, 0);
+            lbl_80433710.x354[1] = HSD_SynthSFXLoad(lbl_803BB340, 1, 0, 0);
             HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
-            st->x274[1] = 2;
+            lbl_80433710.x274[1] = 2;
         }
 
-        if (st->x274[0x36] < 1) {
+        if (lbl_80433710.x274[0x36] < 1) {
             strcpy(&lbl_803BB340[lbl_804D38D0],
                    *(char**) (lbl_803BB300 + 0xAD4));
-            st->x354[0x36] = HSD_SynthSFXLoad(lbl_803BB340, 1, 0, 0);
+            lbl_80433710.x354[0x36] = HSD_SynthSFXLoad(lbl_803BB340, 1, 0, 0);
             HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
-            st->x274[0x36] = 2;
+            lbl_80433710.x274[0x36] = 2;
         }
     }
 }
@@ -2756,28 +2754,35 @@ void lbAudioAx_8002838C(void)
     int* p3;
     int* p4;
     int i;
+    char* ptr;
 
     ARInit(st->x514, 0x10);
     ARQInit();
     AIInit(NULL);
     PAD_STACK(8);
 
-    lbl_804D643C = offsets_arr_803BC4E4[0][0];
-    lbl_804D6440 = offsets_arr_803BC4E4[0x33][0];
-    lbl_804D6440 += offsets_arr_803BC4E4[1][0];
-    lbl_804D6440 += offsets_arr_803BC4E4[0x36][0];
+    lbl_804D643C = *(int*) (lbl_803BB300 + 0x11E4);
+    lbl_804D6440 = *(int*) (lbl_803BB300 + 0x137C);
+    lbl_804D6440 += *(int*) (lbl_803BB300 + 0x11EC);
+    lbl_804D6440 += *(int*) (lbl_803BB300 + 0x1394);
 
     fn_80023254(3);
-    lbl_804D6444 = offsets_arr_803BC4E4[st->x434[0]][0];
+    ptr = lbl_803BB300 + ((*(volatile int*) ((char*) st + 0x434)) << 3);
+    lbl_804D6444 = *(int*) (ptr + 0x11E4);
 
     fn_80023254(4);
-    lbl_804D6444 += offsets_arr_803BC4E4[st->x434[0]][0];
-    lbl_804D6444 += offsets_arr_803BC4E4[st->x434[1]][0];
-    lbl_804D6444 += offsets_arr_803BC4E4[st->x434[2]][0];
-    lbl_804D6444 += offsets_arr_803BC4E4[st->x434[3]][0];
+    ptr = lbl_803BB300 + ((*(volatile int*) ((char*) st + 0x434)) << 3);
+    lbl_804D6444 += *(int*) (ptr + 0x11E4);
+    ptr = lbl_803BB300 + ((*(volatile int*) ((char*) st + 0x438)) << 3);
+    lbl_804D6444 += *(int*) (ptr + 0x11E4);
+    ptr = lbl_803BB300 + ((*(volatile int*) ((char*) st + 0x43C)) << 3);
+    lbl_804D6444 += *(int*) (ptr + 0x11E4);
+    ptr = lbl_803BB300 + ((*(volatile int*) ((char*) st + 0x440)) << 3);
+    lbl_804D6444 += *(int*) (ptr + 0x11E4);
 
     fn_80023254(5);
-    lbl_804D6444 += offsets_arr_803BC4E4[st->x434[0]][0];
+    ptr = lbl_803BB300 + ((*(volatile int*) ((char*) st + 0x434)) << 3);
+    lbl_804D6444 += *(int*) (ptr + 0x11E4);
 
     lbl_804D6438 = lbl_804D643C + (lbl_804D6440 + lbl_804D6444);
     lbl_804D3870 = lbl_804D6438;

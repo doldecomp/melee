@@ -591,6 +591,7 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
 
         for (i = 0x11; i <= 0x12; i++) {
             HSD_JObj* jobj;
+            HSD_AnimJoint* animjoint;
             HSD_GObj* gobj = GObj_Create(4, 5, 0x80);
             HSD_JObj* temp_r23_6;
             s32 temp_r22_9;
@@ -598,7 +599,8 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
             HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
             GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x83);
             HSD_GObj_SetupProc(gobj, mn_8022EAE0, 3);
-            HSD_JObjAddAnimAll(jobj, mnStageSel_804D6C98->x0.animjoint,
+            animjoint = mnStageSel_804D6C98->x0.animjoint;
+            HSD_JObjAddAnimAll(jobj, animjoint,
                                mnStageSel_804D6C98->x0.matanim_joint,
                                mnStageSel_804D6C98->x0.shapeanim_joint);
 

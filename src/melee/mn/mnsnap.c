@@ -249,18 +249,24 @@ static void mnSnap_8025329C(void)
 /// Loads a page of snapshot thumbnails and updates navigation arrows.
 void mnSnap_80253640(s32 page)
 {
-    mnSnap_State* snap = &mnSnap_804A0A10;
-    s32* p48 = &snap->photo_count[0];
-    s32* p4F = &snap->cur_page;
-    s32* p50 = &snap->active_slot;
-    s32* p51;
+    HSD_JObj* jobj;
+    void* img;
+    mnSnap_State* snap;
+    s32* p48;
+    s32* p4F;
+    s32* p50;
     s32* p52;
     s32* p58;
+    s32* p51;
     s32 count;
     s32 i;
     f32 t;
     PAD_STACK(28);
 
+    snap = &mnSnap_804A0A10;
+    p48 = &snap->photo_count[0];
+    p4F = &snap->cur_page;
+    p50 = &snap->active_slot;
     *p4F = page;
     count = p48[*p50] - (page * 4);
     if (count > 4) {
@@ -278,9 +284,6 @@ void mnSnap_80253640(s32 page)
     snap->thumb_loaded[3] = 0;
 
     while (i < count) {
-        HSD_JObj* jobj;
-        void* img;
-
         HSD_DObjClearFlags(snap->thumb_jobjs[i]->u.dobj->next->next, 1);
         jobj = snap->thumb_jobjs[i];
         img = snap->blank_img;
@@ -319,8 +322,11 @@ void mnSnap_80253640(s32 page)
     } else {
         t = 50.0F;
     }
-    HSD_JObjReqAnimAll(snap->scroll_jobj, t);
-    HSD_JObjAnimAll(snap->scroll_jobj);
+    {
+        HSD_JObj** scroll = &snap->scroll_jobj;
+        HSD_JObjReqAnimAll(*scroll, t);
+        HSD_JObjAnimAll(*scroll);
+    }
 
     if (p48[*p50] <= 4) {
         HSD_JObjSetFlagsAll(snap->arrow_jobj, 0x10);
@@ -567,27 +573,26 @@ void mnSnap_80254014(void)
 /// Configures the Yes/No dialog button positions based on language setting.
 void mnSnap_8025409C(s32 dlg_type)
 {
-    mnSnap_State* snap = &mnSnap_804A0A10;
-    HSD_JObj* left;
     HSD_JObj* right;
+    HSD_JObj* left;
     s32* p5E;
     HSD_JObj** p38;
     HSD_JObj** p39;
 
-    snap->dlg_type = dlg_type;
+    mnSnap_804A0A10.dlg_type = dlg_type;
 
     if (dlg_type == 0) {
-        HSD_JObjSetFlags(snap->yes_jobj, 0x10);
-        HSD_JObjSetFlags(snap->no_jobj, 0x10);
+        HSD_JObjSetFlags(mnSnap_804A0A10.yes_jobj, 0x10);
+        HSD_JObjSetFlags(mnSnap_804A0A10.no_jobj, 0x10);
         return;
     }
 
-    p38 = &snap->yes_jobj;
+    p38 = &mnSnap_804A0A10.yes_jobj;
     HSD_JObjClearFlags(*p38, 0x10);
-    p39 = &snap->no_jobj;
+    p39 = &mnSnap_804A0A10.no_jobj;
     HSD_JObjClearFlags(*p39, 0x10);
 
-    p5E = &snap->btn_idx;
+    p5E = &mnSnap_804A0A10.btn_idx;
     *p5E = 0;
 
     if (dlg_type == 1) {
@@ -602,21 +607,8 @@ void mnSnap_8025409C(s32 dlg_type)
         *p5E = 1;
     }
 
-    if (left == NULL) {
-        __assert("jobj.h", 0x3A4, "jobj");
-    }
-    left->translate.x = -3.5F;
-    if (!(left->flags & JOBJ_MTX_INDEP_SRT)) {
-        HSD_JObjSetMtxDirty(left);
-    }
-
-    if (right == NULL) {
-        __assert("jobj.h", 0x3A4, "jobj");
-    }
-    right->translate.x = +3.5F;
-    if (!(right->flags & JOBJ_MTX_INDEP_SRT)) {
-        HSD_JObjSetMtxDirty(right);
-    }
+    HSD_JObjSetTranslateX(left, -3.5F);
+    HSD_JObjSetTranslateX(right, +3.5F);
 
     {
         f32 f;
@@ -640,8 +632,8 @@ void mnSnap_8025409C(s32 dlg_type)
     HSD_JObjAnimAll(left);
     HSD_JObjAnimAll(right);
 
-    snap->left_btn = left;
-    snap->right_btn = right;
+    mnSnap_804A0A10.left_btn = left;
+    mnSnap_804A0A10.right_btn = right;
 }
 
 /// Resets to slot selection state after a card error or empty card.
@@ -799,10 +791,11 @@ void fn_802545C4(void)
     HSD_JObj* jobj;
     HSD_JObj* jobj2;
     Vec3* translate;
-    PAD_STACK(328);
+    PAD_STACK(320);
     buttons = (mn_804A04F0.buttons = mn_80229624(4));
     HSD_JObjAnimAll(mnSnap_804A0A10.select_jobj);
-    HSD_JObjAnimAll(mnSnap_804A0A10.move_jobj);
+    jobj = mnSnap_804A0A10.move_jobj;
+    HSD_JObjAnimAll(jobj);
     state = mnSnap_804A0A10.state;
     if (state >= 4) {
         if (((u32) (state - 15)) > 1) {

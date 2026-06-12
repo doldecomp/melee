@@ -1846,9 +1846,7 @@ void gm_801B2790(GameScene* arg0)
     temp_r30->rules = temp_r31->data.rules;
     temp_r30->rules.x0_0 = 0;
 
-    temp_r31->data.rules.x4_4 = false;
-
-    temp_r30->rules.x0_6 = temp_r31->data.rules.x4_7;
+    temp_r30->rules.x0_6 = temp_r31->data.rules.x4_4 = false;
 
     temp_r30->rules.x5_0 = true;
     temp_r30->rules.x1_2 = true;

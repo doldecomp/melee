@@ -371,6 +371,8 @@ void fn_802523D8(HSD_GObj* gobj)
     MnInfoTextCursor* temp_r3_2;
     MnInfoTextCursor* var_r26;
     MnInfoTextCursor* var_r27;
+    HSD_Text* zero_left;
+    HSD_Text* zero_right;
     PAD_STACK(16);
 
     temp_r31 = gobj->user_data;
@@ -381,15 +383,17 @@ void fn_802523D8(HSD_GObj* gobj)
         temp_r3->flags_3 = HSD_GObj_804D783C;
         temp_r3_2 = gobj->user_data;
         var_r27 = temp_r3_2;
-        var_r26 = temp_r3_2;
+        zero_left = (HSD_Text*) var_r28;
+        zero_right = (HSD_Text*) var_r28;
+        var_r26 = (MnInfoTextCursor*) &((HSD_Text**) temp_r3_2)[var_r28];
         do {
             if (var_r27->left != NULL) {
                 HSD_SisLib_803A5CC4(var_r26->left);
-                var_r27->left = NULL;
+                var_r27->left = zero_left;
             }
             if (var_r27->right != NULL) {
                 HSD_SisLib_803A5CC4(var_r26->right);
-                var_r27->right = NULL;
+                var_r27->right = zero_right;
             }
             var_r28 += 1;
             var_r27 = (MnInfoTextCursor*) ((u8*) var_r27 + 4);
