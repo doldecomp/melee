@@ -206,8 +206,6 @@ char* un_80312834(char* buf, u32 num)
 
 extern f32 un_804DDE28;
 extern f32 un_804DDE2C;
-extern f32 un_804DDE30;
-extern f32 un_804DDE34;
 extern f32 un_804DDE38;
 extern f32 un_804DDE3C;
 extern f32 un_804DDE40;
@@ -298,8 +296,8 @@ void un_80312904(void* arg0, s8 arg1)
     text->pos_y = f29;
     text->pos_z = f31;
     text = row->text0;
-    text->font_size.x = un_804DDE30;
-    text->font_size.y = un_804DDE34;
+    text->font_size.x = 0.028f;
+    text->font_size.y = 0.029f;
     row->text0->default_kerning = 1;
     HSD_SisLib_803A6368(row->text0, un_80308354(row->idx));
 
@@ -308,8 +306,8 @@ void un_80312904(void* arg0, s8 arg1)
     text->pos_y = f29;
     text->pos_z = f31;
     text = row->text1;
-    text->font_size.x = un_804DDE30;
-    text->font_size.y = un_804DDE34;
+    text->font_size.x = 0.028f;
+    text->font_size.y = 0.029f;
     HSD_SisLib_803A6368(row->text1, 0x13B);
 
     digits = ((u8**) ((char*) HSD_SisLib_804D1124[0] + 0x4B8))[row->x28];
@@ -323,7 +321,7 @@ void un_80312904(void* arg0, s8 arg1)
     text->pos_z = f31;
     text = row->text2;
     text->font_size.x = un_804DDE40;
-    text->font_size.y = un_804DDE34;
+    text->font_size.y = 0.029f;
     HSD_SisLib_803A6368(row->text2, row->x28 + 0x12E);
 }
 
@@ -1085,7 +1083,7 @@ void fn_8031438C(HSD_GObj* arg0)
             state->x290->pos_z = un_804DDE68;
             new_var = state->x290;
             state->x290->font_size.x = un_804DDE40;
-            new_var->font_size.y = un_804DDE34;
+            new_var->font_size.y = 0.029f;
             state->x290->default_kerning = 1;
             state->x290->default_alignment = (double) 2;
             HSD_SisLib_803A6B98(state->x290, un_804DDE88, un_804DDE8C,
