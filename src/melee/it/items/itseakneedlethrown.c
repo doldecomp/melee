@@ -22,10 +22,10 @@
 #include <MSL/trigf.h>
 
 ItemStateTable it_803F6F50[] = {
-    { 0, itSeakneedlethrown_UnkMotion0_Anim, itSeakneedlethrown_UnkMotion0_Phys, itSeakneedlethrown_UnkMotion0_Coll }, 
-    { 1, itSeakneedlethrown_UnkMotion1_Anim, itSeakneedlethrown_UnkMotion1_Phys, itSeakneedlethrown_UnkMotion1_Coll }, 
-    { 2, itSeakneedlethrown_UnkMotion2_Anim, itSeakneedlethrown_UnkMotion2_Phys, itSeakneedlethrown_UnkMotion2_Coll }, 
-    { 3, itSeakneedlethrown_UnkMotion3_Anim, itSeakneedlethrown_UnkMotion3_Phys, itSeakneedlethrown_UnkMotion3_Coll }, 
+    { 0, itSeakneedlethrown_UnkMotion0_Anim, itSeakneedlethrown_UnkMotion0_Phys, itSeakneedlethrown_UnkMotion0_Coll },
+    { 1, itSeakneedlethrown_UnkMotion1_Anim, itSeakneedlethrown_UnkMotion1_Phys, itSeakneedlethrown_UnkMotion1_Coll },
+    { 2, itSeakneedlethrown_UnkMotion2_Anim, itSeakneedlethrown_UnkMotion2_Phys, itSeakneedlethrown_UnkMotion2_Coll },
+    { 3, itSeakneedlethrown_UnkMotion3_Anim, itSeakneedlethrown_UnkMotion3_Phys, itSeakneedlethrown_UnkMotion3_Coll },
     { 4, itSeakneedlethrown_UnkMotion4_Anim, itSeakneedlethrown_UnkMotion4_Phys, itSeakneedlethrown_UnkMotion4_Coll }
 };
 static f32 it_803F6FA0[8] = { -2.0f, -2.1f, -2.2f, -2.3f,
