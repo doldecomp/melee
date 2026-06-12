@@ -113,6 +113,21 @@ def line_of(text: str, idx: int) -> int:
     return text.count("\n", 0, idx) + 1
 
 
+def directive_lines(text: str) -> set[int]:
+    """0-based line indices inside preprocessor directives (incl. continuations)."""
+    covered: set[int] = set()
+    lines = text.split("\n")
+    i = 0
+    while i < len(lines):
+        if lines[i].lstrip().startswith("#"):
+            covered.add(i)
+            while i < len(lines) and lines[i].rstrip().endswith("\\"):
+                i += 1
+                covered.add(i)
+        i += 1
+    return covered
+
+
 # --- check: jobj-flags ----------------------------------------------------
 
 # HSD_JObj{Set,Clear}Flags[All] called with a raw hidden-flag literal where
@@ -153,6 +168,57 @@ def scan_jobj_flags(path: Path, text: str) -> Iterator[Finding]:
         pos = close_idx
 
 
+# --- check: assert-macros -------------------------------------------------
+
+# Direct __assert(...) calls whose file argument is __FILE__ or the file's
+# own basename string; both are expressible with the HSD assert macros
+# (debug.h). Calls passing a different filename cannot use the macros (they
+# hard-code __FILE__) and are left alone. A site annotated with a Doxygen
+# @todo within the preceding four lines is exempt: it records that no
+# byte-matching macro form is known there yet.
+_ASSERT_CALL = re.compile(r"__assert\s*\(")
+_ASSERT_MESSAGE = (
+    "Use HSD_ASSERT/HSD_ASSERTMSG/HSD_ASSERTREPORT instead of a direct "
+    "__assert call (see src/sysdolphin/baselib/debug.h), or annotate with a "
+    "@todo if no byte-matching form is known yet"
+)
+_ASSERT_EXEMPT_PATHS = frozenset({"src/sysdolphin/baselib/debug.h"})
+
+
+def scan_assert_macros(path: Path, text: str) -> Iterator[Finding]:
+    if str(path) in _ASSERT_EXEMPT_PATHS:
+        return
+    own = f'"{path.name}"'
+    code = strip_noise(text)
+    lines = text.split("\n")
+    dlines = directive_lines(text)
+    pos = 0
+    while True:
+        m = _ASSERT_CALL.search(code, pos)
+        if m is None:
+            return
+        pos = m.end()
+        line0 = code.count("\n", 0, m.start())
+        if line0 in dlines:
+            continue
+        open_idx = code.index("(", m.start())
+        close_idx = find_close(code, open_idx)
+        if close_idx < 0:
+            continue
+        commas = top_level_commas(code, open_idx, close_idx)
+        end_first = commas[0] if commas else close_idx
+        # Read the first argument from the original text: in the comment- and
+        # string-blanked view a "basename.c" literal would be erased.
+        first = text[open_idx + 1 : end_first].strip()
+        if first not in ("__FILE__", own):
+            continue
+        context = "\n".join(lines[max(0, line0 - 4) : line0 + 1])
+        if "@todo" in context:
+            continue
+        snippet = " ".join(text[m.start() : close_idx + 1].split())
+        yield Finding(str(path), line0 + 1, _ASSERT_MESSAGE, snippet)
+
+
 # --- registry & driver ----------------------------------------------------
 
 CHECKS: list[Check] = [
@@ -160,6 +226,11 @@ CHECKS: list[Check] = [
         "jobj-flags",
         "raw 0x10 instead of JOBJ_HIDDEN in HSD_JObj flag calls",
         scan_jobj_flags,
+    ),
+    Check(
+        "assert-macros",
+        "direct __assert calls that could use the HSD assert macros",
+        scan_assert_macros,
     ),
 ]
 
