@@ -72,90 +72,22 @@ typedef struct mnDiagram_AnimData {
     /* 0x0C */ HSD_JObj* jobj;             ///< JObj for exit animation
 } mnDiagram_AnimData;
 
-struct mnDiagram_DataTailHeader {
-    /* 0x00 */ f32 exit_anim[3];
-    /* 0x0C */ f32 arrow_anim[3];
-    /* 0x18 */ f32 cursor_anim[3];
-    /* 0x24 */ char user_data_error[0x18];
-    /* 0x3C */ char file_name[0xC];
-    /* 0x48 */ char user_data_name[0xC];
-    /* 0x54 */ char ConB1_joint[0x18];
-    /* 0x6C */ char ConB1_animjoint[0x1C];
-    /* 0x88 */ char ConB1_matanim_joint[0x20];
-    /* 0xA8 */ char ConB1_shapeanim_joint[0x24];
-    /* 0xCC */ char CursorB1_joint[0x1C];
-    /* 0xE8 */ char FaceB_joint[0x18];
-    /* 0x100 */ char FaceB_animjoint[0x1C];
-    /* 0x11C */ char FaceB_matanim_joint[0x20];
-    /* 0x13C */ char FaceB_shapeanim_joint[0x24];
-    /* 0x160 */ char NmB_joint[0x18];
-    /* 0x178 */ char NmB_animjoint[0x1C];
-    /* 0x194 */ char NmB_matanim_joint[0x20];
-    /* 0x1B4 */ char NmB_shapeanim_joint[0x20];
-    /* 0x1D4 */ char SubB1_joint[0x18];
-    /* 0x1EC */ char SubB1_animjoint[0x1C];
-    /* 0x208 */ char SubB1_matanim_joint[0x20];
-    /* 0x228 */ char SubB1_shapeanim_joint[0x24];
-    /* 0x24C */ char ConB2_joint[0x18];
-    /* 0x264 */ char ConB2_animjoint[0x1C];
-    /* 0x280 */ char ConB2_matanim_joint[0x20];
-    /* 0x2A0 */ char ConB2_shapeanim_joint[0x24];
-    /* 0x2C4 */ char ConB3_joint[0x18];
-    /* 0x2DC */ char ConB3_animjoint[0x1C];
-    /* 0x2F8 */ char ConB3_matanim_joint[0x20];
-    /* 0x318 */ char ConB3_shapeanim_joint[0x24];
-    /* 0x33C */ char CursorB3_joint[0x20];
-};
-STATIC_ASSERT(sizeof(mnDiagram_DataTailHeader) == 0x35C);
+/// BSS variables - sorted player arrays
+mnDiagram_804A0750_t mnDiagram_804A0750;
+mnDiagram_804A076C_t mnDiagram_804A076C;
 
-/// Data and BSS variables - sorted player arrays
-Point3d mnDiagram_803EE728[3] = {
-    { 4.0F, 1.0F, 0.0F },
-    { -3.0F, 0.8F, 0.0F },
-    { -1.0F, 0.7F, 0.0F },
-};
+static AnimLoopSettings mnDiagram_803EE768 = { 0.0f, 9.0f, -0.1f };
 
-u8 mnDiagram_803EE74C[0x1C] = {
+static u8 mnDiagram_803EE74C[0x1C] = {
     8,    1,    6,    0x10, 0x11, 4,   2,   0xD, 0xB, 0,
     5,    0xC,  0xE,  0x12, 7,    0xF, 0xA, 9,   3,   0x15,
     0x18, 0x13, 0x14, 0x17, 0x16, 0,   0,   0,
 };
 
-AnimLoopSettings mnDiagram_803EE768 = { 0.0f, 9.0f, -0.1f };
-
-mnDiagram_DataTailHeader mnDiagram_803EE774 = {
-    { 10.0F, 19.0F, -0.1F },
-    { 0.0F, 199.0F, 0.0F },
-    { 0.0F, 10.0F, -0.1F },
-    "Can't get user_data.\n",
-    "mndiagram.c",
-    "user_data",
-    "MenMainConB1_Top_joint",
-    "MenMainConB1_Top_animjoint",
-    "MenMainConB1_Top_matanim_joint",
-    "MenMainConB1_Top_shapeanim_joint",
-    "MenMainCursorB1_Top_joint",
-    "MenMainFaceB_Top_joint",
-    "MenMainFaceB_Top_animjoint",
-    "MenMainFaceB_Top_matanim_joint",
-    "MenMainFaceB_Top_shapeanim_joint",
-    "MenMainNmB_Top_joint",
-    "MenMainNmB_Top_animjoint",
-    "MenMainNmB_Top_matanim_joint",
-    "MenMainNmB_Top_shapeanim_joint",
-    "MenMainSubB1_Top_joint",
-    "MenMainSubB1_Top_animjoint",
-    "MenMainSubB1_Top_matanim_joint",
-    "MenMainSubB1_Top_shapeanim_joint",
-    "MenMainConB2_Top_joint",
-    "MenMainConB2_Top_animjoint",
-    "MenMainConB2_Top_matanim_joint",
-    "MenMainConB2_Top_shapeanim_joint",
-    "MenMainConB3_Top_joint",
-    "MenMainConB3_Top_animjoint",
-    "MenMainConB3_Top_matanim_joint",
-    "MenMainConB3_Top_shapeanim_joint",
-    "MenMainCursorB3_Top_joint",
+static Point3d mnDiagram_803EE728[3] = {
+    { 4.0F, 1.0F, 0.0F },
+    { -3.0F, 0.8F, 0.0F },
+    { -1.0F, 0.7F, 0.0F },
 };
 
 /// Overlay over &mnDiagram_803EE728 to reach the trailing animation/text-layout
@@ -164,45 +96,15 @@ typedef struct mnDiagram_AnimTable {
     /* 0x00 */ Point3d points[3];
     /* 0x24 */ u8 pad_24[0x1C];
     /* 0x40 */ AnimLoopSettings x40;
-    /* 0x4C */ AnimLoopSettings exit_anim;
+    /* 0x4C */ u8 pad_4C[0xC];
     /* 0x58 */ AnimLoopSettings arrow_anim;
     /* 0x64 */ AnimLoopSettings cursor_anim;
-    /* 0x70 */ char user_data_error[0x18];
-    /* 0x88 */ char file_name[0xC];
-    /* 0x94 */ char user_data_name[0xC];
-    /* 0xA0 */ char ConB1_joint[0x18];
-    /* 0xB8 */ char ConB1_animjoint[0x1C];
-    /* 0xD4 */ char ConB1_matanim_joint[0x20];
-    /* 0xF4 */ char ConB1_shapeanim_joint[0x24];
-    /* 0x118 */ char CursorB1_joint[0x1C];
-    /* 0x134 */ char FaceB_joint[0x18];
-    /* 0x14C */ char FaceB_animjoint[0x1C];
-    /* 0x168 */ char FaceB_matanim_joint[0x20];
-    /* 0x188 */ char FaceB_shapeanim_joint[0x24];
-    /* 0x1AC */ char NmB_joint[0x18];
-    /* 0x1C4 */ char NmB_animjoint[0x1C];
-    /* 0x1E0 */ char NmB_matanim_joint[0x20];
-    /* 0x200 */ char NmB_shapeanim_joint[0x20];
-    /* 0x220 */ char SubB1_joint[0x18];
-    /* 0x238 */ char SubB1_animjoint[0x1C];
-    /* 0x254 */ char SubB1_matanim_joint[0x20];
-    /* 0x274 */ char SubB1_shapeanim_joint[0x24];
-    /* 0x298 */ char ConB2_joint[0x18];
-    /* 0x2B0 */ char ConB2_animjoint[0x1C];
-    /* 0x2CC */ char ConB2_matanim_joint[0x20];
-    /* 0x2EC */ char ConB2_shapeanim_joint[0x24];
-    /* 0x310 */ char ConB3_joint[0x18];
-    /* 0x328 */ char ConB3_animjoint[0x1C];
-    /* 0x344 */ char ConB3_matanim_joint[0x20];
-    /* 0x364 */ char ConB3_shapeanim_joint[0x24];
-    /* 0x388 */ char CursorB3_joint[0x20];
+    /* 0x70 */ char x70[0x18];
+    /* 0x88 */ char x88[0xC];
+    /* 0x94 */ char x94[0x14];
 } mnDiagram_AnimTable;
-STATIC_ASSERT(sizeof(mnDiagram_AnimTable) == 0x3A8);
 
 #define GET_DIAGRAM_ANIM_TABLE() ((mnDiagram_AnimTable*) &mnDiagram_803EE728)
-
-mnDiagram_804A0750_t mnDiagram_804A0750;
-mnDiagram_804A076C_t mnDiagram_804A076C;
 
 static s32 mnDiagram_804D4FA0 = 0xFF;
 
@@ -1948,8 +1850,8 @@ void mnDiagram_80241310(s32 arg0, s32 arg1, s32 arg2)
 
     user_data = HSD_MemAlloc(sizeof(mnDiagram_PopupData));
     if (user_data == NULL) {
-        OSReport(tbl->user_data_error);
-        __assert(tbl->file_name, 0x5F8, tbl->user_data_name);
+        OSReport(tbl->x70);
+        __assert(tbl->x88, 0x5F8, tbl->x94);
     }
 
     GObj_InitUserData(gobj, 0, mnDiagram_PopupCleanup, user_data);
@@ -2237,7 +2139,7 @@ void mnDiagram_ExitAnimProc(HSD_GObj* gobj)
     data = gobj->user_data;
     mnDiagram_802417D0(gobj);
     jobj = data->jobj;
-    table = mnDiagram_803EE774.exit_anim;
+    table = mnDiagram_803EE774;
     if (mn_8022ED6C(jobj, (AnimLoopSettings*) table) >= table[1]) {
         HSD_GObjPLink_80390228(gobj);
     }
@@ -2633,13 +2535,13 @@ void mnDiagram_802427B4(void* arg0, s32 arg1, s32 arg2)
     // Column headers
     text = HSD_SisLib_803A6754(0, 1);
     data->col_header_text = text;
-    text->font_size.x = mnDiagram_804DBFA4;
-    text->font_size.y = mnDiagram_804DBFA8;
+    text->font_size.x = 0.02f;
+    text->font_size.y = 0.03f;
     {
         HSD_JObj* j = data->jobjs[7];
         pos.z = HSD_JObjGetTranslationZ(j);
-        pos.y = (0, mnDiagram_804DBFAC) - HSD_JObjGetTranslationY(j);
-        pos.x = mnDiagram_804DBFB0 + HSD_JObjGetTranslationX(j);
+        pos.y = -HSD_JObjGetTranslationY(j) - 0.5f;
+        pos.x = HSD_JObjGetTranslationX(j) - 1.3f;
         text->pos_x = pos.x;
         text->pos_y = pos.y;
         text->pos_z = pos.z;
@@ -2653,21 +2555,21 @@ void mnDiagram_802427B4(void* arg0, s32 arg1, s32 arg2)
             name_id = name_byte;
             x_spacing = HSD_JObjGetTranslationX(data->jobjs[8]) -
                         HSD_JObjGetTranslationX(data->jobjs[7]);
-            HSD_SisLib_803A6B98(text, (x_spacing * i) / 0.02f,
-                                mnDiagram_804DBF84, GetNameText(name_id));
+            HSD_SisLib_803A6B98(text, (x_spacing * i) / 0.02f, 0.0f,
+                                GetNameText(name_id));
         }
     }
 
     // Row headers
     row_text = HSD_SisLib_803A6754(0, 1);
     data->row_header_text = row_text;
-    row_text->font_size.x = mnDiagram_804DBFA4;
-    row_text->font_size.y = mnDiagram_804DBFA8;
+    row_text->font_size.x = 0.02f;
+    row_text->font_size.y = 0.03f;
     {
         HSD_JObj* j = data->jobjs[9];
         pos.z = HSD_JObjGetTranslationZ(j);
-        pos.y = mnDiagram_804DBFAC - HSD_JObjGetTranslationY(j);
-        pos.x = mnDiagram_804DBFB0 + HSD_JObjGetTranslationX(j);
+        pos.y = -HSD_JObjGetTranslationY(j) - 0.5f;
+        pos.x = HSD_JObjGetTranslationX(j) - 1.3f;
         row_text->pos_x = pos.x;
         row_text->pos_y = pos.y;
         row_text->pos_z = pos.z;
@@ -2681,8 +2583,7 @@ void mnDiagram_802427B4(void* arg0, s32 arg1, s32 arg2)
             name_id = name_byte;
             y_spacing = HSD_JObjGetTranslationY(data->jobjs[10]) -
                         HSD_JObjGetTranslationY(data->jobjs[9]);
-            HSD_SisLib_803A6B98(row_text, mnDiagram_804DBF84,
-                                -((y_spacing * i) / 0.03f),
+            HSD_SisLib_803A6B98(row_text, 0.0f, -((y_spacing * i) / 0.03f),
                                 GetNameText(name_id));
         }
     }
@@ -2907,8 +2808,8 @@ void mnDiagram_80243434(u8 arg0)
 
     user_data = HSD_MemAlloc(sizeof(Diagram));
     if (user_data == NULL) {
-        OSReport(tbl->user_data_error);
-        __assert(tbl->file_name, 0x90E, tbl->user_data_name);
+        OSReport("Can't get user_data.\n");
+        __assert("mndiagram.c", 0x90E, "user_data");
     }
     user_data->saved_menu = mn_804A04F0.cur_menu;
     user_data->saved_selection = mn_804A04F0.hovered_selection;
@@ -2951,19 +2852,19 @@ void mnDiagram_80243434(u8 arg0)
 
         data2 = GET_DIAGRAM(gobj);
         if (count <= 7) {
-            HSD_JObjSetFlagsAll(data2->jobjs[5], 0x10);
-            HSD_JObjSetFlagsAll(data2->jobjs[6], 0x10);
+            HSD_JObjSetFlagsAll(data2->jobjs[5], JOBJ_HIDDEN);
+            HSD_JObjSetFlagsAll(data2->jobjs[6], JOBJ_HIDDEN);
         } else {
-            HSD_JObjClearFlagsAll(data2->jobjs[5], 0x10);
-            HSD_JObjClearFlagsAll(data2->jobjs[6], 0x10);
+            HSD_JObjClearFlagsAll(data2->jobjs[5], JOBJ_HIDDEN);
+            HSD_JObjClearFlagsAll(data2->jobjs[6], JOBJ_HIDDEN);
         }
 
         if (count <= 0xA) {
-            HSD_JObjSetFlagsAll(data2->jobjs[4], 0x10);
-            HSD_JObjSetFlagsAll(data2->jobjs[3], 0x10);
+            HSD_JObjSetFlagsAll(data2->jobjs[4], JOBJ_HIDDEN);
+            HSD_JObjSetFlagsAll(data2->jobjs[3], JOBJ_HIDDEN);
         } else {
-            HSD_JObjClearFlagsAll(data2->jobjs[4], 0x10);
-            HSD_JObjClearFlagsAll(data2->jobjs[3], 0x10);
+            HSD_JObjClearFlagsAll(data2->jobjs[4], JOBJ_HIDDEN);
+            HSD_JObjClearFlagsAll(data2->jobjs[3], JOBJ_HIDDEN);
         }
 
         if (user_data->is_name_mode != 0) {
@@ -3001,7 +2902,6 @@ void mnDiagram_80243434(u8 arg0)
 /// @param arg1 Initial mode (passed to mnDiagram_80243434)
 void mnDiagram_802437E8(u8 arg0, u8 arg1)
 {
-    mnDiagram_AnimTable* tbl = (mnDiagram_AnimTable*) &mnDiagram_803EE728;
     mnDiagram_Assets* assets = (mnDiagram_Assets*) &mnDiagram_804A0750;
     HSD_GObj* gobj;
     HSD_GObjProc* proc;
@@ -3017,25 +2917,32 @@ void mnDiagram_802437E8(u8 arg0, u8 arg1)
     if (arg0) {
         archive = mn_804D6BB8;
         lbArchive_LoadSections(
-            archive, &assets->ConB1[0], tbl->ConB1_joint, &assets->ConB1[1],
-            tbl->ConB1_animjoint, &assets->ConB1[2], tbl->ConB1_matanim_joint,
-            &assets->ConB1[3], tbl->ConB1_shapeanim_joint,
-            &assets->CursorB1[0], tbl->CursorB1_joint, &assets->FaceB[0],
-            tbl->FaceB_joint, &assets->FaceB[1], tbl->FaceB_animjoint,
-            &assets->FaceB[2], tbl->FaceB_matanim_joint, &assets->FaceB[3],
-            tbl->FaceB_shapeanim_joint, &assets->NmB[0], tbl->NmB_joint,
-            &assets->NmB[1], tbl->NmB_animjoint, &assets->NmB[2],
-            tbl->NmB_matanim_joint, &assets->NmB[3], tbl->NmB_shapeanim_joint,
-            &assets->SubB1[0], tbl->SubB1_joint, &assets->SubB1[1],
-            tbl->SubB1_animjoint, &assets->SubB1[2], tbl->SubB1_matanim_joint,
-            &assets->SubB1[3], tbl->SubB1_shapeanim_joint, &assets->ConB2[0],
-            tbl->ConB2_joint, &assets->ConB2[1], tbl->ConB2_animjoint,
-            &assets->ConB2[2], tbl->ConB2_matanim_joint, &assets->ConB2[3],
-            tbl->ConB2_shapeanim_joint, &assets->ConB3[0], tbl->ConB3_joint,
-            &assets->ConB3[1], tbl->ConB3_animjoint, &assets->ConB3[2],
-            tbl->ConB3_matanim_joint, &assets->ConB3[3],
-            tbl->ConB3_shapeanim_joint, &assets->CursorB3[0],
-            tbl->CursorB3_joint, 0);
+            archive, &assets->ConB1[0], "MenMainConB1_Top_joint",
+            &assets->ConB1[1], "MenMainConB1_Top_animjoint", &assets->ConB1[2],
+            "MenMainConB1_Top_matanim_joint", &assets->ConB1[3],
+            "MenMainConB1_Top_shapeanim_joint", &assets->CursorB1[0],
+            "MenMainCursorB1_Top_joint", &assets->FaceB[0],
+            "MenMainFaceB_Top_joint", &assets->FaceB[1],
+            "MenMainFaceB_Top_animjoint", &assets->FaceB[2],
+            "MenMainFaceB_Top_matanim_joint", &assets->FaceB[3],
+            "MenMainFaceB_Top_shapeanim_joint", &assets->NmB[0],
+            "MenMainNmB_Top_joint", &assets->NmB[1],
+            "MenMainNmB_Top_animjoint", &assets->NmB[2],
+            "MenMainNmB_Top_matanim_joint", &assets->NmB[3],
+            "MenMainNmB_Top_shapeanim_joint", &assets->SubB1[0],
+            "MenMainSubB1_Top_joint", &assets->SubB1[1],
+            "MenMainSubB1_Top_animjoint", &assets->SubB1[2],
+            "MenMainSubB1_Top_matanim_joint", &assets->SubB1[3],
+            "MenMainSubB1_Top_shapeanim_joint", &assets->ConB2[0],
+            "MenMainConB2_Top_joint", &assets->ConB2[1],
+            "MenMainConB2_Top_animjoint", &assets->ConB2[2],
+            "MenMainConB2_Top_matanim_joint", &assets->ConB2[3],
+            "MenMainConB2_Top_shapeanim_joint", &assets->ConB3[0],
+            "MenMainConB3_Top_joint", &assets->ConB3[1],
+            "MenMainConB3_Top_animjoint", &assets->ConB3[2],
+            "MenMainConB3_Top_matanim_joint", &assets->ConB3[3],
+            "MenMainConB3_Top_shapeanim_joint", &assets->CursorB3[0],
+            "MenMainCursorB3_Top_joint", 0);
     }
 
     mnDiagram_8023FA6C();

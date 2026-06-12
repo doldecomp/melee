@@ -16,8 +16,7 @@
 extern char mnDiagram_804D4FA4;
 extern char mnDiagram_804D4FA8[7];
 extern char mnDiagram_804D4FB0[5];
-typedef struct mnDiagram_DataTailHeader mnDiagram_DataTailHeader;
-extern mnDiagram_DataTailHeader mnDiagram_803EE774;
+extern f32 mnDiagram_803EE774[];
 extern f32 mnDiagram_803EE758[];
 extern void* mnDiagram_804A0814[4];
 extern void* mnDiagram_804A07E4[4];
@@ -28,9 +27,5 @@ extern HSD_GObj* mnDiagram_804D6C10;
 extern f64 mnDiagram_804DBF78;
 extern f32 mnDiagram_804DBF84;
 extern const f32 mnDiagram_804DBF94;
-extern f32 mnDiagram_804DBFA4;
-extern f32 mnDiagram_804DBFA8;
-extern f32 mnDiagram_804DBFAC;
-extern f32 mnDiagram_804DBFB0;
 
 #endif
