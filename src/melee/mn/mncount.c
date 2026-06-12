@@ -31,6 +31,10 @@
 #define NUM_CHARACTERS 25
 #define MAX_SCROLL 20
 
+AnimLoopSettings mnCount_803EFA88[2] = {
+    { 0.0f, 19.0f, -0.1f },
+    { 20.0f, 29.0f, -0.1f },
+};
 static AnimLoopSettings mnCount_803EFAA0 = { 0.0f, 199.0f, 0.0f };
 static StaticModelDesc model_desc;
 static HSD_GObj* menu_gobj;
@@ -436,6 +440,11 @@ int mnCount_GetRowValue_Character(mnCount_row row)
     }
 }
 
+static inline unsigned int mnCount_GetCombinedVSPlayTimeValue(void)
+{
+    return *(unsigned int*) gmMainLib_GetCombinedVSPlayTime();
+}
+
 unsigned int mnCount_GetRowValue_Number(int row)
 {
     unsigned int ret;
@@ -456,7 +465,7 @@ unsigned int mnCount_GetRowValue_Number(int row)
         ret = *(unsigned int*) gmMainLib_GetVsPlayTime();
         break;
     case COMBINED_VS_PLAY_TIME:
-        ret = *(unsigned int*) gmMainLib_GetCombinedVSPlayTime();
+        ret = mnCount_GetCombinedVSPlayTimeValue();
         break;
     case VS_PLAY_MATCH_TOTAL:
         ret = gm_GetVsPlayMatchTotal();
@@ -526,7 +535,6 @@ void mnCount_CreateRow(HSD_GObj* gobj, int visible_row, mnCount_row data_row)
     unsigned int row_value;
     int row_value_2;
     float y;
-    char buf1[8];
     char buf2[8];
     static GXColor text_color = { 0xAA, 0xAA, 0xAA, 0xFF };
     if (userdata->labels[visible_row] != NULL) {
@@ -541,7 +549,10 @@ void mnCount_CreateRow(HSD_GObj* gobj, int visible_row, mnCount_row data_row)
     text->text_color = text_color;
     HSD_SisLib_803A6368(text, mnCount_sis_idx[data_row]);
     if (userdata->values[visible_row] != NULL) {
-        HSD_SisLib_803A5CC4(userdata->values[visible_row]);
+        {
+            HSD_Text* volatile value_text = userdata->values[visible_row];
+            HSD_SisLib_803A5CC4(value_text);
+        }
         userdata->values[visible_row] = NULL;
     }
     text = HSD_SisLib_803A6754(0, 1);
@@ -552,6 +563,7 @@ void mnCount_CreateRow(HSD_GObj* gobj, int visible_row, mnCount_row data_row)
     text->text_color = mn_804D4B64;
     text->default_alignment = 2;
     if (inline_is_row_time(data_row)) {
+        char buf1[8];
         text->font_size.x = 0.03f;
         text->font_size.y = 0.03f;
         row_value = mnCount_GetRowValue_Number(data_row);
@@ -564,7 +576,7 @@ void mnCount_CreateRow(HSD_GObj* gobj, int visible_row, mnCount_row data_row)
         text->font_size.y = 0.03f;
         row_value_2 = mnCount_GetRowValue_Character(data_row);
         if (row_value_2 == NUM_CHARACTERS) {
-            HSD_SisLib_803A6B98(text, 0.0f, 0.0f, "－");
+            HSD_SisLib_803A6B98(text, 0.0f, 0.0f, "\201| ");
         } else {
             gm_80160B40(text, gm_8016400C(row_value_2), 0);
         }
