@@ -60,9 +60,10 @@ void fn_801A7A8C(HSD_GObj* gobj)
 
 void gm_801A7B00(void)
 {
+    HSD_CObj* cobj;
+    HSD_LObj* lobj;
     HSD_GObj* gobj;
     HSD_GObj* cam_gobj;
-    HSD_CObj* cobj;
     HSD_JObj* jobj;
     HSD_JObj* child;
     HSD_JObj* target;
@@ -73,8 +74,8 @@ void gm_801A7B00(void)
 
     // Light GObj
     gobj = GObj_Create(0xB, 3, 0);
-    HSD_GObjObject_80390A70(gobj, (u8) HSD_GObj_804D784A,
-                            lb_80011AC4(gm_804D67A8->lights));
+    lobj = lb_80011AC4(gm_804D67A8->lights);
+    HSD_GObjObject_80390A70(gobj, (u8) HSD_GObj_804D784A, lobj);
     GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
 
     // Camera GObj
@@ -84,7 +85,6 @@ void gm_801A7B00(void)
     HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(cam_gobj, HSD_GObj_803910D8, 8);
     cam_gobj->gxlink_prios = 0x801;
-    child = NULL;
     HSD_CObjAddAnim(cobj, gm_804D67A8->cameras[0].anims[0]);
     HSD_CObjReqAnim(cobj, 0.0f);
     HSD_CObjAnim(cobj);
@@ -111,10 +111,7 @@ void gm_801A7B00(void)
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
 
     char_idx = gm_801A659C(gm_801BEFB0());
-    if (jobj == NULL) {
-    } else {
-        child = jobj->child;
-    }
+    child = jobj == NULL ? NULL : jobj->child;
 
     val = -un_803060BC(char_idx, 0);
     HSD_JObjSetTranslateXWithMtxDirty(child, val);
@@ -431,19 +428,12 @@ static s32 gm_804D67C4;
 
 void fn_801A94BC(HSD_GObj* gobj)
 {
-    int i;
     int var_r31;
     HSD_CObj* cobj;
-    PAD_STACK(0x10);
 
     cobj = GET_COBJ(gobj);
     gm_801A4310();
-    var_r31 = 0;
-    for (i = 0; i < 0x1A; i++) {
-        if (un_803048C0(gm_801A659C(i)) ? true : false) {
-            var_r31++;
-        }
-    }
+    var_r31 = fn_801A7FB4_inline();
     if (var_r31 <= 5) {
         if (cobj->aobj->curr_frame < 160.0f) {
             HSD_CObjAnim(cobj);
@@ -454,12 +444,7 @@ void fn_801A94BC(HSD_GObj* gobj)
     }
 
     gm_801A4310();
-    var_r31 = 0;
-    for (i = 0; i < 0x1A; i++) {
-        if (un_803048C0(gm_801A659C(i)) ? true : false) {
-            var_r31++;
-        }
-    }
+    var_r31 = fn_801A7FB4_inline2();
     if (var_r31 <= 0xD) {
         if (cobj->aobj->curr_frame < 190.0f) {
             HSD_CObjAnim(cobj);
