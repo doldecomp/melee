@@ -648,11 +648,11 @@ void mnSnap_8025409C(s32 dlg_type)
 /// Resets to slot selection state after a card error or empty card.
 void mnSnap_80254298(void)
 {
+    void** slot;
     s32* p50 = &mnSnap_804A0A10.active_slot;
     s32* p51;
     s32 i;
     mnSnap_State* snap = &mnSnap_804A0A10;
-    void** slot;
     PAD_STACK(24);
 
     snap->timer = 0xB;
