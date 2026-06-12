@@ -115,25 +115,26 @@ void mnSnap_80254298(void);
 /// Recursively loads snapshot thumbnails from memory card.
 void mnSnap_80253184(void)
 {
+    s32* p50;
     mnSnap_State* snap = &mnSnap_804A0A10;
     s32* p4F;
     s32* p52;
-    s32* p50;
     s32* p57;
     s32* flags;
-    s32* p51;
 
     p4F = &snap->cur_page;
     p52 = &snap->load_idx;
     p50 = &snap->active_slot;
+    snap->card_result = lbSnap_8001E058(*p50, *p52 + (*p4F * 4));
     p57 = &snap->card_result;
     flags = &snap->thumb_loaded[0];
-    *p57 = lbSnap_8001E058(*p50, *p52 + (*p4F * 4));
     if (*p57 == 8) {
         mnSnap_80254298();
         return;
     }
     if (*p57 != 11) {
+        s32* p51;
+
         flags[*p52] = 1;
         *p52 += 1;
         p51 = &snap->pending_loads;
