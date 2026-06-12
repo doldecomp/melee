@@ -222,7 +222,8 @@ void ifStatus_PercentOnDeathAnimationThink(UnkX* value, s32 arg1, s32 arg2)
     }
 }
 
-inline f32 offset_rand(){
+inline f32 offset_rand(void)
+{
     return HSD_Randf() - 0.5f;
 }
 void ifStatus_802F4B84(IfDamageState* state, s32 is_stamina)
@@ -896,8 +897,8 @@ void ifStatus_802F66A4(void)
     DynamicModelDesc** mrk;
     DynamicModelDesc** num;
     HSD_Archive** arch;
-    s32 reset = 0; // = 0 should go away, but that requires configure to be ran
-                   // with --no-warn-error
+    s32 reset = 0; // = 0 should go away after the uninitialized-use warning is
+                   // resolved.
     arch = ifAll_802F3690();
     lbArchive_LoadSections(*arch, (void**) &num, "DmgNum_scene_models",
                            (void**) &mrk, "DmgMrk_scene_models", 0);
