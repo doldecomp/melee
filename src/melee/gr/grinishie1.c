@@ -341,7 +341,6 @@ void grInishie1_801FAC58(Ground_GObj* gobj)
     Vec3 vec;
     Ground* gp;
     HSD_JObj* jobj;
-    HSD_Joint* joint;
 
     jobj = GET_JOBJ(gobj);
     gp = GET_GROUND(gobj);
@@ -359,7 +358,10 @@ void grInishie1_801FAC58(Ground_GObj* gobj)
         }
 
         if (gp->gv.inishie12.xC4 != NULL) {
-            lb_8000B1CC(gp->gv.inishie12.xC4, NULL, &vec);
+            {
+                Vec3* vec_ptr = &vec;
+                lb_8000B1CC(gp->gv.inishie12.xC4, NULL, vec_ptr);
+            }
             HSD_JObjSetTranslate(jobj, &vec);
         }
     }
@@ -829,72 +831,86 @@ void grInishie1_801FC018(HSD_GObj* gobj)
 void grInishie1_801FC110(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
-    struct grInishie1_GroundVars* vars = &gp->gv.inishie1;
-    f32 dist_lo;
-    f32 dist_hi;
 
-    if (vars->xE0 > 100000.0f || vars->xE4 > 100000.0f) {
-        vars->xE0 = 100000.0f;
-        vars->xE4 = 100000.0f;
+    if (gp->gv.inishie1.xE0 > 100000.0f ||
+        gp->gv.inishie1.xE4 > 100000.0f)
+    {
+        gp->gv.inishie1.xE4 = 100000.0f;
+        gp->gv.inishie1.xE0 = 100000.0f;
     }
 
-    dist_lo = fclamp0(gp->gv.inishie1.xE0 - grI1_804D69F8->unk2C[1].y);
-    dist_hi = fclamp0(gp->gv.inishie1.xE4 - grI1_804D69F8->unk2C[1].y);
+    {
+        f32 dist_lo;
+        f32 dist_hi;
+        f32 zero = 0.0f;
 
-    if (dist_lo == 0.0f && dist_hi == 0.0f) {
-        if (fabsf_inline(gp->gv.inishie1.xF0) > 0.0f) {
-            if (gp->gv.inishie1.xF0 < 0.0f) {
-                gp->gv.inishie1.xF0 += grI1_804D69F8->unk2C[1].z;
-                if (gp->gv.inishie1.xF0 > 0.0f) {
-                    gp->gv.inishie1.xF0 = 0.0f;
-                }
-            } else {
-                gp->gv.inishie1.xF0 -= grI1_804D69F8->unk2C[1].z;
+        dist_lo = gp->gv.inishie1.xE0 - grI1_804D69F8->unk2C[1].y;
+        if (dist_lo < 0.0f) {
+            dist_lo = 0.0f;
+        }
+        dist_hi = gp->gv.inishie1.xE4 - grI1_804D69F8->unk2C[1].y;
+        if (dist_hi < 0.0f) {
+            dist_hi = 0.0f;
+        }
+
+        if (zero == dist_lo && zero == dist_hi) {
+            if (fabsf_inline(gp->gv.inishie1.xF0) > 0.0f) {
                 if (gp->gv.inishie1.xF0 < 0.0f) {
-                    gp->gv.inishie1.xF0 = 0.0f;
+                    gp->gv.inishie1.xF0 += grI1_804D69F8->unk2C[1].x;
+                    if (gp->gv.inishie1.xF0 > 0.0f) {
+                        gp->gv.inishie1.xF0 = 0.0f;
+                    }
+                } else {
+                    gp->gv.inishie1.xF0 -= grI1_804D69F8->unk2C[1].x;
+                    if (gp->gv.inishie1.xF0 < 0.0f) {
+                        gp->gv.inishie1.xF0 = 0.0f;
+                    }
                 }
             }
-        }
 
-        gp->gv.inishie1.xF4 = 0.0f;
-    } else {
-        f32 max_speed;
-        gp->gv.inishie1.xF4 += (dist_hi - dist_lo) * grI1_804D69F8->unk24;
-
-        max_speed = grI1_804D69F8->unk28;
-        if (gp->gv.inishie1.xF4 > max_speed) {
-            gp->gv.inishie1.xF4 = max_speed;
-        } else if (gp->gv.inishie1.xF4 < -max_speed) {
-            gp->gv.inishie1.xF4 = -max_speed;
-        }
-
-        if (dist_lo != 0.0f && dist_hi != 0.0f && gp->gv.inishie1.xF4 != 0.0f)
-        {
-            gp->gv.inishie1.xF4 *= grI1_804D69F8->unk2C[0].x;
+            gp->gv.inishie1.xF4 = 0.0f;
         } else {
-            f32 friction;
-            gp->gv.inishie1.xF4 *= grI1_804D69F8->unk2C[1].x;
+            f32 accel = dist_hi - dist_lo;
+            gp->gv.inishie1.xF4 =
+                accel * grI1_804D69F8->unk24 + gp->gv.inishie1.xF4;
 
-            friction = grI1_804D69F8->unk2C[1].y;
-            if (gp->gv.inishie1.xF4 > 0.0f) {
-                gp->gv.inishie1.xF4 -= friction;
-                if (gp->gv.inishie1.xF4 < 0.0f) {
-                    gp->gv.inishie1.xF4 = 0.0f;
-                }
-            } else if (gp->gv.inishie1.xF4 < 0.0f) {
-                gp->gv.inishie1.xF4 += friction;
+            if (gp->gv.inishie1.xF4 > grI1_804D69F8->unk28) {
+                gp->gv.inishie1.xF4 = grI1_804D69F8->unk28;
+            } else if (gp->gv.inishie1.xF4 < -grI1_804D69F8->unk28) {
+                gp->gv.inishie1.xF4 = -grI1_804D69F8->unk28;
+            }
+
+            if (dist_lo != zero && dist_hi != zero &&
+                gp->gv.inishie1.xF4 != zero)
+            {
+                gp->gv.inishie1.xF4 *= grI1_804D69F8->unk2C[0].x;
+            } else {
+                gp->gv.inishie1.xF4 *= grI1_804D69F8->unk2C[0].y;
+
                 if (gp->gv.inishie1.xF4 > 0.0f) {
-                    gp->gv.inishie1.xF4 = 0.0f;
+                    gp->gv.inishie1.xF4 -= grI1_804D69F8->unk2C[0].z;
+                    if (gp->gv.inishie1.xF4 < 0.0f) {
+                        gp->gv.inishie1.xF4 = 0.0f;
+                    }
+                } else if (gp->gv.inishie1.xF4 < 0.0f) {
+                    gp->gv.inishie1.xF4 += grI1_804D69F8->unk2C[0].z;
+                    if (gp->gv.inishie1.xF4 > 0.0f) {
+                        gp->gv.inishie1.xF4 = 0.0f;
+                    }
                 }
             }
-        }
 
-        gp->gv.inishie1.xF0 += gp->gv.inishie1.xF4;
+            gp->gv.inishie1.xF0 += gp->gv.inishie1.xF4;
+        }
     }
 
     {
         if (fabsf_inline(gp->gv.inishie1.xF0) > grI1_804D69F8->unk20) {
-            gp->gv.inishie1.xF0 = fabsf_inline(gp->gv.inishie1.xF0);
+            if (gp->gv.inishie1.xF0 < 0.0f) {
+                gp->gv.inishie1.xF0 = -grI1_804D69F8->unk20;
+            } else {
+                gp->gv.inishie1.xF0 = grI1_804D69F8->unk20;
+            }
             gp->gv.inishie1.xEE = 1;
             gp->gv.inishie1.xF4 = 0.0f;
         }

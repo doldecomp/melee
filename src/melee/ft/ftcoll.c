@@ -1375,21 +1375,24 @@ void ftColl_8007861C(Fighter_GObj* arg0, Fighter_GObj* gobj, int arg2,
                      int arg8)
 {
     Fighter* attacker;
-    Fighter* victim = GET_FIGHTER(gobj);
-    s32 grounded = 0;
+    Fighter* victim;
+    s32 grounded;
+    s32 prev_source_ply;
+    u16 attack_instance = arg6;
+    PAD_STACK(8);
 
     if (arg0 != NULL) {
-        attacker = arg0->user_data;
+        attacker = GET_FIGHTER(arg0);
     } else {
         attacker = NULL;
     }
 
+    victim = GET_FIGHTER(gobj);
+    grounded = 0;
+    prev_source_ply = victim->dmg.x18c4_source_ply;
+
     if (attacker != NULL) {
-        if (attacker == victim) {
-            victim->dmg.x18C0 = 0;
-        } else {
-            victim->dmg.x18C0 = attacker->x8_spawnNum;
-        }
+        victim->dmg.x18C0 = attacker == victim ? 0 : attacker->x8_spawnNum;
         victim->dmg.x18c4_source_ply = attacker->player_id;
         victim->dmg.x18C8 = -1;
         victim->x221F_b5 = attacker->x221F_b4;
@@ -1405,8 +1408,8 @@ void ftColl_8007861C(Fighter_GObj* arg0, Fighter_GObj* gobj, int arg2,
     if (arg7 != NULL && ((s32*) arg7)[2] == 0) {
         grounded = 1;
     }
-    pl_80038144(arg0, gobj, arg4, arg5, arg6, grounded,
-                victim->dmg.x18c4_source_ply);
+    pl_80038144(arg0, gobj, arg4, arg5, attack_instance, grounded,
+                prev_source_ply);
 }
 
 void ftColl_80078710(Fighter_GObj* arg0, Fighter_GObj* arg1, UNK_T arg2)

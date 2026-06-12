@@ -33,6 +33,7 @@
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
+#include <sysdolphin/baselib/wobj.h>
 
 struct staffInfo_t {
     char pad_0[0x948];
@@ -96,7 +97,34 @@ typedef struct {
 } StaffEntryData;
 
 /* 3DBFD8 */ static StaffEntryData gm_803DBFD8[198] = { 0 };
-static u8 gm_803DBFD8_pad[0x1D8] = { 0 };
+static u8 gm_803DBFD8_pad[0x178] = { 0 };
+
+/* 3DD0C8 */ static HSD_WObjDesc gm_803DD0C8 = {
+    NULL,
+    { 0.0F, 0.0F, 2.9F },
+    NULL,
+};
+/* 3DD0DC */ static HSD_WObjDesc gm_803DD0DC = {
+    NULL,
+    { 0.0F, 0.0F, -80.0F },
+    NULL,
+};
+/* 3DD0F0 */ static HSD_CameraDescPerspective gm_803DD0F0 = {
+    NULL,
+    0,
+    1,
+    { 0, 640, 0, 480 },
+    { 0, 640, 0, 480 },
+    &gm_803DD0C8,
+    &gm_803DD0DC,
+    0.0F,
+    NULL,
+    1.0F,
+    10000.0F,
+    80.0F,
+    1.2166671F,
+};
+
 extern GXColor gm_804D42B8;
 extern GXColor gm_804D42BC;
 extern GXColor gm_804D42C0;
@@ -402,6 +430,21 @@ void fn_801AAB74(HSD_GObj* gobj)
 }
 
 #include <math_ppc.h>
+
+typedef struct StaffRollPoints {
+    s32 particles[7];
+    Vec3 corners[4];
+} StaffRollPoints;
+
+/* 3DD1C8 */ static StaffRollPoints gm_803DD1C8 = {
+    { 0x10, 0x63, 0x62, 0x64, 0x5B, 0x5A, 0x59 },
+    {
+        { -13.5F, -4.5F, 0.0F },
+        { -13.5F, 6.5F, 0.0F },
+        { 13.5F, 6.5F, 0.0F },
+        { 13.5F, -4.5F, 0.0F },
+    },
+};
 
 void fn_801AB200(HSD_GObj* gobj)
 {
@@ -950,15 +993,18 @@ void fn_801AC67C(HSD_GObj* gobj)
     }
 }
 
-/* 3DD0F0 */ static HSD_CObjDesc gm_803DD0F0 = { 0 };
+/* 3DD23C */ static char gm_803DD23C[] = {
+    0x25, 0x64, 0x20, 0x82, 0x67, 0x82, 0x68, 0x82, 0x73, 0,
+};
 
 void gm_801AC6D8_OnEnter(void* unused)
 {
     HSD_JObj* jobj_arr[2];
     HSD_CObj* cobj;
-    HSD_GObj* gobj;
-    int i;
+    HSD_JObj* jobj;
     int const gx_link = 11;
+    int i;
+    HSD_GObj* gobj;
     PAD_STACK(0x10);
 
     efLib_Init();
@@ -986,23 +1032,25 @@ void gm_801AC6D8_OnEnter(void* unused)
     }
     {
         HSD_GObj* gobj = GObj_Create(19, 20, 0);
-        HSD_CObj* cobj = HSD_CObjLoadDesc(&gm_803DD0F0);
+        HSD_CObj* cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) &gm_803DD0F0);
         gm_804D6834 = cobj;
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
         GObj_SetupGXLinkMax(gobj, fn_801AAA28, 8);
         gobj->gxlink_prios = 1LL << gx_link;
     }
     {
+        HSD_LObj* lobj;
         HSD_GObj* gobj = GObj_Create(gx_link, 3, 0);
-        HSD_LObj* lobj = lb_80011AC4(gm_804D6840->lights);
+        lobj = lb_80011AC4(gm_804D6840->lights);
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
         GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
         HSD_LObjReqAnimAll(lobj, 0.0F);
         HSD_GObj_SetupProc(gobj, fn_801AAABC, 0);
     }
     {
+        HSD_Fog* fog;
         HSD_GObj* gobj = GObj_Create(0xA, 3, 0);
-        HSD_Fog* fog = HSD_FogLoadDesc(gm_804D6840->fogs[0].desc);
+        fog = HSD_FogLoadDesc(gm_804D6840->fogs[0].desc);
         gm_804D6838 = fog;
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848, fog);
         GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 3, 0);
@@ -1028,8 +1076,10 @@ void gm_801AC6D8_OnEnter(void* unused)
         HSD_GObj_SetupProc(gobj, fn_801AAB18, 0);
     }
     {
+        HSD_JObj* temp_jobj;
         HSD_GObj* gobj = GObj_Create(14, 15, 0);
-        HSD_JObj* jobj = HSD_JObjLoadJoint(gm_804D6844[0]->joint);
+        HSD_JObj* jobj;
+        jobj = HSD_JObjLoadJoint(gm_804D6844[0]->joint);
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
         GObj_SetupGXLink(gobj, NULL, 9, 0);
         gm_8016895C(jobj, gm_804D6844[0], 0);
@@ -1037,11 +1087,11 @@ void gm_801AC6D8_OnEnter(void* unused)
         {
             /// @todo Length of #gm_804D6844 is 10
             for (i = 1; i < 10; i++) {
-                HSD_JObj* jobj = HSD_JObjLoadJoint(gm_804D6844[i]->joint);
-                gm_8016895C(jobj, gm_804D6844[i], 0);
-                HSD_JObjReqAnimAll(jobj, 0.0F);
-                while (jobj->child != NULL) {
-                    HSD_JObjReparent(jobj->child, jobj);
+                temp_jobj = HSD_JObjLoadJoint(gm_804D6844[i]->joint);
+                gm_8016895C(temp_jobj, gm_804D6844[i], 0);
+                HSD_JObjReqAnimAll(temp_jobj, 0.0F);
+                while (temp_jobj->child != NULL) {
+                    HSD_JObjReparent(temp_jobj->child, jobj);
                 }
             }
         }
@@ -1049,7 +1099,7 @@ void gm_801AC6D8_OnEnter(void* unused)
     }
     {
         HSD_GObj* gobj = GObj_Create(14, 15, 0);
-        HSD_JObj* jobj = HSD_JObjLoadJoint(gm_804D6840->models[0]->joint);
+        jobj = HSD_JObjLoadJoint(gm_804D6840->models[0]->joint);
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
         GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, gx_link, 0);
         gm_8016895C(jobj, gm_804D6840->models[0], 0);

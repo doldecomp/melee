@@ -44,6 +44,9 @@ extern f32 grBb_804DB304;
 extern f32 grBb_804DB308;
 extern f32 grBb_804DB30C;
 extern f32 grBb_804DB310;
+extern f32 grBb_804DB350;
+extern f32 grBb_804DB38C;
+extern f32 grBb_804DB3A0;
 extern f32 grBb_804DB3F0;
 extern char grBb_804D46B8;
 
@@ -1392,14 +1395,26 @@ void grBigBlue_801E8D64(Ground_GObj* gobj)
         y_pos = grBb_804DB2F4;
     }
 
-    HSD_JObjSetTranslateX(jobj, 0.0F);
+    if (jobj == NULL) {
+        __assert("jobj.h", 932, "jobj");
+    }
+    jobj->translate.x = grBb_804DB2F4;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
 
     y_pos += grBb_804D69C8->xCC;
     HSD_JObjSetTranslateY(jobj, y_pos);
 
-    HSD_JObjSetTranslateZ(jobj, 0.0F);
+    if (jobj == NULL) {
+        __assert("jobj.h", 962, "jobj");
+    }
+    jobj->translate.z = grBb_804DB2F4;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
 
-    *(f32*) ((u8*) gp + 0xD8) = 0.0F;
+    *(f32*) ((u8*) gp + 0xD8) = grBb_804DB2F4;
     *(s32*) ((u8*) gp + 0xC8) = (s32) (grBb_804D69C8->xD8);
     *(u8*) ((u8*) gp + 0xC4) = 2;
 
@@ -1407,7 +1422,7 @@ void grBigBlue_801E8D64(Ground_GObj* gobj)
 
     HSD_JObjGetTranslation2(jobj, &pos);
     {
-        f32 inv = 1.0F / Ground_801C0498();
+        f32 inv = grBb_804DB2F0 / Ground_801C0498();
         pos.x *= inv;
         pos.y *= inv;
         pos.z *= inv;
@@ -2097,6 +2112,7 @@ s32 grBigBlue_801EACE8(HSD_JObj* exclude, Vec3* point, f32* out_y,
     f32 left_bound, right_bound, top_bound, bottom_bound;
     f32 left_x, right_x;
     f32 dist;
+    f32 zero;
     f32* p_left;
     f32* p_right;
     s32 i;
@@ -2108,8 +2124,9 @@ s32 grBigBlue_801EACE8(HSD_JObj* exclude, Vec3* point, f32* out_y,
     top_bound = point->y + half_range_y;
     bottom_bound = point->y - half_range_y;
 
-    best_in_range = F32_MAX;
-    best_above = -F32_MAX;
+    best_in_range = grBb_804DB3A0;
+    best_above = grBb_804DB310;
+    zero = grBb_804DB2F4;
 
     gp = gobj->user_data;
     p_left = &hw_left.x;
@@ -2141,7 +2158,7 @@ s32 grBigBlue_801EACE8(HSD_JObj* exclude, Vec3* point, f32* out_y,
         {
             if (pos.y > bottom_bound && pos.y < top_bound) {
                 dist = point->y - pos.y;
-                if (dist < 0.0F) {
+                if (dist < zero) {
                     dist = -dist;
                 }
                 if (dist < best_in_range) {
@@ -2161,15 +2178,17 @@ s32 grBigBlue_801EACE8(HSD_JObj* exclude, Vec3* point, f32* out_y,
     if (exclude != jobj && (int) gp->gv.bigblue.x0 == 2) {
         HSD_JObjGetTranslation2(jobj, &route_pos);
 
-        left_x = route_pos.x - 68.0F * Ground_801C0498() * 0.5F;
-        right_x = route_pos.x + 68.0F * Ground_801C0498() * 0.5F;
+        dist = grBb_804DB38C * Ground_801C0498();
+        left_x = route_pos.x - dist * grBb_804DB350;
+        dist = grBb_804DB38C * Ground_801C0498();
+        right_x = dist * grBb_804DB350 + route_pos.x;
 
         if ((right_x > left_bound && right_x < right_bound) ||
             (left_x < right_bound && left_x > left_bound))
         {
             if (route_pos.y > bottom_bound && route_pos.y < top_bound) {
                 dist = point->y - route_pos.y;
-                if (dist < 0.0F) {
+                if (dist < grBb_804DB2F4) {
                     dist = -dist;
                 }
                 if (dist < best_in_range) {
@@ -2181,11 +2200,11 @@ s32 grBigBlue_801EACE8(HSD_JObj* exclude, Vec3* point, f32* out_y,
         }
     }
 
-    if (F32_MAX != best_in_range) {
+    if (grBb_804DB3A0 != best_in_range) {
         *out_y = best_in_range;
         return 1;
     }
-    if (-F32_MAX != best_above) {
+    if (grBb_804DB310 != best_above) {
         *out_y = best_above;
         return 2;
     }
