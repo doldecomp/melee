@@ -31,7 +31,8 @@ static inline bool it_8026F3D4_check_kind(Item* ip, ItemKind it_kind)
     }
     return ret;
 }
-
+// Hack needed to match it_8026F3D4 while keepign this the only 0.0f in the file
+static const f32 zero_init[1] = { 0.0f };
 bool it_8026F3D4(Item_GObj* item_gobj, struct it_8026F3D4_arg1_t* arg1,
                  s32 num, s32 arg3)
 {
@@ -48,7 +49,6 @@ bool it_8026F3D4(Item_GObj* item_gobj, struct it_8026F3D4_arg1_t* arg1,
     s32 cnt;
     bool chk1;
     float zero;
-    static const f32 zero_init = 0.0f;
 
     spawned_item_gobj = NULL;
     chk1 = false;
@@ -56,7 +56,7 @@ bool it_8026F3D4(Item_GObj* item_gobj, struct it_8026F3D4_arg1_t* arg1,
     new_var = arg3 & 1;
     item = GET_ITEM(item_gobj);
     cnt2 = 0;
-    zero = *(volatile f32*) &zero_init;
+    zero = *(volatile f32*) &zero_init[0];
     for (cnt = 0; cnt < num; cnt++) {
         if ((new_var == 0) || (it_kind == -1)) {
             it_kind = it_8026C75C(&it_804A0E50);
@@ -98,7 +98,7 @@ void it_8026F53C(Item_GObj* item_gobj, Vec3* vel, bool chk)
     if (chk == false) {
         vel->x = it_804D6D28->x54_float * (2.0f * (HSD_Randf() - 0.5f));
         vel->y = item->xCC_item_attr->x18;
-        vel->z = 0.0f;
+        vel->z = zero_init[0];
     }
     item->x40_vel = *vel;
 }
@@ -110,13 +110,13 @@ Item_GObj* it_8026F5C8(Item_GObj* item_gobj, ItemKind kind, Vec3* pos)
     PAD_STACK(12);
 
     spawn.kind = kind;
-    spawn.vel.z = 0.0f;
-    spawn.vel.y = 0.0f;
-    spawn.vel.x = 0.0f;
+    spawn.vel.z = zero_init[0];
+    spawn.vel.y = zero_init[0];
+    spawn.vel.x = zero_init[0];
     spawn.x3C_damage = 0;
     spawn.x44_flag.b0 = 1;
     spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0f;
+    spawn.prev_pos.z = zero_init[0];
     spawn.x40 = 0;
     spawn.facing_dir = it_8026B684(&spawn.prev_pos);
     if (item_gobj != NULL) {
@@ -154,7 +154,7 @@ Item_GObj* it_8026F6BC(Item_GObj* item_gobj, Vec3* arg1, Vec3* vel, bool chk)
         if (chk == false) {
             vel->x = it_804D6D28->x54_float * (2.0f * (HSD_Randf() - 0.5f));
             vel->y = spawned_item->xCC_item_attr->x18;
-            vel->z = 0.0f;
+            vel->z = zero_init[0];
         }
         spawned_item->x40_vel = *vel;
     }
@@ -181,7 +181,7 @@ Item_GObj* it_8026F7C8(Vec3* arg0, Vec3* vel, bool chk)
         if (chk == false) {
             vel->x = it_804D6D28->x54_float * (2.0f * (HSD_Randf() - 0.5f));
             vel->y = spawned_item->xCC_item_attr->x18;
-            vel->z = 0.0f;
+            vel->z = zero_init[0];
         }
         spawned_item->x40_vel = *vel;
         it_80274ED8();
@@ -205,7 +205,7 @@ bool it_8026F8B4(Item_GObj* item_gobj, Vec3* arg1, Vec3* arg2, bool chk)
     if (chk == false) {
         arg2->x = it_804D6D28->x54_float * (2.0f * (HSD_Randf() - 0.5f));
         arg2->y = it_804D6D28->x144;
-        arg2->z = 0.0f;
+        arg2->z = zero_init[0];
     }
     it_802E5F00(item_gobj, arg1, arg2, rand_int);
     return true;
