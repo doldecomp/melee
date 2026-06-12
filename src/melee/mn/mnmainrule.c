@@ -368,12 +368,12 @@ void mn_8022FB88(u8 arg0, void* arg1)
 
 void mn_8022FD18(u8 arg0)
 {
+    s32 i;
     u16 sp14;
     u8 sp10;
     s32 spC;
     HSD_JObj* jobj;
     struct mn_8022FB88_arg1_t* data;
-    s32 i;
     u8* ptr;
     u8 val;
 

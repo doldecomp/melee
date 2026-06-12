@@ -416,13 +416,13 @@ void fn_802523D8(HSD_GObj* gobj)
 
 void fn_80252548(HSD_GObj* gobj)
 {
+    MnInfoTextCursor* right;
     HSD_GObjProc* proc;
     HSD_JObj* jobj;
     s32 i;
     u8* trophy;
     MnInfoData* data;
     MnInfoTextCursor* left;
-    MnInfoTextCursor* right;
     u32 date;
     PAD_STACK(24);
 
@@ -498,6 +498,7 @@ void mnInfo_80252720(MnInfoData* data)
 
 s32 mnInfo_80252758(void)
 {
+    MnInfoData* temp_r3_3;
     s32 spC;
     void* sp8;
     HSD_GObj* temp_r3_2;
@@ -505,7 +506,6 @@ s32 mnInfo_80252758(void)
     HSD_GObjProc* temp_r3_4;
     HSD_Text* temp_r3_5;
     HSD_Text* temp_r3_6;
-    MnInfoData* temp_r3_3;
     MnInfoData* temp_ret;
     MnInfoData* temp_r29;
 

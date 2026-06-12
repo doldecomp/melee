@@ -148,6 +148,7 @@ void mnSound_802492CC(HSD_GObj* gobj)
 
 void fn_80249A1C(HSD_GObj* arg0)
 {
+    Menu* menu = GET_MENU(arg0);
     HSD_JObj* sp40;
     HSD_JObj* sp3C;
     HSD_JObj* sp34;
@@ -158,9 +159,7 @@ void fn_80249A1C(HSD_GObj* arg0)
     f32 var_f1;
     u8 temp_r4;
     f32 arg8 = 0.0F; // this should be uninitialized
-
     HSD_JObj* jobj = arg0->hsd_obj;
-    Menu* menu = GET_MENU(arg0);
     PAD_STACK(16);
     if ((u8) mn_804A04F0.cur_menu != 0x14) {
         HSD_GObjPLink_80390228(arg0);
