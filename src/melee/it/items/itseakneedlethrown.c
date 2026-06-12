@@ -8,7 +8,6 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
@@ -23,8 +22,11 @@
 #include <MSL/trigf.h>
 
 ItemStateTable it_803F6F50[] = {
-    { 0, NULL, NULL, NULL }, { 1, NULL, NULL, NULL }, { 2, NULL, NULL, NULL },
-    { 3, NULL, NULL, NULL }, { 4, NULL, NULL, NULL },
+    { 0, itSeakneedlethrown_UnkMotion0_Anim, itSeakneedlethrown_UnkMotion0_Phys, itSeakneedlethrown_UnkMotion0_Coll }, 
+    { 1, itSeakneedlethrown_UnkMotion1_Anim, itSeakneedlethrown_UnkMotion1_Phys, itSeakneedlethrown_UnkMotion1_Coll }, 
+    { 2, itSeakneedlethrown_UnkMotion2_Anim, itSeakneedlethrown_UnkMotion2_Phys, itSeakneedlethrown_UnkMotion2_Coll }, 
+    { 3, itSeakneedlethrown_UnkMotion3_Anim, itSeakneedlethrown_UnkMotion3_Phys, itSeakneedlethrown_UnkMotion3_Coll }, 
+    { 4, itSeakneedlethrown_UnkMotion4_Anim, itSeakneedlethrown_UnkMotion4_Phys, itSeakneedlethrown_UnkMotion4_Coll }
 };
 static f32 it_803F6FA0[8] = { -2.0f, -2.1f, -2.2f, -2.3f,
                               -2.4f, -2.5f, -2.6f, -2.7f };
@@ -43,6 +45,11 @@ static f32 it_803F7060[8] = {
     0.87266463f, 0.9599311f,  1.0471976f, 1.134464f
 };
 
+static void sdata2_order(void){
+    (void) 0.0f;
+    (void) 1.0f;
+    (void) -1.0f;
+}
 Item_GObj* it_802AFD8C(Item_GObj* parent, Vec3* pos, u32 kind,
                        float facing_dir)
 {
