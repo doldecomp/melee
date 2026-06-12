@@ -35,12 +35,12 @@ static inline bool it_8026F3D4_check_kind(Item* ip, ItemKind it_kind)
 bool it_8026F3D4(Item_GObj* item_gobj, struct it_8026F3D4_arg1_t* arg1,
                  s32 num, s32 arg3)
 {
-    u8 _padA[0x48];
+    u8 _padA[0x4C];
     volatile s32 cnt2;
     u8 _padB[0x30];
     ItemKind sp30[8];
     Vec3 sp24;
-    u8 _padC[8];
+    u8 _padC[4];
     ItemKind it_kind;
     int new_var;
     Item* item;
@@ -52,7 +52,6 @@ bool it_8026F3D4(Item_GObj* item_gobj, struct it_8026F3D4_arg1_t* arg1,
     chk1 = false;
     it_kind = -1;
     new_var = arg3 & 1;
-    cnt = 0;
     item = GET_ITEM(item_gobj);
     cnt2 = 0;
     for (cnt = 0; cnt < num; cnt++) {
@@ -138,7 +137,7 @@ Item_GObj* it_8026F6BC(Item_GObj* item_gobj, Vec3* arg1, Vec3* vel, bool chk)
 {
     Item* spawned_item;
     Item_GObj* spawned_item_gobj;
-    PAD_STACK(96);
+    PAD_STACK(88);
 
     if (Item_804A0C64.x2C >= Item_804A0C64.x30) {
         return NULL;
