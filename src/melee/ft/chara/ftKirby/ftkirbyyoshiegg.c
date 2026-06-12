@@ -58,29 +58,29 @@ static void fn_8010AA64(Fighter_GObj* gobj)
     }
 }
 
-static inline void inlineB0(Fighter_GObj* gobj)
+static inline void inlineB0(Fighter_GObj* gobj, ftHurtboxInit* hurt)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftHurtboxInit hurt;
     ftCo_DatAttrs_xBC_t* xBCp;
-    PAD_STACK(16);
 
     ftColl_8007B0C0(gobj, Intangible);
     xBCp = &fp->co_attrs.xBC;
-    hurt.bone_idx = ftParts_GetBoneIndex(fp, FtPart_TransN);
-    hurt.height = HurtHeight_Mid;
-    hurt.is_grabbable = false;
-    hurt.a_offset = xBCp->x4;
-    hurt.b_offset = xBCp->x10;
-    hurt.scale = xBCp->x1C;
-    ftColl_HurtboxInit(fp, fp->hurt_capsules, &hurt);
+    hurt->bone_idx = ftParts_GetBoneIndex(fp, FtPart_TransN);
+    hurt->height = HurtHeight_Mid;
+    hurt->is_grabbable = false;
+    hurt->a_offset = xBCp->x4;
+    hurt->b_offset = xBCp->x10;
+    hurt->scale = xBCp->x1C;
+    ftColl_HurtboxInit(fp, fp->hurt_capsules, hurt);
 }
 
 void ftKb_SpecialNYs_8010AC78(Fighter_GObj* victim, Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(victim);
-    HSD_JObj* jobj = victim->hsd_obj;
+    HSD_JObj* jobj = GET_JOBJ(victim);
     Vec3 scale;
+    ftHurtboxInit hurt;
+    PAD_STACK(0x10);
 
     if (fp->ground_or_air == GA_Ground) {
         ftCommon_8007D5D4(fp);
@@ -91,12 +91,12 @@ void ftKb_SpecialNYs_8010AC78(Fighter_GObj* victim, Fighter_GObj* gobj)
     ftCommon_8007E2F4(fp, 0x1FF);
     fp->invisible = true;
     scale.x = scale.y = scale.z = fp->co_attrs.xBC.size;
-    ftCommon_SetAccessory(fp, (HSD_Joint*) ftKb_SpecialNYs_801093A0());
+    ftCommon_SetAccessory(fp, (HSD_Joint*) ftKb_SpecialNYs_801093A0(gobj));
     HSD_JObjSetScale(fp->x20A0_accessory, &scale);
     lb_8000C2F8(HSD_JObjGetChild(fp->x20A0_accessory),
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_TransN)].joint);
     fp->mv.co.yoshiegg.scale = scale;
-    inlineB0(victim);
+    inlineB0(victim, &hurt);
     ftKb_SpecialNYs_80109260(gobj, &fp->self_vel);
     fp->facing_dir = ftKb_SpecialNYs_80109290(gobj);
     fp->dmg.x182c_behavior = ftKb_SpecialNYs_8010929C(gobj);
