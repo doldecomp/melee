@@ -557,8 +557,8 @@ void Item_80267978(HSD_GObj* gobj)
         item_data->xC4_article_data = it_804A0F60[idx];
         item_data->xB8_itemLogicTable = &it_803F4D20[idx];
         if (item_data->xC4_article_data == NULL) {
-            OSReport("not found zako model data! check ground dat file!\n");
-            __assert("item.c", 686, "0");
+            HSD_ASSERTREPORT(
+                686, 0, "not found zako model data! check ground dat file!\n");
         }
     }
     item_data->xBC_itemStateContainer = item_data->xB8_itemLogicTable->states;
@@ -1994,8 +1994,7 @@ void Item_8026A8EC(Item_GObj* gobj)
     Item* ip = (Item*) HSD_GObjGetUserData(gobj);
 
     if (!it_80272D1C(gobj) || ip == NULL) {
-        OSReport("===== Not Found Item_Struct!! =====\n");
-        __assert("item.c", 2405, "0");
+        HSD_ASSERTREPORT(2405, 0, "===== Not Found Item_Struct!! =====\n");
     }
 
     it_802725D4(gobj);

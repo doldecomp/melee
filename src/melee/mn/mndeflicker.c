@@ -141,7 +141,7 @@ void mnDeflicker_8024A4BC(HSD_GObj* arg0)
     HSD_GObjProc* proc;
     HSD_JObj* jobj;
     u8 temp_r29;
-    Menu* menu;
+    Menu* user_data;
     PAD_STACK(4);
 
     gobj = GObj_Create(HSD_GOBJ_CLASS_ITEM, 7U, 0x80);
@@ -155,17 +155,14 @@ void mnDeflicker_8024A4BC(HSD_GObj* arg0)
                        mnDeflicker_804A08B8.shapeanim_joint);
     HSD_JObjReqAnimAll(jobj, 0.0F);
     HSD_JObjAnimAll(jobj);
-    menu = HSD_MemAlloc(8);
-    if (menu == NULL) {
-        OSReport("Can't get user_data.\n");
-        __assert("mndeflicker.c", 344, "user_data");
-    }
-    menu->cursor = gmMainLib_8015F4E8();
-    menu->text = NULL;
-    GObj_InitUserData(gobj, 0, HSD_Free, menu);
+    user_data = HSD_MemAlloc(8);
+    HSD_ASSERTREPORT(344, user_data, "Can't get user_data.\n");
+    user_data->cursor = gmMainLib_8015F4E8();
+    user_data->text = NULL;
+    GObj_InitUserData(gobj, 0, HSD_Free, user_data);
     proc = HSD_GObj_SetupProc(gobj, mnDeflicker_8024A3E8, 0U);
     proc->flags_3 = HSD_GObj_804D783C;
-    temp_r29 = menu->cursor;
+    temp_r29 = user_data->cursor;
     lb_80011E24(GET_JOBJ(gobj), &sp1C, 5, -1);
     HSD_JObjReqAnimAll(sp1C, (f32) temp_r29);
     mn_8022F3D8(sp1C, 0xFF, 0x20);

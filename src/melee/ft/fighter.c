@@ -716,8 +716,7 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj,
     fp->x2229_b1 = Player_GetFlagsAEBit0(fp->player_id);
 
     if (fp->x61A_controller_index > 4) {
-        OSReport("fighter sub color num over!\n");
-        __assert(__FILE__, 0x33C, "0");
+        HSD_ASSERTREPORT(0x33C, 0, "fighter sub color num over!\n");
     }
 
     if (fp->x61A_controller_index != 0) {
@@ -932,8 +931,7 @@ Fighter_GObj* Fighter_Create(struct plAllocInfo* input)
         if (!fp->no_normal_motion) {
             ftCommon_8007D92C(gobj);
         } else {
-            OSReport("ellegal flag fp->no_normal_motion\n");
-            __assert(__FILE__, 1065, "0");
+            HSD_ASSERTREPORT(1065, 0, "ellegal flag fp->no_normal_motion\n");
         }
     }
     ftLib_800867E8(gobj);
@@ -2415,9 +2413,9 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
                               fpclassify(fp->cur_pos.y) == FP_NAN ||
                               fpclassify(fp->cur_pos.z) == FP_NAN))
     {
-        OSReport("fighter procUpdate pos error.\tpos.x=%f\tpos.y=%f\n",
-                 fp->cur_pos.x, fp->cur_pos.y);
-        __assert(__FILE__, /*line*/ 2517, "0");
+        HSD_ASSERTREPORT(/*line*/ 2517, 0,
+                         "fighter procUpdate pos error.\tpos.x=%f\tpos.y=%f\n",
+                         fp->cur_pos.x, fp->cur_pos.y);
     }
 }
 
@@ -2489,9 +2487,9 @@ void Fighter_procMap(Fighter_GObj* gobj)
             {
                 float x = Fighter_GetPosX(fp);
                 float y = Fighter_GetPosY(fp);
-                OSReport("fighter procMap pos error.\tpos.x=%f\tpos.y=%f\n", x,
-                         y);
-                __assert("fighter.c", 2590, "0");
+                HSD_ASSERTREPORT(
+                    2590, 0,
+                    "fighter procMap pos error.\tpos.x=%f\tpos.y=%f\n", x, y);
             }
         }
 
@@ -2883,8 +2881,8 @@ void Fighter_ProcessHit_8006D1EC(Fighter_GObj* gobj)
                     ftCh_Init_80156014(gobj);
                     break;
                 default:
-                    OSReport("ellegal flag fp->no_reaction_always\n");
-                    __assert(__FILE__, 3085, "0");
+                    HSD_ASSERTREPORT(3085, 0,
+                                     "ellegal flag fp->no_reaction_always\n");
                 }
                 ftCo_8008E9D0(gobj);
             }

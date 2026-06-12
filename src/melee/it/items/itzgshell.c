@@ -700,8 +700,8 @@ void it_802DF230(Item_GObj* gobj)
     } else {
         f32 factor;
         if (angle > 2147483600.0f || angle < -2147483600.0f) {
-            OSReport("*** ZGShell Restoration Rot Y Irregul!\n");
-            __assert("itzgshell.c", 0x3A1, "0");
+            HSD_ASSERTREPORT(0x3A1, 0,
+                             "*** ZGShell Restoration Rot Y Irregul!\n");
         }
         angle = (f32) ((s32) angle % 360);
         HSD_JObjSetRotationY(jobj, deg_to_rad * angle);

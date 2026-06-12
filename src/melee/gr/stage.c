@@ -323,7 +323,7 @@ s32 Stage_80225074(s32 arg0)
     } else if (arg0 == 1) {
         r31 = 0x44;
     } else {
-        __assert(__FILE__, 526, "0");
+        HSD_ASSERT(526, 0);
     }
 
     tmp = Ground_801C28AC(unk_struct_804D49E8.list_idx, r31, &spC);

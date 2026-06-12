@@ -471,7 +471,7 @@ int grPushOn_80219230(int arg0)
         }
         i++;
     }
-    __assert("grpushon.c", 0x35DU, "0");
+    HSD_ASSERT(0x35DU, 0);
 }
 
 void grPushOn_80218888(Ground_GObj* arg0)
@@ -528,7 +528,7 @@ void grPushOn_80218888(Ground_GObj* arg0)
                 }
                 sp60[i] = dx;
             } else {
-                __assert("grpushon.c", 0x1C5, "0");
+                HSD_ASSERT(0x1C5, 0);
             }
             if (sp60[i] < 10.0f) {
                 sp60[i] = 10.0f;

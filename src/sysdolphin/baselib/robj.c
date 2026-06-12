@@ -735,9 +735,7 @@ static void expEvaluate(HSD_Exp* exp, u32 type, void* obj,
     temp_f31 = 57.29578F;
     for (rvalue = exp->rvalue; rvalue != NULL; rvalue = rvalue->next) {
         jobj = rvalue->jobj;
-        if (jobj == NULL) {
-            __assert(__FILE__, 0x467, "jobj");
-        }
+        HSD_ASSERT(0x467, jobj);
         HSD_JObjSetupMatrix(rvalue->jobj);
         for (cur_bit = 1; cur_bit && cur_bit <= rvalue->flags; cur_bit <<= 1) {
             switch (rvalue->flags & cur_bit) {

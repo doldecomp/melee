@@ -503,7 +503,7 @@ void grInishie1_801FB0AC(HSD_GObj* gobj, u32 index)
         gp->gv.inishie1.xD8 = grI1_804D69F8->unk10;
     } else {
         if (gp->gv.inishie1.blocks[index].hatena_gobj != NULL) {
-            __assert("grinishie1.c", 0x29D, "0");
+            HSD_ASSERT(0x29D, 0);
         }
     }
 }
@@ -683,9 +683,8 @@ void grInishie1_801FBAA0(HSD_GObj* gobj, s32 index)
         return;
     }
 
-    if (slot->hatena_gobj != NULL) {
-        __assert("grinishie1.c", 0x39E, "!mapgp->u.map.block[ix].hatena_gobj");
-    }
+    HSD_ASSERTMSG(0x39E, !slot->hatena_gobj,
+                  "!mapgp->u.map.block[ix].hatena_gobj");
 
     slot->hatena_gobj = hatena;
 

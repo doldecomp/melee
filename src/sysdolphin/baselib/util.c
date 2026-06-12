@@ -53,7 +53,7 @@ s32 HSD_Index2PosNrmMtx(u32 arg0)
     case 9:
         return 27;
     default:
-        __assert("util.c", 132, "0");
+        HSD_ASSERT(132, 0);
         return 0;
     }
 }

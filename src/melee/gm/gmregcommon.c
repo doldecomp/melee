@@ -70,9 +70,9 @@ void gmRegSetupEnemyColorTable(s8 ckind, u8 color, s8* ckinds, u8* colors)
             }
         }
         if (colors[i] == 0xFF) {
-            OSReport(
+            HSD_ASSERTREPORT(
+                0xDA, 0,
                 "Error : not find color in gmRegSetupEnemyColorTable()\n");
-            __assert(__FILE__, 0xDA, "0");
         }
     }
 }
