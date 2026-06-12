@@ -821,7 +821,7 @@ void mnDiagram_8023FC28(void)
             }
         }
         if (max_idx != i) {
-            u8* p = &assets->sorted_fighters[max_idx];
+            u8* p = &sorted[max_idx];
             u8 temp = *(p += sizeof(mnDiagram_804A0750_t));
             while (max_idx > i) {
                 *p = *(p - 1);
@@ -2728,6 +2728,57 @@ static inline Diagram* mnDiagram_GetCurrentDiagramData(void)
     return mnDiagram_804D6C10->user_data;
 }
 
+#define MNDIAGRAM_JOBJ_ASSERT(line, cond)                                    \
+    ((cond) ? (void) 0 : __assert(mnDiagram_804D4FA8, line, mnDiagram_804D4FB0))
+
+static inline bool mnDiagram_HSD_JObjMtxIsDirty(HSD_JObj* jobj)
+{
+    bool result;
+    MNDIAGRAM_JOBJ_ASSERT(564, jobj);
+    result = false;
+    if (!(jobj->flags & JOBJ_USER_DEF_MTX) && (jobj->flags & JOBJ_MTX_DIRTY)) {
+        result = true;
+    }
+    return result;
+}
+
+#define mnDiagram_HSD_JObjSetMtxDirty(jobj)                                  \
+    {                                                                         \
+        if (jobj != NULL && !mnDiagram_HSD_JObjMtxIsDirty(jobj)) {            \
+            HSD_JObjSetMtxDirtySub(jobj);                                     \
+        }                                                                     \
+    }
+
+static inline f32 mnDiagram_HSD_JObjGetTranslationX(HSD_JObj* jobj)
+{
+    MNDIAGRAM_JOBJ_ASSERT(993, jobj);
+    return jobj->translate.x;
+}
+
+static inline f32 mnDiagram_HSD_JObjGetTranslationY(HSD_JObj* jobj)
+{
+    MNDIAGRAM_JOBJ_ASSERT(1006, jobj);
+    return jobj->translate.y;
+}
+
+static inline void mnDiagram_HSD_JObjSetTranslateX(HSD_JObj* jobj, f32 x)
+{
+    MNDIAGRAM_JOBJ_ASSERT(932, jobj);
+    jobj->translate.x = x;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        mnDiagram_HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void mnDiagram_HSD_JObjSetTranslateY(HSD_JObj* jobj, f32 y)
+{
+    MNDIAGRAM_JOBJ_ASSERT(947, jobj);
+    jobj->translate.y = y;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        mnDiagram_HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
 void mnDiagram_CursorProc(HSD_GObj* gobj)
 {
     HSD_JObj* sp_jobj;
@@ -2749,19 +2800,19 @@ void mnDiagram_CursorProc(HSD_GObj* gobj)
 
     selection = (u16*) &mn_804A04F0;
     col = *++selection >> 8;
-    x_spacing = HSD_JObjGetTranslationX(data->jobjs[8]) -
-                HSD_JObjGetTranslationX(data->jobjs[7]);
-    HSD_JObjSetTranslateX(sp_jobj, x_spacing * (col - 3));
+    x_spacing = mnDiagram_HSD_JObjGetTranslationX(data->jobjs[8]) -
+                mnDiagram_HSD_JObjGetTranslationX(data->jobjs[7]);
+    mnDiagram_HSD_JObjSetTranslateX(sp_jobj, x_spacing * (col - 3));
 
     lb_80011E24((HSD_JObj*) gobj->hsd_obj, &sp_jobj, 4, -1);
     row = *selection & 0xFF;
-    y_spacing = HSD_JObjGetTranslationY(data->jobjs[10]) -
-                HSD_JObjGetTranslationY(data->jobjs[9]);
-    HSD_JObjSetTranslateY(sp_jobj, y_spacing * (row - 4.5) - 0.1F);
+    y_spacing = mnDiagram_HSD_JObjGetTranslationY(data->jobjs[10]) -
+                mnDiagram_HSD_JObjGetTranslationY(data->jobjs[9]);
+    mnDiagram_HSD_JObjSetTranslateY(sp_jobj, y_spacing * (row - 4.5) - 0.1F);
 
     lb_80011E24((HSD_JObj*) gobj->hsd_obj, &sp_jobj, 2, -1);
-    HSD_JObjSetTranslateX(sp_jobj, x_spacing * (col - 3));
-    HSD_JObjSetTranslateY(sp_jobj, y_spacing * (row - 4.5) - 0.1F);
+    mnDiagram_HSD_JObjSetTranslateX(sp_jobj, x_spacing * (col - 3));
+    mnDiagram_HSD_JObjSetTranslateY(sp_jobj, y_spacing * (row - 4.5) - 0.1F);
 }
 
 void mnDiagram_802433AC(void)
