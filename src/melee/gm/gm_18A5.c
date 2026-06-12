@@ -8008,13 +8008,15 @@ void fn_8019B81C(s32* state)
 
 extern SceneDesc* lbl_804D6670;
 
+#pragma dont_inline on
 void fn_8019B860(TmData* tm)
 {
     fn_8019A158();
     fn_80199AF0();
     fn_80198BA0();
     fn_8018F888();
-    fn_8018E618(tm->entrants, 4.5f, tm->x2C);
+    fn_8018E618(tm->entrants, lbl_804DA810, tm->x2C);
     fn_8018E85C(lbl_804D6670->models[4], tm->x2C);
     tm->cur_option = 0x20;
 }
+#pragma dont_inline reset

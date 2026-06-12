@@ -1142,9 +1142,15 @@ void ftAction_80072CB0(Fighter_GObj* gobj, CommandInfo* cmd)
 
 void ftAction_80072CD8(Fighter_GObj* gobj, CommandInfo* cmd)
 {
+    /// @todo too much stack
+    int gfx_id;
     int sp64;
     int sp60;
-    int gfx_id;
+    struct {
+        u32 x0;
+        u32 x4;
+        u32 x8;
+    } sp2C;
     CommandInfo _cmd;
     u32 cmd_words[3];
     Vec3 offset;
@@ -1173,7 +1179,7 @@ void ftAction_80072CD8(Fighter_GObj* gobj, CommandInfo* cmd)
             offset.x = 0.0f;
             range.x = 0.0f;
 
-            if (!((((u8*) cmd->u)[1] >> 1) & 1)) {
+            if (!cmd->u->footstep_fx_0.use_alt_bone) {
                 part = fp->ft_data->x8->x13;
             } else {
                 part = fp->ft_data->x8->x14;

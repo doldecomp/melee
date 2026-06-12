@@ -54,7 +54,16 @@ typedef struct UnkX {
 
 /* 2F491C */ static void ifStatus_PercentOnDeathAnimationThink(UnkX* value,
                                                                s32, s32);
-/* 3F9628 */ extern Element_803F9628 ifStatus_803F9628[8];
+/* 3F9628 */ Element_803F9628 ifStatus_803F9628[8] = {
+    { NULL, 0, if_802F74D0, 0x7C860U, 8, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+    { NULL, 0, if_802F73C4, 0xC351U, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+    { NULL, 0, if_802F74D0, 0x7C85EU, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+    { NULL, 0, if_802F73C4, 0x7C85DU, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+    { NULL, 0, if_802F73C4, 0x7C857U, 10, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+    { NULL, 0, if_802F74D0, 0x7C855U, 8, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+    { NULL, 0, if_802F74D0, 0x9C48U, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+    { NULL, 0, if_802F74D0, 0x9C46U, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+};
 /* 4D6D60 */ static u8 ifStatus_804D6D60;
 /* 4D6D61 */ static s8 ifStatus_804D6D61;
 
@@ -1253,8 +1262,8 @@ void ifStatus_802F7134(void)
     }
 
     archive = ifAll_802F3690();
-    lbArchive_LoadSections(*archive, (void**) &models,
-                           &ifStatus_803F9628[8], 0);
+    lbArchive_LoadSections(*archive, (void**) &models, "ScInfCnt_scene_models",
+                           0);
 
     for (i = 0; i < 8; i++) {
         ifStatus_803F9628[i].x14 = models[i];
@@ -1272,16 +1281,3 @@ void ifStatus_802F7220(void)
         }
     }
 }
-
-/* 3F9628 */ Element_803F9628 ifStatus_803F9628[8] = {
-    { NULL, 0, if_802F74D0, 0x7C860U, 8, 0, { 0 }, 0, NULL, NULL, 0, 0 },
-    { NULL, 0, if_802F73C4, 0xC351U, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
-    { NULL, 0, if_802F74D0, 0x7C85EU, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
-    { NULL, 0, if_802F73C4, 0x7C85DU, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
-    { NULL, 0, if_802F73C4, 0x7C857U, 10, 0, { 0 }, 0, NULL, NULL, 0, 0 },
-    { NULL, 0, if_802F74D0, 0x7C855U, 8, 0, { 0 }, 0, NULL, NULL, 0, 0 },
-    { NULL, 0, if_802F74D0, 0x9C48U, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
-    { NULL, 0, if_802F74D0, 0x9C46U, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
-};
-
-/* 3F9768 */ char lbl_803F9768[] = "ScInfCnt_scene_models";

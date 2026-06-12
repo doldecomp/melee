@@ -1397,87 +1397,60 @@ void Camera_8002B3D4(void* arg0)
 {
     CameraBounds bounds;
     CameraBounds sp2C;
-    Vec3 sp1C;
-    Vec3 spC;
-    HSD_GObj* temp_r3;
-    HSD_GObj* temp_r3_2;
-    f32 temp_f2;
+    Vec3 distance;
+    Vec3 fighter_pos;
+    float total_dist;
+    HSD_GObj* p1_fgp;
     f32 temp_f31;
-    f32 temp_f3;
-    f32 temp_f4;
     f32 var_f1;
     f32 var_f1_2;
-    s32 var_r0;
-    s32 var_r0_2;
 
     Camera_80030DF8();
     Camera_800293E0();
     Camera_8002B0E0();
     Camera_8002958C(&bounds, &cm_80452C68.transform);
     cm_80452C68.transform.target_fov = cm_803BCCA0.x40;
-    cm_80452C68.transform.fov +=
-        (cm_80452C68.transform.target_fov - cm_80452C68.transform.fov) *
-        cm_803BCCA0.x44;
+    total_dist = cm_80452C68.transform.target_fov - cm_80452C68.transform.fov;
+    cm_80452C68.transform.fov += total_dist * cm_803BCCA0.x44;
     Camera_80029BC4(&bounds, &cm_80452C68.transform);
-    if ((Camera_80030AF8() != 0) &&
-        (temp_r3 = Ground_801C57A4(), ((temp_r3 == NULL) == 0)))
+    if (!((Camera_80030AF8() != 0) &&
+          ((p1_fgp = Ground_801C57A4(), p1_fgp != NULL)) &&
+          (ftLib_80086644(p1_fgp, &fighter_pos),
+           abs_threshold_inline(fighter_pos.z, 30.0f))))
     {
-        ftLib_80086644(temp_r3, &sp1C);
-        var_f1 = sp1C.z;
-        if (var_f1 < 0.0f) {
-            var_f1 = -var_f1;
-        }
-        if (var_f1 > 30.0f) {
-            var_r0 = 1;
-        } else {
-            goto block_6;
-        }
-    } else {
-    block_6:
-        var_r0 = 0;
-    }
-    if (var_r0 == 0) {
         Camera_80029CF8(&bounds, &cm_80452C68.transform);
         Camera_8002A768(&cm_80452C68.transform, 0);
     }
     Camera_8002958C(&sp2C, &cm_80452C68.transform_copy);
     cm_80452C68.transform_copy.target_fov = cm_803BCCA0.x40;
-    cm_80452C68.transform_copy.fov +=
-        (cm_80452C68.transform_copy.target_fov -
-         cm_80452C68.transform_copy.fov) *
-        cm_803BCCA0.x44;
+    temp_f31 =
+        cm_80452C68.transform_copy.target_fov - cm_80452C68.transform_copy.fov;
+    cm_80452C68.transform_copy.fov += temp_f31 * cm_803BCCA0.x44;
     Camera_80029BC4(&sp2C, &cm_80452C68.transform_copy);
-    if ((Camera_80030AF8() != 0) &&
-        (temp_r3_2 = Ground_801C57A4(), ((temp_r3_2 == NULL) == 0)))
+    if (!((Camera_80030AF8() != 0) &&
+          ((p1_fgp = Ground_801C57A4(), p1_fgp != NULL)) &&
+          (ftLib_80086644(p1_fgp, &fighter_pos),
+           abs_threshold_inline(fighter_pos.z, 30.0f))))
     {
-        ftLib_80086644(temp_r3_2, &spC);
-        var_f1_2 = spC.z;
-        if (var_f1_2 < 0.0f) {
-            var_f1_2 = -var_f1_2;
-        }
-        if (var_f1_2 > 30.0f) {
-            var_r0_2 = 1;
-        } else {
-            goto block_15;
-        }
-    } else {
-    block_15:
-        var_r0_2 = 0;
-    }
-    if (var_r0_2 == 0) {
         Camera_80029CF8(&sp2C, &cm_80452C68.transform_copy);
         Camera_8002A768(&cm_80452C68.transform_copy, 0);
     }
+
+    /// @remarks permuter jank
+    distance.y = cm_80452C68.transform.target_position.y -
+                 cm_80452C68.transform.target_interest.y;
     if (cm_80452C68.x2BC == 1.0f) {
-        temp_f4 = cm_80452C68.transform.target_position.x -
-                  cm_80452C68.transform.target_interest.x;
-        temp_f3 = cm_80452C68.transform.target_position.y -
-                  cm_80452C68.transform.target_interest.y;
-        temp_f2 = cm_80452C68.transform.target_position.z -
-                  cm_80452C68.transform.target_interest.z;
-        cm_80452C68.x2C0 = sqrtf__Ff(
-            (temp_f2 * temp_f2) +
-            ((temp_f4 * temp_f4) + (temp_f3 * temp_f3)));
+        distance.x = cm_80452C68.transform.target_position.x -
+                     cm_80452C68.transform.target_interest.x;
+        distance.y = cm_80452C68.transform.target_position.y -
+                     cm_80452C68.transform.target_interest.y;
+        distance.z = cm_80452C68.transform.target_position.z -
+                     cm_80452C68.transform.target_interest.z;
+        var_f1 = distance.y * distance.y;
+        temp_f31 = distance.z * distance.z;
+        var_f1_2 = distance.x * distance.x;
+        total_dist = (var_f1_2 + var_f1) + temp_f31;
+        cm_80452C68.x2C0 = sqrtf__Ff(total_dist);
     }
 
     Camera_8002B1F8(&cm_80452C68.transform);

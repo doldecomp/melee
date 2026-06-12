@@ -794,8 +794,6 @@ void mnDiagram_8023FC28(void)
     u32* tp;
     int n;
     int j;
-    u8* candidate;
-    u32* totals_base;
     PAD_STACK(12);
 
     dst_iter = dst;
@@ -805,7 +803,6 @@ void mnDiagram_8023FC28(void)
         *tp = mnDiagram_SumNameKOs(n & 0xFF);
     }
 
-    totals_base = totals;
     for (i = 0; i < 0x78; i++) {
         max_idx = i;
         for (j = i + 1; j < 0x78; j++) {
@@ -815,13 +812,13 @@ void mnDiagram_8023FC28(void)
                  ((GetNameText(
                        (0, mnDiagram_804A076C.sorted_names[max_idx])) ==
                    NULL) &&
-                  (GetNameText(*candidate) != NULL))))
+                  (GetNameText(mnDiagram_804A076C.sorted_names[j]) != NULL))))
             {
                 max_idx = j;
             }
         }
         if (max_idx != i) {
-            u8* p = &sorted[max_idx];
+            u8* p = &assets->sorted_fighters[max_idx];
             u8 temp = *(p += sizeof(mnDiagram_804A0750_t));
             while (max_idx > i) {
                 *p = *(p - 1);
