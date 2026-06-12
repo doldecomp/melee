@@ -413,6 +413,7 @@ void gm_801BAD70(GameScene* arg0)
     if (level_info->kind == 2) {
         struct gm_evstage_list* stage_list;
         u16 stage;
+        u8* stagep;
         ev->xB_4 = 1;
         stage_list = level_info->x10;
         stage = stage_list->stage[ev->x20];

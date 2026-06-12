@@ -786,6 +786,7 @@ void itLinkboomerang_UnkMotion3_Phys(Item_GObj* gobj)
     f32 speed;
     if (ip->xDD4_itemVar.linkboomerang.xDE8 != 1) {
         length = attrs->xC;
+        attrs->xC = attrs->xC;
         speed = VEC_XY_LENGTH(&ip->x40_vel);
         length = speed + length;
         if (length > attrs->x14) {

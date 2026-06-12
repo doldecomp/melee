@@ -1327,12 +1327,11 @@ bool hsd_803931A4(s32 exi_channel)
     hsd_804D78B8 = 0;
 
     if (MCCInit(hsd_804D7890, 0, (MCC_CBSysEvent) fn_80392E2C) == 0) {
-        OSReport("EXI_%d:not support USB (Error=%d)\n", channel,
-                 MCCGetLastError());
+        OSReport(lbl_8040A8E0, channel, MCCGetLastError());
         return 0;
     }
 
-    OSReport("EXI initialized (EXI_%d)\n", channel);
+    OSReport(lbl_8040A904, channel);
     return 1;
 }
 
@@ -1726,6 +1725,8 @@ s32 hsd_80393D2C(s32 enable)
 }
 #pragma pop
 
+#pragma push
+#pragma pool_data off
 void hsd_80393DA0(u8* buf, size_t size)
 {
     PAD_STACK(4);
@@ -1737,6 +1738,7 @@ void hsd_80393DA0(u8* buf, size_t size)
     hsd_804CF7E8.x0_b1 = true;
     HSD_SetReportCallback(fn_80393C14);
 }
+#pragma pop
 
 #pragma push
 #pragma dont_inline on

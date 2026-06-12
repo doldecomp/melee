@@ -4454,7 +4454,7 @@ static inline bool ftCo_800A9CB4_inline1(Fighter* fp, Vec3* stage_pos)
     if (fp->x1A88.xFA_b6) {
         return false;
     }
-    if (fp->x34_scale.y < 1.0f) {
+    if (fp->x34_scale.y < ftCo_804D8808) {
         return true;
     }
     if (stage_info.internal_stage_id == ICEMTN) {

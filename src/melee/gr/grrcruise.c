@@ -85,6 +85,7 @@ struct StageData grRc_803E4ECC = {
 extern Vec3 grRc_803B8288;
 extern s16 grRc_803E4FF0[];
 extern s16 grRc_804D4790[4];
+extern const f32 grRc_804DB644;
 
 static struct {
     f32 x0;
@@ -306,6 +307,12 @@ void grRCruise_801FF79C(Ground_GObj* arg) {}
 
 void grRCruise_801FF7A0(Ground_GObj* arg) {}
 
+char grRc_803E4F44[] = "dynamicsdata_shipflag\0\0\0"
+                         "gp->u.scroll.int_jobj\0\0\0"
+                         "gp->u.scroll.cam_jobj\0\0\0"
+                         "gp->u.scroll.ctr_jobj\0\0\0"
+                         "translate\0\0";
+
 void grRCruise_801FF7A4(Ground_GObj* gobj)
 {
     Ground_GObj* stage_gobj = gobj;
@@ -320,7 +327,7 @@ void grRCruise_801FF7A4(Ground_GObj* gobj)
     grAnime_801C752C(jobj, 1, 30628, HSD_AObjSetFlags, 3, 0x20000000);
     archive = grDatFiles_801C6324();
     if (archive != NULL && (data = HSD_ArchiveGetPublicAddress(
-                                archive->unk0, "dynamicsdata_shipflag"),
+                                archive->unk0, grRc_803E4F44),
                             data != NULL))
     {
         grLib_801C9B20(Ground_801C3FA4(stage_gobj, 23), data,
@@ -363,7 +370,39 @@ void grRCruise_801FF920(Ground_GObj* arg) {}
 
 void grRCruise_801FF924(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
+    // RCruise uses an anim_gobj/int_jobj split not represented by ScrollVars.
+    struct grRCruise_ScrollVarsForInit {
+        struct {
+            u8 b0 : 1;
+            u8 b1 : 1;
+            u8 b2 : 1;
+            u8 b3 : 1;
+            u8 b4 : 1;
+            u8 b5 : 1;
+            u8 b6 : 1;
+            u8 b7 : 1;
+        } x00;
+        u8 pad_01[3];
+        Vec3 x04;
+        Vec3 x10;
+        Vec3 x1C;
+        HSD_GObj* anim_gobj;
+        HSD_JObj* int_jobj;
+        HSD_JObj* cam_jobj;
+        HSD_JObj* ctr_jobj;
+        HSD_JObj* x34[3];
+        HSD_JObj* x40;
+    };
+    struct grRCruise_ScrollGround {
+        u8 pad_00[0x14];
+        s32 map_id;
+        u8 pad_18[0xAC];
+        struct {
+            struct grRCruise_ScrollVarsForInit scroll;
+        } u;
+    };
+    struct grRCruise_ScrollGround* gp =
+        (struct grRCruise_ScrollGround*) GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     PAD_STACK(0x8);
 
@@ -371,22 +410,37 @@ void grRCruise_801FF924(Ground_GObj* gobj)
     gp->u.scroll.x34[1] = Ground_801C3FA4(gobj, 5);
     gp->u.scroll.x34[2] = Ground_801C3FA4(gobj, 6);
     gp->u.scroll.x40 = Ground_801C3FA4(gobj, 7);
-    gp->u.scroll.scroll_jobj = Ground_801C3FA4(gobj, 3);
-    HSD_ASSERT(0x2B0, gp->u.scroll.scroll_jobj);
+    gp->u.scroll.int_jobj = Ground_801C3FA4(gobj, 3);
+    if (gp->u.scroll.int_jobj == NULL) {
+        __assert("grrcruise.c", 0x2B0, grRc_803E4F44 + 0x18);
+    }
     gp->u.scroll.cam_jobj = Ground_801C3FA4(gobj, 2);
-    HSD_ASSERT(0x2B2, gp->u.scroll.cam_jobj);
+    if (gp->u.scroll.cam_jobj == NULL) {
+        __assert("grrcruise.c", 0x2B2, grRc_803E4F44 + 0x30);
+    }
 
     gp->u.scroll.ctr_jobj = Ground_801C3FA4(gobj, 1);
-    HSD_ASSERT(0x2B4, gp->u.scroll.ctr_jobj);
+    if (gp->u.scroll.ctr_jobj == NULL) {
+        __assert("grrcruise.c", 0x2B4, grRc_803E4F44 + 0x48);
+    }
 
-    HSD_JObjGetTranslation(gp->u.scroll.ctr_jobj, &gp->u.scroll.x04);
-    gp->u.scroll.x10.z = 0.0f;
-    gp->u.scroll.x10.y = 0.0f;
-    gp->u.scroll.x10.x = 0.0f;
-    gp->u.scroll.x1C.z = 0.0f;
-    gp->u.scroll.x1C.y = 0.0f;
-    gp->u.scroll.x1C.x = 0.0f;
-    gp->u.scroll.x00 &= ~0x80;
+    {
+        HSD_JObj* ctr_jobj = gp->u.scroll.ctr_jobj;
+        if (ctr_jobj == NULL) {
+            __assert("jobj.h", 0x3D3, "jobj");
+        }
+        if (&gp->u.scroll.x04 == NULL) {
+            __assert("jobj.h", 0x3D4, grRc_803E4F44 + 0x60);
+        }
+        gp->u.scroll.x04 = ctr_jobj->translate;
+    }
+    gp->u.scroll.x10.z = grRc_804DB644;
+    gp->u.scroll.x10.y = grRc_804DB644;
+    gp->u.scroll.x10.x = grRc_804DB644;
+    gp->u.scroll.x1C.z = grRc_804DB644;
+    gp->u.scroll.x1C.y = grRc_804DB644;
+    gp->u.scroll.x1C.x = grRc_804DB644;
+    gp->u.scroll.x00.b0 = 0;
     grAnime_801C8138(gobj, gp->map_id, 0);
     grAnime_801C752C(jobj, 1, 30628, HSD_AObjSetFlags, 3, 0x20000000);
     gobj->render_cb = (GObj_RenderFunc) fn_80201BE0;

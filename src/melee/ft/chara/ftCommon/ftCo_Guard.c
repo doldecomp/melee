@@ -903,12 +903,15 @@ void ftCo_80093BC0(Fighter_GObj* gobj)
     }
 }
 
+#pragma push
+#pragma inline_depth(3)
 void ftCo_GuardReflect_Anim(HSD_GObj* gobj)
 {
     PAD_STACK(12);
     ftCo_80093BC0(gobj);
     ftCo_GuardOn_Anim(gobj);
 }
+#pragma pop
 
 void ftCo_GuardReflect_IASA(HSD_GObj* gobj)
 {

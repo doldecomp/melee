@@ -164,7 +164,7 @@ void fn_8001FEC4(HSD_GObj* gobj, s32 code)
     BgFlashData* data = &lbl_80433658;
     s32 mode;
     s32 y;
-    PAD_STACK(24);
+    PAD_STACK(8);
 
     if (data->state.active) {
         return;
@@ -174,10 +174,15 @@ void fn_8001FEC4(HSD_GObj* gobj, s32 code)
     mode = data->state.mode;
 
     if (mode == 5 || mode >= 5 || mode < 3) {
-        u8 a = data->xC.a;
-        u8 b = data->xC.b;
-        u8 g = data->xC.g;
-        u8 r = data->xC.r;
+        u8 r;
+        u8 g;
+        u8 b;
+        u8 a;
+
+        a = data->xC.a;
+        b = data->xC.b;
+        g = data->xC.g;
+        r = data->xC.r;
 
         GXBegin(GX_QUADS, GX_VTXFMT0, 4);
         GXPosition2f32(0.0f, 0.0f);
@@ -206,90 +211,99 @@ void fn_8001FEC4(HSD_GObj* gobj, s32 code)
         return;
     }
 
-    if (data->x30 != 0) {
-        return;
-    }
+    switch ((s32) data->x30) {
+    case 0:
+        if ((u32) mode == 3U) {
+            y = 0;
+            while (y <= (s32) data->x38) {
+                if (y == (s32) data->x38) {
+                    s32 width;
+                    u8 strip_h;
+                    s32 neg_y;
+                    s32 neg_yh;
 
-    if ((u32) mode == 3U) {
-        y = 0;
-        while (y <= (s32) data->x38) {
-            if (y == (s32) data->x38) {
-                u8 strip_h = data->x32;
-                s32 width = data->x34;
-                s32 neg_y;
-                s32 neg_yh;
+                    strip_h = data->x32;
+                    width = data->x34;
+                    GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+                    neg_y = -y;
+                    neg_yh = -(y + strip_h);
+                    GXPosition2f32(0.0f, (f32) neg_y);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                    GXPosition2f32((f32) width, (f32) neg_y);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                    GXPosition2f32((f32) width, (f32) neg_yh);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                    GXPosition2f32(0.0f, (f32) neg_yh);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                } else {
+                    u8 strip_h = data->x32;
+                    s32 neg_y;
+                    s32 neg_yh;
 
-                GXBegin(GX_QUADS, GX_VTXFMT0, 4);
-                neg_y = -y;
-                neg_yh = -(y + strip_h);
-                GXPosition2f32(0.0f, (f32) neg_y);
-                GXColor4u8(0, 0, 0, 0xFF);
-                GXPosition2f32((f32) width, (f32) neg_y);
-                GXColor4u8(0, 0, 0, 0xFF);
-                GXPosition2f32((f32) width, (f32) neg_yh);
-                GXColor4u8(0, 0, 0, 0xFF);
-                GXPosition2f32(0.0f, (f32) neg_yh);
-                GXColor4u8(0, 0, 0, 0xFF);
-            } else {
-                u8 strip_h = data->x32;
-                s32 neg_y;
-                s32 neg_yh;
-
-                GXBegin(GX_QUADS, GX_VTXFMT0, 4);
-                neg_y = -y;
-                neg_yh = -(y + strip_h);
-                GXPosition2f32(0.0f, (f32) neg_y);
-                GXColor4u8(0, 0, 0, 0xFF);
-                GXPosition2f32(640.0f, (f32) neg_y);
-                GXColor4u8(0, 0, 0, 0xFF);
-                GXPosition2f32(640.0f, (f32) neg_yh);
-                GXColor4u8(0, 0, 0, 0xFF);
-                GXPosition2f32(0.0f, (f32) neg_yh);
-                GXColor4u8(0, 0, 0, 0xFF);
+                    GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+                    neg_y = -y;
+                    neg_yh = -(y + strip_h);
+                    GXPosition2f32(0.0f, (f32) neg_y);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                    GXPosition2f32(640.0f, (f32) neg_y);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                    GXPosition2f32(640.0f, (f32) neg_yh);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                    GXPosition2f32(0.0f, (f32) neg_yh);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                }
+                y += data->x32;
             }
-            y += data->x32;
-        }
-    } else {
-        y = data->x38;
-        while (y <= 0x1E0) {
-            if (y == (s32) data->x38) {
-                s32 x34 = data->x34;
-                u8 strip_h = data->x32;
-                s32 right = 0x280 - x34;
-                s32 neg_y;
-                s32 xr = x34 + right;
-                s32 neg_yh;
+        } else {
+            s32* pY;
+            s32 y2;
 
-                GXBegin(GX_QUADS, GX_VTXFMT0, 4);
-                neg_y = -y;
-                neg_yh = -(y + strip_h);
-                GXPosition2f32((f32) x34, (f32) neg_y);
-                GXColor4u8(0, 0, 0, 0xFF);
-                GXPosition2f32((f32) xr, (f32) neg_y);
-                GXColor4u8(0, 0, 0, 0xFF);
-                GXPosition2f32((f32) xr, (f32) neg_yh);
-                GXColor4u8(0, 0, 0, 0xFF);
-                GXPosition2f32((f32) x34, (f32) neg_yh);
-                GXColor4u8(0, 0, 0, 0xFF);
-            } else {
-                u8 strip_h = data->x32;
-                s32 neg_y;
-                s32 neg_yh;
+            for (pY = &data->x38, y2 = data->x38; y2 <= 0x1E0;
+                 y2 += data->x32) {
+                if (y2 == *pY) {
+                    s32 x34;
+                    u8 strip_h;
+                    s32 right;
+                    s32 neg_y;
+                    s32 xr;
+                    s32 neg_yh;
 
-                GXBegin(GX_QUADS, GX_VTXFMT0, 4);
-                neg_y = -y;
-                neg_yh = -(y + strip_h);
-                GXPosition2f32(0.0f, (f32) neg_y);
-                GXColor4u8(0, 0, 0, 0xFF);
-                GXPosition2f32(640.0f, (f32) neg_y);
-                GXColor4u8(0, 0, 0, 0xFF);
-                GXPosition2f32(640.0f, (f32) neg_yh);
-                GXColor4u8(0, 0, 0, 0xFF);
-                GXPosition2f32(0.0f, (f32) neg_yh);
-                GXColor4u8(0, 0, 0, 0xFF);
+                    x34 = data->x34;
+                    strip_h = data->x32;
+                    right = 0x280;
+                    right -= x34;
+                    GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+                    neg_y = -y2;
+                    xr = right + x34;
+                    neg_yh = -(y2 + strip_h);
+                    GXPosition2f32((f32) x34, (f32) neg_y);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                    GXPosition2f32((f32) xr, (f32) neg_y);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                    GXPosition2f32((f32) xr, (f32) neg_yh);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                    GXPosition2f32((f32) x34, (f32) neg_yh);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                } else {
+                    s32 neg_y;
+                    u8 strip_h = data->x32;
+                    s32 neg_yh;
+
+                    GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+                    neg_y = -y2;
+                    neg_yh = -(y2 + strip_h);
+                    GXPosition2f32(0.0f, (f32) neg_y);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                    GXPosition2f32(640.0f, (f32) neg_y);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                    GXPosition2f32(640.0f, (f32) neg_yh);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                    GXPosition2f32(0.0f, (f32) neg_yh);
+                    GXColor4u8(0, 0, 0, 0xFF);
+                }
             }
-            y += data->x32;
         }
+        break;
     }
 }
 
@@ -308,7 +322,10 @@ void fn_800204C8(void)
     if (mode >= 3) {
         goto case_3_4;
     }
-    if (mode >= 0) {
+    switch (mode) {
+    case 0:
+    case 1:
+    case 2:
         goto case_0_1_2;
     }
     return;
@@ -322,7 +339,9 @@ case_0_1_2:
     return;
 
 case_3_4:
-    if ((s32) data->x30 == 0) {
+    switch ((s32) data->x30) {
+    case 0:
+    {
         s32* pX;
         s32* pY;
         s32 i;
@@ -341,6 +360,8 @@ case_3_4:
                 return;
             }
         }
+        break;
+    }
     }
 }
 
@@ -646,33 +667,18 @@ void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
 
 #define fake_HSD_ASSERT(line, cond)                                           \
     ((cond) ? ((void) 0) : __assert("jobj.h", line, #cond))
-
-static inline void FakeHSD_JObjSetRotation(HSD_JObj* jobj, Quaternion* rotate)
-{
-    fake_HSD_ASSERT(618, jobj);
-    fake_HSD_ASSERT(619, rotate); // These get opimized away, I am unsure why.
-    jobj->rotate = *rotate;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        HSD_JObjSetMtxDirty(jobj);
-    }
-}
-
-static inline void Fake_HSD_JObjGetRotation(HSD_JObj* jobj, Quaternion* quat)
-{
-    fake_HSD_ASSERT(699, jobj);
-    fake_HSD_ASSERT(700, quat); // These get opimized away, I am unsure why.
-    *quat = jobj->rotate;
-}
+#define fake_HSD_ASSERTMSG(line, cond, msg)                                   \
+    ((cond) ? ((void) 0) : __assert("jobj.h", line, msg))
 
 void fn_8002113C(HSD_JObj* jobj, Vec3* axis, f32 angle)
 {
-    Mtx mtx;
-    Mtx rotMtx;
     Mtx tmpMtx;
+    Mtx rotMtx;
     Mtx result;
-    Vec3 localAxis;
-    Quaternion rot;
+    Vec3 rot;
     Quaternion rot2;
+    Vec3 localAxis;
+    Mtx mtx;
 
     PAD_STACK(0x10);
 
@@ -683,12 +689,18 @@ void fn_8002113C(HSD_JObj* jobj, Vec3* axis, f32 angle)
     PSMTXRotAxisRad(rotMtx, (Vec*) &localAxis, -angle);
 
     if (!(jobj->flags & JOBJ_USE_QUATERNION)) {
-        Quaternion* volatile rot_ptr = &rot;
-        Fake_HSD_JObjGetRotation(jobj, rot_ptr);
-        HSD_MkRotationMtx(tmpMtx, (Vec3*) rot_ptr);
+        fake_HSD_ASSERT(699, jobj);
+        fake_HSD_ASSERTMSG(700, (u32) &rot, "rotate");
+        *(Quaternion*) &rot = jobj->rotate;
+        HSD_MkRotationMtx(tmpMtx, &rot);
         PSMTXConcat(tmpMtx, rotMtx, result);
-        HSD_QuatLib_8037EB28(result, (Vec3*) rot_ptr);
-        FakeHSD_JObjSetRotation(jobj, rot_ptr);
+        HSD_QuatLib_8037EB28(result, &rot);
+        fake_HSD_ASSERT(618, jobj);
+        fake_HSD_ASSERTMSG(619, (u32) &rot, "rotate");
+        jobj->rotate = *(Quaternion*) &rot;
+        if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+            HSD_JObjSetMtxDirty(jobj);
+        }
     } else {
         HSD_JObjGetRotation(jobj, &rot2);
         HSD_MtxQuat(tmpMtx, &rot2);

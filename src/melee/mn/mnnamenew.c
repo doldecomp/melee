@@ -1329,7 +1329,7 @@ s32 mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, u8 arg2)
     HSD_JObj* variant;
     HSD_JObj* key_jobj;
     HSD_JObj* ref_jobj;
-    HSD_JObj* ref2;
+    s32 i;
     HSD_JObj* ref3;
     GlyphVariantEntry* user_data;
     Vec3 sp38;
@@ -1338,7 +1338,7 @@ s32 mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, u8 arg2)
     f32 dy;
     f32 base_x;
     void** setup_desc;
-    s32 i;
+    HSD_JObj* ref2;
     HSD_JObj* jobj;
     HSD_GObj* gobj;
     void** variant_desc;
@@ -1351,7 +1351,7 @@ s32 mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, u8 arg2)
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 6U, 0x80U);
     HSD_GObj_SetupProc(gobj, fn_8023CFC8, 0U);
     HSD_JObjAddAnimAll(jobj, setup_desc[1], setup_desc[2], setup_desc[3]);
-    HSD_JObjReqAnimAll(jobj, (f32) (u8) arg1 * 0.5f);
+    HSD_JObjReqAnimAll(jobj, ((f32) (u8) arg1) / 2.0f);
     HSD_JObjAnimAll(jobj);
 
     user_data = HSD_MemAlloc(sizeof(GlyphVariantEntry));

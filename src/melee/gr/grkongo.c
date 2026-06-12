@@ -352,6 +352,9 @@ void grKongo_801D577C(Ground_GObj* arg0)
         if ((s16) gp->gv.kongo3.xC4 == 3) {
             gp->gv.kongo3.xC4 = 0;
         }
+        if ((s16) temp_r31->gv.kongo3.xC4 == 3) {
+            temp_r31->gv.kongo3.xC4 = 0;
+        }
         break;
     }
     case 0:
