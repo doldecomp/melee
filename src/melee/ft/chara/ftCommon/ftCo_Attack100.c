@@ -91,6 +91,7 @@
 /* 0D9CE8 */ static void fn_800D9CE8(Fighter_GObj* arg0);
 /* 0DA054 */ void fn_800DA054(Fighter_GObj* gobj);
 /* 0DAADC */ static void fn_800DAADC(Fighter_GObj* arg0, Fighter_GObj* arg1);
+/* 0DAD18 */ static bool fn_800DAD18(Fighter_GObj* gobj);
 /* 0DAECC */ static void fn_800DAECC(Fighter_GObj* gobj);
 /* 0DAEEC */ void fn_800DAEEC(Fighter_GObj* gobj);
 /* 0DB230 */ static void fn_800DB230(Fighter_GObj* gobj);
@@ -724,8 +725,7 @@ void fn_800D7938(Fighter_GObj* gobj)
         temp_r4 = it_80291DAC(temp_r31->item_gobj,
                               (s32) ((FighterOverlay*) temp_r31)->x2340);
         if (temp_r4 != -1) {
-            ((void (*)(Item_GObj*, s32)) it_80291F14)(temp_r31->item_gobj,
-                                                      temp_r4);
+            it_80291F14(temp_r31->item_gobj, temp_r4);
         }
         ftCommon_8007E7E4(temp_r30, 1);
     }
@@ -2296,21 +2296,26 @@ void fn_800DA8E4(Fighter_GObj* gobj, Fighter_GObj* victim_gobj, s32 arg2)
     ftCommon_8007E2F4(fp, 0x1FF);
 }
 
+#pragma push
+#pragma dont_inline on
 void fn_800DAA40(Fighter_GObj* arg0, Fighter_GObj* arg1)
 {
+    extern f32 ftCo_804D90C8;
     Vec3 sp18;
-    Fighter* temp_r31 = GET_FIGHTER(arg0);
-    Fighter* temp_r30 = GET_FIGHTER(arg1);
+    Fighter* temp_r31 = arg0->user_data;
+    Fighter* temp_r30 = arg1->user_data;
+    PAD_STACK(8);
     fn_800DAC78(arg0, &sp18);
     if (temp_r31->ground_or_air == GA_Ground) {
         temp_r30->x2170 = sp18.y + temp_r31->cur_pos.y - temp_r30->cur_pos.y;
     } else {
-        temp_r30->x2170 = 0.0F;
+        temp_r30->x2170 = ftCo_804D90C8;
         temp_r31->cur_pos.x += sp18.x;
         temp_r31->cur_pos.y += sp18.y;
         temp_r31->cur_pos.z += sp18.z;
     }
 }
+#pragma pop
 
 void fn_800DAADC(Fighter_GObj* arg0, Fighter_GObj* arg1)
 {
@@ -2366,6 +2371,11 @@ void fn_800DAC78(Fighter_GObj* gobj, Vec3* arg1)
     arg1->x = sp2C.x - sp20.x;
     arg1->y = sp2C.y - sp20.y;
     arg1->z = sp2C.z - sp20.z;
+}
+
+static inline bool fn_800DAD18_noinline(Fighter_GObj* gobj)
+{
+    return fn_800DAD18(gobj);
 }
 
 static bool fn_800DAD18(Fighter_GObj* gobj)
@@ -2863,7 +2873,7 @@ void ftCo_CaptureWaitLw_Phys(Fighter_GObj* gobj)
 {
     PAD_STACK(8);
 
-    if (fn_800DAD18(gobj)) {
+    if (fn_800DAD18_noinline(gobj)) {
         ftCo_CaptureWaitLw_Phys_inline(gobj);
     }
 }
