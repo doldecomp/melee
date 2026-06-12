@@ -881,9 +881,8 @@ void grGreens_80214FA8(Ground_GObj* gobj)
 {
     int j;
     unsigned int i;
-    Ground* gp = GET_GROUND(gobj);
-    int row;
     int col;
+    Ground* gp = GET_GROUND(gobj);
 
     for (i = 0; i < 30; i++) {
         mpJointSetCb2(grGr_803E787C[i], gp, fn_80216DE4);
@@ -893,16 +892,16 @@ void grGreens_80214FA8(Ground_GObj* gobj)
         if (jobj != NULL) {
             HSD_JObjSetFlags(jobj, JOBJ_HIDDEN);
         } else {
-            HSD_ASSERT(1203, NULL);
+            __assert(grGr_803E7728, 1203, "0");
         }
     }
-    for (row = 0; row < 5; row++) {
+    for (j = 0; j < 5; j++) {
         for (col = 0; col < 6; col++) {
-            switch (grGr_8049F9E0[row * 6 + col]) {
+            switch (grGr_8049F9E0[j * 6 + col]) {
             case 1:
             case 2:
-                grGreens_80215358(gobj, col, row,
-                                   grGr_8049F9E0[row * 6 + col], 3);
+                grGreens_80215358(gobj, col, j,
+                                   grGr_8049F9E0[j * 6 + col], 3);
                 break;
             }
         }

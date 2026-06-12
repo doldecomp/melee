@@ -43,8 +43,33 @@
 /* 3FA098 */ static float un_803FA098;
 /* 3FA09C */ static float un_803FA09C;
 /* 3FA0B0 */ static int un_803FA0B0;
-/* 3FA128 */ static struct {
-    u8 _pad0[0x220];
+struct un_803FA128_x130_t {
+    int x0;
+    int x4;
+    int x8;
+    int xC;
+    int x10[4];
+    int x20_pad;
+    int x24[4];
+    int x34_pad;
+    int x38[4];
+    int x48[4];
+    int x58[4];
+    int x68[4];
+    f32 x78[4];
+    f32 x88[4];
+    f32 x98[4];
+    int xA8[4];
+    int xB8[4];
+    int xC8;
+    int xCC[4];
+    int xDC[4];
+    f32 xEC;
+};
+
+/* 3FA128 */ static struct un_803FA128_t {
+    u8 _pad0[0x130];
+    struct un_803FA128_x130_t x130;
     u16 x220;
     u8 _pad222[0x2];
     u8 x224;
@@ -407,18 +432,19 @@ void un_802FFEE0(s32* arg0)
 void un_802FFF2C(StartMeleeData* arg0)
 {
     StartMeleeRules* r = &arg0->rules;
-    struct un_803FA258_t* s = &un_803FA258;
-    PlayerInitData* p;
+    struct un_803FA128_t* s = &un_803FA128;
+    struct un_803FA128_x130_t* sp;
+    StartMeleeData* data;
     s32 i;
-    s32 timer;
+    u16 timer;
 
     gm_80167A64(r);
     r->x2_2 = 0;
-    r->is_teams = s->x4[1];
-    switch (s->xC8) {
+    r->is_teams = s->x130.xC;
+    switch (s->x130.xC8) {
     case 0:
         r->x0_0 = 0;
-        timer = s->xCC[1] + s->xCC[0] * 0x3C;
+        timer = s->x130.xCC[1] + s->x130.xCC[0] * 0x3C;
         if (timer != 0) {
             r->x10 = timer;
             r->x0_6 = 1;
@@ -432,7 +458,7 @@ void un_802FFF2C(StartMeleeData* arg0)
         break;
     case 2:
         r->x0_0 = 2;
-        timer = s->xCC[1] + s->xCC[0] * 0x3C;
+        timer = s->x130.xCC[1] + s->x130.xCC[0] * 0x3C;
         if (timer != 0) {
             r->x10 = timer;
             r->x0_6 = 1;
@@ -445,41 +471,45 @@ void un_802FFF2C(StartMeleeData* arg0)
         r->x0_6 = 0;
         break;
     }
-    r->xE = s->x4[1];
+    r->xE = s->x130.x8;
     r->x20 = -1;
-    r->xB = s->xDC[0] - 1;
+    r->xB = s->x130.xCC[3] - 1;
     r->xC = -1;
-    r->x30 = s->xEC[0];
+    r->x30 = s->x130.xEC;
     gm_80167A14(arg0->players);
+    data = arg0;
+    sp = &s->x130;
     for (i = 0; i < 2; i++) {
-        arg0->players[2 * i].c_kind = s->x4[2 * i];
-        arg0->players[2 * i].slot_type = s->x24[2 * i];
-        arg0->players[2 * i].color = s->x38[2 * i];
-        arg0->players[2 * i].sub_color = s->x48[2 * i];
-        arg0->players[2 * i].team = s->x58[2 * i];
-        arg0->players[2 * i].xC_b0 = un_803FA32C;
-        arg0->players[2 * i].x12 = s->x68[2 * i];
-        arg0->players[2 * i].x18 = s->x78[2 * i];
-        arg0->players[2 * i].x1C = s->x88[2 * i];
-        arg0->players[2 * i].xE = s->xA8[2 * i];
-        arg0->players[2 * i].cpu_level = s->xB8[2 * i];
-        arg0->players[2 * i].stocks = un_803FA32C;
-        arg0->players[2 * i].xC_b1 = 0;
-        arg0->players[2 * i].x20 = s->x98[2 * i];
-        arg0->players[2 * i + 1].c_kind = s->x4[2 * i + 1];
-        arg0->players[2 * i + 1].slot_type = s->x24[2 * i + 1];
-        arg0->players[2 * i + 1].color = s->x38[2 * i + 1];
-        arg0->players[2 * i + 1].sub_color = s->x48[2 * i + 1];
-        arg0->players[2 * i + 1].team = s->x58[2 * i + 1];
-        arg0->players[2 * i + 1].xC_b0 = un_803FA32C;
-        arg0->players[2 * i + 1].x12 = s->x68[2 * i + 1];
-        arg0->players[2 * i + 1].x18 = s->x78[2 * i + 1];
-        arg0->players[2 * i + 1].x1C = s->x88[2 * i + 1];
-        arg0->players[2 * i + 1].xE = s->xA8[2 * i + 1];
-        arg0->players[2 * i + 1].cpu_level = s->xB8[2 * i + 1];
-        arg0->players[2 * i + 1].stocks = un_803FA32C;
-        arg0->players[2 * i + 1].xC_b1 = 0;
-        arg0->players[2 * i + 1].x20 = s->x98[2 * i + 1];
+        data->players[0].c_kind = sp->x10[0];
+        data->players[0].slot_type = sp->x24[0];
+        data->players[0].color = sp->x38[0];
+        data->players[0].sub_color = sp->x48[0];
+        data->players[0].team = sp->x58[0];
+        data->players[0].xC_b0 = sp->xDC[0];
+        data->players[0].x12 = sp->x68[0];
+        data->players[0].x18 = sp->x78[0];
+        data->players[0].x1C = sp->x88[0];
+        data->players[0].xE = sp->xA8[0];
+        data->players[0].cpu_level = sp->xB8[0];
+        data->players[0].stocks = s->x130.xCC[2];
+        data->players[0].xC_b1 = 0;
+        data->players[0].x20 = sp->x98[0];
+        data->players[1].c_kind = sp->x10[1];
+        data->players[1].slot_type = sp->x24[1];
+        data->players[1].color = sp->x38[1];
+        data->players[1].sub_color = sp->x48[1];
+        data->players[1].team = sp->x58[1];
+        data->players[1].xC_b0 = sp->xDC[1];
+        data->players[1].x12 = sp->x68[1];
+        data->players[1].x18 = sp->x78[1];
+        data->players[1].x1C = sp->x88[1];
+        data->players[1].xE = sp->xA8[1];
+        data->players[1].cpu_level = sp->xB8[1];
+        data->players[1].stocks = s->x130.xCC[2];
+        data->players[1].xC_b1 = 0;
+        data->players[1].x20 = sp->x98[1];
+        sp = (struct un_803FA128_x130_t*) &sp->x8;
+        data = (StartMeleeData*) &data->rules.x48;
     }
 }
 

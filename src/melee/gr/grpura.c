@@ -155,6 +155,7 @@ HSD_GObj* grPura_80211E08_noinline2(int gobj_id)
     return grPura_80211E08_noinline(gobj_id);
 };
 
+#pragma auto_inline off
 HSD_GObj* grPura_80211E08(int gobj_id)
 {
     HSD_GObj* gobj;
@@ -171,6 +172,7 @@ HSD_GObj* grPura_80211E08(int gobj_id)
 
     return gobj;
 }
+#pragma auto_inline on
 
 void grPura_80211EF0(Ground_GObj* arg0)
 {
@@ -332,17 +334,16 @@ void grPura_802125EC(Ground_GObj* arg0) {}
 void grPura_802125F0(HSD_GObj* arg0)
 {
     struct Pura_UnkModelDesc {
-        s16 x0;
-        s16 x2;
+        s32 x0;
         f32 x4;
         s32 x8;
     }* desc = (void*) ((char*) grPu_803E6800 + 0x2B0);
     f32 scale;
-    s32 i;
+    HSD_JObj* jobj;
+    u32 i;
     s32 joint;
     HSD_GObj* gobj;
     Ground* gp;
-    HSD_JObj* jobj;
     HSD_JObj* child;
 
     for (i = 0; i < 27; i++, desc++) {
@@ -352,9 +353,9 @@ void grPura_802125F0(HSD_GObj* arg0)
             gp = GET_GROUND(gobj);
             HSD_ASSERT(0x292, gp);
 
-            gp->gv.pura2.xC4 = desc->x0;
-            joint = Ground_801C33C0(4, gp->gv.pura2.xC4);
-            gp->gv.pura2.xC8 = Ground_801C3FA4(arg0, gp->gv.pura2.xC4);
+            gp->gv.pura.xC4 = desc->x0;
+            joint = Ground_801C33C0(4, gp->gv.pura.xC4);
+            gp->gv.pura2.xC8 = Ground_801C3FA4(arg0, joint);
 
             jobj = gobj->hsd_obj;
             HSD_JObjSetTranslateX(

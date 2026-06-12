@@ -259,11 +259,33 @@ AnimLoopSettings* mn_80232458(u8 option, u8 value, u8 direction)
     return &mn_803ED294[count - value];
 }
 
+static inline void mnRulePlus_AnimTimeDigits(u8 value, HSD_JObj** jobjs)
+{
+    HSD_JObj* jobj;
+    jobj = jobjs[2];
+    HSD_JObjReqAnimAll(jobj, (f32) (u8) (value / 10));
+    HSD_JObjAnimAll(jobj);
+    jobj = jobjs[3];
+    HSD_JObjReqAnimAll(jobj, (f32) (u8) (value % 10));
+    HSD_JObjAnimAll(jobj);
+}
+
+static inline void mnRulePlus_AnimZeros(HSD_JObj** jobjs)
+{
+    HSD_JObj* jobj1;
+    HSD_JObj* jobj2;
+    jobj1 = jobjs[5];
+    HSD_JObjReqAnimAll(jobj1, 0.0f);
+    HSD_JObjAnimAll(jobj1);
+    jobj2 = jobjs[6];
+    HSD_JObjReqAnimAll(jobj2, 0.0f);
+    HSD_JObjAnimAll(jobj2);
+}
+
 void mn_802324E4(u8 time_limit, MenuRulesPlusData* data)
 {
     JObjIndices local_indices;
     HSD_JObj** jobjs;
-    HSD_JObj* jobj;
     s32 i;
 
     jobjs = data->x34[0];
@@ -272,7 +294,7 @@ void mn_802324E4(u8 time_limit, MenuRulesPlusData* data)
         for (i = 0; i < 4; i++) {
             HSD_JObjSetFlagsAll(jobjs[local_indices.idx[i]], JOBJ_HIDDEN);
         }
-        HSD_JObjReqAnimAll(jobjs[4], 1.0f);
+        HSD_JObjReqAnimAll(jobjs[4], mn_804D4B98);
         HSD_JObjAnimAll(jobjs[4]);
         return;
     }
@@ -281,18 +303,8 @@ void mn_802324E4(u8 time_limit, MenuRulesPlusData* data)
     }
     HSD_JObjReqAnimAll(jobjs[4], mn_804D6BE4);
     HSD_JObjAnimAll(jobjs[4]);
-    jobj = jobjs[2];
-    HSD_JObjReqAnimAll(jobj, (f32) (u8) (time_limit / 10));
-    HSD_JObjAnimAll(jobj);
-    jobj = jobjs[3];
-    HSD_JObjReqAnimAll(jobj, (f32) (u8) (time_limit % 10));
-    HSD_JObjAnimAll(jobj);
-    jobj = jobjs[5];
-    HSD_JObjReqAnimAll(jobj, 0.0f);
-    HSD_JObjAnimAll(jobj);
-    jobj = jobjs[6];
-    HSD_JObjReqAnimAll(jobj, 0.0f);
-    HSD_JObjAnimAll(jobj);
+    mnRulePlus_AnimTimeDigits(time_limit, jobjs);
+    mnRulePlus_AnimZeros(jobjs);
 }
 
 inline void mn_80232660_inline(HSD_JObj* jobj)

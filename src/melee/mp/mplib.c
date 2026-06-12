@@ -812,6 +812,8 @@ extern Vec2 mpLib_803BF718[2];
 extern MapLine mpLib_803BF728;
 extern MapJoint mpLib_803BF738;
 extern MapCollData mpLib_803BF760;
+extern const float mpLib_804D8050;
+extern const float mpLib_804D80A8;
 
 MapCollData* mpLib_8004D164(void)
 {
@@ -4688,13 +4690,13 @@ void mpLib_80055E9C(int joint_id)
             v_r4->pos.y = v_r4->x4 * m0_0 + m1_3;
         }
         joint->bounding_min.x =
-            (joint->inner->left_bound * m0_0 + m0_3) - 30.0F;
+            (joint->inner->left_bound * m0_0 + m0_3) - mpLib_804D80A8;
         joint->bounding_min.y =
-            (joint->inner->bottom_bound * m0_0 + m1_3) - 30.0F;
+            (joint->inner->bottom_bound * m0_0 + m1_3) - mpLib_804D80A8;
         joint->bounding_max.x =
-            30.0F + (joint->inner->right_bound * m0_0 + m0_3);
+            mpLib_804D80A8 + (joint->inner->right_bound * m0_0 + m0_3);
         joint->bounding_max.y =
-            30.0F + (joint->inner->top_bound * m0_0 + m1_3);
+            mpLib_804D80A8 + (joint->inner->top_bound * m0_0 + m1_3);
         joint->flags |= CollJoint_B8;
         goto after0;
     }
@@ -4732,26 +4734,26 @@ void mpLib_80055E9C(int joint_id)
         if (!(joint->flags & CollJoint_B10)) {
             sp28.x = joint->inner->left_bound;
             sp28.y = joint->inner->bottom_bound;
-            sp28.z = 0.0F;
+            sp28.z = mpLib_804D8050;
             PSMTXMultVec(jobj->mtx, &sp28, &sp28);
             joint->bounding_min.x = sp28.x;
             joint->bounding_min.y = sp28.y;
             sp28.x = joint->inner->right_bound;
             sp28.y = joint->inner->top_bound;
-            sp28.z = 0.0F;
+            sp28.z = mpLib_804D8050;
             PSMTXMultVec(jobj->mtx, &sp28, &sp28);
             joint->bounding_max.x = sp28.x;
             joint->bounding_max.y = sp28.y;
             if (joint->flags & CollJoint_B9) {
                 sp28.x = joint->inner->right_bound;
                 sp28.y = joint->inner->bottom_bound;
-                sp28.z = 0.0F;
+                sp28.z = mpLib_804D8050;
                 PSMTXMultVec(jobj->mtx, &sp28, &sp28);
                 f30 = sp28.x;
                 f31 = sp28.y;
                 sp28.x = joint->inner->left_bound;
                 sp28.y = joint->inner->top_bound;
-                sp28.z = 0.0F;
+                sp28.z = mpLib_804D8050;
                 PSMTXMultVec(jobj->mtx, &sp28, &sp28);
                 f1 = joint->bounding_min.x;
                 f0 = joint->bounding_max.x;
@@ -4796,10 +4798,10 @@ void mpLib_80055E9C(int joint_id)
                     joint->bounding_max.y = f3;
                 }
             }
-            joint->bounding_min.x -= 30.0F;
-            joint->bounding_max.x += 30.0F;
-            joint->bounding_min.y -= 30.0F;
-            joint->bounding_max.y += 30.0F;
+            joint->bounding_min.x -= mpLib_804D80A8;
+            joint->bounding_max.x += mpLib_804D80A8;
+            joint->bounding_min.y -= mpLib_804D80A8;
+            joint->bounding_max.y += mpLib_804D80A8;
         }
     }
 
@@ -4819,6 +4821,9 @@ after1:
     mpIsland_8005B334(joint_id, joint->inner->vtx_start,
                       joint->inner->vtx_count, var_r6);
 }
+
+const float mpLib_804D8050 = 0.0F;
+const float mpLib_804D80A8 = 30.0F;
 
 void mpJointUpdateBounding(int joint_id)
 {
@@ -5699,6 +5704,9 @@ void mpLib_800587FC(HSD_GObj* gobj)
     grDynamicAttr_801CA224();
 }
 
+extern const float mpLib_804D80AC;
+extern const float mpLib_804D80B8;
+
 void mpLib_80058820(void)
 {
     mpCollisionBox* box = mpLib_80458868;
@@ -5711,6 +5719,9 @@ void mpLib_80058820(void)
     box[0].bottom = -10000.0F;
     box[1] = box[0];
 }
+
+const float mpLib_804D80AC = 10000.0F;
+const float mpLib_804D80B8 = -10000.0F;
 
 bool mpCheckedBounding(void)
 {

@@ -42,9 +42,68 @@
 #include <baselib/particle.h>
 #include <baselib/random.h>
 
+u32 grCn_803E1D38[18] = {
+    0x00030003, 0x00000004, 0x00030000, 0x0000000D, 0x00000001,
+    0x000E0000, 0x0002000F, 0x00000005, 0x00100000, 0x00060011,
+    0x00000007, 0x00120000, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000, 0x00000000, 0x00000000,
+};
 int grCn_803E1D80[3] = { 0, 0, 0 };
-int grCn_803E2190[5] = { 0, 0, 1, 2, 5 };
+StageCallbacks grCn_803E1D8C[19] = {
+    { grCorneria_801DD620, grCorneria_801DD64C, grCorneria_801DD654,
+      grCorneria_801DD658, 0 },
+    { grCorneria_801DDAC4, grCorneria_801DDCE8, grCorneria_801DE024,
+      grCorneria_801DE4BC, 0 },
+    { grCorneria_801DE8E4, grCorneria_801DEC00, grCorneria_801DED50,
+      grCorneria_801DF8CC, 0 },
+    { grCorneria_801DD674, grCorneria_801DD9A0, grCorneria_801DD9A8,
+      grCorneria_801DDAC0, 0x80000000 },
+    { grCorneria_801E0140, grCorneria_801E01A0, grCorneria_801E01A8,
+      grCorneria_801E03C4, 0 },
+    { grCorneria_801E0DE4, grCorneria_801E0E0C, grCorneria_801E0E14,
+      grCorneria_801E0E3C, 0x20000000 },
+    { grCorneria_801DFBF0, grCorneria_801DFC1C, grCorneria_801DFC24,
+      grCorneria_801DFC28, 0 },
+    { grCorneria_801E0C3C, grCorneria_801E0D28, grCorneria_801E0D30,
+      grCorneria_801E0DE0, 0x40000000 },
+    { grCorneria_801DFC2C, grCorneria_801DFC90, grCorneria_801DFC98,
+      grCorneria_801DFEB4, 0 },
+    { grCorneria_801DFEB8, grCorneria_801DFF18, grCorneria_801DFF20,
+      grCorneria_801E013C, 0 },
+    { grCorneria_801DF8D0, grCorneria_801DFBC4, grCorneria_801DFBCC,
+      grCorneria_801DFBEC, 0 },
+    { grCorneria_801E1054, grCorneria_801E1058, grCorneria_801E1060,
+      grCorneria_801E12CC, 0 },
+    { grCorneria_801E0F30, grCorneria_801E0F64, grCorneria_801E0F6C,
+      grCorneria_801E1030, 0 },
+    { grCorneria_Arwing_801DE4C0, grCorneria_801DE560, grCorneria_801DE568,
+      grCorneria_801DE8E0, 0 },
+    { grCorneria_Arwing_801DE4C0, grCorneria_801DE560, grCorneria_801DE568,
+      grCorneria_801DE8E0, 0 },
+    { grCorneria_Arwing_801DE4C0, grCorneria_801DE560, grCorneria_801DE568,
+      grCorneria_801DE8E0, 0 },
+    { grCorneria_Arwing_801DE4C0, grCorneria_801DE560, grCorneria_801DE568,
+      grCorneria_801DE8E0, 0 },
+    { grCorneria_Arwing_801DE4C0, grCorneria_801DE560, grCorneria_801DE568,
+      grCorneria_801DE8E0, 0 },
+    { grCorneria_Arwing_801DE4C0, grCorneria_801DE560, grCorneria_801DE568,
+      grCorneria_801DE8E0, 0 },
+};
 
+static u8 grCn_report_pad[0x34] = { 1 };
+char grCn_803E1F3C[0x24] = "%s:%d: couldn t get gobj(id=%d)\n";
+char grCn_803E1F60[0x10] = "grcorneria.c";
+
+static u8 grCn_803E1F70_pad[0x220] = { 0 };
+int grCn_803E2190[5] = { 0, 0, 1, 2, 5 };
+char grCn_803E21A4[0xC] = "translate";
+static u8 grCn_803E21B0_pad[0x14] = { 0 };
+char grCn_803E21C4[0x30] = "grcorneria.c    grCorneriaGetPosMapKind2\n";
+
+SDATA char grCn_804D4650[8] = "/GrCn";
+SDATA char grCn_804D4658[8] = "jobj.h";
+SDATA char grCn_804D4660[8] = "jobj";
+SDATA char grCn_804D4668[4] = "0";
 int grCn_804D466C = -1;
 
 typedef struct grCn_StageData {
@@ -105,7 +164,8 @@ typedef struct grCn_Data {
     /* 0x330 */ Vec3 positions[14];
     /* 0x3D8 */ s32 x3D8[27];
     /* 0x444 */ s32 x444[5];
-    /* 0x458 */ s32 x458[8];
+    /* 0x458 */ s32 x458[5];
+    /* 0x46C */ char translate[0xC];
     /* 0x478 */ s32 x478[3];
     /* 0x484 */ u8 pad5a[0x34];
     /* 0x4B8 */ struct {
@@ -115,7 +175,7 @@ typedef struct grCn_Data {
     /* 0x4CC */ grCn_Entry entries[][5];
 } grCn_Data;
 
-extern grCn_Data grCn_803E1D38;
+#define grCn_803E1D38 (*(grCn_Data*) grCn_803E1D38)
 
 void grCorneria_801DCCFC(void)
 {
@@ -417,53 +477,6 @@ bool grCorneria_801DD52C(void)
 {
     return false;
 }
-
-static u8 grCn_callback_pad[0x34] = { 0 };
-
-StageCallbacks grCn_803E1D8C[19] = {
-    { grCorneria_801DD620, grCorneria_801DD64C, grCorneria_801DD654,
-      grCorneria_801DD658, 0 },
-    { grCorneria_801DDAC4, grCorneria_801DDCE8, grCorneria_801DE024,
-      grCorneria_801DE4BC, 0 },
-    { grCorneria_801DE8E4, grCorneria_801DEC00, grCorneria_801DED50,
-      grCorneria_801DF8CC, 0 },
-    { grCorneria_801DD674, grCorneria_801DD9A0, grCorneria_801DD9A8,
-      grCorneria_801DDAC0, 0x80000000 },
-    { grCorneria_801E0140, grCorneria_801E01A0, grCorneria_801E01A8,
-      grCorneria_801E03C4, 0 },
-    { grCorneria_801E0DE4, grCorneria_801E0E0C, grCorneria_801E0E14,
-      grCorneria_801E0E3C, 0x20000000 },
-    { grCorneria_801DFBF0, grCorneria_801DFC1C, grCorneria_801DFC24,
-      grCorneria_801DFC28, 0 },
-    { grCorneria_801E0C3C, grCorneria_801E0D28, grCorneria_801E0D30,
-      grCorneria_801E0DE0, 0x40000000 },
-    { grCorneria_801DFC2C, grCorneria_801DFC90, grCorneria_801DFC98,
-      grCorneria_801DFEB4, 0 },
-    { grCorneria_801DFEB8, grCorneria_801DFF18, grCorneria_801DFF20,
-      grCorneria_801E013C, 0 },
-    { grCorneria_801DF8D0, grCorneria_801DFBC4, grCorneria_801DFBCC,
-      grCorneria_801DFBEC, 0 },
-    { grCorneria_801E1054, grCorneria_801E1058, grCorneria_801E1060,
-      grCorneria_801E12CC, 0 },
-    { grCorneria_801E0F30, grCorneria_801E0F64, grCorneria_801E0F6C,
-      grCorneria_801E1030, 0 },
-    { grCorneria_Arwing_801DE4C0, grCorneria_801DE560, grCorneria_801DE568,
-      grCorneria_801DE8E0, 0 },
-    { grCorneria_Arwing_801DE4C0, grCorneria_801DE560, grCorneria_801DE568,
-      grCorneria_801DE8E0, 0 },
-    { grCorneria_Arwing_801DE4C0, grCorneria_801DE560, grCorneria_801DE568,
-      grCorneria_801DE8E0, 0 },
-    { grCorneria_Arwing_801DE4C0, grCorneria_801DE560, grCorneria_801DE568,
-      grCorneria_801DE8E0, 0 },
-    { grCorneria_Arwing_801DE4C0, grCorneria_801DE560, grCorneria_801DE568,
-      grCorneria_801DE8E0, 0 },
-    { grCorneria_Arwing_801DE4C0, grCorneria_801DE560, grCorneria_801DE568,
-      grCorneria_801DE8E0, 0 },
-};
-
-static u8 grCn_report_pad[0x34] = { 1 };
-char grCn_803E1F3C[0x24] = "%s:%d: couldn t get gobj(id=%d)\n";
-char grCn_803E1F60[0x10] = "grcorneria.c";
 
 #pragma push
 #pragma dont_inline on
@@ -885,6 +898,83 @@ bool grCorneria_801DE560(Ground_GObj* arg)
     return false;
 }
 
+static inline bool grCn_JObjMtxIsDirty(HSD_JObj* jobj)
+{
+    bool result;
+
+    ((jobj) ? ((void) 0)
+            : __assert(grCn_804D4658, 0x234, grCn_804D4660));
+    result = false;
+    if (!(jobj->flags & JOBJ_USER_DEF_MTX) && (jobj->flags & JOBJ_MTX_DIRTY)) {
+        result = true;
+    }
+    return result;
+}
+
+static inline void grCn_JObjSetMtxDirty(HSD_JObj* jobj)
+{
+    if (jobj != NULL && !grCn_JObjMtxIsDirty(jobj)) {
+        HSD_JObjSetMtxDirtySub(jobj);
+    }
+}
+
+static inline void grCn_JObjSetScaleX(HSD_JObj* jobj, f32 x)
+{
+    ((jobj) ? ((void) 0)
+            : __assert(grCn_804D4658, 0x308, grCn_804D4660));
+    jobj->scale.x = x;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        grCn_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void grCn_JObjSetScaleY(HSD_JObj* jobj, f32 y)
+{
+    ((jobj) ? ((void) 0)
+            : __assert(grCn_804D4658, 0x317, grCn_804D4660));
+    jobj->scale.y = y;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        grCn_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void grCn_JObjSetScaleZ(HSD_JObj* jobj, f32 z)
+{
+    ((jobj) ? ((void) 0)
+            : __assert(grCn_804D4658, 0x326, grCn_804D4660));
+    jobj->scale.z = z;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        grCn_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline f32 grCn_JObjGetTranslationX(HSD_JObj* jobj)
+{
+    ((jobj) ? ((void) 0)
+            : __assert(grCn_804D4658, 0x3E1, grCn_804D4660));
+    return jobj->translate.x;
+}
+
+static inline void grCn_JObjSetTranslateY(HSD_JObj* jobj, f32 y)
+{
+    ((jobj) ? ((void) 0)
+            : __assert(grCn_804D4658, 0x3B3, grCn_804D4660));
+    jobj->translate.y = y;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        grCn_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void grCn_JObjAddTranslationX(HSD_JObj* jobj, f32 x)
+{
+    ((jobj) ? ((void) 0)
+            : __assert(grCn_804D4658, 0x44E, grCn_804D4660));
+    jobj->translate.x += x;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        grCn_JObjSetMtxDirty(jobj);
+    }
+}
+
 void grCorneria_801DE568(Ground_GObj* gobj)
 {
     grCn_Data* data = &grCn_803E1D38;
@@ -898,36 +988,41 @@ void grCorneria_801DE568(Ground_GObj* gobj)
             while (gp->gv.arwing.xDC < -M_PI) {
                 gp->gv.arwing.xDC += M_TAU;
             }
-            {
-                f32 rot = gp->gv.arwing.xDC;
-                while (rot > M_PI) {
-                    gp->gv.arwing.xDC -= M_TAU;
-                    rot = gp->gv.arwing.xDC;
-                }
-                rot = ABS(rot);
-                if (rot < 1.0471976f) {
-                    HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
-                } else {
-                    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-                }
+            while (gp->gv.arwing.xDC > M_PI) {
+                gp->gv.arwing.xDC -= M_TAU;
+            }
+            angle = ABS(gp->gv.arwing.xDC);
+            if (angle < 1.0471976f) {
+                HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
+            } else {
+                HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             }
         } else {
             HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         }
-        HSD_JObjSetTranslate(jobj, &gp->gv.arwing.xE0);
+        if (jobj == NULL) {
+            __assert(grCn_804D4658, 916, grCn_804D4660);
+        }
+        if (&gp->gv.arwing.xE0 == NULL) {
+            __assert(grCn_804D4658, 917, data->translate);
+        }
+        jobj->translate = gp->gv.arwing.xE0;
+        if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+            grCn_JObjSetMtxDirty(jobj);
+        }
         {
             f32 scale = Ground_801C0498();
             {
                 f32 s = scale * grCn_804D69A0->x70;
-                HSD_JObjSetScaleX(jobj, s);
+                grCn_JObjSetScaleX(jobj, s);
             }
             {
                 f32 s = scale * grCn_804D69A0->x70;
-                HSD_JObjSetScaleY(jobj, s);
+                grCn_JObjSetScaleY(jobj, s);
             }
             {
                 f32 s = scale * grCn_804D69A0->x70;
-                HSD_JObjSetScaleZ(jobj, s);
+                grCn_JObjSetScaleZ(jobj, s);
             }
         }
         Ground_801C2FE0(gobj);
@@ -1557,12 +1652,12 @@ void grCorneria_801DFC98(Ground_GObj* gobj)
     if (gp->gv.corneria.xC4.value == 0 &&
         gp->gv.corneria.offset_y.flags.b0 != 1)
     {
-        HSD_JObjAddTranslationX(jobj, grCn_804D69A0->x88);
-        HSD_JObjSetTranslateY(jobj, -grCorneria_801E2EA0());
+        grCn_JObjAddTranslationX(jobj, grCn_804D69A0->x88);
+        grCn_JObjSetTranslateY(jobj, -grCorneria_801E2EA0());
 
         switch ((s8) gp->gv.corneria.xC5) {
         case 0:
-            if (HSD_JObjGetTranslationX(jobj) >=
+            if (grCn_JObjGetTranslationX(jobj) >=
                 3200.0f * Ground_801C0498() / 2 + -1400.0f)
             {
                 grCorneria_801E03C8(gobj, 9);
@@ -1571,7 +1666,7 @@ void grCorneria_801DFC98(Ground_GObj* gobj)
             }
             break;
         case 1:
-            if (HSD_JObjGetTranslationX(jobj) >=
+            if (grCn_JObjGetTranslationX(jobj) >=
                 3200.0f * Ground_801C0498() / 2 + 1400.0f)
             {
                 Ground_801C4A08(gobj);
@@ -1604,12 +1699,12 @@ void grCorneria_801DFF20(Ground_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
 
     if (gp->gv.corneria.xC4.value == 0 && gp->gv.corneria.xC6.flags.b0 != 1) {
-        HSD_JObjAddTranslationX(jobj, grCn_804D69A0->x88);
-        HSD_JObjSetTranslateY(jobj, -grCorneria_801E2EA0());
+        grCn_JObjAddTranslationX(jobj, grCn_804D69A0->x88);
+        grCn_JObjSetTranslateY(jobj, -grCorneria_801E2EA0());
 
         switch ((s8) gp->gv.corneria.xC5) {
         case 0:
-            if (HSD_JObjGetTranslationX(jobj) >=
+            if (grCn_JObjGetTranslationX(jobj) >=
                 3200.0f * Ground_801C0498() / 2 + -1400.0f)
             {
                 grCorneria_801E03C8(gobj, 4);
@@ -1618,7 +1713,7 @@ void grCorneria_801DFF20(Ground_GObj* gobj)
             }
             break;
         case 1:
-            if (HSD_JObjGetTranslationX(jobj) >=
+            if (grCn_JObjGetTranslationX(jobj) >=
                 3200.0f * Ground_801C0498() / 2 + 1400.0f)
             {
                 Ground_801C4A08(gobj);
@@ -1651,12 +1746,12 @@ void grCorneria_801E01A8(Ground_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
 
     if (gp->gv.corneria.xC4.value == 0 && gp->gv.corneria.xC6.flags.b0 != 1) {
-        HSD_JObjAddTranslationX(jobj, grCn_804D69A0->x88);
-        HSD_JObjSetTranslateY(jobj, -grCorneria_801E2EA0());
+        grCn_JObjAddTranslationX(jobj, grCn_804D69A0->x88);
+        grCn_JObjSetTranslateY(jobj, -grCorneria_801E2EA0());
 
         switch ((s8) gp->gv.corneria.xC5) {
         case 0:
-            if (HSD_JObjGetTranslationX(jobj) >=
+            if (grCn_JObjGetTranslationX(jobj) >=
                 4800.0f * Ground_801C0498() / 2 + -1400.0f)
             {
                 grCorneria_801E03C8(gobj, 8);
@@ -1665,7 +1760,7 @@ void grCorneria_801E01A8(Ground_GObj* gobj)
             }
             break;
         case 1:
-            if (HSD_JObjGetTranslationX(jobj) >=
+            if (grCn_JObjGetTranslationX(jobj) >=
                 4800.0f * Ground_801C0498() / 2 + 1400.0f)
             {
                 Ground_801C4A08(gobj);
@@ -1754,7 +1849,7 @@ int grCorneria_801E08CC(void)
     cam_x = pos.x;
     gobj = Ground_801C2BA4(8);
     if (gobj != NULL) {
-        f32 x = HSD_JObjGetTranslationX(gobj->hsd_obj);
+        f32 x = grCn_JObjGetTranslationX(gobj->hsd_obj);
         if (cam_x > -(3200.0f * Ground_801C0498() / 2 - x) &&
             cam_x < 3200.0f * Ground_801C0498() / 2 + x)
         {
@@ -1763,7 +1858,7 @@ int grCorneria_801E08CC(void)
     }
     gobj = Ground_801C2BA4(9);
     if (gobj != NULL) {
-        f32 x = HSD_JObjGetTranslationX(gobj->hsd_obj);
+        f32 x = grCn_JObjGetTranslationX(gobj->hsd_obj);
         if (cam_x > -(3200.0f * Ground_801C0498() / 2 - x) &&
             cam_x < 3200.0f * Ground_801C0498() / 2 + x)
         {
@@ -1772,14 +1867,14 @@ int grCorneria_801E08CC(void)
     }
     gobj = Ground_801C2BA4(4);
     if (gobj != NULL) {
-        f32 x = HSD_JObjGetTranslationX(gobj->hsd_obj);
+        f32 x = grCn_JObjGetTranslationX(gobj->hsd_obj);
         if (cam_x > -(4800.0f * Ground_801C0498() / 2 - x) &&
             cam_x < 4800.0f * Ground_801C0498() / 2 + x)
         {
             return 4;
         }
     }
-    HSD_ASSERT(0x9AC, 0);
+    __assert(grCn_803E1F60, 0x9AC, grCn_804D4668);
     return -1;
 }
 
@@ -1789,7 +1884,7 @@ int grCorneria_801E0A74(f32* arg0)
 
     gobj = Ground_801C2BA4(8);
     if (gobj != NULL) {
-        f32 x = HSD_JObjGetTranslationX(gobj->hsd_obj);
+        f32 x = grCn_JObjGetTranslationX(gobj->hsd_obj);
         if (*arg0 > x - 3200.0f * Ground_801C0498() / 2 &&
             *arg0 < x + 3200.0f * Ground_801C0498() / 2)
         {
@@ -1798,7 +1893,7 @@ int grCorneria_801E0A74(f32* arg0)
     }
     gobj = Ground_801C2BA4(9);
     if (gobj != NULL) {
-        f32 x = HSD_JObjGetTranslationX(gobj->hsd_obj);
+        f32 x = grCn_JObjGetTranslationX(gobj->hsd_obj);
         if (*arg0 > x - 3200.0f * Ground_801C0498() / 2 &&
             *arg0 < x + 3200.0f * Ground_801C0498() / 2)
         {
@@ -1807,14 +1902,15 @@ int grCorneria_801E0A74(f32* arg0)
     }
     gobj = Ground_801C2BA4(4);
     if (gobj != NULL) {
-        f32 x = HSD_JObjGetTranslationX(gobj->hsd_obj);
+        f32 x = grCn_JObjGetTranslationX(gobj->hsd_obj);
         if (*arg0 > x - 4800.0f * Ground_801C0498() / 2 &&
             *arg0 < x + 4800.0f * Ground_801C0498() / 2)
         {
             return 4;
         }
     }
-    HSD_ASSERTREPORT(0x9CB, NULL, "grCorneriaGetPosMapKind2\n");
+    OSReport(grCn_803E21C4);
+    __assert(grCn_803E1F60, 0x9CB, grCn_804D4668);
     return -1;
 }
 
@@ -1847,7 +1943,7 @@ void grCorneria_801E0D30(Ground_GObj* gobj)
     HSD_JObj* jobj;
 
     if ((jobj = gobj->hsd_obj) != NULL) {
-        HSD_JObjSetTranslateY(jobj, -grCorneria_801E2EA0());
+        grCn_JObjSetTranslateY(jobj, -grCorneria_801E2EA0());
     }
 }
 

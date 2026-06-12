@@ -122,6 +122,9 @@ static struct {
 }* grSh_Route_804D6A58;
 
 extern float grNKr_804DB868;
+extern f32 grSh_Route_804DB880;
+extern f32 grSh_Route_804DB884;
+extern f32 grSh_Route_804DB888;
 extern HSD_LightDesc grSh_Route_803E5D74;
 extern HSD_LightDesc grSh_Route_803E5D90;
 extern Vec3 grSh_Route_803B8360;
@@ -390,9 +393,9 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
     if (player != NULL) {
         ftLib_80086644(player, &sp7C);
     } else {
-        sp7C.z = 0.0f;
-        sp7C.y = 0.0f;
-        sp7C.x = 0.0f;
+        sp7C.z = grSh_Route_804DB880;
+        sp7C.y = grSh_Route_804DB880;
+        sp7C.x = grSh_Route_804DB880;
     }
 
     switch (gp->gv.shrineroute.xC4) {
@@ -706,7 +709,7 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
         Camera_80030AE0(1);
     } else {
         Ground_801C2D24((s32) gp->gv.shrineroute.xC8, &sp5C);
-        sp5C.y += 30.0f;
+        sp5C.y += grSh_Route_804DB884;
         Camera_80030AE0(0);
     }
 
@@ -715,7 +718,7 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
         if (timer == 0) {
             Ground_801C38BC(sp5C.x, sp5C.y);
         } else {
-            f32 t = 1.0f / (f32) timer;
+            f32 t = grSh_Route_804DB888 / (f32) timer;
             Stage_UnkSetVec3TCam_Offset(&sp50);
             lbVector_Sub(&sp5C, &sp50);
             sp5C.x *= t;

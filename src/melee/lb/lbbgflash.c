@@ -582,6 +582,11 @@ void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
                         f32 min_angle)
 {
     u8 _1[16];
+    Mtx quatMtx;
+    Mtx rotMtx;
+    Mtx resultMtx;
+    volatile f32 tmp;
+    f32 z_col_z;
     f32 dx = dir->x;
     f32 dy = dir->y;
     f32 dz = dir->z;
@@ -589,11 +594,9 @@ void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
     f32 angle;
     f32 z_col_y;
     f32 z_col_x;
-    f32 z_col_z;
     f32 dx2 = dx * dx;
     f32 dy2 = dy * dy;
     f32 dz2 = dz * dz;
-    volatile f32 tmp;
     if (dx2 + dy2 + dz2 == 0.0f) {
         return;
     }
@@ -603,8 +606,7 @@ void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
     z_col_y = jobj->mtx[1][2];
     z_col_x = jobj->mtx[0][2];
     z_col_z = jobj->mtx[2][2];
-    mag_sq = z_col_y * z_col_y;
-    mag_sq = z_col_x * z_col_x + mag_sq;
+    mag_sq = z_col_x * z_col_x + z_col_y * z_col_y;
     mag_sq = z_col_z * z_col_z + mag_sq;
     if (mag_sq > 0.0f) {
         f64 e = __frsqrte(mag_sq);
@@ -616,7 +618,10 @@ void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
     }
 
     if (mag_sq != 0.0f) {
-        angle = atan2f(-dir->x * (z_col_z / mag_sq), dir->y);
+        {
+            f32 z_div_mag = z_col_z / mag_sq;
+            angle = atan2f(-dir->x * z_div_mag, dir->y);
+        }
 
         if (angle > max_angle) {
             angle = max_angle;
@@ -628,9 +633,6 @@ void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
         if (!(jobj->flags & JOBJ_USE_QUATERNION)) {
             HSD_JObjSetRotationZ(jobj, angle + HSD_JObjGetRotationZ(jobj));
         } else {
-            Mtx quatMtx;
-            Mtx rotMtx;
-            Mtx resultMtx;
             PSMTXQuat(quatMtx, &jobj->rotate);
             MTXRotRad(rotMtx, 'z', angle);
             PSMTXConcat(quatMtx, rotMtx, resultMtx);

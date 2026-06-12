@@ -5521,8 +5521,8 @@ void ftCo_800AC5A0(Fighter* fp)
                 stick_y = 127.0F * -y;
                 stick_x = 127.0F * +x;
             } else {
-                stick_y = 127.0F * +y;
-                stick_x = 127.0F * -x;
+                stick_y = ftCo_804D888C * +y;
+                stick_x = ftCo_804D888C * -x;
             }
         }
         ftCo_800B46B8(fp, CpuCmd_SetLstickX, stick_y);

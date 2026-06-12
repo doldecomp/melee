@@ -89,6 +89,19 @@ struct un_803F9D48 {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, { 0x43, 0x44, 0x45 },
 };
+static char lbl_803F9D84[] = {
+    0x53, 0x63, 0x49, 0x6E, 0x66, 0x50, 0x72, 0x69, 0x7A, 0x65, 0x5F, 0x73,
+    0x63, 0x65, 0x6E, 0x65, 0x5F, 0x64, 0x61, 0x74, 0x61, 0x00, 0x00, 0x00,
+    0x53, 0x64, 0x50, 0x72, 0x69, 0x7A, 0x65, 0x2E, 0x75, 0x73, 0x64, 0x00,
+    0x53, 0x49, 0x53, 0x5F, 0x50, 0x72, 0x69, 0x7A, 0x65, 0x44, 0x61, 0x74,
+    0x61, 0x00, 0x00, 0x00, 0x53, 0x64, 0x50, 0x72, 0x69, 0x7A, 0x65, 0x2E,
+    0x64, 0x61, 0x74, 0x00, 0x25, 0x32, 0x64, 0x2E, 0x25, 0x32, 0x64, 0x2E,
+    0x25, 0x30, 0x34, 0x64, 0x20, 0x20, 0x25, 0x30, 0x32, 0x64, 0x3A, 0x25,
+    0x30, 0x32, 0x64, 0x3A, 0x25, 0x30, 0x32, 0x64, 0x00, 0x00, 0x00, 0x00,
+    0x25, 0x30, 0x34, 0x64, 0x2E, 0x25, 0x32, 0x64, 0x2E, 0x25, 0x32, 0x64,
+    0x20, 0x20, 0x25, 0x30, 0x32, 0x64, 0x3A, 0x25, 0x30, 0x32, 0x64, 0x3A,
+    0x25, 0x30, 0x32, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+};
 /// .sbss
 /* 4D6D98 */ static HSD_Archive* un_804D6D98;
 /* 4D6D9C */ static SceneDesc* un_804D6D9C;
@@ -233,22 +246,15 @@ execute:
     HSD_SisLib_803A5F50(2);
 }
 
-void un_802FE918(int a, int b, int c)
+static inline void un_802FE918_update_x3(void)
 {
-    struct un_803F9B30* x;
-    int new_x3;
     int r;
     int k;
-    int i;
-    char sp1C[0x104];
-    HSD_Text** text;
-    datetime sp14;
+    int new_x3;
 
-    lbAudioAx_800236DC();
-    lbAudioAx_80023F28(un_803F9D48.x30[un_803F9D48.x3]);
     r = HSD_Randi(2);
     for (k = 0; k < 3; k++) {
-        if (un_803F9D48.x3 == k) {
+        if (k == un_803F9D48.x3) {
             r++;
         } else if (r == k) {
             new_x3 = r;
@@ -256,6 +262,19 @@ void un_802FE918(int a, int b, int c)
         }
     }
     un_803F9D48.x3 = new_x3;
+}
+
+void un_802FE918(int a, int b, int c)
+{
+    struct un_803F9B30* x;
+    int i;
+    char sp1C[0x104];
+    HSD_Text** text;
+    datetime sp14;
+
+    lbAudioAx_800236DC();
+    lbAudioAx_80023F28(un_803F9D48.x30[un_803F9D48.x3]);
+    un_802FE918_update_x3();
     gmMainLib_8015D8B0(a);
     for (x = &un_803F9B30[0]; x->x0 != 66; x++) {
         if (x->x0 == a) {
@@ -267,10 +286,13 @@ void un_802FE918(int a, int b, int c)
 found:
     un_803F9D48.x4 = i;
     if (a == 0x3E) {
+        unsigned short v_x6;
         unsigned short v_x8;
+
         un_802FE3F8(a, 2, (short*) &un_803F9D48.x6, (short*) &un_803F9D48.x8);
+        v_x6 = un_803F9D48.x6;
         v_x8 = un_803F9D48.x8;
-        HSD_SisLib_803A6530(2, 0x4A, un_803F9D48.x6);
+        HSD_SisLib_803A6530(2, 0x4A, v_x6);
         HSD_SisLib_803A660C(2, 0x4A, un_803063D4(b, 0x4E, 0x174));
         HSD_SisLib_803A660C(2, 0x4A, v_x8);
         HSD_SisLib_803A6368(un_803F9D48.x20, 0x4A);
@@ -280,10 +302,10 @@ found:
     }
     gm_801692E8(c, &sp14);
     if (lbLang_IsSavedLanguageUS()) {
-        sprintf(sp1C, "%2d.%2d.%04d  %02d:%02d:%02d", sp14.month, sp14.day,
+        sprintf(sp1C, lbl_803F9D84 + 0x40, sp14.month, sp14.day,
                 sp14.year, sp14.hour, sp14.minute, sp14.second);
     } else {
-        sprintf(sp1C, "%04d.%2d.%2d  %02d:%02d:%02d", sp14.year, sp14.month,
+        sprintf(sp1C, lbl_803F9D84 + 0x60, sp14.year, sp14.month,
                 sp14.day, sp14.hour, sp14.minute, sp14.second);
     }
     text = &un_803F9D48.x24;
@@ -322,11 +344,13 @@ found:
     un_803F9D48.xC = arg0x4;
     un_803F9D48.x0a = 1;
     un_804D6D98 = lbArchive_80016DBC("IfPrize", &un_804D6D9C,
-                                     "ScInfPrize_scene_data", 0);
+                                     lbl_803F9D84, 0);
     if (lbLang_IsSavedLanguageUS()) {
-        HSD_SisLib_803A62A0(2, "SdPrize.usd", "SIS_PrizeData");
+        HSD_SisLib_803A62A0(2, lbl_803F9D84 + 0x18,
+                            lbl_803F9D84 + 0x24);
     } else {
-        HSD_SisLib_803A62A0(2, "SdPrize.dat", "SIS_PrizeData");
+        HSD_SisLib_803A62A0(2, lbl_803F9D84 + 0x34,
+                            lbl_803F9D84 + 0x24);
     }
     un_802FE6A8();
 }

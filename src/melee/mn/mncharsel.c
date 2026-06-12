@@ -3209,7 +3209,7 @@ void fn_80262648(HSD_GObj* gobj)
     u8 prev_port = model->x6;
     int n_doors;
 
-    if ((u8) css->match_type == 0x17) {
+    if ((u8) mnCharSel_804D6CB0->match_type == 0x17) {
         n_doors = 2;
     } else {
         n_doors = mnCharSel_804D6CF5;
@@ -3232,7 +3232,7 @@ void fn_80262648(HSD_GObj* gobj)
             } else {
                 model->x6 = (u8) mnCharSel_804D6CF0;
             }
-        } else if ((u8) css->data.data.rules.is_teams == 0) {
+        } else if ((u8) mnCharSel_804D6CB0->data.data.rules.is_teams == 0) {
             if (p_kind == 1) {
                 model->x6 = 8;
             } else {

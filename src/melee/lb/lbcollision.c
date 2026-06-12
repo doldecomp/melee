@@ -1445,6 +1445,19 @@ inline float sqrDistance(Vec3* a, Vec3* b)
     return x * x + y * y + z * z;
 }
 
+static inline float sqrtf_store(float x, volatile float* y)
+{
+    if (x > 0.0f) {
+        double guess = __frsqrte((double) x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        *y = (float) (x * guess);
+        return *y;
+    }
+    return x;
+}
+
 void lbColl_800077A0(Vec3* a, MtxPtr arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
                      float* angle, float x, float dist_offset)
 {
@@ -1460,6 +1473,7 @@ void lbColl_800077A0(Vec3* a, MtxPtr arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
     Vec3 normalize_e;
     Vec3 normal_x;
     Vec3 multi_mtx;
+    volatile float sqrt_tmp[2];
 
     diff_cb.x = c->x - b->x;
     diff_cb.y = c->y - b->y;
@@ -1477,7 +1491,7 @@ void lbColl_800077A0(Vec3* a, MtxPtr arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
         PSMTXMultVec(arg1, &multi_mtx, &multi_mtx);
 
         dist = sqrDistance(&normal_x, &multi_mtx);
-        dist = sqrtf(dist);
+        dist = sqrtf_store(dist, &sqrt_tmp[0]);
 
         offset_dist = dist + dist_offset;
 
@@ -1504,7 +1518,9 @@ void lbColl_800077A0(Vec3* a, MtxPtr arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
                 n1 = 0.0f;
             }
 
-            scl = (-n0 - sqrtf(n1)) / (2.0f * dot_diff_cb);
+            // The second sqrtf spill is allocated just below the scratch array.
+            scl = (-n0 - sqrtf_store(n1, &sqrt_tmp[-1])) /
+                  (2.0f * dot_diff_cb);
         }
 
         normalize_e.x = scl * diff_cb.x + b->x - a->x;

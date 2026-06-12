@@ -57,6 +57,20 @@ static inline s32 randi_between(s32 min, s32 max)
     }
 }
 
+static inline s32 randi_between_f32(f32 min_f, f32 max_f)
+{
+    s32 min = min_f;
+    s32 max = max_f;
+
+    if (max > min) {
+        return min + test_random(max - min);
+    } else if (min > max) {
+        return max + test_random(min - max);
+    } else {
+        return min;
+    }
+}
+
 static inline f32 fabsf_inline(f32 x)
 {
     return (x < 0.0f) ? -x : x;
@@ -472,14 +486,14 @@ void grInishie1_801FB0AC(HSD_GObj* gobj, u32 index)
         grInishie1_801FBC4C(gobj, index);
 
         gp->gv.inishie1.xC6 =
-            randi_between(grI1_804D69F8->unk0, grI1_804D69F8->unk4);
+            randi_between_f32(grI1_804D69F8->unk0, grI1_804D69F8->unk4);
     } else if (gp->gv.inishie1.blocks[index].status == 2) {
         grInishie1_801FBA34(gobj, gp->gv.inishie1.blocks[index].jobj2);
         gp->gv.inishie1.blocks[index].status = 0;
         grInishie1_801FBC4C(gobj, index);
 
         gp->gv.inishie1.xC8 =
-            randi_between(grI1_804D69F8->unk8, grI1_804D69F8->unkC);
+            randi_between_f32(grI1_804D69F8->unk8, grI1_804D69F8->unkC);
     } else if (gp->gv.inishie1.blocks[index].status == 3) {
         grInishie1_801FBA34(gobj, gp->gv.inishie1.blocks[index].jobj2);
         gp->gv.inishie1.blocks[index].status = 0;
@@ -494,9 +508,9 @@ void grInishie1_801FB0AC(HSD_GObj* gobj, u32 index)
             }
             if (i == 0x13) {
                 gp->gv.inishie1.xC6 =
-                    randi_between(grI1_804D69F8->unk0, grI1_804D69F8->unk4);
+                    randi_between_f32(grI1_804D69F8->unk0, grI1_804D69F8->unk4);
                 gp->gv.inishie1.xC8 =
-                    randi_between(grI1_804D69F8->unk8, grI1_804D69F8->unkC);
+                    randi_between_f32(grI1_804D69F8->unk8, grI1_804D69F8->unkC);
             }
         }
 

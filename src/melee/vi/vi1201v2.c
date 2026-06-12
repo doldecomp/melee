@@ -233,15 +233,14 @@ void un_80320A40_OnEnter(void* arg)
 {
     u8* input = arg;
     u8 char_index;
-    char* data = (char*) &un_804002F8;
     HSD_CObj* cobj;
-    HSD_Fog* fog;
     HSD_GObj* gobj;
+    HSD_Fog* fog;
     HSD_JObj* child;
     HSD_JObj* jobj;
     HSD_LObj* lobj;
     f32 scale;
-    char pad[24];
+    PAD_STACK(16);
 
     efLib_Init();
     efAsync_LoadSync(0);
@@ -250,10 +249,17 @@ void un_80320A40_OnEnter(void* arg)
 
     char_index = input[0];
 
-    un_804D701C =
-        lbArchive_LoadSymbols(data + 0x40, &un_804D7010, data + 0x50, NULL);
-    lbArchive_LoadSymbols(data + 0x64, &un_804D7020, data + 0x70, NULL);
-    lbArchive_LoadSymbols(data + 0x8C, &un_804D7014, data + 0x9C, NULL);
+    un_804D701C = lbArchive_LoadSymbols(
+        (char*) &un_804002F8 + 0x40, &un_804D7010,
+        (char*) &un_804002F8 + 0x50, NULL);
+    {
+        char* toykoopa_joint = (char*) &un_804002F8 + 0x70;
+        char* tykoopa_dat = (char*) &un_804002F8 + 0x64;
+        lbArchive_LoadSymbols(tykoopa_dat, &un_804D7020, toykoopa_joint,
+                              NULL);
+    }
+    lbArchive_LoadSymbols((char*) &un_804002F8 + 0x8C, &un_804D7014,
+                          (char*) &un_804002F8 + 0x9C, NULL);
     un_803124BC();
     un_804D7018 =
         lbArchive_LoadSymbols(viGetCharAnimByIndex(char_index), NULL);
@@ -300,7 +306,18 @@ void un_80320A40_OnEnter(void* arg)
     HSD_JObjSetTranslateXWithMtxDirty(child, -un_803060BC(0x1E, 0));
     HSD_JObjSetTranslateYWithMtxDirty(child, -un_803060BC(0x1E, 1));
     HSD_JObjSetTranslateZWithMtxDirty(child, -un_803060BC(0x1E, 2));
-    HSD_JObjSetRotationYWithMtxDirty(child, -un_803060BC(0x1E, 5));
+
+    scale = -un_803060BC(0x1E, 5);
+    if (child == NULL) {
+        __assert("jobj.h", 660, "jobj");
+    }
+    if (child->flags & JOBJ_USE_QUATERNION) {
+        __assert("jobj.h", 661, (char*) &un_804002F8 + 0x18);
+    }
+    child->rotate.y = scale;
+    if (!(child->flags & JOBJ_MTX_INDEP_SRT)) {
+        (HSD_JObjSetMtxDirty)(child);
+    }
 
     scale = 0.55f * (un_803060BC(0x1E, 4) * (1.0f / un_803060BC(0x1E, 3)));
 

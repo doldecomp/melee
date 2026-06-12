@@ -317,7 +317,7 @@ void grVenom_80203B18(void)
     f32 zero;
     s32 i0;
     s32 i1;
-    s32 flag;
+    register s32 flag;
     HSD_GObj* gobj;
     HSD_LObj* lobj;
     HSD_LObj* next;

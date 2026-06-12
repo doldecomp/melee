@@ -1173,7 +1173,7 @@ void ftAction_80072CD8(Fighter_GObj* gobj, CommandInfo* cmd)
             offset.x = 0.0f;
             range.x = 0.0f;
 
-            if (!cmd->u->footstep_fx_0.use_alt_bone) {
+            if (!((((u8*) cmd->u)[1] >> 1) & 1)) {
                 part = fp->ft_data->x8->x13;
             } else {
                 part = fp->ft_data->x8->x14;

@@ -2080,7 +2080,7 @@ bool mpColl_80046224_LeftWall(CollData* coll)
     int* arr = mpColl_80458810.left;
     int i;
 
-    mpColl_804D6490_max_x = F32_MAX;
+    mpColl_804D6490_max_x = *(float*) &mpColl_804D7FA0;
     for (i = 0; i < mpColl_804D648C; arr++, i++) {
         float f30;
         float f29;

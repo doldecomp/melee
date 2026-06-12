@@ -479,10 +479,10 @@ bool grOnett_801E43D8(Ground_GObj* gobj)
 void grOnett_801E43E0(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    u8 saved_car = gp->gv.onettcar.curr_car;
+    s8 saved_car = gp->gv.onettcar.curr_car;
     Vec3 pos = { 0.0f, 0.0f, 0.0f };
     f32 cam_x, cam_y, cam_z;
-    PAD_STACK(32);
+    PAD_STACK(36);
 
     if (!gp->gv.onettcar.x0_b0) {
         HSD_JObj* car_jobj;
@@ -493,14 +493,14 @@ void grOnett_801E43E0(Ground_GObj* gobj)
         car_jobj = gp->gv.onettcar.car_jobjs[saved_car];
         car_jobj2 = gp->gv.onettcar.car_jobjs2[saved_car];
 
-        switch (gp->gv.onettcar.state_a) {
+        switch ((s8) gp->gv.onettcar.state_a) {
         case 0: {
             s8 old_car = gp->gv.onettcar.curr_car;
             HSD_JObj* new_jobj;
-            do {
+            while (gp->gv.onettcar.curr_car == old_car ||
+                   gp->gv.onettcar.curr_car == gp->gv.onettcar.next_car) {
                 gp->gv.onettcar.curr_car = HSD_Randi(4);
-            } while (gp->gv.onettcar.curr_car == old_car ||
-                     gp->gv.onettcar.curr_car == gp->gv.onettcar.next_car);
+            }
 
             new_jobj = gp->gv.onettcar.car_jobjs[gp->gv.onettcar.curr_car];
             HSD_JObjSetTranslateX(new_jobj, 726.0f);
@@ -641,17 +641,17 @@ void grOnett_801E43E0(Ground_GObj* gobj)
 
         /* State machine B: left-to-right car */
         {
-            u8 state_b = gp->gv.onettcar.state_b;
+            s8 state_b = gp->gv.onettcar.state_b;
             s8 next = gp->gv.onettcar.next_car;
             HSD_JObj* b_jobj = gp->gv.onettcar.car_jobjs[next];
 
             switch (state_b) {
             case 0: {
                 HSD_JObj* new_jobj;
-                do {
+                while (gp->gv.onettcar.next_car == next ||
+                       gp->gv.onettcar.next_car == gp->gv.onettcar.curr_car) {
                     gp->gv.onettcar.next_car = HSD_Randi(4);
-                } while (gp->gv.onettcar.next_car == next ||
-                         gp->gv.onettcar.next_car == gp->gv.onettcar.curr_car);
+                }
 
                 new_jobj = gp->gv.onettcar.car_jobjs[gp->gv.onettcar.next_car];
                 HSD_JObjSetTranslateX(new_jobj, -642.0f);

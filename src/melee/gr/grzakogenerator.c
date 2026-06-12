@@ -279,9 +279,11 @@ void grZakoGenerator_801CACB8(Item_GObj* gobj)
     it_8027CE18(gobj);
 
     if (kind == 0x9F) {
-        if (lbl_8049F030.x4->sentinel.x4 == gobj) {
-            lbl_8049F030.x4->sentinel.x0 = -1;
-            lbl_8049F030.x4->sentinel.x4 = NULL;
+        grZakoGenerator_Data* data = lbl_8049F030.x4;
+        grZakoGenerator_Entry* sentinel = &data->sentinel;
+        if (sentinel->x4 == gobj) {
+            sentinel->x0 = -1;
+            data->sentinel.x4 = NULL;
         }
     } else {
         s32 idx = ip->xDD4_itemVar.zako.idx;

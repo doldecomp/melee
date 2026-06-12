@@ -1218,12 +1218,12 @@ void HSD_Synth_8038ADD0(void)
             AXSetVoiceEndAddr(
                 node->voice[i],
                 (HSD_Synth_804D7780 + (HSD_Synth_804D7774 << 0x10)) * 2 +
-                    (i * lbl_804C4540[HSD_Synth_804D7774].x0 +
-                     lbl_804C4540[HSD_Synth_804D7774].x4));
+                    i * lbl_804C4540[HSD_Synth_804D7774].x0 +
+                    lbl_804C4540[HSD_Synth_804D7774].x4);
         }
     }
     if (pos == HSD_Synth_804D7770 && pos != HSD_Synth_804D776C) {
-        if (lbl_804C4540[HSD_Synth_804D7770].x8 == -0x10001) {
+        if ((u32) lbl_804C4540[HSD_Synth_804D7770].x8 == -1U) {
             HSD_Synth_804D7770 = (HSD_Synth_804D7770 + 1) % 3;
             for (i = 0; i < node->voice_count; i++) {
                 AXSetVoiceLoop(node->voice[i], 0);
@@ -1235,7 +1235,7 @@ void HSD_Synth_8038ADD0(void)
                 AXSetVoiceLoopAddr(
                     node->voice[i],
                     (HSD_Synth_804D7780 + (HSD_Synth_804D7770 << 0x10)) * 2 +
-                        (i * lbl_804C4540[HSD_Synth_804D7770].x0 + 2));
+                        i * lbl_804C4540[HSD_Synth_804D7770].x0 + 2);
                 AXSetVoiceAdpcmLoop(
                     node->voice[i],
                     (AXPBADPCMLOOP*) ((u32*) &lbl_804C4540[HSD_Synth_804D7770] +

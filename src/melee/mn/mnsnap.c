@@ -800,10 +800,11 @@ void fn_802545C4(void)
     HSD_JObj* jobj;
     HSD_JObj* jobj2;
     Vec3* translate;
-    PAD_STACK(328);
+    PAD_STACK(320);
     buttons = (mn_804A04F0.buttons = mn_80229624(4));
     HSD_JObjAnimAll(mnSnap_804A0A10.select_jobj);
-    HSD_JObjAnimAll(mnSnap_804A0A10.move_jobj);
+    jobj = mnSnap_804A0A10.move_jobj;
+    HSD_JObjAnimAll(jobj);
     state = mnSnap_804A0A10.state;
     if (state >= 4) {
         if (((u32) (state - 15)) > 1) {

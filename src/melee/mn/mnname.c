@@ -1463,7 +1463,10 @@ HSD_GObj* mnName_8023A59C(u8 arg0)
     HSD_JObjReqAnimAll(root_jobj, 0.0f);
     HSD_JObjAnimAll(root_jobj);
     user_data = (MnName_GObj*) HSD_MemAlloc(0x44);
-    HSD_ASSERTREPORT(0x67CU, user_data, "Can't get user_data.\n");
+    if (user_data == NULL) {
+        OSReport(base + 0x118);
+        __assert(base + 0x10C, 0x67CU, base + 0x130);
+    }
     GObj_InitUserData(gobj, 0U, HSD_Free, user_data);
     *(u8*) &user_data->gobj.classifier = (u8) mn_804A04F0.cur_menu;
     *((u8*) &user_data->gobj.classifier + 1) =

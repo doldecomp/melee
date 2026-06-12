@@ -563,16 +563,16 @@ static void fn_802A3110(HSD_GObj* arg0)
     Vec3 vec;
     u8 _pad[4];
     Item* item = GET_ITEM(arg0);
-    itLinkHookshotAttributes* attr =
-        item->xC4_article_data->x4_specialAttributes;
-    ItemLink* link2; // permuterslop
-    Fighter* fp = item->owner->user_data;
-    ItemLink* item_link = item->xDD4_itemVar.linkhookshot.x0;
+    itLinkHookshotAttributes* attr;
+    ItemLink* item_link;
+    Fighter* fp;
 
-    link2 = item_link;
+    fp = item->owner->user_data;
+    attr = item->xC4_article_data->x4_specialAttributes;
+    item_link = item->xDD4_itemVar.linkhookshot.x0;
     fn_802A3110_inline(item_link, &vec);
 
-    switch (it_802A5320(link2, &vec, attr, fp)) {
+    switch (it_802A5320(item_link, &vec, attr, fp)) {
     case 1:
         item_link->vel.x *= -attr->x0;
         break;
