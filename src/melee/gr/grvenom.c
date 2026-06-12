@@ -301,17 +301,20 @@ extern f32 grVe_804DB750;
 
 void grVenom_80203B18(void)
 {
+    u8 pad8[8];
     Vec3 sp1C;
     s32* data;
     Ground_GObj* obj;
     Ground_GObj* temp;
     Ground* gp;
+    f32 zero;
     s32 i0;
     s32 i1;
     s32 flag;
     HSD_GObj* gobj;
     HSD_LObj* lobj;
     HSD_LObj* next;
+    PAD_STACK(0xC);
 
     data = (s32*) &grVe_803E5348;
     grVe_804D6A30 = Ground_801C49F8();
@@ -329,9 +332,7 @@ void grVenom_80203B18(void)
     data[10] = 0;
     data[13] = 0;
     data[16] = 0;
-    if (Stage_80225194() != 0xE9) {
-        flag = 0;
-    }
+    flag = (Stage_80225194() == 0xE9) ? flag : 0;
     grVe_804D6A40 = flag;
     if (flag == 1) {
         grVe_804D6A38 = 0x78;
@@ -339,13 +340,13 @@ void grVenom_80203B18(void)
         i0 = (s32) grVe_804D6A30->x0;
         i1 = (s32) grVe_804D6A30->x4;
         if (i1 > i0) {
-            i1 = i1 - i0;
-            if (i1 != 0) {
-                i1 = HSD_Randi(i1);
+            s32 diff = i1 - i0;
+            if (diff != 0) {
+                diff = HSD_Randi(diff);
             } else {
-                i1 = 0;
+                diff = 0;
             }
-            i1 = i0 + i1;
+            i1 = i0 + diff;
         } else if (i1 < i0) {
             s32 diff = i0 - i1;
             if (diff != 0) {
@@ -368,8 +369,9 @@ void grVenom_80203B18(void)
     sp1C.x = grVe_804DB738;
     sp1C.y = grVe_804DB73C;
     sp1C.z = grVe_804DB738;
-    lb_80011A50(&sp1C, -1, grVe_804DB73C, grVe_804DB740, grVe_804DB744,
-                grVe_804DB748, grVe_804DB74C, grVe_804DB740, grVe_804DB748);
+    zero = grVe_804DB740;
+    lb_80011A50(&sp1C, -1, grVe_804DB73C, zero, grVe_804DB744,
+                grVe_804DB748, grVe_804DB74C, zero, grVe_804DB748);
     sp1C.x = grVe_804DB73C;
     sp1C.y = grVe_804DB73C;
     sp1C.z = grVe_804DB738;
@@ -379,8 +381,7 @@ void grVenom_80203B18(void)
     mpLib_80057BC0(4);
     gobj = Ground_801C498C();
     if (gobj != NULL) {
-        lobj = gobj->hsd_obj;
-        if (lobj != NULL) {
+        if ((lobj = gobj->hsd_obj) != NULL) {
             while (lobj != NULL) {
                 if (lobj->aobj != NULL) {
                     HSD_AObjSetFlags(lobj->aobj, AOBJ_LOOP);
@@ -569,6 +570,7 @@ bool grVenom_8020427C(Ground_GObj* arg)
 void grVenom_80204284(Ground_GObj* gobj)
 {
     Ground* gp;
+    Ground* tmp_gp;
     HSD_JObj* src_jobj;
     HSD_JObj* dst_jobj;
     u32 pad2;
@@ -577,7 +579,8 @@ void grVenom_80204284(Ground_GObj* gobj)
     s32 timer;
     u32 pad;
 
-    gp = GET_GROUND(gobj);
+    tmp_gp = GET_GROUND(gobj);
+    gp = tmp_gp;
     src_jobj = GET_JOBJ(gobj);
     dst_jobj = (HSD_JObj*) ((HSD_GObj*) gp->gv.venom.xC4)->hsd_obj;
 
@@ -1693,23 +1696,17 @@ void grVenom_80206870(Ground_GObj* arg) {}
 /// @todo Currently 99.60% match - needs register allocation fixes
 void grVenom_80206874(Ground_GObj* gobj)
 {
-    s32 zero;
-    s32* base;
-    Ground* gp;
-    HSD_JObj* jobj;
-    f32 scale;
+    u32 zero = 0;
+    s32* base = (s32*) &grVe_803E5348;
+    Ground* gp = gobj->user_data;
+    HSD_JObj* jobj = gobj->hsd_obj;
+    f32 scale = Ground_801C0498();
     s32* data;
     s32 type;
     Ground_GObj* other;
     Ground* other_gp;
     HSD_JObj* jobj2;
     void* attr;
-
-    zero = 0;
-    gp = gobj->user_data;
-    jobj = gobj->hsd_obj;
-    base = (s32*) &grVe_803E5348;
-    scale = Ground_801C0498();
 
     gp->gv.venom.xC8 = grVe_804D6A34;
     *(s32*) &gp->gv.venom.xEC = zero;
