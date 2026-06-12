@@ -204,15 +204,7 @@ char* un_80312834(char* buf, u32 num)
     return buf;
 }
 
-extern f32 un_804DDE28;
-extern f32 un_804DDE2C;
-extern f32 un_804DDE38;
-extern f32 un_804DDE3C;
-extern f32 un_804DDE40;
-extern f32 un_804DDE44;
 extern f32 un_804DDE48;
-extern f32 un_804DDE4C;
-extern f32 un_804DDE50;
 
 extern GXColor lb_804D3760;
 extern GXColor lb_804D3764;
@@ -274,9 +266,8 @@ void un_80312904(void* arg0, s8 arg1)
         return;
     }
 
-    f30 = HSD_JObjGetTranslationX(row->jobj) - un_804DDE28;
-    f29 = (-row->x30 - HSD_JObjGetTranslationY(state->gobj->hsd_obj)) -
-          un_804DDE2C;
+    f30 = HSD_JObjGetTranslationX(row->jobj) - 6.5f;
+    f29 = (-row->x30 - HSD_JObjGetTranslationY(state->gobj->hsd_obj)) - 0.41f;
     f31 = HSD_JObjGetTranslationZ(state->gobj->hsd_obj);
 
     if (arg1 != 0x63) {
@@ -302,7 +293,7 @@ void un_80312904(void* arg0, s8 arg1)
     HSD_SisLib_803A6368(row->text0, un_80308354(row->idx));
 
     text = row->text1;
-    text->pos_x = un_804DDE38 + f30;
+    text->pos_x = 14.7f + f30;
     text->pos_y = f29;
     text->pos_z = f31;
     text = row->text1;
@@ -316,11 +307,11 @@ void un_80312904(void* arg0, s8 arg1)
     row->text2->default_alignment = 2;
     row->text2->default_kerning = 1;
     text = row->text2;
-    text->pos_x = un_804DDE3C + f30;
+    text->pos_x = 10.5f + f30;
     text->pos_y = f29;
     text->pos_z = f31;
     text = row->text2;
-    text->font_size.x = un_804DDE40;
+    text->font_size.x = 0.038f;
     text->font_size.y = 0.029f;
     HSD_SisLib_803A6368(row->text2, row->x28 + 0x12E);
 }
@@ -433,11 +424,11 @@ done_first_dirty:
     while (i < 3) {
         HSD_JObj* anim_jobj = *((HSD_JObj**) ((u8*) archive + i * 4 + 0x18));
         if (i == state->x29B) {
-            HSD_JObjReqAnim(anim_jobj, un_804DDE44);
+            HSD_JObjReqAnim(anim_jobj, 1.0f);
         } else {
-            HSD_JObjReqAnim(anim_jobj, un_804DDE48);
+            HSD_JObjReqAnim(anim_jobj, 0.0f);
         }
-        HSD_AObjSetRate(anim_jobj->u.dobj->mobj->tobj->aobj, un_804DDE48);
+        HSD_AObjSetRate(anim_jobj->u.dobj->mobj->tobj->aobj, 0.0f);
         HSD_JObjAnim(anim_jobj);
         i++;
     }
@@ -453,9 +444,9 @@ void un_80312E88(TyListArg* arg, float delta)
 
     arg->x30 = arg->x30 + delta;
 
-    if (un_804DDE4C == delta) {
+    if (delta == 999.0f) {
         arg->x30 = arg->x2C;
-    } else if (delta < un_804DDE48) {
+    } else if (delta < 0.0f) {
         if (arg->x30 < arg->x2C) {
             arg->x30 = arg->x2C;
         }
@@ -503,7 +494,7 @@ s32 un_8031305C(void* a, TyListState* state, s8 movedFlag)
     if (i) {
         delta = state->x2A4;
         if ((s8) state->x2A1 == 0) {
-            delta *= un_804DDE50;
+            delta *= -1.0f;
         }
         entry = state->entries;
         i = 0;
@@ -522,7 +513,7 @@ s32 un_8031305C(void* a, TyListState* state, s8 movedFlag)
             i = 0;
             entry = state->entries;
             while (i < (s8) state->entryCount) {
-                un_80312E88(entry, un_804DDE4C);
+                un_80312E88(entry, 999.0f);
                 if ((s8) state->x2A1 == 0) {
                     entry->x24 = (s8) (entry->x24 - 1);
                     if (entry->x24 < -1) {
@@ -624,7 +615,7 @@ void un_80313464(TyListArg* arg)
 
     if (un_80304924(val) != 0) {
         arg->jobjs[1] = un_80313508(((TyListState*) data)->gobj, un_803FE8D0,
-                                    un_804DDE60, arg->x30, un_804DDE48);
+                                    -8.4f, arg->x30, 0.0f);
     }
 }
 
@@ -793,19 +784,6 @@ void un_80313774(void)
 
 extern s32 un_804D6EE8;
 extern s32 un_804D6EEC;
-extern f32 un_804DDE44;
-extern f32 un_804DDE48;
-extern f32 un_804DDE50;
-extern f32 un_804DDE68;
-extern f32 un_804DDE78;
-extern f32 un_804DDE7C;
-extern f32 un_804DDE80;
-extern f32 un_804DDE84;
-extern f32 un_804DDE88;
-extern f32 un_804DDE8C;
-extern f32 un_804DDE90;
-extern f32 un_804DDE94;
-extern f32 un_804DDE98;
 extern char un_803FE5E8[];
 extern char un_804D5A88[3];
 
@@ -857,24 +835,24 @@ void fn_80313BD8(HSD_GObj* gobj)
     /* Fall-through label: block_17 */
     f30 = un_80305D00();
     f31 = un_80305DB0();
-    if (f30 < un_804DDE78) {
+    if (f30 < -0.8f) {
         g[0x12] = g[0x12] + 1;
-        f30 = un_804DDE50;
-        f31 = un_804DDE48;
-    } else if (f30 > un_804DDE7C) {
+        f30 = -1.0f;
+        f31 = 0.0f;
+    } else if (f30 > 0.8f) {
         g[0x12] = g[0x12] + 1;
-        f30 = un_804DDE44;
-        f31 = un_804DDE48;
-    } else if (f31 < un_804DDE80 || (un_80305C44() & 4)) {
+        f30 = 1.0f;
+        f31 = 0.0f;
+    } else if (f31 < -0.6f || (un_80305C44() & 4)) {
         g[0x12] = g[0x12] + 1;
-        f30 = un_804DDE48;
-        f31 = un_804DDE44;
-    } else if (f31 > un_804DDE84 || (un_80305C44() & 8)) {
+        f30 = 0.0f;
+        f31 = 1.0f;
+    } else if (f31 > 0.6f || (un_80305C44() & 8)) {
         g[0x12] = g[0x12] + 1;
-        f30 = un_804DDE48;
-        f31 = un_804DDE50;
+        f30 = 0.0f;
+        f31 = -1.0f;
     } else {
-        f31 = un_804DDE48;
+        f31 = 0.0f;
         g[0xF] = 0;
         f30 = f31;
         g[0x12] = 0;
@@ -922,7 +900,7 @@ void fn_80313BD8(HSD_GObj* gobj)
         g[0xF] = 0;
     }
 
-    if ((f30 < un_804DDE48 && f30 != (f32) (s8) g[0x10]) ||
+    if ((f30 < 0.0f && f30 != (f32) (s8) g[0x10]) ||
         (un_80305B88() & 0x41))
     {
         g[0x10] = (s8) f30;
@@ -935,7 +913,7 @@ void fn_80313BD8(HSD_GObj* gobj)
         return;
     }
 
-    if ((f30 > un_804DDE48 && f30 != (f32) (s8) g[0x10]) ||
+    if ((f30 > 0.0f && f30 != (f32) (s8) g[0x10]) ||
         (un_80305B88() & 0x22))
     {
         g[0x10] = (s8) f30;
@@ -1038,7 +1016,7 @@ void fn_80313BD8(HSD_GObj* gobj)
         un_80312904(p, state->entryCount);
     }
     HSD_JObjSetFlagsAll(state->x288, 0x10);
-    if (f31 > un_804DDE48) {
+    if (f31 > 0.0f) {
         un_80313358(state, 1, 6, 0);
     } else {
         un_80313358(state, 1, 6, 1);
@@ -1065,12 +1043,12 @@ void fn_8031438C(HSD_GObj* arg0)
         if (entry->x16 > 1) {
             for (i = 0; i < 3; i++) {
                 if (i == (s8) state->x29B) {
-                    HSD_JObjReqAnim(archive->jobjs[i], un_804DDE44);
+                    HSD_JObjReqAnim(archive->jobjs[i], 1.0f);
                 } else {
-                    HSD_JObjReqAnim(archive->jobjs[i], un_804DDE48);
+                    HSD_JObjReqAnim(archive->jobjs[i], 0.0f);
                 }
                 HSD_AObjSetRate(archive->jobjs[0]->u.dobj->mobj->tobj->aobj,
-                                un_804DDE48);
+                                0.0f);
             }
             HSD_JObjAnimAll((HSD_JObj*) archive->x0[10]);
         } else {
@@ -1080,13 +1058,13 @@ void fn_8031438C(HSD_GObj* arg0)
                 wait_data->x20 = 0x42100000;
             }
             state->x290 = HSD_SisLib_803A6754(3, un_804D6EEC);
-            state->x290->pos_z = un_804DDE68;
+            state->x290->pos_z = 17.2f;
             new_var = state->x290;
-            state->x290->font_size.x = un_804DDE40;
+            state->x290->font_size.x = 0.038f;
             new_var->font_size.y = 0.029f;
             state->x290->default_kerning = 1;
             state->x290->default_alignment = (double) 2;
-            HSD_SisLib_803A6B98(state->x290, un_804DDE88, un_804DDE8C,
+            HSD_SisLib_803A6B98(state->x290, 290.0f, 320.0f,
                                 un_804D5A88, un_GetTrophyTotal());
         }
         entry->x16--;
@@ -1141,13 +1119,13 @@ void un_8031457C(void)
         HSD_GObjObject_80390A70(entry->x4, HSD_GObj_804D784B, cobj);
         GObj_SetupGXLinkMax(entry->x4, (GObj_RenderFunc) fn_80314504, 0);
         entry->x4->gxlink_prios = 0x0210000000000000ULL;
-        interest.x = un_804DDE90;
-        interest.y = un_804DDE94;
-        interest.z = un_804DDE48;
+        interest.x = 1.1f;
+        interest.y = -0.24f;
+        interest.z = 0.0f;
         HSD_CObjSetInterest(cobj, &interest);
-        eye.x = un_804DDE90;
-        eye.y = un_804DDE94;
-        eye.z = un_804DDE98;
+        eye.x = 1.1f;
+        eye.y = -0.24f;
+        eye.z = 40.0596313f;
         HSD_CObjSetEyePosition(cobj, &eye);
         viewport.xmin = 0x76;
         viewport.ymin = 0x4E;
