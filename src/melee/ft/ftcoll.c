@@ -81,6 +81,20 @@ static int dmg_log0_idx;
 static int dmg_log1_idx;
 static s8 ftColl_804D6560[8];
 
+/// .sdata2
+float const ftColl_804D82E0 = 0;
+float const ftColl_804D82E4 = 500;
+float const ftColl_804D82E8 = 0.5;
+float const ftColl_804D82EC = +1;
+float const ftColl_804D82F0 = -1;
+double const ftColl_804D82F8 = S32_TO_F32;
+float const ftColl_804D8300 = deg_to_rad;
+double const ftColl_804D8308 = U32_TO_F32;
+float const ftColl_804D8310 = F32_MAX;
+float const ftColl_804D8314 = 0.01;
+float const ftColl_804D8318 = 1e-5;
+float const ftColl_804D831C = rad_to_deg;
+
 /// Combo Count Logic
 void ftColl_800763C0(Fighter_GObj* attacker, Fighter_GObj* victim,
                      enum_t attack_id)
@@ -809,12 +823,6 @@ void ftColl_80077464(Item* item, HitCapsule* hit, Fighter* fp)
     }
 }
 
-extern float const ftColl_804D82E0;
-extern float const ftColl_804D82E8;
-extern float const ftColl_804D82EC;
-extern float const ftColl_804D82F0;
-extern float const ftColl_804D8300;
-
 void ftColl_80077688(Item* item, HitCapsule* hurt, Fighter* fp, Vec3* pos,
                      f32 val)
 {
@@ -978,9 +986,9 @@ static inline void inlineItemA0(Item* item, Fighter* fp, HitCapsule* hit,
             {
                 float facing_dir;
                 if (fp->cur_pos.x < item->pos.x) {
-                    facing_dir = *(float const*) &ftColl_804D82EC;
+                    facing_dir = 1.0f;
                 } else {
-                    facing_dir = *(float const*) &ftColl_804D82F0;
+                    facing_dir = -1.0f;
                 }
                 fp->dmg.facing_dir = facing_dir;
             }
@@ -1023,7 +1031,7 @@ static inline void inlineItemA1(Item* item, HitCapsule* hit, Fighter* fp,
         item->xC48 = int_dmg;
 
         vel_x = item->x40_vel.x;
-        if (vel_x < *(volatile float const*) &ftColl_804D82E0) {
+        if (vel_x < 0.0f) {
             vel_x_mag = -vel_x;
         } else {
             vel_x_mag = vel_x;
@@ -1031,15 +1039,15 @@ static inline void inlineItemA1(Item* item, HitCapsule* hit, Fighter* fp,
 
         if (vel_x_mag < it_804D6D28->xD4) {
             if (item->pos.x > fp->cur_pos.x) {
-                dir = *(float const*) &ftColl_804D82F0;
+                dir = -1.0f;
             } else {
-                dir = *(float const*) &ftColl_804D82EC;
+                dir = 1.0f;
             }
         } else {
-            if (vel_x < *(volatile float const*) &ftColl_804D82E0) {
-                dir = *(float const*) &ftColl_804D82F0;
+            if (vel_x < 0.0f) {
+                dir = -1.0f;
             } else {
-                dir = *(float const*) &ftColl_804D82EC;
+                dir = 1.0f;
             }
         }
         item->xCB8_outDamageDirection = dir;
@@ -1054,15 +1062,9 @@ void ftColl_80077970(Item* item, HitCapsule* hit1, Fighter* fp,
     Vec3 midpoint;
     PAD_STACK(24);
 
-    midpoint.x =
-        (hit1->hurt_coll_pos.x + hit2->hurt_coll_pos.x) *
-        *(float const*) &ftColl_804D82E8;
-    midpoint.y =
-        (hit1->hurt_coll_pos.y + hit2->hurt_coll_pos.y) *
-        *(float const*) &ftColl_804D82E8;
-    midpoint.z =
-        (hit1->hurt_coll_pos.z + hit2->hurt_coll_pos.z) *
-        *(float const*) &ftColl_804D82E8;
+    midpoint.x = (hit1->hurt_coll_pos.x + hit2->hurt_coll_pos.x) * 0.5f;
+    midpoint.y = (hit1->hurt_coll_pos.y + hit2->hurt_coll_pos.y) * 0.5f;
+    midpoint.z = (hit1->hurt_coll_pos.z + hit2->hurt_coll_pos.z) * 0.5f;
 
     {
         float dmg = hit2->damage;
@@ -1078,20 +1080,6 @@ void ftColl_80077970(Item* item, HitCapsule* hit1, Fighter* fp,
         }
     }
 }
-
-/// .sdata2
-float const ftColl_804D82E0 = 0;
-float const ftColl_804D82E4 = 500;
-float const ftColl_804D82E8 = 0.5;
-float const ftColl_804D82EC = +1;
-float const ftColl_804D82F0 = -1;
-double const ftColl_804D82F8 = S32_TO_F32;
-float const ftColl_804D8300 = deg_to_rad;
-double const ftColl_804D8308 = U32_TO_F32;
-float const ftColl_804D8310 = F32_MAX;
-float const ftColl_804D8314 = 0.01;
-float const ftColl_804D8318 = 1e-5;
-float const ftColl_804D831C = rad_to_deg;
 
 bool ftColl_80077C60(Item* item, HitCapsule* hit, Fighter* fp,
                      HitCapsule* hit2)
@@ -1930,9 +1918,9 @@ void ftColl_8007925C(Fighter_GObj* gobj)
                 {
                     float dir;
                     if (fp->cur_pos.x > item->pos.x) {
-                        dir = *(float const*) &ftColl_804D82F0;
+                        dir = -1.0f;
                     } else {
-                        float one = *(float const*) &ftColl_804D82EC;
+                        float one = 1.0f;
                         dir = one;
                     }
                     fp->AbsorbAttr.x1A40_absorbHitDirection = dir;
@@ -2010,7 +1998,7 @@ void ftColl_8007925C(Fighter_GObj* gobj)
 
             var_r3 = true;
             if (fp->x221B_b3) {
-                if (*(float const*) &ftColl_804D82F0 == fp->facing_dir) {
+                if (-1.0f == fp->facing_dir) {
                     if (fp->cur_pos.x < item->pos.x) {
                         var_r3 = false;
                     }
