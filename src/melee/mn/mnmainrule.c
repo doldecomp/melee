@@ -108,18 +108,25 @@ void mn_802339FC(void);
 void mnCharSel_80264070(void);
 void mnCharSel_802640A0(void);
 
+static inline u8 mn_8022F538_GetHoveredSelection(void)
+{
+    return mn_804A04F0.hovered_selection;
+}
+
 void fn_8022F538(HSD_GObj* arg0)
 {
+    struct mn_802307F8_t* data;
     GameRules* rules;
     u8* limits;
     u32 buttons;
+    s32 valid;
     u8 hovered;
-    struct mn_802307F8_t* data;
 
-    data = mn_804D6BD0->user_data;
+    PAD_STACK(0x20);
+
+    data = HSD_GObjGetUserData(mn_804D6BD0);
     buttons = mn_80229624(4);
-    ((u32*) &mn_804A04F0.buttons)[1] = buttons;
-    ((u32*) &mn_804A04F0.buttons)[0] = 0;
+    mn_804A04F0.buttons = buttons;
     if ((buttons & 0x200) != 0) {
         if (mn_804A04F0.hovered_selection == 5 ||
             mn_804A04F0.hovered_selection == 6)
@@ -137,6 +144,7 @@ void fn_8022F538(HSD_GObj* arg0)
                 HSD_GObjPLink_80390228(arg0);
                 break;
             }
+            data = HSD_GObjGetUserData(mn_804D6BD0);
             rules = gmMainLib_8015CC34();
             rules->mode = data->x2;
             rules->time_limit = data->x3;
@@ -148,7 +156,8 @@ void fn_8022F538(HSD_GObj* arg0)
         }
     } else if ((buttons & 0x100) != 0) {
         lbAudioAx_80024030(1);
-        if (gm_801A4310() == 1) {
+        switch ((s32) gm_801A4310()) {
+        case 1:
             data = mn_804D6BD0->user_data;
             rules = gmMainLib_8015CC34();
             rules->mode = data->x2;
@@ -159,33 +168,35 @@ void fn_8022F538(HSD_GObj* arg0)
             rules->stock_count = data->x9;
             mn_80229860(2);
             return;
-        }
-        data = mn_804D6BD0->user_data;
-        rules = gmMainLib_8015CC34();
-        rules->mode = data->x2;
-        rules->time_limit = data->x3;
-        rules->handicap = data->x4;
-        rules->damage_ratio = data->x5;
-        rules->unk_x7 = data->x6;
-        rules->stock_count = data->x9;
-        if (gm_801A4310() == 0x1B) {
+        default:
+            data = mn_804D6BD0->user_data;
+            rules = gmMainLib_8015CC34();
+            rules->mode = data->x2;
+            rules->time_limit = data->x3;
+            rules->handicap = data->x4;
+            rules->damage_ratio = data->x5;
+            rules->unk_x7 = data->x6;
+            rules->stock_count = data->x9;
+            if (gm_801A4310() == 0x1B) {
+                HSD_SisLib_803A5E70();
+                mn_8022EBDC();
+                gm_80190EA4();
+                return;
+            }
+            if (gm_801A4310() == 1) {
+                mn_80229894(2, 3, 3);
+                return;
+            }
             HSD_SisLib_803A5E70();
             mn_8022EBDC();
-            gm_80190EA4();
+            mnCharSel_802640A0();
             return;
         }
-        if (gm_801A4310() == 1) {
-            mn_80229894(2, 3, 3);
-            return;
-        }
-        HSD_SisLib_803A5E70();
-        mn_8022EBDC();
-        mnCharSel_802640A0();
-        return;
     }
     if ((buttons & 0x20) != 0) {
         lbAudioAx_80024030(0);
         mn_804A04F0.entering_menu = 0;
+        data = mn_804D6BD0->user_data;
         rules = gmMainLib_8015CC34();
         rules->mode = data->x2;
         rules->time_limit = data->x3;
@@ -211,13 +222,18 @@ void fn_8022F538(HSD_GObj* arg0)
     if ((buttons & 1) != 0) {
         lbAudioAx_80024030(2);
         do {
-            if (mn_804A04F0.hovered_selection == 0) {
+            if ((s32) mn_804A04F0.hovered_selection == 0) {
                 mn_804A04F0.hovered_selection = 6;
             } else {
                 mn_804A04F0.hovered_selection--;
             }
-            hovered = mn_804A04F0.hovered_selection;
-        } while (gm_801A4310() == 0x1B && hovered == 4);
+            hovered = mn_8022F538_GetHoveredSelection();
+            if (gm_801A4310() == 0x1B && hovered == 4) {
+                valid = 0;
+            } else {
+                valid = 1;
+            }
+        } while (valid == 0);
         if (mn_804A04F0.hovered_selection == 1 && data->x2 == 1) {
             mn_804A04F0.confirmed_selection = data->x9;
             return;
@@ -229,13 +245,18 @@ void fn_8022F538(HSD_GObj* arg0)
     if ((buttons & 2) != 0) {
         lbAudioAx_80024030(2);
         do {
-            if (mn_804A04F0.hovered_selection == 6) {
+            if ((s32) mn_804A04F0.hovered_selection == 6) {
                 mn_804A04F0.hovered_selection = 0;
             } else {
                 mn_804A04F0.hovered_selection++;
             }
-            hovered = mn_804A04F0.hovered_selection;
-        } while (gm_801A4310() == 0x1B && hovered == 4);
+            hovered = mn_8022F538_GetHoveredSelection();
+            if (gm_801A4310() == 0x1B && hovered == 4) {
+                valid = 0;
+            } else {
+                valid = 1;
+            }
+        } while (valid == 0);
         if (mn_804A04F0.hovered_selection == 1 && data->x2 == 1) {
             mn_804A04F0.confirmed_selection = data->x9;
             return;
@@ -245,6 +266,11 @@ void fn_8022F538(HSD_GObj* arg0)
         return;
     }
 
+    if (mn_804A04F0.hovered_selection == 5 ||
+        mn_804A04F0.hovered_selection == 6)
+    {
+        return;
+    }
     if (mn_804A04F0.hovered_selection == 1 && data->x2 == 1) {
         limits = mn_804D4B94;
     } else {

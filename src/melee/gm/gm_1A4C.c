@@ -436,11 +436,11 @@ void gm_801A9094(void)
             HSD_JObjSetScaleY(root, 1.8f);
             HSD_JObjSetScaleZ(root, 1.8f);
             if (joint == NULL) {
-                __assert("jobj.h", 0x2F5U, "joint");
+                __assert("gmregenddisp.c", 0x2F5U, "joint");
             }
             child = HSD_JObjLoadJoint(joint);
             if (child == NULL) {
-                __assert("jobj.h", 0x2F7U, "jobj");
+                __assert("gmregenddisp.c", 0x2F7U, "jobj");
             }
             HSD_JObjAddChild(root, child);
             HSD_JObjAddAnimAll(child, NULL, matanim, NULL);

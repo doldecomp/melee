@@ -738,6 +738,15 @@ void grKongo_801D651C(Ground_GObj* gobj)
     HSD_JObjSetTranslate(jobj, &sp2C);
 }
 
+const grKg_801D651C_pair_list grKg_803B7FD4 = {
+    {
+        { 7, 4 },
+        { 8, 5 },
+        { 9, 6 },
+    },
+    0,
+};
+
 bool grKongo_801D6660(Ground_GObj* arg)
 {
     return 0;

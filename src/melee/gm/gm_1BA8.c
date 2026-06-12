@@ -2345,6 +2345,42 @@ void gm_801BDE94(HSD_GObj* arg0)
             HSD_GObjPLink_80390228(arg0);
         }
     }
+
+block_41:
+    if (Player_GetP1Stock() <= 0) {
+        gmMainLib_804D3EE0->unk_530.xB_1 = false;
+        lbAudioAx_80028B90();
+        gm_SetGameSpeed(1.0f);
+        gm_8016B33C(6);
+        gm_8016B364(0x148);
+        gm_8016B378(0x28);
+        gm_8016B328();
+        HSD_GObjPLink_80390228(arg0);
+        return;
+    }
+    {
+        struct EventData* ev2 = &gmMainLib_804D3EE0->unk_530;
+        lbl_8046B6A0_t* info = gm_8016AE38();
+        int do_end;
+        if (ev2->xB_0) {
+            do_end = 0;
+        } else if (info->x24C8.x0_6 && gm_8016AEEC() == 0 &&
+                   gm_8016AEFC() == 0x3B) {
+            do_end = 1;
+        } else {
+            do_end = 0;
+        }
+        if (do_end != 0) {
+            gmMainLib_804D3EE0->unk_530.xB_1 = false;
+            lbAudioAx_80028B90();
+            gm_SetGameSpeed(1.0f);
+            gm_8016B33C(6);
+            gm_8016B364(0x148);
+            gm_8016B378(0x28);
+            gm_8016B328();
+            HSD_GObjPLink_80390228(arg0);
+        }
+    }
 }
 
 void gm_801BE37C(HSD_GObj* gobj)

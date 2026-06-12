@@ -827,21 +827,21 @@ void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
                       int arg5, f32 farg0, f32 farg1)
 {
     u32 var_r30 = 0;
-    s32 var_r29 = 0;
+    HSD_AnimJoint* aj_t;
     UnkArchiveStruct* archive;
     HSD_AnimJoint** ajp;
     HSD_MatAnimJoint** mjp;
     HSD_ShapeAnimJoint** sjp;
-    HSD_AnimJoint* aj_t;
+    s32 var_r29 = 0;
     HSD_MatAnimJoint* mj_t;
     HSD_ShapeAnimJoint* sj_t;
     HSD_AnimJoint* aj;
-    HSD_MatAnimJoint* mj;
-    HSD_ShapeAnimJoint* sj;
-    HSD_JObj* child;
     HSD_AnimJoint* caj;
-    HSD_MatAnimJoint* cmj;
     HSD_ShapeAnimJoint* csj;
+    HSD_JObj* child;
+    HSD_MatAnimJoint* mj;
+    HSD_MatAnimJoint* cmj;
+    HSD_ShapeAnimJoint* sj;
     HSD_MatAnim* manim;
     HSD_ShapeAnimDObj* sdobj;
     u8* eflags;
@@ -955,10 +955,16 @@ void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
                     if (jobj->aobj != NULL) {
                         HSD_AObjRemove(jobj->aobj);
                     }
-                    jobj->aobj = HSD_AObjLoadDesc(aj->aobjdesc);
+                    {
+                        HSD_AObjDesc* aobjdesc = aj->aobjdesc;
+                        jobj->aobj = HSD_AObjLoadDesc(aobjdesc);
+                    }
                     grAnime_801C69FC_noinline(jobj->aobj);
                 }
-                grAnime_801C6960_noinline(jobj->robj, aj->robj_anim);
+                {
+                    HSD_RObj* robj = jobj->robj;
+                    grAnime_801C6960_noinline(robj, aj->robj_anim);
+                }
             }
             if ((jobj->flags & 0x4020) ? false : true) {
                 if (sj != NULL) {

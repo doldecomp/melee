@@ -1668,8 +1668,8 @@ void grMuteCity_801F290C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     HSD_GObj* lgobj;
-    HSD_LObj* lobj;
     s32 i;
+    HSD_LObj* lobj;
     PAD_STACK(16);
 
     if (grLib_801C96E8(gobj) != 0) {

@@ -211,7 +211,7 @@ static inline struct grGreens_BlockVars* getBlock(Ground* gp, int i, int j)
 static inline Vec* getVec(Ground* gp, int i, int j);
 static inline Vec* getVec(Ground* gp, int i, int j)
 {
-    return &gp->gv.greens.x4[i * 6 + j];
+    return &((Vec(*)[6]) gp->gv.greens.x4)[i][j];
 }
 
 void grGreens_80213458(bool arg)

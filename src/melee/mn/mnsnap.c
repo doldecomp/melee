@@ -250,18 +250,24 @@ static void mnSnap_8025329C(void)
 /// Loads a page of snapshot thumbnails and updates navigation arrows.
 void mnSnap_80253640(s32 page)
 {
-    mnSnap_State* snap = &mnSnap_804A0A10;
-    s32* p48 = &snap->photo_count[0];
-    s32* p4F = &snap->cur_page;
-    s32* p50 = &snap->active_slot;
-    s32* p51;
+    HSD_JObj* jobj;
+    void* img;
+    mnSnap_State* snap;
+    s32* p48;
+    s32* p4F;
+    s32* p50;
     s32* p52;
     s32* p58;
+    s32* p51;
     s32 count;
     s32 i;
     f32 t;
     PAD_STACK(28);
 
+    snap = &mnSnap_804A0A10;
+    p48 = &snap->photo_count[0];
+    p4F = &snap->cur_page;
+    p50 = &snap->active_slot;
     *p4F = page;
     count = p48[*p50] - (page * 4);
     if (count > 4) {
@@ -279,9 +285,6 @@ void mnSnap_80253640(s32 page)
     snap->thumb_loaded[3] = 0;
 
     while (i < count) {
-        HSD_JObj* jobj;
-        void* img;
-
         HSD_DObjClearFlags(snap->thumb_jobjs[i]->u.dobj->next->next, 1);
         jobj = snap->thumb_jobjs[i];
         img = snap->blank_img;
@@ -320,8 +323,11 @@ void mnSnap_80253640(s32 page)
     } else {
         t = 50.0F;
     }
-    HSD_JObjReqAnimAll(snap->scroll_jobj, t);
-    HSD_JObjAnimAll(snap->scroll_jobj);
+    {
+        HSD_JObj** scroll = &snap->scroll_jobj;
+        HSD_JObjReqAnimAll(*scroll, t);
+        HSD_JObjAnimAll(*scroll);
+    }
 
     if (p48[*p50] <= 4) {
         HSD_JObjSetFlagsAll(snap->arrow_jobj, JOBJ_HIDDEN);

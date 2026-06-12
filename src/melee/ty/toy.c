@@ -442,11 +442,10 @@ void un_803053C4(s32 targetValue, s32 count, s32 flag)
 {
     s16* list;
     u16* ptr;
+    s32 i;
     u16* default_flags;
     s32 trophyId;
-    s32 i;
     s32 found;
-    u16 val;
 
     if (flag != 0) {
         default_flags = &un_804A284C[5];
@@ -490,10 +489,8 @@ void un_803053C4(s32 targetValue, s32 count, s32 flag)
                                 }
 
                                 ptr = (u16*) ((u8*) ptr + i);
-                                val = *ptr;
                                 count = count - 1;
-                                val ^= 0x8000;
-                                *ptr = val;
+                                *ptr ^= 0x8000;
                             }
                         }
                     }
@@ -508,8 +505,8 @@ void un_803053C4(s32 targetValue, s32 count, s32 flag)
         }
     } else {
         default_flags = &un_804A284C[5];
-        trophyId = 0;
         i = 0;
+        trophyId = 0;
 
         while (trophyId < 0x125) {
             list = un_804D6EB4;
@@ -537,10 +534,8 @@ void un_803053C4(s32 targetValue, s32 count, s32 flag)
                     }
 
                     ptr = (u16*) ((u8*) ptr + i);
-                    val = *ptr;
                     count = count - 1;
-                    val ^= 0x8000;
-                    *ptr = val;
+                    *ptr ^= 0x8000;
 
                     if (count == 0) {
                         goto done;

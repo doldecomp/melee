@@ -1,7 +1,6 @@
 #include "lb_00F9.static.h"
 
 #include "math.h"
-#include "math_ppc.h"
 #include "stdarg.h"
 #include "stddef.h"
 
@@ -57,6 +56,22 @@ struct lb_Collider {
     /* 0x18 */ Vec3 position;
     /* 0x24 */ char pad_24[0x04];
 };
+
+extern double __frsqrte(double);
+
+extern inline float sqrtf(float x)
+{
+    volatile float y;
+    if (x > 0.0f) {
+        double guess = __frsqrte((double) x);
+        guess = .5 * guess * (3.0 - guess * guess * x);
+        guess = .5 * guess * (3.0 - guess * guess * x);
+        guess = .5 * guess * (3.0 - guess * guess * x);
+        y = (float) (x * guess);
+        return y;
+    }
+    return x;
+}
 
 const struct {
     Vec3 v0;
