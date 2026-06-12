@@ -261,8 +261,8 @@ static inline bool itSeakNeedleThrown_CheckGroundHit(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     CollData* coll = &ip->x378_itemColl;
-    Vec3 hit_pos;
     u32 line_id;
+    Vec3 hit_pos;
 
     if (it_8026EA20(gobj, &ip->xDD4_itemVar.seakneedlethrown.xDE4, &ip->pos,
                     &hit_pos, &ip->xDD4_itemVar.seakneedlethrown.xDF4,
@@ -309,7 +309,7 @@ static inline bool itSeakNeedleThrown_CheckGroundHit4(Item_GObj* gobj)
 
 bool itSeakneedlethrown_UnkMotion0_Coll(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
+    Item* ip = gobj->user_data;
     itSeakNeedleThrownAttributes* attr =
         ip->xC4_article_data->x4_specialAttributes;
     HSD_JObj* child = HSD_JObjGetChild(gobj->hsd_obj);
@@ -339,12 +339,13 @@ bool itSeakneedlethrown_UnkMotion0_Coll(Item_GObj* gobj)
             break;
         }
     }
+    PAD_STACK(4);
     return false;
 }
 
 bool itSeakneedlethrown_UnkMotion1_Coll(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
+    Item* ip = gobj->user_data;
     itSeakNeedleThrownAttributes* attr =
         ip->xC4_article_data->x4_specialAttributes;
     if (itSeakNeedleThrown_CheckGroundHit(gobj)) {
