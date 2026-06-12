@@ -3163,10 +3163,7 @@ s32 fn_80181C80(s32 arg0)
     PlayerInitData sp10;
 
     gm_801A4310();
-    var_r29 = 1;
-    var_r30 = 0;
-    sp10 = data->xC;
-    do {
+    for (var_r29 = 1, var_r30 = 0, sp10 = data->xC; var_r29 < 6; var_r29++) {
         if (Player_GetFalls(var_r29) == 0 &&
             Player_GetPlayerSlotType(var_r29) != Gm_PKind_NA)
         {
@@ -3174,8 +3171,7 @@ s32 fn_80181C80(s32 arg0)
         } else {
             sp38 = var_r29;
         }
-        var_r29++;
-    } while (var_r29 < 6);
+    }
 
     if ((s32) data->x54[arg0].x4 > var_r30 && data->x8 > 0x5A) {
         if (Player_GetPlayerSlotType(sp38) != Gm_PKind_NA) {

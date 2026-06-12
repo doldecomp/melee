@@ -581,7 +581,6 @@ loop_40:
 
 void gm_801BB758(GameScene* arg0)
 {
-    u8* data = (u8*) &gm_80497758;
     struct EventData* ev = &gmMainLib_804D3EE0->unk_530;
     MatchExitInfo* exit = gm_801A4284(arg0);
     u8 stage = ev->unk_535;
@@ -590,7 +589,7 @@ void gm_801BB758(GameScene* arg0)
     s32 t;
 
     gm_8016A164();
-    if (*(u8*) ((u8*) exit + 0x10) == 8) {
+    if (exit->match_end.result == 8) {
         s32 do_save = 0;
         if (ev->x20 != 0) {
             do_save = 1;
@@ -620,16 +619,16 @@ void gm_801BB758(GameScene* arg0)
         gm_SetPendingScene(1);
         return;
     }
-    if (*(u8*) ((u8*) exit + 0x10) == 7) {
+    if (exit->match_end.result == 7) {
         gm_801A42F8(1);
         return;
     }
-    ev->x3C += gm_80168940((MatchEnd*) (data + 0x28C));
-    ev->x40 += *(s32*) ((u8*) exit + 0x14);
+    ev->x3C += gm_80168940(&gm_804979D8.match_end);
+    ev->x40 += (s32) exit->match_end.frame_count;
     b = ((u8*) ev)[0xB];
     if (((b >> 3) & 1) && ((b >> 5) & 1)) {
-        ev->x24 = *(s8*) (data + 0x2EC);
-        ev->x28 = *(u16*) (data + 0x2F0);
+        ev->x24 = gm_804979D8.match_end.player_standings[0].stocks;
+        ev->x28 = gm_804979D8.match_end.player_standings[0].percent;
         ev->xB_2 = 0;
         ev->xB_5 = 0;
         t = ev->x20;
@@ -663,7 +662,9 @@ void gm_801BB758(GameScene* arg0)
     } else {
         kind = CHKIND_MAX;
     }
-    if (ev->unk_535 == gm_801BEBC0(0x32) && *(s8*) ((u8*) exit + 0x6C) == 3) {
+    if (ev->unk_535 == gm_801BEBC0(0x32) &&
+        exit->match_end.player_standings[0].stocks == 3)
+    {
         gmMainLib_8015CF84();
     }
     if (ev->xB_1) {

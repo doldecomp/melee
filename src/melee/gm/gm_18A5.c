@@ -6246,12 +6246,12 @@ void fn_801981A0(HSD_GObj* gobj)
     TmData* data;
     s32 pnum;
     HSD_JObj* jobj;
-    u8* state_ptr;
+    struct Lbl804799D8_t* state;
     f32 x_pos;
     s32 in_range;
     u8 counter;
 
-    state_ptr = (u8*) &lbl_804799D8;
+    state = &lbl_804799D8;
     data = gm_8018F634();
     pnum = fn_8018F62C(gobj);
     jobj = gobj->hsd_obj;
@@ -6271,13 +6271,13 @@ void fn_801981A0(HSD_GObj* gobj)
     HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
 
     if (HSD_PadMasterStatus[(u8) pnum].err != 0 &&
-        state_ptr[pnum * 6 + 0x2D] != 4)
+        state->x2A[pnum].state != 4)
     {
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         return;
     }
 
-    if (state_ptr[pnum + 0x44] == 6) {
+    if (state->x44[pnum] == 6) {
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     }
 
@@ -6293,16 +6293,16 @@ void fn_801981A0(HSD_GObj* gobj)
 
     fn_8018FDC4(jobj, x_pos, lbl_804DA818, lbl_804DA824);
 
-    counter = state_ptr[pnum + 0x21];
+    counter = state->x21[pnum];
     counter = (counter + 1) % 11;
-    state_ptr[pnum + 0x21] = counter;
+    state->x21[pnum] = counter;
 
-    if (state_ptr[pnum + 0x44] == 7) {
-        fn_8019044C(jobj, (f32) state_ptr[pnum + 0x21]);
+    if (state->x44[pnum] == 7) {
+        fn_8019044C(jobj, (f32) state->x21[pnum]);
         return;
     }
 
-    fn_8019044C(jobj, (f32) (state_ptr[pnum + 0x21] + 0x14));
+    fn_8019044C(jobj, (f32) (state->x21[pnum] + 0x14));
 }
 
 /// Updates the visibility and position of a player's controller indicator.
