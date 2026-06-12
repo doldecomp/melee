@@ -17,7 +17,7 @@ mwcc_args=(
     '-nodefaults'
     '-inline' 'auto'
     '-requireprotos'
-    '-warn' 'iserror'
+    '-warn' 'off'
     '-i' 'src/melee'
     '-i' 'src/melee/ft/chara'
     '-I-'

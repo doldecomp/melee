@@ -3827,7 +3827,7 @@ void Camera_8002F4D4(s8 arg0, s8 arg1, s32 arg2)
     cm_80452C68.x2D0.angle_left = Stage_GetCamAngleRadiansLeft();
     cm_80452C68.x2D0.unk28 = Stage_GetPauseCamZPosMin();
     cm_80452C68.x2D0.unk2C = Stage_GetPauseCamZPosMax();
-    cm_80452C68.x2D0.callback = (void (*)(Camera_x2D0*)) fn_8002F488;
+    cm_80452C68.x2D0.callback = (void (*)(Camera_x2D0*))(Event) fn_8002F488;
 
     switch (arg2) {
     case 0:
@@ -4014,7 +4014,7 @@ void Camera_8002F9E4(s8 arg0, s8 arg1)
     scale = cm_80452C68.x32C * cm_803BCCA0.x8C + cm_803BCCA0.x90;
     cm_80452C68.x2D0.unk28 = scale * cm_803BCCA0.x94;
     cm_80452C68.x2D0.unk2C = scale * cm_803BCCA0.x98;
-    cm_80452C68.x2D0.callback = (void (*)(Camera_x2D0*)) fn_8002F908;
+    cm_80452C68.x2D0.callback = (void (*)(Camera_x2D0*))(Event) fn_8002F908;
 
     {
         s8 slot = cm_80452C68.x304;
@@ -4094,7 +4094,7 @@ void Camera_8002FC7C(s8 arg0, s8 arg1)
     temp_f2 = (cm_80452C68.x32C * (*new_var).x8C) + (*new_var).x90;
     cm_80452C68.x2D0.unk28 = temp_f2 * (*new_var).x94;
     cm_80452C68.x2D0.unk2C = temp_f2 * (*new_var).x98;
-    cm_80452C68.x2D0.callback = (void (*)(Camera_x2D0*)) fn_8002FBA0;
+    cm_80452C68.x2D0.callback = (void (*)(Camera_x2D0*))(Event) fn_8002FBA0;
     x304_ptr = &cm_80452C68.x304;
     x304_check = *x304_ptr;
     cm_80452C68.x314.z = 0.0f;

@@ -262,7 +262,8 @@ void un_80320A40_OnEnter(void* arg)
     cobj =
         lb_80013B14((HSD_CameraDescPerspective*) un_804D7010->cameras->desc);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
-    GObj_SetupGXLinkMax(gobj, (void (*)(HSD_GObj*, int)) un_803208F0, 8);
+    GObj_SetupGXLinkMax(gobj, (void (*)(HSD_GObj*, int))(Event) un_803208F0,
+                        8);
     HSD_CObjAddAnim(cobj, un_804D7010->cameras->anims[0]);
     HSD_CObjReqAnim(cobj, 0.0f);
     HSD_CObjAnim(cobj);

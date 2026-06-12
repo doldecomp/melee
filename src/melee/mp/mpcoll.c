@@ -127,7 +127,7 @@ void mpCollCheckBounding(CollData* cd, u32 flags)
     top = cd->ecb.top.y + cd->cur_pos.y;
     clamp_above(&top, cd->prev_ecb.top.y + cd->prev_pos.y);
 
-    if (flags & 0b100) {
+    if (flags & CollisionFlagAir_CanGrabLedge) {
         float ledge_snap_x = cd->ledge_snap_x;
         float half_height = 0.5F * cd->ledge_snap_height;
         float offset;
@@ -372,7 +372,7 @@ void mpColl_LoadECB_JObj(CollData* coll, u32 flags)
         EXPAND_ECB_FOR(coll->ecb_source.x10C_joint[5]);
     }
 
-    if (!(flags & 0b100)) {
+    if (!(flags & CollisionFlagAir_CanGrabLedge)) {
         left_x -= 2.0F;
         right_x += 2.0F;
         bottom_y -= 2.0F;
@@ -397,7 +397,7 @@ void mpColl_LoadECB_JObj(CollData* coll, u32 flags)
         bottom_y = mid_y - tmpval;
     }
 
-    if (flags & 0b1000) {
+    if (flags & 0x8) {
         left_x = -1.0F;
         right_x = +1.0F;
     } else {
@@ -407,14 +407,14 @@ void mpColl_LoadECB_JObj(CollData* coll, u32 flags)
 
     if (flags & 1) {
         bottom_y = 0.0F;
-        if (flags & 0b10000) {
+        if (flags & 0x10) {
             top_y = 2.0F;
         }
     } else {
         if (bottom_y < 0.0F) {
             bottom_y = 0.0F;
         }
-        if (flags & 0b10000) {
+        if (flags & 0x10) {
             mid_y = 0.5F * (bottom_y + top_y);
             bottom_y = mid_y - 1.0F;
             top_y = mid_y + 1.0F;
@@ -2398,7 +2398,7 @@ bool mpColl_80046904(CollData* coll, u32 flags)
             x_after_collide_right = coll->cur_pos.x;
         }
 
-        if ((squeeze_flags & 0b1100) == 0b1100) {
+        if ((squeeze_flags & 0xC) == 0xC) {
             mpCollSqueezeHorizontal(coll, true, x_after_collide_right,
                                     x_after_collide_left);
         }
@@ -2459,7 +2459,7 @@ bool mpColl_80046904(CollData* coll, u32 flags)
                 y_after_collide_ceiling = coll->cur_pos.y;
             }
         }
-        if ((squeeze_flags & 0b0011) == 0b0011) {
+        if ((squeeze_flags & 3) == 3) {
             bool airborne;
             if (touched_floor) {
                 airborne = false;
@@ -2505,11 +2505,11 @@ bool mpColl_80046904(CollData* coll, u32 flags)
         }
     }
 
-    if (!(squeeze_flags_all & 0b1000)) {
+    if (!(squeeze_flags_all & 8)) {
         coll->env_flags &= ~Collide_LeftWallMask;
     }
 
-    if (!(squeeze_flags_all & 0b0100)) {
+    if (!(squeeze_flags_all & 4)) {
         coll->env_flags &= ~Collide_RightWallMask;
     }
 

@@ -262,7 +262,7 @@ void grHeal_8021F180(Ground_GObj* gobj)
         }
     }
 
-    mpJointSetCb1(0, gp, (mpLib_Callback) fn_8021F4C0);
+    mpJointSetCb1(0, gp, (mpLib_Callback) (Event) fn_8021F4C0);
     gp->gv.flatzone2.xC4 = 0;
 }
 

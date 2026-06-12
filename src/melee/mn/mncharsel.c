@@ -4163,7 +4163,7 @@ s32 mnCharSel_802640A0(void)
     gobj = GObj_Create(0xE, 2, 0);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848,
                             HSD_FogLoadDesc(MODELS->fog));
-    GObj_SetupGXLink(gobj, (GObj_RenderFunc) fn_8026407C, 0, 0x80);
+    GObj_SetupGXLink(gobj, (GObj_RenderFunc) (Event) fn_8026407C, 0, 0x80);
 
     gobj = GObj_Create(4, 5, 0x80);
     jobj = HSD_JObjLoadJoint(ANIM[0].joint);

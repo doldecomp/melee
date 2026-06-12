@@ -808,8 +808,8 @@ void grInishie1_801FC018(HSD_GObj* gobj)
     gp->gv.inishie1.x104 =
         (gp->gv.inishie1.x10C == NULL) ? NULL : gp->gv.inishie1.x10C->child;
 
-    mpJointSetCb1(0x15, gp, (mpLib_Callback) fn_801FC9AC);
-    mpJointSetCb1(0x14, gp, (mpLib_Callback) fn_801FC9AC);
+    mpJointSetCb1(0x15, gp, (mpLib_Callback) (Event) fn_801FC9AC);
+    mpJointSetCb1(0x14, gp, (mpLib_Callback) (Event) fn_801FC9AC);
     PAD_STACK(16);
 }
 

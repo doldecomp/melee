@@ -480,7 +480,7 @@ void ifMagnify_802FC618(void)
     gobj = GObj_Create(14, 15, 0);
     cobj = lb_80013B14(&ifMagnify_803F97E8);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
-    GObj_SetupGXLinkMax(gobj, (GObj_RenderFunc) ifMagnify_802FBBDC, 0);
+    GObj_SetupGXLinkMax(gobj, (GObj_RenderFunc) (Event) ifMagnify_802FBBDC, 0);
     gobj->gxlink_prios = 0x10;
 
     idesc = *(HSD_ImageDesc**) (player0 + 8);

@@ -364,7 +364,8 @@ void HSD_SynthSFXGroupDataReaddress(AXVPB* arg0, void* callback)
     sfxGroupDataReaddressCounter += 1;
     HSD_DevComRequest(
         0, (uintptr_t) arg0->callback, (uintptr_t) callback, arg0->userContext,
-        0x1B, 0, (HSD_DevComCallback) HSD_SynthSFXGroupDataReaddressCallback,
+        0x1B, 0,
+        (HSD_DevComCallback) (Event) HSD_SynthSFXGroupDataReaddressCallback,
         NULL);
     i = 0;
     delta = ((u8*) callback - (u8*) arg0->callback) * 2;
@@ -1265,7 +1266,7 @@ void HSD_Synth_8038ADD0(void)
                 HSD_DevComRequest(
                     HSD_Synth_804D7764, src,
                     (uintptr_t) &lbl_804C4540[HSD_Synth_804D7768], 0x20, 0x21,
-                    0, (HSD_DevComCallback) HSD_Synth_8038AD74,
+                    0, (HSD_DevComCallback) (Event) HSD_Synth_8038AD74,
                     (void*) (src + 0x20));
             }
         }

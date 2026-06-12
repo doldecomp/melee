@@ -49,7 +49,7 @@ static HSD_GObj* un_804A2E98[4];
 
 static Vec3 initial_pos = { 0.0f, 0.0f, 0.0f };
 
-static f32 getScale()
+static f32 getScale(void)
 {
     return 1.4285715f * un_804D6F80;
 }

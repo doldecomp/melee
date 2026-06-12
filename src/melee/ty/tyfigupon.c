@@ -1317,7 +1317,7 @@ void un_80317A60(void)
          0xFFFFFFFFFFFFFFFFu) &
             0xFFFFFFFFFFFFFFFFu,
         cobj);
-    GObj_SetupGXLinkMax(data->x4, (GObj_RenderFunc) un_803068E0, 0);
+    GObj_SetupGXLinkMax(data->x4, (GObj_RenderFunc) (Event) un_803068E0, 0);
     gobj = data->x4;
     gobj->gxlink_prios = 0x2680000000000000ULL;
 

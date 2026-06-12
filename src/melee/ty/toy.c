@@ -1687,7 +1687,8 @@ void un_80307018(void)
             ptr2->x8 = GObj_Create(3, 4, 0);
             kind = HSD_GObj_804D7848;
             HSD_GObjObject_80390A70(ptr2->x8, kind, fog);
-            GObj_SetupGXLink(ptr2->x8, (GObj_RenderFunc) un_80306A0C, 0x35, 0);
+            GObj_SetupGXLink(ptr2->x8, (GObj_RenderFunc) (Event) un_80306A0C,
+                             0x35, 0);
         }
     }
 }
@@ -4782,7 +4783,7 @@ void un_8030FA50(void)
     cobj = lb_80013B14(cam_desc);
     kind = HSD_GObj_804D784B;
     HSD_GObjObject_80390A70(state[0], kind, cobj);
-    GObj_SetupGXLinkMax(state[0], (GObj_RenderFunc) un_80306954, 0U);
+    GObj_SetupGXLinkMax(state[0], (GObj_RenderFunc) (Event) un_80306954, 0U);
     gobj = state[0];
     gobj->gxlink_prios = 0x1048000000000000ULL;
 
@@ -4803,7 +4804,7 @@ void un_8030FA50(void)
                        frustum_far);
     kind = HSD_GObj_804D784B;
     HSD_GObjObject_80390A70(state[2], kind, cobj);
-    GObj_SetupGXLinkMax(state[2], (GObj_RenderFunc) un_803068E0, 0U);
+    GObj_SetupGXLinkMax(state[2], (GObj_RenderFunc) (Event) un_803068E0, 0U);
     gobj = state[2];
     gobj->gxlink_prios = 0x0E80000000000000ULL;
 
@@ -4828,7 +4829,7 @@ void un_8030FA50(void)
     cobj = lb_80013B14((HSD_CameraDescPerspective*) (str + 0x974));
     kind = HSD_GObj_804D784B;
     HSD_GObjObject_80390A70(state[1], kind, cobj);
-    GObj_SetupGXLinkMax(state[1], (GObj_RenderFunc) un_803068E0, 0U);
+    GObj_SetupGXLinkMax(state[1], (GObj_RenderFunc) (Event) un_803068E0, 0U);
     gobj = state[1];
     gobj->gxlink_prios = 0x8000000000000000ULL;
 

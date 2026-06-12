@@ -225,23 +225,23 @@ void grRCruise_801FF444(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     mpJointSetCb1(5, gobj, grRCruise_80200578);
-    mpJointSetCb1(27, gobj, (mpLib_Callback) grRCruise_802010A4);
-    mpJointSetCb1(36, gobj, (mpLib_Callback) grRCruise_802010A4);
-    mpJointSetCb1(37, gobj, (mpLib_Callback) grRCruise_802010A4);
-    mpJointSetCb1(38, gobj, (mpLib_Callback) grRCruise_802010A4);
-    mpJointSetCb1(39, gobj, (mpLib_Callback) grRCruise_802010A4);
-    mpJointSetCb1(40, gobj, (mpLib_Callback) grRCruise_802010A4);
-    mpJointSetCb1(41, gobj, (mpLib_Callback) grRCruise_802010A4);
-    mpJointSetCb1(42, gobj, (mpLib_Callback) grRCruise_802010A4);
-    mpJointSetCb1(43, gobj, (mpLib_Callback) grRCruise_802010A4);
-    mpJointSetCb1(28, gobj, (mpLib_Callback) grRCruise_802010A4);
-    mpJointSetCb1(29, gobj, (mpLib_Callback) grRCruise_802010A4);
-    mpJointSetCb1(30, gobj, (mpLib_Callback) grRCruise_802010A4);
-    mpJointSetCb1(31, gobj, (mpLib_Callback) grRCruise_802010A4);
-    mpJointSetCb1(32, gobj, (mpLib_Callback) grRCruise_802010A4);
-    mpJointSetCb1(33, gobj, (mpLib_Callback) grRCruise_802010A4);
-    mpJointSetCb1(34, gobj, (mpLib_Callback) grRCruise_802010A4);
-    mpJointSetCb1(35, gobj, (mpLib_Callback) grRCruise_802010A4);
+    mpJointSetCb1(27, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
+    mpJointSetCb1(36, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
+    mpJointSetCb1(37, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
+    mpJointSetCb1(38, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
+    mpJointSetCb1(39, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
+    mpJointSetCb1(40, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
+    mpJointSetCb1(41, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
+    mpJointSetCb1(42, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
+    mpJointSetCb1(43, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
+    mpJointSetCb1(28, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
+    mpJointSetCb1(29, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
+    mpJointSetCb1(30, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
+    mpJointSetCb1(31, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
+    mpJointSetCb1(32, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
+    mpJointSetCb1(33, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
+    mpJointSetCb1(34, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
+    mpJointSetCb1(35, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
     gp->gv.rcruise.x10 = 0;
 }
 
