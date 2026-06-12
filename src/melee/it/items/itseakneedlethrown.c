@@ -248,12 +248,6 @@ void itSeakneedlethrown_UnkMotion3_Phys(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     itResetVelocity(ip);
 }
-
-bool itSeakneedlethrown_UnkMotion3_Coll(Item_GObj* gobj)
-{
-    return false;
-}
-
 void itSeakneedlethrown_UnkMotion4_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -411,6 +405,12 @@ bool itSeakneedlethrown_UnkMotion2_Coll(Item_GObj* gobj)
     return false;
 }
 
+bool itSeakneedlethrown_UnkMotion3_Coll(Item_GObj* gobj)
+{
+    return false;
+}
+
+
 bool itSeakneedlethrown_UnkMotion4_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -546,7 +546,7 @@ bool it_2725_Logic109_ShieldBounced(Item_GObj* gobj)
     return false;
 }
 
-static bool it_2725_Logic109_HitShield_inline(Item_GObj* gobj, Item* ip)
+inline bool it_2725_Logic109_HitShield_inline(Item_GObj* gobj, Item* ip)
 {
     itSeakNeedleThrownAttributes* attr =
         ip->xC4_article_data->x4_specialAttributes;
