@@ -1428,10 +1428,10 @@ static f32 un_804DE01C = 0.6f;
 
 void un_8031B328(void)
 {
-    HSD_FogDesc* fogDesc;
     TyDspBgData* ptr = un_804D6F1C;
     TyDspSceneGfx* scene = (TyDspSceneGfx*) un_804D6ED4;
     LightList** lightData;
+    HSD_FogDesc* fogDesc;
     TyDspBgData* temp3;
     s8 temp2;
     HSD_LObj* lobj;
@@ -1444,9 +1444,9 @@ void un_8031B328(void)
         OSPanic(__FILE__, 0x459, "0");
     }
 
-    lightData = HSD_ArchiveGetPublicAddress(temp3->archive,
-                                            "ScMenDisplay_scene_lights");
-    if (lightData != NULL) {
+    if ((lightData = HSD_ArchiveGetPublicAddress(
+             temp3->archive, "ScMenDisplay_scene_lights")) != NULL)
+    {
         scene->x00 = GObj_Create(2, 3, 0);
         lobj = Toy_LoadLObjList(lightData, 0);
         HSD_GObjObject_80390A70(scene->x00, (unsigned long) HSD_GObj_804D784A,
@@ -1454,14 +1454,13 @@ void un_8031B328(void)
         temp = scene->x00;
         GObj_SetupGXLink(temp, HSD_GObj_LObjCallback, 0x34, 0);
     }
-    if ((((un_804D6F20 != 0) & 0xFFFFFFFFFFFFFFFF) & 0xFFFFFFFFFFFFFFFF) &
-        0xFFFFFFFFFFFFFFFF)
-    {
+    if (un_804D6F20 != 0) {
         HSD_LObjSetColor(lobj, *(GXColor*) &un_804DE018);
     }
 
-    fogDesc = HSD_ArchiveGetPublicAddress(temp3->archive, "ScMenDisplay_fog");
-    if (fogDesc != NULL) {
+    if ((fogDesc = HSD_ArchiveGetPublicAddress(temp3->archive,
+                                               "ScMenDisplay_fog")) != NULL)
+    {
         scene->x08 = GObj_Create(3, 4, 0);
         HSD_GObjObject_80390A70(scene->x08, temp2 = HSD_GObj_804D7848,
                                 HSD_FogLoadDesc(fogDesc));
@@ -1972,6 +1971,11 @@ HSD_GObj* un_8031BC54(s32 arg0)
 static char un_804D5AAC[] = "jobj.h";
 static char un_804D5AB4[] = "jobj";
 
+static inline HSD_JObj* un_8031BF34_inline(void)
+{
+    return (HSD_JObj*) un_804D6F2C->hsd_obj;
+}
+
 void un_8031BF34(s32 arg0)
 {
     TyDspBaseData* base = &un_804A2D98;
@@ -1982,21 +1986,20 @@ void un_8031BF34(s32 arg0)
 
     if (un_804D6F2C != NULL) {
         HSD_Archive** archp = &base->archive;
-        HSD_Archive* arch = *archp;
-        if (arch != NULL) {
-            lbArchive_80016EFC(arch);
+        if (base->archive != NULL) {
+            lbArchive_80016EFC(base->archive);
             *archp = NULL;
         }
     }
 
-    un_80308250(base->x38, (s16) arg0, 0);
+    un_80308250(base->x38, (s16) (u16) arg0, 0);
     un_804D6F2C = un_803087F4(base->x38);
 
     HSD_JObjClearFlagsAll(anim->jobj[0], 0x10);
     HSD_JObjSetFlagsAll(anim->jobj[1], 0x10);
     HSD_JObjClearFlagsAll(anim->jobj[0], 0x10);
 
-    jobj = (HSD_JObj*) un_804D6F2C->hsd_obj;
+    jobj = un_8031BF34_inline();
 
     HSD_JObjSetScaleX(jobj, 0.6f);
     HSD_JObjSetScaleY(jobj, 0.6f);

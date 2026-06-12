@@ -32,6 +32,10 @@
 #define mnDiagram_GetNameByIndex_s(x) ((int) mnDiagram_GetNameByIndex(x))
 #define mnDiagram_GetFighterByIndex_s(x) ((int) mnDiagram_GetFighterByIndex(x))
 #define mnDiagram_GetFighterByIndex_BBC(x) mnDiagram_GetFighterByIndex_s(x)
+#define mnDiagram_GetPrevNameIndex_s(x) ((int) mnDiagram_GetPrevNameIndex(x))
+#define mnDiagram_GetNextNameIndex_s(x) ((int) mnDiagram_GetNextNameIndex(x))
+#define mnDiagram_GetPrevFighterIndex_s(x) ((int) mnDiagram_GetPrevFighterIndex(x))
+#define mnDiagram_GetNextFighterIndex_s(x) ((int) mnDiagram_GetNextFighterIndex(x))
 
 /// @brief Gets entity index based on mode (name or fighter).
 static inline u8 mnDiagram_GetEntityByIndex(u8 is_name_mode, u8 idx)
@@ -254,17 +258,20 @@ void mnDiagram2_UpdateHeader(HSD_GObj* gobj, u8 is_name_mode, u8 entity_idx)
 /// @details Reads is_name_mode to determine which entity index to use.
 static inline void mnDiagram2_RefreshStatRows(void)
 {
-    Diagram2* data = mnDiagram2_804D6C18->user_data;
+    HSD_GObj* d = mnDiagram2_804D6C18;
+    Diagram2* data = d->user_data;
+    Diagram2* new_var;
     u8 entity_idx;
 
-    mnDiagram2_ClearStatRows(mnDiagram2_804D6C18);
+    mnDiagram2_ClearStatRows(d);
     if (data->is_name_mode != 0) {
         entity_idx = data->selected_name_idx;
     } else {
         entity_idx = data->selected_fighter_idx;
     }
-    mnDiagram2_PopulateStatRows(mnDiagram2_804D6C18, (u8) data->scroll_offset,
-                                data->is_name_mode, entity_idx);
+    new_var = data;
+    mnDiagram2_PopulateStatRows(d, (u8) data->scroll_offset,
+                                new_var->is_name_mode, entity_idx);
 }
 
 /// @brief Handles input for the VS Records character details page.
@@ -286,7 +293,7 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
     u8 var_r6;
     u8 var_r5;
     int var_r28;
-    u8 new_val;
+    HSD_GObj* d2;
     PAD_STACK(40);
 
     data = mnDiagram2_804D6C18->user_data;
@@ -302,8 +309,7 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
         gmMainLib_8015CC34()->x12 = x46;
         x47 = data2->selected_name_idx;
         gmMainLib_8015CC34()->x13 = x47;
-        x48 = data2->is_name_mode;
-        gmMainLib_8015CC34()->xD = x48;
+        gmMainLib_8015CC34()->xD = (x48 = data2->is_name_mode);
         mn_80229894(0x1C, 0, 3);
         mnDiagram2_ClearStatRows(mnDiagram2_804D6C18);
         return;
@@ -351,7 +357,7 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
         mnDiagram2_UpdateHeader(mnDiagram2_804D6C18, data->is_name_mode,
                                 var_r5);
         x48 = data->is_name_mode;
-        data2 = mnDiagram2_804D6C18->user_data;
+        data2 = (d2 = mnDiagram2_804D6C18)->user_data;
         if (x48 != 0) {
             HSD_JObjSetFlagsAll(data2->fighter_mode_header, 0x10);
             HSD_JObjClearFlagsAll(data2->name_mode_header, 0x10);
@@ -364,10 +370,11 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
         } else {
             var_r5 = data2->selected_fighter_idx;
         }
-        mnDiagram2_UpdateHeader(mnDiagram2_804D6C18, x48, var_r5);
+        mnDiagram2_UpdateHeader(d2, x48, var_r5);
         return;
     }
 
+    data = mnDiagram2_804D6C18->user_data;
     if (data->is_name_mode != 0) {
         GetNameCount();
         if (result & 1) {
@@ -383,20 +390,20 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
                 mnDiagram2_RefreshStatRows();
             }
         } else if (result & 4) {
-            new_val = mnDiagram_GetPrevNameIndex(data->selected_name_idx);
-            if ((s32) data->selected_name_idx != (s32) new_val) {
+            var_r28 = (u8) mnDiagram_GetPrevNameIndex_s(data->selected_name_idx);
+            if ((s32) data->selected_name_idx != var_r28) {
                 lbAudioAx_80024030(2);
-                data->selected_name_idx = new_val;
+                data->selected_name_idx = var_r28;
                 mnDiagram2_RefreshStatRows();
                 mnDiagram2_UpdateHeader(mnDiagram2_804D6C18,
                                         data->is_name_mode,
                                         data->selected_name_idx);
             }
         } else if (result & 8) {
-            new_val = mnDiagram_GetNextNameIndex(data->selected_name_idx);
-            if ((s32) data->selected_name_idx != (s32) new_val) {
+            var_r28 = (u8) mnDiagram_GetNextNameIndex_s(data->selected_name_idx);
+            if ((s32) data->selected_name_idx != var_r28) {
                 lbAudioAx_80024030(2);
-                data->selected_name_idx = new_val;
+                data->selected_name_idx = var_r28;
                 mnDiagram2_RefreshStatRows();
                 mnDiagram2_UpdateHeader(mnDiagram2_804D6C18,
                                         data->is_name_mode,
@@ -418,22 +425,22 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
                 mnDiagram2_RefreshStatRows();
             }
         } else if (result & 4) {
-            new_val =
-                mnDiagram_GetPrevFighterIndex(data->selected_fighter_idx);
-            if ((s32) data->selected_fighter_idx != (s32) new_val) {
+            var_r28 = (u8)
+                mnDiagram_GetPrevFighterIndex_s(data->selected_fighter_idx);
+            if ((s32) data->selected_fighter_idx != var_r28) {
                 lbAudioAx_80024030(2);
-                data->selected_fighter_idx = new_val;
+                data->selected_fighter_idx = var_r28;
                 mnDiagram2_RefreshStatRows();
                 mnDiagram2_UpdateHeader(mnDiagram2_804D6C18,
                                         data->is_name_mode,
                                         data->selected_fighter_idx);
             }
         } else if (result & 8) {
-            new_val =
-                mnDiagram_GetNextFighterIndex(data->selected_fighter_idx);
-            if ((s32) data->selected_fighter_idx != (s32) new_val) {
+            var_r28 = (u8)
+                mnDiagram_GetNextFighterIndex_s(data->selected_fighter_idx);
+            if ((s32) data->selected_fighter_idx != var_r28) {
                 lbAudioAx_80024030(2);
-                data->selected_fighter_idx = new_val;
+                data->selected_fighter_idx = var_r28;
                 mnDiagram2_RefreshStatRows();
                 mnDiagram2_UpdateHeader(mnDiagram2_804D6C18,
                                         data->is_name_mode,

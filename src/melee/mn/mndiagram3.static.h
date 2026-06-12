@@ -16,10 +16,7 @@ typedef struct mnDiagram3_PosTable {
 } mnDiagram3_PosTable;
 
 typedef struct mnDiagram3_StatTable {
-    /* 0x00 */ u16 indices[0x28];
-    /* 0x50 */ char x50[0x18];
-    /* 0x68 */ char x68[0x10];
-    /* 0x78 */ char x78[0x1C];
+    /* 0x00 */ u16 indices[0x30];
 } mnDiagram3_StatTable;
 
 /* 3EEC10 */ extern AnimLoopSettings mnDiagram3_803EEC10;

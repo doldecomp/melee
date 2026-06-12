@@ -464,11 +464,10 @@ void un_80302FFC(struct un_80304138_objalloc_t* arg0)
 bool un_80303444(struct un_80304138_objalloc_t* arg0)
 {
     bool ret = false;
-    struct un_80304138_objalloc_t_x8* x8 = arg0->x8;
-    switch (x8[arg0->x0].x0) {
+    switch (arg0->x8[arg0->x0].x0) {
     case 2: {
-        int* q = x8[arg0->x0].x10;
-        if (*q < x8[arg0->x0].x18 - 1.0f) {
+        int* q = arg0->x8[arg0->x0].x10;
+        if (*q < arg0->x8[arg0->x0].x18 - 1.0f) {
             *q += 1;
             ret = true;
             arg0->x1 = arg0->x1 | 1;
@@ -477,18 +476,18 @@ bool un_80303444(struct un_80304138_objalloc_t* arg0)
         break;
     }
     case 3: {
-        int* q = x8[arg0->x0].x10;
-        if (*q + x8[arg0->x0].x1C <= x8[arg0->x0].x18) {
+        int* q = arg0->x8[arg0->x0].x10;
+        if (*q + arg0->x8[arg0->x0].x1C <= arg0->x8[arg0->x0].x18) {
             ret = true;
-            *q += x8[arg0->x0].x1C;
+            *q += arg0->x8[arg0->x0].x1C;
             arg0->x1 = arg0->x1 | 1;
             lbAudioAx_80024030(2);
         }
         break;
     }
     case 5: {
-        unsigned char* q = x8[arg0->x0].x10;
-        int idk = x8[arg0->x0].x1C;
+        unsigned char* q = arg0->x8[arg0->x0].x10;
+        int idk = arg0->x8[arg0->x0].x1C;
         if (*q + (idk & 0xFF) <= 0xFF) {
             *q += idk;
         } else {
@@ -500,8 +499,8 @@ bool un_80303444(struct un_80304138_objalloc_t* arg0)
         break;
     }
     case 6: {
-        unsigned short* q = x8[arg0->x0].x10;
-        int idk = x8[arg0->x0].x1C;
+        unsigned short* q = arg0->x8[arg0->x0].x10;
+        int idk = arg0->x8[arg0->x0].x1C;
         if (*q + (idk & 0xFFFF) <= 0xFFFF) {
             *q += idk;
         } else {
@@ -514,12 +513,12 @@ bool un_80303444(struct un_80304138_objalloc_t* arg0)
     }
     case 4:
     case 7: {
-        int* q = x8[arg0->x0].x10;
-        unsigned int idk = x8[arg0->x0].x1C;
+        unsigned int* q = arg0->x8[arg0->x0].x10;
+        unsigned int idk = arg0->x8[arg0->x0].x1C;
         if (*q + (idk & 0xFFFFFFFF) <= 0xFFFFFFFF) {
             *q += idk;
         } else {
-            *q -= 0x100000000 - idk;
+            *q -= (unsigned int) (0x100000000 - idk);
         }
         ret = true;
         arg0->x1 = arg0->x1 | 1;
@@ -527,9 +526,9 @@ bool un_80303444(struct un_80304138_objalloc_t* arg0)
         break;
     }
     case 8: {
-        float* q = x8[arg0->x0].x10;
-        if (*q + x8[arg0->x0].x1C <= x8[arg0->x0].x18) {
-            *q += x8[arg0->x0].x1C;
+        float* q = arg0->x8[arg0->x0].x10;
+        if (*q + arg0->x8[arg0->x0].x1C <= arg0->x8[arg0->x0].x18) {
+            *q += arg0->x8[arg0->x0].x1C;
             ret = true;
             arg0->x1 = arg0->x1 | 1;
             lbAudioAx_80024030(2);
@@ -1172,6 +1171,37 @@ bool un_80304CC8(int arg0)
     return 1;
 }
 
+inline static unsigned short* un_80304D30_idk(void)
+{
+    if (gm_8016B498() || gm_801A4310() == GM_TOY_LOTTERY) {
+        return &un_804A26B8[0xCF];
+    } else {
+        return gmMainLib_8015CC78();
+    }
+}
+
+inline static int un_80304D30_48C0(int arg0)
+{
+    return un_80304D30_idk()[arg0] & 0xFF;
+}
+
+inline static bool un_80304D30_4B0C(int arg0)
+{
+    unsigned short* v;
+    unsigned short s;
+    if (gm_8016B498() || gm_801A4310() == GM_TOY_LOTTERY) {
+        s = un_804A26B8[0xCD] | un_804A26B8[0xCE];
+        v = &s;
+    } else {
+        v = gmMainLib_8015CC84();
+    }
+    if (*v & (1 << arg0)) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
 int un_80304D30(void)
 {
     int i;
@@ -1181,6 +1211,7 @@ int un_80304D30(void)
     int idk;
     int* qwe;
     int sp14[36 / 4];
+    PAD_STACK(4);
     if (un_80304470()) {
         return 0;
     }
@@ -1188,7 +1219,7 @@ int un_80304D30(void)
     count = 0;
     for (i = 0; i < 0x125; i++) {
         if (un_80304CC8(i)) {
-            if (un_803048C0(i)) {
+            if (un_80304D30_48C0(i)) {
                 x = un_803060BC(i, 6);
                 sp14[x]++;
                 if (x != 8 && x != 1) {
@@ -1199,29 +1230,31 @@ int un_80304D30(void)
     }
 
     idk = 6;
-    qwe = sp14;
+    qwe = &sp14[6];
     while (idk != 0) {
-        if (idk <= (unsigned int) 2 || *qwe == 0 || *qwe != un_80304B94(idk)) {
-            break;
-        }
-        for (i = 0; i < idk; i++) {
-            if (1 < (unsigned int) idk && idk != 3) {
-                if (!un_80304B0C(idk)) {
-                    un_804A284C[0] = 2;
-                    un_80305918(idk, 0, 0);
+        if (idk > (unsigned int) 2 && *qwe != 0 &&
+            *qwe == un_80304B94(idk))
+        {
+            for (i = 0; i < idk; i++) {
+                if (1 < (unsigned int) i && i != 3) {
+                    if (!un_80304D30_4B0C(i)) {
+                        ((unsigned char*) un_804A26B8)[0x194] = 2;
+                        un_80305918(i, 0, 0);
+                    }
                 }
             }
-        }
-        i = idk + 1;
-        while (un_80304B94(i) == 0) {
-            i++;
-        }
-        if (4 <= idk && idk <= 6) {
-            if (!un_80304B0C(idk)) {
-                un_804A284C[0] = 2;
-                un_80305918(idk, 0, 0);
-                break;
+            i = idk + 1;
+            while (un_80304B94(i) == 0) {
+                i++;
             }
+            if (4 <= i && i <= 6) {
+                if (!un_80304D30_4B0C(i)) {
+                    ((unsigned char*) un_804A26B8)[0x194] = 2;
+                    un_80305918(i, 0, 0);
+                    break;
+                }
+            }
+            break;
         }
         idk--;
         qwe--;
@@ -1230,7 +1263,7 @@ int un_80304D30(void)
     count2 = 0;
     for (i = 0; i < 8; i++) {
         if (x != 8 && x != 1) {
-            if (un_80304B0C(i)) {
+            if (un_80304D30_4B0C(i)) {
                 count2 += un_80304B94(i);
             }
         }

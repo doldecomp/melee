@@ -127,7 +127,7 @@ float ftKb_SpecialNYs_80109380(void)
 }
 
 #pragma dont_inline on
-ftDynamics* ftKb_SpecialNYs_801093A0(void)
+ftDynamics* ftKb_SpecialNYs_801093A0(Fighter_GObj* gobj)
 {
     return ft_80459B88.hats[FTKIND_SAMUS]->hat_dynamics[0];
 }
