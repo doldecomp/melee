@@ -81,20 +81,6 @@ static int dmg_log0_idx;
 static int dmg_log1_idx;
 static s8 ftColl_804D6560[8];
 
-/// .sdata2
-extern float const ftColl_804D82E0;
-extern float const ftColl_804D82E4;
-extern float const ftColl_804D82E8;
-extern float const ftColl_804D82EC;
-extern float const ftColl_804D82F0;
-extern double const ftColl_804D82F8;
-extern float const ftColl_804D8300;
-extern double const ftColl_804D8308;
-extern float const ftColl_804D8310;
-extern float const ftColl_804D8314;
-extern float const ftColl_804D8318;
-extern float const ftColl_804D831C;
-
 /// Combo Count Logic
 void ftColl_800763C0(Fighter_GObj* attacker, Fighter_GObj* victim,
                      enum_t attack_id)
@@ -822,6 +808,12 @@ void ftColl_80077464(Item* item, HitCapsule* hit, Fighter* fp)
         }
     }
 }
+
+extern float const ftColl_804D82E0;
+extern float const ftColl_804D82E8;
+extern float const ftColl_804D82EC;
+extern float const ftColl_804D82F0;
+extern float const ftColl_804D8300;
 
 void ftColl_80077688(Item* item, HitCapsule* hurt, Fighter* fp, Vec3* pos,
                      f32 val)
