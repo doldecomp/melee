@@ -54,6 +54,7 @@ struct lbl_803DA2E0_t {
 };
 extern struct lbl_803DA2E0_t lbl_803DA2E0;
 extern char lbl_803DA0D0[];
+extern char lbl_803DA3D0[];
 
 extern MatchEnd gm_80477738;
 extern s32 lbl_803B7D3C[4];
@@ -1281,7 +1282,7 @@ void gm_8019E634(void)
     /* Debug output + audio preloading */
     audio_mask = 0;
     for (i = 0; i < (s32) tmd->x30; i++) {
-        OSReport("ckind:%d\n", (s32) tmd->x4B8[i].x1);
+        OSReport(lbl_803DA3D0, (s32) tmd->x4B8[i].x1);
         audio_mask |= lbAudioAx_80026E84((CharacterKind) tmd->x4B8[i].x1);
     }
     lbAudioAx_80026F2C(0x16);
@@ -1385,3 +1386,5 @@ void fn_8019EF08(TmVsData* arg0)
 
     lbDvd_80018254();
 }
+
+char lbl_803DA3D0[] = "ckind:%d\n";

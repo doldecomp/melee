@@ -37,6 +37,9 @@
 #include <MSL/math_ppc.h>
 #include <MSL/trigf.h>
 
+static const f32 un_804DDF70 = 7.0F;
+static const f32 un_804DDF74 = 0.0F;
+
 extern DevText* un_804D6F24;
 extern HSD_Archive* un_804A2DE8[0xB0];
 typedef struct TyDspBaseData {
@@ -447,7 +450,7 @@ void un_80318CB4(s32 arg0)
     grid->x0C_max_x = 3.5f;
     ring_count = 0;
     ring_max = 6;
-    angle = 0.0f;
+    angle = *(f32 const*) &un_804DDF74;
 
     if (arg0 != 0) {
         base_step = 9.0f;
@@ -697,8 +700,8 @@ void un_80319540(s32 arg0)
 
         for (; i < (count = cfg->x08); i++) {
             if (i == 0) {
-                cur->pos[0].x = 0.0f;
-                cur->pos[0].z = 0.0f;
+                cur->pos[0].x = *(f32 const*) &un_804DDF74;
+                cur->pos[0].z = *(f32 const*) &un_804DDF74;
             } else {
                 cur->pos[0].x = 9.0f * (f32) col;
                 if (arg0 != 0 && (row % 2) != 0) {
@@ -827,7 +830,7 @@ void un_80319994(s32 arg0)
 {
     TyDspGrid* grid = un_804D6F14;
     TyDspConfig* cfg = un_804D6F18;
-    f32 xoff = 0.0f;
+    f32 xoff = *(f32 const*) &un_804DDF74;
     s32 n2;
     s32 pivot;
     s32 count;
@@ -850,8 +853,8 @@ void un_80319994(s32 arg0)
 
         for (; i < (count = cfg->x08); i++) {
             if (i == 0) {
-                cur->pos[0].x = 0.0f;
-                cur->pos[0].z = 0.0f;
+                cur->pos[0].x = *(f32 const*) &un_804DDF74;
+                cur->pos[0].z = *(f32 const*) &un_804DDF74;
             } else {
                 cur->pos[0].x = 9.0f * (f32) col + xoff;
                 if (pivot != 0) {
@@ -1020,7 +1023,7 @@ static inline void un_80319EF0_set_z(TyDspGrid* grid, Vec3* interest, Vec3* eyep
     {
         f32 zmin = grid->x08_min_z;
         f32 zrange = grid->x10_max_z - zmin;
-        if (zrange < 0.0f) {
+        if (zrange < *(f32 const*) &un_804DDF74) {
             zrange = -zrange;
         }
         interest->z = zrange * 0.5f + zmin;
@@ -1046,14 +1049,14 @@ void un_80319EF0(void)
     bg = un_804D6F1C;
 
     range = grid->x0C_max_x - grid->x04_min_x;
-    if (range < 0.0f) {
+    if (range < *(f32 const*) &un_804DDF74) {
         range = -range;
     }
     interest.x = range * 0.5f + grid->x04_min_x;
     if (grid->x00 == 3) {
-        interest.x = 0.0f;
+        interest.x = *(f32 const*) &un_804DDF74;
     }
-    interest.y = 0.0f;
+    interest.y = *(f32 const*) &un_804DDF74;
     un_80319EF0_set_z(grid, &interest, &eyepos);
     cfg->x5C = interest;
     HSD_CObjGetEyePosition(cobj, &sp28);
@@ -1065,7 +1068,7 @@ void un_80319EF0(void)
 
     {
         f32 xrange = grid->x0C_max_x - grid->x04_min_x;
-        if (xrange < 0.0f) {
+        if (xrange < *(f32 const*) &un_804DDF74) {
             xrange = -xrange;
         }
         cfg->x40 = 14.0f + xrange;
@@ -1101,8 +1104,10 @@ void un_80319EF0(void)
             cfg->x58 = (14.0f + cfg->x40) * 0.5f + cfg->x5C.x;
             break;
         case 2:
-            cfg->x54 = -((7.0f + cfg->x40) * 0.5f - cfg->x5C.x);
-            cfg->x58 = (7.0f + cfg->x40) * 0.5f + cfg->x5C.x;
+            cfg->x54 = -((*(f32 const*) &un_804DDF70 + cfg->x40) * 0.5f -
+                         cfg->x5C.x);
+            cfg->x58 =
+                (*(f32 const*) &un_804DDF70 + cfg->x40) * 0.5f + cfg->x5C.x;
             break;
         case 3:
             cfg->x54 = -(cfg->x40 * 0.5f - cfg->x5C.x);
@@ -1176,9 +1181,9 @@ void fn_8031A4EC(HSD_GObj* arg0)
 
     val = cfg->x20;
     if (val > -0.2f && val < 0.2f) {
-        cfg->x20 = 0.0f;
+        cfg->x20 = *(f32 const*) &un_804DDF74;
     } else {
-        if (val > 0.0f) {
+        if (val > *(f32 const*) &un_804DDF74) {
             sign = 1;
         } else {
             sign = -1;
@@ -1189,7 +1194,7 @@ void fn_8031A4EC(HSD_GObj* arg0)
     zero = 0;
     val = cfg->x24;
     if (val > -0.2f && val < 0.2f) {
-        cfg->x24 = 0.0f;
+        cfg->x24 = *(f32 const*) &un_804DDF74;
     } else {
         if (val > zero) {
             sign = 1;
@@ -1204,9 +1209,9 @@ void fn_8031A4EC(HSD_GObj* arg0)
 
     val = cfg->x30;
     if (val > -0.2f && val < 0.2f) {
-        cfg->x30 = 0.0f;
+        cfg->x30 = *(f32 const*) &un_804DDF74;
     } else {
-        if (val > 0.0f) {
+        if (val > *(f32 const*) &un_804DDF74) {
             sign = 1;
         } else {
             sign = -1;
@@ -1216,9 +1221,9 @@ void fn_8031A4EC(HSD_GObj* arg0)
 
     val = cfg->x34;
     if (val > -0.2f && val < 0.2f) {
-        cfg->x34 = 0.0f;
+        cfg->x34 = *(f32 const*) &un_804DDF74;
     } else {
-        if (val > 0.0f) {
+        if (val > *(f32 const*) &un_804DDF74) {
             sign = 1;
         } else {
             sign = -1;
@@ -1289,8 +1294,8 @@ void fn_8031A4EC(HSD_GObj* arg0)
     if (un_80305B88() & 0x100) {
         HSD_CObjSetInterest(cobj, &cfg->x5C);
         HSD_CObjSetFov(cobj, cfg->x44);
-        cfg->x10 = 0.0f;
-        cfg->x0C = 0.0f;
+        cfg->x10 = *(f32 const*) &un_804DDF74;
+        cfg->x0C = *(f32 const*) &un_804DDF74;
         HSD_CObjSetEyePosition(cobj, &cfg->x68);
     }
 
@@ -1299,11 +1304,11 @@ void fn_8031A4EC(HSD_GObj* arg0)
         HSD_CObjGetInterest(cobj2, &interest2);
         HSD_CObjGetEyePosition(cobj2, &eye2);
         tempvec1.x = cfg->x68.x;
-        tempvec1.y = 0.0f;
+        tempvec1.y = *(f32 const*) &un_804DDF74;
         tempvec1.z = -500.0f;
         tempvec2.x = 0.017453292f * cfg->x0C;
         tempvec2.y = 0.017453292f * cfg->x10;
-        tempvec2.z = 0.0f;
+        tempvec2.z = *(f32 const*) &un_804DDF74;
         lbVector_ApplyEulerRotation(&tempvec1, &tempvec2);
         tempvec1.z = cfg->x5C.z;
         HSD_CObjSetInterest(cobj2, &tempvec1);
@@ -1564,7 +1569,7 @@ void un_8031B1FC(void)
     HSD_ASSERT(0x43E, 0);
 }
 
-static s32 un_804DE018 = (s32) 0xC8C8C8FF;
+static const s32 un_804DE018 = (s32) 0xC8C8C8FF;
 static f32 un_804DE01C = 0.6f;
 
 void un_8031B328(void)
@@ -1876,11 +1881,11 @@ TyDspEntry* un_8031B9DC(s32 id)
 }
 
 static char un_803FF19C[] = "X  %3.2f\nZ  %3.2f";
-static f32 un_804DE020 = 12.0f;
-static s32 un_804DE024 = (s32) 0xE2E2E2FF;
-static s32 un_804DE028 = (s32) 0x4080D060;
-static f32 un_804DE02C = 18.0f;
-static f64 un_804DE030 = 0.0;
+static const f32 un_804DE020 = 12.0f;
+static const s32 un_804DE024 = (s32) 0xE2E2E2FF;
+static const s32 un_804DE028 = (s32) 0x4080D060;
+static const f32 un_804DE02C = 18.0f;
+static const f64 un_804DE030 = 0.0;
 
 void un_8031BA78(s32 arg0, s32 arg1, f32 farg0)
 {
@@ -2129,21 +2134,23 @@ void un_8031C1D0(void)
     char buf[28];
     HSD_GObj* gobj;
 
-    savedColor = un_804DE024;
+    savedColor = *(s32 const*) &un_804DE024;
     un_804D6F24 = DevText_Create(1, 0x28, 0x28, 9, 3, un_804A2D98.x00);
     if (un_804D6F24 != NULL) {
         gobj = DevText_GetGObj();
-        bgColor = un_804DE028;
+        bgColor = *(s32 const*) &un_804DE028;
         DevText_Show(gobj, un_804D6F24);
         DevText_HideCursor(un_804D6F24);
         DevText_80302AC0(un_804D6F24);
         DevText_SetBGColor(un_804D6F24, *(GXColor*) &bgColor);
-        DevText_SetScale(un_804D6F24, un_804DE020, un_804DE02C);
+        DevText_SetScale(un_804D6F24, *(f32 const*) &un_804DE020,
+                         *(f32 const*) &un_804DE02C);
         DevText_Erase(un_804D6F24);
         DevText_SetCursorXY(un_804D6F24, 0, 0);
         DevText_StoreColorIndex(un_804D6F24, 0);
         DevText_SetTextColor(un_804D6F24, *(GXColor*) &savedColor);
-        sprintf(buf, un_803FF19C, un_804DE030, un_804DE030);
+        sprintf(buf, un_803FF19C, *(f64 const*) &un_804DE030,
+                *(f64 const*) &un_804DE030);
         DevText_Print(un_804D6F24, buf);
     }
 }

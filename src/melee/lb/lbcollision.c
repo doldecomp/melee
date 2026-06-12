@@ -1522,7 +1522,7 @@ void lbColl_800077A0(Vec3* a, MtxPtr arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
             }
 
             // The second sqrtf spill is allocated just below the scratch array.
-            scl = (-n0 - sqrtf_store(n1, &sqrt_tmp[-1])) /
+            scl = (-n0 - sqrtf_store(n1, sqrt_tmp - 1)) /
                   (2.0f * dot_diff_cb);
         }
 

@@ -295,8 +295,8 @@ typedef struct {
     void* x14;
 } Ty25Entry;
 
-extern const f32 un_804DDCE4;
-extern const f32 un_804DDCE8;
+static const f32 un_804DDCE4 = -3000.0F;
+static const f32 un_804DDCE8 = 3000.0F;
 
 s32 un_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
 {
@@ -1727,9 +1727,12 @@ void un_8030715C(f32 cstick_x, f32 cstick_y)
     PSVECScale(&left_vec, &left_vec, cstick_x);
     PSVECAdd(&left_vec, &new_interest, &new_interest);
 
-    if (new_interest.x <= un_804DDCE4 || new_interest.y <= un_804DDCE4 ||
-        new_interest.z <= un_804DDCE4 || new_interest.x >= un_804DDCE8 ||
-        new_interest.y >= un_804DDCE8 || new_interest.z >= un_804DDCE8)
+    if (new_interest.x <= *(f32 const*) &un_804DDCE4 ||
+        new_interest.y <= *(f32 const*) &un_804DDCE4 ||
+        new_interest.z <= *(f32 const*) &un_804DDCE4 ||
+        new_interest.x >= *(f32 const*) &un_804DDCE8 ||
+        new_interest.y >= *(f32 const*) &un_804DDCE8 ||
+        new_interest.z >= *(f32 const*) &un_804DDCE8)
     {
         return;
     }

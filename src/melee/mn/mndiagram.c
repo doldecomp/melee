@@ -1849,6 +1849,13 @@ void mnDiagram_80241310(s32 arg0, s32 arg1, s32 arg2)
     HSD_JObj* jobj;
     mnDiagram_PopupData* user_data;
 
+    /// @todo Constant-pool anchors: these dead literals emit no code but
+    ///       reserve .sdata2 slots for mnDiagram_804DBF94 (-1.0f) and
+    ///       mnDiagram_804DBF98 (the s32-to-f32 bias) so the section layout
+    ///       matches the target object.
+    (void) -1.0F;
+    (void) 4503601774854144.0;
+
     tbl = (mnDiagram_AnimTable*) &mnDiagram_803EE728;
     joint_data = mnDiagram_804A07E4;
     data = GET_DIAGRAM(mnDiagram_804D6C10);
@@ -2623,8 +2630,8 @@ void mnDiagram_802427B4(void* arg0, s32 arg1, s32 arg2)
     {
         HSD_JObj* j = data->jobjs[7];
         pos.z = HSD_JObjGetTranslationZ(j);
-        pos.y = -HSD_JObjGetTranslationY(j) - 0.5f;
-        pos.x = HSD_JObjGetTranslationX(j) - 1.3f;
+        pos.y = -0.5f - HSD_JObjGetTranslationY(j);
+        pos.x = -1.3f + HSD_JObjGetTranslationX(j);
         text->pos_x = pos.x;
         text->pos_y = pos.y;
         text->pos_z = pos.z;
@@ -2651,8 +2658,8 @@ void mnDiagram_802427B4(void* arg0, s32 arg1, s32 arg2)
     {
         HSD_JObj* j = data->jobjs[9];
         pos.z = HSD_JObjGetTranslationZ(j);
-        pos.y = -HSD_JObjGetTranslationY(j) - 0.5f;
-        pos.x = HSD_JObjGetTranslationX(j) - 1.3f;
+        pos.y = -0.5f - HSD_JObjGetTranslationY(j);
+        pos.x = -1.3f + HSD_JObjGetTranslationX(j);
         row_text->pos_x = pos.x;
         row_text->pos_y = pos.y;
         row_text->pos_z = pos.z;

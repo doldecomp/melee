@@ -122,9 +122,9 @@ static struct {
 }* grSh_Route_804D6A58;
 
 extern float grNKr_804DB868;
-extern f32 grSh_Route_804DB880;
-extern f32 grSh_Route_804DB884;
-extern f32 grSh_Route_804DB888;
+extern const f32 grSh_Route_804DB880;
+extern const f32 grSh_Route_804DB884;
+extern const f32 grSh_Route_804DB888;
 extern HSD_LightDesc grSh_Route_803E5D74;
 extern HSD_LightDesc grSh_Route_803E5D90;
 extern Vec3 grSh_Route_803B8360;
@@ -764,12 +764,14 @@ void grShrineRoute_80209AF0(Ground_GObj* gobj)
     grMaterial_801C94D8(jobj);
     gp->gv.shrineroute3.xC4 = Ground_801C3FA4(gobj, 10);
     grShrineRoute_8020A8A4(gobj);
-    gp->gv.shrineroute3.xCC = 0;
-    gp->gv.shrineroute3.xC8 = 0;
+    gp->gv.shrineroute3.xCC = grSh_Route_804DB880;
+    gp->gv.shrineroute3.xC8 = grSh_Route_804DB880;
     gp->gv.shrineroute3.xD0 = 0.00006981317F * HSD_Randf() + 0.000017453292F;
-    gp->gv.shrineroute3.xD0 *= (HSD_Randi(2) != 0) ? 1.0F : -1.0F;
+    gp->gv.shrineroute3.xD0 *=
+        (HSD_Randi(2) != 0) ? grSh_Route_804DB888 : -1.0F;
     gp->gv.shrineroute3.xD4 = 0.00006981317F * HSD_Randf() + 0.000017453292F;
-    gp->gv.shrineroute3.xD4 *= (HSD_Randi(2) != 0) ? 1.0F : -1.0F;
+    gp->gv.shrineroute3.xD4 *=
+        (HSD_Randi(2) != 0) ? grSh_Route_804DB888 : -1.0F;
 }
 
 bool grShrineRoute_80209BE4(Ground_GObj* arg)
@@ -804,7 +806,7 @@ void grShrineRoute_80209BEC(Ground_GObj* gobj)
     rot = vel + HSD_JObjGetRotationX(jobj);
     if (rot > 0.2617994f) {
         rot = 0.2617994f;
-        if (vel < 0.0f) {
+        if (vel < grSh_Route_804DB880) {
             vel = -vel;
         }
         gp->gv.shrineroute3.xC8 = -vel;
@@ -812,7 +814,7 @@ void grShrineRoute_80209BEC(Ground_GObj* gobj)
             0.00006981317f * -HSD_Randf() - 0.000017453292f;
     } else if (rot < -0.2617994f) {
         rot = -0.2617994f;
-        if (vel < 0.0f) {
+        if (vel < grSh_Route_804DB880) {
             vel = -vel;
         }
         gp->gv.shrineroute3.xC8 = vel;
@@ -825,7 +827,7 @@ void grShrineRoute_80209BEC(Ground_GObj* gobj)
     rot = vel + HSD_JObjGetRotationY(jobj);
     if (rot > 0.17453292f) {
         rot = 0.17453292f;
-        if (vel < 0.0f) {
+        if (vel < grSh_Route_804DB880) {
             vel = -vel;
         }
         gp->gv.shrineroute3.xCC = -vel;
@@ -833,7 +835,7 @@ void grShrineRoute_80209BEC(Ground_GObj* gobj)
             0.00006981317f * -HSD_Randf() - 0.000017453292f;
     } else if (rot < -0.17453292f) {
         rot = -0.17453292f;
-        if (vel < 0.0f) {
+        if (vel < grSh_Route_804DB880) {
             vel = -vel;
         }
         gp->gv.shrineroute3.xCC = vel;
@@ -1143,9 +1145,11 @@ void grShrineRoute_8020A8A4(Ground_GObj* gobj)
         HSD_JObjSetTranslateX(gp->gv.shrineroute3.xC4, 300.0f * cosf(angle));
         HSD_JObjSetTranslateY(gp->gv.shrineroute3.xC4, 300.0f * sinf(angle));
         gp->gv.shrineroute3.xD8 =
-            0.04363323f * ((2.0f * grShrineRoute_8020A8A4_rand()) - 1.0f);
+            0.04363323f *
+            ((2.0f * grShrineRoute_8020A8A4_rand()) - grSh_Route_804DB888);
         gp->gv.shrineroute3.xDC =
-            0.04363323f * ((2.0f * grShrineRoute_8020A8A4_rand()) - 1.0f);
+            0.04363323f *
+            ((2.0f * grShrineRoute_8020A8A4_rand()) - grSh_Route_804DB888);
     }
 }
 

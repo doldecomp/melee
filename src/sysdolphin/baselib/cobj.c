@@ -784,7 +784,7 @@ MtxPtr HSD_CObjGetInvViewingMtxPtrDirect(HSD_CObj* cobj)
 
 MtxPtr HSD_CObjGetViewingMtxPtr(HSD_CObj* cobj)
 {
-    extern int HSD_CObjGetUpVector();
+    extern int HSD_CObjGetUpVector(HSD_CObj* cobj, Vec3* up);
     Vec3 interest;
     Vec3 up_vec;
     Vec3 eyepos;
@@ -805,7 +805,7 @@ MtxPtr HSD_CObjGetViewingMtxPtr(HSD_CObj* cobj)
 
 MtxPtr HSD_CObjGetInvViewingMtxPtr(HSD_CObj* cobj)
 {
-    extern int HSD_CObjGetUpVector();
+    extern int HSD_CObjGetUpVector(HSD_CObj* cobj, Vec3* up);
     Vec3 interest;
     Vec3 up_vec;
     Vec3 eyepos;

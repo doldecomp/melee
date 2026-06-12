@@ -2270,7 +2270,7 @@ static inline f32 ftCo_800A4BEC_inline0(Fighter* fp, Fighter* arg1)
     return sqrtf(dx * dx + dy * dy);
 }
 
-extern const f32 ftCo_804D8914;
+static const f32 ftCo_804D8914 = 120.0f;
 
 Fighter* ftCo_800A4BEC(Fighter* fp)
 {
@@ -2318,7 +2318,7 @@ Fighter* ftCo_800A4BEC(Fighter* fp)
     } else {
         data->xF9_b0 = true;
         dist = HSD_Randf();
-        data->x30 = ftCo_804D8914 * (0.5f * (0.5f * dist));
+        data->x30 = *(f32 const*) &ftCo_804D8914 * (0.5f * (0.5f * dist));
         data->x48 = closest;
     }
     return closest;
@@ -4424,9 +4424,10 @@ extern const f32 ftCo_804D8874;
 extern const f64 ftCo_804D8898;
 extern const f32 ftCo_804D88A8;
 extern const f32 ftCo_804D8918;
-extern const f32 ftCo_804D894C;
-extern const f32 ftCo_804D8950;
 extern const f64 ftCo_804D88C0;
+
+static const f32 ftCo_804D894C = -150.0f;
+static const f32 ftCo_804D8950 = -90.0f;
 
 static inline bool ftCo_800A9CB4_is_small(f32 x)
 {
@@ -4444,8 +4445,8 @@ static inline bool ftCo_800A9CB4_is_small(f32 x)
 static inline enum_t ftCo_800A9CB4_inline0(Fighter* fp)
 {
     if (stage_info.internal_stage_id == SHRINE) {
-        if (fp->cur_pos.x > ftCo_804D894C &&
-            fp->cur_pos.x < ftCo_804D8950)
+        if (fp->cur_pos.x > *(f32 const*) &ftCo_804D894C &&
+            fp->cur_pos.x < *(f32 const*) &ftCo_804D8950)
         {
             return 1;
         }
@@ -9019,7 +9020,8 @@ void ftCo_800B33B0(Fighter* fp)
             data->xF9_b0 = false;
         }
     } else {
-        data->x30 = 120.0f * (0.5f * (0.5f * HSD_Randf()));
+        data->x30 =
+            *(f32 const*) &ftCo_804D8914 * (0.5f * (0.5f * HSD_Randf()));
     }
     if (data->x60 != 0) {
         data->x60 = data->x60 - 1;

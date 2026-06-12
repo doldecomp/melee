@@ -194,10 +194,7 @@ static inline void inlineD0(Fighter_GObj* gobj)
         {
             int alpha_i = alpha +
                           (float) (int) (lightshield_amount * (255 - alpha));
-            {
-                void efLib_SetParamAlpha();
-                efLib_SetParamAlpha(gobj, (u8) alpha_i);
-            }
+            efLib_SetParamAlpha(gobj, (u8) alpha_i);
         }
     }
 }

@@ -82,7 +82,6 @@ void fn_8001E910(int arg0, int arg1, void* arg2, int cancelflag)
             }
             streamPlayer->unk_110 = (var_r4 = 1);
         }
-    request_done:
         if (var_r4 == 0) {
             streamPlayer->unk_110 = 0;
         }

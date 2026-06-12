@@ -44,6 +44,14 @@ extern char* mnNameNew_803EE724[];
 extern AnimLoopSettings* mnName_803B8510[];
 extern char mnName_804D4C04[8];
 
+/* String pool for asserts; the matched code addresses these relative to
+ * mnName_803ED538, so they are emitted here to keep the original .data
+ * layout. */
+static char mnName_AssertMsgAnimFrame[] = "But AnimFrame!!!\n";
+static char mnName_AssertFile[] = "mnname.c";
+static char mnName_AssertMsgUserData[] = "Can't get user_data.\n";
+static char mnName_AssertExprUserData[] = "user_data";
+
 typedef struct {
     HSD_Joint* joint;
     HSD_AnimJoint* anim_joint;
@@ -1775,3 +1783,8 @@ bool IsNameNotAllowed(char* name)
     }
     return false;
 }
+
+/* Emitted last so .sdata keeps the original layout (after the jobj.h
+ * assert literals); the matched code references the original symbol
+ * mnName_804D4C04 directly. */
+static char mnName_AssertExprNull[] = "NULL";
