@@ -95,10 +95,10 @@ static void mnStageSw_8023593C(HSD_GObj* gobj)
 
 static void mnStageSw_802359C8(MnStageSwData* data)
 {
+    f32 start_y;
     HSD_Text* text;
     f32 delta_y;
     f32 step_y;
-    f32 start_y;
     s32 i;
     u8* icon;
     HSD_Text** texts;
@@ -150,9 +150,9 @@ static void mnStageSw_802359C8(MnStageSwData* data)
 
 static s32 mnStageSw_80235C58(u8 arg0)
 {
+    s32 low;
     s32 found;
     s32 i;
-    s32 low;
     s32 high;
     u8 curr;
     u8 next;
@@ -281,9 +281,9 @@ static void mnStageSw_80235DC8(u8* user_data, s32 buttons)
 
 static void fn_80235F80(HSD_GObj* gobj)
 {
+    s32 i;
     s32 count;
     s32 enabled;
-    s32 i;
     s32 result;
     u32 buttons;
     u8 idx;
