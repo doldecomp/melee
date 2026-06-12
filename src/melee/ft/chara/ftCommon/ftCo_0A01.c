@@ -2270,7 +2270,7 @@ static inline f32 ftCo_800A4BEC_inline0(Fighter* fp, Fighter* arg1)
     return sqrtf(dx * dx + dy * dy);
 }
 
-extern const f32 ftCo_804D8914;
+static const f32 ftCo_804D8914 = 120.0f;
 
 Fighter* ftCo_800A4BEC(Fighter* fp)
 {
@@ -8971,7 +8971,8 @@ void ftCo_800B33B0(Fighter* fp)
             data->xF9_b0 = false;
         }
     } else {
-        data->x30 = 120.0f * (0.5f * (0.5f * HSD_Randf()));
+        data->x30 =
+            *(f32 const*) &ftCo_804D8914 * (0.5f * (0.5f * HSD_Randf()));
     }
     if (data->x60 != 0) {
         data->x60 = data->x60 - 1;

@@ -454,8 +454,6 @@ void ifMagnify_802FC3C0(s32 slot)
         GXColor color;
         u8 teams_enabled;
         u8 slot_type;
-        GXColor gm_80160968();
-
         slot_type = Player_GetPlayerSlotType(slot);
         teams_enabled = gm_8016B168();
         color = gm_80160968(gm_80160854((u8) slot, Player_GetTeam(slot),

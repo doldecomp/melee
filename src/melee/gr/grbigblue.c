@@ -46,7 +46,6 @@ extern f32 grBb_804DB30C;
 extern f32 grBb_804DB310;
 extern f32 grBb_804DB350;
 extern f32 grBb_804DB38C;
-extern f32 grBb_804DB3A0;
 extern f32 grBb_804DB3F0;
 extern char grBb_804D46B8;
 
@@ -2124,7 +2123,7 @@ s32 grBigBlue_801EACE8(HSD_JObj* exclude, Vec3* point, f32* out_y,
     top_bound = point->y + half_range_y;
     bottom_bound = point->y - half_range_y;
 
-    best_in_range = grBb_804DB3A0;
+    best_in_range = F32_MAX;
     best_above = grBb_804DB310;
     zero = grBb_804DB2F4;
 
@@ -2200,7 +2199,7 @@ s32 grBigBlue_801EACE8(HSD_JObj* exclude, Vec3* point, f32* out_y,
         }
     }
 
-    if (grBb_804DB3A0 != best_in_range) {
+    if (F32_MAX != best_in_range) {
         *out_y = best_in_range;
         return 1;
     }

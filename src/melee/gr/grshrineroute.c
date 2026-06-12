@@ -122,9 +122,9 @@ static struct {
 }* grSh_Route_804D6A58;
 
 extern float grNKr_804DB868;
-extern f32 grSh_Route_804DB880;
-extern f32 grSh_Route_804DB884;
-extern f32 grSh_Route_804DB888;
+extern const f32 grSh_Route_804DB880;
+extern const f32 grSh_Route_804DB884;
+extern const f32 grSh_Route_804DB888;
 extern HSD_LightDesc grSh_Route_803E5D74;
 extern HSD_LightDesc grSh_Route_803E5D90;
 extern Vec3 grSh_Route_803B8360;
@@ -807,7 +807,7 @@ void grShrineRoute_80209BEC(Ground_GObj* gobj)
     rot = vel + HSD_JObjGetRotationX(jobj);
     if (rot > 0.2617994f) {
         rot = 0.2617994f;
-        if (vel < 0.0f) {
+        if (vel < grSh_Route_804DB880) {
             vel = -vel;
         }
         gp->gv.shrineroute3.xC8 = -vel;
@@ -815,7 +815,7 @@ void grShrineRoute_80209BEC(Ground_GObj* gobj)
             0.00006981317f * -HSD_Randf() - 0.000017453292f;
     } else if (rot < -0.2617994f) {
         rot = -0.2617994f;
-        if (vel < 0.0f) {
+        if (vel < grSh_Route_804DB880) {
             vel = -vel;
         }
         gp->gv.shrineroute3.xC8 = vel;
@@ -828,7 +828,7 @@ void grShrineRoute_80209BEC(Ground_GObj* gobj)
     rot = vel + HSD_JObjGetRotationY(jobj);
     if (rot > 0.17453292f) {
         rot = 0.17453292f;
-        if (vel < 0.0f) {
+        if (vel < grSh_Route_804DB880) {
             vel = -vel;
         }
         gp->gv.shrineroute3.xCC = -vel;
@@ -836,7 +836,7 @@ void grShrineRoute_80209BEC(Ground_GObj* gobj)
             0.00006981317f * -HSD_Randf() - 0.000017453292f;
     } else if (rot < -0.17453292f) {
         rot = -0.17453292f;
-        if (vel < 0.0f) {
+        if (vel < grSh_Route_804DB880) {
             vel = -vel;
         }
         gp->gv.shrineroute3.xCC = vel;

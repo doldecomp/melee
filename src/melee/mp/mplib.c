@@ -6126,9 +6126,6 @@ void mpLib_DrawSnapping(void)
     }
 }
 
-extern const float mpLib_804D80E8;
-extern const float mpLib_804D80EC;
-
 void mpLib_DrawMatchingLines(int value, int flag, GXColor color)
 {
     CollLine* line_r31;
@@ -6165,16 +6162,16 @@ void mpLib_DrawMatchingLines(int value, int flag, GXColor color)
                 PAD_STACK(8);
                 GXPosition3f32(groundCollVtx[line_r31->x0->v0_idx].pos.x,
                                groundCollVtx[line_r31->x0->v0_idx].pos.y,
-                               mpLib_804D80E8);
+                               25.0F);
                 GXPosition3f32(groundCollVtx[line_r31->x0->v1_idx].pos.x,
                                groundCollVtx[line_r31->x0->v1_idx].pos.y,
-                               mpLib_804D80E8);
+                               25.0F);
                 GXPosition3f32(groundCollVtx[line_r31->x0->v1_idx].pos.x,
                                groundCollVtx[line_r31->x0->v1_idx].pos.y,
-                               mpLib_804D80EC);
+                               -25.0F);
                 GXPosition3f32(groundCollVtx[line_r31->x0->v0_idx].pos.x,
                                groundCollVtx[line_r31->x0->v0_idx].pos.y,
-                               mpLib_804D80EC);
+                               -25.0F);
             }
         }
         line_r31 += 1;
@@ -6238,16 +6235,16 @@ void mpLib_80059554(void)
             {
                 GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
                                groundCollVtx[line_r7->x0->v0_idx].pos.y,
-                               mpLib_804D80E8);
+                               25.0F);
                 GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
                                groundCollVtx[line_r7->x0->v1_idx].pos.y,
-                               mpLib_804D80E8);
+                               25.0F);
                 GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
                                groundCollVtx[line_r7->x0->v1_idx].pos.y,
-                               mpLib_804D80EC);
+                               -25.0F);
                 GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
                                groundCollVtx[line_r7->x0->v0_idx].pos.y,
-                               mpLib_804D80EC);
+                               -25.0F);
             }
             line_r7++;
         }
@@ -6278,16 +6275,16 @@ void mpLib_80059554(void)
             {
                 GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
                                groundCollVtx[line_r7->x0->v0_idx].pos.y,
-                               mpLib_804D80E8);
+                               25.0F);
                 GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
                                groundCollVtx[line_r7->x0->v1_idx].pos.y,
-                               mpLib_804D80E8);
+                               25.0F);
                 GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
                                groundCollVtx[line_r7->x0->v1_idx].pos.y,
-                               mpLib_804D80EC);
+                               -25.0F);
                 GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
                                groundCollVtx[line_r7->x0->v0_idx].pos.y,
-                               mpLib_804D80EC);
+                               -25.0F);
             }
             line_r7++;
         }
@@ -6318,16 +6315,16 @@ void mpLib_80059554(void)
             {
                 GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
                                groundCollVtx[line_r7->x0->v0_idx].pos.y,
-                               mpLib_804D80E8);
+                               25.0F);
                 GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
                                groundCollVtx[line_r7->x0->v1_idx].pos.y,
-                               mpLib_804D80E8);
+                               25.0F);
                 GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
                                groundCollVtx[line_r7->x0->v1_idx].pos.y,
-                               mpLib_804D80EC);
+                               -25.0F);
                 GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
                                groundCollVtx[line_r7->x0->v0_idx].pos.y,
-                               mpLib_804D80EC);
+                               -25.0F);
             }
             line_r7++;
         }
@@ -6358,16 +6355,16 @@ void mpLib_80059554(void)
             {
                 GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
                                groundCollVtx[line_r7->x0->v0_idx].pos.y,
-                               mpLib_804D80E8);
+                               25.0F);
                 GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
                                groundCollVtx[line_r7->x0->v1_idx].pos.y,
-                               mpLib_804D80E8);
+                               25.0F);
                 GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
                                groundCollVtx[line_r7->x0->v1_idx].pos.y,
-                               mpLib_804D80EC);
+                               -25.0F);
                 GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
                                groundCollVtx[line_r7->x0->v0_idx].pos.y,
-                               mpLib_804D80EC);
+                               -25.0F);
             }
             line_r7++;
         }
@@ -6404,16 +6401,16 @@ void mpLib_80059554(void)
             {
                 GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
                                groundCollVtx[line_r7->x0->v0_idx].pos.y,
-                               mpLib_804D80E8);
+                               25.0F);
                 GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
                                groundCollVtx[line_r7->x0->v1_idx].pos.y,
-                               mpLib_804D80E8);
+                               25.0F);
                 GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
                                groundCollVtx[line_r7->x0->v1_idx].pos.y,
-                               mpLib_804D80EC);
+                               -25.0F);
                 GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
                                groundCollVtx[line_r7->x0->v0_idx].pos.y,
-                               mpLib_804D80EC);
+                               -25.0F);
             }
             line_r7++;
         }
@@ -6444,16 +6441,16 @@ void mpLib_80059554(void)
             {
                 GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
                                groundCollVtx[line_r7->x0->v0_idx].pos.y,
-                               mpLib_804D80E8);
+                               25.0F);
                 GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
                                groundCollVtx[line_r7->x0->v1_idx].pos.y,
-                               mpLib_804D80E8);
+                               25.0F);
                 GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
                                groundCollVtx[line_r7->x0->v1_idx].pos.y,
-                               mpLib_804D80EC);
+                               -25.0F);
                 GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
                                groundCollVtx[line_r7->x0->v0_idx].pos.y,
-                               mpLib_804D80EC);
+                               -25.0F);
             }
             line_r7++;
         }
@@ -6483,16 +6480,16 @@ void mpLib_80059554(void)
             {
                 GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
                                groundCollVtx[line_r7->x0->v0_idx].pos.y,
-                               mpLib_804D80E8);
+                               25.0F);
                 GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
                                groundCollVtx[line_r7->x0->v1_idx].pos.y,
-                               mpLib_804D80E8);
+                               25.0F);
                 GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
                                groundCollVtx[line_r7->x0->v1_idx].pos.y,
-                               mpLib_804D80EC);
+                               -25.0F);
                 GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
                                groundCollVtx[line_r7->x0->v0_idx].pos.y,
-                               mpLib_804D80EC);
+                               -25.0F);
             }
             line_r7++;
         }
@@ -6522,16 +6519,16 @@ void mpLib_80059554(void)
             {
                 GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
                                groundCollVtx[line_r7->x0->v0_idx].pos.y,
-                               mpLib_804D80E8);
+                               25.0F);
                 GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
                                groundCollVtx[line_r7->x0->v1_idx].pos.y,
-                               mpLib_804D80E8);
+                               25.0F);
                 GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
                                groundCollVtx[line_r7->x0->v1_idx].pos.y,
-                               mpLib_804D80EC);
+                               -25.0F);
                 GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
                                groundCollVtx[line_r7->x0->v0_idx].pos.y,
-                               mpLib_804D80EC);
+                               -25.0F);
             }
             line_r7++;
         }
