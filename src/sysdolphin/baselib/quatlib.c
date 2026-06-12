@@ -14,7 +14,6 @@ s32 MatToQuat(Mtx m, Quaternion* q)
     f32 lenCol[3];
     f32 s;
     f32 scale;
-    f32 tr;
     int i;
     int j;
     int k;
@@ -26,10 +25,10 @@ s32 MatToQuat(Mtx m, Quaternion* q)
     lenCol[2] =
         sqrtf(m[0][2] * m[0][2] + m[1][2] * m[1][2] + m[2][2] * m[2][2]);
 
-    tr = m[0][0] / lenCol[0] + m[1][1] / lenCol[1] + m[2][2] / lenCol[2];
+    s = m[0][0] / lenCol[0] + m[1][1] / lenCol[1] + m[2][2] / lenCol[2];
 
-    if (tr > 0.0F) {
-        s = sqrtf(1.0F + tr);
+    if (s > 0.0F) {
+        s = sqrtf(1.0F + s);
         q->w = 0.5F * s;
         scale = 0.5F / s;
         q->x = scale * ((m[2][1] / lenCol[1]) - (m[1][2] / lenCol[2]));
@@ -79,34 +78,24 @@ s32 HSD_QuatLib_8037EB28(Mtx m, Vec3* euler)
     return 0;
 }
 
-/// @todo Currently 87.16% match - temp register allocation (f3/f5, f4/f6
-/// swapped) likely due to mwcc scheduler behavior
 s32 HSD_QuatLib_8037EC4C(Quaternion* p, Quaternion* q, Quaternion* out)
 {
-    f32 py;
-    f32 qx;
-    f32 qy;
-    f32 px;
-    f32 qz;
-    f32 pw;
-    f32 pz;
-    f32 qw;
+    f32 x;
+    f32 y;
+    f32 z;
+    f32 w;
 
-    pw = p->w;
-    qy = q->y;
-    qx = q->x;
-    py = p->y;
-    pz = p->z;
-    px = p->x;
-    qz = q->z;
-    qw = q->w;
+    x = q->w * p->x + p->w * q->x + (p->y * q->z - q->y * p->z);
+    y = q->w * p->y + p->w * q->y + (q->x * p->z - p->x * q->z);
+    z = q->w * p->z + p->w * q->z + (p->x * q->y - q->x * p->y);
+    w = p->w * q->w - (p->z * q->z + (p->x * q->x + p->y * q->y));
 
-    out->x = qw * px + pw * qx + (py * qz - qy * pz);
-    out->y = qw * py + pw * qy + (qx * pz - px * qz);
-    out->z = qw * pz + pw * qz + (px * qy - qx * py);
-    out->w = pw * qw - (pz * qz + (px * qx + py * qy));
+    out->x = x;
+    out->y = y;
+    out->z = z;
+    out->w = w;
 
-    PAD_STACK(24);
+    PAD_STACK(16);
     return 0;
 }
 
