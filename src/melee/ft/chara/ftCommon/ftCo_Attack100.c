@@ -2800,6 +2800,11 @@ void fn_800DBAE4(Fighter_GObj* gobj)
     ftCommon_8007E2F4(fp, 0x1FF);
 }
 
+static inline void fn_800DBBF8_noinline(Fighter_GObj* gobj1, Fighter* gobj2)
+{
+    Fighter_GObj* fighter = gobj1;
+    fn_800DAA40(fighter, gobj2->victim_gobj);
+}
 void fn_800DBBF8(Fighter_GObj* gobj)
 {
     ftHurtboxInit hurt;
@@ -2832,7 +2837,7 @@ void fn_800DBBF8(Fighter_GObj* gobj)
     }
 
     ftCommon_8007E2F4(fp, 0x1FF);
-    fn_800DAA40(gobj, fp_before->victim_gobj);
+    fn_800DBBF8_noinline(gobj, fp_before);
 }
 
 void ftCo_CaptureWaitLw_Anim(Fighter_GObj* gobj)
