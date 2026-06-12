@@ -3147,7 +3147,7 @@ s32 Ground_801C5764(void)
     return stage_info.x6D8;
 }
 
-s16 Ground_801C5774(void)
+s32 Ground_801C5774(void)
 {
     return stage_info.x6DC;
 }

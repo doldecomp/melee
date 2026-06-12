@@ -1631,6 +1631,8 @@ int hsd_80393A5C(char* filename, int data, int size)
     return size;
 }
 
+#pragma push
+#pragma pool_data off
 void fn_80393C14(const u8* buf, size_t size)
 {
     int i;
@@ -1673,6 +1675,7 @@ void fn_80393C14(const u8* buf, size_t size)
     hsd_804CF7E8.xC = write_pos;
     hsd_804CF7E8.x11 = line_len;
 }
+#pragma pop
 
 #pragma push
 #pragma dont_inline on
