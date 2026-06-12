@@ -31,8 +31,11 @@ static inline bool it_8026F3D4_check_kind(Item* ip, ItemKind it_kind)
     }
     return ret;
 }
-// Hack needed to match it_8026F3D4 while keepign this the only 0.0f in the file
+
+/// @todo Hack needed to match @c it_8026F3D4 while keeping this the only 0.0f
+///       in the file
 static const f32 zero_init[1] = { 0.0f };
+
 bool it_8026F3D4(Item_GObj* item_gobj, struct it_8026F3D4_arg1_t* arg1,
                  s32 num, s32 arg3)
 {
