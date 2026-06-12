@@ -15,6 +15,7 @@ s32 MatToQuat(Mtx m, Quaternion* q)
     f32 scale;
     int i;
     int j;
+    int k;
 
     lenCol[0] =
         sqrtf(m[0][0] * m[0][0] + m[1][0] * m[1][0] + m[2][0] * m[2][0]);
@@ -23,8 +24,10 @@ s32 MatToQuat(Mtx m, Quaternion* q)
     lenCol[2] =
         sqrtf(m[0][2] * m[0][2] + m[1][2] * m[1][2] + m[2][2] * m[2][2]);
 
-    if ((m[0][0] / lenCol[0] + m[1][1] / lenCol[1] + m[2][2] / lenCol[2]) > 0.0F) {
-        s = sqrtf(1.0F + (m[0][0] / lenCol[0] + m[1][1] / lenCol[1] + m[2][2] / lenCol[2]));
+    s = m[0][0] / lenCol[0] + m[1][1] / lenCol[1] + m[2][2] / lenCol[2];
+
+    if (s > 0.0F) {
+        s = sqrtf(1.0F + s);
         q->w = 0.5F * s;
         scale = 0.5F / s;
         q->x = scale * ((m[2][1] / lenCol[1]) - (m[1][2] / lenCol[2]));
@@ -39,13 +42,15 @@ s32 MatToQuat(Mtx m, Quaternion* q)
             i = 2;
         }
         j = nxt[i];
+        k = nxt[j];
+
         s = sqrtf(1.0F + (((m[i][i] / lenCol[i]) - (m[j][j] / lenCol[j])) -
-                          (m[nxt[j]][nxt[j]] / lenCol[nxt[j]])));
+                          (m[k][k] / lenCol[k])));
         scale = 0.5F / s;
         q3[i] = 0.5F * s;
-        q->w = scale * ((m[nxt[j]][j] / lenCol[j]) - (m[j][nxt[j]] / lenCol[nxt[j]]));
+        q->w = scale * ((m[k][j] / lenCol[j]) - (m[j][k] / lenCol[k]));
         q3[j] = scale * ((m[j][i] / lenCol[i]) + (m[i][j] / lenCol[j]));
-        q3[nxt[j]] = scale * ((m[nxt[j]][i] / lenCol[i]) + (m[i][nxt[j]] / lenCol[nxt[j]]));
+        q3[k] = scale * ((m[k][i] / lenCol[i]) + (m[i][k] / lenCol[k]));
         q->x = q3[0];
         q->y = q3[1];
         q->z = q3[2];
