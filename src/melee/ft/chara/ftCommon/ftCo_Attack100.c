@@ -2296,11 +2296,8 @@ void fn_800DA8E4(Fighter_GObj* gobj, Fighter_GObj* victim_gobj, s32 arg2)
     ftCommon_8007E2F4(fp, 0x1FF);
 }
 
-#pragma push
-#pragma dont_inline on
 void fn_800DAA40(Fighter_GObj* arg0, Fighter_GObj* arg1)
 {
-    extern f32 ftCo_804D90C8;
     Vec3 sp18;
     Fighter* temp_r31 = arg0->user_data;
     Fighter* temp_r30 = arg1->user_data;
@@ -2309,14 +2306,12 @@ void fn_800DAA40(Fighter_GObj* arg0, Fighter_GObj* arg1)
     if (temp_r31->ground_or_air == GA_Ground) {
         temp_r30->x2170 = sp18.y + temp_r31->cur_pos.y - temp_r30->cur_pos.y;
     } else {
-        temp_r30->x2170 = ftCo_804D90C8;
+        temp_r30->x2170 = 0.0f;
         temp_r31->cur_pos.x += sp18.x;
         temp_r31->cur_pos.y += sp18.y;
         temp_r31->cur_pos.z += sp18.z;
     }
 }
-#pragma pop
-
 void fn_800DAADC(Fighter_GObj* arg0, Fighter_GObj* arg1)
 {
     Fighter* fp = GET_FIGHTER(arg0);
