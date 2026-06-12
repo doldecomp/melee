@@ -179,9 +179,6 @@ static void fn_8019F1D0(void)
 
 static void fn_8019F2D4(u32 arg0)
 {
-    HSD_JObj* jobj;
-    HSD_MObj* mobj;
-
     if (lbl_804D66C8.x4 == 0xA) {
         gm_80167858((s8) lbl_80479A98.x15, lbl_80479A98.x16, 0xD, 0xA);
     }
@@ -189,6 +186,9 @@ static void fn_8019F2D4(u32 arg0)
         gm_80167858((s8) lbl_80479A98.x15, lbl_80479A98.x16, 0xD, 0x14);
     }
     if ((u8) lbl_80479A98.x0 == 0) {
+        HSD_JObj* jobj;
+        HSD_MObj* mobj;
+
         if (lbl_804D66C8.x4 < 0x50) {
             lbl_804D66C8.x4++;
         } else {
@@ -209,6 +209,9 @@ static void fn_8019F2D4(u32 arg0)
         HSD_MObjAnim(mobj);
         return;
     } else if ((u8) lbl_80479A98.x0 == 1) {
+        HSD_JObj* jobj;
+        HSD_MObj* mobj;
+
         if ((u8) lbl_80479A98.x14 != 0) {
             mobj = lbl_804D66C8.x0->u.dobj->mobj;
             HSD_MObjReqAnim(mobj, 0.0f);
@@ -258,6 +261,9 @@ static void fn_8019F2D4(u32 arg0)
             return;
         }
     } else if ((u8) lbl_80479A98.x0 == 8) {
+        HSD_JObj* jobj;
+        HSD_MObj* mobj;
+
         jobj = lbl_804D66C0.x0;
         HSD_JObjReqAnimAll(jobj, (f32) lbl_804D66C8.x4);
         HSD_JObjAnimAll(jobj);

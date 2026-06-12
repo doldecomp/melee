@@ -116,23 +116,23 @@ void ftCo_800978D4(Fighter_GObj* gobj)
 
 void ftCo_8009794C(Fighter_GObj* gobj)
 {
-    u8 _[12] = { 0 };
     Fighter* fp = gobj->user_data;
-    PAD_STACK(16);
     if (fp->ground_or_air == GA_Air) {
         ftCommon_8007D7FC(fp);
     }
     {
         bool b = ftCo_80097570(gobj);
+        FtMotionId msid;
         if (fp->x2226_b1) {
             b = !b;
         }
+        msid = b ? ftCo_MS_DownBoundU : ftCo_MS_DownBoundD;
         Fighter_ChangeMotionState(
-            gobj, b ? ftCo_MS_DownBoundU : ftCo_MS_DownBoundD,
+            gobj, msid,
             Ft_MF_SkipNametagVis | Ft_MF_KeepColAnimPartHitStatus, 0, 1, 0,
             NULL);
         ftCo_800978D4(gobj);
-        ftCo_800976A4(gobj);
+        PAD_STACK(24);
         fp->x67C = 255;
         fp->x67D = 255;
         ftCommon_8007E2F4(fp, 511);

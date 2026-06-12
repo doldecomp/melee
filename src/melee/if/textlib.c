@@ -32,8 +32,18 @@
 #include <MSL/string.h>
 
 /// ?
-/* 4D6E18 */ extern DevText* devtext_drawlist;
-/* 4D6E38 */ extern DevText* devtext_poolhead;
+/* 3FDC80 */ extern char un_803FDC80[];
+/* 3FDC98 */ extern char un_803FDC98[];
+/* 4D5A00 */ extern char un_804D5A00;
+/* 4D6E18 */ extern DevText* un_804D6E18;
+/* 4D6E38 */ extern DevText* un_804D6E38;
+/* 4DDC88 */ extern GXColor un_804DDC88;
+/* 4DDC8C */ extern GXColor un_804DDC8C;
+/* 4DDC90 */ extern GXColor un_804DDC90;
+/* 4DDC94 */ extern GXColor un_804DDC94;
+/* 4DDC98 */ extern GXColor un_804DDC98;
+/* 4DDC9C */ extern f32 un_804DDC9C;
+/* 4DDCA0 */ extern f32 un_804DDCA0;
 unsigned short un_804A26B8[1000];
 unsigned short un_804A284C[1000];
 short* un_804D6EB4;
@@ -57,15 +67,15 @@ GXColor red = { 0xFF, 0x80, 0x80, 0xFF };
 GXColor green = { 0x80, 0xFF, 0x80, 0xFF };
 GXColor blue = { 0x80, 0x80, 0xFF, 0xFF };
 
-GXColor color_08 = { 0x40, 0x50, 0x80, 0x80 };
-GXColor color_0C = { 0xE2, 0xE2, 0xE2, 0xFF };
-GXColor color_10 = { 0xFF, 0x80, 0x20, 0xFF };
-GXColor color_14 = { 0xA0, 0xA0, 0xFF, 0xFF };
+GXColor un_804D5A08 = { 0x40, 0x50, 0x80, 0x80 };
+GXColor un_804D5A0C = { 0xE2, 0xE2, 0xE2, 0xFF };
+GXColor un_804D5A10 = { 0xFF, 0x80, 0x20, 0xFF };
+GXColor un_804D5A14 = { 0xA0, 0xA0, 0xFF, 0xFF };
 
 static inline DevText* find_by_id(char id)
 {
     DevText* text;
-    for (text = devtext_drawlist; text != NULL; text = text->next) {
+    for (text = un_804D6E18; text != NULL; text = text->next) {
         if (text->id == id) {
             return text;
         }
@@ -76,22 +86,23 @@ static inline DevText* find_by_id(char id)
 DevText* DevText_Create(char id, int x, int y, int w, int h, char* buf)
 {
     DevText* text;
-    GXColor bg = { 0x60, 0xD0, 0xB0, 0x70 };
-    PAD_STACK(0x60 - 0x48);
+    UNUSED u32 pad;
+    GXColor bg = un_804DDC88;
+    PAD_STACK(0x14);
 
     if ((text = find_by_id(id))) {
         return NULL;
     }
-    text = devtext_poolhead;
+    text = un_804D6E38;
     if (text != NULL) {
-        devtext_poolhead = text->next;
+        un_804D6E38 = text->next;
     } else {
         text = NULL;
     }
     if (text == NULL) {
         // HSD_ASSERT
-        OSReport("TW : Screen alloc Fail\n");
-        __assert("textlib.c", 309, "0");
+        OSReport(un_803FDC80);
+        __assert(un_803FDC98, 309, &un_804D5A00);
     }
     if (text != NULL) {
         text->x = x;
@@ -100,13 +111,13 @@ DevText* DevText_Create(char id, int x, int y, int w, int h, char* buf)
         text->h = h;
         text->cursor_x = 0;
         text->cursor_y = 0;
-        text->scale_x = 10.0;
-        text->scale_y = 16.0;
+        text->scale_x = un_804DDC9C;
+        text->scale_y = un_804DDCA0;
         text->bg_color = bg;
-        text->text_colors[0] = white;
-        text->text_colors[1] = red;
-        text->text_colors[2] = green;
-        text->text_colors[3] = blue;
+        text->text_colors[0] = un_804DDC8C;
+        text->text_colors[1] = un_804DDC90;
+        text->text_colors[2] = un_804DDC94;
+        text->text_colors[3] = un_804DDC98;
         text->id = (int) id;
         text->line_width = 10;
         text->flags = DEVTEXT_FLAG_SHOWCURSOR;
@@ -144,11 +155,24 @@ inline int DevText_Clamp(int val, int max)
     }
 }
 
+#pragma push
+#pragma dont_inline on
 void DevText_SetCursorXY(DevText* text, int x, int y)
 {
-    text->cursor_x = DevText_Clamp(x, text->w);
-    text->cursor_y = DevText_Clamp(y, text->h);
+    if (text->w <= x) {
+        x = text->w - 1;
+    } else if (x < 0) {
+        x = 0;
+    }
+    text->cursor_x = x;
+    if (text->h <= y) {
+        y = text->h - 1;
+    } else if (y < 0) {
+        y = 0;
+    }
+    text->cursor_y = y;
 }
+#pragma pop
 
 void DevText_SetCursorX(DevText* text, int x)
 {
@@ -264,15 +288,23 @@ inline void DevText_AdvanceLine(DevText* text)
     }
 }
 
+typedef struct DevTextGlyph {
+    u8 chr;
+    u8 color : 2;
+    u8 unk : 6;
+} DevTextGlyph;
+
 void DevText_Print(DevText* text, char* str)
 {
-    PAD_STACK(8);
-    if (str) {
-        while (*str) {
-            if (*str != '\n') {
-                int index = (text->cursor_x + text->cursor_y * text->w) * 2;
-                text->buf[index] = *str;
-                text->buf[index + 1] = text->current_color << 6;
+    char* cur;
+    if (str != NULL) {
+        cur = str;
+        while (*cur) {
+            if (*cur != '\n') {
+                int index = text->cursor_x + text->cursor_y * text->w;
+                ((DevTextGlyph*) text->buf)[index].chr = *cur;
+                ((DevTextGlyph*) text->buf)[index].color =
+                    text->current_color;
                 if (text->cursor_x < text->w - 1) {
                     text->cursor_x++;
                 } else if ((text->flags & DEVTEXT_FLAG_NOWRAP) == 0) {
@@ -281,7 +313,7 @@ void DevText_Print(DevText* text, char* str)
             } else {
                 DevText_AdvanceLine(text);
             }
-            str++;
+            cur++;
         }
     }
 }
@@ -398,6 +430,7 @@ void un_80302FFC(struct un_80304138_objalloc_t* arg0)
     struct un_80304138_objalloc_t_x8* thing;
     int cursor_x = 1;
     int cursor_y;
+    GXColor color;
     for (thing = x8; thing->x0 != 9; thing++) {
         if (thing->x0 != 0 && thing->x0 != 1) {
             int len = DevText_StrLen(thing->x8);
@@ -408,20 +441,24 @@ void un_80302FFC(struct un_80304138_objalloc_t* arg0)
     }
     if (arg0->x1 & 0x10) {
         DevText_StoreColorIndex(arg0->x4, 0);
-        DevText_SetTextColor(arg0->x4, adjust(color_0C));
+        color = adjust(un_804D5A0C);
+        DevText_SetTextColor(arg0->x4, color);
         DevText_StoreColorIndex(arg0->x4, 1);
-        DevText_SetTextColor(arg0->x4, adjust(color_10));
+        color = adjust(un_804D5A10);
+        DevText_SetTextColor(arg0->x4, color);
         DevText_StoreColorIndex(arg0->x4, 2);
-        DevText_SetTextColor(arg0->x4, adjust(color_14));
-        DevText_SetBGColor(arg0->x4, adjust(color_08));
+        color = adjust(un_804D5A14);
+        DevText_SetTextColor(arg0->x4, color);
+        color = adjust(un_804D5A08);
+        DevText_SetBGColor(arg0->x4, color);
     } else {
         DevText_StoreColorIndex(arg0->x4, 0);
-        DevText_SetTextColor(arg0->x4, color_0C);
+        DevText_SetTextColor(arg0->x4, un_804D5A0C);
         DevText_StoreColorIndex(arg0->x4, 1);
-        DevText_SetTextColor(arg0->x4, color_10);
+        DevText_SetTextColor(arg0->x4, un_804D5A10);
         DevText_StoreColorIndex(arg0->x4, 2);
-        DevText_SetTextColor(arg0->x4, color_14);
-        DevText_SetBGColor(arg0->x4, color_08);
+        DevText_SetTextColor(arg0->x4, un_804D5A14);
+        DevText_SetBGColor(arg0->x4, un_804D5A08);
     }
     for (cursor_y = 0; cursor_y < arg0->x4->h; cursor_y++) {
         if (x8->x0 == 0) {
@@ -668,34 +705,36 @@ void un_80303AC4(struct un_80304138_objalloc_t* arg0)
             un_804D6E44->xC(6);
         }
     } else if (buttons & (0x10000000 | HSD_PAD_Y)) { // up
-        int i;
-        int w;
-        for (i = arg0->x0; i >= 0; i--) {
+        u8 j = arg0->x0;
+        int i = j;
+        (void) j;
+        for (i--; i >= 0; i--) {
             if (arg0->x8[i].x0 != NULL) {
-                w = i;
+                (void) i;
                 goto up_found;
             }
         }
-        w = -1;
+        i = -1;
     up_found:
-        if (w != -1) {
-            arg0->x0 = w;
+        if (i != -1) {
+            arg0->x0 = i;
             arg0->x1 = arg0->x1 | 1;
             lbAudioAx_80024030(2);
         }
     } else if (buttons & (0x20000000 | HSD_PAD_X)) { // down
-        int i;
-        int w;
-        for (i = arg0->x0; i < arg0->x4->h; i++) {
+        u8 j = arg0->x0;
+        int i = j;
+        (void) j;
+        for (i++; i < arg0->x4->h; i++) {
             if (arg0->x8[i].x0 != NULL) {
-                w = i;
+                (void) i;
                 goto down_found;
             }
         }
-        w = -1;
+        i = -1;
     down_found:
-        if (w != -1) {
-            arg0->x0 = w;
+        if (i != -1) {
+            arg0->x0 = i;
             arg0->x1 = arg0->x1 | 1;
             lbAudioAx_80024030(2);
         }
@@ -878,9 +917,13 @@ void un_80304210(struct un_80304138_objalloc_t* arg0, void* arg1, int arg2,
     struct un_80304138_objalloc_t* obj = HSD_ObjAlloc(&un_804A2688);
     if (obj != NULL) {
         DevText* text = arg0->x4;
-        un_80303FD4(arg0->x10, obj, arg1, arg2,
-                    text->x + arg3 + text->scale_x * text->w,
-                    text->y + arg4 + text->scale_y * arg0->x0);
+        f32 x = text->scale_x * (f32) text->w;
+        {
+            s32 x_pos = (s32) ((f32) arg3 + x);
+            s32 y_pos = (s32) (text->scale_y * (f32) arg0->x0 + (f32) arg4);
+            un_80303FD4(arg0->x10, obj, arg1, arg2, text->x + x_pos,
+                        text->y + y_pos);
+        }
         arg0->x1 = arg0->x1 | 0x10;
         arg0->prev = obj;
         obj->next = arg0;

@@ -384,8 +384,8 @@ void lbShadow_8000F38C(s32 arg0)
 
     lbVector_Diff(&lightPos, &lightDir, &lightVec);
 
-    dist = lightVec.x * lightVec.x;
-    dist = (lightVec.z * lightVec.z) + (dist + (lightVec.y * lightVec.y));
+    dist = (lightVec.z * lightVec.z) +
+           (dist = (lightVec.x * lightVec.x) + (lightVec.y * lightVec.y));
     dist = lbShadow_Sqrtf(dist);
 
     if (dist < 0.001f) {

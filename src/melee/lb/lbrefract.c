@@ -112,7 +112,6 @@ void lbRefract_80021CE8(void* arg0, s32 arg1)
 {
     lbRefract_CallbackData* cb = arg0;
     u32 param_idx;
-    u32 y_tex;
     u32 col, row;
     f32 x_step, y_step;
     f32 y, x, y_sq;
@@ -148,7 +147,7 @@ void lbRefract_80021CE8(void* arg0, s32 arg1)
             }
             params = *(f32**) (lbl_804D63E8 + 4);
             param0 = params[param_idx];
-            if (param0 != 0.0f) {
+            if (param0) {
                 f32 rem;
                 {
                     f32 abs_dist = __fabsf(dist);
@@ -169,9 +168,9 @@ void lbRefract_80021CE8(void* arg0, s32 arg1)
             if (param0 > 1.0f) {
                 param0 = 1.0f;
             }
-            y_tex = (u32) (127.0f * (y * param0) + 128.0f);
             ((void (*)(lbRefract_CallbackData*, s32, s32, s32, s32, u32, u32))
-                 cb->callback0)(cb, row, col, 0, 0, y_tex,
+                 cb->callback0)(cb, row, col, 0, 0,
+                                (u32) (127.0f * (y * param0) + 128.0f),
                                 (u32) (127.0f * (x * param0) + 128.0f));
             x += x_step;
         }

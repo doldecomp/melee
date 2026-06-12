@@ -2073,7 +2073,6 @@ bool mpColl_80045B74_LeftWall(CollData* coll)
 
 bool mpColl_80046224_LeftWall(CollData* coll)
 {
-    u8 _[4];
     u32 flags;
     Vec3 pos;
     Vec3 normal;
@@ -2081,7 +2080,7 @@ bool mpColl_80046224_LeftWall(CollData* coll)
     int* arr = mpColl_80458810.left;
     int i;
 
-    mpColl_804D6490_max_x = F32_MAX;
+    mpColl_804D6490_max_x = *(float*) &mpColl_804D7FA0;
     for (i = 0; i < mpColl_804D648C; arr++, i++) {
         float f30;
         float f29;
@@ -2092,7 +2091,6 @@ bool mpColl_80046224_LeftWall(CollData* coll)
         float f5;
         float f6;
         float f7;
-        int j;
         int wall_id;
         float x;
 
@@ -2169,22 +2167,23 @@ bool mpColl_80046224_LeftWall(CollData* coll)
         if (line_id != -1 && mpLib_80054ED8(line_id) &&
             (mpLineGetKind(line_id) & CollLine_Ceiling))
         {
+            int line_id2;
             Vec3 vec;
             mpLeftWallGetTop(wall_id, &vec);
             if (pos.y > vec.y) {
-                line_id = mpLinePrevNonCeiling(line_id);
-                if (line_id != -1 && mpLib_80054ED8(line_id) &&
+                line_id2 = mpLinePrevNonCeiling(line_id);
+                if (line_id2 != -1 && mpLib_80054ED8(line_id) &&
                     (mpLineGetKind(line_id) & CollLine_LeftWall))
                 {
                     Vec3 nrm;
                     PAD_STACK(0x44);
-                    mpLineGetNormal(line_id, &nrm);
+                    mpLineGetNormal(line_id2, &nrm);
                     x = (pos.y - vec.y) / -nrm.x * nrm.y + vec.x - pos.x -
                         0.5F;
                     if (mpColl_804D6490_max_x > coll->cur_pos.x + x) {
-                        u32 temp = mpLineGetFlags(line_id);
+                        u32 temp = mpLineGetFlags(line_id2);
                         mpColl_804D6490_max_x = coll->cur_pos.x + x;
-                        mpColl_804D6494_line_id = line_id;
+                        mpColl_804D6494_line_id = line_id2;
                         mpColl_804D6498_flags = temp;
                         mpColl_80458810.normal = nrm;
                     }
@@ -2201,30 +2200,34 @@ bool mpColl_80046224_LeftWall(CollData* coll)
         f30 = coll->cur_pos.y + f7;
         f29 = coll->cur_pos.y + f6;
         f28 = coll->cur_pos.y + f5;
-        for (j = wall_id; j != -1 && (mpLineGetKind(j) & LINE_FLAG_KIND) ==
-                                         CollLine_LeftWall;
-             j = mpLineGetPrev(j))
         {
-            mpLineGetV0Pos(j, &pos);
+            int line_id2;
+            for (line_id2 = wall_id;
+                 line_id2 != -1 && (mpLineGetKind(line_id2) &
+                                     LINE_FLAG_KIND) == CollLine_LeftWall;
+                 line_id2 = mpLineGetPrev(line_id2))
+            {
+                mpLineGetV0Pos(line_id2, &pos);
 
-            if (f28 <= pos.y && pos.y <= f29) {
-                x = f27 * (pos.y - f28) + coll->ecb.bottom.x;
-            } else if (f29 <= pos.y && pos.y <= f30) {
-                x = f26 * (pos.y - f30) + coll->ecb.top.x;
-            } else if (pos.y < f28) {
-                break;
-            } else {
-                continue;
-            }
+                if (f28 <= pos.y && pos.y <= f29) {
+                    x = f27 * (pos.y - f28) + coll->ecb.bottom.x;
+                } else if (f29 <= pos.y && pos.y <= f30) {
+                    x = f26 * (pos.y - f30) + coll->ecb.top.x;
+                } else if (pos.y < f28) {
+                    break;
+                } else {
+                    continue;
+                }
 
-            x = pos.x - x;
-            if (mpColl_804D6490_max_x > x) {
-                flags = mpLineGetFlags(j);
-                mpLineGetNormal(j, &normal);
-                mpColl_804D6490_max_x = x;
-                mpColl_804D6494_line_id = j;
-                mpColl_804D6498_flags = flags;
-                mpColl_80458810.normal = normal;
+                x = pos.x - x;
+                if (mpColl_804D6490_max_x > x) {
+                    flags = mpLineGetFlags(line_id2);
+                    mpLineGetNormal(line_id2, &normal);
+                    mpColl_804D6490_max_x = x;
+                    mpColl_804D6494_line_id = line_id2;
+                    mpColl_804D6498_flags = flags;
+                    mpColl_80458810.normal = normal;
+                }
             }
         }
 

@@ -191,9 +191,19 @@ static inline int lbSnap_GetTiledYOff(int tile_column, int y)
     return (((y / 4) + tile_column) << 5) + ((y % 4) * 2);
 }
 
+static inline u8* lbSnap_GetMemSnapIconData(void)
+{
+    return (u8*) lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[0];
+}
+
+static inline int lbSnap_GetTiledColumn(int x)
+{
+    return (x / 4) * 24;
+}
+
 void lbSnap_8001DA5C(int arg0)
 {
-    u8* dst = (u8*) lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[0];
+    u8* dst = lbSnap_GetMemSnapIconData();
     int dst_x;
     int ctr;
     PAD_STACK(8);
@@ -201,7 +211,7 @@ void lbSnap_8001DA5C(int arg0)
     for (dst_x = 0; dst_x < 32; dst_x++) {
         int src_x = (dst_x * 204 / 32) + 138;
         u8* dst_col = dst + ((dst_x % 4) * 8);
-        int tile_column = (dst_x / 4) * 24;
+        int tile_column = lbSnap_GetTiledColumn(dst_x);
         int dst_y = 0;
         int src_y_accum = 0;
         u16 pixel;

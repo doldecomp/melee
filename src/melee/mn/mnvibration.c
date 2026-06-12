@@ -813,16 +813,25 @@ void fn_802487A8(HSD_GObj* gobj)
     } while ((s32) var_r23 < 4);
 }
 
+static inline f32 mnVibration_GetCursorYSpacing(f32 base_y, HSD_JObj* jobj)
+{
+    return mnVibration_JObjGetTranslationY(jobj) - base_y;
+}
+
 void fn_80248A78(HSD_GObj* arg0)
 {
     MnVibrationData* temp_r30;
     f32 frame;
+    HSD_JObj* cursor_jobj;
+    HSD_GObj* cursor_gobj;
+    MnVibrationAssets* assets;
+    MnVibrationData* data2;
+    MnVibrationData* data3;
+    HSD_JObj* loaded_joint;
     HSD_JObj* jobj;
     HSD_JObj* jobj2;
     HSD_JObj* jobj3;
     HSD_JObj* jobj4;
-    HSD_GObj* cursor_gobj;
-    HSD_JObj* cursor_jobj;
     HSD_JObj* jobj17;
     HSD_JObj* jobj18;
     f32 base_y;
@@ -834,8 +843,11 @@ void fn_80248A78(HSD_GObj* arg0)
     PAD_STACK(64);
 
     temp_r30 = arg0->user_data;
-    frame = mn_8022ED6C(temp_r30->jobjs[1],
-                        (AnimLoopSettings*) &mnVibration_803EECE0);
+    {
+        HSD_JObj* temp_jobj = temp_r30->jobjs[1];
+        frame = mn_8022ED6C(temp_jobj,
+                            (AnimLoopSettings*) &mnVibration_803EECE0);
+    }
     if (frame == 10.0f) {
         jobj = ((MnVibrationData*) arg0->user_data)->jobjs[23];
         if (jobj == NULL) {
@@ -923,10 +935,6 @@ void fn_80248A78(HSD_GObj* arg0)
         }
     } else if (frame == 14.0f) {
         if (GetNameCount() != 0) {
-            MnVibrationData* data2;
-            MnVibrationData* data3;
-            MnVibrationAssets* assets;
-            HSD_JObj* loaded_joint;
             mnVibration_80248644(arg0);
             assets = &mnVibration_804A0868;
             data2 = arg0->user_data;
@@ -945,7 +953,7 @@ void fn_80248A78(HSD_GObj* arg0)
             base_y = mnVibration_JObjGetTranslationY(jobj17);
             jobj18 = data3->jobjs[18];
             jobj17 = data3->jobjs[17];
-            spacing = mnVibration_JObjGetTranslationY(jobj18) - base_y;
+            spacing = mnVibration_GetCursorYSpacing(base_y, jobj18);
             temp_x = mnVibration_JObjGetTranslationX(jobj17);
             mnVibration_JObjSetTranslateX(cursor_jobj, temp_x);
             jobj17 = data3->jobjs[17];

@@ -59,7 +59,6 @@ void ftMaterial_800BF2B8(HSD_MObj* mobj, u32 rendermode)
     HSD_PEDesc pe;
     HSD_TObj** cur_tobj;
     HSD_TExp* texp1;
-    u32 mobj_rendermode;
     HSD_PEDesc* pe_p;
     u32 unused;
 
@@ -82,24 +81,24 @@ void ftMaterial_800BF2B8(HSD_MObj* mobj, u32 rendermode)
     HSD_StateInitTev();
 
     {
-        mobj_rendermode = mobj->rendermode;
+        rendermode = mobj->rendermode;
         HSD_SetMaterialColor(mobj->mat->ambient, mobj->mat->diffuse,
                              mobj->mat->specular, mobj->mat->alpha);
-        if (mobj_rendermode & RENDER_SPECULAR) {
+        if (rendermode & RENDER_SPECULAR) {
             HSD_SetMaterialShininess(mobj->mat->shininess);
         }
         {
             cur_tobj = NULL;
             {
                 tobj = mobj->tobj;
-                if (mobj_rendermode & RENDER_SHADOW && tobj_shadows != NULL) {
+                if (rendermode & RENDER_SHADOW && tobj_shadows != NULL) {
                     cur_tobj = &tobj;
                     while (*cur_tobj != NULL) {
                         cur_tobj = &(*cur_tobj)->next;
                     }
                     *cur_tobj = tobj_shadows;
                 }
-                if ((mobj_rendermode & RENDER_TOON) && tobj_toon != NULL &&
+                if ((rendermode & RENDER_TOON) && tobj_toon != NULL &&
                     tobj_toon->imagedesc != NULL)
                 {
                     tobj_toon->next = tobj;
@@ -107,16 +106,18 @@ void ftMaterial_800BF2B8(HSD_MObj* mobj, u32 rendermode)
                 }
                 HSD_TObjSetup(tobj);
                 HSD_TObjSetupTextureCoordGen(tobj);
-                HSD_MOBJ_METHOD(mobj)->setup_tev(mobj, tobj, mobj_rendermode);
+                HSD_MOBJ_METHOD(mobj)->setup_tev(mobj, tobj, rendermode);
             }
             if (fp->x61D != 0xFF) {
-                mobj_rendermode |= RENDER_NO_ZUPDATE | RENDER_XLU;
+                rendermode |= RENDER_NO_ZUPDATE | RENDER_XLU;
             }
             {
-                texp1 = ftMaterial_800BF534(fp, mobj, &texp, rendermode);
+                HSD_TExp* new_texp =
+                    ftMaterial_800BF534(fp, mobj, &texp, rendermode);
+                texp1 = new_texp;
                 ftMaterial_800BF6BC(fp, mobj, texp1);
                 if (fp->x2223_b2 && !fp->x2223_b3) {
-                    mobj_rendermode |= RENDER_NO_ZUPDATE;
+                    rendermode |= RENDER_NO_ZUPDATE;
                 }
                 {
                     if (fp->x2223_b3 && fp->x61D == 0xFF) {
@@ -136,7 +137,7 @@ void ftMaterial_800BF2B8(HSD_MObj* mobj, u32 rendermode)
                     } else {
                         pe_p = mobj->pe;
                     }
-                    HSD_SetupRenderModeWithCustomPE(mobj_rendermode, pe_p);
+                    HSD_SetupRenderModeWithCustomPE(rendermode, pe_p);
                 }
                 if (texp1 == NULL) {
                     ftCo_8009F75C(fp, true);

@@ -474,18 +474,17 @@ void ftCo_80095D5C(Fighter* fp, Vec3* arg1)
     float angle;
     void* array_element;
     u32 cmd_var0 = fp->cmd_vars[0];
-    float vel_mul = 1;
-    ftCo_DatAttrs* co_attrs = &fp->co_attrs;
+
+    vel = 1;
     if (cmd_var0 != 0) {
-        vel_mul = 0.01f * ((cmd_var0 >> 12) & 0x3FF);
+        vel = 0.01f * ((cmd_var0 >> 12) & 0x3FF);
     }
     array_element = Fighter_804D6550 + (fp->motion_id * 3);
-    vel = vel_mul * (co_attrs->item_throw_velocity_multiplier *
-                     M2C_FIELD(array_element, float*, -0x468));
+    vel *= fp->co_attrs.item_throw_velocity_multiplier *
+           M2C_FIELD(array_element, float*, -0x468);
     if (cmd_var0 != 0) {
-        u32 s16_var1 = ((s16*) &fp->cmd_vars)[1];
-        int int_angle = s16_var1 << 20;
-        int_angle = int_angle >> 20;
+        s16 s16_var1 = ((s16*) &fp->cmd_vars)[1];
+        int int_angle = (s16_var1 << 20) >> 20;
         if (int_angle == 361) {
             angle = M2C_FIELD(array_element, float*, -0x464);
         } else {

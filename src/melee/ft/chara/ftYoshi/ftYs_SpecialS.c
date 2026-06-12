@@ -571,6 +571,7 @@ void ftYs_SpecialAirSEnd_Anim(Fighter_GObj* gobj)
     if (fp->cmd_vars[1] == 1) {
         fp->cmd_vars[1]++;
         lb_8000B1CC(fp->parts[4].joint, NULL, &sp2C);
+        (void) (fp != NULL);
         efSync_Spawn(0x4CF, gobj, &sp2C, &fp->co_attrs.xBC);
     }
 

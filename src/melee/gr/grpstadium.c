@@ -2184,7 +2184,9 @@ void grStadium_801D4548(Ground_GObj* gobj)
         temp_r31->u.stadium.xDC = 3;
         return;
     case 3:
-        if (++temp_r31->u.stadium.xD8 > yaku->x10) {
+        temp_r4_4 = temp_r31->u.stadium.xD8;
+        temp_r31->u.stadium.xD8 = temp_r4_4 + 1;
+        if (temp_r4_4 > yaku->x10) {
             temp_r6 = GET_GROUND(temp_r31->u.stadium.xE4);
             temp_r6->u.stadium.xC4_b1 = true;
             temp_r31->u.stadium.xDC = 4;
@@ -2195,9 +2197,12 @@ void grStadium_801D4548(Ground_GObj* gobj)
         }
         break;
     case 4:
-        temp_r27_2 = GET_JOBJ(temp_r31->u.stadium.xE4);
-        temp_f29 = -((temp_f31 * (0.95f / yaku->x14)) -
-                     HSD_JObjGetScaleY(temp_r27_2));
+        {
+            HSD_JObj* jobj = GET_JOBJ(temp_r31->u.stadium.xE4);
+            temp_r27_2 = jobj;
+        }
+        temp_f29 = HSD_JObjGetScaleY(temp_r27_2);
+        temp_f29 -= temp_f31 * (0.95f / yaku->x14);
         temp_f30 = 0.05f * temp_f31;
         if (temp_f29 > temp_f30) {
             HSD_JObjSetScaleY(temp_r27_2, temp_f29);
@@ -2208,7 +2213,10 @@ void grStadium_801D4548(Ground_GObj* gobj)
             if (temp_r4_4 > yaku->x18) {
                 grAnime_801C7A04(temp_r31->u.stadium.xE4, 0, 7, 0.0f);
                 temp_r3_7 = grStadium_801D10F8(temp_r31->u.stadium.xDE);
-                temp_r27_3 = GET_JOBJ(temp_r3_7);
+                {
+                    HSD_JObj* jobj = GET_JOBJ(temp_r3_7);
+                    temp_r27_3 = jobj;
+                }
                 HSD_JObjSetScaleY(temp_r27_3, temp_f30);
                 HSD_JObjSetTranslateY(temp_r27_3, -10.0F);
                 temp_r31->u.stadium.xE8 = temp_r3_7;
@@ -2222,7 +2230,8 @@ void grStadium_801D4548(Ground_GObj* gobj)
         Camera_80030E44(1, NULL);
         return;
     case 5:
-        temp_r0_3 = ++temp_r31->u.stadium.xD8;
+        temp_r31->u.stadium.xD8++;
+        temp_r0_3 = temp_r31->u.stadium.xD8;
         if (temp_r0_3 <= yaku->x14) {
             float tmp;
             temp_r30 = temp_r31->u.stadium.xE8->hsd_obj;
@@ -2237,7 +2246,10 @@ void grStadium_801D4548(Ground_GObj* gobj)
                 var_f29 = 0.0f;
             }
             HSD_JObjSetTranslateY(temp_r30, var_f29);
-            temp_r5_2 = yaku->x14;
+            {
+                s32 duration = yaku->x14;
+                temp_r5_2 = duration;
+            }
             temp_r3_8 = temp_r31->u.stadium.xD8;
             temp_r27_4 = temp_r31->u.stadium.xE4->hsd_obj;
             temp_r0_5 = temp_r5_2 / 2;
@@ -2250,7 +2262,10 @@ void grStadium_801D4548(Ground_GObj* gobj)
             }
             HSD_JObjSetTranslateY(temp_r27_4, var_f30);
         } else {
-            temp_r27_5 = temp_r31->u.stadium.xE8->hsd_obj;
+            {
+                HSD_JObj* jobj = temp_r31->u.stadium.xE8->hsd_obj;
+                temp_r27_5 = jobj;
+            }
             HSD_JObjSetScaleY(temp_r27_5, temp_f31);
             HSD_JObjSetTranslateY(temp_r27_5, 0.0F);
             temp_r31->u.stadium.xDC = 6;

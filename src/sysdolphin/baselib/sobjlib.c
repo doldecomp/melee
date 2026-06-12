@@ -325,8 +325,12 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
         }
     }
 
-    if ((u8) (tex_fmt - GX_TF_C4) <= 1U) {
-        GXLoadTlut(&sobj->x70_tlutobj, GX_TLUT0);
+    {
+        bool is_ci_texture = (u8) (tex_fmt - GX_TF_C4) <= 1U;
+
+        if (is_ci_texture) {
+            GXLoadTlut(&sobj->x70_tlutobj, GX_TLUT0);
+        }
     }
     if (!(sobj->x40 & 0x10)) {
         GXLoadTexObj(&sobj->x50_texobj, GX_TEXMAP0);

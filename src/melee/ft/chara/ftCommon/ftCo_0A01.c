@@ -1724,7 +1724,7 @@ static inline bool ftCo_IsAlly_dontinline(Fighter* fp0, Fighter* fp1)
 bool ftCo_800A3908(Fighter* fp, bool arg1)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
-    mp_UnkStruct0* island;
+    s32 t;
     Vec3 sp58;
     Vec3 sp64;
     Vec3 sp38;
@@ -1743,7 +1743,7 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
     f32 ddy;
     f32 land_y;
     s32 frames;
-    s32 t;
+    mp_UnkStruct0* island;
     s32 result;
     s32 valid;
     s32 ok;
@@ -1769,13 +1769,11 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
         ex = island_pos.x;
         ey = island_pos.y;
         ez = island_pos.z;
-        if (ex < data->half_width + Stage_GetBlastZoneLeftOffset() ||
+        if (ex < fp->x1A88.half_width + Stage_GetBlastZoneLeftOffset() ||
             ex > Stage_GetBlastZoneRightOffset() - data->half_width ||
-            ey < data->half_height + Stage_GetBlastZoneBottomOffset())
+            ey < data->half_height + Stage_GetBlastZoneBottomOffset() ||
+            ey > Stage_GetBlastZoneTopOffset() - data->half_height)
         {
-            continue;
-        }
-        if (ey > Stage_GetBlastZoneTopOffset() - data->half_height) {
             ok = 1;
         } else {
             ok = 0;
@@ -1806,15 +1804,19 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
                     line_id = -1;
                     valid = 0;
                     px = ex - 5.0;
-                    result = mpCheckFloor(px, 5.0f + ey, px, ey - 5.0f, 0.0f,
-                                          &sp58, &line_id, &flags, &sp64, -1,
-                                          -1, -1, NULL, NULL);
+                    {
+                        s32 floor_result =
+                            mpCheckFloor(px, 5.0f + ey, px, ey - 5.0f, 0.0f,
+                                         &sp58, &line_id, &flags, &sp64, -1,
+                                         -1, -1, NULL, NULL);
+                        result = floor_result;
+                    }
                     if (result != 0 && ftCo_800A1B38_noinline(line_id) != 0) {
                     } else {
                         valid = result;
                     }
                     if (valid != 0) {
-                        if (px < data->half_width +
+                        if (px < fp->x1A88.half_width +
                                      Stage_GetBlastZoneLeftOffset() ||
                             px > Stage_GetBlastZoneRightOffset() -
                                      data->half_width ||
@@ -1862,7 +1864,7 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
                     valid = result;
                 }
                 if (valid != 0) {
-                    if (px < data->half_width +
+                    if (px < fp->x1A88.half_width +
                                  Stage_GetBlastZoneLeftOffset() ||
                         px > Stage_GetBlastZoneRightOffset() -
                                  data->half_width ||
@@ -1905,7 +1907,7 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
 bool ftCo_800A4038(Fighter* fp, bool arg1)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
-    mp_UnkStruct0* island;
+    s32 t;
     Vec3 sp58;
     Vec3 sp64;
     Vec3 sp38;
@@ -1924,10 +1926,13 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
     f32 ddy;
     f32 land_y;
     s32 frames;
-    s32 t;
+    mp_UnkStruct0* island;
     s32 result;
     s32 valid;
     s32 ok;
+    s32 oob;
+
+    PAD_STACK(0x10);
 
     grav = fp->co_attrs.grav;
     if (grav < 0.00001f && grav > -0.00001f) {
@@ -1947,13 +1952,11 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
         ex = island_pos.x;
         ey = island_pos.y;
         ez = island_pos.z;
-        if (ex < data->half_width + Stage_GetBlastZoneLeftOffset() ||
+        if (ex < fp->x1A88.half_width + Stage_GetBlastZoneLeftOffset() ||
             ex > Stage_GetBlastZoneRightOffset() - data->half_width ||
-            ey < data->half_height + Stage_GetBlastZoneBottomOffset())
+            ey < data->half_height + Stage_GetBlastZoneBottomOffset() ||
+            ey > Stage_GetBlastZoneTopOffset() - data->half_height)
         {
-            continue;
-        }
-        if (ey > Stage_GetBlastZoneTopOffset() - data->half_height) {
             ok = 1;
         } else {
             ok = 0;
@@ -1971,12 +1974,12 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
                 land_y = fp->pos_delta.y * t + fp->cur_pos.y;
             } else if (t < frames) {
                 land_y = fp->cur_pos.y +
-                         -(0.5 * (fp->co_attrs.grav * sqrtf((f32) t)) -
-                           fp->pos_delta.y * t);
+                         (fp->pos_delta.y * t -
+                          0.5 * (fp->co_attrs.grav * sqrtf((f32) t)));
             } else {
                 land_y = fp->cur_pos.y +
-                         (-(0.5 * (fp->co_attrs.grav * sqrtf((f32) frames)) -
-                            fp->pos_delta.y * frames) -
+                         ((fp->pos_delta.y * frames -
+                           0.5 * (fp->co_attrs.grav * sqrtf((f32) frames))) -
                           (f32) (t - frames) * fp->co_attrs.terminal_vel);
             }
             if (arg1 != 0) {
@@ -1984,15 +1987,19 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
                     line_id = -1;
                     valid = 0;
                     px = 5.0 + ex;
-                    result = mpCheckFloor(px, 5.0f + ey, px, ey - 5.0f, 0.0f,
-                                          &sp58, &line_id, &flags, &sp64, -1,
-                                          -1, -1, NULL, NULL);
+                    {
+                        s32 floor_result =
+                            mpCheckFloor(px, 5.0f + ey, px, ey - 5.0f, 0.0f,
+                                         &sp58, &line_id, &flags, &sp64, -1,
+                                         -1, -1, NULL, NULL);
+                        result = floor_result;
+                    }
                     if (result != 0 && ftCo_800A1B38_noinline(line_id) != 0) {
                     } else {
                         valid = result;
                     }
                     if (valid != 0) {
-                        if (px < data->half_width +
+                        if (px < fp->x1A88.half_width +
                                      Stage_GetBlastZoneLeftOffset() ||
                             px > Stage_GetBlastZoneRightOffset() -
                                      data->half_width ||
@@ -2001,9 +2008,14 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
                             ey > Stage_GetBlastZoneTopOffset() -
                                      data->half_height)
                         {
-                            ok = 0;
+                            oob = 1;
                         } else {
+                            oob = 0;
+                        }
+                        if (oob == 0) {
                             ok = 1;
+                        } else {
+                            ok = 0;
                         }
                     } else {
                         ok = 0;
@@ -2035,7 +2047,7 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
                     valid = result;
                 }
                 if (valid != 0) {
-                    if (px < data->half_width +
+                    if (px < fp->x1A88.half_width +
                                  Stage_GetBlastZoneLeftOffset() ||
                         px > Stage_GetBlastZoneRightOffset() -
                                  data->half_width ||
@@ -2043,9 +2055,14 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
                                  Stage_GetBlastZoneBottomOffset() ||
                         ey > Stage_GetBlastZoneTopOffset() - data->half_height)
                     {
-                        ok = 0;
+                        oob = 1;
                     } else {
+                        oob = 0;
+                    }
+                    if (oob == 0) {
                         ok = 1;
+                    } else {
+                        ok = 0;
                     }
                 } else {
                     ok = 0;
@@ -2253,11 +2270,14 @@ static inline f32 ftCo_800A4BEC_inline0(Fighter* fp, Fighter* arg1)
     return sqrtf(dx * dx + dy * dy);
 }
 
+static const f32 ftCo_804D8914 = 120.0f;
+
 Fighter* ftCo_800A4BEC(Fighter* fp)
 {
-    HSD_GObj* cur;
     Fighter* cur_fp;
     Fighter* closest;
+    HSD_GObj* cur;
+    struct Fighter_x1A88_t* data = &fp->x1A88;
     f32 best;
     f32 dx;
     f32 dy;
@@ -2273,8 +2293,8 @@ Fighter* ftCo_800A4BEC(Fighter* fp)
             if (!inlineD0(fp, cur_fp) && !ftCo_IsAlly_dontinline(fp, cur_fp)) {
                 if (!ftCo_800A4E8C_inline0(cur_fp)) {
                     if (!inlineD1(cur_fp)) {
-                        if (fp->x1A88.xF9_b0) {
-                            if (cur_fp == fp->x1A88.x48) {
+                        if (data->xF9_b0) {
+                            if (cur_fp == data->x48) {
                                 return cur_fp;
                             }
                         } else if (closest == NULL) {
@@ -2294,11 +2314,12 @@ Fighter* ftCo_800A4BEC(Fighter* fp)
         }
     }
     if (closest == NULL) {
-        fp->x1A88.xF9_b0 = false;
+        data->xF9_b0 = false;
     } else {
-        fp->x1A88.xF9_b0 = true;
-        fp->x1A88.x30 = 120.0f * (0.5f * (0.5f * HSD_Randf()));
-        fp->x1A88.x48 = closest;
+        data->xF9_b0 = true;
+        dist = HSD_Randf();
+        data->x30 = *(f32 const*) &ftCo_804D8914 * (0.5f * (0.5f * dist));
+        data->x48 = closest;
     }
     return closest;
 }
@@ -2880,10 +2901,10 @@ static inline f32 ftCo_800A648C_inline0(Fighter* fp, Item* ip)
 
 Item* ftCo_800A61D8(Fighter* fp)
 {
-    struct Fighter_x1A88_t* data;
-    HSD_GObj* cur;
-    Item* closest;
     Item* ip;
+    Item* closest;
+    HSD_GObj* cur;
+    struct Fighter_x1A88_t* data;
     f32 best;
     f32 dist;
 
@@ -4321,7 +4342,7 @@ static inline float ftCo_800A9904_inline0(Fighter* fp)
 
 void ftCo_800A9904(Fighter* fp)
 {
-    struct Fighter_x1A88_t* temp_r31 = &fp->x1A88;
+    u32 sp38;
 
     f32 var_f0;
     f32 temp_f3;
@@ -4330,8 +4351,8 @@ void ftCo_800A9904(Fighter* fp)
 
     Vec3 sp4C;
     Vec3 sp40;
+    struct Fighter_x1A88_t* temp_r31 = &fp->x1A88;
     int sp3C;
-    u32 sp38;
 
     PAD_STACK(0x24);
 
@@ -4393,10 +4414,40 @@ void ftCo_800A9904(Fighter* fp)
     }
 }
 
+extern const f32 ftCo_804D87D8;
+extern const f32 ftCo_804D8808;
+extern const f64 ftCo_804D8828;
+extern const f64 ftCo_804D8830;
+extern const f32 ftCo_804D8838;
+extern const f32 ftCo_804D8870;
+extern const f32 ftCo_804D8874;
+extern const f64 ftCo_804D8898;
+extern const f32 ftCo_804D88A8;
+extern const f32 ftCo_804D8918;
+extern const f64 ftCo_804D88C0;
+
+static const f32 ftCo_804D894C = -150.0f;
+static const f32 ftCo_804D8950 = -90.0f;
+
+static inline bool ftCo_800A9CB4_is_small(f32 x)
+{
+    if (x < *(volatile f32 const*) &ftCo_804D8870 &&
+        x > *(volatile f32 const*) &ftCo_804D8874)
+    {
+        return true;
+    }
+    return false;
+}
+
+#define FTCO_800A9CB4_ABS(x) \
+    ((x) < *(volatile f32 const*) &ftCo_804D87D8 ? -(x) : (x))
+
 static inline enum_t ftCo_800A9CB4_inline0(Fighter* fp)
 {
     if (stage_info.internal_stage_id == SHRINE) {
-        if (fp->cur_pos.x > -150.0f && fp->cur_pos.x < -90.0f) {
+        if (fp->cur_pos.x > *(f32 const*) &ftCo_804D894C &&
+            fp->cur_pos.x < *(f32 const*) &ftCo_804D8950)
+        {
             return 1;
         }
     } else if (stage_info.internal_stage_id == FOURSIDE) {
@@ -4405,18 +4456,17 @@ static inline enum_t ftCo_800A9CB4_inline0(Fighter* fp)
     return 0;
 }
 
-static inline bool ftCo_800A9CB4_inline1(Fighter* fp)
+static inline bool ftCo_800A9CB4_inline1(Fighter* fp, Vec3* sp3C)
 {
-    Vec3 sp3C;
     if (fp->x1A88.xFA_b6) {
         return false;
     }
-    if (fp->x34_scale.y < 1.0f) {
+    if (fp->x34_scale.y < ftCo_804D8808) {
         return true;
     }
     if (stage_info.internal_stage_id == ICEMTN) {
-        grLib_801C9E60(&sp3C);
-        if (sp3C.y < 0.0) {
+        grLib_801C9E60(sp3C);
+        if (sp3C->y < ftCo_804D8828) {
             return true;
         }
     } else if (stage_info.internal_stage_id == RCRUISE) {
@@ -4427,19 +4477,29 @@ static inline bool ftCo_800A9CB4_inline1(Fighter* fp)
 
 void ftCo_800A9CB4(Fighter* fp)
 {
+    u8 _[0x38];
+    Vec3 sp3C;
+    f32 sp38;
+    volatile f32 sp34;
+    volatile f32 sp30;
+    f32 sp38_b;
     struct Fighter_x1A88_t* temp_r31 = &fp->x1A88;
 
+    f32* temp_r3;
     f32 temp_f1;
+    f32 temp_f3;
     f32 dx;
     f32 var_f0;
     f32 var_f1_2;
     f32 var_f2;
+    f32 var_f3;
+    f32 var_f4;
     f32 var_f5;
 
     enum_t var_r0_2;
     int var_r0_6;
 
-    PAD_STACK(0x58);
+    PAD_STACK(0x18);
 
     if (ftCo_800A1CA8(fp)) {
         ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
@@ -4456,8 +4516,10 @@ void ftCo_800A9CB4(Fighter* fp)
                 ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
                 ftCo_800B463C(fp, CpuCmd_ReleaseY);
                 ftCo_800B463C(fp, CpuCmd_Done);
-            } else if (fp->kind == FTKIND_YOSHI && fp->x34_scale.y < 1.0 &&
-                       ABS(temp_r31->x54.x - fp->cur_pos.x) < 20.0f)
+            } else if (fp->kind == FTKIND_YOSHI &&
+                       fp->x34_scale.y < ftCo_804D8898 &&
+                       FTCO_800A9CB4_ABS(temp_r31->x54.x - fp->cur_pos.x) <
+                           ftCo_804D8918)
             {
                 ftCo_800A0508_dontinline(fp);
             } else {
@@ -4494,7 +4556,7 @@ void ftCo_800A9CB4(Fighter* fp)
             }
             return;
         }
-        if (ftCo_800A9CB4_inline1(fp)) {
+        if (ftCo_800A9CB4_inline1(fp, &sp3C)) {
             ftCo_800A96B8(fp);
             return;
         }
@@ -4506,33 +4568,61 @@ void ftCo_800A9CB4(Fighter* fp)
         return;
     }
     dx = temp_r31->x54.x - fp->cur_pos.x;
-    var_f1_2 = ABS(dx);
-    if (!is_small(fp->pos_delta.x)) {
+    var_f1_2 = FTCO_800A9CB4_ABS(dx);
+    if (!ftCo_800A9CB4_is_small(fp->pos_delta.x)) {
         var_f0 = dx / fp->pos_delta.x;
-    } else if (var_f1_2 > 0.0) {
-        var_f0 = -1.0F;
+    } else if (var_f1_2 > ftCo_804D8828) {
+        var_f0 = ftCo_804D88A8;
     } else {
-        var_f0 = 0.0F;
+        var_f0 = ftCo_804D87D8;
     }
-    if (is_small(fp->co_attrs.grav)) {
-        var_f5 = 1000.0F;
+    temp_f3 = *(temp_r3 = &fp->co_attrs.grav);
+    if (ftCo_800A9CB4_is_small(temp_f3)) {
+        var_f5 = ftCo_804D8838;
     } else {
-        var_f5 = -(-fp->co_attrs.terminal_vel - fp->pos_delta.y) /
-                 fp->co_attrs.grav;
+        var_f5 = -(-fp->co_attrs.terminal_vel - fp->pos_delta.y) / temp_f3;
     }
-    if (var_f5 <= 0.0F) {
+    if (var_f5 <= ftCo_804D87D8) {
         var_f2 = (fp->pos_delta.y * var_f0) + fp->cur_pos.y;
     } else if (var_f0 < var_f5) {
+        if (var_f0 > ftCo_804D87D8) {
+            double guess = __frsqrte((double) var_f0);
+            guess = ftCo_804D8830 * guess *
+                    (ftCo_804D88C0 - guess * guess * var_f0);
+            guess = ftCo_804D8830 * guess *
+                    (ftCo_804D88C0 - guess * guess * var_f0);
+            guess = ftCo_804D8830 * guess *
+                    (ftCo_804D88C0 - guess * guess * var_f0);
+            sp34 = (float) (var_f0 * guess);
+            var_f3 = sp34;
+        } else {
+            var_f3 = var_f0;
+        }
         var_f2 = fp->cur_pos.y +
                  (fp->pos_delta.y * var_f0 -
-                  0.5 * (fp->co_attrs.grav * sqrtf(var_f0)));
+                  ftCo_804D8830 * (*temp_r3 * var_f3));
     } else {
+        if (var_f5 > ftCo_804D87D8) {
+            double guess = __frsqrte((double) var_f5);
+            guess = ftCo_804D8830 * guess *
+                    (ftCo_804D88C0 - guess * guess * var_f5);
+            guess = ftCo_804D8830 * guess *
+                    (ftCo_804D88C0 - guess * guess * var_f5);
+            guess = ftCo_804D8830 * guess *
+                    (ftCo_804D88C0 - guess * guess * var_f5);
+            sp30 = (float) (var_f5 * guess);
+            var_f4 = sp30;
+        } else {
+            var_f4 = var_f5;
+        }
+        var_f3 = *temp_r3;
+        var_f1_2 = var_f0 - var_f5;
         var_f2 = fp->cur_pos.y +
                  (fp->pos_delta.y * var_f5 -
-                  0.5 * (fp->co_attrs.grav * sqrtf(var_f5)) -
-                  ((var_f0 - var_f5) * fp->co_attrs.terminal_vel));
+                  ftCo_804D8830 * (var_f3 * var_f4) -
+                  (var_f1_2 * fp->co_attrs.terminal_vel));
     }
-    if (var_f0 < 0.0) {
+    if (var_f0 < ftCo_804D8828) {
         ftCo_800B46B8(fp, CpuCmd_LstickXTowardDestination, 0x7F);
     } else {
         if (var_f2 < temp_r31->x54.y) {
@@ -4549,6 +4639,8 @@ void ftCo_800A9CB4(Fighter* fp)
     ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
     ftCo_800B463C(fp, CpuCmd_Done);
 }
+
+#undef FTCO_800A9CB4_ABS
 
 /**
  * Determine how much to move the stick based on CPU level
@@ -5420,6 +5512,22 @@ void ftCo_800AC434(Fighter* fp)
     }
 }
 
+/* 4D87D8 */ extern const f32 ftCo_804D87D8;
+/* 4D8808 */ extern const f32 ftCo_804D8808;
+/* 4D8830 */ extern const f64 ftCo_804D8830;
+/* 4D8870 */ extern const f32 ftCo_804D8870;
+/* 4D8874 */ extern const f32 ftCo_804D8874;
+/* 4D888C */ extern const f32 ftCo_804D888C;
+/* 4D88C0 */ extern const f64 ftCo_804D88C0;
+
+static inline bool ftCo_800AC5A0_is_small(float x)
+{
+    if (x < ftCo_804D8870 && x > ftCo_804D8874) {
+        return true;
+    }
+    return false;
+}
+
 void ftCo_800AC5A0(Fighter* fp)
 {
     struct Fighter_x1A88_t* data;
@@ -5442,16 +5550,29 @@ void ftCo_800AC5A0(Fighter* fp)
     if (var_r0) {
         float kb_x = fp->x8c_kb_vel.x;
         float kb_y = fp->x8c_kb_vel.y;
-        float kb_mag = sqrtf(kb_x * kb_x + kb_y * kb_y);
-        if (!is_small(kb_mag)) {
-            float x = kb_x * (1.0F / kb_mag);
-            float y = kb_y * (1.0F / kb_mag);
-            if (kb_x > 0.0F) {
-                stick_y = 127.0F * -y;
-                stick_x = 127.0F * +x;
+        float kb_mag;
+        kb_mag = kb_x * kb_x + (kb_mag = kb_y * kb_y);
+        if (kb_mag > ftCo_804D87D8) {
+            volatile float y;
+            double guess = __frsqrte((double) kb_mag);
+            guess = ftCo_804D8830 * guess *
+                    (ftCo_804D88C0 - guess * guess * kb_mag);
+            guess = ftCo_804D8830 * guess *
+                    (ftCo_804D88C0 - guess * guess * kb_mag);
+            guess = ftCo_804D8830 * guess *
+                    (ftCo_804D88C0 - guess * guess * kb_mag);
+            y = (float) (kb_mag * guess);
+            kb_mag = y;
+        }
+        if (!ftCo_800AC5A0_is_small(kb_mag)) {
+            float x = kb_x * (ftCo_804D8808 / kb_mag);
+            float y = kb_y * (ftCo_804D8808 / kb_mag);
+            if (kb_x > ftCo_804D87D8) {
+                stick_y = ftCo_804D888C * -y;
+                stick_x = ftCo_804D888C * +x;
             } else {
-                stick_y = 127.0F * +y;
-                stick_x = 127.0F * -x;
+                stick_y = ftCo_804D888C * +y;
+                stick_x = ftCo_804D888C * -x;
             }
         }
         ftCo_800B46B8(fp, CpuCmd_SetLstickX, stick_y);
@@ -6690,6 +6811,7 @@ void ftCo_800AF290(Fighter* fp)
     struct Fighter_x1A88_t* data2;
     struct Fighter_x1A88_t* temp_r27;
     Vec3 sp54;
+    u8 _[0x18];
     Vec3 sp30;
     s32 cmd;
     Fighter* target;
@@ -6703,7 +6825,7 @@ void ftCo_800AF290(Fighter* fp)
     f32 dy;
     f32 dist;
     struct Fighter_x1A88_t* data = &fp->x1A88;
-    PAD_STACK(0x30);
+    PAD_STACK(0x14);
 
     cmd = ftCo_800A229C(fp, &sp54);
     if (cmd != 0) {
@@ -6790,22 +6912,22 @@ void ftCo_800AF290(Fighter* fp)
     if (ftCo_800A1C44_dontinline(fp)) {
         data2->xF8_b6 = false;
     } else {
-        target = data->x44;
+        target = data2->x44;
         if (target != NULL && fp->ground_or_air == GA_Ground) {
             if (ftCo_800A1AB4(fp, target) < Fighter_804D64FC->x20[fp->kind]) {
-                data->xF8_b6 = true;
+                data2->xF8_b6 = true;
             } else {
-                data->xF8_b6 = false;
+                data2->xF8_b6 = false;
             }
         } else {
-            data->xF8_b6 = false;
+            data2->xF8_b6 = false;
         }
     }
     target = data->x44;
     if (target != NULL) {
         dy = fp->cur_pos.y - target->cur_pos.y;
         dx = fp->cur_pos.x - target->cur_pos.x;
-        if (sqrtf__Ff(dx * dx + dy * dy) > data->x40) {
+        if (sqrtf__Ff(dy * dy + dx * dx) > data->x40) {
             ftCo_800AEA8C(fp);
             return;
         }
@@ -6814,10 +6936,10 @@ void ftCo_800AF290(Fighter* fp)
     if (data2->x18 != data2->x20 && data2->x18 != data2->x1C) {
         data2->x60 = 0;
     }
-    if (data->x18 == 4) {
+    if (data2->x18 == 4) {
         do_act = 0;
     } else {
-        data->xFA_b2 = false;
+        data2->xFA_b2 = false;
         do_act = 1;
     }
     if (do_act != 0) {
@@ -6895,13 +7017,13 @@ static inline void ftCo_800AF78C_inline0(Fighter* fp)
 void ftCo_800AF78C(Fighter* fp)
 {
     Vec3 sp4C;
-
-    Fighter** temp_r31;
-    struct Fighter_x1A88_t* temp_r30;
-    struct Fighter_x1A88_t* temp_r27;
+    u8 _[0x14];
+    Vec3 sp2C;
 
     Fighter* temp_r3_2;
     Fighter* temp_r4_2;
+    Item_GObj* item_gobj;
+    ItemKind kind;
     f32 temp_f2_2;
     f32 temp_f3;
     f32 var_f4;
@@ -6909,6 +7031,9 @@ void ftCo_800AF78C(Fighter* fp)
     s32 var_r0;
     s32 var_r0_2;
     s32 var_r0_3;
+    bool is_food;
+    Fighter** temp_r31;
+    struct Fighter_x1A88_t* temp_r30;
 
     PAD_STACK(8);
 
@@ -6957,7 +7082,7 @@ void ftCo_800AF78C(Fighter* fp)
         return;
     }
     temp_r30->xF8_b0 = true;
-    temp_r30->xF9_b2 = true;
+    temp_r30->xF9_b2 = (is_food = true);
     temp_r30->xF9_b4 = true;
     temp_r30->xF9_b3 = false;
     temp_r30->xF9_b5 = true;
@@ -6965,16 +7090,34 @@ void ftCo_800AF78C(Fighter* fp)
     temp_r30->xF9_b7 = true;
     temp_r30->xF9_b1 = false;
 
-    fp->x1A88.x44 = ftCo_800A4BEC(fp);
+    temp_r3_2 = ftCo_800A4BEC(fp);
     temp_r31 = &fp->x1A88.x44;
+    *temp_r31 = temp_r3_2;
 
-    temp_r27 = &fp->x1A88;
-    if (fp->item_gobj != NULL && !ftCo_800A5908(GET_ITEM(fp->item_gobj))) {
-        temp_r27->x4C = NULL;
-    } else if (fp->x2168 != 0) {
-        temp_r27->x4C = NULL;
+    item_gobj = fp->item_gobj;
+    if (item_gobj != NULL) {
+        kind = GET_ITEM(item_gobj)->kind;
+        if (kind == It_Kind_Heart) {
+            is_food = true;
+        } else if (kind == It_Kind_Tomato) {
+            is_food = true;
+        } else if (kind == It_Kind_Foods) {
+            is_food = true;
+        } else {
+            is_food = false;
+        }
+        if (is_food == false) {
+            temp_r30->x4C = NULL;
+        } else {
+            goto block_30;
+        }
     } else {
-        temp_r27->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
+    block_30:
+        if (fp->x2168 != 0) {
+            temp_r30->x4C = NULL;
+        } else {
+            temp_r30->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
+        }
     }
     fp->x1A88.x50 = ftCo_800A648C(fp);
 
@@ -6983,7 +7126,17 @@ void ftCo_800AF78C(Fighter* fp)
         if (temp_r30->x4C != NULL) {
             ftCo_800A866C(fp);
         } else {
-            ftCo_800A80E4(fp);
+            temp_r4_2 = *temp_r31;
+            if (temp_r4_2 != NULL && fp->ground_or_air != GA_Air) {
+                temp_f3 = fp->cur_pos.y - temp_r4_2->cur_pos.y;
+                temp_f2_2 = fp->cur_pos.x - temp_r4_2->cur_pos.x;
+                var_f4 = sqrtf(temp_f2_2 * temp_f2_2 + temp_f3 * temp_f3);
+                if (!(var_f4 > 50.0) &&
+                    ftCo_800A6700(fp, &temp_r4_2->cur_pos, &sp2C))
+                {
+                    ftCo_800A1F3C(fp, sp2C.x, sp2C.y, 5.0F);
+                }
+            }
         }
     }
     ftCo_800ADE48(fp);
@@ -7738,8 +7891,11 @@ void ftCo_800B1478(Fighter* fp)
     Fighter** temp_r27;
     Fighter* temp_r3;
     Fighter* var_r4;
+    s32 is_food;
+    Item_GObj* item_gobj;
+    ItemKind kind;
 
-    PAD_STACK(0x18);
+    PAD_STACK(0x20);
 
     temp_r31 = &fp->x1A88;
     temp_r3 = ftCo_800A5CE0(fp);
@@ -7765,7 +7921,7 @@ void ftCo_800B1478(Fighter* fp)
     }
 
     temp_r31->xF8_b0 = true;
-    temp_r31->xF9_b2 = true;
+    temp_r31->xF9_b2 = (is_food = true);
     temp_r31->xF9_b4 = true;
     temp_r31->xF9_b3 = true;
     temp_r31->xF9_b5 = true;
@@ -7774,9 +7930,25 @@ void ftCo_800B1478(Fighter* fp)
     temp_r31->xF9_b1 = false;
 
     *temp_r27 = ftCo_800A4BEC(fp);
-    if (fp->item_gobj != NULL && !ftCo_800A5908(GET_ITEM(fp->item_gobj))) {
-        temp_r31->x4C = NULL;
+    item_gobj = fp->item_gobj;
+    if (item_gobj != NULL) {
+        kind = GET_ITEM(item_gobj)->kind;
+        if (kind == It_Kind_Heart) {
+            is_food = true;
+        } else if (kind == It_Kind_Tomato) {
+            is_food = true;
+        } else if (kind == It_Kind_Foods) {
+            is_food = true;
+        } else {
+            is_food = false;
+        }
+        if (is_food == false) {
+            temp_r31->x4C = NULL;
+        } else {
+            goto block_22;
+        }
     } else {
+    block_22:
         if (fp->x2168 != 0) {
             temp_r31->x4C = NULL;
         } else {
@@ -8346,9 +8518,9 @@ void ftCo_800B2790(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
     s32 cmd;
-    s32 var_r28;
-    s32 on_ground;
     s32 line_id;
+    s32 on_ground;
+    s32 var_r28;
     PAD_STACK(0x18);
 
     if (data->csP == NULL && data->command_duration == 0) {
@@ -8372,7 +8544,14 @@ void ftCo_800B2790(Fighter* fp)
                 ftCo_800A8DE4_noinline(fp);
                 if (fp->ground_or_air == GA_Ground) {
                     line_id = fp->coll_data.floor.index;
-                    if (ftCo_800A6A98_inline0(line_id)) {
+                    if (grBigBlue_801EF844(line_id) ||
+                        grInishie1_801FCAAC(line_id) ||
+                        grCorneria_801E2D90(line_id) ||
+                        grVenom_80206D10(line_id))
+                    {
+                        var_r28 = 1;
+                    }
+                    if (var_r28 != 0) {
                         ftCo_800A0148(fp);
                     } else {
                         goto block_15;
@@ -8841,7 +9020,8 @@ void ftCo_800B33B0(Fighter* fp)
             data->xF9_b0 = false;
         }
     } else {
-        data->x30 = 120.0f * (0.5f * (0.5f * HSD_Randf()));
+        data->x30 =
+            *(f32 const*) &ftCo_804D8914 * (0.5f * (0.5f * HSD_Randf()));
     }
     if (data->x60 != 0) {
         data->x60 = data->x60 - 1;

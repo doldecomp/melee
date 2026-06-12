@@ -43,6 +43,8 @@ ItemStateTable it_803F7438[] = {
     { -1, itSeakchain_UnkMotion4_Anim, NULL, NULL },
 };
 
+extern f32 it_804DD0E0;
+
 void it_802BAEEC(Item_GObj* gobj)
 {
     it_8026B724(gobj);
@@ -71,14 +73,15 @@ int it_802BAF2C(Item* ip, HSD_JObj* jobj)
     ItemLink* head_link;
     ItemLink* tail_link;
     HSD_JObj* result;
-    int i;
     itSeakChain_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    HSD_GObj* link_gobj;
+    ItemLink* link;
+    int i;
     Vec3 zero = it_803B8680;
 
     prev_link = NULL;
     for (i = 0; i < attrs->x0; i++) {
-        HSD_GObj* link_gobj = GObj_Create(7, 0xA, 0);
-        ItemLink* link;
+        link_gobj = GObj_Create(7, 0xA, 0);
 
         if (link_gobj == NULL) {
             while (prev_link != NULL) {
@@ -100,7 +103,7 @@ int it_802BAF2C(Item* ip, HSD_JObj* jobj)
             link->vel = zero;
             link->pos = zero;
             link->x2C_b0 = false;
-            it_802A24D0(link, 1.0f);
+            it_802A24D0(link, it_804DD0E0);
             HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849,
                                     it_802BAF2C_Load_x64(ip));
             GObj_SetupGXLink(link_gobj, it_802A24A0, 6, 0);
@@ -114,7 +117,7 @@ int it_802BAF2C(Item* ip, HSD_JObj* jobj)
             link->vel = zero;
             link->pos = zero;
             link->x2C_b0 = false;
-            it_802A24D0(link, 1.0f);
+            it_802A24D0(link, it_804DD0E0);
             {
                 HSD_JObj* joint = it_802BAF2C_Load_x68(ip);
                 HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849, joint);
@@ -129,7 +132,7 @@ int it_802BAF2C(Item* ip, HSD_JObj* jobj)
             link->vel = zero;
             link->pos = zero;
             link->x2C_b0 = false;
-            it_802A24D0(link, 1.0f);
+            it_802A24D0(link, it_804DD0E0);
             HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849,
                                     it_802BAF2C_Load_x64(ip));
             GObj_SetupGXLink(link_gobj, it_802A24A0, 6, 0);

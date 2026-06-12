@@ -1477,9 +1477,7 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
             (3.0 * sp90.y) + (((spC0.y - spCC.y) * car->xC) + spCC.y);
         car_pos.z =
             (3.0 * sp90.z) + (((spC0.z - spCC.z) * car->xC) + spCC.z);
-        car->x14 = car_pos.x;
-        car->x18 = car_pos.y;
-        car->x1C = car_pos.z;
+        *(Vec3*) &car->x14 = car_pos;
 
         HSD_JObjSetTranslate(jobj, &car_pos);
 
@@ -1614,7 +1612,8 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
                 if (!car->x22_flags.b0 && (u32) car->x24 == 0) {
                     Item_GObj* item_gobj = grMaterial_801C8CFC(
                         0, 2, car_gp, jobj, grMuteCity_801F1A0C,
-                        ((grMc_SpeedFn*) &grMc_803E3B7C[30])[var_r27], NULL);
+                        ((grMc_SpeedFn*) (grMc_803E30B0 + 0xBBC))[var_r27],
+                        NULL);
                     if (item_gobj != NULL) {
                         grMaterial_801C8DE0(item_gobj, 0.0f, 0.0f, -12.0f,
                                             0.0f, 0.0f, 2.0f, 15.0f);
@@ -1669,8 +1668,8 @@ void grMuteCity_801F290C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     HSD_GObj* lgobj;
-    HSD_LObj* lobj;
     s32 i;
+    HSD_LObj* lobj;
     PAD_STACK(16);
 
     if (grLib_801C96E8(gobj) != 0) {

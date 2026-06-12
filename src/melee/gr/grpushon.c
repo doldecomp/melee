@@ -478,19 +478,18 @@ void grPushOn_80218888(Ground_GObj* arg0)
 {
     Vec3 sp10C;
     Vec3 sp100;
+    s32 spB0[20];
+    f32 sp60[20];
     Vec3 sp54;
     Vec3 sp48;
     Vec3 sp3C;
     GXColor sp38;
     Vec3 sp2C;
-    s32 sp24;
-    s32 spB0[20];
-    f32 sp60[20];
     Ground* gp = arg0->user_data;
     HSD_GObj* fighter;
     s32 i;
     s32 j;
-    PAD_STACK(0x10);
+    PAD_STACK(0x14);
 
     fighter = Ground_801C57A4();
     if (fighter != NULL) {
@@ -514,11 +513,9 @@ void grPushOn_80218888(Ground_GObj* arg0)
                 HSD_LObjGetPosition(lobj, &sp54);
                 dx = sp10C.x - sp54.x;
                 dy = sp10C.y - sp54.y;
-                d2 = (dx * dx) + (dy * dy);
-                if (d2 > 0.0f) {
-                    d2 = sqrtf(d2);
-                }
-                sp60[i] = d2;
+                dx *= dx;
+                d2 = dy * dy;
+                sp60[i] = sqrtf(dx + d2);
             } else if (type == 3) {
                 f32 dx;
                 HSD_LObjGetPosition(lobj, &sp48);
@@ -561,9 +558,10 @@ void grPushOn_80218888(Ground_GObj* arg0)
         }
 
         {
-            f32 mindist = sp60[spB0[1]];
+            f32 mindist;
             f32 sumsq;
             sp3C = grPushOn_803B844C;
+            mindist = sp60[spB0[1]];
             for (i = 1; i < gp->u.pushon.count; i++) {
                 if (HSD_LObjGetPosition(gp->u.pushon.lobjs[spB0[i]],
                                         &sp100) != 0) {
@@ -583,10 +581,9 @@ void grPushOn_80218888(Ground_GObj* arg0)
                     lbVector_Add(&sp3C, &sp100);
                 }
             }
-            sumsq = (sp3C.z * sp3C.z) + ((sp3C.x * sp3C.x) + (sp3C.y * sp3C.y));
-            if (sumsq > 0.0f) {
-                sumsq = sqrtf(sumsq);
-            }
+            sumsq = sqrtf(
+                sumsq = (sp3C.z * sp3C.z) +
+                         ((sp3C.x * sp3C.x) + (sp3C.y * sp3C.y)));
             if (sumsq < 0.01f) {
                 sp3C.y = 100.0f;
             }
@@ -608,8 +605,7 @@ void grPushOn_80218888(Ground_GObj* arg0)
                     sp38.g = (u8) (s32) ((f32) sp38.g * t);
                     sp38.b = (u8) (s32) ((f32) sp38.b * t);
                 }
-                sp24 = *(s32*) &sp38;
-                HSD_LObjSetColor(gp->u.pushon.spot_light, *(GXColor*) &sp24);
+                HSD_LObjSetColor(gp->u.pushon.spot_light, sp38);
                 if (HSD_LObjGetPosition(gp->u.pushon.lobjs[spB0[1]], &sp2C) ==
                     0) {
                     sp2C.z = 0.0f;
@@ -626,10 +622,8 @@ void grPushOn_80218888(Ground_GObj* arg0)
                 HSD_LObjSetInterest(gp->u.pushon.spot_light, &sp2C);
                 gp->u.pushon.spot_light->flags =
                     gp->u.pushon.lobjs[spB0[1]]->flags;
-                gp->u.pushon.spot_light->flags =
-                    gp->u.pushon.spot_light->flags & 0xFFFB;
-                gp->u.pushon.spot_light->flags =
-                    gp->u.pushon.spot_light->flags | 8;
+                gp->u.pushon.spot_light->flags &= ~4;
+                gp->u.pushon.spot_light->flags |= 8;
             }
         }
     }

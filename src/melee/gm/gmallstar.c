@@ -512,13 +512,13 @@ void gm_801B5624(GameScene* arg0)
     s8 chars[3];
     StartMeleeData* data;
     u8* base;
-    gm_803DEBE8_t* opp_data;
     UnkAllstarData* allstar;
+    gm_803DEBE8_t* opp_data;
     s32 i;
     s32 count;
     u16 round;
     u8 color;
-    PAD_STACK(8);
+    PAD_STACK(16);
 
     base = (u8*) gm_803DE930_Scenes;
     data = gm_801A427C(arg0);
@@ -569,9 +569,14 @@ void gm_801B5624(GameScene* arg0)
     }
 
     if ((u8) arg0->idx == 0x60) {
-        f32 f30 = gm_8018A1D8(0xC, allstar->x0.cpu_level);
-        f32 f31 = gm_8018A188(0xC, allstar->x0.cpu_level);
-        u8 opp_count = gm_8018A228(0xC, allstar->x0.cpu_level, 0);
+        u8* cpu_level = &allstar->x0.cpu_level;
+        f32 f31;
+        f32 f30;
+        u8 opp_count;
+
+        f30 = gm_8018A1D8(0xC, *cpu_level);
+        f31 = gm_8018A188(0xC, *cpu_level);
+        opp_count = gm_8018A228(0xC, *cpu_level, 0);
 
         gm_8016A22C(3, 0x21, 0x21, 0, 0, 0, 1, 0, 0,
                     (u8) data->players[0].c_kind, data->players[0].color,

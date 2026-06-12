@@ -53,7 +53,10 @@ void fn_8001E910(int arg0, int arg1, void* arg2, int cancelflag)
         intr = OSDisableInterrupts();
         streamPlayer->unk_13C = OSGetTick();
         streamPlayer->unk_138 = (var_r4 = 0);
-        if ((u32) streamPlayer->unk_74 != (u32) streamPlayer->unk_40) {
+        if (((u32) streamPlayer->unk_74 != (u32) streamPlayer->unk_40) ||
+            (((u32) streamPlayer->unk_74 == (u32) streamPlayer->unk_40) &&
+             var_r4))
+        {
             LBMTHP_ASSERTREPORT(0x121, (u32) streamPlayer->currPackedSize != 0,
                                 lbl_803BADEC, lbl_803BADC8,
                                 streamPlayer->file_entrynum,
@@ -78,10 +81,7 @@ void fn_8001E910(int arg0, int arg1, void* arg2, int cancelflag)
                 streamPlayer->unk_8C = var_r3;
             }
             streamPlayer->unk_110 = (var_r4 = 1);
-        } else {
-            goto request_done;
         }
-    request_done:
         if (var_r4 == 0) {
             streamPlayer->unk_110 = 0;
         }
@@ -182,8 +182,8 @@ s32 fn_8001EBF0(THPDecComp* data)
 
 void fn_8001ECF4(THPDecComp* data, void* buf)
 {
-    u32 width;
     u32 height;
+    u32 width;
     u32 count;
     u8* var_r29;
     u32 y_size;
@@ -191,12 +191,14 @@ void fn_8001ECF4(THPDecComp* data, void* buf)
     u32 var_r25;
     u32 var_r24;
     u8* csizep;
-    PAD_STACK(8);
+    char* file;
 
+    file = lbl_803BADB0;
+    PAD_STACK(8);
     width = data->width;
     height = data->height;
     data->frame_buffers = (u32*) buf;
-    y_size = height * width;
+    y_size = width * height;
     count = data->unk_104;
     data->unk_64 = 0;
     uv_size = y_size >> 2U;
@@ -224,7 +226,7 @@ void fn_8001ECF4(THPDecComp* data, void* buf)
                 OSReport(lbl_803BAF60, data->first_frame);
                 OSReport(lbl_803BAF7C, data->frame_offsets);
                 OSReport(lbl_803BAF98, data->first_frame_size);
-                LBMTHP_ASSERT(0x10A, 0, str_0);
+                __assert(file, 0x10A, str_0);
             }
             lbFile_800161C4(data->file_entrynum, data->curr_file_offset,
                             (u32) var_r29, (var_r24 + 0x1F) & 0xFFFFFFE0, 0x21,
@@ -378,7 +380,7 @@ static inline u32 lbMthp_GetFrame(u32** rate_table, u32 counter)
         for (;; rate_ptr += 2) {
             count = rate_ptr[0];
             ticks = rate_ptr[1];
-            total = count * ticks;
+            total = ticks * count;
             if (counter >= total) {
                 frame += count;
                 counter -= total;

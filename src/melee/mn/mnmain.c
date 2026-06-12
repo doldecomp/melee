@@ -1003,6 +1003,7 @@ void mn_8022A440(HSD_GObj* gp, HSD_JObj* root, MainMenuSelection selection)
     lb_8001204C(root, sp24, mn_803EAE7C, 7);
     r29 = sp24[1];
     flow = &mn_804A04F0;
+    !flow; // Permuter slop
     HSD_JObjReqAnimAll(r29, 0.0F);
     HSD_JObjAnimAll(r29);
     HSD_JObjReqAnim(r29,
@@ -1453,13 +1454,13 @@ HSD_GObj* mn_8022B3A0(u8 state)
     }
     if (data->state != MENU_STATE_IDLE) {
         switch (data->state) {
-        case MENU_STATE_EXIT_TO:
         case MENU_STATE_ENTER_TO:
             HSD_JObjReqAnim(data->tree[3], mn_803EB39C.start_frame);
             break;
-        case MENU_STATE_EXIT_FROM:
+        case MENU_STATE_EXIT_TO:
             HSD_JObjReqAnim(data->tree[3], mn_803EB3B4.start_frame);
             break;
+        case MENU_STATE_EXIT_FROM:
         case MENU_STATE_ENTER_FROM:
         case MENU_STATE_5:
             break;
@@ -1480,8 +1481,8 @@ HSD_GObj* mn_8022B3A0(u8 state)
             HSD_JObjAddAnimAll(cursor_jobj, top->animjoint, top->matanim_joint,
                                top->shapeanim_joint);
             lb_8001204C(cursor_jobj, sp2C, mn_803EAE7C, 7);
-            tmp = &mn_803EB378[hovered_selection == i];
-            HSD_JObjReqAnim(sp2C[0], mn_803EB360[0].start_frame);
+            HSD_JObjReqAnim(sp2C[0],
+                            mn_803EB360[hovered_selection == i].start_frame);
             HSD_JObjAnim(sp2C[0]);
             jobj = sp2C[1];
             HSD_JObjReqAnimAll(jobj, hovered_selection == i);
@@ -1498,9 +1499,11 @@ HSD_GObj* mn_8022B3A0(u8 state)
             mn_8022F3D8(jobj, 0x13, TOBJ_MASK);
             HSD_JObjAnim(jobj);
             if (i == hovered_selection) {
-                HSD_JObjReqAnimAll(sp2C[2], tmp->start_frame);
+                HSD_JObjReqAnimAll(
+                    sp2C[2], mn_803EB378[hovered_selection == i].start_frame);
             } else {
-                HSD_JObjReqAnimAll(sp2C[2], tmp->end_frame);
+                HSD_JObjReqAnimAll(
+                    sp2C[2], mn_803EB378[hovered_selection == i].end_frame);
             }
             HSD_JObjAnimAll(sp2C[2]);
             if (i == hovered_selection) {

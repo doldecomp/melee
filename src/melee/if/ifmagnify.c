@@ -63,6 +63,16 @@ static s32 ifMagnify_803F984C[0x10] = {
     0x06060606, 0x06070607, 0x07080708, 0x08080808,
 };
 
+typedef struct ifMagnifyImageDescCopy {
+    u8 pad[0x5C];
+    HSD_ImageDesc image_descs[6];
+} ifMagnifyImageDescCopy;
+
+typedef struct ifMagnifyImageDescBase {
+    u8 pad[0x74];
+    HSD_ImageDesc image_descs[5];
+} ifMagnifyImageDescBase;
+
 s32 ifMagnify_802FB6E8(s32 slot)
 {
     if (ifMagnify_802FC998(slot) != 0) {
@@ -400,17 +410,11 @@ void ifMagnify_802FC3BC(void) {}
 
 void ifMagnify_802FC3C0(s32 slot)
 {
+    ifMagnifyPlayer* player;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
     HSD_JObj* child;
-    HSD_DObj* dobj;
-    HSD_ImageDesc* image_descs;
     HSD_MObj* mobj;
-    HSD_Material* material;
-    ifMagnifyPlayer* player;
-    GXColor color;
-    u8 slot_type;
-    u8 teams_enabled;
 
     player = &ifMagnify_804A1DE0.player[slot];
     if (player->gobj != NULL) {
@@ -420,7 +424,8 @@ void ifMagnify_802FC3C0(s32 slot)
     gobj = GObj_Create(0xE, 0xF, 0);
     GObj_InitUserData(gobj, 0xE, (void (*)(void*)) ifMagnify_802FC3BC, player);
 
-    jobj = HSD_JObjLoadJoint(ifMagnify_804A1DE0.model_desc->joint);
+    jobj = HSD_JObjLoadJoint(
+        (*(DynamicModelDesc**) ifMagnify_804A1DE0.model_desc)->joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, (void (*)(HSD_GObj*, int)) ifMagnify_802FB8C0, 0xB,
                      0);
@@ -429,9 +434,12 @@ void ifMagnify_802FC3C0(s32 slot)
     if (slot == 0) {
         player->idesc = child->u.dobj->next->mobj->tobj->imagedesc;
     } else {
-        image_descs = (HSD_ImageDesc*) ifMagnify_804A1DE0.image_descs;
-        image_descs[slot - 1] = *ifMagnify_804A1DE0.player[0].idesc;
-        player->idesc = &image_descs[slot - 1];
+        ifMagnifyImageDescCopy* copy_base =
+            (ifMagnifyImageDescCopy*) &ifMagnify_804A1DE0;
+
+        copy_base->image_descs[slot] = *ifMagnify_804A1DE0.player[0].idesc;
+        player->idesc = &((ifMagnifyImageDescBase*) &ifMagnify_804A1DE0)
+                             ->image_descs[slot - 1];
         player->idesc->image_ptr = HSD_MemAlloc(
             (GXGetTexBufferSize(player->idesc->width, player->idesc->height,
                                 player->idesc->format, 0, 0) +
@@ -442,24 +450,25 @@ void ifMagnify_802FC3C0(s32 slot)
 
     lb_80011E24(jobj, &player->jobj, 1, -1);
 
-    slot_type = Player_GetPlayerSlotType(slot);
-    teams_enabled = gm_8016B168();
-    color = gm_80160968(gm_80160854((u8) slot, Player_GetTeam(slot),
-                                    teams_enabled, slot_type));
+    {
+        GXColor color;
+        u8 teams_enabled;
+        u8 slot_type;
+        slot_type = Player_GetPlayerSlotType(slot);
+        teams_enabled = gm_8016B168();
+        color = gm_80160968(gm_80160854((u8) slot, Player_GetTeam(slot),
+                                        teams_enabled, slot_type));
 
-    dobj = player->jobj->u.dobj;
-    mobj = dobj->mobj;
-    material = mobj->mat;
-    material->diffuse.r = color.r;
-    material->diffuse.g = color.g;
-    material->diffuse.b = color.b;
+        mobj = player->jobj->u.dobj->mobj;
+        mobj->mat->diffuse.r = color.r;
+        mobj->mat->diffuse.g = color.g;
+        mobj->mat->diffuse.b = color.b;
 
-    dobj = child->u.dobj;
-    mobj = dobj->mobj;
-    material = mobj->mat;
-    material->diffuse.r = color.r;
-    material->diffuse.g = color.g;
-    material->diffuse.b = color.b;
+        mobj = child->u.dobj->mobj;
+        mobj->mat->diffuse.r = color.r;
+        mobj->mat->diffuse.g = color.g;
+        mobj->mat->diffuse.b = color.b;
+    }
 
     player->gobj = gobj;
     player->state.is_offscreen = 0;

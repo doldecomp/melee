@@ -164,6 +164,8 @@ typedef struct TyLightArray_ {
     s32 x7C;
     s32 x80;
     s32 x84;
+    u8 pad88[0xDC - 0x88];
+    s8 xDC[8];
 } TyLightArray_;
 
 typedef struct ToyDataJObj {
@@ -292,6 +294,9 @@ typedef struct {
     u8 pad[0x14];
     void* x14;
 } Ty25Entry;
+
+static const f32 un_804DDCE4 = -3000.0F;
+static const f32 un_804DDCE8 = 3000.0F;
 
 s32 un_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
 {
@@ -442,11 +447,10 @@ void un_803053C4(s32 targetValue, s32 count, s32 flag)
 {
     s16* list;
     u16* ptr;
+    s32 i;
     u16* default_flags;
     s32 trophyId;
-    s32 i;
     s32 found;
-    u16 val;
 
     if (flag != 0) {
         default_flags = &un_804A284C[5];
@@ -490,10 +494,8 @@ void un_803053C4(s32 targetValue, s32 count, s32 flag)
                                 }
 
                                 ptr = (u16*) ((u8*) ptr + i);
-                                val = *ptr;
                                 count = count - 1;
-                                val ^= 0x8000;
-                                *ptr = val;
+                                *ptr ^= 0x8000;
                             }
                         }
                     }
@@ -508,8 +510,8 @@ void un_803053C4(s32 targetValue, s32 count, s32 flag)
         }
     } else {
         default_flags = &un_804A284C[5];
-        trophyId = 0;
         i = 0;
+        trophyId = 0;
 
         while (trophyId < 0x125) {
             list = un_804D6EB4;
@@ -537,10 +539,8 @@ void un_803053C4(s32 targetValue, s32 count, s32 flag)
                     }
 
                     ptr = (u16*) ((u8*) ptr + i);
-                    val = *ptr;
                     count = count - 1;
-                    val ^= 0x8000;
-                    *ptr = val;
+                    *ptr ^= 0x8000;
 
                     if (count == 0) {
                         goto done;
@@ -1706,9 +1706,9 @@ void un_8030715C(f32 cstick_x, f32 cstick_y)
     Vec3 left_vec;
     Vec3 angles;
     TyCameraData_* data;
+    TyLightArray_* cur;
     TyLightArray_* data2;
     HSD_LObj* lobj;
-    TyLightArray_* cur;
     s32 i;
     s8* flag_ptr;
     HSD_CObj* cobj;
@@ -1727,9 +1727,12 @@ void un_8030715C(f32 cstick_x, f32 cstick_y)
     PSVECScale(&left_vec, &left_vec, cstick_x);
     PSVECAdd(&left_vec, &new_interest, &new_interest);
 
-    if (new_interest.x <= -3000.0F || new_interest.y <= -3000.0F ||
-        new_interest.z <= -3000.0F || new_interest.x >= 3000.0F ||
-        new_interest.y >= 3000.0F || new_interest.z >= 3000.0F)
+    if (new_interest.x <= *(f32 const*) &un_804DDCE4 ||
+        new_interest.y <= *(f32 const*) &un_804DDCE4 ||
+        new_interest.z <= *(f32 const*) &un_804DDCE4 ||
+        new_interest.x >= *(f32 const*) &un_804DDCE8 ||
+        new_interest.y >= *(f32 const*) &un_804DDCE8 ||
+        new_interest.z >= *(f32 const*) &un_804DDCE8)
     {
         return;
     }
@@ -1756,7 +1759,7 @@ void un_8030715C(f32 cstick_x, f32 cstick_y)
     lobj = data2->x4->x28;
 
     while (lobj != NULL) {
-        flag_ptr = (s8*) data2 + i + 0xDC;
+        flag_ptr = &data2->xDC[i];
 
         angles.x = 0.017453292F * data2->x14;
         angles.y = 0.017453292F * -data2->x18;
