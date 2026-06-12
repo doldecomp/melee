@@ -1145,8 +1145,7 @@ s32 fn_801F8E58(Ground_GObj* arg0, s32* out)
     {
         Ground* g = gp;
         s32* p = &list[max];
-        i = 0;
-        do {
+        for (i = 0; i < 12; i++) {
             if (g->gv.icemt.xDC == 0 &&
                 (Stage_80225194() != 0xD4 || i >= 4))
             {
@@ -1154,9 +1153,8 @@ s32 fn_801F8E58(Ground_GObj* arg0, s32* out)
                 p++;
                 max++;
             }
-            i++;
             g = (Ground*) ((u8*) g + 2);
-        } while (i < 12);
+        }
     }
 
     HSD_ASSERT(0x81D, max);
@@ -1754,17 +1752,12 @@ int fn_801FA4CC(int num)
     return num;
 }
 
-static inline HSD_JObj* grIceMt_801FA500_get_jobj(HSD_GObj* gobj)
-{
-    return gobj->hsd_obj;
-}
-
 int grIceMt_801FA500(HSD_GObj* arg0, HSD_JObj* arg1)
 {
     s32 count = 0;
     HSD_JObj* jobj;
 
-    jobj = grIceMt_801FA500_get_jobj(arg0);
+    jobj = HSD_GObjGetHSDObj(arg0);
     HSD_ASSERT(0xBB1, jobj);
     jobj = HSD_JObjGetChild(jobj);
     HSD_ASSERT(0xBB2, jobj);
