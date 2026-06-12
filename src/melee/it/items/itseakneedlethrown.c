@@ -8,10 +8,10 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "it/itmaplib.h"
 #include "lb/lbvector.h"
 #include "mp/mpcoll.h"
@@ -23,8 +23,11 @@
 #include <MSL/trigf.h>
 
 ItemStateTable it_803F6F50[] = {
-    { 0, NULL, NULL, NULL }, { 1, NULL, NULL, NULL }, { 2, NULL, NULL, NULL },
-    { 3, NULL, NULL, NULL }, { 4, NULL, NULL, NULL },
+    { 0, itSeakneedlethrown_UnkMotion0_Anim, itSeakneedlethrown_UnkMotion0_Phys, itSeakneedlethrown_UnkMotion0_Coll },
+    { 1, itSeakneedlethrown_UnkMotion1_Anim, itSeakneedlethrown_UnkMotion1_Phys, itSeakneedlethrown_UnkMotion1_Coll },
+    { 2, itSeakneedlethrown_UnkMotion2_Anim, itSeakneedlethrown_UnkMotion2_Phys, itSeakneedlethrown_UnkMotion2_Coll },
+    { 3, itSeakneedlethrown_UnkMotion3_Anim, itSeakneedlethrown_UnkMotion3_Phys, itSeakneedlethrown_UnkMotion3_Coll },
+    { 4, itSeakneedlethrown_UnkMotion4_Anim, itSeakneedlethrown_UnkMotion4_Phys, itSeakneedlethrown_UnkMotion4_Coll }
 };
 static f32 it_803F6FA0[8] = { -2.0f, -2.1f, -2.2f, -2.3f,
                               -2.4f, -2.5f, -2.6f, -2.7f };
@@ -43,6 +46,11 @@ static f32 it_803F7060[8] = {
     0.87266463f, 0.9599311f,  1.0471976f, 1.134464f
 };
 
+static void sdata2_order(void){
+    (void) 0.0f;
+    (void) 1.0f;
+    (void) -1.0f;
+}
 Item_GObj* it_802AFD8C(Item_GObj* parent, Vec3* pos, u32 kind,
                        float facing_dir)
 {
@@ -241,12 +249,6 @@ void itSeakneedlethrown_UnkMotion3_Phys(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     itResetVelocity(ip);
 }
-
-bool itSeakneedlethrown_UnkMotion3_Coll(Item_GObj* gobj)
-{
-    return false;
-}
-
 void itSeakneedlethrown_UnkMotion4_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -261,8 +263,8 @@ static inline bool itSeakNeedleThrown_CheckGroundHit(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     CollData* coll = &ip->x378_itemColl;
-    Vec3 hit_pos;
     u32 line_id;
+    Vec3 hit_pos;
 
     if (it_8026EA20(gobj, &ip->xDD4_itemVar.seakneedlethrown.xDE4, &ip->pos,
                     &hit_pos, &ip->xDD4_itemVar.seakneedlethrown.xDF4,
@@ -309,7 +311,7 @@ static inline bool itSeakNeedleThrown_CheckGroundHit4(Item_GObj* gobj)
 
 bool itSeakneedlethrown_UnkMotion0_Coll(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
+    Item* ip = gobj->user_data;
     itSeakNeedleThrownAttributes* attr =
         ip->xC4_article_data->x4_specialAttributes;
     HSD_JObj* child = HSD_JObjGetChild(gobj->hsd_obj);
@@ -339,12 +341,13 @@ bool itSeakneedlethrown_UnkMotion0_Coll(Item_GObj* gobj)
             break;
         }
     }
+    PAD_STACK(4);
     return false;
 }
 
 bool itSeakneedlethrown_UnkMotion1_Coll(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
+    Item* ip = gobj->user_data;
     itSeakNeedleThrownAttributes* attr =
         ip->xC4_article_data->x4_specialAttributes;
     if (itSeakNeedleThrown_CheckGroundHit(gobj)) {
@@ -402,6 +405,12 @@ bool itSeakneedlethrown_UnkMotion2_Coll(Item_GObj* gobj)
     itSeakNeedleThrown_Coll2_Rotate(ip, child);
     return false;
 }
+
+bool itSeakneedlethrown_UnkMotion3_Coll(Item_GObj* gobj)
+{
+    return false;
+}
+
 
 bool itSeakneedlethrown_UnkMotion4_Coll(Item_GObj* gobj)
 {
@@ -538,7 +547,7 @@ bool it_2725_Logic109_ShieldBounced(Item_GObj* gobj)
     return false;
 }
 
-static bool it_2725_Logic109_HitShield_inline(Item_GObj* gobj, Item* ip)
+inline bool it_2725_Logic109_HitShield_inline(Item_GObj* gobj, Item* ip)
 {
     itSeakNeedleThrownAttributes* attr =
         ip->xC4_article_data->x4_specialAttributes;

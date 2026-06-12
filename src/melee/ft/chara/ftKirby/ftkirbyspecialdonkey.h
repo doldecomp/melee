@@ -100,7 +100,7 @@
 /* 10933C */ int ftKb_SpecialNYs_8010933C(void);
 /* 109354 */ void ftKb_SpecialNYs_80109354(Vec3*);
 /* 109380 */ float ftKb_SpecialNYs_80109380(void);
-/* 1093A0 */ ftDynamics* ftKb_SpecialNYs_801093A0(void);
+/* 1093A0 */ ftDynamics* ftKb_SpecialNYs_801093A0(Fighter_GObj* gobj);
 /* 1093B4 */ void ftKb_SpecialNYs_801093B4(Fighter_GObj* gobj);
 /* 10941C */ void ftKb_SpecialNYs_8010941C(Fighter_GObj* gobj);
 /* 1094FC */ void ftKb_SpecialNYs_801094FC(Fighter_GObj* gobj);
