@@ -873,7 +873,7 @@ s32 HSD_SisLib_803A67EC(u8* data, u8* string)
 
 int HSD_SisLib_803A6B98(HSD_Text* text, float x, float y, const char* fmt, ...)
 {
-    u8 buffer[256];
+    u8 buffer[128];
     u8 encoded[128];
     s16 y_coord;
     s16 x_coord;
@@ -897,6 +897,7 @@ int HSD_SisLib_803A6B98(HSD_Text* text, float x, float y, const char* fmt, ...)
 
     encoded_len = 0;
     alloc = text->alloc_data;
+    encoded[0] = 0;
     if (fmt) {
         va_start(args, fmt);
         vsnprintf((char*) buffer, -1, fmt, args);
@@ -1036,7 +1037,7 @@ end:
 
 s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
 {
-    u8 buffer[256];
+    u8 buffer[128];
     u8 encoded[128];
     s32 old_size;
     s32 result;
@@ -1685,10 +1686,10 @@ void HSD_SisLib_803A7684(HSD_Text* text, u8* cursor, u8 flags)
 s32 HSD_SisLib_803A7F0C(HSD_Text* text, s32 flags)
 {
     u8 entry;
+    s32 flag_hi;
     s32 entry_type;
     s32 entry_flags;
     s32 target_type;
-    s32 flag_hi;
     s32 result;
     s32 remove_size;
     s32 pos;
@@ -1699,7 +1700,7 @@ s32 HSD_SisLib_803A7F0C(HSD_Text* text, s32 flags)
     result = 0;
     remove_size = 0;
     while (pos >= 0) {
-        entry = ((u8*) text->string_buffer)[pos];
+        entry = text->string_buffer[pos];
         entry_type = entry & 0x7F;
         entry_flags = entry & 0x80;
         switch (entry_type) { /* irregular */
@@ -1707,10 +1708,10 @@ s32 HSD_SisLib_803A7F0C(HSD_Text* text, s32 flags)
             pos -= 4;
             if (target_type == 1) {
                 text->x78.x = (f32) *
-                              (s16*) ((u8*) text->string_buffer + pos) *
+                              (s16*) (text->string_buffer + pos) *
                               0.00390625F;
                 text->x78.y = (f32) *
-                              (s16*) ((u8*) text->string_buffer + pos + 2) *
+                              (s16*) (text->string_buffer + pos + 2) *
                               0.00390625F;
                 if (flag_hi == entry_flags) {
                     remove_size = 5;
@@ -1721,9 +1722,9 @@ s32 HSD_SisLib_803A7F0C(HSD_Text* text, s32 flags)
         case 2:
             pos -= 3;
             if (target_type == 2) {
-                text->active_color.r = ((u8*) text->string_buffer)[pos];
-                text->active_color.g = ((u8*) text->string_buffer)[pos + 1];
-                text->active_color.b = ((u8*) text->string_buffer)[pos + 2];
+                text->active_color.r = text->string_buffer[pos];
+                text->active_color.g = text->string_buffer[pos + 1];
+                text->active_color.b = text->string_buffer[pos + 2];
                 if (flag_hi == entry_flags) {
                     remove_size = 4;
                 }
@@ -1734,10 +1735,10 @@ s32 HSD_SisLib_803A7F0C(HSD_Text* text, s32 flags)
             pos -= 4;
             if (target_type == 3) {
                 text->x80.x = (f32) *
-                              (u16*) ((u8*) text->string_buffer + pos) *
+                              (u16*) (text->string_buffer + pos) *
                               0.00390625F;
                 text->x80.y = (f32) *
-                              (u16*) ((u8*) text->string_buffer + pos + 2) *
+                              (u16*) (text->string_buffer + pos + 2) *
                               0.00390625F;
                 if (flag_hi == entry_flags) {
                     remove_size = 5;
@@ -1748,7 +1749,7 @@ s32 HSD_SisLib_803A7F0C(HSD_Text* text, s32 flags)
         case 4:
             pos -= 1;
             if (target_type == 4) {
-                text->alignment = ((u8*) text->string_buffer)[pos];
+                text->alignment = text->string_buffer[pos];
                 if (flag_hi == entry_flags) {
                     remove_size = 2;
                 }
@@ -1758,7 +1759,7 @@ s32 HSD_SisLib_803A7F0C(HSD_Text* text, s32 flags)
         case 5:
             pos -= 4;
             if (target_type == 5) {
-                result = *(s32*) ((u8*) text->string_buffer + pos);
+                result = *(s32*) (text->string_buffer + pos);
                 if (flag_hi == entry_flags) {
                     remove_size = 5;
                 }
@@ -1771,12 +1772,12 @@ s32 HSD_SisLib_803A7F0C(HSD_Text* text, s32 flags)
 done:
     if (remove_size != 0) {
         while ((pos + remove_size) < (s32) text->x6C) {
-            ((u8*) text->string_buffer)[pos] =
-                ((u8*) text->string_buffer)[pos + remove_size];
+            text->string_buffer[pos] =
+                text->string_buffer[pos + remove_size];
             pos += 1;
         }
         while (pos < (s32) text->x6C) {
-            ((u8*) text->string_buffer)[pos] = 0;
+            text->string_buffer[pos] = 0;
             pos += 1;
         }
         text->x6C -= remove_size;
@@ -2123,7 +2124,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                         case 26:
                             if (line_started == 0U) {
                                 line_started += 1;
-                                // HSD_SisLib_803A8134();
+                                HSD_SisLib_803A8134(sis_cursor, text, &line_width_out, &line_height_out);
                                 if (((u8) text->fitting == 1) && (text->box_size_x < line_width_out)) {
                                     text->current_width = 0.0F;
                                     text->x88 = (f32) (text->box_size_x / line_width_out);
@@ -2160,7 +2161,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                 f32 glyph_x;
                                 if (line_started == 0U) {
                                     line_started += 1;
-                                    // HSD_SisLib_803A8134();
+                                    HSD_SisLib_803A8134(sis_cursor, text, &line_width_out, &line_height_out);
                                     if (((u8) text->fitting == 1) && (text->box_size_x < line_width_out)) {
                                         text->current_width = 0.0F;
                                         text->x88 = (f32) (text->box_size_x / line_width_out);
