@@ -1506,10 +1506,11 @@ bool fn_800D8EC8(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_LinkCatchAttrs* attrs;
+    Vec3 bonePos;
+    u32 unused;
     Item_GObj* item;
     HSD_JObj* jobj;
     itLinkHookshotAttributes* hookAttrs;
-    Vec3 bonePos;
     f32 grav;
     Vec3 vel;
     f32 var_f3;
