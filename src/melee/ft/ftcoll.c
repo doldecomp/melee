@@ -955,7 +955,7 @@ static inline void inlineItemA0(Item* item, Fighter* fp, HitCapsule* hit,
 {
     int int_dmg;
 
-    if (dmg != *(float const*) &ftColl_804D82E0) {
+    if (dmg) {
         if ((int) dmg) {
             int_dmg = dmg;
         } else {
@@ -1004,7 +1004,7 @@ static inline void inlineItemA1(Item* item, HitCapsule* hit, Fighter* fp,
     int int_dmg;
     int mode;
 
-    if (dmg != *(float const*) &ftColl_804D82E0) {
+    if (dmg) {
         if ((int) dmg) {
             int_dmg = dmg;
         } else {
@@ -1903,7 +1903,7 @@ void ftColl_8007925C(Fighter_GObj* gobj)
                 it_8026FAC4(item, hurt, 6, fp, 0);
 
                 dmg = hurt->damage;
-                if (dmg != *(float const*) &ftColl_804D82E0) {
+                if (dmg) {
                     if ((int) dmg) {
                         dmg_count = dmg;
                     } else {
