@@ -1,8 +1,12 @@
 #include <dolphin.h>
 #define __THPDecompressiMCURow640x480 __THPDecompressiMCURow640x480_proto
+#define __THPDecompressiMCURowNxN __THPDecompressiMCURowNxN_proto
 #define THPDec_80331340 THPDec_80331340_proto
+#define THPDec_803313D0 THPDec_803313D0_proto
 #include <dolphin/thp/thp.h>
+#undef THPDec_803313D0
 #undef THPDec_80331340
+#undef __THPDecompressiMCURowNxN
 #undef __THPDecompressiMCURow640x480
 
 static const u8 __THPJpegNaturalOrder[80] = {
@@ -60,7 +64,9 @@ typedef struct THPFileInfoMCUBufferView {
 #define THPROUNDUP(a, b) ((((s32) (a)) + ((s32) (b) - 1L)) / ((s32) (b)))
 
 static void __THPDecompressiMCURow640x480(THPFileInfo* info);
+static void __THPDecompressiMCURowNxN(THPFileInfo* info, u32 x);
 void THPDec_80331340(s32, void*, void*, void*);
+void THPDec_803313D0(s32, void*, void*, void*, u32);
 
 void __THPPrepBitStream(THPFileInfo* info)
 {
@@ -2401,7 +2407,6 @@ static void __THPHuffDecodeDCTCompU(register THPFileInfo* info,
     register u32 cnt1;  // r10
     register u32 cnt33; // r8
     register u32 cb;    // r6
-    register u32 cnt1;  // r10
     register s32 t;     // r5
 
     register s32 k;

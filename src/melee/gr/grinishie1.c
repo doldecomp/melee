@@ -36,7 +36,7 @@
 #include <baselib/gobj.h>
 
 #define invalid_state(line)                                                   \
-    OSReport("%s:%d: oioi..\n", "i!=HATENA_APPEAR_CHECKLOOP", line);                         \
+    OSReport(grI1_803E49A8.report_fmt, grI1_803E49A8.checkloop_assert, line); \
     while (true) {                                                            \
     }
 
@@ -127,6 +127,32 @@ Vec3 grI1_803B8268;
         }                                                                     \
     }
 
+#define DOBJ_DIRECT_LOOP(jobj)                                                \
+    {                                                                         \
+        HSD_DObj* dobj = HSD_JObjGetDObj(jobj);                               \
+        while (dobj != NULL) {                                                \
+            HSD_DObjSetFlags(dobj, 1U);                                       \
+            if (dobj != NULL) {                                               \
+                dobj = dobj->next;                                            \
+            } else {                                                          \
+                dobj = NULL;                                                  \
+            }                                                                 \
+        }                                                                     \
+    }
+
+#define DOBJ_DIRECT_CLEAR_LOOP(jobj)                                          \
+    {                                                                         \
+        HSD_DObj* dobj = HSD_JObjGetDObj(jobj);                               \
+        while (dobj != NULL) {                                                \
+            HSD_DObjClearFlags(dobj, 1U);                                     \
+            if (dobj != NULL) {                                               \
+                dobj = dobj->next;                                            \
+            } else {                                                          \
+                dobj = NULL;                                                  \
+            }                                                                 \
+        }                                                                     \
+    }
+
 s16 grI1_803E48C8[22] = {
     13, 3, 3, 14, 3, 14, 15, 3, 15, 16, 3, 16,
     17, 3, 17, 18, 3, 18, 19, 3, 19, 0,
@@ -165,6 +191,21 @@ StageCallbacks grI1_803E48F4[] = {
 
 char grI1_803E4944[] = "/GrI1.dat";
 
+/// corresponds with the 3 - 13 - 3 block pattern on the stage
+#define BLOCK_COUNT 19
+
+struct block_table_struct {
+    s16 idx;
+    s16 jobj_idx;
+};
+
+typedef struct grInishie1_Data {
+    char filename[0x10];
+    struct block_table_struct block_table[BLOCK_COUNT];
+    char report_fmt[0x10];
+    char checkloop_assert[0x1C];
+} grInishie1_Data;
+
 typedef struct grInishie1_StageData {
     StageData stage_data;
     char report_fmt_get_gobj[0x24];
@@ -189,19 +230,24 @@ grInishie1_StageData grI1_803E4950 = {
     "%s:%d: couldn t get gobj(id=%d)\n",
 };
 
-//char grI1_803E49A8[] = "grinishie1.c";
-
-void grInishie1_801FA908(bool arg) {}
-
-/// corresponds with the 3 - 13 - 3 block pattern on the stage
-#define BLOCK_COUNT 19
-
-struct block_table_struct {
-    s16 idx;
-    s16 jobj_idx;
+grInishie1_Data grI1_803E49A8 = {
+    "grinishie1.c",
+    {
+        { 13, 3 }, { 14, 14 }, { 15, 15 }, { 16, 16 }, { 17, 17 },
+        { 18, 18 }, { 19, 19 }, { 11, 20 }, { 12, 21 }, { 1, 4 },
+        { 2, 5 },   { 3, 6 },   { 4, 7 },   { 5, 8 },   { 6, 9 },
+        { 7, 10 },  { 8, 11 },  { 9, 12 },  { 10, 13 },
+    },
+    "%s:%d: oioi..\n",
+    "i!=HATENA_APPEAR_CHECKLOOP",
 };
 
-struct block_table_struct block_idx_table[BLOCK_COUNT];
+char grI1_803E4A30[] = "!mapgp->u.map.block[ix].hatena_gobj";
+char grI1_803E4A54[] = "map_gobj";
+
+#define block_idx_table grI1_803E49A8.block_table
+
+void grInishie1_801FA908(bool arg) {}
 
 void grInishie1_801FA90C(void)
 {
@@ -255,7 +301,8 @@ HSD_GObj* grInishie1_801FA9B4(s32 arg0)
             HSD_GObj_SetupProc(gobj, cb->callback2, 4U);
         }
     } else {
-        OSReport(grI1_803E4950.report_fmt_get_gobj, "grinishie1.c", 0xE7, arg0);
+        OSReport(grI1_803E4950.report_fmt_get_gobj, grI1_803E49A8.filename,
+                 0xE7, arg0);
     }
 
     return gobj;
@@ -371,65 +418,104 @@ void grInishie1_801FAD80(Ground_GObj* gobj) {}
 
 void grInishie1_801FAD84(HSD_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
-    struct grInishie1_GroundVars* vars = &gp->gv.inishie1;
+    typedef struct grInishie1_InitBlock {
+        s16 status;
+        s16 x2;
+        s16 x4;
+        s16 x6;
+        f32 x8;
+        f32 xC;
+        f32 x10;
+        HSD_JObj* jobj;
+        HSD_GObj* hatena_gobj;
+        Item_GObj* item_gobj;
+        s16 x20;
+        s16 x22;
+    } grInishie1_InitBlock;
+    typedef struct grInishie1_InitGround {
+        u8 pad[0xC4];
+        u16 xC4;
+        s16 xC6;
+        s16 xC8;
+        s16 xCA;
+        s16 xCC;
+        s16 xCE;
+        s32 xD0;
+        s32 xD4;
+        s32 xD8;
+        grInishie1_InitBlock* blocks;
+    } grInishie1_InitGround;
+    HSD_JObj* jobj;
+    struct block_table_struct* block_table;
+    char* data_base = (char*) grI1_803E48C8;
+    char* data = data_base;
+    u32 j;
     int i;
+    s32 value;
+    grInishie1_InitGround* gp = gobj->user_data;
+    PAD_STACK(8);
 
-    vars->blocks = (grInishie1_Block*) HSD_MemAlloc(sizeof(grInishie1_Block) *
-                                                    BLOCK_COUNT);
+    gp->blocks = (grInishie1_InitBlock*) HSD_MemAlloc(
+        sizeof(grInishie1_InitBlock) * BLOCK_COUNT);
+
+    block_table = (struct block_table_struct*) (data + 0xF0);
 
     i = 0;
-    while (i < BLOCK_COUNT) {
-        s16 value;
-        int j;
-        HSD_JObj* jobj;
-
-        if (i < 0 || i > BLOCK_COUNT) {
-            invalid_state(0x1F9);
+    while ((u32) i < BLOCK_COUNT) {
+        if (i < 0 || (u32) i >= BLOCK_COUNT) {
+            OSReport(data + 0x13C, data + 0xE0, 0x1F9);
+            while (true) {
+            }
         }
-        value = block_idx_table[i].idx;
+        {
+            s16 check = block_table[i].idx;
+            value = check;
 
-        for (j = 0; j < BLOCK_COUNT; j++) {
-            if (value == block_idx_table[j].idx) {
-                break;
+            for (j = 0; j < BLOCK_COUNT; j++) {
+                if (check == block_table[j].idx) {
+                    break;
+                }
             }
         }
 
         if (j == BLOCK_COUNT) {
-            invalid_state(0x217);
+            OSReport(data + 0x13C, data + 0xE0, 0x217);
+            while (true) {
+            }
         }
 
-        jobj = Ground_801C3FA4(gobj, block_idx_table[j].jobj_idx);
+        jobj = Ground_801C3FA4(
+            gobj, ((struct block_table_struct*) (data + 0xF0))[j].jobj_idx);
         if (jobj == NULL) {
-            invalid_state(0x21D);
+            OSReport(data + 0x13C, data + 0xE0, 0x21D);
+            while (true) {
+            }
         }
 
-        vars->blocks[i].x2 = 2;
-        vars->blocks[i].x4 = 0;
-        vars->blocks[i].jobj2 = jobj;
-        vars->blocks[i].hatena_gobj = NULL;
-        vars->blocks[i].x8 = HSD_JObjGetTranslationY(jobj);
-        vars->blocks[i].xC = 0.0f;
-        vars->blocks[i].jobj = jobj;
-        mpJointSetCb2((s32) value, gp, (mpLib_Callback) fn_801FBEB8);
-        vars->blocks[i].status = 0;
+        gp->blocks[i].x2 = 2;
+        gp->blocks[i].x4 = 0;
+        gp->blocks[i].jobj = jobj;
+        gp->blocks[i].hatena_gobj = NULL;
+        gp->blocks[i].x8 = HSD_JObjGetTranslationY(jobj);
+        gp->blocks[i].xC = 0.0f;
+        gp->blocks[i].x10 = 0.0f;
+        mpJointSetCb2(value, (Ground*) gp, (mpLib_Callback) fn_801FBEB8);
+        gp->blocks[i].status = 0;
         i++;
     }
 
-    for (i = 0; i < BLOCK_COUNT; i++) {
-        grInishie1_Block* slot = &vars->blocks[i];
-
-        HSD_GObj* new_gobj =
-            grMaterial_801C8CFC(8, 0, gp, slot->jobj, NULL, fn_801FBF6C, NULL);
+    for (i = 0; (u32) i < BLOCK_COUNT; i++) {
+        HSD_GObj* new_gobj = grMaterial_801C8CFC(
+            8, 0, (Ground*) gp, gp->blocks[i].jobj, NULL, fn_801FBF6C, NULL);
 
         if (new_gobj != NULL) {
-            grMaterial_801C8DE0(new_gobj, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f,
-                                6.0f);
+            grMaterial_801C8DE0(new_gobj, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f,
+                                0.0f, 6.0f);
             grMaterial_801C8E08(new_gobj);
             grMaterial_801C8E68(new_gobj, 0);
         }
 
-        slot->item_gobj = new_gobj;
+        gp->blocks[i].item_gobj = new_gobj;
     }
 
     if (gm_8016AE80() != -1 && gm_8016B238() == 0) {
@@ -444,39 +530,30 @@ void grInishie1_801FAD84(HSD_GObj* gobj)
         } while (item_kind < It_Common_End);
 
         if (item_kind != It_Common_End) {
-            grInishie1_Block* slot1;
-            grInishie1_Block* slot2;
-            s16 index1 = HSD_Randi(BLOCK_COUNT);
-            s16 index2;
+            s32 index1 = HSD_Randi(BLOCK_COUNT);
+            s32 index2;
+            s32 index1_copy = index1;
+            s32 index2_copy;
 
             do {
                 index2 = HSD_Randi(BLOCK_COUNT);
-            } while (index2 == index1);
+            } while (index1 == (index2_copy = index2));
 
-            slot1 = &vars->blocks[index1];
-            slot2 = &vars->blocks[index2];
+            gp->blocks[index1].status = 1;
+            grInishie1_801FBAA0(gobj, index1_copy);
+            GET_GROUND(gp->blocks[index1].hatena_gobj)->gv.inishie12.xCC = 1;
 
-            slot1->status = 1;
-            grInishie1_801FBAA0(gobj, index1);
-            if (slot1->hatena_gobj != NULL) {
-                Ground* hatena_gp = GET_GROUND(slot1->hatena_gobj);
-                hatena_gp->gv.inishie12.xCC = 1;
-            }
-
-            slot2->status = 2;
-            grInishie1_801FBAA0(gobj, index2);
-            if (slot2->hatena_gobj != NULL) {
-                Ground* hatena_gp = GET_GROUND(slot2->hatena_gobj);
-                hatena_gp->gv.inishie12.xCC = 1;
-            }
+            gp->blocks[index2].status = 2;
+            grInishie1_801FBAA0(gobj, index2_copy);
+            GET_GROUND(gp->blocks[index2].hatena_gobj)->gv.inishie12.xCC = 1;
         }
     }
 
-    vars->xC6 = 0;
-    vars->xC8 = 0;
-    vars->xCA = -1;
-    vars->xCC = -1;
-    vars->xD8 = 0;
+    gp->xC6 = 0;
+    gp->xC8 = 0;
+    gp->xCA = -1;
+    gp->xCC = -1;
+    gp->xD8 = 0;
 }
 
 void grInishie1_801FB0AC(HSD_GObj* gobj, u32 index)
@@ -524,6 +601,35 @@ void grInishie1_801FB0AC(HSD_GObj* gobj, u32 index)
     }
 }
 
+typedef struct grInishie1_TargetBlock {
+    s16 status;
+    s16 x2;
+    s16 x4;
+    s16 x6;
+    f32 x8;
+    f32 xC;
+    f32 x10;
+    HSD_JObj* jobj;
+    HSD_GObj* hatena_gobj;
+    Item_GObj* item_gobj;
+    s16 x20;
+    s16 x22;
+} grInishie1_TargetBlock;
+
+typedef struct grInishie1_TargetGround {
+    u8 pad[0xC4];
+    u16 xC4;
+    s16 xC6;
+    s16 xC8;
+    s16 xCA;
+    s16 xCC;
+    s16 xCE;
+    s32 xD0;
+    s32 xD4;
+    s32 xD8;
+    grInishie1_TargetBlock* blocks;
+} grInishie1_TargetGround;
+
 #define HATENA_APPEAR_CHECKLOOP(countdown, last_index, status_val, line)      \
     if (countdown > 0) {                                                      \
         countdown--;                                                          \
@@ -533,105 +639,104 @@ void grInishie1_801FB0AC(HSD_GObj* gobj, u32 index)
                                                                               \
             do {                                                              \
                 index = HSD_Randi(0x13);                                      \
+                if (index != last_index && gp->blocks[index].status == 0) {   \
+                    break;                                                    \
+                }                                                             \
                 attempts++;                                                   \
-            } while ((index == last_index ||                                  \
-                      gp->gv.inishie1.blocks[index].status != 0) &&                     \
-                     attempts < 0x14);                                        \
+            } while (attempts < 0x14);                                        \
                                                                               \
             if (attempts == 0x14) {                                           \
-                __assert("grinishie1.c", line, "%s:%d: oioi..\n");          \
+                __assert(grI1_803E49A8.filename, line,                       \
+                         grI1_803E49A8.report_fmt);                          \
             }                                                                 \
                                                                               \
             last_index = index;                                               \
-            gp->gv.inishie1.blocks[index].status = status_val;                          \
+            gp->blocks[index].status = status_val;                            \
             grInishie1_801FBAA0(gobj, index);                                 \
-            gp->gv.inishie1.blocks[index].x20 = 0;                                      \
+            gp->blocks[index].x20 = 0;                                        \
         }                                                                     \
     }
 
 void grInishie1_801FB3F0(HSD_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
+    grInishie1_TargetGround* gp = gobj->user_data;
     u32 i;
-    PAD_STACK(64);
+    PAD_STACK(56);
 
-    if (gp->gv.inishie1.xD8 > 0) {
-        gp->gv.inishie1.xD8--;
+    if (gp->xD8 > 0) {
+        gp->xD8--;
     }
 
-    if (gp->gv.inishie1.xD8 == 0 && ((gp->gv.inishie1.xC6 == 1 && gp->gv.inishie1.xC8 > 0 &&
-                            gp->gv.inishie1.xC8 < grI1_804D69F8->unk14) ||
-                           (gp->gv.inishie1.xC8 == 1 && gp->gv.inishie1.xC6 > 0 &&
-                            gp->gv.inishie1.xC6 < grI1_804D69F8->unk14)))
+    if (gp->xD8 == 0 &&
+        ((gp->xC6 == 1 && gp->xC8 > 0 &&
+          gp->xC8 < grI1_804D69F8->unk14) ||
+         (gp->xC8 == 1 && gp->xC6 > 0 &&
+          gp->xC6 < grI1_804D69F8->unk14)))
     {
-        gp->gv.inishie1.xC8 = 0;
-        gp->gv.inishie1.xC6 = 0;
+        gp->xC8 = 0;
+        gp->xC6 = 0;
 
         // this is likely the rare case mentioned on smashwiki
         // where every block will become a hatena block
         for (i = 0; i < 0x13; ++i) {
-            gp->gv.inishie1.blocks[i].status = 3;
+            gp->blocks[i].status = 3;
             grInishie1_801FBAA0(gobj, i);
-            gp->gv.inishie1.blocks[i].x20 = 0;
+            gp->blocks[i].x20 = 0;
         }
     } else {
-        HATENA_APPEAR_CHECKLOOP(gp->gv.inishie1.xC6, gp->gv.inishie1.xCA, 1,
-                                 0x2D0U);
-        HATENA_APPEAR_CHECKLOOP(gp->gv.inishie1.xC8, gp->gv.inishie1.xCC, 2,
-                                 0x2EBU);
+        HATENA_APPEAR_CHECKLOOP(gp->xC6, gp->xCA, 1, 0x2D0U);
+        HATENA_APPEAR_CHECKLOOP(gp->xC8, gp->xCC, 2, 0x2EBU);
     }
 
     for (i = 0; i < 0x13; ++i) {
-        grInishie1_Block* slot = &gp->gv.inishie1.blocks[i];
-
-        switch (slot->status) {
+        switch (gp->blocks[i].x2) {
         case 2:
-            if (slot->x4 > 0) {
-                slot->x4--;
+            if (gp->blocks[i].x4 != 0) {
+                gp->blocks[i].x4--;
             }
             break;
 
         case 3:
-            slot->xC = 1.2f;
+            gp->blocks[i].x10 = 1.2f;
             grInishie1_801FB0AC(gobj, i);
-            slot->status = 4;
+            gp->blocks[i].x2 = 4;
             // fallthrough
 
         case 4:
-            slot->x8 += slot->xC;
+            gp->blocks[i].xC += gp->blocks[i].x10;
 
-            if (slot->x8 > 5.0f) {
-                slot->xC = -1.2f;
-            } else if (slot->x8 < 0.0f) {
-                slot->x8 = 0.0f;
-                slot->status = 2;
-                slot->x4 = 10;
+            if (gp->blocks[i].xC > 5.0) {
+                gp->blocks[i].x10 = -1.2f;
+            } else if (gp->blocks[i].xC < 0.0) {
+                gp->blocks[i].xC = 0.0f;
+                gp->blocks[i].x2 = 2;
+                gp->blocks[i].x4 = 10;
             }
 
             // the blocks appear to not move at all, so not
             // sure what this is
-            if (slot->jobj != NULL) {
-                HSD_JObjSetTranslateY(slot->jobj, slot->x8);
-            }
+            HSD_JObjSetTranslateY(gp->blocks[i].jobj,
+                                  gp->blocks[i].x8 + gp->blocks[i].xC);
             break;
 
         case 0:
-            if (slot->x20 > 0) {
-                slot->x20--;
+            if (gp->blocks[i].x20 != 0) {
+                gp->blocks[i].x20--;
             } else {
                 Vec3 pos;
-                lb_8000B1CC(slot->jobj, NULL, &pos);
+                lb_8000B1CC(gp->blocks[i].jobj, NULL, &pos);
                 if (!grLib_801C9EE8(&pos, 15.0f)) {
-                    DOBJ_LOOP(slot->jobj);
-                    HSD_JObjClearFlagsAll(slot->jobj, JOBJ_HIDDEN);
-                    grMaterial_801C8E08(slot->item_gobj);
-                    slot->status = 1;
-                    slot->x22 = grI1_804D69F8->unk18;
+                    DOBJ_CLEAR_LOOP(gp->blocks[i].jobj);
+                    HSD_JObjClearFlagsAll(gp->blocks[i].jobj, JOBJ_HIDDEN);
+                    grMaterial_801C8E08(gp->blocks[i].item_gobj);
+                    gp->blocks[i].x2 = 1;
+                    gp->blocks[i].x22 = grI1_804D69F8->unk18;
                 }
             }
 
-            if (slot->hatena_gobj != NULL) {
-                HSD_JObj* sub_jobj = ((HSD_GObj*) slot->hatena_gobj)->hsd_obj;
+            if (gp->blocks[i].hatena_gobj != NULL) {
+                HSD_JObj* sub_jobj =
+                    ((HSD_GObj*) gp->blocks[i].hatena_gobj)->hsd_obj;
                 if (!(HSD_JObjGetFlags(sub_jobj) & 0x10)) {
                     HSD_JObjSetFlagsAll(sub_jobj, JOBJ_HIDDEN);
                 }
@@ -641,31 +746,31 @@ void grInishie1_801FB3F0(HSD_GObj* gobj)
             /*
                probably sets the flickering for blocks when they spawn
             */
-            if (slot->x22 > 0) {
-                HSD_JObjGetDObj(slot->jobj);
-                if (slot->hatena_gobj != NULL) {
+            if (gp->blocks[i].x22 > 0) {
+                HSD_JObjGetDObj(gp->blocks[i].jobj);
+                if (gp->blocks[i].hatena_gobj != NULL) {
                     HSD_JObj* target =
-                        ((HSD_GObj*) slot->hatena_gobj)->hsd_obj;
+                        ((HSD_GObj*) gp->blocks[i].hatena_gobj)->hsd_obj;
 
-                    if (slot->x22 & 1) {
+                    if (gp->blocks[i].x22 & 1) {
                         HSD_JObjClearFlagsAll(target, JOBJ_HIDDEN);
                     } else {
                         HSD_JObjSetFlagsAll(target, JOBJ_HIDDEN);
                     }
 
-                    DOBJ_LOOP(slot->jobj);
+                    DOBJ_CLEAR_LOOP(gp->blocks[i].jobj);
                 } else {
-                    if (slot->x22 & 1) {
-                        DOBJ_LOOP(slot->jobj);
+                    if (gp->blocks[i].x22 & 1) {
+                        DOBJ_DIRECT_CLEAR_LOOP(gp->blocks[i].jobj);
                     } else {
-                        DOBJ_LOOP(slot->jobj);
+                        DOBJ_DIRECT_LOOP(gp->blocks[i].jobj);
                     }
                 }
 
-                slot->x22--;
+                gp->blocks[i].x22--;
             } else {
-                slot->status = 2;
-                slot->x4 = 0;
+                gp->blocks[i].x2 = 2;
+                gp->blocks[i].x4 = 0;
             }
             break;
         }
@@ -793,7 +898,9 @@ void fn_801FBF6C(Item_GObj* item_gobj, Ground* gp, Vec3* pos, HSD_GObj* arg3,
     }
 
     map_gobj = Ground_801C2BA4(3);
-    HSD_ASSERT(0x425, map_gobj);
+    if (map_gobj == NULL) {
+        __assert(grI1_803E49A8.filename, 0x425, grI1_803E4A54);
+    }
 
     new_var = map_gobj;
     grInishie1_801FB0AC(map_gobj, i);

@@ -2270,6 +2270,8 @@ static inline f32 ftCo_800A4BEC_inline0(Fighter* fp, Fighter* arg1)
     return sqrtf(dx * dx + dy * dy);
 }
 
+extern const f32 ftCo_804D8914;
+
 Fighter* ftCo_800A4BEC(Fighter* fp)
 {
     Fighter* cur_fp;

@@ -2320,12 +2320,64 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
     mnDiagram_802417D0(gobj);
 }
 
+#define MNDIAGRAM_JOBJ_ASSERT(line, cond)                                    \
+    ((cond) ? (void) 0 : __assert(mnDiagram_804D4FA8, line, mnDiagram_804D4FB0))
+
+static inline bool mnDiagram_HSD_JObjMtxIsDirty(HSD_JObj* jobj)
+{
+    bool result;
+    MNDIAGRAM_JOBJ_ASSERT(564, jobj);
+    result = false;
+    if (!(jobj->flags & JOBJ_USER_DEF_MTX) && (jobj->flags & JOBJ_MTX_DIRTY)) {
+        result = true;
+    }
+    return result;
+}
+
+#define mnDiagram_HSD_JObjSetMtxDirty(jobj)                                  \
+    {                                                                         \
+        if (jobj != NULL && !mnDiagram_HSD_JObjMtxIsDirty(jobj)) {            \
+            HSD_JObjSetMtxDirtySub(jobj);                                     \
+        }                                                                     \
+    }
+
+static inline f32 mnDiagram_HSD_JObjGetTranslationX(HSD_JObj* jobj)
+{
+    MNDIAGRAM_JOBJ_ASSERT(993, jobj);
+    return jobj->translate.x;
+}
+
+static inline f32 mnDiagram_HSD_JObjGetTranslationY(HSD_JObj* jobj)
+{
+    MNDIAGRAM_JOBJ_ASSERT(1006, jobj);
+    return jobj->translate.y;
+}
+
+static inline void mnDiagram_HSD_JObjSetTranslateX(HSD_JObj* jobj, f32 x)
+{
+    MNDIAGRAM_JOBJ_ASSERT(932, jobj);
+    jobj->translate.x = x;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        mnDiagram_HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void mnDiagram_HSD_JObjSetTranslateY(HSD_JObj* jobj, f32 y)
+{
+    MNDIAGRAM_JOBJ_ASSERT(947, jobj);
+    jobj->translate.y = y;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        mnDiagram_HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
 void mnDiagram_80241E78(void* arg0, u8 arg1, u8 arg2, int arg3)
 {
     Diagram* data_alias;
     f32 row_offset_adj;
     HSD_JObj* jobj;
     HSD_JObj* jobj2;
+    Diagram* user_data;
     Diagram* data;
     void** joint_data;
     s32 digit_count;
@@ -2344,17 +2396,17 @@ void mnDiagram_80241E78(void* arg0, u8 arg1, u8 arg2, int arg3)
     data_alias = data;
 
     jobj = data->jobjs[11];
-    base = HSD_JObjGetTranslationX(jobj);
+    base = mnDiagram_HSD_JObjGetTranslationX(jobj);
     jobj2 = data->jobjs[12];
-    x_spacing = HSD_JObjGetTranslationX(jobj2) - base;
+    x_spacing = mnDiagram_HSD_JObjGetTranslationX(jobj2) - base;
 
     jobj = data->jobjs[7];
-    base = HSD_JObjGetTranslationX(jobj);
+    base = mnDiagram_HSD_JObjGetTranslationX(jobj);
     jobj2 = data->jobjs[8];
-    y_spacing = HSD_JObjGetTranslationX(jobj2) - base;
+    y_spacing = mnDiagram_HSD_JObjGetTranslationX(jobj2) - base;
 
     jobj = data->jobjs[9];
-    base = HSD_JObjGetTranslationY(jobj);
+    base = mnDiagram_HSD_JObjGetTranslationY(jobj);
     jobj2 = data->jobjs[10];
     y_offset = HSD_JObjGetTranslationY(jobj2);
     y_offset -= base;
@@ -2380,9 +2432,9 @@ void mnDiagram_80241E78(void* arg0, u8 arg1, u8 arg2, int arg3)
                 jobj, (x_spacing * (f32) i) + col_offset + 0.4f);
         }
         if (row < 10) {
-            HSD_JObjSetTranslateY(jobj, row_offset);
+            mnDiagram_HSD_JObjSetTranslateY(jobj, row_offset);
         } else {
-            HSD_JObjSetTranslateY(jobj, row_offset_adj);
+            mnDiagram_HSD_JObjSetTranslateY(jobj, row_offset_adj);
         }
         HSD_JObjAddChild(data_alias->jobjs[11], jobj);
     }
@@ -2726,57 +2778,6 @@ void mnDiagram_80242C0C(void* arg0, int arg1, int arg2)
 static inline Diagram* mnDiagram_GetCurrentDiagramData(void)
 {
     return mnDiagram_804D6C10->user_data;
-}
-
-#define MNDIAGRAM_JOBJ_ASSERT(line, cond)                                    \
-    ((cond) ? (void) 0 : __assert(mnDiagram_804D4FA8, line, mnDiagram_804D4FB0))
-
-static inline bool mnDiagram_HSD_JObjMtxIsDirty(HSD_JObj* jobj)
-{
-    bool result;
-    MNDIAGRAM_JOBJ_ASSERT(564, jobj);
-    result = false;
-    if (!(jobj->flags & JOBJ_USER_DEF_MTX) && (jobj->flags & JOBJ_MTX_DIRTY)) {
-        result = true;
-    }
-    return result;
-}
-
-#define mnDiagram_HSD_JObjSetMtxDirty(jobj)                                  \
-    {                                                                         \
-        if (jobj != NULL && !mnDiagram_HSD_JObjMtxIsDirty(jobj)) {            \
-            HSD_JObjSetMtxDirtySub(jobj);                                     \
-        }                                                                     \
-    }
-
-static inline f32 mnDiagram_HSD_JObjGetTranslationX(HSD_JObj* jobj)
-{
-    MNDIAGRAM_JOBJ_ASSERT(993, jobj);
-    return jobj->translate.x;
-}
-
-static inline f32 mnDiagram_HSD_JObjGetTranslationY(HSD_JObj* jobj)
-{
-    MNDIAGRAM_JOBJ_ASSERT(1006, jobj);
-    return jobj->translate.y;
-}
-
-static inline void mnDiagram_HSD_JObjSetTranslateX(HSD_JObj* jobj, f32 x)
-{
-    MNDIAGRAM_JOBJ_ASSERT(932, jobj);
-    jobj->translate.x = x;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        mnDiagram_HSD_JObjSetMtxDirty(jobj);
-    }
-}
-
-static inline void mnDiagram_HSD_JObjSetTranslateY(HSD_JObj* jobj, f32 y)
-{
-    MNDIAGRAM_JOBJ_ASSERT(947, jobj);
-    jobj->translate.y = y;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        mnDiagram_HSD_JObjSetMtxDirty(jobj);
-    }
 }
 
 void mnDiagram_CursorProc(HSD_GObj* gobj)

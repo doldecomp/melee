@@ -3211,18 +3211,23 @@ s32 Ground_801C5840(void)
     return stage_info.x6E4[i];
 }
 
+#pragma push
+#pragma global_optimizer off
 void Ground_801C5878(void)
 {
     PAD_STACK(8);
     tyDisplay_8031C2CC();
     if (gm_8016B498() != 0) {
-        int temp_r30 = tyDisplay_8031C2EC();
+        StageInfo* stageinfo = &stage_info;
+        int temp_r30;
+        temp_r30 = tyDisplay_8031C2EC();
         un_8031C454(temp_r30);
-        stage_info.x6E4[0] = temp_r30;
+        stageinfo->x6E4[0] = temp_r30;
     } else {
         stage_info.x6E4[0] = -1;
     }
 }
+#pragma pop
 
 Item_GObj* Ground_801C58E0(s32 arg0, s32 arg1)
 {

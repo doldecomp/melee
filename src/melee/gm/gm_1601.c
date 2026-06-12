@@ -827,6 +827,7 @@ void gm_80160C90(HSD_Text* text, u8 fighter_id, bool arg2)
         } else {
             name_scale = lbl_803B767C[fighter_id];
         }
+        var_f31 = var_f0;
     } else {
         use_alt_name = false;
         if ((u8) arg2 != 0 && lbl_803D5060[fighter_id] != NULL) {
@@ -837,6 +838,7 @@ void gm_80160C90(HSD_Text* text, u8 fighter_id, bool arg2)
         } else {
             name_scale = lbl_803B75F8[fighter_id];
         }
+        var_f31 = var_f0_2;
     }
     HSD_SisLib_803A7548(text,
                         HSD_SisLib_803A6B98(text, 0.0F, 0.0F, str,

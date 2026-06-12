@@ -574,27 +574,26 @@ void mnSnap_80254014(void)
 /// Configures the Yes/No dialog button positions based on language setting.
 void mnSnap_8025409C(s32 dlg_type)
 {
-    mnSnap_State* snap = &mnSnap_804A0A10;
-    HSD_JObj* left;
     HSD_JObj* right;
+    HSD_JObj* left;
     s32* p5E;
     HSD_JObj** p38;
     HSD_JObj** p39;
 
-    snap->dlg_type = dlg_type;
+    mnSnap_804A0A10.dlg_type = dlg_type;
 
     if (dlg_type == 0) {
-        HSD_JObjSetFlags(snap->yes_jobj, JOBJ_HIDDEN);
-        HSD_JObjSetFlags(snap->no_jobj, JOBJ_HIDDEN);
+        HSD_JObjSetFlags(mnSnap_804A0A10.yes_jobj, JOBJ_HIDDEN);
+        HSD_JObjSetFlags(mnSnap_804A0A10.no_jobj, JOBJ_HIDDEN);
         return;
     }
 
-    p38 = &snap->yes_jobj;
+    p38 = &mnSnap_804A0A10.yes_jobj;
     HSD_JObjClearFlags(*p38, JOBJ_HIDDEN);
-    p39 = &snap->no_jobj;
+    p39 = &mnSnap_804A0A10.no_jobj;
     HSD_JObjClearFlags(*p39, JOBJ_HIDDEN);
 
-    p5E = &snap->btn_idx;
+    p5E = &mnSnap_804A0A10.btn_idx;
     *p5E = 0;
 
     if (dlg_type == 1) {
@@ -609,21 +608,8 @@ void mnSnap_8025409C(s32 dlg_type)
         *p5E = 1;
     }
 
-    if (left == NULL) {
-        __assert("jobj.h", 0x3A4, "jobj");
-    }
-    left->translate.x = -3.5F;
-    if (!(left->flags & JOBJ_MTX_INDEP_SRT)) {
-        HSD_JObjSetMtxDirty(left);
-    }
-
-    if (right == NULL) {
-        __assert("jobj.h", 0x3A4, "jobj");
-    }
-    right->translate.x = +3.5F;
-    if (!(right->flags & JOBJ_MTX_INDEP_SRT)) {
-        HSD_JObjSetMtxDirty(right);
-    }
+    HSD_JObjSetTranslateX(left, -3.5F);
+    HSD_JObjSetTranslateX(right, +3.5F);
 
     {
         f32 f;
@@ -647,8 +633,8 @@ void mnSnap_8025409C(s32 dlg_type)
     HSD_JObjAnimAll(left);
     HSD_JObjAnimAll(right);
 
-    snap->left_btn = left;
-    snap->right_btn = right;
+    mnSnap_804A0A10.left_btn = left;
+    mnSnap_804A0A10.right_btn = right;
 }
 
 /// Resets to slot selection state after a card error or empty card.

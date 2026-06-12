@@ -188,7 +188,8 @@ int fn_8016F39C(HSD_Text** arg0, void* arg1, u8 arg2, u16 arg3, u8 arg4,
             item_id = 0;
             while (curr->kind != idx) {
                 if (curr->kind == 0x29A) {
-                    break;
+                    item_id = 0;
+                    goto display;
                 }
                 curr++;
             }
@@ -199,6 +200,7 @@ int fn_8016F39C(HSD_Text** arg0, void* arg1, u8 arg2, u16 arg3, u8 arg4,
                     item_id = curr->x2;
                 }
             }
+display:
             HSD_SisLib_803A6368(arg0[count], item_id);
             count++;
             if (count == (int) arg2) {
@@ -2163,6 +2165,7 @@ lbl_8046DBD8_t* gm_801736DC(void)
     return &lbl_8046DBD8;
 }
 
+#pragma pool_data off
 void gm_801736E8(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5)
 {
     lbl_8046DBD8_t* tmp = &lbl_8046DBD8;
@@ -2174,6 +2177,7 @@ void gm_801736E8(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5)
     tmp->x4 = arg4;
     tmp->x5 = arg5;
 }
+#pragma pool_data on
 
 #pragma push
 #pragma dont_inline on

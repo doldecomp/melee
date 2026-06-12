@@ -3094,13 +3094,14 @@ s32 hsd_80395D88(void* data)
             return 1;
         }
         default:
-            return 0;
+            goto return_0;
         }
     }
     case -1:
         ps_remove_node(sp, data);
         return 1;
     default:
+    return_0:
         return 0;
     }
 }

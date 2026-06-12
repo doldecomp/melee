@@ -882,7 +882,8 @@ void mnName_80238AE0(HSD_GObj* gobj, u8 index, u8 arg2)
 }
 
 static inline AnimLoopSettings*
-mnName_FindAnimLoop(AnimLoopSettings** tableBase, f32 frame)
+mnName_FindAnimLoop(AnimLoopSettings** tableBase, f32 frame,
+                    AnimLoopSettings* base)
 {
     s32 i;
     AnimLoopSettings* table[6];
@@ -909,8 +910,13 @@ mnName_FindAnimLoop(AnimLoopSettings** tableBase, f32 frame)
         }
     }
 
-    msg = "But AnimFrame!!!\n";
-    HSD_ASSERTREPORT(0x3DC, NULL, msg);
+    OSReport((char*) base + 0xF8);
+    __assert((char*) base + 0x10C, 0x3DC, mnName_804D4C04);
+}
+
+inline f32 mnName_80238C34_inline(HSD_JObj* jobj)
+{
+    return mn_8022F298(jobj);
 }
 
 inline f32 mnName_80238C34_inline(HSD_JObj* jobj)
@@ -959,7 +965,7 @@ void mnName_80238C34(HSD_GObj* arg0, u8 arg1, u8 arg2)
         found = mnName_FindAnimLoop(tableBase, mnName_80238C34_inline(jobj));
         result = mn_8022ED6C(jobj, found);
 
-        found = mnName_FindAnimLoop(tableBase, result);
+        found = mnName_FindAnimLoop(tableBase, result, base);
         if (found == base + 5) {
             if (result >= base[5].end_frame) {
                 HSD_GObjPLink_80390228(arg0);

@@ -159,18 +159,26 @@ void mnCharSel_8025BD30(void)
     }
 }
 
+static char mnCharSel_804D50E4[5] = "%02d";
+static char mnCharSel_804D50EC[3] = "99";
+static char mnCharSel_804D50F0[5] = "%08d";
+static char mnCharSel_804D50F8[5] = "%09d";
+static char mnCharSel_804D5108[6] = { '%', 'd', ' ', 0x81, 0x40, 0 };
+static char mnCharSel_804D5110[5] = "%.1f";
+static char mnCharSel_804D5118[3] = "%d";
+
 static inline void drawTimeText(HSD_Text* x, HSD_Text* y, int hours,
                                 int minutes, int seconds, int microseconds)
 {
     if (hours == 0) {
         HSD_SisLib_803A70A0(x, 0, "%02d:%02d", minutes, seconds);
-        HSD_SisLib_803A70A0(y, 0, "%02d", microseconds);
+        HSD_SisLib_803A70A0(y, 0, mnCharSel_804D50E4, microseconds);
     } else if (hours < 100) {
         HSD_SisLib_803A70A0(x, 0, "%d:%02d:%02d", hours, minutes, seconds);
-        HSD_SisLib_803A70A0(y, 0, "%02d", microseconds);
+        HSD_SisLib_803A70A0(y, 0, mnCharSel_804D50E4, microseconds);
     } else {
         HSD_SisLib_803A70A0(x, 0, "99:59:59");
-        HSD_SisLib_803A70A0(y, 0, "99");
+        HSD_SisLib_803A70A0(y, 0, mnCharSel_804D50EC);
     }
 }
 
@@ -311,11 +319,11 @@ void mnCharSel_8025C020(int arg0)
         }
         if (lbLang_IsSavedLanguageJP()) {
             HSD_SisLib_803A70A0(
-                mnCharSel_804D6CE4, 0, "%.1f",
+                mnCharSel_804D6CE4, 0, mnCharSel_804D5110,
                 (f32) (int) (10.0f * (gm_801631F0() / 100.0f)) / 10.0f);
         } else {
             HSD_SisLib_803A70A0(
-                mnCharSel_804D6CE4, 0, "%.1f",
+                mnCharSel_804D6CE4, 0, mnCharSel_804D5110,
                 (f32) (int) (10.0f * (gm_801631F0() / 30.4788f)) / 10.0f);
         }
         break;
@@ -3209,7 +3217,7 @@ void fn_80262648(HSD_GObj* gobj)
     u8 prev_port = model->x6;
     int n_doors;
 
-    if ((u8) mnCharSel_804D6CB0->match_type == 0x17) {
+    if ((u8) css->match_type == 0x17) {
         n_doors = 2;
     } else {
         n_doors = mnCharSel_804D6CF5;
@@ -3232,7 +3240,7 @@ void fn_80262648(HSD_GObj* gobj)
             } else {
                 model->x6 = (u8) mnCharSel_804D6CF0;
             }
-        } else if ((u8) mnCharSel_804D6CB0->data.data.rules.is_teams == 0) {
+        } else if ((u8) css->data.data.rules.is_teams == 0) {
             if (p_kind == 1) {
                 model->x6 = 8;
             } else {

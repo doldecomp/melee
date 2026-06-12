@@ -6126,6 +6126,9 @@ void mpLib_DrawSnapping(void)
     }
 }
 
+extern const float mpLib_804D80E8;
+extern const float mpLib_804D80EC;
+
 void mpLib_DrawMatchingLines(int value, int flag, GXColor color)
 {
     CollLine* line_r31;
@@ -6162,16 +6165,16 @@ void mpLib_DrawMatchingLines(int value, int flag, GXColor color)
                 PAD_STACK(8);
                 GXPosition3f32(groundCollVtx[line_r31->x0->v0_idx].pos.x,
                                groundCollVtx[line_r31->x0->v0_idx].pos.y,
-                               25.0F);
+                               mpLib_804D80E8);
                 GXPosition3f32(groundCollVtx[line_r31->x0->v1_idx].pos.x,
                                groundCollVtx[line_r31->x0->v1_idx].pos.y,
-                               25.0F);
+                               mpLib_804D80E8);
                 GXPosition3f32(groundCollVtx[line_r31->x0->v1_idx].pos.x,
                                groundCollVtx[line_r31->x0->v1_idx].pos.y,
-                               -25.0F);
+                               mpLib_804D80EC);
                 GXPosition3f32(groundCollVtx[line_r31->x0->v0_idx].pos.x,
                                groundCollVtx[line_r31->x0->v0_idx].pos.y,
-                               -25.0F);
+                               mpLib_804D80EC);
             }
         }
         line_r31 += 1;

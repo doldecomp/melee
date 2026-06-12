@@ -2754,28 +2754,35 @@ void lbAudioAx_8002838C(void)
     int* p3;
     int* p4;
     int i;
+    char* ptr;
 
     ARInit(st->x514, 0x10);
     ARQInit();
     AIInit(NULL);
     PAD_STACK(8);
 
-    lbl_804D643C = offsets_arr_803BC4E4[0][0];
-    lbl_804D6440 = offsets_arr_803BC4E4[0x33][0];
-    lbl_804D6440 += offsets_arr_803BC4E4[1][0];
-    lbl_804D6440 += offsets_arr_803BC4E4[0x36][0];
+    lbl_804D643C = *(int*) (lbl_803BB300 + 0x11E4);
+    lbl_804D6440 = *(int*) (lbl_803BB300 + 0x137C);
+    lbl_804D6440 += *(int*) (lbl_803BB300 + 0x11EC);
+    lbl_804D6440 += *(int*) (lbl_803BB300 + 0x1394);
 
     fn_80023254(3);
-    lbl_804D6444 = offsets_arr_803BC4E4[st->x434[0]][0];
+    ptr = lbl_803BB300 + ((*(volatile int*) ((char*) st + 0x434)) << 3);
+    lbl_804D6444 = *(int*) (ptr + 0x11E4);
 
     fn_80023254(4);
-    lbl_804D6444 += offsets_arr_803BC4E4[st->x434[0]][0];
-    lbl_804D6444 += offsets_arr_803BC4E4[st->x434[1]][0];
-    lbl_804D6444 += offsets_arr_803BC4E4[st->x434[2]][0];
-    lbl_804D6444 += offsets_arr_803BC4E4[st->x434[3]][0];
+    ptr = lbl_803BB300 + ((*(volatile int*) ((char*) st + 0x434)) << 3);
+    lbl_804D6444 += *(int*) (ptr + 0x11E4);
+    ptr = lbl_803BB300 + ((*(volatile int*) ((char*) st + 0x438)) << 3);
+    lbl_804D6444 += *(int*) (ptr + 0x11E4);
+    ptr = lbl_803BB300 + ((*(volatile int*) ((char*) st + 0x43C)) << 3);
+    lbl_804D6444 += *(int*) (ptr + 0x11E4);
+    ptr = lbl_803BB300 + ((*(volatile int*) ((char*) st + 0x440)) << 3);
+    lbl_804D6444 += *(int*) (ptr + 0x11E4);
 
     fn_80023254(5);
-    lbl_804D6444 += offsets_arr_803BC4E4[st->x434[0]][0];
+    ptr = lbl_803BB300 + ((*(volatile int*) ((char*) st + 0x434)) << 3);
+    lbl_804D6444 += *(int*) (ptr + 0x11E4);
 
     lbl_804D6438 = lbl_804D643C + (lbl_804D6440 + lbl_804D6444);
     lbl_804D3870 = lbl_804D6438;

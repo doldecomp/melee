@@ -568,76 +568,96 @@ bool grRCruise_8020014C(Ground_GObj* arg)
 
 void grRCruise_80200154(Ground_GObj* gobj)
 {
+    struct grRCruise_SubEntryFlags {
+        u8 b0 : 1;
+        u8 b1 : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    };
     Ground* gp = gobj->user_data;
+    Ground* gp2 = gp;
     s32 i;
 
     for (i = 0; i < 3; i++) {
-        struct grRCruise_SubEntry* entry = &gp->gv.rcruise.x3C[i];
-
-        switch (entry->x00) {
+        switch (gp->gv.rcruise.x3C[i].x00) {
         case 0:
-            mpJointListAdd(entry->x02);
-            grRCruise_80201B60(entry->x0C->child, 1);
-            entry->x08 = 0;
-            entry->x00 = 1;
+            mpJointListAdd(gp2->gv.rcruise.x3C[i].x02);
+            grRCruise_80201B60(gp2->gv.rcruise.x3C[i].x0C->child, 1);
+            gp->gv.rcruise.x3C[i].x04 = 0;
+            gp->gv.rcruise.x3C[i].x00 = 1;
             break;
         case 2:
-            if (entry->x04 == 0) {
-                entry->x08 = 0;
-                grAnime_801C7A94(gobj, grRc_804D4790[i], 1, 0.0f);
-                entry->x00 = 3;
+            if (gp->gv.rcruise.x3C[i].x08 == 0) {
+                gp->gv.rcruise.x3C[i].x04 = 0;
+                grAnime_801C7A94(gobj, grRc_804D4790[i], 1, grRc_804DB644);
+                gp->gv.rcruise.x3C[i].x00 = 3;
             } else if (grAnime_801C83D0(gobj, grRc_804D4790[i], 7) != 0) {
-                entry->x08 = 0;
-                entry->x00 = 5;
+                gp->gv.rcruise.x3C[i].x04 = 0;
+                gp->gv.rcruise.x3C[i].x00 = 5;
             }
             break;
         case 3:
-            if (entry->x08 >= grRc_804D6A10->x0C) {
-                entry->x08 = 0;
-                entry->pad_01 &= ~0x80;
-                entry->x00 = 4;
+            if (gp->gv.rcruise.x3C[i].x04 >= grRc_804D6A10->x0C) {
+                gp->gv.rcruise.x3C[i].x04 = 0;
+                ((struct grRCruise_SubEntryFlags*) &gp->gv.rcruise.x3C[i]
+                     .pad_01)
+                    ->b0 = 0;
+                gp->gv.rcruise.x3C[i].x00 = 4;
             }
-            entry->x08++;
+            gp->gv.rcruise.x3C[i].x04++;
             break;
         case 4:
-            if (entry->x08 % grRc_804D6A10->x14 == 0) {
-                entry->pad_01 ^= 0x80;
-                if ((entry->pad_01 & 0x80) != 0) {
-                    grRCruise_80201B60(entry->x0C->child, 0);
+            if (gp->gv.rcruise.x3C[i].x04 % grRc_804D6A10->x14 == 0) {
+                ((struct grRCruise_SubEntryFlags*) &gp->gv.rcruise.x3C[i]
+                     .pad_01)
+                    ->b0 =
+                    ((struct grRCruise_SubEntryFlags*) &gp->gv.rcruise.x3C[i]
+                         .pad_01)
+                        ->b0 ^
+                    1;
+                if (((struct grRCruise_SubEntryFlags*) &gp->gv.rcruise.x3C[i]
+                         .pad_01)
+                        ->b0)
+                {
+                    grRCruise_80201B60(gp2->gv.rcruise.x3C[i].x0C->child, 0);
                 } else {
-                    grRCruise_80201B60(entry->x0C->child, 1);
+                    grRCruise_80201B60(gp2->gv.rcruise.x3C[i].x0C->child, 1);
                 }
             }
-            if (entry->x08 >= grRc_804D6A10->x10) {
-                mpLib_80057BC0(entry->x02);
-                grRCruise_80201B60(entry->x0C->child, 0);
-                grAnime_801C7BA0(gobj, grRc_804D4790[i], 1, 0.0f);
-                grAnime_801C7A94(gobj, grRc_804D4790[i], 1, 0.0f);
-                mpLib_80055E9C(entry->x02);
-                mpLib_80057424(entry->x02);
-                entry->x00 = 0;
+            if (gp->gv.rcruise.x3C[i].x04 >= grRc_804D6A10->x10) {
+                mpLib_80057BC0(gp2->gv.rcruise.x3C[i].x02);
+                grRCruise_80201B60(gp2->gv.rcruise.x3C[i].x0C->child, 0);
+                grAnime_801C7BA0(gobj, grRc_804D4790[i], 1, grRc_804DB644);
+                grAnime_801C7A94(gobj, grRc_804D4790[i], 1, grRc_804DB644);
+                mpLib_80055E9C(gp2->gv.rcruise.x3C[i].x02);
+                mpLib_80057424(gp2->gv.rcruise.x3C[i].x02);
+                gp->gv.rcruise.x3C[i].x00 = 0;
             }
-            entry->x08++;
+            gp->gv.rcruise.x3C[i].x04++;
             break;
         case 5:
-            if (entry->x08 % grRc_804D6A10->x1C == 0) {
-                grRCruise_80201B60(entry->x0C->child, 0);
+            if (gp->gv.rcruise.x3C[i].x04 % grRc_804D6A10->x1C == 0) {
+                grRCruise_80201B60(gp2->gv.rcruise.x3C[i].x0C->child, 0);
             } else {
-                grRCruise_80201B60(entry->x0C->child, 1);
+                grRCruise_80201B60(gp2->gv.rcruise.x3C[i].x0C->child, 1);
             }
-            if (entry->x08 >= grRc_804D6A10->x18) {
-                mpLib_80057BC0(entry->x02);
-                grRCruise_80201B60(entry->x0C->child, 0);
-                grAnime_801C7BA0(gobj, grRc_804D4790[i], 1, 0.0f);
-                grAnime_801C7A94(gobj, grRc_804D4790[i], 1, 0.0f);
-                mpLib_80055E9C(entry->x02);
-                mpLib_80057424(entry->x02);
-                entry->x00 = 0;
+            if (gp->gv.rcruise.x3C[i].x04 >= grRc_804D6A10->x18) {
+                mpLib_80057BC0(gp2->gv.rcruise.x3C[i].x02);
+                grRCruise_80201B60(gp2->gv.rcruise.x3C[i].x0C->child, 0);
+                grAnime_801C7BA0(gobj, grRc_804D4790[i], 1, grRc_804DB644);
+                grAnime_801C7A94(gobj, grRc_804D4790[i], 1, grRc_804DB644);
+                mpLib_80055E9C(gp2->gv.rcruise.x3C[i].x02);
+                mpLib_80057424(gp2->gv.rcruise.x3C[i].x02);
+                gp->gv.rcruise.x3C[i].x00 = 0;
             }
-            entry->x08++;
+            gp->gv.rcruise.x3C[i].x04++;
             break;
         }
-        entry->x04 = 0;
+        gp->gv.rcruise.x3C[i].x08 = 0;
     }
     Ground_801C2FE0(gobj);
 }

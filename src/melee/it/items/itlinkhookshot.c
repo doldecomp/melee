@@ -184,22 +184,16 @@ static inline void it_link_attr_math(itLinkHookshotAttributes* attr, s32 arg2,
 
 HSD_JObj* it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
 {
-    CollData* temp_r17;
     CollData* temp_r18;
     CollData* temp_r21;
+    CollData* temp_r17;
     HSD_GObj* temp_r3_2;
     ItemLink* temp_r3_3;
     ItemLink* var_r18;
-    itLinkHookshotAttributes* temp_r3_4;
     ItemLink* var_r19;
     ItemLink* var_r20;
-    f32 temp_f7;
-    f32 var_f0;
-    f32 var_f1;
-    s32 temp_r3;
     s32 var_r31;
     itLinkHookshotAttributes* attr;
-    itLinkHookshotAttributes* temp_r3_5;
     HSD_JObj* var_r21;
     Vec3 pos;
 
@@ -1666,9 +1660,11 @@ static void it_802A4758_no_inline(ItemLink* link_0, Vec3* arg1,
 void it_802A6474(ItemLink* link_0, ItemLink* link_1, Vec3* pos,
                  itLinkHookshotAttributes* attrs)
 {
-    u8 _padA[24];
+    u8 _padA[16];
     Vec3 saved_pos;
+    UNUSED f32 _padB;
     Vec3 speed;
+    UNUSED f32 _padC;
     f32 target_dx;
     f32 target_dy;
     f32 target_dz;
@@ -1710,8 +1706,10 @@ void it_802A6474(ItemLink* link_0, ItemLink* link_1, Vec3* pos,
     while (next_link != NULL && next_link->x2C_b0) {
         if (limit_reached == 0) {
             segment_dy = next_link->pos.y - cur_link->pos.y;
-            segment_dx = next_link->pos.x - cur_link->pos.x;
-            segment_dz = next_link->pos.z - cur_link->pos.z;
+            segment_dx = next_link->pos.x;
+            segment_dx -= cur_link->pos.x;
+            segment_dz = next_link->pos.z;
+            segment_dz -= cur_link->pos.z;
             segment_len = segment_dy * segment_dy;
             segment_len = (segment_dx * segment_dx) + segment_len;
             segment_len = (segment_dz * segment_dz) + segment_len;
@@ -2217,7 +2215,7 @@ void it_802A7AF0(HSD_GObj* arg0)
     }
 }
 
-static inline void it_802A7B34_6944_inline(Item* item)
+static void inline it_802A7B34_6944_inline(Item* item)
 {
     Mtx m;
     f32 zero = 0.0F;

@@ -164,6 +164,8 @@ typedef struct TyLightArray_ {
     s32 x7C;
     s32 x80;
     s32 x84;
+    u8 pad88[0xDC - 0x88];
+    s8 xDC[8];
 } TyLightArray_;
 
 typedef struct ToyDataJObj {
@@ -292,6 +294,9 @@ typedef struct {
     u8 pad[0x14];
     void* x14;
 } Ty25Entry;
+
+extern const f32 un_804DDCE4;
+extern const f32 un_804DDCE8;
 
 s32 un_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
 {
@@ -1701,9 +1706,9 @@ void un_8030715C(f32 cstick_x, f32 cstick_y)
     Vec3 left_vec;
     Vec3 angles;
     TyCameraData_* data;
+    TyLightArray_* cur;
     TyLightArray_* data2;
     HSD_LObj* lobj;
-    TyLightArray_* cur;
     s32 i;
     s8* flag_ptr;
     HSD_CObj* cobj;
@@ -1722,9 +1727,9 @@ void un_8030715C(f32 cstick_x, f32 cstick_y)
     PSVECScale(&left_vec, &left_vec, cstick_x);
     PSVECAdd(&left_vec, &new_interest, &new_interest);
 
-    if (new_interest.x <= -3000.0F || new_interest.y <= -3000.0F ||
-        new_interest.z <= -3000.0F || new_interest.x >= 3000.0F ||
-        new_interest.y >= 3000.0F || new_interest.z >= 3000.0F)
+    if (new_interest.x <= un_804DDCE4 || new_interest.y <= un_804DDCE4 ||
+        new_interest.z <= un_804DDCE4 || new_interest.x >= un_804DDCE8 ||
+        new_interest.y >= un_804DDCE8 || new_interest.z >= un_804DDCE8)
     {
         return;
     }
@@ -1751,7 +1756,7 @@ void un_8030715C(f32 cstick_x, f32 cstick_y)
     lobj = data2->x4->x28;
 
     while (lobj != NULL) {
-        flag_ptr = (s8*) data2 + i + 0xDC;
+        flag_ptr = &data2->xDC[i];
 
         angles.x = 0.017453292F * data2->x14;
         angles.y = 0.017453292F * -data2->x18;

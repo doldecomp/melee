@@ -157,14 +157,14 @@ static s32 grGr_803E7734[] = {
 static s32 grGr_803E775C[] = {
     0, 0, 0, 14, 0, 0, 0, 14,
 };
-static s32 grGr_803E777C[] = {
-    1, 8, 15, 16, 2, 9, 3, 10, 4, 11, 5, 12, 6, 13,
+static s32 grGr_803E777C[][2] = {
+    { 1, 8 }, { 15, 16 }, { 2, 9 }, { 3, 10 }, { 4, 11 }, { 5, 12 }, { 6, 13 },
 };
 static s32 grGr_803E77B4[] = {
     0, 0, 0, 14, 0, 0, 0, 14,
 };
-static s32 grGr_803E77D4[] = {
-    1, 8, 15, 16, 2, 9, 3, 10, 4, 11, 5, 12, 6, 13,
+static s32 grGr_803E77D4[][2] = {
+    { 1, 8 }, { 15, 16 }, { 2, 9 }, { 3, 10 }, { 4, 11 }, { 5, 12 }, { 6, 13 },
 };
 static Vec3 grGr_803E780C[] = {
     { -1.0f, 0.0f, 0.0f },
@@ -442,8 +442,13 @@ void grGreens_80213C10(Ground_GObj* gobj)
     Ground_GObj* bg_gobj = Ground_801C2BA4(4);
     Ground* gp = GET_GROUND(gobj);
     Ground* bg_gp = GET_GROUND(bg_gobj);
+    UNUSED u8 pad0[0x18];
+    Vec3 pos;
+    Vec3 pos2;
+    UNUSED u32 pad1;
+    Vec3 pos3;
 
-    PAD_STACK(0x50);
+    PAD_STACK(0x24);
     gp->gv.greens2.x18 = 0;
 
     if (grGr_804D6AAC != 0) {
@@ -492,24 +497,25 @@ void grGreens_80213C10(Ground_GObj* gobj)
     case 1:
         if (gp->gv.greens2.x10 != 0) {
             HSD_JObj* jobj;
-            Vec3 pos;
+            int dir;
 
             gp->gv.greens2.x10 = 0;
             gp->gv.greens2.x8 = 0;
             jobj = gobj->hsd_obj;
-            HSD_JObjGetTranslation(jobj, &pos);
-            if (ftLib_800864A8(&pos, NULL) == 1.0f) {
-                gp->gv.greens2.x14 = 1;
+            HSD_JObjGetTranslation(jobj, &pos2);
+            if (ftLib_800864A8(&pos2, NULL) == 1.0f) {
+                dir = 1;
             } else {
-                gp->gv.greens2.x14 = 0;
+                dir = 0;
             }
+            gp->gv.greens2.x14 = dir;
             gp->gv.greens2.xC = 0;
             grAnime_801C8138(
                 gobj, gp->map_id,
-                grGr_803E777C[gp->gv.greens2.x8 * 2 + gp->gv.greens2.x14]);
+                grGr_803E777C[gp->gv.greens2.x8][gp->gv.greens2.x14]);
             grAnime_801C8138(
                 bg_gobj, bg_gp->map_id,
-                grGr_803E77D4[gp->gv.greens2.x8 * 2 + gp->gv.greens2.x14]);
+                grGr_803E77D4[gp->gv.greens2.x8][gp->gv.greens2.x14]);
             return;
         }
 
@@ -520,10 +526,10 @@ void grGreens_80213C10(Ground_GObj* gobj)
                 gp->gv.greens2.x8++;
                 grAnime_801C8138(
                     gobj, gp->map_id,
-                    grGr_803E777C[gp->gv.greens2.x8 * 2 + gp->gv.greens2.x14]);
+                    grGr_803E777C[gp->gv.greens2.x8][gp->gv.greens2.x14]);
                 grAnime_801C8138(
                     bg_gobj, bg_gp->map_id,
-                    grGr_803E77D4[gp->gv.greens2.x8 * 2 + gp->gv.greens2.x14]);
+                    grGr_803E77D4[gp->gv.greens2.x8][gp->gv.greens2.x14]);
                 return;
             }
             break;
@@ -533,10 +539,10 @@ void grGreens_80213C10(Ground_GObj* gobj)
                 gp->gv.greens2.x8++;
                 grAnime_801C8138(
                     gobj, gp->map_id,
-                    grGr_803E777C[gp->gv.greens2.x8 * 2 + gp->gv.greens2.x14]);
+                    grGr_803E777C[gp->gv.greens2.x8][gp->gv.greens2.x14]);
                 grAnime_801C8138(
                     bg_gobj, bg_gp->map_id,
-                    grGr_803E77D4[gp->gv.greens2.x8 * 2 + gp->gv.greens2.x14]);
+                    grGr_803E77D4[gp->gv.greens2.x8][gp->gv.greens2.x14]);
                 lbAudioAx_800237A8(0x68FB8, 0x7F, 0x40);
                 return;
             }
@@ -549,11 +555,11 @@ void grGreens_80213C10(Ground_GObj* gobj)
                     gp->gv.greens2.x8++;
                     gp->gv.greens2.xC = 0;
                     grAnime_801C8138(gobj, gp->map_id,
-                                     grGr_803E777C[gp->gv.greens2.x8 * 2 +
-                                                   gp->gv.greens2.x14]);
+                                     grGr_803E777C[gp->gv.greens2.x8]
+                                                   [gp->gv.greens2.x14]);
                     grAnime_801C8138(bg_gobj, bg_gp->map_id,
-                                     grGr_803E77D4[gp->gv.greens2.x8 * 2 +
-                                                   gp->gv.greens2.x14]);
+                                     grGr_803E77D4[gp->gv.greens2.x8]
+                                                   [gp->gv.greens2.x14]);
                     lbAudioAx_800237A8(gp->gv.greens2.x14 == 0 ? 0x68FB0
                                                                : 0x68FB1,
                                        0x7F, 0x40);
@@ -564,24 +570,27 @@ void grGreens_80213C10(Ground_GObj* gobj)
 
         case 3:
             if (grAnime_801C83D0(gobj, 0, 7) != 0) {
+                int wind_dir;
+
                 gp->gv.greens2.x8++;
                 grAnime_801C8138(
                     gobj, gp->map_id,
-                    grGr_803E777C[gp->gv.greens2.x8 * 2 + gp->gv.greens2.x14]);
-                if (gp->gv.greens2.x14 == 0) {
-                    lb_80011A50((Vec3*) &grGr_803E780C[0], 0xF, 0.5f, 0.0f,
+                    grGr_803E777C[gp->gv.greens2.x8][gp->gv.greens2.x14]);
+                wind_dir = GET_GROUND(gobj)->gv.greens2.x14;
+                if (wind_dir == 0) {
+                    lb_80011A50(&grGr_803E780C[wind_dir], 0xF, 0.5f, 0.0f,
                                 0.0f, -grGr_params->x44_right,
                                 grGr_params->x48_top, -grGr_params->x40_left,
                                 grGr_params->x4C_bottom);
                 } else {
-                    lb_80011A50((Vec3*) &grGr_803E780C[1], 0xF, 0.5f, 0.0f,
+                    lb_80011A50(&grGr_803E780C[wind_dir], 0xF, 0.5f, 0.0f,
                                 0.0f, grGr_params->x40_left,
                                 grGr_params->x48_top, grGr_params->x44_right,
                                 grGr_params->x4C_bottom);
                 }
                 grAnime_801C8138(
                     bg_gobj, bg_gp->map_id,
-                    grGr_803E77D4[gp->gv.greens2.x8 * 2 + gp->gv.greens2.x14]);
+                    grGr_803E77D4[gp->gv.greens2.x8][gp->gv.greens2.x14]);
                 return;
             }
             break;
@@ -591,38 +600,48 @@ void grGreens_80213C10(Ground_GObj* gobj)
             gp->gv.greens2.x18 = gp->gv.greens2.x14 + 1;
             if (grAnime_801C84A4(gobj, 0, 7) != 0) {
                 HSD_JObj* jobj;
-                Vec3 pos;
+                int new_dir;
+                int wind_dir;
 
                 gp->gv.greens2.xC++;
                 if ((float) gp->gv.greens2.xC > grGr_params->x54) {
-                    return;
+                    goto wind_done;
                 }
 
                 if ((float) gp->gv.greens2.xC > grGr_params->x58) {
                     jobj = gobj->hsd_obj;
-                    HSD_JObjGetTranslation(jobj, &pos);
-                    if (gp->gv.greens2.x14 !=
-                        (ftLib_800864A8(&pos, NULL) == 1.0f))
-                    {
-                        gp->gv.greens2.x8++;
-                        gp->gv.greens2.xC = 0;
-                        grAnime_801C8138(gobj, gp->map_id,
-                                         grGr_803E777C[gp->gv.greens2.x8 * 2 +
-                                                       gp->gv.greens2.x14]);
-                        grAnime_801C8138(bg_gobj, bg_gp->map_id,
-                                         grGr_803E77D4[gp->gv.greens2.x8 * 2 +
-                                                       gp->gv.greens2.x14]);
-                        return;
+                    HSD_JObjGetTranslation(jobj, &pos3);
+                    if (ftLib_800864A8(&pos3, NULL) == 1.0f) {
+                        new_dir = 1;
+                    } else {
+                        new_dir = 0;
+                    }
+                    if (gp->gv.greens2.x14 != new_dir) {
+                        goto wind_done;
                     }
                 }
+                goto blow_wind;
 
-                if (gp->gv.greens2.x14 == 0) {
-                    lb_80011A50((Vec3*) &grGr_803E780C[0], 0xF, 0.5f, 0.0f,
+            wind_done:
+                gp->gv.greens2.x8++;
+                gp->gv.greens2.xC = 0;
+                grAnime_801C8138(
+                    gobj, gp->map_id,
+                    grGr_803E777C[gp->gv.greens2.x8][gp->gv.greens2.x14]);
+                grAnime_801C8138(
+                    bg_gobj, bg_gp->map_id,
+                    grGr_803E77D4[gp->gv.greens2.x8][gp->gv.greens2.x14]);
+                return;
+
+            blow_wind:
+                wind_dir = GET_GROUND(gobj)->gv.greens2.x14;
+                if (wind_dir == 0) {
+                    lb_80011A50(&grGr_803E780C[wind_dir], 0xF, 0.5f, 0.0f,
                                 0.0f, -grGr_params->x44_right,
                                 grGr_params->x48_top, -grGr_params->x40_left,
                                 grGr_params->x4C_bottom);
                 } else {
-                    lb_80011A50((Vec3*) &grGr_803E780C[1], 0xF, 0.5f, 0.0f,
+                    lb_80011A50(&grGr_803E780C[wind_dir], 0xF, 0.5f, 0.0f,
                                 0.0f, grGr_params->x40_left,
                                 grGr_params->x48_top, grGr_params->x44_right,
                                 grGr_params->x4C_bottom);
@@ -673,13 +692,16 @@ void grGreens_80213C10(Ground_GObj* gobj)
                 ((gp->gv.greens2.xC - grGr_params->x64) % grGr_params->x68) ==
                     0)
             {
-                Vec3 pos;
+                float rand;
                 float sign;
+                float diff;
 
+                rand = HSD_Randf();
                 sign = gp->gv.greens2.x24 == 0 ? -1.0f : 1.0f;
-                pos.x = sign * (40.0f * HSD_Randf());
-                pos.y = ((grGr_params->x70 - grGr_params->x6C) * HSD_Randf()) +
-                        grGr_params->x6C;
+                pos.x = sign * (40.0f * rand);
+                rand = HSD_Randf();
+                diff = grGr_params->x70 - grGr_params->x6C;
+                pos.y = (diff * rand) + grGr_params->x6C;
                 pos.z = -40.0f;
                 lbAudioAx_800237A8(0x68FB3, 0x7F, 0x40);
                 it_802EE200(gobj, &pos, grGr_params->x74, grGr_params->x78);

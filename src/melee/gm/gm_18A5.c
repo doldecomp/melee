@@ -7361,6 +7361,7 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
     s32 i;
     PAD_STACK(0x28);
 
+#define tm ((TmData*) arg0)
     if (tm->cur_option == 0x1B) {
         fn_8019B81C(arg0);
     }
@@ -7423,6 +7424,7 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                         ready_count += 1;
                     }
                 }
+                tm_it += 0xA;
             }
         }
 
@@ -7549,11 +7551,13 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                 }
             }
         } else {
-            d8->x0 = 0;
+            u8* tm_ptr;
+            u8* x44_ptr;
+            u8* x2A_ptr;
 
             for (i = 0; i < (s32) tm->x30;) {
                 if ((s8) (u8) HSD_PadMasterStatus[(u8) i].err == 0 &&
-                    tm->x4B8[i].x0 == 0)
+                    tm_ptr[0x4B8] == 0)
                 {
                     u32 buttons = fn_8018F640(i);
 
@@ -7565,74 +7569,79 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                             u8 np = gm_8018F634()->x30;
                             s32 count4 = 0;
                             s32 j;
+                            u8* count_ptr = (u8*) d8;
 
                             for (j = 0; j < (s32) np; j++) {
-                                if (d8->x2A[j].state == 4) {
+                                if (count_ptr[0x2D] == 4) {
                                     count4 += 1;
                                 }
+                                count_ptr += 6;
                             }
                             if (count4 < (s32) (tm->x30 - 1)) {
-                                d8->x44[i] = 6;
-                                d8->x2A[i].state = 4;
+                                x44_ptr[0x44] = 6;
+                                x2A_ptr[0x2D] = 4;
                             }
                         } else {
-                            u8 pstate = d8->x2A[i].state;
+                            u8 pstate = x2A_ptr[0x2D];
                             if (pstate == 4) {
-                                d8->x2A[i].state = 5;
+                                x2A_ptr[0x2D] = 5;
                             } else if (pstate == 0 || pstate == 3 ||
                                        pstate == 5)
                             {
-                                u16 val = tm->x4B8[i].x6;
+                                u16 val = *(u16*) (tm_ptr + 0x4BE);
                                 if (val <= 0x78U) {
                                     gm_80167858(i, (s32) val, 0xB, 0x14);
                                 } else {
                                     gm_80167858(i, 0x78, 0xB, 0x14);
                                 }
-                                d8->x2A[i].state = 1;
+                                x2A_ptr[0x2D] = 1;
                             }
                         }
                     } else if (buttons & 0x400) {
-                        if (d8->x44[i] != 6) {
+                        if (x44_ptr[0x44] != 6) {
                             lbAudioAx_80024030(0);
-                            d8->x44[i] = 6;
+                            x44_ptr[0x44] = 6;
                         } else {
-                            u8 pstate2 = d8->x2A[i].state;
+                            u8 pstate2 = x2A_ptr[0x2D];
                             if (pstate2 == 0 || pstate2 == 3 || pstate2 == 5) {
                                 u8 np2 = gm_8018F634()->x30;
                                 s32 count5 = 0;
                                 s32 k;
+                                u8* count_ptr2 = (u8*) d8;
 
                                 for (k = 0; k < (s32) np2; k++) {
-                                    if (d8->x2A[k].state == 4) {
+                                    if (count_ptr2[0x2D] == 4) {
                                         count5 += 1;
                                     }
+                                    count_ptr2 += 6;
                                 }
                                 if (count5 < (s32) (tm->x30 - 1)) {
                                     lbAudioAx_80024030(0);
-                                    d8->x44[i] = 7;
+                                    x44_ptr[0x44] = 7;
                                 }
                             } else if (pstate2 == 2) {
                                 lbAudioAx_80024030(0);
-                                d8->x2A[i].state = 3;
-                                d8->x2A[i].done = 0;
+                                x2A_ptr[0x2D] = 3;
+                                x2A_ptr[0x2E] = 0;
                             }
                         }
                     } else if ((buttons & 0x10000) || (buttons & 8)) {
-                        if (d8->x44[i] == 8) {
+                        if (x44_ptr[0x44] == 8) {
                             lbAudioAx_80024030(2);
-                            d8->x44[i] = 7;
+                            x44_ptr[0x44] = 7;
                         }
                     } else if (((buttons & 0x20000) || (buttons & 4)) &&
-                               d8->x44[i] == 7)
+                               x44_ptr[0x44] == 7)
                     {
                         lbAudioAx_80024030(2);
-                        d8->x44[i] = 8;
+                        x44_ptr[0x44] = 8;
                     }
                 }
                 i++;
             }
         }
     }
+#undef tm
 }
 
 extern u8 lbl_804D6680[8];
