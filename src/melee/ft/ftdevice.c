@@ -60,8 +60,7 @@ void ftCo_800C06E8(Ground_GObj* gobj, int arg1, void* func)
             return;
         }
     }
-    OSReport("fighter chk device wind func num over!\n");
-    __assert("ftdevice.c", 0x49, "0");
+    HSD_ASSERTREPORT(0x49, 0, "fighter chk device wind func num over!\n");
 }
 
 void ftCo_800C0764(Ground_GObj* arg0, u32 arg1, void* arg2)
@@ -81,8 +80,7 @@ void ftCo_800C0764(Ground_GObj* arg0, u32 arg1, void* arg2)
         }
         ptr++;
     }
-    OSReport("fighter chk device catch func num over!\n");
-    __assert("ftdevice.c", 0x6FU, "0");
+    HSD_ASSERTREPORT(0x6FU, 0, "fighter chk device catch func num over!\n");
 }
 
 /// @todo pretty sure arg2 is a ftDevice callback, but unsure if its
@@ -104,6 +102,5 @@ void ftCo_800C07F8(Ground_GObj* arg0, u32 arg1, void* arg2)
         }
         ptr++;
     }
-    OSReport("fighter chk device coll func num over!\n");
-    __assert("ftdevice.c", 0x95, "0");
+    HSD_ASSERTREPORT(0x95, 0, "fighter chk device coll func num over!\n");
 }

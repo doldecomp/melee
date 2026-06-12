@@ -454,10 +454,7 @@ void HSD_MObjSetToonTextureImage(HSD_ImageDesc* imagedesc)
     if (tobj_toon == NULL) {
         tobj_toon_desc.imagedesc = imagedesc;
         tobj_toon = HSD_TObjLoadDesc(&tobj_toon_desc);
-        if (tobj_toon == NULL) {
-            OSReport("cannot allocate tobj for toon.");
-            __assert(__FILE__, 0x2F8, "tobj_toon");
-        }
+        HSD_ASSERTREPORT(0x2F8, tobj_toon, "cannot allocate tobj for toon.");
     }
     tobj_toon->imagedesc = imagedesc;
 }

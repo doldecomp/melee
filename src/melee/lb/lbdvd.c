@@ -142,16 +142,13 @@ void* lbDvd_80017740(int type, int entry_num, int transient_heap, int heap,
         }
     }
 
-    if (free_index == -1) {
-        __assert("lbdvd.c", 0x1C1, "free_index != -1");
-    }
+    HSD_ASSERT(0x1C1, free_index != -1);
     entry = &preloadCache.entries[free_index];
     entry->state = 1;
     entry->type = type;
     entry->entry_num = entry_num;
     if (lbHeap_80015BB8(heap)) {
-        OSReport("%d, %d\n", heap, entry_num);
-        __assert("lbdvd.c", 0x1CB, "0");
+        HSD_ASSERTREPORT(0x1CB, 0, "%d, %d\n", heap, entry_num);
     }
     entry->heap = heap;
     entry->size = size;
@@ -331,7 +328,7 @@ void lbDvd_80017E64(int key, int index, void* value, bool cancelflag)
 {
     PreloadEntry* preloadEntry = &preloadCache.entries[index];
     if (cancelflag != 0) {
-        __assert(__FILE__, 827, "0");
+        HSD_ASSERT(827, 0);
     } else {
         preloadEntry->state = 3;
     }
@@ -389,7 +386,7 @@ void* lbDvd_GetPreloadedArchive(ssize_t entry_num)
             break;
 
         default:
-            __assert(__FILE__, 864, "0");
+            HSD_ASSERT(864, 0);
             break;
         }
 
@@ -447,8 +444,7 @@ HSD_Archive* lbDvd_8001819C(const char* basename)
     char* filename = lbFile_80016204(basename);
     archive = lbDvd_GetPreloadedArchive(DVDConvertPathToEntrynum(filename));
     if (g_debugLevel != 0 && preloadCache.preloaded && archive == NULL) {
-        OSReport("[LbDvd] %s is not PRELOADed.\n", filename);
-        __assert(__FILE__, 948, "0");
+        HSD_ASSERTREPORT(948, 0, "[LbDvd] %s is not PRELOADed.\n", filename);
     }
     return archive;
 }

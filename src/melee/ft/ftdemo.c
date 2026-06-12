@@ -158,8 +158,7 @@ char* ftDemo_GetMotionFileString(int cb_idx, int cb_arg)
     if (ftData_803C24EC[cb_idx] != NULL) {
         return ftData_803C24EC[cb_idx](cb_arg);
     } else {
-        OSReport("no demo vi anim! %d\n", cb_arg);
-        __assert("ftdemo.c", 296, "0");
+        HSD_ASSERTREPORT(296, 0, "no demo vi anim! %d\n", cb_arg);
     }
 }
 

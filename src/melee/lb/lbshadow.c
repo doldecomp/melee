@@ -110,9 +110,7 @@ void lbShadow_8000ED54(LbShadow* lbshadow, HSD_JObj* jobj)
 {
     HSD_Shadow* shadow;
 
-    if (lbshadow == NULL) {
-        __assert("lbshadow.c", 0x36, "lbshadow");
-    }
+    HSD_ASSERT(0x36, lbshadow);
     shadow = HSD_ShadowAlloc();
     if (shadow != NULL) {
         HSD_CObjSetProjectionType(shadow->camera, PROJ_ORTHO);
@@ -139,9 +137,7 @@ void lbShadow_8000ED54(LbShadow* lbshadow, HSD_JObj* jobj)
 
 void lbShadow_8000EE8C(LbShadow* lbshadow)
 {
-    if (lbshadow == NULL) {
-        __assert("lbshadow.c", 0x62U, "lbshadow");
-    }
+    HSD_ASSERT(0x62U, lbshadow);
     if (lbshadow->shadow != NULL) {
         HSD_ShadowRemove(lbshadow->shadow);
     }

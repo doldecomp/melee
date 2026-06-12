@@ -97,8 +97,7 @@ static inline bool hasExtraFighterId(ftMapping* data)
 static inline void Player_CheckSlot(int slot)
 {
     if (slot < 0 || !(slot < PL_SLOT_MAX)) {
-        OSReport("cant get player struct! %d\n", slot);
-        __assert(__FILE__, 102, "0");
+        HSD_ASSERTREPORT(102, 0, "cant get player struct! %d\n", slot);
     }
 }
 
