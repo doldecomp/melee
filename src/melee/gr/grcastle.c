@@ -1313,9 +1313,10 @@ void grCastle_801CF308(Ground_GObj* gobj)
                 gp->gv.castle5.xC4 = 3;
                 gp->gv.castle11.xD8 = (u32) grMaterial_801C8CFC(
                     0, 1, gp, jobj, NULL,
-                    (void (*)(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
-                              f32)) fn_801CFAFC,
-                    (void (*)(Item_GObj*, Ground*, HSD_GObj*)) fn_801CFB68);
+                    (void (*)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32))(
+                        Event) fn_801CFAFC,
+                    (void (*)(Item_GObj*, Ground*, HSD_GObj*))(
+                        Event) fn_801CFB68);
                 grMaterial_801C8DE0((Item_GObj*) gp->gv.castle11.xD8, 0.0f,
                                     -1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 4.0f);
                 grMaterial_801C8E08((Item_GObj*) gp->gv.castle11.xD8);
@@ -1614,9 +1615,10 @@ s32 grCastle_801CFBD4(Ground_GObj* gobj, s32 arg1)
                                     (u32) grMaterial_801C8CFC(
                                         0, 2, gp, target, NULL,
                                         (void (*)(Item_GObj*, Ground*, Vec3*,
-                                                  HSD_GObj*, f32)) cb1[i],
+                                                  HSD_GObj*,
+                                                  f32))(Event) cb1[i],
                                         (void (*)(Item_GObj*, Ground*,
-                                                  HSD_GObj*)) cb2[i]);
+                                                  HSD_GObj*))(Event) cb2[i]);
                                 grMaterial_801C8DE0(
                                     (Item_GObj*) gp->gv.castle10.x10C[i], 0.0f,
                                     0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 8.0f);

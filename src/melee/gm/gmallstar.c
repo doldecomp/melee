@@ -701,7 +701,7 @@ void gm_801B5ACC(GameScene* arg0)
     }
 
     gm_801B5324(allstar, round + 1);
-    data->rules.x50 = (void (*)(u8)) fn_801B5AA8;
+    data->rules.x50 = (void (*)(u8))(Event) fn_801B5AA8;
 }
 
 void gm_801B5E7C(GameScene* arg0)

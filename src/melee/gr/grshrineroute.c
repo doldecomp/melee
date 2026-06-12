@@ -318,12 +318,12 @@ void grShrineRoute_80208D14(Ground_GObj* gobj)
     }
 
     ftCo_800C07F8(gobj, 3, grShrineRoute_8020AE08);
-    mpJointSetCb1(8, gp, (mpLib_Callback) grShrineRoute_8020AD58);
-    mpJointSetCb1(9, gp, (mpLib_Callback) grShrineRoute_8020AD58);
-    mpJointSetCb1(0xA, gp, (mpLib_Callback) grShrineRoute_8020AD58);
-    mpJointSetCb1(0xB, gp, (mpLib_Callback) grShrineRoute_8020AD58);
-    mpJointSetCb1(0xC, gp, (mpLib_Callback) grShrineRoute_8020AD58);
-    mpJointSetCb1(0xD, gp, (mpLib_Callback) grShrineRoute_8020AD58);
+    mpJointSetCb1(8, gp, (mpLib_Callback) (Event) grShrineRoute_8020AD58);
+    mpJointSetCb1(9, gp, (mpLib_Callback) (Event) grShrineRoute_8020AD58);
+    mpJointSetCb1(0xA, gp, (mpLib_Callback) (Event) grShrineRoute_8020AD58);
+    mpJointSetCb1(0xB, gp, (mpLib_Callback) (Event) grShrineRoute_8020AD58);
+    mpJointSetCb1(0xC, gp, (mpLib_Callback) (Event) grShrineRoute_8020AD58);
+    mpJointSetCb1(0xD, gp, (mpLib_Callback) (Event) grShrineRoute_8020AD58);
 
     if (Ground_801C2D24(0x94, &center)) {
         HSD_JObj* jobj;

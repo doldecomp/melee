@@ -1882,7 +1882,7 @@ void lb_800138EC(s32 arg0, GObj_RenderFunc render_func, u32 arg2, s8 arg3,
     GObj_InitUserData(gobj, 0, fn_800138AC, data);
 
     if (render_func == NULL) {
-        GObj_SetupGXLinkMax(gobj, (GObj_RenderFunc) fn_80013614, arg2);
+        GObj_SetupGXLinkMax(gobj, (GObj_RenderFunc) (Event) fn_80013614, arg2);
     } else {
         GObj_SetupGXLinkMax(gobj, render_func, arg2);
     }

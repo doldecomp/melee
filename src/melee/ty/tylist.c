@@ -1106,7 +1106,8 @@ void un_8031457C(void)
         entry->x0 = GObj_Create(1, 2, 0);
         cobj = lb_80013B14(desc);
         HSD_GObjObject_80390A70(entry->x0, HSD_GObj_804D784B, cobj);
-        GObj_SetupGXLinkMax(entry->x0, (GObj_RenderFunc) un_80306954, 0);
+        GObj_SetupGXLinkMax(entry->x0, (GObj_RenderFunc) (Event) un_80306954,
+                            0);
         entry->x0->gxlink_prios = 0x9010000000000000ULL;
         HSD_GObj_SetupProc(entry->x0, fn_8031438C, 0);
         HSD_GObj_80390CD4(entry->x0);
@@ -1117,7 +1118,8 @@ void un_8031457C(void)
         entry->x4 = GObj_Create(1, 2, 0);
         cobj = lb_80013B14(desc);
         HSD_GObjObject_80390A70(entry->x4, HSD_GObj_804D784B, cobj);
-        GObj_SetupGXLinkMax(entry->x4, (GObj_RenderFunc) fn_80314504, 0);
+        GObj_SetupGXLinkMax(entry->x4, (GObj_RenderFunc) (Event) fn_80314504,
+                            0);
         entry->x4->gxlink_prios = 0x0210000000000000ULL;
         interest.x = 1.1f;
         interest.y = -0.24f;

@@ -743,8 +743,8 @@ void fn_8024BAF0(HSD_GObj* arg0)
         mn_8022EFD8(sp14, &vec_0);
         if (temp_f31 == vec_0.end_frame) {
             HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
-            proc2 = HSD_GObj_SetupProc(arg0, (void (*)(HSD_GObj*)) fn_8024B8B4,
-                                       0U);
+            proc2 = HSD_GObj_SetupProc(
+                arg0, (void (*)(HSD_GObj*))(Event) fn_8024B8B4, 0U);
             proc2->flags_3 = HSD_GObj_804D783C;
             mnSoundTest_8024A958((Soundtest_GObj*) arg0);
             mnSoundTest_804D6C44 = 0;

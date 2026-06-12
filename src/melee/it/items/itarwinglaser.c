@@ -36,16 +36,16 @@ static bool itArwinglaser_UnkMotion3_Coll(Item_GObj*);
 static bool itArwinglaser_UnkMotion5_Coll(Item_GObj*);
 
 ItemStateTable it_803F8DE8[] = {
-    { 0, (HSD_GObjPredicate) itArwinglaser_UnkMotion2_Anim,
+    { 0, (HSD_GObjPredicate) (Event) itArwinglaser_UnkMotion2_Anim,
       (HSD_GObjEvent) itArwinglaser_UnkMotion2_Phys,
       itArwinglaser_UnkMotion2_Coll },
-    { 1, (HSD_GObjPredicate) itArwinglaser_UnkMotion3_Anim,
+    { 1, (HSD_GObjPredicate) (Event) itArwinglaser_UnkMotion3_Anim,
       (HSD_GObjEvent) itArwinglaser_UnkMotion3_Phys,
       itArwinglaser_UnkMotion3_Coll },
-    { 2, (HSD_GObjPredicate) itArwinglaser_UnkMotion2_Anim,
+    { 2, (HSD_GObjPredicate) (Event) itArwinglaser_UnkMotion2_Anim,
       (HSD_GObjEvent) itArwinglaser_UnkMotion2_Phys,
       itArwinglaser_UnkMotion2_Coll },
-    { 3, (HSD_GObjPredicate) itArwinglaser_UnkMotion3_Anim,
+    { 3, (HSD_GObjPredicate) (Event) itArwinglaser_UnkMotion3_Anim,
       (HSD_GObjEvent) itArwinglaser_UnkMotion3_Phys,
       itArwinglaser_UnkMotion3_Coll },
     { 4, NULL, NULL, itArwinglaser_UnkMotion5_Coll },

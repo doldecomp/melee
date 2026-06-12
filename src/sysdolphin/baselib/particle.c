@@ -8502,7 +8502,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         default: /* shape > 8 */
         {
             void (*callback)(HSD_Generator*, Mtx);
-            callback = (void (*)(HSD_Generator*, Mtx)) gen->callback;
+            callback = (void (*)(HSD_Generator*, Mtx))(Event) gen->callback;
             if (callback != NULL) {
                 callback(gen, rot_mtx);
             }

@@ -548,8 +548,8 @@ void grKinokoRoute_80208564(HSD_GObj* gobj)
         HSD_JObj* jobj = Ground_801C3FA4(gobj, depths.x[i]);
         Item_GObj* item = grMaterial_801C8CFC(
             8, 0, gp, jobj, NULL,
-            (void (*)(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
-                      f32)) grKinokoRoute_802084B4,
+            (void (*)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32))(
+                Event) grKinokoRoute_802084B4,
             NULL);
         if (item != NULL) {
             grMaterial_801C8DE0(item, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F,

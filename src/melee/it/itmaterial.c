@@ -32,7 +32,7 @@ void it_80277D08(void)
                      it_803F1F90.library_name, "it_mobj", 0x50, 0x20);
     it_803F1F90.parent.release = hsdMObj.parent.release;
     it_803F1F90.parent.amnesia = hsdMObj.parent.amnesia;
-    it_803F1F90.setup = (HSD_MObjSetupFunc) fn_80277D8C;
+    it_803F1F90.setup = (HSD_MObjSetupFunc) (Event) fn_80277D8C;
     it_803F1F90.load = hsdMObj.load;
     it_803F1F90.make_texp = hsdMObj.make_texp;
 }

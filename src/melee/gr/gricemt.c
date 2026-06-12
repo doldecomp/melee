@@ -486,8 +486,8 @@ void grIceMt_801F7728(Ground_GObj* gobj)
     u32 unused2;
     Ground* gp = gobj->user_data;
     if (gp->gv.icemt.xD8 == 0) {
-        grIceMt_801FA364(&gp->gv.icemt.xC8, &y, (HSD_GObjEvent) fn_801F8E58,
-                         gobj);
+        grIceMt_801FA364(&gp->gv.icemt.xC8, &y,
+                         (HSD_GObjEvent) (Event) fn_801F8E58, gobj);
         grIceMt_801F9ACC((HSD_GObj*) &gp->gv.icemt.xC4,
                          grIceMt_801F96E0(&gp->gv.icemt, -y), fn_801F9038,
                          gobj);
@@ -595,7 +595,7 @@ void grIceMt_801F7A2C(Ground_GObj* arg0)
     }
     if (!((UnkFlagStruct*) &gp->gv.icemt.xD8)->b2) {
         var_r30 = grIceMt_801FA364(&gp->gv.icemt.xC8, &sp30,
-                                   (HSD_GObjEvent) fn_801F9150, arg0);
+                                   (HSD_GObjEvent) (Event) fn_801F9150, arg0);
         if (((UnkFlagStruct*) &gp->gv.icemt.xD8)->b4) {
             fighter = Ground_801C57A4();
             if (fighter != NULL) {
@@ -1700,7 +1700,7 @@ bool grIceMt_801FA364(void* state_, f32* out, HSD_GObjEvent cb_,
                       Ground_GObj* gobj)
 {
     grIceMt_FA364_State* state = state_;
-    s32 (*cb)(HSD_GObj*, s32*) = (s32(*)(HSD_GObj*, s32*)) cb_;
+    s32 (*cb)(HSD_GObj*, s32*) = (s32 (*)(HSD_GObj*, s32*))(Event) cb_;
     bool ret = true;
     f32 result;
     s32 next_delay;

@@ -294,7 +294,7 @@ void lbMemory_80015320(int arg0, Handle* handle, int arg2, int cancelflag)
             if ((u32) handle->x4_lo < 0x80000000U) {
                 HSD_DevComRequest(
                     0, old, current, ((u32) handle->x8_hi + 0x1F) & 0xFFFFFFE0,
-                    0x1B, 1, (HSD_DevComCallback) lbMemory_80015320,
+                    0x1B, 1, (HSD_DevComCallback) (Event) lbMemory_80015320,
                     handle->x0_next);
                 return;
             } else {
@@ -311,7 +311,8 @@ void lbMemory_80015320(int arg0, Handle* handle, int arg2, int cancelflag)
                 mgr->size = size;
                 mgr->offset = 0;
                 mgr->cb_arg = (u32) next;
-                mgr->cb = (void (*)(u32, u32, u32, u32)) lbMemory_80015320;
+                mgr->cb =
+                    (void (*)(u32, u32, u32, u32))(Event) lbMemory_80015320;
                 OSRestoreInterrupts(enabled);
                 OSCreateAlarm(&mgr->alarm);
                 OSSetAlarm(&mgr->alarm, OSMillisecondsToTicks(3), fn_80015184);

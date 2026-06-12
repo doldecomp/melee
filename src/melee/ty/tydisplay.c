@@ -1612,7 +1612,8 @@ void un_8031B460_OnEnter(void* arg0)
 
         cfg2->x00 = GObj_Create(1, 2, 0);
         HSD_GObjObject_80390A70(cfg2->x00, HSD_GObj_804D784B, cobj);
-        GObj_SetupGXLinkMax(cfg2->x00, (GObj_RenderFunc) un_803068E0, 0);
+        GObj_SetupGXLinkMax(cfg2->x00, (GObj_RenderFunc) (Event) un_803068E0,
+                            0);
 
         gobj = cfg2->x00;
         gobj->gxlink_prios = 0x1230000000000000ULL;
