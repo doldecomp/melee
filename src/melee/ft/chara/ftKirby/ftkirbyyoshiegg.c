@@ -76,11 +76,11 @@ static inline void inlineB0(Fighter_GObj* gobj, ftHurtboxInit* hurt)
 
 void ftKb_SpecialNYs_8010AC78(Fighter_GObj* victim, Fighter_GObj* gobj)
 {
-    Fighter* fp = victim->user_data;
-    HSD_JObj* jobj = victim->hsd_obj;
+    Fighter* fp = GET_FIGHTER(victim);
+    HSD_JObj* jobj = GET_JOBJ(victim);
     Vec3 scale;
     ftHurtboxInit hurt;
-    PAD_STACK(0x16);
+    PAD_STACK(0x10);
 
     if (fp->ground_or_air == GA_Ground) {
         ftCommon_8007D5D4(fp);
