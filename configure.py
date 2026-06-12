@@ -1695,7 +1695,7 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/perf.c"),
             Object(Matching, "sysdolphin/baselib/list.c"),
             Object(Matching, "sysdolphin/baselib/object.c"),
-            Object(NonMatching, "sysdolphin/baselib/quatlib.c"),
+            Object(Matching, "sysdolphin/baselib/quatlib.c"),
             Object(Matching, "sysdolphin/baselib/memory.c"),
             Object(Matching, "sysdolphin/baselib/shadow.c"),
             Object(Matching, "sysdolphin/baselib/archive.c"),

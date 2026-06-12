@@ -3,10 +3,25 @@
 #include <placeholder.h>
 
 #include <MSL/math.h>
-#include <MSL/math_ppc.h>
 #include <MSL/trigf.h>
 
-/// @todo Currently 99.9% match - stack frame is 8 bytes too large.
+inline float sqrtf(float x)
+{
+    volatile float y;
+    if (x > 0.0f) {
+        double guess = __frsqrte((double) x); // returns an approximation to
+        guess = .5 * guess *
+                (3.0 - guess * guess * x); // now have 12 sig bits
+        guess = .5 * guess *
+                (3.0 - guess * guess * x); // now have 24 sig bits
+        guess = .5 * guess *
+                (3.0 - guess * guess * x); // now have 32 sig bits
+        y = (float) (x * guess);
+        return y;
+    }
+    return x;
+}
+
 s32 MatToQuat(Mtx m, Quaternion* q)
 {
     f32 q3[3];
@@ -181,9 +196,8 @@ s32 HSD_QuatLib_8037EF28(Quaternion* p, Quaternion* q, Quaternion* out, f32 t)
         out->w = p->z;
 
         if (t < 0.5F) {
-            t2 = 2.0F * t;
-            sp = sinf((f32) (M_PI_2 * (1.0F - t2)));
-            sq = sinf((f32) (M_PI_2 * t2));
+            sp = sinf((f32) (M_PI_2 * (1.0F - (2.0F * t))));
+            sq = sinf((f32) (M_PI_2 * (2.0F * t)));
             out->x = sp * p->x + sq * q->x;
             out->y = sp * p->y + sq * q->y;
             out->z = sp * p->z + sq * q->z;
