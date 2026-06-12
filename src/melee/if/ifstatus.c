@@ -897,8 +897,7 @@ void ifStatus_802F66A4(void)
     DynamicModelDesc** mrk;
     DynamicModelDesc** num;
     HSD_Archive** arch;
-    s32 reset = 0; // = 0 should go away after the uninitialized-use warning is
-                   // resolved.
+    s32 reset;
     arch = ifAll_802F3690();
     lbArchive_LoadSections(*arch, (void**) &num, "DmgNum_scene_models",
                            (void**) &mrk, "DmgMrk_scene_models", 0);
