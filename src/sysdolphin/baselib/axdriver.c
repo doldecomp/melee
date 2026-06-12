@@ -1150,14 +1150,11 @@ bool AXDriver_8038E37C(AXDriverAuxType type, void* param)
 void AXDriver_8038E498(int voices, int priority, int sample_rate,
                        int aram_size)
 {
-    HSD_SM* v;
     int i;
 
-    v = AXDriver_804C45A0;
     for (i = 0; i < 0x60; i++) {
-        v->flags &= ~SMSTATE_MASK;
-        unk_inline(v, &AXDriver_804D7790);
-        v++;
+        AXDriver_804C45A0[i].flags &= ~SMSTATE_MASK;
+        unk_inline(&AXDriver_804C45A0[i], &AXDriver_804D7790);
     }
 
     HSD_SynthInit(voices, priority, sample_rate, aram_size);

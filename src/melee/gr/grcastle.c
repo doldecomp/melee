@@ -394,16 +394,7 @@ void grCastle_801CD658(Ground_GObj* gobj)
     }
     grLib_801C96F8(0x7536, 0x1E, &pos);
 
-    gp->gv.castle9.dynamics[0].data = NULL;
-    gp->gv.castle9.dynamics[1].data = NULL;
-    gp->gv.castle9.dynamics[2].data = NULL;
-    gp->gv.castle9.dynamics[3].data = NULL;
-    gp->gv.castle9.dynamics[4].data = NULL;
-    gp->gv.castle9.dynamics[5].data = NULL;
-    gp->gv.castle9.dynamics[6].data = NULL;
-    gp->gv.castle9.dynamics[7].data = NULL;
-
-    for (i = 8; i < 12; i++) {
+    for (i = 0; 12 > i; i++) {
         gp->gv.castle9.dynamics[i].data = NULL;
     }
 
@@ -420,7 +411,7 @@ void grCastle_801CD658(Ground_GObj* gobj)
                 if (flag6 != NULL) {
                     entries_s = grCs_803B7EA8;
 
-                    for (i = 0; i < 4; i++) {
+                    for (i = 0; (u32) i < 4U; i++) {
                         HSD_JObj* jobj =
                             Ground_801C3FA4(gobj, entries_s.e[i].depth);
                         if (jobj != NULL) {
@@ -559,85 +550,89 @@ void grCastle_801CDC44(Ground_GObj* gobj)
     PAD_STACK(8);
 
     do {
-        struct grCastle_Platform* plat = &gp->gv.castle8.plat[i];
-        switch (plat->state) {
+        switch (gp->gv.castle8.plat[0].state) {
         case 0:
-            if (plat->wind > 0.0f) {
-                s16 cnt = plat->timer;
-                plat->timer = cnt + 1;
+            if (gp->gv.castle8.plat[0].wind > 0.0f) {
+                s16 cnt = gp->gv.castle8.plat[0].timer;
+                gp->gv.castle8.plat[0].timer = cnt + 1;
                 if ((f32) cnt > grCs_804D6970->x38) {
-                    plat->state = 2;
+                    gp->gv.castle8.plat[0].state = 2;
                 }
             } else {
-                plat->timer = 0;
-                plat->state = 1;
+                gp->gv.castle8.plat[0].timer = 0;
+                gp->gv.castle8.plat[0].state = 1;
             }
             break;
         case 1:
-            if (plat->wind > 0.0f) {
-                plat->timer = 0;
-                plat->state = 0;
+            if (gp->gv.castle8.plat[0].wind > 0.0f) {
+                gp->gv.castle8.plat[0].timer = 0;
+                gp->gv.castle8.plat[0].state = 0;
             } else {
-                s16 cnt = plat->timer;
-                plat->timer = cnt + 1;
+                s16 cnt = gp->gv.castle8.plat[0].timer;
+                gp->gv.castle8.plat[0].timer = cnt + 1;
                 if ((f32) cnt > grCs_804D6970->x3C) {
-                    plat->state = 3;
+                    gp->gv.castle8.plat[0].state = 3;
                 }
             }
             break;
         case 2: {
-            f32 wind = plat->wind;
+            f32 wind = gp->gv.castle8.plat[0].wind;
             if (wind > 0.0f) {
                 f32 speed_cap = grCs_804D6970->x28;
-                f32 speed = wind * grCs_804D6970->x20 + grCs_804D6970->x24;
+                f32 speed;
                 f32 max_val;
                 f32 cur;
 
+                speed = wind * grCs_804D6970->x20 + grCs_804D6970->x24;
                 if (speed > speed_cap) {
                     speed = speed_cap;
                 }
                 max_val = grCs_804D6970->x10;
-                cur = plat->pos;
+                cur = gp->gv.castle8.plat[0].pos;
                 if ((max_val - cur) < speed) {
-                    plat->pos = max_val;
+                    gp->gv.castle8.plat[0].pos = max_val;
                 } else {
-                    plat->pos = cur + speed;
+                    gp->gv.castle8.plat[0].pos = cur + speed;
                 }
-                HSD_JObjSetTranslateY(plat->jobj, plat->pos);
+                HSD_JObjSetTranslateY(gp->gv.castle8.plat[0].jobj,
+                                      gp->gv.castle8.plat[0].pos);
             } else {
-                plat->timer = 0;
-                plat->state = 1;
+                gp->gv.castle8.plat[0].timer = 0;
+                gp->gv.castle8.plat[0].state = 1;
             }
             break;
         }
         case 3: {
-            f32 wind = plat->wind;
+            f32 wind = gp->gv.castle8.plat[0].wind;
             if (wind > 0.0f) {
-                plat->timer = 0;
-                plat->state = 0;
+                gp->gv.castle8.plat[0].timer = 0;
+                gp->gv.castle8.plat[0].state = 0;
             } else {
                 f32 speed_cap = grCs_804D6970->x34;
-                f32 speed = wind * grCs_804D6970->x2C + grCs_804D6970->x30;
+                f32 speed;
                 f32 cur;
                 f32 min_val;
 
+                speed = wind * grCs_804D6970->x2C + grCs_804D6970->x30;
                 if (speed > speed_cap) {
                     speed = speed_cap;
                 }
-                cur = plat->pos;
+                cur = gp->gv.castle8.plat[0].pos;
                 min_val = grCs_804D6970->x14;
                 if ((cur - min_val) < speed) {
-                    plat->pos = min_val;
+                    gp->gv.castle8.plat[0].pos = min_val;
                 } else {
-                    plat->pos = cur - speed;
+                    gp->gv.castle8.plat[0].pos = cur - speed;
                 }
-                HSD_JObjSetTranslateY(plat->jobj, plat->pos);
+                HSD_JObjSetTranslateY(gp->gv.castle8.plat[0].jobj,
+                                      gp->gv.castle8.plat[0].pos);
             }
             break;
         }
         }
         i++;
-        plat->wind = 0.0f;
+        gp->gv.castle8.plat[0].wind = 0.0f;
+        gp = (Ground*) ((struct grCastle_Platform*) gp + 1);
     } while (i < 2);
     Ground_801C2FE0(gobj);
 }
@@ -817,15 +812,15 @@ void grCastle_801CE3AC_dontinline(Ground_GObj* gobj)
 
 void grCastle_801CE3AC(Ground_GObj* gobj)
 {
+    HSD_JObj* jobj;
     Ground* gp = GET_GROUND(gobj);
 
     if (gp->gv.castle5.xCC != NULL) {
-        HSD_JObj* jobj = GET_JOBJ(gp->gv.castle5.xCC);
         Quaternion rot;
         Vec3 pos;
         Vec3 offset;
-        PAD_STACK(4);
 
+        jobj = GET_JOBJ(gp->gv.castle5.xCC);
         rot = grCs_803B7EB8;
 
         offset.z = 0.0f;
@@ -1451,8 +1446,7 @@ HSD_JObj* grCastle_801CF868(Ground_GObj* gobj)
                 Ground* sat_gp;
 
                 if (cur_slot != -1) {
-                    weights.w[cur_slot] =
-                        weights.w[cur_slot] / grCs_804D6970->x6;
+                    weights.w[cur_slot] /= grCs_804D6970->x6;
                 }
 
                 total = weights.w[0] + weights.w[1] + weights.w[2];

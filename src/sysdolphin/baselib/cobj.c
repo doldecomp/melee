@@ -724,12 +724,10 @@ int HSD_CObjGetLeftVector(HSD_CObj* cobj, Vec3* left)
 {
     Vec3 eye;
     Vec3 up;
-    int res;
 
     if (cobj != NULL && left != NULL) {
         if (HSD_CObjGetEyeVector(cobj, &eye) == 0) {
-            res = HSD_CObjGetUpVector(cobj, &up);
-            if (res == 0) {
+            if (HSD_CObjGetUpVector(cobj, &up) == 0) {
                 PSVECCrossProduct(&up, &eye, left);
                 if (!vec_normalize_check(left, left)) {
                     return 0;
