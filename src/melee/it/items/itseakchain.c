@@ -42,13 +42,14 @@ ItemStateTable it_803F7438[] = {
     { -1, itSeakchain_UnkMotion4_Anim, NULL, NULL },
     { -1, itSeakchain_UnkMotion4_Anim, NULL, NULL },
 };
-static void order_sdata2();
-static void order_sdata2()
+
+static void order_sdata2(void)
 {
     (void) 0.0f;
     (void) 0.1f;
     (void) 1.0f;
 }
+
 void it_802BAEEC(Item_GObj* gobj)
 {
     it_8026B724(gobj);
