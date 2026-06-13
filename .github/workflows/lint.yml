@@ -3,8 +3,10 @@ name: Check code style
 on:
   push:
     paths: &common_paths
-    - 'src/**'
-    - '!src/**/*.dox'
+      - '.github/workflows/lint.yml'
+      - 'tools/check/**'
+      - 'src/**'
+      - '!src/**/*.dox'
   pull_request:
     paths: *common_paths
 
