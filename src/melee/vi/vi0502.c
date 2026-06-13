@@ -51,7 +51,7 @@ static HSD_Archive* un_804D6F98;
 static HSD_Archive* un_804D6F9C;
 static GXColor erase_colors_vi0502;
 static HSD_GObj* kirby_gobj;
-static ViCharaDesc* un_804D6FA8;
+ViCharaDesc* un_804D6FA8[2];
 
 void un_8031E110(int arg0, int arg1, int arg2)
 {
