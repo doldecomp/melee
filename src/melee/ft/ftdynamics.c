@@ -19,24 +19,23 @@
 
 #pragma force_active on
 
-char const* _assert_msg = "translate";
-
 void ftCo_8009CB40(Fighter* fp, ssize_t bone_idx, bool arg2, FigaTree* arg3)
 {
     ftDynamics* dyn = fp->ft_data->x2C;
+    PAD_STACK(8);
     if (dyn->dynamicsNum != 0) {
         s32 bone_id;
-        u8 var_r22;
+        s32 flag;
         HSD_JObj* var_r30;
         s32 var_r29;
-        struct DynamicsData* var_r28;
-        u8 temp_r21;
+        struct DynamicsData* data;
+        s32 inverse_flag;
         HSD_JObj* temp_jobj;
         bone_id = dyn->ftDynamicBones->array[bone_idx].bone_id;
         if (arg2 == 0) {
-            var_r22 = 0;
+            flag = 0;
         } else {
-            var_r22 = 1;
+            flag = 1;
         }
         var_r30 = fp->parts[bone_id].joint;
         var_r29 = 0;
@@ -45,49 +44,49 @@ void ftCo_8009CB40(Fighter* fp, ssize_t bone_idx, bool arg2, FigaTree* arg3)
         } else {
             fp->dynamic_bone_sets[bone_idx].bone_id = 0x100;
         }
-        var_r28 = fp->dynamic_bone_sets[bone_idx].dyn_desc.data;
-        temp_r21 = 1 - var_r22;
-        while (var_r28 != NULL) {
+        data = fp->dynamic_bone_sets[bone_idx].dyn_desc.data;
+        { s32 tmp = 1 - flag; inverse_flag = tmp; }
+        while (data != NULL) {
             if (var_r29 < (s32) arg3) {
-                if (temp_r21 != 0 && !(fp->parts[bone_id + var_r29].flags_b7))
-                {
-                    var_r28->desc.lb_unk0.unk_2C.x =
-                        var_r28->desc.lb_unk0.jobj->mtx[0][3];
-                    var_r28->desc.lb_unk0.unk_2C.y =
-                        var_r28->desc.lb_unk0.jobj->mtx[1][3];
-                    var_r28->desc.lb_unk0.unk_2C.z =
-                        var_r28->desc.lb_unk0.jobj->mtx[2][3];
-                    var_r28->desc.lb_unk0.unk_44 = 0.0f;
-                    temp_jobj = var_r28->desc.lb_unk0.jobj;
+                if (inverse_flag != 0 && !(fp->parts[bone_id].flags_b0)) {
+                    data->desc.lb_unk0.unk_2C.x =
+                        data->desc.lb_unk0.jobj->mtx[0][3];
+                    data->desc.lb_unk0.unk_2C.y =
+                        data->desc.lb_unk0.jobj->mtx[1][3];
+                    data->desc.lb_unk0.unk_2C.z =
+                        data->desc.lb_unk0.jobj->mtx[2][3];
+                    data->desc.lb_unk0.unk_44 = 0.0f;
+                    { HSD_JObj* tmp_jobj = data->desc.lb_unk0.jobj; temp_jobj = tmp_jobj; }
                     HSD_JObjSetTranslate(temp_jobj,
-                                         &var_r28->desc.lb_unk0.translate);
-                    temp_jobj = var_r28->desc.lb_unk0.jobj;
-                    HSD_JObjSetScale(temp_jobj, &var_r28->desc.lb_unk0.scale);
+                                         &data->desc.lb_unk0.translate);
+                    temp_jobj = data->desc.lb_unk0.jobj;
+                    HSD_JObjSetScale(temp_jobj, &data->desc.lb_unk0.scale);
                 }
-                fp->parts[bone_id + var_r29].flags_b7 = temp_r21;
+                fp->parts[bone_id].flags_b0 = inverse_flag;
             } else {
-                if (var_r22 != 0 && !(fp->parts[bone_id + var_r29].flags_b7)) {
-                    var_r28->desc.lb_unk0.unk_2C.x =
-                        var_r28->desc.lb_unk0.jobj->mtx[0][3];
-                    var_r28->desc.lb_unk0.unk_2C.y =
-                        var_r28->desc.lb_unk0.jobj->mtx[1][3];
-                    var_r28->desc.lb_unk0.unk_2C.z =
-                        var_r28->desc.lb_unk0.jobj->mtx[2][3];
-                    var_r28->desc.lb_unk0.unk_44 = 0.0f;
-                    temp_jobj = var_r28->desc.lb_unk0.jobj;
+                if (flag != 0 && !(fp->parts[bone_id].flags_b0)) {
+                    data->desc.lb_unk0.unk_2C.x =
+                        data->desc.lb_unk0.jobj->mtx[0][3];
+                    data->desc.lb_unk0.unk_2C.y =
+                        data->desc.lb_unk0.jobj->mtx[1][3];
+                    data->desc.lb_unk0.unk_2C.z =
+                        data->desc.lb_unk0.jobj->mtx[2][3];
+                    data->desc.lb_unk0.unk_44 = 0.0f;
+                    temp_jobj = data->desc.lb_unk0.jobj;
                     HSD_JObjSetTranslate(temp_jobj,
-                                         &var_r28->desc.lb_unk0.translate);
-                    temp_jobj = var_r28->desc.lb_unk0.jobj;
-                    HSD_JObjSetScale(temp_jobj, &var_r28->desc.lb_unk0.scale);
+                                         &data->desc.lb_unk0.translate);
+                    temp_jobj = data->desc.lb_unk0.jobj;
+                    HSD_JObjSetScale(temp_jobj, &data->desc.lb_unk0.scale);
                 }
-                fp->parts[bone_id + var_r29].flags_b7 = var_r22;
+                fp->parts[bone_id].flags_b0 = flag;
             }
-            if (fp->parts[bone_id + var_r29].flags_b7) {
+            if (fp->parts[bone_id].flags_b0) {
                 HSD_JObjClearFlags(var_r30, 0x20000U);
             }
             var_r30 = HSD_JObjGetChild(var_r30);
-            var_r28 = var_r28->next;
+            data = data->next;
             var_r29++;
+            bone_id++;
         }
     }
 }
@@ -453,8 +452,8 @@ static inline bool inlineA0(Fighter* fp)
 
 void ftCo_8009DC54(Fighter* fp)
 {
-    ftData* data = fp->ft_data;
     ssize_t idx;
+    ftData* data = fp->ft_data;
     if (fp->x619_costume_id == 2) {
         idx = 0;
     } else if (fp->x619_costume_id == 3) {
@@ -466,13 +465,17 @@ void ftCo_8009DC54(Fighter* fp)
     HSD_ASSERTREPORT(490, fp->dynamics_num < Ft_Dynamics_NumMax,
                      "fighter dynamics num over!\n");
     {
-        ssize_t i;
-        for (i = 0; i < 2; i++) {
+        ssize_t bone_idx = idx * 2 + 1;
+        BoneDynamicsDesc* dyn = fp->dynamic_bone_sets;
+        ssize_t i = 0;
+        do {
             HSD_JObj* cur = fp->fv.kb.hat.jobj;
-            BoneDynamicsDesc* bones =
-                &data->x2C->ftDynamicBones->array[idx * 2 + i];
+            ftDynamics* dynamics = data->x2C;
             ssize_t j;
-            for (j = 0; j < (signed) bones->bone_id; j++) {
+            for (j = 0;
+                 j < (signed) dynamics->ftDynamicBones->array[bone_idx]
+                                  .bone_id;
+                 j++) {
                 if (cur->child != NULL) {
                     cur = cur->child;
                     continue;
@@ -484,12 +487,18 @@ void ftCo_8009DC54(Fighter* fp)
             }
             {
                 DynamicsDesc* desc = &fp->dynamic_bone_sets[i + 1].dyn_desc;
-                lb_8000FD48(cur, desc, bones->bone_id);
-                fp->dynamic_bone_sets[i + 1].bone_id = FtPart_TopN;
-                lb_80011710(&data->x2C->ftDynamicBones->array[i + 4].dyn_desc,
+                lb_8000FD48(cur, desc,
+                            data->x2C->ftDynamicBones->array[bone_idx]
+                                .dyn_desc.count);
+                dyn[1].bone_id = FtPart_TopN;
+                lb_80011710(&data->x2C->ftDynamicBones->array[bone_idx]
+                                  .dyn_desc,
                             desc);
             }
-        }
+            i++;
+            bone_idx++;
+            dyn++;
+        } while (i < 2);
     }
 }
 
@@ -517,76 +526,76 @@ void ftCo_8009DB50(Fighter* fp)
     }
 }
 
-static inline bool inlineB0(Fighter* fp)
-{
-    if (!(fp->x34_scale.y < 1.0f)) {
-        return 0;
-    }
-    if (fp->x34_scale.y > 1.0f) {
-        if (fp->kind == FTKIND_MEWTWO) {
-            if (fp->motion_id < 0xDF || fp->motion_id > 0xE8) {
-                return 1;
-            }
-        }
-        if (fp->ground_or_air == GA_Air || fp->kind == FTKIND_KOOPA) {
-            return 0;
-        }
-        if (fp->kind != FTKIND_GKOOPS) {
-            return 1;
-        }
-    }
-    return 1;
-}
-
 void ftCo_8009DD94(Fighter_GObj* gobj, bool arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ssize_t dynamics_num = fp->dynamics_num;
-    PAD_STACK(16);
+    HSD_JObj* cur;
+    ssize_t i;
+    BoneDynamicsDesc* dyn = fp->dynamic_bone_sets;
+    bool ret_B0;
+    f32 scale_x;
+    PAD_STACK(8);
+
     if (dynamics_num != 0 && stage_info.internal_stage_id == FLATZONE) {
-        HSD_JObjSetupMatrix(GET_JOBJ(gobj));
+        HSD_JObj* jobj = GET_JOBJ(gobj);
+        scale_x = jobj->scale.x;
+        jobj->scale.x = fp->x34_scale.y;
+        HSD_JObjSetMtxDirty(jobj);
     }
     {
-        bool ret_B0 = inlineB0(fp);
+        FighterKind kind;
+        if (fp->x34_scale.y < 1.0f || fp->x34_scale.y > 1.0f) {
+            ret_B0 = false;
+        } else {
+            kind = fp->kind;
+            if (kind == FTKIND_MEWTWO && fp->motion_id >= 0xDF &&
+                fp->motion_id <= 0xE8)
+            {
+                ret_B0 = true;
+            } else if (fp->ground_or_air == GA_Air || kind == FTKIND_KOOPA ||
+                       kind == FTKIND_GKOOPS)
+            {
+                ret_B0 = false;
+            } else {
+                ret_B0 = true;
+            }
+        }
         ftColl_8007AF60(gobj);
         ftCo_8009E614(fp);
         if (fp->kind == FTKIND_PEACH) {
-            ssize_t i;
-            for (i = 0; i < (dynamics_num - 1); i++) {
-                lb_8001044C(&fp->dynamic_bone_sets[i].dyn_desc, &fp->x1670,
-                            fp->x166C, fp->cur_pos.y, arg1,
-                            fp->dynamic_bone_sets[i].bone_id, 3, ret_B0);
+            for (i = 0; i < dynamics_num - 1; i++, dyn++) {
+                lb_8001044C(&dyn->dyn_desc, &fp->x1670, fp->x166C,
+                            fp->cur_pos.y, arg1, dyn->bone_id, 3, ret_B0);
             }
-            lb_8001044C(&fp->dynamic_bone_sets[i].dyn_desc, &fp->x1670,
-                        fp->x166C, fp->cur_pos.y, arg1,
-                        fp->dynamic_bone_sets[i].bone_id, 0, ret_B0);
+            lb_8001044C(&dyn->dyn_desc, &fp->x1670, fp->x166C,
+                        fp->cur_pos.y, arg1, dyn->bone_id, 0, ret_B0);
         } else if (fp->kind == FTKIND_MEWTWO) {
-            ssize_t i;
-            for (i = 0; i < dynamics_num; i++) {
-                lb_8001044C(&fp->dynamic_bone_sets[i].dyn_desc, &fp->x1670,
-                            fp->x166C, fp->cur_pos.y, arg1,
-                            fp->dynamic_bone_sets[i].bone_id, 8, ret_B0);
+            for (i = 0; i < dynamics_num; i++, dyn++) {
+                lb_8001044C(&dyn->dyn_desc, &fp->x1670, fp->x166C,
+                            fp->cur_pos.y, arg1, dyn->bone_id, 8, ret_B0);
             }
         } else {
-            ssize_t i = 0;
-            for (i = 0; i < dynamics_num; i++) {
-                lb_8001044C(&fp->dynamic_bone_sets[i].dyn_desc, &fp->x1670,
-                            fp->x166C, fp->cur_pos.y, arg1,
-                            fp->dynamic_bone_sets[i].bone_id, 0, ret_B0);
+            for (i = 0; i < dynamics_num; i++, dyn++) {
+                lb_8001044C(&dyn->dyn_desc, &fp->x1670, fp->x166C,
+                            fp->cur_pos.y, arg1, dyn->bone_id, 0, ret_B0);
             }
         }
     }
-    if (dynamics_num != 0 && stage_info.internal_stage_id != FLATZONE) {
-        ssize_t i;
-        HSD_JObjSetupMatrix(GET_JOBJ(gobj));
-        for (i = 0; i < dynamics_num; i++) {
-            HSD_JObj* cur;
-            for (cur =
-                     fp->dynamic_bone_sets[i].dyn_desc.data->desc.lb_unk0.jobj;
-                 cur != NULL; cur = cur->child)
-            {
-                HSD_JObjSetupMatrix(cur);
+    if (dynamics_num != 0 && stage_info.internal_stage_id == FLATZONE) {
+        HSD_JObj* jobj = GET_JOBJ(gobj);
+        jobj->scale.x = scale_x;
+        HSD_JObjSetMtxDirty(jobj);
+        dyn = fp->dynamic_bone_sets;
+        i = 0;
+        while (i < dynamics_num) {
+            cur = dyn->dyn_desc.data->desc.lb_unk0.jobj;
+            while (cur->child != NULL) {
+                cur = cur->child;
             }
+            HSD_JObjSetupMatrix(cur);
+            i++;
+            dyn++;
         }
     }
 }
@@ -826,27 +835,24 @@ void ftCo_8009E7B4(Fighter* fp, u8 (*arg1)[2])
                     }
                 }
                 return;
-            } else if (fp->x594_b3) {
-                if (fp->kind != FTKIND_KIRBY) {
-                    if (fp->kind == FTKIND_PURIN) {
-                        ftCo_8009CB40(fp, 0, 0, NULL);
-                        return;
-                    }
-                    {
-                        s32 i;
+            } else {
+                s32 i;
+                if (fp->x594_b3) {
+                    if (fp->kind != FTKIND_KIRBY) {
+                        if (fp->kind == FTKIND_PURIN) {
+                            ftCo_8009CB40(fp, 0, 0, NULL);
+                            return;
+                        }
                         for (i = 0; i < fp->dynamics_num; i++) {
                             ftCo_8009CB40(fp, i, 0, NULL);
                         }
                     }
-                }
-            } else {
-                if (fp->kind != FTKIND_KIRBY) {
-                    if (fp->kind == FTKIND_PURIN) {
-                        ftCo_8009CB40(fp, 0, 1, NULL);
-                        return;
-                    }
-                    {
-                        s32 i;
+                } else {
+                    if (fp->kind != FTKIND_KIRBY) {
+                        if (fp->kind == FTKIND_PURIN) {
+                            ftCo_8009CB40(fp, 0, 1, NULL);
+                            return;
+                        }
                         for (i = 0; i < fp->dynamics_num; i++) {
                             ftCo_8009CB40(fp, i, 1, NULL);
                         }
