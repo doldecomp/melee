@@ -484,17 +484,27 @@ bool itKyasarin_UnkMotion10_Coll(Item_GObj* gobj)
     return it_8027C79C(gobj);
 }
 
-static inline void itKyasarin_FlipAndFall(Item_GObj* gobj, HSD_JObj* jobj,
-                                          Item* ip)
+static inline void itKyasarin_SetFallCollPos(Item* ip, CollData* coll,
+                                             Vec3* pos)
 {
-    CollData* coll = &ip->x378_itemColl;
-    Vec3 pos;
+    coll->cur_pos = ip->pos;
+    *pos = ip->pos;
+}
+
+static inline CollData* itKyasarin_GetCollData(Item* ip)
+{
+    return &ip->x378_itemColl;
+}
+
+static inline void itKyasarin_FlipAndFall(Item_GObj* gobj, HSD_JObj* jobj,
+                                          Item* ip, Vec3* pos)
+{
+    CollData* coll = itKyasarin_GetCollData(ip);
 
     HSD_JObjSetRotationXWithMtxDirty(jobj, M_PI);
     it_802762BC(ip);
-    coll->cur_pos = ip->pos;
-    pos = ip->pos;
-    it_80276100(gobj, &pos);
+    itKyasarin_SetFallCollPos(ip, coll, pos);
+    it_80276100(gobj, pos);
     it_802756D0(gobj);
 }
 
@@ -511,7 +521,7 @@ bool it_802EDDC0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itKyasarinAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
-    PAD_STACK(32);
+    PAD_STACK(4);
 
     ip->xDD4_itemVar.kyasarin.x38 += ip->xCA0;
     if (ip->xDD4_itemVar.kyasarin.x38 < attr->x40) {
@@ -528,11 +538,17 @@ bool it_802EDDC0(Item_GObj* gobj)
         }
         ip->xDCC_flag.b3 = 1;
         if (HSD_Randf() < it_804D6D40->x8) {
-            itKyasarin_FlipAndFall(gobj, GET_JOBJ(gobj), GET_ITEM(gobj));
+            Vec3 pos;
+
+            ip = GET_ITEM(gobj);
+            itKyasarin_FlipAndFall(gobj, GET_JOBJ(gobj), ip, &pos);
             it_8027BA54(gobj, &ip->x40_vel);
             Item_80268E5C(gobj, 9, ITEM_ANIM_UPDATE);
         } else {
-            itKyasarin_FlipAndFall(gobj, GET_JOBJ(gobj), GET_ITEM(gobj));
+            Vec3 pos;
+
+            ip = GET_ITEM(gobj);
+            itKyasarin_FlipAndFall(gobj, GET_JOBJ(gobj), ip, &pos);
             it_8027B964(gobj, 0);
             ip->xDD4_itemVar.kyasarin.x18 = 0;
             Item_80268E5C(gobj, 0xA, ITEM_ANIM_UPDATE);
