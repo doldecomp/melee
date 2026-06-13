@@ -615,7 +615,7 @@ void grOldKongo_8021005C(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    HSD_JObjSetFlagsAll(jobj, 0x10);
+    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     gp->gv.unk.xC4 = rand_range(grOk_804D6A90->x2, grOk_804D6A90->x0);
 }
 
@@ -653,7 +653,7 @@ void grOldKongo_802100FC(Ground_GObj* arg0)
                     x = 200.0f;
                 }
                 HSD_JObjSetTranslateX(jobj, x);
-                HSD_JObjClearFlagsAll(Ground_801C3FA4(arg0, 3), 0x10U);
+                HSD_JObjClearFlagsAll(Ground_801C3FA4(arg0, 3), JOBJ_HIDDEN);
                 return;
             }
             if (-200.0f > left) {
@@ -662,13 +662,13 @@ void grOldKongo_802100FC(Ground_GObj* arg0)
                 x = -200.0f;
             }
             HSD_JObjSetTranslateX(jobj, x);
-            HSD_JObjClearFlagsAll(Ground_801C3FA4(arg0, 1), 0x10U);
+            HSD_JObjClearFlagsAll(Ground_801C3FA4(arg0, 1), JOBJ_HIDDEN);
         }
     } else if (grAnime_801C83D0(arg0, 0, 7) != 0) {
         s32 min;
         int max;
 
-        HSD_JObjSetFlagsAll(jobj, 0x10U);
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         min = grOk_804D6A90->x2;
         max = grOk_804D6A90->x0;
         if (min > max) {

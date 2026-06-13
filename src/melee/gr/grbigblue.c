@@ -173,9 +173,9 @@ void grBigBlue_801E57C0(void)
     grBigBlue_801E59F8(2);
     grBigBlue_801E59F8(0x22);
     grBigBlue_801E59F8(0x21);
-    HSD_JObjSetFlagsAll(grBigBlue_801E59F8(0x20)->hsd_obj, 0x10);
+    HSD_JObjSetFlagsAll(grBigBlue_801E59F8(0x20)->hsd_obj, JOBJ_HIDDEN);
     grBigBlue_801E59F8(0x23);
-    HSD_JObjSetFlagsAll(grBigBlue_801E59F8(0x24)->hsd_obj, 0x10);
+    HSD_JObjSetFlagsAll(grBigBlue_801E59F8(0x24)->hsd_obj, JOBJ_HIDDEN);
     Ground_801C39C0();
     Ground_801C3BB4();
     mpLib_80058044(0x21);
@@ -730,7 +730,7 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                         gp->gv.bigblue.data[i].x34 = 0;
                         gp->gv.bigblue.data[i].x2C = 0;
                         gp->gv.bigblue.data[i].x1 = 3;
-                        HSD_JObjClearFlagsAll(jobj, 0x10);
+                        HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
                         gp->gv.bigblue.data[i].x50 = 0;
                         {
                             s32 chance = grBb_804D69C8->xB8;
@@ -1114,7 +1114,7 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                     (10.0f + Stage_GetBlastZoneRightOffset()) - 50.0f)
                 {
                 reset_route:
-                    HSD_JObjSetFlagsAll(jobj, 0x10);
+                    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
                     HSD_JObjSetRotationZ(jobj, 0.0f);
                     gp->gv.bigblue.data[i].x44.z = 0.0f;
                     gp->gv.bigblue.data[i].x44.y = 0.0f;
@@ -1540,7 +1540,7 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
                     HSD_JObjSetTranslate(jobj, &pos);
                     *(f32*) (bp + 0xD0) = pos.y;
                     *(f32*) (bp + 0xD8) = grBb_804D69C8->xD0;
-                    HSD_JObjClearFlagsAll(jobj, 0x10U);
+                    HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
                     bp[0xC4] = 1;
                 }
             }
@@ -1598,7 +1598,7 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
     }
     case 3:
         if (pos.x > (50.0f + Stage_GetBlastZoneRightOffset())) {
-            HSD_JObjSetFlagsAll(jobj, 0x10U);
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             *(f32*) (bp + 0xD8) = 0.0f;
             *(s32*) ((u8*) Ground_801C2BA4(32)->user_data + 0xCC) = 0;
             {
@@ -1864,7 +1864,7 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
                     *(f32*) ((u8*) gp + 0xE8) = 0.0f;
                     *(f32*) ((u8*) gp + 0xE4) = 0.0f;
 
-                    HSD_JObjClearFlagsAll(jobj, 0x10);
+                    HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
                     gp->gv.bigblue.x0 = 2;
                 }
             }
@@ -2022,7 +2022,7 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
              HSD_JObjGetTranslationX(jobj) >
                  Stage_GetBlastZoneRightOffset() - 50.0f))
         {
-            HSD_JObjSetFlagsAll(jobj, 0x10);
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             *(f32*) ((u8*) gp + 0xEC) = 0.0f;
             *(f32*) ((u8*) gp + 0xE8) = 0.0f;
             *(f32*) ((u8*) gp + 0xE4) = 0.0f;
@@ -2865,7 +2865,7 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
     for (i = 0; i < 30; i++) {
         u8 val;
         mpJointSetCb1(grBb_803E2D78.x84[i], gp, (mpLib_Callback) fn_801EF60C);
-        HSD_JObjSetFlagsAll(((HSD_JObj**) gp->gv.bigblue.xC8)[i], 16);
+        HSD_JObjSetFlagsAll(((HSD_JObj**) gp->gv.bigblue.xC8)[i], JOBJ_HIDDEN);
         val = HSD_Randi(2) ? 0 : 2;
         ((u8*) gp->gv.bigblue.xCC)[i] = val;
     }
@@ -2980,7 +2980,7 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
             *(f32*) (car + 0xEC) = 1.0F;
 
             HSD_JObjClearFlagsAll(((HSD_JObj**) gp->gv.bigblue.xC8)[line_idx],
-                                  16);
+                                  JOBJ_HIDDEN);
 
             jobj = ((HSD_JObj**) gp->gv.bigblue.xC8)[line_idx];
 
@@ -4112,7 +4112,7 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
 
         HSD_JObjSetFlagsAll(
             ((HSD_JObj**) gp->gv.bigblue.xC8)[(*(u16*) car_d4 >> 4) & 0x1F],
-            0x10U);
+            JOBJ_HIDDEN);
 
         car = (u8*) gp + offset;
         if (*(f32*) (car + 0xE0) > 0.0f) {
@@ -4331,7 +4331,7 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
                 {
                     HSD_JObj* jobj;
                     HSD_JObjClearFlagsAll(
-                        ((HSD_JObj**) gp->gv.bigblue.xC8)[slot], 0x10U);
+                        ((HSD_JObj**) gp->gv.bigblue.xC8)[slot], JOBJ_HIDDEN);
                     jobj = ((HSD_JObj**) gp->gv.bigblue.xC8)[slot];
                     HSD_JObjSetTranslate(jobj, (Vec3*) (car + 0xE0));
                 }
@@ -4480,7 +4480,7 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
                 {
                     HSD_JObj* jobj;
                     HSD_JObjClearFlagsAll(
-                        ((HSD_JObj**) gp->gv.bigblue.xC8)[slot], 0x10U);
+                        ((HSD_JObj**) gp->gv.bigblue.xC8)[slot], JOBJ_HIDDEN);
                     jobj = ((HSD_JObj**) gp->gv.bigblue.xC8)[slot];
                     HSD_JObjSetTranslate(jobj, (Vec3*) (car + 0xE0));
                 }

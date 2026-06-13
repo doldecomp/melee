@@ -287,7 +287,8 @@ void grOldYoshi_8020EC10(Ground_GObj* arg)
             if (grAnime_801C83D0(arg, grOy_803E6574[i * 2 + 1], 2)) {
                 gp->gv.oldyoshicloud.cloud[i].xC4_0123 = 2;
                 mpLib_80057BC0(grOy_803E6574[i * 2]);
-                HSD_JObjSetFlagsAll(gp->gv.oldyoshicloud.cloud[i].xC8, 16);
+                HSD_JObjSetFlagsAll(gp->gv.oldyoshicloud.cloud[i].xC8,
+                                    JOBJ_HIDDEN);
                 gp->gv.oldyoshicloud.cloud[i].xC4_567 = 0;
             }
             break;
@@ -303,7 +304,8 @@ void grOldYoshi_8020EC10(Ground_GObj* arg)
             break;
         case 3:
             if (gp->gv.oldyoshicloud.cloud[i].xC4_567 == 0) {
-                HSD_JObjClearFlagsAll(gp->gv.oldyoshicloud.cloud[i].xC8, 16);
+                HSD_JObjClearFlagsAll(gp->gv.oldyoshicloud.cloud[i].xC8,
+                                      JOBJ_HIDDEN);
             }
             if (gp->gv.oldyoshicloud.cloud[i].xC4_567 == grOy_804D6A88->x12) {
                 mpJointListAdd(grOy_803E6574[i * 2]);
@@ -356,7 +358,7 @@ void grOldYoshi_8020EFCC(Ground_GObj* arg)
 {
     HSD_JObj* jobj = arg->hsd_obj;
     Ground* gp = grOldYoshi_8020EFCC_inline(arg);
-    HSD_JObjSetFlagsAll(jobj, 0x10);
+    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     gp->gv.oldyoshiguest.xC4 =
         rand_range(grOy_804D6A88->x16, grOy_804D6A88->x14);
     gp->gv.oldyoshiguest.xC6 = -1;
@@ -401,10 +403,10 @@ void grOldYoshi_8020F088(Ground_GObj* arg)
             return;
         }
         if ((HSD_JObjGetFlags(jobj) & 0x10) != 0) {
-            HSD_JObjClearFlagsAll(jobj, 0x10);
+            HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         }
         if (grAnime_801C83D0(arg, 0, 7) != 0) {
-            HSD_JObjSetFlagsAll(jobj, 0x10);
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             gp->gv.oldyoshiguest.xC4 =
                 rand_range(grOy_804D6A88->x16, grOy_804D6A88->x14);
             gp->gv.oldyoshiguest.xC6 = -1;

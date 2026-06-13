@@ -445,7 +445,7 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
         break;
     case 4:
         HSD_JObjRemoveAnimAll(jobj);
-        HSD_JObjSetFlagsAll(jobj, 0x10U);
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         gp->gv.flatzone2.xCC = 0;
         gp->gv.flatzone2.xD0 = -1;
         break;

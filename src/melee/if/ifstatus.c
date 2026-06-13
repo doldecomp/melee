@@ -415,9 +415,9 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     if ((state->damage_percent % 1000) / 100 == 0 &&
         (state->damage_percent % 100) / 10 == 0)
     {
-        HSD_JObjSetFlagsAll(state->jobjs[Tens], 0x10);
+        HSD_JObjSetFlagsAll(state->jobjs[Tens], JOBJ_HIDDEN);
     } else {
-        HSD_JObjClearFlagsAll(state->jobjs[Tens], 0x10);
+        HSD_JObjClearFlagsAll(state->jobjs[Tens], JOBJ_HIDDEN);
     }
 
     digit_jobj = state->jobjs[Hundreds];
@@ -430,9 +430,9 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
 
     if ((state->damage_percent % 1000) / 100 == 0) {
-        HSD_JObjSetFlagsAll(state->jobjs[Hundreds], 0x10);
+        HSD_JObjSetFlagsAll(state->jobjs[Hundreds], JOBJ_HIDDEN);
     } else {
-        HSD_JObjClearFlagsAll(state->jobjs[Hundreds], 0x10);
+        HSD_JObjClearFlagsAll(state->jobjs[Hundreds], JOBJ_HIDDEN);
     }
 
     /* Update colors when damage changes */

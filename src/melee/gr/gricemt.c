@@ -1071,7 +1071,7 @@ void fn_801F8C64(Item_GObj* gobj, Ground* u1, Vec3* u2, HSD_GObj* u3, f32 u4)
     Item* it = GET_ITEM(gobj);
     grMaterial_801C8E28(gobj);
 
-    HSD_JObjSetFlagsAll(it->xDD4_itemVar.mato.x4, 0x10);
+    HSD_JObjSetFlagsAll(it->xDD4_itemVar.mato.x4, JOBJ_HIDDEN);
     it_8026B294(gobj, &pos);
     efSync_Spawn(0x445, gobj, &pos);
     Ground_801C53EC(310);
