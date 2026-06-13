@@ -42,7 +42,13 @@ ItemStateTable it_803F7438[] = {
     { -1, itSeakchain_UnkMotion4_Anim, NULL, NULL },
     { -1, itSeakchain_UnkMotion4_Anim, NULL, NULL },
 };
-
+static void order_sdata2();
+static void order_sdata2()
+{
+    (void) 0.0f;
+    (void) 0.1f;
+    (void) 1.0f;
+}
 void it_802BAEEC(Item_GObj* gobj)
 {
     it_8026B724(gobj);
@@ -71,14 +77,15 @@ int it_802BAF2C(Item* ip, HSD_JObj* jobj)
     ItemLink* head_link;
     ItemLink* tail_link;
     HSD_JObj* result;
-    int i;
     itSeakChain_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    HSD_GObj* link_gobj;
+    ItemLink* link;
+    int i;
     Vec3 zero = it_803B8680;
 
     prev_link = NULL;
     for (i = 0; i < attrs->x0; i++) {
-        HSD_GObj* link_gobj = GObj_Create(7, 0xA, 0);
-        ItemLink* link;
+        link_gobj = GObj_Create(7, 0xA, 0);
 
         if (link_gobj == NULL) {
             while (prev_link != NULL) {
@@ -814,7 +821,6 @@ void it_802BCB88(Item* ip, Vec3* vec)
     }
     {
         ItemLink* cur;
-        ItemLink* prev;
         Vec3 pos0;
         count = 0;
         for (; link != NULL; link = link->prev) {
@@ -828,11 +834,11 @@ void it_802BCB88(Item* ip, Vec3* vec)
             } else {
                 pos0 = *vec;
             }
-            prev = it_802BCB88_prev(link);
+            cur = it_802BCB88_prev(link);
             {
                 Vec3 pos1;
-                if (prev != NULL) {
-                    pos1 = prev->pos;
+                if (cur != NULL) {
+                    pos1 = cur->pos;
                 } else {
                     pos1 = link->pos;
                 }
