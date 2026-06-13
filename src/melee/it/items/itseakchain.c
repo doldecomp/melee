@@ -42,6 +42,7 @@ ItemStateTable it_803F7438[] = {
     { -1, itSeakchain_UnkMotion4_Anim, NULL, NULL },
     { -1, itSeakchain_UnkMotion4_Anim, NULL, NULL },
 };
+static void order_sdata2();
 static void order_sdata2()
 {
     (void) 0.0f;
