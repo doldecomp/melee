@@ -39,7 +39,7 @@ s32 mnEvent_8024CE74(void)
 {
     s32 count;
 
-    if (g_debugLevel > 2) {
+    if (DbLevel > 2) {
         return 0x2A;
     }
     count = mnEvent_CountUnlocked();
@@ -402,8 +402,7 @@ void mnEvent_8024E524(s32 event_idx)
     mnEvent_8024D7E0(event_gobj, event);
     mnEvent_8024D5B0(event_gobj, event);
     lb_80011E24(event_gobj->hsd_obj, &jobj_09, 9, -1);
-    HSD_JObjReqAnimAll(jobj_09,
-                       (f32) (u8) gm_801BEB8C(gm_801BEBC0(event)));
+    HSD_JObjReqAnimAll(jobj_09, (f32) (u8) gm_801BEB8C(gm_801BEBC0(event)));
     HSD_JObjAnimAll(jobj_09);
     mnEvent_8024D014(event_gobj);
 }
@@ -482,7 +481,8 @@ void fn_8024D864(HSD_GObj* gobj)
             mnEvent_8024D7E0(event_gobj, event);
             mnEvent_8024D5B0(event_gobj, event);
             lb_80011E24(event_gobj->hsd_obj, &jobj_09, 9, -1);
-            HSD_JObjReqAnimAll(jobj_09, (f32) (u8) gm_801BEB8C(gm_801BEBC0(event)));
+            HSD_JObjReqAnimAll(jobj_09,
+                               (f32) (u8) gm_801BEB8C(gm_801BEBC0(event)));
             HSD_JObjAnimAll(jobj_09);
             mnEvent_8024D014(event_gobj);
         }
@@ -527,7 +527,8 @@ void fn_8024D864(HSD_GObj* gobj)
             mnEvent_8024D7E0(event_gobj, event);
             mnEvent_8024D5B0(event_gobj, event);
             lb_80011E24(event_gobj->hsd_obj, &jobj_09, 9, -1);
-            HSD_JObjReqAnimAll(jobj_09, (f32) (u8) gm_801BEB8C(gm_801BEBC0(event)));
+            HSD_JObjReqAnimAll(jobj_09,
+                               (f32) (u8) gm_801BEB8C(gm_801BEBC0(event)));
             HSD_JObjAnimAll(jobj_09);
             mnEvent_8024D014(event_gobj);
             return;
@@ -546,7 +547,8 @@ void fn_8024D864(HSD_GObj* gobj)
             mnEvent_8024D7E0(event_gobj, event);
             mnEvent_8024D5B0(event_gobj, event);
             lb_80011E24(event_gobj->hsd_obj, &jobj_09, 9, -1);
-            HSD_JObjReqAnimAll(jobj_09, (f32) (u8) gm_801BEB8C(gm_801BEBC0(event)));
+            HSD_JObjReqAnimAll(jobj_09,
+                               (f32) (u8) gm_801BEB8C(gm_801BEBC0(event)));
             HSD_JObjAnimAll(jobj_09);
             mnEvent_8024D014(event_gobj);
         }
@@ -568,7 +570,8 @@ void fn_8024D864(HSD_GObj* gobj)
             mnEvent_8024D7E0(event_gobj, event);
             mnEvent_8024D5B0(event_gobj, event);
             lb_80011E24(event_gobj->hsd_obj, &jobj_09, 9, -1);
-            HSD_JObjReqAnimAll(jobj_09, (f32) (u8) gm_801BEB8C(gm_801BEBC0(event)));
+            HSD_JObjReqAnimAll(jobj_09,
+                               (f32) (u8) gm_801BEB8C(gm_801BEBC0(event)));
             HSD_JObjAnimAll(jobj_09);
             mnEvent_8024D014(event_gobj);
             return;
@@ -587,7 +590,8 @@ void fn_8024D864(HSD_GObj* gobj)
             mnEvent_8024D7E0(event_gobj, event);
             mnEvent_8024D5B0(event_gobj, event);
             lb_80011E24(event_gobj->hsd_obj, &jobj_09, 9, -1);
-            HSD_JObjReqAnimAll(jobj_09, (f32) (u8) gm_801BEB8C(gm_801BEBC0(event)));
+            HSD_JObjReqAnimAll(jobj_09,
+                               (f32) (u8) gm_801BEB8C(gm_801BEBC0(event)));
             HSD_JObjAnimAll(jobj_09);
             mnEvent_8024D014(event_gobj);
         }

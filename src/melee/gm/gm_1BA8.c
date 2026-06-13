@@ -19,11 +19,11 @@
 #include <melee/gm/gmresult.h>
 #include <melee/gm/gmresultplayer.h>
 #include <melee/gm/gmtou.h>
-#include <melee/it/items/itevyoshiegg.h>
 #include <melee/gm/gmvsmelee.h>
 #include <melee/gm/types.h>
 #include <melee/gr/ground.h>
 #include <melee/if/ifstock.h>
+#include <melee/it/items/itevyoshiegg.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbbgflash.h>
@@ -289,8 +289,8 @@ void gm_801BAD70(GameScene* arg0)
     void* sd;
     PAD_STACK(0x20);
 
-    lbArchive_LoadSymbols("GmEvent.dat", &gm_804D6900, "sqEventInitDataLevelTbl",
-                          0);
+    lbArchive_LoadSymbols("GmEvent.dat", &gm_804D6900,
+                          "sqEventInitDataLevelTbl", 0);
     levels = gm_804D6900;
     gm_80167A64(&md->rules);
     lvlpp = &levels[level];
@@ -425,8 +425,7 @@ loop_40:
                     r3b[var_r22 + 0x63] = c;
                 }
             }
-            if ((s8) r3b[0x60] == 0x13 &&
-                (s8) r3b[var_r22 + 0x60] == 0x12) {
+            if ((s8) r3b[0x60] == 0x13 && (s8) r3b[var_r22 + 0x60] == 0x12) {
                 u8 c = r3b[var_r22 + 0x63];
                 if (c == r3b[0x63]) {
                     if (c <= 2) {
@@ -490,7 +489,8 @@ loop_40:
     if (level == 0x2B) {
         u8 c = ev->x50[2];
         if ((s8) (u8) ev->x4C[0] == (s8) (u8) ev->x4C[2] &&
-            (u8) ev->x50[0] == c) {
+            (u8) ev->x50[0] == c)
+        {
             if (c <= 2) {
                 c += 1;
             } else {
@@ -533,8 +533,8 @@ loop_40:
         k = xc[0];
         sp8 = (k == 4) ? xc[0x17] : 0;
         gm_8016A22C(k, 0x21, 0x21, ev->x50[1], 0, 0, var_r9, 0, sp8, ev->x0,
-                    ev->x1, xc[1], xc[2], xc[3], xc[4], 0, 1,
-                    *(f32*) (xc + 8), *(f32*) (xc + 0xC));
+                    ev->x1, xc[1], xc[2], xc[3], xc[4], 0, 1, *(f32*) (xc + 8),
+                    *(f32*) (xc + 0xC));
         gm_8016A414(*(f32*) ((u8*) (*lvlpp)->xC + 0x10));
         gm_8016A21C(&md->rules);
         if ((((u8*) (*lvlpp)->xC)[0x14] >> 7) & 1) {
@@ -752,7 +752,7 @@ s32 gm_801BBB64(void)
         ev->x44 = 1;
     }
     pp = &gm_804D6900[idx];
-    ev->x48 = (InternalStageId) *(u16*) ((u8*) (*pp)->x8 + 6);
+    ev->x48 = (InternalStageId) * (u16*) ((u8*) (*pp)->x8 + 6);
     p = (*pp)->x14;
     if (p != NULL) {
         ev->x4C[0] = *(u8*) p;
@@ -951,23 +951,20 @@ s32 gm_801BC00C(void)
         if (ev->x20 == 0) {
             inner = (u8*) var_r29[idx]->x10;
             cd = ((void**) (inner + 0x10))[2];
-            ftLib_80087508(
-                Player_800325C8((CharacterKind) (s8) *(u8*) cd, 0),
-                *((u8*) cd + 3));
+            ftLib_80087508(Player_800325C8((CharacterKind) (s8) * (u8*) cd, 0),
+                           *((u8*) cd + 3));
             cd = ((void**) (inner + 0x10))[3];
-            ftLib_80087508(
-                Player_800325C8((CharacterKind) (s8) *(u8*) cd, 0),
-                *((u8*) cd + 3));
+            ftLib_80087508(Player_800325C8((CharacterKind) (s8) * (u8*) cd, 0),
+                           *((u8*) cd + 3));
         } else {
             cd = ((void**) ((u8*) var_r29[idx]->x10 + 0x10))[4];
-            ftLib_80087508(
-                Player_800325C8((CharacterKind) (s8) *(u8*) cd, 0),
-                *((u8*) cd + 3));
+            ftLib_80087508(Player_800325C8((CharacterKind) (s8) * (u8*) cd, 0),
+                           *((u8*) cd + 3));
         }
         break;
     case 43:
         chr = Player_800325C8(
-            (CharacterKind) (s8) *(u8*) var_r29[idx]->x4->x4, 0);
+            (CharacterKind) (s8) * (u8*) var_r29[idx]->x4->x4, 0);
         ftLib_80087508(chr, ev->x50[2]);
         if (ev->x0 == 4) {
             Player_80031DA8(chr, ev->x1);
@@ -996,7 +993,7 @@ s32 gm_801BC00C(void)
     case 29:
     case 39:
     case 48:
-        for (i = ev->x20; i < (s32) *(u8*) var_r29[idx]->x10; i++) {
+        for (i = ev->x20; i < (s32) * (u8*) var_r29[idx]->x10; i++) {
             cd = ((void**) ((u8*) var_r29[idx]->x10 + 0x10))[i];
             ckind = *(u8*) cd;
             costume = *((u8*) cd + 3);
@@ -1501,8 +1498,9 @@ void gm_801BCC9C(HSD_GObj* arg0)
         mi = gm_8016AE38();
         if (temp_r31->xB_0) {
             var_r0 = 0;
-        } else if (((*(u8*) &mi->x24C8 >> 1U) & 1) &&
-                   gm_8016AEEC() == 0 && gm_8016AEFC() == 0x3B) {
+        } else if (((*(u8*) &mi->x24C8 >> 1U) & 1) && gm_8016AEEC() == 0 &&
+                   gm_8016AEFC() == 0x3B)
+        {
             var_r0 = 1;
         } else {
             var_r0 = 0;
@@ -1589,7 +1587,8 @@ void gm_801BD028(HSD_GObj* arg0)
     if (ev->xB_0) {
         cond = 0;
     } else if (((((u8*) &rules->x24C8)[0] >> 1) & 1) && gm_8016AEEC() == 0 &&
-               gm_8016AEFC() == 0x3B) {
+               gm_8016AEFC() == 0x3B)
+    {
         cond = 1;
     } else {
         cond = 0;
@@ -2087,24 +2086,24 @@ void gm_801BDE94(HSD_GObj* arg0)
         ev->xB_5 = 1;
         if (ev->x20 == 0) {
             mask = lbAudioAx_80026E84(
-                (enum CharacterKind) (s8) (u8) *tbl[level]->x14);
+                (enum CharacterKind)(s8) (u8) *tbl[level]->x14);
             mask |= lbAudioAx_80026E84(
-                (enum CharacterKind) ((struct gm_evx10*) tbl[level]->x10)
+                (enum CharacterKind)((struct gm_evx10*) tbl[level]->x10)
                     ->unk10->unk0);
             mask |= lbAudioAx_80026E84(
-                (enum CharacterKind) ((struct gm_evx10*) tbl[level]->x10)
+                (enum CharacterKind)((struct gm_evx10*) tbl[level]->x10)
                     ->unk18->unk0);
             mask |= lbAudioAx_80026E84(
-                (enum CharacterKind) ((struct gm_evx10*) tbl[level]->x10)
+                (enum CharacterKind)((struct gm_evx10*) tbl[level]->x10)
                     ->unk1C->unk0);
         } else {
             mask = lbAudioAx_80026E84(
-                (enum CharacterKind) (s8) (u8) *tbl[level]->x14);
+                (enum CharacterKind)(s8) (u8) *tbl[level]->x14);
             mask |= lbAudioAx_80026E84(
-                (enum CharacterKind) ((struct gm_evx10*) tbl[level]->x10)
+                (enum CharacterKind)((struct gm_evx10*) tbl[level]->x10)
                     ->unk14->unk0);
             mask |= lbAudioAx_80026E84(
-                (enum CharacterKind) ((struct gm_evx10*) tbl[level]->x10)
+                (enum CharacterKind)((struct gm_evx10*) tbl[level]->x10)
                     ->unk20->unk0);
         }
         lbAudioAx_80026F2C(0x14);
@@ -2124,20 +2123,23 @@ void gm_801BDE94(HSD_GObj* arg0)
         case 0:
             if (Player_GetStocks(1) <= 0) {
                 ev->x18 = 1;
-                gm_801BAB40(&sp50, (int) ((struct gm_evx10*) tbl[level]->x10)->unk18);
+                gm_801BAB40(&sp50,
+                            (int) ((struct gm_evx10*) tbl[level]->x10)->unk18);
                 gm_8016EDDC(2, &sp50);
             }
             goto block_41;
         case 1:
             if (Player_GetStocks(2) <= 0) {
                 ev->x18 = 2;
-                gm_801BAB40(&sp50, (int) ((struct gm_evx10*) tbl[level]->x10)->unk1C);
+                gm_801BAB40(&sp50,
+                            (int) ((struct gm_evx10*) tbl[level]->x10)->unk1C);
                 gm_8016EDDC(3, &sp50);
             }
             goto block_41;
         case 2:
             if (Player_GetStocks(3) <= 0) {
-                struct gm_evspawn* sp = ((struct gm_evx10*) tbl[level]->x10)->unk1C;
+                struct gm_evspawn* sp =
+                    ((struct gm_evx10*) tbl[level]->x10)->unk1C;
                 s8 ckind = sp->unk0;
                 u8 color = sp->unk3;
                 if ((s8) ev->x0 == ckind && (u8) ev->x1 == color) {
@@ -2169,7 +2171,8 @@ void gm_801BDE94(HSD_GObj* arg0)
         case 0:
             if (Player_GetStocks(1) <= 0) {
                 ev->x18 = 1;
-                gm_801BAB40(&sp50, (int) ((struct gm_evx10*) tbl[level]->x10)->unk20);
+                gm_801BAB40(&sp50,
+                            (int) ((struct gm_evx10*) tbl[level]->x10)->unk20);
                 gm_8016EDDC(2, &sp50);
             }
         block_41:
@@ -2191,7 +2194,8 @@ void gm_801BDE94(HSD_GObj* arg0)
                 if (ev2->xB_0) {
                     do_end = 0;
                 } else if (info->x24C8.x0_6 && gm_8016AEEC() == 0 &&
-                           gm_8016AEFC() == 0x3B) {
+                           gm_8016AEFC() == 0x3B)
+                {
                     do_end = 1;
                 } else {
                     do_end = 0;
@@ -2210,7 +2214,8 @@ void gm_801BDE94(HSD_GObj* arg0)
             return;
         case 1:
             if (Player_GetStocks(2) <= 0) {
-                struct gm_evspawn* sp = ((struct gm_evx10*) tbl[level]->x10)->unk20;
+                struct gm_evspawn* sp =
+                    ((struct gm_evx10*) tbl[level]->x10)->unk20;
                 s8 ckind = sp->unk0;
                 u8 color = sp->unk3;
                 if ((s8) ev->x0 == ckind && (u8) ev->x1 == color) {
@@ -2761,7 +2766,7 @@ int gm_801BF050(void)
 void gm_801BF060(GameScene* arg0)
 {
     int* temp_r3 = gm_801A4284(arg0);
-    if (g_debugLevel >= 3) {
+    if (DbLevel >= 3) {
         if (*temp_r3 & 0x100) {
             gm_801A42E8(GM_DEBUG_VS);
             gm_801A42D4();
@@ -2816,7 +2821,8 @@ void gm_801BF128(void)
             b = spB8[j];
             a = spB8[i];
             if ((s32) ((u8*) gmMainLib_804D3EE0)[a + 2] >
-                (s32) ((u8*) gmMainLib_804D3EE0)[b + 2]) {
+                (s32) ((u8*) gmMainLib_804D3EE0)[b + 2])
+            {
                 spB8[i] = b;
                 spB8[j] = a;
             }
@@ -2830,7 +2836,8 @@ void gm_801BF128(void)
             for (j = 0; j < added; j++) {
                 if (pick == gm_801BF648(j) ||
                     (pick == 0x12 && gm_801BF648(j) == 0x13) ||
-                    (pick == 0x13 && gm_801BF648(j) == 0x12)) {
+                    (pick == 0x13 && gm_801BF648(j) == 0x12))
+                {
                     dup = 1;
                 }
             }
@@ -2861,7 +2868,8 @@ void gm_801BF128(void)
             b = sp40[j];
             a = sp40[i];
             if ((s32) ((u8*) gmMainLib_804D3EE0)[a + 0x1C] >
-                (s32) ((u8*) gmMainLib_804D3EE0)[b + 0x1C]) {
+                (s32) ((u8*) gmMainLib_804D3EE0)[b + 0x1C])
+            {
                 sp40[i] = b;
                 sp40[j] = a;
             }

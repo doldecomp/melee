@@ -3034,12 +3034,9 @@ void fn_80309404(HSD_GObj* gobj)
             HSD_CObjGetEyePosition(cobj, &eye_pos);
             transition_eye.y = 8.0f;
             HSD_CObjGetInterest(cobj, &transition_interest);
-            base->x0.x =
-                (transition_eye.x - transition_interest.x) / 10.0f;
-            base->x0.y =
-                (transition_eye.y - transition_interest.y) / 10.0f;
-            base->x0.z =
-                (transition_eye.z - transition_interest.z) / 10.0f;
+            base->x0.x = (transition_eye.x - transition_interest.x) / 10.0f;
+            base->x0.y = (transition_eye.y - transition_interest.y) / 10.0f;
+            base->x0.z = (transition_eye.z - transition_interest.z) / 10.0f;
             un_804D6E90 = (state->x20 - 38.0f) / 10.0f;
             un_804D6E94 = state->x18 / 10.0f;
             state->x61 = 3;
@@ -3202,8 +3199,7 @@ void fn_80309404(HSD_GObj* gobj)
                             } else {
                                 total = *gmMainLib_8015CC90();
                             }
-                            display->selectedIdx =
-                                (s16) (total - 1);
+                            display->selectedIdx = (s16) (total - 1);
                         }
                         if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC)) {
                             total = base->trophy_count;
@@ -3239,10 +3235,9 @@ void fn_80309404(HSD_GObj* gobj)
                                     entry->archive_name = md + 4;
                                     entry->symbol_name = md + 0x24;
                                     entry->trophy_id = tid;
-                                    entry->archive =
-                                        lbArchive_LoadSymbols(
-                                            entry->archive_name, &sp138,
-                                            entry->symbol_name, 0);
+                                    entry->archive = lbArchive_LoadSymbols(
+                                        entry->archive_name, &sp138,
+                                        entry->symbol_name, 0);
                                 }
                             } else {
                                 ToyListEntry* entry;
@@ -3262,10 +3257,9 @@ void fn_80309404(HSD_GObj* gobj)
                                 entry->archive_name = md + 4;
                                 entry->symbol_name = md + 0x24;
                                 entry->trophy_id = tid;
-                                entry->archive =
-                                    lbArchive_LoadSymbols(
-                                        entry->archive_name, &sp134,
-                                        entry->symbol_name, 0);
+                                entry->archive = lbArchive_LoadSymbols(
+                                    entry->archive_name, &sp134,
+                                    entry->symbol_name, 0);
                             }
                             {
                                 HSD_Archive* ma = display->last_entry->archive;
@@ -3276,10 +3270,8 @@ void fn_80309404(HSD_GObj* gobj)
                             }
                             display->selected_entry =
                                 display->selected_entry->prev;
-                            display->first_entry =
-                                display->first_entry->prev;
-                            display->last_entry =
-                                display->last_entry->prev;
+                            display->first_entry = display->first_entry->prev;
+                            display->last_entry = display->last_entry->prev;
                         } else {
                             display->selected_entry =
                                 display->selected_entry->prev;
@@ -3289,8 +3281,7 @@ void fn_80309404(HSD_GObj* gobj)
                         s16 cur_idx;
 
                         lbAudioAx_80024030(2);
-                        display->selectedIdx =
-                            display->selectedIdx + 1;
+                        display->selectedIdx = display->selectedIdx + 1;
                         if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC)) {
                             total = base->trophy_count;
                         } else {
@@ -3331,8 +3322,7 @@ void fn_80309404(HSD_GObj* gobj)
                                 }
                                 entry = display->last_entry->next;
                                 lk = cur_idx - cnt2;
-                                tid =
-                                    un_804D6EDC[lk + 1];
+                                tid = un_804D6EDC[lk + 1];
                                 oa = entry->archive;
                                 md = un_8030813C(tid, (enum_t) un_804D6EDC);
                                 if (oa != NULL) {
@@ -3342,10 +3332,9 @@ void fn_80309404(HSD_GObj* gobj)
                                 entry->archive_name = md + 4;
                                 entry->symbol_name = md + 0x24;
                                 entry->trophy_id = tid;
-                                entry->archive =
-                                    lbArchive_LoadSymbols(
-                                        entry->archive_name, &sp130,
-                                        entry->symbol_name, 0);
+                                entry->archive = lbArchive_LoadSymbols(
+                                    entry->archive_name, &sp130,
+                                    entry->symbol_name, 0);
                             } else {
                                 ToyListEntry* entry;
                                 HSD_Archive* oa;
@@ -3364,13 +3353,13 @@ void fn_80309404(HSD_GObj* gobj)
                                 entry->archive_name = md + 4;
                                 entry->symbol_name = md + 0x24;
                                 entry->trophy_id = tid;
-                                entry->archive =
-                                    lbArchive_LoadSymbols(
-                                        entry->archive_name, &sp12C,
-                                        entry->symbol_name, 0);
+                                entry->archive = lbArchive_LoadSymbols(
+                                    entry->archive_name, &sp12C,
+                                    entry->symbol_name, 0);
                             }
                             {
-                                HSD_Archive* ma = display->first_entry->archive;
+                                HSD_Archive* ma =
+                                    display->first_entry->archive;
                                 if (ma != NULL) {
                                     lbArchive_80016EFC(ma);
                                     display->first_entry->archive = NULL;
@@ -3378,10 +3367,8 @@ void fn_80309404(HSD_GObj* gobj)
                             }
                             display->selected_entry =
                                 display->selected_entry->next;
-                            display->first_entry =
-                                display->first_entry->next;
-                            display->last_entry =
-                                display->last_entry->next;
+                            display->first_entry = display->first_entry->next;
+                            display->last_entry = display->last_entry->next;
                         } else {
                             display->selected_entry =
                                 display->selected_entry->next;
@@ -3393,9 +3380,8 @@ void fn_80309404(HSD_GObj* gobj)
                     state->x58 = 0x95E;
                     un_803087F4(display->selected_entry);
                     un_803084A0(display->selected_entry->trophy_id);
-                    un_803083D8(
-                        ((ToyED8Data*) ed8)->x30,
-                        (s32) display->selected_entry->trophy_id);
+                    un_803083D8(((ToyED8Data*) ed8)->x30,
+                                (s32) display->selected_entry->trophy_id);
                     state->x60 = 0x14;
                 }
             }
@@ -3642,8 +3628,7 @@ void fn_8030B530(HSD_GObj* arg0)
             }
 
             HSD_JObjAddRotationY(jobj_next, 0.017453292f * adj_x);
-            un_803062EC((s32) anim->xC, 5U,
-                        57.29578f * jobj_next->rotate.y);
+            un_803062EC((s32) anim->xC, 5U, 57.29578f * jobj_next->rotate.y);
 
             {
                 f32 abs_y = (adj_y < 0.0f) ? -adj_y : adj_y;
@@ -3695,16 +3680,16 @@ void fn_8030B530(HSD_GObj* arg0)
                     if (abs_x2 > 0.8f) {
                         f32 dx = 0.01f * cosf(angle);
                         HSD_JObjAddTranslationX(jobj_next, dx);
-                        un_803062EC((s32) anim->xC,
-                                    0U, jobj_next->translate.x);
+                        un_803062EC((s32) anim->xC, 0U,
+                                    jobj_next->translate.x);
                     }
                     {
                         f32 abs_y2 = (adj_y < 0.0f) ? -adj_y : adj_y;
                         if (abs_y2 > 0.8f) {
                             f32 dz = 0.01f * -sinf(angle);
                             HSD_JObjAddTranslationZ(jobj_next, dz);
-                            un_803062EC((s32) anim->xC,
-                                        2U, jobj_next->translate.z);
+                            un_803062EC((s32) anim->xC, 2U,
+                                        jobj_next->translate.z);
                         }
                     }
                 } else {
@@ -3712,16 +3697,16 @@ void fn_8030B530(HSD_GObj* arg0)
                     if (abs_x3 > 0.8f) {
                         f32 dx = 0.01f * cosf(angle);
                         HSD_JObjAddTranslationX(jobj_next, dx);
-                        un_803062EC((s32) anim->xC,
-                                    0U, jobj_next->translate.x);
+                        un_803062EC((s32) anim->xC, 0U,
+                                    jobj_next->translate.x);
                     }
                     {
                         f32 abs_y3 = (adj_y < 0.0f) ? -adj_y : adj_y;
                         if (abs_y3 > 0.8f) {
                             f32 dy = 0.01f * sinf(angle);
                             HSD_JObjAddTranslationY(jobj_next, dy);
-                            un_803062EC((s32) anim->xC,
-                                        1U, jobj_next->translate.y);
+                            un_803062EC((s32) anim->xC, 1U,
+                                        jobj_next->translate.y);
                         }
                     }
                 }
@@ -3766,8 +3751,8 @@ void fn_8030B530(HSD_GObj* arg0)
                                         HSD_JObj* n2 = jobj_next->next;
                                         HSD_JObjAddScaleX(n2, -0.01f);
                                         HSD_JObjAddScaleZ(n2, -0.01f);
-                                        un_803062EC((s32) anim->xC,
-                                                    4U, n2->scale.x);
+                                        un_803062EC((s32) anim->xC, 4U,
+                                                    n2->scale.x);
                                     }
                                     btn10 = un_80305C44();
                                     if (btn10 & 1) {
@@ -3783,9 +3768,8 @@ void fn_8030B530(HSD_GObj* arg0)
                                     HSD_JObj* n2 = jobj_next->next;
                                     HSD_JObjAddScaleX(n2, 0.01f);
                                     HSD_JObjAddScaleZ(n2, 0.01f);
-                                    un_803062EC(
-                                        (s32) anim->xC,
-                                        4U, n2->scale.x);
+                                    un_803062EC((s32) anim->xC, 4U,
+                                                n2->scale.x);
                                 }
                                 btn10 = un_80305C44();
                                 if (btn10 & 2) {
@@ -3798,8 +3782,8 @@ void fn_8030B530(HSD_GObj* arg0)
                             HSD_JObjAddScaleX(jobj_next, -0.01f);
                             HSD_JObjAddScaleY(jobj_next, -0.01f);
                             HSD_JObjAddScaleZ(jobj_next, -0.01f);
-                            un_803062EC((s32) anim->xC,
-                                        3U, jobj_next->scale.x);
+                            un_803062EC((s32) anim->xC, 3U,
+                                        jobj_next->scale.x);
                             btn10 = un_80305C44();
                             if (btn10 & 4) {
                                 state->x60 = 8;
@@ -3811,8 +3795,7 @@ void fn_8030B530(HSD_GObj* arg0)
                         HSD_JObjAddScaleX(jobj_next, 0.01f);
                         HSD_JObjAddScaleY(jobj_next, 0.01f);
                         HSD_JObjAddScaleZ(jobj_next, 0.01f);
-                        un_803062EC((s32) anim->xC,
-                                    3U, jobj_next->scale.x);
+                        un_803062EC((s32) anim->xC, 3U, jobj_next->scale.x);
                         btn10 = un_80305C44();
                         if (btn10 & 8) {
                             state->x60 = 8;
@@ -4508,9 +4491,7 @@ void fn_8030E110(HSD_GObj* arg0)
                                 } else {
                                     tc2 = *gmMainLib_8015CC90();
                                 }
-                                if (display->selectedIdx >=
-                                    tc2)
-                                {
+                                if (display->selectedIdx >= tc2) {
                                     display->selectedIdx = 0;
                                 }
                             }
@@ -4534,8 +4515,7 @@ void fn_8030E110(HSD_GObj* arg0)
                                     } else {
                                         tc4 = *gmMainLib_8015CC90();
                                     }
-                                    cur_trophy =
-                                        display->selectedIdx;
+                                    cur_trophy = display->selectedIdx;
                                     next_idx = (s32) (cur_trophy + 1);
                                     if (next_idx >= tc4) {
                                         s16 tc5;
@@ -4550,44 +4530,36 @@ void fn_8030E110(HSD_GObj* arg0)
                                         trophy_id =
                                             un_804D6EDC[display->selectedIdx -
                                                         tc5];
-                                        archive =
-                                            entry->archive;
+                                        archive = entry->archive;
                                         result = un_8030813C(
                                             trophy_id, (s32) un_804D6EDC);
                                         if (archive != NULL) {
                                             lbArchive_80016EFC(archive);
-                                            entry->archive =
-                                                NULL;
+                                            entry->archive = NULL;
                                         }
                                         entry->archive_name = result + 4;
-                                        entry->symbol_name =
-                                            result + 0x24;
+                                        entry->symbol_name = result + 0x24;
                                         entry->trophy_id = trophy_id;
-                                        entry->archive =
-                                            lbArchive_LoadSymbols(
-                                                entry->archive_name, &spCC,
-                                                entry->symbol_name, 0);
+                                        entry->archive = lbArchive_LoadSymbols(
+                                            entry->archive_name, &spCC,
+                                            entry->symbol_name, 0);
                                     } else {
                                         entry = display->last_entry->next;
                                         trophy_id = un_804D6EDC[cur_trophy];
-                                        archive =
-                                            entry->archive;
+                                        archive = entry->archive;
                                         result = un_8030813C(
                                             trophy_id,
                                             (s32) &un_804D6EDC[cur_trophy]);
                                         if (archive != NULL) {
                                             lbArchive_80016EFC(archive);
-                                            entry->archive =
-                                                NULL;
+                                            entry->archive = NULL;
                                         }
                                         entry->archive_name = result + 4;
-                                        entry->symbol_name =
-                                            result + 0x24;
+                                        entry->symbol_name = result + 0x24;
                                         entry->trophy_id = trophy_id;
-                                        entry->archive =
-                                            lbArchive_LoadSymbols(
-                                                entry->archive_name, &spC8,
-                                                entry->symbol_name, 0);
+                                        entry->archive = lbArchive_LoadSymbols(
+                                            entry->archive_name, &spC8,
+                                            entry->symbol_name, 0);
                                     }
                                     archive = display->first_entry->archive;
                                     if (archive != NULL) {
@@ -4630,8 +4602,7 @@ void fn_8030E110(HSD_GObj* arg0)
                                 tc7 = *gmMainLib_8015CC90();
                             }
                             if (tc7 > 3) {
-                                s16 prev_trophy =
-                                    display->selectedIdx;
+                                s16 prev_trophy = display->selectedIdx;
                                 if ((prev_trophy - 1) < 0) {
                                     s16 tc8;
                                     s32 calc_idx;
@@ -4642,8 +4613,7 @@ void fn_8030E110(HSD_GObj* arg0)
                                     } else {
                                         tc8 = *gmMainLib_8015CC90();
                                     }
-                                    calc_idx =
-                                        tc8 + display->selectedIdx;
+                                    calc_idx = tc8 + display->selectedIdx;
                                     entry = display->first_entry->prev;
                                     trophy_id = un_804D6EDC[calc_idx - 1];
                                     archive = entry->archive;
@@ -4655,10 +4625,9 @@ void fn_8030E110(HSD_GObj* arg0)
                                     entry->archive_name = result + 4;
                                     entry->symbol_name = result + 0x24;
                                     entry->trophy_id = trophy_id;
-                                    entry->archive =
-                                        lbArchive_LoadSymbols(
-                                            entry->archive_name, &spD8,
-                                            entry->symbol_name, 0);
+                                    entry->archive = lbArchive_LoadSymbols(
+                                        entry->archive_name, &spD8,
+                                        entry->symbol_name, 0);
                                 } else {
                                     entry = display->first_entry->prev;
                                     trophy_id = un_804D6EDC[prev_trophy - 1];
@@ -4673,13 +4642,11 @@ void fn_8030E110(HSD_GObj* arg0)
                                     entry->archive_name = result + 4;
                                     entry->symbol_name = result + 0x24;
                                     entry->trophy_id = trophy_id;
-                                    entry->archive =
-                                        lbArchive_LoadSymbols(
-                                            entry->archive_name, &spD4,
-                                            entry->symbol_name, 0);
+                                    entry->archive = lbArchive_LoadSymbols(
+                                        entry->archive_name, &spD4,
+                                        entry->symbol_name, 0);
                                 }
-                                archive =
-                                    display->last_entry->archive;
+                                archive = display->last_entry->archive;
                                 if (archive != NULL) {
                                     lbArchive_80016EFC(archive);
                                     display->last_entry->archive = NULL;
@@ -5896,7 +5863,7 @@ void un_80311AB0_OnEnter(void* arg0)
     un_804D6E50 = 0;
     un_804D6EA1 = 0;
 
-    if (g_debugLevel >= 3) {
+    if (DbLevel >= 3) {
         /* Check Z button */
         buttons = un_80305C44();
 
