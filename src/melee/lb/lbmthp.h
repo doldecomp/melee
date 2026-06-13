@@ -14,8 +14,8 @@
 BOOL THPInit(void);
 s32 THPDec_8032F8D4(u32, void*);
 s32 THPDec_8032FD40(THPDec_8032FD40_Data* arg0, u16 height);
-void THPDec_80331340(s32, void*, void*, void*, s32);
-void THPDec_803313D0(s32, void*, void*, void*);
+void THPDec_80331340(s32, void*, void*, void*);
+void THPDec_803313D0(s32, void*, void*, void*, u32);
 s32 THPVideoDecode(void*, void*, void*, void*, void*);
 
 /* Struct used by fn_8001EBF0 for THP decode component init */
