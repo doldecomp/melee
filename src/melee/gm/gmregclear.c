@@ -1034,7 +1034,7 @@ bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
         arg1->xC.xE = 1;
     }
     temp_r0 = arg0->match_end.result;
-    if ((temp_r0 == 7 || temp_r0 == 8) && g_debugLevel <= 2) {
+    if ((temp_r0 == 7 || temp_r0 == 8) && DbLevel <= 2) {
         switch (gm_801A4310()) {
         case 3:
             fn_80162BFC(arg1->ckind, arg1->xC.x18);

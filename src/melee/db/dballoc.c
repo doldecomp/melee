@@ -17,7 +17,7 @@ void fn_UpdateObjAllocLimiter(int player)
 {
     int peak;
 
-    if (g_debugLevel == 4) {
+    if (DbLevel == 4) {
         if ((db_ButtonsDown(player) & HSD_PAD_B) &&
             (db_ButtonsPressed(player) & HSD_PAD_DPADUP))
         {

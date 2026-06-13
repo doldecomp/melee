@@ -1506,7 +1506,7 @@ void un_8031B460_OnEnter(void* arg0)
     un_804D6F2C = 0;
     un_804D6F24 = NULL;
 
-    if ((s32) g_debugLevel >= 3 && (un_80305C44() & 0x10)) {
+    if ((s32) DbLevel >= 3 && (un_80305C44() & 0x10)) {
         un_804D6F20 = 1;
         cfg->x7C = 0;
     }

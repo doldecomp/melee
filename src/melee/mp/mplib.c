@@ -4749,7 +4749,7 @@ bool mpGetSpeed(int line_id, Vec3* pos, Vec3* speed)
     speed->x = new_x - pos->x;
     speed->y = new_y - pos->y;
     speed->z = 0.0F;
-    if (g_debugLevel >= 3) {
+    if (DbLevel >= 3) {
         if (ABS(speed->x) > 10000.0F || ABS(speed->y) > 10000.0F) {
             OSReport("%s:%d: Error: mpGetSpeed() x=%f y=%f\n", __FILE__, 5333,
                      speed->x, speed->y);

@@ -1811,7 +1811,7 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
             if (ftCo_800A2040(fp)) {
                 SET_STICKS(fp->input.lstick.x, fp->input.lstick.y,
                            ftCo_800A17E4(fp), ftCo_800A1874(fp));
-                if (g_debugLevel < 3 && !gm_8016B41C()) {
+                if (DbLevel < 3 && !gm_8016B41C()) {
                     SET_STICKS(fp->input.cstick.x, fp->input.cstick.y,
                                ftCo_800A1994(fp), ftCo_800A1A24(fp));
                 } else {
@@ -1828,7 +1828,7 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                 SET_STICKS(fp->input.lstick.x, fp->input.lstick.y,
                            HSD_PadGameStatus[fp->x618_player_id].nml_stickX,
                            HSD_PadGameStatus[fp->x618_player_id].nml_stickY);
-                if (g_debugLevel < 3 && gm_8016B41C() == 0) {
+                if (DbLevel < 3 && gm_8016B41C() == 0) {
                     SET_STICKS(
                         fp->input.cstick.x, fp->input.cstick.y,
                         HSD_PadGameStatus[fp->x618_player_id].nml_subStickX,
@@ -2409,9 +2409,9 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
 
     ftColl_8007AF28(gobj);
 
-    if (g_debugLevel >= 3 && (fpclassify(fp->cur_pos.x) == FP_NAN ||
-                              fpclassify(fp->cur_pos.y) == FP_NAN ||
-                              fpclassify(fp->cur_pos.z) == FP_NAN))
+    if (DbLevel >= 3 && (fpclassify(fp->cur_pos.x) == FP_NAN ||
+                         fpclassify(fp->cur_pos.y) == FP_NAN ||
+                         fpclassify(fp->cur_pos.z) == FP_NAN))
     {
         HSD_ASSERTREPORT(/*line*/ 2517, 0,
                          "fighter procUpdate pos error.\tpos.x=%f\tpos.y=%f\n",
@@ -2480,7 +2480,7 @@ void Fighter_procMap(Fighter_GObj* gobj)
             pl_80041280(fp->player_id, fp->x221F_b4);
         }
 
-        if (g_debugLevel >= 3) {
+        if (DbLevel >= 3) {
             if (fpclassify(fp->cur_pos.x) == FP_NAN ||
                 fpclassify(fp->cur_pos.y) == FP_NAN ||
                 fpclassify(fp->cur_pos.z) == FP_NAN)
