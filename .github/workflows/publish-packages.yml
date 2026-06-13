@@ -7,13 +7,15 @@ on:
       - .github/workflows/publish-packages.yml
       - .github/packages/**
       - Cargo.lock
-      - reqs/*.txt
+      - reqs/**/*.txt
+      - tools/**/*.py
   pull_request:
     paths:
       - .github/workflows/publish-packages.yml
       - .github/packages/**
       - Cargo.lock
-      - reqs/*.txt
+      - reqs/**/*.txt
+      - tools/**/*.py
   schedule:
     # Monday at 5am EST
     - cron: "0 10 * * 1"
