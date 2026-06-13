@@ -289,18 +289,18 @@ void mnDiagram3_80246D40(HSD_GObj* gobj)
     }
 
     if (data->scroll_offset + 10 < limit) {
-        HSD_JObjClearFlagsAll(jobj, 0x10);
+        HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
     } else {
-        HSD_JObjSetFlagsAll(jobj, 0x10);
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     }
     jobj = data->jobjs[4];
     new_var = jobj;
     mn_8022ED6C(new_var, &mnDiagram3_803EEC1C);
 
     if (data->scroll_offset != 0) {
-        HSD_JObjClearFlagsAll(new_var, 0x10);
+        HSD_JObjClearFlagsAll(new_var, JOBJ_HIDDEN);
     } else {
-        HSD_JObjSetFlagsAll(new_var, 0x10);
+        HSD_JObjSetFlagsAll(new_var, JOBJ_HIDDEN);
     }
 }
 
@@ -339,7 +339,7 @@ void fn_80246E64(HSD_GObj* gobj)
             HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
             proc = HSD_GObj_SetupProc(gobj, fn_80246E04, 0);
             proc->flags_3 = HSD_GObj_804D783C;
-            HSD_JObjSetFlagsAll(data->jobjs[2], 0x10);
+            HSD_JObjSetFlagsAll(data->jobjs[2], JOBJ_HIDDEN);
         }
     } else {
         mnDiagram3_80246D40(gobj);

@@ -2974,11 +2974,11 @@ void fn_80191A54(HSD_GObj* gobj)
     jobj_copy = jobj;
 
     if (td->cur_option <= 9) {
-        HSD_JObjSetFlagsAll(jobj_copy, 0x10);
+        HSD_JObjSetFlagsAll(jobj_copy, JOBJ_HIDDEN);
         return;
     }
 
-    HSD_JObjClearFlagsAll(jobj_copy, 0x10);
+    HSD_JObjClearFlagsAll(jobj_copy, JOBJ_HIDDEN);
 
     if (jobj == NULL) {
         child = NULL;
@@ -3158,11 +3158,11 @@ void fn_80191FD4(HSD_GObj* gobj)
     idx = fn_8018F62C(gobj);
 
     if ((s32) tm->cur_option <= 9) {
-        HSD_JObjSetFlagsAll(jobj, 0x10U);
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         return;
     }
 
-    HSD_JObjClearFlagsAll(jobj, 0x10U);
+    HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
 
     if ((s32) idx == 0x19) {
         if (jobj == NULL) {
@@ -3189,7 +3189,7 @@ void fn_80191FD4(HSD_GObj* gobj)
         {
             u8 chr = tm->x37[lbl_804799B8.x2 + lbl_804799B8.x3].x2;
             if (lbl_803D9D20.x72[chr] != 0) {
-                HSD_JObjClearFlagsAll(sibling, 0x10U);
+                HSD_JObjClearFlagsAll(sibling, JOBJ_HIDDEN);
                 return;
             }
             if (fn_8018F3D0(fn_8018F310(fn_8018F6FC((enum CSSIconHud) chr))) ==
@@ -3198,13 +3198,13 @@ void fn_80191FD4(HSD_GObj* gobj)
                 fn_8019044C(sibling, 200.0f);
                 return;
             }
-            HSD_JObjSetFlagsAll(sibling, 0x10U);
+            HSD_JObjSetFlagsAll(sibling, JOBJ_HIDDEN);
             return;
         }
     }
 
     if ((s32) tm->cur_option != 0xB) {
-        HSD_JObjSetFlagsAll(jobj, 0x10U);
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         return;
     }
 
@@ -3231,7 +3231,7 @@ void fn_80191FD4(HSD_GObj* gobj)
                 flag = 0;
             }
             if (flag == 0) {
-                HSD_JObjSetFlagsAll(child, 0x10U);
+                HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
             } else {
                 fn_8019044C(child, 0.0f);
             }
@@ -3243,7 +3243,7 @@ void fn_80191FD4(HSD_GObj* gobj)
     } else {
         sibling = child->next;
     }
-    HSD_JObjClearFlagsAll(sibling, 0x10U);
+    HSD_JObjClearFlagsAll(sibling, JOBJ_HIDDEN);
 
     hud = fn_8018F6DC(fn_8018F3BC((s32) idx));
     if (lbl_803D9D20.x72[hud] != 0) {
@@ -3261,7 +3261,7 @@ void fn_80191FD4(HSD_GObj* gobj)
         fn_8019044C(sibling, 200.0f);
         return;
     }
-    HSD_JObjSetFlagsAll(sibling, 0x10U);
+    HSD_JObjSetFlagsAll(sibling, JOBJ_HIDDEN);
 }
 
 extern f32 lbl_804DA750; // -1.8f
@@ -3581,7 +3581,7 @@ void fn_80192E6C(void)
     HSD_JObjSetFlagsAll((HSD_JObj*) fn_8019035C(1, lbl_804D6650->models[2], 0,
                                                 0x1A, 2, 1, fn_80192758, 0.0f)
                             ->hsd_obj,
-                        0x10U);
+                        JOBJ_HIDDEN);
 
     for (i = 0; i < 0x40; i++) {
         gobj = fn_8019035C(1, lbl_804D6650->models[8], 0, 0x1A, 2, 1,
@@ -3593,7 +3593,7 @@ void fn_80192E6C(void)
         gobj = fn_8019035C(1, lbl_804D6650->models[3], 0, 0x1A, 2, 1,
                            fn_80191E9C, 0.0f);
         jobj = (HSD_JObj*) gobj->hsd_obj;
-        HSD_JObjSetFlagsAll(jobj, 0x10U);
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         fn_8018FDC4(jobj, -12.300001f, 666.0f, 666.0f);
         fn_8018FBD8((void*) gobj, i);
     }
@@ -6058,21 +6058,21 @@ void fn_80197AF0(HSD_GObj* gobj)
     }
 
     if (in_range == 0) {
-        HSD_JObjSetFlagsAll(jobj, 0x10U);
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         return;
     }
 
-    HSD_JObjClearFlagsAll(jobj, 0x10U);
+    HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
 
     if (((s8) HSD_PadMasterStatus[(u8) pnum].err != 0) &&
         ((u8) tm->x4B8[pnum].x0 != 1))
     {
-        HSD_JObjSetFlagsAll(jobj, 0x10U);
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         return;
     }
 
     if ((u8) tm->x4B8[pnum].x0 == 1) {
-        HSD_JObjSetFlagsAll(jobj, 0x10U);
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     }
 
     players = tm->x30;
@@ -6090,7 +6090,7 @@ void fn_80197AF0(HSD_GObj* gobj)
     if (lbl_804799D8.x44[pnum] != 6 || lbl_804799D8.x2A[pnum].state == 1 ||
         lbl_804799D8.x2A[pnum].state == 2 || lbl_804799D8.x2A[pnum].state == 4)
     {
-        HSD_JObjSetFlagsAll(jobj, 0x10U);
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     }
 
     counter = &lbl_804799D8.x12[pnum];
@@ -7817,7 +7817,7 @@ void fn_8019B458(s32* arg0)
                                          0x1A, 3, 1, fn_80196EEC, 0.0f);
 
             if ((s32) td2->pad_x34[0] == match) {
-                HSD_JObjSetFlagsAll(gobj->hsd_obj, 0x10U);
+                HSD_JObjSetFlagsAll(gobj->hsd_obj, JOBJ_HIDDEN);
             }
         }
 

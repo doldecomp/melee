@@ -359,11 +359,11 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
         x48 = data->is_name_mode;
         data2 = (d2 = mnDiagram2_804D6C18)->user_data;
         if (x48 != 0) {
-            HSD_JObjSetFlagsAll(data2->fighter_mode_header, 0x10);
-            HSD_JObjClearFlagsAll(data2->name_mode_header, 0x10);
+            HSD_JObjSetFlagsAll(data2->fighter_mode_header, JOBJ_HIDDEN);
+            HSD_JObjClearFlagsAll(data2->name_mode_header, JOBJ_HIDDEN);
         } else {
-            HSD_JObjClearFlagsAll(data2->fighter_mode_header, 0x10);
-            HSD_JObjSetFlagsAll(data2->name_mode_header, 0x10);
+            HSD_JObjClearFlagsAll(data2->fighter_mode_header, JOBJ_HIDDEN);
+            HSD_JObjSetFlagsAll(data2->name_mode_header, JOBJ_HIDDEN);
         }
         if (x48 != 0) {
             var_r5 = data2->selected_name_idx;
@@ -907,39 +907,39 @@ void mnDiagram2_UpdateScrollArrows(HSD_GObj* gobj)
     mn_8022ED6C(jobj, &base->anim[1]);
     if (data->is_name_mode) {
         if (data->scroll_offset + 10 < 0x18) {
-            HSD_JObjClearFlagsAll(jobj, 0x10);
+            HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         } else {
-            HSD_JObjSetFlagsAll(jobj, 0x10);
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         }
     } else {
         if (data->scroll_offset + 10 < 0x15) {
-            HSD_JObjClearFlagsAll(jobj, 0x10);
+            HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         } else {
-            HSD_JObjSetFlagsAll(jobj, 0x10);
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         }
     }
 
     jobj = data->up_arrow;
     mn_8022ED6C(jobj, &base->anim[1]);
     if (data->scroll_offset) {
-        HSD_JObjClearFlagsAll(jobj, 0x10);
+        HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
     } else {
-        HSD_JObjSetFlagsAll(jobj, 0x10);
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     }
 
     jobj = data->left_arrow;
     mn_8022ED6C(jobj, &base->anim[1]);
     if (data->is_name_mode) {
         if (data->selected_name_idx) {
-            HSD_JObjClearFlagsAll(jobj, 0x10);
+            HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         } else {
-            HSD_JObjSetFlagsAll(jobj, 0x10);
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         }
     } else {
         if (data->selected_fighter_idx != 0) {
-            HSD_JObjClearFlagsAll(jobj, 0x10);
+            HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         } else {
-            HSD_JObjSetFlagsAll(jobj, 0x10);
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         }
     }
 
@@ -949,17 +949,17 @@ void mnDiagram2_UpdateScrollArrows(HSD_GObj* gobj)
         if (data->selected_name_idx !=
             (u8) mnDiagram_GetNextNameIndex(data->selected_name_idx))
         {
-            HSD_JObjClearFlagsAll(jobj, 0x10);
+            HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         } else {
-            HSD_JObjSetFlagsAll(jobj, 0x10);
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         }
     } else {
         if (data->selected_fighter_idx !=
             (u8) mnDiagram_GetNextFighterIndex(data->selected_fighter_idx))
         {
-            HSD_JObjClearFlagsAll(jobj, 0x10);
+            HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         } else {
-            HSD_JObjSetFlagsAll(jobj, 0x10);
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         }
     }
 }
@@ -985,7 +985,7 @@ void mnDiagram2_Think(HSD_GObj* gobj)
             HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
             proc = HSD_GObj_SetupProc(gobj, mnDiagram2_OnAnimComplete, 0);
             proc->flags_3 = HSD_GObj_804D783C;
-            HSD_JObjSetFlagsAll(((HSD_JObj**) data)[4], 0x10);
+            HSD_JObjSetFlagsAll(((HSD_JObj**) data)[4], JOBJ_HIDDEN);
             if (data->header_text != NULL) {
                 HSD_SisLib_803A5CC4(data->header_text);
                 data->header_text = NULL;
@@ -1101,11 +1101,11 @@ void mnDiagram2_Create(int arg0)
     is_name = user_data->is_name_mode;
     user_data2 = gobj->user_data;
     if (is_name) {
-        HSD_JObjSetFlagsAll(user_data2->fighter_mode_header, 0x10);
-        HSD_JObjClearFlagsAll(user_data2->name_mode_header, 0x10);
+        HSD_JObjSetFlagsAll(user_data2->fighter_mode_header, JOBJ_HIDDEN);
+        HSD_JObjClearFlagsAll(user_data2->name_mode_header, JOBJ_HIDDEN);
     } else {
-        HSD_JObjClearFlagsAll(user_data2->fighter_mode_header, 0x10);
-        HSD_JObjSetFlagsAll(user_data2->name_mode_header, 0x10);
+        HSD_JObjClearFlagsAll(user_data2->fighter_mode_header, JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(user_data2->name_mode_header, JOBJ_HIDDEN);
     }
 
     if (is_name) {

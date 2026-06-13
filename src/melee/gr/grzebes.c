@@ -1390,7 +1390,7 @@ s32 grZebes_801DAA08(void)
                 parent_child = hsd_jobj->child;
             }
 
-            HSD_JObjSetFlagsAll(parent_child, 0x10);
+            HSD_JObjSetFlagsAll(parent_child, JOBJ_HIDDEN);
             HSD_JObjAddChild(parent_child, (&grZe_8049F170[selected])->x04);
 
             {
@@ -1547,7 +1547,7 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
                     {
                         HSD_JObj* jobj = (HSD_JObj*) entry->x20_gobj->hsd_obj;
                         if (jobj != NULL) {
-                            HSD_JObjClearFlagsAll(jobj, 0x10);
+                            HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
                         }
                     }
                 }
