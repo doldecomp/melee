@@ -1,0 +1,24 @@
+name: Check code style
+
+on:
+  push:
+    paths: &common_paths
+    - 'src/**'
+    - '!src/**/*.dox'
+  pull_request:
+    paths: *common_paths
+
+permissions:
+  contents: read
+
+jobs:
+  style-check:
+    name: Check source for common style issues
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+    - name: Run checks
+      run: python3 tools/check/main.py --msg-style actions src
