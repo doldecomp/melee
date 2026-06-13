@@ -292,7 +292,7 @@ void gm_801A4D34(void (*arg0)(void), GameSceneInfo* arg1)
         for (i = 0; i < pad_queue_count; i++) {
             HSD_PerfSetStartTime();
             lb_800198E0();
-            if (g_debugLevel >= 3) {
+            if (DbLevel >= 3) {
                 gm_801A4970(temp_r25->unk_10.x4);
             }
             if (gm_801A46B8(0) || !gm_801A45E8(0)) {
@@ -327,7 +327,7 @@ void gm_801A4D34(void (*arg0)(void), GameSceneInfo* arg1)
                 temp_r25->unk_10.unk_28 |=
                     ~gm_803DA8C8[temp_r25->unk_10.unk_34];
             }
-            if (g_debugLevel >= 3) {
+            if (DbLevel >= 3) {
                 db_CheckScreenshot();
             }
             lbAudioAx_80027DF8();
@@ -344,7 +344,7 @@ void gm_801A4D34(void (*arg0)(void), GameSceneInfo* arg1)
                 }
             }
             HSD_PerfSetCPUTime();
-            if (g_debugLevel >= 3) {
+            if (DbLevel >= 3) {
                 OSCheckActiveThreads();
             }
             gmMainLib_8046B0F0.xC = false;

@@ -223,7 +223,7 @@ void gm_801AF568_OnFrame(void)
     int temp_r29;
     u8 _[0x14];
 
-    if (g_debugLevel >= 3 && set_gm_804D6870_inline() != 0) {
+    if (DbLevel >= 3 && set_gm_804D6870_inline() != 0) {
         if (HSD_PadCopyStatus->trigger & 0x40) {
             if (gm_804D6872 > 6) {
                 gm_804D6872 -= 1;

@@ -1303,7 +1303,7 @@ void gmMainLib_8015FA34(s32 arg0)
             gm_IncrementPowerCount();
         }
     }
-    if (g_debugLevel > 2 && db_804D6B20 != 0) {
+    if (DbLevel > 2 && db_804D6B20 != 0) {
         gmMainLib_804D3EE0->thing.x186C = 0xFF;
         gm_80164F18();
         gm_8016468C();

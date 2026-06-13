@@ -28,7 +28,7 @@ static void fn_HSDPanicHandler(OSContext* ctx)
     OSReport("%s\n", db_build_timestamp);
     Exception_ReportStackTrace(ctx, 0x10);
     hsd_80397DFC(0x1388);
-    Exception_StoreDebugLevel(g_debugLevel);
+    Exception_StoreDebugLevel(DbLevel);
     hsd_80397DA4(ctx);
 }
 
@@ -49,7 +49,7 @@ static void fn_OSErrorHandler(u16 error, OSContext* ctx, ...)
     Exception_ReportStackTrace(ctx, 0x10);
     Exception_ReportCodeline(error, dsisr, dar, ctx);
     hsd_80397DFC(0x1388);
-    Exception_StoreDebugLevel(g_debugLevel);
+    Exception_StoreDebugLevel(DbLevel);
     hsd_80397DA4(ctx);
 
     va_end(va);
