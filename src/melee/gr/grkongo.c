@@ -1271,7 +1271,7 @@ f32 grKongo_801D8314(void)
                                     if (temp_r3_8 < 0) {
                                         var_f31 = -3.1415927f;
                                     } else {
-                                        __assert("grkongo.c", 1753, "0");
+                                        HSD_ASSERT(1753, 0);
                                     }
                                 }
                             }

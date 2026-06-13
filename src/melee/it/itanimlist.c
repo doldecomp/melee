@@ -99,8 +99,7 @@ void it_802790C0(Item_GObj* item_gobj, CommandInfo* cmd)
     bone_idx = cmd->u->it_create_hitbox_0.bone;
     if (bone_idx != 0) {
         if (item->xBBC_dynamicBoneTable == NULL) {
-            OSReport("item can\'t set attack!\n");
-            __assert("itanimlist.c", 0x8B, "0");
+            HSD_ASSERTREPORT(0x8B, 0, "item can\'t set attack!\n");
         }
         hit->jobj = item->xBBC_dynamicBoneTable->bones[bone_idx];
     } else {

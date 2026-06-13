@@ -16,9 +16,8 @@ static _cmsnap_data cmsnap_data;
 
 void cmSnap_800315C8(void)
 {
-    if (cmsnap_data.unk0 != 0) {
-        __assert("cmsnap.c", 0x55, "_p(status) == CmSnapStatus_Sleep");
-    }
+    HSD_ASSERTMSG(0x55, cmsnap_data.unk0 == 0,
+                  "_p(status) == CmSnapStatus_Sleep");
     cmsnap_data.unk0 = 1;
 }
 

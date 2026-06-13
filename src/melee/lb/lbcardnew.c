@@ -51,9 +51,7 @@ struct CardTask* lb_80019C38(void)
             break;
         }
     }
-    if (i == 0xB) {
-        __assert("lbcardnew.c", 0x154, "i != LbCardNewTaskArray_Max");
-    }
+    HSD_ASSERTMSG(0x154, i != 0xB, "i != LbCardNewTaskArray_Max");
     return result;
 }
 
@@ -250,9 +248,7 @@ int lb_8001A184(void)
         if (lb_80432A68.unk_10 != NULL) {
             *(s32*) lb_80432A68.unk_10 = 0;
         }
-        if (lb_80432A68.work_area == NULL) {
-            __assert("lbcardnew.c", 0x23F, "_p(work_area)");
-        }
+        HSD_ASSERTMSG(0x23F, lb_80432A68.work_area, "_p(work_area)");
         enabled = OSDisableInterrupts();
         did_disable = 1;
         mount_result = CARDMountAsync(lb_80432A68.chan, lb_80432A68.work_area,
@@ -371,9 +367,7 @@ int lb_8001A594(char* filename, void* file_entries)
                 open_result = CARDOpen(lb_80432A68.chan, filename,
                                        &lb_80432A68.file_info);
                 CARDClose(&lb_80432A68.file_info);
-                if (lb_80432A68.lib_area == NULL) {
-                    __assert("lbcardnew.c", 0x2C8, "_p(lib_area)");
-                }
+                HSD_ASSERTMSG(0x2C8, lb_80432A68.lib_area, "_p(lib_area)");
                 hsd_803B24E4(&lb_80432A68.unk_A8, lb_80432A68.chan, 0x2000,
                              lb_80432A68.lib_area);
                 if (open_result == 0) {

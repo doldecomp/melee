@@ -7,6 +7,7 @@
 
 float ftCo_CalcYScaledKnockback(float arg0, float scale, float arg2)
 {
+    /// @todo Convert to @c HSD_ASSERT once a byte-matching form is found.
     if (scale == 0.0F) {
         __assert("ftchangeparam.c", 0x1E, "scale != 0.0F");
     }
@@ -229,11 +230,8 @@ void ftCo_800D105C(Fighter_GObj* fgp)
         fp->co_attrs.weight *= Fighter_804D6518->x4;
     }
 
-    if (ftKindCalcIndiviParamTable[fp->kind] == NULL) {
-        OSReport("don\'t set ftKindCalcIndiviParamTable!!\n");
-        __assert("ftchangeparam.c", 0x10d,
-                 "ftKindCalcIndiviParamTable[fp->kind] != NULL");
-    }
+    HSD_ASSERTREPORT(0x10d, ftKindCalcIndiviParamTable[fp->kind] != NULL,
+                     "don\'t set ftKindCalcIndiviParamTable!!\n");
     ftKindCalcIndiviParamTable[fp->kind](fgp);
 
     if (fp->x2D0 != NULL) {
