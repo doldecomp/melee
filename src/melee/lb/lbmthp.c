@@ -26,7 +26,7 @@ void fn_8001E910(int arg0, int arg1, void* arg2, int cancelflag)
     struct lbl_804333E0_t* streamPlayer = &Movieplayer;
     s32 tick_diff;
     s32 var_r0;
-    s32 var_r4;
+    s32 did_request;
     unsigned int var_r3;
     BOOL intr;
 
@@ -52,8 +52,11 @@ void fn_8001E910(int arg0, int arg1, void* arg2, int cancelflag)
     {
         intr = OSDisableInterrupts();
         streamPlayer->unk_13C = OSGetTick();
-        streamPlayer->unk_138 = (var_r4 = 0);
-        if ((u32) streamPlayer->unk_74 != (u32) streamPlayer->unk_40) {
+        streamPlayer->unk_138 = (did_request = 0);
+        if (((u32) streamPlayer->unk_74 != (u32) streamPlayer->unk_40) ||
+            (((u32) streamPlayer->unk_74 == (u32) streamPlayer->unk_40) &&
+             did_request))
+        {
             LBMTHP_ASSERTREPORT(0x121, (u32) streamPlayer->currPackedSize != 0,
                                 lbl_803BADEC, lbl_803BADC8,
                                 streamPlayer->file_entrynum,
@@ -77,12 +80,9 @@ void fn_8001E910(int arg0, int arg1, void* arg2, int cancelflag)
                 }
                 streamPlayer->unk_8C = var_r3;
             }
-            streamPlayer->unk_110 = (var_r4 = 1);
-        } else {
-            goto request_done;
+            streamPlayer->unk_110 = (did_request = 1);
         }
-    request_done:
-        if (var_r4 == 0) {
+        if (did_request == 0) {
             streamPlayer->unk_110 = 0;
         }
         OSRestoreInterrupts(intr);
@@ -182,8 +182,8 @@ s32 fn_8001EBF0(THPDecComp* data)
 
 void fn_8001ECF4(THPDecComp* data, void* buf)
 {
-    u32 width;
     u32 height;
+    u32 width;
     u32 count;
     u8* var_r29;
     u32 y_size;
@@ -192,11 +192,10 @@ void fn_8001ECF4(THPDecComp* data, void* buf)
     u32 var_r24;
     u8* csizep;
     PAD_STACK(8);
-
     width = data->width;
     height = data->height;
     data->frame_buffers = (u32*) buf;
-    y_size = height * width;
+    y_size = width * height;
     count = data->unk_104;
     data->unk_64 = 0;
     uv_size = y_size >> 2U;
@@ -378,7 +377,7 @@ static inline u32 lbMthp_GetFrame(u32** rate_table, u32 counter)
         for (;; rate_ptr += 2) {
             count = rate_ptr[0];
             ticks = rate_ptr[1];
-            total = count * ticks;
+            total = ticks * count;
             if (counter >= total) {
                 frame += count;
                 counter -= total;

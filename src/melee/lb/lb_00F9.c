@@ -1,7 +1,6 @@
 #include "lb_00F9.static.h"
 
 #include "math.h"
-#include "math_ppc.h"
 #include "stdarg.h"
 #include "stddef.h"
 
@@ -57,6 +56,22 @@ struct lb_Collider {
     /* 0x18 */ Vec3 position;
     /* 0x24 */ char pad_24[0x04];
 };
+
+extern double __frsqrte(double);
+
+extern inline float sqrtf(float x)
+{
+    volatile float y;
+    if (x > 0.0f) {
+        double guess = __frsqrte((double) x);
+        guess = .5 * guess * (3.0 - guess * guess * x);
+        guess = .5 * guess * (3.0 - guess * guess * x);
+        guess = .5 * guess * (3.0 - guess * guess * x);
+        y = (float) (x * guess);
+        return y;
+    }
+    return x;
+}
 
 const struct {
     Vec3 v0;
@@ -932,14 +947,16 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
     cur->desc.lb_unk0.unk_2C.z = parent_mtx[2][3];
 }
 
-static inline double inlineB0(void)
+void lb_800115F4(void)
 {
-    float ret = 0.0f;
+    float total_scale = 0.0f;
     struct lb_80011A50_t* cur = lb_804D63B0;
+    struct lb_80011A50_t* head;
+    struct lb_80011A50_t* prev;
 
     while (cur != NULL) {
         if (cur->x0 == 1) {
-            ret += cur->unk_scale;
+            total_scale += cur->unk_scale;
         }
         cur->unk_scale -= cur->x24;
         if (cur->unk_scale < 0.0) {
@@ -950,19 +967,17 @@ static inline double inlineB0(void)
         }
         ++cur->unk_angle_int;
         if (cur->unk_count0 == 0) {
-            struct lb_80011A50_t* var_r3 = lb_804D63B0;
-            struct lb_80011A50_t* prev = cur;
+            prev = cur;
             cur = cur->next;
-            if (prev == var_r3) {
+            if (prev == (head = lb_804D63B0)) {
                 lb_804D63B0 = cur;
             } else {
-                while (var_r3->next != prev) {
-                    var_r3 = var_r3->next;
+                while (head->next != prev) {
+                    head = head->next;
                 }
-                var_r3->next = prev->next;
+                head->next = prev->next;
             }
             {
-                /// @todo inline appears in #lb_800115F4
                 struct lb_80011A50_t* temp = lb_804D63AC;
                 lb_804D63AC = prev;
                 prev->next = temp;
@@ -971,12 +986,8 @@ static inline double inlineB0(void)
             cur = cur->next;
         }
     }
-    return ret;
-}
 
-void lb_800115F4(void)
-{
-    if (inlineB0() > 0.1) {
+    if (total_scale > 0.1) {
         if (lb_804D63B4 > 0) {
             lb_804D63B4 = 2;
             return;
@@ -1519,7 +1530,7 @@ void lb_80012994(HSD_ImageDesc* img, u8 alpha, u8 blur_size, f32 x, f32 y,
     GXColor color;
     u16 w = img->width;
     u16 h = img->height;
-    f32 x_p1, x_m1, y_p1, y_m1;
+    f32 y_p1, x_p1, y_m1, x_m1;
     f32 x_p2, x_m2, y_p2, y_m2;
     f32 off1 = (f32) blur_size / 64.0f;
     f32 off2 = 2.0f * off1;
@@ -2147,20 +2158,15 @@ void lb_800145F4(void)
     }
 }
 
-static inline float inlineC0(Vec3* a, Vec3* b, Vec3* c)
-{
-    if (ABS(b->z - a->z) < 0.01f) {
-        return 1.0f;
-    } else {
-        return (c->z - a->z) / (b->z - a->z);
-    }
-}
+const f32 lb_804D7C70 = 0.0F;
+const f32 lb_804D7C74 = 0.00001F;
+const f32 lb_804D7C78 = 0.0F;
 
 bool lb_80014638(struct lb_80014638_arg0_t* arg0,
                  struct lb_80014638_arg1_t* arg1)
 {
     Vec3 sp30, sp24, sp18;
-    PAD_STACK(4);
+    PAD_STACK(8);
 
     sp30 = arg0->x0;
     sp24 = arg0->xC;
@@ -2175,7 +2181,15 @@ bool lb_80014638(struct lb_80014638_arg0_t* arg0,
         return false;
     }
     {
-        float z = inlineC0(&sp30, &sp24, &sp18);
+        float z = sp18.z;
+        if (((sp24.z - sp30.z) < lb_804D7C70
+                 ? -(sp24.z - sp30.z)
+                 : sp24.z - sp30.z) < lb_804D7C74)
+        {
+            z = lb_804D7C78;
+        } else {
+            z = (z - sp30.z) / (sp24.z - sp30.z);
+        }
         if (z * (sp24.x - sp30.x) + sp30.x > sp18.y) {
             return false;
         }
