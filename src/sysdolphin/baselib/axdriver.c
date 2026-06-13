@@ -464,9 +464,7 @@ static void fn_8038CEA4(s32 vID)
     HSD_SM* v;
     int idx = vID & 0x3F;
 
-    if (vID <= 0) {
-        __assert("axdriver.c", 0x26D, "vID > 0");
-    }
+    HSD_ASSERT(0x26D, vID > 0);
 
     v = AXDriver_804C5920[idx];
     if (v == NULL || v->vID != vID) {

@@ -90,8 +90,7 @@ DevText* DevText_Create(char id, int x, int y, int w, int h, char* buf)
     }
     if (text == NULL) {
         // HSD_ASSERT
-        OSReport("TW : Screen alloc Fail\n");
-        __assert("textlib.c", 309, "0");
+        HSD_ASSERTREPORT(309, 0, "TW : Screen alloc Fail\n");
     }
     if (text != NULL) {
         text->x = x;

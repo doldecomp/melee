@@ -1032,8 +1032,7 @@ void it_8027163C(Item_GObj* item_gobj)
     it_dynams = (ItCollDynamics*) article->x14_dynamics;
     if (it_hurtbox != NULL) {
         if (it_hurtbox->count > 2) {
-            OSReport("item hit num over!\n");
-            __assert("itcoll.c", 0x3F4, "0");
+            HSD_ASSERTREPORT(0x3F4, 0, "item hit num over!\n");
         }
         cnt = 0U;
         item->xAC8_hurtboxNum = it_hurtbox->count;
@@ -1044,8 +1043,7 @@ void it_8027163C(Item_GObj* item_gobj)
             item->xACC_itemHurtbox[index].state = HurtCapsule_Enabled;
             if (hurt_dyn_desc->bone_id != 0) {
                 if (item->xBBC_dynamicBoneTable == NULL) {
-                    OSReport("item can't init hit!\n");
-                    __assert("itcoll.c", 0x402, "0");
+                    HSD_ASSERTREPORT(0x402, 0, "item can't init hit!\n");
                 }
                 hurt->bone =
                     item->xBBC_dynamicBoneTable->bones[hurt_dyn_desc->bone_id];
@@ -1063,8 +1061,7 @@ void it_8027163C(Item_GObj* item_gobj)
     }
     if (it_dynams != NULL) {
         if ((s32) it_dynams->count > 2) {
-            OSReport("item dynamics hit num over!\n");
-            __assert("itcoll.c", 0x415, "0");
+            HSD_ASSERTREPORT(0x415, 0, "item dynamics hit num over!\n");
         }
         cnt = 0U;
         item->xB68 = it_dynams->count;

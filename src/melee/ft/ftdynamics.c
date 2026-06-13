@@ -97,8 +97,7 @@ void ftCo_8009CF84(Fighter* fp)
     ftData* data = fp->ft_data;
     fp->dynamics_num = data->x2C->dynamicsNum;
     if (fp->dynamics_num >= Ft_Dynamics_NumMax) {
-        OSReport("fighter dynamics num over!\n");
-        __assert(__FILE__, 109, "0");
+        HSD_ASSERTREPORT(109, 0, "fighter dynamics num over!\n");
     }
     {
         ssize_t i;
@@ -119,10 +118,8 @@ void ftCo_8009D074(Fighter* fp)
 {
     KirbyHatStruct* hat = ft_80459B88.hats[FTKIND_KOOPA];
     fp->dynamics_num = hat->hat_dynamics[2]->dynamicsNum;
-    if (fp->dynamics_num >= Ft_Dynamics_NumMax) {
-        OSReport("fighter dynamics num over!\n");
-        __assert(__FILE__, 135, "fp->dynamics_num < Ft_Dynamics_NumMax");
-    }
+    HSD_ASSERTREPORT(135, fp->dynamics_num < Ft_Dynamics_NumMax,
+                     "fighter dynamics num over!\n");
     {
         ssize_t i;
         for (i = 0; i < fp->dynamics_num; i++) {
@@ -154,10 +151,8 @@ void ftCo_8009D18C(Fighter* fp)
 {
     KirbyHatStruct* hat = ft_80459B88.hats[FTKIND_ZELDA];
     fp->dynamics_num = hat->hat_dynamics[2]->dynamicsNum;
-    if (fp->dynamics_num >= Ft_Dynamics_NumMax) {
-        OSReport("fighter dynamics num over!\n");
-        __assert(__FILE__, 167, "fp->dynamics_num < Ft_Dynamics_NumMax");
-    }
+    HSD_ASSERTREPORT(167, fp->dynamics_num < Ft_Dynamics_NumMax,
+                     "fighter dynamics num over!\n");
     {
         ssize_t i;
         for (i = 0; i < fp->dynamics_num; i++) {
@@ -189,10 +184,8 @@ void ftCo_8009D2A4(Fighter* fp)
 {
     KirbyHatStruct* hat = ft_80459B88.hats[FTKIND_NANA];
     fp->dynamics_num = hat->hat_dynamics[2]->dynamicsNum;
-    if (fp->dynamics_num >= Ft_Dynamics_NumMax) {
-        OSReport("fighter dynamics num over!\n");
-        __assert(__FILE__, 199, "fp->dynamics_num < Ft_Dynamics_NumMax");
-    }
+    HSD_ASSERTREPORT(199, fp->dynamics_num < Ft_Dynamics_NumMax,
+                     "fighter dynamics num over!\n");
     {
         ssize_t i;
         for (i = 0; i < fp->dynamics_num; i++) {
@@ -224,10 +217,8 @@ void ftCo_8009D3BC(Fighter* fp)
 {
     KirbyHatStruct* hat = ft_80459B88.hats[FTKIND_FALCO];
     fp->dynamics_num = hat->hat_dynamics[2]->dynamicsNum;
-    if (fp->dynamics_num >= Ft_Dynamics_NumMax) {
-        OSReport("fighter dynamics num over!\n");
-        __assert(__FILE__, 232, "fp->dynamics_num < Ft_Dynamics_NumMax");
-    }
+    HSD_ASSERTREPORT(232, fp->dynamics_num < Ft_Dynamics_NumMax,
+                     "fighter dynamics num over!\n");
     {
         ssize_t i;
         for (i = 0; i < fp->dynamics_num; i++) {
@@ -259,10 +250,8 @@ void ftCo_8009D4D4(Fighter* fp)
 {
     KirbyHatStruct* hat = ft_80459B88.hats[FTKIND_KIRBY];
     fp->dynamics_num = hat->hat_dynamics[1]->dynamicsNum;
-    if (fp->dynamics_num >= Ft_Dynamics_NumMax) {
-        OSReport("fighter dynamics num over!\n");
-        __assert(__FILE__, 265, "fp->dynamics_num < Ft_Dynamics_NumMax");
-    }
+    HSD_ASSERTREPORT(265, fp->dynamics_num < Ft_Dynamics_NumMax,
+                     "fighter dynamics num over!\n");
     {
         ssize_t i;
         for (i = 0; i < fp->dynamics_num; i++) {
@@ -294,10 +283,8 @@ void ftCo_8009D5EC(Fighter* fp)
 {
     KirbyHatStruct* hat = ft_80459B88.hats[FTKIND_MARS];
     fp->dynamics_num = hat->hat_dynamics[0]->dynamicsNum;
-    if (fp->dynamics_num >= Ft_Dynamics_NumMax) {
-        OSReport("fighter dynamics num over!\n");
-        __assert(__FILE__, 298, "fp->dynamics_num < Ft_Dynamics_NumMax");
-    }
+    HSD_ASSERTREPORT(298, fp->dynamics_num < Ft_Dynamics_NumMax,
+                     "fighter dynamics num over!\n");
     {
         ssize_t i;
         for (i = 0; i < fp->dynamics_num; i++) {
@@ -329,10 +316,8 @@ void ftCo_8009D704(Fighter* fp)
 {
     KirbyHatStruct* hat = ft_80459B88.hats[FTKIND_LINK];
     fp->dynamics_num = hat->hat_dynamics[2]->dynamicsNum;
-    if (fp->dynamics_num >= Ft_Dynamics_NumMax) {
-        OSReport("fighter dynamics num over!\n");
-        __assert(__FILE__, 331, "fp->dynamics_num < Ft_Dynamics_NumMax");
-    }
+    HSD_ASSERTREPORT(331, fp->dynamics_num < Ft_Dynamics_NumMax,
+                     "fighter dynamics num over!\n");
     {
         ssize_t i;
         for (i = 0; i < fp->dynamics_num; i++) {
@@ -365,10 +350,8 @@ void ftCo_8009D81C(Fighter* fp)
     KirbyHatStruct* hat = ft_80459B88.hats[FTKIND_YOSHI];
     PAD_STACK(2 * 4);
     fp->dynamics_num = hat->hat_dynamics[3]->dynamicsNum;
-    if (fp->dynamics_num >= Ft_Dynamics_NumMax) {
-        OSReport("fighter dynamics num over!\n");
-        __assert(__FILE__, 364, "fp->dynamics_num < Ft_Dynamics_NumMax");
-    }
+    HSD_ASSERTREPORT(364, fp->dynamics_num < Ft_Dynamics_NumMax,
+                     "fighter dynamics num over!\n");
     {
         ssize_t i;
         for (i = 0; i < fp->dynamics_num; i++) {
@@ -390,10 +373,8 @@ void ftCo_8009D920(Fighter* fp)
 {
     KirbyHatStruct* hat = ft_80459B88.hats[FTKIND_LUIGI];
     fp->dynamics_num = hat->hat_dynamics[1]->dynamicsNum;
-    if (fp->dynamics_num >= Ft_Dynamics_NumMax) {
-        OSReport("fighter dynamics num over!\n");
-        __assert(__FILE__, 388, "fp->dynamics_num < Ft_Dynamics_NumMax");
-    }
+    HSD_ASSERTREPORT(388, fp->dynamics_num < Ft_Dynamics_NumMax,
+                     "fighter dynamics num over!\n");
     {
         ssize_t i;
         for (i = 0; i < fp->dynamics_num; i++) {
@@ -427,10 +408,8 @@ void ftCo_8009DA38(Fighter* fp)
 {
     KirbyHatStruct* hat = ft_80459B88.hats[FTKIND_GANON];
     fp->dynamics_num = hat->hat_dynamics[1]->dynamicsNum;
-    if (fp->dynamics_num >= Ft_Dynamics_NumMax) {
-        OSReport("fighter dynamics num over!\n");
-        __assert(__FILE__, 421, "fp->dynamics_num < Ft_Dynamics_NumMax");
-    }
+    HSD_ASSERTREPORT(421, fp->dynamics_num < Ft_Dynamics_NumMax,
+                     "fighter dynamics num over!\n");
     {
         ssize_t i;
         for (i = 0; i < fp->dynamics_num; i++) {
@@ -484,10 +463,8 @@ void ftCo_8009DC54(Fighter* fp)
         return;
     }
     fp->dynamics_num = 3;
-    if (fp->dynamics_num >= Ft_Dynamics_NumMax) {
-        OSReport("fighter dynamics num over!\n");
-        __assert(__FILE__, 490, "fp->dynamics_num < Ft_Dynamics_NumMax");
-    }
+    HSD_ASSERTREPORT(490, fp->dynamics_num < Ft_Dynamics_NumMax,
+                     "fighter dynamics num over!\n");
     {
         ssize_t i;
         for (i = 0; i < 2; i++) {
@@ -521,10 +498,8 @@ void ftCo_8009DB50(Fighter* fp)
     KirbyHatStruct* hat = ft_80459B88.hats[FTKIND_PURIN];
     PAD_STACK(2 * 4);
     fp->dynamics_num = hat->hat_dynamics[4]->dynamicsNum;
-    if (fp->dynamics_num >= Ft_Dynamics_NumMax) {
-        OSReport("fighter dynamics num over!\n");
-        __assert(__FILE__, 455, "fp->dynamics_num < Ft_Dynamics_NumMax");
-    }
+    HSD_ASSERTREPORT(455, fp->dynamics_num < Ft_Dynamics_NumMax,
+                     "fighter dynamics num over!\n");
     {
         ssize_t i;
         for (i = 0; i < fp->dynamics_num; i++) {

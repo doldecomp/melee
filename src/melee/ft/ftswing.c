@@ -42,8 +42,7 @@ int fn_800CCEC4(int x)
     case 23:
         return 5;
     default:
-        OSReport("ellegal swing item!!!\n");
-        __assert("ftswing.c", 82, "0");
+        HSD_ASSERTREPORT(82, 0, "ellegal swing item!!!\n");
     }
 }
 

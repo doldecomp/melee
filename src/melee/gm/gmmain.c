@@ -77,7 +77,7 @@ static void gmMain_8015FDA4(void)
     if (DVDConvertPathToEntrynum("/develop.ini") != -1) {
         db_804D6B20 = true;
         if (db_gameLaunchButtonState & HSD_PAD_X) {
-            int level = g_debugLevel;
+            int level = DbLevel;
             switch (level) {
             case DbLKind_NoDebugRom:
                 level = DbLKind_DebugRom;
@@ -95,9 +95,9 @@ static void gmMain_8015FDA4(void)
                 level = DbLKind_DebugDevelop;
                 break;
             }
-            g_debugLevel = level;
+            DbLevel = level;
         } else if (db_gameLaunchButtonState & HSD_PAD_Y) {
-            int level = g_debugLevel;
+            int level = DbLevel;
             switch (level) {
             case DbLKind_NoDebugRom:
                 level = DbLKind_DebugRom;
@@ -106,14 +106,13 @@ static void gmMain_8015FDA4(void)
                 level = DbLKind_Develop;
                 break;
             }
-            g_debugLevel = level;
+            DbLevel = level;
             db_804D6B20 = false;
         }
     } else {
-        if (g_debugLevel != DbLKind_NoDebugRom) {
-            __assert(__FILE__, 0xD2, "DbLevel == DbLKind_NoDebugRom");
-        }
-        g_debugLevel = 0;
+        HSD_ASSERTMSG(0xD2, DbLevel == DbLKind_NoDebugRom,
+                      "DbLevel == DbLKind_NoDebugRom");
+        DbLevel = 0;
     }
 }
 
@@ -185,8 +184,8 @@ int main(void)
     HSD_SisLib_803A6048(0xC000);
     gmMainLib_8015FBA4();
 
-    if (g_debugLevel != DbLKind_Master &&
-        db_gameLaunchButtonState & HSD_PAD_R && hsd_803931A4(-1))
+    if (DbLevel != DbLKind_Master && db_gameLaunchButtonState & HSD_PAD_R &&
+        hsd_803931A4(-1))
     {
         hsd_80393A54(1);
         while (!hsd_80393A04()) {
@@ -201,7 +200,7 @@ int main(void)
     OSReport("#\n");
     OSReport("# Distribution %d\n", lbLang_GetLanguageSetting());
     OSReport("# Language %d\n", lbLang_GetSavedLanguage());
-    OSReport("# DbLevel %d\n", g_debugLevel);
+    OSReport("# DbLevel %d\n", DbLevel);
     OSReport("# Arena Size %d MB\n", arena_size / (1024 * 1024));
     {
         uintptr_t free_aram_start;

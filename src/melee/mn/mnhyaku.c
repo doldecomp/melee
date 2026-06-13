@@ -164,6 +164,8 @@ inline static Menu* allocMenu(u8 arg0, HSD_GObj* gobj)
     Menu* user_data;
 
     user_data = HSD_MemAlloc(8);
+    /// @todo Convert to @c HSD_ASSERTREPORT once a byte-matching form is
+    /// found.
     if (user_data == NULL) {
         OSReport("Can't get user_data.\n");
         __assert(__FILE__, 360, "user_data");

@@ -969,7 +969,7 @@ void grStadium_801D2528(Ground_GObj* gobj, int arg1, int arg2)
         case 4:
         case 5:
         case 6:
-            __assert("grpstadium.c", 0x536, "0");
+            HSD_ASSERT(0x536, 0);
             break;
         }
     }
