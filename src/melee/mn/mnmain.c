@@ -1073,7 +1073,7 @@ void mn_8022A5D0(HSD_GObj* gp, MainMenuSelection selection)
             mn_8022ED6C(sp84[0], &mn_803EB360[var_r26 == selection]);
             mn_8022ED6C(sp84[2], &mn_803EB378[var_r26 == selection]);
             if (mn_8022ED6C(sp84[3], &mn_803EB390) >= mn_803EB390.end_frame) {
-                HSD_JObjSetFlagsAll(sp84[3], 0x10);
+                HSD_JObjSetFlagsAll(sp84[3], JOBJ_HIDDEN);
             }
             if (selection == var_r26) {
                 if (HSD_JObjGetScaleY(sp84[6]) == 2.0f) {

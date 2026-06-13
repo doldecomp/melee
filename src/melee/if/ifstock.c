@@ -590,15 +590,15 @@ void ifStock_802F98E8(unsigned char player, int b)
                     break;
                 case 2:
                     HSD_JObjSetFlagsAll(ifStock_804A1378.player[player].x28,
-                                        0x10);
+                                        JOBJ_HIDDEN);
                     HSD_JObjSetFlagsAll(ifStock_804A1378.player[player].x2C,
-                                        0x10);
+                                        JOBJ_HIDDEN);
                     HSD_JObjSetFlagsAll(ifStock_804A1378.player[player].x30,
-                                        0x10);
+                                        JOBJ_HIDDEN);
                     HSD_JObjSetFlagsAll(ifStock_804A1378.player[player].x34,
-                                        0x10);
+                                        JOBJ_HIDDEN);
                     HSD_JObjSetFlagsAll(ifStock_804A1378.player[player].x3C,
-                                        0x10);
+                                        JOBJ_HIDDEN);
                     for (i = 0; i < 7; i++) {
                         jobj = ifStock_804A1378.player[player].x4[i + 1];
                         if (i == 0) {

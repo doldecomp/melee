@@ -553,7 +553,7 @@ s32 un_8031305C(void* a, TyListState* state, s8 movedFlag)
                 state->x29E = (u8) (state->x29E - 1);
             }
             if ((s8) state->x29E == 0) {
-                HSD_JObjClearFlagsAll(state->x288, 0x10U);
+                HSD_JObjClearFlagsAll(state->x288, JOBJ_HIDDEN);
                 un_80312904(state->x278, (s8) state->x278->x24);
                 if (HSD_PadCopyStatus->button & 0xC00) {
                     state->pad_2A0 = 5;
@@ -932,7 +932,7 @@ void fn_80313BD8(HSD_GObj* gobj)
 
     if (un_GetTrophyTotal() > 10) {
         if (un_80305C44() & 0x400) {
-            HSD_JObjSetFlagsAll(state->x288, 0x10);
+            HSD_JObjSetFlagsAll(state->x288, JOBJ_HIDDEN);
             if (state->x274->idx == 0 ||
                 state->x274->links[0]->idx + 9 < un_GetTrophyTotal())
             {
@@ -945,7 +945,7 @@ void fn_80313BD8(HSD_GObj* gobj)
             return;
         }
         if (un_80305C44() & 0x800) {
-            HSD_JObjSetFlagsAll(state->x288, 0x10);
+            HSD_JObjSetFlagsAll(state->x288, JOBJ_HIDDEN);
             if (state->x270->idx == un_GetTrophyTotal() - 1 ||
                 state->x270->links[1]->idx - 9 > 0)
             {
@@ -1015,7 +1015,7 @@ void fn_80313BD8(HSD_GObj* gobj)
     for (i = 0; i < (s8) state->entryCount; i++, p++) {
         un_80312904(p, state->entryCount);
     }
-    HSD_JObjSetFlagsAll(state->x288, 0x10);
+    HSD_JObjSetFlagsAll(state->x288, JOBJ_HIDDEN);
     if (f31 > 0.0f) {
         un_80313358(state, 1, 6, 0);
     } else {

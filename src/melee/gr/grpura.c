@@ -319,11 +319,11 @@ void grPura_8021231C(Ground_GObj* arg0)
     if ((HSD_JObjGetFlags(gp->gv.pura2.xC8) & 0x10) &&
         ((HSD_JObjGetFlags(jobj) & 0x10) == NULL))
     {
-        HSD_JObjSetFlagsAll(jobj, 0x10);
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     } else if (((HSD_JObjGetFlags(gp->gv.pura2.xC8) & 0x10) == NULL) &&
                (HSD_JObjGetFlags(jobj) & 0x10))
     {
-        HSD_JObjClearFlagsAll(jobj, 0x10);
+        HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
     }
 }
 
@@ -365,7 +365,7 @@ void grPura_802125F0(HSD_GObj* arg0)
                 jobj, HSD_JObjGetTranslationZ(gp->gv.pura2.xC8));
 
             if (HSD_JObjGetFlags(gp->gv.pura2.xC8) & 0x10) {
-                HSD_JObjSetFlagsAll(jobj, 0x10);
+                HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             }
 
             jobj = gobj->hsd_obj;

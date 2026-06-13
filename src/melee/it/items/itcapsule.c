@@ -104,7 +104,7 @@ void it_8027CFE8(Item_GObj* item_gobj)
     Vec3 sp14;
 
     it_8026B3A8(item_gobj);
-    HSD_JObjSetFlagsAll(jobj, 0x10);
+    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     it->x5D0_animFrameSpeed = 1.0F;
     it_80273454(item_gobj);
     it->xDD4_itemVar.capsule.x4 = true;

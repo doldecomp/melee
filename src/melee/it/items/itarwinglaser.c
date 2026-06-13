@@ -199,7 +199,7 @@ Item_GObj* it_802E72E0(Item_GObj* parent, HSD_JObj* bone, s32 type, f32 scale,
             it_802E7A4C(new_gobj);
             switch (ip->xDD4_itemVar.arwinglaser.xE38) {
             case 0:
-                HSD_JObjSetFlagsAll(jobj, 0x10U);
+                HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
                 ip->xDD4_itemVar.arwinglaser.xE40 =
                     it_802E72E0(new_gobj, bone, 4, scale, scale_mult);
                 ip->xDD4_itemVar.arwinglaser.xE44 =

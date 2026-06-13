@@ -264,14 +264,14 @@ void mnSoundTest_8024AA70(HSD_GObj* arg0, u8 arg1)
         mn_8022EA08((char*) &string, new_var->unk4);
         temp_r3_2->default_alignment = 1;
         HSD_SisLib_803A6B98(temp_r3_2, 0.0f, 0.0f, string);
-        HSD_JObjClearFlagsAll(sp38, 0x10U);
+        HSD_JObjClearFlagsAll(sp38, JOBJ_HIDDEN);
     } else {
         temp_r3_4 = user_data->unk1C;
         if (temp_r3_4 != NULL) {
             HSD_SisLib_803A5CC4(temp_r3_4);
             user_data->unk1C = NULL;
         }
-        HSD_JObjSetFlagsAll(sp38, 0x10U);
+        HSD_JObjSetFlagsAll(sp38, JOBJ_HIDDEN);
     }
     HSD_JObjReqAnimAll(sp34, (f32) (arg1 == 1));
     mn_8022F3D8(sp34, 0xFFU, 0x420);

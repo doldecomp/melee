@@ -79,11 +79,11 @@ void fn_802FED14(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = HSD_GObjGetHSDObj(gobj);
     if (!un_803F9E08.x0.b1) {
-        HSD_JObjSetFlagsAll(jobj, 0x10);
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         return;
     }
     if (un_803F9E08.x1 <= un_803F9E08.x2) {
-        HSD_JObjClearFlagsAll(jobj, 0x10);
+        HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         if (un_803F9E08.x1 < un_803F9E08.x2) {
             if (un_803F9E08.x0.b567) {
                 un_803F9E08.x0.b567--;
@@ -127,7 +127,7 @@ void un_802FEFAC(void)
     GObj_SetupGXLink(gobj_ui, HSD_GObj_JObjCallback, 15, 0);
     HSD_GObj_SetupProc(gobj_ui, fn_802FED14, 17);
     gm_8016895C(jobj_ui, un_804D6DA4->models[0], 0);
-    HSD_JObjSetFlagsAll(jobj_ui, 0x10);
+    HSD_JObjSetFlagsAll(jobj_ui, JOBJ_HIDDEN);
     HSD_JObjReqAnimAll(jobj_ui, un_804DDC20);
     HSD_JObjAnimAll(jobj_ui);
     un_803F9E08.xC = gobj_ui;

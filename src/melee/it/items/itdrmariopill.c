@@ -328,9 +328,9 @@ static inline void itDrMarioPill_Motion2_Anim_flags(Item_GObj* gobj)
     jobj = HSD_JObjGetChild(jobj);
     it_8026B3A8(gobj);
     if (ip->xDAC_itcmd_var0 == 1) {
-        HSD_JObjClearFlags(jobj, 0x10U);
+        HSD_JObjClearFlags(jobj, JOBJ_HIDDEN);
     } else {
-        HSD_JObjSetFlags(jobj, 0x10U);
+        HSD_JObjSetFlags(jobj, JOBJ_HIDDEN);
     }
 }
 

@@ -171,10 +171,10 @@ void fn_80249A1C(HSD_GObj* arg0)
     if (temp_r4 != 0) {
         menu->cursor = (u8) (temp_r4 - 1);
         if ((u8) menu->cursor != 0) {
-            HSD_JObjSetFlagsAll(jobj, 0x10U);
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             return;
         }
-        HSD_JObjClearFlagsAll(jobj, 0x10U);
+        HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         return;
     }
     if ((u8) menu->unk2 == 0) {
@@ -256,7 +256,7 @@ void mnSound_80249C08(int unused)
         lb_80011E24(jobj, &sp60, 0xB, -1);
         HSD_JObjReqAnimAll(sp60, mnSound_803EEED8[user_data->unk1 + 4].start_frame);
         HSD_JObjAnimAll(sp60);
-        HSD_JObjSetFlagsAll(jobj, 0x10U);
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     }
 }
 

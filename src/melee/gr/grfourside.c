@@ -430,7 +430,7 @@ void grFourside_801F37FC(Ground_GObj* gobj)
     gp->gv.foursideUfo.x2 = 0;
     gp->gv.foursideUfo.xC = 0;
     gp->gv.foursideUfo.x3 = 0;
-    HSD_JObjSetFlagsAll(jobj, 16);
+    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     mpLib_80057BC0(4);
     gp->x10_flags.b5 = 1;
 }
@@ -470,7 +470,7 @@ void grFourside_801F3894(Ground_GObj* arg0)
                                      gp->gv.foursideUfo.x1 * 4);
                     mpLib_80055E9C(4);
                     mpLib_80057424(4);
-                    HSD_JObjClearFlagsAll(jobj, 0x10);
+                    HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
                     mpJointListAdd(4);
                     gp->gv.foursideUfo.xC = Camera_80029020();
                     gp->gv.foursideUfo.x3 = 0;
@@ -529,7 +529,7 @@ void grFourside_801F3894(Ground_GObj* arg0)
     case 4: {
         s32 timer = gp->gv.foursideUfo.x4;
         if (timer >= 0x3C) {
-            HSD_JObjSetFlagsAll(jobj, 0x10);
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             mpLib_80057BC0(4);
             gp->gv.foursideUfo.x4 = grFs_804D69D8->ufo_wait;
             gp->gv.foursideUfo.x0 = 0;

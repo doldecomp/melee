@@ -153,7 +153,7 @@ void it_802F3290(Item_GObj* item_gobj)
     item = GET_ITEM(item_gobj);
     item->x40_vel.x = item->x40_vel.y = item->x40_vel.z = 0.0f;
     item->xD44_lifeTimer = 40.0f;
-    HSD_JObjSetFlagsAll(item_jobj, 0x10U);
+    HSD_JObjSetFlagsAll(item_jobj, JOBJ_HIDDEN);
     it_802756D0(item_gobj);
     Item_80268E5C(item_gobj, 2, ITEM_ANIM_UPDATE);
 }
