@@ -636,7 +636,7 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
                     }
 
                     HSD_ASSERT(901, jobj);
-                    HSD_JObjClearFlagsAll(jobj, 16);
+                    HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
 
                     HSD_JObjSetRotationX(jobj, 0.0F);
                     HSD_JObjSetRotationY(jobj, 0.0F);
@@ -1042,7 +1042,7 @@ void grBigBlueRoute_8020DAB4(HSD_JObj** jobjs, f32 scale, int count)
             jobj = HSD_JObjGetNext(jobj);
         }
 
-        HSD_JObjClearFlagsAll(jobj, 16);
+        HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
 
         HSD_JObjSetScaleX(jobj, scale);
         HSD_JObjSetScaleY(jobj, scale);

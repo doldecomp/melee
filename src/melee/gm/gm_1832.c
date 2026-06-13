@@ -2216,9 +2216,9 @@ void fn_80188EE8(HSD_GObj* gobj)
 
     if (gm_801A45E8(2) != 0) {
         HSD_SisLib_803A6368(sub->text, 0x1E);
-        HSD_JObjSetFlagsAll(sub->jobjs[3], 0x10);
+        HSD_JObjSetFlagsAll(sub->jobjs[3], JOBJ_HIDDEN);
     } else {
-        HSD_JObjClearFlagsAll(sub->jobjs[3], 0x10);
+        HSD_JObjClearFlagsAll(sub->jobjs[3], JOBJ_HIDDEN);
     }
 
     {
@@ -2276,7 +2276,7 @@ void fn_80188EE8(HSD_GObj* gobj)
 
     fn_80188D3C(sub->jobjs[27]);
 
-    HSD_JObjSetFlags(sub->jobjs[25], 0x10);
+    HSD_JObjSetFlags(sub->jobjs[25], JOBJ_HIDDEN);
 
     val = sub->menu_values[6];
     jobj = sub->jobjs[26];

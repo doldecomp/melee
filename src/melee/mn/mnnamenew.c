@@ -1463,9 +1463,9 @@ void fn_8023DBE8(HSD_GObj* arg0)
     data = arg0->user_data;
 
     if ((u8) mn_804A04F0.x10 != 1) {
-        HSD_JObjSetFlagsAll(data->jobjs[16], 0x10U);
-        HSD_JObjSetFlagsAll(data->jobjs[12], 0x10U);
-        HSD_JObjSetFlagsAll(data->jobjs[13], 0x10U);
+        HSD_JObjSetFlagsAll(data->jobjs[16], JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(data->jobjs[12], JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(data->jobjs[13], JOBJ_HIDDEN);
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         proc = HSD_GObj_SetupProc(arg0, fn_8023DAEC, 0U);
         proc->flags_3 = HSD_GObj_804D783C;

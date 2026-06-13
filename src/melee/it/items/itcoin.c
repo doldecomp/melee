@@ -73,20 +73,20 @@ void it_802F13B4(Item_GObj* gobj, int arg1)
             ((Camera_80031144() < attr->x48) &&
              (grFigureGet_80219C50(ip->xDD4_itemVar.coin.x14) == 0)))
         {
-            HSD_JObjSetFlagsAll(jobj, 0x10);
-            HSD_JObjClearFlagsAll(jobj->next, 0x10);
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+            HSD_JObjClearFlagsAll(jobj->next, JOBJ_HIDDEN);
         } else {
-            HSD_JObjSetFlagsAll(jobj->next, 0x10);
-            HSD_JObjClearFlagsAll(jobj, 0x10);
+            HSD_JObjSetFlagsAll(jobj->next, JOBJ_HIDDEN);
+            HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         }
     } else if (((gm_801A45E8(1) != 0) && (Ground_801C1D84() == 0)) ||
                (Camera_80031144() < attr->x48))
     {
-        HSD_JObjSetFlagsAll(jobj, 0x10);
-        HSD_JObjClearFlagsAll(jobj->next, 0x10);
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+        HSD_JObjClearFlagsAll(jobj->next, JOBJ_HIDDEN);
     } else {
-        HSD_JObjSetFlagsAll(jobj->next, 0x10);
-        HSD_JObjClearFlagsAll(jobj, 0x10);
+        HSD_JObjSetFlagsAll(jobj->next, JOBJ_HIDDEN);
+        HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
     }
     it_8026EECC(gobj, arg1);
 }
@@ -187,7 +187,7 @@ void itCoin_Logic116_PickedUp(Item_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
     HSD_JObj* child = HSD_JObjGetChild(jobj);
 
-    HSD_JObjClearFlagsAll(child, 0x10);
+    HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
     Item_80268E5C(gobj, 2, ITEM_UNK_0x1);
 }
 

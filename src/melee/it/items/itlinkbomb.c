@@ -542,7 +542,7 @@ void it_8029F69C(HSD_GObj* gobj)
     }
     it_8026B3A8(gobj);
     it_80273454(gobj);
-    HSD_JObjSetFlagsAll(jobj, 0x10U);
+    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     it_8026BD24(gobj);
     it_8027518C(gobj);
     it_802756D0(gobj);
