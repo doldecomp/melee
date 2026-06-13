@@ -110,9 +110,8 @@ static void gmMain_8015FDA4(void)
             db_804D6B20 = false;
         }
     } else {
-        if (g_debugLevel != DbLKind_NoDebugRom) {
-            __assert(__FILE__, 0xD2, "DbLevel == DbLKind_NoDebugRom");
-        }
+        HSD_ASSERTMSG(0xD2, g_debugLevel == DbLKind_NoDebugRom,
+                      "DbLevel == DbLKind_NoDebugRom");
         g_debugLevel = 0;
     }
 }

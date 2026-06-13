@@ -75,8 +75,7 @@ void db_TakeScreenshotIfPending(void)
         if (temp_r3 != -1) {
             var_r30 = HSD_VIData.xfb[temp_r3].buffer;
         } else {
-            OSReport("cant find xfb!\n");
-            ((0) ? ((void) 0) : __assert("dbscreenshot.c", 61, "0"));
+            HSD_ASSERTREPORT(61, 0, "cant find xfb!\n");
         }
         temp_r5 = db_ScreenshotNumber;
         db_ScreenshotNumber = temp_r5 + 1;

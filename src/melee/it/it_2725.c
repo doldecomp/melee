@@ -217,10 +217,10 @@ void it_802728C8(Item_GObj* item_gobj)
     rem = (u32) (s32) ((Item*) item_gobj->user_data)->xD44_lifeTimer %
           it_804D6D28->x44_float;
     if (rem != 0) {
-        HSD_JObjClearFlagsAll(item_jobj2, 0x10U);
+        HSD_JObjClearFlagsAll(item_jobj2, JOBJ_HIDDEN);
         return;
     }
-    HSD_JObjSetFlagsAll(item_jobj2, 0x10U);
+    HSD_JObjSetFlagsAll(item_jobj2, JOBJ_HIDDEN);
 }
 
 void it_80272940(Item_GObj* item_gobj)
@@ -230,7 +230,7 @@ void it_80272940(Item_GObj* item_gobj)
 
     item_jobj1 = GET_JOBJ(item_gobj);
     item_jobj2 = item_jobj1 == NULL ? NULL : item_jobj1->child;
-    HSD_JObjClearFlagsAll(item_jobj2, 0x10U);
+    HSD_JObjClearFlagsAll(item_jobj2, JOBJ_HIDDEN);
 }
 
 void it_80272980(Item_GObj* item_gobj)
@@ -264,12 +264,12 @@ void it_80272980(Item_GObj* item_gobj)
 
 void it_80272A18(HSD_JObj* item_jobj)
 {
-    HSD_JObjClearFlagsAll(item_jobj, 0x10U);
+    HSD_JObjClearFlagsAll(item_jobj, JOBJ_HIDDEN);
 }
 
 void it_80272A3C(HSD_JObj* item_jobj)
 {
-    HSD_JObjSetFlagsAll(item_jobj, 0x10U);
+    HSD_JObjSetFlagsAll(item_jobj, JOBJ_HIDDEN);
 }
 
 void it_80272A60(Item_GObj* item_gobj)
@@ -981,7 +981,8 @@ void it_802742F4(Item_GObj* item_gobj, HSD_GObj* gobj, Fighter_Part ftpart)
         item->x20_team_id = ftLib_80086EB4(gobj);
         item->xD50_landNum = 0;
         item->xDC8_word.flags.x13 = 1;
-        HSD_JObjClearFlagsAll(HSD_JObjGetChild(item_gobj->hsd_obj), 16U);
+        HSD_JObjClearFlagsAll(HSD_JObjGetChild(item_gobj->hsd_obj),
+                              JOBJ_HIDDEN);
         it_802756D0(item_gobj);
         it_8026B3A8(item_gobj);
         db_80225DD8(item_gobj, (Fighter_GObj*) gobj);

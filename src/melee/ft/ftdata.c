@@ -1717,15 +1717,13 @@ void ftData_80085A14(FighterKind kind)
     if (ftData_Table_Unk0[kind].data == NULL) {
         lbFile_800168A0(1, ftData_803C23E4[kind], &sp18, &sp10);
         a_head = sp18;
-        if (a_head == 0) {
-            __assert("ftdata.c", 0x974, "a_head");
-        }
+        HSD_ASSERT(0x974, a_head);
         for (i = 0; i < (u32) ftData_Table_Unk0[kind].count; i++) {
             temp_r0 = temp_r27->xC[i].x8;
             if (temp_r0 != 0) {
                 if (temp_r0 > 0x8000) {
-                    OSReport("fighter figatree over! %x\n", temp_r0);
-                    __assert("ftdata.c", 0x9AF, "0");
+                    HSD_ASSERTREPORT(0x9AF, 0, "fighter figatree over! %x\n",
+                                     temp_r0);
                 }
                 temp_r27->xC[i].x14 = (a_head + temp_r27->xC[i].x4);
             }
@@ -1759,8 +1757,7 @@ void ftData_80085B98(Fighter* fp, int arg1, int arg2)
     fp->x5A8 = 0;
     fp->x58C = ftData_UnkIntPairs[fp->kind].count;
     if (arg2 >= fp->x58C) {
-        OSReport("Demo Status error! %d\n", arg2);
-        __assert("ftdata.c", 0x9D2, "0");
+        HSD_ASSERTREPORT(0x9D2, 0, "Demo Status error! %d\n", arg2);
     }
     if (temp_r30 != 0U) {
         for (i = arg1; i <= arg2; i++) {
@@ -1768,8 +1765,8 @@ void ftData_80085B98(Fighter* fp, int arg1, int arg2)
             temp_r0 = temp_r3->x8;
             if (temp_r3->x8 != 0U) {
                 if (temp_r0 > 0xB000) {
-                    OSReport("fighter figatree over! %x\n", temp_r0);
-                    __assert("ftdata.c", 0x9DC, "0");
+                    HSD_ASSERTREPORT(0x9DC, 0, "fighter figatree over! %x\n",
+                                     temp_r0);
                 }
                 temp_r3 = &fp->ft_data->x14[i];
                 temp_r3->x14 = temp_r30 + temp_r3->x4;
@@ -1805,8 +1802,8 @@ void ftData_80085CD8(Fighter* fp, Fighter* arg1, int msid)
                         &sp14, temp_r4->x0, temp_r3->x8,
                         (intptr_t) temp_r4 - (intptr_t) temp_r3_3->x59C);
                     if (temp_ret == -1) {
-                        OSReport("lbArchiveRelocate error! %x\n", msid);
-                        __assert("ftdata.c", 0x9FA, "0");
+                        HSD_ASSERTREPORT(
+                            0x9FA, 0, "lbArchiveRelocate error! %x\n", msid);
                     }
                 } else {
                     temp_r4_2 = temp_r3->x14;
@@ -1819,8 +1816,8 @@ void ftData_80085CD8(Fighter* fp, Fighter* arg1, int msid)
                     temp_ret_2 =
                         HSD_ArchiveParse(&sp14, fp->x59C->x0, temp_r3->x8);
                     if (temp_ret_2 == -1) {
-                        OSReport("HSD_ArchiveParse error! %x\n", msid);
-                        __assert("ftdata.c", 0xA0F, "0");
+                        HSD_ASSERTREPORT(0xA0F, 0,
+                                         "HSD_ArchiveParse error! %x\n", msid);
                     }
                 }
                 fp->x590 = HSD_ArchiveGetPublicAddress(&sp14, temp_r3->x0);
@@ -1858,8 +1855,8 @@ FigaTree* ftData_80085E50(Fighter* arg0, int msid)
                         &sp10, temp_r4->x0, temp_r3->x8,
                         (intptr_t) temp_r4 - (intptr_t) temp_r3_3->x59C);
                     if (temp_ret == -1) {
-                        OSReport("lbArchiveRelocate error! %x\n", msid);
-                        __assert("ftdata.c", 0xA30, "0");
+                        HSD_ASSERTREPORT(
+                            0xA30, 0, "lbArchiveRelocate error! %x\n", msid);
                     }
                 } else {
                     temp_r4_2 = temp_r3->x14;
@@ -1872,8 +1869,8 @@ FigaTree* ftData_80085E50(Fighter* arg0, int msid)
                     temp_ret_2 =
                         HSD_ArchiveParse(&sp10, arg0->x5A0->x0, temp_r3->x8);
                     if (temp_ret_2 == -1) {
-                        OSReport("HSD_ArchiveParse error! %x\n", msid);
-                        __assert("ftdata.c", 0xA45, "0");
+                        HSD_ASSERTREPORT(0xA45, 0,
+                                         "HSD_ArchiveParse error! %x\n", msid);
                     }
                 }
                 arg0->x598 = HSD_ArchiveGetPublicAddress(&sp10, temp_r3->x0);

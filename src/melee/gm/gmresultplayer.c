@@ -507,9 +507,11 @@ void fn_80178050(HSD_GObj* arg0)
                                 HSD_JObjAnimAll(
                                     data->player_data[k2].jobjs[1]);
                                 HSD_JObjSetFlagsAll(
-                                    data->player_data[k2].jobjs[0], 0x10U);
+                                    data->player_data[k2].jobjs[0],
+                                    JOBJ_HIDDEN);
                                 HSD_JObjSetFlagsAll(
-                                    data->player_data[k2].jobjs[4], 0x10U);
+                                    data->player_data[k2].jobjs[4],
+                                    JOBJ_HIDDEN);
                                 data->player_data[k2].x0_1 = 0;
                                 data->player_data[k2].x0_2 = 0;
                                 data->player_data[k2].x0_3 = 0;
@@ -536,9 +538,9 @@ void fn_80178050(HSD_GObj* arg0)
                             HSD_JObjAnimAll(data->player_data[k2].jobjs[6]);
                             HSD_JObjAnimAll(data->player_data[k2].jobjs[1]);
                             HSD_JObjClearFlagsAll(
-                                data->player_data[k2].jobjs[0], 0x10U);
+                                data->player_data[k2].jobjs[0], JOBJ_HIDDEN);
                             HSD_JObjClearFlagsAll(
-                                data->player_data[k2].jobjs[4], 0x10U);
+                                data->player_data[k2].jobjs[4], JOBJ_HIDDEN);
                             fn_8017435C();
                         }
                     } else if (slot == 1) {
@@ -573,31 +575,31 @@ void fn_80178050(HSD_GObj* arg0)
                     if ((u8) match_end->player_standings[k3].slot_type != 3) {
                         if (!data->player_data[k3].x0_1) {
                             HSD_JObjSetFlagsAll(data->player_data[k3].jobjs[8],
-                                                0x10U);
+                                                JOBJ_HIDDEN);
                         } else {
                             HSD_JObjClearFlagsAll(
-                                data->player_data[k3].jobjs[8], 0x10U);
+                                data->player_data[k3].jobjs[8], JOBJ_HIDDEN);
                         }
                         if (!data->player_data[k3].x0_2) {
                             HSD_JObjSetFlagsAll(data->player_data[k3].jobjs[9],
-                                                0x10U);
+                                                JOBJ_HIDDEN);
                         } else {
                             HSD_JObjClearFlagsAll(
-                                data->player_data[k3].jobjs[9], 0x10U);
+                                data->player_data[k3].jobjs[9], JOBJ_HIDDEN);
                         }
                         if (!data->player_data[k3].x0_3) {
                             HSD_JObjSetFlagsAll(
-                                data->player_data[k3].jobjs[0xA], 0x10U);
+                                data->player_data[k3].jobjs[0xA], JOBJ_HIDDEN);
                         } else {
                             HSD_JObjClearFlagsAll(
-                                data->player_data[k3].jobjs[0xA], 0x10U);
+                                data->player_data[k3].jobjs[0xA], JOBJ_HIDDEN);
                         }
                         if (!data->player_data[k3].x0_4) {
                             HSD_JObjSetFlagsAll(
-                                data->player_data[k3].jobjs[0xB], 0x10U);
+                                data->player_data[k3].jobjs[0xB], JOBJ_HIDDEN);
                         } else {
                             HSD_JObjClearFlagsAll(
-                                data->player_data[k3].jobjs[0xB], 0x10U);
+                                data->player_data[k3].jobjs[0xB], JOBJ_HIDDEN);
                         }
                     }
                     k3++;
@@ -781,12 +783,12 @@ void fn_80178BB4(HSD_GObj* gobj)
 
     i = 0;
     do {
-        HSD_JObjSetFlagsAll(data->player_data[i].jobjs[0], 0x10);
-        HSD_JObjSetFlagsAll(data->player_data[i].jobjs[4], 0x10);
-        HSD_JObjSetFlagsAll(data->player_data[i].jobjs[8], 0x10);
-        HSD_JObjSetFlagsAll(data->player_data[i].jobjs[9], 0x10);
-        HSD_JObjSetFlagsAll(data->player_data[i].jobjs[10], 0x10);
-        HSD_JObjSetFlagsAll(data->player_data[i].jobjs[11], 0x10);
+        HSD_JObjSetFlagsAll(data->player_data[i].jobjs[0], JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(data->player_data[i].jobjs[4], JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(data->player_data[i].jobjs[8], JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(data->player_data[i].jobjs[9], JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(data->player_data[i].jobjs[10], JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(data->player_data[i].jobjs[11], JOBJ_HIDDEN);
         lbDObjSetRateAll(HSD_JObjGetDObj(data->player_data[i].jobjs[6]), 0.0f);
 
         {
@@ -863,16 +865,21 @@ void fn_80178BB4(HSD_GObj* gobj)
                     HSD_ForeachAnim(taunt_jobj, JOBJ_TYPE, ALL_TYPE_MASK,
                                     HSD_AObjSetCurrentFrame, AOBJ_ARG_AF, 0.0);
                     HSD_JObjAnimAll(taunt_jobj);
-                    HSD_JObjSetFlagsAll(data->player_data[i].jobjs[7], 0x10);
+                    HSD_JObjSetFlagsAll(data->player_data[i].jobjs[7],
+                                        JOBJ_HIDDEN);
                 }
 
                 HSD_JObjRemoveAnimAll(data->player_data[i].jobjs[3]);
-                HSD_JObjSetFlagsAll(data->player_data[i].jobjs[3], 0x10);
+                HSD_JObjSetFlagsAll(data->player_data[i].jobjs[3],
+                                    JOBJ_HIDDEN);
             } else {
-                HSD_JObjSetFlagsAll(data->player_data[i].jobjs[1], 0x10);
+                HSD_JObjSetFlagsAll(data->player_data[i].jobjs[1],
+                                    JOBJ_HIDDEN);
                 HSD_JObjRemoveAnimAll(data->player_data[i].jobjs[1]);
-                HSD_JObjSetFlagsAll(data->player_data[i].jobjs[5], 0x10);
-                HSD_JObjSetFlagsAll(data->player_data[i].jobjs[7], 0x10);
+                HSD_JObjSetFlagsAll(data->player_data[i].jobjs[5],
+                                    JOBJ_HIDDEN);
+                HSD_JObjSetFlagsAll(data->player_data[i].jobjs[7],
+                                    JOBJ_HIDDEN);
             }
         }
 

@@ -110,9 +110,9 @@ bool itNesspkthundertrail_UnkMotion0_Anim(Item_GObj* gobj)
     HSD_JObj* child = HSD_JObjGetChild(jobj);
 
     if (ip->xDD4_itemVar.nesspkthundertrail.x8 & 1) {
-        HSD_JObjSetFlagsAll(child, 0x10);
+        HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
     } else {
-        HSD_JObjClearFlagsAll(child, 0x10);
+        HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
     }
     ip->xDD4_itemVar.nesspkthundertrail.x8++;
 

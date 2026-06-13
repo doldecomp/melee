@@ -1996,9 +1996,9 @@ void un_8031BF34(s32 arg0)
     un_80308250(base->x38, (s16) (u16) arg0, 0);
     un_804D6F2C = un_803087F4(base->x38);
 
-    HSD_JObjClearFlagsAll(anim->jobj[0], 0x10);
-    HSD_JObjSetFlagsAll(anim->jobj[1], 0x10);
-    HSD_JObjClearFlagsAll(anim->jobj[0], 0x10);
+    HSD_JObjClearFlagsAll(anim->jobj[0], JOBJ_HIDDEN);
+    HSD_JObjSetFlagsAll(anim->jobj[1], JOBJ_HIDDEN);
+    HSD_JObjClearFlagsAll(anim->jobj[0], JOBJ_HIDDEN);
 
     jobj = un_8031BF34_inline();
 

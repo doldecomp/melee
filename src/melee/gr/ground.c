@@ -1182,12 +1182,8 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lights)
     s32 b6, b7, b5;
     s32 matched;
 
-    if (lights == NULL) {
-        __assert(__FILE__, 0x773, lightset);
-    }
-    if (*lights == NULL) {
-        __assert(__FILE__, 0x774, plightset);
-    }
+    HSD_ASSERTMSG(0x773, lights, lightset);
+    HSD_ASSERTMSG(0x774, *lights, plightset);
 
     walker = lights;
     matched = 0;
@@ -1303,9 +1299,7 @@ void Ground_801C2374(HSD_LObj* lobj)
 HSD_Spline* Ground_801C247C(s32 arg0, s32 arg1)
 {
     UnkArchiveStruct* archive = grDatFiles_801C6330(arg0);
-    if (archive == NULL) {
-        __assert(__FILE__, 0x7E1, Ground_804D44F8);
-    }
+    HSD_ASSERTMSG(0x7E1, archive, Ground_804D44F8);
     if (archive->unk4 != NULL && arg1 < archive->unk4->unk14) {
         return archive->unk4->unk10[arg1];
     } else {
@@ -2004,9 +1998,7 @@ void Ground_801C36F4(int map_id, HSD_JObj* root, UNK_T joint)
     u32 unused[4];
 
     archive = grDatFiles_801C6330(map_id);
-    if (archive == NULL) {
-        __assert(__FILE__, 2936, "archive");
-    }
+    HSD_ASSERT(2936, archive);
     if (root == NULL || joint == NULL) {
         OSReport("%s:%d:Error (root=%08x joint=%08x)\n", __FILE__, __FILE__,
                  root, joint);

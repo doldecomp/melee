@@ -430,7 +430,7 @@ void it_80286BA0(Item_GObj* gobj)
     Camera_80030E44(2, &ip->pos);
     it_80286248(gobj, attr->spawn_weight_0, attr->spawn_weight_1,
                 attr->spawn_weight_2, attr->special_spawn_weight);
-    HSD_JObjSetFlagsAll(jobj, 0x10);
+    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     it_802756D0(gobj);
 
     ip->x40_vel.x = 0.0F;

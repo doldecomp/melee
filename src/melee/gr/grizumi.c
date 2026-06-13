@@ -380,12 +380,12 @@ void grIzumi_801CC0D4(Ground_GObj* gobj)
             if (vec.y < 0.0f) {
                 u32 flags = HSD_JObjGetFlags(gp2->gv.izumi2.xC4);
                 if ((flags & 0x10) == 0) {
-                    HSD_JObjSetFlagsAll(gp2->gv.izumi2.xC4, 0x10);
+                    HSD_JObjSetFlagsAll(gp2->gv.izumi2.xC4, JOBJ_HIDDEN);
                 }
             } else {
                 u32 flags = HSD_JObjGetFlags(gp2->gv.izumi2.xC4);
                 if ((flags & 0x10) != 0) {
-                    HSD_JObjClearFlagsAll(gp2->gv.izumi2.xC4, 0x10);
+                    HSD_JObjClearFlagsAll(gp2->gv.izumi2.xC4, JOBJ_HIDDEN);
                 }
             }
         }
@@ -395,12 +395,12 @@ void grIzumi_801CC0D4(Ground_GObj* gobj)
             if (vec.y < 0.0f) {
                 u32 flags = HSD_JObjGetFlags(gp2->gv.izumi2.xC8);
                 if ((flags & 0x10) == 0) {
-                    HSD_JObjSetFlagsAll(gp2->gv.izumi2.xC8, 0x10);
+                    HSD_JObjSetFlagsAll(gp2->gv.izumi2.xC8, JOBJ_HIDDEN);
                 }
             } else {
                 u32 flags = HSD_JObjGetFlags(gp2->gv.izumi2.xC8);
                 if ((flags & 0x10) != 0) {
-                    HSD_JObjClearFlagsAll(gp2->gv.izumi2.xC8, 0x10);
+                    HSD_JObjClearFlagsAll(gp2->gv.izumi2.xC8, JOBJ_HIDDEN);
                 }
             }
         }
@@ -519,7 +519,7 @@ void grIzumi_801CC358(Ground_GObj* gobj)
         float f;
         gp->gv.izumi3.xC4 = 4;
         gp->gv.izumi3.xC6 = rand_range(grIz_804D6968->x50, grIz_804D6968->x4C);
-        HSD_JObjSetFlagsAll(jobj, 0x10);
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         HSD_JObjRemoveAnimAll(jobj); ///< @todo float load order (41c)
         f = HSD_JObjGetTranslationY(jobj);
         f += -1.0;
@@ -531,7 +531,7 @@ void grIzumi_801CC358(Ground_GObj* gobj)
         if (gp->gv.izumi3.xC6-- < 0) {
             gp->gv.izumi3.xC4 = 2;
             gp->gv.izumi3.xD4 = gp->gv.izumi3.xDC;
-            HSD_JObjClearFlagsAll(jobj, 0x10);
+            HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
             grAnime_801C7FF8(gobj, 0, 7, 0, 0.0f, 1.0f);
             r29 = true;
         }
@@ -590,9 +590,9 @@ void grIzumi_801CCA64(Ground_GObj* gobj)
     HSD_GObjGXLink_8039084C(gobj);
     GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 2, 0);
     gp->gv.izumi2.xC4 = Ground_801C3FA4(gobj, 2);
-    HSD_JObjSetFlagsAll(gp->gv.izumi2.xC4, 0x10);
+    HSD_JObjSetFlagsAll(gp->gv.izumi2.xC4, JOBJ_HIDDEN);
     gp->gv.izumi2.xC8 = Ground_801C3FA4(gobj, 3);
-    HSD_JObjSetFlagsAll(gp->gv.izumi2.xC8, 0x10);
+    HSD_JObjSetFlagsAll(gp->gv.izumi2.xC8, JOBJ_HIDDEN);
 }
 
 bool grIzumi_801CCB08(Ground_GObj* gobj)

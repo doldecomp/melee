@@ -377,6 +377,7 @@ static void MakeTextureMtx(HSD_TObj* tobj)
         no_assert = true;
     }
 
+    /// @todo Convert to @c HSD_ASSERT once a byte-matching form is found.
     if (!no_assert) {
         __assert(__FILE__, 589, "tobj->repeat_s && tobj->repeat_t");
     }

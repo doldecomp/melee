@@ -710,10 +710,10 @@ void grVenom_8020454C(Ground_GObj* gobj)
             }
             if (HSD_JObjGetFlags(gp->gv.venom2.xC4) & 0x10) {
                 if (visible != 0) {
-                    HSD_JObjClearFlagsAll(gp->gv.venom2.xC4, 0x10);
+                    HSD_JObjClearFlagsAll(gp->gv.venom2.xC4, JOBJ_HIDDEN);
                 }
             } else if (visible == 0) {
-                HSD_JObjSetFlagsAll(gp->gv.venom2.xC4, 0x10);
+                HSD_JObjSetFlagsAll(gp->gv.venom2.xC4, JOBJ_HIDDEN);
             }
         }
         i++;
@@ -1239,12 +1239,12 @@ void grVenom_80205758(Ground_GObj* gobj)
                 v = -v;
             }
             if (v < grVe_804DB744) {
-                HSD_JObjClearFlagsAll(jobj, 0x10);
+                HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
             } else {
-                HSD_JObjSetFlagsAll(jobj, 0x10);
+                HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             }
         } else {
-            HSD_JObjSetFlagsAll(jobj, 0x10);
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         }
 
         HSD_JObjSetTranslate(jobj, (Vec3*) &gp->gv.venom.xE0);

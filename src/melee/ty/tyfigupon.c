@@ -598,7 +598,7 @@ void fn_80315C44(HSD_GObj* arg0)
                                    str_coin_shapeanim);
                 HSD_JObjReqAnimAll(jobj, 0.0f);
                 HSD_JObjAnimAll(jobj);
-                HSD_JObjSetFlagsAll(jobj, 0x10);
+                HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
                 HSD_GObj_SetupProc(gobj, tyFigupon_80314C5C, 0);
                 HSD_GObj_80390CD4(gobj);
                 gm_801623FC(gm_801623D8() - 0xA);
@@ -762,8 +762,8 @@ void un_80316420(s16 arg0)
     temp_r31 = un_803048C0(arg0);
     un_80308250(un_804D6EF8, arg0, 0);
     gobj = un_803087F4(un_804D6EF8);
-    HSD_JObjClearFlagsAll(aa8->jobj[0], 0x10);
-    HSD_JObjSetFlagsAll(aa8->jobj[1], 0x10);
+    HSD_JObjClearFlagsAll(aa8->jobj[0], JOBJ_HIDDEN);
+    HSD_JObjSetFlagsAll(aa8->jobj[1], JOBJ_HIDDEN);
     jobj = HSD_GObjGetHSDObj(gobj);
     HSD_JObjSetTranslateX(jobj, -1.8f);
     HSD_JObjSetTranslateY(jobj, 18.6f);
@@ -865,13 +865,13 @@ void fn_803168DC(HSD_GObj* arg0)
 
     if (data->gobj != NULL) {
         if (rot_y > 10.0f) {
-            HSD_JObjClearFlagsAll(data->jobj[0], 0x10);
-            HSD_JObjSetFlagsAll(data->jobj[1], 0x10);
+            HSD_JObjClearFlagsAll(data->jobj[0], JOBJ_HIDDEN);
+            HSD_JObjSetFlagsAll(data->jobj[1], JOBJ_HIDDEN);
             return;
         }
         if (rot_y < -10.0f) {
-            HSD_JObjClearFlagsAll(data->jobj[1], 0x10);
-            HSD_JObjSetFlagsAll(data->jobj[0], 0x10);
+            HSD_JObjClearFlagsAll(data->jobj[1], JOBJ_HIDDEN);
+            HSD_JObjSetFlagsAll(data->jobj[0], JOBJ_HIDDEN);
         }
     }
 }
@@ -1451,7 +1451,7 @@ void un_80317D80_OnEnter(void* arg0)
         GObj_InitUserData(data->x8, 0, Toy_RemoveUserData, ud);
     }
     GObj_SetupGXLink(data->x8, HSD_GObj_JObjCallback, 0x3D, 0);
-    HSD_JObjSetFlagsAll(jobj, 0x10);
+    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     {
         s8 var_r0;
         if (((u32) gm_801623D8() / 10u) != 0) {

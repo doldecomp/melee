@@ -133,9 +133,9 @@ static void fn_8019EFC4(HSD_PadStatus* pad)
             s32 i;
             for (i = 10; i > 0; i--) {
                 if (i > lbl_80479A98.x70) {
-                    HSD_JObjSetFlags(lbl_80479A98.x2C[i - 1], 0x10U);
+                    HSD_JObjSetFlags(lbl_80479A98.x2C[i - 1], JOBJ_HIDDEN);
                 } else {
-                    HSD_JObjClearFlags(lbl_80479A98.x2C[i - 1], 0x10U);
+                    HSD_JObjClearFlags(lbl_80479A98.x2C[i - 1], JOBJ_HIDDEN);
                 }
             }
         }
@@ -327,7 +327,7 @@ static void fn_8019F810(void)
         HSD_JObjReqAnimAll(lbl_804D66B0.x0, (f32) lbl_804D66B0.x4);
         HSD_JObjAnimAll(lbl_804D66B0.x0);
     } else {
-        HSD_JObjSetFlagsAll(lbl_804D66B0.x0, 0x10U);
+        HSD_JObjSetFlagsAll(lbl_804D66B0.x0, JOBJ_HIDDEN);
     }
     if (lbl_80479A98.x0 == 9) {
         if ((u32) lbl_80479A98.x8 == (u32) lbl_80479A98.xC) {
@@ -442,9 +442,9 @@ void fn_8019F9C4(u32 arg0)
     lb_80011E24(jobj, &lbl_804D66C8.x0, 0x35, -1);
     lb_80011E24(jobj, &lbl_804D66C0.x0, 0x37, -1);
     if ((u8) lbl_80479A98.x20 != 0) {
-        HSD_JObjSetFlagsAll(lbl_804D66B0.x0, 0x10);
-        HSD_JObjSetFlagsAll(lbl_804D66C8.x0, 0x10);
-        HSD_JObjSetFlagsAll(lbl_804D66C0.x0, 0x10);
+        HSD_JObjSetFlagsAll(lbl_804D66B0.x0, JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(lbl_804D66C8.x0, JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(lbl_804D66C0.x0, JOBJ_HIDDEN);
     }
 
     gobj = GObj_Create(0xE, 0xF, 0);
@@ -517,9 +517,9 @@ void fn_8019F9C4(u32 arg0)
     HSD_JObjReqAnimAll(lbl_80479A98.x54, (f32) lbl_80479A98.x64);
     for (i = 10; i > 0; i--) {
         if (i > lbl_80479A98.x70) {
-            HSD_JObjSetFlags(lbl_80479A98.x2C[i - 1], 0x10);
+            HSD_JObjSetFlags(lbl_80479A98.x2C[i - 1], JOBJ_HIDDEN);
         } else {
-            HSD_JObjClearFlags(lbl_80479A98.x2C[i - 1], 0x10);
+            HSD_JObjClearFlags(lbl_80479A98.x2C[i - 1], JOBJ_HIDDEN);
         }
     }
     HSD_JObjAnimAll(jobj);

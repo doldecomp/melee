@@ -1070,7 +1070,7 @@ void mnCharSel_8025DB34(u8 arg0)
         if ((u8) mnCharSel_804D6CB0->data.data.rules.is_teams == 0) {
             /* FFA mode */
             u8 port_color_idx;
-            HSD_JObjSetFlags(sp90, 0x10U);
+            HSD_JObjSetFlags(sp90, JOBJ_HIDDEN);
             port_color_idx = arg0;
             if (mnCharSel_803F0DFC.doors[arg0].p_kind != 0) {
                 port_color_idx += 4;
@@ -1094,7 +1094,7 @@ void mnCharSel_8025DB34(u8 arg0)
                             AOBJ_ARG_AOV, 0, 0);
         } else {
             /* Teams mode */
-            HSD_JObjClearFlags(sp90, 0x10U);
+            HSD_JObjClearFlags(sp90, JOBJ_HIDDEN);
             var_r23 = mnCharSel_803F0DFC.doors[arg0].team;
             temp_f31 = (f32) mnCharSel_804D50D0[var_r23];
             lb_80011E24(mnCharSel_804D6CC0, &sp3C,
