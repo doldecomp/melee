@@ -1,0 +1,24 @@
+name: "Style Check"
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  style-check:
+    name: Lint src
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+
+    # Lint the source tree with tools/check. Findings exit non-zero (65),
+    # failing the job, with inline annotations from --msg-style actions; an
+    # internal error exits 74. The unit tests (tools/check/tests) are a
+    # development tool and are not run here.
+    - name: Lint src
+      run: python3 tools/check/main.py --msg-style actions src
