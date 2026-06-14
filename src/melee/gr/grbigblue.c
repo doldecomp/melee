@@ -1407,7 +1407,7 @@ void grBigBlue_801E8D64(Ground_GObj* gobj)
 
     HSD_JObjGetTranslation2(jobj, &pos);
     {
-        f32 inv = grBb_804DB2F0 / Ground_801C0498();
+        f32 inv = 1.0F / Ground_801C0498();
         pos.x *= inv;
         pos.y *= inv;
         pos.z *= inv;
@@ -1760,15 +1760,15 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
     switch ((s8) gp->gv.bigblue.x0) {
     case 0:
         if (*(s32*) ((u8*) GET_GROUND(Ground_801C2BA4(32)) + 0xD0) != 0) {
-            gp->gv.arwing.xC8 = 0;
-            gp->gv.arwing.xD0 = 0;
-            gp->gv.arwing.xCC = 0;
+            gp->gv.bigblue.platform.xC8_timer = 0;
+            gp->gv.bigblue.platform.xD0_timer = 0;
+            gp->gv.bigblue.platform.xCC_timer = 0;
             gp->gv.bigblue.x0 = 1;
         }
         break;
 
     case 1: {
-        s32 timer = gp->gv.arwing.xC8;
+        s32 timer = gp->gv.bigblue.platform.xC8_timer;
         if (timer <= 0) {
             f32 right_y;
             f32 left_y;
@@ -1783,17 +1783,17 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
             right_y = grBigBlue_801EC58C(&pos, NULL, 500.0f);
             left_y = grBigBlue_801EC58C(&half_bot, NULL, 500.0f);
 
-            *(f32*) &gp->gv.arwing.xD4 = grBb_804D69C8->xF4;
+            gp->gv.bigblue.platform.height_offset = grBb_804D69C8->xF4;
             range = ABS(grBb_804D69C8->xF8 - grBb_804D69C8->xF4);
             if ((s32) range != 0) {
                 r = HSD_Randi((s32) range);
             } else {
                 r = 0;
             }
-            *(f32*) &gp->gv.arwing.xD4 = *(f32*) &gp->gv.arwing.xD4 + (f32) r;
+            gp->gv.bigblue.platform.height_offset += (f32) r;
 
-            pos.y = right_y + *(f32*) &gp->gv.arwing.xD4;
-            half_bot.y = left_y + *(f32*) &gp->gv.arwing.xD4;
+            pos.y = right_y + gp->gv.bigblue.platform.height_offset;
+            half_bot.y = left_y + gp->gv.bigblue.platform.height_offset;
 
             if (grBb_804DB310 != right_y || grBb_804DB310 != left_y) {
                 s32 collision;
@@ -1857,17 +1857,17 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
 
                     HSD_JObjSetTranslate(jobj, &pos);
 
-                    gp->gv.arwing.xDC = pos.y;
-                    gp->gv.arwing.xEC = 0.0f;
-                    gp->gv.arwing.xE0.z = 0.0f;
-                    gp->gv.arwing.xE0.y = 0.0f;
+                    gp->gv.bigblue.platform.target_y = pos.y;
+                    gp->gv.bigblue.platform.xEC = 0.0f;
+                    gp->gv.bigblue.platform.velocity.z = 0.0f;
+                    gp->gv.bigblue.platform.velocity.y = 0.0f;
 
                     HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
                     gp->gv.bigblue.x0 = 2;
                 }
             }
         } else {
-            gp->gv.arwing.xC8 = timer - 1;
+            gp->gv.bigblue.platform.xC8_timer = timer - 1;
         }
         break;
     }
@@ -1896,19 +1896,21 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
         if (ace_result == 0 || (ace_result == 1 && pos.y < y_check)) {
             if (bounds_y <= surface_y) {
                 if (surface_y == grBb_804DB310) {
-                    gp->gv.arwing.xDC = half_top.y;
+                    gp->gv.bigblue.platform.target_y = half_top.y;
                 } else {
-                    gp->gv.arwing.xDC = surface_y + *(f32*) &gp->gv.arwing.xD4;
+                    gp->gv.bigblue.platform.target_y =
+                        surface_y + gp->gv.bigblue.platform.height_offset;
                 }
             } else {
-                gp->gv.arwing.xDC = bounds_y + *(f32*) &gp->gv.arwing.xD4;
+                gp->gv.bigblue.platform.target_y =
+                    bounds_y + gp->gv.bigblue.platform.height_offset;
             }
         } else if (ace_result == 1) {
-            gp->gv.arwing.xDC = pos.y + (pos.y - y_check);
+            gp->gv.bigblue.platform.target_y = pos.y + (pos.y - y_check);
         }
 
         {
-            f32 target_y = gp->gv.arwing.xDC;
+            f32 target_y = gp->gv.bigblue.platform.target_y;
             f32 diff = pos.y - target_y;
             if (diff < 0.0f) {
                 diff = -diff;
@@ -1934,7 +1936,7 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
         HSD_JObjSetTranslateY(jobj, pos.y);
 
         {
-            s32 timer = gp->gv.arwing.xCC;
+            s32 timer = gp->gv.bigblue.platform.xCC_timer;
             if (timer <= 0) {
                 s32 timer_range = grBb_804D69C8->x110 - grBb_804D69C8->x10C;
                 s32 r;
@@ -1950,8 +1952,8 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
                 } else {
                     r = 0;
                 }
-                gp->gv.arwing.xCC = r;
-                gp->gv.arwing.xCC += grBb_804D69C8->x10C;
+                gp->gv.bigblue.platform.xCC_timer = r;
+                gp->gv.bigblue.platform.xCC_timer += grBb_804D69C8->x10C;
 
                 speed_range =
                     (grBb_804D69C8->x100 - grBb_804D69C8->xFC) / 0.1f;
@@ -1964,14 +1966,15 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
                 if (speed == 0.0f) {
                     speed = grBb_804D69C8->xFC;
                 }
-                gp->gv.arwing.xE0.y = speed * (f32) (s8) gp->gv.bigblue.x1;
+                gp->gv.bigblue.platform.velocity.y =
+                    speed * (f32) (s8) gp->gv.bigblue.x1;
             } else {
-                gp->gv.arwing.xCC = timer - 1;
+                gp->gv.bigblue.platform.xCC_timer = timer - 1;
             }
         }
 
         {
-            s32 timer = gp->gv.arwing.xD0;
+            s32 timer = gp->gv.bigblue.platform.xD0_timer;
             if (timer <= 0) {
                 s32 timer_range = grBb_804D69C8->x110 - grBb_804D69C8->x10C;
                 s32 r;
@@ -1987,8 +1990,8 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
                 } else {
                     r = 0;
                 }
-                gp->gv.arwing.xD0 = r;
-                gp->gv.arwing.xD0 += grBb_804D69C8->x10C;
+                gp->gv.bigblue.platform.xD0_timer = r;
+                gp->gv.bigblue.platform.xD0_timer += grBb_804D69C8->x10C;
 
                 speed_range =
                     (grBb_804D69C8->x108 - grBb_804D69C8->x104) / 0.1f;
@@ -2004,14 +2007,14 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
                 if (HSD_Randi(2) != 0) {
                     speed *= -1.0f;
                 }
-                gp->gv.arwing.xE0.z = speed;
+                gp->gv.bigblue.platform.velocity.z = speed;
             } else {
-                gp->gv.arwing.xD0 = timer - 1;
+                gp->gv.bigblue.platform.xD0_timer = timer - 1;
             }
         }
 
-        HSD_JObjAddTranslationX(jobj, gp->gv.arwing.xE0.y);
-        HSD_JObjAddTranslationY(jobj, gp->gv.arwing.xE0.z);
+        HSD_JObjAddTranslationX(jobj, gp->gv.bigblue.platform.velocity.y);
+        HSD_JObjAddTranslationY(jobj, gp->gv.bigblue.platform.velocity.z);
 
         if (((s8) gp->gv.bigblue.x1 == -1 &&
              HSD_JObjGetTranslationX(jobj) <
@@ -2021,9 +2024,9 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
                  Stage_GetBlastZoneRightOffset() - 50.0f))
         {
             HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-            gp->gv.arwing.xEC = 0.0f;
-            gp->gv.arwing.xE0.z = 0.0f;
-            gp->gv.arwing.xE0.y = 0.0f;
+            gp->gv.bigblue.platform.xEC = 0.0f;
+            gp->gv.bigblue.platform.velocity.z = 0.0f;
+            gp->gv.bigblue.platform.velocity.y = 0.0f;
             GET_GROUND(Ground_801C2BA4(32))->gv.bigblue.xD0 = 0;
             gp->gv.bigblue.x0 = 0;
         }
@@ -2094,7 +2097,6 @@ s32 grBigBlue_801EACE8(HSD_JObj* exclude, Vec3* point, f32* out_y,
     f32 left_bound, right_bound, top_bound, bottom_bound;
     f32 left_x, right_x;
     f32 dist;
-    f32 zero;
     f32* p_left;
     f32* p_right;
     s32 i;
@@ -2107,8 +2109,7 @@ s32 grBigBlue_801EACE8(HSD_JObj* exclude, Vec3* point, f32* out_y,
     bottom_bound = point->y - half_range_y;
 
     best_in_range = F32_MAX;
-    best_above = grBb_804DB310;
-    zero = grBb_804DB2F4;
+    best_above = -F32_MAX;
 
     gp = gobj->user_data;
     p_left = &hw_left.x;
@@ -2140,7 +2141,7 @@ s32 grBigBlue_801EACE8(HSD_JObj* exclude, Vec3* point, f32* out_y,
         {
             if (pos.y > bottom_bound && pos.y < top_bound) {
                 dist = point->y - pos.y;
-                if (dist < zero) {
+                if (dist < 0.0F) {
                     dist = -dist;
                 }
                 if (dist < best_in_range) {
@@ -2168,7 +2169,7 @@ s32 grBigBlue_801EACE8(HSD_JObj* exclude, Vec3* point, f32* out_y,
         {
             if (route_pos.y > bottom_bound && route_pos.y < top_bound) {
                 dist = point->y - route_pos.y;
-                if (dist < grBb_804DB2F4) {
+                if (dist < 0.0F) {
                     dist = -dist;
                 }
                 if (dist < best_in_range) {
@@ -2184,7 +2185,7 @@ s32 grBigBlue_801EACE8(HSD_JObj* exclude, Vec3* point, f32* out_y,
         *out_y = best_in_range;
         return 1;
     }
-    if (grBb_804DB310 != best_above) {
+    if (-F32_MAX != best_above) {
         *out_y = best_above;
         return 2;
     }
