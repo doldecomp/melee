@@ -137,7 +137,12 @@ void it_802B7160(Fighter_GObj* gobj, itSamusGrapple_HitboxData* data)
     Fighter* fp;
     u32 hit_group;
     HitCapsule* hitbox;
-    struct spawn_hitbox_4* hitbox_data4;
+    u32 damage_arg;
+    struct samus_grapple_hitbox_flags {
+        u8 : 6;
+        u8 hit_grounded : 1;
+    };
+    struct samus_grapple_hitbox_flags* hitbox_flags;
     PAD_STACK(8);
 
     fp = GET_FIGHTER(gobj);
@@ -161,7 +166,9 @@ void it_802B7160(Fighter_GObj* gobj, itSamusGrapple_HitboxData* data)
             hitbox->jobj = fp->parts[bone].joint;
         }
     }
-    ftColl_8007ABD0(hitbox, *damage & 0x3FF, gobj);
+    damage_arg = *damage;
+    damage_arg &= 0x3FF;
+    ftColl_8007ABD0(hitbox, damage_arg, gobj);
     hitbox->scale = data->create_hitbox.create_hitbox_1.size * 0.003906f;
     hitbox->b_offset.x =
         data->create_hitbox.create_hitbox_1.z_offset * 0.003906f;
@@ -170,20 +177,26 @@ void it_802B7160(Fighter_GObj* gobj, itSamusGrapple_HitboxData* data)
     hitbox->b_offset.z =
         data->create_hitbox.create_hitbox_2.x_offset * 0.003906f;
     ftColl_8007AC9C(hitbox, data->create_hitbox.create_hitbox_3.angle, gobj);
-    hitbox_data4 = &data->create_hitbox.create_hitbox_4;
+    hitbox_flags = (struct samus_grapple_hitbox_flags*)
+        &data->create_hitbox.create_hitbox_4 + 3;
     hitbox->x24 = data->create_hitbox.create_hitbox_3.knockback_growth;
     hitbox->x28 = data->create_hitbox.create_hitbox_3.weight_set_knockback;
     hitbox->x43_b0 = data->create_hitbox.create_hitbox_3.item_hit_interaction;
     hitbox->x43_b1 = data->create_hitbox.create_hitbox_3.ignore_fighter_scale;
     hitbox->x40_b0 = data->create_hitbox.create_hitbox_3.clank;
     hitbox->x40_b1 = data->create_hitbox.create_hitbox_3.rebound;
-    hitbox->x2C = hitbox_data4->base_knockback;
-    hitbox->element = hitbox_data4->element;
-    hitbox->x34 = hitbox_data4->shield_damage;
-    hitbox->sfx_severity = hitbox_data4->hit_sfx_severity;
-    hitbox->sfx_kind = hitbox_data4->hit_sfx_kind;
-    hitbox->x40_b2 = hitbox_data4->hit_aerial;
-    hitbox->x40_b3 = hitbox_data4->hit_grounded;
+    hitbox->x2C =
+        ((struct spawn_hitbox_4*) (hitbox_flags - 3))->base_knockback;
+    hitbox->element = ((struct spawn_hitbox_4*) (hitbox_flags - 3))->element;
+    hitbox->x34 =
+        ((struct spawn_hitbox_4*) (hitbox_flags - 3))->shield_damage;
+    hitbox->sfx_severity =
+        ((struct spawn_hitbox_4*) (hitbox_flags - 3))->hit_sfx_severity;
+    hitbox->sfx_kind =
+        ((struct spawn_hitbox_4*) (hitbox_flags - 3))->hit_sfx_kind;
+    hitbox->x40_b2 =
+        ((struct spawn_hitbox_4*) (hitbox_flags - 3))->hit_aerial;
+    hitbox->x40_b3 = hitbox_flags->hit_grounded;
     hitbox->x42_b5 = 1;
     hitbox->x42_b7 = 1;
     hitbox->x41_b4 = 0;
@@ -515,14 +528,28 @@ static inline Item* fn_802B7E34_inline(Item_GObj* gobj, Item* ip, Mtx m)
     return GET_ITEM(gobj);
 }
 
-static inline void link_all(Item_GObj* gobj, Item* ip)
+static inline void fn_802B7E34_anim_inline(Item_GObj* gobj, Item* ip, Mtx m)
 {
-    ItemLink* link;
-    HSD_JObjAnimAll(GET_JOBJ(gobj));
-    link = ip->xDD4_itemVar.samusgrapple.x4;
-    while (link != NULL) {
-        HSD_JObjAnimAll(link->gobj->hsd_obj);
-        link = link->prev;
+    {
+        HSD_JObj* jobj;
+        ItemLink* link = ip->xDD4_itemVar.samusgrapple.x0;
+        jobj = link->gobj->hsd_obj;
+        HSD_JObjSetupMatrix(link->jobj);
+        PSMTXIdentity(m);
+        PSMTXConcat(link->jobj->mtx, m, m);
+        HSD_JObjCopyMtx(jobj, m);
+        jobj->flags |= 0x03800000;
+        HSD_JObjSetMtxDirty(jobj);
+    }
+    {
+        Item* ip = GET_ITEM(gobj);
+        ItemLink* link;
+        HSD_JObjAnimAll(GET_JOBJ(gobj));
+        link = ip->xDD4_itemVar.samusgrapple.x4;
+        while (link != NULL) {
+            HSD_JObjAnimAll(link->gobj->hsd_obj);
+            link = link->prev;
+        }
     }
 }
 
@@ -534,8 +561,7 @@ void fn_802B7E34(Item_GObj* gobj)
     PAD_STACK(20);
 
     samus_grapple_state_sync(fp);
-    ip = fn_802B7E34_inline(gobj, ip, m);
-    link_all(gobj, ip);
+    fn_802B7E34_anim_inline(gobj, ip, m);
     if (samus_grapple_fighter_compare(fp->motion_id)) {
         return;
     }
@@ -1008,17 +1034,14 @@ void it_802B91C4(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
     }
 }
 
-static inline void it_802B9328_attach(ItemLink* link, Mtx m)
+static inline void it_802B9328_attach(ItemLink* link, Vec3* pos, Mtx m)
 {
-    Vec3 pos;
-    PAD_STACK(0xE4);
-
     PSMTXIdentity(m);
     HSD_JObjSetupMatrix(link->jobj);
-    pos.x = link->jobj->mtx[0][3];
-    pos.y = link->jobj->mtx[1][3];
-    pos.z = link->jobj->mtx[2][3];
-    link->pos = pos;
+    pos->x = link->jobj->mtx[0][3];
+    pos->y = link->jobj->mtx[1][3];
+    pos->z = link->jobj->mtx[2][3];
+    link->pos = *pos;
     link->coll_data.cur_pos = link->pos;
     link->coll_data.last_pos = link->coll_data.cur_pos;
     link->x2C_b0 = 1;
@@ -1042,29 +1065,42 @@ static inline f32 it_802B9328_grav(f32 vely)
 s32 it_802B9328(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
                 Fighter* fp)
 {
-    u8 _padA[80];
+    u8 _padA[0x10];
     ItemLink* cur;
     ItemLink* next;
     Item* grapple_ip = fp->fv.ss.x223C->user_data;
     ftSs_DatAttrs* da = fp->ft_data->ext_attr;
     Vec3 dir;
     Vec3 d2;
+    u8 _padB[4];
+    Vec3 attach_pos_1;
+    u8 _padC[8];
+    Vec3 attach_pos_2;
+    u8 _padD[8];
+    Vec3 attach_pos_3;
+    u8 _padE[4];
     itSamusGrapple_HitboxData hitbox_data;
-    Mtx m1, m2, m3;
+    u8 _padF[4];
+    Mtx m1;
+    u8 _padG[4];
+    Mtx m2;
+    u8 _padH[4];
+    Mtx m3;
+    u8 _padI[0x1C];
     s32 result;
     f32 d;
 
     if (fp->motion_id == 0xD4) {
         if (fp->mv.ss.unk7.x0 == da->xA0) {
-            it_802B9328_attach(link, m1);
+            it_802B9328_attach(link, &attach_pos_1, m1);
         }
     } else if (fp->motion_id == 0xD6) {
         if (fp->mv.ss.unk7.x0 == da->xB0) {
-            it_802B9328_attach(link, m2);
+            it_802B9328_attach(link, &attach_pos_2, m2);
         }
     } else if (fp->motion_id == 0x165) {
         if (fp->mv.ss.unk7.x0 == da->xC0) {
-            it_802B9328_attach(link, m3);
+            it_802B9328_attach(link, &attach_pos_3, m3);
         }
     }
 
