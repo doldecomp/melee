@@ -370,35 +370,37 @@ bool grOldYoshi_8020F080(Ground_GObj* arg)
 {
     return false;
 }
-const int grOy_803B83F0[5] = { 1, 2, 3, 4, 5 };
-/// #grOldYoshi_8020F088
+typedef struct grOy_803B83F0_t {
+    int x[5];
+} grOy_803B83F0_t;
+
+typedef struct grOy_803B83F0_Data {
+    grOy_803B83F0_t ids;
+    int pad;
+} grOy_803B83F0_Data;
+
+const grOy_803B83F0_Data grOy_803B83F0 = { { { 1, 2, 3, 4, 5 } }, 0 };
+
 void grOldYoshi_8020F088(Ground_GObj* arg)
 {
-    HSD_JObj* jobj = arg->hsd_obj;
     Ground* gp = arg->user_data;
-    s16 sVar5;
     float dVar9;
     float dVar10;
-    int local34[5];
-    PAD_STACK(8);
     if (gp->gv.oldyoshiguest.xC6 == -1) {
+        s16 sVar5;
         sVar5 = gp->gv.oldyoshiguest.xC4;
         gp->gv.oldyoshiguest.xC4 = sVar5 - 1;
         if (sVar5 < 0) {
-            local34[0] = grOy_803B83F0[0];
-            local34[1] = grOy_803B83F0[1];
-            local34[2] = grOy_803B83F0[2];
-            local34[3] = grOy_803B83F0[3];
-            local34[4] = grOy_803B83F0[4];
-            gp->gv.oldyoshiguest.xC6 = local34[HSD_Randi(5)];
+            grOy_803B83F0_t local34 = grOy_803B83F0.ids;
+            PAD_STACK(8);
+            gp->gv.oldyoshiguest.xC6 = local34.x[HSD_Randi(5)];
         }
         grAnime_801C8138(arg, gp->map_id, 0);
         dVar10 = HSD_Randf();
-        jobj = arg->hsd_obj;
         dVar9 = grOy_804D6A88->x18 * (dVar10 * 2.0f - 1.0f);
-        HSD_JObjSetTranslateY(jobj, dVar9);
+        HSD_JObjSetTranslateY(arg->hsd_obj, dVar9);
     } else {
-        jobj = Ground_801C3FA4(arg, gp->gv.oldyoshiguest.xC6);
+        HSD_JObj* jobj = Ground_801C3FA4(arg, gp->gv.oldyoshiguest.xC6);
         if (jobj == NULL) {
             return;
         }
