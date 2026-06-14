@@ -61,7 +61,7 @@ typedef enum CollLineKind {
     CollLine_LeftWall = 1 << 3,
 } CollLineKind;
 
-#define LINE_FLAG_KIND (0b1111)
+#define LINE_FLAG_KIND (0xF)
 #define LINE_FLAG_EMPTY (1 << 7)
 #define LINE_FLAG_PLATFORM (1 << 8)
 #define LINE_FLAG_LEDGE (1 << 9)

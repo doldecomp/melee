@@ -39,6 +39,7 @@
 -Wno-tautological-bitwise-compare
 -Wno-tautological-compare
 -Wno-undefined-internal
+-Wno-uninitialized
 -Wno-unknown-pragmas
 -Wno-unsequenced
 -Wno-unused-but-set-variable

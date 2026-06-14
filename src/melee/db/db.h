@@ -7,7 +7,7 @@
 #include <common_structs.h>
 
 extern char db_build_timestamp[];
-extern int g_debugLevel;
+extern int DbLevel;
 extern u16 db_gameLaunchButtonState;
 extern char** db_bonus_names;
 extern char** db_motionstate_names;

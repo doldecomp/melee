@@ -706,56 +706,63 @@ inline float get_max_bounds_length(CameraBounds* bounds)
     return size;
 }
 
-void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
+static inline void get_pitch_angle(CameraBounds* bounds, Vec3* scroll_offset,
+                                   f32* pitch_angle)
 {
-    u8 _padA[8];
     f32 len;
-    Vec3 scroll_offset;
-    Vec3 scroll_offset2;
-    f32 min_v;
-    f32 min_h;
-    f32 fov_u;
-    f32 fov_d;
-    f32 fov_r;
-    f32 fov_l;
-    f32 tan_fov_u;
-    f32 temp_f28;
-    f32 temp_f29;
-    f32 temp_f31;
-    f32 mid_x;
-    f32 temp_f31_3;
-    f32 temp_f26;
-    f32 var_f28;
-    f32 vert_frustum_dist;
-    f32 pitch_angle;
-    f32 temp_f30;
-    f32 var_f3;
+    f32 pitch_blend;
 
-    Stage_UnkSetVec3TCam_Offset(&scroll_offset);
+    Stage_UnkSetVec3TCam_Offset(scroll_offset);
     len = get_max_bounds_length(bounds);
 
     if (len > cm_803BCCA0.x28) {
-        var_f3 = cm_803BCCA0.x20;
+        pitch_blend = cm_803BCCA0.x20;
     } else if (len < cm_803BCCA0.x24) {
-        var_f3 = cm_803BCCA0.x1C;
+        pitch_blend = cm_803BCCA0.x1C;
     } else {
-        var_f3 =
+        pitch_blend =
             ((cm_803BCCA0.x20 - cm_803BCCA0.x1C) *
              ((len - cm_803BCCA0.x24) / (cm_803BCCA0.x28 - cm_803BCCA0.x24))) +
             cm_803BCCA0.x1C;
     }
 
-    pitch_angle = ((bounds->y_min - scroll_offset.y) +
-                   (bounds->y_max - scroll_offset.y)) *
-                      (0.5f - var_f3) +
-                  scroll_offset.y;
+    *pitch_angle = ((bounds->y_min - scroll_offset->y) +
+                    (bounds->y_max - scroll_offset->y)) *
+                       (0.5f - pitch_blend) +
+                   scroll_offset->y;
     {
         f32 info_x24 = Stage_GetCamInfoX24();
-        pitch_angle += cm_803BCCA0.x8;
-        pitch_angle = -(deg_to_rad * (pitch_angle * info_x24));
+        *pitch_angle += cm_803BCCA0.x8;
+        *pitch_angle = -(deg_to_rad * (*pitch_angle * info_x24));
     }
-    if (pitch_angle > (temp_f30 = deg_to_rad * cm_803BCCA0.xC)) {
-        pitch_angle = temp_f30;
+}
+
+void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
+{
+    u8 _padA[8];
+    Vec3 scroll_offset;
+    f32 pitch_angle;
+    f32 min_v;
+    f32 horiz_frustum_dist;
+    f32 fov_u;
+    f32 fov_d;
+    f32 fov_r;
+    f32 zoom_depth;
+    f32 tan_fov_u;
+    f32 min_h;
+    f32 pan_angle;
+    f32 unused_f31;
+    f32 mid_x;
+    f32 horiz_offset;
+    f32 fov_l;
+    f32 tan_fov_r_aspect;
+    f32 vert_frustum_dist;
+    Vec3 scroll_offset2;
+    f32 vert_offset;
+
+    get_pitch_angle(bounds, &scroll_offset, &pitch_angle);
+    if (pitch_angle > (vert_offset = deg_to_rad * cm_803BCCA0.xC)) {
+        pitch_angle = vert_offset;
     }
 
     min_v = deg_to_rad * cm_803BCCA0.x10;
@@ -763,112 +770,124 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
         pitch_angle = min_v;
     }
     pitch_angle = pitch_angle + Stage_GetCamPanAngleRadians();
-    temp_f29 = pitch_angle;
+    pan_angle = pitch_angle;
 
-    fov_u = (0.5f * (deg_to_rad * transform->fov)) + temp_f29;
-    HSD_ASSERTMSG(0x4FA, fov_u < (f32) M_PI_2, "fov_u<MTXDegToRad(90.0F)");
+    fov_u = (0.5f * (deg_to_rad * transform->fov)) + pan_angle;
+    HSD_ASSERTMSG(0x4FA, fov_u < (f32) M_PI_2,
+                  "fov_u<MTXDegToRad(90.0F)");
 
-    fov_d = (0.5f * (deg_to_rad * transform->fov)) - temp_f29;
-    HSD_ASSERTMSG(0x4FB, fov_d < (f32) M_PI_2, "fov_d<MTXDegToRad(90.0F)");
+    fov_d = (0.5f * (deg_to_rad * transform->fov)) - pan_angle;
+    HSD_ASSERTMSG(0x4FB, fov_d < (f32) M_PI_2,
+                  "fov_d<MTXDegToRad(90.0F)");
 
     tan_fov_u = tanf(fov_u);
     vert_frustum_dist =
         (bounds->y_max - bounds->y_min) / (tan_fov_u + tanf(fov_d));
     Stage_GetCamBoundsBottomOffset();
     Stage_GetCamBoundsTopOffset();
-    temp_f30 = vert_frustum_dist * tanf(temp_f29);
+    vert_offset = vert_frustum_dist * tanf(pan_angle);
     transform->target_interest.y =
-        temp_f30 + (bounds->y_max - vert_frustum_dist * tan_fov_u);
+        vert_offset + (bounds->y_max - vert_frustum_dist * tan_fov_u);
     Stage_UnkSetVec3TCam_Offset(&scroll_offset2);
     mid_x = 0.5f * (bounds->x_min + bounds->x_max);
     {
         f32 info_x20 = Stage_GetCamInfoX20();
-        temp_f30 = deg_to_rad * cm_803BCCA0.x14;
-        temp_f29 = -(deg_to_rad * ((mid_x - scroll_offset2.x) * info_x20));
+        vert_offset = deg_to_rad * cm_803BCCA0.x14;
+        pan_angle = -(deg_to_rad * ((mid_x - scroll_offset2.x) * info_x20));
     }
-    if (temp_f29 > temp_f30) {
-        temp_f29 = temp_f30;
+    if (pan_angle > vert_offset) {
+        pan_angle = vert_offset;
     }
 
     min_h = deg_to_rad * cm_803BCCA0.x18;
-    if (temp_f29 < min_h) {
-        temp_f29 = min_h;
+    if (pan_angle < min_h) {
+        pan_angle = min_h;
     }
 
-    fov_r = (0.5f * (deg_to_rad * transform->fov)) - temp_f29;
-    HSD_ASSERTMSG(0x508, fov_r < (f32) M_PI_2, "fov_r<MTXDegToRad(90.0F)");
-    fov_l = (0.5f * (deg_to_rad * transform->fov)) + temp_f29;
-    HSD_ASSERTMSG(0x509, fov_l < (f32) M_PI_2, "fov_l<MTXDegToRad(90.0F)");
+    fov_r = (0.5f * (deg_to_rad * transform->fov)) - pan_angle;
+    HSD_ASSERTMSG(0x508, fov_r < (f32) M_PI_2,
+                  "fov_r<MTXDegToRad(90.0F)");
+    fov_l = (0.5f * (deg_to_rad * transform->fov)) + pan_angle;
+    HSD_ASSERTMSG(0x509, fov_l < (f32) M_PI_2,
+                  "fov_l<MTXDegToRad(90.0F)");
 
-    temp_f26 = cm_803BCB64.aspect * tanf(fov_r);
+    tan_fov_r_aspect = cm_803BCB64.aspect * tanf(fov_r);
     {
         f32 tan_fov_l = cm_803BCB64.aspect * tanf(fov_l);
-        temp_f28 = (bounds->x_max - bounds->x_min) / (temp_f26 + tan_fov_l);
+        horiz_frustum_dist = (bounds->x_max - bounds->x_min) / (tan_fov_r_aspect + tan_fov_l);
     }
     Stage_GetCamBoundsLeftOffset();
     Stage_GetCamBoundsRightOffset();
-    temp_f31_3 = cm_803BCB64.aspect * (temp_f28 * tanf(temp_f29));
+    horiz_offset = cm_803BCB64.aspect * (horiz_frustum_dist * tanf(pan_angle));
     transform->target_interest.x =
-        -((temp_f28 * temp_f26) - bounds->x_max) - temp_f31_3;
+        -((horiz_frustum_dist * tan_fov_r_aspect) - bounds->x_max) - horiz_offset;
     transform->target_interest.z = 0.0f;
 
-    vert_frustum_dist = MAX(vert_frustum_dist, temp_f28);
-    var_f28 = vert_frustum_dist;
+    vert_frustum_dist = MAX(vert_frustum_dist, horiz_frustum_dist);
+    zoom_depth = vert_frustum_dist;
     if (vert_frustum_dist < Stage_GetCamZoomRate()) {
-        var_f28 = Stage_GetCamZoomRate();
+        zoom_depth = Stage_GetCamZoomRate();
     }
-    if (var_f28 > Stage_GetCamMaxDepth()) {
-        var_f28 = Stage_GetCamMaxDepth();
+    if (zoom_depth > Stage_GetCamMaxDepth()) {
+        zoom_depth = Stage_GetCamMaxDepth();
     }
-    transform->target_position.x = transform->target_interest.x + temp_f31_3;
-    transform->target_position.y = transform->target_interest.y - temp_f30;
-    transform->target_position.z = transform->target_interest.z + var_f28;
+    transform->target_position.x = transform->target_interest.x + horiz_offset;
+    transform->target_position.y = transform->target_interest.y - vert_offset;
+    transform->target_position.z = transform->target_interest.z + zoom_depth;
 }
 
 void Camera_8002A0C0(CameraBounds* bounds, CameraTransformState* state)
 {
-    f32 temp_f28;
-    f32 temp_f27;
-    f32 temp_f29;
-    f32 temp_f29_2;
-    f32 temp_f5;
-    f32 var_f31;
-    f32 var_f30;
-    f32 var_f6;
+    f32 viewport_x_scale;
+    f32 viewport_y_scale;
+    f32 depth_factor_y;
+    f32 depth_factor_x;
+    f32 half_view_height;
+    f32 input_x;
+    f32 input_y;
+    f32 depth_ratio;
+    struct CameraStaticData {
+        CameraModeCallbacks callbacks;
+        HSD_WObjDesc interest;
+        HSD_WObjDesc eyepos;
+        HSD_CameraDescPerspective desc;
+    }* data = (struct CameraStaticData*) &cm_803BCB18;
 
-    var_f31 = cm_80452C68.xA4 * cm_80452C68.xAC;
-    var_f30 = cm_80452C68.xA8 * cm_80452C68.xAC;
-    var_f31 *= 10.0f;
-    var_f30 *= 10.0f;
+    input_x = cm_80452C68.xA4 * cm_80452C68.xAC;
+    input_y = cm_80452C68.xA8 * cm_80452C68.xAC;
+    input_x *= 10.0f;
+    input_y *= 10.0f;
 
     if (gm_8016B41C() != 0) {
-        var_f31 *= cm_803BCCA0.xE8;
-        var_f30 *= cm_803BCCA0.xE8;
+        input_x *= cm_803BCCA0.xE8;
+        input_y *= cm_803BCCA0.xE8;
     }
 
-    var_f31 *= cm_80452C68.x2BC;
-    var_f30 *= cm_80452C68.x2BC;
-    temp_f5 = bounds->z_pos * tanf(0.5f * (0.017453292f * state->fov));
-    temp_f28 = cm_803BCB64.aspect *
-               (temp_f5 / (0.5f * (f32) (cm_803BCB64.viewport.xmax -
-                                         cm_803BCB64.viewport.xmin)));
-    temp_f27 =
-        temp_f5 /
-        (0.5f * (f32) (cm_803BCB64.viewport.ymax - cm_803BCB64.viewport.ymin));
-    temp_f29 = Stage_GetCamZoomRate();
-    temp_f29_2 = Stage_GetCamMaxDepth() - temp_f29;
+    input_x *= cm_80452C68.x2BC;
+    input_y *= cm_80452C68.x2BC;
+    half_view_height = bounds->z_pos * tanf(0.5f * (0.017453292f * state->fov));
+    viewport_x_scale =
+        data->desc.aspect *
+        (half_view_height / (0.5f * (f32) (data->desc.viewport.xmax -
+                              data->desc.viewport.xmin)));
+    viewport_y_scale =
+        half_view_height / (0.5f * (f32) (data->desc.viewport.ymax -
+                             data->desc.viewport.ymin));
+    depth_factor_y = Stage_GetCamZoomRate();
+    depth_factor_x = Stage_GetCamMaxDepth() - depth_factor_y;
 
-    if (temp_f29_2 < 0.001f) {
-        var_f6 = 0.5f;
+    if (depth_factor_x < 0.001f) {
+        depth_ratio = 0.5f;
     } else {
-        var_f6 = (bounds->z_pos - Stage_GetCamZoomRate()) / temp_f29_2;
+        depth_ratio = (bounds->z_pos - Stage_GetCamZoomRate()) / depth_factor_x;
     }
 
-    Camera_80030DE4(
-        ((var_f6 * (cm_803BCCA0.x5C - cm_803BCCA0.x54)) + cm_803BCCA0.x58) *
-            (var_f31 * temp_f28),
-        ((var_f6 * (cm_803BCCA0.x60 - cm_803BCCA0.x58)) + cm_803BCCA0.x54) *
-            (var_f30 * temp_f27));
+    depth_factor_y = (depth_ratio * (cm_803BCCA0.x5C - cm_803BCCA0.x54)) +
+                     cm_803BCCA0.x54;
+    depth_factor_x = (depth_ratio * (cm_803BCCA0.x60 - cm_803BCCA0.x58)) +
+                     cm_803BCCA0.x58;
+    Camera_80030DE4(depth_factor_x * (input_x * viewport_x_scale),
+                    depth_factor_y * (input_y * viewport_y_scale));
     cm_80452C68.xA4 = 0.0f;
     cm_80452C68.xA8 = 0.0f;
 }
@@ -2262,10 +2281,10 @@ void Camera_8002CB0C(CameraBounds* bounds)
 void Camera_8002CDDC(void* unused)
 {
     CameraBounds bounds;
-    CameraBounds bounds2;
-    CameraBounds bounds3;
     Vec3 sp6C;
     Vec3 sp60;
+    CameraBounds bounds2;
+    CameraBounds bounds3;
     Vec3 sp1C;
     Vec3 spC;
     Camera* cam;
@@ -2274,6 +2293,9 @@ void Camera_8002CDDC(void* unused)
     s32 valid;
     Vec3* pos_ptr;
     CmSubject* subject;
+    f32 target_dz;
+    f32 target_dy;
+    f32 target_dx;
     f32 temp_f31;
 
     cam = &cm_80452C68;
@@ -2376,17 +2398,19 @@ after_loop:
         Camera_8002C5B4(&cam->x2D0);
         {
             Vec3* tgt_interest;
+            Vec3* tgt_interest2;
             Vec3* tgt_position;
             Vec3* position;
             CameraUnkGlobals* globals;
             f32 coeff;
 
             tgt_interest = &transform->target_interest;
+            tgt_interest2 = &cam->transform.target_interest;
             cam->transform.target_interest = cam->x308;
             lbVector_Add(tgt_interest, &cam->x314);
 
             tgt_position = &transform->target_position;
-            cam->transform.target_position = *tgt_interest;
+            cam->transform.target_position = *tgt_interest2;
             lbVector_Add(tgt_position, &cam->pause_eye_offset);
 
             position = &transform->position;
@@ -2399,7 +2423,7 @@ after_loop:
             sp6C.z *= coeff;
             lbVector_Add(position, &sp6C);
 
-            lbVector_Diff(tgt_interest, &transform->interest, &sp60);
+            lbVector_Diff(tgt_interest2, &transform->interest, &sp60);
             coeff = globals->x84;
             sp60.x *= coeff;
             sp60.y *= coeff;
@@ -2407,8 +2431,9 @@ after_loop:
             lbVector_Add(&transform->interest, &sp60);
 
             cam->transform.target_fov = globals->x6C;
-            cam->transform.fov +=
-                (cam->transform.target_fov - cam->transform.fov) * globals->x70;
+            cam->transform.fov =
+                (cam->transform.target_fov - cam->transform.fov) * globals->x70 +
+                cam->transform.fov;
         }
     }
     return;
@@ -2416,9 +2441,11 @@ after_loop:
 fallback_path: {
     CameraTransformState* transform_copy;
     CameraUnkGlobals* globals;
+    f32* smooth_ptr;
+    f32* fov_ptr;
     s32 check;
     s16* count_ptr;
-    PAD_STACK(8);
+    PAD_STACK(4);
 
     Camera_80030DF8();
     Camera_800293E0();
@@ -2426,9 +2453,12 @@ fallback_path: {
     Camera_8002958C(&bounds3, transform);
 
     globals = &cm_803BCCA0;
-    cam->transform.target_fov = globals->x40;
-    cam->transform.fov +=
-        (cam->transform.target_fov - cam->transform.fov) * globals->x44;
+    smooth_ptr = &globals->x44;
+    fov_ptr = &globals->x40;
+    cam->transform.target_fov = *fov_ptr;
+    cam->transform.fov =
+        (cam->transform.target_fov - cam->transform.fov) * *smooth_ptr +
+        cam->transform.fov;
     Camera_80029BC4(&bounds3, transform);
 
     if (Camera_80030AF8()) {
@@ -2454,9 +2484,11 @@ check_done:
 
     transform_copy = &cam->transform_copy;
     Camera_8002958C(&bounds2, transform_copy);
-    cam->transform_copy.target_fov = globals->x40;
-    cam->transform_copy.fov +=
-        (cam->transform_copy.target_fov - cam->transform_copy.fov) * globals->x44;
+    cam->transform_copy.target_fov = *fov_ptr;
+    cam->transform_copy.fov =
+        (cam->transform_copy.target_fov - cam->transform_copy.fov) *
+            *smooth_ptr +
+        cam->transform_copy.fov;
     Camera_80029BC4(&bounds2, transform_copy);
 
     if (Camera_80030AF8()) {
@@ -2481,13 +2513,15 @@ check_done2:
     }
 
     if (cam->x2BC == 1.0f) {
-        f32 dx = transform->target_position.x - transform->target_interest.x;
-        f32 dy = transform->target_position.y - transform->target_interest.y;
-        f32 dz = transform->target_position.z - transform->target_interest.z;
-        f32 dx2 = dx * dx;
-        f32 dy2 = dy * dy;
-        f32 dz2 = dz * dz;
-        cam->x2C0 = sqrtf__Ff(dz2 + (dx2 + dy2));
+        target_dx = cam->transform.target_position.x -
+                    cam->transform.target_interest.x;
+        target_dy = cam->transform.target_position.y -
+                    cam->transform.target_interest.y;
+        target_dz = cam->transform.target_position.z -
+                    cam->transform.target_interest.z;
+        cam->x2C0 =
+            sqrtf__Ff((target_dz * target_dz) +
+                      ((target_dx * target_dx) + (target_dy * target_dy)));
     }
 
     Camera_8002B1F8(transform);
@@ -3827,7 +3861,7 @@ void Camera_8002F4D4(s8 arg0, s8 arg1, s32 arg2)
     cm_80452C68.x2D0.angle_left = Stage_GetCamAngleRadiansLeft();
     cm_80452C68.x2D0.unk28 = Stage_GetPauseCamZPosMin();
     cm_80452C68.x2D0.unk2C = Stage_GetPauseCamZPosMax();
-    cm_80452C68.x2D0.callback = (void (*)(Camera_x2D0*)) fn_8002F488;
+    cm_80452C68.x2D0.callback = (void (*)(Camera_x2D0*))(Event) fn_8002F488;
 
     switch (arg2) {
     case 0:
@@ -3990,6 +4024,7 @@ s32 fn_8002F908(HSD_RectF32* arg0)
 
 void Camera_8002F9E4(s8 arg0, s8 arg1)
 {
+    Vec3* target_interest;
     CameraTransformState* transform;
     f32 scale;
 
@@ -4014,7 +4049,7 @@ void Camera_8002F9E4(s8 arg0, s8 arg1)
     scale = cm_80452C68.x32C * cm_803BCCA0.x8C + cm_803BCCA0.x90;
     cm_80452C68.x2D0.unk28 = scale * cm_803BCCA0.x94;
     cm_80452C68.x2D0.unk2C = scale * cm_803BCCA0.x98;
-    cm_80452C68.x2D0.callback = (void (*)(Camera_x2D0*)) fn_8002F908;
+    cm_80452C68.x2D0.callback = (void (*)(Camera_x2D0*))(Event) fn_8002F908;
 
     {
         s8 slot = cm_80452C68.x304;
@@ -4038,9 +4073,10 @@ void Camera_8002F9E4(s8 arg0, s8 arg1)
     Camera_8002C010(0.0f, 0.0f);
 
     transform = &cm_80452C68.transform;
-    transform->target_interest = cm_80452C68.x308;
+    target_interest = &cm_80452C68.transform.target_interest;
+    *target_interest = cm_80452C68.x308;
     lbVector_Add(&transform->target_interest, &cm_80452C68.x314);
-    transform->target_position = transform->target_interest;
+    cm_80452C68.transform.target_position = *target_interest;
     lbVector_Add(&transform->target_position, &cm_80452C68.pause_eye_offset);
 }
 
@@ -4072,6 +4108,7 @@ s32 fn_8002FBA0(HSD_RectF32* arg0)
 void Camera_8002FC7C(s8 arg0, s8 arg1)
 {
     CameraUnkGlobals* new_var;
+    Vec3* target_interest;
     CameraTransformState* transform;
     f32 temp_f2;
     s8* x304_ptr;
@@ -4094,7 +4131,7 @@ void Camera_8002FC7C(s8 arg0, s8 arg1)
     temp_f2 = (cm_80452C68.x32C * (*new_var).x8C) + (*new_var).x90;
     cm_80452C68.x2D0.unk28 = temp_f2 * (*new_var).x94;
     cm_80452C68.x2D0.unk2C = temp_f2 * (*new_var).x98;
-    cm_80452C68.x2D0.callback = (void (*)(Camera_x2D0*)) fn_8002FBA0;
+    cm_80452C68.x2D0.callback = (void (*)(Camera_x2D0*))(Event) fn_8002FBA0;
     x304_ptr = &cm_80452C68.x304;
     x304_check = *x304_ptr;
     cm_80452C68.x314.z = 0.0f;
@@ -4115,9 +4152,10 @@ void Camera_8002FC7C(s8 arg0, s8 arg1)
     Camera_8002BD88(0.0f, 0.0f);
     Camera_8002C010(0.0f, 0.0f);
     transform = &cm_80452C68.transform;
-    transform->target_interest = cm_80452C68.x308;
+    target_interest = &cm_80452C68.transform.target_interest;
+    *target_interest = cm_80452C68.x308;
     lbVector_Add(&transform->target_interest, &cm_80452C68.x314);
-    transform->target_position = transform->target_interest;
+    cm_80452C68.transform.target_position = *target_interest;
     lbVector_Add(&transform->target_position, &cm_80452C68.pause_eye_offset);
 }
 
@@ -4249,10 +4287,10 @@ Vec3* Camera_8003019C(void)
 
 static void fn_800301D0(HSD_GObj* gobj, int arg1)
 {
-    s64 var_r4;
-    s64 var_r0;
-    s64 var_r3;
-    s64 var_r5;
+    s64 prio8_a;
+    s64 prio1_a;
+    s64 prio8_b;
+    s64 prio1_b;
     HSD_CObj* cobj;
     PAD_STACK(56);
 
@@ -4274,81 +4312,81 @@ static void fn_800301D0(HSD_GObj* gobj, int arg1)
 
         Camera_800310A0(2);
         if (cm_80452C68.x398_b2) {
-            var_r4 = 0;
+            prio8_a = 0;
         } else {
-            var_r4 = 8;
+            prio8_a = 8;
         }
         if (cm_80452C68.x398_b4) {
-            var_r0 = 0;
+            prio1_a = 0;
         } else {
-            var_r0 = 1;
+            prio1_a = 1;
         }
-        gobj->gxlink_prios = var_r0 | var_r4;
+        gobj->gxlink_prios = prio1_a | prio8_a;
         HSD_GObj_80390ED0(gobj, 7);
 
         Camera_800310A0(1);
         if (cm_80452C68.x398_b2) {
-            var_r3 = 0;
+            prio8_b = 0;
         } else {
-            var_r3 = 8;
+            prio8_b = 8;
         }
-        gobj->gxlink_prios = var_r3;
+        gobj->gxlink_prios = prio8_b;
         HSD_GObj_80390ED0(gobj, 7);
 
         Camera_800310A0(0);
         if (cm_80452C68.x398_b2) {
-            var_r3 = 0;
+            prio8_b = 0;
         } else {
-            var_r3 = 8;
+            prio8_b = 8;
         }
-        gobj->gxlink_prios = var_r3;
+        gobj->gxlink_prios = prio8_b;
         HSD_GObj_80390ED0(gobj, 3);
 
         lbRefract_80022560();
         if (cm_80452C68.x398_b4) {
-            var_r5 = 0;
+            prio1_b = 0;
         } else {
-            var_r5 = 1;
+            prio1_b = 1;
         }
-        Camera_800311EC(gobj, var_r5);
+        Camera_800311EC(gobj, prio1_b);
 
         Camera_80031074(0);
         if (cm_80452C68.x398_b2) {
-            var_r4 = 0;
+            prio8_a = 0;
         } else {
-            var_r4 = 8;
+            prio8_a = 8;
         }
         if (cm_80452C68.x398_b4) {
-            var_r0 = 0;
+            prio1_a = 0;
         } else {
-            var_r0 = 1;
+            prio1_a = 1;
         }
-        gobj->gxlink_prios = var_r0 | var_r4;
+        gobj->gxlink_prios = prio1_a | prio8_a;
         HSD_GObj_80390ED0(gobj, 4);
 
         if (cm_80452C68.x398_b4) {
-            var_r5 = 0;
+            prio1_b = 0;
         } else {
-            var_r5 = 1;
+            prio1_b = 1;
         }
-        Camera_80031328(gobj, var_r5);
+        Camera_80031328(gobj, prio1_b);
 
         HSD_FogSet(NULL);
         if (cm_80452C68.x398_b3) {
-            var_r3 = 0;
+            prio8_b = 0;
         } else {
-            var_r3 = 0x80;
+            prio8_b = 0x80;
         }
-        gobj->gxlink_prios = var_r3;
+        gobj->gxlink_prios = prio8_b;
         HSD_GObj_80390ED0(gobj, 7);
 
         Camera_800310A0(3);
         if (cm_80452C68.x398_b2) {
-            var_r3 = 0;
+            prio8_b = 0;
         } else {
-            var_r3 = 8;
+            prio8_b = 8;
         }
-        gobj->gxlink_prios = var_r3;
+        gobj->gxlink_prios = prio8_b;
         HSD_GObj_80390ED0(gobj, 7);
 
         if (Camera_80030AC4() != 0) {
@@ -4873,7 +4911,7 @@ void Camera_800311EC(HSD_GObj* gobj, u64 prios)
 
     a = inline_cam_gx_b0();
     b = inline_cam_gx_b4();
-    gobj->gxlink_prios = inline_cam_gx_b1() | b | a;
+    gobj->gxlink_prios = inline_cam_gx_b1() | (b | a);
     HSD_GObj_80390ED0(gobj, 3);
 }
 

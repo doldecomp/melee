@@ -116,10 +116,10 @@ void it_802ADDD0(Item_GObj* item_gobj, s32 visibility)
     switch (item->xDD4_itemVar.foxblaster.set_sfx_var2) {
     case 0:
     case 2:
-        HSD_JObjSetFlagsAll(child_jobj, 0x10);
+        HSD_JObjSetFlagsAll(child_jobj, JOBJ_HIDDEN);
         return;
     case 1:
-        HSD_JObjClearFlagsAll(child_jobj, 0x10);
+        HSD_JObjClearFlagsAll(child_jobj, JOBJ_HIDDEN);
         break;
     }
 }

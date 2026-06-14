@@ -556,10 +556,11 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                         }
                         {
                             FtMoveId msid = fp->motion_id;
-                            if (msid == ftCo_MS_LightThrowDrop) {
+                            if (msid == (FtMoveId) ftCo_MS_LightThrowDrop) {
                                 Item_8026AC74(fp->item_gobj, &vec2, &vec1,
                                               temp_f4);
-                            } else if (msid >= ftCo_MS_LightThrowF4) {
+                            } else if (msid >= (FtMoveId) ftCo_MS_LightThrowF4)
+                            {
                                 if (it_8026B2B4(fp->item_gobj) == 1) {
                                     ftCommon_8007EBAC(fp, 29, 0);
                                 } else {

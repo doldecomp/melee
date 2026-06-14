@@ -1061,7 +1061,7 @@ void grCastle_801CEACC(Ground_GObj* gobj)
     Ground_801C2ED0(jobj, gp->map_id);
     gp->x10_flags.b5 = 1;
     gp->gv.castle10.xC4 = 0;
-    HSD_JObjSetFlagsAll(jobj, 0x10);
+    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     gp->gv.castle10.xC8 = 0;
 
     for (i = 0; i < 5; i++) {
@@ -1110,7 +1110,7 @@ void grCastle_801CEACC(Ground_GObj* gobj)
             HSD_JObjGetTranslationY(gp->gv.castle10.jobjs[1]);
         gp->gv.castle10.x120[1] = 7;
 
-        HSD_JObjSetFlagsAll(Ground_801C3FA4((HSD_GObj*) gobj, 7), 0x10);
+        HSD_JObjSetFlagsAll(Ground_801C3FA4((HSD_GObj*) gobj, 7), JOBJ_HIDDEN);
         gp->gv.castle10.jobjs[2] = NULL;
         gp->gv.castle10.effect_a[2] = NULL;
         gp->gv.castle10.effect_b[2] = NULL;
@@ -1250,7 +1250,7 @@ void grCastle_801CF0F4(Ground_GObj* gobj)
     Ground_801C2ED0(jobj, gp->map_id);
     gp->gv.castle7.xC4 = 0;
     gp->gv.castle7.xD8 = 0;
-    HSD_JObjSetFlagsAll(jobj, 0x10);
+    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     scale = 1.5f * Ground_801C0498();
     HSD_JObjSetScaleX(jobj, scale);
     HSD_JObjSetScaleY(jobj, scale);
@@ -1290,7 +1290,7 @@ void grCastle_801CF308(Ground_GObj* gobj)
     case 1:
         gp->gv.castle.xC8 = -1;
         gp->gv.castle11.xCA = 0;
-        HSD_JObjClearFlagsAll(jobj, 0x10);
+        HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         grAnime_801C86D4(gp->map_id, (HSD_GObj*) gobj, 0);
         gp->gv.castle5.xC4 = 2;
         /* fallthrough */
@@ -1302,9 +1302,9 @@ void grCastle_801CF308(Ground_GObj* gobj)
             s8 val;
             gp->gv.castle.xC8 += 1;
             if (HSD_JObjGetFlags(jobj) & 0x10) {
-                HSD_JObjClearFlagsAll(jobj, 0x10);
+                HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
             } else {
-                HSD_JObjSetFlagsAll(jobj, 0x10);
+                HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             }
             val = ((s8*) &tbl)[gp->gv.castle.xC8];
             if (val != -1) {
@@ -1313,9 +1313,10 @@ void grCastle_801CF308(Ground_GObj* gobj)
                 gp->gv.castle5.xC4 = 3;
                 gp->gv.castle11.xD8 = (u32) grMaterial_801C8CFC(
                     0, 1, gp, jobj, NULL,
-                    (void (*)(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
-                              f32)) fn_801CFAFC,
-                    (void (*)(Item_GObj*, Ground*, HSD_GObj*)) fn_801CFB68);
+                    (void (*)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32))(
+                        Event) fn_801CFAFC,
+                    (void (*)(Item_GObj*, Ground*, HSD_GObj*))(
+                        Event) fn_801CFB68);
                 grMaterial_801C8DE0((Item_GObj*) gp->gv.castle11.xD8, 0.0f,
                                     -1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 4.0f);
                 grMaterial_801C8E08((Item_GObj*) gp->gv.castle11.xD8);
@@ -1346,14 +1347,14 @@ void grCastle_801CF308(Ground_GObj* gobj)
             s16 cnt = gp->gv.castle8.plat[0].state;
             gp->gv.castle8.plat[0].state = cnt - 1;
             if (cnt < 0) {
-                HSD_JObjSetFlagsAll(jobj, 0x10);
+                HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             }
         }
         if ((s16) ((Ground*) ((HSD_GObj*) gp->gv.castle7.xD0)->user_data)
                 ->gv.castle5.xC4 == 0)
         {
             gp->gv.castle5.xC4 = 0;
-            HSD_JObjSetFlagsAll(jobj, 0x10);
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         }
         var_r6 = 1;
         break;
@@ -1557,17 +1558,17 @@ s32 grCastle_801CFBD4(Ground_GObj* gobj, s32 arg1)
                     }
 
                     if (close == 0) {
-                        HSD_JObjClearFlags(jobj, 0x10);
+                        HSD_JObjClearFlags(jobj, JOBJ_HIDDEN);
                         if (eff_a != NULL && eff_b != NULL) {
                             if (gm_8016AE80() != -1 && gm_8016B238() == 0) {
-                                HSD_JObjClearFlags(eff_a, 0x10);
+                                HSD_JObjClearFlags(eff_a, JOBJ_HIDDEN);
                                 HSD_JObjSetScaleY(eff_a, 0.0001f);
-                                HSD_JObjSetFlags(eff_b, 0x10);
+                                HSD_JObjSetFlags(eff_b, JOBJ_HIDDEN);
                                 HSD_JObjSetScaleY(eff_b, 1.0f);
                             } else {
-                                HSD_JObjSetFlags(eff_a, 0x10);
+                                HSD_JObjSetFlags(eff_a, JOBJ_HIDDEN);
                                 HSD_JObjSetScaleY(eff_a, 1.0f);
-                                HSD_JObjClearFlags(eff_b, 0x10);
+                                HSD_JObjClearFlags(eff_b, JOBJ_HIDDEN);
                                 HSD_JObjSetScaleY(eff_b, 0.0001f);
                             }
                         } else {
@@ -1614,9 +1615,10 @@ s32 grCastle_801CFBD4(Ground_GObj* gobj, s32 arg1)
                                     (u32) grMaterial_801C8CFC(
                                         0, 2, gp, target, NULL,
                                         (void (*)(Item_GObj*, Ground*, Vec3*,
-                                                  HSD_GObj*, f32)) cb1[i],
+                                                  HSD_GObj*,
+                                                  f32))(Event) cb1[i],
                                         (void (*)(Item_GObj*, Ground*,
-                                                  HSD_GObj*)) cb2[i]);
+                                                  HSD_GObj*))(Event) cb2[i]);
                                 grMaterial_801C8DE0(
                                     (Item_GObj*) gp->gv.castle10.x10C[i], 0.0f,
                                     0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 8.0f);
@@ -1648,12 +1650,12 @@ s32 grCastle_801CFBD4(Ground_GObj* gobj, s32 arg1)
                         newScale -= grCs_804D6970->x4C;
                         if (newScale <= 0.0001f) {
                             newScale = 0.0001f;
-                            HSD_JObjSetFlags(jobj, 0x10);
+                            HSD_JObjSetFlags(jobj, JOBJ_HIDDEN);
                             if (eff_a != NULL) {
-                                HSD_JObjSetFlags(eff_a, 0x10);
+                                HSD_JObjSetFlags(eff_a, JOBJ_HIDDEN);
                             }
                             if (eff_b != NULL) {
-                                HSD_JObjSetFlags(eff_b, 0x10);
+                                HSD_JObjSetFlags(eff_b, JOBJ_HIDDEN);
                             }
                         }
                         HSD_JObjSetScaleY(target, newScale);
@@ -1701,8 +1703,10 @@ void grCastle_801D02B8(Ground_GObj* gobj)
                         vel.x = 0.0f;
                         vel.y = grCs_804D6970->x50;
                         it_8026F7C8(&pos, &vel, 1);
-                        HSD_JObjSetFlags(gp->gv.castle10.effect_a[i], 0x10);
-                        HSD_JObjClearFlags(gp->gv.castle10.effect_b[i], 0x10);
+                        HSD_JObjSetFlags(gp->gv.castle10.effect_a[i],
+                                         JOBJ_HIDDEN);
+                        HSD_JObjClearFlags(gp->gv.castle10.effect_b[i],
+                                           JOBJ_HIDDEN);
                     }
                 }
             } else {

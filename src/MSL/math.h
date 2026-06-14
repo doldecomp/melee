@@ -48,9 +48,8 @@ enum FloatType {
 
 static inline s32 __fpclassifyf(float x)
 {
-    const s32 exp_mask = 0b01111111100000000000000000000000; // = 0x7F800000
-    const s32 mantissa_mask =
-        0b00000000011111111111111111111111; // = 0x007fffff
+    const s32 exp_mask = 0x7F800000;
+    const s32 mantissa_mask = 0x007FFFFF;
     switch ((*(s32*) &x) & exp_mask) {
     case exp_mask:
         return ((*(s32*) &x) & mantissa_mask) ? FP_NAN : FP_INFINITE;

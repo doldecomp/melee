@@ -75,6 +75,11 @@ typedef struct _DispItem {
 
 typedef DispItem* (*DispCallback)(void*);
 
+typedef union {
+    f32 f;
+    u8 bytes[4];
+} ParticleFloatBytes;
+
 typedef struct {
     /* 0x00 */ void* next;
     /* 0x04 */ s32 type;
@@ -1116,7 +1121,7 @@ void fn_80392E2C(s32 event_type)
 }
 
 ParticleLogEntry hsd_804CEB40[0x100];
-s32 hsd_804CF740[42];
+extern s32 hsd_804CF740[42];
 
 extern s32 hsd_804D78A8;
 extern s32 hsd_804D78AC;
@@ -1249,31 +1254,32 @@ void hsd_80392E80(void)
     }
 }
 
-// @TODO: Currently 99.75% match - BSS relocation encoding difference
 bool hsd_803931A4(s32 exi_channel)
 {
     s32 channel;
+    s32* channel_flags;
     PAD_STACK(16);
 
-    hsd_804CF740[0] = 0;
-    hsd_804CF740[1] = 0;
-    hsd_804CF740[2] = 0;
-    hsd_804CF740[3] = 0;
-    hsd_804CF740[4] = 0;
-    hsd_804CF740[5] = 0;
-    hsd_804CF740[6] = 0;
-    hsd_804CF740[7] = 0;
-    hsd_804CF740[8] = 0;
-    hsd_804CF740[9] = 0;
-    hsd_804CF740[10] = 0;
-    hsd_804CF740[11] = 0;
-    hsd_804CF740[12] = 0;
-    hsd_804CF740[13] = 0;
-    hsd_804CF740[14] = 0;
-    hsd_804CF740[15] = 0;
-    hsd_804CF740[0] = 1;
-    hsd_804CF740[8] = 1;
-    hsd_804CF740[15] = 1;
+    channel_flags = (s32*) hsd_804CF740;
+    channel_flags[0] = 0;
+    channel_flags[1] = 0;
+    channel_flags[2] = 0;
+    channel_flags[3] = 0;
+    channel_flags[4] = 0;
+    channel_flags[5] = 0;
+    channel_flags[6] = 0;
+    channel_flags[7] = 0;
+    channel_flags[8] = 0;
+    channel_flags[9] = 0;
+    channel_flags[10] = 0;
+    channel_flags[11] = 0;
+    channel_flags[12] = 0;
+    channel_flags[13] = 0;
+    channel_flags[14] = 0;
+    channel_flags[15] = 0;
+    channel_flags[0] = 1;
+    channel_flags[8] = 1;
+    channel_flags[15] = 1;
 
     channel = exi_channel;
 
@@ -1303,6 +1309,8 @@ bool hsd_803931A4(s32 exi_channel)
     OSReport("EXI initialized (EXI_%d)\n", channel);
     return 1;
 }
+
+s32 hsd_804CF740[42];
 
 void fn_803932D0(s32 type, u32 flags, s32 value)
 {
@@ -1835,6 +1843,7 @@ void hsd_80393EF4(int col_delta, int row_delta)
 #pragma pop
 
 #pragma push
+#pragma pool_data off
 #pragma dont_inline on
 u8 hsd_80394068(void)
 {
@@ -2659,21 +2668,22 @@ extern u8 lbl_8040AB20[];
 extern u8 lbl_8040B8AC[];
 extern u8 lbl_8040B904[];
 
-// @TODO: Currently 99.78% match - minor addressing difference
 void hsd_80395644(void)
 {
+    struct ParticleScreenState* sp =
+        (struct ParticleScreenState*) &hsd_804CF810;
     void* saved;
-    void** p = &hsd_804CF810.x50;
+    void** p = &sp->x50;
     s32 val_x20;
     s32 val_x1C;
 
     PAD_STACK(16);
     saved = *p;
     *p = lbl_8040AB20;
-    val_x20 = hsd_804CF810.x20;
-    val_x1C = hsd_804CF810.x1C;
-    hsd_804CF810.x4 = (val_x20 - 21) * 11 + 20;
-    hsd_804CF810.x8 = (hsd_804CF810.x40 - 40) - (val_x1C + 1) * 14;
+    val_x20 = sp->x20;
+    val_x1C = sp->x1C;
+    sp->x4 = (val_x20 - 21) * 11 + 20;
+    sp->x8 = (sp->x40 - 40) - (val_x1C + 1) * 14;
     if (hsd_804D78C8 >= 1) {
         hsd_80394434(lbl_8040B8AC);
     }
@@ -2969,8 +2979,7 @@ static inline void ps_remove_node(struct ParticleScreenState* sp, void* node)
     sp->x0_b5 = 1;
 }
 
-// @TODO: Currently 80.89% match - .bss.0 relocation issue affects register
-// allocation
+// @TODO: Currently 99.38% match - remaining register allocation differences
 s32 hsd_80395D88(void* data)
 {
     char* msg = (char*) lbl_8040AB00;
@@ -3006,21 +3015,21 @@ s32 hsd_80395D88(void* data)
             ps_remove_node(sp, data);
             return 0;
         case 6: {
+            s32 i;
             OSContext* ctx;
             OSContext** ctx_ptr;
+            u32* ctx_words;
             s32 saved;
-            s32 i;
 
-            ctx_ptr = &sp->xD4;
-            if (*ctx_ptr != NULL) {
+            if (*(ctx_ptr = &sp->xD4) != NULL) {
                 saved = hsd_80393D2C(1);
-                ctx = *ctx_ptr;
+                ctx_words = (u32*) *ctx_ptr;
                 OSReport(msg + 0x728);
                 i = 0;
                 do {
-                    OSReport(msg + 0x760, i, ((u32*) ctx)[i], ((u32*) ctx)[i],
-                             i + 0x10, ((u32*) ctx)[i + 0x10],
-                             ((u32*) ctx)[i + 0x10]);
+                    OSReport(msg + 0x760, i, ctx_words[i], ctx_words[i],
+                             i + 0x10, ctx_words[i + 0x10],
+                             ctx_words[i + 0x10]);
                     i++;
                 } while (i < 0x10);
                 hsd_80394950(*ctx_ptr);
@@ -3048,13 +3057,15 @@ s32 hsd_80395D88(void* data)
             hsd_80394E8C(lbl_8040BEC4);
             return 1;
         case 8: {
-            ExcptNode* cur = sp->xD0;
+            void** head_ptr;
+            ExcptNode* cur;
+            cur = *(head_ptr = &sp->xD0);
             while (cur != NULL) {
                 ExcptNode* next = cur->next;
                 cur->next = NULL;
                 cur = next;
             }
-            sp->xD0 = NULL;
+            *head_ptr = NULL;
             sp->x0_b5 = 1;
             return 1;
         }
@@ -3352,6 +3363,7 @@ void hsd_80396884(void)
 s32 hsd_80396A20(void* data)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
+    ExcptNode* node = data;
     u32 val = lbl_8040BC3C.x10;
     s32 shift = 24 - (lbl_8040BC3C.x14 * 4);
     u32 bit = 1;
@@ -3387,17 +3399,17 @@ s32 hsd_80396A20(void* data)
             lbl_8040BC3C.x10 = val & ~mask;
             return 1;
         case 0x200:
-            ps_remove_node(sp, data);
+            ps_remove_node(sp, node);
             return 1;
         case 0x1000: {
             extern u8 lbl_8040BD74[];
-            data = (ExcptNode*) lbl_8040BD74;
-            if (data != NULL) {
-                fn_80394DF4(data);
-                ((ExcptNode*) data)->next = sp->xD0;
-                sp->xD0 = data;
-                if (((ExcptNode*) data)->callback != NULL) {
-                    ((ExcptNode*) data)->callback(data);
+            node = (ExcptNode*) lbl_8040BD74;
+            if (node != NULL) {
+                fn_80394DF4(node);
+                node->next = sp->xD0;
+                sp->xD0 = node;
+                if (node->callback != NULL) {
+                    node->callback(node);
                 }
                 sp->x0_b5 = 1;
             }
@@ -4988,61 +5000,64 @@ void hsd_80398F8C(HSD_Particle* pp, f32 angle)
     f32 vx = pp->vel.x;
     f32 vz = pp->vel.z;
     f32 vy = pp->vel.y;
-    f32 azimuth;
     f32 sin_a, cos_a;
     f32 sin_e, cos_e;
-    f32 mag_sq;
     f32 rand_angle;
+    f32 cos_rand, sin_rand;
     f32 sin_angle, cos_angle;
-    f32 sin_rand, cos_rand;
+    f32 abs_z;
     f32 temp;
-    PAD_STACK(24);
+    f32 abs_temp;
+    PAD_STACK(16);
 
-    temp = vz;
-    *(s32*) &temp &= 0x7FFFFFFF;
-    if (temp < 1.1754944e-38F) {
-        if (vy >= 0.0F) {
-            azimuth = 1.5707964F;
+    {
+        f32 azimuth;
+
+        abs_z = vz;
+        *(s32*) &abs_z &= 0x7FFFFFFF;
+        if (abs_z < 1.1754944e-38F) {
+            if (vy >= 0.0F) {
+                azimuth = 1.5707964F;
+            } else {
+                azimuth = -1.5707964F;
+            }
         } else {
-            azimuth = -1.5707964F;
+            azimuth = atan2f(vy, vz);
         }
-    } else {
-        azimuth = atan2f(vy, vz);
+
+        sin_a = sinf(azimuth);
+        cos_a = cosf(azimuth);
     }
 
-    sin_a = sinf(azimuth);
-    cos_a = cosf(azimuth);
+    {
+        f32 azimuth;
 
-    temp = vy * sin_a + vz * cos_a;
-    *(s32*) &temp &= 0x7FFFFFFF;
-    if (temp < 1.1754944e-38F) {
-        if (vx >= 0.0F) {
-            azimuth = 1.5707964F;
+        temp = vy * sin_a + vz * cos_a;
+        abs_temp = temp;
+        *(s32*) &abs_temp &= 0x7FFFFFFF;
+        if (abs_temp < 1.1754944e-38F) {
+            if (vx >= 0.0F) {
+                azimuth = 1.5707964F;
+            } else {
+                azimuth = -1.5707964F;
+            }
         } else {
-            azimuth = -1.5707964F;
+            azimuth = atan2f(vx, temp);
         }
-    } else {
-        azimuth = atan2f(vx, vy * sin_a + vz * cos_a);
+
+        sin_e = sinf(azimuth);
+        cos_e = cosf(azimuth);
     }
 
-    sin_e = sinf(azimuth);
-    cos_e = cosf(azimuth);
-
-    mag_sq = vz * vz + (vx * vx + vy * vy);
-    if (mag_sq > 0.0F) {
-        f64 x = __frsqrte((f64) mag_sq);
-        x = 0.5 * x * -(((f64) mag_sq * (x * x)) - 3.0);
-        x = 0.5 * x * -(((f64) mag_sq * (x * x)) - 3.0);
-        x = 0.5 * x * -(((f64) mag_sq * (x * x)) - 3.0);
-        mag_sq = (f32) ((f64) mag_sq * x);
-    }
+    vx = (vx * vx + vy * vy) + vz * vz;
+    vx = sqrtf(vx);
 
     rand_angle = (f32) (3.141592653589793 * HSD_Randf() * 2.0);
 
-    sin_angle = mag_sq * sinf(angle);
+    sin_angle = vx * sinf(angle);
     cos_rand = sin_angle * cosf(rand_angle);
     sin_rand = sin_angle * sinf(rand_angle);
-    cos_angle = mag_sq * cosf(angle);
+    cos_angle = vx * cosf(angle);
 
     pp->vel.x = cos_rand * cos_e + cos_angle * sin_e;
     pp->vel.y = cos_e * (cos_angle * sin_a) +
@@ -5100,6 +5115,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
     PAD_STACK(464);
 
 #define fval (*(f32*) &hsd_804D78D0)
+#define fbytes (*(ParticleFloatBytes*) &hsd_804D78D0).bytes
 
     /* Early exit: bit 11 of kind set */
     if (pp->kind & 0x800) {
@@ -5720,21 +5736,26 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
             case 0xA8:
                 /* Position random offset */
-                ((u8*) &fval)[0] = *pc++;
-                ((u8*) &fval)[1] = *pc++;
-                ((u8*) &fval)[2] = *pc++;
-                ((u8*) &fval)[3] = *pc++;
-                pp->pos.x += 2.0F * fval * HSD_Randf() - fval;
-                ((u8*) &fval)[0] = *pc++;
-                ((u8*) &fval)[1] = *pc++;
-                ((u8*) &fval)[2] = *pc++;
-                ((u8*) &fval)[3] = *pc++;
-                pp->pos.y += 2.0F * fval * HSD_Randf() - fval;
-                ((u8*) &fval)[0] = *pc++;
-                ((u8*) &fval)[1] = *pc++;
-                ((u8*) &fval)[2] = *pc++;
-                ((u8*) &fval)[3] = *pc++;
-                pp->pos.z += 2.0F * fval * HSD_Randf() - fval;
+                {
+                    u8* pc2;
+                    fbytes[0] = *pc++;
+                    fbytes[1] = *pc++;
+                    fbytes[2] = *pc++;
+                    fbytes[3] = *pc++;
+                    pp->pos.x += 2.0F * fval * HSD_Randf() - fval;
+                    pc2 = pc + 4;
+                    fbytes[0] = pc[0];
+                    fbytes[1] = pc[1];
+                    fbytes[2] = pc[2];
+                    fbytes[3] = pc[3];
+                    pp->pos.y += 2.0F * fval * HSD_Randf() - fval;
+                    pc = pc2 + 4;
+                    fbytes[0] = pc2[0];
+                    fbytes[1] = pc2[1];
+                    fbytes[2] = pc2[2];
+                    fbytes[3] = pc2[3];
+                    pp->pos.z += 2.0F * fval * HSD_Randf() - fval;
+                }
                 break;
 
             case 0xA9:
@@ -7320,6 +7341,7 @@ do_life:
     }
 
     return pp->next;
+#undef fbytes
 #undef fval
 }
 
@@ -8502,7 +8524,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         default: /* shape > 8 */
         {
             void (*callback)(HSD_Generator*, Mtx);
-            callback = (void (*)(HSD_Generator*, Mtx)) gen->callback;
+            callback = (void (*)(HSD_Generator*, Mtx))(Event) gen->callback;
             if (callback != NULL) {
                 callback(gen, rot_mtx);
             }

@@ -262,7 +262,7 @@ void grHeal_8021F180(Ground_GObj* gobj)
         }
     }
 
-    mpJointSetCb1(0, gp, (mpLib_Callback) fn_8021F4C0);
+    mpJointSetCb1(0, gp, (mpLib_Callback) (Event) fn_8021F4C0);
     gp->gv.flatzone2.xC4 = 0;
 }
 
@@ -322,7 +322,7 @@ void grHeal_8021F4E8(s32 arg0, HSD_JObj* parent_jobj)
     jobj = GET_JOBJ(ground);
     child = HSD_JObjGetChild(jobj);
     HSD_JObjReparent(child, parent_jobj);
-    HSD_JObjClearFlagsAll(child, 0x10U);
+    HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
     Ground_801C4A08(ground);
 }
 

@@ -330,7 +330,7 @@ void mn_8022FB88(u8 arg0, void* arg1)
         var_r27 = 0;
         var_r29 = (u8*) &sp14;
         do {
-            HSD_JObjSetFlagsAll(data->x58[*var_r29], 0x10U);
+            HSD_JObjSetFlagsAll(data->x58[*var_r29], JOBJ_HIDDEN);
             var_r27 += 1;
             var_r29 += 1;
         } while (var_r27 < 4);
@@ -342,7 +342,7 @@ void mn_8022FB88(u8 arg0, void* arg1)
     var_r28 = 0;
     var_r29_2 = (u8*) &sp14;
     do {
-        HSD_JObjClearFlagsAll(data->x58[*var_r29_2], 0x10U);
+        HSD_JObjClearFlagsAll(data->x58[*var_r29_2], JOBJ_HIDDEN);
         var_r28 += 1;
         var_r29_2 += 1;
     } while (var_r28 < 4);
@@ -383,19 +383,19 @@ void mn_8022FD18(u8 arg0)
     sp10 = mn_804DBE0C;
     if (arg0 != 0) {
         for (i = 0, ptr = (u8*) &sp14; i < 2; i++) {
-            HSD_JObjSetFlagsAll(data->x58[ptr[i]], 0x10U);
+            HSD_JObjSetFlagsAll(data->x58[ptr[i]], JOBJ_HIDDEN);
         }
         for (i = 0, ptr = (u8*) &spC; i < 5; i++) {
-            HSD_JObjSetFlagsAll(data->x58[ptr[i]], 0x10U);
+            HSD_JObjSetFlagsAll(data->x58[ptr[i]], JOBJ_HIDDEN);
         }
         mn_8022FB88(data->x3, data);
         return;
     }
     for (i = 0, ptr = (u8*) &sp14; i < 2; i++) {
-        HSD_JObjSetFlagsAll(data->x58[ptr[i]], 0x10U);
+        HSD_JObjSetFlagsAll(data->x58[ptr[i]], JOBJ_HIDDEN);
     }
     for (i = 0, ptr = (u8*) &spC; i < 5; i++) {
-        HSD_JObjSetFlagsAll(data->x58[ptr[i]], 0x10U);
+        HSD_JObjSetFlagsAll(data->x58[ptr[i]], JOBJ_HIDDEN);
     }
     val = data->x9;
     jobj = data->x58[7];
@@ -593,8 +593,8 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
     if (arg1 != 0) {
         selected = data->x1;
         lb_8001204C(option_roots[selected], roots, indices, 0x11);
-        HSD_JObjSetFlagsAll(roots[16], 0x10U);
-        HSD_JObjSetFlagsAll(roots[13], 0x10U);
+        HSD_JObjSetFlagsAll(roots[16], JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(roots[13], JOBJ_HIDDEN);
         jobj = roots[2];
         if ((u8) (selected - 5) <= 1) {
             HSD_JObjReqAnimAll(jobj, *(f32*) (base + 0x78));
@@ -611,14 +611,14 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
             HSD_JObjReqAnim(jobj, *(f32*) (base + 0x10 + selected * 8));
         }
         HSD_JObjAnim(jobj);
-        HSD_JObjSetFlagsAll(roots[8], 0x10U);
+        HSD_JObjSetFlagsAll(roots[8], JOBJ_HIDDEN);
 
         hovered = mn_804A04F0.hovered_selection;
         lb_8001204C(option_roots[hovered], roots, indices, 0x11);
-        HSD_JObjClearFlagsAll(roots[16], 0x10U);
+        HSD_JObjClearFlagsAll(roots[16], JOBJ_HIDDEN);
         HSD_JObjReqAnimAll(roots[16], *(f32*) (base + 0x48));
         if (hovered != 5 && hovered != 6) {
-            HSD_JObjClearFlagsAll(roots[13], 0x10U);
+            HSD_JObjClearFlagsAll(roots[13], JOBJ_HIDDEN);
             HSD_JObjReqAnimAll(roots[13], *(f32*) (base + 0x54));
             HSD_JObjReqAnimAll(roots[2], *(f32*) (base + 0x6C));
             HSD_JObjAnimAll(roots[2]);
@@ -636,7 +636,7 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
         }
         HSD_JObjAnim(roots[7]);
         if ((u8) (hovered - 5) <= 1) {
-            HSD_JObjClearFlagsAll(roots[8], 0x10U);
+            HSD_JObjClearFlagsAll(roots[8], JOBJ_HIDDEN);
             HSD_JObjReqAnimAll(roots[8], *(f32*) (base + 0x90));
             HSD_JObjAnimAll(roots[8]);
         }
@@ -1027,10 +1027,10 @@ HSD_GObj* mn_80230E38(int arg0)
         }
         HSD_JObjAnim(roots[7]);
         if (hovered != i) {
-            HSD_JObjSetFlagsAll(roots[16], 0x10U);
+            HSD_JObjSetFlagsAll(roots[16], JOBJ_HIDDEN);
         }
         if (hovered != i || (u32) (i - 5) <= 1U) {
-            HSD_JObjSetFlagsAll(roots[13], 0x10U);
+            HSD_JObjSetFlagsAll(roots[13], JOBJ_HIDDEN);
         }
         if ((u32) (i - 5) <= 1U) {
             settings =
@@ -1044,7 +1044,7 @@ HSD_GObj* mn_80230E38(int arg0)
         HSD_JObjReqAnimAll(roots[2], settings->start_frame);
         HSD_JObjAnimAll(roots[2]);
         if (hovered != i || (i != 5 && i != 6)) {
-            HSD_JObjSetFlagsAll(roots[8], 0x10U);
+            HSD_JObjSetFlagsAll(roots[8], JOBJ_HIDDEN);
         }
         HSD_JObjAddChild(data->xC[indices[visible]], jobj);
 

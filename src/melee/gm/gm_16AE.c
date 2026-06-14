@@ -552,7 +552,7 @@ void fn_8016B918(void)
             continue;
         }
         temp_r3_2 = Player_GetPlayerId(i);
-        if (g_debugLevel >= 3) {
+        if (DbLevel >= 3) {
             temp_r3_3 = &HSD_PadCopyStatus[(u8) temp_r3_2];
             if ((temp_r3_3->trigger & 8) && (temp_r3_3->button & HSD_PAD_X)) {
                 var_r0_2 = true;
@@ -616,7 +616,7 @@ int fn_8016BC74(void)
         temp_r3 = Player_GetPlayerId(0);
         temp_r4 = &HSD_PadCopyStatus[(u8) temp_r3];
         if (temp_r4->err == 0) {
-            if (g_debugLevel >= 3) {
+            if (DbLevel >= 3) {
                 if ((temp_r4->trigger & 8) && (temp_r4->button & HSD_PAD_X)) {
                     var_r0_2 = 1;
                 } else {
@@ -633,7 +633,7 @@ int fn_8016BC74(void)
         for (var_r30 = 0; var_r30 < PAD_MAX_CONTROLLERS; var_r30++) {
             temp_r3_3 = &HSD_PadCopyStatus[(u8) var_r30];
             if (temp_r3_3->err == 0) {
-                if (g_debugLevel >= 3) {
+                if (DbLevel >= 3) {
                     if ((temp_r3_3->trigger & 8) &&
                         (temp_r3_3->button & HSD_PAD_X))
                     {
@@ -672,7 +672,7 @@ int gm_8016BE80(void)
     for (var_r30 = 0; var_r30 < PAD_MAX_CONTROLLERS; var_r30++) {
         temp_r3 = &HSD_PadCopyStatus[(u8) var_r30];
         if (temp_r3->err == 0) {
-            if (g_debugLevel >= 3) {
+            if (DbLevel >= 3) {
                 if ((temp_r3->trigger & 8) && (temp_r3->button & HSD_PAD_X)) {
                     var_r0 = 1;
                 } else {
@@ -1131,7 +1131,7 @@ static inline int fn_8016CBE8_inline(void)
     for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
         pad = &HSD_PadCopyStatus[(u8) i];
         if (pad->err == 0) {
-            if (g_debugLevel >= 3) {
+            if (DbLevel >= 3) {
                 if ((pad->trigger & 8) && (pad->button & HSD_PAD_X)) {
                     var_r0 = true;
                 } else {
@@ -1246,7 +1246,7 @@ void fn_8016CF4C(int arg0, int arg1)
 {
     gm_801A10FC(arg0);
     lbl_8046B6A0.match_result = arg1;
-    if (arg1 != 8 && g_debugLevel >= 3) {
+    if (arg1 != 8 && DbLevel >= 3) {
         gm_801A4674(1);
         if (lbl_8046B6A0.x24C8.xD > 1) {
             lbl_8046B6A0.unk_30 = lbl_8046B6A0.x24C8.xD - 1;
@@ -1271,7 +1271,7 @@ static inline void fn_8016CFE0_inline(void)
     lbl_8046B6A0_t* tmp;
     int i;
 
-    if (g_debugLevel >= 3 && gm_801A46B8(0) != 0 &&
+    if (DbLevel >= 3 && gm_801A46B8(0) != 0 &&
         (HSD_PadCopyStatus->button & 0x1160) == 0x1160)
     {
         fn_8016C7F0();
@@ -1302,7 +1302,7 @@ void fn_8016CFE0(void)
     fn_8016758C();
     if (gm_801A45E8(1) != 0) {
         var_r4 = fn_8016CBE8_inline();
-        if (g_debugLevel >= 3) {
+        if (DbLevel >= 3) {
             var_r29 = 0x160;
         } else {
             var_r29 = 0x1160;

@@ -636,7 +636,7 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
                     }
 
                     HSD_ASSERT(901, jobj);
-                    HSD_JObjClearFlagsAll(jobj, 16);
+                    HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
 
                     HSD_JObjSetRotationX(jobj, 0.0F);
                     HSD_JObjSetRotationY(jobj, 0.0F);
@@ -1042,7 +1042,7 @@ void grBigBlueRoute_8020DAB4(HSD_JObj** jobjs, f32 scale, int count)
             jobj = HSD_JObjGetNext(jobj);
         }
 
-        HSD_JObjClearFlagsAll(jobj, 16);
+        HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
 
         HSD_JObjSetScaleX(jobj, scale);
         HSD_JObjSetScaleY(jobj, scale);
@@ -1054,12 +1054,10 @@ void grBigBlueRoute_8020DAB4(HSD_JObj** jobjs, f32 scale, int count)
     Ground_801C4A08(gobj);
 }
 
-void grBigBlueRoute_8020DD64(Vec3* v)
+f32 grBigBlueRoute_8020DD64(Vec3* v)
 {
-    f32 x;
-
-    lbVector_Normalize(v);
-    x = v->x;
+    f32 mag = lbVector_Normalize(v);
+    f32 x = v->x;
 
     if (x > 1.0F) {
         v->x = 1.0F;
@@ -1086,6 +1084,8 @@ void grBigBlueRoute_8020DD64(Vec3* v)
         v->y = 0.0F;
         v->x = 0.0F;
     }
+
+    return mag;
 }
 
 DynamicModelDesc* grBigBlueRoute_8020DE48(void)

@@ -268,7 +268,7 @@ void fn_8025A310(HSD_GObj* gobj)
 
     jobj = gobj->hsd_obj;
     if (mnStageSel_804D6CAF != 0) {
-        HSD_JObjSetFlags(jobj, 0x10);
+        HSD_JObjSetFlags(jobj, JOBJ_HIDDEN);
         return;
     }
     HSD_JObjGetTranslation(jobj, &sp1C);
@@ -503,7 +503,7 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
             mnStageSel_803F06D0[i * 2].x0 = temp_r22_6->child->next;
             switch (mnStageSel_803F06D0[i * 2].x8) {
             case 0:
-                HSD_JObjSetFlags(mnStageSel_803F06D0[i * 2].x0, 0x10);
+                HSD_JObjSetFlags(mnStageSel_803F06D0[i * 2].x0, JOBJ_HIDDEN);
                 break;
             case 1:
                 HSD_JObjReqAnimAllByFlags(mnStageSel_803F06D0[i * 2].x0, 0x10,
@@ -518,7 +518,8 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
             mnStageSel_803F06D0[i * 2 + 1].x0 = temp_r22_6->child;
             switch (mnStageSel_803F06D0[i * 2 + 1].x8) {
             case 0:
-                HSD_JObjSetFlags(mnStageSel_803F06D0[i * 2 + 1].x0, 0x10);
+                HSD_JObjSetFlags(mnStageSel_803F06D0[i * 2 + 1].x0,
+                                 JOBJ_HIDDEN);
                 break;
             case 1:
                 HSD_JObjReqAnimAllByFlags(mnStageSel_803F06D0[i * 2 + 1].x0,
@@ -555,7 +556,7 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
                 mnStageSel_803F06D0[i + 13].x8 = 0;
                 /* fallthrough */
             case 0:
-                HSD_JObjSetFlagsAll(temp_r23_3, 0x10);
+                HSD_JObjSetFlagsAll(temp_r23_3, JOBJ_HIDDEN);
                 break;
             default:
                 temp_r22_7 = mnStageSel_803F06D0[i + 13].x9 - 0x16;
@@ -610,7 +611,7 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
                 mnStageSel_803F06D0[i + 5].x8 = 0;
                 /* fallthrough */
             case 0:
-                HSD_JObjSetFlagsAll(temp_r23_6, 0x10);
+                HSD_JObjSetFlagsAll(temp_r23_6, JOBJ_HIDDEN);
                 break;
             default:
                 temp_r22_9 = mnStageSel_803F06D0[i + 5].x9 - 0x14;

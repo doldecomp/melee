@@ -128,9 +128,7 @@ grZakoGenerator_Data* grZakoGenerator_801CA67C(void)
     int i;
     PAD_STACK(8);
 
-    if (data == NULL) {
-        __assert("grzakogenerator.c", 0x52, "pointp");
-    }
+    HSD_ASSERTMSG(0x52, data, "pointp");
 
     for (i = 0; i < 80; i++) {
         data->entries[i].x0 = i + 0x20;

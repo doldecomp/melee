@@ -553,7 +553,7 @@ s32 un_8031305C(void* a, TyListState* state, s8 movedFlag)
                 state->x29E = (u8) (state->x29E - 1);
             }
             if ((s8) state->x29E == 0) {
-                HSD_JObjClearFlagsAll(state->x288, 0x10U);
+                HSD_JObjClearFlagsAll(state->x288, JOBJ_HIDDEN);
                 un_80312904(state->x278, (s8) state->x278->x24);
                 if (HSD_PadCopyStatus->button & 0xC00) {
                     state->pad_2A0 = 5;
@@ -932,7 +932,7 @@ void fn_80313BD8(HSD_GObj* gobj)
 
     if (un_GetTrophyTotal() > 10) {
         if (un_80305C44() & 0x400) {
-            HSD_JObjSetFlagsAll(state->x288, 0x10);
+            HSD_JObjSetFlagsAll(state->x288, JOBJ_HIDDEN);
             if (state->x274->idx == 0 ||
                 state->x274->links[0]->idx + 9 < un_GetTrophyTotal())
             {
@@ -945,7 +945,7 @@ void fn_80313BD8(HSD_GObj* gobj)
             return;
         }
         if (un_80305C44() & 0x800) {
-            HSD_JObjSetFlagsAll(state->x288, 0x10);
+            HSD_JObjSetFlagsAll(state->x288, JOBJ_HIDDEN);
             if (state->x270->idx == un_GetTrophyTotal() - 1 ||
                 state->x270->links[1]->idx - 9 > 0)
             {
@@ -1015,7 +1015,7 @@ void fn_80313BD8(HSD_GObj* gobj)
     for (i = 0; i < (s8) state->entryCount; i++, p++) {
         un_80312904(p, state->entryCount);
     }
-    HSD_JObjSetFlagsAll(state->x288, 0x10);
+    HSD_JObjSetFlagsAll(state->x288, JOBJ_HIDDEN);
     if (f31 > 0.0f) {
         un_80313358(state, 1, 6, 0);
     } else {
@@ -1106,7 +1106,8 @@ void un_8031457C(void)
         entry->x0 = GObj_Create(1, 2, 0);
         cobj = lb_80013B14(desc);
         HSD_GObjObject_80390A70(entry->x0, HSD_GObj_804D784B, cobj);
-        GObj_SetupGXLinkMax(entry->x0, (GObj_RenderFunc) un_80306954, 0);
+        GObj_SetupGXLinkMax(entry->x0, (GObj_RenderFunc) (Event) un_80306954,
+                            0);
         entry->x0->gxlink_prios = 0x9010000000000000ULL;
         HSD_GObj_SetupProc(entry->x0, fn_8031438C, 0);
         HSD_GObj_80390CD4(entry->x0);
@@ -1117,7 +1118,8 @@ void un_8031457C(void)
         entry->x4 = GObj_Create(1, 2, 0);
         cobj = lb_80013B14(desc);
         HSD_GObjObject_80390A70(entry->x4, HSD_GObj_804D784B, cobj);
-        GObj_SetupGXLinkMax(entry->x4, (GObj_RenderFunc) fn_80314504, 0);
+        GObj_SetupGXLinkMax(entry->x4, (GObj_RenderFunc) (Event) fn_80314504,
+                            0);
         entry->x4->gxlink_prios = 0x0210000000000000ULL;
         interest.x = 1.1f;
         interest.y = -0.24f;

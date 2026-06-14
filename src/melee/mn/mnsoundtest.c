@@ -264,14 +264,14 @@ void mnSoundTest_8024AA70(HSD_GObj* arg0, u8 arg1)
         mn_8022EA08((char*) &string, new_var->unk4);
         temp_r3_2->default_alignment = 1;
         HSD_SisLib_803A6B98(temp_r3_2, 0.0f, 0.0f, string);
-        HSD_JObjClearFlagsAll(sp38, 0x10U);
+        HSD_JObjClearFlagsAll(sp38, JOBJ_HIDDEN);
     } else {
         temp_r3_4 = user_data->unk1C;
         if (temp_r3_4 != NULL) {
             HSD_SisLib_803A5CC4(temp_r3_4);
             user_data->unk1C = NULL;
         }
-        HSD_JObjSetFlagsAll(sp38, 0x10U);
+        HSD_JObjSetFlagsAll(sp38, JOBJ_HIDDEN);
     }
     HSD_JObjReqAnimAll(sp34, (f32) (arg1 == 1));
     mn_8022F3D8(sp34, 0xFFU, 0x420);
@@ -743,8 +743,8 @@ void fn_8024BAF0(HSD_GObj* arg0)
         mn_8022EFD8(sp14, &vec_0);
         if (temp_f31 == vec_0.end_frame) {
             HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
-            proc2 = HSD_GObj_SetupProc(arg0, (void (*)(HSD_GObj*)) fn_8024B8B4,
-                                       0U);
+            proc2 = HSD_GObj_SetupProc(
+                arg0, (void (*)(HSD_GObj*))(Event) fn_8024B8B4, 0U);
             proc2->flags_3 = HSD_GObj_804D783C;
             mnSoundTest_8024A958((Soundtest_GObj*) arg0);
             mnSoundTest_804D6C44 = 0;
@@ -754,23 +754,28 @@ void fn_8024BAF0(HSD_GObj* arg0)
 
 void mnSoundTest_8024BCA0(int arg0)
 {
-    HSD_JObj* sp24;
+    HSD_JObj* jobj;
+    UNUSED u8 pad[0xC];
     HSD_GObj* gobj;
     HSD_GObjProc* proc;
-    HSD_JObj* jobj;
+    HSD_JObj* category_jobj;
+    SoundTestModelDesc* model_desc;
     soundtest_user_data* user_data;
+    soundtest_user_data* text_user_data;
+    u32 pad2;
     HSD_Text* text;
-    u8 temp_r29_2;
-    u8 temp_r29_3;
+    u8 selection;
 
+    PAD_STACK(0x14);
+    model_desc = &mnSoundTest_804A08C8;
     gobj = GObj_Create(6U, 7U, 0x80U);
     mnSoundTest_804D6C40 = gobj;
-    jobj = HSD_JObjLoadJoint(mnSoundTest_804A08C8.joint);
+    jobj = HSD_JObjLoadJoint(model_desc->joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4U, 0x80U);
-    HSD_JObjAddAnimAll(jobj, mnSoundTest_804A08C8.animjoint,
-                       mnSoundTest_804A08C8.matanim_joint,
-                       mnSoundTest_804A08C8.shapeanim_joint);
+    HSD_JObjAddAnimAll(jobj, model_desc->animjoint,
+                       model_desc->matanim_joint,
+                       model_desc->shapeanim_joint);
     HSD_JObjReqAnimAll(jobj, 0.0f);
     HSD_JObjAnimAll(jobj);
     proc = HSD_GObj_SetupProc(gobj, (void (*)(HSD_GObj*)) fn_8024BAF0, 0U);
@@ -792,24 +797,24 @@ void mnSoundTest_8024BCA0(int arg0)
     user_data->unk18 = NULL;
     user_data->unk1C = NULL;
     GObj_InitUserData(gobj, 0U, HSD_Free, user_data);
-    text = user_data->unk10;
-    if (text != NULL) {
-        HSD_SisLib_803A5CC4(text);
+    text_user_data = mnSoundTest_804D6C40->user_data;
+    if (text_user_data->unk10 != NULL) {
+        HSD_SisLib_803A5CC4(text_user_data->unk10);
     }
     text =
         HSD_SisLib_803A5ACC(0, 1, -9.5f, 9.1f, 17.0f, 364.68332f, 38.38772f);
-    user_data->unk10 = text;
+    text_user_data->unk10 = text;
     text->font_size.x = 0.0521f;
     text->font_size.y = 0.0521f;
     HSD_SisLib_803A6368(text, 0xBE);
-    temp_r29_2 = user_data->unk0;
-    mnSoundTest_8024ABF8(gobj, temp_r29_2 == 0);
-    mnSoundTest_8024AD58(gobj, temp_r29_2);
-    temp_r29_3 = data_3[user_data->unk3];
-    lb_80011E24(GET_JOBJ(gobj), &sp24, 0x15, -1);
-    HSD_JObjReqAnimAll(sp24, data_4[temp_r29_3]);
-    mn_8022F3D8(sp24, 0xFFU, 0xA0);
-    HSD_JObjAnimAll(sp24);
+    selection = user_data->unk0;
+    mnSoundTest_8024ABF8(gobj, selection == 0);
+    mnSoundTest_8024AD58(gobj, selection);
+    selection = data_3[user_data->unk3];
+    lb_80011E24(GET_JOBJ(gobj), &category_jobj, 0x15, -1);
+    HSD_JObjReqAnimAll(category_jobj, data_4[selection]);
+    mn_8022F3D8(category_jobj, 0xFFU, 0xA0);
+    HSD_JObjAnimAll(category_jobj);
 }
 
 HSD_GObjProc* mnSoundTest_8024BEE0(s32 arg0)

@@ -133,12 +133,6 @@ parser.add_argument(
     help="warning level (default 'off')",
 )
 parser.add_argument(
-    "--no-warn-error",
-    action="store_false",
-    dest="warn_error",
-    help="compiler warnings are not considered errors",
-)
-parser.add_argument(
     "--require-protos",
     dest="require_protos",
     action="store_true",
@@ -259,9 +253,6 @@ if args.max_errors == 0:
 cflags_base.append(f"-msgstyle {args.msg_style}")
 config.ldflags.append(f"-msgstyle {args.msg_style}")
 cflags_base.append(f"-warn {args.warn}")
-
-if args.warn_error:
-    cflags_base.append("-warn iserror")
 
 if args.require_protos:
     cflags_base.append("-requireprotos")
@@ -1168,7 +1159,7 @@ config.libs = [
             Object(NonMatching, "melee/it/itspawn.c"),
             Object(Matching, "melee/it/itgroundcoll.c"),
             Object(Matching, "melee/it/itdraw.c"),
-            Object(NonMatching, "melee/it/itdrop.c"),
+            Object(Matching, "melee/it/itdrop.c"),
             Object(NonMatching, "melee/it/itcoll.c"),
             Object(Matching, "melee/it/it_3F14.c"),
             Object(Matching, "melee/it/it_2725.c"),
@@ -1257,7 +1248,7 @@ config.libs = [
             Object(Matching, "melee/it/items/itsamuschargeshot.c"),
             Object(Matching, "melee/it/items/itsamusmissile.c"),
             Object(NonMatching, "melee/it/items/itsamusgrapple.c"),
-            Object(NonMatching, "melee/it/items/itseakchain.c"),
+            Object(Matching, "melee/it/items/itseakchain.c"),
             Object(Matching, "melee/it/items/itpeachexplode.c"),
             Object(Matching, "melee/it/items/itpeachturnip.c"),
             Object(Matching, "melee/it/items/itpeachparasol.c"),
@@ -1388,7 +1379,7 @@ config.libs = [
             Object(NonMatching, "melee/vi/vi0401.c"),
             Object(Matching, "melee/vi/vi0402.c"),
             Object(NonMatching, "melee/vi/vi0501.c"),
-            Object(NonMatching, "melee/vi/vi0502.c"),
+            Object(Matching, "melee/vi/vi0502.c"),
             Object(Matching, "melee/vi/vi0601.c"),
             Object(Matching, "melee/vi/vi0801.c"),
             Object(Matching, "melee/vi/vi1101.c"),

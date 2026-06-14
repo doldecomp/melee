@@ -177,9 +177,7 @@ void grOnett_801E3930(Ground_GObj* gobj)
     mpJointSetCb1(0, gp, grOnett_801E54B4);
     mpJointSetCb1(1, gp, grOnett_801E54B4);
     gp->gv.onett.subject = Camera_80029020();
-    if (gp->gv.onett.subject == NULL) {
-        __assert("gronett.c", 331, "gp->u.map.subject");
-    }
+    HSD_ASSERTMSG(331, gp->gv.onett.subject, "gp->u.map.subject");
     gp->gv.onett.subject->x40.x = -40.0f;
     gp->gv.onett.subject->x40.y = 40.0f;
     gp->gv.onett.subject->x48.x = 20.0f;

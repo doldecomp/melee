@@ -43,13 +43,15 @@ ItemStateTable it_803F63C0[] = {
     { 1, itTarucann_UnkMotion6_Anim, itTarucann_UnkMotion6_Phys,
       itTarucann_UnkMotion6_Coll },
     { 1, itTarucann_UnkMotion7_Anim,
-      (HSD_GObjEvent) itTarucann_UnkMotion7_Phys, itTarucann_UnkMotion7_Coll },
+      (HSD_GObjEvent) (Event) itTarucann_UnkMotion7_Phys,
+      itTarucann_UnkMotion7_Coll },
     { 1, itTarucann_UnkMotion8_Anim, itTarucann_UnkMotion8_Phys,
       itTarucann_UnkMotion8_Coll },
     { 2, itTarucann_UnkMotion6_Anim, itTarucann_UnkMotion6_Phys,
       itTarucann_UnkMotion6_Coll },
     { 2, itTarucann_UnkMotion7_Anim,
-      (HSD_GObjEvent) itTarucann_UnkMotion7_Phys, itTarucann_UnkMotion7_Coll },
+      (HSD_GObjEvent) (Event) itTarucann_UnkMotion7_Phys,
+      itTarucann_UnkMotion7_Coll },
     { 2, itTarucann_UnkMotion8_Anim, itTarucann_UnkMotion8_Phys,
       itTarucann_UnkMotion8_Coll },
     { 3, itTarucann_UnkMotion9_Anim, itTarucann_UnkMotion9_Phys,
@@ -655,7 +657,7 @@ bool itTarucann_UnkMotion9_Anim(Item_GObj* gobj)
         efSync_Spawn(0x427, gobj, &ip->pos);
         Item_8026AE84(ip, 0xFB, 0x7F, 0x40);
         Camera_80030E44(2, &ip->pos);
-        HSD_JObjSetFlagsAll(jobj, 0x10);
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         it_8026B3A8(gobj);
         ip->xDD4_itemVar.tarucann.x4 = 0x28;
         ip->xDAC_itcmd_var0 = 2;
@@ -682,7 +684,7 @@ bool it_80297790(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     itTaruCann_DatAttrs* da = ip->xC4_article_data->x4_specialAttributes;
     PAD_STACK(16);
-    HSD_JObjClearFlagsAll(gobj->hsd_obj, 0x10);
+    HSD_JObjClearFlagsAll(gobj->hsd_obj, JOBJ_HIDDEN);
     switch (ip->msid) {
     case 3:
     case 4:

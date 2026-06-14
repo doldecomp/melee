@@ -596,7 +596,7 @@ void gmCamera_801A31FC(void)
     gm_8016895C(jobj_b, mdl_b, 0);
     HSD_JObjReqAnimAll(jobj_b, 0.0f);
     HSD_JObjAnimAll(jobj_b);
-    HSD_JObjSetFlagsAll(jobj_b, 0x10);
+    HSD_JObjSetFlagsAll(jobj_b, JOBJ_HIDDEN);
     HSD_GObj_SetupProc(gobj_b, fn_801A31D8, 0);
     gcus->x20 = 2;
     HSD_SisLib_803A62A0(3, "SdVsCam", "SIS_VsCameraData");

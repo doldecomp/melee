@@ -278,12 +278,8 @@ static void HSD_DevComDVDCallback(s32 result, DVDFileInfo* unused)
     }
     type = dvdDC->type;
     if (type == 0x22) {
-        if (dvdDC->size > DEVCOM_BUF_SIZE) {
-            __assert("devcom.c", 0x18C, "dvdDC->size <= DEVCOM_BUF_SIZE");
-        }
-        if (dvdDC->callback == NULL) {
-            __assert("devcom.c", 0x18D, "dvdDC->callback");
-        }
+        HSD_ASSERT(0x18C, dvdDC->size <= DEVCOM_BUF_SIZE);
+        HSD_ASSERT(0x18D, dvdDC->callback);
         if (HSD_DevCom_804D7804 == 0) {
             dvdDC->callback(dvdDC->dcReq, (s32) dvdDC->args,
                             HSD_DevCom_804C6330_bufs[HSD_DevCom_804D77F6],

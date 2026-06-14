@@ -203,7 +203,7 @@ void it_802947CC(Item_GObj* gobj, Vec3* pos)
     it_8026B3A8(gobj);
     ip->pos = *pos;
     HSD_JObjSetTranslate(jobj, &ip->pos);
-    HSD_JObjSetFlagsAll(jobj, 0x10);
+    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     it_8026BD24(gobj);
     it_8027518C(gobj);
     efLib_DestroyAll(gobj);

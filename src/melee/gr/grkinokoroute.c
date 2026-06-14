@@ -470,7 +470,7 @@ void grKinokoRoute_8020836C(Ground_GObj* gobj, int arg1)
     }
 
     if (arg1 != 0) {
-        HSD_JObjClearFlagsAll(jobj, 0x10);
+        HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         mpJointListAdd(0x3C);
         mpJointListAdd(0x33);
 
@@ -485,7 +485,7 @@ void grKinokoRoute_8020836C(Ground_GObj* gobj, int arg1)
         mpJointListAdd(0x0E);
         mpJointListAdd(0x0F);
     } else {
-        HSD_JObjSetFlagsAll(jobj, 0x10);
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         mpLib_80057BC0(0x3C);
         mpLib_80057BC0(0x33);
 
@@ -520,7 +520,7 @@ void grKinokoRoute_802084B4(HSD_GObj* gobj)
         HSD_JObj* jobj;
     }* gp = gobj->user_data;
 
-    HSD_JObjSetFlagsAll(gp->jobj, 0x10);
+    HSD_JObjSetFlagsAll(gp->jobj, JOBJ_HIDDEN);
 
     gobj2 = Ground_801C2BA4(3);
     if (gobj2 != NULL) {
@@ -548,8 +548,8 @@ void grKinokoRoute_80208564(HSD_GObj* gobj)
         HSD_JObj* jobj = Ground_801C3FA4(gobj, depths.x[i]);
         Item_GObj* item = grMaterial_801C8CFC(
             8, 0, gp, jobj, NULL,
-            (void (*)(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
-                      f32)) grKinokoRoute_802084B4,
+            (void (*)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32))(
+                Event) grKinokoRoute_802084B4,
             NULL);
         if (item != NULL) {
             grMaterial_801C8DE0(item, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F,

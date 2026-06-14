@@ -166,7 +166,7 @@ void it_802EB6DC(Item_GObj* gobj)
     ip->xDD4_itemVar.tincle.x38 = 0.0f;
     ip->xDD4_itemVar.tincle.x4C = 0.0f;
     it_802756D0(gobj);
-    HSD_JObjSetFlagsAll(GET_JOBJ(gobj), 0x10);
+    HSD_JObjSetFlagsAll(GET_JOBJ(gobj), JOBJ_HIDDEN);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
     it_802EC9E8(gobj);
 }
@@ -205,7 +205,7 @@ void it_802EB870(Item_GObj* gobj)
     ip->xDD4_itemVar.tincle.x5C = sa->x20 + s;
     ip->x40_vel.y = -sa->x18;
     ip->x40_vel.x = 0.0f;
-    HSD_JObjClearFlagsAll(GET_JOBJ(gobj), 0x10);
+    HSD_JObjClearFlagsAll(GET_JOBJ(gobj), JOBJ_HIDDEN);
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
     it_802EC9E8(gobj);
 }
@@ -254,7 +254,7 @@ void it_802EBA00(Item_GObj* gobj)
 
     ip->xDC8_word.flags.x1A = 1;
 
-    HSD_JObjClearFlagsAll(GET_JOBJ(gobj), 0x10);
+    HSD_JObjClearFlagsAll(GET_JOBJ(gobj), JOBJ_HIDDEN);
 
     Item_80268E5C(gobj, 2, ITEM_UNK_0x1);
 

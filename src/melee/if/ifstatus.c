@@ -222,7 +222,8 @@ void ifStatus_PercentOnDeathAnimationThink(UnkX* value, s32 arg1, s32 arg2)
     }
 }
 
-inline f32 offset_rand(){
+inline f32 offset_rand(void)
+{
     return HSD_Randf() - 0.5f;
 }
 void ifStatus_802F4B84(IfDamageState* state, s32 is_stamina)
@@ -414,9 +415,9 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     if ((state->damage_percent % 1000) / 100 == 0 &&
         (state->damage_percent % 100) / 10 == 0)
     {
-        HSD_JObjSetFlagsAll(state->jobjs[Tens], 0x10);
+        HSD_JObjSetFlagsAll(state->jobjs[Tens], JOBJ_HIDDEN);
     } else {
-        HSD_JObjClearFlagsAll(state->jobjs[Tens], 0x10);
+        HSD_JObjClearFlagsAll(state->jobjs[Tens], JOBJ_HIDDEN);
     }
 
     digit_jobj = state->jobjs[Hundreds];
@@ -429,9 +430,9 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
 
     if ((state->damage_percent % 1000) / 100 == 0) {
-        HSD_JObjSetFlagsAll(state->jobjs[Hundreds], 0x10);
+        HSD_JObjSetFlagsAll(state->jobjs[Hundreds], JOBJ_HIDDEN);
     } else {
-        HSD_JObjClearFlagsAll(state->jobjs[Hundreds], 0x10);
+        HSD_JObjClearFlagsAll(state->jobjs[Hundreds], JOBJ_HIDDEN);
     }
 
     /* Update colors when damage changes */
@@ -896,8 +897,7 @@ void ifStatus_802F66A4(void)
     DynamicModelDesc** mrk;
     DynamicModelDesc** num;
     HSD_Archive** arch;
-    s32 reset = 0; // = 0 should go away, but that requires configure to be ran
-                   // with --no-warn-error
+    s32 reset;
     arch = ifAll_802F3690();
     lbArchive_LoadSections(*arch, (void**) &num, "DmgNum_scene_models",
                            (void**) &mrk, "DmgMrk_scene_models", 0);

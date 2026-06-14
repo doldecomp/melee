@@ -111,8 +111,7 @@ void it_80275BC8(Item_GObj* item_gobj, HSD_GObj* arg_gobj)
             it_8026BB88(arg_gobj, &sp14);
             break;
         default:
-            OSReport("couldn't get Owner_GObj_Kind!!");
-            __assert("itmaplib.c", 0x7FU, "0");
+            HSD_ASSERTREPORT(0x7FU, 0, "couldn't get Owner_GObj_Kind!!");
             break;
         }
     } else {

@@ -672,9 +672,9 @@ void grStadium_801D1EF8(Ground_GObj* gobj)
             jobj = Ground_801C3FA4(gobj, 6);
             if (jobj != NULL) {
                 if (gp->u.display.xE6 & 1) {
-                    HSD_JObjClearFlags(jobj, 0x10);
+                    HSD_JObjClearFlags(jobj, JOBJ_HIDDEN);
                 } else {
-                    HSD_JObjSetFlags(jobj, 0x10);
+                    HSD_JObjSetFlags(jobj, JOBJ_HIDDEN);
                 }
             }
         }
@@ -682,9 +682,9 @@ void grStadium_801D1EF8(Ground_GObj* gobj)
             jobj = Ground_801C3FA4(gobj, 3);
             if (jobj != NULL) {
                 if (gp->u.display.xE6 & 2) {
-                    HSD_JObjClearFlags(jobj, 0x10);
+                    HSD_JObjClearFlags(jobj, JOBJ_HIDDEN);
                 } else {
-                    HSD_JObjSetFlags(jobj, 0x10);
+                    HSD_JObjSetFlags(jobj, JOBJ_HIDDEN);
                 }
             }
         }
@@ -692,9 +692,9 @@ void grStadium_801D1EF8(Ground_GObj* gobj)
             jobj = Ground_801C3FA4(gobj, 7);
             if (jobj != NULL) {
                 if (gp->u.display.xE6 & 8) {
-                    HSD_JObjClearFlags(jobj, 0x10);
+                    HSD_JObjClearFlags(jobj, JOBJ_HIDDEN);
                 } else {
-                    HSD_JObjSetFlags(jobj, 0x10);
+                    HSD_JObjSetFlags(jobj, JOBJ_HIDDEN);
                 }
             }
         }
@@ -702,9 +702,9 @@ void grStadium_801D1EF8(Ground_GObj* gobj)
             jobj = Ground_801C3FA4(gobj, 9);
             if (jobj != NULL) {
                 if (gp->u.display.xE6 & 0x10) {
-                    HSD_JObjClearFlags(jobj, 0x10);
+                    HSD_JObjClearFlags(jobj, JOBJ_HIDDEN);
                 } else {
-                    HSD_JObjSetFlags(jobj, 0x10);
+                    HSD_JObjSetFlags(jobj, JOBJ_HIDDEN);
                 }
             }
         }
@@ -712,9 +712,9 @@ void grStadium_801D1EF8(Ground_GObj* gobj)
             jobj = Ground_801C3FA4(gobj, 4);
             if (jobj != NULL) {
                 if (gp->u.display.xE6 & 4) {
-                    HSD_JObjClearFlags(jobj, 0x10);
+                    HSD_JObjClearFlags(jobj, JOBJ_HIDDEN);
                 } else {
-                    HSD_JObjSetFlags(jobj, 0x10);
+                    HSD_JObjSetFlags(jobj, JOBJ_HIDDEN);
                 }
             }
         }
@@ -722,9 +722,9 @@ void grStadium_801D1EF8(Ground_GObj* gobj)
             jobj = Ground_801C3FA4(gobj, 8);
             if (jobj != NULL) {
                 if (gp->u.display.xE6 & 0x20) {
-                    HSD_JObjClearFlags(jobj, 0x10);
+                    HSD_JObjClearFlags(jobj, JOBJ_HIDDEN);
                 } else {
-                    HSD_JObjSetFlags(jobj, 0x10);
+                    HSD_JObjSetFlags(jobj, JOBJ_HIDDEN);
                 }
             }
         }
@@ -732,9 +732,9 @@ void grStadium_801D1EF8(Ground_GObj* gobj)
             jobj = Ground_801C3FA4(gobj, 5);
             if (jobj != NULL) {
                 if (gp->u.display.xE6 & 0x80) {
-                    HSD_JObjClearFlags(jobj, 0x10);
+                    HSD_JObjClearFlags(jobj, JOBJ_HIDDEN);
                 } else {
-                    HSD_JObjSetFlags(jobj, 0x10);
+                    HSD_JObjSetFlags(jobj, JOBJ_HIDDEN);
                 }
             }
         }
@@ -742,9 +742,9 @@ void grStadium_801D1EF8(Ground_GObj* gobj)
             jobj = Ground_801C3FA4(gobj, 2);
             if (jobj != NULL) {
                 if (gp->u.display.xE6 & 0x40) {
-                    HSD_JObjClearFlags(jobj, 0x10);
+                    HSD_JObjClearFlags(jobj, JOBJ_HIDDEN);
                 } else {
-                    HSD_JObjSetFlags(jobj, 0x10);
+                    HSD_JObjSetFlags(jobj, JOBJ_HIDDEN);
                 }
             }
         }
@@ -969,7 +969,7 @@ void grStadium_801D2528(Ground_GObj* gobj, int arg1, int arg2)
         case 4:
         case 5:
         case 6:
-            __assert("grpstadium.c", 0x536, "0");
+            HSD_ASSERT(0x536, 0);
             break;
         }
     }

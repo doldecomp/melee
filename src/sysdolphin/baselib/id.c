@@ -33,6 +33,7 @@ inline IDEntry* IDEntryAlloc(void)
     IDEntry* entry;
 
     entry = HSD_ObjAlloc(&hsd_iddata);
+    /// @todo Convert to @c HSD_ASSERT once a byte-matching form is found.
     if (entry == NULL) {
         __assert("id.c", 67, "entry");
     }

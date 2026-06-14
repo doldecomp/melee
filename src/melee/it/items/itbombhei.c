@@ -636,7 +636,7 @@ void it_80280B60(Item_GObj* gobj)
         it_8027429C(gobj, &sp3C);
     }
     it_8026B3A8(gobj);
-    HSD_JObjSetFlagsAll(temp_r29, 0x10U);
+    HSD_JObjSetFlagsAll(temp_r29, JOBJ_HIDDEN);
     it_8026BD24(gobj);
     it_8027518C(gobj);
     temp_r30->x5D0_animFrameSpeed = 1.0f;

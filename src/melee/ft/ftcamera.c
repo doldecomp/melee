@@ -104,9 +104,8 @@ void ftCamera_80076320(HSD_GObj* gobj)
     ftCamera_UpdateCameraBox(gobj); // Fighter_UpdateCameraBox
     Stage_UnkSetVec3TCam_Offset(&center_pos);
 
-    if (!(Stage_GetBlastZoneTopOffset() - center_pos.y != 0.0F)) {
-        __assert("ftcamera.c", 137, "stGetPlyDeadUp() - center_pos.y != 0.0F");
-    }
+    HSD_ASSERTMSG(137, Stage_GetBlastZoneTopOffset() - center_pos.y != 0.0F,
+                  "stGetPlyDeadUp() - center_pos.y != 0.0F");
 
     temp_f31 = Stage_GetBlastZoneTopOffset() - center_pos.y;
     temp_f1 = Stage_GetCamBoundsTopOffset() - center_pos.y;

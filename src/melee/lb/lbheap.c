@@ -229,9 +229,7 @@ void lbHeap_80015CA8(int arg0, void* arg1)
     int enabled = OSDisableInterrupts();
     struct Heap* p = &lbHeap_80431FA0.heap_array[arg0];
 
-    if (p->status != 0) {
-        __assert("lbheap.c", 0x143, "p->status == LbHeapStatus_Create");
-    }
+    HSD_ASSERTMSG(0x143, p->status == 0, "p->status == LbHeapStatus_Create");
     if (p->type == 0) {
         int cur_heap = HSD_GetHeap();
         HSD_SetHeap(p->id);

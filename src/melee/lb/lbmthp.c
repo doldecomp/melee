@@ -461,7 +461,7 @@ void lbMthp_8001F410(const char* filename, void* rate_table, int buf,
         &streamPlayer->unk_150,
         __cvt_dbl_usll((f64) (lbl_804D7CC8 * (f32) (*(u32*) 0x800000F8 >> 2))),
         __cvt_dbl_usll((f64) (lbl_804D7CC8 * (f32) (*(u32*) 0x800000F8 >> 2))),
-        (OSAlarmHandler) fn_8001F2A4);
+        (OSAlarmHandler) (Event) fn_8001F2A4);
 }
 
 void lbMthp_8001F578(void)
