@@ -2057,6 +2057,8 @@ static inline s32 fn_8018F888_inline0(void)
     return i;
 }
 
+#pragma push
+#pragma auto_inline off
 void fn_8018F888(void)
 {
     s32 i = fn_8018F888_inline0();
@@ -2071,6 +2073,7 @@ void fn_8018F888(void)
 
     lbl_80473AB8[i + 1].x20.g = 0;
 }
+#pragma pop
 
 void fn_8018FA24(void)
 {
@@ -6620,10 +6623,8 @@ void fn_80198D18(void)
     fn_801901F8(lbl_804D666C->cameras->desc);
     fn_801902F0((int) gobj);
     fn_8019027C(lbl_804D666C->lights);
-    fn_8019035C(0, lbl_804D666C->models[5], 0, 0x1A, 2, 1, fn_80196DBC,
-                lbl_804DA808);
-    fn_8019035C(0, lbl_804D666C->models[4], 0, 0x1A, 2, 1, fn_80196E30,
-                lbl_804DA840);
+    fn_8019035C(0, lbl_804D666C->models[5], 0, 0x1A, 2, 1, fn_80196DBC, 0.0f);
+    fn_8019035C(0, lbl_804D666C->models[4], 0, 0x1A, 2, 1, fn_80196E30, 80.0f);
 
     td = gm_8018F634();
     td->x524[2] = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
@@ -6687,10 +6688,8 @@ void fn_80198EBC(void)
     fn_801902F0((int) gobj);
     fn_8019027C(lbl_804D666C->lights);
 
-    fn_8019035C(0, lbl_804D666C->models[5], 0, 0x1A, 2, 1, fn_80196DBC,
-                lbl_804DA808);
-    fn_8019035C(0, lbl_804D666C->models[4], 0, 0x1A, 2, 1, fn_80196E30,
-                lbl_804DA840);
+    fn_8019035C(0, lbl_804D666C->models[5], 0, 0x1A, 2, 1, fn_80196DBC, 0.0f);
+    fn_8019035C(0, lbl_804D666C->models[4], 0, 0x1A, 2, 1, fn_80196E30, 80.0f);
     fn_80198C60();
 
     gobj = GObj_Create(0xE, 0x1A, 0);
@@ -6941,10 +6940,8 @@ void fn_80199AF0(void)
     fn_801901F8(lbl_804D666C->cameras->desc);
     fn_801902F0((int) gobj);
     fn_8019027C(lbl_804D666C->lights);
-    fn_8019035C(0, lbl_804D666C->models[5], 0, 0x1A, 2, 1, fn_80196DBC,
-                lbl_804DA808);
-    fn_8019035C(0, lbl_804D666C->models[4], 0, 0x1A, 2, 1, fn_80196E30,
-                lbl_804DA840);
+    fn_8019035C(0, lbl_804D666C->models[5], 0, 0x1A, 2, 1, fn_80196DBC, 0.0f);
+    fn_8019035C(0, lbl_804D666C->models[4], 0, 0x1A, 2, 1, fn_80196E30, 80.0f);
 
     fn_80198C60();
 
@@ -6965,9 +6962,9 @@ void fn_80199AF0(void)
     }
 
     fn_8019035C(0, lbl_804D6670->models[0], mode, 0x1A, 3, 1, fn_801985D4,
-                lbl_804DA808);
+                0.0f);
     gobj = fn_8019035C(0, lbl_804D6670->models[2], 0, 0x1A, 3, 1, fn_80198824,
-                       lbl_804DA808);
+                       0.0f);
 
     if (gobj->hsd_obj == NULL) {
         jobj = NULL;
@@ -8000,7 +7997,6 @@ void fn_8019B81C(s32* state)
 
 extern SceneDesc* lbl_804D6670;
 
-#pragma dont_inline on
 void fn_8019B860(TmData* tm)
 {
     fn_8019A158();
@@ -8011,4 +8007,3 @@ void fn_8019B860(TmData* tm)
     fn_8018E85C(lbl_804D6670->models[4], tm->x2C);
     tm->cur_option = 0x20;
 }
-#pragma dont_inline reset

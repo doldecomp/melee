@@ -571,12 +571,12 @@ void gm_801BAD70(GameScene* arg0)
         }
     }
     if (level == 0x31) {
-        r3b[0x8A] = 1;
-        r3b[0xAE] = (u8) -1;
-        ((PlayerInitData*) (r3b + 0x84))->xD_b0 = 1;
-        ((PlayerInitData*) (r3b + 0xA8))->xD_b0 = 1;
-        ((PlayerInitData*) (r3b + 0x84))->xD_b2 = 1;
-        ((PlayerInitData*) (r3b + 0xA8))->xD_b2 = 1;
+        md->players[1].spawn_dir = 1;
+        md->players[2].spawn_dir = -1;
+        md->players[1].xD_b0 = 1;
+        md->players[2].xD_b0 = 1;
+        md->players[1].xD_b2 = 1;
+        md->players[2].xD_b2 = 1;
     }
     if (level_info->kind == 1) {
         struct gm_evbonus* bonus = level_info->xC;

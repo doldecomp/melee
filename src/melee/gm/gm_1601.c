@@ -3544,37 +3544,16 @@ s32 fn_80167638(s32 arg0, Vec3* arg1, Vec3* arg2)
     lbl_8046B6A0_t* info;
     s8 chr;
     s32 idx;
-    u8* p;
+    s32 i;
 
     PAD_STACK(8);
 
     info = gm_8016AE44();
-    if (info->FighterMatchInfo[0].x8 == 0) {
-        idx = 0;
-    } else {
-        p = &info->unk_0;
-        p += 0xE;
-        if (p[0x40] == 0) {
-            idx = 1;
-        } else if (p[0x4E] == 0) {
-            idx = 2;
-        } else {
-            p += 0xE;
-            if (p[0x4E] == 0) {
-                idx = 3;
-            } else {
-                p += 0xE;
-                if (p[0x4E] == 0) {
-                    idx = 4;
-                } else {
-                    p += 0xE;
-                    if (p[0x4E] == 0) {
-                        idx = 5;
-                    } else {
-                        idx = 0;
-                    }
-                }
-            }
+    idx = 0;
+    for (i = 0; i < ARRAY_SIZE(info->FighterMatchInfo); i++) {
+        if (info->FighterMatchInfo[i].x8 == 0) {
+            idx = i;
+            break;
         }
     }
     chr = Player_GetPlayerCharacter(arg0);

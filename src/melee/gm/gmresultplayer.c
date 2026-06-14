@@ -758,7 +758,7 @@ static inline void fn_80178BB4_init_players(ResultsData* data,
                                             MatchEnd* match_end, int* i,
                                             int* ko_count)
 {
-    do {
+    for (; *i < 6; (*i)++) {
         HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[0], JOBJ_HIDDEN);
         HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[4], JOBJ_HIDDEN);
         HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[8], JOBJ_HIDDEN);
@@ -866,9 +866,7 @@ static inline void fn_80178BB4_init_players(ResultsData* data,
                                     JOBJ_HIDDEN);
             }
         }
-
-        (*i)++;
-    } while ((*i) < 6);
+    }
 }
 
 void fn_80178BB4(HSD_GObj* gobj)
