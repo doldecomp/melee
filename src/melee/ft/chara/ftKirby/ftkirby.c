@@ -3212,8 +3212,6 @@ char* ftKb_Init_GetMotionFileString(enum_t arg0)
     return ftKb_Init_803CA5A4[offset - 14];
 }
 
-#pragma push
-#pragma pool_data off
 void ftKb_SpecialN_800EEC34(int arg0, int arg1, int arg2)
 {
     int i;
@@ -3241,7 +3239,6 @@ void ftKb_SpecialN_800EEC34(int arg0, int arg1, int arg2)
         efAsync_LoadAsync(ftKb_Init_803CB46C[arg0]);
     }
 }
-#pragma pop
 
 static inline void ftKb_SpecialN_800EED50_inline(s32 arg0, s32 arg1)
 {
