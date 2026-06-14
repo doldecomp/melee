@@ -1323,8 +1323,9 @@ int HSD_TExpSimplify(HSD_TExp* texp_)
     return res;
 }
 
-int HSD_TExpSimplify2(HSD_TExp* texp)
+int HSD_TExpSimplify2(HSD_TExp* texp_)
 {
+    HSD_TExp* texp = (HSD_TExp*) texp_;
     HSD_TExp* src_exp;
     u8 src_sel;
     int i;
