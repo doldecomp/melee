@@ -3,13 +3,16 @@ run-name: Publish packages
 
 on:
   push:
-    paths:
-      - .github/workflows/publish-packages.yml
-      - .github/packages/**
+    paths: &common_paths
+      - '.github/workflows/publish-packages.yml'
+      - '.github/packages/**'
+      - '**/Cargo.lock'
+      - '**/Cargo.toml'
+      - 'reqs/**/*.txt'
+      - 'tools/**/*.py'
+      - 'tools/**/*.rs'
   pull_request:
-    paths:
-      - .github/workflows/publish-packages.yml
-      - .github/packages/**
+    paths: *common_paths
   schedule:
     # Monday at 5am EST
     - cron: "0 10 * * 1"

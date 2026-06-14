@@ -36,7 +36,14 @@
 #include <baselib/mtx.h>
 #include <baselib/wobj.h>
 
-Vec3 initial_pos = { 0, -3.0f, 0 };
+typedef struct Vi0502Data {
+    Vec3 initial_pos;
+    char vi0502_dat[12];
+    char visual0502_scene[16];
+    char irals_dat[16];
+} Vi0502Data;
+
+extern Vi0502Data un_804000D0;
 
 static SceneDesc* un_804D6F90;
 static HSD_Archive* un_804D6F94;
@@ -44,7 +51,7 @@ static HSD_Archive* un_804D6F98;
 static HSD_Archive* un_804D6F9C;
 static GXColor erase_colors_vi0502;
 static HSD_GObj* kirby_gobj;
-static ViCharaDesc* un_804D6FA8;
+ViCharaDesc* un_804D6FA8[2];
 
 void un_8031E110(int arg0, int arg1, int arg2)
 {
@@ -60,6 +67,7 @@ void vi0502_8031E124(CharacterKind player_kind, int player_costume,
                      int kirby_costume)
 {
     HSD_JObj* jobj;
+    HSD_JObj* jobj2;
     VecMtxPtr pmtx;
 
     Camera_80028B9C(6);
@@ -83,7 +91,7 @@ void vi0502_8031E124(CharacterKind player_kind, int player_costume,
     Player_SetPlayerId(0, 0);
     Player_SetSlottype(0, Gm_PKind_Demo);
     Player_SetFacingDirection(0, 1.0f);
-    Player_80032768(0, &initial_pos);
+    Player_80032768(0, &un_804000D0.initial_pos);
     Player_80036F34(0, 8);
 
     Player_80036E20(CKIND_KIRBY, un_804D6F9C, 7);
@@ -91,16 +99,16 @@ void vi0502_8031E124(CharacterKind player_kind, int player_costume,
     Player_SetCostumeId(1, kirby_costume);
     Player_SetPlayerId(1, 0);
     Player_SetSlottype(1, Gm_PKind_Demo);
-    Player_SetFacingDirection(1, 1.0f);
+    Player_SetFacingDirection(1, -1.0f);
     Player_80036F34(1, 14);
 
     kirby_gobj = Player_GetEntity(1);
     jobj = GET_JOBJ(kirby_gobj);
     HSD_JObjReqAnimAll(jobj, 120.0f);
     HSD_JObjAnimAll(jobj);
-    jobj = GET_JOBJ(kirby_gobj);
+    jobj2 = GET_JOBJ(kirby_gobj);
     pmtx = grLib_801C9A10();
-    HSD_JObjGetTranslation2(jobj, &pmtx[1]);
+    HSD_JObjGetTranslation2(jobj2, &pmtx[1]);
 
     HSD_JObjReqAnimAll(jobj, 0.0f);
 
@@ -152,6 +160,9 @@ void vi0502_RunFrame(HSD_GObj* gobj)
 void un_8031E444_OnEnter(void* arg)
 {
     u8 char_index;
+    Vi0502Data* data;
+    u8 costume1;
+    u8 costume2;
     HSD_Fog* fog;
     HSD_GObj* fog_gobj;
     HSD_LObj* lobj;
@@ -165,17 +176,18 @@ void un_8031E444_OnEnter(void* arg)
     ViCharaDesc* desc;
 
     desc = (ViCharaDesc*) arg;
+    data = &un_804000D0;
     lbAudioAx_800236DC();
     efLib_Init();
     efAsync_LoadSync(0);
 
     char_index = desc->p1_char_index;
 
-    un_804D6F9C = lbArchive_LoadSymbols("Vi0502.dat", &un_804D6F90,
-                                        "visual0502Scene", NULL);
+    un_804D6F9C = lbArchive_LoadSymbols(data->vi0502_dat, &un_804D6F90,
+                                        data->visual0502_scene, NULL);
     un_804D6F94 =
         lbArchive_LoadSymbols(viGetCharAnimByIndex(char_index), NULL);
-    un_804D6F98 = lbArchive_LoadSymbols("IrAls.dat", NULL);
+    un_804D6F98 = lbArchive_LoadSymbols(data->irals_dat, NULL);
 
     fog_gobj = GObj_Create(0xB, 3, 0);
     fog = HSD_FogLoadDesc(un_804D6F90->fogs->desc);
@@ -212,6 +224,15 @@ void un_8031E444_OnEnter(void* arg)
         HSD_GObj_SetupProc(model_gobj, vi0502_8031E304, 0x17);
     }
 
-    vi0502_8031E124(desc->p1_char_index, desc->p1_costume_index,
-                    desc->p2_costume_index);
+    char_index = desc->p1_char_index;
+    costume1 = desc->p1_costume_index;
+    costume2 = desc->p2_costume_index;
+    vi0502_8031E124(char_index, costume1, costume2);
 }
+
+Vi0502Data un_804000D0 = {
+    { 0, -3.0f, 0 },
+    "Vi0502.dat",
+    "visual0502Scene",
+    "IrAls.dat",
+};

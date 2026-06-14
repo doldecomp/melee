@@ -197,7 +197,7 @@ void fn_80252C50(HSD_GObj* gobj)
         o->x4C = NULL;
         return;
     } ///< @todo inline button getter
-    if (g_debugLevel >= 3 && HSD_PadCopyStatus->button & 0x40 &&
+    if (DbLevel >= 3 && HSD_PadCopyStatus->button & 0x40 &&
         HSD_PadCopyStatus->button & 0x20 && HSD_PadCopyStatus->button & 0x100)
     {
         o->x0 = 0;
@@ -248,16 +248,18 @@ void fn_80252E4C(HSD_GObj* arg0)
     if (o->x0 > 0) {
         HSD_JObjClearFlags(fn_80252E4C_inline_GetJObjNext(
                                fn_80252E4C_inline_GetJObjChild(temp_r30)),
-                           0x10);
+                           JOBJ_HIDDEN);
     } else {
         HSD_JObjSetFlags(fn_80252E4C_inline_GetJObjNext(
                              fn_80252E4C_inline_GetJObjChild(temp_r30)),
-                         0x10);
+                         JOBJ_HIDDEN);
     }
     if (mnInfoBonus_802528F8_wrapper() > 5) {
-        HSD_JObjClearFlags(fn_80252E4C_inline_GetJObjChild(temp_r30), 0x10U);
+        HSD_JObjClearFlags(fn_80252E4C_inline_GetJObjChild(temp_r30),
+                           JOBJ_HIDDEN);
     } else {
-        HSD_JObjSetFlags(fn_80252E4C_inline_GetJObjChild(temp_r30), 0x10U);
+        HSD_JObjSetFlags(fn_80252E4C_inline_GetJObjChild(temp_r30),
+                         JOBJ_HIDDEN);
     }
     HSD_JObjReqAnimAll(temp_r30, (f32) o->x48);
     HSD_JObjAnimAll(temp_r30);

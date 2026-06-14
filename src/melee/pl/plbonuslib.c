@@ -1396,6 +1396,8 @@ void pl_8004049C(int player, ItemKind arg1)
     }
     if (var_r0 == 0) {
         OSReport("zako ko player illegal ! :%d\n", player);
+        /// @todo Convert to @c HSD_ASSERT once a byte-matching form is
+        /// found.
         __assert("plbonuslib.c", 1559,
                  "0 <= player && player < Gm_Player_NumMax");
     }

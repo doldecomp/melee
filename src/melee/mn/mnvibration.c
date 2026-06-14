@@ -601,7 +601,7 @@ void mnVibration_8024829C(HSD_GObj* arg0)
             connected = 1;
         }
         mnVibration_802480B4(new_jobj, (u8) i, (u8) connected);
-        HSD_JObjSetFlagsAll(new_jobj, 0x10);
+        HSD_JObjSetFlagsAll(new_jobj, JOBJ_HIDDEN);
         HSD_JObjAddChild(data->jobjs[23], new_jobj);
         i += 1;
     } while (i < 4);
@@ -754,7 +754,8 @@ void fn_802487A8(HSD_GObj* gobj)
         {
             if ((s8) var_r3 != 0) {
                 HSD_JObjSetFlagsAll(
-                    ((MnVibrationData*) temp_r31)->jobjs[*var_r25], 0x10);
+                    ((MnVibrationData*) temp_r31)->jobjs[*var_r25],
+                    JOBJ_HIDDEN);
                 {
                     void* temp_jobj2;
                     temp_jobj2 =
@@ -779,7 +780,8 @@ void fn_802487A8(HSD_GObj* gobj)
                 temp_r31[var_r23 + 6] = 0;
             } else {
                 HSD_JObjClearFlagsAll(
-                    ((MnVibrationData*) temp_r31)->jobjs[*var_r25], 0x10);
+                    ((MnVibrationData*) temp_r31)->jobjs[*var_r25],
+                    JOBJ_HIDDEN);
                 var_r26 = NULL;
                 temp_r31[var_r23 + 2] = 0;
                 temp_r27 = ((MnVibrationData*) mnVibration_804D6C28->user_data)
@@ -854,9 +856,9 @@ void fn_80248A78(HSD_GObj* arg0)
                 i++;
             }
         }
-        HSD_JObjClearFlagsAll(jobj, 0x10U);
+        HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         if ((u8) temp_r30->x6[0] != 0) {
-            HSD_JObjClearFlagsAll(temp_r30->jobjs[22], 0x10U);
+            HSD_JObjClearFlagsAll(temp_r30->jobjs[22], JOBJ_HIDDEN);
         }
     } else if (frame == 11.0f) {
         jobj = ((MnVibrationData*) arg0->user_data)->jobjs[23];
@@ -870,9 +872,9 @@ void fn_80248A78(HSD_GObj* arg0)
         } else {
             jobj = jobj->next;
         }
-        HSD_JObjClearFlagsAll(jobj, 0x10U);
+        HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         if ((u8) temp_r30->x6[1] != 0) {
-            HSD_JObjClearFlagsAll(temp_r30->jobjs[21], 0x10U);
+            HSD_JObjClearFlagsAll(temp_r30->jobjs[21], JOBJ_HIDDEN);
         }
     } else if (frame == 12.0f) {
         jobj = ((MnVibrationData*) arg0->user_data)->jobjs[23];
@@ -891,9 +893,9 @@ void fn_80248A78(HSD_GObj* arg0)
         } else {
             jobj4 = jobj3->next;
         }
-        HSD_JObjClearFlagsAll(jobj4, 0x10U);
+        HSD_JObjClearFlagsAll(jobj4, JOBJ_HIDDEN);
         if ((u8) temp_r30->x6[2] != 0) {
-            HSD_JObjClearFlagsAll(temp_r30->jobjs[20], 0x10U);
+            HSD_JObjClearFlagsAll(temp_r30->jobjs[20], JOBJ_HIDDEN);
         }
     } else if (frame == 13.0f) {
         jobj = ((MnVibrationData*) arg0->user_data)->jobjs[23];
@@ -917,9 +919,9 @@ void fn_80248A78(HSD_GObj* arg0)
         } else {
             jobj = jobj4->next;
         }
-        HSD_JObjClearFlagsAll(jobj, 0x10U);
+        HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         if ((u8) temp_r30->x6[3] != 0) {
-            HSD_JObjClearFlagsAll(temp_r30->jobjs[19], 0x10U);
+            HSD_JObjClearFlagsAll(temp_r30->jobjs[19], JOBJ_HIDDEN);
         }
     } else if (frame == 14.0f) {
         if (GetNameCount() != 0) {
@@ -1016,10 +1018,10 @@ void mnVibration_80248ED4(s32 arg0)
             k += 1;
         } while (k < 0x19);
     }
-    HSD_JObjSetFlagsAll(data->jobjs[22], 0x10);
-    HSD_JObjSetFlagsAll(data->jobjs[21], 0x10);
-    HSD_JObjSetFlagsAll(data->jobjs[20], 0x10);
-    HSD_JObjSetFlagsAll(data->jobjs[19], 0x10);
+    HSD_JObjSetFlagsAll(data->jobjs[22], JOBJ_HIDDEN);
+    HSD_JObjSetFlagsAll(data->jobjs[21], JOBJ_HIDDEN);
+    HSD_JObjSetFlagsAll(data->jobjs[20], JOBJ_HIDDEN);
+    HSD_JObjSetFlagsAll(data->jobjs[19], JOBJ_HIDDEN);
     HSD_GObj_SetupProc(gobj, (void (*)(HSD_GObj*)) fn_80248A78, 0);
     mnVibration_8024829C(gobj);
     if (data->title_text != NULL) {

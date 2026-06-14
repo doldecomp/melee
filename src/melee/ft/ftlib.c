@@ -1044,9 +1044,7 @@ float ftLib_8008777C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ground_or_air != GA_Ground) {
-        __assert("ftlib.c", 1517, "fp->ground_or_air == GA_Ground");
-    }
+    HSD_ASSERT(1517, fp->ground_or_air == GA_Ground);
 
     {
         CollData* cd = Fighter_GetCollData(fp);

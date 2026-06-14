@@ -1034,7 +1034,7 @@ bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
         arg1->xC.xE = 1;
     }
     temp_r0 = arg0->match_end.result;
-    if ((temp_r0 == 7 || temp_r0 == 8) && g_debugLevel <= 2) {
+    if ((temp_r0 == 7 || temp_r0 == 8) && DbLevel <= 2) {
         switch (gm_801A4310()) {
         case 3:
             fn_80162BFC(arg1->ckind, arg1->xC.x18);
@@ -2415,7 +2415,7 @@ void fn_8017FF1C(HSD_GObj* gobj)
         (s32) (0.5f * (f32) (state->x110 - 0x14)) > (s32) state->x11D)
     {
         lb_80011E24(jobj, &sp28, state->x11D + 7, -1);
-        HSD_JObjClearFlagsAll(sp28, 0x10);
+        HSD_JObjClearFlagsAll(sp28, JOBJ_HIDDEN);
         state->x11D = (u8) (state->x11D + 1);
     }
 
@@ -2448,15 +2448,15 @@ void fn_8017FF1C(HSD_GObj* gobj)
     }
 
     if (state->x11E != 0) {
-        HSD_JObjSetFlagsAll(state->x20, 0x10);
+        HSD_JObjSetFlagsAll(state->x20, JOBJ_HIDDEN);
     } else {
-        HSD_JObjClearFlagsAll(state->x20, 0x10);
+        HSD_JObjClearFlagsAll(state->x20, JOBJ_HIDDEN);
     }
 
     if (state->x11F != 0) {
-        HSD_JObjSetFlagsAll(state->x24, 0x10);
+        HSD_JObjSetFlagsAll(state->x24, JOBJ_HIDDEN);
     } else {
-        HSD_JObjClearFlagsAll(state->x24, 0x10);
+        HSD_JObjClearFlagsAll(state->x24, JOBJ_HIDDEN);
     }
 
     if (state->x10C < 1.0f) {
@@ -2505,20 +2505,20 @@ s32 fn_801803FC(void* arg0)
         lb_8001204C(jobj, &p->x4, lbl_803D8B88, 0xA);
     }
     if (state->x117 == 0) {
-        HSD_JObjSetFlagsAll(p->x14, 0x10U);
-        HSD_JObjSetFlagsAll(p->x20, 0x10U);
-        HSD_JObjSetFlagsAll(p->x24, 0x10U);
+        HSD_JObjSetFlagsAll(p->x14, JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(p->x20, JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(p->x24, JOBJ_HIDDEN);
     }
     if (p->x11A != 0) {
         for (i = 0; i < 0xA; i++) {
             lb_80011E24(jobj, &sp10, i + 7, -1);
-            HSD_JObjSetFlagsAll(sp10, 0x10U);
+            HSD_JObjSetFlagsAll(sp10, JOBJ_HIDDEN);
         }
-        HSD_JObjSetFlagsAll(p->x10, 0x10U);
+        HSD_JObjSetFlagsAll(p->x10, JOBJ_HIDDEN);
     } else {
-        HSD_JObjSetFlagsAll(p->x1C, 0x10U);
+        HSD_JObjSetFlagsAll(p->x1C, JOBJ_HIDDEN);
         if (p->x118 != 0) {
-            HSD_JObjSetFlagsAll(p->x18, 0x10U);
+            HSD_JObjSetFlagsAll(p->x18, JOBJ_HIDDEN);
         }
     }
     temp = p->x4;
@@ -2740,7 +2740,7 @@ void fn_80180C14(HSD_GObj* gobj)
     HSD_JObj* jobj = gobj->hsd_obj;
 
     if ((lbl_80472E48.x0 & 3) != 0) {
-        HSD_JObjClearFlagsAll(jobj, 0x10);
+        HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         HSD_JObjAnimAll(jobj);
     }
 }
@@ -2815,7 +2815,7 @@ void fn_80180C60(HSD_GObj* gobj)
     if (!(((u8) lbl_80472E48.x0 >> 2) & 3)) {
         HSD_JObjReqAnimAll(jobj, 0.0f);
     } else if (lbl_80472E48.x0 & 3) {
-        HSD_JObjSetFlagsAll(jobj, 0x10U);
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     } else if (dist > lbl_80472E48.x14[gm_80164024((u8) lbl_80472E48.unk_4)]) {
         if (lbl_804D65D4 == 0) {
             lbAudioAx_800237A8(0x9C40, 0x7F, 0x40);
@@ -2825,7 +2825,8 @@ void fn_80180C60(HSD_GObj* gobj)
             lbl_804D65D4 = 1;
         }
         HSD_JObjClearFlagsAll(
-            HSD_JObjGetNext(HSD_JObjGetChild(HSD_JObjGetChild(jobj))), 0x10U);
+            HSD_JObjGetNext(HSD_JObjGetChild(HSD_JObjGetChild(jobj))),
+            JOBJ_HIDDEN);
     }
 
     if (lbLang_IsSavedLanguageUS() != 0) {
@@ -2988,7 +2989,7 @@ void fn_80181708(void)
     gm_8016895C(jobj, *lbl_804D65CC, 0);
     HSD_JObjReqAnimAll(jobj, 0.0f);
     HSD_JObjAnimAll(jobj);
-    HSD_JObjSetFlagsAll(jobj, 0x10U);
+    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
 
     gobj = (new_var = GObj_Create(0xEU, 0xFU, 0U));
     jobj = HSD_JObjLoadJoint((*lbl_804D65D0)->joint);
@@ -2998,13 +2999,14 @@ void fn_80181708(void)
     gm_8016895C(jobj, *lbl_804D65D0, 0);
     HSD_JObjReqAnimAll(jobj, 10.0f);
     HSD_JObjAnimAll(jobj);
-    HSD_JObjClearFlagsAll(jobj, 0x10U);
+    HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
 
     HSD_JObjSetFlagsAll(
-        HSD_JObjGetNext(HSD_JObjGetChild(HSD_JObjGetChild(jobj))), 0x10U);
+        HSD_JObjGetNext(HSD_JObjGetChild(HSD_JObjGetChild(jobj))),
+        JOBJ_HIDDEN);
     HSD_JObjClearFlagsAll(HSD_JObjGetNext(HSD_JObjGetNext(
                               HSD_JObjGetChild(HSD_JObjGetChild(jobj)))),
-                          0x10U);
+                          JOBJ_HIDDEN);
 
     gm_80168F88();
 }

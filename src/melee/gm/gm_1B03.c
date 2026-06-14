@@ -497,7 +497,7 @@ void gm_801B087C(GameScene* arg0)
 void gm_801B089C(GameScene* scene)
 {
     int* temp_r3 = gm_801A4284(scene);
-    if (g_debugLevel >= 3) {
+    if (DbLevel >= 3) {
         if (*temp_r3 & 0x100) {
             gm_801A42E8(GM_DEBUG_VS);
         } else if (*temp_r3 & 0x1000) {
@@ -1564,8 +1564,9 @@ void gm_801B1C24(GameScene* arg0)
         vs->data.players[i].color = (vs->data.players[i - 1].color + 1) %
                                     gm_80169238(vs->data.players[i].c_kind);
         if (vs->data.players[i].color == vs->data.players[0].color) {
-            vs->data.players[i].color = (vs->data.players[i].color + 1) %
-                                        gm_80169238(vs->data.players[i].c_kind);
+            vs->data.players[i].color =
+                (vs->data.players[i].color + 1) %
+                gm_80169238(vs->data.players[i].c_kind);
         }
         vs->data.players[i].slot_type = 3;
     }

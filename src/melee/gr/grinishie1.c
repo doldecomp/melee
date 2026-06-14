@@ -336,9 +336,9 @@ void grInishie1_801FAC58(Ground_GObj* gobj)
         if (gp->gv.inishie12.xCC == 0) {
             if (gp->gv.inishie12.xC8 > 0) {
                 if (gp->gv.inishie12.xC8 & 1) {
-                    HSD_JObjClearFlagsAll(jobj, 0x10U);
+                    HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
                 } else {
-                    HSD_JObjSetFlagsAll(jobj, 0x10U);
+                    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
                 }
                 gp->gv.inishie12.xC8 -= 1;
             }
@@ -503,7 +503,7 @@ void grInishie1_801FB0AC(HSD_GObj* gobj, u32 index)
         gp->gv.inishie1.xD8 = grI1_804D69F8->unk10;
     } else {
         if (gp->gv.inishie1.blocks[index].hatena_gobj != NULL) {
-            __assert("grinishie1.c", 0x29D, "0");
+            HSD_ASSERT(0x29D, 0);
         }
     }
 }
@@ -607,7 +607,7 @@ void grInishie1_801FB3F0(HSD_GObj* gobj)
                 lb_8000B1CC(slot->jobj, NULL, &pos);
                 if (!grLib_801C9EE8(&pos, 15.0f)) {
                     DOBJ_LOOP(slot->jobj);
-                    HSD_JObjClearFlagsAll(slot->jobj, 0x10U);
+                    HSD_JObjClearFlagsAll(slot->jobj, JOBJ_HIDDEN);
                     grMaterial_801C8E08(slot->item_gobj);
                     slot->status = 1;
                     slot->x22 = grI1_804D69F8->unk18;
@@ -617,7 +617,7 @@ void grInishie1_801FB3F0(HSD_GObj* gobj)
             if (slot->hatena_gobj != NULL) {
                 HSD_JObj* sub_jobj = ((HSD_GObj*) slot->hatena_gobj)->hsd_obj;
                 if (!(HSD_JObjGetFlags(sub_jobj) & 0x10)) {
-                    HSD_JObjSetFlagsAll(sub_jobj, 0x10U);
+                    HSD_JObjSetFlagsAll(sub_jobj, JOBJ_HIDDEN);
                 }
             }
             break;
@@ -632,9 +632,9 @@ void grInishie1_801FB3F0(HSD_GObj* gobj)
                         ((HSD_GObj*) slot->hatena_gobj)->hsd_obj;
 
                     if (slot->x22 & 1) {
-                        HSD_JObjClearFlagsAll(target, 0x10U);
+                        HSD_JObjClearFlagsAll(target, JOBJ_HIDDEN);
                     } else {
-                        HSD_JObjSetFlagsAll(target, 0x10U);
+                        HSD_JObjSetFlagsAll(target, JOBJ_HIDDEN);
                     }
 
                     DOBJ_LOOP(slot->jobj);
@@ -683,9 +683,8 @@ void grInishie1_801FBAA0(HSD_GObj* gobj, s32 index)
         return;
     }
 
-    if (slot->hatena_gobj != NULL) {
-        __assert("grinishie1.c", 0x39E, "!mapgp->u.map.block[ix].hatena_gobj");
-    }
+    HSD_ASSERTMSG(0x39E, !slot->hatena_gobj,
+                  "!mapgp->u.map.block[ix].hatena_gobj");
 
     slot->hatena_gobj = hatena;
 
@@ -742,7 +741,7 @@ void grInishie1_801FBCEC(HSD_GObj* gobj, u32 index)
         it_8026F7C8(&item_spawn_offset, &grI1_803B8268, 0);
     }
 
-    HSD_JObjSetFlagsAll(gp->gv.inishie1.blocks[index].jobj, 0x10U);
+    HSD_JObjSetFlagsAll(gp->gv.inishie1.blocks[index].jobj, JOBJ_HIDDEN);
 
     it_8026B294(gp->gv.inishie1.blocks[index].item_gobj, &effect_pos);
 

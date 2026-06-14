@@ -221,8 +221,8 @@ void ft_800C85B8(Fighter_GObj* gobj)
                         break;
                     }
                     if (var_r26 >= 0x20) {
-                        OSReport("fighter parts model dobj num over!\n");
-                        __assert("ftmetal.c", 0xF8, "0");
+                        HSD_ASSERTREPORT(
+                            0xF8, 0, "fighter parts model dobj num over!\n");
                     }
                     temp_r28->x203C.data[var_r26] = var_r24_2;
                     {
@@ -236,8 +236,7 @@ void ft_800C85B8(Fighter_GObj* gobj)
                     i++;
                 }
                 if (i >= 0x80) {
-                    OSReport("fighter dobj num over!\n");
-                    __assert("ftmetal.c", 0x106, "0");
+                    HSD_ASSERTREPORT(0x106, 0, "fighter dobj num over!\n");
                 }
                 temp_r28->parts[i].xD = var_r26 - 1;
                 temp_r28->parts[i].flags2_b6 = true;

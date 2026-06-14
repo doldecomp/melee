@@ -467,13 +467,21 @@ struct grSmashTaunt_GroundVars {
 };
 
 struct grVenom_GroundVars {
-    /* +00 gp+C4 */ u32 xC4;
+    /* +00 gp+C4 */ union {
+        u32 xC4;
+        struct {
+            u8 b0 : 1;
+        } xC4_flags;
+    };
     /* +04 gp+C8 */ u32 xC8;
     /* +08 gp+CC */ u32 xCC;
     /* +0C gp+D0 */ u32 xD0;
     /* +10 gp+D4 */ f32 xD4;
     /* +14 gp+D8 */ f32 xD8;
-    /* +18 gp+DC */ f32 xDC;
+    /* +18 gp+DC */ union {
+        f32 xDC;
+        Ground_GObj* linked_gobj;
+    };
     /* +1C gp+E0 */ f32 xE0;
     /* +20 gp+E4 */ f32 xE4;
     /* +24 gp+E8 */ f32 xE8;
@@ -1224,6 +1232,18 @@ struct grBigBlue_GroundData {
 };
 STATIC_ASSERT(sizeof(struct grBigBlue_GroundData) == 0x54);
 
+struct grBigBlue_PlatformVars {
+    /* gp+C4 */ u32 xC4;
+    /* gp+C8 */ s32 xC8_timer;
+    /* gp+CC */ s32 xCC_timer;
+    /* gp+D0 */ s32 xD0_timer;
+    /* gp+D4 */ f32 height_offset;
+    /* gp+D8 */ f32 xD8;
+    /* gp+DC */ f32 target_y;
+    /* gp+E0 */ Vec3 velocity;
+    /* gp+EC */ f32 xEC;
+};
+
 /// Used by multiple Big Blue Ground subtypes (track, road, car gobjs).
 /// Different gobjs interpret the same offsets differently.
 ///
@@ -1236,24 +1256,29 @@ STATIC_ASSERT(sizeof(struct grBigBlue_GroundData) == 0x54);
 ///   angular_vel(+48).
 struct grBigBlue_GroundVars {
     union {
-        /*  +0 gp+C4 */ u32 x0_w;
         struct {
-            /*  +0 gp+C5 */ u8 x0;
-            /*  +0 gp+C6 */ u8 x1;
-            /*  +0 gp+C7 */ u8 x2;
-            /*  +0 gp+C8 */ u8 x3;
+            union {
+                /*  +0 gp+C4 */ u32 x0_w;
+                struct {
+                    /*  +0 gp+C5 */ u8 x0;
+                    /*  +0 gp+C6 */ u8 x1;
+                    /*  +0 gp+C7 */ u8 x2;
+                    /*  +0 gp+C8 */ u8 x3;
+                };
+                struct {
+                    u8 x0_b1 : 1;
+                    u8 pad[3];
+                };
+            };
+            /*  +4 gp+C8 */ void* xC8;
+            /*  +8 gp+CC */ void* xCC;
+            /*  +C gp+D0 */ f32 xD0;
+            /* +10 gp+D4 */ HSD_JObj* xD4[3];
+            /* pad */ char pad_3[4];
+            /* +20 gp+E4 */ struct grBigBlue_GroundData data[3];
         };
-        struct {
-            u8 x0_b1 : 1;
-            u8 pad[3];
-        };
+        struct grBigBlue_PlatformVars platform;
     };
-    /*  +4 gp+C8 */ void* xC8;
-    /*  +8 gp+CC */ void* xCC;
-    /*  +C gp+D0 */ f32 xD0;
-    /* +10 gp+D4 */ HSD_JObj* xD4[3];
-    /* pad */ char pad_3[4];
-    /* +20 gp+E4 */ struct grBigBlue_GroundData data[3];
 };
 
 struct grBigBlueRoute_GroundVars {
