@@ -3216,11 +3216,9 @@ void Ground_801C5878(void)
     PAD_STACK(8);
     tyDisplay_8031C2CC();
     if (gm_8016B498() != 0) {
-        StageInfo* stageinfo = &stage_info;
-        int display_id;
-        display_id = tyDisplay_8031C2EC();
-        un_8031C454(display_id);
-        stageinfo->x6E4[0] = display_id;
+        int temp_r30 = tyDisplay_8031C2EC();
+        un_8031C454(temp_r30);
+        stage_info.x6E4[0] = temp_r30;
     } else {
         stage_info.x6E4[0] = -1;
     }
