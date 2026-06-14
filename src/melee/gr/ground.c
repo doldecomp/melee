@@ -3211,8 +3211,6 @@ s32 Ground_801C5840(void)
     return stage_info.x6E4[i];
 }
 
-#pragma push
-#pragma global_optimizer off
 void Ground_801C5878(void)
 {
     PAD_STACK(8);
@@ -3227,7 +3225,6 @@ void Ground_801C5878(void)
         stage_info.x6E4[0] = -1;
     }
 }
-#pragma pop
 
 Item_GObj* Ground_801C58E0(s32 arg0, s32 arg1)
 {
