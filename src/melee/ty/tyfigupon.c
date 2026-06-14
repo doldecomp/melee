@@ -218,7 +218,8 @@ void tyFigupon_80314BE4(HSD_GObj* gobj, int unused)
 void tyFigupon_80314C5C(HSD_GObj* gobj)
 {
     Toy* tp1 = GET_TOY(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
+    HSD_JObj* tmp_jobj = GET_JOBJ(gobj);
+    HSD_JObj* jobj = tmp_jobj;
     struct un_804D6EF4_t* temp_r29 = un_804D6EF4;
     PAD_STACK(40);
     if (tp1 != NULL) {
@@ -456,15 +457,17 @@ void fn_803155C8(void)
         ef4->x58 -= 1;
         if (ef4->x58 == 0) {
             if ((s8) data->x29 != 0) {
+                s32 bet_count;
                 new_var = un_80314B54();
-                sc = ef4->x5D;
+                bet_count = ef4->x5D;
                 fval = (f32) (ef4->x54 + new_var);
                 lbAudioAx_80023694();
-                if (sc != 0) {
-                    sc -= 1;
+                if (bet_count != 0) {
+                    bet_count -= 1;
                 }
                 pct = 100.0f *
-                      (((f32) ef4->x54 / fval) + ((f32) (sc * 5) / 100.0f));
+                      (((f32) ef4->x54 / fval) +
+                       ((f32) (bet_count * 5) / 100.0f));
                 if (pct >= 100.0f) {
                     pct = 99.9f;
                 }
