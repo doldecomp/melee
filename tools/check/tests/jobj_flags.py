@@ -6,7 +6,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-from check.main import _HIDDEN_LITERAL, scan_jobj_flags  # noqa: E402
+from check.main import _HIDDEN_LITERAL, fix_jobj_flags, scan_jobj_flags  # noqa: E402
 
 
 class JObjFlagsTest(unittest.TestCase):
@@ -70,6 +70,49 @@ class JObjFlagsTest(unittest.TestCase):
     def test_literal_regex_rejects_other_values(self) -> None:
         for tok in ["0x100", "160", "0x11", "17", "1", "0x1", "JOBJ_HIDDEN"]:
             self.assertIsNone(_HIDDEN_LITERAL.fullmatch(tok), tok)
+
+
+class JObjFlagsFixTest(unittest.TestCase):
+    def fix(self, source: str) -> tuple[str, int]:
+        return fix_jobj_flags(Path("test.c"), source)
+
+    def test_replaces_all_literal_forms(self) -> None:
+        source = (
+            "void f(HSD_JObj* j) {\n"
+            "    HSD_JObjSetFlagsAll(j, 0x10);\n"
+            "    HSD_JObjClearFlagsAll(j, 0x10U);\n"
+            "    HSD_JObjSetFlags(((HSD_JObj**) ud)[7], 16);\n"
+            "    HSD_JObjClearFlagsAll(child, 16U);\n"
+            "}\n"
+        )
+        fixed, n = self.fix(source)
+        self.assertEqual(n, 4)
+        self.assertNotIn("0x10", fixed)
+        self.assertNotIn(", 16", fixed)
+        self.assertEqual(fixed.count("JOBJ_HIDDEN"), 4)
+
+    def test_preserves_surrounding_text_exactly(self) -> None:
+        source = "    HSD_JObjSetFlagsAll(data->jobjs[3], 0x10);\n"
+        fixed, n = self.fix(source)
+        self.assertEqual((fixed, n), ("    HSD_JObjSetFlagsAll(data->jobjs[3], JOBJ_HIDDEN);\n", 1))
+
+    def test_leaves_non_matches_untouched(self) -> None:
+        source = (
+            "void f(HSD_JObj* j) {\n"
+            "    HSD_JObjSetFlagsAll(j, JOBJ_HIDDEN);\n"
+            "    HSD_JObjSetFlagsAll(j, 0x10 | JOBJ_PTCL);\n"
+            "    HSD_JObjSetFlagsAll(j, 0x100);\n"
+            '    HSD_JObjSetFlagsAll(foo("0x10", j), bar);\n'
+            "}\n"
+        )
+        fixed, n = self.fix(source)
+        self.assertEqual((fixed, n), (source, 0))
+
+    def test_idempotent(self) -> None:
+        source = "    HSD_JObjSetFlagsAll(j, 0x10);\n"
+        once, _ = self.fix(source)
+        twice, n = self.fix(once)
+        self.assertEqual((twice, n), (once, 0))
 
 
 if __name__ == "__main__":
