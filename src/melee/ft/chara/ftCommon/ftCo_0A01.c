@@ -5484,17 +5484,9 @@ void ftCo_800AC434(Fighter* fp)
     }
 }
 
-/* 4D87D8 */ extern const f32 ftCo_804D87D8;
-/* 4D8808 */ extern const f32 ftCo_804D8808;
-/* 4D8830 */ extern const f64 ftCo_804D8830;
-/* 4D8870 */ extern const f32 ftCo_804D8870;
-/* 4D8874 */ extern const f32 ftCo_804D8874;
-/* 4D888C */ extern const f32 ftCo_804D888C;
-/* 4D88C0 */ extern const f64 ftCo_804D88C0;
-
 static inline bool ftCo_800AC5A0_is_small(float x)
 {
-    if (x < ftCo_804D8870 && x > ftCo_804D8874) {
+    if (x < 0.00001F && x > -0.00001F) {
         return true;
     }
     return false;
@@ -5524,27 +5516,24 @@ void ftCo_800AC5A0(Fighter* fp)
         float kb_y = fp->x8c_kb_vel.y;
         float kb_mag;
         kb_mag = kb_x * kb_x + (kb_mag = kb_y * kb_y);
-        if (kb_mag > ftCo_804D87D8) {
+        if (kb_mag > 0.0F) {
             volatile float y;
             double guess = __frsqrte((double) kb_mag);
-            guess = ftCo_804D8830 * guess *
-                    (ftCo_804D88C0 - guess * guess * kb_mag);
-            guess = ftCo_804D8830 * guess *
-                    (ftCo_804D88C0 - guess * guess * kb_mag);
-            guess = ftCo_804D8830 * guess *
-                    (ftCo_804D88C0 - guess * guess * kb_mag);
+            guess = 0.5 * guess * (3.0 - guess * guess * kb_mag);
+            guess = 0.5 * guess * (3.0 - guess * guess * kb_mag);
+            guess = 0.5 * guess * (3.0 - guess * guess * kb_mag);
             y = (float) (kb_mag * guess);
             kb_mag = y;
         }
         if (!ftCo_800AC5A0_is_small(kb_mag)) {
-            float x = kb_x * (ftCo_804D8808 / kb_mag);
-            float y = kb_y * (ftCo_804D8808 / kb_mag);
-            if (kb_x > ftCo_804D87D8) {
-                stick_y = ftCo_804D888C * -y;
-                stick_x = ftCo_804D888C * +x;
+            float x = kb_x * (1.0F / kb_mag);
+            float y = kb_y * (1.0F / kb_mag);
+            if (kb_x > 0.0F) {
+                stick_y = 127.0F * -y;
+                stick_x = 127.0F * +x;
             } else {
-                stick_y = ftCo_804D888C * +y;
-                stick_x = ftCo_804D888C * -x;
+                stick_y = 127.0F * +y;
+                stick_x = 127.0F * -x;
             }
         }
         ftCo_800B46B8(fp, CpuCmd_SetLstickX, stick_y);
