@@ -303,7 +303,8 @@ void grBigBlueRoute_8020BC68(Ground_GObj* gobj)
         gp->gv.bigblueroute2.tracks[0].jobj = jobj;
         if (jobj != NULL) {
             jobj = gp->gv.bigblueroute2.tracks[0].jobj;
-            HSD_JObjGetTranslation(jobj, &gp->gv.bigblueroute2.tracks[0].offset);
+            HSD_JObjGetTranslation(jobj,
+                                   &gp->gv.bigblueroute2.tracks[0].offset);
             lbVector_Sub(&gp->gv.bigblueroute2.tracks[0].offset, &origin);
         }
 
@@ -311,7 +312,8 @@ void grBigBlueRoute_8020BC68(Ground_GObj* gobj)
         gp->gv.bigblueroute2.tracks[1].jobj = jobj;
         if (jobj != NULL) {
             jobj = gp->gv.bigblueroute2.tracks[1].jobj;
-            HSD_JObjGetTranslation(jobj, &gp->gv.bigblueroute2.tracks[1].offset);
+            HSD_JObjGetTranslation(jobj,
+                                   &gp->gv.bigblueroute2.tracks[1].offset);
             lbVector_Sub(&gp->gv.bigblueroute2.tracks[1].offset, &origin);
         }
 
@@ -319,7 +321,8 @@ void grBigBlueRoute_8020BC68(Ground_GObj* gobj)
         gp->gv.bigblueroute2.tracks[2].jobj = jobj;
         if (jobj != NULL) {
             jobj = gp->gv.bigblueroute2.tracks[2].jobj;
-            HSD_JObjGetTranslation(jobj, &gp->gv.bigblueroute2.tracks[2].offset);
+            HSD_JObjGetTranslation(jobj,
+                                   &gp->gv.bigblueroute2.tracks[2].offset);
             lbVector_Sub(&gp->gv.bigblueroute2.tracks[2].offset, &origin);
         }
 
@@ -327,7 +330,8 @@ void grBigBlueRoute_8020BC68(Ground_GObj* gobj)
         gp->gv.bigblueroute2.tracks[3].jobj = jobj;
         if (jobj != NULL) {
             jobj = gp->gv.bigblueroute2.tracks[3].jobj;
-            HSD_JObjGetTranslation(jobj, &gp->gv.bigblueroute2.tracks[3].offset);
+            HSD_JObjGetTranslation(jobj,
+                                   &gp->gv.bigblueroute2.tracks[3].offset);
             lbVector_Sub(&gp->gv.bigblueroute2.tracks[3].offset, &origin);
         }
     } else {
@@ -371,14 +375,14 @@ void grBigBlueRoute_8020BF38(Ground_GObj* gobj)
             for (i = 0; i < 3; i++) {
                 if (gp->gv.bigblueroute2.tracks[i].jobj != NULL) {
                     jobj = gp->gv.bigblueroute2.tracks[i].jobj;
-                    HSD_JObjSetTranslateX(jobj,
-                        gp->gv.bigblueroute2.tracks[i].offset.x +
-                            fighter_pos.x);
+                    HSD_JObjSetTranslateX(
+                        jobj, gp->gv.bigblueroute2.tracks[i].offset.x +
+                                  fighter_pos.x);
 
                     jobj = gp->gv.bigblueroute2.tracks[i].jobj;
-                    HSD_JObjSetTranslateY(jobj,
-                        gp->gv.bigblueroute2.tracks[i].offset.y +
-                            fighter_pos.y);
+                    HSD_JObjSetTranslateY(
+                        jobj, gp->gv.bigblueroute2.tracks[i].offset.y +
+                                  fighter_pos.y);
                 }
             }
 
@@ -540,7 +544,7 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
     s32 route_idx;
     PAD_STACK(8);
 
-    if (!((f32) gp->u.car.x108 < 1.0f + grBb_Route_804D6A68->x40)) {
+    if (gp->u.car.x108 >= 1.0f + grBb_Route_804D6A68->x40) {
         return;
     }
 
@@ -663,19 +667,20 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
 
 static const Vec3 grBb_Route_803B83E0 = { 0.0f, 1.0f, 0.0f };
 
-/// @todo Currently 89.41% match - SYSTEMIC: float-constant hoisting order and
-/// register pressure differ (target spills rot to stack; we keep it in FPRs).
+/// @todo 3448/3452 bytes (4B gap): MWCC needs 1 extra GPR (stmw r24 vs
+/// target stmw r25), shifting gp=r30 vs r29, gobj=r31 vs r30. Stack and FPR
+/// spills match (592B, f16-f31). All sdata2 [0-22] constants match.
 #define RE_ENTRY (&((RouteEntry*) gp->u.car.car_info)[i])
 void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
-    HSD_JObj* root_jobj = gobj->hsd_obj;
     HSD_GObj* fighter;
-    HSD_JObj* jobj;
-    int i;
     Vec3 pos;
     volatile Vec3 rot;
     Vec3 fighter_pos;
+    HSD_JObj* root_jobj = gobj->hsd_obj;
+    HSD_JObj* jobj;
+    int i;
     PAD_STACK(0x4C);
 
     fighter = Ground_801C57A4();
@@ -716,6 +721,18 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                 Vec3 p1;
                 Vec3 tangent;
 
+                t = RE_ENTRY->x4;
+                splGetSplinePoint(&p0, gp->u.car.xD0, t);
+                splGetSplinePoint(&p1, gp->u.car.xD4, t);
+                lbShadow_8000E9F0(&tangent, gp->u.car.xD0, t);
+                lbVector_Diff(&p1, &p0, &pos);
+
+                rot.x = -atan2f(tangent.y, tangent.x);
+                rot.y = 1.5707964f;
+                rot.z = 0.0f;
+
+                45.0f * Ground_801C0498();
+
                 if (RE_ENTRY->xC < RE_ENTRY->x10) {
                     RE_ENTRY->xC += 0.01f;
                     if (RE_ENTRY->xC > RE_ENTRY->x10) {
@@ -728,19 +745,11 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                     }
                 }
 
-                t = RE_ENTRY->x4;
                 frac = RE_ENTRY->xC;
-                splGetSplinePoint(&p0, gp->u.car.xD0, t);
-                splGetSplinePoint(&p1, gp->u.car.xD4, t);
-                lbShadow_8000E9F0(&tangent, gp->u.car.xD0, t);
-                lbVector_Diff(&p1, &p0, &pos);
                 pos.x *= frac;
                 pos.y *= frac;
                 pos.z *= frac;
                 lbVector_Add(&pos, &p0);
-                rot.x = -atan2f(tangent.y, tangent.x);
-                rot.y = 1.5707964f;
-                rot.z = 0.0f;
 
                 if (RE_ENTRY->x4 > 0.966f) {
                     RE_ENTRY->flags.b2_5 = 2;
@@ -884,7 +893,8 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                 Vec3 road_tan;
                 Vec3 road;
 
-                prog = (RE_ENTRY->x14 - RE_ENTRY->x24) / (1.0f - RE_ENTRY->x24);
+                prog =
+                    (RE_ENTRY->x14 - RE_ENTRY->x24) / (1.0f - RE_ENTRY->x24);
                 up = grBb_Route_803B83E0;
                 angle = (1.0f - prog) * RE_ENTRY->x1C;
                 splGetSplinePoint(&air, gp->u.car.xCC, RE_ENTRY->x14);
@@ -941,7 +951,8 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
             if (pos.x - 260.0f < fighter_pos.x &&
                 fighter_pos.x < 260.0f + pos.x &&
                 pos.z - 260.0f < fighter_pos.z &&
-                fighter_pos.z < 260.0f + pos.z && !RE_ENTRY->flags.b1) {
+                fighter_pos.z < 260.0f + pos.z && !RE_ENTRY->flags.b1)
+            {
                 if (!((gp->gv.bigblue.x0 >> 6) & 1)) {
                     gp->gv.bigblue.x0 |= 0x40;
                     Ground_801C53EC(0x77A16);
@@ -951,7 +962,8 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
             if (pos.x - 100.0f < fighter_pos.x &&
                 fighter_pos.x < 100.0f + pos.x &&
                 pos.z - 100.0f < fighter_pos.z &&
-                fighter_pos.z < 100.0f + pos.z) {
+                fighter_pos.z < 100.0f + pos.z)
+            {
                 if (RE_ENTRY->flags.b1) {
                     if (!((gp->gv.bigblue.x0 >> 7) & 1)) {
                         un_802FD604((s32) grBb_Route_804D6A68->x4C);
@@ -985,10 +997,12 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
         }
 
         i++;
-        jobj = (jobj != NULL)
-                   ? (HSD_JObj*) grBigBlueRoute_8020DA9C(
-                         (struct grBigBlueRoute_8020DA9C_t*) jobj)
-                   : NULL;
+        if (jobj != NULL) {
+            jobj = (HSD_JObj*) grBigBlueRoute_8020DA9C(
+                (struct grBigBlueRoute_8020DA9C_t*) jobj);
+        } else {
+            jobj = NULL;
+        }
     } while (i < 31);
 }
 #undef RE_ENTRY
@@ -1105,24 +1119,29 @@ void fn_8020DEAC(void)
     Ground_801C53EC(0x77A12);
 }
 
-
 /* Clamp camera position to stage bounds */
 void grBigBlueRoute_8020DED4(Vec3* pos)
 {
     f32 x = pos->x;
     f32 y = pos->y;
 
-    if (x < 20.0f * Ground_801C0498()) {
-        x = 20.0f * Ground_801C0498();
-    }
+    Ground_801C0498();
+    Ground_801C38BC(x, -1140.0f);
+    Ground_801C0498();
+    Ground_801C38BC(x, -1140.0f);
 
-    if (y < 250.0f * Ground_801C0498()) {
-        y = 250.0f * Ground_801C0498();
-    } else if (y > -3.0f * Ground_801C0498()) {
-        y = -3.0f * Ground_801C0498();
-    }
+    Ground_801C0498();
+    Ground_801C38BC(x, 20.0f);
+    Ground_801C0498();
+    Ground_801C38BC(x, 20.0f);
 
-    Ground_801C38BC(x, y);
+    Ground_801C0498();
+    Ground_801C38BC(y, 250.0f);
+    Ground_801C0498();
+    Ground_801C38BC(y, 250.0f);
+
+    Ground_801C0498();
+    Ground_801C38BC(y, -3.0f);
 }
 
 DynamicsDesc* grBigBlueRoute_8020DF78(enum_t arg)
@@ -1136,9 +1155,10 @@ bool grBigBlueRoute_8020DF80(Vec3* a, int arg, HSD_JObj* joint)
 
     lb_8000B1CC(joint, NULL, &b);
 
-    if (a->y > b.y + -3.0F) {
+    if (b.y > -3.0f) {
         return true;
     } else {
+        Ground_801C38BC(a->y, b.y);
         return false;
     }
 }
