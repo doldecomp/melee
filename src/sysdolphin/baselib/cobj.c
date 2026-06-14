@@ -765,6 +765,16 @@ bool HSD_CObjMtxIsDirty(HSD_CObj* cobj)
            (cobj->interest != NULL && (cobj->interest->flags & 2));
 }
 
+static inline int get_up_vector_for_viewing_mtx_inner(HSD_CObj* cobj, Vec3* up)
+{
+    return HSD_CObjGetUpVector(cobj, up);
+}
+
+static inline int get_up_vector_for_viewing_mtx(HSD_CObj* cobj, Vec3* up)
+{
+    return get_up_vector_for_viewing_mtx_inner(cobj, up);
+}
+
 void HSD_CObjGetViewingMtx(HSD_CObj* cobj, Mtx mtx)
 {
     PSMTXCopy(HSD_CObjGetViewingMtxPtr(cobj), mtx);
@@ -784,7 +794,6 @@ MtxPtr HSD_CObjGetInvViewingMtxPtrDirect(HSD_CObj* cobj)
 
 MtxPtr HSD_CObjGetViewingMtxPtr(HSD_CObj* cobj)
 {
-    extern int HSD_CObjGetUpVector(HSD_CObj* cobj, Vec3* up);
     Vec3 interest;
     Vec3 up_vec;
     Vec3 eyepos;
@@ -792,7 +801,7 @@ MtxPtr HSD_CObjGetViewingMtxPtr(HSD_CObj* cobj)
 
     if (!(cobj->flags & 2) && HSD_CObjMtxIsDirty(cobj)) {
         HSD_CObjGetEyePosition(cobj, &eyepos);
-        HSD_CObjGetUpVector(cobj, &up_vec);
+        get_up_vector_for_viewing_mtx(cobj, &up_vec);
         HSD_CObjGetInterest(cobj, &interest);
         C_MTXLookAt(cobj->view_mtx, &eyepos, &up_vec, &interest);
         HSD_WObjClearFlags(cobj->eyepos, 2);
@@ -805,7 +814,6 @@ MtxPtr HSD_CObjGetViewingMtxPtr(HSD_CObj* cobj)
 
 MtxPtr HSD_CObjGetInvViewingMtxPtr(HSD_CObj* cobj)
 {
-    extern int HSD_CObjGetUpVector(HSD_CObj* cobj, Vec3* up);
     Vec3 interest;
     Vec3 up_vec;
     Vec3 eyepos;
@@ -813,7 +821,7 @@ MtxPtr HSD_CObjGetInvViewingMtxPtr(HSD_CObj* cobj)
 
     if (!(cobj->flags & 2) && HSD_CObjMtxIsDirty(cobj)) {
         HSD_CObjGetEyePosition(cobj, &eyepos);
-        HSD_CObjGetUpVector(cobj, &up_vec);
+        get_up_vector_for_viewing_mtx(cobj, &up_vec);
         HSD_CObjGetInterest(cobj, &interest);
         C_MTXLookAt(cobj->view_mtx, &eyepos, &up_vec, &interest);
         HSD_WObjClearFlags(cobj->eyepos, 2);

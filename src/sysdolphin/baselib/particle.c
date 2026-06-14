@@ -1703,8 +1703,6 @@ s32 hsd_80393D2C(s32 enable)
 }
 #pragma pop
 
-#pragma push
-#pragma pool_data off
 void hsd_80393DA0(u8* buf, size_t size)
 {
     PAD_STACK(4);
@@ -1717,7 +1715,6 @@ void hsd_80393DA0(u8* buf, size_t size)
     hsd_804CF7E8.x0_b1 = true;
     HSD_SetReportCallback(fn_80393C14);
 }
-#pragma pop
 
 #pragma push
 #pragma dont_inline on
@@ -5011,7 +5008,6 @@ void hsd_80398F8C(HSD_Particle* pp, f32 angle)
     f32 abs_z;
     f32 temp;
     f32 abs_temp;
-    volatile f32 sqrt_tmp;
     PAD_STACK(16);
 
     {
@@ -5054,14 +5050,7 @@ void hsd_80398F8C(HSD_Particle* pp, f32 angle)
     }
 
     vx = (vx * vx + vy * vy) + vz * vz;
-    if (vx > 0.0F) {
-        f64 x = __frsqrte((f64) vx);
-        x = 0.5 * x * -(((f64) vx * (x * x)) - 3.0);
-        x = 0.5 * x * -(((f64) vx * (x * x)) - 3.0);
-        x = 0.5 * x * -(((f64) vx * (x * x)) - 3.0);
-        sqrt_tmp = (f32) ((f64) vx * x);
-        vx = sqrt_tmp;
-    }
+    vx = sqrtf(vx);
 
     rand_angle = (f32) (3.141592653589793 * HSD_Randf() * 2.0);
 
