@@ -2270,8 +2270,6 @@ static inline f32 ftCo_800A4BEC_inline0(Fighter* fp, Fighter* arg1)
     return sqrtf(dx * dx + dy * dy);
 }
 
-static const f32 ftCo_804D8914 = 120.0f;
-
 Fighter* ftCo_800A4BEC(Fighter* fp)
 {
     Fighter* cur_fp;
@@ -2318,7 +2316,7 @@ Fighter* ftCo_800A4BEC(Fighter* fp)
     } else {
         data->xF9_b0 = true;
         dist = HSD_Randf();
-        data->x30 = *(f32 const*) &ftCo_804D8914 * (0.5f * (0.5f * dist));
+        data->x30 = 120.0f * (0.5f * (0.5f * dist));
         data->x48 = closest;
     }
     return closest;
@@ -4424,6 +4422,20 @@ static inline bool ftCo_800A9CB4_is_small(f32 x)
     return false;
 }
 
+#define ftCo_800A9CB4_sqrtf_store(dst, x, store)                              \
+    do {                                                                      \
+        if (x > 0.0f) {                                                       \
+            double guess = __frsqrte((double) x);                             \
+            guess = 0.5 * guess * (3.0 - guess * guess * x);                  \
+            guess = 0.5 * guess * (3.0 - guess * guess * x);                  \
+            guess = 0.5 * guess * (3.0 - guess * guess * x);                  \
+            store = (float) (x * guess);                                      \
+            dst = store;                                                      \
+        } else {                                                              \
+            dst = x;                                                          \
+        }                                                                     \
+    } while (0)
+
 static inline enum_t ftCo_800A9CB4_inline0(Fighter* fp)
 {
     if (stage_info.internal_stage_id == SHRINE) {
@@ -4565,30 +4577,13 @@ void ftCo_800A9CB4(Fighter* fp)
     if (terminal_time <= 0.0f) {
         y_pos = (fp->pos_delta.y * x_time) + fp->cur_pos.y;
     } else if (x_time < terminal_time) {
-        if (x_time > 0.0f) {
-            double guess = __frsqrte((double) x_time);
-            guess = 0.5 * guess * (3.0 - guess * guess * x_time);
-            guess = 0.5 * guess * (3.0 - guess * guess * x_time);
-            guess = 0.5 * guess * (3.0 - guess * guess * x_time);
-            sqrt_x_time_store = (float) (x_time * guess);
-            sqrt_x_time = sqrt_x_time_store;
-        } else {
-            sqrt_x_time = x_time;
-        }
+        ftCo_800A9CB4_sqrtf_store(sqrt_x_time, x_time, sqrt_x_time_store);
         y_pos = fp->cur_pos.y +
                  (fp->pos_delta.y * x_time -
                   0.5 * (*grav_p * sqrt_x_time));
     } else {
-        if (terminal_time > 0.0f) {
-            double guess = __frsqrte((double) terminal_time);
-            guess = 0.5 * guess * (3.0 - guess * guess * terminal_time);
-            guess = 0.5 * guess * (3.0 - guess * guess * terminal_time);
-            guess = 0.5 * guess * (3.0 - guess * guess * terminal_time);
-            sqrt_terminal_time_store = (float) (terminal_time * guess);
-            sqrt_term_time = sqrt_terminal_time_store;
-        } else {
-            sqrt_term_time = terminal_time;
-        }
+        ftCo_800A9CB4_sqrtf_store(sqrt_term_time, terminal_time,
+                                   sqrt_terminal_time_store);
         sqrt_x_time = *grav_p;
         x_delta_abs = x_time - terminal_time;
         y_pos = fp->cur_pos.y +
@@ -4613,6 +4608,8 @@ void ftCo_800A9CB4(Fighter* fp)
     ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
     ftCo_800B463C(fp, CpuCmd_Done);
 }
+
+#undef ftCo_800A9CB4_sqrtf_store
 
 /**
  * Determine how much to move the stick based on CPU level
@@ -5516,15 +5513,7 @@ void ftCo_800AC5A0(Fighter* fp)
         float kb_y = fp->x8c_kb_vel.y;
         float kb_mag;
         kb_mag = kb_x * kb_x + (kb_mag = kb_y * kb_y);
-        if (kb_mag > 0.0F) {
-            volatile float y;
-            double guess = __frsqrte((double) kb_mag);
-            guess = 0.5 * guess * (3.0 - guess * guess * kb_mag);
-            guess = 0.5 * guess * (3.0 - guess * guess * kb_mag);
-            guess = 0.5 * guess * (3.0 - guess * guess * kb_mag);
-            y = (float) (kb_mag * guess);
-            kb_mag = y;
-        }
+        kb_mag = sqrtf(kb_mag);
         if (!ftCo_800AC5A0_is_small(kb_mag)) {
             float x = kb_x * (1.0F / kb_mag);
             float y = kb_y * (1.0F / kb_mag);
@@ -8980,8 +8969,7 @@ void ftCo_800B33B0(Fighter* fp)
             data->xF9_b0 = false;
         }
     } else {
-        data->x30 =
-            *(f32 const*) &ftCo_804D8914 * (0.5f * (0.5f * HSD_Randf()));
+        data->x30 = 120.0f * (0.5f * (0.5f * HSD_Randf()));
     }
     if (data->x60 != 0) {
         data->x60 = data->x60 - 1;

@@ -672,8 +672,6 @@ void ftCo_800932DC(Fighter_GObj* gobj)
     }
 }
 
-#pragma push
-#pragma inline_depth(4)
 void ftCo_GuardSetOff_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -689,7 +687,6 @@ void ftCo_GuardSetOff_Anim(Fighter_GObj* gobj)
         ftCo_80091D58(fp);
     }
 }
-#pragma pop
 
 void ftCo_GuardSetOff_IASA(Fighter_GObj* gobj) {}
 
