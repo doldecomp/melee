@@ -759,12 +759,12 @@ static inline void fn_80178BB4_init_players(ResultsData* data,
                                             int* ko_count)
 {
     do {
-        HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[0], 0x10);
-        HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[4], 0x10);
-        HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[8], 0x10);
-        HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[9], 0x10);
-        HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[10], 0x10);
-        HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[11], 0x10);
+        HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[0], JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[4], JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[8], JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[9], JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[10], JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[11], JOBJ_HIDDEN);
         lbDObjSetRateAll(HSD_JObjGetDObj(data->player_data[(*i)].jobjs[6]), 0.0f);
 
         {
@@ -850,16 +850,20 @@ static inline void fn_80178BB4_init_players(ResultsData* data,
                                     HSD_AObjSetCurrentFrame, AOBJ_ARG_AF, 0.0);
                     HSD_JObjAnimAll(taunt_jobj);
                     HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[7],
-                                        0x10);
+                                        JOBJ_HIDDEN);
                 }
 
                 HSD_JObjRemoveAnimAll(data->player_data[(*i)].jobjs[3]);
-                HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[3], 0x10);
+                HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[3],
+                                    JOBJ_HIDDEN);
             } else {
-                HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[1], 0x10);
+                HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[1],
+                                    JOBJ_HIDDEN);
                 HSD_JObjRemoveAnimAll(data->player_data[(*i)].jobjs[1]);
-                HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[5], 0x10);
-                HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[7], 0x10);
+                HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[5],
+                                    JOBJ_HIDDEN);
+                HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[7],
+                                    JOBJ_HIDDEN);
             }
         }
 
