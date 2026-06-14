@@ -1631,8 +1631,6 @@ int hsd_80393A5C(char* filename, int data, int size)
     return size;
 }
 
-#pragma push
-#pragma pool_data off
 void fn_80393C14(const u8* buf, size_t size)
 {
     int i;
@@ -1675,7 +1673,6 @@ void fn_80393C14(const u8* buf, size_t size)
     hsd_804CF7E8.xC = write_pos;
     hsd_804CF7E8.x11 = line_len;
 }
-#pragma pop
 
 #pragma push
 #pragma dont_inline on
@@ -1698,8 +1695,7 @@ s32 hsd_80393D2C(s32 enable)
 void hsd_80393DA0(u8* buf, size_t size)
 {
     PAD_STACK(4);
-    memset(&hsd_804CF7E8, 0,
-           sizeof(hsd_804CF7E8) - sizeof(hsd_804CF7E8.x24));
+    memset(&hsd_804CF7E8, 0, sizeof(hsd_804CF7E8) - sizeof(hsd_804CF7E8.x24));
     hsd_804CF7E8.out_buf = buf;
     hsd_804CF7E8.buf_size = size;
     memset(buf, 0, size);
@@ -3403,7 +3399,8 @@ s32 hsd_80396A20(void* data)
             }
             return 1;
         }
-        default: default_case:
+        default:
+        default_case:
             bit <<= 1;
             break;
         }
