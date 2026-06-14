@@ -1323,9 +1323,9 @@ venom_80205AD4_spawn: {
     s32 idx = data[14];
     s32* data2 = base + idx;
     other = (Ground_GObj*) grVenom_80203EAC(data2[0xC9]);
-    *(s32*) &gp->gv.venom.xDC = (s32) other;
+    gp->gv.venom.linked_gobj = other;
     if (other != NULL) {
-        other = *(Ground_GObj**) &gp->gv.venom.xDC;
+        other = gp->gv.venom.linked_gobj;
         other_gp = other->user_data;
         if (other_gp != NULL) {
             other_gp->gv.venom.xC8 = gp->gv.venom.xC8;
@@ -1337,7 +1337,7 @@ venom_80205AD4_spawn: {
 venom_80205AD4_link:
     jobj2 = Ground_801C3FA4((HSD_GObj*) data[8], 5);
     lb_8000C2F8(Ground_801C3FA4(gobj, 0), jobj2);
-    *(s32*) &gp->gv.venom.xDC = zero;
+    gp->gv.venom.linked_gobj = NULL;
     goto venom_80205AD4_done;
 
 venom_80205AD4_default:
@@ -1355,7 +1355,7 @@ venom_80205AD4_done:
     attr = grVe_804D6A30;
     HSD_JObjSetScaleZ(jobj, scale * attr->x34);
 
-    ((struct grCorneria_GroundVars2*) &gp->gv.venom)->xC4.flags.b0 = false;
+    gp->gv.venom.xC4_flags.b0 = false;
     *(s32*) &gp->gv.venom.xD4 = zero;
     gp->gv.venom.xF0 = zero;
     gp->gv.venom.xF4 = zero;
@@ -1440,12 +1440,10 @@ void grVenom_80205F30(Ground_GObj* gobj)
     s32 retries;
     s32 type_idx;
     HSD_JObj* helper;
-    struct grCorneria_GroundVars2* arwing_vars;
 
     base = (s32*) &grVe_803E5348;
     gp = gobj->user_data;
     jobj = gobj->hsd_obj;
-    arwing_vars = (struct grCorneria_GroundVars2*) &gp->gv.venom;
     sp94 = grVe_803B82D0;
     sp88 = grVe_803B82DC;
     PAD_STACK(0x28);
@@ -1543,8 +1541,8 @@ void grVenom_80205F30(Ground_GObj* gobj)
                     lb_8000B1CC(Ground_801C3FA4((HSD_GObj*) gobj, anim_id),
                                 NULL, &sp94);
                 }
-                if (arwing_vars->xDC != NULL) {
-                    Ground* sub = arwing_vars->xDC->user_data;
+                if (gp->gv.venom.linked_gobj != NULL) {
+                    Ground* sub = gp->gv.venom.linked_gobj->user_data;
                     if (sub != NULL) {
                         sub->gv.venom.xE0 = sp94.x;
                         sub->gv.venom.xE4 = sp94.y;
@@ -1558,8 +1556,8 @@ void grVenom_80205F30(Ground_GObj* gobj)
                     s32 anim_id = base[idx0 + 0xD6];
                     helper = Ground_801C3FA4((HSD_GObj*) gobj, anim_id);
                     rot_z = HSD_JObjGetRotationZ(helper);
-                    if (arwing_vars->xDC != NULL) {
-                        Ground* sub = arwing_vars->xDC->user_data;
+                    if (gp->gv.venom.linked_gobj != NULL) {
+                        Ground* sub = gp->gv.venom.linked_gobj->user_data;
                         if (sub != NULL) {
                             sub->gv.venom.xDC = rot_z;
                         }
@@ -1719,10 +1717,9 @@ void grVenom_80206874(Ground_GObj* gobj)
     case 7: {
         HSD_GObj* other = grVenom_80203EAC(
             data[data[gp->gv.venom.xC8 + 14] + 0xC9]);
-        *(s32*) &gp->gv.venom.xDC = (s32) other;
+        gp->gv.venom.linked_gobj = other;
         if (other != NULL) {
-            Ground* other_gp =
-                GET_GROUND(*(Ground_GObj**) &gp->gv.venom.xDC);
+            Ground* other_gp = GET_GROUND(gp->gv.venom.linked_gobj);
             if (other_gp != NULL) {
                 other_gp->gv.venom.xC8 = gp->gv.venom.xC8;
             }
@@ -1736,7 +1733,7 @@ void grVenom_80206874(Ground_GObj* gobj)
         lb_8000C2F8(
             Ground_801C3FA4(gobj, 0),
             Ground_801C3FA4((HSD_GObj*) data[gp->gv.venom.xC8 + 8], 5));
-        *(s32*) &gp->gv.venom.xDC = 0;
+        gp->gv.venom.linked_gobj = NULL;
         break;
     default:
         *(s32*) &gp->gv.venom.xE0 = -1;
@@ -1748,7 +1745,7 @@ void grVenom_80206874(Ground_GObj* gobj)
     HSD_JObjSetScaleY(jobj, scale * grVe_804D6A30->x34);
     HSD_JObjSetScaleZ(jobj, scale * grVe_804D6A30->x34);
 
-    ((struct grCorneria_GroundVars2*) &gp->gv.venom)->xC4.flags.b0 = false;
+    gp->gv.venom.xC4_flags.b0 = false;
     *(s32*) &gp->gv.venom.xD4 = 0;
     gp->gv.venom.xF0 = 0;
     gp->gv.venom.xF4 = 0;
