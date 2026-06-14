@@ -56,6 +56,7 @@
 #include <common_structs.h>
 #include <stddef.h>
 #include <trigf.h>
+#include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
 #include <MSL/math.h>
@@ -76,8 +77,6 @@ struct ftKb_Init_803CB490_layout {
 extern struct ftKb_Init_803CB4EC_t ftKb_Init_803CB4EC;
 
 extern char ftKb_Init_803CB510[];
-extern char ftKb_Init_803CB52C[];
-extern char* ftKb_Init_804D3DB0;
 
 /// Forward declarations
 void fn_800F9260(HSD_GObj*);
@@ -1010,8 +1009,7 @@ void fn_800F53AC(HSD_GObj* gobj)
         fp->cmd_vars[0] = 0;
         if (fp->fv.kb.hat.x0 != NULL) {
             if (fp->death2_cb != NULL && fp->death2_cb != ftKb_Init_800EE74C) {
-                OSReport(ftKb_Init_803CB510, fp->death2_cb, fp->fv.kb.hat.x0);
-                __assert(ftKb_Init_803CB52C, 0x66, ftKb_Init_804D3DB0);
+                HSD_ASSERTREPORT(0x66, 0, ftKb_Init_803CB510);
             }
             fp->death2_cb = ftKb_Init_800EE74C;
             fp->take_dmg_cb = ftKb_Init_800EE7B8;
