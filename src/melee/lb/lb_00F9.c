@@ -1,6 +1,7 @@
 #include "lb_00F9.static.h"
 
 #include "math.h"
+#include "math_ppc.h"
 #include "stdarg.h"
 #include "stddef.h"
 
@@ -56,22 +57,6 @@ struct lb_Collider {
     /* 0x18 */ Vec3 position;
     /* 0x24 */ char pad_24[0x04];
 };
-
-extern double __frsqrte(double);
-
-extern inline float sqrtf(float x)
-{
-    volatile float y;
-    if (x > 0.0f) {
-        double guess = __frsqrte((double) x);
-        guess = .5 * guess * (3.0 - guess * guess * x);
-        guess = .5 * guess * (3.0 - guess * guess * x);
-        guess = .5 * guess * (3.0 - guess * guess * x);
-        y = (float) (x * guess);
-        return y;
-    }
-    return x;
-}
 
 const struct {
     Vec3 v0;
@@ -2158,10 +2143,6 @@ void lb_800145F4(void)
     }
 }
 
-const f32 lb_804D7C70 = 0.0F;
-const f32 lb_804D7C74 = 0.00001F;
-const f32 lb_804D7C78 = 0.0F;
-
 bool lb_80014638(struct lb_80014638_arg0_t* arg0,
                  struct lb_80014638_arg1_t* arg1)
 {
@@ -2182,11 +2163,11 @@ bool lb_80014638(struct lb_80014638_arg0_t* arg0,
     }
     {
         float z = sp18.z;
-        if (((sp24.z - sp30.z) < lb_804D7C70
+        if (((sp24.z - sp30.z) < 0.0F
                  ? -(sp24.z - sp30.z)
-                 : sp24.z - sp30.z) < lb_804D7C74)
+                 : sp24.z - sp30.z) < 0.00001F)
         {
-            z = lb_804D7C78;
+            z = 0.0F;
         } else {
             z = (z - sp30.z) / (sp24.z - sp30.z);
         }
@@ -2199,6 +2180,12 @@ bool lb_80014638(struct lb_80014638_arg0_t* arg0,
     }
     return true;
 }
+
+#pragma force_active on
+const f32 sdata2_order_0 = 0.0F;
+const f32 sdata2_order_1 = 0.00001F;
+const f32 sdata2_order_2 = 0.0F;
+#pragma force_active reset
 
 bool lb_80014770(Vec3* arg0, int arg1)
 {

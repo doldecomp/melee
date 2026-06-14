@@ -6525,7 +6525,6 @@ void mpLib_80059554(void)
     }
 }
 
-static const float mpLib_804D8124[1] = { 3.0F };
 static const GXColor mpLib_804D8128 = { 0x7D, 0x7D, 0xFF, 0xFF };
 static const GXColor mpLib_804D812C = { 0x7D, 0xFF, 0x80, 0xFF };
 static const GXColor mpLib_804D8130 = { 0xFF, 0xFF, 0x80, 0xFF };
@@ -6606,17 +6605,15 @@ void mpLib_DrawCrosses(s16* idx, int len, GXColor arg2)
     mpLib_SetupDraw(arg2);
     GXBegin(GX_LINES, GX_VTXFMT0, out_count * 6);
     for (i = 0; i < out_count; i++) {
-        GXPosition3f32(vtx->x - mpLib_804D8124[0], vtx->y, vtx->z);
-        GXPosition3f32(mpLib_804D8124[0] + vtx->x, vtx->y, vtx->z);
-        GXPosition3f32(vtx->x, vtx->y - mpLib_804D8124[0], vtx->z);
-        GXPosition3f32(vtx->x, mpLib_804D8124[0] + vtx->y, vtx->z);
-        GXPosition3f32(vtx->x, vtx->y, vtx->z - mpLib_804D8124[0]);
-        GXPosition3f32(vtx->x, vtx->y, mpLib_804D8124[0] + vtx->z);
+        GXPosition3f32(vtx->x - 3.0F, vtx->y, vtx->z);
+        GXPosition3f32(3.0F + vtx->x, vtx->y, vtx->z);
+        GXPosition3f32(vtx->x, vtx->y - 3.0F, vtx->z);
+        GXPosition3f32(vtx->x, 3.0F + vtx->y, vtx->z);
+        GXPosition3f32(vtx->x, vtx->y, vtx->z - 3.0F);
+        GXPosition3f32(vtx->x, vtx->y, 3.0F + vtx->z);
         vtx++;
     }
 }
-
-static char lbl_803BF570[] = "B(%d,%d)-(%d,%d)\n";
 
 enum {
     mpLib_EnemySpawnVtxIds = 0x16,
