@@ -672,19 +672,88 @@ void ftCo_800932DC(Fighter_GObj* gobj)
     }
 }
 
+static inline void ftCo_80091D58_inline(Fighter* fp)
+{
+    Vec3 scl;
+    scl.x = scl.y = scl.z = inlineB0(fp);
+    HSD_JObjSetScale(fp->parts[fp->ft_data->x8->x11].joint, &scl);
+}
+
+static inline void ftCo_80092158_inline(Fighter_GObj* gobj, int arg1,
+                                        HSD_JObj* arg2)
+{
+    int offset = Player_GetUnk45(GET_FIGHTER(gobj)->player_id) << 2;
+    u8* color = Fighter_804D650C + offset;
+    efSync_Spawn(arg1, gobj, arg2,
+                 (color[0] << 16) | (color[1] << 8) | color[2]);
+}
+
+static inline void ftCo_80092C54_inline(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    Fighter_ChangeMotionState(gobj, ftCo_MS_GuardOff, Ft_MF_None, 0, 1, 0,
+                              NULL);
+    ft_PlaySFX(fp, 127, 127, 64);
+}
+
+static inline void ftCo_80092BE8_inline(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    pl_8003E114(fp->player_id, fp->x221F_b4, fp->shield_health);
+    switch (fp->kind) {
+    case FTKIND_YOSHI:
+        ftYs_Shield_8012C49C(gobj);
+        return;
+    default:
+        ftCo_80092C54_inline(gobj);
+        return;
+    }
+}
+
+static inline void ftCo_800928CC_inline(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    switch (fp->kind) {
+    case FTKIND_YOSHI:
+        ftYs_Shield_8012C1D4(gobj);
+        return;
+    default:
+        Fighter_ChangeMotionState(gobj, ftCo_MS_Guard, Ft_MF_SkipAnim, 0, 1,
+                                  0, NULL);
+        {
+            HSD_JObj* jobj = fp->parts[fp->ft_data->x8->x11].joint;
+            ftCo_80092158_inline(gobj, 1048, jobj);
+            fp->x2219_b0 = true;
+            {
+                AbsorbDesc absorb;
+                u8 _[8];
+                Fighter* fp2 = GET_FIGHTER(gobj);
+                absorb.x0_bone_id = fp2->ft_data->x8->x11;
+                absorb.x10_size = 1;
+                absorb.x4_offset.x = absorb.x4_offset.y = absorb.x4_offset.z =
+                    0;
+                ftColl_8007B1B8(gobj, (ShieldDesc*) &absorb, ftCo_80092E50);
+                fp2->x221A_b7 = true;
+            }
+            ftCo_80091E78(gobj, 1);
+        }
+        return;
+    }
+}
+
 void ftCo_GuardSetOff_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    PAD_STACK(16);
+    PAD_STACK(24);
     ftCo_80093BC0(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->mv.co.guard.xC) {
-            ftCo_80092BE8(gobj);
+            ftCo_80092BE8_inline(gobj);
         } else {
-            ftCo_800928CC(gobj);
+            ftCo_800928CC_inline(gobj);
         }
     } else {
-        ftCo_80091D58(fp);
+        ftCo_80091D58_inline(fp);
     }
 }
 
