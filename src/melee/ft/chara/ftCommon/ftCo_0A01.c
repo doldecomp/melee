@@ -4424,8 +4424,16 @@ static inline bool ftCo_800A9CB4_is_small(f32 x)
 
 #define ftCo_800A9CB4_sqrtf_store(dst, x, store)                              \
     do {                                                                      \
-        store = sqrtf(x);                                                     \
-        dst = store;                                                          \
+        if (x > 0.0f) {                                                       \
+            double guess = __frsqrte((double) x);                             \
+            guess = 0.5 * guess * (3.0 - guess * guess * x);                  \
+            guess = 0.5 * guess * (3.0 - guess * guess * x);                  \
+            guess = 0.5 * guess * (3.0 - guess * guess * x);                  \
+            store = (float) (x * guess);                                      \
+            dst = store;                                                      \
+        } else {                                                              \
+            dst = x;                                                          \
+        }                                                                     \
     } while (0)
 
 static inline enum_t ftCo_800A9CB4_inline0(Fighter* fp)
