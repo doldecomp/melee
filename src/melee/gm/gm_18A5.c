@@ -5599,6 +5599,8 @@ void fn_801967E0(s32 arg0)
     return;
 }
 
+#pragma push
+#pragma dont_inline on
 s32 fn_80196CF8(void)
 {
     TmData* tmdata;
@@ -5624,6 +5626,7 @@ s32 fn_80196CF8(void)
 
     return result;
 }
+#pragma pop
 
 static struct Lbl804799D8_t {
     u32 x0;       // 0x00 counter
