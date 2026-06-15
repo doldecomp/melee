@@ -180,7 +180,32 @@ void grIceMt_801F6868(bool id) {}
 
 #define ICEMT_FIELD_MAX 6
 
-/// #grIceMt_801F686C
+extern char grIm_804D4710;
+extern char grIm_804D4718;
+extern char grIm_804D4720;
+
+static inline bool Fake_HSD_JObjMtxIsDirty(HSD_JObj* jobj)
+{
+    bool result;
+    (jobj) ? ((void) 0) : __assert(&grIm_804D4720, 564, &grIm_804D4718);
+    result = false;
+    if (!(jobj->flags & JOBJ_USER_DEF_MTX) && (jobj->flags & JOBJ_MTX_DIRTY)) {
+        result = true;
+    }
+    return result;
+}
+
+static inline void Fake_HSD_JObjSetTranslateY(HSD_JObj* jobj, f32 y)
+{
+    (jobj) ? ((void) 0) : __assert(&grIm_804D4720, 947, &grIm_804D4718);
+    jobj->translate.y = y;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        if (jobj != NULL && !Fake_HSD_JObjMtxIsDirty(jobj)) {
+            HSD_JObjSetMtxDirtySub(jobj);
+        }
+    }
+}
+
 void grIceMt_801F686C(void)
 {
     s32 field30;
@@ -210,7 +235,6 @@ void grIceMt_801F686C(void)
     Ground_801C3260(6);
 
     if (Stage_80225194() == 76) {
-        // First loop: find row where neither xAC[0] nor xAC[1] matches
         for (i = 0; i < ICEMT_FIELD_MAX; i++) {
             xAC = grIm_804D69F4->xAC;
             id = grIm_803E4068[i].id;
@@ -223,9 +247,10 @@ void grIceMt_801F686C(void)
             field30 = grIm_803E4068[i].id;
             break;
         }
-        HSD_ASSERT(0x258, i<ICEMT_FIELD_MAX);
+        (i < ICEMT_FIELD_MAX)
+            ? ((void) 0)
+            : __assert(grIm_803E46F8, 0x258, grIm_803E46F8 + 0xC);
 
-        // Second loop: find row where xAC[0], xAC[1], and field30 don't match
         for (i = 0; i < ICEMT_FIELD_MAX; i++) {
             xAC = grIm_804D69F4->xAC;
             id = grIm_803E4068[i].id;
@@ -241,10 +266,10 @@ void grIceMt_801F686C(void)
             field29 = grIm_803E4068[i].id;
             break;
         }
-        HSD_ASSERT(0x261, i<ICEMT_FIELD_MAX);
+        (i < ICEMT_FIELD_MAX)
+            ? ((void) 0)
+            : __assert(grIm_803E46F8, 0x261, grIm_803E46F8 + 0xC);
 
-        // Third loop: find row where xAC[0], xAC[1], field30, and field29
-        // don't match
         for (i = 0; i < ICEMT_FIELD_MAX; i++) {
             xAC = grIm_804D69F4->xAC;
             id = grIm_803E4068[i].id;
@@ -263,40 +288,45 @@ void grIceMt_801F686C(void)
             field28 = grIm_803E4068[i].id;
             break;
         }
-        HSD_ASSERT(0x26B, i<ICEMT_FIELD_MAX);
+        (i < ICEMT_FIELD_MAX)
+            ? ((void) 0)
+            : __assert(grIm_803E46F8, 0x26B, grIm_803E46F8 + 0xC);
 
-        // Calculate Y positions for the 3 topi platforms
         y_pos = Ground_801C0498();
-        xAC = grIm_804D69F4->xAC;
         y_pos = grIm_804DB570 * y_pos;
-        y_pos = y_pos + grIceMt_801F993C(grIm_803E4068[xAC[0]].id,
-                                         grIm_803E4068[xAC[1]].id);
-        y_pos2 = y_pos + grIceMt_801F993C(grIm_803E4068[xAC[1]].id, field30);
-        y_pos3 = y_pos2 + grIceMt_801F993C(field30, field29);
-        y_pos4 = y_pos3 + grIceMt_801F993C(field29, field28);
+        y_pos = y_pos +
+                grIceMt_801F993C(grIm_803E4068[grIm_804D69F4->xAC[0]].id,
+                                 grIm_803E4068[grIm_804D69F4->xAC[1]].id);
+        y_pos2 = y_pos +
+                 grIceMt_801F993C(grIm_803E4068[grIm_804D69F4->xAC[1]].id,
+                                  grIm_803E4068[field30].id);
+        y_pos3 = y_pos2 + grIceMt_801F993C(grIm_803E4068[field30].id,
+                                           grIm_803E4068[field29].id);
+        y_pos4 = y_pos3 + grIceMt_801F993C(grIm_803E4068[field29].id,
+                                           grIm_803E4068[field28].id);
 
-        // Set up first topi (grIm_804D69E8)
-        bg_gobj = grIceMt_801F71E8(grIm_803E4068[xAC[2]].id);
-        HSD_ASSERT(0x27C, bg_gobj);
+        bg_gobj = grIceMt_801F71E8(grIm_803E4068[grIm_804D69F4->xAC[2]].id);
+        (bg_gobj) ? ((void) 0)
+                  : __assert(grIm_803E46F8, 0x27C, &grIm_804D4710);
         jobj = bg_gobj->hsd_obj;
-        HSD_ASSERT(0x27D, jobj);
-        HSD_JObjSetTranslateY(jobj, y_pos2);
+        (jobj) ? ((void) 0) : __assert(grIm_803E46F8, 0x27D, &grIm_804D4718);
+        Fake_HSD_JObjSetTranslateY(jobj, y_pos2);
         grIm_804D69E8 = bg_gobj;
 
-        // Set up second topi (grIm_804D69EC)
-        bg_gobj = grIceMt_801F71E8(grIm_803E4068[xAC[3]].id);
-        HSD_ASSERT(0x281, bg_gobj);
+        bg_gobj = grIceMt_801F71E8(grIm_803E4068[grIm_804D69F4->xAC[3]].id);
+        (bg_gobj) ? ((void) 0)
+                  : __assert(grIm_803E46F8, 0x281, &grIm_804D4710);
         jobj = bg_gobj->hsd_obj;
-        HSD_ASSERT(0x282, jobj);
-        HSD_JObjSetTranslateY(jobj, y_pos3);
+        (jobj) ? ((void) 0) : __assert(grIm_803E46F8, 0x282, &grIm_804D4718);
+        Fake_HSD_JObjSetTranslateY(jobj, y_pos3);
         grIm_804D69EC = bg_gobj;
 
-        // Set up third topi (grIm_804D69F0)
-        bg_gobj = grIceMt_801F71E8(grIm_803E4068[xAC[4]].id);
-        HSD_ASSERT(0x286, bg_gobj);
+        bg_gobj = grIceMt_801F71E8(grIm_803E4068[grIm_804D69F4->xAC[4]].id);
+        (bg_gobj) ? ((void) 0)
+                  : __assert(grIm_803E46F8, 0x286, &grIm_804D4710);
         jobj = bg_gobj->hsd_obj;
-        HSD_ASSERT(0x287, jobj);
-        HSD_JObjSetTranslateY(jobj, y_pos4);
+        (jobj) ? ((void) 0) : __assert(grIm_803E46F8, 0x287, &grIm_804D4718);
+        Fake_HSD_JObjSetTranslateY(jobj, y_pos4);
         grIm_804D69F0 = bg_gobj;
 
         grIceMt_801F71E8(0xA);
