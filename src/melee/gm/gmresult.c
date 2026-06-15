@@ -93,7 +93,7 @@ typedef struct StatsEntry {
     /* 0x02 */ u8 pad_2[2];
     /* 0x04 */ s32 (*check)(s32);
     /* 0x08 */ u32 (*get)(s32);
-    /* 0x0C */ void* xC;
+    /* 0x0C */ u8 pad_C[4];
 } StatsEntry;
 
 typedef struct StatsList {
@@ -551,83 +551,11 @@ s32 fn_80174A60(StatsList* list, s32 slot)
 }
 
 /// Static data for stats lists
-static StatsEntry lbl_803D6488[13] = {
-    { 8, { 0 }, NULL, NULL, NULL },
-    { 8, { 0 }, NULL, NULL, NULL },
-    { -1, { 0 }, fn_8017AE70, (u32 (*)(s32))(Event) fn_8017BB94, NULL },
-    { -1, { 0 }, fn_8017AED8, (u32 (*)(s32))(Event) fn_8017BC50, NULL },
-    { -1, { 0 }, fn_8017AF40, (u32 (*)(s32))(Event) fn_8017BD0C, NULL },
-    { -1, { 0 }, fn_8017AFA8, (u32 (*)(s32))(Event) fn_8017BDC8, NULL },
-    { 9, { 0 }, NULL, NULL, NULL },
-    { -1, { 0 }, fn_8017B07C, (u32 (*)(s32))(Event) fn_8017BB94, NULL },
-    { -1, { 0 }, fn_8017B0E4, (u32 (*)(s32))(Event) fn_8017BC50, NULL },
-    { -1, { 0 }, fn_8017B14C, (u32 (*)(s32))(Event) fn_8017BD0C, NULL },
-    { -1, { 0 }, fn_8017B1B4, (u32 (*)(s32))(Event) fn_8017BDC8, NULL },
-    { 12, { 0 }, fn_8017B21C, NULL, NULL },
-    { 12, { 0 }, NULL, NULL, NULL },
-};
-
-static StatsEntry lbl_803D6558[48] = {
-    { 10, { 0 }, NULL, NULL, NULL },
-    { 10, { 0 }, NULL, NULL, NULL },
-    { 11, { 0 }, fn_8017AE0C, NULL, NULL },
-    { 14, { 0 }, NULL, NULL, NULL },
-    { 15, { 0 }, fn_8017B010, NULL, NULL },
-    { 12, { 0 }, NULL, NULL, NULL },
-    { 13, { 0 }, fn_8017B21C, NULL, NULL },
-    { 16, { 0 }, NULL, NULL, NULL },
-    { 17, { 0 }, fn_8017B280, NULL, NULL },
-    { 18, { 0 }, NULL, NULL, NULL },
-    { 19, { 0 }, fn_8017B2E4, NULL, NULL },
-    { 20, { 0 }, NULL, NULL, NULL },
-    { 21, { 0 }, fn_8017B348, NULL, NULL },
-    { 22, { 0 }, NULL, NULL, NULL },
-    { 23, { 0 }, fn_8017B3AC, NULL, NULL },
-    { 24, { 0 }, NULL, NULL, NULL },
-    { 25, { 0 }, fn_8017B410, NULL, NULL },
-    { 26, { 0 }, NULL, NULL, NULL },
-    { 27, { 0 }, fn_8017B4D0, NULL, NULL },
-    { 28, { 0 }, NULL, NULL, NULL },
-    { 29, { 0 }, fn_8017B534, NULL, NULL },
-    { 30, { 0 }, NULL, NULL, NULL },
-    { 31, { 0 }, fn_8017B598, NULL, NULL },
-    { 32, { 0 }, NULL, NULL, NULL },
-    { 33, { 0 }, fn_8017B5FC, NULL, NULL },
-    { 34, { 0 }, NULL, NULL, NULL },
-    { 35, { 0 }, fn_8017B660, NULL, NULL },
-    { 36, { 0 }, NULL, NULL, NULL },
-    { 37, { 0 }, fn_8017B6C4, NULL, NULL },
-    { 38, { 0 }, NULL, NULL, NULL },
-    { 39, { 0 }, fn_8017B728, NULL, NULL },
-    { 40, { 0 }, NULL, NULL, NULL },
-    { 41, { 0 }, fn_8017B78C, NULL, NULL },
-    { 42, { 0 }, NULL, NULL, NULL },
-    { 43, { 0 }, fn_8017B7F0, NULL, NULL },
-    { 44, { 0 }, NULL, NULL, NULL },
-    { 45, { 0 }, fn_8017B854, NULL, NULL },
-    { 46, { 0 }, NULL, NULL, NULL },
-    { 47, { 0 }, fn_8017B8B8, NULL, NULL },
-    { 48, { 0 }, NULL, NULL, NULL },
-    { 49, { 0 }, fn_8017B91C, NULL, NULL },
-    { 50, { 0 }, NULL, NULL, NULL },
-    { 51, { 0 }, fn_8017B9F4, NULL, NULL },
-    { 52, { 0 }, NULL, NULL, NULL },
-    { 53, { 0 }, (s32 (*)(s32)) fn_8017BACC, NULL, NULL },
-    { 54, { 0 }, NULL, NULL, NULL },
-    { 55, { 0 }, (s32 (*)(s32)) fn_8017BB30, NULL, NULL },
-    { 54, { 0 }, NULL, NULL, NULL },
-};
-
-static StatsEntry lbl_803D6858[2] = {
-    { 8, { 0 }, NULL, NULL, NULL },
-    { 8, { 0 }, NULL, NULL, NULL },
-};
-
 static StatsList lbl_803D6878[] = {
-    { 0, 0x0D, { 0 }, lbl_803D6488 },
-    { 1, 0x30, { 0 }, lbl_803D6558 },
-    { 2, 0x02, { 0 }, lbl_803D6858 },
-    { 3, 0x00, { 0 }, NULL },
+    { 0, 0x0D, NULL },
+    { 1, 0x30, NULL },
+    { 2, 0x02, NULL },
+    { 3, 0x00, NULL },
 };
 
 void fn_80174B4C(ResultsData* data, s32 slot)
@@ -1013,6 +941,7 @@ end_common:
 void fn_80175880(s32 slot)
 {
     MatchEnd* me;
+    u32 new_var2;
     s32 var_r30;
     u8 winner;
     GXColor sp10;
@@ -1021,7 +950,6 @@ void fn_80175880(s32 slot)
     s32 skip;
     u32 seconds;
     u32 minutes;
-    u32 new_var2;
 
     me = lbl_8046DBE8.x94;
     sp10 = fn_8017507C(slot);
@@ -1059,22 +987,13 @@ void fn_80175880(s32 slot)
         if ((s8) me->player_standings[slot].stocks > 0) {
             goto show_normal;
         }
-        if (me->player_standings[slot].score !=
+        if (me->player_standings[slot].score ==
             me->player_standings[winner].score)
         {
-            goto show_time;
+            goto show_normal;
         }
-    } else {
-        goto show_time;
     }
 
-show_normal:
-    var_r30 = HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time, 0.0F,
-                                  -30.0F,
-                                  "\x81\x7C\x81\x46\x81\x7C\0", slot * 0xA8);
-    goto end_common;
-
-show_time:
     seconds = me->player_standings[slot].x28 / 60;
     if (seconds > 5999) {
         seconds = 5999;
@@ -1083,8 +1002,12 @@ show_time:
     new_var2 = minutes * 60;
     var_r30 =
         HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time, 0.0F,
-                            -30.0F, "%d\x81\x46%02d", minutes,
-                            seconds - new_var2);
+                            -30.0F, "%02d:%02d", minutes, seconds - new_var2);
+    goto end_common;
+
+show_normal:
+    var_r30 = HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time, 0.0F,
+                                  -30.0F, NULL);
     goto end_common;
 
 grey_out:
@@ -1092,7 +1015,7 @@ grey_out:
     sp10.g = 0xA0;
     sp10.b = 0xA0;
     var_r30 = HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time, 0.0F,
-                                  -30.0F, "%s", &lbl_804D3FA0);
+                                  -30.0F, NULL, 0);
 
 end_common:
     HSD_SisLib_803A7548(lbl_8046DBE8.player_data[slot].ko_time, var_r30, 0.11f,
@@ -1667,28 +1590,17 @@ void fn_80176D3C(Vec3* positions)
     ResultsData* data = &lbl_8046DBE8;
     MatchEnd* me;
     Vec3* pos;
-    struct ResultsMatchPlayerIter {
-        u8 pad_0[0x58];
-        u8 slot_type;
-        u8 pad_59[4];
-        u8 is_big_loser;
-        u8 pad_5E;
-        u8 team;
-        u8 pad_60[0xA8 - 0x60];
-    }* p;
-    u8 _[8];
+    MatchPlayerData* p;
     DynamicModelDesc* models[3];
-    s32 i;
-    HSD_GObj* gobj;
     HSD_JObj* jobj;
+    HSD_GObj* gobj;
     s32 winner;
+    s32 i;
     PAD_STACK(8);
 
     me = data->x94;
     pos = positions;
-    p = (struct ResultsMatchPlayerIter*) me;
-    if (p && p) {
-    }
+    p = me->player_standings;
     models[0] = data->flmsce->models[3];
     models[1] = data->flmsce->models[2];
     models[2] = data->flmsce->models[1];
@@ -1852,31 +1764,13 @@ void fn_801771C0(ResultsData* data)
 
 extern HSD_Archive* lbl_804D65B8;
 
-typedef struct ResultsMatchEndPlayerIter {
-    u8 pad_0[0x58];
-    u8 slot_type;
-    s8 character_kind;
-    s8 character_id;
-    u8 x3 : 6;
-    u8 x3_6 : 1;
-    u8 x3_7 : 1;
-    u8 pad_5C[0xA8 - 0x5C];
-} ResultsMatchEndPlayerIter;
-
-typedef struct ResultsDataPlayerIter {
-    u8 pad_0[0xA0];
-    HSD_GObj* fighter_gobj;
-    HSD_GObj* camera;
-    u8 pad_A8[0xD8 - 0xA8];
-} ResultsDataPlayerIter;
-
 void gm_80177368_OnEnter(void* arg0_)
 {
     ResultsMatchInfo* arg0 = arg0_;
-    HSD_GObj* light_gobj;
-    HSD_LObj* lobj;
-    HSD_GObj* model_gobj;
-    MatchEnd* me;
+    HSD_LObj* temp_r3_3;
+    HSD_GObj* temp_r3_2;
+    HSD_GObj* temp_r3_4;
+    MatchEnd* temp_r29;
     ResultsData* data = &lbl_8046DBE8;
     int i;
 
@@ -1889,12 +1783,12 @@ void gm_80177368_OnEnter(void* arg0_)
     lbl_8046DBE8.x0_4 = arg0->x0_0;
     lbl_8046DBE8.x0_5 = arg0->x0_1;
 
-    me = lbl_8046DBE8.x94;
+    temp_r29 = lbl_8046DBE8.x94;
     if (gm_801743A4(lbl_8046DBE8.x94->result)) {
         lbl_8046DBE8.num_pages = 2;
     } else {
         lbl_8046DBE8.num_pages = 3;
-        if (me->x5 == 3) {
+        if (temp_r29->x5 == 3) {
             lbl_8046DBE8.player_data[0].page = 2;
             lbl_8046DBE8.player_data[1].page = 2;
             lbl_8046DBE8.player_data[2].page = 2;
@@ -1902,10 +1796,9 @@ void gm_80177368_OnEnter(void* arg0_)
         }
     }
     if (fn_801701B8() == 0) {
-        ResultsStatsInfo* stats_info = lbl_8046E190;
-        for (i = 0; i < 4; i++, stats_info++) {
-            stats_info->x0 = 2;
-            stats_info->x1 = fn_80174284_noinline(i) * 2 + 2;
+        for (i = 0; i < 4; i++) {
+            lbl_8046E190[i].x0 = 2;
+            lbl_8046E190[i].x1 = fn_80174284_noinline(i) * 2 + 2;
         }
     } else {
         for (i = 0; i < 4; i++) {
@@ -1914,9 +1807,9 @@ void gm_80177368_OnEnter(void* arg0_)
         }
     }
     fn_801771C0(&lbl_8046DBE8);
-    if (me->player_standings[data->x6].slot_type == Gm_PKind_Human) {
-        if (!gm_801743A4(me->result) &&
-            me->player_standings[data->x6].x3_6)
+    if (temp_r29->player_standings[data->x6].slot_type == Gm_PKind_Human) {
+        if (!gm_801743A4(temp_r29->result) &&
+            temp_r29->player_standings[data->x6].x3_6)
         {
             lb_80014574(data->x6, 3, 0x20, 0);
         }
@@ -1933,44 +1826,40 @@ void gm_80177368_OnEnter(void* arg0_)
                  "GmRst");
     }
     fn_80176A6C();
-    light_gobj = GObj_Create(0xB, 3, 0);
-    if (light_gobj == NULL) {
+    temp_r3_2 = GObj_Create(0xB, 3, 0);
+    if (temp_r3_2 == NULL) {
         OSReport("Error : gobj dont't get (gmResultAddLight)\n");
         HSD_ASSERT(0x68C, 0);
     }
-    lobj = lb_80011AC4(data->pnlsce->lights);
-    if (lobj == NULL) {
+    temp_r3_3 = lb_80011AC4(data->pnlsce->lights);
+    if (temp_r3_3 == NULL) {
         OSReport("Error : lobj dont't get (gmResultAddLight)\n");
         HSD_ASSERT(0x68F, 0);
     }
-    HSD_GObjObject_80390A70(light_gobj, (u8) HSD_GObj_804D784A, lobj);
-    GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0xA, 0);
-    model_gobj = GObj_Create(0xE, 0xF, 0);
-    data->x18 = model_gobj;
-    if (model_gobj == NULL) {
+    HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D784A, temp_r3_3);
+    GObj_SetupGXLink(temp_r3_2, HSD_GObj_LObjCallback, 0xA, 0);
+    temp_r3_4 = GObj_Create(0xE, 0xF, 0);
+    data->x18 = temp_r3_4;
+    if (temp_r3_4 == NULL) {
         OSReport("Error : gobj dont't get (gmResultAddModel)\n");
         HSD_ASSERT(0x6A2, 0);
     }
-    HSD_GObj_SetupProc(model_gobj, fn_80179350, 0);
+    HSD_GObj_SetupProc(temp_r3_4, fn_80179350, 0);
     fn_80176F60();
     fn_8017AA78(&arg0->x1);
     fn_8017A004();
-    if (!gm_801743A4(me->result)) {
+    if (!gm_801743A4(temp_r29->result)) {
         lbAudioAx_80023F28(
-            fn_80160400(me->player_standings[data->x6].character_kind));
+            fn_80160400(temp_r29->player_standings[data->x6].character_kind));
     }
 
-    {
-        ResultsMatchEndPlayerIter* p =
-            (ResultsMatchEndPlayerIter*) me;
-        ResultsDataPlayerIter* result_data = (ResultsDataPlayerIter*) data;
-        for (i = 0; i < 4; i++, p++, result_data++) {
-            if (p->slot_type != Gm_PKind_NA) {
-                fn_8017A9B4(i);
-                result_data->fighter_gobj =
-                    fn_8017A67C(p->character_kind, p->x3, i);
-                result_data->camera = fn_8017A318(i);
-            }
+    for (i = 0; i < 4; i++) {
+        if (temp_r29->player_standings[i].slot_type != Gm_PKind_NA) {
+            fn_8017A9B4(i);
+            data->player_data[i].fighter_gobj =
+                fn_8017A67C(temp_r29->player_standings[i].character_kind,
+                            temp_r29->player_standings[i].x3, i);
+            data->player_data[i].camera = fn_8017A318(i);
         }
     }
 }
