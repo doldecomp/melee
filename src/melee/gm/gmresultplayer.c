@@ -79,6 +79,7 @@ typedef struct {
 extern ResultsPlayerConfig lbl_803B7B68;
 extern HSD_CObjDesc lbl_803D7910;
 
+
 typedef struct {
     /* 0x00 */ f32 x_off[4];   // indexed by variant (clamped to 3)
     /* 0x10 */ f32 y_off[4];   // indexed by variant (clamped to 3)
@@ -90,6 +91,8 @@ typedef struct {
     /* 0x010 */ CameraKindParams kind[(0x6D0 - 0x10) / 0x30];
     /* 0x6D0 */ f32 slot_x_off[4];
     /* 0x6E0 */ f32 slot_y_off[4];
+    /* 0x6F0 */ u8 pad_6F0[0xF08 - 0x6F0];
+    /* 0xF08 */ HSD_CObjDesc cobj_desc;
 } CameraKindData;
 
 extern CameraKindData lbl_803D6A08;
@@ -100,6 +103,11 @@ extern s32 lbl_804DA3F4;
 extern int lbl_8046E38C[4];
 
 extern HSD_JObj* lbl_8046E39C[4];
+
+typedef union {
+    s16 h[4];
+    u32 w[2];
+} PackedS16x4;
 
 typedef struct {
     /* 0x00:0 */ u8 x0_0 : 4;
@@ -121,7 +129,7 @@ typedef struct {
     /* 0x22BC */ u32 dim_w2[2];
     /* 0x22C4 */ u32 dim_h1[2];
     /* 0x22CC */ u32 dim_h2[2];
-    /* 0x22D4 */ u32 score_tbl[4][2];
+    /* 0x22D4 */ PackedS16x4 score_tbl[4];
     /* 0x22F4 */ u32 x22F4[4][2];
 } lbl_8046E3AC_t;
 
@@ -411,16 +419,21 @@ bool fn_80177DD0(int slot)
 
 static s32 lbl_804D3FC8 = 1;
 
+static inline MatchEnd* fn_80178050_inline(void)
+{
+    return fn_80174274();
+}
+
 void fn_80178050(HSD_GObj* arg0)
 {
-    ResultsData* data = &lbl_8046DBE8;
     MatchEnd* match_end;
     HSD_JObj* jobj;
     s32 var_r24;
+    ResultsData* data = &lbl_8046DBE8;
 
     PAD_STACK(16);
 
-    match_end = fn_80174274();
+    match_end = fn_80178050_inline();
     jobj = arg0->hsd_obj;
     var_r24 = 0;
 
@@ -475,6 +488,7 @@ void fn_80178050(HSD_GObj* arg0)
             }
 
             {
+                HSD_PadStatus* pad = HSD_PadCopyStatus;
                 s32 k2 = 0;
                 do {
                     u8 slot = match_end->player_standings[k2].slot_type;
@@ -483,7 +497,7 @@ void fn_80178050(HSD_GObj* arg0)
                             if (fn_80177B7C(k2) != 0) {
                                 fn_80174B4C(data, k2);
                             }
-                            if (((s8) HSD_PadCopyStatus[(u8) k2].err != 0) ||
+                            if (((s8) pad->err != 0) ||
                                 (HSD_PadCopyStatus[(u8) k2].trigger & 0x1000))
                             {
                                 data->player_data[k2].x0_0 = 1;
@@ -549,7 +563,7 @@ void fn_80178050(HSD_GObj* arg0)
                         }
                         if ((s32) lbl_804D3FC8 != 0) {
                             data->player_data[k2].x0_0 = 0;
-                            if (((s8) HSD_PadCopyStatus[(u8) k2].err == 0) &&
+                            if (((s8) pad->err == 0) &&
                                 (HSD_PadCopyStatus[(u8) k2].trigger & 0x1000))
                             {
                                 fn_80174338();
@@ -558,7 +572,7 @@ void fn_80178050(HSD_GObj* arg0)
                         }
                     } else if (slot == 3) {
                         if (((s32) lbl_804D3FC8 != 0) &&
-                            ((s8) HSD_PadCopyStatus[(u8) k2].err == 0) &&
+                            ((s8) pad->err == 0) &&
                             (HSD_PadCopyStatus[(u8) k2].trigger & 0x1000))
                         {
                             fn_80174338();
@@ -566,6 +580,7 @@ void fn_80178050(HSD_GObj* arg0)
                         }
                     }
                     k2++;
+                    pad++;
                 } while (k2 < 4);
             }
 
@@ -608,14 +623,12 @@ void fn_80178050(HSD_GObj* arg0)
 
             {
                 s32 all_done = 0;
-                if (!data->player_data[0].x0_0) {
-                    all_done = 1;
-                } else if (!data->player_data[1].x0_0) {
-                    all_done = 1;
-                } else if (!data->player_data[2].x0_0) {
-                    all_done = 1;
-                } else if (!data->player_data[3].x0_0) {
-                    all_done = 1;
+                s32 i;
+                for (i = 0; i < 4; i++) {
+                    if (!data->player_data[i].x0_0) {
+                        all_done = 1;
+                        break;
+                    }
                 }
                 if (all_done == 0) {
                     var_r24 = 1;
@@ -637,7 +650,6 @@ void fn_801785B0(HSD_GObj* gobj)
     u8 mode = match_end->x5;
     int frame_val;
     f32 fv;
-    int unused;
 
     if (mode == 2) {
         lb_80011E24(jobj, &child, 0x15, -1);
@@ -649,7 +661,7 @@ void fn_801785B0(HSD_GObj* gobj)
         lb_80011E24(jobj, &child, 0xC, -1);
         node = child;
         {
-            u8 raw = fn_80174274()->xC;
+            s8 raw = fn_80174274()->xC;
             frame_val = ABS(raw);
         }
         fv = (f32) frame_val;
@@ -674,7 +686,7 @@ void fn_801785B0(HSD_GObj* gobj)
         lb_80011E24(jobj, &child, 0x11, -1);
         node = child;
         {
-            u8 raw = fn_80174274()->xC;
+            s8 raw = fn_80174274()->xC;
             frame_val = ABS(raw);
         }
         fv = (f32) frame_val;
@@ -699,7 +711,7 @@ void fn_801785B0(HSD_GObj* gobj)
         lb_80011E24(jobj, &child, 0x10, -1);
         node = child;
         {
-            u8 raw = fn_80174274()->xC;
+            s8 raw = fn_80174274()->xC;
             frame_val = ABS(raw);
         }
         fv = (f32) frame_val;
@@ -724,7 +736,7 @@ void fn_801785B0(HSD_GObj* gobj)
         lb_80011E24(jobj, &child, 0x15, -1);
         node = child;
         {
-            u8 raw = fn_80174274()->xC;
+            s8 raw = fn_80174274()->xC;
             frame_val = ABS(raw);
         }
         fv = (f32) frame_val;
@@ -739,6 +751,121 @@ void fn_801785B0(HSD_GObj* gobj)
                         AOBJ_ARG_AF, 1.0f);
         mn_8022F3D8(node, 1, TOBJ_MASK);
         return;
+    }
+}
+
+static inline void fn_80178BB4_init_players(ResultsData* data,
+                                            MatchEnd* match_end, int* i,
+                                            int* ko_count)
+{
+    for (; *i < 6; (*i)++) {
+        HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[0], JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[4], JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[8], JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[9], JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[10], JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[11], JOBJ_HIDDEN);
+        lbDObjSetRateAll(HSD_JObjGetDObj(data->player_data[(*i)].jobjs[6]), 0.0f);
+
+        {
+            u8 slot_type = match_end->player_standings[(*i)].slot_type;
+
+            if (slot_type == 0) {
+                (*ko_count) += match_end->player_standings[(*i)].xE;
+            }
+
+            if (slot_type != 3) {
+                int cid;
+                int ckind;
+                u8 is_big_loser;
+                ckind = match_end->player_standings[(*i)].character_kind;
+                cid = match_end->player_standings[(*i)].character_id;
+                is_big_loser = match_end->player_standings[(*i)].is_big_loser;
+
+                if (gm_801743A4(match_end->result) == 0 &&
+                    (u8) match_end->is_teams == 0 && (s32) is_big_loser == 0)
+                {
+                    ResultsData* d2 = &lbl_8046DBE8;
+                    int tex_id =
+                        (int) gm_80168B34((CharacterKind) ckind, (int) cid, 0);
+                    HSD_TObj* tobj = d2->x30->u.dobj->next->mobj->tobj;
+                    HSD_AObj* aobj = tobj->aobj;
+                    HSD_TObjReqAnim(tobj, (f32) tex_id);
+                    HSD_TObjAnim(d2->x30->u.dobj->next->mobj->tobj);
+                    if (tex_id < 0x19) {
+                        HSD_AObjSetCurrentFrame(aobj, 0.0f);
+                        HSD_AObjSetEndFrame(aobj, 29.0f);
+                    } else {
+                        int start = (int) (30.0f * (f32) (tex_id - 0xB4));
+                        HSD_AObjSetCurrentFrame(aobj, (f32) start);
+                        HSD_AObjSetEndFrame(aobj,
+                                            (30.0f + (f32) start) - 1.0f);
+                    }
+                    mn_8022F3D8(d2->x30, 1, TOBJ_MASK);
+                }
+
+                fn_80174FD0(
+                    data->player_data[(*i)].jobjs[5],
+                    (s32) gm_80168B34((CharacterKind) ckind, (int) cid, 0));
+
+                {
+                    u32 rank_val;
+                    HSD_AObj* rank_aobj;
+                    rank_val = gm_80160854(
+                        (*i), match_end->player_standings[(*i)].team,
+                        (u8) (match_end->is_teams == 1),
+                        match_end->player_standings[(*i)].slot_type);
+                    rank_aobj = data->player_data[(*i)]
+                                    .jobjs[2]
+                                    ->u.dobj->mobj->aobj;
+                    HSD_AObjSetCurrentFrame(rank_aobj,
+                                            1.0f + (f32) (u8) rank_val);
+                    HSD_AObjSetRate(rank_aobj, 0.0f);
+                }
+
+                if ((u8) match_end->x5 != 3) {
+                    f32 taunt_frame = gm_80168B34(
+                        (CharacterKind) (s8) (u8) match_end
+                            ->player_standings[(*i)]
+                            .character_kind,
+                        (int) (s8) (u8) match_end->player_standings[(*i)]
+                            .character_id,
+                        match_end->player_standings[(*i)].x3);
+                    HSD_JObj* taunt_jobj = data->player_data[(*i)].jobjs[7];
+                    HSD_ForeachAnim(taunt_jobj, JOBJ_TYPE, ALL_TYPE_MASK,
+                                    HSD_AObjSetRate, AOBJ_ARG_AF, 0.0);
+                    HSD_ForeachAnim(taunt_jobj, JOBJ_TYPE, ALL_TYPE_MASK,
+                                    HSD_AObjSetCurrentFrame, AOBJ_ARG_AF,
+                                    taunt_frame);
+                    HSD_JObjAnimAll(taunt_jobj);
+                    HSD_AObjSetRate(data->player_data[(*i)].jobjs[7]->aobj,
+                                     1.0f);
+                    HSD_AObjSetCurrentFrame(
+                        data->player_data[(*i)].jobjs[7]->aobj, 0.0f);
+                } else {
+                    HSD_JObj* taunt_jobj = data->player_data[(*i)].jobjs[7];
+                    HSD_ForeachAnim(taunt_jobj, JOBJ_TYPE, ALL_TYPE_MASK,
+                                    HSD_AObjSetRate, AOBJ_ARG_AF, 0.0);
+                    HSD_ForeachAnim(taunt_jobj, JOBJ_TYPE, ALL_TYPE_MASK,
+                                    HSD_AObjSetCurrentFrame, AOBJ_ARG_AF, 0.0);
+                    HSD_JObjAnimAll(taunt_jobj);
+                    HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[7],
+                                        JOBJ_HIDDEN);
+                }
+
+                HSD_JObjRemoveAnimAll(data->player_data[(*i)].jobjs[3]);
+                HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[3],
+                                    JOBJ_HIDDEN);
+            } else {
+                HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[1],
+                                    JOBJ_HIDDEN);
+                HSD_JObjRemoveAnimAll(data->player_data[(*i)].jobjs[1]);
+                HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[5],
+                                    JOBJ_HIDDEN);
+                HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[7],
+                                    JOBJ_HIDDEN);
+            }
+        }
     }
 }
 
@@ -782,109 +909,7 @@ void fn_80178BB4(HSD_GObj* gobj)
     }
 
     i = 0;
-    do {
-        HSD_JObjSetFlagsAll(data->player_data[i].jobjs[0], JOBJ_HIDDEN);
-        HSD_JObjSetFlagsAll(data->player_data[i].jobjs[4], JOBJ_HIDDEN);
-        HSD_JObjSetFlagsAll(data->player_data[i].jobjs[8], JOBJ_HIDDEN);
-        HSD_JObjSetFlagsAll(data->player_data[i].jobjs[9], JOBJ_HIDDEN);
-        HSD_JObjSetFlagsAll(data->player_data[i].jobjs[10], JOBJ_HIDDEN);
-        HSD_JObjSetFlagsAll(data->player_data[i].jobjs[11], JOBJ_HIDDEN);
-        lbDObjSetRateAll(HSD_JObjGetDObj(data->player_data[i].jobjs[6]), 0.0f);
-
-        {
-            u8 slot_type = match_end->player_standings[i].slot_type;
-
-            if (slot_type == 0) {
-                ko_count += match_end->player_standings[i].xE;
-            }
-
-            if (slot_type != 3) {
-                int ckind = match_end->player_standings[i].character_kind;
-                int cid = match_end->player_standings[i].character_id;
-                u8 is_big_loser = match_end->player_standings[i].is_big_loser;
-
-                if (gm_801743A4(match_end->result) == 0 &&
-                    (u8) match_end->is_teams == 0 && (s32) is_big_loser == 0)
-                {
-                    ResultsData* d2 = &lbl_8046DBE8;
-                    int tex_id =
-                        (int) gm_80168B34((CharacterKind) ckind, (int) cid, 0);
-                    HSD_TObj* tobj = d2->x30->u.dobj->next->mobj->tobj;
-                    HSD_AObj* aobj = tobj->aobj;
-                    HSD_TObjReqAnim(tobj, (f32) tex_id);
-                    HSD_TObjAnim(d2->x30->u.dobj->next->mobj->tobj);
-                    if (tex_id < 0x19) {
-                        HSD_AObjSetCurrentFrame(aobj, 0.0f);
-                        HSD_AObjSetEndFrame(aobj, 29.0f);
-                    } else {
-                        int start = (int) (30.0f * (f32) (tex_id - 0xB4));
-                        HSD_AObjSetCurrentFrame(aobj, (f32) start);
-                        HSD_AObjSetEndFrame(aobj,
-                                            (30.0f + (f32) start) - 1.0f);
-                    }
-                    mn_8022F3D8(d2->x30, 1, TOBJ_MASK);
-                }
-
-                fn_80174FD0(
-                    data->player_data[i].jobjs[5],
-                    (s32) gm_80168B34((CharacterKind) ckind, (int) cid, 0));
-
-                {
-                    u8 rank_val = (u8) gm_80160854(
-                        i, match_end->player_standings[i].team,
-                        (u8) (match_end->is_teams == 1),
-                        match_end->player_standings[i].slot_type);
-                    HSD_AObj* rank_aobj =
-                        data->player_data[i].jobjs[2]->u.dobj->mobj->aobj;
-                    HSD_AObjSetCurrentFrame(rank_aobj, 1.0f + (f32) rank_val);
-                    HSD_AObjSetRate(rank_aobj, 0.0f);
-                }
-
-                if ((u8) match_end->x5 != 3) {
-                    f32 taunt_frame = gm_80168B34(
-                        (CharacterKind) (s8) (u8) match_end
-                            ->player_standings[i]
-                            .character_kind,
-                        (int) (s8) (u8) match_end->player_standings[i]
-                            .character_id,
-                        match_end->player_standings[i].x3);
-                    HSD_JObj* taunt_jobj = data->player_data[i].jobjs[7];
-                    HSD_ForeachAnim(taunt_jobj, JOBJ_TYPE, ALL_TYPE_MASK,
-                                    HSD_AObjSetRate, AOBJ_ARG_AF, 0.0);
-                    HSD_ForeachAnim(taunt_jobj, JOBJ_TYPE, ALL_TYPE_MASK,
-                                    HSD_AObjSetCurrentFrame, AOBJ_ARG_AF,
-                                    taunt_frame);
-                    HSD_JObjAnimAll(taunt_jobj);
-                    HSD_AObjSetRate(data->player_data[i].jobjs[7]->aobj, 1.0f);
-                    HSD_AObjSetCurrentFrame(
-                        data->player_data[i].jobjs[7]->aobj, 0.0f);
-                } else {
-                    HSD_JObj* taunt_jobj = data->player_data[i].jobjs[7];
-                    HSD_ForeachAnim(taunt_jobj, JOBJ_TYPE, ALL_TYPE_MASK,
-                                    HSD_AObjSetRate, AOBJ_ARG_AF, 0.0);
-                    HSD_ForeachAnim(taunt_jobj, JOBJ_TYPE, ALL_TYPE_MASK,
-                                    HSD_AObjSetCurrentFrame, AOBJ_ARG_AF, 0.0);
-                    HSD_JObjAnimAll(taunt_jobj);
-                    HSD_JObjSetFlagsAll(data->player_data[i].jobjs[7],
-                                        JOBJ_HIDDEN);
-                }
-
-                HSD_JObjRemoveAnimAll(data->player_data[i].jobjs[3]);
-                HSD_JObjSetFlagsAll(data->player_data[i].jobjs[3],
-                                    JOBJ_HIDDEN);
-            } else {
-                HSD_JObjSetFlagsAll(data->player_data[i].jobjs[1],
-                                    JOBJ_HIDDEN);
-                HSD_JObjRemoveAnimAll(data->player_data[i].jobjs[1]);
-                HSD_JObjSetFlagsAll(data->player_data[i].jobjs[5],
-                                    JOBJ_HIDDEN);
-                HSD_JObjSetFlagsAll(data->player_data[i].jobjs[7],
-                                    JOBJ_HIDDEN);
-            }
-        }
-
-        i++;
-    } while (i < 6);
+    fn_80178BB4_init_players(data, match_end, &i, &ko_count);
 
     if (ko_count > 0) {
         un_802FF128(0x6C, 0x78, ko_count, 5);
@@ -1075,6 +1100,8 @@ int fn_80179854(void)
     int i;
     int lookup;
 
+    PAD_STACK(8);
+
     lbBgFlash_800206D4(&color1, &color2, 0x1E);
 
     for (i = 0; i < 4; i++) {
@@ -1091,8 +1118,6 @@ int fn_80179854(void)
             disp->state.x0_6 = 1;
         }
     }
-
-    return lookup;
 }
 
 extern s32 ftLib_800876B4(HSD_GObj*);
@@ -1329,6 +1354,7 @@ void fn_8017A078(s32 arg0)
     HSD_GObj* gobj;
     HSD_CObj* cobj;
     int mode;
+    int idx;
     s16 val;
 
     eye = config->x24;
@@ -1344,7 +1370,8 @@ void fn_8017A078(s32 arg0)
         (interest.y * (f32) (arg0 + 1)) + (0.7f * Player_800360D8(arg0));
 
     mode = fn_801795D4();
-    val = disp->state.score_tbl[mode][fn_801796F0(arg0)];
+    idx = fn_801796F0(arg0);
+    val = disp->state.score_tbl[mode].h[idx];
     interest.x -= (f32) val;
     eye.x -= (f32) val;
     interest.y -= 10.0f;
@@ -1353,18 +1380,12 @@ void fn_8017A078(s32 arg0)
 
     if (mode == 0) {
         s32 kind = disp->state.char_kind[arg0];
-        if (kind == 5) {
-            if ((u8) disp->state.variant[arg0] == 1) {
-                eye.z += 6.0f;
-            }
-        } else if (kind == 9) {
-            if ((u8) disp->state.variant[arg0] == 1) {
-                eye.z += 7.5f;
-            }
-        } else if (kind == 0) {
-            if ((u8) disp->state.variant[arg0] == 2) {
-                eye.z += 6.0f;
-            }
+        if (kind == 5 && (u8) disp->state.variant[arg0] == 1) {
+            eye.z += 6.0f;
+        } else if (kind == 9 && (u8) disp->state.variant[arg0] == 1) {
+            eye.z += 7.5f;
+        } else if (kind == 0 && (u8) disp->state.variant[arg0] == 2) {
+            eye.z += 6.0f;
         }
     }
 
@@ -1375,23 +1396,23 @@ void fn_8017A078(s32 arg0)
 
 HSD_GObj* fn_8017A318(s32 arg0)
 {
-    ResultsDisplayData* disp = &lbl_8046E1B0;
     ResultsPlayerConfig* config = &lbl_803B7B68;
     CameraKindData* data = &lbl_803D6A08;
+    ResultsDisplayData* disp = &lbl_8046E1B0;
     MatchEnd* match_end = &disp->state.match_end;
     s32 _pad[2];
     s32 scissor[2];
     Vec3 eye;
     Vec3 interest;
     ResultsRenderFuncs callbacks;
+    int slot;
     HSD_GObj* gobj;
     HSD_CObj* cobj;
-    int slot;
     u8 variant;
     s32 kind_data;
     int vi;
 
-    PAD_STACK(0x8);
+    PAD_STACK(0xC);
 
     fn_801795D4();
     fn_801796F0(arg0);
@@ -1410,7 +1431,7 @@ HSD_GObj* fn_8017A318(s32 arg0)
     }
 
     gobj = GObj_Create(0x13, 0x14, 0);
-    cobj = HSD_CObjLoadDesc(&lbl_803D7910);
+    cobj = HSD_CObjLoadDesc(&data->cobj_desc);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
 
     {
@@ -1424,24 +1445,26 @@ HSD_GObj* fn_8017A318(s32 arg0)
     vi = ((s32) variant <= 2) ? variant : 3;
 
     kind_data = disp->state.char_kind[arg0];
-    eye.y += data->kind[kind_data].y_off[vi];
+    {
+        f32* y_off = data->kind[kind_data].y_off;
+        eye.y += y_off[vi];
 
-    vi = ((s32) variant <= 2) ? variant : 3;
-    interest.y += data->kind[kind_data].y_off[vi];
+        vi = ((s32) variant <= 2) ? variant : 3;
+        interest.y += y_off[vi];
+    }
 
     vi = ((s32) variant <= 2) ? variant : 3;
     eye.x += data->kind[kind_data].x_off[vi];
 
     {
-        f32 temp_f0;
+        f32 interest_x;
         vi = ((s32) variant <= 2) ? variant : 3;
-        temp_f0 =
-            interest.x + data->kind[disp->state.char_kind[arg0]].x_off[vi];
+        interest_x = interest.x + data->kind[kind_data].x_off[vi];
 
         {
             f32 x_off, y_off;
 
-            interest.x = temp_f0;
+            interest.x = interest_x;
             x_off = data->slot_x_off[slot];
             eye.x += x_off;
             interest.x += x_off;
@@ -1473,16 +1496,13 @@ HSD_GObj* fn_8017A318(s32 arg0)
     if (slot == 0) {
         fn_8017A078(arg0);
     }
-
-    return gobj;
 }
 
-Fighter_GObj* fn_8017A67C(CharacterKind c_kind, int arg1, int arg2)
+Fighter_GObj* fn_8017A67C(CharacterKind kind, int arg1, int arg2)
 {
+    ResultsPlayerConfig* config = &lbl_803B7B68;
     ResultsDisplayData* disp = &lbl_8046E1B0;
     MatchEnd* match_end = &disp->state.match_end;
-    ResultsPlayerConfig* config = &lbl_803B7B68;
-    CharacterKind kind = c_kind;
     HSD_GObj* gobj = NULL;
     int slot_type;
 
@@ -1495,8 +1515,8 @@ Fighter_GObj* fn_8017A67C(CharacterKind c_kind, int arg1, int arg2)
     }
 
     if (gm_80160438(kind) != NULL) {
-        f32 cx, cy, cz;
-        PAD_STACK(8);
+        f32 cz, cy, cx;
+        PAD_STACK(0xC);
         *(s32*) &cx = *(s32*) &config->x74;
         *(s32*) &cy = *(s32*) &config->x78;
         *(s32*) &cz = *(s32*) &config->x7C;
@@ -1692,8 +1712,8 @@ void fn_8017AA78(u8* arg0)
                     .is_big_loser = 1;
             }
             state->x6[i] = 0;
-            state->score_tbl[i][0] = p5[0 + i * 2];
-            state->score_tbl[i][1] = p5[1 + i * 2];
+            state->score_tbl[i].w[0] = p5[0 + i * 2];
+            state->score_tbl[i].w[1] = p5[1 + i * 2];
             state->x22F4[i][0] = p7[i * 2];
             state->x22F4[i][1] = p7[1 + i * 2];
         }
