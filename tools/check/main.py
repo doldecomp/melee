@@ -13,10 +13,19 @@ exits 0 when clean, 65 (``EX_DATAERR``) when issues are found, and 74
 (``EX_IOERR``) on an internal error. ``--msg-style actions`` emits GitHub
 Actions warning annotations instead of the hierarchy.
 
+``--fix`` rewrites the source in place to resolve findings locally (use
+``--fix --dry-run`` to preview a diff). Only ``jobj-flags`` is
+auto-fixable: the literal-to-``JOBJ_HIDDEN`` swap is exact. Findings from
+checks without a fixer (``assert-macros``) are reported but not changed;
+those rewrites need judgement and are left to the developer. Fixes change
+only tokens, not layout, so run clang-format afterward.
+
 Usage:
     python3 tools/check/main.py [--no-<check> ...] [--msg-style {std,actions}] [PATH ...]
+    python3 tools/check/main.py --fix [--dry-run] [--no-<check> ...] [PATH ...]
 """
 import argparse
+import difflib
 import re
 import sys
 from collections.abc import Callable, Iterator
@@ -46,6 +55,8 @@ class Finding:
 
 # A check reads one file's (path, text) and yields any findings in it.
 ScanFn = Callable[[Path, str], Iterator[Finding]]
+# A fix rewrites one file's text, returning (new_text, number_of_fixes).
+FixFn = Callable[[Path, str], tuple[str, int]]
 
 
 @dataclass(frozen=True)
@@ -53,6 +64,7 @@ class Check:
     name: str  # kebab-case id; drives --no-<name> and the [option] label
     help: str
     scan: ScanFn
+    fix: FixFn | None = None
     category: str = "Style Issue"
 
 
@@ -157,14 +169,15 @@ def directive_lines(text: str) -> set[int]:
 # JObj flag #defines instead of hard-coding the single hidden-flag pattern.
 _JOBJ_CALL = re.compile(r"HSD_JObj(?:Set|Clear)Flags(?:All)?\s*\(")
 _HIDDEN_LITERAL = re.compile(r"(?:16|0[xX]0*10|0+20)[uUlL]*")
+_JOBJ_REPLACEMENT = "JOBJ_HIDDEN"
 _JOBJ_MESSAGE = (
     "Use JOBJ_HIDDEN instead of a raw 0x10 literal "
     "(see src/sysdolphin/baselib/jobj.h)"
 )
 
 
-def scan_jobj_flags(path: Path, text: str) -> Iterator[Finding]:
-    code = strip_noise(text)
+def _jobj_literal_spans(code: str) -> Iterator[tuple[int, int, int]]:
+    """Yield (call_start, lit_start, lit_end) for each raw hidden-flag argument."""
     pos = 0
     while True:
         m = _JOBJ_CALL.search(code, pos)
@@ -177,12 +190,30 @@ def scan_jobj_flags(path: Path, text: str) -> Iterator[Finding]:
             continue
         commas = top_level_commas(code, open_idx, close_idx)
         if len(commas) == 1:
-            arg = code[commas[0] + 1 : close_idx].strip()
-            if _HIDDEN_LITERAL.fullmatch(arg):
-                line, column = line_col(code, m.start())
-                snippet = " ".join(text[m.start() : close_idx + 1].split())
-                yield Finding(str(path), line, column, _JOBJ_MESSAGE, snippet)
+            region = code[commas[0] + 1 : close_idx]
+            if _HIDDEN_LITERAL.fullmatch(region.strip()):
+                lead = len(region) - len(region.lstrip())
+                trail = len(region) - len(region.rstrip())
+                yield m.start(), commas[0] + 1 + lead, close_idx - trail
         pos = close_idx
+
+
+def scan_jobj_flags(path: Path, text: str) -> Iterator[Finding]:
+    code = strip_noise(text)
+    for call_start, _lit_start, close_idx in _jobj_literal_spans(code):
+        line, column = line_col(code, call_start)
+        # close_idx is the literal end; the call's ')' is just past it.
+        end = code.index(")", close_idx)
+        snippet = " ".join(text[call_start : end + 1].split())
+        yield Finding(str(path), line, column, _JOBJ_MESSAGE, snippet)
+
+
+def fix_jobj_flags(path: Path, text: str) -> tuple[str, int]:
+    # strip_noise preserves offsets, so spans found in `code` map onto `text`.
+    spans = [(s, e) for _start, s, e in _jobj_literal_spans(strip_noise(text))]
+    for lit_start, lit_end in sorted(spans, reverse=True):
+        text = text[:lit_start] + _JOBJ_REPLACEMENT + text[lit_end:]
+    return text, len(spans)
 
 
 # --- check: assert-macros -------------------------------------------------
@@ -193,6 +224,10 @@ def scan_jobj_flags(path: Path, text: str) -> Iterator[Finding]:
 # hard-code __FILE__) and are left alone. A site annotated with a Doxygen
 # @todo within the preceding four lines is exempt: it records that no
 # byte-matching macro form is known there yet.
+#
+# Detection only: converting these is judgement-laden (the if-guard must be
+# negated and matched against the assert text, and not every site is
+# byte-identical), so there is no auto-fixer here.
 _ASSERT_CALL = re.compile(r"__assert\s*\(")
 _ASSERT_MESSAGE = (
     "Use HSD_ASSERT/HSD_ASSERTMSG/HSD_ASSERTREPORT instead of a direct "
@@ -202,7 +237,18 @@ _ASSERT_MESSAGE = (
 _ASSERT_EXEMPT_PATHS = frozenset({"src/sysdolphin/baselib/debug.h"})
 
 
-def scan_assert_macros(path: Path, text: str) -> Iterator[Finding]:
+def _has_todo(lines: list[str], line0: int) -> bool:
+    return "@todo" in "\n".join(lines[max(0, line0 - 4) : line0 + 1])
+
+
+def _assert_first_arg(text: str, open_idx: int, close_idx: int) -> str:
+    commas = top_level_commas(text, open_idx, close_idx)
+    end_first = commas[0] if commas else close_idx
+    return text[open_idx + 1 : end_first].strip()
+
+
+def _assert_sites(path: Path, text: str) -> Iterator[tuple[int, int]]:
+    """Yield (call_start, close_idx) of in-scope, non-exempt __assert calls."""
     if str(path) in _ASSERT_EXEMPT_PATHS:
         return
     own = f'"{path.name}"'
@@ -222,19 +268,18 @@ def scan_assert_macros(path: Path, text: str) -> Iterator[Finding]:
         close_idx = find_close(code, open_idx)
         if close_idx < 0:
             continue
-        commas = top_level_commas(code, open_idx, close_idx)
-        end_first = commas[0] if commas else close_idx
-        # Read the first argument from the original text: in the comment- and
-        # string-blanked view a "basename.c" literal would be erased.
-        first = text[open_idx + 1 : end_first].strip()
-        if first not in ("__FILE__", own):
+        if _assert_first_arg(text, open_idx, close_idx) not in ("__FILE__", own):
             continue
-        context = "\n".join(lines[max(0, line0 - 4) : line0 + 1])
-        if "@todo" in context:
+        if _has_todo(lines, line0):
             continue
-        _, column = line_col(code, m.start())
-        snippet = " ".join(text[m.start() : close_idx + 1].split())
-        yield Finding(str(path), line0 + 1, column, _ASSERT_MESSAGE, snippet)
+        yield m.start(), close_idx
+
+
+def scan_assert_macros(path: Path, text: str) -> Iterator[Finding]:
+    for call_start, close_idx in _assert_sites(path, text):
+        line, column = line_col(text, call_start)
+        snippet = " ".join(text[call_start : close_idx + 1].split())
+        yield Finding(str(path), line, column, _ASSERT_MESSAGE, snippet)
 
 
 # --- registry & driver ----------------------------------------------------
@@ -244,6 +289,7 @@ CHECKS: list[Check] = [
         "jobj-flags",
         "raw 0x10 instead of JOBJ_HIDDEN in HSD_JObj flag calls",
         scan_jobj_flags,
+        fix_jobj_flags,
     ),
     Check(
         "assert-macros",
@@ -257,17 +303,21 @@ def _dest(name: str) -> str:
     return "no_" + name.replace("-", "_")
 
 
-def collect(checks: list[Check], roots: list[str]) -> list[tuple[Check, Finding]]:
-    found: list[tuple[Check, Finding]] = []
+def _iter_files(roots: list[str]) -> Iterator[Path]:
     for root in roots:
         root_path = Path(root)
         if not root_path.is_dir():
             raise FileNotFoundError(f"scan root does not exist: {root}")
-        for path in sorted(root_path.rglob(SOURCE_GLOB)):
-            text = path.read_text(errors="replace")
-            for check in checks:
-                for finding in check.scan(path, text):
-                    found.append((check, finding))
+        yield from sorted(root_path.rglob(SOURCE_GLOB))
+
+
+def collect(checks: list[Check], roots: list[str]) -> list[tuple[Check, Finding]]:
+    found: list[tuple[Check, Finding]] = []
+    for path in _iter_files(roots):
+        text = path.read_text(errors="replace")
+        for check in checks:
+            for finding in check.scan(path, text):
+                found.append((check, finding))
     return found
 
 
@@ -300,6 +350,56 @@ def print_actions(pairs: list[tuple[Check, Finding]]) -> None:
         )
 
 
+def run_checks(checks: list[Check], roots: list[str], msg_style: str) -> int:
+    pairs = collect(checks, roots)
+    if not pairs:
+        print("Issues: OK")
+        return EXIT_OK
+    if msg_style == "actions":
+        print_actions(pairs)
+    else:
+        print_std(pairs)
+    print(f"Issues: {len(pairs)}", file=sys.stderr)
+    return EXIT_ISSUES
+
+
+def run_fix(checks: list[Check], roots: list[str], dry_run: bool) -> int:
+    fixers = [c for c in checks if c.fix is not None]
+    total_fixed, files_changed, remaining = 0, 0, 0
+    for path in _iter_files(roots):
+        original = path.read_text(errors="replace")
+        text = original
+        for check in fixers:
+            text, n = check.fix(path, text)
+            total_fixed += n
+        if text != original:
+            files_changed += 1
+            if dry_run:
+                sys.stdout.writelines(
+                    difflib.unified_diff(
+                        original.splitlines(keepends=True),
+                        text.splitlines(keepends=True),
+                        fromfile=str(path),
+                        tofile=str(path),
+                    )
+                )
+            else:
+                path.write_text(text)
+        # Count findings that remain after fixing (not auto-fixable).
+        for check in checks:
+            remaining += sum(1 for _ in check.scan(path, text))
+
+    verb = "Would fix" if dry_run else "Fixed"
+    print(f"{verb} {total_fixed} issue(s) in {files_changed} file(s)", file=sys.stderr)
+    if remaining:
+        print(
+            f"{remaining} issue(s) left for manual review "
+            f"(re-run without --fix to list; build and diff before committing)",
+            file=sys.stderr,
+        )
+    return EXIT_OK
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument(
@@ -311,6 +411,16 @@ def main(argv: list[str] | None = None) -> int:
         default="std",
         help="message style (default 'std'; 'actions' emits GitHub Actions annotations)",
     )
+    parser.add_argument(
+        "--fix",
+        action="store_true",
+        help="rewrite source in place to resolve findings (jobj-flags only)",
+    )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="with --fix, print a diff of the changes instead of writing them",
+    )
     for check in CHECKS:
         parser.add_argument(
             f"--no-{check.name}",
@@ -319,18 +429,14 @@ def main(argv: list[str] | None = None) -> int:
             help=f"disable check: {check.help}",
         )
     args = parser.parse_args(argv)
+    if args.dry_run and not args.fix:
+        parser.error("--dry-run only applies with --fix")
 
     enabled = [c for c in CHECKS if not getattr(args, _dest(c.name))]
-    pairs = collect(enabled, args.paths or ["src"])
-    if not pairs:
-        print("Issues: OK")
-        return EXIT_OK
-    if args.msg_style == "actions":
-        print_actions(pairs)
-    else:
-        print_std(pairs)
-    print(f"Issues: {len(pairs)}", file=sys.stderr)
-    return EXIT_ISSUES
+    roots = args.paths or ["src"]
+    if args.fix:
+        return run_fix(enabled, roots, args.dry_run)
+    return run_checks(enabled, roots, args.msg_style)
 
 
 if __name__ == "__main__":
