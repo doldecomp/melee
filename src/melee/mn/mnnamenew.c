@@ -1784,7 +1784,7 @@ void mnNameNew_EnterFromMnCharSel(HSD_Archive* arg0, s32 arg1)
         arg0,
 
         // Background
-        &MenMainBack_Top.joint, mnNameNew_803EE38C,
+        (void**) &MenMainBack_Top.joint, mnNameNew_803EE38C,
         &MenMainBack_Top.animjoint, mnNameNew_803EE3A4,
         &MenMainBack_Top.matanim_joint, mnNameNew_803EE3C0,
         &MenMainBack_Top.shapeanim_joint, mnNameNew_803EE3E0,

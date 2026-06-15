@@ -332,8 +332,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
 
     /* Check for death animation flag (bit 7 of flags byte at offset 0x10) */
     if (state->flags.explode_animation) {
-        void ifStatus_PercentOnDeathAnimationThink();
-        ifStatus_PercentOnDeathAnimationThink((UnkX*) state);
+        ifStatus_PercentOnDeathAnimationThink((UnkX*) state, 0, 0);
         return;
     }
 

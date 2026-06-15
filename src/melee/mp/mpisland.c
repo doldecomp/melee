@@ -543,7 +543,6 @@ void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
             } while (i != link);
         }
 
-    after_alloc:
         mpisp = *arg1;
         if (mpisp != NULL) {
             *arg1 = mpisp->next;

@@ -168,7 +168,6 @@ void gm_801BFCFC(GameScene* arg0)
     void** var_r31;
     s32 var_r30;
     u8* var_r26;
-    s32** gm_801BFC60();
 
     PAD_STACK(8);
 

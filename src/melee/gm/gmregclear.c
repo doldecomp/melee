@@ -1198,19 +1198,19 @@ s32 gm_8017DB88(void* arg0, u8 arg1, s32 arg2, s32 arg3, u8* arg4, u8 arg5,
             p[1] = fn_8017D9C0(chars, arg4);
             out->x0 = p[1];
             if (arg8 != NULL) {
-                val = ((s32 (*)(s32, s32, u8)) arg8)(arg3, arg2, (u8) i);
+                val = arg8(arg3, arg2, (u8) i);
             } else {
                 val = 0;
             }
             out->x1 = val;
             if (arg6 != NULL) {
-                val = ((s32 (*)(s32, s32, u8)) arg6)(arg3, arg2, (u8) i);
+                val = arg6(arg3, arg2, (u8) i);
             } else {
                 val = 0;
             }
             out->x2 = val;
             if (arg7 != NULL) {
-                val = ((s32 (*)(s32, s32, u8)) arg7)(arg3, arg2, (u8) i);
+                val = arg7(arg3, arg2, (u8) i);
             } else {
                 val = 0;
             }

@@ -849,7 +849,7 @@ void fn_80160DE8(HSD_JObj* arg0, u8 arg1, s32 arg2, u8 arg3, f32 farg0,
 {
     HSD_Text* tmp_text = (HSD_Text*) arg0;
     u8 tmp_ckind = arg1;
-    char* str;
+    const char* str;
     f32 size;
     bool use_alt_name;
 
@@ -883,7 +883,7 @@ void fn_80160DE8(HSD_JObj* arg0, u8 arg1, s32 arg2, u8 arg3, f32 farg0,
         }
         size = temp;
     }
-    HSD_SisLib_803A70A0(tmp_text, arg2, str);
+    HSD_SisLib_803A70A0(tmp_text, arg2, (char*) str);
     HSD_SisLib_803A7548(tmp_text, arg2, size * farg0, farg1);
 }
 

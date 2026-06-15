@@ -522,7 +522,6 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
     Vec3 vec0;
     Vec3 vec1;
     Vec3 vec2;
-    extern void Item_8026AD20();
 
     PAD_STACK(0x8);
 
@@ -572,7 +571,7 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                                     ftCommon_8007EBAC(fp, 27, 0);
                                 }
                                 Item_8026AD20(fp->item_gobj, &vec2, &vec1,
-                                              temp_f4, 1);
+                                              temp_f4);
                             } else {
                                 if (it_8026B2B4(fp->item_gobj) == 1) {
                                     ftCommon_8007EBAC(fp, 28, 0);
@@ -580,7 +579,7 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                                     ftCommon_8007EBAC(fp, 26, 0);
                                 }
                                 Item_8026AD20(fp->item_gobj, &vec2, &vec1,
-                                              temp_f4, 0);
+                                              temp_f4);
                             }
                         }
                     }

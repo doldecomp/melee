@@ -905,7 +905,8 @@ void ifStock_802FAEC4(void)
     memzero(&ifStock_804A1ACC, sizeof(ifStock_804A1ACC));
     memzero(&ifStock_804A1A8C, sizeof(ifStock_804A1A8C));
     memzero(&ifStock_804A1774, sizeof(ifStock_804A1774));
-    lbArchive_LoadSections(*ifAll_802F3690(), &sp18, "Stc_scemdls", 0);
+    lbArchive_LoadSections(*ifAll_802F3690(), (void**) &sp18, "Stc_scemdls",
+                           0);
     stock->x0 = sp18;
     stock->x4 = sp18[1];
     ifStock_804A1ACC.x108 = 0;
