@@ -651,10 +651,11 @@ void fn_802514B8(HSD_GObj* gobj)
     HSD_GObjPLink_80390228(gobj);
 }
 
-void fn_802514D8(HSD_GObj* gobj)
+static inline void fn_802514D8_inline(MnCountData* userdata,
+                                       HSD_GObj* gobj)
 {
-    MnCountData* userdata = GET_MNCOUNT(gobj);
     HSD_GObjProc* proc;
+    HSD_JObj* jobj;
     PAD_STACK(16);
     if (mn_804A04F0.cur_menu != MENU_KIND_RECORDS_MISC) {
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
@@ -666,15 +667,17 @@ void fn_802514D8(HSD_GObj* gobj)
             MnCountData* userdata2 = GET_MNCOUNT(gobj);
             MnCountData* userdata3 = userdata2;
             int i;
+            HSD_Text* label_null = NULL;
+            HSD_Text* value_null = NULL;
 
             for (i = 0; i < MNCOUNT_VISIBLE_ROWS; i++) {
                 if (userdata2->labels[i] != NULL) {
                     HSD_SisLib_803A5CC4(userdata3->labels[i]);
-                    userdata2->labels[i] = NULL;
+                    userdata2->labels[i] = label_null;
                 }
                 if (userdata2->values[i] != NULL) {
                     HSD_SisLib_803A5CC4(userdata3->values[i]);
-                    userdata2->values[i] = NULL;
+                    userdata2->values[i] = value_null;
                 }
             }
 
@@ -683,8 +686,8 @@ void fn_802514D8(HSD_GObj* gobj)
     } else {
         // mnCount_UpdateArrowIndicators
 
-        HSD_JObj* jobj = gobj->hsd_obj;
         HSD_JObj* child;
+        jobj = gobj->hsd_obj;
 
         // up arrow
         lb_80011E24(jobj, &child, 2, -1);
@@ -706,13 +709,20 @@ void fn_802514D8(HSD_GObj* gobj)
     }
 }
 
-void fn_80251640(HSD_GObj* gobj)
+void fn_802514D8(HSD_GObj* gobj)
 {
     MnCountData* userdata = GET_MNCOUNT(gobj);
+    PAD_STACK(4);
+    fn_802514D8_inline(userdata, gobj);
+}
+
+void fn_80251640(HSD_GObj* gobj)
+{
     HSD_GObjProc* proc;
     int i;
     HSD_JObj* jobj;
     StaticModelDesc* md;
+    MnCountData* userdata = GET_MNCOUNT(gobj);
     PAD_STACK(24);
 
     if (mn_804A04F0.cur_menu != MENU_KIND_RECORDS_MISC) {
