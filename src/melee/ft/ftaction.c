@@ -1142,31 +1142,26 @@ void ftAction_80072CB0(Fighter_GObj* gobj, CommandInfo* cmd)
 
 void ftAction_80072CD8(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    /// @todo too much stack
-    int gfx_id;
     int sp64;
     int sp60;
-    struct {
-        u32 x0;
-        u32 x4;
-        u32 x8;
-    } sp2C;
+    int gfx_id;
     CommandInfo _cmd;
+    u32 cmd_words[3];
+    Vec3 offset;
+    Vec3 range;
     u32 part;
     Fighter* fp;
-    Vec3 range;
-    Vec3 offset;
+    u32 unused;
 
-    fp = GET_FIGHTER(gobj);
+    fp = gobj->user_data;
     sp60 = 1;
 
     if (ft_80084BFC(gobj, &sp64, &sp60, &gfx_id) != false) {
-        /// @todo not sure how to actually handle this...
         if (sp64 != -1) {
-            _cmd.u = (union CmdUnion*) &sp2C;
-            sp2C.x0 = *(u32*) cmd->u;
-            sp2C.x4 = sp64;
-            sp2C.x8 = *(u32*) ((u8*) cmd->u + 8);
+            _cmd.u = (union CmdUnion*) cmd_words;
+            cmd_words[0] = *(u32*) cmd->u;
+            cmd_words[1] = sp64;
+            cmd_words[2] = *(u32*) ((u8*) cmd->u + 8);
             ftAction_80071B50(gobj, &_cmd);
         }
 
@@ -1192,7 +1187,9 @@ void ftAction_80072CD8(Fighter_GObj* gobj, CommandInfo* cmd)
         return;
     }
 
-    SKIP_CMD(cmd, 3);
+    ++(cmd)->u;
+    ++(cmd)->u;
+    ++(cmd)->u;
 }
 
 void ftAction_80072E24(Fighter_GObj* gobj, CommandInfo* cmd)
@@ -1202,7 +1199,6 @@ void ftAction_80072E24(Fighter_GObj* gobj, CommandInfo* cmd)
 
 void ftAction_80072E4C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    /// @todo same issues as ftAction_80072CD8
     int sp64;
     int sp60;
     int gfx_id;
@@ -1212,8 +1208,9 @@ void ftAction_80072E4C(Fighter_GObj* gobj, CommandInfo* cmd)
     Vec3 range;
     Fighter* fp;
     s32 cmd_flag;
+    u32 unused;
 
-    fp = GET_FIGHTER(gobj);
+    fp = gobj->user_data;
     sp60 = 1;
     gfx_id = -1;
     cmd_flag = cmd->u->unk_fx_0.x1_b0_7;
@@ -1245,7 +1242,9 @@ void ftAction_80072E4C(Fighter_GObj* gobj, CommandInfo* cmd)
         }
     }
     if ((sp60 == 0) || (cmd_flag != 0)) {
-        SKIP_CMD(cmd, 3);
+        ++(cmd)->u;
+        ++(cmd)->u;
+        ++(cmd)->u;
     }
     ftCommon_8007EBAC(fp, 0x16U, 0U);
 }
