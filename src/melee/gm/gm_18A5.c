@@ -1260,71 +1260,42 @@ void fn_8018DC18(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
     c8 = col;
     thickness = data->x1C;
     c1 = col;
-    {
-        GXColor* color = &c1;
-        DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4, color);
-    }
+    DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4, &c1);
 
     right = arg1 + arg3;
     c2 = c8;
-    {
-        GXColor* color = &c2;
-        DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4, color);
-    }
+    DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4, &c2);
 
     half = arg3 / 2;
     center = arg1 + half;
     c3 = c8;
-    {
-        GXColor* color = &c3;
-        DrawRectangle((f32) center, (f32) arg2, thickness, (f32) arg4, color);
-    }
+    DrawRectangle((f32) center, (f32) arg2, thickness, (f32) arg4, &c3);
 
     neg_thickness = -thickness;
     c4 = c8;
-    {
-        GXColor* color = &c4;
-        DrawRectangle((f32) arg1, (f32) arg5, (f32) arg3 + thickness,
-                      neg_thickness, color);
-    }
+    DrawRectangle((f32) arg1, (f32) arg5, (f32) arg3 + thickness,
+                  neg_thickness, &c4);
 
     if (data->x20.g == 0) {
         if (data->x4C == 0) {
             c5 = data->x20;
-            {
-                GXColor* color = &c5;
-                DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
-                              color);
-            }
+            DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4, &c5);
             c6 = data->x20;
-            {
-                GXColor* color = &c6;
-                DrawRectangle((f32) arg1, (f32) arg5, (f32) half + thickness,
-                              neg_thickness, color);
-            }
+            DrawRectangle((f32) arg1, (f32) arg5, (f32) half + thickness,
+                          neg_thickness, &c6);
             return;
         }
         if (data->x78 == 0) {
             c7 = data->x20;
-            {
-                GXColor* color = &c7;
-                DrawRectangle((f32) center, (f32) arg2, thickness, (f32) arg4,
-                              color);
-            }
+            DrawRectangle((f32) center, (f32) arg2, thickness, (f32) arg4,
+                          &c7);
             return;
         }
         c0 = data->x20;
-        {
-            GXColor* color = &c0;
-            DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4,
-                          color);
-        }
+        DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4, &c0);
         c8 = data->x20;
-        {
-            GXColor* color = &c8;
-            DrawRectangle((f32) center, (f32) arg5, (f32) half + thickness,
-                          neg_thickness, color);
-        }
+        DrawRectangle((f32) center, (f32) arg5, (f32) half + thickness,
+                      neg_thickness, &c8);
     }
 }
 
@@ -2480,8 +2451,6 @@ struct Lbl804799B8_t {
     u8 pad2[0x10];
 };
 static struct Lbl804799B8_t lbl_804799B8;
-extern f32 lbl_804DA6E8; // 0.0f
-extern f32 lbl_804DA720; // 1.0f
 
 extern u8 lbl_803D9F80[];
 extern f32 lbl_804DA6FC; // 143.0f
@@ -2721,27 +2690,27 @@ void fn_80191154(HSD_GObj* gobj)
     (*xE_ptr)++;
 }
 
-static inline u8 fn_80191240_inline0(void)
+static inline u8 fn_80191240_dec_flash_timer(void)
 {
     return lbl_804799B8.x7 - 1;
 }
 
-static inline void fn_80191240_inline1(HSD_JObj* jobj,
-                                        HSD_JObj** jobj_copy)
+static inline void fn_80191240_save_root_jobj(HSD_JObj* jobj,
+                                               HSD_JObj** jobj_copy)
 {
     *jobj_copy = jobj;
 }
 
-static inline void fn_80191240_inline2(HSD_GObj* gobj, TmData** tm,
-                                        s32* val)
+static inline void fn_80191240_get_menu_state(HSD_GObj* gobj, TmData** tm,
+                                               s32* val)
 {
     *tm = gm_8018F634();
     *val = fn_8018F62C(gobj);
 }
 
-static inline void fn_80191240_inline3(HSD_JObj* jobj_copy,
-                                        HSD_JObj** jobj,
-                                        HSD_JObj** first_child)
+static inline void fn_80191240_show_children(HSD_JObj* jobj_copy,
+                                              HSD_JObj** jobj,
+                                              HSD_JObj** first_child)
 {
     HSD_JObjClearFlagsAll(jobj_copy, JOBJ_HIDDEN);
     if (*jobj == NULL) {
@@ -2765,27 +2734,27 @@ void fn_80191240(HSD_GObj* gobj)
     HSD_JObj* jobj;
     HSD_JObj* first_child;
 
-    fn_80191240_inline2(gobj, &tm, &val);
+    fn_80191240_get_menu_state(gobj, &tm, &val);
     jobj = gobj->hsd_obj;
-    fn_80191240_inline1(jobj, &jobj_copy);
+    fn_80191240_save_root_jobj(jobj, &jobj_copy);
     if (tm->cur_option >= 9) {
         HSD_JObjSetFlagsAll(jobj_copy, JOBJ_HIDDEN);
         return;
     }
-    fn_80191240_inline3(jobj_copy, &jobj, &first_child);
+    fn_80191240_show_children(jobj_copy, &jobj, &first_child);
     if (val == tm->cur_option) {
         if (lbl_804799B8.x7 != 0) {
-            fn_8019044C(first_child, lbl_804DA720);
-            lbl_804799B8.x7 = fn_80191240_inline0();
+            fn_8019044C(first_child, 1.0F);
+            lbl_804799B8.x7 = fn_80191240_dec_flash_timer();
         } else {
-            fn_8019044C(first_child, lbl_804DA6E8);
+            fn_8019044C(first_child, 0.0F);
         }
         if (lbl_804799B8.x8 != 0) {
-            fn_8019044C(jobj, lbl_804DA720);
+            fn_8019044C(jobj, 1.0F);
             lbl_804799B8.x8 = lbl_804799B8.x8 - 1;
             return;
         }
-        fn_8019044C(jobj, lbl_804DA6E8);
+        fn_8019044C(jobj, 0.0F);
         return;
     }
     if (val > tm->cur_option) {
@@ -2795,7 +2764,7 @@ void fn_80191240(HSD_GObj* gobj)
     if (val == 5 && gm_804771C4.match_type != 0) {
         HSD_JObjSetFlagsAll(jobj_copy, JOBJ_HIDDEN);
     }
-    fn_8019044C(jobj_copy, lbl_804DA6E8);
+    fn_8019044C(jobj_copy, 0.0F);
 }
 
 /// Updates text visibility and menu state for tournament bracket options.
@@ -5630,8 +5599,6 @@ void fn_801967E0(s32 arg0)
     return;
 }
 
-#pragma push
-#pragma dont_inline on
 s32 fn_80196CF8(void)
 {
     TmData* tmdata;
@@ -5657,7 +5624,6 @@ s32 fn_80196CF8(void)
 
     return result;
 }
-#pragma pop
 
 static struct Lbl804799D8_t {
     u32 x0;       // 0x00 counter
@@ -8026,15 +7992,13 @@ void fn_8019B81C(s32* state)
 
 extern SceneDesc* lbl_804D6670;
 
-#pragma dont_inline on
 void fn_8019B860(TmData* tm)
 {
     fn_8019A158();
     fn_80199AF0();
     fn_80198BA0();
     fn_8018F888();
-    fn_8018E618(tm->entrants, lbl_804DA810, tm->x2C);
+    fn_8018E618(tm->entrants, 4.5f, tm->x2C);
     fn_8018E85C(lbl_804D6670->models[4], tm->x2C);
     tm->cur_option = 0x20;
 }
-#pragma dont_inline reset
