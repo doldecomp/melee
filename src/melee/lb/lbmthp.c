@@ -271,13 +271,13 @@ s32 fn_8001EF5C(THPDecComp* data)
 
         if (data->width == 0x280) {
             THPDec_80331340(data->unk_98, data->unk_50, data->unk_54,
-                            data->unk_58, data->width);
+                            data->unk_58);
             DCStoreRange(data->unk_50, data->width * data->height);
             DCStoreRange(data->unk_54, (data->width * data->height) >> 2);
             DCStoreRange(data->unk_58, (data->width * data->height) >> 2);
         } else {
             THPDec_803313D0(data->unk_98, data->unk_50, data->unk_54,
-                            data->unk_58);
+                            data->unk_58, data->width);
         }
 
         intr = OSDisableInterrupts();

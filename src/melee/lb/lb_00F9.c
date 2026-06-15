@@ -2181,12 +2181,6 @@ bool lb_80014638(struct lb_80014638_arg0_t* arg0,
     return true;
 }
 
-#pragma force_active on
-const f32 sdata2_order_0 = 0.0F;
-const f32 sdata2_order_1 = 0.00001F;
-const f32 sdata2_order_2 = 0.0F;
-#pragma force_active reset
-
 bool lb_80014770(Vec3* arg0, int arg1)
 {
     if ((u32) arg1 == 2U) {
