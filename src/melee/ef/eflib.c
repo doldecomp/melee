@@ -1416,7 +1416,7 @@ void efLib_SetTevKonstColor(HSD_JObj* jobj, s32 count, u32 konst, u32 tev0)
 
 /* 458F60 */ EF_ParamEntry efLib_ParamTable[0x8];
 
-void efLib_SetParamAlpha(HSD_GObj* gobj, u8 alpha, f32 unused_1, f32 unused_2)
+void efLib_SetParamAlpha(HSD_GObj* gobj, u8 alpha)
 {
     s32 idx;
 

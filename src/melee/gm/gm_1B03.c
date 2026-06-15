@@ -1836,46 +1836,44 @@ void gm_801B2704(GameScene* arg0)
 
 void gm_801B2790(GameScene* arg0)
 {
-    VsModeData* temp_r31;
-    StartMeleeData* temp_r30;
+    VsModeData* vs;
+    StartMeleeData* start;
     int i;
 
-    temp_r31 = &gmMainLib_804D3EE0->unk_950;
-    temp_r30 = gm_801A427C(arg0);
-    gm_80167BC8(temp_r31);
+    vs = &gmMainLib_804D3EE0->unk_950;
+    start = gm_801A427C(arg0);
+    gm_80167BC8(vs);
 
-    temp_r30->rules = temp_r31->data.rules;
-    temp_r30->rules.x0_0 = 0;
+    start->rules = vs->data.rules;
+    start->rules.x0_0 = 0;
 
-    temp_r31->data.rules.x4_4 = false;
+    start->rules.x0_6 = vs->data.rules.x4_4 = false;
 
-    temp_r30->rules.x0_6 = temp_r31->data.rules.x4_7;
+    start->rules.x5_0 = true;
+    start->rules.x1_2 = true;
+    start->rules.x1_3 = true;
+    start->rules.x2_5 = false;
+    start->rules.x2_6 = false;
+    start->rules.x3_1 = false;
+    start->rules.x4_0 = false;
 
-    temp_r30->rules.x5_0 = true;
-    temp_r30->rules.x1_2 = true;
-    temp_r30->rules.x1_3 = true;
-    temp_r30->rules.x2_5 = false;
-    temp_r30->rules.x2_6 = false;
-    temp_r30->rules.x3_1 = false;
-    temp_r30->rules.x4_0 = false;
+    start->rules.x38 = gm_80165268;
+    start->rules.x3C = gm_80165268;
+    start->rules.x40 = gm_8016BE80;
+    start->rules.x44 = gmCamera_801A31FC;
+    start->rules.x48 = gmCamera_801A3098;
+    start->rules.x4C = gmCamera_801A30E4;
 
-    temp_r30->rules.x38 = gm_80165268;
-    temp_r30->rules.x3C = gm_80165268;
-    temp_r30->rules.x40 = gm_8016BE80;
-    temp_r30->rules.x44 = gmCamera_801A31FC;
-    temp_r30->rules.x48 = gmCamera_801A3098;
-    temp_r30->rules.x4C = gmCamera_801A30E4;
-
-    temp_r30->rules.xD = 1;
-    temp_r30->rules.x2_4 = false;
+    start->rules.xD = 1;
+    start->rules.x2_4 = false;
 
     for (i = 0; i < 6; i++) {
-        temp_r30->players[i] = temp_r31->data.players[i];
-        temp_r30->players[i].xD_b3 = true;
+        start->players[i] = vs->data.players[i];
+        start->players[i].xD_b3 = true;
     }
 
-    gm_801B0348(temp_r30);
-    gm_8016F088(temp_r30);
+    gm_801B0348(start);
+    gm_8016F088(start);
     gm_80168FC4();
     lb_8001C550();
     lbSnap_8001E218(lbDvd_GetPreloadedArchive(0x7D7),
