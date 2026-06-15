@@ -62,8 +62,6 @@ struct lbl_803DA2E0_t lbl_803DA2E0 = {
 };
 static char lbl_803DA3A4[0x18] = "ScGamTour_scene_data";
 static char lbl_803DA3BC[0x14] = "SIS_TournamentData";
-extern char lbl_804D41E0[8];
-extern char lbl_804D41E8[8];
 
 extern MatchEnd gm_80477738;
 extern s32 lbl_803B7D3C[4];
@@ -1356,9 +1354,9 @@ void gm_8019ECAC_OnEnter(void* arg0)
     lbAudioAx_80027168();
     lbAudioAx_80027648();
     gm_8018F634();
-    lbl_804D6688 = lbArchive_80016DBC(lbl_804D41E0, &lbl_804D6690,
+    lbl_804D6688 = lbArchive_80016DBC("GmTou1p", &lbl_804D6690,
                                       strbase + 0xC4, 0);
-    lbl_804D668C = lbArchive_80016DBC(lbl_804D41E8, &lbl_804D6694,
+    lbl_804D668C = lbArchive_80016DBC("GmTou4p", &lbl_804D6694,
                                       strbase + 0xC4, 0);
     HSD_SisLib_803A62A0(0, fn_8018F5F0(), strbase + 0xDC);
     fn_8019DD60();

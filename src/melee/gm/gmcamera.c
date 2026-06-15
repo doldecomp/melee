@@ -435,10 +435,10 @@ void gmCamera_801A2BB0(void)
     }
 }
 
-extern const f32 gmCamera_804DA9C4;
-extern const f32 gmCamera_804DA9C8;
-extern const f32 gmCamera_804DA9CC;
-extern const f32 gmCamera_804DA9D0;
+const f32 gmCamera_804DA9C4 = 5.0f;
+const f32 gmCamera_804DA9C8 = -5.0f;
+const f32 gmCamera_804DA9CC = 1.0f;
+const f32 gmCamera_804DA9D0 = 2.0f;
 
 static inline f32 gmCamera_801A2BF0_get_translate_x(u32* px18)
 {
@@ -532,11 +532,6 @@ void gmCamera_801A2D44(void)
         HSD_JObjSetTranslateX(jobj_b, var_f31);
     }
 }
-
-const f32 gmCamera_804DA9C4 = 5.0f;
-const f32 gmCamera_804DA9C8 = -5.0f;
-const f32 gmCamera_804DA9CC = 1.0f;
-const f32 gmCamera_804DA9D0 = 2.0f;
 
 void gmCamera_801A2FBC(void)
 {
