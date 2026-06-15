@@ -2163,6 +2163,7 @@ lbl_8046DBD8_t* gm_801736DC(void)
     return &lbl_8046DBD8;
 }
 
+#pragma pool_data off
 void gm_801736E8(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5)
 {
     lbl_8046DBD8_t* tmp = &lbl_8046DBD8;
@@ -2174,6 +2175,7 @@ void gm_801736E8(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5)
     tmp->x4 = arg4;
     tmp->x5 = arg5;
 }
+#pragma pool_data on
 
 #pragma push
 #pragma dont_inline on

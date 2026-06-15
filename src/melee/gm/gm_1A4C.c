@@ -19,6 +19,7 @@
 
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -435,13 +436,9 @@ void gm_801A9094(void)
             HSD_JObjSetScaleX(root, 1.8f);
             HSD_JObjSetScaleY(root, 1.8f);
             HSD_JObjSetScaleZ(root, 1.8f);
-            if (joint == NULL) {
-                __assert("jobj.h", 0x2F5U, "joint");
-            }
+            HSD_ASSERT(0x2F5, joint);
             child = HSD_JObjLoadJoint(joint);
-            if (child == NULL) {
-                __assert("jobj.h", 0x2F7U, "jobj");
-            }
+            HSD_ASSERTMSG(0x2F7, child, "jobj");
             HSD_JObjAddChild(root, child);
             HSD_JObjAddAnimAll(child, NULL, matanim, NULL);
             HSD_JObjReqAnimAll(child, (f32) dsp->x05);

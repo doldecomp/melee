@@ -847,31 +847,44 @@ void gm_80160C90(HSD_Text* text, u8 fighter_id, bool arg2)
 void fn_80160DE8(HSD_JObj* arg0, u8 arg1, s32 arg2, u8 arg3, f32 farg0,
                  f32 farg1)
 {
+    HSD_Text* tmp_text = (HSD_Text*) arg0;
+    u8 tmp_ckind = arg1;
     const char* str;
     f32 size;
-    s32 is_us = lbLang_IsSavedLanguageUS();
+    bool use_alt_name;
 
-    if (is_us != 0) {
-        ((u8*) arg0)[0x49] = 1;
+    if (lbLang_IsSavedLanguageUS() != 0) {
+        ((HSD_Text*) arg0)->default_kerning = 1;
     }
-    str = ((u8) arg2) ? fn_801609E0_noinline3(arg3)
-                      : gm_80160980_noinline3(arg3);
+    str = arg3 ? fn_801609E0(tmp_ckind) : gm_80160980(tmp_ckind);
 
-    if (is_us != 0) {
-        if (arg3 != 0 && lbl_803D50E4[arg1] != NULL) {
-            size = lbl_803B75F8[arg1 + 0x63];
-        } else {
-            size = lbl_803B75F8[arg1 + 0x21];
+    if (lbLang_IsSavedLanguageUS() != 0) {
+        f32 temp;
+        use_alt_name = false;
+        if (arg3 && lbl_803D50E4[tmp_ckind] != NULL) {
+            use_alt_name = true;
         }
+        if (use_alt_name) {
+            temp = lbl_803B75F8[tmp_ckind + 0x63];
+        } else {
+            temp = lbl_803B75F8[tmp_ckind + 0x21];
+        }
+        size = temp;
     } else {
-        if (arg3 != 0 && lbl_803D5060[arg1] != NULL) {
-            size = lbl_803B75F8[arg1 + 0x42];
-        } else {
-            size = lbl_803B75F8[arg1];
+        f32 temp;
+        use_alt_name = false;
+        if (arg3 && lbl_803D5060[tmp_ckind] != NULL) {
+            use_alt_name = true;
         }
+        if (use_alt_name) {
+            temp = lbl_803B75F8[tmp_ckind + 0x42];
+        } else {
+            temp = lbl_803B75F8[tmp_ckind];
+        }
+        size = temp;
     }
-    HSD_SisLib_803A70A0((HSD_Text*) arg0, arg2, (char*) str);
-    HSD_SisLib_803A7548((HSD_Text*) arg0, arg2, size * farg0, farg1);
+    HSD_SisLib_803A70A0(tmp_text, arg2, (char*) str);
+    HSD_SisLib_803A7548(tmp_text, arg2, size * farg0, farg1);
 }
 
 f32 fn_80160F58(u8 ckind)
@@ -1218,21 +1231,23 @@ void fn_80162068(MatchEnd* match_end)
     }
 }
 
-s32 fn_80162170(MatchEnd* arg0)
+static inline void fn_80162170_inner(MatchEnd* arg0)
 {
     s32 i;
     s32 j;
     MatchPlayerData* p;
+    MatchPlayerData* q;
+    s32 play_time;
 
     for (i = 0; i < 4; i++) {
         p = &arg0->player_standings[i];
         if (p->slot_type != 3) {
-            u8 ck = p->x4;
-            if (ck != 0x78) {
-                struct NameTagData* nt = GetPersistentNameData(ck);
+            if (p->x4 != 0x78) {
+                struct NameTagData* nt = GetPersistentNameData(p->x4);
                 for (j = 0; j < 4; j++) {
-                    if (j != i && arg0->player_standings[j].slot_type != 3) {
-                        u8 ock = arg0->player_standings[j].x4;
+                    q = &arg0->player_standings[j];
+                    if (i != j && q->slot_type != 3) {
+                        u8 ock = q->x4;
                         if (ock != 0x78) {
                             s32 v = p->kills[j] + nt->vs_kos[ock];
                             if (v > 0xFFFF) {
@@ -1243,14 +1258,29 @@ s32 fn_80162170(MatchEnd* arg0)
                     }
                 }
                 {
-                    u32* pt = &nt->play_time_by_fighter[gm_80164024(
-                        p->character_kind)];
-                    *pt = MIN(*pt + arg0->frame_count / 60, 0xFFFFFFFFU);
+                    {
+                        u32 sum = nt->play_time_by_fighter[gm_80164024(
+                                      p->character_kind)] +
+                                  arg0->frame_count / 60;
+                        play_time = -1;
+                        if ((u32) sum <= (u32) play_time) {
+                            play_time = nt->play_time_by_fighter[gm_80164024(
+                                            p->character_kind)] +
+                                        arg0->frame_count / 60;
+                        }
+                    }
+                    nt->play_time_by_fighter[gm_80164024(p->character_kind)] =
+                        play_time;
                 }
                 fn_80161C90(arg0, i, &nt->sd_count);
             }
         }
     }
+}
+
+s32 fn_80162170(MatchEnd* arg0)
+{
+    fn_80162170_inner(arg0);
 }
 
 s32 gm_801623A4(MatchEnd* arg0)
@@ -3225,43 +3255,49 @@ float fn_80166A8C(register Vec3* src, register Vec3* dst)
 s32 gm_80166A98(MatchEnd* arg0, s32 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,
                 s8 arg6, u8 arg7, u8 arg_sp8, u8 arg_spC)
 {
-    struct HSD_PadStatus* pad_status;
+    s32 score0;
+    s32 score1;
+    s32 score2;
+    s32 score3;
     u32 i;
 
     memzero(arg0, 0x227C);
-    pad_status = &HSD_PadMasterStatus[0];
 
     arg0->result = 1;
     arg0->x5 = 0;
     arg0->is_teams = 0;
 
+    score0 = 0xA - arg3;
     arg0->player_standings[0].character_kind = arg2;
+    score1 = 0xA - arg5;
     arg0->player_standings[1].character_kind = arg4;
+    score2 = 0xA - arg7;
     arg0->player_standings[2].character_kind = arg6;
+    score3 = 0xA - arg_spC;
     arg0->player_standings[3].character_kind = arg_sp8;
 
     // Apply player color to all 4 players?
     for (i = 0; i < 4; i++) {
-        arg0->player_standings[i].character_kind |= (arg1 << 2) & 0xFC;
+        arg0->player_standings[i].x3 = arg1;
     }
 
-    arg0->player_standings[0].score = 0xA - arg3;
-    arg0->player_standings[1].score = 0xA - arg5;
-    arg0->player_standings[2].score = 0xA - arg7;
-    arg0->player_standings[3].score = 0xA - arg_spC;
-    arg0->player_standings[0].x30 = 0xA - arg3;
-    arg0->player_standings[1].x30 = 0xA - arg5;
-    arg0->player_standings[2].x30 = 0xA - arg7;
-    arg0->player_standings[3].x30 = 0xA - arg_spC;
+    arg0->player_standings[0].score = score0;
+    arg0->player_standings[1].score = score1;
+    arg0->player_standings[2].score = score2;
+    arg0->player_standings[3].score = score3;
+    arg0->player_standings[0].x30 = score0;
+    arg0->player_standings[1].x30 = score1;
+    arg0->player_standings[2].x30 = score2;
+    arg0->player_standings[3].x30 = score3;
 
     for (i = 0; i < 4; i++) {
         arg0->player_standings[i].x30 += 6 - i;
         if (arg0->player_standings[i].character_kind == 0x21) {
             arg0->player_standings[i].slot_type = 3;
-        } else if (pad_status[i].err != 0) {
-            arg0->player_standings[i].slot_type = 1;
-        } else {
+        } else if (HSD_PadMasterStatus[(u8) i].err == 0) {
             arg0->player_standings[i].slot_type = 0;
+        } else {
+            arg0->player_standings[i].slot_type = 1;
         }
 
         if (arg0->player_standings[i].character_kind == 0x13) {
@@ -4475,128 +4511,50 @@ void fn_80169574(ssize_t size, s8* buf)
 
 s32 fn_801695BC(u8 arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
 {
-    u8 sp1C[0x0C];
-    s32 temp_r3_2;
-    s32 var_ctr_2;
-    s32 var_r28;
-    s32 var_r28_2;
-    s32 var_r7_2;
-    s32 var_r8;
-    s8 temp_r0;
-    s8 temp_r3_3;
-    s8 temp_r4;
-    s8 temp_r4_3;
-    s8 temp_r5;
-    s8 var_r7;
-    u32 var_ctr;
-    u8 temp_r0_2;
-    u8 temp_r3;
-    u8 temp_r3_4;
-    u8* temp_r4_2;
-    u8* temp_r6;
-    u8* var_r27;
-    u8* var_r3;
-    u8* var_r3_2;
-    u8* var_r6;
-    u8* temp_r27;
+    u8 colors[12];
+    u8 ncolors;
+    s32 ncolors_s32;
+    s32 i;
+    s32 color_i;
+    u8 tmp;
 
-    temp_r3 = gm_80169238_noinline(arg0);
+    ncolors = gm_80169238_noinline(arg0);
     if ((s8) arg0 != 0x21) {
-        var_r7 = 0;
-        if (temp_r3 > 0) {
-            temp_r3_2 = (s32) temp_r3 - 8;
-            if ((s32) temp_r3 > 8) {
-                var_ctr = (u32) (temp_r3_2 + 7) >> 3;
-                var_r6 = &sp1C[0];
-                if (temp_r3_2 > 0) {
-                    do {
-                        var_r6[0] = (u8) var_r7;
-                        var_r6[1] = (u8) (var_r7 + 1);
-                        temp_r5 = var_r7 + 4;
-                        var_r6[2] = (u8) (var_r7 + 2);
-                        temp_r4 = var_r7 + 5;
-                        temp_r3_3 = var_r7 + 6;
-                        var_r6[3] = (u8) (var_r7 + 3);
-                        temp_r0 = var_r7 + 7;
-                        var_r7 += 8;
-                        var_r6[4] = (u8) temp_r5;
-                        var_r6[5] = (u8) temp_r4;
-                        var_r6[6] = (u8) temp_r3_3;
-                        var_r6[7] = (u8) temp_r0;
-                        var_r6 += 8;
-                        var_ctr -= 1;
-                    } while (var_ctr != 0);
+        ncolors_s32 = ncolors;
+        for (i = 0; i < ncolors_s32; i++) {
+            colors[i] = (s8) i;
+        }
+        if ((s8) arg1 == (s8) arg0) {
+            colors[(s8) arg2] = 0xFF;
+        }
+        for (i = 0; i < ncolors_s32; i++) {
+            u8* other = &colors[HSD_Randi(ncolors_s32)];
+            tmp = *other;
+            *other = colors[i];
+            colors[i] = tmp;
+        }
+        color_i = 0;
+        for (i = 0; (s8) arg4[i] != -2; i++) {
+            if ((s8) arg0 == (s8) arg3[i]) {
+                if ((s8) colors[color_i % ncolors_s32] == -1) {
+                    color_i += 1;
                 }
-            }
-            var_r3_2 = &sp1C[var_r7];
-            var_ctr_2 = (s32) temp_r3 - (s32) var_r7;
-            if ((s32) var_r7 < (s32) temp_r3) {
-                do {
-                    *var_r3_2 = (u8) var_r7;
-                    var_r3_2 += 1;
-                    var_r7 += 1;
-                    var_ctr_2 -= 1;
-                } while (var_ctr_2 != 0);
+                arg4[i] = colors[color_i % ncolors_s32];
+                color_i += 1;
             }
         }
-
-        if (arg1 == (s8) arg0) {
-            sp1C[(s8) arg2] = 0xFF;
-        }
-
-        var_r27 = &sp1C[0];
-        var_r28 = 0;
-    loop_12:
-        if (var_r28 < (s32) temp_r3) {
-            temp_r4_2 = &sp1C[HSD_Randi((s32) temp_r3)];
-            temp_r3_4 = *temp_r4_2;
-            var_r28 += 1;
-            *temp_r4_2 = *var_r27;
-            *var_r27 = temp_r3_4;
-            var_r27 += 1;
-            goto loop_12;
-        }
-
-        var_r3 = arg3;
-        var_r8 = 0;
-        var_r7_2 = 0;
-    loop_19:
-        temp_r6 = &arg4[var_r7_2];
-        if ((s8) *temp_r6 != -2) {
-            if ((s8) arg0 == (s8) *var_r3) {
-                if ((s8) sp1C[var_r8 % temp_r3] == -1) {
-                    var_r8 += 1;
-                }
-                temp_r0_2 = sp1C[var_r8 % temp_r3];
-                var_r8 += 1;
-                *temp_r6 = temp_r0_2;
-            }
-            var_r7_2 += 1;
-            var_r3 += 1;
-            goto loop_19;
-        }
-
-        var_r28_2 = 1;
-    loop_26:
-        temp_r27 = &arg4[var_r28_2];
-        if ((s8) temp_r27[0] != -2) {
-            var_r3 = &arg3[var_r28_2];
-            if (((s8) arg0 == (s8) var_r3[0]) &&
-                ((s8) arg0 == (s8) var_r3[-1]))
+        for (i = 1; (s8) arg4[i] != -2; i++) {
+            if ((s8) arg0 == (s8) arg3[i] &&
+                (s8) arg0 == (s8) arg3[i - 1])
             {
-                var_r3 = (u8*) HSD_Randi(2);
-                if (var_r3 != NULL) {
-                    temp_r4_3 = (s8) temp_r27[0];
-                    temp_r27[0] = temp_r27[-1];
-                    temp_r27[-1] = (u8) temp_r4_3;
+                if (HSD_Randi(2) != 0) {
+                    tmp = arg4[i];
+                    arg4[i] = arg4[i - 1];
+                    arg4[i - 1] = tmp;
                 }
             }
-            var_r28_2 += 1;
-            goto loop_26;
         }
-        return (s32) var_r3;
     }
-    return (s32) temp_r3;
 }
 
 #pragma push
@@ -4690,20 +4648,22 @@ void fn_80169900(u8 arg0, struct lbl_8046B488_t* arg1, s8* arg2, s8* arg3)
 
 long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
 {
-    s32 i;
+    s8* p;
     s32 count;
     s8* base;
-    s8* p;
-    s8* q;
+    s8* list;
+    s32 i;
     s8* dst;
     s8* src;
     u8 tmp;
     s8 result;
 
     base = (s8*) &lbl_8046B488;
-    if ((s32) arg0 == 1) {
+    switch (arg0) {
+    case 1:
         i = 0;
-        p = base + 0x1C0;
+        list = base + 0x1C0;
+        p = list;
         do {
             if (i != 4 && gm_80164840_noinline((u8) i) != 0) {
                 *p = i;
@@ -4715,8 +4675,9 @@ long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
         } while (i < 0x1A);
 
         i = 0;
-        p = base + 0x1C0;
+        p = list;
         do {
+            s8* q;
             q = base + HSD_Randi(0x1B);
             tmp = q[0x1C0];
             i += 1;
@@ -4726,42 +4687,37 @@ long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
         } while (i < 0x1A);
 
         count = 0;
-        p = base + 0x1C0;
-        i = 0xD;
-        do {
-            if ((s8) p[0] != -1) {
+        for (i = 0; i < 0xD; i++) {
+            if ((s8) list[0] != -1) {
                 count += 1;
                 if (count > 0x10) {
-                    p[0] = -1;
+                    list[0] = -1;
                 }
             }
-            if ((s8) p[1] != -1) {
+            if ((s8) list[1] != -1) {
                 count += 1;
                 if (count > 0x10) {
-                    p[1] = -1;
+                    list[1] = -1;
                 }
             }
-            p += 2;
-            i -= 1;
-        } while (i != 0);
+            list += 2;
+        }
 
         dst = arg1;
         src = arg2;
         i = 0;
         while ((s8) *src != -2) {
-            while ((s8) base[i + 0x1C0] == -1) {
+            while ((s8) (base + i)[0x1C0] == -1) {
                 i = (i + 1) % 27;
             }
-            result = Player_800325C8((CharacterKind) (s8) base[i + 0x1C0], 0);
+            result = Player_800325C8((CharacterKind) (s8) (base + i)[0x1C0], 0);
             *dst = result;
             i += 1;
             src += 1;
             dst += 1;
         }
-        return (s32) result;
-    } else if ((s8) arg0 >= 1) {
-        return (s32) base;
-    } else if ((s8) arg0 >= 0) {
+        break;
+    case 0:
         dst = arg1;
         src = arg2;
         while ((s8) *src != -2) {
@@ -4769,9 +4725,7 @@ long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
             src += 1;
             dst += 1;
         }
-        return (s32) src;
-    } else {
-        return (s32) base;
+        break;
     }
 }
 
@@ -5025,75 +4979,76 @@ s32 gm_8016A22C(s8 k0, s8 k1, s8 k2, u8 a3, u8 a4, int a5, int mode, int a7,
                 u8 color, u8 p87, u8 p8b, int x6, int x7, int x9, int xA,
                 int flag2, int flag1, f32 f1, f32 f2)
 {
+    struct lbl_8046B488_t* gp = &lbl_8046B488;
     u8* kinds;
     int i;
+    u8 count;
 
-    memzero(&lbl_8046B488, 0x1C0);
+    memzero(gp, 0x1C0);
 
-    lbl_8046B488.x0 = k0;
-    lbl_8046B488.x1 = k1;
-    lbl_8046B488.x2 = k2;
+    gp->x0 = k0;
+    gp->x1 = k1;
+    gp->x2 = k2;
 
-    lbl_8046B488.x3 = a3;
-    lbl_8046B488.x4 = a4;
-    lbl_8046B488.x5 = (u8) a5;
+    gp->x3 = a3;
+    gp->x4 = a4;
+    gp->x5 = (u8) a5;
 
-    lbl_8046B488.x6 = (u8) x6;
-    lbl_8046B488.x7 = (u8) x7;
-    lbl_8046B488.x8 = (u8) x7;
+    gp->x1AC = p87;
+    gp->x1AD = 0x21;
+    gp->x1B2 = p8b;
+
+    gp->x6 = (u8) x6;
+    gp->x7 = (u8) x7;
+    gp->x8 = (u8) x7;
 
     if (x9 > 5) {
         x9 = 5;
     }
-    lbl_8046B488.x9 = (u8) x9;
+    gp->x9 = (u8) x9;
 
-    lbl_8046B488.xA = (u8) xA;
+    gp->xA = (u8) xA;
 
-    lbl_8046B488.x14 = f1;
-    lbl_8046B488.x18 = f2;
+    gp->x14 = f1;
+    gp->x18 = f2;
 
-    lbl_8046B488.unk_10_b2 = flag2;
-    lbl_8046B488.unk_10_b1 = flag1;
+    gp->unk_10_b2 = flag2;
+    gp->unk_10_b1 = flag1;
 
-    lbl_8046B488.x1C = 1.0f;
+    gp->x1C = 1.0f;
 
-    lbl_8046B488.xB = (u8) mode;
-    lbl_8046B488.xD = (u8) a7;
-    lbl_8046B488.xE = color;
+    gp->xB = (u8) mode;
+    gp->xD = (u8) a7;
+    gp->xE = color;
 
-    lbl_8046B488.xC = a3;
+    gp->xC = a3;
 
-    lbl_8046B488.x1AC = p87;
-    lbl_8046B488.x1AD = 0x21;
-    lbl_8046B488.x1B2 = p8b;
+    count = gp->x7;
+    memzero(gp->x20, count);
+    gp->x20[count] = -2;
 
-    memzero(lbl_8046B488.x20, lbl_8046B488.x7);
-    lbl_8046B488.x20[lbl_8046B488.x7] = (s8) -2;
+    fn_80169900_noinline(gp->xD, gp, gp->xA2, gp->x20);
 
-    fn_80169900_noinline(lbl_8046B488.xD, &lbl_8046B488, lbl_8046B488.xA2,
-                lbl_8046B488.x20);
+    kinds = (u8*) &gp->x0;
 
-    kinds = (u8*) &lbl_8046B488.x0;
-
-    switch (lbl_8046B488.xB) {
+    switch (gp->xB) {
     case 0:
         for (i = 0; i < 3; i++) {
-            fn_801695BC_noinline(kinds[i], p87, p8b, (u8*) lbl_8046B488.xA2,
-                        (u8*) lbl_8046B488.x20);
+            fn_801695BC_noinline(kinds[i], p87, p8b, (u8*) gp->xA2,
+                        (u8*) gp->x20);
         }
         break;
 
-    case 1:
+    case 1: {
+        u8 xC = gp->xC;
         for (i = 0; i < 3; i++) {
-            fn_801697FC_noinline(
-                kinds[i], lbl_8046B488.xC, p87, p8b,
-                lbl_8046B488
-                    .x20); // This was being inlined, hence the no-inline
+            fn_801697FC_noinline(kinds[i], xC, p87, p8b, gp->x20);
         }
         break;
     }
+    }
 
-    return fn_80169A84(lbl_8046B488.xE, lbl_8046B488.x124, lbl_8046B488.x20);
+    return fn_80169A84(gp->xE, gp->x124, gp->x20);
 }
 
 void gm_8016A404(s32 arg0)
@@ -5366,25 +5321,22 @@ bool gm_8016AC44(s8 ckind, s8 costume_id)
 {
     s32 idx;
     s32 i;
-    bool found;
+    s8* base;
 
-    found = false;
-    if (gm_8016AE50()->x58 != NULL) {
-        found = true;
-    }
-    if (found == 1) {
+    if ((gm_8016AE50()->x58 != NULL ? 1 : 0) == 1) {
+        base = lbl_8046B668.arr1;
         idx = -1;
         for (i = 0; i < 27; i++) {
-            if (lbl_8046B668.arr2[i] == -2) {
+            if (base[i + 0x1C] == -2) {
                 idx = i;
                 break;
             }
         }
         if (idx != -1) {
             for (i = idx; i >= 0; i--) {
-                if (lbl_8046B668.arr2[i] == costume_id &&
-                    ckind == lbl_8046B668.arr1[i])
-                {
+                s8* entry = &base[i];
+                if (entry[0x1C] == costume_id && ckind == entry[0]) {
+                    entry[0x1C] = -1;
                     return true;
                 }
             }
