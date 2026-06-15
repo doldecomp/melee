@@ -3793,7 +3793,7 @@ melee/it/items/itmewtwodisable.c:
 
 melee/it/items/itmewtwoshadowball.c:
 	.text       start:0x802C4D10 end:0x802C61F4
-	.data       start:0x803F7880 end:0x803F7898
+	.data       start:0x803F7760 end:0x803F7898
 	.sdata      start:0x804D5570 end:0x804D557D
 	.sdata2     start:0x804DD258 end:0x804DD290
 
