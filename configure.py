@@ -506,7 +506,7 @@ config.libs = [
             # Main
             Object(Matching, "melee/ft/fighter.c"),
             Object(Matching, "melee/ft/ftanim.c"),
-            Object(NonMatching, "melee/ft/ftaction.c"),
+            Object(Matching, "melee/ft/ftaction.c"),
             Object(Matching, "melee/ft/ftparts.c"),
             Object(Matching, "melee/ft/ftcamera.c"),
             Object(NonMatching, "melee/ft/ftcoll.c"),

@@ -323,11 +323,11 @@ void ftAction_8007121C(Fighter_GObj* gobj, CommandInfo* cmd)
         }
         ftColl_8007ABD0(hitbox, cmd->u->create_hitbox_0.damage, gobj);
         NEXT_CMD(cmd);
-        hitbox->scale = (1 / 256.0f) * cmd->u->create_hitbox_1.size;
-        hitbox->b_offset.x = (1 / 256.0f) * cmd->u->create_hitbox_1.z_offset;
+        hitbox->scale = 0.003906f * cmd->u->create_hitbox_1.size;
+        hitbox->b_offset.x = 0.003906f * cmd->u->create_hitbox_1.z_offset;
         NEXT_CMD(cmd);
-        hitbox->b_offset.y = (1 / 256.0f) * cmd->u->create_hitbox_2.y_offset;
-        hitbox->b_offset.z = (1 / 256.0f) * cmd->u->create_hitbox_2.x_offset;
+        hitbox->b_offset.y = 0.003906f * cmd->u->create_hitbox_2.y_offset;
+        hitbox->b_offset.z = 0.003906f * cmd->u->create_hitbox_2.x_offset;
         NEXT_CMD(cmd);
         ftColl_8007AC9C(hitbox, cmd->u->create_hitbox_3.angle, gobj);
         hitbox->x24 = cmd->u->create_hitbox_3.knockback_growth;
