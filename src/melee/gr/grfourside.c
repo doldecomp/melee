@@ -440,13 +440,10 @@ bool grFourside_801F388C(Ground_GObj* arg)
     return false;
 }
 
-void grFourside_801F3894(Ground_GObj* arg0)
+static inline void grFourside_801F3894_inline(Ground_GObj* gobj, Ground* gp,
+                                              HSD_JObj* jobj, u8 state,
+                                              u8 prev_building)
 {
-    Ground* gp = arg0->user_data;
-    u8 state = gp->gv.foursideUfo.x0;
-    u8 prev_building = gp->gv.foursideUfo.x1;
-    HSD_JObj* jobj = arg0->hsd_obj;
-    PAD_STACK(8);
     switch (state) {
     case 0: {
         s32 timer = gp->gv.foursideUfo.x4;
@@ -466,7 +463,7 @@ void grFourside_801F3894(Ground_GObj* arg0)
                 } while (prev_building == building);
                 if (building == 2 || grFourside_801F3F10() == 0) {
                     gp->gv.foursideUfo.x1 = building;
-                    grAnime_801C8138(arg0, gp->map_id,
+                    grAnime_801C8138(gobj, gp->map_id,
                                      gp->gv.foursideUfo.x1 * 4);
                     mpLib_80055E9C(4);
                     mpLib_80057424(4);
@@ -486,7 +483,7 @@ void grFourside_801F3894(Ground_GObj* arg0)
         break;
     }
     case 1: {
-        if (grAnime_801C83D0(arg0, 0, 7) != 0) {
+        if (grAnime_801C83D0(gobj, 0, 7) != 0) {
             s32 rand_add = grFs_804D69D8->ufo_stay_time_add;
             s32 var_r6;
             if (rand_add != 0) {
@@ -495,12 +492,12 @@ void grFourside_801F3894(Ground_GObj* arg0)
                 var_r6 = 0;
             }
             gp->gv.foursideUfo.x4 = grFs_804D69D8->ufo_stay_time + var_r6;
-            grAnime_801C8138(arg0, gp->map_id, (prev_building * 4) + 1);
+            grAnime_801C8138(gobj, gp->map_id, (prev_building * 4) + 1);
             Camera_800290D4(gp->gv.foursideUfo.xC);
             gp->gv.foursideUfo.xC = 0;
             gp->gv.foursideUfo.x0 = 2;
         }
-        grFourside_801F3B70(arg0);
+        grFourside_801F3B70(gobj);
         if (gp->gv.foursideUfo.x3 == 1) {
             u8 building = gp->gv.foursideUfo.x1;
             if (building == 0) {
@@ -517,8 +514,8 @@ void grFourside_801F3894(Ground_GObj* arg0)
     case 2: {
         s32 timer = gp->gv.foursideUfo.x4;
         if (timer <= 0) {
-            if (grAnime_801C84A4(arg0, 0, 7) != 0) {
-                grAnime_801C8138(arg0, gp->map_id, (prev_building * 4) + 2);
+            if (grAnime_801C84A4(gobj, 0, 7) != 0) {
+                grAnime_801C8138(gobj, gp->map_id, (prev_building * 4) + 2);
                 gp->gv.foursideUfo.x0 = 4;
             }
         } else {
@@ -539,8 +536,19 @@ void grFourside_801F3894(Ground_GObj* arg0)
         break;
     }
     }
-    Ground_801C2FE0(arg0);
+    Ground_801C2FE0(gobj);
     gp->gv.foursideUfo.x8 = 0;
+}
+
+void grFourside_801F3894(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    u8 state = gp->gv.foursideUfo.x0;
+    u8 prev_building = gp->gv.foursideUfo.x1;
+    HSD_JObj* jobj = gobj->hsd_obj;
+    PAD_STACK(8);
+
+    grFourside_801F3894_inline(gobj, gp, jobj, state, prev_building);
 }
 
 void grFourside_801F3B6C(Ground_GObj* arg) {}

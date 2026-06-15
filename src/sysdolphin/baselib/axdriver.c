@@ -72,8 +72,12 @@ static void unk_inline(HSD_SM* v, HSD_SM** head)
 static bool tmp(HSD_SM* v)
 {
     int idx;
-    HSD_ASSERT(0x92, (v->flags&SMSTATE_MASK) == SMSTATE_ACTIVE ||
-                     (v->flags&SMSTATE_MASK) == SMSTATE_SLEEP);
+    u32 state;
+
+    state = v->flags & SMSTATE_MASK;
+    HSD_ASSERTMSG(0x92, state == SMSTATE_ACTIVE || state == SMSTATE_SLEEP,
+                  "(v->flags&SMSTATE_MASK) == SMSTATE_ACTIVE || "
+                  "(v->flags&SMSTATE_MASK) == SMSTATE_SLEEP");
 
     idx = v->vID;
     if (v->vID != -1) {
@@ -334,7 +338,8 @@ void AXDriver_8038C6C0(HSD_SM* v)
             break;
         case 7:
             v->flags |= 4;
-            v->x1A = CLAMP(0, v->x1A + (s8) (u8) *v->cmd_stream, 0xFF);
+            cmd_val = v->x1A + (s8) (u8) *v->cmd_stream;
+            v->x1A = CLAMP(0, cmd_val, 0xFF);
             break;
         case 8:
             v->flags |= 8;
@@ -342,7 +347,8 @@ void AXDriver_8038C6C0(HSD_SM* v)
             break;
         case 9:
             v->flags |= 8;
-            v->x1C = CLAMP(0, v->x1C + (s8) (u8) *v->cmd_stream, 0xFF);
+            cmd_val = v->x1C + (s8) (u8) *v->cmd_stream;
+            v->x1C = CLAMP(0, cmd_val, 0xFF);
             break;
         case 10:
             v->flags |= 0x10;
@@ -350,7 +356,8 @@ void AXDriver_8038C6C0(HSD_SM* v)
             break;
         case 11:
             v->flags |= 0x10;
-            v->x1E = CLAMP(0, v->x1E + (s8) (u8) *v->cmd_stream, 0xFF);
+            cmd_val = v->x1E + (s8) (u8) *v->cmd_stream;
+            v->x1E = CLAMP(0, cmd_val, 0xFF);
             break;
         case 12:
             v->flags |= 0x20;
@@ -358,8 +365,8 @@ void AXDriver_8038C6C0(HSD_SM* v)
             break;
         case 13:
             v->flags |= 0x20;
-            v->x20 =
-                CLAMP(-0x2A30, v->x20 + (s16) (u16) *v->cmd_stream, 0x960);
+            cmd_val = v->x20 + (s16) (u16) *v->cmd_stream;
+            v->x20 = CLAMP(-0x2A30, cmd_val, 0x960);
             break;
         case 16:
             if (!(AXDriver_804D603C & 1)) {
@@ -380,8 +387,8 @@ void AXDriver_8038C6C0(HSD_SM* v)
         case 17:
             if (!(AXDriver_804D603C & 1)) {
                 v->flags |= 0x80;
-                v->x24[0] =
-                    CLAMP(0, v->x24[0] + (s8) (u8) *v->cmd_stream, 0xFF);
+                cmd_val = v->x24[0] + (s8) (u8) *v->cmd_stream;
+                v->x24[0] = CLAMP(0, cmd_val, 0xFF);
             }
             break;
         case 18:
@@ -393,8 +400,8 @@ void AXDriver_8038C6C0(HSD_SM* v)
         case 19:
             if (!(AXDriver_804D603C >> 1 & 1)) {
                 v->flags |= 0x80;
-                v->x24[1] =
-                    CLAMP(0, v->x24[1] + (s8) (u8) *v->cmd_stream, 0xFF);
+                cmd_val = v->x24[1] + (s8) (u8) *v->cmd_stream;
+                v->x24[1] = CLAMP(0, cmd_val, 0xFF);
             }
             break;
         case 15:
@@ -773,8 +780,6 @@ static void fn_8038DA5C(s32 result, DVDFileInfo* fileInfo)
     }
 }
 
-/// @todo Currently 97.58% match - register allocation in section 1 and 2
-/// parsing blocks (r0/r3 swap for count/ptr, r4/r5 swap for base pointer)
 void AXDriver_8038DA70(const char* path, void (*callback)(void))
 {
     DVDFileInfo fileInfo;
@@ -782,6 +787,7 @@ void AXDriver_8038DA70(const char* path, void (*callback)(void))
     s32 alignedSize;
     void* ptr;
     s32 offset;
+    s32 count;
     s32 j;
     s32 i;
 
@@ -810,12 +816,13 @@ void AXDriver_8038DA70(const char* path, void (*callback)(void))
     DVDClose(&fileInfo);
 
     AXDriver_804D77A0 = ((s32*) AXDriver_804D7798)[0];
-    if (AXDriver_804D77A0 != 0) {
+    count = AXDriver_804D77A0;
+    if (count != 0) {
         ptr = (void*) ((u8*) AXDriver_804D7798 + 4);
     } else {
         ptr = NULL;
     }
-    offset = AXDriver_804D77A0 * 4 + 4;
+    offset = count * 4 + 4;
     AXDriver_804D77A4 = ptr;
 
     AXDriver_804D77A8 = *(s32*) ((u8*) AXDriver_804D7798 + offset);
@@ -827,8 +834,8 @@ void AXDriver_8038DA70(const char* path, void (*callback)(void))
     }
     AXDriver_804D77AC = ptr;
 
-    j = 0;
     i = 0;
+    j = i;
     while (i < AXDriver_804D77A8) {
         i++;
         *(u32*) ((u8*) AXDriver_804D77AC + j) += (u32) AXDriver_804D7798 & ~3u;
@@ -836,30 +843,27 @@ void AXDriver_8038DA70(const char* path, void (*callback)(void))
     }
 
     offset += AXDriver_804D77A8 * 4;
-    AXDriver_804D77B0 = *(s32*) ((u8*) AXDriver_804D7798 + offset);
+    ptr = AXDriver_804D7798;
+    AXDriver_804D77B0 = *(s32*) ((u8*) ptr + offset);
     offset += 4;
-    if (AXDriver_804D77B0 != 0) {
-        ptr = (u8*) AXDriver_804D7798 + offset;
-    } else {
-        ptr = NULL;
-    }
-    offset += AXDriver_804D77B0 * 4;
-    AXDriver_804D77B4 = ptr;
+    count = AXDriver_804D77B0;
+    AXDriver_804D77B4 = count != 0 ? (u32*) ((u8*) ptr + offset) : NULL;
+    offset += count * 4;
 
-    AXDriver_804D77B8 = *(s32*) ((u8*) AXDriver_804D7798 + offset);
+    AXDriver_804D77B8 = *(s32*) ((u8*) ptr + offset);
     offset += 4;
     if (AXDriver_804D77B8 != 0) {
-        ptr = (u8*) AXDriver_804D7798 + offset;
+        ptr = (u8*) ptr + offset;
     } else {
         ptr = NULL;
     }
+    j = 0;
     AXDriver_804D77BC = ptr;
-    i = 0;
-    j = i;
-    while (i < AXDriver_804D77B8) {
-        i++;
-        *(u32*) ((u8*) AXDriver_804D77BC + j) += (u32) AXDriver_804D7798 & ~3u;
-        j += 4;
+    i = j;
+    while (j < AXDriver_804D77B8) {
+        j++;
+        *(u32*) ((u8*) AXDriver_804D77BC + i) += (u32) AXDriver_804D7798 & ~3u;
+        i += 4;
     }
 
     offset += AXDriver_804D77B8 * 4;
@@ -870,13 +874,13 @@ void AXDriver_8038DA70(const char* path, void (*callback)(void))
     } else {
         ptr = NULL;
     }
+    j = 0;
     AXDriver_804D77C4 = ptr;
-    i = 0;
-    j = i;
-    while (i < AXDriver_804D77C0) {
-        i++;
-        *(u32*) ((u8*) AXDriver_804D77C4 + j) += (u32) AXDriver_804D7798 & ~3u;
-        j += 4;
+    i = j;
+    while (j < AXDriver_804D77C0) {
+        j++;
+        *(u32*) ((u8*) AXDriver_804D77C4 + i) += (u32) AXDriver_804D7798 & ~3u;
+        i += 4;
     }
 }
 
@@ -996,25 +1000,20 @@ int AXDriverSetupAux(int channel, AXDriverAuxType type, void* param)
     return result;
 }
 
-static const RevHiDims revhi_dims = {
-    { 0x6FD, 0x7CF, 0x91D, 0x1B1, 0x95, 0x2F, 0x49, 0x43 },
-};
-
-static const s32 revstd_dims[] = {
-    0x6FD,
-    0x7CF,
-    0x1B1,
-    0x95,
-};
-
-/// @todo Currently 53.61% match - needs struct copy and computation order
-/// fixes
 s32 HSD_AudioGetAuxHeapSize(AXDriverAuxType type, void* param)
 {
+    static const RevHiDims AXDriver_803B95F8 = {
+        { 0x6FD, 0x7CF, 0x91D, 0x1B1, 0x95, 0x2F, 0x49, 0x43 },
+    };
+    static const s32 AXDriver_803B9618[] = {
+        0x6FD,
+        0x7CF,
+        0x1B1,
+        0x95,
+    };
     s32 result;
-    s32 d[8];
-    s32 predelay;
-    s32 s0, s1, s2, s3, s4, s5;
+    int i;
+    int k;
 
     result = 0;
 
@@ -1029,40 +1028,34 @@ s32 HSD_AudioGetAuxHeapSize(AXDriverAuxType type, void* param)
     case AXDRIVER_AUX_REVERB_HI: {
         RevHiDims tmp;
 
-        tmp = revhi_dims;
-        predelay =
-            (s32) (32000.0F * ((struct AXFX_REVERBHI*) param)->preDelay);
+        tmp = AXDriver_803B95F8;
 
-        s0 = (tmp.v[0] + 2) * 4;
-        s1 = (tmp.v[1] + 2) * 4;
-        s2 = (tmp.v[2] + 2) * 4;
-        s3 = (tmp.v[3] + 2) * 4;
-        s4 = (tmp.v[4] + 2) * 4;
-        s5 = (tmp.v[5] + 2) * 4;
-
-        result +=
-            s0 + s3 + s1 + s4 + s2 + s5 + (tmp.v[5] + 2) * 4 + predelay * 4;
-        result +=
-            s0 + s3 + s1 + s4 + s2 + s5 + (tmp.v[6] + 2) * 4 + predelay * 4;
-        result +=
-            s0 + s3 + s1 + s4 + s2 + s5 + (tmp.v[7] + 2) * 4 + predelay * 4;
+        for (k = 0; k < 3; k++) {
+            for (i = 0; i < 3; i++) {
+                result += (tmp.v[i] + 2) * 4;
+            }
+            for (i = 0; i < 3; i++) {
+                result += (tmp.v[i + 3] + 2) * 4;
+            }
+            result += (tmp.v[k + 5] + 2) * 4;
+            result += ((s32) (32000.0F *
+                              ((struct AXFX_REVERBHI*) param)->preDelay)) * 4;
+        }
         break;
     }
 
-    case AXDRIVER_AUX_REVERB_STD: {
-        s0 = (revstd_dims[0] + 2) * 4;
-        s1 = (revstd_dims[1] + 2) * 4;
-        s2 = (revstd_dims[2] + 2) * 4;
-        s3 = (revstd_dims[3] + 2) * 4;
-
-        predelay =
-            (s32) (32000.0F * ((struct AXFX_REVERBSTD*) param)->preDelay);
-
-        result = s0 + s2 + s1 + s3 + predelay * 4;
-        result += s0 + s2 + s1 + s3 + predelay * 4;
-        result += s0 + s2 + s1 + s3 + predelay * 4;
+    case AXDRIVER_AUX_REVERB_STD:
+        for (k = 0; k < 3; k++) {
+            for (i = 0; i < 2; i++) {
+                result += (AXDriver_803B9618[i] + 2) * 4;
+            }
+            for (i = 0; i < 2; i++) {
+                result += (AXDriver_803B9618[i + 2] + 2) * 4;
+            }
+            result += ((s32) (32000.0F *
+                              ((struct AXFX_REVERBSTD*) param)->preDelay)) * 4;
+        }
         break;
-    }
 
     case AXDRIVER_AUX_CHORUS:
         result = 0x1680;
