@@ -921,9 +921,9 @@ struct stage_sfx_3 {
 };
 struct footstep_fx_0 {
     u32 opcode : 6;
-    u32 x0_b6_7 : 2;
+    u32 boneId : 8;
     u32 use_alt_bone : 1;
-    u32 x1_b1_7 : 7;
+    u32 x1_b7 : 1;
     u32 x2_b0_7 : 8;
     u32 x3_b0_7 : 8;
 };
