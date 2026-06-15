@@ -26,7 +26,7 @@ s32 it_803F7880[] = {
     0x00030DB0,
 };
 
-void it_802C4D10(Item_GObj* gobj)
+u32 it_802C4D10(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itMewtwoShadowball_DatAttrs* attr =
