@@ -1142,15 +1142,9 @@ void ftAction_80072CB0(Fighter_GObj* gobj, CommandInfo* cmd)
 
 void ftAction_80072CD8(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    /// @todo too much stack
-    int gfx_id;
     int sp64;
     int sp60;
-    struct {
-        u32 x0;
-        u32 x4;
-        u32 x8;
-    } sp2C;
+    int gfx_id;
     CommandInfo _cmd;
     u32 cmd_words[3];
     Vec3 offset;
