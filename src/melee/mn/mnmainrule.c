@@ -140,8 +140,12 @@ struct mn_803EC818_t mn_803EC818[7] = {
     { 0x36, { 0x00, 0x00, 0x00, 0x00 } },
 };
 
-extern f32 mn_804D4B90;
-extern u8 mn_804D4B94[2];
+f32 mn_804D4B88 = 4.0F;
+f32 lbl_804D4B8C = 5.0F;
+f32 mn_804D4B90 = 1.0F;
+u8 mn_804D4B94[4] = { 1, 0x63, 0x2B, 0 };
+
+extern u8 mn_804D4B96;
 extern f32 mn_804D6BD8;
 extern u8* mn_804DBDFC;
 extern f32 mn_804DBE00;
@@ -628,10 +632,6 @@ void mn_80230198(HSD_GObj* gobj, HSD_JObj* jobj, u8 mode)
 }
 
 extern MenuKindData mn_803EB6B0[];
-extern f32 mn_804D4B88;
-extern f32 lbl_804D4B8C;
-
-extern u8 mn_804D4B96;
 extern struct mn_803EC818_t mn_803EC818[];
 extern f32 mn_804DBE18;
 extern f32 mn_804DBE1C;

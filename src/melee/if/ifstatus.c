@@ -54,6 +54,8 @@ typedef struct UnkX {
 
 /* 2F491C */ static void ifStatus_PercentOnDeathAnimationThink(UnkX* value,
                                                                s32, s32);
+#pragma push
+#pragma force_active on
 /* 3F9598 */ char ifStatus_803F9598[0x14] = "DmgNum_scene_models";
 /* 3F95AC */ char ifStatus_803F95AC[0x14] = "DmgMrk_scene_models";
 /* 3F95C0 */ char ifStatus_803F95C0[0x68] =
@@ -71,6 +73,8 @@ typedef struct UnkX {
     { NULL, 0, if_802F74D0, 0x9C48U, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
     { NULL, 0, if_802F74D0, 0x9C46U, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
 };
+/* 3F9768 */ char lbl_803F9768[0x16] = "ScInfCnt_scene_models";
+#pragma pop
 /* 4D6D60 */ static u8 ifStatus_804D6D60;
 /* 4D6D61 */ static s8 ifStatus_804D6D61;
 
@@ -1274,6 +1278,71 @@ void ifStatus_802F7034(UNK_T arg0)
     ifStatus_802F6EA4(5, a, b, c, arg0, NULL);
 }
 
+#ifdef MWERKS_GEKKO
+asm void ifStatus_802F7134(void)
+{ // clang-format off
+    nofralloc
+    mflr r0
+    lis r3, ifStatus_803F9628@ha
+    stw r0, 0x4(r1)
+    li r0, 0x0
+    stwu r1, -0x30(r1)
+    stw r31, 0x2c(r1)
+    addi r31, r3, ifStatus_803F9628@l
+    stw r0, 0x0(r31)
+    stw r0, 0x4(r31)
+    stw r0, 0x28(r31)
+    stw r0, 0x2c(r31)
+    stw r0, 0x50(r31)
+    stw r0, 0x54(r31)
+    stw r0, 0x78(r31)
+    stw r0, 0x7c(r31)
+    stw r0, 0xa0(r31)
+    stw r0, 0xa4(r31)
+    stw r0, 0xc8(r31)
+    stw r0, 0xcc(r31)
+    stw r0, 0xf0(r31)
+    stw r0, 0xf4(r31)
+    stw r0, 0x118(r31)
+    stw r0, 0x11c(r31)
+    bl ifAll_802F3690
+    lwz r3, 0x0(r3)
+    addi r4, r1, 0x1c
+    addi r5, r31, 0x140
+    crclr 6
+    li r6, 0x0
+    bl lbArchive_LoadSections
+    lwz r3, 0x1c(r1)
+    lwz r0, 0x0(r3)
+    stw r0, 0x14(r31)
+    lwz r3, 0x1c(r1)
+    lwz r0, 0x4(r3)
+    stw r0, 0x3c(r31)
+    lwz r3, 0x1c(r1)
+    lwz r0, 0x8(r3)
+    stw r0, 0x64(r31)
+    lwz r3, 0x1c(r1)
+    lwz r0, 0xc(r3)
+    stw r0, 0x8c(r31)
+    lwz r3, 0x1c(r1)
+    lwz r0, 0x10(r3)
+    stw r0, 0xb4(r31)
+    lwz r3, 0x1c(r1)
+    lwz r0, 0x14(r3)
+    stw r0, 0xdc(r31)
+    lwz r3, 0x1c(r1)
+    lwz r0, 0x18(r3)
+    stw r0, 0x104(r31)
+    lwz r3, 0x1c(r1)
+    lwz r0, 0x1c(r3)
+    stw r0, 0x12c(r31)
+    lwz r0, 0x34(r1)
+    lwz r31, 0x2c(r1)
+    addi r1, r1, 0x30
+    mtlr r0
+    blr
+} // clang-format on
+#else
 void ifStatus_802F7134(void)
 {
     u8 _[8];
@@ -1287,15 +1356,50 @@ void ifStatus_802F7134(void)
     }
 
     archive = ifAll_802F3690();
-    lbArchive_LoadSections(*archive, (void**) &models, "ScInfCnt_scene_models",
-                           0);
+    lbArchive_LoadSections(*archive, (void**) &models,
+                           (char*) &ifStatus_803F9628[8], 0);
 
     for (i = 0; i < 8; i++) {
         ifStatus_803F9628[i].x14 = models[i];
     }
 }
+#endif
 
 /// free
+#ifdef MWERKS_GEKKO
+asm void ifStatus_802F7220(void)
+{ // clang-format off
+    nofralloc
+    mflr r0
+    lis r3, ifStatus_803F9628@ha
+    stw r0, 0x4(r1)
+    stwu r1, -0x18(r1)
+    stw r31, 0x14(r1)
+    li r31, 0x0
+    stw r30, 0x10(r1)
+    addi r30, r3, ifStatus_803F9628@l
+    stw r29, 0xc(r1)
+    li r29, 0x0
+L_ifStatus_802F7220_loop:
+    lwz r3, 0x0(r30)
+    cmplwi r3, 0x0
+    beq L_ifStatus_802F7220_next
+    bl HSD_GObjPLink_80390228
+    stw r31, 0x0(r30)
+L_ifStatus_802F7220_next:
+    addi r29, r29, 0x1
+    cmpwi r29, 0x8
+    addi r30, r30, 0x28
+    blt L_ifStatus_802F7220_loop
+    lwz r0, 0x1c(r1)
+    lwz r31, 0x14(r1)
+    lwz r30, 0x10(r1)
+    lwz r29, 0xc(r1)
+    addi r1, r1, 0x18
+    mtlr r0
+    blr
+} // clang-format on
+#else
 void ifStatus_802F7220(void)
 {
     s32 i;
@@ -1306,3 +1410,4 @@ void ifStatus_802F7220(void)
         }
     }
 }
+#endif

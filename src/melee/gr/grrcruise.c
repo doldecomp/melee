@@ -307,12 +307,6 @@ void grRCruise_801FF79C(Ground_GObj* arg) {}
 
 void grRCruise_801FF7A0(Ground_GObj* arg) {}
 
-char grRc_803E4F44[] = "dynamicsdata_shipflag\0\0\0"
-                         "gp->u.scroll.int_jobj\0\0\0"
-                         "gp->u.scroll.cam_jobj\0\0\0"
-                         "gp->u.scroll.ctr_jobj\0\0\0"
-                         "translate\0\0";
-
 void grRCruise_801FF7A4(Ground_GObj* gobj)
 {
     Ground_GObj* stage_gobj = gobj;
@@ -327,7 +321,7 @@ void grRCruise_801FF7A4(Ground_GObj* gobj)
     grAnime_801C752C(jobj, 1, 30628, HSD_AObjSetFlags, 3, 0x20000000);
     archive = grDatFiles_801C6324();
     if (archive != NULL && (data = HSD_ArchiveGetPublicAddress(
-                                archive->unk0, grRc_803E4F44),
+                                archive->unk0, "dynamicsdata_shipflag"),
                             data != NULL))
     {
         grLib_801C9B20(Ground_801C3FA4(stage_gobj, 23), data,
@@ -411,12 +405,12 @@ void grRCruise_801FF924(Ground_GObj* gobj)
     gp->u.scroll.x34[2] = Ground_801C3FA4(gobj, 6);
     gp->u.scroll.x40 = Ground_801C3FA4(gobj, 7);
     gp->u.scroll.int_jobj = Ground_801C3FA4(gobj, 3);
-    HSD_ASSERTMSG(0x2B0, gp->u.scroll.int_jobj, grRc_803E4F44 + 0x18);
+    HSD_ASSERT(0x2B0, gp->u.scroll.int_jobj);
     gp->u.scroll.cam_jobj = Ground_801C3FA4(gobj, 2);
-    HSD_ASSERTMSG(0x2B2, gp->u.scroll.cam_jobj, grRc_803E4F44 + 0x30);
+    HSD_ASSERT(0x2B2, gp->u.scroll.cam_jobj);
 
     gp->u.scroll.ctr_jobj = Ground_801C3FA4(gobj, 1);
-    HSD_ASSERTMSG(0x2B4, gp->u.scroll.ctr_jobj, grRc_803E4F44 + 0x48);
+    HSD_ASSERT(0x2B4, gp->u.scroll.ctr_jobj);
 
     HSD_JObjGetTranslation(gp->u.scroll.ctr_jobj, &gp->u.scroll.x04);
     gp->u.scroll.x10.z = grRc_804DB644;

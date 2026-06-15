@@ -336,7 +336,7 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
     tgtVx = target->pos_delta.x;
     tgtVy = target->pos_delta.y;
     tgtGrav = target->co_attrs.grav;
-    if (target->facing_dir > 0.0) {
+    if (target->facing_dir > 0.0f) {
         rangeF = target->x1A88.x55C;
         rangeB = target->x1A88.x560;
     } else {

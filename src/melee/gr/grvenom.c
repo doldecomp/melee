@@ -69,16 +69,12 @@ extern s32 grVe_804D6A38;
 extern s32 grVe_804D6A3C;
 extern s32 grVe_804D6A40;
 
-/* literal */ SDATA char grVe_804D47B8[] = "/GrVe";
-/* literal */ SDATA char grVe_804D47C0[] = "jobj.h";
-/* literal */ SDATA char grVe_804D47C8[] = "jobj";
-
 #undef __FILE__
-#define __FILE__ (&grVe_804D47C0[0])
+#define __FILE__ "jobj.h"
 static inline bool grVenom_JObjMtxIsDirty(HSD_JObj* jobj)
 {
     bool result;
-    HSD_ASSERTMSG(0x234, jobj, &grVe_804D47C8[0]);
+    HSD_ASSERTMSG(0x234, jobj, "jobj");
     result = false;
     if (!(jobj->flags & JOBJ_USER_DEF_MTX) && (jobj->flags & JOBJ_MTX_DIRTY)) {
         result = true;
@@ -95,7 +91,7 @@ static inline void grVenom_JObjSetMtxDirty(HSD_JObj* jobj)
 
 static inline void grVenom_JObjSetRotationY(HSD_JObj* jobj, f32 y)
 {
-    HSD_ASSERTMSG(0x294, jobj, &grVe_804D47C8[0]);
+    HSD_ASSERTMSG(0x294, jobj, "jobj");
     HSD_ASSERT(0x295, !(jobj->flags & JOBJ_USE_QUATERNION));
     jobj->rotate.y = y;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
@@ -105,7 +101,7 @@ static inline void grVenom_JObjSetRotationY(HSD_JObj* jobj, f32 y)
 
 static inline void grVenom_JObjSetRotationZ(HSD_JObj* jobj, f32 z)
 {
-    HSD_ASSERTMSG(0x2A9, jobj, &grVe_804D47C8[0]);
+    HSD_ASSERTMSG(0x2A9, jobj, "jobj");
     HSD_ASSERT(0x2AA, !(jobj->flags & JOBJ_USE_QUATERNION));
     jobj->rotate.z = z;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
@@ -115,13 +111,13 @@ static inline void grVenom_JObjSetRotationZ(HSD_JObj* jobj, f32 z)
 
 static inline f32 grVenom_JObjGetRotationZ(HSD_JObj* jobj)
 {
-    HSD_ASSERTMSG(0x2E9, jobj, &grVe_804D47C8[0]);
+    HSD_ASSERTMSG(0x2E9, jobj, "jobj");
     return jobj->rotate.z;
 }
 
 static inline void grVenom_JObjSetScaleX(HSD_JObj* jobj, f32 x)
 {
-    HSD_ASSERTMSG(0x308, jobj, &grVe_804D47C8[0]);
+    HSD_ASSERTMSG(0x308, jobj, "jobj");
     jobj->scale.x = x;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         grVenom_JObjSetMtxDirty(jobj);
@@ -130,7 +126,7 @@ static inline void grVenom_JObjSetScaleX(HSD_JObj* jobj, f32 x)
 
 static inline void grVenom_JObjSetScaleY(HSD_JObj* jobj, f32 y)
 {
-    HSD_ASSERTMSG(0x317, jobj, &grVe_804D47C8[0]);
+    HSD_ASSERTMSG(0x317, jobj, "jobj");
     jobj->scale.y = y;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         grVenom_JObjSetMtxDirty(jobj);
@@ -139,7 +135,7 @@ static inline void grVenom_JObjSetScaleY(HSD_JObj* jobj, f32 y)
 
 static inline void grVenom_JObjSetScaleZ(HSD_JObj* jobj, f32 z)
 {
-    HSD_ASSERTMSG(0x326, jobj, &grVe_804D47C8[0]);
+    HSD_ASSERTMSG(0x326, jobj, "jobj");
     jobj->scale.z = z;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         grVenom_JObjSetMtxDirty(jobj);
@@ -148,7 +144,7 @@ static inline void grVenom_JObjSetScaleZ(HSD_JObj* jobj, f32 z)
 
 static inline void grVenom_JObjSetTranslate(HSD_JObj* jobj, Vec3* translate)
 {
-    HSD_ASSERTMSG(0x394, jobj, &grVe_804D47C8[0]);
+    HSD_ASSERTMSG(0x394, jobj, "jobj");
     HSD_ASSERT(0x395, translate);
     jobj->translate = *translate;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
@@ -158,7 +154,7 @@ static inline void grVenom_JObjSetTranslate(HSD_JObj* jobj, Vec3* translate)
 
 static inline void grVenom_JObjGetTranslation(HSD_JObj* jobj, Vec3* translate)
 {
-    HSD_ASSERTMSG(0x3D3, jobj, &grVe_804D47C8[0]);
+    HSD_ASSERTMSG(0x3D3, jobj, "jobj");
     HSD_ASSERT(0x3D4, translate);
     *translate = jobj->translate;
 }
@@ -1035,11 +1031,11 @@ void grVenom_80204DB0(Ground_GObj* gobj)
 }
 
 #undef __FILE__
-#define __FILE__ (&grVe_804D47C0[0])
+#define __FILE__ "jobj.h"
 static inline bool grVenom_80204DD4_JObjMtxIsDirty(HSD_JObj* jobj)
 {
     bool result;
-    HSD_ASSERTMSG(0x234, jobj, &grVe_804D47C8[0]);
+    HSD_ASSERTMSG(0x234, jobj, "jobj");
     result = false;
     if (!(jobj->flags & JOBJ_USER_DEF_MTX) && (jobj->flags & JOBJ_MTX_DIRTY)) {
         result = true;
@@ -1056,7 +1052,7 @@ static inline void grVenom_80204DD4_JObjSetMtxDirty(HSD_JObj* jobj)
 
 static inline void grVenom_80204DD4_JObjSetScaleX(HSD_JObj* jobj, f32 x)
 {
-    HSD_ASSERTMSG(0x308, jobj, &grVe_804D47C8[0]);
+    HSD_ASSERTMSG(0x308, jobj, "jobj");
     jobj->scale.x = x;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         grVenom_80204DD4_JObjSetMtxDirty(jobj);
@@ -1065,7 +1061,7 @@ static inline void grVenom_80204DD4_JObjSetScaleX(HSD_JObj* jobj, f32 x)
 
 static inline void grVenom_80204DD4_JObjSetScaleY(HSD_JObj* jobj, f32 y)
 {
-    HSD_ASSERTMSG(0x317, jobj, &grVe_804D47C8[0]);
+    HSD_ASSERTMSG(0x317, jobj, "jobj");
     jobj->scale.y = y;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         grVenom_80204DD4_JObjSetMtxDirty(jobj);
@@ -1216,11 +1212,11 @@ void grVenom_802052E0(Ground_GObj* gobj, Vec3* pos)
 extern f32 grVe_804DB740;
 
 #undef __FILE__
-#define __FILE__ (&grVe_804D47C0[0])
+#define __FILE__ "jobj.h"
 static inline void grVenom_802053B0_JObjSetRotationY(HSD_JObj* jobj,
                                                      grVe_Data* base)
 {
-    HSD_ASSERTMSG(0x294, jobj, &grVe_804D47C8[0]);
+    HSD_ASSERTMSG(0x294, jobj, "jobj");
     HSD_ASSERTMSG(0x295, !(jobj->flags & JOBJ_USE_QUATERNION),
                   &base->x2BC[0x18]);
     jobj->rotate.y = grVe_804DB740;
@@ -1283,13 +1279,13 @@ void grVenom_802053B0(Ground_GObj* gobj)
             break;
         case 1:
             if (grVenom_80205E84(&sp28) == 0) {
-                *(s32*) &gp->gv.venom.xD8 = 2;
+                gp->gv.venom.xD8 = 2;
             }
             break;
         case 2:
             if (grVenom_80205E84(&sp28) == 1) {
                 lbAudioAx_800237A8(0x6B6C2, 0x7F, 0x40);
-                *(s32*) &gp->gv.venom.xD8 = 3;
+                gp->gv.venom.xD8 = 3;
             }
             break;
         }
@@ -1310,13 +1306,13 @@ void grVenom_802053B0(Ground_GObj* gobj)
             break;
         case 1:
             if (grVenom_80205E84(&sp1C) == 0) {
-                *(s32*) &gp2->gv.venom.xD8 = 2;
+                gp2->gv.venom.xD8 = 2;
             }
             break;
         case 2:
             if (grVenom_80205E84(&sp1C) == 1) {
                 lbAudioAx_800237A8(0x6B6C2, 0x7F, 0x40);
-                *(s32*) &gp2->gv.venom.xD8 = 3;
+                gp2->gv.venom.xD8 = 3;
             }
             break;
         }

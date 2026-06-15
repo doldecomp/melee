@@ -1,7 +1,4 @@
-#define grHomeRun_8021E500 grHomeRun_8021E500_s16
 #include "grhomerun.h"
-#undef grHomeRun_8021E500
-HSD_GObj* grHomeRun_8021E500(s32);
 
 #include "placeholder.h"
 
@@ -776,7 +773,7 @@ void grHomeRun_8021E4F8(Ground_GObj* arg) {}
 
 void grHomeRun_8021E4FC(Ground_GObj* arg) {}
 
-HSD_GObj* grHomeRun_8021E500(s32 arg0)
+HSD_GObj* grHomeRun_8021E500(s16 arg0)
 {
     HSD_JObj* jobj;
     s32 gobj_id;

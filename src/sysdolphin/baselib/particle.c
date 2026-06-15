@@ -2083,21 +2083,19 @@ void hsd_80394544(s32 col, s32 row, u32 num_cols, u32 num_rows, s32 x, s32 y,
                   s32 font_data, void* color_data)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
-    s32 cur_x;
-    s32 cur_row;
-    u32 r;
-    u32 c;
     s32 mode;
     s32 interlace;
+    u32 r;
+    u32 c;
+    s32 cur_x;
     u8 ch;
 
-    cur_row = row;
     mode = sp->x0_b7;
     interlace = sp->x0_b6;
     r = 0;
 
     while (r < num_rows) {
-        hsd_80393E68(col, cur_row);
+        hsd_80393E68(col, row);
         c = 0;
         cur_x = x + 0 * 11;
         y -= 14;
@@ -2118,7 +2116,7 @@ void hsd_80394544(s32 col, s32 row, u32 num_cols, u32 num_rows, s32 x, s32 y,
             cur_x += 11;
             c++;
         }
-        cur_row++;
+        row++;
         r++;
     }
 }
@@ -7872,10 +7870,10 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     Vec3 look_dir;
     Vec3 cam_up;
     Vec3 cross1;
+    Vec3 vel_norm;
     Mtx trig_mtx;
     f64 eps;
     f32 vel_mag_sq;
-    f32 angle3;
     f32 angle1;
     f32 sin_az;
     f32 cos_az;
@@ -7886,12 +7884,13 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     f32 cone_angle;
     f32 elevation;
     f32 tmp;
+    f32 angle3;
     PAD_STACK(16);
 
-    angle1 = 0.0F;
-    angle3 = angle1;
+    angle3 = 0.0F;
+    vel_mag_sq = angle3;
 
-    if (gen->count < 1.0F) {
+    if (gen->count < 0.0F) {
         return gen->count;
     }
 
@@ -7982,7 +7981,6 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
 
     /* Velocity-based rotation */
     if ((gen->type & 0xF) != 1 && vel_mag_sq > 0.0F) {
-        Vec3 vel_norm;
         vel_norm.x = gen->vel.x;
         vel_norm.y = gen->vel.y;
         vel_norm.z = gen->vel.z;
@@ -8092,7 +8090,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     }
 
     /* Main particle emission loop */
-    eps = 0.001F;
+    eps = 1e-10;
     while (gen->count >= 1.0F) {
         switch (gen->type & 0xF) {
         case 0: /* point, disc, cone, sphere, etc. */

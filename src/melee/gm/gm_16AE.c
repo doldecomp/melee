@@ -1811,26 +1811,13 @@ void fn_8016E124(void)
 
 void fn_8016E2BC(void)
 {
-    struct FighterMatchInfoRaw {
-        u8 x0;
-        u8 x1;
-        u8 slot_type;
-        s8 spawn_point;
-        u8 x4;
-        u8 x5;
-        u16 x6;
-        u8 x8;
-        u8 x9;
-        u8 respawn_timer;
-        u8 xB;
-        u16 xC;
-    };
     lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
-    UNUSED u8 pad[8];
     Vec3 sp24;
     Vec3 sp18;
-    int i;
+    float var_f1_2;
     bool var_r0;
+    int i;
+    bool is_teams;
     PAD_STACK(0xC);
 
     Player_80036DA4();
@@ -1849,12 +1836,10 @@ void fn_8016E2BC(void)
             }
         }
         Player_80032768(0, &sp24);
-        {
-            bool is_teams_sp = tmp->x24C8.is_teams == true;
-            Player_SetUnk45(0, fn_80160840(gm_80160854(
-                                      Player_GetPlayerId(0), Player_GetTeam(0),
-                                      is_teams_sp, Player_GetPlayerSlotType(0))));
-        }
+        is_teams = tmp->x24C8.is_teams == true;
+        Player_SetUnk45(0, fn_80160840(gm_80160854(
+                               Player_GetPlayerId(0), Player_GetTeam(0),
+                               is_teams, Player_GetPlayerSlotType(0))));
         Player_80031AD0(0);
         if (tmp->FighterMatchInfo[0].x4_b4) {
             lbAudioAx_800237A8(0x41F4E, 0x7F, 0x40);
@@ -1865,13 +1850,11 @@ void fn_8016E2BC(void)
         fn_8016DEEC();
         for (i = 0; i < 6; i++) {
             if (Player_GetPlayerSlotType(i) != Gm_PKind_NA) {
-                bool is_teams;
                 getSpawnPoint(i, &sp18);
                 if (Player_GetFacingDirection(i) == 0.0F) {
                     if (Stage_80224DC8(tmp->x24C8.xE) != 0) {
                         Player_SetFacingDirection(i, 1.0F);
                     } else {
-                        float var_f1_2;
                         if (sp18.x >= 0.0F) {
                             var_f1_2 = -1.0F;
                         } else {
@@ -1887,7 +1870,7 @@ void fn_8016E2BC(void)
                                                Player_GetTeam(i), is_teams,
                                                Player_GetPlayerSlotType(i))));
                 Player_80031AD0(i);
-                if ((((struct FighterMatchInfoRaw*) lbl_8046B6A0.FighterMatchInfo)[i].x4 >> 3U) & 1) {
+                if (tmp->FighterMatchInfo[i].x4_b4) {
                     lbAudioAx_800237A8(0x41F4E, 0x7F, 0x40);
                 }
             }

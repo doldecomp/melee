@@ -2313,8 +2313,6 @@ static inline f32 ftCo_800A4BEC_inline0(Fighter* fp, Fighter* arg1)
     return sqrtf(dx * dx + dy * dy);
 }
 
-static const f32 ftCo_804D8914 = 120.0f;
-
 Fighter* ftCo_800A4BEC(Fighter* fp)
 {
     Fighter* cur_fp;
@@ -3159,12 +3157,12 @@ s32 ftCo_800A6A98(Fighter* fp, Vec3* arg1)
     struct Fighter_x1A88_t* data = &fp->x1A88;
     mp_UnkStruct0* island;
     f32 best;
-    Vec3 a;
-    Vec3 b;
     Vec3 floor_pos;
     Vec3 floor_normal;
     int line_id;
     u32 flags;
+    Vec3 a;
+    Vec3 b;
     f32 mx;
     f32 my;
     s32 result;
@@ -3203,8 +3201,7 @@ s32 ftCo_800A6A98(Fighter* fp, Vec3* arg1)
                     if (!ftCo_800A4768_inline0(fp, &floor_pos)) {
                         dx = fx - fp->cur_pos.x;
                         dy = floor_pos.y - fp->cur_pos.y;
-                        dist = dx * dx;
-                        dist += dy * dy;
+                        dist = dx * dx + dy * dy;
                         if (best < 0.0 || dist < best) {
                             arg1->x = fx;
                             best = dist;
@@ -9210,8 +9207,7 @@ void ftCo_800B33B0(Fighter* fp)
             data->xF9_b0 = false;
         }
     } else {
-        data->x30 =
-            *(f32 const*) &ftCo_804D8914 * (0.5f * (0.5f * HSD_Randf()));
+        data->x30 = 120.0f * (0.5f * (0.5f * HSD_Randf()));
     }
     if (data->x60 != 0) {
         data->x60 = data->x60 - 1;

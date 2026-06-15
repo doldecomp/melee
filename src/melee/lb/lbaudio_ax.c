@@ -2446,6 +2446,7 @@ void lbAudioAx_80027168(void)
     }
 }
 
+#pragma dont_inline on
 s32 fn_80027488(void)
 {
     int i;
@@ -2464,6 +2465,7 @@ s32 fn_80027488(void)
 
     return 0;
 }
+#pragma dont_inline reset
 
 void lbAudioAx_80027648(void)
 {

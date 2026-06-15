@@ -2383,6 +2383,8 @@ void grCorneria_801E1878(Ground_GObj* gobj)
 
     Ground_801C39C0();
     Ground_801C3BB4();
+
+    PAD_STACK(16);
 }
 
 void grCorneria_801E1970(Ground_GObj* gobj)

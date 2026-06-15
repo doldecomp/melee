@@ -63,6 +63,146 @@ extern s32 un_804D6F00;
 extern char un_803FE5E8[];
 extern void* un_804D6EF8;
 
+char un_804D5A90[8] = "jobj.h";
+char un_804D5A98[8] = "jobj";
+u16 un_804D5AA0[2] = { 0xC, 0 };
+char un_804D5AA4[4] = "";
+
+#define TYFIGUPON_JOBJ_ASSERT(line, cond)                                    \
+    ((cond) ? ((void) 0) : __assert(un_804D5A90, line, un_804D5A98))
+#define TYFIGUPON_JOBJ_ASSERTMSG(line, cond, msg)                            \
+    ((cond) ? ((void) 0) : __assert(un_804D5A90, line, msg))
+
+static inline bool tyFigupon_JObjMtxIsDirty(HSD_JObj* jobj)
+{
+    bool result;
+
+    TYFIGUPON_JOBJ_ASSERT(564, jobj);
+    result = false;
+    if (!(jobj->flags & JOBJ_USER_DEF_MTX) && (jobj->flags & JOBJ_MTX_DIRTY)) {
+        result = true;
+    }
+    return result;
+}
+
+static inline void tyFigupon_JObjSetMtxDirty(HSD_JObj* jobj)
+{
+    if (jobj != NULL && !tyFigupon_JObjMtxIsDirty(jobj)) {
+        HSD_JObjSetMtxDirtySub(jobj);
+    }
+}
+
+static inline f32 tyFigupon_JObjGetTranslationX(HSD_JObj* jobj)
+{
+    TYFIGUPON_JOBJ_ASSERT(993, jobj);
+    return jobj->translate.x;
+}
+
+static inline f32 tyFigupon_JObjGetTranslationY(HSD_JObj* jobj)
+{
+    TYFIGUPON_JOBJ_ASSERT(1006, jobj);
+    return jobj->translate.y;
+}
+
+static inline f32 tyFigupon_JObjGetTranslationZ(HSD_JObj* jobj)
+{
+    TYFIGUPON_JOBJ_ASSERT(1019, jobj);
+    return jobj->translate.z;
+}
+
+static inline void tyFigupon_JObjSetTranslateX(HSD_JObj* jobj, f32 x)
+{
+    TYFIGUPON_JOBJ_ASSERT(932, jobj);
+    jobj->translate.x = x;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        tyFigupon_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void tyFigupon_JObjSetTranslateY(HSD_JObj* jobj, f32 y)
+{
+    TYFIGUPON_JOBJ_ASSERT(947, jobj);
+    jobj->translate.y = y;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        tyFigupon_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void tyFigupon_JObjSetTranslateZ(HSD_JObj* jobj, f32 z)
+{
+    TYFIGUPON_JOBJ_ASSERT(962, jobj);
+    jobj->translate.z = z;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        tyFigupon_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void tyFigupon_JObjAddTranslationX(HSD_JObj* jobj, f32 x)
+{
+    TYFIGUPON_JOBJ_ASSERT(1102, jobj);
+    jobj->translate.x += x;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        tyFigupon_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void tyFigupon_JObjAddTranslationY(HSD_JObj* jobj, f32 y)
+{
+    TYFIGUPON_JOBJ_ASSERT(1114, jobj);
+    jobj->translate.y += y;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        tyFigupon_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void tyFigupon_JObjAddTranslationZ(HSD_JObj* jobj, f32 z)
+{
+    TYFIGUPON_JOBJ_ASSERT(1126, jobj);
+    jobj->translate.z += z;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        tyFigupon_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void tyFigupon_JObjSetScaleX(HSD_JObj* jobj, f32 x)
+{
+    TYFIGUPON_JOBJ_ASSERT(776, jobj);
+    jobj->scale.x = x;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        tyFigupon_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void tyFigupon_JObjSetScaleY(HSD_JObj* jobj, f32 y)
+{
+    TYFIGUPON_JOBJ_ASSERT(791, jobj);
+    jobj->scale.y = y;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        tyFigupon_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void tyFigupon_JObjSetScaleZ(HSD_JObj* jobj, f32 z)
+{
+    TYFIGUPON_JOBJ_ASSERT(806, jobj);
+    jobj->scale.z = z;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        tyFigupon_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void tyFigupon_JObjSetRotationY(HSD_JObj* jobj, f32 y)
+{
+    TYFIGUPON_JOBJ_ASSERT(660, jobj);
+    TYFIGUPON_JOBJ_ASSERTMSG(661,
+                             !(jobj->flags & JOBJ_USE_QUATERNION),
+                             "!(jobj->flags & JOBJ_USE_QUATERNION)");
+    jobj->rotate.y = y;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        tyFigupon_JObjSetMtxDirty(jobj);
+    }
+}
+
 /* .data string literals for tyfigupon.c */
 static char str_panel_joint[] = "ToyFigurePonPanel_Top_joint";
 static char str_bg_joint[] = "ToyFigurePonBg_Top_joint";
@@ -1192,9 +1332,6 @@ void fn_80316C24(HSD_GObj* arg0)
     }
 }
 
-static u16 un_804D5AA0 = 0xC;
-static char un_804D5AA4 = 0;
-
 typedef struct {
     s32 x0, x4, x8, xC;
 } DigitInit;
@@ -1217,7 +1354,7 @@ void un_8031753C(void)
 
     if (ef4->archive == NULL) {
         OSReport(str_err_bg);
-        OSPanic(str_file, 0x55C, &un_804D5AA4);
+        OSPanic(str_file, 0x55C, un_804D5AA4);
     }
     if (ef4->x00 != 0) {
         HSD_GObjPLink_80390228((HSD_GObj*) ef4->x00);
@@ -1293,7 +1430,7 @@ void un_8031753C(void)
         GObj_SetupGXLink((HSD_GObj*) ef4->x08, HSD_GObj_JObjCallback, 0x3C, 0);
         tyFigupon_80314AA8(jobj, str_lever_animjoint, str_lever_matanim,
                            str_lever_shapeanim);
-        lb_8001204C(jobj, &ef4->jobjs[0xE], &un_804D5AA0, 1);
+        lb_8001204C(jobj, &ef4->jobjs[0xE], un_804D5AA0, 1);
 
         trophy_total = un_80314B54();
         new_count = 0;
@@ -1322,7 +1459,7 @@ void un_8031753C(void)
         return;
     }
     OSReport(str_err_panel, str_panel_joint);
-    OSPanic(str_file, 0x610, &un_804D5AA4);
+    OSPanic(str_file, 0x610, un_804D5AA4);
 }
 
 void un_80317A60(void)
@@ -1482,7 +1619,7 @@ void un_80317D80_OnEnter(void* arg0)
     ed4 = un_804D6ED4;
     if (ef4_2->archive == NULL) {
         OSReport(str_err_bg);
-        OSPanic(str_file, 0x627, &un_804D5AA4);
+        OSPanic(str_file, 0x627, un_804D5AA4);
     }
     {
         LightList** temp =

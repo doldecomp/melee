@@ -373,9 +373,6 @@ Fighter_CostumeStrings ftNn_Init_CostumeStrings[] = {
     { ftNn_Init_803CDC5C, ftNn_Init_803CDC68, ftNn_Init_803CDC80 },
 };
 
-extern double const ftNn_Init_804D98A0;
-extern float const ftNn_Init_804D98A8;
-
 extern ftCollisionBox ftNn_Unk2_803CDD60;
 
 void ftNn_Init_OnLoad(Fighter_GObj* gobj)
@@ -480,8 +477,7 @@ bool ftNn_Init_801230D0(Fighter_GObj* nana_gobj)
         }
         if (nana_fp->facing_dir != popo_fp->facing_dir) {
             nana_fp->facing_dir = popo_fp->facing_dir;
-            ftPartSetRotY(nana_fp, 0,
-                          ftNn_Init_804D98A0 * nana_fp->facing_dir);
+            ftPartSetRotY(nana_fp, 0, M_PI_2 * nana_fp->facing_dir);
         }
         lb_8000B1CC(popo_fp->parts[FtPart_R4thNb].joint, NULL, &popo_vec);
         lb_8000B1CC(nana_fp->parts[FtPart_XRotN].joint, NULL, &nana_vec);
@@ -492,7 +488,7 @@ bool ftNn_Init_801230D0(Fighter_GObj* nana_gobj)
         nana_fp->cur_pos.y = popo_vec.y + y;
         nana_fp->cur_pos.z = popo_vec.z + z;
         if (popo_fp->x2219_b5) {
-            ftAnim_SetAnimRate(nana_gobj, ftNn_Init_804D98A8);
+            ftAnim_SetAnimRate(nana_gobj, 0.0f);
         } else {
             if (nana_fp->frame_speed_mul != popo_fp->frame_speed_mul) {
                 ftAnim_SetAnimRate(nana_gobj, popo_fp->frame_speed_mul);
@@ -501,9 +497,6 @@ bool ftNn_Init_801230D0(Fighter_GObj* nana_gobj)
     }
     return true;
 }
-
-double const ftNn_Init_804D98A0 = M_PI_2;
-float const ftNn_Init_804D98A8 = 0.0F;
 
 void fn_80123218(Fighter_GObj* nana_gobj)
 {

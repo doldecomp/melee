@@ -52,7 +52,6 @@ lbl_803D9FD8_fn lbl_803D9FD8[] = {
 
 void fn_8018A514(int count, float val)
 {
-    struct lbl_803D9D20_t* data = &lbl_803D9D20;
     BracketEntry* entries = lbl_80473AB8;
     s32 region;
     BracketSrcEntry* src;
@@ -71,19 +70,19 @@ void fn_8018A514(int count, float val)
 
     if (count < 9) {
         for (i = 0; i < count; i++) {
-            src += data->x0[i + 0x20];
+            src += lbl_803D9D20.x0[i + 0x20];
         }
     } else if (count < 14) {
         for (i = 9; i < count; i++) {
-            src += data->x0[i + 0x20];
+            src += lbl_803D9D20.x0[i + 0x20];
         }
     } else {
         for (i = 14; i < count; i++) {
-            src += data->x0[i + 0x20];
+            src += lbl_803D9D20.x0[i + 0x20];
         }
     }
 
-    n = data->x0[count + 0x20];
+    n = lbl_803D9D20.x0[count + 0x20];
 
     for (i = 0; i < n; i++) {
         entries[i].x0 = src->x0;
@@ -1329,7 +1328,7 @@ void fn_8018DC18(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
     }
 }
 
-static GXColor lbl_804DA69C = { 255, 255, 0, 255 };
+static const GXColor lbl_804DA69C = { 255, 255, 0, 255 };
 
 void fn_8018DF68(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                  s32 arg6, f32 farg0)
@@ -2480,7 +2479,7 @@ struct Lbl804799B8_t {
     u8 xF;
     u8 pad2[0x10];
 };
-extern struct Lbl804799B8_t lbl_804799B8;
+static struct Lbl804799B8_t lbl_804799B8;
 extern f32 lbl_804DA6E8; // 0.0f
 extern f32 lbl_804DA720; // 1.0f
 
@@ -2493,7 +2492,6 @@ extern f32 lbl_804DA70C; // 87.0f
 
 void fn_80190ABC(int mode)
 {
-    struct Lbl804799B8_t* state = &lbl_804799B8;
     u8* table = lbl_803D9F80;
     TmData* tm;
     s32 cur_opt;
@@ -2514,13 +2512,13 @@ void fn_80190ABC(int mode)
         HSD_SisLib_803A6368(tm->x4E0, *(u16*) (table + opt * 4 + flag * 2));
         break;
     }
-    case 2: {
+    case 1: {
         s32 flag = !!gm_804771C4.match_type;
         HSD_SisLib_803A6368(tm->x4E8[opt],
                             *(u16*) (table + opt * 4 + flag * 2 + 0x1C));
         break;
     }
-    case 3: {
+    case 2: {
         s32 display_val;
         if (opt == 2 && gm_804771C4.match_type == 0) {
             s32 val = (&tm->match_type)[opt];
@@ -2549,7 +2547,7 @@ void fn_80190ABC(int mode)
         HSD_SisLib_803A6368(tm->x500[opt], display_val);
         break;
     }
-    case 1: {
+    case 3: {
         s32 display_val =
             lbl_803D9D20.x0[tm->entrants] + 0xB0 - tm->hmn_cpu_count;
         HSD_SisLib_803A6368(tm->x4E4, display_val);
@@ -2557,48 +2555,52 @@ void fn_80190ABC(int mode)
     }
     case 4: {
         HSD_SisLib_803A7664(tm->x518[0]);
-        for (i = 0; i < 0x24; i++) {
-            s32 col = i % 4;
-            s32 row = i / 4;
-            fn_8018ECA8(i + lbl_804799B8.x6 * 4, 0xFF, 0,
-                        149.0f * (f32) col + 537.0f,
-                        47.0f * (f32) row + 409.0f, 0);
-        }
-        break;
-    }
-    case 6: {
-        u8* x3;
-        HSD_SisLib_803A7664(tm->x518[1]);
-        HSD_SisLib_803A7664(tm->x518[2]);
-        x3 = &lbl_804799B8.x3;
-        for (i = 0; i < 12; i++) {
-            s32 idx = *x3 + i;
-            if (idx > lbl_804799B8.x4) {
-                continue;
-            }
-            {
-                f32 pos_y = lbl_804DA704 * (f32) i + lbl_804DA700;
-                fn_8018ECA8(tm->x37[idx].x9, tm->x37[idx].x0, 1,
-                            lbl_804DA6FC, pos_y, 2);
-                idx = *x3 + i;
-                fn_8018ECA8(tm->x37[idx].x9, tm->x37[idx].x0, 1,
-                            lbl_804DA6FC, pos_y, 2);
+        {
+            f32 f_col_mul = 149.0f;
+            f32 f_col_add = 537.0f;
+            f32 f_row_mul = 47.0f;
+            f32 f_row_add = 409.0f;
+            for (i = 0; i < 0x24; i++) {
+                s32 col = i % 4;
+                s32 row = i / 4;
+                f32 pos_x = f_col_mul * (f32) col + f_col_add;
+                f32 pos_y = f_row_mul * (f32) row + f_row_add;
+                fn_8018ECA8(i + lbl_804799B8.x6 * 4, 0xFF, 0, pos_x, pos_y, 0);
             }
         }
         break;
     }
     case 5: {
-        u8* x2;
-        u8* x3;
+        HSD_SisLib_803A7664(tm->x518[1]);
+        HSD_SisLib_803A7664(tm->x518[2]);
+        {
+            f32 f_mul = lbl_804DA704;
+            f32 f_add = lbl_804DA700;
+            for (i = 0; i < 12; i++) {
+                s32 idx = lbl_804799B8.x3 + i;
+                if (idx > lbl_804799B8.x4) {
+                    continue;
+                }
+                {
+                    f32 pos_y = f_mul * (f32) i + f_add;
+                    fn_8018ECA8(tm->x37[idx].x9, tm->x37[idx].x0, 1,
+                                lbl_804DA6FC, pos_y, 2);
+                    idx = lbl_804799B8.x3 + i;
+                    fn_8018ECA8(tm->x37[idx].x9, tm->x37[idx].x0, 1,
+                                lbl_804DA6FC, pos_y, 2);
+                }
+            }
+        }
+        break;
+    }
+    case 6: {
         s32 idx;
         HSD_SisLib_803A7664(tm->x524[0]);
         HSD_SisLib_803A7664(tm->x524[1]);
-        x2 = &lbl_804799B8.x2;
-        x3 = &lbl_804799B8.x3;
         idx = lbl_804799B8.x2 + lbl_804799B8.x3;
         fn_8018ECA8(tm->x37[idx].x9, tm->x37[idx].x0, 3, lbl_804DA708,
                     lbl_804DA70C, 4);
-        idx = *x2 + *x3;
+        idx = lbl_804799B8.x2 + lbl_804799B8.x3;
         fn_8018ECA8(tm->x37[idx].x9, tm->x37[idx].x0, 3, lbl_804DA708,
                     lbl_804DA70C, 4);
         break;
@@ -3527,24 +3529,20 @@ extern s32 lbl_804D665C;
 #pragma inline_depth(0)
 s32 fn_80192938(void)
 {
-    s32 i;
-    s32 start;
-    s32 j;
-    s32 a, b;
     TmData* tm;
-    int* match_type;
-    struct Lbl804799B8_t* state;
+    s32 i;
+    s32 j;
+    s32 start;
+    s32 a, b;
     u8 tmp;
     u8 handicap;
     PAD_STACK(8);
 
-    state = &lbl_804799B8;
     tm = gm_8018F634();
     lbl_804D6658 = 0;
     tm->cur_option = 9;
-    match_type = &gm_804771C4.match_type;
 
-    if ((s32) *match_type == 0) {
+    if ((s32) gm_804771C4.match_type == 0) {
         tm->x2E = lbl_803D9D20.x0[tm->entrants];
         tm->x2F = (u8) tm->hmn_cpu_count;
     } else {
@@ -3555,23 +3553,23 @@ s32 fn_80192938(void)
     }
 
     for (i = 0; i < 0x40; i++) {
-        tm->x37[i].x5 = 0;
-        tm->x37[i].xD = (u8) i;
+        tm->x37[i].x4 = 0;
+        tm->x37[i].xB = (u8) i;
 
         if ((u8) gmMainLib_8015CC34()->handicap == 1) {
-            if ((s32) *match_type == 0) {
+            if ((s32) gm_804771C4.match_type == 0) {
                 gmMainLib_8015CC34()->handicap = 0;
-                tm->x37[i].x2 = 9;
+                tm->x37[i].x1 = 9;
             } else {
-                tm->x37[i].x2 = 5;
+                tm->x37[i].x1 = 5;
             }
         } else {
-            tm->x37[i].x2 = 9;
+            tm->x37[i].x1 = 9;
         }
 
-        tm->x37[i].x3 = fn_8018F410();
-        tm->x37[i].x7 = HSD_Randi(
-            (s32) gm_80169238(fn_8018F6FC((enum CSSIconHud) tm->x37[i].x3)));
+        tm->x37[i].x2 = fn_8018F410();
+        tm->x37[i].x6 = HSD_Randi(
+            (s32) gm_80169238(fn_8018F6FC((enum CSSIconHud) tm->x37[i].x2)));
 
         if (i < (s32) tm->x2E) {
             ((u8*) &tm->x37[i])[-1] = 1;
@@ -3581,10 +3579,12 @@ s32 fn_80192938(void)
             } else {
                 tm->x37[i].x0 = 1;
                 tm->x37[i].x9 = (u16) ((i + 0x384) - tm->x2F);
-                if (((s32) *match_type == 0) && ((s32) tm->cpu_level == 0)) {
-                    tm->x37[i].x1 = HSD_Randi(9) + 1;
+                if (((s32) gm_804771C4.match_type == 0) &&
+                    ((s32) tm->cpu_level == 0))
+                {
+                    tm->x37[i].x0 = HSD_Randi(9) + 1;
                 } else {
-                    tm->x37[i].x1 = (u8) tm->cpu_level;
+                    tm->x37[i].x0 = (u8) tm->cpu_level;
                 }
             }
         } else {
@@ -3600,16 +3600,16 @@ s32 fn_80192938(void)
     tm->x4B8[2].x2 = 0;
     tm->x4B8[3].x2 = 0;
 
-    if ((s32) *match_type == 0) {
+    if ((s32) gm_804771C4.match_type == 0) {
         if ((s32) lbl_804D665C < 2) {
             start = 1;
         }
         for (j = 0; j < 0x3E8; j++) {
             a = start + HSD_Randi(tm->x2E - start);
             b = start + HSD_Randi(tm->x2E - start);
-            tmp = tm->x37[a].xD;
-            tm->x37[a].xD = tm->x37[b].xD;
-            tm->x37[b].xD = tmp;
+            tmp = tm->x37[a].xB;
+            tm->x37[a].xB = tm->x37[b].xB;
+            tm->x37[b].xB = tmp;
         }
     }
 
@@ -4138,14 +4138,13 @@ post:
 
 void fn_80193FCC(s32* arg0, u32 arg1, u32 arg2)
 {
+    u8* table = lbl_803D9F80;
     s32 idx;
     s32* ptr;
     s32 val;
     u8* entry;
     s32 clamp_val;
     int* mt = &gm_804771C4.match_type;
-    struct Lbl804799B8_t* state = &lbl_804799B8;
-    u8* table = lbl_803D9F80;
     TmData* tm;
 
     if (*mt != 0) {
@@ -4153,43 +4152,41 @@ void fn_80193FCC(s32* arg0, u32 arg1, u32 arg2)
     }
 
     if (*mt != 0) {
-        s32 tmp;
         if (fn_8018F808() < 2) {
-            tmp = 2;
+            clamp_val = 2;
         } else {
-            tmp = fn_8018F808();
+            clamp_val = fn_8018F808();
         }
         idx = arg0[0];
-        clamp_val = tmp;
         ptr = arg0 + idx;
         val = *++ptr;
-        if (val > tmp) {
-            *ptr = tmp;
+        if (val > clamp_val) {
+            *ptr = clamp_val;
             fn_80190ABC(3);
         }
     }
 
     if (arg1 & 0x40001) {
         if (*mt != 0) {
-            u8* limits = table + 0x40;
             idx = arg0[0];
+            entry = table + (idx << 1) + (*mt != 0);
             ptr = arg0 + idx;
             val = *++ptr;
-            if (val > (s32) limits[(idx << 1) + (*mt != 0)]) {
+            if (val > (s32) entry[0x40]) {
                 *ptr = val - 1;
                 lbAudioAx_80024030(2);
                 lbl_804799B8.x7 = 5;
             } else {
-                s32 max_plus1 =
-                    (s32) (table + (idx << 1) + (*mt != 0))[0x4C] + 1;
+                s32 max_plus1 = (s32) entry[0x4C] + 1;
                 if (clamp_val < max_plus1) {
                     *ptr = clamp_val;
                 } else {
                     *ptr = max_plus1;
                 }
                 idx = arg0[0];
+                entry = table + (idx << 1) + (*mt != 0);
                 val = arg0[idx + 1];
-                if (val != (s32) limits[(idx << 1) + (*mt != 0)]) {
+                if (val != (s32) entry[0x40]) {
                     lbAudioAx_80024030(2);
                     lbl_804799B8.x7 = 5;
                 }

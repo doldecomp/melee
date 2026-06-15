@@ -1010,8 +1010,6 @@ end_common:
                         new_var);
 }
 
-static char lbl_804D3FA8[8] = "\x81\x7C\x81\x46\x81\x7C";
-
 void fn_80175880(s32 slot)
 {
     MatchEnd* me;
@@ -1072,7 +1070,8 @@ void fn_80175880(s32 slot)
 
 show_normal:
     var_r30 = HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time, 0.0F,
-                                  -30.0F, lbl_804D3FA8, slot * 0xA8);
+                                  -30.0F,
+                                  "\x81\x7C\x81\x46\x81\x7C\0", slot * 0xA8);
     goto end_common;
 
 show_time:

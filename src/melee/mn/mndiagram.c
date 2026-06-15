@@ -2610,7 +2610,6 @@ void mnDiagram_80242C0C(void* arg0, int arg1, int arg2)
     u8* p2;
     int remr;
     HSD_JObj* jobj;
-    HSD_JObj** jobjs;
     Diagram* data = GET_DIAGRAM(arg0);
     mnDiagram_Assets* assets = (mnDiagram_Assets*) &mnDiagram_804A0750;
     void** joint_data;
@@ -2728,8 +2727,7 @@ void mnDiagram_80242C0C(void* arg0, int arg1, int arg2)
             y_spacing = HSD_JObjGetTranslationY(data->jobjs[10]) -
                         HSD_JObjGetTranslationY(data->jobjs[9]);
             HSD_JObjSetTranslateY(jobj, y_spacing * i);
-            jobjs = data->jobjs;
-            HSD_JObjAddChild(jobjs[9], jobj);
+            HSD_JObjAddChild(data->jobjs[9], jobj);
         }
     }
 }
