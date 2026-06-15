@@ -383,67 +383,34 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
 {
     s8 chars[3];
     u8 colors[3];
+    s8* chars_ptr;
     u8* base;
-    gm_803DEBE8_t* opp_data;
     s32 is_last_round;
+    gm_803DEBE8_t* opp_data;
     s32 count_processed;
     s32 count;
-    struct PreloadCacheScene* gc;
+    struct GameCache* gc;
     s32 slot_idx;
     u64 audio;
     s32 i;
-    PAD_STACK(16);
+    PAD_STACK(8);
 
     base = (u8*) gm_803DE930_Scenes;
     is_last_round = 0;
-    count_processed = 0;
+    chars_ptr = chars;
 
     {
         u32 start = ((AllstarRoundInfo*) (base + 0x31C))[arg1].start;
         opp_data = (gm_803DEBE8_t*) (base + 0x2B8) + start;
-        count = ((AllstarRoundInfo*) (base + 0x31C))[arg1].count;
     }
 
-    chars[0] = 0x21;
-    chars[1] = 0x21;
-    chars[2] = 0x21;
+    chars_ptr[0] = 0x21;
+    chars_ptr[1] = 0x21;
+    chars_ptr[2] = 0x21;
 
-    if (count > 0) {
-        if (count > 8) {
-            u32 blocks = (u32) (count - 8 + 7) >> 3;
-            gm_803DEBE8_t* src = opp_data;
-            s8* dst = chars;
-            if (count - 8 > 0) {
-                do {
-                    count_processed += 8;
-                    dst[0] = (s8) src[0].x3;
-                    dst[1] = src[1].x3;
-                    dst[2] = src[2].x3;
-                    dst[3] = src[3].x3;
-                    dst[4] = src[4].x3;
-                    dst[5] = src[5].x3;
-                    dst[6] = src[6].x3;
-                    dst[7] = src[7].x3;
-                    src += 8;
-                    dst += 8;
-                } while (--blocks);
-            }
-        }
-
-        {
-            gm_803DEBE8_t* src2 = &opp_data[count_processed];
-            s8* dst2 = &chars[count_processed];
-            s32 remaining =
-                ((AllstarRoundInfo*) (base + 0x31C))[arg1].count - count_processed;
-            if (count_processed < ((AllstarRoundInfo*) (base + 0x31C))[arg1].count) {
-                do {
-                    u8 val = src2->x3;
-                    src2++;
-                    *dst2 = (s8) val;
-                    dst2++;
-                } while (--remaining);
-            }
-        }
+    count = ((AllstarRoundInfo*) (base + 0x31C))[arg1].count;
+    for (count_processed = 0; count_processed < count; count_processed++) {
+        chars[count_processed] = opp_data[count_processed].x3;
     }
 
     {
@@ -454,23 +421,23 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
         }
     }
 
-    gmRegSetupEnemyColorTable(arg0->x0.ckind, arg0->x0.color, chars, colors);
+    gmRegSetupEnemyColorTable(arg0->x0.ckind, arg0->x0.color, chars_ptr, colors);
 
     if ((s32) arg1 == 0xC) {
-        chars[0] = 3;
+        chars_ptr[0] = 3;
         colors[0] = 0;
         is_last_round = 1;
-        chars[1] = 3;
+        chars_ptr[1] = 3;
         colors[1] = 0;
-        chars[2] = 3;
+        chars_ptr[2] = 3;
         colors[2] = 0;
     }
 
-    gc = lbDvd_8001822C();
+    gc = &lbDvd_8001822C()->game_cache;
     slot_idx = 1;
     lbDvd_80018C6C();
-    gc->game_cache.entries[0].char_id = (s32) (s8) arg0->x0.ckind;
-    gc->game_cache.entries[0].color = arg0->x0.color;
+    gc->entries[0].char_id = (s32) (s8) arg0->x0.ckind;
+    gc->entries[0].color = arg0->x0.color;
     lbDvd_80018254();
     lbDvd_80018C2C(0xC7);
     lbDvd_80017700(4);
@@ -478,24 +445,24 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     {
         s32 idx = slot_idx;
         for (i = 0; i < 3; i++) {
-            if ((s8) chars[i] != 0x21) {
-                gc->game_cache.entries[idx].char_id = chars[i];
+            if ((s8) chars_ptr[i] != 0x21) {
+                gc->entries[idx].char_id = chars_ptr[i];
                 if (is_last_round != 0) {
-                    gc->game_cache.entries[idx].color = 0xFF;
+                    gc->entries[idx].color = 0xFF;
                 } else {
-                    gc->game_cache.entries[idx].color = colors[i];
+                    gc->entries[idx].color = colors[i];
                 }
                 idx++;
             }
         }
     }
 
-    gc->game_cache.stage_id = (InternalStageId) opp_data->x2;
+    gc->stage_id = (InternalStageId) opp_data->x2;
     lbDvd_80018254();
 
     audio = lbAudioAx_80026E84((CharacterKind) (s8) arg0->x0.ckind);
     {
-        s8* cp = chars;
+        s8* cp = chars_ptr;
         for (i = 0; i < 3; i++) {
             audio |= lbAudioAx_80026E84(cp[i]);
         }
@@ -512,13 +479,13 @@ void gm_801B5624(GameScene* arg0)
     s8 chars[3];
     StartMeleeData* data;
     u8* base;
-    gm_803DEBE8_t* opp_data;
     UnkAllstarData* allstar;
+    gm_803DEBE8_t* opp_data;
     s32 i;
     s32 count;
     u16 round;
     u8 color;
-    PAD_STACK(8);
+    PAD_STACK(16);
 
     base = (u8*) gm_803DE930_Scenes;
     data = gm_801A427C(arg0);
@@ -569,9 +536,14 @@ void gm_801B5624(GameScene* arg0)
     }
 
     if ((u8) arg0->idx == 0x60) {
-        f32 f30 = gm_8018A1D8(0xC, allstar->x0.cpu_level);
-        f32 f31 = gm_8018A188(0xC, allstar->x0.cpu_level);
-        u8 opp_count = gm_8018A228(0xC, allstar->x0.cpu_level, 0);
+        u8* cpu_level = &allstar->x0.cpu_level;
+        f32 f31;
+        f32 f30;
+        u8 opp_count;
+
+        f30 = gm_8018A1D8(0xC, *cpu_level);
+        f31 = gm_8018A188(0xC, *cpu_level);
+        opp_count = gm_8018A228(0xC, *cpu_level, 0);
 
         gm_8016A22C(3, 0x21, 0x21, 0, 0, 0, 1, 0, 0,
                     (u8) data->players[0].c_kind, data->players[0].color,
@@ -773,22 +745,22 @@ void gm_801B607C(GameScene* unused)
 void gm_801B60A4_OnLoad(void)
 {
     UnkAllstarData* data;
+    u32 var_r28;
     gm_803DEBE8_t* var_r29;
     gm_803DEBE8_t* var_r30;
-    u32 var_r28;
     int temp;
     gm_803DEBE8_t tmp;
+    PAD_STACK(16);
 
     data = &gm_80473A18;
     gmMainLib_8015CDE0();
     gm_8017C984(data);
 
     {
-        gm_80490940_t* p = gm_80490940;
-        char* pp = (char*) p;
+        u8* pp = (u8*) gm_80490940;
         int i;
         for (i = 25; i > 0; i--) {
-            pp[i] = 0;
+            *pp++ = 0;
         }
     }
 
@@ -800,15 +772,15 @@ void gm_801B60A4_OnLoad(void)
     data->x54 = gm_8018A25C;
     data->x58 = NULL;
     data->x64 = gm_8018A2C4;
-    var_r29 = gm_803DEBE8;
     data->x68 = gm_8018A314;
+    var_r29 = gm_803DEBE8;
     var_r30 = var_r29;
     for (var_r28 = 0; var_r28 < 25; var_r28++) {
         var_r30->x2 = *((&var_r30->x0) + HSD_Randi(2));
         var_r30++;
     }
 
-    var_r30 = gm_803DEBE8;
+    var_r30 = var_r29;
     for (var_r28 = 0; var_r28 < 0x17; var_r28++) {
         gm_803DEBE8_t* swap = &var_r30[var_r28 + HSD_Randi(0x18 - var_r28)];
         tmp = *var_r29;
@@ -821,7 +793,7 @@ void gm_801B60A4_OnLoad(void)
     {
         UnkAllstarData* p = &gm_80473A18;
         int i = 0x18;
-        p->x9C = 0;
+        data->x9C = 0;
         temp = 0x21;
         p->x76[0] = temp;
         p->x76[1] = temp;
@@ -848,10 +820,9 @@ void gm_801B60A4_OnLoad(void)
         p->x76[0x16] = temp;
         p->x76[0x17] = temp;
 
-        temp = 0x1A;
-        if (i < temp) {
+        if (i < 0x1A) {
             u8* q = ((u8*) p) + i;
-            i = temp - i;
+            i = 0x1A - i;
             do {
                 *(q++ + 0x76) = temp;
             } while (--i != 0);

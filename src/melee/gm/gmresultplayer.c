@@ -1126,22 +1126,21 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
 {
     ResultsDisplayData* disp = &lbl_8046E1B0;
     MatchEnd* match_end = &disp->state.match_end;
-    HSD_CObj* cobj;
     HSD_JObj* child_jobj;
+    HSD_CObj* cobj;
     int lookup;
-    PAD_STACK(16);
+    PAD_STACK(24);
 
     fn_801795D4();
     fn_801796F0(arg2);
 
     cobj = (HSD_CObj*) arg0->hsd_obj;
 
-    if (match_end->is_teams == 0) {
-        lookup = match_end->player_standings[arg2].is_big_loser;
-    } else {
-        int idx = match_end->player_standings[arg2].team;
-        lookup = match_end->team_standings[idx].is_big_loser;
-    }
+    lookup = match_end->is_teams == 0
+                 ? match_end->player_standings[arg2].is_big_loser
+                 : match_end
+                       ->team_standings[match_end->player_standings[arg2].team]
+                       .is_big_loser;
 
     if (lookup != 0) {
         HSD_JObj* root = (HSD_JObj*) disp->gobjs[arg2]->hsd_obj;
@@ -1156,16 +1155,13 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
         if (lookup != 0) {
             GXColor color;
 
-            {
-                struct MatchPlayerData* entry =
-                    &match_end->player_standings[arg2];
-                color = gm_80160968(gm_80160854(
-                    (u8) arg2, entry->team, (u8) (match_end->is_teams == 1),
-                    entry->slot_type));
-            }
+            color = gm_80160968(gm_80160854(
+                (u8) arg2, match_end->player_standings[arg2].team,
+                (u8) (match_end->is_teams == 1),
+                match_end->player_standings[arg2].slot_type));
             HSD_SetEraseColor(color.r, color.g, color.b, color.a);
             HSD_CObjEraseScreen(cobj, 1, 0, 0);
-            Camera_800313E0(arg0, arg1);
+            Camera_800313E0(arg0, 0);
 
             {
                 HSD_ImageDesc* desc = &disp->player_img2[arg2];
@@ -1173,16 +1169,25 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
                 HSD_ImageDescCopyFromEFB(
                     desc,
                     disp->state.scissor_x[lookup] +
-                        (0x140 - ((s32) disp->state.dim_w1[lookup] / 4) * 2),
+                        (0x140 -
+                         ((s32) ((u16*) disp->state.dim_w1)[lookup] / 4) *
+                             2),
                     disp->state.scissor_y[lookup] +
-                        (0xF4 - ((s32) disp->state.dim_h1[lookup] / 2) * 2),
+                        (0xF4 -
+                         ((s32) ((u16*) disp->state.dim_h1)[lookup] / 2) *
+                             2),
                     0, 0);
 
                 if (!disp->state.x0_4) {
                     HSD_ImageDescCopyFromEFB(
                         &disp->player_img1[arg2],
-                        0x140 - ((s32) disp->state.dim_w1[lookup] / 4) * 2,
-                        0xF4 - ((s32) disp->state.dim_h1[lookup] / 2) * 2, 0,
+                        0x140 -
+                            ((s32) ((u16*) disp->state.dim_w1)[lookup] / 4) *
+                                2,
+                        0xF4 -
+                            ((s32) ((u16*) disp->state.dim_h1)[lookup] / 2) *
+                                2,
+                        0,
                         0);
                 }
 
@@ -1206,17 +1211,13 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
                 if (disp->state.player_flags[arg2] == 0 && disp->state.x0_6) {
                     GXColor color;
 
-                    {
-                        struct MatchPlayerData* entry =
-                            &match_end->player_standings[arg2];
-                        color = gm_80160968(
-                            gm_80160854((u8) arg2, entry->team,
-                                        (u8) (match_end->is_teams == 1),
-                                        entry->slot_type));
-                    }
+                    color = gm_80160968(gm_80160854(
+                        (u8) arg2, match_end->player_standings[arg2].team,
+                        (u8) (match_end->is_teams == 1),
+                        match_end->player_standings[arg2].slot_type));
                     HSD_SetEraseColor(color.r, color.g, color.b, color.a);
                     HSD_CObjEraseScreen(cobj, 1, 0, 0);
-                    Camera_800313E0(arg0, arg1);
+                    Camera_800313E0(arg0, 0);
 
                     {
                         HSD_ImageDesc* desc = &disp->player_img2[arg2];
@@ -1225,10 +1226,14 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
                             desc,
                             disp->state.scissor_x[lookup] +
                                 (0x140 -
-                                 ((s32) disp->state.dim_w1[lookup] / 4) * 2),
+                                 ((s32) ((u16*) disp->state.dim_w1)[lookup] /
+                                  4) *
+                                     2),
                             disp->state.scissor_y[lookup] +
                                 (0xF4 -
-                                 ((s32) disp->state.dim_h1[lookup] / 2) * 2),
+                                 ((s32) ((u16*) disp->state.dim_h1)[lookup] /
+                                  2) *
+                                     2),
                             0, 0);
 
                         HSD_CObjEraseScreen(cobj, 1, 1, 1);
@@ -1635,10 +1640,18 @@ void fn_8017A9B4(int slot)
 extern u32 lbl_803D7018[];
 extern u32 lbl_803D7038[];
 
-static s32 lbl_804D3FD0[4][2] = { { 0x500050, 0x460034 },
-                                  { 0x6E0072, 0x64004A },
-                                  { 0x340034, 0x340034 },
-                                  { 0x4A004A, 0x4A004A } };
+static s32 lbl_804D3FD0 = 0x00500050;
+static s32 lbl_804D3FD4 = 0x00460034;
+static s32 lbl_804D3FD8 = 0x006E0072;
+static s32 lbl_804D3FDC = 0x0064004A;
+static s32 lbl_804D3FE0 = 0x00340034;
+static s32 lbl_804D3FE4 = 0x00340034;
+static s32 lbl_804D3FE8 = 0x004A004A;
+static s32 lbl_804D3FEC = 0x004A004A;
+static s32 lbl_804D3FF0 = 0x000C0008;
+static s32 lbl_804D3FF4 = 0x00060000;
+static s32 lbl_804D3FF8 = 0x000E000E;
+static s32 lbl_804D3FFC = 0x00060000;
 
 void fn_8017AA78(u8* arg0)
 {
@@ -1667,18 +1680,7 @@ void fn_8017AA78(u8* arg0)
     disp->shared_img.image_ptr = NULL;
     lb_800121FC(&disp->shared_img, 0x64, 0x98, GX_TF_RGB5A3, 0);
 
-    {
-        u32* src = (u32*) fn_80174274() - 2;
-        u32* dst = (u32*) &disp->state.char_kind[3];
-        int n;
-        for (n = 0x44F; n > 0; n--) {
-            u32 a = *(src += 2);
-            u32 b = src[1];
-            *(dst += 2) = a;
-            dst[1] = b;
-        }
-        dst[2] = src[2];
-    }
+    disp->state.match_end = *fn_80174274();
 
     disp->state.x0_0 = 1;
     disp->state.x0_4 = 0;
@@ -1691,14 +1693,32 @@ void fn_8017AA78(u8* arg0)
 
     {
         lbl_8046E3AC_t* state = &disp->state;
-        state->dim_w1[0] = lbl_804D3FD0[0][0];
-        state->dim_w1[1] = lbl_804D3FD0[0][1];
-        state->dim_h1[0] = lbl_804D3FD0[1][0];
-        state->dim_h1[1] = lbl_804D3FD0[1][1];
-        state->scissor_y[0] = lbl_804D3FD0[2][0];
-        state->scissor_y[1] = lbl_804D3FD0[2][1];
-        state->scissor_x[0] = lbl_804D3FD0[3][0];
-        state->scissor_x[1] = lbl_804D3FD0[3][1];
+        s32 a;
+        s32 b;
+        a = lbl_804D3FD0;
+        b = lbl_804D3FD4;
+        state->dim_w1[0] = a;
+        state->dim_w1[1] = b;
+        a = lbl_804D3FD8;
+        b = lbl_804D3FDC;
+        state->dim_h1[0] = a;
+        state->dim_h1[1] = b;
+        a = lbl_804D3FE0;
+        b = lbl_804D3FE4;
+        state->dim_w2[0] = a;
+        state->dim_w2[1] = b;
+        a = lbl_804D3FE8;
+        b = lbl_804D3FEC;
+        state->dim_h2[0] = a;
+        state->dim_h2[1] = b;
+        a = lbl_804D3FF0;
+        b = lbl_804D3FF4;
+        ((u32*) state->scissor_y)[0] = a;
+        ((u32*) state->scissor_y)[1] = b;
+        a = lbl_804D3FF8;
+        b = lbl_804D3FFC;
+        ((u32*) state->scissor_x)[0] = a;
+        ((u32*) state->scissor_x)[1] = b;
     }
 
     {
