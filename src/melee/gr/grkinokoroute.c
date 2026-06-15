@@ -164,8 +164,6 @@ HSD_GObj* grKinokoRoute_8020754C(int gobj_id)
 void grKinokoRoute_80207634(Ground_GObj* gobj)
 {
     Vec3 origin;
-    UNUSED u32 unused1;
-    UNUSED u32 unused2;
     Vec3 cam_offset;
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj;

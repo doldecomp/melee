@@ -413,7 +413,7 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
         if (result != -1) {
             ix = result - 0xBD;
             if (!(gp->gv.shrineroute.xC6 & (1 << ix))) {
-                *(volatile u16*) &gp->gv.shrineroute.xC8 = (u16) result;
+                gp->gv.shrineroute.xC8 = (u16) result;
                 HSD_ASSERTMSG(0x213, gp->gv.shrineroute.symbols[(u32) ix],
                               "gp->u.map.symbol[ix]");
                 {

@@ -674,7 +674,7 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
     HSD_GObj* fighter;
     int i;
     Vec3 pos;
-    volatile Vec3 rot;
+    Vec3 rot;
     Vec3 fighter_pos;
     PAD_STACK(0x44);
 
