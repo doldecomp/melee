@@ -197,6 +197,7 @@ void fn_8012EDE8(Fighter_GObj* gobj)
     Vec3 v;
     if ((motion != 0x16B) && ((motion >= 0x16B) || (motion != 0x167))) {
         lb_8000B1CC(fp->parts[4].joint, NULL, &v);
+        (void) (fp != NULL);
         efSync_Spawn(0x4CF, gobj, &v, &fp->co_attrs.xBC);
         ft_PlaySFX(fp, 0x44618, 0x7FU, 0x40U);
     }
@@ -462,21 +463,10 @@ static inline f32 perm_vel_inline(Fighter* fp)
     return fp->gr_vel;
 }
 
-void ftYs_SpecialAirSLoop_1_Anim(Fighter_GObj* gobj)
+static inline void ftYs_SpecialS_UpdateLoop1Rotation(Fighter* fp,
+                                                     ftYoshiAttributes* attributes,
+                                                     f32* angle)
 {
-    f32 angle;
-    Fighter* fp = GET_FIGHTER(gobj);
-    ftYoshiAttributes* attributes = fp->dat_attrs;
-    Vec3 scale;
-
-    ftYs_SpecialS_8012EB48(gobj);
-    ftYs_SpecialS_UpdateScale(gobj, &scale);
-
-    fp->mv.ys.specials.x14 =
-        ((2.0 * M_PI / 25.0) * attributes->xA0 + fp->mv.ys.specials.x14);
-
-    ftYs_SpecialS_WrapAndSetRotX(gobj);
-
     {
         f32 x10 = fp->mv.ys.specials.x10;
         f32 abs_x10 = ABS(x10);
@@ -514,29 +504,71 @@ void ftYs_SpecialAirSLoop_1_Anim(Fighter_GObj* gobj)
             f32 vel = perm_vel_inline(fp);
             f32 delta;
             if (vel > 0.0F) {
-                delta = ABS(x10) - ABS(vel);
+                if (vel < 0.0F) {
+                    vel = -vel;
+                }
+                if (x10 < 0.0F) {
+                    x10 = -x10;
+                }
+                delta = x10 - vel;
             } else {
-                delta = ABS(x10) + ABS(vel);
+                if (vel < 0.0F) {
+                    vel = -vel;
+                }
+                if (x10 < 0.0F) {
+                    x10 = -x10;
+                }
+                delta = x10 + vel;
             }
-            angle = (M_PI * (delta / total) + M_PI_2);
+            *angle = (M_PI * (delta / total) + M_PI_2);
         } else {
             f32 vel = perm_vel_inline(fp);
             f32 delta;
             if (vel < 0.0F) {
-                delta = ABS(x10) - ABS(vel);
+                if (vel < 0.0F) {
+                    vel = -vel;
+                }
+                if (x10 < 0.0F) {
+                    x10 = -x10;
+                }
+                delta = x10 - vel;
             } else {
-                delta = ABS(x10) + ABS(vel);
+                if (vel < 0.0F) {
+                    vel = -vel;
+                }
+                if (x10 < 0.0F) {
+                    x10 = -x10;
+                }
+                delta = x10 + vel;
             }
-            angle = (M_PI * (delta / total) + (3.0 * M_PI / 2.0));
+            *angle = (M_PI * (delta / total) + (3.0 * M_PI / 2.0));
         }
     }
 
-    while (angle < 0.0F) {
-        angle += 2 * M_PI;
+    while (*angle < 0.0F) {
+        *angle += 2 * M_PI;
     }
-    while (angle > 2 * M_PI) {
-        angle -= 2 * M_PI;
+    while (*angle > 2 * M_PI) {
+        *angle -= 2 * M_PI;
     }
+}
+
+void ftYs_SpecialAirSLoop_1_Anim(Fighter_GObj* gobj)
+{
+    f32 angle;
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftYoshiAttributes* attributes = fp->dat_attrs;
+    Vec3 scale;
+    f32 dir;
+
+    ftYs_SpecialS_8012EB48(gobj);
+    ftYs_SpecialS_UpdateScale(gobj, &scale);
+
+    fp->mv.ys.specials.x14 =
+        ((2.0 * M_PI / 25.0) * attributes->xA0 + fp->mv.ys.specials.x14);
+
+    ftYs_SpecialS_WrapAndSetRotX(gobj);
+    ftYs_SpecialS_UpdateLoop1Rotation(fp, attributes, &angle);
     ftPartSetRotY(fp, 0, angle);
 
     fp->mv.ys.specials.x0--;
@@ -548,12 +580,7 @@ void ftYs_SpecialAirSLoop_1_Anim(Fighter_GObj* gobj)
 
     if (fp->mv.ys.specials.x28 % attributes->xA4 == 0) {
         Vec3* floor_normal = &fp->coll_data.floor.normal;
-        f32 dir;
-        if (perm_vel_inline(fp) < 0.0F) {
-            dir = -1.0F;
-        } else {
-            dir = 1.0F;
-        }
+        dir = (perm_vel_inline(fp) < 0.0F) ? -1.0F : 1.0F;
         angle = atan2f(-floor_normal->x, floor_normal->y);
         efSync_Spawn(0x3FF, gobj, &fp->cur_pos, &dir, &angle);
     }
@@ -707,6 +734,7 @@ void ftYs_SpecialAirSLanding_Anim(Fighter_GObj* gobj)
     if (fp->cmd_vars[1] == 1) {
         fp->cmd_vars[1]++;
         lb_8000B1CC(fp->parts[4].joint, NULL, &sp30);
+        (void) (fp != NULL);
         efSync_Spawn(0x4CF, gobj, &sp30, &fp->co_attrs.xBC);
     }
 
@@ -719,7 +747,7 @@ void ftYs_SpecialAirSLanding_Anim(Fighter_GObj* gobj)
         if (attributes->xE8 == 0.0F) {
             ftCo_Fall_Enter(gobj);
         } else {
-            ftCo_80096900(gobj, 1, 0, 1, 1.0F, 0.0F);
+            ftCo_80096900(gobj, 1, 0, 1, 1.0F, attributes->xE8);
         }
     }
 }
@@ -1191,21 +1219,46 @@ void ftYs_SpecialAirSStart_1_Coll(Fighter_GObj* gobj)
 void ftYs_SpecialAirSLoop_2_Coll(Fighter_GObj* gobj)
 {
     s32 coll_result;
+    Fighter* fp2;
     s32 wall_hit;
     Fighter* fp = GET_FIGHTER(gobj);
     ftYoshiAttributes* attributes = fp->dat_attrs;
-    u8 pad[28];
+    Vec3 pos;
+    f32 angle;
+    Vec3 pos2;
+    f32 angle2;
+    PAD_STACK(32);
 
     fp->mv.ys.specials.x30 = 0;
     coll_result = ft_800824A0(gobj, &ftYs_Unk3_803CEDA4);
 
     if (fp->facing_dir == 1.0F) {
         if ((wall_hit = fp->coll_data.env_flags & 0x3F) != 0) {
-            ftYs_SpecialS_SpawnWallBounceEffect(gobj, &fp->coll_data, true);
+            fp2 = GET_FIGHTER(gobj);
+            pos = fp2->cur_pos;
+            angle = atan2f(-fp->coll_data.left_facing_wall.normal.x,
+                           fp->coll_data.left_facing_wall.normal.y);
+            pos.x += ABS(fp2->coll_data.ecb.right.x);
+            pos.y +=
+                0.5F * ABS(fp2->coll_data.ecb.top.y +
+                            fp2->coll_data.ecb.bottom.y);
+            efSync_Spawn(0x406, gobj, &pos, &angle);
+            Camera_80030E44(3, &pos);
+            ftCommon_8007EBAC(fp2, 0xC, 0xA);
         }
     } else {
         if ((wall_hit = fp->coll_data.env_flags & 0xFC0) != 0) {
-            ftYs_SpecialS_SpawnWallBounceEffect(gobj, &fp->coll_data, false);
+            fp2 = GET_FIGHTER(gobj);
+            pos2 = fp2->cur_pos;
+            angle2 = atan2f(-fp->coll_data.right_facing_wall.normal.x,
+                            fp->coll_data.right_facing_wall.normal.y);
+            pos2.x -= ABS(fp2->coll_data.ecb.left.x);
+            pos2.y +=
+                0.5F * ABS(fp2->coll_data.ecb.top.y +
+                            fp2->coll_data.ecb.bottom.y);
+            efSync_Spawn(0x406, gobj, &pos2, &angle2);
+            Camera_80030E44(3, &pos2);
+            ftCommon_8007EBAC(fp2, 0xC, 0xA);
         }
     }
 

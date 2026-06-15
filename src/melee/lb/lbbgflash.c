@@ -518,7 +518,7 @@ void fn_80020AEC(HSD_JObj* jobj, Mtx out)
     s32 i;
     Mtx tmp;
     Vec3 col;
-    volatile f32 sp28;
+    volatile f32 scale_mag;
     u8 _[16];
 
     if (jobj == NULL) {
@@ -566,8 +566,8 @@ void fn_80020AEC(HSD_JObj* jobj, Mtx out)
             e = 0.5 * e * -(((f64) scale_sq * (e * e)) - 3.0);
             e = 0.5 * e * -(((f64) scale_sq * (e * e)) - 3.0);
             e = 0.5 * e * -(((f64) scale_sq * (e * e)) - 3.0);
-            sp28 = (f32) ((f64) scale_sq * e);
-            scale_sq = sp28;
+            scale_mag = (f32) ((f64) scale_sq * e);
+            scale_sq = scale_mag;
         }
 
         factor = mag * scale_sq;
@@ -687,11 +687,6 @@ void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
     }
 }
 
-#define fake_HSD_ASSERT(line, cond)                                           \
-    ((cond) ? ((void) 0) : __assert("jobj.h", line, #cond))
-#define fake_HSD_ASSERTMSG(line, cond, msg)                                   \
-    ((cond) ? ((void) 0) : __assert("jobj.h", line, msg))
-
 void fn_8002113C(HSD_JObj* jobj, Vec3* axis, f32 angle)
 {
     Mtx tmpMtx;
@@ -711,18 +706,11 @@ void fn_8002113C(HSD_JObj* jobj, Vec3* axis, f32 angle)
     PSMTXRotAxisRad(rotMtx, (Vec*) &localAxis, -angle);
 
     if (!(jobj->flags & JOBJ_USE_QUATERNION)) {
-        fake_HSD_ASSERT(699, jobj);
-        fake_HSD_ASSERTMSG(700, (u32) &rot, "rotate");
-        *(Quaternion*) &rot = jobj->rotate;
+        HSD_JObjGetRotation(jobj, (Quaternion*) &rot);
         HSD_MkRotationMtx(tmpMtx, &rot);
         PSMTXConcat(tmpMtx, rotMtx, result);
         HSD_QuatLib_8037EB28(result, &rot);
-        fake_HSD_ASSERT(618, jobj);
-        fake_HSD_ASSERTMSG(619, (u32) &rot, "rotate");
-        jobj->rotate = *(Quaternion*) &rot;
-        if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-            HSD_JObjSetMtxDirty(jobj);
-        }
+        HSD_JObjSetRotation(jobj, (Quaternion*) &rot);
     } else {
         HSD_JObjGetRotation(jobj, &rot2);
         HSD_MtxQuat(tmpMtx, &rot2);
@@ -751,13 +739,13 @@ void lbBgFlash_80021410(void* arg0)
     u8 pad_hi[32];
     Vec3 axis;
     u8 pad_mid[16];
-    Vec3 sp44;
-    Vec3 sp38;
-    Vec3 sp2C;
-    volatile f32 sp28;
-    volatile f32 sp24;
-    volatile f32 sp20;
-    volatile f32 sp1C;
+    Vec3 diff_pos0_pos1;
+    Vec3 pos1_from_pos0;
+    Vec3 temp_delta;
+    volatile f32 sin_mag;
+    volatile f32 len_ab_mag;
+    volatile f32 len_bc_mag;
+    volatile f32 len_ac_mag;
     f32 dot;
     f32 sin_val;
     f32 len_ab;
@@ -826,24 +814,25 @@ void lbBgFlash_80021410(void* arg0)
         data->pos1.z = (d * nz) + data->pos1.z;
     }
 
-    pDiff = lbVector_Diff(&data->pos0, &data->pos1, &sp44);
+    pDiff = lbVector_Diff(&data->pos0, &data->pos1, &diff_pos0_pos1);
     dot = (axis.z * pDiff->z) + ((axis.x * pDiff->x) + (axis.y * pDiff->y));
     if ((sin_val = 1.0f - (dot * dot)) > 0.0f) {
         f64 e = __frsqrte(sin_val);
         e = 0.5 * e * -(((f64) sin_val * (e * e)) - 3.0);
         e = 0.5 * e * -(((f64) sin_val * (e * e)) - 3.0);
         e = 0.5 * e * -(((f64) sin_val * (e * e)) - 3.0);
-        sp28 = (f32) ((f64) sin_val * e);
-        sin_val = sp28;
+        sin_mag = (f32) ((f64) sin_val * e);
+        sin_val = sin_mag;
     }
     data->len0 = data->len0 * sin_val;
 
-    lbVector_Diff(&data->pos4, &data->pos0, &sp2C);
-    lbVector_Diff(&data->pos1, &data->pos0, &sp38);
-    angle1 = lbVector_Angle(&sp2C, &sp38);
+    lbVector_Diff(&data->pos4, &data->pos0, &temp_delta);
+    lbVector_Diff(&data->pos1, &data->pos0, &pos1_from_pos0);
+    angle1 = lbVector_Angle(&temp_delta, &pos1_from_pos0);
 
-    lbVector_Diff(&data->pos2, &data->pos1, &sp2C);
-    angle2 = (f32) (3.141592653589793 - lbVector_Angle(&sp2C, &sp38));
+    lbVector_Diff(&data->pos2, &data->pos1, &temp_delta);
+    angle2 = (f32) (3.141592653589793 -
+                    lbVector_Angle(&temp_delta, &pos1_from_pos0));
 
     dx = data->pos0.x - data->pos4.x;
     dz = data->pos0.z - data->pos4.z;
@@ -856,8 +845,8 @@ void lbBgFlash_80021410(void* arg0)
         e = 0.5 * e * -(((f64) len_ab * (e * e)) - 3.0);
         e = 0.5 * e * -(((f64) len_ab * (e * e)) - 3.0);
         e = 0.5 * e * -(((f64) len_ab * (e * e)) - 3.0);
-        sp24 = (f32) ((f64) len_ab * e);
-        len_ab = sp24;
+        len_ab_mag = (f32) ((f64) len_ab * e);
+        len_ab = len_ab_mag;
     }
 
     dx = data->pos0.x - data->pos1.x;
@@ -871,8 +860,8 @@ void lbBgFlash_80021410(void* arg0)
         e = 0.5 * e * -(((f64) len_bc * (e * e)) - 3.0);
         e = 0.5 * e * -(((f64) len_bc * (e * e)) - 3.0);
         e = 0.5 * e * -(((f64) len_bc * (e * e)) - 3.0);
-        sp20 = (f32) ((f64) len_bc * e);
-        len_bc = sp20;
+        len_bc_mag = (f32) ((f64) len_bc * e);
+        len_bc = len_bc_mag;
     }
     data->len0 = len_bc;
 
@@ -887,8 +876,8 @@ void lbBgFlash_80021410(void* arg0)
         e = 0.5 * e * -(((f64) len_ac * (e * e)) - 3.0);
         e = 0.5 * e * -(((f64) len_ac * (e * e)) - 3.0);
         e = 0.5 * e * -(((f64) len_ac * (e * e)) - 3.0);
-        sp1C = (f32) ((f64) len_ac * e);
-        len_ac = sp1C;
+        len_ac_mag = (f32) ((f64) len_ac * e);
+        len_ac = len_ac_mag;
     }
     data->len1 = len_ac;
 

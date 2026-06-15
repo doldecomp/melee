@@ -160,7 +160,6 @@ static inline HSD_DObj* dobj_next(HSD_DObj* dobj)
 
 void ft_800C85B8(Fighter_GObj* gobj)
 {
-    u8 _[8];
     HSD_Joint* sp20;
     s32 sp1C;
 
@@ -174,20 +173,21 @@ void ft_800C85B8(Fighter_GObj* gobj)
     int i;
     HSD_DObj* var_r21;
 
-    PAD_STACK(8);
+    PAD_STACK(0xC);
 
     var_r26 = 0;
+    var_r24 = 0;
     temp_r28 = GET_FIGHTER(gobj);
     temp_r23 = temp_r28->ft_data->x5C;
     sp20 = temp_r23;
     sp1C = 0;
-    i = 0;
     while (sp20 != 0) {
-        if (ftParts_8007506C(temp_r28->kind, i) != 0) {
-            i++;
+        if (ftParts_8007506C(temp_r28->kind, var_r24) != 0) {
+            var_r24++;
         } else {
-            HSD_IDInsertToTable(NULL, (u32) sp20, temp_r28->parts[i].joint);
-            i++;
+            HSD_IDInsertToTable(NULL, (u32) sp20,
+                                temp_r28->parts[var_r24].joint);
+            var_r24++;
             ftAnim_GetNextJointInTree(&sp20, &sp1C);
         }
     }
@@ -199,11 +199,11 @@ void ft_800C85B8(Fighter_GObj* gobj)
             var_r27 += 1;
         } else {
             i = 0;
-            temp_r25 = temp_r28->parts[i].joint;
+            temp_r25 = temp_r28->parts[var_r27].joint;
             var_r24_2 = HSD_DObjLoadDesc(sp20->u.dobjdesc);
             if (var_r24_2 != NULL) {
                 var_r21 = HSD_JObjGetDObj(temp_r25);
-                temp_r28->parts[i].flags2_b5 = true;
+                temp_r28->parts[var_r27].flags2_b5 = true;
                 HSD_DObjResolveRefsAll(var_r24_2, sp20->u.dobjdesc);
                 if (var_r21 == NULL) {
                     HSD_JObjAddDObj(temp_r25, var_r24_2);
@@ -238,8 +238,8 @@ void ft_800C85B8(Fighter_GObj* gobj)
                 if (i >= 0x80) {
                     HSD_ASSERTREPORT(0x106, 0, "fighter dobj num over!\n");
                 }
-                temp_r28->parts[i].xD = var_r26 - 1;
-                temp_r28->parts[i].flags2_b6 = true;
+                temp_r28->parts[var_r27].xD = var_r26 - 1;
+                temp_r28->parts[var_r27].flags2_b6 = true;
             }
             var_r27 += 1;
             ftAnim_GetNextJointInTree(&sp20, &sp1C);

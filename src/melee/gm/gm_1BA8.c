@@ -413,7 +413,6 @@ void gm_801BAD70(GameScene* arg0)
     if (level_info->kind == 2) {
         struct gm_evstage_list* stage_list;
         u16 stage;
-        u8* stagep;
         ev->xB_4 = 1;
         stage_list = level_info->x10;
         stage = stage_list->stage[ev->x20];
@@ -2346,7 +2345,6 @@ void gm_801BDE94(HSD_GObj* arg0)
         }
     }
 
-block_41:
     if (Player_GetP1Stock() <= 0) {
         gmMainLib_804D3EE0->unk_530.xB_1 = false;
         lbAudioAx_80028B90();

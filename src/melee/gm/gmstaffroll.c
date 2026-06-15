@@ -131,8 +131,6 @@ extern GXColor gm_804D42C0;
 extern GXColor gm_804D42C4;
 extern GXColor gm_804D42C8;
 extern GXColor gm_804D42CC;
-extern char gm_804D42D0[7];
-extern char gm_804D42D8[5];
 extern s32 gm_804DAAEC;
 
 bool gm_801AA644(void)
@@ -270,27 +268,6 @@ void fn_801AAB18(HSD_GObj* gobj)
     }
 }
 
-static inline bool fn_801AAB74_JObjMtxIsDirty(HSD_JObj* jobj)
-{
-    bool result;
-    if (jobj == NULL) {
-        __assert(gm_804D42D0, 0x234, gm_804D42D8);
-    }
-    result = false;
-    if (!(jobj->flags & JOBJ_USER_DEF_MTX) && (jobj->flags & JOBJ_MTX_DIRTY)) {
-        result = true;
-    }
-    return result;
-}
-
-static inline void fn_801AAB74_JObjSetupMatrix(HSD_JObj* jobj)
-{
-    if (!jobj || !fn_801AAB74_JObjMtxIsDirty(jobj)) {
-        return;
-    }
-    HSD_JObjSetupMatrixSub(jobj);
-}
-
 void fn_801AAB74(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -410,7 +387,7 @@ void fn_801AAB74(HSD_GObj* gobj)
              entry_idx == 0xC5) &&
             (entry_idx != 0x5E || lbLang_IsSavedLanguageJP() != 0))
         {
-            fn_801AAB74_JObjSetupMatrix(leaf);
+            HSD_JObjSetupMatrix(leaf);
             staffInfoSortBuf[gm_804D6800].index = entry_idx;
             staffInfoSortBuf[gm_804D6800].jobj = leaf;
             gm_804D6800++;
@@ -429,14 +406,8 @@ void fn_801AAB74(HSD_GObj* gobj)
 
     for (i = 0; i < gm_804D6800; i++) {
         leaf = staffInfoSortBuf[i].jobj;
-        if (leaf == NULL) {
-            __assert(gm_804D42D0, 0x478, gm_804D42D8);
-        }
-        {
-            extern void HSD_JObjSetupMatrix(HSD_JObj*);
-            HSD_JObjSetupMatrix(leaf);
-        }
-        PSMTXConcat(gm_804D6830->view_mtx, leaf->mtx, staffInfoSortBuf[i].mtx);
+        PSMTXConcat(gm_804D6830->view_mtx, HSD_JObjGetMtxPtr(leaf),
+                    staffInfoSortBuf[i].mtx);
     }
 
     {

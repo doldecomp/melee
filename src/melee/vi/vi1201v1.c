@@ -54,20 +54,10 @@ static un_804D7004_t un_804D7004;
 
 typedef struct Vi1201v1Data {
     Vec3 player_spawn;
-    char use_quaternion_assert[0x28];
-    char vi1201v1_dat[0x10];
-    char visual1201v1_scene[0x14];
-    char tykoopa_dat[0x0C];
-    char toykoopa_model_topn_joint[0x1C];
-    char gmrgstnd_dat[0x10];
-    char stand_scene[0x0C];
 } Vi1201v1Data;
 
 Vi1201v1Data un_80400258 = {
-    { 0.0f, 0.0f, 0.0f }, "!(jobj->flags & JOBJ_USE_QUATERNION)",
-    "Vi1201v1.dat",       "visual1201v1Scene",
-    "TyKoopa.dat",        "ToyKoopaModel_TopN_joint",
-    "GmRgStnd.dat",       "standScene",
+    { 0.0f, 0.0f, 0.0f },
 };
 
 
@@ -224,13 +214,11 @@ void un_8031FD18_OnEnter(void* arg)
 
     char_index = input[0];
 
-    un_804D6FE8 = lbArchive_LoadSymbols(un_80400258.vi1201v1_dat,
-                                        &un_804D6FE0,
-                                        un_80400258.visual1201v1_scene, NULL);
-    lbArchive_LoadSymbols(un_80400258.tykoopa_dat, &un_804D6FEC,
-                          un_80400258.toykoopa_model_topn_joint, NULL);
-    lbArchive_LoadSymbols(un_80400258.gmrgstnd_dat, &un_804D6FE4,
-                          un_80400258.stand_scene, NULL);
+    un_804D6FE8 = lbArchive_LoadSymbols("Vi1201v1.dat", &un_804D6FE0,
+                                        "visual1201v1Scene", NULL);
+    lbArchive_LoadSymbols("TyKoopa.dat", &un_804D6FEC,
+                          "ToyKoopaModel_TopN_joint", NULL);
+    lbArchive_LoadSymbols("GmRgStnd.dat", &un_804D6FE4, "standScene", NULL);
     un_803124BC();
     un_804D6FE8 = lbArchive_LoadSymbols(gm_80160438(char_index), NULL);
 
@@ -282,16 +270,7 @@ void un_8031FD18_OnEnter(void* arg)
     HSD_JObjSetTranslateZWithMtxDirty(child, -un_803060BC(0x1E, 2));
 
     scale = -un_803060BC(0x1E, 5);
-    if (child == NULL) {
-        __assert("jobj.h", 0x294, "jobj");
-    }
-    if (child->flags & JOBJ_USE_QUATERNION) {
-        __assert("jobj.h", 0x295, un_80400258.use_quaternion_assert);
-    }
-    child->rotate.y = scale;
-    if (!(child->flags & JOBJ_MTX_INDEP_SRT)) {
-        (HSD_JObjSetMtxDirty)(child);
-    }
+    HSD_JObjSetRotationYWithMtxDirty(child, scale);
 
     scale = 0.55f * (un_803060BC(0x1E, 4) * (1.0f / un_803060BC(0x1E, 3)));
 

@@ -285,11 +285,11 @@ static void fn_801C8EF8(HSD_MObj* mobj, u32 rendermode)
     Ground* gp;
     HSD_TObj* tobj;
     HSD_TObj** cur_tobj;
-    s32 var_r23;
-    s32 var_r0;
+    s32 reg1_lt4_for_kcsel;
+    s32 temp;
     s32 alpha_reg;
     s32 reg2;
-    s32 var_r24;
+    s32 reg1_lt4;
     s32 reg1;
     u32 mobj_rendermode;
     char* base = (char*) &grMaterial_803E0A20;
@@ -336,28 +336,28 @@ static void fn_801C8EF8(HSD_MObj* mobj, u32 rendermode)
                 OSReport(base + 0x114);
                 __assert(base + 0xF4, 0x7A, grMaterial_804D4568);
             }
-            sp_cnst.comp = var_r24 = 1;
-            sp_cnst.ctype = var_r0 = 0;
+            sp_cnst.comp = reg1_lt4 = 1;
+            sp_cnst.ctype = temp = 0;
             sp_cnst.reg = (u8) reg1;
             sp_cnst.val = &gp->x6C;
             HSD_TExpSetReg((HSD_TExp*) &sp_cnst);
             if (reg1 < 4) {
                 !reg1;
             } else {
-                var_r24 = 0;
+                reg1_lt4 = 0;
             }
-            if (var_r24 != 0) {
-                var_r0 = 4;
+            if (reg1_lt4 != 0) {
+                temp = 4;
             } else {
-                var_r0 = 0;
+                temp = 0;
             }
-            reg2 = lbGetFreeColorRegister(var_r0, mobj, (HSD_TExp*) &sp_cnst);
+            reg2 = lbGetFreeColorRegister(temp, mobj, (HSD_TExp*) &sp_cnst);
             if (reg2 == -1) {
                 OSReport(base + 0x114);
                 __assert(base + 0xF4, 0x88, grMaterial_804D4568);
             }
-            sp_cnst.comp = var_r23 = 1;
-            sp_cnst.ctype = var_r0 = 0;
+            sp_cnst.comp = reg1_lt4_for_kcsel = 1;
+            sp_cnst.ctype = temp = 0;
             sp_cnst.reg = (u8) reg2;
             sp114.r = gp->x6C.a;
             sp114.g = gp->x6C.a;
@@ -369,17 +369,17 @@ static void fn_801C8EF8(HSD_MObj* mobj, u32 rendermode)
             if (reg1 < 4) {
                 !reg1;
             } else {
-                var_r23 = 0;
+                reg1_lt4_for_kcsel = 0;
             }
-            if (var_r23 != 0) {
+            if (reg1_lt4_for_kcsel != 0) {
                 sp_tevdesc.u.tevconf.kcsel = lb_8000CCA4(reg1);
             } else {
                 if (reg2 < 4) {
-                    var_r0 = 1;
+                    temp = 1;
                 } else {
-                    var_r0 = 0;
+                    temp = 0;
                 }
-                if (var_r0 != 0) {
+                if (temp != 0) {
                     sp_tevdesc.u.tevconf.kcsel = lb_8000CCA4(reg2);
                 }
             }
@@ -426,8 +426,7 @@ void grMaterial_801C92C0(HSD_JObj* jobj)
     if (cond != 0) {
         dobj = HSD_JObjGetDObj(jobj);
         while (dobj != NULL) {
-            mobj = dobj != NULL ? dobj->mobj : NULL;
-            if (mobj != NULL) {
+            if ((mobj = dobj != NULL ? dobj->mobj : NULL) != NULL) {
                 hsdChangeClass(mobj, &grMaterial_803E0A20);
             }
             dobj = dobj != NULL ? dobj->next : NULL;
@@ -435,6 +434,7 @@ void grMaterial_801C92C0(HSD_JObj* jobj)
     }
     jobj = jobj == NULL ? NULL : jobj->child;
     while (jobj != NULL) {
+        grandchild = jobj;
         if (jobj != NULL) {
             if (jobj->flags & 0x4020) {
                 cond = 0;
@@ -442,19 +442,26 @@ void grMaterial_801C92C0(HSD_JObj* jobj)
                 cond = 1;
             }
             if (cond != 0) {
-                dobj = HSD_JObjGetDObj(jobj);
+                dobj = HSD_JObjGetDObj(grandchild);
                 while (dobj != NULL) {
-                    mobj = dobj != NULL ? dobj->mobj : NULL;
-                    if (mobj != NULL) {
+                    if ((mobj = dobj != NULL ? dobj->mobj : NULL) != NULL) {
                         hsdChangeClass(mobj, &grMaterial_803E0A20);
                     }
                     dobj = dobj != NULL ? dobj->next : NULL;
                 }
             }
-            grandchild = jobj == NULL ? NULL : jobj->child;
+            if (jobj == NULL) {
+                grandchild = NULL;
+            } else {
+                grandchild = jobj->child;
+            }
             while (grandchild != NULL) {
                 grMaterial_801C92C0(grandchild);
-                grandchild = grandchild == NULL ? NULL : grandchild->next;
+                if (grandchild == NULL) {
+                    grandchild = NULL;
+                } else {
+                    grandchild = grandchild->next;
+                }
             }
         }
         jobj = jobj == NULL ? NULL : jobj->next;

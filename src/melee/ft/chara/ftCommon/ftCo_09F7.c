@@ -185,8 +185,11 @@ block_63:
                   &temp_r30->ft_data->x0->x168);
     return;
 block_64:
-    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3, gfx_id,
-                  temp_r30->parts[var_r27].joint, &temp_r30->facing_dir);
+    {
+        HSD_JObj* joint = temp_r30->parts[var_r27].joint;
+        efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3, gfx_id, joint,
+                      &temp_r30->facing_dir);
+    }
     return;
 block_65:
     sp9C = *arg5;
@@ -220,7 +223,7 @@ block_70:
     sp84.y += 2.0f * arg6->y * (HSD_Randf() - 0.5f);
     var_f1_2 = HSD_Randf() - 0.5f;
     temp_f2_2 = 2.0f * arg6->z;
-    sp84.z += temp_f2_2 * var_f1_2;
+    sp84.z += var_f1_2 * temp_f2_2;
     if (gfx_id >= 0x412) {
         goto block_98;
     }
@@ -368,8 +371,11 @@ block_122:
                   &p_ftCommonData->x564);
     return;
 block_123:
-    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 2, gfx_id,
-                  temp_r30->parts[var_r27].joint, &sp84);
+    {
+        HSD_JObj* joint = temp_r30->parts[var_r27].joint;
+        efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 2, gfx_id, joint,
+                      &sp84);
+    }
     return;
 block_124:
     sp80 = 0.0f;
@@ -380,8 +386,11 @@ block_124:
                       temp_r30->coll_data.floor.normal.y);
     sp80 = var_f1_2;
 block_126:
-    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, gfx_id,
-                  temp_r30->parts[var_r27].joint, &sp84, &sp80);
+    {
+        HSD_JObj* joint = temp_r30->parts[var_r27].joint;
+        efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, gfx_id, joint, &sp84,
+                      &sp80);
+    }
     return;
 block_127:
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 8, 2,

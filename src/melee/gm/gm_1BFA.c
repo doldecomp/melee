@@ -156,18 +156,19 @@ static u8 gm_8049E558[0x170];
 void gm_801BFCFC(GameScene* arg0)
 {
     s32 var_r27_2;
-    s32 var_r30;
-    u32 var_r25;
-    u32 var_r25_2;
-    u32 var_r28_3;
     u32* temp_r29;
-    u32* temp_r29_2;
-    u8* var_r26;
     u8* var_r27;
     u8* var_r28;
-    u8* var_r28_2;
     s32** temp_r3;
+    u8* var_r28_2;
+    u32 var_r25_2;
+    u32 var_r25;
+    u32* temp_r29_2;
+    u32 var_r28_3;
     void** var_r31;
+    s32 var_r30;
+    u8* var_r26;
+    s32** gm_801BFC60();
 
     PAD_STACK(8);
 

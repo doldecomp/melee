@@ -41,7 +41,7 @@
 typedef struct un_80400304_t {
     Vec3 player_spawn;
     char use_quaternion_assert[0x28];
-    char vi1201v2_dat[0x0C];
+    char vi1201v2_dat[0x10];
     char visual1201v2_scene[0x14];
     char tykoopa_dat[0x0C];
     char toykoopa_model_topn_joint[0x1C];
@@ -250,16 +250,16 @@ void un_80320A40_OnEnter(void* arg)
     char_index = input[0];
 
     un_804D701C = lbArchive_LoadSymbols(
-        (char*) &un_804002F8 + 0x40, &un_804D7010,
-        (char*) &un_804002F8 + 0x50, NULL);
+        un_80400304.vi1201v2_dat, &un_804D7010,
+        un_80400304.visual1201v2_scene, NULL);
     {
-        char* toykoopa_joint = (char*) &un_804002F8 + 0x70;
-        char* tykoopa_dat = (char*) &un_804002F8 + 0x64;
+        char* toykoopa_joint = un_80400304.toykoopa_model_topn_joint;
+        char* tykoopa_dat = un_80400304.tykoopa_dat;
         lbArchive_LoadSymbols(tykoopa_dat, &un_804D7020, toykoopa_joint,
                               NULL);
     }
-    lbArchive_LoadSymbols((char*) &un_804002F8 + 0x8C, &un_804D7014,
-                          (char*) &un_804002F8 + 0x9C, NULL);
+    lbArchive_LoadSymbols(un_80400304.gmrgstnd_dat, &un_804D7014,
+                          un_80400304.stand_scene, NULL);
     un_803124BC();
     un_804D7018 =
         lbArchive_LoadSymbols(viGetCharAnimByIndex(char_index), NULL);
@@ -308,16 +308,7 @@ void un_80320A40_OnEnter(void* arg)
     HSD_JObjSetTranslateZWithMtxDirty(child, -un_803060BC(0x1E, 2));
 
     scale = -un_803060BC(0x1E, 5);
-    if (child == NULL) {
-        __assert("jobj.h", 660, "jobj");
-    }
-    if (child->flags & JOBJ_USE_QUATERNION) {
-        __assert("jobj.h", 661, (char*) &un_804002F8 + 0x18);
-    }
-    child->rotate.y = scale;
-    if (!(child->flags & JOBJ_MTX_INDEP_SRT)) {
-        (HSD_JObjSetMtxDirty)(child);
-    }
+    HSD_JObjSetRotationYWithMtxDirty(child, scale);
 
     scale = 0.55f * (un_803060BC(0x1E, 4) * (1.0f / un_803060BC(0x1E, 3)));
 

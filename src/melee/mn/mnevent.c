@@ -170,7 +170,7 @@ void mnEvent_8024D15C(s32 idx, s32 event_id)
         data->gobjs[idx] = icon_gobj;
     }
 
-    text_slot = &((MnEventData*) ((u8*) data + (idx * 4)))->texts[0];
+    text_slot = &data->texts[idx];
     if (*text_slot != NULL) {
         HSD_SisLib_803A5CC4(data->texts[idx]);
     }
@@ -360,13 +360,11 @@ void mnEvent_8024E524(s32 event_idx)
     HSD_GObjProc* proc;
     HSD_JObj* tree;
     MnEventData* user_data;
-    char* base;
     void** assets;
     f32 y_a;
     f32 y_b;
     f32 y;
 
-    base = (char*) &mnEvent_803EF740;
     assets = mnEvent_804A08F8;
 
     gobj = GObj_Create(6, 7, 0x80);
@@ -379,10 +377,7 @@ void mnEvent_8024E524(s32 event_idx)
     HSD_JObjAnimAll(tree);
 
     user_data = HSD_MemAlloc(sizeof(MnEventData));
-    if (user_data == NULL) {
-        OSReport(base + 0x70);
-        __assert(base + 0x88, 0x39B, base + 0x94);
-    }
+    HSD_ASSERTREPORT(0x39B, user_data, "Can't get user_data.\n");
     mnEvent_8024E420(user_data, event_idx);
     GObj_InitUserData(gobj, 0, HSD_Free, user_data);
 

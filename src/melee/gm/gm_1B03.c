@@ -328,13 +328,10 @@ static inline int gm_801B0474_inline(MatchEnd* arg1, int i)
             return arg1->player_standings[i].stocks;
         } else {
             u8 var_r7 = arg1->player_standings[i].stocks;
-            if (arg1->player_standings[i].x28 >= arg1->frame_count) {
-                switch (var_r7) {
-                case 0:
-                    break;
-                default:
-                    return var_r7;
-                }
+            if (arg1->player_standings[i].x28 < arg1->frame_count ||
+                var_r7 != 0)
+            {
+                return var_r7;
             }
         }
     }
@@ -344,7 +341,6 @@ static inline int gm_801B0474_inline(MatchEnd* arg1, int i)
 void gm_801B0474(StartMeleeData* arg0, MatchEnd* arg1)
 {
     int var_r7;
-    s8 var_r6;
     int i;
 
     arg0->rules.x0_0 = 1;
@@ -356,13 +352,14 @@ void gm_801B0474(StartMeleeData* arg0, MatchEnd* arg1)
             var_r7 = gm_801B0474_inline(arg1, i);
             if (arg1->is_teams == 1) {
                 player_standings_inline(
-                    arg0, arg1, i, var_r7,
+                    arg0, arg1, i,
                     arg1->team_standings[arg1->player_standings[i].team]
-                        .is_big_loser);
+                        .is_big_loser,
+                    var_r7);
             } else {
                 player_standings_inline(
-                    arg0, arg1, i, var_r7,
-                    arg1->player_standings[i].is_big_loser);
+                    arg0, arg1, i, arg1->player_standings[i].is_big_loser,
+                    var_r7);
             }
         }
     }
@@ -1546,7 +1543,9 @@ void gm_801B1C24(GameScene* arg0)
     CSSData* css = gm_801A4284(arg0);
     s32 i;
     u64 mask;
-    PreloadCacheScene* cache;
+    struct GameCache* cache;
+    s32 j;
+    PAD_STACK(0x10);
 
     if (css->pending_scene_change == 2) {
         gm_801A42F8(GM_MENU);
@@ -1558,15 +1557,16 @@ void gm_801B1C24(GameScene* arg0)
     gm_801B07E8_layer(css, &vs->data.players[1].c_kind, NULL,
                       (s8*) &vs->data.players[1].color,
                       (s8*) &vs->data.players[1].xA, NULL);
+    j = (i = 2);
     vs->data.players[1].xE = 0;
-    for (i = 2; i < 4; i++) {
+    for (; i < 4; i++, j++) {
         vs->data.players[i] = vs->data.players[1];
         vs->data.players[i].color = (vs->data.players[i - 1].color + 1) %
-                                    gm_80169238(vs->data.players[i].c_kind);
+                                    gm_80169238(vs->data.players[j].c_kind);
         if (vs->data.players[i].color == vs->data.players[0].color) {
             vs->data.players[i].color =
                 (vs->data.players[i].color + 1) %
-                gm_80169238(vs->data.players[i].c_kind);
+                gm_80169238(vs->data.players[j].c_kind);
         }
         vs->data.players[i].slot_type = 3;
     }
@@ -1575,28 +1575,19 @@ void gm_801B1C24(GameScene* arg0)
         vs->data.players[2].slot = 0;
         vs->data.players[3].slot = 0;
     } else {
-        PlayerInitData* p = &vs->data.players[1];
-        if (gm_804D68C0 != 0) {
-            vs->data.players[1].slot = 1;
-            p++;
-        }
-        if (gm_804D68C0 != 1) {
-            p->slot = 2;
-            p++;
-        }
-        if (gm_804D68C0 != 2) {
-            p->slot = 3;
-            p++;
-        }
-        if (gm_804D68C0 != 3) {
-            p->slot = 4;
+        j = 1;
+        for (i = 0; i < 4; i++) {
+            if (gm_804D68C0 != i) {
+                vs->data.players[j].slot = i + 1;
+                j++;
+            }
         }
     }
-    cache = lbDvd_8001822C();
-    cache->game_cache.entries[2].char_id = (s8) vs->data.players[2].c_kind;
-    cache->game_cache.entries[2].color = vs->data.players[2].color;
-    cache->game_cache.entries[3].char_id = (s8) vs->data.players[3].c_kind;
-    cache->game_cache.entries[3].color = vs->data.players[3].color;
+    cache = &lbDvd_8001822C()->game_cache;
+    cache->entries[2].char_id = (s8) vs->data.players[2].c_kind;
+    cache->entries[2].color = vs->data.players[2].color;
+    cache->entries[3].char_id = (s8) vs->data.players[3].c_kind;
+    cache->entries[3].color = vs->data.players[3].color;
     lbDvd_80018254();
     mask = 0;
     for (i = 0; i < 4; i++) {

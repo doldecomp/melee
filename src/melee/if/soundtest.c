@@ -36,6 +36,30 @@
 #include <MSL/string.h>
 
 /// .data
+struct un_803F9F28_t {
+    u8 _pad0[0xA8];
+    int xA8;
+    u8 _padAC[0x8];
+    f32 xB4;
+    u8 _padB8[0x90];
+    int x148;
+    u8 _pad14C[0x1C];
+    int x168;
+    u8 _pad16C[0x8];
+    f32 x174;
+    u8 _pad178[0x10];
+    int x188;
+    u8 _pad18C[0x50];
+    char x1DC[0xC];
+    char x1E8[0x18];
+};
+extern struct un_803F9F28_t un_803F9F28;
+struct SoundTestData {
+    u8 pad0[0xF4];
+    f32 xF4;
+    f32 xF8;
+};
+extern struct SoundTestData un_803F9FA4;
 /* 3F9FD0 */ static int un_803F9FD0;
 /* 3F9FDC */ static float un_803F9FDC;
 /* 3FA070 */ static int un_803FA070;
@@ -215,13 +239,14 @@ struct un_803FA128_x130_t {
 
 void un_802FF7DC(void)
 {
-    lbArchive_LoadSymbols("SmSt.dat", &un_804D6DA8, "smSoundTestLoadData", 0);
-    un_803F9FDC = un_804D6DA8[0];
-    un_803F9FD0 = un_804D6DA8[1];
-    un_803FA070 = un_804D6DA8[2];
-    un_803FA090 = un_804D6DA8[3];
-    un_803FA09C = un_804D6DA8[4];
-    un_803FA0B0 = un_804D6DA8[5];
+    struct un_803F9F28_t* data = &un_803F9F28;
+    lbArchive_LoadSymbols(data->x1DC, &un_804D6DA8, data->x1E8, 0);
+    data->xB4 = un_804D6DA8[0];
+    data->xA8 = un_804D6DA8[1];
+    data->x148 = un_804D6DA8[2];
+    data->x168 = un_804D6DA8[3];
+    data->x174 = un_804D6DA8[4];
+    data->x188 = un_804D6DA8[7];
 }
 
 bool un_802FF884(char* unused)
@@ -291,8 +316,8 @@ s32 un_802FF9DC(void)
     for (i = 0; i < un_804D6DB0; i++) {
         un_804D6DB4 += d->x18[i];
     }
-    un_803FA098 = (f32) un_804D6DB4;
-    un_803FA09C = (f32) (un_804D6DB4 + d->x18[un_804D6DB0]);
+    un_803F9FA4.xF4 = (f32) un_804D6DB4;
+    un_803F9FA4.xF8 = (f32) (un_804D6DB4 + d->x18[un_804D6DB0]);
     return 0;
 }
 
@@ -850,31 +875,40 @@ bool un_80300AB8(bool update_scene)
 bool un_80300AF4(int arg0)
 {
     if (arg0 == 1) {
+        struct un_803FA258_t* data;
         lbAudioAx_80024030(1);
-        un_803FA258.x4[1] = 0x3F;
-        un_803FA258.x4[2] = 0xE;
-        un_803FA258.x24[1] = 3;
-        un_803FA258.x24[2] = 3;
-        un_803FA258.x24[3] = 3;
+        data = &un_803FA258;
+        data->x4[1] = 0x3F;
+        data->x4[3] = 0xE;
+        data->x24[1] = 3;
+        data->x24[2] = 3;
+        data->x24[3] = 3;
         gm_SetPendingScene(4);
         gm_801A4B60();
     }
     return false;
 }
 
+#pragma push
+#pragma global_optimizer off
 bool un_80300B58(int arg0)
 {
     if (arg0 == 1) {
         lbAudioAx_80024030(1);
-        un_803FA258.x4[1] = 0x3B;
-        un_803FA258.x4[2] = 0x2;
-        un_803FA258.x24[1] = 3;
-        un_803FA258.x24[2] = 3;
+        {
+            struct un_803FA258_t* data = &un_803FA258;
+            data->x4[1] = 0x3B;
+            data->x4[3] = 0x2;
+            data->x24[1] = 3;
+            data->x24[2] = 3;
+            data->x24[3] = 3;
+        }
         gm_SetPendingScene(4);
         gm_801A4B60();
     }
     return false;
 }
+#pragma pop
 
 bool un_80300BBC(bool update_scene)
 {

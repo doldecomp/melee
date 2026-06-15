@@ -771,7 +771,6 @@ void psDispParticles(s32 arg0, u32 arg1)
     sp7A5 = 0;
     sp7A4 = 0xFF;
     sp7A0 = 1;
-    prev_kind = 0;
     if (sp798 == 0) {
         if (HSD_PSDisp_804D6380[0] < 0xFFU) {
             HSD_PSDisp_804D6380[0] += 1;
@@ -802,10 +801,6 @@ void psDispParticles(s32 arg0, u32 arg1)
     sp828 = 6.0;
     sp820 = 42.5;
     sp818 = 0.000001;
-    sp7A8 = (u32) -1;
-    sp7AC = (u32) -1;
-    sp79C = NULL;
-    sp7B0 = NULL;
     sp7B4 = 0;
     cache = (f32*) &HSD_PSDisp_804D0FC0;
     do {

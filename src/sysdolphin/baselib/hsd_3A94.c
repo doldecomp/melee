@@ -221,7 +221,6 @@ void hsd_803A949C(s32 chan, s32 arg1)
         }
 
         icon_size = hsd_803A949C_IconSize(state);
-        hdr_plus_icon = icon_size + 0x40;
 
         if (CMD_S32(0x18) == 0) {
             if (memcmp(state->x0, state->x370, 0x40) != 0) {
@@ -234,6 +233,7 @@ void hsd_803A949C(s32 chan, s32 arg1)
                 hsd_804D7988 = 2;
                 break;
             }
+            hdr_plus_icon = icon_size + 0x40;
             if (state->x24 > state->x8) {
                 if (memcmp(state->x0 + hdr_plus_icon, (void*) CMD_S32(0x20),
                            state->x8 - hdr_plus_icon) != 0)
@@ -294,7 +294,6 @@ void hsd_803A949C(s32 chan, s32 arg1)
         }
 
         icon_size = hsd_803A949C_IconSize(state);
-        hdr_plus_icon = icon_size + 0x40;
 
         if (CMD_S32(0x18) == 0) {
             if (CMD_PTR(0x1c) != NULL) {
@@ -303,6 +302,7 @@ void hsd_803A949C(s32 chan, s32 arg1)
             if (icon_size > 0 && CMD_PTR(0x20) != NULL) {
                 memcpy((void*) CMD_S32(0x20), state->x0 + 0x40, icon_size);
             }
+            hdr_plus_icon = icon_size + 0x40;
             if (state->x24 > state->x8) {
                 if (CMD_PTR(0x24) != NULL) {
                     memcpy((void*) CMD_S32(0x24), state->x0 + hdr_plus_icon,
@@ -353,7 +353,7 @@ void hsd_803A949C(s32 chan, s32 arg1)
             hsd_804D7988 = arg1;
             break;
         }
-        if (CMD_S32(0x20) != -1) {
+        if (CMD_S32(0x20) != 0xFFFF) {
             state->x170[CMD_S32(0x1c)] = CMD_S32(0x20);
             state->x270[CMD_S32(0x1c)] = CMD_S32(0x24);
         } else {
@@ -374,7 +374,7 @@ void hsd_803A949C(s32 chan, s32 arg1)
             hsd_804D7988 = arg1;
             break;
         }
-        if (CMD_S32(0x20) != -1) {
+        if (CMD_S32(0x20) != 0xFFFF) {
             state->x170[CMD_S32(0x1c)] = CMD_S32(0x20);
             state->x270[CMD_S32(0x1c)] = CMD_S32(0x24);
         } else {
@@ -393,12 +393,15 @@ void hsd_803A949C(s32 chan, s32 arg1)
             hsd_804D7988 = arg1;
             break;
         }
-        for (i = 0; i < 10; i++) {
-            if (state->file_info.fileNo != -1) {
+        result = state->file_info.fileNo;
+        i = 0;
+        do {
+            if (result != -1) {
                 break;
             }
-        }
-        state->x20 = state->file_info.fileNo;
+            i++;
+        } while (i < 10);
+        state->x20 = result;
         if (state->x20 < 0) {
             hsd_804D7988 = state->x20;
         }
@@ -438,12 +441,12 @@ void hsd_803A949C(s32 chan, s32 arg1)
         if (slot == 0) {
             offset = (state->x24 + 0x30) % state->x8;
             if (hsd_803B31CC(state->x0 + offset, state->x8 - offset) < 0) {
-                state->x170[slot] = -0x7FFF;
-                state->x270[slot] = 0;
+                state->x170[0] = -0x7FFF;
+                state->x270[0] = 0;
                 break;
             }
             state->x170[slot] =
-                (state->x0[offset + 0x10] << 8) + state->x0[offset + 0x11];
+                state->x0[offset + 0x11] + (state->x0[offset + 0x10] << 8);
             if (state->x170[slot] != 0) {
                 state->x170[slot] = -0x7FFF;
                 state->x270[slot] = 0;
@@ -457,7 +460,7 @@ void hsd_803A949C(s32 chan, s32 arg1)
                 state->x270[slot] = 0;
                 break;
             }
-            state->x170[slot] = (state->x0[0x10] << 8) + state->x0[0x11];
+            state->x170[slot] = state->x0[0x11] + (state->x0[0x10] << 8);
             if (state->x170[slot] < 0 || state->x170[slot] > state->x460) {
                 state->x170[slot] = -0x7FFF;
                 state->x270[slot] = 0;

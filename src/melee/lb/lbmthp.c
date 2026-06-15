@@ -223,7 +223,7 @@ void fn_8001ECF4(THPDecComp* data, void* buf)
                 OSReport(lbl_803BAF60, data->first_frame);
                 OSReport(lbl_803BAF7C, data->frame_offsets);
                 OSReport(lbl_803BAF98, data->first_frame_size);
-                __assert(file, 0x10A, str_0);
+                LBMTHP_ASSERT(0x10A, 0, str_0);
             }
             lbFile_800161C4(data->file_entrynum, data->curr_file_offset,
                             (u32) var_r29, (var_r24 + 0x1F) & 0xFFFFFFE0, 0x21,
@@ -435,7 +435,10 @@ void lbMthp_8001F410(const char* filename, void* rate_table, int buf,
     struct lbl_804333E0_t* streamPlayer;
     s32* power;
 
-    streamPlayer = &Movieplayer;
+    {
+        struct lbl_804333E0_t* moviePlayer = &Movieplayer;
+        streamPlayer = moviePlayer;
+    }
     power = &streamPlayer->power;
     LBMTHP_ASSERT(0x341, !streamPlayer->power, lbl_803BAFB8);
 

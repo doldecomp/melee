@@ -256,20 +256,24 @@ static void inlineA1(Fighter_GObj* gobj)
                                           fp->self_vel.y + fp->x8c_kb_vel.y));
 }
 
+static inline int* getDamageMotionIds(enum_t kb_level)
+{
+    return ((int (*)[4][3]) ftCo_803C5520)[0][kb_level];
+}
+
 void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
 {
-    u8 _[0x38] = { 0 };
     float temp_f30;
     Vec3 pos;
     float sp40;
-    Vec3* normal;
+    u8 _[0x2C] = { 0 };
     float temp_f1_2;
     float temp_f1_3;
     float temp_f2;
     float var_f31;
     float kb_angle;
     s32 var_r0;
-    bool var_r30;
+    s32 var_r30;
     Fighter* fp = gobj->user_data;
     enum_t var_r28;
     FtMotionId msid;
@@ -286,6 +290,7 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
         fp->mv.co.damage.x0 = 1;
     }
     {
+        Vec3* normal;
         if (temp_f30 < p_ftCommonData->x158) {
             var_r30 = 0;
             goto block_9;
@@ -329,11 +334,12 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
         if (fp->ground_or_air != GA_Air) {
             goto block_21;
         }
-        msid = ftCo_803C5520[var_r28 * 12][fp->dmg.x184c_damaged_hurtbox + 12];
+        msid = getDamageMotionIds(var_r28)
+            [fp->dmg.x184c_damaged_hurtbox + 12];
         if (!ftCo_Damage_CheckAirMotion(fp)) {
             goto block_20;
         }
-        var_f31 *= p_ftCommonData->x190;
+        var_f31 = var_f31 * p_ftCommonData->x190;
         x = var_f31 * cosf(kb_angle);
         y = var_f31 * sinf(kb_angle);
     block_20:
@@ -349,8 +355,8 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
         if (!(temp_f1_2 < M_PI_2)) {
             goto block_23;
         }
-        msid = (int) *(ftCo_803C5520 +
-                       ((var_r28 * 0xC) + (M2C_FIELD(fp, s32*, 0x184C) * 4)));
+        msid = ((int (*)[4][3]) ftCo_803C5520)[0][var_r28]
+                                                    [fp->dmg.x184c_damaged_hurtbox];
         ftCommon_8007D5D4(fp);
         ftCo_Damage_CalcVel(fp, pos.x, pos.y);
         fp->xF0_ground_kb_vel = 0;
@@ -360,8 +366,8 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
             goto block_27;
         }
         ftCommon_8007D5D4(fp);
-        msid = (int) *(ftCo_803C5520 + ((var_r28 * 0xC) +
-                                        (fp->dmg.x184c_damaged_hurtbox * 4)));
+        msid = ((int (*)[4][3]) ftCo_803C5520)[0][var_r28]
+                                                    [fp->dmg.x184c_damaged_hurtbox];
         if (!(temp_f1_2 >
               (float) (M_PI_2 +
                        (double) M2C_FIELD(p_ftCommonData, float*, 0x1E8))))
@@ -380,8 +386,8 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
         fp->xF0_ground_kb_vel = 0;
         goto block_28;
     block_27:
-        msid = (int) *(ftCo_803C5520 +
-                       ((var_r28 * 0xC) + (M2C_FIELD(fp, s32*, 0x184C) * 4)));
+        msid = ((int (*)[4][3]) ftCo_803C5520)[0][var_r28]
+                                                    [fp->dmg.x184c_damaged_hurtbox];
         fp->xF0_ground_kb_vel = pos.x;
         temp_f2 = fp->xF0_ground_kb_vel;
         ftCo_Damage_CalcVel(fp, normal->y * temp_f2, -normal->x * temp_f2);
@@ -732,24 +738,48 @@ static bool inlineB0(Fighter_GObj* gobj)
     return false;
 }
 
-/// @todo Inline depth.
 #pragma push
-#pragma inline_depth(1)
+#pragma inline_depth(0)
 void ftCo_8008EB58(Fighter_GObj* gobj)
 {
-    PAD_STACK(8);
-    if (inlineB0(gobj)) {
+    Fighter* fp = gobj->user_data;
+    float kb_applied = fp->dmg.kb_applied;
+    bool should_update;
+    enum_t kb_level;
+    float scaled_kb;
+    u8 _[0x18] = { 0 };
+
+    if (kb_applied == 0 ||
+        (fp->allow_sdi && fp->x221A_b3 &&
+         kb_applied < fp->dmg.x18A8 + p_ftCommonData->x140))
+    {
+        should_update = true;
+    } else {
+        should_update = false;
+    }
+
+    if (should_update) {
         ftCo_800C8D00(gobj);
-        inlineF0(gobj);
-        {
-            Fighter* fp = gobj->user_data;
-            if (ftCo_8008DA4C(gobj, fp->dmg.x1860_element,
-                              ftCo_8008D8E8(fp->dmg.kb_applied)))
-            {
-                ftCo_800C0408(gobj);
-            }
-            ftCommon_800804FC(fp);
+        if (fp->motion_id == 0xe0 || fp->motion_id == 0xe1) {
+            ftCo_800DC284(gobj);
         }
+        if (fp->motion_id == 0xe3 || fp->motion_id == 0xe4) {
+            ftCo_800DC3A4(gobj);
+        }
+        scaled_kb = fp->dmg.kb_applied * p_ftCommonData->x154;
+        if (scaled_kb < p_ftCommonData->x158) {
+            kb_level = 0;
+        } else if (scaled_kb < p_ftCommonData->x15C) {
+            kb_level = 1;
+        } else if (scaled_kb < p_ftCommonData->x160) {
+            kb_level = 2;
+        } else {
+            kb_level = 3;
+        }
+        if (ftCo_8008DA4C(gobj, fp->dmg.x1860_element, kb_level)) {
+            ftCo_800C0408(gobj);
+        }
+        ftCommon_800804FC(fp);
     }
 }
 #pragma pop

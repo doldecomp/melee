@@ -44,8 +44,8 @@ extern f32 grBb_804DB304;
 extern f32 grBb_804DB308;
 extern f32 grBb_804DB30C;
 extern f32 grBb_804DB310;
-extern f32 grBb_804DB350;
-extern f32 grBb_804DB38C;
+extern f32 grBb_804DB3A8;
+extern f32 grBb_804DB3AC;
 extern f32 grBb_804DB3F0;
 extern char grBb_804D46B8;
 
@@ -413,32 +413,47 @@ void grBigBlue_801E6364(Ground_GObj* gobj)
     f32 rot_y;
 
     Ground_801C2ED0(jobj, gp->map_id);
-    PAD_STACK(8);
+    PAD_STACK(4);
 
     scale.x = scale.y = scale.z = 1.0F;
     HSD_JObjSetScale(jobj, &scale);
 
     gp->gv.bigblue.xC8 = HSD_MemAlloc(120);
-    HSD_ASSERT(774, gp->gv.bigblue.xC8 != NULL);
+    if (gp->gv.bigblue.xC8 == NULL) {
+        __assert((char*) grBb_803E2938 + 0x440, 774,
+                 (char*) grBb_803E2938 + 0x500);
+    }
 
     gp->gv.bigblue.xCC = HSD_MemAlloc(30);
-    HSD_ASSERT(776, gp->gv.bigblue.xCC != NULL);
+    if (gp->gv.bigblue.xCC == NULL) {
+        __assert((char*) grBb_803E2938 + 0x440, 776,
+                 (char*) grBb_803E2938 + 0x518);
+    }
 
-    for (i = 0; i < 30; i++) {
-        ((HSD_JObj**) gp->gv.bigblue.xC8)[i] =
-            Ground_801C3FA4(gobj, grBb_803E2D78.x48[i]);
+    {
+        s16* ids = (s16*) ((u8*) grBb_803E2938 + 0x488);
+
+        for (i = 0; i < 30; i++) {
+            ((HSD_JObj**) gp->gv.bigblue.xC8)[i] =
+                Ground_801C3FA4(gobj, ids[i]);
+        }
     }
 
     car_gobj = grBigBlue_801E59F8(4);
-    HSD_ASSERT(783, car_gobj != NULL);
-    grFZeroCar_801CAFBC(car_gobj, grBb_803E2D78.x48, 30, 1);
+    if (car_gobj == NULL) {
+        __assert((char*) grBb_803E2938 + 0x440, 783,
+                 (char*) grBb_803E2938 + 0x52C);
+    }
+    grFZeroCar_801CAFBC(car_gobj, (s16*) ((u8*) grBb_803E2938 + 0x44C), 30,
+                        1);
 
+    i = 0;
     cur = HSD_JObjGetChild(car_gobj->hsd_obj);
     rot_y = grBb_804DB304;
     scale_base = grBb_804DB2F0;
     trans_x = grBb_804DB308;
 
-    for (i = 0; i < 30; i++) {
+    for (; i < 30; i++) {
         child = HSD_JObjGetChild(cur);
         next = HSD_JObjGetNext(cur);
 
@@ -472,19 +487,16 @@ void grBigBlue_801E6364(Ground_GObj* gobj)
     {
         s32 max_val = grBb_804D69C8->x10;
         s32 min_val = grBb_804D69C8->x14;
-        s32 result;
 
         if (max_val > min_val) {
             s32 range = max_val - min_val;
-            result = min_val + (range != 0 ? HSD_Randi(range) : 0);
+            max_val = min_val + (range != 0 ? HSD_Randi(range) : 0);
         } else if (max_val < min_val) {
             s32 range = min_val - max_val;
-            result = max_val + (range != 0 ? HSD_Randi(range) : 0);
-        } else {
-            result = max_val;
+            max_val = max_val + (range != 0 ? HSD_Randi(range) : 0);
         }
 
-        *(s16*) ((u8*) gp + 0xD0) = (s16) result;
+        *(s16*) ((u8*) gp + 0xD0) = (s16) max_val;
     }
 }
 
@@ -1279,7 +1291,7 @@ void* grBigBlue_801E89DC(int arg)
     return *(void**) (gp + 0xC8);
 }
 
-/// @todo Currently 79.9% match - platform/store use lwzx/stwx instead of
+/// @todo Currently 82.96% match - platform/store use lwzx/stwx instead of
 /// add+lwz/stw (addressing mode difference), candPtr init missing slwi+add
 void grBigBlue_801E8A1C(int idx)
 {
@@ -1317,9 +1329,7 @@ void grBigBlue_801E8A1C(int idx)
 
     if (validCount != 0) {
         spawn.x14 = valid[HSD_Randi(validCount)];
-        HSD_ASSERT(979, platform != NULL);
-
-        spawn.x8_vec = platform->translate;
+        HSD_JObjGetTranslation2(platform, &spawn.x8_vec);
 
         if (spawn.x14 == 4) {
             spawn.x8_vec.y += 8.0f;
@@ -1337,7 +1347,7 @@ f32 grBigBlue_801E8B84(f32 right, f32 left, f32 bottom, f32 top)
 {
     u8* gp = (u8*) GET_GROUND(Ground_801C2BA4(33));
     int i = 0;
-    f32 result = 0.0F;
+    f32 result = grBb_804DB310;
 
     for (i = 0; i < 4; i++) {
         if ((unsigned) (gp[0xD4] >> 2 & 0x3F) != 1U) {
@@ -1394,26 +1404,14 @@ void grBigBlue_801E8D64(Ground_GObj* gobj)
         y_pos = grBb_804DB2F4;
     }
 
-    if (jobj == NULL) {
-        __assert("jobj.h", 932, "jobj");
-    }
-    jobj->translate.x = grBb_804DB2F4;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        HSD_JObjSetMtxDirty(jobj);
-    }
+    HSD_JObjSetTranslateX(jobj, 0.0F);
 
     y_pos += grBb_804D69C8->xCC;
     HSD_JObjSetTranslateY(jobj, y_pos);
 
-    if (jobj == NULL) {
-        __assert("jobj.h", 962, "jobj");
-    }
-    jobj->translate.z = grBb_804DB2F4;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        HSD_JObjSetMtxDirty(jobj);
-    }
+    HSD_JObjSetTranslateZ(jobj, 0.0F);
 
-    *(f32*) ((u8*) gp + 0xD8) = grBb_804DB2F4;
+    *(f32*) ((u8*) gp + 0xD8) = 0.0F;
     *(s32*) ((u8*) gp + 0xC8) = (s32) (grBb_804D69C8->xD8);
     *(u8*) ((u8*) gp + 0xC4) = 2;
 
@@ -2177,10 +2175,8 @@ s32 grBigBlue_801EACE8(HSD_JObj* exclude, Vec3* point, f32* out_y,
     if (exclude != jobj && (int) gp->gv.bigblue.x0 == 2) {
         HSD_JObjGetTranslation2(jobj, &route_pos);
 
-        dist = grBb_804DB38C * Ground_801C0498();
-        left_x = route_pos.x - dist * grBb_804DB350;
-        dist = grBb_804DB38C * Ground_801C0498();
-        right_x = dist * grBb_804DB350 + route_pos.x;
+        left_x = route_pos.x - 68.0F * Ground_801C0498() * 0.5F;
+        right_x = route_pos.x + 68.0F * Ground_801C0498() * 0.5F;
 
         if ((right_x > left_bound && right_x < right_bound) ||
             (left_x < right_bound && left_x > left_bound))
@@ -2214,6 +2210,34 @@ s32 grBigBlue_801EACE8(HSD_JObj* exclude, Vec3* point, f32* out_y,
 /// generation and stack frame fix (120 vs 112 bytes)
 void grBigBlue_801EB004(Ground_GObj* gobj)
 {
+    typedef struct grBb_InitC4HalfBits {
+        u16 pad0 : 3;
+        u16 lane : 7;
+        u16 pad1 : 6;
+    } grBb_InitC4HalfBits;
+    typedef struct grBb_InitC4WordBits {
+        u32 pad0 : 10;
+        u32 lane : 7;
+        u32 pad1 : 15;
+    } grBb_InitC4WordBits;
+    typedef struct grBb_InitByteLo7 {
+        u8 pad0 : 1;
+        u8 lo7 : 7;
+    } grBb_InitByteLo7;
+    typedef struct grBb_InitByteBits {
+        u8 b0 : 1;
+        u8 b1 : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    } grBb_InitByteBits;
+    typedef struct grBb_InitNibbleBits {
+        u8 hi : 4;
+        u8 lo : 4;
+    } grBb_InitNibbleBits;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Ground* gp = (Ground*) gobj->user_data;
     Vec3 pos;
@@ -2222,8 +2246,6 @@ void grBigBlue_801EB004(Ground_GObj* gobj)
     Vec3 start_pos;
     Vec3 end_pos;
     HSD_JObj* child;
-    HSD_JObj* start_jobj;
-    HSD_JObj* end_jobj;
     u32 i;
     grBb_TrackEntry* entry;
 
@@ -2236,6 +2258,8 @@ void grBigBlue_801EB004(Ground_GObj* gobj)
 
     entry = grBb_TrackEntries;
     for (i = 0; i < 12; i++, entry++) {
+        HSD_JObj* start_jobj;
+        HSD_JObj* end_jobj;
         child = Ground_801C3FA4(gobj, entry->jobj_index);
 
         /* goto required for match: skips to assert block on NULL */
@@ -2268,33 +2292,32 @@ void grBigBlue_801EB004(Ground_GObj* gobj)
         HSD_ASSERT(2330, end_jobj);
     }
 
-    *(u16*) (gp + 0xC4) = (*(u16*) (gp + 0xC4) & ~0x1FC0) | (0x7F << 6);
+    ((grBb_InitC4HalfBits*) &gp->gv.bigblue.x0_w)->lane = 0xFFFF;
 
-    *(u32*) (gp + 0xC4) =
-        (*(u32*) (gp + 0xC4) & ~0x003F8000) | ((u32) 4 << 15);
+    ((grBb_InitC4WordBits*) &gp->gv.bigblue.x0_w)->lane = 4;
 
-    *(s8*) (gp + 0xC6) = *(s8*) (gp + 0xC6) & ~0x7F;
+    ((grBb_InitByteLo7*) ((u8*) gp + 0xC6))->lo7 = 0;
 
-    *(f32*) (gp + 0xC8) = -1000.0F * Ground_801C0498();
-    *(f32*) (gp + 0xCC) = 10.0F * Ground_801C0498();
+    *(f32*) ((u8*) gp + 0xC8) = -1000.0F * Ground_801C0498();
+    *(f32*) ((u8*) gp + 0xCC) = 10.0F * Ground_801C0498();
 
     {
         f32 fval = 0.0F * Ground_801C0498();
 
-        *(f32*) (gp + 0xD0) = fval;
-        *(f32*) (gp + 0xD4) = fval;
-        *(f32*) (gp + 0xD8) = fval;
-        *(f32*) (gp + 0xDC) = fval;
-        *(s16*) (gp + 0xF0) = 0;
-        *(f32*) (gp + 0xF8) = fval;
+        *(f32*) ((u8*) gp + 0xD0) = fval;
+        *(f32*) ((u8*) gp + 0xD4) = fval;
+        *(f32*) ((u8*) gp + 0xD8) = fval;
+        *(f32*) ((u8*) gp + 0xDC) = fval;
+        *(s16*) ((u8*) gp + 0xF0) = 0;
+        *(f32*) ((u8*) gp + 0xF8) = fval;
 
-        *(s8*) (gp + 0xC7) = *(s8*) (gp + 0xC7) & 0x0F;
-        gp->gv.bigblue.x0 = gp->gv.bigblue.x0 & ~0x02;
-        gp->gv.bigblue.x0 = gp->gv.bigblue.x0 & ~0x04;
+        ((grBb_InitNibbleBits*) ((u8*) gp + 0xC7))->hi = 0;
+        ((grBb_InitByteBits*) &gp->gv.bigblue.x0)->b1 = 0;
+        ((grBb_InitByteBits*) &gp->gv.bigblue.x0)->b2 = 0;
     }
 
     {
-        u32 idx = (*(u32*) (gp + 0xC4) >> 15) & 0x7F;
+        u32 idx = (*(u32*) ((u8*) gp + 0xC4) >> 15) & 0x7F;
         HSD_JObj* active =
             Ground_801C3FA4(gobj, grBb_TrackEntries[idx].jobj_index);
 
@@ -2308,14 +2331,14 @@ void grBigBlue_801EB004(Ground_GObj* gobj)
     }
 
     {
-        u32 idx2 = *(s8*) (gp + 0xC6) & 0x7F;
+        u32 idx2 = *(s8*) ((u8*) gp + 0xC6) & 0x7F;
         HSD_JObj* next =
             Ground_801C3FA4(gobj, grBb_TrackEntries[idx2].jobj_index);
         u32 active_idx;
 
         HSD_JObjClearFlagsAll(next, JOBJ_HIDDEN);
 
-        active_idx = (*(u32*) (gp + 0xC4) >> 15) & 0x7F;
+        active_idx = (*(u32*) ((u8*) gp + 0xC4) >> 15) & 0x7F;
         pos.x += grBb_TrackEntries[active_idx].delta.x;
         pos.y += grBb_TrackEntries[active_idx].delta.y;
         pos.z += grBb_TrackEntries[active_idx].delta.z;
@@ -2328,7 +2351,25 @@ void grBigBlue_801EB004(Ground_GObj* gobj)
 /// bitfield rlwimi fixes.
 void grBigBlue_801EB4AC(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
+    typedef struct grBb_B4C4HalfBits {
+        u16 pad0 : 3;
+        u16 lane : 7;
+        u16 pad1 : 6;
+    } grBb_B4C4HalfBits;
+    typedef struct grBb_B4C4WordBits {
+        u32 pad0 : 10;
+        u32 lane : 7;
+        u32 pad1 : 15;
+    } grBb_B4C4WordBits;
+    typedef struct grBb_B4C6Lo7Bits {
+        u8 pad0 : 1;
+        u8 lane : 7;
+    } grBb_B4C6Lo7Bits;
+    typedef struct grBb_B4C7Nibbles {
+        u8 hi : 4;
+        u8 lo : 4;
+    } grBb_B4C7Nibbles;
+    u8* gp = (u8*) GET_GROUND(gobj);
     s32 count = 0;
     HSD_JObj* jobj;
     grBb_TrackEntry* entry;
@@ -2345,20 +2386,11 @@ void grBigBlue_801EB4AC(Ground_GObj* gobj)
         JOBJ_HIDDEN);
 
     /* Copy current lane to previous lane: rlwimi hw, word, 23, 19, 25 */
-    {
-        u32 word = *(u32*) (gp + 0xC4);
-        u16 hw = *(u16*) (gp + 0xC4);
-        hw = (hw & ~0x1FC0) | ((word >> 9) & 0x1FC0);
-        *(u16*) (gp + 0xC4) = hw;
-    }
+    ((grBb_B4C4HalfBits*) (gp + 0xC4))->lane =
+        ((grBb_B4C4WordBits*) (gp + 0xC4))->lane;
 
     /* Update current lane from next lane: rlwimi word, byte, 15, 10, 16 */
-    {
-        u8 next = *(u8*) (gp + 0xC6);
-        u32 word = *(u32*) (gp + 0xC4);
-        word = (word & ~0x003F8000) | (((u32) next << 15) & 0x003F8000);
-        *(u32*) (gp + 0xC4) = word;
-    }
+    ((grBb_B4C4WordBits*) (gp + 0xC4))->lane = *(u8*) (gp + 0xC6);
 
     /* Get new lane's jobj and position */
     jobj = Ground_801C3FA4(
@@ -2378,46 +2410,36 @@ void grBigBlue_801EB4AC(Ground_GObj* gobj)
         s16 direction = *(s16*) (gp + 0xF0);
 
         if (direction == 1) {
-            f32 scale = Ground_801C0498();
-            f32 speed = grBb_804D69C8->x8;
-            f32 vel = *(f32*) (gp + 0xCC);
-
-            if (vel < grBb_804D69C8->x44 * speed * scale) {
+            if (*(f32*) (gp + 0xCC) <
+                (grBb_804D69C8->x8 * Ground_801C0498()) * grBb_804DB3A8)
+            {
                 *(s16*) (gp + 0xF0) = 0;
             }
         } else if (direction == -1) {
-            f32 scale = Ground_801C0498();
-            f32 speed = grBb_804D69C8->x4;
-            f32 vel = *(f32*) (gp + 0xCC);
-
-            if (vel > -(speed * scale) * grBb_804D69C8->x44) {
+            if (*(f32*) (gp + 0xCC) >
+                grBb_804DB3A8 * -(grBb_804D69C8->x4 * Ground_801C0498()))
+            {
                 *(s16*) (gp + 0xF0) = 0;
             }
         } else {
-            f32 scale = Ground_801C0498();
-            f32 vel = *(f32*) (gp + 0xCC);
-            f32 neg_speed = -(grBb_804D69C8->x4 * scale);
-
-            if (vel < neg_speed) {
+            if (*(f32*) (gp + 0xCC) <
+                -(grBb_804D69C8->x4 * Ground_801C0498()))
+            {
                 *(s16*) (gp + 0xF0) = -1;
-            } else {
-                f32 scale2 = Ground_801C0498();
-                f32 pos_speed = grBb_804D69C8->x8 * scale2;
-
-                if (vel > pos_speed) {
-                    *(s16*) (gp + 0xF0) = 1;
-                }
+            } else if (*(f32*) (gp + 0xCC) >
+                       grBb_804D69C8->x8 * Ground_801C0498())
+            {
+                *(s16*) (gp + 0xF0) = 1;
             }
         }
     }
 
     /* Random lane selection loop */
-    vel_threshold = 0.0F;
+    vel_threshold = grBb_804DB3AC;
     delta_threshold = 0.0F;
 
     for (;;) {
-        HSD_ASSERT(2414, count <= 1000);
-        count++;
+        HSD_ASSERT(2414, count++ <= 1000);
 
         random_lane = HSD_Randi(12);
         entry = &grBb_TrackEntries[random_lane];
@@ -2435,44 +2457,37 @@ void grBigBlue_801EB4AC(Ground_GObj* gobj)
         }
 
         /* Direction flag check */
-        if (gp->gv.bigblue.x0 & 0x80) {
-            if ((u32) random_lane <= 1) {
-                break;
-            }
-            if (random_lane == 4) {
-                break;
-            }
-            continue;
-        }
-
-        /* Direction compatibility */
-        {
-            s16 dir = *(s16*) (gp + 0xF0);
-
-            if (dir == 1) {
-                if (entry->delta.y < delta_threshold) {
+        if ((gp[0xC4] >> 7) & 1) {
+            if ((u32) random_lane > 1) {
+                if (random_lane != 4) {
                     continue;
                 }
             }
-            if (dir == -1) {
-                if (entry->delta.y > delta_threshold) {
-                    continue;
+        } else {
+            /* Direction compatibility */
+            {
+                s16 dir = *(s16*) (gp + 0xF0);
+
+                if (dir == 1) {
+                    if (entry->delta.y < delta_threshold) {
+                        continue;
+                    }
+                }
+                if (dir == -1) {
+                    if (entry->delta.y > delta_threshold) {
+                        continue;
+                    }
                 }
             }
-        }
 
-        /* Reachability check */
-        {
-            f32 scale = Ground_801C0498();
-            f32 vel = *(f32*) (gp + 0xCC);
-            f32 speed = grBb_804D69C8->x8;
-            f32 target = speed * scale + vel;
-            f32 pos =
-                sp_pos.y +
-                grBb_TrackEntries[(*(u32*) (gp + 0xC4) >> 15) & 0x7F].delta.y +
-                entry->delta.y;
-
-            if (pos < target) {
+            /* Reachability check */
+            if (sp_pos.y +
+                    grBb_TrackEntries[(*(u32*) (gp + 0xC4) >> 15) & 0x7F]
+                        .delta.y +
+                    entry->delta.y <
+                grBb_804D69C8->x8 * Ground_801C0498() +
+                    *(f32*) (gp + 0xCC))
+            {
                 continue;
             }
         }
@@ -2480,7 +2495,7 @@ void grBigBlue_801EB4AC(Ground_GObj* gobj)
     }
 
     /* Store new lane index into gp+0xC6 */
-    *(u8*) (gp + 0xC6) = (*(u8*) (gp + 0xC6) & ~0x7F) | (random_lane & 0x7F);
+    ((grBb_B4C6Lo7Bits*) (gp + 0xC6))->lane = random_lane;
 
     HSD_ASSERT(979, jobj);
 
@@ -2510,11 +2525,7 @@ void grBigBlue_801EB4AC(Ground_GObj* gobj)
         mpLib_80057BC0(47);
         mpLib_80057BC0(48);
         mpLib_80057BC0(49);
-        {
-            u8 byte = *(s8*) (gp + 0xC7);
-            byte = (byte & ~0xF0) | (0 & 0xF0);
-            *(s8*) (gp + 0xC7) = byte;
-        }
+        ((grBb_B4C7Nibbles*) (gp + 0xC7))->hi = 0;
     }
 
     /* Switch on random_lane for collision zone activation */
@@ -2580,21 +2591,38 @@ void grBigBlue_801EB4AC(Ground_GObj* gobj)
     mpLib_80058560();
 }
 
+typedef struct grBb_ByteBits {
+    u8 b0 : 1;
+    u8 b1 : 1;
+    u8 b2 : 1;
+    u8 b3 : 1;
+    u8 b4 : 1;
+    u8 b5 : 1;
+    u8 b6 : 1;
+    u8 b7 : 1;
+} grBb_ByteBits;
+
+typedef struct grBb_NibbleBits {
+    u8 hi : 4;
+    u8 lo : 4;
+} grBb_NibbleBits;
+
 void grBigBlue_801EBAF8(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
+    u8* gp = (u8*) GET_GROUND(gobj);
     HSD_JObj* jobj = gobj->hsd_obj;
+    u8 pad[8];
     Vec3 bone_pos;
     Vec3 vel;
+    Vec3 prev;
     Vec3 center;
     Vec3 normal_out;
     Vec3 target;
-    Vec3 prev;
     f32 target_y;
     f32 rot_z;
     f32 angular_vel;
     grBb_TrackEntry* entry;
-    PAD_STACK(16);
+    PAD_STACK(8);
 
     center.x = 0.0F;
     center.z = 0.0F;
@@ -2623,25 +2651,23 @@ void grBigBlue_801EBAF8(Ground_GObj* gobj)
         }
         if (angle < 0.17453292F) {
             if (bone_pos.x < 0.0F) {
-                u8 byte = gp->gv.bigblue.x0;
-                if ((byte >> 5) & 1) {
-                    gp->gv.bigblue.x0 = byte & ~0x20;
+                if (((grBb_ByteBits*) (gp + 0xC4))->b2) {
+                    ((grBb_ByteBits*) (gp + 0xC4))->b2 = 0;
                 }
             } else {
-                u8 byte = gp->gv.bigblue.x0;
-                if (!((byte >> 5) & 1) &&
+                if (!((grBb_ByteBits*) (gp + 0xC4))->b2 &&
                     (((*(u32*) (gp + 0xC4)) >> 15) & 0x7F) == 0xB)
                 {
-                    gp->gv.bigblue.x0 = byte | 0x20;
+                    ((grBb_ByteBits*) (gp + 0xC4))->b2 = 1;
                 }
             }
         }
     }
 
     if ((((*(u32*) (gp + 0xC4)) >> 15) & 0x7F) == 0xB) {
-        u32 state = (*(s8*) (gp + 0xC7) >> 4) & 0xF;
+        u32 state = ((grBb_NibbleBits*) (gp + 0xC7))->hi;
         if (state == 0) {
-            *(s8*) (gp + 0xC7) = (*(s8*) (gp + 0xC7) & ~0xF0) | 0x10;
+            ((grBb_NibbleBits*) (gp + 0xC7))->hi = 1;
         } else if (state == 1) {
             mpJointListAdd(0x29);
             mpJointListAdd(0x2A);
@@ -2652,13 +2678,13 @@ void grBigBlue_801EBAF8(Ground_GObj* gobj)
             mpLib_80057BC0(0x2F);
             mpLib_80057BC0(0x30);
             mpLib_80057BC0(0x30);
-            *(s8*) (gp + 0xC7) = (*(s8*) (gp + 0xC7) & ~0xF0) | 0x20;
+            ((grBb_NibbleBits*) (gp + 0xC7))->hi = 2;
         } else if (state == 2) {
             if (*(f32*) (gp + 0xF8) < -0.5235988F) {
                 mpJointListAdd(0x2C);
                 mpJointListAdd(0x2D);
                 mpJointListAdd(0x2E);
-                *(s8*) (gp + 0xC7) = (*(s8*) (gp + 0xC7) & ~0xF0) | 0x30;
+                ((grBb_NibbleBits*) (gp + 0xC7))->hi = 3;
             }
         } else if (state == 3) {
             if (*(f32*) (gp + 0xF8) < -2.7925267F) {
@@ -2668,12 +2694,12 @@ void grBigBlue_801EBAF8(Ground_GObj* gobj)
                 mpJointListAdd(0x2F);
                 mpJointListAdd(0x30);
                 mpJointListAdd(0x31);
-                *(s8*) (gp + 0xC7) = (*(s8*) (gp + 0xC7) & ~0xF0) | 0x40;
+                ((grBb_NibbleBits*) (gp + 0xC7))->hi = 4;
             }
         }
     }
 
-    if (!((gp->gv.bigblue.x0 >> 6) & 1)) {
+    if (!((grBb_ByteBits*) (gp + 0xC4))->b1) {
         target_y = grBigBlue_801EC58C(&center, &normal_out,
                                       20.0F * Ground_801C0498());
     } else {
@@ -2682,7 +2708,7 @@ void grBigBlue_801EBAF8(Ground_GObj* gobj)
     }
 
     if (target_y != grBb_804DB310 &&
-        (!((gp->gv.bigblue.x0 >> 6) & 1) || target_y > center.y))
+        (!((grBb_ByteBits*) (gp + 0xC4))->b1 || target_y > center.y))
     {
         f32 max_steer = grBb_804D69C8->x70;
         if (target_y > max_steer) {
@@ -2696,23 +2722,23 @@ void grBigBlue_801EBAF8(Ground_GObj* gobj)
         target.z = center.z;
 
         if ((((*(u32*) (gp + 0xC4)) >> 15) & 0x7F) == 0xB &&
-            ((gp->gv.bigblue.x0 >> 5) & 1))
+            ((grBb_ByteBits*) (gp + 0xC4))->b2)
         {
             rot_z = -atan2f(-normal_out.x, normal_out.y);
         } else {
             rot_z = -*(f32*) (gp + 0xF8);
         }
 
-        gp->gv.bigblue.x0 &= ~0x40;
+        ((grBb_ByteBits*) (gp + 0xC4))->b1 = 0;
     } else {
-        if (!((gp->gv.bigblue.x0 >> 6) & 1)) {
+        if (!((grBb_ByteBits*) (gp + 0xC4))->b1) {
             lbVector_Diff((Vec3*) (gp + 0xD4), (Vec3*) (gp + 0xC8),
                           (Vec3*) (gp + 0xE0));
             {
                 f32 speed = grBb_804D69C8->x7C * Ground_801C0498();
                 *(f32*) (gp + 0xEC) = sinf(*(f32*) (gp + 0xF8)) * speed;
             }
-            gp->gv.bigblue.x0 |= 0x40;
+            ((grBb_ByteBits*) (gp + 0xC4))->b1 = 1;
         }
 
         if (target_y != grBb_804DB310) {
@@ -2766,7 +2792,7 @@ void grBigBlue_801EBAF8(Ground_GObj* gobj)
     {
         f32 old_rot = *(f32*) (gp + 0xF8);
         *(f32*) (gp + 0xF8) = old_rot + angular_vel;
-        if (!((gp->gv.bigblue.x0 >> 5) & 1) && old_rot > 0.0F) {
+        if (!((gp[0xC4] >> 5) & 1) && old_rot > 0.0F) {
             if (*(f32*) (gp + 0xF8) <= 0.0F) {
                 *(f32*) (gp + 0xF8) = 0.0F;
             }
@@ -2885,7 +2911,8 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
 
     for (i = 0; i < 30; i++) {
         u8 val;
-        mpJointSetCb1(grBb_803E2D78.x84[i], gp, (mpLib_Callback) fn_801EF60C);
+        mpJointSetCb1(*(s16*) ((u8*) grBb_803E2938 + 0x4C4 + i * 2), gp,
+                      (mpLib_Callback) fn_801EF60C);
         HSD_JObjSetFlagsAll(((HSD_JObj**) gp->gv.bigblue.xC8)[i], JOBJ_HIDDEN);
         val = HSD_Randi(2) ? 0 : 2;
         ((u8*) gp->gv.bigblue.xCC)[i] = val;
@@ -2995,7 +3022,9 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
             *(s32*) (car + 0xF0) = lo;
 
             {
-                Ground_801C5440(gp, k, grBb_803E2EB8.x58[HSD_Randi(4)]);
+                Ground_801C5440(
+                    gp, k,
+                    ((u32*) ((u8*) grBb_803E2938 + 0x6D8))[HSD_Randi(4)]);
             }
 
             *(f32*) (car + 0xEC) = 1.0F;
@@ -3019,59 +3048,20 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
 {
     s32 i = 0;
     Ground* gp = GET_GROUND(gobj);
+    Ground_GObj* ground_gobj = gobj;
+    s32 active_count = 0;
     s32 free_count = 0;
     s32 reserved_count = 0;
-    s32 active_count = 0;
     PAD_STACK(8);
 
-    /* Count free (0) and reserved (2) lanes - 5×6=30 total */
-    {
-        s32 ctr = 5;
-        do {
-            u8 val;
-            val = *((u8*) gp->gv.bigblue.xCC + i);
-            if (val == 0) {
-                free_count++;
-            } else if (val == 2) {
-                reserved_count++;
-            }
-            i++;
-            val = *((u8*) gp->gv.bigblue.xCC + i);
-            if (val == 0) {
-                free_count++;
-            } else if (val == 2) {
-                reserved_count++;
-            }
-            i++;
-            val = *((u8*) gp->gv.bigblue.xCC + i);
-            if (val == 0) {
-                free_count++;
-            } else if (val == 2) {
-                reserved_count++;
-            }
-            i++;
-            val = *((u8*) gp->gv.bigblue.xCC + i);
-            if (val == 0) {
-                free_count++;
-            } else if (val == 2) {
-                reserved_count++;
-            }
-            i++;
-            val = *((u8*) gp->gv.bigblue.xCC + i);
-            if (val == 0) {
-                free_count++;
-            } else if (val == 2) {
-                reserved_count++;
-            }
-            i++;
-            val = *((u8*) gp->gv.bigblue.xCC + i);
-            if (val == 0) {
-                free_count++;
-            } else if (val == 2) {
-                reserved_count++;
-            }
-            i++;
-        } while (--ctr);
+    /* Count free (0) and reserved (2) lanes */
+    for (i = 0; i < 30; i++) {
+        u8 val = ((u8*) gp->gv.bigblue.xCC)[i];
+        if (val == 0) {
+            free_count++;
+        } else if (val == 2) {
+            reserved_count++;
+        }
     }
 
     /* Balance lanes */
@@ -3083,90 +3073,16 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
             pick = 0;
         }
         {
-            s32 ctr = 3;
-            i = 0;
-        bal_loop1: {
-            u8* p = (u8*) gp->gv.bigblue.xCC + i;
-            if ((u8) *p == 2 && (pick--, pick < 0)) {
-                *p = 0;
-                free_count++;
-            } else {
-                i++;
-                p = (u8*) gp->gv.bigblue.xCC + i;
-                if ((u8) *p == 2 && (pick--, pick < 0)) {
+            u8* p;
+            s32 j;
+            for (j = 0; j < 30; j++) {
+                p = (u8*) gp->gv.bigblue.xCC + j;
+                if (*p == 2 && --pick < 0) {
                     *p = 0;
                     free_count++;
-                } else {
-                    i++;
-                    p = (u8*) gp->gv.bigblue.xCC + i;
-                    if ((u8) *p == 2 && (pick--, pick < 0)) {
-                        *p = 0;
-                        free_count++;
-                    } else {
-                        i++;
-                        p = (u8*) gp->gv.bigblue.xCC + i;
-                        if ((u8) *p == 2 && (pick--, pick < 0)) {
-                            *p = 0;
-                            free_count++;
-                        } else {
-                            i++;
-                            p = (u8*) gp->gv.bigblue.xCC + i;
-                            if ((u8) *p == 2 && (pick--, pick < 0)) {
-                                *p = 0;
-                                free_count++;
-                            } else {
-                                i++;
-                                p = (u8*) gp->gv.bigblue.xCC + i;
-                                if ((u8) *p == 2 && (pick--, pick < 0)) {
-                                    *p = 0;
-                                    free_count++;
-                                } else {
-                                    i++;
-                                    p = (u8*) gp->gv.bigblue.xCC + i;
-                                    if ((u8) *p == 2 && (pick--, pick < 0)) {
-                                        *p = 0;
-                                        free_count++;
-                                    } else {
-                                        i++;
-                                        p = (u8*) gp->gv.bigblue.xCC + i;
-                                        if ((u8) *p == 2 && (pick--, pick < 0))
-                                        {
-                                            *p = 0;
-                                            free_count++;
-                                        } else {
-                                            i++;
-                                            p = (u8*) gp->gv.bigblue.xCC + i;
-                                            if ((u8) *p == 2 &&
-                                                (pick--, pick < 0))
-                                            {
-                                                *p = 0;
-                                                free_count++;
-                                            } else {
-                                                i++;
-                                                p = (u8*) gp->gv.bigblue.xCC +
-                                                    i;
-                                                if ((u8) *p == 2 &&
-                                                    (pick--, pick < 0))
-                                                {
-                                                    *p = 0;
-                                                    free_count++;
-                                                } else {
-                                                    i++;
-                                                    ctr--;
-                                                    if (ctr != 0) {
-                                                        goto bal_loop1;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    break;
                 }
             }
-        }
         }
     } else if (reserved_count == 0) {
         s32 pick;
@@ -3176,110 +3092,39 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
             pick = 0;
         }
         {
-            s32 ctr = 3;
-            i = 0;
-        bal_loop2: {
-            u8* p = (u8*) gp->gv.bigblue.xCC + i;
-            if ((u8) *p == 0 && (pick--, pick < 0)) {
-                *p = 2;
-                reserved_count++;
-            } else {
-                i++;
-                p = (u8*) gp->gv.bigblue.xCC + i;
-                if ((u8) *p == 0 && (pick--, pick < 0)) {
+            u8* p;
+            s32 j;
+            for (j = 0; j < 30; j++) {
+                p = (u8*) gp->gv.bigblue.xCC + j;
+                if (*p == 0 && --pick < 0) {
                     *p = 2;
                     reserved_count++;
-                } else {
-                    i++;
-                    p = (u8*) gp->gv.bigblue.xCC + i;
-                    if ((u8) *p == 0 && (pick--, pick < 0)) {
-                        *p = 2;
-                        reserved_count++;
-                    } else {
-                        i++;
-                        p = (u8*) gp->gv.bigblue.xCC + i;
-                        if ((u8) *p == 0 && (pick--, pick < 0)) {
-                            *p = 2;
-                            reserved_count++;
-                        } else {
-                            i++;
-                            p = (u8*) gp->gv.bigblue.xCC + i;
-                            if ((u8) *p == 0 && (pick--, pick < 0)) {
-                                *p = 2;
-                                reserved_count++;
-                            } else {
-                                i++;
-                                p = (u8*) gp->gv.bigblue.xCC + i;
-                                if ((u8) *p == 0 && (pick--, pick < 0)) {
-                                    *p = 2;
-                                    reserved_count++;
-                                } else {
-                                    i++;
-                                    p = (u8*) gp->gv.bigblue.xCC + i;
-                                    if ((u8) *p == 0 && (pick--, pick < 0)) {
-                                        *p = 2;
-                                        reserved_count++;
-                                    } else {
-                                        i++;
-                                        p = (u8*) gp->gv.bigblue.xCC + i;
-                                        if ((u8) *p == 0 && (pick--, pick < 0))
-                                        {
-                                            *p = 2;
-                                            reserved_count++;
-                                        } else {
-                                            i++;
-                                            p = (u8*) gp->gv.bigblue.xCC + i;
-                                            if ((u8) *p == 0 &&
-                                                (pick--, pick < 0))
-                                            {
-                                                *p = 2;
-                                                reserved_count++;
-                                            } else {
-                                                i++;
-                                                p = (u8*) gp->gv.bigblue.xCC +
-                                                    i;
-                                                if ((u8) *p == 0 &&
-                                                    (pick--, pick < 0))
-                                                {
-                                                    *p = 2;
-                                                    reserved_count++;
-                                                } else {
-                                                    i++;
-                                                    ctr--;
-                                                    if (ctr != 0) {
-                                                        goto bal_loop2;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    break;
                 }
             }
-        }
         }
     }
 
     /* Count active cars (not in state 1, 7, or 8) */
     {
         u8* bp = (u8*) gp;
+        u8* p;
         u32 st;
         st = (bp[0xD4] >> 2) & 0x3F;
         if (st != 1 && st != 7 && st != 8) {
             active_count = 1;
         }
+        p = bp + 0x40;
         st = (bp[0x114] >> 2) & 0x3F;
         if (st != 1 && st != 7 && st != 8) {
             active_count++;
         }
-        st = (bp[0x154] >> 2) & 0x3F;
+        st = (p[0x114] >> 2) & 0x3F;
+        p += 0x40;
         if (st != 1 && st != 7 && st != 8) {
             active_count++;
         }
-        st = (bp[0x194] >> 2) & 0x3F;
+        st = (p[0x114] >> 2) & 0x3F;
         if (st != 1 && st != 7 && st != 8) {
             active_count++;
         }
@@ -3292,6 +3137,7 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
     /* Find closest car */
     {
         u8* bp = (u8*) gp;
+        f32 dist;
         f32 closest_dist = 3.4028235e38f;
         s32 ctr = 2;
         u8* car_p = (u8*) gp;
@@ -3299,13 +3145,17 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
         s32 closest_lane = -1;
         s32 car_idx = 0;
 
-    car_loop: {
-        u32 st = (car_p[0xD4] >> 2) & 0x3F;
-        if (st == 10) {
-            found_ten = 1;
-        } else {
+    car_loop:
+        {
+            u32 st;
+
+            st = (car_p[0xD4] >> 2) & 0x3F;
+            if (st == 10) {
+                found_ten = 1;
+                goto car_done;
+            }
             if (st != 1 && st != 7 && st != 8) {
-                f32 dist = *(f32*) (car_p + 0xE0);
+                dist = *(f32*) (car_p + 0xE0);
                 if (dist < 0.0f) {
                     dist = -dist;
                 }
@@ -3319,43 +3169,41 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
                     goto car_done;
                 }
             }
+
+            st = (car_p[0x114] >> 2) & 0x3F;
             car_idx++;
-            {
-                u32 st2 = (car_p[0x114] >> 2) & 0x3F;
-                if (st2 == 10) {
-                    found_ten = 1;
+            if (st == 10) {
+                found_ten = 1;
+                goto car_done;
+            }
+            if (st != 1 && st != 7 && st != 8) {
+                dist = *(f32*) (car_p + 0x120);
+                if (dist < 0.0f) {
+                    dist = -dist;
+                }
+                if (dist > 60.0f) {
+                    if (closest_dist > dist) {
+                        closest_dist = dist;
+                        closest_lane = car_idx;
+                    }
                 } else {
-                    if (st2 != 1 && st2 != 7 && st2 != 8) {
-                        f32 dist2 = *(f32*) (car_p + 0x120);
-                        if (dist2 < 0.0f) {
-                            dist2 = -dist2;
-                        }
-                        if (dist2 > 60.0f) {
-                            if (closest_dist > dist2) {
-                                closest_dist = dist2;
-                                closest_lane = car_idx;
-                            }
-                        } else {
-                            found_ten = 1;
-                            goto car_done;
-                        }
-                    }
-                    car_p += 0x80;
-                    car_idx++;
-                    ctr--;
-                    if (ctr != 0) {
-                        goto car_loop;
-                    }
+                    found_ten = 1;
+                    goto car_done;
                 }
             }
+            ctr--;
+            car_p += 0x80;
+            car_idx++;
+            if (ctr != 0) {
+                goto car_loop;
+            }
         }
-    }
     car_done:
 
         if (found_ten == 0 && closest_lane != -1) {
-            u8* target_car = bp + (closest_lane << 6);
             register s32 st_val;
             register u8 byte;
+            u8* target_car = bp + (closest_lane << 6);
 
             st_val = 10;
             byte = target_car[0xD4];
@@ -3493,84 +3341,71 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
                 if (direction == 1) {
                     s32 pick;
                     s32 pos;
-                    s32 cnt;
                     if (free_count != 0) {
                         pick = HSD_Randi(free_count);
                     } else {
                         pick = 0;
                     }
-                    cnt = 0x1E;
-                    pos = 0;
-                spawn_loop1:
-                    if ((u8) * ((u8*) gp->gv.bigblue.xCC + pos) == 0 &&
-                        --pick < 0)
-                    {
-                        if (grBigBlue_801EE398(gobj, active_count, 5) != 0) {
-                            s32 tmin = grBb_804D69C8->x10;
-                            s32 tmax = grBb_804D69C8->x14;
-                            if (tmin > tmax) {
-                                s32 diff = tmin - tmax;
-                                if (diff != 0) {
-                                    tmin = tmax + HSD_Randi(diff);
-                                } else {
-                                    tmin = tmax;
+                    for (pos = 0; pos < 30; pos++) {
+                        if ((u8) * ((u8*) gp->gv.bigblue.xCC + pos) == 0 &&
+                            --pick < 0)
+                        {
+                            if (grBigBlue_801EE398(ground_gobj, active_count, 5) != 0)
+                            {
+                                s32 tmin = grBb_804D69C8->x10;
+                                s32 tmax = grBb_804D69C8->x14;
+                                if (tmin > tmax) {
+                                    s32 diff = tmin - tmax;
+                                    if (diff != 0) {
+                                        tmin = tmax + HSD_Randi(diff);
+                                    } else {
+                                        tmin = tmax;
+                                    }
+                                } else if (tmin < tmax) {
+                                    s32 diff = tmax - tmin;
+                                    if (diff != 0) {
+                                        tmin += HSD_Randi(diff);
+                                    }
                                 }
-                            } else if (tmin < tmax) {
-                                s32 diff = tmax - tmin;
-                                if (diff != 0) {
-                                    tmin += HSD_Randi(diff);
-                                }
+                                *(s16*) (bp + 0xD0) = (s16) tmin;
+                                return;
                             }
-                            *(s16*) (bp + 0xD0) = (s16) tmin;
                             return;
                         }
-                    } else {
-                        pos++;
-                        cnt--;
-                        if (cnt == 0) {
-                            return;
-                        }
-                        goto spawn_loop1;
                     }
                 } else if (direction == -1) {
                     s32 pick;
                     s32 pos;
-                    s32 cnt;
                     if (reserved_count != 0) {
                         pick = HSD_Randi(reserved_count);
                     } else {
                         pick = 0;
                     }
-                    cnt = 0x1E;
-                    pos = 0;
-                spawn_loop2:
-                    if ((u8) * ((u8*) gp->gv.bigblue.xCC + pos) == 2 &&
-                        --pick < 0)
-                    {
-                        if (grBigBlue_801EE398(gobj, active_count, 6) != 0) {
-                            s32 tmin = grBb_804D69C8->x10;
-                            s32 tmax = grBb_804D69C8->x14;
-                            if (tmin > tmax) {
-                                s32 diff = tmin - tmax;
-                                if (diff != 0) {
-                                    tmin = tmax + HSD_Randi(diff);
-                                } else {
-                                    tmin = tmax;
+                    for (pos = 0; pos < 30; pos++) {
+                        if ((u8) * ((u8*) gp->gv.bigblue.xCC + pos) == 2 &&
+                            --pick < 0)
+                        {
+                            if (grBigBlue_801EE398(ground_gobj, active_count, 6) != 0)
+                            {
+                                s32 tmin = grBb_804D69C8->x10;
+                                s32 tmax = grBb_804D69C8->x14;
+                                if (tmin > tmax) {
+                                    s32 diff = tmin - tmax;
+                                    if (diff != 0) {
+                                        tmin = tmax + HSD_Randi(diff);
+                                    } else {
+                                        tmin = tmax;
+                                    }
+                                } else if (tmin < tmax) {
+                                    s32 diff = tmax - tmin;
+                                    if (diff != 0) {
+                                        tmin += HSD_Randi(diff);
+                                    }
                                 }
-                            } else if (tmin < tmax) {
-                                s32 diff = tmax - tmin;
-                                if (diff != 0) {
-                                    tmin += HSD_Randi(diff);
-                                }
+                                *(s16*) (bp + 0xD0) = (s16) tmin;
+                                return;
                             }
-                            *(s16*) (bp + 0xD0) = (s16) tmin;
                             return;
-                        }
-                    } else {
-                        pos++;
-                        cnt--;
-                        if (cnt != 0) {
-                            goto spawn_loop2;
                         }
                     }
                 }
@@ -3619,9 +3454,7 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
         jobj = (HSD_JObj*) arr[(hw >> 4) & 0x1F];
     }
 
-    HSD_ASSERT(745, jobj);
-
-    f31_rot = jobj->rotate.z;
+    f31_rot = HSD_JObjGetRotationZ(jobj);
 
     {
         u32 state = (lane_flags[0] >> 2) & 0x3F;
@@ -3634,55 +3467,8 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
             active = 0;
             behind = 0;
 
-            /* Lane 0 */
-            {
-                u32 st = (gp[0xD4] >> 2) & 0x3F;
-                idx = 0;
-                if (st != 1 && st != 7 && st != 8) {
-                    active++;
-                    if (idx != lane && *(f32*) (gp + 0xE0) <
-                                           *(f32*) (lane_gp + 0xE0))
-                    {
-                        behind++;
-                    }
-                }
-            }
-
-            /* Lane 1 */
-            iter = gp + 0x40;
-            {
-                u32 st = (gp[0x114] >> 2) & 0x3F;
-                idx = 1;
-                if (st != 1 && st != 7 && st != 8) {
-                    active++;
-                    if (idx != lane && *(f32*) (iter + 0xE0) <
-                                           *(f32*) (lane_gp + 0xE0))
-                    {
-                        behind++;
-                    }
-                }
-            }
-
-            /* Lane 2 */
-            {
-                u32 st = (iter[0x114] >> 2) & 0x3F;
-                idx = 2;
-                iter += 0x40;
-                if (st != 1 && st != 7 && st != 8) {
-                    active++;
-                    if (idx != lane && *(f32*) (iter + 0xE0) <
-                                           *(f32*) (lane_gp + 0xE0))
-                    {
-                        behind++;
-                    }
-                }
-            }
-
-            /* Lane 3 */
-            {
-                u32 st = (iter[0x114] >> 2) & 0x3F;
-                idx = 3;
-                iter += 0x40;
+            for (idx = 0, iter = gp; idx < 4; idx++, iter += 0x40) {
+                u32 st = (iter[0xD4] >> 2) & 0x3F;
                 if (st != 1 && st != 7 && st != 8) {
                     active++;
                     if (idx != lane && *(f32*) (iter + 0xE0) <
@@ -3712,48 +3498,53 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
 
         /* Convergence step for position index */
         {
-            f32 current = *(f32*) (lane_gp + 0xD8);
+            f32* current_p = (f32*) (lane_gp + 0xD8);
+            f32 current = *current_p;
             f32 diff = target - current;
 
             if (diff < -0.5F) {
-                *(f32*) (lane_gp + 0xD8) = current - 0.5F;
+                *current_p = current - 0.5F;
             } else if (diff > 0.5F) {
-                *(f32*) (lane_gp + 0xD8) = current + 0.5F;
+                *current_p = current + 0.5F;
             } else {
-                *(f32*) (lane_gp + 0xD8) = target;
+                *current_p = target;
             }
         }
     }
 
     /* Velocity update: vel += accel */
-    *(f32*) (lane_gp + 0xFC) += *(f32*) (lane_gp + 0x100);
-
-    /* Clamp velocity to +-max_speed*scale */
     {
-        f32 scale = Ground_801C0498();
-        f32 vel = *(f32*) (lane_gp + 0xFC);
-        f32 max_spd = grBb_804D69C8->x24;
+        f32* vel_p = (f32*) (lane_gp + 0xFC);
 
-        if (vel > max_spd * scale) {
-            f32 s2 = Ground_801C0498();
-            *(f32*) (lane_gp + 0xFC) = grBb_804D69C8->x24 * s2;
-        } else {
-            f32 s2 = Ground_801C0498();
-            f32 lim = grBb_804D69C8->x24 * s2;
+        *vel_p += *(f32*) (lane_gp + 0x100);
 
-            if (vel < -lim) {
-                f32 s3 = Ground_801C0498();
-                *(f32*) (lane_gp + 0xFC) = -(grBb_804D69C8->x24 * s3);
+        /* Clamp velocity to +-max_speed*scale */
+        {
+            f32 scale = Ground_801C0498();
+            f32 vel = *vel_p;
+            f32 max_spd = grBb_804D69C8->x24;
+
+            if (vel > max_spd * scale) {
+                f32 s2 = Ground_801C0498();
+                *vel_p = grBb_804D69C8->x24 * s2;
+            } else {
+                f32 s2 = Ground_801C0498();
+                f32 lim = grBb_804D69C8->x24 * s2;
+
+                if (vel < -lim) {
+                    f32 s3 = Ground_801C0498();
+                    *vel_p = -(grBb_804D69C8->x24 * s3);
+                }
             }
         }
-    }
 
-    /* Position update: xDC += vel, xE0 = xD8 + xDC */
-    {
-        f32 vel = *(f32*) (lane_gp + 0xFC);
-        *(f32*) (lane_gp + 0xDC) += vel;
-        *(f32*) (lane_gp + 0xE0) = *(f32*) (lane_gp + 0xD8) +
-                                            *(f32*) (lane_gp + 0xDC);
+        /* Position update: xDC += vel, xE0 = xD8 + xDC */
+        {
+            f32 vel = *vel_p;
+            *(f32*) (lane_gp + 0xDC) += vel;
+            *(f32*) (lane_gp + 0xE0) = *(f32*) (lane_gp + 0xD8) +
+                                                *(f32*) (lane_gp + 0xDC);
+        }
     }
 
     /* Height/bounce simulation */
@@ -3909,9 +3700,9 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
         if (0.0F != ground_y) {
             f32 s2 = Ground_801C0498();
             f32 drag = grBb_804D69C8->x2C;
+            f32 base_y = drag * s2 + ground_y;
             *(f32*) (lane_gp + 0xE4) =
-                heading_osc + *(f32*) (lane_gp + 0xF8) +
-                (drag * s2 + ground_y);
+                heading_osc + *(f32*) (lane_gp + 0xF8) + base_y;
         } else {
             lane_gp[0xD4] = (lane_gp[0xD4] & ~0x02) | 0x02;
             {
@@ -3949,9 +3740,9 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
     s32 offset;
     PAD_STACK(8);
 
-    gp = (u8*) gobj->user_data;
-    result = 0;
     offset = index << 6;
+    result = 0;
+    gp = (u8*) gobj->user_data;
 
     switch ((gp[offset + 0xD4] >> 2) & 0x3F) {
     case 1:
@@ -4591,7 +4382,7 @@ bool grBigBlue_801EEF00(Ground_GObj* gobj, s32 index)
             }
             scale = Ground_801C0498();
             norm = abs_speed / (grBb_804D69C8->x28 * scale);
-            if ((f32) * (s32*) (gp + offset + 0xF0) > norm) {
+            if (norm < (f32) * (s32*) (gp + offset + 0xF0)) {
                 scale = Ground_801C0498();
                 *(f32*) (gp + offset + 0x100) = -(grBb_804D69C8->x28 * scale);
             } else {
@@ -4605,7 +4396,7 @@ bool grBigBlue_801EEF00(Ground_GObj* gobj, s32 index)
             }
             scale = Ground_801C0498();
             norm = abs_speed / (grBb_804D69C8->x28 * scale);
-            if ((f32) * (s32*) (gp + offset + 0xF0) > norm) {
+            if (norm < (f32) * (s32*) (gp + offset + 0xF0)) {
                 scale = Ground_801C0498();
                 *(f32*) (gp + offset + 0x100) = grBb_804D69C8->x28 * scale;
             } else {
@@ -4627,7 +4418,7 @@ bool grBigBlue_801EEF00(Ground_GObj* gobj, s32 index)
         }
         scale = Ground_801C0498();
         norm = abs_speed / (grBb_804D69C8->x28 * scale);
-        if ((f32) * (s32*) (gp + offset + 0xF0) > norm) {
+        if (norm < (f32) * (s32*) (gp + offset + 0xF0)) {
             if (*(f32*) (gp + offset + 0xE0) < Stage_GetCamBoundsRightOffset())
             {
                 scale = Ground_801C0498();
@@ -4651,7 +4442,7 @@ bool grBigBlue_801EEF00(Ground_GObj* gobj, s32 index)
         }
         scale = Ground_801C0498();
         norm = abs_speed / (grBb_804D69C8->x28 * scale);
-        if ((f32) * (s32*) (gp + offset + 0xF0) > norm) {
+        if (norm < (f32) * (s32*) (gp + offset + 0xF0)) {
             if (*(f32*) (gp + offset + 0xE0) > Stage_GetCamBoundsLeftOffset())
             {
                 scale = Ground_801C0498();
@@ -4741,14 +4532,15 @@ bool grBigBlue_801EEF00(Ground_GObj* gobj, s32 index)
 
     case 5:
     case 6: {
-        u8* p = gp + offset;
+        u8* car = gp + offset;
+        f32* alpha = (f32*) (car + 0xEC);
 
-        *(f32*) (p + 0x100) = 0.0F;
-        *(f32*) (p + 0xEC) += (1.0F / 60.0F);
-        if (*(f32*) (p + 0xEC) > 1.0F) {
-            *(f32*) (p + 0xEC) = 1.0F;
+        *(f32*) (car + 0x100) = 0.0F;
+        *alpha += (1.0F / 60.0F);
+        if (*alpha > 1.0F) {
+            *alpha = 1.0F;
         }
-        Ground_801C5630((Ground*) gp, index, *(f32*) (p + 0xEC));
+        Ground_801C5630((Ground*) gp, index, *alpha);
         break;
     }
 
@@ -4767,13 +4559,14 @@ bool grBigBlue_801EEF00(Ground_GObj* gobj, s32 index)
     }
 
     case 9: {
-        u8* p = gp + offset;
+        u8* car = gp + offset;
+        f32* alpha = (f32*) (car + 0xEC);
 
-        *(f32*) (p + 0xEC) -= (1.0F / 60.0F);
-        if (*(f32*) (p + 0xEC) < 0.0F) {
-            *(f32*) (p + 0xEC) = 0.0F;
+        *alpha -= (1.0F / 60.0F);
+        if (*alpha < 0.0F) {
+            *alpha = 0.0F;
         }
-        Ground_801C5630((Ground*) gp, index, *(f32*) (p + 0xEC));
+        Ground_801C5630((Ground*) gp, index, *alpha);
         break;
     }
     }
@@ -4857,7 +4650,6 @@ void grBigBlue_801EF424(Ground_GObj* gobj)
     }
 }
 
-/// @todo Currently 99.98% match - assert string relocation offset
 void fn_801EF60C(Ground* gp, s32 joint_id, CollData* coll, s32 time_param,
                  s32 env, f32 force)
 {
@@ -4867,6 +4659,7 @@ void fn_801EF60C(Ground* gp, s32 joint_id, CollData* coll, s32 time_param,
     u8* p;
     s32 i;
     u16 hw;
+    char* data = (char*) grBb_803E2938;
     PAD_STACK(8);
 
     if ((s32) coll->x34_flags.b1234 != 1) {
@@ -4875,7 +4668,7 @@ void fn_801EF60C(Ground* gp, s32 joint_id, CollData* coll, s32 time_param,
     if (env != 1) {
         return;
     }
-    table = grBb_803E2D78.x84;
+    table = (s16*) (data + 0x4C4);
 
     for (idx = 0; idx < 30; table++, idx++) {
         if (joint_id == *table) {
@@ -4883,7 +4676,9 @@ void fn_801EF60C(Ground* gp, s32 joint_id, CollData* coll, s32 time_param,
         }
     }
 
-    HSD_ASSERT(0xED9, idx != 30);
+    if (idx == 30) {
+        __assert(data + 0x440, 0xED9, data + 0x758);
+    }
 
     params = grBb_804D69C8;
     p = (u8*) gp;

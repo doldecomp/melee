@@ -177,33 +177,35 @@ void fn_802F770C(HSD_GObj* gobj, int callback)
 {
     HudIndex* status = ifStatus_802F4910();
     void** ptr = lbl_804A1340;
+    void** ptr2;
+    void** ptr3;
+    void** ptr4;
     s32 slot;
     void* temp;
 
     if (ptr[1] == gobj) {
         slot = 0;
     } else {
-        ptr += 2;
-        temp = ptr[1];
-        if (temp == gobj) {
+        if ((temp = (ptr += 2)[1]) == gobj) {
             slot = 1;
         } else {
-            temp = ptr[3];
-            ptr += 2;
+            ptr2 = ptr;
+            temp = ptr2[3];
+            ptr4 = ptr2 + 2;
             if (temp == gobj) {
                 slot = 2;
             } else {
-                temp = ptr[3];
-                ptr += 2;
+                temp = ptr4[3];
+                ptr = ptr4 + 2;
                 if (temp == gobj) {
                     slot = 3;
                 } else {
                     temp = ptr[3];
-                    ptr += 2;
+                    ptr2 = ptr + 2;
                     if (temp == gobj) {
                         slot = 4;
                     } else {
-                        temp = ptr[3];
+                        temp = ptr2[3];
                         if (temp == gobj) {
                             slot = 5;
                         } else {
@@ -215,7 +217,7 @@ void fn_802F770C(HSD_GObj* gobj, int callback)
         }
     }
 
-    if (!((((u8*) status)[slot * 100 + 16] >> 3) & 1)) {
+    if (!status->players[slot].flags.hide_all_digits) {
         HSD_GObj_JObjCallback(gobj, callback);
     }
 }
@@ -223,8 +225,6 @@ void fn_802F770C(HSD_GObj* gobj, int callback)
 HSD_GObj* fn_802F77F8(HSD_GObj* gobj, u8 slot, s32 arg2)
 {
     void** base = lbl_804A1340;
-    HSD_GObj* new_gobj = gobj;
-    s32 arg2_copy = arg2;
     HSD_JObj* jobj;
     Vec3* pos;
 
@@ -232,57 +232,29 @@ HSD_GObj* fn_802F77F8(HSD_GObj* gobj, u8 slot, s32 arg2)
         return NULL;
     }
 
-    if (new_gobj != NULL) {
-        HSD_GObjPLink_80390228(new_gobj);
+    if (gobj != NULL) {
+        HSD_GObjPLink_80390228(gobj);
     }
 
-    new_gobj = GObj_Create(14, 15, 0);
-    if (new_gobj == NULL) {
-        goto end;
-    }
+    gobj = GObj_Create(14, 15, 0);
+    if (gobj != NULL) {
+        jobj = HSD_JObjLoadJoint(*(*(HSD_Joint***) base[0]));
+        if (jobj != NULL) {
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+            GObj_SetupGXLink(gobj, fn_802F770C, 11, 0);
+            gm_8016895C(jobj, *(DynamicModelDesc**) base[0], (u8) arg2);
+            HSD_JObjReqAnimAll(jobj, 0.0f);
+            HSD_JObjAnimAll(jobj);
 
-    jobj = HSD_JObjLoadJoint(*(*(HSD_Joint***) base[0]));
-    if (jobj == NULL) {
-        HSD_GObjPLink_80390228(new_gobj);
-        new_gobj = NULL;
-        goto end;
-    }
-
-    HSD_GObjObject_80390A70(new_gobj, HSD_GObj_804D7849, jobj);
-    GObj_SetupGXLink(new_gobj, fn_802F770C, 11, 0);
-    gm_8016895C(jobj, *(DynamicModelDesc**) base[0], (u8) arg2_copy);
-    HSD_JObjReqAnimAll(jobj, 0.0f);
-    HSD_JObjAnimAll(jobj);
-
-    pos = ifAll_802F3424(slot);
-    if (jobj == NULL) {
-        __assert("jobj.h", 0x394, "jobj");
-    }
-    if (pos == NULL) {
-        __assert("jobj.h", 0x395, "jobj");
-    }
-
-    jobj->translate = *pos;
-
-    if (!(jobj->flags & 0x02000000)) {
-        s32 is_dirty;
-        u32 flags;
-
-        if (jobj == NULL) {
-            __assert("jobj.h", 0x234, "jobj");
-        }
-        flags = jobj->flags;
-        is_dirty = 0;
-        if (!(flags & 0x00800000) && (flags & 0x40)) {
-            is_dirty = 1;
-        }
-        if (is_dirty == 0) {
-            HSD_JObjSetMtxDirtySub(jobj);
+            pos = ifAll_802F3424(slot);
+            HSD_JObjSetTranslate(jobj, pos);
+        } else {
+            HSD_GObjPLink_80390228(gobj);
+            gobj = NULL;
         }
     }
 
-end:
-    return new_gobj;
+    return gobj;
 }
 
 void fn_802F7994(HSD_GObj* gobj)
@@ -290,7 +262,9 @@ void fn_802F7994(HSD_GObj* gobj)
     HSD_JObj* jobj;
     void** base = lbl_804A1340;
     void** ptr;
+    void** entry;
     s32 slot;
+    s32 idx;
     void* cmp;
     f32 frame;
 
@@ -300,8 +274,9 @@ void fn_802F7994(HSD_GObj* gobj)
     if (base[1] == gobj) {
         slot = 0;
     } else {
-        ptr = base + 2;
-        cmp = base[3];
+        ptr = base;
+        ptr += 2;
+        cmp = ptr[1];
         if (cmp == gobj) {
             slot = 1;
         } else {
@@ -334,8 +309,8 @@ void fn_802F7994(HSD_GObj* gobj)
 
     if (slot >= 0) {
         if (frame > 12.0f && base[slot * 2 + 2] == NULL) {
-            s32 idx = (u8) slot << 3;
-            void** entry = base + idx;
+            idx = (u8) slot << 1;
+            entry = base + idx;
             base[idx + 2] = fn_802F77F8(*++entry, (u8) slot, 1);
             if (base[idx + 2] != NULL) {
                 HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F7670, 0x11);
@@ -359,7 +334,7 @@ void if_802F7AF8(s32 slot)
     s32 slot2 = Player_80036428(slot);
     HSD_GObj* result;
 
-    idx = (u8) slot << 1;
+    idx = slot << 1;
     entry = base + idx;
     result = fn_802F77F8(*++entry, (u8) slot, 1);
     base1 = &base[1];
@@ -443,20 +418,24 @@ void if_802F7D08(s32 slot)
             HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F7994, 0x11);
         }
     } else if (ret == -1) {
-        idx = (u8) slot << 1;
-        entry = base + idx;
-        result = fn_802F77F8(*++entry, (u8) slot, 1);
-        base[idx + 1] = result;
-        if (base[idx + 1] != NULL) {
-            HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F7994, 0x11);
+        void** entry2;
+        s32 idx2;
+        idx2 = (u8) slot << 1;
+        entry2 = base + idx2;
+        result = fn_802F77F8(*++entry2, (u8) slot, 1);
+        base[idx2 + 1] = result;
+        if (base[idx2 + 1] != NULL) {
+            HSD_GObj_SetupProc(*entry2, (HSD_GObjEvent) fn_802F7994, 0x11);
         }
     } else {
-        idx = (u8) slot << 1;
-        entry = base + idx;
-        result = fn_802F77F8(*++entry, (u8) slot, 1);
-        base[idx + 1] = result;
-        if (base[idx + 1] != NULL) {
-            HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F75D4, 0x11);
+        void** entry2;
+        s32 idx2;
+        idx2 = (u8) slot << 1;
+        entry2 = base + idx2;
+        result = fn_802F77F8(*++entry2, (u8) slot, 1);
+        base[idx2 + 1] = result;
+        if (base[idx2 + 1] != NULL) {
+            HSD_GObj_SetupProc(*entry2, (HSD_GObjEvent) fn_802F75D4, 0x11);
         }
     }
 }

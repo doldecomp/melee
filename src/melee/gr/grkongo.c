@@ -352,9 +352,6 @@ void grKongo_801D577C(Ground_GObj* arg0)
         if ((s16) gp->gv.kongo3.xC4 == 3) {
             gp->gv.kongo3.xC4 = 0;
         }
-        if ((s16) temp_r31->gv.kongo3.xC4 == 3) {
-            temp_r31->gv.kongo3.xC4 = 0;
-        }
         break;
     }
     case 0:
@@ -640,6 +637,8 @@ void grKongo_801D6378(Ground_GObj* arg)
     return;
 }
 
+#undef __FILE__
+#define __FILE__ (&grKg_803E1858[0])
 void grKongo_801D828C(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
@@ -654,6 +653,8 @@ void grKongo_801D828C(HSD_GObj* gobj)
         grMaterial_801C95C4(gobj);
     }
 }
+#undef __FILE__
+#define __FILE__ "grkongo.c"
 
 void grKongo_801D637C(Ground_GObj* arg0)
 {
@@ -737,15 +738,6 @@ void grKongo_801D651C(Ground_GObj* gobj)
     splArcLengthPoint(&sp2C, gp->gv.kongo2.xC4, gp->gv.kongo.xCC);
     HSD_JObjSetTranslate(jobj, &sp2C);
 }
-
-const grKg_801D651C_pair_list grKg_803B7FD4 = {
-    {
-        { 7, 4 },
-        { 8, 5 },
-        { 9, 6 },
-    },
-    0,
-};
 
 bool grKongo_801D6660(Ground_GObj* arg)
 {
@@ -870,7 +862,20 @@ static struct _struct_grKg_803E188C_0x18 grKg_803E188C[0xF] = {
     { 0x2D, 0, NULL, 0.10471976f, 0.0f, 0.0f },
 };
 
+char grKg_803E19F4[] = "translate";
 char grKg_803E1A00[] = "gp->u.taru.keep";
+
+#undef __FILE__
+#define __FILE__ "jobj.h"
+static inline void grKongo_801D7E78_GetTranslation(HSD_JObj* jobj,
+                                                   Vec3* translate)
+{
+    HSD_ASSERT(979, jobj);
+    HSD_ASSERTMSG(980, translate, &grKg_803E19F4[0]);
+    *translate = jobj->translate;
+}
+#undef __FILE__
+#define __FILE__ "grkongo.c"
 
 struct _struct_grKg_804D6984 {
     HSD_JObj* unk0;
@@ -1670,7 +1675,7 @@ Vec3* grKongo_801D7E78(HSD_GObj* gobj, Vec3* pos)
         if (gp->map_id == YORSTER) {
             jobj = gobj->hsd_obj;
             if (jobj != NULL) {
-                HSD_JObjGetTranslation(jobj, pos);
+                grKongo_801D7E78_GetTranslation(jobj, pos);
                 goto done;
             }
             return NULL;

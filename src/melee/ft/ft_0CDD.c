@@ -84,6 +84,8 @@ void ftCo_800CDE74(Fighter_GObj* fighter_gobj)
 }
 #pragma pop
 
+#pragma push
+#pragma auto_inline off
 void ftCo_800CDE94(Fighter* fighter, Vec3* arg1, Vec3* arg2)
 {
     Vec3 pos;
@@ -103,6 +105,7 @@ void ftCo_800CDE94(Fighter* fighter, Vec3* arg1, Vec3* arg2)
     }
     MTXMultVec(HSD_JObjGetMtxPtr(fighterbone_jobj), &pos, arg2);
 }
+#pragma pop
 
 /// grounded
 void ftCo_800CDF5C(Fighter_GObj* fighter_gobj)
@@ -342,8 +345,7 @@ void ftCo_800CE620(HSD_GObj* fighter_gobj)
 
 inline void ftCo_800CE650_inline(HSD_GObj* gobj, int temp_r3_4, int temp_r4_2)
 {
-    int div = temp_r3_4 / temp_r4_2;
-    if (temp_r4_2 - 1 == temp_r3_4 - div * temp_r4_2) {
+    if (temp_r4_2 - 1 == temp_r3_4 % temp_r4_2) {
         ft_800892A0(gobj);
         ft_80089824(gobj);
     }

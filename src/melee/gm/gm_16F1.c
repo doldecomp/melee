@@ -188,8 +188,7 @@ int fn_8016F39C(HSD_Text** arg0, void* arg1, u8 arg2, u16 arg3, u8 arg4,
             item_id = 0;
             while (curr->kind != idx) {
                 if (curr->kind == 0x29A) {
-                    item_id = 0;
-                    goto display;
+                    break;
                 }
                 curr++;
             }
@@ -200,7 +199,6 @@ int fn_8016F39C(HSD_Text** arg0, void* arg1, u8 arg2, u16 arg3, u8 arg4,
                     item_id = curr->x2;
                 }
             }
-display:
             HSD_SisLib_803A6368(arg0[count], item_id);
             count++;
             if (count == (int) arg2) {

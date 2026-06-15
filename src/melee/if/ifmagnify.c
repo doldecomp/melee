@@ -161,10 +161,12 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
     Vec2 out;
     Vec3 translate;
     GXColor color;
+    GXColor color_copy;
     HSD_GObj* fighter_gobj;
     ifMagnifyPlayer* player;
     s32 slot;
     bool is_colored;
+    bool should_display;
     u8 arrow_kind;
     u8 slot_type;
     u8 teams_enabled;
@@ -176,9 +178,14 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
     player = arg0->user_data;
     slot = player - ifMagnify_804A1DE0.player;
     is_colored = false;
-    if ((gm_8016AE38()->hud_enabled != 0) && !ifAll_IsHUDHidden() &&
-        !Camera_80030130() && player->state.is_offscreen)
+    if ((gm_8016AE38()->hud_enabled == 0) || ifAll_IsHUDHidden() ||
+        Camera_80030130())
     {
+        should_display = false;
+    } else {
+        should_display = true;
+    }
+    if (should_display && player->state.is_offscreen) {
         fighter_gobj = Player_GetEntity(slot);
         if (fighter_gobj != NULL) {
             ftLib_80086A58(fighter_gobj, &screen_pos);
@@ -201,12 +208,13 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
                 color =
                     gm_80160968(gm_80160854((u8) slot, Player_GetTeam(slot),
                                             teams_enabled, slot_type));
+                color_copy = color;
                 if (player->state.unk == 2) {
                     arrow_kind = 1;
                 } else {
                     arrow_kind = 2;
                 }
-                un_802FD928((u8) slot, arrow_kind, &color);
+                un_802FD928((u8) slot, arrow_kind, &color_copy);
                 is_colored = true;
             }
         }
@@ -218,15 +226,17 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
 
 void ifMagnify_802FBBDC(HSD_GObj* arg0)
 {
+    ifMagnify* magnify;
     HSD_CObj* cobj;
-    ifMagnifyPlayer* player;
     HSD_GObj* fighter_gobj;
-    Vec3 interest_pos;
-    Vec3 world_pos;
+    ifMagnifyPlayer* player;
     f32 top;
     f32 bottom;
     f32 left;
     f32 right;
+    Vec3 interest_pos;
+    GXColor colors[4];
+    Vec3 world_pos;
     f32 x_blend;
     f32 y_blend;
     f32 x_inv;
@@ -234,23 +244,31 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
     f32 scale;
     f32 x_class;
     f32 y_class;
-    GXColor colors[4];
+    f32 mix0;
+    f32 mix1;
+    f32 mix2;
+    f32 mix3;
     GXColor result;
     int i;
     int j;
     u8* color_ids;
+    bool should_display;
+    bool is_outside;
 
+    magnify = &ifMagnify_804A1DE0;
     for (i = 0; i < 6; i++) {
-        ifMagnify_804A1DE0.player[i].state.is_offscreen = 0;
+        magnify->player[i].state.is_offscreen = 0;
     }
 
     if ((gm_8016AE38()->hud_enabled == 0) || ifAll_IsHUDHidden() ||
         Camera_80030130())
     {
-        return;
+        should_display = false;
+    } else {
+        should_display = true;
     }
-
-    cobj = arg0->hsd_obj;
+    if (should_display) {
+        cobj = arg0->hsd_obj;
     HSD_CObjGetOrtho(cobj, &top, &bottom, &left, &right);
     if (HSD_CObjSetCurrent(cobj) != 0) {
         HSD_GObj_80390ED0(arg0, 7);
@@ -258,7 +276,7 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
     }
 
     for (i = 0; i < 6; i++) {
-        player = &ifMagnify_804A1DE0.player[i];
+        player = &magnify->player[i];
         fighter_gobj = Player_GetEntity(i);
         if (player->state.ignore_offscreen || fighter_gobj == NULL ||
             !ftLib_80086B64(fighter_gobj) || !ftLib_80086ED0(fighter_gobj))
@@ -278,9 +296,13 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
         }
 
         Player_80036978(i, (s32) &world_pos);
-        if (world_pos.x < Stage_GetCamBoundsLeftOffset() ||
-            world_pos.x > Stage_GetCamBoundsRightOffset())
+        is_outside = true;
+        if (!(world_pos.x < Stage_GetCamBoundsLeftOffset()) &&
+            !(world_pos.x > Stage_GetCamBoundsRightOffset()))
         {
+            is_outside = false;
+        }
+        if (is_outside) {
             x_blend = 0.0f;
         } else {
             if (world_pos.x < Stage_GetCamBoundsLeftOffset()) {
@@ -303,18 +325,22 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
                              Stage_GetCamBoundsLeftOffset()));
             } else {
                 x_blend =
-                    1.0f - (-((0.5f * (Stage_GetCamBoundsLeftOffset() +
-                                       Stage_GetCamBoundsRightOffset())) -
-                              world_pos.x) /
-                            -((0.5f * (Stage_GetCamBoundsLeftOffset() +
-                                       Stage_GetCamBoundsRightOffset())) -
-                              Stage_GetCamBoundsRightOffset()));
+                    1.0f - ((world_pos.x -
+                             (0.5f * (Stage_GetCamBoundsLeftOffset() +
+                                      Stage_GetCamBoundsRightOffset()))) /
+                            (Stage_GetCamBoundsRightOffset() -
+                             (0.5f * (Stage_GetCamBoundsLeftOffset() +
+                                      Stage_GetCamBoundsRightOffset()))));
             }
         }
         x_inv = 1.0f - x_blend;
-        if (world_pos.y > Stage_GetCamBoundsTopOffset() ||
-            world_pos.y < Stage_GetCamBoundsBottomOffset())
+        is_outside = true;
+        if (!(world_pos.y > Stage_GetCamBoundsTopOffset()) &&
+            !(world_pos.y < Stage_GetCamBoundsBottomOffset()))
         {
+            is_outside = false;
+        }
+        if (is_outside) {
             y_blend = 0.0f;
         } else {
             if (world_pos.y > Stage_GetCamBoundsTopOffset()) {
@@ -346,50 +372,48 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
             }
         }
         y_inv = 1.0f - y_blend;
-        if (world_pos.y > Stage_GetCamBoundsTopOffset()) {
-            y_class = 0.0f;
-        } else if (world_pos.y < Stage_GetCamBoundsBottomOffset()) {
-            y_class = 3.0f;
-        } else if (world_pos.y > (0.5f * (Stage_GetCamBoundsTopOffset() +
-                                          Stage_GetCamBoundsBottomOffset())))
-        {
-            y_class = 1.0f;
-        } else {
-            y_class = 2.0f;
-        }
-        if (world_pos.x < Stage_GetCamBoundsLeftOffset()) {
-            x_class = 0.0f;
-        } else if (world_pos.x > Stage_GetCamBoundsRightOffset()) {
-            x_class = 3.0f;
-        } else if (world_pos.x < (0.5f * (Stage_GetCamBoundsLeftOffset() +
-                                          Stage_GetCamBoundsRightOffset())))
-        {
-            x_class = 1.0f;
-        } else {
-            x_class = 2.0f;
-        }
-        color_ids =
-            (u8*) &ifMagnify_803F984C[(s32) x_class + ((s32) y_class * 4)];
         for (j = 0; j < 4; j++) {
+            if (world_pos.y > Stage_GetCamBoundsTopOffset()) {
+                y_class = 0.0f;
+            } else if (world_pos.y < Stage_GetCamBoundsBottomOffset()) {
+                y_class = 3.0f;
+            } else if (world_pos.y > (0.5f * (Stage_GetCamBoundsTopOffset() +
+                                              Stage_GetCamBoundsBottomOffset())))
+            {
+                y_class = 1.0f;
+            } else {
+                y_class = 2.0f;
+            }
+            if (world_pos.x < Stage_GetCamBoundsLeftOffset()) {
+                x_class = 0.0f;
+            } else if (world_pos.x > Stage_GetCamBoundsRightOffset()) {
+                x_class = 3.0f;
+            } else if (world_pos.x < (0.5f * (Stage_GetCamBoundsLeftOffset() +
+                                              Stage_GetCamBoundsRightOffset())))
+            {
+                x_class = 1.0f;
+            } else {
+                x_class = 2.0f;
+            }
+            color_ids = (u8*) &ifMagnify_803F984C[(s32) x_class +
+                                                  ((s32) y_class * 4)];
             colors[j] = *ifMagnify_803F9828[color_ids[j]]();
         }
 
-        result.r = (u8) ((colors[3].r * x_inv * y_inv) +
-                         (colors[2].r * x_blend * y_inv) +
-                         (colors[0].r * x_blend * y_blend) +
-                         (colors[1].r * x_inv * y_blend));
-        result.g = (u8) ((colors[3].g * x_inv * y_inv) +
-                         (colors[2].g * x_blend * y_inv) +
-                         (colors[0].g * x_blend * y_blend) +
-                         (colors[1].g * x_inv * y_blend));
-        result.b = (u8) ((colors[3].b * x_inv * y_inv) +
-                         (colors[2].b * x_blend * y_inv) +
-                         (colors[0].b * x_blend * y_blend) +
-                         (colors[1].b * x_inv * y_blend));
-        result.a = (u8) ((colors[3].a * x_inv * y_inv) +
-                         (colors[2].a * x_blend * y_inv) +
-                         (colors[0].a * x_blend * y_blend) +
-                         (colors[1].a * x_inv * y_blend));
+        y_blend = 1.0f - y_inv;
+        x_blend = 1.0f - x_inv;
+        mix0 = x_inv * y_blend;
+        mix1 = x_blend * y_blend;
+        mix2 = x_blend * y_inv;
+        mix3 = x_inv * y_inv;
+        result.r = (u8) ((colors[3].r * mix3) + (colors[2].r * mix2) +
+                         (colors[0].r * mix1) + (colors[1].r * mix0));
+        result.g = (u8) ((colors[3].g * mix3) + (colors[2].g * mix2) +
+                         (colors[0].g * mix1) + (colors[1].g * mix0));
+        result.b = (u8) ((colors[3].b * mix3) + (colors[2].b * mix2) +
+                         (colors[0].b * mix1) + (colors[1].b * mix0));
+        result.a = (u8) ((colors[3].a * mix3) + (colors[2].a * mix2) +
+                         (colors[0].a * mix1) + (colors[1].a * mix0));
 
         HSD_SetEraseColor(result.r, result.g, result.b, result.a);
         HSD_CObjEraseScreen(cobj, 1, 0, 1);
@@ -403,7 +427,9 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
         player->state.is_offscreen = 1;
     }
 
-    HSD_CObjSetOrtho(cobj, top, bottom, left, right);
+        HSD_CObjSetOrtho(cobj, top, bottom, left, right);
+    }
+    PAD_STACK(8);
 }
 
 void ifMagnify_802FC3BC(void) {}
@@ -509,16 +535,12 @@ void ifMagnify_802FC618(void)
 void ifMagnify_802FC750(void)
 {
     ifMagnify* base = &ifMagnify_804A1DE0;
-    s32 i;
-    u8* ptr;
-    s32 offset;
     HSD_GObj** gobj_ptr;
+    s32 i;
 
-    ptr = (u8*) base;
-    offset = 0;
-    for (i = 0; i < 6; ptr += 0x10, offset += 0x10, i++) {
-        if (*(HSD_GObj**) (ptr + 0x14) != NULL) {
-            gobj_ptr = (HSD_GObj**) ((u8*) base + offset + 0x14);
+    for (i = 0; i < 6; i++) {
+        if (*(HSD_GObj**) ((u8*) base + (i << 4) + 0x14) != NULL) {
+            gobj_ptr = (HSD_GObj**) ((u32) base + (i << 4) + 0x14);
             HSD_GObjPLink_80390228(*gobj_ptr);
             *gobj_ptr = NULL;
         }

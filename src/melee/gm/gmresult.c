@@ -630,9 +630,6 @@ static StatsList lbl_803D6878[] = {
     { 3, 0x00, { 0 }, NULL },
 };
 
-static char lbl_803D6898[] =
-    "Error : Cannot read archive file (File Name : %s).";
-
 void fn_80174B4C(ResultsData* data, s32 slot)
 {
     struct ResultsPlayerData* pdata;
@@ -1013,10 +1010,11 @@ end_common:
                         new_var);
 }
 
+static char lbl_804D3FA8[8] = "\x81\x7C\x81\x46\x81\x7C";
+
 void fn_80175880(s32 slot)
 {
     MatchEnd* me;
-    u32 new_var2;
     s32 var_r30;
     u8 winner;
     GXColor sp10;
@@ -1025,6 +1023,7 @@ void fn_80175880(s32 slot)
     s32 skip;
     u32 seconds;
     u32 minutes;
+    u32 new_var2;
 
     me = lbl_8046DBE8.x94;
     sp10 = fn_8017507C(slot);
@@ -1062,13 +1061,21 @@ void fn_80175880(s32 slot)
         if ((s8) me->player_standings[slot].stocks > 0) {
             goto show_normal;
         }
-        if (me->player_standings[slot].score ==
+        if (me->player_standings[slot].score !=
             me->player_standings[winner].score)
         {
-            goto show_normal;
+            goto show_time;
         }
+    } else {
+        goto show_time;
     }
 
+show_normal:
+    var_r30 = HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time, 0.0F,
+                                  -30.0F, lbl_804D3FA8, slot * 0xA8);
+    goto end_common;
+
+show_time:
     seconds = me->player_standings[slot].x28 / 60;
     if (seconds > 5999) {
         seconds = 5999;
@@ -1081,17 +1088,12 @@ void fn_80175880(s32 slot)
                             seconds - new_var2);
     goto end_common;
 
-show_normal:
-    var_r30 = HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time, 0.0F,
-                                  -30.0F, NULL);
-    goto end_common;
-
 grey_out:
     sp10.r = 0xA0;
     sp10.g = 0xA0;
     sp10.b = 0xA0;
     var_r30 = HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time, 0.0F,
-                                  -30.0F, NULL, 0);
+                                  -30.0F, "%s", &lbl_804D3FA0);
 
 end_common:
     HSD_SisLib_803A7548(lbl_8046DBE8.player_data[slot].ko_time, var_r30, 0.11f,
@@ -1101,10 +1103,6 @@ end_common:
     HSD_SisLib_803A74F0(lbl_8046DBE8.player_data[slot].ko_time, var_r30,
                         new_var);
 }
-
-static char lbl_803D68D8[] = "SdRst.usd";
-static char lbl_803D68E4[] = "SIS_ResultData";
-static char lbl_803D68F4[] = "SdRst.dat";
 
 void fn_80175A94(s32 slot, Vec3* position)
 {
@@ -1590,13 +1588,13 @@ void fn_80176A6C(void)
     gobj = GObj_Create(0x13U, 0x14U, 0U);
     if (gobj == NULL) {
         OSReport("Error : gobj dont\'t get (gmResultAddPanelCamera)\n");
-        HSD_ASSERTMSG(0x662, 0, (char*) &lbl_804D3FB0);
+        HSD_ASSERT(0x662, 0);
     }
 
     cobj = HSD_CObjLoadDesc(lbl_8046DBE8.pnlsce->cameras->desc);
     if (cobj == NULL) {
         OSReport("Error : cobj dont\'t get (gmResultAddPanelCamera)\n");
-        HSD_ASSERTMSG(0x668, 0, (char*) &lbl_804D3FB0);
+        HSD_ASSERT(0x668, 0);
     }
 
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
@@ -1609,16 +1607,12 @@ void fn_80176A6C(void)
 
     HSD_SisLib_803A611C(0, gobj, 9U, 0xDU, 0U, 0xEU, 0U, 0x13U);
     if (lbLang_IsSavedLanguageUS() != 0) {
-        HSD_SisLib_803A62A0(0, lbl_803D68D8, lbl_803D68E4);
+        HSD_SisLib_803A62A0(0, "SdRst.usd", "SIS_ResultData");
     } else {
-        HSD_SisLib_803A62A0(0, lbl_803D68F4, lbl_803D68E4);
+        HSD_SisLib_803A62A0(0, "SdRst.dat", "SIS_ResultData");
     }
     lbl_8046DBE8.cobj = cobj;
 }
-
-static char lbl_803D6974[] = "Error : gobj dont't get (gmResultAddLight)\n";
-static char lbl_803D69A0[] = "Error : lobj dont't get (gmResultAddLight)\n";
-static char lbl_803D69CC[] = "Error : gobj dont't get (gmResultAddModel)\n";
 
 void fn_80176BCC(HSD_GObj* gobj)
 {
@@ -1877,17 +1871,13 @@ typedef struct ResultsDataPlayerIter {
     u8 pad_A8[0xD8 - 0xA8];
 } ResultsDataPlayerIter;
 
-static char lbl_804D3F70[] = "GmRst";
-static char lbl_804D3F78[] = "pnlsce";
-static char lbl_804D3F80[] = "flmsce";
-
 void gm_80177368_OnEnter(void* arg0_)
 {
     ResultsMatchInfo* arg0 = arg0_;
-    HSD_GObj* temp_r3_2;
-    HSD_LObj* temp_r3_3;
-    HSD_GObj* temp_r3_4;
-    MatchEnd* temp_r29;
+    HSD_GObj* light_gobj;
+    HSD_LObj* lobj;
+    HSD_GObj* model_gobj;
+    MatchEnd* me;
     ResultsData* data = &lbl_8046DBE8;
     int i;
 
@@ -1900,12 +1890,12 @@ void gm_80177368_OnEnter(void* arg0_)
     lbl_8046DBE8.x0_4 = arg0->x0_0;
     lbl_8046DBE8.x0_5 = arg0->x0_1;
 
-    temp_r29 = lbl_8046DBE8.x94;
+    me = lbl_8046DBE8.x94;
     if (gm_801743A4(lbl_8046DBE8.x94->result)) {
         lbl_8046DBE8.num_pages = 2;
     } else {
         lbl_8046DBE8.num_pages = 3;
-        if (temp_r29->x5 == 3) {
+        if (me->x5 == 3) {
             lbl_8046DBE8.player_data[0].page = 2;
             lbl_8046DBE8.player_data[1].page = 2;
             lbl_8046DBE8.player_data[2].page = 2;
@@ -1925,54 +1915,55 @@ void gm_80177368_OnEnter(void* arg0_)
         }
     }
     fn_801771C0(&lbl_8046DBE8);
-    if (temp_r29->player_standings[data->x6].slot_type == Gm_PKind_Human) {
-        if (!gm_801743A4(temp_r29->result) &&
-            temp_r29->player_standings[data->x6].x3_6)
+    if (me->player_standings[data->x6].slot_type == Gm_PKind_Human) {
+        if (!gm_801743A4(me->result) &&
+            me->player_standings[data->x6].x3_6)
         {
             lb_80014574(data->x6, 3, 0x20, 0);
         }
     }
     un_802FF1B4();
-    lbl_804D65B8 = lbArchive_80016DBC(lbl_804D3F70, &data->pnlsce,
-                                      lbl_804D3F78, &data->flmsce,
-                                      lbl_804D3F80, 0);
+    lbl_804D65B8 = lbArchive_80016DBC("GmRst", &data->pnlsce, "pnlsce",
+                                      &data->flmsce, "flmsce", 0);
     if (data->pnlsce == NULL) {
-        OSReport(lbl_803D6898, lbl_804D3F70);
+        OSReport("Error : Cannot read archive file (File Name : %s).",
+                 "GmRst");
     }
     if (data->flmsce == NULL) {
-        OSReport(lbl_803D6898, lbl_804D3F70);
+        OSReport("Error : Cannot read archive file (File Name : %s).",
+                 "GmRst");
     }
     fn_80176A6C();
-    temp_r3_2 = GObj_Create(0xB, 3, 0);
-    if (temp_r3_2 == NULL) {
-        OSReport(lbl_803D6974);
-        HSD_ASSERTMSG(0x68C, 0, (char*) &lbl_804D3FB0);
+    light_gobj = GObj_Create(0xB, 3, 0);
+    if (light_gobj == NULL) {
+        OSReport("Error : gobj dont't get (gmResultAddLight)\n");
+        HSD_ASSERT(0x68C, 0);
     }
-    temp_r3_3 = lb_80011AC4(data->pnlsce->lights);
-    if (temp_r3_3 == NULL) {
-        OSReport(lbl_803D69A0);
-        HSD_ASSERTMSG(0x68F, 0, (char*) &lbl_804D3FB0);
+    lobj = lb_80011AC4(data->pnlsce->lights);
+    if (lobj == NULL) {
+        OSReport("Error : lobj dont't get (gmResultAddLight)\n");
+        HSD_ASSERT(0x68F, 0);
     }
-    HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D784A, temp_r3_3);
-    GObj_SetupGXLink(temp_r3_2, HSD_GObj_LObjCallback, 0xA, 0);
-    temp_r3_4 = GObj_Create(0xE, 0xF, 0);
-    data->x18 = temp_r3_4;
-    if (temp_r3_4 == NULL) {
-        OSReport(lbl_803D69CC);
-        HSD_ASSERTMSG(0x6A2, 0, (char*) &lbl_804D3FB0);
+    HSD_GObjObject_80390A70(light_gobj, (u8) HSD_GObj_804D784A, lobj);
+    GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0xA, 0);
+    model_gobj = GObj_Create(0xE, 0xF, 0);
+    data->x18 = model_gobj;
+    if (model_gobj == NULL) {
+        OSReport("Error : gobj dont't get (gmResultAddModel)\n");
+        HSD_ASSERT(0x6A2, 0);
     }
-    HSD_GObj_SetupProc(temp_r3_4, fn_80179350, 0);
+    HSD_GObj_SetupProc(model_gobj, fn_80179350, 0);
     fn_80176F60();
     fn_8017AA78(&arg0->x1);
     fn_8017A004();
-    if (!gm_801743A4(temp_r29->result)) {
+    if (!gm_801743A4(me->result)) {
         lbAudioAx_80023F28(
-            fn_80160400(temp_r29->player_standings[data->x6].character_kind));
+            fn_80160400(me->player_standings[data->x6].character_kind));
     }
 
     {
         ResultsMatchEndPlayerIter* p =
-            (ResultsMatchEndPlayerIter*) temp_r29;
+            (ResultsMatchEndPlayerIter*) me;
         ResultsDataPlayerIter* result_data = (ResultsDataPlayerIter*) data;
         for (i = 0; i < 4; i++, p++, result_data++) {
             if (p->slot_type != Gm_PKind_NA) {

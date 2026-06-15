@@ -67,13 +67,17 @@ sislib_UnkAlloc3* HSD_SisLib_804D797C;
 
 /// u8 HSD_SisLib_8040C490[0x60] = { 0 };
 
-extern u8 HSD_SisLib_8040CB00[0x240];
 static u8
     HSD_SisLib_8040CD40; /* unable to generate initializer: unknown type */
 
 static HSD_Archive* HSD_SisLib_804D1110[5];
 SIS* HSD_SisLib_804D1124[5];
 s8 HSD_SisLib_804D6390[4] = { 0, 0, 0, 0 };
+
+static inline u8* HSD_SisLib_BytePtr(void* ptr)
+{
+    return ptr;
+}
 
 void* HSD_SisLib_Alloc(s32 size)
 {
@@ -906,7 +910,8 @@ int HSD_SisLib_803A6B98(HSD_Text* text, float x, float y, const char* fmt, ...)
 
     old_buf = alloc->data;
     old_size = alloc->size;
-    required_size = ((u8*) alloc->next - (u8*) old_buf) + 0x11;
+    required_size =
+        (HSD_SisLib_BytePtr(alloc->next) - HSD_SisLib_BytePtr(old_buf)) + 0x11;
     required_size += encoded_len;
     if (old_size < required_size) {
         alloc->size =
@@ -1084,7 +1089,9 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
             tail_len = (u8*) old_end - playhead;
             {
                 u32 new_required_size =
-                    new_size + (((u8*) old_end - (u8*) old_buf) + 1);
+                    new_size + ((HSD_SisLib_BytePtr(old_end) -
+                                 HSD_SisLib_BytePtr(old_buf)) +
+                                1);
                 required_size = new_required_size;
             }
             if (cur_size < required_size) {
@@ -1282,6 +1289,57 @@ void HSD_SisLib_803A7664(HSD_Text* text)
     *(u8*) data->x0 = 0;
     data->xC = 0;
 }
+
+static u8 HSD_SisLib_8040CB00[0x240] = {
+    0x09, 0x08, 0x09, 0x0C, 0x09, 0x08, 0x08, 0x08, 0x09, 0x08, 0x09, 0x08,
+    0x09, 0x08, 0x09, 0x08, 0x09, 0x08, 0x09, 0x08, 0x04, 0x03, 0x06, 0x05,
+    0x04, 0x04, 0x05, 0x03, 0x08, 0x06, 0x08, 0x06, 0x04, 0x03, 0x05, 0x03,
+    0x0D, 0x0B, 0x07, 0x06, 0x06, 0x04, 0x08, 0x06, 0x03, 0x01, 0x04, 0x03,
+    0x04, 0x03, 0x06, 0x04, 0x04, 0x02, 0x06, 0x04, 0x05, 0x04, 0x06, 0x05,
+    0x05, 0x03, 0x04, 0x03, 0x01, 0x00, 0x05, 0x04, 0x04, 0x03, 0x05, 0x04,
+    0x07, 0x06, 0x07, 0x06, 0x07, 0x06, 0x07, 0x06, 0x07, 0x06, 0x08, 0x09,
+    0x07, 0x06, 0x08, 0x07, 0x0A, 0x0A, 0x09, 0x0C, 0x08, 0x06, 0x0C, 0x0C,
+    0x01, 0x00, 0x07, 0x06, 0x07, 0x06, 0x07, 0x06, 0x07, 0x06, 0x0A, 0x09,
+    0x08, 0x07, 0x08, 0x09, 0x07, 0x05, 0x07, 0x06, 0x02, 0x01, 0x07, 0x06,
+    0x06, 0x06, 0x07, 0x06, 0x05, 0x05, 0x03, 0x02, 0x05, 0x05, 0x03, 0x02,
+    0x06, 0x06, 0x04, 0x04, 0x06, 0x05, 0x03, 0x02, 0x05, 0x03, 0x02, 0x00,
+    0x01, 0x00, 0x00, 0x00, 0x04, 0x04, 0x04, 0x00, 0x04, 0x05, 0x04, 0x03,
+    0x02, 0x02, 0x02, 0x00, 0x04, 0x04, 0x03, 0x00, 0x04, 0x03, 0x03, 0x00,
+    0x05, 0x03, 0x05, 0x03, 0x02, 0x02, 0x02, 0x00, 0x02, 0x02, 0x01, 0x00,
+    0x02, 0x02, 0x01, 0x00, 0x02, 0x02, 0x02, 0x00, 0x03, 0x03, 0x03, 0x00,
+    0x04, 0x05, 0x01, 0x02, 0x01, 0x00, 0x02, 0x02, 0x02, 0x00, 0x04, 0x04,
+    0x03, 0x00, 0x01, 0x01, 0x03, 0x02, 0x01, 0x00, 0x00, 0x00, 0x01, 0x01,
+    0x02, 0x01, 0x02, 0x00, 0x02, 0x00, 0x02, 0x01, 0x02, 0x00, 0x02, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x01,
+    0x02, 0x01, 0x01, 0x00, 0x01, 0x00, 0x03, 0x03, 0x01, 0x01, 0x02, 0x01,
+    0x02, 0x02, 0x03, 0x02, 0x04, 0x04, 0x01, 0x01, 0x05, 0x05, 0x02, 0x02,
+    0x05, 0x05, 0x02, 0x02, 0x03, 0x03, 0x05, 0x05, 0x02, 0x02, 0x01, 0x00,
+    0x02, 0x03, 0x04, 0x04, 0x01, 0x01, 0x02, 0x03, 0x01, 0x01, 0x05, 0x04,
+    0x03, 0x01, 0x04, 0x06, 0x01, 0x03, 0x06, 0x05, 0x03, 0x02, 0x05, 0x04,
+    0x02, 0x02, 0x04, 0x05, 0x02, 0x01, 0x02, 0x02, 0x02, 0x00, 0x02, 0x02,
+    0x01, 0x00, 0x03, 0x02, 0x02, 0x00, 0x01, 0x01, 0x01, 0x00, 0x03, 0x04,
+    0x02, 0x00, 0x02, 0x02, 0x01, 0x00, 0x02, 0x01, 0x02, 0x01, 0x02, 0x01,
+    0x02, 0x00, 0x02, 0x02, 0x02, 0x00, 0x02, 0x03, 0x01, 0x00, 0x03, 0x02,
+    0x02, 0x00, 0x02, 0x02, 0x02, 0x00, 0x05, 0x05, 0x02, 0x02, 0x01, 0x00,
+    0x02, 0x02, 0x01, 0x00, 0x09, 0x03, 0x09, 0x02, 0x02, 0x02, 0x01, 0x01,
+    0x02, 0x02, 0x03, 0x02, 0x03, 0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x04, 0x04, 0x00, 0x04, 0x02, 0x04, 0x03, 0x03, 0x00, 0x03, 0x00,
+    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
+    0x02, 0x02, 0x04, 0x04, 0x01, 0x01, 0x02, 0x03, 0x02, 0x02, 0x04, 0x04,
+    0x02, 0x01, 0x05, 0x05, 0x02, 0x02, 0x06, 0x06, 0x03, 0x04, 0x03, 0x03,
+    0x05, 0x05, 0x01, 0x01, 0x05, 0x03, 0x03, 0x03, 0x06, 0x06, 0x03, 0x03,
+    0x04, 0x03, 0x02, 0x02, 0x03, 0x00, 0x04, 0x05, 0x04, 0x00, 0x08, 0x08,
+    0x02, 0x12, 0x02, 0x13, 0x0C, 0x0D, 0x0C, 0x0D, 0x0B, 0x0A, 0x0D, 0x0C,
+    0x0D, 0x0C, 0x07, 0x06, 0x0D, 0x0C, 0x0A, 0x08, 0x00, 0x00, 0x02, 0x01,
+    0x01, 0x00, 0x01, 0x01, 0x0F, 0x0F, 0x02, 0x17, 0x01, 0x10, 0x15, 0x00,
+    0x01, 0x14, 0x15, 0x00, 0x01, 0x13, 0x13, 0x00, 0x01, 0x12, 0x04, 0x03,
+    0x04, 0x03, 0x05, 0x04, 0x04, 0x03, 0x01, 0x01, 0x01, 0x00, 0x04, 0x02,
+    0x05, 0x05, 0x01, 0x00, 0x04, 0x03, 0x03, 0x02, 0x08, 0x06, 0x03, 0x02,
+    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x01, 0x02, 0x00, 0x00, 0x01, 0x01, 0x00, 0x00,
+};
 
 void HSD_SisLib_803A8134(void* cursor, HSD_Text* text, f32* out_width,
                          f32* out_height)
@@ -1816,7 +1874,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
     u8 saved_kerning;
 
     u8 *data = &HSD_SisLib_8040CD40;
-    u8 *default_kerning = (u8*) &HSD_SisLib_8040CB00;
+    u8 *default_kerning = HSD_SisLib_8040CB00;
 
     if (gobj != NULL) {
         if (pass == 2U) {
@@ -1938,8 +1996,11 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
             f64 half_glyph = 16.0;
 
             u32 line_started;
+            u8 render_done = 0U;
+            u8 restart_text;
 
-        restart_text:
+            do {
+            restart_text = 0U;
             text->current_height = 0.0F;
             line_started = 0U;
             saved_kerning = text->kerning;
@@ -1973,7 +2034,8 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                 sis_cursor = (u8*) (pop_result + 4);
                                 break;
                             }
-                            goto render_done;
+                            render_done = 1U;
+                            break;
                         case 1:
                             text->x60 = NULL;
                             clear_idx = 0;
@@ -1999,7 +2061,8 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                             text->x98 = 0;
                             sis_cursor += 1;
                             text->sis_buffer = (SIS *)sis_cursor;
-                            goto restart_text;
+                            restart_text = 1U;
+                            break;
                         case 3:
                             if (line_started == 0U) {
                                 line_height_out = 32.0F * text->x80.y;
@@ -2217,54 +2280,57 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                     f32 uv_right = 1.0F;
                                     f32 quad_right = (text->x88 * glyph_w) + glyph_x;
                                     f32 quad_bottom = glyph_y + glyph_h;
+                                    u8 draw_glyph = 1U;
                                     if ((u8) text->x4E != 0) {
                                         if ((min.x > quad_right) || (max.x < glyph_x) || (min.y > quad_bottom) || (max.y < quad_top)) {
-                                            goto skip_draw;
-                                        }
-                                        if (min.x > glyph_x) {
-                                            f32 clip_left = min.x - glyph_x;
-                                            uv_left = clip_left / glyph_w;
-                                            glyph_x += clip_left;
-                                        }
-                                        if (max.x < quad_right) {
-                                            f32 clip_right = quad_right - max.x;
-                                            uv_right = 1.0F - (clip_right / glyph_w);
-                                            quad_right -= clip_right;
-                                        }
-                                        if (min.y > quad_top) {
-                                            f32 clip_top = min.y - quad_top;
-                                            uv_top = clip_top / glyph_h;
-                                            quad_top += clip_top;
-                                        }
-                                        if (max.y < quad_bottom) {
-                                            f32 clip_bottom = quad_bottom - max.y;
-                                            uv_bottom = 1.0F - (clip_bottom / glyph_h);
-                                            quad_bottom -= clip_bottom;
+                                            draw_glyph = 0U;
+                                        } else {
+                                            if (min.x > glyph_x) {
+                                                f32 clip_left = min.x - glyph_x;
+                                                uv_left = clip_left / glyph_w;
+                                                glyph_x += clip_left;
+                                            }
+                                            if (max.x < quad_right) {
+                                                f32 clip_right = quad_right - max.x;
+                                                uv_right = 1.0F - (clip_right / glyph_w);
+                                                quad_right -= clip_right;
+                                            }
+                                            if (min.y > quad_top) {
+                                                f32 clip_top = min.y - quad_top;
+                                                uv_top = clip_top / glyph_h;
+                                                quad_top += clip_top;
+                                            }
+                                            if (max.y < quad_bottom) {
+                                                f32 clip_bottom = quad_bottom - max.y;
+                                                uv_bottom = 1.0F - (clip_bottom / glyph_h);
+                                                quad_bottom -= clip_bottom;
+                                            }
                                         }
                                     }
-                                    if (glyph_idx < 0x4000U) {
-                                        GXInitTexObj(&tex_obj, data + ((tex_offset << 9) & 0x01FFFE00), 0x20U, 0x20U, GX_TF_I4, GX_CLAMP, GX_CLAMP, 0U);
-                                    } else {
-                                        GXInitTexObj(&tex_obj, (u8*) kerning + ((tex_offset << 9) & 0x01FFFE00), 0x20U, 0x20U, GX_TF_I4, GX_CLAMP, GX_CLAMP, 0U);
-                                    }
-                                    GXLoadTexObj(&tex_obj, GX_TEXMAP0);
-                                    GXSetTevColor(GX_TEVREG0, *(GXColor*)&text->active_color);
-                                    GXBegin(GX_QUADS, GX_VTXFMT0, 4U);
-                                    {
-                                        f32 glyph_depth = text->pos_z;
-                                        f32 neg_quad_top = -quad_top;
-                                        f32 neg_quad_bottom = -quad_bottom;
-                                        GXPosition3f32(glyph_x, neg_quad_top, glyph_depth);
-                                        GXTexCoord2f32(uv_left, uv_top);
-                                        GXPosition3f32(quad_right, neg_quad_top, glyph_depth);
-                                        GXTexCoord2f32(uv_right, uv_top);
-                                        GXPosition3f32(quad_right, neg_quad_bottom, glyph_depth);
-                                        GXTexCoord2f32(uv_right, uv_bottom);
-                                        GXPosition3f32(glyph_x, neg_quad_bottom, glyph_depth);
-                                        GXTexCoord2f32(uv_left, uv_bottom);
+                                    if (draw_glyph != 0U) {
+                                        if (glyph_idx < 0x4000U) {
+                                            GXInitTexObj(&tex_obj, data + ((tex_offset << 9) & 0x01FFFE00), 0x20U, 0x20U, GX_TF_I4, GX_CLAMP, GX_CLAMP, 0U);
+                                        } else {
+                                            GXInitTexObj(&tex_obj, HSD_SisLib_BytePtr(kerning) + ((tex_offset << 9) & 0x01FFFE00), 0x20U, 0x20U, GX_TF_I4, GX_CLAMP, GX_CLAMP, 0U);
+                                        }
+                                        GXLoadTexObj(&tex_obj, GX_TEXMAP0);
+                                        GXSetTevColor(GX_TEVREG0, *(GXColor*)&text->active_color);
+                                        GXBegin(GX_QUADS, GX_VTXFMT0, 4U);
+                                        {
+                                            f32 glyph_depth = text->pos_z;
+                                            f32 neg_quad_top = -quad_top;
+                                            f32 neg_quad_bottom = -quad_bottom;
+                                            GXPosition3f32(glyph_x, neg_quad_top, glyph_depth);
+                                            GXTexCoord2f32(uv_left, uv_top);
+                                            GXPosition3f32(quad_right, neg_quad_top, glyph_depth);
+                                            GXTexCoord2f32(uv_right, uv_top);
+                                            GXPosition3f32(quad_right, neg_quad_bottom, glyph_depth);
+                                            GXTexCoord2f32(uv_right, uv_bottom);
+                                            GXPosition3f32(glyph_x, neg_quad_bottom, glyph_depth);
+                                            GXTexCoord2f32(uv_left, uv_bottom);
+                                        }
                                     }
 
-skip_draw:
                                     text->current_width = (f32) ((text->x88 * (text->x80.x * (32.0F + text->x78.x))) + text->current_width);
                                     if ((u8) text->kerning != 0) {
                                         if (glyph_idx < 0x4000U) {
@@ -2287,9 +2353,12 @@ skip_draw:
                         }
                     }
                 }
+                if ((render_done != 0U) || (restart_text != 0U)) {
+                    break;
+                }
                 sis_cursor++;
             }
-        render_done:
+            } while ((restart_text != 0U) && (render_done == 0U));
             HSD_StateInvalidate(-1);
             text->active_color.r = saved_color_r;
             text->active_color.g = saved_color_g;

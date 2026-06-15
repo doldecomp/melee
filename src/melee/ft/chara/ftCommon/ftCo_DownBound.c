@@ -63,30 +63,38 @@ void ftCo_80097630(Fighter* fp, enum_t* sfx_ids, float threshold)
 
 void ftCo_800976A4(Fighter_GObj* gobj)
 {
-    u8 _[16] = { 0 };
     Fighter* fp = gobj->user_data;
-    float vel_x = fp->self_vel.x + fp->x8c_kb_vel.x;
-    float vel_y = fp->self_vel.y + fp->x8c_kb_vel.y;
-    float dist = sqrtf(SQ(vel_x) + SQ(vel_y)) * fp->co_attrs.weight;
-    enum_t ef_id = 1031;
-    IntVec3 ivec;
+    enum_t* common_sfx_ids = ftCo_DownBound_SfxIds;
+    float vel_x;
+    float vel_y;
+    float dist;
+    enum_t ef_id;
+    int sfx_ids[4];
+    int arg2;
+    int arg3;
     Vec3 vec1;
     Vec3 vec0;
-    ivec.y = 1;
-    if (ft_80084C74(gobj, &ivec.z, &ivec.y, &ivec.x)) {
-        if (ivec.z != -1) {
-            ftCo_80097630(fp, ftCo_DownBound_SfxIds, dist);
+    PAD_STACK(8);
+    vel_x = fp->self_vel.x + fp->x8c_kb_vel.x;
+    vel_y = fp->self_vel.y + fp->x8c_kb_vel.y;
+    dist = sqrtf(SQ(vel_x) + SQ(vel_y));
+    dist *= fp->co_attrs.weight;
+    ef_id = 1031;
+    arg2 = 1;
+    if (ft_80084C74(gobj, sfx_ids, &arg2, &arg3)) {
+        if (sfx_ids[0] != -1) {
+            ftCo_80097630(fp, sfx_ids, dist);
         }
-        if (ivec.x != -1) {
-            ef_id = ivec.x;
+        if (arg3 != -1) {
+            ef_id = arg3;
         }
     }
-    vec0.x = vec1.x = 0;
-    vec0.y = vec1.y = 0;
     vec0.z = vec1.z = 0;
+    vec0.y = vec1.y = 0;
+    vec0.x = vec1.x = 0;
     ftCo_8009F834(gobj, ef_id, 0, 0, 0, &vec1, &vec0, 0);
-    if (ivec.y != 0) {
-        ftCo_80097630(fp, ftCo_DownBound_SfxIds, dist);
+    if (arg2 != 0) {
+        ftCo_80097630(fp, common_sfx_ids, dist);
     }
     Camera_80030E44(4, &fp->cur_pos);
     ftCommon_8007EBAC(fp, 9, 0);
@@ -142,12 +150,14 @@ void ftCo_8009794C(Fighter_GObj* gobj)
 
 void ftCo_80097AF4(Fighter_GObj* gobj)
 {
-    // ftCo_80097570
+    HSD_JObj* jobj;
     Fighter* fp = gobj->user_data;
-    HSD_JObj* jobj = fp->parts[ftParts_GetBoneIndex(fp, FtPart_HipN)].joint;
-    float rot0, rot1;
+    float rot0;
+    float rot1;
+
+    jobj = fp->parts[ftParts_GetBoneIndex(fp, FtPart_HipN)].joint;
     HSD_JObjSetupMatrix(jobj);
-    PAD_STACK(40);
+    PAD_STACK(56);
     if (fp->x2226_b0) {
         rot0 = jobj->mtx[0][2];
         rot1 = jobj->mtx[1][2];
@@ -156,17 +166,28 @@ void ftCo_80097AF4(Fighter_GObj* gobj)
         rot1 = jobj->mtx[1][1];
     }
     if (ABS(rot0) < ABS(rot1)) {
-        ftCo_8009794C(gobj);
-    } else {
-        // ftCo_800978D4
         Fighter* fp = gobj->user_data;
-        float param = atan2f(-fp->self_vel.y, fp->self_vel.x);
-        HSD_JObj* jobj = fp->parts[FtPart_TopN].joint;
-        {
-            Fighter* fp = gobj->user_data;
-            efAsync_Spawn(gobj, &fp->x60C, 4, 1030, jobj, &param);
-            ftCo_800976A4(gobj);
+        if (fp->ground_or_air == GA_Air) {
+            ftCommon_8007D7FC(fp);
         }
+        {
+            extern bool ftCo_80097570(Fighter_GObj* gobj);
+            bool b = ftCo_80097570(gobj);
+            if (fp->x2226_b1) {
+                b = !b;
+            }
+            Fighter_ChangeMotionState(
+                gobj, b ? ftCo_MS_DownBoundU : ftCo_MS_DownBoundD,
+                Ft_MF_SkipNametagVis | Ft_MF_KeepColAnimPartHitStatus, 0, 1,
+                0, NULL);
+            ftCo_800978D4(gobj);
+            fp->x67C = 255;
+            fp->x67D = 255;
+            ftCommon_8007E2F4(fp, 511);
+            ftCommon_8007CCE8(fp);
+        }
+    } else {
+        ftCo_800978D4(gobj);
         Camera_80030E44(4, &fp->cur_pos);
         if (fp->facing_dir * rot0 > 0) {
             ft_8008A2BC(gobj);

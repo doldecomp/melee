@@ -85,7 +85,7 @@ struct StageData grRc_803E4ECC = {
 extern Vec3 grRc_803B8288;
 extern s16 grRc_803E4FF0[];
 extern s16 grRc_804D4790[4];
-extern const f32 grRc_804DB644;
+const f32 grRc_804DB644;
 
 static struct {
     f32 x0;
@@ -411,29 +411,14 @@ void grRCruise_801FF924(Ground_GObj* gobj)
     gp->u.scroll.x34[2] = Ground_801C3FA4(gobj, 6);
     gp->u.scroll.x40 = Ground_801C3FA4(gobj, 7);
     gp->u.scroll.int_jobj = Ground_801C3FA4(gobj, 3);
-    if (gp->u.scroll.int_jobj == NULL) {
-        __assert("grrcruise.c", 0x2B0, grRc_803E4F44 + 0x18);
-    }
+    HSD_ASSERTMSG(0x2B0, gp->u.scroll.int_jobj, grRc_803E4F44 + 0x18);
     gp->u.scroll.cam_jobj = Ground_801C3FA4(gobj, 2);
-    if (gp->u.scroll.cam_jobj == NULL) {
-        __assert("grrcruise.c", 0x2B2, grRc_803E4F44 + 0x30);
-    }
+    HSD_ASSERTMSG(0x2B2, gp->u.scroll.cam_jobj, grRc_803E4F44 + 0x30);
 
     gp->u.scroll.ctr_jobj = Ground_801C3FA4(gobj, 1);
-    if (gp->u.scroll.ctr_jobj == NULL) {
-        __assert("grrcruise.c", 0x2B4, grRc_803E4F44 + 0x48);
-    }
+    HSD_ASSERTMSG(0x2B4, gp->u.scroll.ctr_jobj, grRc_803E4F44 + 0x48);
 
-    {
-        HSD_JObj* ctr_jobj = gp->u.scroll.ctr_jobj;
-        if (ctr_jobj == NULL) {
-            __assert("jobj.h", 0x3D3, "jobj");
-        }
-        if (&gp->u.scroll.x04 == NULL) {
-            __assert("jobj.h", 0x3D4, grRc_803E4F44 + 0x60);
-        }
-        gp->u.scroll.x04 = ctr_jobj->translate;
-    }
+    HSD_JObjGetTranslation(gp->u.scroll.ctr_jobj, &gp->u.scroll.x04);
     gp->u.scroll.x10.z = grRc_804DB644;
     gp->u.scroll.x10.y = grRc_804DB644;
     gp->u.scroll.x10.x = grRc_804DB644;
@@ -745,17 +730,16 @@ void grRCruise_8020071C(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     HSD_JObj* jobj = Ground_801C3FA4(gobj, 8);
-    HSD_GObj* gobj5 = Ground_801C2BA4(5);
-    HSD_JObj* jobj5 = gobj5 != NULL ? Ground_801C3FA4(gobj5, 8) : NULL;
+    HSD_JObj* jobj5 = Ground_801C3FA4(Ground_801C2BA4(5), 8);
     f32 abs_rot =
-        gp->gv.rcruise.x14 < 0.0f ? -gp->gv.rcruise.x14 : gp->gv.rcruise.x14;
+        gp->gv.rcruise.x18 < 0.0f ? -gp->gv.rcruise.x18 : gp->gv.rcruise.x18;
     f32 wrapped = abs_rot - (360.0f * (s32) (abs_rot / 360.0f));
     PAD_STACK(8);
 
     switch (gp->gv.rcruise.x2C) {
     case 0:
         if (gp->gv.rcruise.x34 == 0) {
-            gp->gv.rcruise.x1C = gp->gv.rcruise.x14 < 0.0f ? 1.0f : -1.0f;
+            gp->gv.rcruise.x1C = (f32) (gp->gv.rcruise.x18 < 0.0f ? 1 : -1);
             gp->gv.rcruise.x20 = grRc_804D6A10->x8 * gp->gv.rcruise.x1C;
             if (wrapped <= 0.2f) {
                 gp->gv.rcruise.x20 = 0.0f;
@@ -765,14 +749,14 @@ void grRCruise_8020071C(Ground_GObj* gobj)
             gp->gv.rcruise.x1C = 1.0f;
             gp->gv.rcruise.x20 =
                 grRc_804D6A10->x0 * (gp->gv.rcruise.x28 - gp->gv.rcruise.x24);
-            if (gp->gv.rcruise.x20 > grRc_804D6A10->x4) {
+            if (gp->gv.rcruise.x20 >= grRc_804D6A10->x4) {
                 gp->gv.rcruise.x20 = grRc_804D6A10->x4;
             }
         } else {
             gp->gv.rcruise.x1C = -1.0f;
             gp->gv.rcruise.x20 =
                 -grRc_804D6A10->x0 * (gp->gv.rcruise.x24 - gp->gv.rcruise.x28);
-            if (gp->gv.rcruise.x20 < -grRc_804D6A10->x4) {
+            if (gp->gv.rcruise.x20 <= -grRc_804D6A10->x4) {
                 gp->gv.rcruise.x20 = -grRc_804D6A10->x4;
             }
         }
@@ -780,7 +764,8 @@ void grRCruise_8020071C(Ground_GObj* gobj)
     case 1:
         if (gp->gv.rcruise.x38 == 0) {
             if (gp->gv.rcruise.x34 == 0) {
-                gp->gv.rcruise.x1C = gp->gv.rcruise.x14 < 0.0f ? 1.0f : -1.0f;
+                gp->gv.rcruise.x1C =
+                    (f32) (gp->gv.rcruise.x18 < 0.0f ? 1 : -1);
                 gp->gv.rcruise.x20 = grRc_804D6A10->x8 * gp->gv.rcruise.x1C;
                 if (wrapped <= 0.2f) {
                     gp->gv.rcruise.x20 = 0.0f;
@@ -792,19 +777,17 @@ void grRCruise_8020071C(Ground_GObj* gobj)
         } else {
             gp->gv.rcruise.x38--;
             gp->gv.rcruise.x20 += 0.008f * -gp->gv.rcruise.x1C;
-            if (gp->gv.rcruise.x20 < 0.0f ? -gp->gv.rcruise.x20
-                                          : gp->gv.rcruise.x20 <= 0.008f)
+            if ((gp->gv.rcruise.x20 < 0.0f ? -gp->gv.rcruise.x20
+                                           : gp->gv.rcruise.x20) <= 0.008f)
             {
                 gp->gv.rcruise.x20 = 0.0f;
             }
         }
         break;
     }
-    gp->gv.rcruise.x14 += gp->gv.rcruise.x20;
-    HSD_JObjSetRotationZ(jobj, 0.017453292f * gp->gv.rcruise.x14);
-    if (jobj5 != NULL) {
-        HSD_JObjSetRotationZ(jobj5, 0.017453292f * gp->gv.rcruise.x14);
-    }
+    gp->gv.rcruise.x18 += gp->gv.rcruise.x20;
+    HSD_JObjSetRotationZ(jobj, 0.017453292f * gp->gv.rcruise.x18);
+    HSD_JObjSetRotationZ(jobj5, 0.017453292f * gp->gv.rcruise.x18);
     gp->gv.rcruise.x30 = gp->gv.rcruise.x34;
     gp->gv.rcruise.x34 = 0;
     gp->gv.rcruise.x28 = 0.0f;

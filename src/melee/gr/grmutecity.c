@@ -371,7 +371,7 @@ char grMc_803E3434[0x48] =
     "not found car spline (R)\n\0\0\0"
     "not found car spline (L)\n";
 
-static struct {
+typedef struct grMc_UnkStruct {
     int x0;
     void* x4;
     DynamicsDesc* x8;
@@ -386,7 +386,9 @@ static struct {
     f32 x44;
     f32 x48;
     f32 x4C;
-}* grMc_804D69D0;
+} grMc_UnkStruct;
+
+static grMc_UnkStruct* grMc_804D69D0;
 
 static s32 grMc_804D69D4;
 
@@ -937,16 +939,15 @@ void grMuteCity_801F0D20(Ground_GObj* gobj)
         mpLineSetPos(0x31, sp28.x, 30.0f + sp28.y, sp28.x, sp28.y);
         mpLineSetPos(0x35, sp1C.x, sp1C.y, sp1C.x, 30.0f + sp1C.y);
     } else if (mode == 2) {
-        f32 angle, angle_fwd, angle_back, tmp;
+        f32 angle, angle_fwd, angle_back;
         angle = atan2f(sp1C.y - sp28.y, sp1C.x - sp28.x);
-        angle_fwd = 0.2617994f + angle;
         angle_back = (3.1415927f + angle) - 0.2617994f;
-        tmp = (10.0f * sinf(angle_back)) + sp28.y;
-        mpLineSetPos(0x31, (10.0f * cosf(angle_back)) + sp28.x, tmp, sp28.x,
-                     sp28.y);
-        tmp = (10.0f * sinf(angle_fwd)) + sp1C.y;
-        mpLineSetPos(0x35, sp1C.x, sp1C.y, (10.0f * cosf(angle_fwd)) + sp1C.x,
-                     tmp);
+        angle_fwd = 0.2617994f + angle;
+        mpLineSetPos(0x31, (10.0f * cosf(angle_back)) + sp28.x,
+                     (10.0f * sinf(angle_back)) + sp28.y, sp28.x, sp28.y);
+        mpLineSetPos(0x35, sp1C.x, sp1C.y,
+                     (10.0f * cosf(angle_fwd)) + sp1C.x,
+                     (10.0f * sinf(angle_fwd)) + sp1C.y);
     } else {
         mpLineSetPos(0x31, sp28.x - 5.0f, sp28.y, sp28.x, sp28.y);
         mpLineSetPos(0x35, sp1C.x, sp1C.y, 5.0f + sp1C.x, sp1C.y);
@@ -955,8 +956,8 @@ void grMuteCity_801F0D20(Ground_GObj* gobj)
     gp->gv.mutecity.xE4 = sp28;
     gp->gv.mutecity.xF0 = sp1C;
     lbVector_Diff(&sp1C, &sp28, &sp10);
-    mpLineSetPos(0x33, (0.35f * sp10.x) + sp28.x, (0.35f * sp10.y) + sp28.y,
-                 (0.65f * sp10.x) + sp28.x, (0.65f * sp10.y) + sp28.y);
+    mpLineSetPos(0x33, sp28.x + (0.35f * sp10.x), sp28.y + (0.35f * sp10.y),
+                 sp28.x + (0.65f * sp10.x), sp28.y + (0.65f * sp10.y));
     mpLib_80055E24(4);
     mpLib_8005667C(4);
 }
@@ -994,56 +995,62 @@ void grMuteCity_801F0F4C(Ground_GObj* gobj)
 
 void grMuteCity_801F106C(s32 i)
 {
+    typedef struct grMc_CarState {
+        s32 idx[30];
+        grMc_CarEntry cars[30];
+    } grMc_CarState;
     f32 var_f0;
-    grMc_CarEntry* car = &grMc_8049F4B8[i];
-    u16 flags16 = car->x20;
-    PAD_STACK(8);
+    grMc_CarState* state = (grMc_CarState*) grMc_8049F440;
+    grMc_CarEntry* cars = state->cars;
+    u16 flags16 = state->cars[i].x20;
 
-    if (!car->x22_flags.b0) {
+    if (!cars[i].x22_flags.b0) {
         if (flags16 & 1) {
             if (flags16 & 8) {
-                car->x8 -= grMc_804D69D0->x4C;
+                state->cars[i].x8 -= grMc_804D69D0->x4C;
             } else {
                 s32 rnd = HSD_Randi(4);
                 switch (rnd) {
                 case 3:
                     break;
                 case 0:
-                    car->x8 -= grMc_804D69D0->x4C;
+                    state->cars[i].x8 -= grMc_804D69D0->x4C;
                     break;
-                default:
+                case 1:
+                case 2:
                     if (flags16 & 4) {
-                        car->xC += grMc_804D69D0->x44;
-                        if (car->xC > 0.9) {
-                            car->xC = 0.9f;
+                        state->cars[i].xC += grMc_804D69D0->x44;
+                        if (state->cars[i].xC > 0.9) {
+                            state->cars[i].xC = 0.9f;
                         }
                     } else {
-                        car->xC -= grMc_804D69D0->x44;
-                        if (car->xC < 0.1) {
-                            car->xC = 0.1f;
+                        state->cars[i].xC -= grMc_804D69D0->x44;
+                        if (state->cars[i].xC < 0.1) {
+                            state->cars[i].xC = 0.1f;
                         }
                     }
                     break;
                 }
             }
         } else {
-            car->x8 += grMc_804D69D0->x40;
-            if (car->xC > (0.7f + grMc_804D69D0->x48)) {
-                car->xC -= grMc_804D69D0->x48;
-            } else if (car->xC < (0.3f - grMc_804D69D0->x48)) {
-                car->xC += grMc_804D69D0->x48;
+            grMc_UnkStruct* params = grMc_804D69D0;
+            state->cars[i].x8 += params->x40;
+            if (state->cars[i].xC > (0.7f + params->x48)) {
+                state->cars[i].xC -= params->x48;
+            } else if (state->cars[i].xC < (0.3f - params->x48)) {
+                state->cars[i].xC += params->x48;
             }
         }
         if (flags16 & 8) {
             if (flags16 & 4) {
-                car->xC += grMc_804D69D0->x44;
-                if (car->xC > 1.0) {
-                    car->xC = 1.0f;
+                state->cars[i].xC += grMc_804D69D0->x44;
+                if (state->cars[i].xC > 1.0) {
+                    state->cars[i].xC = 1.0f;
                 }
             } else {
-                car->xC -= grMc_804D69D0->x44;
-                if (car->xC < 0.0) {
-                    car->xC = 0.0f;
+                state->cars[i].xC -= grMc_804D69D0->x44;
+                if (state->cars[i].xC < 0.0) {
+                    state->cars[i].xC = 0.0f;
                 }
             }
         }
@@ -1054,22 +1061,24 @@ void grMuteCity_801F106C(s32 i)
         } else {
             var_f0 = grMc_804D69D0->x34;
         }
-        if (car->x8 > var_f0) {
-            car->x8 = var_f0;
+        if (state->cars[i].x8 > var_f0) {
+            state->cars[i].x8 = var_f0;
             return;
         }
-        if (car->x8 < 0.0) {
-            car->x8 = 0.0f;
+        if (state->cars[i].x8 < 0.0) {
+            state->cars[i].x8 = 0.0f;
         }
     } else {
-        if ((car->x4 > 0.827f) && (car->x4 < 0.914f)) {
-            if (car->x8 < 0.001f) {
-                car->x8 = 0.001f;
+        if ((state->cars[i].x4 > 0.827f) &&
+            (state->cars[i].x4 < 0.914f))
+        {
+            if (state->cars[i].x8 < 0.001f) {
+                state->cars[i].x8 = 0.001f;
             }
         } else {
-            car->x8 *= 0.95f;
-            if (car->x8 < 0.00001f) {
-                car->x8 = 0.0f;
+            state->cars[i].x8 *= 0.95f;
+            if (state->cars[i].x8 < 0.00001f) {
+                state->cars[i].x8 = 0.0f;
             }
         }
     }
@@ -1078,18 +1087,22 @@ void grMuteCity_801F106C(s32 i)
 void grMuteCity_801F1328(void)
 {
     s32* arr = grMc_8049F440;
-    int i, j;
-    PAD_STACK(8);
+    s32* p;
+    int i;
+    s32 offset;
+    int j;
 
-    for (i = 1; i < 30; i++) {
-        j = i;
-        while (j > 0 &&
-               grMc_8049F4B8[arr[j]].x0 > grMc_8049F4B8[arr[j - 1]].x0)
-        {
-            s32 temp = arr[j];
-            arr[j] = arr[j - 1];
-            arr[j - 1] = temp;
-            j--;
+    for (offset = 4, i = 1; i < 30; i++, offset += 4) {
+        p = (s32*) ((u32) arr + offset);
+        for (j = i; j >= 0; j--) {
+            s32 temp = p[0];
+            s32 prev = p[-1];
+            if (grMc_8049F4B8[temp].x0 > grMc_8049F4B8[prev].x0) {
+                p[0] = prev;
+                *--p = temp;
+            } else {
+                break;
+            }
         }
     }
 
@@ -1098,28 +1111,26 @@ void grMuteCity_801F1328(void)
     }
 
     for (i = 0; i < 30; i++) {
-        grMc_CarEntry* my_car = &grMc_8049F4B8[arr[i]];
-        if (my_car->x22_flags.b0) {
+        if (grMc_8049F4B8[arr[i]].x22_flags.b0) {
             continue;
         }
         for (j = 1; j < 30; j++) {
-            s32 idx = i + j;
-            grMc_CarEntry* other_car;
+            s32 sum = i + j;
+            s32 idx = sum;
             f32 other_pos;
             f32 my_pos;
             f32 dist;
 
-            if (idx >= 30) {
+            if (sum >= 30) {
                 idx -= 30;
             }
-            other_car = &grMc_8049F4B8[arr[idx]];
 
-            if (other_car->x22_flags.b0) {
+            if (grMc_8049F4B8[arr[idx]].x22_flags.b0) {
                 continue;
             }
 
-            other_pos = other_car->x4;
-            my_pos = my_car->x4;
+            other_pos = grMc_8049F4B8[arr[idx]].x4;
+            my_pos = grMc_8049F4B8[arr[i]].x4;
             if (my_pos > other_pos) {
                 dist = my_pos - other_pos;
             } else {
@@ -1129,27 +1140,30 @@ void grMuteCity_801F1328(void)
             if (dist > 0.002) {
                 break;
             }
-            other_car->x20 |= 1;
+            grMc_8049F4B8[arr[idx]].x20 |= 1;
 
             {
-                f32 dx = my_car->x14 - other_car->x14;
-                f32 dy = my_car->x18 - other_car->x18;
-                f32 dz = my_car->x1C - other_car->x1C;
+                f32 dx = grMc_8049F4B8[arr[i]].x14 -
+                         grMc_8049F4B8[arr[idx]].x14;
+                f32 dy = grMc_8049F4B8[arr[i]].x18 -
+                         grMc_8049F4B8[arr[idx]].x18;
+                f32 dz = grMc_8049F4B8[arr[i]].x1C -
+                         grMc_8049F4B8[arr[idx]].x1C;
                 f32 dx2 = dx * dx;
                 f32 dy2 = dy * dy;
                 f32 dz2 = dz * dz;
                 if ((dz2 + (dx2 + dy2)) < 900.0f) {
-                    my_car->x20 |= 8;
-                    other_car->x20 |= 8;
+                    grMc_8049F4B8[arr[i]].x20 |= 8;
+                    grMc_8049F4B8[arr[idx]].x20 |= 8;
                 }
             }
 
-            if (my_car->xC > other_car->xC) {
-                my_car->x20 |= 4;
-                other_car->x20 |= 2;
+            if (grMc_8049F4B8[arr[i]].xC > grMc_8049F4B8[arr[idx]].xC) {
+                grMc_8049F4B8[arr[i]].x20 |= 4;
+                grMc_8049F4B8[arr[idx]].x20 |= 2;
             } else {
-                my_car->x20 |= 2;
-                other_car->x20 |= 4;
+                grMc_8049F4B8[arr[i]].x20 |= 2;
+                grMc_8049F4B8[arr[idx]].x20 |= 4;
             }
         }
     }
@@ -1319,7 +1333,7 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
     HSD_JObj* car_jobj = arg0->hsd_obj;
     HSD_JObj* jobj;
     HSD_JObj* var_r20;
-    s32 var_r27;
+    s32 car_idx;
     grMc_CarEntry* car;
     f32 track_mid;
     f32 var_f31;
@@ -1344,7 +1358,7 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
         }
     }
 
-    var_r27 = 0;
+    car_idx = 0;
     car = grMc_8049F4B8;
 
     do {
@@ -1612,7 +1626,7 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
                 if (!car->x22_flags.b0 && (u32) car->x24 == 0) {
                     Item_GObj* item_gobj = grMaterial_801C8CFC(
                         0, 2, car_gp, jobj, grMuteCity_801F1A0C,
-                        ((grMc_SpeedFn*) (grMc_803E30B0 + 0xBBC))[var_r27],
+                        ((grMc_SpeedFn*) (grMc_803E30B0 + 0xBBC))[car_idx],
                         NULL);
                     if (item_gobj != NULL) {
                         grMaterial_801C8DE0(item_gobj, 0.0f, 0.0f, -12.0f,
@@ -1641,13 +1655,13 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
         }
 
         car++;
-        var_r27 += 1;
+        car_idx += 1;
         if (jobj == NULL) {
             jobj = NULL;
         } else {
             jobj = jobj->next;
         }
-    } while (var_r27 < 0x1E);
+    } while (car_idx < 0x1E);
 }
 
 DynamicModelDesc* grMuteCity_801F28A8(void)

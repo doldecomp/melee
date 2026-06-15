@@ -4,6 +4,8 @@
 
 #include <platform.h>
 
+#include <math.h>
+
 #include "cm/camera.h"
 #include "ef/efsync.h"
 #include "ft/ftdevice.h"
@@ -28,6 +30,7 @@
 #include <baselib/jobj.h>
 #include <baselib/psstructs.h>
 #include <baselib/random.h>
+#include "MSL/math_ppc.h"
 
 static struct {
     int x0;
@@ -37,6 +40,14 @@ static struct {
 typedef struct grNKr_Depths {
     s16 x[51];
 } grNKr_Depths;
+
+typedef union grNKr_Flags {
+    u8 flags;
+    struct {
+        u8 b7 : 1;
+        u8 b0123456 : 7;
+    };
+} grNKr_Flags;
 
 static const Vec3 grNKr_803B82E8 = { 0.0f, 0.0f, 0.0f };
 
@@ -153,6 +164,8 @@ HSD_GObj* grKinokoRoute_8020754C(int gobj_id)
 void grKinokoRoute_80207634(Ground_GObj* gobj)
 {
     Vec3 origin;
+    UNUSED u32 unused1;
+    UNUSED u32 unused2;
     Vec3 cam_offset;
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj;
@@ -161,29 +174,33 @@ void grKinokoRoute_80207634(Ground_GObj* gobj)
     if (jobj != NULL) {
         HSD_JObjGetTranslation(jobj, &origin);
 
-        gp->gv.kinokoroute.entries[0].jobj = Ground_801C2CF4(0x7F);
-        if (gp->gv.kinokoroute.entries[0].jobj != NULL) {
+        if ((gp->gv.kinokoroute.entries[0].jobj = Ground_801C2CF4(0x7F)) !=
+            NULL)
+        {
             HSD_JObjGetTranslation(gp->gv.kinokoroute.entries[0].jobj,
                                    &gp->gv.kinokoroute.entries[0].pos);
             lbVector_Sub(&gp->gv.kinokoroute.entries[0].pos, &origin);
         }
 
-        gp->gv.kinokoroute.entries[1].jobj = Ground_801C2CF4(0x80);
-        if (gp->gv.kinokoroute.entries[1].jobj != NULL) {
+        if ((gp->gv.kinokoroute.entries[1].jobj = Ground_801C2CF4(0x80)) !=
+            NULL)
+        {
             HSD_JObjGetTranslation(gp->gv.kinokoroute.entries[1].jobj,
                                    &gp->gv.kinokoroute.entries[1].pos);
             lbVector_Sub(&gp->gv.kinokoroute.entries[1].pos, &origin);
         }
 
-        gp->gv.kinokoroute.entries[2].jobj = Ground_801C2CF4(0x81);
-        if (gp->gv.kinokoroute.entries[2].jobj != NULL) {
+        if ((gp->gv.kinokoroute.entries[2].jobj = Ground_801C2CF4(0x81)) !=
+            NULL)
+        {
             HSD_JObjGetTranslation(gp->gv.kinokoroute.entries[2].jobj,
                                    &gp->gv.kinokoroute.entries[2].pos);
             lbVector_Sub(&gp->gv.kinokoroute.entries[2].pos, &origin);
         }
 
-        gp->gv.kinokoroute.entries[3].jobj = Ground_801C2CF4(0x82);
-        if (gp->gv.kinokoroute.entries[3].jobj != NULL) {
+        if ((gp->gv.kinokoroute.entries[3].jobj = Ground_801C2CF4(0x82)) !=
+            NULL)
+        {
             HSD_JObjGetTranslation(gp->gv.kinokoroute.entries[3].jobj,
                                    &gp->gv.kinokoroute.entries[3].pos);
             lbVector_Sub(&gp->gv.kinokoroute.entries[3].pos, &origin);
@@ -312,27 +329,26 @@ bool grKinokoRoute_80207C80(Ground_GObj* arg)
 
 void grKinokoRoute_80207C88(Ground_GObj* gobj)
 {
-    Vec3 fighter_pos = grNKr_803B82E8;
+    HSD_JObj* reb0_jobj;
+    Vec3 fighter_pos;
+    Vec3 zone_point;
     Vec3 cam_target;
     Vec3 cam_offset;
-    Vec3 point;
-    Vec3 diff;
-    Vec3 translate;
     f32 scale;
     Ground* gp = GET_GROUND(gobj);
     HSD_GObj* fighter;
     HSD_GObj* ground_gobj;
-    HSD_JObj* reb0_jobj;
     HSD_JObj* eve_jobj;
-    PAD_STACK(32);
+    PAD_STACK(4);
 
+    fighter_pos = grNKr_803B82E8;
     scale = Ground_801C0498();
     fighter = Ground_801C57A4();
-    if (fighter == NULL) {
+    if (fighter != NULL) {
+        ftLib_80086644(fighter, &fighter_pos);
+    } else {
         return;
     }
-
-    ftLib_80086644(fighter, &fighter_pos);
     if (gp->gv.kinokoroute2.phase != 2) {
         if (ftLib_80086EC0(fighter)) {
             Stage_UnkSetVec3TCam_Offset(&cam_target);
@@ -347,18 +363,20 @@ void grKinokoRoute_80207C88(Ground_GObj* gobj)
                 fighter_pos.y = 250.0f * scale;
             }
             if (gp->gv.kinokoroute2.spawn_idx != -1) {
-                Ground_801C2D24(gp->gv.kinokoroute2.spawn_idx, &point);
-                if (fighter_pos.x < point.x) {
-                    fighter_pos.x = point.x;
+                Vec3 spawn_point;
+                Ground_801C2D24(gp->gv.kinokoroute2.spawn_idx, &spawn_point);
+                if (fighter_pos.x < spawn_point.x) {
+                    fighter_pos.x = spawn_point.x;
                 }
             } else {
-                Ground_801C2D24(0, &point);
-                if (fighter_pos.x < point.x) {
-                    fighter_pos.x = point.x;
+                Vec3 boundary_point;
+                Ground_801C2D24(0, &boundary_point);
+                if (fighter_pos.x < boundary_point.x) {
+                    fighter_pos.x = boundary_point.x;
                 }
-                Ground_801C2D24(0xBD, &point);
-                if (fighter_pos.x > point.x) {
-                    fighter_pos.x = point.x;
+                Ground_801C2D24(0xBD, &boundary_point);
+                if (fighter_pos.x > boundary_point.x) {
+                    fighter_pos.x = boundary_point.x;
                 }
             }
             cam_target = fighter_pos;
@@ -366,13 +384,17 @@ void grKinokoRoute_80207C88(Ground_GObj* gobj)
         }
         Ground_801C3D44(NULL, 30.0f, 10000.0f);
         if (gp->gv.kinokoroute2.phase < 2) {
-            gp->gv.kinokoroute2.spawn_idx =
-                Ground_801C3DB4(NULL, 60.0f, 10000.0f);
-            if (gp->gv.kinokoroute2.spawn_idx != -1) {
+            s16 spawn_idx = Ground_801C3DB4(NULL, 60.0f, 10000.0f);
+            gp->gv.kinokoroute2.spawn_idx = spawn_idx;
+            if (spawn_idx != -1) {
                 gp->gv.kinokoroute2.phase = 2;
                 gp->gv.kinokoroute2.cam_timer = 0x3C;
                 Ground_801C5750();
-                gm_801674C4(0x11, 0xA, 3, 0xB3, grKinokoRoute_80208480);
+                {
+                    u8 route_id = 0xB3;
+                    gm_801674C4(0x11, 0xA, 3, route_id,
+                                 grKinokoRoute_80208480);
+                }
                 gp->gv.kinokoroute2.zone_idx = 2;
                 ground_gobj = Ground_801C2BA4(0);
                 if (ground_gobj != NULL) {
@@ -389,14 +411,17 @@ void grKinokoRoute_80207C88(Ground_GObj* gobj)
                 gp->gv.kinokoroute2.cam_timer = 0x3C;
             }
         }
-        if (gp->gv.kinokoroute2.zone_idx + 5 < 7 &&
-            Ground_801C2D24(gp->gv.kinokoroute2.zone_idx + 5, &point) &&
-            fighter_pos.x > point.x)
         {
-            gp->gv.kinokoroute2.zone_idx += 1;
+            s32 zone_idx = gp->gv.kinokoroute2.zone_idx + 5;
+            if (7 > zone_idx && Ground_801C2D24(zone_idx, &zone_point) &&
+                fighter_pos.x > zone_point.x)
+            {
+                gp->gv.kinokoroute2.zone_idx += 1;
+            }
         }
         stage_info.x6DC = gp->gv.kinokoroute2.zone_idx;
     } else {
+        Vec3 translate;
         Ground_801C2D24(gp->gv.kinokoroute2.spawn_idx, &fighter_pos);
         fighter_pos.y += 30.0f;
         cam_target = fighter_pos;
@@ -435,8 +460,10 @@ void grKinokoRoute_80207C88(Ground_GObj* gobj)
 
     Stage_UnkSetVec3TCam_Offset(&cam_offset);
     if (gp->gv.kinokoroute2.cam_timer == 0) {
+        Vec3 diff;
         lbVector_Diff(&cam_offset, &cam_target, &diff);
-        if (lbVector_Normalize(&diff) > 10.0f) {
+        if (sqrtf(SQ(diff.x) + SQ(diff.y) + SQ(diff.z)) > 10.0f) {
+            lbVector_Normalize(&diff);
             diff.x *= 10.0f;
             diff.y *= 10.0f;
             diff.z *= 10.0f;
@@ -455,9 +482,9 @@ void grKinokoRoute_80207C88(Ground_GObj* gobj)
 
     lb_800115F4();
     Ground_801C2FE0(gobj);
-    if (gp->gv.kinokoroute2.flags & 0x80) {
+    if (((grNKr_Flags*) &gp->gv.kinokoroute2.flags)->b7) {
         mpLib_80058560();
-        gp->gv.kinokoroute2.flags &= ~0x80;
+        ((grNKr_Flags*) &gp->gv.kinokoroute2.flags)->b7 = 0;
     }
 }
 

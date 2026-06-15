@@ -61,7 +61,7 @@
 /* 1DAA08 */ static s32 grZebes_801DAA08(void);
 /* 1DAE70 */ static void grZebes_801DAE70(s32, u8, f32, f32, f32);
 /* 1DB3CC */ static s32 grZebes_801DB3CC(HSD_GObj* gobj);
-/* 1DBB60 */ static s32 grZebes_801DBB60(s32 arg);
+/* 1DBB60 */ static s32 grZebes_801DBB60(HSD_GObj* yaku);
 /* 1DC260 */ static void grZebes_801DC260(void);
 /* 1DC408 */ static void grZebes_801DC408(Ground_GObj*);
 /* 1DC744 */ static void grZebes_801DC744(s32, u8);
@@ -295,6 +295,8 @@ static const grZe_803B7FF0_t grZe_803B7FF0 = {
 
 u8 grZe_803E1B90[0xF0] = { 0 };
 
+u8 grZe_803E1C80[0x60] = { 0 };
+
 void grZebes_801D8644(HSD_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
@@ -351,15 +353,15 @@ void grZebes_801D881C(HSD_GObj* gobj)
 {
     Vec3 sp80;
     Vec3 sp74;
-    f32 col_heights[6];
     f32 col_x[6];
+    f32 col_heights[6];
     Vec3 sp28;
     Vec3 sp1C;
     f32 sp18;
     f32 sp14;
     Ground* gp = GET_GROUND(gobj);
     HSD_GObj* secondary_gobj = (HSD_GObj*) gp->gv.zebes5.xF0;
-    u8 result = grZebes_801DA528(gobj, &gp->gv.zebes5.xC8, 1, 2);
+    s32 result = grZebes_801DA528(gobj, &gp->gv.zebes5.xC8, 1, 2);
     PAD_STACK(8);
 
     if ((s32) gp->gv.zebes5.xEC != result) {
@@ -379,9 +381,10 @@ void grZebes_801D881C(HSD_GObj* gobj)
         if (timer < 0) {
             grZebes_801DAA08();
             {
+                f32 rand = HSD_Randf();
                 f32 base = grZe_804D6990->x08;
-                *(s16*) &gp->gv.zebes5.xF8 =
-                    (s16) ((grZe_804D6990->x0C - base) * HSD_Randf() + base);
+                f32 diff = grZe_804D6990->x0C - base;
+                *(s16*) &gp->gv.zebes5.xF8 = (s16) (diff * rand + base);
             }
         }
     }
@@ -389,7 +392,7 @@ void grZebes_801D881C(HSD_GObj* gobj)
     {
         s32 popped = grZebes_801DB3CC(gobj);
         grZebes_801DC260();
-        grZebes_801DBB60(gp->gv.zebes5.x100);
+        grZebes_801DBB60((HSD_GObj*) gp->gv.zebes5.x100);
         grZebes_801DC408(gobj);
 
         switch (gp->gv.zebes5.xC4) {
@@ -404,11 +407,14 @@ void grZebes_801D881C(HSD_GObj* gobj)
             break;
         case 1:
             if (grAnime_801C83D0(gobj, 0xE, 1) != 0) {
+                f32 rand;
                 f32 base;
+                f32 diff;
                 gp->gv.zebes5.xC4 = 2;
+                rand = HSD_Randf();
                 base = grZe_804D6990->x00;
-                gp->gv.zebes5.xC6 =
-                    (s16) ((grZe_804D6990->x04 - base) * HSD_Randf() + base);
+                diff = grZe_804D6990->x04 - base;
+                gp->gv.zebes5.xC6 = (s16) (diff * rand + base);
             }
             break;
         case 2:
@@ -434,17 +440,17 @@ void grZebes_801D881C(HSD_GObj* gobj)
             if (eq_counter % divisor == 0) {
                 s32 mirror = 6 - spawn_phase;
                 if (spawn_phase < mirror) {
-                    f32 scale_min = grZe_804D6990->x58;
-                    u8* base = (u8*) grZe_8049F140 + spawn_phase * 0x24;
                     f32 rand = HSD_Randf();
+                    f32 scale_min = grZe_804D6990->x58;
+                    f32 diff = grZe_804D6990->x5C - scale_min;
+                    u8* base = (u8*) grZe_8049F140 + spawn_phase * 0x24;
                     grZebes_801DAE70(spawn_phase, 4, *(f32*) (base + 0x14),
                                      *(f32*) (base + 0x18),
-                                     (grZe_804D6990->x5C - scale_min) * rand +
-                                         scale_min);
+                                     diff * rand + scale_min);
                 }
                 if (spawn_phase <= mirror) {
-                    u8* base2 = (u8*) grZe_8049F140 + mirror * 0x24;
                     f32 rand2 = HSD_Randf();
+                    u8* base2 = (u8*) grZe_8049F140 + mirror * 0x24;
                     grZebes_801DAE70(mirror, 4, *(f32*) (base2 + 0x5C),
                                      *(f32*) (base2 + 0x60),
                                      (f32) (0.5 * rand2 + 1.0));
@@ -585,8 +591,6 @@ void grZebes_801D881C(HSD_GObj* gobj)
 }
 
 void grZebes_801D90FC(Ground_GObj* arg) {}
-
-u8 grZe_803E1C80[0x6C] = { 0 };
 
 void grZebes_801D9100(HSD_GObj* gobj)
 {
@@ -857,7 +861,8 @@ void grZebes_801D99E0(HSD_GObj* gobj)
             gp->gv.zebes5.xC8 = 2;
             gp->gv.zebes5.xC6 = 0;
 
-            diff = gp->gv.zebes5.xD4 - gp->gv.zebes5.xD8;
+            diff = gp->gv.zebes5.xD4;
+            diff -= gp->gv.zebes5.xD8;
             if (diff < 0.0f) {
                 diff = -diff;
             }
@@ -891,6 +896,7 @@ void grZebes_801D99E0(HSD_GObj* gobj)
         f32 t;
         f32 delta;
         f32 abs_delta;
+        f32 threshold;
 
         gp->gv.zebes5.xC6 = (s16) (gp->gv.zebes5.xC6 + 1);
         if (gp->gv.zebes5.xC6 < 60) {
@@ -901,31 +907,22 @@ void grZebes_801D99E0(HSD_GObj* gobj)
         accel = grZe_804D6990->x9C;
         t = vel / accel;
         delta = gp->gv.zebes5.xD4 - gp->gv.zebes5.xD8;
+        threshold = (f32) ((f64) (vel * t) -
+                           (0.5 * (f64) accel * (f64) (t * t)));
 
+        abs_delta = delta;
         if (delta < 0.0f) {
-            abs_delta = -delta;
-        } else {
-            abs_delta = delta;
+            abs_delta = -abs_delta;
         }
 
-        if (abs_delta <
-            (f32) - ((0.5 * (f64) accel * (f64) (t * t)) - (f64) (vel * t)))
+        if (abs_delta < threshold ||
+            ((delta < 0.0f) ? -delta : delta) < accel)
         {
             gp->gv.zebes5.xC8 = 4;
         } else {
-            f32 abs_delta2;
-            if (delta < 0.0f) {
-                abs_delta2 = -delta;
-            } else {
-                abs_delta2 = delta;
-            }
-            if (abs_delta2 < accel) {
-                gp->gv.zebes5.xC8 = 4;
-            } else {
-                gp->gv.zebes5.xD0 = gp->gv.zebes5.xD0 + accel;
-                if (gp->gv.zebes5.xD0 > gp->gv.zebes5.xCC) {
-                    gp->gv.zebes5.xD0 = gp->gv.zebes5.xCC;
-                }
+            gp->gv.zebes5.xD0 = gp->gv.zebes5.xD0 + accel;
+            if (gp->gv.zebes5.xD0 > gp->gv.zebes5.xCC) {
+                gp->gv.zebes5.xD0 = gp->gv.zebes5.xCC;
             }
         }
 
@@ -968,22 +965,23 @@ void grZebes_801D99E0(HSD_GObj* gobj)
             s16 idx = gp->gv.zebes5.xC4;
             if (idx == 0x1E) {
                 gp->gv.zebes5.xC4 = 0;
-            } else {
-                grZe_AcidLevelEntry* e = &grZe_804D6990->xA0_entries[idx];
-                if (e->x0_base == 0 && e->x2_delay_min == 0 &&
-                    e->x4_delay_max == 0 && e->x6_level == 0)
-                {
-                    gp->gv.zebes5.xC4 = 0;
-                }
+            } else if (grZe_804D6990->xA0_entries[idx].x0_base == 0 &&
+                       grZe_804D6990->xA0_entries[idx].x2_delay_min == 0 &&
+                       grZe_804D6990->xA0_entries[idx].x4_delay_max == 0 &&
+                       grZe_804D6990->xA0_entries[idx].x6_level == 0)
+            {
+                gp->gv.zebes5.xC4 = 0;
             }
         }
 
         {
-            grZe_AcidLevelEntry* e2 = &grZe_804D6990->xA0_entries[gp->gv.zebes5.xC4];
-            s16 delay_max = e2->x4_delay_max;
-            s16 delay_min = e2->x2_delay_min;
+            s32 delay_min, delay_max;
 
-            if (delay_max > delay_min) {
+            if ((delay_max = grZe_804D6990->xA0_entries[gp->gv.zebes5.xC4]
+                                 .x4_delay_max) >
+                (delay_min = grZe_804D6990->xA0_entries[gp->gv.zebes5.xC4]
+                                 .x2_delay_min))
+            {
                 s32 diff = delay_max - delay_min;
                 delay_max = delay_min + ((diff != 0) ? HSD_Randi(diff) : 0);
             } else if (delay_max < delay_min) {
@@ -1071,62 +1069,51 @@ void grZebes_801D9F84(Ground_GObj* gobj)
 
 void grZebes_801DA0C0(Ground_GObj* arg) {}
 
-const grZe_BubbleConfig grZe_803B8044 = {
-    { 1.0f, 1.1f, 1.0f, 1.2f, 1.1f, 1.0f, 1.0f },
-    {
-        { 7.59f, 2.5f, 0.0f },
-        { 24.05f, 2.2f, 0.0f },
-        { 8.2f, -4.55f, 0.0f },
-        { 24.1f, -4.6f, 0.0f },
-    },
+grZe_ColorEntry grZe_803E1CF8[3] = {
+    { -320.0f, 0.0f, 0.0f, 0.0f },
+    { -80.0f, 1.0f, 20.0f, 30.0f },
+    { 90.0f, 90.0f, 75.0f, 0.0f },
 };
 
 void grZebes_801DA0C4(f32 level)
 {
     GXColor color;
-    grZe_ColorEntry table[3] = {
-        { -320.0f, 0.0f, 0.0f, 0.0f },
-        { -80.0f, 1.0f, 20.0f, 30.0f },
-        { 90.0f, 90.0f, 75.0f, 0.0f },
-    };
     u32 idx = 0;
 
-    while (idx < 3U && level > table[idx].threshold) {
+    while (idx < 3U && level > grZe_803E1CF8[idx].threshold) {
         idx++;
     }
 
     if ((s32) idx == 0) {
-        color.r = (u8) table[0].r;
-        color.g = (u8) table[0].g;
-        color.b = (u8) table[0].b;
+        color.r = (u8) grZe_803E1CF8[0].r;
+        color.g = (u8) grZe_803E1CF8[0].g;
+        color.b = (u8) grZe_803E1CF8[0].b;
         color.a = 0xFF;
         return;
     }
 
     if (idx == 3) {
-        color.r = (u8) table[2].r;
-        color.g = (u8) table[2].g;
-        color.b = (u8) table[2].b;
+        color.r = (u8) grZe_803E1CF8[2].r;
+        color.g = (u8) grZe_803E1CF8[2].g;
+        color.b = (u8) grZe_803E1CF8[2].b;
         color.a = 0xFF;
         return;
     }
 
     {
-        f32 t0 = table[idx - 1].threshold;
-        f32 t = (level - t0) / (table[idx].threshold - t0);
+        f32 t0 = grZe_803E1CF8[idx - 1].threshold;
+        f32 t = (level - t0) / (grZe_803E1CF8[idx].threshold - t0);
 
         if (Ground_801C2090(&color)) {
-            // This is clearly some inline lerp function, but I am unsure how
-            // to do that.
-            f32 r0 = table[idx - 1].r;
-            color.r = (u8) (t * (table[idx].r - r0) + r0);
+            f32 r0 = grZe_803E1CF8[idx - 1].r;
+            color.r = (u8) (t * (grZe_803E1CF8[idx].r - r0) + r0);
             {
-                f32 g0 = table[idx - 1].g;
-                color.g = (u8) (t * (table[idx].g - g0) + g0);
+                f32 g0 = grZe_803E1CF8[idx - 1].g;
+                color.g = (u8) (t * (grZe_803E1CF8[idx].g - g0) + g0);
             }
             {
-                f32 b0 = table[idx - 1].b;
-                color.b = (u8) (t * (table[idx].b - b0) + b0);
+                f32 b0 = grZe_803E1CF8[idx - 1].b;
+                color.b = (u8) (t * (grZe_803E1CF8[idx].b - b0) + b0);
             }
             Ground_801C205C(&color);
         }
@@ -1511,21 +1498,29 @@ void grZebes_801DAE70(s32 arg0, u8 arg1, f32 x, f32 y, f32 scale)
 
 s32 grZebes_801DB088(Ground* gp, s32 arg1)
 {
-    u8 _[0x48];
-    grZe_BubbleEntry* entry = &grZe_8049F170[arg1];
+    Vec3 pos1;
+    Vec3 pos2;
+    u8 _[0x08];
+    s32 offset = arg1 * 0x24;
+    u8* base = (u8*) grZe_8049F140;
     s32 result = 0;
-    Item_GObj* mat;
-    Ground* bgp;
+    u8* active_ptr = base + offset;
 
-    if (entry->x00_active != 0) {
-        if (entry->x20_gobj != NULL) {
-            bgp = GET_GROUND(entry->x20_gobj);
-
+    if (*((u8*) (active_ptr += 0x30)) != 0) {
+        u8* gobj_base;
+        HSD_GObj** gobj_ptr;
+        HSD_GObj* bubble_gobj;
+        gobj_base = base;
+        gobj_base += 0x50;
+        gobj_ptr = (HSD_GObj**) gobj_base;
+        gobj_ptr = (HSD_GObj**) ((u8*) gobj_ptr + offset);
+        bubble_gobj = *gobj_ptr;
+        if (bubble_gobj != NULL) {
+            Ground* bgp = GET_GROUND(bubble_gobj);
             if (bgp != NULL) {
-                mat = bgp->gv.zebes3.xC4;
-
+                Item_GObj* mat = bgp->gv.zebes3.xC4;
                 if (mat != NULL) {
-                    if (entry->x00_active == 1) {
+                    if (*active_ptr == 1) {
                         grMaterial_801C8E08(mat);
                     } else {
                         grMaterial_801C8E28(mat);
@@ -1533,120 +1528,151 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
                 }
 
                 {
-                    // Clamp
-                    f32 speed = grZe_804D6990->x68;
-                    f32 target = entry->x1C;
-                    f32 current = entry->x18_size;
-                    f32 diff = target - current;
+                    u8* target_base;
+                    grZe_YakumonoParam* yaku;
+                    u8* current_base;
+                    f32* target_ptr;
+                    f32 speed;
+                    f32* current_ptr;
+                    f32 target;
+                    f32 current;
+                    f32 diff;
+
+                    target_base = base;
+                    target_base += 0x4C;
+                    yaku = grZe_804D6990;
+                    current_base = base;
+                    current_base += 0x48;
+                    target_ptr = (f32*) target_base;
+                    speed = yaku->x68;
+                    current_ptr = (f32*) current_base;
+                    target_ptr = (f32*) ((u8*) target_ptr + offset);
+                    current_ptr = (f32*) ((u8*) current_ptr + offset);
+                    target = *target_ptr;
+                    current = *current_ptr;
+                    diff = target - current;
 
                     if (diff > speed) {
-                        entry->x18_size = current + speed;
+                        *current_ptr = current + speed;
                     } else if (diff < -speed) {
-                        entry->x18_size = current - speed;
+                        *current_ptr = current - speed;
                     } else {
-                        entry->x18_size = target;
+                        *current_ptr = target;
                     }
-                }
 
-                if (entry->x04 != NULL &&
-                    grAnime_801C83D0(entry->x20_gobj, 0, 7) != 0)
-                {
-                    HSD_JObjRemoveAll(entry->x04);
-                    entry->x04 = NULL;
                     {
-                        HSD_JObj* jobj = (HSD_JObj*) entry->x20_gobj->hsd_obj;
-                        if (jobj != NULL) {
-                            HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
-                        }
-                    }
-                }
-
-                switch (entry->x00_active) {
-                case 3: {
-                    s16 t = entry->x02_timer;
-                    entry->x02_timer = (s16) (t - 1);
-                    if (t < 0) {
-                        Item_GObj* m = bgp->gv.zebes3.xC4;
-                        if (m != NULL) {
-                            grMaterial_801C8CDC(m);
-                        }
-                        Ground_801C4A08(entry->x20_gobj);
+                        u8* jobj_base;
+                        HSD_JObj** jobj_ptr;
+                        jobj_base = base;
+                        jobj_base += 0x34;
+                        jobj_ptr = (HSD_JObj**) jobj_base;
+                        jobj_ptr = (HSD_JObj**) ((u8*) jobj_ptr + offset);
+                        if (*jobj_ptr != NULL &&
+                            grAnime_801C83D0(*gobj_ptr, 0, 7) != 0)
                         {
-                            Vec3 pos;
-                            pos.x = entry->x08_x;
-                            pos.y = entry->x0C_y;
-                            pos.z = 4.0f;
-                            grLib_801C96F8(0x7530, 0x1E, &pos);
-                        }
-                        Ground_801C5440(gp, 0, 0x61A86);
-                        entry->x20_gobj = NULL;
-                        entry->x04 = NULL;
-                        entry->x00_active = 0;
-                    }
-                    break;
-                }
-                case 2: {
-                    Item_GObj* m = bgp->gv.zebes3.xC4;
-                    if (m != NULL) {
-                        grMaterial_801C8CDC(m);
-                    }
-                    Ground_801C4A08(entry->x20_gobj);
-                    {
-                        Vec3 pos;
-                        pos.x = entry->x08_x;
-                        pos.y = entry->x0C_y;
-                        pos.z = 4.0f;
-                        grLib_801C96F8(0x7530, 0x1E, &pos);
-                    }
-                    entry->x20_gobj = NULL;
-                    entry->x04 = NULL;
-                    entry->x00_active = 0;
-
-                    if (arg1 < 7 && arg1 != 0 && arg1 != 6) {
-                        f32 best_dist = 64.0f;
-                        s32 best_idx = -1;
-                        s32 j;
-                        f32 ey = entry->x0C_y;
-                        f32 ex = entry->x08_x;
-
-                        for (j = 7; j < 20; j++) {
-                            if (grZe_8049F170[j].x00_active == 1) {
-                                f32 dx = grZe_8049F170[j].x08_x - ex;
-                                f32 dy = grZe_8049F170[j].x0C_y - ey;
-                                f32 dx2 = dx * dx;
-                                f32 dy2 = dy * dy;
-                                f32 dist = dx2 + dy2;
-                                if (dist < best_dist) {
-                                    best_idx = j;
-                                    best_dist = dist;
-                                }
+                            HSD_JObjRemoveAll(*jobj_ptr);
+                            *jobj_ptr = NULL;
+                            if ((*gobj_ptr)->hsd_obj != NULL) {
+                                HSD_JObjClearFlagsAll(
+                                    (HSD_JObj*) (*gobj_ptr)->hsd_obj,
+                                    JOBJ_HIDDEN);
                             }
                         }
 
-                        if (best_idx != -1) {
-                            grZe_BubbleEntry* src = &grZe_8049F170[best_idx];
-                            entry->x00_active = src->x00_active;
-                            entry->x04 = src->x04;
-                            entry->x18_size = src->x18_size;
-                            entry->x1C = src->x1C;
-                            entry->x20_gobj = src->x20_gobj;
-                            src->x00_active = 0;
-                            src->x20_gobj = NULL;
-                        } else {
-                            for (j = 7; j < 20; j++) {
-                                if (j != 0 && j != 6 &&
-                                    grZe_8049F170[j].x00_active == 1)
+                        switch (*active_ptr) {
+                        case 3: {
+                            u8* entry_base = base + offset;
+                            s16 t = *(s16*) (entry_base + 0x32);
+                            *(s16*) (entry_base + 0x32) = (s16) (t - 1);
+                            if (t < 0) {
+                                if (bgp->gv.zebes3.xC4 != NULL) {
+                                    grMaterial_801C8CDC(bgp->gv.zebes3.xC4);
+                                }
+                                Ground_801C4A08(*gobj_ptr);
                                 {
-                                    grZe_8049F170[j].x00_active = 3;
-                                    grZe_8049F170[j].x02_timer =
-                                        (s16) (HSD_Randi(0x3C) + 0x0A);
+                                    pos1.x = *(f32*) (entry_base + 0x38);
+                                    pos1.y = *(f32*) (entry_base + 0x3C);
+                                    pos1.z = 4.0f;
+                                    grLib_801C96F8(0x7530, 0x1E, &pos1);
+                                }
+                                Ground_801C5440(gp, 0, 0x61A86);
+                                *gobj_ptr = NULL;
+                                *jobj_ptr = NULL;
+                                *active_ptr = 0;
+                            }
+                            break;
+                        }
+                        case 2: {
+                            if (bgp->gv.zebes3.xC4 != NULL) {
+                                grMaterial_801C8CDC(bgp->gv.zebes3.xC4);
+                            }
+                            Ground_801C4A08(*gobj_ptr);
+                            {
+                                u8* entry_base = base + offset;
+                                pos2.x = *(f32*) (entry_base + 0x38);
+                                pos2.y = *(f32*) (entry_base + 0x3C);
+                                pos2.z = 4.0f;
+                                grLib_801C96F8(0x7530, 0x1E, &pos2);
+                            }
+                            *gobj_ptr = NULL;
+                            *jobj_ptr = NULL;
+                            *active_ptr = 0;
+
+                            if (arg1 < 7 && arg1 != 0 && arg1 != 6) {
+                                f32 best_dist = 64.0f;
+                                u8* search_base = base + 0x12C;
+                                u8* scan = search_base;
+                                s32 best_idx = -1;
+                                s32 j = 7;
+                                f32 ey = *(f32*) (active_ptr + 0x0C);
+                                f32 ex = *(f32*) (active_ptr + 0x08);
+
+                                for (; j < 20; j++, scan += 0x24) {
+                                    if (*scan == 1) {
+                                        f32 dx = *(f32*) (scan + 0x08) - ex;
+                                        f32 dy = *(f32*) (scan + 0x0C) - ey;
+                                        f32 dx2 = dx * dx;
+                                        f32 dy2 = dy * dy;
+                                        f32 dist = dx2 + dy2;
+                                        if (dist < best_dist) {
+                                            best_idx = j;
+                                            best_dist = dist;
+                                        }
+                                    }
+                                }
+
+                                if (best_idx != -1) {
+                                    s32 best_offset = best_idx * 0x24;
+                                    u8* src = base + best_offset;
+                                    HSD_GObj** src_gobj_ptr =
+                                        (HSD_GObj**) (gobj_base + best_offset);
+                                    *active_ptr = *(u8*) (src + 0x30);
+                                    *jobj_ptr =
+                                        *(HSD_JObj**) (jobj_base + best_offset);
+                                    *current_ptr =
+                                        *(f32*) (current_base + best_offset);
+                                    *target_ptr =
+                                        *(f32*) (target_base + best_offset);
+                                    *gobj_ptr = *src_gobj_ptr;
+                                    *(u8*) (src + 0x30) = 0;
+                                    *src_gobj_ptr = NULL;
+                                } else {
+                                    u8* cur = search_base;
+                                    s32 k;
+                                    for (k = 7; k < 20; k++, cur += 0x24) {
+                                        if (k != 0 && k != 6 && *cur == 1) {
+                                            *cur = 3;
+                                            *(s16*) (cur + 0x02) =
+                                                (s16) (HSD_Randi(0x3C) + 0x0A);
+                                        }
+                                    }
+                                    result = 1;
                                 }
                             }
-                            result = 1;
+                            break;
+                        }
                         }
                     }
-                    break;
-                }
                 }
             }
         }
@@ -1657,9 +1683,9 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
 s32 grZebes_801DB3CC(HSD_GObj* gobj)
 {
     grZe_BubbleEntry* base = grZe_8049F170;
-    grZe_BubbleEntry* ptr;
     s32 popped = 0;
     int i;
+    grZe_BubbleEntry* ptr;
     PAD_STACK(8);
 
     ptr = base;
@@ -1692,7 +1718,7 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                 if (idx != 0 && idx != 6) {
                     f32 fx = zero;
                     f32 fy = zero;
-                    grZe_BubbleEntry* left = &base[idx - 1];
+                    grZe_BubbleEntry* left = &grZe_8049F170[idx - 1];
                     if (left->x00_active != 0) {
                         f32 dy = left->x0C_y - cur->x0C_y;
                         f32 dx = left->x08_x - cur->x08_x;
@@ -1704,18 +1730,20 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                             f32 col_r = grZe_804D6990->x74;
                             if (dist > col_r) {
                                 f32 max_force = grZe_804D6990->x80;
+                                f32 norm_x = dx / dist;
+                                f32 norm_y = dy / dist;
                                 f32 push = dist - col_r;
                                 if (push > max_force) {
                                     push = max_force;
                                 }
-                                fx = (dx / dist) * push + zero;
-                                fy = (dy / dist) * push + zero;
+                                fx = norm_x * push + zero;
+                                fy = norm_y * push + zero;
                             }
                         }
                         neighbor_count = 1;
                     }
                     {
-                        grZe_BubbleEntry* right = &base[idx + 1];
+                        grZe_BubbleEntry* right = &grZe_8049F170[idx + 1];
                         if (right->x00_active != 0) {
                             f32 dy2 = right->x0C_y - cur->x0C_y;
                             f32 dx2 = right->x08_x - cur->x08_x;
@@ -1727,12 +1755,14 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                                 f32 col_r2 = grZe_804D6990->x74;
                                 if (dist2 > col_r2) {
                                     f32 max_force2 = grZe_804D6990->x80;
+                                    f32 norm_x2 = dx2 / dist2;
+                                    f32 norm_y2 = dy2 / dist2;
                                     f32 push2 = dist2 - col_r2;
                                     if (push2 > max_force2) {
                                         push2 = max_force2;
                                     }
-                                    fx += (dx2 / dist2) * push2;
-                                    fy += (dy2 / dist2) * push2;
+                                    fx += norm_x2 * push2;
+                                    fy += norm_y2 * push2;
                                 }
                             }
                             neighbor_count += 1;
@@ -1750,8 +1780,8 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
     }
 
     {
-        int a;
         grZe_BubbleEntry* ea = base;
+        int a;
         for (a = 0; a < 19; a++, ea++) {
             if (ea->x00_active != 0) {
                 int b = a + 1;
@@ -1774,6 +1804,10 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                                 f32 avg_size = ea->x18_size + eb->x18_size;
                                 f32 col_rad =
                                     grZe_804D6990->x74 * 0.5f * avg_size;
+                                f32 near_rad =
+                                    grZe_804D6990->x70 * 0.5f * avg_size;
+                                f32 far_rad =
+                                    grZe_804D6990->x6C * 0.5f * avg_size;
                                 if (dist < 0.001f) {
                                     dy = 0.001f;
                                     dx = 0.0f;
@@ -1787,36 +1821,40 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                                                             0.5) *
                                                0.9);
                                     if (a >= 7) {
+                                        f32 vx = -dx * strength;
                                         f32 vy = -dy * strength;
                                         f32 clamp_vy = vy;
                                         if (vy < 0.0f) {
                                             clamp_vy = 0.0f;
                                         }
-                                        ea->x10 += -dx * strength;
+                                        ea->x10 += vx;
                                         ea->x14 += clamp_vy;
                                     }
                                     if (b >= 7) {
+                                        f32 vx2 = dx * strength;
                                         f32 vy2 = dy * strength;
                                         if (vy2 < 0.0f) {
                                             vy2 = 0.0f;
                                         }
-                                        eb->x10 += dx * strength;
+                                        eb->x10 += vx2;
                                         eb->x14 += vy2;
                                     }
-                                } else if (!(raw_dist < grZe_804D6990->x70 *
-                                                            0.5f * avg_size) &&
-                                           raw_dist < grZe_804D6990->x6C *
-                                                          0.5f * avg_size)
+                                } else if (!(raw_dist < near_rad) &&
+                                           raw_dist < far_rad)
                                 {
                                     f32 attract =
                                         grZe_804D6990->x78 / raw_dist;
                                     if (a >= 7) {
-                                        ea->x10 += dx * attract;
-                                        ea->x14 += dy * attract;
+                                        f32 vx = dx * attract;
+                                        f32 vy = dy * attract;
+                                        ea->x10 += vx;
+                                        ea->x14 += vy;
                                     }
                                     if (b >= 7) {
-                                        eb->x10 += -dx * attract;
-                                        eb->x14 += -dy * attract;
+                                        f32 vx2 = -dx * attract;
+                                        f32 vy2 = -dy * attract;
+                                        eb->x10 += vx2;
+                                        eb->x14 += vy2;
                                     }
                                 }
                             }
@@ -1830,39 +1868,43 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
     {
         int k;
         grZe_BubbleEntry* p = base;
+        f32 left_anchor_x = grZe_8049F158[0].x;
+        f32 left_anchor_y = grZe_8049F158[0].y;
+        f32 right_anchor_x = grZe_8049F158[1].x;
+        f32 right_anchor_y = grZe_8049F158[1].y;
+        f32 left_bound_y = grZe_8049F140[0].y;
+        f32 left_bound_x = grZe_8049F140[0].x;
+        f32 right_bound_y = grZe_8049F140[1].y;
+        f32 right_bound_x = grZe_8049F140[1].x;
         for (k = 0; k < 20; k++, p++) {
             if (p->x00_active != 0) {
                 if (k == 0) {
                     p->x10 = 0.0f;
                     p->x14 = 0.0f;
-                    p->x08_x = grZe_8049F158[0].x;
-                    p->x0C_y = grZe_8049F158[0].y;
+                    p->x08_x = left_anchor_x;
+                    p->x0C_y = left_anchor_y;
                 } else if (k == 6) {
                     p->x10 = 0.0f;
                     p->x14 = 0.0f;
-                    p->x08_x = grZe_8049F158[1].x;
-                    p->x0C_y = grZe_8049F158[1].y;
+                    p->x08_x = right_anchor_x;
+                    p->x0C_y = right_anchor_y;
                 } else {
                     f32 old_y = p->x0C_y;
                     f32 old_x = p->x08_x;
                     f32 new_y = old_y + p->x14;
                     f32 new_x = old_x + p->x10;
-                    if (new_y < grZe_8049F140[0].y &&
-                        new_x < grZe_8049F140[0].x)
-                    {
-                        if (old_y >= grZe_8049F140[0].y) {
-                            new_y = grZe_8049F140[0].y;
-                        } else if (old_x >= grZe_8049F140[0].x) {
-                            new_x = grZe_8049F140[0].x;
+                    if (new_y < left_bound_y && new_x < left_bound_x) {
+                        if (old_y >= left_bound_y) {
+                            new_y = left_bound_y;
+                        } else if (old_x >= left_bound_x) {
+                            new_x = left_bound_x;
                         }
                     }
-                    if (new_y < grZe_8049F140[1].y &&
-                        new_x > grZe_8049F140[1].x)
-                    {
-                        if (old_y >= grZe_8049F140[1].y) {
-                            new_y = grZe_8049F140[1].y;
-                        } else if (old_x <= grZe_8049F140[1].x) {
-                            new_x = grZe_8049F140[1].x;
+                    if (new_y < right_bound_y && new_x > right_bound_x) {
+                        if (old_y >= right_bound_y) {
+                            new_y = right_bound_y;
+                        } else if (old_x <= right_bound_x) {
+                            new_x = right_bound_x;
                         }
                     }
                     p->x08_x = new_x;
@@ -1893,12 +1935,12 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
     return popped;
 }
 
-s32 grZebes_801DBB60(s32 arg)
+s32 grZebes_801DBB60(HSD_GObj* yaku)
 {
-    HSD_GObj* yaku = (HSD_GObj*) arg;
-    grZe_BubbleEntry* bubbles = grZe_8049F170;
-    s32 count = 0;
     s32 last_idx;
+    u8* base = (u8*) grZe_8049F140;
+    grZe_BubbleEntry* bubbles = (grZe_BubbleEntry*) (base + 0x30);
+    s32 count = 0;
     f32 max_dist_sq = -1.0f;
 
     HSD_ASSERT(0x898, yaku);
@@ -1923,12 +1965,16 @@ s32 grZebes_801DBB60(s32 arg)
     }
 
     if (count == 1) {
-        grZe_BubbleEntry* entry = &bubbles[last_idx];
-        f32 zero = 0.0f;
         grMaterial_801C8E08((Item_GObj*) yaku);
-        grMaterial_801C8DE0((Item_GObj*) yaku, entry->x08_x, entry->x0C_y,
-                            zero, entry->x08_x, entry->x0C_y, zero,
-                            (f32) (2.0 * (f64) entry->x18_size));
+        {
+            u8* entry = base + last_idx * 0x24;
+            f32 zero = 0.0f;
+            grMaterial_801C8DE0(
+                (Item_GObj*) yaku, *(f32*) (entry + 0x38),
+                *(f32*) (entry + 0x3C), zero, *(f32*) (entry + 0x38),
+                *(f32*) (entry + 0x3C), zero,
+                (f32) (2.0 * (f64) *(f32*) (entry + 0x48)));
+        }
         return 1;
     }
 
@@ -1946,7 +1992,8 @@ s32 grZebes_801DBB60(s32 arg)
                 f32 ei_x = ei->x08_x;
                 f32 ei_size = ei->x18_size;
                 s32 rem = 20 - j;
-                grZe_BubbleEntry* ej = &bubbles[j];
+                grZe_BubbleEntry* ej =
+                    (grZe_BubbleEntry*) (base + j * 0x24 + 0x30);
                 if (j < 20) {
                     for (; rem != 0; ej++, j++, rem--) {
                         if (ej->x00_active == 1 && j != 0 && j != 6) {
@@ -1977,10 +2024,12 @@ s32 grZebes_801DBB60(s32 arg)
         if (max_dist_sq < 0.0f) {
             HSD_ASSERT(0x8D2, 0);
         } else if (max_dist_sq < 0.0001f) {
-            grZe_BubbleEntry* entry = &bubbles[last_idx];
-            grMaterial_801C8DE0((Item_GObj*) yaku, entry->x08_x, entry->x0C_y,
-                                0.0f, entry->x08_x, entry->x0C_y, 0.0f,
-                                (f32) (2.0 * (f64) entry->x18_size));
+            u8* entry = base + last_idx * 0x24;
+            grMaterial_801C8DE0(
+                (Item_GObj*) yaku, *(f32*) (entry + 0x38),
+                *(f32*) (entry + 0x3C), 0.0f, *(f32*) (entry + 0x38),
+                *(f32*) (entry + 0x3C), 0.0f,
+                (f32) (2.0 * (f64) *(f32*) (entry + 0x48)));
             return 1;
         } else {
             f32 dy = y2 - y1;
@@ -2013,9 +2062,7 @@ s32 grZebes_801DBB60(s32 arg)
                         closest_dist = cx * cx + cy * cy;
                     }
 
-                    if (closest_dist > 0.0f) {
-                        closest_dist = sqrtf(closest_dist);
-                    }
+                    closest_dist = sqrtf(closest_dist);
 
                     {
                         f32 check = (f32) (2.0 * (f64) bp->x18_size +
@@ -2026,9 +2073,7 @@ s32 grZebes_801DBB60(s32 arg)
                                 f32 dpy2 = bp->x0C_y - y1;
                                 f32 dist2 = dpx2 * dpx2 + dpy2 * dpy2;
                                 f32 new_width;
-                                if (dist2 > 0.0f) {
-                                    dist2 = sqrtf(dist2);
-                                }
+                                dist2 = sqrtf(dist2);
                                 {
                                     f32 sum = dist2 + width;
                                     new_width =
@@ -2046,9 +2091,7 @@ s32 grZebes_801DBB60(s32 arg)
                                     f32 ddx = x1 - x2;
                                     f32 dist3 = ddx * ddx + ddy * ddy;
                                     f32 expand;
-                                    if (dist3 > 0.0f) {
-                                        dist3 = sqrtf(dist3);
-                                    }
+                                    dist3 = sqrtf(dist3);
                                     expand = new_width - width;
                                     width = new_width;
                                     {
@@ -2062,9 +2105,7 @@ s32 grZebes_801DBB60(s32 arg)
                                 f32 dpy2 = bp->x0C_y - y2;
                                 f32 dist2 = dpx2 * dpx2 + dpy2 * dpy2;
                                 f32 new_width;
-                                if (dist2 > 0.0f) {
-                                    dist2 = sqrtf(dist2);
-                                }
+                                dist2 = sqrtf(dist2);
                                 {
                                     f32 sum = dist2 + width;
                                     new_width =
@@ -2082,9 +2123,7 @@ s32 grZebes_801DBB60(s32 arg)
                                     f32 ddx = x2 - x1;
                                     f32 dist3 = ddx * ddx + ddy * ddy;
                                     f32 expand;
-                                    if (dist3 > 0.0f) {
-                                        dist3 = sqrtf(dist3);
-                                    }
+                                    dist3 = sqrtf(dist3);
                                     expand = new_width - width;
                                     width = new_width;
                                     {
@@ -2256,6 +2295,16 @@ void grZebes_801DC744(s32 arg0, u8 arg1)
                          1.0f);
     }
 }
+
+const grZe_BubbleConfig grZe_803B8044 = {
+    { 1.0f, 1.1f, 1.0f, 1.2f, 1.1f, 1.0f, 1.0f },
+    {
+        { 7.59f, 2.5f, 0.0f },
+        { 24.05f, 2.2f, 0.0f },
+        { 8.2f, -4.55f, 0.0f },
+        { 24.1f, -4.6f, 0.0f },
+    },
+};
 
 void grZebes_801DC9DC(s32 arg0)
 {

@@ -2341,10 +2341,10 @@ bool mpColl_80046904(CollData* coll, u32 flags)
     int squeeze_flags;     // r30
     int old_squeeze_flags; // r29
     int squeeze_flags_all; // r28
-    bool stay_airborne;    // r24
     int left_right_flags;  // r23
-    bool platform_pass;    // r25
     bool touched_floor;    // r22
+    bool platform_pass;    // r25
+    bool stay_airborne;    // r24
     PAD_STACK(0x8);
 
     platform_pass = flags & CollisionFlagAir_PlatformPassCallback;

@@ -29,8 +29,6 @@ void lbShadow_8000E9F0(Vec3* p, HSD_Spline* spline, f32 u)
     f32 t;
     f32 orig_u;
 
-    PAD_STACK(16);
-
     if (u < 0.0F || u > 1.0F) {
         return;
     }
@@ -74,8 +72,14 @@ void lbShadow_8000E9F0(Vec3* p, HSD_Spline* spline, f32 u)
         u_1 = 1.0F - t;
         half = 0.5F;
         b1 = half * ((3.0F * u2) - (4.0F * t));
-        b0 = u_1 * (-half * u_1);
-        b2 = half * (1.0F + ((-3.0F * u2) + (2.0F * t)));
+        {
+            f32 b0_tmp = u_1 * (-half * u_1);
+            b0 = b0_tmp;
+        }
+        {
+            f32 b2_tmp = half * (1.0F + ((-3.0F * u2) + (2.0F * t)));
+            b2 = b2_tmp;
+        }
         b3 = half * u2;
         p->x = (cp[3].x * b3) +
                ((cp[2].x * b2) + ((cp[0].x * b0) + (cp[1].x * b1)));
@@ -97,8 +101,11 @@ void lbShadow_8000E9F0(Vec3* p, HSD_Spline* spline, f32 u)
                           (2.0F * -((2.0F * tension) - 3.0F) * t));
         p->x = (cp[3].x * car3) +
                ((cp[2].x * car2) + ((cp[0].x * car0) + (cp[1].x * car1)));
-        p->y = (cp[3].y * car3) +
-               ((cp[2].y * car2) + ((cp[0].y * car0) + (cp[1].y * car1)));
+        {
+            f32 car0_y = cp[0].y * car0;
+            p->y = (cp[3].y * car3) +
+                   ((cp[2].y * car2) + ((car0_y) + (cp[1].y * car1)));
+        }
         p->z = (cp[3].z * car3) +
                ((cp[2].z * car2) + ((cp[0].z * car0) + (cp[1].z * car1)));
         break;

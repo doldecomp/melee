@@ -108,7 +108,7 @@ int it_802BAF2C(Item* ip, HSD_JObj* jobj)
             link->vel = zero;
             link->pos = zero;
             link->x2C_b0 = false;
-            it_802A24D0(link, it_804DD0E0);
+            it_802A24D0(link, 1.0f);
             HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849,
                                     it_802BAF2C_Load_x64(ip));
             GObj_SetupGXLink(link_gobj, it_802A24A0, 6, 0);
@@ -122,7 +122,7 @@ int it_802BAF2C(Item* ip, HSD_JObj* jobj)
             link->vel = zero;
             link->pos = zero;
             link->x2C_b0 = false;
-            it_802A24D0(link, it_804DD0E0);
+            it_802A24D0(link, 1.0f);
             {
                 HSD_JObj* joint = it_802BAF2C_Load_x68(ip);
                 HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849, joint);
@@ -137,7 +137,7 @@ int it_802BAF2C(Item* ip, HSD_JObj* jobj)
             link->vel = zero;
             link->pos = zero;
             link->x2C_b0 = false;
-            it_802A24D0(link, it_804DD0E0);
+            it_802A24D0(link, 1.0f);
             HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849,
                                     it_802BAF2C_Load_x64(ip));
             GObj_SetupGXLink(link_gobj, it_802A24A0, 6, 0);

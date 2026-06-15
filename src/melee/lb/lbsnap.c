@@ -193,7 +193,7 @@ static inline int lbSnap_GetTiledYOff(int tile_column, int y)
 
 static inline u8* lbSnap_GetMemSnapIconData(void)
 {
-    return (u8*) lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[0];
+    return lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[0].ptr;
 }
 
 static inline int lbSnap_GetTiledColumn(int x)
@@ -325,8 +325,9 @@ int lbSnap_8001DF6C(int chan)
         desc->x1C = lbSnap_80433380.x0;
         ret = lb_8001BB48(chan, text, &desc->x14, desc,
                           lbSnap_80433380.x4_string,
-                          lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[0],
-                          lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[1], 0);
+                          lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[0].offset,
+                          lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[1].size,
+                          0);
     }
     return ret;
 }
@@ -350,8 +351,9 @@ int lbSnap_8001E058(int chan, int index)
         lbSnap_803BACC8.x1C = lbSnap_80433380.x0;
         ret = lb_8001BF04(chan, text, &lbSnap_803BACC8.x14,
                           lbSnap_80433380.x4_string,
-                          lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[0],
-                          lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[1], 0);
+                          lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[0].offset,
+                          lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[1].size,
+                          0);
     }
     return ret;
 }
