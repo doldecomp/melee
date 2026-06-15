@@ -3362,14 +3362,14 @@ void gm_80182174(void)
 
     gm_8016795C(&lbl_80472ED8.xC);
 
-    ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.c_kind = 0x1B;
-    ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.slot_type = 1;
-    ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.stocks = 1;
-    ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.xD_b4 = 1;
+    lbl_80472ED8.xC.c_kind = 0x1B;
+    lbl_80472ED8.xC.slot_type = 1;
+    lbl_80472ED8.xC.stocks = 1;
+    lbl_80472ED8.xC.xD_b4 = 1;
 
     switch (mode) {
     case 0x21:
-        src = ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->x6A4;
+        src = lbl_80472ED8.x6A4;
         dst = lbl_80472ED8.x54;
         for (i = 0; i < 101; i++) {
             dst->x0 = src->x0;
