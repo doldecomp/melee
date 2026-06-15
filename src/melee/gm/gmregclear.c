@@ -3330,7 +3330,6 @@ void fn_80181E18(void)
 
 void gm_80182174(void)
 {
-    u8* data = lbl_803D8D08;
     s32 i;
     RegClearSpawnEntry* src;
     RegClearSpawnEntry* dst;
@@ -3348,13 +3347,13 @@ void gm_80182174(void)
     spawn_table_26 = &lbl_80472ED8.x6B8;
     spawn_table_24 = &lbl_80472ED8.x6B0;
 
-    lbArchive_80016DBC((const char*) &data[0x480], &lbl_80472ED8.x6A4,
-                       (const char*) &data[0x490], spawn_table_22,
-                       (const char*) &data[0x4AC], spawn_table_23,
-                       (const char*) &data[0x4C8], spawn_table_24,
-                       (const char*) &data[0x4E4], spawn_table_25,
-                       (const char*) &data[0x500], spawn_table_26,
-                       (const char*) &data[0x51C], 0);
+    lbArchive_80016DBC("GmKumite.dat", &lbl_80472ED8.x6A4,
+                       "gmKumiteSystemTable10man", spawn_table_22,
+                       "gmKumiteSystemTable100man", spawn_table_23,
+                       "gmKumiteSystemTable10min", spawn_table_24,
+                       "gmKumiteSystemTable60min", spawn_table_25,
+                       "gmKumiteSystemTableEndless", spawn_table_26,
+                       "gmKumiteSystemTableMercilessly", 0);
 
     lbl_80472ED8.x0 = 0;
     lbl_80472ED8.x4 = 0;
