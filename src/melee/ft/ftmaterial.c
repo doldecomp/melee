@@ -54,7 +54,7 @@ void ftMaterial_800BF260(void)
 {
     hsdInitClassInfo(&ftMObj.parent, &hsdMObj.parent, "sysdolphin_base_library",
                      "ft_mobj", sizeof(HSD_MObjInfo), sizeof(HSD_MObj));
-    ftMObj.setup = (HSD_MObjSetupFunc) ftMaterial_800BF2B8;
+    ftMObj.setup = (HSD_MObjSetupFunc) (Event) ftMaterial_800BF2B8;
 }
 
 void ftMaterial_800BF2B8(HSD_MObj* mobj, u32 rendermode, u32 unused)
