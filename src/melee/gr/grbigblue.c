@@ -23,7 +23,6 @@
 #include "lb/lb_00F9.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
-#include "MSL/math_ppc.h"
 
 #include <math.h>
 #include <trigf.h>
@@ -61,33 +60,15 @@ typedef struct grBb_Data803E2EB8 {
 } grBb_Data803E2EB8;
 
 u16 grBb_803E2938[] = {
-    0x0024, 0x0022, 0x000A,
-    0x0025, 0x0022, 0x000A,
-    0x0026, 0x0022, 0x0007,
-    0x0027, 0x0022, 0x0007,
-    0x0028, 0x0022, 0x0007,
-    0x0029, 0x0022, 0x000E,
-    0x002A, 0x0022, 0x000E,
-    0x002B, 0x0022, 0x000E,
-    0x002C, 0x0022, 0x000F,
-    0x002D, 0x0022, 0x000F,
-    0x002E, 0x0022, 0x000F,
-    0x002F, 0x0022, 0x0010,
-    0x0030, 0x0022, 0x0010,
-    0x0031, 0x0022, 0x0010,
-    0x0034, 0x0022, 0x0020,
-    0x0035, 0x0022, 0x0020,
-    0x0036, 0x0022, 0x0020,
-    0x0037, 0x0022, 0x0023,
-    0x0038, 0x0022, 0x0023,
-    0x0039, 0x0022, 0x0023,
-    0x003A, 0x0022, 0x0026,
-    0x003B, 0x0022, 0x0026,
-    0x003C, 0x0022, 0x0026,
-    0x003D, 0x0022, 0x0029,
-    0x003E, 0x0022, 0x0029,
-    0x003F, 0x0022, 0x0029,
-    0x0040, 0x0022, 0x002C,
+    0x0024, 0x0022, 0x000A, 0x0025, 0x0022, 0x000A, 0x0026, 0x0022, 0x0007,
+    0x0027, 0x0022, 0x0007, 0x0028, 0x0022, 0x0007, 0x0029, 0x0022, 0x000E,
+    0x002A, 0x0022, 0x000E, 0x002B, 0x0022, 0x000E, 0x002C, 0x0022, 0x000F,
+    0x002D, 0x0022, 0x000F, 0x002E, 0x0022, 0x000F, 0x002F, 0x0022, 0x0010,
+    0x0030, 0x0022, 0x0010, 0x0031, 0x0022, 0x0010, 0x0034, 0x0022, 0x0020,
+    0x0035, 0x0022, 0x0020, 0x0036, 0x0022, 0x0020, 0x0037, 0x0022, 0x0023,
+    0x0038, 0x0022, 0x0023, 0x0039, 0x0022, 0x0023, 0x003A, 0x0022, 0x0026,
+    0x003B, 0x0022, 0x0026, 0x003C, 0x0022, 0x0026, 0x003D, 0x0022, 0x0029,
+    0x003E, 0x0022, 0x0029, 0x003F, 0x0022, 0x0029, 0x0040, 0x0022, 0x002C,
     0x0041, 0x0022, 0x002C,
 };
 extern grBb_Data803E2D78 grBb_803E2D78;
@@ -266,7 +247,8 @@ HSD_GObj* grBigBlue_801E59F8(s32 id)
             HSD_GObj_SetupProc(gobj, cbs->callback2, 4U);
         }
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grbigblue.c", 0x17E, id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grbigblue.c", 0x17E,
+                 id);
     }
     return gobj;
 }
@@ -413,102 +395,24 @@ void grBigBlue_801E635C(Ground_GObj* arg) {}
 void grBigBlue_801E6360(Ground_GObj* arg) {}
 
 static s16 grBb_803E2D84[] = {
-    0x0004,
-    0x0005,
-    0x0006,
-    0x0008,
-    0x0009,
-    0x000A,
-    0x000B,
-    0x000C,
-    0x000D,
-    0x000E,
-    0x0003,
-    0x000F,
-    0x0010,
-    0x0011,
-    0x0012,
-    0x0013,
-    0x0014,
-    0x0015,
-    0x0016,
-    0x0017,
-    0x0018,
-    0x0019,
-    0x001A,
-    0x001B,
-    0x001C,
-    0x001D,
-    0x0025,
-    0x0026,
-    0x0027,
-    0x0028,
+    0x0004, 0x0005, 0x0006, 0x0008, 0x0009, 0x000A, 0x000B, 0x000C,
+    0x000D, 0x000E, 0x0003, 0x000F, 0x0010, 0x0011, 0x0012, 0x0013,
+    0x0014, 0x0015, 0x0016, 0x0017, 0x0018, 0x0019, 0x001A, 0x001B,
+    0x001C, 0x001D, 0x0025, 0x0026, 0x0027, 0x0028,
 };
 
 static s16 grBb_803E2DC0[] = {
-    0x0001,
-    0x0002,
-    0x0003,
-    0x0004,
-    0x0005,
-    0x0006,
-    0x0007,
-    0x0008,
-    0x0009,
-    0x000A,
-    0x000B,
-    0x000C,
-    0x000D,
-    0x000E,
-    0x000F,
-    0x0010,
-    0x0011,
-    0x0012,
-    0x0013,
-    0x0014,
-    0x0015,
-    0x0016,
-    0x0017,
-    0x0018,
-    0x0019,
-    0x001A,
-    0x001B,
-    0x001C,
-    0x001D,
-    0x001E,
+    0x0001, 0x0002, 0x0003, 0x0004, 0x0005, 0x0006, 0x0007, 0x0008,
+    0x0009, 0x000A, 0x000B, 0x000C, 0x000D, 0x000E, 0x000F, 0x0010,
+    0x0011, 0x0012, 0x0013, 0x0014, 0x0015, 0x0016, 0x0017, 0x0018,
+    0x0019, 0x001A, 0x001B, 0x001C, 0x001D, 0x001E,
 };
 
 static s16 lbl_803E2DFC[] = {
-    0x0003,
-    0x0004,
-    0x0005,
-    0x0006,
-    0x0007,
-    0x0008,
-    0x0009,
-    0x000A,
-    0x000B,
-    0x000C,
-    0x000D,
-    0x000E,
-    0x000F,
-    0x0010,
-    0x0011,
-    0x0012,
-    0x0013,
-    0x0014,
-    0x0015,
-    0x0016,
-    0x0017,
-    0x0018,
-    0x0019,
-    0x001A,
-    0x001B,
-    0x001C,
-    0x001D,
-    0x001E,
-    0x001F,
-    0x0020,
+    0x0003, 0x0004, 0x0005, 0x0006, 0x0007, 0x0008, 0x0009, 0x000A,
+    0x000B, 0x000C, 0x000D, 0x000E, 0x000F, 0x0010, 0x0011, 0x0012,
+    0x0013, 0x0014, 0x0015, 0x0016, 0x0017, 0x0018, 0x0019, 0x001A,
+    0x001B, 0x001C, 0x001D, 0x001E, 0x001F, 0x0020,
 };
 
 void grBigBlue_801E6364(Ground_GObj* gobj)
@@ -538,8 +442,7 @@ void grBigBlue_801E6364(Ground_GObj* gobj)
     HSD_ASSERT(776, gp->u.carnull.rank);
 
     for (i = 0; i < 30; i++) {
-        gp->u.carnull.coll_jobj[i] =
-            Ground_801C3FA4(gobj, grBb_803E2DC0[i]);
+        gp->u.carnull.coll_jobj[i] = Ground_801C3FA4(gobj, grBb_803E2DC0[i]);
     }
 
     car_gobj = grBigBlue_801E59F8(4);
@@ -732,8 +635,7 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                     right_y = grBigBlue_801EC58C(&pos, NULL, 500.0f);
                     left_y = grBigBlue_801EC58C(&neg_pos, NULL, 500.0f);
 
-                    if (right_y != -F32_MAX || left_y != -F32_MAX)
-                    {
+                    if (right_y != -F32_MAX || left_y != -F32_MAX) {
                         f32 height_range;
                         s32 height_range_i;
                         s32 height_range_arg;
@@ -798,8 +700,7 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                             speeds = grBb_803B8114;
                             found = grBigBlue_801E8794(
                                 jobj, &pos, 0,
-                                2.0f * (speeds.x * Ground_801C0498()),
-                                25.0f);
+                                2.0f * (speeds.x * Ground_801C0498()), 25.0f);
                             if (found == 0) {
                                 Vec3 speeds2;
                                 speeds2 = grBb_803B8114;
@@ -1146,8 +1047,8 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                     speed_off4 =
                         ((f32*) &speeds4)[(s8) idx] * Ground_801C0498();
                     right_x = cur_pos.x + (20.0f + speed_off4);
-                    target_y = grBigBlue_801E8B84(cam_top, cam_bot, left_x,
-                                                  right_x);
+                    target_y =
+                        grBigBlue_801E8B84(cam_top, cam_bot, left_x, right_x);
                 }
 
                 probe_pos = cur_pos;
@@ -1648,7 +1549,7 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
                     }
                     if (pos.y == -3.4028235e38f) {
                         OSReport("*** Not Set Position!(FFlyer)\n");
-                        __assert("grbigblue.c", 0x6CB, "0");
+                        HSD_ASSERT(1739, 0);
                     }
                     HSD_JObjSetTranslate(jobj, &pos);
                     *(f32*) (bp + 0xD0) = pos.y;
@@ -1969,7 +1870,7 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
                 if (collision == 0) {
                     if (grBb_804DB310 == pos.y) {
                         OSReport("*** Not Set Position!(Tyukei)\n");
-                        __assert("grbigblue.c", 0x7CA, "0");
+                        HSD_ASSERT(1994, 0);
                     }
 
                     HSD_JObjSetTranslate(jobj, &pos);
@@ -2006,9 +1907,9 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
         surface_y = grBigBlue_801EC58C(&pos2, NULL, 500.0f);
 
         half_h = 52.0f * Ground_801C0498() / 2 + 4.0f;
-        ace_result = grBigBlue_801EACE8(
-            jobj, &pos, &y_check, 68.0f * Ground_801C0498() / 2 + 10.0f,
-            half_h);
+        ace_result =
+            grBigBlue_801EACE8(jobj, &pos, &y_check,
+                               68.0f * Ground_801C0498() / 2 + 10.0f, half_h);
 
         if (ace_result == 0 || (ace_result == 1 && pos.y < y_check)) {
             if (bounds_y <= surface_y) {
@@ -2510,8 +2411,7 @@ void grBigBlue_801EB4AC(Ground_GObj* gobj)
                 *(s16*) (gp + 0xF0) = 0;
             }
         } else {
-            if (*(f32*) (gp + 0xCC) <
-                -(grBb_804D69C8->x4 * Ground_801C0498()))
+            if (*(f32*) (gp + 0xCC) < -(grBb_804D69C8->x4 * Ground_801C0498()))
             {
                 *(s16*) (gp + 0xF0) = -1;
             } else if (*(f32*) (gp + 0xCC) >
@@ -2575,8 +2475,7 @@ void grBigBlue_801EB4AC(Ground_GObj* gobj)
                     grBb_TrackEntries[(*(u32*) (gp + 0xC4) >> 15) & 0x7F]
                         .delta.y +
                     entry->delta.y <
-                grBb_804D69C8->x8 * Ground_801C0498() +
-                    *(f32*) (gp + 0xCC))
+                grBb_804D69C8->x8 * Ground_801C0498() + *(f32*) (gp + 0xCC))
             {
                 continue;
             }
@@ -3242,59 +3141,58 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
         s32 closest_lane = -1;
         s32 car_idx = 0;
 
-    car_loop:
-        {
-            u32 st;
+    car_loop: {
+        u32 st;
 
-            st = (car_p[0xD4] >> 2) & 0x3F;
-            if (st == 10) {
+        st = (car_p[0xD4] >> 2) & 0x3F;
+        if (st == 10) {
+            found_ten = 1;
+            goto car_done;
+        }
+        if (st != 1 && st != 7 && st != 8) {
+            dist = *(f32*) (car_p + 0xE0);
+            if (dist < 0.0f) {
+                dist = -dist;
+            }
+            if (dist > 60.0f) {
+                if (closest_dist > dist) {
+                    closest_dist = dist;
+                    closest_lane = car_idx;
+                }
+            } else {
                 found_ten = 1;
                 goto car_done;
-            }
-            if (st != 1 && st != 7 && st != 8) {
-                dist = *(f32*) (car_p + 0xE0);
-                if (dist < 0.0f) {
-                    dist = -dist;
-                }
-                if (dist > 60.0f) {
-                    if (closest_dist > dist) {
-                        closest_dist = dist;
-                        closest_lane = car_idx;
-                    }
-                } else {
-                    found_ten = 1;
-                    goto car_done;
-                }
-            }
-
-            st = (car_p[0x114] >> 2) & 0x3F;
-            car_idx++;
-            if (st == 10) {
-                found_ten = 1;
-                goto car_done;
-            }
-            if (st != 1 && st != 7 && st != 8) {
-                dist = *(f32*) (car_p + 0x120);
-                if (dist < 0.0f) {
-                    dist = -dist;
-                }
-                if (dist > 60.0f) {
-                    if (closest_dist > dist) {
-                        closest_dist = dist;
-                        closest_lane = car_idx;
-                    }
-                } else {
-                    found_ten = 1;
-                    goto car_done;
-                }
-            }
-            ctr--;
-            car_p += 0x80;
-            car_idx++;
-            if (ctr != 0) {
-                goto car_loop;
             }
         }
+
+        st = (car_p[0x114] >> 2) & 0x3F;
+        car_idx++;
+        if (st == 10) {
+            found_ten = 1;
+            goto car_done;
+        }
+        if (st != 1 && st != 7 && st != 8) {
+            dist = *(f32*) (car_p + 0x120);
+            if (dist < 0.0f) {
+                dist = -dist;
+            }
+            if (dist > 60.0f) {
+                if (closest_dist > dist) {
+                    closest_dist = dist;
+                    closest_lane = car_idx;
+                }
+            } else {
+                found_ten = 1;
+                goto car_done;
+            }
+        }
+        ctr--;
+        car_p += 0x80;
+        car_idx++;
+        if (ctr != 0) {
+            goto car_loop;
+        }
+    }
     car_done:
 
         if (found_ten == 0 && closest_lane != -1) {
@@ -3447,7 +3345,8 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
                         if ((u8) * ((u8*) gp->gv.bigblue.xCC + pos) == 0 &&
                             --pick < 0)
                         {
-                            if (grBigBlue_801EE398(ground_gobj, active_count, 5) != 0)
+                            if (grBigBlue_801EE398(ground_gobj, active_count,
+                                                   5) != 0)
                             {
                                 s32 tmin = grBb_804D69C8->x10;
                                 s32 tmax = grBb_804D69C8->x14;
@@ -3482,7 +3381,8 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
                         if ((u8) * ((u8*) gp->gv.bigblue.xCC + pos) == 2 &&
                             --pick < 0)
                         {
-                            if (grBigBlue_801EE398(ground_gobj, active_count, 6) != 0)
+                            if (grBigBlue_801EE398(ground_gobj, active_count,
+                                                   6) != 0)
                             {
                                 s32 tmin = grBb_804D69C8->x10;
                                 s32 tmax = grBb_804D69C8->x14;
@@ -3568,8 +3468,8 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
                 u32 st = (iter[0xD4] >> 2) & 0x3F;
                 if (st != 1 && st != 7 && st != 8) {
                     active++;
-                    if (idx != lane && *(f32*) (iter + 0xE0) <
-                                           *(f32*) (lane_gp + 0xE0))
+                    if (idx != lane &&
+                        *(f32*) (iter + 0xE0) < *(f32*) (lane_gp + 0xE0))
                     {
                         behind++;
                     }
@@ -3639,8 +3539,8 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
         {
             f32 vel = *vel_p;
             *(f32*) (lane_gp + 0xDC) += vel;
-            *(f32*) (lane_gp + 0xE0) = *(f32*) (lane_gp + 0xD8) +
-                                                *(f32*) (lane_gp + 0xDC);
+            *(f32*) (lane_gp + 0xE0) =
+                *(f32*) (lane_gp + 0xD8) + *(f32*) (lane_gp + 0xDC);
         }
     }
 
@@ -3750,8 +3650,8 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
     /* Collision/grounding check */
     if ((lane_gp[0xD4] >> 1) & 1) {
         /* Grounded path */
-        ground_y = grBigBlue_801EC58C((Vec3*) (lane_gp + 0xE0),
-                                      &sp_vec, (f32) 500.0f);
+        ground_y = grBigBlue_801EC58C((Vec3*) (lane_gp + 0xE0), &sp_vec,
+                                      (f32) 500.0f);
 
         if (0.0F != ground_y && ground_y > rank_factor) {
             if (*(f32*) (lane_gp + 0x10C) < 0.0F) {
@@ -3774,8 +3674,7 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
         }
 
         /* Lateral position += angular velocity */
-        *(f32*) (lane_gp + 0xE4) +=
-            *(f32*) (lane_gp + 0x10C);
+        *(f32*) (lane_gp + 0xE4) += *(f32*) (lane_gp + 0x10C);
 
         /* Track reference adjustment */
         {
@@ -3791,8 +3690,8 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
     } else {
         /* Non-grounded path */
         f32 s = Ground_801C0498();
-        ground_y = grBigBlue_801EC58C((Vec3*) (lane_gp + 0xE0),
-                                      &sp_vec, 20.0F * s);
+        ground_y =
+            grBigBlue_801EC58C((Vec3*) (lane_gp + 0xE0), &sp_vec, 20.0F * s);
 
         if (0.0F != ground_y) {
             f32 s2 = Ground_801C0498();
