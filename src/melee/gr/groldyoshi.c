@@ -476,7 +476,7 @@ float grOldYoshi_8020F31C(float param1, float param2, float param3,
         fVar2 = param1;
     }
     fVar3 = (fVar2 / param2);
-    
+
     if (param1 < 0.0f) {
         fVar2 = -param1;
     } else {
