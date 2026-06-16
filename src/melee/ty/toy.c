@@ -164,6 +164,8 @@ typedef struct TyLightArray_ {
     s32 x7C;
     s32 x80;
     s32 x84;
+    u8 pad88[0xDC - 0x88];
+    s8 xDC[8];
 } TyLightArray_;
 
 typedef struct ToyDataJObj {
@@ -292,6 +294,9 @@ typedef struct {
     u8 pad[0x14];
     void* x14;
 } Ty25Entry;
+
+static const f32 un_804DDCE4 = -3000.0F;
+static const f32 un_804DDCE8 = 3000.0F;
 
 s32 un_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
 {
@@ -442,11 +447,10 @@ void un_803053C4(s32 targetValue, s32 count, s32 flag)
 {
     s16* list;
     u16* ptr;
+    s32 i;
     u16* default_flags;
     s32 trophyId;
-    s32 i;
     s32 found;
-    u16 val;
 
     if (flag != 0) {
         default_flags = &un_804A284C[5];
@@ -490,10 +494,8 @@ void un_803053C4(s32 targetValue, s32 count, s32 flag)
                                 }
 
                                 ptr = (u16*) ((u8*) ptr + i);
-                                val = *ptr;
                                 count = count - 1;
-                                val ^= 0x8000;
-                                *ptr = val;
+                                *ptr ^= 0x8000;
                             }
                         }
                     }
@@ -508,8 +510,8 @@ void un_803053C4(s32 targetValue, s32 count, s32 flag)
         }
     } else {
         default_flags = &un_804A284C[5];
-        trophyId = 0;
         i = 0;
+        trophyId = 0;
 
         while (trophyId < 0x125) {
             list = un_804D6EB4;
@@ -537,10 +539,8 @@ void un_803053C4(s32 targetValue, s32 count, s32 flag)
                     }
 
                     ptr = (u16*) ((u8*) ptr + i);
-                    val = *ptr;
                     count = count - 1;
-                    val ^= 0x8000;
-                    *ptr = val;
+                    *ptr ^= 0x8000;
 
                     if (count == 0) {
                         goto done;
@@ -1460,47 +1460,50 @@ void un_80306D14(void)
 void un_80306D70(s32 arg0)
 {
     UNUSED u8 framepad[8];
-    LightList** sp14;
-    TyLightFile* base;
-    TyLightData* data;
-    char* sym;
-    s32 idx;
-    u8 kind;
 
-    base = (TyLightFile*) un_803FDD18;
-    data = un_804D6ED4;
+    {
+        LightList** sp14;
+        TyLightFile* base;
+        TyLightData* data;
+        char* sym;
+        s32 idx;
+        u8 kind;
 
-    if (data->archive != NULL && data->gobj != NULL) {
-        HSD_GObjProc_8038FED4(data->gobj);
-        HSD_GObjPLink_80390228(data->gobj);
-        data->gobj = NULL;
-        idx = base->entries[arg0].idx;
-        sym = base->symbols[idx].name;
-        sp14 = HSD_ArchiveGetPublicAddress(data->archive, sym);
-    } else {
-        idx = base->entries[arg0].idx;
-        sym = base->symbols[idx].name;
-        data->archive = lbArchive_80016DBC((char*) base, &sp14, sym, 0);
-    }
+        base = (TyLightFile*) un_803FDD18;
+        data = un_804D6ED4;
 
-    if (sp14 != NULL) {
-        s32 spC;
-        HSD_LObj* lobj;
-
-        data->gobj = GObj_Create(2, 1, 0);
-        lobj = Toy_LoadLObjList(sp14, &spC);
-        kind = HSD_GObj_804D784A;
-        HSD_GObjObject_80390A70(data->gobj, kind, lobj);
-        GObj_SetupGXLink(data->gobj, HSD_GObj_LObjCallback, 0x37, 0);
-        if (spC != 0) {
-            HSD_GObj_SetupProc(data->gobj, (HSD_GObjEvent) un_80306C5C, 0);
-            HSD_GObj_80390CD4(data->gobj);
+        if (data->archive != NULL && data->gobj != NULL) {
+            HSD_GObjProc_8038FED4(data->gobj);
+            HSD_GObjPLink_80390228(data->gobj);
+            data->gobj = NULL;
+            idx = base->entries[arg0].idx;
+            sym = base->symbols[idx].name;
+            sp14 = HSD_ArchiveGetPublicAddress(data->archive, sym);
+        } else {
+            idx = base->entries[arg0].idx;
+            sym = base->symbols[idx].name;
+            data->archive = lbArchive_80016DBC((char*) base, &sp14, sym, 0);
         }
-    } else {
-        idx = base->entries[arg0].idx;
-        sym = base->symbols[idx].name;
-        OSReport((char*) base + 0x64C, sym);
-        __assert(un_804D5A48, 0x8CD, un_804D5A50);
+
+        if (sp14 != NULL) {
+            s32 spC;
+            HSD_LObj* lobj;
+
+            data->gobj = GObj_Create(2, 1, 0);
+            lobj = Toy_LoadLObjList(sp14, &spC);
+            kind = HSD_GObj_804D784A;
+            HSD_GObjObject_80390A70(data->gobj, kind, lobj);
+            GObj_SetupGXLink(data->gobj, HSD_GObj_LObjCallback, 0x37, 0);
+            if (spC != 0) {
+                HSD_GObj_SetupProc(data->gobj, (HSD_GObjEvent) un_80306C5C, 0);
+                HSD_GObj_80390CD4(data->gobj);
+            }
+        } else {
+            idx = base->entries[arg0].idx;
+            sym = base->symbols[idx].name;
+            OSReport((char*) base + 0x64C, sym);
+            HSD_ASSERTMSG(0x8CD, 0, un_804D5A50);
+        }
     }
 }
 
@@ -1706,9 +1709,9 @@ void un_8030715C(f32 cstick_x, f32 cstick_y)
     Vec3 left_vec;
     Vec3 angles;
     TyCameraData_* data;
+    TyLightArray_* cur;
     TyLightArray_* data2;
     HSD_LObj* lobj;
-    TyLightArray_* cur;
     s32 i;
     s8* flag_ptr;
     HSD_CObj* cobj;
@@ -1727,9 +1730,12 @@ void un_8030715C(f32 cstick_x, f32 cstick_y)
     PSVECScale(&left_vec, &left_vec, cstick_x);
     PSVECAdd(&left_vec, &new_interest, &new_interest);
 
-    if (new_interest.x <= -3000.0F || new_interest.y <= -3000.0F ||
-        new_interest.z <= -3000.0F || new_interest.x >= 3000.0F ||
-        new_interest.y >= 3000.0F || new_interest.z >= 3000.0F)
+    if (new_interest.x <= *(f32 const*) &un_804DDCE4 ||
+        new_interest.y <= *(f32 const*) &un_804DDCE4 ||
+        new_interest.z <= *(f32 const*) &un_804DDCE4 ||
+        new_interest.x >= *(f32 const*) &un_804DDCE8 ||
+        new_interest.y >= *(f32 const*) &un_804DDCE8 ||
+        new_interest.z >= *(f32 const*) &un_804DDCE8)
     {
         return;
     }
@@ -1756,7 +1762,7 @@ void un_8030715C(f32 cstick_x, f32 cstick_y)
     lobj = data2->x4->x28;
 
     while (lobj != NULL) {
-        flag_ptr = (s8*) data2 + i + 0xDC;
+        flag_ptr = &data2->xDC[i];
 
         angles.x = 0.017453292F * data2->x14;
         angles.y = 0.017453292F * -data2->x18;
@@ -1794,12 +1800,13 @@ void un_8030715C(f32 cstick_x, f32 cstick_y)
 
 void un_80307470(s32 arg0)
 {
-    char* data;
     ToyGlobalsS_* tg;
+    char* data;
     HSD_AnimJoint* anim;
     HSD_MatAnimJoint* matanim;
-    HSD_JObj* loaded_jobj;
+    HSD_ShapeAnimJoint* shapanim;
     HSD_Joint* joint;
+    HSD_JObj* loaded_jobj;
     char** entry;
     u8 kind;
 
@@ -1828,9 +1835,8 @@ void un_80307470(s32 arg0)
         entry = (char**) (data + arg0 * 0xC);
         anim = HSD_ArchiveGetPublicAddress(tg->x50, entry[0x224 / 4]);
         matanim = HSD_ArchiveGetPublicAddress(tg->x50, entry[0x228 / 4]);
-        HSD_JObjAddAnimAll(
-            loaded_jobj, anim, matanim,
-            HSD_ArchiveGetPublicAddress(tg->x50, entry[0x22C / 4]));
+        shapanim = HSD_ArchiveGetPublicAddress(tg->x50, entry[0x22C / 4]);
+        HSD_JObjAddAnimAll(loaded_jobj, anim, matanim, shapanim);
         HSD_JObjReqAnimAll(loaded_jobj, un_804DDCD8);
         kind = HSD_GObj_804D7849;
         HSD_GObjObject_80390A70(tg->x0, kind, loaded_jobj);
@@ -1959,7 +1965,7 @@ void un_80307828(int arg0)
     PAD_STACK(12);
 }
 
-/* 96.8% match */
+/* 99.7% match */
 
 void un_803078E4(void)
 {
@@ -1969,8 +1975,6 @@ void un_803078E4(void)
     PosArrayFull pos_en;
     PosArrayFull pos_jp;
     HSD_SObj* sobj;
-    s32* jp_ptr;
-    s32* en_ptr;
     s32 i;
 
     table = un_803FDD18;
@@ -1999,24 +2003,20 @@ void un_803078E4(void)
         GObj_SetupGXLink(data->x0C, HSD_SObjLib_803A49E0, 0x38, 0);
 
         i = 0;
-        jp_ptr = pos_jp.a[0].xy;
-        en_ptr = pos_en.a[0].xy;
 
         do {
             sobj =
                 HSD_SObjLib_803A477C(data->x0C, (int) syms[i], 0, 0, 0x80, 0);
             if (sobj != NULL) {
                 if (lbLang_IsSavedLanguageJP() != 0) {
-                    sobj->x10 = (f32) jp_ptr[0];
-                    sobj->x14 = (f32) jp_ptr[1];
+                    sobj->x10 = (f32) pos_jp.a[i].xy[0];
+                    sobj->x14 = (f32) pos_jp.a[i].xy[1];
                 } else {
-                    sobj->x10 = (f32) en_ptr[0];
-                    sobj->x14 = (f32) en_ptr[1];
+                    sobj->x10 = (f32) pos_en.a[i].xy[0];
+                    sobj->x14 = (f32) pos_en.a[i].xy[1];
                 }
             }
             i += 1;
-            jp_ptr += 2;
-            en_ptr += 2;
         } while (i < 7);
     }
 }
@@ -2107,20 +2107,20 @@ void un_80307F64(s32 arg0, s32 arg1)
 {
     s8 idx;
     s32 kind = arg0;
-    char* data;
     s32* base;
+    HSD_JObj* jobj2;
     ToyAnimState* state;
     HSD_JObj* jobj1;
-    HSD_JObj* jobj2;
+    char* data;
 
     data = un_803FDD18;
     base = (s32*) un_804A26B8;
-    state = (ToyAnimState*) ((u8*) base + 0x3F0);
-    idx = state->x0E;
+    idx = ((Toy26B8*) base)->anim.x0E;
     jobj1 = (HSD_JObj*) base[idx + (0x3F4 / 4)];
     jobj2 = (HSD_JObj*) base[(idx ^ 1) + (0x3F4 / 4)];
+    state = &((Toy26B8*) base)->anim;
 
-    if (state->x0F == 0) {
+    if (((Toy26B8*) base)->anim.x0F == 0) {
         if (arg1 != 0) {
             if (kind != state->x11) {
                 HSD_JObjRemoveAnimAll(jobj1);
@@ -2792,7 +2792,7 @@ void fn_80309404(HSD_GObj* gobj)
     s32 sp130;
     s32 sp12C;
 
-    PAD_STACK(264);
+    PAD_STACK(256);
 
     cobj = gobj->hsd_obj;
     base = (Toy26B8*) un_804A26B8;
@@ -2903,8 +2903,6 @@ void fn_80309404(HSD_GObj* gobj)
 
     switch ((s8) state->x61) {
     case 0: {
-        s16 trophy_count;
-
         trigger = un_80305B88();
 
         if (trigger & 0x200) {
@@ -2915,48 +2913,58 @@ void fn_80309404(HSD_GObj* gobj)
             return;
         }
 
-        if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC)) {
-            trophy_count = base->trophy_count;
-        } else {
-            trophy_count = *gmMainLib_8015CC90();
-        }
-        if (trophy_count == 0) {
-            return;
-        }
-
-        tmp = state->x40 + state->x44;
-        if (tmp == 0.0f) {
-            trigger = un_80305B88();
-
-            if (trigger & 0xF) {
-                state->x58 = 0;
+        {
+            s32 trophy_count;
+            if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC)) {
+                trophy_count = base->trophy_count;
             } else {
-                if ((f32) state->x58 > 2400.0f) {
-                    state->x24 = (f32) (state->x24 + 0.01f);
-                    if (state->x24 > 1.0f) {
-                        state->x24 = 1.0f;
-                    }
-                    state->x1C = (f32) (state->x1C + state->x24);
-                    tmp = state->x1C;
-                    if (tmp < -360.0f) {
-                        state->x1C = (f32) (tmp + 360.0f);
-                    }
-                    tmp = state->x1C;
-                    if (tmp > 360.0f) {
-                        state->x1C = (f32) (tmp - 360.0f);
-                    }
-                    ed4->x18 = (f32) state->x1C;
-                }
-                state->x58 = state->x58 + 1;
+                trophy_count = *gmMainLib_8015CC90();
             }
-        } else {
-            state->x58 = 0;
+            if (trophy_count == 0) {
+                return;
+            }
         }
 
-        if (trophy_count == 1) {
-            if ((state->x30 + state->x34) != 0.0f) {
-                state->x34 = 0.0f;
-                state->x30 = 0.0f;
+        if ((state->x40 + state->x44) != 0.0f) {
+            goto reset_idle_timer;
+        }
+        trigger = un_80305B88();
+
+        if (trigger & 0xF) {
+        reset_idle_timer:
+            state->x58 = 0;
+        } else {
+            if ((f32) state->x58 > 2400.0f) {
+                state->x24 += 0.01f;
+                if (state->x24 > 1.0f) {
+                    state->x24 = 1.0f;
+                }
+                state->x1C = (f32) (state->x1C + state->x24);
+                tmp = state->x1C;
+                if (tmp < -360.0f) {
+                    state->x1C += 360.0f;
+                }
+                tmp = state->x1C;
+                if (tmp > 360.0f) {
+                    state->x1C = (f32) (tmp - 360.0f);
+                }
+                ed4->x18 = (f32) state->x1C;
+            }
+            state->x58 = state->x58 + 1;
+        }
+
+        {
+            s32 trophy_count;
+            if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC)) {
+                trophy_count = base->trophy_count;
+            } else {
+                trophy_count = *gmMainLib_8015CC90();
+            }
+            if (trophy_count == 1) {
+                if ((state->x30 + state->x34) != 0.0f) {
+                    state->x34 = 0.0f;
+                    state->x30 = 0.0f;
+                }
             }
         }
 
@@ -3178,16 +3186,29 @@ void fn_80309404(HSD_GObj* gobj)
                 trophy_count = *gmMainLib_8015CC90();
             }
             if (trophy_count > 1) {
-                trigger = un_80305B88();
-                if (trigger & 0x60) {
+                tmp = state->x30;
+                if (tmp < 0.0f) {
+                    tmp = -tmp;
+                }
+                if (!(tmp > 0.9f)) {
+                    trigger = un_80305B88();
+                    if (!(trigger & 0x60)) {
+                        goto skip_trophy_cycle;
+                    }
+                }
+                {
                     TyDisplayData* display;
                     u32 trig2;
 
                     display = un_804D6EE0;
+                    if (state->x30 < 0.0f) {
+                        goto cycle_prev;
+                    }
                     trig2 = un_80305B88();
                     if (trig2 & 0x441) {
+                    cycle_prev: {
                         s16 new_idx;
-                        s16 total;
+                        s32 total;
 
                         lbAudioAx_80024030(2);
                         new_idx = display->selectedIdx - 1;
@@ -3209,7 +3230,7 @@ void fn_80309404(HSD_GObj* gobj)
                         if (total > 3) {
                             s16 cur_idx = display->selectedIdx;
                             if ((cur_idx - 1) < 0) {
-                                s16 cnt;
+                                s32 cnt;
                                 s32 lk;
                                 ToyListEntry* entry;
                                 HSD_Archive* oa;
@@ -3226,8 +3247,8 @@ void fn_80309404(HSD_GObj* gobj)
                                 entry = display->first_entry;
                                 {
                                     s16 tid = un_804D6EDC[lk - 1];
-                                    oa = entry->archive;
                                     md = un_8030813C(tid, lk);
+                                    oa = entry->archive;
                                     if (oa != NULL) {
                                         lbArchive_80016EFC(oa);
                                         entry->archive = NULL;
@@ -3247,9 +3268,9 @@ void fn_80309404(HSD_GObj* gobj)
 
                                 entry = display->first_entry;
                                 tid = un_804D6EDC[cur_idx - 1];
-                                oa = entry->archive;
                                 md = un_8030813C(
                                     tid, (enum_t) &un_804D6EDC[cur_idx]);
+                                oa = entry->archive;
                                 if (oa != NULL) {
                                     lbArchive_80016EFC(oa);
                                     entry->archive = NULL;
@@ -3276,8 +3297,17 @@ void fn_80309404(HSD_GObj* gobj)
                             display->selected_entry =
                                 display->selected_entry->prev;
                         }
+                    }
                     } else {
-                        s16 total;
+                        if (state->x30 > 0.0f) {
+                            goto cycle_next;
+                        }
+                        trig2 = un_80305B88();
+                        if (!(trig2 & 0x822)) {
+                            goto after_cycle_direction;
+                        }
+                    cycle_next: {
+                        s32 total;
                         s16 cur_idx;
 
                         lbAudioAx_80024030(2);
@@ -3296,7 +3326,7 @@ void fn_80309404(HSD_GObj* gobj)
                             total = *gmMainLib_8015CC90();
                         }
                         if (total > 3) {
-                            s16 cnt;
+                            s32 cnt;
 
                             if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC))
                             {
@@ -3306,7 +3336,7 @@ void fn_80309404(HSD_GObj* gobj)
                             }
                             cur_idx = display->selectedIdx;
                             if ((s32) (cur_idx + 1) >= cnt) {
-                                s16 cnt2;
+                                s32 cnt2;
                                 ToyListEntry* entry;
                                 HSD_Archive* oa;
                                 char* md;
@@ -3323,8 +3353,8 @@ void fn_80309404(HSD_GObj* gobj)
                                 entry = display->last_entry->next;
                                 lk = cur_idx - cnt2;
                                 tid = un_804D6EDC[lk + 1];
-                                oa = entry->archive;
                                 md = un_8030813C(tid, (enum_t) un_804D6EDC);
+                                oa = entry->archive;
                                 if (oa != NULL) {
                                     lbArchive_80016EFC(oa);
                                     entry->archive = NULL;
@@ -3343,9 +3373,9 @@ void fn_80309404(HSD_GObj* gobj)
 
                                 entry = display->last_entry->next;
                                 tid = un_804D6EDC[cur_idx + 1];
-                                oa = entry->archive;
                                 md = un_8030813C(
                                     tid, (enum_t) &un_804D6EDC[cur_idx]);
+                                oa = entry->archive;
                                 if (oa != NULL) {
                                     lbArchive_80016EFC(oa);
                                     entry->archive = NULL;
@@ -3374,16 +3404,41 @@ void fn_80309404(HSD_GObj* gobj)
                                 display->selected_entry->next;
                         }
                     }
+                    }
 
+                after_cycle_direction:
                     un_80307828(0);
                     un_8030715C(0.0f, 0.0f);
                     state->x58 = 0x95E;
                     un_803087F4(display->selected_entry);
+                    {
+                        s16 idx = un_804D6EDC[display->selectedIdx];
+                        u16* flags;
+
+                        if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC)) {
+                            flags = base->trophy_flags;
+                        } else {
+                            flags = gmMainLib_8015CC78();
+                        }
+
+                        if (flags[idx] & 0x8000) {
+                            idx = un_804D6EDC[display->selectedIdx];
+                            if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC))
+                            {
+                                flags = base->trophy_flags;
+                            } else {
+                                flags = gmMainLib_8015CC78();
+                            }
+                            flags += idx;
+                            *flags ^= 0x8000;
+                        }
+                    }
                     un_803084A0(display->selected_entry->trophy_id);
                     un_803083D8(((ToyED8Data*) ed8)->x30,
                                 (s32) display->selected_entry->trophy_id);
                     state->x60 = 0x14;
                 }
+            skip_trophy_cycle:;
             }
         }
 
@@ -3454,7 +3509,7 @@ void fn_8030B530(HSD_GObj* arg0)
         s32 sp188;
         s32 sp184;
 
-        PAD_STACK(304);
+        PAD_STACK(312);
 
         {
             void* anim_state_ptr = M2C_FIELD(anim, void**, 0x0);
@@ -3464,22 +3519,19 @@ void fn_8030B530(HSD_GObj* arg0)
         }
 
         {
-            f32 val;
             f32 abs;
             s32 i;
 
             for (i = 0; i < 4; i++) {
-                val = HSD_PadCopyStatus[(u8) i].nml_stickX;
-                if (val < 0.0F) {
-                    abs = -val;
+                if ((stick_x = HSD_PadCopyStatus[(u8) i].nml_stickX) < 0.0F) {
+                    abs = -stick_x;
                 } else {
-                    abs = val;
+                    abs = stick_x;
                 }
                 if (abs > 0.1F) {
                     break;
                 }
             }
-            stick_x = val;
         }
         stick_y = un_80305DB0();
 
@@ -4149,9 +4201,11 @@ void fn_8030E110(HSD_GObj* arg0)
     void* spD4;
     void* spCC;
     void* spC8;
-    Toy6E68* state;
+    Toy26B8* base;
     void* ed4;
     HSD_CObj* cobj;
+    Toy6E68* state;
+    ToyAnimState* anim;
     f32 abs_val, tmp;
     s32 sign;
     f32 moved_x, moved_y;
@@ -4161,16 +4215,16 @@ void fn_8030E110(HSD_GObj* arg0)
     char* result;
     s16 trophy_id;
     HSD_Archive* archive;
-    ToyAnimState* anim;
 
     PAD_STACK(176);
 
-    anim = (ToyAnimState*) ((u8*) un_804A26B8 + 0x3F0);
+    base = TOY_DATA;
+    anim = &base->anim;
     state = (Toy6E68*) un_804D6E68;
     ed4 = un_804D6ED4;
     cobj = arg0->hsd_obj;
-    moved_y = 0.0f;
     moved_x = 0.0f;
+    moved_y = 0.0f;
     {
         f32 val;
         f32 abs;
@@ -4268,9 +4322,9 @@ void fn_8030E110(HSD_GObj* arg0)
             }
 
             {
-                s16 tc;
+                s32 tc;
                 if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC)) {
-                    tc = TOY_DATA->trophy_count;
+                    tc = base->trophy_count;
                 } else {
                     tc = *gmMainLib_8015CC90();
                 }
@@ -4333,9 +4387,8 @@ void fn_8030E110(HSD_GObj* arg0)
 
             trigger = un_80305B88();
 
-            if ((state->x44 + (state->x40 + (state->x30 + state->x34)) +
-                 (f32) trigger) == 0.0f)
-            {
+            tmp = state->x44 + (state->x40 + (state->x30 + state->x34));
+            if ((tmp + (f32) trigger) == 0.0f) {
                 state->x5C = state->x5C + 1;
             } else {
                 state->x5C = 0;
@@ -4456,9 +4509,9 @@ void fn_8030E110(HSD_GObj* arg0)
                 if (trigger & 0x60) {
                     display = un_804D6EE0;
                     {
-                        s16 tc;
+                        s32 tc;
                         if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC)) {
-                            tc = TOY_DATA->trophy_count;
+                            tc = base->trophy_count;
                         } else {
                             tc = *gmMainLib_8015CC90();
                         }
@@ -4483,11 +4536,11 @@ void fn_8030E110(HSD_GObj* arg0)
                             display->selectedIdx =
                                 (s16) (display->selectedIdx + 1);
                             {
-                                s16 tc2;
+                                s32 tc2;
                                 if ((gm_8016B498() != 0) ||
                                     (gm_801A4310() == 0xC))
                                 {
-                                    tc2 = TOY_DATA->trophy_count;
+                                    tc2 = base->trophy_count;
                                 } else {
                                     tc2 = *gmMainLib_8015CC90();
                                 }
@@ -4496,33 +4549,33 @@ void fn_8030E110(HSD_GObj* arg0)
                                 }
                             }
                             {
-                                s16 tc3;
+                                s32 tc3;
                                 if ((gm_8016B498() != 0) ||
                                     (gm_801A4310() == 0xC))
                                 {
-                                    tc3 = TOY_DATA->trophy_count;
+                                    tc3 = base->trophy_count;
                                 } else {
                                     tc3 = *gmMainLib_8015CC90();
                                 }
                                 if (tc3 > 3) {
-                                    s16 tc4;
+                                    s32 tc4;
                                     s16 cur_trophy;
                                     s32 next_idx;
                                     if ((gm_8016B498() != 0) ||
                                         (gm_801A4310() == 0xC))
                                     {
-                                        tc4 = TOY_DATA->trophy_count;
+                                        tc4 = base->trophy_count;
                                     } else {
                                         tc4 = *gmMainLib_8015CC90();
                                     }
                                     cur_trophy = display->selectedIdx;
                                     next_idx = (s32) (cur_trophy + 1);
                                     if (next_idx >= tc4) {
-                                        s16 tc5;
+                                        s32 tc5;
                                         if ((gm_8016B498() != 0) ||
                                             (gm_801A4310() == 0xC))
                                         {
-                                            tc5 = TOY_DATA->trophy_count;
+                                            tc5 = base->trophy_count;
                                         } else {
                                             tc5 = *gmMainLib_8015CC90();
                                         }
@@ -4530,9 +4583,9 @@ void fn_8030E110(HSD_GObj* arg0)
                                         trophy_id =
                                             un_804D6EDC[display->selectedIdx -
                                                         tc5];
-                                        archive = entry->archive;
                                         result = un_8030813C(
                                             trophy_id, (s32) un_804D6EDC);
+                                        archive = entry->archive;
                                         if (archive != NULL) {
                                             lbArchive_80016EFC(archive);
                                             entry->archive = NULL;
@@ -4546,10 +4599,10 @@ void fn_8030E110(HSD_GObj* arg0)
                                     } else {
                                         entry = display->last_entry->next;
                                         trophy_id = un_804D6EDC[cur_trophy];
-                                        archive = entry->archive;
                                         result = un_8030813C(
                                             trophy_id,
                                             (s32) &un_804D6EDC[cur_trophy]);
+                                        archive = entry->archive;
                                         if (archive != NULL) {
                                             lbArchive_80016EFC(archive);
                                             entry->archive = NULL;
@@ -4584,40 +4637,40 @@ void fn_8030E110(HSD_GObj* arg0)
                         display->selectedIdx =
                             (s16) (display->selectedIdx - 1);
                         if (display->selectedIdx < 0) {
-                            s16 tc6;
+                            s32 tc6;
                             if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC))
                             {
-                                tc6 = TOY_DATA->trophy_count;
+                                tc6 = base->trophy_count;
                             } else {
                                 tc6 = *gmMainLib_8015CC90();
                             }
                             display->selectedIdx = (s16) (tc6 - 1);
                         }
                         {
-                            s16 tc7;
+                            s32 tc7;
                             if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC))
                             {
-                                tc7 = TOY_DATA->trophy_count;
+                                tc7 = base->trophy_count;
                             } else {
                                 tc7 = *gmMainLib_8015CC90();
                             }
                             if (tc7 > 3) {
                                 s16 prev_trophy = display->selectedIdx;
                                 if ((prev_trophy - 1) < 0) {
-                                    s16 tc8;
+                                    s32 tc8;
                                     s32 calc_idx;
                                     if ((gm_8016B498() != 0) ||
                                         (gm_801A4310() == 0xC))
                                     {
-                                        tc8 = TOY_DATA->trophy_count;
+                                        tc8 = base->trophy_count;
                                     } else {
                                         tc8 = *gmMainLib_8015CC90();
                                     }
                                     calc_idx = tc8 + display->selectedIdx;
                                     entry = display->first_entry->prev;
                                     trophy_id = un_804D6EDC[calc_idx - 1];
-                                    archive = entry->archive;
                                     result = un_8030813C(trophy_id, calc_idx);
+                                    archive = entry->archive;
                                     if (archive != NULL) {
                                         lbArchive_80016EFC(archive);
                                         entry->archive = NULL;
@@ -4631,10 +4684,10 @@ void fn_8030E110(HSD_GObj* arg0)
                                 } else {
                                     entry = display->first_entry->prev;
                                     trophy_id = un_804D6EDC[prev_trophy - 1];
-                                    archive = entry->archive;
                                     result = un_8030813C(
                                         trophy_id,
                                         (s32) &un_804D6EDC[prev_trophy]);
+                                    archive = entry->archive;
                                     if (archive != NULL) {
                                         lbArchive_80016EFC(archive);
                                         entry->archive = NULL;
@@ -5118,6 +5171,7 @@ void un_80310324(void)
     ToyGlobalsS_* tg6;
     ToySubStructS_* sub;
     s32 sp[4];
+    UNUSED u8 sp_pad[8];
     s32 i;
     s32 one;
     s16 idx;
@@ -5127,8 +5181,6 @@ void un_80310324(void)
     HSD_GObj* gobj;
     u16* flags;
     f32 two;
-
-    PAD_STACK(4);
 
     data = un_803FDD18;
     toy = TOY_DATA;
@@ -5144,7 +5196,7 @@ void un_80310324(void)
             str = data + 0x5F8;
         }
         tg->x50 =
-            lbArchive_LoadSymbols(str, &sp[3], *(void**) (data + 0x188), NULL);
+            lbArchive_LoadSymbols(str, &sp[4], *(void**) (data + 0x188), NULL);
     }
 
     memzero(un_804D6E68, 0x64);
@@ -5156,8 +5208,8 @@ void un_80310324(void)
     tg2 = un_804D6ED8;
     if (tg2->x54 == NULL) {
         tg2->x54 = lbArchive_LoadSymbols(
-            data + 0x640, &sp[0], *(void**) (data + 0x320), &sp[1],
-            *(void**) (data + 0x324), &sp[2], *(void**) (data + 0x328), 0);
+            data + 0x640, &sp[1], *(void**) (data + 0x320), &sp[2],
+            *(void**) (data + 0x324), &sp[3], *(void**) (data + 0x328), 0);
 
         tg2->x8 = GObj_Create(4, 5, 0);
         GObj_SetupGXLink(tg2->x8, HSD_SObjLib_803A49E0, 0x32, 0);
@@ -5166,7 +5218,7 @@ void un_80310324(void)
         two = un_804DDCF0;
         one = 1;
         do {
-            sobj = HSD_SObjLib_803A477C(tg2->x8, sp[i], 0, 0, 0x80, 0);
+            sobj = HSD_SObjLib_803A477C(tg2->x8, sp[i + 1], 0, 0, 0x80, 0);
             *(f32*) ((char*) sobj + 0x1C) = two;
             i += 1;
             *(f32*) ((char*) sobj + 0x20) = two;
@@ -5508,39 +5560,40 @@ void un_80310B48(HSD_GObj* gobj)
     f32 stickX;
     f32 stickY;
     f32 absVal;
-    f32 dirY;
     f32 dirX;
+    f32 dirY;
     u32 buttons;
     s32 changed;
-    s16* valptr;
     s32 i;
-    s32 slot;
-    s32 maxVal;
+    s16* valptr;
 
-    PAD_STACK(72);
+    PAD_STACK(88);
 
     changed = 0;
     editor = (ToyParamEditor*) un_804D6E5C;
 
-    {
-        f32 val;
-        f32 abs;
-        s32 i;
-
-        for (i = 0; i < 4; i++) {
-            val = HSD_PadCopyStatus[(u8) i].nml_stickX;
-            if (val < 0.0F) {
-                abs = -val;
-            } else {
-                abs = val;
-            }
-            if (abs > 0.1F) {
-                break;
-            }
+    for (i = 0; i < 4; i++) {
+        if ((stickX = HSD_PadCopyStatus[(u8) i].nml_stickX) < 0.0F) {
+            absVal = -stickX;
+        } else {
+            absVal = stickX;
         }
-        stickX = val;
+        if (absVal > 0.1F) {
+            break;
+        }
     }
-    stickY = un_80305DB0();
+
+    for (i = 0; i < 4; i++) {
+        if ((stickY = HSD_PadCopyStatus[(u8) i].nml_stickY) < 0.0F) {
+            absVal = -stickY;
+        } else {
+            absVal = stickY;
+        }
+        if (absVal > 0.1F) {
+            gm_801677E8(i);
+            break;
+        }
+    }
 
     if (stickX < -0.6f) {
         dirX = 1.0f;
@@ -5620,11 +5673,11 @@ void un_80310B48(HSD_GObj* gobj)
     }
 
     lbAudioAx_80024030(2);
-    slot = (s8) editor->selected_slot;
-    editor->values[slot] = (s16) (editor->values[slot] + 1);
-    slot = (s8) editor->selected_slot;
-    maxVal = un_80304B94((s32) (s8) editor->selected_slot);
-    if ((s16) editor->values[slot] > maxVal) {
+    editor->values[(s8) editor->selected_slot] =
+        (s16) (editor->values[(s8) editor->selected_slot] + 1);
+    if ((s16) editor->values[(s8) editor->selected_slot] >
+        un_80304B94((s32) (s8) editor->selected_slot))
+    {
         editor->values[(s8) editor->selected_slot] =
             (s16) un_80304B94((s32) (s8) editor->selected_slot);
     }
@@ -5644,8 +5697,8 @@ skip_increment:
     }
 
     lbAudioAx_80024030(2);
-    slot = (s8) editor->selected_slot;
-    editor->values[slot] = (s16) (editor->values[slot] - 1);
+    editor->values[(s8) editor->selected_slot] =
+        (s16) (editor->values[(s8) editor->selected_slot] - 1);
     if ((s16) editor->values[(s8) editor->selected_slot] < 0) {
         editor->values[(s8) editor->selected_slot] = 0;
     }
