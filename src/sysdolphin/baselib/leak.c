@@ -28,8 +28,8 @@ extern HSD_LeakChecker HSD_Leak_80407B58;
 static char HSD_Leak_804D6000[] = " ";
 static char HSD_Leak_804D6004[] = "done.\n";
 
-/* @todo Currently ~97.3% match - register allocation differences
- * remain: r28/r29 swap (scan_copy/cap_ptr) and loop/local register swaps
+/* @todo Currently ~98.4% match - register allocation differences
+ * remain: r28/r29 swap (scan/cap_ptr) and loop/local register swaps
  * in the allocation table scan and report indentation loops. */
 int HSD_Leak_80387DF8(int indent)
 {
@@ -71,7 +71,7 @@ int HSD_Leak_80387DF8(int indent)
         OSReport(HSD_Leak_804D6000);
     }
     cap_ptr = &lc->capacity;
-    OSReport(lc->str_numreg, lc->used, lc->capacity, lc->peak);
+    OSReport(lc->str_numreg, lc->used, *cap_ptr, lc->peak);
 
     /* Scan memory for heap references */
     {
@@ -90,11 +90,9 @@ int HSD_Leak_80387DF8(int indent)
                             if ((u32) (reg_idx + 0x10000) != 0xFFFF &&
                                 reg_idx < *cap_ptr)
                             {
-                                u32* ep =
-                                    (u32*) ((u32) lc->table + (reg_idx << 2));
-                                u32 entry = *ep;
+                                u32 entry = lc->table[reg_idx];
                                 if (hdr == (u32*) (entry & ~1u)) {
-                                    *ep = entry | 1;
+                                    lc->table[reg_idx] = entry | 1;
                                 }
                             }
                         }
