@@ -604,7 +604,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_ThrownMewtwo.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureKirby.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureWaitKirby.c"),
-            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_ThrownKirby.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_ThrownKirby.c"),
             # Main again
             Object(Matching, "melee/ft/ftdemo.c"),
             Object(Matching, "melee/ft/ft_0BEC.c"),
@@ -1061,7 +1061,7 @@ config.libs = [
             Object(Matching, "melee/gr/grfigure1.c"),
             Object(Matching, "melee/gr/grfigure2.c"),
             Object(Matching, "melee/gr/grfigure3.c"),
-            Object(NonMatching, "melee/gr/groldyoshi.c"),
+            Object(Matching, "melee/gr/groldyoshi.c"),
             Object(NonMatching, "melee/gr/groldkongo.c"),
             Object(NonMatching, "melee/gr/groldpupupu.c"),
             Object(NonMatching, "melee/gr/grpura.c"),
