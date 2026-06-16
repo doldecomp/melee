@@ -132,6 +132,27 @@ extern HSD_Archive* lbl_804D6628;
 extern u8 lbl_803D9828[];
 extern f32 lbl_803B7C68[];
 
+typedef struct TrainingItemEntry {
+    s16 item_id;
+    s16 text_id;
+} TrainingItemEntry;
+STATIC_ASSERT(sizeof(TrainingItemEntry) == 4);
+
+static inline TrainingItemEntry* TrainingItemTable_Get(void)
+{
+    return (TrainingItemEntry*) lbl_803D9828;
+}
+
+static inline s16 TrainingItemTable_GetItemId(s32 idx)
+{
+    return TrainingItemTable_Get()[idx].item_id;
+}
+
+static inline s16 TrainingItemTable_GetTextId(s32 idx)
+{
+    return TrainingItemTable_Get()[idx].text_id;
+}
+
 typedef struct {
     /* 0x00 */ f32 vals[3];
 } ClassicSlotVals;
@@ -1988,26 +2009,26 @@ void fn_80188550(int arg0)
 
     if (arg0 != current) {
         if (arg0 > lbl_80473700.count) {
-            u8* player;
+            PlayerInitData* player;
             int i;
             int skip;
             int remaining;
 
             skip = lbl_80473700.count;
-            player = (u8*) &lbl_80473700;
+            player = lbl_80473700.players;
             remaining = arg0 - current;
             i = 0;
             j = 0;
 
-            for (i = 0; i < 4; i++, player += sizeof(PlayerInitData)) {
+            for (i = 0; i < 4; i++, player++) {
                 if (i != 0) {
                     if (skip == 0) {
                         if (i != 0) {
-                            player[0x75] = 1;
+                            player->slot_type = 1;
                         } else {
-                            player[0x75] = j;
+                            player->slot_type = j;
                         }
-                        gm_8016EDDC(i, (PlayerInitData*) &player[0x74]);
+                        gm_8016EDDC(i, player);
                         if (--remaining == 0) {
                             break;
                         }
@@ -2281,9 +2302,7 @@ void fn_80188EE8(HSD_GObj* gobj)
     if (lbLang_IsSettingUS() != 0 && val == 0x13) {
         HSD_SisLib_803A6368(text, 0x17);
     } else {
-        u8* data = lbl_803D9828;
-        data += val * 4;
-        HSD_SisLib_803A6368(text, (s32) *(s16*) &data[2]);
+        HSD_SisLib_803A6368(text, (s32) TrainingItemTable_GetTextId(val));
     }
 
     jobj = sub->jobjs[32];
@@ -2402,7 +2421,7 @@ void fn_801891F4(void)
                 s16 item;
                 HSD_JObj* jobj;
                 lbAudioAx_80024030(8);
-                item = *(s16*) &((s32*) lbl_803D9828)[sub->menu_values[1]];
+                item = TrainingItemTable_GetItemId(sub->menu_values[1]);
                 jobj = Player_GetEntity(0)->hsd_obj;
                 HSD_JObjGetTranslation2(jobj, &pos);
                 pos.y += 10.0f;

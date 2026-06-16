@@ -50,6 +50,37 @@ lbl_803D9FD8_fn lbl_803D9FD8[] = {
     fn_80195CCC, fn_80194F30, fn_8019610C, fn_8019610C,
 };
 
+typedef struct BracketEntrySlot {
+    /* 0x00 */ HSD_GObj* x2C;
+    /* 0x04 */ u8 x30;
+    /* 0x05 */ u8 pad31;
+    /* 0x06 */ u8 x32;
+    /* 0x07 */ u8 pad33;
+    /* 0x08 */ s32 x34;
+    /* 0x0C */ s32 x38;
+    /* 0x10 */ s32 x3C;
+    /* 0x14 */ s32 x40;
+    /* 0x18 */ s32 x44;
+    /* 0x1C */ s32 x48;
+    /* 0x20 */ u8 x4C;
+    /* 0x21 */ u8 x4D;
+    /* 0x22 */ u8 x4E;
+    /* 0x23 */ u8 x4F;
+    /* 0x24 */ u8 x50;
+    /* 0x25 */ u8 x51;
+    /* 0x26 */ u8 x52;
+    /* 0x27 */ u8 pad53;
+    /* 0x28 */ u16 x54;
+    /* 0x2A */ u8 pad56[0x2C - 0x2A];
+} BracketEntrySlot;
+STATIC_ASSERT(sizeof(BracketEntrySlot) == 0x2C);
+
+static inline BracketEntrySlot* BracketEntry_GetSlot(BracketEntry* entry,
+                                                     s32 slot_idx)
+{
+    return &((BracketEntrySlot*) &entry->x2C)[slot_idx];
+}
+
 void fn_8018A514(int count, float val)
 {
     BracketEntry* entries = lbl_80473AB8;
@@ -170,7 +201,7 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
 {
     BracketEntry* entries = lbl_80473AB8;
     BracketEntry* entry;
-    u8* sub;
+    BracketEntrySlot* slot;
     s32* p34;
     s32* p3C;
     s32* p44;
@@ -183,14 +214,14 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
     TmData* tm = gm_8018F634();
 
     entry = &entries[entry_idx];
-    sub = (u8*) entries + entry_idx * (s32) 0xDC + slot_idx * (s32) 0x2C;
+    slot = BracketEntry_GetSlot(entry, slot_idx);
 
-    p34 = (s32*) (sub + 0x34);
-    p3C = (s32*) (sub + 0x3C);
-    p44 = (s32*) (sub + 0x44);
-    p38 = (s32*) (sub + 0x38);
-    p40 = (s32*) (sub + 0x40);
-    p48 = (s32*) (sub + 0x48);
+    p34 = &slot->x34;
+    p3C = &slot->x3C;
+    p44 = &slot->x44;
+    p38 = &slot->x38;
+    p40 = &slot->x40;
+    p48 = &slot->x48;
 
     if (entry->x1 != 0) {
         px3 = &entry->x3;
@@ -405,8 +436,8 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
         }
     }
 
-    HSD_JObjSetTranslateX(jobj, (f32) *(s32*) (sub + 0x44));
-    HSD_JObjSetTranslateY(jobj, -(f32) *(s32*) (sub + 0x48));
+    HSD_JObjSetTranslateX(jobj, (f32) slot->x44);
+    HSD_JObjSetTranslateY(jobj, -(f32) slot->x48);
 }
 
 extern s32 lbl_804D6630;
@@ -2459,6 +2490,26 @@ extern f32 lbl_804DA704; // 48.6f
 extern f32 lbl_804DA708; // 514.0f
 extern f32 lbl_804DA70C; // 87.0f
 
+typedef struct TmSettingTable {
+    u8 pad_0[0x40];
+    u8 min[6][2];
+    u8 max[6][2];
+} TmSettingTable;
+STATIC_ASSERT(offsetof(TmSettingTable, min) == 0x40);
+STATIC_ASSERT(offsetof(TmSettingTable, max) == 0x4C);
+
+static inline u8 TmSettingTable_GetMin(s32 idx, int match_type)
+{
+    TmSettingTable* table = (TmSettingTable*) lbl_803D9F80;
+    return table->min[idx][match_type != 0];
+}
+
+static inline u8 TmSettingTable_GetMax(s32 idx, int match_type)
+{
+    TmSettingTable* table = (TmSettingTable*) lbl_803D9F80;
+    return table->max[idx][match_type != 0];
+}
+
 void fn_80190ABC(int mode)
 {
     u8* table = lbl_803D9F80;
@@ -3244,7 +3295,7 @@ void fn_80191FD4(HSD_GObj* gobj)
         fn_8019044C(sibling, fn_8018F71C((s32) tm->x37[slot].x3,
                                          (s32) tm->x37[slot].x7));
         {
-            u8 chr = tm->x37[lbl_804799B8.x2 + lbl_804799B8.x3].x3;
+            u8 chr = tm->x37[slot].x3;
             if (lbl_803D9D20.x72[chr] != 0) {
                 HSD_JObjClearFlagsAll(sibling, JOBJ_HIDDEN);
                 return;
@@ -3807,7 +3858,6 @@ extern u8 lbl_803D9F80[];
 void fn_801935B8(void)
 {
     struct Lbl804799B8_t* state = &lbl_804799B8;
-    u8* table = lbl_803D9F80;
     TmData* tm;
     HSD_GObj* gobj;
     HSD_Fog* fog;
@@ -3838,7 +3888,7 @@ void fn_801935B8(void)
     for (i = 0; i < 6; i++) {
         lbl_804799B8.pad2[i] = 0xa;
         lbl_804799B8.pad2[i + 6] = 0;
-        (&tm->match_type)[i] = table[0x40 + i * 2];
+        (&tm->match_type)[i] = TmSettingTable_GetMin(i, 0);
     }
 
     lbl_804799B8.x1 = 0;
@@ -3976,7 +4026,7 @@ void fn_80193B58(s32* arg0, u32 arg1, u32 arg2)
             idx = arg0[0];
             ptr = arg0 + idx;
             val = *++ptr;
-            if (val > (s32) lbl_803D9F80[(idx << 1) + (*mt != 0) + 0x40]) {
+            if (val > (s32) TmSettingTable_GetMin(idx, *mt)) {
                 *ptr = val - 1;
                 lbAudioAx_80024030(2);
                 state->x7 = 5;
@@ -3992,7 +4042,7 @@ void fn_80193B58(s32* arg0, u32 arg1, u32 arg2)
                 }
                 idx = arg0[0];
                 val = arg0[idx + 1];
-                if (val != (s32) lbl_803D9F80[(idx << 1) + (*mt != 0) + 0x40]) {
+                if (val != (s32) TmSettingTable_GetMin(idx, *mt)) {
                     lbAudioAx_80024030(2);
                     state->x7 = 5;
                 }
@@ -4012,11 +4062,10 @@ void fn_80193B58(s32* arg0, u32 arg1, u32 arg2)
         }
     } else if (arg1 & 0x80002) {
         if (*mt == 0) {
-            u8* limits = table + 0x4C;
             idx = arg0[0];
             ptr = arg0 + idx;
             val = *++ptr;
-            if (val < (s32) limits[(idx << 1) + (*mt != 0)]) {
+            if (val < (s32) TmSettingTable_GetMax(idx, *mt)) {
                 if (val + 1 <= clamp_val) {
                     *ptr = val + 1;
                     lbAudioAx_80024030(2);
@@ -4036,7 +4085,7 @@ void fn_80193B58(s32* arg0, u32 arg1, u32 arg2)
                 *ptr = (s32) entry[0x40];
                 idx = arg0[0];
                 val = arg0[idx + 1];
-                if (val != (s32) limits[(idx << 1) + (*mt != 0)]) {
+                if (val != (s32) TmSettingTable_GetMax(idx, *mt)) {
                     lbAudioAx_80024030(2);
                     state->x8 = 5;
                 }
@@ -4534,14 +4583,11 @@ void fn_801949B4(s32* arg0, u32 arg1, u32 arg2)
 void fn_80194BC4(s32* arg0, u32 arg1, u32 arg2)
 {
     int* match_type_ptr;
-    s16* data_ptr;
     s32 option;
     s32 value;
     s32* arr_ptr;
-    u8* lookup_ptr;
     int match_type;
 
-    data_ptr = (s16*) lbl_803D9F80;
     match_type_ptr = &gm_804771C4.match_type;
 
     if (*match_type_ptr != 0) {
@@ -4554,12 +4600,11 @@ void fn_80194BC4(s32* arg0, u32 arg1, u32 arg2)
         match_type = *match_type_ptr;
         option = *arg0;
         arr_ptr = arg0 + option;
-        lookup_ptr = (u8*) &data_ptr[option] + !!match_type;
         value = *(++arr_ptr);
-        if (value > lookup_ptr[0x40]) {
+        if (value > TmSettingTable_GetMin(option, match_type)) {
             *arr_ptr = value - 1;
         } else {
-            *arr_ptr = lookup_ptr[0x4C];
+            *arr_ptr = TmSettingTable_GetMax(option, match_type);
         }
     } else if (arg1 & 0x80002) {
         lbAudioAx_80024030(2);
@@ -4567,12 +4612,11 @@ void fn_80194BC4(s32* arg0, u32 arg1, u32 arg2)
         match_type = *match_type_ptr;
         option = *arg0;
         arr_ptr = arg0 + option;
-        lookup_ptr = (u8*) &data_ptr[option] + !!match_type;
         value = *(++arr_ptr);
-        if (value < lookup_ptr[0x4C]) {
+        if (value < TmSettingTable_GetMax(option, match_type)) {
             *arr_ptr = value + 1;
         } else {
-            *arr_ptr = lookup_ptr[0x40];
+            *arr_ptr = TmSettingTable_GetMin(option, match_type);
         }
     }
 
@@ -5011,13 +5055,6 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
 /// Handles name entry/selection input for tournament mode.
 void fn_80195AF0(s32* state_ptr, u32 buttons, u32 trigger)
 {
-    u8* ptr;
-    u8* page_ptr;
-    u8* row_ptr;
-    u8* col_ptr;
-
-    ptr = (u8*) &lbl_804799B8;
-
     if (trigger & 0x1000) {
         lbl_804D6654 = *state_ptr;
         *state_ptr = 0x11;
@@ -5039,10 +5076,8 @@ void fn_80195AF0(s32* state_ptr, u32 buttons, u32 trigger)
         s32 idx;
 
         lbAudioAx_80024030(1);
-        col_ptr = ptr + 2;
-        row_ptr = ptr + 3;
         tm_alt = (TmData_80194F30*) state_ptr;
-        idx = ptr[2] + ptr[3];
+        idx = lbl_804799B8.x2 + lbl_804799B8.x3;
         tm_alt->x37[idx].xB = tm_alt->x37[idx].x9;
         switch (*state_ptr) {
         case 0xD:
@@ -5056,21 +5091,23 @@ void fn_80195AF0(s32* state_ptr, u32 buttons, u32 trigger)
             }
             return;
         case 0xE:
-            page_ptr = ptr + 6;
-            if (GetNameText(ptr[5] + (ptr[6] * 4)) != NULL) {
-                idx = *col_ptr + *row_ptr;
-                tm_alt->x37[idx].x9 = ptr[5] + (*page_ptr * 4);
+            if (GetNameText(lbl_804799B8.x5 + (lbl_804799B8.x6 * 4)) != NULL) {
+                idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+                tm_alt->x37[idx].x9 =
+                    lbl_804799B8.x5 + (lbl_804799B8.x6 * 4);
             }
             *state_ptr = 0xF;
             fn_80190ABC(4);
             return;
         }
     } else if (trigger & 0x200) {
-        u16* arr;
+        TmData_80194F30* tm_alt;
+        s32 idx;
 
         lbAudioAx_80024030(0);
-        arr = (u16*) ((u8*) state_ptr + (ptr[2] + ptr[3]) * 0x12);
-        arr[0x20] = arr[0x21];
+        tm_alt = (TmData_80194F30*) state_ptr;
+        idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+        tm_alt->x37[idx].x9 = tm_alt->x37[idx].xB;
         fn_80190ABC(5);
         fn_80190ABC(6);
         *state_ptr = 0xC;
@@ -5079,8 +5116,7 @@ void fn_80195AF0(s32* state_ptr, u32 buttons, u32 trigger)
 
 void fn_80195CCC(s32* arg, u32 buttons, u32 trigger)
 {
-    u8* ptr = (u8*) &lbl_804799B8;
-    u16* arr;
+    TmData_80194F30* tm_alt = (TmData_80194F30*) arg;
     s32 selected;
     s32 slot;
     TmData* tm;
@@ -5092,62 +5128,73 @@ void fn_80195CCC(s32* arg, u32 buttons, u32 trigger)
 
     if (buttons & 0x40001) {
         lbAudioAx_80024030(2);
-        if ((ptr[5] % 4) != 0) {
-            ptr[5] = (u8) (ptr[5] - 1);
-            arr = (u16*) ((u8*) arg + (ptr[2] + ptr[3]) * 0x12);
-            arr[0x20] = (s16) (ptr[5] + (ptr[6] * 4));
+        if ((lbl_804799B8.x5 % 4) != 0) {
+            lbl_804799B8.x5 -= 1;
+            slot = lbl_804799B8.x2 + lbl_804799B8.x3;
+            tm_alt->x37[slot].x9 =
+                lbl_804799B8.x5 + (lbl_804799B8.x6 * 4);
             fn_80190ABC(5);
             fn_80190ABC(4);
         }
     } else if (buttons & 0x80002) {
         lbAudioAx_80024030(2);
-        if (((s32) (ptr[5] % 4) < 3) &&
-            ((s32) (ptr[5] + ((ptr[6] * 4) + 1)) < GetNameCount()))
+        if (((s32) (lbl_804799B8.x5 % 4) < 3) &&
+            ((s32) (lbl_804799B8.x5 + ((lbl_804799B8.x6 * 4) + 1)) <
+             GetNameCount()))
         {
-            ptr[5] = (u8) (ptr[5] + 1);
-            arr = (u16*) ((u8*) arg + (ptr[2] + ptr[3]) * 0x12);
-            arr[0x20] = (s16) (ptr[5] + (ptr[6] * 4));
+            lbl_804799B8.x5 += 1;
+            slot = lbl_804799B8.x2 + lbl_804799B8.x3;
+            tm_alt->x37[slot].x9 =
+                lbl_804799B8.x5 + (lbl_804799B8.x6 * 4);
             fn_80190ABC(5);
             fn_80190ABC(4);
         }
     } else if (buttons & 0x10008) {
         lbAudioAx_80024030(2);
-        if (((s32) ptr[5] / 4) != 0) {
-            ptr[5] = (u8) (ptr[5] - 4);
-            arr = (u16*) ((u8*) arg + (ptr[2] + ptr[3]) * 0x12);
-            arr[0x20] = (s16) (ptr[5] + (ptr[6] * 4));
+        if (((s32) lbl_804799B8.x5 / 4) != 0) {
+            lbl_804799B8.x5 -= 4;
+            slot = lbl_804799B8.x2 + lbl_804799B8.x3;
+            tm_alt->x37[slot].x9 =
+                lbl_804799B8.x5 + (lbl_804799B8.x6 * 4);
             fn_80190ABC(5);
             fn_80190ABC(4);
-        } else if ((u8) ptr[6] != 0) {
-            ptr[6] = (u8) (ptr[6] - 1);
-            arr = (u16*) ((u8*) arg + (ptr[2] + ptr[3]) * 0x12);
-            arr[0x20] = (s16) (ptr[5] + (ptr[6] * 4));
+        } else if (lbl_804799B8.x6 != 0) {
+            lbl_804799B8.x6 -= 1;
+            slot = lbl_804799B8.x2 + lbl_804799B8.x3;
+            tm_alt->x37[slot].x9 =
+                lbl_804799B8.x5 + (lbl_804799B8.x6 * 4);
             fn_80190ABC(5);
             fn_80190ABC(4);
         }
     } else if (buttons & 0x20004) {
         lbAudioAx_80024030(2);
-        if ((s32) ((s32) ptr[5] / 4) < 8) {
-            if ((s32) (ptr[5] + ((ptr[6] * 4) + 4)) < GetNameCount()) {
-                ptr[5] = (u8) (ptr[5] + 4);
-                arr = (u16*) ((u8*) arg + (ptr[2] + ptr[3]) * 0x12);
-                arr[0x20] = (s16) (ptr[5] + (ptr[6] * 4));
+        if ((s32) ((s32) lbl_804799B8.x5 / 4) < 8) {
+            if ((s32) (lbl_804799B8.x5 + ((lbl_804799B8.x6 * 4) + 4)) <
+                GetNameCount())
+            {
+                lbl_804799B8.x5 += 4;
+                slot = lbl_804799B8.x2 + lbl_804799B8.x3;
+                tm_alt->x37[slot].x9 =
+                    lbl_804799B8.x5 + (lbl_804799B8.x6 * 4);
             }
             fn_80190ABC(5);
             fn_80190ABC(4);
-        } else if ((s32) (ptr[5] + ((ptr[6] * 4) + 4)) < GetNameCount()) {
-            ptr[6] = (u8) (ptr[6] + 1);
-            arr = (u16*) ((u8*) arg + (ptr[2] + ptr[3]) * 0x12);
-            arr[0x20] = (s16) (ptr[5] + (ptr[6] * 4));
+        } else if ((s32) (lbl_804799B8.x5 + ((lbl_804799B8.x6 * 4) + 4)) <
+                   GetNameCount())
+        {
+            lbl_804799B8.x6 += 1;
+            slot = lbl_804799B8.x2 + lbl_804799B8.x3;
+            tm_alt->x37[slot].x9 =
+                lbl_804799B8.x5 + (lbl_804799B8.x6 * 4);
             fn_80190ABC(5);
             fn_80190ABC(4);
         }
     }
 
     if (trigger & 0x100) {
-        if (GetNameText(ptr[5] + (ptr[6] * 4)) != NULL) {
-            selected = ptr[5] + (ptr[6] * 4);
-            slot = ptr[2] + ptr[3];
+        if (GetNameText(lbl_804799B8.x5 + (lbl_804799B8.x6 * 4)) != NULL) {
+            selected = lbl_804799B8.x5 + (lbl_804799B8.x6 * 4);
+            slot = lbl_804799B8.x2 + lbl_804799B8.x3;
             tm = gm_8018F634();
             count = tm->x2E;
             unique = 1;
@@ -5161,9 +5208,9 @@ void fn_80195CCC(s32* arg, u32 buttons, u32 trigger)
             }
             if (unique != 0) {
                 lbAudioAx_80024030(1);
-                arr = (u16*) ((u8*) arg +
-                              (lbl_804799B8.x2 + lbl_804799B8.x3) * 0x12);
-                arr[0x20] = (s16) (lbl_804799B8.x5 + (lbl_804799B8.x6 * 4));
+                slot = lbl_804799B8.x2 + lbl_804799B8.x3;
+                tm_alt->x37[slot].x9 =
+                    lbl_804799B8.x5 + (lbl_804799B8.x6 * 4);
                 fn_80190ABC(5);
                 fn_80190ABC(6);
                 *arg = 0xC;
@@ -5175,11 +5222,9 @@ void fn_80195CCC(s32* arg, u32 buttons, u32 trigger)
     }
 
     if (trigger & 0x200) {
-        u16* arr2;
-
         lbAudioAx_80024030(0);
-        arr2 = (u16*) ((u8*) arg + (lbl_804799B8.x2 + lbl_804799B8.x3) * 0x12);
-        arr2[0x20] = arr2[0x21];
+        slot = lbl_804799B8.x2 + lbl_804799B8.x3;
+        tm_alt->x37[slot].x9 = tm_alt->x37[slot].xB;
         fn_80190ABC(5);
         fn_80190ABC(6);
         *arg = 0xE;
@@ -5193,8 +5238,6 @@ void fn_8019610C(s32* state, u32 buttons, u32 trigger)
 {
     TmData* td;
     s32 i;
-    u8* src_ptr;
-    u8* dst_ptr;
     s32 base_val;
 
     i = 1;
@@ -5219,22 +5262,18 @@ void fn_8019610C(s32* state, u32 buttons, u32 trigger)
             } else {
                 td = gm_8018F634();
                 i = 0;
-                src_ptr = (u8*) td;
-                dst_ptr = (u8*) td;
                 base_val = i;
                 while (i < td->x2E) {
-                    src_ptr[0x45] = src_ptr[0x44];
-                    src_ptr[0x46] = base_val;
+                    td->x37[i].xE = td->x37[i].xD;
+                    td->x37[i].xF = base_val;
                     if (i < td->x30) {
-                        *(u16*) &dst_ptr[0x4BE] = *(u16*) &src_ptr[0x40];
-                        dst_ptr[0x4BD] = src_ptr[0x39];
-                        dst_ptr[0x4B9] = src_ptr[0x3A];
-                        dst_ptr[0x4B8] = src_ptr[0x37];
-                        dst_ptr[0x4BB] = src_ptr[0x3E];
-                        dst_ptr[0x4BA] = src_ptr[0x3C];
+                        td->x4B8[i].x6 = td->x37[i].x9;
+                        td->x4B8[i].x5 = td->x37[i].x2;
+                        td->x4B8[i].x1 = td->x37[i].x3;
+                        td->x4B8[i].x0 = td->x37[i].x0;
+                        td->x4B8[i].x3 = td->x37[i].x7;
+                        td->x4B8[i].x2 = td->x37[i].x5;
                     }
-                    src_ptr += 0x12;
-                    dst_ptr += 0xA;
                     i++;
                 }
                 gm_SetPendingScene(2);
@@ -5759,6 +5798,19 @@ void fn_80196EEC(HSD_GObj* gobj)
 
 extern s32 lbl_803B7CE0[9];
 
+typedef struct TmPlayerAnimFrames {
+    u16 start;
+    u16 end;
+    u16 loop;
+} TmPlayerAnimFrames;
+STATIC_ASSERT(sizeof(TmPlayerAnimFrames) == 6);
+
+typedef union TmPlayerAnimFrameTable {
+    s32 words[9];
+    TmPlayerAnimFrames states[6];
+} TmPlayerAnimFrameTable;
+STATIC_ASSERT(sizeof(TmPlayerAnimFrameTable) == sizeof(s32) * 9);
+
 void fn_80196FFC(HSD_GObj* gobj)
 {
     TmData* tm;
@@ -5769,7 +5821,7 @@ void fn_80196FFC(HSD_GObj* gobj)
     u8 players;
     u8 state;
     u8 start_frame, cur_frame, end_frame, loop_flag;
-    s32 table[9];
+    TmPlayerAnimFrameTable table;
 
     tm = gm_8018F634();
     pnum = fn_8018F62C(gobj);
@@ -5778,15 +5830,15 @@ void fn_80196FFC(HSD_GObj* gobj)
         jobj = jobj_tmp;
     }
 
-    table[1] = lbl_803B7CE0[1];
-    table[0] = lbl_803B7CE0[0];
-    table[2] = lbl_803B7CE0[2];
-    table[3] = lbl_803B7CE0[3];
-    table[4] = lbl_803B7CE0[4];
-    table[5] = lbl_803B7CE0[5];
-    table[7] = lbl_803B7CE0[7];
-    table[6] = lbl_803B7CE0[6];
-    table[8] = lbl_803B7CE0[8];
+    table.words[1] = lbl_803B7CE0[1];
+    table.words[0] = lbl_803B7CE0[0];
+    table.words[2] = lbl_803B7CE0[2];
+    table.words[3] = lbl_803B7CE0[3];
+    table.words[4] = lbl_803B7CE0[4];
+    table.words[5] = lbl_803B7CE0[5];
+    table.words[7] = lbl_803B7CE0[7];
+    table.words[6] = lbl_803B7CE0[6];
+    table.words[8] = lbl_803B7CE0[8];
 
     if ((s32) gm_8018F634()->cur_option >= 0x1B &&
         (s32) gm_8018F634()->cur_option <= 0x1E)
@@ -5832,20 +5884,14 @@ void fn_80196FFC(HSD_GObj* gobj)
     tm->x524[2]->hidden = 0;
 
     state = lbl_804799D8.x2A[pnum].state;
-    {
-        u16* frames = (u16*) table;
-        lbl_804799D8.x2A[pnum].end = frames[state * 3 + 1];
-    }
-    {
-        int start_idx = state * 3 + 0;
-        lbl_804799D8.x2A[pnum].start = ((u16*) table)[start_idx];
-    }
+    lbl_804799D8.x2A[pnum].end = table.states[state].end;
+    lbl_804799D8.x2A[pnum].start = table.states[state].start;
     {
         u8 start = lbl_804799D8.x2A[pnum].start;
         start_frame = start;
     }
 
-    lbl_804799D8.x2A[pnum].loop = ((u16*) table)[state * 3 + 2];
+    lbl_804799D8.x2A[pnum].loop = table.states[state].loop;
     cur_frame = lbl_804799D8.x2A[pnum].cur;
     end_frame = lbl_804799D8.x2A[pnum].end;
     loop_flag = lbl_804799D8.x2A[pnum].loop;
@@ -7826,7 +7872,6 @@ void fn_8019B458(s32* arg0)
     s32 i;
     s32 rank;
     s32 x24;
-    u8* ptr;
     TmData* td;
 
     s32 costumes[4];
@@ -7839,30 +7884,15 @@ void fn_8019B458(s32* arg0)
     tm->pad_x34[0] = tm->x33;
 
     td = gm_8018F634();
-    ptr = &lbl_803DA0D0.rank_thresholds[td->entrants][0] - 0x1E;
     x24 = td->x24;
 
-    if (x24 > (s32) ptr[0x23]) {
+    if (x24 > (s32) lbl_803DA0D0.rank_thresholds[td->entrants][5]) {
         rank = 6;
     } else {
-        ptr += 5;
-        if (x24 <= (s32) ptr[0x1E]) {
-            rank = 5;
-        }
-        if (x24 <= (s32) (ptr--)[0x1D]) {
-            rank = 4;
-        }
-        if (x24 <= (s32) (ptr--)[0x1D]) {
-            rank = 3;
-        }
-        if (x24 <= (s32) (ptr--)[0x1D]) {
-            rank = 2;
-        }
-        if (x24 <= (s32) (ptr--)[0x1D]) {
-            rank = 1;
-        }
-        if (x24 <= (s32) ptr[0x1D]) {
-            rank = 0;
+        for (i = 5; i >= 0; i--) {
+            if (x24 <= (s32) lbl_803DA0D0.rank_thresholds[td->entrants][i]) {
+                rank = i;
+            }
         }
     }
 

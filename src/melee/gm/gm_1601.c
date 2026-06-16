@@ -4650,7 +4650,6 @@ long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
 {
     s8* p;
     s32 count;
-    s8* base;
     s8* list;
     s32 i;
     s8* dst;
@@ -4658,11 +4657,10 @@ long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
     u8 tmp;
     s8 result;
 
-    base = (s8*) &lbl_8046B488;
     switch (arg0) {
     case 1:
         i = 0;
-        list = base + 0x1C0;
+        list = lbl_8046B488.x1C0;
         p = list;
         do {
             if (i != 4 && gm_80164840_noinline((u8) i) != 0) {
@@ -4678,10 +4676,10 @@ long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
         p = list;
         do {
             s8* q;
-            q = base + HSD_Randi(0x1B);
-            tmp = q[0x1C0];
+            q = &lbl_8046B488.x1C0[HSD_Randi(0x1B)];
+            tmp = *q;
             i += 1;
-            q[0x1C0] = (u8) *p;
+            *q = (u8) *p;
             *p = tmp;
             p += 1;
         } while (i < 0x1A);
@@ -4707,10 +4705,11 @@ long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
         src = arg2;
         i = 0;
         while ((s8) *src != -2) {
-            while ((s8) (base + i)[0x1C0] == -1) {
+            while ((s8) lbl_8046B488.x1C0[i] == -1) {
                 i = (i + 1) % 27;
             }
-            result = Player_800325C8((CharacterKind) (s8) (base + i)[0x1C0], 0);
+            result =
+                Player_800325C8((CharacterKind) (s8) lbl_8046B488.x1C0[i], 0);
             *dst = result;
             i += 1;
             src += 1;
@@ -4975,12 +4974,22 @@ gm_8016A404_event_player_init_cb(struct lbl_8046B488_t* gp)
     return &state->event_player_init_cb;
 }
 
+static inline u8 gm_8016A22C_kind(struct lbl_8046B488_t* gp, int idx)
+{
+    switch (idx) {
+    case 0:
+        return gp->x0;
+    case 1:
+        return gp->x1;
+    }
+    return gp->x2;
+}
+
 s32 gm_8016A22C(s8 k0, s8 k1, s8 k2, u8 a3, u8 a4, int a5, int mode, int a7,
                 u8 color, u8 p87, u8 p8b, int x6, int x7, int x9, int xA,
                 int flag2, int flag1, f32 f1, f32 f2)
 {
     struct lbl_8046B488_t* gp = &lbl_8046B488;
-    u8* kinds;
     int i;
     u8 count;
 
@@ -5029,20 +5038,19 @@ s32 gm_8016A22C(s8 k0, s8 k1, s8 k2, u8 a3, u8 a4, int a5, int mode, int a7,
 
     fn_80169900_noinline(gp->xD, gp, gp->xA2, gp->x20);
 
-    kinds = (u8*) &gp->x0;
-
     switch (gp->xB) {
     case 0:
         for (i = 0; i < 3; i++) {
-            fn_801695BC_noinline(kinds[i], p87, p8b, (u8*) gp->xA2,
-                        (u8*) gp->x20);
+            fn_801695BC_noinline(gm_8016A22C_kind(gp, i), p87, p8b,
+                                  (u8*) gp->xA2, (u8*) gp->x20);
         }
         break;
 
     case 1: {
         u8 xC = gp->xC;
         for (i = 0; i < 3; i++) {
-            fn_801697FC_noinline(kinds[i], xC, p87, p8b, gp->x20);
+            fn_801697FC_noinline(gm_8016A22C_kind(gp, i), xC, p87, p8b,
+                                  gp->x20);
         }
         break;
     }
@@ -5319,24 +5327,22 @@ int gm_8016A9E8(u8 arg0, s8 arg1)
 
 bool gm_8016AC44(s8 ckind, s8 costume_id)
 {
+    struct lbl_8046B668_t* ptr = &lbl_8046B668;
     s32 idx;
     s32 i;
-    s8* base;
 
     if ((gm_8016AE50()->x58 != NULL ? 1 : 0) == 1) {
-        base = lbl_8046B668.arr1;
         idx = -1;
         for (i = 0; i < 27; i++) {
-            if (base[i + 0x1C] == -2) {
+            if (ptr->arr2[i] == -2) {
                 idx = i;
                 break;
             }
         }
         if (idx != -1) {
             for (i = idx; i >= 0; i--) {
-                s8* entry = &base[i];
-                if (entry[0x1C] == costume_id && ckind == entry[0]) {
-                    entry[0x1C] = -1;
+                if (ptr->arr2[i] == costume_id && ckind == ptr->arr1[i]) {
+                    ptr->arr2[i] = -1;
                     return true;
                 }
             }
