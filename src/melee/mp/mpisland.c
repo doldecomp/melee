@@ -53,14 +53,14 @@ void mpIsland_8005A728(void)
     CollLine* lines;
     CollVtx* vtx;
     mp_UnkStruct0* mpisp;
-    mp_UnkStruct0* prev;
+    float z_val;
     int count;
     int line_idx;
     int end_idx;
+    int next;
     int hidden;
-    s16 next;
-    float z_val;
-    int i;
+    mp_UnkStruct0* prev;
+    mp_UnkStruct0** ceiling_tail;
     u8 visited[0x600];
     PAD_STACK(0x10);
 
@@ -68,13 +68,13 @@ void mpIsland_8005A728(void)
     lines = mpGetGroundCollLine();
     vtx = mpGetGroundCollVtx();
     mpIsland_8005A6F8();
+    ceiling_tail = &mpIsland_80458E88.xC;
 
     memzero(visited, 0x600u);
 
     /* Process floor segments */
-    count = map->floor_count;
     prev = NULL;
-    if (count) {
+    if ((count = map->floor_count) != 0) {
         line_idx = map->floor_start;
         z_val = mpIsland_804D8158;
         while (count != 0) {
@@ -87,8 +87,9 @@ void mpIsland_8005A728(void)
             }
             prev = mpisp;
             end_idx = line_idx;
+            next = !line_idx;
             hidden = 0;
-            while (true) {
+            while (line_idx != next) {
                 visited[end_idx] = 1;
                 if (!(lines[end_idx].flags & LINE_FLAG_ENABLED) ||
                     (lines[end_idx].flags & LINE_FLAG_HIDDEN))
@@ -101,9 +102,6 @@ void mpIsland_8005A728(void)
                     break;
                 }
                 end_idx = next;
-                if (line_idx == end_idx) {
-                    break;
-                }
             }
             mpisp->x20 = hidden ? 2 : 0;
             mpisp->next = NULL;
@@ -122,16 +120,14 @@ void mpIsland_8005A728(void)
             line_idx++;
             {
                 u8* p = &visited[line_idx];
-                int ctr = count;
-                if (count) {
-                    do {
-                        if (!*p) {
-                            break;
-                        }
-                        p++;
-                        line_idx++;
-                        count--;
-                    } while (--ctr);
+                int ctr;
+                for (ctr = count; ctr != 0; ctr--) {
+                    if (!*p) {
+                        break;
+                    }
+                    p++;
+                    line_idx++;
+                    count--;
                 }
             }
         }
@@ -145,18 +141,19 @@ void mpIsland_8005A728(void)
     if (count) {
         line_idx = map->ceiling_start;
         z_val = mpIsland_804D8158;
-        for (; count != 0;) {
+        while (count != 0) {
             mpisp = HSD_MemAlloc(0x2C);
             HSD_ASSERT(0x3E, mpisp);
             if (prev) {
                 prev->next = mpisp;
             } else {
-                mpIsland_80458E88.xC = mpisp;
+                mpIsland_80458E88.x4 = mpisp;
             }
             prev = mpisp;
             end_idx = line_idx;
+            next = !line_idx;
             hidden = 0;
-            for (;;) {
+            while (line_idx != next) {
                 visited[end_idx] = 1;
                 if (!(lines[end_idx].flags & LINE_FLAG_ENABLED) ||
                     (lines[end_idx].flags & LINE_FLAG_HIDDEN))
@@ -170,9 +167,6 @@ void mpIsland_8005A728(void)
                     break;
                 }
                 end_idx = next;
-                if (line_idx == end_idx) {
-                    break;
-                }
             }
             mpisp->x20 = hidden ? 2 : 0;
             mpisp->next = NULL;
@@ -191,22 +185,20 @@ void mpIsland_8005A728(void)
             line_idx++;
             {
                 u8* p = &visited[line_idx];
-                int ctr = count;
-                if (count) {
-                    do {
-                        if (!*p) {
-                            break;
-                        }
-                        p++;
-                        line_idx++;
-                        count--;
-                    } while (--ctr);
+                int ctr;
+                for (ctr = count; ctr != 0; ctr--) {
+                    if (!*p) {
+                        break;
+                    }
+                    p++;
+                    line_idx++;
+                    count--;
                 }
             }
         }
     }
 
-    mpIsland_80458E88.x8 = prev;
+    *ceiling_tail = prev;
 }
 
 mp_UnkStruct0* mpIsland_8005AB54(int surface_idx)
@@ -432,8 +424,10 @@ void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
                        int arg3, int arg4, int arg5, bool arg6)
 {
     mp_UnkStruct0* cur;
-    mp_UnkStruct0* prev;
+    float z_val;
+    u8 visited[0x600];
     mp_UnkStruct0* next;
+    mp_UnkStruct0* prev;
     mp_UnkStruct0* mpisp;
     CollLine* lines;
     CollVtx* vtx;
@@ -446,11 +440,9 @@ void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
     int loop;
     u32 type_flag;
     s16 link;
-    float z_val;
     float min_x;
     float max_x;
     int i;
-    u8 visited[0x600];
     PAD_STACK(16);
 
     type_flag = arg3 | 0x10;
@@ -479,8 +471,8 @@ void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
     inner = joints->inner;
     z_val = mpIsland_804D8158;
 
-    line_idx = inner->dynamic_start;
     end_total = inner->dynamic_start + inner->dynamic_count;
+    line_idx = inner->dynamic_start;
 
     for (; line_idx < end_total;) {
         if (visited[line_idx] != 0 ||
@@ -528,10 +520,7 @@ void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
                 }
             }
 
-            if (loop) {
-                HSD_ASSERT(0x206, !loop);
-                goto after_alloc;
-            }
+            HSD_ASSERT(0x206, !loop);
         } else {
             start_idx = end_idx;
             min_x = -F32_MAX;
@@ -544,15 +533,16 @@ void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
                     max_x = vtx[lines[i].x0->v0_idx].pos.x;
                     end_idx = i;
                 }
-                if (min_x > vtx[lines[i].x0->v1_idx].pos.x) {
-                    min_x = vtx[lines[i].x0->v1_idx].pos.x;
-                    start_idx = i;
+                {
+                    if (min_x > vtx[lines[i].x0->v1_idx].pos.x) {
+                        min_x = vtx[lines[i].x0->v1_idx].pos.x;
+                        start_idx = i;
+                    }
                 }
                 i = lines[i].x0->prev_id0;
             } while (i != link);
         }
 
-    after_alloc:
         mpisp = *arg1;
         if (mpisp != NULL) {
             *arg1 = mpisp->next;

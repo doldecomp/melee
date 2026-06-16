@@ -54,6 +54,8 @@ typedef struct UnkX {
 
 /* 2F491C */ static void ifStatus_PercentOnDeathAnimationThink(UnkX* value,
                                                                s32, s32);
+/* 3F9598 */ char ifStatus_803F9598[0x14] = "DmgNum_scene_models";
+/* 3F95AC */ char ifStatus_803F95AC[0x14] = "DmgMrk_scene_models";
 /* 3F9628 */ Element_803F9628 ifStatus_803F9628[8] = {
     { NULL, 0, if_802F74D0, 0x7C860U, 8, 0, { 0 }, 0, NULL, NULL, 0, 0 },
     { NULL, 0, if_802F73C4, 0xC351U, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
@@ -64,6 +66,7 @@ typedef struct UnkX {
     { NULL, 0, if_802F74D0, 0x9C48U, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
     { NULL, 0, if_802F74D0, 0x9C46U, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
 };
+/* 3F9768 */ char lbl_803F9768[0x16] = "ScInfCnt_scene_models";
 /* 4D6D60 */ static u8 ifStatus_804D6D60;
 /* 4D6D61 */ static s8 ifStatus_804D6D61;
 
@@ -391,11 +394,10 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
 
     HSD_JObjAnimAll(jobj);
 
-    anim_base = (HSD_MatAnimJoint**) &hud->janim_selection_joints;
     digit_jobj = state->jobjs[Ones];
     ones_digit = state->damage_percent % 10;
     HSD_TObjAddAnimAll(digit_jobj->u.dobj->mobj->tobj,
-                       (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])
+                       (HSD_TexAnim*) ifStatus_HudInfo.janim_selection_joints
                            ->child->child->aobjdesc->fobjdesc);
     HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * ones_digit);
     HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
@@ -403,7 +405,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     digit_jobj = state->jobjs[Tens];
     tens_digit = (state->damage_percent % 100) / 10;
     HSD_TObjAddAnimAll(digit_jobj->u.dobj->mobj->tobj,
-                       (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])
+                       (HSD_TexAnim*) ifStatus_HudInfo.janim_selection_joints
                            ->child->child->aobjdesc->fobjdesc);
     HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * tens_digit);
     HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
@@ -419,7 +421,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     digit_jobj = state->jobjs[Hundreds];
     hundreds_digit = (state->damage_percent % 1000) / 100;
     HSD_TObjAddAnimAll(digit_jobj->u.dobj->mobj->tobj,
-                       (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])
+                       (HSD_TexAnim*) ifStatus_HudInfo.janim_selection_joints
                            ->child->child->aobjdesc->fobjdesc);
     HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * hundreds_digit);
     HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
@@ -539,7 +541,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
         ((state->damage_percent % 1000) / 100 == 1) ? 0.5069F : 0.0F;
     digit_jobj = state->jobjs[Hundreds];
     pos = state->translation_x[Hundreds] +
-          (digit_offset + tens_offset + hundreds_offset);
+          (tens_offset + digit_offset + hundreds_offset);
     if (digit_jobj == NULL) {
         __assert("jobj.h", 932, "jobj");
     }
@@ -683,6 +685,7 @@ void ifStatus_802F5E50(HSD_GObj* gobj, s32 arg1)
 void ifStatus_802F5EC0(IfDamageState* state, s32 player_idx)
 {
     HSD_GObj* gobj;
+    HSD_MatAnimJoint** anim_base;
     HSD_JObj* jobj;
     Vec3* vec;
     s32 i;
@@ -703,9 +706,10 @@ void ifStatus_802F5EC0(IfDamageState* state, s32 player_idx)
     }
     state->flags.animation_status_id = 0;
     HSD_JObjRemoveAnim(jobj);
+    anim_base = (HSD_MatAnimJoint**) &hud->janim_selection_joints;
     lb_8000C07C(jobj, 0, (HSD_AnimJoint**) hud->jobj_desc_parent,
-                (HSD_MatAnimJoint**) hud->janim_selection_joints,
-                (HSD_ShapeAnimJoint**) hud->janim_selection_textures);
+                (HSD_MatAnimJoint**) anim_base[0],
+                (HSD_ShapeAnimJoint**) anim_base[1]);
     HSD_JObjReqAnimAll(jobj, 0.0f);
     HSD_JObjAnimAll(jobj);
     vec = ifAll_802F3424((u8) player_idx);
@@ -717,9 +721,9 @@ void ifStatus_802F5EC0(IfDamageState* state, s32 player_idx)
     }
     if (state->jobjs[3] != NULL) {
         tobj = state->jobjs[3]->u.dobj->mobj->tobj;
-        HSD_TObjAddAnimAll(tobj,
-                           (HSD_TexAnim*) hud->janim_selection_joints->child
-                               ->child->next->next->next->aobjdesc->fobjdesc);
+        HSD_TObjAddAnimAll(
+            tobj, (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])
+                      ->child->child->next->next->next->aobjdesc->fobjdesc);
         if (Player_GetMoreFlagsBit2((s8) state->player_slot) != 0) {
             HSD_TObjReqAnimAll(tobj, 1.0f);
         } else {
@@ -771,6 +775,11 @@ check_done:
     return gx_cur;
 }
 
+static inline HSD_GObj* ifStatus_CreateMarkGObj(void)
+{
+    return GObj_Create(0xE, 0xF, 0);
+}
+
 void ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
 {
     HSD_GObj* gobj;
@@ -790,7 +799,7 @@ void ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
     chara = Player_GetPlayerCharacter(idx);
     if (state->next == NULL) {
         ifAll_802F3690();
-        gobj = GObj_Create(0xE, 0xF, 0);
+        gobj = ifStatus_CreateMarkGObj();
         if (gobj == NULL) {
             HSD_ASSERTREPORT(0x30A, 0,
                              "Error : gobj dont't get (ifAddMark)\n");
@@ -1239,6 +1248,71 @@ void ifStatus_802F7034(UNK_T arg0)
     ifStatus_802F6EA4(5, a, b, c, arg0, NULL);
 }
 
+#ifdef MWERKS_GEKKO
+asm void ifStatus_802F7134(void)
+{ // clang-format off
+    nofralloc
+    mflr r0
+    lis r3, ifStatus_803F9628@ha
+    stw r0, 0x4(r1)
+    li r0, 0x0
+    stwu r1, -0x30(r1)
+    stw r31, 0x2c(r1)
+    addi r31, r3, ifStatus_803F9628@l
+    stw r0, 0x0(r31)
+    stw r0, 0x4(r31)
+    stw r0, 0x28(r31)
+    stw r0, 0x2c(r31)
+    stw r0, 0x50(r31)
+    stw r0, 0x54(r31)
+    stw r0, 0x78(r31)
+    stw r0, 0x7c(r31)
+    stw r0, 0xa0(r31)
+    stw r0, 0xa4(r31)
+    stw r0, 0xc8(r31)
+    stw r0, 0xcc(r31)
+    stw r0, 0xf0(r31)
+    stw r0, 0xf4(r31)
+    stw r0, 0x118(r31)
+    stw r0, 0x11c(r31)
+    bl ifAll_802F3690
+    lwz r3, 0x0(r3)
+    addi r4, r1, 0x1c
+    addi r5, r31, 0x140
+    crclr 6
+    li r6, 0x0
+    bl lbArchive_LoadSections
+    lwz r3, 0x1c(r1)
+    lwz r0, 0x0(r3)
+    stw r0, 0x14(r31)
+    lwz r3, 0x1c(r1)
+    lwz r0, 0x4(r3)
+    stw r0, 0x3c(r31)
+    lwz r3, 0x1c(r1)
+    lwz r0, 0x8(r3)
+    stw r0, 0x64(r31)
+    lwz r3, 0x1c(r1)
+    lwz r0, 0xc(r3)
+    stw r0, 0x8c(r31)
+    lwz r3, 0x1c(r1)
+    lwz r0, 0x10(r3)
+    stw r0, 0xb4(r31)
+    lwz r3, 0x1c(r1)
+    lwz r0, 0x14(r3)
+    stw r0, 0xdc(r31)
+    lwz r3, 0x1c(r1)
+    lwz r0, 0x18(r3)
+    stw r0, 0x104(r31)
+    lwz r3, 0x1c(r1)
+    lwz r0, 0x1c(r3)
+    stw r0, 0x12c(r31)
+    lwz r0, 0x34(r1)
+    lwz r31, 0x2c(r1)
+    addi r1, r1, 0x30
+    mtlr r0
+    blr
+} // clang-format on
+#else
 void ifStatus_802F7134(void)
 {
     u8 _[8];
@@ -1259,8 +1333,43 @@ void ifStatus_802F7134(void)
         ifStatus_803F9628[i].x14 = models[i];
     }
 }
+#endif
 
 /// free
+#ifdef MWERKS_GEKKO
+asm void ifStatus_802F7220(void)
+{ // clang-format off
+    nofralloc
+    mflr r0
+    lis r3, ifStatus_803F9628@ha
+    stw r0, 0x4(r1)
+    stwu r1, -0x18(r1)
+    stw r31, 0x14(r1)
+    li r31, 0x0
+    stw r30, 0x10(r1)
+    addi r30, r3, ifStatus_803F9628@l
+    stw r29, 0xc(r1)
+    li r29, 0x0
+L_ifStatus_802F7220_loop:
+    lwz r3, 0x0(r30)
+    cmplwi r3, 0x0
+    beq L_ifStatus_802F7220_next
+    bl HSD_GObjPLink_80390228
+    stw r31, 0x0(r30)
+L_ifStatus_802F7220_next:
+    addi r29, r29, 0x1
+    cmpwi r29, 0x8
+    addi r30, r30, 0x28
+    blt L_ifStatus_802F7220_loop
+    lwz r0, 0x1c(r1)
+    lwz r31, 0x14(r1)
+    lwz r30, 0x10(r1)
+    lwz r29, 0xc(r1)
+    addi r1, r1, 0x18
+    mtlr r0
+    blr
+} // clang-format on
+#else
 void ifStatus_802F7220(void)
 {
     s32 i;
@@ -1271,3 +1380,4 @@ void ifStatus_802F7220(void)
         }
     }
 }
+#endif

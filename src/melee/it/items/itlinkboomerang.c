@@ -187,6 +187,7 @@ HSD_GObj* it_802A013C(f32 facing_dir, Fighter_GObj* owner_gobj, Vec3* pos,
         Item* ip = GET_ITEM(gobj);
         itLinkBoomerangAttributes* attrs =
             ip->xC4_article_data->x4_specialAttributes;
+        Item* item_ptr;
         HSD_Joint* joint;
         int i;
         it_80275158(gobj, attrs->x0);
@@ -208,11 +209,12 @@ HSD_GObj* it_802A013C(f32 facing_dir, Fighter_GObj* owner_gobj, Vec3* pos,
             ip->xDD4_itemVar.linkboomerang.xEB0[i].y = 0.0f;
             ip->xDD4_itemVar.linkboomerang.xEB0[i].z = 0.0f;
         }
+        item_ptr = ip;
         for (i = 0; i < 2; i++) {
             itLinkBoomerangAttributes* attrs;
             AnimBundle* anim_bundle;
             HSD_JObj* jobj;
-            ip->xDD4_itemVar.linkboomerang.xDDC[i] = 0;
+            item_ptr->xDD4_itemVar.linkboomerang.xDDC[0] = 0;
             attrs = ip->xC4_article_data->x4_specialAttributes;
             if (i == 0) {
                 joint = attrs->x44;
@@ -228,7 +230,8 @@ HSD_GObj* it_802A013C(f32 facing_dir, Fighter_GObj* owner_gobj, Vec3* pos,
                                    anim_bundle->shapeanim);
             }
             HSD_JObjReqAnimAll(jobj, 0.0f);
-            ip->xDD4_itemVar.linkboomerang.xF90[i] = jobj;
+            item_ptr->xDD4_itemVar.linkboomerang.xF90[0] = jobj;
+            item_ptr = (Item*) ((s32*) item_ptr + 1);
         }
         ip->xDD4_itemVar.linkboomerang.xDD8 = 0;
         it_802A013C_inline(gobj);
@@ -783,6 +786,7 @@ void itLinkboomerang_UnkMotion3_Phys(Item_GObj* gobj)
     f32 speed;
     if (ip->xDD4_itemVar.linkboomerang.xDE8 != 1) {
         length = attrs->xC;
+        attrs->xC = attrs->xC;
         speed = VEC_XY_LENGTH(&ip->x40_vel);
         length = speed + length;
         if (length > attrs->x14) {

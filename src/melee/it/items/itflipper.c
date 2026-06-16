@@ -552,10 +552,11 @@ static inline void it_3F14_DmgRecv_CE8(Item_GObj* gobj, Vec3* vel, Vec3* pos,
         HSD_GObj* fighter = ip->xCEC_fighterGObj;
         if (ftLib_80086960(fighter)) {
             Item* ip = GET_ITEM(gobj);
-            itFlipper_DatAttrs* attrs = itFlipper_GetAttrs(ip);
+            itFlipper_DatAttrs* attrs;
             /// @todo Eliminate this no-op branch (perturbs scheduling).
             if (pos != NULL) {
             }
+            attrs = itFlipper_GetAttrs(ip);
             ftLib_800866DC(fighter, pos);
             ftLib_80086BEC(fighter, vel);
             speed = attrs->x18 * sqrtf__Ff(vel->x * vel->x + vel->y * vel->y);

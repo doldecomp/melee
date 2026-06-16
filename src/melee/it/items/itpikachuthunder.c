@@ -52,10 +52,10 @@ Item_GObj* it_802B1DF8(Item_GObj* owner, Vec3* pos, Vec3* vel, s32 count,
     SpawnItem spawn;
     u8 _pad[4];
     u32 x40 = Item_8026AE60();
-    Item_GObj* first;
+    s32 cur_delay;
     void* new_var;
     Item_GObj* item_gobj;
-    s32 cur_delay;
+    Item_GObj* first;
     Item_GObj* prev = NULL;
     int i;
 
