@@ -119,6 +119,8 @@ static void ftCo_DamageIce_OnHit(Fighter_GObj* gobj)
 
 static inline void ftCo_DamageIce_StartJump(Fighter* fp)
 {
+    float* ice_size = &fp->co_attrs.damageice_ice_size;
+
     {
         ftCo_8009E140(fp, 0);
         ftCommon_8007F824(fp->gobj);
@@ -151,14 +153,14 @@ static inline void ftCo_DamageIce_StartJump(Fighter* fp)
     ftColl_8007B0C0(fp->gobj, Intangible);
 
     {
-        ftHurtboxInit hurt;
         Vec3 offset = ftCo_DamageIce_HurtboxOffset;
+        ftHurtboxInit hurt;
 
         hurt.bone_idx = ftParts_GetBoneIndex(fp, FtPart_XRotN);
         hurt.height = HurtHeight_Mid;
         hurt.is_grabbable = false;
         hurt.a_offset = hurt.b_offset = offset;
-        hurt.scale = fp->co_attrs.damageice_ice_size;
+        hurt.scale = *ice_size;
 
         ftColl_HurtboxInit(fp, fp->hurt_capsules, &hurt);
     }
