@@ -438,32 +438,18 @@ void fn_8020F2A8(Ground* gp, s32 param2, CollData* coll, s32 param4,
 }
 
 // Move related code from Context tab to here
-float grOldYoshi_8020F31C(float param1, float param2, float param3,
-                          float param4, float param5, float param6)
+static inline float grOldYoshi_8020F31C_inline(float param1, float param2,
+                                               float param3, float param4,
+                                               float distance)
 {
     float fVar1;
-    float fVar2;
-    float fVar3;
-    // fVar2 = param1;
-    if (param1 < 0.0f) {
-        fVar2 = -param1;
-    } else {
-        fVar2 = param1;
-    }
-    fVar3 = (fVar2 / param2);
-    // fVar2 = param1;
-    if (param1 < 0.0f) {
-        fVar2 = -param1;
-    } else {
-        fVar2 = param1;
-    }
+
     fVar1 = param4 - param3;
     if (fVar1 < 0.0f) {
         fVar1 = -fVar1;
     }
-    if (fVar3 * (-param2 * 0.5f * fVar3) + (fVar3 * fVar2) < fVar1 &&
-        ((param4 > param3 && param1 > 0.0f) ||
-         (param4 < param3 && param1 < 0.0f)))
+    if (fVar1 < distance && ((param4 > param3 && param1 > 0.0f) ||
+                             (param4 < param3 && param1 < 0.0f)))
     {
         if (param1 > 0.0f) {
             param1 = param1 - param2;
@@ -477,13 +463,37 @@ float grOldYoshi_8020F31C(float param1, float param2, float param3,
             param1 = param1 - param2;
         }
     }
+    return param1;
+}
+
+float grOldYoshi_8020F31C(float param1, float param2, float param3,
+                          float param4, float param5, float param6)
+{
+    float fVar2;
+    float fVar3;
+    float fVar4;
+    // fVar2 = param1;
+    if (param1 < 0.0f) {
+        fVar2 = -param1;
+    } else {
+        fVar2 = param1;
+    }
+    fVar3 = (fVar2 / param2);
+    // fVar2 = param1;
+    if (param1 < 0.0f) {
+        fVar2 = -param1;
+    } else {
+        fVar2 = param1;
+    }
+    fVar4 = fVar3 * (-param2 * 0.5f * fVar3) + (fVar3 * fVar2);
+    param1 = grOldYoshi_8020F31C_inline(param1, param2, param3, param4, fVar4);
     if (param1 > param5) {
         return param5;
     }
-    if (param1 > param6) {
-        return param1;
+    if (param1 < param6) {
+        return param6;
     }
-    return param6;
+    return param1;
 }
 
 DynamicsDesc* grOldYoshi_8020F404(enum_t arg)
