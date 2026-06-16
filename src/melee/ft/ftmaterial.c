@@ -54,10 +54,10 @@ void ftMaterial_800BF260(void)
 {
     hsdInitClassInfo(&ftMObj.parent, &hsdMObj.parent, "sysdolphin_base_library",
                      "ft_mobj", sizeof(HSD_MObjInfo), sizeof(HSD_MObj));
-    ftMObj.setup = ftMaterial_800BF2B8;
+    ftMObj.setup = (HSD_MObjSetupFunc) ftMaterial_800BF2B8;
 }
 
-void ftMaterial_800BF2B8(HSD_MObj* mobj, u32 rendermode)
+void ftMaterial_800BF2B8(HSD_MObj* mobj, u32 rendermode, u32 unused)
 {
     Fighter* fp;
     HSD_TObj* tobj;
@@ -66,7 +66,6 @@ void ftMaterial_800BF2B8(HSD_MObj* mobj, u32 rendermode)
     HSD_TObj** cur_tobj;
     HSD_TExp* texp1;
     HSD_PEDesc* pe_p;
-    u32 unused;
 
     fp = GET_FIGHTER(HSD_GObj_804D7814);
 
