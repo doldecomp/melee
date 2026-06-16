@@ -11,9 +11,7 @@
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
-#include "ftCaptain/types.h"
 #include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_CaptureCut.h"
 #include "ftCommon/ftCo_Throw.h"
 #include "ftCommon/types.h"
 
@@ -26,15 +24,12 @@
 
 #pragma force_active on
 
-float const ftCo_804D8750 = 0;
-float const ftCo_804D8754 = 1;
-double const ftCo_804D8758 = S32_TO_F32;
-
 /* 09C744 */ static void ftCo_8009C744(Fighter_GObj* gobj);
 
 void ftCo_8009C5A4(Fighter_GObj* gobj, FtMotionId msid)
 {
-    u8 _[8] = { 0 };
+    u32 unused1;
+    u32 unused2;
     Fighter* fp = gobj->user_data;
     if (fp->motion_id != msid || msid != ftCo_MS_ShoulderedWait) {
         Fighter_ChangeMotionState(
@@ -49,6 +44,7 @@ void ftCo_8009C5A4(Fighter_GObj* gobj, FtMotionId msid)
 void ftCo_8009C640(Fighter_GObj* gobj, FtMotionId msid)
 {
     Fighter* fp = gobj->user_data;
+    PAD_STACK(8);
     ftCommon_InitGrab(fp, 0,
                       (int) (fp->dmg.x1830_percent * p_ftCommonData->x4A0 +
                              p_ftCommonData->x4A4));
@@ -94,7 +90,8 @@ void ftCo_Shouldered_Anim(Fighter_GObj* gobj)
     Fighter* fp2;
     Fighter* fp1;
     Fighter_GObj* gobj1;
-    u8 _[8];
+    u32 unused1;
+    u32 unused2;
     Vec3 pos;
     Fighter* fp = gobj->user_data;
     PAD_STACK(16);
