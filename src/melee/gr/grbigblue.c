@@ -23,6 +23,7 @@
 #include "lb/lb_00F9.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
+#include "MSL/math_ppc.h"
 
 #include <math.h>
 #include <trigf.h>
