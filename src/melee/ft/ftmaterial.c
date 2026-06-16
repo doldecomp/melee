@@ -322,6 +322,7 @@ void ftMaterial_800BF6BC(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp)
             }
             sp_cnst1.reg = (u8) reg2;
             {
+                // @todo Fix this stack pointer arithmetic 
                 GXColor* color = (GXColor*) ((u8*) &sp_tevdesc - 4);
                 u8 alpha = sp168.a;
 
