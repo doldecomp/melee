@@ -76,7 +76,11 @@ typedef struct mnDiagram_AnimData {
 mnDiagram_804A0750_t mnDiagram_804A0750;
 mnDiagram_804A076C_t mnDiagram_804A076C;
 
-static AnimLoopSettings mnDiagram_803EE768 = { 0.0f, 9.0f, -0.1f };
+static Point3d mnDiagram_803EE728[3] = {
+    { 4.0F, 1.0F, 0.0F },
+    { -3.0F, 0.8F, 0.0F },
+    { -1.0F, 0.7F, 0.0F },
+};
 
 static u8 mnDiagram_803EE74C[0x1C] = {
     8,    1,    6,    0x10, 0x11, 4,   2,   0xD, 0xB, 0,
@@ -84,10 +88,11 @@ static u8 mnDiagram_803EE74C[0x1C] = {
     0x18, 0x13, 0x14, 0x17, 0x16, 0,   0,   0,
 };
 
-static Point3d mnDiagram_803EE728[3] = {
-    { 4.0F, 1.0F, 0.0F },
-    { -3.0F, 0.8F, 0.0F },
-    { -1.0F, 0.7F, 0.0F },
+static AnimLoopSettings mnDiagram_803EE768 = { 0.0f, 9.0f, -0.1f };
+
+/// Trailing animation settings overlaid by mnDiagram_AnimTable.
+f32 mnDiagram_803EE774[] = {
+    10.0f, 19.0f, -0.1f, 0.0f, 199.0f, 0.0f, 0.0f, 10.0f, -0.1f,
 };
 
 /// Overlay over &mnDiagram_803EE728 to reach the trailing
@@ -1891,6 +1896,13 @@ void mnDiagram_80241310(s32 arg0, s32 arg1, s32 arg2)
     HSD_JObj* jobj;
     mnDiagram_PopupData* user_data;
 
+    /// @todo Constant-pool anchors: these dead literals emit no code but
+    ///       reserve .sdata2 slots for mnDiagram_804DBF94 (-1.0f) and
+    ///       mnDiagram_804DBF98 (the s32-to-f32 bias) so the section layout
+    ///       matches the target object.
+    (void) -1.0F;
+    (void) 4503601774854144.0;
+
     tbl = (mnDiagram_AnimTable*) &mnDiagram_803EE728;
     joint_data = mnDiagram_804A07E4;
     data = GET_DIAGRAM(mnDiagram_804D6C10);
@@ -2324,6 +2336,7 @@ void mnDiagram_80241E78(void* arg0, u8 arg1, u8 arg2, int arg3)
     f32 row_offset_adj;
     HSD_JObj* jobj;
     HSD_JObj* jobj2;
+    Diagram* user_data;
     Diagram* data;
     void** joint_data;
     s32 digit_count;
