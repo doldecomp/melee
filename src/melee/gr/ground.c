@@ -1169,13 +1169,6 @@ typedef struct LightOverrideEntry {
     /* 0x5 */ u8 _pad[3];
 } LightOverrideEntry;
 
-typedef struct LightOverrideFlags {
-    u8 a : 1;
-    u8 b : 1;
-    u8 c : 1;
-    u8 _ : 5;
-} LightOverrideFlags;
-
 LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lights)
 {
     LightList** walker;
@@ -1186,7 +1179,6 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lights)
     HSD_LightDesc* desc;
     s32 count;
     s32 i;
-    s32 byte_off;
     bool found;
     s32 b6, b7, b5;
     bool matched;
@@ -1201,15 +1193,13 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lights)
         desc = (*walker)->desc;
         count = dat->unk1C;
         if (count != 0) {
-            for (i = 0, byte_off = 0; i < count; i++, byte_off += 8) {
+            for (i = 0; i < count; i++) {
                 arr = dat->unk18;
-                if (*(HSD_LightDesc**) ((u8*) arr + byte_off) == desc) {
-                    LightOverrideFlags* p =
-                        (LightOverrideFlags*) ((u8*) arr + (i * 8) + 4);
+                if (arr[i].desc == desc) {
                     found = true;
-                    b6 = p->b;
-                    b7 = p->a;
-                    b5 = p->c;
+                    b6 = arr[i].b;
+                    b7 = arr[i].a;
+                    b5 = arr[i].c;
                     goto search1_done;
                 }
             }
@@ -1234,15 +1224,13 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lights)
             dat = archive->unk4;
             count = dat->unk1C;
             if (count != 0) {
-                for (i = 0, byte_off = 0; i < count; i++, byte_off += 8) {
+                for (i = 0; i < count; i++) {
                     arr = dat->unk18;
-                    if (*(HSD_LightDesc**) ((u8*) arr + byte_off) == desc) {
-                        LightOverrideFlags* p =
-                            (LightOverrideFlags*) ((u8*) arr + (i * 8) + 4);
+                    if (arr[i].desc == desc) {
                         found = true;
-                        b6 = p->b;
-                        b7 = p->a;
-                        b5 = p->c;
+                        b6 = arr[i].b;
+                        b7 = arr[i].a;
+                        b5 = arr[i].c;
                         goto search2_done;
                     }
                 }
