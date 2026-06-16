@@ -102,11 +102,6 @@ struct HSD_ImageDesc grPu_803E7620 = { &grPu_803E6E20, 32, 32, 4, 0, 0, 0 };
 
 void grPura_80211CFC(bool num) {}
 
-const f32 grPu_804DBA70 = 0.0;
-const f32 grPu_804DBA74 = 2.0;
-const f32 grPu_804DBA78 = 30.0;
-const f32 grPu_804DBA7C = -30.0;
-
 /* 4D6AA0 */ static HSD_GObj* grPu_804D6AA0;
 
 void grPura_80211D00(void)
@@ -155,6 +150,7 @@ HSD_GObj* grPura_80211E08_noinline2(int gobj_id)
     return grPura_80211E08_noinline(gobj_id);
 };
 
+#pragma auto_inline off
 HSD_GObj* grPura_80211E08(int gobj_id)
 {
     HSD_GObj* gobj;
@@ -171,6 +167,7 @@ HSD_GObj* grPura_80211E08(int gobj_id)
 
     return gobj;
 }
+#pragma auto_inline on
 
 void grPura_80211EF0(Ground_GObj* arg0)
 {
@@ -283,6 +280,11 @@ void grPura_802120E0(Ground_GObj* arg0)
     gp->gv.pura.xC8 = 0;
 }
 
+const f32 grPu_804DBA70 = 0.0;
+const f32 grPu_804DBA74 = 2.0;
+const f32 grPu_804DBA78 = 30.0;
+const f32 grPu_804DBA7C = -30.0;
+
 void grPura_8021228C(Ground_GObj* arg0) {}
 
 void grPura_80212290(Ground_GObj* arg0)
@@ -335,17 +337,16 @@ void grPura_802125EC(Ground_GObj* arg0) {}
 void grPura_802125F0(HSD_GObj* arg0)
 {
     struct Pura_UnkModelDesc {
-        s16 x0;
-        s16 x2;
+        s32 x0;
         f32 x4;
         s32 x8;
     }* desc = (void*) ((char*) grPu_803E6800 + 0x2B0);
     f32 scale;
-    s32 i;
+    HSD_JObj* jobj;
+    u32 i;
     s32 joint;
     HSD_GObj* gobj;
     Ground* gp;
-    HSD_JObj* jobj;
     HSD_JObj* child;
 
     for (i = 0; i < 27; i++, desc++) {
@@ -355,9 +356,9 @@ void grPura_802125F0(HSD_GObj* arg0)
             gp = GET_GROUND(gobj);
             HSD_ASSERT(0x292, gp);
 
-            gp->gv.pura2.xC4 = desc->x0;
-            joint = Ground_801C33C0(4, gp->gv.pura2.xC4);
-            gp->gv.pura2.xC8 = Ground_801C3FA4(arg0, gp->gv.pura2.xC4);
+            gp->gv.pura.xC4 = desc->x0;
+            joint = Ground_801C33C0(4, gp->gv.pura.xC4);
+            gp->gv.pura2.xC8 = Ground_801C3FA4(arg0, joint);
 
             jobj = gobj->hsd_obj;
             HSD_JObjSetTranslateX(jobj,
@@ -400,12 +401,12 @@ void grPura_802125F0(HSD_GObj* arg0)
 
 void grPura_80212CD4(HSD_GObj* arg0)
 {
-    Vec3 sp10;
-    s32 i;
     Ground* gp = arg0->user_data;
+    Ground* gp2 = gp;
     HSD_JObj* jobj = arg0->hsd_obj;
+    u32 i;
     HSD_JObj* node;
-    CmSubject* s;
+    Vec3 subject_pos;
 
     for (i = 0; i < 25; i++) {
         gp->gv.pura3.xC4[i] = NULL;
@@ -418,31 +419,38 @@ void grPura_80212CD4(HSD_GObj* arg0)
         node = jobj->child;
     }
     if (node != NULL) {
-        node = node->child;
-        for (i = 0; i < 25; i++, node = node->next) {
+        if (node == NULL) {
+            node = NULL;
+        } else {
+            node = node->child;
+        }
+        for (i = 0; i < 25; i++) {
             if (node == NULL) {
                 return;
             }
-            s = Camera_80029020();
-            gp->gv.pura3.x128[i] = s;
-            if (s != NULL) {
+            if ((gp->gv.pura3.x128[i] = Camera_80029020()) != NULL) {
                 gp->gv.pura3.xC4[i] = node;
-                lb_8000B1CC(gp->gv.pura3.xC4[i], NULL, &sp10);
-                s->x10 = sp10;
+                lb_8000B1CC(gp2->gv.pura3.xC4[i], NULL, &subject_pos);
+                gp->gv.pura3.x128[i]->x10 = subject_pos;
                 if (HSD_JObjGetFlags(node) & 0x10) {
-                    s->x8 = 1;
+                    gp->gv.pura3.x128[i]->x8 = 1;
                 } else {
-                    s->x8 = 0;
+                    gp->gv.pura3.x128[i]->x8 = 0;
                 }
-                s->x48.x = 30.0f;
-                s->x48.y = -30.0f;
-                s->x40.x = -30.0f;
-                s->x40.y = 30.0f;
-                s->x2C.x = s->x40.x;
-                s->x2C.y = s->x40.y;
-                s->x34.x = s->x48.x;
-                s->x34.y = s->x48.y;
-                s->x34.z = s->x48.z;
+                gp->gv.pura3.x128[i]->x48.x = 30.0f;
+                gp->gv.pura3.x128[i]->x48.y = -30.0f;
+                gp->gv.pura3.x128[i]->x40.x = -30.0f;
+                gp->gv.pura3.x128[i]->x40.y = 30.0f;
+                {
+                    CmSubject* subject = gp->gv.pura3.x128[i];
+                    subject->x2C = subject->x40;
+                    subject->x34 = subject->x48;
+                }
+            }
+            if (node == NULL) {
+                node = NULL;
+            } else {
+                node = node->next;
             }
         }
     }
@@ -555,18 +563,26 @@ void grPura_80213128(HSD_DObj* dobj)
     }
 }
 
+#pragma dont_inline on
 void grPura_80213224(HSD_DObj* dobj)
 {
     if (dobj != 0) {
         HSD_MObjCompileTev(dobj->mobj);
     }
 }
+#pragma dont_inline reset
 
 void grPura_80213250(HSD_JObj* jobj)
 {
     HSD_JObj* child = jobj->child;
-    HSD_DObj* dobj;
+    HSD_DObj* sibling_iter;
     HSD_DObj* iter;
+    HSD_DObj* next;
+    HSD_DObj* sibling_dobj;
+    HSD_DObj* dobj;
+    HSD_DObj* self_dobj;
+    HSD_DObj* self_iter;
+    HSD_DObj* self_next;
 
     if (child != NULL) {
         if (child->child != NULL) {
@@ -576,8 +592,7 @@ void grPura_80213250(HSD_JObj* jobj)
             grPura_80213250(child->next);
         }
         if (union_type_dobj(child)) {
-            dobj = child->u.dobj;
-            if (dobj != NULL) {
+            if ((dobj = child->u.dobj) != NULL) {
                 if (dobj->next != NULL) {
                     grPura_80213128(dobj->next);
                 }
@@ -591,41 +606,57 @@ void grPura_80213250(HSD_JObj* jobj)
         }
     }
 
-    child = jobj->next;
-    if (child != NULL) {
-        if (child->child != NULL) {
-            grPura_80213250(child->child);
-        }
-        if (child->next != NULL) {
-            grPura_80213250(child->next);
-        }
-        if (union_type_dobj(child)) {
-            dobj = child->u.dobj;
-            if (dobj != NULL) {
-                if (dobj->next != NULL) {
-                    grPura_80213128(dobj->next);
-                }
-                for (iter = dobj; iter != NULL; iter = iter->next) {
-                    grPura_80213224(iter);
-                }
-                if (dobj->mobj != NULL) {
-                    HSD_MObjCompileTev(dobj->mobj);
+    {
+        HSD_JObj* sibling;
+        if ((sibling = jobj->next) != NULL) {
+            if (sibling->child != NULL) {
+                grPura_80213250(sibling->child);
+            }
+            if (sibling->next != NULL) {
+                grPura_80213250(sibling->next);
+            }
+            if (union_type_dobj(sibling)) {
+                if ((sibling_dobj = sibling->u.dobj) != NULL) {
+                    if (sibling_dobj->next != NULL) {
+                        grPura_80213128(sibling_dobj->next);
+                    }
+                    for (sibling_iter = sibling_dobj; sibling_iter != NULL;
+                         sibling_iter = sibling_iter->next)
+                    {
+                        grPura_80213224(sibling_iter);
+                    }
+                    if (sibling_dobj->mobj != NULL) {
+                        HSD_MObjCompileTev(sibling_dobj->mobj);
+                    }
                 }
             }
         }
     }
 
     if (union_type_dobj(jobj)) {
-        dobj = jobj->u.dobj;
-        if (dobj != NULL) {
-            if (dobj->next != NULL) {
-                grPura_80213128(dobj->next);
+        if ((self_dobj = jobj->u.dobj) != NULL) {
+            if ((self_next = self_dobj->next) != NULL) {
+                if (self_next->next != NULL) {
+                    grPura_80213128(self_next->next);
+                }
+                for (self_iter = self_next; self_iter != NULL;
+                     self_iter = self_iter->next)
+                {
+                    grPura_80213224(self_iter);
+                }
+                if (self_next->mobj != NULL) {
+                    HSD_MObjCompileTev(self_next->mobj);
+                }
             }
-            for (iter = dobj; iter != NULL; iter = iter->next) {
-                grPura_80213224(iter);
+            for (self_iter = self_dobj; self_iter != NULL;
+                 self_iter = self_iter->next)
+            {
+                if (self_iter != NULL) {
+                    HSD_MObjCompileTev(self_iter->mobj);
+                }
             }
-            if (dobj->mobj != NULL) {
-                HSD_MObjCompileTev(dobj->mobj);
+            if (self_dobj->mobj != NULL) {
+                HSD_MObjCompileTev(self_dobj->mobj);
             }
         }
     }
