@@ -342,9 +342,7 @@ static inline s32 randi_between(s32 min, s32 max)
         } else {
             return min;
         }
-    } // else {
-    //    return min;
-    //}
+    }
 }
 
 // For some reason, the normal GET_GROUND didn't work here
@@ -437,7 +435,6 @@ void fn_8020F2A8(Ground* gp, s32 param2, CollData* coll, s32 param4,
     return;
 }
 
-// Move related code from Context tab to here
 static inline float grOldYoshi_8020F31C_inline(float param1, float param2,
                                                float param3, float param4,
                                                float distance)
@@ -472,14 +469,14 @@ float grOldYoshi_8020F31C(float param1, float param2, float param3,
     float fVar2;
     float fVar3;
     float fVar4;
-    // fVar2 = param1;
+
     if (param1 < 0.0f) {
         fVar2 = -param1;
     } else {
         fVar2 = param1;
     }
     fVar3 = (fVar2 / param2);
-    // fVar2 = param1;
+    
     if (param1 < 0.0f) {
         fVar2 = -param1;
     } else {
