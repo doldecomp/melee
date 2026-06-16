@@ -30,10 +30,16 @@ struct Unk80433380_0 {
     char x38[4];
 };
 
+typedef union LbMcSnapMemSnapIconData {
+    u8* ptr;
+    int offset;
+    int size;
+} LbMcSnapMemSnapIconData;
+
 struct Unk80433380 {
     /* 0x00 */ struct Unk80433380_0* x0;
     /* 0x04 */ char x4_string[0x40];
-    /* 0x44 */ int* x44_LbMcSnap_MemSnapIconData;
+    /* 0x44 */ LbMcSnapMemSnapIconData* x44_LbMcSnap_MemSnapIconData;
     /* 0x48 */ struct Unk80433380_48* x48;
     /* 0x4C */ int x4C_cardState[2];
     /* 0x54 */ int x54_stateChanged[3];
