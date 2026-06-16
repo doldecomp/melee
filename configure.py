@@ -604,7 +604,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_ThrownMewtwo.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureKirby.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureWaitKirby.c"),
-            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_ThrownKirby.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_ThrownKirby.c"),
             # Main again
             Object(Matching, "melee/ft/ftdemo.c"),
             Object(Matching, "melee/ft/ft_0BEC.c"),
