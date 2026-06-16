@@ -610,7 +610,7 @@ config.libs = [
             Object(Matching, "melee/ft/ft_0BEC.c"),
             Object(Matching, "melee/ft/ft_0BEF.c"),
             Object(Matching, "melee/ft/ft_0BF0.c"),
-            Object(NonMatching, "melee/ft/ftmaterial.c"),
+            Object(Matching, "melee/ft/ftmaterial.c"),
             Object(Matching, "melee/ft/ftcolanim.c"),
             Object(Matching, "melee/ft/ftdevice.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_Bury.c"),
