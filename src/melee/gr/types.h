@@ -1768,6 +1768,11 @@ struct Ground {
             struct grPushOn_GroundVars pushon;
             struct ScrollVars scroll;
             struct grBigBlueRoute_GroundVars car;
+            struct {
+                /*  +0 gp+C4 */ UNK_T xC4;
+                /*  +4 gp+C8 */ HSD_JObj** coll_jobj;
+                /*  +8 gp+CC */ UNK_T rank;
+            } carnull;
         } u;
     };
 };
