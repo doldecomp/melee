@@ -83,10 +83,6 @@ struct grMaterial_MObjInfo {
     { HSD_TE_CNST, NULL, NULL, HSD_TE_RGB, HSD_TE_U8, 0xFF, 0xFF },
 };
 
-/* 4D456C */ static ItCmd grMaterial_804D456C[1] = {
-    grMaterial_801C9470,
-};
-
 void grMaterial_801C87D0(HSD_JObj* jobj, u32 flags)
 {
     HSD_DObj* dobj;
@@ -575,6 +571,10 @@ void grMaterial_801C9604(HSD_GObj* gobj, int arg1, bool arg2)
     gp->x10_flags.b4 = 0;
     grMaterial_801C9698(gobj);
 }
+
+/* 4D456C */ static ItCmd grMaterial_804D456C[1] = {
+    grMaterial_801C9470,
+};
 
 void fn_801C9664(Item_GObj* gobj, CommandInfo* cmd, int arg2)
 {
