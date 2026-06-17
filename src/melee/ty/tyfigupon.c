@@ -872,9 +872,8 @@ void fn_803168DC(HSD_GObj* arg0)
             return;
         }
         if (rot_y < -10.0f) {
-            HSD_JObjClearFlagsAll(data->jobj[1], 0x10);
-            HSD_JObjSetFlagsAll(data->jobj[0],
-                                JOBJ_HIDDEN);
+            HSD_JObjClearFlagsAll(data->jobj[1], JOBJ_HIDDEN);
+            HSD_JObjSetFlagsAll(data->jobj[0], JOBJ_HIDDEN);
         }
     }
 }
