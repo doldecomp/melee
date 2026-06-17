@@ -62,6 +62,8 @@ struct un_804A1F58_x8_t {
     unsigned char x10;
 };
 
+static u8 un_804A1F48[0x10];
+
 /* 4A1F58 */ static struct un_804A1F58_t {
     unsigned int x0;
     char pad_x4[4];

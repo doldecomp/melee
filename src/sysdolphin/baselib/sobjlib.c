@@ -148,7 +148,10 @@ void HSD_SObjLib_803A4740(HSD_SObj* sobj)
     }
 }
 
-static char filename[] = "sobjlib.c";
+static void order_data(void)
+{
+    (void) __FILE__;
+}
 
 HSD_SObj* HSD_SObjLib_803A477C(HSD_GObj* gobj, HSD_SObjDesc* desc,
                                GXTexWrapMode wrap_s, GXTexWrapMode wrap_t,
@@ -172,9 +175,7 @@ HSD_SObj* HSD_SObjLib_803A477C(HSD_GObj* gobj, HSD_SObjDesc* desc,
     }
 
     sobj = HSD_ObjAlloc(&HSD_SObjLib_804D10E0);
-    if (sobj == NULL) {
-        __assert(filename, 0x11F, "sobj");
-    }
+    HSD_ASSERT(287, sobj);
 
     if (tlut != NULL) {
         GXInitTlutObj(&sobj->x70_tlutobj, tlut->lut, tlut->fmt,

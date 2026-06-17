@@ -5,7 +5,6 @@
 #include "db/db.h"
 #include "ft/chara/ftPikachu/ftPk_SpecialLw.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/itCharItems.h"
@@ -13,6 +12,7 @@
 
 #include "it/items/forward.h"
 
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/types.h"
 #include "MSL/math.h"
@@ -233,7 +233,7 @@ void it_802B22B8(Item_GObj* gobj)
     it_802B22B8_inline(gobj);
 }
 
-static inline f32 pika_scale(f32 a, f32 b)
+static f32 pika_scale(f32 a, f32 b)
 {
     f32 f = 10000.0f * a / b;
     f = ((s32) (f + 1)) / 10000.0f;
