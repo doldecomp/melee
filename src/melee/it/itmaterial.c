@@ -83,14 +83,14 @@ void fn_80277D8C(HSD_MObj* mobj, u32 rendermode_arg, u32 unused_arg)
     }
     tobj1_ptr = NULL;
     tobj2 = mobj->tobj;
-    if ((rendermode & 0x04000000) && tobj_shadows) {
+    if ((rendermode & RENDER_SHADOW) && tobj_shadows != NULL) {
         tobj1_ptr = &tobj2;
         while (*tobj1_ptr != NULL) {
             tobj1_ptr = &(*tobj1_ptr)->next;
         }
         *tobj1_ptr = tobj_shadows;
     }
-    if ((rendermode & 0x1000) && (tobj_toon != NULL) &&
+    if ((rendermode & RENDER_TOON) && (tobj_toon != NULL) &&
         (tobj_toon->imagedesc != NULL))
     {
         tobj_toon->next = tobj2;
@@ -101,10 +101,10 @@ void fn_80277D8C(HSD_MObj* mobj, u32 rendermode_arg, u32 unused_arg)
     HSD_MOBJ_METHOD(mobj)->setup_tev(mobj, tobj2, rendermode);
     it_80278108(item, mobj, it_80277F90(item, mobj, &sp38));
     if (item->x5C9 != 0xFF) {
-        rendermode |= 0x60000000;
+        rendermode |= RENDER_BLENDING;
     }
     if (item->xDCF_flag.b4 && !item->xDCF_flag.b5) {
-        rendermode |= 0x20000000;
+        rendermode |= RENDER_NO_ZUPDATE;
     }
     if (item->xDCF_flag.b5 && (item->x5C9 == 0xFF)) {
         pe_desc.flags = 0x38;
