@@ -64,7 +64,18 @@ class JObjFlagsTest(unittest.TestCase):
         self.assertEqual(self.lines(source), [])
 
     def test_literal_regex_matches_value_sixteen_forms(self) -> None:
-        for tok in ["16", "0x10", "0X10", "0x010", "0x10U", "0x10u", "0x10UL", "16U", "020", "0020"]:
+        for tok in [
+            "16",
+            "0x10",
+            "0X10",
+            "0x010",
+            "0x10U",
+            "0x10u",
+            "0x10UL",
+            "16U",
+            "020",
+            "0020",
+        ]:
             self.assertTrue(_HIDDEN_LITERAL.fullmatch(tok), tok)
 
     def test_literal_regex_rejects_other_values(self) -> None:
@@ -94,7 +105,9 @@ class JObjFlagsFixTest(unittest.TestCase):
     def test_preserves_surrounding_text_exactly(self) -> None:
         source = "    HSD_JObjSetFlagsAll(data->jobjs[3], 0x10);\n"
         fixed, n = self.fix(source)
-        self.assertEqual((fixed, n), ("    HSD_JObjSetFlagsAll(data->jobjs[3], JOBJ_HIDDEN);\n", 1))
+        self.assertEqual(
+            (fixed, n), ("    HSD_JObjSetFlagsAll(data->jobjs[3], JOBJ_HIDDEN);\n", 1)
+        )
 
     def test_leaves_non_matches_untouched(self) -> None:
         source = (

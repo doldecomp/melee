@@ -50,8 +50,9 @@ void HSD_SynthSFXSampleLoadCallback(int result, int length, void* addr,
         u32* buf = (u32*) HSD_Synth_804D7730;
         u32 data_bytes = hsd_SynthSFXLoadBuf[0] - 0x10;
         s32 src_idx = (data_bytes >> 2) - 1;
-        u32 total = (hsd_SynthSFXLoadBuf[2] * 8 + hsd_SynthSFXLoadBuf[0] + 0x37) &
-                    ~0x1F;
+        u32 total =
+            (hsd_SynthSFXLoadBuf[2] * 8 + hsd_SynthSFXLoadBuf[0] + 0x37) &
+            ~0x1F;
         u32 shift = (total - data_bytes) >> 2;
         u32 dnw;
         AXVPB** pp;
@@ -869,7 +870,8 @@ s32 HSD_Synth_8038A000(void)
                 int cnt = HSD_Synth_804C28E0_1784[ch].x178C;
                 if (cnt != 0) {
                     HSD_Synth_804C28E0_1784[ch].x1784 =
-                        (HSD_Synth_804C28E0_1784[ch].x1784 * ((f32) cnt - 1.0f)) /
+                        (HSD_Synth_804C28E0_1784[ch].x1784 *
+                         ((f32) cnt - 1.0f)) /
                             (f32) cnt +
                         HSD_Synth_804C28E0_1784[ch].x1788 / (f32) cnt;
                     HSD_Synth_804C28E0_1784[ch].x178C -= 1;
@@ -1238,7 +1240,8 @@ void HSD_Synth_8038ADD0(void)
                         (i * lbl_804C4540[HSD_Synth_804D7770].x0 + 2));
                 AXSetVoiceAdpcmLoop(
                     node->voice[i],
-                    (AXPBADPCMLOOP*) ((u32*) &lbl_804C4540[HSD_Synth_804D7770] +
+                    (AXPBADPCMLOOP*) ((u32*) &lbl_804C4540
+                                          [HSD_Synth_804D7770] +
                                       (i * 2 + 3)));
             }
         }
@@ -1246,7 +1249,8 @@ void HSD_Synth_8038ADD0(void)
     if ((s32) ((HSD_Synth_804D776C + 1) % 3) != pos) {
         intr = OSDisableInterrupts();
         if (HSD_Synth_804D7778 != 0 ||
-            HSD_Synth_804D7768 != HSD_Synth_804D776C) {
+            HSD_Synth_804D7768 != HSD_Synth_804D776C)
+        {
             OSRestoreInterrupts(intr);
             return;
         }

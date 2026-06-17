@@ -167,8 +167,8 @@ HSD_GObj* grOldKongo_8020F52C(int arg0)
             HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
-        OSReport((char*) grOk_803E6580 + 0x9C,
-                 (char*) grOk_803E6580 + 0xC0, 0xD5, arg0);
+        OSReport((char*) grOk_803E6580 + 0x9C, (char*) grOk_803E6580 + 0xC0,
+                 0xD5, arg0);
     }
 
     return gobj;

@@ -8,8 +8,8 @@
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/it_279C.h>
-#include <melee/it/itmaplib.h>
 #include <melee/it/item.h>
+#include <melee/it/itmaplib.h>
 
 static Item_GObj* it_804D6D50;
 

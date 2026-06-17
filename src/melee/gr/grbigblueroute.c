@@ -303,7 +303,8 @@ void grBigBlueRoute_8020BC68(Ground_GObj* gobj)
         gp->gv.bigblueroute2.tracks[0].jobj = jobj;
         if (jobj != NULL) {
             jobj = gp->gv.bigblueroute2.tracks[0].jobj;
-            HSD_JObjGetTranslation(jobj, &gp->gv.bigblueroute2.tracks[0].offset);
+            HSD_JObjGetTranslation(jobj,
+                                   &gp->gv.bigblueroute2.tracks[0].offset);
             lbVector_Sub(&gp->gv.bigblueroute2.tracks[0].offset, &origin);
         }
 
@@ -311,7 +312,8 @@ void grBigBlueRoute_8020BC68(Ground_GObj* gobj)
         gp->gv.bigblueroute2.tracks[1].jobj = jobj;
         if (jobj != NULL) {
             jobj = gp->gv.bigblueroute2.tracks[1].jobj;
-            HSD_JObjGetTranslation(jobj, &gp->gv.bigblueroute2.tracks[1].offset);
+            HSD_JObjGetTranslation(jobj,
+                                   &gp->gv.bigblueroute2.tracks[1].offset);
             lbVector_Sub(&gp->gv.bigblueroute2.tracks[1].offset, &origin);
         }
 
@@ -319,7 +321,8 @@ void grBigBlueRoute_8020BC68(Ground_GObj* gobj)
         gp->gv.bigblueroute2.tracks[2].jobj = jobj;
         if (jobj != NULL) {
             jobj = gp->gv.bigblueroute2.tracks[2].jobj;
-            HSD_JObjGetTranslation(jobj, &gp->gv.bigblueroute2.tracks[2].offset);
+            HSD_JObjGetTranslation(jobj,
+                                   &gp->gv.bigblueroute2.tracks[2].offset);
             lbVector_Sub(&gp->gv.bigblueroute2.tracks[2].offset, &origin);
         }
 
@@ -327,7 +330,8 @@ void grBigBlueRoute_8020BC68(Ground_GObj* gobj)
         gp->gv.bigblueroute2.tracks[3].jobj = jobj;
         if (jobj != NULL) {
             jobj = gp->gv.bigblueroute2.tracks[3].jobj;
-            HSD_JObjGetTranslation(jobj, &gp->gv.bigblueroute2.tracks[3].offset);
+            HSD_JObjGetTranslation(jobj,
+                                   &gp->gv.bigblueroute2.tracks[3].offset);
             lbVector_Sub(&gp->gv.bigblueroute2.tracks[3].offset, &origin);
         }
     } else {
@@ -371,14 +375,14 @@ void grBigBlueRoute_8020BF38(Ground_GObj* gobj)
             for (i = 0; i < 3; i++) {
                 if (gp->gv.bigblueroute2.tracks[i].jobj != NULL) {
                     jobj = gp->gv.bigblueroute2.tracks[i].jobj;
-                    HSD_JObjSetTranslateX(jobj,
-                        gp->gv.bigblueroute2.tracks[i].offset.x +
-                            fighter_pos.x);
+                    HSD_JObjSetTranslateX(
+                        jobj, gp->gv.bigblueroute2.tracks[i].offset.x +
+                                  fighter_pos.x);
 
                     jobj = gp->gv.bigblueroute2.tracks[i].jobj;
-                    HSD_JObjSetTranslateY(jobj,
-                        gp->gv.bigblueroute2.tracks[i].offset.y +
-                            fighter_pos.y);
+                    HSD_JObjSetTranslateY(
+                        jobj, gp->gv.bigblueroute2.tracks[i].offset.y +
+                                  fighter_pos.y);
                 }
             }
 
@@ -884,7 +888,8 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                 Vec3 road_tan;
                 Vec3 road;
 
-                prog = (RE_ENTRY->x14 - RE_ENTRY->x24) / (1.0f - RE_ENTRY->x24);
+                prog =
+                    (RE_ENTRY->x14 - RE_ENTRY->x24) / (1.0f - RE_ENTRY->x24);
                 up = grBb_Route_803B83E0;
                 angle = (1.0f - prog) * RE_ENTRY->x1C;
                 splGetSplinePoint(&air, gp->u.car.xCC, RE_ENTRY->x14);
@@ -941,7 +946,8 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
             if (pos.x - 260.0f < fighter_pos.x &&
                 fighter_pos.x < 260.0f + pos.x &&
                 pos.z - 260.0f < fighter_pos.z &&
-                fighter_pos.z < 260.0f + pos.z && !RE_ENTRY->flags.b1) {
+                fighter_pos.z < 260.0f + pos.z && !RE_ENTRY->flags.b1)
+            {
                 if (!((gp->gv.bigblue.x0 >> 6) & 1)) {
                     gp->gv.bigblue.x0 |= 0x40;
                     Ground_801C53EC(0x77A16);
@@ -951,7 +957,8 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
             if (pos.x - 100.0f < fighter_pos.x &&
                 fighter_pos.x < 100.0f + pos.x &&
                 pos.z - 100.0f < fighter_pos.z &&
-                fighter_pos.z < 100.0f + pos.z) {
+                fighter_pos.z < 100.0f + pos.z)
+            {
                 if (RE_ENTRY->flags.b1) {
                     if (!((gp->gv.bigblue.x0 >> 7) & 1)) {
                         un_802FD604((s32) grBb_Route_804D6A68->x4C);
@@ -985,10 +992,9 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
         }
 
         i++;
-        jobj = (jobj != NULL)
-                   ? (HSD_JObj*) grBigBlueRoute_8020DA9C(
-                         (struct grBigBlueRoute_8020DA9C_t*) jobj)
-                   : NULL;
+        jobj = (jobj != NULL) ? (HSD_JObj*) grBigBlueRoute_8020DA9C(
+                                    (struct grBigBlueRoute_8020DA9C_t*) jobj)
+                              : NULL;
     } while (i < 31);
 }
 #undef RE_ENTRY
@@ -1104,7 +1110,6 @@ void fn_8020DEAC(void)
 {
     Ground_801C53EC(0x77A12);
 }
-
 
 /* Clamp camera position to stage bounds */
 void grBigBlueRoute_8020DED4(Vec3* pos)

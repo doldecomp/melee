@@ -240,39 +240,13 @@ void gm_801A8114(HSD_JObj* arg0, int arg1)
 }
 
 static char lbl_803DB49C[][0xC] = {
-    "Captain  ",
-    "Donkey   ",
-    "Fox      ",
-    "GameWatch",
-    "Kirby    ",
-    "Koopa    ",
-    "Link     ",
-    "Luigi    ",
-    "Mario    ",
-    "Mars     ",
-    "Mewtwo   ",
-    "Ness     ",
-    "Peach    ",
-    "Pikachu  ",
-    "PopoNana ",
-    "Purin    ",
-    "Samus    ",
-    "Yoshi    ",
-    "Ze->Se   ",
-    "Se->Ze   ",
-    "Falco    ",
-    "Clink    ",
-    "Drmario  ",
-    "Emblem   ",
-    "Pichu    ",
-    "Ganon    ",
-    "MasterH  ",
-    "Boy      ",
-    "Girl     ",
-    "GKoops   ",
-    "CrezyH   ",
-    "Sandbag  ",
-    "POPO     ",
+    "Captain  ", "Donkey   ", "Fox      ", "GameWatch", "Kirby    ",
+    "Koopa    ", "Link     ", "Luigi    ", "Mario    ", "Mars     ",
+    "Mewtwo   ", "Ness     ", "Peach    ", "Pikachu  ", "PopoNana ",
+    "Purin    ", "Samus    ", "Yoshi    ", "Ze->Se   ", "Se->Ze   ",
+    "Falco    ", "Clink    ", "Drmario  ", "Emblem   ", "Pichu    ",
+    "Ganon    ", "MasterH  ", "Boy      ", "Girl     ", "GKoops   ",
+    "CrezyH   ", "Sandbag  ", "POPO     ",
 };
 
 void fn_801A851C(HSD_GObj* gobj)
@@ -304,8 +278,7 @@ void gm_801A85E4(HSD_JObj* jobj, s32 arg1, s32 arg2)
         angle =
             0.017453292f * ((45.0f * (f32) idx) + (2.0f * HSD_Randf()) - 1.0f);
         HSD_JObjSetTranslateX(jobj, 25.0f * cosf(angle));
-        HSD_JObjSetTranslateZ(jobj,
-                              0.9f * ((25.0f * -sinf(angle)) + -18.0f));
+        HSD_JObjSetTranslateZ(jobj, 0.9f * ((25.0f * -sinf(angle)) + -18.0f));
     } else if (arg1 <= 0xC) {
         arg2 = 0xC - arg1;
         temp_idx = arg2 + 8;
@@ -317,8 +290,7 @@ void gm_801A85E4(HSD_JObj* jobj, s32 arg1, s32 arg2)
         angle = 0.017453292f *
                 ((25.714285f * (f32) (idx - 5)) + (4.0f * HSD_Randf()) - 2.0f);
         HSD_JObjSetTranslateX(jobj, 50.0f * cosf(angle));
-        HSD_JObjSetTranslateZ(jobj,
-                              0.9f * ((50.0f * -sinf(angle)) + -18.0f));
+        HSD_JObjSetTranslateZ(jobj, 0.9f * ((50.0f * -sinf(angle)) + -18.0f));
     } else if (arg1 <= 0x15) {
         arg2 = 0x15 - arg1;
         temp_idx = arg2 + 0x11;
@@ -330,8 +302,7 @@ void gm_801A85E4(HSD_JObj* jobj, s32 arg1, s32 arg2)
         angle =
             0.017453292f * ((22.5f * (f32) (idx - 0xD)) + HSD_Randf() - 0.5f);
         HSD_JObjSetTranslateX(jobj, 75.0f * cosf(angle));
-        HSD_JObjSetTranslateZ(jobj,
-                              0.8f * ((75.0f * -sinf(angle)) + -18.0f));
+        HSD_JObjSetTranslateZ(jobj, 0.8f * ((75.0f * -sinf(angle)) + -18.0f));
     } else if (arg1 == 0x16) {
         HSD_JObjSetTranslateX(jobj, -80.0f);
         HSD_JObjSetTranslateZ(jobj, -70.0f);

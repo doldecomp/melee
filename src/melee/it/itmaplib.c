@@ -911,9 +911,7 @@ void it_802775F0(Item_GObj* item_gobj, Vec3* arg1)
     if (item->spin_spd != temp_sqrt) {
         temp_sqrt = sqrtf_accurate_sp18(SQ(arg1->x) + SQ(arg1->y));
         item->xD3C_spinSpeed = 0.85f * (temp_sqrt / item->xC1C.bottom);
-        if ((arg1->x < 0.0f ? -1 : 1) !=
-            (item->facing_dir < 0.0f ? -1 : 1))
-        {
+        if ((arg1->x < 0.0f ? -1 : 1) != (item->facing_dir < 0.0f ? -1 : 1)) {
             item->xD3C_spinSpeed = -item->xD3C_spinSpeed;
         }
         if (item->xDC8_word.flags.x19 != 1) {
@@ -1105,7 +1103,6 @@ void it_80277C40(Item_GObj* item_gobj, s32 arg1)
         sp20.y = coll->ecb.bottom.y;
     }
     if (!item->xDCF_flag.b0) {
-        it_80278800(item_gobj, 0x405, 0, &sp20, &sp14, 0U,
-                    0.0f);
+        it_80278800(item_gobj, 0x405, 0, &sp20, &sp14, 0U, 0.0f);
     }
 }

@@ -9,8 +9,8 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
-#include "it/itmaplib.h"
 #include "it/item.h"
+#include "it/itmaplib.h"
 
 ItemStateTable it_803F82F0[] = {
     { 0, itFushigibana_UnkMotion0_Anim, itFushigibana_UnkMotion0_Phys,

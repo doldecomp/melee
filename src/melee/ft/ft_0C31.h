@@ -25,5 +25,4 @@
 /* 0C6E90 */ void ftCo_EntryEnd_Coll(Fighter_GObj* gobj);
 /* 0C6F34 */ void fn_800C6F34(Fighter_GObj* gobj);
 
-
 #endif

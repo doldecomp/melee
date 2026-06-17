@@ -640,7 +640,7 @@ void mnNameNew_GlyphVariantInput(void)
         }
         null_ch = (s8) mnNameNew_NullCharacter;
         table = (char**) &mnNameNew_803EDCE4[data->x1];
-        while (null_ch != (s8) **table) {
+        while (null_ch != (s8) * *table) {
             table++;
             count++;
         }

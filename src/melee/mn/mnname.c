@@ -465,9 +465,8 @@ void mnName_ConfirmNameDeleteInput(HSD_GObj* arg0)
         {
             sel = (u8) flow->hovered_selection;
             {
-                s32 tmp =
-                    ((HSD_GObj*) mnName_804D6BF8->user_data)->gx_link +
-                    ((flow->hovered_selection & 0xFF) / 6);
+                s32 tmp = ((HSD_GObj*) mnName_804D6BF8->user_data)->gx_link +
+                          ((flow->hovered_selection & 0xFF) / 6);
                 col = tmp;
             }
             colCount = mnName_GetColumnCount();
@@ -1398,8 +1397,7 @@ void mnName_8023A290(void)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 6U, 0x80U);
     HSD_GObj_SetupProc(gobj, fn_8023A0BC, 0U);
-    HSD_JObjAddAnimAll(jobj, archive->anim_joint,
-                       archive->matanim_joint,
+    HSD_JObjAddAnimAll(jobj, archive->anim_joint, archive->matanim_joint,
                        archive->shapeanim_joint);
     HSD_JObjReqAnimAll(jobj, mnName_803ED600[0]);
     HSD_JObjAnimAll(jobj);
@@ -1544,8 +1542,8 @@ HSD_GObj* mnName_8023A59C(u8 arg0)
     return gobj;
 }
 
-static inline struct mn_80231634_t* mnName_8023A9B4_GetUserData(
-    MnName_GObj* gobj2)
+static inline struct mn_80231634_t*
+mnName_8023A9B4_GetUserData(MnName_GObj* gobj2)
 {
     return (struct mn_80231634_t*) gobj2->gobj.user_data_remove_func;
 }
@@ -1577,8 +1575,7 @@ void mnName_8023A9B4(u8 arg0)
     mnName_8023A9B4_ResetDisplayOrder();
     gobj2 = (0, mnName_8023A9B4_GetGObj());
     if ((u8) mn_804A04F0.x10 == 1) {
-        struct mn_80231634_t* p =
-            mnName_8023A9B4_GetUserData(gobj2);
+        struct mn_80231634_t* p = mnName_8023A9B4_GetUserData(gobj2);
         if (p == NULL) {
             jobj = NULL;
         } else {

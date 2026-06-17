@@ -281,7 +281,8 @@ void fn_80247510(HSD_GObj* gobj)
     }
 
     // Check animation timer
-    if (data->x0[0] <= ((AnimLoopSettings*) &mnVibration_803EECE0)->end_frame) {
+    if (data->x0[0] <= ((AnimLoopSettings*) &mnVibration_803EECE0)->end_frame)
+    {
         data->x0[0]++;
         return;
     }
@@ -455,7 +456,8 @@ void fn_80247510(HSD_GObj* gobj)
     }
 
     // Handle down navigation
-    else if (inputs_repeat & 0x20) {
+    else if (inputs_repeat & 0x20)
+    {
         cursor_row = data->x0[1];
         if (cursor_row < 7) {
             scroll_offset = data->scroll_offset;

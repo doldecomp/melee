@@ -38,8 +38,10 @@ int GetNameCount(void);
 #define mnDiagram_GetFighterByIndex_BBC(x) mnDiagram_GetFighterByIndex_s(x)
 #define mnDiagram_GetPrevNameIndex_s(x) ((int) mnDiagram_GetPrevNameIndex(x))
 #define mnDiagram_GetNextNameIndex_s(x) ((int) mnDiagram_GetNextNameIndex(x))
-#define mnDiagram_GetPrevFighterIndex_s(x) ((int) mnDiagram_GetPrevFighterIndex(x))
-#define mnDiagram_GetNextFighterIndex_s(x) ((int) mnDiagram_GetNextFighterIndex(x))
+#define mnDiagram_GetPrevFighterIndex_s(x)                                    \
+    ((int) mnDiagram_GetPrevFighterIndex(x))
+#define mnDiagram_GetNextFighterIndex_s(x)                                    \
+    ((int) mnDiagram_GetNextFighterIndex(x))
 
 /// @brief Gets entity index based on mode (name or fighter).
 static inline u8 mnDiagram_GetEntityByIndex(u8 is_name_mode, u8 idx)
@@ -390,7 +392,8 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
                 mnDiagram2_RefreshStatRows();
             }
         } else if (result & 4) {
-            var_r28 = (u8) mnDiagram_GetPrevNameIndex_s(data->selected_name_idx);
+            var_r28 =
+                (u8) mnDiagram_GetPrevNameIndex_s(data->selected_name_idx);
             if ((s32) data->selected_name_idx != var_r28) {
                 lbAudioAx_80024030(2);
                 data->selected_name_idx = var_r28;
@@ -400,7 +403,8 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
                                         data->selected_name_idx);
             }
         } else if (result & 8) {
-            var_r28 = (u8) mnDiagram_GetNextNameIndex_s(data->selected_name_idx);
+            var_r28 =
+                (u8) mnDiagram_GetNextNameIndex_s(data->selected_name_idx);
             if ((s32) data->selected_name_idx != var_r28) {
                 lbAudioAx_80024030(2);
                 data->selected_name_idx = var_r28;
@@ -425,8 +429,8 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
                 mnDiagram2_RefreshStatRows();
             }
         } else if (result & 4) {
-            var_r28 = (u8)
-                mnDiagram_GetPrevFighterIndex_s(data->selected_fighter_idx);
+            var_r28 = (u8) mnDiagram_GetPrevFighterIndex_s(
+                data->selected_fighter_idx);
             if ((s32) data->selected_fighter_idx != var_r28) {
                 lbAudioAx_80024030(2);
                 data->selected_fighter_idx = var_r28;
@@ -436,8 +440,8 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
                                         data->selected_fighter_idx);
             }
         } else if (result & 8) {
-            var_r28 = (u8)
-                mnDiagram_GetNextFighterIndex_s(data->selected_fighter_idx);
+            var_r28 = (u8) mnDiagram_GetNextFighterIndex_s(
+                data->selected_fighter_idx);
             if ((s32) data->selected_fighter_idx != var_r28) {
                 lbAudioAx_80024030(2);
                 data->selected_fighter_idx = var_r28;

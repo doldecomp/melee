@@ -299,8 +299,7 @@ void DevText_Print(DevText* text, char* str)
             if (*cur != '\n') {
                 int index = text->cursor_x + text->cursor_y * text->w;
                 ((DevTextGlyph*) text->buf)[index].chr = *cur;
-                ((DevTextGlyph*) text->buf)[index].color =
-                    text->current_color;
+                ((DevTextGlyph*) text->buf)[index].color = text->current_color;
                 if (text->cursor_x < text->w - 1) {
                     text->cursor_x++;
                 } else if ((text->flags & DEVTEXT_FLAG_NOWRAP) == 0) {
@@ -1271,9 +1270,7 @@ int un_80304D30(void)
     idk = 6;
     qwe = &sp14[6];
     while (idk != 0) {
-        if (idk > (unsigned int) 2 && *qwe != 0 &&
-            *qwe == un_80304B94(idk))
-        {
+        if (idk > (unsigned int) 2 && *qwe != 0 && *qwe == un_80304B94(idk)) {
             for (i = 0; i < idk; i++) {
                 if (1 < (unsigned int) i && i != 3) {
                     if (!un_80304D30_4B0C(i)) {

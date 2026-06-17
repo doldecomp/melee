@@ -631,8 +631,7 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
         {
             HSD_JObjReqAnim(roots[7], mn_804D4B88.end_frame);
         } else {
-            HSD_JObjReqAnim(roots[7],
-                            *(f32*) (base + 0x14 + hovered * 8));
+            HSD_JObjReqAnim(roots[7], *(f32*) (base + 0x14 + hovered * 8));
         }
         HSD_JObjAnim(roots[7]);
         if ((u8) (hovered - 5) <= 1) {

@@ -79,7 +79,6 @@ typedef struct {
 extern ResultsPlayerConfig lbl_803B7B68;
 extern HSD_CObjDesc lbl_803D7910;
 
-
 typedef struct {
     /* 0x00 */ f32 x_off[4];   // indexed by variant (clamped to 3)
     /* 0x10 */ f32 y_off[4];   // indexed by variant (clamped to 3)
@@ -765,7 +764,8 @@ static inline void fn_80178BB4_init_players(ResultsData* data,
         HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[9], JOBJ_HIDDEN);
         HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[10], JOBJ_HIDDEN);
         HSD_JObjSetFlagsAll(data->player_data[(*i)].jobjs[11], JOBJ_HIDDEN);
-        lbDObjSetRateAll(HSD_JObjGetDObj(data->player_data[(*i)].jobjs[6]), 0.0f);
+        lbDObjSetRateAll(HSD_JObjGetDObj(data->player_data[(*i)].jobjs[6]),
+                         0.0f);
 
         {
             u8 slot_type = match_end->player_standings[(*i)].slot_type;
@@ -815,9 +815,8 @@ static inline void fn_80178BB4_init_players(ResultsData* data,
                         (*i), match_end->player_standings[(*i)].team,
                         (u8) (match_end->is_teams == 1),
                         match_end->player_standings[(*i)].slot_type);
-                    rank_aobj = data->player_data[(*i)]
-                                    .jobjs[2]
-                                    ->u.dobj->mobj->aobj;
+                    rank_aobj =
+                        data->player_data[(*i)].jobjs[2]->u.dobj->mobj->aobj;
                     HSD_AObjSetCurrentFrame(rank_aobj,
                                             1.0f + (f32) (u8) rank_val);
                     HSD_AObjSetRate(rank_aobj, 0.0f);
@@ -839,7 +838,7 @@ static inline void fn_80178BB4_init_players(ResultsData* data,
                                     taunt_frame);
                     HSD_JObjAnimAll(taunt_jobj);
                     HSD_AObjSetRate(data->player_data[(*i)].jobjs[7]->aobj,
-                                     1.0f);
+                                    1.0f);
                     HSD_AObjSetCurrentFrame(
                         data->player_data[(*i)].jobjs[7]->aobj, 0.0f);
                 } else {

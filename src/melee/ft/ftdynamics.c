@@ -45,7 +45,10 @@ void ftCo_8009CB40(Fighter* fp, ssize_t bone_idx, bool arg2, FigaTree* arg3)
             fp->dynamic_bone_sets[bone_idx].bone_id = 0x100;
         }
         data = fp->dynamic_bone_sets[bone_idx].dyn_desc.data;
-        { s32 tmp = 1 - flag; inverse_flag = tmp; }
+        {
+            s32 tmp = 1 - flag;
+            inverse_flag = tmp;
+        }
         while (data != NULL) {
             if (var_r29 < (s32) arg3) {
                 if (inverse_flag != 0 && !(fp->parts[bone_id].flags_b0)) {
@@ -56,7 +59,10 @@ void ftCo_8009CB40(Fighter* fp, ssize_t bone_idx, bool arg2, FigaTree* arg3)
                     data->desc.lb_unk0.unk_2C.z =
                         data->desc.lb_unk0.jobj->mtx[2][3];
                     data->desc.lb_unk0.unk_44 = 0.0f;
-                    { HSD_JObj* tmp_jobj = data->desc.lb_unk0.jobj; temp_jobj = tmp_jobj; }
+                    {
+                        HSD_JObj* tmp_jobj = data->desc.lb_unk0.jobj;
+                        temp_jobj = tmp_jobj;
+                    }
                     HSD_JObjSetTranslate(temp_jobj,
                                          &data->desc.lb_unk0.translate);
                     temp_jobj = data->desc.lb_unk0.jobj;
@@ -473,9 +479,10 @@ void ftCo_8009DC54(Fighter* fp)
             ftDynamics* dynamics = data->x2C;
             ssize_t j;
             for (j = 0;
-                 j < (signed) dynamics->ftDynamicBones->array[bone_idx]
-                                  .bone_id;
-                 j++) {
+                 j <
+                 (signed) dynamics->ftDynamicBones->array[bone_idx].bone_id;
+                 j++)
+            {
                 if (cur->child != NULL) {
                     cur = cur->child;
                     continue;
@@ -487,13 +494,13 @@ void ftCo_8009DC54(Fighter* fp)
             }
             {
                 DynamicsDesc* desc = &fp->dynamic_bone_sets[i + 1].dyn_desc;
-                lb_8000FD48(cur, desc,
-                            data->x2C->ftDynamicBones->array[bone_idx]
-                                .dyn_desc.count);
+                lb_8000FD48(
+                    cur, desc,
+                    data->x2C->ftDynamicBones->array[bone_idx].dyn_desc.count);
                 dyn[1].bone_id = FtPart_TopN;
-                lb_80011710(&data->x2C->ftDynamicBones->array[bone_idx]
-                                  .dyn_desc,
-                            desc);
+                lb_80011710(
+                    &data->x2C->ftDynamicBones->array[bone_idx].dyn_desc,
+                    desc);
             }
             i++;
             bone_idx++;
@@ -568,8 +575,8 @@ void ftCo_8009DD94(Fighter_GObj* gobj, bool arg1)
                 lb_8001044C(&dyn->dyn_desc, &fp->x1670, fp->x166C,
                             fp->cur_pos.y, arg1, dyn->bone_id, 3, ret_B0);
             }
-            lb_8001044C(&dyn->dyn_desc, &fp->x1670, fp->x166C,
-                        fp->cur_pos.y, arg1, dyn->bone_id, 0, ret_B0);
+            lb_8001044C(&dyn->dyn_desc, &fp->x1670, fp->x166C, fp->cur_pos.y,
+                        arg1, dyn->bone_id, 0, ret_B0);
         } else if (fp->kind == FTKIND_MEWTWO) {
             for (i = 0; i < dynamics_num; i++, dyn++) {
                 lb_8001044C(&dyn->dyn_desc, &fp->x1670, fp->x166C,
