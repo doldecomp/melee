@@ -131,7 +131,7 @@ void fn_80277D8C(HSD_MObj* mobj, u32 rendermode_arg, u32 unused_arg)
 
 HSD_TExp* it_80277F90(Item* item, HSD_MObj* mobj, HSD_TExp* arg2)
 {
-    HSD_TevDesc sp14;
+    HSD_TevDesc desc;
     struct it_MObjInfo* info = &it_mobj;
     s32 reg;
     int chk;
@@ -148,20 +148,20 @@ HSD_TExp* it_80277F90(Item* item, HSD_MObj* mobj, HSD_TExp* arg2)
         arg2->cnst.reg = reg;
         arg2->cnst.val = &item->x548_colorOverlay.x50_light_color;
         HSD_TExpSetReg(arg2);
-        sp14 = info->tevdesc_tmpl;
-        sp14.stage = HSD_StateAssignTev();
-        sp14.color = 2;
-        sp14.u.tevconf.clr_a = GX_CC_ZERO;
-        sp14.u.tevconf.clr_b = lb_8000CC8C(reg);
-        sp14.u.tevconf.clr_c = GX_CC_RASA;
-        sp14.u.tevconf.clr_d = chk = 0;
+        desc = info->tevdesc_tmpl;
+        desc.stage = HSD_StateAssignTev();
+        desc.color = 2;
+        desc.u.tevconf.clr_a = GX_CC_ZERO;
+        desc.u.tevconf.clr_b = lb_8000CC8C(reg);
+        desc.u.tevconf.clr_c = GX_CC_RASA;
+        desc.u.tevconf.clr_d = chk = 0;
         if (reg < 4) {
             chk = 1;
         }
         if (chk) {
-            sp14.u.tevconf.kcsel = lb_8000CCA4(reg);
+            desc.u.tevconf.kcsel = lb_8000CCA4(reg);
         }
-        HSD_SetupTevStage(&sp14);
+        HSD_SetupTevStage(&desc);
         return arg2;
     }
     return NULL;
