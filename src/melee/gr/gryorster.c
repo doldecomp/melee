@@ -312,8 +312,7 @@ void grYorster_8020266C(HSD_GObj* gobj)
                 gp->gv.yorster.elements[i].x10 =
                     (s32) ((f32) frames_left *
                            (end_frame / grYt_804D6A20.x0->x0C));
-            } else if (gp->gv.yorster.elements[i].x08 >=
-                       grYt_804D6A20.x0->x00)
+            } else if (gp->gv.yorster.elements[i].x08 >= grYt_804D6A20.x0->x00)
             {
                 s32 frames_left;
                 f32 end_frame;
@@ -328,7 +327,7 @@ void grYorster_8020266C(HSD_GObj* gobj)
                 } else {
                     frames_left =
                         (s32) (10.0f * (grYt_804D6A20.x0->x04 -
-                                         gp->gv.yorster.elements[i].x08));
+                                        gp->gv.yorster.elements[i].x08));
                 }
                 end_frame = (f32) grYt_804D6A20.x0->x1C;
                 if (end_frame >=
@@ -356,7 +355,8 @@ void grYorster_8020266C(HSD_GObj* gobj)
                                  (f32) gp2->gv.yorster.elements[i].x10, 1.0f);
                 mpLib_80057BC0(joint);
                 gp->gv.yorster.elements[i].x01 = 3;
-                gp->gv.yorster.elements[i].x0C = gp->gv.yorster.elements[i].x10;
+                gp->gv.yorster.elements[i].x0C =
+                    gp->gv.yorster.elements[i].x10;
             } else {
                 gp->gv.yorster.elements[i].x0C--;
             }

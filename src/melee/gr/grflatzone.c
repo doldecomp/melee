@@ -661,9 +661,8 @@ void grFlatzone_80217EF0(Ground_GObj* gobj)
         if ((gp->gv.unk.xC8 % grFz_804D6AB0->unk14) == 0) {
             register f32 var_f1;
             Vec3 pos;
-            var_f1 = HSD_Randf() *
-                      (f32) (grFz_804D6AB0->unk18 -
-                             (temp_r30 = grFz_804D6AB0->unk1C));
+            var_f1 = HSD_Randf() * (f32) (grFz_804D6AB0->unk18 -
+                                          (temp_r30 = grFz_804D6AB0->unk1C));
             pos.x = var_f1 - (f32) -temp_r30;
             pos.y = Stage_GetBlastZoneTopOffset() - 5.0f;
             pos.z = 0.0f;
@@ -718,20 +717,20 @@ void grFlatzone_80218060(s32 arg0)
                     if (v == (u8) gp->gv.pad_0[4]) {
                         goto loop_4;
                     }
-                } while (((s16 (*)[5]) (tbl + 0x94))[v][1] == -1);
+                } while (((s16(*)[5])(tbl + 0x94))[v][1] == -1);
                 do {
                     {
                         s32 randi = HSD_Randi(4);
                         v = randi + 1;
                     }
-                } while (((s16 (*)[5]) (tbl + 0x94))[gp->gv.flatzone.xC7]
-                             [(u8) (gp->gv.pad_0[5] = v)] == -1);
+                } while (((s16(*)[5])(tbl + 0x94))[gp->gv.flatzone.xC7][(
+                             u8) (gp->gv.pad_0[5] = v)] == -1);
             }
             gp->gv.pad_0[6] = 0;
             gp->gv.flatzone.xCC =
                 (s16) rand_int(grFz_804D6AB0->unkC, grFz_804D6AB0->unk8);
-            gp->gv.flatzone.xC5 = (u8) ((s16 (*)[5]) (tbl + 0x94))
-                [gp->gv.flatzone.xC7][(u8) gp->gv.pad_0[5]];
+            gp->gv.flatzone.xC5 = (u8) ((s16(*)[5])(
+                tbl + 0x94))[gp->gv.flatzone.xC7][(u8) gp->gv.pad_0[5]];
             grAnime_801C8138(gobj, gp->map_id, (s32) gp->gv.flatzone.xC5);
         }
     }
@@ -750,8 +749,9 @@ static inline void grFlatzone_802181B4_inline(void)
             gp->gv.pad_0[5] = 0;
             gp->gv.pad_0[6] = 0;
             gp->gv.flatzone.xCC = 0;
-            gp->gv.flatzone.xC5 = ((s16 (*)[5]) grFz_803E7A68)
-                [gp->gv.flatzone.xC7][(u8) gp->gv.pad_0[5]];
+            gp->gv.flatzone.xC5 =
+                ((s16(*)[5])
+                     grFz_803E7A68)[gp->gv.flatzone.xC7][(u8) gp->gv.pad_0[5]];
             grAnime_801C8138(gobj, gp->map_id, gp->gv.flatzone.xC5);
         }
     }

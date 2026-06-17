@@ -18,7 +18,9 @@
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
+
 #include "lb/forward.h"
+
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
@@ -158,8 +160,8 @@ HSD_GObj* grOldKongo_8020F52C(int arg0)
             HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
-        OSReport((char*) grOk_803E6580 + 0x9C,
-                 (char*) grOk_803E6580 + 0xC0, 0xD5, arg0);
+        OSReport((char*) grOk_803E6580 + 0x9C, (char*) grOk_803E6580 + 0xC0,
+                 0xD5, arg0);
     }
 
     return gobj;
@@ -270,10 +272,8 @@ static inline f32 grOldKongo_8020F888_tau_range(f32 a)
     return 0.0f;
 }
 
-static inline void grOldKongo_8020F888_update_xC8(HSD_JObj* jobj,
-                                                     Ground* gp,
-                                                     Ground_GObj* gobj,
-                                                     Vec3* pos)
+static inline void grOldKongo_8020F888_update_xC8(HSD_JObj* jobj, Ground* gp,
+                                                  Ground_GObj* gobj, Vec3* pos)
 {
     s16 timer;
     f32 xec_max;
@@ -344,7 +344,8 @@ void grOldKongo_8020F888(Ground_GObj* arg0)
     case 2:
     case 3:
         y_speed = gp->gv.arwing.xE0.y;
-        angle_limit = 0.5f * (y_speed * (y_speed / DegToRad(grOk_804D6A90->x1C)));
+        angle_limit =
+            0.5f * (y_speed * (y_speed / DegToRad(grOk_804D6A90->x1C)));
         if (y_speed > 0.0f) {
             angle_delta = gp->gv.oldkongo.xD8 - gp->gv.arwing.xDC;
         } else if (y_speed < 0.0f) {
@@ -473,8 +474,7 @@ void grOldKongo_8020F888(Ground_GObj* arg0)
             hit.unk10 = grOk_804D6A90->x60;
             hit.unk14 = grOk_804D6A90->x64;
             hit.element = grOk_804D6A90->x68;
-            hit_angle =
-                (f32) (1.5707963267948966 + (f64) gp->gv.arwing.xDC);
+            hit_angle = (f32) (1.5707963267948966 + (f64) gp->gv.arwing.xDC);
             if (hit_angle < 0.0f) {
                 hit_angle += M_TAU;
             } else if (hit_angle > M_TAU) {
@@ -482,8 +482,8 @@ void grOldKongo_8020F888(Ground_GObj* arg0)
             }
             hit_angle = 57.29578f * hit_angle;
             if (((HSD_GObj*) gp->gv.arwing.xD4)->p_link == 8) {
-                ftCo_8009EC70((Fighter_GObj*) gp->gv.arwing.xD4, &sp3C,
-                              &hit, hit_angle);
+                ftCo_8009EC70((Fighter_GObj*) gp->gv.arwing.xD4, &sp3C, &hit,
+                              hit_angle);
             }
             gp->gv.oldkongo.xC6 = 4;
             Ground_801C5440(gp, 0, 0x12AU);

@@ -77,8 +77,7 @@ inline bool setupMtxIsDirty(HSD_JObj* jobj)
     }
 
     result = false;
-    if (!(jobj->flags & JOBJ_USER_DEF_MTX) &&
-        (jobj->flags & JOBJ_MTX_DIRTY)) {
+    if (!(jobj->flags & JOBJ_USER_DEF_MTX) && (jobj->flags & JOBJ_MTX_DIRTY)) {
         result = true;
     }
     return result;
@@ -111,9 +110,8 @@ inline void setupStartAccessory(HSD_GObj* gobj, Vec3* scale)
             HSD_JObjSetMtxDirtySub(jobj);
         }
     }
-    lb_8000C2F8(
-        fp->x20A0_accessory,
-        fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint);
+    lb_8000C2F8(fp->x20A0_accessory,
+                fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint);
 }
 
 void ftKb_SpecialNMs_8010B2FC(HSD_GObj* gobj)
@@ -482,9 +480,10 @@ void ftKb_MsSpecialNEnd_Anim(Fighter_GObj* gobj)
         i = 0;
         do {
             if ((s32) hit_fp->x914[0].state == 1) {
-                f32 dmg = (f32) (s32) (ms_da->base_damage +
-                                        (fp->mv.kb.specialn_ms.cur_frame / 30) *
-                                            ms_da->additional_damage_per_iteration);
+                f32 dmg =
+                    (f32) (s32) (ms_da->base_damage +
+                                 (fp->mv.kb.specialn_ms.cur_frame / 30) *
+                                     ms_da->additional_damage_per_iteration);
                 ftColl_8007ABD0(hit_fp->x914, (u32) dmg, gobj);
             }
             i += 1;
@@ -514,9 +513,10 @@ void ftKb_MsSpecialAirNEnd_Anim(Fighter_GObj* gobj)
         i = 0;
         do {
             if ((s32) hit_fp->x914[0].state == 1) {
-                f32 dmg = (f32) (s32) (ms_da->base_damage +
-                                        (fp->mv.kb.specialn_ms.cur_frame / 30) *
-                                            ms_da->additional_damage_per_iteration);
+                f32 dmg =
+                    (f32) (s32) (ms_da->base_damage +
+                                 (fp->mv.kb.specialn_ms.cur_frame / 30) *
+                                     ms_da->additional_damage_per_iteration);
                 ftColl_8007ABD0(hit_fp->x914, (u32) dmg, gobj);
             }
             i += 1;

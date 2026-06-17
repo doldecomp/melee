@@ -174,15 +174,14 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
                 fpPredY = fpVy * t + fpY;
             } else if (t < v) {
                 sq = sqrtf(t);
-                fpPredY = (f32) ((f64) fpY +
-                                 ((f64) (fpVy * t) -
-                                  0.5 * (f64) (fpGrav * sq)));
+                fpPredY = (f32) ((f64) fpY + ((f64) (fpVy * t) -
+                                              0.5 * (f64) (fpGrav * sq)));
             } else {
                 sq = sqrtf(v);
-                fpPredY = (f32) ((f64) fpY +
-                                 ((f64) (fpTermNeg * (t - v)) +
-                                  ((f64) (fpVy * t) -
-                                   0.5 * (f64) (fpGrav * sq))));
+                fpPredY =
+                    (f32) ((f64) fpY +
+                           ((f64) (fpTermNeg * (t - v)) +
+                            ((f64) (fpVy * t) - 0.5 * (f64) (fpGrav * sq))));
             }
         } else {
             fpPredY = fpVy * t + fpY;
@@ -225,7 +224,8 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
         scale = fp->x34_scale.y;
         if (list->x14 * scale * halfRange > relPredY &&
             list->x10 * scale * halfRange < relPredY + x568 &&
-            dirx * halfRange < relx + rangeF && diry * halfRange > relx - rangeB)
+            dirx * halfRange < relx + rangeF &&
+            diry * halfRange > relx - rangeB)
         {
             if (cpu->xC8 != 0) {
                 for (j = 0; j < cpu->xC8; j++) {
@@ -381,15 +381,14 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
                 fpPredY = fpVy * t + fpY;
             } else if (t < v) {
                 sq = sqrtf(t);
-                fpPredY = (f32) ((f64) fpY +
-                                 ((f64) (fpVy * t) -
-                                  0.5 * (f64) (fpGrav * sq)));
+                fpPredY = (f32) ((f64) fpY + ((f64) (fpVy * t) -
+                                              0.5 * (f64) (fpGrav * sq)));
             } else {
                 sq = sqrtf(v);
-                fpPredY = (f32) ((f64) fpY +
-                                 ((f64) (fpTermNeg * (t - v)) +
-                                  ((f64) (fpVy * t) -
-                                   0.5 * (f64) (fpGrav * sq))));
+                fpPredY =
+                    (f32) ((f64) fpY +
+                           ((f64) (fpTermNeg * (t - v)) +
+                            ((f64) (fpVy * t) - 0.5 * (f64) (fpGrav * sq))));
             }
         } else {
             fpPredY = fpVy * t + fpY;
@@ -436,8 +435,8 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
         yLo = list->x10 * scale;
         yHi *= halfRange;
         yLo *= halfRange;
-        if (yHi > relPredY && yLo < relPredY + x568 &&
-            dirx < relx + rangeF && diry > relx - rangeB)
+        if (yHi > relPredY && yLo < relPredY + x568 && dirx < relx + rangeF &&
+            diry > relx - rangeB)
         {
             if (cpu->xC8 != 0) {
                 for (j = 0; j < cpu->xC8; j++) {
@@ -578,15 +577,14 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
                 fpPredY = fpVy * t + fpY;
             } else if (t < v) {
                 sq = sqrtf(t);
-                fpPredY = (f32) ((f64) fpY +
-                                 ((f64) (fpVy * t) -
-                                  0.5 * (f64) (fpGrav * sq)));
+                fpPredY = (f32) ((f64) fpY + ((f64) (fpVy * t) -
+                                              0.5 * (f64) (fpGrav * sq)));
             } else {
                 sq = sqrtf(v);
-                fpPredY = (f32) ((f64) fpY +
-                                 ((f64) (fpTermNeg * (t - v)) +
-                                  ((f64) (fpVy * t) -
-                                   0.5 * (f64) (fpGrav * sq))));
+                fpPredY =
+                    (f32) ((f64) fpY +
+                           ((f64) (fpTermNeg * (t - v)) +
+                            ((f64) (fpVy * t) - 0.5 * (f64) (fpGrav * sq))));
             }
         } else {
             fpPredY = fpVy * t + fpY;
@@ -628,8 +626,8 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
         }
         scale = fp->x34_scale.y;
         if (list->x14 * scale > relPredY &&
-            list->x10 * scale < relPredY + yBound &&
-            dirx < relx + sizeHalf && diry > relx - sizeHalf)
+            list->x10 * scale < relPredY + yBound && dirx < relx + sizeHalf &&
+            diry > relx - sizeHalf)
         {
             if (cpu->xC8 != 0) {
                 for (j = 0; j < cpu->xC8; j++) {
@@ -1320,17 +1318,17 @@ void ftCo_800B77E8(Fighter* fp)
     switch (fp->kind) {
     case FTKIND_MARIO:
         target = fp->x1A88.x44;
-        if (target != NULL &&
-            mpCheckAll(&c1.p, &c1.line, &c1.flags, &c1.n, -1, -1, fp->cur_pos.x,
-                       fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+        if (target != NULL && mpCheckAll(&c1.p, &c1.line, &c1.flags, &c1.n, -1,
+                                         -1, fp->cur_pos.x, fp->cur_pos.y,
+                                         target->cur_pos.x, target->cur_pos.y))
         {
             can_attack = 1;
         } else if (fp->facing_dir > 0.0) {
             y = fp->cur_pos.y;
             x = fp->cur_pos.x;
             x = 22.0f + x;
-            if (ftCo_800A0FB0(&c1.p, &c1.line, &c1.flags, &c1.n, -1, -1, -1, x, 5.0 + y, x,
-                              y - 1000.0, 0.0f) == 0)
+            if (ftCo_800A0FB0(&c1.p, &c1.line, &c1.flags, &c1.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
             {
                 can_attack = 1;
             } else {
@@ -1339,8 +1337,8 @@ void ftCo_800B77E8(Fighter* fp)
         } else {
             y = fp->cur_pos.y;
             x = fp->cur_pos.x - 22.0f;
-            if (ftCo_800A0FB0(&c1.p, &c1.line, &c1.flags, &c1.n, -1, -1, -1, x, 5.0 + y, x,
-                              y - 1000.0, 0.0f) == 0)
+            if (ftCo_800A0FB0(&c1.p, &c1.line, &c1.flags, &c1.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
             {
                 can_attack = 1;
             } else {
@@ -1359,17 +1357,17 @@ void ftCo_800B77E8(Fighter* fp)
     case FTKIND_FOX:
     case FTKIND_FALCO:
         target = fp->x1A88.x44;
-        if (target != NULL &&
-            mpCheckAll(&c2.p, &c2.line, &c2.flags, &c2.n, -1, -1, fp->cur_pos.x,
-                       fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+        if (target != NULL && mpCheckAll(&c2.p, &c2.line, &c2.flags, &c2.n, -1,
+                                         -1, fp->cur_pos.x, fp->cur_pos.y,
+                                         target->cur_pos.x, target->cur_pos.y))
         {
             can_attack = 1;
         } else if (fp->facing_dir > 0.0) {
             y = fp->cur_pos.y;
             x = fp->cur_pos.x;
             x += 62.0f;
-            if (ftCo_800A0FB0(&c2.p, &c2.line, &c2.flags, &c2.n, -1, -1, -1, x, 5.0 + y, x,
-                              y - 1000.0, 0.0f) == 0)
+            if (ftCo_800A0FB0(&c2.p, &c2.line, &c2.flags, &c2.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
             {
                 can_attack = 1;
             } else {
@@ -1378,8 +1376,8 @@ void ftCo_800B77E8(Fighter* fp)
         } else {
             y = fp->cur_pos.y;
             x = fp->cur_pos.x - 62.0f;
-            if (ftCo_800A0FB0(&c2.p, &c2.line, &c2.flags, &c2.n, -1, -1, -1, x, 5.0 + y, x,
-                              y - 1000.0, 0.0f) == 0)
+            if (ftCo_800A0FB0(&c2.p, &c2.line, &c2.flags, &c2.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
             {
                 can_attack = 1;
             } else {
@@ -1398,17 +1396,17 @@ void ftCo_800B77E8(Fighter* fp)
     case FTKIND_CAPTAIN:
     case FTKIND_GANON:
         target = fp->x1A88.x44;
-        if (target != NULL &&
-            mpCheckAll(&c3.p, &c3.line, &c3.flags, &c3.n, -1, -1, fp->cur_pos.x,
-                       fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+        if (target != NULL && mpCheckAll(&c3.p, &c3.line, &c3.flags, &c3.n, -1,
+                                         -1, fp->cur_pos.x, fp->cur_pos.y,
+                                         target->cur_pos.x, target->cur_pos.y))
         {
             can_attack = 1;
         } else if (fp->facing_dir > 0.0) {
             y = fp->cur_pos.y;
             x = fp->cur_pos.x;
             x += 102.0f;
-            if (ftCo_800A0FB0(&c3.p, &c3.line, &c3.flags, &c3.n, -1, -1, -1, x, 5.0 + y, x,
-                              y - 1000.0, 0.0f) == 0)
+            if (ftCo_800A0FB0(&c3.p, &c3.line, &c3.flags, &c3.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
             {
                 can_attack = 1;
             } else {
@@ -1417,8 +1415,8 @@ void ftCo_800B77E8(Fighter* fp)
         } else {
             y = fp->cur_pos.y;
             x = fp->cur_pos.x - 102.0f;
-            if (ftCo_800A0FB0(&c3.p, &c3.line, &c3.flags, &c3.n, -1, -1, -1, x, 5.0 + y, x,
-                              y - 1000.0, 0.0f) == 0)
+            if (ftCo_800A0FB0(&c3.p, &c3.line, &c3.flags, &c3.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
             {
                 can_attack = 1;
             } else {
@@ -1433,17 +1431,17 @@ void ftCo_800B77E8(Fighter* fp)
             }
         }
         target = fp->x1A88.x44;
-        if (target != NULL &&
-            mpCheckAll(&c4.p, &c4.line, &c4.flags, &c4.n, -1, -1, fp->cur_pos.x,
-                       fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+        if (target != NULL && mpCheckAll(&c4.p, &c4.line, &c4.flags, &c4.n, -1,
+                                         -1, fp->cur_pos.x, fp->cur_pos.y,
+                                         target->cur_pos.x, target->cur_pos.y))
         {
             can_attack = 1;
         } else if (fp->facing_dir > 0.0) {
             y = fp->cur_pos.y;
             x = fp->cur_pos.x;
             x += 58.0f;
-            if (ftCo_800A0FB0(&c4.p, &c4.line, &c4.flags, &c4.n, -1, -1, -1, x, 5.0 + y, x,
-                              y - 1000.0, 0.0f) == 0)
+            if (ftCo_800A0FB0(&c4.p, &c4.line, &c4.flags, &c4.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
             {
                 can_attack = 1;
             } else {
@@ -1452,8 +1450,8 @@ void ftCo_800B77E8(Fighter* fp)
         } else {
             y = fp->cur_pos.y;
             x = fp->cur_pos.x - 58.0f;
-            if (ftCo_800A0FB0(&c4.p, &c4.line, &c4.flags, &c4.n, -1, -1, -1, x, 5.0 + y, x,
-                              y - 1000.0, 0.0f) == 0)
+            if (ftCo_800A0FB0(&c4.p, &c4.line, &c4.flags, &c4.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
             {
                 can_attack = 1;
             } else {
@@ -1488,17 +1486,17 @@ void ftCo_800B77E8(Fighter* fp)
     case FTKIND_PIKACHU:
     case FTKIND_PICHU:
         target = fp->x1A88.x44;
-        if (target != NULL &&
-            mpCheckAll(&c5.p, &c5.line, &c5.flags, &c5.n, -1, -1, fp->cur_pos.x,
-                       fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+        if (target != NULL && mpCheckAll(&c5.p, &c5.line, &c5.flags, &c5.n, -1,
+                                         -1, fp->cur_pos.x, fp->cur_pos.y,
+                                         target->cur_pos.x, target->cur_pos.y))
         {
             can_attack = 1;
         } else if (fp->facing_dir > 0.0) {
             y = fp->cur_pos.y;
             x = fp->cur_pos.x;
             x += 57.0f;
-            if (ftCo_800A0FB0(&c5.p, &c5.line, &c5.flags, &c5.n, -1, -1, -1, x, 5.0 + y, x,
-                              y - 1000.0, 0.0f) == 0)
+            if (ftCo_800A0FB0(&c5.p, &c5.line, &c5.flags, &c5.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
             {
                 can_attack = 1;
             } else {
@@ -1507,8 +1505,8 @@ void ftCo_800B77E8(Fighter* fp)
         } else {
             y = fp->cur_pos.y;
             x = fp->cur_pos.x - 57.0f;
-            if (ftCo_800A0FB0(&c5.p, &c5.line, &c5.flags, &c5.n, -1, -1, -1, x, 5.0 + y, x,
-                              y - 1000.0, 0.0f) == 0)
+            if (ftCo_800A0FB0(&c5.p, &c5.line, &c5.flags, &c5.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
             {
                 can_attack = 1;
             } else {
@@ -1528,16 +1526,17 @@ void ftCo_800B77E8(Fighter* fp)
         if (fp->ground_or_air == GA_Ground) {
             target = fp->x1A88.x44;
             if (target != NULL &&
-                mpCheckAll(&c6.p, &c6.line, &c6.flags, &c6.n, -1, -1, fp->cur_pos.x,
-                           fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+                mpCheckAll(&c6.p, &c6.line, &c6.flags, &c6.n, -1, -1,
+                           fp->cur_pos.x, fp->cur_pos.y, target->cur_pos.x,
+                           target->cur_pos.y))
             {
                 can_attack = 1;
             } else if (fp->facing_dir > 0.0) {
                 y = fp->cur_pos.y;
                 x = fp->cur_pos.x;
                 x += 27.0f;
-                if (ftCo_800A0FB0(&c6.p, &c6.line, &c6.flags, &c6.n, -1, -1, -1, x, 5.0 + y, x,
-                                  y - 1000.0, 0.0f) == 0)
+                if (ftCo_800A0FB0(&c6.p, &c6.line, &c6.flags, &c6.n, -1, -1,
+                                  -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
                 {
                     can_attack = 1;
                 } else {
@@ -1546,8 +1545,8 @@ void ftCo_800B77E8(Fighter* fp)
             } else {
                 y = fp->cur_pos.y;
                 x = fp->cur_pos.x - 27.0f;
-                if (ftCo_800A0FB0(&c6.p, &c6.line, &c6.flags, &c6.n, -1, -1, -1, x, 5.0 + y, x,
-                                  y - 1000.0, 0.0f) == 0)
+                if (ftCo_800A0FB0(&c6.p, &c6.line, &c6.flags, &c6.n, -1, -1,
+                                  -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
                 {
                     can_attack = 1;
                 } else {
@@ -1575,16 +1574,17 @@ void ftCo_800B77E8(Fighter* fp)
         if (fp->ground_or_air == GA_Ground) {
             target = fp->x1A88.x44;
             if (target != NULL &&
-                mpCheckAll(&c7.p, &c7.line, &c7.flags, &c7.n, -1, -1, fp->cur_pos.x,
-                           fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+                mpCheckAll(&c7.p, &c7.line, &c7.flags, &c7.n, -1, -1,
+                           fp->cur_pos.x, fp->cur_pos.y, target->cur_pos.x,
+                           target->cur_pos.y))
             {
                 can_attack = 1;
             } else if (fp->facing_dir > 0.0) {
                 y = fp->cur_pos.y;
                 x = fp->cur_pos.x;
                 x += 53.0f;
-                if (ftCo_800A0FB0(&c7.p, &c7.line, &c7.flags, &c7.n, -1, -1, -1, x, 5.0 + y, x,
-                                  y - 1000.0, 0.0f) == 0)
+                if (ftCo_800A0FB0(&c7.p, &c7.line, &c7.flags, &c7.n, -1, -1,
+                                  -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
                 {
                     can_attack = 1;
                 } else {
@@ -1593,8 +1593,8 @@ void ftCo_800B77E8(Fighter* fp)
             } else {
                 y = fp->cur_pos.y;
                 x = fp->cur_pos.x - 53.0f;
-                if (ftCo_800A0FB0(&c7.p, &c7.line, &c7.flags, &c7.n, -1, -1, -1, x, 5.0 + y, x,
-                                  y - 1000.0, 0.0f) == 0)
+                if (ftCo_800A0FB0(&c7.p, &c7.line, &c7.flags, &c7.n, -1, -1,
+                                  -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
                 {
                     can_attack = 1;
                 } else {
@@ -1622,16 +1622,17 @@ void ftCo_800B77E8(Fighter* fp)
         if (fp->ground_or_air == GA_Ground) {
             target = fp->x1A88.x44;
             if (target != NULL &&
-                mpCheckAll(&c8.p, &c8.line, &c8.flags, &c8.n, -1, -1, fp->cur_pos.x,
-                           fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+                mpCheckAll(&c8.p, &c8.line, &c8.flags, &c8.n, -1, -1,
+                           fp->cur_pos.x, fp->cur_pos.y, target->cur_pos.x,
+                           target->cur_pos.y))
             {
                 can_attack = 1;
             } else if (fp->facing_dir > 0.0) {
                 y = fp->cur_pos.y;
                 x = fp->cur_pos.x;
                 x += 16.0f;
-                if (ftCo_800A0FB0(&c8.p, &c8.line, &c8.flags, &c8.n, -1, -1, -1, x, 5.0 + y, x,
-                                  y - 1000.0, 0.0f) == 0)
+                if (ftCo_800A0FB0(&c8.p, &c8.line, &c8.flags, &c8.n, -1, -1,
+                                  -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
                 {
                     can_attack = 1;
                 } else {
@@ -1640,8 +1641,8 @@ void ftCo_800B77E8(Fighter* fp)
             } else {
                 y = fp->cur_pos.y;
                 x = fp->cur_pos.x - 16.0f;
-                if (ftCo_800A0FB0(&c8.p, &c8.line, &c8.flags, &c8.n, -1, -1, -1, x, 5.0 + y, x,
-                                  y - 1000.0, 0.0f) == 0)
+                if (ftCo_800A0FB0(&c8.p, &c8.line, &c8.flags, &c8.n, -1, -1,
+                                  -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
                 {
                     can_attack = 1;
                 } else {
@@ -1667,17 +1668,17 @@ void ftCo_800B77E8(Fighter* fp)
         break;
     case FTKIND_LUIGI:
         target = fp->x1A88.x44;
-        if (target != NULL &&
-            mpCheckAll(&c9.p, &c9.line, &c9.flags, &c9.n, -1, -1, fp->cur_pos.x,
-                       fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+        if (target != NULL && mpCheckAll(&c9.p, &c9.line, &c9.flags, &c9.n, -1,
+                                         -1, fp->cur_pos.x, fp->cur_pos.y,
+                                         target->cur_pos.x, target->cur_pos.y))
         {
             can_attack = 1;
         } else if (fp->facing_dir > 0.0) {
             y = fp->cur_pos.y;
             x = fp->cur_pos.x;
             x += 60.0f;
-            if (ftCo_800A0FB0(&c9.p, &c9.line, &c9.flags, &c9.n, -1, -1, -1, x, 5.0 + y, x,
-                              y - 1000.0, 0.0f) == 0)
+            if (ftCo_800A0FB0(&c9.p, &c9.line, &c9.flags, &c9.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
             {
                 can_attack = 1;
             } else {
@@ -1686,8 +1687,8 @@ void ftCo_800B77E8(Fighter* fp)
         } else {
             y = fp->cur_pos.y;
             x = fp->cur_pos.x - 60.0f;
-            if (ftCo_800A0FB0(&c9.p, &c9.line, &c9.flags, &c9.n, -1, -1, -1, x, 5.0 + y, x,
-                              y - 1000.0, 0.0f) == 0)
+            if (ftCo_800A0FB0(&c9.p, &c9.line, &c9.flags, &c9.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
             {
                 can_attack = 1;
             } else {
@@ -1705,17 +1706,17 @@ void ftCo_800B77E8(Fighter* fp)
         break;
     case FTKIND_PEACH:
         target = fp->x1A88.x44;
-        if (target != NULL &&
-            mpCheckAll(&c10.p, &c10.line, &c10.flags, &c10.n, -1, -1, fp->cur_pos.x,
-                       fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+        if (target != NULL && mpCheckAll(&c10.p, &c10.line, &c10.flags, &c10.n,
+                                         -1, -1, fp->cur_pos.x, fp->cur_pos.y,
+                                         target->cur_pos.x, target->cur_pos.y))
         {
             can_attack = 1;
         } else if (fp->facing_dir > 0.0) {
             y = fp->cur_pos.y;
             x = fp->cur_pos.x;
             x += 32.0f;
-            if (ftCo_800A0FB0(&c10.p, &c10.line, &c10.flags, &c10.n, -1, -1, -1, x, 5.0 + y, x,
-                              y - 1000.0, 0.0f) == 0)
+            if (ftCo_800A0FB0(&c10.p, &c10.line, &c10.flags, &c10.n, -1, -1,
+                              -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
             {
                 can_attack = 1;
             } else {
@@ -1724,8 +1725,8 @@ void ftCo_800B77E8(Fighter* fp)
         } else {
             y = fp->cur_pos.y;
             x = fp->cur_pos.x - 32.0f;
-            if (ftCo_800A0FB0(&c10.p, &c10.line, &c10.flags, &c10.n, -1, -1, -1, x, 5.0 + y, x,
-                              y - 1000.0, 0.0f) == 0)
+            if (ftCo_800A0FB0(&c10.p, &c10.line, &c10.flags, &c10.n, -1, -1,
+                              -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
             {
                 can_attack = 1;
             } else {

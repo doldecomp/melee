@@ -1277,7 +1277,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
                         ftAnim_8006EBE8(gobj, anim_start - anim_speed,
                                         anim_speed,
                                         (anim_blend == -1.0f) ? 0.0f
-                                        : (anim_blend)        ? anim_blend
+                                        : (anim_blend) ? anim_blend
                                                        : (*unk_byte_ptr)[0]);
                     }
                     ftAnim_8006E9B4(gobj);
@@ -1298,7 +1298,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
                     if (fp->x590 != 0U) {
                         ftAnim_8006EBE8(gobj, anim_start, anim_speed,
                                         (anim_blend == -1.0f) ? 0.0f
-                                        : (anim_blend)        ? anim_blend
+                                        : (anim_blend) ? anim_blend
                                                        : (*unk_byte_ptr)[0]);
                     }
                     fp->x3E4_fighterCmdScript.timer = 0.0f;

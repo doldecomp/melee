@@ -161,8 +161,8 @@ HSD_GObj* grPura_80211E08(int gobj_id)
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport((char*) grPu_803E6800 + 0x270,
-                 (char*) grPu_803E6800 + 0x294, 0x108, gobj_id);
+        OSReport((char*) grPu_803E6800 + 0x270, (char*) grPu_803E6800 + 0x294,
+                 0x108, gobj_id);
     }
 
     return gobj;
@@ -261,9 +261,12 @@ void grPura_802120E0(Ground_GObj* arg0)
         sp18 = grPu_803E6AA0[gp->gv.pura.xC4];
         t = (f32) gp->gv.pura.xC8 / 3600.0f;
         gp->gv.pura.xC8++;
-        sp18.r = (s8) (t * (f32) ((u8) spilC.r - (u8) sp18.r) + (f32) (u8) sp18.r);
-        sp18.g = (s8) (t * (f32) ((u8) spilC.g - (u8) sp18.g) + (f32) (u8) sp18.g);
-        sp18.b = (s8) (t * (f32) ((u8) spilC.b - (u8) sp18.b) + (f32) (u8) sp18.b);
+        sp18.r =
+            (s8) (t * (f32) ((u8) spilC.r - (u8) sp18.r) + (f32) (u8) sp18.r);
+        sp18.g =
+            (s8) (t * (f32) ((u8) spilC.g - (u8) sp18.g) + (f32) (u8) sp18.g);
+        sp18.b =
+            (s8) (t * (f32) ((u8) spilC.b - (u8) sp18.b) + (f32) (u8) sp18.b);
         Ground_801C205C(&sp18);
         Camera_SetBackgroundColor(sp18.r, sp18.g, sp18.b);
         return;
@@ -356,12 +359,12 @@ void grPura_802125F0(HSD_GObj* arg0)
             gp->gv.pura2.xC8 = Ground_801C3FA4(arg0, joint);
 
             jobj = gobj->hsd_obj;
-            HSD_JObjSetTranslateX(
-                jobj, HSD_JObjGetTranslationX(gp->gv.pura2.xC8));
-            HSD_JObjSetTranslateY(
-                jobj, HSD_JObjGetTranslationY(gp->gv.pura2.xC8));
-            HSD_JObjSetTranslateZ(
-                jobj, HSD_JObjGetTranslationZ(gp->gv.pura2.xC8));
+            HSD_JObjSetTranslateX(jobj,
+                                  HSD_JObjGetTranslationX(gp->gv.pura2.xC8));
+            HSD_JObjSetTranslateY(jobj,
+                                  HSD_JObjGetTranslationY(gp->gv.pura2.xC8));
+            HSD_JObjSetTranslateZ(jobj,
+                                  HSD_JObjGetTranslationZ(gp->gv.pura2.xC8));
 
             if (HSD_JObjGetFlags(gp->gv.pura2.xC8) & 0x10) {
                 HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
@@ -617,7 +620,8 @@ void grPura_80213250(HSD_JObj* jobj)
                         grPura_80213128(sibling_dobj->next);
                     }
                     for (sibling_iter = sibling_dobj; sibling_iter != NULL;
-                         sibling_iter = sibling_iter->next) {
+                         sibling_iter = sibling_iter->next)
+                    {
                         grPura_80213224(sibling_iter);
                     }
                     if (sibling_dobj->mobj != NULL) {
@@ -635,7 +639,8 @@ void grPura_80213250(HSD_JObj* jobj)
                     grPura_80213128(self_next->next);
                 }
                 for (self_iter = self_next; self_iter != NULL;
-                     self_iter = self_iter->next) {
+                     self_iter = self_iter->next)
+                {
                     grPura_80213224(self_iter);
                 }
                 if (self_next->mobj != NULL) {
@@ -643,7 +648,8 @@ void grPura_80213250(HSD_JObj* jobj)
                 }
             }
             for (self_iter = self_dobj; self_iter != NULL;
-                 self_iter = self_iter->next) {
+                 self_iter = self_iter->next)
+            {
                 if (self_iter != NULL) {
                     HSD_MObjCompileTev(self_iter->mobj);
                 }

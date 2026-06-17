@@ -1,6 +1,7 @@
 #include "mndiagram3.h"
 
 #include "mndiagram3.static.h"
+
 #include "baselib/debug.h"
 
 #include <baselib/gobj.h>
@@ -628,7 +629,8 @@ void fn_802461BC(HSD_GObj* gobj)
         lbAudioAx_80024030(1);
         data->is_name_mode = (data->is_name_mode == 0) ? 1 : 0;
         if ((data->is_name_mode == 0) &&
-            ((s32) (data->scroll_offset + 0xA) >= 0x15)) {
+            ((s32) (data->scroll_offset + 0xA) >= 0x15))
+        {
             data->scroll_offset = 0;
         }
         data = mnDiagram3_804D6C20->user_data;
@@ -652,12 +654,12 @@ void fn_802461BC(HSD_GObj* gobj)
             base_idx = data->scroll_offset;
             base_idx_u8 = base_idx;
             spacing = HSD_JObjGetTranslationY(data->jobjs[9]) -
-                          HSD_JObjGetTranslationY(data->jobjs[8]);
+                      HSD_JObjGetTranslationY(data->jobjs[8]);
             lb_8000B1CC(data->jobjs[8], (Vec3*) (base + 0x18), &spDC);
             for (i = 0; i < 0xA; i++) {
-                HSD_Text* t = HSD_SisLib_803A5ACC(
-                    0, 1, spDC.x - 6.5f, -spacing * (f32) i + -spDC.y, spDC.z,
-                    6.5f, 240.0f);
+                HSD_Text* t = HSD_SisLib_803A5ACC(0, 1, spDC.x - 6.5f,
+                                                  -spacing * (f32) i + -spDC.y,
+                                                  spDC.z, 6.5f, 240.0f);
                 data->row_labels[i] = t;
                 i_u8 = i;
                 limit = (data->is_name_mode != 0) ? 0x18 : 0x15;
@@ -693,11 +695,13 @@ void fn_802461BC(HSD_GObj* gobj)
             n = data->saved_selection;
             spacing = HSD_JObjGetTranslationY(cur->jobjs[9]) -
                       HSD_JObjGetTranslationY(cur->jobjs[8]);
-            HSD_JObjSetTranslateX(popup, HSD_JObjGetTranslationX(cur->jobjs[8]));
-            HSD_JObjSetTranslateY(popup, spacing * (f32) n +
-                                             HSD_JObjGetTranslationY(
-                                                 cur->jobjs[8]));
-            HSD_JObjSetTranslateZ(popup, HSD_JObjGetTranslationZ(cur->jobjs[8]));
+            HSD_JObjSetTranslateX(popup,
+                                  HSD_JObjGetTranslationX(cur->jobjs[8]));
+            HSD_JObjSetTranslateY(popup,
+                                  spacing * (f32) n +
+                                      HSD_JObjGetTranslationY(cur->jobjs[8]));
+            HSD_JObjSetTranslateZ(popup,
+                                  HSD_JObjGetTranslationZ(cur->jobjs[8]));
             {
                 HSD_GObj* diagram_gobj = mnDiagram3_804D6C20;
                 mnDiagram2_ClearDetailView(diagram_gobj);
@@ -731,9 +735,9 @@ void fn_802461BC(HSD_GObj* gobj)
                       HSD_JObjGetTranslationY(data->jobjs[8]);
             lb_8000B1CC(data->jobjs[8], (Vec3*) (base + 0x18), &spC0);
             for (i = 0; i < 0xA; i++) {
-                HSD_Text* t = HSD_SisLib_803A5ACC(
-                    0, 1, spC0.x - 6.5f, -spacing * (f32) i + -spC0.y, spC0.z,
-                    6.5f, 240.0f);
+                HSD_Text* t = HSD_SisLib_803A5ACC(0, 1, spC0.x - 6.5f,
+                                                  -spacing * (f32) i + -spC0.y,
+                                                  spC0.z, 6.5f, 240.0f);
                 data->row_labels[i] = t;
                 i_u8 = i;
                 limit = (data->is_name_mode != 0) ? 0x18 : 0x15;
@@ -768,11 +772,13 @@ void fn_802461BC(HSD_GObj* gobj)
             n = data->saved_selection;
             spacing = HSD_JObjGetTranslationY(cur->jobjs[9]) -
                       HSD_JObjGetTranslationY(cur->jobjs[8]);
-            HSD_JObjSetTranslateX(popup, HSD_JObjGetTranslationX(cur->jobjs[8]));
-            HSD_JObjSetTranslateY(popup, spacing * (f32) n +
-                                             HSD_JObjGetTranslationY(
-                                                 cur->jobjs[8]));
-            HSD_JObjSetTranslateZ(popup, HSD_JObjGetTranslationZ(cur->jobjs[8]));
+            HSD_JObjSetTranslateX(popup,
+                                  HSD_JObjGetTranslationX(cur->jobjs[8]));
+            HSD_JObjSetTranslateY(popup,
+                                  spacing * (f32) n +
+                                      HSD_JObjGetTranslationY(cur->jobjs[8]));
+            HSD_JObjSetTranslateZ(popup,
+                                  HSD_JObjGetTranslationZ(cur->jobjs[8]));
             {
                 HSD_GObj* diagram_gobj = mnDiagram3_804D6C20;
                 mnDiagram2_ClearDetailView(diagram_gobj);
@@ -807,9 +813,9 @@ void fn_802461BC(HSD_GObj* gobj)
                       HSD_JObjGetTranslationY(data->jobjs[8]);
             lb_8000B1CC(data->jobjs[8], (Vec3*) (base + 0x18), &spA4);
             for (i = 0; i < 0xA; i++) {
-                HSD_Text* t = HSD_SisLib_803A5ACC(
-                    0, 1, spA4.x - 6.5f, -spacing * (f32) i + -spA4.y, spA4.z,
-                    6.5f, 240.0f);
+                HSD_Text* t = HSD_SisLib_803A5ACC(0, 1, spA4.x - 6.5f,
+                                                  -spacing * (f32) i + -spA4.y,
+                                                  spA4.z, 6.5f, 240.0f);
                 data->row_labels[i] = t;
                 i_u8 = i;
                 limit = (data->is_name_mode != 0) ? 0x18 : 0x15;

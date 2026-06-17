@@ -486,8 +486,7 @@ void fn_80039618(int player)
     }
     for (j = 0; j < 6; j++) {
         for (k = 1; k <= 0x10; k++) {
-            if (!(pl_80037B2C(stats, j, k) != 0 ||
-                  pl_80038628(gobj, k) == 0))
+            if (!(pl_80037B2C(stats, j, k) != 0 || pl_80038628(gobj, k) == 0))
             {
                 break;
             }
@@ -497,8 +496,8 @@ void fn_80039618(int player)
             break;
         }
     }
-    if (Player_GetStaleMoveTableIndexPtr2(player)->x0_staleMoveTable.x904[0x11] ==
-        0)
+    if (Player_GetStaleMoveTableIndexPtr2(player)
+            ->x0_staleMoveTable.x904[0x11] == 0)
     {
         int found_low = 0;
         int found_high = 0;

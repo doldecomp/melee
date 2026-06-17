@@ -1441,20 +1441,22 @@ loop_3:
                 glyph_code = *(u16*) cursor;
                 if (glyph_code < 0x4000U) {
                     kern_data = (TextKerning*) (default_kerning +
-                                                (((glyph_code - 0x2000) * 2) & 0x1FFFE));
+                                                (((glyph_code - 0x2000) * 2) &
+                                                 0x1FFFE));
                     kern_right = kern_data->right;
                     kern_left = kern_data->left;
                     kern_width = kern_left + (kern_right - 2);
-                    *out_width = -((text->x80.x * (f32) kern_width) -
-                                   *out_width);
+                    *out_width =
+                        -((text->x80.x * (f32) kern_width) - *out_width);
                 } else {
-                    kern_data_2 = (TextKerning*) &glyph_tex
-                                      ->data[((glyph_code - 0x4000) * 2) & 0x1FFFE];
+                    kern_data_2 =
+                        (TextKerning*) &glyph_tex
+                            ->data[((glyph_code - 0x4000) * 2) & 0x1FFFE];
                     kern_right = kern_data_2->right;
                     kern_left = kern_data_2->left;
                     kern_width = kern_left + (kern_right - 2);
-                    *out_width = -((text->x80.x * (f32) kern_width) -
-                                   *out_width);
+                    *out_width =
+                        -((text->x80.x * (f32) kern_width) - *out_width);
                 }
             }
             if (*out_height < (32.0F * text->x80.y)) {
@@ -1770,11 +1772,9 @@ s32 HSD_SisLib_803A7F0C(HSD_Text* text, s32 flags)
         case 1:
             pos -= 4;
             if (target_type == 1) {
-                text->x78.x = (f32) *
-                              (s16*) (text->string_buffer + pos) *
-                              0.00390625F;
-                text->x78.y = (f32) *
-                              (s16*) (text->string_buffer + pos + 2) *
+                text->x78.x =
+                    (f32) * (s16*) (text->string_buffer + pos) * 0.00390625F;
+                text->x78.y = (f32) * (s16*) (text->string_buffer + pos + 2) *
                               0.00390625F;
                 if (flag_hi == entry_flags) {
                     remove_size = 5;
@@ -1797,11 +1797,9 @@ s32 HSD_SisLib_803A7F0C(HSD_Text* text, s32 flags)
         case 3:
             pos -= 4;
             if (target_type == 3) {
-                text->x80.x = (f32) *
-                              (u16*) (text->string_buffer + pos) *
-                              0.00390625F;
-                text->x80.y = (f32) *
-                              (u16*) (text->string_buffer + pos + 2) *
+                text->x80.x =
+                    (f32) * (u16*) (text->string_buffer + pos) * 0.00390625F;
+                text->x80.y = (f32) * (u16*) (text->string_buffer + pos + 2) *
                               0.00390625F;
                 if (flag_hi == entry_flags) {
                     remove_size = 5;
@@ -1835,8 +1833,7 @@ s32 HSD_SisLib_803A7F0C(HSD_Text* text, s32 flags)
 done:
     if (remove_size != 0) {
         while ((pos + remove_size) < (s32) text->x6C) {
-            text->string_buffer[pos] =
-                text->string_buffer[pos + remove_size];
+            text->string_buffer[pos] = text->string_buffer[pos + remove_size];
             pos += 1;
         }
         while (pos < (s32) text->x6C) {

@@ -492,7 +492,8 @@ void grOnett_801E43E0(Ground_GObj* gobj)
             s8 old_car = gp->gv.onettcar.curr_car;
             HSD_JObj* new_jobj;
             while (gp->gv.onettcar.curr_car == old_car ||
-                   gp->gv.onettcar.curr_car == gp->gv.onettcar.next_car) {
+                   gp->gv.onettcar.curr_car == gp->gv.onettcar.next_car)
+            {
                 gp->gv.onettcar.curr_car = HSD_Randi(4);
             }
 
@@ -643,7 +644,8 @@ void grOnett_801E43E0(Ground_GObj* gobj)
             case 0: {
                 HSD_JObj* new_jobj;
                 while (gp->gv.onettcar.next_car == next ||
-                       gp->gv.onettcar.next_car == gp->gv.onettcar.curr_car) {
+                       gp->gv.onettcar.next_car == gp->gv.onettcar.curr_car)
+                {
                     gp->gv.onettcar.next_car = HSD_Randi(4);
                 }
 
@@ -818,10 +820,9 @@ void grOnett_801E5214(Ground_GObj* gobj)
         }
 
         jobj = gp->gv.onett.awnings[i].jobj;
-        HSD_JObjSetTranslateY(
-            jobj, gp->gv.onett.awnings[i].velocity +
-                      (gp->gv.onett.awnings[i].initial_y +
-                       gp->gv.onett.awnings[i].accumulator));
+        HSD_JObjSetTranslateY(jobj, gp->gv.onett.awnings[i].velocity +
+                                        (gp->gv.onett.awnings[i].initial_y +
+                                         gp->gv.onett.awnings[i].accumulator));
 
         if (gp->gv.onett.awnings[i].cooldown == 0 &&
             (gp->gv.onett.awnings[i].counter_prev !=
@@ -834,8 +835,7 @@ void grOnett_801E5214(Ground_GObj* gobj)
         }
 
         gp->gv.onett.awnings[i].accumulator = 0.0f;
-        gp->gv.onett.awnings[i].counter_prev =
-            gp->gv.onett.awnings[i].counter;
+        gp->gv.onett.awnings[i].counter_prev = gp->gv.onett.awnings[i].counter;
         gp->gv.onett.awnings[i].counter = 0;
         gp->gv.onett.awnings[i].flag = 0;
 

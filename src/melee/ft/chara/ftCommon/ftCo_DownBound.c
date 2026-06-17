@@ -114,8 +114,8 @@ static inline void inlineA0(Fighter_GObj* gobj, enum_t arg1, enum_t arg2,
 void ftCo_800978D4(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    float param = atan2f(-fp->coll_data.floor.normal.x,
-                         fp->coll_data.floor.normal.y);
+    float param =
+        atan2f(-fp->coll_data.floor.normal.x, fp->coll_data.floor.normal.y);
     PAD_STACK(12);
     efAsync_Spawn(gobj, (u8*) gobj->user_data + 0x60c, 4, 0x406,
                   fp->parts[FtPart_TopN].joint, &param);
@@ -136,9 +136,8 @@ void ftCo_8009794C(Fighter_GObj* gobj)
         }
         msid = b ? ftCo_MS_DownBoundU : ftCo_MS_DownBoundD;
         Fighter_ChangeMotionState(
-            gobj, msid,
-            Ft_MF_SkipNametagVis | Ft_MF_KeepColAnimPartHitStatus, 0, 1, 0,
-            NULL);
+            gobj, msid, Ft_MF_SkipNametagVis | Ft_MF_KeepColAnimPartHitStatus,
+            0, 1, 0, NULL);
         ftCo_800978D4(gobj);
         PAD_STACK(24);
         fp->x67C = 255;
@@ -171,15 +170,15 @@ void ftCo_80097AF4(Fighter_GObj* gobj)
             ftCommon_8007D7FC(fp);
         }
         {
-            extern bool ftCo_80097570(Fighter_GObj* gobj);
+            extern bool ftCo_80097570(Fighter_GObj * gobj);
             bool b = ftCo_80097570(gobj);
             if (fp->x2226_b1) {
                 b = !b;
             }
             Fighter_ChangeMotionState(
                 gobj, b ? ftCo_MS_DownBoundU : ftCo_MS_DownBoundD,
-                Ft_MF_SkipNametagVis | Ft_MF_KeepColAnimPartHitStatus, 0, 1,
-                0, NULL);
+                Ft_MF_SkipNametagVis | Ft_MF_KeepColAnimPartHitStatus, 0, 1, 0,
+                NULL);
             ftCo_800978D4(gobj);
             fp->x67C = 255;
             fp->x67D = 255;

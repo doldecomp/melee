@@ -346,7 +346,6 @@ bool grPushOn_80218880(Ground_GObj* arg)
     return false;
 }
 
-
 void grPushOn_80218ED0(Ground_GObj* arg) {}
 
 HSD_LObj* grPushOn_80218ED4(HSD_GObj* gobj)
@@ -567,7 +566,8 @@ void grPushOn_80218888(Ground_GObj* arg0)
             mindist = light_distances[light_order[1]];
             for (i = 1; i < gp->u.pushon.count; i++) {
                 if (HSD_LObjGetPosition(gp->u.pushon.lobjs[light_order[i]],
-                                        &sp100) != 0) {
+                                        &sp100) != 0)
+                {
                     f32 w = mindist / light_distances[light_order[i]];
                     lbVector_Sub(&sp100, &sp10C);
                     if (sp100.y < 100.0f) {
@@ -584,9 +584,8 @@ void grPushOn_80218888(Ground_GObj* arg0)
                     lbVector_Add(&sp3C, &sp100);
                 }
             }
-            sumsq = sqrtf(
-                sumsq = (sp3C.z * sp3C.z) +
-                         ((sp3C.x * sp3C.x) + (sp3C.y * sp3C.y)));
+            sumsq = sqrtf(sumsq = (sp3C.z * sp3C.z) +
+                                  ((sp3C.x * sp3C.x) + (sp3C.y * sp3C.y)));
             if (sumsq < 0.01f) {
                 sp3C.y = 100.0f;
             }
@@ -610,15 +609,17 @@ void grPushOn_80218888(Ground_GObj* arg0)
                     sp38.b = (u8) (s32) ((f32) sp38.b * t);
                 }
                 HSD_LObjSetColor(gp->u.pushon.spot_light, sp38);
-                if (HSD_LObjGetPosition(gp->u.pushon.lobjs[light_order[1]], &sp2C) ==
-                    0) {
+                if (HSD_LObjGetPosition(gp->u.pushon.lobjs[light_order[1]],
+                                        &sp2C) == 0)
+                {
                     sp2C.z = 0.0f;
                     sp2C.y = 0.0f;
                     sp2C.x = 0.0f;
                 }
                 HSD_LObjSetPosition(gp->u.pushon.spot_light, &sp2C);
-                if (HSD_LObjGetInterest(gp->u.pushon.lobjs[light_order[1]], &sp2C) ==
-                    0) {
+                if (HSD_LObjGetInterest(gp->u.pushon.lobjs[light_order[1]],
+                                        &sp2C) == 0)
+                {
                     sp2C.z = 0.0f;
                     sp2C.y = 0.0f;
                     sp2C.x = 0.0f;

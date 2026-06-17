@@ -815,8 +815,7 @@ void gm_80160C90(HSD_Text* text, u8 fighter_id, bool arg2)
     if (lbLang_IsSavedLanguageUS() != 0) {
         text->default_kerning = 1;
     }
-    str = ((u8) arg2 != 0) ? fn_801609E0(fighter_id)
-                           : gm_80160980(fighter_id);
+    str = ((u8) arg2 != 0) ? fn_801609E0(fighter_id) : gm_80160980(fighter_id);
     if (lbLang_IsSavedLanguageUS() != 0) {
         use_alt_name = false;
         if ((u8) arg2 != 0 && lbl_803D50E4[fighter_id] != NULL) {
@@ -838,10 +837,9 @@ void gm_80160C90(HSD_Text* text, u8 fighter_id, bool arg2)
             name_scale = lbl_803B75F8[fighter_id];
         }
     }
-    HSD_SisLib_803A7548(text,
-                        HSD_SisLib_803A6B98(text, 0.0F, 0.0F, str,
-                                            use_alt_name),
-                        name_scale, 1.0F);
+    HSD_SisLib_803A7548(
+        text, HSD_SisLib_803A6B98(text, 0.0F, 0.0F, str, use_alt_name),
+        name_scale, 1.0F);
 }
 
 void fn_80160DE8(HSD_JObj* arg0, u8 arg1, s32 arg2, u8 arg3, f32 farg0,
@@ -943,7 +941,8 @@ s32 fn_80161154(MatchEnd* arg0)
         for (i = 0; i < 4; i++) {
             player = &arg0->player_standings[i];
             if (player->slot_type != 3 &&
-                arg0->team_standings[player->team].is_big_loser == var_r3) {
+                arg0->team_standings[player->team].is_big_loser == var_r3)
+            {
                 spC[i] = 1;
                 cnt = 1;
                 idx = i;
@@ -1123,16 +1122,16 @@ void fn_80161C90(MatchEnd* arg0, int arg1, u16* arg2)
     s->unk0 = (s->unk0 + p->self_destructs > 0xFFFF)
                   ? 0xFFFF
                   : s->unk0 + p->self_destructs;
-    s->unk4 = (s->unk4 + p->x38 > 0xFFFFFFFFU) ? 0xFFFFFFFFU
-                                                : s->unk4 + p->x38;
-    s->unk8 = (s->unk8 + p->x3C > 0xFFFFFFFFU) ? 0xFFFFFFFFU
-                                                : s->unk8 + p->x3C;
-    s->unkC = (s->unkC + p->x40 > 0xFFFFFFFFU) ? 0xFFFFFFFFU
-                                                : s->unkC + p->x40;
-    s->unk10 = (s->unk10 + p->x44 > 0xFFFFFFFFU) ? 0xFFFFFFFFU
-                                                  : s->unk10 + p->x44;
-    s->unk14 = (s->unk14 + p->x48 > 0xFFFFFFFFU) ? 0xFFFFFFFFU
-                                                  : s->unk14 + p->x48;
+    s->unk4 =
+        (s->unk4 + p->x38 > 0xFFFFFFFFU) ? 0xFFFFFFFFU : s->unk4 + p->x38;
+    s->unk8 =
+        (s->unk8 + p->x3C > 0xFFFFFFFFU) ? 0xFFFFFFFFU : s->unk8 + p->x3C;
+    s->unkC =
+        (s->unkC + p->x40 > 0xFFFFFFFFU) ? 0xFFFFFFFFU : s->unkC + p->x40;
+    s->unk10 =
+        (s->unk10 + p->x44 > 0xFFFFFFFFU) ? 0xFFFFFFFFU : s->unk10 + p->x44;
+    s->unk14 =
+        (s->unk14 + p->x48 > 0xFFFFFFFFU) ? 0xFFFFFFFFU : s->unk14 + p->x48;
     if (s->unk18 < p->x4C) {
         s->unk18 = p->x4C;
     }
@@ -1174,25 +1173,25 @@ void fn_80161C90(MatchEnd* arg0, int arg1, u16* arg2)
         count = 0xFFFF;
     }
     s->unk24 = count;
-    s->unk28 = (s->unk28 + p->x50 > 0xFFFFFFFFU) ? 0xFFFFFFFFU
-                                                  : s->unk28 + p->x50;
+    s->unk28 =
+        (s->unk28 + p->x50 > 0xFFFFFFFFU) ? 0xFFFFFFFFU : s->unk28 + p->x50;
     gmMainLib_8015EDBC()->x10 =
         (p->x50 + gmMainLib_8015EDBC()->x10 > 0xFFFFFFFFU)
             ? 0xFFFFFFFFU
             : p->x50 + gmMainLib_8015EDBC()->x10;
-    s->unk2C = (s->unk2C + p->x54 > 0xFFFFFFFFU) ? 0xFFFFFFFFU
-                                                  : s->unk2C + p->x54;
-    s->unk30 = (s->unk30 + p->x58 > 0xFFFFFFFFU) ? 0xFFFFFFFFU
-                                                  : s->unk30 + p->x58;
-    s->unk34 = (s->unk34 + p->x5C > 0xFFFFFFFFU) ? 0xFFFFFFFFU
-                                                  : s->unk34 + p->x5C;
+    s->unk2C =
+        (s->unk2C + p->x54 > 0xFFFFFFFFU) ? 0xFFFFFFFFU : s->unk2C + p->x54;
+    s->unk30 =
+        (s->unk30 + p->x58 > 0xFFFFFFFFU) ? 0xFFFFFFFFU : s->unk30 + p->x58;
+    s->unk34 =
+        (s->unk34 + p->x5C > 0xFFFFFFFFU) ? 0xFFFFFFFFU : s->unk34 + p->x5C;
     if (arg0->x5 == 2) {
         s->unk38 = (s->unk38 + p->x60 > 0xFFFFFFFFU) ? 0xFFFFFFFFU
-                                                      : s->unk38 + p->x60;
+                                                     : s->unk38 + p->x60;
         s->unk3C = (s->unk3C + p->x64 > 0xFFFFFFFFU) ? 0xFFFFFFFFU
-                                                      : s->unk3C + p->x64;
+                                                     : s->unk3C + p->x64;
         s->unk40 = (s->unk40 + p->x68 > 0xFFFFFFFFU) ? 0xFFFFFFFFU
-                                                      : s->unk40 + p->x68;
+                                                     : s->unk40 + p->x68;
     }
 }
 
@@ -2260,7 +2259,8 @@ bool gm_80164330(s32 arg0)
     if (total_stages_on == 0) {
         OSReport("RandomStageSwitch All-Off!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
     }
-    return ((1 << (u16) arg0) & gmMainLib_8015CC58()->stage_mask) ? true : false;
+    return ((1 << (u16) arg0) & gmMainLib_8015CC58()->stage_mask) ? true
+                                                                  : false;
 }
 
 bool gm_80164430(u16 arg0)
@@ -2826,7 +2826,8 @@ u32 fn_801656A8(MatchEnd* arg0, u32 arg1)
         for (j = 0; j < 6; j++) {
             if (arg0->player_standings[j].slot_type != 3 &&
                 (u32) arg0->player_standings[arg1].x20 >
-                    (u32) arg0->player_standings[j].x20) {
+                    (u32) arg0->player_standings[j].x20)
+            {
                 cnt_gt += 1;
             }
         }
@@ -2856,8 +2857,7 @@ s32 fn_8016588C(lbl_8046B6A0_24C_t* arg0, s32 arg1)
 
     if (gm_801A4310() == 0x1F) {
         if (arg0->x58[arg1].x28 != 0) {
-            v = (u8) (arg0->x58[arg1].x28 / 60 +
-                      0xFF000001);
+            v = (u8) (arg0->x58[arg1].x28 / 60 + 0xFF000001);
         } else {
             v = arg0->x58[arg1].x9;
         }
@@ -2880,8 +2880,7 @@ s32 fn_8016588C(lbl_8046B6A0_24C_t* arg0, s32 arg1)
             if ((s8) arg0->x58[arg1].x8 != 0) {
                 v = (u8) (s8) arg0->x58[arg1].x8;
             } else {
-                v = (u8) (arg0->x58[arg1].x28 / 60 +
-                          0xFF000001);
+                v = (u8) (arg0->x58[arg1].x28 / 60 + 0xFF000001);
             }
             lim = (1 << 24) - 1;
             if (lim < 0) {
@@ -2957,7 +2956,8 @@ s32 fn_80165AC0(MatchEnd* arg0)
             for (j = 0; j < 6; j++) {
                 if (arg0->player_standings[j].slot_type != 3 && i != j &&
                     arg0->player_standings[i].score <
-                        arg0->player_standings[j].score) {
+                        arg0->player_standings[j].score)
+                {
                     arg0->player_standings[i].is_big_loser += 1;
                 }
             }
@@ -2970,7 +2970,8 @@ s32 fn_80165AC0(MatchEnd* arg0)
     count = 0;
     for (j = 0; j < 6; j++) {
         if (arg0->player_standings[j].slot_type != 3 &&
-            arg0->player_standings[j].is_big_loser == 0) {
+            arg0->player_standings[j].is_big_loser == 0)
+        {
             arg0->winners[count] = j;
             count += 1;
         }
@@ -3057,7 +3058,8 @@ s32 fn_80165FA4(MatchEnd* arg0)
         if (t->active != 0) {
             for (j = 0; j < 5; j++) {
                 if (j != i && arg0->team_standings[j].active != 0 &&
-                    (s32) t->score < (s32) arg0->team_standings[j].score) {
+                    (s32) t->score < (s32) arg0->team_standings[j].score)
+                {
                     t->is_big_loser += 1;
                 }
             }
@@ -3070,7 +3072,8 @@ s32 fn_80165FA4(MatchEnd* arg0)
     count = 0;
     for (j = 0; j < 5; j++) {
         if (arg0->team_standings[j].active != 0 &&
-            arg0->team_standings[j].is_big_loser == 0) {
+            arg0->team_standings[j].is_big_loser == 0)
+        {
             arg0->team_winners[count] = j;
             count += 1;
         }
@@ -3365,7 +3368,8 @@ void gm_80166CCC(MatchEnd* arg0, MatchEnd* arg1)
                 if (arg0->player_standings[i].is_big_loser == 0) {
                     if (arg1->player_standings[i].slot_type == 3) {
                         arg0->player_standings[i].is_big_loser += player_count;
-                        arg0->player_standings[i].is_small_loser += player_count;
+                        arg0->player_standings[i].is_small_loser +=
+                            player_count;
                     } else {
                         arg0->player_standings[i].is_big_loser =
                             arg1->player_standings[i].is_big_loser;
@@ -3469,14 +3473,14 @@ void fn_8016719C(s32 slot, s32 subchar)
 
     respawn_pos.y = Stage_GetCamBoundsTopOffset();
     Player_80032768(slot, &respawn_pos);
-    Player_SetFacingDirection(slot,
-                              respawn_pos.x >= 0.0f ? -1.0f : 1.0f);
+    Player_SetFacingDirection(slot, respawn_pos.x >= 0.0f ? -1.0f : 1.0f);
     Player_SetHPByIndex(slot, subchar, match_info->FighterMatchInfo[slot].x6);
     Player_80032070(slot, subchar);
     if (subchar != 1) {
         ifStatus_802F6508(slot);
-        temp_r4 = (struct fn_8016719C_xC_bits*)
-            &match_info->FighterMatchInfo[slot].xC;
+        temp_r4 =
+            (struct fn_8016719C_xC_bits*) &match_info->FighterMatchInfo[slot]
+                .xC;
         if (temp_r4->b0) {
             temp_r4->b0 = true;
             Camera_800310E8();
@@ -4019,7 +4023,8 @@ void gm_80168710(MatchEnd* arg0, VsModeData* arg1)
     count = 0;
     for (j = 0; j < 4; j++) {
         if (arg0->player_standings[j].slot_type == 0 &&
-            (s32) arg0->player_standings[j].is_big_loser == best) {
+            (s32) arg0->player_standings[j].is_big_loser == best)
+        {
             buf[count++] = j;
         }
     }
@@ -4544,9 +4549,7 @@ s32 fn_801695BC(u8 arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
             }
         }
         for (i = 1; (s8) arg4[i] != -2; i++) {
-            if ((s8) arg0 == (s8) arg3[i] &&
-                (s8) arg0 == (s8) arg3[i - 1])
-            {
+            if ((s8) arg0 == (s8) arg3[i] && (s8) arg0 == (s8) arg3[i - 1]) {
                 if (HSD_Randi(2) != 0) {
                     tmp = arg4[i];
                     arg4[i] = arg4[i - 1];
@@ -4710,7 +4713,8 @@ long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
             while ((s8) (base + i)[0x1C0] == -1) {
                 i = (i + 1) % 27;
             }
-            result = Player_800325C8((CharacterKind) (s8) (base + i)[0x1C0], 0);
+            result =
+                Player_800325C8((CharacterKind) (s8) (base + i)[0x1C0], 0);
             *dst = result;
             i += 1;
             src += 1;
@@ -5035,7 +5039,7 @@ s32 gm_8016A22C(s8 k0, s8 k1, s8 k2, u8 a3, u8 a4, int a5, int mode, int a7,
     case 0:
         for (i = 0; i < 3; i++) {
             fn_801695BC_noinline(kinds[i], p87, p8b, (u8*) gp->xA2,
-                        (u8*) gp->x20);
+                                 (u8*) gp->x20);
         }
         break;
 
@@ -5215,7 +5219,7 @@ void fn_8016A4C8(void)
                     (u8) gp->xE != 0)
                 {
                     Player_SetUnk4D(spawn_slot,
-                                     (s32) (s8) (u8) gp->x124[gp->x7]);
+                                    (s32) (s8) (u8) gp->x124[gp->x7]);
                     Player_SetFlagsAEBit1(spawn_slot, 1U);
                 }
                 if (*gm_8016A404_event_player_init_cb(gp) != NULL) {

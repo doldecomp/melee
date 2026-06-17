@@ -117,7 +117,6 @@ void lbArq_80014BD0(u32 source, void* dest, size_t length,
     OSRestoreInterrupts(intr);
 }
 
-
 void lbArq_80014D2C(void)
 {
     lbArqGlobal* global = &lbArq_804316C0;

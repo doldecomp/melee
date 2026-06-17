@@ -805,17 +805,17 @@ HSD_GObj* mnItemSw_802351A0(s32 arg0)
                     HSD_JObjGetTranslationY(user_data->jobjs[4]);
 
         if (cursor < 0x10) {
-            HSD_JObjSetTranslateX(cjobj,
-                                  HSD_JObjGetTranslationX(user_data->jobjs[4]));
-            HSD_JObjSetTranslateY(cjobj,
-                                  y_spacing * (f32) cursor +
-                                      HSD_JObjGetTranslationY(user_data->jobjs[4]));
+            HSD_JObjSetTranslateX(
+                cjobj, HSD_JObjGetTranslationX(user_data->jobjs[4]));
+            HSD_JObjSetTranslateY(
+                cjobj, y_spacing * (f32) cursor +
+                           HSD_JObjGetTranslationY(user_data->jobjs[4]));
         } else {
-            HSD_JObjSetTranslateX(cjobj,
-                                  HSD_JObjGetTranslationX(user_data->jobjs[6]));
-            HSD_JObjSetTranslateY(cjobj,
-                                  y_spacing * (f32) (cursor - 0x10) +
-                                      HSD_JObjGetTranslationY(user_data->jobjs[4]));
+            HSD_JObjSetTranslateX(
+                cjobj, HSD_JObjGetTranslationX(user_data->jobjs[6]));
+            HSD_JObjSetTranslateY(
+                cjobj, y_spacing * (f32) (cursor - 0x10) +
+                           HSD_JObjGetTranslationY(user_data->jobjs[4]));
         }
     }
 

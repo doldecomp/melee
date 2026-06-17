@@ -282,7 +282,8 @@ void fn_80247510(HSD_GObj* gobj)
     }
 
     // Check animation timer
-    if (data->x0[0] <= ((AnimLoopSettings*) &mnVibration_803EECE0)->end_frame) {
+    if (data->x0[0] <= ((AnimLoopSettings*) &mnVibration_803EECE0)->end_frame)
+    {
         data->x0[0]++;
         return;
     }
@@ -463,7 +464,8 @@ void fn_80247510(HSD_GObj* gobj)
     }
 
     // Handle down navigation
-    else if (inputs_repeat & PAD_ANY_DOWN) {
+    else if (inputs_repeat & PAD_ANY_DOWN)
+    {
         cursor_row = data->x0[1];
         if (cursor_row < 7) {
             name_idx_tmp = cursor_row + 1;
@@ -855,8 +857,8 @@ void fn_80248A78(HSD_GObj* arg0)
     data = arg0->user_data;
     {
         HSD_JObj* temp_jobj = data->jobjs[1];
-        frame = mn_8022ED6C(temp_jobj,
-                            (AnimLoopSettings*) &mnVibration_803EECE0);
+        frame =
+            mn_8022ED6C(temp_jobj, (AnimLoopSettings*) &mnVibration_803EECE0);
     }
     if (frame == 10.0f) {
         jobj = ((MnVibrationData*) arg0->user_data)->jobjs[23];

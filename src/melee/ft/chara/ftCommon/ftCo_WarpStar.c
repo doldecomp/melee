@@ -187,9 +187,8 @@ void ftCo_800C4C60(Fighter_GObj* gobj)
     fp->self_vel.y *= p_ftCommonData->x438;
     fp->self_vel.z = 0;
     {
-        float h_init_v =
-            -fp->facing_dir * p_ftCommonData->x78 *
-            fp->co_attrs.jump_h_initial_velocity;
+        float h_init_v = -fp->facing_dir * p_ftCommonData->x78 *
+                         fp->co_attrs.jump_h_initial_velocity;
         float h_vel = fp->mv.co.jump.jump_mul * h_init_v;
         float h_max_vel;
         float v_init_v =

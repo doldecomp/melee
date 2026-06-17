@@ -208,18 +208,21 @@ void hsd_803B3408(u8* arg0, s32 arg1, s32 arg2, s32 arg3, s32 unused_arg4)
     var_r12 = 0;
     for (var_r28 = 0; var_r28 < 2; var_r28++) {
         var_r8 = var_r11;
-        var_r24 = arg0 +
-                  ((((arg1 / 4) * 0x10) + ((arg2 / 4) * temp_r31) + var_r10) * 2);
+        var_r24 =
+            arg0 +
+            ((((arg1 / 4) * 0x10) + ((arg2 / 4) * temp_r31) + var_r10) * 2);
         var_r9 = 0;
         for (var_r27 = 0; var_r27 < 2; var_r27++) {
             for (var_r7 = 0; var_r7 < 4; var_r7++) {
                 var_r6 = 0;
                 for (var_ctr = 4; var_ctr != 0; var_ctr--) {
                     temp_r22 = (var_r6 & 2) * 4;
-                    temp_r5 = (u16*) (var_r24 +
-                                       ((((var_r6 & 1) * 2) +
-                                         (temp_r22 + (((var_r7 & 1) * 0x20) +
-                                                      ((var_r7 & 2) * temp_r31)))) * 2));
+                    temp_r5 =
+                        (u16*) (var_r24 +
+                                ((((var_r6 & 1) * 2) +
+                                  (temp_r22 + (((var_r7 & 1) * 0x20) +
+                                               ((var_r7 & 2) * temp_r31)))) *
+                                 2));
                     temp_r30 = *temp_r5;
                     temp_r22_2 = (temp_r30 >> 8U) & 0xF8;
                     {
@@ -253,18 +256,20 @@ void hsd_803B3408(u8* arg0, s32 arg1, s32 arg2, s32 arg3, s32 unused_arg4)
                     var_r5 =
                         HSD_804D2648_BUF + ((var_r9 + var_r6_2) * 4) + 0x118;
                     for (var_ctr_2 = 2; var_ctr_2 != 0; var_ctr_2--) {
-                        temp_r22_4 = M2C_FIELD(
-                            var_r24, u16*,
-                            (((var_r26 << 5) & 0x20) +
-                             ((var_r26 & 2) * temp_r31)) * 2);
+                        temp_r22_4 = M2C_FIELD(var_r24, u16*,
+                                               (((var_r26 << 5) & 0x20) +
+                                                ((var_r26 & 2) * temp_r31)) *
+                                                   2);
                         temp_r26 = var_r26 + 1;
                         temp_f5 = (f32) ((temp_r22_4 >> 8U) & 0xF8);
                         {
-                            f32 temp_f3_3 = 0.587f * (f32) ((temp_r22_4 >> 3U) & 0xFC);
+                            f32 temp_f3_3 =
+                                0.587f * (f32) ((temp_r22_4 >> 3U) & 0xFC);
                             temp_f3_2 = temp_f3_3;
                         }
                         temp_r22_5 = (((temp_r26 << 5) & 0x20) +
-                                      ((temp_r26 & 2) * temp_r31)) * 2;
+                                      ((temp_r26 & 2) * temp_r31)) *
+                                     2;
                         temp_f7 = (f32) ((temp_r22_4 * 8) & 0xF8);
                         var_r26 = temp_r26 + 1;
                         M2C_FIELD(var_r5, s32*, 0) =
@@ -385,8 +390,8 @@ static void fn_803B376C(u8* arg0)
         var_r4[4] = (s32) (0.707107 * (f64) (temp_f6 - temp_f30));
         var_r4[6] = (s32) ((-0.92388 * (f64) temp_f27_2) +
                            (0.382683 * (f64) temp_f26));
-        var_r4[2] = (s32) ((0.382683 * (f64) temp_f27_2) +
-                           (0.92388 * (f64) temp_f26));
+        var_r4[2] =
+            (s32) ((0.382683 * (f64) temp_f27_2) + (0.92388 * (f64) temp_f26));
         temp_f11_3 = (f32) (0.707107 * (f64) (temp_f8 + temp_f11_2));
         temp_f8_2 = (f32) (0.707107 * (f64) (temp_f8 - temp_f11_2));
         temp_f30_2 = temp_f11_3 + temp_f28_2;
@@ -439,8 +444,7 @@ static void fn_803B376C(u8* arg0)
         temp_f28_7 = temp_f28_6 + temp_f8_4;
         {
             f64 temp_f30_5 = 0.19509 * (f64) temp_f30_4;
-            var_r4_2[56] = (s32) ((0.980785 * (f64) temp_f27_6) +
-                                  temp_f30_5);
+            var_r4_2[56] = (s32) ((0.980785 * (f64) temp_f27_6) + temp_f30_5);
         }
         var_r4_2[40] = (s32) ((0.83147 * (f64) temp_f28_7) +
                               (0.55557 * (f64) temp_f29_3));
@@ -622,8 +626,7 @@ void hsd_803B3CD8(s32 arg0)
     }
     var_r31 = 0;
 loop_13:
-    M2C_FIELD(temp_r8, s32*, 0) =
-        (s32) M2C_FIELD((u8*) jmp_buf, s32*, 0x718);
+    M2C_FIELD(temp_r8, s32*, 0) = (s32) M2C_FIELD((u8*) jmp_buf, s32*, 0x718);
     temp_r28 = var_r6[var_r31];
     var_r29 = var_r7[var_r31] - 1;
     for (; var_r29 >= 0; var_r29--) {

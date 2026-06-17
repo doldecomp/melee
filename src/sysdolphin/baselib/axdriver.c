@@ -1039,7 +1039,8 @@ s32 HSD_AudioGetAuxHeapSize(AXDriverAuxType type, void* param)
             }
             result += (tmp.v[k + 5] + 2) * 4;
             result += ((s32) (32000.0F *
-                              ((struct AXFX_REVERBHI*) param)->preDelay)) * 4;
+                              ((struct AXFX_REVERBHI*) param)->preDelay)) *
+                      4;
         }
         break;
     }
@@ -1053,7 +1054,8 @@ s32 HSD_AudioGetAuxHeapSize(AXDriverAuxType type, void* param)
                 result += (AXDriver_803B9618[i + 2] + 2) * 4;
             }
             result += ((s32) (32000.0F *
-                              ((struct AXFX_REVERBSTD*) param)->preDelay)) * 4;
+                              ((struct AXFX_REVERBSTD*) param)->preDelay)) *
+                      4;
         }
         break;
 

@@ -4,8 +4,6 @@
 
 #include <platform.h>
 
-#include <math.h>
-
 #include "cm/camera.h"
 #include "ef/efsync.h"
 #include "ft/ftdevice.h"
@@ -22,7 +20,9 @@
 #include "lb/lb_00F9.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
+#include "MSL/math_ppc.h"
 
+#include <math.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -30,7 +30,6 @@
 #include <baselib/jobj.h>
 #include <baselib/psstructs.h>
 #include <baselib/random.h>
-#include "MSL/math_ppc.h"
 
 static struct {
     int x0;
@@ -250,12 +249,12 @@ void grKinokoRoute_802078F0(Ground_GObj* gobj)
 
     for (i = 0; i < 4; i++) {
         if (gp->gv.kinokoroute.entries[i].jobj != NULL) {
-            HSD_JObjSetTranslateX(gp->gv.kinokoroute.entries[i].jobj,
-                                  scale * (gp->gv.kinokoroute.entries[i].pos.x +
-                                           pos.x));
-            HSD_JObjSetTranslateY(gp->gv.kinokoroute.entries[i].jobj,
-                                  scale * (gp->gv.kinokoroute.entries[i].pos.y +
-                                           pos.y));
+            HSD_JObjSetTranslateX(
+                gp->gv.kinokoroute.entries[i].jobj,
+                scale * (gp->gv.kinokoroute.entries[i].pos.x + pos.x));
+            HSD_JObjSetTranslateY(
+                gp->gv.kinokoroute.entries[i].jobj,
+                scale * (gp->gv.kinokoroute.entries[i].pos.y + pos.y));
         }
     }
 }
@@ -393,7 +392,7 @@ void grKinokoRoute_80207C88(Ground_GObj* gobj)
                 {
                     u8 route_id = 0xB3;
                     gm_801674C4(0x11, 0xA, 3, route_id,
-                                 grKinokoRoute_80208480);
+                                grKinokoRoute_80208480);
                 }
                 gp->gv.kinokoroute2.zone_idx = 2;
                 ground_gobj = Ground_801C2BA4(0);

@@ -463,9 +463,9 @@ static inline f32 perm_vel_inline(Fighter* fp)
     return fp->gr_vel;
 }
 
-static inline void ftYs_SpecialS_UpdateLoop1Rotation(Fighter* fp,
-                                                     ftYoshiAttributes* attributes,
-                                                     f32* angle)
+static inline void
+ftYs_SpecialS_UpdateLoop1Rotation(Fighter* fp, ftYoshiAttributes* attributes,
+                                  f32* angle)
 {
     {
         f32 x10 = fp->mv.ys.specials.x10;
@@ -1239,9 +1239,8 @@ void ftYs_SpecialAirSLoop_2_Coll(Fighter_GObj* gobj)
             angle = atan2f(-fp->coll_data.left_facing_wall.normal.x,
                            fp->coll_data.left_facing_wall.normal.y);
             pos.x += ABS(fp2->coll_data.ecb.right.x);
-            pos.y +=
-                0.5F * ABS(fp2->coll_data.ecb.top.y +
-                            fp2->coll_data.ecb.bottom.y);
+            pos.y += 0.5F * ABS(fp2->coll_data.ecb.top.y +
+                                fp2->coll_data.ecb.bottom.y);
             efSync_Spawn(0x406, gobj, &pos, &angle);
             Camera_80030E44(3, &pos);
             ftCommon_8007EBAC(fp2, 0xC, 0xA);
@@ -1253,9 +1252,8 @@ void ftYs_SpecialAirSLoop_2_Coll(Fighter_GObj* gobj)
             angle2 = atan2f(-fp->coll_data.right_facing_wall.normal.x,
                             fp->coll_data.right_facing_wall.normal.y);
             pos2.x -= ABS(fp2->coll_data.ecb.left.x);
-            pos2.y +=
-                0.5F * ABS(fp2->coll_data.ecb.top.y +
-                            fp2->coll_data.ecb.bottom.y);
+            pos2.y += 0.5F * ABS(fp2->coll_data.ecb.top.y +
+                                 fp2->coll_data.ecb.bottom.y);
             efSync_Spawn(0x406, gobj, &pos2, &angle2);
             Camera_80030E44(3, &pos2);
             ftCommon_8007EBAC(fp2, 0xC, 0xA);

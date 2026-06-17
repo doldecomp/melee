@@ -60,7 +60,6 @@ Vi1201v1Data un_80400258 = {
     { 0.0f, 0.0f, 0.0f },
 };
 
-
 void un_8031F980(int arg0, int arg1)
 {
     M2C_FIELD(&un_804D7004, u8*, 0) = arg0;

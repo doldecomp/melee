@@ -235,7 +235,8 @@ HSD_JObj* it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
 
             mpColl_80041EE4(first_coll);
             first_coll->x34_flags.b1234 = 5;
-            mpColl_SetECBSource_Fixed(first_coll, NULL, arg8, arg8, arg8, arg8);
+            mpColl_SetECBSource_Fixed(first_coll, NULL, arg8, arg8, arg8,
+                                      arg8);
             HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849,
                                     it_link_get_joint(arg0, link_idx));
             GObj_SetupGXLink(link_gobj, it_802A24A0, 6U, 0U);
@@ -460,7 +461,7 @@ static void inline it_802A2EE4_inline_alt(ItemLink* item_link, Vec3* pos)
 }
 
 static void inline it_802A2EE4_inline_alt_mtx_first(ItemLink* item_link,
-                                                     Vec3* pos)
+                                                    Vec3* pos)
 {
     Mtx m;
     f32 zero = 0.0F;

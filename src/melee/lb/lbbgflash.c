@@ -258,8 +258,8 @@ void fn_8001FEC4(HSD_GObj* gobj, s32 code)
             s32* pY;
             s32 y2;
 
-            for (pY = &data->x38, y2 = data->x38; y2 <= 0x1E0;
-                 y2 += data->x32) {
+            for (pY = &data->x38, y2 = data->x38; y2 <= 0x1E0; y2 += data->x32)
+            {
                 if (y2 == *pY) {
                     s32 x34;
                     u8 strip_h;
@@ -340,8 +340,7 @@ case_0_1_2:
 
 case_3_4:
     switch ((s32) data->x30) {
-    case 0:
-    {
+    case 0: {
         s32* pX;
         s32* pY;
         s32 i;
@@ -789,16 +788,15 @@ void lbBgFlash_80021410(void* arg0)
         dot = -((nz * data->pos1.z) +
                 ((nx * data->pos1.x) + (ny * data->pos1.y)));
 
-        d = -(dot + ((data->pos4.z * nz) +
-                     ((x * nx) + (data->pos4.y * ny))));
+        d = -(dot + ((data->pos4.z * nz) + ((x * nx) + (data->pos4.y * ny))));
         data->pos4.x = (d * nx) + x;
         data->pos4.y = (d * ny) + data->pos4.y;
         data->pos4.z = (d * nz) + data->pos4.z;
 
         {
             f32 x = data->pos0.x;
-            d = -(dot + ((data->pos0.z * nz) +
-                         ((x * nx) + (data->pos0.y * ny))));
+            d = -(dot +
+                  ((data->pos0.z * nz) + ((x * nx) + (data->pos0.y * ny))));
             data->pos0.x = (d * nx) + x;
         }
         data->pos0.y = (d * ny) + data->pos0.y;
@@ -806,8 +804,8 @@ void lbBgFlash_80021410(void* arg0)
 
         {
             f32 x = data->pos1.x;
-            d = -(dot + ((data->pos1.z * nz) +
-                         ((x * nx) + (data->pos1.y * ny))));
+            d = -(dot +
+                  ((data->pos1.z * nz) + ((x * nx) + (data->pos1.y * ny))));
             data->pos1.x = (d * nx) + x;
         }
         data->pos1.y = (d * ny) + data->pos1.y;
@@ -905,8 +903,8 @@ void lbBgFlash_80021410(void* arg0)
     len_pow = len_ab * len_pow;
     len_pow = len_ab * len_pow;
     if (len_ab > sum_len) {
-        len_ab = ((11.0f * sum_len) / 10.0f) +
-                 (-(sum_pow) / (10.0f * len_pow));
+        len_ab =
+            ((11.0f * sum_len) / 10.0f) + (-(sum_pow) / (10.0f * len_pow));
     }
 
     a2 = len_bc * len_bc;
@@ -933,10 +931,10 @@ void lbBgFlash_80021410(void* arg0)
     acos2 = acosf(cos2);
     rem = 3.141592653589793 - (f64) acos2;
     if (rem < 0.1745329201221466) {
-        acos2 = (f32) (2.9670597334676465 +
-                       (f64) (f32) ((f64) (f32) (fabs(rem) /
-                                                 0.1745329201221466) *
-                                    ((f64) acos2 - 2.9670597334676465)));
+        acos2 =
+            (f32) (2.9670597334676465 +
+                   (f64) (f32) ((f64) (f32) (fabs(rem) / 0.1745329201221466) *
+                                ((f64) acos2 - 2.9670597334676465)));
     }
 
     acos1 -= angle1;

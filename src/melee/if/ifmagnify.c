@@ -269,163 +269,165 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
     }
     if (should_display) {
         cobj = arg0->hsd_obj;
-    HSD_CObjGetOrtho(cobj, &top, &bottom, &left, &right);
-    if (HSD_CObjSetCurrent(cobj) != 0) {
-        HSD_GObj_80390ED0(arg0, 7);
-        HSD_CObjEndCurrent();
-    }
-
-    for (i = 0; i < 6; i++) {
-        player = &magnify->player[i];
-        fighter_gobj = Player_GetEntity(i);
-        if (player->state.ignore_offscreen || fighter_gobj == NULL ||
-            !ftLib_80086B64(fighter_gobj) || !ftLib_80086ED0(fighter_gobj))
-        {
-            continue;
+        HSD_CObjGetOrtho(cobj, &top, &bottom, &left, &right);
+        if (HSD_CObjSetCurrent(cobj) != 0) {
+            HSD_GObj_80390ED0(arg0, 7);
+            HSD_CObjEndCurrent();
         }
 
-        scale = 0.125f * ftLib_80086B80(fighter_gobj);
-        HSD_CObjSetOrtho(cobj, top * scale, bottom * scale, left * scale,
-                         right * scale);
-        ftLib_80086B90(fighter_gobj, &interest_pos);
-        HSD_CObjSetInterest(cobj, &interest_pos);
-        interest_pos.z = 300.0f;
-        HSD_CObjSetEyePosition(cobj, &interest_pos);
-        if (HSD_CObjSetCurrent(cobj) == 0) {
-            continue;
-        }
-
-        Player_80036978(i, (s32) &world_pos);
-        is_outside = true;
-        if (!(world_pos.x < Stage_GetCamBoundsLeftOffset()) &&
-            !(world_pos.x > Stage_GetCamBoundsRightOffset()))
-        {
-            is_outside = false;
-        }
-        if (is_outside) {
-            x_blend = 0.0f;
-        } else {
-            if (world_pos.x < Stage_GetCamBoundsLeftOffset()) {
-                x_class = 0.0f;
-            } else if (world_pos.x > Stage_GetCamBoundsRightOffset()) {
-                x_class = 3.0f;
-            } else if (world_pos.x <
-                       (0.5f * (Stage_GetCamBoundsLeftOffset() +
-                                Stage_GetCamBoundsRightOffset())))
+        for (i = 0; i < 6; i++) {
+            player = &magnify->player[i];
+            fighter_gobj = Player_GetEntity(i);
+            if (player->state.ignore_offscreen || fighter_gobj == NULL ||
+                !ftLib_80086B64(fighter_gobj) || !ftLib_80086ED0(fighter_gobj))
             {
-                x_class = 1.0f;
-            } else {
-                x_class = 2.0f;
+                continue;
             }
-            if (((s32) x_class - 1) == 0) {
-                x_blend =
-                    1.0f - ((world_pos.x - Stage_GetCamBoundsLeftOffset()) /
-                            ((0.5f * (Stage_GetCamBoundsLeftOffset() +
-                                      Stage_GetCamBoundsRightOffset())) -
-                             Stage_GetCamBoundsLeftOffset()));
-            } else {
-                x_blend =
-                    1.0f - ((world_pos.x -
-                             (0.5f * (Stage_GetCamBoundsLeftOffset() +
-                                      Stage_GetCamBoundsRightOffset()))) /
-                            (Stage_GetCamBoundsRightOffset() -
-                             (0.5f * (Stage_GetCamBoundsLeftOffset() +
-                                      Stage_GetCamBoundsRightOffset()))));
-            }
-        }
-        x_inv = 1.0f - x_blend;
-        is_outside = true;
-        if (!(world_pos.y > Stage_GetCamBoundsTopOffset()) &&
-            !(world_pos.y < Stage_GetCamBoundsBottomOffset()))
-        {
-            is_outside = false;
-        }
-        if (is_outside) {
-            y_blend = 0.0f;
-        } else {
-            if (world_pos.y > Stage_GetCamBoundsTopOffset()) {
-                y_class = 0.0f;
-            } else if (world_pos.y < Stage_GetCamBoundsBottomOffset()) {
-                y_class = 3.0f;
-            } else if (world_pos.y >
-                       (0.5f * (Stage_GetCamBoundsTopOffset() +
-                                Stage_GetCamBoundsBottomOffset())))
-            {
-                y_class = 1.0f;
-            } else {
-                y_class = 2.0f;
-            }
-            if (((s32) y_class - 1) == 0) {
-                y_blend =
-                    1.0f - ((Stage_GetCamBoundsTopOffset() - world_pos.y) /
-                            -((0.5f * (Stage_GetCamBoundsTopOffset() +
-                                       Stage_GetCamBoundsBottomOffset())) -
-                              Stage_GetCamBoundsTopOffset()));
-            } else {
-                y_blend =
-                    1.0f - (((0.5f * (Stage_GetCamBoundsTopOffset() +
-                                      Stage_GetCamBoundsBottomOffset())) -
-                             world_pos.y) /
-                            ((0.5f * (Stage_GetCamBoundsTopOffset() +
-                                      Stage_GetCamBoundsBottomOffset())) -
-                             Stage_GetCamBoundsBottomOffset()));
-            }
-        }
-        y_inv = 1.0f - y_blend;
-        for (j = 0; j < 4; j++) {
-            if (world_pos.y > Stage_GetCamBoundsTopOffset()) {
-                y_class = 0.0f;
-            } else if (world_pos.y < Stage_GetCamBoundsBottomOffset()) {
-                y_class = 3.0f;
-            } else if (world_pos.y > (0.5f * (Stage_GetCamBoundsTopOffset() +
-                                              Stage_GetCamBoundsBottomOffset())))
-            {
-                y_class = 1.0f;
-            } else {
-                y_class = 2.0f;
-            }
-            if (world_pos.x < Stage_GetCamBoundsLeftOffset()) {
-                x_class = 0.0f;
-            } else if (world_pos.x > Stage_GetCamBoundsRightOffset()) {
-                x_class = 3.0f;
-            } else if (world_pos.x < (0.5f * (Stage_GetCamBoundsLeftOffset() +
-                                              Stage_GetCamBoundsRightOffset())))
-            {
-                x_class = 1.0f;
-            } else {
-                x_class = 2.0f;
-            }
-            color_ids = (u8*) &ifMagnify_803F984C[(s32) x_class +
-                                                  ((s32) y_class * 4)];
-            colors[j] = *ifMagnify_803F9828[color_ids[j]]();
-        }
 
-        y_blend = 1.0f - y_inv;
-        x_blend = 1.0f - x_inv;
-        mix0 = x_inv * y_blend;
-        mix1 = x_blend * y_blend;
-        mix2 = x_blend * y_inv;
-        mix3 = x_inv * y_inv;
-        result.r = (u8) ((colors[3].r * mix3) + (colors[2].r * mix2) +
-                         (colors[0].r * mix1) + (colors[1].r * mix0));
-        result.g = (u8) ((colors[3].g * mix3) + (colors[2].g * mix2) +
-                         (colors[0].g * mix1) + (colors[1].g * mix0));
-        result.b = (u8) ((colors[3].b * mix3) + (colors[2].b * mix2) +
-                         (colors[0].b * mix1) + (colors[1].b * mix0));
-        result.a = (u8) ((colors[3].a * mix3) + (colors[2].a * mix2) +
-                         (colors[0].a * mix1) + (colors[1].a * mix0));
+            scale = 0.125f * ftLib_80086B80(fighter_gobj);
+            HSD_CObjSetOrtho(cobj, top * scale, bottom * scale, left * scale,
+                             right * scale);
+            ftLib_80086B90(fighter_gobj, &interest_pos);
+            HSD_CObjSetInterest(cobj, &interest_pos);
+            interest_pos.z = 300.0f;
+            HSD_CObjSetEyePosition(cobj, &interest_pos);
+            if (HSD_CObjSetCurrent(cobj) == 0) {
+                continue;
+            }
 
-        HSD_SetEraseColor(result.r, result.g, result.b, result.a);
-        HSD_CObjEraseScreen(cobj, 1, 0, 1);
-        HSD_GObj_804D7814 = fighter_gobj;
-        ftDrawCommon_80080C28(fighter_gobj, 0);
-        ftDrawCommon_80080C28(fighter_gobj, 1);
-        ftDrawCommon_80080C28(fighter_gobj, 2);
-        HSD_GObj_804D7814 = NULL;
-        lb_800122C8(player->idesc, 0, 0, true);
-        HSD_CObjEndCurrent();
-        player->state.is_offscreen = 1;
-    }
+            Player_80036978(i, (s32) &world_pos);
+            is_outside = true;
+            if (!(world_pos.x < Stage_GetCamBoundsLeftOffset()) &&
+                !(world_pos.x > Stage_GetCamBoundsRightOffset()))
+            {
+                is_outside = false;
+            }
+            if (is_outside) {
+                x_blend = 0.0f;
+            } else {
+                if (world_pos.x < Stage_GetCamBoundsLeftOffset()) {
+                    x_class = 0.0f;
+                } else if (world_pos.x > Stage_GetCamBoundsRightOffset()) {
+                    x_class = 3.0f;
+                } else if (world_pos.x <
+                           (0.5f * (Stage_GetCamBoundsLeftOffset() +
+                                    Stage_GetCamBoundsRightOffset())))
+                {
+                    x_class = 1.0f;
+                } else {
+                    x_class = 2.0f;
+                }
+                if (((s32) x_class - 1) == 0) {
+                    x_blend = 1.0f -
+                              ((world_pos.x - Stage_GetCamBoundsLeftOffset()) /
+                               ((0.5f * (Stage_GetCamBoundsLeftOffset() +
+                                         Stage_GetCamBoundsRightOffset())) -
+                                Stage_GetCamBoundsLeftOffset()));
+                } else {
+                    x_blend =
+                        1.0f - ((world_pos.x -
+                                 (0.5f * (Stage_GetCamBoundsLeftOffset() +
+                                          Stage_GetCamBoundsRightOffset()))) /
+                                (Stage_GetCamBoundsRightOffset() -
+                                 (0.5f * (Stage_GetCamBoundsLeftOffset() +
+                                          Stage_GetCamBoundsRightOffset()))));
+                }
+            }
+            x_inv = 1.0f - x_blend;
+            is_outside = true;
+            if (!(world_pos.y > Stage_GetCamBoundsTopOffset()) &&
+                !(world_pos.y < Stage_GetCamBoundsBottomOffset()))
+            {
+                is_outside = false;
+            }
+            if (is_outside) {
+                y_blend = 0.0f;
+            } else {
+                if (world_pos.y > Stage_GetCamBoundsTopOffset()) {
+                    y_class = 0.0f;
+                } else if (world_pos.y < Stage_GetCamBoundsBottomOffset()) {
+                    y_class = 3.0f;
+                } else if (world_pos.y >
+                           (0.5f * (Stage_GetCamBoundsTopOffset() +
+                                    Stage_GetCamBoundsBottomOffset())))
+                {
+                    y_class = 1.0f;
+                } else {
+                    y_class = 2.0f;
+                }
+                if (((s32) y_class - 1) == 0) {
+                    y_blend =
+                        1.0f - ((Stage_GetCamBoundsTopOffset() - world_pos.y) /
+                                -((0.5f * (Stage_GetCamBoundsTopOffset() +
+                                           Stage_GetCamBoundsBottomOffset())) -
+                                  Stage_GetCamBoundsTopOffset()));
+                } else {
+                    y_blend =
+                        1.0f - (((0.5f * (Stage_GetCamBoundsTopOffset() +
+                                          Stage_GetCamBoundsBottomOffset())) -
+                                 world_pos.y) /
+                                ((0.5f * (Stage_GetCamBoundsTopOffset() +
+                                          Stage_GetCamBoundsBottomOffset())) -
+                                 Stage_GetCamBoundsBottomOffset()));
+                }
+            }
+            y_inv = 1.0f - y_blend;
+            for (j = 0; j < 4; j++) {
+                if (world_pos.y > Stage_GetCamBoundsTopOffset()) {
+                    y_class = 0.0f;
+                } else if (world_pos.y < Stage_GetCamBoundsBottomOffset()) {
+                    y_class = 3.0f;
+                } else if (world_pos.y >
+                           (0.5f * (Stage_GetCamBoundsTopOffset() +
+                                    Stage_GetCamBoundsBottomOffset())))
+                {
+                    y_class = 1.0f;
+                } else {
+                    y_class = 2.0f;
+                }
+                if (world_pos.x < Stage_GetCamBoundsLeftOffset()) {
+                    x_class = 0.0f;
+                } else if (world_pos.x > Stage_GetCamBoundsRightOffset()) {
+                    x_class = 3.0f;
+                } else if (world_pos.x <
+                           (0.5f * (Stage_GetCamBoundsLeftOffset() +
+                                    Stage_GetCamBoundsRightOffset())))
+                {
+                    x_class = 1.0f;
+                } else {
+                    x_class = 2.0f;
+                }
+                color_ids = (u8*) &ifMagnify_803F984C[(s32) x_class +
+                                                      ((s32) y_class * 4)];
+                colors[j] = *ifMagnify_803F9828[color_ids[j]]();
+            }
+
+            y_blend = 1.0f - y_inv;
+            x_blend = 1.0f - x_inv;
+            mix0 = x_inv * y_blend;
+            mix1 = x_blend * y_blend;
+            mix2 = x_blend * y_inv;
+            mix3 = x_inv * y_inv;
+            result.r = (u8) ((colors[3].r * mix3) + (colors[2].r * mix2) +
+                             (colors[0].r * mix1) + (colors[1].r * mix0));
+            result.g = (u8) ((colors[3].g * mix3) + (colors[2].g * mix2) +
+                             (colors[0].g * mix1) + (colors[1].g * mix0));
+            result.b = (u8) ((colors[3].b * mix3) + (colors[2].b * mix2) +
+                             (colors[0].b * mix1) + (colors[1].b * mix0));
+            result.a = (u8) ((colors[3].a * mix3) + (colors[2].a * mix2) +
+                             (colors[0].a * mix1) + (colors[1].a * mix0));
+
+            HSD_SetEraseColor(result.r, result.g, result.b, result.a);
+            HSD_CObjEraseScreen(cobj, 1, 0, 1);
+            HSD_GObj_804D7814 = fighter_gobj;
+            ftDrawCommon_80080C28(fighter_gobj, 0);
+            ftDrawCommon_80080C28(fighter_gobj, 1);
+            ftDrawCommon_80080C28(fighter_gobj, 2);
+            HSD_GObj_804D7814 = NULL;
+            lb_800122C8(player->idesc, 0, 0, true);
+            HSD_CObjEndCurrent();
+            player->state.is_offscreen = 1;
+        }
 
         HSD_CObjSetOrtho(cobj, top, bottom, left, right);
     }

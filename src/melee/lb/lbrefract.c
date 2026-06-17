@@ -168,10 +168,10 @@ void lbRefract_80021CE8(void* arg0, s32 arg1)
             if (param0 > 1.0f) {
                 param0 = 1.0f;
             }
-            ((void (*)(lbRefract_CallbackData*, s32, s32, s32, s32, u32, u32))
-                 cb->callback0)(cb, row, col, 0, 0,
-                                (u32) (127.0f * (y * param0) + 128.0f),
-                                (u32) (127.0f * (x * param0) + 128.0f));
+            ((void (*)(lbRefract_CallbackData*, s32, s32, s32, s32, u32,
+                       u32)) cb->callback0)(
+                cb, row, col, 0, 0, (u32) (127.0f * (y * param0) + 128.0f),
+                (u32) (127.0f * (x * param0) + 128.0f));
             x += x_step;
         }
         y += y_step;

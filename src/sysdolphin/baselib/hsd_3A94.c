@@ -4,8 +4,8 @@
 #include "hsd_3B2B.h"
 #include "hsd_3B2E.h"
 
-#include <dolphin/card.h>
 #include <string.h>
+#include <dolphin/card.h>
 
 extern volatile s32 hsd_804D7980;
 extern s32 hsd_804D7988;
@@ -26,7 +26,7 @@ typedef struct CardBlock {
     /* 0x20 */ u8 x20[1];
 } CardBlock;
 
-#define CMD_S32(off)                                                            \
+#define CMD_S32(off)                                                          \
     (((CardBufEntry*) (hsd_804D1138 + (off)))[hsd_804D7980].x0)
 #define CMD_STATE ((CardState*) CMD_S32(0x14))
 #define CMD_PTR(off) ((void*) CMD_S32(off))
@@ -109,7 +109,8 @@ void hsd_803A949C(s32 chan, s32 arg1)
                     break;
                 }
                 if (CMD_PTR(0x28) != NULL) {
-                    memcpy((void*) CMD_S32(0x28), state->x0 + offset + 0x20, CMD_S32(0x30));
+                    memcpy((void*) CMD_S32(0x28), state->x0 + offset + 0x20,
+                           CMD_S32(0x30));
                 }
             }
             result = hsd_803A949C_Close(state);
@@ -227,8 +228,8 @@ void hsd_803A949C(s32 chan, s32 arg1)
                 hsd_804D7988 = 2;
                 break;
             }
-            if (icon_size > 0 &&
-                memcmp(state->x0 + 0x40, (void*) CMD_S32(0x1c), icon_size) != 0)
+            if (icon_size > 0 && memcmp(state->x0 + 0x40,
+                                        (void*) CMD_S32(0x1c), icon_size) != 0)
             {
                 hsd_804D7988 = 2;
                 break;
@@ -250,7 +251,9 @@ void hsd_803A949C(s32 chan, s32 arg1)
             } else {
                 hsd_803B2B20(CMD_STATE->x0, CMD_STATE->x24,
                              &CMD_STATE->digest[CMD_S32(0x18) * 0x10]);
-                if (memcmp(state->x0 + state->x24, CMD_STATE->digest, 0x30) != 0) {
+                if (memcmp(state->x0 + state->x24, CMD_STATE->digest, 0x30) !=
+                    0)
+                {
                     hsd_804D7988 = 2;
                 }
             }
@@ -273,7 +276,9 @@ void hsd_803A949C(s32 chan, s32 arg1)
             } else {
                 hsd_803B2B20(CMD_STATE->x0, remaining,
                              &CMD_STATE->digest[CMD_S32(0x18) * 0x10]);
-                if (memcmp(state->x0 + remaining, CMD_STATE->digest, 0x30) != 0) {
+                if (memcmp(state->x0 + remaining, CMD_STATE->digest, 0x30) !=
+                    0)
+                {
                     hsd_804D7988 = 2;
                 }
             }
@@ -317,7 +322,9 @@ void hsd_803A949C(s32 chan, s32 arg1)
                 }
                 hsd_803B2B20(CMD_STATE->x0, CMD_STATE->x24,
                              &CMD_STATE->digest[CMD_S32(0x18) * 0x10]);
-                if (memcmp(state->x0 + state->x24, CMD_STATE->digest, 0x30) != 0) {
+                if (memcmp(state->x0 + state->x24, CMD_STATE->digest, 0x30) !=
+                    0)
+                {
                     hsd_804D7988 = -0x107;
                 }
             }
@@ -338,7 +345,9 @@ void hsd_803A949C(s32 chan, s32 arg1)
                 }
                 hsd_803B2B20(CMD_STATE->x0, remaining,
                              &CMD_STATE->digest[CMD_S32(0x18) * 0x10]);
-                if (memcmp(state->x0 + remaining, CMD_STATE->digest, 0x30) != 0) {
+                if (memcmp(state->x0 + remaining, CMD_STATE->digest, 0x30) !=
+                    0)
+                {
                     hsd_804D7988 = -0x107;
                 }
             }

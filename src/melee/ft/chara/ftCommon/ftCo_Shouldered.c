@@ -107,8 +107,7 @@ void ftCo_Shouldered_Anim(Fighter_GObj* gobj)
         lb_8000B1CC(
             fp1->parts[(ftParts_GetBoneIndex(fp1, FtPart_TransN2))].joint,
             NULL, &pos);
-        fp1->dmg.kb_applied =
-            ftColl_80079C70(fp1, fp2, hit, hit->unk_count);
+        fp1->dmg.kb_applied = ftColl_80079C70(fp1, fp2, hit, hit->unk_count);
         fp1->dmg.x1848_kb_angle = hit->kb_angle;
         fp1->dmg.facing_dir_1 = fp1->facing_dir;
         fp1->dmg.x184c_damaged_hurtbox = 1;

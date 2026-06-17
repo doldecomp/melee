@@ -2264,8 +2264,7 @@ float ftColl_80079EA8(Fighter* fp, HitCapsule* hit, int unk_count)
               ((ftColl_804D8314 * (float) (u32) hit->x24 *
                 (ftd->x11C * ((decay - ((w * decay) / (one + w))) *
                               (x118 * ftd->x110 +
-                               ftd->x114 *
-                                   (x118 * (float) (u32) hit->x28))) +
+                               ftd->x114 * (x118 * (float) (u32) hit->x28))) +
                  ftd->x120)) +
                (float) (u32) hit->x2C)));
     } else {
@@ -2288,18 +2287,16 @@ float ftColl_80079EA8(Fighter* fp, HitCapsule* hit, int unk_count)
             result =
                 one *
                 (one *
-                 (one *
-                  ((ftColl_804D8314 * (float) (u32) hit->x24 *
-                    (ftd->x11C *
-                         ((decay - ((w * decay) / (one + w))) *
-                          (ftd->x110 *
-                               ((float) count + fp->dmg.x1838_percentTemp) +
-                           ftd->x114 *
-                               ((float) (u32) unk_count *
-                                ((float) count +
-                                 fp->dmg.x1838_percentTemp)))) +
-                     ftd->x120)) +
-                   (float) (u32) hit->x2C)));
+                 (one * ((ftColl_804D8314 * (float) (u32) hit->x24 *
+                          (ftd->x11C *
+                               ((decay - ((w * decay) / (one + w))) *
+                                (ftd->x110 * ((float) count +
+                                              fp->dmg.x1838_percentTemp) +
+                                 ftd->x114 * ((float) (u32) unk_count *
+                                              ((float) count +
+                                               fp->dmg.x1838_percentTemp)))) +
+                           ftd->x120)) +
+                         (float) (u32) hit->x2C)));
         }
     }
 
@@ -3495,8 +3492,7 @@ void ftColl_8007BE3C(Fighter_GObj* gobj)
         Fighter* vfp = gobj->user_data;
         switch (effect_idx) {
         case 1000:
-            ftColl_80078538(gobj, &fp->dmg.x1880, x1890, dmg_unsigned,
-                            x187c);
+            ftColl_80078538(gobj, &fp->dmg.x1880, x1890, dmg_unsigned, x187c);
             break;
         case 1001:
         case 1002:

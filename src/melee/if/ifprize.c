@@ -86,13 +86,13 @@ struct un_803F9D48 {
     struct un_802FEBE0_OnEnter_arg0* x2C;
     int x30[3];
 } un_803F9D48 = {
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, { 0x43, 0x44, 0x45 },
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, { 0x43, 0x44, 0x45 },
 };
 static char lbl_803F9D84[] = "ScInfPrize_scene_data\0\0\0"
-                                "SdPrize.usd\0"
-                                "SIS_PrizeData\0\0\0"
-                                "SdPrize.dat";
+                             "SdPrize.usd\0"
+                             "SIS_PrizeData\0\0\0"
+                             "SdPrize.dat";
 /// .sbss
 /* 4D6D98 */ static HSD_Archive* un_804D6D98;
 /* 4D6D9C */ static SceneDesc* un_804D6D9C;
@@ -334,14 +334,11 @@ found:
     un_803F9D48.x1 = 0;
     un_803F9D48.xC = arg0x4;
     un_803F9D48.x0a = 1;
-    un_804D6D98 = lbArchive_80016DBC("IfPrize", &un_804D6D9C,
-                                     lbl_803F9D84, 0);
+    un_804D6D98 = lbArchive_80016DBC("IfPrize", &un_804D6D9C, lbl_803F9D84, 0);
     if (lbLang_IsSavedLanguageUS()) {
-        HSD_SisLib_803A62A0(2, lbl_803F9D84 + 0x18,
-                            lbl_803F9D84 + 0x24);
+        HSD_SisLib_803A62A0(2, lbl_803F9D84 + 0x18, lbl_803F9D84 + 0x24);
     } else {
-        HSD_SisLib_803A62A0(2, lbl_803F9D84 + 0x34,
-                            lbl_803F9D84 + 0x24);
+        HSD_SisLib_803A62A0(2, lbl_803F9D84 + 0x34, lbl_803F9D84 + 0x24);
     }
     un_802FE6A8();
 }

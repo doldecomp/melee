@@ -420,8 +420,8 @@ void ft_80089B08(Fighter_GObj* gobj)
                 if (fn_8008998C(fp, &ik, &spA4) != 0) {
                     lbBgFlash_80021410(&ik);
                 }
-                lbBgFlash_80020E38(ik.jobj2, &spA4, 0.34906584f,
-                                    0.34906584f, -1.0f);
+                lbBgFlash_80020E38(ik.jobj2, &spA4, 0.34906584f, 0.34906584f,
+                                   -1.0f);
                 ik.jobj0->rotate = rot_save0;
                 ik.jobj1->rotate = rot_save1;
                 ik.jobj2->rotate = rot_save2;
@@ -455,8 +455,8 @@ void ft_80089B08(Fighter_GObj* gobj)
                 if (fn_8008998C(fp, &ik, &spA4) != 0) {
                     lbBgFlash_80021410(&ik);
                 }
-                lbBgFlash_80020E38(ik.jobj2, &spA4, 0.34906584f,
-                                    0.34906584f, 1.0f);
+                lbBgFlash_80020E38(ik.jobj2, &spA4, 0.34906584f, 0.34906584f,
+                                   1.0f);
                 ik.jobj0->rotate = rot_save3;
                 ik.jobj1->rotate = rot_save4;
                 ik.jobj2->rotate = rot_save5;
@@ -480,8 +480,7 @@ void ft_80089B08(Fighter_GObj* gobj)
                 guess = 0.5 * guess * (3.0 - guess * guess * line_len);
                 guess = 0.5 * guess * (3.0 - guess * guess * line_len);
                 guess = 0.5 * guess * (3.0 - guess * guess * line_len);
-                ((volatile f32*) &sp1C)[-1] =
-                    (f32) ((f64) line_len * guess);
+                ((volatile f32*) &sp1C)[-1] = (f32) ((f64) line_len * guess);
                 line_len = ((volatile f32*) &sp1C)[-1];
             }
             if (line_len < 5.0f) {

@@ -228,9 +228,8 @@ void un_802FF364(int slot)
     if (s > 9999) {
         s = 9999;
     }
-    thing->x8 =
-        HSD_SisLib_803A6B98(thing->x4, ifAll->x, un_804DDC28 + ifAll->y, "%d",
-                            s);
+    thing->x8 = HSD_SisLib_803A6B98(thing->x4, ifAll->x,
+                                    un_804DDC28 + ifAll->y, "%d", s);
     HSD_SisLib_803A7548(thing->x4, thing->x8, un_804DDC2C, un_804DDC2C);
     thing->x4->render_callback = fn_802FF360;
     thing->x0 = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);

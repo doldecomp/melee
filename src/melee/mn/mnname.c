@@ -466,9 +466,8 @@ void mnName_ConfirmNameDeleteInput(HSD_GObj* arg0)
         {
             sel = (u8) flow->hovered_selection;
             {
-                s32 tmp =
-                    ((HSD_GObj*) mnName_804D6BF8->user_data)->gx_link +
-                    ((flow->hovered_selection & 0xFF) / 6);
+                s32 tmp = ((HSD_GObj*) mnName_804D6BF8->user_data)->gx_link +
+                          ((flow->hovered_selection & 0xFF) / 6);
                 col = tmp;
             }
             colCount = mnName_GetColumnCount();
@@ -600,9 +599,8 @@ void mnName_MainInput(HSD_GObj* arg0)
             if ((u16) mn_804A04F0.hovered_selection < 0x18U) {
                 s32 isValid;
                 s32 sel = (u8) mn_804A04F0.hovered_selection;
-                s32 col =
-                    ((HSD_GObj*) mnName_804D6BF8->user_data)->gx_link +
-                    (mn_804A04F0.hovered_selection / 6);
+                s32 col = ((HSD_GObj*) mnName_804D6BF8->user_data)->gx_link +
+                          (mn_804A04F0.hovered_selection / 6);
                 s32 colCount = mnName_GetColumnCount();
                 u8 nameIdx;
                 if (colCount > 4 && col >= colCount) {
@@ -1165,8 +1163,7 @@ void mnName_80239A24(HSD_GObj* gobj)
     i = 0;
     do {
         jobj = HSD_JObjLoadJoint(archive->joint);
-        HSD_JObjAddAnimAll(jobj, archive->anim_joint,
-                           archive->matanim_joint,
+        HSD_JObjAddAnimAll(jobj, archive->anim_joint, archive->matanim_joint,
                            archive->shapeanim_joint);
         HSD_JObjReqAnimAll(jobj, (f32) ((u8) i == flow->hovered_selection));
         HSD_JObjAnimAll(jobj);
@@ -1412,8 +1409,7 @@ void mnName_8023A290(void)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 6U, 0x80U);
     HSD_GObj_SetupProc(gobj, fn_8023A0BC, 0U);
-    HSD_JObjAddAnimAll(jobj, archive->anim_joint,
-                       archive->matanim_joint,
+    HSD_JObjAddAnimAll(jobj, archive->anim_joint, archive->matanim_joint,
                        archive->shapeanim_joint);
     HSD_JObjReqAnimAll(jobj, mnName_803ED600[0]);
     HSD_JObjAnimAll(jobj);
@@ -1558,8 +1554,8 @@ HSD_GObj* mnName_8023A59C(u8 arg0)
     return gobj;
 }
 
-static inline struct mn_80231634_t* mnName_8023A9B4_GetUserData(
-    MnName_GObj* gobj2)
+static inline struct mn_80231634_t*
+mnName_8023A9B4_GetUserData(MnName_GObj* gobj2)
 {
     return (struct mn_80231634_t*) gobj2->gobj.user_data_remove_func;
 }
@@ -1591,8 +1587,7 @@ void mnName_8023A9B4(u8 arg0)
     mnName_8023A9B4_ResetDisplayOrder();
     gobj2 = (0, mnName_8023A9B4_GetGObj());
     if ((u8) mn_804A04F0.x10 == 1) {
-        struct mn_80231634_t* p =
-            mnName_8023A9B4_GetUserData(gobj2);
+        struct mn_80231634_t* p = mnName_8023A9B4_GetUserData(gobj2);
         if (p == NULL) {
             jobj = NULL;
         } else {
@@ -1637,63 +1632,35 @@ s32 mnName_8023AC40(void)
     u32 i;
     HSD_GObjProc* proc;
 
-    lbArchive_LoadSections(archive,
-                           (void**) (ptr + 0x98),
-                           (char*) mnName_803ED538 + 0x13C,
-                           (void**) (ptr + 0x9C),
-                           (char*) mnName_803ED538 + 0x158,
-                           (void**) (ptr + 0xA0),
-                           (char*) mnName_803ED538 + 0x178,
-                           (void**) (ptr + 0xA4),
-                           (char*) mnName_803ED538 + 0x19C,
-                           (void**) (ptr + 0x78),
-                           (char*) mnName_803ED538 + 0x1C0,
-                           (void**) (ptr + 0x7C),
-                           (char*) mnName_803ED538 + 0x1DC,
-                           (void**) (ptr + 0x80),
-                           (char*) mnName_803ED538 + 0x1FC,
-                           (void**) (ptr + 0x84),
-                           (char*) mnName_803ED538 + 0x220,
-                           (void**) (ptr + 0x88),
-                           (char*) mnName_803ED538 + 0x244,
-                           (void**) (ptr + 0x8C),
-                           (char*) mnName_803ED538 + 0x25C,
-                           (void**) (ptr + 0x90),
-                           (char*) mnName_803ED538 + 0x278,
-                           (void**) (ptr + 0x94),
-                           (char*) mnName_803ED538 + 0x298,
-                           (void**) (ptr + 0xA8),
-                           (char*) mnName_803ED538 + 0x2BC,
-                           (void**) (ptr + 0xAC),
-                           (char*) mnName_803ED538 + 0x2D8,
-                           (void**) (ptr + 0xB0),
-                           (char*) mnName_803ED538 + 0x2F8,
-                           (void**) (ptr + 0xB4),
-                           (char*) mnName_803ED538 + 0x31C,
-                           (void**) (ptr + 0xB8),
-                           (char*) mnName_803ED538 + 0x340,
-                           (void**) (ptr + 0xBC),
-                           (char*) mnName_803ED538 + 0x35C,
-                           (void**) (ptr + 0xC0),
-                           (char*) mnName_803ED538 + 0x37C,
-                           (void**) (ptr + 0xC4),
-                           (char*) mnName_803ED538 + 0x3A0,
-                           (void**) (ptr + 0xC8),
-                           (char*) mnName_803ED538 + 0x3C4,
-                           (void**) (ptr + 0xCC),
-                           (char*) mnName_803ED538 + 0x3E0,
-                           (void**) (ptr + 0xD0),
-                           (char*) mnName_803ED538 + 0x400,
-                           (void**) (ptr + 0xD4),
-                           (char*) mnName_803ED538 + 0x424,
-                           (void**) (ptr + 0xD8),
-                           (char*) mnName_803ED538 + 0x448,
-                           (void**) (ptr + 0xDC),
-                           (char*) mnName_803ED538 + 0x464,
-                           (void**) (ptr + 0xE0),
-                           (char*) mnName_803ED538 + 0x484,
-                           (void**) (ptr + 0xE4),
-                           (char*) mnName_803ED538 + 0x4A8, 0);
+    lbArchive_LoadSections(
+        archive, (void**) (ptr + 0x98), (char*) mnName_803ED538 + 0x13C,
+        (void**) (ptr + 0x9C), (char*) mnName_803ED538 + 0x158,
+        (void**) (ptr + 0xA0), (char*) mnName_803ED538 + 0x178,
+        (void**) (ptr + 0xA4), (char*) mnName_803ED538 + 0x19C,
+        (void**) (ptr + 0x78), (char*) mnName_803ED538 + 0x1C0,
+        (void**) (ptr + 0x7C), (char*) mnName_803ED538 + 0x1DC,
+        (void**) (ptr + 0x80), (char*) mnName_803ED538 + 0x1FC,
+        (void**) (ptr + 0x84), (char*) mnName_803ED538 + 0x220,
+        (void**) (ptr + 0x88), (char*) mnName_803ED538 + 0x244,
+        (void**) (ptr + 0x8C), (char*) mnName_803ED538 + 0x25C,
+        (void**) (ptr + 0x90), (char*) mnName_803ED538 + 0x278,
+        (void**) (ptr + 0x94), (char*) mnName_803ED538 + 0x298,
+        (void**) (ptr + 0xA8), (char*) mnName_803ED538 + 0x2BC,
+        (void**) (ptr + 0xAC), (char*) mnName_803ED538 + 0x2D8,
+        (void**) (ptr + 0xB0), (char*) mnName_803ED538 + 0x2F8,
+        (void**) (ptr + 0xB4), (char*) mnName_803ED538 + 0x31C,
+        (void**) (ptr + 0xB8), (char*) mnName_803ED538 + 0x340,
+        (void**) (ptr + 0xBC), (char*) mnName_803ED538 + 0x35C,
+        (void**) (ptr + 0xC0), (char*) mnName_803ED538 + 0x37C,
+        (void**) (ptr + 0xC4), (char*) mnName_803ED538 + 0x3A0,
+        (void**) (ptr + 0xC8), (char*) mnName_803ED538 + 0x3C4,
+        (void**) (ptr + 0xCC), (char*) mnName_803ED538 + 0x3E0,
+        (void**) (ptr + 0xD0), (char*) mnName_803ED538 + 0x400,
+        (void**) (ptr + 0xD4), (char*) mnName_803ED538 + 0x424,
+        (void**) (ptr + 0xD8), (char*) mnName_803ED538 + 0x448,
+        (void**) (ptr + 0xDC), (char*) mnName_803ED538 + 0x464,
+        (void**) (ptr + 0xE0), (char*) mnName_803ED538 + 0x484,
+        (void**) (ptr + 0xE4), (char*) mnName_803ED538 + 0x4A8, 0);
 
     if (lbLang_IsSavedLanguageUS()) {
         lbArchive_LoadSections(

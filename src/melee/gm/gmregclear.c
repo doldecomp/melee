@@ -948,9 +948,7 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
                     player_slot->player.xC_b1 = 0;
                 }
                 player_kind = (u8) player_slot->player.c_kind;
-                if (((s8) player_kind == 0x1A) ||
-                    ((s8) player_kind == 0x1E))
-                {
+                if (((s8) player_kind == 0x1A) || ((s8) player_kind == 0x1E)) {
                     player_slot->player.xC_b7 = 1;
                     player_slot->player.hp = 0x12C;
                     player_slot->player.xD_b2 = 1;
@@ -3348,13 +3346,12 @@ void gm_80182174(void)
     spawn_table_26 = &lbl_80472ED8.x6B8;
     spawn_table_24 = &lbl_80472ED8.x6B0;
 
-    lbArchive_80016DBC((const char*) &data[0x480], &lbl_80472ED8.x6A4,
-                       (const char*) &data[0x490], spawn_table_22,
-                       (const char*) &data[0x4AC], spawn_table_23,
-                       (const char*) &data[0x4C8], spawn_table_24,
-                       (const char*) &data[0x4E4], spawn_table_25,
-                       (const char*) &data[0x500], spawn_table_26,
-                       (const char*) &data[0x51C], 0);
+    lbArchive_80016DBC(
+        (const char*) &data[0x480], &lbl_80472ED8.x6A4,
+        (const char*) &data[0x490], spawn_table_22, (const char*) &data[0x4AC],
+        spawn_table_23, (const char*) &data[0x4C8], spawn_table_24,
+        (const char*) &data[0x4E4], spawn_table_25, (const char*) &data[0x500],
+        spawn_table_26, (const char*) &data[0x51C], 0);
 
     lbl_80472ED8.x0 = 0;
     lbl_80472ED8.x4 = 0;

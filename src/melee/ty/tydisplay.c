@@ -652,8 +652,10 @@ void un_80318CB4(s32 arg0)
             gobj = cfg->x78;
             if (gobj != NULL) {
                 un_804D6F10[jobjIdx] = (HSD_JObj*) gobj->hsd_obj;
-                HSD_JObjSetTranslateX(un_804D6F10[jobjIdx], grid->pos[posIdx].x);
-                HSD_JObjSetTranslateZ(un_804D6F10[jobjIdx], grid->pos[posIdx].z);
+                HSD_JObjSetTranslateX(un_804D6F10[jobjIdx],
+                                      grid->pos[posIdx].x);
+                HSD_JObjSetTranslateZ(un_804D6F10[jobjIdx],
+                                      grid->pos[posIdx].z);
                 jobjIdx++;
                 posIdx++;
             }
@@ -764,9 +766,7 @@ void un_80319540(s32 arg0)
             pivot = 0;
             j = 0;
             for (n = 1; n2 >= n; n++) {
-                if (*(s32*) &grid->sort[n].val >
-                    *(s32*) &grid->sort[0].val)
-                {
+                if (*(s32*) &grid->sort[n].val > *(s32*) &grid->sort[0].val) {
                     pivot += 1;
                     j += 8;
                     if (pivot != n) {
@@ -1003,7 +1003,8 @@ void un_80319994(s32 arg0)
     }
 }
 
-static inline void un_80319EF0_set_z(TyDspGrid* grid, Vec3* interest, Vec3* eyepos)
+static inline void un_80319EF0_set_z(TyDspGrid* grid, Vec3* interest,
+                                     Vec3* eyepos)
 {
     {
         f32 zmin = grid->x08_min_z;
@@ -1089,8 +1090,8 @@ void un_80319EF0(void)
             cfg->x58 = (14.0f + cfg->x40) * 0.5f + cfg->x5C.x;
             break;
         case 2:
-            cfg->x54 = -((*(f32 const*) &un_804DDF70 + cfg->x40) * 0.5f -
-                         cfg->x5C.x);
+            cfg->x54 =
+                -((*(f32 const*) &un_804DDF70 + cfg->x40) * 0.5f - cfg->x5C.x);
             cfg->x58 =
                 (*(f32 const*) &un_804DDF70 + cfg->x40) * 0.5f + cfg->x5C.x;
             break;

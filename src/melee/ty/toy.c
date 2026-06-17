@@ -1495,8 +1495,7 @@ void un_80306D70(s32 arg0)
             HSD_GObjObject_80390A70(data->gobj, kind, lobj);
             GObj_SetupGXLink(data->gobj, HSD_GObj_LObjCallback, 0x37, 0);
             if (spC != 0) {
-                HSD_GObj_SetupProc(data->gobj, (HSD_GObjEvent) un_80306C5C,
-                                   0);
+                HSD_GObj_SetupProc(data->gobj, (HSD_GObjEvent) un_80306C5C, 0);
                 HSD_GObj_80390CD4(data->gobj);
             }
         } else {
@@ -3207,8 +3206,7 @@ void fn_80309404(HSD_GObj* gobj)
                     }
                     trig2 = un_80305B88();
                     if (trig2 & 0x441) {
-                    cycle_prev:
-                    {
+                    cycle_prev: {
                         s16 new_idx;
                         s32 total;
 
@@ -3308,8 +3306,7 @@ void fn_80309404(HSD_GObj* gobj)
                         if (!(trig2 & 0x822)) {
                             goto after_cycle_direction;
                         }
-                    cycle_next:
-                    {
+                    cycle_next: {
                         s32 total;
                         s16 cur_idx;
 
@@ -3426,8 +3423,7 @@ void fn_80309404(HSD_GObj* gobj)
 
                         if (flags[idx] & 0x8000) {
                             idx = un_804D6EDC[display->selectedIdx];
-                            if ((gm_8016B498() != 0) ||
-                                (gm_801A4310() == 0xC))
+                            if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC))
                             {
                                 flags = base->trophy_flags;
                             } else {
@@ -3442,8 +3438,7 @@ void fn_80309404(HSD_GObj* gobj)
                                 (s32) display->selected_entry->trophy_id);
                     state->x60 = 0x14;
                 }
-            skip_trophy_cycle:
-                ;
+            skip_trophy_cycle:;
             }
         }
 

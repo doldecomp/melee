@@ -651,8 +651,7 @@ void fn_802514B8(HSD_GObj* gobj)
     HSD_GObjPLink_80390228(gobj);
 }
 
-static inline void fn_802514D8_inline(MnCountData* userdata,
-                                       HSD_GObj* gobj)
+static inline void fn_802514D8_inline(MnCountData* userdata, HSD_GObj* gobj)
 {
     HSD_GObjProc* proc;
     HSD_JObj* jobj;

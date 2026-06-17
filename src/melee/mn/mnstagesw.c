@@ -39,11 +39,8 @@ typedef struct MnStageSwData {
 } MnStageSwData;
 
 AnimLoopSettings mnStageSw_803ED488[5] = {
-    { 0.0f, 199.0f, 0.0f },
-    { 0.0f, 9.0f, -0.1f },
-    { 0.0f, 0.0f, -0.1f },
-    { 0.0f, 0.0f, -0.1f },
-    { 0.0f, 0.0f, -0.1f },
+    { 0.0f, 199.0f, 0.0f }, { 0.0f, 9.0f, -0.1f }, { 0.0f, 0.0f, -0.1f },
+    { 0.0f, 0.0f, -0.1f },  { 0.0f, 0.0f, -0.1f },
 };
 
 /// Stage switch toggle indices - maps menu position to internal stage ID
@@ -123,8 +120,8 @@ static void mnStageSw_802359C8(MnStageSwData* data)
         text->default_alignment = 2;
         text->default_fitting = 1;
         if (gm_80164430(gm_801641CC(mnStageSw_803ED4C4[(u8) i])) != 0) {
-            HSD_SisLib_803A6368(
-                text, mnStageSw_stageIcons[mnStageSw_803ED4C4[i]]);
+            HSD_SisLib_803A6368(text,
+                                mnStageSw_stageIcons[mnStageSw_803ED4C4[i]]);
         } else {
             HSD_SisLib_803A6368(text, 0x25);
         }
@@ -140,8 +137,8 @@ static void mnStageSw_802359C8(MnStageSwData* data)
         text->default_alignment = 2;
         text->default_fitting = 1;
         if (gm_80164430(gm_801641CC(mnStageSw_803ED4C4[(u8) i])) != 0) {
-            HSD_SisLib_803A6368(
-                text, mnStageSw_stageIcons[mnStageSw_803ED4C4[i]]);
+            HSD_SisLib_803A6368(text,
+                                mnStageSw_stageIcons[mnStageSw_803ED4C4[i]]);
         } else {
             HSD_SisLib_803A6368(text, 0x25);
         }
@@ -340,8 +337,8 @@ static void fn_80235F80(HSD_GObj* gobj)
                 stage_ids = mnStageSw_803ED4C4;
                 i = 0;
                 do {
-                    if (gm_80164430(
-                            gm_801641CC(mnStageSw_803ED4C4[(u8) i])) != 0)
+                    if (gm_80164430(gm_801641CC(mnStageSw_803ED4C4[(u8) i])) !=
+                        0)
                     {
                         gm_801641E4(*stage_ids, user_data[i + 2]);
                     }
@@ -494,8 +491,8 @@ static void mnStageSw_80236548(HSD_GObj* gobj, u8 arg1, u8 arg2)
         hovered = data->x1;
     }
     sel = hovered;
-    lb_80011E24(mnStageSw_802364A0_noinline(data, sel), &hover_anim_jobj,
-                3, -1);
+    lb_80011E24(mnStageSw_802364A0_noinline(data, sel), &hover_anim_jobj, 3,
+                -1);
     mn_8022ED6C(hover_anim_jobj, mnStageSw_803ED488);
 }
 
@@ -574,8 +571,7 @@ static void fn_80236998(HSD_GObj* gobj)
         if (mn_8022F298(jobj) >= anims->end_frame) {
             switch ((s32) data->x1F) {
             case 1:
-            case 3:
-            {
+            case 3: {
                 s32 i;
 
                 data->x1F = i = 0;
@@ -598,8 +594,7 @@ static void fn_80236998(HSD_GObj* gobj)
                 return;
             }
             case 2:
-            case 4:
-            {
+            case 4: {
                 s32 i;
 
                 for (i = 0; i < NUM_STAGES; i++) {
@@ -744,15 +739,15 @@ static HSD_GObj* mnStageSw_80236CBC(s8 arg0)
         if (hovered < 15) {
             HSD_JObjSetTranslateX(cursor,
                                   HSD_JObjGetTranslationX(user_data->x2C));
-            HSD_JObjSetTranslateY(
-                cursor, y_spacing * (f32) hovered +
-                            HSD_JObjGetTranslationY(user_data->x2C));
+            HSD_JObjSetTranslateY(cursor,
+                                  y_spacing * (f32) hovered +
+                                      HSD_JObjGetTranslationY(user_data->x2C));
         } else {
             HSD_JObjSetTranslateX(cursor,
                                   HSD_JObjGetTranslationX(user_data->x34));
-            HSD_JObjSetTranslateY(
-                cursor, y_spacing * (f32) (hovered - 15) +
-                            HSD_JObjGetTranslationY(user_data->x2C));
+            HSD_JObjSetTranslateY(cursor,
+                                  y_spacing * (f32) (hovered - 15) +
+                                      HSD_JObjGetTranslationY(user_data->x2C));
         }
     }
     HSD_JObjSetFlagsAll(user_data->x28, JOBJ_HIDDEN);

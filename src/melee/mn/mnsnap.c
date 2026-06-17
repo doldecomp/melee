@@ -183,11 +183,10 @@ static void mnSnap_8025329C(void)
         mnSnap_ThumbImageSlot* img_slot;
 
         p52 = &snap->load_idx;
-        img_slot = (mnSnap_ThumbImageSlot*) ((u32) snap +
-                                             (snap->load_idx % 4) * 4);
+        img_slot =
+            (mnSnap_ThumbImageSlot*) ((u32) snap + (snap->load_idx % 4) * 4);
         if (lbSnap_8001DE8C(img_slot->image) == 1) {
-            img_slot =
-                (mnSnap_ThumbImageSlot*) ((u32) snap + (*p52 % 4) * 4);
+            img_slot = (mnSnap_ThumbImageSlot*) ((u32) snap + (*p52 % 4) * 4);
             jobj = snap->thumb_jobjs[*p52];
             img = img_slot->image;
             HSD_ASSERT(193, jobj);
@@ -1090,7 +1089,8 @@ void fn_802545C4(void)
                                       0x98)));
                 }
 
-            } else if (((1 == slot) && (mnSnap_804A0A10.card_status[0] != 0)) &&
+            } else if (((1 == slot) &&
+                        (mnSnap_804A0A10.card_status[0] != 0)) &&
                        (buttons & 4))
             {
                 lbAudioAx_80024030(2);
@@ -2465,31 +2465,30 @@ void mnSnap_80257F24(void)
     warn_shapeanim = &snap->warn_shapeanim;
 
     lbArchive_LoadSections(
-        mn_804D6BB8, main_joint, "MenMainConSn_Top_joint",
-        main_animjoint, "MenMainConSn_Top_animjoint",
-        main_matanim, "MenMainConSn_Top_matanim_joint",
-        main_shapeanim, "MenMainConSn_Top_shapeanim_joint",
-        csr_joint, "MenMainSubCsrSn_Top_joint",
-        csr_animjoint, "MenMainSubCsrSn_Top_animjoint",
-        csr_matanim, "MenMainSubCsrSn_Top_matanim_joint",
-        csr_shapeanim, "MenMainSubCsrSn_Top_shapeanim_joint",
-        (void**) &snap->photo_joint, "MenMainPhotoSn_Top_joint",
-        (void**) &snap->sub_animjoint, "MenMainSubSn_Top_animjoint",
-        (void**) &snap->sub_matanim, "MenMainSubSn_Top_matanim_joint",
-        (void**) &snap->sub_shapeanim, "MenMainSubSn_Top_shapeanim_joint",
-        (void**) &snap->page_joint, "MenMainSubSn_Top_joint",
-        (void**) &snap->load_joint, "MenMainLoadSn_Top_joint",
-        (void**) &snap->load_animjoint, "MenMainLoadSn_Top_animjoint",
-        (void**) &snap->load_matanim, "MenMainLoadSn_Top_matanim_joint",
-        arrows_joint, "MenMainSubSn_Top_joint",
-        arrows_animjoint, "MenMainSubSn_Top_animjoint",
-        arrows_matanim, "MenMainSubSn_Top_matanim_joint",
-        arrows_shapeanim, "MenMainSubSn_Top_shapeanim_joint",
-        warn_joint, "MenMainWarCmn_Top_joint",
-        warn_animjoint, "MenMainWarCmn_Top_animjoint",
-        warn_matanim, "MenMainWarCmn_Top_matanim_joint",
-        warn_shapeanim, "MenMainWarCmn_Top_shapeanim_joint",
-        0);
+        mn_804D6BB8, main_joint, "MenMainConSn_Top_joint", main_animjoint,
+        "MenMainConSn_Top_animjoint", main_matanim,
+        "MenMainConSn_Top_matanim_joint", main_shapeanim,
+        "MenMainConSn_Top_shapeanim_joint", csr_joint,
+        "MenMainSubCsrSn_Top_joint", csr_animjoint,
+        "MenMainSubCsrSn_Top_animjoint", csr_matanim,
+        "MenMainSubCsrSn_Top_matanim_joint", csr_shapeanim,
+        "MenMainSubCsrSn_Top_shapeanim_joint", (void**) &snap->photo_joint,
+        "MenMainPhotoSn_Top_joint", (void**) &snap->sub_animjoint,
+        "MenMainSubSn_Top_animjoint", (void**) &snap->sub_matanim,
+        "MenMainSubSn_Top_matanim_joint", (void**) &snap->sub_shapeanim,
+        "MenMainSubSn_Top_shapeanim_joint", (void**) &snap->page_joint,
+        "MenMainSubSn_Top_joint", (void**) &snap->load_joint,
+        "MenMainLoadSn_Top_joint", (void**) &snap->load_animjoint,
+        "MenMainLoadSn_Top_animjoint", (void**) &snap->load_matanim,
+        "MenMainLoadSn_Top_matanim_joint", arrows_joint,
+        "MenMainSubSn_Top_joint", arrows_animjoint,
+        "MenMainSubSn_Top_animjoint", arrows_matanim,
+        "MenMainSubSn_Top_matanim_joint", arrows_shapeanim,
+        "MenMainSubSn_Top_shapeanim_joint", warn_joint,
+        "MenMainWarCmn_Top_joint", warn_animjoint,
+        "MenMainWarCmn_Top_animjoint", warn_matanim,
+        "MenMainWarCmn_Top_matanim_joint", warn_shapeanim,
+        "MenMainWarCmn_Top_shapeanim_joint", 0);
 
     /* Main GObj */
     gobj = GObj_Create(6, 7, 0x80);

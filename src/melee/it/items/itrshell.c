@@ -12,10 +12,10 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_3F14.h"
-#include "it/ithitbox.h"
-#include "it/itmaplib.h"
 #include "it/itcoll.h"
 #include "it/item.h"
+#include "it/ithitbox.h"
+#include "it/itmaplib.h"
 #include "MSL/math.h"
 #include "sysdolphin/baselib/random.h"
 

@@ -780,7 +780,7 @@ s32 gmMainLib_8015DBF4(s32 arg0)
     s32 j;
     u8 val;
 
-#define ADJ_PTR(ptr_expr, set_value)                                           \
+#define ADJ_PTR(ptr_expr, set_value)                                          \
     do {                                                                      \
         ptr = (u8*) (ptr_expr);                                               \
         val = *ptr;                                                           \
@@ -791,7 +791,7 @@ s32 gmMainLib_8015DBF4(s32 arg0)
         }                                                                     \
     } while (0)
 
-#define ADJ_PTR_LOAD(ptr_expr, load_expr, set_value)                           \
+#define ADJ_PTR_LOAD(ptr_expr, load_expr, set_value)                          \
     do {                                                                      \
         ptr = (u8*) (ptr_expr);                                               \
         val = (load_expr);                                                    \
@@ -805,7 +805,7 @@ s32 gmMainLib_8015DBF4(s32 arg0)
         }                                                                     \
     } while (0)
 
-#define ADJ_VMD_PTR(vmd_expr)                                                  \
+#define ADJ_VMD_PTR(vmd_expr)                                                 \
     do {                                                                      \
         vmd = (u8*) (vmd_expr);                                               \
         j = 2;                                                                \
@@ -818,7 +818,7 @@ s32 gmMainLib_8015DBF4(s32 arg0)
         } while (--j != 0);                                                   \
     } while (0)
 
-#define ADJ_VMD_BASE(ofs)                                                      \
+#define ADJ_VMD_BASE(ofs)                                                     \
     do {                                                                      \
         load = base;                                                          \
         vmd = base + (ofs);                                                   \

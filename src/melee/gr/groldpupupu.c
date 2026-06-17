@@ -172,8 +172,8 @@ HSD_GObj* grOldPupupu_802108B4(int arg0)
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport((char*) grOp_803E6688 + 0xF4,
-                 (char*) grOp_803E6688 + 0x118, 0xD9, arg0);
+        OSReport((char*) grOp_803E6688 + 0xF4, (char*) grOp_803E6688 + 0x118,
+                 0xD9, arg0);
     }
 
     return gobj;
@@ -365,8 +365,7 @@ void grOldPupupu_80210D10(Ground_GObj* gobj)
         {
             f32 rand = HSD_Randf();
             y = direction *
-                (((f32) grOp_804D6A98->x4 * ((2.0F * rand) - 1.0F)) +
-                 20.0F);
+                (((f32) grOp_804D6A98->x4 * ((2.0F * rand) - 1.0F)) + 20.0F);
         }
         for (i = 0; i < count; i++) {
             HSD_GObj* spawn;
@@ -386,16 +385,15 @@ void grOldPupupu_80210D10(Ground_GObj* gobj)
 
         respawn = grOp_804D6A98->x2;
         min_respawn = grOp_804D6A98->x0;
-        respawn =
-            respawn > min_respawn
-                ? min_respawn + (respawn - min_respawn != 0
-                                      ? HSD_Randi(respawn - min_respawn)
-                                      : 0)
-            : respawn < min_respawn
-                ? respawn + (min_respawn - respawn != 0
-                                  ? HSD_Randi(min_respawn - respawn)
-                                  : 0)
-                : respawn;
+        respawn = respawn > min_respawn
+                      ? min_respawn + (respawn - min_respawn != 0
+                                           ? HSD_Randi(respawn - min_respawn)
+                                           : 0)
+                  : respawn < min_respawn
+                      ? respawn + (min_respawn - respawn != 0
+                                       ? HSD_Randi(min_respawn - respawn)
+                                       : 0)
+                      : respawn;
         gp->gv.oldpupupu2.xC4 = respawn;
     }
 }

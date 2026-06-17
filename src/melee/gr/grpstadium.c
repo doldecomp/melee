@@ -1816,8 +1816,7 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
                 {
                     const char* character_name = gm_80160A60(var_r30_2);
                     if (character_name != NULL) {
-                        HSD_SisLib_803A6B98(gp2->win_dynamic_p,
-                                            grPs_804DAF58,
+                        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF58,
                                             (f32) (temp_r29 + var_r28), "%s",
                                             character_name);
                     }
@@ -2195,11 +2194,10 @@ void grStadium_801D4548(Ground_GObj* gobj)
             return;
         }
         break;
-    case 4:
-        {
-            HSD_JObj* jobj = GET_JOBJ(stadium_gp->u.stadium.xE4);
-            active_jobj = jobj;
-        }
+    case 4: {
+        HSD_JObj* jobj = GET_JOBJ(stadium_gp->u.stadium.xE4);
+        active_jobj = jobj;
+    }
         scale_y = HSD_JObjGetScaleY(active_jobj);
         scale_y -= stage_scale * (0.95f / yaku->x14);
         min_scale = 0.05f * stage_scale;
@@ -2240,7 +2238,8 @@ void grStadium_801D4548(Ground_GObj* gobj)
             half_duration = yaku->x14 / 2;
             if (translate_count < half_duration) {
                 incoming_translate_y =
-                    -10.0f * stage_scale * (1.0f - ((f32) translate_count / half_duration));
+                    -10.0f * stage_scale *
+                    (1.0f - ((f32) translate_count / half_duration));
             } else {
                 incoming_translate_y = 0.0f;
             }
@@ -2251,8 +2250,8 @@ void grStadium_801D4548(Ground_GObj* gobj)
             half_duration = duration / 2;
             if (frame_count > half_duration) {
                 translate_y = -10.0f * stage_scale *
-                          (1.0f - ((f32) (duration - frame_count) /
-                                   (duration - half_duration)));
+                              (1.0f - ((f32) (duration - frame_count) /
+                                       (duration - half_duration)));
             } else {
                 translate_y = 0.0f;
             }

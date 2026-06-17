@@ -67,12 +67,9 @@ void HSD_SynthSFXSampleLoadCallback(int result, int length, void* addr,
         dnw = total - header_size;
         *(u32*) ((u8*) HSD_Synth_804D7730 + (dnw & ~3)) =
             hsd_SynthSFXLoadBuf[4];
-        ((u32*) HSD_Synth_804D7730)[(dnw >> 2) + 1] =
-            hsd_SynthSFXLoadBuf[5];
-        ((u32*) HSD_Synth_804D7730)[(dnw >> 2) + 2] =
-            hsd_SynthSFXLoadBuf[6];
-        ((u32*) HSD_Synth_804D7730)[(dnw >> 2) + 3] =
-            hsd_SynthSFXLoadBuf[7];
+        ((u32*) HSD_Synth_804D7730)[(dnw >> 2) + 1] = hsd_SynthSFXLoadBuf[5];
+        ((u32*) HSD_Synth_804D7730)[(dnw >> 2) + 2] = hsd_SynthSFXLoadBuf[6];
+        ((u32*) HSD_Synth_804D7730)[(dnw >> 2) + 3] = hsd_SynthSFXLoadBuf[7];
         HSD_Synth_804D7734 = (u32*) ((u8*) HSD_Synth_804D7730 + (dnw & ~3));
 
         bankID = HSD_Synth_804C2A60[0].bankID;
@@ -933,9 +930,8 @@ s32 HSD_Synth_8038A000(void)
         if (!(node->flags & 3)) {
             vol = 32767.0f *
                   (node->user_vol[0].x8_float *
-                   (node->unk28 *
-                    (HSD_Synth_804D6030 *
-                     HSD_Synth_804C28E0_1784[node->xB].x1784)));
+                   (node->unk28 * (HSD_Synth_804D6030 *
+                                   HSD_Synth_804C28E0_1784[node->xB].x1784)));
         } else {
             vol = 0;
             active = 0;
@@ -1253,7 +1249,8 @@ void HSD_Synth_8038ADD0(void)
                         i * lbl_804C4540[HSD_Synth_804D7770].x0 + 2);
                 AXSetVoiceAdpcmLoop(
                     node->voice[i],
-                    (AXPBADPCMLOOP*) ((u32*) &lbl_804C4540[HSD_Synth_804D7770] +
+                    (AXPBADPCMLOOP*) ((u32*) &lbl_804C4540
+                                          [HSD_Synth_804D7770] +
                                       (i * 2 + 3)));
             }
         }
@@ -1261,7 +1258,8 @@ void HSD_Synth_8038ADD0(void)
     if ((s32) ((HSD_Synth_804D776C + 1) % 3) != pos) {
         intr = OSDisableInterrupts();
         if (HSD_Synth_804D7778 != 0 ||
-            HSD_Synth_804D7768 != HSD_Synth_804D776C) {
+            HSD_Synth_804D7768 != HSD_Synth_804D776C)
+        {
             OSRestoreInterrupts(intr);
             return;
         }

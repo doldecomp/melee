@@ -652,7 +652,7 @@ int SimplifySrc(HSD_TExp* arg0)
 #define CLEAR_ARG(arg)                                                        \
     do {                                                                      \
         clear_arg = HSD_TExpDag_804D5FF8;                                     \
-        clear_exp = HSD_TExpDag_804D5FFC;                                    \
+        clear_exp = HSD_TExpDag_804D5FFC;                                     \
         *(u32*) &(arg) = clear_arg;                                           \
         (arg).exp = clear_exp;                                                \
     } while (0)
@@ -989,7 +989,8 @@ int SimplifyByMerge(HSD_TExp* arg0)
                             child->tev.c_in[3].sel == HSD_TE_0 &&
                             child->tev.c_scale == 0)
                         {
-                            if (arg0->tev.tex != NULL && child->tev.tex != NULL &&
+                            if (arg0->tev.tex != NULL &&
+                                child->tev.tex != NULL &&
                                 arg0->tev.tex != child->tev.tex)
                             {
                                 conflict = 1;
@@ -1062,10 +1063,12 @@ int SimplifyByMerge(HSD_TExp* arg0)
                                         arg0->tev.chan = child->tev.chan;
                                     }
                                     if (arg0->tev.tex_swap == 0xFF) {
-                                        arg0->tev.tex_swap = child->tev.tex_swap;
+                                        arg0->tev.tex_swap =
+                                            child->tev.tex_swap;
                                     }
                                     if (arg0->tev.ras_swap == 0xFF) {
-                                        arg0->tev.ras_swap = child->tev.ras_swap;
+                                        arg0->tev.ras_swap =
+                                            child->tev.ras_swap;
                                     }
                                     HSD_TExpUnref(child, child_sel);
                                 }
@@ -1149,10 +1152,12 @@ int SimplifyByMerge(HSD_TExp* arg0)
                                         arg0->tev.chan = child->tev.chan;
                                     }
                                     if (arg0->tev.tex_swap == 0xFF) {
-                                        arg0->tev.tex_swap = child->tev.tex_swap;
+                                        arg0->tev.tex_swap =
+                                            child->tev.tex_swap;
                                     }
                                     if (arg0->tev.ras_swap == 0xFF) {
-                                        arg0->tev.ras_swap = child->tev.ras_swap;
+                                        arg0->tev.ras_swap =
+                                            child->tev.ras_swap;
                                     }
                                     HSD_TExpUnref(child, child_sel);
                                 }

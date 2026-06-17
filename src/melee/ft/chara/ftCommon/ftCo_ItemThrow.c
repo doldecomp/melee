@@ -541,9 +541,10 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                     float fsm = -fp->cmd_timer / fp->frame_speed_mul;
                     float cd_xB4 = co_attrs->xB4;
                     float temp_f2 =
-                        cd_xB4 *
-                        ((ftCo_ItemThrowAttrs*) Fighter_804D6550)
-                            [fp->motion_id - ftCo_MS_LightThrowF].x8;
+                        cd_xB4 * ((ftCo_ItemThrowAttrs*)
+                                      Fighter_804D6550)[fp->motion_id -
+                                                        ftCo_MS_LightThrowF]
+                                     .x8;
                     float temp_f4 = var_f4 * temp_f2;
                     {
                         vec2.x = fsm * (fp->mv.co.itemthrow4.x8.x - vec0.x) +

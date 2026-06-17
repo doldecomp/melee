@@ -450,8 +450,7 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
         }
         {
             HSD_JObj* part = jobj_parts[7];
-            HSD_JObjReqAnim(part,
-                            mn_803ED1D0.text_start_frames[old_sel * 2]);
+            HSD_JObjReqAnim(part, mn_803ED1D0.text_start_frames[old_sel * 2]);
             HSD_JObjAnim(part);
         }
         HSD_JObjSetFlagsAll(jobj_parts[8], JOBJ_HIDDEN);
@@ -497,18 +496,15 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
         if ((s32) hovered_u8 != 5 && (s32) hovered_u8 < 5) {
             if ((s32) hovered_u8 != 0) {
                 if ((s32) hovered_u8 < 0) {
-
                 } else {
                     if ((mn_804A04F0.buttons & 4) != 0) {
                         HSD_JObjReqAnimAll(
-                            tree,
-                            mn_80232458(hovered_u8, confirmed, 0)
-                                ->start_frame);
+                            tree, mn_80232458(hovered_u8, confirmed, 0)
+                                      ->start_frame);
                     } else {
                         HSD_JObjReqAnimAll(
-                            tree,
-                            mn_80232458(hovered_u8, confirmed, 1)
-                                ->start_frame);
+                            tree, mn_80232458(hovered_u8, confirmed, 1)
+                                      ->start_frame);
                     }
                     HSD_JObjAnimAll(tree);
                 }

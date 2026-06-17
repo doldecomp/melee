@@ -68,9 +68,9 @@ char un_804D5A98[8] = "jobj";
 u16 un_804D5AA0[2] = { 0xC, 0 };
 char un_804D5AA4[4] = "";
 
-#define TYFIGUPON_JOBJ_ASSERT(line, cond)                                    \
+#define TYFIGUPON_JOBJ_ASSERT(line, cond)                                     \
     ((cond) ? ((void) 0) : __assert(un_804D5A90, line, un_804D5A98))
-#define TYFIGUPON_JOBJ_ASSERTMSG(line, cond, msg)                            \
+#define TYFIGUPON_JOBJ_ASSERTMSG(line, cond, msg)                             \
     ((cond) ? ((void) 0) : __assert(un_804D5A90, line, msg))
 
 static inline bool tyFigupon_JObjMtxIsDirty(HSD_JObj* jobj)
@@ -194,8 +194,7 @@ static inline void tyFigupon_JObjSetScaleZ(HSD_JObj* jobj, f32 z)
 static inline void tyFigupon_JObjSetRotationY(HSD_JObj* jobj, f32 y)
 {
     TYFIGUPON_JOBJ_ASSERT(660, jobj);
-    TYFIGUPON_JOBJ_ASSERTMSG(661,
-                             !(jobj->flags & JOBJ_USE_QUATERNION),
+    TYFIGUPON_JOBJ_ASSERTMSG(661, !(jobj->flags & JOBJ_USE_QUATERNION),
                              "!(jobj->flags & JOBJ_USE_QUATERNION)");
     jobj->rotate.y = y;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
@@ -617,9 +616,8 @@ void fn_803155C8(void)
                 if (bet_count != 0) {
                     bet_count -= 1;
                 }
-                pct = 100.0f *
-                      (((f32) ef4->x54 / fval) +
-                       ((f32) (bet_count * 5) / 100.0f));
+                pct = 100.0f * (((f32) ef4->x54 / fval) +
+                                ((f32) (bet_count * 5) / 100.0f));
                 if (pct >= 100.0f) {
                     pct = 99.9f;
                 }
@@ -970,9 +968,7 @@ static inline void tyFigupon_CalcCameraRot(f32* cy, f32* cx, f32* rot_y,
                 pad = &HSD_PadCopyStatus[i = 3];
                 *cx = pad->nml_subStickX;
                 *cy = pad->nml_subStickY;
-                if (-0.4f < *cx && *cx < 0.4f && -0.4f < *cy &&
-                    *cy < 0.4f)
-                {
+                if (-0.4f < *cx && *cx < 0.4f && -0.4f < *cy && *cy < 0.4f) {
                 }
             }
         }
@@ -1003,7 +999,6 @@ static inline void tyFigupon_CalcCameraRot(f32* cy, f32* cx, f32* rot_y,
             *rot_y = 30.0f * ((*cy - dead) / 0.6f);
         }
     }
-
 }
 
 void fn_803168DC(HSD_GObj* arg0)
@@ -1132,8 +1127,7 @@ void fn_80316C24(HSD_GObj* arg0)
             if (ef4_3->x54 == 0) {
                 pct = 0.0f;
             } else {
-                pct = ((f32) ef4_3->x54 / fval) +
-                      ((f32) (sc * 5) / 100.0f);
+                pct = ((f32) ef4_3->x54 / fval) + ((f32) (sc * 5) / 100.0f);
             }
             if (pct >= 1.0f) {
                 pct = 999.0f;
@@ -1194,8 +1188,8 @@ void fn_80316C24(HSD_GObj* arg0)
                 if (ef4_5->x54 == 0) {
                     pct = 0.0f;
                 } else {
-                    pct = ((f32) ef4_5->x54 / fval) +
-                          ((f32) (sc * 5) / 100.0f);
+                    pct =
+                        ((f32) ef4_5->x54 / fval) + ((f32) (sc * 5) / 100.0f);
                 }
                 if (pct >= 1.0f) {
                     pct = 999.0f;
@@ -1632,8 +1626,8 @@ void un_80317D80_OnEnter(void* arg0)
                 HSD_GObj* gobj = (HSD_GObj*) ed4->x0;
                 HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
             }
-            GObj_SetupGXLink((HSD_GObj*) ed4->x0, HSD_GObj_LObjCallback,
-                             0x34, 0);
+            GObj_SetupGXLink((HSD_GObj*) ed4->x0, HSD_GObj_LObjCallback, 0x34,
+                             0);
         }
     }
     memzero(un_804D6ED4, 0xE4);

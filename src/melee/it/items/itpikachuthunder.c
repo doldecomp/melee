@@ -8,12 +8,12 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/ithitbox.h"
 #include "it/itCharItems.h"
 #include "it/item.h"
 
 #include "it/items/forward.h"
 
+#include "it/ithitbox.h"
 #include "it/types.h"
 #include "MSL/math.h"
 

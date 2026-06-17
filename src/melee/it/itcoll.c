@@ -656,8 +656,7 @@ void it_802706D0(Item_GObj* arg_item_gobj)
         if (chk && !arg_item->xDD0_flag.b1) {
             count = 0;
             for (hit_index = 0; hit_index < 4; hit_index++) {
-                HitCapsule* arg_hit =
-                    &arg_item->x5D4_hitboxes[hit_index].hit;
+                HitCapsule* arg_hit = &arg_item->x5D4_hitboxes[hit_index].hit;
                 HitCapsule* tmp_hit = arg_hit;
                 if ((arg_hit->state != HitCapsule_Disabled) &&
                     (arg_hit->element != HitElement_Catch) &&
@@ -739,8 +738,8 @@ void it_802706D0(Item_GObj* arg_item_gobj)
                      hurt_index++)
                 {
                     if (lbColl_8000805C(
-                            hit, &arg_item->xACC_itemHurtbox[hurt_index],
-                            NULL, 0, item->scl, arg_item->scl, 0.0f))
+                            hit, &arg_item->xACC_itemHurtbox[hurt_index], NULL,
+                            0, item->scl, arg_item->scl, 0.0f))
                     {
                         it_802706D0_sub3(
                             item, arg_item, hit,
@@ -823,28 +822,26 @@ void it_80270E30(Item_GObj* arg_item_gobj)
             hit = damage_log->x8;
             attr = arg_item->xCC_item_attr;
             if (hit->x28 != 0) {
-                knockback =
-                    (0.01f * hit->x24 *
-                     ((it_804D6D28->x80_float[11] *
-                       (attr->x1C_damage_mul *
-                        ((it_804D6D28->x80_float[10] *
-                          it_804D6D28->x80_float[8]) +
-                         (it_804D6D28->x80_float[9] *
-                          (it_804D6D28->x80_float[10] * hit->x28))))) +
-                      it_804D6D28->x80_float[12])) +
-                    hit->x2C;
+                knockback = (0.01f * hit->x24 *
+                             ((it_804D6D28->x80_float[11] *
+                               (attr->x1C_damage_mul *
+                                ((it_804D6D28->x80_float[10] *
+                                  it_804D6D28->x80_float[8]) +
+                                 (it_804D6D28->x80_float[9] *
+                                  (it_804D6D28->x80_float[10] * hit->x28))))) +
+                              it_804D6D28->x80_float[12])) +
+                            hit->x2C;
             } else {
-                knockback =
-                    ((0.01f * hit->x24) *
-                     ((it_804D6D28->x80_float[11] *
-                       (attr->x1C_damage_mul *
-                        ((it_804D6D28->x80_float[8] *
-                          (arg_item->xC9C + (f32) arg_item->xCA0)) +
-                         (it_804D6D28->x80_float[9] *
-                          (hit->damage *
-                           (arg_item->xC9C + (f32) arg_item->xCA0)))))) +
-                      it_804D6D28->x80_float[12])) +
-                    hit->x2C;
+                knockback = ((0.01f * hit->x24) *
+                             ((it_804D6D28->x80_float[11] *
+                               (attr->x1C_damage_mul *
+                                ((it_804D6D28->x80_float[8] *
+                                  (arg_item->xC9C + (f32) arg_item->xCA0)) +
+                                 (it_804D6D28->x80_float[9] *
+                                  (hit->damage * (arg_item->xC9C +
+                                                  (f32) arg_item->xCA0)))))) +
+                              it_804D6D28->x80_float[12])) +
+                            hit->x2C;
             }
             knockback_cap = it_804D6D28->x80_float[7];
             if (knockback >= knockback_cap) {
@@ -1240,8 +1237,7 @@ void it_80271B60(Item_GObj* item_gobj)
             ecb = &Item_804A0CCC.x0_ecb_arr[cnt];
             y_pos = Item_804A0CCC.xC0_pos_arr[cnt].y;
             x_pos = Item_804A0CCC.xC0_pos_arr[cnt].x;
-            if (itColl_chkECBOverlap(x_pos, y_pos, &item->xBEC, ecb, &sp24))
-            {
+            if (itColl_chkECBOverlap(x_pos, y_pos, &item->xBEC, ecb, &sp24)) {
                 if (ABS(sp24.x - x_pos) < 0.001f) {
                     if (HSD_Randi(2) != 0) {
                         dir = 1.0f;

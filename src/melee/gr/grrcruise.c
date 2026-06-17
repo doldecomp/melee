@@ -80,7 +80,7 @@ struct StageData grRc_803E4ECC = {
     ARRAY_SIZE(grRc_803E4DA8),
 };
 
-#define grRc_803E5014 \
+#define grRc_803E5014                                                         \
     (*(struct grRCruise_VanishDesc*) ((u8*) grRc_803E4DA8 + 0x26C))
 extern Vec3 grRc_803B8288;
 extern s16 grRc_803E4FF0[];
@@ -696,8 +696,7 @@ void grRCruise_80200578(Ground* gp_arg, s32 joint_id, CollData* cd, s32 arg3,
     f32 dist;
     PAD_STACK(8);
 
-    if ((s32) cd->x34_flags.b1234 != 1 &&
-        (s32) cd->x34_flags.b1234 != 2 &&
+    if ((s32) cd->x34_flags.b1234 != 1 && (s32) cd->x34_flags.b1234 != 2 &&
         (s32) cd->x34_flags.b1234 != 3)
     {
         return;
@@ -789,18 +788,15 @@ void grRCruise_8020071C(Ground_GObj* gobj)
 }
 
 s16 grRc_803E4FF0[] = {
-    0x20, 0x29, 0x2A, 0x2B, 0x2C, 0x2D, 0x2E, 0x2F, 0x30,
-    0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0,
-    0x06, 0x04, 0,    0,    0x08, 0x05, 0,    0,
-    0x10, 0x0A, 0,    0,    0x0B, 0x06, 0,    0,
-    0x0C, 0x07, 0,    0,    0x0D, 0x08, 0,    0,
-    0x0E, 0x09, 0,    0,    0x0F, 0x08, 0,    0,
-    0x13, 0x0C, 0,    1,    0x14, 0x0D, 0,    1,
-    0x15, 0x0E, 0,    1,    0x1E, 0x0F, 0,    1,
-    0x16, 0x10, 0,    1,    0x17, 0x11, 0,    1,
-    0x18, 0x12, 0,    1,    0x19, 0x13, 0,    1,
-    0x1A, 0x14, 0,    1,    0x1B, 0x15, 0,    1,
-    0x1C, 0x16, 0,    1,    0x1D, 0x17, 0,    1,
+    0x20, 0x29, 0x2A, 0x2B, 0x2C, 0x2D, 0x2E, 0x2F, 0x30, 0x21, 0x22,
+    0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0,    0x06, 0x04, 0,    0,
+    0x08, 0x05, 0,    0,    0x10, 0x0A, 0,    0,    0x0B, 0x06, 0,
+    0,    0x0C, 0x07, 0,    0,    0x0D, 0x08, 0,    0,    0x0E, 0x09,
+    0,    0,    0x0F, 0x08, 0,    0,    0x13, 0x0C, 0,    1,    0x14,
+    0x0D, 0,    1,    0x15, 0x0E, 0,    1,    0x1E, 0x0F, 0,    1,
+    0x16, 0x10, 0,    1,    0x17, 0x11, 0,    1,    0x18, 0x12, 0,
+    1,    0x19, 0x13, 0,    1,    0x1A, 0x14, 0,    1,    0x1B, 0x15,
+    0,    1,    0x1C, 0x16, 0,    1,    0x1D, 0x17, 0,    1,
 };
 
 void grRCruise_80200B48(Ground_GObj* gobj)
@@ -859,8 +855,7 @@ void grRCruise_80200C04(Ground_GObj* gobj)
             break;
         case 2:
             if ((entry->x04 % grRc_804D6A10->x28) == 0) {
-                f32 range =
-                    100.0f * (grRc_804D6A10->x30 - grRc_804D6A10->x2C);
+                f32 range = 100.0f * (grRc_804D6A10->x30 - grRc_804D6A10->x2C);
                 s32 randi = (s32) range != 0 ? HSD_Randi((s32) range) : 0;
                 HSD_JObjSetTranslateY(entry->x14,
                                       entry->x0C + (grRc_804D6A10->x2C +
@@ -1107,8 +1102,7 @@ void grRCruise_80201410(Ground_GObj* gobj)
             mpJointListAdd(desc_table->desc[i].x02);
         } else {
             gp->u.map.vanish[i].x00 = 0;
-            grAnime_801C7FF8(gobj, desc_table->desc[i].x00, 2, 1, 0.0f,
-                             1.0f);
+            grAnime_801C7FF8(gobj, desc_table->desc[i].x00, 2, 1, 0.0f, 1.0f);
             mpLib_80057BC0(desc_table->desc[i].x02);
         }
     }

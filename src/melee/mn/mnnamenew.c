@@ -440,7 +440,8 @@ s32 PickAutoName(HSD_GObj* arg0)
 
     name_ptr = &AutoNamesList[pick];
     while ((null_ch = (s8) mnNameNew_NullCharacter) !=
-           (s8) (ch = (*name_ptr)[char_idx])) {
+           (s8) (ch = (*name_ptr)[char_idx]))
+    {
         text[0] = ch;
         text[1] = (*name_ptr)[char_idx + 1];
         text[2] = mnNameNew_NullCharacter;
@@ -656,7 +657,7 @@ void mnNameNew_GlyphVariantInput(void)
         }
         null_ch = (s8) mnNameNew_NullCharacter;
         table = (char**) &mnNameNew_803EDCE4[data->x1];
-        while (null_ch != (s8) **table) {
+        while (null_ch != (s8) * *table) {
             table++;
             count++;
         }
@@ -1301,8 +1302,10 @@ s32 mnNameNew_8023D130(GlyphVariantEntry* arg0, u8 arg1, u8 arg2, s32 arg3)
         HSD_JObjGetTranslationX(jobj18) - HSD_JObjGetTranslationX(jobj14);
     y_range =
         -(HSD_JObjGetTranslationY(jobj1C) - HSD_JObjGetTranslationY(jobj14));
-    table_upper = AddCharacterToName_getGlyphs(layout->upper_glyphs, (u8) arg3);
-    table_lower = AddCharacterToName_getGlyphs(layout->lower_glyphs, (u8) arg3);
+    table_upper =
+        AddCharacterToName_getGlyphs(layout->upper_glyphs, (u8) arg3);
+    table_lower =
+        AddCharacterToName_getGlyphs(layout->lower_glyphs, (u8) arg3);
     for (i = 0; i < (s32) arg1; i++) {
         if ((u8) (arg3 - 0x30) <= 1U) {
             if ((i % 2) != 0) {
@@ -1429,14 +1432,24 @@ s32 mnNameNew_8023DA08(NameNewEntry* arg0)
     s32 var_r29;
     anim = mnNameNew_803EDA58;
     var_r29 = 1;
-    if (mn_8022ED6C(arg0->jobjs[12], &anim[2]) < anim[2].end_frame) { var_r29 = 0; }
+    if (mn_8022ED6C(arg0->jobjs[12], &anim[2]) < anim[2].end_frame) {
+        var_r29 = 0;
+    }
     end_frame = &anim[2].end_frame;
-    if (mn_8022ED6C(arg0->jobjs[13], &anim[2]) < *end_frame) { var_r29 = 0; }
+    if (mn_8022ED6C(arg0->jobjs[13], &anim[2]) < *end_frame) {
+        var_r29 = 0;
+    }
     frame = mn_8022EFD8(arg0->jobjs[4], anim);
     end_frame = &anim->end_frame;
-    if (frame < anim->end_frame) { var_r29 = 0; }
-    if (mn_8022EFD8(arg0->jobjs[2], anim) < *end_frame) { var_r29 = 0; }
-    if (mn_8022EFD8(arg0->jobjs[6], anim) < *end_frame) { var_r29 = 0; }
+    if (frame < anim->end_frame) {
+        var_r29 = 0;
+    }
+    if (mn_8022EFD8(arg0->jobjs[2], anim) < *end_frame) {
+        var_r29 = 0;
+    }
+    if (mn_8022EFD8(arg0->jobjs[6], anim) < *end_frame) {
+        var_r29 = 0;
+    }
     return var_r29;
 }
 
@@ -1714,8 +1727,7 @@ void mnNameNew_8023E32C(s32 arg0)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, root_jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4U, 0x80U);
     HSD_GObj_SetupProc(gobj, (HSD_GObjEvent) fn_8023DBE8, 0U);
-    HSD_JObjAddAnimAll(root_jobj, setup_desc[1], setup_desc[2],
-                       setup_desc[3]);
+    HSD_JObjAddAnimAll(root_jobj, setup_desc[1], setup_desc[2], setup_desc[3]);
     HSD_JObjReqAnimAll(root_jobj, 0.0f);
     HSD_JObjAnimAll(root_jobj);
     user_data = HSD_MemAlloc(0x6C);
@@ -1790,8 +1802,8 @@ void mnNameNew_EnterFromMnCharSel(HSD_Archive* arg0, s32 arg1)
         &MenMainBack_Top.shapeanim_joint, mnNameNew_803EE3E0,
 
         // Scene
-        &MenMain_cam, mnNameNew_803EE400, &MenMain_lights,
-        mnNameNew_803EE41C, &MenMain_fog, mnNameNew_803EE434,
+        &MenMain_cam, mnNameNew_803EE400, &MenMain_lights, mnNameNew_803EE41C,
+        &MenMain_fog, mnNameNew_803EE434,
 
         // Panel
         &MenMainPanel_Top.joint, mnNameNew_803EE444,
@@ -1800,27 +1812,23 @@ void mnNameNew_EnterFromMnCharSel(HSD_Archive* arg0, s32 arg1)
         &MenMainPanel_Top.shapeanim_joint, mnNameNew_803EE498,
 
         // Row 1
-        &mnNameNew_804A06F0[0], mnNameNew_803EE4BC,
-        &mnNameNew_804A06F0[1], mnNameNew_803EE4D8,
-        &mnNameNew_804A06F0[2], mnNameNew_803EE4F8,
+        &mnNameNew_804A06F0[0], mnNameNew_803EE4BC, &mnNameNew_804A06F0[1],
+        mnNameNew_803EE4D8, &mnNameNew_804A06F0[2], mnNameNew_803EE4F8,
         &mnNameNew_804A06F0[3], mnNameNew_803EE51C,
 
         // Row 2
-        &mnNameNew_804A0700[0], mnNameNew_803EE540,
-        &mnNameNew_804A0700[1], mnNameNew_803EE55C,
-        &mnNameNew_804A0700[2], mnNameNew_803EE57C,
+        &mnNameNew_804A0700[0], mnNameNew_803EE540, &mnNameNew_804A0700[1],
+        mnNameNew_803EE55C, &mnNameNew_804A0700[2], mnNameNew_803EE57C,
         &mnNameNew_804A0700[3], mnNameNew_803EE5A0,
 
         // Row 3
-        &mnNameNew_804A0710[0], mnNameNew_803EE5C4,
-        &mnNameNew_804A0710[1], mnNameNew_803EE5E0,
-        &mnNameNew_804A0710[2], mnNameNew_803EE600,
+        &mnNameNew_804A0710[0], mnNameNew_803EE5C4, &mnNameNew_804A0710[1],
+        mnNameNew_803EE5E0, &mnNameNew_804A0710[2], mnNameNew_803EE600,
         &mnNameNew_804A0710[3], mnNameNew_803EE624,
 
         // Row 4
-        &mnNameNew_804A0720[0], mnNameNew_803EE648,
-        &mnNameNew_804A0720[1], mnNameNew_803EE664,
-        &mnNameNew_804A0720[2], mnNameNew_803EE684,
+        &mnNameNew_804A0720[0], mnNameNew_803EE648, &mnNameNew_804A0720[1],
+        mnNameNew_803EE664, &mnNameNew_804A0720[2], mnNameNew_803EE684,
         &mnNameNew_804A0720[3], mnNameNew_803EE6A8,
 
         NULL);

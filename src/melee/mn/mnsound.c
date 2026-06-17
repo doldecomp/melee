@@ -206,9 +206,7 @@ void fn_80249A1C(HSD_GObj* arg0)
     }
     lb_80011E24((HSD_JObj*) arg0->hsd_obj, &sp20, 6, -1);
     temp_f1 = mn_8022F298(sp20);
-    if ((anim[5].start_frame <= temp_f1) &&
-        (temp_f1 <= anim[5].end_frame))
-    {
+    if ((anim[5].start_frame <= temp_f1) && (temp_f1 <= anim[5].end_frame)) {
         sp28 = anim[5];
     } else {
         sp28 = anim[6];
@@ -291,7 +289,8 @@ void mnSound_80249C08(int unused)
             mn_8022ED6C(sp64, anim + 1);
         }
         lb_80011E24(jobj, &sp60, 0xB, -1);
-        HSD_JObjReqAnimAll(sp60, mnSound_803EEED8[user_data->unk1 + 3].end_frame);
+        HSD_JObjReqAnimAll(sp60,
+                           mnSound_803EEED8[user_data->unk1 + 3].end_frame);
         HSD_JObjAnimAll(sp60);
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     }

@@ -357,9 +357,9 @@ void gm_801B0474(StartMeleeData* arg0, MatchEnd* arg1)
                         .is_big_loser,
                     var_r7);
             } else {
-                player_standings_inline(
-                    arg0, arg1, i, arg1->player_standings[i].is_big_loser,
-                    var_r7);
+                player_standings_inline(arg0, arg1, i,
+                                        arg1->player_standings[i].is_big_loser,
+                                        var_r7);
             }
         }
     }

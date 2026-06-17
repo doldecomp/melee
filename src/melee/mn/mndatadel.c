@@ -387,9 +387,8 @@ void fn_8024F318(HSD_GObj* gobj)
             switch ((s32) cursor) {
             case 0: {
                 case_user_data = mnDataDel_804D6C68->user_data;
-                temp_ret = mn_80231634(
-                    (struct mn_80231634_t*)
-                        case_user_data->x10[mnDataDel_803EF8AC[0]]);
+                temp_ret = mn_80231634((struct mn_80231634_t*) case_user_data
+                                           ->x10[mnDataDel_803EF8AC[0]]);
                 lb_80011E24((HSD_JObj*) temp_ret, &sp68, 1, -1);
                 frame = mn_8022F298(sp68);
                 HSD_JObjReqAnimAll(sp68, 1.0f);
@@ -411,9 +410,8 @@ void fn_8024F318(HSD_GObj* gobj)
                 break;
             case 2: {
                 case_user_data = mnDataDel_804D6C68->user_data;
-                temp_ret = mn_80231634(
-                    (struct mn_80231634_t*)
-                        case_user_data->x10[mnDataDel_803EF8AC[2]]);
+                temp_ret = mn_80231634((struct mn_80231634_t*) case_user_data
+                                           ->x10[mnDataDel_803EF8AC[2]]);
                 lb_80011E24((HSD_JObj*) temp_ret, &sp60, 1, -1);
                 frame = mn_8022F298(sp60);
                 HSD_JObjReqAnimAll(sp60, 1.0f);
@@ -430,9 +428,8 @@ void fn_8024F318(HSD_GObj* gobj)
             }
             case 3: {
                 case_user_data = mnDataDel_804D6C68->user_data;
-                temp_ret = mn_80231634(
-                    (struct mn_80231634_t*)
-                        case_user_data->x10[mnDataDel_803EF8AC[3]]);
+                temp_ret = mn_80231634((struct mn_80231634_t*) case_user_data
+                                           ->x10[mnDataDel_803EF8AC[3]]);
                 lb_80011E24((HSD_JObj*) temp_ret, &sp58, 1, -1);
                 frame = mn_8022F298(sp58);
                 HSD_JObjReqAnimAll(sp58, 1.0f);
@@ -450,9 +447,8 @@ void fn_8024F318(HSD_GObj* gobj)
             }
             case 4: {
                 case_user_data = mnDataDel_804D6C68->user_data;
-                temp_ret = mn_80231634(
-                    (struct mn_80231634_t*)
-                        case_user_data->x10[mnDataDel_803EF8AC[4]]);
+                temp_ret = mn_80231634((struct mn_80231634_t*) case_user_data
+                                           ->x10[mnDataDel_803EF8AC[4]]);
                 lb_80011E24((HSD_JObj*) temp_ret, &sp50, 1, -1);
                 frame = mn_8022F298(sp50);
                 HSD_JObjReqAnimAll(sp50, 1.0f);

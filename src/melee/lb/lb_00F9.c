@@ -86,9 +86,9 @@ const struct {
 };
 
 char lb_803BA150[] = "active deffect:\0[NULL]\n\n\0\0\0\0"
-                      "free deffect:\0\0\0[NULL]\n\n\n\0\0\0"
-                      "translate\0\0\0"
-                      "!(jobj->flags & JOBJ_USE_QUATERNION)\0\0\0\0\0\0";
+                     "free deffect:\0\0\0[NULL]\n\n\n\0\0\0"
+                     "translate\0\0\0"
+                     "!(jobj->flags & JOBJ_USE_QUATERNION)\0\0\0\0\0\0";
 
 lb_803BA248_fn lb_803BA248[] = {
     lb_80013BB0, lb_80013BB8, lb_80013BE4, lb_80013C18, lb_80013D68,
@@ -1235,7 +1235,8 @@ int lb_80011E24(HSD_JObj* root, HSD_JObj** result, ...)
                         break;
                     }
                     if (HSD_JObjGetNext(HSD_JObjGetParent(saved)) != NULL) {
-                        next_node = saved = HSD_JObjGetNext(HSD_JObjGetParent(saved));
+                        next_node = saved =
+                            HSD_JObjGetNext(HSD_JObjGetParent(saved));
                         break;
                     }
                     saved = HSD_JObjGetParent(saved);
@@ -1790,8 +1791,8 @@ void fn_80013614(HSD_GObj* gobj)
             GXSetTevColor(GX_TEVREG0, color);
             GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
                             GX_CA_ZERO);
-            GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
-                            GX_TEVPREV);
+            GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO,
+                            GX_CS_SCALE_1, 1, GX_TEVPREV);
             lb_8001271C(&tex_obj, x0, x4, (f32) width, (f32) height, x8, xC);
         }
         HSD_StateInvalidate(2);
@@ -2161,9 +2162,8 @@ bool lb_80014638(struct lb_80014638_arg0_t* arg0,
     }
     {
         float z = sp18.z;
-        if (((sp24.z - sp30.z) < 0.0F
-                 ? -(sp24.z - sp30.z)
-                 : sp24.z - sp30.z) < 0.00001F)
+        if (((sp24.z - sp30.z) < 0.0F ? -(sp24.z - sp30.z) : sp24.z - sp30.z) <
+            0.00001F)
         {
             z = 0.0F;
         } else {
