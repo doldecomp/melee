@@ -51,18 +51,41 @@ struct grMaterial_MObjInfo {
     /*  +48 */ void (*setup_tev)(HSD_MObj* mobj, HSD_TObj* tobj,
                                  u32 rendermode);
     /*  +4C */ void (*unset)(HSD_MObj* mobj, u32 rendermode);
-    /*  +50 */ u8 pad_x50[0xDC - 0x50];
-    /*  +DC */ char library_name[0xF4 - 0xDC];
+    /*  +50 */ HSD_TevDesc tevdesc_tmpl;
+    /*  +C4 */ HSD_TECnst texp_tmpl;
 };
 
-/* 3E0A20 */ static struct grMaterial_MObjInfo grMaterial_803E0A20 = { 0 };
-/* 4D4560 */ static char grMaterial_804D4560[] = "gr_mobj";
-/* 4D4568 */ static char grMaterial_804D4568[] = "0";
+/* 3E0A20 */ static struct grMaterial_MObjInfo grMaterial_803E0A20 = {
+    { { grMaterial_801C8E74 } },
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    {
+        NULL,
+        1,
+        0,
+        0xFF,
+        0xFF,
+        0xFF,
+        {
+            {
+                GX_TEV_ADD,   GX_CC_CPREV,    GX_CC_ZERO,     GX_CC_ZERO,
+                GX_CC_ZERO,   GX_CS_SCALE_1,  GX_TB_ZERO,     GX_DISABLE,
+                GX_TEVPREV,   GX_TEV_ADD,     GX_CA_ZERO,     GX_CA_ZERO,
+                GX_CA_ZERO,   GX_CA_APREV,    GX_CS_SCALE_1,  GX_TB_ZERO,
+                GX_DISABLE,   GX_TEVPREV,     GX_TC_LINEAR,   GX_TEV_SWAP0,
+                GX_TEV_SWAP0, GX_TEV_KCSEL_1, GX_TEV_KASEL_1,
+            },
+        },
+    },
+    { HSD_TE_CNST, NULL, NULL, HSD_TE_RGB, HSD_TE_U8, 0xFF, 0xFF },
+};
+
 /* 4D456C */ static ItCmd grMaterial_804D456C[1] = {
     grMaterial_801C9470,
 };
-
-static u32 data_section_pad[35] = { 0 };
 
 void grMaterial_801C87D0(HSD_JObj* jobj, u32 flags)
 {
@@ -265,9 +288,8 @@ void grMaterial_801C8E68(HSD_GObj* gobj, GroundOrAir ground_or_air)
 void grMaterial_801C8E74(void)
 {
     hsdInitClassInfo(HSD_CLASS_INFO(&grMaterial_803E0A20),
-                     HSD_CLASS_INFO(&hsdMObj),
-                     grMaterial_803E0A20.library_name, "gr_mobj",
-                     sizeof(HSD_MObjInfo), sizeof(HSD_MObj));
+                     HSD_CLASS_INFO(&hsdMObj), "sysdolphin_base_library",
+                     "gr_mobj", sizeof(HSD_MObjInfo), sizeof(HSD_MObj));
     HSD_CLASS_INFO(&grMaterial_803E0A20)->release =
         HSD_CLASS_INFO(&hsdMObj)->release;
     HSD_CLASS_INFO(&grMaterial_803E0A20)->amnesia =
@@ -319,9 +341,7 @@ static void fn_801C8EF8(HSD_MObj* mobj, u32 rendermode)
     }
     HSD_TObjSetup(tobj);
     HSD_TObjSetupTextureCoordGen(tobj);
-    if (mobj->tevdesc == NULL) {
-        __assert(base + 0xF4, 0xF3, base + 0x104);
-    }
+    HSD_ASSERT(0xF3, mobj->tevdesc);
     HSD_TExpSetupTev(mobj->tevdesc, mobj->texp);
     HSD_TObjSetupVolatileTev(tobj, mobj_rendermode);
 
@@ -333,8 +353,8 @@ static void fn_801C8EF8(HSD_MObj* mobj, u32 rendermode)
         if (grMaterial_GetOverlay(gp)->x7C_color_enable) {
             reg1 = lbGetFreeColorRegister(0, mobj, NULL);
             if (reg1 == -1) {
-                OSReport(base + 0x114);
-                __assert(base + 0xF4, 0x7A, grMaterial_804D4568);
+                OSReport("can't find free color register!\n");
+                HSD_ASSERT(0x7A, 0);
             }
             sp_cnst.comp = reg1_lt4 = 1;
             sp_cnst.ctype = temp = 0;
@@ -353,8 +373,8 @@ static void fn_801C8EF8(HSD_MObj* mobj, u32 rendermode)
             }
             reg2 = lbGetFreeColorRegister(temp, mobj, (HSD_TExp*) &sp_cnst);
             if (reg2 == -1) {
-                OSReport(base + 0x114);
-                __assert(base + 0xF4, 0x88, grMaterial_804D4568);
+                OSReport("can't find free color register!\n");
+                HSD_ASSERT(0x88, 0);
             }
             sp_cnst.comp = reg1_lt4_for_kcsel = 1;
             sp_cnst.ctype = temp = 0;
@@ -387,8 +407,8 @@ static void fn_801C8EF8(HSD_MObj* mobj, u32 rendermode)
         if (gp->x10_flags.b6) {
             alpha_reg = lbGetFreeAlphaRegister(0, mobj, NULL);
             if (alpha_reg == -1) {
-                OSReport(base + 0x138);
-                __assert(base + 0xF4, 0xA7, grMaterial_804D4568);
+                OSReport("can't find free alpha register!\n");
+                HSD_ASSERT(0xA7, 0);
             }
             sp_cnst.comp = 5;
             sp_cnst.ctype = 3;
