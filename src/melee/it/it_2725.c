@@ -372,8 +372,8 @@ s32 it_80272D40(Item_GObj* item_gobj)
     if (ftLib_80086960(item_gobj)) {
         return 0;
     }
-    if ((item_gobj != NULL) && (item_gobj->classifier == HSD_GOBJ_CLASS_ITEM))
-    { // ITEM_UNK_ENEMY?
+    if ((item_gobj != NULL) &&
+        (item_gobj->classifier == HSD_GOBJ_CLASS_ITEM)) { // ITEM_UNK_ENEMY?
         chk = true;
     } else {
         chk = false;

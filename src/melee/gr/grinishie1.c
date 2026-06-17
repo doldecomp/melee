@@ -36,7 +36,7 @@
 #include <baselib/gobj.h>
 
 #define invalid_state(line)                                                   \
-    OSReport("%s:%d: oioi..\n", "i!=HATENA_APPEAR_CHECKLOOP", line);                         \
+    OSReport("%s:%d: oioi..\n", "i!=HATENA_APPEAR_CHECKLOOP", line);          \
     while (true) {                                                            \
     }
 
@@ -127,8 +127,8 @@ Vec3 grI1_803B8268;
     }
 
 s16 grI1_803E48C8[22] = {
-    13, 3, 3, 14, 3, 14, 15, 3, 15, 16, 3, 16,
-    17, 3, 17, 18, 3, 18, 19, 3, 19, 0,
+    13, 3,  3, 14, 3,  14, 15, 3,  15, 16, 3,
+    16, 17, 3, 17, 18, 3,  18, 19, 3,  19, 0,
 };
 
 StageCallbacks grI1_803E48F4[] = {
@@ -228,7 +228,8 @@ bool grInishie1_801FA9AC(void)
 HSD_GObj* grInishie1_801FA9B4(s32 arg0)
 {
     HSD_GObj* gobj;
-    StageCallbacks* cb = (StageCallbacks*) ((char*) grI1_803E48C8 + 0x2c) + arg0;
+    StageCallbacks* cb =
+        (StageCallbacks*) ((char*) grI1_803E48C8 + 0x2c) + arg0;
 
     gobj = Ground_GetStageGObj(arg0);
 
@@ -252,7 +253,8 @@ HSD_GObj* grInishie1_801FA9B4(s32 arg0)
             HSD_GObj_SetupProc(gobj, cb->callback2, 4U);
         }
     } else {
-        OSReport(grI1_803E4950.report_fmt_get_gobj, "grinishie1.c", 0xE7, arg0);
+        OSReport(grI1_803E4950.report_fmt_get_gobj, "grinishie1.c", 0xE7,
+                 arg0);
     }
 
     return gobj;
@@ -503,10 +505,10 @@ void grInishie1_801FB0AC(HSD_GObj* gobj, u32 index)
                 }
             }
             if (i == 0x13) {
-                gp->gv.inishie1.xC6 =
-                    randi_between_f32(grI1_804D69F8->unk0, grI1_804D69F8->unk4);
-                gp->gv.inishie1.xC8 =
-                    randi_between_f32(grI1_804D69F8->unk8, grI1_804D69F8->unkC);
+                gp->gv.inishie1.xC6 = randi_between_f32(grI1_804D69F8->unk0,
+                                                        grI1_804D69F8->unk4);
+                gp->gv.inishie1.xC8 = randi_between_f32(grI1_804D69F8->unk8,
+                                                        grI1_804D69F8->unkC);
             }
         }
 
@@ -528,14 +530,15 @@ void grInishie1_801FB0AC(HSD_GObj* gobj, u32 index)
             do {                                                              \
                 index = HSD_Randi(0x13);                                      \
                 if (index != last_index &&                                    \
-                    gp->gv.inishie1.blocks[index].status == 0) {              \
+                    gp->gv.inishie1.blocks[index].status == 0)                \
+                {                                                             \
                     break;                                                    \
                 }                                                             \
                 attempts++;                                                   \
             } while (attempts < 0x14);                                        \
                                                                               \
             if (attempts == 0x14) {                                           \
-                HSD_ASSERTMSG(line, false, "%s:%d: oioi..\n");            \
+                HSD_ASSERTMSG(line, false, "%s:%d: oioi..\n");                \
             }                                                                 \
                                                                               \
             last_index = index;                                               \
@@ -829,9 +832,7 @@ void grInishie1_801FC110(HSD_GObj* gobj)
     f32 dist_lo;
     f32 dist_hi;
 
-    if (gp->gv.inishie1.xE0 > 100000.0f ||
-        gp->gv.inishie1.xE4 > 100000.0f)
-    {
+    if (gp->gv.inishie1.xE0 > 100000.0f || gp->gv.inishie1.xE4 > 100000.0f) {
         gp->gv.inishie1.xE4 = 100000.0f;
         gp->gv.inishie1.xE0 = 100000.0f;
     }
@@ -868,8 +869,7 @@ void grInishie1_801FC110(HSD_GObj* gobj)
             gp->gv.inishie1.xF4 = -max_speed;
         }
 
-        if (dist_lo != 0.0f && dist_hi != 0.0f &&
-            gp->gv.inishie1.xF4 != 0.0f)
+        if (dist_lo != 0.0f && dist_hi != 0.0f && gp->gv.inishie1.xF4 != 0.0f)
         {
             gp->gv.inishie1.xF4 *= grI1_804D69F8->unk2C[0].x;
         } else {
@@ -990,10 +990,8 @@ void grInishie1_801FC664(HSD_GObj* gobj)
         if (gp->gv.inishie1.xF4 > t) {
             gp->gv.inishie1.xF4 = t;
         }
-        HSD_JObjAddTranslationY(gp->gv.inishie1.x100,
-                                -gp->gv.inishie1.xF4);
-        HSD_JObjAddTranslationY(gp->gv.inishie1.x104,
-                                -gp->gv.inishie1.xF4);
+        HSD_JObjAddTranslationY(gp->gv.inishie1.x100, -gp->gv.inishie1.xF4);
+        HSD_JObjAddTranslationY(gp->gv.inishie1.x104, -gp->gv.inishie1.xF4);
         bottom = -30.0f + Stage_GetBlastZoneBottomOffset();
         lb_8000B1CC(gp->gv.inishie1.x100, NULL, &sp18);
         lb_8000B1CC(gp->gv.inishie1.x104, NULL, &sp24);

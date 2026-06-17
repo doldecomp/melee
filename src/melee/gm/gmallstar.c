@@ -433,9 +433,11 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
         {
             gm_803DEBE8_t* src2 = &opp_data[count_processed];
             s8* dst2 = &chars[count_processed];
-            s32 remaining =
-                ((AllstarRoundInfo*) (base + 0x31C))[arg1].count - count_processed;
-            if (count_processed < ((AllstarRoundInfo*) (base + 0x31C))[arg1].count) {
+            s32 remaining = ((AllstarRoundInfo*) (base + 0x31C))[arg1].count -
+                            count_processed;
+            if (count_processed <
+                ((AllstarRoundInfo*) (base + 0x31C))[arg1].count)
+            {
                 do {
                     u8 val = src2->x3;
                     src2++;
@@ -546,8 +548,7 @@ void gm_801B5624(GameScene* arg0)
     {
         gm_803DEBE8_t* opp = (gm_803DEBE8_t*) (base + 0x2B8) +
                              ((AllstarRoundInfo*) (base + 0x31C))[round].start;
-        color =
-            ((u8*) gm_80490940)[((u32) opp - (u32) (base + 0x2B8)) >> 2];
+        color = ((u8*) gm_80490940)[((u32) opp - (u32) (base + 0x2B8)) >> 2];
     }
 
     round = gm_8017BE84(arg0->idx);
@@ -640,8 +641,7 @@ void gm_801B5ACC(GameScene* arg0)
     {
         gm_803DEBE8_t* opp =
             (gm_803DEBE8_t*) (base + 0x2B8) + gm_803DEC4C[round].start;
-        color =
-            ((u8*) gm_80490940)[((u32) opp - (u32) (base + 0x2B8)) >> 2];
+        color = ((u8*) gm_80490940)[((u32) opp - (u32) (base + 0x2B8)) >> 2];
     }
 
     gm_8017CE34(data, (UnkAdventureData*) allstar, chars, 0, 0, 0, 0, 0x55, 0,

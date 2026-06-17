@@ -776,10 +776,10 @@ void grZebes_801D9798(HSD_GObj* gobj)
 
     gp->gv.zebes5.xC4 = 0;
 
-    if ((delay_max = grZe_804D6990->xA0_entries[gp->gv.zebes5.xC4]
-                         .x4_delay_max) >
-        (delay_min = grZe_804D6990->xA0_entries[gp->gv.zebes5.xC4]
-                         .x2_delay_min))
+    if ((delay_max =
+             grZe_804D6990->xA0_entries[gp->gv.zebes5.xC4].x4_delay_max) >
+        (delay_min =
+             grZe_804D6990->xA0_entries[gp->gv.zebes5.xC4].x2_delay_min))
     {
         s32 diff = delay_max - delay_min;
         delay_max = delay_min + ((diff != 0) ? HSD_Randi(diff) : 0);
@@ -797,11 +797,11 @@ void grZebes_801D9798(HSD_GObj* gobj)
     gp->gv.zebes5.xDC = 0;
     gp->x11_flags.b012 = 1;
 
-    for (j = 0; j < 0x1D &&
-                (grZe_804D6990->xA0_entries[j + 1].x0_base != 0 ||
-                 grZe_804D6990->xA0_entries[j + 1].x2_delay_min != 0 ||
-                 grZe_804D6990->xA0_entries[j + 1].x4_delay_max != 0 ||
-                 grZe_804D6990->xA0_entries[j + 1].x6_level != 0);
+    for (j = 0;
+         j < 0x1D && (grZe_804D6990->xA0_entries[j + 1].x0_base != 0 ||
+                      grZe_804D6990->xA0_entries[j + 1].x2_delay_min != 0 ||
+                      grZe_804D6990->xA0_entries[j + 1].x4_delay_max != 0 ||
+                      grZe_804D6990->xA0_entries[j + 1].x6_level != 0);
          j++)
     {
         ;
@@ -867,13 +867,15 @@ void grZebes_801D99E0(HSD_GObj* gobj)
                 diff = -diff;
             }
 
-            discriminant = (grZe_804D6990->x98 * grZe_804D6990->x98) - (4.0f * diff) / grZe_804D6990->x9C;
+            discriminant = (grZe_804D6990->x98 * grZe_804D6990->x98) -
+                           (4.0f * diff) / grZe_804D6990->x9C;
             if (discriminant < 0.0f) {
                 gp->gv.zebes5.xCC = 999.0f;
             } else {
                 f32 root = sqrtf(discriminant);
                 gp->gv.zebes5.xCC =
-                    (f32) (0.5 * (f64) (grZe_804D6990->x9C * (grZe_804D6990->x98 - root)));
+                    (f32) (0.5 * (f64) (grZe_804D6990->x9C *
+                                        (grZe_804D6990->x98 - root)));
                 if (gp->gv.zebes5.xCC < 0.0f) {
                     gp->gv.zebes5.xCC = 999.0f;
                 }
@@ -907,16 +909,15 @@ void grZebes_801D99E0(HSD_GObj* gobj)
         accel = grZe_804D6990->x9C;
         t = vel / accel;
         delta = gp->gv.zebes5.xD4 - gp->gv.zebes5.xD8;
-        threshold = (f32) ((f64) (vel * t) -
-                           (0.5 * (f64) accel * (f64) (t * t)));
+        threshold =
+            (f32) ((f64) (vel * t) - (0.5 * (f64) accel * (f64) (t * t)));
 
         abs_delta = delta;
         if (delta < 0.0f) {
             abs_delta = -abs_delta;
         }
 
-        if (abs_delta < threshold ||
-            ((delta < 0.0f) ? -delta : delta) < accel)
+        if (abs_delta < threshold || ((delta < 0.0f) ? -delta : delta) < accel)
         {
             gp->gv.zebes5.xC8 = 4;
         } else {

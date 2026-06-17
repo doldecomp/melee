@@ -6,6 +6,7 @@
 #include "it/types.h"
 
 #include <baselib/forward.h>
+
 #include <dolphin/mtx.h>
 
 /* 26C47C */ void it_8026C47C(struct it_8026C47C_arg0_t*);

@@ -29,9 +29,7 @@ void ftCh_TagRockPaper_Anim(HSD_GObj* gobj)
         ftCh_GrabUnk1_8015BC88(gobj);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ChangeMotionState(gobj, 0x180, 0, 0.0f,
-                                  1.0f, 0.0f,
-                                  NULL);
+        Fighter_ChangeMotionState(gobj, 0x180, 0, 0.0f, 1.0f, 0.0f, NULL);
         ftAnim_8006EBA4(gobj);
     }
 }

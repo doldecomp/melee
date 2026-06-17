@@ -2,6 +2,9 @@
 
 #include <platform.h>
 
+#include "it/it_2725.h"
+#include "it/ithitbox.h"
+
 #include <melee/gr/forward.h>
 
 #include <dolphin/os.h>
@@ -25,8 +28,6 @@
 #include <melee/gr/types.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/items/itwhispyapple.h>
-#include "it/it_2725.h"
-#include "it/ithitbox.h"
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbaudio_ax.h>
@@ -549,12 +550,12 @@ void grGreens_80213C10(Ground_GObj* gobj)
                 if ((float) gp->gv.greens2.xC > grGr_params->x50) {
                     gp->gv.greens2.x8++;
                     gp->gv.greens2.xC = 0;
-                    grAnime_801C8138(gobj, gp->map_id,
-                                     grGr_803E777C[gp->gv.greens2.x8]
-                                                   [gp->gv.greens2.x14]);
-                    grAnime_801C8138(bg_gobj, bg_gp->map_id,
-                                     grGr_803E77D4[gp->gv.greens2.x8]
-                                                   [gp->gv.greens2.x14]);
+                    grAnime_801C8138(
+                        gobj, gp->map_id,
+                        grGr_803E777C[gp->gv.greens2.x8][gp->gv.greens2.x14]);
+                    grAnime_801C8138(
+                        bg_gobj, bg_gp->map_id,
+                        grGr_803E77D4[gp->gv.greens2.x8][gp->gv.greens2.x14]);
                     lbAudioAx_800237A8(gp->gv.greens2.x14 == 0 ? 0x68FB0
                                                                : 0x68FB1,
                                        0x7F, 0x40);
@@ -653,7 +654,8 @@ void grGreens_80213C10(Ground_GObj* gobj)
                 {
                     Ground* cur_gp = GET_GROUND(gobj);
                     cur_gp->gv.greens2.x0 = (cur_gp->gv.greens2.x0 + 1) % 10;
-                    cur_gp->gv.greens2.x4 = grGr_803E7734[cur_gp->gv.greens2.x0];
+                    cur_gp->gv.greens2.x4 =
+                        grGr_803E7734[cur_gp->gv.greens2.x0];
                     cur_gp->gv.greens2.x10 = 1;
                 }
                 return;
@@ -678,7 +680,8 @@ void grGreens_80213C10(Ground_GObj* gobj)
                 {
                     Ground* cur_gp = GET_GROUND(gobj);
                     cur_gp->gv.greens2.x0 = (cur_gp->gv.greens2.x0 + 1) % 10;
-                    cur_gp->gv.greens2.x4 = grGr_803E7734[cur_gp->gv.greens2.x0];
+                    cur_gp->gv.greens2.x4 =
+                        grGr_803E7734[cur_gp->gv.greens2.x0];
                     cur_gp->gv.greens2.x10 = 1;
                 }
             } else {
@@ -776,7 +779,6 @@ void grGreens_80214804(Ground_GObj* gobj)
     HSD_Free((void*) gp->gv.corneria.xC8);
     HSD_Free((void*) gp->gv.corneria.xCC);
 }
-
 
 void grGreens_8021483C(Ground_GObj* gobj)
 {
@@ -920,8 +922,7 @@ void grGreens_80214FA8(Ground_GObj* gobj)
             switch (grGr_8049F9E0[j * 6 + col]) {
             case 1:
             case 2:
-                grGreens_80215358(gobj, col, j,
-                                   grGr_8049F9E0[j * 6 + col], 3);
+                grGreens_80215358(gobj, col, j, grGr_8049F9E0[j * 6 + col], 3);
                 break;
             }
         }
@@ -1310,10 +1311,10 @@ void grGreens_802166C4(Ground_GObj* gobj)
             }
         }
 
-        left_has_nonzero = weights[0] != 0 || weights[1] != 0 ||
-                           weights[2] != 0;
-        right_has_nonzero = weights[3] != 0 || weights[4] != 0 ||
-                            weights[5] != 0;
+        left_has_nonzero =
+            weights[0] != 0 || weights[1] != 0 || weights[2] != 0;
+        right_has_nonzero =
+            weights[3] != 0 || weights[4] != 0 || weights[5] != 0;
 
         if (left_has_nonzero) {
             int total;
@@ -1400,7 +1401,8 @@ void grGreens_802166C4(Ground_GObj* gobj)
                 }
                 spawn_row -= 1;
             }
-            type_roll = grGr_params->x20 != 0 ? HSD_Randi(grGr_params->x20) : 0;
+            type_roll =
+                grGr_params->x20 != 0 ? HSD_Randi(grGr_params->x20) : 0;
             type = type_roll != 0 ? 1 : 2;
             grGreens_80215358(gobj, choice, spawn_row, type, 1);
         }

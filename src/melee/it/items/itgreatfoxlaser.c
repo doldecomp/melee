@@ -5,10 +5,10 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/ithitbox.h"
-#include "it/itzako.h"
 #include "it/itcoll.h"
 #include "it/item.h"
+#include "it/ithitbox.h"
+#include "it/itzako.h"
 #include "lb/lb_00B0.h"
 
 #include <MSL/math.h>
