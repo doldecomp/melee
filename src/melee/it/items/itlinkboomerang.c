@@ -7,59 +7,21 @@
 #include "ft/ftlib.h"
 #include "ftLink/ftLk_SpecialHi.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/itCharItems.h"
+#include "it/itdraw.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "it/itmaplib.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 
+#include <math_ppc.h>
 #include <MSL/trigf.h>
 
-#define M_TAU 6.283185307179586
-#define DEG2RAD 0.017453292f
-
-static inline float my_sqrtf(float x)
-{
-    static const double _half = .5;
-    static const double _three = 3.0;
-
-    u8 _[4] = { 0 };
-
-    volatile float y;
-    if (x > 0) {
-        double guess = __frsqrte((double) x);
-        guess = _half * guess * (_three - guess * guess * x);
-        guess = _half * guess * (_three - guess * guess * x);
-        guess = _half * guess * (_three - guess * guess * x);
-        y = (float) (x * guess);
-        return y;
-    }
-    return x;
-}
-
-#define HYPOT(x, y) my_sqrtf((x) * (x) + (y) * (y))
+#define HYPOT(x, y) sqrtf((x) * (x) + (y) * (y))
 #define VEC_XY_LENGTH(v) HYPOT((v)->x, (v)->y)
-
-static inline void clamp_angle_pi(f32* angle)
-{
-    if (*angle <= 0.0f) {
-        *angle += M_PI;
-    } else {
-        *angle -= M_PI;
-    }
-}
-
-static inline void clamp_tau(f32* angle)
-{
-    if (*angle > M_TAU) {
-        *angle -= M_TAU;
-    } else if (*angle < -M_TAU) {
-        *angle += M_TAU;
-    }
-}
 
 ItemStateTable it_803F6920[] = {
     { -1, itLinkboomerang_UnkMotion0_Anim, NULL, NULL },
@@ -193,7 +155,7 @@ HSD_GObj* it_802A013C(f32 facing_dir, Fighter_GObj* owner_gobj, Vec3* pos,
         ip->xDAC_itcmd_var0 = 0;
         ip->xDB0_itcmd_var1 = 0;
         ip->xDB4_itcmd_var2 = 0;
-        ip->xDD4_itemVar.linkboomerang.xF7C = -sinf(DEG2RAD * attrs->x1C);
+        ip->xDD4_itemVar.linkboomerang.xF7C = -sinf(deg_to_rad * attrs->x1C);
         ip->xDD4_itemVar.linkboomerang.xDE8 = 0;
         ip->xDD4_itemVar.linkboomerang.xF98 = owner_gobj;
         ip->xDD4_itemVar.linkboomerang.xF8C = 0.0f;
@@ -573,6 +535,15 @@ void itLinkboomerang_UnkMotion2_Phys(Item_GObj* gobj)
     }
 }
 
+static void clamp_tau(f32* angle)
+{
+    if (*angle > M_TAU) {
+        *angle -= M_TAU;
+    } else if (*angle < -M_TAU) {
+        *angle += M_TAU;
+    }
+}
+
 static void clamp_pi_tau(f32* angle)
 {
     if (*angle < -M_PI) {
@@ -589,33 +560,35 @@ f32 it_802A13EC(Item_GObj* gobj)
     f32 dx;
     f32 dy;
     f32 angle;
-    u8 _pad[4] = { 0 };
-    Vec3 pos;
-    if (ip->xDD4_itemVar.linkboomerang.xF98) {
-        ftLk_SpecialHi_GetPosWithAdjustedY(ip->xDD4_itemVar.linkboomerang.xF98,
-                                           &pos);
-        dy = pos.y - ip->pos.y;
-        dx = pos.x - ip->pos.x;
-        ret = HYPOT(dx, dy);
-        if (ip->xDD4_itemVar.linkboomerang.xF80 > 0.0f) {
-            ip->xDD4_itemVar.linkboomerang.xF80--;
-        } else if (ip->xDD4_itemVar.linkboomerang.xF80 <= 0.0f) {
-            return ret;
+    PAD_STACK(4);
+    {
+        Vec3 pos;
+        if (ip->xDD4_itemVar.linkboomerang.xF98) {
+            ftLk_SpecialHi_GetPosWithAdjustedY(
+                ip->xDD4_itemVar.linkboomerang.xF98, &pos);
+            dy = pos.y - ip->pos.y;
+            dx = pos.x - ip->pos.x;
+            ret = HYPOT(dx, dy);
+            if (ip->xDD4_itemVar.linkboomerang.xF80 > 0.0f) {
+                ip->xDD4_itemVar.linkboomerang.xF80--;
+            } else if (ip->xDD4_itemVar.linkboomerang.xF80 <= 0.0f) {
+                return ret;
+            }
+            angle = atan2f(dy, dx);
+            clamp_pi_tau(&angle);
+            angle -= ip->xDD4_itemVar.linkboomerang.xF74;
+            clamp_pi_tau(&angle);
+            if (angle > ip->xDD4_itemVar.linkboomerang.xF84) {
+                angle = ip->xDD4_itemVar.linkboomerang.xF84;
+            } else if (angle < -ip->xDD4_itemVar.linkboomerang.xF84) {
+                angle = -ip->xDD4_itemVar.linkboomerang.xF84;
+            }
+            ip->xDD4_itemVar.linkboomerang.xF74 += angle;
+            clamp_tau(&ip->xDD4_itemVar.linkboomerang.xF74);
+            norm_xF74(ip);
         }
-        angle = atan2f(dy, dx);
-        clamp_pi_tau(&angle);
-        angle -= ip->xDD4_itemVar.linkboomerang.xF74;
-        clamp_pi_tau(&angle);
-        if (angle > ip->xDD4_itemVar.linkboomerang.xF84) {
-            angle = ip->xDD4_itemVar.linkboomerang.xF84;
-        } else if (angle < -ip->xDD4_itemVar.linkboomerang.xF84) {
-            angle = -ip->xDD4_itemVar.linkboomerang.xF84;
-        }
-        ip->xDD4_itemVar.linkboomerang.xF74 += angle;
-        clamp_tau(&ip->xDD4_itemVar.linkboomerang.xF74);
-        norm_xF74(ip);
+        return ret;
     }
-    return ret;
 }
 
 void it_802A15EC(Item_GObj* gobj, Vec3* arg1)
@@ -684,6 +657,15 @@ static void it_802A19E0_no_inline(Item_GObj* gobj)
     it_802A19E0(gobj);
 }
 
+static inline void clamp_angle_pi(f32* angle)
+{
+    if (*angle <= 0.0f) {
+        *angle += M_PI;
+    } else {
+        *angle -= M_PI;
+    }
+}
+
 void it_802A1948(Item_GObj* gobj, s32 arg1)
 {
     Item* ip;
@@ -693,9 +675,9 @@ void it_802A1948(Item_GObj* gobj, s32 arg1)
     attrs = ip->xC4_article_data->x4_specialAttributes;
     clamp_angle_pi(&ip->xDD4_itemVar.linkboomerang.xF74);
     if (arg1 != 0) {
-        ip->xDD4_itemVar.linkboomerang.xF84 = DEG2RAD * attrs->x24;
+        ip->xDD4_itemVar.linkboomerang.xF84 = deg_to_rad * attrs->x24;
     } else {
-        ip->xDD4_itemVar.linkboomerang.xF84 = DEG2RAD * attrs->x20;
+        ip->xDD4_itemVar.linkboomerang.xF84 = deg_to_rad * attrs->x20;
     }
     ip->xDD4_itemVar.linkboomerang.xF80 = attrs->x28;
     it_802A19E0_no_inline(gobj);
@@ -805,7 +787,7 @@ bool it_802A1F08(Item_GObj* gobj)
     {
         attrs = ip->xC4_article_data->x4_specialAttributes;
         clamp_angle_pi(&ip->xDD4_itemVar.linkboomerang.xF74);
-        ip->xDD4_itemVar.linkboomerang.xF84 = DEG2RAD * attrs->x24;
+        ip->xDD4_itemVar.linkboomerang.xF84 = deg_to_rad * attrs->x24;
         ip->xDD4_itemVar.linkboomerang.xF80 = attrs->x28;
         it_802A19E0_no_inline(gobj);
     }
@@ -824,7 +806,7 @@ bool it_802A1FA8(Item_GObj* gobj)
     {
         attrs = ip->xC4_article_data->x4_specialAttributes;
         clamp_angle_pi(&ip->xDD4_itemVar.linkboomerang.xF74);
-        ip->xDD4_itemVar.linkboomerang.xF84 = DEG2RAD * attrs->x24;
+        ip->xDD4_itemVar.linkboomerang.xF84 = deg_to_rad * attrs->x24;
         ip->xDD4_itemVar.linkboomerang.xF80 = attrs->x28;
         it_802A19E0_no_inline(gobj);
     }
@@ -843,7 +825,7 @@ bool itLinkBoomerang_Logic18_Absorbed(Item_GObj* gobj)
     {
         attrs = ip->xC4_article_data->x4_specialAttributes;
         clamp_angle_pi(&ip->xDD4_itemVar.linkboomerang.xF74);
-        ip->xDD4_itemVar.linkboomerang.xF84 = DEG2RAD * attrs->x24;
+        ip->xDD4_itemVar.linkboomerang.xF84 = deg_to_rad * attrs->x24;
         ip->xDD4_itemVar.linkboomerang.xF80 = attrs->x28;
         it_802A19E0_no_inline(gobj);
     }
@@ -895,7 +877,7 @@ bool it_802A2288(Item_GObj* gobj)
     if ((ip->xDD4_itemVar.linkboomerang.xDE8 != 1) && (ip->msid != 3)) {
         attrs = ip->xC4_article_data->x4_specialAttributes;
         clamp_angle_pi(&ip->xDD4_itemVar.linkboomerang.xF74);
-        ip->xDD4_itemVar.linkboomerang.xF84 = DEG2RAD * attrs->x24;
+        ip->xDD4_itemVar.linkboomerang.xF84 = deg_to_rad * attrs->x24;
         ip->xDD4_itemVar.linkboomerang.xF80 = attrs->x28;
         it_802A19E0_no_inline(gobj);
     }
