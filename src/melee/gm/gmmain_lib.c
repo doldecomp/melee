@@ -1077,18 +1077,14 @@ void InitializePersistentNameData(s32 arg0)
 void gmMainLib_8015F150(void)
 {
     s32 i;
-    PAD_STACK(8);
 
     for (i = 0; i < 0x19; i++) {
-        int j;
-        struct FighterData* data = &gmMainLib_804D3EE0->thing.x1F2C[(u8) i];
-        for (j = 0; j < 0x19; j++) {
+        int j = 0;
+        struct FighterData* data = GetPersistentFighterData((u8) i);
+        for (; j < 0x19; j++) {
             data->fighter_kos[j] = 0;
         }
-        gmMainLib_8015EF30(
-            (struct gmMainLib_8015EF30_s*) &gmMainLib_804D3EE0->thing
-                .x1F2C[(u8) i]
-                .sd_count);
+        gmMainLib_8015EF30((struct gmMainLib_8015EF30_s*) &data->sd_count);
     }
 }
 
@@ -1197,14 +1193,17 @@ static u8 gmMainLib_804D3EE4;
 
 void gmMainLib_8015F600(int arg0, int arg1)
 {
-    s32 i;
-    PAD_STACK(112);
+    s32 j;
+    s32 bank_offset;
+    s32 lang;
+    PAD_STACK(104);
 
     if (arg0 == 1) {
-        s32 j = 0;
+        j = 0;
         do {
+            s32 i;
             struct FighterData* fdata = gmMainLib_804D3EE0->thing.x1F2C;
-            for (i = 0; i < 25; i++) {
+            for (i = 0; 25 > i; i++) {
                 fdata[(u8) j].fighter_kos[i] = 0;
             }
             gmMainLib_8015EF30(
@@ -1227,7 +1226,6 @@ void gmMainLib_8015F600(int arg0, int arg1)
             *(struct gmm_x1CB0*) gmMainLib_803D4A60;
 
         {
-            s32 lang;
             switch (lbLang_GetLanguageSetting()) {
             case 0:
                 lang = 0;
@@ -1247,22 +1245,24 @@ void gmMainLib_8015F600(int arg0, int arg1)
             gm_80164504(0x14U);
         }
     } else {
-        s32 bank_offset = (arg0 - 2) * 19;
-        s32 j;
+        bank_offset = (arg0 - 2) * 19;
 
         j = 0;
         do {
-            s32 idx = j + bank_offset;
-            struct NameTagData* data =
-                &gmMainLib_804D3EE0->thing.x2FF8[(u8) idx / 19]
-                     .inner[(u8) idx % 19];
+            struct NameTagData* data;
+            struct NameTagDataBank* bank;
+            s32 i;
+            s32 idx;
+            idx = j + bank_offset;
+            bank = gmMainLib_804D3EE0->thing.x2FF8;
+            data = &bank[(u8) idx / 19].inner[(u8) idx % 19];
 
             for (i = 0; i < 120; i++) {
                 data->vs_kos[i] = 0;
             }
             gmMainLib_8015EF30((struct gmMainLib_8015EF30_s*) &data->sd_count);
 
-            for (i = 0; i < 25; i++) {
+            for (i = 0; 25 > i; i++) {
                 data->play_time_by_fighter[i] = 0;
             }
             data->x1A2 = 5;

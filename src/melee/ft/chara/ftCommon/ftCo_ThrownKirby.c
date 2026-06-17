@@ -25,20 +25,40 @@
 #include "lb/lbvector.h"
 
 #include <common_structs.h>
-#include <math_ppc.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
+
+static void sdata2_order(void)
+{
+    (void) 0.0f;
+    (void) S32_TO_F32;
+    (void) .5;  // 40 08 00 ..
+    (void) 3.0; // 4f e0 00..
+    (void) -1.0f;
+    (void) +1.0f;
+}
+
+// moved here for linking purposes
+extern double __frsqrte(double);
+
+extern inline float sqrtf(float x)
+{
+    volatile float y;
+    if (x > 0.0f) {
+        double guess = __frsqrte((double) x); // returns an approximation to
+        guess = .5 * guess * (3.0 - guess * guess * x); // now have 12 sig bits
+        guess = .5 * guess * (3.0 - guess * guess * x); // now have 24 sig bits
+        guess = .5 * guess * (3.0 - guess * guess * x); // now have 32 sig bits
+        y = (float) (x * guess);
+        return y;
+    }
+    return x;
+}
 
 typedef float (*KirbyVelocityFunc)(Fighter_GObj* gobj, Vec3* victim_self_vel,
                                    float victim_facing_dir);
 typedef float (*GetFloatFunc)(Fighter_GObj* gobj);
 
-/* literal */ float const ftCo_804D8BD0 = 0;
-/* literal */ double const ftCo_804D8BD8 = S32_TO_F32;
-/* literal */ double const ftCo_804D8BE0 = 0.5;
-/* literal */ double const ftCo_804D8BE8 = 3;
-/* literal */ float const ftCo_804D8BF0 = -1;
-/* literal */ float const ftCo_804D8BF4 = +1;
 FighterKind ftCo_800BD9E0(Fighter_GObj* gobj, Fighter_GObj* victim_gobj)
 {
     ftKb_Fighter* fp = GET_FIGHTER(gobj);
@@ -97,19 +117,27 @@ static inline float inlineB1(Fighter_GObj* gobj)
 
 static inline void inlineB2(Fighter_GObj* gobj, Fighter_GObj* thrower_gobj,
                             Vec3* scale, ftCommon_MotionState msid,
-                            KirbyVelocityFunc vel_func, GetFloatFunc get_float)
+                            KirbyVelocityFunc vel_func, GetFloatFunc get_float,
+                            bool x18_b0)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     fp->facing_dir = -GET_FIGHTER(thrower_gobj)->facing_dir;
     fp->mv.co.thrownkirby.thrower_gobj = thrower_gobj;
-    fp->mv.co.thrownkirby.x8 = 0;
+    fp->mv.co.thrownkirby.x8 = 0.0f;
     fp->mv.co.thrownkirby.x4 =
         vel_func(thrower_gobj, &fp->self_vel, fp->facing_dir);
     Fighter_UpdateModelScale(gobj);
-    HSD_JObjGetScale(jobj, &fp->mv.co.thrownkirby.scale);
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_SkipThrowException, 0, 1, 0,
-                              thrower_gobj);
+    // TODO inline this to HSD_JObjGetScale someway
+    if (jobj == NULL) {
+        __assert("jobj.h", 0x337, "jobj");
+    }
+    if (&fp->mv.co.thrownkirby.scale == NULL) {
+        __assert("jobj.h", 0x338, "scale");
+    }
+    fp->mv.co.thrownkirby.scale = jobj->scale;
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_SkipThrowException, 0.0f, 1.0f,
+                              0.0f, thrower_gobj);
     fp->take_dmg_2_cb = ftCo_800BE7C0;
     fp->take_dmg_cb = ftCo_800BE7C0;
     ftCommon_8007E2F4(fp, 0x1FF);
@@ -119,7 +147,7 @@ static inline void inlineB2(Fighter_GObj* gobj, Fighter_GObj* thrower_gobj,
     ftCommon_InitGrab(fp, 0, get_float(thrower_gobj));
     ftAnim_8006EBA4(gobj);
     ftCommon_8007D5D4(fp);
-    fp->mv.co.thrownkirby.x18_b0 = false;
+    fp->mv.co.thrownkirby.x18_b0 = x18_b0;
     fp->mv.co.thrownkirby.x18_b1 = false;
     ftCommon_SetAccessory(fp, ftKb_SpecialN_800F5898(thrower_gobj));
     scale->x = scale->y = scale->z = inlineB0(gobj);
@@ -132,9 +160,9 @@ void ftCo_800BDB58(Fighter_GObj* gobj, Fighter_GObj* thrower_gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Vec3 scale;
-    PAD_STACK(24);
+    PAD_STACK(36);
     inlineB2(gobj, thrower_gobj, &scale, ftCo_MS_ThrownKirbyStar,
-             ftKb_SpecialN_800F58AC, ftKb_SpecialN_800F5A88);
+             ftKb_SpecialN_800F58AC, ftKb_SpecialN_800F5A88, false);
 
     /// @todo Possibly another callback in #inlineB2
     ftColl_8007ABD0(fp->x914, inlineB1(gobj), gobj);
@@ -198,11 +226,13 @@ void ftCo_ThrownKirbyStar_Coll(Fighter_GObj* gobj)
 
 void ftCo_800BE000(Fighter_GObj* gobj, Fighter_GObj* thrower_gobj)
 {
-    Vec3 scale;
     Fighter* fp = GET_FIGHTER(gobj);
-    PAD_STACK(8);
+    u32 unused1;
+    u32 unused2;
+    Vec3 scale;
+    PAD_STACK(12);
     inlineB2(gobj, thrower_gobj, &scale, ftCo_MS_ThrownCopyStar,
-             ftKb_SpecialN_800F58D8, ftKb_SpecialN_800F5AB0);
+             ftKb_SpecialN_800F58D8, ftKb_SpecialN_800F5AB0, true);
 
     /// @todo Possibly another callback in #inlineB2
     ftColl_8007AFF8(gobj);
@@ -246,7 +276,8 @@ void ftCo_ThrownCopyStar_Coll(Fighter_GObj* gobj)
 
 void ftCo_800BE494(Fighter_GObj* gobj)
 {
-    u8 _[8] = { 0 };
+    u32 unused1;
+    u32 unused2;
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftCo_MS_ThrownKirby, Ft_MF_Unk06, 0, 1, 0,
                               NULL);
@@ -291,8 +322,8 @@ static inline void inlineC0(Fighter_GObj* gobj)
 
 void ftCo_ThrownKirby_Phys(Fighter_GObj* gobj)
 {
-    u8 _[28] = { 0 };
     Fighter* fp = GET_FIGHTER(gobj);
+    PAD_STACK(28);
     fp->grab_timer -= ftKb_SpecialN_800F5AC0();
     if (!fp->mv.co.thrownkirby.x18_b0) {
         if (fp->grab_timer <= 0) {
@@ -314,7 +345,7 @@ void ftCo_800BE6AC(Fighter_GObj* gobj)
     f32 f = (fp->mv.co.thrownkirby.x10 - fp->grab_timer) /
             fp->mv.co.thrownkirby.x10;
     f *= xC;
-    scale.x = scale.y = scale.z = (*((f32 const*) &ftCo_804D8BF4) - xC) - -f;
+    scale.x = scale.y = scale.z = (1.0f - xC) - -f;
     scale.x *= fp->mv.co.thrownkirby.scale.x;
     scale.y *= fp->mv.co.thrownkirby.scale.y;
     scale.z *= fp->mv.co.thrownkirby.scale.z;

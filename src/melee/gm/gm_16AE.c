@@ -1268,8 +1268,8 @@ static inline void fn_8016CF4C_dontinline(int arg0, int arg1)
 
 static inline void fn_8016CFE0_inline(void)
 {
-    lbl_8046B6A0_t* tmp;
     int i;
+    lbl_8046B6A0_t* tmp;
 
     if (DbLevel >= 3 && gm_801A46B8(0) != 0 &&
         (HSD_PadCopyStatus->button & 0x1160) == 0x1160)
@@ -1309,8 +1309,10 @@ void fn_8016CFE0(void)
         }
         var_r29_2 = var_r29;
         if (tmp->x24C8.x3_4 && tmp->pause_timer == 0 && tmp->unk_3 == 0) {
-            if ((var_r29_2 & gm_801A36A0(tmp->pauser))) {
-                if (!(var_r29_2 & gm_801A3680(tmp->pauser))) {
+            u64 buttons = gm_801A36A0(tmp->pauser);
+            if ((var_r29_2 & buttons) != 0) {
+                buttons = gm_801A3680(tmp->pauser);
+                if ((var_r29_2 & buttons) == var_r29_2) {
                     fn_8016CF4C_dontinline(var_r4, 7);
                     return;
                 }

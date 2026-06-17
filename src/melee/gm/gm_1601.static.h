@@ -54,7 +54,9 @@ struct lbl_8046B488_t {
     /* 0x1B2 */ u8 x1B2;
     /* 0x1AE */ s8 x1B3[0x1B8 - 0x1B3];
     /* 0x1B8 */ GmRouteCallback x1B8;
-    /* 0x1BC */ char pad_1BC[0x1E0 - 0x1BC];
+    /* 0x1BC */ char pad_1BC[0x1C0 - 0x1BC];
+    /* 0x1C0 */ s8 x1C0[0x1B];
+    /* 0x1DB */ char pad_1DB[0x1E0 - 0x1DB];
 }; /* size = 0x1E0 */
 STATIC_ASSERT(sizeof(struct lbl_8046B488_t) == 0x1E0);
 

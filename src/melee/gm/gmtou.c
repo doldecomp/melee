@@ -52,11 +52,17 @@ struct lbl_803DA2E0_t {
     u8 x0[0x20];
     f32 x20[0x29];
 };
-extern struct lbl_803DA2E0_t lbl_803DA2E0;
-
+struct lbl_803DA2E0_t lbl_803DA2E0 = {
+    {
+        0x00, 0x01, 0x02, 0x03, 0x05, 0x06, 0x0C, 0x06, 0x06,
+        0x07, 0x09, 0x08, 0x06, 0x09, 0x04, 0x09, 0x0A, 0x0B,
+        0x0C, 0x02, 0x0C, 0x06, 0x07, 0x09, 0x0C,
+    },
+};
 extern MatchEnd gm_80477738;
 extern s32 lbl_803B7D3C[4];
-extern u8* lbl_804DA948;
+extern u32 lbl_804DA948;
+extern char lbl_803DA3D0[];
 s32 fn_80166CBC(void*, ssize_t);
 
 static inline TmData* GetTmData(void)
@@ -177,12 +183,11 @@ extern s32 lbl_803B7D18[9];
 void fn_8019C048(HSD_GObj* gobj)
 {
     TmData* tmd;
-    s32 idx;
     HSD_JObj* jobj;
+    s32 idx;
     f32 x;
-    u8 state;
-    u8 start_frame, cur_frame, end_frame, loop_flag;
     s32 table[9];
+    PAD_STACK(8);
 
     tmd = gm_8018F634();
     idx = fn_8018F62C(gobj);
@@ -206,8 +211,7 @@ void fn_8019C048(HSD_GObj* gobj)
 
     HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
 
-    state = lbl_80479A58.x1D[idx].x0;
-    if (state == 4) {
+    if (lbl_80479A58.x1D[idx].x0 == 4) {
         HSD_SisLib_803A7548(tmd->x524[2], (s32) idx, 0.0f, 0.0f);
     } else {
         HSD_SisLib_803A7548(tmd->x524[2], (s32) idx, 1.0f, 1.0f);
@@ -228,42 +232,34 @@ void fn_8019C048(HSD_GObj* gobj)
 
     tmd->x524[2]->hidden = 0;
 
-    state = lbl_80479A58.x1D[idx].x0;
-    lbl_80479A58.x1D[idx].a = ((u16*) table)[state * 3 + 0];
-    lbl_80479A58.x1D[idx].c = ((u16*) table)[state * 3 + 1];
-    lbl_80479A58.x1D[idx].x2 = ((u16*) table)[state * 3 + 2];
+    lbl_80479A58.x1D[idx].a = ((u16*) table)[lbl_80479A58.x1D[idx].x0 * 3 + 0];
+    lbl_80479A58.x1D[idx].c = ((u16*) table)[lbl_80479A58.x1D[idx].x0 * 3 + 1];
+    lbl_80479A58.x1D[idx].x2 =
+        ((u16*) table)[lbl_80479A58.x1D[idx].x0 * 3 + 2];
 
-    start_frame = lbl_80479A58.x1D[idx].a;
-    cur_frame = lbl_80479A58.x1D[idx].b;
-    end_frame = lbl_80479A58.x1D[idx].c;
-    loop_flag = lbl_80479A58.x1D[idx].x2;
-
-    if (cur_frame < start_frame) {
-        lbl_80479A58.x1D[idx].b = start_frame;
-        cur_frame = start_frame;
+    if (lbl_80479A58.x1D[idx].b < lbl_80479A58.x1D[idx].a) {
+        lbl_80479A58.x1D[idx].b = lbl_80479A58.x1D[idx].a;
     }
 
-    if (cur_frame < end_frame) {
-        lbl_80479A58.x1D[idx].b = (u8) (cur_frame + 1);
+    if (lbl_80479A58.x1D[idx].b < lbl_80479A58.x1D[idx].c) {
+        lbl_80479A58.x1D[idx].b++;
     } else {
         lbl_80479A58.x1D[idx].x1 = 1;
-        if (loop_flag != 0) {
-            lbl_80479A58.x1D[idx].b = start_frame;
+        if (lbl_80479A58.x1D[idx].x2 != 0) {
+            lbl_80479A58.x1D[idx].b = lbl_80479A58.x1D[idx].a;
         } else {
-            lbl_80479A58.x1D[idx].b = end_frame;
+            lbl_80479A58.x1D[idx].b = lbl_80479A58.x1D[idx].c;
         }
     }
 
-    state = lbl_80479A58.x1D[idx].x0;
-    if (state == 0 && lbl_80479A58.x38[idx] == 6) {
+    if (lbl_80479A58.x1D[idx].x0 == 0 && lbl_80479A58.x38[idx] == 6) {
         if (lbl_80479A58.x1D[idx].x1 != 0 && (u8) tmd->x4B8[idx].x0 != 0) {
             lbl_80479A58.x1D[idx].x0 = 1;
             lbl_80479A58.x1D[idx].x1 = 0;
         }
     }
 
-    state = lbl_80479A58.x1D[idx].x0;
-    if (state == 1) {
+    if (lbl_80479A58.x1D[idx].x0 == 1) {
         if (lbl_80479A58.x1D[idx].x1 != 0) {
             lbl_80479A58.x1D[idx].x0 = 2;
             lbl_80479A58.x1D[idx].x1 = 0;
@@ -568,21 +564,24 @@ void fn_8019D1BC(void)
     tmd = gm_8018F634();
 
     for (i = 0; i < (s32) tmd->x30; i++) {
-        gobj = fn_8019035C(0, lbl_804D6694->models[12], 0, 0x1A, 2, 1,
-                           fn_8019C048, (f32) i);
-        jobj = GET_JOBJ(gobj);
-        HSD_JObjSetTranslateY(jobj, -2.5f);
-        fn_8018FBD8(gobj, i);
+        {
+            HSD_GObj* first_gobj =
+                fn_8019035C(0, lbl_804D6694->models[12], 0, 0x1A, 2, 1,
+                            fn_8019C048, (f32) i);
+            HSD_JObj* first_jobj = GET_JOBJ(first_gobj);
+            HSD_JObjSetTranslateY(first_jobj, -2.5f);
+            fn_8018FBD8(first_gobj, i);
 
-        c = HSD_JObjGetChild(jobj);
-        HSD_MObjRemoveAnimByFlags(c->u.dobj->mobj, 4);
-        c = HSD_JObjGetChild(jobj);
-        c = HSD_JObjGetNext(c);
-        HSD_MObjRemoveAnimByFlags(c->u.dobj->mobj, 4);
-        c = HSD_JObjGetChild(jobj);
-        c = HSD_JObjGetNext(c);
-        c = HSD_JObjGetNext(c);
-        HSD_MObjRemoveAnimByFlags(c->u.dobj->mobj, 4);
+            c = HSD_JObjGetChild(first_jobj);
+            HSD_MObjRemoveAnimByFlags(c->u.dobj->mobj, 4);
+            c = HSD_JObjGetChild(first_jobj);
+            c = HSD_JObjGetNext(c);
+            HSD_MObjRemoveAnimByFlags(c->u.dobj->mobj, 4);
+            c = HSD_JObjGetChild(first_jobj);
+            c = HSD_JObjGetNext(c);
+            c = HSD_JObjGetNext(c);
+            HSD_MObjRemoveAnimByFlags(c->u.dobj->mobj, 4);
+        }
 
         if (tmd->x30 == 4) {
             pos = 73.0f + (240.0f * (f32) i + 152.0f);
@@ -655,8 +654,12 @@ void fn_8019D1BC(void)
         if (tmd->x31 != 0) {
             gobj = fn_8019035C(0, lbl_804D6694->models[11], 0, 0x1A, 2, 1,
                                fn_8019D074, anim);
-            jobj = GET_JOBJ(gobj);
-            HSD_JObjSetTranslateY(jobj, -2.0f);
+            {
+                HSD_JObj* created_jobj = GET_JOBJ(gobj);
+                jobj = created_jobj;
+            }
+            c = jobj;
+            HSD_JObjSetTranslateY(c, -2.0f);
             fn_8018FBD8(gobj, i);
             fn_8019044C(jobj, (f32) tmd->x4B8[i].x5);
         }
@@ -782,6 +785,7 @@ void gm_8019DF8C_OnFrame(void)
     u32 pressed;
     PAD_STACK(4);
 
+    confirmed = 0;
     tmd = gm_8018F634();
     fn_8018F674(4);
     fn_8018F640(4);
@@ -794,7 +798,6 @@ void gm_8019DF8C_OnFrame(void)
         return;
     }
 
-    confirmed = 0;
     for (i = 0; i < (s32) tmd->x30; i++) {
         if (lbl_80479A58.x1D[i].x0 == 2 && lbl_80479A58.x1D[i].b >= 0x3CU &&
             (s8) (u8) HSD_PadMasterStatus[(u8) i].err == 0)
@@ -1056,7 +1059,6 @@ void gm_8019E634(void)
 {
     s32 indices[4];
     s32 results[4];
-    u8* hbuf_init;
     TmData* tmd;
     s32 hmn_cpu;
     s32 i, j;
@@ -1091,10 +1093,11 @@ void gm_8019E634(void)
 
     /* Handicap adjustment */
     if ((u8) gmMainLib_8015CC34()->handicap == 1) {
+        u32 hbuf_init;
         u8* hbuf;
 
         hbuf_init = lbl_804DA948;
-        hbuf = hbuf_init;
+        hbuf = (u8*) &hbuf_init;
 
         /* Read handicap from x37 entries */
         for (i = 0; i < 4; i++) {
@@ -1103,9 +1106,9 @@ void gm_8019E634(void)
                 TmData* p = gm_8018F634();
                 for (j = 0; j < (s32) p->x2E; j++) {
                     if (id != (s32) p->x37[j].xF) {
-                        continue;
+                    } else {
+                        goto found1;
                     }
-                    goto found1;
                 }
                 j = 0;
             found1:
@@ -1113,7 +1116,7 @@ void gm_8019E634(void)
             }
         }
 
-        fn_80169000(&gm_80477738, &hbuf_init);
+        fn_80169000(&gm_80477738, hbuf);
 
         /* Write back adjusted handicap */
         for (i = 0; i < 4; i++) {
@@ -1122,9 +1125,9 @@ void gm_8019E634(void)
                 TmData* p = gm_8018F634();
                 for (j = 0; j < (s32) p->x2E; j++) {
                     if (id != (s32) p->x37[j].xF) {
-                        continue;
+                    } else {
+                        goto found2;
                     }
-                    goto found2;
                 }
                 j = 0;
             found2:
@@ -1141,9 +1144,9 @@ void gm_8019E634(void)
             TmData* p = gm_8018F634();
             for (j = 0; j < (s32) p->x2E; j++) {
                 if (id != (s32) p->x37[j].xF) {
-                    continue;
+                } else {
+                    goto found3;
                 }
-                goto found3;
             }
             j = 0;
         found3:
@@ -1153,13 +1156,13 @@ void gm_8019E634(void)
             p = gm_8018F634();
             for (j = 0; j < (s32) p->x2E; j++) {
                 if (id != (s32) p->x37[j].xF) {
-                    continue;
+                } else {
+                    goto found4;
                 }
-                goto found4;
             }
             j = 0;
         found4:
-            tmd->x37[j].xE = (s8) indices[i];
+            tmd->x37[j].xE = indices[i];
         }
     } else {
         /* FFA mode */
@@ -1168,9 +1171,9 @@ void gm_8019E634(void)
             TmData* p = gm_8018F634();
             for (j = 0; j < (s32) p->x2E; j++) {
                 if (id != (s32) p->x37[j].xF) {
-                    continue;
+                } else {
+                    goto found5;
                 }
-                goto found5;
             }
             j = 0;
         found5:
@@ -1180,13 +1183,13 @@ void gm_8019E634(void)
             p = gm_8018F634();
             for (j = 0; j < (s32) p->x2E; j++) {
                 if (id != (s32) p->x37[j].xF) {
-                    continue;
+                } else {
+                    goto found6;
                 }
-                goto found6;
             }
             j = 0;
         found6:
-            tmd->x37[j].xE = (s8) indices[(tmd->x30 - 1) - i];
+            tmd->x37[j].xE = indices[(tmd->x30 - 1) - i];
         }
     }
 
@@ -1195,9 +1198,9 @@ void gm_8019E634(void)
         TmData* p = gm_8018F634();
         for (j = 0; j < (s32) p->x2E; j++) {
             if (i != (s32) p->x37[j].xF) {
-                continue;
+            } else {
+                goto found7;
             }
-            goto found7;
         }
         j = 0;
     found7:
@@ -1211,9 +1214,9 @@ void gm_8019E634(void)
         p = gm_8018F634();
         for (j = 0; j < (s32) p->x2E; j++) {
             if (i != (s32) p->x37[j].xE) {
-                continue;
+            } else {
+                goto found8;
             }
-            goto found8;
         }
         j = 0;
     found8:
@@ -1222,31 +1225,31 @@ void gm_8019E634(void)
         p = gm_8018F634();
         for (j = 0; j < (s32) p->x2E; j++) {
             if (i != (s32) p->x37[j].xE) {
-                continue;
+            } else {
+                goto found9;
             }
-            goto found9;
         }
         j = 0;
     found9:
-        tmd->x4B8[i].x1 = tmd->x37[j].x2;
+        tmd->x4B8[i].x5 = tmd->x37[j].x2;
 
         p = gm_8018F634();
         for (j = 0; j < (s32) p->x2E; j++) {
             if (i != (s32) p->x37[j].xE) {
-                continue;
+            } else {
+                goto found10;
             }
-            goto found10;
         }
         j = 0;
     found10:
-        tmd->x4B8[i].x3 = tmd->x37[j].x3;
+        tmd->x4B8[i].x1 = tmd->x37[j].x3;
 
         p = gm_8018F634();
         for (j = 0; j < (s32) p->x2E; j++) {
             if (i != (s32) p->x37[j].xE) {
-                continue;
+            } else {
+                goto found11;
             }
-            goto found11;
         }
         j = 0;
     found11:
@@ -1255,20 +1258,20 @@ void gm_8019E634(void)
         p = gm_8018F634();
         for (j = 0; j < (s32) p->x2E; j++) {
             if (i != (s32) p->x37[j].xE) {
-                continue;
+            } else {
+                goto found12;
             }
-            goto found12;
         }
         j = 0;
     found12:
-        tmd->x4B8[i].x5 = tmd->x37[j].x7;
+        tmd->x4B8[i].x3 = tmd->x37[j].x7;
 
         p = gm_8018F634();
         for (j = 0; j < (s32) p->x2E; j++) {
             if (i != (s32) p->x37[j].xE) {
-                continue;
+            } else {
+                goto found13;
             }
-            goto found13;
         }
         j = 0;
     found13:
@@ -1276,10 +1279,10 @@ void gm_8019E634(void)
     }
 
     /* Debug output + audio preloading */
-    audio_mask = 0;
+    audio_mask = 8;
     for (i = 0; i < (s32) tmd->x30; i++) {
-        OSReport("ckind:%d\n", (s32) tmd->x4B8[i].x1);
         audio_mask |= lbAudioAx_80026E84((CharacterKind) tmd->x4B8[i].x1);
+        OSReport(lbl_803DA3D0, (s32) tmd->x4B8[i].x1);
     }
     lbAudioAx_80026F2C(0x16);
     lbAudioAx_8002702C(6, audio_mask);
@@ -1293,10 +1296,11 @@ void gm_8019ECAC_OnEnter(void* arg0)
         CharacterKind char_id[4];
         u32 color[4];
     } local;
-    u64 audio_mask;
-    s32 i;
     TmData* tmd;
+    s32 i;
+    u64 audio_mask;
     s32 j;
+    char* strbase = (char*) &lbl_803DA2E0;
     PAD_STACK(4);
 
     tmd = gm_8018F634();
@@ -1366,7 +1370,6 @@ void fn_8019EE80(TmVsData* arg0)
 
     lbDvd_80018254();
 }
-
 void fn_8019EF08(TmVsData* arg0)
 {
     struct GameCache* game_cache;
