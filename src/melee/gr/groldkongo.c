@@ -1,7 +1,5 @@
 #include "groldkongo.h"
 
-#include "placeholder.h"
-
 #include <platform.h>
 
 #include "baselib/debug.h"
@@ -18,6 +16,7 @@
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
+#include "gr/types.h"
 
 #include "lb/forward.h"
 
@@ -107,9 +106,9 @@ char grOk_803E6640[] = "groldkongo.c";
 
 static lbColl_80008D30_arg1 grOk_803B8408;
 
-static inline s32* grOldKongo_GetHitTimer(Ground* gp)
+static inline int* grOldKongo_GetHitTimer(Ground* gp)
 {
-    return (s32*) &gp->gv.oldkongo.xD0;
+    return &gp->gv.oldkongo.hit_timer;
 }
 
 void grOldKongo_8020F468(bool arg) {}
@@ -293,11 +292,11 @@ void grOldKongo_8020F888(Ground_GObj* arg0)
     f32 hit_angle;
     f32 angle_delta;
     f32 xec_max;
-    s32 hit_timer;
+    int hit_timer;
     s16 state_timer;
     s16 release_timer;
     s16 timer;
-    s32* hit_timer_ptr;
+    int* hit_timer_ptr;
     gobj = arg0;
     gp = GET_GROUND(gobj);
     jobj = Ground_801C3FA4(gobj, 1);

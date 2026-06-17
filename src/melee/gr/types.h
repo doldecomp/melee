@@ -742,7 +742,7 @@ struct grOldKongo_GroundVars {
     s16 xCA;
     s16 xCC;
     s16 xCE;
-    void* xD0;
+    int hit_timer;
     void* xD4;
     f32 xD8;
     f32 xDC;
