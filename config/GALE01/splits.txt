@@ -2327,11 +2327,25 @@ melee/gm/gm_1AED.c:
 	.sdata2     start:0x804DABF8 end:0x804DAC18
 
 melee/gm/gm_1B03.c:
-	.text       start:0x801B0348 end:0x801B2BA4
-	.data       start:0x803DD6A0 end:0x803DDC58
+	.text       start:0x801B0348 end:0x801B0FB8
+	.data       start:0x803DD6A0 end:0x803DD888
 	.bss        start:0x80480DC8 end:0x80490880
+
+melee/gm/gm_1B0FB.c:
+	.text       start:0x801B0FB8 end:0x801B0FF8
+	.data       start:0x803DD888 end:0x803DD8B8
 	.sdata      start:0x804D4310 end:0x804D4318
-	.sbss       start:0x804D6878 end:0x804D68D0
+	.sbss       start:0x804D6878 end:0x804D68B0
+
+melee/gm/gm_1B0FF.c:
+	.text       start:0x801B0FF8 end:0x801B14A0
+	.data       start:0x803DD8B8 end:0x803DD9A0
+	.sbss       start:0x804D68B0 end:0x804D68C0
+
+melee/gm/gm_1B14.c:
+	.text       start:0x801B14A0 end:0x801B2BA4
+	.data       start:0x803DD9A0 end:0x803DDC58
+	.sbss       start:0x804D68C0 end:0x804D68D0
 
 melee/gm/gmclassic.c:
 	.text       start:0x801B2BA4 end:0x801B3F40
@@ -3376,13 +3390,13 @@ melee/it/items/itfoods.c:
 
 melee/it/items/itmsbomb.c:
 	.text       start:0x8028FE90 end:0x80290938
-	.data       start:0x803F5E00 end:0x803F5EA5
+	.data       start:0x803F5E00 end:0x803F5EA8
 	.sdata      start:0x804D52B0 end:0x804D52BD
 	.sdata2     start:0x804DCA98 end:0x804DCAA4
 
 melee/it/items/itflipper.c:
 	.text       start:0x80290938 end:0x80291BE0
-	.data       start:0x803F5EA8 end:0x803F5F40
+	.data       start:0x803F5F18 end:0x803F5F40
 	.sdata      start:0x804D52C0 end:0x804D52D0
 	.sdata2     start:0x804DCAA8 end:0x804DCAE8
 
