@@ -4992,74 +4992,75 @@ s32 gm_8016A22C(s8 k0, s8 k1, s8 k2, u8 a3, u8 a4, int a5, int mode, int a7,
                 u8 color, u8 p87, u8 p8b, int x6, int x7, int x9, int xA,
                 int flag2, int flag1, f32 f1, f32 f2)
 {
-    struct lbl_8046B488_t* gp = &lbl_8046B488;
+    u8* kinds;
     int i;
-    u8 count;
 
-    memzero(gp, 0x1C0);
+    memzero(&lbl_8046B488, 0x1C0);
 
-    gp->x0 = k0;
-    gp->x1 = k1;
-    gp->x2 = k2;
+    lbl_8046B488.x0 = k0;
+    lbl_8046B488.x1 = k1;
+    lbl_8046B488.x2 = k2;
 
-    gp->x3 = a3;
-    gp->x4 = a4;
-    gp->x5 = (u8) a5;
+    lbl_8046B488.x3 = a3;
+    lbl_8046B488.x4 = a4;
+    lbl_8046B488.x5 = (u8) a5;
 
-    gp->x1AC = p87;
-    gp->x1AD = 0x21;
-    gp->x1B2 = p8b;
-
-    gp->x6 = (u8) x6;
-    gp->x7 = (u8) x7;
-    gp->x8 = (u8) x7;
+    lbl_8046B488.x6 = (u8) x6;
+    lbl_8046B488.x7 = (u8) x7;
+    lbl_8046B488.x8 = (u8) x7;
 
     if (x9 > 5) {
         x9 = 5;
     }
-    gp->x9 = (u8) x9;
+    lbl_8046B488.x9 = (u8) x9;
 
-    gp->xA = (u8) xA;
+    lbl_8046B488.xA = (u8) xA;
 
-    gp->x14 = f1;
-    gp->x18 = f2;
+    lbl_8046B488.x14 = f1;
+    lbl_8046B488.x18 = f2;
 
-    gp->unk_10_b2 = flag2;
-    gp->unk_10_b1 = flag1;
+    lbl_8046B488.unk_10_b2 = flag2;
+    lbl_8046B488.unk_10_b1 = flag1;
 
-    gp->x1C = 1.0f;
+    lbl_8046B488.x1C = 1.0f;
 
-    gp->xB = (u8) mode;
-    gp->xD = (u8) a7;
-    gp->xE = color;
+    lbl_8046B488.xB = (u8) mode;
+    lbl_8046B488.xD = (u8) a7;
+    lbl_8046B488.xE = color;
 
-    gp->xC = a3;
+    lbl_8046B488.xC = a3;
 
-    count = gp->x7;
-    memzero(gp->x20, count);
-    gp->x20[count] = -2;
+    lbl_8046B488.x1AC = p87;
+    lbl_8046B488.x1AD = 0x21;
+    lbl_8046B488.x1B2 = p8b;
 
-    fn_80169900_noinline(gp->xD, gp, gp->xA2, gp->x20);
+    memzero(lbl_8046B488.x20, lbl_8046B488.x7);
+    lbl_8046B488.x20[lbl_8046B488.x7] = (s8) -2;
 
-    switch (gp->xB) {
+    fn_80169900_noinline(lbl_8046B488.xD, &lbl_8046B488, lbl_8046B488.xA2,
+                         lbl_8046B488.x20);
+
+    kinds = (u8*) &lbl_8046B488.x0;
+
+    switch (lbl_8046B488.xB) {
     case 0:
         for (i = 0; i < 3; i++) {
-            fn_801695BC_noinline(gm_8016A22C_kind(gp, i), p87, p8b,
-                                 (u8*) gp->xA2, (u8*) gp->x20);
+            fn_801695BC_noinline(kinds[i], p87, p8b, (u8*) lbl_8046B488.xA2,
+                                 (u8*) lbl_8046B488.x20);
         }
         break;
 
-    case 1: {
-        u8 xC = gp->xC;
+    case 1:
         for (i = 0; i < 3; i++) {
-            fn_801697FC_noinline(gm_8016A22C_kind(gp, i), xC, p87, p8b,
-                                 gp->x20);
+            fn_801697FC_noinline(
+                kinds[i], lbl_8046B488.xC, p87, p8b,
+                lbl_8046B488
+                    .x20); // This was being inlined, hence the no-inline
         }
         break;
     }
-    }
 
-    return fn_80169A84(gp->xE, gp->x124, gp->x20);
+    return fn_80169A84(lbl_8046B488.xE, lbl_8046B488.x124, lbl_8046B488.x20);
 }
 
 void gm_8016A404(s32 arg0)

@@ -2416,7 +2416,7 @@ void fn_801891F4(void)
                 s16 item;
                 HSD_JObj* jobj;
                 lbAudioAx_80024030(8);
-                item = TrainingItemTable_GetItemId(sub->menu_values[1]);
+                item = *(s16*) &((s32*) lbl_803D9828)[sub->menu_values[1]];
                 jobj = Player_GetEntity(0)->hsd_obj;
                 HSD_JObjGetTranslation2(jobj, &pos);
                 pos.y += 10.0f;
