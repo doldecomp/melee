@@ -63,6 +63,14 @@ typedef struct ftCo_x50_t {
     /* +C28 */ f32 xC28;
 } ftCo_x50_t;
 
+typedef struct ftCo_CollData {
+    /* +00 */ u8 pad0[4];
+    /* +04 */ Vec3 p;
+    /* +10 */ Vec3 n;
+    /* +1C */ int line;
+    /* +20 */ u32 flags;
+} ftCo_CollData;
+
 int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
 {
     ftCo_AttackEntry sp3C[32];
@@ -76,16 +84,15 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
     bool nearzero;
     f32 r;
     f32 sum;
-    f32 acc;
     f32 inv;
+    f32 acc;
     f32 t;
-    f32 relx;
     f32 fpPredY;
+    f32 relx;
     f32 relPredY;
     f32 v;
     f32 sq;
     f32 scale;
-    f32 dirx;
     f32 diry;
     f32 rangeF;
     f32 rangeB;
@@ -94,14 +101,14 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
     f32 tgtTermNeg;
     f32 fpY;
     f32 fpVy;
-    f32 fpGrav;
+    f32 tgtVx;
     f32 tgtY;
     f32 tgtVy;
     f32 tgtGrav;
     f32 fpX;
     f32 fpVx;
     f32 tgtX;
-    f32 tgtVx;
+    f32 fpGrav;
     f32 x568;
 
     cpu->x74.y = 0.0f;
@@ -119,12 +126,11 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
     fpGrav = fp->co_attrs.grav;
     tgtY = target->cur_pos.y;
     tgtVy = target->pos_delta.y;
-    tgtGrav = target->co_attrs.grav;
     fpX = fp->cur_pos.x;
+    tgtGrav = target->co_attrs.grav;
     fpVx = fp->pos_delta.x;
     tgtX = target->cur_pos.x;
     tgtVx = target->pos_delta.x;
-    x568 = target->x1A88.x568;
     if (target->facing_dir > 0.0f) {
         rangeF = target->x1A88.x55C;
         rangeB = target->x1A88.x560;
@@ -132,8 +138,10 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
         rangeF = target->x1A88.x560;
         rangeB = target->x1A88.x55C;
     }
+    x568 = target->x1A88.x568;
     count = 0;
-    while (list->cmd != 0) {
+    while (list->cmd) {
+        f32 dirx;
         found = false;
         if (list->x20 > cpu->level) {
             list++;
@@ -178,7 +186,7 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
         } else {
             fpPredY = fpVy * t + fpY;
         }
-        if (target->ground_or_air == GA_Air) {
+        if ((u32) target->ground_or_air == GA_Air) {
             if (tgtGrav < 0.00001f && tgtGrav > -0.00001f) {
                 nearzero = true;
             } else {
@@ -206,13 +214,12 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
         } else {
             relPredY = (tgtVy * t + tgtY) - fpPredY;
         }
-        scale = fp->x34_scale.y;
         if (fp->facing_dir > 0.0f) {
-            dirx = list->x08 * scale;
-            diry = list->x0C * scale;
+            dirx = list->x08 * fp->x34_scale.y;
+            diry = list->x0C * fp->x34_scale.y;
         } else {
-            dirx = -list->x0C * scale;
-            diry = -list->x08 * scale;
+            dirx = -list->x0C * fp->x34_scale.y;
+            diry = -list->x08 * fp->x34_scale.y;
         }
         scale = fp->x34_scale.y;
         if (list->x14 * scale * halfRange > relPredY &&
@@ -280,33 +287,34 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
     bool nearzero;
     f32 r;
     f32 sum;
-    f32 acc;
     f32 inv;
+    f32 acc;
     f32 t;
-    f32 relx;
     f32 fpPredY;
+    f32 relx;
     f32 relPredY;
     f32 v;
     f32 sq;
     f32 scale;
-    f32 dirx;
     f32 diry;
     f32 rangeF;
     f32 rangeB;
-    f32 halfRange;
     f32 fpTermNeg;
     f32 tgtTermNeg;
+    f32 fpX;
     f32 fpY;
+    f32 fpVx;
     f32 fpVy;
     f32 fpGrav;
+    f32 tgtX;
     f32 tgtY;
+    f32 tgtVx;
     f32 tgtVy;
     f32 tgtGrav;
-    f32 fpX;
-    f32 fpVx;
-    f32 tgtX;
-    f32 tgtVx;
     f32 x568;
+    f32 halfRange;
+
+    PAD_STACK(0x10);
 
     cpu->x74.y = 0.0f;
     cpu->x74.x = 0.0f;
@@ -318,17 +326,16 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
     }
     fpTermNeg = -fp->co_attrs.terminal_vel;
     tgtTermNeg = -target->co_attrs.terminal_vel;
+    fpX = fp->cur_pos.x;
     fpY = fp->cur_pos.y;
+    fpVx = fp->pos_delta.x;
     fpVy = fp->pos_delta.y;
     fpGrav = fp->co_attrs.grav;
+    tgtX = target->cur_pos.x;
     tgtY = target->cur_pos.y;
+    tgtVx = target->pos_delta.x;
     tgtVy = target->pos_delta.y;
     tgtGrav = target->co_attrs.grav;
-    fpX = fp->cur_pos.x;
-    fpVx = fp->pos_delta.x;
-    tgtX = target->cur_pos.x;
-    tgtVx = target->pos_delta.x;
-    x568 = target->x1A88.x568;
     if (target->facing_dir > 0.0f) {
         rangeF = target->x1A88.x55C;
         rangeB = target->x1A88.x560;
@@ -336,8 +343,12 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
         rangeF = target->x1A88.x560;
         rangeB = target->x1A88.x55C;
     }
+    x568 = target->x1A88.x568;
     count = 0;
-    while (list->cmd != 0) {
+    while (list->cmd) {
+        f32 dirx;
+        f32 yHi;
+        f32 yLo;
         found = false;
         if (list->x20 > cpu->level) {
             list++;
@@ -382,7 +393,7 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
         } else {
             fpPredY = fpVy * t + fpY;
         }
-        if (target->ground_or_air == GA_Air) {
+        if ((u32) target->ground_or_air == GA_Air) {
             if (tgtGrav < 0.00001f && tgtGrav > -0.00001f) {
                 nearzero = true;
             } else {
@@ -410,13 +421,12 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
         } else {
             relPredY = (tgtVy * t + tgtY) - fpPredY;
         }
-        scale = fp->x34_scale.y;
         if (fp->facing_dir > 0.0f) {
-            dirx = list->x08 * scale;
-            diry = list->x0C * scale + reach;
+            dirx = list->x08 * fp->x34_scale.y;
+            diry = list->x0C * fp->x34_scale.y + reach;
         } else {
-            dirx = -list->x0C * scale - reach;
-            diry = -list->x08 * scale;
+            dirx = -list->x0C * fp->x34_scale.y - reach;
+            diry = -list->x08 * fp->x34_scale.y;
         }
         scale = fp->x34_scale.y;
         if ((list->x14 * scale + reach) * halfRange > relPredY &&
@@ -456,8 +466,7 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
     }
     inv = 1.0 / sum;
     acc = 0.0f;
-    sel = sp40;
-    for (i = 0; i < count; i++) {
+    for (i = 0, sel = sp40; i < count; i++, sel++) {
         acc += sel->weight;
         if (acc * inv >= r) {
             cpu->x6C.x = fp->x34_scale.y * sp40[i].x08;
@@ -466,7 +475,6 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
             cpu->x74.y = fp->x34_scale.y * sp40[i].x14;
             return sp40[i].cmd;
         }
-        sel++;
     }
     HSD_ASSERT(0x1C5, NULL);
 }
@@ -488,14 +496,10 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
     f32 sum;
     f32 acc;
     f32 inv;
-    f32 t;
-    f32 relx;
     f32 fpPredY;
     f32 relPredY;
     f32 v;
     f32 sq;
-    f32 scale;
-    f32 dirx;
     f32 diry;
     f32 sizeHalf;
     f32 fpTermNeg;
@@ -524,15 +528,19 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
     x50TermNeg = -attrs->x14;
     sizeHalf = (f32) (0.5 * (x50->xC24 + x50->xC28));
     yBound = x50->xC1C + x50->xC20;
-    fpVy = fp->pos_delta.y;
-    fpGrav = fp->co_attrs.grav;
-    x50Y = x50->x50;
-    x50Grav = attrs->x10;
     fpX = fp->cur_pos.x;
     fpVx = fp->pos_delta.x;
+    fpVy = fp->pos_delta.y;
+    fpGrav = fp->co_attrs.grav;
     x50X = x50->x4C;
+    x50Y = x50->x50;
     x50Vx = x50->x40;
-    while (list->cmd != 0) {
+    x50Grav = attrs->x10;
+    while (list->cmd) {
+        f32 t;
+        f32 relx;
+        f32 dirx;
+        f32 scale;
         found = false;
         if (list->x20 > cpu->level) {
             list++;
@@ -605,13 +613,12 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
         } else {
             relPredY = (x50Vy * t + x50Y) - fpPredY;
         }
-        scale = fp->x34_scale.y;
         if (fp->facing_dir > 0.0f) {
-            dirx = list->x08 * scale;
-            diry = list->x0C * scale;
+            dirx = list->x08 * fp->x34_scale.y;
+            diry = list->x0C * fp->x34_scale.y;
         } else {
-            dirx = -list->x0C * scale;
-            diry = -list->x08 * scale;
+            dirx = -list->x0C * fp->x34_scale.y;
+            diry = -list->x08 * fp->x34_scale.y;
         }
         scale = fp->x34_scale.y;
         if (list->x14 * scale > relPredY &&
@@ -1280,452 +1287,485 @@ int ftCo_800B7638(Fighter* fp)
 void ftCo_800B77E8(Fighter* fp)
 {
     struct Fighter_x1A88_t* cpu = &fp->x1A88;
-    u8 _[0x28];
-    u32 f1;
-    int L1;
-    Vec3 n1;
-    Vec3 p1;
-    u32 f2;
-    int L2;
-    Vec3 n2;
-    Vec3 p2;
-    u32 f3;
-    int L3;
-    Vec3 n3;
-    Vec3 p3;
-    u32 f4;
-    int L4;
-    Vec3 n4;
-    Vec3 p4;
-    u32 f5;
-    int L5;
-    Vec3 n5;
-    Vec3 p5;
-    u32 f6;
-    int L6;
-    Vec3 n6;
-    Vec3 p6;
-    u32 f7;
-    int L7;
-    Vec3 n7;
-    Vec3 p7;
-    u32 f8;
-    int L8;
-    Vec3 n8;
-    Vec3 p8;
-    u32 f9;
-    int L9;
-    Vec3 n9;
-    Vec3 p9;
-    u32 f10;
-    int L10;
-    Vec3 n10;
-    Vec3 p10;
-    Fighter* temp_r30 = cpu->x44;
+    ftCo_CollData c1;
+    ftCo_CollData c2;
+    ftCo_CollData c3;
+    ftCo_CollData c4;
+    ftCo_CollData c5;
+    ftCo_CollData c6;
+    ftCo_CollData c7;
+    ftCo_CollData c8;
+    ftCo_CollData c9;
+    ftCo_CollData c10;
+    Fighter* cpu_target = cpu->x44;
     Fighter* target;
-    int var_r0;
+    int can_attack;
     int charge;
     f32 x;
     f32 y;
 
-    PAD_STACK(0x28);
-
-    if ((cpu->xC == 7 || ftCo_800A1C44(fp)) && cpu->xEC < 8U) {
-        fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x34;
-        fp->x1A88.xEC++;
+    if (cpu->xC == 7 || ftCo_800A1C44(fp)) {
+        struct Fighter_x1A88_t* tmp = &fp->x1A88;
+        if (fp->x1A88.xEC < 8U) {
+            tmp->xCC_array[tmp->xEC] = 0x34;
+            tmp->xEC++;
+        }
     }
     switch (fp->kind) {
     case FTKIND_MARIO:
         target = fp->x1A88.x44;
-        if (target != NULL &&
-            mpCheckAll(&p1, &L1, &f1, &n1, -1, -1, fp->cur_pos.x,
-                       fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+        if (target != NULL && mpCheckAll(&c1.p, &c1.line, &c1.flags, &c1.n, -1,
+                                         -1, fp->cur_pos.x, fp->cur_pos.y,
+                                         target->cur_pos.x, target->cur_pos.y))
         {
-            var_r0 = 1;
+            can_attack = 1;
         } else if (fp->facing_dir > 0.0) {
             y = fp->cur_pos.y;
-            x = fp->cur_pos.x + 22.0f;
-            if (ftCo_800A0FB0(&p1, &L1, &f1, &n1, -1, -1, -1, x, 5.0 + y, x,
-                              y - 1000.0, 0.0f) == 0)
+            x = fp->cur_pos.x;
+            x = 22.0f + x;
+            if (ftCo_800A0FB0(&c1.p, &c1.line, &c1.flags, &c1.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
             {
-                var_r0 = 1;
+                can_attack = 1;
             } else {
-                var_r0 = 0;
+                can_attack = 0;
             }
         } else {
             y = fp->cur_pos.y;
             x = fp->cur_pos.x - 22.0f;
-            if (ftCo_800A0FB0(&p1, &L1, &f1, &n1, -1, -1, -1, x, 5.0 + y, x,
-                              y - 1000.0, 0.0f) == 0)
+            if (ftCo_800A0FB0(&c1.p, &c1.line, &c1.flags, &c1.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
             {
-                var_r0 = 1;
+                can_attack = 1;
             } else {
-                var_r0 = 0;
+                can_attack = 0;
             }
         }
-        if (var_r0 != 0 && cpu->xEC < 8U) {
-            fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x1F;
-            fp->x1A88.xEC++;
-            return;
+        if (can_attack != 0) {
+            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            if (fp->x1A88.xEC < 8U) {
+                tmp->xCC_array[tmp->xEC] = 0x1F;
+                tmp->xEC++;
+                return;
+            }
         }
         break;
     case FTKIND_FOX:
     case FTKIND_FALCO:
         target = fp->x1A88.x44;
-        if (target != NULL &&
-            mpCheckAll(&p2, &L2, &f2, &n2, -1, -1, fp->cur_pos.x,
-                       fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+        if (target != NULL && mpCheckAll(&c2.p, &c2.line, &c2.flags, &c2.n, -1,
+                                         -1, fp->cur_pos.x, fp->cur_pos.y,
+                                         target->cur_pos.x, target->cur_pos.y))
         {
-            var_r0 = 1;
+            can_attack = 1;
         } else if (fp->facing_dir > 0.0) {
             y = fp->cur_pos.y;
-            x = fp->cur_pos.x + 62.0f;
-            if (ftCo_800A0FB0(&p2, &L2, &f2, &n2, -1, -1, -1, x, 5.0 + y, x,
-                              y - 1000.0, 0.0f) == 0)
+            x = fp->cur_pos.x;
+            x += 62.0f;
+            if (ftCo_800A0FB0(&c2.p, &c2.line, &c2.flags, &c2.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
             {
-                var_r0 = 1;
+                can_attack = 1;
             } else {
-                var_r0 = 0;
+                can_attack = 0;
             }
         } else {
             y = fp->cur_pos.y;
             x = fp->cur_pos.x - 62.0f;
-            if (ftCo_800A0FB0(&p2, &L2, &f2, &n2, -1, -1, -1, x, 5.0 + y, x,
-                              y - 1000.0, 0.0f) == 0)
+            if (ftCo_800A0FB0(&c2.p, &c2.line, &c2.flags, &c2.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
             {
-                var_r0 = 1;
+                can_attack = 1;
             } else {
-                var_r0 = 0;
+                can_attack = 0;
             }
         }
-        if (var_r0 != 0 && cpu->xEC < 8U) {
-            fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x1B;
-            fp->x1A88.xEC++;
-            return;
+        if (can_attack != 0) {
+            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            if (fp->x1A88.xEC < 8U) {
+                tmp->xCC_array[tmp->xEC] = 0x1B;
+                tmp->xEC++;
+                return;
+            }
         }
         break;
     case FTKIND_CAPTAIN:
     case FTKIND_GANON:
         target = fp->x1A88.x44;
-        if (target != NULL &&
-            mpCheckAll(&p3, &L3, &f3, &n3, -1, -1, fp->cur_pos.x,
-                       fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+        if (target != NULL && mpCheckAll(&c3.p, &c3.line, &c3.flags, &c3.n, -1,
+                                         -1, fp->cur_pos.x, fp->cur_pos.y,
+                                         target->cur_pos.x, target->cur_pos.y))
         {
-            var_r0 = 1;
+            can_attack = 1;
         } else if (fp->facing_dir > 0.0) {
             y = fp->cur_pos.y;
-            x = fp->cur_pos.x + 102.0f;
-            if (ftCo_800A0FB0(&p3, &L3, &f3, &n3, -1, -1, -1, x, 5.0 + y, x,
-                              y - 1000.0, 0.0f) == 0)
+            x = fp->cur_pos.x;
+            x += 102.0f;
+            if (ftCo_800A0FB0(&c3.p, &c3.line, &c3.flags, &c3.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
             {
-                var_r0 = 1;
+                can_attack = 1;
             } else {
-                var_r0 = 0;
+                can_attack = 0;
             }
         } else {
             y = fp->cur_pos.y;
             x = fp->cur_pos.x - 102.0f;
-            if (ftCo_800A0FB0(&p3, &L3, &f3, &n3, -1, -1, -1, x, 5.0 + y, x,
-                              y - 1000.0, 0.0f) == 0)
+            if (ftCo_800A0FB0(&c3.p, &c3.line, &c3.flags, &c3.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
             {
-                var_r0 = 1;
+                can_attack = 1;
             } else {
-                var_r0 = 0;
+                can_attack = 0;
             }
         }
-        if (var_r0 != 0 && cpu->xEC < 8U) {
-            fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x26;
-            fp->x1A88.xEC++;
+        if (can_attack != 0) {
+            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            if (fp->x1A88.xEC < 8U) {
+                tmp->xCC_array[tmp->xEC] = 0x26;
+                tmp->xEC++;
+            }
         }
         target = fp->x1A88.x44;
-        if (target != NULL &&
-            mpCheckAll(&p4, &L4, &f4, &n4, -1, -1, fp->cur_pos.x,
-                       fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+        if (target != NULL && mpCheckAll(&c4.p, &c4.line, &c4.flags, &c4.n, -1,
+                                         -1, fp->cur_pos.x, fp->cur_pos.y,
+                                         target->cur_pos.x, target->cur_pos.y))
         {
-            var_r0 = 1;
+            can_attack = 1;
         } else if (fp->facing_dir > 0.0) {
             y = fp->cur_pos.y;
-            x = fp->cur_pos.x + 58.0f;
-            if (ftCo_800A0FB0(&p4, &L4, &f4, &n4, -1, -1, -1, x, 5.0 + y, x,
-                              y - 1000.0, 0.0f) == 0)
+            x = fp->cur_pos.x;
+            x += 58.0f;
+            if (ftCo_800A0FB0(&c4.p, &c4.line, &c4.flags, &c4.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
             {
-                var_r0 = 1;
+                can_attack = 1;
             } else {
-                var_r0 = 0;
+                can_attack = 0;
             }
         } else {
             y = fp->cur_pos.y;
             x = fp->cur_pos.x - 58.0f;
-            if (ftCo_800A0FB0(&p4, &L4, &f4, &n4, -1, -1, -1, x, 5.0 + y, x,
-                              y - 1000.0, 0.0f) == 0)
+            if (ftCo_800A0FB0(&c4.p, &c4.line, &c4.flags, &c4.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
             {
-                var_r0 = 1;
+                can_attack = 1;
             } else {
-                var_r0 = 0;
+                can_attack = 0;
             }
         }
-        if (var_r0 != 0) {
-            if (cpu->xEC < 8U) {
-                fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x1B;
-                fp->x1A88.xEC++;
+        if (can_attack != 0) {
+            {
+                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                if (fp->x1A88.xEC < 8U) {
+                    tmp->xCC_array[tmp->xEC] = 0x1B;
+                    tmp->xEC++;
+                }
             }
-            if (cpu->xEC < 8U) {
-                fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x37;
-                fp->x1A88.xEC++;
+            {
+                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                if (fp->x1A88.xEC < 8U) {
+                    tmp->xCC_array[tmp->xEC] = 0x37;
+                    tmp->xEC++;
+                }
             }
-            if (cpu->xEC < 8U) {
-                fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x38;
-                fp->x1A88.xEC++;
-                return;
+            {
+                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                if (fp->x1A88.xEC < 8U) {
+                    tmp->xCC_array[tmp->xEC] = 0x38;
+                    tmp->xEC++;
+                    return;
+                }
             }
         }
         break;
     case FTKIND_PIKACHU:
     case FTKIND_PICHU:
         target = fp->x1A88.x44;
-        if (target != NULL &&
-            mpCheckAll(&p5, &L5, &f5, &n5, -1, -1, fp->cur_pos.x,
-                       fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+        if (target != NULL && mpCheckAll(&c5.p, &c5.line, &c5.flags, &c5.n, -1,
+                                         -1, fp->cur_pos.x, fp->cur_pos.y,
+                                         target->cur_pos.x, target->cur_pos.y))
         {
-            var_r0 = 1;
+            can_attack = 1;
         } else if (fp->facing_dir > 0.0) {
             y = fp->cur_pos.y;
-            x = fp->cur_pos.x + 57.0f;
-            if (ftCo_800A0FB0(&p5, &L5, &f5, &n5, -1, -1, -1, x, 5.0 + y, x,
-                              y - 1000.0, 0.0f) == 0)
+            x = fp->cur_pos.x;
+            x += 57.0f;
+            if (ftCo_800A0FB0(&c5.p, &c5.line, &c5.flags, &c5.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
             {
-                var_r0 = 1;
+                can_attack = 1;
             } else {
-                var_r0 = 0;
+                can_attack = 0;
             }
         } else {
             y = fp->cur_pos.y;
             x = fp->cur_pos.x - 57.0f;
-            if (ftCo_800A0FB0(&p5, &L5, &f5, &n5, -1, -1, -1, x, 5.0 + y, x,
-                              y - 1000.0, 0.0f) == 0)
+            if (ftCo_800A0FB0(&c5.p, &c5.line, &c5.flags, &c5.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
             {
-                var_r0 = 1;
+                can_attack = 1;
             } else {
-                var_r0 = 0;
+                can_attack = 0;
             }
         }
-        if (var_r0 != 0 && cpu->xEC < 8U) {
-            fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x1B;
-            fp->x1A88.xEC++;
-            return;
+        if (can_attack != 0) {
+            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            if (fp->x1A88.xEC < 8U) {
+                tmp->xCC_array[tmp->xEC] = 0x1B;
+                tmp->xEC++;
+                return;
+            }
         }
         break;
     case FTKIND_KOOPA:
         if (fp->ground_or_air == GA_Ground) {
             target = fp->x1A88.x44;
             if (target != NULL &&
-                mpCheckAll(&p6, &L6, &f6, &n6, -1, -1, fp->cur_pos.x,
-                           fp->cur_pos.y, target->cur_pos.x,
+                mpCheckAll(&c6.p, &c6.line, &c6.flags, &c6.n, -1, -1,
+                           fp->cur_pos.x, fp->cur_pos.y, target->cur_pos.x,
                            target->cur_pos.y))
             {
-                var_r0 = 1;
+                can_attack = 1;
             } else if (fp->facing_dir > 0.0) {
                 y = fp->cur_pos.y;
                 x = fp->cur_pos.x + 27.0f;
-                if (ftCo_800A0FB0(&p6, &L6, &f6, &n6, -1, -1, -1, x, 5.0 + y,
-                                  x, y - 1000.0, 0.0f) == 0)
+                if (ftCo_800A0FB0(&c6.p, &c6.line, &c6.flags, &c6.n, -1, -1,
+                                  -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
                 {
-                    var_r0 = 1;
+                    can_attack = 1;
                 } else {
-                    var_r0 = 0;
+                    can_attack = 0;
                 }
             } else {
                 y = fp->cur_pos.y;
                 x = fp->cur_pos.x - 27.0f;
-                if (ftCo_800A0FB0(&p6, &L6, &f6, &n6, -1, -1, -1, x, 5.0 + y,
-                                  x, y - 1000.0, 0.0f) == 0)
+                if (ftCo_800A0FB0(&c6.p, &c6.line, &c6.flags, &c6.n, -1, -1,
+                                  -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
                 {
-                    var_r0 = 1;
+                    can_attack = 1;
                 } else {
-                    var_r0 = 0;
+                    can_attack = 0;
                 }
             }
-            if (var_r0 != 0 && cpu->xEC < 8U) {
-                fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x26;
-                fp->x1A88.xEC++;
+            if (can_attack != 0) {
+                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                if (fp->x1A88.xEC < 8U) {
+                    tmp->xCC_array[tmp->xEC] = 0x26;
+                    tmp->xEC++;
+                    return;
+                }
+            }
+        } else if (!cpu->xFA_b2) {
+            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            if (fp->x1A88.xEC < 8U) {
+                tmp->xCC_array[tmp->xEC] = 0x26;
+                tmp->xEC++;
                 return;
             }
-        } else if (!cpu->xFA_b2 && cpu->xEC < 8U) {
-            fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x26;
-            fp->x1A88.xEC++;
-            return;
         }
         break;
     case FTKIND_GKOOPS:
         if (fp->ground_or_air == GA_Ground) {
             target = fp->x1A88.x44;
             if (target != NULL &&
-                mpCheckAll(&p7, &L7, &f7, &n7, -1, -1, fp->cur_pos.x,
-                           fp->cur_pos.y, target->cur_pos.x,
+                mpCheckAll(&c7.p, &c7.line, &c7.flags, &c7.n, -1, -1,
+                           fp->cur_pos.x, fp->cur_pos.y, target->cur_pos.x,
                            target->cur_pos.y))
             {
-                var_r0 = 1;
+                can_attack = 1;
             } else if (fp->facing_dir > 0.0) {
                 y = fp->cur_pos.y;
                 x = fp->cur_pos.x + 53.0f;
-                if (ftCo_800A0FB0(&p7, &L7, &f7, &n7, -1, -1, -1, x, 5.0 + y,
-                                  x, y - 1000.0, 0.0f) == 0)
+                if (ftCo_800A0FB0(&c7.p, &c7.line, &c7.flags, &c7.n, -1, -1,
+                                  -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
                 {
-                    var_r0 = 1;
+                    can_attack = 1;
                 } else {
-                    var_r0 = 0;
+                    can_attack = 0;
                 }
             } else {
                 y = fp->cur_pos.y;
                 x = fp->cur_pos.x - 53.0f;
-                if (ftCo_800A0FB0(&p7, &L7, &f7, &n7, -1, -1, -1, x, 5.0 + y,
-                                  x, y - 1000.0, 0.0f) == 0)
+                if (ftCo_800A0FB0(&c7.p, &c7.line, &c7.flags, &c7.n, -1, -1,
+                                  -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
                 {
-                    var_r0 = 1;
+                    can_attack = 1;
                 } else {
-                    var_r0 = 0;
+                    can_attack = 0;
                 }
             }
-            if (var_r0 != 0 && cpu->xEC < 8U) {
-                fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x26;
-                fp->x1A88.xEC++;
+            if (can_attack != 0) {
+                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                if (fp->x1A88.xEC < 8U) {
+                    tmp->xCC_array[tmp->xEC] = 0x26;
+                    tmp->xEC++;
+                    return;
+                }
+            }
+        } else if (!cpu->xFA_b2) {
+            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            if (fp->x1A88.xEC < 8U) {
+                tmp->xCC_array[tmp->xEC] = 0x26;
+                tmp->xEC++;
                 return;
             }
-        } else if (!cpu->xFA_b2 && cpu->xEC < 8U) {
-            fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x26;
-            fp->x1A88.xEC++;
-            return;
         }
         break;
     case FTKIND_YOSHI:
         if (fp->ground_or_air == GA_Ground) {
             target = fp->x1A88.x44;
             if (target != NULL &&
-                mpCheckAll(&p8, &L8, &f8, &n8, -1, -1, fp->cur_pos.x,
-                           fp->cur_pos.y, target->cur_pos.x,
+                mpCheckAll(&c8.p, &c8.line, &c8.flags, &c8.n, -1, -1,
+                           fp->cur_pos.x, fp->cur_pos.y, target->cur_pos.x,
                            target->cur_pos.y))
             {
-                var_r0 = 1;
+                can_attack = 1;
             } else if (fp->facing_dir > 0.0) {
                 y = fp->cur_pos.y;
                 x = fp->cur_pos.x + 16.0f;
-                if (ftCo_800A0FB0(&p8, &L8, &f8, &n8, -1, -1, -1, x, 5.0 + y,
-                                  x, y - 1000.0, 0.0f) == 0)
+                if (ftCo_800A0FB0(&c8.p, &c8.line, &c8.flags, &c8.n, -1, -1,
+                                  -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
                 {
-                    var_r0 = 1;
+                    can_attack = 1;
                 } else {
-                    var_r0 = 0;
+                    can_attack = 0;
                 }
             } else {
                 y = fp->cur_pos.y;
                 x = fp->cur_pos.x - 16.0f;
-                if (ftCo_800A0FB0(&p8, &L8, &f8, &n8, -1, -1, -1, x, 5.0 + y,
-                                  x, y - 1000.0, 0.0f) == 0)
+                if (ftCo_800A0FB0(&c8.p, &c8.line, &c8.flags, &c8.n, -1, -1,
+                                  -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
                 {
-                    var_r0 = 1;
+                    can_attack = 1;
                 } else {
-                    var_r0 = 0;
+                    can_attack = 0;
                 }
             }
-            if (var_r0 != 0 && cpu->xEC < 8U) {
-                fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x26;
-                fp->x1A88.xEC++;
+            if (can_attack != 0) {
+                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                if (fp->x1A88.xEC < 8U) {
+                    tmp->xCC_array[tmp->xEC] = 0x26;
+                    tmp->xEC++;
+                    return;
+                }
+            }
+        } else if (!cpu->xFA_b2) {
+            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            if (fp->x1A88.xEC < 8U) {
+                tmp->xCC_array[tmp->xEC] = 0x26;
+                tmp->xEC++;
                 return;
             }
-        } else if (!cpu->xFA_b2 && cpu->xEC < 8U) {
-            fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x26;
-            fp->x1A88.xEC++;
-            return;
         }
         break;
     case FTKIND_LUIGI:
         target = fp->x1A88.x44;
-        if (target != NULL &&
-            mpCheckAll(&p9, &L9, &f9, &n9, -1, -1, fp->cur_pos.x,
-                       fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+        if (target != NULL && mpCheckAll(&c9.p, &c9.line, &c9.flags, &c9.n, -1,
+                                         -1, fp->cur_pos.x, fp->cur_pos.y,
+                                         target->cur_pos.x, target->cur_pos.y))
         {
-            var_r0 = 1;
+            can_attack = 1;
         } else if (fp->facing_dir > 0.0) {
             y = fp->cur_pos.y;
-            x = fp->cur_pos.x + 60.0f;
-            if (ftCo_800A0FB0(&p9, &L9, &f9, &n9, -1, -1, -1, x, 5.0 + y, x,
-                              y - 1000.0, 0.0f) == 0)
+            x = fp->cur_pos.x;
+            x += 60.0f;
+            if (ftCo_800A0FB0(&c9.p, &c9.line, &c9.flags, &c9.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
             {
-                var_r0 = 1;
+                can_attack = 1;
             } else {
-                var_r0 = 0;
+                can_attack = 0;
             }
         } else {
             y = fp->cur_pos.y;
             x = fp->cur_pos.x - 60.0f;
-            if (ftCo_800A0FB0(&p9, &L9, &f9, &n9, -1, -1, -1, x, 5.0 + y, x,
-                              y - 1000.0, 0.0f) == 0)
+            if (ftCo_800A0FB0(&c9.p, &c9.line, &c9.flags, &c9.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
             {
-                var_r0 = 1;
+                can_attack = 1;
             } else {
-                var_r0 = 0;
+                can_attack = 0;
             }
         }
-        if (var_r0 != 0 && cpu->xEC < 8U) {
-            fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x26;
-            fp->x1A88.xEC++;
-            return;
+        if (can_attack != 0) {
+            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            if (fp->x1A88.xEC < 8U) {
+                tmp->xCC_array[tmp->xEC] = 0x26;
+                tmp->xEC++;
+                return;
+            }
         }
         break;
     case FTKIND_PEACH:
         target = fp->x1A88.x44;
-        if (target != NULL &&
-            mpCheckAll(&p10, &L10, &f10, &n10, -1, -1, fp->cur_pos.x,
-                       fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+        if (target != NULL && mpCheckAll(&c10.p, &c10.line, &c10.flags, &c10.n,
+                                         -1, -1, fp->cur_pos.x, fp->cur_pos.y,
+                                         target->cur_pos.x, target->cur_pos.y))
         {
-            var_r0 = 1;
+            can_attack = 1;
         } else if (fp->facing_dir > 0.0) {
             y = fp->cur_pos.y;
             x = fp->cur_pos.x + 32.0f;
-            if (ftCo_800A0FB0(&p10, &L10, &f10, &n10, -1, -1, -1, x, 5.0 + y,
-                              x, y - 1000.0, 0.0f) == 0)
+            if (ftCo_800A0FB0(&c10.p, &c10.line, &c10.flags, &c10.n, -1, -1,
+                              -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
             {
-                var_r0 = 1;
+                can_attack = 1;
             } else {
-                var_r0 = 0;
+                can_attack = 0;
             }
         } else {
             y = fp->cur_pos.y;
             x = fp->cur_pos.x - 32.0f;
-            if (ftCo_800A0FB0(&p10, &L10, &f10, &n10, -1, -1, -1, x, 5.0 + y,
-                              x, y - 1000.0, 0.0f) == 0)
+            if (ftCo_800A0FB0(&c10.p, &c10.line, &c10.flags, &c10.n, -1, -1,
+                              -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
             {
-                var_r0 = 1;
+                can_attack = 1;
             } else {
-                var_r0 = 0;
+                can_attack = 0;
             }
         }
-        if (var_r0 != 0 && cpu->xEC < 8U) {
-            fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x26;
-            fp->x1A88.xEC++;
-            return;
+        if (can_attack != 0) {
+            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            if (fp->x1A88.xEC < 8U) {
+                tmp->xCC_array[tmp->xEC] = 0x26;
+                tmp->xEC++;
+                return;
+            }
         }
         break;
     case FTKIND_KIRBY:
-        if (fp->ground_or_air == GA_Air && !cpu->xFA_b2 && cpu->xEC < 8U) {
-            fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x26;
-            fp->x1A88.xEC++;
+        if (fp->ground_or_air == GA_Air && !cpu->xFA_b2) {
+            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            if (fp->x1A88.xEC < 8U) {
+                tmp->xCC_array[tmp->xEC] = 0x26;
+                tmp->xEC++;
+            }
         }
         charge = fp->fv.gw.x2238_panicCharge;
         if (charge == 3 || charge == 0xD || charge == 0x10) {
-            if (cpu->xEC < 8U) {
-                fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x11;
-                fp->x1A88.xEC++;
-                return;
+            {
+                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                if (fp->x1A88.xEC < 8U) {
+                    tmp->xCC_array[tmp->xEC] = 0x11;
+                    tmp->xEC++;
+                    return;
+                }
             }
         } else {
-            if (cpu->xEC < 8U) {
-                fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x12;
-                fp->x1A88.xEC++;
+            {
+                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                if (fp->x1A88.xEC < 8U) {
+                    tmp->xCC_array[tmp->xEC] = 0x12;
+                    tmp->xEC++;
+                }
             }
-            if (fp->x34_scale.y < temp_r30->x34_scale.y && cpu->xEC < 8U) {
-                fp->x1A88.xCC_array[fp->x1A88.xEC] = 0x11;
-                fp->x1A88.xEC++;
+            if (fp->x34_scale.y < cpu_target->x34_scale.y) {
+                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                if (fp->x1A88.xEC < 8U) {
+                    tmp->xCC_array[tmp->xEC] = 0x11;
+                    tmp->xEC++;
+                }
             }
         }
         break;
@@ -1794,16 +1834,19 @@ bool ftCo_800B89CC(Fighter* fp)
 
 bool ftCo_800B8A9C(Fighter* fp)
 {
+    u8 _[0x38];
+    u32 sp38;
+    int sp34;
+    Vec3 sp28;
+    Vec3 sp1C;
+    Fighter** target_pp;
+    Fighter* target3;
     struct Fighter_x1A88_t* cpu = &fp->x1A88;
     Fighter* target;
     Item* item;
     float weapon_reach;
     int result;
     int var_r0;
-    Vec3 sp1C;
-    Vec3 sp28;
-    int sp34;
-    u32 sp38;
 
     if (!cpu->xF9_b2) {
         return false;
@@ -1817,31 +1860,44 @@ bool ftCo_800B8A9C(Fighter* fp)
         cpu->xA4 = 0;
         return false;
     }
+    target_pp = &fp->x1A88.x44;
     {
-        Fighter* target2 = cpu->x44;
+        Fighter* target2 = fp->x1A88.x44;
         if (target2->motion_id >= ftCo_MS_Catch &&
             target2->motion_id <= ftCo_MS_EscapeAir)
         {
-            if (cpu->xEC < 8U) {
+            u8* xec = &fp->x1A88.xEC;
+            if (fp->x1A88.xEC < 8U) {
                 cpu->xCC_array[cpu->xEC] = 0x28;
                 cpu->xEC++;
             }
-            if (cpu->xEC < 8U) {
-                cpu->xCC_array[cpu->xEC] = 0x29;
-                cpu->xEC++;
+            {
+                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                if (*xec < 8U) {
+                    tmp->xCC_array[tmp->xEC] = 0x29;
+                    tmp->xEC++;
+                }
             }
         } else if (target2->x34_scale.y > fp->x34_scale.y) {
-            if (cpu->xEC < 8U) {
-                cpu->xCC_array[cpu->xEC] = 0x28;
-                cpu->xEC++;
+            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            u8* xec = &fp->x1A88.xEC;
+            if (fp->x1A88.xEC < 8U) {
+                tmp->xCC_array[tmp->xEC] = 0x28;
+                tmp->xEC++;
             }
-            if (cpu->xEC < 8U) {
-                cpu->xCC_array[cpu->xEC] = 0x29;
-                cpu->xEC++;
+            {
+                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                if (*xec < 8U) {
+                    tmp->xCC_array[tmp->xEC] = 0x29;
+                    tmp->xEC++;
+                }
             }
-            if (fp->kind == FTKIND_KIRBY && cpu->xEC < 8U) {
-                cpu->xCC_array[cpu->xEC] = 0x11;
-                cpu->xEC++;
+            if (fp->kind == FTKIND_KIRBY) {
+                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                if (*xec < 8U) {
+                    tmp->xCC_array[tmp->xEC] = 0x11;
+                    tmp->xEC++;
+                }
             }
         }
     }
@@ -1858,13 +1914,18 @@ bool ftCo_800B8A9C(Fighter* fp)
         goto done;
     }
     if (ftCo_800A3134(target) || ftCo_800A3200(target)) {
-        if (cpu->xC8 < 8U) {
-            cpu->xA8_array[cpu->xC8] = 0xa;
-            cpu->xC8++;
+        struct Fighter_x1A88_t* tmp = &fp->x1A88;
+        u8* xc8 = &fp->x1A88.xC8;
+        if (fp->x1A88.xC8 < 8U) {
+            tmp->xA8_array[tmp->xC8] = 0xa;
+            tmp->xC8++;
         }
-        if (cpu->xC8 < 8U) {
-            cpu->xA8_array[cpu->xC8] = 0xe;
-            cpu->xC8++;
+        {
+            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            if (*xc8 < 8U) {
+                tmp->xA8_array[tmp->xC8] = 0xe;
+                tmp->xC8++;
+            }
         }
         result = ftCo_800B4AB0(fp, target,
                                ((void**) Fighter_804D64FC->x4)[fp->kind]);
@@ -1920,7 +1981,7 @@ bool ftCo_800B8A9C(Fighter* fp)
         }
     }
     {
-        Fighter* target3 = cpu->x44;
+        target3 = *target_pp;
         if (fp->item_gobj != NULL) {
             var_r0 = 0;
         } else if (ftCo_800A3200(target3)) {
@@ -2736,12 +2797,14 @@ bool ftCo_800BB104(Fighter* fp, Fighter* arg1, Vec3* arg2, f32 arg3)
 int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
 {
     Vec3 dst;
+    HitCapsule* hit;
     int i;
     s32 count;
-    HitCapsule* hit;
     HitCapsuleState state;
     bool result;
     struct Fighter_x1A88_t* temp_r31 = &fp->x1A88;
+
+    PAD_STACK(0x38);
 
     if (ip->owner == fp->gobj) {
         return 0;
@@ -2778,9 +2841,9 @@ int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
 
     if (fp->kind == FTKIND_NESS && temp_r31->level > 3) {
         if (count < 21) {
-            Vec3 sp94;
-            Vec3 spAC;
             Vec3 spB8;
+            Vec3 spAC;
+            Vec3 sp94;
             for (i = 0; i < 4; i++) {
                 state = ip->x5D4_hitboxes[i].hit.state;
                 hit = &ip->x5D4_hitboxes[i].hit;
@@ -2797,15 +2860,22 @@ int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
                     if (lbColl_80006094(&hit->x4C, &sp94, arg2, &dst, &spAC,
                                         &spB8, hit->scale, arg3))
                     {
-                        return 2;
+                        result = true;
+                    } else {
+                        result = false;
                     }
+                } else {
+                    result = false;
+                }
+                if (result) {
+                    return 2;
                 }
             }
             return 0;
         } else {
-            Vec3 sp60;
-            Vec3 sp78;
             Vec3 sp84;
+            Vec3 sp78;
+            Vec3 sp60;
             for (i = 0; i < 4; i++) {
                 state = ip->x5D4_hitboxes[i].hit.state;
                 hit = &ip->x5D4_hitboxes[i].hit;
@@ -2822,11 +2892,18 @@ int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
                     if (lbColl_80006094(&hit->x4C, &sp60, arg2, &dst, &sp78,
                                         &sp84, hit->scale, arg3))
                     {
-                        if (hit->x42_b0) {
-                            return 3;
-                        }
-                        return 2;
+                        result = true;
+                    } else {
+                        result = false;
                     }
+                } else {
+                    result = false;
+                }
+                if (result) {
+                    if (hit->x42_b0) {
+                        return 3;
+                    }
+                    return 2;
                 }
             }
             return 0;
@@ -2834,9 +2911,9 @@ int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
     }
 
     {
-        Vec3 sp2C;
-        Vec3 sp44;
         Vec3 sp50;
+        Vec3 sp44;
+        Vec3 sp2C;
         for (i = 0; i < 4; i++) {
             state = ip->x5D4_hitboxes[i].hit.state;
             hit = &ip->x5D4_hitboxes[i].hit;
@@ -2853,8 +2930,15 @@ int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
                 if (lbColl_80006094(&hit->x4C, &sp2C, arg2, &dst, &sp44, &sp50,
                                     hit->scale, arg3))
                 {
-                    return 2;
+                    result = true;
+                } else {
+                    result = false;
                 }
+            } else {
+                result = false;
+            }
+            if (result) {
+                return 2;
             }
         }
     }

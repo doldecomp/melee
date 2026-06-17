@@ -21,7 +21,6 @@
 #include "it/it_26B1.h"
 #include "it/items/itpeachparasol.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbbgflash.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 #include "pl/plattack.h"
@@ -31,6 +30,9 @@
 #include <baselib/jobj.h>
 #include <MSL/math_ppc.h>
 #include <MSL/trigf.h>
+
+void lbBgFlash_80020E38(HSD_JObj*, Vec3*, f32, f32, f32);
+void lbBgFlash_80021410(IKState*);
 
 extern s32 db_804D4AF8;
 
@@ -376,9 +378,11 @@ void ft_80089B08(Fighter_GObj* gobj)
     Quaternion rot_save5;
     Vec3 sp38;
     Vec3 sp2C;
+    volatile f32 line_len_sqrt;
     Vec3 sp1C;
 
     Fighter* fp = gobj->user_data;
+    (void) &line_len_sqrt;
 
     if (!fp->x2219_b5 && fp->ground_or_air == GA_Ground) {
         if (db_804D4AF8 != 0) {
@@ -416,7 +420,8 @@ void ft_80089B08(Fighter_GObj* gobj)
                 if (fn_8008998C(fp, &ik, &spA4) != 0) {
                     lbBgFlash_80021410(&ik);
                 }
-                lbBgFlash_80020E38(ik.jobj2, &spA4, 0.34906584f, 0.34906584f);
+                lbBgFlash_80020E38(ik.jobj2, &spA4, 0.34906584f, 0.34906584f,
+                                   -1.0f);
                 ik.jobj0->rotate = rot_save0;
                 ik.jobj1->rotate = rot_save1;
                 ik.jobj2->rotate = rot_save2;
@@ -450,7 +455,8 @@ void ft_80089B08(Fighter_GObj* gobj)
                 if (fn_8008998C(fp, &ik, &spA4) != 0) {
                     lbBgFlash_80021410(&ik);
                 }
-                lbBgFlash_80020E38(ik.jobj2, &spA4, 0.34906584f, 0.34906584f);
+                lbBgFlash_80020E38(ik.jobj2, &spA4, 0.34906584f, 0.34906584f,
+                                   1.0f);
                 ik.jobj0->rotate = rot_save3;
                 ik.jobj1->rotate = rot_save4;
                 ik.jobj2->rotate = rot_save5;
@@ -467,8 +473,16 @@ void ft_80089B08(Fighter_GObj* gobj)
             mpLineGetV0Pos(line_id, &sp2C);
             dy = sp38.y - sp2C.y;
             dx = sp38.x - sp2C.x;
-            line_len = (dx * dx) + (dy * dy);
-            line_len = sqrtf(line_len);
+            line_len = dy * dy;
+            line_len += dx * dx;
+            if (line_len > 0.0f) {
+                f64 guess = __frsqrte((f64) line_len);
+                guess = 0.5 * guess * (3.0 - guess * guess * line_len);
+                guess = 0.5 * guess * (3.0 - guess * guess * line_len);
+                guess = 0.5 * guess * (3.0 - guess * guess * line_len);
+                ((volatile f32*) &sp1C)[-1] = (f32) ((f64) line_len * guess);
+                line_len = ((volatile f32*) &sp1C)[-1];
+            }
             if (line_len < 5.0f) {
                 s32 next_id, prev_id;
                 adj_angle = 0.0f;
