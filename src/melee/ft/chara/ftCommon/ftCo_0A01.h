@@ -144,7 +144,7 @@ struct _m2c_stack_ftCo_800A3554 {
 /* 0A75DC */ static void ftCo_800A75DC(Fighter* fp0, Fighter* fp1);
 /* 0A7AAC */ static void ftCo_800A7AAC(Fighter* fp);
 /* 0A80E4 */ static void ftCo_800A80E4(Fighter* fp);
-/* 0A8210 */ static void ftCo_800A8210(Fighter* fp, Vec3*);
+/* 0A8210 */ static bool ftCo_800A8210(Fighter* fp, Vec3*);
 /* 0A866C */ static void ftCo_800A866C(Fighter* fp);
 /* 0A8940 */ static void ftCo_800A8940(Fighter* fp);
 /* 0A8DE4 */ static void ftCo_800A8DE4(Fighter* fp);
