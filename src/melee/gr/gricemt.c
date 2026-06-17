@@ -265,7 +265,7 @@ void grIceMt_801F686C(void)
             field29 = grIm_803E4068[i].id;
             break;
         }
-        HSD_ASSERT(613, i<ICEMT_FIELD_MAX);
+        HSD_ASSERT(609, i<ICEMT_FIELD_MAX);
 
         for (i = 0; i < ICEMT_FIELD_MAX; i++) {
             xAC = grIm_804D69F4->xAC;
@@ -317,7 +317,7 @@ void grIceMt_801F686C(void)
         gobj = grIceMt_801F71E8(grIm_803E4068[grIm_804D69F4->xAC[4]].id);
         HSD_ASSERT(646, gobj);
         jobj = gobj->hsd_obj;
-        HSD_ASSERT(647, gobj);
+        HSD_ASSERT(647, jobj);
         HSD_JObjSetTranslateY(jobj, y_pos4);
         grIm_804D69F0 = gobj;
 
