@@ -377,7 +377,7 @@ def run_checks(
     return EXIT_ISSUES
 
 
-def run_fix(checks: list[Check], roots: list[str], dry_run: bool) -> int:
+def run_fix(checks: list[Check], roots: list[str], dry_run: bool, quiet: bool) -> int:
     fixers = [c for c in checks if c.fix is not None]
     total_fixed, files_changed, remaining = 0, 0, 0
     for path in _iter_files(roots):
@@ -403,14 +403,17 @@ def run_fix(checks: list[Check], roots: list[str], dry_run: bool) -> int:
         for check in checks:
             remaining += sum(1 for _ in check.scan(path, text))
 
-    verb = "Would fix" if dry_run else "Fixed"
-    print(f"{verb} {total_fixed} issue(s) in {files_changed} file(s)", file=sys.stderr)
-    if remaining:
+    if files_changed > 1 or not quiet:
+        verb = "Would fix" if dry_run else "Fixed"
         print(
-            f"{remaining} issue(s) left for manual review "
-            f"(re-run without --fix to list; build and diff before committing)",
-            file=sys.stderr,
+            f"{verb} {total_fixed} issue(s) in {files_changed} file(s)", file=sys.stderr
         )
+        if remaining:
+            print(
+                f"{remaining} issue(s) left for manual review "
+                f"(re-run without --fix to list; build and diff before committing)",
+                file=sys.stderr,
+            )
     return EXIT_OK
 
 
@@ -458,7 +461,7 @@ def main(argv: list[str] | None = None) -> int:
     enabled = [c for c in CHECKS if not getattr(args, _dest(c.name))]
     roots = args.paths or ["src"]
     if args.fix:
-        return run_fix(enabled, roots, args.dry_run)
+        return run_fix(enabled, roots, args.dry_run, args.quiet)
     return run_checks(enabled, roots, args.msg_style, args.quiet)
 
 
