@@ -340,10 +340,9 @@ void ftCo_800CE620(HSD_GObj* fighter_gobj)
     }
 }
 
-inline void ftCo_800CE650_inline(HSD_GObj* gobj, int temp_r3_4, int temp_r4_2)
+inline void ftCo_800CE650_inline(HSD_GObj* gobj, int frame, int interval)
 {
-    int div = temp_r3_4 / temp_r4_2;
-    if (temp_r4_2 - 1 == temp_r3_4 - div * temp_r4_2) {
+    if (interval - 1 == frame % interval) {
         ft_800892A0(gobj);
         ft_80089824(gobj);
     }

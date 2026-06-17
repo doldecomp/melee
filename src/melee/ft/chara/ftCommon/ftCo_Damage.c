@@ -256,22 +256,26 @@ static void inlineA1(Fighter_GObj* gobj)
                                           fp->self_vel.y + fp->x8c_kb_vel.y));
 }
 
+static inline int* getDamageMotionIds(enum_t kb_level)
+{
+    return ((int (*)[4][3]) ftCo_803C5520)[0][kb_level];
+}
+
 void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
 {
-    u8 _[0x38] = { 0 };
     float temp_f30;
     Vec3 pos;
     float sp40;
-    Vec3* normal;
+    u8 _[0x2C] = { 0 };
     float temp_f1_2;
     float temp_f1_3;
     float temp_f2;
-    float var_f31;
+    float scaled_kb;
     float kb_angle;
     s32 var_r0;
-    bool var_r30;
+    s32 kb_level_base;
     Fighter* fp = gobj->user_data;
-    enum_t var_r28;
+    enum_t kb_level;
     FtMotionId msid;
     float x;
     float y;
@@ -286,36 +290,37 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
         fp->mv.co.damage.x0 = 1;
     }
     {
+        Vec3* normal;
         if (temp_f30 < p_ftCommonData->x158) {
-            var_r30 = 0;
+            kb_level_base = 0;
             goto block_9;
         } else {
             if (!(temp_f30 < p_ftCommonData->x15C)) {
                 goto block_6;
             }
-            var_r30 = 1;
+            kb_level_base = 1;
             goto block_9;
         }
     block_6:
         if (!(temp_f30 < p_ftCommonData->x160)) {
             goto block_8;
         }
-        var_r30 = 2;
+        kb_level_base = 2;
         goto block_9;
     block_8:
-        var_r30 = 3;
+        kb_level_base = 3;
     block_9:
-        var_r28 = var_r30;
+        kb_level = kb_level_base;
         if (arg1 == -1) {
             goto block_11;
         }
-        var_r28 = 3;
+        kb_level = 3;
     block_11:
         fp->mv.co.damage.x1A = 0;
-        var_f31 = kb_applied * p_ftCommonData->x100;
+        scaled_kb = kb_applied * p_ftCommonData->x100;
         fp->mv.co.damage.x14 = 0;
         kb_angle = ftCo_Damage_CalcAngle(fp, kb_applied);
-        if (var_r30 < 2) {
+        if (kb_level_base < 2) {
             goto block_17;
         }
         if ((u32) M2C_FIELD(fp, u32*, 0x1860) != 5U) {
@@ -323,19 +328,20 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
         }
         kb_angle = calcAngle(kb_angle);
     block_17:
-        x = var_f31 * cosf(kb_angle);
-        y = var_f31 * sinf(kb_angle);
+        x = scaled_kb * cosf(kb_angle);
+        y = scaled_kb * sinf(kb_angle);
         fp->facing_dir = fp->dmg.facing_dir_1;
         if (fp->ground_or_air != GA_Air) {
             goto block_21;
         }
-        msid = ftCo_803C5520[var_r28 * 12][fp->dmg.x184c_damaged_hurtbox + 12];
+        msid =
+            getDamageMotionIds(kb_level)[fp->dmg.x184c_damaged_hurtbox + 12];
         if (!ftCo_Damage_CheckAirMotion(fp)) {
             goto block_20;
         }
-        var_f31 *= p_ftCommonData->x190;
-        x = var_f31 * cosf(kb_angle);
-        y = var_f31 * sinf(kb_angle);
+        scaled_kb = scaled_kb * p_ftCommonData->x190;
+        x = scaled_kb * cosf(kb_angle);
+        y = scaled_kb * sinf(kb_angle);
     block_20:
         ftCo_Damage_CalcVel(fp, -x * fp->facing_dir, y);
         fp->xF0_ground_kb_vel = 0;
@@ -349,19 +355,19 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
         if (!(temp_f1_2 < M_PI_2)) {
             goto block_23;
         }
-        msid = (int) *(ftCo_803C5520 +
-                       ((var_r28 * 0xC) + (M2C_FIELD(fp, s32*, 0x184C) * 4)));
+        msid = ((int (*)[4][3])
+                    ftCo_803C5520)[0][kb_level][fp->dmg.x184c_damaged_hurtbox];
         ftCommon_8007D5D4(fp);
         ftCo_Damage_CalcVel(fp, pos.x, pos.y);
         fp->xF0_ground_kb_vel = 0;
         goto block_28;
     block_23:
-        if (var_r28 != 3) {
+        if (kb_level != 3) {
             goto block_27;
         }
         ftCommon_8007D5D4(fp);
-        msid = (int) *(ftCo_803C5520 + ((var_r28 * 0xC) +
-                                        (fp->dmg.x184c_damaged_hurtbox * 4)));
+        msid = ((int (*)[4][3])
+                    ftCo_803C5520)[0][kb_level][fp->dmg.x184c_damaged_hurtbox];
         if (!(temp_f1_2 >
               (float) (M_PI_2 +
                        (double) M2C_FIELD(p_ftCommonData, float*, 0x1E8))))
@@ -380,15 +386,15 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
         fp->xF0_ground_kb_vel = 0;
         goto block_28;
     block_27:
-        msid = (int) *(ftCo_803C5520 +
-                       ((var_r28 * 0xC) + (M2C_FIELD(fp, s32*, 0x184C) * 4)));
+        msid = ((int (*)[4][3])
+                    ftCo_803C5520)[0][kb_level][fp->dmg.x184c_damaged_hurtbox];
         fp->xF0_ground_kb_vel = pos.x;
         temp_f2 = fp->xF0_ground_kb_vel;
         ftCo_Damage_CalcVel(fp, normal->y * temp_f2, -normal->x * temp_f2);
     block_28:
         fp->self_vel.x = fp->self_vel.y = fp->self_vel.z = 0;
         fp->gr_vel = 0;
-        if (var_r28 != 3) {
+        if (kb_level != 3) {
             goto block_36;
         }
         if (fp->ground_or_air != GA_Air) {
@@ -421,7 +427,7 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
         if (msid == 0x145) {
             goto block_42;
         }
-        if (var_r30 < 2) {
+        if (kb_level_base < 2) {
             goto block_42;
         }
         if ((u32) M2C_FIELD(fp, u32*, 0x1860) != 5U) {
@@ -438,7 +444,7 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
     }
 block_44:
 
-    ftCo_8008DA4C(gobj, var_r28, 0);
+    ftCo_8008DA4C(gobj, kb_level, 0);
     ftCo_8008DB10(gobj, (s32) M2C_FIELD(fp, u32*, 0x1860), kb_applied);
     Fighter_ChangeMotionState(gobj, msid, 0x40U, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
@@ -476,13 +482,13 @@ block_63:
     }
     fp->mv.co.damage.x8 = 1;
 block_67:
-    if (var_r28 != 3) {
+    if (kb_level != 3) {
         goto block_70;
     }
-    if (!(var_f31 >= M2C_FIELD(p_ftCommonData, float*, 0x5E8))) {
+    if (!(scaled_kb >= p_ftCommonData->x5E8)) {
         goto block_70;
     }
-    ftCommon_8007EFC0(fp, M2C_FIELD(p_ftCommonData, u32*, 0x5EC));
+    ftCommon_8007EFC0(fp, (u32) p_ftCommonData->x5EC);
 block_70:
     if (var_r27 == 0) {
         goto block_75;
@@ -502,7 +508,7 @@ block_73:
     M2C_FIELD(fp, s32*, 0x190C) = (s32) M2C_FIELD(
         M2C_FIELD(M2C_FIELD(fp, void**, 0x10C), void**, 0x4C), s32*, 0x1C);
 block_75:
-    if (var_r28 != 3) {
+    if (kb_level != 3) {
         goto block_83;
     }
     if (fp->ground_or_air != GA_Air) {
@@ -530,7 +536,7 @@ block_83:
     if (fp->motion_id == 0x145) {
         return;
     }
-    if (var_r30 < 2) {
+    if (kb_level_base < 2) {
         return;
     }
     if ((u32) fp->dmg.x1860_element == 5U) {
@@ -732,24 +738,47 @@ static bool inlineB0(Fighter_GObj* gobj)
     return false;
 }
 
-/// @todo Inline depth.
 #pragma push
-#pragma inline_depth(1)
+#pragma inline_depth(0)
 void ftCo_8008EB58(Fighter_GObj* gobj)
 {
-    PAD_STACK(8);
-    if (inlineB0(gobj)) {
+    Fighter* fp = gobj->user_data;
+    float kb_applied = fp->dmg.kb_applied;
+    bool should_update;
+    enum_t kb_level;
+    float scaled_kb;
+    u8 _[0x18] = { 0 };
+
+    if (kb_applied == 0 || (fp->allow_sdi && fp->x221A_b3 &&
+                            kb_applied < fp->dmg.x18A8 + p_ftCommonData->x140))
+    {
+        should_update = true;
+    } else {
+        should_update = false;
+    }
+
+    if (should_update) {
         ftCo_800C8D00(gobj);
-        inlineF0(gobj);
-        {
-            Fighter* fp = gobj->user_data;
-            if (ftCo_8008DA4C(gobj, fp->dmg.x1860_element,
-                              ftCo_8008D8E8(fp->dmg.kb_applied)))
-            {
-                ftCo_800C0408(gobj);
-            }
-            ftCommon_800804FC(fp);
+        if (fp->motion_id == 0xe0 || fp->motion_id == 0xe1) {
+            ftCo_800DC284(gobj);
         }
+        if (fp->motion_id == 0xe3 || fp->motion_id == 0xe4) {
+            ftCo_800DC3A4(gobj);
+        }
+        scaled_kb = fp->dmg.kb_applied * p_ftCommonData->x154;
+        if (scaled_kb < p_ftCommonData->x158) {
+            kb_level = 0;
+        } else if (scaled_kb < p_ftCommonData->x15C) {
+            kb_level = 1;
+        } else if (scaled_kb < p_ftCommonData->x160) {
+            kb_level = 2;
+        } else {
+            kb_level = 3;
+        }
+        if (ftCo_8008DA4C(gobj, fp->dmg.x1860_element, kb_level)) {
+            ftCo_800C0408(gobj);
+        }
+        ftCommon_800804FC(fp);
     }
 }
 #pragma pop
@@ -782,6 +811,12 @@ static inline void inlineB2(Fighter_GObj* gobj)
         ftCo_800C0408(gobj);
     }
     ftCommon_800804FC(fp);
+}
+
+/// @todo Inline depth.
+static inline bool inlineB3(Fighter_GObj* gobj)
+{
+    return inlineB0(gobj);
 }
 
 void ftCo_8008EC90(Fighter_GObj* gobj)
@@ -866,7 +901,7 @@ void ftCo_8008EC90(Fighter_GObj* gobj)
                                 fp->dmg.x183C_applied;
                             other_fp->x1960_vibrateMult =
                                 fp->x1960_vibrateMult;
-                            if (inlineB0(gobj)) {
+                            if (inlineB3(gobj)) {
                                 ftCo_8008E9D0(gobj);
                             }
                             fp->x1828 = 2;

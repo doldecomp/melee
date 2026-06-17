@@ -11,7 +11,9 @@
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
+#include "ftCaptain/types.h"
 #include "ftCommon/ftCo_Attack100.h"
+#include "ftCommon/ftCo_CaptureCut.h"
 #include "ftCommon/ftCo_Throw.h"
 #include "ftCommon/types.h"
 
