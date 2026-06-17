@@ -3,8 +3,8 @@
 #include <platform.h>
 
 #include "it/inlines.h"
-#include "it/itzako.h"
 #include "it/itCommonItems.h"
+#include "it/itzako.h"
 #include "it/types.h"
 
 #include <dolphin/mtx.h>

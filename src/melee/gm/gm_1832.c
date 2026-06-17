@@ -332,15 +332,15 @@ void fn_80184138(HSD_GObj* arg0, int arg1)
         HSD_JObjSetScaleZ(
             jobj, lbl_804D6604->x6C[lbl_804735E8.xF4[arg1]].x08.z * scl);
     } else {
-        HSD_JObjSetScaleX(
-            jobj, lbl_804D6604->x6C[lbl_804735E8.xF4[arg1]].x08.x *
-                      lbl_804D6604->x3C[lbl_804735E8.xF0].vals[arg1]);
-        HSD_JObjSetScaleY(
-            jobj, lbl_804D6604->x6C[lbl_804735E8.xF4[arg1]].x08.y *
-                      lbl_804D6604->x3C[lbl_804735E8.xF0].vals[arg1]);
-        HSD_JObjSetScaleZ(
-            jobj, lbl_804D6604->x6C[lbl_804735E8.xF4[arg1]].x08.z *
-                      lbl_804D6604->x3C[lbl_804735E8.xF0].vals[arg1]);
+        HSD_JObjSetScaleX(jobj,
+                          lbl_804D6604->x6C[lbl_804735E8.xF4[arg1]].x08.x *
+                              lbl_804D6604->x3C[lbl_804735E8.xF0].vals[arg1]);
+        HSD_JObjSetScaleY(jobj,
+                          lbl_804D6604->x6C[lbl_804735E8.xF4[arg1]].x08.y *
+                              lbl_804D6604->x3C[lbl_804735E8.xF0].vals[arg1]);
+        HSD_JObjSetScaleZ(jobj,
+                          lbl_804D6604->x6C[lbl_804735E8.xF4[arg1]].x08.z *
+                              lbl_804D6604->x3C[lbl_804735E8.xF0].vals[arg1]);
     }
 
     for (i = 0; i < 6; i++) {

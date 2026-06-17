@@ -35,8 +35,8 @@ void ftCo_800C78B0(HSD_GObj* gobj, HSD_GObj* owner)
     ftCommon_8007DB58(gobj);
     ftCo_8009750C(gobj);
     ftCo_800DD168(gobj);
-    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureLikelike, 0x1080, 0.0f, 1.0f,
-                              0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureLikelike, 0x1080, 0.0f,
+                              1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
     fp->accessory1_cb = fn_800C7AE0;
     fp->death2_cb = fn_800C7890;

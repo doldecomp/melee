@@ -1707,11 +1707,9 @@ s32 HSD_SisLib_803A7F0C(HSD_Text* text, s32 flags)
         case 1:
             pos -= 4;
             if (target_type == 1) {
-                text->x78.x = (f32) *
-                              (s16*) (text->string_buffer + pos) *
-                              0.00390625F;
-                text->x78.y = (f32) *
-                              (s16*) (text->string_buffer + pos + 2) *
+                text->x78.x =
+                    (f32) * (s16*) (text->string_buffer + pos) * 0.00390625F;
+                text->x78.y = (f32) * (s16*) (text->string_buffer + pos + 2) *
                               0.00390625F;
                 if (flag_hi == entry_flags) {
                     remove_size = 5;
@@ -1734,11 +1732,9 @@ s32 HSD_SisLib_803A7F0C(HSD_Text* text, s32 flags)
         case 3:
             pos -= 4;
             if (target_type == 3) {
-                text->x80.x = (f32) *
-                              (u16*) (text->string_buffer + pos) *
-                              0.00390625F;
-                text->x80.y = (f32) *
-                              (u16*) (text->string_buffer + pos + 2) *
+                text->x80.x =
+                    (f32) * (u16*) (text->string_buffer + pos) * 0.00390625F;
+                text->x80.y = (f32) * (u16*) (text->string_buffer + pos + 2) *
                               0.00390625F;
                 if (flag_hi == entry_flags) {
                     remove_size = 5;
@@ -1772,8 +1768,7 @@ s32 HSD_SisLib_803A7F0C(HSD_Text* text, s32 flags)
 done:
     if (remove_size != 0) {
         while ((pos + remove_size) < (s32) text->x6C) {
-            text->string_buffer[pos] =
-                text->string_buffer[pos + remove_size];
+            text->string_buffer[pos] = text->string_buffer[pos + remove_size];
             pos += 1;
         }
         while (pos < (s32) text->x6C) {

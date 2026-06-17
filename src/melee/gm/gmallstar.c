@@ -421,7 +421,8 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
         }
     }
 
-    gmRegSetupEnemyColorTable(arg0->x0.ckind, arg0->x0.color, chars_ptr, colors);
+    gmRegSetupEnemyColorTable(arg0->x0.ckind, arg0->x0.color, chars_ptr,
+                              colors);
 
     if ((s32) arg1 == 0xC) {
         chars_ptr[0] = 3;
@@ -513,8 +514,7 @@ void gm_801B5624(GameScene* arg0)
     {
         gm_803DEBE8_t* opp = (gm_803DEBE8_t*) (base + 0x2B8) +
                              ((AllstarRoundInfo*) (base + 0x31C))[round].start;
-        color =
-            ((u8*) gm_80490940)[((u32) opp - (u32) (base + 0x2B8)) >> 2];
+        color = ((u8*) gm_80490940)[((u32) opp - (u32) (base + 0x2B8)) >> 2];
     }
 
     round = gm_8017BE84(arg0->idx);
@@ -612,8 +612,7 @@ void gm_801B5ACC(GameScene* arg0)
     {
         gm_803DEBE8_t* opp =
             (gm_803DEBE8_t*) (base + 0x2B8) + gm_803DEC4C[round].start;
-        color =
-            ((u8*) gm_80490940)[((u32) opp - (u32) (base + 0x2B8)) >> 2];
+        color = ((u8*) gm_80490940)[((u32) opp - (u32) (base + 0x2B8)) >> 2];
     }
 
     gm_8017CE34(data, (UnkAdventureData*) allstar, chars, 0, 0, 0, 0, 0x55, 0,

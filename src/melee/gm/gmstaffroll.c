@@ -187,7 +187,9 @@ void fn_801AA7F8(HSD_GObj* gobj)
 }
 
 static int gm_804D6800;
-enum { Gm_GObj_GXLink_PlyCursor = 9 };
+enum {
+    Gm_GObj_GXLink_PlyCursor = 9
+};
 void fn_801AA854(HSD_GObj* gobj, int code)
 {
     int i;
@@ -540,10 +542,9 @@ void fn_801AB200(HSD_GObj* gobj)
         entry_idx = staffInfoSortBuf[i].index;
         if (staffInfo[entry_idx].x8 < 1) {
             if (entry_idx < 7) {
-                lb_80011E24(gm_804D682C, &ptcl_jobj,
-                            *(s32*) ((u8*) gm_803DBFD8 + entry_idx * 4 +
-                                      0x11F0),
-                            -1);
+                lb_80011E24(
+                    gm_804D682C, &ptcl_jobj,
+                    *(s32*) ((u8*) gm_803DBFD8 + entry_idx * 4 + 0x11F0), -1);
                 if (entry_idx == 0) {
                     p = ptcl_jobj->u.ptcl;
                     tally_color = *(s32*) &gm_804D42C4;
@@ -622,11 +623,10 @@ void fn_801AB200(HSD_GObj* gobj)
                         selected = entry_idx;
                         if (staffInfo[entry_idx].x8 < 1) {
                             if (entry_idx < 7) {
-                                lb_80011E24(
-                                    gm_804D682C, &ptcl_jobj2,
-                                    *(s32*) ((u8*) gm_803DBFD8 +
-                                              entry_idx * 4 + 0x11F0),
-                                    -1);
+                                lb_80011E24(gm_804D682C, &ptcl_jobj2,
+                                            *(s32*) ((u8*) gm_803DBFD8 +
+                                                     entry_idx * 4 + 0x11F0),
+                                            -1);
                                 if (entry_idx == 0) {
                                     p = ptcl_jobj2->u.ptcl;
                                     tally_color = *(s32*) &gm_804D42CC;
@@ -772,8 +772,8 @@ void fn_801AB200(HSD_GObj* gobj)
                     text_arr[j]->text_color.b = 0;
                     if (selected == 0x4B && j == 2) {
                         line_num = gm_80164840(0x16U) * 2;
-                        HSD_SisLib_803A6368(text_arr[j], 0xBEC + gm_80164840(7U) +
-                                                             line_num);
+                        HSD_SisLib_803A6368(
+                            text_arr[j], 0xBEC + gm_80164840(7U) + line_num);
                     } else if (j == 2 && check_failed == 1) {
                         if (lbLang_IsSavedLanguageJP() != 0) {
                             HSD_SisLib_803A6368(text_arr[j],
@@ -809,7 +809,7 @@ void fn_801AB200(HSD_GObj* gobj)
                     if (selected < 7) {
                         lb_80011E24(gm_804D682C, &ptcl_jobj3,
                                     *(s32*) ((u8*) gm_803DBFD8 + selected * 4 +
-                                              0x11F0),
+                                             0x11F0),
                                     -1);
                         if (selected == 0) {
                             p = ptcl_jobj3->u.ptcl;
@@ -924,8 +924,8 @@ void fn_801AB200(HSD_GObj* gobj)
         }
     }
 
-    HSD_JObjSetTranslateX(
-        jobj_pair[0], ((f32*) ((u8*) gm_803DBFD8 + 0xF78))[gm_804D6810]);
+    HSD_JObjSetTranslateX(jobj_pair[0],
+                          ((f32*) ((u8*) gm_803DBFD8 + 0xF78))[gm_804D6810]);
 
     if (button == 0x1000) {
         if (gm_804D681C == 1) {
@@ -970,12 +970,9 @@ void fn_801AB200(HSD_GObj* gobj)
         gm_804D6820 = 0x3C;
     }
 
-    if (gm_804D6814 >=
-        *(s32*) ((u8*) gm_803DBFD8 + gm_804D684C * 8 + 0xF88))
-    {
+    if (gm_804D6814 >= *(s32*) ((u8*) gm_803DBFD8 + gm_804D684C * 8 + 0xF88)) {
         lbAudioAx_800237A8(
-            *(s32*) ((u8*) gm_803DBFD8 + gm_804D684C * 8 + 0xF8C), 0x7F,
-            0x40);
+            *(s32*) ((u8*) gm_803DBFD8 + gm_804D684C * 8 + 0xF8C), 0x7F, 0x40);
         gm_804D684C += 1;
     }
 }

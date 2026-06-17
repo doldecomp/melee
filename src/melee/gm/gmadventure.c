@@ -1545,8 +1545,7 @@ void gm_801B4C5C(GameScene* scene)
     if (gm_8017D7AC(temp_r30, &temp_r29->x0, 0x69) &&
         temp_r30->match_end.frame_count / 60 > 30)
     {
-        gm_SetPendingScene(
-            NEXT_SCENEBLOCK_AFTER(ADVENTURE_GIANTKIRBY_FIGHT));
+        gm_SetPendingScene(NEXT_SCENEBLOCK_AFTER(ADVENTURE_GIANTKIRBY_FIGHT));
     }
 }
 

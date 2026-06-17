@@ -73,7 +73,6 @@ HSD_GObj* grIm_804D69EC;
 HSD_GObj* grIm_804D69F0;
 IceMountainParams* grIm_804D69F4;
 
-
 typedef struct GrIm825C {
     struct {
         u32 x0;
@@ -101,9 +100,8 @@ S16Vec3 grIm_803E40B0[] = {
 
 static u8 grIm_data_pad[0x628] = { 1 };
 
-char grIm_803E46F8[0x20] =
-    "gricemt.c\0\0\0"
-    "i<ICEMT_FIELD_MAX";
+char grIm_803E46F8[0x20] = "gricemt.c\0\0\0"
+                           "i<ICEMT_FIELD_MAX";
 
 StageCallbacks grIm_803E4718[] = { { grIceMt_801F72D4, grIceMt_801F75DC,
                                      grIceMt_801F75E4, grIceMt_801F75E4, 0 },
@@ -378,8 +376,7 @@ HSD_GObj* grIceMt_801F71E8(int gobj_id)
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport(grIm_803E4800.report_format, grIm_803E46F8, 0x35C,
-                 gobj_id);
+        OSReport(grIm_803E4800.report_format, grIm_803E46F8, 0x35C, gobj_id);
     }
 
     return gobj;
@@ -1117,9 +1114,8 @@ void grIceMt_801F8CDC(Ground_GObj* gobj, s16* joint_indices, int count,
         item = grMaterial_801C8CFC(8, 0, gp, parent_jobj, NULL, fn_801F8C64,
                                    NULL);
         if (item != NULL) {
-            grMaterial_801C8DE0(item, 0.0f, -1.0f,
-                                0.0f, 0.0f, 1.0f,
-                                0.0f, 6.0f);
+            grMaterial_801C8DE0(item, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f,
+                                6.0f);
             grMaterial_801C8E08(item);
             grMaterial_801C8E68(item, 0);
         }
@@ -1146,9 +1142,7 @@ s32 fn_801F8E58(Ground_GObj* arg0, s32* out)
         Ground* g = gp;
         s32* p = &list[max];
         for (i = 0; i < 12; i++) {
-            if (g->gv.icemt.xDC == 0 &&
-                (Stage_80225194() != 0xD4 || i >= 4))
-            {
+            if (g->gv.icemt.xDC == 0 && (Stage_80225194() != 0xD4 || i >= 4)) {
                 *p = i;
                 p++;
                 max++;

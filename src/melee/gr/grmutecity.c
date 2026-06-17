@@ -28,8 +28,8 @@
 #include "MSL/trigf.h"
 #include "sysdolphin/baselib/spline.h"
 
-#include <baselib/gobj.h>
 #include <baselib/debug.h>
+#include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/lobj.h>
@@ -366,10 +366,9 @@ grMc_StageData grMc_803E33DC = {
     "%s:%d: couldn t get gobj(id=%d)\n",
 };
 
-char grMc_803E3434[0x48] =
-    "grmutecity.c\0\0\0\0"
-    "not found car spline (R)\n\0\0\0"
-    "not found car spline (L)\n";
+char grMc_803E3434[0x48] = "grmutecity.c\0\0\0\0"
+                           "not found car spline (R)\n\0\0\0"
+                           "not found car spline (L)\n";
 
 typedef struct grMc_UnkStruct {
     int x0;
@@ -945,8 +944,7 @@ void grMuteCity_801F0D20(Ground_GObj* gobj)
         angle_fwd = 0.2617994f + angle;
         mpLineSetPos(0x31, (10.0f * cosf(angle_back)) + sp28.x,
                      (10.0f * sinf(angle_back)) + sp28.y, sp28.x, sp28.y);
-        mpLineSetPos(0x35, sp1C.x, sp1C.y,
-                     (10.0f * cosf(angle_fwd)) + sp1C.x,
+        mpLineSetPos(0x35, sp1C.x, sp1C.y, (10.0f * cosf(angle_fwd)) + sp1C.x,
                      (10.0f * sinf(angle_fwd)) + sp1C.y);
     } else {
         mpLineSetPos(0x31, sp28.x - 5.0f, sp28.y, sp28.x, sp28.y);
@@ -1069,9 +1067,7 @@ void grMuteCity_801F106C(s32 i)
             state->cars[i].x8 = 0.0f;
         }
     } else {
-        if ((state->cars[i].x4 > 0.827f) &&
-            (state->cars[i].x4 < 0.914f))
-        {
+        if ((state->cars[i].x4 > 0.827f) && (state->cars[i].x4 < 0.914f)) {
             if (state->cars[i].x8 < 0.001f) {
                 state->cars[i].x8 = 0.001f;
             }
@@ -1143,12 +1139,12 @@ void grMuteCity_801F1328(void)
             grMc_8049F4B8[arr[idx]].x20 |= 1;
 
             {
-                f32 dx = grMc_8049F4B8[arr[i]].x14 -
-                         grMc_8049F4B8[arr[idx]].x14;
-                f32 dy = grMc_8049F4B8[arr[i]].x18 -
-                         grMc_8049F4B8[arr[idx]].x18;
-                f32 dz = grMc_8049F4B8[arr[i]].x1C -
-                         grMc_8049F4B8[arr[idx]].x1C;
+                f32 dx =
+                    grMc_8049F4B8[arr[i]].x14 - grMc_8049F4B8[arr[idx]].x14;
+                f32 dy =
+                    grMc_8049F4B8[arr[i]].x18 - grMc_8049F4B8[arr[idx]].x18;
+                f32 dz =
+                    grMc_8049F4B8[arr[i]].x1C - grMc_8049F4B8[arr[idx]].x1C;
                 f32 dx2 = dx * dx;
                 f32 dy2 = dy * dy;
                 f32 dz2 = dz * dz;
@@ -1485,12 +1481,9 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
         PSVECCrossProduct(&spB4, &sp90, &spA8);
         lbVector_Normalize(&spA8);
 
-        car_pos.x =
-            (3.0 * sp90.x) + (((spC0.x - spCC.x) * car->xC) + spCC.x);
-        car_pos.y =
-            (3.0 * sp90.y) + (((spC0.y - spCC.y) * car->xC) + spCC.y);
-        car_pos.z =
-            (3.0 * sp90.z) + (((spC0.z - spCC.z) * car->xC) + spCC.z);
+        car_pos.x = (3.0 * sp90.x) + (((spC0.x - spCC.x) * car->xC) + spCC.x);
+        car_pos.y = (3.0 * sp90.y) + (((spC0.y - spCC.y) * car->xC) + spCC.y);
+        car_pos.z = (3.0 * sp90.z) + (((spC0.z - spCC.z) * car->xC) + spCC.z);
         *(Vec3*) &car->x14 = car_pos;
 
         HSD_JObjSetTranslate(jobj, &car_pos);
@@ -1643,7 +1636,8 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
             }
         } else {
             if (car_pos.z > spE8.z || car_pos.z > 5000.0f ||
-                car_pos.z < -1500.0f) {
+                car_pos.z < -1500.0f)
+            {
                 if ((u32) car->x28 != 0) {
                     grLib_801C98A0(jobj);
                     car->x28 = 0;

@@ -12,12 +12,12 @@
 #include "gr/types.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
-#include "it/itzako.h"
 #include "it/item.h"
 #include "it/items/itleadead.h"
 #include "it/items/itlikelike.h"
 #include "it/items/itnokonoko.h"
 #include "it/items/itpatapata.h"
+#include "it/itzako.h"
 #include "it/types.h"
 #include "lb/lb_00B0.h"
 

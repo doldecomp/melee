@@ -451,8 +451,7 @@ loop:
         for (temp = arg2; temp->x0 != 0xD; temp++) {
             if (temp->xC != NULL) {
                 stage1 = Stage_8022519C((InternalStageId) entry->x00);
-                if (Stage_8022519C((InternalStageId) temp->xC->x00) ==
-                    stage1)
+                if (Stage_8022519C((InternalStageId) temp->xC->x00) == stage1)
                 {
                     result = entry;
                     goto next;

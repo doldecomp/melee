@@ -54,10 +54,9 @@ struct lbl_803DA2E0_t {
 };
 struct lbl_803DA2E0_t lbl_803DA2E0 = {
     {
-        0x00, 0x01, 0x02, 0x03, 0x05, 0x06, 0x0C, 0x06,
-        0x06, 0x07, 0x09, 0x08, 0x06, 0x09, 0x04, 0x09,
-        0x0A, 0x0B, 0x0C, 0x02, 0x0C, 0x06, 0x07, 0x09,
-        0x0C,
+        0x00, 0x01, 0x02, 0x03, 0x05, 0x06, 0x0C, 0x06, 0x06,
+        0x07, 0x09, 0x08, 0x06, 0x09, 0x04, 0x09, 0x0A, 0x0B,
+        0x0C, 0x02, 0x0C, 0x06, 0x07, 0x09, 0x0C,
     },
 };
 extern MatchEnd gm_80477738;
@@ -233,10 +232,8 @@ void fn_8019C048(HSD_GObj* gobj)
 
     tmd->x524[2]->hidden = 0;
 
-    lbl_80479A58.x1D[idx].a =
-        ((u16*) table)[lbl_80479A58.x1D[idx].x0 * 3 + 0];
-    lbl_80479A58.x1D[idx].c =
-        ((u16*) table)[lbl_80479A58.x1D[idx].x0 * 3 + 1];
+    lbl_80479A58.x1D[idx].a = ((u16*) table)[lbl_80479A58.x1D[idx].x0 * 3 + 0];
+    lbl_80479A58.x1D[idx].c = ((u16*) table)[lbl_80479A58.x1D[idx].x0 * 3 + 1];
     lbl_80479A58.x1D[idx].x2 =
         ((u16*) table)[lbl_80479A58.x1D[idx].x0 * 3 + 2];
 
@@ -568,9 +565,9 @@ void fn_8019D1BC(void)
 
     for (i = 0; i < (s32) tmd->x30; i++) {
         {
-            HSD_GObj* first_gobj = fn_8019035C(
-                0, lbl_804D6694->models[12], 0, 0x1A, 2, 1, fn_8019C048,
-                (f32) i);
+            HSD_GObj* first_gobj =
+                fn_8019035C(0, lbl_804D6694->models[12], 0, 0x1A, 2, 1,
+                            fn_8019C048, (f32) i);
             HSD_JObj* first_jobj = GET_JOBJ(first_gobj);
             HSD_JObjSetTranslateY(first_jobj, -2.5f);
             fn_8018FBD8(first_gobj, i);
@@ -1109,11 +1106,8 @@ void gm_8019E634(void)
                 TmData* p = gm_8018F634();
                 for (j = 0; j < (s32) p->x2E; j++) {
                     if (id != (s32) p->x37[j].xF) {
-
                     } else {
-
                         goto found1;
-
                     }
                 }
                 j = 0;
@@ -1131,11 +1125,8 @@ void gm_8019E634(void)
                 TmData* p = gm_8018F634();
                 for (j = 0; j < (s32) p->x2E; j++) {
                     if (id != (s32) p->x37[j].xF) {
-
                     } else {
-
                         goto found2;
-
                     }
                 }
                 j = 0;
@@ -1153,11 +1144,8 @@ void gm_8019E634(void)
             TmData* p = gm_8018F634();
             for (j = 0; j < (s32) p->x2E; j++) {
                 if (id != (s32) p->x37[j].xF) {
-
                 } else {
-
                     goto found3;
-
                 }
             }
             j = 0;
@@ -1168,11 +1156,8 @@ void gm_8019E634(void)
             p = gm_8018F634();
             for (j = 0; j < (s32) p->x2E; j++) {
                 if (id != (s32) p->x37[j].xF) {
-
                 } else {
-
                     goto found4;
-
                 }
             }
             j = 0;
@@ -1186,11 +1171,8 @@ void gm_8019E634(void)
             TmData* p = gm_8018F634();
             for (j = 0; j < (s32) p->x2E; j++) {
                 if (id != (s32) p->x37[j].xF) {
-
                 } else {
-
                     goto found5;
-
                 }
             }
             j = 0;
@@ -1201,11 +1183,8 @@ void gm_8019E634(void)
             p = gm_8018F634();
             for (j = 0; j < (s32) p->x2E; j++) {
                 if (id != (s32) p->x37[j].xF) {
-
                 } else {
-
                     goto found6;
-
                 }
             }
             j = 0;
@@ -1219,11 +1198,8 @@ void gm_8019E634(void)
         TmData* p = gm_8018F634();
         for (j = 0; j < (s32) p->x2E; j++) {
             if (i != (s32) p->x37[j].xF) {
-
             } else {
-
                 goto found7;
-
             }
         }
         j = 0;
@@ -1238,11 +1214,8 @@ void gm_8019E634(void)
         p = gm_8018F634();
         for (j = 0; j < (s32) p->x2E; j++) {
             if (i != (s32) p->x37[j].xE) {
-
             } else {
-
                 goto found8;
-
             }
         }
         j = 0;
@@ -1252,11 +1225,8 @@ void gm_8019E634(void)
         p = gm_8018F634();
         for (j = 0; j < (s32) p->x2E; j++) {
             if (i != (s32) p->x37[j].xE) {
-
             } else {
-
                 goto found9;
-
             }
         }
         j = 0;
@@ -1266,11 +1236,8 @@ void gm_8019E634(void)
         p = gm_8018F634();
         for (j = 0; j < (s32) p->x2E; j++) {
             if (i != (s32) p->x37[j].xE) {
-
             } else {
-
                 goto found10;
-
             }
         }
         j = 0;
@@ -1280,11 +1247,8 @@ void gm_8019E634(void)
         p = gm_8018F634();
         for (j = 0; j < (s32) p->x2E; j++) {
             if (i != (s32) p->x37[j].xE) {
-
             } else {
-
                 goto found11;
-
             }
         }
         j = 0;
@@ -1294,11 +1258,8 @@ void gm_8019E634(void)
         p = gm_8018F634();
         for (j = 0; j < (s32) p->x2E; j++) {
             if (i != (s32) p->x37[j].xE) {
-
             } else {
-
                 goto found12;
-
             }
         }
         j = 0;
@@ -1308,11 +1269,8 @@ void gm_8019E634(void)
         p = gm_8018F634();
         for (j = 0; j < (s32) p->x2E; j++) {
             if (i != (s32) p->x37[j].xE) {
-
             } else {
-
                 goto found13;
-
             }
         }
         j = 0;

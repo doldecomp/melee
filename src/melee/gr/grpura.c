@@ -165,8 +165,8 @@ HSD_GObj* grPura_80211E08(int gobj_id)
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport((char*) grPu_803E6800 + 0x270,
-                 (char*) grPu_803E6800 + 0x294, 0x108, gobj_id);
+        OSReport((char*) grPu_803E6800 + 0x270, (char*) grPu_803E6800 + 0x294,
+                 0x108, gobj_id);
     }
 
     return gobj;
@@ -266,9 +266,12 @@ void grPura_802120E0(Ground_GObj* arg0)
         cur = gp->gv.pura.xC8;
         gp->gv.pura.xC8 = cur + 1;
         t = (f32) cur / 3600.0f;
-        sp18.r = (s8) (t * (f32) ((u8) spilC.r - (u8) sp18.r) + (f32) (u8) sp18.r);
-        sp18.g = (s8) (t * (f32) ((u8) spilC.g - (u8) sp18.g) + (f32) (u8) sp18.g);
-        sp18.b = (s8) (t * (f32) ((u8) spilC.b - (u8) sp18.b) + (f32) (u8) sp18.b);
+        sp18.r =
+            (s8) (t * (f32) ((u8) spilC.r - (u8) sp18.r) + (f32) (u8) sp18.r);
+        sp18.g =
+            (s8) (t * (f32) ((u8) spilC.g - (u8) sp18.g) + (f32) (u8) sp18.g);
+        sp18.b =
+            (s8) (t * (f32) ((u8) spilC.b - (u8) sp18.b) + (f32) (u8) sp18.b);
         Ground_801C205C(&sp18);
         Camera_SetBackgroundColor(sp18.r, sp18.g, sp18.b);
         return;
@@ -357,12 +360,12 @@ void grPura_802125F0(HSD_GObj* arg0)
             gp->gv.pura2.xC8 = Ground_801C3FA4(arg0, gp->gv.pura2.xC4);
 
             jobj = gobj->hsd_obj;
-            HSD_JObjSetTranslateX(
-                jobj, HSD_JObjGetTranslationX(gp->gv.pura2.xC8));
-            HSD_JObjSetTranslateY(
-                jobj, HSD_JObjGetTranslationY(gp->gv.pura2.xC8));
-            HSD_JObjSetTranslateZ(
-                jobj, HSD_JObjGetTranslationZ(gp->gv.pura2.xC8));
+            HSD_JObjSetTranslateX(jobj,
+                                  HSD_JObjGetTranslationX(gp->gv.pura2.xC8));
+            HSD_JObjSetTranslateY(jobj,
+                                  HSD_JObjGetTranslationY(gp->gv.pura2.xC8));
+            HSD_JObjSetTranslateZ(jobj,
+                                  HSD_JObjGetTranslationZ(gp->gv.pura2.xC8));
 
             if (HSD_JObjGetFlags(gp->gv.pura2.xC8) & 0x10) {
                 HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);

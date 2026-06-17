@@ -1,9 +1,10 @@
 #include "psdisp.h"
 
-#include "baselib/forward.h"
-
 #include "baselib/cobj.h"
 #include "baselib/fog.h"
+
+#include "baselib/forward.h"
+
 #include "baselib/lobj.h"
 #include "baselib/mtx.h"
 #include "baselib/psdisptev.h"
@@ -376,7 +377,8 @@ static inline HSD_Particle* psDispSubPoint(HSD_Particle* pp)
             (!(pp->kind & DispLighting) ||
              (q->matColCount == 0 && q->ambColCount == 0 &&
               q->matRGB == pp->matRGB && q->matA == pp->matA &&
-              q->ambRGB == pp->ambRGB && q->ambA == pp->ambA))) {
+              q->ambRGB == pp->ambRGB && q->ambA == pp->ambA)))
+        {
             count++;
             *p = q->pos;
             p++;
@@ -481,7 +483,8 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
     q = pp->next;
     while (q != NULL) {
         if (q->size == pp->size && q->appsrt == NULL &&
-            !((q->kind ^ pp->kind) & 0xC0100400) && !(q->kind & DispPoint)) {
+            !((q->kind ^ pp->kind) & 0xC0100400) && !(q->kind & DispPoint))
+        {
             vbuf[count].cur = q->pos;
             if (q->kind & Tornado) {
                 calcTornadoLastPos(q, &vbuf[count].prev.x, &vbuf[count].prev.y,
@@ -501,7 +504,8 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
             }
             count++;
             cbuf[count - 1].c1 = cbuf[count - 1].c0;
-            cbuf[count - 1].c1.a = (u8) ((f32) cbuf[count - 1].c1.a * q->trail);
+            cbuf[count - 1].c1.a =
+                (u8) ((f32) cbuf[count - 1].c1.a * q->trail);
             if (count == 16) {
                 if (pp->kind & DispTexture) {
                     setVtxDesc(2);
@@ -909,18 +913,27 @@ void psDispParticles(s32 arg0, u32 arg1)
                     GXSetTevColor(GX_TEVREG2, *(GXColor*) sp7D4);
                     HSD_PSDisp_804D792C = -1;
                     GXSetZCompLoc(GX_FALSE);
-                    HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(), (MtxPtr) cache);
+                    HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(),
+                                          (MtxPtr) cache);
                     PSMTXInverse((MtxPtr) cache, (MtxPtr) (cache + 0xC));
                     GXGetProjectionv(&cache[0x18]);
                     if (cache[0x18] == (f32) sp8B0) {
-                        cache[0x1F] = cache[0x19] * cache[0] + cache[0x1A] * cache[8];
-                        cache[0x20] = cache[0x19] * cache[1] + cache[0x1A] * cache[9];
-                        cache[0x21] = cache[0x19] * cache[2] + cache[0x1A] * cache[10];
-                        cache[0x22] = cache[0x19] * cache[3] + cache[0x1A] * cache[11];
-                        cache[0x23] = cache[0x1B] * cache[4] + cache[0x1C] * cache[8];
-                        cache[0x24] = cache[0x1B] * cache[5] + cache[0x1C] * cache[9];
-                        cache[0x25] = cache[0x1B] * cache[6] + cache[0x1C] * cache[10];
-                        cache[0x26] = cache[0x1B] * cache[7] + cache[0x1C] * cache[11];
+                        cache[0x1F] =
+                            cache[0x19] * cache[0] + cache[0x1A] * cache[8];
+                        cache[0x20] =
+                            cache[0x19] * cache[1] + cache[0x1A] * cache[9];
+                        cache[0x21] =
+                            cache[0x19] * cache[2] + cache[0x1A] * cache[10];
+                        cache[0x22] =
+                            cache[0x19] * cache[3] + cache[0x1A] * cache[11];
+                        cache[0x23] =
+                            cache[0x1B] * cache[4] + cache[0x1C] * cache[8];
+                        cache[0x24] =
+                            cache[0x1B] * cache[5] + cache[0x1C] * cache[9];
+                        cache[0x25] =
+                            cache[0x1B] * cache[6] + cache[0x1C] * cache[10];
+                        cache[0x26] =
+                            cache[0x1B] * cache[7] + cache[0x1C] * cache[11];
                     } else {
                         cache[0x1F] = cache[0x19] * cache[0] + cache[0x1A];
                         cache[0x20] = cache[0x19] * cache[1] + cache[0x1A];
@@ -958,20 +971,35 @@ void psDispParticles(s32 arg0, u32 arg1)
                     }
                     GXEnableTexOffsets(GX_TEXCOORD0, GX_TRUE, GX_TRUE);
                     GXSetCullMode(GX_CULL_BACK);
-                    GXSetArray(GX_VA_TEX0, (void*) ((char*) &HSD_PSDisp_8040C300 + 0x40), 2U);
-                    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_TEX_ST, GX_RGBA6, 0U);
-                    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX0, GX_TEX_ST, GX_RGB565, 0U);
-                    GXSetVtxAttrFmt(GX_VTXFMT1, GX_VA_POS, GX_TEX_ST, GX_RGBA6, 0U);
-                    GXSetVtxAttrFmt(GX_VTXFMT2, GX_VA_POS, GX_TEX_ST, GX_RGBA6, 0U);
-                    GXSetVtxAttrFmt(GX_VTXFMT2, GX_VA_CLR0, GX_TEX_ST, GX_RGBA8, 0U);
-                    GXSetVtxAttrFmt(GX_VTXFMT2, GX_VA_TEX0, GX_TEX_ST, GX_RGB565, 0U);
-                    GXSetVtxAttrFmt(GX_VTXFMT3, GX_VA_POS, GX_TEX_ST, GX_RGBA6, 0U);
-                    GXSetVtxAttrFmt(GX_VTXFMT3, GX_VA_CLR0, GX_TEX_ST, GX_RGBA8, 0U);
-                    GXSetVtxAttrFmt(GX_VTXFMT4, GX_VA_POS, GX_TEX_ST, GX_RGBA6, 0U);
-                    GXSetVtxAttrFmt(GX_VTXFMT4, GX_VA_TEX0, GX_TEX_ST, GX_RGBA6, 0U);
-                    GXSetVtxAttrFmt(GX_VTXFMT5, GX_VA_POS, GX_TEX_ST, GX_RGBA6, 0U);
-                    GXSetVtxAttrFmt(GX_VTXFMT5, GX_VA_CLR0, GX_TEX_ST, GX_RGBA8, 0U);
-                    GXSetVtxAttrFmt(GX_VTXFMT5, GX_VA_TEX0, GX_TEX_ST, GX_RGBA6, 0U);
+                    GXSetArray(GX_VA_TEX0,
+                               (void*) ((char*) &HSD_PSDisp_8040C300 + 0x40),
+                               2U);
+                    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_TEX_ST, GX_RGBA6,
+                                    0U);
+                    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX0, GX_TEX_ST,
+                                    GX_RGB565, 0U);
+                    GXSetVtxAttrFmt(GX_VTXFMT1, GX_VA_POS, GX_TEX_ST, GX_RGBA6,
+                                    0U);
+                    GXSetVtxAttrFmt(GX_VTXFMT2, GX_VA_POS, GX_TEX_ST, GX_RGBA6,
+                                    0U);
+                    GXSetVtxAttrFmt(GX_VTXFMT2, GX_VA_CLR0, GX_TEX_ST,
+                                    GX_RGBA8, 0U);
+                    GXSetVtxAttrFmt(GX_VTXFMT2, GX_VA_TEX0, GX_TEX_ST,
+                                    GX_RGB565, 0U);
+                    GXSetVtxAttrFmt(GX_VTXFMT3, GX_VA_POS, GX_TEX_ST, GX_RGBA6,
+                                    0U);
+                    GXSetVtxAttrFmt(GX_VTXFMT3, GX_VA_CLR0, GX_TEX_ST,
+                                    GX_RGBA8, 0U);
+                    GXSetVtxAttrFmt(GX_VTXFMT4, GX_VA_POS, GX_TEX_ST, GX_RGBA6,
+                                    0U);
+                    GXSetVtxAttrFmt(GX_VTXFMT4, GX_VA_TEX0, GX_TEX_ST,
+                                    GX_RGBA6, 0U);
+                    GXSetVtxAttrFmt(GX_VTXFMT5, GX_VA_POS, GX_TEX_ST, GX_RGBA6,
+                                    0U);
+                    GXSetVtxAttrFmt(GX_VTXFMT5, GX_VA_CLR0, GX_TEX_ST,
+                                    GX_RGBA8, 0U);
+                    GXSetVtxAttrFmt(GX_VTXFMT5, GX_VA_TEX0, GX_TEX_ST,
+                                    GX_RGBA6, 0U);
                     sp7A0 = 0;
                 }
 
@@ -980,10 +1008,12 @@ void psDispParticles(s32 arg0, u32 arg1)
                     HSD_PSDisp_804D792C = blend_mode;
                     switch (blend_mode) {
                     case 0:
-                        GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA, GX_LO_CLEAR);
+                        GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA,
+                                       GX_BL_INVSRCALPHA, GX_LO_CLEAR);
                         break;
                     case 1:
-                        GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_ONE, GX_LO_CLEAR);
+                        GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_ONE,
+                                       GX_LO_CLEAR);
                         break;
                     default:
                         OSReport((char*) &HSD_PSDisp_8040C300 + 0x70);
@@ -993,17 +1023,27 @@ void psDispParticles(s32 arg0, u32 arg1)
 
                 if (pp->aCmpCount != 0) {
                     s32 scale = (65536 * pp->aCmpRemain) / pp->aCmpCount;
-                    alpha0 = ((pp->aCmpParam1Target << 16) + scale * (pp->aCmpParam1 - pp->aCmpParam1Target)) >> 16;
-                    alpha1 = ((pp->aCmpParam2Target << 16) + scale * (pp->aCmpParam2 - pp->aCmpParam2Target)) >> 16;
+                    alpha0 =
+                        ((pp->aCmpParam1Target << 16) +
+                         scale * (pp->aCmpParam1 - pp->aCmpParam1Target)) >>
+                        16;
+                    alpha1 =
+                        ((pp->aCmpParam2Target << 16) +
+                         scale * (pp->aCmpParam2 - pp->aCmpParam2Target)) >>
+                        16;
                 } else {
                     alpha0 = pp->aCmpParam1;
                     alpha1 = pp->aCmpParam2;
                 }
-                if ((var_r16 != pp->aCmpMode) || (sp7A5 != alpha0) || (sp7A4 != alpha1)) {
+                if ((var_r16 != pp->aCmpMode) || (sp7A5 != alpha0) ||
+                    (sp7A4 != alpha1))
+                {
                     sp7A5 = alpha0;
                     var_r16 = pp->aCmpMode;
                     sp7A4 = alpha1;
-                    GXSetAlphaCompare((pp->aCmpMode >> 3) & 7, sp7A5, (pp->aCmpMode >> 6) & 3, pp->aCmpMode & 7, sp7A4);
+                    GXSetAlphaCompare((pp->aCmpMode >> 3) & 7, sp7A5,
+                                      (pp->aCmpMode >> 6) & 3,
+                                      pp->aCmpMode & 7, sp7A4);
                 }
 
                 psSetupTev((u32*) pp);
@@ -1014,21 +1054,41 @@ void psDispParticles(s32 arg0, u32 arg1)
                     if (chan_state != (DispLighting | Trail)) {
                         if ((s32) chan_state < (s32) (DispLighting | Trail)) {
                             if ((s32) chan_state < 0x80000001) {
-                                GXAttnFn attn_fn = HSD_LObjGetLightMaskAttnFunc() != 0 ? GX_AF_SPOT : GX_AF_NONE;
-                                GXSetChanCtrl(GX_COLOR0, GX_TRUE, GX_SRC_REG, GX_SRC_REG, HSD_LObjGetLightMaskDiffuse(), GX_DF_NONE, attn_fn);
-                                GXSetChanCtrl(GX_ALPHA0, GX_FALSE, GX_SRC_REG, GX_SRC_REG, 0U, GX_DF_NONE, GX_AF_NONE);
+                                GXAttnFn attn_fn =
+                                    HSD_LObjGetLightMaskAttnFunc() != 0
+                                        ? GX_AF_SPOT
+                                        : GX_AF_NONE;
+                                GXSetChanCtrl(GX_COLOR0, GX_TRUE, GX_SRC_REG,
+                                              GX_SRC_REG,
+                                              HSD_LObjGetLightMaskDiffuse(),
+                                              GX_DF_NONE, attn_fn);
+                                GXSetChanCtrl(GX_ALPHA0, GX_FALSE, GX_SRC_REG,
+                                              GX_SRC_REG, 0U, GX_DF_NONE,
+                                              GX_AF_NONE);
                             } else {
-                                GXSetChanCtrl(GX_COLOR0A0, GX_FALSE, GX_SRC_REG, GX_SRC_REG, 0U, GX_DF_NONE, GX_AF_NONE);
+                                GXSetChanCtrl(GX_COLOR0A0, GX_FALSE,
+                                              GX_SRC_REG, GX_SRC_REG, 0U,
+                                              GX_DF_NONE, GX_AF_NONE);
                             }
                         } else if (chan_state != Trail) {
-                            GXSetChanCtrl(GX_COLOR0A0, GX_FALSE, GX_SRC_REG, GX_SRC_REG, 0U, GX_DF_NONE, GX_AF_NONE);
+                            GXSetChanCtrl(GX_COLOR0A0, GX_FALSE, GX_SRC_REG,
+                                          GX_SRC_REG, 0U, GX_DF_NONE,
+                                          GX_AF_NONE);
                         } else {
-                            GXSetChanCtrl(GX_COLOR0A0, GX_FALSE, GX_SRC_VTX, GX_SRC_VTX, 0U, GX_DF_NONE, GX_AF_NONE);
+                            GXSetChanCtrl(GX_COLOR0A0, GX_FALSE, GX_SRC_VTX,
+                                          GX_SRC_VTX, 0U, GX_DF_NONE,
+                                          GX_AF_NONE);
                         }
                     } else {
-                        GXAttnFn attn_fn = HSD_LObjGetLightMaskAttnFunc() != 0 ? GX_AF_SPOT : GX_AF_NONE;
-                        GXSetChanCtrl(GX_COLOR0, GX_TRUE, GX_SRC_REG, GX_SRC_REG, HSD_LObjGetLightMaskDiffuse(), GX_DF_NONE, attn_fn);
-                        GXSetChanCtrl(GX_ALPHA0, GX_FALSE, GX_SRC_VTX, GX_SRC_VTX, 0U, GX_DF_NONE, GX_AF_NONE);
+                        GXAttnFn attn_fn = HSD_LObjGetLightMaskAttnFunc() != 0
+                                               ? GX_AF_SPOT
+                                               : GX_AF_NONE;
+                        GXSetChanCtrl(GX_COLOR0, GX_TRUE, GX_SRC_REG,
+                                      GX_SRC_REG,
+                                      HSD_LObjGetLightMaskDiffuse(),
+                                      GX_DF_NONE, attn_fn);
+                        GXSetChanCtrl(GX_ALPHA0, GX_FALSE, GX_SRC_VTX,
+                                      GX_SRC_VTX, 0U, GX_DF_NONE, GX_AF_NONE);
                     }
                 }
 
@@ -1041,11 +1101,17 @@ void psDispParticles(s32 arg0, u32 arg1)
                         prim_color.a = 0xFF;
                     } else {
                         getColorPrimEnv(pp, &prim_color, &env_color);
-                        amb_color.r = (u8) (((s32) (amb_color.r * prim_color.r)) >> 8);
-                        amb_color.g = (u8) (((s32) (amb_color.g * prim_color.g)) >> 8);
-                        amb_color.b = (u8) (((s32) (amb_color.b * prim_color.b)) >> 8);
+                        amb_color.r =
+                            (u8) (((s32) (amb_color.r * prim_color.r)) >> 8);
+                        amb_color.g =
+                            (u8) (((s32) (amb_color.g * prim_color.g)) >> 8);
+                        amb_color.b =
+                            (u8) (((s32) (amb_color.b * prim_color.b)) >> 8);
                     }
-                    if ((prim_color.r != HSD_PSDisp_804D7934.r) || (prim_color.g != HSD_PSDisp_804D7934.g) || (prim_color.b != HSD_PSDisp_804D7934.b)) {
+                    if ((prim_color.r != HSD_PSDisp_804D7934.r) ||
+                        (prim_color.g != HSD_PSDisp_804D7934.g) ||
+                        (prim_color.b != HSD_PSDisp_804D7934.b))
+                    {
                         HSD_PSDisp_804D7934.r = prim_color.r;
                         HSD_PSDisp_804D7934.g = prim_color.g;
                         HSD_PSDisp_804D7934.b = prim_color.b;
@@ -1060,7 +1126,10 @@ void psDispParticles(s32 arg0, u32 arg1)
                         amb_color.g = 0;
                         amb_color.b = 0;
                     }
-                    if ((amb_color.r != HSD_PSDisp_804D7938.r) || (amb_color.g != HSD_PSDisp_804D7938.g) || (amb_color.b != HSD_PSDisp_804D7938.b)) {
+                    if ((amb_color.r != HSD_PSDisp_804D7938.r) ||
+                        (amb_color.g != HSD_PSDisp_804D7938.g) ||
+                        (amb_color.b != HSD_PSDisp_804D7938.b))
+                    {
                         HSD_PSDisp_804D7938.r = amb_color.r;
                         HSD_PSDisp_804D7938.g = amb_color.g;
                         HSD_PSDisp_804D7938.b = amb_color.b;
@@ -1070,19 +1139,33 @@ void psDispParticles(s32 arg0, u32 arg1)
                 }
 
                 getColorPrimEnv(pp, &prim_color, &env_color);
-                if ((pp->kind & PrimEnv) || (!(pp->kind & DispLighting) && !(pp->kind & Trail))) {
-                    if ((HSD_PSDisp_804D793C.r != prim_color.r) || (HSD_PSDisp_804D793C.g != prim_color.g) || (HSD_PSDisp_804D793C.b != prim_color.b) || (HSD_PSDisp_804D793C.a != prim_color.a)) {
+                if ((pp->kind & PrimEnv) ||
+                    (!(pp->kind & DispLighting) && !(pp->kind & Trail)))
+                {
+                    if ((HSD_PSDisp_804D793C.r != prim_color.r) ||
+                        (HSD_PSDisp_804D793C.g != prim_color.g) ||
+                        (HSD_PSDisp_804D793C.b != prim_color.b) ||
+                        (HSD_PSDisp_804D793C.a != prim_color.a))
+                    {
                         HSD_PSDisp_804D793C = prim_color;
                         sp6A8 = *(s32*) &HSD_PSDisp_804D793C;
                         GXSetTevColor(GX_TEVREG0, *(GXColor*) sp7C8);
                     }
                     if (pp->kind & PrimEnv) {
-                        if ((HSD_PSDisp_804D7940.r != env_color.r) || (HSD_PSDisp_804D7940.g != env_color.g) || (HSD_PSDisp_804D7940.b != env_color.b) || (HSD_PSDisp_804D7940.a != env_color.a)) {
+                        if ((HSD_PSDisp_804D7940.r != env_color.r) ||
+                            (HSD_PSDisp_804D7940.g != env_color.g) ||
+                            (HSD_PSDisp_804D7940.b != env_color.b) ||
+                            (HSD_PSDisp_804D7940.a != env_color.a))
+                        {
                             HSD_PSDisp_804D7940 = env_color;
                             sp6AC = *(s32*) &HSD_PSDisp_804D7940;
                             GXSetTevColor(GX_TEVREG1, *(GXColor*) sp7C4);
                         }
-                    } else if ((HSD_PSDisp_804D7940.r != 0) || (HSD_PSDisp_804D7940.g != 0) || (HSD_PSDisp_804D7940.b != 0) || (HSD_PSDisp_804D7940.a != 0)) {
+                    } else if ((HSD_PSDisp_804D7940.r != 0) ||
+                               (HSD_PSDisp_804D7940.g != 0) ||
+                               (HSD_PSDisp_804D7940.b != 0) ||
+                               (HSD_PSDisp_804D7940.a != 0))
+                    {
                         HSD_PSDisp_804D7940.r = 0;
                         HSD_PSDisp_804D7940.g = 0;
                         HSD_PSDisp_804D7940.b = 0;
@@ -1094,9 +1177,14 @@ void psDispParticles(s32 arg0, u32 arg1)
                 if (pp->kind & DispLighting) {
                     getColorMatAmb_noinline(pp, &mat_color, &amb_color);
                     if (!(pp->kind & PrimEnv)) {
-                        mat_color.a = (u8) (((s32) (mat_color.a * prim_color.a)) >> 8);
+                        mat_color.a =
+                            (u8) (((s32) (mat_color.a * prim_color.a)) >> 8);
                     }
-                    if ((HSD_PSDisp_804D7944.r != mat_color.r) || (HSD_PSDisp_804D7944.g != mat_color.g) || (HSD_PSDisp_804D7944.b != mat_color.b) || (HSD_PSDisp_804D7944.a != mat_color.a)) {
+                    if ((HSD_PSDisp_804D7944.r != mat_color.r) ||
+                        (HSD_PSDisp_804D7944.g != mat_color.g) ||
+                        (HSD_PSDisp_804D7944.b != mat_color.b) ||
+                        (HSD_PSDisp_804D7944.a != mat_color.a))
+                    {
                         HSD_PSDisp_804D7944 = mat_color;
                         sp6B8 = *(s32*) &HSD_PSDisp_804D7944;
                         GXSetTevColor(GX_TEVREG2, *(GXColor*) sp7B8);
@@ -1105,10 +1193,12 @@ void psDispParticles(s32 arg0, u32 arg1)
 
                 if (sp7AC != (pp->kind & TexEdge)) {
                     sp7AC = pp->kind & TexEdge;
-                    GXSetZMode(GX_TRUE, GX_LEQUAL, (sp7AC != 0) ? GX_TRUE : GX_FALSE);
+                    GXSetZMode(GX_TRUE, GX_LEQUAL,
+                               (sp7AC != 0) ? GX_TRUE : GX_FALSE);
                 }
                 if (((pp->kind ^ prev_kind) & DispFog) != 0) {
-                    HSD_FogSet((pp->kind & DispFog) ? HSD_PSDisp_804D7908 : NULL);
+                    HSD_FogSet((pp->kind & DispFog) ? HSD_PSDisp_804D7908
+                                                    : NULL);
                 }
 
                 if (sp7F0 != NULL) {
@@ -1116,7 +1206,9 @@ void psDispParticles(s32 arg0, u32 arg1)
                     HSD_PSFormGroup** bank_entry = form_array[pp->bank];
                     if (bank_entry != NULL) {
                         form_group = bank_entry[pp->texGroup];
-                        if ((form_group != NULL) && (pp->poseNum < form_group->num)) {
+                        if ((form_group != NULL) &&
+                            (pp->poseNum < form_group->num))
+                        {
                             form = form_group->formTable[pp->poseNum];
                         }
                     }
@@ -1139,16 +1231,21 @@ void psDispParticles(s32 arg0, u32 arg1)
                     if (wrap_bits != sp7A8) {
                         sp7A8 = wrap_bits;
                         sp7B0 = NULL;
-                        PSMTXScale(temp_mtx, (pp->kind & MirrorS) ? 2.0f : 1.0f, (pp->kind & MirrorT) ? 2.0f : 1.0f, 1.0f);
+                        PSMTXScale(temp_mtx,
+                                   (pp->kind & MirrorS) ? 2.0f : 1.0f,
+                                   (pp->kind & MirrorT) ? 2.0f : 1.0f, 1.0f);
                         if (pp->kind & MirrorT) {
                             sp700 = 1.0f;
                             temp_mtx[1][3] = sp700;
                         }
                         GXLoadTexMtxImm(temp_mtx, GX_TEXMTX0, GX_MTX2x4);
-                        GXSetTexCoordGen2(GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0, GX_TEXMTX0, GX_FALSE, GX_PTIDENTITY);
+                        GXSetTexCoordGen2(GX_TEXCOORD0, GX_TG_MTX2x4,
+                                          GX_TG_TEX0, GX_TEXMTX0, GX_FALSE,
+                                          GX_PTIDENTITY);
                     }
                     if (sp7F4 != NULL) {
-                        HSD_PSTexGroup*** tex_array = (HSD_PSTexGroup***) sp7F4;
+                        HSD_PSTexGroup*** tex_array =
+                            (HSD_PSTexGroup***) sp7F4;
                         HSD_PSTexGroup** bank_tex = tex_array[pp->bank];
                         if (bank_tex != NULL) {
                             tex_group = bank_tex[pp->texGroup];
@@ -1156,8 +1253,11 @@ void psDispParticles(s32 arg0, u32 arg1)
                     }
                     if (tex_group != NULL) {
                         image = tex_group->texTable[pp->poseNum];
-                        if ((tex_group->fmt == GX_TF_C4) || (tex_group->fmt == GX_TF_C8)) {
-                            void** palettes = (void**) &tex_group->texTable[tex_group->num];
+                        if ((tex_group->fmt == GX_TF_C4) ||
+                            (tex_group->fmt == GX_TF_C8))
+                        {
+                            void** palettes =
+                                (void**) &tex_group->texTable[tex_group->num];
                             if (pp->palNum != 0xFF) {
                                 tlut = palettes[pp->palNum];
                             } else if (!(pp->kind & ComTLUT)) {
@@ -1186,7 +1286,9 @@ void psDispParticles(s32 arg0, u32 arg1)
                         switch (tex_group->fmt) {
                         case GX_TF_C4:
                         case GX_TF_C8:
-                            GXInitTexObjCI(&sp764, image, tex_group->width, tex_group->height, tex_group->fmt, wrap_s, wrap_t, GX_FALSE, GX_TLUT0);
+                            GXInitTexObjCI(&sp764, image, tex_group->width,
+                                           tex_group->height, tex_group->fmt,
+                                           wrap_s, wrap_t, GX_FALSE, GX_TLUT0);
                             break;
                         case GX_TF_I4:
                         case GX_TF_I8:
@@ -1196,25 +1298,35 @@ void psDispParticles(s32 arg0, u32 arg1)
                         case GX_TF_RGB5A3:
                         case GX_TF_RGBA8:
                         case GX_TF_CMPR:
-                            GXInitTexObj(&sp764, image, tex_group->width, tex_group->height, tex_group->fmt, wrap_s, wrap_t, GX_FALSE);
+                            GXInitTexObj(&sp764, image, tex_group->width,
+                                         tex_group->height, tex_group->fmt,
+                                         wrap_s, wrap_t, GX_FALSE);
                             break;
                         default:
-                            __assert((char*) &HSD_PSDisp_8040C300 + 0x94, 0x8AAU, "0");
+                            __assert((char*) &HSD_PSDisp_8040C300 + 0x94,
+                                     0x8AAU, "0");
                             break;
                         }
                         var_r15 = pp->kind & TexInterpNear;
-                        GXInitTexObjLOD(&sp764, (var_r15 != 0) ? GX_NEAR : GX_LINEAR, (var_r15 != 0) ? GX_NEAR : GX_LINEAR, 0.0f, 0.0f, 0.0f, GX_FALSE, GX_FALSE, GX_ANISO_1);
+                        GXInitTexObjLOD(
+                            &sp764, (var_r15 != 0) ? GX_NEAR : GX_LINEAR,
+                            (var_r15 != 0) ? GX_NEAR : GX_LINEAR, 0.0f, 0.0f,
+                            0.0f, GX_FALSE, GX_FALSE, GX_ANISO_1);
                         GXLoadTexObj(&sp764, GX_TEXMAP0);
                     }
                     if ((pp->kind & TexInterpNear) != (u32) var_r15) {
                         var_r15 = pp->kind & TexInterpNear;
-                        GXInitTexObjLOD(&sp764, (var_r15 != 0) ? GX_NEAR : GX_LINEAR, (var_r15 != 0) ? GX_NEAR : GX_LINEAR, 0.0f, 0.0f, 0.0f, GX_FALSE, GX_FALSE, GX_ANISO_1);
+                        GXInitTexObjLOD(
+                            &sp764, (var_r15 != 0) ? GX_NEAR : GX_LINEAR,
+                            (var_r15 != 0) ? GX_NEAR : GX_LINEAR, 0.0f, 0.0f,
+                            0.0f, GX_FALSE, GX_FALSE, GX_ANISO_1);
                         GXLoadTexObj(&sp764, GX_TEXMAP0);
                     }
                 }
 
                 if (pp->kind & Tornado) {
-                    calcTornadoLastPos(pp, &last_pos.x, &last_pos.y, &last_pos.z);
+                    calcTornadoLastPos(pp, &last_pos.x, &last_pos.y,
+                                       &last_pos.z);
                 } else {
                     last_pos.x = pp->pos.x - pp->vel.x;
                     last_pos.y = pp->pos.y - pp->vel.y;
@@ -1237,13 +1349,18 @@ void psDispParticles(s32 arg0, u32 arg1)
                     if (appsrt != NULL) {
                         if (appsrt->frameNum != HSD_PSDisp_804D6380[0]) {
                             if (appsrt->status != 2) {
-                                HSD_MtxSRT(appsrt->mmtx, &appsrt->scale, (Point3d*) &appsrt->rot, &appsrt->translate, NULL);
+                                HSD_MtxSRT(appsrt->mmtx, &appsrt->scale,
+                                           (Point3d*) &appsrt->rot,
+                                           &appsrt->translate, NULL);
                             }
                             if (appsrt->status == 1) {
                                 appsrt->status = 2;
                             }
-                            PSMTXConcat((MtxPtr) cache, appsrt->mmtx, (MtxPtr) &appsrt->ssx);
-                            ax = appsrt->ssx * appsrt->ssx + appsrt->x74 * appsrt->x74 + appsrt->x84 * appsrt->x84;
+                            PSMTXConcat((MtxPtr) cache, appsrt->mmtx,
+                                        (MtxPtr) &appsrt->ssx);
+                            ax = appsrt->ssx * appsrt->ssx +
+                                 appsrt->x74 * appsrt->x74 +
+                                 appsrt->x84 * appsrt->x84;
                             if (ax > (f32) sp8B0) {
                                 double e = __frsqrte((double) ax);
                                 e = 0.5 * e * (3.0 - (double) ax * e * e);
@@ -1252,7 +1369,9 @@ void psDispParticles(s32 arg0, u32 arg1)
                                 ax = (f32) ((double) ax * e);
                             }
                             appsrt->x94 = ax;
-                            ay = appsrt->ssy * appsrt->ssy + appsrt->x78 * appsrt->x78 + appsrt->x88 * appsrt->x88;
+                            ay = appsrt->ssy * appsrt->ssy +
+                                 appsrt->x78 * appsrt->x78 +
+                                 appsrt->x88 * appsrt->x88;
                             if (ay > (f32) sp8B0) {
                                 double e = __frsqrte((double) ay);
                                 e = 0.5 * e * (3.0 - (double) ay * e * e);
@@ -1266,9 +1385,11 @@ void psDispParticles(s32 arg0, u32 arg1)
                                 temp_mtx[0][3] = appsrt->translate.x;
                                 temp_mtx[1][3] = appsrt->translate.y;
                                 temp_mtx[2][3] = appsrt->translate.z;
-                                PSMTXConcat((MtxPtr) cache, temp_mtx, temp_mtx);
+                                PSMTXConcat((MtxPtr) cache, temp_mtx,
+                                            temp_mtx);
                                 HSD_MtxGetScale(temp_mtx, &scale);
-                                PSMTXScale((MtxPtr) &appsrt->ssx, scale.x, scale.y, scale.z);
+                                PSMTXScale((MtxPtr) &appsrt->ssx, scale.x,
+                                           scale.y, scale.z);
                                 appsrt->x70 = temp_mtx[0][3];
                                 appsrt->x80 = temp_mtx[1][3];
                                 appsrt->x90 = temp_mtx[2][3];
@@ -1291,66 +1412,86 @@ void psDispParticles(s32 arg0, u32 arg1)
                         draw_mtx[2][1] = appsrt->x88;
                         draw_mtx[2][2] = appsrt->x8C;
                         draw_mtx[2][3] = appsrt->x90;
-                        cur_pos.x = draw_mtx[0][0] * pp->pos.x + draw_mtx[0][1] * pp->pos.y + draw_mtx[0][2] * pp->pos.z + draw_mtx[0][3];
-                        cur_pos.y = draw_mtx[1][0] * pp->pos.x + draw_mtx[1][1] * pp->pos.y + draw_mtx[1][2] * pp->pos.z + draw_mtx[1][3];
-                        cur_pos.z = draw_mtx[2][0] * pp->pos.x + draw_mtx[2][1] * pp->pos.y + draw_mtx[2][2] * pp->pos.z + draw_mtx[2][3];
-                        prev_pos.x = draw_mtx[0][0] * last_pos.x + draw_mtx[0][1] * last_pos.y + draw_mtx[0][2] * last_pos.z + draw_mtx[0][3];
-                        prev_pos.y = draw_mtx[1][0] * last_pos.x + draw_mtx[1][1] * last_pos.y + draw_mtx[1][2] * last_pos.z + draw_mtx[1][3];
-                        prev_pos.z = draw_mtx[2][0] * last_pos.x + draw_mtx[2][1] * last_pos.y + draw_mtx[2][2] * last_pos.z + draw_mtx[2][3];
+                        cur_pos.x = draw_mtx[0][0] * pp->pos.x +
+                                    draw_mtx[0][1] * pp->pos.y +
+                                    draw_mtx[0][2] * pp->pos.z +
+                                    draw_mtx[0][3];
+                        cur_pos.y = draw_mtx[1][0] * pp->pos.x +
+                                    draw_mtx[1][1] * pp->pos.y +
+                                    draw_mtx[1][2] * pp->pos.z +
+                                    draw_mtx[1][3];
+                        cur_pos.z = draw_mtx[2][0] * pp->pos.x +
+                                    draw_mtx[2][1] * pp->pos.y +
+                                    draw_mtx[2][2] * pp->pos.z +
+                                    draw_mtx[2][3];
+                        prev_pos.x = draw_mtx[0][0] * last_pos.x +
+                                     draw_mtx[0][1] * last_pos.y +
+                                     draw_mtx[0][2] * last_pos.z +
+                                     draw_mtx[0][3];
+                        prev_pos.y = draw_mtx[1][0] * last_pos.x +
+                                     draw_mtx[1][1] * last_pos.y +
+                                     draw_mtx[1][2] * last_pos.z +
+                                     draw_mtx[1][3];
+                        prev_pos.z = draw_mtx[2][0] * last_pos.x +
+                                     draw_mtx[2][1] * last_pos.y +
+                                     draw_mtx[2][2] * last_pos.z +
+                                     draw_mtx[2][3];
                         ax = (pp->size > (f32) sp820) ? 255.0f
                                                       : (f32) sp828 * pp->size;
                         if (pp->kind & Trail) {
                             tail_color.a =
                                 (u8) ((f32) tail_color.a * pp->trail);
-                        if (HSD_PSDisp_804D7910 != (s32) (u8) (s32) ax) {
-                            HSD_PSDisp_804D7910 = (u8) (s32) ax;
-                            GXSetLineWidth((u8) HSD_PSDisp_804D7910, GX_TO_ONE);
-                        }
-                        if (pp->kind & DispTexture) {
-                            setVtxDesc(2);
-                            GXBegin(GX_LINES, GX_VTXFMT2, 2U);
+                            if (HSD_PSDisp_804D7910 != (s32) (u8) (s32) ax) {
+                                HSD_PSDisp_804D7910 = (u8) (s32) ax;
+                                GXSetLineWidth((u8) HSD_PSDisp_804D7910,
+                                               GX_TO_ONE);
+                            }
+                            if (pp->kind & DispTexture) {
+                                setVtxDesc(2);
+                                GXBegin(GX_LINES, GX_VTXFMT2, 2U);
+                            } else {
+                                setVtxDesc(3);
+                                GXBegin(GX_LINES, GX_VTXFMT3, 2U);
+                            }
+                            GXWGFifo.f32 = prev_pos.x;
+                            GXWGFifo.f32 = prev_pos.y;
+                            GXWGFifo.f32 = prev_pos.z;
+                            GXWGFifo.u8 = tail_color.r;
+                            GXWGFifo.u8 = tail_color.g;
+                            GXWGFifo.u8 = tail_color.b;
+                            GXWGFifo.u8 = tail_color.a;
+                            if (pp->kind & DispTexture) {
+                                GXWGFifo.u8 = tex_base + 0;
+                            }
+                            GXWGFifo.f32 = cur_pos.x;
+                            GXWGFifo.f32 = cur_pos.y;
+                            GXWGFifo.f32 = cur_pos.z;
+                            GXWGFifo.u8 = draw_color.r;
+                            GXWGFifo.u8 = draw_color.g;
+                            GXWGFifo.u8 = draw_color.b;
+                            GXWGFifo.u8 = draw_color.a;
+                            if (pp->kind & DispTexture) {
+                                GXWGFifo.u8 = tex_base + 1;
+                            }
                         } else {
-                            setVtxDesc(3);
-                            GXBegin(GX_LINES, GX_VTXFMT3, 2U);
-                        }
-                        GXWGFifo.f32 = prev_pos.x;
-                        GXWGFifo.f32 = prev_pos.y;
-                        GXWGFifo.f32 = prev_pos.z;
-                        GXWGFifo.u8 = tail_color.r;
-                        GXWGFifo.u8 = tail_color.g;
-                        GXWGFifo.u8 = tail_color.b;
-                        GXWGFifo.u8 = tail_color.a;
-                        if (pp->kind & DispTexture) {
-                            GXWGFifo.u8 = tex_base + 0;
-                        }
-                        GXWGFifo.f32 = cur_pos.x;
-                        GXWGFifo.f32 = cur_pos.y;
-                        GXWGFifo.f32 = cur_pos.z;
-                        GXWGFifo.u8 = draw_color.r;
-                        GXWGFifo.u8 = draw_color.g;
-                        GXWGFifo.u8 = draw_color.b;
-                        GXWGFifo.u8 = draw_color.a;
-                        if (pp->kind & DispTexture) {
-                            GXWGFifo.u8 = tex_base + 1;
-                        }
-                    } else {
-                        if (HSD_PSDisp_804D790C != (s32) (u8) (s32) ax) {
-                            HSD_PSDisp_804D790C = (u8) (s32) ax;
-                            GXSetPointSize((u8) HSD_PSDisp_804D790C, GX_TO_ONE);
-                        }
-                        if (pp->kind & DispTexture) {
-                            setVtxDesc(0);
-                            GXBegin(GX_POINTS, GX_VTXFMT0, 1U);
-                        } else {
-                            setVtxDesc(1);
-                            GXBegin(GX_POINTS, GX_VTXFMT1, 1U);
-                        }
-                        GXWGFifo.f32 = cur_pos.x;
-                        GXWGFifo.f32 = cur_pos.y;
-                        GXWGFifo.f32 = cur_pos.z;
-                        if (pp->kind & DispTexture) {
-                            GXWGFifo.u8 = tex_base + 1;
-                        }
+                            if (HSD_PSDisp_804D790C != (s32) (u8) (s32) ax) {
+                                HSD_PSDisp_804D790C = (u8) (s32) ax;
+                                GXSetPointSize((u8) HSD_PSDisp_804D790C,
+                                               GX_TO_ONE);
+                            }
+                            if (pp->kind & DispTexture) {
+                                setVtxDesc(0);
+                                GXBegin(GX_POINTS, GX_VTXFMT0, 1U);
+                            } else {
+                                setVtxDesc(1);
+                                GXBegin(GX_POINTS, GX_VTXFMT1, 1U);
+                            }
+                            GXWGFifo.f32 = cur_pos.x;
+                            GXWGFifo.f32 = cur_pos.y;
+                            GXWGFifo.f32 = cur_pos.z;
+                            if (pp->kind & DispTexture) {
+                                GXWGFifo.u8 = tex_base + 1;
+                            }
                         }
                     } else {
                         if (HSD_PSDisp_804D7948 != 0) {
@@ -1367,13 +1508,18 @@ void psDispParticles(s32 arg0, u32 arg1)
                     appsrt = pp->appsrt;
                     if (appsrt->frameNum != HSD_PSDisp_804D6380[0]) {
                         if (appsrt->status != 2) {
-                            HSD_MtxSRT(appsrt->mmtx, &appsrt->scale, (Point3d*) &appsrt->rot, &appsrt->translate, NULL);
+                            HSD_MtxSRT(appsrt->mmtx, &appsrt->scale,
+                                       (Point3d*) &appsrt->rot,
+                                       &appsrt->translate, NULL);
                         }
                         if (appsrt->status == 1) {
                             appsrt->status = 2;
                         }
-                        PSMTXConcat((MtxPtr) cache, appsrt->mmtx, (MtxPtr) &appsrt->ssx);
-                        ax = appsrt->ssx * appsrt->ssx + appsrt->x74 * appsrt->x74 + appsrt->x84 * appsrt->x84;
+                        PSMTXConcat((MtxPtr) cache, appsrt->mmtx,
+                                    (MtxPtr) &appsrt->ssx);
+                        ax = appsrt->ssx * appsrt->ssx +
+                             appsrt->x74 * appsrt->x74 +
+                             appsrt->x84 * appsrt->x84;
                         if (ax > (f32) sp8B0) {
                             double e = __frsqrte((double) ax);
                             e = 0.5 * e * (3.0 - (double) ax * e * e);
@@ -1382,7 +1528,9 @@ void psDispParticles(s32 arg0, u32 arg1)
                             ax = (f32) ((double) ax * e);
                         }
                         appsrt->x94 = ax;
-                        ay = appsrt->ssy * appsrt->ssy + appsrt->x78 * appsrt->x78 + appsrt->x88 * appsrt->x88;
+                        ay = appsrt->ssy * appsrt->ssy +
+                             appsrt->x78 * appsrt->x78 +
+                             appsrt->x88 * appsrt->x88;
                         if (ay > (f32) sp8B0) {
                             double e = __frsqrte((double) ay);
                             e = 0.5 * e * (3.0 - (double) ay * e * e);
@@ -1398,7 +1546,8 @@ void psDispParticles(s32 arg0, u32 arg1)
                             temp_mtx[2][3] = appsrt->translate.z;
                             PSMTXConcat((MtxPtr) cache, temp_mtx, temp_mtx);
                             HSD_MtxGetScale(temp_mtx, &scale);
-                            PSMTXScale((MtxPtr) &appsrt->ssx, scale.x, scale.y, scale.z);
+                            PSMTXScale((MtxPtr) &appsrt->ssx, scale.x, scale.y,
+                                       scale.z);
                             appsrt->x70 = temp_mtx[0][3];
                             appsrt->x80 = temp_mtx[1][3];
                             appsrt->x90 = temp_mtx[2][3];
@@ -1421,12 +1570,24 @@ void psDispParticles(s32 arg0, u32 arg1)
                     draw_mtx[2][1] = appsrt->x88;
                     draw_mtx[2][2] = appsrt->x8C;
                     draw_mtx[2][3] = appsrt->x90;
-                    cur_pos.x = draw_mtx[0][0] * pp->pos.x + draw_mtx[0][1] * pp->pos.y + draw_mtx[0][2] * pp->pos.z + draw_mtx[0][3];
-                    cur_pos.y = draw_mtx[1][0] * pp->pos.x + draw_mtx[1][1] * pp->pos.y + draw_mtx[1][2] * pp->pos.z + draw_mtx[1][3];
-                    cur_pos.z = draw_mtx[2][0] * pp->pos.x + draw_mtx[2][1] * pp->pos.y + draw_mtx[2][2] * pp->pos.z + draw_mtx[2][3];
-                    prev_pos.x = draw_mtx[0][0] * last_pos.x + draw_mtx[0][1] * last_pos.y + draw_mtx[0][2] * last_pos.z + draw_mtx[0][3];
-                    prev_pos.y = draw_mtx[1][0] * last_pos.x + draw_mtx[1][1] * last_pos.y + draw_mtx[1][2] * last_pos.z + draw_mtx[1][3];
-                    prev_pos.z = draw_mtx[2][0] * last_pos.x + draw_mtx[2][1] * last_pos.y + draw_mtx[2][2] * last_pos.z + draw_mtx[2][3];
+                    cur_pos.x = draw_mtx[0][0] * pp->pos.x +
+                                draw_mtx[0][1] * pp->pos.y +
+                                draw_mtx[0][2] * pp->pos.z + draw_mtx[0][3];
+                    cur_pos.y = draw_mtx[1][0] * pp->pos.x +
+                                draw_mtx[1][1] * pp->pos.y +
+                                draw_mtx[1][2] * pp->pos.z + draw_mtx[1][3];
+                    cur_pos.z = draw_mtx[2][0] * pp->pos.x +
+                                draw_mtx[2][1] * pp->pos.y +
+                                draw_mtx[2][2] * pp->pos.z + draw_mtx[2][3];
+                    prev_pos.x = draw_mtx[0][0] * last_pos.x +
+                                 draw_mtx[0][1] * last_pos.y +
+                                 draw_mtx[0][2] * last_pos.z + draw_mtx[0][3];
+                    prev_pos.y = draw_mtx[1][0] * last_pos.x +
+                                 draw_mtx[1][1] * last_pos.y +
+                                 draw_mtx[1][2] * last_pos.z + draw_mtx[1][3];
+                    prev_pos.z = draw_mtx[2][0] * last_pos.x +
+                                 draw_mtx[2][1] * last_pos.y +
+                                 draw_mtx[2][2] * last_pos.z + draw_mtx[2][3];
                     ax = appsrt->x94 * pp->size;
                     ay = 0.0f;
                     bx = 0.0f;
@@ -1453,9 +1614,11 @@ void psDispParticles(s32 arg0, u32 arg1)
                             f64 d850 = (f64) (cache[0x1C] * x88);
                             f64 d860 = (f64) (cache[0x1C] * x8C);
                             f64 d870 = (f64) (cache[0x1C] * x90);
-                            f32 w0 = x90 + (x8C * pp->pos.z +
-                                            (x84 * pp->pos.x + x88 * pp->pos.y));
-                            f32 f16 = cache[0x19] * appsrt->x6C + cache[0x1A] * x8C;
+                            f32 w0 =
+                                x90 + (x8C * pp->pos.z +
+                                       (x84 * pp->pos.x + x88 * pp->pos.y));
+                            f32 f16 =
+                                cache[0x19] * appsrt->x6C + cache[0x1A] * x8C;
                             f32 s808 =
                                 cache[0x19] * appsrt->ssx + cache[0x1A] * x84;
                             f32 s804 =
@@ -1474,19 +1637,23 @@ void psDispParticles(s32 arg0, u32 arg1)
                             }
                             if (cache[0x18] != w0) {
                                 f32 w0inv = (f32) sp878 / w0;
-                                f32 w1 = x90 + (x8C * d.z + (x84 * d.x + x88 * d.y));
+                                f32 w1 = x90 +
+                                         (x8C * d.z + (x84 * d.x + x88 * d.y));
                                 if (cache[0x18] != w1) {
                                     f32 w1inv = (f32) sp878 / w1;
-                                    vf1 = w0inv * (f20 + (f16 * pp->pos.z +
-                                                          (s808 * pp->pos.x +
-                                                           s804 * pp->pos.y))) -
-                                          w1inv * (f20 + (f16 * d.z +
-                                                          (s808 * d.x + s804 * d.y)));
+                                    vf1 =
+                                        w0inv * (f20 + (f16 * pp->pos.z +
+                                                        (s808 * pp->pos.x +
+                                                         s804 * pp->pos.y))) -
+                                        w1inv * (f20 +
+                                                 (f16 * d.z +
+                                                  (s808 * d.x + s804 * d.y)));
                                     vf2 = w0inv * (f13 + (f11 * pp->pos.z +
                                                           (f12 * pp->pos.x +
                                                            f8 * pp->pos.y))) -
-                                          w1inv * (f13 + (f11 * d.z +
-                                                          (f12 * d.x + f8 * d.y)));
+                                          w1inv *
+                                              (f13 + (f11 * d.z +
+                                                      (f12 * d.x + f8 * d.y)));
                                 }
                             }
                         } else {
@@ -1618,8 +1785,12 @@ void psDispParticles(s32 arg0, u32 arg1)
                                 if (pp->kind & TexFlipT) {
                                     t = 1.0f - t;
                                 }
-                                GXWGFifo.f32 = cur_pos.x + ax * (2.0f * (s - 0.5f)) + bx * (2.0f * (t - 0.5f));
-                                GXWGFifo.f32 = cur_pos.y + ay * (2.0f * (s - 0.5f)) + by * (2.0f * (t - 0.5f));
+                                GXWGFifo.f32 = cur_pos.x +
+                                               ax * (2.0f * (s - 0.5f)) +
+                                               bx * (2.0f * (t - 0.5f));
+                                GXWGFifo.f32 = cur_pos.y +
+                                               ay * (2.0f * (s - 0.5f)) +
+                                               by * (2.0f * (t - 0.5f));
                                 GXWGFifo.f32 = cur_pos.z;
                                 if (pp->kind & DispTexture) {
                                     GXWGFifo.f32 = s;
@@ -1696,29 +1867,34 @@ void psDispParticles(s32 arg0, u32 arg1)
                                                         cache[9] * pp->pos.y));
                                 if (cache[0x18] != w0) {
                                     f32 w0inv = (f32) sp878 / w0;
-                                    f32 w1 = cache[0xB] +
-                                             (cache[0xA] * d.z +
-                                              (cache[8] * d.x + cache[9] * d.y));
+                                    f32 w1 =
+                                        cache[0xB] +
+                                        (cache[0xA] * d.z +
+                                         (cache[8] * d.x + cache[9] * d.y));
                                     if (cache[0x18] != w1) {
                                         f32 w1inv = (f32) sp878 / w1;
-                                        f64 t888 = (f64) (cache[0x20] * pp->pos.y);
+                                        f64 t888 =
+                                            (f64) (cache[0x20] * pp->pos.y);
                                         f64 t890 = (f64) (cache[0x1F] * d.x +
                                                           cache[0x20] * d.y);
-                                        vf1 = w0inv * (cache[0x22] +
-                                                       (cache[0x21] * pp->pos.z +
-                                                        (cache[0x1F] * pp->pos.x +
-                                                         (f32) t888))) -
+                                        vf1 = w0inv *
+                                                  (cache[0x22] +
+                                                   (cache[0x21] * pp->pos.z +
+                                                    (cache[0x1F] * pp->pos.x +
+                                                     (f32) t888))) -
                                               w1inv * (cache[0x22] +
                                                        (cache[0x21] * d.z +
                                                         (f32) t890));
-                                        vf2 = w0inv * (cache[0x26] +
-                                                       (cache[0x25] * pp->pos.z +
-                                                        (cache[0x23] * pp->pos.x +
-                                                         cache[0x24] * pp->pos.y))) -
-                                              w1inv * (cache[0x26] +
-                                                       (cache[0x25] * d.z +
-                                                        (cache[0x23] * d.x +
-                                                         cache[0x24] * d.y)));
+                                        vf2 =
+                                            w0inv *
+                                                (cache[0x26] +
+                                                 (cache[0x25] * pp->pos.z +
+                                                  (cache[0x23] * pp->pos.x +
+                                                   cache[0x24] * pp->pos.y))) -
+                                            w1inv * (cache[0x26] +
+                                                     (cache[0x25] * d.z +
+                                                      (cache[0x23] * d.x +
+                                                       cache[0x24] * d.y)));
                                     }
                                 }
                             }
@@ -1730,10 +1906,12 @@ void psDispParticles(s32 arg0, u32 arg1)
                                     f32 dy = pp->pos.y - t.y;
                                     f32 dx = pp->pos.x - t.x;
                                     f32 dz = pp->pos.z - t.z;
-                                    vf1 = cache[0x21] * dz +
-                                          (cache[0x1F] * dx + cache[0x20] * dy);
-                                    vf2 = cache[0x25] * dz +
-                                          (cache[0x23] * dx + cache[0x24] * dy);
+                                    vf1 =
+                                        cache[0x21] * dz +
+                                        (cache[0x1F] * dx + cache[0x20] * dy);
+                                    vf2 =
+                                        cache[0x25] * dz +
+                                        (cache[0x23] * dx + cache[0x24] * dy);
                                 }
                             } else {
                                 f32 vy = pp->vel.y;
@@ -1766,12 +1944,15 @@ void psDispParticles(s32 arg0, u32 arg1)
                         axis.y = right.z * up.x - right.x * up.z;
                         axis.z = right.x * up.y - right.y * up.x;
                         PSMTXRotAxisRad(temp_mtx, &axis, angle);
-                        t1 = temp_mtx[1][0] * right.x + temp_mtx[1][1] * right.y;
+                        t1 = temp_mtx[1][0] * right.x +
+                             temp_mtx[1][1] * right.y;
                         t2 = temp_mtx[1][0] * up.x + temp_mtx[1][1] * up.y;
-                        t3 = temp_mtx[2][0] * right.x + temp_mtx[2][1] * right.y;
+                        t3 = temp_mtx[2][0] * right.x +
+                             temp_mtx[2][1] * right.y;
                         t4 = temp_mtx[2][0] * up.x + temp_mtx[2][1] * up.y;
                         right.x = temp_mtx[0][2] * right.z +
-                                  (temp_mtx[0][0] * right.x + temp_mtx[0][1] * right.y);
+                                  (temp_mtx[0][0] * right.x +
+                                   temp_mtx[0][1] * right.y);
                         right.y = temp_mtx[1][2] * right.z + t1;
                         right.z = temp_mtx[2][2] * right.z + t3;
                         up.x = temp_mtx[0][2] * up.z +
@@ -1806,7 +1987,8 @@ void psDispParticles(s32 arg0, u32 arg1)
                             GXWGFifo.u8 = draw_color.r;
                             GXWGFifo.u8 = draw_color.g;
                             GXWGFifo.u8 = draw_color.b;
-                            GXWGFifo.u8 = (s8) ((f32) draw_color.a * pp->trail);
+                            GXWGFifo.u8 =
+                                (s8) ((f32) draw_color.a * pp->trail);
                             if (pp->kind & DispTexture) {
                                 GXWGFifo.u8 = tex_base + 0;
                             }
@@ -1836,7 +2018,8 @@ void psDispParticles(s32 arg0, u32 arg1)
                             GXWGFifo.u8 = draw_color.r;
                             GXWGFifo.u8 = draw_color.g;
                             GXWGFifo.u8 = draw_color.b;
-                            GXWGFifo.u8 = (s8) ((f32) draw_color.a * pp->trail);
+                            GXWGFifo.u8 =
+                                (s8) ((f32) draw_color.a * pp->trail);
                             if (pp->kind & DispTexture) {
                                 GXWGFifo.u8 = tex_base + 3;
                             }
@@ -1861,9 +2044,12 @@ void psDispParticles(s32 arg0, u32 arg1)
                                 u32 primitive_count;
                                 if (segLen > (f32) sp8B0) {
                                     double e = __frsqrte((double) segLen);
-                                    e = 0.5 * e * (3.0 - (double) segLen * e * e);
-                                    e = 0.5 * e * (3.0 - (double) segLen * e * e);
-                                    e = 0.5 * e * (3.0 - (double) segLen * e * e);
+                                    e = 0.5 * e *
+                                        (3.0 - (double) segLen * e * e);
+                                    e = 0.5 * e *
+                                        (3.0 - (double) segLen * e * e);
+                                    e = 0.5 * e *
+                                        (3.0 - (double) segLen * e * e);
                                     segLen = (f32) ((double) segLen * e);
                                 }
                                 ratio = segLen / upLen;
@@ -1904,12 +2090,15 @@ void psDispParticles(s32 arg0, u32 arg1)
                                         if (pp->kind & TexFlipT) {
                                             t = 1.0f - t;
                                         }
-                                        GXWGFifo.f32 = up.x * ratio * tx +
-                                                       (right.x * sx + cur_pos.x);
-                                        GXWGFifo.f32 = up.y * ratio * tx +
-                                                       (right.y * sx + cur_pos.y);
-                                        GXWGFifo.f32 = up.z * ratio * tx +
-                                                       (right.z * sx + cur_pos.z);
+                                        GXWGFifo.f32 =
+                                            up.x * ratio * tx +
+                                            (right.x * sx + cur_pos.x);
+                                        GXWGFifo.f32 =
+                                            up.y * ratio * tx +
+                                            (right.y * sx + cur_pos.y);
+                                        GXWGFifo.f32 =
+                                            up.z * ratio * tx +
+                                            (right.z * sx + cur_pos.z);
                                         GXWGFifo.u8 = draw_color.r;
                                         GXWGFifo.u8 = draw_color.g;
                                         GXWGFifo.u8 = draw_color.b;
@@ -1984,9 +2173,12 @@ void psDispParticles(s32 arg0, u32 arg1)
                                 }
                                 sx = 2.0f * (s - 0.5f);
                                 tx = 2.0f * (t - 0.5f);
-                                GXWGFifo.f32 = cur_pos.x + right.x * sx + up.x * tx;
-                                GXWGFifo.f32 = cur_pos.y + right.y * sx + up.y * tx;
-                                GXWGFifo.f32 = cur_pos.z + right.z * sx + up.z * tx;
+                                GXWGFifo.f32 =
+                                    cur_pos.x + right.x * sx + up.x * tx;
+                                GXWGFifo.f32 =
+                                    cur_pos.y + right.y * sx + up.y * tx;
+                                GXWGFifo.f32 =
+                                    cur_pos.z + right.z * sx + up.z * tx;
                                 if (pp->kind & DispTexture) {
                                     GXWGFifo.f32 = s;
                                     GXWGFifo.f32 = t;

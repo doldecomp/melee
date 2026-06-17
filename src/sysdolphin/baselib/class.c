@@ -78,8 +78,8 @@ HSD_MemoryEntry* GetMemoryEntry(s32 idx)
     HSD_ASSERT(171, idx >= 0);
 
     if (idx >= nb_memory_list) {
-        if (nb_memory_list == 0)
-        { // In this case, it's uninitialized and allocs the array
+        if (nb_memory_list ==
+            0) { // In this case, it's uninitialized and allocs the array
             s32 new_nb;
 
             for (new_nb = 32; idx >= new_nb; new_nb *= 2) {
