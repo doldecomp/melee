@@ -1160,18 +1160,12 @@ char plightset[10] = "*lightset";
 
 typedef struct LightOverrideEntry {
     /* 0x0 */ HSD_LightDesc* desc;
-    /* 0x4 */ u8 _flag_pad0;
-    /* 0x5 */ u8 _flag_pad1;
-    /* 0x6 */ u8 _flag_pad2;
-    /* 0x7 */ u8 _flag_pad3;
+    /* 0x4 */ u8 a : 1;
+    /* 0x4 */ u8 b : 1;
+    /* 0x4 */ u8 c : 1;
+    /* 0x4 */ u8 _ : 5;
+    /* 0x5 */ u8 _pad[3];
 } LightOverrideEntry;
-
-typedef struct LightOverrideFlags {
-    u8 a : 1;
-    u8 b : 1;
-    u8 c : 1;
-    u8 _ : 5;
-} LightOverrideFlags;
 
 LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lights)
 {
@@ -1183,10 +1177,9 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lights)
     HSD_LightDesc* desc;
     s32 count;
     s32 i;
-    s32 byte_off;
-    s32 found;
+    bool found;
     s32 b6, b7, b5;
-    s32 matched;
+    bool matched;
 
     HSD_ASSERTMSG(0x773, lights, lightset);
     HSD_ASSERTMSG(0x774, *lights, plightset);
@@ -1195,25 +1188,22 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lights)
     matched = 0;
     while (*walker != NULL) {
         dat = archive->unk4;
-        desc = *(HSD_LightDesc**) *walker;
+        desc = (*walker)->desc;
         count = dat->unk1C;
         if (count != 0) {
-            found = 0;
             for (i = 0; i < count; i++) {
-                arr = (LightOverrideEntry*) dat->unk18;
+                arr = dat->unk18;
                 if (arr[i].desc == desc) {
-                    LightOverrideFlags* p =
-                        (LightOverrideFlags*) &arr[i]._flag_pad0;
-                    found = 1;
-                    b6 = p->b;
-                    b7 = p->a;
-                    b5 = p->c;
-                    break;
+                    found = true;
+                    b6 = arr[i].b;
+                    b7 = arr[i].a;
+                    b5 = arr[i].c;
+                    goto search1_done;
                 }
             }
-        } else {
-            found = 0;
         }
+        found = false;
+    search1_done:
         if (found != 0 && (b6 != 0 || b7 != 0 || b5 != 0)) {
             matched = 1;
             break;
@@ -1232,22 +1222,19 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lights)
             dat = archive->unk4;
             count = dat->unk1C;
             if (count != 0) {
-                found = 0;
                 for (i = 0; i < count; i++) {
-                    arr = (LightOverrideEntry*) dat->unk18;
+                    arr = dat->unk18;
                     if (arr[i].desc == desc) {
-                        LightOverrideFlags* p =
-                            (LightOverrideFlags*) &arr[i]._flag_pad0;
-                        found = 1;
-                        b6 = p->b;
-                        b7 = p->a;
-                        b5 = p->c;
-                        break;
+                        found = true;
+                        b6 = arr[i].b;
+                        b7 = arr[i].a;
+                        b5 = arr[i].c;
+                        goto search2_done;
                     }
                 }
-            } else {
-                found = 0;
             }
+            found = false;
+        search2_done:
             if (found == 0 || (b6 == 0 && b7 == 0 && b5 == 0)) {
                 clean = out;
                 while ((clean[0] = clean[1]) != NULL) {
@@ -3209,18 +3196,24 @@ s32 Ground_801C5840(void)
     return stage_info.x6E4[i];
 }
 
+#pragma push
+#pragma global_optimizer off
+/// @todo Why is @c global_optimizer necessary?
 void Ground_801C5878(void)
 {
     PAD_STACK(8);
     tyDisplay_8031C2CC();
     if (gm_8016B498() != 0) {
-        int temp_r30 = tyDisplay_8031C2EC();
-        un_8031C454(temp_r30);
-        stage_info.x6E4[0] = temp_r30;
+        StageInfo* stageinfo = &stage_info;
+        int display_id;
+        display_id = tyDisplay_8031C2EC();
+        un_8031C454(display_id);
+        stageinfo->x6E4[0] = display_id;
     } else {
         stage_info.x6E4[0] = -1;
     }
 }
+#pragma pop
 
 Item_GObj* Ground_801C58E0(s32 arg0, s32 arg1)
 {
