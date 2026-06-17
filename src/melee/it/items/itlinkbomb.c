@@ -11,12 +11,12 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_3F14.h"
 #include "it/itCharItems.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 #include "lb/lb_00F9.h"
@@ -40,6 +40,13 @@ ItemStateTable it_803F6888[] = {
     { 0, itLinkbomb_UnkMotion6_Anim, itLinkbomb_UnkMotion6_Phys,
       itLinkbomb_UnkMotion6_Coll },
 };
+
+static void order_sdata2(void)
+{
+    (void) 2.0f;
+    (void) 0.5f;
+    (void) 0.0f;
+}
 
 void it_8029D968(Item_GObj* gobj)
 {

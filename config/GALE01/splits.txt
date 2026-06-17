@@ -3535,10 +3535,10 @@ melee/it/items/itfoxillusion.c:
 
 melee/it/items/itlinkbomb.c:
 	.text       start:0x8029D968 end:0x8029FDBC
-	.rodata     start:0x803B8640 end:0x803B8650
-	.data       start:0x803F6888 end:0x803F6920
-	.sdata      start:0x804D5380 end:0x804D5390
-	.sdata2     start:0x804DCD38 end:0x804DCD68
+	.rodata     start:0x803B8640 end:0x803B864C
+	.data       start:0x803F6888 end:0x803F691D
+	.sdata      start:0x804D5380 end:0x804D538D
+	.sdata2     start:0x804DCD38 end:0x804DCD64
 
 melee/it/items/itlinkboomerang.c:
 	.text       start:0x8029FDBC end:0x802A2418
@@ -3649,7 +3649,7 @@ melee/it/items/itseakvanish.c:
 melee/it/items/itpikachuthunder.c:
 	.text       start:0x802B1DEC end:0x802B2560
 	.data       start:0x803F70C8 end:0x803F70F8
-	.sdata      start:0x804D5478 end:0x804D5488
+	.sdata      start:0x804D5478 end:0x804D5485
 	.sdata2     start:0x804DCF98 end:0x804DCFB8
 
 melee/it/items/itmariocape.c:
@@ -4276,17 +4276,15 @@ melee/if/if_2FC93.c:
 
 melee/if/ifprize.c:
 	.text       start:0x802FE3F8 end:0x802FED14
-	.rodata     start:0x803B8790 end:0x803B8810
 	.data       start:0x803F9A00 end:0x803F9E08
-	.bss        start:0x804A1F48 end:0x804A1F58
 	.sdata      start:0x804D5830 end:0x804D5838
 	.sbss       start:0x804D6D98 end:0x804D6DA0
-	.sdata2     start:0x804DDBD0 end:0x804DDCC8
+	.sdata2     start:0x804DDBD0 end:0x804DDC00
 
 melee/if/ifcoget.c:
 	.text       start:0x802FED14 end:0x802FF7DC
 	.data       start:0x803F9E08 end:0x803F9F28
-	.bss        start:0x804A1F58 end:0x804A1FD8
+	.bss        start:0x804A1F48 end:0x804A1FD8
 	.sdata      start:0x804D5838 end:0x804D5850
 	.sbss       start:0x804D6DA0 end:0x804D6DA8
 
@@ -4298,6 +4296,7 @@ melee/if/soundtest.c:
 
 melee/if/textdraw.c:
 	.text       start:0x80301E44 end:0x80302834
+	.rodata     start:0x803B8790 end:0x803B8810
 	.data       start:0x803FDC20 end:0x803FDD18
 	.bss        start:0x804A1FD8 end:0x804A2688
 
@@ -5099,8 +5098,8 @@ sysdolphin/baselib/lobj.c:
 
 sysdolphin/baselib/cobj.c:
 	.text       start:0x803676F8 end:0x8036A938
-	.data       start:0x80406220 end:0x80406350
-	.sdata      start:0x804D5D40 end:0x804D5D58
+	.data       start:0x80406220 end:0x80406349
+	.sdata      start:0x804D5D40 end:0x804D5D52
 	.sbss       start:0x804D7658 end:0x804D7660
 	.sdata2     start:0x804DE468 end:0x804DE4D0
 

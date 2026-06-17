@@ -233,6 +233,18 @@ execute:
     HSD_SisLib_803A5F50(2);
 }
 
+/// @note Needed for @c .data ordering
+static void setArchive(void)
+{
+    un_804D6D98 = lbArchive_80016DBC("IfPrize", &un_804D6D9C,
+                                     "ScInfPrize_scene_data", 0);
+    if (lbLang_IsSavedLanguageUS()) {
+        HSD_SisLib_803A62A0(2, "SdPrize.usd", "SIS_PrizeData");
+    } else {
+        HSD_SisLib_803A62A0(2, "SdPrize.dat", "SIS_PrizeData");
+    }
+}
+
 void un_802FE918(int a, int b, int c)
 {
     struct un_803F9B30* x;
@@ -321,13 +333,7 @@ found:
     un_803F9D48.x1 = 0;
     un_803F9D48.xC = arg0x4;
     un_803F9D48.x0a = 1;
-    un_804D6D98 = lbArchive_80016DBC("IfPrize", &un_804D6D9C,
-                                     "ScInfPrize_scene_data", 0);
-    if (lbLang_IsSavedLanguageUS()) {
-        HSD_SisLib_803A62A0(2, "SdPrize.usd", "SIS_PrizeData");
-    } else {
-        HSD_SisLib_803A62A0(2, "SdPrize.dat", "SIS_PrizeData");
-    }
+    setArchive();
     un_802FE6A8();
 }
 
