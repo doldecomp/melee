@@ -407,6 +407,7 @@ static gmClassicMatchup* gmClassic_801B2BA4(gmClassicMatchup* arg0, u8* arg1,
     gmClassicMatchup* result;
     gmClassicMatchup* entry;
     gm_803DDEC8Struct* temp;
+    u8* order;
     s32 outer;
     s8 target_char;
     int cur_char;
@@ -415,60 +416,63 @@ static gmClassicMatchup* gmClassic_801B2BA4(gmClassicMatchup* arg0, u8* arg1,
     s32 count;
     s32 stage1;
 
-    target_char = (s8) gmMainLib_8015CDC8()->c_kind;
     result = NULL;
+    target_char = (s8) gmMainLib_8015CDC8()->c_kind;
+    order = arg1;
     outer = 0;
 
-    do {
-        entry = &arg0[*arg1];
-        for (j = 0; j < 3; j++) {
-            cur_char = entry->x02[j];
+    goto check;
+loop:
+    entry = &arg0[*order];
+    for (j = 0; j < 3; j++) {
+        cur_char = entry->x02[j];
 
-            if (cur_char == 0x21) {
-                continue;
-            }
-            if (gm_80164430(entry->x00) == 0) {
-                goto next;
-            }
-            if (gm_80164840(cur_char) == 0) {
-                goto next;
-            }
-            if (cur_char == target_char) {
-                goto next;
-            }
-
-            for (temp = arg2; temp->x0 != 0xD; temp++) {
-                for (k = 0; k < 3; k++) {
-                    if (temp->xC != NULL && cur_char == temp->xC->x02[k]) {
-                        goto next;
-                    }
-                }
-            }
-
-            for (temp = arg2; temp->x0 != 0xD; temp++) {
-                if (temp->xC != NULL) {
-                    stage1 = Stage_8022519C((InternalStageId) entry->x00);
-                    if (stage1 ==
-                        Stage_8022519C((InternalStageId) temp->xC->x00))
-                    {
-                        result = entry;
-                        goto next;
-                    }
-                }
-            }
+        if (cur_char == 0x21) {
+            continue;
         }
-        if (result == NULL) {
+        if (gm_80164430(entry->x00) == 0) {
             goto next;
         }
-        return entry;
-    next:
-        outer++;
-        arg1++;
-        count = 0;
-        while (arg0[count].x00 != 0x148) {
-            count++;
+        if (gm_80164840(cur_char) == 0) {
+            goto next;
         }
-    } while (outer < count);
+        if (cur_char == target_char) {
+            goto next;
+        }
+
+        for (temp = arg2; temp->x0 != 0xD; temp++) {
+            for (k = 0; k < 3; k++) {
+                if (temp->xC != NULL && cur_char == temp->xC->x02[k]) {
+                    goto next;
+                }
+            }
+        }
+
+        for (temp = arg2; temp->x0 != 0xD; temp++) {
+            if (temp->xC != NULL) {
+                stage1 = Stage_8022519C((InternalStageId) entry->x00);
+                if (Stage_8022519C((InternalStageId) temp->xC->x00) == stage1)
+                {
+                    result = entry;
+                    goto next;
+                }
+            }
+        }
+    }
+    if (entry != NULL) {
+        return entry;
+    }
+next:
+    outer++;
+    order++;
+check:
+    count = 0;
+    while (arg0[count].x00 != 0x148) {
+        count++;
+    }
+    if (outer < count) {
+        goto loop;
+    }
 
     if (result != NULL) {
         return result;
@@ -573,21 +577,23 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
 void gmClassic_OnLoad(void)
 {
     UnkAllstarData* data;
+    gmClassicSceneData* scene_data = (gmClassicSceneData*) gm_803DDC58_Scenes;
+    gmClassic_80490880Data* o = &gmClassic_80490880;
     gm_803DDEC8Struct* entry;
     s32 i;
-    PAD_STACK(40);
+    PAD_STACK(32);
 
-    for (entry = gmClassic_803DDEC8.x00; entry->x0 != 0x0D; entry++) {
+    for (entry = scene_data->matchups.x00; entry->x0 != 0x0D; entry++) {
         entry->xC = NULL;
     }
 
-    gmClassic_InitMatchupOrder(gmClassic_803DDEC8.x2B0,
+    gmClassic_InitMatchupOrder(scene_data->matchups.x2B0,
                                gmClassic_80490880.x80);
-    gmClassic_InitMatchupOrder(gmClassic_803DDEC8.x26C,
+    gmClassic_InitMatchupOrder(scene_data->matchups.x26C,
                                gmClassic_80490880.x74);
-    gmClassic_InitMatchupOrder(gmClassic_803DDEC8.x1B8,
+    gmClassic_InitMatchupOrder(scene_data->matchups.x1B8,
                                gmClassic_80490880.x54);
-    gmClassic_InitMatchupOrder(gmClassic_803DDEC8.x0CC,
+    gmClassic_InitMatchupOrder(scene_data->matchups.x0CC,
                                gmClassic_80490880.x2C);
 
     data = gm_8017EB30();
@@ -597,7 +603,7 @@ void gmClassic_OnLoad(void)
     for (i = 0; i < 2; i++) {
         s32 j;
         for (j = 0; j < 6; j++) {
-            gm_804908A0[i * 6 + j] = 0;
+            o->x20[i * 6 + j] = 0;
         }
     }
 
