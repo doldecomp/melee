@@ -16,7 +16,7 @@ grMaterial_801C8D44(int arg0, int arg1, Ground* arg2, Vec3* arg3, int arg4,
                     void (*arg5)(Item_GObj*, Ground*),
                     void (*arg6)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32),
                     void (*arg7)(Item_GObj*, Ground*, HSD_GObj*));
-/* 1C9490 */ void grMaterial_801C9490(Item_GObj* gobj, CommandInfo* cmd);
+/* 1C8E48 */ bool grMaterial_801C8E48(HSD_GObj* gobj);
 
 /* 1C87D0 */ void grMaterial_801C87D0(HSD_JObj*, u32 flags);
 /* 1C8858 */ void grMaterial_801C8858(HSD_JObj*, u32 flags);
@@ -43,6 +43,7 @@ grMaterial_801C8D44(int, int, Ground*, Vec3*, int,
 /* 1C8E68 */ void grMaterial_801C8E68(HSD_GObj*, GroundOrAir);
 /* 1C92C0 */ void grMaterial_801C92C0(HSD_JObj*);
 /* 1C9470 */ void grMaterial_801C9470(Item_GObj*, CommandInfo*);
+/* 1C9490 */ void grMaterial_801C9490(Item_GObj* gobj, CommandInfo* cmd);
 /* 1C94D8 */ void grMaterial_801C94D8(void*);
 /* 1C95C4 */ void grMaterial_801C95C4(HSD_GObj*);
 /* 1C9604 */ void grMaterial_801C9604(HSD_GObj* bg, int, bool);
