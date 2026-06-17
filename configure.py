@@ -74,7 +74,17 @@ parser.add_argument(
 parser.add_argument(
     "--debug",
     action="store_true",
-    help="build with debug info (non-matching)",
+    help="build with debug info (implies --non-matching)",
+)
+parser.add_argument(
+    "--bugfix",
+    action="store_true",
+    help="build with bug fixes (implies --non-matching)",
+)
+parser.add_argument(
+    "--asm",
+    action="store_true",
+    help="override src files with asm equivalents (implies --non-matching)",
 )
 if not is_windows():
     parser.add_argument(
@@ -152,6 +162,10 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
+if any((args.debug, args.bugfix, args.asm)):
+    args.non_matching = True
+
+
 config = ProjectConfig()
 config.version = str(args.version)
 version_num = VERSIONS.index(config.version)
@@ -169,8 +183,7 @@ config.ninja_path = args.ninja
 config.progress = args.progress
 if not is_windows():
     config.wrapper = args.wrapper
-# Don't build asm unless we're --non-matching
-if not config.non_matching:
+if not args.asm:
     config.asm_dir = None
 
 # Tool versions
@@ -245,6 +258,8 @@ cflags_base = [
 if args.debug:
     # Or -sym dwarf-2 for Wii compilers
     cflags_base.append("-sym on")
+if args.bugfix:
+    cflags_base.append("-DBUGFIX")
 
 cflags_base.append(f"-maxerrors {args.max_errors}")
 if args.max_errors == 0:
@@ -610,7 +625,7 @@ config.libs = [
             Object(Matching, "melee/ft/ft_0BEC.c"),
             Object(Matching, "melee/ft/ft_0BEF.c"),
             Object(Matching, "melee/ft/ft_0BF0.c"),
-            Object(NonMatching, "melee/ft/ftmaterial.c"),
+            Object(Matching, "melee/ft/ftmaterial.c"),
             Object(Matching, "melee/ft/ftcolanim.c"),
             Object(Matching, "melee/ft/ftdevice.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_Bury.c"),
@@ -951,7 +966,9 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCrazyHand/ftCh_TagGrab.c"),
             Object(Matching, "melee/ft/chara/ftCrazyHand/ftCh_GrabUnk1_B174.c"),
             Object(Matching, "melee/ft/chara/ftCrazyHand/ftCh_CaptureCrazyHand.c"),
-            Object(Matching, "melee/ft/chara/ftCrazyHand/ftCh_CaptureDamageCrazyHand.c"),
+            Object(
+                Matching, "melee/ft/chara/ftCrazyHand/ftCh_CaptureDamageCrazyHand.c"
+            ),
             Object(Matching, "melee/ft/chara/ftCrazyHand/ftCh_CaptureWaitCrazyHand.c"),
             Object(Matching, "melee/ft/chara/ftCrazyHand/ftCh_ThrownCrazyHand.c"),
             Object(Matching, "melee/ft/chara/ftCrazyHand/ftCh_TagCancel.c"),
@@ -1393,7 +1410,7 @@ config.libs = [
         [
             Object(Matching, "melee/sfx/sfx_unk.c"),
             Object(Matching, "melee/sfx/crowdsfx.c"),
-        ]
+        ],
     ),
     RuntimeLib(
         "Gekko runtime",
@@ -1708,19 +1725,25 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/gobjuserdata.c"),
             Object(Matching, "sysdolphin/baselib/gobj.c"),
             Object(Matching, "sysdolphin/baselib/gobjinit.c"),
-            Object(NonMatching, "sysdolphin/baselib/particle.c",
-                   extra_cflags=["-Cpp_exceptions on"],
+            Object(
+                NonMatching,
+                "sysdolphin/baselib/particle.c",
+                extra_cflags=["-Cpp_exceptions on"],
             ),
-            Object(NonMatching, "sysdolphin/baselib/psdisp.c",
-                   extra_cflags=["-Cpp_exceptions on"],
+            Object(
+                NonMatching,
+                "sysdolphin/baselib/psdisp.c",
+                extra_cflags=["-Cpp_exceptions on"],
             ),
             Object(
                 Matching,
                 "sysdolphin/baselib/psdisptev.c",
                 extra_cflags=["-Cpp_exceptions on"],
             ),
-            Object(Matching, "sysdolphin/baselib/psappsrt.c",
-                   extra_cflags=["-Cpp_exceptions on"],
+            Object(
+                Matching,
+                "sysdolphin/baselib/psappsrt.c",
+                extra_cflags=["-Cpp_exceptions on"],
             ),
             Object(NonMatching, "sysdolphin/baselib/sobjlib.c"),
             Object(NonMatching, "sysdolphin/baselib/sislib.c"),
