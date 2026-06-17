@@ -90,8 +90,8 @@ static Point3d mnDiagram_803EE728[3] = {
     { -1.0F, 0.7F, 0.0F },
 };
 
-/// Overlay over &mnDiagram_803EE728 to reach the trailing animation/text-layout
-/// data the popup/cursor procs read at fixed offsets.
+/// Overlay over &mnDiagram_803EE728 to reach the trailing
+/// animation/text-layout data the popup/cursor procs read at fixed offsets.
 typedef struct mnDiagram_AnimTable {
     /* 0x00 */ Point3d points[3];
     /* 0x24 */ u8 pad_24[0x1C];
@@ -1800,7 +1800,8 @@ void mnDiagram_80240D94(void* arg0, s32 arg1, s32 arg2, s32 arg3)
                 label_text->pos_z = z;
             }
             label_text->default_alignment = 1;
-            HSD_SisLib_803A6B98(label_text, 0.0f, 0.0f, GetNameText((u8) arg2));
+            HSD_SisLib_803A6B98(label_text, 0.0f, 0.0f,
+                                GetNameText((u8) arg2));
         }
     }
 
@@ -2370,11 +2371,10 @@ void mnDiagram_80241E78(void* arg0, u8 arg1, u8 arg2, int arg3)
         HSD_JObjReqAnimAll(jobj, base);
         HSD_JObjAnimAll(jobj);
         if (col < 7) {
-            HSD_JObjSetTranslateX(
-                jobj, (x_spacing * (f32) i) + col_offset);
+            HSD_JObjSetTranslateX(jobj, (x_spacing * (f32) i) + col_offset);
         } else {
-            HSD_JObjSetTranslateX(
-                jobj, (x_spacing * (f32) i) + col_offset + 0.4f);
+            HSD_JObjSetTranslateX(jobj,
+                                  (x_spacing * (f32) i) + col_offset + 0.4f);
         }
         if (row < 10) {
             HSD_JObjSetTranslateY(jobj, row_offset);

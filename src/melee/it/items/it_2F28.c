@@ -6,12 +6,12 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/ithitbox.h"
 #include "it/it_279C.h"
-#include "it/itzako.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
 #include "it/items/types.h"
+#include "it/ithitbox.h"
+#include "it/itzako.h"
 #include "it/types.h"
 
 #include <math.h>
@@ -109,11 +109,9 @@ void it_2F28_UnkMotion0_Phys(HSD_GObj* item_gobj)
     f32 var_f4 = sqrtf(SQ(item->x40_vel.x) + SQ(item->x40_vel.y));
     if (var_f4 > item->xDD4_itemVar.unk2.x0) {
         item->x40_vel.x =
-            (item->x40_vel.x * (var_f4 - item->xDD4_itemVar.unk2.x0)) /
-            var_f4;
+            (item->x40_vel.x * (var_f4 - item->xDD4_itemVar.unk2.x0)) / var_f4;
         item->x40_vel.y =
-            (item->x40_vel.y * (var_f4 - item->xDD4_itemVar.unk2.x0)) /
-            var_f4;
+            (item->x40_vel.y * (var_f4 - item->xDD4_itemVar.unk2.x0)) / var_f4;
     } else {
         item->x40_vel.x = 0.0f;
     }

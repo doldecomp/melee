@@ -74,8 +74,8 @@ void ftCo_800CF6E8(ftCo_DatAttrs* attr, f32 scale)
         *cur = ftCo_CalcYScaledKnockback(*cur, scale, Fighter_804D6524->x60);
         cur = &attr->xDC;
         *cur = ftCo_CalcYScaledKnockback(*cur, scale, Fighter_804D6524->x64);
-        cur[1] = ftCo_CalcYScaledKnockback(cur[1], scale,
-                                           Fighter_804D6524->x68);
+        cur[1] =
+            ftCo_CalcYScaledKnockback(cur[1], scale, Fighter_804D6524->x68);
         attr->normal_landing_lag = ftCo_CalcYScaledKnockback(
             attr->normal_landing_lag, scale, Fighter_804D6524->x6C);
         attr->landingairn_lag = ftCo_CalcYScaledKnockback(
@@ -123,8 +123,8 @@ void ftCo_800D0CBC(Fighter_GObj* fgp)
 
     if (scale != fp->x34_scale.y) {
         orig_scale = fp->x34_scale.y;
-        scale *= ftCo_CalcYScaledKnockback(1.0f, orig_scale,
-                                           Fighter_804D6524->x28);
+        scale *=
+            ftCo_CalcYScaledKnockback(1.0f, orig_scale, Fighter_804D6524->x28);
     }
 
     if (fp->x197C != NULL) {

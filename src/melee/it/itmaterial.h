@@ -4,7 +4,6 @@
 #include <platform.h>
 
 #include "it/forward.h"
-
 #include <baselib/forward.h>
 
 #include <dolphin/gx.h>

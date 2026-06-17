@@ -185,8 +185,7 @@ void gm_801BFCFC(GameScene* arg0)
     for (var_r25 = 0; (s32) var_r25 < 0x42; var_r25++) {
         if (gm_8017219C(var_r25) != 0) {
             temp_r3 = gm_801BFC60(var_r25, var_r30, 0,
-                                  *gmMainLib_8015D804((s32) var_r25),
-                                  var_r31);
+                                  *gmMainLib_8015D804((s32) var_r25), var_r31);
             *var_r28 = 1;
             var_r31 = (void**) temp_r3;
             var_r30 += 1;
@@ -207,8 +206,8 @@ void gm_801BFCFC(GameScene* arg0)
             }
             *var_r28_2 = un_803048C0((s32) var_r25_2);
             var_r31 = (void**) gm_801BFC60(
-                0x3E, var_r30, var_r25_2,
-                *gmMainLib_8015D970((s32) var_r25_2), var_r31);
+                0x3E, var_r30, var_r25_2, *gmMainLib_8015D970((s32) var_r25_2),
+                var_r31);
             var_r30 += 1;
         }
         var_r28_2 += 1;
@@ -221,8 +220,8 @@ void gm_801BFCFC(GameScene* arg0)
     for (var_r28_3 = 0; (s32) var_r28_3 < 0x42; var_r28_3++) {
         if (((u8) *var_r27 == 0) && (gm_8017219C(var_r28_3) != 0)) {
             var_r31 = (void**) gm_801BFC60(
-                var_r28_3, var_r30, 0,
-                *gmMainLib_8015D804((s32) var_r28_3), var_r31);
+                var_r28_3, var_r30, 0, *gmMainLib_8015D804((s32) var_r28_3),
+                var_r31);
             var_r30 += 1;
         }
         var_r27 += 1;
@@ -239,9 +238,9 @@ void gm_801BFCFC(GameScene* arg0)
                 gmMainLib_8015DA40((u32) var_r27_2);
                 Trophy_SetUnlockState((s32) (s16) var_r27_2, 1);
             }
-            var_r31 = (void**) gm_801BFC60(
-                0x3E, var_r30, var_r27_2,
-                *gmMainLib_8015D970(var_r27_2), var_r31);
+            var_r31 =
+                (void**) gm_801BFC60(0x3E, var_r30, var_r27_2,
+                                     *gmMainLib_8015D970(var_r27_2), var_r31);
             var_r30 += 1;
         }
         var_r26 += 1;

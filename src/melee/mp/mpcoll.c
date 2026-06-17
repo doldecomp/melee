@@ -2204,7 +2204,7 @@ bool mpColl_80046224_LeftWall(CollData* coll)
             int line_id2;
             for (line_id2 = wall_id;
                  line_id2 != -1 && (mpLineGetKind(line_id2) &
-                                     LINE_FLAG_KIND) == CollLine_LeftWall;
+                                    LINE_FLAG_KIND) == CollLine_LeftWall;
                  line_id2 = mpLineGetPrev(line_id2))
             {
                 mpLineGetV0Pos(line_id2, &pos);

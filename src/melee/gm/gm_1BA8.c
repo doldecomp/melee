@@ -493,7 +493,8 @@ void gm_801BAD70(GameScene* arg0)
                 }
             }
             if ((s8) r3b[0x60] == 0x13 &&
-                (s8) r3b[player_init_off + 0x60] == 0x12) {
+                (s8) r3b[player_init_off + 0x60] == 0x12)
+            {
                 u8 c = r3b[player_init_off + 0x63];
                 if (c == r3b[0x63]) {
                     if (c <= 2) {
@@ -561,7 +562,8 @@ void gm_801BAD70(GameScene* arg0)
     if (level == 0x2B) {
         u8 c = ev->x50[2];
         if ((s8) (u8) ev->x4C[2] == (s8) (u8) ev->x4C[0] &&
-            (u8) ev->x50[0] == c) {
+            (u8) ev->x50[0] == c)
+        {
             if (c <= 2) {
                 c = c + 1;
             } else {
@@ -1043,9 +1045,9 @@ s32 gm_801BC00C(void)
                 *((u8*) event_entry + 3));
         } else {
             event_entry = ((void**) ((u8*) event_levels[idx]->x10 + 0x10))[4];
-            ftLib_80087508(Player_800325C8(
-                               (CharacterKind) (s8) * (u8*) event_entry, 0),
-                           *((u8*) event_entry + 3));
+            ftLib_80087508(
+                Player_800325C8((CharacterKind) (s8) * (u8*) event_entry, 0),
+                *((u8*) event_entry + 3));
         }
         break;
     case 43:
@@ -1080,16 +1082,15 @@ s32 gm_801BC00C(void)
     case 39:
     case 48:
         for (i = ev->x20, entry_offset = i * 4;
-             i < (s32) * (u8*) event_levels[idx]->x10;
-             i++, entry_offset += 4) {
+             i < (s32) * (u8*) event_levels[idx]->x10; i++, entry_offset += 4)
+        {
             event_entry =
                 *(void**) ((u8*) event_levels[idx]->x10 + entry_offset + 0x10);
             ckind = *(u8*) event_entry;
             costume = *((u8*) event_entry + 3);
             {
                 struct EventData* ev2 = &gmMainLib_804D3EE0->unk_530;
-                if ((s8) ev2->x0 == (s8) ckind &&
-                    (u8) ev2->x1 == costume) {
+                if ((s8) ev2->x0 == (s8) ckind && (u8) ev2->x1 == costume) {
                     if (costume <= 2) {
                         costume += 1;
                     } else {
@@ -1107,8 +1108,7 @@ s32 gm_801BC00C(void)
             costume = *((u8*) event_entry + 3);
             {
                 struct EventData* ev2 = &gmMainLib_804D3EE0->unk_530;
-                if ((s8) ev2->x0 == (s8) ckind &&
-                    (u8) ev2->x1 == costume) {
+                if ((s8) ev2->x0 == (s8) ckind && (u8) ev2->x1 == costume) {
                     if (costume <= 2) {
                         costume += 1;
                     } else {
@@ -1122,8 +1122,7 @@ s32 gm_801BC00C(void)
             costume = *((u8*) event_entry + 3);
             {
                 struct EventData* ev2 = &gmMainLib_804D3EE0->unk_530;
-                if ((s8) ev2->x0 == (s8) ckind &&
-                    (u8) ev2->x1 == costume) {
+                if ((s8) ev2->x0 == (s8) ckind && (u8) ev2->x1 == costume) {
                     if (costume <= 2) {
                         costume += 1;
                     } else {
@@ -1137,8 +1136,7 @@ s32 gm_801BC00C(void)
             costume = *((u8*) event_entry + 3);
             {
                 struct EventData* ev2 = &gmMainLib_804D3EE0->unk_530;
-                if ((s8) ev2->x0 == (s8) ckind &&
-                    (u8) ev2->x1 == costume) {
+                if ((s8) ev2->x0 == (s8) ckind && (u8) ev2->x1 == costume) {
                     if (costume <= 2) {
                         costume += 1;
                     } else {
@@ -1154,8 +1152,7 @@ s32 gm_801BC00C(void)
             costume = *((u8*) event_entry + 3);
             {
                 struct EventData* ev2 = &gmMainLib_804D3EE0->unk_530;
-                if ((s8) ev2->x0 == (s8) ckind &&
-                    (u8) ev2->x1 == costume) {
+                if ((s8) ev2->x0 == (s8) ckind && (u8) ev2->x1 == costume) {
                     if (costume <= 2) {
                         costume += 1;
                     } else {
@@ -1169,8 +1166,7 @@ s32 gm_801BC00C(void)
             costume = *((u8*) event_entry + 3);
             {
                 struct EventData* ev2 = &gmMainLib_804D3EE0->unk_530;
-                if ((s8) ev2->x0 == (s8) ckind &&
-                    (u8) ev2->x1 == costume) {
+                if ((s8) ev2->x0 == (s8) ckind && (u8) ev2->x1 == costume) {
                     if (costume <= 2) {
                         costume += 1;
                     } else {
@@ -1700,7 +1696,8 @@ void gm_801BD028(HSD_GObj* arg0)
     if (ev->xB_0) {
         cond = 0;
     } else if (rules->x24C8.x0_6 && gm_8016AEEC() == 0 &&
-               gm_8016AEFC() == 0x3B) {
+               gm_8016AEFC() == 0x3B)
+    {
         cond = 1;
     } else {
         cond = 0;
@@ -2328,7 +2325,8 @@ void gm_801BDE94(HSD_GObj* arg0)
         if (ev2->xB_0) {
             do_end = 0;
         } else if (info->x24C8.x0_6 && gm_8016AEEC() == 0 &&
-                   gm_8016AEFC() == 0x3B) {
+                   gm_8016AEFC() == 0x3B)
+        {
             do_end = 1;
         } else {
             do_end = 0;
@@ -2948,7 +2946,8 @@ void gm_801BF128(void)
             for (pick = 0; pick < c; pick++) {
                 if (j == gm_801BF648(pick) ||
                     (j == 0x12 && gm_801BF648(pick) == 0x13) ||
-                    (j == 0x13 && gm_801BF648(pick) == 0x12)) {
+                    (j == 0x13 && gm_801BF648(pick) == 0x12))
+                {
                     dup = 1;
                 }
             }
