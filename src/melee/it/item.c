@@ -769,7 +769,7 @@ static void Item_8026814C(HSD_GObj* gobj)
         if (var_r29 != NULL) {
             temp_r0 = var_r29->mobj;
             if (temp_r0 != NULL) {
-                hsdChangeClass(temp_r0, &it_803F1F90);
+                hsdChangeClass(temp_r0, &it_mobj);
             }
             var_r29 = var_r0 = (var_r29 != NULL) ? var_r29->next : NULL;
             goto loop_2;
