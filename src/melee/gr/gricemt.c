@@ -47,6 +47,9 @@ static const Vec3 grIm_803B8220[] = {
 };
 
 IceMountainParams* grIm_804D69F4;
+HSD_GObj* grIm_804D69F0;
+HSD_GObj* grIm_804D69EC;
+HSD_GObj* grIm_804D69E8;
 
 typedef struct GrIm825C {
     struct {

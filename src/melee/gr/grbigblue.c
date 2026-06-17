@@ -248,8 +248,8 @@ HSD_GObj* grBigBlue_801E59F8(s32 id)
             HSD_GObj_SetupProc(gobj, cbs->callback2, 4U);
         }
     } else {
-        OSReport((char*) grBb_803E2938 + 0x41C, (char*) grBb_803E2938 + 0x440,
-                 0x17E, id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grbigblue.c", 0x17E,
+                 id);
     }
     return gobj;
 }
@@ -1870,9 +1870,8 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
 
                 if (collision == 0) {
                     if (grBb_804DB310 == pos.y) {
-                        OSReport((char*) &grBb_803E2EB8);
-                        __assert((char*) &grBb_803E2D78, 0x7CA,
-                                 &grBb_804D46B8);
+                        OSReport("*** Not Set Position!(Tyukei)\n");
+                        HSD_ASSERT(1994, 0);
                     }
 
                     HSD_JObjSetTranslate(jobj, &pos);
