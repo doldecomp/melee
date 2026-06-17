@@ -14,17 +14,17 @@ permissions:
   contents: read
 
 jobs:
-  style-check:
+  pre-commit:
     name: Check source for common style issues
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        hook: ['clang-format', 'style-check']
     steps:
     - uses: actions/checkout@v6
     - uses: actions/setup-python@v5
       with:
         python-version: "3.12"
-    - name: Run checks
-      run: python3 tools/check/main.py --msg-style actions src
-    - name: Run clang-format
-      uses: pre-commit/action@v3.0.1
+    - uses: pre-commit/action@v3.0.1
       with:
-        extra_args: clang-format --all-files
+        extra_args: ${{ matrix.hook }} --all-files
