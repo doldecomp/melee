@@ -3353,9 +3353,10 @@ void ftKb_SpecialN_800EF040(Fighter_GObj* gobj, int arg1, KirbyHatStruct* hat)
 
 extern char ftKb_Init_804D3DAC[2];
 
-static inline void ftKb_SpecialN_800EF0E4_insert_joint_refs(
-    s32 total_dobjs, HSD_Joint* root, Fighter* fp, s32* part_off,
-    HSD_Joint** sp28, s32* sp24)
+static inline void
+ftKb_SpecialN_800EF0E4_insert_joint_refs(s32 total_dobjs, HSD_Joint* root,
+                                         Fighter* fp, s32* part_off,
+                                         HSD_Joint** sp28, s32* sp24)
 {
     *part_off = total_dobjs << 4;
     *sp28 = root;

@@ -55,7 +55,6 @@ void it_802BE5D8(void* arg, float frame)
     HSD_JObjAnimAll(jobj);
 }
 
-
 static inline HSD_JObj* it_802BE65C_LoadString(Item* ip)
 {
     itYoyoAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;

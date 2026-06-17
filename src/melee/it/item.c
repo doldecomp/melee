@@ -14,14 +14,14 @@
 #include "gr/stage.h"
 #include "it/inlines.h"
 #include "it/it_2725.h"
-#include "it/it_3F14.h"
-#include "it/ithitbox.h"
 #include "it/it_279C.h"
+#include "it/it_3F14.h"
 #include "it/itanimlist.h"
+#include "it/itcoll.h"
 #include "it/iteffect.h"
+#include "it/ithitbox.h"
 #include "it/itmaplib.h"
 #include "it/itmaterial.h"
-#include "it/itcoll.h"
 #include "it/types.h"
 
 #include "lb/forward.h"
@@ -455,8 +455,7 @@ static void Item_802676F4(HSD_GObj* gobj)
 
 static /// @remarks #Item_8026862C loads two integers into this,
        ///          but the second one goes _?
-    bool
-    Item_8026784C(enum_t dropItem, int _)
+    bool Item_8026784C(enum_t dropItem, int _)
 {
     bool result = false;
 
@@ -810,8 +809,7 @@ static void Item_8026814C(HSD_GObj* gobj)
 }
 
 static /// @todo Needs some serious cleaning.
-    bool
-    Item_802682F0(HSD_GObj* gobj)
+    bool Item_802682F0(HSD_GObj* gobj)
 {
     s32 var_r4;
     Item* item_data;
@@ -1501,8 +1499,7 @@ static void Item_80269B60(HSD_GObj* gobj)
 static /// @remarks Somewhat arbitrary. Does not run on Hook Shot / Grapple
        /// Beam,
     ///          rather items such as the Barrel Cannon.
-    void
-    Item_80269BE4(HSD_GObj* gobj)
+    void Item_80269BE4(HSD_GObj* gobj)
 {
     Item* item_data = gobj->user_data;
     if (item_data->xDD0_flag.b5) {

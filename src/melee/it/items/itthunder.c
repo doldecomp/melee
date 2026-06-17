@@ -11,8 +11,8 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
-#include "it/itmaplib.h"
 #include "it/item.h"
+#include "it/itmaplib.h"
 
 ItemStateTable it_803F7C40[] = {
     { 0, itThunder_UnkMotion0_Anim, itThunder_UnkMotion0_Phys,

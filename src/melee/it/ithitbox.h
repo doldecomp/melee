@@ -4,6 +4,7 @@
 #include <platform.h>
 
 #include "it/forward.h"
+
 #include "it/types.h"
 
 #include <dolphin/mtx.h>

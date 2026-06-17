@@ -522,8 +522,7 @@ static void grLast_8021B2E8(Ground_GObj* gobj)
 
     gp = GET_GROUND(gobj);
     if (Stage_80225194() == 0xB0 || // Boss fight vs Master Hand
-        Stage_80225194() == 0xFB)
-    { // Event match #50
+        Stage_80225194() == 0xFB) { // Event match #50
         temp_f1 = gm_8016ECE8();
         switch (gp->u.map.xC4_b2_25) {
         case 1:

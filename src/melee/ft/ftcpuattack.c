@@ -166,15 +166,14 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
                 fpPredY = fpVy * t + fpY;
             } else if (t < v) {
                 sq = sqrtf(t);
-                fpPredY = (f32) ((f64) fpY +
-                                 ((f64) (fpVy * t) -
-                                  0.5 * (f64) (fpGrav * sq)));
+                fpPredY = (f32) ((f64) fpY + ((f64) (fpVy * t) -
+                                              0.5 * (f64) (fpGrav * sq)));
             } else {
                 sq = sqrtf(v);
-                fpPredY = (f32) ((f64) fpY +
-                                 ((f64) (fpTermNeg * (t - v)) +
-                                  ((f64) (fpVy * t) -
-                                   0.5 * (f64) (fpGrav * sq))));
+                fpPredY =
+                    (f32) ((f64) fpY +
+                           ((f64) (fpTermNeg * (t - v)) +
+                            ((f64) (fpVy * t) - 0.5 * (f64) (fpGrav * sq))));
             }
         } else {
             fpPredY = fpVy * t + fpY;
@@ -218,7 +217,8 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
         scale = fp->x34_scale.y;
         if (list->x14 * scale * halfRange > relPredY &&
             list->x10 * scale * halfRange < relPredY + x568 &&
-            dirx * halfRange < relx + rangeF && diry * halfRange > relx - rangeB)
+            dirx * halfRange < relx + rangeF &&
+            diry * halfRange > relx - rangeB)
         {
             if (cpu->xC8 != 0) {
                 for (j = 0; j < cpu->xC8; j++) {
@@ -370,15 +370,14 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
                 fpPredY = fpVy * t + fpY;
             } else if (t < v) {
                 sq = sqrtf(t);
-                fpPredY = (f32) ((f64) fpY +
-                                 ((f64) (fpVy * t) -
-                                  0.5 * (f64) (fpGrav * sq)));
+                fpPredY = (f32) ((f64) fpY + ((f64) (fpVy * t) -
+                                              0.5 * (f64) (fpGrav * sq)));
             } else {
                 sq = sqrtf(v);
-                fpPredY = (f32) ((f64) fpY +
-                                 ((f64) (fpTermNeg * (t - v)) +
-                                  ((f64) (fpVy * t) -
-                                   0.5 * (f64) (fpGrav * sq))));
+                fpPredY =
+                    (f32) ((f64) fpY +
+                           ((f64) (fpTermNeg * (t - v)) +
+                            ((f64) (fpVy * t) - 0.5 * (f64) (fpGrav * sq))));
             }
         } else {
             fpPredY = fpVy * t + fpY;
@@ -422,7 +421,8 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
         scale = fp->x34_scale.y;
         if ((list->x14 * scale + reach) * halfRange > relPredY &&
             list->x10 * scale * halfRange < relPredY + x568 &&
-            dirx * halfRange < relx + rangeF && diry * halfRange > relx - rangeB)
+            dirx * halfRange < relx + rangeF &&
+            diry * halfRange > relx - rangeB)
         {
             if (cpu->xC8 != 0) {
                 for (j = 0; j < cpu->xC8; j++) {
@@ -565,15 +565,14 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
                 fpPredY = fpVy * t + fpY;
             } else if (t < v) {
                 sq = sqrtf(t);
-                fpPredY = (f32) ((f64) fpY +
-                                 ((f64) (fpVy * t) -
-                                  0.5 * (f64) (fpGrav * sq)));
+                fpPredY = (f32) ((f64) fpY + ((f64) (fpVy * t) -
+                                              0.5 * (f64) (fpGrav * sq)));
             } else {
                 sq = sqrtf(v);
-                fpPredY = (f32) ((f64) fpY +
-                                 ((f64) (fpTermNeg * (t - v)) +
-                                  ((f64) (fpVy * t) -
-                                   0.5 * (f64) (fpGrav * sq))));
+                fpPredY =
+                    (f32) ((f64) fpY +
+                           ((f64) (fpTermNeg * (t - v)) +
+                            ((f64) (fpVy * t) - 0.5 * (f64) (fpGrav * sq))));
             }
         } else {
             fpPredY = fpVy * t + fpY;
@@ -616,8 +615,8 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
         }
         scale = fp->x34_scale.y;
         if (list->x14 * scale > relPredY &&
-            list->x10 * scale < relPredY + yBound &&
-            dirx < relx + sizeHalf && diry > relx - sizeHalf)
+            list->x10 * scale < relPredY + yBound && dirx < relx + sizeHalf &&
+            diry > relx - sizeHalf)
         {
             if (cpu->xC8 != 0) {
                 for (j = 0; j < cpu->xC8; j++) {
@@ -1521,14 +1520,15 @@ void ftCo_800B77E8(Fighter* fp)
             target = fp->x1A88.x44;
             if (target != NULL &&
                 mpCheckAll(&p6, &L6, &f6, &n6, -1, -1, fp->cur_pos.x,
-                           fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+                           fp->cur_pos.y, target->cur_pos.x,
+                           target->cur_pos.y))
             {
                 var_r0 = 1;
             } else if (fp->facing_dir > 0.0) {
                 y = fp->cur_pos.y;
                 x = fp->cur_pos.x + 27.0f;
-                if (ftCo_800A0FB0(&p6, &L6, &f6, &n6, -1, -1, -1, x, 5.0 + y, x,
-                                  y - 1000.0, 0.0f) == 0)
+                if (ftCo_800A0FB0(&p6, &L6, &f6, &n6, -1, -1, -1, x, 5.0 + y,
+                                  x, y - 1000.0, 0.0f) == 0)
                 {
                     var_r0 = 1;
                 } else {
@@ -1537,8 +1537,8 @@ void ftCo_800B77E8(Fighter* fp)
             } else {
                 y = fp->cur_pos.y;
                 x = fp->cur_pos.x - 27.0f;
-                if (ftCo_800A0FB0(&p6, &L6, &f6, &n6, -1, -1, -1, x, 5.0 + y, x,
-                                  y - 1000.0, 0.0f) == 0)
+                if (ftCo_800A0FB0(&p6, &L6, &f6, &n6, -1, -1, -1, x, 5.0 + y,
+                                  x, y - 1000.0, 0.0f) == 0)
                 {
                     var_r0 = 1;
                 } else {
@@ -1561,14 +1561,15 @@ void ftCo_800B77E8(Fighter* fp)
             target = fp->x1A88.x44;
             if (target != NULL &&
                 mpCheckAll(&p7, &L7, &f7, &n7, -1, -1, fp->cur_pos.x,
-                           fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+                           fp->cur_pos.y, target->cur_pos.x,
+                           target->cur_pos.y))
             {
                 var_r0 = 1;
             } else if (fp->facing_dir > 0.0) {
                 y = fp->cur_pos.y;
                 x = fp->cur_pos.x + 53.0f;
-                if (ftCo_800A0FB0(&p7, &L7, &f7, &n7, -1, -1, -1, x, 5.0 + y, x,
-                                  y - 1000.0, 0.0f) == 0)
+                if (ftCo_800A0FB0(&p7, &L7, &f7, &n7, -1, -1, -1, x, 5.0 + y,
+                                  x, y - 1000.0, 0.0f) == 0)
                 {
                     var_r0 = 1;
                 } else {
@@ -1577,8 +1578,8 @@ void ftCo_800B77E8(Fighter* fp)
             } else {
                 y = fp->cur_pos.y;
                 x = fp->cur_pos.x - 53.0f;
-                if (ftCo_800A0FB0(&p7, &L7, &f7, &n7, -1, -1, -1, x, 5.0 + y, x,
-                                  y - 1000.0, 0.0f) == 0)
+                if (ftCo_800A0FB0(&p7, &L7, &f7, &n7, -1, -1, -1, x, 5.0 + y,
+                                  x, y - 1000.0, 0.0f) == 0)
                 {
                     var_r0 = 1;
                 } else {
@@ -1601,14 +1602,15 @@ void ftCo_800B77E8(Fighter* fp)
             target = fp->x1A88.x44;
             if (target != NULL &&
                 mpCheckAll(&p8, &L8, &f8, &n8, -1, -1, fp->cur_pos.x,
-                           fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+                           fp->cur_pos.y, target->cur_pos.x,
+                           target->cur_pos.y))
             {
                 var_r0 = 1;
             } else if (fp->facing_dir > 0.0) {
                 y = fp->cur_pos.y;
                 x = fp->cur_pos.x + 16.0f;
-                if (ftCo_800A0FB0(&p8, &L8, &f8, &n8, -1, -1, -1, x, 5.0 + y, x,
-                                  y - 1000.0, 0.0f) == 0)
+                if (ftCo_800A0FB0(&p8, &L8, &f8, &n8, -1, -1, -1, x, 5.0 + y,
+                                  x, y - 1000.0, 0.0f) == 0)
                 {
                     var_r0 = 1;
                 } else {
@@ -1617,8 +1619,8 @@ void ftCo_800B77E8(Fighter* fp)
             } else {
                 y = fp->cur_pos.y;
                 x = fp->cur_pos.x - 16.0f;
-                if (ftCo_800A0FB0(&p8, &L8, &f8, &n8, -1, -1, -1, x, 5.0 + y, x,
-                                  y - 1000.0, 0.0f) == 0)
+                if (ftCo_800A0FB0(&p8, &L8, &f8, &n8, -1, -1, -1, x, 5.0 + y,
+                                  x, y - 1000.0, 0.0f) == 0)
                 {
                     var_r0 = 1;
                 } else {
@@ -1680,8 +1682,8 @@ void ftCo_800B77E8(Fighter* fp)
         } else if (fp->facing_dir > 0.0) {
             y = fp->cur_pos.y;
             x = fp->cur_pos.x + 32.0f;
-            if (ftCo_800A0FB0(&p10, &L10, &f10, &n10, -1, -1, -1, x, 5.0 + y, x,
-                              y - 1000.0, 0.0f) == 0)
+            if (ftCo_800A0FB0(&p10, &L10, &f10, &n10, -1, -1, -1, x, 5.0 + y,
+                              x, y - 1000.0, 0.0f) == 0)
             {
                 var_r0 = 1;
             } else {
@@ -1690,8 +1692,8 @@ void ftCo_800B77E8(Fighter* fp)
         } else {
             y = fp->cur_pos.y;
             x = fp->cur_pos.x - 32.0f;
-            if (ftCo_800A0FB0(&p10, &L10, &f10, &n10, -1, -1, -1, x, 5.0 + y, x,
-                              y - 1000.0, 0.0f) == 0)
+            if (ftCo_800A0FB0(&p10, &L10, &f10, &n10, -1, -1, -1, x, 5.0 + y,
+                              x, y - 1000.0, 0.0f) == 0)
             {
                 var_r0 = 1;
             } else {

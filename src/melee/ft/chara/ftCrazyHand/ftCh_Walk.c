@@ -22,8 +22,8 @@
 
 void fn_801578E8(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, ftMh_MS_WalkLoop, 0, 0.0f,
-                              1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_WalkLoop, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -54,8 +54,8 @@ void ftCh_WalkLoop_Coll(HSD_GObj* gobj) {}
 
 void ftCh_Init_801579F4(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, ftMh_MS_WalkWait, 0, 0.0f,
-                              1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_WalkWait, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
 }
 

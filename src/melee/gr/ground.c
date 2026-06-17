@@ -24,10 +24,10 @@
 #include "gr/inlines.h"
 #include "if/textlib.h"
 #include "it/it_26B1.h"
-#include "it/itzako.h"
 #include "it/it_2725.h"
 #include "it/it_3F14.h"
 #include "it/items/itcoin.h"
+#include "it/itzako.h"
 #include "it/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
@@ -599,9 +599,8 @@ void Ground_801C0C2C(HSD_GObj* arg0)
                         if (pass_y_min && ypos < y_max) {
                             pass_position_bounds = true;
                         }
-                        if (pass_position_bounds &&
-                            (stage_info.x90 == NULL ||
-                             stage_info.x90(&sp50, i)))
+                        if (pass_position_bounds && (stage_info.x90 == NULL ||
+                                                     stage_info.x90(&sp50, i)))
                         {
                             result = true;
                             break;
@@ -636,9 +635,8 @@ void Ground_801C0C2C(HSD_GObj* arg0)
                         if (pass_y_min && ypos < y_max) {
                             pass_position_bounds = true;
                         }
-                        if (pass_position_bounds &&
-                            (stage_info.x94 == NULL ||
-                             stage_info.x94(&sp50, i)))
+                        if (pass_position_bounds && (stage_info.x94 == NULL ||
+                                                     stage_info.x94(&sp50, i)))
                         {
                             result = true;
                             break;

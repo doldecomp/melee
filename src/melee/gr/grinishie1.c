@@ -36,7 +36,7 @@
 #include <baselib/gobj.h>
 
 #define invalid_state(line)                                                   \
-    OSReport("%s:%d: oioi..\n", "i!=HATENA_APPEAR_CHECKLOOP", line);                         \
+    OSReport("%s:%d: oioi..\n", "i!=HATENA_APPEAR_CHECKLOOP", line);          \
     while (true) {                                                            \
     }
 
@@ -114,8 +114,8 @@ Vec3 grI1_803B8268;
     }
 
 s16 grI1_803E48C8[22] = {
-    13, 3, 3, 14, 3, 14, 15, 3, 15, 16, 3, 16,
-    17, 3, 17, 18, 3, 18, 19, 3, 19, 0,
+    13, 3,  3, 14, 3,  14, 15, 3,  15, 16, 3,
+    16, 17, 3, 17, 18, 3,  18, 19, 3,  19, 0,
 };
 
 StageCallbacks grI1_803E48F4[] = {
@@ -175,7 +175,7 @@ grInishie1_StageData grI1_803E4950 = {
     "%s:%d: couldn t get gobj(id=%d)\n",
 };
 
-//char grI1_803E49A8[] = "grinishie1.c";
+// char grI1_803E49A8[] = "grinishie1.c";
 
 void grInishie1_801FA908(bool arg) {}
 
@@ -217,7 +217,8 @@ bool grInishie1_801FA9AC(void)
 HSD_GObj* grInishie1_801FA9B4(s32 arg0)
 {
     HSD_GObj* gobj;
-    StageCallbacks* cb = (StageCallbacks*) ((char*) grI1_803E48C8 + 0x2c) + arg0;
+    StageCallbacks* cb =
+        (StageCallbacks*) ((char*) grI1_803E48C8 + 0x2c) + arg0;
 
     gobj = Ground_GetStageGObj(arg0);
 
@@ -241,7 +242,8 @@ HSD_GObj* grInishie1_801FA9B4(s32 arg0)
             HSD_GObj_SetupProc(gobj, cb->callback2, 4U);
         }
     } else {
-        OSReport(grI1_803E4950.report_fmt_get_gobj, "grinishie1.c", 0xE7, arg0);
+        OSReport(grI1_803E4950.report_fmt_get_gobj, "grinishie1.c", 0xE7,
+                 arg0);
     }
 
     return gobj;
@@ -519,17 +521,17 @@ void grInishie1_801FB0AC(HSD_GObj* gobj, u32 index)
                 index = HSD_Randi(0x13);                                      \
                 attempts++;                                                   \
             } while ((index == last_index ||                                  \
-                      gp->gv.inishie1.blocks[index].status != 0) &&                     \
+                      gp->gv.inishie1.blocks[index].status != 0) &&           \
                      attempts < 0x14);                                        \
                                                                               \
             if (attempts == 0x14) {                                           \
-                __assert("grinishie1.c", line, "%s:%d: oioi..\n");          \
+                __assert("grinishie1.c", line, "%s:%d: oioi..\n");            \
             }                                                                 \
                                                                               \
             last_index = index;                                               \
-            gp->gv.inishie1.blocks[index].status = status_val;                          \
+            gp->gv.inishie1.blocks[index].status = status_val;                \
             grInishie1_801FBAA0(gobj, index);                                 \
-            gp->gv.inishie1.blocks[index].x20 = 0;                                      \
+            gp->gv.inishie1.blocks[index].x20 = 0;                            \
         }                                                                     \
     }
 
@@ -543,10 +545,11 @@ void grInishie1_801FB3F0(HSD_GObj* gobj)
         gp->gv.inishie1.xD8--;
     }
 
-    if (gp->gv.inishie1.xD8 == 0 && ((gp->gv.inishie1.xC6 == 1 && gp->gv.inishie1.xC8 > 0 &&
-                            gp->gv.inishie1.xC8 < grI1_804D69F8->unk14) ||
-                           (gp->gv.inishie1.xC8 == 1 && gp->gv.inishie1.xC6 > 0 &&
-                            gp->gv.inishie1.xC6 < grI1_804D69F8->unk14)))
+    if (gp->gv.inishie1.xD8 == 0 &&
+        ((gp->gv.inishie1.xC6 == 1 && gp->gv.inishie1.xC8 > 0 &&
+          gp->gv.inishie1.xC8 < grI1_804D69F8->unk14) ||
+         (gp->gv.inishie1.xC8 == 1 && gp->gv.inishie1.xC6 > 0 &&
+          gp->gv.inishie1.xC6 < grI1_804D69F8->unk14)))
     {
         gp->gv.inishie1.xC8 = 0;
         gp->gv.inishie1.xC6 = 0;
@@ -560,9 +563,9 @@ void grInishie1_801FB3F0(HSD_GObj* gobj)
         }
     } else {
         HATENA_APPEAR_CHECKLOOP(gp->gv.inishie1.xC6, gp->gv.inishie1.xCA, 1,
-                                 0x2D0U);
+                                0x2D0U);
         HATENA_APPEAR_CHECKLOOP(gp->gv.inishie1.xC8, gp->gv.inishie1.xCC, 2,
-                                 0x2EBU);
+                                0x2EBU);
     }
 
     for (i = 0; i < 0x13; ++i) {
@@ -977,10 +980,8 @@ void grInishie1_801FC664(HSD_GObj* gobj)
         if (gp->gv.inishie1.xF4 > t) {
             gp->gv.inishie1.xF4 = t;
         }
-        HSD_JObjAddTranslationY(gp->gv.inishie1.x100,
-                                -gp->gv.inishie1.xF4);
-        HSD_JObjAddTranslationY(gp->gv.inishie1.x104,
-                                -gp->gv.inishie1.xF4);
+        HSD_JObjAddTranslationY(gp->gv.inishie1.x100, -gp->gv.inishie1.xF4);
+        HSD_JObjAddTranslationY(gp->gv.inishie1.x104, -gp->gv.inishie1.xF4);
         bottom = -30.0f + Stage_GetBlastZoneBottomOffset();
         lb_8000B1CC(gp->gv.inishie1.x100, NULL, &sp18);
         lb_8000B1CC(gp->gv.inishie1.x104, NULL, &sp24);

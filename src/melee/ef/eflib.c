@@ -147,7 +147,8 @@ inline HSD_Generator* eflib_generator_add_appsrt(HSD_Generator* generator,
             {                                                                 \
                 _parent = NULL;                                               \
             }                                                                 \
-            else {                                                            \
+            else                                                              \
+            {                                                                 \
                 _parent = (_jobj)->parent;                                    \
             }                                                                 \
         } while (_parent != NULL);                                            \

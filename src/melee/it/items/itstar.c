@@ -2,8 +2,8 @@
 
 #include "it/inlines.h"
 #include "it/it_2725.h"
-#include "it/itmaplib.h"
 #include "it/itCommonItems.h"
+#include "it/itmaplib.h"
 #include "it/types.h"
 
 #include <dolphin/mtx.h>

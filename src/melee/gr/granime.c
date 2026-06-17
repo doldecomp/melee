@@ -303,10 +303,10 @@ static inline void grAnime_801C6A54_inner(HSD_JObj* jobj,
     grAnime_801C6A54(jobj, animjoint, matanimjoint, shapeanimjoint);
 }
 
-static inline void grAnime_801C6A54_noinline(HSD_JObj* jobj,
-                                             HSD_AnimJoint* animjoint,
-                                             HSD_MatAnimJoint* matanimjoint,
-                                             HSD_ShapeAnimJoint* shapeanimjoint)
+static inline void
+grAnime_801C6A54_noinline(HSD_JObj* jobj, HSD_AnimJoint* animjoint,
+                          HSD_MatAnimJoint* matanimjoint,
+                          HSD_ShapeAnimJoint* shapeanimjoint)
 {
     grAnime_801C6A54_inner(jobj, animjoint, matanimjoint, shapeanimjoint);
 }
@@ -344,7 +344,8 @@ void grAnime_801C6C0C(HSD_JObj* jobj, HSD_AnimJoint* animjoint,
             }
             mj = next_mj;
             if (shapeanimjoint != NULL) {
-                next_sj = shapeanimjoint != NULL ? shapeanimjoint->child : NULL;
+                next_sj =
+                    shapeanimjoint != NULL ? shapeanimjoint->child : NULL;
             } else {
                 next_sj = NULL;
             }
@@ -438,16 +439,18 @@ void grAnime_801C6C0C(HSD_JObj* jobj, HSD_AnimJoint* animjoint,
     }
 }
 
-static inline void grAnime_801C6C0C_inner(
-    HSD_JObj* jobj, HSD_AnimJoint* animjoint,
-    HSD_MatAnimJoint* matanimjoint, HSD_ShapeAnimJoint* shapeanimjoint)
+static inline void grAnime_801C6C0C_inner(HSD_JObj* jobj,
+                                          HSD_AnimJoint* animjoint,
+                                          HSD_MatAnimJoint* matanimjoint,
+                                          HSD_ShapeAnimJoint* shapeanimjoint)
 {
     grAnime_801C6C0C(jobj, animjoint, matanimjoint, shapeanimjoint);
 }
 
-static inline void grAnime_801C6C0C_noinline(
-    HSD_JObj* jobj, HSD_AnimJoint* animjoint,
-    HSD_MatAnimJoint* matanimjoint, HSD_ShapeAnimJoint* shapeanimjoint)
+static inline void
+grAnime_801C6C0C_noinline(HSD_JObj* jobj, HSD_AnimJoint* animjoint,
+                          HSD_MatAnimJoint* matanimjoint,
+                          HSD_ShapeAnimJoint* shapeanimjoint)
 {
     grAnime_801C6C0C_inner(jobj, animjoint, matanimjoint, shapeanimjoint);
 }
@@ -537,8 +540,8 @@ void grAnime_801C706C(HSD_TObj* tobj, s32 flags, void* func, u32 type,
     }
 }
 
-static inline void grAnime_801C706C_inner(HSD_TObj* tobj, s32 flags, void* func,
-                                          u32 type, void* param)
+static inline void grAnime_801C706C_inner(HSD_TObj* tobj, s32 flags,
+                                          void* func, u32 type, void* param)
 {
     grAnime_801C706C(tobj, flags, func, type, param);
 }
@@ -607,8 +610,8 @@ inline bool grAnime_801C6F50_wrapped(HSD_JObj* obj, int flags, void* func,
 }
 
 static inline void grAnime_801C7228_for_each_child(HSD_JObj* obj, void* param,
-                                                  u32 type, void* func,
-                                                  int flags, int arg5)
+                                                   u32 type, void* func,
+                                                   int flags, int arg5)
 {
     HSD_RObj* robj;
     HSD_JObj* child;
@@ -626,7 +629,8 @@ static inline void grAnime_801C7228_for_each_child(HSD_JObj* obj, void* param,
                 grAnime_801C70E0(child->u.dobj, flags, func, type, param);
             }
             for (child_robj = child->robj; child_robj != NULL;
-                 child_robj = child_robj->next) {
+                 child_robj = child_robj->next)
+            {
                 if (flags & 0x200) {
                     if (child_robj->aobj != NULL) {
                         grAnime_801C6F50(child_robj->aobj, child_robj, 0xA,
@@ -636,7 +640,8 @@ static inline void grAnime_801C7228_for_each_child(HSD_JObj* obj, void* param,
             }
             if (arg5 && !(child->flags & 0x1000)) {
                 for (grandchild = child->child; grandchild != NULL;
-                     grandchild = grandchild->next) {
+                     grandchild = grandchild->next)
+                {
                     grAnime_801C7228(grandchild, flags, func, type, param,
                                      arg5);
                 }
@@ -681,8 +686,8 @@ void grAnime_801C7228(HSD_JObj* obj, int flags, void* func, u32 type,
     grAnime_801C7228_for_each_child(obj, param, type, func, flags, arg5);
 }
 
-void grAnime_801C752C(HSD_JObj* obj, s32 arg1, s32 flags, void* func,
-                      u32 type, ...)
+void grAnime_801C752C(HSD_JObj* obj, s32 arg1, s32 flags, void* func, u32 type,
+                      ...)
 {
     HSD_JObj* obj_tmp;
     HSD_RObj* robj;
@@ -939,8 +944,7 @@ void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
     }
     archive = grDatFiles_801C6330(map_id);
     HSD_ASSERT(0x4DE, archive);
-    if ((arg3 & 1) &&
-        (ajp = archive->unk4->unk8[map_id].unk4, ajp != NULL) &&
+    if ((arg3 & 1) && (ajp = archive->unk4->unk8[map_id].unk4, ajp != NULL) &&
         (aj_t = ajp[arg4], aj_t != NULL))
     {
         aj = &aj_t[arg2];
@@ -949,8 +953,7 @@ void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
     } else {
         aj = NULL;
     }
-    if ((arg3 & 2) &&
-        (mjp = archive->unk4->unk8[map_id].unk8, mjp != NULL) &&
+    if ((arg3 & 2) && (mjp = archive->unk4->unk8[map_id].unk8, mjp != NULL) &&
         (mj_t = mjp[arg4], mj_t != NULL))
     {
         mj = &mj_t[arg2];
@@ -959,8 +962,7 @@ void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
     } else {
         mj = NULL;
     }
-    if ((arg3 & 4) &&
-        (sjp = archive->unk4->unk8[map_id].unkC, sjp != NULL) &&
+    if ((arg3 & 4) && (sjp = archive->unk4->unk8[map_id].unkC, sjp != NULL) &&
         (sj_t = sjp[arg4], sj_t != NULL))
     {
         sj = &sj_t[arg2];

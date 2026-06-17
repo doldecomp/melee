@@ -12,12 +12,12 @@
 #include "gr/types.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
-#include "it/itzako.h"
 #include "it/item.h"
 #include "it/items/itleadead.h"
 #include "it/items/itlikelike.h"
 #include "it/items/itnokonoko.h"
 #include "it/items/itpatapata.h"
+#include "it/itzako.h"
 #include "it/types.h"
 #include "lb/lb_00B0.h"
 
@@ -337,7 +337,6 @@ void grZakoGenerator_801CAEB0(int arg0, int arg1)
         lbl_8049F030.x4->sentinel.x4 = NULL;
     }
 }
-
 
 void grZakoGenerator_801CAEF0(bool arg0)
 {
