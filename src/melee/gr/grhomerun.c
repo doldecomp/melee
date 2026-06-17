@@ -170,8 +170,8 @@ HSD_GObj* grHomeRun_8021C82C(int gobj_id)
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport((char*) grHr_803E8140 + 0x110,
-                 (char*) grHr_803E8140 + 0x134, 0x131, gobj_id);
+        OSReport((char*) grHr_803E8140 + 0x110, (char*) grHr_803E8140 + 0x134,
+                 0x131, gobj_id);
     }
 
     return gobj;

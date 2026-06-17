@@ -4,10 +4,10 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/itmaplib.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
 #include "it/items/itkinoko.h"
+#include "it/itmaplib.h"
 
 ItemStateTable it_803F6130[] = {
     { 0, itDkinoko_UnkMotion0_Anim, itDkinoko_UnkMotion0_Phys,

@@ -1,8 +1,8 @@
 #ifndef GALE01_15B850
 #define GALE01_15B850
 
-#include <baselib/forward.h>
 #include "ft/forward.h"
+#include <baselib/forward.h>
 
 /* 15B850 */ void ftCh_GrabUnk1_8015B850(HSD_GObj* gobj, FtMotionId msid);
 /* 15B8EC */ void ftCo_ThrownCrazyHand_Anim(HSD_GObj* gobj);

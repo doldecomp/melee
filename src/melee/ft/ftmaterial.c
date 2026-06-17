@@ -39,8 +39,8 @@ static HSD_TevDesc ftMaterial_803C69D0 = {
     HSD_TE_UNDEF,
     HSD_TE_UNDEF,
     { {
-        0, 0, 15, 15, 15, 0, 0, true, 0, 0, 7, 7, 7, 0, 0, false,
-        0, 0, 0, 0, 0, 0, 0,
+        0, 0, 15, 15,    15, 0, 0, true, 0, 0, 7, 7,
+        7, 0, 0,  false, 0,  0, 0, 0,    0, 0, 0,
     } },
 };
 
@@ -52,8 +52,9 @@ static HSD_TECnst ftMaterial_803C6A44 = {
 
 void ftMaterial_800BF260(void)
 {
-    hsdInitClassInfo(&ftMObj.parent, &hsdMObj.parent, "sysdolphin_base_library",
-                     "ft_mobj", sizeof(HSD_MObjInfo), sizeof(HSD_MObj));
+    hsdInitClassInfo(&ftMObj.parent, &hsdMObj.parent,
+                     "sysdolphin_base_library", "ft_mobj",
+                     sizeof(HSD_MObjInfo), sizeof(HSD_MObj));
     ftMObj.setup = (HSD_MObjSetupFunc) (Event) ftMaterial_800BF2B8;
 }
 
@@ -322,7 +323,7 @@ void ftMaterial_800BF6BC(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp)
             }
             sp_cnst1.reg = (u8) reg2;
             {
-                // @todo Fix this stack pointer arithmetic 
+                // @todo Fix this stack pointer arithmetic
                 GXColor* color = (GXColor*) ((u8*) &sp_tevdesc - 4);
                 u8 alpha = sp168.a;
 

@@ -171,8 +171,8 @@ HSD_GObj* grOldPupupu_802108B4(int arg0)
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport((char*) grOp_803E6688 + 0xF4,
-                 (char*) grOp_803E6688 + 0x118, 0xD9, arg0);
+        OSReport((char*) grOp_803E6688 + 0xF4, (char*) grOp_803E6688 + 0x118,
+                 0xD9, arg0);
     }
 
     return gobj;

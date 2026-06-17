@@ -340,7 +340,7 @@ void fn_80174468(u8 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
 
     if (list->mode == 2 || entry->check != NULL) {
         if (list->mode != 2) {
-            result = ((s32 (*)(u8))(Event) entry->check)(slot);
+            result = ((s32(*)(u8))(Event) entry->check)(slot);
             if (result < 0) {
                 value_id = HSD_SisLib_803A6B98(text3, const_zero, const_neg30,
                                                "%s", &lbl_804D3F8C);
@@ -1460,8 +1460,7 @@ void fn_80175DC8(HSD_GObj* gobj)
         }
         lb_8000B1CC(title_jobj, &sp78, &sp6C);
         HSD_SisLib_803A6368(
-            HSD_SisLib_803A5ACC(0, 0, sp6C.x, -sp6C.y, sp6C.z, 12.0F,
-                                300.0F),
+            HSD_SisLib_803A5ACC(0, 0, sp6C.x, -sp6C.y, sp6C.z, 12.0F, 300.0F),
             2);
     } else if (me->x5 == 1) {
         title_text = data->x2C;
@@ -1472,8 +1471,7 @@ void fn_80175DC8(HSD_GObj* gobj)
         }
         lb_8000B1CC(title_jobj, &sp60, &sp54);
         HSD_SisLib_803A6368(
-            HSD_SisLib_803A5ACC(0, 0, sp54.x, -sp54.y, sp54.z, 12.0F,
-                                300.0F),
+            HSD_SisLib_803A5ACC(0, 0, sp54.x, -sp54.y, sp54.z, 12.0F, 300.0F),
             3);
     } else if (me->x5 == 2) {
         title_text = data->x2C;
@@ -1484,8 +1482,7 @@ void fn_80175DC8(HSD_GObj* gobj)
         }
         lb_8000B1CC(title_jobj, &sp48, &sp3C);
         HSD_SisLib_803A6368(
-            HSD_SisLib_803A5ACC(0, 0, sp3C.x, -sp3C.y, sp3C.z, 12.0F,
-                                300.0F),
+            HSD_SisLib_803A5ACC(0, 0, sp3C.x, -sp3C.y, sp3C.z, 12.0F, 300.0F),
             4);
     } else if (me->x5 == 3) {
         title_text = data->x2C;
@@ -1496,8 +1493,7 @@ void fn_80175DC8(HSD_GObj* gobj)
         }
         lb_8000B1CC(title_jobj, &sp30, &sp24);
         HSD_SisLib_803A6368(
-            HSD_SisLib_803A5ACC(0, 0, sp24.x, -sp24.y, sp24.z, 12.0F,
-                                300.0F),
+            HSD_SisLib_803A5ACC(0, 0, sp24.x, -sp24.y, sp24.z, 12.0F, 300.0F),
             5);
     }
 }

@@ -192,8 +192,8 @@ block_65:
     sp9C = *arg5;
     sp98 = 0.017453292f * (256.0f * arg6->x);
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 6, gfx_id,
-                  temp_r30->parts[var_r27].joint, &sp9C,
-                  &temp_r30->facing_dir, &sp98);
+                  temp_r30->parts[var_r27].joint, &sp9C, &temp_r30->facing_dir,
+                  &sp98);
     return;
 block_66:
     temp_f1_2 = temp_r30->x34_scale.y;
@@ -410,8 +410,8 @@ block_131:
     sp7C = var_f1_2;
 block_133:
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 6, gfx_id,
-                  temp_r30->parts[var_r27].joint, &sp84,
-                  &temp_r30->facing_dir, &sp7C);
+                  temp_r30->parts[var_r27].joint, &sp84, &temp_r30->facing_dir,
+                  &sp7C);
     return;
 block_134:
     OSReport("no effect from animlist %d\n", gfx_id);

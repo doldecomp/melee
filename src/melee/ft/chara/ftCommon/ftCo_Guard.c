@@ -192,8 +192,8 @@ static inline void inlineD0(Fighter_GObj* gobj)
         float alpha = p_ftCommonData->x2F4;
         float lightshield_amount = fp->lightshield_amount;
         {
-            int alpha_i = alpha +
-                          (float) (int) (lightshield_amount * (255 - alpha));
+            int alpha_i =
+                alpha + (float) (int) (lightshield_amount * (255 - alpha));
             efLib_SetParamAlpha(gobj, (u8) alpha_i);
         }
     }
@@ -261,8 +261,8 @@ void ftCo_800921DC(HSD_GObj* gobj)
     fp->mv.co.guard.x4 = 0;
     fp->mv.co.guard.x2C = 0;
     {
-        float lightshield_amount = (fp->input.x650 - p_ftCommonData->x10) /
-                                   (1 - p_ftCommonData->x10);
+        float lightshield_amount =
+            (fp->input.x650 - p_ftCommonData->x10) / (1 - p_ftCommonData->x10);
         if (lightshield_amount < 0) {
             lightshield_amount = fp->mv.co.guard.x2C;
         }
@@ -718,8 +718,8 @@ static inline void ftCo_800928CC_inline(Fighter_GObj* gobj)
         ftYs_Shield_8012C1D4(gobj);
         return;
     default:
-        Fighter_ChangeMotionState(gobj, ftCo_MS_Guard, Ft_MF_SkipAnim, 0, 1,
-                                  0, NULL);
+        Fighter_ChangeMotionState(gobj, ftCo_MS_Guard, Ft_MF_SkipAnim, 0, 1, 0,
+                                  NULL);
         {
             HSD_JObj* jobj = fp->parts[fp->ft_data->x8->x11].joint;
             ftCo_80092158_inline(gobj, 1048, jobj);

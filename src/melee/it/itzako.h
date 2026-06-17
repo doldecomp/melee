@@ -4,13 +4,11 @@
 #include <platform.h>
 
 #include "it/forward.h"
-
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
 
-/* 27B5B0 */ Item_GObj* it_8027B5B0(ItemKind, Vec3*, HSD_JObj*, Vec3*,
-                                    bool);
+/* 27B5B0 */ Item_GObj* it_8027B5B0(ItemKind, Vec3*, HSD_JObj*, Vec3*, bool);
 /* 27B730 */ void it_8027B730(Item_GObj*);
 /* 27B798 */ bool it_8027B798(Item_GObj*, Vec3*);
 /* 27B964 */ void it_8027B964(Item_GObj*, bool);

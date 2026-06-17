@@ -25,8 +25,8 @@ static void fn_801577B4(HSD_GObj* gobj);
 void fn_8015755C(HSD_GObj* gobj)
 {
     PAD_STACK(8);
-    Fighter_ChangeMotionState(gobj, ftMh_MS_SweepWait, 0, 0.0f,
-                              1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_SweepWait, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -101,8 +101,7 @@ static void fn_801577B4(HSD_GObj* gobj)
 
 void ftCh_Init_801577F8(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, ftMh_MS_Walk2, 0, 0.0f,
-                              1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftMh_MS_Walk2, 0, 0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
 }
 

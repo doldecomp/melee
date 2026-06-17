@@ -27,8 +27,7 @@ static void fn_801588B8(HSD_GObj* gobj);
 void fn_801587B0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, 0x169, 0, 0.0f,
-                              1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 0x169, 0, 0.0f, 1.0f, 0.0f, NULL);
     fp->cmd_vars[0] = 0;
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[2] = 0;

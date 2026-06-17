@@ -253,7 +253,8 @@ void mnSound_80249C08(int unused)
         lb_80011E24(jobj, &sp64, 0xE, -1);
         mn_8022ED6C(sp64, &mnSound_803EEED8[user_data->unk2 + 1]);
         lb_80011E24(jobj, &sp60, 0xB, -1);
-        HSD_JObjReqAnimAll(sp60, mnSound_803EEED8[user_data->unk1 + 4].start_frame);
+        HSD_JObjReqAnimAll(sp60,
+                           mnSound_803EEED8[user_data->unk1 + 4].start_frame);
         HSD_JObjAnimAll(sp60);
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     }

@@ -465,9 +465,8 @@ void fn_803155C8(void)
                 if (bet_count != 0) {
                     bet_count -= 1;
                 }
-                pct = 100.0f *
-                      (((f32) ef4->x54 / fval) +
-                       ((f32) (bet_count * 5) / 100.0f));
+                pct = 100.0f * (((f32) ef4->x54 / fval) +
+                                ((f32) (bet_count * 5) / 100.0f));
                 if (pct >= 100.0f) {
                     pct = 99.9f;
                 }

@@ -7,13 +7,13 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_3F14.h"
-#include "it/itmaplib.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
 
 #include "it/items/forward.h"
 
 #include "it/items/itwhitebea.h"
+#include "it/itmaplib.h"
 
 #include <baselib/jobj.h>
 #include <MSL/math.h>

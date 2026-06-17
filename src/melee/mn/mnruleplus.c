@@ -476,19 +476,16 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
                 if ((s32) hovered_u8 >= 0) {
                     if ((mn_804A04F0.buttons & 4) != 0) {
                         HSD_JObjReqAnimAll(
-                            tree,
-                            mn_803ED294[mn_803ED2E8.stat[hovered][1] -
-                                         confirmed]
-                                .start_frame);
+                            tree, mn_803ED294[mn_803ED2E8.stat[hovered][1] -
+                                              confirmed]
+                                      .start_frame);
                     } else if (confirmed == 0) {
                         HSD_JObjReqAnimAll(
-                            tree,
-                            mn_803ED270[mn_803ED2E8.stat[hovered][1]]
-                                .start_frame);
+                            tree, mn_803ED270[mn_803ED2E8.stat[hovered][1]]
+                                      .start_frame);
                     } else {
-                        HSD_JObjReqAnimAll(tree,
-                                           mn_803ED270[confirmed - 1]
-                                               .start_frame);
+                        HSD_JObjReqAnimAll(
+                            tree, mn_803ED270[confirmed - 1].start_frame);
                     }
                     HSD_JObjAnimAll(tree);
                 }
