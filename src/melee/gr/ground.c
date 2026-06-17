@@ -3198,6 +3198,7 @@ s32 Ground_801C5840(void)
 
 #pragma push
 #pragma global_optimizer off
+/// @todo Why is @c global_optimizer necessary?
 void Ground_801C5878(void)
 {
     PAD_STACK(8);
