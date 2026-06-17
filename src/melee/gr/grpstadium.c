@@ -1991,15 +1991,13 @@ static struct VecScalar {
 void grStadium_801D435C(Ground_GObj* arg0)
 {
     struct VecScalar* cur;
-    Ground* gp;
-    f32 temp_f0;
+    Ground* gp = HSD_GObjGetUserData(arg0);
     f32 temp_f1_2;
     f32 temp_f1_3;
     f32 var_f31;
     int var_r28;
     Vec3 spC;
 
-    gp = arg0->user_data;
     if (gp->u.stadium.xD4 == 0.0F) {
         int i;
         cur = lbl_803E1630;
