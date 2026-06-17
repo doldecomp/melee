@@ -1,12 +1,12 @@
-#include "dolphin/gx/GXStruct.h"
 #define SOBJLIB_INTERNAL
+#include "sobjlib.h"
+
 #include "cobj.h"
 #include "gobj.h"
 #include "gobjgxlink.h"
 #include "gobjobject.h"
 #include "objalloc.h"
 #include "pobj.h"
-#include "sobjlib.h"
 #include "state.h"
 #include "tev.h"
 #include "tobj.h"
@@ -16,7 +16,15 @@
 #include <math.h>
 #include <dolphin/os.h>
 
-/* 4D4540 */ u8 HSD_SObjLib_804D7960;
+/* 004DB670 */ extern const s32 HSD_SObjLib_804DEA90;
+/* 004DB66C */ extern const s32 HSD_SObjLib_804DEA8C;
+/* 004DB668 */ extern const s32 HSD_SObjLib_804DEA88;
+/* 004DB664 */ extern const s32 HSD_SObjLib_804DEA84;
+/* 004DB660 */ extern const s32 HSD_SObjLib_804DEA80;
+/* 004DB674 */ extern const f32 HSD_SObjLib_804DEA94;
+/* 004DB678 */ extern const f32 HSD_SObjLib_804DEA98;
+/* 004D4540 */ u8 HSD_SObjLib_804D7960;
+/* 004CDCC0 */ extern HSD_ObjAllocData HSD_SObjLib_804D10E0;
 
 GObjFunc HSD_SObjLib_8040C3A0[] = { (void*) HSD_SObjLib_803A4740 };
 
@@ -27,12 +35,6 @@ GObjFuncs HSD_SObjLib_8040C3A4 = {
 };
 
 HSD_ObjAllocData HSD_SObjLib_804D10E0;
-
-static void order_data(void)
-{
-    (void) __FILE__;
-    (void) "BadOBJ for SOBJ-displayfunc\n";
-}
 
 void HSD_SObjLib_803A44A4(void)
 {
@@ -146,6 +148,11 @@ void HSD_SObjLib_803A4740(HSD_SObj* sobj)
     }
 }
 
+static void order_data(void)
+{
+    (void) __FILE__;
+}
+
 HSD_SObj* HSD_SObjLib_803A477C(HSD_GObj* gobj, HSD_SObjDesc* desc,
                                GXTexWrapMode wrap_s, GXTexWrapMode wrap_t,
                                u8 priority, u8 use_secondary)
@@ -245,11 +252,6 @@ void HSD_SObjLib_803A49E0(HSD_GObj* gobj, int unused)
     }
 }
 
-const GXColorS10 HSD_SObjLib_804DEA80 = { 0xFFA6, 0x0000, 0xFF8E, 0x0087 };
-const GXColor HSD_SObjLib_804DEA88 = { 0x00, 0x00, 0xE2, 0x58 };
-const GXColor HSD_SObjLib_804DEA8C = { 0xB3, 0x00, 0x00, 0xB6 };
-const GXColor HSD_SObjLib_804DEA90 = { 0xFF, 0x00, 0xFF, 0x80 };
-
 void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
 {
     f32 x_cos;
@@ -296,8 +298,8 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
     } else {
         center_width = (f32) obj_width * sobj->x1C;
         center_height = (f32) obj_height * sobj->x20;
-        origin_x = (center_width * 0.5f) + sobj->x10;
-        origin_y = (center_height * 0.5f) + sobj->x14;
+        origin_x = (center_width * HSD_SObjLib_804DEA94) + sobj->x10;
+        origin_y = (center_height * HSD_SObjLib_804DEA94) + sobj->x14;
     }
 
     GXClearVtxDesc();
@@ -391,14 +393,15 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
 
         GXSetAlphaCompare(GX_ALWAYS, 0, GX_AOP_OR, GX_ALWAYS, 0);
 
-        tev_color = HSD_SObjLib_804DEA80;
+        ((u32*) &tev_color)[0] = HSD_SObjLib_804DEA80;
+        ((u32*) &tev_color)[1] = HSD_SObjLib_804DEA84;
         GXSetTevColorS10(GX_TEVREG0, tev_color);
 
-        k_color = HSD_SObjLib_804DEA88;
+        *(u32*) &k_color = HSD_SObjLib_804DEA88;
         GXSetTevKColor(GX_KCOLOR0, k_color);
-        k_color = HSD_SObjLib_804DEA8C;
+        *(u32*) &k_color = HSD_SObjLib_804DEA8C;
         GXSetTevKColor(GX_KCOLOR1, k_color);
-        k_color = HSD_SObjLib_804DEA90;
+        *(u32*) &k_color = HSD_SObjLib_804DEA90;
         GXSetTevKColor(GX_KCOLOR2, k_color);
 
         GXSetTevSwapModeTable(GX_TEV_SWAP0, GX_CH_RED, GX_CH_GREEN, GX_CH_BLUE,
@@ -495,10 +498,10 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
         }
     }
 
-    sin_half = 0.5f * sinf(sobj->x18);
+    sin_half = HSD_SObjLib_804DEA94 * sinf(sobj->x18);
     angle = sobj->x18;
     cos_val = cosf(angle);
-    cos_half = 0.5f * -cos_val;
+    cos_half = HSD_SObjLib_804DEA94 * -cos_val;
     width = (f32) obj_width * sobj->x1C;
     height = (f32) obj_height * sobj->x20;
     x_sin = sin_half * width;
@@ -537,12 +540,19 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
     HSD_StateSetZMode(1, GX_LEQUAL, 1);
 }
 
+const s32 HSD_SObjLib_804DEA80 = 0xFFA60000;
+const s32 HSD_SObjLib_804DEA84 = 0xFF8E0087;
+const s32 HSD_SObjLib_804DEA88 = 0xE258;
+const s32 HSD_SObjLib_804DEA8C = 0xB30000B6;
+const s32 HSD_SObjLib_804DEA90 = 0xFF00FF80;
+const f32 HSD_SObjLib_804DEA94 = 0.5F;
+const f32 HSD_SObjLib_804DEA98 = 2.0F;
+
 static HSD_Chan lbl_8040C418 = {
     NULL,       GX_COLOR0,  0,          { 0 },         { 0xFF, 0xFF, 0xFF },
     false,      GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_CLAMP,
     GX_AF_NONE,
 };
-
 static HSD_Chan lbl_8040C448 = {
     NULL,       GX_ALPHA0,  0,          { 0, 0, 0, 0xFF }, { 0, 0, 0, 0xFF },
     false,      GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL,     GX_DF_CLAMP,
@@ -583,7 +593,7 @@ void HSD_SObjLib_803A55DC(HSD_GObj* gobj, u16 width, u16 height, int priority)
 
     f32 roll = 0.0F;
     f32 near_val = roll;
-    f32 far_val = 2.0f;
+    f32 far_val = *(volatile const f32*) &HSD_SObjLib_804DEA98;
     f32 top = roll;
     f32 bottom = -height;
     f32 left = roll;
