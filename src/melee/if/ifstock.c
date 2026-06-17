@@ -201,7 +201,7 @@ void ifStock_802F8298(HSD_GObj* gobj)
             HSD_JObjClearFlagsAll(jobj2, JOBJ_HIDDEN);
             if (stock->x204[user_data->player].x0[i + 5] <= 10) {
                 lbVector_8000DE38(
-                    (float(*)[4]) &
+                    (float (*)[4]) &
                         stock->x204[user_data->player]
                             .x0[0xC +
                                 (i - 5) * sizeof(struct IfStockStealAnim)],

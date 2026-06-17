@@ -6273,8 +6273,7 @@ void ftCo_800ADE48(Fighter* fp)
                                                                                         0
                                                                                     ? 1
                                                                                     : 0;
-                                                                        } else
-                                                                        {
+                                                                        } else {
                                                                             found =
                                                                                 1;
                                                                         }

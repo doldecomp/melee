@@ -24,6 +24,7 @@ Usage:
     python3 tools/check/main.py [--no-<check> ...] [--msg-style {std,actions}] [PATH ...]
     python3 tools/check/main.py --fix [--dry-run] [--no-<check> ...] [PATH ...]
 """
+
 import argparse
 import difflib
 import re
@@ -306,8 +307,11 @@ def _dest(name: str) -> str:
 def _iter_files(roots: list[str]) -> Iterator[Path]:
     for root in roots:
         root_path = Path(root)
-        if not root_path.is_dir():
+
+        if not root_path.exists():
             raise FileNotFoundError(f"scan root does not exist: {root}")
+        if not root_path.is_dir():
+            yield root_path
         yield from sorted(root_path.rglob(SOURCE_GLOB))
 
 
@@ -326,7 +330,14 @@ def print_std(pairs: list[tuple[Check, Finding]]) -> None:
     indent = "    "
     ordered = sorted(
         pairs,
-        key=lambda cf: (SEVERITY, cf[0].category, cf[0].name, cf[1].path, cf[1].line, cf[1].column),
+        key=lambda cf: (
+            SEVERITY,
+            cf[0].category,
+            cf[0].name,
+            cf[1].path,
+            cf[1].line,
+            cf[1].column,
+        ),
     )
     print(f"{SEVERITY} ({len(ordered)})")
     for category, cat_items in groupby(ordered, key=lambda cf: cf[0].category):
@@ -350,10 +361,13 @@ def print_actions(pairs: list[tuple[Check, Finding]]) -> None:
         )
 
 
-def run_checks(checks: list[Check], roots: list[str], msg_style: str) -> int:
+def run_checks(
+    checks: list[Check], roots: list[str], msg_style: str, quiet: bool
+) -> int:
     pairs = collect(checks, roots)
     if not pairs:
-        print("Issues: OK")
+        if not quiet:
+            print("Issues: OK")
         return EXIT_OK
     if msg_style == "actions":
         print_actions(pairs)
@@ -406,20 +420,29 @@ def main(argv: list[str] | None = None) -> int:
         "paths", nargs="*", default=["src"], help="source roots to scan (default: src)"
     )
     parser.add_argument(
+        "-m",
         "--msg-style",
         choices=["std", "actions"],
         default="std",
         help="message style (default 'std'; 'actions' emits GitHub Actions annotations)",
     )
     parser.add_argument(
+        "-f",
         "--fix",
         action="store_true",
         help="rewrite source in place to resolve findings (jobj-flags only)",
     )
     parser.add_argument(
+        "-n",
         "--dry-run",
         action="store_true",
         help="with --fix, print a diff of the changes instead of writing them",
+    )
+    parser.add_argument(
+        "-q",
+        "--quiet",
+        action="store_true",
+        help="don't print anything if the check succeeds",
     )
     for check in CHECKS:
         parser.add_argument(
@@ -436,7 +459,7 @@ def main(argv: list[str] | None = None) -> int:
     roots = args.paths or ["src"]
     if args.fix:
         return run_fix(enabled, roots, args.dry_run)
-    return run_checks(enabled, roots, args.msg_style)
+    return run_checks(enabled, roots, args.msg_style, args.quiet)
 
 
 if __name__ == "__main__":
