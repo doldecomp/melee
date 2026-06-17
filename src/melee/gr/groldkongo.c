@@ -102,8 +102,6 @@ grOk_StageData grOk_803E65E8 = {
     "%s:%d: couldn t get gobj(id=%d)\n",
 };
 
-char grOk_803E6640[] = "groldkongo.c";
-
 static lbColl_80008D30_arg1 grOk_803B8408;
 
 static inline int* grOldKongo_GetHitTimer(Ground* gp)
@@ -223,7 +221,7 @@ void grOldKongo_8020F6E4(Ground_GObj* gobj)
     gp->gv.oldkongo.xC4 = 0;
     gp->gv.oldkongo.xC6 = 0;
     gp->gv.oldkongo.xC8 = 2;
-    gp->gv.oldkongo.xD4 = NULL;
+    gp->gv.oldkongo.keep = NULL;
     gp->gv.oldkongo.xE0 = 0.0f;
     gp->gv.oldkongo.xE4 = 0.0f;
     gp->gv.oldkongo.xEC = grOk_804D6A90->x48;
@@ -443,7 +441,7 @@ void grOldKongo_8020F888(Ground_GObj* arg0)
 
     switch (gp->gv.oldkongo.xC6) {
     case 1:
-        if ((u32) gp->gv.oldkongo.xD4 == 0U) {
+        if (gp->gv.oldkongo.keep == NULL) {
             gp->gv.oldkongo.xC6 = 0;
             goto block_123;
         }
@@ -481,7 +479,7 @@ void grOldKongo_8020F888(Ground_GObj* arg0)
             }
             hit_angle = 57.29578f * hit_angle;
             {
-                Fighter_GObj* fighter_gobj = gp->gv.oldkongo.xD4;
+                Fighter_GObj* fighter_gobj = gp->gv.oldkongo.keep;
 
                 if (fighter_gobj->p_link == 8) {
                     ftCo_8009EC70(fighter_gobj, &sp3C, &hit, hit_angle);
@@ -578,7 +576,7 @@ void grOldKongo_802100FC(Ground_GObj* arg0)
 
 void grOldKongo_80210450(Ground_GObj* arg) {}
 
-s32 grOldKongo_80210454(HSD_GObj* arg0, HSD_GObj* arg1)
+bool grOldKongo_80210454(Ground_GObj* ground_gobj, Fighter_GObj* keep)
 {
     Ground* gp;
     Vec3 pos_gnd;
@@ -587,14 +585,14 @@ s32 grOldKongo_80210454(HSD_GObj* arg0, HSD_GObj* arg1)
     f32 rand_val;
     f32 diff;
 
-    gp = GET_GROUND(arg0);
+    gp = GET_GROUND(ground_gobj);
 
     if (gp->gv.oldkongo.xC6 != 0) {
         goto done;
     }
 
     Ground_801C4DA0(&pos_gnd, &unk);
-    ftLib_80086644(arg1, &pos_ft);
+    ftLib_80086644(keep, &pos_ft);
 
     if (!((pos_gnd.x - pos_ft.x) * (pos_gnd.x - pos_ft.x) +
               (pos_gnd.y - pos_ft.y) * (pos_gnd.y - pos_ft.y) +
@@ -607,16 +605,16 @@ s32 grOldKongo_80210454(HSD_GObj* arg0, HSD_GObj* arg1)
     rand_val = HSD_Randf();
     diff = grOk_804D6A90->xC - grOk_804D6A90->x8;
     gp->gv.oldkongo.xCA = (s16) (diff * rand_val + grOk_804D6A90->x8);
-    gp->gv.oldkongo.xD4 = arg1;
+    gp->gv.oldkongo.keep = keep;
     gp->gv.oldkongo.xC6 = 1;
     Ground_801C5440(gp, 0, 0x129U);
-    grAnime_801C7FF8(arg0, 2, 7, 1, 0.0f, 1.0f);
-    grMaterial_801C9604(arg0, grOk_804D6A90->x6C, 0);
-    efSync_Spawn(0x405, arg0, &pos_ft);
-    ftLib_80086C18(arg1, 0xD, 0x1E);
-    return 1;
+    grAnime_801C7FF8(ground_gobj, 2, 7, 1, 0.0f, 1.0f);
+    grMaterial_801C9604(ground_gobj, grOk_804D6A90->x6C, 0);
+    efSync_Spawn(0x405, ground_gobj, &pos_ft);
+    ftLib_80086C18(keep, 0xD, 0x1E);
+    return true;
 done:
-    return 0;
+    return false;
 }
 
 void grOldKongo_802105AC(Ground_GObj* gobj)
@@ -633,12 +631,13 @@ void grOldKongo_802105C8(HSD_GObj* gobj)
     if (gp->gv.oldkongo.xC6 != 1) {
         return;
     }
-    if (gp->gv.oldkongo.xD4 == NULL) {
-        __assert(grOk_803E6640, 751, "gp->u.taru.keep");
-    }
-    if (((u8*) gp->gv.oldkongo.xD4)[2] == 8) {
+
+    /// @todo Fix field name to match. #Ground::gv should be @c u.
+    HSD_ASSERTMSG(751, gp->gv.oldkongo.keep, "gp->u.taru.keep");
+
+    if (((u8*) gp->gv.oldkongo.keep)[2] == 8) {
         gp->gv.oldkongo.xC6 = 0;
-        gp->gv.oldkongo.xD4 = NULL;
+        gp->gv.oldkongo.keep = NULL;
         grMaterial_801C95C4(gobj);
     }
 }
