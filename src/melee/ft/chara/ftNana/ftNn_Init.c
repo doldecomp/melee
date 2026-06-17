@@ -464,9 +464,12 @@ bool ftNn_Init_801230D0(Fighter_GObj* nana_gobj)
 {
     Fighter* nana_fp = GET_FIGHTER(nana_gobj);
     Fighter_GObj* popo_gobj = Player_GetEntityAtIndex(nana_fp->player_id, 0);
+    u8 _[12];
     Vec popo_vec;
     Vec nana_vec;
-    PAD_STACK(16);
+    float x;
+    float y;
+    float z;
     if (popo_gobj != NULL) {
         Fighter* popo_fp = GET_FIGHTER(popo_gobj);
         if (popo_fp->motion_id < 347 || popo_fp->motion_id > 352) {
@@ -478,10 +481,13 @@ bool ftNn_Init_801230D0(Fighter_GObj* nana_gobj)
         }
         lb_8000B1CC(popo_fp->parts[FtPart_R4thNb].joint, NULL, &popo_vec);
         lb_8000B1CC(nana_fp->parts[FtPart_XRotN].joint, NULL, &nana_vec);
-        nana_fp->cur_pos.x = popo_vec.x + (nana_fp->cur_pos.x - nana_vec.x);
-        nana_fp->cur_pos.y = popo_vec.y + (nana_fp->cur_pos.y - nana_vec.y);
-        nana_fp->cur_pos.z = popo_vec.z + (nana_fp->cur_pos.z - nana_vec.z);
-        if (popo_fp->x2219_b6) {
+        x = nana_fp->cur_pos.x - nana_vec.x;
+        y = nana_fp->cur_pos.y - nana_vec.y;
+        z = nana_fp->cur_pos.z - nana_vec.z;
+        nana_fp->cur_pos.x = popo_vec.x + x;
+        nana_fp->cur_pos.y = popo_vec.y + y;
+        nana_fp->cur_pos.z = popo_vec.z + z;
+        if (popo_fp->x2219_b5) {
             ftAnim_SetAnimRate(nana_gobj, 0.0f);
         } else {
             if (nana_fp->frame_speed_mul != popo_fp->frame_speed_mul) {
@@ -986,7 +992,11 @@ static inline void ftPp_SpecialS_1_Coll_inline3(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
     ftNn_Init_80123B3C_inline(gobj);
-    ftCommon_8007D7FC(fp);
+    {
+        Fighter* fp2 = fp;
+        ftCommon_8007D7FC(fp2);
+    }
+    fp->self_vel.y = 0.0f;
     Fighter_ChangeMotionState(gobj, 359, 0x0C4C528A, fp->cur_anim_frame, 1.0f,
                               0.0f, NULL);
     ftNn_Init_80123B3C_inline(gobj);
@@ -1017,7 +1027,7 @@ void ftPp_SpecialS_1_Coll(Fighter_GObj* nana_gobj)
         nana_fp->cur_pos.x =
             -((1.5f * (nana_fp->mv.pp.unk_80123954.x0 * nana_fp->facing_dir)) -
               popo_fp->cur_pos.x);
-        if (!ft_800824A0(nana_gobj, &ftNn_Unk2_803CDD60)) {
+        if (ft_800824A0(nana_gobj, &ftNn_Unk2_803CDD60)) {
             ftPp_SpecialS_1_Coll_inline3(nana_gobj);
         }
     }
