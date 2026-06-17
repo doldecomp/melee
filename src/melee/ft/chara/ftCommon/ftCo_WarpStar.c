@@ -173,6 +173,9 @@ void ftCo_WarpStarFall_Coll(Fighter_GObj* gobj)
 
 void ftCo_800C4C60(Fighter_GObj* gobj)
 {
+    UNUSED unsigned char _[8];
+    Vec3 vec;
+    float param;
     Fighter* fp = GET_FIGHTER(gobj);
     fp->facing_dir = fp->mv.co.warpstar.facing_dir;
     Fighter_ChangeMotionState(gobj, ftCo_MS_JumpB, Ft_MF_None, 0, 1, 0, NULL);
@@ -183,35 +186,38 @@ void ftCo_800C4C60(Fighter_GObj* gobj)
                       fp->mv.co.jump.jump_mul;
     fp->self_vel.y *= p_ftCommonData->x438;
     fp->self_vel.z = 0;
-    fp->self_vel.y =
-        fp->co_attrs.jump_v_initial_velocity * fp->mv.co.jump.jump_mul;
     {
-        float n0 = -fp->facing_dir * p_ftCommonData->x78;
-        float n1 = fp->co_attrs.jump_h_initial_velocity * n0;
-        float n2 = fp->mv.co.jump.jump_mul * n1;
-        float n3 = fp->self_vel.x + n2;
-        float n4 = fp->co_attrs.jump_h_max_velocity * fp->mv.co.jump.jump_mul;
-        if (ABS(n3) > n4) {
-            if (n3 < 0) {
-                n3 = -n4;
+        float h_init_v = -fp->facing_dir * p_ftCommonData->x78 *
+                         fp->co_attrs.jump_h_initial_velocity;
+        float h_vel = fp->mv.co.jump.jump_mul * h_init_v;
+        float h_max_vel;
+        float v_init_v =
+            fp->co_attrs.jump_v_initial_velocity * fp->mv.co.jump.jump_mul;
+
+        fp->self_vel.y = v_init_v;
+        h_vel = fp->self_vel.x + h_vel;
+        h_max_vel = fp->co_attrs.jump_h_max_velocity * fp->mv.co.jump.jump_mul;
+
+        if (ABS(h_vel) > h_max_vel) {
+            if (h_vel < 0) {
+                h_vel = -h_max_vel;
             } else {
-                n3 = n4;
+                h_vel = h_max_vel;
             }
         }
-        fp->self_vel.x = n3;
+        fp->self_vel.x = h_vel;
     }
     it_802947CC(fp->item_gobj, &fp->cur_pos);
     {
-        Vec3 vec;
         vec.x = 0;
         vec.y = fp->coll_data.ecb.bottom.y;
         vec.z = 0;
         vec.x += fp->cur_pos.x;
         vec.y += fp->cur_pos.y;
-        vec.z = 0 + fp->cur_pos.z;
+        vec.z += fp->cur_pos.z;
         {
-            float param = atan2f(-fp->coll_data.floor.normal.x,
-                                 fp->coll_data.floor.normal.y);
+            param = atan2f(-fp->coll_data.floor.normal.x,
+                           fp->coll_data.floor.normal.y);
             efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, 1030, NULL, &vec,
                           &param);
         }
