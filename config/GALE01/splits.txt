@@ -2586,9 +2586,9 @@ melee/gr/grgreatbay.c:
 
 melee/gr/gricemt.c:
 	.text       start:0x801F6868 end:0x801FA908
-	.rodata     start:0x803B8220 end:0x803B8268
-	.data       start:0x803E4068 end:0x803E48C8
-	.sdata      start:0x804D4710 end:0x804D4748
+	.rodata     start:0x803B8220 end:0x803B8266
+	.data       start:0x803E4068 end:0x803E48C5
+	.sdata      start:0x804D4710 end:0x804D4742
 	.sbss       start:0x804D69E8 end:0x804D69F8
 	.sdata2     start:0x804DB570 end:0x804DB5C0
 
