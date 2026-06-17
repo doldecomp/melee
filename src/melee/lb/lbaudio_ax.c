@@ -105,7 +105,7 @@ void fn_80023254(s32 arg0)
     int* arr_b44;
     int* local_ptr;
     s8(*arr_5d0)[4];
-    int(*arr_4e4)[2];
+    int (*arr_4e4)[2];
     int count;
     int j;
     int n;
@@ -125,7 +125,7 @@ void fn_80023254(s32 arg0)
     for (count = 0; count <= 0x37; count++) {
         local_ptr = local_arr;
         arr_5d0 = (s8(*)[4])(base + 0x2D0);
-        arr_4e4 = (int(*)[2])(base + 0x11E4);
+        arr_4e4 = (int (*)[2])(base + 0x11E4);
         j = 0;
 
         do {
@@ -136,7 +136,7 @@ void fn_80023254(s32 arg0)
                 goto next;
             }
 
-            if ((u32) ((int(*)[2])(base + 0x11E4))[*arr_b44][0] >=
+            if ((u32) ((int (*)[2])(base + 0x11E4))[*arr_b44][0] >=
                 (u32) (*arr_4e4)[0])
             {
                 goto next;
@@ -172,7 +172,7 @@ s32 lbAudioAx_800233EC(s32 arg0)
 
     if (fn_80026E58(0x21) == 1) {
         if (arg0 >= 0 && arg0 < 0x83D60) {
-            int(*ranges)[2] = (int(*)[2])(base + 0x5D4);
+            int (*ranges)[2] = (int (*)[2])(base + 0x5D4);
             for (slot = 0; slot < 0x37; slot++) {
                 if (ranges[slot][0] <= arg0 && arg0 <= ranges[slot][1]) {
                     break;
@@ -212,7 +212,7 @@ s32 lbAudioAx_800233EC(s32 arg0)
     }
 
     if (arg0 >= 0 && arg0 < 0x83D60) {
-        int(*ranges)[2] = (int(*)[2])(base + 0x5D4);
+        int (*ranges)[2] = (int (*)[2])(base + 0x5D4);
         for (slot = 0; slot < 0x37; slot++) {
             if (ranges[slot][0] <= arg0 && arg0 <= ranges[slot][1]) {
                 break;
@@ -2062,7 +2062,7 @@ void fn_800267B0(void)
     s8(*arr_5d0)[4];
     int* arr_194;
     int* arr_354;
-    int(*arr_4e4)[2];
+    int (*arr_4e4)[2];
     int j;
     int i;
 
@@ -2115,7 +2115,7 @@ void fn_800268B4(void)
 {
     int* arr_38a4;
     int* arr_3984;
-    int(*arr_4e4)[2];
+    int (*arr_4e4)[2];
     int i;
 
     lbl_804D6450 = 0;
