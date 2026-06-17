@@ -1110,43 +1110,45 @@ void fn_801F8C64(Item_GObj* gobj, Ground* u1, Vec3* u2, HSD_GObj* u3, f32 u4)
 void grIceMt_801F8CDC(Ground_GObj* gobj, s16* joint_indices, int block_num,
                       HSD_GObj** output_array)
 {
-    Ground* gp = gobj->user_data;
-    int i;
-    void* jobj_desc;
-    HSD_JObj* parent_jobjs[20];
-    HSD_JObj* coll_jobj;
-    HSD_JObj* block_jobj;
-    Item_GObj* item;
-    UnkArchiveStruct* archive;
-    u8 unused[24];
+    PAD_STACK(4 * 4);
+    {
+        Ground* gp = GET_GROUND(gobj);
+        int i;
+        void* jobj_desc;
+        HSD_JObj* parent_jobjs[20];
+        HSD_JObj* coll_jobj;
+        HSD_JObj* block_jobj;
+        Item_GObj* item;
+        UnkArchiveStruct* archive;
 
-    archive = grDatFiles_801C6324();
-    jobj_desc = archive->unk4->unk8[7].unk0;
+        archive = grDatFiles_801C6324();
+        jobj_desc = archive->unk4->unk8[7].unk0;
 
-    HSD_ASSERT(2004, block_num<=BLOCK_COLL_JOBJ_MAX);
+        HSD_ASSERT(2004, block_num<=BLOCK_COLL_JOBJ_MAX);
 
-    for (i = 0; i < block_num; i++) {
-        parent_jobjs[i] = Ground_801C3FA4(gobj, joint_indices[i]);
-    }
-
-    for (i = 0; i < block_num; i++) {
-        coll_jobj = parent_jobjs[i];
-        HSD_ASSERT(0x7E3, coll_jobj);
-
-        block_jobj = HSD_JObjLoadJoint(jobj_desc);
-        HSD_ASSERT(0x7E6, block_jobj);
-
-        HSD_JObjAddChild(coll_jobj, block_jobj);
-
-        item =
-            grMaterial_801C8CFC(8, 0, gp, coll_jobj, NULL, fn_801F8C64, NULL);
-        if (item != NULL) {
-            grMaterial_801C8DE0(item, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f,
-                                6.0f);
-            grMaterial_801C8E08(item);
-            grMaterial_801C8E68(item, 0);
+        for (i = 0; i < block_num; i++) {
+            parent_jobjs[i] = Ground_801C3FA4(gobj, joint_indices[i]);
         }
-        output_array[i] = item;
+
+        for (i = 0; i < block_num; i++) {
+            coll_jobj = parent_jobjs[i];
+            HSD_ASSERT(0x7E3, coll_jobj);
+
+            block_jobj = HSD_JObjLoadJoint(jobj_desc);
+            HSD_ASSERT(0x7E6, block_jobj);
+
+            HSD_JObjAddChild(coll_jobj, block_jobj);
+
+            item = grMaterial_801C8CFC(8, 0, gp, coll_jobj, NULL, fn_801F8C64,
+                                       NULL);
+            if (item != NULL) {
+                grMaterial_801C8DE0(item, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f,
+                                    6.0f);
+                grMaterial_801C8E08(item);
+                grMaterial_801C8E68(item, 0);
+            }
+            output_array[i] = item;
+        }
     }
 }
 
