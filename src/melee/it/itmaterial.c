@@ -83,14 +83,14 @@ void fn_80277D8C(HSD_MObj* mobj, u32 rendermode_arg, u32 unused_arg)
     }
     tobj1_ptr = NULL;
     tobj2 = mobj->tobj;
-    if ((rendermode & 0x04000000) && tobj_shadows) {
+    if ((rendermode & RENDER_SHADOW) && tobj_shadows != NULL) {
         tobj1_ptr = &tobj2;
         while (*tobj1_ptr != NULL) {
             tobj1_ptr = &(*tobj1_ptr)->next;
         }
         *tobj1_ptr = tobj_shadows;
     }
-    if ((rendermode & 0x1000) && (tobj_toon != NULL) &&
+    if ((rendermode & RENDER_TOON) && (tobj_toon != NULL) &&
         (tobj_toon->imagedesc != NULL))
     {
         tobj_toon->next = tobj2;
@@ -101,10 +101,10 @@ void fn_80277D8C(HSD_MObj* mobj, u32 rendermode_arg, u32 unused_arg)
     HSD_MOBJ_METHOD(mobj)->setup_tev(mobj, tobj2, rendermode);
     it_80278108(item, mobj, it_80277F90(item, mobj, &sp38));
     if (item->x5C9 != 0xFF) {
-        rendermode |= 0x60000000;
+        rendermode |= RENDER_BLENDING;
     }
     if (item->xDCF_flag.b4 && !item->xDCF_flag.b5) {
-        rendermode |= 0x20000000;
+        rendermode |= RENDER_NO_ZUPDATE;
     }
     if (item->xDCF_flag.b5 && (item->x5C9 == 0xFF)) {
         pe_desc.flags = 0x38;
@@ -131,7 +131,7 @@ void fn_80277D8C(HSD_MObj* mobj, u32 rendermode_arg, u32 unused_arg)
 
 HSD_TExp* it_80277F90(Item* item, HSD_MObj* mobj, HSD_TExp* arg2)
 {
-    HSD_TevDesc sp14;
+    HSD_TevDesc desc;
     struct it_MObjInfo* info = &it_mobj;
     s32 reg;
     int chk;
@@ -148,20 +148,20 @@ HSD_TExp* it_80277F90(Item* item, HSD_MObj* mobj, HSD_TExp* arg2)
         arg2->cnst.reg = reg;
         arg2->cnst.val = &item->x548_colorOverlay.x50_light_color;
         HSD_TExpSetReg(arg2);
-        sp14 = info->tevdesc_tmpl;
-        sp14.stage = HSD_StateAssignTev();
-        sp14.color = 2;
-        sp14.u.tevconf.clr_a = GX_CC_ZERO;
-        sp14.u.tevconf.clr_b = lb_8000CC8C(reg);
-        sp14.u.tevconf.clr_c = GX_CC_RASA;
-        sp14.u.tevconf.clr_d = chk = 0;
+        desc = info->tevdesc_tmpl;
+        desc.stage = HSD_StateAssignTev();
+        desc.color = 2;
+        desc.u.tevconf.clr_a = GX_CC_ZERO;
+        desc.u.tevconf.clr_b = lb_8000CC8C(reg);
+        desc.u.tevconf.clr_c = GX_CC_RASA;
+        desc.u.tevconf.clr_d = chk = 0;
         if (reg < 4) {
             chk = 1;
         }
         if (chk) {
-            sp14.u.tevconf.kcsel = lb_8000CCA4(reg);
+            desc.u.tevconf.kcsel = lb_8000CCA4(reg);
         }
-        HSD_SetupTevStage(&sp14);
+        HSD_SetupTevStage(&desc);
         return arg2;
     }
     return NULL;

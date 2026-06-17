@@ -756,6 +756,7 @@ void ftCo_GuardSetOff_Anim(Fighter_GObj* gobj)
         ftCo_80091D58_inline(fp);
     }
 }
+#pragma pop
 
 void ftCo_GuardSetOff_IASA(Fighter_GObj* gobj) {}
 
