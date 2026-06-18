@@ -148,7 +148,7 @@ void un_803182D4_OnFrame(void)
     }
 }
 
-void un_8031830C(TySortElem* base, s32 lo, s32 hi)
+inline void quicksort(TySortElem* base, s32 lo, s32 hi)
 {
     TySortElem tmp;
     PAD_STACK(16);
@@ -214,7 +214,7 @@ void un_8031830C(TySortElem* base, s32 lo, s32 hi)
         }
 
         if (pivot + 1 < hi) {
-            s32 mid3 = (1 + pivot + hi) / 2;
+            s32 mid3 = (pivot + hi + 1) / 2;
             s32 pivot3;
 
             if (pivot + 1 != mid3) {
@@ -247,108 +247,16 @@ void un_8031830C(TySortElem* base, s32 lo, s32 hi)
     }
 }
 
+void un_8031830C(TySortElem* base, s32 lo, s32 hi)
+{
+    PAD_STACK(16);
+    quicksort(base, lo, hi);
+}
+
 void un_80318714(TySortElem* base, s32 lo, s32 hi)
 {
-    typedef struct TySortElemInt {
-        s32 key;
-        s32 val;
-    } TySortElemInt;
-    TySortElemInt* sort = (TySortElemInt*) base;
-    TySortElemInt tmp;
     PAD_STACK(16);
-
-    if (lo < hi) {
-        s32 mid = (lo + hi) / 2;
-        s32 pivot, i;
-
-        if (lo != mid) {
-            tmp = sort[lo];
-            sort[lo] = sort[mid];
-            sort[mid] = tmp;
-        }
-
-        pivot = lo;
-        for (i = lo + 1; i <= hi; i++) {
-            if (sort[i].val > sort[lo].val) {
-                pivot++;
-                if (pivot != i) {
-                    tmp = sort[pivot];
-                    sort[pivot] = sort[i];
-                    sort[i] = tmp;
-                }
-            }
-        }
-
-        if (lo != pivot) {
-            tmp = sort[lo];
-            sort[lo] = sort[pivot];
-            sort[pivot] = tmp;
-        }
-
-        if (lo < pivot - 1) {
-            s32 mid2 = (pivot + lo - 1) / 2;
-            s32 pivot2;
-
-            if (lo != mid2) {
-                tmp = sort[lo];
-                sort[lo] = sort[mid2];
-                sort[mid2] = tmp;
-            }
-
-            pivot2 = lo;
-            for (i = lo + 1; i <= pivot - 1; i++) {
-                if (sort[i].val > sort[lo].val) {
-                    pivot2++;
-                    if (pivot2 != i) {
-                        tmp = sort[pivot2];
-                        sort[pivot2] = sort[i];
-                        sort[i] = tmp;
-                    }
-                }
-            }
-
-            if (lo != pivot2) {
-                tmp = sort[lo];
-                sort[lo] = sort[pivot2];
-                sort[pivot2] = tmp;
-            }
-
-            un_80318714(base, lo, pivot2 - 1);
-            un_80318714(base, pivot2 + 1, pivot - 1);
-        }
-
-        if (pivot + 1 < hi) {
-            s32 mid3 = (1 + pivot + hi) / 2;
-            s32 pivot3;
-
-            if (pivot + 1 != mid3) {
-                tmp = sort[pivot + 1];
-                sort[pivot + 1] = sort[mid3];
-                sort[mid3] = tmp;
-            }
-
-            pivot3 = pivot + 1;
-            for (i = pivot + 2; i <= hi; i++) {
-                if (sort[i].val > sort[pivot + 1].val) {
-                    pivot3++;
-                    if (pivot3 != i) {
-                        tmp = sort[pivot3];
-                        sort[pivot3] = sort[i];
-                        sort[i] = tmp;
-                    }
-                }
-            }
-
-            if (pivot + 1 != pivot3) {
-                tmp = sort[pivot + 1];
-                sort[pivot + 1] = sort[pivot3];
-                sort[pivot3] = tmp;
-            }
-
-            un_80318714(base, pivot + 1, pivot3 - 1);
-            un_80318714(base, pivot3 + 1, hi);
-        }
-    }
+    quicksort(base, lo, hi);
 }
 
 extern TyDspGrid* un_804D6F14;
@@ -993,21 +901,6 @@ void un_80319994(s32 arg0)
     }
 }
 
-static inline void un_80319EF0_set_z(TyDspGrid* grid, Vec3* interest,
-                                     Vec3* eyepos)
-{
-    {
-        f32 zmin = grid->x08_min_z;
-        f32 zrange = grid->x10_max_z - zmin;
-        if (zrange < 0.0f) {
-            zrange = -zrange;
-        }
-        interest->z = zrange * 0.5f + zmin;
-    }
-    *eyepos = *interest;
-    interest->z -= 10.0f;
-}
-
 void un_80319EF0(void)
 {
     Vec3 interest;
@@ -1015,15 +908,13 @@ void un_80319EF0(void)
     Vec3 eyepos;
     TyDspGrid* grid = un_804D6F14;
     TyDspConfig* cfg = un_804D6F18;
-    TyDspBgData* bg;
+    TyDspBgData* bg = un_804D6F1C;
     HSD_CObj* cobj;
     f32 range;
     f32 scale;
     PAD_STACK(16);
 
     cobj = (HSD_CObj*) cfg->x00->hsd_obj;
-    bg = un_804D6F1C;
-
     range = grid->x0C_max_x - grid->x04_min_x;
     if (range < 0.0f) {
         range = -range;
@@ -1033,7 +924,16 @@ void un_80319EF0(void)
         interest.x = 0.0f;
     }
     interest.y = 0.0f;
-    un_80319EF0_set_z(grid, &interest, &eyepos);
+    {
+        f32 zmin = grid->x08_min_z;
+        f32 zrange = grid->x10_max_z - zmin;
+        if (zrange < 0.0f) {
+            zrange = -zrange;
+        }
+        interest.z = zrange * 0.5f + zmin;
+    }
+    eyepos = interest;
+    interest.z -= 10.0f;
     cfg->x5C = interest;
     HSD_CObjGetEyePosition(cobj, &sp28);
     sp28.x = eyepos.x;
