@@ -579,8 +579,8 @@ void grFlatzone_802174EC(Ground_GObj* gobj)
                 if ((u8) gp->gv.pad_0[6] == (u8) next_anim) {
                     continue;
                 }
-                row_entry = tbl[(u8) gp->gv.pad_0[3] * 10 +
-                                (u8) gp->gv.pad_0[5]];
+                row_entry =
+                    tbl[(u8) gp->gv.pad_0[3] * 10 + (u8) gp->gv.pad_0[5]];
                 if (row_entry != -1) {
                     break;
                 }
