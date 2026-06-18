@@ -2759,14 +2759,14 @@ void lbAudioAx_8002838C(void)
     fn_80023254(4);
     ptr = lbl_803BB300 + ((*(volatile int*) ((char*) lbl_80433B44)) << 3);
     lbl_804D6444 += *(int*) (ptr + 0x11E4);
-    ptr = lbl_803BB300 +
-          ((*(volatile int*) ((char*) lbl_80433B44 + 0x4)) << 3);
+    ptr =
+        lbl_803BB300 + ((*(volatile int*) ((char*) lbl_80433B44 + 0x4)) << 3);
     lbl_804D6444 += *(int*) (ptr + 0x11E4);
-    ptr = lbl_803BB300 +
-          ((*(volatile int*) ((char*) lbl_80433B44 + 0x8)) << 3);
+    ptr =
+        lbl_803BB300 + ((*(volatile int*) ((char*) lbl_80433B44 + 0x8)) << 3);
     lbl_804D6444 += *(int*) (ptr + 0x11E4);
-    ptr = lbl_803BB300 +
-          ((*(volatile int*) ((char*) lbl_80433B44 + 0xC)) << 3);
+    ptr =
+        lbl_803BB300 + ((*(volatile int*) ((char*) lbl_80433B44 + 0xC)) << 3);
     lbl_804D6444 += *(int*) (ptr + 0x11E4);
 
     fn_80023254(5);
@@ -2782,14 +2782,14 @@ void lbAudioAx_8002838C(void)
     rvbStd.time = 1.88f;
     HSD_ASSERT(0xF6E, HSD_AudioGetAuxHeapSize(AXDRIVER_AUX_REVERB_STD, &rvbStd) < 53*1024);
 
-    AXDriver_8038E30C(0, 2, &rvbStd,
-                      (u8*) ((char*) lbl_80433B44 + 0x120), 0xD400);
+    AXDriver_8038E30C(0, 2, &rvbStd, (u8*) ((char*) lbl_80433B44 + 0x120),
+                      0xD400);
 
     AXDriver_8038E37C(AXDRIVER_AUX_DELAY, &delay);
     HSD_ASSERT(0xF72, HSD_AudioGetAuxHeapSize(AXDRIVER_AUX_REVERB_STD, &delay) < 71*1024);
 
-    AXDriver_8038E30C(1, 4, &delay,
-                      (u8*) ((char*) lbl_80433B44 + 0xD520), 0x11C00);
+    AXDriver_8038E30C(1, 4, &delay, (u8*) ((char*) lbl_80433B44 + 0xD520),
+                      0x11C00);
 
     HSD_SynthSFXAllocateBank(lbl_804D643C);
     HSD_SynthSFXAllocateBank(lbl_804D6440);
