@@ -122,4 +122,9 @@ typedef enum {
     /* 64 */ StatsAttack_Count,
 } plStats_Attack;
 
+typedef enum PlATK {
+    PlATK_AttackNormal_Start = 1,
+    PlATK_AttackNormal_End = 16,
+} PlATK;
+
 #endif

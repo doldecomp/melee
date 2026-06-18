@@ -399,7 +399,9 @@ struct gmm_x0 {
     /* 0x17C0 */ VsModeData unk_1710; ///< opening movie?
     /* 0x1850 */ GameRules x1850;
     /* 0x1898 */ struct gmm_x1868 thing;
-}; /* size = 0x6E80 */
+    /* 0x6E50 */ u8 pad_6E50[0x8518 - 0x6E50];
+};
+STATIC_ASSERT(sizeof(struct gmm_x0) == 0x8518);
 
 struct lbl_8046B6A0_24C_t {
     UNK_T x0;
@@ -1040,5 +1042,24 @@ typedef struct TrainingModeState {
     /* 0x104 */ s32 result_cache[4];
     /* 0x114 */ CssSubStruct css;
 } TrainingModeState;
+
+struct TrainingMenuData {
+    u8 pad_x0[0x6 - 0x0];
+    s16 x6;
+    u8 pad_x8[0x14 - 0x8];
+    PlayerInitData players[6];
+    HSD_GObj* xA4;
+    HSD_JObj* xA8[39];
+    u32 x144[39];
+    u32 x1E0;
+    u32 x1E4;
+    u32 x1E8;
+    u32 x1EC;
+    u32 x1F0;
+    u32 x1F4;
+    u32 x1F8;
+    HSD_Text* x1FC;
+    u32 x200;
+}; /// 80473814
 
 #endif

@@ -25,17 +25,19 @@
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/types.h"
 #include "ftSandbag/ftSb_Init.h"
-#include "lb/lbrefract.h"
 
 #include <common_structs.h>
 #include <math.h>
 #include <math_ppc.h>
+#include <trigf.h>
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 
 /* 097040 */ static void ftCo_800976A4(Fighter_GObj* gobj);
 /* 0972E8 */ static void ftCo_8009794C(Fighter_GObj* gobj);
 /* 097490 */ static void ftCo_80097AF4(Fighter_GObj* gobj);
+
+enum_t ftCo_DownBound_SfxIds[] = { 9, 10, 11, 12 };
 
 bool ftCo_80097570(Fighter_GObj* gobj)
 {
@@ -238,7 +240,7 @@ void ftCo_DownBound_Phys(Fighter_GObj* arg0)
 
 void ftCo_DownBound_Coll(Fighter_GObj* gobj)
 {
-    u8 _[8] = { 0 };
+    PAD_STACK(8);
     if (ft_80082708(gobj) == GA_Ground) {
         ftCo_Fall_Enter(gobj);
     } else {

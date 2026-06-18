@@ -72,7 +72,7 @@ s32 HSD_LObjGetLightMaskSpecular(void)
 
 u32 HSD_LObjGetType(HSD_LObj* lobj)
 {
-    return lobj->flags & 0x3;
+    return lobj->flags & LOBJ_TYPE_MASK;
 }
 
 void HSD_LObjSetActive(HSD_LObj* lobj)
