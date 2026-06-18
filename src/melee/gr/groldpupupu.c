@@ -371,7 +371,8 @@ void grOldPupupu_80210D10(Ground_GObj* gobj)
             HSD_GObj* spawn;
             spawn = grOldPupupu_802108B4_noinline(2);
             if (spawn != NULL) {
-                HSD_ASSERTMSG(0x216, (jobj = spawn->hsd_obj), "jobj");
+                jobj = spawn->hsd_obj;
+                HSD_ASSERT(0x216, jobj);
                 HSD_JObjSetTranslateX(jobj, direction * x);
                 HSD_JObjSetTranslateY(jobj, y);
                 HSD_JObjSetTranslateZ(jobj, -150.0F * direction);
