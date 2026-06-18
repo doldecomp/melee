@@ -1,17 +1,5 @@
 #include <dolphin.h>
-#define __THPDecompressiMCURow640x480 __THPDecompressiMCURow640x480_proto
-#define __THPDecompressiMCURowNxN __THPDecompressiMCURowNxN_proto
-#define __THPReadFrameHeader __THPReadFrameHeader_proto
-#define THPDec_80330158 THPDec_80330158_proto
-#define THPDec_80331340 THPDec_80331340_proto
-#define THPDec_803313D0 THPDec_803313D0_proto
 #include <dolphin/thp/thp.h>
-#undef THPDec_803313D0
-#undef THPDec_80331340
-#undef THPDec_80330158
-#undef __THPReadFrameHeader
-#undef __THPDecompressiMCURowNxN
-#undef __THPDecompressiMCURow640x480
 
 static const u8 __THPJpegNaturalOrder[80] = {
     0,  1,  8,  16, 9,  2,  3,  10, 17, 24, 32, 25, 18, 11, 4,  5,
@@ -39,9 +27,8 @@ static u16* __THPHuffmanCodeTab;
 static THPSample* Gbase ATTRIBUTE_ALIGN(32);
 static u32 Gwid ATTRIBUTE_ALIGN(32);
 static f32* Gq ATTRIBUTE_ALIGN(32);
+static u8* __THPLCWork512[3];
 extern u8* __THPLCWork672[3];
-static u8* THPDec_804A7400[31];
-static u8* THPDec_804A747C[3];
 static u32 __THPOldGQR5;
 static u32 __THPOldGQR6;
 static u8* __THPWorkArea;
@@ -67,13 +54,6 @@ typedef struct THPFileInfoMCUBufferView {
 } THPFileInfoMCUBufferView;
 
 #define THPROUNDUP(a, b) ((((s32) (a)) + ((s32) (b) - 1L)) / ((s32) (b)))
-
-static void __THPDecompressiMCURow640x480(THPFileInfo* info);
-static void __THPDecompressiMCURowNxN(THPFileInfo* info, u32 x);
-static u8 __THPReadFrameHeader(THPFileInfo* info);
-u8 THPDec_80330158(THPFileInfo* info);
-void THPDec_80331340(s32, void*, void*, void*);
-void THPDec_803313D0(s32, void*, void*, void*, u32);
 
 void __THPPrepBitStream(THPFileInfo* info)
 {
@@ -339,6 +319,17 @@ typedef struct THPVideoDecodeInfoView {
     u8* x904;
 } THPVideoDecodeInfoView;
 
+/**
+ * Decodes a THP video file.
+ *
+ * @param file   Pointer to the THP video file.
+ * @param tileY  Pointer to the output tile for Y component.
+ * @param tileU  Pointer to the output tile for U component.
+ * @param tileV  Pointer to the output tile for V component.
+ * @param work   Pointer to the work area.
+ * @return       Error code indicating the success or failure of the decoding
+ * process.
+ */
 s32 THPVideoDecode(void* file, void* tileY, void* tileU, void* tileV,
                    void* workArea)
 {
@@ -1736,7 +1727,7 @@ static void __THPDecompressiMCURow512x448(void)
         __THPHuffDecodeDCTCompV(__THPInfo, __THPMCUBuffer[5]);
 
         comp = &__THPInfo->components[0];
-        Gbase = THPDec_804A7400[28];
+        Gbase = __THPLCWork512[0];
         Gwid = 512;
         Gq = __THPInfo->quantTabs[comp->quantizationTableSelector];
         x_pos = (u32) (cl_num * 16);
@@ -1746,13 +1737,13 @@ static void __THPDecompressiMCURow512x448(void)
         __THPInverseDCTY8(__THPMCUBuffer[3], x_pos + 8);
 
         comp = &__THPInfo->components[1];
-        Gbase = THPDec_804A7400[29];
+        Gbase = __THPLCWork512[1];
         Gwid = 256;
         Gq = __THPInfo->quantTabs[comp->quantizationTableSelector];
         x_pos /= 2;
         __THPInverseDCTNoYPos(__THPMCUBuffer[4], x_pos);
         comp = &__THPInfo->components[2];
-        Gbase = THPDec_804A7400[30];
+        Gbase = __THPLCWork512[2];
         Gq = __THPInfo->quantTabs[comp->quantizationTableSelector];
         __THPInverseDCTNoYPos(__THPMCUBuffer[5], x_pos);
 
@@ -1772,9 +1763,9 @@ static void __THPDecompressiMCURow512x448(void)
         }
     }
 
-    LCStoreData(__THPInfo->dLC[0], THPDec_804A7400[28], 0x2000);
-    LCStoreData(__THPInfo->dLC[1], THPDec_804A7400[29], 0x800);
-    LCStoreData(__THPInfo->dLC[2], THPDec_804A7400[30], 0x800);
+    LCStoreData(__THPInfo->dLC[0], __THPLCWork512[0], 0x2000);
+    LCStoreData(__THPInfo->dLC[1], __THPLCWork512[1], 0x800);
+    LCStoreData(__THPInfo->dLC[2], __THPLCWork512[2], 0x800);
 
     __THPInfo->dLC[0] += 0x2000;
     __THPInfo->dLC[1] += 0x800;
@@ -2881,153 +2872,29 @@ static inline void OSInitFastCast(void) {
 // clang-format off
 
 
-typedef struct THPLCWorkInfo {
-    u32 id;
-    u32 size;
-} THPLCWorkInfo;
-
-static THPLCWorkInfo THPDec_80400B80[5] = {
-    { 0, 0x1000 }, { 1, 0x400 }, { 2, 0x400 }, { 3, 0x400 }, { 4, 0x400 },
-};
-
-static THPLCWorkInfo THPDec_80400BA8[9] = {
-    { 0, 0x1000 }, { 1, 0x200 }, { 2, 0x200 }, { 3, 0x200 }, { 4, 0x200 },
-    { 5, 0x200 },  { 6, 0x200 }, { 7, 0x200 }, { 8, 0x200 },
-};
-
-asm BOOL THPInit(void)
+BOOL THPInit(void)
 {
-    nofralloc
+    u8* base;
+    //OSRegisterVersion(__THPVersion);
+    base = (u8*)(0xE000 << 16);
 
-    mflr r0
-    lis r4, THPDec_804A7400@ha
-    stw r0, 4(r1)
-    stwu r1, -16(r1)
-    stw r31, 12(r1)
-    addi r31, r4, THPDec_804A7400@l
-    bl PPCMfhid2
-    rlwinm. r0, r3, 0, 3, 3
-    bne _skip_lc_enable
-    lis r3, 0xE000
-    li r4, 0x4000
-    bl DCInvalidateRange
-    bl LCEnable
+    __THPLCWork512[0] = base;
+    base += 0x2000;
+    __THPLCWork512[1] = base;
+    base += 0x800;
+    __THPLCWork512[2] = base;
+    base += 0x200;
 
-_skip_lc_enable:
-    lis r10, 0xE000
-    lis r4, THPDec_80400B80@ha
-    stw r10, 0(r31)
-    addi r9, r4, THPDec_80400B80@l
-    lwz r0, 4(r9)
-    add r10, r10, r0
-    stw r10, 4(r31)
-    lwz r0, 12(r9)
-    add r10, r10, r0
-    stw r10, 8(r31)
-    lwz r0, 20(r9)
-    add r10, r10, r0
-    stw r10, 12(r31)
-    lwz r0, 28(r9)
-    add r10, r10, r0
-    stw r10, 16(r31)
-    lwz r0, 36(r9)
-    add r10, r10, r0
-    stw r10, 20(r31)
-    lis r4, THPDec_80400BA8@ha
-    addi r5, r4, THPDec_80400BA8@l
-    lwz r0, 4(r9)
-    add r10, r10, r0
-    stw r10, 24(r31)
-    lwz r0, 12(r9)
-    add r10, r10, r0
-    stw r10, 28(r31)
-    lwz r0, 20(r9)
-    add r10, r10, r0
-    stw r10, 32(r31)
-    lwz r0, 28(r9)
-    add r10, r10, r0
-    stw r10, 36(r31)
-    lis r10, 0xE000
-    stw r10, 40(r31)
-    lwz r0, 4(r5)
-    add r10, r10, r0
-    stw r10, 44(r31)
-    lwz r0, 12(r5)
-    add r10, r10, r0
-    stw r10, 48(r31)
-    lwz r0, 20(r5)
-    add r10, r10, r0
-    stw r10, 52(r31)
-    lwz r0, 28(r5)
-    add r10, r10, r0
-    stw r10, 56(r31)
-    lwz r0, 36(r5)
-    add r10, r10, r0
-    stw r10, 60(r31)
-    lwz r0, 44(r5)
-    add r10, r10, r0
-    stw r10, 64(r31)
-    lwz r0, 52(r5)
-    add r10, r10, r0
-    stw r10, 68(r31)
-    lwz r0, 60(r5)
-    add r10, r10, r0
-    stw r10, 72(r31)
-    lwz r0, 68(r5)
-    add r10, r10, r0
-    addi r7, r31, 36
-    stw r10, 40(r7)
-    lwz r0, 4(r5)
-    add r10, r10, r0
-    stw r10, 44(r7)
-    lwz r0, 12(r5)
-    add r10, r10, r0
-    stw r10, 48(r7)
-    lwz r0, 20(r5)
-    add r10, r10, r0
-    stw r10, 52(r7)
-    lwz r0, 28(r5)
-    add r10, r10, r0
-    stw r10, 56(r7)
-    lwz r0, 36(r5)
-    add r10, r10, r0
-    stw r10, 60(r7)
-    lwz r0, 44(r5)
-    add r10, r10, r0
-    stw r10, 64(r7)
-    lwz r0, 52(r5)
-    add r10, r10, r0
-    stw r10, 68(r7)
-    lwz r0, 60(r5)
-    add r10, r10, r0
-    stw r10, 72(r7)
-    lis r10, 0xE000
-    stw r10, 112(r31)
-    addi r10, r10, 0x2000
-    stw r10, 116(r31)
-    addi r10, r10, 0x800
-    stw r10, 120(r31)
-    lis r10, 0xE000
-    stw r10, 124(r31)
-    addi r10, r10, 0x2800
-    stw r10, 128(r31)
-    addi r10, r10, 0xA00
-    stw r10, 132(r31)
-    li r3, OS_GQR_U8
-    oris r3, r3, OS_GQR_U8
-    mtspr GQR2, r3
-    li r3, OS_GQR_U16
-    oris r3, r3, OS_GQR_U16
-    mtspr GQR3, r3
-    li r3, OS_GQR_S8
-    oris r3, r3, OS_GQR_S8
-    mtspr GQR4, r3
-    li r3, OS_GQR_S16
-    oris r3, r3, OS_GQR_S16
-    mtspr GQR5, r3
-    lwz r0, 20(r1)
-    lwz r31, 12(r1)
-    addi r1, r1, 16
-    mtlr r0
-    blr
+    base              = (u8*)(0xE000 << 16);
+    __THPLCWork672[0] = base;
+    base += 0x2A00;
+    __THPLCWork672[1] = base;
+    base += 0xA80;
+    __THPLCWork672[2] = base;
+    base += 0xA80;
+
+    //OSInitFastCast();
+
+    __THPInitFlag = TRUE;
+    return TRUE;
 }

@@ -295,9 +295,6 @@ typedef struct {
     void* x14;
 } Ty25Entry;
 
-static const f32 un_804DDCE4 = -3000.0F;
-static const f32 un_804DDCE8 = 3000.0F;
-
 s32 un_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
 {
     s32 obtained_arr[293];
@@ -1730,12 +1727,9 @@ void un_8030715C(f32 cstick_x, f32 cstick_y)
     PSVECScale(&left_vec, &left_vec, cstick_x);
     PSVECAdd(&left_vec, &new_interest, &new_interest);
 
-    if (new_interest.x <= *(f32 const*) &un_804DDCE4 ||
-        new_interest.y <= *(f32 const*) &un_804DDCE4 ||
-        new_interest.z <= *(f32 const*) &un_804DDCE4 ||
-        new_interest.x >= *(f32 const*) &un_804DDCE8 ||
-        new_interest.y >= *(f32 const*) &un_804DDCE8 ||
-        new_interest.z >= *(f32 const*) &un_804DDCE8)
+    if (new_interest.x <= -3000.0F || new_interest.y <= -3000.0F ||
+        new_interest.z <= -3000.0F || new_interest.x >= 3000.0F ||
+        new_interest.y >= 3000.0F || new_interest.z >= 3000.0F)
     {
         return;
     }
@@ -1964,8 +1958,6 @@ void un_80307828(int arg0)
 
     PAD_STACK(12);
 }
-
-/* 99.7% match */
 
 void un_803078E4(void)
 {
@@ -5171,7 +5163,6 @@ void un_80310324(void)
     ToyGlobalsS_* tg6;
     ToySubStructS_* sub;
     s32 sp[4];
-    UNUSED u8 sp_pad[8];
     s32 i;
     s32 one;
     s16 idx;
@@ -5181,6 +5172,8 @@ void un_80310324(void)
     HSD_GObj* gobj;
     u16* flags;
     f32 two;
+
+    PAD_STACK(8);
 
     data = un_803FDD18;
     toy = TOY_DATA;
