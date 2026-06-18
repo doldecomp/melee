@@ -1,9 +1,5 @@
 #include "lbaudio_ax.static.h"
 
-#include "math.h"
-
-#include "baselib/debug.h"
-
 #include "baselib/forward.h"
 
 #include "baselib/random.h"
@@ -30,14 +26,7 @@
 #include <melee/lb/lblanguage.h>
 #include <melee/pl/player.h>
 
-extern s8 flags_arr_803BB800[0x62];
-
 typedef bool (*lbl_803BCA24_fn)(HSD_GObj*);
-
-lbl_803BCA24_fn lbl_803BCA24[] = {
-    fn_800251EC, fn_800253D8, fn_800256BC, fn_800259A0, fn_800259EC,
-    fn_80025A98, fn_80025B44, fn_80025CBC, fn_80025E38, fn_80025E38,
-};
 
 int lbAudioAx_8002305C(int arg0, int arg1)
 {
@@ -373,7 +362,7 @@ s32 lbAudioAx_80023B24(s32 arg0)
     s32 off;
 
     if (arg0 >= 0 && arg0 < 0x83D60) {
-        int (*ranges)[2] = (int (*)[2])(lbl_803BB300 + 0x5D4);
+        int (*ranges)[2] = s32_arr_803BB8D4;
         for (slot = 0; slot < 0x37; slot++, ranges++) {
             if ((*ranges)[0] <= arg0 && arg0 <= (*ranges)[1]) {
                 break;
@@ -386,7 +375,7 @@ s32 lbAudioAx_80023B24(s32 arg0)
     off = slot * 4;
     if ((int) *(lbl_803BB300 + 0x2D1 + off) != 5) {
         HSD_AudioSFXKeyOffAll();
-        if (st->x274[slot] != 2) {
+        if (lbl_80433984[slot] != 2) {
             int total, k, j, accum, n;
             total = 0;
             for (j = total; j < 0x3E8; j++) {
@@ -403,10 +392,10 @@ s32 lbAudioAx_80023B24(s32 arg0)
 
             {
                 s8(*arr)[4] = (s8(*)[4])(lbl_803BB300 + 0x2D0);
-                int* arr_b4 = st->xB4;
-                int* arr_194 = st->x194;
-                int* arr_274 = st->x274;
-                int* arr_354 = st->x354;
+                int* arr_b4 = lbl_804337C4;
+                int* arr_194 = lbl_804338A4;
+                int* arr_274 = lbl_80433984;
+                int* arr_354 = lbl_80433A64;
                 s32 k;
                 for (k = 0; k < 0x37;
                      k++, arr++, arr_b4++, arr_194++, arr_274++, arr_354++)
@@ -424,9 +413,9 @@ s32 lbAudioAx_80023B24(s32 arg0)
                 strcpy(&lbl_803BB340[lbl_804D38D0],
                        *(char**) (lbl_803BB300 + (slot * 4) + 0x9FC));
             }
-            st->x354[slot] = HSD_SynthSFXLoad(lbl_803BB340, 2, 0, 0);
+            lbl_80433A64[slot] = HSD_SynthSFXLoad(lbl_803BB340, 2, 0, 0);
             HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
-            st->x274[slot] = 2;
+            lbl_80433984[slot] = 2;
         }
     }
 
@@ -450,35 +439,6 @@ bool fn_80023ED4(const char* arg0, int arg1, int arg2)
     }
     return AXDriver_8038E8EC(arg0, var_r0, arg2);
 }
-
-u8 data_pad_0[0x144] = { 0 };
-char* lbl_803BC314[] = {
-    "1p_qk.hps",      "akaneia.hps",    "baloon.hps",     "bigblue.hps",
-    "castle.hps",     "continue.hps",   "corneria.hps",   "docmari.hps",
-    "ending.hps",     "famidemo.hps",   "ff_1p01.hps",    "ff_1p02.hps",
-    "ff_bad.hps",     "ff_dk.hps",      "ff_emb.hps",     "ff_flat.hps",
-    "ff_fox.hps",     "ff_fzero.hps",   "ff_good.hps",    "ff_ice.hps",
-    "ff_kirby.hps",   "ff_link.hps",    "ff_mario.hps",   "ff_nes.hps",
-    "ff_poke.hps",    "ff_samus.hps",   "ff_step1.hps",   "ff_step2.hps",
-    "ff_step3.hps",   "ff_yoshi.hps",   "flatzone.hps",   "fourside.hps",
-    "gameover.hps",   "garden.hps",     "greatbay.hps",   "greens.hps",
-    "howto.hps",      "howto_s.hps",    "hyaku.hps",      "hyaku2.hps",
-    "icemt.hps",      "inis1_01.hps",   "inis1_02.hps",   "inis2_01.hps",
-    "inis2_02.hps",   "intro_es.hps",   "intro_nm.hps",   "item_h.hps",
-    "item_s.hps",     "izumi.hps",      "kongo.hps",      "kraid.hps",
-    "menu01.hps",     "menu02.hps",     "menu3.hps",      "mrider.hps",
-    "mutecity.hps",   "old_dk.hps",     "old_kb.hps",     "old_ys.hps",
-    "onetto.hps",     "onetto2.hps",    "opening.hps",    "pokesta.hps",
-    "pstadium.hps",   "pura.hps",       "rcruise.hps",    "s_info1.hps",
-    "s_info2.hps",    "s_info3.hps",    "s_new1.hps",     "s_new2.hps",
-    "s_newcom.hps",   "s_select.hps",   "saria.hps",      "shrine.hps",
-    "siren.hps",      "smari3.hps",     "sp_end.hps",     "sp_giga.hps",
-    "sp_metal.hps",   "sp_zako.hps",    "swm_15min.hps",  "target.hps",
-    "venom.hps",      "vl_battle.hps",  "vl_castle.hps",  "vl_corneria.hps",
-    "vl_cosmos.hps",  "vl_figure1.hps", "vl_figure2.hps", "vl_fzero.hps",
-    "vl_last_v2.hps", "vs_hyou1.hps",   "vs_hyou2.hps",   "yorster.hps",
-    "ystory.hps",     "zebes.hps",      "testnz.hps",
-};
 
 static inline const char* lbAudioAx_80023F28_inline0(int arg0)
 {
@@ -521,7 +481,6 @@ bool lbAudioAx_80023F28(s32 arg0)
     return lbAudioAx_80023F28_inline1(var_r3);
 }
 
-u8 data_pad[0x478] = { 0 };
 static struct lbl_803BC918_t {
     int x0;
     int x4;
@@ -718,6 +677,26 @@ s32 lbAudioAx_800243F4(int arg0)
         break;
     }
     return fn_80023750(arg0, 0x7F, 0x40, var_r6, 7);
+}
+
+lbl_803BCA24_fn lbl_803BCA24[] = {
+    fn_800251EC, fn_800253D8, fn_800256BC, fn_800259A0, fn_800259EC,
+    fn_80025A98, fn_80025B44, fn_80025CBC, fn_80025E38, fn_80025E38,
+};
+
+/// @todo .data order hack
+static void order_data(void)
+{
+    (void) "******** CAUTION ********\nFGM load size is over\n";
+    (void) __FILE__;
+
+    //  Fake combined string to suppress pooling
+    (void) "/audio/us/"
+           "\00\00/audio/\00";
+
+    (void) "smash2.sem";
+    (void) "HSD_AudioGetAuxHeapSize(2, &rvbStd) < 53*1024";
+    (void) "HSD_AudioGetAuxHeapSize(2, &delay) < 71*1024";
 }
 
 void fn_800244F4(void)
@@ -2078,9 +2057,9 @@ void fn_800267B0(void)
     for (i = 0; i < 5; i++) {
         arr_5d0 = s32_arr_803BB5D0;
         arr_4e4 = offsets_arr_803BC4E4;
-        arr_274 = st->x274;
-        arr_194 = st->x194;
-        arr_354 = st->x354;
+        arr_274 = lbl_80433984;
+        arr_194 = lbl_804338A4;
+        arr_354 = lbl_80433A64;
         j = 0;
 
         goto loop_check;
@@ -2229,11 +2208,11 @@ s32 fn_80026C04(s32 arg0)
     s32 slot;
 
     if (arg0 != -1) {
-        int* arr_354 = lbl_80433710.x354;
+        int* arr_354 = lbl_80433A64;
         int i;
         for (i = 0; i < 0x37; i++) {
             if (arg0 == *arr_354) {
-                lbl_80433710.x274[i] = 1;
+                lbl_80433984[i] = 1;
                 {
                     char* ptr = base + (i << 3);
                     s32 offset = *(s32*) (ptr + 0x11E4);
@@ -2251,8 +2230,8 @@ s32 fn_80026C04(s32 arg0)
         slot = 0;
         {
             s8(*arr_5d0)[4] = (s8(*)[4])(base + 0x2D0);
-            int* arr_194 = st->x194;
-            int* arr_274 = st->x274;
+            int* arr_194 = lbl_804338A4;
+            int* arr_274 = lbl_80433984;
 
             for (; slot < 0x37; slot++, arr_5d0++, arr_194++, arr_274++) {
                 if (priority == (*arr_5d0)[1] && *arr_194 == 1 &&
@@ -2270,7 +2249,7 @@ found:
         s32 idx = slot * 4;
         strcpy(&lbl_803BB340[lbl_804D38D0], *(char**) (base + idx + 0x9FC));
         priority = HSD_SynthSFXLoad(lbl_803BB340, 2, (int) fn_80026C04, 0);
-        st->x354[slot] = priority;
+        lbl_80433A64[slot] = priority;
     }
 
     return priority;
@@ -2384,7 +2363,7 @@ void lbAudioAx_80027168(void)
 
     {
         s8(*arr5d0)[4] = (s8(*)[4])(base + 0x2D0);
-        int* arr274 = st->x274;
+        int* arr274 = lbl_80433984;
         for (i = 0; i < 55; i++) {
             if (arr5d0[i][1] != 5 && arr274[i] == 2) {
                 arr274[i] = 1;
@@ -2395,7 +2374,7 @@ void lbAudioAx_80027168(void)
     count = 0;
     {
         s8(*arr5d0)[4] = (s8(*)[4])(base + 0x2D0);
-        int* arr_b4 = st->xB4;
+        int* arr_b4 = lbl_804337C4;
         for (i = count; i < 55; i++) {
             if (arr5d0[i][1] != 5 && arr_b4[i] != -1) {
                 count++;
@@ -2407,8 +2386,8 @@ void lbAudioAx_80027168(void)
         fn_800269AC();
 
         {
-            int* src = st->xB4;
-            int* dst = st->x194;
+            int* src = lbl_804337C4;
+            int* dst = lbl_804338A4;
             for (i = 0; i < 55; i++) {
                 dst[i] = src[i];
             }
@@ -2419,7 +2398,7 @@ void lbAudioAx_80027168(void)
 
         if ((u32) lbl_804D6438 < (u32) (lbl_804D6448 + lbl_804D6450)) {
             HSD_ASSERTREPORT(
-                0xDB3, NULL,
+                0xDB3, 0,
                 "******** CAUTION ********\nFGM load size is over\n");
         }
 
@@ -2430,7 +2409,7 @@ void lbAudioAx_80027168(void)
                 char* ptr = base + off;
                 char* dst = base + lbl_804D38D0;
                 strcpy(dst + 0x40, *(char**) (ptr + 0x9FC));
-                st->x354[slot] =
+                lbl_80433A64[slot] =
                     HSD_SynthSFXLoad(base + 0x40, 2, (s32) fn_80026C04, 0);
             }
         }
@@ -2564,10 +2543,10 @@ void lbAudioAx_80027AB0(s32 arg0)
         }
 
         {
-            int* a = lbl_80433710.x354;
-            int* b = lbl_80433710.xB4;
-            int* c = lbl_80433710.x194;
-            int* d = lbl_80433710.x274;
+            int* a = lbl_80433A64;
+            int* b = lbl_804337C4;
+            int* c = lbl_804338A4;
+            int* d = lbl_80433984;
             int idx;
             for (idx = 0; idx < 55; a++, b++, c++, d++, idx++) {
                 if (idx != 0) {
@@ -2582,28 +2561,28 @@ void lbAudioAx_80027AB0(s32 arg0)
         HSD_SynthSFXUnloadBank(1);
         HSD_SynthSFXUnloadBank(2);
 
-        if (lbl_80433710.x274[0x33] < 1) {
+        if (lbl_80433984[0x33] < 1) {
             strcpy(&lbl_803BB340[lbl_804D38D0],
                    *(char**) (lbl_803BB300 + 0xAC8));
-            lbl_80433710.x354[0x33] = HSD_SynthSFXLoad(lbl_803BB340, 1, 0, 0);
+            lbl_80433A64[0x33] = HSD_SynthSFXLoad(lbl_803BB340, 1, 0, 0);
             HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
-            lbl_80433710.x274[0x33] = 2;
+            lbl_80433984[0x33] = 2;
         }
 
-        if (lbl_80433710.x274[1] < 1) {
+        if (lbl_80433984[1] < 1) {
             strcpy(&lbl_803BB340[lbl_804D38D0],
                    *(char**) (lbl_803BB300 + 0xA00));
-            lbl_80433710.x354[1] = HSD_SynthSFXLoad(lbl_803BB340, 1, 0, 0);
+            lbl_80433A64[1] = HSD_SynthSFXLoad(lbl_803BB340, 1, 0, 0);
             HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
-            lbl_80433710.x274[1] = 2;
+            lbl_80433984[1] = 2;
         }
 
-        if (lbl_80433710.x274[0x36] < 1) {
+        if (lbl_80433984[0x36] < 1) {
             strcpy(&lbl_803BB340[lbl_804D38D0],
                    *(char**) (lbl_803BB300 + 0xAD4));
-            lbl_80433710.x354[0x36] = HSD_SynthSFXLoad(lbl_803BB340, 1, 0, 0);
+            lbl_80433A64[0x36] = HSD_SynthSFXLoad(lbl_803BB340, 1, 0, 0);
             HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
-            lbl_80433710.x274[0x36] = 2;
+            lbl_80433984[0x36] = 2;
         }
     }
 }
@@ -2763,7 +2742,7 @@ void lbAudioAx_8002838C(void)
     int i;
     char* ptr;
 
-    ARInit(st->x514, 0x10);
+    ARInit((u32*) &lbl_80433B44[0x38], 0x10);
     ARQInit();
     AIInit(NULL);
     PAD_STACK(8);
@@ -2774,21 +2753,24 @@ void lbAudioAx_8002838C(void)
     lbl_804D6440 += *(int*) (lbl_803BB300 + 0x1394);
 
     fn_80023254(3);
-    ptr = lbl_803BB300 + ((*(volatile int*) ((char*) st + 0x434)) << 3);
+    ptr = lbl_803BB300 + ((*(volatile int*) ((char*) lbl_80433B44)) << 3);
     lbl_804D6444 = *(int*) (ptr + 0x11E4);
 
     fn_80023254(4);
-    ptr = lbl_803BB300 + ((*(volatile int*) ((char*) st + 0x434)) << 3);
+    ptr = lbl_803BB300 + ((*(volatile int*) ((char*) lbl_80433B44)) << 3);
     lbl_804D6444 += *(int*) (ptr + 0x11E4);
-    ptr = lbl_803BB300 + ((*(volatile int*) ((char*) st + 0x438)) << 3);
+    ptr = lbl_803BB300 +
+          ((*(volatile int*) ((char*) lbl_80433B44 + 0x4)) << 3);
     lbl_804D6444 += *(int*) (ptr + 0x11E4);
-    ptr = lbl_803BB300 + ((*(volatile int*) ((char*) st + 0x43C)) << 3);
+    ptr = lbl_803BB300 +
+          ((*(volatile int*) ((char*) lbl_80433B44 + 0x8)) << 3);
     lbl_804D6444 += *(int*) (ptr + 0x11E4);
-    ptr = lbl_803BB300 + ((*(volatile int*) ((char*) st + 0x440)) << 3);
+    ptr = lbl_803BB300 +
+          ((*(volatile int*) ((char*) lbl_80433B44 + 0xC)) << 3);
     lbl_804D6444 += *(int*) (ptr + 0x11E4);
 
     fn_80023254(5);
-    ptr = lbl_803BB300 + ((*(volatile int*) ((char*) st + 0x434)) << 3);
+    ptr = lbl_803BB300 + ((*(volatile int*) ((char*) lbl_80433B44)) << 3);
     lbl_804D6444 += *(int*) (ptr + 0x11E4);
 
     lbl_804D6438 = lbl_804D643C + (lbl_804D6440 + lbl_804D6444);
@@ -2800,21 +2782,23 @@ void lbAudioAx_8002838C(void)
     rvbStd.time = 1.88f;
     HSD_ASSERT(0xF6E, HSD_AudioGetAuxHeapSize(AXDRIVER_AUX_REVERB_STD, &rvbStd) < 53*1024);
 
-    AXDriver_8038E30C(0, 2, &rvbStd, st->x554, 0xD400);
+    AXDriver_8038E30C(0, 2, &rvbStd,
+                      (u8*) ((char*) lbl_80433B44 + 0x120), 0xD400);
 
     AXDriver_8038E37C(AXDRIVER_AUX_DELAY, &delay);
     HSD_ASSERT(0xF72, HSD_AudioGetAuxHeapSize(AXDRIVER_AUX_REVERB_STD, &delay) < 71*1024);
 
-    AXDriver_8038E30C(1, 4, &delay, st->xD954, 0x11C00);
+    AXDriver_8038E30C(1, 4, &delay,
+                      (u8*) ((char*) lbl_80433B44 + 0xD520), 0x11C00);
 
     HSD_SynthSFXAllocateBank(lbl_804D643C);
     HSD_SynthSFXAllocateBank(lbl_804D6440);
     HSD_SynthSFXAllocateBank(lbl_804D6444);
 
-    p1 = st->xB4;
-    p2 = st->x194;
-    p3 = st->x274;
-    p4 = st->x354;
+    p1 = lbl_804337C4;
+    p2 = lbl_804338A4;
+    p3 = lbl_80433984;
+    p4 = lbl_80433A64;
     for (i = 0; i < 7; i++) {
         p1[0] = -1;
         p2[0] = -1;
@@ -2885,12 +2869,12 @@ s32 lbAudioAx_80028690(void)
     if (lbl_804D3878 == -1) {
         HSD_AudioSFXKeyOffAll();
         HSD_SynthSFXUnloadBank(0);
-        if (st->x274[0] < 1) {
+        if (lbl_80433984[0] < 1) {
             strcpy(&lbl_803BB340[lbl_804D38D0],
                    *(char**) (lbl_803BB300 + 0x9FC));
-            st->x354[0] = HSD_SynthSFXLoad(lbl_803BB340, 0, 0, 0);
+            lbl_80433A64[0] = HSD_SynthSFXLoad(lbl_803BB340, 0, 0, 0);
             HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
-            st->x274[0] = 2;
+            lbl_80433984[0] = 2;
         }
     }
 
@@ -2906,10 +2890,10 @@ s32 lbAudioAx_80028690(void)
         strcpy(&lbl_803BB340[lbl_804D38D0], "smash2.sem");
         AXDriver_8038DA70(lbl_803BB340, lb_800195D0);
 
-        a = st->x354;
-        b = st->xB4;
-        c = st->x194;
-        d = st->x274;
+        a = lbl_80433A64;
+        b = lbl_804337C4;
+        c = lbl_804338A4;
+        d = lbl_80433984;
         for (idx = 0; idx < 55; idx++) {
             if (idx != 0) {
                 a[idx] = -1;
@@ -2922,36 +2906,36 @@ s32 lbAudioAx_80028690(void)
         HSD_SynthSFXUnloadBank(1);
         HSD_SynthSFXUnloadBank(2);
 
-        if (st->x274[0x33] < 1) {
+        if (lbl_80433984[0x33] < 1) {
             strcpy(&lbl_803BB340[lbl_804D38D0],
                    *(char**) (lbl_803BB300 + 0xAC8));
-            st->x354[0x33] = HSD_SynthSFXLoad(lbl_803BB340, 1, 0, 0);
+            lbl_80433A64[0x33] = HSD_SynthSFXLoad(lbl_803BB340, 1, 0, 0);
             HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
-            st->x274[0x33] = 2;
+            lbl_80433984[0x33] = 2;
         }
 
-        if (st->x274[1] < 1) {
+        if (lbl_80433984[1] < 1) {
             strcpy(&lbl_803BB340[lbl_804D38D0],
                    *(char**) (lbl_803BB300 + 0xA00));
-            st->x354[1] = HSD_SynthSFXLoad(lbl_803BB340, 1, 0, 0);
+            lbl_80433A64[1] = HSD_SynthSFXLoad(lbl_803BB340, 1, 0, 0);
             HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
-            st->x274[1] = 2;
+            lbl_80433984[1] = 2;
         }
 
-        if (st->x274[0x36] < 1) {
+        if (lbl_80433984[0x36] < 1) {
             strcpy(&lbl_803BB340[lbl_804D38D0],
                    *(char**) (lbl_803BB300 + 0xAD4));
-            st->x354[0x36] = HSD_SynthSFXLoad(lbl_803BB340, 1, 0, 0);
+            lbl_80433A64[0x36] = HSD_SynthSFXLoad(lbl_803BB340, 1, 0, 0);
             HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
-            st->x274[0x36] = 2;
+            lbl_80433984[0x36] = 2;
         }
 
-        if (st->x274[2] < 1) {
+        if (lbl_80433984[2] < 1) {
             strcpy(&lbl_803BB340[lbl_804D38D0],
                    *(char**) (lbl_803BB300 + 0xA04));
-            st->x354[2] = HSD_SynthSFXLoad(lbl_803BB340, 2, 0, 0);
+            lbl_80433A64[2] = HSD_SynthSFXLoad(lbl_803BB340, 2, 0, 0);
             HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
-            st->x274[2] = 2;
+            lbl_80433984[2] = 2;
         }
     }
 
@@ -3004,4 +2988,16 @@ void lbAudioAx_80028B6C(void)
 void lbAudioAx_80028B90(void)
 {
     lbl_804D38CC = 0x7F;
+}
+
+/// @todo .sdata order hack
+void order_sdata(void)
+{
+    (void) "0";
+}
+
+/// @todo .sdata2 order hack
+void order_sdata2(void)
+{
+    (void) 1.88f;
 }
