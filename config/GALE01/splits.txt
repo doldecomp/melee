@@ -2277,13 +2277,18 @@ melee/gm/gmregtyfall.c:
 	.sbss       start:0x804D6740 end:0x804D67B0
 	.sdata2     start:0x804DAA00 end:0x804DAA18
 
-melee/gm/gm_1A4C.c:
-	.text       start:0x801A7A44 end:0x801A9DD0
-	.data       start:0x803DB430 end:0x803DBF78
-	.bss        start:0x80480A00 end:0x80480B38
-	.sdata      start:0x804D4290 end:0x804D42E8
-	.sbss       start:0x804D67B0 end:0x804D67D0
+melee/gm/gm_1A7A.c:
+	.text       start:0x801A7A44 end:0x801A7FB4
+	.data       start:0x803DB430 end:0x803DB458
+	.sdata      start:0x804D4290 end:0x804D42A0
+	.sbss       start:0x804D67B0 end:0x804D67B8
 	.sdata2     start:0x804DAA18 end:0x804DAA28
+
+melee/gm/gmregenddisp.c:
+	.text       start:0x801A7FB4 end:0x801A9DD0
+	.data       start:0x803DB458 end:0x803DBF78
+	.bss        start:0x80480A00 end:0x80480B38
+	.sdata      start:0x804D42A0 end:0x804D42B8
 	.sdata2     start:0x804DAA28 end:0x804DAAA8
 
 melee/gm/gmopening.c:
