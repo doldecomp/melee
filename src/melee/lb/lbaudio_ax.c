@@ -696,7 +696,26 @@ static void order_data(void)
 
     (void) "smash2.sem";
     (void) "HSD_AudioGetAuxHeapSize(2, &rvbStd) < 53*1024";
-    (void) "HSD_AudioGetAuxHeapSize(2, &delay) < 71*1024";
+    (void) "HSD_AudioGetAuxHeapSize(2, &delay) < 71*1024\0\0\0\0\0\0\0";
+}
+
+static inline void lbAudioAx_SetAudioPath(char* dst, bool us)
+{
+    dst[0] = '/';
+    dst[1] = 'a';
+    dst[2] = 'u';
+    dst[3] = 'd';
+    dst[4] = 'i';
+    dst[5] = 'o';
+    dst[6] = '/';
+    if (us) {
+        dst[7] = 'u';
+        dst[8] = 's';
+        dst[9] = '/';
+        dst[10] = '\0';
+    } else {
+        dst[7] = '\0';
+    }
 }
 
 void fn_800244F4(void)
@@ -2397,9 +2416,8 @@ void lbAudioAx_80027168(void)
         fn_800267B0();
 
         if ((u32) lbl_804D6438 < (u32) (lbl_804D6448 + lbl_804D6450)) {
-            HSD_ASSERTREPORT(
-                0xDB3, 0,
-                "******** CAUTION ********\nFGM load size is over\n");
+            OSReport("******** CAUTION ********\nFGM load size is over\n");
+            __assert(__FILE__, 0xDB3, "0\0\0\0\0\0\0");
         }
 
         {
@@ -2521,11 +2539,11 @@ void lbAudioAx_80027AB0(s32 arg0)
     s32 lang;
 
     if (lbLang_IsSavedLanguageUS()) {
-        strcpy(lbl_803BB340, "/audio/us/");
+        lbAudioAx_SetAudioPath(lbl_803BB340, true);
         lbl_804D38D0 = 10;
         lang = 1;
     } else {
-        strcpy(lbl_803BB340, "/audio/");
+        lbAudioAx_SetAudioPath(lbl_803BB340, false);
         lbl_804D38D0 = 7;
         lang = 0;
     }
@@ -2780,13 +2798,15 @@ void lbAudioAx_8002838C(void)
 
     AXDriver_8038E37C(AXDRIVER_AUX_REVERB_STD, &rvbStd);
     rvbStd.time = 1.88f;
-    HSD_ASSERT(0xF6E, HSD_AudioGetAuxHeapSize(AXDRIVER_AUX_REVERB_STD, &rvbStd) < 53*1024);
+    HSD_ASSERT(0xF6E, HSD_AudioGetAuxHeapSize(2, &rvbStd) < 53*1024);
 
     AXDriver_8038E30C(0, 2, &rvbStd, (u8*) ((char*) lbl_80433B44 + 0x120),
                       0xD400);
 
     AXDriver_8038E37C(AXDRIVER_AUX_DELAY, &delay);
-    HSD_ASSERT(0xF72, HSD_AudioGetAuxHeapSize(AXDRIVER_AUX_REVERB_STD, &delay) < 71*1024);
+    HSD_ASSERTMSG(
+        0xF72, HSD_AudioGetAuxHeapSize(2, &delay) < 71 * 1024,
+        "HSD_AudioGetAuxHeapSize(2, &delay) < 71*1024\0\0\0\0\0\0\0");
 
     AXDriver_8038E30C(1, 4, &delay, (u8*) ((char*) lbl_80433B44 + 0xD520),
                       0x11C00);
@@ -2854,16 +2874,16 @@ s32 lbAudioAx_80028690(void)
     fn_80024654(1);
 
     if (lbLang_IsSavedLanguageUS()) {
-        strcpy(lbl_803BB340, "/audio/us/");
+        lbAudioAx_SetAudioPath(lbl_803BB340, true);
         lbl_804D38D0 = 10;
         var_r29 = 1;
     } else {
-        strcpy(lbl_803BB340, "/audio/");
+        lbAudioAx_SetAudioPath(lbl_803BB340, false);
         lbl_804D38D0 = 7;
         var_r29 = 0;
     }
 
-    strcpy(lbl_803BB380, "/audio/");
+    lbAudioAx_SetAudioPath(lbl_803BB380, false);
     lbl_804D38D4 = 7;
 
     if (lbl_804D3878 == -1) {
@@ -2993,7 +3013,7 @@ void lbAudioAx_80028B90(void)
 /// @todo .sdata order hack
 void order_sdata(void)
 {
-    (void) "0";
+    (void) "0\0\0\0\0\0\0";
 }
 
 /// @todo .sdata2 order hack
