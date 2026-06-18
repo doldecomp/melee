@@ -9,6 +9,8 @@ block_relocations:
 # GXColors in dbitem
 - source: 0x803EAE08
 - source: 0x804DBCF0
+# GXColor in dbbonus
+- source: 0x803EAE10
 # Bitmasks in psdisptev
 - source: .text:0x803A3A60
 - source: .text:0x803A3A68
