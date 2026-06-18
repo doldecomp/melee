@@ -21,12 +21,9 @@
 #include "lb/lbvector.h"
 #include "lb/types.h"
 #include "mp/mplib.h"
-
-#include <math_ppc.h>
-
-extern Vec3 grPushOn_803B844C;
 #include "sysdolphin/baselib/lobj.h"
 
+#include <math_ppc.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/random.h>
@@ -62,11 +59,17 @@ static struct {
     struct grPushOn_Lookup x10c[0x21];
 }* grPushOn_804D6AB8;
 
-extern Vec3 grPushOn_803B8440;
-extern Vec3 grPushOn_803B8458;
-extern Vec3 grPushOn_803B8464;
-extern u8 grPushOn_804D4934;
-extern u8 grPushOn_804D4948;
+/// @todo .sdata order hack
+static void order_sdata(void)
+{
+    (void) "0";
+}
+
+Vec3 const grPushOn_803B8440 = { 0 };
+Vec3 const grPushOn_803B844C = { 0 };
+Vec3 const grPushOn_803B8458 = { 0.0f, 100.0f, 0.0f };
+Vec3 const grPushOn_803B8464 = { 0.0f, 100.0f, 0.0f };
+float grPushOn_804D4934 = 16.0f;
 
 StageCallbacks grPushOn_803E7AC8[3] = {
     { grPushOn_802184CC, grPushOn_80218590, grPushOn_80218598,
@@ -165,65 +168,6 @@ HSD_LightDesc grPushOn_803E7B74 = {
     NULL,
     NULL,
     { &grPushOn_804D4934 },
-};
-
-HSD_LightDesc grPushOn_803E7B90 = {
-    NULL,
-    NULL,
-    0xA,
-    0,
-    { 0xFF, 0xFF, 0xFF, 0xFF },
-    NULL,
-    NULL,
-    { &grPushOn_804D4948 },
-};
-
-static struct grPushOn_LightConfig light_configs[9] = {
-    { { 0xBE, 0xE6, 0xE6, 0xFF },
-      { -12.0F, 735.0F, -20.0F },
-      0.1F,
-      800.0F,
-      3 },
-    { { 0xF0, 0xF0, 0xF0, 0xFF },
-      { 250.0F, 708.0F, -30.0F },
-      0.4F,
-      500.0F,
-      3 },
-    { { 0xC3, 0x56, 0xCD, 0xFF },
-      { 550.0F, 655.0F, -50.0F },
-      0.2F,
-      600.0F,
-      3 },
-    { { 0xF0, 0xF0, 0xF0, 0xFF },
-      { 860.0F, 550.0F, -30.0F },
-      0.1F,
-      700.0F,
-      3 },
-    { { 0x7C, 0xE7, 0xFF, 0xFF },
-      { 1150.0F, 675.0F, -60.0F },
-      0.2F,
-      800.0F,
-      3 },
-    { { 0xFF, 0x4B, 0x4B, 0xFF },
-      { 1400.0F, 370.0F, -60.0F },
-      0.01F,
-      500.0F,
-      3 },
-    { { 0xE6, 0xE6, 0xE6, 0xFF },
-      { 1580.0F, 20.0F, -30.0F },
-      0.1F,
-      500.0F,
-      3 },
-    { { 0xFF, 0x6E, 0x6E, 0xFF },
-      { 2093.0F, 120.0F, -20.0F },
-      0.3F,
-      600.0F,
-      3 },
-    { { 0xBE, 0xE6, 0xFF, 0xFF },
-      { 1700.0F, 630.0F, -20.0F },
-      0.2F,
-      800.0F,
-      3 },
 };
 
 void grPushOn_802184CC(Ground_GObj* gobj)
@@ -371,6 +315,67 @@ HSD_LObj* grPushOn_80218ED4(HSD_GObj* gobj)
     return new_lobj;
 }
 
+float grPushOn_804D4948 = 16.0f;
+
+HSD_LightDesc grPushOn_803E7B90 = {
+    NULL,
+    NULL,
+    0xA,
+    0,
+    { 0xFF, 0xFF, 0xFF, 0xFF },
+    NULL,
+    NULL,
+    { &grPushOn_804D4948 },
+};
+
+static struct grPushOn_LightConfig light_configs[9] = {
+    { { 0xBE, 0xE6, 0xE6, 0xFF },
+      { -12.0F, 735.0F, -20.0F },
+      0.1F,
+      800.0F,
+      3 },
+    { { 0xF0, 0xF0, 0xF0, 0xFF },
+      { 250.0F, 708.0F, -30.0F },
+      0.4F,
+      500.0F,
+      3 },
+    { { 0xC3, 0x56, 0xCD, 0xFF },
+      { 550.0F, 655.0F, -50.0F },
+      0.2F,
+      600.0F,
+      3 },
+    { { 0xF0, 0xF0, 0xF0, 0xFF },
+      { 860.0F, 550.0F, -30.0F },
+      0.1F,
+      700.0F,
+      3 },
+    { { 0x7C, 0xE7, 0xFF, 0xFF },
+      { 1150.0F, 675.0F, -60.0F },
+      0.2F,
+      800.0F,
+      3 },
+    { { 0xFF, 0x4B, 0x4B, 0xFF },
+      { 1400.0F, 370.0F, -60.0F },
+      0.01F,
+      500.0F,
+      3 },
+    { { 0xE6, 0xE6, 0xE6, 0xFF },
+      { 1580.0F, 20.0F, -30.0F },
+      0.1F,
+      500.0F,
+      3 },
+    { { 0xFF, 0x6E, 0x6E, 0xFF },
+      { 2093.0F, 120.0F, -20.0F },
+      0.3F,
+      600.0F,
+      3 },
+    { { 0xBE, 0xE6, 0xFF, 0xFF },
+      { 1700.0F, 630.0F, -20.0F },
+      0.2F,
+      800.0F,
+      3 },
+};
+
 HSD_LObj* grPushOn_80218FC0(HSD_GObj* gobj)
 {
     HSD_LObj* new_lobj;
@@ -420,9 +425,7 @@ void grPushOn_802190D0(HSD_GObj* gobj)
     i = 0;
 
     while (i < 9 && lobj != NULL) {
-        // Equivalent to HSD_LObjGetType(lobj); inlined here to match
-        // the original assembly (the real function is in lobj.c).
-        HSD_ASSERT(0x2BA, (u32) (lobj->flags & LOBJ_TYPE_MASK) == LOBJ_POINT);
+        HSD_ASSERT(698, HSD_LObjGetType(lobj)==LOBJ_POINT);
         lobj->flags = LOBJ_POINT | LOBJ_DIFFUSE;
         color = entry->color;
         HSD_LObjSetColor(lobj, color);
@@ -473,7 +476,7 @@ int grPushOn_80219230(int arg0)
         }
         i++;
     }
-    HSD_ASSERT(0x35DU, 0);
+    HSD_ASSERT(861, 0);
 }
 
 void grPushOn_80218888(Ground_GObj* arg0)

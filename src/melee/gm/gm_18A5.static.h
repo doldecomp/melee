@@ -148,8 +148,6 @@ typedef struct BracketEntry {
 
 static BracketEntry lbl_80473AB8[0x40];
 
-TmData gm_804771C4;
-
 static struct lbl_803D9D20_t {
     /*  +0 */ u8 x0[0x59];
     /* +59 */ u8 x59[0x72 - 0x59];
