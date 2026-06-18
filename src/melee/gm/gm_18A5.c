@@ -50,6 +50,8 @@ lbl_803D9FD8_fn lbl_803D9FD8[] = {
     fn_80195CCC, fn_80194F30, fn_8019610C, fn_8019610C,
 };
 
+/* 4771C4 */ TmData gm_804771C4;
+
 typedef struct BracketEntrySlot {
     /* 0x00 */ HSD_GObj* x2C;
     /* 0x04 */ u8 x30;

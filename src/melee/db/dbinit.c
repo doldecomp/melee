@@ -1,4 +1,5 @@
 #include "db.h"
+#include "dbsound.h"
 
 #include "ft/ftlib.h"
 #include "lb/lbarchive.h"

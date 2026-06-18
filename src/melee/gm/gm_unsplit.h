@@ -22,7 +22,7 @@
 #include <melee/gm/gm_1A36.h>    // IWYU pragma: export
 #include <melee/gm/gm_1A3F.h>    // IWYU pragma: export
 #include <melee/gm/gm_1A45.h>    // IWYU pragma: export
-#include <melee/gm/gm_1A4C.h>    // IWYU pragma: export
+#include <melee/gm/gm_1A7A.h>    // IWYU pragma: export
 #include <melee/gm/gm_1ADD.h>    // IWYU pragma: export
 #include <melee/gm/gm_1AED.h>    // IWYU pragma: export
 #include <melee/gm/gm_1B03.h>    // IWYU pragma: export

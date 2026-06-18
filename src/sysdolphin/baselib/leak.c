@@ -5,28 +5,33 @@
 #define HEAP_MAGIC 0x01234567
 
 typedef struct HSD_LeakChecker {
-    u32* table;                             /* 0x00 */
-    u32 x04;                                /* 0x04 */
-    u32 used;                               /* 0x08 */
-    u32 capacity;                           /* 0x0C */
-    u32 x10;                                /* 0x10 */
-    u32 x14;                                /* 0x14 */
-    u32 peak;                               /* 0x18 */
-    u32 x1C;                                /* 0x1C */
-    char str_now_registering[0x108 - 0x20]; /* 0x20 */
-    char str_not_init[0x12C - 0x108];       /* 0x108 */
-    char str_begin[0x14C - 0x12C];          /* 0x12C */
-    char str_numreg[0x17C - 0x14C];         /* 0x14C */
-    char str_leak_detected[0x1A8 - 0x17C];  /* 0x17C */
-    char str_leak_destroyed[0x1D0 - 0x1A8]; /* 0x1A8 */
-    char str_num_leaked[0x1F0 - 0x1D0];     /* 0x1D0 */
-    char str_no_leak[0x208 - 0x1F0];        /* 0x1F0 */
+    u32* table;   /* 0x00 */
+    u32 x04;      /* 0x04 */
+    u32 used;     /* 0x08 */
+    u32 capacity; /* 0x0C */
+    u32 x10;      /* 0x10 */
+    u32 x14;      /* 0x14 */
+    u32 peak;     /* 0x18 */
+    s32 x1C;      /* 0x1C */
 } HSD_LeakChecker;
 
-extern u32 lbCommand_803B9840[16];
-extern HSD_LeakChecker HSD_Leak_80407B58;
-static char HSD_Leak_804D6000[] = " ";
-static char HSD_Leak_804D6004[] = "done.\n";
+/// @todo Cannot access melee/lb from here
+/* 3B9840 */ extern u32 lbCommand_803B9840[16];
+
+/* 407B58 */ HSD_LeakChecker HSD_Leak_80407B58 = {
+    NULL, 0, 0, 0, 0, 0, 0, -1
+};
+
+/// @todo .data order hack
+static void order_data(void)
+{
+    (void) "now registering suspecting memory ...\n";
+    (void) "WARNING!!\n";
+    (void) "Too many memory blocks are registerd to memory checker.\n";
+    (void) "Please increase a capacity of checker.\n";
+    (void) "Non-registered memory block is specified (%p).\n";
+    (void) "leak unregister range %p %p\n";
+}
 
 /* @todo Currently ~97.3% match - register allocation differences
  * remain: r28/r29 swap (scan_copy/cap_ptr) and loop/local register swaps
@@ -56,22 +61,23 @@ int HSD_Leak_80387DF8(int indent)
 
     if (lc->table == NULL) {
         for (i = 0; i < (u32) indent; i++) {
-            OSReport(HSD_Leak_804D6000);
+            OSReport(" ");
         }
-        OSReport(lc->str_not_init);
+        OSReport("Leak checker is not initialized.\n");
         return 0;
     }
 
     for (i = 0; i < (u32) indent; i++) {
-        OSReport(HSD_Leak_804D6000);
+        OSReport(" ");
     }
-    OSReport(lc->str_begin);
+    OSReport("Begin memory leak check ...\n");
 
     for (j = 0; j < (u32) (indent + 2); j++) {
-        OSReport(HSD_Leak_804D6000);
+        OSReport(" ");
     }
     cap_ptr = &lc->capacity;
-    OSReport(lc->str_numreg, lc->used, lc->capacity, lc->peak);
+    OSReport("number of registered ptr: %d / %d (peak %d)\n", lc->used,
+             lc->capacity, lc->peak);
 
     /* Scan memory for heap references */
     {
@@ -128,19 +134,20 @@ int HSD_Leak_80387DF8(int indent)
                         *(u32*) ((u32) lc->table + (reg_idx << 2)))
                     {
                         for (j = 0; j < i; j++) {
-                            OSReport(HSD_Leak_804D6000);
+                            OSReport(" ");
                         }
-                        OSReport(lc->str_leak_detected,
-                                 (u32*) ((u32) heap_start_phys + 0x20),
-                                 block[2], block[3]);
+                        OSReport(
+                            "leak detected (%p) nb_reg (%d) mark (%08x)\n",
+                            (u32*) ((u32) heap_start_phys + 0x20), block[2],
+                            block[3]);
                         goto next_leak;
                     }
                 }
             }
             for (j = 0; j < i; j++) {
-                OSReport(HSD_Leak_804D6000);
+                OSReport(" ");
             }
-            OSReport(lc->str_leak_destroyed,
+            OSReport("leak detected (%p) [destroyed header]\n",
                      (u32*) ((u32) heap_start_phys + 0x20));
         next_leak:
             leak_count++;
@@ -150,20 +157,20 @@ int HSD_Leak_80387DF8(int indent)
 
     if (leak_count > 0) {
         for (j = 0; j < (u32) (indent + 2); j++) {
-            OSReport(HSD_Leak_804D6000);
+            OSReport(" ");
         }
-        OSReport(lc->str_num_leaked, leak_count);
+        OSReport("number of leaked memory: %d.\n", leak_count);
     } else {
         for (j = 0; j < (u32) (indent + 2); j++) {
-            OSReport(HSD_Leak_804D6000);
+            OSReport(" ");
         }
-        OSReport(lc->str_no_leak);
+        OSReport("leak is not detected.\n");
     }
 
     for (j = 0; j < (u32) indent; j++) {
-        OSReport(HSD_Leak_804D6000);
+        OSReport(" ");
     }
-    OSReport(HSD_Leak_804D6004);
+    OSReport("done.\n");
 
     return leak_count;
 }
