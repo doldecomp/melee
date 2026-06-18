@@ -1628,66 +1628,39 @@ extern HSD_Text* mnName_804D6BFC;
 s32 mnName_8023AC40(void)
 {
     HSD_Archive* archive = mn_804D6BB8;
+    u8* ptr = mnName_NameDisplayOrder;
     u32 i;
     HSD_GObjProc* proc;
 
-    lbArchive_LoadSections(archive,
-                           (void**) ((char*) mnName_NameDisplayOrder + 0x98),
-                           (char*) mnName_803ED538 + 0x13C,
-                           (void**) ((char*) mnName_NameDisplayOrder + 0x9C),
-                           (char*) mnName_803ED538 + 0x158,
-                           (void**) ((char*) mnName_NameDisplayOrder + 0xA0),
-                           (char*) mnName_803ED538 + 0x178,
-                           (void**) ((char*) mnName_NameDisplayOrder + 0xA4),
-                           (char*) mnName_803ED538 + 0x19C,
-                           (void**) ((char*) mnName_NameDisplayOrder + 0x78),
-                           (char*) mnName_803ED538 + 0x1C0,
-                           (void**) ((char*) mnName_NameDisplayOrder + 0x7C),
-                           (char*) mnName_803ED538 + 0x1DC,
-                           (void**) ((char*) mnName_NameDisplayOrder + 0x80),
-                           (char*) mnName_803ED538 + 0x1FC,
-                           (void**) ((char*) mnName_NameDisplayOrder + 0x84),
-                           (char*) mnName_803ED538 + 0x220,
-                           (void**) ((char*) mnName_NameDisplayOrder + 0x88),
-                           (char*) mnName_803ED538 + 0x244,
-                           (void**) ((char*) mnName_NameDisplayOrder + 0x8C),
-                           (char*) mnName_803ED538 + 0x25C,
-                           (void**) ((char*) mnName_NameDisplayOrder + 0x90),
-                           (char*) mnName_803ED538 + 0x278,
-                           (void**) ((char*) mnName_NameDisplayOrder + 0x94),
-                           (char*) mnName_803ED538 + 0x298,
-                           (void**) ((char*) mnName_NameDisplayOrder + 0xA8),
-                           (char*) mnName_803ED538 + 0x2BC,
-                           (void**) ((char*) mnName_NameDisplayOrder + 0xAC),
-                           (char*) mnName_803ED538 + 0x2D8,
-                           (void**) ((char*) mnName_NameDisplayOrder + 0xB0),
-                           (char*) mnName_803ED538 + 0x2F8,
-                           (void**) ((char*) mnName_NameDisplayOrder + 0xB4),
-                           (char*) mnName_803ED538 + 0x31C,
-                           (void**) ((char*) mnName_NameDisplayOrder + 0xB8),
-                           (char*) mnName_803ED538 + 0x340,
-                           (void**) ((char*) mnName_NameDisplayOrder + 0xBC),
-                           (char*) mnName_803ED538 + 0x35C,
-                           (void**) ((char*) mnName_NameDisplayOrder + 0xC0),
-                           (char*) mnName_803ED538 + 0x37C,
-                           (void**) ((char*) mnName_NameDisplayOrder + 0xC4),
-                           (char*) mnName_803ED538 + 0x3A0,
-                           (void**) ((char*) mnName_NameDisplayOrder + 0xC8),
-                           (char*) mnName_803ED538 + 0x3C4,
-                           (void**) ((char*) mnName_NameDisplayOrder + 0xCC),
-                           (char*) mnName_803ED538 + 0x3E0,
-                           (void**) ((char*) mnName_NameDisplayOrder + 0xD0),
-                           (char*) mnName_803ED538 + 0x400,
-                           (void**) ((char*) mnName_NameDisplayOrder + 0xD4),
-                           (char*) mnName_803ED538 + 0x424,
-                           (void**) ((char*) mnName_NameDisplayOrder + 0xD8),
-                           (char*) mnName_803ED538 + 0x448,
-                           (void**) ((char*) mnName_NameDisplayOrder + 0xDC),
-                           (char*) mnName_803ED538 + 0x464,
-                           (void**) ((char*) mnName_NameDisplayOrder + 0xE0),
-                           (char*) mnName_803ED538 + 0x484,
-                           (void**) ((char*) mnName_NameDisplayOrder + 0xE4),
-                           (char*) mnName_803ED538 + 0x4A8, 0);
+    lbArchive_LoadSections(
+        archive, (void**) (ptr + 0x98), (char*) mnName_803ED538 + 0x13C,
+        (void**) (ptr + 0x9C), (char*) mnName_803ED538 + 0x158,
+        (void**) (ptr + 0xA0), (char*) mnName_803ED538 + 0x178,
+        (void**) (ptr + 0xA4), (char*) mnName_803ED538 + 0x19C,
+        (void**) (ptr + 0x78), (char*) mnName_803ED538 + 0x1C0,
+        (void**) (ptr + 0x7C), (char*) mnName_803ED538 + 0x1DC,
+        (void**) (ptr + 0x80), (char*) mnName_803ED538 + 0x1FC,
+        (void**) (ptr + 0x84), (char*) mnName_803ED538 + 0x220,
+        (void**) (ptr + 0x88), (char*) mnName_803ED538 + 0x244,
+        (void**) (ptr + 0x8C), (char*) mnName_803ED538 + 0x25C,
+        (void**) (ptr + 0x90), (char*) mnName_803ED538 + 0x278,
+        (void**) (ptr + 0x94), (char*) mnName_803ED538 + 0x298,
+        (void**) (ptr + 0xA8), (char*) mnName_803ED538 + 0x2BC,
+        (void**) (ptr + 0xAC), (char*) mnName_803ED538 + 0x2D8,
+        (void**) (ptr + 0xB0), (char*) mnName_803ED538 + 0x2F8,
+        (void**) (ptr + 0xB4), (char*) mnName_803ED538 + 0x31C,
+        (void**) (ptr + 0xB8), (char*) mnName_803ED538 + 0x340,
+        (void**) (ptr + 0xBC), (char*) mnName_803ED538 + 0x35C,
+        (void**) (ptr + 0xC0), (char*) mnName_803ED538 + 0x37C,
+        (void**) (ptr + 0xC4), (char*) mnName_803ED538 + 0x3A0,
+        (void**) (ptr + 0xC8), (char*) mnName_803ED538 + 0x3C4,
+        (void**) (ptr + 0xCC), (char*) mnName_803ED538 + 0x3E0,
+        (void**) (ptr + 0xD0), (char*) mnName_803ED538 + 0x400,
+        (void**) (ptr + 0xD4), (char*) mnName_803ED538 + 0x424,
+        (void**) (ptr + 0xD8), (char*) mnName_803ED538 + 0x448,
+        (void**) (ptr + 0xDC), (char*) mnName_803ED538 + 0x464,
+        (void**) (ptr + 0xE0), (char*) mnName_803ED538 + 0x484,
+        (void**) (ptr + 0xE4), (char*) mnName_803ED538 + 0x4A8, 0);
 
     if (lbLang_IsSavedLanguageUS()) {
         lbArchive_LoadSections(
@@ -1704,7 +1677,8 @@ s32 mnName_8023AC40(void)
     mn_804A04F0.hovered_selection = 0x18;
     mnName_804D6BFC = NULL;
     for (i = 0; i < 0x78; i++) {
-        mnName_NameDisplayOrder[i] = (u8) i;
+        *ptr = (u8) i;
+        ptr++;
     }
 
     mn_804A04F0.x10 = 0;

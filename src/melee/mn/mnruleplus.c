@@ -352,8 +352,10 @@ void mn_80232660(HSD_GObj* gobj, HSD_JObj* jobj, u8 option)
     }
 }
 
+#pragma dont_inline on
 void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
 {
+    UNUSED u8 pad[8];
     HSD_JObj* option_roots[6];
     HSD_JObj* jobj_parts[17];
     u16 jobj_map[17];
@@ -562,6 +564,7 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
         i++;
     }
 }
+#pragma dont_inline off
 
 void mn_80232D4C(HSD_GObj* gobj, u32 arg1, u32 arg2)
 {
