@@ -18,15 +18,15 @@
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/stage.h"
-#include "it/it_266F.h"
 #include "it/item.h"
 #include "it/items/ittincle.h"
+#include "it/itspawn.h"
+#include "it/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/types.h"
 #include "mp/mplib.h"
 
-#include <string.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>

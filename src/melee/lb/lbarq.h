@@ -32,8 +32,6 @@ typedef struct lbArqHandle {
     /* 0x04 */ lbArqNode* node;
 } lbArqHandle;
 
-extern lbArqGlobal lbArq_804316C0;
-
 /* 014ABC */ lbArqState lbArq_80014ABC(lbArqNode* arg0);
 /* 014AC4 */ void lbArq_80014AC4(lbArqHandle* handle);
 /* 014BD0 */ void lbArq_80014BD0(u32, void*, size_t, lbArqCallback, void*);
