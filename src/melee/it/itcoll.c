@@ -265,6 +265,12 @@ void it_8026FCF8(Item* arg_item, HitCapsule* arg_hit)
     lbColl_80008440(arg_hit);
 }
 
+static void order_sdata2_0(void)
+{
+    (void) 0.0f;
+    (void) S32_TO_F32;
+}
+
 void it_8026FE68(Item* arg_item0, HitCapsule* hit1, Item* arg_item2,
                  HitCapsule* hit3)
 {

@@ -421,7 +421,7 @@ bool pl_80038628(HSD_GObj* gobj, int kind)
 {
     Fighter* fp;
 
-    HSD_ASSERT(0x1A1, kind >= 1 && kind <= 0x10);
+    HSD_ASSERT(0x1A1, PlATK_AttackNormal_Start <= kind && kind <= PlATK_AttackNormal_End);
     fp = GET_FIGHTER(gobj);
     if (pl_803BCE70[kind - 1] == -1) {
         return true;

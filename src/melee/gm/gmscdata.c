@@ -2,6 +2,7 @@
 
 #include "gm/forward.h"
 
+#include "gm/gm_1B14.h"
 #include "if/ifprize.h"
 
 #include <melee/gm/gm_unsplit.h>

@@ -14,6 +14,7 @@
 #define M_PI_3 (M_PI / 3)
 
 #define M_PI_F 3.14159265358979323846F
+#define M_TAU_F 6.283185307179586F
 #define M_PI_2_F (M_PI_F / 2.0F)
 #define M_PI_3_F (M_PI_F / 3.0F)
 
