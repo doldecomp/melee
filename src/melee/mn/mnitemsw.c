@@ -488,13 +488,13 @@ void mnItemSw_8023453C(HSD_GObj* gobj, u8 arg1, u8 arg2)
             }
             HSD_JObjAnimAll(all_jobj);
         } else {
-            HSD_JObj* sp3C;
+            HSD_JObj* toggle_jobj;
             u8 confirmed = mn_804A04F0.confirmed_selection;
             HSD_JObj* jobj =
                 mnItemSw_8023405C(data, (u8) mn_804A04F0.hovered_selection);
-            lb_80011E24(jobj, &sp3C, 2, -1);
-            HSD_JObjReqAnimAll(sp3C, mnItemSw_804D4BA0[confirmed]);
-            HSD_JObjAnimAll(sp3C);
+            lb_80011E24(jobj, &toggle_jobj, 2, -1);
+            HSD_JObjReqAnimAll(toggle_jobj, mnItemSw_804D4BA0[confirmed]);
+            HSD_JObjAnimAll(toggle_jobj);
         }
     }
 

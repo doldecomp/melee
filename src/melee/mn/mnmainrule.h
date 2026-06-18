@@ -22,8 +22,7 @@ struct mn_802307F8_t {
         struct {
             /* 0x00C */ HSD_JObj* xC0[10];
             struct {
-                /* 0x00 */ HSD_JObj* x0;
-                /* 0x04 */ u8 x4_pad[0x24 - 0x04];
+                /* 0x00 */ HSD_JObj* jobjs[9];
             } x34[7];
         };
     };
