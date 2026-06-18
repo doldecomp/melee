@@ -9,6 +9,8 @@
 
 #include <placeholder.h>
 
+#include "gm/gm_1B14.h"
+
 #include <dolphin/dvd.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <baselib/debug.h>

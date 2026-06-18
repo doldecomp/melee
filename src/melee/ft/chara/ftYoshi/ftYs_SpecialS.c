@@ -282,6 +282,22 @@ void ftYs_SpecialS_8012F0DC(Fighter_GObj* gobj, s32 arg1, s32 arg2, f32 arg3)
     ftPartSetRotZ(fp, 2, 0.0F);
 }
 
+/// @todo .sdata2 order hack
+static void order_sdata2_0(void)
+{
+    (void) 0.5f;
+    (void) U32_TO_F32;
+    (void) M_TAU;
+    (void) -1.0f;
+    (void) 0.25132741228718347;
+    (void) 0.7f;
+    (void) M_PI;
+    (void) 4.71238898038469;
+    (void) 0.10471975511965977;
+    (void) -0.05f;
+    (void) 0.01f;
+}
+
 void ftYs_SpecialS_8012F35C(Fighter_GObj* gobj)
 {
     f32 var_f0;
@@ -445,7 +461,7 @@ void ftYs_SpecialAirSLoop_0_Anim(Fighter_GObj* gobj)
             abs_speed = -abs_speed;
         }
         fp->mv.ys.specials.x14 =
-            (f32) ((f64) (2.0 * M_PI / 25.0) * (attributes->xD8 * abs_speed) +
+            (f32) ((f64) (M_TAU / 25.0) * (attributes->xD8 * abs_speed) +
                    (f64) fp->mv.ys.specials.x14);
     }
 
@@ -541,7 +557,7 @@ ftYs_SpecialS_UpdateLoop1Rotation(Fighter* fp, ftYoshiAttributes* attributes,
                 }
                 delta = x10 + vel;
             }
-            *angle = (M_PI * (delta / total) + (3.0 * M_PI / 2.0));
+            *angle = (M_PI * (delta / total) + (3.0 * M_PI_2));
         }
     }
 
