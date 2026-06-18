@@ -2778,13 +2778,14 @@ melee/gr/grpushon.c:
 	.rodata     start:0x803B8440 end:0x803B8470
 	.data       start:0x803E7AC8 end:0x803E7D00
 	.sdata      start:0x804D4930 end:0x804D4950
-	.sbss       start:0x804D6AB8 end:0x804D6AC8
+	.sbss       start:0x804D6AB8 end:0x804D6AC0
 	.sdata2     start:0x804DBAF0 end:0x804DBB40
 
 melee/gr/grfigureget.c:
 	.text       start:0x80219530 end:0x80219C98
 	.rodata     start:0x803B8470 end:0x803B8480
 	.data       start:0x803E7D00 end:0x803E7DA0
+	.sbss       start:0x804D6AC0 end:0x804D6AC8
 	.sdata2     start:0x804DBB40 end:0x804DBB60
 
 melee/gr/grbattle.c:
@@ -4148,13 +4149,13 @@ melee/it/items/itgreatfoxlaser.c:
 
 melee/it/items/ittincle.c:
 	.text       start:0x802EB5C8 end:0x802ECCDC
+	.rodata     start:0x803B8740 end:0x803B8750
 	.data       start:0x803F9000 end:0x803F90D0
 	.sdata      start:0x804D56F8 end:0x804D5708
 	.sdata2     start:0x804DD8B0 end:0x804DD8E0
 
 melee/it/items/itkyasarin.c:
 	.text       start:0x802ECCDC end:0x802EE200
-	.rodata     start:0x803B8740 end:0x803B8750
 	.data       start:0x803F90D0 end:0x803F91D0
 	.sdata      start:0x804D5708 end:0x804D5718
 	.sdata2     start:0x804DD8E0 end:0x804DD918

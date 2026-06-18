@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include "vi/forward.h"
+#include "vi/forward.h" // IWYU pragma: export
 
 struct ViCharaDesc {
     /* 0x0 */ u8 p1_char_index;
