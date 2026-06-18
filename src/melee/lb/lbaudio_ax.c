@@ -696,7 +696,7 @@ static void order_data(void)
 
     (void) "smash2.sem";
     (void) "HSD_AudioGetAuxHeapSize(2, &rvbStd) < 53*1024";
-    (void) "HSD_AudioGetAuxHeapSize(2, &delay) < 71*1024\0\0\0\0\0\0\0";
+    (void) "HSD_AudioGetAuxHeapSize(2, &delay) < 71*1024";
 }
 
 static inline void lbAudioAx_SetAudioPath(char* dst, bool us)
@@ -2417,7 +2417,7 @@ void lbAudioAx_80027168(void)
 
         if ((u32) lbl_804D6438 < (u32) (lbl_804D6448 + lbl_804D6450)) {
             OSReport("******** CAUTION ********\nFGM load size is over\n");
-            __assert(__FILE__, 0xDB3, "0\0\0\0\0\0\0");
+            __assert(__FILE__, 0xDB3, "0");
         }
 
         {
@@ -2804,9 +2804,8 @@ void lbAudioAx_8002838C(void)
                       0xD400);
 
     AXDriver_8038E37C(AXDRIVER_AUX_DELAY, &delay);
-    HSD_ASSERTMSG(
-        0xF72, HSD_AudioGetAuxHeapSize(2, &delay) < 71 * 1024,
-        "HSD_AudioGetAuxHeapSize(2, &delay) < 71*1024\0\0\0\0\0\0\0");
+    HSD_ASSERTMSG(0xF72, HSD_AudioGetAuxHeapSize(2, &delay) < 71 * 1024,
+                  "HSD_AudioGetAuxHeapSize(2, &delay) < 71*1024");
 
     AXDriver_8038E30C(1, 4, &delay, (u8*) ((char*) lbl_80433B44 + 0xD520),
                       0x11C00);
@@ -3013,7 +3012,7 @@ void lbAudioAx_80028B90(void)
 /// @todo .sdata order hack
 void order_sdata(void)
 {
-    (void) "0\0\0\0\0\0\0";
+    (void) "0";
 }
 
 /// @todo .sdata2 order hack
