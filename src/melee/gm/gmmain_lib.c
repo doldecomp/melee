@@ -1189,7 +1189,7 @@ void gmMainLib_8015F588(bool arg0)
 
 /// #gmMainLib_8015F600
 
-static u8 gmMainLib_804D3EE4;
+static s8 gmMainLib_804D3EE4[] = { 0 };
 
 void gmMainLib_8015F600(int arg0, int arg1)
 {
@@ -1271,14 +1271,14 @@ void gmMainLib_8015F600(int arg0, int arg1)
                 char* src = mnName_8023749C((s32) (u8) idx);
                 if (src != NULL) {
                     s32 k = 0;
-                    while ((s8) gmMainLib_804D3EE4 != (s8) (u8) *src) {
+                    while (gmMainLib_804D3EE4[0] != (s8) (u8) *src) {
                         data->namedata[k] = (u8) *src;
                         k++;
                         src++;
                     }
-                    data->namedata[k] = gmMainLib_804D3EE4;
+                    data->namedata[k] = gmMainLib_804D3EE4[0];
                 } else {
-                    data->namedata[0] = (u8) gmMainLib_804D3EE4;
+                    data->namedata[0] = gmMainLib_804D3EE4[0];
                 }
             }
             data->x1A1 = 1;
