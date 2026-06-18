@@ -399,7 +399,9 @@ struct gmm_x0 {
     /* 0x17C0 */ VsModeData unk_1710; ///< opening movie?
     /* 0x1850 */ GameRules x1850;
     /* 0x1898 */ struct gmm_x1868 thing;
-}; /* size = 0x6E80 */
+    /* 0x6E50 */ u8 pad_6E50[0x8518 - 0x6E50];
+};
+STATIC_ASSERT(sizeof(struct gmm_x0) == 0x8518);
 
 struct lbl_8046B6A0_24C_t {
     UNK_T x0;
