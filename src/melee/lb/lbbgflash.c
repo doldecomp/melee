@@ -579,7 +579,7 @@ void fn_80020AEC(HSD_JObj* jobj, Mtx out)
 }
 #pragma inline_depth(8)
 void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
-                        f32 min_angle)
+                        f32 min_angle, f32 unused)
 {
     u8 _1[16];
     f32 dx = dir->x;

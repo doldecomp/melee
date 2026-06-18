@@ -379,9 +379,17 @@ melee/ft/ft_0881.c:
 	.sdata2     start:0x804D83E0 end:0x804D83E8
 
 melee/ft/ft_0892.c:
-	.text       start:0x800892D4 end:0x8008A494
+	.text       start:0x800892D4 end:0x8008998C
+	.sdata2     start:0x804D83E8 end:0x804D83F0
+
+melee/ft/ft_0899.c:
+	.text       start:0x8008998C end:0x8008A1FC
 	.sdata      start:0x804D3AD0 end:0x804D3AE0
-	.sdata2     start:0x804D83E8 end:0x804D8448
+	.sdata2     start:0x804D83F0 end:0x804D8438
+
+melee/ft/ft_08A1.c:
+	.text       start:0x8008A1FC end:0x8008A494
+	.sdata2     start:0x804D8438 end:0x804D8448
 
 melee/ft/chara/ftCommon/ftCo_Wait.c:
 	.text       start:0x8008A494 end:0x8008A698

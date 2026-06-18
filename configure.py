@@ -541,7 +541,9 @@ config.libs = [
             Object(Matching, "melee/ft/ftlib.c"),
             Object(Matching, "melee/ft/ft_0877.c"),
             Object(Matching, "melee/ft/ft_0881.c"),
-            Object(NonMatching, "melee/ft/ft_0892.c"),
+            Object(Matching, "melee/ft/ft_0892.c"),
+            Object(NonMatching, "melee/ft/ft_0899.c"),
+            Object(Matching, "melee/ft/ft_08A1.c"),
             # Common
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Wait.c"),
             Object(Matching, "melee/ft/ftwaitanim.c"),
