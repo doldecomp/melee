@@ -3,6 +3,8 @@
 #include <dolphin/os.h>
 #include <baselib/debug.h>
 
+/* 4316C0 */ lbArqGlobal lbArq_804316C0;
+
 #pragma push
 #pragma dont_inline on
 lbArqState lbArq_80014ABC(lbArqNode* arg0)
