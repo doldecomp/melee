@@ -1,5 +1,6 @@
 #include "lbarq.h"
 
+#include <trigf.h>
 #include <dolphin/os.h>
 #include <baselib/debug.h>
 
