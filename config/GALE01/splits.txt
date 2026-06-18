@@ -2275,7 +2275,7 @@ melee/gm/gmregtyfall.c:
 	.bss        start:0x804808F8 end:0x80480A00
 	.sdata      start:0x804D4278 end:0x804D4290
 	.sbss       start:0x804D6740 end:0x804D67B0
-	.sdata2     start:0x804DAA00 end:0x804DAA28
+	.sdata2     start:0x804DAA00 end:0x804DAA18
 
 melee/gm/gm_1A4C.c:
 	.text       start:0x801A7A44 end:0x801A9DD0
@@ -2283,6 +2283,7 @@ melee/gm/gm_1A4C.c:
 	.bss        start:0x80480A00 end:0x80480B38
 	.sdata      start:0x804D4290 end:0x804D42E8
 	.sbss       start:0x804D67B0 end:0x804D67D0
+	.sdata2     start:0x804DAA18 end:0x804DAA28
 	.sdata2     start:0x804DAA28 end:0x804DAAA8
 
 melee/gm/gmopening.c:
