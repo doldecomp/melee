@@ -6,11 +6,8 @@
 #include "dolphin/gx/GXStruct.h"
 
 #include "ft/forward.h"
+#include "vi/forward.h"
 #include <baselib/forward.h>
-
-/* 4D7028 */ extern GXColor un_804D7028;
-/* 4D7030 */ extern HSD_GObj* un_804D7030;
-/* 4D7034 */ extern HSD_GObj* un_804D7034;
 
 /* 3204B0 */ void un_803204B0(int, int);
 /* 3204C0 */ void un_803204C0(HSD_GObj*);
@@ -24,5 +21,9 @@
 /* 320A1C */ void fn_80320A1C(HSD_GObj*);
 /* 320A40 */ void un_80320A40_OnEnter(void*);
 /* 3210EC */ void un_803210EC_OnFrame(void);
+/* 4D7004 */ extern un_804D7004_t un_804D7038;
+/* 4D7028 */ extern GXColor un_804D7028;
+/* 4D7030 */ extern HSD_GObj* un_804D7030;
+/* 4D7034 */ extern HSD_GObj* un_804D7034;
 
 #endif

@@ -87,14 +87,17 @@ static struct strings us_msg[6] = {
 static HSD_Text* lb_804D63D0;
 
 struct lb_804329F0_t {
-    struct UnkArrElem {
-        /* 0x00 */ s64 x0;
-        /* 0x08 */ s64 x8;
-        /* 0x10 */ int x10;
-    } x0[2];
+    union {
+        struct UnkArrElem {
+            /* 0x00 */ s64 x0;
+            /* 0x08 */ s64 x8;
+            /* 0x10 */ int x10;
+        } x0[2];
+        /* 0x00 */ u32 x0_words[12];
+    };
     u32 x4;
     u64 x38;
-    u64 x40;
+    OSTime x40;
     int x48;
     OSAlarm alarm;
 };
@@ -234,21 +237,21 @@ void fn_800195FC(void)
 
 void lb_80019628(void)
 {
-    OSAlarm* alarm = &lb_804329F0.alarm;
     OSTime period;
-    u64 new_val = lb_804329F0.x38;
+    OSTime new_val = lb_804329F0.x38;
 
-    if ((s64) new_val == lb_804329F0.x0[0].x0) {
+    if (new_val == lb_804329F0.x0[0].x0) {
         return;
     }
 
-    lb_804329F0.x0[0].x0 = (s64) new_val;
+    lb_804329F0.x0[0].x0 = new_val;
 
     if (lb_804329F0.x0[0].x8 >= lb_804329F0.x0[0].x0) {
-        lb_804329F0.x0[0].x8 = 0;
+        lb_804329F0.x0_words[3] = 0;
+        lb_804329F0.x0_words[2] = 0;
     }
 
-    period = (OSTime) (f64) (u32) OS_TIMER_CLOCK;
+    period = (OSTime) (f32) (u32) OS_TIMER_CLOCK;
 
     if (lb_804329F0.x0[0].x0 < period) {
         period = lb_804329F0.x0[0].x0;
@@ -258,22 +261,18 @@ void lb_80019628(void)
         period = lb_804329F0.x0[1].x0;
     }
 
-    {
-        OSTime fps_period =
-            (OSTime) (f64) (0.016666668f * (f32) (u32) OS_TIMER_CLOCK);
-        if (period >= fps_period) {
-            period = fps_period;
-        }
+    if (period >= (OSTime) (f64) (0.016666668f * (f32) (u32) OS_TIMER_CLOCK)) {
+        period = (OSTime) (f64) (0.016666668f * (f32) (u32) OS_TIMER_CLOCK);
     }
 
-    if ((s64) lb_804329F0.x40 == period) {
+    if (lb_804329F0.x40 == period) {
         return;
     }
 
-    lb_804329F0.x40 = (u64) period;
+    lb_804329F0.x40 = period;
 
     {
-        u32 rate = (u32) ((u64) period / (OS_TIMER_CLOCK / 1000));
+        u32 rate = (u32) (lb_804329F0.x40 / (OS_TIMER_CLOCK / 1000));
         if (rate > 11) {
             rate = 11;
         }
@@ -284,10 +283,10 @@ void lb_80019628(void)
     }
 
     if (lb_804329F0.x48 != 0) {
-        OSCancelAlarm(alarm);
+        OSCancelAlarm(&lb_804329F0.alarm);
     }
-    OSCreateAlarm(alarm);
-    OSSetPeriodicAlarm(alarm, lb_804329F0.x40, lb_804329F0.x40,
+    OSCreateAlarm(&lb_804329F0.alarm);
+    OSSetPeriodicAlarm(&lb_804329F0.alarm, lb_804329F0.x40, lb_804329F0.x40,
                        (OSAlarmHandler) fn_800195FC);
     lb_804329F0.x48 = 1;
 }

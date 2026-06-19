@@ -435,7 +435,10 @@ void lbMthp_8001F410(const char* filename, void* rate_table, int buf,
     struct lbl_804333E0_t* streamPlayer;
     s32* power;
 
-    streamPlayer = &Movieplayer;
+    {
+        struct lbl_804333E0_t* moviePlayer = &Movieplayer;
+        streamPlayer = moviePlayer;
+    }
     power = &streamPlayer->power;
     LBMTHP_ASSERT(0x341, !streamPlayer->power, lbl_803BAFB8);
 
