@@ -1796,40 +1796,44 @@ void mnNameNew_EnterFromMnCharSel(HSD_Archive* arg0, s32 arg1)
         arg0,
 
         // Background
-        (void**) &MenMainBack_Top.joint, mnNameNew_803EE38C,
-        &MenMainBack_Top.animjoint, mnNameNew_803EE3A4,
-        &MenMainBack_Top.matanim_joint, mnNameNew_803EE3C0,
-        &MenMainBack_Top.shapeanim_joint, mnNameNew_803EE3E0,
+        (void**) &MenMainBack_Top.joint, "MenMainBack_Top_joint",
+        &MenMainBack_Top.animjoint, "MenMainBack_Top_animjoint",
+        &MenMainBack_Top.matanim_joint, "MenMainBack_Top_matanim_joint",
+        &MenMainBack_Top.shapeanim_joint, "MenMainBack_Top_shapeanim_joint",
 
         // Scene
-        &MenMain_cam, mnNameNew_803EE400, &MenMain_lights, mnNameNew_803EE41C,
-        &MenMain_fog, mnNameNew_803EE434,
+        &MenMain_cam, "ScMenMain_cam_int1_camera", &MenMain_lights,
+        "ScMenMain_scene_lights", &MenMain_fog, "ScMenMain_fog",
 
         // Panel
-        &MenMainPanel_Top.joint, mnNameNew_803EE444,
-        &MenMainPanel_Top.animjoint, mnNameNew_803EE45C,
-        &MenMainPanel_Top.matanim_joint, mnNameNew_803EE478,
-        &MenMainPanel_Top.shapeanim_joint, mnNameNew_803EE498,
+        &MenMainPanel_Top.joint, "MenMainPanel_Top_joint",
+        &MenMainPanel_Top.animjoint, "MenMainPanel_Top_animjoint",
+        &MenMainPanel_Top.matanim_joint, "MenMainPanel_Top_matanim_joint",
+        &MenMainPanel_Top.shapeanim_joint, "MenMainPanel_Top_shapeanim_joint",
 
         // Row 1
-        &mnNameNew_804A06F0[0], mnNameNew_803EE4BC, &mnNameNew_804A06F0[1],
-        mnNameNew_803EE4D8, &mnNameNew_804A06F0[2], mnNameNew_803EE4F8,
-        &mnNameNew_804A06F0[3], mnNameNew_803EE51C,
+        &mnNameNew_804A06F0[0], "MenMainConEtNw_Top_joint",
+        &mnNameNew_804A06F0[1], "MenMainConEtNw_Top_animjoint",
+        &mnNameNew_804A06F0[2], "MenMainConEtNw_Top_matanim_joint",
+        &mnNameNew_804A06F0[3], "MenMainConEtNw_Top_shapeanim_joint",
 
         // Row 2
-        &mnNameNew_804A0700[0], mnNameNew_803EE540, &mnNameNew_804A0700[1],
-        mnNameNew_803EE55C, &mnNameNew_804A0700[2], mnNameNew_803EE57C,
-        &mnNameNew_804A0700[3], mnNameNew_803EE5A0,
+        &mnNameNew_804A0700[0], "MenMainBaseEtNw_Top_joint",
+        &mnNameNew_804A0700[1], "MenMainBaseEtNw_Top_animjoint",
+        &mnNameNew_804A0700[2], "MenMainBaseEtNw_Top_matanim_joint",
+        &mnNameNew_804A0700[3], "MenMainBaseEtNw_Top_shapeanim_joint",
 
         // Row 3
-        &mnNameNew_804A0710[0], mnNameNew_803EE5C4, &mnNameNew_804A0710[1],
-        mnNameNew_803EE5E0, &mnNameNew_804A0710[2], mnNameNew_803EE600,
-        &mnNameNew_804A0710[3], mnNameNew_803EE624,
+        &mnNameNew_804A0710[0], "MenMainSubEtNw_Top_joint",
+        &mnNameNew_804A0710[1], "MenMainSubEtNw_Top_animjoint",
+        &mnNameNew_804A0710[2], "MenMainSubEtNw_Top_matanim_joint",
+        &mnNameNew_804A0710[3], "MenMainSubEtNw_Top_shapeanim_joint",
 
         // Row 4
-        &mnNameNew_804A0720[0], mnNameNew_803EE648, &mnNameNew_804A0720[1],
-        mnNameNew_803EE664, &mnNameNew_804A0720[2], mnNameNew_803EE684,
-        &mnNameNew_804A0720[3], mnNameNew_803EE6A8,
+        &mnNameNew_804A0720[0], "MenMainSbaseEtNw_Top_joint",
+        &mnNameNew_804A0720[1], "MenMainSbaseEtNw_Top_animjoint",
+        &mnNameNew_804A0720[2], "MenMainSbaseEtNw_Top_matanim_joint",
+        &mnNameNew_804A0720[3], "MenMainSbaseEtNw_Top_shapeanim_joint",
 
         NULL);
 
@@ -1837,11 +1841,11 @@ void mnNameNew_EnterFromMnCharSel(HSD_Archive* arg0, s32 arg1)
 
     if (is_us) {
         lbArchive_LoadSections(arg0, (void**) &AutoNamesList,
-                               mnNameNew_803EE6D0, &NotAllowedNamesList,
-                               mnNameNew_803EE6E4, NULL);
+                               "mnNameAutoNameUs", &NotAllowedNamesList,
+                               "mnNameRefuseNameUs", NULL);
     } else {
         lbArchive_LoadSections(arg0, (void**) &AutoNamesList, "mnNameAutoName",
-                               &NotAllowedNamesList, mnNameNew_803EE708, NULL);
+                               &NotAllowedNamesList, "mnNameRefuseName", NULL);
     }
 
     mn_8022C304();
