@@ -2448,7 +2448,7 @@ melee/gm/gm_1BA8.c:
 	.bss        start:0x80497758 end:0x8049E558
 	.sdata      start:0x804D4330 end:0x804D44C8
 	.sbss       start:0x804D6900 end:0x804D6940
-	.sdata2     start:0x804DAC78 end:0x804DAC90
+	.sdata2     start:0x804DAC78 end:0x804DAC88
 
 melee/gm/gm_1BF9.c:
 	.text       start:0x801BF948 end:0x801BFA6C

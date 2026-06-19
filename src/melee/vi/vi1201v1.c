@@ -50,7 +50,7 @@
 /* 4D6FFC */ static u8 un_804D6FFC;
 /* 4D6FFD */ static u8 un_804D6FFD;
 /* 4D7000 */ static void* un_804D7000;
-static un_804D7004_t un_804D7004;
+/* 4D7004 */ un_804D7004_t un_804D7004;
 
 Vec3 player_spawn = { 0.0f, 0.0f, 0.0f };
 
