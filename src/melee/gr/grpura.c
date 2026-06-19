@@ -280,11 +280,6 @@ void grPura_802120E0(Ground_GObj* arg0)
     gp->gv.pura.xC8 = 0;
 }
 
-const f32 grPu_804DBA70 = 0.0;
-const f32 grPu_804DBA74 = 2.0;
-const f32 grPu_804DBA78 = 30.0;
-const f32 grPu_804DBA7C = -30.0;
-
 void grPura_8021228C(Ground_GObj* arg0) {}
 
 void grPura_80212290(Ground_GObj* arg0)
