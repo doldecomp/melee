@@ -1222,7 +1222,7 @@ static gm_803DF94C_t gm_804D43E0 = { gm_801BC754, NULL };
 /// @todo Fix this callback signature
 static gm_803DF94C_t gm_804D43E8 = {
     gm_801BC754,
-    (void (*)(int)) gm_801BEA88,
+    (void (*)(int))(void*) gm_801BEA88,
 };
 
 static gm_803DF94C_t gm_804D43F0 = { gm_801BD7FC, NULL };
