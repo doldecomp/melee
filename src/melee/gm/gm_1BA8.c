@@ -222,7 +222,7 @@ s32 gm_801BAC9C(GameScene* arg0, s32 arg1)
     s32 k;
     s32 count = 0;
     struct gm_event_char_list* src =
-        (struct gm_event_char_list*) gm_804D6900[ev->unk_535][0]->x4;
+        (struct gm_event_char_list*) (*gm_804D6900)[ev->unk_535]->x4;
     PAD_STACK(8);
 
     for (i = 0; i < 0x21; i++) {
@@ -1876,7 +1876,7 @@ void gm_801BC9E8(HSD_GObj* gobj)
     bool var_r0;
     struct EventData* temp_r30_2;
     struct gm_804D6900_x4_t* temp_r30 =
-        gm_804D6900[gmMainLib_804D3EE0->unk_530.unk_535][0]->x4;
+        (*gm_804D6900)[gmMainLib_804D3EE0->unk_530.unk_535]->x4;
     u32 coins = Player_GetCoins(0);
     PAD_STACK(0x28);
 
@@ -3026,7 +3026,7 @@ void gm_801BE638(HSD_GObj* gobj)
 void gm_801BEA10(int arg0)
 {
     Player_SetPlayerAndEntityCpuType(
-        arg0, gm_804D6900[gmMainLib_804D3EE0->unk_530.unk_535][0]->xC->x16);
+        arg0, (*gm_804D6900)[gmMainLib_804D3EE0->unk_530.unk_535]->xC->x16);
 }
 
 void gm_801BEA4C(int arg0)
@@ -3072,7 +3072,7 @@ u8 gm_801BEB80(void)
 
 bool gm_801BEB8C(u8 arg0)
 {
-    return gm_804D6900[arg0][0]->x8->x1_0;
+    return (*gm_804D6900)[arg0]->x8->x1_0;
 }
 
 u8 gm_801BEBA8(u8 arg0)
@@ -3118,7 +3118,7 @@ u8 gm_801BEBF8(u8 arg0)
 UNK_T gm_801BEC54(void)
 {
     struct gm_804D6900_t* temp_r3;
-    temp_r3 = gm_804D6900[gmMainLib_804D3EE0->unk_530.unk_535][0];
+    temp_r3 = (*gm_804D6900)[gmMainLib_804D3EE0->unk_530.unk_535];
     if (temp_r3 == NULL) {
         return NULL;
     }
