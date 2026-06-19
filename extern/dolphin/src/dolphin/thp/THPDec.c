@@ -119,12 +119,15 @@ s32 THPDec_8032F8D4(u32 file_arg, void* out_arg)
     THPDec_8032FD40_Data* out = (THPDec_8032FD40_Data*) out_arg;
     u8 sH[8];
     u8 sV[8];
-    char jfif[] = "JFIF";
+    u8 jfif[] = "JFIF";
     u8 found_jfif;
     u8 marker;
+    u8 comp_i;
+    u8 sampling;
+    u8 jfif_i;
     u32 i;
-    u32 ncomp;
-    u32 len;
+    u8 ncomp;
+    u16 len;
 
     found_jfif = 0;
     memset(out, 0, 0xC);
@@ -152,9 +155,11 @@ s32 THPDec_8032F8D4(u32 file_arg, void* out_arg)
             if (ncomp != 3) {
                 return 0;
             }
-            for (i = 0; i < ncomp; i++) {
-                sH[i] = p[i * 3 + 1] >> 4;
-                sV[i] = p[i * 3 + 1] & 0xF;
+            for (comp_i = 0; comp_i < ncomp; comp_i++) {
+                sampling = p[1];
+                sH[comp_i] = sampling >> 4;
+                sV[comp_i] = sampling & 0xF;
+                p += 3;
             }
             if (sH[0] / sH[1] == 2 && sH[0] / sH[2] == 2) {
                 if (sV[0] / sV[1] == 2 && sV[0] / sV[2] == 2) {
@@ -172,8 +177,8 @@ s32 THPDec_8032F8D4(u32 file_arg, void* out_arg)
         } else if (marker == 0xE0) {
             len = (p[0] << 8) | p[1];
             p += 2;
-            for (i = 0; i < 5; i++) {
-                if (*p != jfif[i]) {
+            for (jfif_i = 0; jfif_i < 5; jfif_i++) {
+                if (*p != jfif[jfif_i]) {
                     return 0;
                 }
                 p++;
@@ -286,6 +291,34 @@ static u8 __THPSetupBuffers(THPFileInfo* info)
     }
 }
 
+typedef struct THPVideoDecodeHeader {
+    u16 xSize;
+    u16 ySize;
+} THPVideoDecodeHeader;
+
+typedef struct THPVideoDecodeInfoView {
+    u8* file;
+    u32 currByte;
+    u32 cnt;
+    u8* x0C;
+    u8 pad10[0x50 - 0x10];
+    u16 xSize;
+    u16 ySize;
+    u8 pad54[0x6C - 0x54];
+    u8* x6C;
+    u8 pad70[0x7D - 0x70];
+    u8 x7D;
+    u8 pad7E[0x8D2 - 0x7E];
+    u16 x8D2;
+    u8 pad8D4[0x8E8 - 0x8D4];
+    u16 x8E8;
+    u16 x8EA;
+    u16 x8EC;
+    u16 x8EE;
+    u8 pad8F0[0x904 - 0x8F0];
+    u8* x904;
+} THPVideoDecodeInfoView;
+
 /**
  * Decodes a THP video file.
  *
@@ -300,17 +333,31 @@ static u8 __THPSetupBuffers(THPFileInfo* info)
 s32 THPVideoDecode(void* file, void* tileY, void* tileU, void* tileV,
                    void* workArea)
 {
-    u8 all_done, status;
-    s32 errorCode;
+    u8 done;
+    THPVideoDecodeInfoView* info = tileU;
+    THPVideoDecodeHeader* header = file;
+    u8* statusOut = tileY;
+    u8 status;
+    s32 length;
+    u32 i;
 
-    THPFileInfo* info = __THPInfo;
-
-    DCZeroRange(file, sizeof(THPFileInfo));
+    DCZeroRange(info, 0x920);
+    info->x904 = (u8*) info;
+    info->x904 += 0x920;
+    info->xSize = header->xSize;
+    info->ySize = header->ySize;
+    info->file = info->x6C;
     info->cnt = 33;
-    info->decompressedY = 0;
-    info->file = (u8*) file;
-
-    all_done = FALSE;
+    info->x8EC = 0;
+    info->x8EE = 0;
+    info->x8D2 = 0;
+    info->x8E8 = 0;
+    info->x8EA = 0;
+    info->x7D = 0;
+    info->x0C = tileV;
+    THPDec_803300E0((u32*) info);
+    done = FALSE;
+    info->file = info->x0C;
 
     for (;;) {
         if ((*(info->file)++) != 0xFF) {
@@ -318,122 +365,80 @@ s32 THPVideoDecode(void* file, void* tileY, void* tileU, void* tileV,
         }
 
         while (*info->file == 0xFF) {
-            ((info->file)++);
+            info->file++;
         }
 
         status = (*(info->file)++);
 
         if (status <= 0xD7) {
             if (status == 0xC4) {
-                status = __THPReadHuffmanTableSpecification(info);
-
+                status = __THPReadHuffmanTableSpecification((THPFileInfo*) info);
                 if (status != 0) {
                     goto _err_bad_status;
                 }
-            }
-
-            else if (status == 192)
-            {
-                status = __THPReadFrameHeader();
+            } else if (status == 0xC0) {
+                status = __THPReadFrameHeader((THPFileInfo*) info);
                 if (status != 0) {
                     goto _err_bad_status;
                 }
-            }
-
-            else {
-                goto _err_unsupported_marker;
-            }
-        }
-
-        else if (0xD8 <= status && status <= 0xDF)
-        {
-            if (status == 221) {
-                __THPRestartDefinition(info);
-            }
-
-            else if (status == 219)
-            {
-                status = __THPReadQuantizationTable(info);
-                if (status != 0) {
-                    goto _err_bad_status;
-                }
-            }
-
-            else if (status == 218)
-            {
-                status = __THPReadScaneHeader(info);
-                if (status != 0) {
-                    goto _err_bad_status;
-                }
-
-                all_done = TRUE;
-            } else if (status == 216) {
-                // empty but required for match
             } else {
-                goto _err_unsupported_marker;
+                *statusOut = 11;
+                return 0;
             }
-        }
-
-        else if (0xE0 <= status)
-        {
-            if ((224 <= status && status <= 239) || status == 254) {
-                info->file += (info->file)[0] << 8 | (info->file)[1];
+        } else if (0xD8 <= status && status <= 0xDF) {
+            if (status == 0xDD) {
+                __THPRestartDefinition((THPFileInfo*) info);
+            } else if (status == 0xDB) {
+                status = __THPReadQuantizationTable((THPFileInfo*) info);
+                if (status != 0) {
+                    goto _err_bad_status;
+                }
+            } else if (status == 0xDA) {
+                status = __THPReadScaneHeader((THPFileInfo*) info);
+                if (status != 0) {
+                    goto _err_bad_status;
+                }
+                done = TRUE;
+                info->x6C = info->file;
+            } else if (status != 0xD8) {
+                *statusOut = 11;
+                return 0;
+            }
+        } else if (0xE0 <= status) {
+            if (status == 0xE0) {
+                status = THPDec_80330158((THPFileInfo*) info);
+                if (status != 0) {
+                    goto _err_bad_status;
+                }
+            } else if (0xE1 <= status && status <= 0xEF) {
+                THPDec_803302EC(&info->file);
+            } else if (status == 0xFE) {
+                length = (info->file[0] << 8) | info->file[1];
+                info->file += 2;
+                for (i = 0; i < length - 2; i++) {
+                    info->file++;
+                }
             } else {
-                goto _err_unsupported_marker;
+                *statusOut = 11;
+                return 0;
             }
         }
 
-        if (all_done) {
-            break;
+        if (done) {
+            *statusOut = 0;
+            return (s32) info;
         }
     }
 
-    __THPSetupBuffers(info);
-    __THPDecompressYUV(tileY, tileU, tileV);
-    return 0;
-
-_err_no_input:
-    errorCode = 25;
-    goto _err_exit;
-
-_err_no_output:
-    errorCode = 27;
-    goto _err_exit;
-
-_err_no_work:
-    errorCode = 26;
-    goto _err_exit;
-
-_err_unsupported_marker:
-    errorCode = 11;
-    goto _err_exit;
-
-_err_bad_resource:
-    errorCode = 1;
-    goto _err_exit;
-
-_err_no_mem:
-    errorCode = 6;
-    goto _err_exit;
-
 _err_bad_syntax:
-    errorCode = 3;
+    *statusOut = 3;
     goto _err_exit;
 
 _err_bad_status:
-    errorCode = status;
-    goto _err_exit;
-
-_err_lc_not_enabled:
-    errorCode = 28;
-    goto _err_exit;
-
-_err_not_initialized:
-    errorCode = 29;
-    goto _err_exit;
+    *statusOut = status;
 
 _err_exit:
-    return errorCode;
+    return 0;
 }
 
 s32 THPDec_803302EC(u8** data)
@@ -478,7 +483,7 @@ void THPDec_803300E0(u32* data)
     }
 }
 
-s32 THPDec_80330158(THPFileInfo* info)
+u8 THPDec_80330158(THPFileInfo* info)
 {
     u8 jfif[] = "JFIF";
     u8* start;
@@ -543,9 +548,13 @@ typedef struct THPScanComp {
     /* 0x00 */ u8 x00;
     /* 0x01 */ u8 samplingH;
     /* 0x02 */ u8 samplingV;
-    /* 0x03 */ u8 pad03[3];
+    /* 0x03 */ u8 quantizationTableSelector;
+    /* 0x04 */ u8 DCTableSelector;
+    /* 0x05 */ u8 ACTableSelector;
     /* 0x06 */ u16 x06;
-    /* 0x08 */ u8 pad08[0x14 - 0x08];
+    /* 0x08 */ u32 x08;
+    /* 0x0C */ u32 x0C;
+    /* 0x10 */ u32 x10;
     /* 0x14 */ s32 x14;
     /* 0x18 */ s32 x18;
     /* 0x1C */ s32 x1C;
@@ -555,10 +564,20 @@ typedef struct THPScanComp {
 } THPScanComp;
 
 typedef struct THPScanInfo {
-    /* 0x000 */ u8 pad00[0x70];
+    /* 0x000 */ u8* file;
+    /* 0x004 */ u32 currByte;
+    /* 0x008 */ u32 cnt;
+    /* 0x00C */ u8* x0C;
+    /* 0x010 */ u8 pad10[0x50 - 0x10];
+    /* 0x050 */ u16 x50;
+    /* 0x052 */ u16 x52;
+    /* 0x054 */ u8 pad54[0x70 - 0x54];
     /* 0x070 */ u16 x70;
     /* 0x072 */ u16 x72;
-    /* 0x074 */ u8 pad74[0x7A - 0x74];
+    /* 0x074 */ u16 x74;
+    /* 0x076 */ u16 x76;
+    /* 0x078 */ u8 validHuffmanTabs;
+    /* 0x079 */ u8 x79;
     /* 0x07A */ u8 x7A;
     /* 0x07B */ u8 x7B;
     /* 0x07C */ u8 x7C;
@@ -568,34 +587,58 @@ typedef struct THPScanInfo {
     /* 0x8CC */ u16 x8CC;
     /* 0x8CE */ u16 x8CE;
     /* 0x8D0 */ u16 x8D0;
+    /* 0x8D2 */ u8 pad8D2[0x8D4 - 0x8D2];
+    /* 0x8D4 */ u16 x8D4;
+    /* 0x8D6 */ u8 pad8D6[0x904 - 0x8D6];
+    /* 0x904 */ u8* x904;
 } THPScanInfo;
 
-s32 THPDec_803310CC(THPScanInfo* info);
+u8 THPDec_803310CC(THPScanInfo* info);
 
-s32 THPDec_803310CC(THPScanInfo* info)
+u8 THPDec_803310CC(THPScanInfo* info)
 {
-    u8 i;
+    u32 i;
     s32 count;
-    s32 j;
+    s32 count2;
+    s32 tmp;
     THPScanComp* c;
 
-    info->x8CC = (info->x7A * 8 + info->x70 - 1) / (info->x7A * 8);
-    info->x8D0 = (info->x7B * 8 + info->x72 - 1) / (info->x7B * 8);
+    count = info->x7A * 8;
+    tmp = count + info->x70;
+    tmp--;
+    info->x8CC = tmp / count;
+    count = info->x7B * 8;
+    tmp = count;
+    tmp += info->x72;
+    tmp--;
+    info->x8D0 = tmp / count;
     info->x8CE = 0;
     for (i = 0; i < info->x7C; i++) {
         c = &info->components[i];
-        c->x28 = (info->x7A * 8 + info->x70 * c->samplingH - 1) / (info->x7A * 8);
-        c->x24 = (info->x7B * 8 + info->x72 * c->samplingV - 1) / (info->x7B * 8);
+        count = info->x7A * 8;
+        tmp = count + info->x70 * c->samplingH;
+        tmp--;
+        c->x28 = tmp / count;
+        count = info->x7B * 8;
+        tmp = count;
+        tmp += info->x72 * c->samplingV;
+        tmp--;
+        c->x24 = tmp / count;
         c->x14 = c->samplingH;
         c->x18 = c->samplingV;
         c->x1C = c->x14 * c->x18;
         c->x20 = c->x14 * 8;
         count = c->x1C;
+        tmp = count;
         if (info->x8CE + count > 0x10) {
             return 0x11;
         }
-        for (j = 0; j < count; j++) {
-            info->x8BC[info->x8CE++] = i;
+        if (tmp > 0) {
+            count2 = tmp;
+            while (count2 > 0) {
+                info->x8BC[info->x8CE++] = i;
+                count2--;
+            }
         }
         if (info->x8CE > 6) {
             OSReport("THP does not support anything other than 4:2:0!\n");
@@ -647,6 +690,7 @@ void THPDec_80331340(s32 arg0, void* arg1, void* arg2, void* arg3)
 
 void THPDec_803313D0(s32 arg0, void* arg1, void* arg2, void* arg3, u32 x)
 {
+    u32 width = x;
     THPDecodeInfo* info = (THPDecodeInfo*) arg0;
     info->x8F0 = arg1;
     info->x8F4 = arg2;
@@ -665,7 +709,7 @@ void THPDec_803313D0(s32 arg0, void* arg1, void* arg2, void* arg3, u32 x)
 
     __THPPrepBitStream((THPFileInfo*) info);
     while (info->x8EE < info->x8EA + info->x76) {
-        __THPDecompressiMCURowNxN((THPFileInfo*) info, x);
+        __THPDecompressiMCURowNxN((THPFileInfo*) info, width);
         info->x8EE += info->x8D4;
     }
 }
@@ -683,39 +727,97 @@ s32 THPDec_8032FD40(THPDec_8032FD40_Data* data, u16 num)
     return base;
 }
 
-static u8 __THPReadFrameHeader(void)
+typedef struct THPFrameHeaderComp {
+    /* 0x00 */ u8 componentID;
+    /* 0x01 */ u8 samplingH;
+    /* 0x02 */ u8 samplingV;
+    /* 0x03 */ u8 quantizationTableSelector;
+    /* 0x04 */ u8 pad04[0x08 - 0x04];
+    /* 0x08 */ u32 x08;
+    /* 0x0C */ u32 x0C;
+    /* 0x10 */ u8 pad10[0x2C - 0x10];
+} THPFrameHeaderComp;
+
+typedef struct THPFrameHeaderInfo {
+    /* 0x000 */ u8* file;
+    /* 0x004 */ u8 pad04[0x70 - 0x04];
+    /* 0x070 */ u16 xPixelSize;
+    /* 0x072 */ u16 yPixelSize;
+    /* 0x074 */ u8 pad74[0x7A - 0x74];
+    /* 0x07A */ u8 samplingHMax;
+    /* 0x07B */ u8 samplingVMax;
+    /* 0x07C */ u8 nComponents;
+    /* 0x07D */ u8 pad7D[0x838 - 0x7D];
+    /* 0x838 */ THPFrameHeaderComp components[3];
+    /* 0x8BC */ u8 pad8BC[0x8D4 - 0x8BC];
+    /* 0x8D4 */ u16 x8D4;
+} THPFrameHeaderInfo;
+
+static u8 __THPReadFrameHeader(THPFileInfo* info)
 {
-    u8 i, utmp8;
+    THPFrameHeaderInfo* frame = (THPFrameHeaderInfo*) info;
+    THPFrameHeaderInfo* compBase;
+    THPFrameHeaderInfo* compBase2;
+    u8 i;
+    u8 j;
+    u8 k;
+    THPFrameHeaderComp* comp;
+    u8 utmp8;
+    u16 ySize;
 
-    __THPInfo->file += 2;
+    frame->file += 2;
 
-    utmp8 = (*(__THPInfo->file)++);
+    utmp8 = (*(frame->file)++);
 
     if (utmp8 != 8) {
         return 10;
     }
 
-    __THPInfo->yPixelSize =
-        (u16) ((__THPInfo->file)[0] << 8 | (__THPInfo->file)[1]);
-    __THPInfo->file += 2;
-    __THPInfo->xPixelSize =
-        (u16) ((__THPInfo->file)[0] << 8 | (__THPInfo->file)[1]);
-    __THPInfo->file += 2;
+    frame->yPixelSize = (u16) ((frame->file)[0] << 8 | (frame->file)[1]);
+    frame->file += 2;
+    frame->xPixelSize = (u16) ((frame->file)[0] << 8 | (frame->file)[1]);
+    frame->file += 2;
 
-    utmp8 = (*(__THPInfo->file)++);
-    if (utmp8 != 3) {
+    frame->nComponents = (*(frame->file)++);
+    if (frame->nComponents != 3 && frame->nComponents != 1) {
         return 12;
     }
 
-    for (i = 0; i < 3; i++) {
-        utmp8 = (*(__THPInfo->file)++);
-        utmp8 = (*(__THPInfo->file)++);
-        if ((i == 0 && utmp8 != 0x22) || (i > 0 && utmp8 != 0x11)) {
-            return 19;
-        }
+    for (i = 0, compBase = frame; i < frame->nComponents;
+         compBase = (THPFrameHeaderInfo*) ((u8*) compBase +
+                                           sizeof(THPFrameHeaderComp)), i++) {
+        compBase->components[0].componentID = (*(frame->file)++);
+        utmp8 = (*(frame->file)++);
+        compBase->components[0].samplingH = (u8) (utmp8 >> 4);
+        compBase->components[0].samplingV = (u8) (utmp8 & 0xF);
+        compBase->components[0].quantizationTableSelector =
+            (*(frame->file)++);
+    }
 
-        __THPInfo->components[i].quantizationTableSelector =
-            (*(__THPInfo->file)++);
+    frame->samplingHMax = 1;
+    frame->samplingVMax = 1;
+    for (j = 0, compBase2 = frame; j < frame->nComponents;
+         compBase2 = (THPFrameHeaderInfo*) ((u8*) compBase2 +
+                                            sizeof(THPFrameHeaderComp)), j++) {
+        comp = &compBase2->components[0];
+        frame->samplingHMax = frame->samplingHMax > comp->samplingH
+                                  ? frame->samplingHMax
+                                  : comp->samplingH;
+        frame->samplingVMax = frame->samplingVMax > comp->samplingV
+                                  ? frame->samplingVMax
+                                  : comp->samplingV;
+    }
+
+    ySize = frame->yPixelSize;
+    frame->x8D4 = (u16) THPROUNDUP(
+        ySize, THPROUNDUP(ySize, frame->samplingVMax * 8));
+    for (k = 0; k < frame->nComponents; k++) {
+        frame->components[k].x08 =
+            THPROUNDUP(frame->xPixelSize * frame->components[k].samplingH,
+                       frame->samplingHMax);
+        frame->components[k].x0C =
+            THPROUNDUP(frame->yPixelSize * frame->components[k].samplingV,
+                       frame->samplingVMax);
     }
 
     return 0;
@@ -811,72 +913,158 @@ static u8 __THPReadHuffmanTableSpecification(THPFileInfo* info)
 
 static u8 __THPReadScaneHeader(THPFileInfo* info)
 {
-    u8 i, utmp8;
-    info->file += 2;
+    THPScanInfo* compBase;
+    THPScanInfo* scan;
+    s32 rem;
+    u8 i, ncomp, utmp8;
+    s32 quotient;
+    s32 rows;
+    u16 rowHeight;
+    u16 ySize;
+    u16 rows16;
+    u16 width16;
+    u32 width;
 
-    utmp8 = (*(info->file)++);
+    scan = (THPScanInfo*) info;
+    scan->file += 2;
 
-    if (utmp8 != 3) {
+    ncomp = (*(scan->file)++);
+
+    if (ncomp != scan->x7C) {
         return 12;
     }
 
-    for (i = 0; i < 3; i++) {
-        utmp8 = (*(info->file)++);
+    for (i = 0, compBase = scan; i < ncomp;
+         compBase = (THPScanInfo*) ((u8*) compBase + sizeof(THPScanComp)), i++) {
+        rem = 1;
+        scan->file++;
+        utmp8 = (*(scan->file)++);
+        compBase->components[0].DCTableSelector = (u8) (utmp8 >> 4);
+        compBase->components[0].ACTableSelector = (u8) (utmp8 & 15);
 
-        utmp8 = (*(info->file)++);
-        info->components[i].DCTableSelector = (u8) (utmp8 >> 4);
-        info->components[i].ACTableSelector = (u8) (utmp8 & 15);
-
-        if ((info->validHuffmanTabs & (1 << ((utmp8 >> 4)))) == 0) {
+        if ((scan->validHuffmanTabs & (rem << (utmp8 >> 4))) == 0) {
             return 15;
         }
 
-        if ((info->validHuffmanTabs & (1 << ((utmp8 & 15) + 1))) == 0) {
+        if ((scan->validHuffmanTabs & (rem << ((utmp8 & 15) + 1))) == 0) {
             return 15;
         }
+
+        scan->x74 = scan->x50;
+        scan->x76 = scan->x52;
+        rowHeight = scan->x8D4;
+        ySize = scan->x76;
+        width = compBase->components[0].x08;
+        quotient = ySize / rowHeight;
+        rows = rowHeight + ySize;
+        rows--;
+        rows /= rowHeight;
+        rows16 = rows;
+        width16 = width;
+
+        if (ySize - (quotient * rowHeight) == 0) {
+            rem = 0;
+        }
+
+        compBase->components[0].x10 = (u32) scan->x904;
+        scan->x904 += width16 *
+                      (u16) (((u16) ((rows16 + rem) * rowHeight)) >>
+                             (scan->x7B -
+                              compBase->components[0].samplingV));
     }
 
-    info->file += 3;
-    info->MCUsPerRow = (u16) THPROUNDUP(info->xPixelSize, 16);
-    info->components[0].predDC = 0;
-    info->components[1].predDC = 0;
-    info->components[2].predDC = 0;
-    return 0;
+    scan->file += 3;
+    return THPDec_803310CC(scan);
 }
 
-static u8 __THPHuffGenerateSizeTable(THPFileInfo* info, u8 a, int b)
-{
-    s32 p, l, i;
-    p = 0;
+typedef struct THPHuffmanTabSizeEntry {
+    u8 quick[32];
+    u8 increment[32];
+    u8* Vij;
+    s32 maxCode[18];
+    s32 valPtr[18];
+    u8 padD4[0xD8 - 0xD4];
+    u8* bits;
+    s8* sizeTab;
+    u32* codeTab;
+    u32 numCodes;
+    u32 padE8;
+} THPHuffmanTabSizeEntry;
 
+typedef struct THPFileInfoHuffmanSizeView {
+    u8 pad[0x88];
+    THPHuffmanTabSizeEntry huffmanTabs[4];
+    u8 pad438[0x904 - 0x438];
+    u8* x904;
+} THPFileInfoHuffmanSizeView;
+
+static u8 __THPHuffGenerateSizeTable(THPFileInfo* info, u8 tab_index, int huffmanBits)
+{
+    THPFileInfoHuffmanSizeView* huff;
+    u8* bits;
+    s32 p;
+    s32 l;
+    s32 i;
+
+    bits = (u8*) huffmanBits;
+
+    p = 0;
     for (l = 1; l <= 16; l++) {
-        i = (s32) __THPHuffmanBits[l - 1];
+        p += bits[l - 1];
+    }
+
+    huff = (THPFileInfoHuffmanSizeView*) info;
+    huff->huffmanTabs[tab_index].sizeTab = (s8*) huff->x904;
+    huff->x904 += p + 1;
+
+    p = 0;
+    for (l = 1; l <= 16; l++) {
+        i = bits[l - 1];
         while (i--) {
-            __THPHuffmanSizeTab[p++] = (u8) l;
+            huff->huffmanTabs[tab_index].sizeTab[p++] = (s8) l;
         }
     }
 
-    __THPHuffmanSizeTab[p] = 0;
+    huff->huffmanTabs[tab_index].sizeTab[p] = 0;
+    huff->huffmanTabs[tab_index].numCodes = p;
+    return 0;
 }
 
 static u8 __THPHuffGenerateCodeTable(THPFileInfo* info, u8 tab_index)
 {
-    u8 si;
-    u16 p, code;
+    THPFileInfoHuffmanSizeView* huff;
+    s32 si;
+    s32 p;
+    u32 code;
+
+    huff = (THPFileInfoHuffmanSizeView*) info;
+
+    p = 0;
+    si = huff->huffmanTabs[tab_index].sizeTab[0];
+    while (huff->huffmanTabs[tab_index].sizeTab[p]) {
+        while (huff->huffmanTabs[tab_index].sizeTab[p] == si) {
+            p++;
+        }
+        si++;
+    }
+
+    huff->huffmanTabs[tab_index].codeTab = (u32*) huff->x904;
+    huff->x904 += p * sizeof(u32);
 
     p = 0;
     code = 0;
-    si = __THPHuffmanSizeTab[0];
-
-    while (__THPHuffmanSizeTab[p]) {
-        while (__THPHuffmanSizeTab[p] == si) {
-            __THPHuffmanCodeTab[p++] = code;
+    si = huff->huffmanTabs[tab_index].sizeTab[0];
+    while (huff->huffmanTabs[tab_index].sizeTab[p]) {
+        while (huff->huffmanTabs[tab_index].sizeTab[p] == si) {
+            huff->huffmanTabs[tab_index].codeTab[p++] = code;
             code++;
         }
 
         code <<= 1;
         si++;
     }
+
+    return 0;
 }
 
 static int __THPHuffGenerateDecoderTables(THPFileInfo* info, u8 tabIndex)

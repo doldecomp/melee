@@ -73,6 +73,7 @@ void lbArq_80014BD0(u32 source, void* dest, size_t length,
 {
     lbArqGlobal* global = &lbArq_804316C0;
     lbArqNode* rp;
+    lbArqNode* tmp;
     lbArqNode** tail;
     lbArqNode** free_head;
     BOOL intr;
@@ -80,7 +81,8 @@ void lbArq_80014BD0(u32 source, void* dest, size_t length,
     PAD_STACK(16);
     DCInvalidateRange(dest, length);
     intr = OSDisableInterrupts();
-    rp = global->list[LB_ARQ_STATE_FREE];
+    tmp = global->list[LB_ARQ_STATE_FREE];
+    rp = tmp;
     free_head = &global->list[LB_ARQ_STATE_FREE];
     HSD_ASSERT(0x67, rp);
     *free_head = rp->next;

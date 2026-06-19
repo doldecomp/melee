@@ -4,6 +4,8 @@
 
 #include "gm_unsplit.h"
 
+#include "vi/vi1201v1.h"
+
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjproc.h>
@@ -75,8 +77,6 @@ GameScene gm_803DF618_Scenes[] = {
     },
     { 0xFF },
 };
-
-/* 49E548 */ static struct gm_8049E548_t gm_8049E548;
 
 extern u8 gm_804D68F8;
 extern u8 gm_804D68F9;
@@ -222,7 +222,7 @@ s32 gm_801BAC9C(GameScene* arg0, s32 arg1)
     s32 k;
     s32 count = 0;
     struct gm_event_char_list* src =
-        (struct gm_event_char_list*) gm_804D6900[ev->unk_535]->x4;
+        (struct gm_event_char_list*) (*gm_804D6900)[ev->unk_535]->x4;
     PAD_STACK(8);
 
     for (i = 0; i < 0x21; i++) {
@@ -347,7 +347,7 @@ void gm_801BAD70(GameScene* arg0)
 
     lbArchive_LoadSymbols("GmEvent.dat", &gm_804D6900,
                           "sqEventInitDataLevelTbl", 0);
-    levels = gm_804D6900;
+    levels = gm_804D6900[0];
     gm_80167A64(&md->rules);
     lvlpp = &levels[level];
     level_info = (struct gm_evlevel*) *lvlpp;
@@ -697,12 +697,12 @@ void gm_801BB758(GameScene* arg0)
         gm_801A42F8(1);
         return;
     }
-    ev->x3C += gm_80168940(&gm_804979D8.match_end);
+    ev->x3C += gm_80168940(&gm_804979D8[0].match_end);
     ev->x40 += (s32) exit->match_end.frame_count;
     b = ((u8*) ev)[0xB];
     if (((b >> 3) & 1) && ((b >> 5) & 1)) {
-        ev->x24 = gm_804979D8.match_end.player_standings[0].stocks;
-        ev->x28 = gm_804979D8.match_end.player_standings[0].percent;
+        ev->x24 = gm_804979D8[0].match_end.player_standings[0].stocks;
+        ev->x28 = gm_804979D8[0].match_end.player_standings[0].percent;
         ev->xB_2 = 0;
         ev->xB_5 = 0;
         t = ev->x20;
@@ -822,7 +822,7 @@ s32 gm_801BBB64(void)
     s32 result;
 
     ev = &gmMainLib_804D3EE0->unk_530;
-    tbl = gm_804D6900;
+    tbl = gm_804D6900[0];
     idx = gmMainLib_804D3EE0->unk_530.unk_535;
     if (*tbl[idx]->x14 != 0x21) {
         ev->x44 = 0;
@@ -950,7 +950,7 @@ void gm_801BBEA8_OnLoad(void)
     temp_r30 = &gmMainLib_804D3EE0->unk_530;
     gm_801BA8FC();
 
-    temp_r29 = gm_804D6900;
+    temp_r29 = gm_804D6900[0];
     temp_r28 = temp_r30->unk_535;
     temp_r30->x0 = 0;
     temp_r30->x1 = 0;
@@ -1028,7 +1028,7 @@ s32 gm_801BC00C(void)
     case 48:
         lbArchive_LoadSymbols("GmEvent.dat", &gm_804D6900,
                               "sqEventInitDataLevelTbl", 0);
-        event_levels = gm_804D6900;
+        event_levels = gm_804D6900[0];
         break;
     }
 
@@ -1195,17 +1195,63 @@ static u8 gm_803DF918[] = {
     0x2C, 0x2D, 0x2E, 0x22, 0x30, 0x31, 0x32,
 };
 
-extern gm_803DF94C_t gm_804D4330, gm_804D43B8, gm_804D4340, gm_804D4348,
-    gm_804D4350, gm_804D4358, gm_804D4360, gm_804D4368, gm_804D4370,
-    gm_804D4378, gm_804D4380, gm_804D4388, gm_804D4390, gm_804D4398,
-    gm_804D4450, gm_804D43A8, gm_804D43B0, gm_804D4338, gm_804D43C0,
-    gm_804D43C8, gm_804D43D0, gm_804D43D8, gm_804D4400, gm_804D43E8,
-    gm_804D43F0, gm_804D43F8, gm_804D43E0, gm_804D4408, gm_804D4410,
-    gm_804D4418, gm_804D4420, gm_804D4428, gm_804D4430, gm_804D4438,
-    gm_804D44A8, gm_804D4448, gm_804D43A0, gm_804D4458, gm_804D4460,
-    gm_804D4468, gm_804D4470, gm_804D4478, gm_804D4480, gm_804D4488,
-    gm_804D4490, gm_804D4498, gm_804D44A0, gm_804D4440, gm_804D44B0,
-    gm_804D44B8, gm_804D44C0;
+static gm_803DF94C_t gm_804D4330 = { gm_801BC754, NULL };
+static gm_803DF94C_t gm_804D4338 = { gm_801BC754, NULL };
+static gm_803DF94C_t gm_804D4340 = { gm_801BC754, NULL };
+static gm_803DF94C_t gm_804D4348 = { gm_801BC754, NULL };
+static gm_803DF94C_t gm_804D4350 = { gm_801BC9E8, NULL };
+static gm_803DF94C_t gm_804D4358 = { gm_801BC754, NULL };
+static gm_803DF94C_t gm_804D4360 = { gm_801BC754, NULL };
+static gm_803DF94C_t gm_804D4368 = { gm_801BC754, NULL };
+static gm_803DF94C_t gm_804D4370 = { gm_801BCAF0, NULL };
+static gm_803DF94C_t gm_804D4378 = { gm_801BCF20, NULL };
+static gm_803DF94C_t gm_804D4380 = { gm_801BCF40, NULL };
+static gm_803DF94C_t gm_804D4388 = { gm_801BC754, NULL };
+static gm_803DF94C_t gm_804D4390 = { gm_801BD028, NULL };
+static gm_803DF94C_t gm_804D4398 = { gm_801BC754, NULL };
+static gm_803DF94C_t gm_804D43A0 = { gm_801BC754, NULL };
+static gm_803DF94C_t gm_804D43A8 = { gm_801BC754, gm_801BEA10 };
+static gm_803DF94C_t gm_804D43B0 = { gm_801BD164, NULL };
+static gm_803DF94C_t gm_804D43B8 = { gm_801BC754, NULL };
+static gm_803DF94C_t gm_804D43C0 = { gm_801BD30C, NULL };
+static gm_803DF94C_t gm_804D43C8 = { gm_801BD44C, NULL };
+static gm_803DF94C_t gm_804D43D0 = { gm_801BD46C, NULL };
+static gm_803DF94C_t gm_804D43D8 = { gm_801BD658, gm_801BEA4C };
+static gm_803DF94C_t gm_804D43E0 = { gm_801BC754, NULL };
+
+/// @todo Fix this callback signature
+static gm_803DF94C_t gm_804D43E8 = {
+    gm_801BC754,
+    (void (*)(int))(void*) gm_801BEA88,
+};
+
+static gm_803DF94C_t gm_804D43F0 = { gm_801BD7FC, NULL };
+static gm_803DF94C_t gm_804D43F8 = { gm_801BC754, NULL };
+static gm_803DF94C_t gm_804D4400 = { gm_801BC754, NULL };
+static gm_803DF94C_t gm_804D4408 = { gm_801BC754, gm_801BEAF0 };
+static gm_803DF94C_t gm_804D4410 = { gm_801BD93C, NULL };
+static gm_803DF94C_t gm_804D4418 = { gm_801BDAD4, NULL };
+static gm_803DF94C_t gm_804D4420 = { gm_801BC754, NULL };
+static gm_803DF94C_t gm_804D4428 = { gm_801BDAF4, NULL };
+static gm_803DF94C_t gm_804D4430 = { gm_801BDC08, NULL };
+static gm_803DF94C_t gm_804D4438 = { gm_801BC754, NULL };
+static gm_803DF94C_t gm_804D4440 = { gm_801BDD44, NULL };
+static gm_803DF94C_t gm_804D4448 = { gm_801BDE94, NULL };
+static gm_803DF94C_t gm_804D4450 = { gm_801BC754, NULL };
+static gm_803DF94C_t gm_804D4458 = { gm_801BC754, NULL };
+static gm_803DF94C_t gm_804D4460 = { gm_801BC754, NULL };
+static gm_803DF94C_t gm_804D4468 = { gm_801BE37C, NULL };
+static gm_803DF94C_t gm_804D4470 = { gm_801BC754, NULL };
+static gm_803DF94C_t gm_804D4478 = { gm_801BC754, NULL };
+static gm_803DF94C_t gm_804D4480 = { gm_801BC754, NULL };
+static gm_803DF94C_t gm_804D4488 = { gm_801BE39C, NULL };
+static gm_803DF94C_t gm_804D4490 = { gm_801BC754, gm_801BEB2C };
+static gm_803DF94C_t gm_804D4498 = { gm_801BC754, NULL };
+static gm_803DF94C_t gm_804D44A0 = { gm_801BC754, NULL };
+static gm_803DF94C_t gm_804D44A8 = { gm_801BC754, NULL };
+static gm_803DF94C_t gm_804D44B0 = { gm_801BE618, NULL };
+static gm_803DF94C_t gm_804D44B8 = { gm_801BE638, NULL };
+static gm_803DF94C_t gm_804D44C0 = { gm_801BC754, NULL };
 
 gm_803DF94C_t* gm_803DF94C[] = {
     &gm_804D4330, &gm_804D43B8, &gm_804D4340, &gm_804D4348, &gm_804D4350,
@@ -1219,6 +1265,406 @@ gm_803DF94C_t* gm_803DF94C[] = {
     &gm_804D4470, &gm_804D4478, &gm_804D4480, &gm_804D4488, &gm_804D4490,
     &gm_804D4498, &gm_804D44A0, &gm_804D4440, &gm_804D44B0, &gm_804D44B8,
     &gm_804D44C0
+};
+
+GameScene gm_803DFA18_Scenes[] = {
+    {
+        0,
+        2,
+        0,
+        NULL,
+        gm_801BEC80,
+        {
+            GS_TOY_GALLERY,
+            NULL,
+            &gm_804D6908,
+        },
+    },
+    { 0xFF },
+};
+
+GameScene gm_803DFA48_Scenes[] = {
+    {
+        0,
+        2,
+        0,
+        gm_801BECA8,
+        gm_801BECD0,
+        {
+            GS_TOY_LOTTERY,
+            NULL,
+            &gm_804D6910,
+        },
+    },
+    { 0xFF },
+};
+
+GameScene gm_803DFA78_Scenes[] = {
+    {
+        0,
+        2,
+        0,
+        NULL,
+        gm_801BED14,
+        {
+            GS_TOY_COLLECTION,
+            NULL,
+            &gm_804D6918,
+        },
+    },
+    { 0xFF },
+};
+
+GameScene gm_803DFAA8_Scenes[] = {
+    {
+        0,
+        2,
+        0,
+        gm_801BED3C,
+        gm_801BEDA8,
+        {
+            GS_CSS,
+            &gm_8049BEE8,
+            NULL,
+        },
+    },
+    { 0xFF },
+};
+
+GameScene gm_803DFAD8_Scenes[] = {
+    {
+        0,
+        2,
+        0,
+        gm_801BEE58,
+        NULL,
+        {
+            GS_SSS,
+            &gm_8049C030,
+            NULL,
+        },
+    },
+    { 0xFF },
+};
+
+GameScene gm_803DFB08[] = {
+    {
+        0,
+        2,
+        0,
+        NULL,
+        NULL,
+        {
+            GS_REGEND_TOYFALL,
+            NULL,
+            &gm_804D6920,
+        },
+    },
+    {
+        1,
+        2,
+        0,
+        NULL,
+        NULL,
+        {
+            GS_STAFFROLL,
+            NULL,
+            NULL,
+        },
+    },
+    {
+        2,
+        2,
+        0,
+        NULL,
+        gm_801BEF84,
+        {
+            GS_MOVIE_END,
+            NULL,
+            NULL,
+        },
+    },
+    {
+        3,
+        2,
+        0,
+        NULL,
+        gm_801BEE9C,
+        {
+            GS_REGEND_CONGRATS,
+            NULL,
+            &gm_804D6920,
+        },
+    },
+    { 0xFF },
+};
+
+GameScene gm_803DFB80_Scenes[] = {
+    {
+        0,
+        2,
+        0,
+        NULL,
+        NULL,
+        {
+            GS_REGEND_TOYFALL,
+            NULL,
+            &gm_804D6920,
+        },
+    },
+    {
+        1,
+        2,
+        0,
+        NULL,
+        gm_801BEE9C,
+        {
+            GS_REGEND_CONGRATS,
+            NULL,
+            &gm_804D6920,
+        },
+    },
+    { 0xFF },
+};
+
+GameScene gm_803DFBC8_Scenes[] = {
+    {
+        0,
+        3,
+        0,
+        gm_801BF85C,
+        gm_801BF898,
+        {
+            GS_MOVIE_OPENING,
+            NULL,
+            NULL,
+        },
+    },
+    {
+        1,
+        3,
+        0,
+        gm_801BF4DC,
+        NULL,
+        {
+            GS_VS,
+            &gm_8049C188,
+            &gm_8049C2C0,
+        },
+    },
+    {
+        2,
+        3,
+        0,
+        gm_801B087C,
+        gm_801BF060,
+        {
+            GS_TITLE,
+            NULL,
+            &gm_804D6930,
+        },
+    },
+    {
+        3,
+        3,
+        0,
+        gm_801BF4DC,
+        NULL,
+        {
+            GS_VS,
+            &gm_8049C188,
+            &gm_8049C2C0,
+        },
+    },
+    {
+        4,
+        3,
+        0,
+        NULL,
+        gm_801BF8B8,
+        {
+            GS_MOVIE_HOWTO,
+            NULL,
+            NULL,
+        },
+    },
+    {
+        5,
+        3,
+        0,
+        NULL,
+        gm_801BF8D8,
+        {
+            GS_MOVIE_OMAKE15,
+            NULL,
+            NULL,
+        },
+    },
+    { 0xFF },
+};
+
+GameScene gm_803DFC70_Scenes[] = {
+    {
+        0,
+        2,
+        0,
+        gm_801BF728,
+        NULL,
+        {
+            GS_CUTSCENE_LUIGI,
+            &un_804D6F3C,
+            NULL,
+        },
+    },
+    {
+        1,
+        2,
+        0,
+        NULL,
+        NULL,
+        {
+            GS_CUTSCENE_BRINSTAR,
+            &un_804D6F60,
+            NULL,
+        },
+    },
+    {
+        2,
+        2,
+        0,
+        NULL,
+        NULL,
+        {
+            GS_CUTSCENE_EXPLOSION,
+            NULL,
+            NULL,
+        },
+    },
+    {
+        3,
+        2,
+        0,
+        NULL,
+        NULL,
+        {
+            GS_CUTSCENE_3KIRBYS,
+            &un_804D6F84,
+            NULL,
+        },
+    },
+    {
+        4,
+        2,
+        0,
+        NULL,
+        NULL,
+        {
+            GS_CUTSCENE_GIANTKIRBY,
+            &un_804D6FA8,
+            NULL,
+        },
+    },
+    {
+        5,
+        2,
+        0,
+        NULL,
+        NULL,
+        {
+            GS_CUTSCENE_STARFOX,
+            NULL,
+            NULL,
+        },
+    },
+    {
+        6,
+        2,
+        0,
+        NULL,
+        NULL,
+        {
+            GS_CUTSCENE_FZERO,
+            NULL,
+            NULL,
+        },
+    },
+    {
+        7,
+        2,
+        0,
+        NULL,
+        NULL,
+        {
+            GS_CUTSCENE_METAL,
+            &un_804D6FD8,
+            NULL,
+        },
+    },
+    {
+        8,
+        2,
+        0,
+        NULL,
+        NULL,
+        {
+            GS_CUTSCENE_BOWSERTOY,
+            &un_804D7004,
+            NULL,
+        },
+    },
+    {
+        9,
+        2,
+        0,
+        NULL,
+        NULL,
+        {
+            GS_CUTSCENE_GIGATRANSFORM,
+            &un_804D7038,
+            NULL,
+        },
+    },
+    {
+        10,
+        2,
+        0,
+        NULL,
+        NULL,
+        {
+            GS_CUTSCENE_GIGADEFEATED,
+            NULL,
+            NULL,
+        },
+    },
+    {
+        11,
+        2,
+        0,
+        NULL,
+        gm_801BF834,
+        {
+            GS_REGEND_CONGRATS,
+            &gm_804D6928,
+            &gm_804D692C,
+        },
+    },
+    { 0xFF },
+};
+
+GameScene gm_803DFDA8_Scenes[] = {
+    {
+        0,
+        2,
+        0,
+        gm_801BF8F8,
+        gm_801BF920,
+        {
+            GS_PROG_SCAN,
+            &gm_804D6938,
+            &gm_804D693C,
+        },
+    },
+    { 0xFF },
 };
 
 int gm_801BC488(void)
@@ -1302,7 +1748,7 @@ void gm_801BC4F4(HSD_GObj* gobj)
 void gm_801BC670(HSD_GObj* arg0)
 {
     struct EventData* temp_r31 = &gmMainLib_804D3EE0->unk_530;
-    struct gm_804D6900_x4_t* temp_r30 = gm_804D6900[0]->x4;
+    struct gm_804D6900_x4_t* temp_r30 = gm_804D6900[0][0]->x4;
     PAD_STACK(0x10);
 
     temp_r31->xB_2 = true;
@@ -1430,7 +1876,7 @@ void gm_801BC9E8(HSD_GObj* gobj)
     bool var_r0;
     struct EventData* temp_r30_2;
     struct gm_804D6900_x4_t* temp_r30 =
-        gm_804D6900[gmMainLib_804D3EE0->unk_530.unk_535]->x4;
+        (*gm_804D6900)[gmMainLib_804D3EE0->unk_530.unk_535]->x4;
     u32 coins = Player_GetCoins(0);
     PAD_STACK(0x28);
 
@@ -1534,7 +1980,7 @@ void gm_801BCAF0(HSD_GObj* gobj)
 
 void gm_801BCC9C(HSD_GObj* arg0)
 {
-    struct gm_804D6900_t** temp_r29 = gm_804D6900;
+    struct gm_804D6900_t** temp_r29 = gm_804D6900[0];
     struct EventData* ev = &gmMainLib_804D3EE0->unk_530;
     u8 idx = gmMainLib_804D3EE0->unk_530.unk_535;
     struct gm_804D6900_x4_t* x4 = (*temp_r29)->x4;
@@ -1668,7 +2114,7 @@ void gm_801BD028(HSD_GObj* arg0)
     lbl_8046B6A0_t* rules;
     s32 cond;
     struct EventData* ev = &gmMainLib_804D3EE0->unk_530;
-    struct gm_804D6900_t** levels = gm_804D6900;
+    struct gm_804D6900_t** levels = gm_804D6900[0];
     u8 level = gmMainLib_804D3EE0->unk_530.unk_535;
     PAD_STACK(0x1C);
 
@@ -2184,7 +2630,7 @@ void gm_801BDD44(HSD_GObj* arg0)
 void gm_801BDE94(HSD_GObj* arg0)
 {
     PlayerInitData sp50;
-    struct gm_804D6900_t** tbl = gm_804D6900;
+    struct gm_804D6900_t** tbl = gm_804D6900[0];
     struct EventData* ev = &gmMainLib_804D3EE0->unk_530;
     u8 level = ev->unk_535;
     u64 mask;
@@ -2363,7 +2809,7 @@ void gm_801BE39C(HSD_GObj* gobj)
 
     PAD_STACK(0x34);
 
-    temp_r28 = gm_804D6900;
+    temp_r28 = gm_804D6900[0];
     temp_r0 = gmMainLib_804D3EE0->unk_530.unk_535;
     temp_r31 = &gmMainLib_804D3EE0->unk_530;
     temp_r30 = temp_r28[temp_r0]->x4;
@@ -2580,7 +3026,7 @@ void gm_801BE638(HSD_GObj* gobj)
 void gm_801BEA10(int arg0)
 {
     Player_SetPlayerAndEntityCpuType(
-        arg0, gm_804D6900[gmMainLib_804D3EE0->unk_530.unk_535]->xC->x16);
+        arg0, (*gm_804D6900)[gmMainLib_804D3EE0->unk_530.unk_535]->xC->x16);
 }
 
 void gm_801BEA4C(int arg0)
@@ -2626,7 +3072,7 @@ u8 gm_801BEB80(void)
 
 bool gm_801BEB8C(u8 arg0)
 {
-    return gm_804D6900[arg0]->x8->x1_0;
+    return (*gm_804D6900)[arg0]->x8->x1_0;
 }
 
 u8 gm_801BEBA8(u8 arg0)
@@ -2650,7 +3096,7 @@ u8 gm_801BEBF8(u8 arg0)
 {
     u8* table = gm_803DF918;
     u8 i;
-    struct gm_804D6900_t** array = gm_804D6900;
+    struct gm_804D6900_t** array = gm_804D6900[0];
     struct gm_804D6900_t* entry;
     u8* ptr;
 
@@ -2672,7 +3118,7 @@ u8 gm_801BEBF8(u8 arg0)
 UNK_T gm_801BEC54(void)
 {
     struct gm_804D6900_t* temp_r3;
-    temp_r3 = gm_804D6900[gmMainLib_804D3EE0->unk_530.unk_535];
+    temp_r3 = (*gm_804D6900)[gmMainLib_804D3EE0->unk_530.unk_535];
     if (temp_r3 == NULL) {
         return NULL;
     }
@@ -2770,8 +3216,6 @@ void gm_801BEF84(GameScene* arg)
 {
     lbMthp_8001F800();
 }
-
-/* 49C178 */ static u8 gm_8049C178[16];
 
 void gm_801BEFA4(int ckind)
 {

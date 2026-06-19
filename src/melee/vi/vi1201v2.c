@@ -7,7 +7,6 @@
 #include "cm/camera.h"
 #include "ef/efasync.h"
 #include "ef/eflib.h"
-#include "ft/ft_0C31.h"
 #include "ft/ftdemo.h"
 #include "gm/gm_1601.h"
 #include "gm/gm_unsplit.h"
@@ -67,7 +66,7 @@ GXColor un_804D7028;
 static s32 un_804D702C;
 HSD_GObj* un_804D7030;
 HSD_GObj* un_804D7034;
-static un_804D7004_t un_804D7038;
+un_804D7004_t un_804D7038;
 
 void un_803204B0(int arg0, int arg1)
 {
