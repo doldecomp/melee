@@ -679,6 +679,7 @@ struct MatchExitInfo {
     int x8;
     MatchEnd match_end;
 };
+STATIC_ASSERT(sizeof(struct MatchExitInfo) == 0x2288);
 
 struct ResultsMatchInfo {
     u8 x0_0 : 1;
@@ -1061,5 +1062,18 @@ struct TrainingMenuData {
     HSD_Text* x1FC;
     u32 x200;
 }; /// 80473814
+///
+struct gm_8049E548_t {
+    /* 0x00 */ char c_kind[4];
+    /* 0x04 */ u8 x4[4];
+    /* 0x08 */ u8 unk_8;
+    /* 0x09 */ u8 unk_9;
+    /* 0x0A */ s8 unk_A;
+    /* 0x0B */ char pad_B[1];
+    /* 0x0C */ u16 unk_C; ///< InternalStageId
+    /* 0x0E */ s8 unk_E;  /* inferred */
+    /* 0x0F */ char pad_F[1];
+}; /* size = 0x10 */
+STATIC_ASSERT(sizeof(struct gm_8049E548_t) == 0x10);
 
 #endif

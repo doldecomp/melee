@@ -7,19 +7,6 @@
 #include <melee/mn/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-struct gm_8049E548_t {
-    /* 0x00 */ char c_kind[4];
-    /* 0x04 */ u8 x4[4];
-    /* 0x08 */ u8 unk_8;
-    /* 0x09 */ u8 unk_9;
-    /* 0x0A */ s8 unk_A;
-    /* 0x0B */ char pad_B[1];
-    /* 0x0C */ u16 unk_C; ///< InternalStageId
-    /* 0x0E */ s8 unk_E;  /* inferred */
-    /* 0x0F */ char pad_F[1];
-}; /* size = 0x10 */
-STATIC_ASSERT(sizeof(struct gm_8049E548_t) == 0x10);
-
 /* 1B0348 */ void gm_801B0348(StartMeleeData*); /// Character tints?
 /* 1B0474 */ void gm_801B0474(StartMeleeData*, MatchEnd*);
 /* 1B05F4 */ void gm_801B05F4(PlayerInitData*, int);
