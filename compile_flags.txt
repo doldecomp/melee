@@ -24,6 +24,7 @@
 -Werror=typedef-redefinition
 -Wno-bitfield-constant-conversion
 -Wno-builtin-macro-redefined
+-Wno-cast-function-type-mismatch
 -Wno-for-loop-analysis
 -Wno-format
 -Wno-fortify-source
