@@ -73,99 +73,60 @@ void order_dag(int num, u32* dep, u32* full_dep, HSD_TExpDag* list, int depth,
     int* spC;
     int* sp10;
     HSD_TExpDag* dag;
-    int new_scheduled;
-    u32 new_available;
-    u32 blocked;
     u32 dep_bits;
+    u32 blocked;
+    u32 full_bits;
     int score;
     int i;
     int n;
-    int rem;
-    PAD_STACK(8);
 
-    new_scheduled = done_set | (1 << idx);
-    new_available = ready_set & ~(1 << idx);
-    order[depth] = (u8) idx;
+    done_set |= 1 << idx;
+    ready_set &= ~(1 << idx);
+    order[depth++] = (u8) idx;
 
-    if (depth + 1 == num) {
+    if (depth == num) {
         score = assign_reg(num, dep, list, order);
         if (score < *min) {
             *min = score;
-            i = 0;
-            if (num > 0) {
-                rem = num - 8;
-                if (num <= 8) {
-                    goto remainder;
-                }
-                n = (u32) (rem + 7) >> 3;
-                if (rem <= 0) {
-                    goto remainder;
-                }
-                {
-                    int* src = order;
-                    int* dst = min_order;
-
-                    do {
-                        i += 8;
-                        dst[0] = src[0];
-                        dst[1] = src[1];
-                        dst[2] = src[2];
-                        dst[3] = src[3];
-                        dst[4] = src[4];
-                        dst[5] = src[5];
-                        dst[6] = src[6];
-                        dst[7] = src[7];
-                        src += 8;
-                        dst += 8;
-                    } while (--n > 0);
-                }
-            remainder: {
-                int* src2 = order + i;
-                int* dst2 = min_order + i;
-
-                n = num - i;
-                if (i < num) {
-                    do {
-                        *dst2 = *src2;
-                        src2++;
-                        dst2++;
-                    } while (--n > 0);
-                }
-            }
+            for (i = 0; i < num; i++) {
+                min_order[i] = order[i];
             }
         }
     } else {
-        dep_bits = dep[idx];
-        blocked = new_available | dep_bits;
         {
             u32* fp = full_dep;
 
-            dep_bits = 0;
+            dep_bits = dep[idx];
+            {
+                u32 tmp = ready_set | dep_bits;
+                blocked = tmp;
+            }
+            full_bits = 0;
             n = 0;
             for (i = 0; i < num; i++) {
                 if (blocked & (1 << n)) {
-                    dep_bits |= *fp;
+                    full_bits |= *fp;
                 }
                 fp++;
                 n++;
             }
         }
         dag = &list[idx];
-        new_available = blocked & ~dep_bits;
-        if (dag->nb_dep == 1 && (new_available & dep[idx])) {
+        ready_set = blocked & ~full_bits;
+        if (dag->nb_dep == 1 && (ready_set & dep_bits)) {
             sp8 = order;
             spC = min;
             sp10 = min_order;
-            order_dag(num, dep, full_dep, list, depth + 1, dag->depend[0]->idx,
-                      new_scheduled, new_available, sp8, spC, sp10);
+            order_dag(num, dep, full_dep, list, depth, dag->depend[0]->idx,
+                      done_set, ready_set, sp8, spC, sp10);
         } else {
             for (i = 0; i < num; i++) {
-                if (new_available & (1 << i)) {
+                if (ready_set & (1 << i)) {
                     sp8 = order;
                     spC = min;
                     sp10 = min_order;
-                    order_dag(num, dep, full_dep, list, depth + 1, i,
-                              new_scheduled, new_available, sp8, spC, sp10);
+                    order_dag(num, dep, full_dep, list, depth, i, done_set,
+                              ready_set, sp8, spC, sp10);
                 }
             }
         }
@@ -203,26 +164,20 @@ void CalcDistance(HSD_TExp** tevs, int* dist, HSD_TExp* tev, int num,
     }
 }
 
-static int HSD_TEXP_MAX_NUM = 20;
+#define HSD_TEXP_MAX_NUM 32
 
 int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list)
 {
     HSD_TExp* sp94[32];
     int sp14[32];
     HSD_TExp* tmp;
-    HSD_TExp* tmp2;
     HSD_TExp* cur;
     HSD_TExp* cur2;
+    HSD_TExp** base;
     HSD_TExp** p;
-    HSD_TExp** q;
-    HSD_TExp** r;
-    HSD_TExp** r2;
-    HSD_TExp** r3;
     HSD_TExpDag* dep_entry;
     HSD_TExpDag* dep_entry2;
     HSD_TExpDag* dag;
-    HSD_TExpDag* dag2;
-    HSD_TExpDag* dag3;
     int count;
     int count2;
     int num;
@@ -233,84 +188,57 @@ int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list)
     int last;
     int idx;
     int idx2;
-    int loop_count;
-    int loop_count2;
-    int loop_count3;
+    u32 loop_count3;
     int loop_count4;
-    int loop_count5;
-    int loop_count6;
     int dist;
-    int ofs;
-    u8 dep_count;
-    u8 dep_count2;
+    PAD_STACK(4);
 
     HSD_ASSERT(0xEEU, HSD_TExpGetType(root) == HSD_TE_TEV);
 
-    sp94[0] = root;
-    p = &sp94[0];
-    num = 1;
+    base = &sp94[0];
+    num = 0;
+    base[num++] = root;
+    p = base;
     j = 0;
-loop_22:
-    if (j < num) {
+    while (j < num) {
         HSD_ASSERT(0xF6U, j<HSD_TEXP_MAX_NUM);
         cur = *p;
-        i = 0;
         tmp = cur;
-        do {
+        for (i = 0; i < 4; i++) {
             if ((u8) cur->tev.c_in[0].type == HSD_TE_TEV) {
-                loop_count = num;
-                q = &sp94[0];
-                k = 0;
-                if (num > 0) {
-                loop_8:
-                    if (*q != cur->tev.c_in[0].exp) {
-                        q++;
-                        k++;
-                        loop_count--;
-                        if (loop_count != 0) {
-                            goto loop_8;
-                        }
+                HSD_TExp** q = base;
+                for (k = 0; k < num; k++) {
+                    if (*q == cur->tev.c_in[0].exp) {
+                        break;
                     }
+                    q++;
                 }
                 if (k >= num) {
-                    sp94[num] = cur->tev.c_in[0].exp;
-                    num++;
+                    base[num++] = cur->tev.c_in[0].exp;
                 }
             }
-            i++;
             cur = (HSD_TExp*) ((u8*) cur + sizeof(HSD_TEArg));
-        } while (i < 4);
+        }
 
-        i = 0;
         cur2 = tmp;
-        do {
+        for (i = 0; i < 4; i++) {
             if ((u8) cur2->tev.a_in[0].type == HSD_TE_TEV) {
-                loop_count2 = num;
-                r = &sp94[0];
-                k = 0;
-                if (num > 0) {
-                loop_16:
-                    if (*r != cur2->tev.a_in[0].exp) {
-                        r++;
-                        k++;
-                        loop_count2--;
-                        if (loop_count2 != 0) {
-                            goto loop_16;
-                        }
+                HSD_TExp** r = base;
+                for (k = 0; k < num; k++) {
+                    if (*r == cur2->tev.a_in[0].exp) {
+                        break;
                     }
+                    r++;
                 }
                 if (k >= num) {
-                    sp94[num] = cur2->tev.a_in[0].exp;
-                    num++;
+                    base[num++] = cur2->tev.a_in[0].exp;
                 }
             }
-            i++;
             cur2 = (HSD_TExp*) ((u8*) cur2 + sizeof(HSD_TEArg));
-        } while (i < 4);
+        }
 
         p++;
         j++;
-        goto loop_22;
     }
 
     j = 0;
@@ -353,33 +281,28 @@ loop_22:
     }
 
     CalcDistance(&sp94[0], &sp14[0], sp94[0], num, 0);
-    idx = 0;
-loop_36:
-    if (idx < num) {
+    for (idx = 0; idx < num; idx++) {
         count2 = idx + 1;
-        loop_count5 = num - count2;
         {
+            HSD_TExp** r3;
             int* distp = &sp14[count2];
 
             r3 = &sp94[count2];
-            if (count2 < num) {
-                do {
-                    if (distp[-1] > distp[0]) {
-                        tmp2 = r3[-1];
-                        r3[-1] = r3[0];
-                        r3[0] = tmp2;
-                        dist = distp[-1];
-                        distp[-1] = distp[0];
-                        distp[0] = dist;
-                    }
-                    distp++;
-                    r3++;
-                    loop_count5--;
-                } while (loop_count5 != 0);
+            for (; count2 < num; count2++) {
+                if (distp[-1] > distp[0]) {
+                    HSD_TExp* tmp2;
+
+                    tmp2 = r3[-1];
+                    r3[-1] = r3[0];
+                    r3[0] = tmp2;
+                    dist = distp[-1];
+                    distp[-1] = distp[0];
+                    distp[0] = dist;
+                }
+                distp++;
+                r3++;
             }
         }
-        idx++;
-        goto loop_36;
     }
 
     last = num - 1;
@@ -396,42 +319,31 @@ loop_65:
         dag->tev = &tmp->tev;
         do {
             if ((u8) cur->tev.c_in[0].type == HSD_TE_TEV) {
-                l = last;
-                loop_count6 = num - l;
-                q = &sp94[last];
-                if (l < num) {
-                loop_41:
+                HSD_TExp** q = &sp94[last];
+                for (l = last; l < num; l++) {
                     if (cur->tev.c_in[0].exp == *q) {
+                        HSD_TExpDag** deps;
+                        u8 dep_count;
+
                         dep_count = dag->nb_dep;
-                        dag2 = dag;
+                        deps = dag->depend;
                         dep_entry = &list[l];
-                        l = 0;
-                        if ((int) dep_count > 0) {
-                        loop_43:
-                            if (dag2->depend[0] != dep_entry) {
-                                dag2++;
-                                l++;
-                                dep_count--;
-                                if (dep_count != 0) {
-                                    goto loop_43;
-                                }
+                        for (l = 0; l < (int) dep_count; l++) {
+                            if (*deps == dep_entry) {
+                                break;
                             }
+                            deps++;
                         }
                         if (l >= (int) dag->nb_dep) {
                             dag->depend[dag->nb_dep] = dep_entry;
                             dag->nb_dep++;
                             dep_entry->nb_ref++;
                         }
-                    } else {
-                        q++;
-                        l++;
-                        loop_count6--;
-                        if (loop_count6 != 0) {
-                            goto loop_41;
-                        }
+                        break;
                     }
+                    q++;
                 }
-                HSD_ASSERT(0x145B, l < num);
+                HSD_ASSERT(0x145, l < num);
             }
             idx++;
             cur = (HSD_TExp*) ((u8*) cur + sizeof(HSD_TEArg));
@@ -441,40 +353,29 @@ loop_65:
         cur2 = tmp;
         do {
             if ((u8) cur2->tev.a_in[0].type == HSD_TE_TEV) {
-                l = last;
-                ofs = num - l;
-                r2 = &sp94[last];
-                if (l < num) {
-                loop_54:
+                HSD_TExp** r2 = &sp94[last];
+                for (l = last; l < num; l++) {
                     if (cur2->tev.a_in[0].exp == *r2) {
+                        HSD_TExpDag** deps2;
+                        u8 dep_count2;
+
                         dep_count2 = dag->nb_dep;
-                        dag3 = dag;
+                        deps2 = dag->depend;
                         dep_entry2 = &list[l];
-                        l = 0;
-                        if ((int) dep_count2 > 0) {
-                        loop_56:
-                            if (dag3->depend[0] != dep_entry2) {
-                                dag3++;
-                                l++;
-                                dep_count2--;
-                                if (dep_count2 != 0) {
-                                    goto loop_56;
-                                }
+                        for (l = 0; l < (int) dep_count2; l++) {
+                            if (*deps2 == dep_entry2) {
+                                break;
                             }
+                            deps2++;
                         }
                         if (l >= (int) dag->nb_dep) {
                             dag->depend[dag->nb_dep] = dep_entry2;
                             dag->nb_dep++;
                             dep_entry2->nb_ref++;
                         }
-                    } else {
-                        r2++;
-                        l++;
-                        ofs--;
-                        if (ofs != 0) {
-                            goto loop_54;
-                        }
+                        break;
                     }
+                    r2++;
                 }
                 HSD_ASSERT(0x15B, l < num);
             }
@@ -750,8 +651,10 @@ int SimplifySrc(HSD_TExp* arg0)
 
 #define CLEAR_ARG(arg)                                                        \
     do {                                                                      \
-        *(u32*) &(arg) = HSD_TExpDag_804D5FF8;                                \
-        (arg).exp = HSD_TExpDag_804D5FFC;                                     \
+        clear_arg = HSD_TExpDag_804D5FF8;                                     \
+        clear_exp = HSD_TExpDag_804D5FFC;                                     \
+        *(u32*) &(arg) = clear_arg;                                           \
+        (arg).exp = clear_exp;                                                \
     } while (0)
 
 #define BIAS_TO_INT(bias) ((bias) == 1 ? 1 : ((bias) == 2 ? -1 : 0))
@@ -765,12 +668,15 @@ int SimplifySrc(HSD_TExp* arg0)
 int SimplifyThis(HSD_TExp* arg0)
 {
     HSD_TExp* cur;
+    u32 clear_arg;
+    HSD_TExp* clear_exp;
     int color_tex;
     int alpha_tex;
     int color_ras;
     int alpha_ras;
     int result;
     int changed;
+    int op;
     int i;
 
     result = 0;
@@ -780,69 +686,25 @@ int SimplifyThis(HSD_TExp* arg0)
         color_ras = -1;
         alpha_ras = -1;
 
-        switch (arg0->tev.c_in[0].type) {
-        case HSD_TE_TEX:
-            color_tex = 0;
-            break;
-        case HSD_TE_RAS:
-            color_ras = 0;
-            break;
-        }
-        switch (arg0->tev.a_in[0].type) {
-        case HSD_TE_TEX:
-            alpha_tex = 0;
-            break;
-        case HSD_TE_RAS:
-            alpha_ras = 0;
-            break;
-        }
-        switch (arg0->tev.c_in[1].type) {
-        case HSD_TE_TEX:
-            color_tex = 1;
-            break;
-        case HSD_TE_RAS:
-            color_ras = 1;
-            break;
-        }
-        switch (arg0->tev.a_in[1].type) {
-        case HSD_TE_TEX:
-            alpha_tex = 1;
-            break;
-        case HSD_TE_RAS:
-            alpha_ras = 1;
-            break;
-        }
-        switch (arg0->tev.c_in[2].type) {
-        case HSD_TE_TEX:
-            color_tex = 2;
-            break;
-        case HSD_TE_RAS:
-            color_ras = 2;
-            break;
-        }
-        switch (arg0->tev.a_in[2].type) {
-        case HSD_TE_TEX:
-            alpha_tex = 2;
-            break;
-        case HSD_TE_RAS:
-            alpha_ras = 2;
-            break;
-        }
-        switch (arg0->tev.c_in[3].type) {
-        case HSD_TE_TEX:
-            color_tex = 3;
-            break;
-        case HSD_TE_RAS:
-            color_ras = 3;
-            break;
-        }
-        switch (arg0->tev.a_in[3].type) {
-        case HSD_TE_TEX:
-            alpha_tex = 3;
-            break;
-        case HSD_TE_RAS:
-            alpha_ras = 3;
-            break;
+        cur = arg0;
+        for (i = 0; i < 4; i++) {
+            switch (cur->tev.c_in[0].type) {
+            case HSD_TE_TEX:
+                color_tex = i;
+                break;
+            case HSD_TE_RAS:
+                color_ras = i;
+                break;
+            }
+            switch (cur->tev.a_in[0].type) {
+            case HSD_TE_TEX:
+                alpha_tex = i;
+                break;
+            case HSD_TE_RAS:
+                alpha_ras = i;
+                break;
+            }
+            cur = (HSD_TExp*) ((u8*) cur + sizeof(HSD_TEArg));
         }
 
         if (color_tex == -1 && alpha_tex == -1) {
@@ -975,10 +837,11 @@ int SimplifyThis(HSD_TExp* arg0)
             changed = 1;
         }
 
-        if (arg0->tev.a_op != 0xE) {
-            if (arg0->tev.a_op < 0xE) {
-                if (arg0->tev.a_op < 2) {
-                    if (arg0->tev.a_op >= 0) {
+        op = arg0->tev.a_op;
+        if (op != 0xE) {
+            if (op < 0xE) {
+                if (op < 2) {
+                    if (op >= 0) {
                         if (arg0->tev.a_in[2].sel == HSD_TE_0) {
                             if (arg0->tev.a_in[1].sel != HSD_TE_0) {
                                 HSD_TExpUnref(arg0->tev.a_in[1].exp,
@@ -1018,19 +881,19 @@ int SimplifyThis(HSD_TExp* arg0)
                             changed = 1;
                         }
                     }
-                } else if (arg0->tev.a_op >= 8 &&
-                           arg0->tev.a_in[2].sel == HSD_TE_0)
-                {
-                    arg0->tev.a_op = 0;
-                    HSD_TExpUnref(arg0->tev.a_in[0].exp,
-                                  arg0->tev.a_in[0].sel);
-                    CLEAR_ARG(arg0->tev.a_in[0]);
-                    HSD_TExpUnref(arg0->tev.a_in[1].exp,
-                                  arg0->tev.a_in[1].sel);
-                    changed = 1;
-                    CLEAR_ARG(arg0->tev.a_in[1]);
+                } else if (op >= 8) {
+                    if (arg0->tev.a_in[2].sel == HSD_TE_0) {
+                        arg0->tev.a_op = 0;
+                        HSD_TExpUnref(arg0->tev.a_in[0].exp,
+                                      arg0->tev.a_in[0].sel);
+                        CLEAR_ARG(arg0->tev.a_in[0]);
+                        HSD_TExpUnref(arg0->tev.a_in[1].exp,
+                                      arg0->tev.a_in[1].sel);
+                        changed = 1;
+                        CLEAR_ARG(arg0->tev.a_in[1]);
+                    }
                 }
-            } else if (arg0->tev.a_op < 0x10) {
+            } else if (op < 0x10) {
                 if (arg0->tev.a_in[2].sel == HSD_TE_0) {
                     arg0->tev.a_op = 0;
                     HSD_TExpUnref(arg0->tev.a_in[0].exp,
@@ -1078,10 +941,13 @@ int SimplifyByMerge(HSD_TExp* arg0)
     HSD_TExp* child;
     HSD_TEArg tmp_arg;
     int bias;
-    int merged;
     int result;
+    int merged;
     int i;
+    int conflict;
+    u8 type;
     u8 child_sel;
+    u8 new_op;
 
     result = 0;
     do {
@@ -1101,54 +967,111 @@ int SimplifyByMerge(HSD_TExp* arg0)
                     ((arg0->tev.c_in[3].sel == HSD_TE_RGB &&
                       arg0->tev.c_in[3].exp->tev.c_clamp != 0) ||
                      (arg0->tev.c_in[3].sel == HSD_TE_A &&
-                      arg0->tev.c_in[3].exp->tev.a_clamp != 0)) &&
-                    arg0->tev.c_in[0].type >= HSD_TE_TEX &&
-                    arg0->tev.c_in[0].type < 4)
+                      arg0->tev.c_in[3].exp->tev.a_clamp != 0)))
                 {
-                    tmp_arg = arg0->tev.c_in[0];
-                    arg0->tev.c_in[0] = arg0->tev.c_in[3];
-                    arg0->tev.c_in[3] = tmp_arg;
+                    type = arg0->tev.c_in[0].type;
+                    switch ((s32) type) {
+                    case HSD_TE_TEX:
+                    case HSD_TE_RAS:
+                        tmp_arg = arg0->tev.c_in[0];
+                        arg0->tev.c_in[0] = arg0->tev.c_in[3];
+                        arg0->tev.c_in[3] = tmp_arg;
+                        break;
+                    }
                 }
 
                 switch (arg0->tev.c_in[0].type) {
                 case HSD_TE_TEV:
-                    child_sel = arg0->tev.c_in[0].sel;
-                    if (child_sel == HSD_TE_RGB) {
+                    if (arg0->tev.c_in[0].sel == HSD_TE_RGB) {
                         child = arg0->tev.c_in[0].exp;
+                        child_sel = arg0->tev.c_in[0].sel;
                         if ((child->tev.c_op == 0 || child->tev.c_op == 1) &&
                             child->tev.c_in[3].sel == HSD_TE_0 &&
-                            child->tev.c_scale == 0 &&
-                            !RESOURCE_CONFLICT(arg0->tev.tex, arg0->tev.chan,
-                                               child))
+                            child->tev.c_scale == 0)
                         {
-                            bias = BIAS_TO_INT(child->tev.c_bias);
-                            if (child->tev.c_op == 1) {
-                                bias = -bias;
+                            if (arg0->tev.tex != NULL &&
+                                child->tev.tex != NULL &&
+                                arg0->tev.tex != child->tev.tex)
+                            {
+                                conflict = 1;
+                            } else if (arg0->tev.chan != 0xFF &&
+                                       child->tev.chan != 0xFF &&
+                                       arg0->tev.chan != child->tev.chan)
+                            {
+                                conflict = 1;
+                            } else {
+                                conflict = 0;
                             }
-                            bias += BIAS_TO_INT(arg0->tev.c_bias);
-                            if (bias >= -1 && bias <= 1) {
+                            if (conflict == 0) {
+                                switch ((s32) child->tev.c_bias) {
+                                case 1:
+                                    bias = 1;
+                                    break;
+                                case 2:
+                                    bias = -1;
+                                    break;
+                                default:
+                                    bias = 0;
+                                    break;
+                                }
                                 if (child->tev.c_op == 1) {
-                                    arg0->tev.c_op = arg0->tev.c_op == 0;
+                                    bias = -bias;
                                 }
-                                for (i = 0; i < 3; i++) {
-                                    arg0->tev.c_in[i] = child->tev.c_in[i];
-                                    HSD_TExpRef(arg0->tev.c_in[i].exp,
-                                                arg0->tev.c_in[i].sel);
+                                switch ((s32) arg0->tev.c_bias) {
+                                case 1:
+                                    bias += 1;
+                                    break;
+                                case 2:
+                                    bias -= 1;
+                                    break;
                                 }
-                                if (arg0->tev.tex == NULL) {
-                                    arg0->tev.tex = child->tev.tex;
+                                switch (bias) {
+                                case 0:
+                                    arg0->tev.c_bias = 0;
+                                    merged = 1;
+                                    break;
+                                case 1:
+                                    arg0->tev.c_bias = 1;
+                                    merged = 1;
+                                    break;
+                                case -1:
+                                    arg0->tev.c_bias = 2;
+                                    merged = 1;
+                                    break;
+                                default:
+                                    merged = 0;
+                                    break;
                                 }
-                                if (arg0->tev.chan == 0xFF) {
-                                    arg0->tev.chan = child->tev.chan;
+                                if (merged != 0) {
+                                    if (child->tev.c_op == 1) {
+                                        if (arg0->tev.c_op == 0) {
+                                            new_op = 1;
+                                        } else {
+                                            new_op = 0;
+                                        }
+                                        arg0->tev.c_op = new_op;
+                                    }
+                                    for (i = 0; i < 3; i++) {
+                                        arg0->tev.c_in[i] = child->tev.c_in[i];
+                                        HSD_TExpRef(arg0->tev.c_in[i].exp,
+                                                    arg0->tev.c_in[i].sel);
+                                    }
+                                    if (arg0->tev.tex == NULL) {
+                                        arg0->tev.tex = child->tev.tex;
+                                    }
+                                    if (arg0->tev.chan == 0xFF) {
+                                        arg0->tev.chan = child->tev.chan;
+                                    }
+                                    if (arg0->tev.tex_swap == 0xFF) {
+                                        arg0->tev.tex_swap =
+                                            child->tev.tex_swap;
+                                    }
+                                    if (arg0->tev.ras_swap == 0xFF) {
+                                        arg0->tev.ras_swap =
+                                            child->tev.ras_swap;
+                                    }
+                                    HSD_TExpUnref(child, child_sel);
                                 }
-                                if (arg0->tev.tex_swap == 0xFF) {
-                                    arg0->tev.tex_swap = child->tev.tex_swap;
-                                }
-                                if (arg0->tev.ras_swap == 0xFF) {
-                                    arg0->tev.ras_swap = child->tev.ras_swap;
-                                }
-                                HSD_TExpUnref(child, child_sel);
-                                merged = 1;
                             }
                         }
                     }
@@ -1160,41 +1083,84 @@ int SimplifyByMerge(HSD_TExp* arg0)
                             child = arg0->tev.c_in[3].exp;
                             if (child->tev.c_scale == 0 &&
                                 (arg0->tev.c_bias == 0 ||
-                                 arg0->tev.c_bias != child->tev.c_bias) &&
-                                !RESOURCE_CONFLICT(arg0->tev.tex,
-                                                   arg0->tev.chan, child))
+                                 arg0->tev.c_bias != child->tev.c_bias))
                             {
-                                for (i = 0; i < 4; i++) {
-                                    arg0->tev.c_in[i] = child->tev.c_in[i];
-                                    HSD_TExpRef(arg0->tev.c_in[i].exp,
-                                                arg0->tev.c_in[i].sel);
-                                }
-                                arg0->tev.c_op = child->tev.c_op;
-                                bias = BIAS_TO_INT(child->tev.c_bias);
-                                if (child->tev.c_op == 1) {
-                                    bias = -bias;
-                                }
-                                bias += BIAS_TO_INT(arg0->tev.c_bias);
-                                arg0->tev.c_bias = INT_TO_BIAS(bias);
-                                if (arg0->tev.c_clamp == 0xFF ||
-                                    arg0->tev.c_clamp == 0)
+                                if (arg0->tev.tex != NULL &&
+                                    child->tev.tex != NULL &&
+                                    arg0->tev.tex != child->tev.tex)
                                 {
-                                    arg0->tev.c_clamp = child->tev.c_clamp;
+                                    conflict = 1;
+                                } else if (arg0->tev.chan != 0xFF &&
+                                           child->tev.chan != 0xFF &&
+                                           arg0->tev.chan != child->tev.chan)
+                                {
+                                    conflict = 1;
+                                } else {
+                                    conflict = 0;
                                 }
-                                if (arg0->tev.tex == NULL) {
-                                    arg0->tev.tex = child->tev.tex;
+                                if (conflict == 0) {
+                                    merged = 1;
+                                    for (i = 0; i < 4; i++) {
+                                        arg0->tev.c_in[i] = child->tev.c_in[i];
+                                        HSD_TExpRef(arg0->tev.c_in[i].exp,
+                                                    arg0->tev.c_in[i].sel);
+                                    }
+                                    arg0->tev.c_op = child->tev.c_op;
+                                    switch ((s32) child->tev.c_bias) {
+                                    case 1:
+                                        bias = 1;
+                                        break;
+                                    case 2:
+                                        bias = -1;
+                                        break;
+                                    default:
+                                        bias = 0;
+                                        break;
+                                    }
+                                    if (child->tev.c_op == 1) {
+                                        bias = -bias;
+                                    }
+                                    switch ((s32) arg0->tev.c_bias) {
+                                    case 1:
+                                        bias += 1;
+                                        break;
+                                    case 2:
+                                        bias -= 1;
+                                        break;
+                                    }
+                                    switch (bias) {
+                                    case 1:
+                                        arg0->tev.c_bias = 1;
+                                        break;
+                                    case -1:
+                                        arg0->tev.c_bias = 2;
+                                        break;
+                                    default:
+                                    case 0:
+                                        arg0->tev.c_bias = 0;
+                                        break;
+                                    }
+                                    if (arg0->tev.c_clamp == 0xFF ||
+                                        arg0->tev.c_clamp == 0)
+                                    {
+                                        arg0->tev.c_clamp = child->tev.c_clamp;
+                                    }
+                                    if (arg0->tev.tex == NULL) {
+                                        arg0->tev.tex = child->tev.tex;
+                                    }
+                                    if (arg0->tev.chan == 0xFF) {
+                                        arg0->tev.chan = child->tev.chan;
+                                    }
+                                    if (arg0->tev.tex_swap == 0xFF) {
+                                        arg0->tev.tex_swap =
+                                            child->tev.tex_swap;
+                                    }
+                                    if (arg0->tev.ras_swap == 0xFF) {
+                                        arg0->tev.ras_swap =
+                                            child->tev.ras_swap;
+                                    }
+                                    HSD_TExpUnref(child, child_sel);
                                 }
-                                if (arg0->tev.chan == 0xFF) {
-                                    arg0->tev.chan = child->tev.chan;
-                                }
-                                if (arg0->tev.tex_swap == 0xFF) {
-                                    arg0->tev.tex_swap = child->tev.tex_swap;
-                                }
-                                if (arg0->tev.ras_swap == 0xFF) {
-                                    arg0->tev.ras_swap = child->tev.ras_swap;
-                                }
-                                HSD_TExpUnref(child, child_sel);
-                                merged = 1;
                             }
                         }
                     }
@@ -1210,13 +1176,17 @@ int SimplifyByMerge(HSD_TExp* arg0)
             {
                 if (arg0->tev.a_op == 0 &&
                     arg0->tev.a_in[3].type == HSD_TE_TEV &&
-                    arg0->tev.a_in[3].exp->tev.a_clamp != 0 &&
-                    arg0->tev.a_in[0].type >= HSD_TE_TEX &&
-                    arg0->tev.a_in[0].type < 4)
+                    arg0->tev.a_in[3].exp->tev.a_clamp != 0)
                 {
-                    tmp_arg = arg0->tev.a_in[0];
-                    arg0->tev.a_in[0] = arg0->tev.a_in[3];
-                    arg0->tev.a_in[3] = tmp_arg;
+                    type = arg0->tev.a_in[0].type;
+                    switch ((s32) type) {
+                    case HSD_TE_TEX:
+                    case HSD_TE_RAS:
+                        tmp_arg = arg0->tev.a_in[0];
+                        arg0->tev.a_in[0] = arg0->tev.a_in[3];
+                        arg0->tev.a_in[3] = tmp_arg;
+                        break;
+                    }
                 }
 
                 switch (arg0->tev.a_in[0].type) {
@@ -1225,32 +1195,82 @@ int SimplifyByMerge(HSD_TExp* arg0)
                     child_sel = arg0->tev.a_in[0].sel;
                     if ((child->tev.a_op == 0 || child->tev.a_op == 1) &&
                         child->tev.a_in[3].sel == HSD_TE_0 &&
-                        child->tev.a_scale == 0 &&
-                        !RESOURCE_CONFLICT(arg0->tev.tex, arg0->tev.chan,
-                                           child))
+                        child->tev.a_scale == 0)
                     {
-                        bias = BIAS_TO_INT(child->tev.a_bias);
-                        if (child->tev.a_op == 1) {
-                            bias = -bias;
+                        if (arg0->tev.tex != NULL && child->tev.tex != NULL &&
+                            arg0->tev.tex != child->tev.tex)
+                        {
+                            conflict = 1;
+                        } else if (arg0->tev.chan != 0xFF &&
+                                   child->tev.chan != 0xFF &&
+                                   arg0->tev.chan != child->tev.chan)
+                        {
+                            conflict = 1;
+                        } else {
+                            conflict = 0;
                         }
-                        bias += BIAS_TO_INT(arg0->tev.a_bias);
-                        if (bias >= -1 && bias <= 1) {
+                        if (conflict == 0) {
+                            switch ((s32) child->tev.a_bias) {
+                            case 1:
+                                bias = 1;
+                                break;
+                            case 2:
+                                bias = -1;
+                                break;
+                            default:
+                                bias = 0;
+                                break;
+                            }
                             if (child->tev.a_op == 1) {
-                                arg0->tev.a_op = arg0->tev.a_op == 0;
+                                bias = -bias;
                             }
-                            for (i = 0; i < 3; i++) {
-                                arg0->tev.a_in[i] = child->tev.a_in[i];
-                                HSD_TExpRef(arg0->tev.a_in[i].exp,
-                                            arg0->tev.a_in[i].sel);
+                            switch ((s32) arg0->tev.a_bias) {
+                            case 1:
+                                bias += 1;
+                                break;
+                            case 2:
+                                bias -= 1;
+                                break;
                             }
-                            if (arg0->tev.tex == NULL) {
-                                arg0->tev.tex = child->tev.tex;
+                            switch (bias) {
+                            case 0:
+                                arg0->tev.a_bias = 0;
+                                merged = 1;
+                                break;
+                            case 1:
+                                arg0->tev.a_bias = 1;
+                                merged = 1;
+                                break;
+                            case -1:
+                                arg0->tev.a_bias = 2;
+                                merged = 1;
+                                break;
+                            default:
+                                merged = 0;
+                                break;
                             }
-                            if (arg0->tev.chan == 0xFF) {
-                                arg0->tev.chan = child->tev.chan;
+                            if (merged != 0) {
+                                if (child->tev.a_op == 1) {
+                                    if (arg0->tev.a_op == 0) {
+                                        new_op = 1;
+                                    } else {
+                                        new_op = 0;
+                                    }
+                                    arg0->tev.a_op = new_op;
+                                }
+                                for (i = 0; i < 3; i++) {
+                                    arg0->tev.a_in[i] = child->tev.a_in[i];
+                                    HSD_TExpRef(arg0->tev.a_in[i].exp,
+                                                arg0->tev.a_in[i].sel);
+                                }
+                                if (arg0->tev.tex == NULL) {
+                                    arg0->tev.tex = child->tev.tex;
+                                }
+                                if (arg0->tev.chan == 0xFF) {
+                                    arg0->tev.chan = child->tev.chan;
+                                }
+                                HSD_TExpUnref(child, child_sel);
                             }
-                            HSD_TExpUnref(child, child_sel);
-                            merged = 1;
                         }
                     }
                     break;
@@ -1260,35 +1280,76 @@ int SimplifyByMerge(HSD_TExp* arg0)
                         child_sel = arg0->tev.a_in[3].sel;
                         if (child->tev.a_scale == 0 &&
                             (arg0->tev.a_bias == 0 ||
-                             arg0->tev.a_bias != child->tev.a_bias) &&
-                            !RESOURCE_CONFLICT(arg0->tev.tex, arg0->tev.chan,
-                                               child))
+                             arg0->tev.a_bias != child->tev.a_bias))
                         {
-                            for (i = 0; i < 4; i++) {
-                                arg0->tev.a_in[i] = child->tev.a_in[i];
-                                HSD_TExpRef(arg0->tev.a_in[i].exp,
-                                            arg0->tev.a_in[i].sel);
-                            }
-                            arg0->tev.a_op = child->tev.a_op;
-                            bias = BIAS_TO_INT(child->tev.a_bias);
-                            if (child->tev.a_op == 1) {
-                                bias = -bias;
-                            }
-                            bias += BIAS_TO_INT(arg0->tev.a_bias);
-                            arg0->tev.a_bias = INT_TO_BIAS(bias);
-                            if (arg0->tev.a_clamp == 0xFF ||
-                                arg0->tev.a_clamp == 0)
+                            if (arg0->tev.tex != NULL &&
+                                child->tev.tex != NULL &&
+                                arg0->tev.tex != child->tev.tex)
                             {
-                                arg0->tev.a_clamp = child->tev.a_clamp;
+                                conflict = 1;
+                            } else if (arg0->tev.chan != 0xFF &&
+                                       child->tev.chan != 0xFF &&
+                                       arg0->tev.chan != child->tev.chan)
+                            {
+                                conflict = 1;
+                            } else {
+                                conflict = 0;
                             }
-                            if (arg0->tev.tex == NULL) {
-                                arg0->tev.tex = child->tev.tex;
+                            if (conflict == 0) {
+                                merged = 1;
+                                for (i = 0; i < 4; i++) {
+                                    arg0->tev.a_in[i] = child->tev.a_in[i];
+                                    HSD_TExpRef(arg0->tev.a_in[i].exp,
+                                                arg0->tev.a_in[i].sel);
+                                }
+                                arg0->tev.a_op = child->tev.a_op;
+                                switch ((s32) child->tev.a_bias) {
+                                case 1:
+                                    bias = 1;
+                                    break;
+                                case 2:
+                                    bias = -1;
+                                    break;
+                                default:
+                                    bias = 0;
+                                    break;
+                                }
+                                if (child->tev.a_op == 1) {
+                                    bias = -bias;
+                                }
+                                switch ((s32) arg0->tev.a_bias) {
+                                case 1:
+                                    bias += 1;
+                                    break;
+                                case 2:
+                                    bias -= 1;
+                                    break;
+                                }
+                                switch (bias) {
+                                case 1:
+                                    arg0->tev.a_bias = 1;
+                                    break;
+                                case -1:
+                                    arg0->tev.a_bias = 2;
+                                    break;
+                                default:
+                                case 0:
+                                    arg0->tev.a_bias = 0;
+                                    break;
+                                }
+                                if (arg0->tev.a_clamp == 0xFF ||
+                                    arg0->tev.a_clamp == 0)
+                                {
+                                    arg0->tev.a_clamp = child->tev.a_clamp;
+                                }
+                                if (arg0->tev.tex == NULL) {
+                                    arg0->tev.tex = child->tev.tex;
+                                }
+                                if (arg0->tev.chan == 0xFF) {
+                                    arg0->tev.chan = child->tev.chan;
+                                }
+                                HSD_TExpUnref(child, child_sel);
                             }
-                            if (arg0->tev.chan == 0xFF) {
-                                arg0->tev.chan = child->tev.chan;
-                            }
-                            HSD_TExpUnref(child, child_sel);
-                            merged = 1;
                         }
                     }
                     break;
