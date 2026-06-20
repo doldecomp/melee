@@ -2,9 +2,9 @@
 
 #include "baselib/debug.h"
 #include "dolphin/gx/GXStruct.h"
-#include "gm/gm_18A5.h"
 #include "gm/gm_1A3F.h"
 #include "gm/gmmain_lib.h"
+#include "gm/gmtoulib.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
