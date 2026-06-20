@@ -1,11 +1,12 @@
-#ifndef MELEE_GM_1B03_H
-#define MELEE_GM_1B03_H
+#ifndef GALE01_1B0348
+#define GALE01_1B0348
 
 #include <placeholder.h>
 
-#include <melee/gm/forward.h>
 #include <melee/mn/forward.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <melee/gm/types.h>
 
 /* 1B0348 */ void gm_801B0348(StartMeleeData*); /// Character tints?
 /* 1B0474 */ void gm_801B0474(StartMeleeData*, MatchEnd*);
@@ -42,7 +43,6 @@
 /* 1B0F60 */ void gm_801B0F60(GameScene*);
 /* 1B0F90 */ void gm_801B0F90(GameScene*);
 
-/* 477738 */ extern MatchEnd gm_80477738;
 /* 480F20 */ extern MatchExitInfo gm_80480F20;
 /* 4831A8 */ extern struct ResultsMatchInfo gm_804831A8;
 /* 48542C */ extern UNK_T gm_8048542C[0xC / 4];

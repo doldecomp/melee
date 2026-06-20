@@ -20,7 +20,7 @@
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/gmresult.h>
 #include <melee/gm/gmresultplayer.h>
-#include <melee/gm/gmtou.h>
+#include <melee/gm/gmtoulib.h>
 #include <melee/gm/gmvsmelee.h>
 #include <melee/gm/types.h>
 #include <melee/gr/ground.h>
