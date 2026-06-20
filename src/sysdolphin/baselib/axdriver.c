@@ -1078,6 +1078,17 @@ s32 HSD_AudioGetAuxHeapSize(AXDriverAuxType type, void* param)
     return result;
 }
 
+const RevHiDims AXDriver_803B95F8 = {
+    { 0x6FD, 0x7CF, 0x91D, 0x1B1, 0x95, 0x2F, 0x49, 0x43 },
+};
+
+const s32 AXDriver_803B9618[] = {
+    0x6FD,
+    0x7CF,
+    0x1B1,
+    0x95,
+};
+
 bool AXDriver_8038E30C(s32 channel, s32 type, void* param, u8* heap,
                        u32 heap_size)
 {
