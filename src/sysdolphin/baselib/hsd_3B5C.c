@@ -4,8 +4,7 @@
 
 #include <Gecko_setjmp.h>
 
-#define HSD_FIELD(base, type, offset) (*(type) ((u8*) (base) + (offset)))
-#define HSD_COEFF(code) HSD_FIELD((hsd_804D2E70 + ((code) * 4)), s32*, 0x718)
+#define HSD_COEFF(code) M2C_FIELD((hsd_804D2E70 + ((code) * 4)), s32*, 0x718)
 
 extern u8 hsd_804D2E70[2084];
 extern u8* hsd_804D79B8;
@@ -575,38 +574,38 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
     for (work_r10 = 0; work_r10 < 4; work_r10++) {
         work_r8 = work_r9;
         for (work_ctr = 4; work_ctr != 0; work_ctr--) {
-            HSD_FIELD(work_r8, s32*, 0) =
-                (s32) (HSD_FIELD(work_r8, s32*, 0) + 0x80);
-            HSD_FIELD(work_r8, s32*, 4) =
-                (s32) (HSD_FIELD(work_r8, s32*, 4) + 0x80);
-            HSD_FIELD(work_r8, s32*, 8) =
-                (s32) (HSD_FIELD(work_r8, s32*, 8) + 0x80);
-            HSD_FIELD(work_r8, s32*, 0xC) =
-                (s32) (HSD_FIELD(work_r8, s32*, 0xC) + 0x80);
-            HSD_FIELD(work_r8, s32*, 0x10) =
-                (s32) (HSD_FIELD(work_r8, s32*, 0x10) + 0x80);
-            HSD_FIELD(work_r8, s32*, 0x14) =
-                (s32) (HSD_FIELD(work_r8, s32*, 0x14) + 0x80);
-            HSD_FIELD(work_r8, s32*, 0x18) =
-                (s32) (HSD_FIELD(work_r8, s32*, 0x18) + 0x80);
-            HSD_FIELD(work_r8, s32*, 0x1C) =
-                (s32) (HSD_FIELD(work_r8, s32*, 0x1C) + 0x80);
-            HSD_FIELD(work_r8, s32*, 0x20) =
-                (s32) (HSD_FIELD(work_r8, s32*, 0x20) + 0x80);
-            HSD_FIELD(work_r8, s32*, 0x24) =
-                (s32) (HSD_FIELD(work_r8, s32*, 0x24) + 0x80);
-            HSD_FIELD(work_r8, s32*, 0x28) =
-                (s32) (HSD_FIELD(work_r8, s32*, 0x28) + 0x80);
-            HSD_FIELD(work_r8, s32*, 0x2C) =
-                (s32) (HSD_FIELD(work_r8, s32*, 0x2C) + 0x80);
-            HSD_FIELD(work_r8, s32*, 0x30) =
-                (s32) (HSD_FIELD(work_r8, s32*, 0x30) + 0x80);
-            HSD_FIELD(work_r8, s32*, 0x34) =
-                (s32) (HSD_FIELD(work_r8, s32*, 0x34) + 0x80);
-            HSD_FIELD(work_r8, s32*, 0x38) =
-                (s32) (HSD_FIELD(work_r8, s32*, 0x38) + 0x80);
-            HSD_FIELD(work_r8, s32*, 0x3C) =
-                (s32) (HSD_FIELD(work_r8, s32*, 0x3C) + 0x80);
+            M2C_FIELD(work_r8, s32*, 0) =
+                (s32) (M2C_FIELD(work_r8, s32*, 0) + 0x80);
+            M2C_FIELD(work_r8, s32*, 4) =
+                (s32) (M2C_FIELD(work_r8, s32*, 4) + 0x80);
+            M2C_FIELD(work_r8, s32*, 8) =
+                (s32) (M2C_FIELD(work_r8, s32*, 8) + 0x80);
+            M2C_FIELD(work_r8, s32*, 0xC) =
+                (s32) (M2C_FIELD(work_r8, s32*, 0xC) + 0x80);
+            M2C_FIELD(work_r8, s32*, 0x10) =
+                (s32) (M2C_FIELD(work_r8, s32*, 0x10) + 0x80);
+            M2C_FIELD(work_r8, s32*, 0x14) =
+                (s32) (M2C_FIELD(work_r8, s32*, 0x14) + 0x80);
+            M2C_FIELD(work_r8, s32*, 0x18) =
+                (s32) (M2C_FIELD(work_r8, s32*, 0x18) + 0x80);
+            M2C_FIELD(work_r8, s32*, 0x1C) =
+                (s32) (M2C_FIELD(work_r8, s32*, 0x1C) + 0x80);
+            M2C_FIELD(work_r8, s32*, 0x20) =
+                (s32) (M2C_FIELD(work_r8, s32*, 0x20) + 0x80);
+            M2C_FIELD(work_r8, s32*, 0x24) =
+                (s32) (M2C_FIELD(work_r8, s32*, 0x24) + 0x80);
+            M2C_FIELD(work_r8, s32*, 0x28) =
+                (s32) (M2C_FIELD(work_r8, s32*, 0x28) + 0x80);
+            M2C_FIELD(work_r8, s32*, 0x2C) =
+                (s32) (M2C_FIELD(work_r8, s32*, 0x2C) + 0x80);
+            M2C_FIELD(work_r8, s32*, 0x30) =
+                (s32) (M2C_FIELD(work_r8, s32*, 0x30) + 0x80);
+            M2C_FIELD(work_r8, s32*, 0x34) =
+                (s32) (M2C_FIELD(work_r8, s32*, 0x34) + 0x80);
+            M2C_FIELD(work_r8, s32*, 0x38) =
+                (s32) (M2C_FIELD(work_r8, s32*, 0x38) + 0x80);
+            M2C_FIELD(work_r8, s32*, 0x3C) =
+                (s32) (M2C_FIELD(work_r8, s32*, 0x3C) + 0x80);
             work_r8 += 0x40;
         }
         work_r9 += 0x100;
@@ -635,8 +634,8 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
                                      (((work_r8_2 % 2) * 4) +
                                       ((work_r8_2 / 2) << 5))) *
                                     4);
-                        scratch_r20 = HSD_FIELD(scratch_r16, s32*, 0x618);
-                        scratch_r18 = HSD_FIELD(scratch_r16, s32*, 0x518);
+                        scratch_r20 = M2C_FIELD(scratch_r16, s32*, 0x618);
+                        scratch_r18 = M2C_FIELD(scratch_r16, s32*, 0x518);
                         scratch_f0 = (f32) ((1.402f * (f64) scratch_r20) +
                                             (f64) scratch_r19);
                         if (scratch_f0 < 0.0f) {
@@ -750,9 +749,9 @@ s32 hsd_803B6BE4(char* arg0, s32 arg1, void* arg2)
     hsd_804D79C0 = arg1;
     hsd_804D79B8 = (u8*) arg0;
     hsd_804D79BC = (u8*) arg0;
-    HSD_FIELD(base, s32*, 0x820) = 0;
-    HSD_FIELD(base, s32*, 0x81C) = 0;
-    HSD_FIELD(base, s32*, 0x818) = 0;
+    M2C_FIELD(base, s32*, 0x820) = 0;
+    M2C_FIELD(base, s32*, 0x81C) = 0;
+    M2C_FIELD(base, s32*, 0x818) = 0;
     hsd_804D79C4 = 0;
     if (__setjmp((__jmp_buf*) base) != 0) {
         return 0;
@@ -764,7 +763,7 @@ loop_3:
         for (work_r3 = 0; work_r3 < 0x40; work_r3 += 8) {
             scratch_r5 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5 + 1;
-            *(quant_table + HSD_FIELD(work_r4, u8*, 0)) = *scratch_r5;
+            *(quant_table + M2C_FIELD(work_r4, u8*, 0)) = *scratch_r5;
             scratch_r5_2 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_2 + 1;
             *(quant_table + work_r4[1]) = *scratch_r5_2;
@@ -805,37 +804,37 @@ loop_11:
         for (work_r3_2 = 0; work_r3_2 < 0x40; work_r3_2 += 8) {
             scratch_r5_9 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_9 + 1;
-            HSD_FIELD((quant_table + HSD_FIELD(work_r4_2, u8*, 0)), u8*,
+            M2C_FIELD((quant_table + M2C_FIELD(work_r4_2, u8*, 0)), u8*,
                       0x40) = (u8) *scratch_r5_9;
             scratch_r5_10 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_10 + 1;
-            HSD_FIELD((quant_table + work_r4_2[1]), u8*, 0x40) =
+            M2C_FIELD((quant_table + work_r4_2[1]), u8*, 0x40) =
                 (u8) *scratch_r5_10;
             scratch_r5_11 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_11 + 1;
-            HSD_FIELD((quant_table + work_r4_2[2]), u8*, 0x40) =
+            M2C_FIELD((quant_table + work_r4_2[2]), u8*, 0x40) =
                 (u8) *scratch_r5_11;
             scratch_r5_12 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_12 + 1;
-            HSD_FIELD((quant_table + work_r4_2[3]), u8*, 0x40) =
+            M2C_FIELD((quant_table + work_r4_2[3]), u8*, 0x40) =
                 (u8) *scratch_r5_12;
             scratch_r5_13 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_13 + 1;
-            HSD_FIELD((quant_table + work_r4_2[4]), u8*, 0x40) =
+            M2C_FIELD((quant_table + work_r4_2[4]), u8*, 0x40) =
                 (u8) *scratch_r5_13;
             scratch_r5_14 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_14 + 1;
-            HSD_FIELD((quant_table + work_r4_2[5]), u8*, 0x40) =
+            M2C_FIELD((quant_table + work_r4_2[5]), u8*, 0x40) =
                 (u8) *scratch_r5_14;
             scratch_r5_15 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_15 + 1;
-            HSD_FIELD((quant_table + work_r4_2[6]), u8*, 0x40) =
+            M2C_FIELD((quant_table + work_r4_2[6]), u8*, 0x40) =
                 (u8) *scratch_r5_15;
             scratch_r5_16 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_16 + 1;
             scratch_r0_3 = work_r4_2[7];
             work_r4_2 += 8;
-            HSD_FIELD((quant_table + scratch_r0_3), u8*, 0x40) =
+            M2C_FIELD((quant_table + scratch_r0_3), u8*, 0x40) =
                 (u8) *scratch_r5_16;
         }
     } else {
@@ -885,31 +884,31 @@ loop_24:
                 work_r4_3 = &base[0x718];
                 for (work_r3_3 = 0; work_r3_3 < 0x40; work_r3_3 += 8) {
                     scratch_r6 = quant_table + work_r3_3;
-                    scratch_r0_7 = HSD_FIELD(scratch_r6, u8*, 0);
-                    HSD_FIELD(work_r5, s32*, 0) =
-                        (s32) (HSD_FIELD(work_r4_3, s32*, 0) * scratch_r0_7);
-                    HSD_FIELD(work_r5, s32*, 4) =
-                        (s32) (HSD_FIELD(work_r4_3, s32*, 4) *
-                               HSD_FIELD(scratch_r6, u8*, 1));
-                    HSD_FIELD(work_r5, s32*, 8) =
-                        (s32) (HSD_FIELD(work_r4_3, s32*, 8) *
-                               HSD_FIELD(scratch_r6, u8*, 2));
-                    HSD_FIELD(work_r5, s32*, 0xC) =
-                        (s32) (HSD_FIELD(work_r4_3, s32*, 0xC) *
-                               HSD_FIELD(scratch_r6, u8*, 3));
-                    HSD_FIELD(work_r5, s32*, 0x10) =
-                        (s32) (HSD_FIELD(work_r4_3, s32*, 0x10) *
-                               HSD_FIELD(scratch_r6, u8*, 4));
-                    HSD_FIELD(work_r5, s32*, 0x14) =
-                        (s32) (HSD_FIELD(work_r4_3, s32*, 0x14) *
-                               HSD_FIELD(scratch_r6, u8*, 5));
-                    HSD_FIELD(work_r5, s32*, 0x18) =
-                        (s32) (HSD_FIELD(work_r4_3, s32*, 0x18) *
-                               HSD_FIELD(scratch_r6, u8*, 6));
-                    scratch_r7 = HSD_FIELD(work_r4_3, s32*, 0x1C);
+                    scratch_r0_7 = M2C_FIELD(scratch_r6, u8*, 0);
+                    M2C_FIELD(work_r5, s32*, 0) =
+                        (s32) (M2C_FIELD(work_r4_3, s32*, 0) * scratch_r0_7);
+                    M2C_FIELD(work_r5, s32*, 4) =
+                        (s32) (M2C_FIELD(work_r4_3, s32*, 4) *
+                               M2C_FIELD(scratch_r6, u8*, 1));
+                    M2C_FIELD(work_r5, s32*, 8) =
+                        (s32) (M2C_FIELD(work_r4_3, s32*, 8) *
+                               M2C_FIELD(scratch_r6, u8*, 2));
+                    M2C_FIELD(work_r5, s32*, 0xC) =
+                        (s32) (M2C_FIELD(work_r4_3, s32*, 0xC) *
+                               M2C_FIELD(scratch_r6, u8*, 3));
+                    M2C_FIELD(work_r5, s32*, 0x10) =
+                        (s32) (M2C_FIELD(work_r4_3, s32*, 0x10) *
+                               M2C_FIELD(scratch_r6, u8*, 4));
+                    M2C_FIELD(work_r5, s32*, 0x14) =
+                        (s32) (M2C_FIELD(work_r4_3, s32*, 0x14) *
+                               M2C_FIELD(scratch_r6, u8*, 5));
+                    M2C_FIELD(work_r5, s32*, 0x18) =
+                        (s32) (M2C_FIELD(work_r4_3, s32*, 0x18) *
+                               M2C_FIELD(scratch_r6, u8*, 6));
+                    scratch_r7 = M2C_FIELD(work_r4_3, s32*, 0x1C);
                     work_r4_3 += 0x20;
-                    HSD_FIELD(work_r5, s32*, 0x1C) =
-                        (s32) (scratch_r7 * HSD_FIELD(scratch_r6, u8*, 7));
+                    M2C_FIELD(work_r5, s32*, 0x1C) =
+                        (s32) (scratch_r7 * M2C_FIELD(scratch_r6, u8*, 7));
                     work_r5 += 0x20;
                 }
                 fn_803B61B4(work_r24);
@@ -921,31 +920,31 @@ loop_24:
             work_r5_2 = &base[0x518];
             for (work_r3_4 = 0; work_r3_4 < 0x40; work_r3_4 += 8) {
                 scratch_r6_2 = quant_table + 0x40 + work_r3_4;
-                scratch_r7_2 = HSD_FIELD(scratch_r6_2, u8*, 0);
-                HSD_FIELD(work_r5_2, s32*, 0) =
-                    (s32) (HSD_FIELD(work_r4_4, s32*, 0) * scratch_r7_2);
-                HSD_FIELD(work_r5_2, s32*, 4) =
-                    (s32) (HSD_FIELD(work_r4_4, s32*, 4) *
-                           HSD_FIELD(scratch_r6_2, u8*, 1));
-                HSD_FIELD(work_r5_2, s32*, 8) =
-                    (s32) (HSD_FIELD(work_r4_4, s32*, 8) *
-                           HSD_FIELD(scratch_r6_2, u8*, 2));
-                HSD_FIELD(work_r5_2, s32*, 0xC) =
-                    (s32) (HSD_FIELD(work_r4_4, s32*, 0xC) *
-                           HSD_FIELD(scratch_r6_2, u8*, 3));
-                HSD_FIELD(work_r5_2, s32*, 0x10) =
-                    (s32) (HSD_FIELD(work_r4_4, s32*, 0x10) *
-                           HSD_FIELD(scratch_r6_2, u8*, 4));
-                HSD_FIELD(work_r5_2, s32*, 0x14) =
-                    (s32) (HSD_FIELD(work_r4_4, s32*, 0x14) *
-                           HSD_FIELD(scratch_r6_2, u8*, 5));
-                HSD_FIELD(work_r5_2, s32*, 0x18) =
-                    (s32) (HSD_FIELD(work_r4_4, s32*, 0x18) *
-                           HSD_FIELD(scratch_r6_2, u8*, 6));
-                scratch_r7_3 = HSD_FIELD(work_r4_4, s32*, 0x1C);
+                scratch_r7_2 = M2C_FIELD(scratch_r6_2, u8*, 0);
+                M2C_FIELD(work_r5_2, s32*, 0) =
+                    (s32) (M2C_FIELD(work_r4_4, s32*, 0) * scratch_r7_2);
+                M2C_FIELD(work_r5_2, s32*, 4) =
+                    (s32) (M2C_FIELD(work_r4_4, s32*, 4) *
+                           M2C_FIELD(scratch_r6_2, u8*, 1));
+                M2C_FIELD(work_r5_2, s32*, 8) =
+                    (s32) (M2C_FIELD(work_r4_4, s32*, 8) *
+                           M2C_FIELD(scratch_r6_2, u8*, 2));
+                M2C_FIELD(work_r5_2, s32*, 0xC) =
+                    (s32) (M2C_FIELD(work_r4_4, s32*, 0xC) *
+                           M2C_FIELD(scratch_r6_2, u8*, 3));
+                M2C_FIELD(work_r5_2, s32*, 0x10) =
+                    (s32) (M2C_FIELD(work_r4_4, s32*, 0x10) *
+                           M2C_FIELD(scratch_r6_2, u8*, 4));
+                M2C_FIELD(work_r5_2, s32*, 0x14) =
+                    (s32) (M2C_FIELD(work_r4_4, s32*, 0x14) *
+                           M2C_FIELD(scratch_r6_2, u8*, 5));
+                M2C_FIELD(work_r5_2, s32*, 0x18) =
+                    (s32) (M2C_FIELD(work_r4_4, s32*, 0x18) *
+                           M2C_FIELD(scratch_r6_2, u8*, 6));
+                scratch_r7_3 = M2C_FIELD(work_r4_4, s32*, 0x1C);
                 work_r4_4 += 0x20;
-                HSD_FIELD(work_r5_2, s32*, 0x1C) =
-                    (s32) (scratch_r7_3 * HSD_FIELD(scratch_r6_2, u8*, 7));
+                M2C_FIELD(work_r5_2, s32*, 0x1C) =
+                    (s32) (scratch_r7_3 * M2C_FIELD(scratch_r6_2, u8*, 7));
                 work_r5_2 += 0x20;
             }
             fn_803B61B4(&base[0x518]);
@@ -953,31 +952,31 @@ loop_24:
             work_r4_5 = &base[0x618];
             for (work_r3_5 = 0; work_r3_5 < 0x40; work_r3_5 += 8) {
                 scratch_r5_17 = quant_table + 0x40 + work_r3_5;
-                scratch_r6_3 = HSD_FIELD(scratch_r5_17, u8*, 0);
-                HSD_FIELD(work_r4_5, s32*, 0) =
-                    (s32) (HSD_FIELD(work_r24_2, s32*, 0) * scratch_r6_3);
-                HSD_FIELD(work_r4_5, s32*, 4) =
-                    (s32) (HSD_FIELD(work_r24_2, s32*, 4) *
-                           HSD_FIELD(scratch_r5_17, u8*, 1));
-                HSD_FIELD(work_r4_5, s32*, 8) =
-                    (s32) (HSD_FIELD(work_r24_2, s32*, 8) *
-                           HSD_FIELD(scratch_r5_17, u8*, 2));
-                HSD_FIELD(work_r4_5, s32*, 0xC) =
-                    (s32) (HSD_FIELD(work_r24_2, s32*, 0xC) *
-                           HSD_FIELD(scratch_r5_17, u8*, 3));
-                HSD_FIELD(work_r4_5, s32*, 0x10) =
-                    (s32) (HSD_FIELD(work_r24_2, s32*, 0x10) *
-                           HSD_FIELD(scratch_r5_17, u8*, 4));
-                HSD_FIELD(work_r4_5, s32*, 0x14) =
-                    (s32) (HSD_FIELD(work_r24_2, s32*, 0x14) *
-                           HSD_FIELD(scratch_r5_17, u8*, 5));
-                HSD_FIELD(work_r4_5, s32*, 0x18) =
-                    (s32) (HSD_FIELD(work_r24_2, s32*, 0x18) *
-                           HSD_FIELD(scratch_r5_17, u8*, 6));
-                scratch_r6_4 = HSD_FIELD(work_r24_2, s32*, 0x1C);
+                scratch_r6_3 = M2C_FIELD(scratch_r5_17, u8*, 0);
+                M2C_FIELD(work_r4_5, s32*, 0) =
+                    (s32) (M2C_FIELD(work_r24_2, s32*, 0) * scratch_r6_3);
+                M2C_FIELD(work_r4_5, s32*, 4) =
+                    (s32) (M2C_FIELD(work_r24_2, s32*, 4) *
+                           M2C_FIELD(scratch_r5_17, u8*, 1));
+                M2C_FIELD(work_r4_5, s32*, 8) =
+                    (s32) (M2C_FIELD(work_r24_2, s32*, 8) *
+                           M2C_FIELD(scratch_r5_17, u8*, 2));
+                M2C_FIELD(work_r4_5, s32*, 0xC) =
+                    (s32) (M2C_FIELD(work_r24_2, s32*, 0xC) *
+                           M2C_FIELD(scratch_r5_17, u8*, 3));
+                M2C_FIELD(work_r4_5, s32*, 0x10) =
+                    (s32) (M2C_FIELD(work_r24_2, s32*, 0x10) *
+                           M2C_FIELD(scratch_r5_17, u8*, 4));
+                M2C_FIELD(work_r4_5, s32*, 0x14) =
+                    (s32) (M2C_FIELD(work_r24_2, s32*, 0x14) *
+                           M2C_FIELD(scratch_r5_17, u8*, 5));
+                M2C_FIELD(work_r4_5, s32*, 0x18) =
+                    (s32) (M2C_FIELD(work_r24_2, s32*, 0x18) *
+                           M2C_FIELD(scratch_r5_17, u8*, 6));
+                scratch_r6_4 = M2C_FIELD(work_r24_2, s32*, 0x1C);
                 work_r24_2 += 0x20;
-                HSD_FIELD(work_r4_5, s32*, 0x1C) =
-                    (s32) (scratch_r6_4 * HSD_FIELD(scratch_r5_17, u8*, 7));
+                M2C_FIELD(work_r4_5, s32*, 0x1C) =
+                    (s32) (scratch_r6_4 * M2C_FIELD(scratch_r5_17, u8*, 7));
                 work_r4_5 += 0x20;
             }
             fn_803B61B4(&base[0x618]);
