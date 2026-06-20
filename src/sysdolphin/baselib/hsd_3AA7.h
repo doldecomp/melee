@@ -5,6 +5,11 @@
 
 #include <dolphin/card.h>
 
+typedef union CardFileData {
+    int size;
+    u8* ptr;
+} CardFileData;
+
 typedef struct CardState {
     /* 0x00 */ u8* x0;
     /* 0x04 */ s32 x4;
@@ -14,7 +19,7 @@ typedef struct CardState {
     /* 0x24 */ u32 x24;
     /* 0x28 */ int x28[9];
     /* 0x4C */ int x4C[9];
-    /* 0x70 */ int x70[9];
+    /* 0x70 */ CardFileData x70[9];
     /* 0x94 */ u8 pad_94[0xDC];
     /* 0x170 */ s32 x170[64];
     /* 0x270 */ s32 x270[64];

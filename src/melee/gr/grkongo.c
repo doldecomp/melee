@@ -95,10 +95,6 @@ grKg_StageData grKg_803E1800 = {
 
 char grKg_803E1858[] = "grkongo.c";
 char grKg_803E1A00[];
-static inline char* grKongo_801D828C_TaruKeepMsg(void)
-{
-    return &grKg_803E1A00[0];
-}
 static const lbColl_80008D30_arg1 grKg_803B7FB0 = {
     1, 1, 361, 0, 0, 180, 0, 0, 0,
 };
@@ -642,8 +638,7 @@ void grKongo_801D828C(HSD_GObj* gobj)
     if (gp->gv.kongo3.xC6 != 1) {
         return;
     }
-    HSD_ASSERTMSG(1719, gp->gv.kongo.u.taru.keep,
-                  grKongo_801D828C_TaruKeepMsg());
+    HSD_ASSERT(1719, gp->gv.kongo.u.taru.keep);
     if (((u8*) gp->gv.kongo.u.taru.keep)[2] == 8) {
         gp->gv.kongo3.xC6 = 0;
         gp->gv.kongo.u.taru.keep = NULL;
