@@ -446,8 +446,8 @@ void mnDiagram3_8024714C(void* arg0)
     u8 sp40[8];
     Diagram3* data;
     HSD_GObj* gobj;
-    HSD_JObj* row0;
     mnDiagram_ArchiveData* archive;
+    HSD_JObj* row0;
     f32 row_spacing;
     f32 neg_spacing;
 
@@ -461,12 +461,12 @@ void mnDiagram3_8024714C(void* arg0)
 
     gobj = mnDiagram3_804D6C20;
     archive = &mnDiagram_804A0854;
-    data = gobj->user_data;
 
     {
         HSD_JObj* popup_jobj;
         HSD_GObj* popup;
 
+        data = gobj->user_data;
         popup = GObj_Create(6, 7, 0x80);
         data->popup_gobj = popup;
         popup_jobj = HSD_JObjLoadJoint(archive->x0);
