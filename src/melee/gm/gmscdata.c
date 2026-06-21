@@ -32,7 +32,7 @@
 #include <melee/gm/gmsupersudden.h>
 #include <melee/gm/gmtiny.h>
 #include <melee/gm/gmtitle.h>
-#include <melee/gm/gmtou.h>
+#include <melee/gm/gmtoulib.h>
 #include <melee/gm/gmvsmelee.h>
 #include <melee/gm/types.h>
 #include <melee/mn/mncharsel.h>

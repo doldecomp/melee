@@ -154,8 +154,8 @@ Handle* lbMemory_80014FC8(Handle* arg0, u32 size)
     if (g_alloc.x62C_free_mem == NULL) {
         __assert(lbl_803BA2C0, 0xCCU, lbl_803BA328);
     }
-    start = arg0->x4_lo;
     aligned_size = ((size + 0x1F) & 0xFFFFFFE0);
+    start = arg0->x4_lo;
     iter = (Handle*) &arg0->xC_prev;
     memp_candidate = NULL;
 
@@ -196,7 +196,6 @@ Handle* lbMemory_80014FC8(Handle* arg0, u32 size)
         return result;
     }
 }
-
 void lbMemory_800150F0(Handle* h, void* arg1)
 {
     Handle* handle = h->xC_prev;

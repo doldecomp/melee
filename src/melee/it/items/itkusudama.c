@@ -225,16 +225,7 @@ void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3)
         return;
     }
 
-    { // it_80289BE8_inline(gobj, 0.1f, &pos, &vel);
-
-        Item* ip = GET_ITEM(gobj);
-        float const vel_scale = 0.1f;
-        pos = ip->pos;
-        pos.y -= 5.0f;
-        vel.x = (vel_scale * HSD_Randf()) - (vel_scale * 0.5f);
-        vel.y = ((vel_scale * 0.5f) * HSD_Randf()) - (vel_scale * 0.5f);
-        vel.z = 0.0f;
-    }
+    it_80289BE8_inline(gobj, 0.1f, &pos, &vel);
     pos.y -= 5.0f;
 
     if (it_8026F6BC(gobj, &pos, &vel, true) != NULL) {

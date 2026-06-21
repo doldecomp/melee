@@ -82,11 +82,11 @@ int hsd_803B2FA0(u8* data, int len)
 
 #pragma dont_inline on
 
-static u8 fn_803B302C(u8 prev, u8 cur)
+static int fn_803B302C(u32 prev, u32 cur)
 {
     u32 mod7;
 
-    mod7 = prev % 7;
+    mod7 = (u8) prev % 7;
 
     switch (mod7) {
     case 0:
@@ -130,22 +130,24 @@ static u8 fn_803B302C(u8 prev, u8 cur)
         break;
     }
 
-    return cur ^ lbl_80430BD0[prev % 13] ^ prev;
+    cur ^= lbl_80430BD0[(u8) prev % 13];
+    cur ^= prev;
+    return cur;
 }
 
 #pragma dont_inline reset
 
 int hsd_803B31CC(u8* data, int len)
 {
+    u32 prev;
     u8* ptr;
     int i;
-    u8 cur;
+    u32 cur;
     u8 check[16];
     u8* p;
     u8* q;
     int j;
     int k;
-    u8 prev;
 
     if (data == NULL) {
         return -1;

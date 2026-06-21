@@ -889,7 +889,7 @@ bool un_80300AF4(int arg0)
     return false;
 }
 
-/// @note Required for un_80300B58 to remain an exact match.
+/// @todo Find a solution without the pragma
 #pragma push
 #pragma global_optimizer off
 bool un_80300B58(int arg0)

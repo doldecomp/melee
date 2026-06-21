@@ -191,9 +191,19 @@ static inline int lbSnap_GetTiledYOff(int tile_column, int y)
     return (((y / 4) + tile_column) << 5) + ((y % 4) * 2);
 }
 
+static inline u8* lbSnap_GetMemSnapIconData(void)
+{
+    return lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[0].ptr;
+}
+
+static inline int lbSnap_GetTiledColumn(int x)
+{
+    return (x / 4) * 24;
+}
+
 void lbSnap_8001DA5C(int arg0)
 {
-    u8* dst = (u8*) lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[0];
+    u8* dst = lbSnap_GetMemSnapIconData();
     int dst_x;
     int ctr;
     PAD_STACK(8);
@@ -201,7 +211,7 @@ void lbSnap_8001DA5C(int arg0)
     for (dst_x = 0; dst_x < 32; dst_x++) {
         int src_x = (dst_x * 204 / 32) + 138;
         u8* dst_col = dst + ((dst_x % 4) * 8);
-        int tile_column = (dst_x / 4) * 24;
+        int tile_column = lbSnap_GetTiledColumn(dst_x);
         int dst_y = 0;
         int src_y_accum = 0;
         u16 pixel;
@@ -313,10 +323,10 @@ int lbSnap_8001DF6C(int chan)
         lbSnap_8001D4A4(chan_arg, text);
         desc->x14 = lbSnap_GetSaveDataOffset(lbSnap_80433380.x0);
         desc->x1C = lbSnap_80433380.x0;
-        ret = lb_8001BB48(chan, text, &desc->x14, desc,
-                          lbSnap_80433380.x4_string,
-                          lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[0],
-                          lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[1], 0);
+        ret = lb_8001BB48(
+            chan, text, &desc->x14, desc, lbSnap_80433380.x4_string,
+            lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[0].offset,
+            lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[1].size, 0);
     }
     return ret;
 }
@@ -338,10 +348,10 @@ int lbSnap_8001E058(int chan, int index)
         lbSnap_ClearText(text);
         sprintf(text, "%u", lbSnap_80433380.x48[chan].entries[index].time);
         lbSnap_803BACC8.x1C = lbSnap_80433380.x0;
-        ret = lb_8001BF04(chan, text, &lbSnap_803BACC8.x14,
-                          lbSnap_80433380.x4_string,
-                          lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[0],
-                          lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[1], 0);
+        ret = lb_8001BF04(
+            chan, text, &lbSnap_803BACC8.x14, lbSnap_80433380.x4_string,
+            lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[0].offset,
+            lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[1].size, 0);
     }
     return ret;
 }

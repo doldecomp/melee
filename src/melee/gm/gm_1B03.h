@@ -1,24 +1,12 @@
-#ifndef MELEE_GM_1B03_H
-#define MELEE_GM_1B03_H
+#ifndef GALE01_1B0348
+#define GALE01_1B0348
 
 #include <placeholder.h>
 
-#include <melee/gm/forward.h>
 #include <melee/mn/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-struct gm_8049E548_t {
-    /* 0x00 */ char c_kind[4];
-    /* 0x04 */ u8 x4[4];
-    /* 0x08 */ u8 unk_8;
-    /* 0x09 */ u8 unk_9;
-    /* 0x0A */ s8 unk_A;
-    /* 0x0B */ char pad_B[1];
-    /* 0x0C */ u16 unk_C; ///< InternalStageId
-    /* 0x0E */ s8 unk_E;  /* inferred */
-    /* 0x0F */ char pad_F[1];
-}; /* size = 0x10 */
-STATIC_ASSERT(sizeof(struct gm_8049E548_t) == 0x10);
+#include <melee/gm/types.h>
 
 /* 1B0348 */ void gm_801B0348(StartMeleeData*); /// Character tints?
 /* 1B0474 */ void gm_801B0474(StartMeleeData*, MatchEnd*);
@@ -55,7 +43,6 @@ STATIC_ASSERT(sizeof(struct gm_8049E548_t) == 0x10);
 /* 1B0F60 */ void gm_801B0F60(GameScene*);
 /* 1B0F90 */ void gm_801B0F90(GameScene*);
 
-/* 477738 */ extern MatchEnd gm_80477738;
 /* 480F20 */ extern MatchExitInfo gm_80480F20;
 /* 4831A8 */ extern struct ResultsMatchInfo gm_804831A8;
 /* 48542C */ extern UNK_T gm_8048542C[0xC / 4];

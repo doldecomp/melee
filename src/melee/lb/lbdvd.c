@@ -1,4 +1,4 @@
-#include "lb_0192.h"
+#include "lb_0195.h"
 #include "lbarchive.h"
 
 #include "lbdvd.static.h"
@@ -505,19 +505,25 @@ void lbDvd_80018254(void)
         break;
     }
 
-    for (i = 0; i < (signed) ARRAY_SIZE(preloadCache.entries); i++) {
-        entry = &preloadCache.entries[i];
-        if (entry->load_score < 0) {
-            if (entry->state == 1) {
-                if (preloadCache.entries[i].archive != NULL) {
-                    lbHeap_80015CA8(entry->heap, entry->archive->addr);
+    {
+        PreloadEntry* cleanup_entry;
+        int j;
+        for (j = 0; j < (signed) ARRAY_SIZE(preloadCache.entries); j++) {
+            cleanup_entry = &preloadCache.entries[j];
+            if (cleanup_entry->load_score < 0) {
+                if (cleanup_entry->state == 1) {
+                    if (preloadCache.entries[j].archive != NULL) {
+                        lbHeap_80015CA8(cleanup_entry->heap,
+                                        cleanup_entry->archive->addr);
+                    }
+                    if (cleanup_entry->raw_data != NULL) {
+                        lbHeap_80015CA8(cleanup_entry->heap,
+                                        cleanup_entry->raw_data->addr);
+                    }
+                    *cleanup_entry = lbDvd_803BA68C;
+                } else if (cleanup_entry->state == 4) {
+                    cleanup_entry->state = 3;
                 }
-                if (entry->raw_data != NULL) {
-                    lbHeap_80015CA8(entry->heap, entry->raw_data->addr);
-                }
-                *entry = lbDvd_803BA68C;
-            } else if (entry->state == 4) {
-                entry->state = 3;
             }
         }
     }

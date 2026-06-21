@@ -12,6 +12,7 @@
 
 #include "gm/gm_1601.h"
 #include "gm/gm_16AE.h"
+#include "gm/gmregclear.h"
 #include "gm/types.h"
 #include "gr/ground.h"
 #include "if/ifall.h"

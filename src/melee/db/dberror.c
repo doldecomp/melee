@@ -6,7 +6,7 @@
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/particle.h>
 #include <sysdolphin/baselib/video.h>
-#include <melee/lb/lb_0192.h>
+#include <melee/lb/lb_0195.h>
 #include <melee/lb/lbcardnew.h>
 
 void db_ClearFPUExceptions(void)

@@ -50,15 +50,9 @@
 /* 4D6FFC */ static u8 un_804D6FFC;
 /* 4D6FFD */ static u8 un_804D6FFD;
 /* 4D7000 */ static void* un_804D7000;
-static un_804D7004_t un_804D7004;
+/* 4D7004 */ un_804D7004_t un_804D7004;
 
-typedef struct Vi1201v1Data {
-    Vec3 player_spawn;
-} Vi1201v1Data;
-
-Vi1201v1Data un_80400258 = {
-    { 0.0f, 0.0f, 0.0f },
-};
+Vec3 player_spawn = { 0.0f, 0.0f, 0.0f };
 
 void un_8031F980(int arg0, int arg1)
 {
@@ -88,7 +82,7 @@ void un_8031F9D8(CharacterKind char_index, int costume_id)
     Player_SetPlayerId(0, 0);
     Player_SetSlottype(0, 2);
     Player_SetFacingDirection(0, 0.0f);
-    Player_80032768(0, &un_80400258.player_spawn);
+    Player_80032768(0, &player_spawn);
     Player_80036F34(0, 1);
     un_804D7000 = Player_GetEntity(0);
     lbAudioAx_80026F2C(0x18);

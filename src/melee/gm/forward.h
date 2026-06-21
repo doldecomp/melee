@@ -120,40 +120,40 @@ typedef enum MatchOutcome {
 } MatchOutcome;
 
 struct gm_801677C0_s;
-
+struct lbl_8046B488_t;
+typedef struct CameraVsData CameraVsData;
+typedef struct datetime datetime;
+typedef struct DebugGameOverData DebugGameOverData;
 typedef struct GameMode GameMode;
+typedef struct GameRules GameRules;
 typedef struct GameScene GameScene;
 typedef struct GameSceneHandler GameSceneHandler;
 typedef struct GameSceneInfo GameSceneInfo;
-
-typedef struct datetime datetime;
-typedef struct GameRules GameRules;
 typedef struct gm_8016A92C_arg0_t gm_8016A92C_arg0_t;
 typedef struct gm_8017DB6C_arg0_t gm_8017DB6C_arg0_t;
-typedef struct lbl_8046B6A0_t lbl_8046B6A0_t;
+typedef struct gmm_x0_528_t gmm_x0_528_t;
 typedef struct lbl_8046B6A0_24C_t lbl_8046B6A0_24C_t;
+typedef struct lbl_8046B6A0_t lbl_8046B6A0_t;
+typedef struct lbl_8046DBD8_t lbl_8046DBD8_t;
+typedef struct MatchEnd MatchEnd;
+typedef struct MatchExitInfo MatchExitInfo;
+typedef struct MatchPlayerData MatchPlayerData;
+typedef struct MenuEnterData MenuEnterData;
+typedef struct MenuExitData MenuExitData;
 typedef struct Placeholder_8016AE38_flags Placeholder_8016AE38_flags;
 typedef struct Placeholder_8016AE38_flags_2 Placeholder_8016AE38_flags_2;
 typedef struct Placeholder_8016AE50_ret_val Placeholder_8016AE50_ret_val;
-typedef struct MatchPlayerData MatchPlayerData;
-typedef struct MatchEnd MatchEnd;
-typedef struct MatchExitInfo MatchExitInfo;
-typedef struct ResultsMatchInfo ResultsMatchInfo;
-typedef struct TmData TmData;
 typedef struct ResultsData ResultsData;
-typedef struct CameraVsData CameraVsData;
+typedef struct ResultsMatchInfo ResultsMatchInfo;
+typedef struct TmAnimTimers TmAnimTimers;
+typedef struct TmData TmData;
 typedef struct TmVsData TmVsData;
-typedef struct DebugGameOverData DebugGameOverData;
 typedef struct Unk1PData Unk1PData;
-typedef struct UnkAllstarData UnkAllstarData;
-typedef struct UnkAdventureData UnkAdventureData;
-typedef struct UnkMultimanData UnkMultimanData;
-typedef struct gmm_x0_528_t gmm_x0_528_t;
 typedef struct Unk1PData_x24 Unk1PData_x24;
-typedef struct lbl_8046DBD8_t lbl_8046DBD8_t;
+typedef struct UnkAdventureData UnkAdventureData;
+typedef struct UnkAllstarData UnkAllstarData;
+typedef struct UnkMultimanData UnkMultimanData;
 typedef struct VsApproachData VsApproachData;
-typedef struct MenuExitData MenuExitData;
-typedef struct MenuEnterData MenuEnterData;
 
 typedef bool (*GmRouteCallback)(int);
 

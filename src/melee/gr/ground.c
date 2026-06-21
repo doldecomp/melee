@@ -14,6 +14,8 @@
 
 #include <placeholder.h>
 
+#include "baselib/forward.h"
+
 #include "cm/camera.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
@@ -24,7 +26,6 @@
 #include "gr/inlines.h"
 #include "if/textlib.h"
 #include "it/it_26B1.h"
-#include "it/it_2725.h"
 #include "it/it_3F14.h"
 #include "it/items/itcoin.h"
 #include "it/itzako.h"
@@ -87,9 +88,9 @@
 /* 1C55AC */ static void Ground_801C55AC(Ground*);
 /* 1C5878 */ static void Ground_801C5878(void);
 
-StageInfo stage_info;
+/* 49E6C8 */ StageInfo stage_info;
 
-static StageData Ground_803DFEA8 = {
+/* 3DFEA8 */ static StageData Ground_803DFEA8 = {
     0,
     NULL,
     NULL,
@@ -427,6 +428,8 @@ void Ground_801C06B8(InternalStageId arg0)
     case PSTADIUM:
         grStadium_801D511C();
         return;
+    default:
+        return;
     }
 }
 
@@ -725,6 +728,8 @@ void Ground_801C1158(void)
     case VENOM:
         grCorneria_801E2A6C();
         break;
+    default:
+        return;
     }
 }
 
@@ -777,11 +782,6 @@ HSD_JObj* Ground_801C13D0(s32 arg0, s32 depth)
     }
     return result;
 }
-
-static char Ground_804D44F8[8] = "archive";
-
-#define assert_line(line, cond)                                               \
-    ((cond) ? (void) 0 : __assert(__FILE__, line, #cond))
 
 static HSD_JObj* get_jobj_inline(float phi_f0)
 {
@@ -849,7 +849,7 @@ Ground_GObj* Ground_GetStageGObj(int map_id)
 
     grMaterial_801C95C4(gobj);
     archive = grDatFiles_801C6324();
-    assert_line(0x54E, archive);
+    HSD_ASSERT(1358, archive);
 
     if (map_id < archive->unk4->unkC) {
         archive = grDatFiles_801C6330(map_id);
@@ -1154,10 +1154,6 @@ f32 Ground_801C20D0(void)
     return stage_info.cam_info.cam_vertical_tilt;
 }
 
-/// @todo attempt decomp once param types are known
-char lightset[9] = "lightset";
-char plightset[10] = "*lightset";
-
 typedef struct LightOverrideEntry {
     /* 0x0 */ HSD_LightDesc* desc;
     /* 0x4 */ u8 a : 1;
@@ -1167,7 +1163,7 @@ typedef struct LightOverrideEntry {
     /* 0x5 */ u8 _pad[3];
 } LightOverrideEntry;
 
-LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lights)
+LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lightset)
 {
     LightList** walker;
     LightList** out;
@@ -1181,10 +1177,10 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lights)
     s32 b6, b7, b5;
     bool matched;
 
-    HSD_ASSERTMSG(0x773, lights, lightset);
-    HSD_ASSERTMSG(0x774, *lights, plightset);
+    HSD_ASSERT(1907, lightset);
+    HSD_ASSERT(1908, *lightset);
 
-    walker = lights;
+    walker = lightset;
     matched = 0;
     while (*walker != NULL) {
         dat = archive->unk4;
@@ -1212,10 +1208,10 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lights)
     }
 
     if (matched == 0) {
-        return lights;
+        return lightset;
     }
 
-    out = lights;
+    out = lightset;
     while (*out != NULL) {
         desc = *(HSD_LightDesc**) *out;
         if (desc->flags & 3) {
@@ -1261,7 +1257,7 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lights)
         }
         out++;
     }
-    return lights;
+    return lightset;
 }
 
 void Ground_801C2374(HSD_LObj* lobj)
@@ -1293,7 +1289,7 @@ void Ground_801C2374(HSD_LObj* lobj)
 HSD_Spline* Ground_801C247C(s32 arg0, s32 arg1)
 {
     UnkArchiveStruct* archive = grDatFiles_801C6330(arg0);
-    HSD_ASSERTMSG(0x7E1, archive, Ground_804D44F8);
+    HSD_ASSERT(2017, archive);
     if (archive->unk4 != NULL && arg1 < archive->unk4->unk14) {
         return archive->unk4->unk10[arg1];
     } else {
@@ -2608,30 +2604,53 @@ static LightList** Ground_801C466C_inline(void)
     return NULL;
 }
 
-float Ground_803E065C[] = { 0, 0, 0, 0 };
-float Ground_803E066C[] = { 0, 0.57, 0.57, 0.57, 0 };
-
-struct a {
-    UNK_T x0;
-    UNK_T x4;
-    int x8;
-    int xC;
-    UNK_T x10;
-    UNK_T x14;
-    UNK_T x18;
+/* 3E065C */ static HSD_LightAnim Ground_803E065C[] = { 0 };
+/* 3E066C */ static HSD_WObjDesc Ground_803E066C = {
+    NULL,
+    { 0.57f, 0.57f, 0.57f },
+    NULL,
 };
 
-float Ground_804D4508 = 16;
-
-struct a Ground_803E0680 = {
-    NULL, NULL, 0xD0000, -1, &Ground_803E066C, NULL, &Ground_804D4508,
+/* 4D4500 */ static HSD_LightAnim* Ground_804D4500[] = {
+    Ground_803E065C,
+    NULL,
 };
 
-UNK_T Ground_803E069C[] = { NULL, NULL, NULL, NULL };
+/* 4D4508 */ float Ground_804D4508 = 16.0f;
 
-struct a Ground_803E06AC = { NULL, NULL, 0x40000, -1, NULL, NULL, NULL };
+/* 3E0680 */ static HSD_LightDesc Ground_803E0680 = {
+    NULL,
+    NULL,
+    (1 << 0) | (1 << 2) | (1 << 3),
+    0,
+    { 0xFF, 0xFF, 0xFF, 0xFF },
+    &Ground_803E066C,
+    NULL,
+    &Ground_804D4508,
+};
 
-static LightList* Ground_803E06C8[3] = { 0 };
+/* 3E069C */ static HSD_LightAnim Ground_803E069C[] = { 0 };
+/* 3E06AC */ static HSD_LightDesc Ground_803E06AC = {
+    NULL, NULL, (1 << 2), 0, { 0xFF, 0xFF, 0xFF, 0xFF }, NULL, NULL, NULL
+};
+
+/* 4D450C */ static LightList Ground_804D450C = {
+    &Ground_803E0680,
+    Ground_804D4500,
+};
+/* 4D4514 */ static HSD_LightAnim* Ground_804D4514[] = {
+    Ground_803E069C,
+    NULL,
+};
+/* 4D451C */ static LightList Ground_804D451C = {
+    &Ground_803E06AC,
+    Ground_804D4514,
+};
+/* 3E06C8 */ static LightList* Ground_803E06C8[] = {
+    &Ground_804D451C,
+    &Ground_804D450C,
+    NULL,
+};
 
 void Ground_801C466C(void)
 {
@@ -2910,20 +2929,6 @@ void Ground_801C4E70(HSD_JObj* arg0, HSD_JObj* arg1, HSD_JObj* arg2,
     stage_info.x16C = vec;
 }
 
-struct Node {
-    float* x0;
-    UNK_T x4;
-};
-
-struct Node Ground_804D4500 = { Ground_803E065C, NULL };
-
-SDATA UNK_T Ground_804D450C[] = { &Ground_803E0680, &Ground_804D4500 };
-SDATA UNK_T Ground_804D4514[] = { &Ground_803E069C, NULL };
-SDATA UNK_T Ground_804D451C[] = { &Ground_803E06AC, &Ground_804D4514 };
-
-SDATA char Ground_804D4524[] = "fog.h";
-SDATA char Ground_804D452C[] = "fog";
-
 static inline float vec_len(Vec3* v)
 {
     float x2 = v->x * v->x;
@@ -2931,6 +2936,10 @@ static inline float vec_len(Vec3* v)
     float z2 = v->z * v->z;
     return sqrtf(x2 + y2 + z2);
 }
+
+/// @todo replace with fog.h inlines
+#define FOG_ASSERT(line, cond)                                                \
+    ((cond) ? (void) 0 : __assert("fog.h", line, #cond))
 
 void Ground_801C4FAC(HSD_CObj* cobj)
 {
@@ -3026,17 +3035,18 @@ void Ground_801C4FAC(HSD_CObj* cobj)
                 if (phi_f31 > phi_f30) {
                     phi_f30 = 1.0f + phi_f31;
                 }
-#line 1 "fog.h"
-                HSD_ASSERTMSG(0xB4, fog, "fog");
-                fog->start = phi_f31;
 
-                HSD_ASSERTMSG(0xBF, fog, "fog");
-#line 3049 "src/melee/gr/ground.c"
+                FOG_ASSERT(180, fog);
+                fog->start = phi_f31;
+                FOG_ASSERT(191, fog);
+
                 fog->end = phi_f30;
             }
         }
     }
 }
+
+#undef FOG_ASSERT
 
 void Ground_801C53EC(u32 arg0)
 {
@@ -3320,3 +3330,5 @@ void Ground_801C5AEC(Vec3* v, Vec3* arg1, Vec3* arg2, Vec3* arg3)
         v->z = 0;
     }
 }
+
+static int unused_ints[] = { 1, 1, 0, 0, 0, 180, 0, 0, 0 };
