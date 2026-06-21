@@ -1963,7 +1963,7 @@ void un_803078E4(void)
 {
     tyLightData* data;
     char* table;
-    void* syms[7];
+    UNK_T syms[7];
     PosArrayFull pos_en;
     PosArrayFull pos_jp;
     HSD_SObj* sobj;
@@ -1997,8 +1997,7 @@ void un_803078E4(void)
         i = 0;
 
         do {
-            sobj =
-                HSD_SObjLib_803A477C(data->x0C, (int) syms[i], 0, 0, 0x80, 0);
+            sobj = HSD_SObjLib_803A477C(data->x0C, syms[i], 0, 0, 0x80, 0);
             if (sobj != NULL) {
                 if (lbLang_IsSavedLanguageJP() != 0) {
                     sobj->x10 = (f32) pos_jp.a[i].xy[0];
@@ -5162,7 +5161,7 @@ void un_80310324(void)
     ToyGlobalsS_* tg5;
     ToyGlobalsS_* tg6;
     ToySubStructS_* sub;
-    s32 sp[4];
+    UNK_T sp[4];
     s32 i;
     s32 one;
     s16 idx;

@@ -167,7 +167,7 @@ HSD_SObj* HSD_SObjLib_803A477C(HSD_GObj* gobj, HSD_SObjDesc* desc,
     if (use_secondary) {
         image = desc->image;
         tlut = desc->tlut;
-        image2 = desc->image2;
+        image2 = ((HSD_SObjDesc2*) desc)->image2;
     } else {
         image = desc->image;
         image2 = NULL;

@@ -21,7 +21,8 @@
 static StaticModelDesc mnGallery_804A0BA0;
 static StaticModelDesc mnGallery_804A0BB0;
 static HSD_GObj* mnGallery_804D6C88;
-static void* mnGallery_804D6C8C;
+static size_t const heap_size = 0x271000;
+static u32* rate_table;
 
 #define GET_804D6C88(gobj)                                                    \
     ((struct mnGallery_804D6C88_userdata*) HSD_GObjGetUserData(gobj))
@@ -56,7 +57,7 @@ static void float_order_helper(HSD_SObj* sobj)
 
 void mnGallery_80258940(void)
 {
-    mnGallery_804D6C8C = HSD_MemAlloc(0x271000);
+    rate_table = HSD_MemAlloc(heap_size);
 }
 
 void mnGallery_8025896C(HSD_GObj* gobj, int render_pass)
@@ -151,16 +152,15 @@ static void mnGallery_80258BC4(struct mnGallery_804D6C88_userdata* data)
         lbAudioAx_800236DC();
         lbAudioAx_80023F28(0x52);
         lbAudioAx_80024E50(true);
-        lbMthp_8001F410("MvOmake15.mth", 0, (int) mnGallery_804D6C8C, 0x271000,
-                        0);
+        lbMthp_8001F410("MvOmake15.mth", 0, rate_table, heap_size, 0);
         lbAudioAx_80024E50(false);
         break;
     case 1:
         lbAudioAx_800236DC();
         lbAudioAx_80023F28(0x24);
         lbAudioAx_80024E50(true);
-        lbMthp_8001F410("MvHowTo.mth", gm_801ACC94(), (int) mnGallery_804D6C8C,
-                        0x271000, 0);
+        lbMthp_8001F410("MvHowTo.mth", gm_801ACC94(), rate_table, heap_size,
+                        0);
         lbAudioAx_80024E50(false);
         break;
     }
