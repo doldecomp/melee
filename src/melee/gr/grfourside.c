@@ -278,6 +278,7 @@ void grFourside_801F3274(Ground_GObj* gobj)
     HSD_JObj* crane_iron = Ground_801C3FA4(gobj, 4);
     float fVar1;
     float temp_fVar1;
+    PAD_STACK(0x1C);
     // Ground_801C2ED0(jobj,gp->map_id);
     // grAnime_801C7FF8(gobj,0,7,0,0.0f,0.0f);
     switch (gp->gv.foursideCrane.x0) {
@@ -337,7 +338,7 @@ void grFourside_801F3274(Ground_GObj* gobj)
                 gp->gv.foursideCrane.x10 =
                     gp->gv.foursideCrane.x10 -
                     (((s32) fVar1 != 0 ? HSD_Randi(fVar1) : 0) + temp_fVar1);
-                gp->gv.foursideCrane.x1.b1 = 0;
+                gp->gv.foursideCrane.x1.b1 = 1;
                 OSReport("pos = %f : tgrpos = %f\n", gp->gv.foursideCrane.xC,
                          gp->gv.foursideCrane.x10);
                 gp->gv.foursideCrane.x0 = 5;
@@ -382,9 +383,11 @@ void grFourside_801F3274(Ground_GObj* gobj)
         }
         break;
     case 7:
-        temp_fVar1 = fVar1 = gp->gv.foursideCrane.x1C;
+        fVar1 = gp->gv.foursideCrane.x1C;
         if (fVar1 < 0.0f) {
             temp_fVar1 = -fVar1;
+        } else {
+            temp_fVar1 = fVar1;
         }
         if (temp_fVar1 > gp->gv.foursideCrane.x14) {
             gp->gv.foursideCrane.xC = gp->gv.foursideCrane.x10;
@@ -606,6 +609,8 @@ void grFourside_801F3CC8(Ground_GObj* gobj)
     HSD_JObj* heli_jobj = Ground_801C3FA4(gobj, 2);
     HSD_GObj* other;
     Ground* other_gp;
+    bool other_active;
+    PAD_STACK(0x14);
 
     switch (gp->gv.fourside2.x0) {
     case 0:
@@ -615,6 +620,11 @@ void grFourside_801F3CC8(Ground_GObj* gobj)
             if (other_gp->gv.fourside2.x1 == 2 ||
                 other_gp->gv.fourside2.x0 == 0)
             {
+                other_active = false;
+            } else {
+                other_active = true;
+            }
+            if (other_active == false) {
                 HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
                 grAnime_801C8138(gobj, gp->map_id, 0);
                 gp->gv.fourside2.x1 = 0;
@@ -643,6 +653,11 @@ void grFourside_801F3CC8(Ground_GObj* gobj)
             if (other_gp->gv.fourside2.x1 == 2 ||
                 other_gp->gv.fourside2.x0 == 0)
             {
+                other_active = false;
+            } else {
+                other_active = true;
+            }
+            if (other_active == false) {
                 grAnime_801C8138(gobj, gp->map_id, 2);
                 gp->gv.fourside2.x0 = 3;
                 Ground_801C53EC(0x704E2);
