@@ -135,7 +135,7 @@ s32 fn_8001EB14(THPDecComp* data, const char* path)
 #define ALIGN_32(x) (((x) + 0x1F) & ~0x1F)
 
 /// @returns memory required
-s32 fn_8001EBF0(THPDecComp* data)
+size_t fn_8001EBF0(THPDecComp* data)
 {
     s32 size = 0;
     u32 unk_104_val;
@@ -441,25 +441,25 @@ void fn_8001F2A4(OSAlarm* alarm, OSContext* context)
     }
 }
 
-void lbMthp_8001F410(const char* filename, void* rate_table, int buf,
-                     int heap_size, int loop)
+void lbMthp_8001F410(const char* filename, void* rate_table, void* buf,
+                     size_t heap_size, int loop)
 {
-    s32 memoryRequired;
+    size_t memoryRequired;
 
     HSD_ASSERT(833, !MoviePlayer.power);
     MoviePlayer.power = 1;
     fn_8001EB14((THPDecComp*) &MoviePlayer, filename);
     MoviePlayer.rate_table = rate_table;
     memoryRequired = fn_8001EBF0((THPDecComp*) &MoviePlayer);
-    if ((u32) buf != 0U) {
+    if (buf != NULL) {
         HSD_ASSERT(848, heap_size >= memoryRequired);
         MoviePlayer.unk_140 = NULL;
     } else {
-        buf = (int) HSD_MemAlloc(memoryRequired);
-        MoviePlayer.unk_140 = (void*) buf;
+        buf = HSD_MemAlloc(memoryRequired);
+        MoviePlayer.unk_140 = buf;
     }
     MoviePlayer.unk_68 = loop;
-    fn_8001ECF4((THPDecComp*) &MoviePlayer, (void*) buf);
+    fn_8001ECF4((THPDecComp*) &MoviePlayer, buf);
     MoviePlayer.unk_144 = 0;
     MoviePlayer.unk_148 = 1;
     OSCreateAlarm(&MoviePlayer.alarm);

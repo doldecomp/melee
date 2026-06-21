@@ -778,7 +778,7 @@ void fn_8018575C(HSD_GObj* gobj)
 /// images. Distributes 10 image tiles across a grid with random offsets.
 void fn_801857C4(HSD_GObj* arg0)
 {
-    HSD_SObjDesc2* desc;
+    HSD_SObjDesc2 desc;
     Vec3 pos_copy;
     Vec3 pos;
     HSD_SObj* sobj;
@@ -797,11 +797,11 @@ void fn_801857C4(HSD_GObj* arg0)
         i = 0;
         delay = 1;
         for (; i < 10; i++, img_idx++) {
-            desc->desc.image = &lbl_804735E8.x40[img_idx[0x90]];
-            desc->desc.tlut = NULL;
-            desc->image2 = &lbl_804735E8.x88[img_idx[0x90]];
-            sobj = HSD_SObjLib_803A477C(lbl_804735E8.xDC, (HSD_SObjDesc*) desc,
-                                        0, 0, 0x80, 1);
+            desc.desc.image = &lbl_804735E8.x40[img_idx[0x90]];
+            desc.desc.tlut = NULL;
+            desc.image2 = &lbl_804735E8.x88[img_idx[0x90]];
+            sobj = HSD_SObjLib_803A477C(lbl_804735E8.xDC, &desc.desc, 0, 0,
+                                        0x80, 1);
             total_tiles = 10;
             num_cols = (s32) fn_801855BC(total_tiles);
             row = (u8) i / (u8) num_cols;
