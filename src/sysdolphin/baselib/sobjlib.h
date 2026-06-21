@@ -1,6 +1,8 @@
 #ifndef SYSDOLPHIN_BASELIB_SOBJLIB_H
 #define SYSDOLPHIN_BASELIB_SOBJLIB_H
 
+#include "platform.h"
+
 #include <placeholder.h>
 
 #include <sysdolphin/baselib/forward.h>
@@ -14,8 +16,15 @@ extern u8 HSD_SObjLib_804D7960;
 typedef struct HSD_SObjDesc {
     /* 0x00 */ HSD_ImageDesc* image;
     /* 0x04 */ struct _HSD_Tlut* tlut;
-    /* 0x08 */ HSD_ImageDesc* image2;
 } HSD_SObjDesc;
+STATIC_ASSERT(sizeof(struct HSD_SObjDesc) == 0x8);
+
+/// @note #HSD_SObjDesc fits in .sdata
+typedef struct HSD_SObjDesc2 {
+    /* 0x00 */ struct HSD_SObjDesc desc;
+    /* 0x08 */ HSD_ImageDesc* image2;
+} HSD_SObjDesc2;
+STATIC_ASSERT(sizeof(struct HSD_SObjDesc2) == 0xC);
 
 struct HSD_SObj {
     /* 0x00 */ void* x0;
@@ -66,14 +75,9 @@ typedef HSD_SObj HSD_SObj_803A477C_t;
 /* 3A44D4 */ void HSD_SObjLib_803A44D4(HSD_GObj*, HSD_SObj*, u8);
 /* 3A466C */ void HSD_SObjLib_803A466C(HSD_SObj*);
 /* 3A4740 */ void HSD_SObjLib_803A4740(HSD_SObj*);
-#ifdef SOBJLIB_INTERNAL
 /* 3A477C */ HSD_SObj* HSD_SObjLib_803A477C(HSD_GObj*, HSD_SObjDesc*,
                                             GXTexWrapMode, GXTexWrapMode, u8,
                                             u8);
-#else
-/* 3A477C */ HSD_SObj* HSD_SObjLib_803A477C(HSD_GObj*, int, int, int, int,
-                                            int);
-#endif
 /* 3A49E0 */ void HSD_SObjLib_803A49E0(HSD_GObj*, int);
 /* 3A4A68 */ void HSD_SObjLib_803A4A68(HSD_SObj*);
 /* 3A54EC */ void HSD_SObjLib_803A54EC(HSD_GObj*, int);

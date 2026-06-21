@@ -32,11 +32,6 @@
 #include <baselib/sobjlib.h>
 #include <baselib/tobj.h>
 
-struct ImageDesc_Pair {
-    HSD_ImageDesc* x0;
-    UNK_T x4;
-};
-
 struct ImageDesc_Array {
     HSD_ImageDesc x0[2][2];
     u8 x60[0xC];
@@ -50,7 +45,7 @@ struct ImageDesc_Array {
 /* 4D6798 */ HSD_Joint* gm_804D6798;
 /* 4D6794 */ int gm_804D6794;
 /* 4D6790 */ int gm_804D6790;
-/* 4D6788 */ struct ImageDesc_Pair gm_804D6788;
+/* 4D6788 */ struct HSD_SObjDesc gm_804D6788;
 /* 4D6784 */ int gm_804D6784;
 /* 4D6780 */ int gm_804D6780;
 /* 4D677C */ HSD_GObj* gm_804D677C;
@@ -59,7 +54,7 @@ struct ImageDesc_Array {
 /* 4D6770 */ int gm_804D6770;
 /* 4D676C */ HSD_GObj* gm_804D676C;
 /* 4D6768 */ HSD_GObj* gm_804D6768;
-/* 4D6760 */ struct ImageDesc_Pair gm_804D6760;
+/* 4D6760 */ struct HSD_SObjDesc gm_804D6760;
 /* 4D675C */ int gm_804D675C;
 /* 4D6758 */ int gm_804D6758;
 /* 4D6754 */ HSD_GObj* gm_804D6754;
@@ -120,10 +115,10 @@ void fn_801A6664(HSD_GObj* arg0)
     HSD_JObjAnimAll((HSD_JObj*) arg0->hsd_obj);
     if ((s32) gm_804D6758 != 0) {
         HSD_SObjLib_803A4740(gm_804D6754->hsd_obj);
-        gm_804D6760.x0 = &gm_804808F8.x0[gm_804D675C][0];
-        gm_804D6760.x4 = NULL;
-        temp_r3 = HSD_SObjLib_803A477C(gm_804D6754, (s32) &gm_804D6760, 0, 0,
-                                       0x80, 0);
+        gm_804D6760.image = &gm_804808F8.x0[gm_804D675C][0];
+        gm_804D6760.tlut = NULL;
+        temp_r3 =
+            HSD_SObjLib_803A477C(gm_804D6754, &gm_804D6760, 0, 0, 0x80, 0);
         temp_r3->x10 = 60.0f;
         temp_r3->x14 = 0.0f;
         gm_804D675C = gm_804D675C == 0;
@@ -150,10 +145,10 @@ void fn_801A6664(HSD_GObj* arg0)
         }
         gm_804D6790 = 7;
         HSD_SObjLib_803A4740(gm_804D677C->hsd_obj);
-        gm_804D6788.x0 = &gm_804809D0[gm_804D6784];
-        gm_804D6788.x4 = 0;
-        temp_r3_2 = HSD_SObjLib_803A477C(gm_804D677C, (s32) &gm_804D6788, 0, 0,
-                                         0x80, 0);
+        gm_804D6788.image = &gm_804809D0[gm_804D6784];
+        gm_804D6788.tlut = NULL;
+        temp_r3_2 =
+            HSD_SObjLib_803A477C(gm_804D677C, &gm_804D6788, 0, 0, 0x80, 0);
         temp_r3_2->x10 = 60.0f;
         temp_r3_2->x14 = 0.0f;
         temp_r3_2->x3C = gm_804D4278.x0;

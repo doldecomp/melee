@@ -3,6 +3,7 @@
 
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sobjlib.h>
+#include <sysdolphin/baselib/tobj.h>
 
 struct lbl_804335B8_t {
     /* 0x00 */ GXTexObj tex0; /* 0x00-0x20 (size 0x20) */
@@ -13,15 +14,8 @@ struct lbl_804335B8_t {
     /* 0x68 */ void* x68;     /* image ptr for tex2 */
     /* 0x6C */ u16 x6C;       /* width */
     /* 0x6E */ u16 x6E;       /* height */
-    /* 0x70 */ s32 x70;
-    /* 0x74 */ u16 x74;
-    /* 0x76 */ u16 x76;
-    /* 0x78 */ s32 x78;
-    /* 0x7C */ s32 x7C;
-    /* 0x80 */ float x80;
-    /* 0x84 */ float x84;
-    /* 0x88 */ void* x88;
-    /* 0x8C */ s32 x8C;
+    /* 0x70 */ struct HSD_ImageDesc x70;
+    /* 0x88 */ struct HSD_SObjDesc x88;
     /* 0x90 */ struct HSD_SObj* x90;
     /* 0x94 */ u32 unk94;
     /* 0x98 */ u32 unk98;
@@ -35,17 +29,16 @@ static struct lbl_804335B8_t lbl_804335B8;
 
 void* lbMthp8001F890(HSD_GObj* gobj)
 {
-    lbl_804335B8.x70 = 0;
-    lbl_804335B8.x74 = lbl_804335B8.x6C;
-    lbl_804335B8.x76 = lbl_804335B8.x6E;
-    lbl_804335B8.x78 = 6;
-    lbl_804335B8.x7C = 0;
-    lbl_804335B8.x84 = 0.0F;
-    lbl_804335B8.x80 = 0.0F;
-    lbl_804335B8.x88 = &lbl_804335B8.x70;
-    lbl_804335B8.x8C = 0;
+    lbl_804335B8.x70.image_ptr = NULL;
+    lbl_804335B8.x70.width = lbl_804335B8.x6C;
+    lbl_804335B8.x70.height = lbl_804335B8.x6E;
+    lbl_804335B8.x70.format = GX_TF_RGBA8;
+    lbl_804335B8.x70.mipmap = 0;
+    lbl_804335B8.x70.minLOD = lbl_804335B8.x70.maxLOD = 0.0F;
+    lbl_804335B8.x88.image = &lbl_804335B8.x70;
+    lbl_804335B8.x88.tlut = NULL;
     lbl_804335B8.x90 =
-        HSD_SObjLib_803A477C(gobj, (int) &lbl_804335B8.x88, 0, 0, 0x80, 0);
+        HSD_SObjLib_803A477C(gobj, &lbl_804335B8.x88, 0, 0, 0x80, 0);
     lbl_804335B8.x90->x40 |= 0x10;
     return lbl_804335B8.x90;
 }

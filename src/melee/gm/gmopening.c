@@ -28,7 +28,7 @@
 /* 4D67E4 */ static u32 gm_804D67E4;
 /* 4D67E8 */ static HSD_GObj* gm_804D67E8;
 /* 4D67F4 */ HSD_GObj* gm_804D67F4;
-/* 4D67F0 */ int gm_804D67F0;
+/* 4D67F0 */ HSD_SObjDesc* gm_804D67F0;
 /* 4D67EC */ u32 gm_804D67EC;
 
 static void sdata2_order(void)
@@ -129,8 +129,8 @@ void fn_801AA0E8(void)
     hsd_80392528((Event) fn_801A9FCC);
 }
 
-/* 3DBFB4 */ static int gm_803DBFB4[] = {
-    0x000004E2, 0x00000002, 0x0000018A, 0x00000001, 0x00010000, 0x00000002,
+/* 3DBFB4 */ static u32 gm_803DBFB4[] = {
+    1250, 2, 394, 1, 65536, 2,
 };
 
 void gm_801AA110_OnEnter(UNK_T arg0)

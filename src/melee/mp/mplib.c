@@ -49,7 +49,7 @@
     do {                                                                      \
         if ((line_id) == -1 || (line_id) >= mpLib_804D64B4->line_count)       \
             HSD_ASSERTREPORT(line, 0, "%s:%d:not found lineID=%d\n",          \
-                             __FILE__, line, line_id);                        \
+                             __FILE__, line, line_id);                                   \
     } while (0)
 
 struct mpLib_803BF248_t_x4 {

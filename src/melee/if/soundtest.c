@@ -225,7 +225,7 @@ struct un_803FA128_x130_t {
 /* 4D590C */ extern s32 un_804D590C;
 /* 4D5910 */ extern s32 un_804D5910;
 
-/* 4D5990 */ extern SDATA char un_804D5990[];
+/* 4D5990 */ extern HSD_SObjDesc un_804D5990;
 
 /// .bss (extern)
 /* 45A6C0 */ extern u8 gmMainLib_8045A6C0[];
@@ -1480,8 +1480,7 @@ int un_80301964(int arg0)
             gobj = GObj_Create(0xE, 0xF, 0);
             GObj_SetupGXLink(gobj, HSD_SObjLib_803A49E0, 0x12, 0);
             un_803FD274[0] = un_804D6E04;
-            sobj =
-                HSD_SObjLib_803A477C(gobj, (int) un_804D5990, 0, 0, 0x80, 0);
+            sobj = HSD_SObjLib_803A477C(gobj, &un_804D5990, 0, 0, 0x80, 0);
             sobj->x10 = un_804DDC4C;
             sobj->x14 = un_804DDC50;
             sobj->x40 |= 2;
