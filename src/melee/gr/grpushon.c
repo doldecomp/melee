@@ -425,7 +425,8 @@ void grPushOn_802190D0(HSD_GObj* gobj)
     i = 0;
 
     while (i < 9 && lobj != NULL) {
-        HSD_ASSERT(698, HSD_LObjGetType(lobj)==LOBJ_POINT);
+        HSD_ASSERTMSG(698, (lobj->flags & LOBJ_TYPE_MASK) == LOBJ_POINT,
+                      "HSD_LObjGetType(lobj)==LOBJ_POINT");
         lobj->flags = LOBJ_POINT | LOBJ_DIFFUSE;
         color = entry->color;
         HSD_LObjSetColor(lobj, color);
