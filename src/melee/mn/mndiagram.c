@@ -116,7 +116,7 @@ typedef struct mnDiagram_AnimTable {
     /* 0x94 */ char x94[0x14];
 } mnDiagram_AnimTable;
 
-#define GET_DIAGRAM_ANIM_TABLE() \
+#define GET_DIAGRAM_ANIM_TABLE()                                              \
     ((mnDiagram_AnimTable*) &mnDiagram_PopupAnimTable)
 
 static s32 mnDiagram_804D4FA0 = 0xFF;
