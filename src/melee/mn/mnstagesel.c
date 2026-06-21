@@ -2,6 +2,8 @@
 
 #include "mnstagesel.static.h"
 
+#include "placeholder.h"
+
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -24,6 +26,12 @@
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/types.h>
 #include <melee/mn/mnmain.h>
+
+/// @todo .sdata2 order hack
+static void order_sdata2(void)
+{
+    (void) S32_TO_F32;
+}
 
 /// Random stage selection
 /// Returns an internal stage ID - 2 (since first 2 internal stage IDs are
