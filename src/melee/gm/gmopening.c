@@ -129,8 +129,8 @@ void fn_801AA0E8(void)
     hsd_80392528((Event) fn_801A9FCC);
 }
 
-/* 3DBFB4 */ static int gm_803DBFB4[] = {
-    0x000004E2, 0x00000002, 0x0000018A, 0x00000001, 0x00010000, 0x00000002,
+/* 3DBFB4 */ static u32 gm_803DBFB4[] = {
+    1250, 2, 394, 1, 65536, 2,
 };
 
 void gm_801AA110_OnEnter(UNK_T arg0)

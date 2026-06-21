@@ -441,7 +441,7 @@ void fn_8001F2A4(OSAlarm* alarm, OSContext* context)
     }
 }
 
-void lbMthp_8001F410(const char* filename, void* rate_table, void* buf,
+void lbMthp_8001F410(const char* filename, u32* rate_table, void* buf,
                      size_t heap_size, int loop)
 {
     size_t memoryRequired;

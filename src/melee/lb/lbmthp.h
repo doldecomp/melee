@@ -135,7 +135,7 @@ STATIC_ASSERT(sizeof(struct THPDecComp) == sizeof(struct lbl_804333E0_t));
 /* 01F06C */ s32 fn_8001F06C(THPDecComp* data);
 /* 01F13C */ s32 fn_8001F13C(THPDecComp* data);
 /* 01F294 */ s32 fn_8001F294(void);
-/* 01F410 */ void lbMthp_8001F410(const char* filename, void* rate_table,
+/* 01F410 */ void lbMthp_8001F410(const char* filename, u32* rate_table,
                                   void* buf, size_t heap_size, int loop);
 /* 01F578 */ void lbMthp_8001F578(void);
 /* 01F5C4 */ s32 lbMthp_8001F5C4(void);
