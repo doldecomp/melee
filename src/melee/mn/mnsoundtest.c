@@ -346,22 +346,29 @@ void mnSoundTest_8024AD58(HSD_GObj* arg0, u8 arg1)
 static inline void fn_8024AED0_inline(HSD_GObj* arg0)
 {
     char string[3];
-    HSD_Text* temp_r3_6;
-    soundtest_user_data* temp_r28_4 = mnSoundTest_804D6C40->user_data;
-    HSD_Text* temp_r3_5 = temp_r28_4->unk1C;
-    if (temp_r3_5 != NULL) {
-        HSD_SisLib_803A5CC4(temp_r3_5);
+    HSD_Text* text;
+    f32 pos_y;
+    soundtest_user_data* user_data = mnSoundTest_804D6C40->user_data;
+    HSD_Text* old_text = user_data->unk1C;
+    if (old_text != NULL) {
+        HSD_SisLib_803A5CC4(old_text);
     }
-    temp_r3_6 = HSD_SisLib_803A6754(0, 0);
-    temp_r28_4->unk1C = temp_r3_6;
-    temp_r3_6->pos_x = vec_8.y;
-    temp_r3_6->pos_y = vec_8.x;
-    temp_r3_6->pos_z = 18.0f;
-    temp_r3_6->font_size.x = 0.04f;
-    temp_r3_6->font_size.y = 0.04f;
-    mn_8022EA08((char*) &string, temp_r28_4->unk4);
-    temp_r3_6->default_alignment = 1;
-    HSD_SisLib_803A6B98(temp_r3_6, 0.0f, 0.0f, string);
+    text = HSD_SisLib_803A6754(0, 0);
+    user_data->unk1C = text;
+    pos_y = vec_8.y;
+    text->pos_x = vec_8.x;
+    text->pos_y = pos_y;
+    text->pos_z = 18.0f;
+    text->font_size.x = 0.04f;
+    text->font_size.y = 0.04f;
+    mn_8022EA08((char*) &string, user_data->unk4);
+    text->default_alignment = 1;
+    HSD_SisLib_803A6B98(text, 0.0f, 0.0f, string);
+}
+
+static inline soundtest_user_data* fn_8024AED0_GetUserData(void)
+{
+    return mnSoundTest_804D6C40->user_data;
 }
 
 void fn_8024AED0(HSD_GObj* arg0)
@@ -371,24 +378,24 @@ void fn_8024AED0(HSD_GObj* arg0)
     HSD_GObjProc* temp_r3_2;
     HSD_Text* temp_r3_7;
     HSD_Text* temp_r3_8;
-    f32 temp_f1;
-    f32 temp_f1_2;
+    f32 fade_timer;
+    f32 preview_timer;
     s32 temp_r28_3;
-    s32 temp_r31;
+    s32 sound_kind;
     s32 temp_r3_3;
     s32 temp_r5;
     u16 temp_r30;
     u16 temp_r4;
     u8 temp_r28_2;
-    soundtest_user_data* temp_r26;
-    soundtest_user_data* temp_r27;
+    soundtest_user_data* menu_data;
+    soundtest_user_data* reset_data;
     soundtest_user_data* temp_r28_5;
     HSD_JObj* temp_r27_2;
-    soundtest_user_data* temp_r3_4;
+    soundtest_user_data* input_data;
     u64 events;
 
-    soundtest_user_data* user_data = arg0->user_data;
-    PAD_STACK(88);
+    soundtest_user_data* user_data = mnSoundTest_804D6C40->user_data;
+    PAD_STACK(80);
     if ((u16) mn_804D6BC8.cooldown != 0) {
         Menu_DecrementAnimTimer();
         return;
@@ -403,41 +410,42 @@ void fn_8024AED0(HSD_GObj* arg0)
         temp_r3_2->flags_3 = HSD_GObj_804D783C;
         return;
     }
-    temp_r26 = mnSoundTest_804D6C40->user_data;
-    temp_f1 = temp_r26->unk8;
-    if (temp_f1 < 1.0f) {
-        temp_r26->unk8 = (f32) (temp_f1 - 0.02f);
-        if (temp_r26->unk8 <= 0.0f) {
-            temp_r26->unk8 = 1.0f;
-            temp_r27 = mnSoundTest_804D6C40->user_data;
+    menu_data = mnSoundTest_804D6C40->user_data;
+    fade_timer = menu_data->unk8;
+    if (fade_timer < 1.0f) {
+        menu_data->unk8 = (f32) (fade_timer - 0.02f);
+        if (menu_data->unk8 <= 0.0f) {
+            menu_data->unk8 = 1.0f;
+            reset_data = fn_8024AED0_GetUserData();
             lbAudioAx_800236DC();
-            temp_r27->unk2 = 0x50;
+            reset_data->unk2 = 0x50;
         }
     }
-    temp_f1_2 = temp_r26->unkC;
-    if (temp_f1_2 < 1.0f) {
-        temp_r26->unkC = (f32) (temp_f1_2 - 0.02f);
-        if (temp_r26->unkC <= 0.0f) {
-            temp_r26->unkC = 1.0f;
+    preview_timer = menu_data->unkC;
+    if (preview_timer < 1.0f) {
+        menu_data->unkC = (f32) (preview_timer - 0.02f);
+        if (menu_data->unkC <= 0.0f) {
+            menu_data->unkC = 1.0f;
             lbAudioAx_80023694();
         }
     }
     if ((u8) mnSoundTest_804D6C44 == 0) {
         temp_r3_3 = lbAudioAx_80023968(data_3[user_data->unk3]);
         temp_r5 = 0 & 0;
-        if (events & MenuInput_RTrigger) {
+        if (events & MenuInput_AButton) {
             temp_r30 = user_data->unk4;
             temp_r28_2 = data_3[user_data->unk3];
-            temp_r3_4 = mnSoundTest_804D6C40->user_data;
+            input_data = fn_8024AED0_GetUserData();
             temp_r27_2 = mnSoundTest_804D6C40->hsd_obj;
-            temp_r3_4->unkC = 1.0f;
-            mnSoundTest_804D6C4C =
-                lbAudioAx_800245F4(gm_80160244(gmMainLib_8015ED74()));
+            input_data->unkC = 1.0f;
+            sound_kind = gm_80160244(gmMainLib_8015ED74());
+            lbAudioAx_800245F4(sound_kind);
+            mnSoundTest_804D6C4C = sound_kind;
             temp_r28_3 = lbAudioAx_80023A44(temp_r28_2, temp_r30);
             lbAudioAx_80023694();
             lbAudioAx_80023B24(temp_r28_3);
             lb_80011E24(temp_r27_2, &sp7C, 0xD, -1);
-            HSD_JObjReqAnimAll(sp7C, vec_4.start_frame);
+            HSD_JObjReqAnimAll(sp7C, vec_5.start_frame);
             mn_8022F3D8(sp7C, 0xFFU, MOBJ_MASK);
             HSD_JObjAnimAll(sp7C);
         } else if (events & MenuInput_StartButton) {
@@ -473,7 +481,7 @@ void fn_8024B2B0(HSD_GObj* arg0)
     HSD_JObj* jobj;
     soundtest_user_data* user_data;
     soundtest_user_data* menu_data;
-    u32 inputs;
+    u64 inputs;
     u8 state;
     u8 anim_idx;
     u16 sound_id;
@@ -490,7 +498,7 @@ void fn_8024B2B0(HSD_GObj* arg0)
     }
     inputs = mn_80229624(4U);
     mn_804A04F0.buttons = inputs;
-    mn_804A04F0.x10 = 0;
+    mn_804A04F0.entering_menu = 0;
     if (inputs & MenuInput_Back) {
         mn_804A04F0.entering_menu = 0;
         mn_80229894(5, 2U, 3);
@@ -819,6 +827,7 @@ void mnSoundTest_8024BCA0(int arg0)
 HSD_GObjProc* mnSoundTest_8024BEE0(s32 arg0)
 {
     HSD_GObjProc* proc;
+    HSD_Archive* archive;
     s32 temp_ret;
 
     mn_804D6BC8.cooldown = 5;
@@ -828,15 +837,15 @@ HSD_GObjProc* mnSoundTest_8024BEE0(s32 arg0)
     mnSoundTest_804D6C48 = gm_801601C4(gmMainLib_8015ED74());
     temp_ret = gm_80160244(gmMainLib_8015ED74());
     mnSoundTest_804D6C4C = temp_ret;
+    archive = mn_804D6BB8;
     mnSoundTest_804D6C44 = 1;
     lbArchive_LoadSections(
-        mn_804D6BB8, (void**) &mnSoundTest_804A08C8.joint,
-        mnSoundTest_803EF528, &mnSoundTest_804A08C8.animjoint,
-        mnSoundTest_803EF540, &mnSoundTest_804A08C8.matanim_joint,
-        mnSoundTest_803EF55C, &mnSoundTest_804A08C8.shapeanim_joint,
-        mnSoundTest_803EF57C, 0);
+        archive, (void**) &mnSoundTest_804A08C8.joint, mnSoundTest_803EF528,
+        &mnSoundTest_804A08C8.animjoint, mnSoundTest_803EF540,
+        &mnSoundTest_804A08C8.matanim_joint, mnSoundTest_803EF55C,
+        &mnSoundTest_804A08C8.shapeanim_joint, mnSoundTest_803EF57C, 0);
     mnSoundTest_8024BCA0(arg0);
     proc = HSD_GObj_SetupProc(GObj_Create(0U, 1U, 0x80U), fn_8024B2B0, 0U);
-    proc->flags_3 = HSD_GObj_804D783C;
+    proc->flags_3 = (u16) HSD_GObj_804D783C;
     return proc;
 }
