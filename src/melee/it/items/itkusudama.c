@@ -266,24 +266,27 @@ void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3)
                 spawned[i] = kind;
             }
         }
-        for (; i < count; i++) {
-            ItemKind rand_kind = it_8026F3AC();
-            Vec3 vel;
-            Vec3 pos;
-            PAD_STACK(8);
-            if (rand_kind != -1) {
-                Item_GObj* spawned_gobj;
-                it_80289BE8_inline(gobj, 1.2f, &pos, &vel);
-                spawned_gobj = it_8026F5C8(gobj, rand_kind, &pos);
-                if (spawned_gobj != NULL) {
-                    it_8026F53C(spawned_gobj, &vel, true);
-                    it_80274ED8();
-                    prev_kind = rand_kind;
-                } else {
-                    prev_kind = -1;
+        {
+            ItemKind* spawn_ptr = &spawned[i];
+            for (; i < count; i++, spawn_ptr++) {
+                ItemKind rand_kind = it_8026F3AC();
+                Vec3 vel;
+                Vec3 pos;
+                PAD_STACK(8);
+                if (rand_kind != -1) {
+                    Item_GObj* spawned_gobj;
+                    it_80289BE8_inline(gobj, 1.2f, &pos, &vel);
+                    spawned_gobj = it_8026F5C8(gobj, rand_kind, &pos);
+                    if (spawned_gobj != NULL) {
+                        it_8026F53C(spawned_gobj, &vel, true);
+                        it_80274ED8();
+                        prev_kind = rand_kind;
+                    } else {
+                        prev_kind = -1;
+                    }
                 }
+                *spawn_ptr = prev_kind;
             }
-            spawned[i] = prev_kind;
         }
     } else {
         i -= arg1;
@@ -303,7 +306,8 @@ void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3)
         } else {
             Vec3 vel;
             Vec3 pos;
-            count = HSD_Randi(2) + 3;
+            count = HSD_Randi(2);
+            count += 3;
             for (i = 0; i < count; i++) {
                 ItemKind rand_kind = it_8026F3AC();
                 if (rand_kind != -1) {

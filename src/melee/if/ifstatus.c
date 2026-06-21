@@ -391,11 +391,10 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
 
     HSD_JObjAnimAll(jobj);
 
-    anim_base = (HSD_MatAnimJoint**) &hud->janim_selection_joints;
     digit_jobj = state->jobjs[Ones];
     ones_digit = state->damage_percent % 10;
     HSD_TObjAddAnimAll(digit_jobj->u.dobj->mobj->tobj,
-                       (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])
+                       (HSD_TexAnim*) ifStatus_HudInfo.janim_selection_joints
                            ->child->child->aobjdesc->fobjdesc);
     HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * ones_digit);
     HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
@@ -403,7 +402,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     digit_jobj = state->jobjs[Tens];
     tens_digit = (state->damage_percent % 100) / 10;
     HSD_TObjAddAnimAll(digit_jobj->u.dobj->mobj->tobj,
-                       (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])
+                       (HSD_TexAnim*) ifStatus_HudInfo.janim_selection_joints
                            ->child->child->aobjdesc->fobjdesc);
     HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * tens_digit);
     HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
@@ -419,7 +418,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     digit_jobj = state->jobjs[Hundreds];
     hundreds_digit = (state->damage_percent % 1000) / 100;
     HSD_TObjAddAnimAll(digit_jobj->u.dobj->mobj->tobj,
-                       (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])
+                       (HSD_TexAnim*) ifStatus_HudInfo.janim_selection_joints
                            ->child->child->aobjdesc->fobjdesc);
     HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * hundreds_digit);
     HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
@@ -539,7 +538,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
         ((state->damage_percent % 1000) / 100 == 1) ? 0.5069F : 0.0F;
     digit_jobj = state->jobjs[Hundreds];
     pos = state->translation_x[Hundreds] +
-          (digit_offset + tens_offset + hundreds_offset);
+          (tens_offset + digit_offset + hundreds_offset);
     if (digit_jobj == NULL) {
         __assert("jobj.h", 932, "jobj");
     }
@@ -683,6 +682,7 @@ void ifStatus_802F5E50(HSD_GObj* gobj, s32 arg1)
 void ifStatus_802F5EC0(IfDamageState* state, s32 player_idx)
 {
     HSD_GObj* gobj;
+    HSD_MatAnimJoint** anim_base;
     HSD_JObj* jobj;
     Vec3* vec;
     s32 i;
@@ -703,9 +703,10 @@ void ifStatus_802F5EC0(IfDamageState* state, s32 player_idx)
     }
     state->flags.animation_status_id = 0;
     HSD_JObjRemoveAnim(jobj);
+    anim_base = (HSD_MatAnimJoint**) &hud->janim_selection_joints;
     lb_8000C07C(jobj, 0, (HSD_AnimJoint**) hud->jobj_desc_parent,
-                (HSD_MatAnimJoint**) hud->janim_selection_joints,
-                (HSD_ShapeAnimJoint**) hud->janim_selection_textures);
+                (HSD_MatAnimJoint**) anim_base[0],
+                (HSD_ShapeAnimJoint**) anim_base[1]);
     HSD_JObjReqAnimAll(jobj, 0.0f);
     HSD_JObjAnimAll(jobj);
     vec = ifAll_802F3424((u8) player_idx);
@@ -717,9 +718,9 @@ void ifStatus_802F5EC0(IfDamageState* state, s32 player_idx)
     }
     if (state->jobjs[3] != NULL) {
         tobj = state->jobjs[3]->u.dobj->mobj->tobj;
-        HSD_TObjAddAnimAll(tobj,
-                           (HSD_TexAnim*) hud->janim_selection_joints->child
-                               ->child->next->next->next->aobjdesc->fobjdesc);
+        HSD_TObjAddAnimAll(
+            tobj, (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])
+                      ->child->child->next->next->next->aobjdesc->fobjdesc);
         if (Player_GetMoreFlagsBit2((s8) state->player_slot) != 0) {
             HSD_TObjReqAnimAll(tobj, 1.0f);
         } else {
@@ -771,6 +772,11 @@ check_done:
     return gx_cur;
 }
 
+static inline HSD_GObj* ifStatus_CreateMarkGObj(void)
+{
+    return GObj_Create(0xE, 0xF, 0);
+}
+
 void ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
 {
     HSD_GObj* gobj;
@@ -790,7 +796,7 @@ void ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
     chara = Player_GetPlayerCharacter(idx);
     if (state->next == NULL) {
         ifAll_802F3690();
-        gobj = GObj_Create(0xE, 0xF, 0);
+        gobj = ifStatus_CreateMarkGObj();
         if (gobj == NULL) {
             HSD_ASSERTREPORT(0x30A, 0,
                              "Error : gobj dont't get (ifAddMark)\n");
