@@ -520,8 +520,7 @@ HSD_SObj* lbMthp_8001F624(HSD_GObj* gobj, int width, int height)
     lbl_803BAFE8.image_ptr = NULL;
     lbl_803BAFE8.width = width;
     lbl_803BAFE8.height = height;
-    sobj = HSD_SObjLib_803A477C(gobj, (HSD_SObjDesc2*) &lbl_804D3834, 0, 0,
-                                0x80, 0);
+    sobj = HSD_SObjLib_803A477C(gobj, &lbl_804D3834, 0, 0, 0x80, 0);
     sobj->x40 |= 0x10;
     return sobj;
 }

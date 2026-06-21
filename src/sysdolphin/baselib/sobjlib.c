@@ -153,7 +153,7 @@ static void order_data(void)
     (void) __FILE__;
 }
 
-HSD_SObj* HSD_SObjLib_803A477C(HSD_GObj* gobj, HSD_SObjDesc2* desc,
+HSD_SObj* HSD_SObjLib_803A477C(HSD_GObj* gobj, HSD_SObjDesc* desc,
                                GXTexWrapMode wrap_s, GXTexWrapMode wrap_t,
                                u8 priority, u8 use_secondary)
 {
@@ -165,13 +165,13 @@ HSD_SObj* HSD_SObjLib_803A477C(HSD_GObj* gobj, HSD_SObjDesc2* desc,
     f32 inv_height;
 
     if (use_secondary) {
-        image = desc->desc.image;
-        tlut = desc->desc.tlut;
-        image2 = desc->image2;
+        image = desc->image;
+        tlut = desc->tlut;
+        image2 = ((HSD_SObjDesc2*) desc)->image2;
     } else {
-        image = desc->desc.image;
+        image = desc->image;
         image2 = NULL;
-        tlut = desc->desc.tlut;
+        tlut = desc->tlut;
     }
 
     sobj = HSD_ObjAlloc(&HSD_SObjLib_804D10E0);
