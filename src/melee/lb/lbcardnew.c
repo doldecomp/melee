@@ -7,7 +7,7 @@
 #include <sysdolphin/baselib/hsd_3AA7.h>
 #include <sysdolphin/baselib/hsd_3B27.h>
 #include <sysdolphin/baselib/memory.h>
-#include <melee/lb/lb_0192.h>
+#include <melee/lb/lb_0195.h>
 #include <MSL/strtoul.h>
 
 int lb_80019BB8(int card_result)

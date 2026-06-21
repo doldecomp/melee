@@ -21,7 +21,7 @@
 #include <melee/gm/gm_16AE.h>
 #include <melee/gr/stage.h>
 #include <melee/it/it_26B1.h>
-#include <melee/lb/lb_0192.h>
+#include <melee/lb/lb_0195.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/pl/player.h>
