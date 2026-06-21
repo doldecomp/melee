@@ -42,6 +42,12 @@
 #include <melee/mn/mnnamenew.h>
 #include <MSL/trigf.h>
 
+typedef struct CSSAllData {
+    u8 gnw_name[0x1C];
+    CSSModeInfo mode_info[24];
+    CSSIcon icons[26];
+} CSSAllData;
+
 TextKerning* mnCharSel_8025BC20(TextKerning* arg0, u32 arg1)
 {
     TextKerning* kerning;
@@ -1696,11 +1702,7 @@ s32 mnCharSel_8025FDEC(u8 door)
     int icon_idx;
     CSSData* css;
     struct CSSCharModel** model_ptr;
-    struct CSSAllData {
-        u8 gnw_name[0x1C];
-        CSSModeInfo mode_info[24];
-        CSSIcon icons[26];
-    }* all_data = (struct CSSAllData*) &mnCharSel_803F0A48;
+    CSSAllData* all_data = (CSSAllData*) &mnCharSel_803F0A48;
 
     if (mnCharSel_804D6CF5 == 1) {
         if (door != 0) {

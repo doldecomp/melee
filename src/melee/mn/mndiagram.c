@@ -72,14 +72,21 @@ typedef struct mnDiagram_AnimData {
     /* 0x0C */ HSD_JObj* jobj;             ///< JObj for exit animation
 } mnDiagram_AnimData;
 
+/// Head label for the contiguous mnDiagram popup animation data run.
+typedef struct mnDiagram_PopupAnimTableHead {
+    /* 0x00 */ Point3d points[3];
+} mnDiagram_PopupAnimTableHead;
+
 /// BSS variables - sorted player arrays
 mnDiagram_804A0750_t mnDiagram_804A0750;
 mnDiagram_804A076C_t mnDiagram_804A076C;
 
-static Point3d mnDiagram_803EE728[3] = {
-    { 4.0F, 1.0F, 0.0F },
-    { -3.0F, 0.8F, 0.0F },
-    { -1.0F, 0.7F, 0.0F },
+static mnDiagram_PopupAnimTableHead mnDiagram_PopupAnimTable = {
+    {
+        { 4.0F, 1.0F, 0.0F },
+        { -3.0F, 0.8F, 0.0F },
+        { -1.0F, 0.7F, 0.0F },
+    },
 };
 
 static u8 mnDiagram_803EE74C[0x1C] = {
@@ -91,11 +98,11 @@ static u8 mnDiagram_803EE74C[0x1C] = {
 static AnimLoopSettings mnDiagram_803EE768 = { 0.0f, 9.0f, -0.1f };
 
 /// Trailing animation settings overlaid by mnDiagram_AnimTable.
-f32 mnDiagram_803EE774[] = {
+static f32 mnDiagram_PopupExitAnimFrames[] = {
     10.0f, 19.0f, -0.1f, 0.0f, 199.0f, 0.0f, 0.0f, 10.0f, -0.1f,
 };
 
-/// Overlay over &mnDiagram_803EE728 to reach the trailing
+/// Overlay over &mnDiagram_PopupAnimTable to reach the trailing
 /// animation/text-layout data the popup/cursor procs read at fixed offsets.
 typedef struct mnDiagram_AnimTable {
     /* 0x00 */ Point3d points[3];
@@ -109,7 +116,8 @@ typedef struct mnDiagram_AnimTable {
     /* 0x94 */ char x94[0x14];
 } mnDiagram_AnimTable;
 
-#define GET_DIAGRAM_ANIM_TABLE() ((mnDiagram_AnimTable*) &mnDiagram_803EE728)
+#define GET_DIAGRAM_ANIM_TABLE() \
+    ((mnDiagram_AnimTable*) &mnDiagram_PopupAnimTable)
 
 static s32 mnDiagram_804D4FA0 = 0xFF;
 
@@ -1624,7 +1632,7 @@ void mnDiagram_PopupAnimProc(void* arg0)
 {
     mnDiagram_PopupData* data = ((HSD_GObj*) arg0)->user_data;
     HSD_Text* text;
-    mnDiagram_AnimTable* tbl = (mnDiagram_AnimTable*) &mnDiagram_803EE728;
+    mnDiagram_AnimTable* tbl = GET_DIAGRAM_ANIM_TABLE();
     Vec3 pos;
     float new_var;
     f32 anim_frame;
@@ -1739,7 +1747,7 @@ inline void mnDiagram_FormatPopupNumber(char* buf, u32 val)
 void mnDiagram_80240D94(void* arg0, s32 arg1, s32 arg2, s32 arg3)
 {
     mnDiagram_PopupData* data = ((HSD_GObj*) arg0)->user_data;
-    mnDiagram_AnimTable* tbl = (mnDiagram_AnimTable*) &mnDiagram_803EE728;
+    mnDiagram_AnimTable* tbl = GET_DIAGRAM_ANIM_TABLE();
     Point3d pos;
     float new_var;
     char buf[8];
@@ -1886,6 +1894,13 @@ void mnDiagram_80240D94(void* arg0, s32 arg1, s32 arg2, s32 arg3)
     }
 }
 
+/// @todo .sdata2 order hack
+static void order_sdata2(void)
+{
+    (void) -1.0f;
+    (void) S32_TO_F32;
+}
+
 void mnDiagram_80241310(s32 arg0, s32 arg1, s32 arg2)
 {
     int i;
@@ -1896,14 +1911,7 @@ void mnDiagram_80241310(s32 arg0, s32 arg1, s32 arg2)
     HSD_JObj* jobj;
     mnDiagram_PopupData* user_data;
 
-    /// @todo Constant-pool anchors: these dead literals emit no code but
-    ///       reserve .sdata2 slots for mnDiagram_804DBF94 (-1.0f) and
-    ///       mnDiagram_804DBF98 (the s32-to-f32 bias) so the section layout
-    ///       matches the target object.
-    (void) -1.0F;
-    (void) 4503601774854144.0;
-
-    tbl = (mnDiagram_AnimTable*) &mnDiagram_803EE728;
+    tbl = GET_DIAGRAM_ANIM_TABLE();
     joint_data = mnDiagram_804A07E4;
     data = GET_DIAGRAM(mnDiagram_804D6C10);
 
@@ -2038,7 +2046,7 @@ void mnDiagram_802417D0(HSD_GObj* gobj)
 {
     u8 result2;
     Diagram* data = gobj->user_data;
-    mnDiagram_AnimTable* tbl = (mnDiagram_AnimTable*) &mnDiagram_803EE728;
+    mnDiagram_AnimTable* tbl = GET_DIAGRAM_ANIM_TABLE();
     HSD_JObj* jobj;
     u8* sorted = mnDiagram_804A0750.sorted_fighters;
     s32 i;
@@ -2208,7 +2216,7 @@ void mnDiagram_ExitAnimProc(HSD_GObj* gobj)
     data = gobj->user_data;
     mnDiagram_802417D0(gobj);
     jobj = data->jobj;
-    table = mnDiagram_803EE774;
+    table = mnDiagram_PopupExitAnimFrames;
     if (mn_8022ED6C(jobj, (AnimLoopSettings*) table) >= table[1]) {
         HSD_GObjPLink_80390228(gobj);
     }
