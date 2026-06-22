@@ -155,6 +155,9 @@ static u8 gm_8049E558[0x170];
 
 void gm_801BFCFC(GameScene* arg0)
 {
+#ifdef __MWERKS__
+    s32** gm_801BFC60();
+#endif
     s32 var_r27_2;
     u32* temp_r29;
     u8* var_r27;
