@@ -844,7 +844,7 @@ s32 gmMainLib_8015DBF4(s32 arg0)
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_522.x4);
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_528.x4);
     ADJ_NAMETAG_STANDALONE_PAIR(*((u8*) config + 0x18),
-                                 *((u8*) config + 0x18));
+                                *((u8*) config + 0x18));
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_530.unk_584.unk_586);
 
     ADJ_VMD_SINGLE(&gm_80497618);
