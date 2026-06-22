@@ -1,3 +1,4 @@
+/// @file Seems to deal with the challenger approaching functions.
 #include "gm_1BFA.h"
 
 #include "gm_unsplit.h"
@@ -13,8 +14,6 @@
 #include "ty/tylist.h"
 
 #include <melee/gm/types.h>
-
-/// @remarks this file seems to deal with the challenger approaching functions.
 
 extern UNK_T gm_804D6860[];
 extern StartMeleeData gm_80480530;
@@ -126,10 +125,9 @@ void gm_801BFBA8(GameScene* arg0)
     }
 }
 
-/// @remarks unsure about this return type.
 #pragma push
 #pragma dont_inline on
-s32** gm_801BFC60(s16 arg0, s32 arg1, s16 arg2, s32 arg3, void** arg4)
+static UNK_T* gm_801BFC60(u32 arg0, s32 arg1, u32 arg2, u32 arg3, UNK_T* arg4)
 {
     struct un_804A1F48_t* temp_r3;
 
@@ -147,7 +145,7 @@ s32** gm_801BFC60(s16 arg0, s32 arg1, s16 arg2, s32 arg3, void** arg4)
         *arg4 = temp_r3;
         return (&temp_r3->x8);
     }
-    return (s32**) arg4;
+    return arg4;
 }
 #pragma pop
 
@@ -155,20 +153,17 @@ static u8 gm_8049E558[0x170];
 
 void gm_801BFCFC(GameScene* arg0)
 {
-#ifdef __MWERKS__
-    s32** gm_801BFC60();
-#endif
     s32 var_r27_2;
     u32* temp_r29;
     u8* var_r27;
     u8* var_r28;
-    s32** temp_r3;
+    UNK_T* temp_r3;
     u8* var_r28_2;
     u32 var_r25_2;
-    u32 var_r25;
+    int var_r25;
     u32* temp_r29_2;
     u32 var_r28_3;
-    void** var_r31;
+    UNK_T* var_r31;
     s32 var_r30;
     u8* var_r26;
 
