@@ -1,4 +1,5 @@
-#include "ft_0892.h"
+#include "ft_0899.h"
+
 #include "math.h"
 
 #include "db/dbsound.h"
@@ -15,22 +16,9 @@
 #include <MSL/math_ppc.h>
 #include <MSL/trigf.h>
 
-typedef struct ftData_x58_t {
-    /* 0x00 */ u8 x0;
-    /* 0x01 */ u8 x1;
-    /* 0x02 */ u8 pad_02[2];
-    /* 0x04 */ f32 x4;
-    /* 0x08 */ u8 x8;
-    /* 0x09 */ u8 x9;
-    /* 0x0A */ u8 pad_0A[2];
-    /* 0x0C */ f32 xC;
-    /* 0x10 */ u8 x10;
-    /* 0x11 */ u8 x11;
-    /* 0x12 */ u8 pad_12[6];
-    /* 0x18 */ f32 x18;
-} ftData_x58_t;
+/* 08998C */ static bool fn_8008998C(Fighter* fp, IKState* ik, Vec3* normal);
 
-s32 fn_8008998C(Fighter* fp, IKState* ik, Vec3* normal)
+static bool fn_8008998C(Fighter* fp, IKState* ik, Vec3* normal)
 {
     u8 _[12];
     Vec3 jobj_pos;
@@ -192,9 +180,10 @@ void ft_80089B08(Fighter_GObj* gobj)
             mpLineGetV1Pos(line_id, &sp38);
             mpLineGetV0Pos(line_id, &sp2C);
             dy = sp38.y - sp2C.y;
-            dx = sp38.x - sp2C.x;
-            line_len = dy * dy;
-            line_len += dx * dx;
+            dx = sp38.x;
+            dx -= sp2C.x;
+            line_len = dx * dx + dy * dy;
+            (void) line_len;
             if (line_len > 0.0f) {
                 f64 guess = __frsqrte((f64) line_len);
                 guess = 0.5 * guess * (3.0 - guess * guess * line_len);
@@ -204,19 +193,24 @@ void ft_80089B08(Fighter_GObj* gobj)
                 line_len = ((volatile f32*) &sp1C)[-1];
             }
             if (line_len < 5.0f) {
-                s32 next_id, prev_id;
                 adj_angle = 0.0f;
-                next_id = mpLineGetNext(line_id);
-                if (next_id != -1 && (mpLineGetKind(next_id) & 1)) {
-                    mpLineGetNormal(next_id, &sp1C);
-                    adj_angle = fp->facing_dir * atan2f(sp1C.x, sp1C.y);
+                {
+                    s32 next_check = mpLineGetNext(line_id);
+                    s32 next_id = next_check;
+                    if (next_check != -1 && (mpLineGetKind(next_id) & 1)) {
+                        mpLineGetNormal(next_id, &sp1C);
+                        adj_angle = fp->facing_dir * atan2f(sp1C.x, sp1C.y);
+                    }
                 }
-                prev_id = mpLineGetPrev(line_id);
-                if (prev_id != -1 && (mpLineGetKind(prev_id) & 1)) {
-                    mpLineGetNormal(prev_id, &sp1C);
-                    adj_angle =
-                        0.5f * ((fp->facing_dir * atan2f(sp1C.x, sp1C.y)) +
-                                adj_angle);
+                {
+                    s32 prev_check = mpLineGetPrev(line_id);
+                    s32 prev_id = prev_check;
+                    if (prev_check != -1 && (mpLineGetKind(prev_id) & 1)) {
+                        mpLineGetNormal(prev_id, &sp1C);
+                        adj_angle =
+                            0.5f * ((fp->facing_dir * atan2f(sp1C.x, sp1C.y)) +
+                                    adj_angle);
+                    }
                 }
                 {
                     f32 diff = adj_angle - angle;
@@ -240,11 +234,11 @@ void ft_80089B08(Fighter_GObj* gobj)
     PAD_STACK(16);
 }
 
-void ft_8008A1B8(Fighter_GObj* gobj, int flags)
+void ft_8008A1B8(Fighter_GObj* gobj, u32 flags)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x221C_u16_y = flags;
-    if (!(flags & 0x4)) {
+    if (!(flags & (1 << 2))) {
         ftPartSetRotX(fp, 0, 0.0F);
     }
 }

@@ -15,9 +15,6 @@
 /* 0898B4 */ ft_800898B4_t* ft_800898B4(Fighter_GObj* gobj);
 /* 0898C0 */ bool ft_800898C0(HSD_GObj*);
 /* 089914 */ s32 ft_80089914(HSD_GObj* gobj, int msid);
-/* 08998C */ s32 fn_8008998C(Fighter*, IKState*, Vec3*);
-/* 089B08 */ void ft_80089B08(Fighter_GObj* gobj);
-/* 08A1B8 */ void ft_8008A1B8(Fighter_GObj* gobj, int);
 /* 08A1FC */ bool ft_8008A1FC(Fighter_GObj* gobj);
 /* 08A244 */ bool ft_8008A244(Fighter_GObj* gobj);
 /* 08A2BC */ void ft_8008A2BC(Fighter_GObj* gobj);

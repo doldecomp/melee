@@ -661,7 +661,7 @@ struct ftData {
     /* +4C */ FtSFX* x4C_sfx;
     /* +50 */ Vec2* x50;
     /* +54 */ int x54;
-    /* +58 */ void* x58;
+    /* +58 */ struct ftData_x58_t* x58;
     /* +5C */ HSD_Joint* x5C;
 };
 
@@ -1921,5 +1921,20 @@ typedef struct DmgLogEntry {
     /* +24 */ size_t size_of_xC;
 } DmgLogEntry;
 STATIC_ASSERT(sizeof(struct DmgLogEntry) == 0x28);
+
+struct ftData_x58_t {
+    /* 0x00 */ u8 x0;
+    /* 0x01 */ u8 x1;
+    /* 0x02 */ u8 pad_02[2];
+    /* 0x04 */ f32 x4;
+    /* 0x08 */ u8 x8;
+    /* 0x09 */ u8 x9;
+    /* 0x0A */ u8 pad_0A[2];
+    /* 0x0C */ f32 xC;
+    /* 0x10 */ u8 x10;
+    /* 0x11 */ u8 x11;
+    /* 0x12 */ u8 pad_12[6];
+    /* 0x18 */ f32 x18;
+};
 
 #endif
