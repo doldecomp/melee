@@ -910,16 +910,16 @@ void gmMainLib_8015EA80(void)
         }
     }
     {
-        VsModeData* base = &gmMainLib_804D3EE0->unk_590;
+        char* base = (char*) gmMainLib_804D3EE0 + 0x588;
         s32 j;
         for (i = 0; i < 6; i++) {
             for (j = 0; j < 6; j++) {
-                base[i].data.players[j].handicap = 9;
+                base[0x78 + i * 0x140 + j * 0x24] = 9;
             }
         }
         for (i = 7; i < 13; i++) {
             for (j = 0; j < 6; j++) {
-                base[i].data.players[j].handicap = 9;
+                base[0x78 + i * 0x140 + j * 0x24] = 9;
             }
         }
     }
@@ -1131,13 +1131,18 @@ void gmMainLib_8015F150(void)
 {
     s32 i;
 
+    PAD_STACK(8);
+
     for (i = 0; i < 0x19; i++) {
         int j = 0;
-        struct FighterData* data = GetPersistentFighterData((u8) i);
+        struct FighterData* base = gmMainLib_804D3EE0->thing.x1F2C;
         for (; j < 0x19; j++) {
-            data->fighter_kos[j] = 0;
+            base[(u8) i].fighter_kos[j] = 0;
         }
-        gmMainLib_8015EF30((struct gmMainLib_8015EF30_s*) &data->sd_count);
+        gmMainLib_8015EF30(
+            (struct gmMainLib_8015EF30_s*) &gmMainLib_804D3EE0->thing
+                .x1F2C[(u8) i]
+                .sd_count);
     }
 }
 
@@ -1246,13 +1251,11 @@ static s8 gmMainLib_804D3EE4[] = { 0 };
 
 void gmMainLib_8015F600(int arg0, int arg1)
 {
-    s32 j;
-    s32 bank_offset;
     s32 lang;
-    PAD_STACK(104);
+    PAD_STACK(96);
 
     if (arg0 == 1) {
-        j = 0;
+        s32 j = 0;
         do {
             s32 i;
             struct FighterData* fdata = gmMainLib_804D3EE0->thing.x1F2C;
@@ -1298,9 +1301,9 @@ void gmMainLib_8015F600(int arg0, int arg1)
             gm_80164504(0x14U);
         }
     } else {
-        bank_offset = (arg0 - 2) * 19;
+        s32 bank_offset = (arg0 - 2) * 19;
+        s32 j = 0;
 
-        j = 0;
         do {
             struct NameTagData* data;
             struct NameTagDataBank* bank;
@@ -1320,6 +1323,8 @@ void gmMainLib_8015F600(int arg0, int arg1)
             }
             data->x1A2 = 5;
 
+            bank = gmMainLib_804D3EE0->thing.x2FF8;
+            data = &bank[(u8) idx / 19].inner[(u8) idx % 19];
             {
                 char* src = mnName_8023749C((s32) (u8) idx);
                 if (src != NULL) {

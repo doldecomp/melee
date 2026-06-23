@@ -972,7 +972,7 @@ s32 ftCo_800A229C(Fighter* fp, Vec3* arg1)
     f32 mag;
     s32 var_r0;
 
-    PAD_STACK(8);
+    PAD_STACK(4);
 
     if (grGreatBay_801F66A4() != 0 && fp->cur_pos.x > -5.0) {
         *arg1 = fp->cur_pos;
@@ -1003,7 +1003,7 @@ s32 ftCo_800A229C(Fighter* fp, Vec3* arg1)
     grLib_801C9E60(&sp2C);
     if (stage == RCRUISE) {
         w = Stage_GetBlastZoneRightOffset() - Stage_GetBlastZoneLeftOffset();
-        if (sp2C.x < 0.0f) {
+        if (sp2C.x < 0.0) {
             if (fp->cur_pos.x < 0.4f * w + Stage_GetBlastZoneLeftOffset()) {
                 *arg1 = fp->cur_pos;
                 return 2;
@@ -1016,7 +1016,7 @@ s32 ftCo_800A229C(Fighter* fp, Vec3* arg1)
         }
     block_18:
         h = Stage_GetBlastZoneTopOffset() - Stage_GetBlastZoneBottomOffset();
-        if (sp2C.y > 0.0f) {
+        if (sp2C.y > 0.0) {
             if (fp->cur_pos.y > -(0.4f * h - Stage_GetBlastZoneTopOffset())) {
                 *arg1 = fp->cur_pos;
                 return 2;
@@ -1054,13 +1054,9 @@ s32 ftCo_800A229C(Fighter* fp, Vec3* arg1)
     if (stage == ICEMTN) {
         h = Stage_GetBlastZoneTopOffset() - Stage_GetBlastZoneBottomOffset();
         grLib_801C9E60(&sp20);
-        if (sp20.y < 0.0f) {
-            mag = -sp20.y;
-        } else {
-            mag = sp20.y;
-        }
+        mag = ABS(sp20.y);
         frac = 0.4 * mag + 0.4;
-        if (sp20.y < 0.0f) {
+        if (sp20.y < 0.0) {
             if (fp->cur_pos.y < h * frac + Stage_GetBlastZoneBottomOffset()) {
                 *arg1 = fp->cur_pos;
                 return 2;
@@ -1326,7 +1322,6 @@ s32 ftCo_800A2C80(Fighter* fp)
 {
     s32 result;
     s32 blocked;
-    struct Fighter_x1A88_t* data;
     Vec3 floor_pos;
     Vec3 floor_normal;
     Vec3 dir;
@@ -1344,8 +1339,7 @@ s32 ftCo_800A2C80(Fighter* fp)
     s32 is_small;
     s32 oob;
 
-    data = &fp->x1A88;
-    if (data->xFA_b6) {
+    if (fp->x1A88.xFA_b6) {
         return 0;
     }
     if (fp->ground_or_air == GA_Ground) {
@@ -1383,7 +1377,7 @@ s32 ftCo_800A2C80(Fighter* fp)
     if (lb_8000D008(vy, v) > -1.0471975430846214) {
         return 0;
     }
-    if (data->xFA_b5) {
+    if (fp->x1A88.xFA_b5) {
         return 0;
     }
     if (stage_info.internal_stage_id == INISHIE1) {
@@ -7101,6 +7095,7 @@ void ftCo_800AF78C(Fighter* fp)
     bool is_food;
     Fighter** target_slot;
     struct Fighter_x1A88_t* data;
+    struct Fighter_x1A88_t* item_data;
 
     PAD_STACK(8);
 
@@ -7158,8 +7153,8 @@ void ftCo_800AF78C(Fighter* fp)
     data->xF9_b1 = false;
 
     target = ftCo_800A4BEC(fp);
-    target_slot = &fp->x1A88.x44;
-    *target_slot = target;
+    *(target_slot = &fp->x1A88.x44) = target;
+    item_data = &fp->x1A88;
 
     item_gobj = fp->item_gobj;
     if (item_gobj != NULL) {
@@ -7174,16 +7169,16 @@ void ftCo_800AF78C(Fighter* fp)
             is_food = false;
         }
         if (is_food == false) {
-            data->x4C = NULL;
+            item_data->x4C = NULL;
         } else {
             goto maybe_find_item;
         }
     } else {
     maybe_find_item:
         if (fp->x2168 != 0) {
-            data->x4C = NULL;
+            item_data->x4C = NULL;
         } else {
-            data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
+            item_data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
         }
     }
     fp->x1A88.x50 = ftCo_800A648C(fp);
@@ -7961,9 +7956,8 @@ void ftCo_800B1478(Fighter* fp)
 
     data = &fp->x1A88;
     target = ftCo_800A5CE0(fp);
-    target_slot = &fp->x1A88.x44;
 
-    fp->x1A88.x44 = target;
+    *(target_slot = &fp->x1A88.x44) = target;
 
     if (target != NULL) {
         data->xF8_b0 = true;
