@@ -1,4 +1,5 @@
-#include "ft_0892.h"
+#include "ft_0899.h"
+
 #include "math.h"
 
 #include "db/dbsound.h"
@@ -15,22 +16,9 @@
 #include <MSL/math_ppc.h>
 #include <MSL/trigf.h>
 
-typedef struct ftData_x58_t {
-    /* 0x00 */ u8 x0;
-    /* 0x01 */ u8 x1;
-    /* 0x02 */ u8 pad_02[2];
-    /* 0x04 */ f32 x4;
-    /* 0x08 */ u8 x8;
-    /* 0x09 */ u8 x9;
-    /* 0x0A */ u8 pad_0A[2];
-    /* 0x0C */ f32 xC;
-    /* 0x10 */ u8 x10;
-    /* 0x11 */ u8 x11;
-    /* 0x12 */ u8 pad_12[6];
-    /* 0x18 */ f32 x18;
-} ftData_x58_t;
+/* 08998C */ static bool fn_8008998C(Fighter* fp, IKState* ik, Vec3* normal);
 
-s32 fn_8008998C(Fighter* fp, IKState* ik, Vec3* normal)
+static bool fn_8008998C(Fighter* fp, IKState* ik, Vec3* normal)
 {
     u8 _[12];
     Vec3 jobj_pos;
@@ -246,11 +234,11 @@ void ft_80089B08(Fighter_GObj* gobj)
     PAD_STACK(16);
 }
 
-void ft_8008A1B8(Fighter_GObj* gobj, int flags)
+void ft_8008A1B8(Fighter_GObj* gobj, u32 flags)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x221C_u16_y = flags;
-    if (!(flags & 0x4)) {
+    if (!(flags & (1 << 2))) {
         ftPartSetRotX(fp, 0, 0.0F);
     }
 }
