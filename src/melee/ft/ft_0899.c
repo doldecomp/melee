@@ -192,9 +192,10 @@ void ft_80089B08(Fighter_GObj* gobj)
             mpLineGetV1Pos(line_id, &sp38);
             mpLineGetV0Pos(line_id, &sp2C);
             dy = sp38.y - sp2C.y;
-            dx = sp38.x - sp2C.x;
-            line_len = dy * dy;
-            line_len += dx * dx;
+            dx = sp38.x;
+            dx -= sp2C.x;
+            line_len = dx * dx + dy * dy;
+            (void) line_len;
             if (line_len > 0.0f) {
                 f64 guess = __frsqrte((f64) line_len);
                 guess = 0.5 * guess * (3.0 - guess * guess * line_len);
@@ -204,19 +205,24 @@ void ft_80089B08(Fighter_GObj* gobj)
                 line_len = ((volatile f32*) &sp1C)[-1];
             }
             if (line_len < 5.0f) {
-                s32 next_id, prev_id;
                 adj_angle = 0.0f;
-                next_id = mpLineGetNext(line_id);
-                if (next_id != -1 && (mpLineGetKind(next_id) & 1)) {
-                    mpLineGetNormal(next_id, &sp1C);
-                    adj_angle = fp->facing_dir * atan2f(sp1C.x, sp1C.y);
+                {
+                    s32 next_check = mpLineGetNext(line_id);
+                    s32 next_id = next_check;
+                    if (next_check != -1 && (mpLineGetKind(next_id) & 1)) {
+                        mpLineGetNormal(next_id, &sp1C);
+                        adj_angle = fp->facing_dir * atan2f(sp1C.x, sp1C.y);
+                    }
                 }
-                prev_id = mpLineGetPrev(line_id);
-                if (prev_id != -1 && (mpLineGetKind(prev_id) & 1)) {
-                    mpLineGetNormal(prev_id, &sp1C);
-                    adj_angle =
-                        0.5f * ((fp->facing_dir * atan2f(sp1C.x, sp1C.y)) +
-                                adj_angle);
+                {
+                    s32 prev_check = mpLineGetPrev(line_id);
+                    s32 prev_id = prev_check;
+                    if (prev_check != -1 && (mpLineGetKind(prev_id) & 1)) {
+                        mpLineGetNormal(prev_id, &sp1C);
+                        adj_angle =
+                            0.5f * ((fp->facing_dir * atan2f(sp1C.x, sp1C.y)) +
+                                    adj_angle);
+                    }
                 }
                 {
                     f32 diff = adj_angle - angle;
