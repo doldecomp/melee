@@ -64,15 +64,15 @@ Item_GObj* it_802B1DF8(Item_GObj* owner, Vec3* pos, Vec3* vel, s32 count,
     spawn.prev_pos.z = 0.0f;
     spawn.pos = spawn.prev_pos;
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    cur_delay = 0;
     spawn.facing_dir = -1.0f;
-    spawn.x3C_damage = 0;
+    spawn.x3C_damage = (cur_delay = 0);
+    cur_delay = 0;
     spawn.x0_parent_gobj = owner;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
     spawn.x44_flag.b0 = true;
     spawn.x40 = x40;
 
-    for (i = 0; i < count; i++) {
+    for (first = NULL, i = 0; i < count; i++) {
         item_gobj = Item_80268B18(&spawn);
         if (i == 0) {
             first = item_gobj;
