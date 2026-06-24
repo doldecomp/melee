@@ -495,15 +495,19 @@ ftYs_SpecialS_UpdateLoop1Rotation(Fighter* fp, ftYoshiAttributes* attributes,
             if (perm_vel_inline(fp) > 0.0F) {
                 fp->mv.ys.specials.x18 = abs_xE4 * (abs_vel / abs_x10) + -xE4;
             } else {
+                f32 scaled_abs_x10 = abs_x10;
+                scaled_abs_x10 *= 0.7F;
                 fp->mv.ys.specials.x18 =
-                    abs_xE4 * (abs_vel / (abs_x10 * 0.7F)) + -xE4;
+                    abs_xE4 * (abs_vel / scaled_abs_x10) + -xE4;
             }
         } else {
             if (perm_vel_inline(fp) < 0.0F) {
                 fp->mv.ys.specials.x18 = abs_xE4 * (abs_vel / abs_x10) + -xE4;
             } else {
+                f32 scaled_abs_x10 = abs_x10;
+                scaled_abs_x10 *= 0.7F;
                 fp->mv.ys.specials.x18 =
-                    abs_xE4 * (abs_vel / (abs_x10 * 0.7F)) + -xE4;
+                    abs_xE4 * (abs_vel / scaled_abs_x10) + -xE4;
             }
         }
     }

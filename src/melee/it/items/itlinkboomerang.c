@@ -563,7 +563,7 @@ f32 it_802A13EC(Item_GObj* gobj)
     f32 dx;
     f32 dy;
     f32 angle;
-    PAD_STACK(4);
+    PAD_STACK(8);
     {
         Vec3 pos;
         if (ip->xDD4_itemVar.linkboomerang.xF98) {

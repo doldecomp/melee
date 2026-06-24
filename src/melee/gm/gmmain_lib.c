@@ -774,6 +774,7 @@ s32 gmMainLib_8015DBF4(s32 arg0)
     extern VsModeData gm_80497618;
     struct gmm_x0* load_gmm;
     struct gmm_x0_528_t* config;
+    GameRules* gr;
     s32 j;
     u8 val;
     u8* ptr;
@@ -865,7 +866,8 @@ s32 gmMainLib_8015DBF4(s32 arg0)
     ADJ_VMD(&load_gmm->unk_1490, &load_gmm->unk_1490);
 
     {
-        GameRules* gr = &gmMainLib_804D3EE0->x1850;
+        gr = &gmMainLib_804D3EE0->x1850;
+        (void) gr;
 
         val = gr->unk_x10;
         if (val == (u8) arg0) {
