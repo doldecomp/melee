@@ -970,6 +970,7 @@ int SimplifyByMerge(HSD_TExp* arg0)
                       arg0->tev.c_in[3].exp->tev.a_clamp != 0)))
                 {
                     type = arg0->tev.c_in[0].type;
+                    (void) type;
                     switch ((s32) type) {
                     case HSD_TE_TEX:
                     case HSD_TE_RAS:
