@@ -165,9 +165,9 @@ static inline struct WarnCmnData* mnDataDel_GetWarnData(void)
 /// @brief animates the warning modal
 void fn_8024ECCC(HSD_GObj* arg0)
 {
+    HSD_JObj* panel;
     struct WarnCmnData* data;
     HSD_JObj* root;
-    HSD_JObj* panel;
     HSD_JObj* exclaim;
     HSD_JObj* cursor_no;
     HSD_JObj* cursor_yes;

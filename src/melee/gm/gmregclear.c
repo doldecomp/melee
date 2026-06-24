@@ -1953,13 +1953,13 @@ s32 fn_8017F2A4(HSD_Text** arg0, f32 farg0, f32 farg1)
 
 s32 fn_8017F47C(HSD_Text** arg0, int arg1)
 {
+    u8 mask;
+    s32 val;
     s32* p;
     s32 i;
     int entry;
     s32 prev_idx;
-    u8 mask;
     s32 idx;
-    s32 val;
 
     entry = arg1;
     prev_idx = -999;

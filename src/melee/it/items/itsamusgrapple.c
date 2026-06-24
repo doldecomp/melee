@@ -658,6 +658,7 @@ void fn_802B8384(Item_GObj* gobj)
     PAD_STACK(20);
 
     fp = owner->user_data;
+    (void) fp;
     link = ip->xDD4_itemVar.samusgrapple.x0;
     samus_grapple_setup_pos(link, &pos, m);
 

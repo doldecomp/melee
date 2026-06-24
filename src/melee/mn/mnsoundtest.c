@@ -373,6 +373,7 @@ static inline soundtest_user_data* fn_8024AED0_GetUserData(void)
 
 void fn_8024AED0(HSD_GObj* arg0)
 {
+    HSD_JObj* temp_r27_2;
     HSD_JObj* sp7C;
     void* sp50;
     HSD_GObjProc* temp_r3_2;
@@ -390,12 +391,11 @@ void fn_8024AED0(HSD_GObj* arg0)
     soundtest_user_data* menu_data;
     soundtest_user_data* reset_data;
     soundtest_user_data* temp_r28_5;
-    HSD_JObj* temp_r27_2;
     soundtest_user_data* input_data;
     u64 events;
 
     soundtest_user_data* user_data = mnSoundTest_804D6C40->user_data;
-    PAD_STACK(80);
+    PAD_STACK(64);
     if ((u16) mn_804D6BC8.cooldown != 0) {
         Menu_DecrementAnimTimer();
         return;
@@ -411,6 +411,7 @@ void fn_8024AED0(HSD_GObj* arg0)
         return;
     }
     menu_data = mnSoundTest_804D6C40->user_data;
+    (void) menu_data;
     fade_timer = menu_data->unk8;
     if (fade_timer < 1.0f) {
         menu_data->unk8 = (f32) (fade_timer - 0.02f);

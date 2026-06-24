@@ -1716,6 +1716,7 @@ void un_8030715C(f32 cstick_x, f32 cstick_y)
 
     data = (void*) un_804D6E68;
     data2 = un_804D6ED4;
+    (void) data2;
     cobj = data->x8->x28;
 
     HSD_CObjGetInterest(cobj, &interest);

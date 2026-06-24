@@ -2376,6 +2376,7 @@ void mnDiagram_80241E78(void* arg0, u8 arg1, u8 arg2, int arg3)
     base = HSD_JObjGetTranslationY(jobj);
     jobj2 = data->jobjs[10];
     y_offset = HSD_JObjGetTranslationY(jobj2);
+    (void) y_offset;
     y_offset -= base;
 
     digit_count = mn_GetDigitCount(arg3);

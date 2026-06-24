@@ -774,7 +774,8 @@ void grKongo_801D6668(Ground_GObj* arg0)
         splArcLengthPoint(&sp28, gp->gv.kongo2.xC4, gp->gv.kongo.xCC);
         splArcLengthPoint(&sp1C, gp->gv.kongo2.xC4, gp->gv.kongo.xCC + step);
         dx = sp28.x - sp1C.x;
-        dz = sp28.z - sp1C.z;
+        dz = sp28.z;
+        dz -= sp1C.z;
         dy = sp28.y - sp1C.y;
         dx *= dx;
         dy *= dy;
