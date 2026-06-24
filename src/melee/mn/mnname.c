@@ -1397,8 +1397,8 @@ void mnName_8023A290(void)
     HSD_JObj* sp28;
     HSD_JObj* sp24;
     HSD_JObj* sp20;
-    HSD_JObj* sp18;
     HSD_JObj* sp14;
+    HSD_JObj* sp18;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
     u8 sel;

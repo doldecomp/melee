@@ -2012,6 +2012,7 @@ u8 fn_80173098(int arg0)
         }
     }
     var_r31 = fn_80173098_CountUnlocked();
+    (void) var_r31;
     if (var_r31 >= 10 && !gm_80164840(CKIND_CLINK)) {
         return CKIND_CLINK;
     }
