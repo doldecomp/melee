@@ -337,6 +337,7 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
         float temp_f1;
         float unk_sum = arg6 + arg7;
         vec4 = *arg0;
+        (void) vec4;
         arg4_offset = vec4;
         {
             Vec3 arg2_copy;
@@ -668,6 +669,7 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
         Vec3 c0;
 
         c0 = *c;
+        (void) c0;
 
         {
             Vec3 c1;
@@ -1159,6 +1161,7 @@ block_39:
     start_delta_y = hit_start_copy.y - hurt_start_copy.y;
     hurt_delta_y = hurt_end_y - hurt_start_copy.y;
     hurt_end_x = hurt_end->x;
+    (void) hurt_end_x;
     hurt_delta_x = hurt_end_x - hurt_start_copy.x;
     segment_dot = hit_delta.y * hurt_delta_y;
     hurt_len_sq = hurt_delta_y * hurt_delta_y;

@@ -1165,7 +1165,6 @@ typedef struct LightOverrideEntry {
 
 LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lightset)
 {
-    LightList** walker;
     LightList** out;
     LightList** clean;
     LightOverrideEntry* arr;
@@ -1174,6 +1173,7 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lightset)
     s32 count;
     s32 i;
     bool found;
+    LightList** walker;
     s32 b6, b7, b5;
     bool matched;
 
@@ -1981,9 +1981,9 @@ void Ground_801C34AC(s32 map_id, HSD_JObj* root, struct HSD_Joint* joint)
 
 void Ground_801C36F4(int map_id, HSD_JObj* root, UNK_T joint)
 {
+    HSD_JObj* parent;
     HSD_JObj* jobj;
     UnkStageDat* stage_dat;
-    HSD_JObj* parent;
     UnkArchiveStruct* archive;
     int entry_count;
     struct {
@@ -2023,6 +2023,7 @@ entry_next:
 entry_found:
     for (i = 0; i < 0x57 * 3; i++) {
         jobj = stage_info.x280[i];
+        (void) jobj;
         if (jobj != NULL) {
             while ((parent = jobj->parent) != NULL) {
                 jobj = parent;
@@ -2657,8 +2658,8 @@ void Ground_801C466C(void)
     Vec3 sp10; /* compiler-managed */
     HSD_GObj* temp_r3;
     HSD_LObj* temp_r3_2;
-    HSD_LObj* var_r27;
     LightList** var_r27_2;
+    HSD_LObj* var_r27;
     HSD_LObj* var_r26_2;
     LightList** var_r28_2;
     LightList** var_r3;

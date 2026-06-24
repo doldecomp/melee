@@ -623,6 +623,7 @@ void fn_80020AEC(HSD_JObj* jobj, Mtx out)
 void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
                         f32 min_angle, f32 unused)
 {
+    f32 dz2;
     u8 _1[16];
     Mtx quatMtx;
     Mtx rotMtx;
@@ -638,7 +639,8 @@ void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
     f32 z_col_x;
     f32 dx2 = dx * dx;
     f32 dy2 = dy * dy;
-    f32 dz2 = dz * dz;
+    dz2 = dz * dz;
+    (void) dz2;
     if (dx2 + dy2 + dz2 == 0.0f) {
         return;
     }

@@ -108,7 +108,9 @@ static void mnStageSw_802359C8(MnStageSwData* data)
 
     start_y = -1.6f + HSD_JObjGetTranslationY(data->x2C);
     step_y = HSD_JObjGetTranslationY(data->x2C);
-    delta_y = HSD_JObjGetTranslationY(data->x30) - step_y;
+    delta_y = HSD_JObjGetTranslationY(data->x30);
+    (void) delta_y;
+    delta_y -= step_y;
 
     for (i = 0; i < 15; i++) {
         text = HSD_SisLib_803A5ACC(

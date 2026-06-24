@@ -1291,8 +1291,8 @@ static inline void fn_8016CFE0_inline(void)
 void fn_8016CFE0(void)
 {
     lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
-    s64 var_r29_2;
     int var_r29;
+    s64 var_r29_2;
     int var_r4;
     PAD_STACK(0x10);
 

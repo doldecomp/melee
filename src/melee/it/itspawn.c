@@ -325,8 +325,8 @@ void it_8026CD50(s32* counts, u64 mask, f32 weight)
         ItemPickTable monster;
     } ItemSpawnTables;
     ItemSpawnTables* tables = (ItemSpawnTables*) &it_804A0E30;
-    u8** item_kinds;
     u16** weights;
+    u8** item_kinds;
     s32* p;
     s32 cnt;
     ItemKind it_kind;
@@ -352,10 +352,10 @@ void it_8026CD50(s32* counts, u64 mask, f32 weight)
     *(item_kinds = &tables->common.x4) = HSD_MemAlloc(cnt * 4);
     *(weights = &tables->common.xC) = HSD_MemAlloc(cnt * 4);
 
-    cnt2 = 0;
     mask = backup;
     p2 = counts + It_Kind_BombHei;
-    cumulative = 0;
+    cumulative = (cnt2 = 0);
+    cnt2 = 0;
     it_kind2 = It_Kind_BombHei;
     while (it_kind2 < It_Kind_L_Gun_Ray) {
         if ((mask & 1) && *p2 != 0) {
@@ -402,6 +402,7 @@ void it_8026CF04(void)
         item_common = it_804D6D28;
         idx = i = 0;
         counts = &item_common->x128[i];
+        (void) counts;
         cumulative = 0;
         for (; i < 4; i++, idx++) {
             (*x4_loc)[i] = It_Kind_Kuriboh + i;
