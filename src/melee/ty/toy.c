@@ -5153,19 +5153,19 @@ void un_803102D0(void)
 
 void un_80310324(void)
 {
+    s16 idx;
+    ToyGlobalsS_* tg3;
+    s32 i;
     Toy26B8* toy;
     char* data;
     ToyGlobalsS_* tg;
     ToyGlobalsS_* tg2;
-    ToyGlobalsS_* tg3;
     ToyGlobalsS_* tg4;
     ToyGlobalsS_* tg5;
     ToyGlobalsS_* tg6;
     ToySubStructS_* sub;
     UNK_T sp[4];
-    s32 i;
     s32 one;
-    s16 idx;
     s32 var_r0;
     char* str;
     HSD_SObj* sobj;
@@ -5198,8 +5198,7 @@ void un_80310324(void)
     un_80306D70(0);
     un_80307018();
 
-    tg2 = un_804D6ED8;
-    if (tg2->x54 == NULL) {
+    if ((tg2 = un_804D6ED8)->x54 == NULL) {
         tg2->x54 = lbArchive_LoadSymbols(
             data + 0x640, &sp[1], *(void**) (data + 0x320), &sp[2],
             *(void**) (data + 0x324), &sp[3], *(void**) (data + 0x328), 0);

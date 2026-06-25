@@ -382,6 +382,7 @@ void mnEvent_8024E524(s32 event_idx)
     GObj_InitUserData(gobj, 0, HSD_Free, user_data);
 
     page = user_data->page;
+    (void) page;
     lb_80011E24(tree, &jobj_0A, 0xA, -1);
     lb_80011E24(tree, &jobj_0C, 0xC, -1);
     y_a = HSD_JObjGetTranslationY(jobj_0A);

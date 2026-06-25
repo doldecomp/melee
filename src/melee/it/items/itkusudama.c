@@ -244,6 +244,7 @@ void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3)
     if (i < arg1) {
         ItemKind kind;
         count = attr->x14;
+        (void) count;
         kind = (ItemKind) attr->x10;
         if (attr->x10 == It_Kind_M_Ball && it_8026C704() == true) {
             i = HSD_Randi(arg2 + arg3);
