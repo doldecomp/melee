@@ -7097,7 +7097,7 @@ void ftCo_800AF78C(Fighter* fp)
     struct Fighter_x1A88_t* data;
     struct Fighter_x1A88_t* item_data;
 
-    PAD_STACK(8);
+    PAD_STACK(12);
 
     data = &fp->x1A88;
     cmd = ftCo_800A229C(fp, &sp4C);

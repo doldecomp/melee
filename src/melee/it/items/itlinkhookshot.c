@@ -580,6 +580,7 @@ static void fn_802A3110(HSD_GObj* arg0)
 
     fp = item->owner->user_data;
     attr = item->xC4_article_data->x4_specialAttributes;
+    (void) attr;
     item_link = item->xDD4_itemVar.linkhookshot.x0;
     fn_802A3110_inline(item_link, &vec);
 
@@ -611,6 +612,7 @@ void it_802A3254(Item_GObj* arg0)
 
     fp = item->owner->user_data;
     attr = item->xC4_article_data->x4_specialAttributes;
+    (void) attr;
     item_link = item->xDD4_itemVar.linkhookshot.x4;
 
     it_802A2EE4_inline_alt(item_link, &pos);
