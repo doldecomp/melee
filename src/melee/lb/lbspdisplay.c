@@ -513,7 +513,7 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
             Vec3 saved_dir = link_dir;
 
             /* Apply stiffness blend toward natural direction */
-            if (cur->desc.lb_unk0.unk_4C * desc->pos.x < 1.0f) {
+            if (cur->desc.lb_unk0.unk_4C * desc->pos.x < 1.0) {
                 f32 stiff_angle = ABS(lbVector_Angle(&link_dir, &current_dir));
                 if (stiff_angle != 0.0f) {
                     PSVECCrossProduct(&link_dir, &current_dir, &cross_vec);

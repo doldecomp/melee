@@ -832,7 +832,7 @@ void grGreens_8021483C(Ground_GObj* gobj)
     for (i = 0; i < 5; i++) {
         y = ((left_top - left_bottom) * 0.25f * i) + left_bottom;
 
-        getVec(gp, i, 0)->x = (left_max * 0.0f) + left_min;
+        getVec(gp, i, 0)->x = (left_max * 0.0) + left_min;
         getVec(gp, i, 0)->y = y;
         getVec(gp, i, 0)->z = 0.0f;
         getVec(gp, i, 1)->x = (left_max * 1.0f) + left_min;

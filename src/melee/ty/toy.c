@@ -2892,7 +2892,7 @@ void _Toy_80309404(HSD_GObj* gobj)
             }
         }
 
-        if ((state->x40 + state->x44) != 0.0f) {
+        if ((state->x40 + state->x44) != 0.0) {
             goto reset_idle_timer;
         }
         trigger = Toy_80305B88();
@@ -3695,7 +3695,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
                 angle = lb_8000D008(adj_y, adj_x);
 
                 if (state->x18 < -25.0f) {
-                    f32 abs_x2 = (adj_x < 0.0f) ? -adj_x : adj_x;
+                    f32 abs_x2 = (adj_x < 0.0) ? -adj_x : adj_x;
                     if (abs_x2 > 0.8f) {
                         f32 dx = 0.01f * cosf(angle);
                         HSD_JObjAddTranslationX(jobj_next, dx);

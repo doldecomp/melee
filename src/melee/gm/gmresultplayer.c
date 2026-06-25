@@ -1481,7 +1481,7 @@ HSD_GObj* fn_8017A318(s32 arg0)
     }
 
     vi = ((s32) variant <= 2) ? variant : 3;
-    if ((1.0f - data->kind[kind_data].z_scale[vi]) < 0.0f) {
+    if ((1.0f - data->kind[kind_data].z_scale[vi]) < 0.0) {
         vi = ((s32) variant <= 2) ? variant : 3;
         eye.z += 100.0f * (1.0f - data->kind[kind_data].z_scale[vi]);
     } else {

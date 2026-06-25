@@ -1794,7 +1794,7 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                                         f32 vx = -dx * strength;
                                         f32 vy = -dy * strength;
                                         f32 clamp_vy = vy;
-                                        if (vy < 0.0f) {
+                                        if (vy < 0.0) {
                                             clamp_vy = 0.0f;
                                         }
                                         ea->x10 += vx;
@@ -2012,7 +2012,7 @@ s32 grZebes_801DBB60(HSD_GObj* yaku)
                     f32 t = inv_len_sq * (dx * dpy + dy * dpx);
                     f32 closest_dist;
 
-                    if (t < 0.0f) {
+                    if (t < 0.0) {
                         closest_dist = dpy * dpy + dpx * dpx;
                     } else if (t > 1.0f) {
                         f32 ex = bx - x2;

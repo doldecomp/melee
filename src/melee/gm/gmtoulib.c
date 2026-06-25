@@ -986,7 +986,7 @@ void fn_8018C8D4(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
         mid_y = arg2 + half_h;
         c7 = c0;
         DrawRectangle((f32) (arg1 + 0x2B), (f32) mid_y,
-                      ((f32) arg3 + thickness) - 43.0f, neg_thickness, &c7);
+                      ((f32) arg3 + thickness) - 43.0, neg_thickness, &c7);
 
         c8 = c0;
         DrawRectangle((f32) (arg1 + 0x2B), (f32) mid_y, thickness,

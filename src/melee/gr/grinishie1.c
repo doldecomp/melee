@@ -602,7 +602,7 @@ void grInishie1_801FB3F0(HSD_GObj* gobj)
 
             if (slot->x8 > 5.0f) {
                 slot->xC = -1.2f;
-            } else if (slot->x8 < 0.0f) {
+            } else if (slot->x8 < 0.0) {
                 slot->x8 = 0.0f;
                 slot->status = 2;
                 slot->x4 = 10;
@@ -750,7 +750,7 @@ void grInishie1_801FBCEC(HSD_GObj* gobj, u32 index)
         lb_8000B1CC(gp->gv.inishie1.blocks[index].jobj, NULL,
                     &item_spawn_offset);
 
-        item_spawn_offset.y += 5.0f;
+        item_spawn_offset.y += 5.0;
 
         it_8026F7C8(&item_spawn_offset, &grI1_803B8268, 0);
     }

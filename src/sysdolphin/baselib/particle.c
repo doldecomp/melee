@@ -6098,7 +6098,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     vel_mag = sqrtf(vel_mag_sq);
                     dist_sq = dy * dy + dx * dx;
                     dist_sq += dz * dz;
-                    if (dist_sq == 0.0F) {
+                    if (dist_sq == 0.0) {
                         break;
                     }
                     dist = sqrtf(dist_sq);
@@ -8113,7 +8113,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         case 6:
         case 7: {
             /* Compute radius */
-            if (gen->radius < 0.0F) {
+            if (gen->radius < 0.0) {
                 sin_az = -gen->radius;
                 radius = 0.0F;
             } else {
