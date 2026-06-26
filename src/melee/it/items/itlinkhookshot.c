@@ -1847,8 +1847,8 @@ void it_802A6944(Item* item, f32 scl)
     HSD_JObjSetMtxDirty(jobj);
 }
 
-s32 it_802A6A78(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
-                Fighter* arg3)
+bool it_802A6A78(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
+                 Fighter* arg3)
 {
     ItemLink* link_1;
     ftLk_DatAttrs* lk_attr;
@@ -1859,15 +1859,15 @@ s32 it_802A6A78(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
     lk_attr = arg3->ft_data->ext_attr;
     if (arg3->motion_id == 0xD4) {
         if (arg3->mv.ca.specials.grav < lk_attr->x88) {
-            return 1;
+            return true;
         }
     } else if (arg3->motion_id == 0xD6) {
         if (arg3->mv.ca.specials.grav < lk_attr->x98) {
-            return 1;
+            return true;
         }
     } else if (arg3->motion_id == 0x168) {
         if (arg3->mv.ca.specials.grav < lk_attr->xA8) {
-            return 1;
+            return true;
         }
     }
 
@@ -1892,14 +1892,14 @@ s32 it_802A6A78(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
                 link_1->coll_data.cur_pos = link_1->pos;
                 link_1->coll_data.last_pos = link_1->coll_data.cur_pos;
             } else {
-                return 0;
+                return false;
             }
         }
         link_0 = link_1;
         link_1 = link_1->next;
     }
     it_802A49B0(link_0, arg1, arg2, arg2->x30);
-    return 0;
+    return false;
 }
 
 void it_802A6DC8(HSD_JObj* arg0, Vec3* arg1, Vec3* arg2)

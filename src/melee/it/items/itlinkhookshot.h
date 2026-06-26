@@ -84,8 +84,8 @@
 /* 802A678C */ s32 it_802A678C(ItemLink* arg0, Vec3* arg1,
                                itLinkHookshotAttributes* arg2, f32 arg8);
 /* 802A6944 */ void it_802A6944(Item*, f32);
-/* 802A6A78 */ s32 it_802A6A78(ItemLink* arg0, Vec3* arg1,
-                               itLinkHookshotAttributes* arg2, Fighter* arg3);
+/* 802A6A78 */ bool it_802A6A78(ItemLink* arg0, Vec3* arg1,
+                                itLinkHookshotAttributes* arg2, Fighter* arg3);
 /* 802A6DC8 */ void it_802A6DC8(HSD_JObj* arg0, Vec3* arg1, Vec3* arg2);
 /* 802A6F80 */ void it_802A6F80(HSD_JObj* arg0, Vec3* arg1, Vec3* arg2,
                                 f32 val);
