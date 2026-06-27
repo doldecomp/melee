@@ -28,6 +28,27 @@
 #include "lb/lbaudio_ax.h"
 #include "lb/lbvector.h"
 #include "mp/mpcoll.h"
+#include "MSL/math.h"
+
+#include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjobject.h>
+#include <baselib/gobjuserdata.h>
+
+ItemStateTable it_803F7438[] = {
+    { -1, itSeakchain_UnkMotion4_Anim, NULL, NULL },
+    { -1, itSeakchain_UnkMotion4_Anim, NULL, NULL },
+    { -1, itSeakchain_UnkMotion4_Anim, NULL, NULL },
+    { -1, itSeakchain_UnkMotion4_Anim, NULL, NULL },
+    { -1, itSeakchain_UnkMotion4_Anim, NULL, NULL },
+};
+
+static void order_sdata2(void)
+{
+    (void) 0.0f;
+    (void) 0.1f;
+    (void) 1.0f;
+}
 
 void it_802BAEEC(Item_GObj* gobj)
 {
@@ -39,7 +60,94 @@ void it_802BAF0C(Item_GObj* gobj)
     it_8026B73C(gobj);
 }
 
-/// #it_802BAF2C
+static inline HSD_JObj* it_802BAF2C_Load_x64(Item* ip)
+{
+    itSeakChain_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    return HSD_JObjLoadJoint(attrs->x64_joint);
+}
+
+static inline HSD_JObj* it_802BAF2C_Load_x68(Item* ip)
+{
+    itSeakChain_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    return HSD_JObjLoadJoint(attrs->x68_joint);
+}
+
+int it_802BAF2C(Item* ip, HSD_JObj* jobj)
+{
+    ItemLink* prev_link;
+    ItemLink* head_link;
+    ItemLink* tail_link;
+    HSD_JObj* result;
+    itSeakChain_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    HSD_GObj* link_gobj;
+    ItemLink* link;
+    int i;
+    Vec3 zero = it_803B8680;
+
+    prev_link = NULL;
+    for (i = 0; i < attrs->x0; i++) {
+        link_gobj = GObj_Create(7, 0xA, 0);
+
+        if (link_gobj == NULL) {
+            while (prev_link != NULL) {
+                HSD_GObjPLink_80390228(prev_link->gobj);
+                prev_link = prev_link->next;
+            }
+            return 0;
+        }
+
+        link = HSD_ObjAlloc(&item_link_alloc_data);
+        it_80275328(link_gobj, link);
+        GObj_InitUserData(link_gobj, 6, it_802A2474, link);
+
+        if (i == 0) {
+            link->next = NULL;
+            head_link = link;
+            link->jobj = jobj;
+            link->gobj = link_gobj;
+            link->vel = zero;
+            link->pos = zero;
+            link->x2C_b0 = false;
+            it_802A24D0(link, 1.0f);
+            HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849,
+                                    it_802BAF2C_Load_x64(ip));
+            GObj_SetupGXLink(link_gobj, it_802A24A0, 6, 0);
+        } else if (i == attrs->x0 - 1) {
+            prev_link->prev = link;
+            link->prev = NULL;
+            tail_link = link;
+            link->next = prev_link;
+            link->jobj = jobj;
+            link->gobj = link_gobj;
+            link->vel = zero;
+            link->pos = zero;
+            link->x2C_b0 = false;
+            it_802A24D0(link, 1.0f);
+            {
+                HSD_JObj* joint = it_802BAF2C_Load_x68(ip);
+                HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849, joint);
+            }
+            GObj_SetupGXLink(link_gobj, HSD_GObj_JObjCallback, 6, 0);
+            result = link_gobj->hsd_obj;
+        } else {
+            prev_link->prev = link;
+            link->next = prev_link;
+            link->jobj = jobj;
+            link->gobj = link_gobj;
+            link->vel = zero;
+            link->pos = zero;
+            link->x2C_b0 = false;
+            it_802A24D0(link, 1.0f);
+            HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849,
+                                    it_802BAF2C_Load_x64(ip));
+            GObj_SetupGXLink(link_gobj, it_802A24A0, 6, 0);
+        }
+        prev_link = link;
+    }
+    ip->xDD4_itemVar.seakchain.x0 = tail_link;
+    ip->xDD4_itemVar.seakchain.x4 = head_link;
+    return (int) result;
+}
 
 static void inlineA0(Item_GObj* gobj)
 {
@@ -74,10 +182,10 @@ Item_GObj* itSeakChain_Spawn(Fighter_GObj* parent_gobj, Point3d* arg1,
 {
     SpawnItem spawn;
     Fighter* fp;
-    Item* ip;
     Item_GObj* gobj;
-    s32 var_ctr;
-    void* var_r3;
+    Item* ip;
+    s32 i;
+    PAD_STACK(32);
 
     fp = GET_FIGHTER(parent_gobj);
     spawn.kind = It_Kind_Seak_Chain;
@@ -94,46 +202,12 @@ Item_GObj* itSeakChain_Spawn(Fighter_GObj* parent_gobj, Point3d* arg1,
     if (gobj != NULL) {
         ip = GET_ITEM(gobj);
         ip->xDD4_itemVar.seakchain.parent_gobj = parent_gobj;
-        ip->xDD4_itemVar.seakchain.x0 = NULL;
-        ip->xDD4_itemVar.seakchain.x4 = NULL;
-        if (0 < 0xF) {
-            /// @todo Probably a for loop along a Vec3 array at the end of
-            ///       #itSeakChain_ItemVars
-            M2C_FIELD(ip, f32*, 0xDF8) = 0.0f;
-            M2C_FIELD(ip, f32*, 0xDF4) = 0.0f;
-            M2C_FIELD(ip, f32*, 0xDF0) = 0.0f;
-            M2C_FIELD(ip, f32*, 0xE04) = 0.0f;
-            M2C_FIELD(ip, f32*, 0xE00) = 0.0f;
-            M2C_FIELD(ip, f32*, 0xDFC) = 0.0f;
-            M2C_FIELD(ip, f32*, 0xE10) = 0.0f;
-            M2C_FIELD(ip, f32*, 0xE0C) = 0.0f;
-            M2C_FIELD(ip, f32*, 0xE08) = 0.0f;
-            M2C_FIELD(ip, f32*, 0xE1C) = 0.0f;
-            M2C_FIELD(ip, f32*, 0xE18) = 0.0f;
-            M2C_FIELD(ip, f32*, 0xE14) = 0.0f;
-            M2C_FIELD(ip, f32*, 0xE28) = 0.0f;
-            M2C_FIELD(ip, f32*, 0xE24) = 0.0f;
-            M2C_FIELD(ip, f32*, 0xE20) = 0.0f;
-            M2C_FIELD(ip, f32*, 0xE34) = 0.0f;
-            M2C_FIELD(ip, f32*, 0xE30) = 0.0f;
-            M2C_FIELD(ip, f32*, 0xE2C) = 0.0f;
-            M2C_FIELD(ip, f32*, 0xE40) = 0.0f;
-            M2C_FIELD(ip, f32*, 0xE3C) = 0.0f;
-            M2C_FIELD(ip, f32*, 0xE38) = 0.0f;
-            M2C_FIELD(ip, f32*, 0xE4C) = 0.0f;
-            M2C_FIELD(ip, f32*, 0xE48) = 0.0f;
-            M2C_FIELD(ip, f32*, 0xE44) = 0.0f;
-            var_r3 = ip + (8 * 0xC);
-            var_ctr = 0xF - 8;
-            if (8 < 0xF) {
-                do {
-                    M2C_FIELD(var_r3, f32*, 0xDF8) = 0.0f;
-                    M2C_FIELD(var_r3, f32*, 0xDF4) = 0.0f;
-                    M2C_FIELD(var_r3, f32*, 0xDF0) = 0.0f;
-                    // var_r3 += 0xC;
-                    var_ctr -= 1;
-                } while (var_ctr != 0);
-            }
+        ip->xDD4_itemVar.seakchain.x10 = 0;
+        ip->xDD4_itemVar.seakchain.x14 = 0;
+        for (i = 0; i < 0xF; i++) {
+            ip->xDD4_itemVar.seakchain.history[i].z = 0.0f;
+            ip->xDD4_itemVar.seakchain.history[i].y = 0.0f;
+            ip->xDD4_itemVar.seakchain.history[i].x = 0.0f;
         }
         it_80272A3C(GET_JOBJ(gobj));
         it_802BAF2C(ip, fp->parts[FtPart_L3rdNa].joint);
@@ -167,7 +241,7 @@ void fn_802BB44C(Item_GObj* gobj)
     vec.x = mtx[0][3];
     vec.y = mtx[1][3];
     vec.z = mtx[2][3];
-    switch (it_802BBD64(link, &vec, mtx)) {
+    switch (it_802BBD64(link, &vec, sa)) {
     case 1:
         link->vel.x *= -sa->x58;
         it_802BCF2C(gobj);
@@ -196,7 +270,7 @@ void fn_802BB574(Item_GObj* gobj)
     vec.x = mtx[0][3];
     vec.y = mtx[1][3];
     vec.z = mtx[2][3];
-    switch (it_802BBED0(link, &vec, mtx)) {
+    switch (it_802BBED0(link, &vec, sa)) {
     case 1:
         link->vel.x *= -sa->x58;
         break;
@@ -229,6 +303,7 @@ void fn_802BB694(Item_GObj* gobj)
 
 void fn_802BB784(Item_GObj* gobj)
 {
+    Vec3 vec;
     Mtx mtx;
     Item* ip;
     itSeakChain_Attrs* sa;
@@ -238,21 +313,18 @@ void fn_802BB784(Item_GObj* gobj)
     link = ip->xDD4_itemVar.seakchain.x4;
     sa = ip->xC4_article_data->x4_specialAttributes;
     PSMTXIdentity(mtx);
-    mtx[0][0] = 0.0f;
-    mtx[1][0] = 0.0f;
-    mtx[2][0] = 0.1f;
+    mtx[0][3] = 0.0f;
+    mtx[1][3] = 0.0f;
+    mtx[2][3] = 0.1f;
     HSD_JObjSetupMatrix(link->jobj);
     PSMTXConcat(link->jobj->mtx, mtx, mtx);
-    {
-        Vec3 vec;
-        vec.x = mtx[0][0];
-        vec.y = mtx[1][0];
-        vec.z = mtx[2][0];
-        if (it_802BC94C(link, &vec, mtx, sa->x54)) {
-            it_2725_Logic54_PickedUp(gobj);
-        }
-        it_802BCB88(ip, &vec);
+    vec.x = mtx[0][3];
+    vec.y = mtx[1][3];
+    vec.z = mtx[2][3];
+    if (it_802BC94C(link, &vec, sa, sa->x54)) {
+        it_2725_Logic54_PickedUp(gobj);
     }
+    it_802BCB88(ip, &vec);
 }
 
 static bool notInSpecialS(Fighter_GObj* gobj)
@@ -282,132 +354,162 @@ bool itSeakchain_UnkMotion4_Anim(Item_GObj* gobj)
 
 int it_802BB938(ItemLink* link, int arg1, float arg2)
 {
-    CollData* temp_r31;
-    ItemLink* temp_r5;
-    s32 temp_r3_2;
-    s32 temp_r3_3;
-    u8 temp_r3;
-    u8 temp_r4;
+    CollData* coll = &link->coll_data;
 
-    temp_r31 = &link->coll_data;
-    temp_r5 = link->next;
-    if ((temp_r5 != NULL) && temp_r5->x2C_b0) {
-        temp_r31->last_pos = temp_r5->pos;
+    if (link->next != NULL && link->next->x2C_b0) {
+        coll->last_pos = link->next->pos;
     } else {
-        temp_r31->last_pos = temp_r31->cur_pos;
+        coll->last_pos = coll->cur_pos;
     }
-    temp_r31->cur_pos = link->pos;
-    if (mpColl_80048844(temp_r31, arg2) != 0) {
-        temp_r3 = M2C_FIELD(link, u8*, 0x2C);
-        if (!((temp_r3 >> 6) & 1) && (arg1 != 0) && !((temp_r3 >> 5) & 1)) {
+    coll->cur_pos = link->pos;
+    if (mpColl_80048844(coll)) {
+        if (!link->x2C_b1 && arg1 != 0 && !link->x2C_b2) {
             lbAudioAx_800237A8(0x41F45, 0x7F, 0x40);
-            link->x2C_b2 = true;
+            link->x2C_b2 = 0xF; // weird; gets truncated to 0x1
         }
         link->x2C_b1 = true;
     } else {
         link->x2C_b1 = false;
-        temp_r4 = M2C_FIELD(link, u8*, 0x2C);
-        temp_r3_2 = (temp_r4 >> 5) & 1;
-        if (temp_r3_2 != 0) {
-            M2C_FIELD(link, u8*, 0x2C) =
-                (temp_r4 & ~0x20) | (((temp_r3_2 - 1) << 5) & 0x20);
+        if (link->x2C_b2) {
+            link->x2C_b2--;
         }
     }
-    temp_r3_3 = temp_r31->env_flags;
-    if (temp_r3_3 & 0x18000) {
-        temp_r31->cur_pos.x = link->pos.x;
-    } else if (temp_r3_3 & 0xFFF) {
-        ItemLink* next = link->next;
-        if (next != NULL && next->x2C_b0 && link->prev != NULL) {
-            temp_r31->cur_pos.y += arg2;
+    if (coll->env_flags & 0x18000) {
+        coll->cur_pos.x = link->pos.x;
+    } else if (coll->env_flags & 0xFFF) {
+        if (link->next != NULL && link->next->x2C_b0 && link->prev != NULL) {
+            coll->cur_pos.y += arg2;
         }
     }
-    link->pos = temp_r31->cur_pos;
-    return temp_r31->env_flags & 0x18FFF;
+    link->pos = coll->cur_pos;
+    return coll->env_flags & 0x18FFF;
 }
 
+#pragma push
+#pragma dont_inline on
 s32 it_802BBAEC(ItemLink* link, s32 arg1, f32 arg2)
 {
     return it_802BB938(link, arg1, arg2);
 }
+#pragma pop
 
-int it_802BBB0C(ItemLink* link, Vec3* offset, Mtx mtx, float scale)
+void it_802BBB0C(ItemLink* link, Vec3* offset, itSeakChain_Attrs* sa,
+                 float scale)
 {
+    u8 _pad[8];
     Vec3 pos;
-    ItemLink *cur = link->prev, *prev = link;
-    int ret = it_802A3C98(&prev->pos, offset, &pos);
-    prev->pos.x = pos.x * scale + offset->x;
-    prev->pos.y = pos.y * scale + offset->y;
-    prev->pos.z = pos.z * scale + offset->z;
-    for (; cur != NULL; prev = cur, cur = cur->prev) {
-        cur->vel.y -= mtx[1][2];
-        it_802A4420(cur);
-        it_802A43EC(cur);
-        it_802BB938(cur, 0, mtx[0][1]);
-        {
-            float temp_ret = it_802A3C98(&cur->pos, &prev->pos, &pos);
-            ret = temp_ret;
-            if (temp_ret > mtx[0][1]) {
-                cur->pos.x = pos.x * mtx[0][1] + prev->pos.x;
-                cur->pos.y = pos.y * mtx[0][1] + prev->pos.y;
-                cur->pos.z = pos.z * mtx[0][1] + prev->pos.z;
+    ItemLink* prev = link->prev;
+
+    it_802A3C98(&link->pos, offset, &pos);
+    link->pos.x = pos.x * scale + offset->x;
+    link->pos.y = pos.y * scale + offset->y;
+    link->pos.z = pos.z * scale + offset->z;
+    for (; prev != NULL; link = prev, prev = prev->prev) {
+        prev->vel.y -= sa->x18;
+        it_802A4420(prev);
+        it_802A43EC(prev);
+        it_802BB938(prev, 0, sa->x4);
+        if (it_802A3C98(&prev->pos, &link->pos, &pos) > sa->x4) {
+            prev->pos.x = pos.x * sa->x4 + link->pos.x;
+            prev->pos.y = pos.y * sa->x4 + link->pos.y;
+            prev->pos.z = pos.z * sa->x4 + link->pos.z;
+        }
+    }
+}
+
+void it_802BBC38(ItemLink* link, Vec3* offset, itSeakChain_Attrs* sa,
+                 f32 scale)
+{
+    u8 _pad[12];
+    Vec3 origin;
+    u8 _pad2[4];
+    ItemLink* prev = link->prev;
+
+    it_802A3C98(&link->pos, offset, &origin);
+    link->pos.x = origin.x * scale + offset->x;
+    link->pos.y = origin.y * scale + offset->y;
+    link->pos.z = origin.z * scale + offset->z;
+    for (; prev != NULL; link = prev, prev = prev->prev) {
+        prev->vel.y -= sa->x18;
+        it_802A4420(prev);
+        it_802A43EC(prev);
+        it_802BB938(prev, 0, sa->x4);
+        if (it_802A3C98(&prev->pos, &link->pos, &origin) > sa->x4) {
+            prev->pos.x = origin.x * sa->x4 + link->pos.x;
+            prev->pos.y = origin.y * sa->x4 + link->pos.y;
+            prev->pos.z = origin.z * sa->x4 + link->pos.z;
+        }
+    }
+}
+
+enum_t it_802BBD64(ItemLink* link, Vec3* arg1, itSeakChain_Attrs* sa)
+{
+    u8 _pad[0x10];
+    Vec3 vec;
+    ItemLink* cur = link;
+    ItemLink* prev = link->next;
+    int temp_r29;
+
+    it_802A4420(link);
+    temp_r29 = it_802BB938(cur, 1, sa->x4) & 0xFFF;
+    cur->pos.z = cur->pos.z;
+    while (prev != NULL) {
+        if (prev->x2C_b0) {
+            if (it_802A3C98(&prev->pos, &cur->pos, &vec) > sa->x4) {
+                prev->pos.x = vec.x * sa->x4 + cur->pos.x;
+                prev->pos.y = vec.y * sa->x4 + cur->pos.y;
+                prev->pos.z = vec.z * sa->x4 + cur->pos.z;
+            }
+            it_802A43EC(prev);
+        } else {
+            if (it_802A3C98(arg1, &cur->pos, &vec) > sa->x4) {
+                prev->pos.x = vec.x * sa->x4 + cur->pos.x;
+                prev->pos.y = vec.y * sa->x4 + cur->pos.y;
+                prev->pos.z = vec.z * sa->x4 + cur->pos.z;
+                prev->x2C_b0 = true;
+                it_802A43B8(prev);
+            } else {
+                if (temp_r29 != 0) {
+                    return 1;
+                }
+                return 0;
             }
         }
+        cur = prev;
+        prev = prev->next;
     }
-    return ret;
+    it_802BBB0C(cur, arg1, sa, sa->x4);
+    return 2;
 }
 
-int it_802BBC38(ItemLink* link, Vec3* offset, Mtx arg2, f32 scale)
+enum_t it_802BBED0(ItemLink* link, Point3d* arg1, itSeakChain_Attrs* sa)
 {
-    Vec3 origin;
-    ItemLink* cur = link->prev;
-    ItemLink* prev = link;
-    int ret = it_802A3C98(&prev->pos, offset, &origin);
-    prev->pos.x = origin.x * scale + offset->x;
-    prev->pos.y = origin.y * scale + offset->y;
-    prev->pos.z = origin.z * scale + offset->z;
-    for (; cur != NULL; prev = cur, cur = cur->prev) {
-        float temp_ret;
-        cur->vel.y -= arg2[1][2];
-        it_802A4420(cur);
-        it_802A43EC(cur);
-        it_802BB938(cur, 0, arg2[0][1]);
-        temp_ret = it_802A3C98(&cur->pos, &prev->pos, &origin);
-        ret = temp_ret;
-        if (temp_ret > arg2[0][1]) {
-            cur->pos.x = origin.x * arg2[0][1] + prev->pos.x;
-            cur->pos.y = origin.y * arg2[0][1] + prev->pos.y;
-            cur->pos.z = origin.z * arg2[0][1] + prev->pos.z;
-        }
-    }
-    return ret;
-}
+    u8 _pad[16];
+    Point3d pos;
+    ItemLink *cur = link, *prev = link->next;
 
-enum_t it_802BBD64(ItemLink* link, Vec3* arg1, f32 (*arg2)[4])
-{
-    PAD_STACK(4 * 4);
+    link->vel.y -= sa->x18;
+    it_802A4420(cur);
+
     {
-        Vec3 vec;
-        ItemLink* cur = link;
-        ItemLink* prev = link->next;
-
-        it_802A4420(link);
-        {
-            int temp_r29 = it_802BB938(cur, 1, arg2[0][1]) & 0xFFF;
-            goto loop;
-        loop_body: {
+        int temp_r29 = it_802BB938(cur, 1, sa->x4) & 0xFFF;
+        float vel_scale = 1.0f;
+        while (prev != NULL) {
             if (prev->x2C_b0) {
-                if (it_802A3C98(&prev->pos, &cur->pos, &vec) > arg2[0][1]) {
-                    prev->pos.x = vec.x * arg2[0][1] + cur->pos.x;
-                    prev->pos.y = vec.y * arg2[0][1] + cur->pos.y;
-                    prev->pos.z = vec.z * arg2[0][1] + cur->pos.z;
+                prev->vel.y = -((sa->x18 * vel_scale) - prev->vel.y);
+                vel_scale *= sa->x34;
+                it_802A4420(prev);
+                if (it_802A3C98(&prev->pos, &cur->pos, &pos) > sa->x4) {
+                    prev->pos.x = pos.x * sa->x4 + cur->pos.x;
+                    prev->pos.y = pos.y * sa->x4 + cur->pos.y;
+                    prev->pos.z = pos.z * sa->x4 + cur->pos.z;
                 }
                 it_802A43EC(prev);
             } else {
-                if (it_802A3C98(arg1, &cur->pos, &vec) > arg2[0][1]) {
-                    prev->pos.x = vec.x * arg2[0][1] + cur->pos.x;
-                    prev->pos.y = vec.y * arg2[0][1] + cur->pos.y;
-                    prev->pos.z = vec.z * arg2[0][1] + cur->pos.z;
+                if (it_802A3C98(arg1, &cur->pos, &pos) > sa->x4) {
+                    prev->pos.x = pos.x * sa->x4 + cur->pos.x;
+                    prev->pos.y = pos.y * sa->x4 + cur->pos.y;
+                    prev->pos.z = pos.z * sa->x4 + cur->pos.z;
                     prev->x2C_b0 = true;
                     it_802A43B8(prev);
                 } else {
@@ -420,72 +522,245 @@ enum_t it_802BBD64(ItemLink* link, Vec3* arg1, f32 (*arg2)[4])
             cur = prev;
             prev = prev->next;
         }
-        loop:
-            if (prev != NULL) {
-                goto loop_body;
-            }
-            it_802BBB0C(cur, arg1, arg2, arg2[0][1]);
-            return 2;
-        }
+        it_802BBB0C(cur, arg1, sa, sa->x4);
+        return 2;
     }
 }
 
-enum_t it_802BBED0(ItemLink* link, Point3d* arg1, f32 (*mtx)[4])
+static inline void itSeakChain_clamp_x10(ItemLink* link,
+                                         itSeakChain_Attrs* attrs)
 {
-    Point3d pos;
-    ItemLink *cur = link, *prev = link->next;
+    f32 value = link->vel.x;
+    f32 limit = attrs->x10;
 
-    link->vel.y -= mtx[1][2];
+    if (value > limit) {
+        link->vel.x = value - limit;
+    } else if (value < -limit) {
+        link->vel.x = value + limit;
+    } else {
+        link->vel.x = 0.0f;
+    }
+}
+
+static inline void itSeakChain_clamp_x14(ItemLink* link,
+                                         itSeakChain_Attrs* attrs)
+{
+    f32 value = link->vel.x;
+    f32 limit = attrs->x14;
+
+    if (value > limit) {
+        link->vel.x = value - limit;
+    } else if (value < -limit) {
+        link->vel.x = value + limit;
+    } else {
+        link->vel.x = 0.0f;
+    }
+}
+
+void it_802BC080(ItemLink* link, Vec3* target, Item* ip)
+{
+    struct {
+        Vec3 dir;
+        u8 pad[16];
+    } stack;
+    f32 lstick_x, lstick_y;
+    ItemLink* iter = link->prev;
+    ItemLink* cur = link;
+    itSeakChain_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    s32 last_idx = (s32) (0.5f * attrs->x0 - 1.0f);
+    Fighter* fp;
+    s32 env_flags;
+    s32 use_arg = 0;
+    s32 counter;
+    s32 coll_arg;
+    f32 scale;
+    s32 mode;
+    int i;
+    PAD_STACK(12);
+
+    while (iter != NULL && !cur->x2C_b0) {
+        cur = iter;
+        iter = iter->prev;
+    }
+
+    if (ip->xDD4_itemVar.seakchain.x18 != 0) {
+        coll_arg = 1;
+    } else {
+        coll_arg = 0;
+    }
+    fp = GET_FIGHTER(ip->xDD4_itemVar.seakchain.parent_gobj);
+
+    for (i = 0; last_idx > i; i++) {
+        ip->xDD4_itemVar.seakchain.history[last_idx - i].x =
+            ip->xDD4_itemVar.seakchain.history[last_idx - 1 - i].x;
+        ip->xDD4_itemVar.seakchain.history[last_idx - i].y =
+            ip->xDD4_itemVar.seakchain.history[last_idx - 1 - i].y;
+    }
+
+    if (ABS(fp->fv.sk.lstick_delta.x) > attrs->x48) {
+        s32 sign = (fp->fv.sk.lstick_delta.x < 0.0f) ? -1 : 1;
+        if (ip->facing_dir == sign) {
+            ip->xDD4_itemVar.seakchain.history[0].x =
+                fp->fv.sk.lstick_delta.x * attrs->x38;
+        } else {
+            ip->xDD4_itemVar.seakchain.history[0].x =
+                fp->fv.sk.lstick_delta.x * attrs->x3C;
+        }
+    } else {
+        ip->xDD4_itemVar.seakchain.history[0].x = 0.0f;
+    }
+
+    if (ABS(fp->fv.sk.lstick_delta.y) > attrs->x48) {
+        s32 sign = (fp->fv.sk.lstick_delta.y < 0.0f) ? -1 : 1;
+        if (sign > 0.0f) {
+            ip->xDD4_itemVar.seakchain.history[0].y =
+                fp->fv.sk.lstick_delta.y * attrs->x40;
+        } else {
+            ip->xDD4_itemVar.seakchain.history[0].y =
+                fp->fv.sk.lstick_delta.y * attrs->x44;
+        }
+    } else {
+        ip->xDD4_itemVar.seakchain.history[0].y = 0.0f;
+    }
+
+    ip->xDD4_itemVar.seakchain.x18 = *(s32*) &fp->mv.co.common.x1C;
+
+    cur->vel.x += ip->xDD4_itemVar.seakchain.history[0].x * attrs->x1C;
+    cur->vel.y += ip->xDD4_itemVar.seakchain.history[0].y * attrs->x20;
+    itSeakChain_clamp_x10(cur, attrs);
+    if (ABS(cur->vel.x) > attrs->x24) {
+        if (cur->vel.x > 0.0f) {
+            cur->vel.x = attrs->x24;
+        } else {
+            cur->vel.x = -attrs->x24;
+        }
+    }
+    if (cur->vel.y > attrs->x18 - attrs->x28) {
+        cur->vel.y -= attrs->x18;
+    } else if (cur->vel.y < -attrs->x18 - attrs->x28) {
+        cur->vel.y += attrs->x18;
+    }
+    if (ABS(cur->vel.y) > attrs->x2C) {
+        if (cur->vel.y > 0.0f) {
+            cur->vel.y = attrs->x2C;
+        } else {
+            cur->vel.y = -attrs->x2C;
+        }
+    }
+
     it_802A4420(cur);
 
-    {
-        float vel_scale = 1.0f;
-        int temp_r29 = it_802BB938(cur, 1, mtx[0][1]) & 0xFFF;
-    loop_body: {
-        if (prev == NULL) {
-            it_802BBB0C(cur, arg1, mtx, mtx[0][1]);
-            return 2;
+    scale = 1.0f;
+    scale *= attrs->x34;
+    if (it_802A3C98(&cur->pos, target, &stack.dir) > attrs->x4) {
+        cur->pos.x = stack.dir.x * attrs->x4 + target->x;
+        cur->pos.y = stack.dir.y * attrs->x4 + target->y;
+        cur->pos.z = stack.dir.z * attrs->x4 + target->z;
+    }
+
+    use_arg = ip->xDD4_itemVar.seakchain.x10;
+    lstick_x = ftSk_SpecialS_80110F58(ip->xDD4_itemVar.seakchain.parent_gobj);
+    lstick_y = ftSk_SpecialS_80110F64(ip->xDD4_itemVar.seakchain.parent_gobj);
+    if (ABS(lstick_x) < attrs->x48 && ABS(lstick_y) < attrs->x48) {
+        mode = 3;
+    } else if (lstick_y < -0.5f) {
+        mode = 1;
+    } else {
+        mode = 2;
+    }
+
+    counter = 0;
+    while (iter != NULL) {
+        f32 dx, dy;
+        s32 idx = (s32) (0.5f * (counter + 1));
+        f32 fx = attrs->x1C;
+        f32 fy = attrs->x20;
+        dx = scale * (ip->xDD4_itemVar.seakchain.history[idx].x * fx);
+        dy = scale * (ip->xDD4_itemVar.seakchain.history[idx].y * fy);
+        if (use_arg != 0) {
+            dx *= attrs->x30;
         }
-        if (prev->x2C_b0) {
-            prev->vel.y = -((mtx[1][2] * vel_scale) - prev->vel.y);
-            vel_scale *= mtx[1][2];
-            it_802A4420(prev);
-            if (it_802A3C98(&prev->pos, &cur->pos, &pos) > mtx[0][1]) {
-                prev->pos.x = pos.x * mtx[0][1] + cur->pos.x;
-                prev->pos.y = pos.y * mtx[0][1] + cur->pos.y;
-                prev->pos.z = pos.z * mtx[0][1] + cur->pos.z;
+        iter->vel.x += dx;
+        iter->vel.y += dy;
+
+        {
+            f32 lim = attrs->x10 * scale;
+            if (iter->vel.x > lim) {
+                iter->vel.x -= lim;
+            } else if (iter->vel.x < -attrs->x10 * scale) {
+                iter->vel.x += lim;
+            } else {
+                iter->vel.x = 0.0f;
             }
-            it_802A43EC(prev);
-            goto block_10;
         }
         {
-            f32 temp_f2_2 = mtx[0][1];
-            if (it_802A3C98(arg1, &cur->pos, &pos) > temp_f2_2) {
-                prev->pos.x = pos.x * temp_f2_2 + cur->pos.x;
-                prev->pos.y = pos.y * mtx[0][1] + cur->pos.y;
-                prev->pos.z = pos.z * mtx[0][1] + cur->pos.z;
-                prev->x2C_b0 = true;
-                it_802A43B8(prev);
-            block_10:
-                cur = prev;
-                prev = prev->next;
-                goto loop_body;
-            }
-            if (temp_r29 != 0) {
-                return 1;
+            if (ABS(iter->vel.x) > attrs->x24 * scale) {
+                if (iter->vel.x > 0.0f) {
+                    iter->vel.x = attrs->x24 * scale;
+                } else {
+                    iter->vel.x = -attrs->x24 * scale;
+                }
             }
         }
+        {
+            f32 vy_lim = attrs->x18 * scale;
+            if (iter->vel.y > vy_lim - attrs->x28) {
+                iter->vel.y -= vy_lim;
+            } else if (iter->vel.y < -attrs->x18 * scale - attrs->x28) {
+                iter->vel.y += vy_lim;
+            }
+        }
+        {
+            if (ABS(iter->vel.y) > attrs->x2C * scale) {
+                if (iter->vel.y > 0.0f) {
+                    iter->vel.y = attrs->x2C * scale;
+                } else {
+                    iter->vel.y = -attrs->x2C * scale;
+                }
+            }
+        }
+
+        counter++;
+        scale *= attrs->x34;
+        it_802A4420(iter);
+
+        if (counter > mode) {
+            if (counter % 5 == 0) {
+                env_flags = it_802BBAEC(iter, coll_arg, attrs->x4);
+            } else {
+                env_flags = it_802BBAEC(iter, 0, attrs->x4);
+            }
+        } else {
+            env_flags = 0;
+        }
+        env_flags &= 0x18000;
+        if (env_flags != 0) {
+            if (ABS(iter->vel.y) > attrs->x60) {
+                iter->vel.y *= -attrs->x5C;
+            } else {
+                itSeakChain_clamp_x14(iter, attrs);
+                iter->vel.y = 0.0f;
+            }
+        }
+
+        if (it_802A3C98(&iter->pos, &cur->pos, &stack.dir) > attrs->x4) {
+            iter->pos.x = stack.dir.x * attrs->x4 + cur->pos.x;
+            iter->pos.y = stack.dir.y * attrs->x4 + cur->pos.y;
+            iter->pos.z = stack.dir.z * attrs->x4 + cur->pos.z;
+        }
+
+        cur = iter;
+        iter = iter->prev;
     }
-    }
-    return 0;
+    ip->xDD4_itemVar.seakchain.x10 = env_flags;
 }
 
-/// #it_802BC080
-
-int it_802BC94C(ItemLink* arg0, Vec3* arg1, Mtx arg2, f32 farg0)
+int it_802BC94C(ItemLink* arg0, Vec3* arg1, itSeakChain_Attrs* sa, f32 farg0)
 {
+    u8 _padA[8];
     ItemLink *var_r30, *var_r29;
-    PAD_STACK(3 * 4);
+    Vec3 sp18;
+    float var_f1;
 
     for (var_r29 = arg0, var_r30 = arg0->prev;
          var_r30 != NULL && !var_r29->x2C_b0;)
@@ -493,20 +768,18 @@ int it_802BC94C(ItemLink* arg0, Vec3* arg1, Mtx arg2, f32 farg0)
         var_r29 = var_r30;
         var_r30 = var_r30->prev;
     }
-    {
-        Vec3 sp18;
-        float var_f1 = it_802A3C98(&var_r29->pos, arg1, &sp18);
-        while (var_r30 != NULL && farg0 > var_f1) {
-            var_r29->x2C_b0 = false;
-            var_f1 = it_802A3C98(&var_r30->pos, arg1, &sp18);
-            var_r29 = var_r30;
-            var_r30 = var_r30->prev;
-        }
-        {
-            float var_f1_2 = var_f1 - farg0;
-            it_802BBC38(var_r29, arg1, arg2, MAX(var_f1_2, arg2[0][1]));
-        }
+    var_f1 = it_802A3C98(&var_r29->pos, arg1, &sp18);
+    while (var_r30 != NULL && farg0 > var_f1) {
+        var_r29->x2C_b0 = false;
+        var_f1 = it_802A3C98(&var_r30->pos, arg1, &sp18);
+        var_r29 = var_r30;
+        var_r30 = var_r30->prev;
     }
+    var_f1 -= farg0;
+    if (var_f1 > sa->x4) {
+        var_f1 = sa->x4;
+    }
+    it_802BBC38(var_r29, arg1, sa, var_f1);
     if (var_r30 != NULL) {
         return false;
     }
@@ -532,20 +805,23 @@ void it_802BCA30(Item* ip)
     HSD_JObjSetMtxDirty(jobj0);
 }
 
-void it_802BCB88(Item* arg0, Vec3* arg1)
+static inline ItemLink* it_802BCB88_prev(ItemLink* link)
 {
-    ItemLink* link = arg0->xDD4_itemVar.seakchain.x4;
-    itSeakChain_Attrs* sa = arg0->xC4_article_data->x4_specialAttributes;
+    return link->prev;
+}
+
+void it_802BCB88(Item* ip, Vec3* vec)
+{
+    ItemLink* link = ip->xDD4_itemVar.seakchain.x4;
+    itSeakChain_Attrs* sa = ip->xC4_article_data->x4_specialAttributes;
     HSD_JObj* jobj;
-    int const divisor = 3;
     int count;
-    int stride = sa->x0 / divisor;
+    int stride = sa->x0 / 3;
     while (!link->x2C_b0) {
         link = link->prev;
     }
     {
         ItemLink* cur;
-        ItemLink* prev;
         Vec3 pos0;
         count = 0;
         for (; link != NULL; link = link->prev) {
@@ -554,16 +830,16 @@ void it_802BCB88(Item* arg0, Vec3* arg1)
                 if (cur->x2C_b0) {
                     pos0 = cur->pos;
                 } else {
-                    pos0 = *arg1;
+                    pos0 = *vec;
                 }
             } else {
-                pos0 = *arg1;
+                pos0 = *vec;
             }
-            prev = link->prev;
+            cur = it_802BCB88_prev(link);
             {
                 Vec3 pos1;
-                if (prev != NULL) {
-                    pos1 = prev->pos;
+                if (cur != NULL) {
+                    pos1 = cur->pos;
                 } else {
                     pos1 = link->pos;
                 }
@@ -574,18 +850,18 @@ void it_802BCB88(Item* arg0, Vec3* arg1)
                         HSD_JObjSetTranslate(jobj, &translate);
                         if (count % stride == 0) {
                             int i;
-                            for (i = divisor; i > count / stride; i--) {
+                            for (i = 3; i > count / stride; i--) {
                                 ftSk_SpecialS_UpdateHitboxes(
-                                    arg0->xDD4_itemVar.seakchain.parent_gobj,
+                                    ip->xDD4_itemVar.seakchain.parent_gobj,
                                     &translate, i - 1);
                             }
                         }
                         if (link->prev == NULL) {
                             ftSk_SpecialS_UpdateHitboxes(
-                                arg0->xDD4_itemVar.seakchain.parent_gobj,
-                                &translate, divisor);
+                                ip->xDD4_itemVar.seakchain.parent_gobj,
+                                &translate, 3);
                         }
-                        ++count;
+                        count++;
                         {
                             Vec3 dir;
                             dir.x = pos1.x - pos0.x;
@@ -608,7 +884,6 @@ void it_802BCB88(Item* arg0, Vec3* arg1)
                         mtx[1][2] *= sa->x4;
                         mtx[2][2] *= sa->x4;
                         PSMTXCopy(mtx, jobj->mtx);
-                        link = link->prev;
                     }
                 }
             }
@@ -619,7 +894,7 @@ void it_802BCB88(Item* arg0, Vec3* arg1)
 void it_2725_Logic54_PickedUp(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
-    PAD_STACK(4);
+    PAD_STACK(8);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
     item->on_accessory = fn_802BB428;
 }

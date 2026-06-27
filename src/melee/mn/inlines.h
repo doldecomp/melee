@@ -25,6 +25,7 @@ typedef enum _MenuInput {
 } MenuInput;
 
 #define GET_MENU(gobj) ((Menu*) HSD_GObjGetUserData(gobj))
+#define GET_DIAGRAM(gobj) ((Diagram*) HSD_GObjGetUserData(gobj))
 
 static inline void Menu_DecrementAnimTimer(void)
 {

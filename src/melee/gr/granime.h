@@ -6,9 +6,8 @@
 
 /* 1C65B0 */ void grAnime_801C65B0(UnkArchiveStruct*);
 /* 1C6C0C */ void grAnime_801C6C0C(HSD_JObj*, HSD_AnimJoint*,
-                                   HSD_MatAnimJoint*,
-                                   HSD_ShapeAnimJoint*);
-/* 1C752C */ void grAnime_801C752C(HSD_JObj*, ...);
+                                   HSD_MatAnimJoint*, HSD_ShapeAnimJoint*);
+/* 1C752C */ void grAnime_801C752C(HSD_JObj*, s32, s32, void*, u32, ...);
 /* 1C775C */ void grAnime_801C775C(HSD_GObj*, int, u32, f32, f32);
 /* 1C77FC */ void grAnime_801C77FC(HSD_GObj*, int, u32);
 /* 1C787C */ void grAnime_801C787C(HSD_GObj*, int, u32);
@@ -17,12 +16,13 @@
 /* 1C7A04 */ void grAnime_801C7A04(HSD_GObj*, int, u32, f32);
 /* 1C7A94 */ void grAnime_801C7A94(HSD_GObj*, int, u32, float);
 /* 1C7B24 */ void grAnime_801C7B24(HSD_GObj*, int, u32, float);
+/* 1C7BA0 */ void grAnime_801C7BA0(HSD_GObj*, int, u32, float);
 /* 1C7C1C */ void grAnime_801C7C1C(HSD_JObj*, s32, s32, s32, s32, int, f32,
                                    f32);
 /* 1C7FF8 */ void grAnime_801C7FF8(HSD_GObj*, int, int, int, float, float);
 /* 1C8098 */ void grAnime_801C8098(HSD_GObj*, int, int, int, float, float);
 /* 1C8138 */ void grAnime_801C8138(HSD_GObj*, enum_t, bool);
-/* 1C8578 */ HSD_Joint* grAnime_801C8578(void*, void*);
+/* 1C8578 */ HSD_Joint* grAnime_801C8578(HSD_Joint*, s32*);
 /* 1C8318 */ HSD_AObj* grAnime_801C8318(HSD_GObj*, int, u32);
 /* 1C83D0 */ bool grAnime_801C83D0(HSD_GObj*, bool, enum_t);
 /* 1C84A4 */ bool grAnime_801C84A4(HSD_GObj*, s32, s32);

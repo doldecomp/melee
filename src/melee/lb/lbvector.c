@@ -454,7 +454,7 @@ Vec3* lbVector_WorldToScreen(HSD_CObj* cobj, const Vec3* pos3d,
 /// m = rotation_matrix_z(angles.z) * rotation_matrix_y(angles.y) *
 /// rotation_matrix_x(angles.x) Column 4 of m is then set to (0,0,0) because
 /// there is no translational component.
-void lbVector_CreateEulerMatrix(Mtx m, Vec3* angles)
+void lbVector_CreateEulerMatrix(Mtx m, Quaternion* angles)
 {
     float sx = sin(angles->x);
     float cx = cos(angles->x);

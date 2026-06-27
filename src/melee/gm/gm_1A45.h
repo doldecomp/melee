@@ -21,7 +21,7 @@
 /* 1A4B50 */ void gm_801A4B50(int);
 /* 1A4B60 */ void gm_801A4B60(void);
 /* 1A4B74 */ UNK_RET gm_801A4B74(UNK_PARAMS);
-/* 1A4B88 */ void gm_801A4B88(struct MinorSceneInfo*);
+/* 1A4B88 */ void gm_801A4B88(struct GameSceneInfo*);
 /* 1A4B90 */ void* gm_801A4B90(void);
 /* 1A4B9C */ void* gm_801A4B9C(void);
 /* 1A4BA8 */ u32 gm_801A4BA8(void);
@@ -29,8 +29,8 @@
 /* 1A4BC8 */ HSD_GObj* gm_801A4BC8(void);
 /* 1A4BD0 */ void fn_801A4BD0(HSD_GObj*);
 /* 1A4BD4 */ void gm_801A4BD4(void);
-/* 1A4CE0 */ MinorSceneHandler* gm_801A4CE0(u8 id);
-/* 1A4D34 */ void gm_801A4D34(void (*)(void), struct MinorSceneInfo*);
+/* 1A4CE0 */ GameSceneHandler* gm_801A4CE0(u8 id);
+/* 1A4D34 */ void gm_801A4D34(void (*)(void), struct GameSceneInfo*);
 
 /* 4D6724 */ extern void (*gm_804D6724)(void);
 

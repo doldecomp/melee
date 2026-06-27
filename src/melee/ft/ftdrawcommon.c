@@ -34,6 +34,23 @@ static inline void mtx_thing_2(MtxPtr mtx, Vec3* v, Vec3* v2)
     mtx[2][3] = v->z + v2->z;
 }
 
+static inline MtxPtr ftDrawCommon_8008051C_inline(HSD_GObj* gobj, Vec3* sp54,
+                                                  Vec3* v, Mtx sp18, Mtx sp70)
+
+{
+    v->x = v->y = v->z = 0.0F;
+    sp54->x = sp54->y = sp54->z = 0.0F;
+    if (ftLib_80087074(gobj, sp54)) {
+        HSD_CObj* current = HSD_CObjGetCurrent();
+        MtxPtr mtx = current->view_mtx;
+        PSMTXIdentity(sp18);
+        mtx_thing_2(sp18, sp54, v);
+        PSMTXConcat(mtx, sp18, sp70);
+        return sp70;
+    }
+    return NULL;
+}
+
 MtxPtr ftDrawCommon_8008051C(HSD_GObj* arg1, MtxPtr arg2)
 {
     u8 unused0[0x4];
@@ -65,15 +82,19 @@ void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, bool arg2)
 {
     GXColor spAC;
     GXColor spA8;
+    int i;
 
     s32 fighter_2;
     Fighter* fighter;
     u32 phi_r24;
     u32 do_invalidate;
+    Mtx sp78;
+    Mtx sp18;
     MtxPtr mtx;
-    int i;
-
-    PAD_STACK(0x18);
+    u8 _pad[12];
+    Vec3 sp54;
+    Vec3 v;
+    PAD_STACK(12);
 
     fighter = GET_FIGHTER(gobj);
     do_invalidate = false;
@@ -210,8 +231,6 @@ void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, bool arg2)
     }
 
     if (!fighter->invisible && !fighter->x221E_b5 && arg2) {
-        Mtx sp78;
-
         ftParts_800750C8(fighter, 1, 0);
         ftParts_800750C8(fighter, 4, 0);
         if (fighter->is_metal || fighter->x2226_b5 || fighter->x2227_b3) {
@@ -226,7 +245,8 @@ void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, bool arg2)
         fighter->x2227_b7 = true;
         fighter->x2228_b0 = false;
 
-        mtx = ftDrawCommon_8008051C(gobj, sp78);
+        mtx = ftDrawCommon_8008051C_inline(gobj, &sp54, &v, sp18, sp78);
+
         HSD_JObjDispAll(GET_JOBJ(gobj), mtx, HSD_GObj_80390EB8(arg1), 0);
         if (ftData_UnkMtxFunc0[fighter->kind] != NULL) {
             ftData_UnkMtxFunc0[fighter->kind](gobj, arg1, mtx);
@@ -244,16 +264,15 @@ void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, bool arg2)
 void ftDrawCommon_80080C28(HSD_GObj* gobj, int arg1)
 {
     Mtx sp70;
-
+    Mtx sp18;
     MtxPtr temp_r28;
     f32 temp_f31;
     f32 temp_f0;
-
     Fighter* fighter;
-
     MtxPtr phi_r28;
     HSD_JObj* temp_r27;
-
+    Vec3 sp54;
+    Vec3 v;
     PAD_STACK(4);
 
     fighter = GET_FIGHTER(gobj);
@@ -267,14 +286,12 @@ void ftDrawCommon_80080C28(HSD_GObj* gobj, int arg1)
                 ftParts_800750C8(fighter, 1, 1);
             }
 
-            phi_r28 = NULL;
-
             fighter->x2223_b2 = 0;
             fighter->x2223_b3 = 0;
             fighter->x2227_b7 = 0;
             fighter->x2228_b0 = 1;
-
-            phi_r28 = ftDrawCommon_8008051C(gobj, sp70);
+            phi_r28 =
+                ftDrawCommon_8008051C_inline(gobj, &sp54, &v, sp18, sp70);
 
             temp_r27 = GET_JOBJ(gobj);
             HSD_JObjDispAll(temp_r27, phi_r28, HSD_GObj_80390EB8(arg1), 0);

@@ -76,7 +76,7 @@ void grTganon_UnkStage0_OnLoad(void)
 
 void grTganon_UnkStage0_OnStart(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grTGanon_8022477C(void)

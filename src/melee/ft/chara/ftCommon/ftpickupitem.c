@@ -83,6 +83,11 @@ bool ftpickupitem_80094150(Fighter_GObj* gobj, Item_GObj* item_gobj)
     return false;
 }
 
+inline itPickup* ftpickupitem_800942A0_inline(Fighter* fp)
+{
+    return &fp->x294_itPickup;
+}
+
 /// Find item in pickup range?
 Item_GObj* ftpickupitem_800942A0(Fighter_GObj* gobj, u32 flags)
 {
@@ -91,7 +96,7 @@ Item_GObj* ftpickupitem_800942A0(Fighter_GObj* gobj, u32 flags)
     Vec4* offset0;
 
     fp = GET_FIGHTER(gobj);
-    pickup = &fp->x294_itPickup;
+    pickup = ftpickupitem_800942A0_inline(fp);
     offset0 = fp->ground_or_air == GA_Ground ? &pickup->gr_light_offset
                                              : &pickup->air_light_offset;
     if (ftCo_800A2040(fp) && (signed) fp->x1A88.xC == 28) {
@@ -153,10 +158,7 @@ Item_GObj* ftpickupitem_800942A0(Fighter_GObj* gobj, u32 flags)
 bool ftpickupitem_8009447C(Fighter_GObj* gobj, Item_GObj* item_gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (item_gobj == NULL) {
-        OSReport("ftGetImmItem item_gobj is NULL!!\n");
-        __assert(__FILE__, 174, "item_gobj");
-    }
+    HSD_ASSERTREPORT(174, item_gobj, "ftGetImmItem item_gobj is NULL!!\n");
     if (it_8026B30C(item_gobj) == 5) {
         switch (itGetKind(item_gobj)) {
         case It_Kind_Heart:
@@ -346,10 +348,7 @@ void ftpickupitem_80094B6C(Fighter_GObj* gobj, Item_GObj* item_gobj)
     Vec3 vec;
     Fighter* fp = gobj->user_data;
     PAD_STACK(4);
-    if (item_gobj == NULL) {
-        OSReport("ftGetImmItem item_gobj is NULL!!\n");
-        __assert(__FILE__, 399, "item_gobj");
-    }
+    HSD_ASSERTREPORT(399, item_gobj, "ftGetImmItem item_gobj is NULL!!\n");
     if (it_8026B30C(item_gobj) == 5) {
         switch (itGetKind(item_gobj)) {
         case It_Kind_Heart:

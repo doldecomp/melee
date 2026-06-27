@@ -17,7 +17,7 @@
 #include <dolphin/mtx.h>
 
 /* 00F9F8 */ void lb_8000F9F8(HSD_JObj* jobj);
-/* 00FA94 */ UNK_RET lb_8000FA94(UNK_PARAMS);
+/* 00FA94 */ void lb_8000FA94(void);
 /* 00FCDC */ void lb_8000FCDC(void);
 /* 00FD18 */ void lb_8000FD18(DynamicsDesc*);
 /* 00FD48 */ void lb_8000FD48(HSD_JObj*, DynamicsDesc*, size_t);
@@ -43,7 +43,7 @@
 /* 0122C8 */ void
 lb_800122C8(HSD_ImageDesc* image_desc, u16 origx, u16 origy,
             bool clear); ///< #HSD_ImageDescCopyFromEFB wrapper
-/* 0122F0 */ UNK_RET lb_800122F0(UNK_PARAMS);
+/* 0122F0 */ void lb_800122F0(HSD_ImageDesc*, GXTexObj*, f32);
 /* 01271C */ void lb_8001271C(GXTexObj*, float, float, float, float, float,
                               float);
 /* 01285C */ void lb_8001285C(HSD_ImageDesc*, GXTexObj*);
@@ -51,9 +51,10 @@ lb_800122C8(HSD_ImageDesc* image_desc, u16 origx, u16 origy,
                               float, float);
 /* 013614 */ void fn_80013614(HSD_GObj*);
 /* 0138AC */ void fn_800138AC(void* ptr); ///< #HSD_Free wrapper
-/* 0138CC */ void lb_800138CC(HSD_GObj* gobj, int arg1);
+/* 0138CC */ void lb_800138CC(HSD_GObj* gobj, HSD_GObjEvent arg1);
 /* 0138D8 */ void lb_800138D8(HSD_GObj* gobj, s8 arg1);
-/* 0138EC */ UNK_RET lb_800138EC(UNK_PARAMS);
+/* 0138EC */ void lb_800138EC(s32 arg0, GObj_RenderFunc render_func, u32 arg2,
+                              s8 arg3, f32 x, f32 y, f32 w, f32 h);
 /* 013B14 */ HSD_CObj* lb_80013B14(HSD_CameraDescPerspective*);
 /* 013C18 */ bool lb_80013C18(ColorOverlay*);
 /* 013D68 */ bool lb_80013D68(ColorOverlay*);
@@ -66,7 +67,7 @@ lb_800122C8(HSD_ImageDesc* image_desc, u16 origx, u16 origy,
 /* 014498 */ void lb_80014498(ColorOverlay*);
 /* 0144C8 */ bool lb_800144C8(ColorOverlay*, struct Fighter_804D653C_t*, int,
                               int);
-/* 014534 */ UNK_RET lb_80014534(UNK_PARAMS);
+/* 014534 */ void lb_80014534(void);
 /* 014574 */ void lb_80014574(u8, int, int, int);
 /* 0145C0 */ void lb_800145C0(u8 slot); ///< Reset pad rumble
 /* 0145F4 */ void lb_800145F4(void);

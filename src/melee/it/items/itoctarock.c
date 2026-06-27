@@ -9,8 +9,12 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/it_3F14.h"
 #include "it/item.h"
 #include "it/items/itoctarockstone.h"
+#include "it/ithitbox.h"
+#include "it/itmaplib.h"
+#include "it/itzako.h"
 #include "lb/lb_00B0.h"
 #include "mp/mpcoll.h"
 #include "sysdolphin/baselib/random.h"
@@ -106,7 +110,7 @@ bool it_802E4B00(Item_GObj* gobj)
         it_80275474(gobj);
         it_8027CE44(gobj);
         Camera_80030E44(2, &ip->pos);
-        if (HSD_Randf() < it_804D6D40[2]) {
+        if (HSD_Randf() < it_804D6D40->x8) {
             it_802E58A0(gobj);
         } else {
             it_802E57D4(gobj);

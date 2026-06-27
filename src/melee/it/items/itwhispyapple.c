@@ -6,7 +6,10 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/it_3F14.h"
 #include "it/item.h"
+#include "it/ithitbox.h"
+#include "it/itmaplib.h"
 #include "lb/lb_00F9.h"
 #include "MSL/math.h"
 
@@ -72,13 +75,13 @@ static bool itWhispyapple_UnkMotion0_Anim_inline(Item_GObj* gobj)
     HSD_JObj* child = HSD_JObjGetChild(jobj);
     ip->xD44_lifeTimer -= 1.0f;
     if (ip->msid == 7) {
-        HSD_JObjSetFlagsAll(child, 0x10);
+        HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
     } else if ((ip->xD44_lifeTimer <= it_804D6D28->x34) ||
                (ABS(ip->pos.z) > 1))
     {
         it_802728C8(gobj);
     } else {
-        HSD_JObjClearFlagsAll(child, 0x10);
+        HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
     }
     if (ip->xD44_lifeTimer <= 0.0f) {
         return true;
@@ -273,7 +276,7 @@ void it_802EEA08(Item_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
     HSD_JObj* child = HSD_JObjGetChild(jobj);
-    HSD_JObjClearFlagsAll(child, 0x10);
+    HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
     Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
 }
 
@@ -287,17 +290,16 @@ void itWhispyapple_UnkMotion3_Phys(Item_GObj* gobj) {}
 void it_802EEA70(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-    HSD_JObj* child = HSD_JObjGetChild(jobj);
-    Vec3 vec = { 0, 0, 0 };
+    HSD_JObj* child = HSD_JObjGetChild(GET_JOBJ(gobj));
+    Vec3 pos = { 0.0f, 0.0f, 0.0f };
 
     it_8026B390(gobj);
-    HSD_JObjClearFlagsAll(child, 0x10);
+    HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
     ip->x40_vel.z = 0.0f;
     ip->x40_vel.y = 0.0f;
     ip->pos.z = 0.0f;
-    it_8027429C(gobj, &vec);
+    it_8027429C(gobj, &pos);
 }
 
 void it_802EEB28(Item_GObj* gobj)
@@ -308,7 +310,7 @@ void it_802EEB28(Item_GObj* gobj)
     PAD_STACK(8);
 
     it_8026B390(gobj);
-    HSD_JObjClearFlagsAll(child, 0x10);
+    HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
     Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
     ip->x40_vel.z = 0.0f;
     ip->pos.z = 0.0f;
@@ -339,7 +341,7 @@ void it_802EED00(Item_GObj* gobj)
     Vec3 pos;
 
     it_8026B3A8(gobj);
-    HSD_JObjSetFlagsAll(jobj, 0x10);
+    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     it_8026BD24(gobj);
     it_80275158(gobj, 20.0f);
     it_8026BDB4(gobj);

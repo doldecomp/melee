@@ -39,25 +39,15 @@ enum WarnCommonJoints {
 struct MnDataDelData {
     AnimLoopSettings x0;
     AnimLoopSettings xC;
-    AnimLoopSettings x18;
-    AnimLoopSettings x24;
-    AnimLoopSettings x30;
-    s32 x3C;
-    s32 x40;
-    s32 x44;
-    s32 x48;
-    s32 x4C;
-    s32 x50;
-    s32 x54;
-    s16 x58;
-    s16 x5A;
-    s16 x5C;
-    s16 x5E;
-    s16 x60;
-    s16 x62;
-    f32 x64;
-    f32 x68;
-    f32 x6C;
+};
+
+struct MnDataDelGObjUserData {
+    /* +00 */ u8 x0;
+    /* +01 */ u8 x1;
+    /* +02 */ u8 x2;
+    /* +03 */ u8 x3[6];
+    /* +0C */ HSD_Text* xC;
+    /* +10 */ HSD_JObj* x10[8];
 };
 
 static inline void JObj_GetChildAtIdx(HSD_JObj* parent, HSD_JObj** child,
@@ -83,10 +73,22 @@ static inline bool Anim_IsFrameInRange(float frame, AnimLoopSettings* settings)
 
 extern HSD_GObj* mnDataDel_804D6C68;
 extern HSD_Text* mnDataDel_804D6C6C;
-static struct MnDataDelData mnDataDel_803EF870;
+static struct MnDataDelData mnDataDel_803EF870 = {
+    { 0, 19, -0.1 },
+    { 20, 29, -0.1 },
+};
+static AnimLoopSettings mnDataDel_803EF888 = { 0, 5, -0.1F };
+static AnimLoopSettings mnDataDel_803EF894 = { 0, 0, -0.1F };
 static AnimLoopSettings mnDataDel_803EF8A0 = {
     0.0f, 9.0f, -0.1f
 }; /// mnDataDel_803EF870[4]
+static u32 mnDataDel_803EF8AC[] = { 1, 2, 3, 4, 5, 6, 7 };
+static u16 mnDataDel_803EF8C8[] = {
+    0xC0, 0xC1, 0xC2, 0xC3, 0xC4, 0xC6,
+};
+static Vec3 lbl_803EF8D4 = { -5.5F, -2.8F, 23 };
+static StaticModelDesc mnDataDel_804A0918;
+static StaticModelDesc mnDataDel_804A0928;
 static StaticModelDesc mnDataDel_804A0938;
 
 #endif

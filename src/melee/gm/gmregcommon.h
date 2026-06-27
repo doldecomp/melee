@@ -9,4 +9,6 @@ int gm_8017BE84(u32 arg0);
 int gm_8017BE8C(s8*);
 void gmRegSetupEnemyColorTable(s8 ckind, u8 color, s8* ckinds, u8* colors);
 
+extern u8 lbl_803D79F0[];
+
 #endif

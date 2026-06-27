@@ -17,7 +17,7 @@ void lbRefract_80022560(void);
 /// @brief Reset TEV and indirect texture stages.
 void lbRefract_800225D4(void);
 s32 lbRefract_PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc);
-void lbRefract_80022998(HSD_MObj*, u32 rendermode, s8);
+void lbRefract_80022998(HSD_MObj*, u32 rendermode, s32);
 /// @brief Increment refraction effect user count.
 void lbRefract_80022BB8(void);
 /// @brief Decrement refraction effect user count.

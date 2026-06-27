@@ -5,12 +5,12 @@
 #include "ft/forward.h"
 
 #include "ft/ft_0877.h"
-#include "ft/ft_0D31.h"
+#include "ft/ft_0D4D.h"
 #include "ft/ftdata.h"
 #include "ft/ftdemo.h"
 #include "ft/ftlib.h"
 #include "ft/types.h"
-#include "ftKirby/ftKb_Init.h"
+#include "ftKirby/ftkirby.h"
 #include "gm/gm_unsplit.h"
 #include "if/ifstatus.h"
 #include "lb/lbarchive.h"
@@ -97,8 +97,7 @@ static inline bool hasExtraFighterId(ftMapping* data)
 static inline void Player_CheckSlot(int slot)
 {
     if (slot < 0 || !(slot < PL_SLOT_MAX)) {
-        OSReport("cant get player struct! %d\n", slot);
-        __assert(__FILE__, 102, "0");
+        HSD_ASSERTREPORT(102, 0, "cant get player struct! %d\n", slot);
     }
 }
 
@@ -1815,7 +1814,7 @@ void Player_SetUnk45(s32 slot, int unk45)
     player->unk45 = unk45;
 }
 
-u8 Player_GetUnk45(s32 slot)
+u32 Player_GetUnk45(s32 slot)
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);

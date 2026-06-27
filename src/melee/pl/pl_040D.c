@@ -53,7 +53,7 @@ void pl_80040ED4(int slot, int arg1, int arg2, int arg3, int arg4, f32 arg5)
     }
 }
 
-void pl_80040FBC(int slot, UNK_T unused, int arg2, int arg3, int arg4)
+void pl_80040FBC(int slot, int unused, int arg2, int arg3, int arg4)
 {
     pl_StaleMoveTableExt_t* temp_r3;
     bool var_r0;
@@ -91,7 +91,7 @@ void pl_80040FBC(int slot, UNK_T unused, int arg2, int arg3, int arg4)
     }
 }
 
-void pl_800410F4(int slot, UNK_T unused, int arg2, int arg3, int arg4)
+void pl_800410F4(int slot, int unused, int arg2, int arg3, int arg4)
 {
     struct pl_x5EC_t* temp_r3;
 

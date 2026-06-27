@@ -11,7 +11,7 @@
 /* 28D090 */ void it_8028D090(Item_GObj*);
 /* 28D100 */ void it_8028D100(Item_GObj* gobj);
 /* 28D26C */ void it_8028D26C(Item_GObj* gobj);
-/* 28D390 */ s32 it_8028D390(Item_GObj* gobj);
+/* 28D390 */ void it_8028D390(Item_GObj* gobj);
 /* 28D3B8 */ void it_8028D3B8(Item_GObj* gobj);
 /* 28D4A8 */ void fn_8028D4A8(Item_GObj* gobj);
 /* 28D4E4 */ void it_8028D4E4(Item_GObj* gobj);

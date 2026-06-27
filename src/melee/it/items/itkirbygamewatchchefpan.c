@@ -1,20 +1,17 @@
 #include "itkirbygamewatchchefpan.h"
 
+#include "ftKirby/ftkirbyspecialgamewatch.h"
+#include "it/itzako.h"
+
 #include <melee/db/db.h>
-#include <melee/ft/chara/ftKirby/ftKb_Init.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
-#include <melee/it/it_2725.h>
 #include <melee/it/item.h>
+#include <melee/it/itzako.h>
 #include <melee/it/types.h>
 
 ItemStateTable it_803F7958[] = {
-    {
-        -1,
-        itKirbygamewatchchefpan_UnkMotion0_Anim,
-        NULL,
-        NULL,
-    },
+    { -1, itKirbygamewatchchefpan_UnkMotion0_Anim, NULL, NULL },
 };
 
 Item_GObj* it_802C74D8(HSD_GObj* parent, Vec3* pos, Fighter_Part part,

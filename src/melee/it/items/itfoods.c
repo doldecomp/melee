@@ -145,7 +145,7 @@ void itFoods_Logic18_PickedUp(Item_GObj* gobj)
 {
     HSD_JObj* jobj = HSD_GObjGetHSDObj(gobj);
     HSD_JObj* child = HSD_JObjGetChild(jobj);
-    HSD_JObjClearFlagsAll(child, 0x10U);
+    HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
 }
 

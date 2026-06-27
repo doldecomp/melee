@@ -138,8 +138,8 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         } else {
             f32_1 = -*va_arg(vlist, f32*);
         }
-        ret_obj =
-            efLib_CreateGenerator_Translate_FacingDir(0x14B, &translate, f32_1);
+        ret_obj = efLib_CreateGenerator_Translate_FacingDir(0x14B, &translate,
+                                                            f32_1);
         break;
     case 0x3F3:
         ret_obj = efLib_CreateGenerator(0xB, va_arg(vlist, Vec3*));
@@ -156,8 +156,9 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             } else {
                 rot_y = M_PI_2;
             }
+            f32_1 = rot_y;
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationY(jobj_1, rot_y);
+            HSD_JObjSetRotationY(jobj_1, f32_1);
         }
         break;
     case 0x3F6:
@@ -175,8 +176,9 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             } else {
                 rot_y = M_PI_2;
             }
+            f32_1 = rot_y;
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationY(jobj_1, rot_y);
+            HSD_JObjSetRotationY(jobj_1, f32_1);
             f32_2 = *va_arg(vlist, f32*);
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
             HSD_JObjSetRotationZ(jobj_1, f32_2);
@@ -191,8 +193,9 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             } else {
                 rot_y = M_PI_2;
             }
+            f32_1 = rot_y;
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationY(jobj_1, rot_y);
+            HSD_JObjSetRotationY(jobj_1, f32_1);
             f32_2 = *va_arg(vlist, f32*);
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
             HSD_JObjSetRotationZ(jobj_1, f32_2);
@@ -207,8 +210,9 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             } else {
                 rot_y = M_PI_2;
             }
+            f32_1 = rot_y;
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationY(jobj_1, rot_y);
+            HSD_JObjSetRotationY(jobj_1, f32_1);
             f32_2 = *va_arg(vlist, f32*);
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
             HSD_JObjSetRotationZ(jobj_1, f32_2);
@@ -241,8 +245,9 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             } else {
                 rot_y = M_PI_2;
             }
+            f32_1 = rot_y;
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationY(jobj_1, rot_y);
+            HSD_JObjSetRotationY(jobj_1, f32_1);
             f32_2 = *va_arg(vlist, f32*);
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
             HSD_JObjSetRotationZ(jobj_1, f32_2);
@@ -252,8 +257,8 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         va_vec3 = va_arg(vlist, Vec3*);
         translate = *va_vec3;
         f32_1 = *va_arg(vlist, f32*);
-        ret_obj =
-            efLib_CreateGenerator_Translate_FacingDir(0x107, &translate, f32_1);
+        ret_obj = efLib_CreateGenerator_Translate_FacingDir(0x107, &translate,
+                                                            f32_1);
         break;
     case 0x3FF:
         ret_obj = efLib_Create_Attach_Pos(5, gobj, va_arg(vlist, Vec3*));
@@ -264,8 +269,9 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             } else {
                 rot_y = M_PI_2;
             }
+            f32_1 = rot_y;
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationY(jobj_1, rot_y);
+            HSD_JObjSetRotationY(jobj_1, f32_1);
             f32_2 = *va_arg(vlist, f32*);
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
             HSD_JObjSetRotationZ(jobj_1, f32_2);
@@ -669,8 +675,8 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         va_vec3 = va_arg(vlist, Vec3*);
         translate = *va_vec3;
         f32_1 = *va_arg(vlist, f32*);
-        ret_obj =
-            efLib_CreateGenerator_Translate_FacingDir(0x13C, &translate, f32_1);
+        ret_obj = efLib_CreateGenerator_Translate_FacingDir(0x13C, &translate,
+                                                            f32_1);
         break;
     case 0x42F:
         ret_obj = efLib_Create_Attach_Pos(0x20, gobj, va_arg(vlist, Vec3*));
@@ -680,16 +686,17 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             } else {
                 rot_y = M_PI_2;
             }
+            f32_1 = rot_y;
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationY(jobj_1, rot_y);
+            HSD_JObjSetRotationY(jobj_1, f32_1);
         }
         break;
     case 0x430:
         va_vec3 = va_arg(vlist, Vec3*);
         translate = *va_vec3;
         f32_1 = *va_arg(vlist, f32*);
-        ret_obj =
-            efLib_CreateGenerator_Translate_FacingDir(0x140, &translate, f32_1);
+        ret_obj = efLib_CreateGenerator_Translate_FacingDir(0x140, &translate,
+                                                            f32_1);
         break;
     case 0x431:
         ret_obj = efLib_Create_Attach_Pos(0x21, gobj, va_arg(vlist, Vec3*));
@@ -699,8 +706,9 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             } else {
                 rot_y = M_PI_2;
             }
+            f32_1 = rot_y;
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationY(jobj_1, rot_y);
+            HSD_JObjSetRotationY(jobj_1, f32_1);
         }
         break;
     case 0x432:
@@ -805,8 +813,8 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         va_vec3 = va_arg(vlist, Vec3*);
         translate = *va_vec3;
         f32_1 = *va_arg(vlist, f32*);
-        ret_obj =
-            efLib_CreateGenerator_Translate_FacingDir(0x1D8, &translate, f32_1);
+        ret_obj = efLib_CreateGenerator_Translate_FacingDir(0x1D8, &translate,
+                                                            f32_1);
         break;
     case 0x441:
         ret_obj = efLib_CreateGenerator(0x1FB, va_arg(vlist, Vec3*));
@@ -1124,7 +1132,8 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
     while (efLib_AnimCount != 0) {
         count = efLib_AnimCount - 1;
         efLib_AnimCount = count;
-        HSD_JObjAnimAll((efLib_AnimQueue[count].gobj));
+        HSD_JObjAnimAll(
+            ((EF_ParamEntry*) (((u32*) efLib_AnimQueue) + count))->gobj);
     }
 #if 1
 #else
@@ -1245,7 +1254,8 @@ void efAsync_LoadSync(int idx)
     }
 }
 
-void efAsync_QueueProcessDeferred(HSD_GObj* gobj, EF_QueuedEffect* queued_effect)
+void efAsync_QueueProcessDeferred(HSD_GObj* gobj,
+                                  EF_QueuedEffect* queued_effect)
 {
     Vec3 sp4C;
     Vec3 sp40;

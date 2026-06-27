@@ -1,5 +1,14 @@
 repos:
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: v18.1.8
+  rev: v22.1.5
   hooks:
   - id: clang-format
+    types_or: [c]
+- repo: local
+  hooks:
+    - id: style-check
+      name: style-check
+      entry: python tools/check/main.py --fix --quiet
+      language: system
+      pass_filenames: true
+      types_or: [c]

@@ -22,6 +22,8 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 
+#include "mp/forward.h"
+
 #include <math.h>
 #include <math_ppc.h>
 #include <trigf.h>

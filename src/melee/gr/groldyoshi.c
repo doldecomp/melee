@@ -87,7 +87,7 @@ void grOldYoshi_8020E824(void) {}
 
 void grOldYoshi_8020E828(void)
 {
-    grZakoGenerator_801CAE04(false);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grOldYoshi_8020E84C(void)
@@ -207,15 +207,14 @@ void grOldYoshi_8020EAF4(Ground_GObj* arg) {}
 void grOldYoshi_8020EAF8(Ground_GObj* arg) {}
 
 s16 grOy_803E6574[] = { 0, 1, 1, 5, 2, 9 };
-/// #grOldYoshi_8020EAFC
-void grOldYoshi_8020EAFC(Ground_GObj* arg)
+
+void grOldYoshi_8020EAFC(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(arg);
-    HSD_JObj* jobj = arg->hsd_obj;
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
     int i;
-    PAD_STACK(4);
     Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(arg, gp->map_id, 0);
+    grAnime_801C8138(gobj, gp->map_id, 0);
     for (i = 0; i < 3; i++) {
         gp->gv.oldyoshicloud.cloud[i].xC4_0123 = 0;
         gp->gv.oldyoshicloud.cloud[i].xC4_4 = 0;
@@ -223,7 +222,7 @@ void grOldYoshi_8020EAFC(Ground_GObj* arg)
         gp->gv.oldyoshicloud.cloud[i].xD4 = 0.0f;
         gp->gv.oldyoshicloud.cloud[i].xD0 = 0.0f;
         gp->gv.oldyoshicloud.cloud[i].xC8 =
-            Ground_801C3FA4(arg, grOy_803E6574[i * 2 + 1]);
+            Ground_801C3FA4(gobj, grOy_803E6574[i * 2 + 1]);
         gp->gv.oldyoshicloud.cloud[i].xCC =
             HSD_JObjGetTranslationY(gp->gv.oldyoshicloud.cloud[i].xC8);
         mpJointSetCb1(grOy_803E6574[i * 2], gp, fn_8020F2A8);
@@ -242,7 +241,7 @@ void grOldYoshi_8020EC10(Ground_GObj* arg)
     int i = 0;
     Ground* gp = arg->user_data;
     HSD_JObj* jobj = arg->user_data;
-    do {
+    for (i = 0; i < 3; i++) {
         // int test = HSD_Randi(3);
         switch (gp->gv.oldyoshicloud.cloud[i].xC4_0123) {
         case 0:
@@ -288,7 +287,8 @@ void grOldYoshi_8020EC10(Ground_GObj* arg)
             if (grAnime_801C83D0(arg, grOy_803E6574[i * 2 + 1], 2)) {
                 gp->gv.oldyoshicloud.cloud[i].xC4_0123 = 2;
                 mpLib_80057BC0(grOy_803E6574[i * 2]);
-                HSD_JObjSetFlagsAll(gp->gv.oldyoshicloud.cloud[i].xC8, 16);
+                HSD_JObjSetFlagsAll(gp->gv.oldyoshicloud.cloud[i].xC8,
+                                    JOBJ_HIDDEN);
                 gp->gv.oldyoshicloud.cloud[i].xC4_567 = 0;
             }
             break;
@@ -304,7 +304,8 @@ void grOldYoshi_8020EC10(Ground_GObj* arg)
             break;
         case 3:
             if (gp->gv.oldyoshicloud.cloud[i].xC4_567 == 0) {
-                HSD_JObjClearFlagsAll(gp->gv.oldyoshicloud.cloud[i].xC8, 16);
+                HSD_JObjClearFlagsAll(gp->gv.oldyoshicloud.cloud[i].xC8,
+                                      JOBJ_HIDDEN);
             }
             if (gp->gv.oldyoshicloud.cloud[i].xC4_567 == grOy_804D6A88->x12) {
                 mpJointListAdd(grOy_803E6574[i * 2]);
@@ -320,8 +321,7 @@ void grOldYoshi_8020EC10(Ground_GObj* arg)
                               gp->gv.oldyoshicloud.cloud[i].xCC -
                                   gp->gv.oldyoshicloud.cloud[i].xD0);
         gp->gv.oldyoshicloud.cloud[i].xC4_4 = 0;
-        i++;
-    } while (i < 3);
+    }
     Ground_801C2FE0(arg);
     return;
 }
@@ -347,25 +347,20 @@ static inline s32 randi_between(s32 min, s32 max)
     //}
 }
 
-static inline int rand_inline(int a, int b)
+// For some reason, the normal GET_GROUND didn't work here
+inline Ground* grOldYoshi_8020EFCC_inline(Ground_GObj* arg0);
+inline Ground* grOldYoshi_8020EFCC_inline(Ground_GObj* arg0)
 {
-    if (a > b) {
-        return b + (a - b != 0 ? HSD_Randi(a - b) : 0);
-    } else if (a < b) {
-        return a + (b - a != 0 ? HSD_Randi(b - a) : 0);
-    } else {
-        return a;
-    }
+    return arg0->user_data;
 }
 
-/// #grOldYoshi_8020EFCC
 void grOldYoshi_8020EFCC(Ground_GObj* arg)
 {
     HSD_JObj* jobj = arg->hsd_obj;
-    Ground* gp = arg->user_data;
-    HSD_JObjSetFlagsAll(jobj, 0x10);
+    Ground* gp = grOldYoshi_8020EFCC_inline(arg);
+    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     gp->gv.oldyoshiguest.xC4 =
-        rand_inline(grOy_804D6A88->x16, grOy_804D6A88->x14);
+        rand_range(grOy_804D6A88->x16, grOy_804D6A88->x14);
     gp->gv.oldyoshiguest.xC6 = -1;
     gp->x11_flags.b012 = 2;
     // oldyoshiguest;
@@ -375,44 +370,47 @@ bool grOldYoshi_8020F080(Ground_GObj* arg)
 {
     return false;
 }
-const int grOy_803B83F0[5] = { 1, 2, 3, 4, 5 };
-/// #grOldYoshi_8020F088
+typedef struct grOy_803B83F0_t {
+    int x[5];
+} grOy_803B83F0_t;
+
+typedef struct grOy_803B83F0_Data {
+    grOy_803B83F0_t ids;
+    int pad;
+} grOy_803B83F0_Data;
+
+const grOy_803B83F0_Data grOy_803B83F0 = { { { 1, 2, 3, 4, 5 } }, 0 };
+
 void grOldYoshi_8020F088(Ground_GObj* arg)
 {
-    HSD_JObj* jobj = arg->hsd_obj;
     Ground* gp = arg->user_data;
-    s16 sVar5;
     float dVar9;
     float dVar10;
-    int local34[5];
     if (gp->gv.oldyoshiguest.xC6 == -1) {
+        s16 sVar5;
         sVar5 = gp->gv.oldyoshiguest.xC4;
         gp->gv.oldyoshiguest.xC4 = sVar5 - 1;
         if (sVar5 < 0) {
-            local34[0] = grOy_803B83F0[0];
-            local34[1] = grOy_803B83F0[1];
-            local34[2] = grOy_803B83F0[2];
-            local34[3] = grOy_803B83F0[3];
-            local34[4] = grOy_803B83F0[4];
-            gp->gv.oldyoshiguest.xC6 = local34[HSD_Randi(5)];
+            grOy_803B83F0_t local34 = grOy_803B83F0.ids;
+            PAD_STACK(8);
+            gp->gv.oldyoshiguest.xC6 = local34.x[HSD_Randi(5)];
         }
         grAnime_801C8138(arg, gp->map_id, 0);
         dVar10 = HSD_Randf();
-        jobj = arg->hsd_obj;
         dVar9 = grOy_804D6A88->x18 * (dVar10 * 2.0f - 1.0f);
-        HSD_JObjSetTranslateY(jobj, dVar9);
+        HSD_JObjSetTranslateY(arg->hsd_obj, dVar9);
     } else {
-        jobj = Ground_801C3FA4(arg, gp->gv.oldyoshiguest.xC6);
+        HSD_JObj* jobj = Ground_801C3FA4(arg, gp->gv.oldyoshiguest.xC6);
         if (jobj == NULL) {
             return;
         }
         if ((HSD_JObjGetFlags(jobj) & 0x10) != 0) {
-            HSD_JObjClearFlagsAll(jobj, 0x10);
+            HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         }
         if (grAnime_801C83D0(arg, 0, 7) != 0) {
-            HSD_JObjSetFlagsAll(jobj, 0x10);
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             gp->gv.oldyoshiguest.xC4 =
-                rand_inline(grOy_804D6A88->x16, grOy_804D6A88->x14);
+                rand_range(grOy_804D6A88->x16, grOy_804D6A88->x14);
             gp->gv.oldyoshiguest.xC6 = -1;
         }
     }
@@ -440,32 +438,18 @@ void fn_8020F2A8(Ground* gp, s32 param2, CollData* coll, s32 param4,
 }
 
 // Move related code from Context tab to here
-float grOldYoshi_8020F31C(float param1, float param2, float param3,
-                          float param4, float param5, float param6)
+static inline float grOldYoshi_8020F31C_inline(float param1, float param2,
+                                               float param3, float param4,
+                                               float distance)
 {
     float fVar1;
-    float fVar2;
-    float fVar3;
-    // fVar2 = param1;
-    if (param1 < 0.0f) {
-        fVar2 = -param1;
-    } else {
-        fVar2 = param1;
-    }
-    fVar3 = (fVar2 / param2);
-    // fVar2 = param1;
-    if (param1 < 0.0f) {
-        fVar2 = -param1;
-    } else {
-        fVar2 = param1;
-    }
+
     fVar1 = param4 - param3;
     if (fVar1 < 0.0f) {
         fVar1 = -fVar1;
     }
-    if (fVar3 * (-param2 * 0.5f * fVar3) + (fVar3 * fVar2) < fVar1 &&
-        ((param4 > param3 && param1 > 0.0f) ||
-         (param4 < param3 && param1 < 0.0f)))
+    if (fVar1 < distance && ((param4 > param3 && param1 > 0.0f) ||
+                             (param4 < param3 && param1 < 0.0f)))
     {
         if (param1 > 0.0f) {
             param1 = param1 - param2;
@@ -479,13 +463,37 @@ float grOldYoshi_8020F31C(float param1, float param2, float param3,
             param1 = param1 - param2;
         }
     }
+    return param1;
+}
+
+float grOldYoshi_8020F31C(float param1, float param2, float param3,
+                          float param4, float param5, float param6)
+{
+    float fVar2;
+    float fVar3;
+    float fVar4;
+    // fVar2 = param1;
+    if (param1 < 0.0f) {
+        fVar2 = -param1;
+    } else {
+        fVar2 = param1;
+    }
+    fVar3 = (fVar2 / param2);
+    // fVar2 = param1;
+    if (param1 < 0.0f) {
+        fVar2 = -param1;
+    } else {
+        fVar2 = param1;
+    }
+    fVar4 = fVar3 * (-param2 * 0.5f * fVar3) + (fVar3 * fVar2);
+    param1 = grOldYoshi_8020F31C_inline(param1, param2, param3, param4, fVar4);
     if (param1 > param5) {
         return param5;
     }
-    if (param1 > param6) {
-        return param1;
+    if (param1 < param6) {
+        return param6;
     }
-    return param6;
+    return param1;
 }
 
 DynamicsDesc* grOldYoshi_8020F404(enum_t arg)

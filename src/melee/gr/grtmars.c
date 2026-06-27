@@ -98,7 +98,7 @@ static void grTmars_UnkStage0_OnLoad(void)
 
 static void grTmars_UnkStage0_OnStart(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 static bool grTMars_80221F90(void)

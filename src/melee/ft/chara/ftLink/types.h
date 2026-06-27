@@ -41,10 +41,10 @@ struct ftLk_DatAttrs {
     /* +54 */ float attackairlw_hit_anim_frame_end;
     /* +58 */ u32 attackairlw_anim_flags[3];
     /* +64 */ struct SwordAttrs x64;
-    /* +84 */ UNK_T x84;
+    /* +84 */ s32 x84;
     /* +88 */ s32 x88;
-    /* +8C */ UNK_T x8C;
-    /* +90 */ UNK_T x90;
+    /* +8C */ s32 x8C;
+    /* +90 */ s32 x90;
     /* +94 */ UNK_T x94;
     /* +98 */ s32 x98;
     /* +9C */ UNK_T x9C;

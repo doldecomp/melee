@@ -1,71 +1,28 @@
 #include "itsamusmissile.h"
 
-#include "baselib/jobj.h"
-#include "baselib/mtx.h"
 #include "db/db.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ftSamus/ftSs_SpecialN.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/itCharItems.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "lb/lbvector.h"
 
-#include <math.h>
 #include <trigf.h>
+#include <baselib/mtx.h>
 
-bool itSamusmissile_UnkMotion0_Coll(Item_GObj* gobj)
-{
-    it_8026E71C(gobj, it_802B701C);
-    return false;
-}
-
-bool itSamusmissile_UnkMotion1_Coll(Item_GObj* gobj)
-{
-    it_8026E71C(gobj, it_802B70A0);
-    return false;
-}
-
-bool itSamusmissile_UnkMotion3_Anim(Item_GObj* gobj)
-{
-    return it_802751D8(gobj);
-}
-
-void it_802B63F8(HSD_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    itSamusMissileAttributes* attrs =
-        ip->xC4_article_data->x4_specialAttributes;
-
-    if (ip->xD44_lifeTimer > attrs->x4 - attrs->x8) {
-        ip->xDAC_itcmd_var0 = 1;
-    } else {
-        ip->xDAC_itcmd_var0 = 0;
-    }
-
-    if (ip->xD44_lifeTimer == attrs->x4 - attrs->x8 &&
-        ip->xDD4_itemVar.samusmissile.is_smash_missile == 0)
-    {
-        efLib_DestroyAll(gobj);
-    }
-
-    if (ip->xD44_lifeTimer <= (attrs->x24 - attrs->x28)) {
-        ip->xDB0_itcmd_var1 = 1;
-    }
-
-    if (ip->xD44_lifeTimer <= 0.0f) {
-        if (ip->xDD4_itemVar.samusmissile.is_smash_missile == 0) {
-            it_802B701C(gobj);
-        } else {
-            it_802B70A0(gobj);
-        }
-    } else {
-        --ip->xD44_lifeTimer;
-    }
-}
+ItemStateTable it_803F7340[] = {
+    { 0, itSamusmissile_UnkMotion0_Anim, itSamusmissile_UnkMotion0_Phys,
+      itSamusmissile_UnkMotion0_Coll },
+    { 1, itSamusmissile_UnkMotion1_Anim, itSamusmissile_UnkMotion1_Phys,
+      itSamusmissile_UnkMotion1_Coll },
+    { 2, itSamusmissile_UnkMotion3_Anim, NULL, NULL },
+    { 3, itSamusmissile_UnkMotion3_Anim, NULL, NULL },
+};
 
 Item_GObj* it_802B62D0(Item_GObj* gobj, Vec3* pos, int arg2, f32 facing_dir)
 {
@@ -110,7 +67,63 @@ Item_GObj* it_802B62D0(Item_GObj* gobj, Vec3* pos, int arg2, f32 facing_dir)
     return NULL;
 }
 
-Item_GObj* it_802B64FC(Item_GObj* gobj)
+void it_802B63F8(HSD_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itSamusMissileAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
+
+    if (ip->xD44_lifeTimer > attrs->x4 - attrs->x8) {
+        ip->xDAC_itcmd_var0 = 1;
+    } else {
+        ip->xDAC_itcmd_var0 = 0;
+    }
+
+    if (ip->xD44_lifeTimer == attrs->x4 - attrs->x8 &&
+        ip->xDD4_itemVar.samusmissile.is_smash_missile == 0)
+    {
+        efLib_DestroyAll(gobj);
+    }
+
+    if (ip->xD44_lifeTimer <= (attrs->x24 - attrs->x28)) {
+        ip->xDB0_itcmd_var1 = 1;
+    }
+
+    if (ip->xD44_lifeTimer <= 0.0f) {
+        if (ip->xDD4_itemVar.samusmissile.is_smash_missile == 0) {
+            it_802B701C(gobj);
+        } else {
+            it_802B70A0(gobj);
+        }
+    } else {
+        --ip->xD44_lifeTimer;
+    }
+}
+
+static inline void itSamusMissile_ClampTurn(Item* ip,
+                                            itSamusMissileAttributes* sa)
+{
+    f32 turn = ip->xDD4_itemVar.samusmissile.x8;
+    f32 abs_turn;
+    f32 max_turn;
+
+    if (turn < 0.0f) {
+        abs_turn = -turn;
+    } else {
+        abs_turn = turn;
+    }
+
+    max_turn = sa->x1C;
+    if (abs_turn > max_turn) {
+        if (turn > 0.0f) {
+            ip->xDD4_itemVar.samusmissile.x8 = max_turn;
+        } else {
+            ip->xDD4_itemVar.samusmissile.x8 = -max_turn;
+        }
+    }
+}
+
+void it_802B64FC(Item_GObj* gobj)
 {
     Vec3 vec3;
     Vec3 vec2;
@@ -119,8 +132,6 @@ Item_GObj* it_802B64FC(Item_GObj* gobj)
     HSD_GObj* temp_r3;
     HSD_GObj* temp_ret;
     Item* ip;
-    f32 temp_f2;
-    f32 var_f0;
     f32 var_f1;
     itSamusMissileAttributes* sa;
 
@@ -131,21 +142,19 @@ Item_GObj* it_802B64FC(Item_GObj* gobj)
         goto block_4;
     }
     temp_ret = it_8026C258(&ip->pos, ip->facing_dir);
-    // var_f1 = M2C_BITWISE(f32, temp_ret);
     temp_r3 = temp_ret;
     if (temp_r3 == NULL) {
-        goto block_18;
+        goto block_17;
     }
     it_8026BB88(temp_r3, &vec3);
+    goto block_4;
+block_17:
+    return;
 block_4:
     var_f1 = 0.0f;
-    if (vec3.x != 0.0f) {
-        goto block_6;
+    if ((vec3.x == 0.0f) && (vec3.y == 0.0f)) {
+        return;
     }
-    if (vec3.y == 0.0f) {
-        goto block_18;
-    }
-block_6:
     vec2.x = ip->x40_vel.x;
     vec2.y = ip->x40_vel.y;
     vec2.z = 0.0f;
@@ -156,14 +165,12 @@ block_6:
     lbVector_NormalizeXY(&vec1);
     var_f1 = lbVector_AngleXY(&vec2, &vec1);
     if (var_f1 < sa->x20) {
-        goto block_18;
+        return;
     }
-    vec0.x = vec1.x;
-    vec0.y = vec1.y;
-    vec0.z = vec1.z;
+    vec0 = vec1;
     lbVector_Sub(&vec0, &vec2);
     if ((vec0.y > 0.001f)) {
-        ip->xDD4_itemVar.samusmissile.x8 -= M2C_FIELD(sa, f32*, 0x18);
+        ip->xDD4_itemVar.samusmissile.x8 -= sa->x18;
         goto block_11;
     }
     if (!(vec0.y < 0.001f)) {
@@ -171,30 +178,7 @@ block_6:
     }
     ip->xDD4_itemVar.samusmissile.x8 += sa->x18;
 block_11:
-    var_f1 = ip->xDD4_itemVar.samusmissile.x8;
-    if (!(var_f1 < 0.0f)) {
-        goto block_13;
-    }
-    var_f0 = -var_f1;
-    goto block_14;
-block_13:
-    var_f0 = var_f1;
-block_14:
-    temp_f2 = M2C_FIELD(sa, f32*, 0x1C);
-    if (!(var_f0 > temp_f2)) {
-        goto block_18;
-    }
-    if (!(var_f1 > 0.0f)) {
-        goto block_17;
-    }
-    ip->xDD4_itemVar.samusmissile.x8 = temp_f2;
-    return NULL;
-    // return M2C_BITWISE(Item_GObj*, var_f1);
-block_17:
-    ip->xDD4_itemVar.samusmissile.x8 = -temp_f2;
-block_18:
-    return NULL;
-    // return M2C_BITWISE(Item_GObj*, var_f1);
+    itSamusMissile_ClampTurn(ip, sa);
 }
 
 void* it_802B66A8(Item_GObj* gobj)
@@ -236,46 +220,60 @@ inline void isSamusmissile_MotionAnim(Item_GObj* gobj)
     }
 }
 
-s32 itSamusmissile_UnkMotion0_Anim(Item_GObj* gobj)
+bool itSamusmissile_UnkMotion0_Anim(Item_GObj* gobj)
 {
     isSamusmissile_MotionAnim(gobj);
     return false;
 }
 
-static void inlineA0(Item_GObj* gobj)
+static inline void inlineA0(Item_GObj* gobj, Vec3* vec)
 {
     Item* ip = GET_ITEM(gobj);
     itSamusMissileAttributes* sa1 = ip->xC4_article_data->x4_specialAttributes;
-    Vec3 vec;
-    vec.x = sa1->xC * ip->facing_dir;
-    vec.y = 0.0f;
-    vec.z = 0.0f;
-    lbVector_Rotate(&vec, 4,
+    vec->x = sa1->xC * ip->facing_dir;
+    vec->y = 0.0f;
+    vec->z = 0.0f;
+    lbVector_Rotate(vec, 4,
                     ip->xDD4_itemVar.samusmissile.x8 * -ip->facing_dir);
-    ip->x40_vel.x = vec.x;
-    ip->x40_vel.y = vec.y;
+    ip->x40_vel.x = vec->x;
+    ip->x40_vel.y = vec->y;
+}
+
+static inline void itSamusmissile_SetRotationX(Item_GObj* gobj)
+{
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* child = HSD_JObjGetChild(jobj);
+
+    HSD_JObjSetRotationX(child, ip->xDD4_itemVar.samusmissile.x8);
 }
 
 void itSamusmissile_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itSamusMissileAttributes* sa0 = ip->xC4_article_data->x4_specialAttributes;
+    Vec3 vec;
+    PAD_STACK(8);
     if (ip->xDAC_itcmd_var0 != 0) {
         it_802B64FC(gobj);
-        inlineA0(gobj);
-        HSD_JObjSetRotationX(HSD_JObjGetChild(GET_JOBJ(gobj)),
-                             GET_ITEM(gobj)->xDD4_itemVar.samusmissile.x8);
+        inlineA0(gobj, &vec);
+        itSamusmissile_SetRotationX(gobj);
     } else {
         if (VEC2_SQ_LEN(ip->x40_vel) > SQ(sa0->x14)) {
             ip->x40_vel.x *= sa0->x10;
             ip->x40_vel.y *= sa0->x10;
         }
-        HSD_JObjSetRotationX(HSD_JObjGetChild(GET_JOBJ(gobj)),
-                             GET_ITEM(gobj)->xDD4_itemVar.samusmissile.x8);
+        itSamusmissile_SetRotationX(gobj);
     }
 }
 
-void* it_802B6A60(Item_GObj* gobj)
+bool itSamusmissile_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    it_8026E71C(gobj, it_802B701C);
+    return false;
+}
+
+void it_802B6A60(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itSamusMissileAttributes* attrs;
@@ -292,10 +290,10 @@ void* it_802B6A60(Item_GObj* gobj)
     it_8026B3A8(gobj);
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
 
-    return efSync_Spawn(1156, gobj, itGetJObjGrandchild(gobj));
+    efSync_Spawn(1156, gobj, itGetJObjGrandchild(gobj));
 }
 
-s32 itSamusmissile_UnkMotion1_Anim(Item_GObj* gobj)
+bool itSamusmissile_UnkMotion1_Anim(Item_GObj* gobj)
 {
     isSamusmissile_MotionAnim(gobj);
     return false;
@@ -321,6 +319,12 @@ void itSamusmissile_UnkMotion1_Phys(Item_GObj* gobj)
             }
         }
     }
+}
+
+bool itSamusmissile_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    it_8026E71C(gobj, it_802B70A0);
+    return false;
 }
 
 bool it_2725_Logic52_DmgDealt(Item_GObj* gobj)
@@ -374,12 +378,14 @@ bool it_2725_Logic52_ShieldBounced(Item_GObj* arg0)
         {
             f32 temp_f1 = atan2f(ip->x40_vel.x, ip->x40_vel.y);
             f32 var_f31;
+            HSD_JObj* child;
             if (ip->facing_dir == +1.0f) {
-                var_f31 = temp_f1 - M_PI_2;
+                var_f31 = temp_f1 - M_PI_2_F;
             } else {
                 var_f31 = 270 * deg_to_rad - temp_f1;
             }
-            HSD_JObjSetRotationX(HSD_JObjGetChild(jobj), var_f31);
+            child = HSD_JObjGetChild(jobj);
+            HSD_JObjSetRotationX(child, var_f31);
         }
     }
     return false;
@@ -419,6 +425,11 @@ void it_802B701C(Item_GObj* gobj)
     efLib_DestroyAll(gobj);
     it_80272B40(gobj);
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+}
+
+bool itSamusmissile_UnkMotion3_Anim(Item_GObj* gobj)
+{
+    return it_802751D8(gobj);
 }
 
 void it_802B70A0(Item_GObj* gobj)

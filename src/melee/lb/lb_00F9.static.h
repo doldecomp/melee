@@ -39,6 +39,8 @@ struct CameraBlurData {
 /* 013BE4 */ static bool lb_80013BE4(ColorOverlay* arg);
 /* 013FF0 */ static bool lb_80013FF0(ColorOverlay* arg);
 /* 014234 */ static bool lb_80014234(ColorOverlay* arg);
+/* 4D3768 */ static GXColor lb_804D3768;
+/* 4D376C */ static GXColor lb_804D376C;
 /* 4D3770 */ static GXColor yellow;
 /* 4D63A0 */ static struct lb_804D63A0_t* lb_804D63A0;
 /* 4D63A4 */ static struct DynamicsData* cur_data;
@@ -46,6 +48,7 @@ struct CameraBlurData {
 /* 4D63AC */ static struct lb_80011A50_t* lb_804D63AC;
 /* 4D63B0 */ static struct lb_80011A50_t* lb_804D63B0;
 /* 4D63B4 */ static enum_t lb_804D63B4;
+/* 4D63B8 */ static u8 lb_804D63B8;
 /* 4D63C0 */ static struct Fighter_804D653C_t* lb_804D63C0;
 
 #endif

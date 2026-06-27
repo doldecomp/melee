@@ -6,9 +6,12 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/it_3F14.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
 #include "it/items/types.h"
+#include "it/ithitbox.h"
+#include "it/itzako.h"
 #include "it/types.h"
 #include "lb/lb_00B0.h"
 
@@ -121,18 +124,18 @@ Item_GObj* it_802E6AEC(Ground* arg0, int arg1, int arg2, HSD_JObj* arg3,
     if (item_gobj != NULL) {
         Item* item = GET_ITEM((HSD_GObj*) item_gobj);
         if (arg3 != 0) {
-            item->xDD4_itemVar.it_2E6A_1.x2 = 1;
-            item->xDD4_itemVar.it_2E6A_1.x4 = arg3;
+            item->xDD4_itemVar.yaku.x2 = 1;
+            item->xDD4_itemVar.yaku.x4 = arg3;
         } else if (pos != 0) {
-            item->xDD4_itemVar.it_2E6A_1.x2 = 2;
-            item->xDD4_itemVar.it_2E6A_1.x4_vec = *pos;
+            item->xDD4_itemVar.yaku.x2 = 2;
+            item->xDD4_itemVar.yaku.x4_vec = *pos;
         }
 
-        item->xDD4_itemVar.it_2E6A_1.x0 = arg1;
-        item->xDD4_itemVar.it_2E6A_1.x10 = arg0;
-        item->xDD4_itemVar.it_2E6A_1.x14 = arg6;
-        item->xDD4_itemVar.it_2E6A_1.x18 = arg7;
-        item->xDD4_itemVar.it_2E6A_1.x1C = arg8;
+        item->xDD4_itemVar.yaku.x0 = arg1;
+        item->xDD4_itemVar.yaku.x10 = arg0;
+        item->xDD4_itemVar.yaku.x14 = arg6;
+        item->xDD4_itemVar.yaku.x18 = arg7;
+        item->xDD4_itemVar.yaku.x1C = arg8;
         item_jobj = GET_JOBJ(item_gobj);
         sp30 = it_803B8730;
         HSD_JObjSetScale(item_jobj, &sp30);
@@ -157,16 +160,16 @@ void it_2E6A_UnkMotion19_Phys(HSD_GObj* item_gobj)
 
     item = GET_ITEM((HSD_GObj*) item_gobj);
     item_jobj = item_gobj->hsd_obj;
-    if (item->xDD4_itemVar.it_2E6A_1.x2 == 1) {
-        lb_8000B1CC(item->xDD4_itemVar.it_2E6A_1.x4, NULL, &sp24);
+    if (item->xDD4_itemVar.yaku.x2 == 1) {
+        lb_8000B1CC(item->xDD4_itemVar.yaku.x4, NULL, &sp24);
         item->pos = sp24;
-        jobj1 = item->xDD4_itemVar.it_2E6A_1.x4;
+        jobj1 = item->xDD4_itemVar.yaku.x4;
         HSD_JObjGetScale(jobj1, &sp24);
         HSD_JObjSetScale(item_jobj, &sp24);
-        jobj2 = item->xDD4_itemVar.it_2E6A_1.x4;
+        jobj2 = item->xDD4_itemVar.yaku.x4;
         HSD_JObjGetRotation(jobj2, &sp14);
         HSD_JObjSetRotation(item_jobj, &sp14);
-    } else if (item->xDD4_itemVar.it_2E6A_1.x2 != 2) {
+    } else if (item->xDD4_itemVar.yaku.x2 != 2) {
         OSReport("%s:%d: oioi...\n", "ityaku.c", 0xD7);
         while (true)
             ;
@@ -176,11 +179,10 @@ void it_2E6A_UnkMotion19_Phys(HSD_GObj* item_gobj)
 bool it_2E6A_Logic117_DmgDealt(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
-    if (item->xDD4_itemVar.it_2E6A_1.x14 != NULL &&
-        item->xDD4_itemVar.it_2E6A_1.x10 != NULL)
+    if (item->xDD4_itemVar.yaku.x14 != NULL &&
+        item->xDD4_itemVar.yaku.x10 != NULL)
     {
-        item->xDD4_itemVar.it_2E6A_1.x14(item_gobj,
-                                         item->xDD4_itemVar.it_2E6A_1.x10);
+        item->xDD4_itemVar.yaku.x14(item_gobj, item->xDD4_itemVar.yaku.x10);
     }
     return false;
 }
@@ -194,12 +196,11 @@ bool it_2E6A_Logic117_DmgReceived(Item_GObj* item_gobj)
     item->xC9C = 0;
     it_8027B798(item_gobj, &sp10);
     fighter_gobj = item->xCEC_fighterGObj;
-    if (item->xDD4_itemVar.it_2E6A_1.x18 != NULL &&
-        item->xDD4_itemVar.it_2E6A_1.x10 != NULL)
+    if (item->xDD4_itemVar.yaku.x18 != NULL &&
+        item->xDD4_itemVar.yaku.x10 != NULL)
     {
-        item->xDD4_itemVar.it_2E6A_1.x18(item_gobj,
-                                         item->xDD4_itemVar.it_2E6A_1.x10,
-                                         &sp10, fighter_gobj, item->xCA0);
+        item->xDD4_itemVar.yaku.x18(item_gobj, item->xDD4_itemVar.yaku.x10,
+                                    &sp10, fighter_gobj, item->xCA0);
     }
     return false;
 }
@@ -207,11 +208,11 @@ bool it_2E6A_Logic117_DmgReceived(Item_GObj* item_gobj)
 bool it_802E7054(HSD_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
-    if (item->xDD4_itemVar.it_2E6A_1.x1C != NULL &&
-        item->xDD4_itemVar.it_2E6A_1.x10 != NULL)
+    if (item->xDD4_itemVar.yaku.x1C != NULL &&
+        item->xDD4_itemVar.yaku.x10 != NULL)
     {
-        item->xDD4_itemVar.it_2E6A_1.x1C(
-            item_gobj, item->xDD4_itemVar.it_2E6A_1.x10, item->toucher);
+        item->xDD4_itemVar.yaku.x1C(item_gobj, item->xDD4_itemVar.yaku.x10,
+                                    item->toucher);
     }
     return false;
 }

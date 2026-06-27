@@ -8,6 +8,7 @@
 #include "gm/types.h"
 
 #include "if/forward.h"
+#include "sc/forward.h"
 
 /* 305058 */ s32 un_80305058(s32, s32, s32, f32);
 /* 3053C4 */ void un_803053C4(s32, s32, s32);
@@ -22,7 +23,7 @@
 /* 3060BC */ float un_803060BC(int, int);
 /* 3062BC */ s16 un_803062BC(s32 trophyId);
 /* 3062EC */ void un_803062EC(s32 arg0, u32 arg1, f32 farg0);
-/* 3063D4 */ s32 un_803063D4(s16, s32, s32);
+/* 3063D4 */ s32 un_803063D4(s32, s32, s32);
 /* 3064B8 */ s16 un_803064B8(s16 arg0, s8 arg1);
 /* 30663C */ void un_8030663C(void);
 /* 3067BC */ void un_803067BC(s32, s32);
@@ -39,7 +40,7 @@
 /* 306CF4 */ void Toy_RemoveUserData(void* ptr);
 /* 306D14 */ void un_80306D14(void);
 /* 306D70 */ void un_80306D70(s32 arg0);
-/* 306EEC */ HSD_LObj* un_80306EEC(void*, s32);
+/* 306EEC */ HSD_LObj* Toy_LoadLObjList(LightList**, s32*);
 /* 307018 */ void un_80307018(void);
 /* 30715C */ void un_8030715C(f32, f32);
 /* 307470 */ void un_80307470(s32);
@@ -49,7 +50,7 @@
 /* 307BA0 */ HSD_JObj* un_80307BA0(HSD_JObj*, s16);
 /* 307E84 */ void fn_80307E84(HSD_GObj* gobj);
 /* 307F64 */ void un_80307F64(s32, s32);
-/* 30813C */ char* un_8030813C(s16 arg0,
+/* 30813C */ char* un_8030813C(s32 arg0,
                                enum_t unused); /// @todo :: fill out the struct
                                                /// that this uses/returns
 /* 308250 */ void un_80308250(u8* arg0, s32 arg1, s32 arg2);
@@ -57,14 +58,14 @@
 /* 308328 */ void un_80308328(s32 arg0);
 /* 308354 */ s16 un_80308354(s16 idx);
 /* 3083D8 */ void un_803083D8(HSD_JObj* jobj, s32 arg1);
-/* 3084A0 */ void un_803084A0(s16 arg0);
+/* 3084A0 */ void un_803084A0(s32 arg0);
 /* 3087F4 */ HSD_GObj* un_803087F4(void*);
 /* 308DC8 */ void un_80308DC8(HSD_CObj*);
 /* 308F04 */ void un_80308F04(HSD_CObj*);
 /* 309338 */ f32 un_80309338(Vec3* arg0, Vec3* arg1);
-/* 309404 */ UNK_RET fn_80309404(UNK_PARAMS);
-/* 30B530 */ UNK_RET fn_8030B530(UNK_PARAMS);
-/* 30E110 */ UNK_RET fn_8030E110(UNK_PARAMS);
+/* 309404 */ void fn_80309404(HSD_GObj*);
+/* 30B530 */ void fn_8030B530(HSD_GObj*);
+/* 30E110 */ void fn_8030E110(HSD_GObj*);
 /* 30FA50 */ void un_8030FA50(void);
 /* 30FE48 */ void un_8030FE48(void*, s32);
 /* 3102C4 */ void un_803102C4(s8 arg0);
@@ -72,12 +73,12 @@
 /* 310324 */ void un_80310324(void);
 /* 310660 */ void un_80310660(s32 arg0);
 /* 3109A0 */ void un_803109A0(s32, s32, s32);
-/* 310B48 */ UNK_RET un_80310B48(UNK_PARAMS);
+/* 310B48 */ void un_80310B48(HSD_GObj*);
 /* 3114E8 */ void un_803114E8(void);
 /* 311680 */ void un_80311680(void);
 /* 311788 */ void un_80311788(void);
 /* 311960 */ void un_80311960(void);
-/* 311AB0 */ void un_80311AB0_OnEnter(UNK_T);
+/* 311AB0 */ void un_80311AB0_OnEnter(void*);
 /* 311F5C */ void un_80311F5C(void);
 /* 312018 */ void un_80312018_OnFrame(void);
 /* 312050 */ void un_80312050(void);
@@ -94,10 +95,7 @@
 /* 3FE880 */ extern char un_803FE880[];
 /* 4D6ED4 */ extern void* un_804D6ED4;
 /* 4D6ED8 */ extern void* un_804D6ED8;
-/* 4D5A8C */ extern char un_804D5A8C[];
-/* 4DDE60 */ extern float un_804DDE60;
-/* 4DDE4C */ extern float un_804DDE4C;
-/* 4DDE48 */ extern float un_804DDE48;
+/* 4D5A8C */ extern char un_804D5A8C[4];
 /* 4D5A78 */ extern char un_804D5A78;
 /* 4D5A80 */ extern char un_804D5A80;
 
@@ -134,12 +132,14 @@
 
 /* un_803053C4 externs */
 /* 4D6EB4 */ extern s16* un_804D6EB4;
+/* 4DDCC8 */ extern f32 un_804DDCC8;
 /* 4DDCD0 */ extern f64 un_804DDCD0;
 
 /* un_80308354 externs */
+/* 3FE454 */ extern char un_803FE454[];
 /* 3FE474 */ extern char un_803FE474[];
-/* 4D5A48 */ extern char un_804D5A48[];
-/* 4D5A50 */ extern char un_804D5A50[];
+/* 4D5A48 */ extern char un_804D5A48[6];
+/* 4D5A50 */ extern char un_804D5A50[2];
 
 /* un_803102D0 externs */
 /* 4D6ECC */ extern void* un_804D6ECC;
@@ -148,5 +148,53 @@
 /* 3FE878 */ extern char str_TyDataf_dat[];
 /* 3FE8C0 */ extern char str_tyModelFileTbl[];
 /* 3FE8CC */ extern char str_tyModelFileUsTbl[];
+
+/* toy.c externs */
+extern u8 un_804D6EA0;
+extern u8 un_804D6EA1;
+extern s8 un_804D6E50;
+extern s8 un_804D6EA2;
+extern void** un_804D6E68;
+extern void* un_804D6EBC;
+extern s16* un_804D6E64;
+extern char un_803FDD18[];
+extern char un_803FE3B8[];
+extern char un_803FE3DC[];
+extern HSD_FogDesc un_803B8844;
+extern Vec3 un_803B8858;
+
+typedef struct PosArray {
+    s32 xy[2];
+} PosArray;
+
+typedef struct PosArrayFull {
+    PosArray a[7];
+} PosArrayFull;
+
+extern PosArrayFull un_803B8864;
+extern PosArrayFull un_803B889C;
+
+extern s32 un_804D6E58;
+extern s32 un_804D6E60;
+extern f32 un_804D6E80;
+extern f32 un_804D6E84;
+extern f32 un_804D6E88;
+extern f32 un_804D6E8C;
+extern f32 un_804D6E90;
+extern f32 un_804D6E94;
+extern s32 un_804D6E70;
+extern s32 un_804D6E74;
+extern s32 un_804D6E78;
+extern s32 un_804D6E7C;
+extern f32 un_804DDCD8;
+extern f32 un_804DDCEC;
+extern f32 un_804DDCF0;
+extern f32 un_804DDD78;
+extern f32 un_804DDD7C;
+extern f32 un_804DDD80;
+extern f32 un_804DDD84;
+extern f32 un_804DDE00;
+extern Vec3 un_803B88F8;
+extern Vec3 un_803B8904;
 
 #endif

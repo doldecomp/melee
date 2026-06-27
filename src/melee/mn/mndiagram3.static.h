@@ -9,14 +9,22 @@
 
 #include <melee/mn/types.h>
 
+typedef struct mnDiagram3_PosTable {
+    /* 0x00 */ Vec3 x0;
+    /* 0x0C */ Vec3 xC;
+    /* 0x18 */ Vec3 x18;
+} mnDiagram3_PosTable;
+
+typedef struct mnDiagram3_StatTable {
+    /* 0x00 */ u16 indices[0x30];
+} mnDiagram3_StatTable;
+
 /* 3EEC10 */ extern AnimLoopSettings mnDiagram3_803EEC10;
 /* 3EEC1C */ extern AnimLoopSettings mnDiagram3_803EEC1C;
-/* 3EEC28 */ extern u8 mnDiagram3_803EEC28[0x24];
-/* 3EEC4C */ extern u8 mnDiagram3_803EEC4C[0x94];
+/* 3EEC28 */ extern mnDiagram3_PosTable mnDiagram3_803EEC28;
+/* 3EEC4C */ extern mnDiagram3_StatTable mnDiagram3_803EEC4C;
 /* 4A0844 */ extern mnDiagram_ArchiveData mnDiagram_804A0844;
 /* 4A0854 */ extern mnDiagram_ArchiveData mnDiagram_804A0854;
-/* 4D4FD8 */ extern char mnDiagram3_804D4FD8[7];
-/* 4D4FE0 */ extern char mnDiagram3_804D4FE0[5];
 /* 4D6C20 */ extern HSD_GObj* mnDiagram3_804D6C20;
 /* 4D6C24 */ extern HSD_GObj* mnDiagram3_804D6C24;
 /* 4D4B64 */ extern GXColor mn_804D4B64;

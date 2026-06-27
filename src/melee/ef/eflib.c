@@ -27,7 +27,6 @@
 #include "ftCommon/ftCo_Bury.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
-
 #include "MSL/math.h"
 
 #include <runtime.h>
@@ -65,8 +64,8 @@ void efLib_particles_proc_aux(HSD_GObj*);
 /*                       INLINES                        */
 /* ---------------------------------------------------- */
 
-void inline eflib_create_generator_add_appsrt(HSD_Generator** generator, s32 gfx_id,
-                             HSD_JObj* jobj)
+void inline eflib_create_generator_add_appsrt(HSD_Generator** generator,
+                                              s32 gfx_id, HSD_JObj* jobj)
 {
     *generator = hsd_8039EFAC(0, gfx_id / 1000, gfx_id, jobj);
     if (*generator != NULL) {
@@ -87,7 +86,8 @@ void inline eflib_create_generator_add_appsrt(HSD_Generator** generator, s32 gfx
     }
 }
 
-inline EF_Effect* eflib_create_effect_and_attach(int gfx_id, HSD_GObj* gobj, HSD_JObj* jobj)
+inline EF_Effect* eflib_create_effect_and_attach(int gfx_id, HSD_GObj* gobj,
+                                                 HSD_JObj* jobj)
 {
     EF_Effect* effect = efLib_Create(gfx_id, gobj);
     if ((effect) != NULL) {
@@ -106,8 +106,8 @@ inline EF_Effect* eflib_create_effect_and_attach(int gfx_id, HSD_GObj* gobj, HSD
     return effect;
 }
 
-inline HSD_Generator*
-eflib_generator_add_appsrt(HSD_Generator* generator, s32 status)
+inline HSD_Generator* eflib_generator_add_appsrt(HSD_Generator* generator,
+                                                 s32 status)
 {
     HSD_psAppSRT* psAppSRT;
 
@@ -147,7 +147,8 @@ eflib_generator_add_appsrt(HSD_Generator* generator, s32 status)
             {                                                                 \
                 _parent = NULL;                                               \
             }                                                                 \
-            else {                                                            \
+            else                                                              \
+            {                                                                 \
                 _parent = (_jobj)->parent;                                    \
             }                                                                 \
         } while (_parent != NULL);                                            \
@@ -295,7 +296,8 @@ void efLib_PauseAll(HSD_GObj* gobj)
     while (gobj_1 != NULL) {
         effect_1 = GET_EFFECT(gobj_1);
         if ((effect_1 != NULL) && (effect_1->parent_gobj == gobj)) {
-            effect_1->state_flags = (effect_1->state_flags & EF_STATE_ASYNC) | EF_STATE_ENTERING_PAUSE;
+            effect_1->state_flags = (effect_1->state_flags & EF_STATE_ASYNC) |
+                                    EF_STATE_ENTERING_PAUSE;
         }
         gobj_1 = gobj_1->next;
     }
@@ -303,7 +305,8 @@ void efLib_PauseAll(HSD_GObj* gobj)
     while (gobj_2 != NULL) {
         effect_2 = GET_EFFECT(gobj_2);
         if ((effect_2 != NULL) && (effect_2->parent_gobj == gobj)) {
-            effect_2->state_flags = (effect_2->state_flags & EF_STATE_ASYNC) | EF_STATE_ENTERING_PAUSE;
+            effect_2->state_flags = (effect_2->state_flags & EF_STATE_ASYNC) |
+                                    EF_STATE_ENTERING_PAUSE;
         }
         gobj_2 = gobj_2->next;
     }
@@ -412,7 +415,8 @@ void efLib_Update(HSD_GObj* gobj)
                     HSD_JObjSetupMatrixSub(attach_jobj);
                 }
                 if (effect->scale_flags & EF_SCALE_INHERIT) {
-                    HSD_MtxGetScale(HSD_JObjGetMtxPtr(effect->attach_jobj), &scale);
+                    HSD_MtxGetScale(HSD_JObjGetMtxPtr(effect->attach_jobj),
+                                    &scale);
                 }
             } else if (effect->scale_flags & EF_SCALE_INHERIT) {
                 HSD_JObjGetScale(effect->attach_jobj, &scale);
@@ -435,7 +439,8 @@ EF_Effect* efLib_Create(int gfx_id, HSD_GObj* parent_gobj)
     EF_EffectDesc* desc;
     u8 p_link;
 
-    desc = &((EF_EffectDesc*) efAsync_DatEntries[gfx_id / 1000].data)[gfx_id % 1000];
+    desc = &((EF_EffectDesc*) efAsync_DatEntries[gfx_id / 1000]
+                 .data)[gfx_id % 1000];
 
     if (efLib_LoadKind == EF_LOADKIND_ASYNC) {
         if (efLib_EffectCount >= 64) {
@@ -555,16 +560,19 @@ EF_Effect* efLib_Create_Attach(u32 gfx_id, HSD_GObj* gobj, HSD_JObj* jobj)
 EF_Effect* efLib_Create_AttachChild(u32 gfx_id, HSD_GObj* gobj, HSD_JObj* jobj)
 {
     EF_Effect* effect;
-    if ((effect = eflib_create_effect_and_attach(gfx_id, gobj, jobj)) != NULL) {
+    if ((effect = eflib_create_effect_and_attach(gfx_id, gobj, jobj)) != NULL)
+    {
         lb_8000C290(GET_JOBJ(effect->gobj), jobj);
     }
     return effect;
 }
 
-EF_Effect* efLib_Create_Attach_Scale(u32 gfx_id, HSD_GObj* gobj, HSD_JObj* jobj)
+EF_Effect* efLib_Create_Attach_Scale(u32 gfx_id, HSD_GObj* gobj,
+                                     HSD_JObj* jobj)
 {
     EF_Effect* effect;
-    if ((effect = eflib_create_effect_and_attach(gfx_id, gobj, jobj)) != NULL) {
+    if ((effect = eflib_create_effect_and_attach(gfx_id, gobj, jobj)) != NULL)
+    {
         Vec3 scale;
         HSD_JObjGetScale(GET_JOBJ(gobj), &scale);
         scale.x = scale.z = scale.y;
@@ -573,10 +581,12 @@ EF_Effect* efLib_Create_Attach_Scale(u32 gfx_id, HSD_GObj* gobj, HSD_JObj* jobj)
     return effect;
 }
 
-EF_Effect* efLib_Create_AttachChild_Scale(u32 gfx_id, HSD_GObj* gobj, HSD_JObj* jobj)
+EF_Effect* efLib_Create_AttachChild_Scale(u32 gfx_id, HSD_GObj* gobj,
+                                          HSD_JObj* jobj)
 {
     // --- PLS DONT INLINE ------------------------------------------------
-    extern EF_Effect* efLib_Create_Attach(u32 gfx_id, HSD_GObj* gobj, HSD_JObj* jobj);
+    extern EF_Effect* efLib_Create_Attach(u32 gfx_id, HSD_GObj * gobj,
+                                          HSD_JObj * jobj);
     // --------------------------------------------------------------------
 
     EF_Effect* effect = efLib_Create_Attach(gfx_id, gobj, jobj);
@@ -595,10 +605,12 @@ EF_Effect* efLib_Create_AttachChild_Scale(u32 gfx_id, HSD_GObj* gobj, HSD_JObj* 
     return effect;
 }
 
-EF_Effect* efLib_Create_Attach_Scale_FacingDir(u32 gfx_id, HSD_GObj* gobj, HSD_JObj* jobj)
+EF_Effect* efLib_Create_Attach_Scale_FacingDir(u32 gfx_id, HSD_GObj* gobj,
+                                               HSD_JObj* jobj)
 {
     // --- PLS DONT INLINE ------------------------------------------------
-    extern EF_Effect* efLib_Create_Attach(u32 gfx_id, HSD_GObj* gobj, HSD_JObj* jobj);
+    extern EF_Effect* efLib_Create_Attach(u32 gfx_id, HSD_GObj * gobj,
+                                          HSD_JObj * jobj);
     // --------------------------------------------------------------------
 
     EF_Effect* effect = efLib_Create_Attach(gfx_id, gobj, jobj);
@@ -649,7 +661,8 @@ void efLib_render_callback(HSD_GObj* gobj, int code)
     }
     HSD_StateSetColorUpdate(1);
     if (gobj->gx_link == 7) {
-        psDispParticles(PTCL_RENDER_LINKNO_0 | PTCL_RENDER_LINKNO_2, particles_code);
+        psDispParticles(PTCL_RENDER_LINKNO_0 | PTCL_RENDER_LINKNO_2,
+                        particles_code);
         return;
     }
     psDispParticles(PTCL_RENDER_LINKNO_1, particles_code);
@@ -670,7 +683,7 @@ void efLib_particles_proc_aux(HSD_GObj* gobj)
 HSD_Generator* efLib_CreateGenerator(s32 gfx_id, Vec3* pos)
 {
     HSD_Generator* generator;
-    u8 linkNo;
+    int linkNo;
 
     linkNo = 0;
     switch (gfx_id) {
@@ -715,7 +728,9 @@ HSD_Generator* efLib_CreateGenerator_AddAppSRT(s32 gfx_id)
     return generator;
 }
 
-HSD_Generator* efLib_CreateGenerator_Translate_FacingDir(s32 gfx_id, Vec3* translation, f32 direction)
+HSD_Generator* efLib_CreateGenerator_Translate_FacingDir(s32 gfx_id,
+                                                         Vec3* translation,
+                                                         f32 direction)
 {
     HSD_Generator* generator;
     HSD_psAppSRT* appsrt;
@@ -746,15 +761,15 @@ HSD_Generator* efLib_CreateGenerator_Translate_FacingDir(s32 gfx_id, Vec3* trans
 
 HSD_Generator* efLib_CreateGenerator_Attach(s32 gfx_id, HSD_JObj* jobj)
 {
-    HSD_Generator* generator =
-        hsd_8039EFAC(0, gfx_id / 1000, gfx_id, jobj);
+    HSD_Generator* generator = hsd_8039EFAC(0, gfx_id / 1000, gfx_id, jobj);
     if (generator != NULL) {
         generator->type &= ~PSAPPSRT_UNK_B10;
     }
     return generator;
 }
 
-HSD_Generator* efLib_CreateGenerator_Attach_AddAppSRT(s32 gfx_id, HSD_JObj* jobj)
+HSD_Generator* efLib_CreateGenerator_Attach_AddAppSRT(s32 gfx_id,
+                                                      HSD_JObj* jobj)
 {
     HSD_Generator* generator = hsd_8039EFAC(0, gfx_id / 1000, gfx_id, jobj);
     if (generator != NULL) {
@@ -774,14 +789,16 @@ HSD_Generator* efLib_CreateGenerator_Attach_AddAppSRT(s32 gfx_id, HSD_JObj* jobj
     return generator;
 }
 
-HSD_Generator* efLib_CreateGenerator_Attach_Scale(s32 gfx_id, va_list vlist, HSD_GObj* gobj)
+HSD_Generator* efLib_CreateGenerator_Attach_Scale(s32 gfx_id, va_list vlist,
+                                                  HSD_GObj* gobj)
 {
     Vec3 scale;
     HSD_Generator* generator;
     s32 id;
 
     id = gfx_id;
-    eflib_create_generator_add_appsrt(&generator, id, va_arg(vlist, HSD_JObj*));
+    eflib_create_generator_add_appsrt(&generator, id,
+                                      va_arg(vlist, HSD_JObj*));
     if (generator != NULL) {
         HSD_JObjGetScale(GET_JOBJ(gobj), &scale);
         generator->appsrt->scale.x = generator->appsrt->scale.y =
@@ -794,7 +811,8 @@ HSD_Generator* efLib_CreateGenerator_AppSRT_SetScale(s32 gfx_id, va_list vlist)
 {
     HSD_Generator* generator;
 
-    eflib_create_generator_add_appsrt(&generator, gfx_id, va_arg(vlist, HSD_JObj*));
+    eflib_create_generator_add_appsrt(&generator, gfx_id,
+                                      va_arg(vlist, HSD_JObj*));
     if (generator != NULL) {
         generator->appsrt->scale.x = generator->appsrt->scale.y =
             generator->appsrt->scale.z = *va_arg(vlist, f32*);
@@ -802,21 +820,23 @@ HSD_Generator* efLib_CreateGenerator_AppSRT_SetScale(s32 gfx_id, va_list vlist)
     return generator;
 }
 
-HSD_Generator* efLib_CreateGenerator_AppSRT_SetFacingDir(s32 gfx_id, va_list vlist)
+HSD_Generator* efLib_CreateGenerator_AppSRT_SetFacingDir(s32 gfx_id,
+                                                         va_list vlist)
 {
     HSD_Generator* generator;
     f32 direction;
 
-    eflib_create_generator_add_appsrt(&generator, gfx_id, va_arg(vlist, HSD_JObj*));
+    eflib_create_generator_add_appsrt(&generator, gfx_id,
+                                      va_arg(vlist, HSD_JObj*));
     if (generator != NULL) {
         direction = *va_arg(vlist, f32*);
-        generator->appsrt->rot.y =
-            direction < 0.0F ? -M_PI_2 : M_PI_2;
+        generator->appsrt->rot.y = direction < 0.0F ? -M_PI_2 : M_PI_2;
     }
     return generator;
 }
 
-HSD_Generator* efLib_CreateGenerator_AppSRT_SetFacingDirScale(s32 gfx_id, va_list vlist)
+HSD_Generator* efLib_CreateGenerator_AppSRT_SetFacingDirScale(s32 gfx_id,
+                                                              va_list vlist)
 {
     HSD_Generator* generator;
     f32 direction;
@@ -828,8 +848,7 @@ HSD_Generator* efLib_CreateGenerator_AppSRT_SetFacingDirScale(s32 gfx_id, va_lis
     eflib_create_generator_add_appsrt(&generator, id, jobj);
     if (generator != NULL) {
         direction = *va_arg(vlist, f32*);
-        generator->appsrt->rot.y =
-            direction < 0.0F ? -M_PI_2 : M_PI_2;
+        generator->appsrt->rot.y = direction < 0.0F ? -M_PI_2 : M_PI_2;
         generator->appsrt->scale.x = generator->appsrt->scale.y =
             generator->appsrt->scale.z = *va_arg(vlist, f32*);
     }
@@ -1022,8 +1041,8 @@ void efLib_Cb_ParticleRender(HSD_Particle* particle)
 }
 
 // must be placed here for data ordering reasons...
-void (*lbl_803BF810[0x03])(HSD_Particle* particle) = { efLib_Cb_ParticleRender, NULL,
-                                                       NULL };
+void (*lbl_803BF810[0x03])(HSD_Particle* particle) = { efLib_Cb_ParticleRender,
+                                                       NULL, NULL };
 
 // Global particle callback. Checks if the particle cmdList matches
 // bank 0 refs (0x96, 0x97, 0x98, 0x21B). If matched, attaches an
@@ -1153,7 +1172,7 @@ void efLib_Cb_SetRotYZ_FromFighter(EF_Effect* effect)
 
     fighter = GET_FIGHTER(effect->parent_gobj);
     jobj_1 = GET_JOBJ(effect->gobj);
-    half_pi = M_PI_2_F - fighter->mv.co.common.x4;
+    half_pi = M_PI_2_F - fighter->mv.co.common.x4.x;
     if (fighter->facing_dir < 0.0F) {
         HSD_JObjSetRotationY(jobj_1, -M_PI_2_F);
         HSD_JObjSetRotationZ(jobj_1, half_pi);
@@ -1280,11 +1299,12 @@ void efLib_Cb_ftMr_SpecialLw(EF_Effect* effect)
     fighter = GET_FIGHTER(effect->parent_gobj);
 
     if (fighter->motion_id == 349) {
-        HSD_JObjClearFlagsAll(eff_child_nxt_jobj, 0x10U);
+        HSD_JObjClearFlagsAll(eff_child_nxt_jobj, JOBJ_HIDDEN);
     } else {
-        HSD_JObjSetFlagsAll(eff_child_nxt_jobj, 0x10U);
+        HSD_JObjSetFlagsAll(eff_child_nxt_jobj, JOBJ_HIDDEN);
     }
-    if ((fighter->cmd_vars[3] != 0U) && ((s32) fighter->mv.co.common.xC != 0))
+    if ((fighter->cmd_vars[3] != 0U) &&
+        (*(s32*) &fighter->mv.co.common.x4.z != 0))
     {
         f32 rotate_z = -atan2f(fighter->coll_data.floor.normal.x,
                                fighter->coll_data.floor.normal.y);
@@ -1309,12 +1329,13 @@ void efLib_Cb_ftLg_SpecialLw(EF_Effect* effect)
     fighter = GET_FIGHTER(effect->parent_gobj);
 
     if (fighter->motion_id == 357) {
-        HSD_JObjClearFlagsAll(eff_child_nxt_jobj, 0x10U);
+        HSD_JObjClearFlagsAll(eff_child_nxt_jobj, JOBJ_HIDDEN);
     } else {
-        HSD_JObjSetFlagsAll(eff_child_nxt_jobj, 0x10U);
+        HSD_JObjSetFlagsAll(eff_child_nxt_jobj, JOBJ_HIDDEN);
     }
 
-    if ((fighter->cmd_vars[3] != 0U) && ((s32) fighter->mv.co.common.xC != 0))
+    if ((fighter->cmd_vars[3] != 0U) &&
+        (*(s32*) &fighter->mv.co.common.x4.z != 0))
     {
         f32 rotate_z = -atan2f(fighter->coll_data.floor.normal.x,
                                fighter->coll_data.floor.normal.y);
@@ -1335,9 +1356,9 @@ void efLib_Cb_ftKp_SpecialHi(EF_Effect* effect)
     jobj_1 = GET_JOBJ(effect->gobj);
     jobj_2 = GET_JOBJ(effect->next->gobj);
     if ((fighter = GET_FIGHTER(effect->parent_gobj))->motion_id == 359) {
-        HSD_JObjClearFlagsAll(jobj_2, 0x10U);
+        HSD_JObjClearFlagsAll(jobj_2, JOBJ_HIDDEN);
     } else {
-        HSD_JObjSetFlagsAll(jobj_2, 0x10U);
+        HSD_JObjSetFlagsAll(jobj_2, JOBJ_HIDDEN);
     }
     if ((fighter->cmd_vars[2] & 1) && ((s32) fighter->mv.co.common.x10 != 0)) {
         rotate_z = -atan2f(fighter->coll_data.floor.normal.x,
@@ -1382,11 +1403,12 @@ void efLib_SetTevKonstColor(HSD_JObj* jobj, s32 count, u32 konst, u32 tev0)
 
 // JObj animation queue!
 
-// Effect JObjs are appended during efLib_Create, then HSD_JObjAnimAll is called
-// on each at end-of-frame. Currently you have to cast to HSD_JObj** while keeping
-// its type as EF_ParamEntry[0x10] for matching purposes... (compiler bases the
-// efLib_ParamTable address off this array for some reason (???), so both must be
-// the same type x_X ... if you can figure out a way around this pls fix ty).
+// Effect JObjs are appended during efLib_Create, then HSD_JObjAnimAll is
+// called on each at end-of-frame. Currently you have to cast to HSD_JObj**
+// while keeping its type as EF_ParamEntry[0x10] for matching purposes...
+// (compiler bases the efLib_ParamTable address off this array for some reason
+// (???), so both must be the same type x_X ... if you can figure out a way
+// around this pls fix ty).
 
 /* 458EE0 */ EF_ParamEntry efLib_AnimQueue[0x10];
 
@@ -1395,7 +1417,7 @@ void efLib_SetTevKonstColor(HSD_JObj* jobj, s32 count, u32 konst, u32 tev0)
 
 /* 458F60 */ EF_ParamEntry efLib_ParamTable[0x8];
 
-void efLib_SetParamAlpha(HSD_GObj* gobj, u8 alpha, f32 unused_1, f32 unused_2)
+void efLib_SetParamAlpha(HSD_GObj* gobj, u8 alpha)
 {
     s32 idx;
 
@@ -1497,7 +1519,8 @@ void efLib_Cb_AccumOffset_FromParams(EF_Effect* effect)
     HSD_JObjSetTranslate(GET_JOBJ(effect->gobj), &translate);
 }
 
-EF_Effect* efLib_CreateGenerator_AppSRT_SetPos(int gfx_id, HSD_GObj* gobj, HSD_JObj* jobj, Vec3* vec)
+EF_Effect* efLib_CreateGenerator_AppSRT_SetPos(int gfx_id, HSD_GObj* gobj,
+                                               HSD_JObj* jobj, Vec3* vec)
 {
     HSD_Generator* generator;
     EF_Effect* effect = efLib_Create(0, gobj);
@@ -1506,7 +1529,8 @@ EF_Effect* efLib_CreateGenerator_AppSRT_SetPos(int gfx_id, HSD_GObj* gobj, HSD_J
         effect->update = efLib_Cb_AccumOffset_FromParams;
         effect->attach_jobj = jobj;
         effect->params = *vec;
-        eflib_create_generator_add_appsrt(&generator, gfx_id, GET_JOBJ(effect->gobj));
+        eflib_create_generator_add_appsrt(&generator, gfx_id,
+                                          GET_JOBJ(effect->gobj));
     }
     return effect;
 }

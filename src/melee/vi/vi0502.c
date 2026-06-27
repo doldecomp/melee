@@ -36,7 +36,14 @@
 #include <baselib/mtx.h>
 #include <baselib/wobj.h>
 
-Vec3 initial_pos = { 0, -3.0f, 0 };
+typedef struct Vi0502Data {
+    Vec3 initial_pos;
+    char vi0502_dat[12];
+    char visual0502_scene[16];
+    char irals_dat[16];
+} Vi0502Data;
+
+extern Vi0502Data un_804000D0;
 
 static SceneDesc* un_804D6F90;
 static HSD_Archive* un_804D6F94;
@@ -44,7 +51,7 @@ static HSD_Archive* un_804D6F98;
 static HSD_Archive* un_804D6F9C;
 static GXColor erase_colors_vi0502;
 static HSD_GObj* kirby_gobj;
-static ViCharaDesc* un_804D6FA8;
+ViCharaDesc* un_804D6FA8[2];
 
 void un_8031E110(int arg0, int arg1, int arg2)
 {
@@ -60,9 +67,11 @@ void vi0502_8031E124(CharacterKind player_kind, int player_costume,
                      int kirby_costume)
 {
     HSD_JObj* jobj;
+    HSD_JObj* jobj2;
     VecMtxPtr pmtx;
 
     Camera_80028B9C(6);
+    PAD_STACK(32);
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);
@@ -82,7 +91,7 @@ void vi0502_8031E124(CharacterKind player_kind, int player_costume,
     Player_SetPlayerId(0, 0);
     Player_SetSlottype(0, Gm_PKind_Demo);
     Player_SetFacingDirection(0, 1.0f);
-    Player_80032768(0, &initial_pos);
+    Player_80032768(0, &un_804000D0.initial_pos);
     Player_80036F34(0, 8);
 
     Player_80036E20(CKIND_KIRBY, un_804D6F9C, 7);
@@ -90,16 +99,16 @@ void vi0502_8031E124(CharacterKind player_kind, int player_costume,
     Player_SetCostumeId(1, kirby_costume);
     Player_SetPlayerId(1, 0);
     Player_SetSlottype(1, Gm_PKind_Demo);
-    Player_SetFacingDirection(1, 1.0f);
+    Player_SetFacingDirection(1, -1.0f);
     Player_80036F34(1, 14);
 
     kirby_gobj = Player_GetEntity(1);
     jobj = GET_JOBJ(kirby_gobj);
     HSD_JObjReqAnimAll(jobj, 120.0f);
     HSD_JObjAnimAll(jobj);
-    jobj = GET_JOBJ(kirby_gobj);
+    jobj2 = GET_JOBJ(kirby_gobj);
     pmtx = grLib_801C9A10();
-    HSD_JObjGetTranslation2(jobj, &pmtx[1]);
+    HSD_JObjGetTranslation2(jobj2, &pmtx[1]);
 
     HSD_JObjReqAnimAll(jobj, 0.0f);
 
@@ -150,57 +159,80 @@ void vi0502_RunFrame(HSD_GObj* gobj)
 
 void un_8031E444_OnEnter(void* arg)
 {
-    u8* input = arg;
-    HSD_GObj* gobj;
-    HSD_CObj* cobj;
+    u8 char_index;
+    Vi0502Data* data;
+    u8 costume1;
+    u8 costume2;
     HSD_Fog* fog;
+    HSD_GObj* fog_gobj;
     HSD_LObj* lobj;
+    HSD_GObj* light_gobj;
+    HSD_CObj* cobj;
+    HSD_GObj* camera_gobj;
+    int i;
+    HSD_JObj* new_var;
+    HSD_GObj* model_gobj;
     HSD_JObj* jobj;
-    CharacterKind char_kind;
-    s32 i;
+    ViCharaDesc* desc;
 
+    desc = (ViCharaDesc*) arg;
+    data = &un_804000D0;
     lbAudioAx_800236DC();
     efLib_Init();
     efAsync_LoadSync(0);
 
-    char_kind = input[0];
+    char_index = desc->p1_char_index;
 
-    un_804D6F9C = lbArchive_LoadSymbols("Vi0502.dat", &un_804D6F90,
-                                        "visual0502Scene", NULL);
-    un_804D6F94 = lbArchive_LoadSymbols(viGetCharAnimByIndex(char_kind), NULL);
-    un_804D6F98 = lbArchive_LoadSymbols("IrAls.dat", NULL);
+    un_804D6F9C = lbArchive_LoadSymbols(data->vi0502_dat, &un_804D6F90,
+                                        data->visual0502_scene, NULL);
+    un_804D6F94 =
+        lbArchive_LoadSymbols(viGetCharAnimByIndex(char_index), NULL);
+    un_804D6F98 = lbArchive_LoadSymbols(data->irals_dat, NULL);
 
-    gobj = GObj_Create(0xB, 3, 0);
+    fog_gobj = GObj_Create(0xB, 3, 0);
     fog = HSD_FogLoadDesc(un_804D6F90->fogs->desc);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848, fog);
-    GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
-    *(GXColor*) &erase_colors_vi0502 = fog->color;
+    HSD_GObjObject_80390A70(fog_gobj, HSD_GObj_804D7848, fog);
+    GObj_SetupGXLink(fog_gobj, HSD_GObj_FogCallback, 0, 0);
+    erase_colors_vi0502 = fog->color;
 
-    gobj = GObj_Create(0xB, 3, 0);
+    light_gobj = GObj_Create(0xB, 3, 0);
     lobj = lb_80011AC4(un_804D6F90->lights);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
-    GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
+    HSD_GObjObject_80390A70(light_gobj, HSD_GObj_804D784A, lobj);
+    GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0, 0);
 
-    gobj = GObj_Create(0x13, 0x14, 0);
+    camera_gobj = GObj_Create(0x13, 0x14, 0);
     cobj =
         lb_80013B14((HSD_CameraDescPerspective*) un_804D6F90->cameras->desc);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
-    GObj_SetupGXLinkMax(gobj, (void (*)(HSD_GObj*, int)) vi0502_8031E328, 5);
+    HSD_GObjObject_80390A70(camera_gobj, HSD_GObj_804D784B, cobj);
+    GObj_SetupGXLinkMax(camera_gobj,
+                        (void (*)(HSD_GObj*, int)) vi0502_8031E328, 5);
     HSD_CObjAddAnim(cobj, un_804D6F90->cameras->anims[0]);
-    HSD_CObjReqAnim(cobj, 0.0f);
+    HSD_CObjReqAnim(cobj, 0.0F);
     HSD_CObjAnim(cobj);
-    HSD_GObj_SetupProc(gobj, vi0502_RunFrame, 0);
+    HSD_GObj_SetupProc(camera_gobj, vi0502_RunFrame, 0);
 
     for (i = 0; un_804D6F90->models[i] != NULL; i++) {
-        gobj = GObj_Create(0xE, 0xF, 0);
+        model_gobj = GObj_Create(0xE, 0xF, 0);
         jobj = HSD_JObjLoadJoint(un_804D6F90->models[i]->joint);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
-        GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 9, 0);
-        gm_8016895C(jobj, un_804D6F90->models[i], 0);
-        HSD_JObjReqAnimAll(jobj, 0.0f);
+        new_var = jobj;
+        HSD_GObjObject_80390A70(model_gobj, HSD_GObj_804D7849, new_var);
+        GObj_SetupGXLink(model_gobj, HSD_GObj_JObjCallback, 9, 0);
+        gm_8016895C(jobj, un_804D6F90->models[i],
+                    (un_804D6F90->models[i] != NULL) * 0);
+        HSD_JObjReqAnimAll(new_var, 0.0F);
         HSD_JObjAnimAll(jobj);
-        HSD_GObj_SetupProc(gobj, vi0502_8031E304, 0x17);
+        HSD_GObj_SetupProc(model_gobj, vi0502_8031E304, 0x17);
     }
 
-    vi0502_8031E124(input[0], input[1], input[3]);
+    char_index = desc->p1_char_index;
+    costume1 = desc->p1_costume_index;
+    costume2 = desc->p2_costume_index;
+    vi0502_8031E124(char_index, costume1, costume2);
 }
+
+Vi0502Data un_804000D0 = {
+    { 0, -3.0f, 0 },
+    "Vi0502.dat",
+    "visual0502Scene",
+    "IrAls.dat",
+};

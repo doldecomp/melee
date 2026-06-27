@@ -1,10 +1,12 @@
+#ifndef GALE01_216E74
+#define GALE01_216E74
+
 #include <placeholder.h>
 #include <platform.h>
 
+#include "dolphin/mtx.h"
+
 #include "gr/forward.h"
-
-#include "it/inlines.h"
-
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
@@ -55,3 +57,5 @@
 /* 218260 */ void grFlatzone_80218260(void);
 /* 2182B4 */ DynamicsDesc* grFlatzone_802182B4(enum_t);
 /* 2182BC */ bool grFlatzone_802182BC(Vec3*, int, HSD_JObj*);
+
+#endif

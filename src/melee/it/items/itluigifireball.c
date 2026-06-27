@@ -8,8 +8,10 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/it_3F14.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
+#include "it/itmaplib.h"
 
 #include <common_structs.h>
 #include <math_ppc.h>

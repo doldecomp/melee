@@ -5,17 +5,24 @@
 
 #include "ft/ftlib.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/it_3F14.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
+#include "it/ithitbox.h"
 #include "lb/lb_00B0.h"
+#include "lb/lbcollision.h"
 #include "lb/lbvector.h"
+#include "MetroTRK/intrinsics.h"
+
+#include <math.h>
 
 /* 0x802910B8 */ void itFlipper_Logic20_Thrown(Item_GObj* gobj);
 
 HSD_GObj* it_80290938(HSD_JObj* jobj)
 {
+    u8 _pad[8];
     SpawnItem spawn;
     Vec3 pos;
     Item_GObj* gobj = NULL;
@@ -58,7 +65,47 @@ void itFlipper_Logic20_Spawned(Item_GObj* gobj)
     it_80290F00(gobj);
 }
 
-/// #it_80290A7C
+void it_80290A7C(Item_GObj* gobj)
+{
+    HSD_JObj* child;
+    Item* ip2;
+    HSD_JObj* jobj;
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* root = GET_JOBJ(gobj);
+    itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+
+    if (root == NULL) {
+        child = NULL;
+    } else {
+        child = root->child;
+    }
+    if (child == NULL) {
+        jobj = NULL;
+    } else {
+        jobj = child->child;
+    }
+
+    if (ip->xDD4_itemVar.flipper.xDE4 > 3.1415927f) {
+        ip->xDD4_itemVar.flipper.xDE4 -= 6.2831855f;
+    }
+    if (ip->xDD4_itemVar.flipper.xDE4 < -3.1415927f) {
+        ip->xDD4_itemVar.flipper.xDE4 += 6.2831855f;
+    }
+
+    ip2 = ip;
+    if (ABS(ip2->xDD4_itemVar.flipper.xDE4) > 0.0f) {
+        if (ABS(ip2->xDD4_itemVar.flipper.xDE4) < attrs->x20) {
+            ip->xDD4_itemVar.flipper.xDE4 = 0.0f;
+        } else if (ip2->xDD4_itemVar.flipper.xDE4 > 0.0f) {
+            ip2->xDD4_itemVar.flipper.xDE4 -= attrs->x20;
+        } else {
+            ip->xDD4_itemVar.flipper.xDE4 += attrs->x20;
+        }
+    }
+
+    ip->xDD4_itemVar.flipper.xDE0 += ip2->xDD4_itemVar.flipper.xDE4;
+    HSD_JObjSetRotationX(jobj, ip2->xDD4_itemVar.flipper.xDE0);
+}
 
 void it_80290C38(Item_GObj* gobj, Vec3* pos, f32 angle)
 {
@@ -88,26 +135,83 @@ void it_80290C38(Item_GObj* gobj, Vec3* pos, f32 angle)
     }
 }
 
-/// #it_80290CE8
+static inline itFlipper_DatAttrs* itFlipper_GetAttrs(Item* ip)
+{
+    return ip->xC4_article_data->x4_specialAttributes;
+}
+
+static inline void it_80290CE8_inline(Item_GObj* gobj, Vec3* vel, Vec3* pos,
+                                      f32 speed)
+{
+    Item* ip = GET_ITEM(gobj);
+    *pos = ip->pos;
+
+    if (ip->xCF4_fighterGObjUnk != NULL) {
+        HSD_GObj* fighter = ip->xCF4_fighterGObjUnk;
+        if (ftLib_80086960(fighter)) {
+            Item* ip = GET_ITEM(gobj);
+            itFlipper_DatAttrs* attrs = itFlipper_GetAttrs(ip);
+            /// @todo Eliminate this no-op branch (perturbs scheduling).
+            if (pos != NULL) {
+            }
+            ftLib_800866DC(fighter, pos);
+            ftLib_80086BEC(fighter, vel);
+            speed = attrs->x18 * sqrtf__Ff(vel->x * vel->x + vel->y * vel->y);
+        }
+        ip->xCF4_fighterGObjUnk = NULL;
+    }
+    it_80290C38(gobj, pos, deg_to_rad * speed);
+}
+
+void it_80290CE8(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    f32 speed = 10.0f;
+    u8 _pad[8];
+    Vec3 pos;
+    Vec3 vel;
+    PAD_STACK(4);
+    pos = ip->pos;
+
+    if (ip->xCF4_fighterGObjUnk != NULL) {
+        HSD_GObj* fighter = ip->xCF4_fighterGObjUnk;
+        if (ftLib_80086960(fighter)) {
+            Item* ip = GET_ITEM(gobj);
+            itFlipper_DatAttrs* attrs = itFlipper_GetAttrs(ip);
+            f32 tmp;
+            ftLib_800866DC(fighter, &pos);
+            ftLib_80086BEC(fighter, &vel);
+            tmp = attrs->x18 * sqrtf__Ff(vel.x * vel.x + vel.y * vel.y);
+            speed = tmp;
+        }
+        ip->xCF4_fighterGObjUnk = NULL;
+    }
+    it_80290C38(gobj, &pos, deg_to_rad * speed);
+}
+
+static inline void it_80290DD4_inline(Item_GObj* gobj, s32 kind, Vec3* pos,
+                                      Vec3* vec)
+{
+    Item* ip = GET_ITEM(gobj);
+    vec->z = 0.0f;
+    vec->y = 0.0f;
+    vec->x = 0.0f;
+
+    if (kind == 0x14) {
+        vec->x = ip->pos.x - pos->x;
+        vec->y = ip->pos.y - pos->y;
+        lbVector_NormalizeXY(vec);
+        vec->x *= 0.2f;
+        vec->y *= 0.2f;
+        ip->x40_vel.x += vec->x;
+        ip->x40_vel.y += vec->y;
+    }
+}
 
 void it_80290DD4(Item_GObj* gobj, s32 kind, Vec3* pos)
 {
-    Item* ip = GET_ITEM(gobj);
     Vec3 vec;
-
-    vec.z = 0.0f;
-    vec.y = 0.0f;
-    vec.x = 0.0f;
-
-    if (kind == 0x14) {
-        vec.x = ip->pos.x - pos->x;
-        vec.y = ip->pos.y - pos->y;
-        lbVector_NormalizeXY(&vec);
-        vec.x *= 0.2f;
-        vec.y *= 0.2f;
-        ip->x40_vel.x += vec.x;
-        ip->x40_vel.y += vec.y;
-    }
+    it_80290DD4_inline(gobj, kind, pos, &vec);
 }
 
 void it_80290E78(Item_GObj* gobj)
@@ -206,12 +310,10 @@ void itFlipper_UnkMotion3_Phys(Item_GObj* gobj)
     it_80272860(gobj, item_attr->x10_fall_speed,
                 item_attr->x14_fall_speed_max);
     if (ip->xDD4_itemVar.flipper.xDD4 <= 0xA) {
-        ip->x40_vel.x *=
-            (f32) ip->xDD4_itemVar.flipper.xDD4 /
-            (1.0f + (f32) ip->xDD4_itemVar.flipper.xDD4);
-        ip->x40_vel.y *=
-            (f32) ip->xDD4_itemVar.flipper.xDD4 /
-            (1.0f + (f32) ip->xDD4_itemVar.flipper.xDD4);
+        ip->x40_vel.x *= (f32) ip->xDD4_itemVar.flipper.xDD4 /
+                         (1.0f + (f32) ip->xDD4_itemVar.flipper.xDD4);
+        ip->x40_vel.y *= (f32) ip->xDD4_itemVar.flipper.xDD4 /
+                         (1.0f + (f32) ip->xDD4_itemVar.flipper.xDD4);
     }
     it_80274658(gobj, it_804D6D28->x68_float);
 }
@@ -263,7 +365,55 @@ void it_8029131C(Item_GObj* gobj)
     Item_80268E5C(gobj, 5, 0x12);
 }
 
-/// #it_80291344
+static inline void it_80291344_inline(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_80272674(gobj, 0);
+    it_80272674(gobj, 1);
+    lbColl_80008440(&ip->x5D4_hitboxes[0].hit);
+    lbColl_80008440(&ip->x5D4_hitboxes[1].hit);
+    it_802756E0(gobj);
+}
+
+bool it_80291344(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    it_80290A7C(gobj);
+
+    if (ABS(ip->x40_vel.x) >= 0.01f) {
+        ip->x40_vel.x *= 0.9f;
+    } else {
+        ip->x40_vel.x = 0.0f;
+    }
+
+    if (ABS(ip->x40_vel.y) >= 0.01f) {
+        ip->x40_vel.y *= 0.9f;
+    } else {
+        ip->x40_vel.y = 0.0f;
+    }
+
+    {
+        s32 timer = ip->xDD4_itemVar.flipper.xDDC;
+        if (timer > 0) {
+            ip->xDD4_itemVar.flipper.xDDC = timer - 1;
+            if (ip->xDD4_itemVar.flipper.xDDC == 0) {
+                it_80291344_inline(gobj);
+            }
+        }
+    }
+
+    if (ip->xDD4_itemVar.flipper.xDE8 == 0) {
+        ip->xD44_lifeTimer -= 1.0f;
+        if (ip->xD44_lifeTimer <= 0.0f) {
+            return true;
+        }
+        if (ip->xD44_lifeTimer <= it_804D6D28->x34) {
+            it_802728C8(gobj);
+        }
+    }
+    return false;
+}
 
 bool itFlipper_UnkMotion5_Anim(Item_GObj* gobj)
 {
@@ -280,7 +430,7 @@ bool itFlipper_UnkMotion6_Anim(Item_GObj* gobj)
     if (ip->xDD4_itemVar.flipper.xDE4 == 0.0F) {
         Item_80268E5C(gobj, 5, 0x12);
     }
-    it_80291344(gobj);
+    return it_80291344(gobj);
 }
 
 void itFlipper_UnkMotion6_Phys(Item_GObj* gobj)
@@ -302,7 +452,33 @@ bool itFlipper_UnkMotion6_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_3F14_Logic20_DmgDealt
+bool it_3F14_Logic20_DmgDealt(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    Vec3 pos;
+    u8 _pad[8];
+    Vec3 pos2;
+    Vec3 vel;
+    if (ip->xDD4_itemVar.flipper.xDD8 == 0) {
+        if (ip->xDD4_itemVar.flipper.xDD4 >= 6) {
+            itColl_BounceOffVictim(gobj);
+        } else {
+            ip->x40_vel.x = -1.0f * ip->x40_vel.x;
+            ip->x40_vel.y = -1.0f * ip->x40_vel.y + it_804D6D28->x60_float;
+        }
+    } else {
+        ip->xDD4_itemVar.flipper.xDDC = attrs->x14;
+        it_80290CE8_inline(gobj, &vel, &pos, 10.0f);
+        it_80272560(gobj, 0);
+        it_80272560(gobj, 1);
+        it_802756D0(gobj);
+        if (ip->xDD4_itemVar.flipper.xDE8 == 0) {
+            it_80290DD4_inline(gobj, ip->xC38, &ip->xCD4, &pos2);
+        }
+    }
+    return false;
+}
 
 #pragma dont_inline on
 bool it_3F14_Logic20_Clanked(Item_GObj* gobj)
@@ -315,8 +491,7 @@ bool it_3F14_Logic20_Clanked(Item_GObj* gobj)
             itColl_BounceOffVictim(gobj);
         } else {
             ip->x40_vel.x = -1.0f * ip->x40_vel.x;
-            ip->x40_vel.y =
-                -1.0f * ip->x40_vel.y + it_804D6D28->x60_float;
+            ip->x40_vel.y = -1.0f * ip->x40_vel.y + it_804D6D28->x60_float;
         }
     } else {
         ip->xDD4_itemVar.flipper.xDDC = attrs->x14;
@@ -341,8 +516,7 @@ bool it_3F14_Logic20_HitShield(Item_GObj* gobj)
             itColl_BounceOffVictim(gobj);
         } else {
             ip->x40_vel.x = -1.0f * ip->x40_vel.x;
-            ip->x40_vel.y =
-                -1.0f * ip->x40_vel.y + it_804D6D28->x60_float;
+            ip->x40_vel.y = -1.0f * ip->x40_vel.y + it_804D6D28->x60_float;
         }
     } else {
         ip->xDD4_itemVar.flipper.xDDC = attrs->x14;
@@ -368,7 +542,50 @@ bool itFlipper_Logic20_ShieldBounced(Item_GObj* gobj)
     return itColl_BounceOffShield(gobj);
 }
 
-/// #it_3F14_Logic20_DmgReceived
+static inline void it_3F14_DmgRecv_CE8(Item_GObj* gobj, Vec3* vel, Vec3* pos,
+                                       f32 speed)
+{
+    Item* ip = GET_ITEM(gobj);
+    *pos = ip->pos;
+
+    if (ip->xCEC_fighterGObj != NULL) {
+        HSD_GObj* fighter = ip->xCEC_fighterGObj;
+        if (ftLib_80086960(fighter)) {
+            Item* ip = GET_ITEM(gobj);
+            itFlipper_DatAttrs* attrs;
+            /// @todo Eliminate this no-op branch (perturbs scheduling).
+            if (pos != NULL) {
+            }
+            attrs = itFlipper_GetAttrs(ip);
+            ftLib_800866DC(fighter, pos);
+            ftLib_80086BEC(fighter, vel);
+            speed = attrs->x18 * sqrtf__Ff(vel->x * vel->x + vel->y * vel->y);
+        }
+        ip->xCEC_fighterGObj = NULL;
+    }
+    it_80290C38(gobj, pos, deg_to_rad * speed);
+}
+
+bool it_3F14_Logic20_DmgReceived(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    Vec3 pos;
+    u8 _pad[8];
+    Vec3 vec;
+    Vec3 vel;
+    if (ip->xDD4_itemVar.flipper.xDD8 != 0) {
+        ip->xDD4_itemVar.flipper.xDDC = attrs->x14;
+        it_3F14_DmgRecv_CE8(gobj, &vel, &pos, 10.0f);
+        it_80272560(gobj, 0);
+        it_80272560(gobj, 1);
+        it_802756D0(gobj);
+        if (ip->xDD4_itemVar.flipper.xDE8 == 0) {
+            it_80290DD4_inline(gobj, ip->xCB4, &ip->xCE0, &vec);
+        }
+    }
+    return false;
+}
 
 void itFlipper_Logic20_EnteredAir(Item_GObj* gobj)
 {

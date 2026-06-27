@@ -9,6 +9,9 @@
 #include "it/item.h"
 #include "it/items/itzgshell.h"
 #include "it/items/itzrshell.h"
+#include "it/ithitbox.h"
+#include "it/itmaplib.h"
+#include "it/itzako.h"
 #include "mp/mpcoll.h"
 
 ItemStateTable it_803F85F0[] = {

@@ -80,7 +80,7 @@ void grTiceclimber_UnkStage0_OnLoad(void) {}
 
 void grTiceclimber_UnkStage0_OnStart(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grTIceClimber_80220FAC(void)
@@ -162,7 +162,7 @@ void grTIceClimber_80221208(Item_GObj* gobj, Ground* u1, Vec3* u2,
     Vec3 pos;
     Item* it = GET_ITEM(gobj);
 
-    HSD_JObjSetFlagsAll(it->xDD4_itemVar.mato.x4, 0x10);
+    HSD_JObjSetFlagsAll(it->xDD4_itemVar.mato.x4, JOBJ_HIDDEN);
     lb_8000B1CC(it->xDD4_itemVar.mato.x4, NULL, &pos);
     efSync_Spawn(0x445, gobj, &pos);
     Camera_80030E44(2, 0);

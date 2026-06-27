@@ -10,17 +10,6 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_0852.h"
-#include "ft/ft_0BEC.h"
-#include "ft/ft_0C31.h"
-#include "ft/ft_0CD1.h"
-#include "ft/ft_0CDD.h"
-#include "ft/ft_0D31.h"
-#include "ft/ftcamera.h"
-#include "ft/ftcliffcommon.h"
-#include "ft/ftcolanim.h"
-#include "ft/ftlipstickswing.h"
-#include "ft/ftstarrodswing.h"
-#include "ft/ftswing.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCaptain/ftCa_Init.h"
@@ -28,113 +17,6 @@
 #include "ftCaptain/ftCa_SpecialN.h"
 #include "ftCaptain/ftCa_SpecialS.h"
 #include "ftCLink/ftCl_Init.h"
-
-#include "ftCommon/forward.h"
-
-#include "ftCommon/ftCo_AppealS.h"
-#include "ftCommon/ftCo_Attack1.h"
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_AttackAir.h"
-#include "ftCommon/ftCo_AttackDash.h"
-#include "ftCommon/ftCo_AttackHi3.h"
-#include "ftCommon/ftCo_AttackHi4.h"
-#include "ftCommon/ftCo_AttackLw3.h"
-#include "ftCommon/ftCo_AttackLw4.h"
-#include "ftCommon/ftCo_AttackS3.h"
-#include "ftCommon/ftCo_AttackS4.h"
-#include "ftCommon/ftCo_Barrel.h"
-#include "ftCommon/ftCo_BarrelWait.h"
-#include "ftCommon/ftCo_Bury.h"
-#include "ftCommon/ftCo_CaptureCaptain.h"
-#include "ftCommon/ftCo_CaptureCut.h"
-#include "ftCommon/ftCo_CaptureDamageKoopa.h"
-#include "ftCommon/ftCo_CaptureKirby.h"
-#include "ftCommon/ftCo_CaptureKoopa.h"
-#include "ftCommon/ftCo_CaptureWaitKirby.h"
-#include "ftCommon/ftCo_CaptureWaitKoopa.h"
-#include "ftCommon/ftCo_CaptureYoshi.h"
-#include "ftCommon/ftCo_CliffAttack.h"
-#include "ftCommon/ftCo_CliffClimb.h"
-#include "ftCommon/ftCo_CliffEscape.h"
-#include "ftCommon/ftCo_CliffJump.h"
-#include "ftCommon/ftCo_CliffWait.h"
-#include "ftCommon/ftCo_Damage.h"
-#include "ftCommon/ftCo_DamageBind.h"
-#include "ftCommon/ftCo_DamageFall.h"
-#include "ftCommon/ftCo_DamageIce.h"
-#include "ftCommon/ftCo_DamageScrew.h"
-#include "ftCommon/ftCo_DamageSong.h"
-#include "ftCommon/ftCo_Dash.h"
-#include "ftCommon/ftCo_Down.h"
-#include "ftCommon/ftCo_DownAttack.h"
-#include "ftCommon/ftCo_DownBound.h"
-#include "ftCommon/ftCo_DownDamage.h"
-#include "ftCommon/ftCo_DownSpot.h"
-#include "ftCommon/ftCo_DownStand.h"
-#include "ftCommon/ftCo_Escape.h"
-#include "ftCommon/ftCo_EscapeAir.h"
-#include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/ftCo_FallAerial.h"
-#include "ftCommon/ftCo_FallSpecial.h"
-#include "ftCommon/ftCo_FlyReflect.h"
-#include "ftCommon/ftCo_Furafura.h"
-#include "ftCommon/ftCo_Guard.h"
-#include "ftCommon/ftCo_HammerFall.h"
-#include "ftCommon/ftCo_HammerJump.h"
-#include "ftCommon/ftCo_HammerKneeBend.h"
-#include "ftCommon/ftCo_HammerLanding.h"
-#include "ftCommon/ftCo_HammerTurn.h"
-#include "ftCommon/ftCo_HammerWait.h"
-#include "ftCommon/ftCo_HammerWalk.h"
-#include "ftCommon/ftCo_ItemParasolDamageFall.h"
-#include "ftCommon/ftCo_ItemParasolFall.h"
-#include "ftCommon/ftCo_ItemParasolFallSpecial.h"
-#include "ftCommon/ftCo_ItemParasolOpen.h"
-#include "ftCommon/ftCo_ItemScrew.h"
-#include "ftCommon/ftCo_ItemThrow.h"
-#include "ftCommon/ftCo_Jump.h"
-#include "ftCommon/ftCo_JumpAerial.h"
-#include "ftCommon/ftCo_KinokoGiantEnd.h"
-#include "ftCommon/ftCo_KinokoGiantStart.h"
-#include "ftCommon/ftCo_KinokoSmallEnd.h"
-#include "ftCommon/ftCo_KinokoSmallStart.h"
-#include "ftCommon/ftCo_KneeBend.h"
-#include "ftCommon/ftCo_Landing.h"
-#include "ftCommon/ftCo_LandingAir.h"
-#include "ftCommon/ftCo_Lift.h"
-#include "ftCommon/ftCo_MissFoot.h"
-#include "ftCommon/ftCo_Ottotto.h"
-#include "ftCommon/ftCo_Pass.h"
-#include "ftCommon/ftCo_Passive.h"
-#include "ftCommon/ftCo_PassiveCeil.h"
-#include "ftCommon/ftCo_PassiveStand.h"
-#include "ftCommon/ftCo_PassiveWall.h"
-#include "ftCommon/ftCo_Rebound.h"
-#include "ftCommon/ftCo_Run.h"
-#include "ftCommon/ftCo_RunBrake.h"
-#include "ftCommon/ftCo_RunDirect.h"
-#include "ftCommon/ftCo_ShieldBreakDown.h"
-#include "ftCommon/ftCo_ShieldBreakFall.h"
-#include "ftCommon/ftCo_ShieldBreakFly.h"
-#include "ftCommon/ftCo_ShieldBreakStand.h"
-#include "ftCommon/ftCo_Shouldered.h"
-#include "ftCommon/ftCo_Squat.h"
-#include "ftCommon/ftCo_SquatRv.h"
-#include "ftCommon/ftCo_SquatWait.h"
-#include "ftCommon/ftCo_StopCeil.h"
-#include "ftCommon/ftCo_StopWall.h"
-#include "ftCommon/ftCo_Throw.h"
-#include "ftCommon/ftCo_Thrown.h"
-#include "ftCommon/ftCo_ThrownKirby.h"
-#include "ftCommon/ftCo_ThrownKoopa.h"
-#include "ftCommon/ftCo_ThrownMewtwo.h"
-#include "ftCommon/ftCo_Turn.h"
-#include "ftCommon/ftCo_TurnRun.h"
-#include "ftCommon/ftCo_Wait.h"
-#include "ftCommon/ftCo_Walk.h"
-#include "ftCommon/ftCo_WarpStar.h"
-#include "ftCommon/ftCo_YoshiEgg.h"
-#include "ftCommon/ftpickupitem.h"
 #include "ftCrazyHand/ftCh_Init.h"
 #include "ftDonkey/ftDk_Init.h"
 #include "ftDonkey/ftDk_SpecialHi.h"
@@ -156,12 +38,12 @@
 #include "ftGameWatch/ftGw_SpecialS.h"
 #include "ftGanon/ftGn_Init.h"
 #include "ftGigaKoopa/ftGk_Init.h"
-#include "ftKirby/ftKb_Init.h"
+#include "ftKirby/ftkirby.h"
+#include "ftKirby/ftkirbyspecialhi.h"
 #include "ftKoopa/ftKp_Init.h"
 #include "ftKoopa/ftKp_SpecialHi.h"
 #include "ftKoopa/ftKp_SpecialLw.h"
 #include "ftKoopa/ftKp_SpecialN.h"
-#include "ftKoopa/ftKp_SpecialS.h"
 #include "ftLink/ftLk_Init.h"
 #include "ftLink/ftLk_SpecialHi.h"
 #include "ftLink/ftLk_SpecialLw.h"
@@ -183,10 +65,7 @@
 #include "ftMars/ftMs_SpecialLw.h"
 #include "ftMars/ftMs_SpecialN.h"
 #include "ftMars/ftMs_SpecialS.h"
-#include "ftMasterHand/ftMh_CaptureDamageMasterHand.h"
-#include "ftMasterHand/ftMh_CaptureMasterHand.h"
 #include "ftMasterHand/ftMh_Init.h"
-#include "ftMasterHand/ftMh_ThrownMasterHand.h"
 #include "ftMewtwo/ftMt_Init.h"
 #include "ftMewtwo/ftMt_SpecialHi.h"
 #include "ftMewtwo/ftMt_SpecialLw.h"
@@ -209,8 +88,9 @@
 #include "ftPikachu/ftPk_SpecialLw.h"
 #include "ftPikachu/ftPk_SpecialN.h"
 #include "ftPikachu/ftPk_SpecialS.h"
-#include "ftPopo/ftPp_1211.h"
 #include "ftPopo/ftPp_Init.h"
+#include "ftPopo/ftPp_SpecialHi.h"
+#include "ftPopo/ftPp_SpecialLw.h"
 #include "ftPopo/ftPp_SpecialN.h"
 #include "ftPopo/ftPp_SpecialS.h"
 #include "ftPurin/ftPr_Init.h"
@@ -1837,15 +1717,13 @@ void ftData_80085A14(FighterKind kind)
     if (ftData_Table_Unk0[kind].data == NULL) {
         lbFile_800168A0(1, ftData_803C23E4[kind], &sp18, &sp10);
         a_head = sp18;
-        if (a_head == 0) {
-            __assert("ftdata.c", 0x974, "a_head");
-        }
+        HSD_ASSERT(0x974, a_head);
         for (i = 0; i < (u32) ftData_Table_Unk0[kind].count; i++) {
             temp_r0 = temp_r27->xC[i].x8;
             if (temp_r0 != 0) {
                 if (temp_r0 > 0x8000) {
-                    OSReport("fighter figatree over! %x\n", temp_r0);
-                    __assert("ftdata.c", 0x9AF, "0");
+                    HSD_ASSERTREPORT(0x9AF, 0, "fighter figatree over! %x\n",
+                                     temp_r0);
                 }
                 temp_r27->xC[i].x14 = (a_head + temp_r27->xC[i].x4);
             }
@@ -1879,8 +1757,7 @@ void ftData_80085B98(Fighter* fp, int arg1, int arg2)
     fp->x5A8 = 0;
     fp->x58C = ftData_UnkIntPairs[fp->kind].count;
     if (arg2 >= fp->x58C) {
-        OSReport("Demo Status error! %d\n", arg2);
-        __assert("ftdata.c", 0x9D2, "0");
+        HSD_ASSERTREPORT(0x9D2, 0, "Demo Status error! %d\n", arg2);
     }
     if (temp_r30 != 0U) {
         for (i = arg1; i <= arg2; i++) {
@@ -1888,8 +1765,8 @@ void ftData_80085B98(Fighter* fp, int arg1, int arg2)
             temp_r0 = temp_r3->x8;
             if (temp_r3->x8 != 0U) {
                 if (temp_r0 > 0xB000) {
-                    OSReport("fighter figatree over! %x\n", temp_r0);
-                    __assert("ftdata.c", 0x9DC, "0");
+                    HSD_ASSERTREPORT(0x9DC, 0, "fighter figatree over! %x\n",
+                                     temp_r0);
                 }
                 temp_r3 = &fp->ft_data->x14[i];
                 temp_r3->x14 = temp_r30 + temp_r3->x4;
@@ -1925,8 +1802,8 @@ void ftData_80085CD8(Fighter* fp, Fighter* arg1, int msid)
                         &sp14, temp_r4->x0, temp_r3->x8,
                         (intptr_t) temp_r4 - (intptr_t) temp_r3_3->x59C);
                     if (temp_ret == -1) {
-                        OSReport("lbArchiveRelocate error! %x\n", msid);
-                        __assert("ftdata.c", 0x9FA, "0");
+                        HSD_ASSERTREPORT(
+                            0x9FA, 0, "lbArchiveRelocate error! %x\n", msid);
                     }
                 } else {
                     temp_r4_2 = temp_r3->x14;
@@ -1939,8 +1816,8 @@ void ftData_80085CD8(Fighter* fp, Fighter* arg1, int msid)
                     temp_ret_2 =
                         HSD_ArchiveParse(&sp14, fp->x59C->x0, temp_r3->x8);
                     if (temp_ret_2 == -1) {
-                        OSReport("HSD_ArchiveParse error! %x\n", msid);
-                        __assert("ftdata.c", 0xA0F, "0");
+                        HSD_ASSERTREPORT(0xA0F, 0,
+                                         "HSD_ArchiveParse error! %x\n", msid);
                     }
                 }
                 fp->x590 = HSD_ArchiveGetPublicAddress(&sp14, temp_r3->x0);
@@ -1978,8 +1855,8 @@ FigaTree* ftData_80085E50(Fighter* arg0, int msid)
                         &sp10, temp_r4->x0, temp_r3->x8,
                         (intptr_t) temp_r4 - (intptr_t) temp_r3_3->x59C);
                     if (temp_ret == -1) {
-                        OSReport("lbArchiveRelocate error! %x\n", msid);
-                        __assert("ftdata.c", 0xA30, "0");
+                        HSD_ASSERTREPORT(
+                            0xA30, 0, "lbArchiveRelocate error! %x\n", msid);
                     }
                 } else {
                     temp_r4_2 = temp_r3->x14;
@@ -1992,8 +1869,8 @@ FigaTree* ftData_80085E50(Fighter* arg0, int msid)
                     temp_ret_2 =
                         HSD_ArchiveParse(&sp10, arg0->x5A0->x0, temp_r3->x8);
                     if (temp_ret_2 == -1) {
-                        OSReport("HSD_ArchiveParse error! %x\n", msid);
-                        __assert("ftdata.c", 0xA45, "0");
+                        HSD_ASSERTREPORT(0xA45, 0,
+                                         "HSD_ArchiveParse error! %x\n", msid);
                     }
                 }
                 arg0->x598 = HSD_ArchiveGetPublicAddress(&sp10, temp_r3->x0);

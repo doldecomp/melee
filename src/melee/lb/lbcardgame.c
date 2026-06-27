@@ -37,20 +37,18 @@ static struct {
         u32 x4;
         UNK_T x8;
     } unk_arr[8];
-} lb_803BAB74 = {
-    { 0, 3, 0, 0x1790, 0 },
-    NULL,
-    {
-        { 0x1F2C, 1, NULL },
-        { 0x1F2C, 1, NULL },
-        { 0x1F2C, 1, NULL },
-        { 0x1F2C, 1, NULL },
-        { 0x1F2C, 1, NULL },
-        { 0x1F2C, 1, NULL },
-        { 0x1F2C, 1, NULL },
-        { -1,     0, NULL },
-    }
-};
+} lb_803BAB74 = { { 0, 3, 0, 0x1790, 0 },
+                  NULL,
+                  {
+                      { 0x1F2C, 1, NULL },
+                      { 0x1F2C, 1, NULL },
+                      { 0x1F2C, 1, NULL },
+                      { 0x1F2C, 1, NULL },
+                      { 0x1F2C, 1, NULL },
+                      { 0x1F2C, 1, NULL },
+                      { 0x1F2C, 1, NULL },
+                      { -1, 0, NULL },
+                  } };
 
 void lb_8001C600(void)
 {
@@ -107,9 +105,7 @@ u32 lb_8001C87C(void)
 
 int lb_8001C8BC(void)
 {
-    if (!lb_80433318.enable) {
-        __assert("lbcardgame.c", 0x140, "_p(enable)");
-    }
+    HSD_ASSERTMSG(0x140, lb_80433318.enable, "_p(enable)");
 
     return lb_8001BC18(0, "SuperSmashBros0110290334", (void**) &lb_803BAB74,
                        &lb_803BAB60, lb_8001C658(), lb_8001C820(),
@@ -234,9 +230,7 @@ void lb_8001CDB4(void)
 
 void lb_8001CE00(void)
 {
-    if (!lb_80433318.enable) {
-        __assert("lbcardgame.c", 0x2A3, "_p(enable)");
-    }
+    HSD_ASSERTMSG(0x2A3, lb_80433318.enable, "_p(enable)");
     *gm_GetPowerTime() += gmMainLib_8015FC74();
     lb_80433318.xC = true;
 }

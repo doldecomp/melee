@@ -19,6 +19,7 @@
 #include <math_ppc.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
+#include <MSL/math_ppc.h>
 
 HSD_ObjAllocData robj_alloc_data;   // robj_alloc_data
 HSD_ObjAllocData rvalue_alloc_data; // rvalue_alloc_data
@@ -341,6 +342,12 @@ static inline HSD_RObj* inlined_HSD_RObjGetByType(HSD_RObj* robj, u32 type,
     }
 
     return NULL;
+}
+
+inline f32 HSD_MtxColMagFloat(MtxPtr mtx, int col)
+{
+    return sqrtf((mtx[0][col] * mtx[0][col]) + (mtx[1][col] * mtx[1][col]) +
+                 (mtx[2][col] * mtx[2][col]));
 }
 
 static void resolveCnsOrientation(HSD_RObj* robj, void* obj,
@@ -687,7 +694,7 @@ void HSD_RObjFree(HSD_RObj* robj)
 
 static char HSD_RObj_80406F14[] = "(ptr && nitems) || !ptr";
 
-extern float HSD_ByteCodeEval(u8*, float*, u32);
+extern float HSD_ByteCodeEval(u8*, f32*, s32);
 
 static void expEvaluate(HSD_Exp* exp, u32 type, void* obj,
                         HSD_ObjUpdateFunc update_func)
@@ -728,9 +735,7 @@ static void expEvaluate(HSD_Exp* exp, u32 type, void* obj,
     temp_f31 = 57.29578F;
     for (rvalue = exp->rvalue; rvalue != NULL; rvalue = rvalue->next) {
         jobj = rvalue->jobj;
-        if (jobj == NULL) {
-            __assert(__FILE__, 0x467, "jobj");
-        }
+        HSD_ASSERT(0x467, jobj);
         HSD_JObjSetupMatrix(rvalue->jobj);
         for (cur_bit = 1; cur_bit && cur_bit <= rvalue->flags; cur_bit <<= 1) {
             switch (rvalue->flags & cur_bit) {

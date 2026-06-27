@@ -188,25 +188,25 @@ var structTypes = map[string]CStructType{
 		},
 	},
 
-	"MajorScene": {
+	"GameMode": {
 		Fields: []CFieldType{
 			ignoredField, // u8 + u8 + padding
 			{"Load", &CFuncType{"void", []string{"void"}}},
 			{"Unload", &CFuncType{"void", []string{"void"}}},
 			{"Init", &CFuncType{"void", []string{"void"}}},
-			ignoredField, // MinorScene*
+			ignoredField, // GameScene*
 		},
 	},
 
-	"MinorScene": {
+	"GameScene": {
 		Fields: []CFieldType{
 			ignoredField, // u8 + u8 + u16
-			{"Prep", &CFuncType{"void", []string{"MinorScene*"}}},
-			{"Decide", &CFuncType{"void", []string{"MinorScene*"}}},
+			{"Prep", &CFuncType{"void", []string{"GameScene*"}}},
+			{"Decide", &CFuncType{"void", []string{"GameScene*"}}},
 		},
 	},
 
-	"MinorSceneHandler": {
+	"GameSceneHandler": {
 		Fields: []CFieldType{
 			ignoredField,
 			{"OnFrame", &CFuncType{"void", []string{"void"}}},

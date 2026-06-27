@@ -78,7 +78,7 @@ void grTest_UnkStage0_OnLoad(void) {}
 
 void grTest_UnkStage0_OnStart(void)
 {
-    grZakoGenerator_801CAE04(false);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grTest_8020703C(void)
@@ -142,9 +142,9 @@ void grTest_802071C4(Ground_GObj* gobj)
         iVar2 = Ground_801C3FA4(gobj, 0x10);
         if (iVar2) {
             if (HSD_JObjGetFlags(iVar2) & 0x10) {
-                HSD_JObjClearFlags(iVar2, 0x10);
+                HSD_JObjClearFlags(iVar2, JOBJ_HIDDEN);
             } else {
-                HSD_JObjSetFlags(iVar2, 0x10);
+                HSD_JObjSetFlags(iVar2, JOBJ_HIDDEN);
             }
             grTe_804D6A48 = 0.0f;
         }
@@ -154,9 +154,9 @@ void grTest_802071C4(Ground_GObj* gobj)
         iVar2 = Ground_801C3FA4(gobj, 0x11);
         if (iVar2) {
             if (HSD_JObjGetFlags(iVar2) & 0x10) {
-                HSD_JObjClearFlags(iVar2, 0x10);
+                HSD_JObjClearFlags(iVar2, JOBJ_HIDDEN);
             } else {
-                HSD_JObjSetFlags(iVar2, 0x10);
+                HSD_JObjSetFlags(iVar2, JOBJ_HIDDEN);
             }
             grTe_804D6A48 = 0.0f;
         }

@@ -180,5 +180,6 @@ typedef struct unkCastle unkCastle;
 
 typedef void (*unkCastleCallback)(void*, struct unkCastle*);
 typedef void (*unkCastleCallback2)(void*, struct unkCastle*, Ground_GObj*);
+typedef int (*GrIceMtSegmentLookup)(Ground_GObj*);
 
 #endif

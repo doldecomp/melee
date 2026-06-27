@@ -33,12 +33,9 @@
 #include "ftYoshi/types.h"
 #include "ftZakoBoy/types.h"
 #include "ftZelda/types.h"
-#include "gr/types.h"
 
 #include "it/forward.h"
 
-#include "lb/lbanim.h"
-#include "lb/lbcommand.h"
 #include "lb/types.h"
 
 #include <baselib/forward.h>
@@ -643,7 +640,10 @@ struct ftData {
     /* +24 */ UNK_T x24;
     /* +28 */ WaitStruct* x28;
     /* +2C */ struct ftDynamics* x2C;
-    /* +30 */ UNK_T x30;
+    /* +30 */ struct ftData_x30 {
+        /* +0 */ int count;
+        /* +4 */ ftHurtboxInit* inits;
+    }* x30;
     /* +34 */ struct ftData_x34 {
         /* +0 */ Fighter_Part x0;
         /* +4 */ float scale;
@@ -661,7 +661,7 @@ struct ftData {
     /* +4C */ FtSFX* x4C_sfx;
     /* +50 */ Vec2* x50;
     /* +54 */ int x54;
-    /* +58 */ void* x58;
+    /* +58 */ struct ftData_x58_t* x58;
     /* +5C */ HSD_Joint* x5C;
 };
 
@@ -936,7 +936,27 @@ struct Fighter_DemoStrings {
 /* fp+2074 */ struct Struct2074 {
     /* fp+2074 */ Vec2 x2074_vec;
     /* fp+207C */ S32Vec2 x207C;
-    /* fp+2084 */ u32 x2084;
+    /* fp+2084 */ union {
+        u32 x2084;
+        struct {
+            u8 x2084_b0 : 1;
+            u8 x2084_b1 : 1;
+            u8 x2084_b2 : 1;
+            u8 x2084_b3 : 1;
+            u8 x2084_b4 : 1;
+            u8 x2084_b5 : 1;
+            u8 x2084_b6 : 1;
+            u8 x2084_b7 : 1;
+            u8 x2085_b0 : 1;
+            u8 x2085_b1 : 1;
+            u8 x2085_b2 : 1;
+            u8 x2085_b3 : 1;
+            u8 x2085_b4 : 1;
+            u8 x2085_b5 : 1;
+            u8 x2085_b6 : 1;
+            u8 x2085_b7 : 1;
+        };
+    };
     /* fp+2088 */ u16 x2088;
 };
 
@@ -999,7 +1019,7 @@ struct Fighter_x1A88_t {
     /*  +44 */ Fighter* x44;
     /*  +48 */ UNK_T x48;
     /*  +4C */ Item* x4C;
-    /*  +50 */ int x50;
+    /*  +50 */ u32 x50;
     /*  +54 */ Vec2 x54;
     /*  +5C */ float x5C;
     /*  +60 */ int x60;
@@ -1015,10 +1035,13 @@ struct Fighter_x1A88_t {
     /*  +94 */ int x94;
     /*  +98 */ Vec3 x98;
     /*  +A4 */ int xA4;
-    /*  +A8 */ u8 pad_xA8[0xC8 - 0xA8];
-    /*  +C8 */ u8 xC8;
-    /*  +C9 */ u8 pad_xC9[0xEC - 0xC9];
-    /*  +EC */ u8 xEC;
+    /*  +A8 */ s32
+        xA8_array[8];  ///< defend move queue (up to 8 entries, count in xC8)
+    /*  +C8 */ u8 xC8; ///< defend move queue count
+    /*  +C9 */ u8 pad_xC9[0xCC - 0xC9];
+    /*  +CC */ s32
+        xCC_array[8];  ///< attack move queue (up to 8 entries, count in xEC)
+    /*  +EC */ u8 xEC; ///< attack move queue count
     /*  +ED */ u8 pad_xED[0xF0 - 0xED];
     /*  +F0 */ Fighter* xF0;
     /*  +F4 */ Item* xF4;
@@ -1093,19 +1116,19 @@ struct ft_800898B4_t {
     /*  +4  */ int x4;
     /*  +8  */ float kb_applied1;
     /*  +C  */ int xC;
-    /*  +10 */ u32 x10_b0 : 1;
-    /*  +10 */ u32 x10_b1 : 1;
-    /*  +10 */ u32 x10_b2 : 1;
-    /*  +10 */ u32 x10_b3 : 1;
-    /*  +10 */ u32 x10_b4 : 1;
-    /*  +10 */ u32 x10_b5 : 1;
-    /*  +10 */ u32 x10_b6 : 1;
-    /*  +10 */ u32 x10_b7 : 1;
-    /*  +11 */ u32 x11_b0 : 1;
-    /*  +11 */ u32 x11_b1 : 1;
-    /*  +11 */ u32 x11_b2 : 1;
-    /*  +11 */ u32 x11_b3 : 1;
-    /*  +11 */ u32 x11_b4 : 1;
+    /*  +10 */ u8 x10_b0 : 1;
+    /*  +10 */ u8 x10_b1 : 1;
+    /*  +10 */ u8 x10_b2 : 1;
+    /*  +10 */ u8 x10_b3 : 1;
+    /*  +10 */ u8 x10_b4 : 1;
+    /*  +10 */ u8 x10_b5 : 1;
+    /*  +10 */ u8 x10_b6 : 1;
+    /*  +10 */ u8 x10_b7 : 1;
+    /*  +11 */ u8 x11_b0 : 1;
+    /*  +11 */ u8 x11_b1 : 1;
+    /*  +11 */ u8 x11_b2 : 1;
+    /*  +11 */ u8 x11_b3 : 1;
+    /*  +11 */ u8 x11_b4 : 1;
 };
 
 struct Fighter {
@@ -1320,7 +1343,7 @@ struct Fighter {
         /* +10 */ HSD_JObj* jobj;
         /* +14 */ float x14;
         /* +18 */ Vec3 x18;
-        /* +24 */ u8 pad[0x28 - 0x24];
+        /* +24 */ int x24;
     } x1670[1]; ///< @todo figure out proper size
     /* fp+1674 */ u8 filler_x1674[0x1828 - 0x1670 - 0x28];
     /* fp+1828 */ enum_t x1828;
@@ -1827,26 +1850,26 @@ struct ftData_80085FD4_ret {
     /* +14 */ u32 x14;
 };
 
-typedef struct ArticleDynamicBones {
+struct ArticleDynamicBones {
     BoneDynamicsDesc array[Ft_Dynamics_NumMax];
-} ArticleDynamicBones;
+};
 
-typedef struct ftDynamics {
+struct ftDynamics {
     /// @todo Very similar to #ItemDynamics.
     struct {
         /*  +0 */ int dynamicsNum;
         /*  +4 */ ArticleDynamicBones* ftDynamicBones;
     };
     /*  +8 */ int x4;
-    /*  +C */ void* x8;
+    /*  +C */ struct ftData_x38* x8;
     /* +10 */ FigaTree*** x10;
-} ftDynamics;
+};
 
-typedef struct KirbyHatStruct {
+struct KirbyHatStruct {
     /*  +0 */ HSD_Joint* hat_joint;
     /*  +4 */ FtPartsDesc desc;
     /*  +C */ ftDynamics* hat_dynamics[5];
-} KirbyHatStruct;
+};
 
 typedef struct Kirby_Unk {
     /*  +0 */ HSD_Joint* x0;
@@ -1864,6 +1887,21 @@ struct ft_80459B88_t {
 };
 STATIC_ASSERT(sizeof(struct ft_80459B88_t) == 0x88);
 
+struct IKState {
+    /* 0x00 */ HSD_JObj* jobj0;
+    /* 0x04 */ HSD_JObj* jobj1;
+    /* 0x08 */ HSD_JObj* jobj2;
+    /* 0x0C */ Vec3 pos0;
+    /* 0x18 */ Vec3 pos1;
+    /* 0x24 */ Vec3 pos2;
+    /* 0x30 */ Vec3 pos3;
+    /* 0x3C */ Vec3 pos4;
+    /* 0x48 */ f32 len0;
+    /* 0x4C */ f32 len1;
+    /* 0x50 */ f32 angle_max;
+    /* 0x54 */ f32 angle_limit;
+};
+
 typedef struct DmgLogEntry {
     /*  +0 */ enum EntityKind x0;
     /*  +4 */ FighterKind kind;
@@ -1879,9 +1917,24 @@ typedef struct DmgLogEntry {
         FighterHurtCapsule* hurt1;
     };
     /* +14 */ Vec3 pos;
-    /* +20 */ int x20;
+    /* +20 */ float x20;
     /* +24 */ size_t size_of_xC;
 } DmgLogEntry;
 STATIC_ASSERT(sizeof(struct DmgLogEntry) == 0x28);
+
+struct ftData_x58_t {
+    /* 0x00 */ u8 x0;
+    /* 0x01 */ u8 x1;
+    /* 0x02 */ u8 pad_02[2];
+    /* 0x04 */ f32 x4;
+    /* 0x08 */ u8 x8;
+    /* 0x09 */ u8 x9;
+    /* 0x0A */ u8 pad_0A[2];
+    /* 0x0C */ f32 xC;
+    /* 0x10 */ u8 x10;
+    /* 0x11 */ u8 x11;
+    /* 0x12 */ u8 pad_12[6];
+    /* 0x18 */ f32 x18;
+};
 
 #endif

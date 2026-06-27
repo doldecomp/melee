@@ -38,7 +38,7 @@ efLib_Create_AttachChild_Scale(u32 gfx_id, HSD_GObj* gobj, HSD_JObj* jobj);
                                                             HSD_GObj* gobj,
                                                             HSD_JObj* jobj);
 /* 05C814 */ EF_Effect* efLib_Create_Attach_Pos(u32 gfx_id, HSD_GObj* gobj,
-                                          Vec3* position);
+                                                Vec3* position);
 
 // Particle processing callbacks
 
@@ -101,8 +101,7 @@ efLib_CreateGenerator_AppSRT_SetFacingDirScale(s32 gfx_id, va_list vlist);
 
 /* 05F774 */ void efLib_SetTevKonstColor(HSD_JObj* jobj, s32 count, u32 konst,
                                          u32 tev0);
-/* 05F864 */ void efLib_SetParamAlpha(HSD_GObj* gobj, u8 alpha, f32 unused1,
-                                      f32 unused2);
+/* 05F864 */ void efLib_SetParamAlpha(HSD_GObj* gobj, u8 alpha);
 /* 05F990 */ void efLib_SetParamGfxId(HSD_GObj* gobj, s32 gfx_id);
 
 // More effect callbacks (?)

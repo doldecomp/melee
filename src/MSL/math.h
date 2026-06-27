@@ -14,6 +14,7 @@
 #define M_PI_3 (M_PI / 3)
 
 #define M_PI_F 3.14159265358979323846F
+#define M_TAU_F 6.283185307179586F
 #define M_PI_2_F (M_PI_F / 2.0F)
 #define M_PI_3_F (M_PI_F / 3.0F)
 
@@ -21,6 +22,8 @@
 #define M_TAU_L 6.283185307179586L
 #define M_PI_2_L (M_PI_L / 2.0L)
 #define M_PI_3_L (M_PI_L / 3.0L)
+
+#define SIGNF(x) ((x) > 0.0f ? 1.0f : -1.0f)
 
 static float const deg_to_rad = M_PI / 180;
 static float const rad_to_deg = 180 / M_PI;
@@ -46,9 +49,8 @@ enum FloatType {
 
 static inline s32 __fpclassifyf(float x)
 {
-    const s32 exp_mask = 0b01111111100000000000000000000000; // = 0x7F800000
-    const s32 mantissa_mask =
-        0b00000000011111111111111111111111; // = 0x007fffff
+    const s32 exp_mask = 0x7F800000;
+    const s32 mantissa_mask = 0x007FFFFF;
     switch ((*(s32*) &x) & exp_mask) {
     case exp_mask:
         return ((*(s32*) &x) & mantissa_mask) ? FP_NAN : FP_INFINITE;

@@ -5,6 +5,9 @@
 
 #include "cm/camera.h"
 #include "ft/ftlib.h"
+
+#include "it/forward.h"
+
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -12,10 +15,32 @@
 #include "it/itCommonItems.h"
 #include "it/item.h"
 #include "it/items/itnokonoko.h"
+#include "it/ithitbox.h"
+#include "it/itmaplib.h"
+#include "it/itzako.h"
 #include "lb/lb_00B0.h"
 #include "mp/mpcoll.h"
+#include "MSL/math.h"
 
 #include <baselib/jobj.h>
+#include <baselib/random.h>
+
+ItemStateTable it_803F88C0[] = {
+    { 0, NULL, NULL, NULL },
+    { 1, itPatapata_UnkMotion1_Anim, itPatapata_UnkMotion1_Phys,
+      itPatapata_UnkMotion1_Coll },
+    { 1, itPatapata_UnkMotion2_Anim, itPatapata_UnkMotion3_Phys,
+      itPatapata_UnkMotion3_Coll },
+    { 2, itPatapata_UnkMotion3_Anim, itPatapata_UnkMotion3_Phys,
+      itPatapata_UnkMotion3_Coll },
+    { -1, itPatapata_UnkMotion4_Anim, itPatapata_UnkMotion4_Phys,
+      itPatapata_UnkMotion4_Coll },
+    { 3, itPatapata_UnkMotion5_Anim, itPatapata_UnkMotion5_Phys, NULL },
+    { 4, itPatapata_UnkMotion6_Anim, itPatapata_UnkMotion6_Phys,
+      itPatapata_UnkMotion6_Coll },
+    { 1, itPatapata_UnkMotion7_Anim, itPatapata_UnkMotion7_Phys,
+      itPatapata_UnkMotion7_Coll },
+};
 
 void it_802E05A0(Item_GObj* gobj)
 {
@@ -77,7 +102,53 @@ bool itPatapata_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802E0734
+void it_802E0734(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itPatapataAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+
+    switch (ip->xDD4_itemVar.patapata.x40) {
+    case 0: {
+        s32 x10sq = attrs->x10 * attrs->x10;
+        f32 xC = attrs->xC;
+        ip->x40_vel.x = ip->facing_dir * attrs->x0->x4;
+        ip->x40_vel.y = 0.0f;
+        ip->xDD4_itemVar.patapata.x30 = -1.0f * ((2.0f * xC) / x10sq);
+        break;
+    }
+    case 1: {
+        f32 half_width;
+        s32 frames;
+        s32 x24;
+        f32 half_height;
+        ip->x40_vel.x = ip->facing_dir * attrs->x0->x4;
+        half_width = attrs->x14 / 2;
+        frames = half_width / attrs->x0->x4;
+        ip->xDD4_itemVar.patapata.x20 = frames;
+        ip->xDD4_itemVar.patapata.x28 = frames / 2;
+        ip->xDD4_itemVar.patapata.x2C =
+            -ip->facing_dir * ((2.0f * half_width) / (frames * frames));
+        x24 = attrs->x1C / 2;
+        half_height = attrs->x18 / 2;
+        ip->xDD4_itemVar.patapata.x24 = x24;
+        ip->x40_vel.y = -1.0f * (half_height / x24);
+        ip->xDD4_itemVar.patapata.x30 = (2.0f * half_height) / (x24 * x24);
+        break;
+    }
+    case 2: {
+        s32 x20 = attrs->x24 / 2;
+        f32 half_height = attrs->x20 / 2;
+        ip->xDD4_itemVar.patapata.x20 = x20;
+        ip->x40_vel.y = -1.0f * (half_height / x20);
+        ip->xDD4_itemVar.patapata.x30 = (2.0f * half_height) / (x20 * x20);
+        break;
+    }
+    }
+    ip->x40_vel.z = 0.0f;
+    it_8027C56C(gobj, ip->facing_dir);
+    it_802756E0(gobj);
+    it_802E1648(gobj, 2, 2);
+}
 
 bool itPatapata_UnkMotion2_Anim(Item_GObj* gobj)
 {
@@ -88,9 +159,110 @@ bool itPatapata_UnkMotion2_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itPatapata_UnkMotion3_Phys
+void itPatapata_UnkMotion3_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itPatapataAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    PAD_STACK(16);
 
-/// #itPatapata_UnkMotion3_Coll
+    if (it_802750E8(gobj, 2) && ip->msid == 2) {
+        it_802E0D9C(gobj);
+    }
+    switch (ip->xDD4_itemVar.patapata.x40) {
+    case 0:
+        ip->x40_vel.y += ip->xDD4_itemVar.patapata.x30;
+        break;
+    case 1:
+        if (ip->xDD4_itemVar.patapata.x20 == 0) {
+            ip->xDD4_itemVar.patapata.x20 = (attrs->x14 / 2) / attrs->x0->x4;
+            ip->xDD4_itemVar.patapata.x2C *= -1;
+        } else {
+            ip->x40_vel.x += ip->xDD4_itemVar.patapata.x2C;
+            ip->xDD4_itemVar.patapata.x20 -= 1;
+            if (ip->xDD4_itemVar.patapata.x28 == ip->xDD4_itemVar.patapata.x20)
+            {
+                it_802E0D9C(gobj);
+            }
+        }
+        if (ip->xDD4_itemVar.patapata.x24 == 0) {
+            ip->xDD4_itemVar.patapata.x24 = attrs->x1C / 2;
+            ip->xDD4_itemVar.patapata.x30 *= -1;
+        } else {
+            ip->x40_vel.y += ip->xDD4_itemVar.patapata.x30;
+            ip->xDD4_itemVar.patapata.x24 -= 1;
+        }
+        break;
+    case 2:
+        if (ip->xDD4_itemVar.patapata.x20 == 0) {
+            ip->xDD4_itemVar.patapata.x20 = attrs->x24 / 2;
+            ip->xDD4_itemVar.patapata.x30 *= -1;
+        } else {
+            ip->x40_vel.y += ip->xDD4_itemVar.patapata.x30;
+            ip->xDD4_itemVar.patapata.x20 -= 1;
+        }
+        break;
+    }
+}
+
+bool itPatapata_UnkMotion3_Coll(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    itPatapataAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    s32 landed = it_8026DA08(gobj);
+
+    if (it_80276308(gobj)) {
+        switch (ip->xDD4_itemVar.patapata.x40) {
+        case 0:
+            if (ip->msid == 2) {
+                Item_GObj* gobj2 = gobj; // permuterslop
+                it_802E0D9C(gobj2);
+            }
+            break;
+        case 1: {
+            f32 width;
+            s32 frames;
+            ip->x40_vel.x = -ip->facing_dir * attrs->x0->x4;
+            ip->xDD4_itemVar.patapata.x20 = frames =
+                ((width = attrs->x14) / attrs->x0->x4);
+            ip->xDD4_itemVar.patapata.x28 = frames / 2;
+            ip->xDD4_itemVar.patapata.x2C =
+                ip->facing_dir * ((2.0f * width) / (frames * frames));
+            if (ip->msid == 2) {
+                it_802E0D9C(gobj);
+            }
+            break;
+        }
+        case 2:
+            break;
+        }
+    }
+    if (landed) {
+        switch (ip->xDD4_itemVar.patapata.x40) {
+        case 0: {
+            s32 x10 = attrs->x10;
+            f32 dir = ip->facing_dir;
+            f32 xC = attrs->xC;
+            ip->x40_vel.x = dir * attrs->x0->x4;
+            ip->x40_vel.y = xC / x10;
+            break;
+        }
+        case 1:
+            ip->x40_vel.y *= -1.0f;
+            ip->xDD4_itemVar.patapata.x30 *= -1.0f;
+            break;
+        case 2: {
+            s32 frames = attrs->x24;
+            f32 height = attrs->x20;
+            ip->xDD4_itemVar.patapata.x20 = frames;
+            ip->x40_vel.y = height / frames;
+            ip->xDD4_itemVar.patapata.x30 =
+                -1.0f * ((2.0f * height) / (frames * frames));
+            break;
+        }
+        }
+    }
+    return false;
+}
 
 void it_802E0D9C(Item_GObj* gobj)
 {
@@ -140,7 +312,7 @@ bool it_2725_Logic4_DmgReceived(Item_GObj* gobj)
     if (ip->msid == 6) {
         it_802E1694(gobj);
     } else {
-        it_802E11E0();
+        it_802E11E0(gobj);
     }
     return false;
 }
@@ -149,7 +321,7 @@ bool it_802E0F1C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(8);
-    it_802E11E0();
+    it_802E11E0(gobj);
     Item_8026AE84(ip, 0x12E, 0x7F, 0x40);
     ftLib_80086D40(ip->xCFC, 12, 0);
     return false;
@@ -236,7 +408,55 @@ bool itPatapata_UnkMotion6_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802E11E0
+void it_802E11E0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itPatapataAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    s32 coll_facing;
+    s32 range;
+    s32 rand;
+    f32 val;
+
+    ip->init_facing_dir = ip->facing_dir;
+    it_8027B798(gobj, &ip->x40_vel);
+    ip->facing_dir = ip->init_facing_dir;
+    if (ip->facing_dir == -1.0f) {
+        coll_facing = -1;
+    } else {
+        coll_facing = 1;
+    }
+    mpCollSetFacingDir(&ip->x378_itemColl, coll_facing);
+    HSD_JObjSetFlagsAll(ip->xBBC_dynamicBoneTable->bones[0], JOBJ_HIDDEN);
+    HSD_JObjClearFlagsAll(ip->xBBC_dynamicBoneTable->bones[18], JOBJ_HIDDEN);
+    HSD_JObjClearFlagsAll(ip->xBBC_dynamicBoneTable->bones[11], JOBJ_HIDDEN);
+    it_802756D0(gobj);
+    it_80274C88(gobj);
+    it_80275474(gobj);
+    it_802E15B0(gobj);
+    ip->xDD4_itemVar.patapata.x20 = (s32) attrs->x28;
+    ip->xDD4_itemVar.patapata.x28 = attrs->x2C;
+    ip->xDD4_itemVar.patapata.x44 = 0;
+
+    range = (s32) (ABS(attrs->x30) + ABS(attrs->x34));
+
+    rand = HSD_Randi(range);
+    val = attrs->x30;
+    while (rand != 0) {
+        val += 0.1f;
+        rand--;
+    }
+    ip->xDD4_itemVar.patapata.x2C = val;
+
+    rand = HSD_Randi(range);
+    val = attrs->x30;
+    while (rand != 0) {
+        val += 0.1f;
+        rand--;
+    }
+    ip->x40_vel.x += val;
+
+    Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+}
 
 bool itPatapata_UnkMotion4_Anim(Item_GObj* gobj)
 {
@@ -249,11 +469,15 @@ bool itPatapata_UnkMotion4_Anim(Item_GObj* gobj)
         toggle = ip->xDD4_itemVar.patapata.x44 ^ 1;
         ip->xDD4_itemVar.patapata.x44 = toggle;
         if (toggle != 0) {
-            HSD_JObjSetFlagsAll(ip->xBBC_dynamicBoneTable->bones[18], 0x10);
-            HSD_JObjSetFlagsAll(ip->xBBC_dynamicBoneTable->bones[11], 0x10);
+            HSD_JObjSetFlagsAll(ip->xBBC_dynamicBoneTable->bones[18],
+                                JOBJ_HIDDEN);
+            HSD_JObjSetFlagsAll(ip->xBBC_dynamicBoneTable->bones[11],
+                                JOBJ_HIDDEN);
         } else {
-            HSD_JObjClearFlagsAll(ip->xBBC_dynamicBoneTable->bones[18], 0x10);
-            HSD_JObjClearFlagsAll(ip->xBBC_dynamicBoneTable->bones[11], 0x10);
+            HSD_JObjClearFlagsAll(ip->xBBC_dynamicBoneTable->bones[18],
+                                  JOBJ_HIDDEN);
+            HSD_JObjClearFlagsAll(ip->xBBC_dynamicBoneTable->bones[11],
+                                  JOBJ_HIDDEN);
         }
     } else {
         ip->xDD4_itemVar.patapata.x28 -= 1;
@@ -266,7 +490,7 @@ void itPatapata_UnkMotion4_Phys(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     itPatapataAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
     HSD_JObjAddTranslationZ(ip->xBBC_dynamicBoneTable->bones[18],
-                             ip->xDD4_itemVar.patapata.x2C);
+                            ip->xDD4_itemVar.patapata.x2C);
     it_80272860(gobj, attrs->x38, attrs->x3C);
 }
 
@@ -323,4 +547,34 @@ void it_802E16D8(Item_GObj* gobj, Item_GObj* ref_gobj)
     it_8026B894(gobj, ref_gobj);
 }
 
-/// #it_802E16F8
+Item_GObj* it_802E16F8(s32 arg0, Vec3* pos, s32 facing)
+{
+    Item* ip;
+    s32 coll_facing;
+    Vec3 vel = { 0 };
+    Item_GObj* gobj = it_8027B5B0(0xD4, pos, NULL, &vel, 1);
+    PAD_STACK(8);
+
+    if (gobj != NULL) {
+        ip = GET_ITEM(gobj);
+        ip->facing_dir = (f32) facing;
+        it_8027C56C(gobj, ip->facing_dir);
+        if (ip->facing_dir == -1.0f) {
+            coll_facing = -1;
+        } else {
+            coll_facing = 1;
+        }
+        mpCollSetFacingDir(&ip->x378_itemColl, coll_facing);
+        ip->xDD4_itemVar.patapata.x40 = arg0;
+        if (ip->xDD4_itemVar.patapata.x40 < 2) {
+            Item_80268E5C(gobj, 0, 2);
+            HSD_JObjAnimAll(gobj->hsd_obj);
+        }
+        it_8027CAD8(gobj);
+        ip = GET_ITEM(gobj);
+        Item_80268E5C(gobj, 1, 2);
+        it_80274CAC(gobj);
+        ip->jumped_on = it_802E0F1C;
+    }
+    return gobj;
+}

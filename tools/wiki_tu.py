@@ -3,8 +3,10 @@
 import argparse
 import json
 import sys
+from enum import IntEnum, auto
 from pathlib import Path
-from typing import Dict, Optional, cast
+from typing import cast
+from urllib.parse import quote
 
 import humanfriendly
 import mistletoe
@@ -13,7 +15,21 @@ from mistletoe.span_token import RawText
 from mistletoe.token import Token
 
 
-def read_wiki(lines) -> Dict[str, Dict[str, str]]:
+class ColumnIndex(IntEnum):
+    FILE = 0
+    MATCHED = auto()
+    TOTAL = auto()
+    REMAINING = auto()
+    TEXT_PERCENT = auto()
+    DATA_PERCENT = auto()
+    DISCORD = auto()
+    GITHUB = auto()
+
+
+BYTES_RE = re.compile(r"\bbytes?\b")
+
+
+def read_wiki(lines) -> dict[str, dict[str, str]]:
     assignees = {}
 
     def read_text(token: Token) -> str:
@@ -28,13 +44,13 @@ def read_wiki(lines) -> Dict[str, Dict[str, str]]:
         td = list(map(read_text, token.children))
 
         assignee = {}
-        if len(td) > 5 and td[5]:
-            assignee["discord"] = td[5]
-        if len(td) > 6 and td[6]:
-            assignee["github"] = td[6]
+        if len(td) > ColumnIndex.DISCORD and td[ColumnIndex.DISCORD]:
+            assignee["discord"] = td[ColumnIndex.DISCORD]
+        if len(td) > ColumnIndex.GITHUB and td[ColumnIndex.GITHUB]:
+            assignee["github"] = td[ColumnIndex.GITHUB]
 
         if assignee:
-            assignees[td[0]] = assignee
+            assignees[td[ColumnIndex.FILE]] = assignee
 
     def read_table(token: Table):
         assert token.children is not None
@@ -72,49 +88,139 @@ def write(args):
         data = json.load(path.open("r"))
 
     assignees = {}
-    if cast(Optional[Path], args.wiki_path):
+    if cast(Path | None, args.wiki_path):
         md = args.wiki_path.read_text()
         assignees = read_wiki(md)
 
-    print("""# Translation Units
+    def friendly_size(value: int) -> str:
+        # Non-breaking space so sizes like "1.18 KB" do not wrap in a cell.
+        size = BYTES_RE.sub("B", humanfriendly.format_size(value))
+        return size.replace(" ", "&nbsp;")
 
-Edit this page and fill in your own username to assign yourself to a file.
+    def percent_cell(matched: int, total: int, reported: float | None) -> str:
+        # A TU with no section of this kind has nothing to match.
+        if total == 0:
+            return "&mdash;"
+        pct = reported if reported is not None else (100.0 * matched / total)
+        return f"`{humanfriendly.round_number(float(pct))}%`"
 
-Just write your username as plaintext and it will be formatted automatically later.
-
-File|Matched|Total|%|:grey_question:|Assignee<br>Discord|Assignee<br>GitHub
--|-|-|-|-|-|-""")
-    for unit in data["units"] or []:
-
-        def friendly_size(value: int) -> str:
-            return f"`{humanfriendly.format_size(value).replace('bytes', 'B')}`"
-
-        # Strip "main/" by splitting on "/" and recombining
-        file = "/".join((unit["name"] or "/").split("/")[1:])
-        # Link to source file
-        file_link = f"[`{file}`](../blob/master/src/{file}.c)"
-
-        matched_code = int(unit["measures"].get("matched_code") or 0)
-        total_code = int(unit["measures"].get("total_code") or 0)
-        code_percent = float(unit["measures"].get("matched_code_percent") or 0)
-        matched = f"{friendly_size(matched_code)}"
-        total = f"{friendly_size(total_code)}"
-        percent = f"`{humanfriendly.round_number(code_percent)}%`"
-        linked = ":heavy_check_mark:" if unit["metadata"].get("complete") else ":x:"
-
+    def assignee_cells(file: str):
         assignee = assignees.get(file, {})
-
         if "discord" in assignee:
-            discord = f"`{assignee['discord']}`"
+            # Exactly one leading "@", whether or not the parsed value had one.
+            discord = f"`@{assignee['discord'].lstrip('@')}`"
         else:
             discord = "<!-- Discord -->"
-
         if "github" in assignee:
             github = f"[{assignee['github']}](../commits?author={assignee['github']})"
         else:
             github = "<!-- GitHub -->"
+        return discord, github
 
-        print(f"{file_link}|{matched}|{total}|{percent}|{linked}|{discord}|{github}")
+    def get_measure_int(unit, key: str) -> int:
+        return int(unit["measures"].get(key) or 0)
+
+    def get_measure_float(unit, key: str) -> float:
+        return float(unit["measures"].get(key) or 0)
+
+    def percent_cells(unit):
+        text = percent_cell(
+            get_measure_int(unit, "fuzzy_code"),
+            get_measure_int(unit, "total_code"),
+            get_measure_float(unit, "fuzzy_match_percent"),
+        )
+        data = percent_cell(
+            get_measure_int(unit, "matched_data"),
+            get_measure_int(unit, "total_data"),
+            get_measure_float(unit, "matched_data_percent"),
+        )
+        return text, data
+
+    def file_link(unit) -> tuple[str, str]:
+        name = unit["name"]
+
+        # Strip the leading module ("main/") by splitting and recombining.
+        file = "/".join((name or "/").split("/")[1:])
+
+        url = f"https://decomp.dev/doldecomp/melee?unit={quote(unit['name'], safe='')}"
+        link = f"[`{file}`]({url})"
+
+        return file, link
+
+    def row_full(unit) -> str:
+        file, link = file_link(unit)
+        matched = friendly_size(get_measure_int(unit, "fuzzy_code"))
+        total = friendly_size(get_measure_int(unit, "total_code"))
+        remaining_code = get_measure_int(unit, "remaining_code")
+        remaining = friendly_size(remaining_code) if remaining_code else "&mdash;"
+        text, data = percent_cells(unit)
+        discord, github = assignee_cells(file)
+        return f"{link}|{matched}|{total}|{remaining}|{text}|{data}|{discord}|{github}"
+
+    def row_slim(unit) -> str:
+        _, link = file_link(unit)
+        text, data = percent_cells(unit)
+        return f"{link}|{text}|{data}"
+
+    # Bucket each TU by how far it has progressed. "complete" (fully linked) is
+    # the canonical done flag -- it drives the official completed-unit count --
+    # so it wins; otherwise split on whether .text is fully matched.
+    in_progress = []
+    data_left = []
+    linked = []
+    for unit in data["units"] or []:
+        fuzzy_percent = get_measure_float(unit, "fuzzy_match_percent")
+        total_code = get_measure_int(unit, "total_code")
+        fuzzy_code = int(total_code * fuzzy_percent / 100)
+        unit["measures"]["fuzzy_code"] = fuzzy_code
+        unit["measures"]["remaining_code"] = total_code - fuzzy_code
+        if unit["metadata"].get("complete"):
+            linked.append(unit)
+        elif fuzzy_percent >= 100:
+            data_left.append(unit)
+        else:
+            in_progress.append(unit)
+
+    def by_remaining(unit):
+        return get_measure_int(unit, "remaining_code")
+
+    in_progress.sort(key=by_remaining)
+    data_left.sort(key=by_remaining)
+    full_header = (
+        "File|Matched|Total|Remaining|.text %|data %|Assignee<br>Discord|Assignee<br>GitHub\n"
+        "-|-|-|-|-|-|-|-"
+    )
+    slim_header = "File|.text %|data %\n-|-|-"
+
+    print(
+        "# Translation Units\n\n"
+        "Edit this page and fill in your own username to assign yourself to a file.\n\n"
+        "Just write your username as plaintext and it will be formatted "
+        "automatically later.\n\n"
+        "Each TU has two matching signals: **.text %** (code) and **data %**. "
+        "A TU moves into **Fully linked** once it is marked complete "
+        "(`.text` and data matched and linked into the build)."
+    )
+
+    # The count goes on its own line below each header so the header text --
+    # and therefore the section's anchor URL -- stays stable as counts change.
+    print("\n## .text in progress\n")
+    print(f"{len(in_progress)} translation units\n")
+    print(full_header)
+    for unit in in_progress:
+        print(row_full(unit))
+
+    print("\n## .text matched - data / linking left\n")
+    print(f"{len(data_left)} translation units\n")
+    print(full_header)
+    for unit in data_left:
+        print(row_full(unit))
+
+    print("\n## Fully linked\n")
+    print(f"{len(linked)} translation units\n")
+    print(slim_header)
+    for unit in linked:
+        print(row_slim(unit))
 
 
 def main():

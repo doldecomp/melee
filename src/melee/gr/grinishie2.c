@@ -217,7 +217,7 @@ void grInishie2_801FCCAC(void) {}
 
 void grInishie2_801FCCB0(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grInishie2_801FCCD4(void)
@@ -509,15 +509,16 @@ void grInishie2_801FD4F0(Ground_GObj* gobj)
 {
     Vec3 vec;
     s32 spawn_side;
-    HSD_JObj* temp_r28;
-    HSD_JObj* temp_r29;
-    void* temp_r30;
-    void* temp_r3;
     Ground* gp;
+    HSD_JObj* jobj;
+    HSD_JObj* temp_r29;
+    HSD_JObj* temp_r30;
+    PAD_STACK(12);
 
-    temp_r29 = GET_JOBJ(gobj);
+    jobj = GET_JOBJ(gobj);
     gp = GET_GROUND(gobj);
-    temp_r28 = temp_r29;
+    temp_r29 = jobj;
+    temp_r30 = jobj;
     spawn_side = HSD_Randi(2);
     mpJointListAdd(0xE);
     if (spawn_side == 0) {
@@ -531,7 +532,7 @@ void grInishie2_801FD4F0(Ground_GObj* gobj)
     vec.z = grI2_804D6A00->unk14[spawn_side].z;
     HSD_JObjSetTranslate(temp_r29, &vec);
     gp->gv.inishie22.xC4 = it_802ECD3C(gobj, &vec, sign_inline(spawn_side));
-    Ground_801C2ED0(temp_r28, gp->map_id);
+    Ground_801C2ED0(temp_r30, gp->map_id);
 }
 
 bool grInishie2_801FD64C(Ground_GObj* gobj)
@@ -634,20 +635,22 @@ void grInishie2_801FD824(HSD_GObj* gobj)
 
 void grInishie2_801FD9EC(HSD_GObj* gobj)
 {
+    HSD_JObj* jobj;
     Ground* gp;
+    Vec3* temp_vec;
     u8 temp_u8;
     s32 var_r0;
     s32 var_r3;
     s32 var_r3_2;
     s16 temp_r0;
-    HSD_JObj* jobj;
-    Vec3* temp_vec;
+    PAD_STACK(48);
 
     gp = gobj->user_data;
 
     if (grAnime_801C83D0(gobj, 1, 1) != 0) {
         if (gp->gv.inishie23.xC8_flags.b1) {
-            f32 temp_f = gp->gv.inishie23.xD8.x + gp->gv.inishie23.xCC.x;
+            f32 temp_f = GET_GROUND(gobj)->gv.inishie23.xD8.x +
+                         GET_GROUND(gobj)->gv.inishie23.xCC.x;
 
             if (temp_f > Stage_GetCamBoundsRightOffset()) {
                 var_r0 = 2;
@@ -666,8 +669,8 @@ void grInishie2_801FD9EC(HSD_GObj* gobj)
                 if ((s16) gp->gv.inishie23.xCA < 2) {
                     gp->gv.inishie23.xC8_flags.b3 ^= 1;
                 } else {
-                    f32 temp_f =
-                        gp->gv.inishie23.xD8.x + gp->gv.inishie23.xCC.x;
+                    f32 temp_f = GET_GROUND(gobj)->gv.inishie23.xD8.x +
+                                 GET_GROUND(gobj)->gv.inishie23.xCC.x;
 
                     if (temp_f > Stage_GetCamBoundsRightOffset()) {
                         var_r3 = 2;
@@ -679,7 +682,7 @@ void grInishie2_801FD9EC(HSD_GObj* gobj)
 
                     if (var_r3 != 0) {
                         gp->gv.inishie23.xC8_flags.b2 = 1;
-                        gp->gv.inishie23.xC8_flags.b3 = (var_r3 == 2);
+                        gp->gv.inishie23.xC8_flags.b3 = var_r3;
                         gp->gv.inishie23.xC8_flags.b0 = 1;
                     } else {
                         temp_r0 = grI2_804D6A00->unk48 + grI2_804D6A00->unk4A;
@@ -697,19 +700,23 @@ void grInishie2_801FD9EC(HSD_GObj* gobj)
 
         grAnime_801C8138(gobj, gp->map_id, gp->gv.inishie23.xC8_flags.b3);
 
+        gp = GET_GROUND(gobj);
         jobj = Ground_801C3FA4(gobj, 0);
-        HSD_JObjSetTranslate(jobj, &gp->gv.inishie23.xD8);
+        temp_vec = &gp->gv.inishie23.xD8;
+        HSD_JObjSetTranslate(jobj, temp_vec);
         HSD_JObjAddTranslationX(jobj, gp->gv.inishie23.xCC.x);
         HSD_JObjAddTranslationY(jobj, gp->gv.inishie23.xCC.y);
         HSD_JObjAddTranslationZ(jobj, gp->gv.inishie23.xCC.z);
-        HSD_JObjGetTranslation(jobj, &gp->gv.inishie23.xD8);
+        temp_vec = &gp->gv.inishie23.xD8;
+        HSD_JObjGetTranslation(jobj, temp_vec);
 
         return;
     }
 
-    gp = gobj->user_data;
+    gp = GET_GROUND(gobj);
     jobj = Ground_801C3FA4(gobj, 1);
-    HSD_JObjGetTranslation(jobj, &gp->gv.inishie23.xCC);
+    temp_vec = &gp->gv.inishie23.xCC;
+    HSD_JObjGetTranslation(jobj, temp_vec);
 }
 
 void grInishie2_801FDE8C(Ground_GObj* gobj)

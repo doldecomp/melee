@@ -2,6 +2,9 @@
 
 #include <platform.h>
 
+#include "it/it_2725.h"
+#include "it/ithitbox.h"
+
 #include <melee/gr/forward.h>
 
 #include <dolphin/os.h>
@@ -24,36 +27,51 @@
 #include <melee/gr/stage.h>
 #include <melee/gr/types.h>
 #include <melee/it/it_2725.h>
+#include <melee/it/items/itwhispyapple.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbaudio_ax.h>
 #include <melee/mp/mplib.h>
 
 #define Gr_Greens_Block_Status_None 0
 #define Gr_Greens_Block_Max 30
 
 static u8 grGr_804D6AAC;
-static s8 grGr_804D6AAD;
+static u8 grGr_804D6AAD;
 static struct {
     int x0_blockTimerMin;
     int x4_blockTimerMax;
     int x8_blockBombChance;
-
-    char padC[0x24 - 0xC];
-
+    int xC;
+    int x10;
+    int x14;
+    int x18;
+    int x1C;
+    int x20;
     int x24;
     int x28;
-
-    char pad2C[0x34 - 0x2C];
-
+    float x2C;
+    float x30;
     int x34_windTimerMin;
     int x38_windTimerMax;
-
     float x3C_windSpeed;
     float x40_left;
     float x44_right;
     float x48_top;
     float x4C_bottom;
+    float x50;
+    float x54;
+    float x58;
+    int x5C;
+    int x60;
+    int x64;
+    int x68;
+    float x6C;
+    float x70;
+    float x74;
+    float x78;
 }* grGr_params;
+
 static StageCallbacks grGr_callbacks[] = {
     {
         grGreens_8021360C,
@@ -106,30 +124,81 @@ static StageCallbacks grGr_callbacks[] = {
     },
 };
 
-static s16 grGr_803E7840[128] = { 0 };
+char grGr_803E76C4[] = "/GrGr.dat";
+
+typedef struct grGr_StageData {
+    StageData stage_data;
+    char report_format[0x24];
+} grGr_StageData;
+
+grGr_StageData grGr_803E76D0 = {
+    {
+        GREENS,
+        grGr_callbacks,
+        grGr_803E76C4,
+        grGreens_Init,
+        grGreens_80213458,
+        grGreens_802134F4,
+        grGreens_802134F8,
+        grGreens_8021351C,
+        grGreens_80216E64,
+        grGreens_80216E6C,
+        1,
+        NULL,
+        0,
+    },
+    "%s:%d: couldn t get gobj(id=%d)\n",
+};
+
+char grGr_803E7728[] = "grgreens.c";
+
+static s32 grGr_803E7734[] = {
+    0, 1, 0, 1, 0, 2, 0, 1, 0, 2,
+};
+static s32 grGr_803E775C[] = {
+    0, 0, 0, 14, 0, 0, 0, 14,
+};
+static s32 grGr_803E777C[][2] = {
+    { 1, 8 }, { 15, 16 }, { 2, 9 }, { 3, 10 }, { 4, 11 }, { 5, 12 }, { 6, 13 },
+};
+static s32 grGr_803E77B4[] = {
+    0, 0, 0, 14, 0, 0, 0, 14,
+};
+static s32 grGr_803E77D4[][2] = {
+    { 1, 8 }, { 15, 16 }, { 2, 9 }, { 3, 10 }, { 4, 11 }, { 5, 12 }, { 6, 13 },
+};
+static Vec3 grGr_803E780C[] = {
+    { -1.0f, 0.0f, 0.0f },
+    { 1.0f, 0.0f, 0.0f },
+};
+static u8 grGr_803E7824[0x1C] = { 0 };
+static s16 grGr_803E7840[30] = {
+    5,    6,    7,    8,    9,    0xA,  0xB,  0xC,  0xD,  0xE,
+    0xF,  0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18,
+    0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F, 0x20, 0x21, 0x22,
+};
+static s16 grGr_803E787C[30] = { 0,    1,    2,    3,    4,    5,
+                                 6,    7,    8,    9,    0xA,  0xB,
+                                 0xC,  0xD,  0xE,  0xF,  0x10, 0x11,
+                                 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
+                                 0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D };
 static u8 grGr_8049F9E0[0x20];
 
 static inline int randrange(int min, int max);
 static inline int randrange(int min, int max)
 {
     int diff;
-    int rng = min;
-    if (max > min) {
-        diff = max - min;
-        if (diff != 0) {
-            rng = HSD_Randi(diff);
-        } else {
-            rng = 0;
-        }
-        rng = rng + min;
-    } else if (max < min) {
+    int rng;
+    if (min > max) {
         diff = min - max;
-        if (diff != 0) {
-            rng = HSD_Randi(diff);
-        } else {
-            rng = 0;
-        }
-        rng = rng + max;
+        rng = (diff != 0) ? HSD_Randi(diff) : 0;
+        rng = max + rng;
+    } else if (min < max) {
+        diff = max - min;
+        rng = (diff != 0) ? HSD_Randi(diff) : 0;
+        rng = min + rng;
+    } else {
+        rng = min;
     }
     return rng;
 }
@@ -137,7 +206,7 @@ static inline int randrange(int min, int max)
 static inline struct grGreens_BlockVars* getBlock(Ground* gp, int i, int j);
 static inline struct grGreens_BlockVars* getBlock(Ground* gp, int i, int j)
 {
-    return &gp->gv.greens.x8_blocks[i * 6 + j];
+    return &((struct grGreens_BlockVars(*)[6]) gp->gv.greens.x8_blocks)[i][j];
 }
 
 static inline Vec* getVec(Ground* gp, int i, int j);
@@ -172,7 +241,7 @@ void grGreens_802134F4(void) {}
 
 void grGreens_802134F8(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grGreens_8021351C(void)
@@ -200,7 +269,7 @@ Ground_GObj* grGreens_80213524(int id)
             HSD_GObj_SetupProc(gobj, cbs->callback2, 4);
         }
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 281, id);
+        OSReport((char*) grGr_callbacks + 0xCC, grGr_803E7728, 281, id);
     }
     return gobj;
 }
@@ -294,13 +363,13 @@ void grGreens_802139C0(Ground_GObj* arg) {}
 
 void grGreens_802139C4(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
+    Ground* gp = gobj->user_data;
     ftCo_800C06E8(gobj, 9, fn_80213B1C);
     gp->gv.greens.x0_flags.whole_thing = 0;
     gp->gv.greens.x4 = NULL;
     gp->gv.greens.x8_blocks = NULL;
-    gp->gv.greens.xC = randrange(grGr_params->x34_windTimerMin,
-                                 grGr_params->x38_windTimerMax);
+    gp->gv.greens.xC = randrange(grGr_params->x38_windTimerMax,
+                                 grGr_params->x34_windTimerMin);
     gp->gv.greens.x10 = 1;
     gp->gv.greens.x1C = 0;
     gp->gv.greens.x14 = HSD_Randi(2);
@@ -345,7 +414,7 @@ bool fn_80213B1C(Ground_GObj* ground_gobj, Fighter_GObj* fighter_gobj,
     ftLib_80086644(fighter_gobj, &vec2);
     vec->y = 0.0f;
     vec->z = 0.0f;
-    switch (GET_GROUND(ground_gobj)->gv.greens.x18) {
+    switch (GET_GROUND(ground_gobj)->gv.greens2.x18) {
     case 1:
         if (grGreens_80213AB4(&vec2, -grGr_params->x40_left,
                               -grGr_params->x44_right, grGr_params->x48_top,
@@ -371,19 +440,281 @@ bool fn_80213B1C(Ground_GObj* ground_gobj, Fighter_GObj* fighter_gobj,
 
 void grGreens_80213C10(Ground_GObj* gobj)
 {
-    // Ground_GObj* gobj2 = Ground_801C2BA4(4);
-    // Ground* gp = GET_GROUND(gobj);
-    // Ground* gp2 = GET_GROUND(gobj2);
-    // gp->u.greens.x18 = 0;
-    // if (grGr_804D6AAC == 0 && grGr_804D6AAD == 0) {
-    //     gp->u.greens.x1C++;
-    //     switch (gp->u.greens.x4) {}
-    // }
-}
+    Ground_GObj* bg_gobj = Ground_801C2BA4(4);
+    Ground* gp = GET_GROUND(gobj);
+    Ground* bg_gp = GET_GROUND(bg_gobj);
+    PAD_STACK(0x50);
+    gp->gv.greens2.x18 = 0;
 
-void fn_802159B4(Item_GObj* item_gobj, Ground* gp)
-{
-    return;
+    if (grGr_804D6AAC != 0) {
+        return;
+    }
+    if (grGr_804D6AAD != 0) {
+        return;
+    }
+
+    gp->gv.greens2.x1C++;
+
+    switch (gp->gv.greens2.x4) {
+    case 0:
+        if (gp->gv.greens2.x10 != 0) {
+            gp->gv.greens2.x10 = 0;
+            gp->gv.greens2.x8 = HSD_Randi(8);
+            gp->gv.greens2.xC = randrange(grGr_params->x38_windTimerMax,
+                                          grGr_params->x34_windTimerMin);
+            grAnime_801C8138(gobj, gp->map_id,
+                             grGr_803E775C[gp->gv.greens2.x8]);
+            grAnime_801C8138(bg_gobj, bg_gp->map_id,
+                             grGr_803E77B4[gp->gv.greens2.x8]);
+            return;
+        }
+
+        gp->gv.greens2.xC--;
+        if (grAnime_801C84A4(gobj, 0, 7) != 0) {
+            if (gp->gv.greens2.xC > 0) {
+                gp->gv.greens2.x8 = HSD_Randi(8);
+                grAnime_801C8138(gobj, gp->map_id,
+                                 grGr_803E775C[gp->gv.greens2.x8]);
+                grAnime_801C8138(bg_gobj, bg_gp->map_id,
+                                 grGr_803E77B4[gp->gv.greens2.x8]);
+                return;
+            }
+
+            {
+                Ground* cur_gp = GET_GROUND(gobj);
+                cur_gp->gv.greens2.x0 = (cur_gp->gv.greens2.x0 + 1) % 10;
+                cur_gp->gv.greens2.x4 = grGr_803E7734[cur_gp->gv.greens2.x0];
+                cur_gp->gv.greens2.x10 = 1;
+            }
+        }
+        break;
+
+    case 1:
+        if (gp->gv.greens2.x10 != 0) {
+            HSD_JObj* jobj;
+            Vec3 pos;
+            int dir;
+
+            gp->gv.greens2.x10 = 0;
+            gp->gv.greens2.x8 = 0;
+            jobj = gobj->hsd_obj;
+            HSD_JObjGetTranslation(jobj, &pos);
+            if (ftLib_800864A8(&pos, NULL) == 1.0f) {
+                dir = 1;
+            } else {
+                dir = 0;
+            }
+            gp->gv.greens2.x14 = dir;
+            gp->gv.greens2.xC = 0;
+            grAnime_801C8138(
+                gobj, gp->map_id,
+                grGr_803E777C[gp->gv.greens2.x8][gp->gv.greens2.x14]);
+            grAnime_801C8138(
+                bg_gobj, bg_gp->map_id,
+                grGr_803E77D4[gp->gv.greens2.x8][gp->gv.greens2.x14]);
+            return;
+        }
+
+        switch (gp->gv.greens2.x8) {
+        case 0:
+        case 5:
+            if (grAnime_801C83D0(gobj, 0, 7) != 0) {
+                gp->gv.greens2.x8++;
+                grAnime_801C8138(
+                    gobj, gp->map_id,
+                    grGr_803E777C[gp->gv.greens2.x8][gp->gv.greens2.x14]);
+                grAnime_801C8138(
+                    bg_gobj, bg_gp->map_id,
+                    grGr_803E77D4[gp->gv.greens2.x8][gp->gv.greens2.x14]);
+                return;
+            }
+            break;
+
+        case 1:
+            if (grAnime_801C83D0(gobj, 0, 7) != 0) {
+                gp->gv.greens2.x8++;
+                grAnime_801C8138(
+                    gobj, gp->map_id,
+                    grGr_803E777C[gp->gv.greens2.x8][gp->gv.greens2.x14]);
+                grAnime_801C8138(
+                    bg_gobj, bg_gp->map_id,
+                    grGr_803E77D4[gp->gv.greens2.x8][gp->gv.greens2.x14]);
+                lbAudioAx_800237A8(0x68FB8, 0x7F, 0x40);
+                return;
+            }
+            break;
+
+        case 2:
+            if (grAnime_801C84A4(gobj, 0, 7) != 0) {
+                gp->gv.greens2.xC++;
+                if ((float) gp->gv.greens2.xC > grGr_params->x50) {
+                    gp->gv.greens2.x8++;
+                    gp->gv.greens2.xC = 0;
+                    grAnime_801C8138(
+                        gobj, gp->map_id,
+                        grGr_803E777C[gp->gv.greens2.x8][gp->gv.greens2.x14]);
+                    grAnime_801C8138(
+                        bg_gobj, bg_gp->map_id,
+                        grGr_803E77D4[gp->gv.greens2.x8][gp->gv.greens2.x14]);
+                    lbAudioAx_800237A8(gp->gv.greens2.x14 == 0 ? 0x68FB0
+                                                               : 0x68FB1,
+                                       0x7F, 0x40);
+                    return;
+                }
+            }
+            break;
+
+        case 3:
+            if (grAnime_801C83D0(gobj, 0, 7) != 0) {
+                int wind_dir;
+
+                gp->gv.greens2.x8++;
+                grAnime_801C8138(
+                    gobj, gp->map_id,
+                    grGr_803E777C[gp->gv.greens2.x8][gp->gv.greens2.x14]);
+                wind_dir = GET_GROUND(gobj)->gv.greens2.x14;
+                if (wind_dir == 0) {
+                    lb_80011A50(&grGr_803E780C[wind_dir], 0xF, 0.5f, 0.0f,
+                                0.0f, -grGr_params->x44_right,
+                                grGr_params->x48_top, -grGr_params->x40_left,
+                                grGr_params->x4C_bottom);
+                } else {
+                    lb_80011A50(&grGr_803E780C[wind_dir], 0xF, 0.5f, 0.0f,
+                                0.0f, grGr_params->x40_left,
+                                grGr_params->x48_top, grGr_params->x44_right,
+                                grGr_params->x4C_bottom);
+                }
+                grAnime_801C8138(
+                    bg_gobj, bg_gp->map_id,
+                    grGr_803E77D4[gp->gv.greens2.x8][gp->gv.greens2.x14]);
+                return;
+            }
+            break;
+
+        case 4:
+            Camera_80030E44(1, NULL);
+            gp->gv.greens2.x18 = gp->gv.greens2.x14 + 1;
+            if (grAnime_801C84A4(gobj, 0, 7) != 0) {
+                HSD_JObj* jobj;
+                int new_dir;
+                int wind_dir;
+                int wind_done;
+
+                gp->gv.greens2.xC++;
+                wind_done = 0;
+                if ((float) gp->gv.greens2.xC > grGr_params->x54) {
+                    return;
+                }
+
+                if ((float) gp->gv.greens2.xC > grGr_params->x58) {
+                    Vec3 pos;
+
+                    jobj = gobj->hsd_obj;
+                    HSD_JObjGetTranslation(jobj, &pos);
+                    if (ftLib_800864A8(&pos, NULL) == 1.0f) {
+                        new_dir = 1;
+                    } else {
+                        new_dir = 0;
+                    }
+                    if (gp->gv.greens2.x14 != new_dir) {
+                        wind_done = 1;
+                    }
+                }
+
+                if (wind_done) {
+                    gp->gv.greens2.x8++;
+                    gp->gv.greens2.xC = 0;
+                    grAnime_801C8138(
+                        gobj, gp->map_id,
+                        grGr_803E777C[gp->gv.greens2.x8][gp->gv.greens2.x14]);
+                    grAnime_801C8138(
+                        bg_gobj, bg_gp->map_id,
+                        grGr_803E77D4[gp->gv.greens2.x8][gp->gv.greens2.x14]);
+                    return;
+                }
+
+                wind_dir = GET_GROUND(gobj)->gv.greens2.x14;
+                if (wind_dir == 0) {
+                    lb_80011A50(&grGr_803E780C[wind_dir], 0xF, 0.5f, 0.0f,
+                                0.0f, -grGr_params->x44_right,
+                                grGr_params->x48_top, -grGr_params->x40_left,
+                                grGr_params->x4C_bottom);
+                } else {
+                    lb_80011A50(&grGr_803E780C[wind_dir], 0xF, 0.5f, 0.0f,
+                                0.0f, grGr_params->x40_left,
+                                grGr_params->x48_top, grGr_params->x44_right,
+                                grGr_params->x4C_bottom);
+                }
+                return;
+            }
+            break;
+
+        case 6:
+            if (grAnime_801C83D0(gobj, 0, 7) != 0) {
+                {
+                    Ground* cur_gp = GET_GROUND(gobj);
+                    cur_gp->gv.greens2.x0 = (cur_gp->gv.greens2.x0 + 1) % 10;
+                    cur_gp->gv.greens2.x4 =
+                        grGr_803E7734[cur_gp->gv.greens2.x0];
+                    cur_gp->gv.greens2.x10 = 1;
+                }
+                return;
+            }
+            break;
+        }
+        break;
+
+    case 2:
+        if (gp->gv.greens2.x10 != 0) {
+            gp->gv.greens2.x10 = 0;
+            gp->gv.greens2.x8 = 0;
+            gp->gv.greens2.xC = 0;
+            grAnime_801C8138(gobj, gp->map_id, 7);
+            grAnime_801C8138(bg_gobj, bg_gp->map_id, 7);
+            lbAudioAx_800237A8(0x68FB2, 0x7F, 0x40);
+            gp->gv.greens2.x20 =
+                randrange(grGr_params->x60, grGr_params->x5C - 1);
+            gp->gv.greens2.x24 = HSD_Randi(2);
+        } else if (grAnime_801C83D0(gobj, 0, 7) != 0) {
+            if (gp->gv.greens2.x20 < 0) {
+                {
+                    Ground* cur_gp = GET_GROUND(gobj);
+                    cur_gp->gv.greens2.x0 = (cur_gp->gv.greens2.x0 + 1) % 10;
+                    cur_gp->gv.greens2.x4 =
+                        grGr_803E7734[cur_gp->gv.greens2.x0];
+                    cur_gp->gv.greens2.x10 = 1;
+                }
+            } else {
+                grAnime_801C8138(gobj, gp->map_id, 7);
+                grAnime_801C8138(bg_gobj, bg_gp->map_id, 7);
+            }
+        } else if (gp->gv.greens2.x20 >= 0) {
+            if (gp->gv.greens2.xC >= grGr_params->x64 &&
+                ((gp->gv.greens2.xC - grGr_params->x64) % grGr_params->x68) ==
+                    0)
+            {
+                Vec3 pos;
+                float rand;
+                float sign;
+                float diff;
+
+                rand = HSD_Randf();
+                sign = gp->gv.greens2.x24 == 0 ? -1.0f : 1.0f;
+                pos.x = sign * (40.0f * rand);
+                rand = HSD_Randf();
+                diff = grGr_params->x70 - grGr_params->x6C;
+                pos.y = (diff * rand) + grGr_params->x6C;
+                pos.z = -40.0f;
+                lbAudioAx_800237A8(0x68FB3, 0x7F, 0x40);
+                it_802EE200(gobj, &pos, grGr_params->x74, grGr_params->x78);
+                gp->gv.greens2.x20--;
+                gp->gv.greens2.x24 = (gp->gv.greens2.x24 + 1) & 1;
+            }
+        }
+
+        gp->gv.greens2.xC++;
+        break;
+    }
 }
 
 void grGreens_80214654(Ground_GObj* arg)
@@ -400,20 +731,22 @@ void fn_80214658(Ground_GObj* gobj)
 
 void grGreens_80214674(Ground_GObj* gobj)
 {
+    Ground_GObj* new_var;
     Ground* gp = GET_GROUND(gobj);
+    new_var = gobj;
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
     gp->gv.greens.x4 = HSD_MemAlloc(5 * 6 * sizeof(*gp->gv.greens.x4));
     memzero(gp->gv.greens.x4, 5 * 6 * sizeof(*gp->gv.greens.x4));
     gp->gv.greens.x8_blocks =
         HSD_MemAlloc(5 * 6 * sizeof(*gp->gv.greens.x8_blocks));
     memzero(gp->gv.greens.x8_blocks, 5 * 6 * sizeof(*gp->gv.greens.x8_blocks));
-    grGreens_8021483C(gobj);
+    grGreens_8021483C(new_var);
     if (grGr_804D6AAC == 0) {
-        grGreens_80214B58(gobj);
+        grGreens_80214B58(new_var);
     }
     grGr_804D6AAC = 0;
-    grGreens_80214FA8(gobj);
-    Ground_801C10B8(gobj, fn_80214658);
+    grGreens_80214FA8(new_var);
+    Ground_801C10B8(new_var, fn_80214658);
     gp->gv.greens.xC = randrange(grGr_params->x0_blockTimerMin,
                                  grGr_params->x4_blockTimerMax);
     gp->gv.greens.x0_flags.b0 = 1;
@@ -450,26 +783,131 @@ void grGreens_80214804(Ground_GObj* gobj)
 void grGreens_8021483C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    float f24 = -F32_MAX;
-    float f31 = F32_MAX;
-    float f23 = -F32_MAX;
-    float f30 = F32_MAX;
-    float f29 = -F32_MAX;
-    float f28 = -F32_MAX;
-    float f27 = F32_MAX;
-    float f26 = F32_MAX;
+    Vec vec;
+    float left_max = -3.4028235e38f;
+    float left_min = 3.4028235e38f;
+    float left_top = -3.4028235e38f;
+    float left_bottom = 3.4028235e38f;
+    float right_max = -3.4028235e38f;
+    float right_top = -3.4028235e38f;
+    float right_min = 3.4028235e38f;
+    float right_bottom = 3.4028235e38f;
+    int i;
+    float y;
+
+    for (i = 0; i < 30; i++) {
+        HSD_JObj* jobj = Ground_801C3FA4(gobj, grGr_803E7840[i]);
+
+        HSD_ASSERT(1014, jobj);
+        lb_8000B1CC(jobj, NULL, &vec);
+        if (vec.x < 0.0f) {
+            if (left_max < vec.x) {
+                left_max = vec.x;
+            }
+            if (left_min > vec.x) {
+                left_min = vec.x;
+            }
+            if (left_top < vec.y) {
+                left_top = vec.y;
+            }
+            if (left_bottom > vec.y) {
+                left_bottom = vec.y;
+            }
+        } else {
+            if (right_max < vec.x) {
+                right_max = vec.x;
+            }
+            if (right_min > vec.x) {
+                right_min = vec.x;
+            }
+            if (right_top < vec.y) {
+                right_top = vec.y;
+            }
+            if (right_bottom > vec.y) {
+                right_bottom = vec.y;
+            }
+        }
+    }
+    left_max = (left_max - left_min) * 0.5f;
+    for (i = 0; i < 5; i++) {
+        y = ((left_top - left_bottom) * 0.25f * i) + left_bottom;
+
+        getVec(gp, i, 0)->x = (left_max * 0.0f) + left_min;
+        getVec(gp, i, 0)->y = y;
+        getVec(gp, i, 0)->z = 0.0f;
+        getVec(gp, i, 1)->x = (left_max * 1.0f) + left_min;
+        getVec(gp, i, 1)->y = y;
+        getVec(gp, i, 1)->z = 0.0f;
+        getVec(gp, i, 2)->x = (left_max * 2.0f) + left_min;
+        getVec(gp, i, 2)->y = y;
+        getVec(gp, i, 2)->z = 0.0f;
+    }
+    right_max = (right_max - right_min) * 0.5f;
+    for (i = 0; i < 5; i++) {
+        y = ((right_top - right_bottom) * 0.25f * i) + right_bottom;
+
+        getVec(gp, i, 3)->x = (right_max * 0.0f) + right_min;
+        getVec(gp, i, 3)->y = y;
+        getVec(gp, i, 3)->z = 0.0f;
+        getVec(gp, i, 4)->x = (right_max * 1.0f) + right_min;
+        getVec(gp, i, 4)->y = y;
+        getVec(gp, i, 4)->z = 0.0f;
+        getVec(gp, i, 5)->x = (right_max * 2.0f) + right_min;
+        getVec(gp, i, 5)->y = y;
+        getVec(gp, i, 5)->z = 0.0f;
+    }
 }
 
-/// #grGreens_80214B58
+static inline void BOMB(int idx)
+{
+    grGr_8049F9E0[idx] =
+        (((grGr_params->x20 != 0) ? HSD_Randi(grGr_params->x20) : 0) != 0) ? 1
+                                                                           : 2;
+}
+
+void grGreens_80214B58(Ground_GObj* gobj)
+{
+    int i;
+    for (i = 0; i < 24; i++) {
+        grGr_8049F9E0[i] = 0;
+    }
+
+    grGr_8049F9E0[0x18] = 0;
+    grGr_8049F9E0[0x19] = 0;
+    grGr_8049F9E0[0x1A] = 0;
+    grGr_8049F9E0[0x1B] = 0;
+    grGr_8049F9E0[0x1C] = 0;
+    grGr_8049F9E0[0x1D] = 0;
+
+    BOMB(0x12);
+    BOMB(0x0C);
+    BOMB(0x0D);
+    BOMB(0x06);
+    BOMB(0x07);
+    BOMB(0x08);
+    BOMB(0x00);
+    BOMB(0x01);
+    BOMB(0x02);
+    BOMB(0x17);
+    BOMB(0x10);
+    BOMB(0x11);
+    BOMB(0x09);
+    BOMB(0x0A);
+    BOMB(0x0B);
+    BOMB(0x03);
+    BOMB(0x04);
+    BOMB(0x05);
+}
 
 void grGreens_80214FA8(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    unsigned int i;
     int j;
-    int k;
+    unsigned int i;
+    int col;
+    Ground* gp = GET_GROUND(gobj);
+
     for (i = 0; i < 30; i++) {
-        mpJointSetCb2(grGr_803E7840[i], gp, fn_80216DE4);
+        mpJointSetCb2(grGr_803E787C[i], gp, fn_80216DE4);
     }
     for (j = 0; j < 30; j++) {
         HSD_JObj* jobj = Ground_801C3FA4(gobj, grGr_803E7840[j]);
@@ -479,24 +917,70 @@ void grGreens_80214FA8(Ground_GObj* gobj)
             HSD_ASSERT(1203, 0);
         }
     }
-    for (k = 0; k < 5; k++) {
-        for (j = 0; j < 6; j++) {
-            switch (grGr_8049F9E0[k * 6 + j]) {
+    for (j = 0; j < 5; j++) {
+        for (col = 0; col < 6; col++) {
+            switch (grGr_8049F9E0[j * 6 + col]) {
             case 1:
             case 2:
-                grGreens_80215358(gobj, k, j, grGr_8049F9E0[k * 6 + j], 3);
+                grGreens_80215358(gobj, col, j, grGr_8049F9E0[j * 6 + col], 3);
                 break;
             }
         }
     }
 }
 
-/// #grGreens_802150C4
-
-void grGreens_80215358(Ground_GObj* gobj, int i, int j, int arg3, int arg4)
+void grGreens_802150C4(Ground_GObj* gobj, int arg1, int arg2)
 {
     Ground* gp = GET_GROUND(gobj);
-    struct grGreens_BlockVars* block = getBlock(gp, i, j);
+
+    if (arg2 > 0 && arg1 > 0 && getBlock(gp, arg2 - 1, arg1 - 1)->status == 3)
+    {
+        if (getBlock(gp, arg2 - 1, arg1)->status == 3) {
+            mpLib_800581DC(getBlock(gp, arg2 - 1, arg1 - 1)->x18,
+                           getBlock(gp, arg2 - 1, arg1)->x18);
+        } else if (getBlock(gp, arg2, arg1 - 1)->status == 3) {
+            mpLib_800581DC(getBlock(gp, arg2 - 1, arg1 - 1)->x18,
+                           getBlock(gp, arg2, arg1 - 1)->x18);
+        }
+    }
+    if (arg2 < 4 && arg1 > 0 && getBlock(gp, arg2 + 1, arg1 - 1)->status == 3)
+    {
+        if (getBlock(gp, arg2 + 1, arg1)->status == 3) {
+            mpLib_800581DC(getBlock(gp, arg2 + 1, arg1 - 1)->x18,
+                           getBlock(gp, arg2 + 1, arg1)->x18);
+        } else if (getBlock(gp, arg2, arg1 - 1)->status == 3) {
+            mpLib_800581DC(getBlock(gp, arg2 + 1, arg1 - 1)->x18,
+                           getBlock(gp, arg2, arg1 - 1)->x18);
+        }
+    }
+    if (arg2 > 0 && arg1 < 5 && getBlock(gp, arg2 - 1, arg1 + 1)->status == 3)
+    {
+        if (getBlock(gp, arg2 - 1, arg1)->status == 3) {
+            mpLib_800581DC(getBlock(gp, arg2 - 1, arg1 + 1)->x18,
+                           getBlock(gp, arg2 - 1, arg1)->x18);
+        } else if (getBlock(gp, arg2, arg1 + 1)->status == 3) {
+            mpLib_800581DC(getBlock(gp, arg2 - 1, arg1 + 1)->x18,
+                           getBlock(gp, arg2, arg1 + 1)->x18);
+        }
+    }
+    if (arg2 < 4 && arg1 < 5 && getBlock(gp, arg2 + 1, arg1 + 1)->status == 3)
+    {
+        if (getBlock(gp, arg2 + 1, arg1)->status == 3) {
+            mpLib_800581DC(getBlock(gp, arg2 + 1, arg1 + 1)->x18,
+                           getBlock(gp, arg2 + 1, arg1)->x18);
+            return;
+        }
+        if (getBlock(gp, arg2, arg1 + 1)->status == 3) {
+            mpLib_800581DC(getBlock(gp, arg2 + 1, arg1 + 1)->x18,
+                           getBlock(gp, arg2, arg1 + 1)->x18);
+        }
+    }
+}
+
+void grGreens_80215358(Ground_GObj* gobj, int col, int row, int arg3, int arg4)
+{
+    Ground* gp = GET_GROUND(gobj);
+    struct grGreens_BlockVars* block = getBlock(gp, row, col);
     unsigned char arr[30];
     int m;
     int n;
@@ -510,12 +994,13 @@ void grGreens_80215358(Ground_GObj* gobj, int i, int j, int arg3, int arg4)
     float grMaterial_801C8DE0_paramB;
     Vec vec;
     float f;
-    HSD_ASSERT(1305, block->status==Gr_Greens_Block_Status_None);
+    PAD_STACK(0x10);
+    HSD_ASSERT(1305, block->status == Gr_Greens_Block_Status_None);
     for (n = 0; n < 30; n++) {
         arr[n] = 0;
     }
-    for (n = 0; n < 6; n++) {
-        for (m = 0; m < 5; m++) {
+    for (n = 0; n < 5; n++) {
+        for (m = 0; m < 6; m++) {
             if (getBlock(gp, n, m)->status != Gr_Greens_Block_Status_None) {
                 arr[getBlock(gp, n, m)->index] = 1;
             }
@@ -526,7 +1011,7 @@ void grGreens_80215358(Ground_GObj* gobj, int i, int j, int arg3, int arg4)
             break;
         }
     }
-    HSD_ASSERT(1316, num<Gr_Greens_Block_Max);
+    HSD_ASSERT(1316, num < Gr_Greens_Block_Max);
     if (arg3 == 1) {
         type = 1;
     } else if (arg3 == 2) {
@@ -558,16 +1043,16 @@ void grGreens_80215358(Ground_GObj* gobj, int i, int j, int arg3, int arg4)
     block->x1_2 = 0;
     block->x1_3 = 0;
     block->x8 =
-        (arg4 == 1) ? Stage_GetBlastZoneTopOffset() : getVec(gp, i, j)->y;
+        (arg4 == 1) ? Stage_GetBlastZoneTopOffset() : getVec(gp, row, col)->y;
     block->x4 = 0.0f;
     block->xC = block_gobj;
     block->x10 = item_gobj;
     block->x14 = jobj;
-    block->x18 = Ground_801C32D4(6, grGr_803E7840[0]);
+    block->x18 = Ground_801C32D4(6, grGr_803E7840[num]);
     block->x1C = 0;
     block->x1_4 = 0;
     block->x1_7 = 0;
-    vec.x = getVec(gp, i, j)->x;
+    vec.x = getVec(gp, row, col)->x;
     vec.y = block->x8;
     vec.z = 0.0f;
     if (arg4 == 3) {
@@ -585,29 +1070,33 @@ void grGreens_80215358(Ground_GObj* gobj, int i, int j, int arg3, int arg4)
     mpLib_80057424(block->x18);
 }
 
-/// #fn_802159B4
+void fn_802159B4(Item_GObj* item_gobj, Ground* gp)
+{
+    return;
+}
 
 void grGreens_802159B8(Ground* gp, int i, int j, int value)
 {
-    HSD_GObj* gobj = getBlock(gp, i, j)->x10;
+    HSD_GObj* gobj = getBlock(gp, j, i)->x10;
     Vec vec;
     float f;
-    if (gobj != NULL && !getBlock(gp, i, j)->x1_7) {
-        getBlock(gp, i, j)->x1_7 = 1;
-        grMaterial_801C8E28(gobj);
-        getBlock(gp, i, j)->x1C = value;
 
-        if (getBlock(gp, i, j)->x1_1) {
-            HSD_JObjSetFlagsAll(getBlock(gp, i, j)->xC->hsd_obj, JOBJ_HIDDEN);
+    if (gobj != NULL && !getBlock(gp, j, i)->x1_7) {
+        getBlock(gp, j, i)->x1_7 = 1;
+        grMaterial_801C8E28(gobj);
+        getBlock(gp, j, i)->x1C = value;
+
+        if (getBlock(gp, j, i)->x1_1) {
+            HSD_JObjSetFlagsAll(getBlock(gp, j, i)->xC->hsd_obj, JOBJ_HIDDEN);
             grMaterial_801C8D98(gobj, 1);
             it_80275414(gobj);
-            getBlock(gp, i, j)->x1_2 = 1;
+            getBlock(gp, j, i)->x1_2 = 1;
             HSD_JObjGetTranslation(gobj->hsd_obj, &vec);
             vec.y += 5.0f * Ground_801C0498();
             efSync_Spawn(1039, gobj, &vec);
         } else {
             f = 0.0f;
-            getBlock(gp, i, j)->x1_3 = 1;
+            getBlock(gp, j, i)->x1_3 = 1;
             Camera_80030E44(2, NULL);
             HSD_JObjGetTranslation(gobj->hsd_obj, &vec);
             vec.y += 5.0f * Ground_801C0498();
@@ -617,20 +1106,367 @@ void grGreens_802159B8(Ground* gp, int i, int j, int value)
     }
 }
 
-/// #fn_80215B84
+void fn_80215B84(Item_GObj* item_gobj, Ground* gp, Vec* arg2, HSD_GObj* gobj,
+                 float arg4)
+{
+    int i;
+    int j;
+    int row = -1;
+    int col = 0;
+
+    for (i = 0; i < 5; i++) {
+        for (j = 0; j < 6; j++) {
+            struct grGreens_BlockVars* block = getBlock(gp, i, j);
+
+            if (block->status != Gr_Greens_Block_Status_None &&
+                block->x10 == item_gobj)
+            {
+                row = i;
+                col = j;
+                i = 5;
+                break;
+            }
+        }
+    }
+    HSD_ASSERT(1465, row != -1);
+    grGreens_802159B8(gp, col, row, (s32) gobj);
+}
 
 void fn_80215D50(Item_GObj* item_gobj, Ground* gp, HSD_GObj* gobj)
 {
     return;
 }
 
-/// #grGreens_80215D54
+s32 grGreens_80215D54(Ground_GObj* gobj, int arg1, int arg2)
+{
+    Ground* gp = GET_GROUND(gobj);
+    int row;
 
-/// #grGreens_80215ED8
+    for (row = 1; row < 5; row++) {
+        if ((getBlock(gp, row, arg1)->status == 1 ||
+             getBlock(gp, row, arg1)->status == 2) &&
+            getBlock(gp, row - 1, arg1)->status == 0)
+        {
+            int r;
+            for (r = row; r < 5; r++) {
+                struct grGreens_BlockVars temp = *getBlock(gp, r, arg1);
+                *getBlock(gp, r, arg1) = *getBlock(gp, r - 1, arg1);
+                *getBlock(gp, r - 1, arg1) = temp;
+            }
+            if (getBlock(gp, row - 1, arg1)->status == 2) {
+                getBlock(gp, row - 1, arg1)->status |= 0x10;
+            }
+            row = 0;
+        }
+    }
+    return (s32) gobj;
+}
 
-/// #grGreens_802166C4
+void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
+{
+    Ground* gp = GET_GROUND(gobj);
+    struct grGreens_BlockVars* block = getBlock(gp, row, col);
+    Vec pos;
+    float scale;
 
-/// #grGreens_80216C20
+    if (block->status == Gr_Greens_Block_Status_None || block->x1_3) {
+        return;
+    }
+
+    if (block->x1_2) {
+        if (grMaterial_801C8E48(block->x10) != 0) {
+            block->x1_3 = 1;
+        }
+        return;
+    }
+
+    switch (block->status) {
+    case 2:
+        return;
+    case 1:
+        if (block->x1_4) {
+            block->x4 = 0.0f;
+            block->x1_4 = 0;
+            grGreens_802159B8(gp, col, row, 0);
+        } else {
+            block->x4 += grGr_params->x30;
+            if (block->x4 > grGr_params->x2C) {
+                block->x4 = grGr_params->x2C;
+            }
+            block->x8 -= block->x4;
+            if (row > 0) {
+                struct grGreens_BlockVars* below = getBlock(gp, row - 1, col);
+
+                if (below->status == 1 || below->status == 2) {
+                    float spacing =
+                        getVec(gp, row, col)->y - getVec(gp, row - 1, col)->y;
+
+                    if (block->x8 - below->x8 < spacing) {
+                        block->status = 2;
+                        block->x8 = spacing + below->x8;
+                    }
+                }
+            }
+        }
+
+        if (block->x8 < getVec(gp, row, col)->y) {
+            int next_row;
+
+            block->x8 = getVec(gp, row, col)->y;
+            block->status = 3;
+            block->x1_5 = 1;
+            for (next_row = row + 1; next_row < 5; next_row++) {
+                struct grGreens_BlockVars* next = getBlock(gp, next_row, col);
+
+                if (next->status != 2) {
+                    break;
+                }
+                next->x8 = getVec(gp, next_row, col)->y;
+                next->status = 3;
+                next->x1_5 = 1;
+                pos.x = getVec(gp, next_row, col)->x;
+                pos.y = next->x8;
+                pos.z = 0.0f;
+                HSD_JObjSetTranslate(next->xC->hsd_obj, &pos);
+                scale = 1.0f / Ground_801C0498();
+                pos.x *= scale;
+                pos.y *= scale;
+                pos.z *= scale;
+                HSD_JObjSetTranslate(next->x14, &pos);
+            }
+        } else {
+            int next_row;
+
+            for (next_row = row + 1; next_row < 5; next_row++) {
+                struct grGreens_BlockVars* next = getBlock(gp, next_row, col);
+
+                if (next->status != 2) {
+                    break;
+                }
+                next->x8 = getVec(gp, next_row, col)->y -
+                           getVec(gp, next_row - 1, col)->y +
+                           getBlock(gp, next_row - 1, col)->x8;
+                pos.x = getVec(gp, next_row, col)->x;
+                pos.y = next->x8;
+                pos.z = 0.0f;
+                HSD_JObjSetTranslate(next->xC->hsd_obj, &pos);
+                scale = 1.0f / Ground_801C0498();
+                pos.x *= scale;
+                pos.y *= scale;
+                pos.z *= scale;
+                HSD_JObjSetTranslate(next->x14, &pos);
+            }
+        }
+        break;
+    }
+
+    pos.x = getVec(gp, row, col)->x;
+    pos.y = block->x8;
+    pos.z = 0.0f;
+    HSD_JObjSetTranslate(block->xC->hsd_obj, &pos);
+    scale = 1.0f / Ground_801C0498();
+    pos.x *= scale;
+    pos.y *= scale;
+    pos.z *= scale;
+    HSD_JObjSetTranslate(block->x14, &pos);
+}
+
+void grGreens_802166C4(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    int row;
+    int col;
+
+    if (gp->gv.greens.xC-- < 0) {
+        u8 weights[6];
+        bool left_has_nonzero;
+        bool right_has_nonzero;
+        int choice = -1;
+
+        for (col = 0; col < 6; col++) {
+            weights[col] = grGr_params->x1C;
+            for (row = 4; row >= 0; row--) {
+                if (getBlock(gp, row, col)->status !=
+                    Gr_Greens_Block_Status_None)
+                {
+                    switch (row) {
+                    case 0:
+                        weights[col] = grGr_params->x18;
+                        break;
+                    case 1:
+                        weights[col] = grGr_params->x14;
+                        break;
+                    case 2:
+                        weights[col] = grGr_params->x10;
+                        break;
+                    case 3:
+                        weights[col] = grGr_params->xC;
+                        break;
+                    case 4:
+                        weights[col] = grGr_params->x8_blockBombChance;
+                        break;
+                    }
+                    break;
+                }
+            }
+        }
+
+        left_has_nonzero =
+            weights[0] != 0 || weights[1] != 0 || weights[2] != 0;
+        right_has_nonzero =
+            weights[3] != 0 || weights[4] != 0 || weights[5] != 0;
+
+        if (left_has_nonzero) {
+            int total;
+            int pick;
+
+            if (right_has_nonzero) {
+                total = weights[0] + weights[1] + weights[2] + weights[3] +
+                        weights[4] + weights[5];
+                pick = total != 0 ? HSD_Randi(total) : 0;
+                choice = 0;
+                pick -= weights[0];
+                if (pick >= 0) {
+                    choice = 1;
+                    pick -= weights[1];
+                    if (pick >= 0) {
+                        choice = 2;
+                        pick -= weights[2];
+                        if (pick >= 0) {
+                            choice = 3;
+                            pick -= weights[3];
+                            if (pick >= 0) {
+                                choice = 4;
+                                pick -= weights[4];
+                                if (pick >= 0) {
+                                    choice = 5;
+                                    pick -= weights[5];
+                                    if (pick >= 0) {
+                                        choice = 6;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                HSD_ASSERT(1693, choice < 6);
+            } else {
+                total = weights[0] + weights[1] + weights[2];
+                pick = total != 0 ? HSD_Randi(total) : 0;
+                choice = 0;
+                pick -= weights[0];
+                if (pick >= 0) {
+                    choice = 1;
+                    pick -= weights[1];
+                    if (pick >= 0) {
+                        choice = 2;
+                        pick -= weights[2];
+                        if (pick >= 0) {
+                            choice = 3;
+                        }
+                    }
+                }
+                HSD_ASSERT(1702, choice < 3);
+            }
+        } else if (right_has_nonzero) {
+            int total = weights[3] + weights[4] + weights[5];
+            int pick = total != 0 ? HSD_Randi(total) : 0;
+
+            choice = 3;
+            pick -= weights[3];
+            if (pick >= 0) {
+                choice = 4;
+                pick -= weights[4];
+                if (pick >= 0) {
+                    choice = 5;
+                    pick -= weights[5];
+                    if (pick >= 0) {
+                        choice = 6;
+                    }
+                }
+            }
+            HSD_ASSERT(1711, choice < 6);
+        }
+
+        if (choice != -1) {
+            int spawn_row = 4;
+            int type_roll;
+            int type;
+
+            while (spawn_row > 0) {
+                if (getBlock(gp, spawn_row - 1, choice)->status !=
+                    Gr_Greens_Block_Status_None)
+                {
+                    break;
+                }
+                spawn_row -= 1;
+            }
+            type_roll =
+                grGr_params->x20 != 0 ? HSD_Randi(grGr_params->x20) : 0;
+            type = type_roll != 0 ? 1 : 2;
+            grGreens_80215358(gobj, choice, spawn_row, type, 1);
+        }
+
+        gp->gv.greens.xC = randrange(grGr_params->x0_blockTimerMin,
+                                     grGr_params->x4_blockTimerMax);
+    }
+
+    for (row = 0; row < 5; row++) {
+        for (col = 0; col < 6; col++) {
+            grGreens_80215ED8(gobj, col, row);
+        }
+    }
+
+restart_cleanup:
+    for (row = 0; row < 5; row++) {
+        for (col = 0; col < 6; col++) {
+            struct grGreens_BlockVars* block = getBlock(gp, row, col);
+
+            if (block->x1_3) {
+                block->x1_3 = 0;
+                block->x1_6 = 1;
+                block->status = Gr_Greens_Block_Status_None;
+                Ground_801C4A08(block->xC);
+                grMaterial_801C8CDC(block->x10);
+                HSD_JObjSetFlags(block->x14, JOBJ_HIDDEN);
+                grGreens_80215D54(gobj, col, row);
+                goto restart_cleanup;
+            }
+        }
+    }
+}
+
+void grGreens_80216C20(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    int i;
+    int j;
+
+    for (i = 0; i < 5; i++) {
+        for (j = 0; j < 6; j++) {
+            struct grGreens_BlockVars* block = getBlock(gp, i, j);
+
+            if (block->x1_6) {
+                if (i > 0 && getBlock(gp, i - 1, j)->status == 3) {
+                    mpLib_800581DC(block->x18, getBlock(gp, i - 1, j)->x18);
+                }
+                if (j > 0 && getBlock(gp, i, j - 1)->status == 3) {
+                    mpLib_800581DC(block->x18, getBlock(gp, i, j - 1)->x18);
+                }
+                if (i < 4 && getBlock(gp, i + 1, j)->status == 3) {
+                    mpLib_800581DC(block->x18, getBlock(gp, i + 1, j)->x18);
+                }
+                if (j < 5 && getBlock(gp, i, j + 1)->status == 3) {
+                    mpLib_800581DC(block->x18, getBlock(gp, i, j + 1)->x18);
+                }
+                block->x1_6 = 0;
+            } else if (block->x1_7) {
+                grGreens_802150C4(gobj, j, i);
+                block->x1_7 = 0;
+            }
+        }
+    }
+}
 
 void fn_80216DE4(Ground* gp, s32 arg1, CollData* arg2, s32 arg3,
                  enum mpLib_GroundEnum arg4, f32 farg0)

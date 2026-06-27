@@ -33,7 +33,7 @@ typedef struct {
     f32 x18;
     f32 x1C;
     f32 x20;
-    u8 pad_24[4];
+    f32 x24;
     void* x28;
 } RouteEntry;
 
@@ -67,10 +67,10 @@ typedef struct {
 /* 20C238 */ void grBigBlueRoute_8020C238(Ground_GObj*);
 /* 20C530 */ s32 grBigBlueRoute_8020C530(Ground_GObj*);
 /* 20C85C */ void grBigBlueRoute_8020C85C(Ground_GObj*);
-/* 20CD20 */ UNK_RET grBigBlueRoute_8020CD20(Ground_GObj*);
+/* 20CD20 */ void grBigBlueRoute_8020CD20(Ground_GObj*);
 /* 20DA9C */ int grBigBlueRoute_8020DA9C(struct grBigBlueRoute_8020DA9C_t*);
 /* 20DAB4 */ void grBigBlueRoute_8020DAB4(HSD_JObj**, float, int);
-/* 20DD64 */ void grBigBlueRoute_8020DD64(Vec3*);
+/* 20DD64 */ f32 grBigBlueRoute_8020DD64(Vec3*);
 /* 20DE48 */ DynamicModelDesc* grBigBlueRoute_8020DE48(void);
 /* 20DEAC */ UNK_RET fn_8020DEAC(UNK_PARAMS);
 /* 20DED4 */ void grBigBlueRoute_8020DED4(Vec3*);

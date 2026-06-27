@@ -6,7 +6,7 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0852.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_0D31.h"
+#include "ft/ft_0D4D.h"
 #include "ft/ftanim.h"
 #include "ft/ftchangeparam.h"
 #include "ft/ftcommon.h"
@@ -17,7 +17,7 @@
 #include "ftCommon/forward.h"
 
 #include "ftGameWatch/ftGw_Init.h"
-#include "ftKirby/ftKb_Init.h"
+#include "ftKirby/ftkirby.h"
 #include "gm/gm_unsplit.h"
 
 #include "it/forward.h"
@@ -1044,9 +1044,7 @@ float ftLib_8008777C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ground_or_air != GA_Ground) {
-        __assert("ftlib.c", 1517, "fp->ground_or_air == GA_Ground");
-    }
+    HSD_ASSERT(1517, fp->ground_or_air == GA_Ground);
 
     {
         CollData* cd = Fighter_GetCollData(fp);

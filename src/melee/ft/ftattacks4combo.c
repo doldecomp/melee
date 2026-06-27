@@ -36,8 +36,7 @@ void ftCo_800CED30(Fighter_GObj* gobj)
             }
         } else {
         second:
-            OSReport("don't have smash42 motion!!!\n");
-            __assert("ftattacks4combo.c", 0x36, "0");
+            HSD_ASSERTREPORT(0x36, 0, "don't have smash42 motion!!!\n");
         }
     }
 third:

@@ -3,6 +3,7 @@
 #include "debug.h"
 #include "math.h"
 
+#include <MSL/math_ppc.h>
 #include <MSL/trigf.h>
 
 #define EPSILON 0.0000000001f
@@ -461,9 +462,7 @@ void* HSD_VecAlloc(void)
 {
     void* vec = HSD_ObjAlloc(&HSD_Mtx_804C2310);
 
-    if (vec == NULL) {
-        __assert("mtx.c", 0x335, "vec");
-    }
+    HSD_ASSERT(0x335, vec);
 
     return vec;
 }
@@ -480,9 +479,7 @@ void* HSD_MtxAlloc(void)
     void* mtx;
 
     mtx = HSD_ObjAlloc(&HSD_Mtx_804C233C);
-    if (mtx == NULL) {
-        __assert("mtx.c", 0x354, "mtx");
-    }
+    HSD_ASSERT(0x354, mtx);
     return mtx;
 }
 

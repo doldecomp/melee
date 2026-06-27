@@ -176,11 +176,8 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
                     }
                     pos.x = tether_data->pos_x_0;
                     pos.x *= fp->facing_dir;
-                    {
-                        float x = pos.x;
-                        pos.x = x + fp->pos_delta.x;
-                        it_802A78B8(tether_gobj, &pos, x);
-                    }
+                    pos.x += fp->pos_delta.x;
+                    it_802A78B8(tether_gobj, &pos);
                     if (fp->kind == FTKIND_CLINK) {
                         ft_PlaySFX(fp, 0x111B9, 0x7F, 0x40);
                     } else {
@@ -238,13 +235,9 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
                                 return;
                             }
                             pos.x = tether_data->pos_x_1;
-                            ;
                             pos.x *= fp->facing_dir;
-                            {
-                                float x = pos.x;
-                                pos.x = x + fp->pos_delta.x;
-                                it_802BAAE4(temp_r29_2, &pos, x);
-                            }
+                            pos.x += fp->pos_delta.x;
+                            it_802BAAE4(temp_r29_2, &pos);
                         }
                     }
                 } else {

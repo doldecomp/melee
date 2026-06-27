@@ -2,6 +2,8 @@
 
 #include "mnstagesel.static.h"
 
+#include "placeholder.h"
+
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -24,6 +26,12 @@
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/types.h>
 #include <melee/mn/mnmain.h>
+
+/// @todo .sdata2 order hack
+static void order_sdata2(void)
+{
+    (void) S32_TO_F32;
+}
 
 /// Random stage selection
 /// Returns an internal stage ID - 2 (since first 2 internal stage IDs are
@@ -268,7 +276,7 @@ void fn_8025A310(HSD_GObj* gobj)
 
     jobj = gobj->hsd_obj;
     if (mnStageSel_804D6CAF != 0) {
-        HSD_JObjSetFlags(jobj, 0x10);
+        HSD_JObjSetFlags(jobj, JOBJ_HIDDEN);
         return;
     }
     HSD_JObjGetTranslation(jobj, &sp1C);
@@ -503,7 +511,7 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
             mnStageSel_803F06D0[i * 2].x0 = temp_r22_6->child->next;
             switch (mnStageSel_803F06D0[i * 2].x8) {
             case 0:
-                HSD_JObjSetFlags(mnStageSel_803F06D0[i * 2].x0, 0x10);
+                HSD_JObjSetFlags(mnStageSel_803F06D0[i * 2].x0, JOBJ_HIDDEN);
                 break;
             case 1:
                 HSD_JObjReqAnimAllByFlags(mnStageSel_803F06D0[i * 2].x0, 0x10,
@@ -518,7 +526,8 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
             mnStageSel_803F06D0[i * 2 + 1].x0 = temp_r22_6->child;
             switch (mnStageSel_803F06D0[i * 2 + 1].x8) {
             case 0:
-                HSD_JObjSetFlags(mnStageSel_803F06D0[i * 2 + 1].x0, 0x10);
+                HSD_JObjSetFlags(mnStageSel_803F06D0[i * 2 + 1].x0,
+                                 JOBJ_HIDDEN);
                 break;
             case 1:
                 HSD_JObjReqAnimAllByFlags(mnStageSel_803F06D0[i * 2 + 1].x0,
@@ -555,7 +564,7 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
                 mnStageSel_803F06D0[i + 13].x8 = 0;
                 /* fallthrough */
             case 0:
-                HSD_JObjSetFlagsAll(temp_r23_3, 0x10);
+                HSD_JObjSetFlagsAll(temp_r23_3, JOBJ_HIDDEN);
                 break;
             default:
                 temp_r22_7 = mnStageSel_803F06D0[i + 13].x9 - 0x16;
@@ -591,6 +600,7 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
 
         for (i = 0x11; i <= 0x12; i++) {
             HSD_JObj* jobj;
+            HSD_AnimJoint* animjoint;
             HSD_GObj* gobj = GObj_Create(4, 5, 0x80);
             HSD_JObj* temp_r23_6;
             s32 temp_r22_9;
@@ -598,7 +608,8 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
             HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
             GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x83);
             HSD_GObj_SetupProc(gobj, mn_8022EAE0, 3);
-            HSD_JObjAddAnimAll(jobj, mnStageSel_804D6C98->x0.animjoint,
+            animjoint = mnStageSel_804D6C98->x0.animjoint;
+            HSD_JObjAddAnimAll(jobj, animjoint,
                                mnStageSel_804D6C98->x0.matanim_joint,
                                mnStageSel_804D6C98->x0.shapeanim_joint);
 
@@ -610,7 +621,7 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
                 mnStageSel_803F06D0[i + 5].x8 = 0;
                 /* fallthrough */
             case 0:
-                HSD_JObjSetFlagsAll(temp_r23_6, 0x10);
+                HSD_JObjSetFlagsAll(temp_r23_6, JOBJ_HIDDEN);
                 break;
             default:
                 temp_r22_9 = mnStageSel_803F06D0[i + 5].x9 - 0x14;
@@ -755,7 +766,7 @@ void mnStageSel_8025B850_OnFrame(void)
         lb_800145F4();
         HSD_GObjPLink_80390228(mnStageSel_804D6C9C);
         mn_8022F268();
-        gm_801A42F8(MJ_MENU);
+        gm_801A42F8(GM_MENU);
         gm_801A4B60();
         return;
     }

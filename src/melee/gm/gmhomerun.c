@@ -16,7 +16,7 @@
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/gmresult.h>
 #include <melee/gm/gmresultplayer.h>
-#include <melee/gm/gmtou.h>
+#include <melee/gm/gmtoulib.h>
 #include <melee/gm/gmvsmelee.h>
 #include <melee/gm/types.h>
 #include <melee/lb/lbarchive.h>
@@ -38,7 +38,7 @@
 #include <melee/vi/vi1101.h>
 #include <melee/vi/vi1201v1.h>
 
-MinorScene gm_803DF198_MinorScenes[] = {
+GameScene gm_803DF198_Scenes[] = {
     {
         0,
         3,
@@ -46,7 +46,7 @@ MinorScene gm_803DF198_MinorScenes[] = {
         gm_801B98E8,
         gm_801B999C,
         {
-            MN_CSS,
+            GS_CSS,
             &gm_804807B0,
             &gm_804807B0,
         },
@@ -58,7 +58,7 @@ MinorScene gm_803DF198_MinorScenes[] = {
         gm_801B9A3C,
         gm_801B9DD8,
         {
-            MN_VS,
+            GS_VS,
             &gm_80480530,
             &gm_80479D98,
         },
@@ -70,7 +70,7 @@ VsModeData gm_80497618;
 static u8 gm_804D68F8;
 static u8 gm_804D68F9;
 
-void gm_801B98E8(MinorScene* scene)
+void gm_801B98E8(GameScene* scene)
 {
     CSSData* css;
     struct GameCache* game_cache;
@@ -94,14 +94,14 @@ void gm_801B98E8(MinorScene* scene)
     gm_804D68F9 = lbTime_8000AF74(gm_804D68F9, 1);
 }
 
-void gm_801B999C(MinorScene* scene)
+void gm_801B999C(GameScene* scene)
 {
     VsModeData* vs = &gm_80497618;
     CSSData* temp_r3;
 
     temp_r3 = gm_801A4284(scene);
     if (temp_r3->pending_scene_change == 2) {
-        gm_801A42F8(MJ_MENU);
+        gm_801A42F8(GM_MENU);
         return;
     }
     gm_80167A14(vs->data.players);
@@ -115,7 +115,7 @@ void gm_801B999C(MinorScene* scene)
     vs->data.players[1].team = 1;
 }
 
-void gm_801B9A3C(MinorScene* arg0)
+void gm_801B9A3C(GameScene* arg0)
 {
     StartMeleeData* data;
     VsModeData* vs = &gm_80497618;
@@ -161,7 +161,7 @@ void gm_801B9A3C(MinorScene* arg0)
     gm_80180B18();
 }
 
-void gm_801B9DD8(MinorScene* arg0)
+void gm_801B9DD8(GameScene* arg0)
 {
     u32 temp_r31;
     s32* temp_r3_2;
@@ -174,7 +174,7 @@ void gm_801B9DD8(MinorScene* arg0)
     gm_8016247C(temp_r3->match_end.player_standings[0].xE);
     gm_80180BA0();
     if (temp_r3->match_end.result == 8) {
-        gm_SetScenePendingMinor(1);
+        gm_SetPendingScene(1);
         return;
     }
     temp_r30 =
@@ -191,7 +191,7 @@ void gm_801B9DD8(MinorScene* arg0)
     gm_80173EEC();
     gm_80172898(8);
     if (gm_80173754(0x20, gm_804D68F8) == 0) {
-        gm_SetScenePendingMinor(0);
+        gm_SetPendingScene(0);
     }
 }
 

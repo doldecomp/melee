@@ -1,13 +1,18 @@
 #include "itwstar.h"
 
+#include "placeholder.h"
+
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/it_279C.h"
+#include "it/it_3F14.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
+#include "it/ithitbox.h"
 #include "lb/lb_00F9.h"
 
 #include <baselib/jobj.h>
@@ -15,38 +20,41 @@
 
 HSD_AnimJoint* it_80294364(Item_GObj* gobj)
 {
-    s32 candidates[8];
-    s32 i;
-    Item* ip;
-    s32 last;
-    itWstarAttributes* attr;
-    s32 count;
-    s32 total;
-    s32* p;
+    Item* ip = GET_ITEM(gobj);
+    itWstarAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    s32 candidates[7];
+    int i;
+    int count;
     s32 picked;
+    s32 end = it_804D6D00;
+    s32 var_ctr = attr->x24_count;
 
-    i = 0;
-    p = candidates;
-    ip = GET_ITEM(gobj);
-    last = it_804D6D00;
-    attr = ip->xC4_article_data->x4_specialAttributes;
-    count = 0;
-    total = attr->x24_count;
-
-    for (; i < total; i++) {
-        if (i != last) {
-            *p++ = i;
+    for (i = count = 0; i < var_ctr; i++) {
+        if (i != it_804D6D00) {
+            candidates[count] = i;
             count++;
         }
     }
-
     picked = candidates[HSD_Randi(count)];
-    it_804D6D00 = (s8) picked;
+    it_804D6D00 = picked;
     ip->xDD4_itemVar.wstar.xDDC = picked;
     Item_8026AE84(ip, attr->x28_entries[ip->xDD4_itemVar.wstar.xDDC].x4_sfx,
                   0x7f, 0x40);
     return attr->x28_entries[picked].x0_anim_joint;
 }
+
+ItemStateTable it_803F61B0[] = {
+    { 0, itWstar_UnkMotion0_Anim, itWstar_UnkMotion0_Phys,
+      itWstar_UnkMotion0_Coll },
+    { -1, itWstar_UnkMotion1_Anim, itWstar_UnkMotion1_Phys,
+      itWstar_UnkMotion1_Coll },
+    { -1, itWstar_UnkMotion3_Anim, NULL, NULL },
+    { 2, itWstar_UnkMotion3_Anim, NULL, NULL },
+    { -1, itWstar_UnkMotion4_Anim, itWstar_UnkMotion4_Phys,
+      itWstar_UnkMotion4_Coll },
+    { 1, itWstar_UnkMotion5_Anim, itWstar_UnkMotion5_Phys,
+      itWstar_UnkMotion5_Coll },
+};
 
 void it_80294430(Item_GObj* gobj, f32 arg1, f32 arg2)
 {
@@ -76,9 +84,9 @@ void itWStar_Logic29_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     ip->xDCE_flag.b7 = 0;
-    ip->xDD4_itemVar.wstar.xDD8 = 0.0F;
-    ip->xDD4_itemVar.wstar.xDD4 = 0.0F;
-    it_80294364(gobj);
+    ip->xDD4_itemVar.wstar.xDD8 = 1.0f;
+    ip->xDD4_itemVar.wstar.xDD4 = 1.0f;
+    it_80294624(gobj);
 }
 
 void it_8029455C(Item_GObj* gobj)
@@ -167,14 +175,16 @@ void itWStar_Logic29_Dropped(Item_GObj* gobj)
 
 void it_802947CC(Item_GObj* gobj, Vec3* pos)
 {
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-    Item* ip = GET_ITEM(gobj);
-    union Struct2070 saved_xD90;
-    Vec2 saved_xD94;
-    S32Vec2 saved_xD9C;
-    u32 saved_xDA4;
-    u16 saved_xDA8;
+    u8 _pad[8];
+    HSD_JObj* jobj = gobj->hsd_obj;
+    Item* ip = gobj->user_data;
     Vec3 item_pos;
+    union Struct2070 saved_xD90;
+    volatile u32 saved_xDA4;
+    S32Vec2 saved_xD9C;
+    Vec2 saved_xD94;
+    u8 _pad2[4];
+    u16 saved_xDA8;
 
     itResetVelocity(ip);
     ip->xDAC_itcmd_var0 = 0;
@@ -193,7 +203,7 @@ void it_802947CC(Item_GObj* gobj, Vec3* pos)
     it_8026B3A8(gobj);
     ip->pos = *pos;
     HSD_JObjSetTranslate(jobj, &ip->pos);
-    HSD_JObjSetFlagsAll(jobj, 0x10);
+    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     it_8026BD24(gobj);
     it_8027518C(gobj);
     efLib_DestroyAll(gobj);

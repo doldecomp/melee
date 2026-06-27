@@ -97,7 +97,7 @@ static void grShrine_UnkStage0_OnLoad(void) {}
 
 static void grShrine_UnkStage0_OnStart(void)
 {
-    grZakoGenerator_801CAE04(false);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 static bool grShrine_80201D18(void)

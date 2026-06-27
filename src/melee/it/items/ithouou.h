@@ -6,7 +6,7 @@
 #include "it/items/types.h"
 
 /* 2D251C */ void it_2725_Logic18_Spawned(Item_GObj*);
-/* 2D25B8 */ UNK_RET it_802D25B8(UNK_PARAMS);
+/* 2D25B8 */ void it_802D25B8(HSD_GObj* gobj);
 /* 2D25BC */ void it_802D25BC(Item_GObj*, Item_GObj*);
 /* 2D25DC */ bool itHouou_UnkMotion1_Anim(Item_GObj* gobj);
 /* 2D2640 */ void itHouou_UnkMotion1_Phys(Item_GObj* gobj);

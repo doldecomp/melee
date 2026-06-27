@@ -271,14 +271,14 @@ struct PreloadEntry {
 struct PreloadCacheScene {
     bool is_heap_persistent[2];
     struct GameCache {
-        u8 major_id;
+        u8 mode_id;
         u8 field2_0x9;
         u8 field3_0xa;
         u8 field4_0xb;
         InternalStageId stage_id;
         PreloadCacheSceneEntry entries[8];
     } game_cache;
-    s32 major_scene_changes;
+    s32 mode_scene_changes;
 };
 
 struct PreloadCache {
@@ -292,11 +292,17 @@ struct PreloadCache {
 };
 
 struct lb_800138D8_t {
-    /*  +0 */ char pad_0[0x11];
+    /*  +0 */ f32 x0;
+    /*  +4 */ f32 x4;
+    /*  +8 */ f32 x8;
+    /*  +C */ f32 xC;
+    /* +10 */ s8 x10;
     /* +11 */ s8 x11;
     /* +12 */ s8 x12;
     /* +13 */ char pad_13[0x18 - 0x13];
-    /* +18 */ int x18;
+    /* +18 */ HSD_GObjEvent x18;
+    /* +1C */ s32 x1C;
+    /* +20 */ char pad_20[0x24 - 0x20];
 };
 
 struct lb_80432A68_38_t {
@@ -304,6 +310,13 @@ struct lb_80432A68_38_t {
     /* 0x4 */ s32 unk_4;
 };
 STATIC_ASSERT(sizeof(struct lb_80432A68_38_t) == 0x8);
+
+struct lbCardNew_SnapshotEntry {
+    /* 0x0 */ u32 time;
+    /* 0x4 */ s16 file_no;
+    /* 0x6 */ u16 blocks;
+};
+STATIC_ASSERT(sizeof(lbCardNew_SnapshotEntry) == 0x8);
 
 struct lb_80432A68_t {
     /* 0x000 */ UNK_T work_area;
@@ -314,9 +327,9 @@ struct lb_80432A68_t {
     /* 0x014 */ const char* unk_14;
     /* 0x018 */ s32 unk_18;
     /* 0x01C */ s32 unk_1C;
-    /* 0x020 */ UNK_T unk_20;
-    /* 0x024 */ int* unk_24;
-    /* 0x028 */ int* unk_28;
+    /* 0x020 */ lbCardNew_SnapshotEntry* snapshot_entries;
+    /* 0x024 */ int* free_blocks;
+    /* 0x028 */ int* free_files;
     /* 0x02C */ char x2C[2];
     /* 0x02C */ char x2E;
     /* 0x02C */ char x2F[4];
@@ -467,20 +480,13 @@ STATIC_ASSERT(sizeof(struct Fighter_804D653C_t) == 8);
 
 struct lb_00F9_UnkDesc1Inner {
     /* 0x00 */ f32 unk_0;
-    /* 0x04 */ f32 unk_4;  /* inferred */
-    /* 0x08 */ s32 unk_8;  /* inferred */
-    /* 0x0C */ s32 unk_C;  /* inferred */
-    /* 0x10 */ s32 unk_10; /* inferred */
-    /* 0x14 */ s32 unk_14; /* inferred */
-    /* 0x18 */ f32 unk_18; /* inferred */
-    /* 0x1C */ s32 unk_1C; /* inferred */
-    /* 0x20 */ s32 unk_20; /* inferred */
-    /* 0x24 */ f32 unk_24; /* inferred */
-    /* 0x28 */ s32 unk_28; /* inferred */
-    /* 0x2C */ s32 unk_2C; /* inferred */
-    /* 0x30 */ s32 unk_30; /* inferred */
-    /* 0x34 */ f32 unk_34; /* inferred */
-    /* 0x38 */ f32 unk_38; /* inferred */
+    /* 0x04 */ f32 unk_4; /* inferred */
+    /* 0x08 */ Quaternion unk_8;
+    /* 0x18 */ f32 unk_18;  /* inferred */
+    /* 0x1C */ Vec3 unk_1C; /* inferred */
+    /* 0x28 */ Vec3 unk_28; /* inferred */
+    /* 0x34 */ f32 unk_34;  /* inferred */
+    /* 0x38 */ f32 unk_38;  /* inferred */
 };
 STATIC_ASSERT(sizeof(struct lb_00F9_UnkDesc1Inner) == 0x3C);
 
@@ -489,39 +495,30 @@ struct lb_00F9_UnkDesc1 {
 };
 
 struct lb_00F9_UnkDesc0 {
-    /* 0x00 */ f32 unk_0;
-    /* 0x04 */ f32 unk_4;
-    /* 0x08 */ s32 unk_8;
-    /* 0x0C */ f32 unk_C;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ s32 unk_20;
-    /* 0x24 */ s32 unk_24;
-    /* 0x28 */ s32 unk_28;
-    /* 0x2C */ f32 unk_2C;
-    /* 0x30 */ s32 unk_30;
-    /* 0x34 */ s32 unk_34;
-    /* 0x38 */ f32 unk_38;
-    char pad_3C[0x78 - 0x3C];
-    int unk_78;
-    int unk_7C;
-    int unk_80;
-    f32 unk_84;
-    f32 unk_88;
-    f32 unk_8C;
-};
-
-struct ftDynamics_UnkDesc {
-    HSD_JObj* jobj;
+    /* 0x00 */ HSD_JObj* jobj;
+    /* 0x04 */ Quaternion rotate;
+    /* 0x14 */ Vec3 translate;
+    /* 0x20 */ Vec3 scale;
+    /* 0x2C */ Vec3 unk_2C;
+    /* 0x38 */ Vec3 unk_38;
+    /* 0x44 */ f32 unk_44;
+    /* 0x48 */ f32 unk_48;
+    /* 0x4C */ f32 unk_4C;
+    /* 0x50 */ f32 unk_50;
+    /* 0x54 */ s32 unk_54;
+    /* 0x58 */ Quaternion unk_58;
+    /* 0x68 */ f32 unk_68;
+    /* 0x6C */ Vec3 unk_6C;
+    /* 0x78 */ Vec3 unk_78;
+    /* 0x84 */ f32 unk_84;
+    /* 0x88 */ f32 unk_88;
+    /* 0x8C */ f32 unk_8C;
 };
 
 union PolymorphicDesc {
     u8 _[0x90];
     struct lb_00F9_UnkDesc0 lb_unk0;
     struct lb_00F9_UnkDesc1 lb_unk1;
-    struct ftDynamics_UnkDesc ft_unk;
     struct AbsorbDesc absorb;
     struct HurtCapsule hurt;
 };
@@ -530,8 +527,9 @@ STATIC_ASSERT(sizeof(union PolymorphicDesc) == 0x90);
 struct DynamicsData {
     union PolymorphicDesc desc;
     /* 0x90 */ struct DynamicsData* next;
-}; /* size = 0x94 */
-STATIC_ASSERT(sizeof(struct DynamicsData) == 0x94);
+    /* 0x94 */ s32 unk_94;
+}; /* size = 0x98 */
+STATIC_ASSERT(sizeof(struct DynamicsData) == 0x98);
 
 struct DynamicsDesc {
     /* +0 */ struct DynamicsData* data;
@@ -549,12 +547,12 @@ struct lb_8000FD18_t {
 };
 
 struct lb_804D63A0_t {
-    /* +0 */ char pad_0[0xBE00];
+    /* +0 */ struct DynamicsData entries[0x140];
 };
 STATIC_ASSERT(sizeof(struct lb_804D63A0_t) == 0xBE00);
 
 struct lb_804D63A8_t {
-    /* +0 */ char pad_0[0x1C0];
+    /* +0 */ struct lb_80011A50_t entries[8];
 };
 STATIC_ASSERT(sizeof(struct lb_804D63A8_t) == 0x1C0);
 
@@ -855,6 +853,23 @@ struct spawn_hitbox_5 {
     u32 x1_b6 : 1;
     u32 x1_b7 : 1;
 };
+struct it_create_hitbox_0 {
+    u32 opcode : 6;
+    u32 id : 3;
+    u32 hit_group : 3;
+    u32 bone : 7;
+    u32 damage : 13;
+};
+struct it_create_hitbox_4 {
+    u32 base_knockback : 9;
+    u32 element : 5;
+    u32 x40_b0 : 1;
+    s32 shield_damage : 8;
+    u32 sfx_severity : 3;
+    u32 sfx_kind : 4;
+    u32 x40_b3 : 1;
+    u32 x40_b2 : 1;
+};
 struct spawn_hitbox_skip {
     u8 _0[0xF];
     u32 xF_b0 : 1;
@@ -906,9 +921,9 @@ struct stage_sfx_3 {
 };
 struct footstep_fx_0 {
     u32 opcode : 6;
-    u32 x0_b6_7 : 2;
+    u32 boneId : 8;
     u32 use_alt_bone : 1;
-    u32 x1_b1_7 : 7;
+    u32 x1_b7 : 1;
     u32 x2_b0_7 : 8;
     u32 x3_b0_7 : 8;
 };
@@ -1018,6 +1033,8 @@ struct CommandInfo {
             struct spawn_hitbox_3 create_hitbox_3;
             struct spawn_hitbox_4 create_hitbox_4;
             struct spawn_hitbox_5 create_hitbox_5;
+            struct it_create_hitbox_0 it_create_hitbox_0;
+            struct it_create_hitbox_4 it_create_hitbox_4;
             struct sound_effect_0 sound_effect_0;
             struct sound_effect_1 sound_effect_1;
             struct sound_effect_2 sound_effect_2;

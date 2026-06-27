@@ -66,9 +66,9 @@ void grKraid_OnInit(void)
     grKraid_801FE0C4(2);
     grKraid_801FE0C4(3);
     gobj = grKraid_801FE0C4(4);
-    HSD_JObjSetFlagsAll(GET_JOBJ(gobj), 0x10);
+    HSD_JObjSetFlagsAll(GET_JOBJ(gobj), JOBJ_HIDDEN);
     gobj = grKraid_801FE0C4(1);
-    HSD_JObjSetFlagsAll(GET_JOBJ(gobj), 0x10);
+    HSD_JObjSetFlagsAll(GET_JOBJ(gobj), JOBJ_HIDDEN);
     Ground_801C39C0();
     Ground_801C3BB4();
 }
@@ -77,7 +77,7 @@ void grKraid_OnLoad(void) {}
 
 void grKraid_OnStart(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grKraid_801FE0BC(void)
@@ -209,17 +209,6 @@ bool grKraid_801FE438(Ground_GObj* gobj)
     return false;
 }
 
-static inline int rand_inline(int a, int b)
-{
-    if (a > b) {
-        return b + (a - b != 0 ? HSD_Randi(a - b) : 0);
-    } else if (a < b) {
-        return a + (b - a != 0 ? HSD_Randi(b - a) : 0);
-    } else {
-        return a;
-    }
-}
-
 const Vec grKr_803B8278 = { 0.0f, 0.0f, 0.0f };
 void grKraid_801FE440(Ground_GObj* gobj)
 {
@@ -231,10 +220,10 @@ void grKraid_801FE440(Ground_GObj* gobj)
     Vec pos = grKr_803B8278;
     switch (gp->gv.kraid.x0) {
     case 0:
-        if (gp->gv.kraid.x4)
-        { /// @remark Explicit != 0.0f comparison leads to incorrect ordering
-            gp->gv.kraid.x10 = rand_inline(grKr_804D6A08->map_time_max,
-                                           grKr_804D6A08->map_time_min);
+        if (gp->gv.kraid.x4) { /// @remark Explicit != 0.0f comparison leads to
+                               /// incorrect ordering
+            gp->gv.kraid.x10 = rand_range(grKr_804D6A08->map_time_max,
+                                          grKr_804D6A08->map_time_min);
             gp->gv.kraid.x0 = 1;
             grAnime_801C7FF8(gobj, 18, 7, 1, 0.0f, 1.0f);
             Ground_801C53EC(420007);
@@ -414,8 +403,9 @@ void grKraid_801FEA00(Ground_GObj* gobj)
             Ground* map = Ground_801C2BA4(3)->user_data;
             if ((int) map->gv.kraid.x4 == 0) {
                 grKraid_801FEE54(gobj);
-                HSD_JObjClearFlagsAll(jobj, 0x10);
-                HSD_JObjClearFlagsAll(Ground_801C2BA4(1)->hsd_obj, 0x10);
+                HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
+                HSD_JObjClearFlagsAll(Ground_801C2BA4(1)->hsd_obj,
+                                      JOBJ_HIDDEN);
                 grKraid_801FF068(gobj, 3);
                 Ground_801C53EC(420001);
                 Ground_801C53EC(420008);
@@ -498,8 +488,8 @@ void grKraid_801FEA00(Ground_GObj* gobj)
         if (grAnime_801C83D0(gobj, 0, 7) != 0) {
             gp->gv.kraid2.xC = grKr_804D6A08->kraid_wait_time +
                                grKr_804D6A08->kraid_wait_time_add;
-            HSD_JObjSetFlagsAll(jobj, 0x10);
-            HSD_JObjSetFlagsAll(Ground_801C2BA4(1)->hsd_obj, 0x10);
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+            HSD_JObjSetFlagsAll(Ground_801C2BA4(1)->hsd_obj, JOBJ_HIDDEN);
             gp->gv.kraid2.xC =
                 grKr_804D6A08->kraid_wait_time +
                 ((s32) grKr_804D6A08->kraid_wait_time_add != 0

@@ -7,6 +7,9 @@
 
 #define NUM_OPPONENTS 3
 
+u8 lbl_803D79F0[] = { 0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  10, 11,
+                      12, 13, 14, 15, 16, 17, 20, 21, 22, 24, 25, 33 };
+
 int gm_8017BE84(u32 arg0)
 {
     return (arg0 >> 3) & 0x1F;
@@ -67,9 +70,9 @@ void gmRegSetupEnemyColorTable(s8 ckind, u8 color, s8* ckinds, u8* colors)
             }
         }
         if (colors[i] == 0xFF) {
-            OSReport(
+            HSD_ASSERTREPORT(
+                0xDA, 0,
                 "Error : not find color in gmRegSetupEnemyColorTable()\n");
-            __assert(__FILE__, 0xDA, "0");
         }
     }
 }

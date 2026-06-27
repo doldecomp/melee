@@ -87,7 +87,7 @@ static void grFigure3_OnLoad(void) {}
 
 static void grFigure3_OnStart(void)
 {
-    grZakoGenerator_801CAE04(false);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 static bool grFigure3_8020E5A0(void)

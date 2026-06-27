@@ -75,7 +75,9 @@ typedef struct _ftYoshiAttributes { // x2D4 (fp->dat_attrs)
     float x118;
     float x11C;
     float x120;
-    u8 pad_x124[0x138 - 0x124];
+    float x124;
+    float x128;
+    u8 x12C[0x138 - 0x12C];
 } ftYoshiAttributes;
 STATIC_ASSERT(sizeof(struct _ftYoshiAttributes) == 0x138);
 

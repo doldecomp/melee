@@ -124,7 +124,7 @@ void grTmewtwo_UnkStage0_OnLoad(void) {}
 
 void grTmewtwo_UnkStage0_OnStart(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grTMewtwo_8022227C(void)

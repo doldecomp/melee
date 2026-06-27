@@ -3,7 +3,7 @@
 
 #include <placeholder.h>
 
-#include "it/inlines.h"
+#include "mp/forward.h"
 
 #include <dolphin/mtx.h>
 
@@ -42,7 +42,8 @@
 /* 20014C */ bool grRCruise_8020014C(Ground_GObj*);
 /* 200154 */ void grRCruise_80200154(Ground_GObj*);
 /* 20045C */ void grRCruise_8020045C(Ground_GObj*);
-/* 200460 */ UNK_RET fn_80200460(UNK_PARAMS);
+/* 200460 */ void fn_80200460(Ground*, s32, CollData*, s32, mpLib_GroundEnum,
+                              f32);
 /* 200540 */ void grRCruise_80200540(Ground_GObj*);
 /* 200578 */ void grRCruise_80200578(Ground*, s32, CollData*, s32,
                                      mpLib_GroundEnum, f32);
@@ -51,11 +52,11 @@
 /* 200C04 */ void grRCruise_80200C04(Ground_GObj*);
 /* 2010A4 */ void grRCruise_802010A4(Ground_GObj*, s32, CollData*);
 /* 201110 */ void grRCruise_80201110(Ground_GObj*);
-/* 201288 */ UNK_RET grRCruise_80201288(UNK_PARAMS);
-/* 201410 */ UNK_RET grRCruise_80201410(UNK_PARAMS);
+/* 201288 */ void grRCruise_80201288(HSD_JObj*, void (*)(HSD_DObj*, u32), u32);
+/* 201410 */ void grRCruise_80201410(Ground_GObj*);
 /* 201588 */ void grRCruise_80201588(Ground_GObj*);
 /* 201918 */ void grRCruise_80201918(Vec3*);
-/* 201988 */ UNK_RET grRCruise_80201988(UNK_PARAMS);
+/* 201988 */ bool grRCruise_80201988(s32);
 /* 201B60 */ void grRCruise_80201B60(HSD_JObj*, s32);
 /* 201BE0 */ void fn_80201BE0(HSD_GObj*, s32);
 /* 201C50 */ DynamicsDesc* grRCruise_80201C50(enum_t);

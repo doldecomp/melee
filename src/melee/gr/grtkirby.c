@@ -84,7 +84,7 @@ void grTkirby_UnkStage0_OnLoad(void) {}
 
 void grTkirby_UnkStage0_OnStart(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grTKirby_80221400(void)

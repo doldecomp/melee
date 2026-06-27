@@ -86,7 +86,7 @@ void grTfalco_UnkStage0_OnLoad(void) {}
 
 void grTfalco_UnkStage0_OnStart(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grTFalco_80220894(void)

@@ -73,7 +73,7 @@ void grTpurin_UnkStage0_OnLoad(void)
 
 void grTpurin_UnkStage0_OnStart(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grTPurin_80223204(void)

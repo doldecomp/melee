@@ -41,7 +41,7 @@ float lbVector_sqrtf_accurate(float x);
 
 Vec3* lbVector_WorldToScreen(HSD_CObj* cobj, const Vec3* pos3d,
                              Vec3* screenCoords, int d);
-void lbVector_CreateEulerMatrix(Mtx m, Vec3* angles);
+void lbVector_CreateEulerMatrix(Mtx m, Quaternion* angles);
 float lbVector_8000E838(Vec3* a, Vec3* b, Vec3* c, Vec3* d);
 
 #endif

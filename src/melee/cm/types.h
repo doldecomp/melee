@@ -46,6 +46,22 @@ struct CameraBounds {
     float z_pos;
 };
 
+struct Camera_x2D0 {
+    /* +0x00 */ f32 y_max;
+    /* +0x04 */ f32 y_min;
+    /* +0x08 */ f32 x_min;
+    /* +0x0C */ f32 x_max;
+    /* +0x10 */ f32 z_max;
+    /* +0x14 */ f32 z_min;
+    /* +0x18 */ f32 angle_up;
+    /* +0x1C */ f32 angle_down;
+    /* +0x20 */ f32 angle_right;
+    /* +0x24 */ f32 angle_left;
+    /* +0x28 */ f32 unk28;
+    /* +0x2C */ f32 unk2C;
+    /* +0x30 */ void (*callback)(Camera_x2D0*);
+};
+
 struct CameraQuake {
     /* 0x0 */ Vec3 x0;
     /* 0xC */ int type;
@@ -92,24 +108,12 @@ struct Camera {
     /* 0x2BA */ s16 x2BA;
     /* 0x2BC */ f32 x2BC;
     /* 0x2C0 */ f32 x2C0;
-    /* 0x2C4 */ s8 x2C4; /* unk player slot */
-    /* 0x2C5 */ s8 x2C5;
+    /* 0x2C4 */ s8 x2C4; ///< unk player slot
+    /* 0x2C5 */ s8 x2C5; ///< pauser slot
     /* 0x2C6 */ char pad_2C6[0x2C8 - 0x2C6];
     /* 0x2C8 */ float pitch_offset;
     /* 0x2CC */ float yaw_offset;
-    /* 0x2D0 */ f32 x2D0;
-    /* 0x2D4 */ f32 x2D4;
-    /* 0x2D8 */ f32 x2D8;
-    /* 0x2DC */ f32 x2DC;
-    /* 0x2E0 */ f32 x2E0;
-    /* 0x2E4 */ f32 x2E4;
-    /* 0x2E8 */ f32 x2E8;
-    /* 0x2EC */ f32 x2EC;
-    /* 0x2F0 */ f32 x2F0;
-    /* 0x2F4 */ f32 x2F4;
-    /* 0x2F8 */ f32 min_distance;
-    /* 0x2FC */ f32 max_distance;
-    /* 0x300 */ s32 x300;
+    /* 0x2D0 */ Camera_x2D0 x2D0;
     /* 0x304 */ s8 x304;
     /* 0x305 */ s8 x305;
     /* 0x306 */ s8 x306;
@@ -151,7 +155,10 @@ struct Camera {
         s32 s32;
     } x378;
     // /* 0x378 */ f32 x378;
-    /* 0x37C */ s32 x37C;
+    /* 0x37C */ union {
+        s32 s32;
+        f32 f32;
+    } x37C;
     /* 0x380 */ u8 x380[0x18];
     /* 0x398:0 */ u8 x398_b0 : 1;
     /* 0x398:1 */ u8 x398_b1 : 1;

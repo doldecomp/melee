@@ -106,7 +106,7 @@ void grTmario_UnkStage0_OnLoad(void) {}
 
 void grTmario_UnkStage0_OnStart(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grTMario_8021F8DC(void)

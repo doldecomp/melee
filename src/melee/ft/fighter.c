@@ -6,6 +6,7 @@
 #include "ft_081B.h"
 #include "ft_0852.h"
 #include "ft_0877.h"
+#include "ft_0899.h"
 #include "ft_0D31.h"
 #include "ftaction.h"
 #include "ftanim.h"
@@ -16,6 +17,7 @@
 #include "ftdynamics.h"
 #include "ftlib.h"
 #include "ftparts.h"
+#include "placeholder.h"
 
 #include <platform.h>
 
@@ -30,6 +32,7 @@
 #include "ft/ft_0DF0.h"
 #include "ft/ftafterimage.h"
 #include "ft/ftchangeparam.h"
+#include "ft/ftCo_800C7CA0.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftdata.h"
 #include "ft/ftdevice.h"
@@ -58,14 +61,15 @@
 #include "ftCommon/ftCo_ShieldBreakFly.h"
 #include "ftCommon/ftCo_SpecialS.h"
 #include "ftCrazyHand/ftCh_Init.h"
-#include "ftKirby/ftKb_Init.h"
+#include "ftCrazyHand/ftCh_Wait1_0.h"
+#include "ftKirby/ftkirby.h"
 #include "ftMasterHand/ftMh_Wait1_0.h"
 #include "ftPeach/types.h"
 #include "gm/gm_unsplit.h"
 #include "gr/stage.h"
 #include "if/ifmagnify.h"
 #include "it/it_26B1.h"
-#include "it/it_2725.h"
+#include "it/it_279C.h"
 #include "it/item.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00CE.h"
@@ -79,7 +83,7 @@
 #include "pl/player.h"
 #include "pl/plbonuslib.h"
 #include "pl/pltrick.h"
-#include "vi/vi1202.h"
+#include "sfx/crowdsfx.h"
 
 #include <common_structs.h>
 #include <dolphin/gx.h>
@@ -713,8 +717,7 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj,
     fp->x2229_b1 = Player_GetFlagsAEBit0(fp->player_id);
 
     if (fp->x61A_controller_index > 4) {
-        OSReport("fighter sub color num over!\n");
-        __assert(__FILE__, 0x33C, "0");
+        HSD_ASSERTREPORT(0x33C, 0, "fighter sub color num over!\n");
     }
 
     if (fp->x61A_controller_index != 0) {
@@ -922,15 +925,14 @@ Fighter_GObj* Fighter_Create(struct plAllocInfo* input)
     } else if (fp->kind == FTKIND_CREZYH) {
         ftCh_Init_80155FCC(gobj);
     } else if (input->has_transformation) {
-        ftMaterial_800BFD04(gobj);
+        ftCo_800BFD04(gobj);
     } else if (Player_GetFlagsBit3(fp->player_id) != 0) {
         ftCo_800C61B0(gobj);
     } else {
         if (!fp->no_normal_motion) {
             ftCommon_8007D92C(gobj);
         } else {
-            OSReport("ellegal flag fp->no_normal_motion\n");
-            __assert(__FILE__, 1065, "0");
+            HSD_ASSERTREPORT(1065, 0, "ellegal flag fp->no_normal_motion\n");
         }
     }
     ftLib_800867E8(gobj);
@@ -1276,7 +1278,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
                         ftAnim_8006EBE8(gobj, anim_start - anim_speed,
                                         anim_speed,
                                         (anim_blend == -1.0f) ? 0.0f
-                                        : (anim_blend)        ? anim_blend
+                                        : (anim_blend) ? anim_blend
                                                        : (*unk_byte_ptr)[0]);
                     }
                     ftAnim_8006E9B4(gobj);
@@ -1297,7 +1299,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
                     if (fp->x590 != 0U) {
                         ftAnim_8006EBE8(gobj, anim_start, anim_speed,
                                         (anim_blend == -1.0f) ? 0.0f
-                                        : (anim_blend)        ? anim_blend
+                                        : (anim_blend) ? anim_blend
                                                        : (*unk_byte_ptr)[0]);
                     }
                     fp->x3E4_fighterCmdScript.timer = 0.0f;
@@ -1810,7 +1812,7 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
             if (ftCo_800A2040(fp)) {
                 SET_STICKS(fp->input.lstick.x, fp->input.lstick.y,
                            ftCo_800A17E4(fp), ftCo_800A1874(fp));
-                if (g_debugLevel < 3 && !gm_8016B41C()) {
+                if (DbLevel < 3 && !gm_8016B41C()) {
                     SET_STICKS(fp->input.cstick.x, fp->input.cstick.y,
                                ftCo_800A1994(fp), ftCo_800A1A24(fp));
                 } else {
@@ -1827,7 +1829,7 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                 SET_STICKS(fp->input.lstick.x, fp->input.lstick.y,
                            HSD_PadGameStatus[fp->x618_player_id].nml_stickX,
                            HSD_PadGameStatus[fp->x618_player_id].nml_stickY);
-                if (g_debugLevel < 3 && gm_8016B41C() == 0) {
+                if (DbLevel < 3 && gm_8016B41C() == 0) {
                     SET_STICKS(
                         fp->input.cstick.x, fp->input.cstick.y,
                         HSD_PadGameStatus[fp->x618_player_id].nml_subStickX,
@@ -2408,13 +2410,13 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
 
     ftColl_8007AF28(gobj);
 
-    if (g_debugLevel >= 3 && (fpclassify(fp->cur_pos.x) == FP_NAN ||
-                              fpclassify(fp->cur_pos.y) == FP_NAN ||
-                              fpclassify(fp->cur_pos.z) == FP_NAN))
+    if (DbLevel >= 3 && (fpclassify(fp->cur_pos.x) == FP_NAN ||
+                         fpclassify(fp->cur_pos.y) == FP_NAN ||
+                         fpclassify(fp->cur_pos.z) == FP_NAN))
     {
-        OSReport("fighter procUpdate pos error.\tpos.x=%f\tpos.y=%f\n",
-                 fp->cur_pos.x, fp->cur_pos.y);
-        __assert(__FILE__, /*line*/ 2517, "0");
+        HSD_ASSERTREPORT(/*line*/ 2517, 0,
+                         "fighter procUpdate pos error.\tpos.x=%f\tpos.y=%f\n",
+                         fp->cur_pos.x, fp->cur_pos.y);
     }
 }
 
@@ -2479,16 +2481,16 @@ void Fighter_procMap(Fighter_GObj* gobj)
             pl_80041280(fp->player_id, fp->x221F_b4);
         }
 
-        if (g_debugLevel >= 3) {
+        if (DbLevel >= 3) {
             if (fpclassify(fp->cur_pos.x) == FP_NAN ||
                 fpclassify(fp->cur_pos.y) == FP_NAN ||
                 fpclassify(fp->cur_pos.z) == FP_NAN)
             {
                 float x = Fighter_GetPosX(fp);
                 float y = Fighter_GetPosY(fp);
-                OSReport("fighter procMap pos error.\tpos.x=%f\tpos.y=%f\n", x,
-                         y);
-                __assert("fighter.c", 2590, "0");
+                HSD_ASSERTREPORT(
+                    2590, 0,
+                    "fighter procMap pos error.\tpos.x=%f\tpos.y=%f\n", x, y);
             }
         }
 
@@ -2649,16 +2651,15 @@ void Fighter_TakeDamage_8006CC7C(Fighter* fp, float damage_amount)
     }
 }
 
-/// https://decomp.me/scratch/9QvFG
-void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2)
+void Fighter_8006CDA4(Fighter* fp, s32 arg1)
 {
-    u8 _[4] = { 0 };
     bool temp_bool;
-    bool hold_item_bool = 0;
+    bool hold_item_bool = false;
     Vec3 vec;
+    PAD_STACK(8);
 
     if (fp->item_gobj && !it_8026B2B4(fp->item_gobj)) {
-        hold_item_bool = 1;
+        hold_item_bool = true;
     }
 
     temp_bool = !((fp->x2220_b3 || fp->x2220_b4 || ftCo_8008E984(fp)));
@@ -2667,7 +2668,6 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2)
     if (fp->motion_id != 0x145 && (unsigned) fp->motion_id - 0x122 > 1 &&
         fp->dmg.x1860_element != 0xAU && !fp->x2226_b2)
     {
-        u8 _[4] = { 0 };
         if ( ///// giant if condition
             hold_item_bool && temp_bool &&
             ((HSD_Randi(p_ftCommonData->x418) < arg1) ||
@@ -2882,8 +2882,8 @@ void Fighter_ProcessHit_8006D1EC(Fighter_GObj* gobj)
                     ftCh_Init_80156014(gobj);
                     break;
                 default:
-                    OSReport("ellegal flag fp->no_reaction_always\n");
-                    __assert(__FILE__, 3085, "0");
+                    HSD_ASSERTREPORT(3085, 0,
+                                     "ellegal flag fp->no_reaction_always\n");
                 }
                 ftCo_8008E9D0(gobj);
             }

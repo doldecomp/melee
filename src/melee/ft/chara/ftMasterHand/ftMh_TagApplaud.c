@@ -12,6 +12,7 @@
 #include "ft/ftanim.h"
 #include "ft/ftbosslib.h"
 #include "ftCrazyHand/ftCh_Init.h"
+#include "ftCrazyHand/ftCh_Throw.h"
 
 #include "ftMasterHand/forward.h"
 

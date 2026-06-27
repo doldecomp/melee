@@ -85,7 +85,7 @@ void grTlink_UnkStage0_OnLoad(void) {}
 
 void grTlink_UnkStage0_OnStart(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grTLink_802219C8(void)

@@ -3,6 +3,7 @@
 #include "gm_unsplit.h"
 #include "gmtitle.h"
 
+#include <stdio.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjplink.h>
@@ -12,31 +13,124 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbmthp.h>
+#include <melee/mn/types.h>
 
-/// #gm_801A9DD0
+/* 3B7D68 */ static const Vec3 gm_803B7D68 = { 0.0f, 0.0f, 1.0f };
+/* 3B7D74 */ static const Vec3 gm_803B7D74 = { 0.0f, 0.0f, 0.0f };
+/* 480B38 */ static PerfLabelLine gm_80480B38[4];
+/* 4D67D0 */ static bool gm_804D67D0;
+/* 4D67D4 */ static HSD_GObj* gm_804D67D4;
+/* 4D67D8 */ static HSD_GObj* gm_804D67D8;
+/* 4D67DC */ static bool gm_804D67DC;
+/* 4D67E0 */ static u8 gm_804D67E0;
+/* 4D67E1 */ static u8 gm_804D67E1;
+/* 4D67E2 */ static u8 gm_804D67E2;
+/* 4D67E4 */ static u32 gm_804D67E4;
+/* 4D67E8 */ static HSD_GObj* gm_804D67E8;
+/* 4D67F4 */ HSD_GObj* gm_804D67F4;
+/* 4D67F0 */ HSD_SObjDesc* gm_804D67F0;
+/* 4D67EC */ u32 gm_804D67EC;
 
-/// #fn_801A9FCC
+static void sdata2_order(void)
+{
+    (void) 82.0f;
+    (void) 290.0f;
+}
+
+void gm_801A9DD0(HSD_GObj* arg0, u16 arg1, u16 arg2, int arg3, int arg4)
+{
+    HSD_CObj* cobj;
+    f32 roll = 0.0f;
+    f32 far_val;
+    f32 near_val = 0.0f;
+    f32 top;
+    f32 bottom;
+    f32 left;
+    f32 right;
+    Scissor viewport;
+    Scissor scissor;
+    Vec3 eye = gm_803B7D68;
+    Vec3 interest = gm_803B7D74;
+
+    far_val = 2.0f;
+    bottom = (f32) (-(s32) (u16) arg2);
+    right = (f32) arg1;
+    top = 0.0f;
+    left = 0.0f;
+
+    if (arg4 != 0) {
+        s32 temp = (s32) (arg1 - 0x248) / 2;
+        left = (f32) temp;
+        right = (f32) (temp + 0x248);
+    }
+    viewport.left = 0;
+    scissor.left = 0;
+    viewport.right = arg1;
+    scissor.right = arg1;
+    viewport.top = 0;
+    scissor.top = 0;
+    viewport.bottom = arg2;
+    scissor.bottom = arg2;
+    cobj = HSD_CObjAlloc();
+    HSD_CObjSetProjectionType(cobj, PROJ_ORTHO);
+    HSD_CObjSetViewport(cobj, (HSD_RectS16*) &viewport);
+    HSD_CObjSetScissor(cobj, &scissor);
+    HSD_CObjSetEyePosition(cobj, &eye);
+    HSD_CObjSetInterest(cobj, &interest);
+    HSD_CObjSetRoll(cobj, roll);
+    HSD_CObjSetNear(cobj, near_val);
+    HSD_CObjSetFar(cobj, far_val);
+    HSD_CObjSetOrtho(cobj, top, bottom, left, right);
+    HSD_GObjObject_80390A70(arg0, HSD_GObj_804D784B, cobj);
+    GObj_SetupGXLinkMax(arg0, HSD_SObjLib_803A54EC, (u32) arg3);
+}
+
+#pragma push
+#pragma force_active on
+static float unused_floats[] = {
+    0.0f, 1600.0, 400.0f, 0.0f, 1330.0f, 130.0f, 0.0f, -3.0f, 0.0f,
+};
+#pragma pop
+
+void* fn_801A9FCC(void)
+{
+    u32 ms;
+    s32 idx;
+    PerfLabelLine* lines = gm_80480B38;
+
+    lines[0].unk_04 = 0;
+
+    idx = 0;
+    sprintf(lines[idx].text, "\\cffff00%2d", lbMthp_8001F5F4());
+
+    lines[0].next = &lines[1];
+    lines[1].unk_04 = 0;
+
+    ms = lbMthp_8001F5E4();
+    idx = 1;
+    sprintf(lines[idx].text, "\\cffff00%2d", ms);
+
+    lines[1].next = &lines[2];
+    lines[2].unk_04 = 0;
+
+    ms = (u32) ((f32) (u32) lbMthp_8001F5D4() /
+                (f32) (*(u32*) 0x800000F8 / 4 / 1000));
+    idx = 2;
+    sprintf(lines[idx].text, "\\cffff00%3d", ms);
+
+    lines[2].next = &lines[3];
+    lines[2].next = NULL;
+
+    return lines;
+}
 
 void fn_801AA0E8(void)
 {
-    hsd_80392528(fn_801A9FCC);
+    hsd_80392528((Event) fn_801A9FCC);
 }
 
-static bool gm_804D67D0;
-static HSD_GObj* gm_804D67D4;
-static HSD_GObj* gm_804D67D8;
-static bool gm_804D67DC;
-static u8 gm_804D67E0;
-static u8 gm_804D67E1;
-static u8 gm_804D67E2;
-static u32 gm_804D67E4;
-static HSD_GObj* gm_804D67E8;
-u32 gm_804D67EC;
-int gm_804D67F0;
-static HSD_GObj* gm_804D67F4;
-
-static int gm_803DBFB4[] = {
-    0x000004E2, 0x00000002, 0x0000018A, 0x00000001, 0x00010000, 0x00000002,
+/* 3DBFB4 */ static u32 gm_803DBFB4[] = {
+    1250, 2, 394, 1, 65536, 2,
 };
 
 void gm_801AA110_OnEnter(UNK_T arg0)
@@ -159,7 +253,7 @@ void gm_801AA28C_OnFrame(void)
         lbAudioAx_800236DC();
         lbAudioAx_80023694();
         gm_801A4B74();
-        gm_801A42E8(MJ_TITLE);
+        gm_801A42E8(GM_TITLE);
         gm_801A42D4();
     } else if (gm_804D67EC > 0x157C) {
         if (gm_801A36A0(4) & 0x1000) {
@@ -170,7 +264,7 @@ void gm_801AA28C_OnFrame(void)
             gm_80173EEC();
             gm_80172898(0x100);
             if (!gm_80173754(1, 0)) {
-                gm_801A42E8(MJ_MENU);
+                gm_801A42E8(GM_MENU);
             }
             gm_801A42D4();
         }
@@ -181,7 +275,7 @@ void gm_801AA28C_OnFrame(void)
             lbAudioAx_80023694();
             lbAudioAx_80024030(1);
             gm_801A4B60();
-            gm_801A42E8(MJ_TITLE);
+            gm_801A42E8(GM_TITLE);
             gm_801A42D4();
         }
     }

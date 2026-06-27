@@ -37,15 +37,23 @@
 /* 21231C */ void grPura_8021231C(Ground_GObj*);
 /* 2125EC */ void grPura_802125EC(Ground_GObj*);
 /* 2125F0 */ UNK_RET grPura_802125F0(HSD_GObj*);
-/* 212CD4 */ UNK_RET grPura_80212CD4(HSD_GObj*);
-/* 212EF4 */ UNK_RET grPura_80212EF4(HSD_GObj*);
-/* 212FC0 */ UNK_RET grPura_80212FC0(HSD_GObj*);
+/* 212CD4 */ void grPura_80212CD4(HSD_GObj*);
+/* 212EF4 */ void grPura_80212EF4(HSD_GObj*);
+/* 212FC0 */ void grPura_80212FC0(HSD_GObj*);
 /* 2130C0 */ DynamicsDesc* grPura_802130C0(enum_t);
 /* 2130C8 */ bool grPura_802130C8(Vec3* a, int, HSD_JObj*);
 /* 2130D0 */ UNK_RET fn_802130D0(HSD_GObj*, int);
 /* 213128 */ void grPura_80213128(HSD_DObj*);
 /* 213224 */ UNK_RET grPura_80213224(HSD_DObj*);
-/* 213250 */ UNK_RET grPura_80213250(HSD_JObj*);
-/* 3E6C0C */ extern u16 grPu_803E6C0C[266];
+/* 213250 */ void grPura_80213250(HSD_JObj*);
+typedef struct {
+    /* 0x00 */ s16 x00;
+    /* 0x02 */ s16 x02;
+    /* 0x04 */ s16 x04;
+    /* 0x06 */ s16 x06;
+    /* 0x08 */ HSD_JObj* x08;
+} GrPuVtxMapEntry; // size = 0x0C
+
+/* 3E6C0C */ extern GrPuVtxMapEntry grPu_803E6C0C[42];
 
 #endif

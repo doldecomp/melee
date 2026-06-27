@@ -151,9 +151,9 @@ bool itNessbat_UnkMotion0_Anim(Item_GObj* gobj)
     PAD_STACK(24);
 
     if (ip->xDAC_itcmd_var0 == 0) {
-        HSD_JObjClearFlagsAll(child, 0x10);
+        HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
     } else {
-        HSD_JObjSetFlagsAll(child, 0x10);
+        HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
     }
 
     if (ip->xDD4_itemVar.nessbat.x0 != NULL) {

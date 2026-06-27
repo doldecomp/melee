@@ -1,12 +1,13 @@
 #include "ftcolanim.h"
 
+#include "ft/chara/ftCommon/ftCo_HammerWait.h"
 #include "ft/fighter.h"
+#include "ft/ft_0D4D.h"
 #include "ft/ftaction.h"
 #include "ft/ftdata.h"
-#include "ft/types.h"
+#include "gm/gm_1601.h"
 #include "lb/lb_00F9.h"
-
-#include <melee/ft/chara/ftCommon/ftCo_HammerWait.h>
+#include "pl/player.h"
 
 #pragma force_active on
 
@@ -28,6 +29,33 @@ FtCmd ftCo_803C6ADC[3] = {
     ftCo_800BFED4,
     ftCo_800BFF14,
 };
+
+void ftCo_800BFD04(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_Sleep, Ft_MF_None, 0.0f, 1.0f,
+                              0.0f, NULL);
+    fp->invisible = true;
+    fp->x221E_b1 = true;
+    fp->x221E_b2 = true;
+    fp->x2219_b1 = true;
+    fp->x890_cameraBox->x8 = true;
+    fp->x221F_b3 = true;
+    fp->x221F_b1 = true;
+}
+
+void ftCo_800BFD9C(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCo_800BFD04(gobj);
+    if (fp->x2222_b5) {
+        HSD_GObj* pl_gobj = Player_GetEntityAtIndex(fp->player_id, 1);
+        if (pl_gobj != NULL) {
+            ftCo_800D4F24(pl_gobj, 1);
+        }
+    }
+    gm_80167320(fp->player_id, fp->x221F_b4);
+}
 
 void ftCo_Sleep_Anim(Fighter_GObj* gobj) {}
 
@@ -82,9 +110,10 @@ void ftCo_800BFFAC(Fighter* fp)
 
 bool ftCo_800BFFD0(Fighter* fp, int arg1, int arg2)
 {
+    long tmp;
     if (arg1 >= 0x7B) {
-        s32 temp_r7 = arg1 - 0x7B;
-        if (lb_800144C8(&fp->x508, Fighter_804D6538, temp_r7, arg2)) {
+        arg1 -= (tmp = 0x7B);
+        if (lb_800144C8(&fp->x508, Fighter_804D6538, arg1, arg2)) {
             return true;
         }
     } else if (Fighter_804D653C[arg1].unk5 != 0) {

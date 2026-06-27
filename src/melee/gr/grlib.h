@@ -13,7 +13,7 @@
 /* 1C96E8 */ bool grLib_801C96E8(HSD_GObj*);
 /* 1C96F8 */ HSD_Generator* grLib_801C96F8(s32, s32, Vec3*);
 /* 1C97DC */ void grLib_801C97DC(s32, s32, HSD_JObj*);
-/* 1C9808 */ void grLib_801C9808(s32, s32, HSD_JObj*);
+/* 1C9808 */ HSD_Generator* grLib_801C9808(s32, s32, HSD_JObj*);
 /* 1C9834 */ void grLib_801C9834(HSD_Generator*);
 /* 1C9854 */ void grLib_801C9854(HSD_JObj*);
 /* 1C9874 */ void grLib_801C9874(HSD_Generator*);

@@ -10,7 +10,7 @@
 #include "gm/gmscdata.h"
 #include "if/ifcoget.h"
 #include "lb/lb_00F9.h"
-#include "lb/lb_0192.h"
+#include "lb/lb_0195.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbcardgame.h"
 #include "lb/lbheap.h"
@@ -174,7 +174,7 @@ void gm_801A4B74(void)
     gm_80479D58.unk_C = 2;
 }
 
-void gm_801A4B88(struct MinorSceneInfo* info)
+void gm_801A4B88(struct GameSceneInfo* info)
 {
     gm_804D6720 = info;
 }
@@ -237,9 +237,9 @@ void gm_801A4BD4(void)
     lb_80014534();
 }
 
-MinorSceneHandler* gm_801A4CE0(u8 id)
+GameSceneHandler* gm_801A4CE0(u8 id)
 {
-    MinorSceneHandler* cur;
+    GameSceneHandler* cur;
     for (cur = gm_801A50A0(); cur->class_id != 0x2D; cur++) {
         if (cur->class_id == id) {
             return cur;
@@ -258,7 +258,7 @@ inline u64 maybe_gm_801A48A4(u8 i)
     }
 }
 
-void gm_801A4D34(void (*arg0)(void), MinorSceneInfo* arg1)
+void gm_801A4D34(void (*arg0)(void), GameSceneInfo* arg1)
 {
     int pad_queue_count;
     int i;
@@ -292,7 +292,7 @@ void gm_801A4D34(void (*arg0)(void), MinorSceneInfo* arg1)
         for (i = 0; i < pad_queue_count; i++) {
             HSD_PerfSetStartTime();
             lb_800198E0();
-            if (g_debugLevel >= 3) {
+            if (DbLevel >= 3) {
                 gm_801A4970(temp_r25->unk_10.x4);
             }
             if (gm_801A46B8(0) || !gm_801A45E8(0)) {
@@ -327,7 +327,7 @@ void gm_801A4D34(void (*arg0)(void), MinorSceneInfo* arg1)
                 temp_r25->unk_10.unk_28 |=
                     ~gm_803DA8C8[temp_r25->unk_10.unk_34];
             }
-            if (g_debugLevel >= 3) {
+            if (DbLevel >= 3) {
                 db_CheckScreenshot();
             }
             lbAudioAx_80027DF8();
@@ -344,7 +344,7 @@ void gm_801A4D34(void (*arg0)(void), MinorSceneInfo* arg1)
                 }
             }
             HSD_PerfSetCPUTime();
-            if (g_debugLevel >= 3) {
+            if (DbLevel >= 3) {
                 OSCheckActiveThreads();
             }
             gmMainLib_8046B0F0.xC = false;

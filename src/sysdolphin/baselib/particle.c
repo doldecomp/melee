@@ -1,5 +1,13 @@
 #include "particle.h"
 
+typedef struct {
+    /* 0x00 */ void* next;
+    /* 0x04 */ s32 type;
+    /* 0x08 */ u8 content[0x80];
+} PerfDispItem;
+
+static PerfDispItem hsd_804CE3F8[6];
+
 #include "particle.static.h"
 
 #include <math.h>
@@ -23,6 +31,7 @@
 #include <baselib/state.h>
 #include <baselib/video.h>
 #include <MetroTRK/ppc_reg.h>
+#include <MSL/math_ppc.h>
 #include <MSL/trigf.h>
 
 typedef struct {
@@ -41,6 +50,13 @@ typedef struct _EventData {
     /* 0x10 */ u32* entries;
     /* 0x14 */ s32 index;
 } EventData;
+
+typedef struct _MCCPacket {
+    /* 0x0 */ s32 x0;
+    /* 0x4 */ u8 x4_b7 : 1;
+    /* 0x4 */ u8 _x4_pad : 7;
+    /* 0x5 */ u8 x5;
+} MCCPacket;
 
 typedef struct _DispData {
     /* 0x00 */ u8 _pad[0x10];
@@ -74,11 +90,10 @@ typedef struct _DispItem {
 
 typedef DispItem* (*DispCallback)(void*);
 
-typedef struct {
-    /* 0x00 */ void* next;
-    /* 0x04 */ s32 type;
-    /* 0x08 */ u8 content[0x80];
-} PerfDispItem;
+typedef union {
+    f32 f;
+    u8 bytes[4];
+} ParticleFloatBytes;
 
 struct EventPriority {
     Event event;
@@ -134,7 +149,60 @@ void DrawRectangle(f32 x_min, f32 y_min, f32 w, f32 h, GXColor* color)
     GXEnd();
 }
 
-static u8 lbl_80408630[1];
+static u8 lbl_80408630[0x268] = {
+    0x00, 0x60, 0x60, 0x66, 0x66, 0x06, 0x06, 0x00, 0xFF, 0x00, 0x00, 0x00,
+    0x00, 0x30, 0x36, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x60, 0x60, 0x63, 0x63, 0x03, 0x03, 0x06, 0x06, 0x66,
+    0xFF, 0x00, 0x00, 0x00, 0x60, 0x60, 0x66, 0x66, 0x06, 0x13, 0x63, 0xFF,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0x03, 0x63, 0x40, 0x46, 0xFF, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x60, 0x00, 0x00, 0x03, 0x03, 0x63, 0x63,
+    0x66, 0x66, 0x06, 0xFF, 0x00, 0x00, 0x00, 0x06, 0x06, 0x66, 0x66, 0x63,
+    0x63, 0x03, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x60, 0x60, 0x62, 0x62,
+    0x43, 0x43, 0x46, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x60, 0x60, 0x66,
+    0x66, 0x06, 0x06, 0x00, 0x03, 0x63, 0xFF, 0x00, 0x00, 0x63, 0x03, 0x03,
+    0x00, 0x00, 0x60, 0x60, 0x66, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x06, 0x30,
+    0x30, 0x66, 0x14, 0x54, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x40, 0x40, 0x61, 0x61, 0x66, 0x66, 0x06, 0x06, 0x00, 0x03, 0x63, 0xFF,
+    0x60, 0x20, 0x20, 0x03, 0x03, 0x26, 0x26, 0x66, 0xFF, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x30, 0x30, 0x63, 0x63, 0x36, 0x36, 0x06, 0x10, 0x16, 0xFF,
+    0x00, 0x00, 0x60, 0x00, 0x00, 0x06, 0x06, 0x66, 0x03, 0x53, 0xFF, 0x00,
+    0x00, 0x00, 0x00, 0x60, 0x00, 0x00, 0x06, 0x02, 0x42, 0xFF, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x60, 0x30, 0x30, 0x02, 0x02, 0x06, 0x06, 0x66,
+    0x66, 0x63, 0x63, 0x33, 0xFF, 0x00, 0x06, 0x60, 0x66, 0x03, 0x63, 0xFF,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10, 0x50, 0x16, 0x56, 0x30, 0x36,
+    0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x50, 0x56, 0x56, 0x16, 0x16,
+    0x14, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x06, 0x60, 0x03,
+    0x03, 0x66, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x06, 0x06,
+    0x66, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x06, 0x00,
+    0x00, 0x33, 0x33, 0x60, 0x60, 0x66, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x06,
+    0x00, 0x00, 0x66, 0x66, 0x60, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x30, 0x63, 0x63, 0x36, 0x36, 0x03, 0x03, 0x30, 0xFF, 0x00, 0x00, 0x00,
+    0x00, 0x06, 0x00, 0x00, 0x50, 0x50, 0x61, 0x61, 0x62, 0x62, 0x53, 0x53,
+    0x03, 0xFF, 0x06, 0x02, 0x02, 0x60, 0x60, 0x64, 0x64, 0x06, 0x24, 0x46,
+    0x46, 0x66, 0xFF, 0x06, 0x00, 0x00, 0x60, 0x60, 0x62, 0x62, 0x02, 0x32,
+    0x66, 0xFF, 0x00, 0x00, 0x60, 0x00, 0x00, 0x66, 0x66, 0x06, 0xFF, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x60, 0x30, 0x36, 0xFF, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x06, 0x06, 0x66, 0x66, 0x60,
+    0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x02, 0x36, 0x36,
+    0x62, 0x62, 0x60, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x16, 0x16, 0x56,
+    0x56, 0x60, 0x32, 0x36, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x66, 0x60,
+    0x06, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x32,
+    0x32, 0x60, 0x32, 0x36, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x60, 0x60, 0x06, 0x06, 0x66, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x03, 0x63, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x06, 0x66, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x03, 0x22, 0x22, 0x44, 0x44, 0x63, 0xFF, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x63, 0x63, 0x06, 0xFF, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x50, 0x16, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x40, 0x22, 0x22, 0x24, 0x24, 0x46, 0xFF,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x42, 0x42, 0x44, 0x44, 0x26,
+    0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x44, 0x26, 0xFF, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x60, 0x03, 0x03, 0x66,
+    0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x30, 0x36, 0x03,
+    0x63, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x61, 0x01,
+    0x01, 0x65, 0x65, 0x05, 0x30, 0x36, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+};
 static float lbl_804D6070 = 12.0F;
 static float lbl_804D6074 = 12.0F;
 
@@ -147,6 +215,7 @@ f32 DrawASCII(int chr, float x, float y, GXColor* color)
     s32 i;
     u8 p0, p1;
     u8 r, g, b, a;
+    PAD_STACK(48);
 
     if (chr >= '0' && chr <= '9') {
         index = chr - '0';
@@ -162,10 +231,14 @@ f32 DrawASCII(int chr, float x, float y, GXColor* color)
     }
 
     switch (chr) {
-    case '.':
+    case '.': {
+        f32 px;
+        f32 py;
         GXBegin(0xB8, 0, 1);
-        GXWGFifo.f32 = (f32) ((f64) lbl_804D6070 * 0.3 + (f64) x);
-        GXWGFifo.f32 = (f32) ((f64) lbl_804D6074 * 0.9 + (f64) y);
+        px = (f32) ((f64) lbl_804D6070 * 0.3 + (f64) x);
+        py = (f32) ((f64) lbl_804D6074 * 0.9 + (f64) y);
+        GXWGFifo.f32 = px;
+        GXWGFifo.f32 = py;
         a = color->a;
         b = color->b;
         g = color->g;
@@ -175,16 +248,17 @@ f32 DrawASCII(int chr, float x, float y, GXColor* color)
         GXWGFifo.u8 = b;
         GXWGFifo.u8 = a;
         return lbl_804D6070;
+    }
     case ':': {
         f32 cx;
         GXBegin(0xB8, 0, 2);
         cx = (f32) ((f64) lbl_804D6070 * 0.3 + (f64) x);
         GXWGFifo.f32 = cx;
         GXWGFifo.f32 = (f32) ((f64) lbl_804D6074 * 0.3 + (f64) y);
-        a = color->a;
-        b = color->b;
-        g = color->g;
         r = color->r;
+        g = color->g;
+        b = color->b;
+        a = color->a;
         GXWGFifo.u8 = r;
         GXWGFifo.u8 = g;
         GXWGFifo.u8 = b;
@@ -239,15 +313,16 @@ draw_glyph:
     ptr = glyph;
     i = 0;
     while (i < 0x29 && (u8) ptr[0] != 0xFF) {
-        p0 = glyph[i];
-        i++;
-        p1 = glyph[i];
-        i++;
+        p0 = glyph[i++];
+        p1 = glyph[i++];
         ptr += 2;
         GXBegin(0xA8, 0, 2);
         GXWGFifo.f32 = lbl_804D6070 * (0.11F * (s32) (p0 >> 4)) + x;
         GXWGFifo.f32 = lbl_804D6074 * (0.11F * (p0 & 0xF)) + y;
-        a = color->a;
+        {
+            u8 alpha = color->a;
+            a = alpha;
+        }
         b = color->b;
         g = color->g;
         r = color->r;
@@ -292,21 +367,21 @@ static inline int hexval(int ch)
 {
     if (ch < 0x47) {
         if (ch < 0x0A) {
-            if (ch < 0) {
-                goto ret_zero;
+            if (ch >= 0) {
+                goto sub_30;
             }
-            goto sub_30;
-        }
-        if (ch < 0x41) {
             goto ret_zero;
         }
-        goto sub_37;
+        if (ch >= 0x41) {
+            goto sub_37;
+        }
+        goto ret_zero;
     }
     if (ch < 0x67) {
-        if (ch < 0x61) {
-            goto ret_zero;
+        if (ch >= 0x61) {
+            goto sub_57;
         }
-        goto sub_57;
+        goto ret_zero;
     }
     goto ret_zero;
 sub_30:
@@ -409,6 +484,29 @@ void hsd_80391E18(u8* list, f32 x1, f32 y1, f32 x2, f32 y2)
 }
 
 // @TODO: Currently 88.12% match - register allocation differences remain
+static inline void hsd_80391F28_calc_perp_and_begin(f32 dy, f32 dx,
+                                                    f32* perp_x, f32* perp_y)
+{
+    f32 len;
+
+    len = (dx * dx) + (dy * dy);
+    if (len > 0.0F) {
+        f64 e = __frsqrte(len);
+        e = 0.5 * e * -(len * (e * e) - 3.0);
+        e = 0.5 * e * -(len * (e * e) - 3.0);
+        e = 0.5 * e * -(len * (e * e) - 3.0);
+        e = len * e;
+        {
+            volatile f32 temp = (f32) e;
+            len = temp;
+        }
+    }
+    *perp_x = -dy / len;
+    *perp_y = -dx / len;
+
+    GXBegin(0xA8, 0, 2);
+}
+
 void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
 {
     f32 tick6_x;
@@ -425,26 +523,9 @@ void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
     s32 i;
     u8 r, g, b, a;
 
-    PAD_STACK(8);
-
     dy = y2 - y1;
     dx = x2 - x1;
-    len = (dx * dx) + (dy * dy);
-    if (len > 0.0F) {
-        f64 e = __frsqrte(len);
-        e = 0.5 * e * -(len * (e * e) - 3.0);
-        e = 0.5 * e * -(len * (e * e) - 3.0);
-        e = 0.5 * e * -(len * (e * e) - 3.0);
-        e = len * e;
-        {
-            volatile f32 temp = (f32) e;
-            len = temp;
-        }
-    }
-    perp_x = -dy / len;
-    perp_y = -dx / len;
-
-    GXBegin(0xA8, 0, 2);
+    hsd_80391F28_calc_perp_and_begin(dy, dx, &perp_x, &perp_y);
 
     step_y = dy / count;
     step_x = dx / count;
@@ -459,7 +540,10 @@ void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
     r = color->r;
 
     tick6_y = 6.0F * perp_y;
-    tick6_x = 6.0F * perp_x;
+    {
+        f32 tmp_tick6_x = 6.0F * perp_x;
+        tick6_x = tmp_tick6_x;
+    }
     tick4_x = 4.0F * perp_x;
     tick4_y = 4.0F * perp_y;
 
@@ -526,25 +610,28 @@ extern GlyphEntry lbl_80408898[4];
 void hsd_803921B8(void* bitmap, s32 x, s32 y, s32 dst, s32 w, s32 h,
                   s32 stride, void* tbl)
 {
-    s32 row;
-    s32 col;
-    s32 bit_off;
+    volatile s32 v_stride;
     s32 bit_x;
+    s32 cur_dst;
+    u32 max_x;
     s32 off_x;
     s32 off_y;
-    u32 max_x;
+    GlyphEntry* table;
+    s32 bit_off;
+    s32 col;
+    s32 x2;
     s32 data_off;
     u32 word;
-    s32 cur_dst;
     s32 shift;
     s32 val;
-    GlyphEntry* table;
+    u8* bmp;
     GlyphEntry* entry;
 
-    table = tbl;
+    v_stride = stride;
+    bmp = bitmap;
     off_y = 0;
     off_x = 0;
-    if (table == NULL) {
+    if ((table = tbl) == NULL) {
         table = lbl_80408898;
     }
     if (y < 0) {
@@ -559,14 +646,15 @@ void hsd_803921B8(void* bitmap, s32 x, s32 y, s32 dst, s32 w, s32 h,
         off_x = -x;
         x = 0;
     }
+    x2 = x * 2;
     data_off = off_y * 4;
     while (off_y < 14 && (u32) y < h) {
         col = x;
         bit_x = off_x;
-        cur_dst = dst + (y * stride) + (x * 2);
+        cur_dst = dst + (y * v_stride) + x2;
         while ((u32) col < max_x) {
-            word = *(u32*) ((u8*) bitmap + data_off +
-                            (((u32) bit_x >> 2) & 0x3FFFFFFC));
+            word =
+                *(u32*) (bmp + data_off + (((u32) bit_x >> 2) & 0x3FFFFFFC));
             shift = cur_dst;
             bit_off = bit_x & 0xF;
             while (bit_off < 16 && (u32) col < max_x) {
@@ -596,7 +684,7 @@ void hsd_803922FC(void* bitmap, s32 x, s32 y, s32 parity, s32 dst, s32 w,
     s32 bit_off;
     s32 bit_x;
     s32 off_x;
-    s32 off_y;
+    GlyphEntry* table;
     u32 max_x;
     s32 x2;
     s32 data_off;
@@ -606,7 +694,7 @@ void hsd_803922FC(void* bitmap, s32 x, s32 y, s32 parity, s32 dst, s32 w,
     s32 shift;
     s32 val;
     u8* bmp;
-    GlyphEntry* table;
+    s32 off_y;
     GlyphEntry* entry;
 
     v_h = h;
@@ -716,6 +804,7 @@ static const u32 lbl_804DE8E0 = 0xFFFFFFFF;
 // @TODO: Currently 89.78% match - needs minor control flow and register fixes
 void hsd_8039254C(void)
 {
+    GXColor default_col;
     GXColor bar_col;
     GXColor bg_col3;
     GXColor bg_col2;
@@ -724,31 +813,31 @@ void hsd_8039254C(void)
     GXColor bg_col0;
     GXColor* p_bar_col = &bar_col;
     GXColor* p_bg_col3 = &bg_col3;
-    GXColor* p_bg_col2 = &bg_col2;
+    GXColor* p_bg_col0 = &bg_col0;
     GXColor* p_bg_col1 = &bg_col1;
     GXColor* p_txt_col = &txt_col;
-    GXColor* p_bg_col0 = &bg_col0;
+    GXColor* p_bg_col2 = &bg_col2;
     s32 col_pos;
     s32 first;
     f32 line;
     HSD_SList* event_node;
-    DispItem* item;
     s32 type;
     s32 char_count;
-    s32 j;
     s32 total_ticks;
     DispItem* bar_ptr;
     f32 bar_y;
     f32 bar_x;
     f32 t2;
+    PAD_STACK(8);
 
     col_pos = 60;
     first = 1;
     line = 1.0F;
     event_node = (HSD_SList*) hsd_804D7850;
-    txt_col = *(GXColor*) &lbl_804DE8E0;
+    default_col = *(GXColor*) &lbl_804DE8E0;
 
     while (event_node != NULL) {
+        DispItem* item;
         DispCallback cb;
         cb = (DispCallback) ((void**) event_node->data)[0];
         item = cb(event_node->data);
@@ -756,7 +845,7 @@ void hsd_8039254C(void)
         while (item != NULL) {
             if (first != 0) {
                 if (lbl_804D6080.a != 0) {
-                    hsd_80391A04(6, 10.0F, 10.0F);
+                    hsd_80391A04(10.0F, 10.0F, 6);
                     bg_col0 = lbl_804D6080;
                     DrawRectangle(-10.0F, 5.0F, 620.0F, 10.0F, p_bg_col0);
                 }
@@ -769,18 +858,19 @@ void hsd_8039254C(void)
                     char_count = 0;
                 } else {
                     char_count = 0;
-                    j = 0;
                     {
                         s32 len = strlen(item->content.text);
+                        s32 j = 0;
                         while (j < len) {
                             if ((s8) item->content.text[j] != '\\') {
                                 char_count++;
                             } else {
                                 j++;
-                                if ((s8) item->content.text[j] == 'c' ||
-                                    (s8) item->content.text[j] == 'C')
-                                {
+                                switch ((s8) item->content.text[j]) {
+                                case 'c':
+                                case 'C':
                                     j += 6;
+                                    break;
                                 }
                             }
                             j++;
@@ -796,11 +886,11 @@ void hsd_8039254C(void)
                                       10.0F, p_bg_col1);
                     }
                 }
-                hsd_80391A04(6, 10.0F, 10.0F);
-                txt_col = *(GXColor*) &lbl_804DE8E0;
+                hsd_80391A04(10.0F, 10.0F, 6);
+                txt_col = default_col;
                 hsd_80391AC8(item->content.text, p_txt_col,
                              (f32) (col_pos * 10), 10.0F * line);
-                col_pos = char_count + col_pos + 2;
+                col_pos = 2 + char_count + col_pos;
                 break;
             case 2:
                 if (col_pos != 0) {
@@ -811,7 +901,7 @@ void hsd_8039254C(void)
                                       5.0F, p_bg_col2);
                     }
                 }
-                hsd_80391A04(24, 10.0F, 10.0F);
+                hsd_80391A04(10.0F, 10.0F, 24);
                 t2 = (10.0F * line) + 2.0F;
                 hsd_80391E18(item->content.gradient, 0.0F, t2, 600.0F, t2);
                 col_pos = 60;
@@ -819,9 +909,12 @@ void hsd_8039254C(void)
             case 1:
                 bar_ptr = item;
                 total_ticks = 0;
-                while (bar_ptr->content.bars[0].count > 0) {
-                    total_ticks += bar_ptr->content.bars[0].count;
-                    bar_ptr = (DispItem*) ((u8*) bar_ptr + 8);
+                {
+                    s32 count;
+                    while ((count = bar_ptr->content.bars[0].count) > 0) {
+                        total_ticks += count;
+                        bar_ptr = (DispItem*) ((u8*) bar_ptr + 8);
+                    }
                 }
                 if (total_ticks > 0) {
                     if (col_pos != 0) {
@@ -832,19 +925,24 @@ void hsd_8039254C(void)
                                           620.0F, 5.0F, p_bg_col3);
                         }
                     }
-                    hsd_80391A04(12, 10.0F, 10.0F);
+                    hsd_80391A04(10.0F, 10.0F, 12);
                     bar_y = (10.0F * line) + 2.0F;
                     bar_x = 0.0F;
                     bar_ptr = item;
-                    while (bar_ptr->content.bars[0].count > 0) {
-                        f32 prev_x;
-                        prev_x = bar_x;
-                        bar_col = *(GXColor*) &bar_ptr->content.bars[0].color;
-                        bar_x += (600.0F / (f32) total_ticks) *
-                                 (f32) bar_ptr->content.bars[0].count;
-                        hsd_80391F28(p_bar_col, prev_x, bar_y, bar_x, bar_y,
-                                     (f32) bar_ptr->content.bars[0].count);
-                        bar_ptr = (DispItem*) ((u8*) bar_ptr + 8);
+                    {
+                        s32 count;
+                        while ((count = bar_ptr->content.bars[0].count) > 0) {
+                            f32 prev_x;
+                            prev_x = bar_x;
+                            bar_col =
+                                *(GXColor*) &bar_ptr->content.bars[0].color;
+                            bar_x +=
+                                (600.0F / (f32) total_ticks) * (f32) count;
+                            hsd_80391F28(p_bar_col, prev_x, bar_y, bar_x,
+                                         bar_y,
+                                         (f32) bar_ptr->content.bars[0].count);
+                            bar_ptr = (DispItem*) ((u8*) bar_ptr + 8);
+                        }
                     }
                     col_pos = 60;
                 }
@@ -910,8 +1008,6 @@ void fn_80392A08(int mode, int scale, int enable)
 }
 #pragma pop
 
-PerfDispItem hsd_804CE3F8[6];
-
 static s32 lbl_804D6090 = -1;
 static s32 lbl_804D6094 = (s32) 0xFF0000FF;
 static s32 lbl_804D6098 = 0x00FF00FF;
@@ -923,62 +1019,62 @@ static s32 lbl_804D60A4 = (s32) 0xC0C000FF;
 // fixes
 void* fn_80392A3C(void)
 {
-    s32* bars;
-    s32* colors;
+    volatile s32 green;
+    s32 numFrames;
     s32 bar_count;
     s32 count;
     PerfDispItem* entry;
-    PAD_STACK(8);
 
     count = 0;
-    {
-        s32 numFrames = lbl_804D6088;
-        if (numFrames != 0) {
-            hsd_804CE3F8[0].type = 1;
-            bars = (s32*) &hsd_804CE3F8[0].content[0];
-            colors = (s32*) &hsd_804CE3F8[0].content[4];
-            bars[0] = 1;
-            bar_count = 1;
-            colors[0] = lbl_804D6098;
-            if (numFrames > 1) {
-                s32 val = numFrames - 1;
-                if (val > 3) {
-                    val = 3;
-                }
-                bars[bar_count * 2] = val;
-                bar_count = 2;
-                colors[bar_count * 2 - 2] = lbl_804D60A4;
+    numFrames = lbl_804D6088;
+    if (0 != numFrames) {
+        hsd_804CE3F8[0].type = 1;
+        ((s32*) &hsd_804CE3F8[0].content[0])[0] = 1;
+        bar_count = 1;
+        green = lbl_804D6098;
+        ((s32*) &hsd_804CE3F8[0].content[4])[0] = green;
+        if (numFrames > 1) {
+            s32 val = numFrames - 1;
+            if (val > 3) {
+                val = 3;
             }
-            if (numFrames > 4) {
-                bars[bar_count * 2] = numFrames - 4;
-                bar_count++;
-                colors[bar_count * 2 - 4] = lbl_804D6094;
+            {
+                s32 idx = bar_count;
+                ((s32*) &hsd_804CE3F8[0].content[0])[idx * 2] = val;
+                ((s32*) &hsd_804CE3F8[0].content[4])[idx * 2] = lbl_804D60A4;
             }
-            bars[bar_count * 2] = -1;
-            hsd_804CE3F8[0].next = &hsd_804CE3F8[1];
-            hsd_804CE3F8[1].type = 2;
-            count = 4;
-            ((f32*) &hsd_804CE3F8[1].content[0])[0] =
-                hsd_804D7860 / (f32) numFrames;
-            ((s32*) &hsd_804CE3F8[1].content[0])[1] = lbl_804D609C;
-            ((f32*) &hsd_804CE3F8[1].content[0])[2] =
-                (f32) (s32) (0.9999F + hsd_804D7860) / (f32) numFrames;
-            ((s32*) &hsd_804CE3F8[1].content[0])[3] = lbl_804D60A0;
-            ((f32*) &hsd_804CE3F8[1].content[0])[4] = -1.0F;
-            hsd_804CE3F8[1].next = &hsd_804CE3F8[2];
-            hsd_804CE3F8[2].type = 2;
-            ((f32*) &hsd_804CE3F8[2].content[0])[0] =
-                hsd_804D785C / (f32) numFrames;
-            ((s32*) &hsd_804CE3F8[2].content[0])[1] = lbl_804D6090;
-            ((f32*) &hsd_804CE3F8[2].content[0])[2] = -1.0F;
-            hsd_804CE3F8[2].next = &hsd_804CE3F8[3];
-            hsd_804CE3F8[3].type = 2;
-            ((f32*) &hsd_804CE3F8[3].content[0])[0] =
-                hsd_804D7858 / (f32) numFrames;
-            ((s32*) &hsd_804CE3F8[3].content[0])[1] = lbl_804D6098;
-            ((f32*) &hsd_804CE3F8[3].content[0])[2] = -1.0F;
-            hsd_804CE3F8[3].next = &hsd_804CE3F8[4];
+            bar_count = 2;
         }
+        if (numFrames > 4) {
+            ((s32*) &hsd_804CE3F8[0].content[0])[bar_count * 2] =
+                numFrames - 4;
+            ((s32*) &hsd_804CE3F8[0].content[4])[bar_count * 2] = lbl_804D6094;
+            bar_count++;
+        }
+        ((s32*) &hsd_804CE3F8[0].content[0])[bar_count * 2] = -1;
+        hsd_804CE3F8[0].next = &hsd_804CE3F8[1];
+        hsd_804CE3F8[1].type = 2;
+        count = 4;
+        ((f32*) &hsd_804CE3F8[1].content[0])[0] =
+            hsd_804D7860 / (f32) numFrames;
+        ((s32*) &hsd_804CE3F8[1].content[0])[1] = lbl_804D609C;
+        ((f32*) &hsd_804CE3F8[1].content[0])[2] =
+            (f32) (s32) (0.9999F + hsd_804D7860) / (f32) numFrames;
+        ((s32*) &hsd_804CE3F8[1].content[0])[3] = lbl_804D60A0;
+        ((f32*) &hsd_804CE3F8[1].content[0])[4] = -1.0F;
+        hsd_804CE3F8[1].next = &hsd_804CE3F8[2];
+        hsd_804CE3F8[2].type = 2;
+        ((f32*) &hsd_804CE3F8[2].content[0])[0] =
+            hsd_804D785C / (f32) numFrames;
+        ((s32*) &hsd_804CE3F8[2].content[0])[1] = lbl_804D6090;
+        ((f32*) &hsd_804CE3F8[2].content[0])[2] = -1.0F;
+        hsd_804CE3F8[2].next = &hsd_804CE3F8[3];
+        hsd_804CE3F8[3].type = 2;
+        ((f32*) &hsd_804CE3F8[3].content[0])[0] =
+            hsd_804D7858 / (f32) numFrames;
+        ((s32*) &hsd_804CE3F8[3].content[0])[1] = green;
+        ((f32*) &hsd_804CE3F8[3].content[0])[2] = -1.0F;
+        hsd_804CE3F8[3].next = &hsd_804CE3F8[4];
     }
     if (lbl_804D608C != 0) {
         hsd_804CE3F8[count].type = 0;
@@ -1113,7 +1209,7 @@ void fn_80392E2C(s32 event_type)
 }
 
 ParticleLogEntry hsd_804CEB40[0x100];
-s32 hsd_804CF740[42];
+extern s32 hsd_804CF740[42];
 
 extern s32 hsd_804D78A8;
 extern s32 hsd_804D78AC;
@@ -1124,12 +1220,12 @@ void hsd_80392E80(void)
 {
     s32 status;
     s32 event;
-    s32 count;
     s32 head;
     u32 ticksPerUnit;
     s32 startTick;
     s32 waiting;
     s32 intr;
+    s32* channel_flags;
     PAD_STACK(16);
 
     ticksPerUnit = *(u32*) 0x800000F8 >> 2;
@@ -1138,14 +1234,12 @@ void hsd_80392E80(void)
         intr = OSDisableInterrupts();
         if (hsd_804D7898 == 0) {
             OSRestoreInterrupts(intr);
-            hsd_80393844();
             break;
         }
 
-        count = hsd_804D7898 - 1;
         head = hsd_804D789C + 1;
         event = hsd_804CE728[hsd_804D789C];
-        hsd_804D7898 = count;
+        hsd_804D7898 -= 1;
         hsd_804D789C = head - (head / 256) * 256;
         OSRestoreInterrupts(intr);
 
@@ -1203,25 +1297,26 @@ void hsd_80392E80(void)
                     }
                 } else {
                     OSReport("OK\n");
-                    hsd_804CF740[0] = 0;
-                    hsd_804CF740[1] = 0;
-                    hsd_804CF740[2] = 0;
-                    hsd_804CF740[3] = 0;
-                    hsd_804CF740[4] = 0;
-                    hsd_804CF740[5] = 0;
-                    hsd_804CF740[6] = 0;
-                    hsd_804CF740[7] = 0;
-                    hsd_804CF740[8] = 0;
-                    hsd_804CF740[9] = 0;
-                    hsd_804CF740[10] = 0;
-                    hsd_804CF740[11] = 0;
-                    hsd_804CF740[12] = 0;
-                    hsd_804CF740[13] = 0;
-                    hsd_804CF740[14] = 0;
-                    hsd_804CF740[15] = 0;
-                    hsd_804CF740[0] = 1;
-                    hsd_804CF740[8] = 1;
-                    hsd_804CF740[15] = 1;
+                    channel_flags = (s32*) hsd_804CF740;
+                    channel_flags[0] = 0;
+                    channel_flags[1] = 0;
+                    channel_flags[2] = 0;
+                    channel_flags[3] = 0;
+                    channel_flags[4] = 0;
+                    channel_flags[5] = 0;
+                    channel_flags[6] = 0;
+                    channel_flags[7] = 0;
+                    channel_flags[8] = 0;
+                    channel_flags[9] = 0;
+                    channel_flags[10] = 0;
+                    channel_flags[11] = 0;
+                    channel_flags[12] = 0;
+                    channel_flags[13] = 0;
+                    channel_flags[14] = 0;
+                    channel_flags[15] = 0;
+                    channel_flags[0] = 1;
+                    channel_flags[8] = 1;
+                    channel_flags[15] = 1;
                 }
             }
             break;
@@ -1244,33 +1339,35 @@ void hsd_80392E80(void)
             break;
         }
     }
+    hsd_80393844();
 }
 
-// @TODO: Currently 99.75% match - BSS relocation encoding difference
 bool hsd_803931A4(s32 exi_channel)
 {
     s32 channel;
+    s32* channel_flags;
     PAD_STACK(16);
 
-    hsd_804CF740[0] = 0;
-    hsd_804CF740[1] = 0;
-    hsd_804CF740[2] = 0;
-    hsd_804CF740[3] = 0;
-    hsd_804CF740[4] = 0;
-    hsd_804CF740[5] = 0;
-    hsd_804CF740[6] = 0;
-    hsd_804CF740[7] = 0;
-    hsd_804CF740[8] = 0;
-    hsd_804CF740[9] = 0;
-    hsd_804CF740[10] = 0;
-    hsd_804CF740[11] = 0;
-    hsd_804CF740[12] = 0;
-    hsd_804CF740[13] = 0;
-    hsd_804CF740[14] = 0;
-    hsd_804CF740[15] = 0;
-    hsd_804CF740[0] = 1;
-    hsd_804CF740[8] = 1;
-    hsd_804CF740[15] = 1;
+    channel_flags = (s32*) hsd_804CF740;
+    channel_flags[0] = 0;
+    channel_flags[1] = 0;
+    channel_flags[2] = 0;
+    channel_flags[3] = 0;
+    channel_flags[4] = 0;
+    channel_flags[5] = 0;
+    channel_flags[6] = 0;
+    channel_flags[7] = 0;
+    channel_flags[8] = 0;
+    channel_flags[9] = 0;
+    channel_flags[10] = 0;
+    channel_flags[11] = 0;
+    channel_flags[12] = 0;
+    channel_flags[13] = 0;
+    channel_flags[14] = 0;
+    channel_flags[15] = 0;
+    channel_flags[0] = 1;
+    channel_flags[8] = 1;
+    channel_flags[15] = 1;
 
     channel = exi_channel;
 
@@ -1301,6 +1398,8 @@ bool hsd_803931A4(s32 exi_channel)
     return 1;
 }
 
+s32 hsd_804CF740[42];
+
 void fn_803932D0(s32 type, u32 flags, s32 value)
 {
     s32 count = hsd_804D78BC;
@@ -1318,8 +1417,6 @@ void fn_803932D0(s32 type, u32 flags, s32 value)
     }
 }
 
-// @TODO: Currently 99.71% match - r30/r31 register swap
-// (startTick/ticksPerUnit)
 s32 hsd_80393328(void)
 {
     u32 ticksPerUnit;
@@ -1338,7 +1435,7 @@ s32 hsd_80393328(void)
     }
     result = 1;
     startTick = OSGetTick();
-    ticksPerUnit = *(u32*) 0x800000F8 >> 2;
+    ticksPerUnit = (*(u32*) 0x800000F8 >> 2) & 0xFFFFFFFFFFFFFFFF;
     do {
         hsd_80392E80();
         if (hsd_804D78B0 == 0) {
@@ -1366,10 +1463,9 @@ void hsd_80393440(void* request, void* response)
     u16 cmd;
     s32 channel_mask;
     s32 streaming;
-    s32 channel;
     s32 num_blocks;
+    s32 channel;
     s32 i;
-    s32* ptr;
     u8 free_blocks;
     u8 err;
 
@@ -1384,60 +1480,18 @@ void hsd_80393440(void* request, void* response)
             streaming = 0;
         }
         num_blocks = cmd & 0xF;
-        ptr = &hsd_804CF740[2];
-        channel = 2;
-
-        {
-            s32 ctr = 2;
-            do {
-                if (*ptr == 0) {
-                    break;
-                }
-                ptr++;
-                channel++;
-                if (*ptr == 0) {
-                    break;
-                }
-                ptr++;
-                channel++;
-                if (*ptr == 0) {
-                    break;
-                }
-                ptr++;
-                channel++;
-                if (*ptr == 0) {
-                    break;
-                }
-                ptr++;
-                channel++;
-                if (*ptr == 0) {
-                    break;
-                }
-                ptr++;
-                channel++;
-                if (*ptr == 0) {
-                    break;
-                }
-                ptr++;
-                channel++;
-                if (*ptr == 0) {
-                    break;
-                }
-                ptr++;
-                channel++;
-                if (*ptr == 0) {
-                    break;
-                }
-                ptr += 1;
-                channel++;
-            } while (--ctr > 0);
+        for (channel = 2; channel < 16; channel++) {
+            if (hsd_804CF740[channel] == 0) {
+                break;
+            }
         }
 
         if (channel == 16) {
             ((u16*) response)[3] = (u16) 0x8001;
             MCCWrite(0xF, (hsd_804D78AC << 5) + 0x1000, response, 0x20, 0);
             if (MCCNotify(0xF, hsd_804D78AC + 0x80) == 0) {
-                OSReport("Error(0x%x) in MCCNotify.\n", MCCGetLastError());
+                err = MCCGetLastError();
+                OSReport("Error(0x%x) in MCCNotify.\n", err);
             }
             hsd_804D78AC = (hsd_804D78AC + 1) % 128;
             return;
@@ -1455,7 +1509,8 @@ void hsd_80393440(void* request, void* response)
             ((u16*) response)[3] = (u16) (free_blocks + 0x8010);
             MCCWrite(0xF, (hsd_804D78AC << 5) + 0x1000, response, 0x20, 0);
             if (MCCNotify(0xF, hsd_804D78AC + 0x80) == 0) {
-                OSReport("Error(0x%x) in MCCNotify.\n", MCCGetLastError());
+                err = MCCGetLastError();
+                OSReport("Error(0x%x) in MCCNotify.\n", err);
             }
             hsd_804D78AC = (hsd_804D78AC + 1) % 128;
             return;
@@ -1465,7 +1520,8 @@ void hsd_80393440(void* request, void* response)
         ((u16*) response)[3] = channel;
         MCCWrite(0xF, (hsd_804D78AC << 5) + 0x1000, response, 0x20, 0);
         if (MCCNotify(0xF, hsd_804D78AC + 0x80) == 0) {
-            OSReport("Error(0x%x) in MCCNotify.\n", MCCGetLastError());
+            err = MCCGetLastError();
+            OSReport("Error(0x%x) in MCCNotify.\n", err);
         }
         hsd_804D78AC = (hsd_804D78AC + 1) % 128;
         if (streaming != 0) {
@@ -1481,7 +1537,8 @@ void hsd_80393440(void* request, void* response)
             ((u16*) response)[3] = (u16) 0x8002;
             MCCWrite(0xF, (hsd_804D78AC << 5) + 0x1000, response, 0x20, 0);
             if (MCCNotify(0xF, hsd_804D78AC + 0x80) == 0) {
-                OSReport("Error(0x%x) in MCCNotify.\n", MCCGetLastError());
+                err = MCCGetLastError();
+                OSReport("Error(0x%x) in MCCNotify.\n", err);
             }
             hsd_804D78AC = (hsd_804D78AC + 1) % 128;
             return;
@@ -1489,7 +1546,8 @@ void hsd_80393440(void* request, void* response)
         ((u16*) response)[3] = 0;
         MCCWrite(0xF, (hsd_804D78AC << 5) + 0x1000, response, 0x20, 0);
         if (MCCNotify(0xF, hsd_804D78AC + 0x80) == 0) {
-            OSReport("Error(0x%x) in MCCNotify.\n", MCCGetLastError());
+            err = MCCGetLastError();
+            OSReport("Error(0x%x) in MCCNotify.\n", err);
         }
         hsd_804D78AC = (hsd_804D78AC + 1) % 128;
         hsd_804CF740[i] = 0;
@@ -1500,16 +1558,18 @@ void hsd_80393440(void* request, void* response)
 
 void hsd_80393840(void) {}
 
-// @TODO: Currently 91.62% match - needs register allocation fix
+// @TODO: Currently 99.29% match - stack frame/register allocation differences
+// remain
 void hsd_80393844(void)
 {
     ParticleLogEntry* base = hsd_804CEB40;
-    u8* req_buf = (u8*) (base + 0x100);
-    u8* resp_buf = (u8*) (base + 0x100) + 0x40;
+    u8* resp_status = (u8*) (base + 0x100) + 0x44;
+    u8* req_status = (u8*) (base + 0x100) + 0x84;
     s32 type;
     u32 flags;
     s32 value;
     BOOL irq;
+    u8 err;
 
     for (;;) {
         irq = OSDisableInterrupts();
@@ -1536,26 +1596,29 @@ void hsd_80393844(void)
 
         if ((value & 0xFFFFFF00) == 0x100) {
             if (MCCNotify(0xF, (u8) value | 0x200) == 0) {
-                OSReport("Error(0x%x) in MCCNotify.\n", MCCGetLastError());
+                err = MCCGetLastError();
+                OSReport("Error(0x%x) in MCCNotify.\n", err);
             }
         } else if ((value & 0xFFFFFF00) == 0x200) {
             if ((u32) hsd_804D78B0 == (u8) value) {
                 hsd_804D78B0 = 0;
             }
         } else if ((value & 0xFFFFFF80) == 0x80) {
-            memset(req_buf, 0, 0x20);
+            memset((u8*) &base[0x10A].x8, 0, 0x20);
             hsd_804D78A8 = value & 0x7F;
-            if (MCCRead(0xF, hsd_804D78A8 << 5, req_buf, 0x20, 0) != 0 &&
-                !((req_buf[4] >> 7) & 1))
+            if (MCCRead(0xF, hsd_804D78A8 << 5, (u8*) &base[0x10A].x8, 0x20,
+                        0) != 0 &&
+                !((*req_status >> 7) & 1))
             {
-                memset(resp_buf, 0, 0x20);
-                resp_buf[4] = (u8) (resp_buf[4] | 0x80);
-                *(s32*) resp_buf = *(s32*) req_buf;
-                resp_buf[5] = req_buf[5];
-                if (req_buf[5] < 0x20U) {
-                    void (*fn)(void*, void*) = lbl_8040A93C[req_buf[5]];
-                    if (fn != NULL) {
-                        fn(req_buf, resp_buf);
+                u8 cmd;
+                memset((u8*) &base[0x105].x4, 0, 0x20);
+                ((MCCPacket*) &base[0x105].x4)->x4_b7 = 1;
+                *(s32*) &base[0x105].x4 = *(s32*) &base[0x10A].x8;
+                cmd = ((u8*) &base[0x10A].x8)[5];
+                if (((u8*) &base[0x105].x4)[5] = cmd, cmd < 0x20U) {
+                    if (lbl_8040A93C[cmd] != NULL) {
+                        lbl_8040A93C[cmd]((u8*) &base[0x10A].x8,
+                                          (u8*) &base[0x105].x4);
                     }
                 }
             }
@@ -1615,9 +1678,9 @@ int hsd_80393A5C(char* filename, int data, int size)
         return -1;
     }
 
-    written_f = (f32) (s32) FIOFwrite(fd, (void*) data, size);
+    written_f = (f32) (u32) FIOFwrite(fd, (void*) data, size);
 
-    if ((f32) (u32) size != written_f) {
+    if ((f32) (s32) size != written_f) {
         OSReport("cannot save file\n");
         FIOFclose(fd);
         return (s32) written_f;
@@ -1635,13 +1698,13 @@ void fn_80393C14(const u8* buf, size_t size)
     int i;
 
     const u32 out_size = hsd_804CF7E8.buf_size;
-    const u32 tmp = out_size - 1;
 
     int write_pos = hsd_804CF7E8.xC;
     u8* out_buf = hsd_804CF7E8.out_buf;
     u8 line_len = hsd_804CF7E8.x11;
 
     for (i = 0; i < size; i++) {
+        const u32 tmp = out_size - 1;
         switch (buf[i]) {
         case '\r':
             break;
@@ -1673,24 +1736,30 @@ void fn_80393C14(const u8* buf, size_t size)
     hsd_804CF7E8.x11 = line_len;
 }
 
+#pragma push
+#pragma dont_inline on
 s32 hsd_80393D2C(s32 enable)
 {
-    s32 old = hsd_804CF7E8.x0_b1;
+    struct ParticleConsoleState* sp = &hsd_804CF7E8;
+    s32 old = sp->x0_b1;
 
     if (enable != 0) {
-        hsd_804CF7E8.x0_b1 = 1;
+        sp->x0_b1 = 1;
         HSD_SetReportCallback(fn_80393C14);
     } else {
-        hsd_804CF7E8.x0_b1 = 0;
+        sp->x0_b1 = 0;
         HSD_SetReportCallback(NULL);
     }
     return old;
 }
+#pragma pop
 
+#pragma push
+#pragma pool_data off
 void hsd_80393DA0(u8* buf, size_t size)
 {
     PAD_STACK(4);
-    memset(&hsd_804CF7E8, 0, sizeof(hsd_804CF7E8));
+    memset(&hsd_804CF7E8, 0, sizeof(hsd_804CF7E8) - sizeof(hsd_804CF7E8.x24));
     hsd_804CF7E8.out_buf = buf;
     hsd_804CF7E8.buf_size = size;
     memset(buf, 0, size);
@@ -1698,6 +1767,7 @@ void hsd_80393DA0(u8* buf, size_t size)
     hsd_804CF7E8.x0_b1 = true;
     HSD_SetReportCallback(fn_80393C14);
 }
+#pragma pop
 
 #pragma push
 #pragma dont_inline on
@@ -1760,6 +1830,7 @@ void hsd_80393EF4(int col_delta, int row_delta)
 {
     u32 byte_val;
     u32 buf_size;
+    int* pos_ptr;
     u32 counter;
     u32 pos;
     u32 sum;
@@ -1770,6 +1841,7 @@ void hsd_80393EF4(int col_delta, int row_delta)
         return;
     }
 
+    pos_ptr = &sp->x1C;
     buf_size = sp->buf_size;
 
     if ((u32) sp->x1C >= buf_size) {
@@ -1793,18 +1865,22 @@ void hsd_80393EF4(int col_delta, int row_delta)
         }
 
         sp->x18 += counter;
-        sp->x1C = pos;
+        *pos_ptr = pos;
 
         if (col_delta >= 0) {
-            sp->x14 += col_delta;
-            if ((u32) sp->x14 > byte_val) {
-                sp->x14 = byte_val;
+            int* col_ptr = &sp->x14;
+            *col_ptr += col_delta;
+            if ((u32) *col_ptr > byte_val) {
+                *col_ptr = byte_val;
             }
         } else {
-            if ((u32) sp->x14 > (u32) -col_delta) {
-                sp->x14 -= (u32) -col_delta;
+            int* col_ptr = &sp->x14;
+            u32 col = *col_ptr;
+            col_delta = -col_delta;
+            if (col > (u32) col_delta) {
+                *col_ptr = col - (u32) col_delta;
             } else {
-                sp->x14 = 0;
+                *col_ptr = 0;
             }
         }
     } else if (row_delta < 0) {
@@ -1826,6 +1902,7 @@ void hsd_80393EF4(int col_delta, int row_delta)
 #pragma pop
 
 #pragma push
+#pragma pool_data off
 #pragma dont_inline on
 u8 hsd_80394068(void)
 {
@@ -1857,28 +1934,29 @@ u8 hsd_80394068(void)
 #pragma dont_inline on
 u8 hsd_80394128(s32 col, s32 row)
 {
-    struct ParticleConsoleState* sp = &hsd_804CF7E8;
     u8 result;
 
     hsd_80393E68(col, row);
-    if (!sp->x0_b0) {
+    if (!hsd_804CF7E8.x0_b0) {
         result = 0;
-    } else if ((u32) sp->x1C > sp->buf_size) {
+    } else if ((u32) hsd_804CF7E8.x1C > hsd_804CF7E8.buf_size) {
         result = 0;
-    } else if ((u32) sp->x14 < (u32) sp->x20) {
-        result = sp->out_buf[(sp->x14 + (sp->xC + sp->buf_size - sp->x1C)) %
-                             sp->buf_size];
-        sp->x14++;
+    } else if ((u32) hsd_804CF7E8.x14 < (u32) hsd_804CF7E8.x20) {
+        result =
+            hsd_804CF7E8.out_buf[(hsd_804CF7E8.x14 +
+                                  (hsd_804CF7E8.xC + hsd_804CF7E8.buf_size -
+                                   hsd_804CF7E8.x1C)) %
+                                 hsd_804CF7E8.buf_size];
+        hsd_804CF7E8.x14++;
     } else {
         result = 0;
         hsd_80393EF4(0, -1);
-        sp->x14 = 0;
+        hsd_804CF7E8.x14 = 0;
     }
     return result;
 }
 #pragma pop
 
-// @TODO: Currently 85.87% match - needs control flow fix
 s32 hsd_803941E8(void* xfb_out_ptr, void* xfb_cur_ptr)
 {
     s32* xfb_out = xfb_out_ptr;
@@ -1894,48 +1972,37 @@ s32 hsd_803941E8(void* xfb_out_ptr, void* xfb_cur_ptr)
     last_draw = HSD_VIGetXFBLastDrawDone();
 
     if (last_draw != -1) {
-        *xfb_cur = *(u32*) ((u8*) &HSD_VIData + last_draw * 0x60 + 0x58);
+        *xfb_cur = (u32) HSD_VIData.xfb[last_draw].buffer;
     }
 
     vi_base = (u8*) &HSD_VIData;
     nb_xfb = HSD_VIData.nb_xfb;
-    i = 0;
-    if (nb_xfb > 0) {
-        do {
-            if (i == last_draw) {
-                goto next1;
-            }
-            buf = *(u32*) (vi_base + 0x58);
-            xfb_out[0] = buf;
-            if (buf != 0) {
-                break;
-            }
-        next1:
-            vi_base += 0x60;
-            i++;
-        } while (--nb_xfb > 0);
+    for (i = 0; i < nb_xfb; i++) {
+        if (i == last_draw) {
+            goto next1;
+        }
+        buf = *(u32*) (vi_base + 0x58);
+        xfb_out[0] = buf;
+        if (buf != 0) {
+            break;
+        }
+    next1:
+        vi_base += 0x60;
     }
 
-    {
-        s32 j = i + 1;
-        u8* vi_ptr = (u8*) &HSD_VIData + j * 0x60;
-        s32 remain = nb_xfb - j;
-
-        if (j < nb_xfb) {
-            do {
-                if (j == last_draw) {
-                    goto next2;
-                }
-                buf = *(u32*) (vi_ptr + 0x58);
-                xfb_out[1] = buf;
-                if (buf != 0) {
-                    break;
-                }
-            next2:
-                vi_ptr += 0x60;
-                j++;
-            } while (--remain > 0);
+    i++;
+    vi_base = (u8*) &HSD_VIData + i * 0x60;
+    for (; i < nb_xfb; i++) {
+        if (i == last_draw) {
+            goto next2;
         }
+        buf = *(u32*) (vi_base + 0x58);
+        xfb_out[1] = buf;
+        if (buf != 0) {
+            break;
+        }
+    next2:
+        vi_base += 0x60;
     }
 
     if ((u32) xfb_out[0] == 0) {
@@ -2073,11 +2140,19 @@ void hsd_80394544(s32 col, s32 row, u32 num_cols, u32 num_rows, s32 x, s32 y,
 
 extern u8 lbl_8040AB40[];
 
-// @TODO: Currently 73.53% match - ASM bytes identical, capped by .bss.0
-// relocation symbol mismatch
+// @TODO: Currently 88.35% match - register allocation/loop counter
+// differences remain
+static inline s32 hsd_80394668_get_interlace(struct ParticleScreenState* sp)
+{
+    return sp->x0_b6;
+}
+
+#pragma push
+#pragma global_optimizer off
 void hsd_80394668(void)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
+    PAD_STACK(24);
 
     if ((u32) sp->x2C != 0) {
         /* Copy XFB data with brightness adjustment */
@@ -2096,51 +2171,51 @@ void hsd_80394668(void)
                     u8* s0 = src + pos;
                     u8* d0 = dst + pos;
                     pos += 2;
-                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFF) + 0x10);
+                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFFFFFF) + 0x10);
                     d0[1] = s0[1];
 
                     s0 = src + pos;
                     d0 = dst + pos;
                     pos += 2;
-                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFF) + 0x10);
+                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFFFFFF) + 0x10);
                     d0[1] = s0[1];
 
                     s0 = src + pos;
                     d0 = dst + pos;
                     pos += 2;
-                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFF) + 0x10);
+                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFFFFFF) + 0x10);
                     d0[1] = s0[1];
 
                     s0 = src + pos;
                     d0 = dst + pos;
                     pos += 2;
-                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFF) + 0x10);
+                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFFFFFF) + 0x10);
                     d0[1] = s0[1];
 
                     s0 = src + pos;
                     d0 = dst + pos;
                     pos += 2;
-                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFF) + 0x10);
+                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFFFFFF) + 0x10);
                     d0[1] = s0[1];
 
                     s0 = src + pos;
                     d0 = dst + pos;
                     pos += 2;
-                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFF) + 0x10);
+                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFFFFFF) + 0x10);
                     d0[1] = s0[1];
 
                     s0 = src + pos;
                     d0 = dst + pos;
                     pos += 2;
-                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFF) + 0x10);
+                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFFFFFF) + 0x10);
                     d0[1] = s0[1];
 
                     s0 = src + pos;
                     d0 = dst + pos;
                     pos += 2;
-                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFF) + 0x10);
+                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFFFFFF) + 0x10);
                     d0[1] = s0[1];
-                } while (--unrolled > 0);
+                } while (--unrolled != 0);
                 remainder = half_count & 7;
                 if (remainder == 0) {
                     return;
@@ -2154,18 +2229,22 @@ void hsd_80394668(void)
                 u8 luma = s1[0];
                 u8* d1 = dst + pos;
                 pos += 2;
-                d1[0] = (u8) (((luma - 0x10) & 0xFF) + 0x10);
+                d1[0] = (u8) (((luma - 0x10) & 0xFFFFFF) + 0x10);
                 d1[1] = s1[1];
-            } while (--remainder > 0);
+            } while (--remainder != 0);
         }
     } else {
         /* Draw console text to framebuffer */
-        void* saved_color = sp->x50;
+        void** x50_ptr = &sp->x50;
+        s32* x4_ptr = &sp->x4;
+        s32* x40_ptr = &sp->x40;
+        s32* x8_ptr = &sp->x8;
+        void* saved_color = *x50_ptr;
         s32 row;
         s32 col;
         s32 cur_x;
 
-        sp->x50 = lbl_8040AB40;
+        *x50_ptr = lbl_8040AB40;
         row = 0;
 
         while (row <= sp->x1C) {
@@ -2174,25 +2253,27 @@ void hsd_80394668(void)
             cur_x = 0x14;
 
             while (col < sp->x20) {
-                sp->x4 = cur_x;
-                sp->x8 = (sp->x40 - 0x28) - y_off;
+                *x4_ptr = cur_x;
+                *x8_ptr = (*x40_ptr - 0x28) - y_off;
                 if (sp->x0_b7 != 0) {
-                    hsd_803922FC((void*) ((u8*) sp->x4C + 0x700), sp->x4,
-                                 sp->x8, sp->x0_b6, (&sp->x24)[sp->x34],
-                                 sp->x3C, sp->x40, sp->x44, sp->x50);
+                    s32 interlace = hsd_80394668_get_interlace(sp);
+                    hsd_803922FC((void*) ((u8*) sp->x4C + 0x700), *x4_ptr,
+                                 *x8_ptr, interlace, (&sp->x24)[sp->x34],
+                                 sp->x3C, *x40_ptr, sp->x44, *x50_ptr);
                 } else {
-                    hsd_803921B8((void*) ((u8*) sp->x4C + 0x700), sp->x4,
-                                 sp->x8, (&sp->x24)[sp->x34], sp->x3C, sp->x40,
-                                 sp->x44, sp->x50);
+                    hsd_803921B8((void*) ((u8*) sp->x4C + 0x700), *x4_ptr,
+                                 *x8_ptr, (&sp->x24)[sp->x34], sp->x3C,
+                                 *x40_ptr, sp->x44, *x50_ptr);
                 }
                 cur_x += 11;
                 col++;
             }
             row++;
         }
-        sp->x50 = saved_color;
+        *x50_ptr = saved_color;
     }
 }
+#pragma pop
 
 // @TODO: Currently 96.16% match - register swap in second loop (r29/r30)
 void hsd_80394950(OSContext* ctx)
@@ -2212,7 +2293,7 @@ void hsd_80394950(OSContext* ctx)
     OSClearContext(&tmp);
     OSSetCurrentContext(&tmp);
 
-    OSReport("- FPR ---------------------------------\n");
+    OSReport("- FPR -----------------------------------------------\n");
 
     i = 0;
     p = (u8*) ctx;
@@ -2224,7 +2305,7 @@ void hsd_80394950(OSContext* ctx)
         p += 8;
     } while (i < 32);
 
-    OSReport("- PSF ---------------------------------\n");
+    OSReport("- PSF -----------------------------------------------\n");
 
     i = 0;
     p = (u8*) ctx;
@@ -2440,8 +2521,8 @@ void hsd_80394E8C(void* node_ptr)
 extern u8 lbl_8040AB00[];
 extern u8 lbl_8040AB20[];
 
-// @TODO: Currently 92.89% match - ASM bytes identical, capped by relocation
-// diffs
+// @TODO: Currently 93.04% match - BSS relocation and register allocation
+// differences remain
 void hsd_80394F48(void* data)
 {
     void* base_color = lbl_8040AB00;
@@ -2569,33 +2650,37 @@ void hsd_80394F48(void* data)
     }
 
     {
-        s32 j = 0;
-        *px4 += 11;
-        while (j < num_entries) {
-            if (sp->x0_b7 != 0) {
-                hsd_803922FC((void*) ((u8*) sp->x4C + 0x9D8), *px4, *px8,
-                             sp->x0_b6, (&sp->x24)[sp->x34], sp->x3C, *px40,
-                             sp->x44, *px50);
-            } else {
-                hsd_803921B8((void*) ((u8*) sp->x4C + 0x9D8), *px4, *px8,
-                             (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44,
-                             *px50);
-            }
-            j++;
+        struct ParticleScreenState* sp = &hsd_804CF810;
+        s32 b6;
+        {
+            s32 j = 0;
             *px4 += 11;
+            while (j < num_entries) {
+                if (sp->x0_b7 != 0) {
+                    hsd_803922FC((void*) ((u8*) sp->x4C + 0x9D8), *px4, *px8,
+                                 sp->x0_b6, (&sp->x24)[sp->x34], sp->x3C,
+                                 *px40, sp->x44, *px50);
+                } else {
+                    hsd_803921B8((void*) ((u8*) sp->x4C + 0x9D8), *px4, *px8,
+                                 (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44,
+                                 *px50);
+                }
+                j++;
+                *px4 += 11;
+            }
         }
-    }
 
-    b6 = sp->x0_b6;
-    if (sp->x0_b7 != 0) {
-        hsd_803922FC((void*) ((u8*) sp->x4C + 0x968), *px4, *px8, b6,
-                     (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
-    } else {
-        hsd_803921B8((void*) ((u8*) sp->x4C + 0x968), *px4, *px8,
-                     (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
-    }
+        b6 = sp->x0_b6;
+        if (sp->x0_b7 != 0) {
+            hsd_803922FC((void*) ((u8*) sp->x4C + 0x968), *px4, *px8, b6,
+                         (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
+        } else {
+            hsd_803921B8((void*) ((u8*) sp->x4C + 0x968), *px4, *px8,
+                         (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
+        }
 
-    *px4 += 11;
+        *px4 += 11;
+    }
     *pxC8 += 4;
     *pxCC -= dp->index + 1;
 }
@@ -2649,21 +2734,22 @@ extern u8 lbl_8040AB20[];
 extern u8 lbl_8040B8AC[];
 extern u8 lbl_8040B904[];
 
-// @TODO: Currently 99.78% match - minor addressing difference
 void hsd_80395644(void)
 {
+    struct ParticleScreenState* sp =
+        (struct ParticleScreenState*) &hsd_804CF810;
     void* saved;
-    void** p = &hsd_804CF810.x50;
+    void** p = &sp->x50;
     s32 val_x20;
     s32 val_x1C;
 
     PAD_STACK(16);
     saved = *p;
     *p = lbl_8040AB20;
-    val_x20 = hsd_804CF810.x20;
-    val_x1C = hsd_804CF810.x1C;
-    hsd_804CF810.x4 = (val_x20 - 21) * 11 + 20;
-    hsd_804CF810.x8 = (hsd_804CF810.x40 - 40) - (val_x1C + 1) * 14;
+    val_x20 = sp->x20;
+    val_x1C = sp->x1C;
+    sp->x4 = (val_x20 - 21) * 11 + 20;
+    sp->x8 = (sp->x40 - 40) - (val_x1C + 1) * 14;
     if (hsd_804D78C8 >= 1) {
         hsd_80394434(lbl_8040B8AC);
     }
@@ -2703,22 +2789,25 @@ s32 hsd_803956D8(void* disp_ptr)
     return 0;
 }
 
-static char* lbl_804D62C8 = "<<PUSH START BUTTON TO SEE INSTRUCTION>>";
-
-// @TODO: Currently 73.00% match - ASM bytes identical, capped by .bss.0
-// relocation symbol mismatch
+// @TODO: BSS relocation and register allocation differences remain
 void hsd_803957C0(u8 input)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
     s32* x10_ptr = &sp->x10;
+    s32* x4_ptr;
+    s32* x8_ptr;
+    s32* x40_ptr;
+    void** x50_ptr;
     s32 col;
     s32 row;
+    s32 b6;
     u8 ch;
     void* saved;
-    u8 saved_ch;
+    s32 saved_ch;
+    PAD_STACK(24);
 
     ch = input;
-    saved_ch = ch;
+    saved_ch = input;
     col = sp->x0C + sp->x18;
     row = *x10_ptr + sp->x14;
 
@@ -2739,26 +2828,36 @@ void hsd_803957C0(u8 input)
 
     saved = sp->x50;
     sp->x50 = lbl_8040AB20;
-    sp->x4 = col * 11 + 20;
     sp->x8 = (sp->x40 - 40) - (*x10_ptr + 1) * 14;
+    sp->x4 = col * 11 + 20;
 
-    if (sp->x0_b7) {
-        hsd_803922FC((void*) ((u8*) sp->x4C + (ch & 0x7F) * 0x38), sp->x4,
-                     sp->x8, sp->x0_b6, (&sp->x24)[sp->x34], sp->x3C, sp->x40,
-                     sp->x44, sp->x50);
-    } else {
-        hsd_803921B8((void*) ((u8*) sp->x4C + (ch & 0x7F) * 0x38), sp->x4,
-                     sp->x8, (&sp->x24)[sp->x34], sp->x3C, sp->x40, sp->x44,
-                     sp->x50);
+    x50_ptr = &sp->x50;
+    {
+        struct ParticleScreenState* draw_sp = &hsd_804CF810;
+        x4_ptr = &draw_sp->x4;
+        x40_ptr = &draw_sp->x40;
+        x8_ptr = &draw_sp->x8;
+        b6 = draw_sp->x0_b6;
+
+        if (draw_sp->x0_b7) {
+            hsd_803922FC((void*) ((u8*) draw_sp->x4C + (ch & 0x7F) * 0x38),
+                         *x4_ptr, *x8_ptr, b6, (&draw_sp->x24)[draw_sp->x34],
+                         draw_sp->x3C, *x40_ptr, draw_sp->x44, *x50_ptr);
+        } else {
+            hsd_803921B8((void*) ((u8*) draw_sp->x4C + (ch & 0x7F) * 0x38),
+                         *x4_ptr, *x8_ptr, (&draw_sp->x24)[draw_sp->x34],
+                         draw_sp->x3C, *x40_ptr, draw_sp->x44, *x50_ptr);
+        }
     }
 
     if ((u32) sp->xD0 == saved_ch) {
-        sp->x4 = (sp->x20 - 0x27) * 11 + 20;
-        sp->x8 = (sp->x40 - 40) - (sp->x1C + 1) * 14;
-        hsd_80394434(lbl_804D62C8);
+        struct ParticleScreenState* final_sp = &hsd_804CF810;
+        *x4_ptr = (final_sp->x20 - 0x27) * 11 + 20;
+        *x8_ptr = (*x40_ptr - 40) - (final_sp->x1C + 1) * 14;
+        hsd_80394434("<<PUSH START BUTTON TO SEE INSTRUCTION>>");
     }
 
-    sp->x50 = saved;
+    *x50_ptr = saved;
 }
 
 #pragma push
@@ -2942,8 +3041,7 @@ static inline void ps_remove_node(struct ParticleScreenState* sp, void* node)
     if (node == NULL) {
         return;
     }
-    head_ptr = &sp->xD0;
-    if (*head_ptr == NULL) {
+    if (*(head_ptr = &sp->xD0) == NULL) {
         return;
     }
     while ((cur = *head_ptr) != NULL && cur != node) {
@@ -2959,12 +3057,11 @@ static inline void ps_remove_node(struct ParticleScreenState* sp, void* node)
     sp->x0_b5 = 1;
 }
 
-// @TODO: Currently 80.89% match - .bss.0 relocation issue affects register
-// allocation
+// @TODO: Currently 99.38% match - remaining register allocation differences
 s32 hsd_80395D88(void* data)
 {
-    struct ParticleScreenState* sp = &hsd_804CF810;
     char* msg = (char*) lbl_8040AB00;
+    struct ParticleScreenState* sp = &hsd_804CF810;
     s32 result;
 
     result = hsd_80395550(data);
@@ -2995,22 +3092,26 @@ s32 hsd_80395D88(void* data)
         remove_return_0:
             ps_remove_node(sp, data);
             return 0;
-        case 6:
-            if (sp->xD4 != NULL) {
-                OSContext* ctx = sp->xD4;
-                s32 saved;
-                s32 i;
+        case 6: {
+            s32 i;
+            OSContext* ctx;
+            OSContext** ctx_ptr;
+            u32* ctx_words;
+            s32 saved;
 
+            if (*(ctx_ptr = &sp->xD4) != NULL) {
                 saved = hsd_80393D2C(1);
+                ctx_words = (u32*) *ctx_ptr;
                 OSReport(msg + 0x728);
                 i = 0;
                 do {
-                    OSReport(msg + 0x760, i, ((u32*) ctx)[i], ((u32*) ctx)[i],
-                             i + 0x10, ((u32*) ctx)[i + 0x10],
-                             ((u32*) ctx)[i + 0x10]);
+                    OSReport(msg + 0x760, i, ctx_words[i], ctx_words[i],
+                             i + 0x10, ctx_words[i + 0x10],
+                             ctx_words[i + 0x10]);
                     i++;
                 } while (i < 0x10);
-                hsd_80394950(ctx);
+                hsd_80394950(*ctx_ptr);
+                ctx = *ctx_ptr;
                 OSReport(msg + 0x828);
                 OSReport(msg + 0x860, ((u32*) ctx)[0x198 / 4],
                          ((u32*) ctx)[0x19C / 4]);
@@ -3029,17 +3130,20 @@ s32 hsd_80395D88(void* data)
             }
             ps_remove_node(sp, data);
             return 1;
+        }
         case 7:
             hsd_80394E8C(lbl_8040BEC4);
             return 1;
         case 8: {
-            ExcptNode* cur = sp->xD0;
+            void** head_ptr;
+            ExcptNode* cur;
+            cur = *(head_ptr = &sp->xD0);
             while (cur != NULL) {
                 ExcptNode* next = cur->next;
                 cur->next = NULL;
                 cur = next;
             }
-            sp->xD0 = NULL;
+            *head_ptr = NULL;
             sp->x0_b5 = 1;
             return 1;
         }
@@ -3070,31 +3174,33 @@ static char* lbl_804D62CC = "+- MEMORY DUMP ------------------------------+";
 static char* lbl_804D62D0 = "|%08X=%08X:%08X:%08X:%08X|";
 static char* lbl_804D62D4 = "+--------------------------------------------+";
 
-// @TODO: Currently 83.94% match - needs register allocation fix
+static inline s32 hsd_80396188_calc_col(void)
+{
+    return ((hsd_804CF810.x20 - 0x2E) / 2) * 11 + 20;
+}
+
+// @TODO: Currently 95.69% match - needs register allocation fix
 void hsd_80396188(void)
 {
-    struct ParticleScreenState* sp = &hsd_804CF810;
-    void** px50 = &sp->x50;
-    s32* px4 = &sp->x4;
-    s32* px40 = &sp->x40;
-    s32* px8 = &sp->x8;
     void* saved;
     s32 col;
     s32 i;
     u32* addr;
-    char buf[96];
+    char buf[64];
+    PAD_STACK(20);
 
     addr = (u32*) lbl_8040BAF0.x10;
-    saved = *px50;
-    *px50 = lbl_8040AB00;
-    col = ((sp->x20 - 0x2E) / 2) * 11 + 20;
-    *px4 = col;
-    *px8 = *px40 - 0x7C;
+    saved = hsd_804CF810.x50;
+    col = hsd_80396188_calc_col();
+    hsd_804CF810.x50 = lbl_8040AB00;
+    hsd_804CF810.x4 = col;
+    hsd_804CF810.x8 = hsd_804CF810.x40 - 0x7C;
     hsd_80394434(lbl_804D62CC);
     i = 0;
     do {
-        *px4 = col;
-        *px8 = (*px40 - 0x28) - (4 - i + 1) * 14;
+        s32 row = 4 - i;
+        hsd_804CF810.x4 = col;
+        hsd_804CF810.x8 = (hsd_804CF810.x40 - 0x28) - (row + 1) * 14;
         sprintf(buf, lbl_804D62D0, addr, addr[0], addr[1], addr[2], addr[3]);
         hsd_80394434(buf);
         {
@@ -3105,69 +3211,70 @@ void hsd_80396188(void)
         }
         i++;
     } while (i < 4);
-    *px4 = col;
-    *px8 = *px40 - 0x36;
+    hsd_804CF810.x4 = col;
+    hsd_804CF810.x8 = hsd_804CF810.x40 - 0x36;
     hsd_80394434(lbl_804D62D4);
-    *px50 = saved;
+    hsd_804CF810.x50 = saved;
 }
 
-extern u8 lbl_8040BBE8[];
+extern ExcptNode lbl_8040BBE8[];
 
-static char* lbl_804D62D8 = "\n";
-static char* lbl_804D62DC = "[%08X";
-static char* lbl_804D62E4 = ":";
-static char* lbl_804D62E8 = "%02X";
-static char* lbl_804D62F0 = "]\n";
+static char lbl_804D62D8[] = "\n";
+static char lbl_804D62DC[] = "[%08X";
+static char lbl_804D62E4[] = ":";
+static char lbl_804D62E8[] = "%02X";
+static char lbl_804D62F0[] = "]\n";
 
-// @TODO: Currently 86.81% match - needs register allocation fix
 s32 hsd_803962A8(void* data)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
     u32 bit;
-    s32 old;
+    s32 old8, old4, old1, old2;
+    u32 *ptr8, *ptr4, *ptr1, *ptr2;
     u8* addr;
     s32 i, j, k;
+    PAD_STACK(32);
 
     bit = 1;
     while (bit <= sp->xBC) {
         switch (sp->xBC & bit) {
         case 0x8: {
-            old = lbl_8040BAF0.x10;
+            ptr8 = &lbl_8040BAF0.x10;
+            old8 = *ptr8;
             {
                 u32 memsize = OSGetPhysicalMemSize();
-                lbl_8040BAF0.x10 =
-                    (((old & 0x0FFFFFFF) + memsize - 0x10) % memsize) +
-                    0x80000000;
+                old8 &= 0x0FFFFFFF;
+                *ptr8 = ((old8 + memsize - 0x10) % memsize) + 0x80000000;
             }
             return 1;
         }
         case 0x4: {
-            old = lbl_8040BAF0.x10;
+            ptr4 = &lbl_8040BAF0.x10;
+            old4 = *ptr4;
             {
                 u32 memsize = OSGetPhysicalMemSize();
-                lbl_8040BAF0.x10 =
-                    (((old & 0x0FFFFFFF) + memsize + 0x10) % memsize) +
-                    0x80000000;
+                old4 &= 0x0FFFFFFF;
+                *ptr4 = ((old4 + memsize + 0x10) % memsize) + 0x80000000;
             }
             return 1;
         }
         case 0x1: {
-            old = lbl_8040BAF0.x10;
+            ptr1 = &lbl_8040BAF0.x10;
+            old1 = *ptr1;
             {
                 u32 memsize = OSGetPhysicalMemSize();
-                lbl_8040BAF0.x10 =
-                    (((old & 0x0FFFFFFF) + memsize - 0x40) % memsize) +
-                    0x80000000;
+                old1 &= 0x0FFFFFFF;
+                *ptr1 = ((old1 + memsize - 0x40) % memsize) + 0x80000000;
             }
             return 1;
         }
         case 0x2: {
-            old = lbl_8040BAF0.x10;
+            ptr2 = &lbl_8040BAF0.x10;
+            old2 = *ptr2;
             {
                 u32 memsize = OSGetPhysicalMemSize();
-                lbl_8040BAF0.x10 =
-                    (((old & 0x0FFFFFFF) + memsize + 0x40) % memsize) +
-                    0x80000000;
+                old2 &= 0x0FFFFFFF;
+                *ptr2 = ((old2 + memsize + 0x40) % memsize) + 0x80000000;
             }
             return 1;
         }
@@ -3185,8 +3292,7 @@ s32 hsd_803962A8(void* data)
                     OSReport(lbl_804D62E4);
                     k = 0;
                     do {
-                        OSReport(lbl_804D62E8, *addr);
-                        addr++;
+                        OSReport(lbl_804D62E8, *addr++);
                         k++;
                     } while (k < 4);
                     j++;
@@ -3201,37 +3307,34 @@ s32 hsd_803962A8(void* data)
             sp->x18 = 0;
             sp->x14 = 0;
             return 1;
-        case 0x100: {
-            ExcptNode* node = (ExcptNode*) &lbl_8040BC3C;
+        case 0x100:
             lbl_8040BC3C.x10 = (s32) lbl_8040BAF0.x10;
             lbl_8040BC3C.x18 = &lbl_8040BAF0;
-            if (node != NULL) {
-                fn_80394DF4(node);
-                node->next = (ExcptNode*) sp->xD0;
-                sp->xD0 = node;
-                if (node->callback != NULL) {
-                    node->callback(node);
+            if (&lbl_8040BC3C != NULL) {
+                fn_80394DF4(&lbl_8040BC3C);
+                ((ExcptNode*) &lbl_8040BC3C)->next = (ExcptNode*) sp->xD0;
+                sp->xD0 = &lbl_8040BC3C;
+                if (((ExcptNode*) &lbl_8040BC3C)->callback != NULL) {
+                    ((ExcptNode*) &lbl_8040BC3C)
+                        ->callback((ExcptNode*) &lbl_8040BC3C);
                 }
                 sp->x0_b5 = 1;
             }
             return 1;
-        }
         case 0x200:
             ps_remove_node(sp, data);
             return 1;
-        case 0x1000: {
-            ExcptNode* node = (ExcptNode*) lbl_8040BBE8;
-            if (node != NULL) {
-                fn_80394DF4(node);
-                node->next = (ExcptNode*) sp->xD0;
-                sp->xD0 = node;
-                if (node->callback != NULL) {
-                    node->callback(node);
+        case 0x1000:
+            if (lbl_8040BBE8 != NULL) {
+                fn_80394DF4(lbl_8040BBE8);
+                lbl_8040BBE8->next = (ExcptNode*) sp->xD0;
+                sp->xD0 = lbl_8040BBE8;
+                if (lbl_8040BBE8->callback != NULL) {
+                    lbl_8040BBE8->callback(lbl_8040BBE8);
                 }
                 sp->x0_b5 = 1;
             }
             return 1;
-        }
         default:
             bit <<= 1;
             break;
@@ -3240,7 +3343,6 @@ s32 hsd_803962A8(void* data)
     return 0;
 }
 
-// @TODO: Currently 96.49% match - needs minor register allocation fix
 s32 hsd_803966A0(void* data)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
@@ -3291,51 +3393,57 @@ void hsd_80396868(void)
     lbl_8040BC3C.x10 = (lbl_8040BC3C.x10 & 0x0FFFFFF0) | 0x80000000;
 }
 
-// @TODO: Currently 80.22% match - .bss.0 relocation caps match percentage
+static char* lbl_804D62F4 = "+--------------------------+";
+static char* lbl_804D62F8 = "| INPUT ADDRESS : 8%07X |";
+
+// @TODO: Currently 92.87% match - .bss.0 relocation caps match percentage
 void hsd_80396884(void)
 {
-    struct ParticleScreenState* sp = &hsd_804CF810;
     char buf[32];
     void* saved;
     s32 x_base;
     u8 ch;
+    s32 b6;
+    PAD_STACK(28);
 
-    x_base = (sp->x20 - 30) / 2;
-    sprintf(buf, "| INPUT ADDRESS : 8%07lX |", lbl_8040BC3C.x10 & 0x0FFFFFFF);
-    saved = sp->x50;
-    sp->x50 = lbl_8040AB00;
-    sp->x4 = x_base * 11 + 20;
-    sp->x8 = sp->x40 - 82;
+    x_base = (hsd_804CF810.x20 - 30) / 2;
+    sprintf(buf, "| INPUT ADDRESS : 8%07X |", lbl_8040BC3C.x10 & 0x0FFFFFFF);
+    saved = hsd_804CF810.x50;
+    hsd_804CF810.x50 = lbl_8040AB00;
+    hsd_804CF810.x4 = x_base * 11 + 20;
+    hsd_804CF810.x8 = hsd_804CF810.x40 - 82;
     hsd_80394434("+--------------------------+");
-    sp->x4 = x_base * 11 + 20;
-    sp->x8 = sp->x40 - 68;
+    hsd_804CF810.x4 = x_base * 11 + 20;
+    hsd_804CF810.x8 = hsd_804CF810.x40 - 68;
     hsd_80394434(buf);
-    sp->x4 = x_base * 11 + 20;
-    sp->x8 = sp->x40 - 54;
+    hsd_804CF810.x4 = x_base * 11 + 20;
+    hsd_804CF810.x8 = hsd_804CF810.x40 - 54;
     hsd_80394434("+--------------------------+");
-    sp->x4 = (lbl_8040BC3C.x14 + 19 + x_base) * 11 + 20;
-    sp->x8 = sp->x40 - 68;
-    sp->x50 = lbl_8040AB20;
+    hsd_804CF810.x4 = (lbl_8040BC3C.x14 + 19 + x_base) * 11 + 20;
+    hsd_804CF810.x8 = hsd_804CF810.x40 - 68;
+    hsd_804CF810.x50 = lbl_8040AB20;
+    b6 = hsd_804CF810.x0_b6;
     ch = *(&buf[19] + lbl_8040BC3C.x14);
-    if (sp->x0_b7) {
-        void* bitmap = (void*) ((u8*) sp->x4C + (ch & 0x7F) * 0x38);
-        s32 dst = (&sp->x24)[sp->x34];
-        hsd_803922FC(bitmap, sp->x4, sp->x8, (*(u8*) sp >> 6) & 1, dst,
-                     sp->x3C, sp->x40, sp->x44, sp->x50);
+    if (hsd_804CF810.x0_b7) {
+        void* bitmap = (void*) ((u8*) hsd_804CF810.x4C + (ch & 0x7F) * 0x38);
+        s32 dst = (&hsd_804CF810.x24)[hsd_804CF810.x34];
+        hsd_803922FC(bitmap, hsd_804CF810.x4, hsd_804CF810.x8, b6, dst,
+                     hsd_804CF810.x3C, hsd_804CF810.x40, hsd_804CF810.x44,
+                     hsd_804CF810.x50);
     } else {
-        void* bitmap = (void*) ((u8*) sp->x4C + (ch & 0x7F) * 0x38);
-        s32 dst = (&sp->x24)[sp->x34];
-        hsd_803921B8(bitmap, sp->x4, sp->x8, dst, sp->x3C, sp->x40, sp->x44,
-                     sp->x50);
+        void* bitmap = (void*) ((u8*) hsd_804CF810.x4C + (ch & 0x7F) * 0x38);
+        s32 dst = (&hsd_804CF810.x24)[hsd_804CF810.x34];
+        hsd_803921B8(bitmap, hsd_804CF810.x4, hsd_804CF810.x8, dst,
+                     hsd_804CF810.x3C, hsd_804CF810.x40, hsd_804CF810.x44,
+                     hsd_804CF810.x50);
     }
-    sp->x50 = saved;
+    hsd_804CF810.x50 = saved;
 }
 
-// @TODO: Currently 95.60% match - ps_remove_node inline scheduling, branch
-// offsets
 s32 hsd_80396A20(void* data)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
+    ExcptNode* node = data;
     u32 val = lbl_8040BC3C.x10;
     s32 shift = 24 - (lbl_8040BC3C.x14 * 4);
     u32 bit = 1;
@@ -3366,37 +3474,35 @@ s32 hsd_80396A20(void* data)
                 hsd_80394E8C(lbl_8040BC3C.x18);
                 return 1;
             }
-            /* fallthrough */
-        default:
-            bit <<= 1;
-            break;
+            goto default_case;
         case 0x400:
             lbl_8040BC3C.x10 = val & ~mask;
             return 1;
         case 0x200:
-            ps_remove_node(sp, data);
+            ps_remove_node(sp, node);
             return 1;
         case 0x1000: {
-            extern u8 lbl_8040BD74[];
-            ExcptNode* node = (ExcptNode*) lbl_8040BD74;
-            if (node != NULL) {
-                fn_80394DF4(node);
-                node->next = sp->xD0;
-                sp->xD0 = node;
-                if (node->callback != NULL) {
-                    node->callback(node);
+            extern ExcptNode lbl_8040BD74[];
+            if (lbl_8040BD74 != NULL) {
+                fn_80394DF4(lbl_8040BD74);
+                lbl_8040BD74->next = sp->xD0;
+                sp->xD0 = lbl_8040BD74;
+                if (lbl_8040BD74->callback != NULL) {
+                    lbl_8040BD74->callback(lbl_8040BD74);
                 }
                 sp->x0_b5 = 1;
             }
             return 1;
         }
+        default:
+        default_case:
+            bit <<= 1;
+            break;
         }
     }
     return 0;
 }
 
-// @TODO: Currently 96.49% match - ps_remove_node inline scheduling (addi/lwz
-// order)
 s32 hsd_80396C78(void* data)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
@@ -3441,7 +3547,16 @@ s32 hsd_80396C78(void* data)
     }
 }
 
-// @TODO: Currently 77.71% match - .bss.0 relocation affects register
+static char* lbl_804D62FC = "+- DBAT ------------------------+";
+static char* lbl_804D6300 = "+- IBAT ------------------------+";
+static char* lbl_804D6304 = "| %d BL xxxxxxxxxxx  %c%c %c%c%c%c %s |";
+static char* lbl_804D6308 = "|   BEPI %08X BRPN %08X |";
+static char* lbl_804D630C = "+-------------------------------+";
+static char lbl_804D6310[] = "N/A";
+static char lbl_804D6314[] = "R/W";
+static char lbl_804D6318[] = "R/O";
+
+// @TODO: Currently 86.10% match - .bss.0 relocation affects register
 // allocation
 void hsd_80396E40(s32 keycode)
 {
@@ -3470,16 +3585,13 @@ void hsd_80396E40(s32 keycode)
     s32 j;
     char ch;
 
-    PAD_STACK(8);
     saved = *px50;
     row = sp->x1C - 1;
     *px50 = lbl_8040AB00;
     *px4 = 0x106;
+    *px8 = (*px40 - 0x28) - (row + 1) * 14;
     row--;
-    *px8 = (*px40 - 0x28) - (row + 2) * 14;
-    if (keycode >= 0x220) {
-        hsd_80394434("+- DBAT ------------------------+");
-    } else if (keycode >= 0x218) {
+    if (keycode < 0x220 && keycode >= 0x218) {
         hsd_80394434("+- DBAT ------------------------+");
     } else {
         hsd_80394434("+- IBAT ------------------------+");
@@ -3492,14 +3604,14 @@ void hsd_80396E40(s32 keycode)
         bat_l = baselib_mfspr(spr_l);
         switch (bat_u & 2) {
         case 0:
-            perm = "N/A";
+            perm = lbl_804D6310;
             break;
         case 2:
-            perm = "R/W";
+            perm = lbl_804D6314;
             break;
         default:
         case 1:
-            perm = "R/O";
+            perm = lbl_804D6318;
             break;
         }
         if (bat_l & 8) {
@@ -3532,9 +3644,9 @@ void hsd_80396E40(s32 keycode)
         } else {
             var_s = 's';
         }
-        sprintf(buf, "| %ld BL xxxxxxxxxxx  %c%c %c%c%c%c %s |", i,
-                (int) var_s, (int) var_u, (int) var_w, (int) var_i,
-                (int) var_m, (int) var_g, perm);
+        sprintf(buf, "| %d BL xxxxxxxxxxx  %c%c %c%c%c%c %s |", i, (int) var_s,
+                (int) var_u, (int) var_w, (int) var_i, (int) var_m,
+                (int) var_g, perm);
         ptr = buf;
         for (j = 0; j < 11; j++) {
             if (bat_l & (1 << (0x1F - (j + 0x13)))) {
@@ -3549,7 +3661,7 @@ void hsd_80396E40(s32 keycode)
         *px8 = (*px40 - 0x28) - (row + 1) * 14;
         row--;
         hsd_80394434(buf);
-        sprintf(buf, "|   BEPI %08lX BRPN %08lX |", bat_l & 0xFFFC0000,
+        sprintf(buf, "|   BEPI %08X BRPN %08X |", bat_l & 0xFFFC0000,
                 bat_u & 0xFFFC0000);
         *px4 = 0x106;
         *px8 = (*px40 - 0x28) - (row + 1) * 14;
@@ -3593,7 +3705,26 @@ void fn_80397108(void) {}
 
 void fn_8039710C(void) {}
 
-// @TODO: Currently 80.88% match - .bss.0 relocation causes register shift
+static char* lbl_804D631C = "+- SPR --------------+";
+static char* lbl_804D6320 = "| NO   NAME    VAL   |";
+static char* lbl_804D6324 = "|%4d %s%s %08X|";
+static char* lbl_804D6328 = "+---- gekko only ----+";
+static char* lbl_804D632C = "|                    |";
+static char* lbl_804D6330 = "+--------------------+";
+#define SPR_BOX_TOP() lbl_804D631C
+#define SPR_BOX_HEADER() lbl_804D6320
+#define SPR_VALUE_FMT() lbl_804D6324
+#define SPR_GEKKO_ONLY() lbl_804D6328
+#define SPR_BLANK_ROW() lbl_804D632C
+#define SPR_BOX_BOTTOM() lbl_804D6330
+static char lbl_804D6334[] = "     ";
+static char lbl_804D633C[] = "    ";
+static char lbl_804D6344[] = "   ";
+static char lbl_804D6348[] = "  ";
+static char lbl_804D634C[] = " ";
+static char lbl_804D6350[8] = "";
+
+// @TODO: Currently 85.84% match - .bss.0 relocation causes register shift
 void hsd_80397110(void)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
@@ -3605,8 +3736,8 @@ void hsd_80397110(void)
     s32* px8 = &sp->x8;
     char buf[32];
     void* saved;
-    s32 row;
     u32 i;
+    s32 row;
     s32 offset;
     u32* spr_entry;
     char* padding;
@@ -3618,11 +3749,11 @@ void hsd_80397110(void)
     *px4 = 20;
     *px8 = (*px40 - 0x28) - (row + 1) * 14;
     row--;
-    hsd_80394434("+- SPR --------------+");
+    hsd_80394434(SPR_BOX_TOP());
     *px4 = 20;
     *px8 = (*px40 - 0x28) - (row + 1) * 14;
     row--;
-    hsd_80394434("| NO   NAME    VAL   |");
+    hsd_80394434(SPR_BOX_HEADER());
     {
         u32* bec4 = (u32*) lbl_8040BEC4;
         i = 0;
@@ -3645,30 +3776,30 @@ void hsd_80397110(void)
             *px8 = (*px40 - 0x28) - (row + 1) * 14;
             row--;
             if (spr_entry[0] == 0) {
-                hsd_80394434("+---- gekko only ----+");
+                hsd_80394434(SPR_GEKKO_ONLY());
             } else {
                 s32 name_len = strlen((char*) spr_entry[1]);
                 switch (name_len) {
                 case 1:
-                    padding = "     ";
+                    padding = lbl_804D6334;
                     break;
                 case 2:
-                    padding = "    ";
+                    padding = lbl_804D633C;
                     break;
                 case 3:
-                    padding = "   ";
+                    padding = lbl_804D6344;
                     break;
                 case 4:
-                    padding = "  ";
+                    padding = lbl_804D6348;
                     break;
                 case 5:
-                    padding = " ";
+                    padding = lbl_804D634C;
                     break;
                 default:
-                    padding = "";
+                    padding = lbl_804D6350;
                     break;
                 }
-                sprintf(buf, "|%4ld %s%s %08X|", spr_entry[0],
+                sprintf(buf, SPR_VALUE_FMT(), spr_entry[0],
                         (char*) spr_entry[1], padding,
                         baselib_mfspr(spr_entry[0]));
                 hsd_80394434(buf);
@@ -3682,16 +3813,14 @@ void hsd_80397110(void)
         *px4 = 20;
         *px8 = (*px40 - 0x28) - (row + 1) * 14;
         row--;
-        hsd_80394434("|                    |");
+        hsd_80394434(SPR_BLANK_ROW());
     }
     *px4 = 20;
     *px8 = (*px40 - 0x28) - (row + 1) * 14;
-    hsd_80394434("+--------------------+");
+    hsd_80394434(SPR_BOX_BOTTOM());
     *px50 = saved;
 }
 
-// @TODO: Currently 98.13% match - ps_remove_node inline scheduling (addi/lwz
-// order)
 s32 fn_80397374(void* data)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
@@ -3710,10 +3839,13 @@ s32 fn_80397374(void* data)
             } else {
                 u32 max = sp->x1C - 4;
                 sel = max;
-                spr_off = 0x44 - max;
+                spr_off = 0x44;
+                spr_off = spr_off - max;
             }
             *(u32*) (lbl_8040BEC4 + 0x10) = spr_off;
             *(u32*) (lbl_8040BEC4 + 0x14) = sel;
+            if (sp->x1C) {
+            }
             return 1;
         case 0x4:
             if (sel < (u32) (sp->x1C - 4)) {
@@ -3745,7 +3877,6 @@ s32 fn_80397374(void* data)
     return 0;
 }
 
-// @TODO: Currently 96.89% match - lwz directly to non-volatile + dead beq
 void hsd_80397520(void* node_ptr)
 {
     PSNode* child1;
@@ -3755,10 +3886,8 @@ void hsd_80397520(void* node_ptr)
     if (node == NULL) {
         return;
     }
-    child1 = node->child;
-    if (child1 != NULL) {
-        child2 = child1->child;
-        if (child2 != NULL) {
+    if ((child1 = node->child) != NULL && child1 != NULL) {
+        if ((child2 = child1->child) != NULL && child2 != NULL) {
             if (child2->child != NULL) {
                 hsd_80397520(child2->child);
             }
@@ -3775,8 +3904,7 @@ void hsd_80397520(void* node_ptr)
     }
 }
 
-// @TODO: Currently 72.43% match - ASM bytes identical, capped by .bss.0
-// relocation symbol mismatch
+// @TODO: Currently 94.61% match - register allocation differences remain
 void hsd_803975D4(void)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
@@ -3798,64 +3926,94 @@ void hsd_803975D4(void)
     memcpy((u8*) cur_pads + 0x30, cur_pads, 0x30);
     PADRead(cur_pads);
     PADClamp(cur_pads);
-    if ((s8) cur_pads[0].err == -1) {
-        reset_mask = 0x80000000 >> 0;
-    }
-    if ((s8) cur_pads[1].err == -1) {
-        reset_mask |= 0x80000000 >> 1;
-    }
-    if ((s8) cur_pads[2].err == -1) {
-        reset_mask |= 0x80000000 >> 2;
-    }
-    if ((s8) cur_pads[3].err == -1) {
-        reset_mask |= 0x80000000 >> 3;
+    for (port = 0; port < 4; port++) {
+        if ((s8) sp->_pad4[0xA + port * 0xC] == -1) {
+            reset_mask |= 0x80000000 >> port;
+        }
     }
     if (reset_mask != 0) {
         PADReset(reset_mask);
     }
     port = 0;
-    if (((s8) ((PADStatus*) ((u8*) sp + 0x84))[0].err != 0 ||
-         (s8) cur_pads[0].err != 0) &&
-        (port = 1, ((s8) ((PADStatus*) ((u8*) sp + 0x84))[1].err != 0 ||
-                    (s8) cur_pads[1].err != 0)) &&
-        (port = 2, ((s8) ((PADStatus*) ((u8*) sp + 0x84))[2].err != 0 ||
-                    (s8) cur_pads[2].err != 0)) &&
-        (port = 3, ((s8) ((PADStatus*) ((u8*) sp + 0x84))[3].err != 0 ||
-                    (s8) cur_pads[3].err != 0)))
-    {
-        port = 4;
+    if ((s8) sp->_pad4[0x3A] != 0) {
+        goto port1;
     }
+    if ((s8) sp->_pad4[0xA] == 0) {
+        goto port_done;
+    }
+port1:
+    port = 1;
+    if ((s8) sp->_pad4[0x46] != 0) {
+        goto port2;
+    }
+    if ((s8) sp->_pad4[0x16] == 0) {
+        goto port_done;
+    }
+port2:
+    port = 2;
+    if ((s8) sp->_pad4[0x52] != 0) {
+        goto port3;
+    }
+    if ((s8) sp->_pad4[0x22] == 0) {
+        goto port_done;
+    }
+port3:
+    port = 3;
+    if ((s8) sp->_pad4[0x5E] != 0) {
+        goto port4;
+    }
+    if ((s8) sp->_pad4[0x2E] == 0) {
+        goto port_done;
+    }
+port4:
+    port = 4;
+port_done:
     if (port == 4) {
         sp->xBC = 0;
         sp->xC0 = 0;
         return;
     }
     *(s32*) ((u8*) sp + 0xB4) = port;
-    buttons = cur_pads[*(s32*) ((u8*) sp + 0xB4)].button;
-    sp->xC0 = buttons;
+    buttons =
+        ((PADStatus*) ((u8*) sp + 0x54))[*(s32*) ((u8*) sp + 0xB4)].button;
     new_press =
-        buttons &
-        (((PADStatus*) ((u8*) sp + 0x84))[*(s32*) ((u8*) sp + 0xB4)].button ^
-         buttons);
+        ((PADStatus*) ((u8*) sp + 0x84))[*(s32*) ((u8*) sp + 0xB4)].button ^
+        buttons;
+    sp->xC0 = buttons;
+    new_press = buttons & new_press;
     if (new_press != 0) {
         *(s32*) ((u8*) sp + 0xB8) = 0;
-    } else if (cur_pads[*(s32*) ((u8*) sp + 0xB4)].button != 0) {
+    } else if (((PADStatus*) ((u8*) sp + 0x54))[*(s32*) ((u8*) sp + 0xB4)]
+                   .button != 0)
+    {
         *(s32*) ((u8*) sp + 0xB8) += 1;
         if (*(s32*) ((u8*) sp + 0xB8) > 30) {
-            new_press = cur_pads[*(s32*) ((u8*) sp + 0xB4)].button;
+            new_press =
+                ((PADStatus*) ((u8*) sp + 0x54))[*(s32*) ((u8*) sp + 0xB4)]
+                    .button;
         }
     }
     sp->xBC = new_press;
 }
 
-// @TODO: Currently 81.94% match - asm bytes identical, relocation differences
+// @TODO: Currently 98.70% match - register allocation and relocation
+// differences
+static inline PSNode* ps_node_child(PSNode* node)
+{
+    return node->child;
+}
+
 void* fn_80397814(void* arg)
 {
+    u8* base = lbl_8040AB00;
+    void* ctx;
     struct ParticleScreenState* sp = &hsd_804CF810;
-    void* ctx = arg;
     u32 retrace;
-    u32* keybuf = &sp->xC0;
+    u32 next_retrace;
+    u32* keybuf;
+    PAD_STACK(160);
 
+    ctx = arg;
     hsd_80393D2C(0);
     hsd_80394314();
     PADSetSamplingRate(0);
@@ -3863,122 +4021,133 @@ void* fn_80397814(void* arg)
     /* Wait for first retrace */
     retrace = VIGetRetraceCount();
     do {
-    } while (VIGetRetraceCount() == retrace);
-
-    retrace = VIGetRetraceCount();
+        next_retrace = VIGetRetraceCount();
+    } while (next_retrace == retrace);
+    retrace = next_retrace;
+    keybuf = &sp->xC0;
     do {
         hsd_803975D4();
         do {
-        } while (VIGetRetraceCount() == retrace);
-        retrace = VIGetRetraceCount();
+            next_retrace = VIGetRetraceCount();
+        } while (next_retrace == retrace);
+        retrace = next_retrace;
     } while (*keybuf != 0);
 
     retrace = VIGetRetraceCount();
     do {
-    } while (VIGetRetraceCount() == retrace);
-
-    retrace = VIGetRetraceCount();
+        next_retrace = VIGetRetraceCount();
+    } while (next_retrace == retrace);
+    retrace = next_retrace;
     do {
         hsd_803975D4();
         do {
-        } while (VIGetRetraceCount() == retrace);
-        retrace = VIGetRetraceCount();
+            next_retrace = VIGetRetraceCount();
+        } while (next_retrace == retrace);
+        retrace = next_retrace;
     } while (*keybuf != 0x70);
 
     retrace = VIGetRetraceCount();
     do {
-    } while (VIGetRetraceCount() == retrace);
-
-    retrace = VIGetRetraceCount();
+        next_retrace = VIGetRetraceCount();
+    } while (next_retrace == retrace);
+    retrace = next_retrace;
     do {
         hsd_803975D4();
         do {
-        } while (VIGetRetraceCount() == retrace);
-        retrace = VIGetRetraceCount();
+            next_retrace = VIGetRetraceCount();
+        } while (next_retrace == retrace);
+        retrace = next_retrace;
     } while (*keybuf != 0);
 
     retrace = VIGetRetraceCount();
     do {
-    } while (VIGetRetraceCount() == retrace);
-
-    retrace = VIGetRetraceCount();
+        next_retrace = VIGetRetraceCount();
+    } while (next_retrace == retrace);
+    retrace = next_retrace;
     do {
         hsd_803975D4();
         do {
-        } while (VIGetRetraceCount() == retrace);
-        retrace = VIGetRetraceCount();
+            next_retrace = VIGetRetraceCount();
+        } while (next_retrace == retrace);
+        retrace = next_retrace;
     } while (*keybuf != 0x808);
 
     retrace = VIGetRetraceCount();
     do {
-    } while (VIGetRetraceCount() == retrace);
-
-    retrace = VIGetRetraceCount();
+        next_retrace = VIGetRetraceCount();
+    } while (next_retrace == retrace);
+    retrace = next_retrace;
     do {
         hsd_803975D4();
         do {
-        } while (VIGetRetraceCount() == retrace);
-        retrace = VIGetRetraceCount();
+            next_retrace = VIGetRetraceCount();
+        } while (next_retrace == retrace);
+        retrace = next_retrace;
     } while (*keybuf != 0);
 
     retrace = VIGetRetraceCount();
     do {
-    } while (VIGetRetraceCount() == retrace);
-
-    retrace = VIGetRetraceCount();
+        next_retrace = VIGetRetraceCount();
+    } while (next_retrace == retrace);
+    retrace = next_retrace;
     do {
         hsd_803975D4();
         do {
-        } while (VIGetRetraceCount() == retrace);
-        retrace = VIGetRetraceCount();
+            next_retrace = VIGetRetraceCount();
+        } while (next_retrace == retrace);
+        retrace = next_retrace;
     } while (*keybuf != 0x104);
 
     retrace = VIGetRetraceCount();
     do {
-    } while (VIGetRetraceCount() == retrace);
-
-    retrace = VIGetRetraceCount();
+        next_retrace = VIGetRetraceCount();
+    } while (next_retrace == retrace);
+    retrace = next_retrace;
     do {
         hsd_803975D4();
         do {
-        } while (VIGetRetraceCount() == retrace);
-        retrace = VIGetRetraceCount();
+            next_retrace = VIGetRetraceCount();
+        } while (next_retrace == retrace);
+        retrace = next_retrace;
     } while (*keybuf != 0);
 
     retrace = VIGetRetraceCount();
     do {
-    } while (VIGetRetraceCount() == retrace);
-
-    retrace = VIGetRetraceCount();
+        next_retrace = VIGetRetraceCount();
+    } while (next_retrace == retrace);
+    retrace = next_retrace;
     do {
         hsd_803975D4();
         do {
-        } while (VIGetRetraceCount() == retrace);
-        retrace = VIGetRetraceCount();
+            next_retrace = VIGetRetraceCount();
+        } while (next_retrace == retrace);
+        retrace = next_retrace;
     } while (*keybuf != 0x201);
 
     retrace = VIGetRetraceCount();
     do {
-    } while (VIGetRetraceCount() == retrace);
-
-    retrace = VIGetRetraceCount();
+        next_retrace = VIGetRetraceCount();
+    } while (next_retrace == retrace);
+    retrace = next_retrace;
     do {
         hsd_803975D4();
         do {
-        } while (VIGetRetraceCount() == retrace);
-        retrace = VIGetRetraceCount();
+            next_retrace = VIGetRetraceCount();
+        } while (next_retrace == retrace);
+        retrace = next_retrace;
     } while (*keybuf != 0);
 
     retrace = VIGetRetraceCount();
     do {
-    } while (VIGetRetraceCount() == retrace);
-
-    retrace = VIGetRetraceCount();
+        next_retrace = VIGetRetraceCount();
+    } while (next_retrace == retrace);
+    retrace = next_retrace;
     do {
         hsd_803975D4();
         do {
-        } while (VIGetRetraceCount() == retrace);
-        retrace = VIGetRetraceCount();
+            next_retrace = VIGetRetraceCount();
+        } while (next_retrace == retrace);
+        retrace = next_retrace;
     } while (*keybuf != 0x402);
 
     /* Configure video */
@@ -3989,7 +4158,7 @@ void* fn_80397814(void* arg)
     /* Clear display list */
     keybuf = (u32*) &sp->xD0;
     {
-        void* cur = *(void**) keybuf;
+        void* cur = sp->xD0;
         while (cur != NULL) {
             void* next = *(void**) cur;
             *(void**) cur = NULL;
@@ -3999,14 +4168,12 @@ void* fn_80397814(void* arg)
     }
 
     /* Link exception node */
-    {
-        ExcptNode* node = (ExcptNode*) &lbl_8040B8AC[0x18];
-        if (node != NULL) {
-            node->next = NULL;
-            *(void**) keybuf = node;
-            if (node->callback != NULL) {
-                node->callback(node);
-            }
+    if (base + 0xDC4 != NULL) {
+        ((ExcptNode*) (base + 0xDC4))->next = NULL;
+        *(void**) keybuf = base + 0xDC4;
+        if (((ExcptNode*) (base + 0xDC4))->callback != NULL) {
+            ((ExcptNode*) (base + 0xDC4))
+                ->callback((ExcptNode*) (base + 0xDC4));
         }
     }
 
@@ -4019,43 +4186,46 @@ void* fn_80397814(void* arg)
         s32* fb_ptr = (s32*) &sp->x40;
         s32* fb2_ptr = (s32*) &sp->x44;
         u32 retrace2;
+        u32 next_retrace2;
         s32* col_ptr = &sp->x34;
-        s32* x18_ptr = &sp->x18;
         s32* x14_ptr = &sp->x14;
+        s32* x18_ptr = &sp->x18;
         s32* x20_ptr = &sp->x20;
         s32* nrows_ptr = &sp->x1C;
         s32* fb_array = &sp->x24;
         s32* x3C_ptr = &sp->x3C;
-        s32* c8_ptr = &sp->xC8;
-        s32* cc_ptr = &sp->xCC;
-        s32* size_ptr = &sp->x48;
+        s32* c8_ptr;
+        s32* cc_ptr;
+        s32* size_ptr;
         void* lbl_ptr;
         s32 fb_idx;
-        void* node;
+        PSNode* node;
 
         hsd_80394544(*x18_ptr, *x14_ptr, *x20_ptr, *nrows_ptr, 20,
                      *fb_ptr - 40, fb_array[*col_ptr], *x3C_ptr, *fb_ptr,
                      *fb2_ptr, (s32) lbl_804088B8, NULL);
 
-        *c8_ptr = 0;
+        sp->xC8 = 0;
+        c8_ptr = &sp->xC8;
+        cc_ptr = &sp->xCC;
         *cc_ptr = *nrows_ptr - 1;
 
         /* Process display node */
-        node = *(void**) keybuf;
+        {
+            PSNode* tmp = *(PSNode**) keybuf;
+            node = tmp;
+        }
         if (node != NULL) {
-            void* child = *(void**) node;
-            if (child != NULL) {
-                hsd_80397520(child);
+            if (node->child != NULL) {
+                hsd_80397520(node->child);
             }
-            {
-                void (*cb)(void*) = *(void (**)(void*))((u8*) node + 8);
-                if (cb != NULL) {
-                    cb(node);
-                }
+            if (node->callback != NULL) {
+                node->callback(node);
             }
         }
 
         /* Flush and display first frame */
+        size_ptr = &sp->x48;
         fb_idx = *col_ptr;
         DCFlushRange((void*) fb_array[fb_idx], *size_ptr);
         fb_idx = *col_ptr;
@@ -4064,8 +4234,9 @@ void* fn_80397814(void* arg)
 
         retrace2 = VIGetRetraceCount();
         do {
-        } while (VIGetRetraceCount() == retrace2);
-        retrace2 = VIGetRetraceCount();
+            next_retrace2 = VIGetRetraceCount();
+        } while (next_retrace2 == retrace2);
+        retrace2 = next_retrace2;
         lbl_ptr = lbl_804088B8;
 
         /* Main rendering loop */
@@ -4074,30 +4245,28 @@ void* fn_80397814(void* arg)
             s32 result;
 
             hsd_803975D4();
-            {
-                u8 flags = *(u8*) sp;
-                flags &= ~(1 << 5);
-                *(u8*) sp = flags;
-            }
+        restart_walk:
+            sp->x0_b5 = 0;
 
             /* Walk display callback list */
             disp_node = *(void**) keybuf;
             result = 0;
-            while (disp_node != NULL && !(*(u8*) sp & (1 << 5))) {
-                void* (*render_cb)(void*) =
-                    *(void* (**) (void*) )((u8*) disp_node + 0xC);
-                if (render_cb != NULL) {
-                    result = (s32) render_cb(disp_node);
+            while (disp_node != NULL && !sp->x0_b5) {
+                if (*(void* (**) (void*) )((u8*) disp_node + 0xC) != NULL) {
+                    result = (s32) (*(void* (**) (void*) )((u8*) disp_node +
+                                                           0xC))(disp_node);
                     if (result != 0) {
-                        break;
+                        goto walk_done;
                     }
                 }
                 disp_node = *(void**) disp_node;
             }
 
-            if (*(u8*) sp & (1 << 5)) {
-                result = 0;
+            if (sp->x0_b5) {
+                goto restart_walk;
             }
+            result = 0;
+        walk_done:
 
             if (result != 0) {
                 /* Advance frame buffer index */
@@ -4109,43 +4278,39 @@ void* fn_80397814(void* arg)
                 hsd_80394668();
 
                 hsd_80394544(*x18_ptr, *x14_ptr, *x20_ptr, *nrows_ptr, 20,
-                             *fb_ptr - 40, fb_array[*col_ptr], *x3C_ptr,
+                             *fb_ptr - 40, (&sp->x24)[*col_ptr], *x3C_ptr,
                              *fb_ptr, *fb2_ptr, (s32) lbl_ptr, NULL);
 
                 *c8_ptr = 0;
                 *cc_ptr = *nrows_ptr - 1;
 
                 /* Process display node */
-                node = *(void**) keybuf;
+                node = *(PSNode**) keybuf;
                 if (node != NULL) {
-                    void* child = *(void**) node;
-                    if (child != NULL) {
-                        hsd_80397520(child);
+                    if (node->child != NULL) {
+                        hsd_80397520(ps_node_child(node));
                     }
-                    {
-                        void (*cb)(void*) =
-                            *(void (**)(void*))((u8*) node + 8);
-                        if (cb != NULL) {
-                            cb(node);
-                        }
+                    if (node->callback != NULL) {
+                        node->callback(node);
                     }
                 }
 
                 /* Flush and display */
                 fb_idx = *col_ptr;
-                DCFlushRange((void*) fb_array[fb_idx], *size_ptr);
+                DCFlushRange((void*) (&sp->x24)[fb_idx], *size_ptr);
                 fb_idx = *col_ptr;
-                VISetNextFrameBuffer((void*) fb_array[fb_idx]);
+                VISetNextFrameBuffer((void*) (&sp->x24)[fb_idx]);
                 VIFlush();
             }
 
             do {
-            } while (VIGetRetraceCount() == retrace2);
-            retrace2 = VIGetRetraceCount();
+                next_retrace2 = VIGetRetraceCount();
+            } while (next_retrace2 == retrace2);
+            retrace2 = next_retrace2;
         }
     }
 
-    OSPanic("debugconsole_main.c", 2228, "debug thread finished.");
+    OSPanic((char*) base + 0x13E0, 2228, (char*) base + 0x13F4);
 
     return NULL;
 }
@@ -4512,65 +4677,64 @@ void psInitDataBankLoad(int bank, int* cmdBank, int* texBank, u32* ref,
 void psInitDataBankLocate(HSD_Archive* cmdBank, HSD_Archive* texBank,
                           int* formBank)
 {
-    s32 version;
     s32 num;
     s32 num2;
     s32* ptr;
     s32* base;
     s32 i;
-    s32 j;
+    s32 version;
 
     version = *(u16*) cmdBank;
     if (version < 0x40) {
-        if (version != 0) {
-            goto done_cmd;
+        if (version == 0) {
+            goto version0;
         }
-        /* Version 0: relocate pointer table at cmdBank+8 */
-        num = ((s32*) cmdBank)[1];
-        base = (s32*) ((u8*) cmdBank + 8);
-        num2 = num;
-        i = 0;
-        if (num <= 0) {
-            goto done_cmd;
-        }
+        goto done_cmd;
+    }
+    if (version >= 0x44) {
+        goto done_cmd;
+    }
+    goto version40;
+
+version0:
+    num2 = ((s32*) cmdBank)[1];
+    base = (s32*) ((u8*) cmdBank + 8);
+    num = 0;
+    if (num2 > 0) {
         for (i = 0; i < num2; i++) {
             ((s32*) cmdBank)[i + 2] += (s32) cmdBank;
         }
-    } else if (version >= 0x44) {
-        goto done_cmd;
-    } else {
-        /* Version 0x40-0x43 */
-        s32 offset_count = ((s32*) cmdBank)[1];
-        s32 num_entries = ((s32*) cmdBank)[2];
-        s32* entry = (s32*) ((u8*) cmdBank + 12);
-        s32* cursor = (s32*) cmdBank;
-        num2 = num_entries + offset_count;
-        base = entry - offset_count;
-        i = 0;
+    }
+    goto done_cmd;
 
-        while (i < ((s32*) cmdBank)[2]) {
-            if (cursor[3] != 0) {
-                cursor[3] += (s32) cmdBank;
-            }
-            cursor++;
-            i++;
+version40:
+    num = ((s32*) cmdBank)[1];
+    base = (s32*) ((u8*) cmdBank + 12) - num;
+    num2 = ((s32*) cmdBank)[2] + num;
+    ptr = (s32*) cmdBank;
+    i = 0;
+    while (i < ((s32*) cmdBank)[2]) {
+        if (ptr[3] != 0) {
+            ptr[3] += (s32) cmdBank;
         }
-        num = offset_count;
+        ptr++;
+        i++;
     }
 
 done_cmd:
     /* Phase 2: Fix cmdList kind bits */
     {
         s32 count = num2 - num;
-        s32* p = base + num;
+        ptr = base + num;
         if (num < num2) {
-            for (j = 0; j < count; j++) {
-                s32* cmd = (s32*) p[j];
+            for (i = 0; i < count; i++) {
+                s32* cmd = (s32*) ptr[0];
                 if (cmd != NULL) {
-                    cmd[2] = cmd[2] & 0xF000000F;
-                    cmd = (s32*) p[j];
+                    cmd[2] = cmd[2] & 0xF1FFFFFF;
+                    cmd = (s32*) ptr[0];
                     cmd[2] = cmd[2] | 0x08000000;
                 }
+                ptr++;
             }
         }
     }
@@ -4583,12 +4747,13 @@ done_cmd:
         s32 k;
 
         if (num_groups >= 1) {
-            for (k = 0; k < num_groups; k++) {
+            k = num_groups;
+            do {
                 if (cur[0] != 0) {
                     cur[0] += (s32) texBank;
                 }
                 cur++;
-            }
+            } while (--k != 0);
         }
 
         cur = groups;
@@ -4603,12 +4768,18 @@ done_cmd:
                 {
                     s32 ti;
                     s32 ofs;
-                    for (ti = 0, ofs = 0; (u32) ti < tg->num; ti++, ofs += 4) {
-                        s32* entry_ptr = (s32*) ((u8*) tg + 24 + ofs);
-                        if (*entry_ptr != 0) {
-                            *entry_ptr += (s32) texBank;
+                    for (ti = 0, ofs = 0;
+                         (u32) ti < ((HSD_PSTexGroup*) cur[0])->num;
+                         ti++, ofs += 4)
+                    {
+                        u32* entry_ptr =
+                            (u32*) ((u8*) ((HSD_PSTexGroup*) cur[0]) + 24 +
+                                    ofs);
+                        if (*entry_ptr != 0U) {
+                            *entry_ptr += (u32) texBank;
                         }
                     }
+                    tg = (HSD_PSTexGroup*) cur[0];
                 }
 
                 /* Check format for palette relocation */
@@ -4623,22 +4794,24 @@ done_cmd:
                 if (tg->palflag & 1) {
                     /* Single palette pointer */
                     s32 ofs = tg->num * 4 + 24;
-                    s32* pal_ptr = (s32*) ((u8*) tg + ofs);
-                    if (*pal_ptr == 0) {
+                    if (*(u32*) ((u8*) tg + ofs) == 0U) {
                         goto next_group;
                     }
-                    *pal_ptr += (s32) texBank;
+                    *(u32*) ((u8*) tg + ofs) += (u32) texBank;
                 } else if (tg->palnum != 0) {
                     /* Multiple palette pointers (palnum > 0) */
                     s32 ti;
                     s32 ofs;
                     ti = (s32) tg->num;
                     ofs = ti * 4;
-                    for (; (u32) ti < tg->num + tg->palnum; ti++, ofs += 4) {
+                    for (; (u32) ti < ((HSD_PSTexGroup*) cur[0])->num +
+                                          ((HSD_PSTexGroup*) cur[0])->palnum;
+                         ti++, ofs += 4)
+                    {
                         HSD_PSTexGroup* tg2 = (HSD_PSTexGroup*) cur[0];
-                        s32* entry_ptr = (s32*) ((u8*) tg2 + 24 + ofs);
-                        if (*entry_ptr != 0) {
-                            *entry_ptr += (s32) texBank;
+                        u32* entry_ptr = (u32*) ((u8*) tg2 + 24 + ofs);
+                        if (*entry_ptr != 0U) {
+                            *entry_ptr += (u32) texBank;
                         }
                     }
                 } else {
@@ -4647,11 +4820,13 @@ done_cmd:
                     s32 ofs;
                     ti = (s32) tg->num;
                     ofs = ti * 4;
-                    for (; (u32) ti < tg->num * 2; ti++, ofs += 4) {
+                    for (; (u32) ti < ((HSD_PSTexGroup*) cur[0])->num * 2;
+                         ti++, ofs += 4)
+                    {
                         HSD_PSTexGroup* tg2 = (HSD_PSTexGroup*) cur[0];
-                        s32* entry_ptr = (s32*) ((u8*) tg2 + 24 + ofs);
-                        if (*entry_ptr != 0) {
-                            *entry_ptr += (s32) texBank;
+                        u32* entry_ptr = (u32*) ((u8*) tg2 + 24 + ofs);
+                        if (*entry_ptr != 0U) {
+                            *entry_ptr += (u32) texBank;
                         }
                     }
                 }
@@ -4660,38 +4835,33 @@ done_cmd:
                 cur++;
             }
         }
-    }
 
-    /* Phase 4: formBank relocation */
-    if (formBank == NULL) {
-        return;
-    }
-    {
-        s32 num_groups = formBank[0];
-        s32* groups = (s32*) formBank + 1;
-
-        if (num_groups < 1) {
+        /* Phase 4: formBank relocation */
+        if (formBank == NULL) {
             return;
         }
+        if (num_groups >= 1) {
+            s32* groups = (s32*) formBank + 1;
 
-        for (i = 0; i < num_groups; i++) {
-            if (groups[0] == 0) {
-                goto next_form;
-            }
-            groups[0] += (s32) formBank;
-            {
-                HSD_PSFormGroup* fg = (HSD_PSFormGroup*) groups[0];
-                s32* p2 = (s32*) fg;
-                s32 fi;
-                for (fi = 0; (u32) fi < fg->num; fi++) {
-                    if (p2[1] != 0) {
-                        p2[1] += (s32) formBank;
-                    }
-                    p2++;
+            for (i = 0; i < num_groups; i++) {
+                if (groups[0] == 0) {
+                    goto next_form;
                 }
+                groups[0] += (s32) formBank;
+                {
+                    HSD_PSFormGroup* fg = (HSD_PSFormGroup*) groups[0];
+                    u32* p2 = (u32*) fg;
+                    s32 fi;
+                    for (fi = 0; (u32) fi < fg->num; fi++) {
+                        if (p2[1] != 0U) {
+                            p2[1] += (u32) formBank;
+                        }
+                        p2++;
+                    }
+                }
+            next_form:
+                groups++;
             }
-        next_form:
-            groups++;
         }
     }
 }
@@ -4709,126 +4879,50 @@ void psInitDataBank(int bank, int* cmdBank, int* texBank, u32* ref,
 // @TODO: Currently 62.67% match - ASM bytes identical, relocation differences
 void hsd_80398A08(u32 unused)
 {
-    s32* base = (s32*) hsd_804D08E8;
-    s32* r4;
-    s32* r5;
-    s32* r6;
-    s32* r7;
-    s32* r8;
-    s32* r9;
+    extern u16 hsd_804D78DC;
     s32 i;
 
-    HSD_ObjAllocInit((HSD_ObjAllocData*) ((u8*) base + 0x678), 0x98, 4);
+    HSD_ObjAllocInit(&hsd_804D0F60.alloc_data, 0x98, 4);
     PAD_STACK(24);
 
     i = 0;
-    base[0x20 / 4] = i;
-    r4 = base + 0x470 / 4;
-    base[0x24 / 4] = i;
-    r5 = base + 0x164 / 4;
-    base[0x28 / 4] = i;
-    r6 = base + 0x574 / 4;
-    r7 = base + 0x268 / 4;
-    base[0x2C / 4] = i;
-    r8 = base + 0x36C / 4;
-    r9 = base + 0x60 / 4;
-    base[0x30 / 4] = i;
-    base[0x34 / 4] = i;
-    base[0x38 / 4] = i;
-    base[0x3C / 4] = i;
-    base[0x40 / 4] = i;
-    base[0x44 / 4] = i;
-    base[0x48 / 4] = i;
-    base[0x4C / 4] = i;
-    base[0x50 / 4] = i;
-    base[0x54 / 4] = i;
-    base[0x58 / 4] = i;
-    base[0x5C / 4] = i;
+    hsd_804D0908[0] = NULL;
+    hsd_804D0908[1] = NULL;
+    hsd_804D0908[2] = NULL;
+    hsd_804D0908[3] = NULL;
+    hsd_804D0908[4] = NULL;
+    hsd_804D0908[5] = NULL;
+    hsd_804D0908[6] = NULL;
+    hsd_804D0908[7] = NULL;
+    hsd_804D0908[8] = NULL;
+    hsd_804D0908[9] = NULL;
+    hsd_804D0908[10] = NULL;
+    hsd_804D0908[11] = NULL;
+    hsd_804D0908[12] = NULL;
+    hsd_804D0908[13] = NULL;
+    hsd_804D0908[14] = NULL;
+    hsd_804D0908[15] = NULL;
     hsd_804D78E2 = i;
-    numPeakParticles = i;
-    for (; i < 64; i += 8) {
-        r4[0] = 0;
-        r5[0] = 0;
-        r6[0] = 0;
-        r7[0] = 0;
-        r8[0] = 0;
-        r9[0] = 0;
-        r4[1] = 0;
-        r5[1] = 0;
-        r6[1] = 0;
-        r7[1] = 0;
-        r8[1] = 0;
-        r9[1] = 0;
-        r4[2] = 0;
-        r5[2] = 0;
-        r6[2] = 0;
-        r7[2] = 0;
-        r8[2] = 0;
-        r9[2] = 0;
-        r4[3] = 0;
-        r5[3] = 0;
-        r6[3] = 0;
-        r7[3] = 0;
-        r8[3] = 0;
-        r9[3] = 0;
-        r4[4] = 0;
-        r5[4] = 0;
-        r6[4] = 0;
-        r7[4] = 0;
-        r8[4] = 0;
-        r9[4] = 0;
-        r4[5] = 0;
-        r5[5] = 0;
-        r6[5] = 0;
-        r7[5] = 0;
-        r8[5] = 0;
-        r9[5] = 0;
-        r4[6] = 0;
-        r5[6] = 0;
-        r6[6] = 0;
-        r7[6] = 0;
-        r8[6] = 0;
-        r9[6] = 0;
-        r4[7] = 0;
-        r4 += 8;
-        r5[7] = 0;
-        r5 += 8;
-        r6[7] = 0;
-        r6 += 8;
-        r7[7] = 0;
-        r7 += 8;
-        r8[7] = 0;
-        r8 += 8;
-        r9[7] = 0;
-        r9 += 8;
-    }
-    r7 = base + i + 0x60 / 4;
-    {
-        s32 count = 0x41 - i;
-        if (i < 0x41) {
-            do {
-                r7[0x410 / 4] = 0;
-                r7[0x104 / 4] = 0;
-                r7[0x514 / 4] = 0;
-                r7[0x208 / 4] = 0;
-                r7[0x30C / 4] = 0;
-                r7[0] = 0;
-                r7++;
-            } while (--count != 0);
-        }
+    hsd_804D78DC = i;
+    for (; i < 0x41; i++) {
+        psNumCmdList[i] = 0;
+        psFormGroupArray[i] = NULL;
+        ptclref_804D0E5C[i] = NULL;
+        psTexGroupArray[i] = NULL;
+        psCmdListArray[i] = NULL;
+        hsd_804D0908[0x10 + i] = NULL;
     }
     hsd_804D78D4 = 0;
-    base[0] = 0;
-    base[1] = 0;
-    base[2] = 0;
-    base[3] = 0;
-    base[4] = 0;
-    base[5] = 0;
-    base[6] = 0;
-    base[7] = 0;
+    hsd_804D08E8[0] = NULL;
+    hsd_804D08E8[1] = NULL;
+    hsd_804D08E8[2] = NULL;
+    hsd_804D08E8[3] = NULL;
+    hsd_804D08E8[4] = NULL;
+    hsd_804D08E8[5] = NULL;
+    hsd_804D08E8[6] = NULL;
+    hsd_804D08E8[7] = NULL;
 }
 
-// @TODO: Currently 99.63% match - asm bytes identical, relocation differences
 HSD_Particle* hsd_80398C04(HSD_Particle** head, int linkNo, int bank, u32 kind,
                            u16 texGroup, u8* list, int life, int palflag,
                            f32 x, f32 y, f32 z, f32 vx, f32 vy, f32 vz,
@@ -4864,7 +4958,7 @@ HSD_Particle* hsd_80398C04(HSD_Particle** head, int linkNo, int bank, u32 kind,
     }
 
     if (head == NULL) {
-        slot = (HSD_Particle**) ((s32*) hsd_804D08E8 + 0x20 / 4 + linkNo);
+        slot = (HSD_Particle**) &hsd_804D0908[linkNo];
         pp->next = *slot;
         *slot = pp;
     } else {
@@ -4902,14 +4996,14 @@ HSD_Particle* hsd_80398C04(HSD_Particle** head, int linkNo, int bank, u32 kind,
     pp->cmdWait = cmd_wait;
     pp->poseNum = 0;
     pp->palNum = 0xFF;
-    pp->envCol.a = 0xFF;
-    pp->envCol.b = 0xFF;
-    pp->envCol.g = 0xFF;
-    pp->envCol.r = 0xFF;
-    pp->envColTarget.a = 0;
-    pp->envColTarget.b = 0;
-    pp->envColTarget.g = 0;
-    pp->envColTarget.r = 0;
+    pp->primCol.a = 0xFF;
+    pp->primCol.b = 0xFF;
+    pp->primCol.g = 0xFF;
+    pp->primCol.r = 0xFF;
+    pp->envCol.a = 0;
+    pp->envCol.b = 0;
+    pp->envCol.g = 0;
+    pp->envCol.r = 0;
     pp->envColCount = 0;
     pp->primColCount = 0;
     pp->sizeCount = 0;
@@ -4921,7 +5015,7 @@ HSD_Particle* hsd_80398C04(HSD_Particle** head, int linkNo, int bank, u32 kind,
     pp->aCmpRemain = 0;
     pp->aCmpCount = 0;
     pp->rotateCount = 0;
-    pp->sizeTarget = 0.0F;
+    pp->rotateTarget = 0.0F;
     pp->rotate = 0.0F;
     pp->gen = gp;
     if (gp != NULL) {
@@ -4974,60 +5068,64 @@ void hsd_80398F8C(HSD_Particle* pp, f32 angle)
     f32 vx = pp->vel.x;
     f32 vz = pp->vel.z;
     f32 vy = pp->vel.y;
-    f32 azimuth;
     f32 sin_a, cos_a;
     f32 sin_e, cos_e;
-    f32 mag_sq;
     f32 rand_angle;
+    f32 cos_rand, sin_rand;
     f32 sin_angle, cos_angle;
-    f32 sin_rand, cos_rand;
+    f32 abs_z;
     f32 temp;
+    f32 abs_temp;
+    PAD_STACK(16);
 
-    temp = vz;
-    *(s32*) &temp &= 0x7FFFFFFF;
-    if (temp < 1.1754944e-38F) {
-        if (vy >= 0.0F) {
-            azimuth = 1.5707964F;
+    {
+        f32 azimuth;
+
+        abs_z = vz;
+        *(s32*) &abs_z &= 0x7FFFFFFF;
+        if (abs_z < 1.1754944e-38F) {
+            if (vy >= 0.0F) {
+                azimuth = 1.5707964F;
+            } else {
+                azimuth = -1.5707964F;
+            }
         } else {
-            azimuth = -1.5707964F;
+            azimuth = atan2f(vy, vz);
         }
-    } else {
-        azimuth = atan2f(vy, vz);
+
+        sin_a = sinf(azimuth);
+        cos_a = cosf(azimuth);
     }
 
-    sin_a = sinf(azimuth);
-    cos_a = cosf(azimuth);
+    {
+        f32 azimuth;
 
-    temp = vy * sin_a + vz * cos_a;
-    *(s32*) &temp &= 0x7FFFFFFF;
-    if (temp < 1.1754944e-38F) {
-        if (vx >= 0.0F) {
-            azimuth = 1.5707964F;
+        temp = vy * sin_a + vz * cos_a;
+        abs_temp = temp;
+        *(s32*) &abs_temp &= 0x7FFFFFFF;
+        if (abs_temp < 1.1754944e-38F) {
+            if (vx >= 0.0F) {
+                azimuth = 1.5707964F;
+            } else {
+                azimuth = -1.5707964F;
+            }
         } else {
-            azimuth = -1.5707964F;
+            azimuth = atan2f(vx, temp);
         }
-    } else {
-        azimuth = atan2f(vx, vy * sin_a + vz * cos_a);
+
+        sin_e = sinf(azimuth);
+        cos_e = cosf(azimuth);
     }
 
-    sin_e = sinf(azimuth);
-    cos_e = cosf(azimuth);
-
-    mag_sq = vz * vz + (vx * vx + vy * vy);
-    if (mag_sq > 0.0F) {
-        f64 x = __frsqrte((f64) mag_sq);
-        x = 0.5 * x * -(((f64) mag_sq * (x * x)) - 3.0);
-        x = 0.5 * x * -(((f64) mag_sq * (x * x)) - 3.0);
-        x = 0.5 * x * -(((f64) mag_sq * (x * x)) - 3.0);
-        mag_sq = (f32) ((f64) mag_sq * x);
-    }
+    vx = (vx * vx + vy * vy) + vz * vz;
+    vx = sqrtf(vx);
 
     rand_angle = (f32) (3.141592653589793 * HSD_Randf() * 2.0);
 
-    sin_angle = mag_sq * sinf(angle);
+    sin_angle = vx * sinf(angle);
     cos_rand = sin_angle * cosf(rand_angle);
     sin_rand = sin_angle * sinf(rand_angle);
-    cos_angle = mag_sq * cosf(angle);
+    cos_angle = vx * cosf(angle);
 
     pp->vel.x = cos_rand * cos_e + cos_angle * sin_e;
     pp->vel.y = cos_e * (cos_angle * sin_a) +
@@ -5085,6 +5183,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
     PAD_STACK(464);
 
 #define fval (*(f32*) &hsd_804D78D0)
+#define fbytes (*(ParticleFloatBytes*) &hsd_804D78D0).bytes
 
     /* Early exit: bit 11 of kind set */
     if (pp->kind & 0x800) {
@@ -5705,21 +5804,26 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
             case 0xA8:
                 /* Position random offset */
-                ((u8*) &fval)[0] = *pc++;
-                ((u8*) &fval)[1] = *pc++;
-                ((u8*) &fval)[2] = *pc++;
-                ((u8*) &fval)[3] = *pc++;
-                pp->pos.x += 2.0F * fval * HSD_Randf() - fval;
-                ((u8*) &fval)[0] = *pc++;
-                ((u8*) &fval)[1] = *pc++;
-                ((u8*) &fval)[2] = *pc++;
-                ((u8*) &fval)[3] = *pc++;
-                pp->pos.y += 2.0F * fval * HSD_Randf() - fval;
-                ((u8*) &fval)[0] = *pc++;
-                ((u8*) &fval)[1] = *pc++;
-                ((u8*) &fval)[2] = *pc++;
-                ((u8*) &fval)[3] = *pc++;
-                pp->pos.z += 2.0F * fval * HSD_Randf() - fval;
+                {
+                    u8* pc2;
+                    fbytes[0] = *pc++;
+                    fbytes[1] = *pc++;
+                    fbytes[2] = *pc++;
+                    fbytes[3] = *pc++;
+                    pp->pos.x += 2.0F * fval * HSD_Randf() - fval;
+                    pc2 = pc + 4;
+                    fbytes[0] = pc[0];
+                    fbytes[1] = pc[1];
+                    fbytes[2] = pc[2];
+                    fbytes[3] = pc[3];
+                    pp->pos.y += 2.0F * fval * HSD_Randf() - fval;
+                    pc = pc2 + 4;
+                    fbytes[0] = pc2[0];
+                    fbytes[1] = pc2[1];
+                    fbytes[2] = pc2[2];
+                    fbytes[3] = pc2[3];
+                    pp->pos.z += 2.0F * fval * HSD_Randf() - fval;
+                }
                 break;
 
             case 0xA9:
@@ -7305,28 +7409,27 @@ do_life:
     }
 
     return pp->next;
+#undef fbytes
 #undef fval
 }
 
 void hsd_8039CEAC(u32 mask)
 {
-    void** bins;
     void* cur;
     void* prev;
     s32 i;
     u32 bits;
     void* next;
 
-    bins = hsd_804D0908;
     bits = mask;
     for (i = 0; i < 16; i++) {
         if (!(bits & 0x10000)) {
-            cur = *bins;
+            cur = hsd_804D0908[i];
             prev = NULL;
             while (cur != NULL) {
                 next = hsd_8039930C(cur, prev);
                 if (prev == NULL) {
-                    if (*bins != next) {
+                    if (hsd_804D0908[i] != next) {
                         prev = cur;
                     }
                 } else {
@@ -7338,12 +7441,9 @@ void hsd_8039CEAC(u32 mask)
             }
         }
         bits >>= 1;
-        bins++;
     }
 }
 
-// @TODO: Currently 96.59% match - instruction scheduling in address
-/// computation
 void hsd_8039CF4C(s32 index, HSD_JObj* jobj)
 {
     if (index < 0 || index > 8) {
@@ -7351,8 +7451,10 @@ void hsd_8039CF4C(s32 index, HSD_JObj* jobj)
     }
 
     if (index != 0) {
-        HSD_JObj** p = &hsd_804D08E8[index];
-        HSD_JObj* old = *--p;
+        HSD_JObj** p = hsd_804D08E8;
+        HSD_JObj* old;
+        p += index;
+        old = *--p;
         if (old != jobj) {
             if (old != NULL) {
                 HSD_JObjUnref(jobj);
@@ -8490,7 +8592,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         default: /* shape > 8 */
         {
             void (*callback)(HSD_Generator*, Mtx);
-            callback = (void (*)(HSD_Generator*, Mtx)) gen->callback;
+            callback = (void (*)(HSD_Generator*, Mtx))(Event) gen->callback;
             if (callback != NULL) {
                 callback(gen, rot_mtx);
             }
@@ -8561,7 +8663,6 @@ void hsd_8039EE24(u32 mask)
     }
 }
 
-// @TODO: Currently 91.82% match - 2 dead beq instructions in target
 HSD_Generator* hsd_8039EFAC(s32 linkNo, s32 bank, s32 gfx_id, HSD_JObj* jobj)
 {
     HSD_Generator* gen;
@@ -8570,14 +8671,19 @@ HSD_Generator* hsd_8039EFAC(s32 linkNo, s32 bank, s32 gfx_id, HSD_JObj* jobj)
     if (gen == NULL) {
         return NULL;
     }
-    gen->jobj = jobj;
-    ref_INC(jobj);
+    if (gen != NULL) {
+        gen->jobj = jobj;
+        if (jobj != NULL) {
+            ref_INC(jobj);
+        }
+    }
     gen->type |= (gen->kind & 0x20000) ? 0x500 : 0x700;
     return gen;
 }
 
-// @TODO: Currently 80.55% match - ASM bytes identical, relocation differences
-HSD_Generator* hsd_8039F05C(s8 linkNo, s32 bank, s32 idx)
+// @TODO: Currently 80.79% match - .bss.0 section anchor hoist causes
+// register-allocation cascade (extra saved reg + frame shift)
+HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
 {
     HSD_PSCmdList** cmdListArr;
     HSD_PSCmdList* cl;
@@ -8805,7 +8911,6 @@ HSD_Generator* hsd_8039F05C(s8 linkNo, s32 bank, s32 idx)
     return gen;
 }
 
-// @TODO: Currently 92.50% match - dead beq instructions in target
 HSD_Generator* hsd_8039F6CC(s32 linkNo, s32 bank, s32 gfx_id, HSD_JObj* jobj)
 {
     HSD_Generator* gen;
@@ -8814,8 +8919,12 @@ HSD_Generator* hsd_8039F6CC(s32 linkNo, s32 bank, s32 gfx_id, HSD_JObj* jobj)
     if (gen == NULL) {
         return NULL;
     }
-    gen->jobj = jobj;
-    ref_INC(jobj);
+    if (gen != NULL) {
+        gen->jobj = jobj;
+        if (jobj != NULL) {
+            ref_INC(jobj);
+        }
+    }
     gen->type |= (gen->kind & 0x20000) ? 0x500 : 0x700;
     hsd_804D78F4 =
         (u32) HSD_SListAllocAndAppend((HSD_SList*) hsd_804D78F4, gen);

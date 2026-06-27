@@ -79,13 +79,13 @@
                                itLinkHookshotAttributes* arg2, f32 arg8);
 /* 802A5FE0 */ s32 it_802A5FE0(ItemLink* arg0, ItemLink* arg1, Vec3* arg2,
                                itLinkHookshotAttributes* arg3, f32 arg8);
-/* 802A6474 */ void it_802A6474(ItemLink* arg0, ItemLink* arg1, Vec3* arg2,
-                                itLinkHookshotAttributes* arg3);
+/* 802A6474 */ void it_802A6474(ItemLink* arg0, ItemLink* arg1, Vec3* pos,
+                                itLinkHookshotAttributes* attrs);
 /* 802A678C */ s32 it_802A678C(ItemLink* arg0, Vec3* arg1,
                                itLinkHookshotAttributes* arg2, f32 arg8);
 /* 802A6944 */ void it_802A6944(Item*, f32);
-/* 802A6A78 */ s32 it_802A6A78(ItemLink* arg0, Vec3* arg1,
-                               itLinkHookshotAttributes* arg2, Fighter* arg3);
+/* 802A6A78 */ bool it_802A6A78(ItemLink* arg0, Vec3* arg1,
+                                itLinkHookshotAttributes* arg2, Fighter* arg3);
 /* 802A6DC8 */ void it_802A6DC8(HSD_JObj* arg0, Vec3* arg1, Vec3* arg2);
 /* 802A6F80 */ void it_802A6F80(HSD_JObj* arg0, Vec3* arg1, Vec3* arg2,
                                 f32 val);
@@ -96,7 +96,7 @@
 /* 802A7764 */ void it_802A7764(HSD_GObj* arg0);
 /* 802A77DC */ void it_802A77DC(Item_GObj* gobj);
 /* 802A7840 */ void it_802A7840(HSD_GObj* arg0);
-/* 802A78B8 */ void it_802A78B8(HSD_GObj* arg0, Vec3* arg1, f32 arg2);
+/* 802A78B8 */ void it_802A78B8(HSD_GObj* arg0, Vec3* arg1);
 /* 802A793C */ void it_802A793C(HSD_GObj* arg0);
 /* 802A79A0 */ void it_802A79A0(HSD_GObj* arg0);
 /* 802A7A04 */ void it_802A7A04(HSD_GObj* arg0);

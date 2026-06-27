@@ -33,9 +33,7 @@ struct ftHurtboxInit {
 union ftCommon_MotionVars {
     struct {
         /* fp+2340 */ int x0;
-        /* fp+2344 */ f32 x4;
-        /* fp+2348 */ UNK_T x8;
-        /* fp+234C */ UNK_T xC;
+        /* fp+2344 */ Vec3 x4;
         /* fp+2350 */ UNK_T x10;
         /* fp+2354 */ float x14;
         /* fp+2358 */ float x18;
@@ -227,6 +225,10 @@ union ftCommon_MotionVars {
         /* fp+2344 */ float anim_start;
     } rebound;
     struct {
+        /* fp+2340 */ u8 pad_x0[4];
+        /* fp+2344 */ u8 x4;
+    } downreflect;
+    struct {
         /* fp+2340 */ bool x0;
         /* fp+2344 */ float x4;
     } pass;
@@ -368,6 +370,7 @@ union ftCommon_MotionVars {
     } entry;
     struct {
         /* fp+2340 */ Item_GObj* x0;
+        /* fp+2344 */ int x4;
     } capturelikelike;
     struct {
         /* fp+2340 */ HSD_GObjEvent x0;

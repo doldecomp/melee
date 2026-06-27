@@ -35,9 +35,9 @@ static void mnSound_VolumeAnim(HSD_JObj* jobj, s32 sound_music_mix,
 {
     Vec3 pos_0;
     Vec3 pos_1;
-    HSD_JObj* jobj_anim_2;
-    HSD_JObj* jobj_anim_1;
     HSD_JObj* jobj_anim_0;
+    HSD_JObj* jobj_anim_1;
+    HSD_JObj* jobj_anim_2;
     lb_80011E24(jobj, &jobj_anim_0, 6, -1);
     lb_80011E24(jobj, &jobj_anim_1, 3, -1);
     lb_80011E24(jobj, &jobj_anim_2, 4, -1);
@@ -55,29 +55,40 @@ static void mnSound_VolumeAnim(HSD_JObj* jobj, s32 sound_music_mix,
 static void mnSound_ChannelAnim(HSD_JObj* jobj, s32 channel)
 {
     HSD_JObj* jobj_anim[3];
-    f32 temp_f31, temp_f30;
+    f32 right_frame, left_frame;
     lb_80011E24(jobj, &jobj_anim[0], 8, -1);
     lb_80011E24(jobj, &jobj_anim[1], 10, -1);
     lb_80011E24(jobj, &jobj_anim[2], 9, -1);
-    temp_f31 = mn_8022F298(jobj_anim[1]);
-    temp_f30 = mn_8022F298(jobj_anim[2]);
+    left_frame = mn_8022F298(jobj_anim[1]);
+    right_frame = mn_8022F298(jobj_anim[2]);
 
     HSD_JObjReqAnimAll(jobj_anim[0], channel);
     HSD_JObjAnimAll(jobj_anim[0]);
 
-    HSD_JObjReqAnimAll(jobj_anim[1], temp_f31);
+    HSD_JObjReqAnimAll(jobj_anim[1], left_frame);
     mn_8022F3D8(jobj_anim[1], 0xFFU, MOBJ_MASK);
     HSD_JObjAnimAll(jobj_anim[1]);
 
-    HSD_JObjReqAnimAll(jobj_anim[2], temp_f30);
+    HSD_JObjReqAnimAll(jobj_anim[2], right_frame);
     mn_8022F3D8(jobj_anim[2], 0xFFU, MOBJ_MASK);
     HSD_JObjAnimAll(jobj_anim[2]);
+}
+
+static inline void mnSound_InitCenterText(Menu* menu, s32 val)
+{
+    HSD_Text* text =
+        HSD_SisLib_803A5ACC(0, 1, -9.5F, 9.1F, 17.0F, 364.68332F, 38.38772F);
+    menu->text = text;
+    text->font_size.x = 0.0521F;
+    text->font_size.y = 0.0521F;
+    HSD_SisLib_803A6368(text, val);
 }
 
 void mnSound_802492CC(HSD_GObj* gobj)
 {
     Menu* menu = GET_MENU(mnSound_804D6C30);
     u64 events;
+    PAD_STACK(8);
     if (mn_804D6BC8.cooldown != 0) {
         Menu_DecrementAnimTimer();
         return;
@@ -101,11 +112,16 @@ void mnSound_802492CC(HSD_GObj* gobj)
         }
         {
             Menu* menu = GET_MENU(mnSound_804D6C30);
-            HSD_Text* text = menu->text;
-            if (text != NULL) {
-                HSD_SisLib_803A5CC4(text);
+            s32 text_id;
+            if (menu->text != NULL) {
+                HSD_SisLib_803A5CC4(menu->text);
             }
-            Menu_InitCenterText(menu, (menu->unk2 == 0) ? 0xBB : 0xBC);
+            if (menu->unk2 == 0) {
+                text_id = 0xBB;
+            } else {
+                text_id = 0xBC;
+            }
+            mnSound_InitCenterText(menu, text_id);
         }
         return;
     }
@@ -119,12 +135,14 @@ void mnSound_802492CC(HSD_GObj* gobj)
                 lbAudioAx_80024C08(menu->unk1);
             }
         } else if ((s8) menu->unk3 > -100) {
+            u8 mix;
             // move towards sounds
             lbAudioAx_80024030(2);
             menu->unk3 -= 5;
-            mnSound_VolumeAnim(GET_JOBJ(mnSound_804D6C30), menu->unk3, 15);
-            gm_801602C0(menu->unk3);
-            gmMainLib_8015ED80(menu->unk3);
+            mix = menu->unk3;
+            mnSound_VolumeAnim(GET_JOBJ(mnSound_804D6C30), mix, 15);
+            gm_801602C0(mix);
+            gmMainLib_8015ED80(GET_MENU(mnSound_804D6C30)->unk3);
         }
     } else if (events & MenuInput_Right) {
         if (menu->unk2 == 0) {
@@ -136,31 +154,33 @@ void mnSound_802492CC(HSD_GObj* gobj)
                 lbAudioAx_80024C08(menu->unk1);
             }
         } else if ((s8) menu->unk3 < 100) {
+            u8 mix;
             // move towards music
             lbAudioAx_80024030(2);
             menu->unk3 += 5;
-            mnSound_VolumeAnim(GET_JOBJ(mnSound_804D6C30), menu->unk3, 18);
-            gm_801602C0(menu->unk3);
-            gmMainLib_8015ED80(menu->unk3);
+            mix = menu->unk3;
+            mnSound_VolumeAnim(GET_JOBJ(mnSound_804D6C30), mix, 18);
+            gm_801602C0(mix);
+            gmMainLib_8015ED80(GET_MENU(mnSound_804D6C30)->unk3);
         }
     }
 }
 
 void fn_80249A1C(HSD_GObj* arg0)
 {
+    Menu* menu = GET_MENU(arg0);
     HSD_JObj* sp40;
     HSD_JObj* sp3C;
+    UNUSED u8 pad38[4];
     HSD_JObj* sp34;
     AnimLoopSettings sp28;
+    UNUSED u8 pad24[4];
     HSD_JObj* sp20;
-    HSD_JObj* temp_r3;
-    f32 temp_f1;
-    f32 var_f1;
+    f32 cursor_frame;
     u8 temp_r4;
-    f32 arg8 = 0.0F; // this should be uninitialized
-
+    AnimLoopSettings* anim = mnSound_803EEED8;
     HSD_JObj* jobj = arg0->hsd_obj;
-    Menu* menu = GET_MENU(arg0);
+    PAD_STACK(16);
     if ((u8) mn_804A04F0.cur_menu != 0x14) {
         HSD_GObjPLink_80390228(arg0);
         HSD_SisLib_803A5CC4(menu->text);
@@ -170,10 +190,10 @@ void fn_80249A1C(HSD_GObj* arg0)
     if (temp_r4 != 0) {
         menu->cursor = (u8) (temp_r4 - 1);
         if ((u8) menu->cursor != 0) {
-            HSD_JObjSetFlagsAll(jobj, 0x10U);
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             return;
         }
-        HSD_JObjClearFlagsAll(jobj, 0x10U);
+        HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         return;
     }
     if ((u8) menu->unk2 == 0) {
@@ -182,30 +202,37 @@ void fn_80249A1C(HSD_GObj* arg0)
         } else {
             lb_80011E24(jobj, &sp34, 9, -1);
         }
-        arg8 = mn_8022EC18(sp34, &mnSound_803EEED8[0], 0x80);
+        mn_8022EC18(sp34, anim, 0x80);
     }
-    lb_80011E24((HSD_JObj*) arg0->hsd_obj, &sp20, 6, -1, arg8);
-    temp_f1 = mn_8022F298(sp20);
-    if ((mnSound_803EEED8[5].start_frame <= temp_f1) &&
-        ((temp_f1 <= mnSound_803EEED8[5].end_frame) != 0))
+    lb_80011E24((HSD_JObj*) arg0->hsd_obj, &sp20, 6, -1);
+    cursor_frame = mn_8022F298(sp20);
+    if ((anim[5].start_frame <= cursor_frame) &&
+        (cursor_frame <= anim[5].end_frame))
     {
-        sp28 = mnSound_803EEED8[5];
+        sp28 = anim[5];
     } else {
-        sp28 = mnSound_803EEED8[6];
+        sp28 = anim[6];
     }
     mn_8022ED6C(sp20, &sp28);
     lb_80011E24(jobj, &sp40, 0xE, -1);
-    mn_8022ED6C(sp40, &mnSound_803EEED8[menu->unk2 + 1]);
+    {
+        AnimLoopSettings* temp = &anim[menu->unk2];
+        mn_8022ED6C(sp40, temp + 1);
+    }
     lb_80011E24(jobj, &sp3C, 0xB, -1);
-    mn_8022ED6C(sp3C, &mnSound_803EEED8[menu->unk1 + 4]);
+    {
+        AnimLoopSettings* temp = &anim[menu->unk1];
+        mn_8022ED6C(sp3C, temp + 3);
+    }
 }
 
 void mnSound_80249C08(int unused)
 {
     HSD_GObj* gobj = GObj_Create(HSD_GOBJ_CLASS_ITEM, 7U, 0x80U);
     HSD_JObj* jobj;
-    Menu* menu;
+    Menu* user_data;
     HSD_GObjProc* proc;
+    PAD_STACK(24);
     mnSound_804D6C30 = gobj;
     jobj = HSD_JObjLoadJoint(mnSound_804A08A8.joint);
     HSD_GObjObject_80390A70((HSD_GObj*) gobj, (u8) HSD_GObj_804D7849, jobj);
@@ -214,51 +241,60 @@ void mnSound_80249C08(int unused)
                        mnSound_804A08A8.matanim_joint,
                        mnSound_804A08A8.shapeanim_joint);
     HSD_JObjReqAnimAll(jobj, 0.0F);
-    menu = HSD_MemAlloc(8);
-    if (menu == NULL) {
-        OSReport("Can't get user_data.\n");
-        __assert("mnsound.c", 0x22CU, "user_data");
+    {
+        Menu* alloc = HSD_MemAlloc(8);
+        user_data = alloc;
     }
+    HSD_ASSERTREPORT(0x22CU, user_data, "Can't get user_data.\n");
     gmMainLib_8015CC34();
-    menu->cursor = 0x14;
-    menu->unk1 = lbAudioAx_80024BD0();
-    menu->unk2 = 0U;
-    menu->unk3 = gmMainLib_8015ED74();
-    menu->text = NULL;
-    GObj_InitUserData(gobj, 0U, HSD_Free, menu);
+    user_data->cursor = 0x14;
+    user_data->unk1 = lbAudioAx_80024BD0();
+    user_data->unk2 = 0U;
+    user_data->unk3 = gmMainLib_8015ED74();
+    user_data->text = NULL;
+    GObj_InitUserData(gobj, 0U, HSD_Free, user_data);
     proc = HSD_GObj_SetupProc(gobj, fn_80249A1C, 0U);
     proc->flags_3 = HSD_GObj_804D783C;
 
     {
         Menu* menu = GET_MENU(mnSound_804D6C30);
-        HSD_Text* text = menu->text;
-        if (text != NULL) {
-            HSD_SisLib_803A5CC4(text);
+        s32 text_id;
+        if (menu->text != NULL) {
+            HSD_SisLib_803A5CC4(menu->text);
         }
-        Menu_InitCenterText(menu, (menu->unk2 == 0) ? 0xBB : 0xBC);
+        if (menu->unk2 == 0) {
+            text_id = 0xBB;
+        } else {
+            text_id = 0xBC;
+        }
+        mnSound_InitCenterText(menu, text_id);
     }
 
-    mnSound_ChannelAnim(GET_JOBJ(gobj), menu->unk1);
+    mnSound_ChannelAnim(GET_JOBJ(gobj), user_data->unk1);
 
     {
         HSD_JObj* sp5C;
         lb_80011E24(jobj, &sp5C, 6, -1);
-        HSD_JObjReqAnimAll(sp5C, mnSound_803EEED8[1].start_frame);
+        HSD_JObjReqAnimAll(sp5C, mnSound_803EEED8[5].end_frame);
         HSD_JObjAnimAll(sp5C);
     }
 
-    mnSound_VolumeAnim(GET_JOBJ(gobj), menu->unk3, -1);
+    mnSound_VolumeAnim(GET_JOBJ(gobj), user_data->unk3, -1);
 
     {
         HSD_JObj* sp64;
         HSD_JObj* sp60;
-        gm_801602C0(menu->unk3);
+        gm_801602C0(user_data->unk3);
         lb_80011E24(jobj, &sp64, 0xE, -1);
-        mn_8022ED6C(sp64, &mnSound_803EEED8[menu->unk2 + 1]);
+        {
+            AnimLoopSettings* anim = &mnSound_803EEED8[user_data->unk2];
+            mn_8022ED6C(sp64, anim + 1);
+        }
         lb_80011E24(jobj, &sp60, 0xB, -1);
-        HSD_JObjReqAnimAll(sp60, mnSound_803EEED8[menu->unk1 + 4].start_frame);
+        HSD_JObjReqAnimAll(sp60,
+                           mnSound_803EEED8[user_data->unk1 + 3].end_frame);
         HSD_JObjAnimAll(sp60);
-        HSD_JObjSetFlagsAll(jobj, 0x10U);
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     }
 }
 

@@ -1,13 +1,28 @@
 #include "lb/lb_00CE.h"
 
-#include <platform.h>
+#include "placeholder.h"
 
-#include "MSL/math_ppc.h"
+#include <platform.h>
 
 #include <baselib/forward.h>
 
 #include <math.h>
+#include <math_ppc.h>
 #include <trigf.h>
+
+static void sdata2_order(void)
+{
+    (void) M_PI_2;
+    (void) M_PI;
+    (void) 1.0f;
+    (void) 2.0f;
+    (void) S32_TO_F32;
+    (void) 0.0f;
+    (void) 0.5;
+    (void) 3.0;
+    (void) 0.00001f;
+    (void) -0.00001f;
+}
 
 f32 expf(f32 arg8)
 {
@@ -71,9 +86,7 @@ f32 powf(f32 arg0, f32 arg1)
 
 s32 powi(s32 base, s32 exponent)
 {
-    s32 exp_minus_8;
-    s32 remaining;
-    s32 powers_done;
+    s32 i;
     s32 result;
 
     if (base == 0) {
@@ -83,29 +96,13 @@ s32 powi(s32 base, s32 exponent)
         goto return_zero;
     }
 
-    powers_done = 0;
+    i = 0;
     result = 1;
 
-    if (exponent > 0) {
-        exp_minus_8 = exponent - 8;
-        if (exponent > 8) {
-            exp_minus_8 = (u32) (exp_minus_8 + 7) >> 3U;
-            if (exp_minus_8 > 0) {
-                do {
-                    result = result * base * base * base * base * base * base *
-                             base * base;
-                    powers_done += 8;
-                    exp_minus_8--;
-                } while (exp_minus_8 != 0);
-            }
-        }
-
-        remaining = exponent - powers_done;
-
-        if (powers_done < exponent) {
-            result *= remaining;
-        }
+    for (; i < exponent; i++) {
+        result *= base;
     }
+
     return result;
 
 return_zero:
@@ -166,32 +163,33 @@ s32 lb_8000D148(f32 point0_x, f32 point0_y, f32 point1_x, f32 point1_y,
     f32 dist_01;
     f32 var_f0;
     {
-        f32 diff_01_y = point0_y - point1_y;
         f32 diff_01_x = point1_x - point0_x;
-        f32 dist_squared_01 =
-            (diff_01_x * diff_01_x) + (diff_01_y * diff_01_y);
-        if (dist_squared_01 < 0.00001f) {
+        f32 diff_01_y = point0_y - point1_y;
+        f32 cross = point0_y * point1_x;
+
+        dist_01 = (diff_01_x * diff_01_x) + (diff_01_y * diff_01_y);
+        cross = (point0_x * point1_y) - cross;
+        if (dist_01 < 0.00001f) {
             return 0;
         }
-        dist_01 = sqrtf(dist_squared_01);
+        dist_01 = sqrtf(dist_01);
 
-        var_f0 = ((point0_x * point1_y) - (point0_y * point1_x)) +
-                 ((diff_01_x * point2_x) + (diff_01_y * point2_y));
+        var_f0 = cross + ((diff_01_x * point2_x) + (diff_01_y * point2_y));
         if (var_f0 < 0.0f) {
             var_f0 = -var_f0;
         }
     }
 
     if ((var_f0 / dist_01) <= threshold) {
-        f32 diff_02_x = point0_x - point2_x;
-        f32 diff_02_y = point0_y - point2_y;
-        f32 diff_12_x = point1_x - point2_x;
-        f32 diff_12_y = point1_y - point2_y;
-        f32 threshold_squared = threshold * threshold;
-        f32 dist_squared_02 =
-            (diff_02_x * diff_02_x) + (diff_02_y * diff_02_y);
-        f32 dist_squared_12 =
-            (diff_12_x * diff_12_x) + (diff_12_y * diff_12_y);
+        f32 threshold_squared;
+        f32 dist_squared_02;
+        f32 dist_squared_12;
+
+        dist_squared_02 = (point0_x - point2_x) * (point0_x - point2_x) +
+                          (point0_y - point2_y) * (point0_y - point2_y);
+        threshold_squared = threshold * threshold;
+        dist_squared_12 = (point1_x - point2_x) * (point1_x - point2_x) +
+                          (point1_y - point2_y) * (point1_y - point2_y);
         if (dist_squared_02 < threshold_squared) {
             if (dist_squared_12 > threshold_squared) {
                 return 1;

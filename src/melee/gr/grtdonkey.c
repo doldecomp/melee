@@ -88,7 +88,7 @@ static void grTdonkey_UnkStage0_OnLoad(void) {}
 
 static void grTdonkey_UnkStage0_OnStart(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 static bool grTDonkey_802202C4(void)

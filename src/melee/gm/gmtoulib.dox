@@ -1,0 +1,9 @@
+/**
+ * @returns the frame for the tou css icon?
+*/
+/* 18F71C */ float fn_8018F71C(int, int);
+
+/**
+ * updates visibility of char icons on the "press start" screen
+*/
+/* 19C570 */ void fn_8019C570(HSD_GObj*);

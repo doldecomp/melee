@@ -9,10 +9,11 @@
 
 #include <dolphin/mtx.h>
 
-/* 2C4D10 */ void it_802C4D10(Item_GObj*);
+/* 2C4D10 */ u32 it_802C4D10(Item_GObj*);
 /* 2C4F50 */ bool it_802C4F50(Item_GObj*, CollData*);
 /* 2C5000 */ HSD_GObj* it_802C5000(Item_GObj*, Vec3*, s32, s32, float);
-/* 2C519C */ void it_802C519C(Item_GObj*, Vec3*, s32, s32, float, float);
+/* 2C519C */ Item_GObj* it_802C519C(Item_GObj*, Vec3*, s32, s32, float angle,
+                                    float facing_dir);
 /* 2C53F0 */ void it_802C53F0(Item_GObj*, Vec3*, float, float, float);
 /* 2C56A0 */ void it_2725_Logic101_Destroyed(Item_GObj*);
 /* 2C573C */ void it_802C573C(Item_GObj*);
@@ -20,7 +21,6 @@
 /* 2C57C8 */ bool itMewtwoshadowball_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2C5B0C */ void itMewtwoshadowball_UnkMotion0_Phys(Item_GObj* gobj);
 /* 2C5B10 */ bool itMewtwoshadowball_UnkMotion0_Coll(Item_GObj* gobj);
-/* 2C5B18 */ void it_802C5B18(Item_GObj*);
 /* 2C5BF8 */ bool itMewtwoshadowball_UnkMotion8_Anim(Item_GObj* gobj);
 /* 2C5CF4 */ void itMewtwoshadowball_UnkMotion8_Phys(Item_GObj* gobj);
 /* 2C5D64 */ bool itMewtwoshadowball_UnkMotion8_Coll(Item_GObj* gobj);

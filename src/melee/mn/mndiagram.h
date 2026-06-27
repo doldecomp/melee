@@ -9,9 +9,14 @@
 /* 23EA40 */ u8 mnDiagram_GetNameByIndex(int idx);
 /* 23EA54 */ bool mnDiagram_IsDistanceOverflow(u32 distance);
 /* 23EAC4 */ u32 mnDiagram_ConvertDistanceForDisplay(u32 distance);
-/* 23EB84 */ s32 mnDiagram_GetHitPercentage(u8 is_name_mode, u8 player_index);
+/* 23EB84 */ s32 mnDiagram_GetHitPercentage(int is_name_mode, u8 player_index);
+#ifdef MNDIAGRAM_SOURCE
 /* 23ECC4 */ s32 mnDiagram_GetPlayPercentage(u8 is_name_mode, u8 player_index);
-/* 23EE38 */ s32 mnDiagram_GetAveragePlayerCount(u8 is_name_mode,
+#else
+/* 23ECC4 */ s32 mnDiagram_GetPlayPercentage(int is_name_mode,
+                                             u8 player_index);
+#endif
+/* 23EE38 */ s32 mnDiagram_GetAveragePlayerCount(int is_name_mode,
                                                  u8 player_index);
 /* 23EF70 */ int mnDiagram_GetNameTotalKOs(u8 field_index);
 /* 23EFE4 */ int mnDiagram_GetNameTotalFalls(u8 field_index);
@@ -39,7 +44,7 @@
 /* 240D94 */ void mnDiagram_80240D94(void* arg0, s32 arg1, s32 arg2, s32 arg3);
 /* 241310 */ void mnDiagram_80241310(s32 arg0, s32 arg1, s32 arg2);
 /* 241668 */ void mnDiagram_80241668(void* arg0);
-/* 241730 */ void mnDiagram_80241730(void* arg0, int arg1, int arg2);
+/* 241730 */ void mnDiagram_80241730(HSD_GObj* arg0, int arg1, int arg2);
 /* 2417D0 */ void mnDiagram_802417D0(HSD_GObj* gobj);
 /* 241AE8 */ void mnDiagram_ExitAnimProc(HSD_GObj* gobj);
 /* 241B4C */ void mnDiagram_UpdateScrollArrowVisibility(void* gobj, int count);
@@ -52,6 +57,6 @@
 /* 243038 */ void mnDiagram_CursorProc(HSD_GObj* gobj);
 /* 2433AC */ void mnDiagram_802433AC(void);
 /* 243434 */ void mnDiagram_80243434(u8 arg0);
-/* 2437E8 */ void mnDiagram_802437E8(s32 arg0, s32 arg1);
+/* 2437E8 */ void mnDiagram_802437E8(u8 arg0, u8 arg1);
 
 #endif

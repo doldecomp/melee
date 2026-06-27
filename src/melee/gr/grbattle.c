@@ -169,7 +169,7 @@ static void grBattle_OnLoad(void) {}
 
 static void grBattle_OnStart(void)
 {
-    grZakoGenerator_801CAE04(false);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 static bool grBattle_80219D7C(void)

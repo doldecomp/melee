@@ -11,6 +11,7 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
+#include <baselib/random.h>
 
 #define GET_GROUND(gobj) ((Ground*) HSD_GObjGetUserData(gobj))
 
@@ -37,6 +38,19 @@ static inline void Ground_SetupStageCallbacks(HSD_GObj* gobj,
     }
     if (callbacks->callback2 != NULL) {
         HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+    }
+}
+
+#define ZRANDI(n) ((n) != 0 ? HSD_Randi(n) : 0)
+
+static inline int rand_range(int a, int b)
+{
+    if (a > b) {
+        return b + ZRANDI(a - b);
+    } else if (a < b) {
+        return a + ZRANDI(b - a);
+    } else {
+        return a;
     }
 }
 

@@ -4,7 +4,11 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "gm/forward.h"
 #include "gr/forward.h"
+
+#include "gr/types.h"
+
 #include "lb/forward.h"
 #include "mp/forward.h"
 #include <baselib/forward.h>
@@ -57,10 +61,11 @@ struct IceMountainParams {
     float xA4;
     float xA8;
     s16* xAC;
-    float xB0;
-    float xB4;
+    s16* xB0;
+    s16* xB4;
     s16 xB8;
-    bool xBC;
+    s16 pad;
+    grZakoGenerator_SpawnDesc xBC;
     float xC0;
     float xC4;
     float xC8;
@@ -120,13 +125,10 @@ extern f32 grIm_804DB570;
 /* 1F8C64 */ // void fn_801F8C64(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32);
 /* 1F8CDC */ void grIceMt_801F8CDC(Ground_GObj*, s16* joint_indices, int count,
                                    HSD_GObj** output_array);
-/* 1F8E58 */ UNK_RET fn_801F8E58(Ground_GObj*);
-/* 1F9038 */ UNK_RET fn_801F9038(Ground_GObj*);
-/* 1F9150 */ IceMountainParams* fn_801F9150(HSD_GObj*);
-/* 1F91A4 */ void fn_801F91A4(void);
-/* 1F91A8 */ HSD_GObj* fn_801F91A8(HSD_GObj*);
-/* 1F91EC */ void grIceMt_801F91EC(HSD_GObj*, s16*, int, int, int, int, int,
-                                   mpLib_Callback);
+/* 1F8E58 */ s32 fn_801F8E58(Ground_GObj*, s32*);
+/* 1F9038 */ int fn_801F9038(Ground_GObj*);
+/* 1F9150 */ s32 fn_801F9150(HSD_GObj*, s32*);
+/* 1F91A8 */ int fn_801F91A8(Ground_GObj*);
 /* 1F929C */ void grIceMt_801F929C(HSD_GObj* arg0, void* arg1);
 /* 1F9338 */ void fn_801F9338(Ground*, int, CollData*, s32, mpLib_GroundEnum,
                               float);
@@ -135,14 +137,16 @@ extern f32 grIm_804DB570;
 /* 1F9558 */ void fn_801F9558(Ground*, int, CollData*, s32, mpLib_GroundEnum,
                               float);
 /* 1F9668 */ void grIceMt_801F9668(float);
-/* 1F96E0 */ float grIceMt_801F96E0(float);
-/* 1F98A8 */ bool grIceMt_801F98A8(HSD_GObj* param1);
+/* 1F96E0 */ float grIceMt_801F96E0(struct grIceMt_GroundVars*, float);
+/* 1F98A8 */ void grIceMt_801F98A8(HSD_GObj* param1);
 /* 1F993C */ f32 grIceMt_801F993C(s32, s32);
-/* 1F9ACC */ void grIceMt_801F9ACC(float);
-/* 1FA0BC */ UNK_RET grIceMt_801FA0BC(int);
-/* 1FA364 */ void grIceMt_801FA364(UNK_T, float*, HSD_GObjEvent, Ground_GObj*);
+/* 1F9ACC */ int grIceMt_801F9ACC(Ground_GObj*, float, GrIceMtSegmentLookup,
+                                  Ground_GObj*);
+/* 1FA0BC */ void grIceMt_801FA0BC(s16*);
+/* 1FA364 */ bool grIceMt_801FA364(void* state, float* out, HSD_GObjEvent cb,
+                                   Ground_GObj* gobj);
 /* 1FA4CC */ int fn_801FA4CC(int num);
-/* 1FA500 */ int grIceMt_801FA500(HSD_GObj*);
+/* 1FA500 */ int grIceMt_801FA500(HSD_GObj*, HSD_JObj*);
 /* 1FA6D8 */ void grIceMt_801FA6D8(HSD_GObj*);
 /* 1FA728 */ void grIceMt_801FA728(Vec3*);
 /* 1FA7F0 */ void grIceMt_801FA7F0(Ground*, s32, CollData*, s32,

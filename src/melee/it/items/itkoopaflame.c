@@ -3,6 +3,8 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "it/it_2725.h"
+
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>
 
@@ -10,7 +12,7 @@
 #include <melee/db/db.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
-#include <melee/ft/chara/ftKirby/ftKb_Init.h>
+#include <melee/ft/chara/ftKirby/ftkirby.h>
 #include <melee/ft/chara/ftKoopa/ftKp_SpecialN.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_266F.h>

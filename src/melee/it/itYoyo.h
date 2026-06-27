@@ -3,6 +3,8 @@
 
 #include <platform.h>
 
+#include <baselib/forward.h>
+
 typedef struct itYoyoAttributes {
     s32 x0_CHARGE_SPAWN_POS;
     s32 x4_UPSMASH_CHARGE_STRING_LENGTH;
@@ -24,9 +26,9 @@ typedef struct itYoyoAttributes {
     s32 x44_UPSMASH_YOYO_NUDGE_FRAME;
     s32 x48_DOWNSMASH_YOYO_ROT_FRAME;
     s32 x4C_DOWNSMASH_YOYO_NUDGE_FRAME;
-    s32 x50_UNK4;
-    s32 x54_UNK5;
-    s32 x58_UNK6;
+    HSD_Joint* x50_string_joint;
+    HSD_Joint* x54_yoyo_joint;
+    HSD_MatAnimJoint* x58_yoyo_matanim;
     s32 x5C_UNK7;
 } itYoyoAttributes;
 

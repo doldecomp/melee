@@ -9,9 +9,12 @@
 
 /// Sound object userdata (0x48 bytes, allocated by HSD_ObjAlloc)
 typedef struct lbAudioAx_UserData {
-    /* 0x00 */ u8 x0[0x08];
+    /* 0x00 */ s32 x0;
+    /* 0x04 */ HSD_GObj* gobj;
     /* 0x08 */ HSD_GObj* entity;
-    /* 0x0C */ u8 xC[0x0C];
+    /* 0x0C */ s32 xC;
+    /* 0x10 */ bool (*x10)(HSD_GObj*);
+    /* 0x14 */ s32 x14;
     /* 0x18 */ s32 start_val;
     /* 0x1C */ s32 end_val;
     /* 0x20 */ s32 x20;
@@ -25,18 +28,20 @@ typedef struct lbAudioAx_UserData {
     /* 0x34 */ s32 current_frame;
     /* 0x38 */ s32 end_frame;
     /* 0x3C */ f32 x3C;
-    /* 0x40 */ u8 x40[0x04];
+    /* 0x40 */ s32 x40;
     /* 0x44 */ s32 x44;
 } lbAudioAx_UserData;
 
-extern f32 lbl_804D63F0;
-extern int lbl_804D63F4;
-extern int lbl_804D63F8;
-extern int lbl_804D63FC;
-extern int lbl_804D6400;
-extern int lbl_804D6404;
+static f32 lbl_804D63F0;
+static int lbl_804D63F4;
+static int lbl_804D63F8;
+static int lbl_804D63FC;
+static int lbl_804D6400;
+static int lbl_804D6404;
 
+static s32 lbl_804D3870 = 0x700000;
 static int lbl_804D3874 = 1;
+static s32 lbl_804D3878 = -1;
 static int lbl_804D387C = 0x7F;
 static f32 lbl_804D3880 = 1.0F; ///< synth volume
 static int lbl_804D3884 = 0x7F;
@@ -58,6 +63,7 @@ static f32 lbl_804D38C0 = 1.0F;
 static f32 lbl_804D38C4 = 1.0F;
 static f32 lbl_804D38C8 = 1.0F;
 static int lbl_804D38CC = 0x7F;
+static int lbl_804D38D0 = 7;
 static int lbl_804D38D4 = 7;
 static int lbl_804D38D8 = 1;
 static int lbl_804D38DC = -1;
@@ -81,22 +87,20 @@ static s32 lbl_804D642C;
 static int lbl_804D6430;
 static int lbl_804D6434;
 
-typedef struct {
-    /* 0x00 */ HSD_ObjAllocData alloc;
-    /* 0x2C */ s32 x2C[17];
-    /* 0x70 */ s32 x70[17];
-} lbAudioAx_PoolAlloc; // size: 0xB4
+typedef struct lbAudioAx_PoolAlloc {
+    /* 0x0000 */ HSD_ObjAllocData alloc;
+    /* 0x002C */ s32 x2C[17];
+    /* 0x0070 */ s32 x70[17];
+} lbAudioAx_PoolAlloc;
+STATIC_ASSERT(sizeof(struct lbAudioAx_PoolAlloc) == 0xB4);
 
 static lbAudioAx_PoolAlloc lbl_80433710;
 
-static int lbl_80433984[0x38];
-
-static struct {
-    int** x0;
-    int** x4;
-    int** x8;
-    int** xC;
-}* lbl_804D6454;
+/* 4337C4 */ static int lbl_804337C4[0x38];
+/* 4338A4 */ static int lbl_804338A4[0x38];
+/* 433984 */ static int lbl_80433984[0x38];
+/* 433A64 */ static int lbl_80433A64[0x38];
+/* 433B44 */ static int lbl_80433B44[0x1F124 / 4];
 
 char lbl_803BB300[0x40] = "";
 char lbl_803BB340[0x40] = "/audio/";
@@ -190,6 +194,27 @@ static u8 s32_arr_803BB6B0[0x6F][3] = {
     { 0x37, 0x01, 0x01 }, { 0x37, 0x01, 0x01 }, { 0x00, 0x00, 0x00 },
 };
 
+static s8 flags_arr_803BB800[] = {
+    0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x00, 0x01, 0x01, 0x01,
+    0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x01,
+    0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
+    0x01, 0x01, 0x00, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x01,
+    0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x01,
+    0x01, 0x01, 0x00, 0x00, 0x02, 0x10, 0x00, 0x41, 0x00, 0x06, 0x00, 0x17,
+    0x00, 0x0B, 0x00, 0x07, 0x00, 0x55, 0x00, 0x70, 0x00, 0x43, 0x00, 0x66,
+    0x00, 0x7D, 0x00, 0x81, 0x00, 0x45, 0x00, 0xF9, 0x00, 0x9A, 0x00, 0x50,
+    0x00, 0x6D, 0x00, 0x68, 0x00, 0x5E, 0x00, 0x85, 0x00, 0x94, 0x00, 0x66,
+    0x00, 0x5B, 0x00, 0x61, 0x00, 0x67, 0x00, 0x4F, 0x00, 0x4B, 0x00, 0xC8,
+    0x00, 0x64, 0x00, 0x48, 0x00, 0x5B, 0x00, 0x84, 0x00, 0x1E, 0x00, 0xDE,
+    0x00, 0x08, 0x00, 0x1A, 0x00, 0x0B, 0x00, 0x02, 0x00, 0x0B, 0x00, 0x0E,
+    0x00, 0x0C, 0x00, 0x05, 0x00, 0x09, 0x00, 0x0A, 0x00, 0x19, 0x00, 0x07,
+    0x00, 0x05, 0x00, 0x09, 0x00, 0x02, 0x00, 0x07, 0x00, 0x10, 0x00, 0x36,
+    0x00, 0x02, 0x00, 0x05, 0x00, 0x01, 0x00, 0x00,
+};
+
 static int s32_arr_803BB8D4[0x38][2] = {
     { 0, 0x20F },         { 0x2710, 0x2750 },   { 0x4E20, 0x4E25 },
     { 0x7530, 0x7546 },   { 0x9C40, 0x9C4A },   { 0xC350, 0xC356 },
@@ -212,6 +237,51 @@ static int s32_arr_803BB8D4[0x38][2] = {
     { 0x83D60, 0x83D60 }, { 0x83D60, 0x83D60 },
 };
 
+static char* lbl_803BBCFC[] = {
+    "main.ssm",     "pokemon.ssm", "nr_title.ssm", "nr_select.ssm",
+    "nr_1p.ssm",    "nr_vs.ssm",   "captain.ssm",  "clink.ssm",
+    "dk.ssm",       "drmario.ssm", "falco.ssm",    "fox.ssm",
+    "gkoopa.ssm",   "ice.ssm",     "kirby.ssm",    "koopa.ssm",
+    "link.ssm",     "luigi.ssm",   "mario.ssm",    "mars.ssm",
+    "mewtwo.ssm",   "ness.ssm",    "peach.ssm",    "pichu.ssm",
+    "pikachu.ssm",  "purin.ssm",   "samus.ssm",    "zs.ssm",
+    "yoshi.ssm",    "gw.ssm",      "ganon.ssm",    "emblem.ssm",
+    "mhands.ssm",   "kirbytm.ssm", "castle.ssm",   "corneria.ssm",
+    "greatbay.ssm", "kongo.ssm",   "mutecity.ssm", "onett.ssm",
+    "zebes.ssm",    "garden.ssm",  "klaid.ssm",    "greens.ssm",
+    "venom.ssm",    "bigblue.ssm", "fourside.ssm", "pupupu.ssm",
+    "pstadium.ssm", "1padv.ssm",   "ending.ssm",   "nr_name.ssm",
+    "1pend.ssm",    "last.ssm",    "end.ssm",      NULL,
+};
+
+static char* lbl_803BC314[] = {
+    "1p_qk.hps",      "akaneia.hps",    "baloon.hps",     "bigblue.hps",
+    "castle.hps",     "continue.hps",   "corneria.hps",   "docmari.hps",
+    "ending.hps",     "famidemo.hps",   "ff_1p01.hps",    "ff_1p02.hps",
+    "ff_bad.hps",     "ff_dk.hps",      "ff_emb.hps",     "ff_flat.hps",
+    "ff_fox.hps",     "ff_fzero.hps",   "ff_good.hps",    "ff_ice.hps",
+    "ff_kirby.hps",   "ff_link.hps",    "ff_mario.hps",   "ff_nes.hps",
+    "ff_poke.hps",    "ff_samus.hps",   "ff_step1.hps",   "ff_step2.hps",
+    "ff_step3.hps",   "ff_yoshi.hps",   "flatzone.hps",   "fourside.hps",
+    "gameover.hps",   "garden.hps",     "greatbay.hps",   "greens.hps",
+    "howto.hps",      "howto_s.hps",    "hyaku.hps",      "hyaku2.hps",
+    "icemt.hps",      "inis1_01.hps",   "inis1_02.hps",   "inis2_01.hps",
+    "inis2_02.hps",   "intro_es.hps",   "intro_nm.hps",   "item_h.hps",
+    "item_s.hps",     "izumi.hps",      "kongo.hps",      "kraid.hps",
+    "menu01.hps",     "menu02.hps",     "menu3.hps",      "mrider.hps",
+    "mutecity.hps",   "old_dk.hps",     "old_kb.hps",     "old_ys.hps",
+    "onetto.hps",     "onetto2.hps",    "opening.hps",    "pokesta.hps",
+    "pstadium.hps",   "pura.hps",       "rcruise.hps",    "s_info1.hps",
+    "s_info2.hps",    "s_info3.hps",    "s_new1.hps",     "s_new2.hps",
+    "s_newcom.hps",   "s_select.hps",   "saria.hps",      "shrine.hps",
+    "siren.hps",      "smari3.hps",     "sp_end.hps",     "sp_giga.hps",
+    "sp_metal.hps",   "sp_zako.hps",    "swm_15min.hps",  "target.hps",
+    "venom.hps",      "vl_battle.hps",  "vl_castle.hps",  "vl_corneria.hps",
+    "vl_cosmos.hps",  "vl_figure1.hps", "vl_figure2.hps", "vl_fzero.hps",
+    "vl_last_v2.hps", "vs_hyou1.hps",   "vs_hyou2.hps",   "yorster.hps",
+    "ystory.hps",     "zebes.hps",      "testnz.hps",
+};
+
 static u8 unk_arr_803BC4A0[0x21][2] = {
     { 0x38, 0x03 }, { 0x32, 0x21 }, { 0x06, 0x54 }, { 0x1E, 0x1E },
     { 0x23, 0x31 }, { 0x04, 0x04 }, { 0x22, 0x4B }, { 0x2B, 0x2B },
@@ -223,15 +293,52 @@ static u8 unk_arr_803BC4A0[0x21][2] = {
     { 0x62, 0x62 }, { 0x62, 0x62 }, { 0x62, 0x62 }, { 0x62, 0x62 },
 };
 
-static int offsets_arr_803BC4E4[0x38][2];
+static int offsets_arr_803BC4E4[][2] = {
+    2045824, 0,       561760, 1,      153024, 0,      239264, 1,      121888,
+    0,       54176,   0,      443328, 1,      298400, 0,      206368, 0,
+    430560,  1,       599712, 1,      573216, 1,      487936, 0,      477600,
+    1,       586208,  1,      526752, 1,      328672, 1,      372992, 1,
+    372736,  0,       513088, 1,      562912, 1,      509024, 0,      416736,
+    1,       580128,  1,      613088, 1,      334528, 1,      319040, 1,
+    590176,  1,       321472, 1,      165344, 1,      427872, 1,      495520,
+    1,       563712,  0,      572832, 0,      176224, 0,      441760, 1,
+    490240,  0,       360064, 0,      150144, 0,      54208,  0,      387872,
+    0,       428896,  0,      304096, 0,      144480, 0,      382272, 1,
+    34880,   0,       78592,  0,      123104, 0,      101504, 0,      160576,
+    0,       1168864, 0,      348160, 1,      363936, 0,      663136, 0,
+    1536,    0,       0,      0,      150050, 330000, 150053, 330003, 150056,
+    330006,  150059,  330009, 260006, 330012, 260009, 330015, 260012, 330018,
+    260015,  330021,  260018, 330024, 260021, 330027, 80007,  330030, 80010,
+    330033,  210069,  330036, 210072, 330039, 210084, 330042, 240076, 330045,
+    240079,  330048,  60079,  330051, 110100, 330054, 110103, 330057, 110106,
+    330060,  110109,  330063, 110085, 330066, 180025, 330069, 180007, 330072,
+    160082,  330075,  160061, 330078, 160064, 330081, 220061, 330084, 130021,
+    330087,  130024,  330090, 280073, 330093, 280076, 330096, 280088, 330099,
+    90030,   330102,  90012,  330105, 100096, 330108, 100099, 330111, 100102,
+    330114,  100105,  330117, 100081, 330120, 300085, 330123, 290063, 330126,
+    310102,  330129,  310105, 330132, 310108, 330135, 250064, 330138, 250067,
+    330141,  250070,  330144, 250073, 330147, 70082,  330150, 70061,  330153,
+    70064,   330156,  170026, 330159, 170008, 330162, 190103, 330165, 190106,
+    330168,  190109,  330171, 200106, 330174, 200109, 330177, 200112, 330180,
+    200115,  330183,  200118, 330186, 200121, 330189, 200124, 330192, 200127,
+    330195,  200130,  330198, 270134, 330201, 270137, 330204, 270140, 330207,
+    270191,  330210,  270197, 330213, 230067, 330216, 230070, 330219, 540000,
+    540000,
 
-extern int lbl_804337C4[0x38];
-extern int lbl_804338A4[0x38];
-extern int lbl_80433B44[0x38];
+};
 
-extern int lbl_804D6438;
-extern int lbl_804D6448;
-extern int lbl_804D644C;
-extern int lbl_804D6450;
+/* 4D6438 */ static int lbl_804D6438;
+/* 4D643C */ static int lbl_804D643C;
+/* 4D6440 */ static int lbl_804D6440;
+/* 4D6444 */ static int lbl_804D6444;
+/* 4D6448 */ static int lbl_804D6448;
+/* 4D644C */ static int lbl_804D644C;
+/* 4D6450 */ static int lbl_804D6450;
+/* 4D6454 */ static struct {
+    int** x0;
+    int** x4;
+    int** x8;
+    int** xC;
+}* lbl_804D6454;
 
 #endif

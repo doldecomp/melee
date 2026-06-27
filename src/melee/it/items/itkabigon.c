@@ -1,8 +1,5 @@
 #include "itkabigon.h"
 
-#include <placeholder.h>
-#include <platform.h>
-
 #include "cm/camera.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
@@ -11,20 +8,20 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/itCommonItems.h"
+#include "it/it_279C.h"
 #include "it/item.h"
+#include "it/itmaplib.h"
 
 #include <baselib/random.h>
 
-typedef struct itKabigonAttributes {
-    f32 x0;
-    f32 x4;
-    f32 x8;
-    f32 xC;
-    s32 x10;
-    s32 x14;
-    f32 x18;
-} itKabigonAttributes;
+ItemStateTable it_803F7AD8[] = {
+    { 0, itKabigon_UnkMotion0_Anim, itKabigon_UnkMotion0_Phys,
+      itKabigon_UnkMotion0_Coll },
+    { 1, itKabigon_UnkMotion1_Anim, itKabigon_UnkMotion1_Phys,
+      itKabigon_UnkMotion1_Coll },
+    { -1, itKabigon_UnkMotion2_Anim, itKabigon_UnkMotion2_Phys,
+      itKabigon_UnkMotion2_Coll },
+};
 
 void it_802C9D40(Item_GObj* gobj)
 {
@@ -136,9 +133,57 @@ void it_802CA014(Item_GObj* gobj)
     }
 }
 
-/// #it_802CA074
+void it_802CA074(Item_GObj* gobj)
+{
+    HSD_JObj* jobj = HSD_GObjGetHSDObj(gobj);
+    Item* ip = GET_ITEM(gobj);
+    Vec3 scale;
 
-/// #itKabigon_UnkMotion1_Anim
+    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+    ip->x40_vel.y = 0.0F;
+    scale.z = ip->xDD4_itemVar.kabigon.x68;
+    scale.y = ip->xDD4_itemVar.kabigon.x68;
+    scale.x = ip->xDD4_itemVar.kabigon.x68;
+    HSD_JObjSetScale(jobj, &scale);
+    Item_8026AE84(ip, 0x2724, 0x7F, 0x40);
+}
+
+static inline void itKabigon_UnkMotion1_Anim_inline(Item_GObj* gobj, Item* ip)
+{
+    Vec3 scale;
+    if (!it_80272C6C(gobj)) {
+        HSD_JObj* jobj = GET_JOBJ(gobj);
+        Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+        ip->entered_hitlag = efLib_PauseAll;
+        ip->exited_hitlag = efLib_ResumeAll;
+        scale.x = scale.y = scale.z = ip->xDD4_itemVar.kabigon.x68;
+        HSD_JObjSetScale(jobj, &scale);
+    }
+}
+
+bool itKabigon_UnkMotion1_Anim(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    if (ip->xDAC_itcmd_var0 == 0) {
+        if (ip->xDD4_itemVar.kabigon.x6C <= 0) {
+            HSD_JObj* jobj = GET_JOBJ(gobj);
+            ip->xDAC_itcmd_var0 = 1;
+            HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
+            ip->pos.y = Stage_GetBlastZoneTopOffset();
+            ip->x40_vel.y = ip->xDD4_itemVar.kabigon.x64;
+            Camera_80030E44(2, NULL);
+        } else {
+            ip->xDD4_itemVar.kabigon.x6C--;
+        }
+    } else if (ip->pos.y < Stage_GetBlastZoneBottomOffset()) {
+        return true;
+    }
+    itKabigon_UnkMotion1_Anim_inline(gobj, ip);
+    return false;
+}
 
 void itKabigon_UnkMotion1_Phys(Item_GObj* gobj) {}
 

@@ -7,12 +7,18 @@
 #include "it/forward.h"
 
 #include "it/items/types.h"
+#include "it/types.h"
 
 #include <dolphin/mtx.h>
 
+typedef struct itSeakNeedleThrownAttributes {
+    f32 x0;
+    f32 x4;
+    f32 x8;
+} itSeakNeedleThrownAttributes;
+
 /* 2AFD8C */ Item_GObj* it_802AFD8C(Item_GObj*, Vec3*, u32, float);
-/* 2AFEA8 */ Item_GObj* it_802AFEA8(Item_GObj* gobj, Fighter_GObj* owner_gobj,
-                                    u32);
+/* 2AFEA8 */ void it_802AFEA8(Item_GObj* gobj, Fighter_GObj* owner_gobj, u32);
 /* 2AFEF8 */ void itSeakNeedleThrown_Logic109_Destroyed(Item_GObj*);
 /* 2AFF08 */ void it_802AFF08(Item_GObj*, Fighter_GObj*);
 /* 2B00F4 */ void it_802B00F4(Item_GObj*, Fighter_GObj*);

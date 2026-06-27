@@ -17,6 +17,8 @@
 
 #include "it/items/forward.h"
 
+#include "it/itmaplib.h"
+
 #include <math.h>
 
 #define M_TAU 6.283185307179586

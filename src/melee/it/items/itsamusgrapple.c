@@ -7,6 +7,7 @@
 
 #include "dolphin/types.h"
 #include "ef/efsync.h"
+#include "ft/chara/ftCommon/ftCo_0A01.h"
 #include "ft/chara/ftCommon/ftCo_AirCatch.h"
 #include "ft/chara/ftCommon/ftCo_CliffJump.h"
 #include "ft/chara/ftCommon/ftCo_DamageFall.h"
@@ -19,6 +20,8 @@
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
+#include "ft/ftlib.h"
+#include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ftSamus/types.h"
 #include "it/inlines.h"
@@ -26,6 +29,7 @@
 #include "it/itCharItems.h"
 #include "it/item.h"
 #include "lb/lbvector.h"
+#include "lb/types.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
@@ -36,9 +40,6 @@
 #include <baselib/random.h>
 
 extern Vec3 it_803B8674;
-typedef struct {
-    s32 data[5];
-} itSamusGrapple_HitboxData;
 extern itSamusGrapple_HitboxData it_803B8660;
 
 static inline bool samus_grapple_fighter_compare(FtMotionId id)
@@ -130,7 +131,84 @@ void itSamusGrapple_Logic53_Spawned(Item_GObj* gobj)
     ip->xDD4_itemVar.samusgrapple.unk_10 = NULL;
 }
 
-/// #it_802B7160
+void it_802B7160(Fighter_GObj* gobj, itSamusGrapple_HitboxData* data)
+{
+    u16* damage;
+    Fighter* fp;
+    u32 hit_group;
+    HitCapsule* hitbox;
+    u32 damage_arg;
+    struct samus_grapple_hitbox_flags {
+        u8 : 6;
+        u8 hit_grounded : 1;
+    };
+    struct samus_grapple_hitbox_flags* hitbox_flags;
+    PAD_STACK(8);
+
+    fp = GET_FIGHTER(gobj);
+    hit_group = data->create_hitbox.create_hitbox_0.hit_group;
+    if (((hitbox = &fp->x914[data->create_hitbox.create_hitbox_0.id])->state ==
+         HitCapsule_Disabled) ||
+        hitbox->x4 != hit_group)
+    {
+        hitbox->x4 = hit_group;
+        hitbox->state = HitCapsule_Enabled;
+        fp->x2219_b3 = 1;
+        ftColl_800768A0(fp, hitbox);
+    }
+    damage = (u16*) ((u8*) data + 2);
+    {
+        u32 bone = data->create_hitbox.create_hitbox_0.bone;
+        if (data->create_hitbox.create_hitbox_0.use_common_bone_ids) {
+            bone = ftParts_GetBoneIndex(fp, bone);
+            hitbox->jobj = fp->parts[bone].joint;
+        } else {
+            hitbox->jobj = fp->parts[bone].joint;
+        }
+    }
+    damage_arg = *damage;
+    damage_arg &= 0x3FF;
+    ftColl_8007ABD0(hitbox, damage_arg, gobj);
+    hitbox->scale = data->create_hitbox.create_hitbox_1.size * 0.003906f;
+    hitbox->b_offset.x =
+        data->create_hitbox.create_hitbox_1.z_offset * 0.003906f;
+    hitbox->b_offset.y =
+        data->create_hitbox.create_hitbox_2.y_offset * 0.003906f;
+    hitbox->b_offset.z =
+        data->create_hitbox.create_hitbox_2.x_offset * 0.003906f;
+    ftColl_8007AC9C(hitbox, data->create_hitbox.create_hitbox_3.angle, gobj);
+    hitbox_flags = (struct samus_grapple_hitbox_flags*) &data->create_hitbox
+                       .create_hitbox_4 +
+                   3;
+    hitbox->x24 = data->create_hitbox.create_hitbox_3.knockback_growth;
+    hitbox->x28 = data->create_hitbox.create_hitbox_3.weight_set_knockback;
+    hitbox->x43_b0 = data->create_hitbox.create_hitbox_3.item_hit_interaction;
+    hitbox->x43_b1 = data->create_hitbox.create_hitbox_3.ignore_fighter_scale;
+    hitbox->x40_b0 = data->create_hitbox.create_hitbox_3.clank;
+    hitbox->x40_b1 = data->create_hitbox.create_hitbox_3.rebound;
+    hitbox->x2C =
+        ((struct spawn_hitbox_4*) (hitbox_flags - 3))->base_knockback;
+    hitbox->element = ((struct spawn_hitbox_4*) (hitbox_flags - 3))->element;
+    hitbox->x34 = ((struct spawn_hitbox_4*) (hitbox_flags - 3))->shield_damage;
+    hitbox->sfx_severity =
+        ((struct spawn_hitbox_4*) (hitbox_flags - 3))->hit_sfx_severity;
+    hitbox->sfx_kind =
+        ((struct spawn_hitbox_4*) (hitbox_flags - 3))->hit_sfx_kind;
+    hitbox->x40_b2 = ((struct spawn_hitbox_4*) (hitbox_flags - 3))->hit_aerial;
+    hitbox->x40_b3 = hitbox_flags->hit_grounded;
+    hitbox->x42_b5 = 1;
+    hitbox->x42_b7 = 1;
+    hitbox->x41_b4 = 0;
+    hitbox->x41_b6 = 0;
+    hitbox->x41_b5 = 0;
+    hitbox->x42_b0 = 0;
+    hitbox->x42_b4 = 0;
+    hitbox->x41_b7 = 0;
+    hitbox->hit_grabbed_victim_only = data->x134_4;
+    hitbox->x42_b1 = 1;
+    hitbox->x42_b2 = 0;
+    hitbox->x43_b2 = 0;
+}
 
 void it_802B743C(HSD_GObj* gobj, Item* ip, s32 type)
 {
@@ -205,20 +283,120 @@ void it_802B743C(HSD_GObj* gobj, Item* ip, s32 type)
     HSD_JObjReqAnimAll(jobj->child, 0.0f);
 }
 
-static inline void it_802B75FC_inline(ItemLink* link, f32 f)
+static inline void it_802B75FC_inline(ItemLink* link, Vec* zero, f32 f)
 {
-    link->vel = it_803B8674;
-    link->pos = it_803B8674;
+    CollData* cd = &link->coll_data;
+    link->vel = *zero;
+    link->pos = *zero;
     link->x2C_b0 = 0;
     link->x2C_b1 = 0;
     link->x2C_b2 = 0;
-    link->coll_data.cur_pos = link->pos;
-    link->coll_data.last_pos = link->coll_data.cur_pos;
-    mpColl_80041EE4(&link->coll_data);
-    mpColl_SetECBSource_Fixed(&link->coll_data, NULL, f, f, f, f);
+    cd->cur_pos = link->pos;
+    cd->last_pos = cd->cur_pos;
+    mpColl_80041EE4(cd);
+    mpColl_SetECBSource_Fixed(cd, NULL, f, f, f, f);
 }
 
-/// #it_802B75FC
+HSD_JObj* it_802B75FC(Item* ip, HSD_JObj* jobj_arg, s32 arg2, f32 scale)
+{
+    f32 coeff;
+    f32 temp;
+    HSD_JObj* result;
+    ItemLink* prev_link;
+    ItemLink* head_link;
+    ItemLink* tail_link;
+    s32 i;
+    itSamusGrappleAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
+    Vec3 zero_vel = it_803B8674;
+    PAD_STACK(4);
+
+    if (arg2 != 0) {
+        coeff = attrs->x60;
+    } else {
+        coeff = attrs->x5C;
+    }
+
+    attrs->x38 = attrs->x10 * scale;
+    attrs->x3C = attrs->x14 * scale;
+    attrs->x40 = coeff * (attrs->x18 * scale);
+    attrs->x44 = attrs->x1C * scale;
+    attrs->x48 = coeff * (attrs->x20 * scale);
+    attrs->x4C = coeff * (attrs->x24 * scale);
+    attrs->x50 = coeff * (attrs->x28 * scale);
+    attrs->x54 = coeff * (attrs->x2C * scale);
+    attrs->x58 = attrs->x30 * scale;
+
+    if (scale > 1.0) {
+        temp = (attrs->x8 * (attrs->xC * attrs->x38)) +
+               ((1.0f - attrs->x8) * (attrs->xC * attrs->x10));
+    } else {
+        temp = attrs->xC * attrs->x38;
+    }
+    attrs->x34 = ((temp * coeff) / attrs->x38);
+
+    if (ip->xDD4_itemVar.samusgrapple.x16 == 1) {
+        attrs->x34 *= 2;
+    }
+    ip->xDD4_itemVar.samusgrapple.x15 = attrs->x34;
+
+    prev_link = NULL;
+    for (i = 0; i < attrs->x34; i++) {
+        HSD_GObj* link_gobj = GObj_Create(7, 0xA, 0);
+        ItemLink* link;
+        if (link_gobj == NULL) {
+            while (prev_link != NULL) {
+                HSD_GObjPLink_80390228(prev_link->gobj);
+                prev_link = prev_link->next;
+            }
+            return NULL;
+        }
+        link = HSD_ObjAlloc(&item_link_alloc_data);
+        GObj_InitUserData(link_gobj, 6, it_802A2474, link);
+
+        if (i == 0) {
+            link->next = NULL;
+            head_link = link;
+            link->jobj = jobj_arg;
+            link->gobj = link_gobj;
+            it_802B75FC_inline(link, &zero_vel, 1.0f);
+            it_802B743C(link_gobj, ip, 0);
+        } else if (i == attrs->x34 - 1) {
+            itSamusGrappleAttributes* attrs2;
+            HSD_JObj* tail_jobj;
+            prev_link->prev = link;
+            link->prev = NULL;
+            tail_link = link;
+            link->next = prev_link;
+            link->jobj = jobj_arg;
+            link->gobj = link_gobj;
+            it_802B75FC_inline(link, &zero_vel, 1.5f);
+            attrs2 = ip->xC4_article_data->x4_specialAttributes;
+            tail_jobj = HSD_JObjLoadJoint(attrs2->x70);
+            HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849, tail_jobj);
+            GObj_SetupGXLink(link_gobj, it_802A24A0, 6, 0);
+            HSD_JObjAddAnimAll(tail_jobj->child,
+                               (attrs2->x98 != NULL) ? *attrs2->x98 : NULL,
+                               (attrs2->x9C != NULL) ? *attrs2->x9C : NULL,
+                               (attrs2->xA0 != NULL) ? *attrs2->xA0 : NULL);
+            HSD_JObjReqAnimAll(tail_jobj->child, 0.0f);
+            result = link_gobj->hsd_obj;
+        } else {
+            prev_link->prev = link;
+            link->next = prev_link;
+            link->jobj = jobj_arg;
+            link->gobj = link_gobj;
+            it_802B75FC_inline(link, &zero_vel, 1.0f);
+            it_802B743C(link_gobj, ip, i % 3);
+        }
+        link->x1CC = -1;
+        prev_link = link;
+    }
+
+    ip->xDD4_itemVar.samusgrapple.x0 = tail_link;
+    ip->xDD4_itemVar.samusgrapple.x4 = head_link;
+    return result;
+}
 
 void it_802B7B84(Item_GObj* gobj)
 {
@@ -248,9 +426,93 @@ void it_802B7B84(Item_GObj* gobj)
     }
 }
 
-/// #it_802B7C18
+Item_GObj* it_802B7C18(Fighter_GObj* owner, Vec3* pos, f32 facing_dir)
+{
+    Fighter* fp = GET_FIGHTER(owner);
+    SpawnItem spawn;
+    Item_GObj* item_gobj;
+    Item* ip;
+    HSD_JObj* jobj;
+    itSamusGrappleAttributes* attrs;
+    s32 type;
+    HSD_AnimJoint* anim;
+    HSD_MatAnimJoint* matanim;
+    HSD_ShapeAnimJoint* shapeanim;
+    PAD_STACK(16);
 
-static inline void fn_802B7E34_inline(Item* ip, Mtx m)
+    if (!samus_grapple_fighter_compare(fp->motion_id)) {
+        return NULL;
+    }
+
+    spawn.kind = 0x60;
+    spawn.prev_pos = *pos;
+    spawn.pos = spawn.prev_pos;
+    spawn.facing_dir = facing_dir;
+    spawn.x3C_damage = 0;
+    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
+    spawn.x0_parent_gobj = owner;
+    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
+    spawn.x44_flag.b0 = 1;
+
+    item_gobj = Item_80268B18(&spawn);
+    if (item_gobj != NULL) {
+        ip = GET_ITEM(item_gobj);
+        jobj = item_gobj->hsd_obj;
+        attrs = ip->xC4_article_data->x4_specialAttributes;
+        ip->xDD4_itemVar.samusgrapple.x14 = 0;
+
+        if (fp->fv.ss.x2240 >= 4) {
+            if (fp->ground_or_air == GA_Ground) {
+                ip->xDD4_itemVar.samusgrapple.x16 = 1;
+            } else {
+                ip->xDD4_itemVar.samusgrapple.x16 = 2;
+            }
+        } else {
+            ip->xDD4_itemVar.samusgrapple.x16 = 0;
+            fp->fv.ss.x2240 = 0;
+        }
+
+        if (fp->motion_id == 0x165) {
+            type = 1;
+        } else {
+            type = 0;
+        }
+        if (it_802B75FC(ip, ftLib_80086630(owner, FtPart_ThrowN), type,
+                        fp->x34_scale.y) == NULL)
+        {
+            Item_8026A8EC(item_gobj);
+            return NULL;
+        }
+
+        if (attrs->xAC != NULL) {
+            shapeanim = *attrs->xAC;
+        } else {
+            shapeanim = NULL;
+        }
+        if (attrs->xA8 != NULL) {
+            matanim = *attrs->xA8;
+        } else {
+            matanim = NULL;
+        }
+        if (attrs->xA4 != NULL) {
+            anim = *attrs->xA4;
+        } else {
+            anim = NULL;
+        }
+        HSD_JObjAddAnimAll(jobj->child, anim, matanim, shapeanim);
+        HSD_JObjReqAnimAll(jobj->child, 0.0f);
+
+        ip->xDD4_itemVar.samusgrapple.x8 = owner;
+        ip->xDD4_itemVar.samusgrapple.xC =
+            ip->xDD4_itemVar.samusgrapple.x0->gobj->hsd_obj;
+        fp->parts[0x8B].joint = ip->xDD4_itemVar.samusgrapple.xC;
+        Item_8026AB54(item_gobj, owner, FtPart_ThrowN);
+        it_802A2428(item_gobj);
+    }
+    return item_gobj;
+}
+
+static inline Item* fn_802B7E34_inline(Item_GObj* gobj, Item* ip, Mtx m)
 {
     HSD_JObj* jobj;
     ItemLink* link = ip->xDD4_itemVar.samusgrapple.x0;
@@ -261,14 +523,31 @@ static inline void fn_802B7E34_inline(Item* ip, Mtx m)
     HSD_JObjCopyMtx(jobj, m);
     jobj->flags |= 0x03800000;
     HSD_JObjSetMtxDirty(jobj);
+    return GET_ITEM(gobj);
 }
 
-static inline void link_all(HSD_JObj* jobj, ItemLink* link)
+static inline void fn_802B7E34_anim_inline(Item_GObj* gobj, Item* ip, Mtx m)
 {
-    HSD_JObjAnimAll(jobj);
-    while (link != NULL) {
-        HSD_JObjAnimAll(link->gobj->hsd_obj);
-        link = link->prev;
+    {
+        HSD_JObj* jobj;
+        ItemLink* link = ip->xDD4_itemVar.samusgrapple.x0;
+        jobj = link->gobj->hsd_obj;
+        HSD_JObjSetupMatrix(link->jobj);
+        PSMTXIdentity(m);
+        PSMTXConcat(link->jobj->mtx, m, m);
+        HSD_JObjCopyMtx(jobj, m);
+        jobj->flags |= 0x03800000;
+        HSD_JObjSetMtxDirty(jobj);
+    }
+    {
+        Item* ip = GET_ITEM(gobj);
+        ItemLink* link;
+        HSD_JObjAnimAll(GET_JOBJ(gobj));
+        link = ip->xDD4_itemVar.samusgrapple.x4;
+        while (link != NULL) {
+            HSD_JObjAnimAll(link->gobj->hsd_obj);
+            link = link->prev;
+        }
     }
 }
 
@@ -278,21 +557,9 @@ void fn_802B7E34(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     Fighter* fp = GET_FIGHTER(ip->owner);
     PAD_STACK(20);
+
     samus_grapple_state_sync(fp);
-    fn_802B7E34_inline(ip, m);
-
-    {
-        Item* ip = GET_ITEM(gobj);
-        ItemLink* link;
-        HSD_JObjAnimAll(GET_JOBJ(gobj));
-        link = ip->xDD4_itemVar.samusgrapple.x4;
-        while (link) {
-            HSD_JObjAnimAll(link->gobj->hsd_obj);
-            link = link->prev;
-        }
-    }
-
-    // samus_grapple_anim(gobj);
+    fn_802B7E34_anim_inline(gobj, ip, m);
     if (samus_grapple_fighter_compare(fp->motion_id)) {
         return;
     }
@@ -307,17 +574,20 @@ void itSamusgrapple_UnkMotion0_Phys(Item_GObj* gobj)
 void fn_802B805C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    Fighter* fp = ip->owner->user_data;
-    itSamusGrappleAttributes* attrs =
-        ip->xC4_article_data->x4_specialAttributes;
+    Fighter_GObj* owner;
+    itSamusGrappleAttributes* attrs;
     ItemLink* link;
+    Fighter* fp;
     Vec3 pos;
     Vec3 normal;
     Vec3 pos2;
-    u8 _pad2[16];
+    u8 _padA[4];
     Mtx m;
-    PAD_STACK(16);
+    PAD_STACK(28);
 
+    owner = ip->owner;
+    attrs = ip->xC4_article_data->x4_specialAttributes;
+    fp = owner->user_data;
     samus_grapple_state_sync(fp);
 
     link = ip->xDD4_itemVar.samusgrapple.x0;
@@ -329,8 +599,7 @@ void fn_802B805C(Item_GObj* gobj)
 
     samus_grapple_setup_pos(link, &pos, m);
 
-    fp = ip->owner->user_data;
-    switch (it_802B9328(link, &pos, attrs, fp)) {
+    switch (it_802B9328(link, &pos, attrs, ip->owner->user_data)) {
     case 1:
         if (fp->motion_id == 0x165) {
             ftCo_800C3CC0(ip->owner);
@@ -377,16 +646,20 @@ void itSamusgrapple_UnkMotion1_Phys(Item_GObj* gobj)
 void fn_802B8384(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    Fighter* fp = ip->owner->user_data;
+    Fighter_GObj* owner = ip->owner;
     itSamusGrappleAttributes* attrs =
         ip->xC4_article_data->x4_specialAttributes;
-    ItemLink* link = ip->xDD4_itemVar.samusgrapple.x0;
+    ItemLink* link;
+    Fighter* fp;
     Vec3 pos;
     Vec3 sp5C;
     u8 _pad[4];
     Mtx m;
     PAD_STACK(20);
 
+    fp = owner->user_data;
+    (void) fp;
+    link = ip->xDD4_itemVar.samusgrapple.x0;
     samus_grapple_setup_pos(link, &pos, m);
 
     switch (it_802B99A0(link, &pos, attrs, fp)) {
@@ -418,7 +691,7 @@ void fn_802B8524(Item_GObj* gobj)
     itSamusGrappleAttributes* attrs =
         ip->xC4_article_data->x4_specialAttributes;
     Fighter* fp = ip->owner->user_data;
-    Fighter* new_var = fp;
+    Fighter* fp2 = fp; // permuterslop
     ItemLink* link = ip->xDD4_itemVar.samusgrapple.x4;
     Vec3 pos;
     u8 _pad[4];
@@ -427,7 +700,7 @@ void fn_802B8524(Item_GObj* gobj)
 
     samus_grapple_setup_pos(link, &pos, m);
     it_802B9CE8(link, &pos, attrs, ip->owner->user_data);
-    it_802A7168(ip, &pos, new_var->x34_scale.y);
+    it_802A7168(ip, &pos, fp2->x34_scale.y);
     samus_grapple_anim(gobj);
     if (samus_grapple_fighter_compare(fp->motion_id)) {
         return;
@@ -445,29 +718,34 @@ void fn_802B8684(Item_GObj* gobj)
     Vec3 pos;
     u8 _pad[4];
     Mtx m;
-    Item* ip = GET_ITEM(gobj);
-    itSamusGrappleAttributes* attrs =
-        ip->xC4_article_data->x4_specialAttributes;
-    Fighter* fp = ip->owner->user_data;
-    ItemLink* link = ip->xDD4_itemVar.samusgrapple.x4;
+    Fighter* fp;
+    Fighter* fp2;
+    Item* ip;
+    itSamusGrappleAttributes* attrs;
+    ItemLink* link;
     f32 retract_speed;
     PAD_STACK(20);
 
+    ip = GET_ITEM(gobj);
+    attrs = ip->xC4_article_data->x4_specialAttributes;
+    fp = ip->owner->user_data;
+    fp2 = fp;
+    link = ip->xDD4_itemVar.samusgrapple.x4;
     samus_grapple_setup_pos(link, &pos, m);
 
-    if (fp->ground_or_air == GA_Ground) {
+    if (fp2->ground_or_air == GA_Ground) {
         retract_speed = attrs->x4C;
     } else {
         retract_speed = 2.0 * attrs->x4C;
     }
     if (it_802BA194(link, &pos, attrs, retract_speed)) {
-        if (!samus_grapple_fighter_compare(fp->motion_id)) {
+        if (!samus_grapple_fighter_compare(fp2->motion_id)) {
             it_802B7B84(gobj);
             return;
         }
         itSamusGrapple_Logic53_PickedUp(gobj);
     }
-    it_802A7168(ip, &pos, fp->x34_scale.y);
+    it_802A7168(ip, &pos, fp2->x34_scale.y);
     samus_grapple_anim(gobj);
 }
 
@@ -534,13 +812,15 @@ void fn_802B895C(Item_GObj* gobj)
     Fighter* fp = ip->owner->user_data;
     ItemLink* link = ip->xDD4_itemVar.samusgrapple.x4;
     Vec3 pos;
+    Fighter* fp2;
     u8 _pad[4];
     Mtx m;
     PAD_STACK(20);
 
+    fp2 = fp;
     samus_grapple_setup_pos(link, &pos, m);
 
-    if (fn_802B895C_inline(ip, fp, &pos)) {
+    if (fn_802B895C_inline(ip, fp2, &pos)) {
         ftCo_80090780(ip->owner);
         it_802B7B84(gobj);
         return;
@@ -549,13 +829,13 @@ void fn_802B895C(Item_GObj* gobj)
         it_802BABB8(gobj);
         return;
     }
-    it_802A7168(ip, &pos, fp->x34_scale.y);
+    it_802A7168(ip, &pos, fp2->x34_scale.y);
     samus_grapple_anim(gobj);
-    if (fp->ground_or_air != GA_Air) {
+    if (fp2->ground_or_air != GA_Air) {
         it_802BAA58(gobj);
         return;
     }
-    if (fp->input.x668 & 0x100) {
+    if (fp2->input.x668 & 0x100) {
         it_802BAB7C(gobj);
     }
 }
@@ -568,42 +848,46 @@ void itSamusgrapple_UnkMotion6_Phys(Item_GObj* gobj)
 void fn_802B8B54(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    Fighter* fp = ip->owner->user_data;
     itSamusGrappleAttributes* attrs =
         ip->xC4_article_data->x4_specialAttributes;
-    ItemLink* link = ip->xDD4_itemVar.samusgrapple.x4;
+    Fighter* fp = ip->owner->user_data;
+    ItemLink* link;
     Vec3 pos;
-    ftSs_DatAttrs* da = fp->dat_attrs;
+    ftSs_DatAttrs* da;
+    Fighter* fp2;
     u8 _pad[4];
     f32 dx, dy;
     u8 _pad2[24];
     Mtx m;
     PAD_STACK(28);
 
+    da = fp->dat_attrs;
+    link = ip->xDD4_itemVar.samusgrapple.x4;
+    fp2 = fp;
     samus_grapple_setup_pos(link, &pos, m);
-    dx = fp->cur_pos.x - pos.x;
-    dy = fp->cur_pos.y - pos.y;
+    dx = fp2->cur_pos.x - pos.x;
+    dy = fp2->cur_pos.y - pos.y;
 
     if (it_802BA3BC(ip->xDD4_itemVar.samusgrapple.x4,
                     ip->xDD4_itemVar.samusgrapple.x0, &pos, attrs,
                     attrs->x4C) != 0)
     {
-        fp->cur_pos.x = pos.x + dx;
-        fp->cur_pos.y = pos.y + dy;
+        fp2->cur_pos.x = pos.x + dx;
+        fp2->cur_pos.y = pos.y + dy;
         if (ftCo_800C3A14(ip->owner) && ft_80082E3C(ip->owner) == NULL) {
             ftCliffCommon_80081370(ip->owner);
         } else {
-            fp->self_vel.x = 0.0f;
+            fp2->self_vel.x = 0.0f;
             ftCo_8009B390(ip->owner, da->xCC);
         }
         it_802B7B84(gobj);
         return;
     }
-    fp->cur_pos.x = pos.x + dx;
-    fp->cur_pos.y = pos.y + dy;
-    it_802A7168(ip, &pos, fp->x34_scale.y);
+    fp2->cur_pos.x = pos.x + dx;
+    fp2->cur_pos.y = pos.y + dy;
+    it_802A7168(ip, &pos, fp2->x34_scale.y);
     samus_grapple_anim(gobj);
-    if (fp->ground_or_air != GA_Air) {
+    if (fp2->ground_or_air != GA_Air) {
         it_802BAA58(gobj);
     }
 }
@@ -623,51 +907,53 @@ void fn_802B8D38(Item_GObj* gobj)
     Vec3 pos;
     u8 _pad2[12];
     Vec3 saved_pos;
+    Fighter* fp2;
     u8 _pad3[4];
     Mtx m;
     u8 _pad[20];
     f32 old_x, old_y;
 
+    fp2 = fp;
     samus_grapple_setup_pos(link, &pos, m);
 
-    if (fn_802B895C_inline(ip, fp, &pos)) {
+    if (fn_802B895C_inline(ip, fp2, &pos)) {
         ftCo_80090780(ip->owner);
         it_802B7B84(gobj);
         return;
     }
 
-    old_x = fp->cur_pos.x - pos.x;
-    old_y = fp->cur_pos.y - pos.y;
-    saved_pos = fp->cur_pos;
+    old_x = fp2->cur_pos.x - pos.x;
+    old_y = fp2->cur_pos.y - pos.y;
+    saved_pos = fp2->cur_pos;
     it_802BA5DC(ip->xDD4_itemVar.samusgrapple.x4,
                 ip->xDD4_itemVar.samusgrapple.x0, &pos, attrs);
-    fp->cur_pos.x = pos.x + (old_x);
-    fp->cur_pos.y = pos.y + (old_y);
+    fp2->cur_pos.x = pos.x + (old_x);
+    fp2->cur_pos.y = pos.y + (old_y);
     {
         f32 tmp;
-        tmp = fp->self_vel.x + (fp->cur_pos.x - saved_pos.x);
-        fp->self_vel.x = tmp;
-        fp->pos_delta.x = tmp;
-        tmp = fp->self_vel.y + (fp->cur_pos.y - saved_pos.y);
-        fp->self_vel.y = tmp;
-        fp->pos_delta.y = tmp;
+        tmp = fp2->self_vel.x + (fp2->cur_pos.x - saved_pos.x);
+        fp2->self_vel.x = tmp;
+        fp2->pos_delta.x = tmp;
+        tmp = fp2->self_vel.y + (fp2->cur_pos.y - saved_pos.y);
+        fp2->self_vel.y = tmp;
+        fp2->pos_delta.y = tmp;
     }
-    it_802A7168(ip, &pos, fp->x34_scale.y);
+    it_802A7168(ip, &pos, fp2->x34_scale.y);
     samus_grapple_anim(gobj);
     if (ip->xDD4_itemVar.samusgrapple.x16 != 0 &&
-        (fp->input.held_inputs & 0x40))
+        (fp2->input.held_inputs & 0x40))
     {
-        fp->mv.ss.grapple.x4 += 1.0f;
+        fp2->mv.ss.grapple.x4 += 1.0f;
     }
-    if (fp->ground_or_air != GA_Air) {
+    if (fp2->ground_or_air != GA_Air) {
         it_802BAA58(gobj);
         return;
     }
-    if (fp->input.x668 & 0x100) {
+    if (fp2->input.x668 & 0x100) {
         it_802BAB7C(gobj);
         return;
     }
-    if (fp->mv.ss.grapple.x4-- <= 0) {
+    if (fp2->mv.ss.grapple.x4-- <= 0) {
         ftCo_80090780(ip->owner);
         it_802B7B84(gobj);
     }
@@ -746,9 +1032,233 @@ void it_802B91C4(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
     }
 }
 
-/// #it_802B9328
+static inline void it_802B9328_attach(ItemLink* link, Vec3* pos, Mtx m)
+{
+    PSMTXIdentity(m);
+    HSD_JObjSetupMatrix(link->jobj);
+    pos->x = link->jobj->mtx[0][3];
+    pos->y = link->jobj->mtx[1][3];
+    pos->z = link->jobj->mtx[2][3];
+    link->pos = *pos;
+    link->coll_data.cur_pos = link->pos;
+    link->coll_data.last_pos = link->coll_data.cur_pos;
+    link->x2C_b0 = 1;
+}
 
-/// #it_802B99A0
+static inline f32 it_802B9328_grav(f32 vely)
+{
+    f32 one = 1.0f;
+
+    if (HSD_Randf() > 0.9) {
+        if (vely < 0.0) {
+            return -((one * HSD_Randf()) - vely);
+        } else {
+            return (one * HSD_Randf()) + vely;
+        }
+    } else {
+        return 0.0f;
+    }
+}
+
+s32 it_802B9328(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
+                Fighter* fp)
+{
+    u8 _padA[0x10];
+    ItemLink* cur;
+    ItemLink* next;
+    Item* grapple_ip = fp->fv.ss.x223C->user_data;
+    ftSs_DatAttrs* da = fp->ft_data->ext_attr;
+    Vec3 dir;
+    Vec3 d2;
+    u8 _padB[4];
+    Vec3 attach_pos_1;
+    u8 _padC[8];
+    Vec3 attach_pos_2;
+    u8 _padD[8];
+    Vec3 attach_pos_3;
+    u8 _padE[4];
+    itSamusGrapple_HitboxData hitbox_data;
+    u8 _padF[4];
+    Mtx m1;
+    u8 _padG[4];
+    Mtx m2;
+    u8 _padH[4];
+    Mtx m3;
+    u8 _padI[0x1C];
+    s32 result;
+    f32 d;
+
+    if (fp->motion_id == 0xD4) {
+        if (fp->mv.ss.unk7.x0 == da->xA0) {
+            it_802B9328_attach(link, &attach_pos_1, m1);
+        }
+    } else if (fp->motion_id == 0xD6) {
+        if (fp->mv.ss.unk7.x0 == da->xB0) {
+            it_802B9328_attach(link, &attach_pos_2, m2);
+        }
+    } else if (fp->motion_id == 0x165) {
+        if (fp->mv.ss.unk7.x0 == da->xC0) {
+            it_802B9328_attach(link, &attach_pos_3, m3);
+        }
+    }
+
+    if (fp->ground_or_air == GA_Ground &&
+        grapple_ip->xDD4_itemVar.samusgrapple.x16 == 1)
+    {
+        if (fp->input.x668 & 0x100) {
+            hitbox_data.create_hitbox = it_803B8660.create_hitbox;
+            ftColl_8007AFF8(fp->gobj);
+            it_802B7160(fp->gobj, &hitbox_data);
+            grapple_ip->xDD4_itemVar.samusgrapple.x16++;
+        } else {
+            ftColl_8007AFF8(fp->gobj);
+        }
+    }
+
+    next = link->next;
+
+    if ((fp->input.held_inputs & 0x40) &&
+        grapple_ip->xDD4_itemVar.samusgrapple.x16 == 1)
+    {
+        Fighter* target = ftCo_800A4A40(fp);
+        if (target != NULL) {
+            d2.x = target->cur_pos.x - link->pos.x;
+            d2.y = target->cur_pos.y - link->pos.y;
+            d2.z = target->cur_pos.z - link->pos.z;
+            lbVector_Normalize(&d2);
+            link->vel.x = d2.x * attrs->x40;
+            link->vel.y = d2.y * attrs->x40;
+            link->vel.z = d2.z * attrs->x40;
+        }
+    }
+
+    it_802A4420(link);
+    result = it_802A3D90(link);
+    if (result != 0) {
+        if (result & 0x3F) {
+            result = 1;
+            link->x1CC = link->coll_data.left_facing_wall.index;
+        } else if (result & 0xFC0) {
+            result = 1;
+            link->x1CC = link->coll_data.right_facing_wall.index;
+        } else {
+            result = 2;
+        }
+    }
+
+    cur = link;
+    while (next != NULL) {
+        if (next->x2C_b0) {
+            next->vel.y -= it_802B9328_grav(next->vel.y);
+            next->pos.y += next->vel.y;
+            d = it_802A3C98(&next->pos, &cur->pos, &dir);
+            if (d > attrs->x38) {
+                next->pos.x = dir.x * attrs->x38 + cur->pos.x;
+                next->pos.y = dir.y * attrs->x38 + cur->pos.y;
+                next->pos.z = dir.z * attrs->x38 + cur->pos.z;
+            } else if (d < attrs->x3C) {
+                next->pos.x = dir.x * attrs->x3C + cur->pos.x;
+                next->pos.y = dir.y * attrs->x3C + cur->pos.y;
+                next->pos.z = dir.z * attrs->x3C + cur->pos.z;
+            }
+            it_802A43EC(next);
+        } else {
+            if (it_802A3C98(pos, &cur->pos, &dir) > attrs->x38) {
+                next->pos.x = dir.x * attrs->x38 + cur->pos.x;
+                next->pos.y = dir.y * attrs->x38 + cur->pos.y;
+                next->pos.z = dir.z * attrs->x38 + cur->pos.z;
+                next->x2C_b0 = 1;
+                it_802A43B8(next);
+            } else {
+                return result;
+            }
+        }
+        cur = next;
+        next = next->next;
+    }
+    it_802B900C(cur, pos, attrs, attrs->x38);
+    return 3;
+}
+
+s32 it_802B99A0(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
+                Fighter* fp)
+{
+    u8 _pad[8];
+    Vec3 dir;
+    Item* grapple_ip = fp->fv.ss.x223C->user_data;
+    ItemLink* cur;
+    ItemLink* next;
+    s32 result;
+    f32 d;
+    itSamusGrapple_HitboxData hitbox_data;
+    PAD_STACK(8);
+
+    if (fp->ground_or_air == GA_Ground &&
+        grapple_ip->xDD4_itemVar.samusgrapple.x16 == 1)
+    {
+        if (fp->input.x668 & 0x100) {
+            hitbox_data.create_hitbox = it_803B8660.create_hitbox;
+            ftColl_8007AFF8(fp->gobj);
+            it_802B7160(fp->gobj, &hitbox_data);
+            grapple_ip->xDD4_itemVar.samusgrapple.x16++;
+        } else {
+            ftColl_8007AFF8(fp->gobj);
+        }
+    }
+
+    next = link->next;
+    cur = link;
+    link->vel.y -= samus_grapple_calc_grav(link->vel.y);
+    if (link->vel.x > attrs->x58) {
+        link->vel.x -= attrs->x58;
+    } else if (link->vel.x < -attrs->x58) {
+        link->vel.x += attrs->x58;
+    } else {
+        link->vel.x = 0.0f;
+    }
+
+    it_802A4420(cur);
+    result = it_802A3D90(cur);
+    if (result != 0) {
+        if (result & 0xFFF) {
+            result = 1;
+        } else {
+            result = 2;
+        }
+    }
+
+    while (next != NULL) {
+        if (next->x2C_b0) {
+            next->vel.y -= samus_grapple_calc_grav(next->vel.y);
+            it_802A4420(next);
+            d = it_802A3C98(&next->pos, &cur->pos, &dir);
+            if (d > attrs->x38) {
+                next->pos.x = (dir.x * attrs->x38) + cur->pos.x;
+                next->pos.y = (dir.y * attrs->x38) + cur->pos.y;
+                next->pos.z = (dir.z * attrs->x38) + cur->pos.z;
+            } else if (d < attrs->x3C) {
+                next->pos.x = (dir.x * attrs->x3C) + cur->pos.x;
+                next->pos.y = (dir.y * attrs->x3C) + cur->pos.y;
+                next->pos.z = (dir.z * attrs->x3C) + cur->pos.z;
+            }
+            it_802A43EC(next);
+        } else {
+            if (it_802A3C98(pos, &cur->pos, &dir) > attrs->x38) {
+                next->pos.x = (dir.x * attrs->x38) + cur->pos.x;
+                next->pos.y = (dir.y * attrs->x38) + cur->pos.y;
+                next->pos.z = (dir.z * attrs->x38) + cur->pos.z;
+                next->x2C_b0 = 1;
+                it_802A43B8(next);
+            } else {
+                return result;
+            }
+        }
+        cur = next;
+        next = next->next;
+    }
+    it_802B900C(cur, pos, attrs, attrs->x38);
+    return 3;
+}
 
 void it_802B9CE8(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
                  Fighter* fp)
@@ -756,25 +1266,25 @@ void it_802B9CE8(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
     ItemLink* prev;
     f32 d;
     Item* grapple_ip = fp->fv.ss.x223C->user_data;
-    u8 _pad[12];
-    Fighter* new_var;
-    Vec3 dir;
+    Fighter* fp2; // permuterslop
+    u8 _pad[4];
     Vec3* dir_ptr;
     f32 friction;
+    Vec3 dir;
     itSamusGrapple_HitboxData hitbox_data;
     PAD_STACK(8);
 
-    new_var = fp;
-    if (new_var->ground_or_air == GA_Ground &&
+    fp2 = fp;
+    if (fp2->ground_or_air == GA_Ground &&
         grapple_ip->xDD4_itemVar.samusgrapple.x16 == 1)
     {
-        if (new_var->input.x668 & 0x100) {
-            hitbox_data = it_803B8660;
-            ftColl_8007AFF8(new_var->gobj);
-            it_802B7160(new_var->gobj, &hitbox_data);
+        if (fp2->input.x668 & 0x100) {
+            hitbox_data.create_hitbox = it_803B8660.create_hitbox;
+            ftColl_8007AFF8(fp2->gobj);
+            it_802B7160(fp2->gobj, &hitbox_data);
             grapple_ip->xDD4_itemVar.samusgrapple.x16++;
         } else {
-            ftColl_8007AFF8(new_var->gobj);
+            ftColl_8007AFF8(fp2->gobj);
         }
     }
     prev = link->prev;
@@ -818,10 +1328,10 @@ void it_802B9CE8(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
 
 bool it_802B9FD4(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs)
 {
-    ItemLink* next;
+    Vec3* pos_ptr = pos;
     Vec3 dir;
+    ItemLink* next;
     Vec3* dir_ptr;
-    PAD_STACK(4);
 
     it_802A4454(link);
     next = link->next;
@@ -838,7 +1348,7 @@ bool it_802B9FD4(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs)
             }
             it_802A43EC(next);
         } else {
-            if (it_802A3C98(pos, &link->pos, &dir) > attrs->x38) {
+            if (it_802A3C98(pos_ptr, &link->pos, &dir) > attrs->x38) {
                 dir_ptr = &dir;
                 next->pos.x = (dir_ptr->x * attrs->x38) + link->pos.x;
                 next->pos.y = (dir_ptr->y * attrs->x38) + link->pos.y;
@@ -858,12 +1368,12 @@ bool it_802B9FD4(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs)
 bool it_802BA194(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
                  f32 target_dist)
 {
+    u8 _padA[8];
     ItemLink* next;
     ItemLink* cur;
     ItemLink* iter;
     f32 d, remaining;
     bool result;
-    u8 _pad[16];
     Vec3 dir;
 
     cur = link;
@@ -883,8 +1393,11 @@ bool it_802BA194(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
         next = next->prev;
     }
 
-    remaining = d - target_dist;
-    it_802B900C(cur, pos, attrs, MAX(remaining, attrs->x38));
+    d -= target_dist;
+    if (d > attrs->x38) {
+        d = attrs->x38;
+    }
+    it_802B900C(cur, pos, attrs, d);
 
     if (next != NULL) {
         result = false;
@@ -894,10 +1407,11 @@ bool it_802BA194(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
 
     iter = link;
     while (iter != NULL) {
-        f32 dx = iter->pos.x - iter->coll_data.last_pos.x;
-        f32 dz = iter->pos.z - iter->coll_data.last_pos.z;
+        f32 dx = iter->coll_data.cur_pos.x - iter->coll_data.last_pos.x;
+        f32 dz = iter->coll_data.cur_pos.z - iter->coll_data.last_pos.z;
+        remaining = dz - iter->vel.z;
         iter->vel.x += 0.12 * (dx - iter->vel.x);
-        iter->vel.z += 0.12 * (dz - iter->vel.z);
+        iter->vel.z += 0.12 * remaining;
         iter = iter->prev;
     }
     return result;
@@ -949,8 +1463,8 @@ bool it_802BA3BC(ItemLink* tail, ItemLink* head, Vec3* pos,
     Vec3 dir;
     Vec3* dir_ptr;
     Vec3 saved_pos;
-    ItemLink* next_tail;
     ItemLink* link;
+    ItemLink* next_tail;
     s32 count;
     f32 d, remaining, max_dist;
 
@@ -988,8 +1502,8 @@ bool it_802BA3BC(ItemLink* tail, ItemLink* head, Vec3* pos,
     while (link != NULL && link->x2C_b0) {
         count++;
         if (it_802A3C98(&link->pos, &head->pos, &dir) > attrs->x38) {
-            dir_ptr = &dir;
             link->pos.x = (dir_ptr->x * attrs->x38) + head->pos.x;
+            dir_ptr = &dir;
             link->pos.y = (dir_ptr->y * attrs->x38) + head->pos.y;
             link->pos.z = (dir_ptr->z * attrs->x38) + head->pos.z;
         }
@@ -1014,17 +1528,19 @@ void it_802BA5DC(ItemLink* tail, ItemLink* head, Vec3* pos,
                  itSamusGrappleAttributes* attrs)
 {
     Vec3 saved_pos;
-    Vec3 dir;
-    Vec3* dir_ptr;
     ItemLink* link;
+    ItemLink* head_link;
+    Vec3* dir_ptr;
     ItemLink* next;
     ItemLink* cur;
     bool retracted;
-    PAD_STACK(12);
+    Vec3* pos_ptr;
+    u8 _padA[8];
 
-    it_802A4454(head);
+    head_link = head;
+    it_802A4454(head_link);
     cur = tail;
-    saved_pos = head->pos;
+    saved_pos = head_link->pos;
     next = tail->prev;
 
     while (next != NULL && !cur->x2C_b0) {
@@ -1034,77 +1550,89 @@ void it_802BA5DC(ItemLink* tail, ItemLink* head, Vec3* pos,
 
     it_802B91C4(cur, pos, attrs, attrs->x38);
     retracted = false;
-    head->pos = saved_pos;
+    head_link->pos = saved_pos;
 
-    link = head->next;
-    while (link != NULL && link->x2C_b0) {
-        if (!retracted) {
-            if (it_802A3C98(&link->pos, &head->pos, &dir) > attrs->x38) {
-                dir_ptr = &dir;
-                link->pos.x = (dir_ptr->x * attrs->x38) + head->pos.x;
-                link->pos.y = (dir_ptr->y * attrs->x38) + head->pos.y;
-                link->pos.z = (dir_ptr->z * attrs->x38) + head->pos.z;
-            } else {
-                retracted = true;
+    {
+        Vec3 dir;
+
+        link = head_link->next;
+        while (link != NULL && link->x2C_b0) {
+            if (!retracted) {
+                if (it_802A3C98(&link->pos, &head_link->pos, &dir) >
+                    attrs->x38)
+                {
+                    dir_ptr = &dir;
+                    link->pos.x = (dir_ptr->x * attrs->x38) + head_link->pos.x;
+                    link->pos.y = (dir_ptr->y * attrs->x38) + head_link->pos.y;
+                    link->pos.z = (dir_ptr->z * attrs->x38) + head_link->pos.z;
+                } else {
+                    retracted = true;
+                }
             }
+            head_link = link;
+            link = link->next;
         }
-        head = link;
-        link = link->next;
-    }
 
-    if (it_802A3C98(pos, &head->pos, &dir) > attrs->x38) {
-        dir_ptr = &dir;
-        pos->x = (dir_ptr->x * attrs->x38) + head->pos.x;
-        pos->y = (dir_ptr->y * attrs->x38) + head->pos.y;
-        pos->z = (dir_ptr->z * attrs->x38) + head->pos.z;
+        if (it_802A3C98(pos_ptr = pos, &head_link->pos, &dir) > attrs->x38) {
+            dir_ptr = &dir;
+            pos_ptr->x = (dir_ptr->x * attrs->x38) + head_link->pos.x;
+            pos->y = (dir_ptr->y * attrs->x38) + head_link->pos.y;
+            pos_ptr->z = (dir_ptr->z * attrs->x38) + head_link->pos.z;
+        }
     }
 }
 
 bool it_802BA760(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
                  Fighter* fp)
 {
+    u8 _padA[16];
     Vec3 dir;
     Vec3* dir_ptr;
     ftSs_DatAttrs* da = fp->ft_data->ext_attr;
     ItemLink* cur;
     ItemLink* next;
-    PAD_STACK(16);
 
-    if ((fp->motion_id == 0xD4 && (fp->mv.ss.unk7.x0 < da->xA0)) ||
-        (fp->motion_id == 0xD6 && (fp->mv.ss.unk7.x0 < da->xB0)) ||
-        (fp->motion_id == 0x165 && (fp->mv.ss.unk7.x0 < da->xC0)))
-    {
-        return true;
-    } else {
-        cur = link;
-        next = link->next;
-        while (next != NULL) {
-            if (next->x2C_b0) {
-                if (it_802A3C98(&next->pos, &cur->pos, &dir) > attrs->x38) {
-                    dir_ptr = &dir;
-                    next->pos.x = (dir_ptr->x * attrs->x38) + cur->pos.x;
-                    next->pos.y = (dir_ptr->y * attrs->x38) + cur->pos.y;
-                    next->pos.z = (dir_ptr->z * attrs->x38) + cur->pos.z;
-                }
-                it_802A43EC(next);
-            } else {
-                if (it_802A3C98(pos, &cur->pos, &dir) > attrs->x38) {
-                    dir_ptr = &dir;
-                    next->pos.x = (dir_ptr->x * attrs->x38) + cur->pos.x;
-                    next->pos.y = (dir_ptr->y * attrs->x38) + cur->pos.y;
-                    next->pos.z = (dir_ptr->z * attrs->x38) + cur->pos.z;
-                    next->x2C_b0 = 1;
-                    it_802A43B8(next);
-                } else {
-                    return false;
-                }
-            }
-            cur = next;
-            next = next->next;
+    if (fp->motion_id == 0xD4) {
+        if (fp->mv.ss.unk7.x0 < da->xA0) {
+            return true;
         }
-        it_802B900C(cur, pos, attrs, attrs->x38);
-        return false;
+    } else if (fp->motion_id == 0xD6) {
+        if (fp->mv.ss.unk7.x0 < da->xB0) {
+            return true;
+        }
+    } else if (fp->motion_id == 0x165) {
+        if (fp->mv.ss.unk7.x0 < da->xC0) {
+            return true;
+        }
     }
+    cur = link;
+    next = link->next;
+    while (next != NULL) {
+        if (next->x2C_b0) {
+            if (it_802A3C98(&next->pos, &cur->pos, &dir) > attrs->x38) {
+                dir_ptr = &dir;
+                next->pos.x = (dir_ptr->x * attrs->x38) + cur->pos.x;
+                next->pos.y = (dir_ptr->y * attrs->x38) + cur->pos.y;
+                next->pos.z = (dir_ptr->z * attrs->x38) + cur->pos.z;
+            }
+            it_802A43EC(next);
+        } else {
+            if (it_802A3C98(pos, &cur->pos, &dir) > attrs->x38) {
+                dir_ptr = &dir;
+                next->pos.x = (dir_ptr->x * attrs->x38) + cur->pos.x;
+                next->pos.y = (dir_ptr->y * attrs->x38) + cur->pos.y;
+                next->pos.z = (dir_ptr->z * attrs->x38) + cur->pos.z;
+                next->x2C_b0 = 1;
+                it_802A43B8(next);
+            } else {
+                return false;
+            }
+        }
+        cur = next;
+        next = next->next;
+    }
+    it_802B900C(cur, pos, attrs, attrs->x38);
+    return false;
 }
 
 void itSamusGrapple_Logic53_PickedUp(Item_GObj* gobj)
@@ -1149,7 +1677,7 @@ void it_802BAA94(Item_GObj* gobj)
     it_802A2428(gobj);
 }
 
-void it_802BAAE4(Item_GObj* gobj, Vec3* vel, f32 unused)
+void it_802BAAE4(Item_GObj* gobj, Vec3* vel)
 {
     Item* ip = GET_ITEM(gobj);
     ItemLink* link = ip->xDD4_itemVar.samusgrapple.x0;
@@ -1214,7 +1742,6 @@ void it_802BACC4(Fighter_GObj* gobj)
     u8 _pad[8];
     Mtx m;
     Mtx m2;
-    PAD_STACK(4);
 
     if (fp->fv.ss.x223C != NULL) {
         Item* ip = GET_ITEM(fp->fv.ss.x223C);
@@ -1225,7 +1752,7 @@ void it_802BACC4(Fighter_GObj* gobj)
         samus_grapple_setup_pos(link, &pos, m);
 
         if (it_802BA760(link, &pos, attrs, fp)) {
-            fn_802B7E34_inline(ip, m2);
+            fn_802B7E34_inline(fp->fv.ss.x223C, ip, m2);
         } else {
             it_802A7168(ip, &pos, fp->x34_scale.y);
         }

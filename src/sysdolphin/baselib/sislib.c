@@ -56,8 +56,8 @@ static HSD_CameraDescPerspective HSD_SisLib_8040C4B8 = {
     1.3333,
 };
 
-sislib_UnkAllocData* HSD_SisLib_804D7970;
-sislib_UnkAllocData* HSD_SisLib_804D7974;
+SisBlock* free_head;
+SisBlock* used_head;
 HSD_Text* HSD_SisLib_804D7978;
 sislib_UnkAlloc3* HSD_SisLib_804D797C;
 
@@ -67,8 +67,6 @@ sislib_UnkAlloc3* HSD_SisLib_804D797C;
 
 /// u8 HSD_SisLib_8040C490[0x60] = { 0 };
 
-static f32
-    HSD_SisLib_8040CB00; /* unable to generate initializer: unknown type */
 static u8
     HSD_SisLib_8040CD40; /* unable to generate initializer: unknown type */
 
@@ -76,24 +74,25 @@ static HSD_Archive* HSD_SisLib_804D1110[5];
 SIS* HSD_SisLib_804D1124[5];
 s8 HSD_SisLib_804D6390[4] = { 0, 0, 0, 0 };
 
-/// @todo Currently 99.54% match - needs register allocation fix
-/// (var_r4 allocated to r3 instead of r4)
-/// a generic allocator used by multiple
-/// data types
-void* HSD_SisLib_803A5798(s32 size)
+static inline u8* HSD_SisLib_BytePtr(void* ptr)
 {
-    sislib_UnkAllocData* best;
-    sislib_UnkAllocData* alloc_tail;
+    return ptr;
+}
+
+void* HSD_SisLib_Alloc(s32 size)
+{
+    SisBlock* best;
+    SisBlock* alloc_tail;
     s32 remainder;
     s32 best_size;
-    sislib_UnkAllocData* free_cur;
-    sislib_UnkAllocData* alloc_cur;
-    sislib_UnkAllocData* search;
+    SisBlock* free_cur;
+    SisBlock* alloc_cur;
+    SisBlock* search;
 
     best = NULL;
     alloc_tail = NULL;
-    free_cur = HSD_SisLib_804D7970;
-    alloc_cur = HSD_SisLib_804D7974;
+    free_cur = free_head;
+    alloc_cur = used_head;
     if (size == 0) {
         OSReport("ZERO byte alloc\n");
         OSPanic("sislib.c", 0x3C, "");
@@ -104,7 +103,7 @@ void* HSD_SisLib_803A5798(s32 size)
     }
     while (alloc_cur != NULL) {
         alloc_tail = alloc_cur;
-        alloc_cur = alloc_cur->data_0;
+        alloc_cur = alloc_cur->next;
     }
     for (;;) {
         if (free_cur->size == size) {
@@ -120,7 +119,7 @@ void* HSD_SisLib_803A5798(s32 size)
                 best = free_cur;
             }
         }
-        free_cur = free_cur->data_0;
+        free_cur = free_cur->next;
         if (free_cur == NULL) {
             break;
         }
@@ -130,106 +129,102 @@ void* HSD_SisLib_803A5798(s32 size)
         OSPanic("sislib.c", 0x56, "");
     }
 
-    search = HSD_SisLib_804D7970;
+    search = free_head;
 
     if (search == best) {
         int remaining_size;
         u8* data_ptr;
-        sislib_UnkAllocData* next_free;
+        SisBlock* next_free;
 
-        data_ptr = (u8*) HSD_SisLib_804D7970->data_1;
-        next_free = HSD_SisLib_804D7970->data_0;
+        data_ptr = (u8*) free_head->data;
+        next_free = free_head->next;
         remaining_size = size;
-        remaining_size = (HSD_SisLib_804D7970->size - remaining_size) -
-                         (sizeof(sislib_UnkAllocData));
+        remaining_size =
+            (free_head->size - remaining_size) - (sizeof(SisBlock));
         if (remaining_size < 0) {
             OSReport("Memory Empty\n");
             OSPanic("sislib.c", 0x5F, "");
         }
 
-        HSD_SisLib_804D7970 = (sislib_UnkAllocData*) (data_ptr + size);
-        HSD_SisLib_804D7970->data_0 = next_free;
-        HSD_SisLib_804D7970->data_1 = (HSD_Text*) (HSD_SisLib_804D7970 + 1);
-        HSD_SisLib_804D7970->size = remaining_size;
+        free_head = (SisBlock*) (data_ptr + size);
+        free_head->next = next_free;
+        free_head->data = (HSD_Text*) (free_head + 1);
+        free_head->size = remaining_size;
         best->size = size;
     } else {
-        while (search->data_0 != best) {
-            search = search->data_0;
+        while (search->next != best) {
+            search = search->next;
         }
-        search->data_0 = best->data_0;
+        search->next = best->next;
     }
-    best->data_0 = NULL;
+    best->next = NULL;
     if (alloc_tail != NULL) {
-        alloc_tail->data_0 = best;
+        alloc_tail->next = best;
     }
-    if (HSD_SisLib_804D7974 == NULL) {
-        HSD_SisLib_804D7974 = best;
+    if (used_head == NULL) {
+        used_head = best;
     }
-    return best->data_1;
+    return best->data;
 }
 
-/// @todo Currently 92.39% match - needs register allocation fix in
-/// coalesce block (new_size/old_next register assignment differs)
-void HSD_SisLib_803A594C(void* ptr)
+void HSD_SisLib_Free(void* ptr)
 {
-    sislib_UnkAllocData* free_cur;
-    sislib_UnkAllocData* free_tail;
-    sislib_UnkAllocData* alloc_prev;
-    sislib_UnkAllocData* alloc_cur;
+    SisBlock* free_cur;
+    SisBlock* free_tail;
+    SisBlock* alloc_prev;
+    SisBlock* alloc_cur;
 
-    free_cur = HSD_SisLib_804D7970;
+    free_cur = free_head;
     free_tail = NULL;
-    alloc_cur = HSD_SisLib_804D7974;
+    alloc_cur = used_head;
     alloc_prev = NULL;
     while (alloc_cur != NULL) {
-        if ((void*) alloc_cur->data_1 == (void*) ptr) {
+        if (alloc_cur->data == ptr) {
             break;
         }
         alloc_prev = alloc_cur;
-        alloc_cur = alloc_cur->data_0;
+        alloc_cur = alloc_cur->next;
     }
     if (alloc_cur == NULL) {
         return;
     }
-    if (free_cur ==
-        (sislib_UnkAllocData*) ((u8*) alloc_cur->data_1 + alloc_cur->size))
-    {
-        sislib_UnkAllocData* old_next;
-        s32 new_size;
+    if ((u8*) free_cur == ((u8*) alloc_cur->data + alloc_cur->size)) {
+        u32 new_size = alloc_cur->size + sizeof(SisBlock);
+        SisBlock* old_next;
+        new_size = new_size + free_cur->size;
 
-        old_next = free_cur->data_0;
-        new_size = free_cur->size + (alloc_cur->size + 0xC);
+        old_next = free_cur->next;
 
         if (alloc_prev != NULL) {
-            alloc_prev->data_0 = alloc_cur->data_0;
+            alloc_prev->next = alloc_cur->next;
         } else {
-            HSD_SisLib_804D7974 = alloc_cur->data_0;
+            used_head = alloc_cur->next;
         }
-        HSD_SisLib_804D7970 = alloc_cur;
-        alloc_cur->data_0 = old_next;
-        HSD_SisLib_804D7970->data_1 = (HSD_Text*) (HSD_SisLib_804D7970 + 1);
-        HSD_SisLib_804D7970->size = new_size;
+        free_head = alloc_cur;
+        alloc_cur->next = old_next;
+        free_head->data = (HSD_Text*) (free_head + 1);
+        free_head->size = new_size;
         return;
     }
     while (free_cur != NULL) {
         free_tail = free_cur;
-        free_cur = free_cur->data_0;
+        free_cur = free_cur->next;
     }
     if (free_tail != NULL) {
-        free_tail->data_0 = alloc_cur;
+        free_tail->next = alloc_cur;
     }
     if (alloc_prev != NULL) {
-        alloc_prev->data_0 = alloc_cur->data_0;
+        alloc_prev->next = alloc_cur->next;
     } else {
-        HSD_SisLib_804D7974 = alloc_cur->data_0;
+        used_head = alloc_cur->next;
     }
-    alloc_cur->data_0 = NULL;
+    alloc_cur->next = NULL;
 }
 
 void HSD_SisLib_803A5A2C(void* ptr)
 {
     HSD_Text* next_text;
-    sislib_UnkAllocData* alloc;
+    SisBlock* alloc;
     HSD_Text* curr;
     HSD_Text* last;
 
@@ -245,15 +240,15 @@ void HSD_SisLib_803A5A2C(void* ptr)
             }
             alloc = curr->alloc_data;
             if (alloc != NULL) {
-                if (alloc->data_1 != NULL) {
-                    HSD_SisLib_803A594C(alloc->data_1);
+                if (alloc->data != NULL) {
+                    HSD_SisLib_Free(alloc->data);
                 }
-                HSD_SisLib_803A594C(curr->alloc_data);
+                HSD_SisLib_Free(curr->alloc_data);
             }
             if (curr->string_buffer != NULL) {
-                HSD_SisLib_803A594C(curr->string_buffer);
+                HSD_SisLib_Free(curr->string_buffer);
             }
-            HSD_SisLib_803A594C(curr);
+            HSD_SisLib_Free(curr);
             return;
         }
         last = curr;
@@ -331,7 +326,7 @@ void HSD_SisLib_803A5DA0(s32 font_idx)
             } else {
                 HSD_SisLib_804D797C = next;
             }
-            HSD_SisLib_803A594C(curr);
+            HSD_SisLib_Free(curr);
         }
         last = curr;
         curr = next;
@@ -376,7 +371,7 @@ HSD_Text* HSD_SisLib_803A5ACC(int font_idx, s32 context_id, f32 pos_x,
         list_tail = list_cur;
         list_cur = list_cur->next;
     }
-    text = HSD_SisLib_803A5798(0xA0);
+    text = HSD_SisLib_Alloc(0xA0);
     if (HSD_SisLib_804D7978 == NULL) {
         HSD_SisLib_804D7978 = text;
     }
@@ -429,7 +424,7 @@ HSD_Text* HSD_SisLib_803A5ACC(int font_idx, s32 context_id, f32 pos_x,
     return text;
 }
 
-static sislib_UnkAllocData* HSD_SisLib_804D796C;
+static SisBlock* HSD_SisLib_804D796C;
 
 void HSD_SisLib_803A5E70(void)
 {
@@ -444,16 +439,16 @@ void HSD_SisLib_803A5E70(void)
             HSD_GObjPLink_80390228(curr->x4);
             curr->x4 = 0;
         }
-        HSD_SisLib_803A594C(curr);
+        HSD_SisLib_Free(curr);
         curr = next;
     }
 
     HSD_SisLib_804D797C = NULL;
-    HSD_SisLib_804D7970 = HSD_SisLib_804D796C;
-    HSD_SisLib_804D7974 = NULL;
-    HSD_SisLib_804D7970->data_0 = NULL;
-    HSD_SisLib_804D7970->data_1 = (HSD_Text*) (HSD_SisLib_804D7970 + 1);
-    HSD_SisLib_804D7970->size = HSD_SisLib_804D7968 - 0xC;
+    free_head = HSD_SisLib_804D796C;
+    used_head = NULL;
+    free_head->next = NULL;
+    free_head->data = (HSD_Text*) (free_head + 1);
+    free_head->size = HSD_SisLib_804D7968 - 0xC;
 }
 
 void HSD_SisLib_803A5F50(s32 font_idx)
@@ -490,12 +485,11 @@ void HSD_SisLib_803A6048(u32 size)
     int i;
 
     HSD_SisLib_804D7968 = size;
-    HSD_SisLib_804D7974 = NULL;
-    HSD_SisLib_804D796C = HSD_SisLib_804D7970 =
-        HSD_MemAlloc(HSD_SisLib_804D7968);
-    HSD_SisLib_804D7970->data_0 = NULL;
-    HSD_SisLib_804D7970->data_1 = (HSD_Text*) (HSD_SisLib_804D7970 + 1);
-    HSD_SisLib_804D7970->size = HSD_SisLib_804D7968 - 0xC;
+    used_head = NULL;
+    HSD_SisLib_804D796C = free_head = HSD_MemAlloc(HSD_SisLib_804D7968);
+    free_head->next = NULL;
+    free_head->data = (HSD_Text*) (free_head + 1);
+    free_head->size = HSD_SisLib_804D7968 - 0xC;
     HSD_SisLib_804D7978 = NULL;
     HSD_SisLib_804D797C = NULL;
 
@@ -537,7 +531,7 @@ s32 HSD_SisLib_803A611C(int font_idx, HSD_GObj* parent_gobj, u16 class_id,
         }
         list_cur = list_cur->x0;
     }
-    entry = HSD_SisLib_803A5798(0x10);
+    entry = HSD_SisLib_Alloc(0x10);
     if (HSD_SisLib_804D797C == NULL) {
         HSD_SisLib_804D797C = entry;
     }
@@ -622,9 +616,9 @@ void HSD_SisLib_803A6368(HSD_Text* text, s32 sis_idx)
     text->x94 = 0;
     text->x4B = 0;
     if (text->string_buffer != NULL) {
-        HSD_SisLib_803A594C(text->string_buffer);
+        HSD_SisLib_Free(text->string_buffer);
     }
-    text->string_buffer = HSD_SisLib_803A5798(0x10);
+    text->string_buffer = HSD_SisLib_Alloc(0x10);
     i = 0;
     text->x6E = 0x10;
     while (i < text->x6E) {
@@ -660,10 +654,10 @@ u8* HSD_SisLib_803A6478(u8* dst, u8* src)
     return dst;
 }
 
-void HSD_SisLib_803A6530(s32 font_idx, s32 dst_idx, s32 src_idx)
+u8* HSD_SisLib_803A6530(s32 font_idx, s32 dst_idx, s32 src_idx)
 {
     u8** sis_table = (u8**) HSD_SisLib_804D1124[font_idx];
-    HSD_SisLib_803A6478(sis_table[dst_idx], sis_table[src_idx]);
+    return HSD_SisLib_803A6478(sis_table[dst_idx], sis_table[src_idx]);
 }
 
 void HSD_SisLib_803A660C(s32 font_idx, s32 dst_idx, s32 src_idx)
@@ -701,25 +695,25 @@ void HSD_SisLib_803A660C(s32 font_idx, s32 dst_idx, s32 src_idx)
 
 HSD_Text* HSD_SisLib_803A6754(int font_idx, s32 context_id)
 {
-    sislib_UnkAllocData* alloc;
+    SisBlock* alloc;
     HSD_Text* text;
     HSD_Text* buffer;
 
     text = HSD_SisLib_803A5ACC(font_idx, context_id, 0.0F, 0.0F, 0.0F, 640.0F,
                                480.0F);
-    alloc = HSD_SisLib_803A5798(0x10);
+    alloc = HSD_SisLib_Alloc(0x10);
     text->alloc_data = alloc;
-    buffer = HSD_SisLib_803A5798(0x80);
-    alloc->data_1 = buffer;
-    alloc->data_0 = (sislib_UnkAllocData*) buffer;
+    buffer = HSD_SisLib_Alloc(0x80);
+    alloc->data = buffer;
+    alloc->next = (SisBlock*) buffer;
     alloc->size = 0x80; ///< @todo This being a byte store means one of my
                         ///< assumptions is wrong;
     // maybe this is a different struct.
-    *(u8*) &alloc->data_0->data_0 =
+    *(u8*) &alloc->next->next =
         0; ///< @todo Do any other Data struct usages have a 0xC member?
     *(&alloc->size + 1) = 0;
     HSD_SisLib_803A6368(text, 0);
-    text->sis_buffer = (SIS*) alloc->data_1;
+    text->sis_buffer = (SIS*) alloc->data;
     return text;
 }
 
@@ -732,194 +726,149 @@ HSD_Text* HSD_SisLib_803A6754(int font_idx, s32 context_id)
 s32 HSD_SisLib_803A67EC(u8* data, u8* string)
 {
     s32 has_kerning;
-    s32 dead_r10_2;
-    s32 dead_r10_3;
-    s32 dead_r10_4;
-    s32 dead_r8_2;
-    s32 dead_r9;
-    s32 dead_r9_10;
-    s32 dead_r9_2;
-    s32 dead_r9_3;
-    s32 dead_r9_4;
-    s32 dead_r9_5;
-    s32 dead_r9_6;
-    s32 dead_r9_7;
-    s32 dead_r9_8;
-    s32 dead_r9_9;
-    s32 lut_count;
     s32 state;
     s32 state_dot;
     s32 out_idx_digit;
     s32 state_colon;
     s32 state_digit;
+    s32 lut_count;
     s32 lut_idx;
     s32 in_idx;
     s32 out_idx;
     u8* char_ptr;
     u8* str_cursor;
-    u32* lut_ptr;
+    u8* lut_ptr;
+    u8* out_ptr;
     u8 cur_char;
     u8 sjis_hi;
     u8 sjis_lo;
-    void* dead_r11;
 
     str_cursor = string;
     has_kerning = 0;
     out_idx = 0;
-    in_idx = 0;
-loop_42:
-    if (in_idx < 0x80) {
+    for (in_idx = 0; in_idx < 0x80; in_idx++, str_cursor++) {
         char_ptr = &string[in_idx];
-        cur_char = (u8) *char_ptr;
+        cur_char = *char_ptr;
         if (cur_char == '\0') {
             if (has_kerning != 0) {
                 data[out_idx] = 0xB;
                 out_idx += 1;
             }
-        } else {
-            if (cur_char == ' ') {
-                state = has_kerning;
-                if (state == 0) {
-                    data[out_idx++] = 0xA;
-                    data[out_idx++] = 0xF4;
-                    data[out_idx++] = 0x0;
-                    state_dot += 1;
-                    data[out_idx++] = 0x0;
-                    data[out_idx++] = 0x0;
-                    out_idx++;
-                }
-                has_kerning = state;
-                sjis_hi = 0x81;
-                sjis_lo = 0x40;
-            } else if (cur_char == '"') {
-                data[out_idx] = 0xB;
-                out_idx += 1;
-                has_kerning = 0;
-                sjis_hi = 0x81;
-                sjis_lo = 0x68;
-            } else if (cur_char == '\'') {
-                data[out_idx] = 0xB;
-                out_idx += 1;
-                has_kerning = 0;
-                sjis_hi = 0x81;
-                sjis_lo = 0x66;
-            } else if (cur_char == ',') {
-                data[out_idx] = 0xB;
-                out_idx += 1;
-                has_kerning = 0;
-                sjis_hi = 0x81;
-                sjis_lo = 0x43;
-            } else if (cur_char == '-') {
-                data[out_idx] = 0xB;
-                out_idx += 1;
-                has_kerning = 0;
-                sjis_hi = 0x81;
-                sjis_lo = 0x7C;
-            } else if (cur_char == '.') {
-                state_dot = has_kerning;
-                if (state_dot == 0) {
-#if 0
-                    data[out_idx] = 0xA;
-                    dead_r9_4 = out_idx + 1;
-                    data[out_idx].unk1 = 0xF4;
-                    dead_r9_5 = dead_r9_4 + 1;
-                    data[dead_r9_4].unk1 = 0;
-                    dead_r9_6 = dead_r9_5 + 1;
-                    state_dot += 1;
-                    data[dead_r9_5].unk1 = 0;
-                    data[dead_r9_6].unk1 = 0;
-                    out_idx = dead_r9_6 + 1 + 1;
-#endif
-                }
-                has_kerning = state_dot;
-                sjis_hi = 0x81;
-                sjis_lo = 0x44;
-            } else if ((cur_char >= '0') && (cur_char <= '9')) {
-                state_digit = has_kerning;
-                out_idx_digit = out_idx;
-                if (state_digit == 0) {
-#if 0
-                    data[out_idx_digit] = 0xA;
-                    dead_r10_2 = out_idx_digit + 1;
-                    data[out_idx_digit].unk1 = 0xF4;
-                    dead_r10_3 = dead_r10_2 + 1;
-                    data[dead_r10_2].unk1 = 0;
-                    dead_r10_4 = dead_r10_3 + 1;
-                    state_digit += 1;
-                    data[dead_r10_3].unk1 = 0;
-                    data[dead_r10_4].unk1 = 0;
-                    out_idx_digit = dead_r10_4 + 1 + 1;
-#endif
-                }
-                has_kerning = state_digit;
-                out_idx = out_idx_digit;
-                sjis_hi = 0x82;
-                sjis_lo = (u8) *char_ptr + 0x1F;
-            } else if (cur_char == ':') {
-                state_colon = has_kerning;
-                if (state_colon == 0) {
-#if 0
-                    data[out_idx] = 0xA;
-                    dead_r9_7 = out_idx + 1;
-                    data[out_idx].unk1 = 0xF4;
-                    dead_r9_8 = dead_r9_7 + 1;
-                    data[dead_r9_7].unk1 = 0;
-                    dead_r9_9 = dead_r9_8 + 1;
-                    state_colon += 1;
-                    data[dead_r9_8].unk1 = 0;
-                    data[dead_r9_9].unk1 = 0;
-                    out_idx = dead_r9_9 + 1 + 1;
-#endif
-                }
-                has_kerning = state_colon;
-                sjis_hi = 0x81;
-                sjis_lo = 0x46;
-            } else if ((cur_char >= 'A') && (cur_char <= 'Z')) {
-                data[out_idx] = 0xB;
-                has_kerning = 0;
-                out_idx += 1;
-                sjis_hi = 0x82;
-                sjis_lo = (u8) *char_ptr + 0x1F;
-            } else if ((cur_char >= 'a') && (cur_char <= 'z')) {
-                data[out_idx] = 0xB;
-                has_kerning = 0;
-                out_idx += 1;
-                sjis_hi = 0x82;
-                sjis_lo = (u8) *char_ptr + 0x20;
-            } else {
-                data[out_idx] = 0xB;
-                out_idx += 1;
-                has_kerning = 0;
-                sjis_hi = (u8) string[in_idx];
-                in_idx += 1;
-                sjis_lo = str_cursor[1];
-                str_cursor += 1;
-            }
-            lut_count = 0x11F;
-            lut_ptr = lbl_8040C8C0;
-            lut_idx = 0;
-#if 0
-loop_37:
-            if ((sjis_hi == (u8) lut_ptr->unk0) && (sjis_lo == (u8) lut_ptr->unk1)) {
-                dead_r11 = HSD_SisLib_8040C680 + (lut_idx * 2);
-                dead_r9_10 = out_idx + 1;
-                data[out_idx] = dead_r11->unk0;
-                dead_r8_2 = dead_r9_10;
-                out_idx = dead_r9_10 + 1;
-                data[dead_r8_2] = dead_r11->unk1;
-            } else {
-                lut_ptr += 2;
-                lut_idx += 1;
-                lut_count -= 1;
-                if (lut_count != 0) {
-                    goto loop_37;
-                }
-            }
-#endif
-            in_idx += 1;
-            str_cursor += 1;
-            goto loop_42;
+            break;
         }
+        if (cur_char == ' ') {
+            state = has_kerning;
+            if (state == 0) {
+                data[out_idx++] = 0xA;
+                data[out_idx++] = 0xF4;
+                data[out_idx++] = 0x0;
+                state += 1;
+                data[out_idx++] = 0x0;
+                data[out_idx++] = 0x0;
+            }
+            has_kerning = state;
+            sjis_hi = 0x81;
+            sjis_lo = 0x40;
+        } else if (cur_char == '"') {
+            data[out_idx] = 0xB;
+            out_idx += 1;
+            has_kerning = 0;
+            sjis_hi = 0x81;
+            sjis_lo = 0x68;
+        } else if (cur_char == '\'') {
+            data[out_idx] = 0xB;
+            out_idx += 1;
+            has_kerning = 0;
+            sjis_hi = 0x81;
+            sjis_lo = 0x66;
+        } else if (cur_char == ',') {
+            data[out_idx] = 0xB;
+            out_idx += 1;
+            has_kerning = 0;
+            sjis_hi = 0x81;
+            sjis_lo = 0x43;
+        } else if (cur_char == '-') {
+            data[out_idx] = 0xB;
+            out_idx += 1;
+            has_kerning = 0;
+            sjis_hi = 0x81;
+            sjis_lo = 0x7C;
+        } else if (cur_char == '.') {
+            state_dot = has_kerning;
+            if (state_dot == 0) {
+                data[out_idx++] = 0xA;
+                data[out_idx++] = 0xF4;
+                data[out_idx++] = 0x0;
+                state_dot += 1;
+                data[out_idx++] = 0x0;
+                data[out_idx++] = 0x0;
+            }
+            has_kerning = state_dot;
+            sjis_hi = 0x81;
+            sjis_lo = 0x44;
+        } else if ((cur_char >= '0') && (cur_char <= '9')) {
+            state_digit = has_kerning;
+            out_idx_digit = out_idx;
+            if (state_digit == 0) {
+                data[out_idx_digit++] = 0xA;
+                data[out_idx_digit++] = 0xF4;
+                data[out_idx_digit++] = 0x0;
+                state_digit += 1;
+                data[out_idx_digit++] = 0x0;
+                data[out_idx_digit++] = 0x0;
+            }
+            has_kerning = state_digit;
+            out_idx = out_idx_digit;
+            sjis_hi = 0x82;
+            sjis_lo = (u8) *char_ptr + 0x1F;
+        } else if (cur_char == ':') {
+            state_colon = has_kerning;
+            if (state_colon == 0) {
+                data[out_idx++] = 0xA;
+                data[out_idx++] = 0xF4;
+                data[out_idx++] = 0x0;
+                state_colon += 1;
+                data[out_idx++] = 0x0;
+                data[out_idx++] = 0x0;
+            }
+            has_kerning = state_colon;
+            sjis_hi = 0x81;
+            sjis_lo = 0x46;
+        } else if ((cur_char >= 'A') && (cur_char <= 'Z')) {
+            data[out_idx] = 0xB;
+            has_kerning = 0;
+            out_idx += 1;
+            sjis_hi = 0x82;
+            sjis_lo = (u8) *char_ptr + 0x1F;
+        } else if ((cur_char >= 'a') && (cur_char <= 'z')) {
+            data[out_idx] = 0xB;
+            has_kerning = 0;
+            out_idx += 1;
+            sjis_hi = 0x82;
+            sjis_lo = (u8) *char_ptr + 0x20;
+        } else {
+            data[out_idx] = 0xB;
+            out_idx += 1;
+            has_kerning = 0;
+            sjis_hi = (u8) string[in_idx];
+            in_idx += 1;
+            sjis_lo = str_cursor[1];
+            str_cursor += 1;
+        }
+        lut_count = 0x11F;
+        lut_ptr = (u8*) lbl_8040C8C0;
+        lut_idx = 0;
+        do {
+            if ((sjis_hi == lut_ptr[0]) && (sjis_lo == lut_ptr[1])) {
+                out_ptr = (u8*) HSD_SisLib_8040C680 + lut_idx * 2;
+                data[out_idx++] = out_ptr[0];
+                data[out_idx++] = out_ptr[1];
+                break;
+            }
+            lut_ptr += 2;
+            lut_idx += 1;
+            lut_count -= 1;
+        } while (lut_count != 0);
     }
     data[out_idx] = 0;
     return out_idx;
@@ -927,189 +876,111 @@ loop_37:
 
 int HSD_SisLib_803A6B98(HSD_Text* text, float x, float y, const char* fmt, ...)
 {
-    s8 dead_sp10C;
-    HSD_Text** dead_sp88;
-    f64* dead_sp84;
-    s32 dead_sp80;
-    f64 dead_line_width;
-    f64 dead_sp58;
-    f64 dead_sp50;
-    f64 dead_sp48;
-    f64 dead_sp40;
-    f64 dead_sp38;
-    f64 dead_sp30;
-    f64 dead_sp28;
-    s32 dead_sp24;
-    s32 dead_sp20;
-    s32 dead_sp1C;
-    s32 dead_sp18;
-    s32 dead_sp14;
-    s32 dead_sp10;
-    void* dead_spC;
-    HSD_Text* dead_sp8;
-    s16 y_coord;
-    s16 x_coord;
-    s32 remaining_len;
-    s32 tail_count;
+    u8 buffer[128];
+    u8 encoded[128];
+    s32 x_coord;
+    s32 y_coord;
+    HSD_Text* old_buf;
+    SisBlock* alloc;
     s32 encoded_len;
     s32 copied_bytes;
-    s32 copy_idx;
-    sislib_UnkAllocData* alloc;
-    sislib_UnkAllocData* dead_r3_10;
-    sislib_UnkAllocData* dead_r3_11;
-    sislib_UnkAllocData* dead_r3_12;
-    sislib_UnkAllocData* dead_r3_13;
-    sislib_UnkAllocData* dead_r3_14;
-    sislib_UnkAllocData* dead_r3_15;
-    sislib_UnkAllocData* dead_r3_17;
-    sislib_UnkAllocData* dead_r3_18;
-    sislib_UnkAllocData* dead_r3_2;
-    sislib_UnkAllocData* dead_r3_3;
-    sislib_UnkAllocData* dead_r3_4;
-    sislib_UnkAllocData* dead_r3_5;
-    sislib_UnkAllocData* dead_r3_6;
-    sislib_UnkAllocData* dead_r3_7;
-    sislib_UnkAllocData* dead_r3_8;
-    sislib_UnkAllocData* dead_r3_9;
-    sislib_UnkAllocData* dead_r4_3;
-    sislib_UnkAllocData* dead_r5;
-    sislib_UnkAllocData* dead_r5_2;
-    sislib_UnkAllocData* dead_r5_3;
-    sislib_UnkAllocData* dead_r5_4;
-    sislib_UnkAllocData* dead_r5_5;
-    sislib_UnkAllocData* dead_r5_6;
-    sislib_UnkAllocData* dead_r5_7;
-    sislib_UnkAllocData* dead_r5_8;
-    HSD_Text* dead_r31;
-    u8* new_buf;
+    s32 i;
+    s32 tail_count;
     u8* copy_dst;
     u8* copy_src;
+    u8* new_buf;
+    s32 copy_idx;
+    u8* bulk_src;
+    u8* tail_src;
     u32 required_size;
     u32 old_size;
     u32 bulk_count;
-    u8* bulk_src;
-    u8* tail_src;
-    u8 copy_byte;
-    u8 dead_r4_2;
-    u8 dead_r6;
-    u8* playhead;
-    va_list args; ///< @todo what size is this?
-    u8 sis_buf;
+    u8** cur;
+    va_list args;
 
-    encoded_len = 0; // some type of size
+    encoded_len = 0;
     alloc = text->alloc_data;
-    sis_buf = 0;
-    if (fmt) { ///< @todo is this the correct usage of vaargs?
-        u8 buffer[256];
+    encoded[0] = 0;
+    if (fmt) {
         va_start(args, fmt);
         vsnprintf((char*) buffer, -1, fmt, args);
         va_end(args);
-        encoded_len = HSD_SisLib_803A67EC(&sis_buf, buffer);
+        encoded_len = HSD_SisLib_803A67EC(encoded, buffer);
     }
 
-    // some sort of copy of a dynamically-sized struct
-    {
-        // It would appear that data_1 is allocated right after data_0 in
-        // memory.
-        u8* dead_r31 = (u8*) alloc->data_1;
-        old_size = alloc->size;
-        required_size =
-            encoded_len + (((u8*) alloc->data_0 - dead_r31) + 0x11);
-        if (old_size < required_size) {
-            // make sure that this unsigned subtract doesn't overflow?
-            alloc->size =
-                old_size +
-                ((((u32) (required_size - old_size) >> 7U) + 1) << 7);
-            new_buf = HSD_SisLib_803A5798((s32) alloc->size);
-            // clearly a handwritten memory copy
-            {
-                copy_src = dead_r31;
-                copy_dst = new_buf;
-                copy_idx = 0;
-                while (copy_idx <
-                       (s32) (((u8*) alloc->data_0 - (u8*) alloc->data_1) + 1))
-                {
-                    copy_byte = *copy_src;
-                    copy_idx += 1;
-                    copy_src += 1;
-                    *copy_dst = copy_byte;
-                    copy_dst += 1;
-                }
-            }
-            alloc->data_1 = (HSD_Text*) new_buf;
-            text->sis_buffer = (SIS*) new_buf;
-            alloc->data_0 =
-                (sislib_UnkAllocData*) (new_buf +
-                                        ((u8*) alloc->data_0 - dead_r31));
-            HSD_SisLib_803A594C(dead_r31);
+    old_buf = alloc->data;
+    old_size = alloc->size;
+    required_size =
+        (HSD_SisLib_BytePtr(alloc->next) - HSD_SisLib_BytePtr(old_buf)) + 0x11;
+    required_size += encoded_len;
+    if (old_size < required_size) {
+        alloc->size =
+            old_size + ((((u32) (required_size - old_size) >> 7U) + 1) << 7);
+        copy_dst = HSD_SisLib_Alloc((s32) alloc->size);
+        copy_src = (u8*) old_buf;
+        new_buf = copy_dst;
+        copy_idx = 0;
+        while (copy_idx < (s32) (((u8*) alloc->next - (u8*) alloc->data) + 1))
+        {
+            *copy_dst = *copy_src;
+            copy_idx += 1;
+            copy_src += 1;
+            copy_dst += 1;
         }
+        alloc->data = (HSD_Text*) new_buf;
+        text->sis_buffer = (SIS*) new_buf;
+        alloc->next =
+            (SisBlock*) (new_buf + ((u8*) alloc->next - (u8*) old_buf));
+        HSD_SisLib_Free(old_buf);
     }
 
-    playhead = (u8*) alloc;
-    *(playhead++) = 7;
+    cur = (u8**) &alloc->next;
+    *(*cur)++ = 7;
     copied_bytes = 0;
-
-    // @note: Is it just assuming these are always passed in?
-    x_coord = *((s16*) args + 8);
-    *((s16*) playhead++) = x_coord >> 8;
-    *playhead++ = x_coord;
-
-    y_coord = *((s16*) fmt + 9);
-    // *((s16 *)playhead)++ = y_coord >> 8;
-    *playhead++ = y_coord;
-
-    *playhead++ = 0xC;
-
-    *playhead++ = text->text_color.a;
-    *playhead++ = text->text_color.b;
-    *playhead++ = text->text_color.g;
-    *playhead++ = 0xE;
-    *playhead++ = text->text_color.r;
-    *playhead++ = (u8) (s32) (text->x34.x);
-    *playhead++ = (u8) (s32) (256.0F * text->x34.x);
-    *playhead++ = (u8) (s32) (text->x34.y);
-    *playhead++ = (u8) (s32) (256.0F * text->x34.y);
+    x_coord = (s16) x;
+    *(*cur)++ = (u8) (x_coord >> 8);
+    *(*cur)++ = (u8) x_coord;
+    y_coord = (s16) y;
+    *(*cur)++ = (u8) (y_coord >> 8);
+    *(*cur)++ = (u8) y_coord;
+    *(*cur)++ = 0xC;
+    *(*cur)++ = text->text_color.r;
+    *(*cur)++ = text->text_color.g;
+    *(*cur)++ = text->text_color.b;
+    *(*cur)++ = 0xE;
+    *(*cur)++ = (u8) (s32) text->x34.x;
+    *(*cur)++ = (u8) (s32) (256.0F * text->x34.x);
+    *(*cur)++ = (u8) (s32) text->x34.y;
+    *(*cur)++ = (u8) (s32) (256.0F * text->x34.y);
 
     if (encoded_len > 0) {
-        /*
-        This copies sets of 8 bytes individually, presumably from
-        whatever HSD_SisLib_803A67EC returned. The second part of
-        the loop copies any remaining bytes that aren't modulo 8.
-        Maybe they had intended for the first part to be a "fast"
-        copy, only for the compiler to output essentially the
-        same operations for both?
-        */
-        remaining_len = encoded_len - 8;
         if (encoded_len > 8) {
-            bulk_count = (u32) (remaining_len + 7) >> 3U;
-            bulk_src = &sis_buf;
-            if (remaining_len > 0) {
+            bulk_count = (u32) ((encoded_len - 8) + 7) >> 3U;
+            bulk_src = encoded;
+            if ((encoded_len - 8) > 0) {
                 do {
-                    int i;
                     copied_bytes += 8;
                     for (i = 0; i < 8; i++) {
-                        *playhead++ = bulk_src[i];
+                        *(*cur)++ = bulk_src[i];
                     }
                     bulk_src += 8;
                     bulk_count -= 1;
                 } while (bulk_count != 0);
             }
         }
-        tail_src = &sis_buf + copied_bytes;
+        tail_src = encoded + copied_bytes;
         tail_count = encoded_len - copied_bytes;
         if (copied_bytes < encoded_len) {
             do {
-                *playhead++ = *tail_src++;
+                *(*cur)++ = *tail_src++;
                 tail_count -= 1;
             } while (tail_count != 0);
         }
     }
-    *playhead++ = 0xF;
-    *playhead++ = 0xD;
-    *playhead = 0;
-    *((s32*) playhead + 2) = *((s32*) playhead + 2) + 1;
-
-    return (int) playhead;
+    *(*cur)++ = 0xF;
+    *(*cur)++ = 0xD;
+    **cur = 0;
+    return ((sisLib_803A7664_t*) alloc)->xC++;
 }
 
 /// @todo there seems to be a file boundary before this function,
@@ -1169,6 +1040,181 @@ end:
     return sis_data;
 }
 
+s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
+{
+    u8 buffer[128];
+    u8 encoded[128];
+    s32 old_size;
+    HSD_Text* old_buf;
+    s32 new_size;
+    s32 grow_diff;
+    s32 shrink_diff;
+    s32 tail_len;
+    s32 copy_idx;
+    s32 i;
+    s32 remainder;
+    u32 required_size;
+    u32 cur_size;
+    u32 bulk_count;
+    u8* entry;
+    u8* playhead;
+    u8* new_buf;
+    u8* copy_src;
+    u8* copy_dst;
+    u8* src;
+    u8* dst;
+    u8* tail_src;
+    SisBlock* alloc;
+    s32 result;
+    SisBlock* old_end;
+    va_list args;
+
+    entry = fn_803A6FEC((u8*) text->sis_buffer, entry_idx, &old_size);
+    if (entry != NULL) {
+        alloc = text->alloc_data;
+        playhead = entry + 0xE;
+        if (fmt != NULL) {
+            va_start(args, fmt);
+            vsnprintf((char*) buffer, -1, fmt, args);
+            va_end(args);
+            new_size = HSD_SisLib_803A67EC(encoded, buffer);
+        } else {
+            new_size = 0;
+        }
+        if (old_size < new_size) {
+            old_end = alloc->next;
+            grow_diff = new_size - old_size;
+            old_buf = alloc->data;
+            cur_size = alloc->size;
+            tail_len = (u8*) old_end - playhead;
+            {
+                u32 new_required_size =
+                    new_size + ((HSD_SisLib_BytePtr(old_end) -
+                                 HSD_SisLib_BytePtr(old_buf)) +
+                                1);
+                required_size = new_required_size;
+            }
+            if (cur_size < required_size) {
+                alloc->size =
+                    cur_size +
+                    ((((u32) (required_size - cur_size) >> 7U) + 1) << 7);
+                new_buf = HSD_SisLib_Alloc((s32) alloc->size);
+                copy_src = (u8*) old_buf;
+                copy_dst = new_buf;
+                copy_idx = 0;
+                while (copy_idx <
+                       (s32) (((u8*) alloc->next - (u8*) alloc->data) + 1))
+                {
+                    *copy_dst = *copy_src;
+                    copy_idx += 1;
+                    copy_src += 1;
+                    copy_dst += 1;
+                }
+                alloc->data = (HSD_Text*) new_buf;
+                text->sis_buffer = (SIS*) new_buf;
+                alloc->next =
+                    (SisBlock*) (new_buf + ((u8*) old_end - (u8*) old_buf));
+                HSD_SisLib_Free(old_buf);
+                playhead = (u8*) alloc->next - tail_len;
+            }
+            dst = &playhead[grow_diff + tail_len];
+            src = &playhead[tail_len];
+            if (tail_len > 0) {
+                bulk_count = (u32) tail_len >> 3U;
+                if (bulk_count != 0) {
+                    for (; bulk_count != 0; bulk_count--) {
+                        for (i = 0; i < 8; i++) {
+                            dst[-i] = src[-i];
+                        }
+                        src -= 8;
+                        dst -= 8;
+                    }
+                    remainder = tail_len & 7;
+                    if (remainder == 0) {
+                        goto grow_done;
+                    }
+                } else {
+                    remainder = tail_len;
+                }
+                do {
+                    *dst = *src;
+                    src -= 1;
+                    dst -= 1;
+                    remainder -= 1;
+                } while (remainder != 0);
+            }
+        grow_done:
+            alloc->next = (SisBlock*) ((u8*) alloc->next + grow_diff);
+        } else if (old_size > new_size) {
+            shrink_diff = old_size - new_size;
+            i = 0;
+            tail_len = (u8*) alloc->next - playhead;
+            if (tail_len > 0) {
+                if (tail_len > 8) {
+                    bulk_count = (u32) ((tail_len - 8) + 7) >> 3U;
+                    src = &playhead[shrink_diff];
+                    if ((tail_len - 8) > 0) {
+                        do {
+                            dst = &playhead[i];
+                            i += 8;
+                            for (copy_idx = 0; copy_idx < 8; copy_idx++) {
+                                dst[copy_idx] = src[copy_idx];
+                            }
+                            src += 8;
+                            bulk_count -= 1;
+                        } while (bulk_count != 0);
+                    }
+                }
+                tail_src = &playhead[shrink_diff + i];
+                remainder = tail_len - i;
+                dst = &playhead[i];
+                if (i < tail_len) {
+                    do {
+                        *dst = *tail_src;
+                        tail_src += 1;
+                        dst += 1;
+                        remainder -= 1;
+                    } while (remainder != 0);
+                }
+            }
+            alloc->next = (SisBlock*) ((u8*) alloc->next - shrink_diff);
+        }
+        i = 0;
+        if (new_size > 0) {
+            if (new_size > 8) {
+                bulk_count = (u32) ((new_size - 8) + 7) >> 3U;
+                src = encoded;
+                if ((new_size - 8) > 0) {
+                    do {
+                        i += 8;
+                        for (copy_idx = 0; copy_idx < 8; copy_idx++) {
+                            playhead[copy_idx] = src[copy_idx];
+                        }
+                        src += 8;
+                        playhead += 8;
+                        bulk_count -= 1;
+                    } while (bulk_count != 0);
+                }
+            }
+            tail_src = encoded + i;
+            remainder = new_size - i;
+            if (i < new_size) {
+                do {
+                    *playhead = *tail_src;
+                    tail_src += 1;
+                    playhead += 1;
+                    remainder -= 1;
+                } while (remainder != 0);
+            }
+        }
+        *playhead = 0xF;
+        result = 1;
+    } else {
+        result = 0;
+    }
+    return result;
+}
+
 void HSD_SisLib_803A746C(HSD_Text* text, s32 entry_idx, f32 new_x, f32 new_y)
 {
     s32 x;
@@ -1187,7 +1233,7 @@ void HSD_SisLib_803A746C(HSD_Text* text, s32 entry_idx, f32 new_x, f32 new_y)
     }
 }
 
-void HSD_SisLib_803A74F0(HSD_Text* text, s32 entry_idx, u8* color_rgb)
+void HSD_SisLib_803A74F0(HSD_Text* text, s32 entry_idx, GXColor* color_rgb)
 {
     u8* entry;
     u8* color_ptr;
@@ -1196,9 +1242,9 @@ void HSD_SisLib_803A74F0(HSD_Text* text, s32 entry_idx, u8* color_rgb)
     entry = fn_803A6FEC((u8*) text->sis_buffer, entry_idx, NULL);
     if (entry != NULL) {
         color_ptr = entry + 5;
-        color_ptr[1] = color_rgb[0];
-        color_ptr[2] = color_rgb[1];
-        color_ptr[3] = color_rgb[2];
+        color_ptr[1] = color_rgb->r;
+        color_ptr[2] = color_rgb->g;
+        color_ptr[3] = color_rgb->b;
     }
 }
 
@@ -1244,29 +1290,80 @@ void HSD_SisLib_803A7664(HSD_Text* text)
     data->xC = 0;
 }
 
-void HSD_SisLib_803A8134(void* sis_data, HSD_Text* text, f32* out_width,
+static u8 HSD_SisLib_8040CB00[0x240] = {
+    0x09, 0x08, 0x09, 0x0C, 0x09, 0x08, 0x08, 0x08, 0x09, 0x08, 0x09, 0x08,
+    0x09, 0x08, 0x09, 0x08, 0x09, 0x08, 0x09, 0x08, 0x04, 0x03, 0x06, 0x05,
+    0x04, 0x04, 0x05, 0x03, 0x08, 0x06, 0x08, 0x06, 0x04, 0x03, 0x05, 0x03,
+    0x0D, 0x0B, 0x07, 0x06, 0x06, 0x04, 0x08, 0x06, 0x03, 0x01, 0x04, 0x03,
+    0x04, 0x03, 0x06, 0x04, 0x04, 0x02, 0x06, 0x04, 0x05, 0x04, 0x06, 0x05,
+    0x05, 0x03, 0x04, 0x03, 0x01, 0x00, 0x05, 0x04, 0x04, 0x03, 0x05, 0x04,
+    0x07, 0x06, 0x07, 0x06, 0x07, 0x06, 0x07, 0x06, 0x07, 0x06, 0x08, 0x09,
+    0x07, 0x06, 0x08, 0x07, 0x0A, 0x0A, 0x09, 0x0C, 0x08, 0x06, 0x0C, 0x0C,
+    0x01, 0x00, 0x07, 0x06, 0x07, 0x06, 0x07, 0x06, 0x07, 0x06, 0x0A, 0x09,
+    0x08, 0x07, 0x08, 0x09, 0x07, 0x05, 0x07, 0x06, 0x02, 0x01, 0x07, 0x06,
+    0x06, 0x06, 0x07, 0x06, 0x05, 0x05, 0x03, 0x02, 0x05, 0x05, 0x03, 0x02,
+    0x06, 0x06, 0x04, 0x04, 0x06, 0x05, 0x03, 0x02, 0x05, 0x03, 0x02, 0x00,
+    0x01, 0x00, 0x00, 0x00, 0x04, 0x04, 0x04, 0x00, 0x04, 0x05, 0x04, 0x03,
+    0x02, 0x02, 0x02, 0x00, 0x04, 0x04, 0x03, 0x00, 0x04, 0x03, 0x03, 0x00,
+    0x05, 0x03, 0x05, 0x03, 0x02, 0x02, 0x02, 0x00, 0x02, 0x02, 0x01, 0x00,
+    0x02, 0x02, 0x01, 0x00, 0x02, 0x02, 0x02, 0x00, 0x03, 0x03, 0x03, 0x00,
+    0x04, 0x05, 0x01, 0x02, 0x01, 0x00, 0x02, 0x02, 0x02, 0x00, 0x04, 0x04,
+    0x03, 0x00, 0x01, 0x01, 0x03, 0x02, 0x01, 0x00, 0x00, 0x00, 0x01, 0x01,
+    0x02, 0x01, 0x02, 0x00, 0x02, 0x00, 0x02, 0x01, 0x02, 0x00, 0x02, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x01,
+    0x02, 0x01, 0x01, 0x00, 0x01, 0x00, 0x03, 0x03, 0x01, 0x01, 0x02, 0x01,
+    0x02, 0x02, 0x03, 0x02, 0x04, 0x04, 0x01, 0x01, 0x05, 0x05, 0x02, 0x02,
+    0x05, 0x05, 0x02, 0x02, 0x03, 0x03, 0x05, 0x05, 0x02, 0x02, 0x01, 0x00,
+    0x02, 0x03, 0x04, 0x04, 0x01, 0x01, 0x02, 0x03, 0x01, 0x01, 0x05, 0x04,
+    0x03, 0x01, 0x04, 0x06, 0x01, 0x03, 0x06, 0x05, 0x03, 0x02, 0x05, 0x04,
+    0x02, 0x02, 0x04, 0x05, 0x02, 0x01, 0x02, 0x02, 0x02, 0x00, 0x02, 0x02,
+    0x01, 0x00, 0x03, 0x02, 0x02, 0x00, 0x01, 0x01, 0x01, 0x00, 0x03, 0x04,
+    0x02, 0x00, 0x02, 0x02, 0x01, 0x00, 0x02, 0x01, 0x02, 0x01, 0x02, 0x01,
+    0x02, 0x00, 0x02, 0x02, 0x02, 0x00, 0x02, 0x03, 0x01, 0x00, 0x03, 0x02,
+    0x02, 0x00, 0x02, 0x02, 0x02, 0x00, 0x05, 0x05, 0x02, 0x02, 0x01, 0x00,
+    0x02, 0x02, 0x01, 0x00, 0x09, 0x03, 0x09, 0x02, 0x02, 0x02, 0x01, 0x01,
+    0x02, 0x02, 0x03, 0x02, 0x03, 0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x04, 0x04, 0x00, 0x04, 0x02, 0x04, 0x03, 0x03, 0x00, 0x03, 0x00,
+    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
+    0x02, 0x02, 0x04, 0x04, 0x01, 0x01, 0x02, 0x03, 0x02, 0x02, 0x04, 0x04,
+    0x02, 0x01, 0x05, 0x05, 0x02, 0x02, 0x06, 0x06, 0x03, 0x04, 0x03, 0x03,
+    0x05, 0x05, 0x01, 0x01, 0x05, 0x03, 0x03, 0x03, 0x06, 0x06, 0x03, 0x03,
+    0x04, 0x03, 0x02, 0x02, 0x03, 0x00, 0x04, 0x05, 0x04, 0x00, 0x08, 0x08,
+    0x02, 0x12, 0x02, 0x13, 0x0C, 0x0D, 0x0C, 0x0D, 0x0B, 0x0A, 0x0D, 0x0C,
+    0x0D, 0x0C, 0x07, 0x06, 0x0D, 0x0C, 0x0A, 0x08, 0x00, 0x00, 0x02, 0x01,
+    0x01, 0x00, 0x01, 0x01, 0x0F, 0x0F, 0x02, 0x17, 0x01, 0x10, 0x15, 0x00,
+    0x01, 0x14, 0x15, 0x00, 0x01, 0x13, 0x13, 0x00, 0x01, 0x12, 0x04, 0x03,
+    0x04, 0x03, 0x05, 0x04, 0x04, 0x03, 0x01, 0x01, 0x01, 0x00, 0x04, 0x02,
+    0x05, 0x05, 0x01, 0x00, 0x04, 0x03, 0x03, 0x02, 0x08, 0x06, 0x03, 0x02,
+    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x01, 0x02, 0x00, 0x00, 0x01, 0x01, 0x00, 0x00,
+};
+
+void HSD_SisLib_803A8134(void* cursor, HSD_Text* text, f32* out_width,
                          f32* out_height)
 {
     SIS* sis;
     TextGlyphTexture* glyph_tex;
+    u8* default_kerning = HSD_SisLib_8040CB00;
     f32 line_height;
     f32 line_height_2;
-    f32 saved_spacing;
-    f32 saved_scale_y;
     f32 saved_scale_x;
+    f32 saved_scale_y;
+    f32 saved_spacing;
     u16 scale_val;
+    u16 kern_enabled;
     u16 saved_x6C;
     u16 glyph_code;
-    u16 clear_idx;
+    s32 kern_width;
+    s32 clear_idx;
     u32 pop_result;
-    u8* kern_data_2;
+    TextKerning* kern_data_2;
     u8 opcode;
-    u8 kern_enabled;
-    u8* kern_data;
-    u8* cursor;
-    PAD_STACK(8);
-
-    cursor = sis_data;
+    u8 kern_left;
+    u8 kern_right;
+    TextKerning* kern_data;
     saved_scale_x = text->x80.x;
     saved_scale_y = text->x80.y;
     saved_spacing = text->x78.x;
@@ -1279,57 +1376,51 @@ void HSD_SisLib_803A8134(void* sis_data, HSD_Text* text, f32* out_width,
     *out_width = 0.0F;
     *out_height = 32.0F * text->x80.y;
 loop_3:
-    opcode = *cursor;
+    opcode = *(u8*) cursor;
     switch (opcode) {
     case 0:
         pop_result = HSD_SisLib_803A7F0C(text, 0x85);
         if (pop_result != 0U) {
-            *cursor = pop_result + 4;
-        block_33:
-            cursor += 1;
-            goto loop_3;
+            cursor = (u8*) (pop_result + 4);
+            goto block_33;
         }
         break;
     case 9:
-        HSD_SisLib_803A7684(text, *cursor, 0x85U);
+        HSD_SisLib_803A7684(text, (u8*) cursor, 0x85U);
         /* fallthrough */
     case 8:
-        cursor = cursor - 1;
+        cursor = (u8*) *(s32*) ((u8*) cursor + 1) - 1;
         goto block_33;
     case 14:
-        HSD_SisLib_803A7684(text, *cursor, 0x83U);
-        text->x80.x = *((f32*) ((u16*) cursor + 1)) * 0.00390625F;
-        scale_val = *(u16*) (cursor + 3);
-        cursor += 4;
-        text->x80.y = (f32) scale_val * 0.00390625F;
+        HSD_SisLib_803A7684(text, (u8*) cursor, 0x83U);
+        text->x80.x = (f32) * (u16*) ((u8*) cursor + 1) / 256.0F;
+        scale_val = *(u16*) ((u8*) cursor + 3);
+        cursor = (u8*) cursor + 4;
+        text->x80.y = (f32) scale_val / 256.0F;
         goto block_33;
     case 15:
         HSD_SisLib_803A7F0C(text, 0x83);
         goto block_33;
     case 6:
-        cursor += 4;
+        cursor = (u8*) cursor + 4;
         goto block_33;
     case 10:
-        if (((sislib_UnkAllocData*) text->alloc_data == NULL) ||
-            ((s16) kern_enabled == 0))
-        {
-            HSD_SisLib_803A7684(text, *cursor, 0x81U);
-            text->x78.x = (f32) (s16) * (cursor + 1) * 0.00390625F;
+        if (((SisBlock*) text->alloc_data == NULL) || (kern_enabled == 0)) {
+            HSD_SisLib_803A7684(text, (u8*) cursor, 0x81U);
+            text->x78.x = (f32) * (s16*) ((u8*) cursor + 1) / 256.0F;
         }
-        cursor += 4;
+        cursor = (u8*) cursor + 4;
         goto block_33;
     case 11:
-        if (((sislib_UnkAllocData*) text->alloc_data == NULL) ||
-            ((s16) kern_enabled == 0))
-        {
+        if (((SisBlock*) text->alloc_data == NULL) || (kern_enabled == 0)) {
             HSD_SisLib_803A7F0C(text, 0x81);
         }
         goto block_33;
     case 12:
-        cursor += 3;
+        cursor = (u8*) cursor + 3;
         goto block_33;
     case 5:
-        cursor += 2;
+        cursor = (u8*) cursor + 2;
         goto block_33;
     case 22:
         kern_enabled = 1;
@@ -1339,159 +1430,414 @@ loop_3:
         goto block_33;
     case 26:
         *out_width += text->x80.x * (16.0F + text->x78.x);
-        line_height = 32.0F * text->x80.y;
-        if (*out_height < line_height) {
-            *out_height = line_height;
+        if (*out_height < (32.0F * text->x80.y)) {
+            *out_height = 32.0F * text->x80.y;
         }
         goto block_33;
     default:
         if (opcode >= 0x20U) {
             *out_width += text->x80.x * (32.0F + text->x78.x);
-            if ((s16) kern_enabled != 0) {
-                glyph_code = (u16) *cursor;
+            if (kern_enabled != 0) {
+                glyph_code = *(u16*) cursor;
                 if (glyph_code < 0x4000U) {
-                    kern_data = (u8*) &HSD_SisLib_8040CB00 +
-                                (((glyph_code - 0x2000) * 2) & 0x1FFFE);
-                    *out_width = -((text->x80.x *
-                                    (f32) (*kern_data + (kern_data[1] - 2))) -
-                                   *out_width);
+                    kern_data = (TextKerning*) (default_kerning +
+                                                (((glyph_code - 0x2000) * 2) &
+                                                 0x1FFFE));
+                    kern_right = kern_data->right;
+                    kern_left = kern_data->left;
+                    kern_width = kern_left + (kern_right - 2);
+                    *out_width =
+                        -((text->x80.x * (f32) kern_width) - *out_width);
                 } else {
                     kern_data_2 =
-                        &glyph_tex
-                             ->data[((glyph_code - 0x4000) * 2) & 0x1FFFE];
+                        (TextKerning*) &glyph_tex
+                            ->data[((glyph_code - 0x4000) * 2) & 0x1FFFE];
+                    kern_right = kern_data_2->right;
+                    kern_left = kern_data_2->left;
+                    kern_width = kern_left + (kern_right - 2);
                     *out_width =
-                        -((text->x80.x *
-                           (f32) (*kern_data_2 + (kern_data_2[1] - 2))) -
-                          *out_width);
+                        -((text->x80.x * (f32) kern_width) - *out_width);
                 }
             }
-            line_height_2 = 32.0F * text->x80.y;
-            if (*out_height < line_height_2) {
-                *out_height = line_height_2;
+            if (*out_height < (32.0F * text->x80.y)) {
+                *out_height = 32.0F * text->x80.y;
             }
-            cursor += 1;
+            cursor = (u8*) cursor + 1;
         }
         goto block_33;
     }
+    goto block_done;
+block_33:
+    cursor = (u8*) cursor + 1;
+    goto loop_3;
+block_done:
     *out_width -= text->x78.x;
     text->x80.x = saved_scale_x;
     text->x80.y = saved_scale_y;
     text->x78.x = saved_spacing;
     text->x6C = saved_x6C;
+    opcode = 0;
     clear_idx = text->x6C;
-loop_36:
-    if ((s32) clear_idx < (s32) text->x6E) {
-        *((u8*) text->string_buffer + clear_idx) = 0;
+    while (clear_idx < (s32) text->x6E) {
+        text->string_buffer[clear_idx] = opcode;
         clear_idx += 1;
-        goto loop_36;
     }
 }
 
-void static inline HSD_SisLib_803A7F0C_inline(HSD_Text* text, s32 flags,
-                                              s32* out_remove_size,
-                                              u32* stack_pos, s32* out_value)
+void HSD_SisLib_803A7684(HSD_Text* text, u8* cursor, u8 flags)
 {
-    s32* buf;
-    u8 entry;
-    s32 entry_type;
-    s32 entry_flags;
-    s32 target_type;
-    s32 flag_hi;
-    flag_hi = flags & 0x80;
-    target_type = flags & 0x7F;
-    while (*stack_pos >= 0) {
-        buf = (s32*) text->string_buffer;
-        entry = *(buf + *stack_pos);
-        entry_type = entry & 0x7F;
-        entry_flags = entry & 0x80;
-        switch (entry_type) { /* irregular */
-        case 1:
-            *stack_pos -= 4;
-            if (target_type == 1) {
-                text->x78.x = (f32) * (buf + *stack_pos) * 0.00390625F;
-                text->x78.y = (f32) * (buf + (*stack_pos + 2)) * 0.00390625F;
-                if (flag_hi == entry_flags) {
-                    *out_remove_size = 5;
+    s32 old_x6E;
+    s32 new_x6E;
+    s32 idx;
+    s32 count;
+    s32 k;
+    s32 pos;
+    u32 bulk;
+    u8* old_buf;
+    u8* src;
+
+    switch (flags & 0x7F) {
+    case 1:
+        old_x6E = text->x6E;
+        if (old_x6E < (s32) (text->x6C + 5)) {
+            new_x6E = old_x6E + 0x10;
+            old_buf = (u8*) text->string_buffer;
+            text->string_buffer = HSD_SisLib_Alloc(new_x6E);
+            text->x6E = (u16) new_x6E;
+            idx = 0;
+            if (old_x6E > 0) {
+                src = old_buf;
+                count = old_x6E;
+                bulk = (u32) count >> 3U;
+                if (bulk != 0) {
+                    do {
+                        for (k = 0; k < 8; k++) {
+                            text->string_buffer[idx++] = src[k];
+                        }
+                        src += 8;
+                        bulk -= 1;
+                    } while (bulk != 0);
+                    count &= 7;
+                    if (count == 0) {
+                        goto zero_1;
+                    }
                 }
-            } else {
-                break;
+                do {
+                    text->string_buffer[idx++] = *src++;
+                    count -= 1;
+                } while (count != 0);
             }
-            return;
-        case 2:
-            *stack_pos -= 3;
-            if (target_type == 2) {
-                text->active_color.r =
-                    ((GXColor*) text->string_buffer + *stack_pos)->r;
-                text->active_color.g =
-                    ((GXColor*) text->string_buffer + *stack_pos)->g;
-                text->active_color.b =
-                    ((GXColor*) text->string_buffer + *stack_pos)->b;
-                if (flag_hi == entry_flags) {
-                    *out_remove_size = 4;
-                }
-            } else {
-                break;
+        zero_1:
+            while (idx < (s32) text->x6E) {
+                text->string_buffer[idx++] = 0;
             }
-            return;
-        case 3:
-            *stack_pos -= 4;
-            if (target_type == 3) {
-                text->x80.x = (f32) * (buf + *stack_pos) * 0.00390625F;
-                text->x80.y = (f32) * (buf + (*stack_pos + 2)) * 0.00390625F;
-                if (flag_hi == entry_flags) {
-                    *out_remove_size = 5;
-                }
-            } else {
-                break;
-            }
-            return;
-        case 4:
-            *stack_pos -= 1;
-            if (target_type == 4) {
-                text->alignment = *(buf + *stack_pos);
-                if (flag_hi == entry_flags) {
-                    *out_remove_size = 2;
-                }
-            } else {
-                break;
-            }
-            return;
-        case 5:
-            *stack_pos -= 4;
-            if (target_type == 5) {
-                *out_value = *(buf + *stack_pos);
-                if (flag_hi == entry_flags) {
-                    *out_remove_size = 5;
-                }
-            } else {
-                break;
-            }
-            return;
+            HSD_SisLib_Free(old_buf);
         }
-        *stack_pos -= 1;
+        pos = text->x6C;
+        text->x6C = pos + 1;
+        text->string_buffer[pos] = (s8) ((s32) (256.0F * text->x78.x) >> 8);
+        pos = text->x6C;
+        text->x6C = pos + 1;
+        text->string_buffer[pos] = (s8) (256.0F * text->x78.x);
+        pos = text->x6C;
+        text->x6C = pos + 1;
+        text->string_buffer[pos] = (s8) ((s32) (256.0F * text->x78.y) >> 8);
+        pos = text->x6C;
+        text->x6C = pos + 1;
+        text->string_buffer[pos] = (s8) (256.0F * text->x78.y);
+        pos = text->x6C;
+        text->x6C = pos + 1;
+        text->string_buffer[pos] = (s8) flags;
+        return;
+    case 2:
+        old_x6E = text->x6E;
+        if (old_x6E < (s32) (text->x6C + 4)) {
+            new_x6E = old_x6E + 0x10;
+            old_buf = (u8*) text->string_buffer;
+            text->string_buffer = HSD_SisLib_Alloc(new_x6E);
+            text->x6E = (u16) new_x6E;
+            idx = 0;
+            if (old_x6E > 0) {
+                src = old_buf;
+                count = old_x6E;
+                bulk = (u32) count >> 3U;
+                if (bulk != 0) {
+                    do {
+                        for (k = 0; k < 8; k++) {
+                            text->string_buffer[idx++] = src[k];
+                        }
+                        src += 8;
+                        bulk -= 1;
+                    } while (bulk != 0);
+                    count &= 7;
+                    if (count == 0) {
+                        goto zero_2;
+                    }
+                }
+                do {
+                    text->string_buffer[idx++] = *src++;
+                    count -= 1;
+                } while (count != 0);
+            }
+        zero_2:
+            while (idx < (s32) text->x6E) {
+                text->string_buffer[idx++] = 0;
+            }
+            HSD_SisLib_Free(old_buf);
+        }
+        pos = text->x6C;
+        text->x6C = pos + 1;
+        text->string_buffer[pos] = (s8) text->active_color.r;
+        pos = text->x6C;
+        text->x6C = pos + 1;
+        text->string_buffer[pos] = (s8) text->active_color.g;
+        pos = text->x6C;
+        text->x6C = pos + 1;
+        text->string_buffer[pos] = (s8) text->active_color.b;
+        pos = text->x6C;
+        text->x6C = pos + 1;
+        text->string_buffer[pos] = (s8) flags;
+        return;
+    case 3:
+        old_x6E = text->x6E;
+        if (old_x6E < (s32) (text->x6C + 5)) {
+            new_x6E = old_x6E + 0x10;
+            old_buf = (u8*) text->string_buffer;
+            text->string_buffer = HSD_SisLib_Alloc(new_x6E);
+            text->x6E = (u16) new_x6E;
+            idx = 0;
+            if (old_x6E > 0) {
+                src = old_buf;
+                count = old_x6E;
+                bulk = (u32) count >> 3U;
+                if (bulk != 0) {
+                    do {
+                        for (k = 0; k < 8; k++) {
+                            text->string_buffer[idx++] = src[k];
+                        }
+                        src += 8;
+                        bulk -= 1;
+                    } while (bulk != 0);
+                    count &= 7;
+                    if (count == 0) {
+                        goto zero_3;
+                    }
+                }
+                do {
+                    text->string_buffer[idx++] = *src++;
+                    count -= 1;
+                } while (count != 0);
+            }
+        zero_3:
+            while (idx < (s32) text->x6E) {
+                text->string_buffer[idx++] = 0;
+            }
+            HSD_SisLib_Free(old_buf);
+        }
+        pos = text->x6C;
+        text->x6C = pos + 1;
+        text->string_buffer[pos] = (s8) ((s32) (256.0F * text->x80.x) >> 8);
+        pos = text->x6C;
+        text->x6C = pos + 1;
+        text->string_buffer[pos] = (s8) (256.0F * text->x80.x);
+        pos = text->x6C;
+        text->x6C = pos + 1;
+        text->string_buffer[pos] = (s8) ((s32) (256.0F * text->x80.y) >> 8);
+        pos = text->x6C;
+        text->x6C = pos + 1;
+        text->string_buffer[pos] = (s8) (256.0F * text->x80.y);
+        pos = text->x6C;
+        text->x6C = pos + 1;
+        text->string_buffer[pos] = (s8) flags;
+        return;
+    case 4:
+        old_x6E = text->x6E;
+        if (old_x6E < (s32) (text->x6C + 2)) {
+            new_x6E = old_x6E + 0x10;
+            old_buf = (u8*) text->string_buffer;
+            text->string_buffer = HSD_SisLib_Alloc(new_x6E);
+            text->x6E = (u16) new_x6E;
+            idx = 0;
+            if (old_x6E > 0) {
+                src = old_buf;
+                count = old_x6E;
+                bulk = (u32) count >> 3U;
+                if (bulk != 0) {
+                    do {
+                        for (k = 0; k < 8; k++) {
+                            text->string_buffer[idx++] = src[k];
+                        }
+                        src += 8;
+                        bulk -= 1;
+                    } while (bulk != 0);
+                    count &= 7;
+                    if (count == 0) {
+                        goto zero_4;
+                    }
+                }
+                do {
+                    text->string_buffer[idx++] = *src++;
+                    count -= 1;
+                } while (count != 0);
+            }
+        zero_4:
+            while (idx < (s32) text->x6E) {
+                text->string_buffer[idx++] = 0;
+            }
+            HSD_SisLib_Free(old_buf);
+        }
+        pos = text->x6C;
+        text->x6C = pos + 1;
+        text->string_buffer[pos] = (s8) text->alignment;
+        pos = text->x6C;
+        text->x6C = pos + 1;
+        text->string_buffer[pos] = (s8) flags;
+        return;
+    case 5:
+        old_x6E = text->x6E;
+        if (old_x6E < (s32) (text->x6C + 5)) {
+            new_x6E = old_x6E + 0x10;
+            old_buf = (u8*) text->string_buffer;
+            text->string_buffer = HSD_SisLib_Alloc(new_x6E);
+            text->x6E = (u16) new_x6E;
+            idx = 0;
+            if (old_x6E > 0) {
+                src = old_buf;
+                count = old_x6E;
+                bulk = (u32) count >> 3U;
+                if (bulk != 0) {
+                    do {
+                        for (k = 0; k < 8; k++) {
+                            text->string_buffer[idx++] = src[k];
+                        }
+                        src += 8;
+                        bulk -= 1;
+                    } while (bulk != 0);
+                    count &= 7;
+                    if (count == 0) {
+                        goto zero_5;
+                    }
+                }
+                do {
+                    text->string_buffer[idx++] = *src++;
+                    count -= 1;
+                } while (count != 0);
+            }
+        zero_5:
+            while (idx < (s32) text->x6E) {
+                text->string_buffer[idx++] = 0;
+            }
+            HSD_SisLib_Free(old_buf);
+        }
+        pos = text->x6C;
+        text->x6C = pos + 1;
+        text->string_buffer[pos] = (s8) ((u32) cursor >> 0x18U);
+        pos = text->x6C;
+        text->x6C = pos + 1;
+        text->string_buffer[pos] = (s8) (u8) ((u32) cursor >> 0x10U);
+        pos = text->x6C;
+        text->x6C = pos + 1;
+        text->string_buffer[pos] = (s8) (u8) ((u32) cursor >> 8U);
+        pos = text->x6C;
+        text->x6C = pos + 1;
+        text->string_buffer[pos] = (s8) (u32) cursor;
+        pos = text->x6C;
+        text->x6C = pos + 1;
+        text->string_buffer[pos] = (s8) flags;
+        return;
     }
 }
 
 s32 HSD_SisLib_803A7F0C(HSD_Text* text, s32 flags)
 {
-    s32 unused_r7_2;
+    u8 entry;
+    s32 flag_hi;
+    s32 entry_type;
+    s32 entry_flags;
+    s32 target_type;
     s32 result;
     s32 remove_size;
-    u16 unused_r6_2;
-    u32 pos;
+    s32 pos;
 
+    flag_hi = flags & 0x80;
+    target_type = flags & 0x7F;
     pos = text->x6C;
     result = 0;
     remove_size = 0;
-    HSD_SisLib_803A7F0C_inline(text, flags, &remove_size, &pos, &result);
+    while (pos >= 0) {
+        entry = text->string_buffer[pos];
+        entry_type = entry & 0x7F;
+        entry_flags = entry & 0x80;
+        switch (entry_type) { /* irregular */
+        case 1:
+            pos -= 4;
+            if (target_type == 1) {
+                text->x78.x =
+                    (f32) * (s16*) (text->string_buffer + pos) * 0.00390625F;
+                text->x78.y = (f32) * (s16*) (text->string_buffer + pos + 2) *
+                              0.00390625F;
+                if (flag_hi == entry_flags) {
+                    remove_size = 5;
+                }
+                goto done;
+            }
+            break;
+        case 2:
+            pos -= 3;
+            if (target_type == 2) {
+                text->active_color.r = text->string_buffer[pos];
+                text->active_color.g = text->string_buffer[pos + 1];
+                text->active_color.b = text->string_buffer[pos + 2];
+                if (flag_hi == entry_flags) {
+                    remove_size = 4;
+                }
+                goto done;
+            }
+            break;
+        case 3:
+            pos -= 4;
+            if (target_type == 3) {
+                text->x80.x =
+                    (f32) * (u16*) (text->string_buffer + pos) * 0.00390625F;
+                text->x80.y = (f32) * (u16*) (text->string_buffer + pos + 2) *
+                              0.00390625F;
+                if (flag_hi == entry_flags) {
+                    remove_size = 5;
+                }
+                goto done;
+            }
+            break;
+        case 4:
+            pos -= 1;
+            if (target_type == 4) {
+                text->alignment = text->string_buffer[pos];
+                if (flag_hi == entry_flags) {
+                    remove_size = 2;
+                }
+                goto done;
+            }
+            break;
+        case 5:
+            pos -= 4;
+            if (target_type == 5) {
+                result = *(s32*) (text->string_buffer + pos);
+                if (flag_hi == entry_flags) {
+                    remove_size = 5;
+                }
+                goto done;
+            }
+            break;
+        }
+        pos -= 1;
+    }
+done:
     if (remove_size != 0) {
-        while ((s32) (pos + remove_size) < (s32) text->x6C) {
-            *((s32*) text->string_buffer + pos) =
-                *((s32*) text->string_buffer + pos + remove_size);
+        while ((pos + remove_size) < (s32) text->x6C) {
+            text->string_buffer[pos] = text->string_buffer[pos + remove_size];
             pos += 1;
         }
-        while ((s32) pos < (s32) text->x6C) {
-            *((s32*) text->string_buffer + pos) = 0;
+        while (pos < (s32) text->x6C) {
+            text->string_buffer[pos] = 0;
             pos += 1;
         }
         text->x6C -= remove_size;
@@ -1504,8 +1850,8 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
     // clang-format off
     HSD_Text *text;
     Mtx m;
-    TextGlyphTexture *textures = NULL;
     TextKerning *kerning = NULL;
+    TextGlyphTexture *textures = NULL;
 
     Vec2 min;
     Vec2 max;
@@ -1525,13 +1871,13 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
     u8 saved_kerning;
 
     u8 *data = &HSD_SisLib_8040CD40;
-
+    u8 *default_kerning = HSD_SisLib_8040CB00;
 
     if (gobj != NULL) {
-        if (pass == 2) {
+        if (pass == 2U) {
             text = gobj->user_data;
         } else {
-            text = NULL;
+            return;
         }
     } else {
         text = (HSD_Text*) pass;
@@ -1623,7 +1969,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                 GXPosition3f32(max.x, neg_max_y, depth);
                 GXTexCoord2f32(1.0F, 1.0F);
                 GXPosition3f32(min.x, neg_max_y, depth);
-                GXTexCoord2f32(1.0F, 1.0F);
+                GXTexCoord2f32(0.0F, 1.0F);
             }
         }
         GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_TEXA, GX_CA_A0, GX_CA_ZERO);
@@ -1642,13 +1988,19 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
             text->fitting = text->default_fitting;
         }
         {
-            f32 line_width;
             f32 line_width_out = 0;
+            f32 line_height_out;
             f64 half_glyph = 16.0;
 
-            u32 line_started = 0U;
-            saved_kerning = text->kerning;
+            u32 line_started;
+            u8 render_done = 0U;
+            u8 restart_text;
+
+            do {
+            restart_text = 0U;
             text->current_height = 0.0F;
+            line_started = 0U;
+            saved_kerning = text->kerning;
             saved_font_size = text->x80;
             saved_color_r = text->active_color.r;
             saved_color_g = text->active_color.g;
@@ -1676,8 +2028,10 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                         case 0:
                             pop_result = HSD_SisLib_803A7F0C(text, 5);
                             if (pop_result != 0U) {
-                                *(u32 *)sis_cursor = pop_result + 4;
+                                sis_cursor = (u8*) (pop_result + 4);
+                                break;
                             }
+                            render_done = 1U;
                             break;
                         case 1:
                             text->x60 = NULL;
@@ -1704,13 +2058,14 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                             text->x98 = 0;
                             sis_cursor += 1;
                             text->sis_buffer = (SIS *)sis_cursor;
+                            restart_text = 1U;
                             break;
                         case 3:
                             if (line_started == 0U) {
-                                line_width = 32.0F * text->x80.x;
+                                line_height_out = 32.0F * text->x80.y;
                             }
                             line_started = 0U;
-                            text->current_height = (f32) ((text->font_size.x * ((text->x80.x * text->x78.y) + line_width)) + text->current_height);
+                            text->current_height = (f32) ((text->font_size.y * ((text->x80.y * text->x78.y) + line_height_out)) + text->current_height);
                             if (skip_count != 0U) {
                                 skip_count -= 1;
                             } else {
@@ -1733,20 +2088,20 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                 skip_count -= 1;
                             } else {
                                 text->x98 = (u32) (text->x98 + 1);
-                                text->x94 = *((u8 *)sis_cursor + 1);
+                                text->x94 = *(u16*) (sis_cursor + 1);
                                 text->x60 = (void *) (sis_cursor + 3);
                             }
                             sis_cursor += 2;
                             break;
                         case 6:
-                            line_delay = *((u8 *)sis_cursor + 1);
-                            char_delay = *((u8 *)sis_cursor + 3);
+                            line_delay = *(u16*) (sis_cursor + 1);
+                            char_delay = *(u16*) (sis_cursor + 3);
                             sis_cursor += 4;
                             break;
                         case 7:
                             line_started = 1U;
-                            // HSD_SisLib_803A8134();
-                            x_origin = (f32) *((u8 *)sis_cursor + 1);
+                            HSD_SisLib_803A8134((void*) (sis_cursor + 5), text, &line_width_out, &line_height_out);
+                            x_origin = (f32) *(s16*) (sis_cursor + 1);
                             if (((u8) text->fitting == 1) && (text->box_size_x < line_width_out) != 0) {
                                 text->x88 = (f32) (text->box_size_x / line_width_out);
                             } else {
@@ -1763,21 +2118,21 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                 text->current_width = x_origin;
                                 break;
                             }
-                            y_offset = *((u8 *)sis_cursor + 3);
+                            y_offset = *(s16*) (sis_cursor + 3);
                             sis_cursor += 4;
                             text->current_height = (f32) ((f32) y_offset * text->font_size.y);
                             break;
                         case 9:
-                            HSD_SisLib_803A7684(text, *sis_cursor, 5U);
+                            HSD_SisLib_803A7684(text, sis_cursor, 5U);
                             /* fallthrough */
                         case 8:
-                            sis_cursor -= 4;
+                            sis_cursor = (u8*) *(s32*) (sis_cursor + 1) - 1;
                             break;
                         case 10:
                             if (((u32) text->alloc_data == 0U) || (saved_kerning == 0)) {
-                                HSD_SisLib_803A7684(text, *sis_cursor, 1U);
-                                text->x78.x = (f32) ((f32) (s16)sis_cursor[1] * 0.00390625F);
-                                text->x78.y = (f32) ((f32) (s16)sis_cursor[3] * 0.00390625F);
+                                HSD_SisLib_803A7684(text, sis_cursor, 1U);
+                                text->x78.x = (f32) ((f32) *(s16*) (sis_cursor + 1) * 0.00390625F);
+                                text->x78.y = (f32) ((f32) *(s16*) (sis_cursor + 3) * 0.00390625F);
                             }
                             sis_cursor += 4;
                             break;
@@ -1787,7 +2142,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                             }
                             break;
                         case 12:
-                            HSD_SisLib_803A7684(text, *sis_cursor, 2U);
+                            HSD_SisLib_803A7684(text, sis_cursor, 2U);
                             text->active_color.r = sis_cursor[1];
                             text->active_color.g = sis_cursor[2];
                             text->active_color.b = sis_cursor[3];
@@ -1797,24 +2152,24 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                             HSD_SisLib_803A7F0C(text, 2);
                             break;
                         case 14:
-                            HSD_SisLib_803A7684(text, *sis_cursor, 3U);
-                            text->x80.x = (f32) ((f32) (s16)sis_cursor[1] * 0.00390625F);
-                            text->x80.y = (f32) ((f32) (s16)sis_cursor[2] * 0.00390625F);
+                            HSD_SisLib_803A7684(text, sis_cursor, 3U);
+                            text->x80.x = (f32) ((f32) *(u16*) (sis_cursor + 1) * 0.00390625F);
+                            text->x80.y = (f32) ((f32) *(u16*) (sis_cursor + 3) * 0.00390625F);
                             sis_cursor += 4;
                             break;
                         case 15:
                             HSD_SisLib_803A7F0C(text, 3);
                             break;
                         case 16:
-                            HSD_SisLib_803A7684(text, *sis_cursor, 4U);
+                            HSD_SisLib_803A7684(text, sis_cursor, 4U);
                             text->alignment = 1U;
                             break;
                         case 18:
-                            HSD_SisLib_803A7684(text, *sis_cursor, 4U);
+                            HSD_SisLib_803A7684(text, sis_cursor, 4U);
                             text->alignment = 0U;
                             break;
                         case 20:
-                            HSD_SisLib_803A7684(text, *sis_cursor, 4U);
+                            HSD_SisLib_803A7684(text, sis_cursor, 4U);
                             text->alignment = 2U;
                             break;
                         case 17:
@@ -1837,7 +2192,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                         case 26:
                             if (line_started == 0U) {
                                 line_started += 1;
-                                // HSD_SisLib_803A8134();
+                                HSD_SisLib_803A8134(sis_cursor, text, &line_width_out, &line_height_out);
                                 if (((u8) text->fitting == 1) && (text->box_size_x < line_width_out)) {
                                     text->current_width = 0.0F;
                                     text->x88 = (f32) (text->box_size_x / line_width_out);
@@ -1874,7 +2229,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                 f32 glyph_x;
                                 if (line_started == 0U) {
                                     line_started += 1;
-                                    // HSD_SisLib_803A8134();
+                                    HSD_SisLib_803A8134(sis_cursor, text, &line_width_out, &line_height_out);
                                     if (((u8) text->fitting == 1) && (text->box_size_x < line_width_out)) {
                                         text->current_width = 0.0F;
                                         text->x88 = (f32) (text->box_size_x / line_width_out);
@@ -1903,7 +2258,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                 glyph_x = (text->current_width * scale_x) + text->pos_x;
                                 if ((u8) text->kerning != 0) {
                                     if (glyph_idx < 0x4000U) {
-                                        glyph_x = -((scale_x * (text->x80.x * (f32) (*(&HSD_SisLib_8040CB00 + ((tex_offset * 2) & 0x1FFFE)) - 1))) - glyph_x);
+                                        glyph_x = -((scale_x * (text->x80.x * (f32) (default_kerning[(tex_offset * 2) & 0x1FFFE] - 1))) - glyph_x);
                                     } else {
                                         glyph_x = -((scale_x * (text->x80.x * (f32) (textures->data[(tex_offset * 2) & 0x1FFFE] - 1))) - glyph_x);
                                     }
@@ -1914,7 +2269,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                     f32 scale_y = text->font_size.y;
                                     f32 uv_top = 0.0F;
                                     f32 glyph_w = 32.0F * text->x80.x * scale_x;
-                                    f32 glyph_y = (scale_y * (line_width - glyph_size)) + (text->pos_y + text->current_height);
+                                    f32 glyph_y = (scale_y * (line_height_out - glyph_size)) + (text->pos_y + text->current_height);
                                     f32 glyph_h = glyph_size * scale_y;
                                     f32 uv_bottom = 1.0F;
                                     f32 uv_left = 0.0F;
@@ -1922,8 +2277,11 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                     f32 uv_right = 1.0F;
                                     f32 quad_right = (text->x88 * glyph_w) + glyph_x;
                                     f32 quad_bottom = glyph_y + glyph_h;
+                                    u8 draw_glyph = 1U;
                                     if ((u8) text->x4E != 0) {
-                                        if (!(min.x > quad_right) && !(max.x < glyph_x) && !(min.y > quad_bottom) && !(max.y < quad_top)) {
+                                        if ((min.x > quad_right) || (max.x < glyph_x) || (min.y > quad_bottom) || (max.y < quad_top)) {
+                                            draw_glyph = 0U;
+                                        } else {
                                             if (min.x > glyph_x) {
                                                 f32 clip_left = min.x - glyph_x;
                                                 uv_left = clip_left / glyph_w;
@@ -1946,32 +2304,34 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                             }
                                         }
                                     }
-                                    if (glyph_idx < 0x4000U) {
-                                        GXInitTexObj(&tex_obj, &data + ((tex_offset << 9) & 0x01FFFE00), 0x20U, 0x20U, GX_TF_I4, GX_CLAMP, GX_CLAMP, 0U);
-                                    } else {
-                                        GXInitTexObj(&tex_obj, kerning + ((tex_offset << 9) & 0x01FFFE00), 0x20U, 0x20U, GX_TF_I4, GX_CLAMP, GX_CLAMP, 0U);
-                                    }
-                                    GXLoadTexObj(&tex_obj, GX_TEXMAP0);
-                                    GXSetTevColor(GX_TEVREG0, *(GXColor*)&text->active_color);
-                                    GXBegin(GX_QUADS, GX_VTXFMT0, 4U);
-                                    {
-                                        f32 glyph_depth = text->pos_z;
-                                        f32 neg_quad_top = -quad_top;
-                                        f32 neg_quad_bottom = -quad_bottom;
-                                        GXPosition3f32(glyph_x, neg_quad_top, glyph_depth);
-                                        GXTexCoord2f32(uv_left, uv_top);
-                                        GXPosition3f32(quad_right, neg_quad_top, glyph_depth);
-                                        GXTexCoord2f32(uv_right, uv_top);
-                                        GXPosition3f32(quad_right, neg_quad_bottom, glyph_depth);
-                                        GXTexCoord2f32(uv_right, uv_bottom);
-                                        GXPosition3f32(glyph_x, neg_quad_bottom, glyph_depth);
-                                        GXTexCoord2f32(uv_left, uv_bottom);
+                                    if (draw_glyph != 0U) {
+                                        if (glyph_idx < 0x4000U) {
+                                            GXInitTexObj(&tex_obj, data + ((tex_offset << 9) & 0x01FFFE00), 0x20U, 0x20U, GX_TF_I4, GX_CLAMP, GX_CLAMP, 0U);
+                                        } else {
+                                            GXInitTexObj(&tex_obj, HSD_SisLib_BytePtr(kerning) + ((tex_offset << 9) & 0x01FFFE00), 0x20U, 0x20U, GX_TF_I4, GX_CLAMP, GX_CLAMP, 0U);
+                                        }
+                                        GXLoadTexObj(&tex_obj, GX_TEXMAP0);
+                                        GXSetTevColor(GX_TEVREG0, *(GXColor*)&text->active_color);
+                                        GXBegin(GX_QUADS, GX_VTXFMT0, 4U);
+                                        {
+                                            f32 glyph_depth = text->pos_z;
+                                            f32 neg_quad_top = -quad_top;
+                                            f32 neg_quad_bottom = -quad_bottom;
+                                            GXPosition3f32(glyph_x, neg_quad_top, glyph_depth);
+                                            GXTexCoord2f32(uv_left, uv_top);
+                                            GXPosition3f32(quad_right, neg_quad_top, glyph_depth);
+                                            GXTexCoord2f32(uv_right, uv_top);
+                                            GXPosition3f32(quad_right, neg_quad_bottom, glyph_depth);
+                                            GXTexCoord2f32(uv_right, uv_bottom);
+                                            GXPosition3f32(glyph_x, neg_quad_bottom, glyph_depth);
+                                            GXTexCoord2f32(uv_left, uv_bottom);
+                                        }
                                     }
 
-                                    text->current_width = (f32) ((text->x80.y * (text->x80.x * (32.0F + text->x78.x))) + text->current_width);
+                                    text->current_width = (f32) ((text->x88 * (text->x80.x * (32.0F + text->x78.x))) + text->current_width);
                                     if ((u8) text->kerning != 0) {
                                         if (glyph_idx < 0x4000U) {
-                                            f32 *kern_pair = &HSD_SisLib_8040CB00 + ((tex_offset * 2) & 0x1FFFE);
+                                            u8 *kern_pair = &default_kerning[(tex_offset * 2) & 0x1FFFE];
                                             text->current_width = (f32) -((text->x88 * (text->x80.x * (f32) (kern_pair[0] + (kern_pair[1] - 2)))) - text->current_width);
                                         } else {
                                             u8 *kern_pair = &textures->data[(tex_offset * 2) & 0x1FFFE];
@@ -1990,8 +2350,12 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                         }
                     }
                 }
+                if ((render_done != 0U) || (restart_text != 0U)) {
+                    break;
+                }
                 sis_cursor++;
             }
+            } while ((restart_text != 0U) && (render_done == 0U));
             HSD_StateInvalidate(-1);
             text->active_color.r = saved_color_r;
             text->active_color.g = saved_color_g;
@@ -2013,6 +2377,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
             }
         }
     }
+    PAD_STACK(0x20);
     // clang-format on
 }
 

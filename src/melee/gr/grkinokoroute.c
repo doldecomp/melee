@@ -8,13 +8,22 @@
 #include "ef/efsync.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
+#include "gm/gm_1601.h"
 #include "gr/grdisplay.h"
 #include "gr/grlib.h"
 #include "gr/grmaterial.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
+#include "gr/stage.h"
+#include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
+#include "lb/lbvector.h"
+#include "mp/mplib.h"
+#include "MSL/math_ppc.h"
 
+#include <math.h>
+#include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
@@ -24,8 +33,30 @@
 
 static struct {
     int x0;
-    int x4;
+    grZakoGenerator_SpawnDesc x4;
 }* grNKr_804D6A50;
+
+typedef struct grNKr_Depths {
+    s16 x[51];
+} grNKr_Depths;
+
+typedef union grNKr_Flags {
+    u8 flags;
+    struct {
+        u8 b7 : 1;
+        u8 b0123456 : 7;
+    };
+} grNKr_Flags;
+
+static const Vec3 grNKr_803B82E8 = { 0.0f, 0.0f, 0.0f };
+
+static const grNKr_Depths grNKr_803B82F4 = {
+    {
+        1,  2,  3,  4,  5,  6,  7,  8,  9,  10, 11, 12, 13, 14, 15, 16, 17,
+        18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34,
+        35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51,
+    },
+};
 
 StageCallbacks grNKr_803E57F0[4] = {
     { grKinokoRoute_80207634, grKinokoRoute_802078E8, grKinokoRoute_802078F0,
@@ -36,6 +67,24 @@ StageCallbacks grNKr_803E57F0[4] = {
       grKinokoRoute_80207AD8, 0 },
     { grKinokoRoute_80207B5C, grKinokoRoute_80207C80, grKinokoRoute_80207C88,
       grKinokoRoute_80208368, 0xC0000000 },
+};
+
+static char grNKr_803E5840[] = "/GrNKr.dat";
+
+StageData grNKr_803E584C = {
+    KINOKOROUTE,
+    grNKr_803E57F0,
+    grNKr_803E5840,
+    grKinokoRoute_80207420,
+    (void (*)(int)) grKinokoRoute_8020741C,
+    grKinokoRoute_80207490,
+    grKinokoRoute_802074D8,
+    grKinokoRoute_80207544,
+    grKinokoRoute_80208754,
+    grKinokoRoute_8020875C,
+    1,
+    NULL,
+    0,
 };
 
 void grKinokoRoute_8020741C(bool arg) {}
@@ -111,14 +160,102 @@ HSD_GObj* grKinokoRoute_8020754C(int gobj_id)
     return gobj;
 }
 
-/// #grKinokoRoute_80207634
+void grKinokoRoute_80207634(Ground_GObj* gobj)
+{
+    Vec3 origin;
+    Vec3 cam_offset;
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj;
+
+    jobj = Ground_801C2CF4(0x94);
+    if (jobj != NULL) {
+        HSD_JObjGetTranslation(jobj, &origin);
+
+        if ((gp->gv.kinokoroute.entries[0].jobj = Ground_801C2CF4(0x7F)) !=
+            NULL)
+        {
+            HSD_JObjGetTranslation(gp->gv.kinokoroute.entries[0].jobj,
+                                   &gp->gv.kinokoroute.entries[0].pos);
+            lbVector_Sub(&gp->gv.kinokoroute.entries[0].pos, &origin);
+        }
+
+        if ((gp->gv.kinokoroute.entries[1].jobj = Ground_801C2CF4(0x80)) !=
+            NULL)
+        {
+            HSD_JObjGetTranslation(gp->gv.kinokoroute.entries[1].jobj,
+                                   &gp->gv.kinokoroute.entries[1].pos);
+            lbVector_Sub(&gp->gv.kinokoroute.entries[1].pos, &origin);
+        }
+
+        if ((gp->gv.kinokoroute.entries[2].jobj = Ground_801C2CF4(0x81)) !=
+            NULL)
+        {
+            HSD_JObjGetTranslation(gp->gv.kinokoroute.entries[2].jobj,
+                                   &gp->gv.kinokoroute.entries[2].pos);
+            lbVector_Sub(&gp->gv.kinokoroute.entries[2].pos, &origin);
+        }
+
+        if ((gp->gv.kinokoroute.entries[3].jobj = Ground_801C2CF4(0x82)) !=
+            NULL)
+        {
+            HSD_JObjGetTranslation(gp->gv.kinokoroute.entries[3].jobj,
+                                   &gp->gv.kinokoroute.entries[3].pos);
+            lbVector_Sub(&gp->gv.kinokoroute.entries[3].pos, &origin);
+        }
+    } else {
+        gp->gv.kinokoroute.entries[0].jobj = NULL;
+        gp->gv.kinokoroute.entries[1].jobj = NULL;
+        gp->gv.kinokoroute.entries[2].jobj = NULL;
+        gp->gv.kinokoroute.entries[3].jobj = NULL;
+    }
+
+    Ground_801C39C0();
+    Ground_801C3BB4();
+    Stage_UnkSetVec3TCam_Offset(&cam_offset);
+    Ground_801C3880(1.5f * (Stage_GetCamBoundsTopOffset() - cam_offset.y));
+    Ground_801C3890(1.5f * (Stage_GetCamBoundsBottomOffset() - cam_offset.y));
+    Ground_801C38A0(1.5f * (Stage_GetCamBoundsLeftOffset() - cam_offset.x));
+    Ground_801C38AC(1.5f * (Stage_GetCamBoundsRightOffset() - cam_offset.x));
+}
 
 bool grKinokoRoute_802078E8(Ground_GObj* arg)
 {
     return false;
 }
 
-/// #grKinokoRoute_802078F0
+void grKinokoRoute_802078F0(Ground_GObj* gobj)
+{
+    s32 i;
+    Vec3 pos;
+    Ground* gp = GET_GROUND(gobj);
+    HSD_GObj* fighter;
+    f32 scale;
+
+    fighter = Ground_801C57A4();
+    if (fighter != NULL) {
+        ftLib_80086644(fighter, &pos);
+    } else {
+        return;
+    }
+
+    scale = Ground_801C0498();
+    if (scale > 0.0001f) {
+        scale = 1.0f / scale;
+    } else {
+        scale = 1.0f;
+    }
+
+    for (i = 0; i < 4; i++) {
+        if (gp->gv.kinokoroute.entries[i].jobj != NULL) {
+            HSD_JObjSetTranslateX(
+                gp->gv.kinokoroute.entries[i].jobj,
+                scale * (gp->gv.kinokoroute.entries[i].pos.x + pos.x));
+            HSD_JObjSetTranslateY(
+                gp->gv.kinokoroute.entries[i].jobj,
+                scale * (gp->gv.kinokoroute.entries[i].pos.y + pos.y));
+        }
+    }
+}
 
 void grKinokoRoute_80207A94(Ground_GObj* arg) {}
 
@@ -160,20 +297,240 @@ void grKinokoRoute_80207B30(HSD_GObj* gobj)
     ftCo_800C07F8(gobj, 6, grKinokoRoute_80208660);
 }
 
-/// #grKinokoRoute_80207B5C
+void grKinokoRoute_80207B5C(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* reb0_jobj;
+
+    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    gp->x8_callback = NULL;
+    gp->xC_callback = NULL;
+    gp->x10_flags.b2 = 1;
+    gp->gv.kinokoroute2.phase = 0;
+    gp->gv.kinokoroute2.zone_idx = 0;
+    gp->gv.kinokoroute2.cam_timer = 0;
+    gp->gv.kinokoroute2.spawn_idx = -1;
+    Ground_801C10B8(gobj, grKinokoRoute_80207B30);
+    grKinokoRoute_80208564(gobj);
+    gp->gv.kinokoroute2.flags |= 0x80;
+    reb0_jobj = Ground_801C2CF4(4);
+    HSD_ASSERT(467, reb0_jobj);
+    HSD_JObjGetTranslation(reb0_jobj, &gp->gv.kinokoroute2.reb0_pos);
+}
 
 bool grKinokoRoute_80207C80(Ground_GObj* arg)
 {
     return false;
 }
 
-/// #grKinokoRoute_80207C88
+void grKinokoRoute_80207C88(Ground_GObj* gobj)
+{
+    HSD_JObj* reb0_jobj;
+    Vec3 fighter_pos;
+    Vec3 zone_point;
+    Vec3 cam_target;
+    Vec3 cam_offset;
+    f32 scale;
+    Ground* gp = GET_GROUND(gobj);
+    HSD_GObj* fighter;
+    HSD_GObj* ground_gobj;
+    HSD_JObj* eve_jobj;
+    PAD_STACK(4);
+
+    fighter_pos = grNKr_803B82E8;
+    scale = Ground_801C0498();
+    fighter = Ground_801C57A4();
+    if (fighter != NULL) {
+        ftLib_80086644(fighter, &fighter_pos);
+    } else {
+        return;
+    }
+    if (gp->gv.kinokoroute2.phase != 2) {
+        if (ftLib_80086EC0(fighter)) {
+            Stage_UnkSetVec3TCam_Offset(&cam_target);
+            gp->gv.kinokoroute2.cam_timer = 0x3C;
+        } else if (ftLib_8008732C(fighter)) {
+            Stage_UnkSetVec3TCam_Offset(&cam_target);
+            gp->gv.kinokoroute2.cam_timer = 0;
+        } else {
+            if (fighter_pos.y < 20.0f * scale) {
+                fighter_pos.y = 20.0f * scale;
+            } else if (fighter_pos.y > 250.0f * scale) {
+                fighter_pos.y = 250.0f * scale;
+            }
+            if (gp->gv.kinokoroute2.spawn_idx != -1) {
+                Vec3 spawn_point;
+                Ground_801C2D24(gp->gv.kinokoroute2.spawn_idx, &spawn_point);
+                if (fighter_pos.x < spawn_point.x) {
+                    fighter_pos.x = spawn_point.x;
+                }
+            } else {
+                Vec3 boundary_point;
+                Ground_801C2D24(0, &boundary_point);
+                if (fighter_pos.x < boundary_point.x) {
+                    fighter_pos.x = boundary_point.x;
+                }
+                Ground_801C2D24(0xBD, &boundary_point);
+                if (fighter_pos.x > boundary_point.x) {
+                    fighter_pos.x = boundary_point.x;
+                }
+            }
+            cam_target = fighter_pos;
+            Camera_80030AE0(true);
+        }
+        Ground_801C3D44(NULL, 30.0f, 10000.0f);
+        if (gp->gv.kinokoroute2.phase < 2) {
+            s16 spawn_idx = Ground_801C3DB4(NULL, 60.0f, 10000.0f);
+            gp->gv.kinokoroute2.spawn_idx = spawn_idx;
+            if (spawn_idx != -1) {
+                gp->gv.kinokoroute2.phase = 2;
+                gp->gv.kinokoroute2.cam_timer = 0x3C;
+                Ground_801C5750();
+                {
+                    u8 route_id = 0xB3;
+                    gm_801674C4(0x11, 0xA, 3, route_id,
+                                grKinokoRoute_80208480);
+                }
+                gp->gv.kinokoroute2.zone_idx = 2;
+                ground_gobj = Ground_801C2BA4(0);
+                if (ground_gobj != NULL) {
+                    Ground_801C4A08(ground_gobj);
+                }
+                ground_gobj = Ground_801C2BA4(2);
+                if (ground_gobj != NULL) {
+                    Ground_801C4A08(ground_gobj);
+                }
+                grKinokoRoute_8020754C(0);
+                grKinokoRoute_8020754C(2);
+                Ground_801C38BC(cam_target.x, cam_target.y);
+                grZakoGenerator_801CAF08();
+                gp->gv.kinokoroute2.cam_timer = 0x3C;
+            }
+        }
+        {
+            s32 zone_idx = gp->gv.kinokoroute2.zone_idx + 5;
+            if (7 > zone_idx && Ground_801C2D24(zone_idx, &zone_point) &&
+                fighter_pos.x > zone_point.x)
+            {
+                gp->gv.kinokoroute2.zone_idx += 1;
+            }
+        }
+        stage_info.x6DC = gp->gv.kinokoroute2.zone_idx;
+    } else {
+        Vec3 translate;
+        Ground_801C2D24(gp->gv.kinokoroute2.spawn_idx, &fighter_pos);
+        fighter_pos.y += 30.0f;
+        cam_target = fighter_pos;
+        Camera_80030AE0(false);
+        stage_info.x6DC = 0;
+        reb0_jobj = Ground_801C2CF4(4);
+        eve_jobj = Ground_801C2CF4(0xBD);
+        HSD_ASSERT(617, reb0_jobj&&eve_jobj);
+        HSD_JObjGetTranslation(eve_jobj, &translate);
+        translate.y += 50.0f;
+        HSD_JObjSetTranslate(reb0_jobj, &translate);
+        if (gp->gv.kinokoroute2.cam_timer == 0) {
+            grKinokoRoute_8020836C(gobj, 0);
+        }
+        if (Ground_801C5764() == 1) {
+            gp->gv.kinokoroute2.phase = 3;
+            gp->gv.kinokoroute2.cam_timer = 0x3C;
+            grKinokoRoute_8020836C(gobj, 1);
+            grZakoGenerator_801CAEF0(true);
+            reb0_jobj = Ground_801C2CF4(4);
+            HSD_ASSERT(654, reb0_jobj);
+            HSD_JObjSetTranslate(reb0_jobj, &gp->gv.kinokoroute2.reb0_pos);
+            ground_gobj = Ground_801C2BA4(0);
+            if (ground_gobj != NULL) {
+                Ground_801C4A08(ground_gobj);
+            }
+            ground_gobj = Ground_801C2BA4(2);
+            if (ground_gobj != NULL) {
+                Ground_801C4A08(ground_gobj);
+            }
+            grKinokoRoute_8020754C(2);
+            grKinokoRoute_8020754C(0);
+            Ground_801C38BC(cam_target.x, cam_target.y);
+        }
+    }
+
+    Stage_UnkSetVec3TCam_Offset(&cam_offset);
+    if (gp->gv.kinokoroute2.cam_timer == 0) {
+        Vec3 diff;
+        lbVector_Diff(&cam_offset, &cam_target, &diff);
+        if (sqrtf(SQ(diff.x) + SQ(diff.y) + SQ(diff.z)) > 10.0f) {
+            lbVector_Normalize(&diff);
+            diff.x *= 10.0f;
+            diff.y *= 10.0f;
+            diff.z *= 10.0f;
+            Ground_801C38BC(cam_target.x + diff.x, cam_target.y + diff.y);
+        }
+    } else {
+        f32 step = 1.0f / gp->gv.kinokoroute2.cam_timer;
+        lbVector_Sub(&cam_target, &cam_offset);
+        cam_target.x *= step;
+        cam_target.y *= step;
+        cam_target.z *= step;
+        lbVector_Add(&cam_offset, &cam_target);
+        Ground_801C38BC(cam_offset.x, cam_offset.y);
+        gp->gv.kinokoroute2.cam_timer -= 1;
+    }
+
+    lb_800115F4();
+    Ground_801C2FE0(gobj);
+    if (((grNKr_Flags*) &gp->gv.kinokoroute2.flags)->b7) {
+        mpLib_80058560();
+        ((grNKr_Flags*) &gp->gv.kinokoroute2.flags)->b7 = 0;
+    }
+}
 
 void grKinokoRoute_80208368(Ground_GObj* arg) {}
 
-/// #grKinokoRoute_8020836C
+void grKinokoRoute_8020836C(Ground_GObj* gobj, int arg1)
+{
+    HSD_JObj* jobj = Ground_801C3FA4(gobj, 0x53);
+    Item_GObj* cur;
+    PAD_STACK(16);
 
-bool grKinokoRoute_80208480(bool arg)
+    if (jobj == NULL) {
+        return;
+    }
+
+    if (arg1 != 0) {
+        HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
+        mpJointListAdd(0x3C);
+        mpJointListAdd(0x33);
+
+        for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
+            if (itGetKind(cur) == 0xA0) {
+                grMaterial_801C8E08(cur);
+            }
+        }
+
+        mpJointListAdd(0x0C);
+        mpJointListAdd(0x0D);
+        mpJointListAdd(0x0E);
+        mpJointListAdd(0x0F);
+    } else {
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+        mpLib_80057BC0(0x3C);
+        mpLib_80057BC0(0x33);
+
+        for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
+            if (itGetKind(cur) == 0xA0) {
+                grMaterial_801C8E28(cur);
+            }
+        }
+
+        mpLib_80057BC0(0x0C);
+        mpLib_80057BC0(0x0D);
+        mpLib_80057BC0(0x0E);
+        mpLib_80057BC0(0x0F);
+    }
+}
+
+bool grKinokoRoute_80208480(int arg)
 {
     if (arg == 1) {
         Ground_801C5740(arg);
@@ -191,7 +548,7 @@ void grKinokoRoute_802084B4(HSD_GObj* gobj)
         HSD_JObj* jobj;
     }* gp = gobj->user_data;
 
-    HSD_JObjSetFlagsAll(gp->jobj, 0x10);
+    HSD_JObjSetFlagsAll(gp->jobj, JOBJ_HIDDEN);
 
     gobj2 = Ground_801C2BA4(3);
     if (gobj2 != NULL) {
@@ -211,25 +568,20 @@ void grKinokoRoute_802084B4(HSD_GObj* gobj)
 
 void grKinokoRoute_80208564(HSD_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
+    Ground* gp = GET_GROUND(gobj);
     u32 i;
-    s16 depths[] = {
-        1,  2,  3,  4,  5,  6,  7,  8,  9,  10, 11, 12, 13,
-        14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
-        27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
-        40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51,
-    };
+    grNKr_Depths depths = grNKr_803B82F4;
 
     for (i = 0; i < 0x33U; i++) {
-        HSD_JObj* jobj = Ground_801C3FA4(gobj, depths[i]);
+        HSD_JObj* jobj = Ground_801C3FA4(gobj, depths.x[i]);
         Item_GObj* item = grMaterial_801C8CFC(
             8, 0, gp, jobj, NULL,
-            (void (*)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32))
-                grKinokoRoute_802084B4,
+            (void (*)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32))(
+                Event) grKinokoRoute_802084B4,
             NULL);
         if (item != NULL) {
-            grMaterial_801C8DE0(item, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F,
-                                0.0F, 7.0F);
+            grMaterial_801C8DE0(item, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F,
+                                7.0F);
             grMaterial_801C8E08(item);
             grMaterial_801C8E68(item, GA_Ground);
         }

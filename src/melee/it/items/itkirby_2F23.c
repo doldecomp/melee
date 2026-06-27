@@ -1,13 +1,22 @@
 #include "itkirby_2F23.h"
 
-#include <placeholder.h>
-#include <platform.h>
-
-#include "ft/chara/ftKirby/ftKb_Init.h"
+#include "ft/chara/ftKirby/ftkirby.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/ithitbox.h"
+#include "it/itmaplib.h"
+
+#include <MetroTRK/intrinsics.h>
+#include <MSL/math.h>
+
+ItemStateTable it_803F9450[] = {
+    { -1, itKirby_2F23_UnkMotion0_Anim, itKirby_2F23_UnkMotion0_Phys,
+      itKirby_2F23_UnkMotion0_Coll },
+    { -1, itKirby_2F23_UnkMotion1_Anim, itKirby_2F23_UnkMotion1_Phys,
+      itKirby_2F23_UnkMotion1_Coll },
+};
 
 f64 it_802F23AC(Item_GObj* gobj, Vec3* pos)
 {
@@ -16,7 +25,45 @@ f64 it_802F23AC(Item_GObj* gobj, Vec3* pos)
            SQ(ip->pos.z - pos->z);
 }
 
-/// #it_802F23EC
+static inline void it_802F23EC_inline(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    Vec3 pos;
+    Vec2 limits;
+
+    ip->xDD4_itemVar.kirby2f23.x1D0 = ftKb_SpecialN_800F5B4C(ip->grab_victim);
+    ip->xDD4_itemVar.kirby2f23.x1D4 = ftKb_SpecialN_800F5B3C(ip->grab_victim);
+    ftKb_SpecialN_800F5B5C(ip->grab_victim, &pos);
+    ip->xDD4_itemVar.kirby2f23.x1C8 = ip->pos.x - pos.x;
+    ip->xDD4_itemVar.kirby2f23.x1CC = ip->pos.y - pos.y;
+    ftKb_SpecialN_800F5B20(ip->grab_victim, &limits);
+    ip->xDD4_itemVar.kirby2f23.x1D8 = limits.x;
+    ip->xDD4_itemVar.kirby2f23.x1DC = limits.y;
+    ip->xDD4_itemVar.kirby2f23.x1F4 = ftKb_SpecialN_800F5AF0(ip->grab_victim);
+    HSD_JObjGetScale(jobj, &ip->xDD4_itemVar.kirby2f23.x1E8);
+}
+
+void it_802F23EC(Item_GObj* gobj, Fighter_GObj* owner_gobj, f32 facing_dir)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    ip->atk_victim = owner_gobj;
+    ip->grab_victim = owner_gobj;
+    it_8026C220(gobj, owner_gobj);
+    ip->xDD0_flag.b1 = false;
+    ip->facing_dir = facing_dir;
+    ip->xBC_itemStateContainer = it_803F9450;
+    Item_80268E5C(gobj, 0, 0);
+    it_802762BC(ip);
+    it_802F23EC_inline(gobj);
+    it_802756D0(gobj);
+    it_80274ECC(gobj, 1);
+    it_80274C88(gobj);
+    it_8026BD54(gobj);
+    it_80273408(gobj);
+    ip->on_accessory = it_802F258C;
+}
 
 bool itKirby_2F23_UnkMotion0_Anim(Item_GObj* gobj)
 {
@@ -30,7 +77,60 @@ bool itKirby_2F23_UnkMotion0_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802F258C
+static inline void it_802F258C_scale(Item_GObj* gobj, Vec3* offset)
+{
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    f32 dist = sqrtf__Ff(SQ(offset->x) + SQ(offset->y) + SQ(offset->z));
+
+    if (dist < ip->xDD4_itemVar.kirby2f23.x1D0) {
+        Vec3 scale;
+        f32 f = dist / ip->xDD4_itemVar.kirby2f23.x1D0;
+        dist = ip->xDD4_itemVar.kirby2f23.x1D4;
+        f *= dist;
+        scale.x = scale.y = scale.z = (1.0f - dist) + f;
+
+        scale.x *= ip->xDD4_itemVar.kirby2f23.x1E8.x;
+        scale.y *= ip->xDD4_itemVar.kirby2f23.x1E8.y;
+        scale.z *= ip->xDD4_itemVar.kirby2f23.x1E8.z;
+        HSD_JObjSetScale(jobj, &scale);
+    }
+}
+
+static inline void it_802F258C_update(Item_GObj* gobj, Vec3* offset)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    if (ABS(offset->x) > ip->xDD4_itemVar.kirby2f23.x1D8) {
+        s32 sign = (offset->x < 0.0f) ? -1 : 1;
+        offset->x = ip->xDD4_itemVar.kirby2f23.x1D8 * sign;
+    }
+    if (ABS(offset->y) > ip->xDD4_itemVar.kirby2f23.x1DC) {
+        s32 sign = (offset->y < 0.0f) ? -1 : 1;
+        offset->y = ip->xDD4_itemVar.kirby2f23.x1DC * sign;
+    }
+
+    ip->xDD4_itemVar.kirby2f23.x1C8 -= offset->x;
+    ip->xDD4_itemVar.kirby2f23.x1CC -= offset->y;
+    ftKb_SpecialN_800F5B5C(ip->grab_victim, offset);
+    ip->pos.x = offset->x + ip->xDD4_itemVar.kirby2f23.x1C8;
+    ip->pos.y = offset->y + ip->xDD4_itemVar.kirby2f23.x1CC;
+    ip->pos.z = offset->z;
+}
+
+void it_802F258C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    Vec3 offset;
+    PAD_STACK(4);
+
+    offset.x = ip->xDD4_itemVar.kirby2f23.x1C8;
+    offset.y = ip->xDD4_itemVar.kirby2f23.x1CC;
+    offset.z = 0.0f;
+
+    it_802F258C_scale(gobj, &offset);
+    it_802F258C_update(gobj, &offset);
+}
 
 void it_802F2810(HSD_GObj* gobj)
 {

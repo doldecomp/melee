@@ -2,6 +2,9 @@
 
 #include "ftcmdscript.h"
 
+#include "baselib/debug.h"
+#include "ft/ftlib.h"
+
 #include <melee/ft/chara/ftDonkey/forward.h>
 #include <melee/ft/chara/ftKoopa/forward.h>
 #include <melee/ft/chara/ftSamus/forward.h>
@@ -9,6 +12,7 @@
 #include <melee/ft/chara/ftZelda/forward.h>
 
 #include <math.h>
+#include <math_ppc.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/chara/ftCommon/ftCo_09F7.h>
 #include <melee/ft/chara/ftCommon/ftCo_0A01.h>
@@ -23,13 +27,690 @@
 #include <melee/mp/mplib.h>
 #include <melee/mp/types.h>
 
-/// #ftCo_800B4AB0
+typedef struct ftCo_AttackEntry {
+    /* +00 */ s32 cmd;
+    /* +04 */ s32 x04;
+    /* +08 */ f32 x08;
+    /* +0C */ f32 x0C;
+    /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
+    /* +18 */ f32 weight;
+    /* +1C */ s32 x1C;
+    /* +20 */ s32 x20;
+} ftCo_AttackEntry;
 
-/// #ftCo_800B52AC
+typedef struct ftCo_x50_attr {
+    /* +00 */ u8 pad00[0x10];
+    /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
+} ftCo_x50_attr;
 
-/// #ftCo_800B5AB0
+typedef struct ftCo_x50_t {
+    /* +00 */ u8 pad00[0x40];
+    /* +40 */ f32 x40;
+    /* +44 */ f32 x44;
+    /* +48 */ u8 pad48[0x4C - 0x48];
+    /* +4C */ f32 x4C;
+    /* +50 */ f32 x50;
+    /* +54 */ u8 pad54[0xC0 - 0x54];
+    /* +C0 */ s32 xC0;
+    /* +C4 */ u8 padC4[0xCC - 0xC4];
+    /* +CC */ ftCo_x50_attr* xCC;
+    /* +D0 */ u8 padD0[0xC1C - 0xD0];
+    /* +C1C */ f32 xC1C;
+    /* +C20 */ f32 xC20;
+    /* +C24 */ f32 xC24;
+    /* +C28 */ f32 xC28;
+} ftCo_x50_t;
 
-/// #ftCo_800B6208
+typedef struct ftCo_CollData {
+    /* +00 */ u8 pad0[4];
+    /* +04 */ Vec3 p;
+    /* +10 */ Vec3 n;
+    /* +1C */ int line;
+    /* +20 */ u32 flags;
+} ftCo_CollData;
+
+int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
+{
+    ftCo_AttackEntry sp3C[32];
+    ftCo_AttackEntry* list = arg2;
+    ftCo_AttackEntry* sel;
+    struct Fighter_x1A88_t* cpu = &fp->x1A88;
+    s32 count;
+    s32 i;
+    s32 j;
+    bool found;
+    bool nearzero;
+    f32 r;
+    f32 sum;
+    f32 inv;
+    f32 acc;
+    f32 t;
+    f32 fpPredY;
+    f32 relx;
+    f32 relPredY;
+    f32 v;
+    f32 sq;
+    f32 scale;
+    f32 diry;
+    f32 rangeF;
+    f32 rangeB;
+    f32 halfRange;
+    f32 fpTermNeg;
+    f32 tgtTermNeg;
+    f32 fpY;
+    f32 fpVy;
+    f32 tgtVx;
+    f32 tgtY;
+    f32 tgtVy;
+    f32 tgtGrav;
+    f32 fpX;
+    f32 fpVx;
+    f32 tgtX;
+    f32 fpGrav;
+    f32 x568;
+
+    cpu->x74.y = 0.0f;
+    cpu->x74.x = 0.0f;
+    cpu->x6C.y = 0.0f;
+    cpu->x6C.x = 0.0f;
+    halfRange = (f32) (0.5 * cpu->x570 + 0.5);
+    if (list == NULL) {
+        return 0;
+    }
+    fpTermNeg = -fp->co_attrs.terminal_vel;
+    tgtTermNeg = -target->co_attrs.terminal_vel;
+    fpY = fp->cur_pos.y;
+    fpVy = fp->pos_delta.y;
+    fpGrav = fp->co_attrs.grav;
+    tgtY = target->cur_pos.y;
+    tgtVy = target->pos_delta.y;
+    fpX = fp->cur_pos.x;
+    tgtGrav = target->co_attrs.grav;
+    fpVx = fp->pos_delta.x;
+    tgtX = target->cur_pos.x;
+    tgtVx = target->pos_delta.x;
+    if (target->facing_dir > 0.0f) {
+        rangeF = target->x1A88.x55C;
+        rangeB = target->x1A88.x560;
+    } else {
+        rangeF = target->x1A88.x560;
+        rangeB = target->x1A88.x55C;
+    }
+    x568 = target->x1A88.x568;
+    count = 0;
+    while (list->cmd) {
+        f32 dirx;
+        found = false;
+        if (list->x20 > cpu->level) {
+            list++;
+            continue;
+        }
+        for (j = 0; j < cpu->xEC; j++) {
+            if (cpu->xCC_array[j] == list->cmd) {
+                found = true;
+                break;
+            }
+        }
+        if (found) {
+            list++;
+            continue;
+        }
+        t = list->x04;
+        relx = (tgtVx * t + tgtX) - (fpVx * t + fpX);
+        if (target->ground_or_air == GA_Air) {
+            if (fpGrav < 0.00001f && fpGrav > -0.00001f) {
+                nearzero = true;
+            } else {
+                nearzero = false;
+            }
+            if (nearzero) {
+                v = 1000.0f;
+            } else {
+                v = -(fpTermNeg - fpY) / fpGrav;
+            }
+            if (v <= 0.0f) {
+                fpPredY = fpVy * t + fpY;
+            } else if (t < v) {
+                sq = sqrtf(t);
+                fpPredY = (f32) ((f64) fpY + ((f64) (fpVy * t) -
+                                              0.5 * (f64) (fpGrav * sq)));
+            } else {
+                sq = sqrtf(v);
+                fpPredY =
+                    (f32) ((f64) fpY +
+                           ((f64) (fpTermNeg * (t - v)) +
+                            ((f64) (fpVy * t) - 0.5 * (f64) (fpGrav * sq))));
+            }
+        } else {
+            fpPredY = fpVy * t + fpY;
+        }
+        if ((u32) target->ground_or_air == GA_Air) {
+            if (tgtGrav < 0.00001f && tgtGrav > -0.00001f) {
+                nearzero = true;
+            } else {
+                nearzero = false;
+            }
+            if (nearzero) {
+                v = 1000.0f;
+            } else {
+                v = -(tgtTermNeg - tgtVy) / tgtGrav;
+            }
+            if (v <= 0.0f) {
+                relPredY = (tgtVy * t + tgtY) - fpPredY;
+            } else if (t < v) {
+                sq = sqrtf(t);
+                relPredY = (f32) (((f64) (tgtVy * t + tgtY) -
+                                   0.5 * (f64) (tgtGrav * sq)) -
+                                  (f64) fpPredY);
+            } else {
+                sq = sqrtf(v);
+                relPredY = (f32) (((f64) (tgtTermNeg * (t - v)) +
+                                   ((f64) (tgtVy * t + tgtY) -
+                                    0.5 * (f64) (tgtGrav * sq))) -
+                                  (f64) fpPredY);
+            }
+        } else {
+            relPredY = (tgtVy * t + tgtY) - fpPredY;
+        }
+        if (fp->facing_dir > 0.0f) {
+            dirx = list->x08 * fp->x34_scale.y;
+            diry = list->x0C * fp->x34_scale.y;
+        } else {
+            dirx = -list->x0C * fp->x34_scale.y;
+            diry = -list->x08 * fp->x34_scale.y;
+        }
+        scale = fp->x34_scale.y;
+        if (list->x14 * scale * halfRange > relPredY &&
+            list->x10 * scale * halfRange < relPredY + x568 &&
+            dirx * halfRange < relx + rangeF &&
+            diry * halfRange > relx - rangeB)
+        {
+            if (cpu->xC8 != 0) {
+                for (j = 0; j < cpu->xC8; j++) {
+                    if (cpu->xA8_array[j] == list->cmd) {
+                        sp3C[count] = *list;
+                        count++;
+                    }
+                }
+            } else if (cpu->x80 % list->x1C == 0) {
+                sp3C[count] = *list;
+                count++;
+            }
+        }
+        list++;
+    }
+    if (count == 0) {
+        return 0;
+    }
+    r = HSD_Randf();
+    sum = 0.0f;
+    for (i = 0; i < count; i++) {
+        sum += sp3C[i].weight;
+    }
+    if (sum < 0.00001f && sum > -0.00001f) {
+        nearzero = true;
+    } else {
+        nearzero = false;
+    }
+    if (nearzero) {
+        return 0;
+    }
+    inv = 1.0 / sum;
+    acc = 0.0f;
+    sel = sp3C;
+    for (i = 0; i < count; i++) {
+        acc += sel->weight;
+        if (acc * inv >= r) {
+            cpu->x6C.x = fp->x34_scale.y * sp3C[i].x08;
+            cpu->x6C.y = fp->x34_scale.y * sp3C[i].x10;
+            cpu->x74.x = fp->x34_scale.y * sp3C[i].x0C;
+            cpu->x74.y = fp->x34_scale.y * sp3C[i].x14;
+            return sp3C[i].cmd;
+        }
+        sel++;
+    }
+    HSD_ASSERT(0xFA, NULL);
+}
+
+int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
+{
+    ftCo_AttackEntry sp40[32];
+    ftCo_AttackEntry* list = arg2;
+    ftCo_AttackEntry* sel;
+    struct Fighter_x1A88_t* cpu = &fp->x1A88;
+    s32 count;
+    s32 i;
+    s32 j;
+    bool found;
+    bool nearzero;
+    f32 r;
+    f32 sum;
+    f32 inv;
+    f32 acc;
+    f32 t;
+    f32 fpPredY;
+    f32 relx;
+    f32 relPredY;
+    f32 v;
+    f32 sq;
+    f32 scale;
+    f32 diry;
+    f32 rangeF;
+    f32 rangeB;
+    f32 fpTermNeg;
+    f32 tgtTermNeg;
+    f32 fpX;
+    f32 fpY;
+    f32 fpVx;
+    f32 fpVy;
+    f32 fpGrav;
+    f32 tgtX;
+    f32 tgtY;
+    f32 tgtVx;
+    f32 tgtVy;
+    f32 tgtGrav;
+    f32 x568;
+    f32 halfRange;
+
+    PAD_STACK(0x10);
+
+    cpu->x74.y = 0.0f;
+    cpu->x74.x = 0.0f;
+    cpu->x6C.y = 0.0f;
+    cpu->x6C.x = 0.0f;
+    halfRange = (f32) (0.5 * cpu->x570 + 0.5);
+    if (list == NULL) {
+        return 0;
+    }
+    fpTermNeg = -fp->co_attrs.terminal_vel;
+    tgtTermNeg = -target->co_attrs.terminal_vel;
+    fpX = fp->cur_pos.x;
+    fpY = fp->cur_pos.y;
+    fpVx = fp->pos_delta.x;
+    fpVy = fp->pos_delta.y;
+    fpGrav = fp->co_attrs.grav;
+    tgtX = target->cur_pos.x;
+    tgtY = target->cur_pos.y;
+    tgtVx = target->pos_delta.x;
+    tgtVy = target->pos_delta.y;
+    tgtGrav = target->co_attrs.grav;
+    if (target->facing_dir > 0.0f) {
+        rangeF = target->x1A88.x55C;
+        rangeB = target->x1A88.x560;
+    } else {
+        rangeF = target->x1A88.x560;
+        rangeB = target->x1A88.x55C;
+    }
+    x568 = target->x1A88.x568;
+    count = 0;
+    while (list->cmd) {
+        f32 dirx;
+        f32 yHi;
+        f32 yLo;
+        found = false;
+        if (list->x20 > cpu->level) {
+            list++;
+            continue;
+        }
+        for (j = 0; j < cpu->xEC; j++) {
+            if (cpu->xCC_array[j] == list->cmd) {
+                found = true;
+                break;
+            }
+        }
+        if (found) {
+            list++;
+            continue;
+        }
+        t = list->x04;
+        relx = (tgtVx * t + tgtX) - (fpVx * t + fpX);
+        if (target->ground_or_air == GA_Air) {
+            if (fpGrav < 0.00001f && fpGrav > -0.00001f) {
+                nearzero = true;
+            } else {
+                nearzero = false;
+            }
+            if (nearzero) {
+                v = 1000.0f;
+            } else {
+                v = -(fpTermNeg - fpY) / fpGrav;
+            }
+            if (v <= 0.0f) {
+                fpPredY = fpVy * t + fpY;
+            } else if (t < v) {
+                sq = sqrtf(t);
+                fpPredY = (f32) ((f64) fpY + ((f64) (fpVy * t) -
+                                              0.5 * (f64) (fpGrav * sq)));
+            } else {
+                sq = sqrtf(v);
+                fpPredY =
+                    (f32) ((f64) fpY +
+                           ((f64) (fpTermNeg * (t - v)) +
+                            ((f64) (fpVy * t) - 0.5 * (f64) (fpGrav * sq))));
+            }
+        } else {
+            fpPredY = fpVy * t + fpY;
+        }
+        if ((u32) target->ground_or_air == GA_Air) {
+            if (tgtGrav < 0.00001f && tgtGrav > -0.00001f) {
+                nearzero = true;
+            } else {
+                nearzero = false;
+            }
+            if (nearzero) {
+                v = 1000.0f;
+            } else {
+                v = -(tgtTermNeg - tgtVy) / tgtGrav;
+            }
+            if (v <= 0.0f) {
+                relPredY = (tgtVy * t + tgtY) - fpPredY;
+            } else if (t < v) {
+                sq = sqrtf(t);
+                relPredY = (f32) (((f64) (tgtVy * t + tgtY) -
+                                   0.5 * (f64) (tgtGrav * sq)) -
+                                  (f64) fpPredY);
+            } else {
+                sq = sqrtf(v);
+                relPredY = (f32) (((f64) (tgtTermNeg * (t - v)) +
+                                   ((f64) (tgtVy * t + tgtY) -
+                                    0.5 * (f64) (tgtGrav * sq))) -
+                                  (f64) fpPredY);
+            }
+        } else {
+            relPredY = (tgtVy * t + tgtY) - fpPredY;
+        }
+        if (fp->facing_dir > 0.0f) {
+            dirx = list->x08 * fp->x34_scale.y;
+            diry = list->x0C * fp->x34_scale.y + reach;
+        } else {
+            dirx = -list->x0C * fp->x34_scale.y - reach;
+            diry = -list->x08 * fp->x34_scale.y;
+        }
+        scale = fp->x34_scale.y;
+        if ((list->x14 * scale + reach) * halfRange > relPredY &&
+            list->x10 * scale * halfRange < relPredY + x568 &&
+            dirx * halfRange < relx + rangeF &&
+            diry * halfRange > relx - rangeB)
+        {
+            if (cpu->xC8 != 0) {
+                for (j = 0; j < cpu->xC8; j++) {
+                    if (cpu->xA8_array[j] == list->cmd) {
+                        sp40[count] = *list;
+                        count++;
+                    }
+                }
+            } else if (cpu->x80 % list->x1C == 0) {
+                sp40[count] = *list;
+                count++;
+            }
+        }
+        list++;
+    }
+    if (count == 0) {
+        return 0;
+    }
+    r = HSD_Randf();
+    sum = 0.0f;
+    for (i = 0; i < count; i++) {
+        sum += sp40[i].weight;
+    }
+    if (sum < 0.00001f && sum > -0.00001f) {
+        nearzero = true;
+    } else {
+        nearzero = false;
+    }
+    if (nearzero) {
+        return 0;
+    }
+    inv = 1.0 / sum;
+    acc = 0.0f;
+    for (i = 0, sel = sp40; i < count; i++, sel++) {
+        acc += sel->weight;
+        if (acc * inv >= r) {
+            cpu->x6C.x = fp->x34_scale.y * sp40[i].x08;
+            cpu->x6C.y = fp->x34_scale.y * sp40[i].x10;
+            cpu->x74.x = fp->x34_scale.y * sp40[i].x0C;
+            cpu->x74.y = fp->x34_scale.y * sp40[i].x14;
+            return sp40[i].cmd;
+        }
+    }
+    HSD_ASSERT(0x1C5, NULL);
+}
+
+int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
+{
+    ftCo_AttackEntry sp34[32];
+    ftCo_x50_t* x50 = arg1;
+    ftCo_x50_attr* attrs;
+    ftCo_AttackEntry* list = arg2;
+    ftCo_AttackEntry* sel;
+    struct Fighter_x1A88_t* cpu = &fp->x1A88;
+    s32 count;
+    s32 i;
+    s32 j;
+    bool found;
+    bool nearzero;
+    f32 r;
+    f32 sum;
+    f32 acc;
+    f32 inv;
+    f32 fpPredY;
+    f32 relPredY;
+    f32 v;
+    f32 sq;
+    f32 diry;
+    f32 sizeHalf;
+    f32 fpTermNeg;
+    f32 fpY;
+    f32 fpVy;
+    f32 fpGrav;
+    f32 fpX;
+    f32 fpVx;
+    f32 x50TermNeg;
+    f32 x50Y;
+    f32 x50Vy;
+    f32 x50Grav;
+    f32 x50X;
+    f32 x50Vx;
+    f32 yBound;
+
+    cpu = &fp->x1A88;
+    if (list == NULL) {
+        return 0;
+    }
+    attrs = x50->xCC;
+    count = 0;
+    fpTermNeg = -fp->co_attrs.terminal_vel;
+    fpY = fp->cur_pos.y;
+    x50Vy = x50->x44;
+    x50TermNeg = -attrs->x14;
+    sizeHalf = (f32) (0.5 * (x50->xC24 + x50->xC28));
+    yBound = x50->xC1C + x50->xC20;
+    fpX = fp->cur_pos.x;
+    fpVx = fp->pos_delta.x;
+    fpVy = fp->pos_delta.y;
+    fpGrav = fp->co_attrs.grav;
+    x50X = x50->x4C;
+    x50Y = x50->x50;
+    x50Vx = x50->x40;
+    x50Grav = attrs->x10;
+    while (list->cmd) {
+        f32 t;
+        f32 relx;
+        f32 dirx;
+        f32 scale;
+        found = false;
+        if (list->x20 > cpu->level) {
+            list++;
+            continue;
+        }
+        for (j = 0; j < cpu->xEC; j++) {
+            if (cpu->xCC_array[j] == list->cmd) {
+                found = true;
+                break;
+            }
+        }
+        if (found) {
+            list++;
+            continue;
+        }
+        t = list->x04;
+        relx = (x50Vx * t + x50X) - (fpVx * t + fpX);
+        if (x50->xC0 == 1) {
+            if (fpGrav < 0.00001f && fpGrav > -0.00001f) {
+                nearzero = true;
+            } else {
+                nearzero = false;
+            }
+            if (nearzero) {
+                v = 1000.0f;
+            } else {
+                v = -(fpTermNeg - fpY) / fpGrav;
+            }
+            if (v <= 0.0f) {
+                fpPredY = fpVy * t + fpY;
+            } else if (t < v) {
+                sq = sqrtf(t);
+                fpPredY = (f32) ((f64) fpY + ((f64) (fpVy * t) -
+                                              0.5 * (f64) (fpGrav * sq)));
+            } else {
+                sq = sqrtf(v);
+                fpPredY =
+                    (f32) ((f64) fpY +
+                           ((f64) (fpTermNeg * (t - v)) +
+                            ((f64) (fpVy * t) - 0.5 * (f64) (fpGrav * sq))));
+            }
+        } else {
+            fpPredY = fpVy * t + fpY;
+        }
+        if (x50->xC0 == 1) {
+            if (x50Grav < 0.00001f && x50Grav > -0.00001f) {
+                nearzero = true;
+            } else {
+                nearzero = false;
+            }
+            if (nearzero) {
+                v = 1000.0f;
+            } else {
+                v = -(x50TermNeg - x50Vy) / x50Grav;
+            }
+            if (v <= 0.0f) {
+                relPredY = (x50Vy * t + x50Y) - fpPredY;
+            } else if (t < v) {
+                sq = sqrtf(t);
+                relPredY = (f32) (((f64) (x50Vy * t + x50Y) -
+                                   0.5 * (f64) (x50Grav * sq)) -
+                                  (f64) fpPredY);
+            } else {
+                sq = sqrtf(v);
+                relPredY = (f32) (((f64) (x50TermNeg * (t - v)) +
+                                   ((f64) (x50Vy * t + x50Y) -
+                                    0.5 * (f64) (x50Grav * sq))) -
+                                  (f64) fpPredY);
+            }
+        } else {
+            relPredY = (x50Vy * t + x50Y) - fpPredY;
+        }
+        if (fp->facing_dir > 0.0f) {
+            dirx = list->x08 * fp->x34_scale.y;
+            diry = list->x0C * fp->x34_scale.y;
+        } else {
+            dirx = -list->x0C * fp->x34_scale.y;
+            diry = -list->x08 * fp->x34_scale.y;
+        }
+        scale = fp->x34_scale.y;
+        if (list->x14 * scale > relPredY &&
+            list->x10 * scale < relPredY + yBound && dirx < relx + sizeHalf &&
+            diry > relx - sizeHalf)
+        {
+            if (cpu->xC8 != 0) {
+                for (j = 0; j < cpu->xC8; j++) {
+                    if (cpu->xA8_array[j] == list->cmd) {
+                        sp34[count] = *list;
+                        count++;
+                    }
+                }
+            } else if (cpu->x80 % list->x1C == 0) {
+                sp34[count] = *list;
+                count++;
+            }
+        }
+        list++;
+    }
+    if (count == 0) {
+        return 0;
+    }
+    r = HSD_Randf();
+    sum = 0.0f;
+    for (i = 0; i < count; i++) {
+        sum += sp34[i].weight;
+    }
+    if (sum < 0.00001f && sum > -0.00001f) {
+        nearzero = true;
+    } else {
+        nearzero = false;
+    }
+    if (nearzero) {
+        return 0;
+    }
+    inv = 1.0 / sum;
+    acc = 0.0f;
+    sel = sp34;
+    for (i = 0; i < count; i++) {
+        acc += sel->weight;
+        if (acc * inv >= r) {
+            return sp34[i].cmd;
+        }
+        sel++;
+    }
+    HSD_ASSERT(0x26A, NULL);
+}
+
+int ftCo_800B6208(ftCo_AttackEntry* arr)
+{
+    f32 r;
+    f32 sum;
+    f32 acc;
+    f32 inv;
+    ftCo_AttackEntry* p;
+    s32 n;
+    s32 i;
+    bool zero;
+
+    r = HSD_Randf();
+    sum = 0.0f;
+    p = arr;
+    n = 0;
+    while (p->cmd != 0) {
+        sum += p->weight;
+        p++;
+        n++;
+    }
+    if (n == 0) {
+        return 0;
+    }
+    if (sum < 0.00001f && sum > -0.00001f) {
+        zero = true;
+    } else {
+        zero = false;
+    }
+    if (zero) {
+        return 0;
+    }
+    inv = 1.0 / sum;
+    acc = 0.0f;
+    p = arr;
+    for (i = 0; i < n; i++) {
+        acc += p->weight;
+        if (acc * inv >= r) {
+            return arr[i].cmd;
+        }
+        p++;
+    }
+    HSD_ASSERT(0x28A, 0);
+}
 
 /// Return true if the fighter is currently in any attacking motion state
 bool ftCo_800B630C(Fighter* fp)
@@ -603,7 +1284,493 @@ int ftCo_800B7638(Fighter* fp)
     return 0;
 }
 
-/// #ftCo_800B77E8
+void ftCo_800B77E8(Fighter* fp)
+{
+    struct Fighter_x1A88_t* cpu = &fp->x1A88;
+    ftCo_CollData c1;
+    ftCo_CollData c2;
+    ftCo_CollData c3;
+    ftCo_CollData c4;
+    ftCo_CollData c5;
+    ftCo_CollData c6;
+    ftCo_CollData c7;
+    ftCo_CollData c8;
+    ftCo_CollData c9;
+    ftCo_CollData c10;
+    Fighter* cpu_target = cpu->x44;
+    Fighter* target;
+    int can_attack;
+    int charge;
+    f32 x;
+    f32 y;
+
+    if (cpu->xC == 7 || ftCo_800A1C44(fp)) {
+        struct Fighter_x1A88_t* tmp = &fp->x1A88;
+        if (fp->x1A88.xEC < 8U) {
+            tmp->xCC_array[tmp->xEC] = 0x34;
+            tmp->xEC++;
+        }
+    }
+    switch (fp->kind) {
+    case FTKIND_MARIO:
+        target = fp->x1A88.x44;
+        if (target != NULL && mpCheckAll(&c1.p, &c1.line, &c1.flags, &c1.n, -1,
+                                         -1, fp->cur_pos.x, fp->cur_pos.y,
+                                         target->cur_pos.x, target->cur_pos.y))
+        {
+            can_attack = 1;
+        } else if (fp->facing_dir > 0.0) {
+            y = fp->cur_pos.y;
+            x = fp->cur_pos.x;
+            x = 22.0f + x;
+            if (ftCo_800A0FB0(&c1.p, &c1.line, &c1.flags, &c1.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
+            {
+                can_attack = 1;
+            } else {
+                can_attack = 0;
+            }
+        } else {
+            y = fp->cur_pos.y;
+            x = fp->cur_pos.x - 22.0f;
+            if (ftCo_800A0FB0(&c1.p, &c1.line, &c1.flags, &c1.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
+            {
+                can_attack = 1;
+            } else {
+                can_attack = 0;
+            }
+        }
+        if (can_attack != 0) {
+            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            if (fp->x1A88.xEC < 8U) {
+                tmp->xCC_array[tmp->xEC] = 0x1F;
+                tmp->xEC++;
+                return;
+            }
+        }
+        break;
+    case FTKIND_FOX:
+    case FTKIND_FALCO:
+        target = fp->x1A88.x44;
+        if (target != NULL && mpCheckAll(&c2.p, &c2.line, &c2.flags, &c2.n, -1,
+                                         -1, fp->cur_pos.x, fp->cur_pos.y,
+                                         target->cur_pos.x, target->cur_pos.y))
+        {
+            can_attack = 1;
+        } else if (fp->facing_dir > 0.0) {
+            y = fp->cur_pos.y;
+            x = fp->cur_pos.x;
+            x += 62.0f;
+            if (ftCo_800A0FB0(&c2.p, &c2.line, &c2.flags, &c2.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
+            {
+                can_attack = 1;
+            } else {
+                can_attack = 0;
+            }
+        } else {
+            y = fp->cur_pos.y;
+            x = fp->cur_pos.x - 62.0f;
+            if (ftCo_800A0FB0(&c2.p, &c2.line, &c2.flags, &c2.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
+            {
+                can_attack = 1;
+            } else {
+                can_attack = 0;
+            }
+        }
+        if (can_attack != 0) {
+            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            if (fp->x1A88.xEC < 8U) {
+                tmp->xCC_array[tmp->xEC] = 0x1B;
+                tmp->xEC++;
+                return;
+            }
+        }
+        break;
+    case FTKIND_CAPTAIN:
+    case FTKIND_GANON:
+        target = fp->x1A88.x44;
+        if (target != NULL && mpCheckAll(&c3.p, &c3.line, &c3.flags, &c3.n, -1,
+                                         -1, fp->cur_pos.x, fp->cur_pos.y,
+                                         target->cur_pos.x, target->cur_pos.y))
+        {
+            can_attack = 1;
+        } else if (fp->facing_dir > 0.0) {
+            y = fp->cur_pos.y;
+            x = fp->cur_pos.x;
+            x += 102.0f;
+            if (ftCo_800A0FB0(&c3.p, &c3.line, &c3.flags, &c3.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
+            {
+                can_attack = 1;
+            } else {
+                can_attack = 0;
+            }
+        } else {
+            y = fp->cur_pos.y;
+            x = fp->cur_pos.x - 102.0f;
+            if (ftCo_800A0FB0(&c3.p, &c3.line, &c3.flags, &c3.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
+            {
+                can_attack = 1;
+            } else {
+                can_attack = 0;
+            }
+        }
+        if (can_attack != 0) {
+            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            if (fp->x1A88.xEC < 8U) {
+                tmp->xCC_array[tmp->xEC] = 0x26;
+                tmp->xEC++;
+            }
+        }
+        target = fp->x1A88.x44;
+        if (target != NULL && mpCheckAll(&c4.p, &c4.line, &c4.flags, &c4.n, -1,
+                                         -1, fp->cur_pos.x, fp->cur_pos.y,
+                                         target->cur_pos.x, target->cur_pos.y))
+        {
+            can_attack = 1;
+        } else if (fp->facing_dir > 0.0) {
+            y = fp->cur_pos.y;
+            x = fp->cur_pos.x;
+            x += 58.0f;
+            if (ftCo_800A0FB0(&c4.p, &c4.line, &c4.flags, &c4.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
+            {
+                can_attack = 1;
+            } else {
+                can_attack = 0;
+            }
+        } else {
+            y = fp->cur_pos.y;
+            x = fp->cur_pos.x - 58.0f;
+            if (ftCo_800A0FB0(&c4.p, &c4.line, &c4.flags, &c4.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
+            {
+                can_attack = 1;
+            } else {
+                can_attack = 0;
+            }
+        }
+        if (can_attack != 0) {
+            {
+                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                if (fp->x1A88.xEC < 8U) {
+                    tmp->xCC_array[tmp->xEC] = 0x1B;
+                    tmp->xEC++;
+                }
+            }
+            {
+                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                if (fp->x1A88.xEC < 8U) {
+                    tmp->xCC_array[tmp->xEC] = 0x37;
+                    tmp->xEC++;
+                }
+            }
+            {
+                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                if (fp->x1A88.xEC < 8U) {
+                    tmp->xCC_array[tmp->xEC] = 0x38;
+                    tmp->xEC++;
+                    return;
+                }
+            }
+        }
+        break;
+    case FTKIND_PIKACHU:
+    case FTKIND_PICHU:
+        target = fp->x1A88.x44;
+        if (target != NULL && mpCheckAll(&c5.p, &c5.line, &c5.flags, &c5.n, -1,
+                                         -1, fp->cur_pos.x, fp->cur_pos.y,
+                                         target->cur_pos.x, target->cur_pos.y))
+        {
+            can_attack = 1;
+        } else if (fp->facing_dir > 0.0) {
+            y = fp->cur_pos.y;
+            x = fp->cur_pos.x;
+            x += 57.0f;
+            if (ftCo_800A0FB0(&c5.p, &c5.line, &c5.flags, &c5.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
+            {
+                can_attack = 1;
+            } else {
+                can_attack = 0;
+            }
+        } else {
+            y = fp->cur_pos.y;
+            x = fp->cur_pos.x - 57.0f;
+            if (ftCo_800A0FB0(&c5.p, &c5.line, &c5.flags, &c5.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
+            {
+                can_attack = 1;
+            } else {
+                can_attack = 0;
+            }
+        }
+        if (can_attack != 0) {
+            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            if (fp->x1A88.xEC < 8U) {
+                tmp->xCC_array[tmp->xEC] = 0x1B;
+                tmp->xEC++;
+                return;
+            }
+        }
+        break;
+    case FTKIND_KOOPA:
+        if (fp->ground_or_air == GA_Ground) {
+            target = fp->x1A88.x44;
+            if (target != NULL &&
+                mpCheckAll(&c6.p, &c6.line, &c6.flags, &c6.n, -1, -1,
+                           fp->cur_pos.x, fp->cur_pos.y, target->cur_pos.x,
+                           target->cur_pos.y))
+            {
+                can_attack = 1;
+            } else if (fp->facing_dir > 0.0) {
+                y = fp->cur_pos.y;
+                x = fp->cur_pos.x + 27.0f;
+                if (ftCo_800A0FB0(&c6.p, &c6.line, &c6.flags, &c6.n, -1, -1,
+                                  -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
+                {
+                    can_attack = 1;
+                } else {
+                    can_attack = 0;
+                }
+            } else {
+                y = fp->cur_pos.y;
+                x = fp->cur_pos.x - 27.0f;
+                if (ftCo_800A0FB0(&c6.p, &c6.line, &c6.flags, &c6.n, -1, -1,
+                                  -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
+                {
+                    can_attack = 1;
+                } else {
+                    can_attack = 0;
+                }
+            }
+            if (can_attack != 0) {
+                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                if (fp->x1A88.xEC < 8U) {
+                    tmp->xCC_array[tmp->xEC] = 0x26;
+                    tmp->xEC++;
+                    return;
+                }
+            }
+        } else if (!cpu->xFA_b2) {
+            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            if (fp->x1A88.xEC < 8U) {
+                tmp->xCC_array[tmp->xEC] = 0x26;
+                tmp->xEC++;
+                return;
+            }
+        }
+        break;
+    case FTKIND_GKOOPS:
+        if (fp->ground_or_air == GA_Ground) {
+            target = fp->x1A88.x44;
+            if (target != NULL &&
+                mpCheckAll(&c7.p, &c7.line, &c7.flags, &c7.n, -1, -1,
+                           fp->cur_pos.x, fp->cur_pos.y, target->cur_pos.x,
+                           target->cur_pos.y))
+            {
+                can_attack = 1;
+            } else if (fp->facing_dir > 0.0) {
+                y = fp->cur_pos.y;
+                x = fp->cur_pos.x + 53.0f;
+                if (ftCo_800A0FB0(&c7.p, &c7.line, &c7.flags, &c7.n, -1, -1,
+                                  -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
+                {
+                    can_attack = 1;
+                } else {
+                    can_attack = 0;
+                }
+            } else {
+                y = fp->cur_pos.y;
+                x = fp->cur_pos.x - 53.0f;
+                if (ftCo_800A0FB0(&c7.p, &c7.line, &c7.flags, &c7.n, -1, -1,
+                                  -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
+                {
+                    can_attack = 1;
+                } else {
+                    can_attack = 0;
+                }
+            }
+            if (can_attack != 0) {
+                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                if (fp->x1A88.xEC < 8U) {
+                    tmp->xCC_array[tmp->xEC] = 0x26;
+                    tmp->xEC++;
+                    return;
+                }
+            }
+        } else if (!cpu->xFA_b2) {
+            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            if (fp->x1A88.xEC < 8U) {
+                tmp->xCC_array[tmp->xEC] = 0x26;
+                tmp->xEC++;
+                return;
+            }
+        }
+        break;
+    case FTKIND_YOSHI:
+        if (fp->ground_or_air == GA_Ground) {
+            target = fp->x1A88.x44;
+            if (target != NULL &&
+                mpCheckAll(&c8.p, &c8.line, &c8.flags, &c8.n, -1, -1,
+                           fp->cur_pos.x, fp->cur_pos.y, target->cur_pos.x,
+                           target->cur_pos.y))
+            {
+                can_attack = 1;
+            } else if (fp->facing_dir > 0.0) {
+                y = fp->cur_pos.y;
+                x = fp->cur_pos.x + 16.0f;
+                if (ftCo_800A0FB0(&c8.p, &c8.line, &c8.flags, &c8.n, -1, -1,
+                                  -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
+                {
+                    can_attack = 1;
+                } else {
+                    can_attack = 0;
+                }
+            } else {
+                y = fp->cur_pos.y;
+                x = fp->cur_pos.x - 16.0f;
+                if (ftCo_800A0FB0(&c8.p, &c8.line, &c8.flags, &c8.n, -1, -1,
+                                  -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
+                {
+                    can_attack = 1;
+                } else {
+                    can_attack = 0;
+                }
+            }
+            if (can_attack != 0) {
+                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                if (fp->x1A88.xEC < 8U) {
+                    tmp->xCC_array[tmp->xEC] = 0x26;
+                    tmp->xEC++;
+                    return;
+                }
+            }
+        } else if (!cpu->xFA_b2) {
+            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            if (fp->x1A88.xEC < 8U) {
+                tmp->xCC_array[tmp->xEC] = 0x26;
+                tmp->xEC++;
+                return;
+            }
+        }
+        break;
+    case FTKIND_LUIGI:
+        target = fp->x1A88.x44;
+        if (target != NULL && mpCheckAll(&c9.p, &c9.line, &c9.flags, &c9.n, -1,
+                                         -1, fp->cur_pos.x, fp->cur_pos.y,
+                                         target->cur_pos.x, target->cur_pos.y))
+        {
+            can_attack = 1;
+        } else if (fp->facing_dir > 0.0) {
+            y = fp->cur_pos.y;
+            x = fp->cur_pos.x;
+            x += 60.0f;
+            if (ftCo_800A0FB0(&c9.p, &c9.line, &c9.flags, &c9.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
+            {
+                can_attack = 1;
+            } else {
+                can_attack = 0;
+            }
+        } else {
+            y = fp->cur_pos.y;
+            x = fp->cur_pos.x - 60.0f;
+            if (ftCo_800A0FB0(&c9.p, &c9.line, &c9.flags, &c9.n, -1, -1, -1, x,
+                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
+            {
+                can_attack = 1;
+            } else {
+                can_attack = 0;
+            }
+        }
+        if (can_attack != 0) {
+            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            if (fp->x1A88.xEC < 8U) {
+                tmp->xCC_array[tmp->xEC] = 0x26;
+                tmp->xEC++;
+                return;
+            }
+        }
+        break;
+    case FTKIND_PEACH:
+        target = fp->x1A88.x44;
+        if (target != NULL && mpCheckAll(&c10.p, &c10.line, &c10.flags, &c10.n,
+                                         -1, -1, fp->cur_pos.x, fp->cur_pos.y,
+                                         target->cur_pos.x, target->cur_pos.y))
+        {
+            can_attack = 1;
+        } else if (fp->facing_dir > 0.0) {
+            y = fp->cur_pos.y;
+            x = fp->cur_pos.x + 32.0f;
+            if (ftCo_800A0FB0(&c10.p, &c10.line, &c10.flags, &c10.n, -1, -1,
+                              -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
+            {
+                can_attack = 1;
+            } else {
+                can_attack = 0;
+            }
+        } else {
+            y = fp->cur_pos.y;
+            x = fp->cur_pos.x - 32.0f;
+            if (ftCo_800A0FB0(&c10.p, &c10.line, &c10.flags, &c10.n, -1, -1,
+                              -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
+            {
+                can_attack = 1;
+            } else {
+                can_attack = 0;
+            }
+        }
+        if (can_attack != 0) {
+            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            if (fp->x1A88.xEC < 8U) {
+                tmp->xCC_array[tmp->xEC] = 0x26;
+                tmp->xEC++;
+                return;
+            }
+        }
+        break;
+    case FTKIND_KIRBY:
+        if (fp->ground_or_air == GA_Air && !cpu->xFA_b2) {
+            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            if (fp->x1A88.xEC < 8U) {
+                tmp->xCC_array[tmp->xEC] = 0x26;
+                tmp->xEC++;
+            }
+        }
+        charge = fp->fv.gw.x2238_panicCharge;
+        if (charge == 3 || charge == 0xD || charge == 0x10) {
+            {
+                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                if (fp->x1A88.xEC < 8U) {
+                    tmp->xCC_array[tmp->xEC] = 0x11;
+                    tmp->xEC++;
+                    return;
+                }
+            }
+        } else {
+            {
+                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                if (fp->x1A88.xEC < 8U) {
+                    tmp->xCC_array[tmp->xEC] = 0x12;
+                    tmp->xEC++;
+                }
+            }
+            if (fp->x34_scale.y < cpu_target->x34_scale.y) {
+                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                if (fp->x1A88.xEC < 8U) {
+                    tmp->xCC_array[tmp->xEC] = 0x11;
+                    tmp->xEC++;
+                }
+            }
+        }
+        break;
+    }
+}
 
 bool ftCo_800B885C(Fighter* fp)
 {
@@ -665,7 +1832,199 @@ bool ftCo_800B89CC(Fighter* fp)
     return true;
 }
 
-/// #ftCo_800B8A9C
+bool ftCo_800B8A9C(Fighter* fp)
+{
+    u8 _[0x38];
+    u32 sp38;
+    int sp34;
+    Vec3 sp28;
+    Vec3 sp1C;
+    Fighter** target_pp;
+    Fighter* target3;
+    struct Fighter_x1A88_t* cpu = &fp->x1A88;
+    Fighter* target;
+    Item* item;
+    float weapon_reach;
+    int result;
+    int var_r0;
+
+    if (!cpu->xF9_b2) {
+        return false;
+    }
+    target = cpu->x44;
+    cpu->xEC = 0;
+    cpu->xC8 = 0;
+    if (target == NULL || fp->motion_id == ftCo_MS_Pass ||
+        ftCo_800A1C44(target) || ftCo_800B885C(fp) || ftCo_800A1CA8(fp))
+    {
+        cpu->xA4 = 0;
+        return false;
+    }
+    target_pp = &fp->x1A88.x44;
+    {
+        Fighter* target2 = fp->x1A88.x44;
+        if (target2->motion_id >= ftCo_MS_Catch &&
+            target2->motion_id <= ftCo_MS_EscapeAir)
+        {
+            u8* xec = &fp->x1A88.xEC;
+            if (fp->x1A88.xEC < 8U) {
+                cpu->xCC_array[cpu->xEC] = 0x28;
+                cpu->xEC++;
+            }
+            {
+                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                if (*xec < 8U) {
+                    tmp->xCC_array[tmp->xEC] = 0x29;
+                    tmp->xEC++;
+                }
+            }
+        } else if (target2->x34_scale.y > fp->x34_scale.y) {
+            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            u8* xec = &fp->x1A88.xEC;
+            if (fp->x1A88.xEC < 8U) {
+                tmp->xCC_array[tmp->xEC] = 0x28;
+                tmp->xEC++;
+            }
+            {
+                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                if (*xec < 8U) {
+                    tmp->xCC_array[tmp->xEC] = 0x29;
+                    tmp->xEC++;
+                }
+            }
+            if (fp->kind == FTKIND_KIRBY) {
+                struct Fighter_x1A88_t* tmp = &fp->x1A88;
+                if (*xec < 8U) {
+                    tmp->xCC_array[tmp->xEC] = 0x11;
+                    tmp->xEC++;
+                }
+            }
+        }
+    }
+    ftCo_800B77E8(fp);
+    if (fp->ground_or_air == GA_Air) {
+        if (ftCo_800B89CC(fp)) {
+            result = ftCo_800B4AB0(fp, target,
+                                   ((void**) Fighter_804D64FC->x8)[fp->kind]);
+            if (result != 0) {
+                cpu->xA4 = result;
+                return true;
+            }
+        }
+        goto done;
+    }
+    if (ftCo_800A3134(target) || ftCo_800A3200(target)) {
+        struct Fighter_x1A88_t* tmp = &fp->x1A88;
+        u8* xc8 = &fp->x1A88.xC8;
+        if (fp->x1A88.xC8 < 8U) {
+            tmp->xA8_array[tmp->xC8] = 0xa;
+            tmp->xC8++;
+        }
+        {
+            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            if (*xc8 < 8U) {
+                tmp->xA8_array[tmp->xC8] = 0xe;
+                tmp->xC8++;
+            }
+        }
+        result = ftCo_800B4AB0(fp, target,
+                               ((void**) Fighter_804D64FC->x4)[fp->kind]);
+        if (result != 0) {
+            cpu->xA4 = result;
+            return true;
+        }
+        goto done;
+    }
+    if (fp->item_gobj != NULL && ftCo_800A59E4(GET_ITEM(fp->item_gobj))) {
+        item = GET_ITEM(fp->item_gobj);
+        if (!ftCo_800A59E4(item)) {
+            weapon_reach = 0.0f;
+        } else {
+            switch (item->kind) {
+            case It_Kind_Harisen:
+                weapon_reach = ((float*) Fighter_804D64FC->x24)[0];
+                break;
+            case It_Kind_LipStick:
+                weapon_reach = ((float*) Fighter_804D64FC->x24)[1];
+                break;
+            case It_Kind_StarRod:
+                weapon_reach = ((float*) Fighter_804D64FC->x24)[2];
+                break;
+            case It_Kind_Sword:
+                weapon_reach = ((float*) Fighter_804D64FC->x24)[3];
+                break;
+            case It_Kind_Bat:
+                weapon_reach = ((float*) Fighter_804D64FC->x24)[4];
+                break;
+            case It_Kind_Parasol:
+                weapon_reach = ((float*) Fighter_804D64FC->x24)[5];
+                break;
+            default:
+                weapon_reach = 0.0f;
+                break;
+            }
+        }
+        result = ftCo_800B52AC(fp, target,
+                               ((void**) Fighter_804D64FC->x18)[fp->kind],
+                               weapon_reach);
+        if (result != 0) {
+            cpu->xA4 = result;
+            return true;
+        }
+    }
+    if (cpu->level > 5 && ftCo_800B9F6C(target)) {
+        result = ftCo_800B4AB0(fp, target,
+                               ((void**) Fighter_804D64FC->x10)[fp->kind]);
+        if (result != 0) {
+            cpu->xA4 = result;
+            return true;
+        }
+    }
+    {
+        target3 = *target_pp;
+        if (fp->item_gobj != NULL) {
+            var_r0 = 0;
+        } else if (ftCo_800A3200(target3)) {
+            var_r0 = 0;
+        } else {
+            if (ftCo_800A0FB0(&sp1C, &sp34, &sp38, &sp28, -1, -1, -1,
+                              target3->cur_pos.x, 5.0 + target3->cur_pos.y,
+                              target3->cur_pos.x, target3->cur_pos.y - 1000.0,
+                              0.0f) != 0)
+            {
+                var_r0 = 0;
+            } else {
+                var_r0 = 1;
+            }
+        }
+    }
+    if (var_r0 != 0) {
+        result = ftCo_800B4AB0(fp, target,
+                               ((void**) Fighter_804D64FC->x1C)[fp->kind]);
+        if (result != 0) {
+            cpu->xA4 = result;
+            cpu->xF8_b7 = 1;
+            return true;
+        }
+    }
+    result =
+        ftCo_800B4AB0(fp, target, ((void**) Fighter_804D64FC->x4)[fp->kind]);
+    if (result != 0) {
+        cpu->xA4 = result;
+        return true;
+    }
+    if (cpu->x50 != 0) {
+        result = ftCo_800B5AB0(fp, (void*) cpu->x50,
+                               ((void**) Fighter_804D64FC->x14)[fp->kind]);
+        if (result != 0) {
+            cpu->xA4 = result;
+            return true;
+        }
+    }
+done:
+    cpu->xA4 = 0;
+    return false;
+}
 
 void ftCo_800B9020(Fighter* fp)
 {
@@ -1435,7 +2794,156 @@ bool ftCo_800BB104(Fighter* fp, Fighter* arg1, Vec3* arg2, f32 arg3)
     return false;
 }
 
-/// #ftCo_800BB220
+int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
+{
+    Vec3 dst;
+    HitCapsule* hit;
+    int i;
+    s32 count;
+    HitCapsuleState state;
+    bool result;
+    struct Fighter_x1A88_t* temp_r31 = &fp->x1A88;
+
+    PAD_STACK(0x38);
+
+    if (ip->owner == fp->gobj) {
+        return 0;
+    }
+    if (ftLib_80086960(ip->owner) && ftCo_IsAlly(fp, GET_FIGHTER(ip->owner))) {
+        return 0;
+    }
+    switch (ip->kind) {
+    case It_Kind_Star:
+    case It_Kind_Unk4:
+        result = true;
+        break;
+    default:
+        result = ftCo_800A5980((Fighter*) ip);
+        break;
+    }
+    if (result) {
+        return 0;
+    }
+
+    if (fp->x1A88.level < 3) {
+        count = (s32) (20.0f * HSD_Randf()) + 10;
+    } else if (temp_r31->level < 6) {
+        count = (s32) (10.0f * HSD_Randf()) + 5;
+    } else if (temp_r31->level < 9) {
+        count = (s32) (5.0f * HSD_Randf()) + 3;
+    } else {
+        count = 1;
+    }
+
+    dst.x = fp->pos_delta.x * count + arg2->x;
+    dst.y = fp->pos_delta.y * count + arg2->y;
+    dst.z = fp->pos_delta.z * count + arg2->z;
+
+    if (fp->kind == FTKIND_NESS && temp_r31->level > 3) {
+        if (count < 21) {
+            Vec3 spB8;
+            Vec3 spAC;
+            Vec3 sp94;
+            for (i = 0; i < 4; i++) {
+                state = ip->x5D4_hitboxes[i].hit.state;
+                hit = &ip->x5D4_hitboxes[i].hit;
+                if (state != HitCapsule_Disabled &&
+                    state != HitCapsule_Enabled && !hit->x43_b2 &&
+                    hit->element != 0xB && !lbColl_8000ACFC(fp, hit))
+                {
+                    f32 dx = hit->x4C.x - hit->x58.x;
+                    f32 dy = hit->x4C.y - hit->x58.y;
+                    f32 dz = hit->x4C.z - hit->x58.z;
+                    sp94.x = dx * count + hit->x4C.x;
+                    sp94.y = dy * count + hit->x4C.y;
+                    sp94.z = dz * count + hit->x4C.z;
+                    if (lbColl_80006094(&hit->x4C, &sp94, arg2, &dst, &spAC,
+                                        &spB8, hit->scale, arg3))
+                    {
+                        result = true;
+                    } else {
+                        result = false;
+                    }
+                } else {
+                    result = false;
+                }
+                if (result) {
+                    return 2;
+                }
+            }
+            return 0;
+        } else {
+            Vec3 sp84;
+            Vec3 sp78;
+            Vec3 sp60;
+            for (i = 0; i < 4; i++) {
+                state = ip->x5D4_hitboxes[i].hit.state;
+                hit = &ip->x5D4_hitboxes[i].hit;
+                if (state != HitCapsule_Disabled &&
+                    state != HitCapsule_Enabled && !hit->x43_b2 &&
+                    hit->element != 0xB && !lbColl_8000ACFC(fp, hit))
+                {
+                    f32 dx = hit->x4C.x - hit->x58.x;
+                    f32 dy = hit->x4C.y - hit->x58.y;
+                    f32 dz = hit->x4C.z - hit->x58.z;
+                    sp60.x = dx * count + hit->x4C.x;
+                    sp60.y = dy * count + hit->x4C.y;
+                    sp60.z = dz * count + hit->x4C.z;
+                    if (lbColl_80006094(&hit->x4C, &sp60, arg2, &dst, &sp78,
+                                        &sp84, hit->scale, arg3))
+                    {
+                        result = true;
+                    } else {
+                        result = false;
+                    }
+                } else {
+                    result = false;
+                }
+                if (result) {
+                    if (hit->x42_b0) {
+                        return 3;
+                    }
+                    return 2;
+                }
+            }
+            return 0;
+        }
+    }
+
+    {
+        Vec3 sp50;
+        Vec3 sp44;
+        Vec3 sp2C;
+        for (i = 0; i < 4; i++) {
+            state = ip->x5D4_hitboxes[i].hit.state;
+            hit = &ip->x5D4_hitboxes[i].hit;
+            if (state != HitCapsule_Disabled && state != HitCapsule_Enabled &&
+                !hit->x43_b2 && hit->element != 0xB &&
+                !lbColl_8000ACFC(fp, hit))
+            {
+                f32 dx = hit->x4C.x - hit->x58.x;
+                f32 dy = hit->x4C.y - hit->x58.y;
+                f32 dz = hit->x4C.z - hit->x58.z;
+                sp2C.x = dx * count + hit->x4C.x;
+                sp2C.y = dy * count + hit->x4C.y;
+                sp2C.z = dz * count + hit->x4C.z;
+                if (lbColl_80006094(&hit->x4C, &sp2C, arg2, &dst, &sp44, &sp50,
+                                    hit->scale, arg3))
+                {
+                    result = true;
+                } else {
+                    result = false;
+                }
+            } else {
+                result = false;
+            }
+            if (result) {
+                return 2;
+            }
+        }
+    }
+    return 0;
+}
 
 bool ftCo_800BB768(Fighter* fp, Fighter* arg1)
 {

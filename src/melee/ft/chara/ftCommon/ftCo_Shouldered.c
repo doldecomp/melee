@@ -26,15 +26,12 @@
 
 #pragma force_active on
 
-float const ftCo_804D8750 = 0;
-float const ftCo_804D8754 = 1;
-double const ftCo_804D8758 = S32_TO_F32;
-
 /* 09C744 */ static void ftCo_8009C744(Fighter_GObj* gobj);
 
 void ftCo_8009C5A4(Fighter_GObj* gobj, FtMotionId msid)
 {
-    u8 _[8] = { 0 };
+    u32 unused1;
+    u32 unused2;
     Fighter* fp = gobj->user_data;
     if (fp->motion_id != msid || msid != ftCo_MS_ShoulderedWait) {
         Fighter_ChangeMotionState(
@@ -49,6 +46,7 @@ void ftCo_8009C5A4(Fighter_GObj* gobj, FtMotionId msid)
 void ftCo_8009C640(Fighter_GObj* gobj, FtMotionId msid)
 {
     Fighter* fp = gobj->user_data;
+    PAD_STACK(8);
     ftCommon_InitGrab(fp, 0,
                       (int) (fp->dmg.x1830_percent * p_ftCommonData->x4A0 +
                              p_ftCommonData->x4A4));
@@ -63,9 +61,9 @@ void ftCo_8009C744(Fighter_GObj* gobj)
     Fighter_GObj* vic_gobj = fp->victim_gobj;
     Fighter* vic_fp = vic_gobj->user_data;
     Vec3 pos;
-    u8 _[12] = { 0 };
     HitCapsule* hit = &vic_fp->xDF4[1];
-    ftCo_800DC920(vic_gobj, gobj);
+    PAD_STACK(8);
+    ftCo_800DC920(fp->victim_gobj, gobj);
     lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint, NULL,
                 &pos);
     fp->dmg.kb_applied = ftColl_80079C70(fp, vic_fp, hit, hit->unk_count);
@@ -74,7 +72,7 @@ void ftCo_8009C744(Fighter_GObj* gobj)
     fp->dmg.x184c_damaged_hurtbox = 1;
     fp->dmg.x1854_collpos = pos;
     fp->dmg.x1860_element = hit->element;
-    // ftColl_80078710(gobj);
+    ftColl_80078710(vic_gobj, gobj, &fp->dmg.facing_dir_1);
     Fighter_UnkTakeDamage_8006CC30(fp, hit->damage);
     ftCo_Damage_CalcKnockback(fp);
     ftCo_8008E908(gobj, 0);
@@ -90,42 +88,43 @@ static inline float inlineA0(Fighter_GObj* gobj)
 
 void ftCo_Shouldered_Anim(Fighter_GObj* gobj)
 {
+    HitCapsule* hit;
+    Fighter* fp2;
+    Fighter* fp1;
+    Fighter_GObj* gobj1;
+    u32 unused1;
+    u32 unused2;
+    Vec3 pos;
     Fighter* fp = gobj->user_data;
+    PAD_STACK(16);
     fp->mv.co.shouldered.x4 = ftCommon_GrabMash(fp, inlineA0(fp->victim_gobj));
     if (fp->grab_timer <= 0) {
-        HitCapsule* hit;
-        Fighter_GObj* gobj1 = fp->victim_gobj;
-        Fighter* fp1 = gobj1->user_data;
-        Fighter_GObj* gobj2 = fp1->victim_gobj;
-        {
-            Fighter* fp1 = gobj1->user_data;
-            Fighter* fp2 = gobj2->user_data;
-            Vec3 pos;
-            hit = &fp2->xDF4[1];
-            lb_8000B1CC(
-                fp1->parts[(ftParts_GetBoneIndex(fp1, FtPart_TransN2))].joint,
-                NULL, &pos);
-            fp1->dmg.kb_applied =
-                ftColl_80079C70(fp1, fp2, hit, hit->unk_count);
-            fp1->dmg.x1848_kb_angle = hit->kb_angle;
-            fp1->dmg.facing_dir_1 = fp1->facing_dir;
-            fp1->dmg.x184c_damaged_hurtbox = 1;
-            fp2->dmg.x1854_collpos = pos;
-            fp1->dmg.x1860_element = hit->element;
-            // ftColl_80078710(gobj);
-            Fighter_UnkTakeDamage_8006CC30(fp1, hit->damage);
-            ftCo_Damage_CalcKnockback(fp1);
-            ftCo_8008E908(gobj1, 0);
-        }
+        gobj1 = fp->victim_gobj;
+        fp1 = gobj1->user_data;
+        fp2 = fp1->victim_gobj->user_data;
+        hit = &fp2->xDF4[1];
+        lb_8000B1CC(
+            fp1->parts[(ftParts_GetBoneIndex(fp1, FtPart_TransN2))].joint,
+            NULL, &pos);
+        fp1->dmg.kb_applied = ftColl_80079C70(fp1, fp2, hit, hit->unk_count);
+        fp1->dmg.x1848_kb_angle = hit->kb_angle;
+        fp1->dmg.facing_dir_1 = fp1->facing_dir;
+        fp1->dmg.x184c_damaged_hurtbox = 1;
+        fp1->dmg.x1854_collpos = pos;
+        fp1->dmg.x1860_element = hit->element;
+        ftColl_80078710(gobj1, fp1->victim_gobj, &fp1->dmg.facing_dir_1);
+        Fighter_UnkTakeDamage_8006CC30(fp1, hit->damage);
+        ftCo_Damage_CalcKnockback(fp1);
+        ftCo_8008E908(gobj1, 0);
         ftCo_8009C744(gobj);
         return;
     }
-    if (fp->mv.ca.specials.grav) {
-        fp->mv.ca.specials.grav -= 1;
-    }
-    if (fp->mv.co.shouldered.x0 <= 0 && !fp->mv.co.shouldered.x4) {
-        ftAnim_SetAnimRate(gobj, 1);
-        fp->mv.co.shouldered.x0 = 0;
+    if (fp->mv.co.shouldered.x0) {
+        fp->mv.co.shouldered.x0 -= 1;
+        if (fp->mv.co.shouldered.x0 <= 0 && !fp->mv.co.shouldered.x4) {
+            ftAnim_SetAnimRate(gobj, 1);
+            fp->mv.co.shouldered.x0 = 0;
+        }
     }
     if (fp->mv.co.shouldered.x0 <= 0 && fp->mv.co.shouldered.x4 &&
         fp->motion_id == ftCo_MS_ShoulderedWait)

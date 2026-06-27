@@ -4,7 +4,7 @@
 #include <platform.h>
 
 #include "db/db.h"
-#include "ft/chara/ftKirby/ftKb_Init.h"
+#include "ft/chara/ftKirby/ftkirby.h"
 #include "ft/chara/ftNess/ftNs_SpecialN.h"
 #include "ft/ftlib.h"
 

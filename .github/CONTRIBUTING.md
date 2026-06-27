@@ -25,7 +25,13 @@ While not all code submitted at this time conforms to this standard, it is the i
 - [Pull Requests](#prs)
 
 ## <a name="auto-formatting"></a>Auto Formatting
-C code that's contributed to this codebase should have `clang-format` ran on it. You can do this easily by adding the C files you changed, and then running [`git clang-format`](https://ortogonal.github.io/cpp/git-clang-format/), which will run `clang-format` on staged files.
+`clang-format` should be run on all C code in `src`. The easiest way to do this is to install and run [`pre-commit`](https://pre-commit.com/), which will run the formatter with every commit. `pre-commit` is included in our dev packages:
+
+```
+pip install -r reqs/dev.txt # Install the pre-commit package
+pre-commit # Install the commit hook
+pre-commit run --all-files # Run the hook once on existing code
+```
 
 ## <a name="naming"></a>Naming
 - Avoid naming a function that you are not matching. If you have not matched to understand the functionality, don't expect that someone else did just because they named it.
@@ -132,4 +138,9 @@ If you just want to get started and match a function, you don't need to create a
 
 If you're familiar with git and want to make changes locally, you can also [fork the repo](https://docs.github.com/en/get-started/quickstart/fork-a-repo) to your personal GitHub. When submitting code, try to group your changes into fewer but larger PRs, as it'a easier to review that way.
 
-When you open a PR, the `#smash-bros-melee` channel on Discord will be notified.
+## <a name="ai"></a>AI Assistance
+
+Using AI to match functions is acceptable and frequently practiced. However, please adhere to the following guidelines:
+* Refrain from allowing AI to name fields in structs or other globally accessible identifiers.
+* Discourage AI from attempting to match data sections, instead focusing solely on code matches.
+* When submitting pull requests or issues, avoid including AI output in the body or in comments, and do not submit automated code reviews. An AI summary which is both relevant and concise may be included if it is wrapped in markdown comments (`>`) to differentiate it from human writing.

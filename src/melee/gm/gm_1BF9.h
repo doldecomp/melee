@@ -5,8 +5,8 @@
 
 #include <melee/gm/forward.h>
 
-void gm_801BF948(MinorScene*);
-void gm_801BF9A8(MinorScene*);
-void gm_801BFA3C(MinorScene*);
+void gm_801BF948(GameScene*);
+void gm_801BF9A8(GameScene*);
+void gm_801BFA3C(GameScene*);
 
 #endif

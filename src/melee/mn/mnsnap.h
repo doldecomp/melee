@@ -20,11 +20,12 @@
 /* 253E90 */ void mnSnap_80253E90(s32 idx);
 /* 253F60 */ void mnSnap_80253F60(void);
 /* 254014 */ void mnSnap_80254014(void);
-/* 25409C */ void mnSnap_8025409C(HSD_JObj* jobj_flag);
+/* 25409C */ void mnSnap_8025409C(s32 dlg_type);
 /* 254298 */ void mnSnap_80254298(void);
 /* 25441C */ s32 mnSnap_8025441C(u64 buttons);
 /* 2545C4 */ void fn_802545C4(void);
 /* 257D7C */ void fn_80257D7C(void);
 /* 257F24 */ void mnSnap_80257F24(void);
+/* 4A0B90 */ extern struct mnSnap_804A0B90_t* mnSnap_804A0B90[4];
 
 #endif

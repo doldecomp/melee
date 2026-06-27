@@ -9,15 +9,28 @@
 
 #include <sysdolphin/baselib/forward.h>
 
+enum RulePlusOption {
+    RULEPLUS_TIME_LIMIT,
+    RULEPLUS_FRIENDLY_FIRE,
+    RULEPLUS_PAUSE,
+    RULEPLUS_SCORE,
+    RULEPLUS_SD_PENALTY,
+    RULEPLUS_STAGE_SELECT,
+    RULEPLUS_COUNT,
+};
+
 typedef struct _MenuRulesPlusData {
     MenuKind8 menu_kind;
     u8 hovered_selection;
-    struct {
-        u8 time_limit;
-        u8 friendly_fire;
-        u8 pause;
-        u8 score;
-        u8 sd_penalty;
+    union {
+        struct {
+            u8 time_limit;
+            u8 friendly_fire;
+            u8 pause;
+            u8 score;
+            u8 sd_penalty;
+        };
+        u8 values[5];
     } rule_values;
     u8 x7;
     MenuState8 state;
@@ -32,10 +45,8 @@ typedef struct mn_803ED1D0_t {
     float text_start_frames[12];
     AnimLoopSettings x4C;
     AnimLoopSettings x58;
-    AnimLoopSettings x64;
-    AnimLoopSettings x70;
-    AnimLoopSettings x7C;
-    AnimLoopSettings x88;
+    AnimLoopSettings x64[2]; ///< [0] = unselected, [1] = selected (non-stage)
+    AnimLoopSettings x7C[2]; ///< [0] = unselected, [1] = selected (stage)
     AnimLoopSettings x94;
 } mn_803ED1D0_t;
 STATIC_ASSERT(sizeof(mn_803ED1D0_t) == 0xA0);
@@ -49,5 +60,13 @@ STATIC_ASSERT(sizeof(mn_803ED1D0_t) == 0xA0);
 /* 232F44 */ void fn_80232F44(HSD_GObj*);
 /* 233218 */ HSD_GObj* mn_80233218(MenuState);
 /* 2339FC */ void mn_802339FC(void);
+
+extern volatile f32 mn_804DBE44;
+extern const f32 mn_804DBE4C;
+extern const f32 mn_804DBE50;
+extern const f32 mn_804DBE54;
+extern const f32 mn_804DBE58;
+extern const f32 mn_804DBE5C;
+extern const f32 mn_804DBE60;
 
 #endif

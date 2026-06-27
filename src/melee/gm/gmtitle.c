@@ -65,10 +65,10 @@ static void gmTitle_801A146C(HSD_GObj* gobj)
     mn_8022ED6C(GET_JOBJ(gobj), &gmTitle_803DA4FC);
 }
 
-static inline bool isActiveTitle()
+static inline bool isActiveTitle(void)
 {
-    if (gm_801A4310() == MJ_TITLE ||
-        (gm_801A4310() == MJ_OPENING_MV && gm_801A42C4() == MN_VS))
+    if (gm_801A4310() == GM_TITLE ||
+        (gm_801A4310() == GM_OPENING_MV && gm_801A42C4() == GS_VS))
     {
         return false;
     }
@@ -135,8 +135,8 @@ HSD_GObj* gmTitle_801A165C(void)
                        gmTitle_80479B28.matanim_joint,
                        gmTitle_80479B28.shapeanim_joint);
 
-    if (gm_801A4310() == MJ_TITLE ||
-        (gm_801A4310() == MJ_OPENING_MV && gm_801A42C4() == MN_VS))
+    if (gm_801A4310() == GM_TITLE ||
+        (gm_801A4310() == GM_OPENING_MV && gm_801A42C4() == GS_VS))
     {
         var_r0 = false;
     } else {
@@ -279,7 +279,7 @@ void gmTitle_801A1C18_OnFrame(void)
         tmp = gm_801A4B9C();
         *tmp = input;
         gm_801A4B60();
-    } else if (g_debugLevel >= 3) {
+    } else if (DbLevel >= 3) {
         if (input & HSD_PAD_Y) {
             lbAudioAx_80024030(1);
             tmp = gm_801A4B9C();
@@ -358,7 +358,7 @@ void gmTitle_801A1E20_OnEnter(void* unused)
     fn_801A1498_inline();
 
     // Debug shows the build timestamp on the title screen
-    if (g_debugLevel >= 1) {
+    if (DbLevel >= 1) {
         HSD_SisLib_803A611C(0, NULL, 9, 0xD, 0, 0xE, 0, 0x13);
         text = HSD_SisLib_803A6754(0, 0);
         gmTitle_801A1D38(db_build_timestamp, gmTitle_80479B48);

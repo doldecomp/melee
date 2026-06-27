@@ -10,7 +10,7 @@
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
-#include "ftKirby/ftKb_Init.h"
+#include "ftKirby/ftkirby.h"
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>

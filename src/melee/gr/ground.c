@@ -14,6 +14,8 @@
 
 #include <placeholder.h>
 
+#include "baselib/forward.h"
+
 #include "cm/camera.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
@@ -24,8 +26,9 @@
 #include "gr/inlines.h"
 #include "if/textlib.h"
 #include "it/it_26B1.h"
-#include "it/it_2725.h"
+#include "it/it_3F14.h"
 #include "it/items/itcoin.h"
+#include "it/itzako.h"
 #include "it/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
@@ -75,7 +78,7 @@
 /* 1C1D38 */ static void Ground_801C1D38(HSD_GObj*);
 /* 1C1E2C */ static void Ground_801C1E2C(HSD_GObj* gobj, int code);
 /* 1C1E94 */ static void Ground_801C1E94(void);
-/* 1C20E0 */ UNK_T Ground_801C20E0(UnkArchiveStruct*, UNK_T);
+/* 1C20E0 */ LightList** Ground_801C20E0(UnkArchiveStruct*, LightList**);
 /* 1C24F8 */ static bool Ground_801C24F8(s32, u32, s32*);
 /* 1C28CC */ void Ground_801C28CC(void*, s32);
 /* 1C2BBC */ static void Ground_801C2BBC(HSD_GObj*, s32);
@@ -85,9 +88,9 @@
 /* 1C55AC */ static void Ground_801C55AC(Ground*);
 /* 1C5878 */ static void Ground_801C5878(void);
 
-StageInfo stage_info;
+/* 49E6C8 */ StageInfo stage_info;
 
-static StageData Ground_803DFEA8 = {
+/* 3DFEA8 */ static StageData Ground_803DFEA8 = {
     0,
     NULL,
     NULL,
@@ -425,6 +428,8 @@ void Ground_801C06B8(InternalStageId arg0)
     case PSTADIUM:
         grStadium_801D511C();
         return;
+    default:
+        return;
     }
 }
 
@@ -437,7 +442,7 @@ void Ground_801C0754(StructPairWithStageID* pair)
     stage = Ground_803DFEDC[pair->stage_id];
     arg3 = (pair->list_idx == 0x55) ? 0 : 1;
     grDatFiles_801C6038(stage->data1, 0, arg3);
-    Ground_801C28CC(stage_info.xA0, pair->list_idx);
+    Ground_801C28CC(&stage_info.xA0, pair->list_idx);
     stage_info.x178 = stage->callback5;
     stage_info.x17C = stage->callback6;
     Ground_801C5878();
@@ -565,36 +570,40 @@ void Ground_801C0C2C(HSD_GObj* arg0)
     Vec3 sp44;
     Vec3 sp38;
     Vec3 sp2C;
+    bool pass_position_bounds;
+    bool pass_y_min;
+    bool pass_x_bounds;
+    f32 xpos;
+    f32 ypos;
 
     if (stage_info.unk8C.b6 || stage_info.unk8C.b7) {
         HSD_GObj* gobj = Ground_801C57A4();
         if (gobj != NULL && !ftLib_8008701C(gobj)) {
             ftLib_80086644(gobj, &sp50);
             if (stage_info.unk8C.b6) {
-                bool result = false;
-                f32 x_min = -stage_info.x70C;
-                f32 y_min = -stage_info.x710;
-                f32 x_max = +stage_info.x70C;
-                f32 y_max = +stage_info.x710;
                 int i;
+                bool result = pass_x_bounds = pass_y_min =
+                    pass_position_bounds = false;
+                f32 x_max = stage_info.x70C;
+                f32 y_max = stage_info.x710;
                 for (i = 0x99; i < 0xB3; i++) {
                     if (Ground_801C2D24(i, &sp44)) {
-                        bool var_r0_2 = 0;
-                        bool var_r3_2 = 0;
-                        bool var_r4_2 = 0;
-                        f32 xpos = sp50.x - sp44.x;
-                        f32 ypos = sp50.y - sp44.y;
-                        if (xpos > x_min && xpos < x_max) {
-                            var_r4_2 = 1;
+                        pass_position_bounds = false;
+                        pass_y_min = pass_position_bounds;
+                        pass_x_bounds = pass_position_bounds;
+                        xpos = sp50.x - sp44.x;
+                        ypos = sp50.y - sp44.y;
+                        if (xpos > -x_max && xpos < x_max) {
+                            pass_x_bounds = true;
                         }
-                        if (var_r4_2 && ypos > y_min) {
-                            var_r3_2 = 1;
+                        if (pass_x_bounds && ypos > -y_max) {
+                            pass_y_min = true;
                         }
-                        if (var_r3_2 && ypos < y_max) {
-                            var_r0_2 = 1;
+                        if (pass_y_min && ypos < y_max) {
+                            pass_position_bounds = true;
                         }
-                        if (var_r0_2 && (stage_info.x90 == NULL ||
-                                         stage_info.x90(&sp50, i)))
+                        if (pass_position_bounds && (stage_info.x90 == NULL ||
+                                                     stage_info.x90(&sp50, i)))
                         {
                             result = true;
                             break;
@@ -609,30 +618,28 @@ void Ground_801C0C2C(HSD_GObj* arg0)
                 stage_info.unk8C.b6 = false;
             }
             if (stage_info.unk8C.b7) {
-                bool result = false;
-                f32 x_min = -stage_info.x718;
-                f32 y_min = -stage_info.x71C;
-                f32 x_max = +stage_info.x718;
-                f32 y_max = +stage_info.x71C;
                 int i;
+                bool result = false;
+                f32 x_max = stage_info.x718;
+                f32 y_max = stage_info.x71C;
                 for (i = 0xBD; i < 0xC7; i++) {
                     if (Ground_801C2D24(i, &sp38)) {
-                        bool var_r0_2 = 0;
-                        bool var_r3_2 = 0;
-                        bool var_r4_2 = 0;
-                        f32 xpos = sp50.x - sp38.x;
-                        f32 ypos = sp50.y - sp38.y;
-                        if (xpos > x_min && xpos < x_max) {
-                            var_r4_2 = 1;
+                        pass_position_bounds = false;
+                        pass_y_min = pass_position_bounds;
+                        pass_x_bounds = pass_position_bounds;
+                        xpos = sp50.x - sp38.x;
+                        ypos = sp50.y - sp38.y;
+                        if (xpos > -x_max && xpos < x_max) {
+                            pass_x_bounds = true;
                         }
-                        if (var_r4_2 && ypos > y_min) {
-                            var_r3_2 = 1;
+                        if (pass_x_bounds && ypos > -y_max) {
+                            pass_y_min = true;
                         }
-                        if (var_r3_2 && ypos < y_max) {
-                            var_r0_2 = 1;
+                        if (pass_y_min && ypos < y_max) {
+                            pass_position_bounds = true;
                         }
-                        if (var_r0_2 && (stage_info.x94 == NULL ||
-                                         stage_info.x94(&sp50, i)))
+                        if (pass_position_bounds && (stage_info.x94 == NULL ||
+                                                     stage_info.x94(&sp50, i)))
                         {
                             result = true;
                             break;
@@ -649,9 +656,9 @@ void Ground_801C0C2C(HSD_GObj* arg0)
         }
     }
     if (gm_8016B238()) {
-        int temp_r3_2 = gm_8016AEDC();
-        if (temp_r3_2 > 0x4B0 && temp_r3_2 - stage_info.x9C > 0x1E) {
-            stage_info.x9C = temp_r3_2;
+        int current_frame = gm_8016AEDC();
+        if (current_frame > 0x4B0 && current_frame - stage_info.x9C > 0x1E) {
+            stage_info.x9C = current_frame;
             if (Ground_801C0A70(&sp2C)) {
                 BobOmbRain spC = Ground_803B7DEC;
                 spC.x8_vec = sp2C;
@@ -721,6 +728,8 @@ void Ground_801C1158(void)
     case VENOM:
         grCorneria_801E2A6C();
         break;
+    default:
+        return;
     }
 }
 
@@ -773,11 +782,6 @@ HSD_JObj* Ground_801C13D0(s32 arg0, s32 depth)
     }
     return result;
 }
-
-static char Ground_804D44F8[8] = "archive";
-
-#define assert_line(line, cond)                                               \
-    ((cond) ? (void) 0 : __assert(__FILE__, line, #cond))
 
 static HSD_JObj* get_jobj_inline(float phi_f0)
 {
@@ -845,7 +849,7 @@ Ground_GObj* Ground_GetStageGObj(int map_id)
 
     grMaterial_801C95C4(gobj);
     archive = grDatFiles_801C6324();
-    assert_line(0x54E, archive);
+    HSD_ASSERT(1358, archive);
 
     if (map_id < archive->unk4->unkC) {
         archive = grDatFiles_801C6330(map_id);
@@ -1061,12 +1065,16 @@ inline HSD_FogDesc* foo(void)
 {
     StageCallbacks* phi_r29;
     StageCallbacks* temp_r29;
+    UnkArchiveStruct* archive;
     int temp_r30;
+    int stage_id;
     int i;
 
     grDatFiles_801C6324();
-    temp_r30 = grDatFiles_801C6324()->unk4->unkC;
-    temp_r29 = Ground_803DFEDC[stage_info.internal_stage_id]->callbacks;
+    archive = grDatFiles_801C6324();
+    stage_id = stage_info.internal_stage_id;
+    temp_r29 = Ground_803DFEDC[stage_id]->callbacks;
+    temp_r30 = archive->unk4->unkC;
     grDatFiles_801C6324();
     for (i = 0; i < temp_r30; i++) {
         phi_r29 = &temp_r29[i];
@@ -1097,7 +1105,7 @@ void Ground_801C1E94(void)
         if (temp_r3 != NULL) {
             phi_f1 = temp_r3->x0;
         } else {
-            phi_f1 = 1;
+            phi_f1 = 1.0F;
         }
         temp_r29_2->start *= phi_f1;
         temp_r29_2->end *= phi_f1;
@@ -1146,11 +1154,111 @@ f32 Ground_801C20D0(void)
     return stage_info.cam_info.cam_vertical_tilt;
 }
 
-/// @todo attempt decomp once param types are known
-char lightset[9] = "lightset";
-char plightset[10] = "*lightset";
+typedef struct LightOverrideEntry {
+    /* 0x0 */ HSD_LightDesc* desc;
+    /* 0x4 */ u8 a : 1;
+    /* 0x4 */ u8 b : 1;
+    /* 0x4 */ u8 c : 1;
+    /* 0x4 */ u8 _ : 5;
+    /* 0x5 */ u8 _pad[3];
+} LightOverrideEntry;
 
-/// #Ground_801C20E0
+LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lightset)
+{
+    LightList** out;
+    LightList** clean;
+    LightOverrideEntry* arr;
+    UnkStageDat* dat;
+    HSD_LightDesc* desc;
+    s32 count;
+    s32 i;
+    bool found;
+    LightList** walker;
+    s32 b6, b7, b5;
+    bool matched;
+
+    HSD_ASSERT(1907, lightset);
+    HSD_ASSERT(1908, *lightset);
+
+    walker = lightset;
+    matched = 0;
+    while (*walker != NULL) {
+        dat = archive->unk4;
+        desc = (*walker)->desc;
+        count = dat->unk1C;
+        if (count != 0) {
+            for (i = 0; i < count; i++) {
+                arr = dat->unk18;
+                if (arr[i].desc == desc) {
+                    found = true;
+                    b6 = arr[i].b;
+                    b7 = arr[i].a;
+                    b5 = arr[i].c;
+                    goto search1_done;
+                }
+            }
+        }
+        found = false;
+    search1_done:
+        if (found != 0 && (b6 != 0 || b7 != 0 || b5 != 0)) {
+            matched = 1;
+            break;
+        }
+        walker++;
+    }
+
+    if (matched == 0) {
+        return lightset;
+    }
+
+    out = lightset;
+    while (*out != NULL) {
+        desc = *(HSD_LightDesc**) *out;
+        if (desc->flags & 3) {
+            dat = archive->unk4;
+            count = dat->unk1C;
+            if (count != 0) {
+                for (i = 0; i < count; i++) {
+                    arr = dat->unk18;
+                    if (arr[i].desc == desc) {
+                        found = true;
+                        b6 = arr[i].b;
+                        b7 = arr[i].a;
+                        b5 = arr[i].c;
+                        goto search2_done;
+                    }
+                }
+            }
+            found = false;
+        search2_done:
+            if (found == 0 || (b6 == 0 && b7 == 0 && b5 == 0)) {
+                clean = out;
+                while ((clean[0] = clean[1]) != NULL) {
+                    clean++;
+                }
+                out--;
+            } else {
+                if (b6) {
+                    desc->flags |= 4;
+                } else {
+                    desc->flags &= ~4;
+                }
+                if (b7) {
+                    (*(HSD_LightDesc**) *out)->flags |= 8;
+                } else {
+                    (*(HSD_LightDesc**) *out)->flags &= ~8;
+                }
+                if (b5) {
+                    (*(HSD_LightDesc**) *out)->flags |= 0x400;
+                } else {
+                    (*(HSD_LightDesc**) *out)->flags &= ~0x400;
+                }
+            }
+        }
+        out++;
+    }
+    return lightset;
+}
 
 void Ground_801C2374(HSD_LObj* lobj)
 {
@@ -1181,9 +1289,7 @@ void Ground_801C2374(HSD_LObj* lobj)
 HSD_Spline* Ground_801C247C(s32 arg0, s32 arg1)
 {
     UnkArchiveStruct* archive = grDatFiles_801C6330(arg0);
-    if (archive == NULL) {
-        __assert(__FILE__, 0x7E1, Ground_804D44F8);
-    }
+    HSD_ASSERT(2017, archive);
     if (archive->unk4 != NULL && arg1 < archive->unk4->unk14) {
         return archive->unk4->unk10[arg1];
     } else {
@@ -1347,11 +1453,70 @@ static char msg1[] =
     "             check StageParam.csv or StageItem.csv, stdata.c\n";
 static char msg2[] = " stageid=%d\n";
 
-/// #Ground_801C28CC
-
-u8* Ground_801C2AD8(void)
+void Ground_801C28CC(void* arg0, s32 arg1)
 {
-    return stage_info.xA0;
+    UnkBgmStruct* bgm = stage_info.param->xB0;
+    s32 count = stage_info.param->xB4;
+    s32 i;
+
+    PAD_STACK(16);
+
+    for (i = 0; i < count; i++) {
+        if (bgm->x0 == arg1) {
+            UnkBgmStruct* b = bgm;
+            s32* out = (s32*) arg0;
+            s32 k;
+            s32 n = 0;
+            for (k = 0; k < 4; k++) {
+                out[0] = *(s16*) ((u8*) stage_info.param + n + 0x6A) *
+                         *(s16*) ((u8*) b + 0x1A);
+                out[1] = *(s16*) ((u8*) stage_info.param + n + 0x6C) *
+                         *(s16*) ((u8*) b + 0x1C);
+                out[2] = *(s16*) ((u8*) stage_info.param + n + 0x6E) *
+                         *(s16*) ((u8*) b + 0x1E);
+                out[3] = *(s16*) ((u8*) stage_info.param + n + 0x70) *
+                         *(s16*) ((u8*) b + 0x20);
+                out[4] = *(s16*) ((u8*) stage_info.param + n + 0x72) *
+                         *(s16*) ((u8*) b + 0x22);
+                out[5] = *(s16*) ((u8*) stage_info.param + n + 0x74) *
+                         *(s16*) ((u8*) b + 0x24);
+                out[6] = *(s16*) ((u8*) stage_info.param + n + 0x76) *
+                         *(s16*) ((u8*) b + 0x26);
+                out[7] = *(s16*) ((u8*) stage_info.param + n + 0x78) *
+                         *(s16*) ((u8*) b + 0x28);
+                b = (UnkBgmStruct*) ((u8*) b + 0x10);
+                out += 8;
+                n += 0x10;
+            }
+            if ((n >> 1) < 0x23) {
+                s16* bp = (s16*) ((u8*) b + 0x1A);
+                do {
+                    *out++ =
+                        *(s16*) ((u8*) stage_info.param + n + 0x6A) * *bp++;
+                    n += 2;
+                } while ((n >> 1) < 0x23);
+            }
+            return;
+        }
+        bgm++;
+    }
+
+    OSReport(msg0, __FILE__, 0x906, stage_info.internal_stage_id, arg1, count);
+    OSReport(msg1);
+    {
+        UnkBgmStruct* p = stage_info.param->xB0;
+        for (i = 0; i < count; i++) {
+            OSReport(msg2, p->x0);
+            p++;
+        }
+    }
+    while (1) {
+    }
+}
+
+s32* Ground_801C2AD8(void)
+{
+    return &stage_info.xA0;
 }
 
 f32 Ground_801C2AE8(s32 arg0)
@@ -1724,52 +1889,146 @@ u32 unknown[] = {
     0xFFFFFFFF, 0,          0,          0,
 };
 
-/// #void Ground_801C34AC
-
-void Ground_801C36F4(int map_id, HSD_JObj* root, UNK_T joint)
+void Ground_801C34AC(s32 map_id, HSD_JObj* root, struct HSD_Joint* joint)
 {
-    HSD_JObj* phi_r6;
-    UnkStageDat* temp_r3_2;
+    HSD_JObj* jobj;
+    StageInfo* stageinfo;
+    UnkStageDat* stage_dat;
     UnkArchiveStruct* archive;
-    int temp_r4_2;
+    int entry_count;
     struct {
-        void* x0;
-        u8 x4_pad[0x8];
-    }* phi_r3;
+        void* joint;
+        s16* pairs;
+        s32 pair_count;
+    }* entry;
+    int count;
+    s16* pair;
+    int prev_index;
+    int jobj_index;
+    int target;
     int i;
-    u32 unused[4];
+    int j;
 
+    jobj = root;
+    prev_index = -1;
     archive = grDatFiles_801C6330(map_id);
     if (archive == NULL) {
-        __assert(__FILE__, 2936, "archive");
+        return;
     }
     if (root == NULL || joint == NULL) {
         OSReport("%s:%d:Error (root=%08x joint=%08x)\n", __FILE__, __FILE__,
                  root, joint);
         return;
     }
-    temp_r3_2 = archive->unk4;
-    temp_r4_2 = temp_r3_2->unk4;
-    if (temp_r4_2 == 0) {
+    stage_dat = archive->unk4;
+    entry_count = stage_dat->unk4;
+    if (entry_count == 0) {
         return;
     }
-    phi_r3 = temp_r3_2->unk0;
-    for (i = 0; true; i++) {
-        if (i >= temp_r4_2) {
-            return;
-        }
-        if (phi_r3[i].x0 == joint) {
+    entry = stage_dat->unk0;
+    for (i = 0; i < entry_count; i++, entry++) {
+        if (entry->joint == joint) {
             break;
         }
     }
-
-    for (i = 0; i < 0x57 * 3; i++) {
-        phi_r6 = stage_info.x280[i];
-        if (phi_r6 != NULL) {
-            while (phi_r6->parent != NULL) {
-                phi_r6 = phi_r6->parent;
+    if (i >= entry_count) {
+        return;
+    }
+    count = entry->pair_count;
+    stageinfo = &stage_info;
+    pair = entry->pairs;
+    if (count <= 0) {
+        return;
+    }
+    for (j = count; j > 0; j--) {
+        target = pair[0];
+        if (prev_index > target || prev_index == -1) {
+            jobj = root;
+            jobj_index = 0;
+        } else {
+            jobj_index = prev_index;
+        }
+        while (jobj != NULL) {
+            if (jobj_index == target) {
+                break;
             }
-            if (phi_r6 == root) {
+            if (!(jobj->flags & JOBJ_INSTANCE) &&
+                HSD_JObjGetChild(jobj) != NULL)
+            {
+                jobj = HSD_JObjGetChild(jobj);
+            } else if (HSD_JObjGetNext(jobj) != NULL) {
+                jobj = HSD_JObjGetNext(jobj);
+            } else {
+                while (1) {
+                    if (HSD_JObjGetParent(jobj) == NULL) {
+                        jobj = NULL;
+                        break;
+                    }
+                    if (HSD_JObjGetNext(HSD_JObjGetParent(jobj)) != NULL) {
+                        jobj = HSD_JObjGetNext(HSD_JObjGetParent(jobj));
+                        break;
+                    }
+                    jobj = HSD_JObjGetParent(jobj);
+                }
+            }
+            jobj_index++;
+        }
+        prev_index = jobj_index;
+        stageinfo->x280[pair[1]] = jobj;
+        pair += 2;
+    }
+}
+
+void Ground_801C36F4(int map_id, HSD_JObj* root, UNK_T joint)
+{
+    HSD_JObj* parent;
+    HSD_JObj* jobj;
+    UnkStageDat* stage_dat;
+    UnkArchiveStruct* archive;
+    int entry_count;
+    struct {
+        void* joint;
+        u8 x4_pad[0x8];
+    }* entry;
+    int i;
+    u32 unused[4];
+
+    archive = grDatFiles_801C6330(map_id);
+    HSD_ASSERT(2936, archive);
+    if (root == NULL || joint == NULL) {
+        OSReport("%s:%d:Error (root=%08x joint=%08x)\n", __FILE__, __FILE__,
+                 root, joint);
+        return;
+    }
+    stage_dat = archive->unk4;
+    entry_count = stage_dat->unk4;
+    if (entry_count == 0) {
+        return;
+    }
+    i = 0;
+    entry = stage_dat->unk0;
+entry_loop:
+    if (i < entry_count) {
+        if (entry->joint == joint) {
+            goto entry_found;
+        }
+        goto entry_next;
+    }
+    return;
+entry_next:
+    entry++;
+    i++;
+    goto entry_loop;
+
+entry_found:
+    for (i = 0; i < 0x57 * 3; i++) {
+        jobj = stage_info.x280[i];
+        (void) jobj;
+        if (jobj != NULL) {
+            while ((parent = jobj->parent) != NULL) {
+                jobj = parent;
+            }
+            if (jobj == root) {
                 stage_info.x280[i] = NULL;
             }
         }
@@ -2346,46 +2605,69 @@ static LightList** Ground_801C466C_inline(void)
     return NULL;
 }
 
-float Ground_803E065C[] = { 0, 0, 0, 0 };
-float Ground_803E066C[] = { 0, 0.57, 0.57, 0.57, 0 };
-
-struct a {
-    UNK_T x0;
-    UNK_T x4;
-    int x8;
-    int xC;
-    UNK_T x10;
-    UNK_T x14;
-    UNK_T x18;
+/* 3E065C */ static HSD_LightAnim Ground_803E065C[] = { 0 };
+/* 3E066C */ static HSD_WObjDesc Ground_803E066C = {
+    NULL,
+    { 0.57f, 0.57f, 0.57f },
+    NULL,
 };
 
-float Ground_804D4508 = 16;
-
-struct a Ground_803E0680 = {
-    NULL, NULL, 0xD0000, -1, &Ground_803E066C, NULL, &Ground_804D4508,
+/* 4D4500 */ static HSD_LightAnim* Ground_804D4500[] = {
+    Ground_803E065C,
+    NULL,
 };
 
-UNK_T Ground_803E069C[] = { NULL, NULL, NULL, NULL };
+/* 4D4508 */ float Ground_804D4508 = 16.0f;
 
-struct a Ground_803E06AC = { NULL, NULL, 0x40000, -1, NULL, NULL, NULL };
+/* 3E0680 */ static HSD_LightDesc Ground_803E0680 = {
+    NULL,
+    NULL,
+    (1 << 0) | (1 << 2) | (1 << 3),
+    0,
+    { 0xFF, 0xFF, 0xFF, 0xFF },
+    &Ground_803E066C,
+    NULL,
+    &Ground_804D4508,
+};
 
-static LightList* Ground_803E06C8[3] = { 0 };
+/* 3E069C */ static HSD_LightAnim Ground_803E069C[] = { 0 };
+/* 3E06AC */ static HSD_LightDesc Ground_803E06AC = {
+    NULL, NULL, (1 << 2), 0, { 0xFF, 0xFF, 0xFF, 0xFF }, NULL, NULL, NULL
+};
+
+/* 4D450C */ static LightList Ground_804D450C = {
+    &Ground_803E0680,
+    Ground_804D4500,
+};
+/* 4D4514 */ static HSD_LightAnim* Ground_804D4514[] = {
+    Ground_803E069C,
+    NULL,
+};
+/* 4D451C */ static LightList Ground_804D451C = {
+    &Ground_803E06AC,
+    Ground_804D4514,
+};
+/* 3E06C8 */ static LightList* Ground_803E06C8[] = {
+    &Ground_804D451C,
+    &Ground_804D450C,
+    NULL,
+};
 
 void Ground_801C466C(void)
 {
     Vec3 sp10; /* compiler-managed */
     HSD_GObj* temp_r3;
     HSD_LObj* temp_r3_2;
-    HSD_LObj* var_r27;
     LightList** var_r27_2;
+    HSD_LObj* var_r27;
     HSD_LObj* var_r26_2;
     LightList** var_r28_2;
     LightList** var_r3;
     float var_f31;
     int temp_r28;
+    Vec3* sp10p;
 
-    var_r28_2 = Ground_801C466C_inline();
-    if (var_r28_2 == NULL) {
+    if ((var_r28_2 = Ground_801C466C_inline()) == NULL) {
         var_r28_2 = Ground_803E06C8;
     }
     temp_r3 = GObj_Create(0xD, 3, 0);
@@ -2408,18 +2690,19 @@ void Ground_801C466C(void)
     } else {
         var_f31 = 1.0F;
     }
+    sp10p = &sp10;
     while (var_r27 != NULL) {
         if (HSD_LObjGetPosition(var_r27, &sp10) != 0) {
             sp10.x *= var_f31;
             sp10.y *= var_f31;
             sp10.z *= var_f31;
-            HSD_LObjSetPosition(var_r27, &sp10);
+            HSD_LObjSetPosition(var_r27, sp10p);
         }
         if (HSD_LObjGetInterest(var_r27, &sp10) != 0) {
             sp10.x *= var_f31;
             sp10.y *= var_f31;
             sp10.z *= var_f31;
-            HSD_LObjSetInterest(var_r27, &sp10);
+            HSD_LObjSetInterest(var_r27, sp10p);
         }
         if (var_r27 == NULL) {
             var_r27 = NULL;
@@ -2647,20 +2930,6 @@ void Ground_801C4E70(HSD_JObj* arg0, HSD_JObj* arg1, HSD_JObj* arg2,
     stage_info.x16C = vec;
 }
 
-struct Node {
-    float* x0;
-    UNK_T x4;
-};
-
-struct Node Ground_804D4500 = { Ground_803E065C, NULL };
-
-SDATA UNK_T Ground_804D450C[] = { &Ground_803E0680, &Ground_804D4500 };
-SDATA UNK_T Ground_804D4514[] = { &Ground_803E069C, NULL };
-SDATA UNK_T Ground_804D451C[] = { &Ground_803E06AC, &Ground_804D4514 };
-
-SDATA char Ground_804D4524[] = "fog.h";
-SDATA char Ground_804D452C[] = "fog";
-
 static inline float vec_len(Vec3* v)
 {
     float x2 = v->x * v->x;
@@ -2669,17 +2938,23 @@ static inline float vec_len(Vec3* v)
     return sqrtf(x2 + y2 + z2);
 }
 
+/// @todo replace with fog.h inlines
+#define FOG_ASSERT(line, cond)                                                \
+    ((cond) ? (void) 0 : __assert("fog.h", line, #cond))
+
 void Ground_801C4FAC(HSD_CObj* cobj)
 {
-    Vec3 d;
+    HSD_Fog* fog;
+    float xz_inv_len;
+    float dx;
+    float dz;
     float dx2;
     float dy2;
     float dz2;
-    HSD_Fog* fog;
 
-    float phi_f1;
-    float phi_f2;
-    float temp_f3_2;
+    float xz_x_weight;
+    float xz_z_weight;
+    float dy;
     float phi_f31;
     float phi_f30;
 
@@ -2704,24 +2979,24 @@ void Ground_801C4FAC(HSD_CObj* cobj)
             sp44 = stage_info.x16C;
         }
         if (sp74.z < 0) {
-            temp_f3_2 = 1.0f / sqrtf((sp74.x * sp74.x) + (sp74.z * sp74.z));
-            phi_f1 = temp_f3_2 * fabsf(sp74.x);
-            phi_f2 = temp_f3_2 * fabsf(sp74.z);
-            sp50.x *= phi_f1;
-            sp50.y *= phi_f1;
-            sp50.z *= phi_f1;
+            xz_inv_len = 1.0f / sqrtf((sp74.x * sp74.x) + (sp74.z * sp74.z));
+            xz_x_weight = xz_inv_len * fabsf(sp74.x);
+            xz_z_weight = xz_inv_len * fabsf(sp74.z);
+            sp50.x *= xz_x_weight;
+            sp50.y *= xz_x_weight;
+            sp50.z *= xz_x_weight;
 
-            sp44.x *= phi_f1;
-            sp44.y *= phi_f1;
-            sp44.z *= phi_f1;
+            sp44.x *= xz_x_weight;
+            sp44.y *= xz_x_weight;
+            sp44.z *= xz_x_weight;
 
-            sp68.x *= phi_f2;
-            sp68.y *= phi_f2;
-            sp68.z *= phi_f2;
+            sp68.x *= xz_z_weight;
+            sp68.y *= xz_z_weight;
+            sp68.z *= xz_z_weight;
 
-            sp5C.x *= phi_f2;
-            sp5C.y *= phi_f2;
-            sp5C.z *= phi_f2;
+            sp5C.x *= xz_z_weight;
+            sp5C.y *= xz_z_weight;
+            sp5C.z *= xz_z_weight;
             PSVECAdd(&sp68, &sp50, &sp38);
             PSVECAdd(&sp5C, &sp44, &sp2C);
         } else {
@@ -2732,19 +3007,25 @@ void Ground_801C4FAC(HSD_CObj* cobj)
         if (stage_info.x12C != NULL) {
             fog = GET_FOG(stage_info.x12C);
             if (fog != NULL) {
-                d.x = sp38.x - sp20.x;
-                d.y = sp38.y - sp20.y;
-                d.z = sp38.z - sp20.z;
-                dx2 = d.x * d.x;
-                dy2 = d.y * d.y;
-                dz2 = d.z * d.z;
+                dx = sp38.x;
+                dy = sp38.y;
+                dz = sp38.z;
+                dx -= sp20.x;
+                dy -= sp20.y;
+                dz -= sp20.z;
+                dx2 = dx * dx;
+                dy2 = dy * dy;
+                dz2 = dz * dz;
                 phi_f31 = sqrtf(dx2 + dy2 + dz2);
-                d.x = sp2C.x - sp20.x;
-                d.y = sp2C.y - sp20.y;
-                d.z = sp2C.z - sp20.z;
-                dx2 = d.x * d.x;
-                dy2 = d.y * d.y;
-                dz2 = d.z * d.z;
+                dx = sp2C.x;
+                dy = sp2C.y;
+                dz = sp2C.z;
+                dx -= sp20.x;
+                dy -= sp20.y;
+                dz -= sp20.z;
+                dx2 = dx * dx;
+                dy2 = dy * dy;
+                dz2 = dz * dz;
                 phi_f30 = sqrtf(dx2 + dy2 + dz2);
                 if (phi_f30 < 10) {
                     phi_f30 = 10;
@@ -2755,19 +3036,18 @@ void Ground_801C4FAC(HSD_CObj* cobj)
                 if (phi_f31 > phi_f30) {
                     phi_f30 = 1.0f + phi_f31;
                 }
-                if (fog == NULL) {
-                    __assert("fog.h", 0xB4, "fog");
-                }
-                fog->start = phi_f31;
 
-                if (fog == NULL) {
-                    __assert("fog.h", 0xBF, "fog");
-                }
+                FOG_ASSERT(180, fog);
+                fog->start = phi_f31;
+                FOG_ASSERT(191, fog);
+
                 fog->end = phi_f30;
             }
         }
     }
 }
+
+#undef FOG_ASSERT
 
 void Ground_801C53EC(u32 arg0)
 {
@@ -2882,7 +3162,7 @@ s32 Ground_801C5764(void)
     return stage_info.x6D8;
 }
 
-s16 Ground_801C5774(void)
+s32 Ground_801C5774(void)
 {
     return stage_info.x6DC;
 }
@@ -2927,18 +3207,24 @@ s32 Ground_801C5840(void)
     return stage_info.x6E4[i];
 }
 
+#pragma push
+#pragma global_optimizer off
+/// @todo Why is @c global_optimizer necessary?
 void Ground_801C5878(void)
 {
     PAD_STACK(8);
     tyDisplay_8031C2CC();
     if (gm_8016B498() != 0) {
-        int temp_r30 = tyDisplay_8031C2EC();
-        un_8031C454(temp_r30);
-        stage_info.x6E4[0] = temp_r30;
+        StageInfo* stageinfo = &stage_info;
+        int display_id;
+        display_id = tyDisplay_8031C2EC();
+        un_8031C454(display_id);
+        stageinfo->x6E4[0] = display_id;
     } else {
         stage_info.x6E4[0] = -1;
     }
 }
+#pragma pop
 
 Item_GObj* Ground_801C58E0(s32 arg0, s32 arg1)
 {
@@ -3045,3 +3331,5 @@ void Ground_801C5AEC(Vec3* v, Vec3* arg1, Vec3* arg2, Vec3* arg3)
         v->z = 0;
     }
 }
+
+static int unused_ints[] = { 1, 1, 0, 0, 0, 180, 0, 0, 0 };
