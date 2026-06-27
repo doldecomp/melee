@@ -2290,11 +2290,11 @@ found:
     return false;
 }
 
-int gm_80164504(u16 stage_id)
+void gm_80164504(u16 stage_id)
 {
     u16* stage_unlock_mask;
-    u8 internal_id;
     s32 i;
+    u8 internal_id;
     u8 unlock_idx;
     u8 notify_val;
 
