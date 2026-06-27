@@ -290,7 +290,7 @@ void un_80312904(void* arg0, s8 arg1)
     text->font_size.x = 0.028f;
     text->font_size.y = 0.029f;
     row->text0->default_kerning = 1;
-    HSD_SisLib_803A6368(row->text0, un_80308354(row->idx));
+    HSD_SisLib_803A6368(row->text0, un_803082F8(row->idx));
 
     text = row->text1;
     text->pos_x = 14.7f + f30;

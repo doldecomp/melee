@@ -2217,15 +2217,15 @@ void un_80308250(u8* arg0, s32 arg1, s32 arg2)
     }
 }
 
-void un_803082F8(s16 idx)
+s32 un_803082F8(s16 idx)
 {
-    un_803063D4(un_80308354(idx), 2, 0x128);
+    return un_803063D4((s16) un_80308354(idx), 2, 0x128);
 }
 void un_80308328(s32 arg0)
 {
     un_803063D4((s16) arg0, 2, 0x128);
 }
-s16 un_80308354(s16 idx)
+s32 un_80308354(s16 idx)
 {
     s32 i;
     s32 target;

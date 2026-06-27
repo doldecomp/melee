@@ -493,9 +493,7 @@ void dropcallback(void* dropped)
     for (i = 0; i < node->voice_count; i++) {
         AXVPB* v = node->voice[i];
         if (v != voice) {
-            int idx = HSD_Synth_804D7720;
-            HSD_Synth_804D7720 = idx + 1;
-            HSD_Synth_804C28E0[idx] = v;
+            HSD_Synth_804C28E0[HSD_Synth_804D7720++] = v;
         }
         hsd_SynthSFXNodes[node->voice[i]->index].x0 = 0;
     }

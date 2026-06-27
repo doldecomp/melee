@@ -2443,6 +2443,11 @@ void gm_80173DE4(MatchEnd* arg0)
     }
 }
 
+static inline bool gm_80173EEC_inline(u8 arg0, int arg1)
+{
+    return gm_80160474(arg0, arg1);
+}
+
 void gm_80173EEC(void)
 {
     int i;
@@ -2453,32 +2458,32 @@ void gm_80173EEC(void)
         temp_r29 = &gmMainLib_8015EDBC()->x18[(u32) i];
         if (*temp_r29 >= 100) {
             ckind = gm_8016400C(i);
-            fn_80172C78(gm_80160474(ckind, GM_CLASSIC));
+            fn_80172C78(gm_80173EEC_inline(ckind, GM_CLASSIC));
             if (ckind == CKIND_ZELDA) {
-                fn_80172C78(gm_80160474(CKIND_SEAK, GM_CLASSIC));
+                fn_80172C78(gm_80173EEC_inline(CKIND_SEAK, GM_CLASSIC));
             }
             if (ckind == CKIND_SEAK) {
-                fn_80172C78(gm_80160474(CKIND_ZELDA, GM_CLASSIC));
+                fn_80172C78(gm_80173EEC_inline(CKIND_ZELDA, GM_CLASSIC));
             }
         }
         if (*temp_r29 >= 200) {
             ckind = gm_8016400C(i);
-            fn_80172C78(gm_80160474(ckind, GM_ADVENTURE));
+            fn_80172C78(gm_80173EEC_inline(ckind, GM_ADVENTURE));
             if (ckind == CKIND_ZELDA) {
-                fn_80172C78(gm_80160474(CKIND_SEAK, GM_ADVENTURE));
+                fn_80172C78(gm_80173EEC_inline(CKIND_SEAK, GM_ADVENTURE));
             }
             if (ckind == CKIND_SEAK) {
-                fn_80172C78(gm_80160474(CKIND_ZELDA, GM_ADVENTURE));
+                fn_80172C78(gm_80173EEC_inline(CKIND_ZELDA, GM_ADVENTURE));
             }
         }
         if (*temp_r29 >= 300) {
             ckind = gm_8016400C(i);
-            fn_80172C78(gm_80160474(ckind, GM_ALLSTAR));
+            fn_80172C78(gm_80173EEC_inline(ckind, GM_ALLSTAR));
             if (ckind == CKIND_ZELDA) {
-                fn_80172C78(gm_80160474(CKIND_SEAK, GM_ALLSTAR));
+                fn_80172C78(gm_80173EEC_inline(CKIND_SEAK, GM_ALLSTAR));
             }
             if (ckind == CKIND_SEAK) {
-                fn_80172C78(gm_80160474(CKIND_ZELDA, GM_ALLSTAR));
+                fn_80172C78(gm_80173EEC_inline(CKIND_ZELDA, GM_ALLSTAR));
             }
         }
     }
