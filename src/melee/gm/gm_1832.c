@@ -45,12 +45,12 @@
 #include <melee/it/it_266F.h>
 #include <melee/it/item.h>
 #include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
 #include <melee/lb/lb_0195.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbbgflash.h>
 #include <melee/lb/lblanguage.h>
+#include <melee/lb/lbspdisplay.h>
 #include <melee/mn/mnname.h>
 #include <melee/mn/types.h>
 #include <melee/mp/mpcoll.h>

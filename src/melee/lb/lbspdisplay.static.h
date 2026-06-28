@@ -1,7 +1,7 @@
 #ifndef __GALE01_00F9F8
 #define __GALE01_00F9F8
 
-#include "lb_00F9.h" // IWYU pragma: export
+#include "lbspdisplay.h" // IWYU pragma: export
 #include "platform.h"
 
 #include <placeholder.h>

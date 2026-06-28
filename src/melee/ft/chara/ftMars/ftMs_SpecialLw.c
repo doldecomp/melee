@@ -20,7 +20,7 @@
 #include "lb/forward.h"
 
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>

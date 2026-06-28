@@ -19,8 +19,8 @@
 #include "if/ifstatus.h"
 #include "if/types.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
+#include "lb/lbspdisplay.h"
 #include "lb/lbvector.h"
 #include "pl/player.h"
 

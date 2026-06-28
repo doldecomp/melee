@@ -60,14 +60,14 @@ void gm_801BF9A8(GameScene* data)
 {
     struct sceneData* scene_data = gm_801A4284(data);
 
-    if (!un_803048C0(TROPHY_PIKMIN)) {
+    if (!Toy_803048C0(TROPHY_PIKMIN)) {
         if (!lb_8001C2D8(0, "01",
                          lbLang_GetLanguageSetting() == LANG_JP ? "GPIJ"
                                                                 : "GPIE",
                          "Pikmin dataFile"))
         {
-            un_803124BC();
-            Trophy_SetUnlockState(TROPHY_PIKMIN, true);
+            Toy_803124BC();
+            Toy_SetUnlockState(TROPHY_PIKMIN, true);
         }
     }
 

@@ -11,9 +11,9 @@
 #include "gr/stage.h"
 #include "it/item.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
+#include "lb/lbspdisplay.h"
 #include "mn/mnmain.h"
 #include "mp/mpcoll.h"
 #include "pl/player.h"
@@ -357,8 +357,8 @@ void gm_801A6EE4(void)
     PAD_STACK(4);
 
     gm_801A4B90();
-    un_803124BC();
-    un_803102D0();
+    Toy_803124BC();
+    Toy_803102D0();
     switch (gm_801A4310()) {
     case GM_CLASSIC_GOVER:
         var_r29 = GM_CLASSIC;
@@ -514,17 +514,17 @@ void gm_801A7070_OnEnter(void* unused)
 
     temp_r29 = gm_801A659C(gm_801BEFB0());
     var_r27_2 = HSD_JObjGetChild(temp_r3_7);
-    temp_f31_2 = -un_803060BC(temp_r29, 0);
+    temp_f31_2 = -Toy_803060BC(temp_r29, 0);
     HSD_JObjSetTranslateXWithMtxDirty(var_r27_2, temp_f31_2);
-    temp_f31_3 = -un_803060BC(temp_r29, 1);
+    temp_f31_3 = -Toy_803060BC(temp_r29, 1);
     HSD_JObjSetTranslateYWithMtxDirty(var_r27_2, temp_f31_3);
-    temp_f31_4 = -un_803060BC(temp_r29, 2);
+    temp_f31_4 = -Toy_803060BC(temp_r29, 2);
     HSD_JObjSetTranslateZWithMtxDirty(var_r27_2, temp_f31_4);
 
-    temp_f31_5 = -(0.017453292f * un_803060BC(temp_r29, 5));
+    temp_f31_5 = -(0.017453292f * Toy_803060BC(temp_r29, 5));
     HSD_JObjSetRotationYWithMtxDirty(var_r27_2, temp_f31_5);
-    temp_f31_6 = 1.0f / un_803060BC(temp_r29, 3);
-    temp_f31_7 = un_803060BC(temp_r29, 4);
+    temp_f31_6 = 1.0f / Toy_803060BC(temp_r29, 3);
+    temp_f31_7 = Toy_803060BC(temp_r29, 4);
     temp_f31_7 = temp_f31_7 * temp_f31_6;
     HSD_JObjSetScaleXWithMtxDirty(var_r27_2, temp_f31_7);
     HSD_JObjSetScaleYWithMtxDirty(var_r27_2, temp_f31_7);

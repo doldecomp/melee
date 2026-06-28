@@ -4,10 +4,10 @@
 
 #include "gm/gm_unsplit.h"
 #include "gm/gmmain_lib.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lblanguage.h"
+#include "lb/lbspdisplay.h"
 #include "sc/types.h"
 #include "ty/toy.h"
 #include "ty/tylist.h"
@@ -283,7 +283,7 @@ found:
         un_802FE3F8(a, 2, (short*) &un_803F9D48.x6, (short*) &un_803F9D48.x8);
         v_x8 = un_803F9D48.x8;
         HSD_SisLib_803A6530(2, 0x4A, un_803F9D48.x6);
-        HSD_SisLib_803A660C(2, 0x4A, un_803063D4(b, 0x4E, 0x174));
+        HSD_SisLib_803A660C(2, 0x4A, Toy_803063D4(b, 0x4E, 0x174));
         HSD_SisLib_803A660C(2, 0x4A, v_x8);
         HSD_SisLib_803A6368(un_803F9D48.x20, 0x4A);
     } else {
@@ -311,7 +311,7 @@ void un_802FEBE0_OnEnter(void* arg0_)
     int arg0x4;
     int arg0x0;
 
-    un_803124BC();
+    Toy_803124BC();
     un_803F9D48.x28 = arg0;
     un_803F9D48.x2C = arg0->x8;
     un_803F9D48.x3 = HSD_Randi(3);

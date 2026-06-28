@@ -175,7 +175,7 @@ void gm_801BFCFC(GameScene* arg0)
     var_r30 = 0;
     memzero(gm_8049E558, 0x42);
     memzero(&gm_8049E558[0x44], 0x125);
-    un_803124BC();
+    Toy_803124BC();
 
     /// @remarks these for loops were converted from the do-whiles with very
     /// little scrutiny... take them with a grain of salt
@@ -200,9 +200,9 @@ void gm_801BFCFC(GameScene* arg0)
                 temp_r29 = gmMainLib_8015D970((s32) var_r25_2);
                 *temp_r29 = lbTime_8000AFBC();
                 gmMainLib_8015DA40(var_r25_2);
-                Trophy_SetUnlockState((s32) (s16) var_r25_2, 1);
+                Toy_SetUnlockState((s32) (s16) var_r25_2, 1);
             }
-            *var_r28_2 = un_803048C0((s32) var_r25_2);
+            *var_r28_2 = Toy_803048C0((s32) var_r25_2);
             var_r31 = (void**) gm_801BFC60(
                 0x3E, var_r30, var_r25_2, *gmMainLib_8015D970((s32) var_r25_2),
                 var_r31);
@@ -226,15 +226,15 @@ void gm_801BFCFC(GameScene* arg0)
     }
 
     for (var_r27_2 = 0; var_r27_2 < 0x125; var_r27_2++) {
-        if ((((s32) *var_r26 < un_803048C0(var_r27_2)) ||
-             (un_803048C0(var_r27_2) == 0)) &&
+        if ((((s32) *var_r26 < Toy_803048C0(var_r27_2)) ||
+             (Toy_803048C0(var_r27_2) == 0)) &&
             (gmMainLib_8015DA1C((u32) var_r27_2) != 0))
         {
             if (gmMainLib_8015DA90((u32) var_r27_2) == 0) {
                 temp_r29_2 = gmMainLib_8015D970(var_r27_2);
                 *temp_r29_2 = lbTime_8000AFBC();
                 gmMainLib_8015DA40((u32) var_r27_2);
-                Trophy_SetUnlockState((s32) (s16) var_r27_2, 1);
+                Toy_SetUnlockState((s32) (s16) var_r27_2, 1);
             }
             var_r31 =
                 (void**) gm_801BFC60(0x3E, var_r30, var_r27_2,

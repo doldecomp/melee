@@ -294,7 +294,8 @@ Fighter_CostumeStrings ftLk_Init_CostumeStrings[] = {
     { ftLk_Init_803C81E0, ftLk_Init_803C81EC, ftLk_Init_803C8204 },
 };
 
-int ftLk_Init_803C82EC[31] = { 0 };
+/* 3C82EC */ UnkCostumeStruct ftLk_Init_803C82EC = { 0 };
+/* 3C8304 */ static int pad[25] = { 0 };
 
 bool ftLk_Init_BoomerangExists(HSD_GObj* gobj)
 {

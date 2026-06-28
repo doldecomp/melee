@@ -5,15 +5,16 @@
 
 #include "gm/gm_1BA8.h"
 #include "gm/gmregtyfall.h"
-#include "if/textlib.h"
+#include "gm/inlines.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbbgflash.h"
 #include "lb/lbmthp.h"
+#include "lb/lbspdisplay.h"
 #include "sc/types.h"
 #include "ty/toy.h"
 #include "ty/tydisplay.h"
+#include "ty/types.h"
 
 #include <baselib/archive.h>
 #include <baselib/cobj.h>
@@ -22,7 +23,6 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
@@ -83,13 +83,13 @@ void gm_801A8114(HSD_JObj* arg0, int arg1)
         transJobj = arg0->child;
     }
 
-    HSD_JObjSetTranslateX(transJobj, un_803060BC(arg1, 0));
-    HSD_JObjSetTranslateY(transJobj, un_803060BC(arg1, 1));
-    HSD_JObjSetTranslateZ(transJobj, un_803060BC(arg1, 2));
+    HSD_JObjSetTranslateX(transJobj, Toy_803060BC(arg1, 0));
+    HSD_JObjSetTranslateY(transJobj, Toy_803060BC(arg1, 1));
+    HSD_JObjSetTranslateZ(transJobj, Toy_803060BC(arg1, 2));
 
-    HSD_JObjSetRotationY(transJobj, 0.017453292f * un_803060BC(arg1, 5));
+    HSD_JObjSetRotationY(transJobj, 0.017453292f * Toy_803060BC(arg1, 5));
 
-    scale = un_803060BC(arg1, 3) * (1.0F / un_803060BC(arg1, 4));
+    scale = Toy_803060BC(arg1, 3) * (1.0F / Toy_803060BC(arg1, 4));
     HSD_ASSERT(363, transJobj);
 
     HSD_JObjSetScaleX(transJobj, scale);
@@ -222,7 +222,7 @@ void gm_801A8D54(s32* arg0)
     for (i = 0; i < 0x1A; i++) {
         if ((u32) (i - 0x12) <= 1U) {
             gm_801A4310();
-            if ((un_803048C0(gm_801A659C(i)) ? true : false) &&
+            if ((Toy_803048C0(gm_801A659C(i)) ? true : false) &&
                 gm_801BEFB0() != CKIND_ZELDA && gm_801BEFB0() != CKIND_SEAK)
             {
                 sp84[count] = i;
@@ -230,7 +230,7 @@ void gm_801A8D54(s32* arg0)
             }
         } else {
             gm_801A4310();
-            if ((un_803048C0(gm_801A659C(i)) ? true : false) &&
+            if ((Toy_803048C0(gm_801A659C(i)) ? true : false) &&
                 i != gm_801BEFB0())
             {
                 sp84[count] = i;
@@ -277,11 +277,11 @@ void gm_801A9094(void)
     i = 0x19;
     do {
         if (sp8C[i] != 0x1A) {
-            dsp = un_8031B9DC(gm_801A659C(sp8C[i]));
+            dsp = tyDisplay_8031B9DC(gm_801A659C(sp8C[i]));
             joint = HSD_ArchiveGetPublicAddress(
-                gm_804D679C, (const char*) un_8031BB34((s8) dsp->x04));
-            matanim = HSD_ArchiveGetPublicAddress(gm_804D679C,
-                                                  un_8031BB94((s8) dsp->x04));
+                gm_804D679C, (const char*) tyDisplay_8031BB34((s8) dsp->x04));
+            matanim = HSD_ArchiveGetPublicAddress(
+                gm_804D679C, tyDisplay_8031BB94((s8) dsp->x04));
             bg_joint = HSD_ArchiveGetPublicAddress(gm_804D679C,
                                                    "ToyDspStand_Top_joint");
             gobj = GObj_Create(0xE, 0xF, 0);
@@ -380,7 +380,7 @@ void gm_801A9630(void)
 
     for (i = 0; i < 0x1A; i++) {
         gm_801A4310();
-        if (un_803048C0(gm_801A659C(i)) ? true : false) {
+        if (Toy_803048C0(gm_801A659C(i)) ? true : false) {
             gm_80480AD0[i] = HSD_Randi(0x2710);
         } else {
             gm_80480AD0[i] = 0;

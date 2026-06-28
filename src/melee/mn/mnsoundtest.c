@@ -4,8 +4,8 @@
 
 #include "gm/gm_unsplit.h"
 #include "gm/gmmain_lib.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
+#include "lb/lbspdisplay.h"
 
 #include "mn/forward.h"
 

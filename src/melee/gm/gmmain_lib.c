@@ -1272,12 +1272,12 @@ void gmMainLib_8015F600(int arg0, int arg1)
         } while (j < 25);
 
         memzero(&gmMainLib_804D3EE0->thing.x1CD0, 0x25C);
-        un_80311960();
+        Toy_80311960();
 
         if (arg1 == 0) {
-            un_803124BC();
-            Trophy_SetUnlockState((s32) (s16) un_80305058(2, 0x63, 0, 100.0f),
-                                  1);
+            Toy_803124BC();
+            Toy_SetUnlockState((s32) (s16) Toy_80305058(2, 0x63, 0, 100.0f),
+                               1);
         }
 
         gmMainLib_804D3EE0->thing.x1CB0 =
@@ -1299,7 +1299,7 @@ void gmMainLib_8015F600(int arg0, int arg1)
         gm_801623FC(0x32);
         gm_IncrementPowerCount();
 
-        if (arg1 == 0 && un_803048C0(0xA5) > 0 && gm_80164430(0x14U) == 0) {
+        if (arg1 == 0 && Toy_803048C0(0xA5) > 0 && gm_80164430(0x14U) == 0) {
             gm_80164504(0x14U);
         }
     } else {
@@ -1381,7 +1381,7 @@ void gmMainLib_8015FB68(void)
     gm_801647D0();
     gm_801729EC();
     gm_80174238();
-    un_80311960();
+    Toy_80311960();
 }
 
 #pragma push

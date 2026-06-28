@@ -12,8 +12,8 @@
 #include "if/ifstatus.h"
 #include "it/items/itarwinglaser.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
+#include "lb/lbspdisplay.h"
 #include "mp/mplib.h"
 #include "pl/player.h"
 

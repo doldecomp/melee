@@ -17,7 +17,7 @@
 #include "ftZelda/types.h"
 #include "it/items/itzeldadinfire.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
 #include <dolphin/mtx.h>
 

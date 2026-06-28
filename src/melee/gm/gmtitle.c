@@ -13,11 +13,11 @@
 #include <melee/db/db.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/types.h>
-#include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbmthp.h>
+#include <melee/lb/lbspdisplay.h>
 #include <melee/lb/lbtime.h>
 #include <melee/mn/mnmain.h>
 #include <melee/sc/types.h>

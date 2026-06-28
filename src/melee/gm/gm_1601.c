@@ -21,9 +21,9 @@
 #include "if/ifnametag.h"
 #include "if/ifstatus.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lblanguage.h"
+#include "lb/lbspdisplay.h"
 #include "lb/lbtime.h"
 #include "mn/mnstagesel.h"
 #include "pl/player.h"
@@ -526,7 +526,7 @@ char* gm_801604DC(CharacterKind ckind, GameModeKind scene)
         var_r3 = lbl_803B7A00[ckind];
         break;
     }
-    return un_8030813C(var_r3, scene) + 4;
+    return Toy_8030813C(var_r3, scene) + 4;
 }
 
 char* gm_80160564(CharacterKind ckind, GameModeKind scene)
@@ -546,7 +546,7 @@ char* gm_80160564(CharacterKind ckind, GameModeKind scene)
         var_r3 = lbl_803B7A00[ckind];
         break;
     }
-    return un_8030813C(var_r3, scene) + 0x24;
+    return Toy_8030813C(var_r3, scene) + 0x24;
 }
 
 u8 fn_801605EC(s32 arg0)

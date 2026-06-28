@@ -16,11 +16,11 @@
 #include "gm/gm_16F1.h"
 #include "gm/gm_1A3F.h"
 #include "gm/gmmain_lib.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbcardgame.h"
 #include "lb/lblanguage.h"
+#include "lb/lbspdisplay.h"
 #include "mn/inlines.h"
 #include "mn/mnmain.h"
 #include "mn/mnmainrule.h"
@@ -458,7 +458,7 @@ void fn_8024F318(HSD_GObj* gobj)
                 mn_8022F3D8(sp50, 0xFFU, (enum _HSD_TypeMask) 0x480);
                 HSD_JObjAnimAll(sp50);
                 case_user_data->x3[4] = 1;
-                un_80311960();
+                Toy_80311960();
                 gmMainLib_8015F4BC();
                 gm_80174238();
                 gm_801729EC();

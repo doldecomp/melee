@@ -21,7 +21,7 @@
 #include "it/itspawn.h"
 #include "it/types.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 

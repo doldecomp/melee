@@ -23,11 +23,11 @@
 #include "gm/gmpause.h"
 #include "gm/types.h"
 #include "if/ifall.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbcardnew.h"
 #include "lb/lbsnap.h"
+#include "lb/lbspdisplay.h"
 #include "mn/mnmain.h"
 #include "sc/types.h"
 

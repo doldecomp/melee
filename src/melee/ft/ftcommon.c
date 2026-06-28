@@ -37,7 +37,7 @@
 #include "it/items/itfflowerflame.h"
 #include "it/items/itrabbitc.h"
 #include "it/items/itsword.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
 #include "mp/forward.h"
 

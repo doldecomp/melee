@@ -14,7 +14,7 @@
 
 #include "lb/forward.h"
 
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
 typedef struct BgFlashState {
     u8 active : 1;
@@ -55,8 +55,8 @@ extern BgFlashData lbl_80433658;
 #include <baselib/objalloc.h>
 #include <baselib/particle.h>
 #include <baselib/quatlib.h>
-#include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbarchive.h>
+#include <melee/lb/lbspdisplay.h>
 #include <melee/lb/lbvector.h>
 #include <MSL/math.h>
 #include <MSL/trigf.h>

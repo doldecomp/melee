@@ -10,7 +10,7 @@
 #include "it/item.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 #include "MSL/math.h"
 
 #include <baselib/random.h>

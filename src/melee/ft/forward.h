@@ -43,6 +43,7 @@ typedef struct IKState IKState;
 typedef struct KirbyHatStruct KirbyHatStruct;
 typedef struct MotionState MotionState;
 typedef struct TempS TempS;
+typedef struct UnkCostumeStruct UnkCostumeStruct;
 typedef struct UnkFloat6_Camera UnkFloat6_Camera;
 typedef struct UnkPlBonusBits UnkPlBonusBits;
 typedef u32 MotionFlags;

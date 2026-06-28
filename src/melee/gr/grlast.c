@@ -19,7 +19,7 @@
 #include <melee/gr/inlines.h>
 #include <melee/gr/stage.h>
 #include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbspdisplay.h>
 #include <melee/lb/lbvector.h>
 
 const Vec3 grLast_803B8480 = { 1, 1, 1 };

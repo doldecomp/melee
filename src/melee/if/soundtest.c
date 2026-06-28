@@ -914,8 +914,8 @@ bool un_80300B58(int arg0)
 bool un_80300BBC(bool update_scene)
 {
     if (update_scene == true) {
-        un_803124BC();
-        un_80311680();
+        Toy_803124BC();
+        Toy_80311680();
         gm_801A42F8(GM_TOY_GALLERY);
         gm_801A4B60();
     }
@@ -926,8 +926,8 @@ bool un_80300BBC(bool update_scene)
 bool un_80300BF8(bool update_scene)
 {
     if (update_scene == true) {
-        un_803124BC();
-        Trophy_SetUnlockState(0xE6, true);
+        Toy_803124BC();
+        Toy_SetUnlockState(0xE6, true);
         gm_801A42F8(GM_MENU);
         gm_801A4B60();
     }
@@ -938,8 +938,8 @@ bool un_80300BF8(bool update_scene)
 bool un_80300C3C(bool update_scene)
 {
     if (update_scene == true) {
-        un_803124BC();
-        Trophy_SetUnlockState(0xC9, true);
+        Toy_803124BC();
+        Toy_SetUnlockState(0xC9, true);
         gm_801A42F8(GM_MENU);
         gm_801A4B60();
     }
@@ -952,7 +952,7 @@ bool un_80300C80(int arg0)
     if (arg0 == 1) {
         u32* ptr = gmMainLib_8015CCF0();
         *ptr = un_804D6DDC * 10;
-        un_803124BC();
+        Toy_803124BC();
         gm_801A42F8(1);
         gm_801A4B60();
     }

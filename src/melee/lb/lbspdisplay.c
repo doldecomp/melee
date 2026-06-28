@@ -1,4 +1,4 @@
-#include "lb_00F9.static.h"
+#include "lbspdisplay.static.h"
 
 #include "math.h"
 #include "math_ppc.h"
@@ -43,10 +43,7 @@
 #include <baselib/tev.h>
 #include <melee/mp/mplib.h>
 #include <melee/sc/types.h>
-#include <MSL/trigf.h>
-
-#undef __FILE__
-#define __FILE__ "lbspdisplay.c"
+#include <MSL/trigf.h> // IWYU pragma: keep
 
 typedef bool (*lb_803BA248_fn)(ColorOverlay*);
 

@@ -16,9 +16,9 @@
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gm_1A3F.h>
 #include <melee/gm/gmmain_lib.h>
-#include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lblanguage.h>
+#include <melee/lb/lbspdisplay.h>
 #include <melee/mn/mnmainrule.h>
 #include <melee/sc/types.h>
 

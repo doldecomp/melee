@@ -86,6 +86,11 @@ parser.add_argument(
     action="store_true",
     help="override src files with asm equivalents (implies --non-matching)",
 )
+parser.add_argument(
+    "--testing",
+    action="store_true",
+    help="enable units being tested for linking",
+)
 if not is_windows():
     parser.add_argument(
         "--wrapper",
@@ -162,7 +167,7 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
-if any((args.debug, args.bugfix, args.asm)):
+if any({args.debug, args.bugfix, args.asm, args.testing}):
     args.non_matching = True
 
 
@@ -436,6 +441,7 @@ NonMatching = False  # Object does not match and should not be linked
 Equivalent = (
     config.non_matching
 )  # Object should be linked when configured with --non-matching
+Testing = bool(args.testing) # Object is being tested for linking
 
 
 # Object is only matching for specific versions
@@ -458,7 +464,7 @@ config.libs = [
             Object(Matching, "melee/lb/lb_00CE.c"),
             Object(Matching, "melee/lb/lbvector.c"),
             Object(NonMatching, "melee/lb/lbshadow.c"),
-            Object(NonMatching, "melee/lb/lb_00F9.c"),
+            Object(NonMatching, "melee/lb/lbspdisplay.c"),
             Object(NonMatching, "melee/lb/lbarq.c"),
             Object(NonMatching, "melee/lb/lbmemory.c"),
             Object(NonMatching, "melee/lb/lbheap.c"),
@@ -631,6 +637,7 @@ config.libs = [
             Object(Matching, "melee/ft/ftmaterial.c"),
             Object(Matching, "melee/ft/ftcolanim.c"),
             Object(Matching, "melee/ft/ftdevice.c"),
+            Object(NonMatching, "melee/ft/ft_459A.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_Bury.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_FlyReflect.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_PassiveWall.c"),
@@ -1392,10 +1399,10 @@ config.libs = [
     MeleeLib(
         "ty (Toy, trophies)",
         [
-            Object(NonMatching, "melee/ty/toy.c"),
-            Object(NonMatching, "melee/ty/tylist.c"),
-            Object(NonMatching, "melee/ty/tyfigupon.c"),
-            Object(NonMatching, "melee/ty/tydisplay.c"),
+            Object(Testing, "melee/ty/toy.c"),
+            Object(Testing, "melee/ty/tylist.c"),
+            Object(Testing, "melee/ty/tyfigupon.c"),
+            Object(Testing, "melee/ty/tydisplay.c"),
         ],
     ),
     MeleeLib(

@@ -1,58 +1,57 @@
 #include "gmscdata.h"
 
-#include "gm/forward.h"
+#include "gm_1B14.h"
+#include "gm_unsplit.h"
+#include "gmadventure.h"
+#include "gmallstar.h"
+#include "gmapproach.h"
+#include "gmcamera.h"
+#include "gmclassic.h"
+#include "gmfixedcamera.h"
+#include "gmgiant.h"
+#include "gmhomerun.h"
+#include "gmhowto.h"
+#include "gminvisible.h"
+#include "gmlightning.h"
+#include "gmmenu.h"
+#include "gmmovieend.h"
+#include "gmmultiman.h"
+#include "gmomake15.h"
+#include "gmopening.h"
+#include "gmprogressive.h"
+#include "gmregtyfall.h"
+#include "gmresult.h"
+#include "gmsinglebutton.h"
+#include "gmslomo.h"
+#include "gmstaffroll.h"
+#include "gmstamina.h"
+#include "gmsupersudden.h"
+#include "gmtiny.h"
+#include "gmtitle.h"
+#include "gmtoulib.h"
+#include "gmvsmelee.h"
+#include "types.h"
 
-#include "gm/gm_1B14.h"
 #include "if/ifprize.h"
+#include "mn/mncharsel.h"
+#include "mn/mnmain.h"
+#include "mn/mnstagesel.h"
+#include "ty/toy.h"
+#include "ty/tydisplay.h"
+#include "ty/tyfigupon.h"
+#include "vi/vi0102.h"
+#include "vi/vi0401.h"
+#include "vi/vi0402.h"
+#include "vi/vi0501.h"
+#include "vi/vi0502.h"
+#include "vi/vi0601.h"
+#include "vi/vi0801.h"
+#include "vi/vi1101.h"
+#include "vi/vi1201v1.h"
+#include "vi/vi1201v2.h"
+#include "vi/vi1202.h"
 
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmadventure.h>
-#include <melee/gm/gmallstar.h>
-#include <melee/gm/gmapproach.h>
-#include <melee/gm/gmcamera.h>
-#include <melee/gm/gmclassic.h>
-#include <melee/gm/gmfixedcamera.h>
-#include <melee/gm/gmgiant.h>
-#include <melee/gm/gmhomerun.h>
-#include <melee/gm/gmhowto.h>
-#include <melee/gm/gminvisible.h>
-#include <melee/gm/gmlightning.h>
-#include <melee/gm/gmmenu.h>
-#include <melee/gm/gmmovieend.h>
-#include <melee/gm/gmmultiman.h>
-#include <melee/gm/gmomake15.h>
-#include <melee/gm/gmopening.h>
-#include <melee/gm/gmprogressive.h>
-#include <melee/gm/gmregtyfall.h>
-#include <melee/gm/gmresult.h>
-#include <melee/gm/gmsinglebutton.h>
-#include <melee/gm/gmslomo.h>
-#include <melee/gm/gmstaffroll.h>
-#include <melee/gm/gmstamina.h>
-#include <melee/gm/gmsupersudden.h>
-#include <melee/gm/gmtiny.h>
-#include <melee/gm/gmtitle.h>
-#include <melee/gm/gmtoulib.h>
-#include <melee/gm/gmvsmelee.h>
-#include <melee/gm/types.h>
-#include <melee/mn/mncharsel.h>
-#include <melee/mn/mnmain.h>
-#include <melee/mn/mnstagesel.h>
-#include <melee/ty/toy.h>
-#include <melee/ty/tydisplay.h>
-#include <melee/ty/tyfigupon.h>
-#include <melee/vi/vi0102.h>
-#include <melee/vi/vi0401.h>
-#include <melee/vi/vi0402.h>
-#include <melee/vi/vi0501.h>
-#include <melee/vi/vi0502.h>
-#include <melee/vi/vi0601.h>
-#include <melee/vi/vi0801.h>
-#include <melee/vi/vi1101.h>
-#include <melee/vi/vi1201v1.h>
-#include <melee/vi/vi1201v2.h>
-#include <melee/vi/vi1202.h>
-
+/// @todo Do these callbacks have uniform signatures, or polymorphic user data?
 static GameSceneHandler gm_803DA920[] = {
     {
         GS_TITLE,
@@ -126,22 +125,22 @@ static GameSceneHandler gm_803DA920[] = {
     },
     {
         GS_TOY_GALLERY,
-        un_80312018_OnFrame,
-        un_80311AB0_OnEnter,
+        Toy_OnFrame_80312018,
+        Toy_OnEnter_80311AB0,
         NULL,
         NULL,
     },
     {
         GS_TOY_LOTTERY,
-        un_803182D4_OnFrame,
-        un_80317D80_OnEnter,
+        tyFigupon_OnFrame_803182D4,
+        tyFigupon_OnEnter_80317D80,
         NULL,
         NULL,
     },
     {
         GS_TOY_COLLECTION,
-        un_8031B9A4_OnFrame,
-        un_8031B460_OnEnter,
+        tyDisplay_OnFrame_8031B9A4,
+        tyDisplay_OnEnter_8031B460,
         NULL,
         NULL,
     },
@@ -473,7 +472,7 @@ GameMode gm_803DACA4[] = {
         GM_TOY_GALLERY,
         NULL,
         NULL,
-        un_803122D0_OnInit,
+        Toy_OnInit_803122D0,
         gm_803DFA18_Scenes,
     },
     {

@@ -1,9 +1,9 @@
 #ifndef RUNTIME_PLATFORM_H
 #define RUNTIME_PLATFORM_H
 
-#include <stdbool.h> // IWYU pragma: export
-#include <stddef.h>  // IWYU pragma: export
-#include <dolphin/types.h>
+#include <stdbool.h>       // IWYU pragma: export
+#include <stddef.h>        // IWYU pragma: export
+#include <dolphin/types.h> // IWYU pragma: export
 
 /// The underlying type of an @c enum, used as a placeholder
 typedef int enum_t;
@@ -121,9 +121,11 @@ typedef void (*Event)(void);
 
 #if defined(__MWERKS__) && !defined(M2CTX)
 #define SDATA __declspec(section ".sdata")
+#define DATA __declspec(section ".data")
 #define WEAK __declspec(weak)
 #else
 #define SDATA
+#define DATA
 #define WEAK
 #endif
 

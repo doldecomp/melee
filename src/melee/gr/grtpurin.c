@@ -6,7 +6,7 @@
 #include "gr/inlines.h"
 #include "gr/types.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 #include "lb/types.h"
 #include "mp/mplib.h"
 

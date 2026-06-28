@@ -24,7 +24,7 @@ void HSD_GObj_80391304(HSD_GObjLibInitDataType* arg0)
     int i;
     int var_r8;
     int nfuncs;
-    struct _GObjFuncs* var_r4_2;
+    struct GObjFuncs* var_r4_2;
 
     HSD_GObj_80391260(arg0);
 

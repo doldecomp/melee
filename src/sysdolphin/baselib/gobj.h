@@ -46,11 +46,11 @@ struct HSD_GObj {
 
 typedef void (*GObjFunc)(HSD_Obj*);
 
-typedef struct _GObjFuncs {
-    struct _GObjFuncs* next;
+struct GObjFuncs {
+    struct GObjFuncs* next;
     u8 size;
     GObjFunc* funcs;
-} GObjFuncs;
+};
 
 typedef struct _HSD_GObjLibInitDataType {
     u8 p_link_max;    // 804CE380

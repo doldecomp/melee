@@ -1,6 +1,6 @@
 #include "cm/cmsnap.h"
 
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
 #include <baselib/debug.h>
 #include <baselib/gobj.h>

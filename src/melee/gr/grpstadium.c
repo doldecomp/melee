@@ -30,10 +30,10 @@
 #include <melee/gr/stage.h>
 #include <melee/gr/types.h>
 #include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbdvd.h>
 #include <melee/lb/lbfile.h>
 #include <melee/lb/lblanguage.h>
+#include <melee/lb/lbspdisplay.h>
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mplib.h>
 #include <melee/pl/player.h>

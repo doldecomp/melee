@@ -25,7 +25,7 @@
 #include "lb/forward.h"
 
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 #include "lb/types.h"
 
 #include "mp/forward.h"
@@ -172,15 +172,15 @@ void grFigureGet_802196F0(Ground_GObj* gobj)
     gp->xC_callback = NULL;
     tyDisplay_8031C2CC();
     i0 = HSD_Randi(3);
-    gp->gv.figureget.x10[i0] = un_80305058(0, 0x63, 0, 65.0f);
+    gp->gv.figureget.x10[i0] = Toy_80305058(0, 0x63, 0, 65.0f);
     i1 = i0 + 1;
     if (i1 >= 3) {
         i1 = 0;
     }
     gp->gv.figureget.x10[i1] = Ground_801C5840();
-    if (un_8031C354(gp->gv.figureget.x10[i1], &sp14, 1, 2) == 0) {
+    if (tyDisplay_8031C354(gp->gv.figureget.x10[i1], &sp14, 1, 2) == 0) {
         do {
-            temp_r3 = un_80305058(2, 0x63, 1, 75.0f);
+            temp_r3 = Toy_80305058(2, 0x63, 1, 75.0f);
             sp14 = temp_r3;
         } while (gp->gv.figureget.x10[i1] == temp_r3);
     }
@@ -190,7 +190,7 @@ void grFigureGet_802196F0(Ground_GObj* gobj)
     }
     gp->gv.figureget.x10[i1] = sp14;
     for (var_r29_3 = 0; var_r29_3 < 3; var_r29_3++) {
-        un_8031C454(gp->gv.figureget.x10[var_r29_3]);
+        tyDisplay_8031C454(gp->gv.figureget.x10[var_r29_3]);
     }
     PAD_STACK(8);
     temp_r3_2 = yakumono_param->x4;

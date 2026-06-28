@@ -16,6 +16,7 @@ struct HSD_ArchiveHeader {
     u8 version[4]; /* 0x14 */
     u32 pad[2];    /* 0x18 */
 };
+STATIC_ASSERT(sizeof(struct HSD_ArchiveHeader) == 0x20);
 
 struct HSD_ArchiveRelocationInfo {
     u32 offset;

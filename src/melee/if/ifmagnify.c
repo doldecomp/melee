@@ -12,9 +12,9 @@
 #include "if/if_2FC93.h"
 #include "if/ifall.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbrefract.h"
+#include "lb/lbspdisplay.h"
 #include "pl/player.h"
 #include "sc/types.h"
 

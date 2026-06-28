@@ -6,7 +6,7 @@
 #include "baselib/forward.h"
 
 #include "baselib/jobj.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
 #include "mn/forward.h"
 

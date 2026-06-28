@@ -5,9 +5,9 @@
 #include "cm/camera.h"
 #include "ft/ftlib.h"
 #include "it/it_2725.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbcollision.h"
 #include "lb/lbgx.h"
+#include "lb/lbspdisplay.h"
 
 #include <baselib/tev.h>
 

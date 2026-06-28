@@ -13,7 +13,7 @@
 #include "it/itCommonItems.h"
 #include "it/item.h"
 #include "it/ithitbox.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
 #include <baselib/jobj.h>
 #include <baselib/random.h>
