@@ -1346,22 +1346,24 @@ void grBigBlue_801E8A1C(int idx)
 /// @todo Currently 94.71% match - needs pointer advancement and i variable
 f32 grBigBlue_801E8B84(f32 right, f32 left, f32 bottom, f32 top)
 {
-    u8* gp = (u8*) GET_GROUND(Ground_801C2BA4(33));
+    Ground* gp = Ground_801C2BA4(33)->user_data;
     int i = 0;
-    f32 result = 0.0F;
+    f32 result = grBb_804DB310;
 
     for (i = 0; i < 4; i++) {
-        if ((unsigned) (gp[0xD4] >> 2 & 0x3F) != 1U) {
-            if (*(f32*) (gp + 0xE4) < right && *(f32*) (gp + 0xE4) > left) {
-                if (*(f32*) (gp + 0xE0) < top && *(f32*) (gp + 0xE0) > bottom)
+        if ((unsigned) (gp->gv.bigblue.car.lanes[i].state >> 2 & 0x3F) != 1U) {
+            if (gp->gv.bigblue.car.lanes[i].pos.y < right &&
+                gp->gv.bigblue.car.lanes[i].pos.y > left)
+            {
+                if (gp->gv.bigblue.car.lanes[i].pos.x < top &&
+                    gp->gv.bigblue.car.lanes[i].pos.x > bottom)
                 {
-                    if (*(f32*) (gp + 0xE4) > result) {
-                        result = *(f32*) (gp + 0xE4);
+                    if (gp->gv.bigblue.car.lanes[i].pos.y > result) {
+                        result = gp->gv.bigblue.car.lanes[i].pos.y;
                     }
                 }
             }
         }
-        gp += 0x40;
     }
 
     return result;
