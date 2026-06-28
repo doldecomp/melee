@@ -135,56 +135,56 @@ int Toy_80304B94(int option)
 {
     int res;
     switch (option) {
-    case 0:
+    case 7:
         if (lbLang_IsSettingJP()) {
             res = 0x4;
         } else {
             res = 0x4;
         }
         break;
-    case 1:
+    case 6:
         if (lbLang_IsSettingJP()) {
             res = 0xA;
         } else {
             res = 0xA;
         }
         break;
-    case 2:
+    case 5:
         if (lbLang_IsSettingJP()) {
             res = 0x11;
         } else {
             res = 0x10;
         }
         break;
-    case 3:
-        if (lbLang_IsSettingJP()) {
-            res = 0x17;
-        } else {
-            res = 0x17;
-        }
-        break;
     case 4:
         if (lbLang_IsSettingJP()) {
+            res = 0x17;
+        } else {
+            res = 0x17;
+        }
+        break;
+    case 3:
+        if (lbLang_IsSettingJP()) {
             res = 0xC;
         } else {
             res = 0xC;
         }
         break;
-    case 5:
+    case 2:
         if (lbLang_IsSettingJP()) {
             res = 0x48;
         } else {
             res = 0x48;
         }
         break;
-    case 6:
+    case 0:
         if (lbLang_IsSettingJP()) {
             res = 0x1B;
         } else {
             res = 0x1B;
         }
         break;
-    case 7:
+    case 1:
         if (lbLang_IsSettingJP()) {
             res = 0x7E;
         } else {
