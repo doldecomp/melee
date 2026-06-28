@@ -1381,8 +1381,8 @@ f32 grBigBlue_801E8B84(f32 right, f32 left, f32 bottom, f32 top)
     return result;
 }
 
-f32 grBigBlue_801E8D04_inline(f32 right, f32 left, f32 bottom, f32 top);
-f32 grBigBlue_801E8D04_inline(f32 right, f32 left, f32 bottom, f32 top)
+
+static f32 grBigBlue_801E8D04_inline(f32 right, f32 left, f32 bottom, f32 top)
 {
     return grBigBlue_801E8B84(right, left, bottom, top);
 }
