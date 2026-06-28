@@ -132,7 +132,7 @@ void ftKb_SpecialNMs_8010B2FC(HSD_GObj* gobj)
 
 void ftKb_SpecialNMs_8010B4A0(HSD_GObj* gobj)
 {
-    PAD_STACK(4 * 6);
+    PAD_STACK(8);
     {
         ftKb_DatAttrs* da;
         struct ftKb_SpecialNMs_DatAttrs* ms_da;
@@ -188,6 +188,7 @@ void ftKb_SpecialNMs_8010B4A0(HSD_GObj* gobj)
             fp->x20A0_accessory,
             fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint);
     }
+    PAD_STACK(0x10);
 }
 
 void ftKb_MsSpecialNStart_Anim(HSD_GObj* gobj)
