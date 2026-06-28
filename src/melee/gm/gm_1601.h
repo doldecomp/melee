@@ -119,7 +119,7 @@
 /* 1647F8 */ int gm_801647F8(u8);
 /* 164840 */ bool gm_80164840(u8 ckind);
 /* 164910 */ void gm_80164910(int);
-/* 164A0C */ long gm_80164A0C(u8);
+/* 164A0C */ void gm_80164A0C(u8);
 /* 164ABC */ bool gm_80164ABC(void);
 /* 164B48 */ bool fn_80164B48(void);
 /* 164F18 */ void gm_80164F18(void);
