@@ -1647,7 +1647,7 @@ void fn_80187C9C(HSD_GObj* gobj, int arg1)
 
 void fn_80187CF4(HSD_GObj* gobj)
 {
-    HSD_JObj* jobj = GET_JOBJ(gobj);
+    HSD_JObj* jobj = gobj->user_data;
     int state = lbl_804736C0.x37.state2;
     DynamicModelDesc* desc;
     int anim_state;
@@ -1705,7 +1705,7 @@ void fn_80187CF4(HSD_GObj* gobj)
         }
         break;
     }
-    HSD_JObjAnimAll(GET_JOBJ(gobj));
+    HSD_JObjAnimAll(gobj->user_data);
 }
 
 static char lbl_804D4138[] = "IrNml";
