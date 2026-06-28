@@ -1369,6 +1369,12 @@ f32 grBigBlue_801E8B84(f32 right, f32 left, f32 bottom, f32 top)
     return result;
 }
 
+f32 grBigBlue_801E8D04_inline(f32 right, f32 left, f32 bottom, f32 top);
+f32 grBigBlue_801E8D04_inline(f32 right, f32 left, f32 bottom, f32 top)
+{
+    return grBigBlue_801E8B84(right, left, bottom, top);
+}
+
 f32 grBigBlue_801E8D04(void)
 {
     f32 val4, val3, val2, val1;
@@ -1376,7 +1382,7 @@ f32 grBigBlue_801E8D04(void)
     val2 = Stage_GetCamBoundsLeftOffset();
     val3 = Stage_GetCamBoundsBottomOffset();
     val4 = Stage_GetCamBoundsTopOffset();
-    return grBigBlue_801E8B84(val4, val3, val2, val1);
+    return grBigBlue_801E8D04_inline(val4, val3, val2, val1);
 }
 
 void grBigBlue_801E8D64(Ground_GObj* gobj)
