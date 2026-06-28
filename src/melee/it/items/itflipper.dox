@@ -1,0 +1,378 @@
+/// @file
+/// @brief Flipper item (@c It_Kind_Flipper) -- the pinball paddle.
+///
+/// @note These names were determined by Claude (an AI), not recovered from an
+/// original author; treat them as tentative until confirmed by a human. Each
+/// symbol keeps an @c \@alias tag recording the machine-generated name it
+/// replaced (revertible with @c melee-replace-symbols), and the superscript
+/// markers in the briefs are footnotes into @ref itflipper_naming, where the
+/// supporting debugger experiment for each name is recorded.
+
+#include <platform.h>
+
+#include "it/forward.h"
+
+#include "it/items/types.h"
+
+/**
+ * @page itflipper_naming Flipper naming: debugger evidence
+ *
+ * These flipper names were determined by Claude (an AI), not recovered from an
+ * original author. Each was inferred from a concrete observation in a running,
+ * retail-matching build; the experiments below are that supporting evidence,
+ * reproduced from the analysis (function references updated to their current
+ * names). Treat every name as tentative until confirmed by a human.
+ *
+ * @note The experiments reference fields by raw struct offset (e.g. `xDD4`,
+ * `attrs->x0`), matching the original derivation; each field's current name is
+ * recorded on its @c \@alias tag.
+ *
+ * ## Method
+ *
+ * - Tooling: Dolphin GDB stub (port 2159) + dolphin-debugger-mcp, with symbols
+ *   loaded from the matching decomp (`config/GALE01`). Because the build
+ *   byte-matches retail GALE01, `symbols.txt` addresses are the live RAM
+ *   addresses, so a halted PC / field offset maps directly to source.
+ * - Layout: item field offsets are absolute within `struct Item`.
+ *   `ip = gobj->user_data` (`gobj + 0x2C`); flipper itemVars at `ip + 0xDD4`;
+ *   flipper DatAttrs at `ip->xC4_article_data->x4_specialAttributes`.
+ * - Instance addresses are per-spawn; the offsets are stable. (E0-E3 used
+ *   `ip = 0x80d79900`; after a game reboot E4/E5 used `ip = 0x80d77520`.)
+ *
+ * ## Experiments
+ *
+ * @anchor fp_e0
+ * ### E0 — Read the static DatAttrs out of RAM
+ * Action: broke at itFlipper_Spawned(); followed
+ * `ip -> xC4_article_data -> x4_specialAttributes` to `attrs = 0x80825a44`; read 40 bytes.
+ * Observed (offset = value): `x0=18 x4=25 x8=500 xC=0.8 x10=0.5 x14=10 x18=11.5 x1C=0.131(rad) x20=0.000872 x24=0.8727(rad, = 50 deg)`.
+ *
+ * @anchor fp_e1
+ * ### E1 — Flipper deals damage while airborne (normal throw)
+ * Action: broke at itFlipper_DmgDealt(); threw the flipper into a fighter
+ * mid-flight.
+ * Observed: `xDD4 = 18` (== `attrs->x0`); `xDD8 = 0`;
+ * `Item.xCF4_fighterGObjUnk = 0x80cb2a60` (set), `Item.xCEC_fighterGObj = NULL`.
+ * Deduced: `xDD4` is loaded from a flight-timer attr; `xDD8 = 0` is the
+ * "airborne projectile" state (itFlipper_DmgDealt() took the bounce branch); the
+ * dealt handler reads `xCF4`, the received handler reads `xCEC`.
+ *
+ * @anchor fp_e2
+ * ### E2 — Flight timer counts down and triggers settle (strong throw)
+ * Action: broke at itFlipper_Inflight_Anim() (per flight frame) and
+ * itFlipper_Settle(). Threw the flipper into open space; sampled `xDD4` each
+ * frame; read `xD44_lifeTimer` and `xDD8` immediately before and after
+ * itFlipper_Settle().
+ * Observed:
+ * - `xDD4` over consecutive frames: `25 -> 24 -> 23` (-1/frame); == `attrs->x4`
+ *   at throw (this was the strong throw).
+ * - itFlipper_Settle() entry: `xDD4 = 0`, `xDD8 = 0`, `xD44_lifeTimer = 1400.0`.
+ * - itFlipper_Settle() return: `xDD8 = 1`, `xD44_lifeTimer = 500.0` (== `attrs->x8`).
+ *
+ * Deduced: `xDD4` = flight timer (counts down; reaching 0 triggers settle);
+ * `x4` = strong-throw flight value (25); `xDD8` = settled flag (0 -> 1 on settle);
+ * `x8` = post-settle lifetime (500).
+ *
+ * @anchor fp_e3
+ * ### E3 — Settled flipper strikes a fighter (spin + hitbox)
+ * Action: broke at itFlipper_AddSpinImpulse(), then itFlipper_UpdateSpin();
+ * walked a fighter into the settled, spinning flipper and sampled `xDE0`/`xDE4`
+ * over consecutive frames.
+ * Observed:
+ * - At the hit: caller of itFlipper_AddSpinImpulse() = `itFlipper_DmgDealt+0x114`
+ *   (the settled, `xDD8=1` branch); `xDDC = 10` (== `attrs->x14`).
+ * - `xDE4` (spin velocity): `0 -> 0.528` at the impulse, then per-frame
+ *   `0.5283 -> 0.5274 -> 0.5266` (decreasing ~0.00087/frame == `attrs->x20`).
+ * - `xDE0` (spin angle): `0 -> 0.5274 -> 1.0539`, i.e. `xDE0 += xDE4` each frame;
+ *   itFlipper_UpdateSpin() feeds this to HSD_JObjSetRotationX() (the paddle
+ *   visibly spins).
+ *
+ * Deduced: `xDDC` = hitbox cooldown set from `attrs->x14` (10) on a hit;
+ * `xDE4` = angular velocity (kicked on contact, decays by `attrs->x20`);
+ * `xDE0` = accumulated spin angle driving the paddle rotation;
+ * `x20` = per-frame spin decay; `x14` = hitbox interval.
+ *
+ * @anchor fp_e4
+ * ### E4 — Hard hit saturates the spin clamp
+ * Action: broke at itFlipper_AddSpinImpulse(); dash/aerial into a freshly-settled
+ * flipper (`xDE4 = 0`). Read the `angle` arg (`f1`) and `xDE4` before, then
+ * `xDE4` after via the return address (`itFlipper_DmgDealt+0x114`).
+ * Observed: `angle` arg `f1 = 0.8047` rad (~46 deg); `xDE4` before = 0;
+ * `xDE4` after = `0xbf5f66f3` = `-0.8727` (== `-attrs->x24`; same magnitude bits
+ * as `x24 = 0x3f5f66f3`).
+ * Deduced: `x24` = maximum |spin velocity|; `xDE4` saturates at `+/-x24`. The
+ * `angle` arg (= `deg_to_rad * x18 * fighter_speed`, per itFlipper_SpinFromFighter())
+ * confirms `x18` scales fighter speed into spin. This hit's `angle + x1C` (~0.936)
+ * exceeded `x24`, so it clamped -- `x18`/`x1C` magnitudes are read (11.5 / 0.131)
+ * but their exact split is not isolated from a clamped hit.
+ *
+ * @anchor fp_e5
+ * ### E5 — Wall and floor bounce restitution
+ * Action: disassembled itFlipper_Inflight_Coll(); set breakpoints at the two
+ * collision-gated `vel.x` stores: `+0x44` (`vel.x *= -xC`, on wall `coll & 0xC`)
+ * and `+0x98` (`vel.x *= x10`, on floor `coll & 1`). Threw the flipper into a
+ * wall, then skipped it off the floor; read `vel.x` before (`f1`) and after (`f0`).
+ * Observed:
+ * - Wall (`coll = 0x4`): `vel.x` `-1.6953 -> +1.3562` (factor `-0.800` == `-attrs->xC`).
+ * - Floor (`coll = 0x1`): `vel.x` `-2.6798 -> -1.3399` (factor `0.500` == `attrs->x10`).
+ *
+ * Deduced: `xC` = wall/ceiling restitution (0.8; flips and scales `vel.x`);
+ * `x10` = floor restitution (0.5; scales `vel.x`).
+ *
+ * @anchor fp_e6
+ * ### E6 — Stage-anchored flipper (Bowser's Target Test)
+ * itFlipper_Spawn() (the only writer of `xDE8 = 1` / `xDEC = jobj`) is called from
+ * Ground_801C42AC(), which runs on **Target Test** stage load and spawns a flipper
+ * anchored to each stage joint in `stage_info.x280[0xFC..0x103]`. It never fires
+ * in Training mode (no such joints), which is why E0-E5 only saw `xDE8 = 0`.
+ * Action: entered **Bowser's Break the Targets** (its course has a flipper
+ * obstacle oscillating on a moving joint); broke at itFlipper_UpdateActive()
+ * (settled-flipper per-frame); read the itemVars and compared the flipper's
+ * `pos` (`ip + 0x4C`) to the anchor jobj's world-matrix translation
+ * (`xDEC + 0x44`, column 3).
+ * Observed: `xDE8 = 1`; `xDEC = 0x80c2d140` (non-NULL HSD_JObj); `xDE4 = 0` (idle,
+ * state 5 via itFlipper_Active_Anim()); flipper `pos = (20.326, 16.621, 0.0)` ==
+ * anchor jobj world translation `(20.326, 16.621, 0.0)`, bit-for-bit identical
+ * (`0x41a29c00 0x4184f7d3 0x0`).
+ * Verified at spawn: reset the stage with a breakpoint at itFlipper_Spawn(); it
+ * was called with `jobj` arg `r3 = 0x80c2d140`, and the flipper it returned had
+ * `xDE8 = 1` and `xDEC = 0x80c2d140` (== the arg) with `xDE0 = 0` (fresh) -- so
+ * itFlipper_Spawn() sets `xDE8 = 1` and `xDEC` directly from its jobj argument.
+ * Deduced: `xDE8` = stage-anchored flag (set only by itFlipper_Spawn()); `xDEC` =
+ * the anchor HSD_JObj the flipper is pinned to (its `pos` tracks the joint exactly).
+ *
+ * ## Function experiments
+ *
+ * @anchor fp_f1
+ * ### F1 — Motion-state machine (`msid` = `ip + 0x24`)
+ * Action: write-watchpoint on a flipper's `msid`; drove it spawn -> fall -> land
+ * -> pick up -> throw -> settle (Training mode), logging each `(new msid, caller)`
+ * (caller = LR at the Item_80268E5C() store).
+ * Observed transitions:
+ * - itFlipper_EnterFalling() -> `msid 1` (at spawn): falling
+ * - itFlipper_EnterResting() -> `msid 0` (on landing): rest on ground (also resets velocity)
+ * - itFlipper_PickedUp() -> `msid 2`: held
+ * - itFlipper_Thrown() -> `msid 3`: thrown / in flight
+ * - itFlipper_EnterActive() -> `msid 5` (via itFlipper_Settle()): active flipper
+ *
+ * Deduced state ids: `0`=rest, `1`=fall, `2`=held, `3`=flight, `5`=active
+ * (matches E6's anchored flipper sitting in state 5).
+ *
+ * @anchor fp_f2
+ * ### F2 — Flipper-vs-flipper separation (itFlipper_Repel())
+ * Action: broke at itFlipper_Repel(); clanked an attack into a settled flipper,
+ * then put two flippers in contact. Read the `kind` arg (`r4` = `ip->xC38`) and
+ * `x40_vel` before/after.
+ * Observed:
+ * - Normal attack clank: `kind = -1` (0xFFFFFFFF); `x40_vel` unchanged `(0,0,0)`.
+ * - Two flippers touching: `kind = 0x14` (== `It_Kind_Flipper`); `x40_vel`
+ *   `(0,0,0) -> (0.199, -0.019, 0)`, magnitude exactly `0.2`, directed away from
+ *   the other flipper.
+ *
+ * Deduced: itFlipper_Repel() adds a fixed `0.2` separation impulse away from a
+ * colliding flipper, only when the collided kind is `It_Kind_Flipper`.
+ */
+
+/// @enum itFlipper_MotionState
+/// Motion-state ids written to the item's motion state through
+/// @c Item_80268E5C; each value equals the @c UnkMotionN callback index it was
+/// named from. The id-to-meaning map -- 0 resting, 1 falling, 2 held,
+/// 3 in-flight, 4 airborne, 5 active, 6 spinning -- was recovered by
+/// watch-pointing the motion state across a full lifecycle.<sup>[\ref fp_f1 "F1"]</sup>
+
+/// Spawns a flipper pinned to a stage joint @p jobj (Break-the-Targets
+/// obstacles): stores it in @c xDEC_stageAnchor, sets @c xDE8_isStageFixed, and
+/// settles it.<sup>[\ref fp_e6 "E6"]</sup>
+/// @alias{it_80290938}
+/* 290938 */ HSD_GObj* itFlipper_Spawn(HSD_JObj*);
+
+/// Logic-20 spawn callback: zero-initializes the itemVars and enters the falling
+/// state.
+/// @alias{itFlipper_Logic20_Spawned}
+/* 290A20 */ void itFlipper_Spawned(Item_GObj*);
+
+/// Advances the paddle spin one frame: decays @c xDE4_spinVel toward 0, adds it
+/// into @c xDE0_spinAngle, and applies that as an X rotation.<sup>[\ref fp_e3 "E3"]</sup>
+/// @alias{it_80290A7C}
+/* 290A7C */ void itFlipper_UpdateSpin(Item_GObj*);
+
+/// Adds a spin impulse directed by the contact point @p pos, clamped to
+/// +/- @c x24_maxSpinVel.<sup>[\ref fp_e3 "E3"], [\ref fp_e4 "E4"]</sup>
+/// @alias{it_80290C38}
+/* 290C38 */ void itFlipper_AddSpinImpulse(Item_GObj*, Vec3*, f32);
+
+/// Derives the spin impulse from the striking fighter's speed and applies it
+/// via itFlipper_AddSpinImpulse(), reading the fighter from
+/// @c xCF4_fighterGObjUnk (the dealt-damage side).<sup>[\ref fp_e4 "E4"]</sup>
+/// @alias{it_80290CE8}
+/* 290CE8 */ void itFlipper_SpinFromFighter(Item_GObj*);
+
+/// Pushes the flipper away from @p pos with a fixed 0.2 impulse, only when
+/// @p kind is @c It_Kind_Flipper (0x14).<sup>[\ref fp_f2 "F2"]</sup>
+/// @alias{it_80290DD4}
+/* 290DD4 */ void itFlipper_Repel(Item_GObj* gobj, s32 kind, Vec3* pos);
+
+/// Resets the flipper's velocity and enters the resting state (motion state
+/// 0).<sup>[\ref fp_f1 "F1"]</sup>
+/// @alias{it_80290E78}
+/* 290E78 */ void itFlipper_EnterResting(Item_GObj*);
+
+/// Animate callback for the resting state (motion state 0).
+/// @alias{itFlipper_UnkMotion0_Anim}
+/* 290EC8 */ bool itFlipper_Resting_Anim(Item_GObj* gobj);
+
+/// Physics callback for the resting state (motion state 0).
+/// @alias{itFlipper_UnkMotion0_Phys}
+/* 290ED0 */ void itFlipper_Resting_Phys(Item_GObj* gobj);
+
+/// Collision callback for the resting state (motion state 0): falls again if the
+/// ground vanishes.
+/// @alias{itFlipper_UnkMotion0_Coll}
+/* 290ED4 */ bool itFlipper_Resting_Coll(Item_GObj* gobj);
+
+/// Enters the falling state (motion state 1).<sup>[\ref fp_f1 "F1"]</sup>
+/// @alias{it_80290F00}
+/* 290F00 */ void itFlipper_EnterFalling(Item_GObj* gobj);
+
+/// Animate callback for the falling state (motion state 1).
+/// @alias{itFlipper_UnkMotion1_Anim}
+/* 290F28 */ bool itFlipper_Falling_Anim(Item_GObj* gobj);
+
+/// Physics callback for the falling state (motion state 1): applies gravity
+/// toward terminal speed.
+/// @alias{itFlipper_UnkMotion1_Phys}
+/* 290F30 */ void itFlipper_Falling_Phys(Item_GObj* gobj);
+
+/// Collision callback for the falling state (motion state 1): rests on landing.
+/// @alias{itFlipper_UnkMotion1_Coll}
+/* 290F60 */ bool itFlipper_Falling_Coll(Item_GObj* gobj);
+
+/// Logic-20 pickup callback: enters the held state (motion state
+/// 2).<sup>[\ref fp_f1 "F1"]</sup>
+/// @alias{itFlipper_Logic20_PickedUp}
+/* 290F8C */ void itFlipper_PickedUp(Item_GObj*);
+
+/// Animate callback for the held state (motion state 2).
+/// @alias{itFlipper_UnkMotion2_Anim}
+/* 290FB4 */ bool itFlipper_Held_Anim(Item_GObj* gobj);
+
+/// Physics callback for the held state (motion state 2).
+/// @alias{itFlipper_UnkMotion2_Phys}
+/* 290FBC */ void itFlipper_Held_Phys(Item_GObj* gobj);
+
+/// Logic-20 drop callback: forwards to itFlipper_Thrown() -- a drop is handled
+/// as a throw.
+/// @alias{itFlipper_Logic20_Dropped}
+/* 290FC0 */ void itFlipper_Dropped(Item_GObj*);
+
+/// Logic-20 throw callback: loads @c xDD4_flightTimer from @c x4_smashThrowDuration
+/// (smash) or @c x0_throwDuration (normal) and enters the in-flight
+/// state.<sup>[\ref fp_e1 "E1"], [\ref fp_e2 "E2"]</sup>
+/// @alias{itFlipper_Logic20_Thrown}
+/* 290FE0 */ void itFlipper_Thrown(Item_GObj*);
+
+/// Animate callback for the in-flight state (motion state 3): decrements
+/// @c xDD4_flightTimer and settles the flipper at 0.<sup>[\ref fp_e2 "E2"]</sup>
+/// @alias{itFlipper_UnkMotion3_Anim}
+/* 291068 */ bool itFlipper_Inflight_Anim(Item_GObj* gobj);
+
+/// Physics callback for the in-flight state (motion state 3): gravity plus
+/// end-of-flight velocity damping.
+/// @alias{itFlipper_UnkMotion3_Phys}
+/* 2910A8 */ void itFlipper_Inflight_Phys(Item_GObj* gobj);
+
+/// Collision callback for the in-flight state (motion state 3): bounces off
+/// walls/ceiling by @c xC_wallBounce and the floor by
+/// @c x10_floorBounce.<sup>[\ref fp_e5 "E5"]</sup>
+/// @alias{itFlipper_UnkMotion3_Coll}
+/* 291188 */ bool itFlipper_Inflight_Coll(Item_GObj* gobj);
+
+/// Settles a thrown flipper into a stationary hazard: stops it, sets
+/// @c xDD8_isSettled, loads @c xD44_lifeTimer from @c x8_lifetime, and enters
+/// the active state.<sup>[\ref fp_e2 "E2"]</sup>
+/// @alias{it_80291254}
+/* 291254 */ void itFlipper_Settle(Item_GObj*);
+
+/// Enters the active (settled, hitbox-armed) state (motion state
+/// 5).<sup>[\ref fp_f1 "F1"]</sup>
+/// @alias{it_8029131C}
+/* 29131C */ void itFlipper_EnterActive(Item_GObj* gobj);
+
+/// Per-frame update for the active flipper: advances the spin, damps leftover
+/// velocity, ticks @c xDDC_hitboxTimer, and expires the item by lifetime unless
+/// stage-fixed.<sup>[\ref fp_e3 "E3"], [\ref fp_e6 "E6"]</sup>
+/// @alias{it_80291344}
+/* 291344 */ bool itFlipper_UpdateActive(Item_GObj* gobj);
+
+/// Animate callback for the active state (motion state 5): switches to spinning
+/// while @c xDE4_spinVel is nonzero.
+/// @alias{itFlipper_UnkMotion5_Anim}
+/* 2914C8 */ bool itFlipper_Active_Anim(Item_GObj* gobj);
+
+/// Animate callback for the spinning state (motion state 6): returns to active
+/// once @c xDE4_spinVel reaches 0.
+/// @alias{itFlipper_UnkMotion6_Anim}
+/* 29151C */ bool itFlipper_Spinning_Anim(Item_GObj* gobj);
+
+/// Physics callback for the spinning state (motion state 6): re-pins a
+/// stage-fixed flipper to @c xDEC_stageAnchor each frame.<sup>[\ref fp_e6 "E6"]</sup>
+/// @alias{itFlipper_UnkMotion6_Phys}
+/* 291570 */ void itFlipper_Spinning_Phys(Item_GObj* gobj);
+
+/// Collision callback for the spinning state (motion state 6).
+/// @alias{itFlipper_UnkMotion6_Coll}
+/* 2915B4 */ bool itFlipper_Spinning_Coll(Item_GObj* gobj);
+
+/// Logic-20 "dealt damage" callback: bounces while airborne, or (once settled)
+/// arms @c xDDC_hitboxTimer and kicks spin from the fighter via
+/// @c xCF4_fighterGObjUnk.<sup>[\ref fp_e1 "E1"], [\ref fp_e3 "E3"], [\ref fp_e4 "E4"]</sup>
+/// @alias{it_3F14_Logic20_DmgDealt}
+/* 2915E8 */ bool itFlipper_DmgDealt(Item_GObj*);
+
+/// Logic-20 clank callback: same handling as itFlipper_DmgDealt().
+/// @alias{it_3F14_Logic20_Clanked}
+/* 2917C8 */ bool itFlipper_Clanked(Item_GObj*);
+
+/// Logic-20 shield-hit callback: same handling as itFlipper_DmgDealt().
+/// @alias{it_3F14_Logic20_HitShield}
+/* 2918A0 */ bool itFlipper_HitShield(Item_GObj*);
+
+/// Logic-20 reflected callback.
+/// @alias{itFlipper_Logic20_Reflected}
+/* 291978 */ bool itFlipper_Reflected(Item_GObj*);
+
+/// Logic-20 shield-bounce callback.
+/// @alias{itFlipper_Logic20_ShieldBounced}
+/* 291998 */ bool itFlipper_ShieldBounced(Item_GObj*);
+
+/// Logic-20 "received damage" callback: when settled, arms @c xDDC_hitboxTimer
+/// and kicks spin from the attacking fighter via @c xCEC_fighterGObj (mirrors
+/// itFlipper_DmgDealt()'s @c xCF4).<sup>[\ref fp_e1 "E1"]</sup>
+/// @alias{it_3F14_Logic20_DmgReceived}
+/* 2919B8 */ bool itFlipper_DmgReceived(Item_GObj*);
+
+/// Logic-20 entered-air callback: enters the airborne state (motion state 4).
+/// @alias{itFlipper_Logic20_EnteredAir}
+/* 291B58 */ void itFlipper_EnteredAir(Item_GObj*);
+
+/// Animate callback for the airborne state (motion state 4).
+/// @alias{itFlipper_UnkMotion4_Anim}
+/* 291B80 */ bool itFlipper_Airborne_Anim(Item_GObj* gobj);
+
+/// Physics callback for the airborne state (motion state 4).
+/// @alias{itFlipper_UnkMotion4_Phys}
+/* 291B88 */ void itFlipper_Airborne_Phys(Item_GObj* gobj);
+
+/// Collision callback for the airborne state (motion state 4): rests or falls on
+/// contact.
+/// @alias{itFlipper_UnkMotion4_Coll}
+/* 291B8C */ bool itFlipper_Airborne_Coll(Item_GObj* gobj);
+
+/// Logic-20 event callback (purpose not yet identified).
+/// @alias{itFlipper_Logic20_EvtUnk}
+/* 291BC0 */ void itFlipper_EvtUnk(Item_GObj*, Item_GObj*);
+
+/// The flipper's motion-state table: the per-state {animate, physics, collision}
+/// callbacks indexed by #itFlipper_MotionState.
+/// @alias{it_803F5EA8}
+/* 3F5EA8 */ extern ItemStateTable ItemStateTable_Flipper[];
