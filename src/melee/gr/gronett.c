@@ -399,6 +399,9 @@ void grOnett_801E40E4(Ground* gp, s32 arg1, CollData* cd, s32 arg3,
     if (arg4 == 1) {
         gp->gv.onett_building.hit_count += 1;
         switch (gp->gv.onett_building.state) {
+        case 4:
+        case 5:
+            break;
         case 0:
             if (gp->gv.onett_building.hit_count < grOt_804D69C0->x34) {
                 gp->gv.onett_building.next_state = 1;
@@ -760,7 +763,7 @@ void grOnett_801E5194(Ground* gp, s32 car_idx, s32 sound_type)
 
 void grOnett_801E5214(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
+    Ground* gp = gobj->user_data;
     int i;
     for (i = 0; i < 2; i++) {
         f32 disp, vel, abs_ratio, force, error, spring;
@@ -868,8 +871,12 @@ void grOnett_801E54B4(Ground* gp, s32 arg1, CollData* cd, s32 arg3,
 
 void grOnett_801E5538(Ground_GObj* gobj)
 {
+    s32 new_var2;
     Ground* gp = GET_GROUND(gobj);
-    if (gp->gv.onett.timer-- < 0) {
+    s32 new_var;
+    new_var2 = gp->gv.onett.timer--;
+    new_var = new_var2;
+    if (new_var < 0) {
         if (gp->gv.onett.gen != NULL) {
             gp->gv.onett.timer =
                 rand_range(grOt_804D69C0->x28, grOt_804D69C0->x24);
