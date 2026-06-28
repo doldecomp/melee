@@ -1,13 +1,6 @@
 #ifndef GALE01_1601C4
 #define GALE01_1601C4
 
-#include <placeholder.h>
-#include <platform.h>
-
-#include "dolphin/gx/GXStruct.h"
-#include "dolphin/mtx.h"
-#include "dolphin/types.h"
-
 #include "ft/forward.h"
 #include "gm/forward.h"
 #include "mn/forward.h"
@@ -16,24 +9,14 @@
 
 #include "sc/forward.h"
 
-#include <printf.h>
-#include <melee/gm/gmregclear.h>
-
-struct lbl_8046B488_t;
-
-#include <melee/gm/gmregclear.h>
-
 /* 1601C4 */ int gm_801601C4(s8);
 /* 160244 */ int gm_80160244(s8);
 /* 1602C0 */ void gm_801602C0(s8);
 /* 1603B0 */ void gm_801603B0(void);
-/* 160400 */ u32
-    fn_80160400(CharacterKind);      ///< gets character victory theme id
-/* 160438 */ char* gm_80160438(s32); ///< gets character result anim path
+/* 160400 */ u32 fn_80160400(CharacterKind);
+/* 160438 */ char* gm_80160438(s32);
 /* 160474 */ bool gm_80160474(CharacterKind, GameModeKind);
-/* 1604DC */ char*
-    gm_801604DC(CharacterKind,
-                GameModeKind); ///< gets characters trophy model
+/* 1604DC */ char* gm_801604DC(CharacterKind, GameModeKind);
 /* 160564 */ char* gm_80160564(CharacterKind, GameModeKind);
 /* 1605EC */ u8 fn_801605EC(s32);
 /* 160638 */ s8 gm_80160638(s32);
@@ -43,9 +26,8 @@ struct lbl_8046B488_t;
 /* 1607A8 */ u8 fn_801607A8(int);
 /* 1607F4 */ u8 fn_801607F4(int);
 /* 160840 */ u8 fn_80160840(u8);
-/* 160854 */ u32 gm_80160854(u8, u8, u8,
-                             u8);     ///< gets the player hud color index
-/* 160968 */ GXColor gm_80160968(u8); ///< gets the player hud color
+/* 160854 */ u32 gm_80160854(u8, u8, u8, u8);
+/* 160968 */ GXColor gm_80160968(u8);
 /* 160980 */ const char* gm_80160980(u8 ckind);
 /* 1609E0 */ const char* fn_801609E0(u8 ckind);
 /* 160A60 */ const char* gm_80160A60(int);
@@ -130,12 +112,12 @@ struct lbl_8046B488_t;
 /* 1642A0 */ bool fn_801642A0(void);
 /* 164330 */ bool gm_80164330(s32);
 /* 164430 */ bool gm_80164430(u16);
-/* 164504 */ int gm_80164504(u16);
+/* 164504 */ void gm_80164504(u16);
 /* 164600 */ bool gm_80164600(void);
 /* 16468C */ UNK_RET gm_8016468C(UNK_PARAMS);
 /* 1647D0 */ void gm_801647D0(void);
 /* 1647F8 */ int gm_801647F8(u8);
-/* 164840 */ bool gm_80164840(u8 ckind); ///< character unlocked check
+/* 164840 */ bool gm_80164840(u8 ckind);
 /* 164910 */ void gm_80164910(int);
 /* 164A0C */ long gm_80164A0C(u8);
 /* 164ABC */ bool gm_80164ABC(void);
@@ -167,6 +149,7 @@ struct lbl_8046B488_t;
 /* 166378 */ void gm_80166378(struct lbl_8046B6A0_24C_t*);
 /* 166A98 */ long gm_80166A98(MatchEnd*, s32, s8, u8, s8, u8, s8, u8, u8, u8);
 /* 166CBC */ s32 gmCamera_801A2640(void);
+/* 166CBC */ u8 fn_80166CBC(MatchEnd*, ssize_t index);
 /* 166CCC */ void gm_80166CCC(MatchEnd*, MatchEnd*);
 /* 167140 */ bool gm_80167140(MatchEnd*);
 /* 167194 */ int fn_80167194(MatchEnd*);
@@ -186,8 +169,7 @@ struct lbl_8046B488_t;
 /* 167A14 */ void gm_80167A14(struct PlayerInitData*);
 /* 167A64 */ void gm_80167A64(struct StartMeleeRules*);
 /* 167B50 */ void gm_80167B50(struct VsModeData*);
-/* 167BC8 */ void
-gm_80167BC8(struct VsModeData*); // inits VsModeData from game rules
+/* 167BC8 */ void gm_80167BC8(struct VsModeData*);
 /* 167FC4 */ void gm_80167FC4(struct SSSData*);
 /* 1685D4 */ s8 gm_801685D4(u8, u8);
 /* 168638 */ void gm_80168638(MatchEnd*);

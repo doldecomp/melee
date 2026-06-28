@@ -2,6 +2,7 @@
 
 #include "gm/forward.h"
 
+#include "gm/gm_1B14.h"
 #include "if/ifprize.h"
 
 #include <melee/gm/gm_unsplit.h>
@@ -31,7 +32,7 @@
 #include <melee/gm/gmsupersudden.h>
 #include <melee/gm/gmtiny.h>
 #include <melee/gm/gmtitle.h>
-#include <melee/gm/gmtou.h>
+#include <melee/gm/gmtoulib.h>
 #include <melee/gm/gmvsmelee.h>
 #include <melee/gm/types.h>
 #include <melee/mn/mncharsel.h>
@@ -371,25 +372,19 @@ static GameSceneHandler gm_803DA920[] = {
 };
 
 extern GameScene gm_803DD6A0_Scenes[], gm_803DD6D0_Scenes[],
-    gm_803DD888_Scenes[], gm_803DD8B8_Scenes[],
-    gm_803DD9A0_Scenes[], gm_803DDA78_Scenes[],
-    gm_803DDAC0_Scenes[], gm_803DDB80_Scenes[],
-    gm_803DDBE0_Scenes[], gm_803DDC58_Scenes[],
-    gm_803DE1B8_Scenes[], gm_803DE930_Scenes[],
-    gm_803DECB8_Scenes[], gm_803DED00_Scenes[],
-    gm_803DED48_Scenes[], gm_803DED90_Scenes[],
-    gm_803DEDD8_Scenes[], gm_803DEE20_Scenes[],
-    gm_803DEE68_Scenes[], gm_803DEEB0_Scenes[],
-    gm_803DEF88_Scenes[], gm_803DF060_Scenes[],
-    gm_803DF138_Scenes[], gm_803DF198_Scenes[],
-    gm_803DF1E0_Scenes[], gm_803DF2B8_Scenes[],
-    gm_803DF390_Scenes[], gm_803DF468_Scenes[],
-    gm_803DF540_Scenes[], gm_803DF618_Scenes[],
-    gm_803DFA18_Scenes[], gm_803DFA48_Scenes[],
-    gm_803DFA78_Scenes[], gm_803DFAA8_Scenes[],
-    gm_803DFAD8_Scenes[], gm_803DFB08[], gm_803DFB80_Scenes[],
-    gm_803DFBC8_Scenes[], gm_803DFC70_Scenes[],
-    gm_803DFDA8_Scenes[], gm_803DFDD8_Scenes[],
+    gm_803DD888_Scenes[], gm_803DD8B8_Scenes[], gm_803DD9A0_Scenes[],
+    gm_803DDA78_Scenes[], gm_803DDAC0_Scenes[], gm_803DDB80_Scenes[],
+    gm_803DDBE0_Scenes[], gm_803DDC58_Scenes[], gm_803DE1B8_Scenes[],
+    gm_803DE930_Scenes[], gm_803DECB8_Scenes[], gm_803DED00_Scenes[],
+    gm_803DED48_Scenes[], gm_803DED90_Scenes[], gm_803DEDD8_Scenes[],
+    gm_803DEE20_Scenes[], gm_803DEE68_Scenes[], gm_803DEEB0_Scenes[],
+    gm_803DEF88_Scenes[], gm_803DF060_Scenes[], gm_803DF138_Scenes[],
+    gm_803DF198_Scenes[], gm_803DF1E0_Scenes[], gm_803DF2B8_Scenes[],
+    gm_803DF390_Scenes[], gm_803DF468_Scenes[], gm_803DF540_Scenes[],
+    gm_803DF618_Scenes[], gm_803DFA18_Scenes[], gm_803DFA48_Scenes[],
+    gm_803DFA78_Scenes[], gm_803DFAA8_Scenes[], gm_803DFAD8_Scenes[],
+    gm_803DFB08[], gm_803DFB80_Scenes[], gm_803DFBC8_Scenes[],
+    gm_803DFC70_Scenes[], gm_803DFDA8_Scenes[], gm_803DFDD8_Scenes[],
     gm_803DFE18_Scenes[], gm_803DFE48_Scenes[];
 
 GameMode gm_803DACA4[] = {

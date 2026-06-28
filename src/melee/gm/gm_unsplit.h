@@ -17,17 +17,17 @@
 #include <melee/gm/gm_17AD.h>    // IWYU pragma: export
 #include <melee/gm/gm_17BA.h>    // IWYU pragma: export
 #include <melee/gm/gm_1832.h>    // IWYU pragma: export
-#include <melee/gm/gm_18A5.h>    // IWYU pragma: export
 #include <melee/gm/gm_19EF.h>    // IWYU pragma: export
 #include <melee/gm/gm_1A36.h>    // IWYU pragma: export
 #include <melee/gm/gm_1A3F.h>    // IWYU pragma: export
 #include <melee/gm/gm_1A45.h>    // IWYU pragma: export
-#include <melee/gm/gm_1A4C.h>    // IWYU pragma: export
+#include <melee/gm/gm_1A7A.h>    // IWYU pragma: export
 #include <melee/gm/gm_1ADD.h>    // IWYU pragma: export
 #include <melee/gm/gm_1AED.h>    // IWYU pragma: export
 #include <melee/gm/gm_1B03.h>    // IWYU pragma: export
 #include <melee/gm/gm_1BA8.h>    // IWYU pragma: export
 #include <melee/gm/gm_1BFA.h>    // IWYU pragma: export
 #include <melee/gm/gmregclear.h> // IWYU pragma: export
+#include <melee/gm/gmtoulib.h>   // IWYU pragma: export
 
 #endif

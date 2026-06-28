@@ -249,8 +249,9 @@ void grShrineRoute_80208A34(Ground_GObj* arg) {}
 
 void fn_80208A38(HSD_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
     u8 flags[6];
+    u8* flag = flags;
+    Ground* gp = gobj->user_data;
     Vec3 pos;
     HSD_JObj* jobj;
     HSD_GObj* effect;
@@ -265,12 +266,15 @@ void fn_80208A38(HSD_GObj* gobj)
     flags[3] = 0;
     flags[4] = 0;
     flags[5] = 0;
-    flags[HSD_Randi(6)] = 1;
+    {
+        int idx = HSD_Randi(6);
+        flag[idx] = 1;
+    }
 
-    for (i = 0; i < 6; i++) {
+    for (i = 0; i < 6; flag++, i++) {
         jobj = Ground_801C2CF4(i + 0xBD);
         if (jobj != NULL) {
-            if (flags[i] != 0) {
+            if (*flag != 0) {
                 gp->gv.shrineroute.symbols[i] = grShrineRoute_802088C0(3);
             } else {
                 gp->gv.shrineroute.symbols[i] = grShrineRoute_802088C0(1);
@@ -278,11 +282,12 @@ void fn_80208A38(HSD_GObj* gobj)
             lb_8000B1CC(jobj, NULL, &pos);
             effect = gp->gv.shrineroute.symbols[i];
             if (effect != NULL) {
-                ejobj = GET_JOBJ(effect);
-                HSD_JObjSetTranslate(ejobj, &pos);
-                HSD_JObjSetScaleX(ejobj, grSh_Route_804D6A58->x14);
-                HSD_JObjSetScaleY(ejobj, grSh_Route_804D6A58->x14);
-                HSD_JObjSetScaleZ(ejobj, grSh_Route_804D6A58->x14);
+                if ((ejobj = GET_JOBJ(effect)) != NULL) {
+                    HSD_JObjSetTranslate(ejobj, &pos);
+                    HSD_JObjSetScaleX(ejobj, grSh_Route_804D6A58->x14);
+                    HSD_JObjSetScaleY(ejobj, grSh_Route_804D6A58->x14);
+                    HSD_JObjSetScaleZ(ejobj, grSh_Route_804D6A58->x14);
+                }
             }
         }
     }
@@ -408,7 +413,7 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
         if (result != -1) {
             ix = result - 0xBD;
             if (!(gp->gv.shrineroute.xC6 & (1 << ix))) {
-                *(volatile u16*) &gp->gv.shrineroute.xC8 = (u16) result;
+                gp->gv.shrineroute.xC8 = (u16) result;
                 HSD_ASSERTMSG(0x213, gp->gv.shrineroute.symbols[(u32) ix],
                               "gp->u.map.symbol[ix]");
                 {
@@ -531,8 +536,7 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
                     HSD_JObjSetFlagsAll(Ground_801C3FA4(gr2, 0), JOBJ_HIDDEN);
                 }
             }
-            grAnime_801C7A04((HSD_GObj*) gobj, 0, 7U,
-                               0.0f);
+            grAnime_801C7A04((HSD_GObj*) gobj, 0, 7U, 0.0f);
             grLib_801C9908(gobj->hsd_obj);
             if (gp->gv.shrineroute.xD4 != 0) {
                 grMaterial_801C9604((HSD_GObj*) gp->gv.shrineroute.xD4,
@@ -765,11 +769,9 @@ void grShrineRoute_80209AF0(Ground_GObj* gobj)
     gp->gv.shrineroute3.xCC = 0.0f;
     gp->gv.shrineroute3.xC8 = 0.0f;
     gp->gv.shrineroute3.xD0 = 0.00006981317F * HSD_Randf() + 0.000017453292F;
-    gp->gv.shrineroute3.xD0 *=
-        (HSD_Randi(2) != 0) ? 1.0f : -1.0F;
+    gp->gv.shrineroute3.xD0 *= (HSD_Randi(2) != 0) ? 1.0f : -1.0F;
     gp->gv.shrineroute3.xD4 = 0.00006981317F * HSD_Randf() + 0.000017453292F;
-    gp->gv.shrineroute3.xD4 *=
-        (HSD_Randi(2) != 0) ? 1.0f : -1.0F;
+    gp->gv.shrineroute3.xD4 *= (HSD_Randi(2) != 0) ? 1.0f : -1.0F;
 }
 
 bool grShrineRoute_80209BE4(Ground_GObj* arg)
@@ -782,6 +784,8 @@ void grShrineRoute_80209BEC(Ground_GObj* gobj)
     Ground* gp = gobj->user_data;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     f32 vel;
+    f32 next;
+    f32 next2;
     f32 rot;
 
     gp->gv.shrineroute3.xC8 += gp->gv.shrineroute3.xD0;
@@ -800,9 +804,9 @@ void grShrineRoute_80209BEC(Ground_GObj* gobj)
         gp->gv.shrineroute3.xCC = -0.0008726646f;
     }
 
-    vel = gp->gv.shrineroute3.xC8;
-    rot = vel + HSD_JObjGetRotationX(jobj);
-    if (rot > 0.2617994f) {
+    next = HSD_JObjGetRotationX(jobj) + (vel = gp->gv.shrineroute3.xC8);
+    rot = next;
+    if (next > 0.2617994f) {
         rot = 0.2617994f;
         if (vel < 0.0f) {
             vel = -vel;
@@ -821,9 +825,9 @@ void grShrineRoute_80209BEC(Ground_GObj* gobj)
     }
     HSD_JObjSetRotationX(jobj, rot);
 
-    vel = gp->gv.shrineroute3.xCC;
-    rot = vel + HSD_JObjGetRotationY(jobj);
-    if (rot > 0.17453292f) {
+    next2 = HSD_JObjGetRotationY(jobj) + (vel = gp->gv.shrineroute3.xCC);
+    rot = next2;
+    if (next2 > 0.17453292f) {
         rot = 0.17453292f;
         if (vel < 0.0f) {
             vel = -vel;
@@ -848,7 +852,7 @@ void grShrineRoute_80209BEC(Ground_GObj* gobj)
         if (rot > 6.283185307179586) {
             rot = (f32) ((f64) rot - 6.283185307179586);
         } else if (rot < -6.283185307179586) {
-            rot = (f32) ((f64) rot + 6.283185307179586);
+            rot += 6.283185307179586;
         }
         HSD_JObjSetRotationX(gp->gv.shrineroute3.xC4, rot);
 
@@ -857,7 +861,7 @@ void grShrineRoute_80209BEC(Ground_GObj* gobj)
         if (rot > 6.283185307179586) {
             rot = (f32) ((f64) rot - 6.283185307179586);
         } else if (rot < -6.283185307179586) {
-            rot = (f32) ((f64) rot + 6.283185307179586);
+            rot += 6.283185307179586;
         }
         HSD_JObjSetRotationY(gp->gv.shrineroute3.xC4, rot);
     }
@@ -909,7 +913,6 @@ bool grShrineRoute_8020A214(Ground_GObj* arg)
 
 void grShrineRoute_8020A21C(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
     HSD_GObj* player;
     Vec3 player_pos;
     Vec3 light_pos;
@@ -920,9 +923,10 @@ void grShrineRoute_8020A21C(Ground_GObj* gobj)
     Vec3 dir;
     GXColor color;
     Vec3 temp_pos;
-    s32 color_val;
     f32* dp;
     s32* sp;
+    s32* sp2;
+    Ground* gp;
     s32 count;
     s32 i;
     s32 j;
@@ -933,8 +937,9 @@ void grShrineRoute_8020A21C(Ground_GObj* gobj)
     f32 dx;
     f32 dy;
     f32 dist_sq;
-    PAD_STACK(16);
+    PAD_STACK(12);
 
+    gp = gobj->user_data;
     player = Ground_801C57A4();
     if (player != NULL) {
         ftLib_80086644(player, &player_pos);
@@ -946,6 +951,7 @@ void grShrineRoute_8020A21C(Ground_GObj* gobj)
 
     if ((u32) gp->gv.shrineroute2.xC4 != 0) {
         sp = sorted;
+        sp2 = sp;
         dp = distances;
         i = 0;
         while (i < (s32) gp->gv.shrineroute2.x168) {
@@ -978,14 +984,13 @@ void grShrineRoute_8020A21C(Ground_GObj* gobj)
             if (*dp < 10.0f) {
                 *dp = 10.0f;
             }
-            *sp = i;
+            *sp2 = i;
             dp += 1;
-            sp += 1;
+            sp2 += 1;
             i += 1;
         }
 
         /* Selection sort by distance */
-        sp = sorted;
         i = 0;
         while (i < (s32) gp->gv.shrineroute2.x168) {
             count = (s32) gp->gv.shrineroute2.x168;
@@ -1043,7 +1048,10 @@ void grShrineRoute_8020A21C(Ground_GObj* gobj)
                 light_pos.x *= weight;
                 light_pos.y *= weight;
                 light_pos.z *= weight;
-                lbVector_Add(&dir, &light_pos);
+                {
+                    Vec3* light_pos_ptr = &light_pos;
+                    lbVector_Add(&dir, light_pos_ptr);
+                }
             }
             sp += 1;
             i += 1;
@@ -1071,15 +1079,14 @@ void grShrineRoute_8020A21C(Ground_GObj* gobj)
             f32 dist_diff;
             dist_diff = distances[sorted[2]] - distances[sorted[1]];
             HSD_LObjGetColor(gp->gv.shrineroute2.xC8[sorted[1]], &color);
-            if (dist_diff < 50.0f) {
+            if (distances[sorted[2]] - distances[sorted[1]] < 50.0f) {
                 f32 ratio = dist_diff / 50.0f;
                 color.r = (u8) (s32) ((f32) (u8) color.r * ratio);
                 color.g = (u8) (s32) ((f32) color.g * ratio);
                 color.b = (u8) (s32) ((f32) color.b * ratio);
             }
         }
-        color_val = *(s32*) &color;
-        HSD_LObjSetColor(gp->gv.shrineroute2.x170, *(GXColor*) &color_val);
+        HSD_LObjSetColor(gp->gv.shrineroute2.x170, color);
 
         /* Copy position from 2nd nearest */
         if (HSD_LObjGetPosition(gp->gv.shrineroute2.xC8[sorted[1]],
@@ -1143,11 +1150,9 @@ void grShrineRoute_8020A8A4(Ground_GObj* gobj)
         HSD_JObjSetTranslateX(gp->gv.shrineroute3.xC4, 300.0f * cosf(angle));
         HSD_JObjSetTranslateY(gp->gv.shrineroute3.xC4, 300.0f * sinf(angle));
         gp->gv.shrineroute3.xD8 =
-            0.04363323f *
-            ((2.0f * grShrineRoute_8020A8A4_rand()) - 1.0f);
+            0.04363323f * ((2.0f * grShrineRoute_8020A8A4_rand()) - 1.0f);
         gp->gv.shrineroute3.xDC =
-            0.04363323f *
-            ((2.0f * grShrineRoute_8020A8A4_rand()) - 1.0f);
+            0.04363323f * ((2.0f * grShrineRoute_8020A8A4_rand()) - 1.0f);
     }
 }
 
@@ -1301,14 +1306,16 @@ void grShrineRoute_8020AF38(HSD_GObj* gobj, s32 arg1)
 {
     Ground* gp = GET_GROUND(gobj);
     HSD_GObj* pgobj;
+    HSD_GObj** symbolp;
     HSD_JObj* jobj;
     f32 scale;
     s32 ix = arg1 - 0xBD;
-    PAD_STACK(16);
+    PAD_STACK(4);
 
     pgobj = Ground_801C57A4();
 
     if (gp->gv.shrineroute.symbols[ix] != NULL) {
+        symbolp = gp->gv.shrineroute.symbols + ix;
         scale = 0.7f;
         if (((Ground*) gp->gv.shrineroute.symbols[ix]->user_data)->map_id == 1)
         {
@@ -1319,7 +1326,7 @@ void grShrineRoute_8020AF38(HSD_GObj* gobj, s32 arg1)
         jobj = Ground_801C2CF4(arg1);
         efSync_Spawn(0x428, gobj, jobj, &scale);
         Ground_801C4A08(gp->gv.shrineroute.symbols[ix]);
-        gp->gv.shrineroute.symbols[ix] = NULL;
+        *symbolp = NULL;
         if (pgobj != NULL) {
             ftLib_80086C18(pgobj, 0xB, 0x1E);
         }

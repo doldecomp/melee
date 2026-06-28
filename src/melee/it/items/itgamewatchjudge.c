@@ -13,8 +13,8 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/itzako.h"
 #include "it/item.h"
+#include "it/itzako.h"
 
 ItemStateTable it_803F7968[] = {
     { 0, itGamewatchjudge_UnkMotion0_Anim, NULL, NULL },

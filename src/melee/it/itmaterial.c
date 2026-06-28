@@ -7,12 +7,13 @@
 #include "it/inlines.h"
 #include "lb/lb_00B0.h"
 
+#include <baselib/class.h>
 #include <baselib/dobj.h>
 #include <baselib/tev.h>
 
 struct it_MObjInfo {
     /*   +0 */ HSD_ClassInfo parent;
-    /*  +3C */ HSD_MObjSetupFunc setup;
+    /*  +3C */ it_MObjSetupFunc setup;
     /*  +40 */ int (*load)(HSD_MObj* mobj, HSD_MObjDesc* desc);
     /*  +44 */ HSD_TExp* (*make_texp)(HSD_MObj* mobj, HSD_TObj* tobj_top,
                                       HSD_TExp** list);
@@ -21,20 +22,46 @@ struct it_MObjInfo {
     /*  +4C */ void (*unset)(HSD_MObj* mobj, u32 rendermode);
     /*  +50 */ HSD_TevDesc tevdesc_tmpl;
     /*  +C4 */ HSD_TECnst texp_tmpl;
-    /*  +DC */ char library_name[0xF4 - 0xDC];
-    /*  +F4 */ char report_fmt_no_register[0x118 - 0xF4];
-    /* +118 */ char assert_file[0x128 - 0x118];
-    /* +128 */ char report_fmt_no_register_2[0x150 - 0x128];
 };
+
+struct it_MObjInfo it_mobj = {
+    { { it_80277D08 } },
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    {
+        NULL,
+        1,
+        0,
+        0xFF,
+        0xFF,
+        0xFF,
+        {
+            {
+                GX_TEV_ADD,   GX_CC_CPREV,    GX_CC_ZERO,     GX_CC_ZERO,
+                GX_CC_ZERO,   GX_CS_SCALE_1,  GX_TB_ZERO,     GX_ENABLE,
+                GX_TEVPREV,   GX_TEV_ADD,     GX_CA_ZERO,     GX_CA_ZERO,
+                GX_CA_ZERO,   GX_CA_APREV,    GX_CS_SCALE_1,  GX_TB_ZERO,
+                GX_DISABLE,   GX_TEVPREV,     GX_TC_LINEAR,   GX_TEV_SWAP0,
+                GX_TEV_SWAP0, GX_TEV_KCSEL_1, GX_TEV_KASEL_1,
+            },
+        },
+    },
+    { HSD_TE_CNST, NULL, NULL, HSD_TE_RGB, HSD_TE_U8, 0xFF, 0xFF },
+};
+
 void it_80277D08(void)
 {
-    hsdInitClassInfo(&it_803F1F90.parent, &hsdMObj.parent,
-                     it_803F1F90.library_name, "it_mobj", 0x50, 0x20);
-    it_803F1F90.parent.release = hsdMObj.parent.release;
-    it_803F1F90.parent.amnesia = hsdMObj.parent.amnesia;
-    it_803F1F90.setup = (HSD_MObjSetupFunc) (Event) fn_80277D8C;
-    it_803F1F90.load = hsdMObj.load;
-    it_803F1F90.make_texp = hsdMObj.make_texp;
+    hsdInitClassInfo(HSD_CLASS_INFO(&it_mobj), HSD_CLASS_INFO(&hsdMObj),
+                     "sysdolphin_base_library", "it_mobj",
+                     sizeof(HSD_MObjInfo), sizeof(HSD_MObj));
+    it_mobj.parent.release = hsdMObj.parent.release;
+    it_mobj.parent.amnesia = hsdMObj.parent.amnesia;
+    it_mobj.setup = (it_MObjSetupFunc) fn_80277D8C;
+    it_mobj.load = hsdMObj.load;
+    it_mobj.make_texp = hsdMObj.make_texp;
 }
 
 void fn_80277D8C(HSD_MObj* mobj, u32 rendermode_arg, u32 unused_arg)
@@ -56,14 +83,14 @@ void fn_80277D8C(HSD_MObj* mobj, u32 rendermode_arg, u32 unused_arg)
     }
     tobj1_ptr = NULL;
     tobj2 = mobj->tobj;
-    if ((rendermode & 0x04000000) && tobj_shadows) {
+    if ((rendermode & RENDER_SHADOW) && tobj_shadows != NULL) {
         tobj1_ptr = &tobj2;
         while (*tobj1_ptr != NULL) {
             tobj1_ptr = &(*tobj1_ptr)->next;
         }
         *tobj1_ptr = tobj_shadows;
     }
-    if ((rendermode & 0x1000) && (tobj_toon != NULL) &&
+    if ((rendermode & RENDER_TOON) && (tobj_toon != NULL) &&
         (tobj_toon->imagedesc != NULL))
     {
         tobj_toon->next = tobj2;
@@ -74,10 +101,10 @@ void fn_80277D8C(HSD_MObj* mobj, u32 rendermode_arg, u32 unused_arg)
     HSD_MOBJ_METHOD(mobj)->setup_tev(mobj, tobj2, rendermode);
     it_80278108(item, mobj, it_80277F90(item, mobj, &sp38));
     if (item->x5C9 != 0xFF) {
-        rendermode |= 0x60000000;
+        rendermode |= RENDER_BLENDING;
     }
     if (item->xDCF_flag.b4 && !item->xDCF_flag.b5) {
-        rendermode |= 0x20000000;
+        rendermode |= RENDER_NO_ZUPDATE;
     }
     if (item->xDCF_flag.b5 && (item->x5C9 == 0xFF)) {
         pe_desc.flags = 0x38;
@@ -104,8 +131,8 @@ void fn_80277D8C(HSD_MObj* mobj, u32 rendermode_arg, u32 unused_arg)
 
 HSD_TExp* it_80277F90(Item* item, HSD_MObj* mobj, HSD_TExp* arg2)
 {
-    HSD_TevDesc sp14;
-    struct it_MObjInfo* info = &it_803F1F90;
+    HSD_TevDesc desc;
+    struct it_MObjInfo* info = &it_mobj;
     s32 reg;
     int chk;
 
@@ -115,26 +142,26 @@ HSD_TExp* it_80277F90(Item* item, HSD_MObj* mobj, HSD_TExp* arg2)
         arg2->cnst = info->texp_tmpl;
         reg = lbGetFreeColorRegister(0, mobj, NULL);
         if (reg == -1) {
-            OSReport(info->report_fmt_no_register);
-            __assert(info->assert_file, 0xDD, "0");
+            OSReport("can't find free color register!\n");
+            HSD_ASSERT(0xDD, 0);
         }
         arg2->cnst.reg = reg;
         arg2->cnst.val = &item->x548_colorOverlay.x50_light_color;
         HSD_TExpSetReg(arg2);
-        sp14 = info->tevdesc_tmpl;
-        sp14.stage = HSD_StateAssignTev();
-        sp14.color = 2;
-        sp14.u.tevconf.clr_a = GX_CC_ZERO;
-        sp14.u.tevconf.clr_b = lb_8000CC8C(reg);
-        sp14.u.tevconf.clr_c = GX_CC_RASA;
-        sp14.u.tevconf.clr_d = chk = 0;
+        desc = info->tevdesc_tmpl;
+        desc.stage = HSD_StateAssignTev();
+        desc.color = 2;
+        desc.u.tevconf.clr_a = GX_CC_ZERO;
+        desc.u.tevconf.clr_b = lb_8000CC8C(reg);
+        desc.u.tevconf.clr_c = GX_CC_RASA;
+        desc.u.tevconf.clr_d = chk = 0;
         if (reg < 4) {
             chk = 1;
         }
         if (chk) {
-            sp14.u.tevconf.kcsel = lb_8000CCA4(reg);
+            desc.u.tevconf.kcsel = lb_8000CCA4(reg);
         }
-        HSD_SetupTevStage(&sp14);
+        HSD_SetupTevStage(&desc);
         return arg2;
     }
     return NULL;
@@ -155,7 +182,7 @@ void it_80278108(Item* item, HSD_MObj* mobj, HSD_TExp* texp)
     s32 reg2;
     s32 var_r3;
     ColorOverlay* overlay;
-    struct it_MObjInfo* info = &it_803F1F90;
+    struct it_MObjInfo* info = &it_mobj;
 
     if (item->xDCF_flag.b5) {
         return;
@@ -226,8 +253,8 @@ void it_80278108(Item* item, HSD_MObj* mobj, HSD_TExp* texp)
         spFC = info->texp_tmpl;
         reg1 = lbGetFreeColorRegister(0, mobj, texp);
         if (reg1 == -1) {
-            OSReport(info->report_fmt_no_register);
-            __assert(info->assert_file, 0x144, "0");
+            OSReport("can't find free color register!\n");
+            HSD_ASSERT(0x144, 0);
         }
         spFC.reg = reg1;
         spFC.val = &sp168;
@@ -245,8 +272,8 @@ void it_80278108(Item* item, HSD_MObj* mobj, HSD_TExp* texp)
         }
         reg2 = lbGetFreeColorRegister(var_r3, mobj, (HSD_TExp*) &spFC);
         if (reg2 == -1) {
-            OSReport(info->report_fmt_no_register_2);
-            __assert(info->assert_file, 0x152, "0");
+            OSReport("can't find free color ratio register!\n");
+            HSD_ASSERT(0x152, 0);
         }
         if (item->x5C9 != 0xFF) {
             sp90 = info->texp_tmpl;
@@ -412,52 +439,3 @@ void it_80278574(HSD_GObj* gobj, GXColor* arg1)
         }
     }
 }
-
-struct it_MObjInfo it_803F1F90 = {
-    { { it_80277D08 } },
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    {
-        NULL,
-        1,
-        0,
-        0xFF,
-        0xFF,
-        0xFF,
-        {
-            {
-                GX_TEV_ADD,
-                GX_CC_CPREV,
-                GX_CC_ZERO,
-                GX_CC_ZERO,
-                GX_CC_ZERO,
-                GX_CS_SCALE_1,
-                GX_TB_ZERO,
-                1,
-                GX_TEVPREV,
-                GX_TEV_ADD,
-                GX_CA_ZERO,
-                GX_CA_ZERO,
-                GX_CA_ZERO,
-                GX_CA_APREV,
-                GX_CS_SCALE_1,
-                GX_TB_ZERO,
-                0,
-                GX_TEVPREV,
-                GX_TC_LINEAR,
-                GX_TEV_SWAP0,
-                GX_TEV_SWAP0,
-                GX_TEV_KCSEL_1,
-                GX_TEV_KASEL_1,
-            },
-        },
-    },
-    { HSD_TE_CNST, NULL, NULL, HSD_TE_RGB, HSD_TE_U8, 0xFF, 0xFF },
-    "sysdolphin_base_library",
-    "can\'t find free color register!\n",
-    "itmaterial.c",
-    "can\'t find free color ratio register!\n",
-};

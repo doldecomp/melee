@@ -2080,7 +2080,7 @@ bool mpColl_80046224_LeftWall(CollData* coll)
     int* arr = mpColl_80458810.left;
     int i;
 
-    mpColl_804D6490_max_x = F32_MAX;
+    mpColl_804D6490_max_x = *(float*) &mpColl_804D7FA0;
     for (i = 0; i < mpColl_804D648C; arr++, i++) {
         float f30;
         float f29;
@@ -2204,7 +2204,7 @@ bool mpColl_80046224_LeftWall(CollData* coll)
             int line_id2;
             for (line_id2 = wall_id;
                  line_id2 != -1 && (mpLineGetKind(line_id2) &
-                                     LINE_FLAG_KIND) == CollLine_LeftWall;
+                                    LINE_FLAG_KIND) == CollLine_LeftWall;
                  line_id2 = mpLineGetPrev(line_id2))
             {
                 mpLineGetV0Pos(line_id2, &pos);
@@ -2289,8 +2289,7 @@ static inline void mpCollCeilingInline(CollData* coll)
     if (mpCheckLeftWall(top_x, top_y, side_x, side_y, NULL, &left_wall_id,
                         NULL, NULL, coll->joint_id_skip,
                         coll->joint_id_only) &&
-        left_wall_id != non_ceiling_id)
-    { // Collision_CheckLeftWallHug
+        left_wall_id != non_ceiling_id) { // Collision_CheckLeftWallHug
         hit_wall = true;
     } else {
         hit_wall = false;
@@ -2307,8 +2306,7 @@ static inline void mpCollCeilingInline(CollData* coll)
     if (mpCheckRightWall(top_x, top_y, side_x, side_y, NULL, &right_wall_id,
                          NULL, NULL, coll->joint_id_skip,
                          coll->joint_id_only) &&
-        right_wall_id != non_ceiling_id)
-    { // Collision_CheckRightWallHug
+        right_wall_id != non_ceiling_id) { // Collision_CheckRightWallHug
         hit_wall = true;
     } else {
         hit_wall = false;
@@ -2322,14 +2320,14 @@ static inline void mpCollFloorInline(CollData* coll, bool ecb_unlocked,
                                      u32 squeeze_flags)
 {
     int wall_id;
-    if (mpColl_80043BBC(coll, &wall_id))
-    { // Physics_CheckFloorConnectedLeftWallHug
+    if (mpColl_80043BBC(coll,
+                        &wall_id)) { // Physics_CheckFloorConnectedLeftWallHug
         // Physics_LeftWallFloorMultiCollide
         mpColl_80043C6C(coll, wall_id, ecb_unlocked && !(squeeze_flags & 1));
     }
 
-    if (mpColl_80043E90(coll, &wall_id))
-    { // Physics_CheckFloorConnectedRightWallHug
+    if (mpColl_80043E90(coll,
+                        &wall_id)) { // Physics_CheckFloorConnectedRightWallHug
         // Physics_RightWallFloorMultiCollide
         mpColl_80043F40(coll, wall_id, ecb_unlocked && !(squeeze_flags & 1));
     }
@@ -2341,10 +2339,10 @@ bool mpColl_80046904(CollData* coll, u32 flags)
     int squeeze_flags;     // r30
     int old_squeeze_flags; // r29
     int squeeze_flags_all; // r28
-    bool stay_airborne;    // r24
     int left_right_flags;  // r23
-    bool platform_pass;    // r25
     bool touched_floor;    // r22
+    bool platform_pass;    // r25
+    bool stay_airborne;    // r24
     PAD_STACK(0x8);
 
     platform_pass = flags & CollisionFlagAir_PlatformPassCallback;
@@ -2376,8 +2374,8 @@ bool mpColl_80046904(CollData* coll, u32 flags)
         }
 
         if (mpColl_80044E10_RightWall(coll)) { // Physics_RightWallCheckAir
-            if (mpColl_800454A4_RightWall(coll))
-            { // Physics_RightWallCollideAir
+            if (mpColl_800454A4_RightWall(
+                    coll)) { // Physics_RightWallCollideAir
                 left_right_flags |= 2;
                 squeeze_flags |= 4;
             }
@@ -2393,8 +2391,8 @@ bool mpColl_80046904(CollData* coll, u32 flags)
         }
 
         if (mpColl_80044E10_RightWall(coll)) { // Physics_RightWallCheckAir
-            if (mpColl_800454A4_RightWall(coll))
-            { // Physics_RightWallCollideAir
+            if (mpColl_800454A4_RightWall(
+                    coll)) { // Physics_RightWallCollideAir
                 left_right_flags |= 2;
                 squeeze_flags |= 4;
             }
@@ -2410,8 +2408,8 @@ bool mpColl_80046904(CollData* coll, u32 flags)
         y_after_collide_floor = 0.0F;
 
         if (mpColl_80044AD8_Ceiling(coll, left_right_flags) &&
-            mpColl_80044C74_Ceiling(coll))
-        { // Physics_CeilingCheck, Physics_CeilingCollideAir
+            mpColl_80044C74_Ceiling(
+                coll)) { // Physics_CeilingCheck, Physics_CeilingCollideAir
             mpCollCeilingInline(coll);
 
             squeeze_flags |= 1;
@@ -2430,8 +2428,8 @@ bool mpColl_80046904(CollData* coll, u32 flags)
 
         if (r3) {
             if (stay_airborne) {
-                if (mpColl_80044948_Floor(coll))
-                { // Physics_FloorCollideStayAirborne
+                if (mpColl_80044948_Floor(
+                        coll)) { // Physics_FloorCollideStayAirborne
                     mpCollFloorInline(coll, false, squeeze_flags);
                 }
             } else {
@@ -2441,9 +2439,10 @@ bool mpColl_80046904(CollData* coll, u32 flags)
                     ecb_unlocked = true;
                 }
 
-                if (mpColl_80044838_Floor(coll, ecb_unlocked &&
-                                                    !(squeeze_flags & 1)))
-                { // Physics_SnapToFloorNoEdgePass
+                if (mpColl_80044838_Floor(
+                        coll, ecb_unlocked &&
+                                  !(squeeze_flags &
+                                    1))) { // Physics_SnapToFloorNoEdgePass
                     mpCollFloorInline(coll, ecb_unlocked, squeeze_flags);
 
                     coll->x34_flags.b5 = true;
@@ -2454,8 +2453,8 @@ bool mpColl_80046904(CollData* coll, u32 flags)
             y_after_collide_floor = coll->cur_pos.y;
             squeeze_flags |= 2;
             if (mpColl_80044AD8_Ceiling(coll, left_right_flags) &&
-                mpColl_80044C74_Ceiling(coll))
-            { // Physics_CeilingCheck, Physics_CeilingCollideAir
+                mpColl_80044C74_Ceiling(
+                    coll)) { // Physics_CeilingCheck, Physics_CeilingCollideAir
                 mpCollCeilingInline(coll);
 
                 squeeze_flags |= 1;
@@ -2482,8 +2481,9 @@ bool mpColl_80046904(CollData* coll, u32 flags)
 
         if (!on_edge && coll->cur_pos.y < coll->prev_pos.y) {
             if (coll->facing_dir == 1 || coll->facing_dir == 0) {
-                if (mpColl_80044164(coll, &coll->ledge_id_left))
-                { // Physics_CheckForLeftLedge
+                if (mpColl_80044164(
+                        coll,
+                        &coll->ledge_id_left)) { // Physics_CheckForLeftLedge
                     on_edge = true;
                     coll->env_flags |= Collide_LeftLedgeGrab;
                 } else {
@@ -2494,8 +2494,9 @@ bool mpColl_80046904(CollData* coll, u32 flags)
                 }
             }
             if (coll->facing_dir == -1 || coll->facing_dir == 0) {
-                if (mpColl_800443C4(coll, &coll->ledge_id_right))
-                { // Physics_CheckForRightLedge
+                if (mpColl_800443C4(
+                        coll,
+                        &coll->ledge_id_right)) { // Physics_CheckForRightLedge
                     on_edge = true;
                     coll->env_flags |= Collide_RightLedgeGrab;
                 } else {

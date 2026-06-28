@@ -3,10 +3,8 @@
 
 #include <placeholder.h>
 
-#include "dolphin/gx/GXStruct.h"
-
 #include "ft/forward.h"
-#include "sc/forward.h"
+#include "vi/forward.h"
 #include <baselib/forward.h>
 
 /* 31F980 */ void un_8031F980(int arg0, int arg1);
@@ -19,5 +17,6 @@
 /* 31FCBC */ void fn_8031FCBC(HSD_GObj*);
 /* 31FD18 */ void un_8031FD18_OnEnter(void* arg);
 /* 320490 */ void un_80320490_OnFrame(void);
+/* 4D7004 */ extern un_804D7004_t un_804D7004;
 
 #endif

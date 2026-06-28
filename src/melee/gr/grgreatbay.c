@@ -18,15 +18,15 @@
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/stage.h"
-#include "it/it_266F.h"
 #include "it/item.h"
 #include "it/items/ittincle.h"
+#include "it/itspawn.h"
+#include "it/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/types.h"
 #include "mp/mplib.h"
 
-#include <string.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
@@ -443,9 +443,10 @@ void grGreatBay_801F499C(Ground_GObj* gobj)
             switch (gp->gv.greatbay.xC5.b0123456) {
             case 1: {
                 HSD_JObjSetTranslateX(
-                    jobj, grGb_804D69E0.x0->kame_x +
-                              rand_range(grGb_804D69E0.x0->kame_x_fb_offset_b,
-                                         grGb_804D69E0.x0->kame_x_fb_offset_a));
+                    jobj,
+                    grGb_804D69E0.x0->kame_x +
+                        rand_range(grGb_804D69E0.x0->kame_x_fb_offset_b,
+                                   grGb_804D69E0.x0->kame_x_fb_offset_a));
                 mpLib_80057BC0(2);
                 mpLib_80057BC0(3);
                 mpLib_80057BC0(4);
@@ -457,9 +458,10 @@ void grGreatBay_801F499C(Ground_GObj* gobj)
                 break;
             case 0: {
                 HSD_JObjSetTranslateX(
-                    jobj, grGb_804D69E0.x0->kame_x +
-                              rand_range(grGb_804D69E0.x0->kame_x_lr_offset_b,
-                                         grGb_804D69E0.x0->kame_x_lr_offset_a));
+                    jobj,
+                    grGb_804D69E0.x0->kame_x +
+                        rand_range(grGb_804D69E0.x0->kame_x_lr_offset_b,
+                                   grGb_804D69E0.x0->kame_x_lr_offset_a));
                 mpJointListAdd(2);
                 mpJointListAdd(3);
                 mpJointListAdd(4);
@@ -468,9 +470,10 @@ void grGreatBay_801F499C(Ground_GObj* gobj)
             }
             case 3: {
                 HSD_JObjSetTranslateX(
-                    jobj, grGb_804D69E0.x0->kame_x +
-                              rand_range(grGb_804D69E0.x0->kame_x_fb_offset_b,
-                                         grGb_804D69E0.x0->kame_x_fb_offset_a));
+                    jobj,
+                    grGb_804D69E0.x0->kame_x +
+                        rand_range(grGb_804D69E0.x0->kame_x_fb_offset_b,
+                                   grGb_804D69E0.x0->kame_x_fb_offset_a));
                 mpLib_80057BC0(2);
                 mpLib_80057BC0(3);
                 mpLib_80057BC0(4);

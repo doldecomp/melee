@@ -62,6 +62,8 @@ struct un_804A1F58_x8_t {
     unsigned char x10;
 };
 
+static u8 un_804A1F48[0x10];
+
 /* 4A1F58 */ static struct un_804A1F58_t {
     unsigned int x0;
     char pad_x4[4];
@@ -165,24 +167,26 @@ void un_802FF1B4(void)
     un_802FEFAC();
 }
 
-void fn_802FF218(HSD_GObj* arg0)
+static inline int fn_802FF218_inline(HSD_GObj* arg0)
 {
     int x;
-    int y;
-    struct un_804A1F58_x8_t* thing;
-    PAD_STACK(24);
     for (x = 0; x < 6; x++) {
         if (un_804A1F58.x8[x].x0 == arg0) {
-            y = x;
-            goto _done;
+            return x;
         }
     }
-    y = -1;
-_done:
+    return -1;
+}
+
+void fn_802FF218(HSD_GObj* arg0)
+{
+    int y;
+    PAD_STACK(32);
+    y = fn_802FF218_inline(arg0);
     if (y >= 0) {
-        thing = &un_804A1F58.x8[y];
+        struct un_804A1F58_x8_t* thing = &un_804A1F58.x8[y];
         if (thing->x10 == 1) {
-            HSD_SisLib_803A70A0(thing->x4, thing->x8, "");
+            HSD_SisLib_803A70A0(thing->x4, thing->x8, "  ");
         } else {
             int s;
             gm_8016B774();
@@ -227,9 +231,8 @@ void un_802FF364(int slot)
     if (s > 9999) {
         s = 9999;
     }
-    thing->x8 =
-        HSD_SisLib_803A6B98(thing->x4, ifAll->x, un_804DDC28 + ifAll->y, "%d",
-                            s);
+    thing->x8 = HSD_SisLib_803A6B98(thing->x4, ifAll->x,
+                                    un_804DDC28 + ifAll->y, "%d", s);
     HSD_SisLib_803A7548(thing->x4, thing->x8, un_804DDC2C, un_804DDC2C);
     thing->x4->render_callback = fn_802FF360;
     thing->x0 = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
@@ -247,15 +250,18 @@ void un_802FF498(void)
 void un_802FF4FC(void)
 {
     int i;
-    PAD_STACK(8);
+    struct un_804A1F58_t* base = &un_804A1F58;
     for (i = 0; i < 6; i++) {
-        if (un_804A1F58.x8[i].x0) {
-            HSD_GObjPLink_80390228(un_804A1F58.x8[i].x0);
+        struct un_804A1F58_x8_t* thing;
+        thing = (0, &base->x8[i]);
+        if (thing->x0) {
+            HSD_GObjPLink_80390228(thing->x0);
         }
-        if (un_804A1F58.x8[i].x4) {
-            HSD_SisLib_803A5CC4(un_804A1F58.x8[i].x4);
+        if (thing->x4) {
+            HSD_SisLib_803A5CC4(thing->x4);
         }
     }
+    (void) base;
 }
 
 void un_802FF570(void)

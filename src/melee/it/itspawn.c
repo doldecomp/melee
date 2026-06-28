@@ -50,18 +50,22 @@ void it_8026C47C(struct it_8026C47C_arg0_t* arg_struct)
     }
 }
 
+static inline s32 it_8026C530_pi1317(s32 arg3)
+{
+    return arg3 - 1;
+}
 s32 it_8026C530(s32 arg0, ItemPickTable* arg1, s32 arg2, s32 arg3)
 {
+    s32 last;
+    s32 var_r5;
     u16* temp_r10;
+    s32 mid;
     s32 temp_r6;
     s32 temp_r7;
-    s32 mid;
     u16* temp_r9;
-    s32 var_r5;
-    s32 last;
 
     var_r5 = arg2;
-    last = arg3 - 1;
+    last = it_8026C530_pi1317(arg3);
     if (var_r5 == last) {
         return var_r5;
     }
@@ -274,6 +278,7 @@ void it_8026CB9C(s32* counts, u64 mask, f32 weight)
     ItemKind it_kind2;
     s32* p2;
     s32 cumulative;
+    s32 idx;
     u64 backup;
 
     backup = mask;
@@ -293,10 +298,65 @@ void it_8026CB9C(s32* counts, u64 mask, f32 weight)
     *(weights = &spawner->x4.xC) = HSD_MemAlloc(cnt * 4);
 
     cnt2 = 0;
-    mask = backup;
     p2 = counts;
+    mask = backup;
+    idx = cnt2;
     it_kind2 = 0;
     cumulative = 0;
+    while (it_kind2 < It_Kind_L_Gun_Ray) {
+        if ((mask & 1) && *p2 != 0) {
+            (*item_kinds)[cnt2] = it_kind2;
+            (*weights)[idx] = cumulative;
+            cnt2++;
+            idx++;
+            cumulative = (cumulative + ((weight * *p2) + 0.99f));
+        }
+        p2++;
+        it_kind2++;
+        mask >>= 1;
+    }
+}
+
+void it_8026CD50(s32* counts, u64 mask, f32 weight)
+{
+    typedef struct {
+        RandomItemSpawner alloc;
+        ItemPickTable common;
+        ItemPickTable monster;
+    } ItemSpawnTables;
+    ItemSpawnTables* tables = (ItemSpawnTables*) &it_804A0E30;
+    u16** weights;
+    u8** item_kinds;
+    s32* p;
+    s32 cnt;
+    ItemKind it_kind;
+    ItemKind it_kind2;
+    s32 cnt2;
+    s32* p2;
+    s32 cumulative;
+    u64 backup;
+
+    backup = mask;
+    p = counts + It_Kind_BombHei;
+    cnt = 0;
+    it_kind = It_Kind_BombHei;
+    while (it_kind < It_Kind_L_Gun_Ray) {
+        if ((mask & 1) && *p != 0) {
+            cnt++;
+        }
+        p++;
+        it_kind++;
+        mask >>= 1;
+    }
+    tables->common.x0 = cnt;
+    *(item_kinds = &tables->common.x4) = HSD_MemAlloc(cnt * 4);
+    *(weights = &tables->common.xC) = HSD_MemAlloc(cnt * 4);
+
+    mask = backup;
+    p2 = counts + It_Kind_BombHei;
+    cumulative = (cnt2 = 0);
+    cnt2 = 0;
+    it_kind2 = It_Kind_BombHei;
     while (it_kind2 < It_Kind_L_Gun_Ray) {
         if ((mask & 1) && *p2 != 0) {
             (*item_kinds)[cnt2] = it_kind2;
@@ -307,70 +367,6 @@ void it_8026CB9C(s32* counts, u64 mask, f32 weight)
         p2++;
         it_kind2++;
         mask >>= 1;
-    }
-}
-
-void it_8026CD50(s32* arg0, u64 arg1, f32 arg2)
-{
-    typedef struct {
-        RandomItemSpawner alloc;
-        ItemPickTable common;
-        ItemPickTable monster;
-    } ItemSpawnTables;
-    ItemSpawnTables* tables = (ItemSpawnTables*) &it_804A0E30;
-    s32 struct_size;
-    ItemKind it_kind;
-    s32 cumulative;
-    s32 idx;
-    s32* p;
-    s32 cnt;
-    u32 mask_low;
-    u64 temp_ret;
-    u64 mask;
-
-    mask_low = (u32) arg1;
-    mask = arg1;
-    p = arg0 + It_Kind_BombHei;
-    cnt = 0;
-    it_kind = It_Kind_BombHei;
-    {
-        s32 new_var = It_Kind_L_Gun_Ray;
-        while (it_kind < new_var) {
-            if (((mask & 1) != 0) && (*p != 0)) {
-                cnt++;
-            }
-            p++;
-            it_kind++;
-            temp_ret = __shr2u(mask, mask_low, 1);
-            mask = temp_ret;
-        }
-    }
-    struct_size = cnt * 4;
-    idx = struct_size;
-    mask_low = (u32) temp_ret;
-    tables->common.x0 = cnt;
-    tables->common.x4 = HSD_MemAlloc(idx);
-    tables->common.xC = HSD_MemAlloc(idx);
-    cnt = 0;
-    p = arg0 + It_Kind_BombHei;
-    idx = 0;
-    cumulative = 0;
-    it_kind = It_Kind_BombHei;
-    while (it_kind < It_Kind_L_Gun_Ray) {
-        mask_low = (u32) arg1;
-        struct_size = cumulative;
-        if ((((mask & 1) ^ 0) != 0) && (*p != 0)) {
-            tables->common.x4[cnt] = it_kind;
-            cnt++;
-            tables->common.xC[idx] = struct_size;
-            idx++;
-            cumulative = cumulative + ((arg2 * *p) + 0.99f);
-        }
-        p++;
-        it_kind++;
-        temp_ret = __shr2u(mask, mask_low, 1);
-        mask_low = (u32) temp_ret;
-        mask = temp_ret;
     }
 }
 
@@ -404,11 +400,14 @@ void it_8026CF04(void)
         tables->monster.xC = HSD_MemAlloc(tables->monster.x0 * 4);
         xC_loc = &tables->monster.xC;
         item_common = it_804D6D28;
-        cumulative = idx = i = 0;
+        idx = i = 0;
+        counts = &item_common->x128[i];
+        (void) counts;
+        cumulative = 0;
         for (; i < 4; i++, idx++) {
             (*x4_loc)[i] = It_Kind_Kuriboh + i;
             (*xC_loc)[idx] = cumulative;
-            cumulative += item_common->x128[i];
+            cumulative += counts[i];
         }
     }
 }
@@ -422,7 +421,6 @@ void it_8026D018(void)
     } ItemSpawnTables;
     ItemSpawnTables* tables = (ItemSpawnTables*) &it_804A0E30;
     bool chk;
-    u8 _padA[8];
     if (!gm_8016B238() && (gm_8016AE80() != -1)) {
         tables->alloc.x18 = gm_8016AEA4();
         {
@@ -448,7 +446,7 @@ void it_8026D018(void)
                 f32 weight = gm_8016AE94();
                 if ((stage_mask != 0) && (stage_info != NULL)) {
                     u64 monster_mask = stage_mask >> 6;
-                    it_8026CA4C(&tables->common, stage_info, stage_mask, 6,
+                    it_8026CA4C(&tables->common, stage_info, monster_mask, 6,
                                 weight);
                     if (tables->common.x8 != 0) {
                         it_8026CD50(stage_info, monster_mask, weight);
@@ -459,10 +457,10 @@ void it_8026D018(void)
             HSD_GObj_SetupProc(GObj_Create(5U, 7U, 0U), fn_8026C88C, 0U);
             {
                 s32* range = &it_804D6D28->xFC[gm_8016AE80() * 2];
-                s32* alloc_x0 = (s32*) &it_804A0E30.x0;
                 f32 randf = HSD_Randf();
-                *alloc_x0 = (range[1] - range[0]) * randf + range[0];
-                *alloc_x0 *= Ground_801C2AE8(Stage_80225194());
+                f32 diff = range[1] - range[0];
+                tables->alloc.x0 = diff * randf + range[0];
+                tables->alloc.x0 *= Ground_801C2AE8(Stage_80225194());
             }
         }
     }

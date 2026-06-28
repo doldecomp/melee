@@ -1,12 +1,14 @@
-#ifndef MELEE_GM_18A5_H
-#define MELEE_GM_18A5_H
+#ifndef GALE01_18A514
+#define GALE01_18A514
 
 #include <placeholder.h>
 
-#include <melee/ft/forward.h>
-#include <melee/gm/forward.h>
-#include <melee/mn/forward.h>
-#include <melee/sc/forward.h>
+#include "gm/types.h"
+
+#include "melee/ft/forward.h"
+#include "melee/gm/forward.h"
+#include "melee/mn/forward.h"
+#include "melee/sc/forward.h"
 #include <sysdolphin/baselib/forward.h>
 
 /* 18A514 */ void fn_8018A514(int, float);
@@ -25,7 +27,6 @@
 /* 18ECA8 */ void fn_8018ECA8(s32, s32, s32, f32, f32, s32);
 /* 18F00C */ void fn_8018F00C(char*, s32);
 /* 18F1B0 */ s32 gm_8018F1B0(MatchEnd* me);
-/* 17F294 */ int fn_8017F294(void);
 /* 18F310 */ int fn_8018F310(int);
 /* 18F3BC */ int fn_8018F3BC(s32 arg0);
 /* 18F3D0 */ int fn_8018F3D0(int);
@@ -40,8 +41,7 @@
 /* 18F6A8 */ u32 fn_8018F6A8(int);
 /* 18F6DC */ int fn_8018F6DC(int);
 /* 18F6FC */ CharacterKind fn_8018F6FC(CSSIconHud);
-/* 18F71C */ float
-fn_8018F71C(int, int); ///< returns the frame for the tou css icon?
+/* 18F71C */ float fn_8018F71C(int, int);
 /* 18F74C */ int fn_8018F74C(void);
 /* 18F808 */ int fn_8018F808(void);
 /* 18F888 */ void fn_8018F888(void);
@@ -141,5 +141,37 @@ fn_8018F71C(int, int); ///< returns the frame for the tou css icon?
 /* 19B458 */ void fn_8019B458(s32* arg0);
 /* 19B81C */ void fn_8019B81C(s32* arg0);
 /* 19B860 */ void fn_8019B860(TmData*);
+/* 19B8C4 */ void gm_8019B8C4_OnEnter(void*);
+/* 19B9C8 */ void gm_8019B9C8_OnLeave(void*);
+/* 19BA04 */ void fn_8019BA04(s32* arg0);
+/* 19BA08 */ void fn_8019BA08(u8, HSD_JObj*);
+/* 19BF18 */ void fn_8019BF18(HSD_GObj*);
+/* 19BF8C */ void fn_8019BF8C(HSD_GObj*);
+/* 19C048 */ void fn_8019C048(HSD_GObj*);
+/* 19C3EC */ void fn_8019C3EC(HSD_GObj*);
+/* 19C570 */ void fn_8019C570(HSD_GObj*);
+/* 19C6AC */ void fn_8019C6AC(HSD_GObj*);
+/* 19C744 */ void fn_8019C744(HSD_GObj*);
+/* 19CA38 */ void fn_8019CA38(HSD_GObj*);
+/* 19CBFC */ void fn_8019CBFC(HSD_GObj*);
+/* 19CC74 */ void fn_8019CC74(HSD_GObj*);
+/* 19CDBC */ void fn_8019CDBC(HSD_GObj*);
+/* 19CFA4 */ void fn_8019CFA4(HSD_GObj*);
+/* 19D074 */ void fn_8019D074(HSD_GObj*);
+/* 19D1BC */ void fn_8019D1BC(void);
+/* 19DD60 */ void fn_8019DD60(void);
+/* 19DF8C */ void gm_8019DF8C_OnFrame(void);
+/* 19E634 */ void gm_8019E634(void);
+/* 19ECAC */ void gm_8019ECAC_OnEnter(void*);
+/* 19EE54 */ void gm_8019EE54_OnLeave(void*);
+/* 19EE80 */ void fn_8019EE80(TmVsData*);
+/* 19EF08 */ void fn_8019EF08(TmVsData*);
+/* 4771C4 */ extern TmData gm_804771C4;
+/* 477738 */ extern MatchEnd gm_80477738;
+/* 473AB8 */ extern BracketEntry lbl_80473AB8[64];
+/* 4D663C */ extern HSD_GObj* lbl_804D663C;
+/* 4771B8 */ extern struct TmBoxArrays lbl_804771B8;
+/* 3D9F80 */ extern struct TmSettingTable lbl_803D9F80;
+/* 3D9D20 */ extern struct lbl_803D9D20_t lbl_803D9D20;
 
 #endif

@@ -177,8 +177,9 @@ void it_802B7160(Fighter_GObj* gobj, itSamusGrapple_HitboxData* data)
     hitbox->b_offset.z =
         data->create_hitbox.create_hitbox_2.x_offset * 0.003906f;
     ftColl_8007AC9C(hitbox, data->create_hitbox.create_hitbox_3.angle, gobj);
-    hitbox_flags = (struct samus_grapple_hitbox_flags*)
-        &data->create_hitbox.create_hitbox_4 + 3;
+    hitbox_flags = (struct samus_grapple_hitbox_flags*) &data->create_hitbox
+                       .create_hitbox_4 +
+                   3;
     hitbox->x24 = data->create_hitbox.create_hitbox_3.knockback_growth;
     hitbox->x28 = data->create_hitbox.create_hitbox_3.weight_set_knockback;
     hitbox->x43_b0 = data->create_hitbox.create_hitbox_3.item_hit_interaction;
@@ -188,14 +189,12 @@ void it_802B7160(Fighter_GObj* gobj, itSamusGrapple_HitboxData* data)
     hitbox->x2C =
         ((struct spawn_hitbox_4*) (hitbox_flags - 3))->base_knockback;
     hitbox->element = ((struct spawn_hitbox_4*) (hitbox_flags - 3))->element;
-    hitbox->x34 =
-        ((struct spawn_hitbox_4*) (hitbox_flags - 3))->shield_damage;
+    hitbox->x34 = ((struct spawn_hitbox_4*) (hitbox_flags - 3))->shield_damage;
     hitbox->sfx_severity =
         ((struct spawn_hitbox_4*) (hitbox_flags - 3))->hit_sfx_severity;
     hitbox->sfx_kind =
         ((struct spawn_hitbox_4*) (hitbox_flags - 3))->hit_sfx_kind;
-    hitbox->x40_b2 =
-        ((struct spawn_hitbox_4*) (hitbox_flags - 3))->hit_aerial;
+    hitbox->x40_b2 = ((struct spawn_hitbox_4*) (hitbox_flags - 3))->hit_aerial;
     hitbox->x40_b3 = hitbox_flags->hit_grounded;
     hitbox->x42_b5 = 1;
     hitbox->x42_b7 = 1;
@@ -457,7 +456,6 @@ Item_GObj* it_802B7C18(Fighter_GObj* owner, Vec3* pos, f32 facing_dir)
 
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {
-
         ip = GET_ITEM(item_gobj);
         jobj = item_gobj->hsd_obj;
         attrs = ip->xC4_article_data->x4_specialAttributes;
@@ -593,8 +591,7 @@ void fn_802B805C(Item_GObj* gobj)
     samus_grapple_state_sync(fp);
 
     link = ip->xDD4_itemVar.samusgrapple.x0;
-    if (!samus_grapple_fighter_compare(fp->motion_id) &&
-        !(link->next->x2C_b0))
+    if (!samus_grapple_fighter_compare(fp->motion_id) && !(link->next->x2C_b0))
     {
         it_802B7B84(gobj);
         return;
@@ -661,6 +658,7 @@ void fn_802B8384(Item_GObj* gobj)
     PAD_STACK(20);
 
     fp = owner->user_data;
+    (void) fp;
     link = ip->xDD4_itemVar.samusgrapple.x0;
     samus_grapple_setup_pos(link, &pos, m);
 
@@ -1564,12 +1562,9 @@ void it_802BA5DC(ItemLink* tail, ItemLink* head, Vec3* pos,
                     attrs->x38)
                 {
                     dir_ptr = &dir;
-                    link->pos.x =
-                        (dir_ptr->x * attrs->x38) + head_link->pos.x;
-                    link->pos.y =
-                        (dir_ptr->y * attrs->x38) + head_link->pos.y;
-                    link->pos.z =
-                        (dir_ptr->z * attrs->x38) + head_link->pos.z;
+                    link->pos.x = (dir_ptr->x * attrs->x38) + head_link->pos.x;
+                    link->pos.y = (dir_ptr->y * attrs->x38) + head_link->pos.y;
+                    link->pos.z = (dir_ptr->z * attrs->x38) + head_link->pos.z;
                 } else {
                     retracted = true;
                 }

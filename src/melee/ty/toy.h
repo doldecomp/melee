@@ -54,9 +54,9 @@
                                enum_t unused); /// @todo :: fill out the struct
                                                /// that this uses/returns
 /* 308250 */ void un_80308250(u8* arg0, s32 arg1, s32 arg2);
-/* 3082F8 */ void un_803082F8(s16 idx);
+/* 3082F8 */ s32 un_803082F8(s16 idx);
 /* 308328 */ void un_80308328(s32 arg0);
-/* 308354 */ s16 un_80308354(s16 idx);
+/* 308354 */ s32 un_80308354(s16 idx);
 /* 3083D8 */ void un_803083D8(HSD_JObj* jobj, s32 arg1);
 /* 3084A0 */ void un_803084A0(s32 arg0);
 /* 3087F4 */ HSD_GObj* un_803087F4(void*);

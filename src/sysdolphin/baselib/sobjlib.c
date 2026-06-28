@@ -148,7 +148,10 @@ void HSD_SObjLib_803A4740(HSD_SObj* sobj)
     }
 }
 
-static char filename[] = "sobjlib.c";
+static void order_data(void)
+{
+    (void) __FILE__;
+}
 
 HSD_SObj* HSD_SObjLib_803A477C(HSD_GObj* gobj, HSD_SObjDesc* desc,
                                GXTexWrapMode wrap_s, GXTexWrapMode wrap_t,
@@ -164,7 +167,7 @@ HSD_SObj* HSD_SObjLib_803A477C(HSD_GObj* gobj, HSD_SObjDesc* desc,
     if (use_secondary) {
         image = desc->image;
         tlut = desc->tlut;
-        image2 = desc->image2;
+        image2 = ((HSD_SObjDesc2*) desc)->image2;
     } else {
         image = desc->image;
         image2 = NULL;
@@ -172,9 +175,7 @@ HSD_SObj* HSD_SObjLib_803A477C(HSD_GObj* gobj, HSD_SObjDesc* desc,
     }
 
     sobj = HSD_ObjAlloc(&HSD_SObjLib_804D10E0);
-    if (sobj == NULL) {
-        __assert(filename, 0x11F, "sobj");
-    }
+    HSD_ASSERT(287, sobj);
 
     if (tlut != NULL) {
         GXInitTlutObj(&sobj->x70_tlutobj, tlut->lut, tlut->fmt,
@@ -325,8 +326,12 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
         }
     }
 
-    if ((u8) (tex_fmt - GX_TF_C4) <= 1U) {
-        GXLoadTlut(&sobj->x70_tlutobj, GX_TLUT0);
+    {
+        bool is_ci_texture = (u8) (tex_fmt - GX_TF_C4) <= 1U;
+
+        if (is_ci_texture) {
+            GXLoadTlut(&sobj->x70_tlutobj, GX_TLUT0);
+        }
     }
     if (!(sobj->x40 & 0x10)) {
         GXLoadTexObj(&sobj->x50_texobj, GX_TEXMAP0);

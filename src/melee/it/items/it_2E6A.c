@@ -7,11 +7,11 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_3F14.h"
-#include "it/ithitbox.h"
-#include "it/itzako.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
 #include "it/items/types.h"
+#include "it/ithitbox.h"
+#include "it/itzako.h"
 #include "it/types.h"
 #include "lb/lb_00B0.h"
 
@@ -182,8 +182,7 @@ bool it_2E6A_Logic117_DmgDealt(Item_GObj* item_gobj)
     if (item->xDD4_itemVar.yaku.x14 != NULL &&
         item->xDD4_itemVar.yaku.x10 != NULL)
     {
-        item->xDD4_itemVar.yaku.x14(item_gobj,
-                                         item->xDD4_itemVar.yaku.x10);
+        item->xDD4_itemVar.yaku.x14(item_gobj, item->xDD4_itemVar.yaku.x10);
     }
     return false;
 }
@@ -200,9 +199,8 @@ bool it_2E6A_Logic117_DmgReceived(Item_GObj* item_gobj)
     if (item->xDD4_itemVar.yaku.x18 != NULL &&
         item->xDD4_itemVar.yaku.x10 != NULL)
     {
-        item->xDD4_itemVar.yaku.x18(item_gobj,
-                                         item->xDD4_itemVar.yaku.x10,
-                                         &sp10, fighter_gobj, item->xCA0);
+        item->xDD4_itemVar.yaku.x18(item_gobj, item->xDD4_itemVar.yaku.x10,
+                                    &sp10, fighter_gobj, item->xCA0);
     }
     return false;
 }
@@ -213,8 +211,8 @@ bool it_802E7054(HSD_GObj* item_gobj)
     if (item->xDD4_itemVar.yaku.x1C != NULL &&
         item->xDD4_itemVar.yaku.x10 != NULL)
     {
-        item->xDD4_itemVar.yaku.x1C(
-            item_gobj, item->xDD4_itemVar.yaku.x10, item->toucher);
+        item->xDD4_itemVar.yaku.x1C(item_gobj, item->xDD4_itemVar.yaku.x10,
+                                    item->toucher);
     }
     return false;
 }

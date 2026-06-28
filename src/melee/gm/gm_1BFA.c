@@ -1,3 +1,4 @@
+/// @file Seems to deal with the challenger approaching functions.
 #include "gm_1BFA.h"
 
 #include "gm_unsplit.h"
@@ -13,8 +14,6 @@
 #include "ty/tylist.h"
 
 #include <melee/gm/types.h>
-
-/// @remarks this file seems to deal with the challenger approaching functions.
 
 extern UNK_T gm_804D6860[];
 extern StartMeleeData gm_80480530;
@@ -126,10 +125,9 @@ void gm_801BFBA8(GameScene* arg0)
     }
 }
 
-/// @remarks unsure about this return type.
 #pragma push
 #pragma dont_inline on
-s32** gm_801BFC60(s16 arg0, s32 arg1, s16 arg2, s32 arg3, void** arg4)
+static UNK_T* gm_801BFC60(u32 arg0, s32 arg1, u32 arg2, u32 arg3, UNK_T* arg4)
 {
     struct un_804A1F48_t* temp_r3;
 
@@ -147,7 +145,7 @@ s32** gm_801BFC60(s16 arg0, s32 arg1, s16 arg2, s32 arg3, void** arg4)
         *arg4 = temp_r3;
         return (&temp_r3->x8);
     }
-    return (s32**) arg4;
+    return arg4;
 }
 #pragma pop
 
@@ -156,18 +154,18 @@ static u8 gm_8049E558[0x170];
 void gm_801BFCFC(GameScene* arg0)
 {
     s32 var_r27_2;
-    s32 var_r30;
-    u32 var_r25;
-    u32 var_r25_2;
-    u32 var_r28_3;
     u32* temp_r29;
-    u32* temp_r29_2;
-    u8* var_r26;
     u8* var_r27;
     u8* var_r28;
+    UNK_T* temp_r3;
     u8* var_r28_2;
-    s32** temp_r3;
-    void** var_r31;
+    u32 var_r25_2;
+    int var_r25;
+    u32* temp_r29_2;
+    u32 var_r28_3;
+    UNK_T* var_r31;
+    s32 var_r30;
+    u8* var_r26;
 
     PAD_STACK(8);
 
@@ -185,8 +183,7 @@ void gm_801BFCFC(GameScene* arg0)
     for (var_r25 = 0; (s32) var_r25 < 0x42; var_r25++) {
         if (gm_8017219C(var_r25) != 0) {
             temp_r3 = gm_801BFC60(var_r25, var_r30, 0,
-                                  *gmMainLib_8015D804((s32) var_r25),
-                                  var_r31);
+                                  *gmMainLib_8015D804((s32) var_r25), var_r31);
             *var_r28 = 1;
             var_r31 = (void**) temp_r3;
             var_r30 += 1;
@@ -207,8 +204,8 @@ void gm_801BFCFC(GameScene* arg0)
             }
             *var_r28_2 = un_803048C0((s32) var_r25_2);
             var_r31 = (void**) gm_801BFC60(
-                0x3E, var_r30, var_r25_2,
-                *gmMainLib_8015D970((s32) var_r25_2), var_r31);
+                0x3E, var_r30, var_r25_2, *gmMainLib_8015D970((s32) var_r25_2),
+                var_r31);
             var_r30 += 1;
         }
         var_r28_2 += 1;
@@ -221,8 +218,8 @@ void gm_801BFCFC(GameScene* arg0)
     for (var_r28_3 = 0; (s32) var_r28_3 < 0x42; var_r28_3++) {
         if (((u8) *var_r27 == 0) && (gm_8017219C(var_r28_3) != 0)) {
             var_r31 = (void**) gm_801BFC60(
-                var_r28_3, var_r30, 0,
-                *gmMainLib_8015D804((s32) var_r28_3), var_r31);
+                var_r28_3, var_r30, 0, *gmMainLib_8015D804((s32) var_r28_3),
+                var_r31);
             var_r30 += 1;
         }
         var_r27 += 1;
@@ -239,9 +236,9 @@ void gm_801BFCFC(GameScene* arg0)
                 gmMainLib_8015DA40((u32) var_r27_2);
                 Trophy_SetUnlockState((s32) (s16) var_r27_2, 1);
             }
-            var_r31 = (void**) gm_801BFC60(
-                0x3E, var_r30, var_r27_2,
-                *gmMainLib_8015D970(var_r27_2), var_r31);
+            var_r31 =
+                (void**) gm_801BFC60(0x3E, var_r30, var_r27_2,
+                                     *gmMainLib_8015D970(var_r27_2), var_r31);
             var_r30 += 1;
         }
         var_r26 += 1;

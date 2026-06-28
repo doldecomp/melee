@@ -10,7 +10,7 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
-#include "ft/ft_0892.h"
+#include "ft/ft_0899.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0DF0.h"
 #include "ft/ftanim.h"
@@ -899,64 +899,57 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
 
     case 1:
         sp8 = fp->player_id + fp->x221F_b4;
-        fp->x214C = lbAudioAx_800264E4(
-            lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127,
-                               sfx_param0, sfx_param1, sfx_param2,
-                               sp8 + 0x36, -1));
+        fp->x214C = lbAudioAx_800264E4(lbAudioAx_800263E8(
+            direction, gobj, behavior, sfx, 127, 127, sfx_param0, sfx_param1,
+            sfx_param2, sp8 + 0x36, -1));
         break;
 
     case 2:
         if (!fp->x2225_b6) {
             sp8 = fp->player_id + fp->x221F_b4;
-            fp->x2144 = lbAudioAx_800264E4(
-                lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127,
-                                   sfx_param0, sfx_param1, sfx_param2,
-                                   sp8 + 0x1E, -1));
+            fp->x2144 = lbAudioAx_800264E4(lbAudioAx_800263E8(
+                direction, gobj, behavior, sfx, 127, 127, sfx_param0,
+                sfx_param1, sfx_param2, sp8 + 0x1E, -1));
             break;
         }
         switch (fp->kind) {
         case FTKIND_GAMEWATCH:
         case FTKIND_SAMUS:
             sp8 = fp->player_id + fp->x221F_b4;
-            fp->x2144 = lbAudioAx_800264E4(
-                lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127,
-                                   sfx_param0, sfx_param1, sfx_param2,
-                                   sp8 + 0x1E, -1));
+            fp->x2144 = lbAudioAx_800264E4(lbAudioAx_800263E8(
+                direction, gobj, behavior, sfx, 127, 127, sfx_param0,
+                sfx_param1, sfx_param2, sp8 + 0x1E, -1));
             break;
         }
         break;
 
     case 3:
         sp8 = fp->player_id + fp->x221F_b4;
-        fp->x2150 = lbAudioAx_800264E4(
-            lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127,
-                               sfx_param0, sfx_param1, sfx_param2,
-                               sp8 + 0x42, -1));
+        fp->x2150 = lbAudioAx_800264E4(lbAudioAx_800263E8(
+            direction, gobj, behavior, sfx, 127, 127, sfx_param0, sfx_param1,
+            sfx_param2, sp8 + 0x42, -1));
         break;
 
     case 4:
         sp8 = fp->player_id + fp->x221F_b4;
-        fp->x2154 = lbAudioAx_800264E4(
-            lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127,
-                               sfx_param0, sfx_param1, sfx_param2,
-                               sp8 + 0x4E, -1));
+        fp->x2154 = lbAudioAx_800264E4(lbAudioAx_800263E8(
+            direction, gobj, behavior, sfx, 127, 127, sfx_param0, sfx_param1,
+            sfx_param2, sp8 + 0x4E, -1));
         break;
 
     case 5:
         sp8 = fp->player_id + fp->x221F_b4;
-        fp->x2158 = lbAudioAx_800264E4(
-            lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127,
-                               sfx_param0, sfx_param1, sfx_param2,
-                               sp8 + 0x5A, -1));
+        fp->x2158 = lbAudioAx_800264E4(lbAudioAx_800263E8(
+            direction, gobj, behavior, sfx, 127, 127, sfx_param0, sfx_param1,
+            sfx_param2, sp8 + 0x5A, -1));
         break;
 
     case 6:
         if (!fp->x2225_b6) {
             sp8 = fp->player_id + fp->x221F_b4;
-            fp->x2148 = lbAudioAx_800264E4(
-                lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127,
-                                   sfx_param0, sfx_param1, sfx_param2,
-                                   sp8 + 0x2A, -1));
+            fp->x2148 = lbAudioAx_800264E4(lbAudioAx_800263E8(
+                direction, gobj, behavior, sfx, 127, 127, sfx_param0,
+                sfx_param1, sfx_param2, sp8 + 0x2A, -1));
             break;
         }
 
@@ -964,10 +957,9 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
         case FTKIND_GAMEWATCH:
         case FTKIND_SAMUS:
             sp8 = fp->player_id + fp->x221F_b4;
-            fp->x2148 = lbAudioAx_800264E4(
-                lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127,
-                                   sfx_param0, sfx_param1, sfx_param2,
-                                   sp8 + 0x2A, -1));
+            fp->x2148 = lbAudioAx_800264E4(lbAudioAx_800263E8(
+                direction, gobj, behavior, sfx, 127, 127, sfx_param0,
+                sfx_param1, sfx_param2, sp8 + 0x2A, -1));
             break;
         }
         break;

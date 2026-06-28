@@ -33,6 +33,7 @@
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
+#include <sysdolphin/baselib/wobj.h>
 
 struct staffInfo_t {
     char pad_0[0x948];
@@ -96,7 +97,34 @@ typedef struct {
 } StaffEntryData;
 
 /* 3DBFD8 */ static StaffEntryData gm_803DBFD8[198] = { 0 };
-static u8 gm_803DBFD8_pad[0x1D8] = { 0 };
+static u8 gm_803DBFD8_pad[0x178] = { 0 };
+
+/* 3DD0C8 */ static HSD_WObjDesc gm_803DD0C8 = {
+    NULL,
+    { 0.0F, 0.0F, 2.9F },
+    NULL,
+};
+/* 3DD0DC */ static HSD_WObjDesc gm_803DD0DC = {
+    NULL,
+    { 0.0F, 0.0F, -80.0F },
+    NULL,
+};
+/* 3DD0F0 */ static HSD_CameraDescPerspective gm_803DD0F0 = {
+    NULL,
+    0,
+    1,
+    { 0, 640, 0, 480 },
+    { 0, 640, 0, 480 },
+    &gm_803DD0C8,
+    &gm_803DD0DC,
+    0.0F,
+    NULL,
+    1.0F,
+    10000.0F,
+    80.0F,
+    1.2166671F,
+};
+
 extern GXColor gm_804D42B8;
 extern GXColor gm_804D42BC;
 extern GXColor gm_804D42C0;
@@ -159,7 +187,9 @@ void fn_801AA7F8(HSD_GObj* gobj)
 }
 
 static int gm_804D6800;
-enum { Gm_GObj_GXLink_PlyCursor = 9 };
+enum {
+    Gm_GObj_GXLink_PlyCursor = 9
+};
 void fn_801AA854(HSD_GObj* gobj, int code)
 {
     int i;
@@ -243,18 +273,18 @@ void fn_801AAB18(HSD_GObj* gobj)
 void fn_801AAB74(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    HSD_JObj* child;
-    HSD_JObj* leaf;
-    HSD_Text* text;
-    int entry_idx;
-    int staff_idx;
+    StaffEntryData* entry_data;
     int name_page_jp;
     int name_page_en;
     int title_page;
-    StaffEntryData* entry_data;
+    HSD_JObj* child;
+    int entry_idx;
+    HSD_JObj* leaf;
+    HSD_Text* text;
+    int staff_idx;
     int i;
     SortBufEntry bsort_temp;
-    PAD_STACK(0x20);
+    PAD_STACK(0x24);
 
     if (gm_804D6818 == 0) {
         for (i = 0; i < gm_804D681C; i++) {
@@ -262,9 +292,8 @@ void fn_801AAB74(HSD_GObj* gobj)
         }
     }
 
-    entry_idx = 0;
+    entry_idx = staff_idx = 0;
     child = jobj->child;
-    staff_idx = 0;
     gm_804D6800 = 0;
     entry_data = gm_803DBFD8;
     {
@@ -379,9 +408,8 @@ void fn_801AAB74(HSD_GObj* gobj)
 
     for (i = 0; i < gm_804D6800; i++) {
         leaf = staffInfoSortBuf[i].jobj;
-        HSD_ASSERT(0x478, leaf);
-        HSD_JObjSetupMatrix(leaf);
-        PSMTXConcat(gm_804D6830->view_mtx, leaf->mtx, staffInfoSortBuf[i].mtx);
+        PSMTXConcat(gm_804D6830->view_mtx, HSD_JObjGetMtxPtr(leaf),
+                    staffInfoSortBuf[i].mtx);
     }
 
     {
@@ -403,9 +431,24 @@ void fn_801AAB74(HSD_GObj* gobj)
 
 #include <math_ppc.h>
 
+typedef struct StaffRollPoints {
+    s32 particles[7];
+    Vec3 corners[4];
+} StaffRollPoints;
+
+/* 3DD1C8 */ static StaffRollPoints gm_803DD1C8 = {
+    { 0x10, 0x63, 0x62, 0x64, 0x5B, 0x5A, 0x59 },
+    {
+        { -13.5F, -4.5F, 0.0F },
+        { -13.5F, 6.5F, 0.0F },
+        { 13.5F, 6.5F, 0.0F },
+        { 13.5F, -4.5F, 0.0F },
+    },
+};
+
 void fn_801AB200(HSD_GObj* gobj)
 {
-    HSD_JObj* root = GET_JOBJ(gobj);
+    HSD_JObj* hover_jobj;
     HSD_JObj* cursor_jobj;
     HSD_JObj* temp_jobj;
     HSD_JObj* jobj_pair[2];
@@ -418,9 +461,10 @@ void fn_801AB200(HSD_GObj* gobj)
     HSD_JObj* ptcl_jobj3;
     s32 selected;
     s32 button;
-    HSD_JObj* hover_jobj;
+    HSD_JObj* root = GET_JOBJ(gobj);
     int i, j;
-    s8 raw_stick;
+    s32 raw_stick;
+    u8 pad_idx;
     s32 adj_val;
     f32 vel_x, vel_y;
     f32 sq_x, sq_y;
@@ -451,7 +495,8 @@ void fn_801AB200(HSD_GObj* gobj)
 
     lb_80011E24(root, &cursor_jobj, 7, -1);
 
-    raw_stick = HSD_PadCopyStatus[(u8) gm_801BF010()].stickX;
+    pad_idx = gm_801BF010();
+    raw_stick = HSD_PadCopyStatus[pad_idx].stickX;
     if (raw_stick > 4) {
         adj_val = raw_stick - 4;
     } else if (raw_stick < -4) {
@@ -461,7 +506,8 @@ void fn_801AB200(HSD_GObj* gobj)
     }
     vel_x = (f32) adj_val;
 
-    raw_stick = HSD_PadCopyStatus[(u8) gm_801BF010()].stickY;
+    pad_idx = gm_801BF010();
+    raw_stick = HSD_PadCopyStatus[pad_idx].stickY;
     if (raw_stick > 4) {
         adj_val = raw_stick - 4;
     } else if (raw_stick < -4) {
@@ -473,7 +519,7 @@ void fn_801AB200(HSD_GObj* gobj)
     sq_x = vel_x * vel_x + 6400.0f;
     vel_y = (f32) adj_val;
     sq_x = sqrtf(sq_x);
-    vel_x *= 0.00038461538f * sq_x;
+    vel_x = vel_x * 0.00038461538f * sq_x;
     sq_y = vel_y * vel_y + 6400.0f;
     sq_y = sqrtf(sq_y);
 
@@ -496,10 +542,9 @@ void fn_801AB200(HSD_GObj* gobj)
         entry_idx = staffInfoSortBuf[i].index;
         if (staffInfo[entry_idx].x8 < 1) {
             if (entry_idx < 7) {
-                lb_80011E24(gm_804D682C, &ptcl_jobj,
-                            *(s32*) ((u8*) gm_803DBFD8 + entry_idx * 4 +
-                                      0x11F0),
-                            -1);
+                lb_80011E24(
+                    gm_804D682C, &ptcl_jobj,
+                    *(s32*) ((u8*) gm_803DBFD8 + entry_idx * 4 + 0x11F0), -1);
                 if (entry_idx == 0) {
                     p = ptcl_jobj->u.ptcl;
                     tally_color = *(s32*) &gm_804D42C4;
@@ -578,11 +623,10 @@ void fn_801AB200(HSD_GObj* gobj)
                         selected = entry_idx;
                         if (staffInfo[entry_idx].x8 < 1) {
                             if (entry_idx < 7) {
-                                lb_80011E24(
-                                    gm_804D682C, &ptcl_jobj2,
-                                    *(s32*) ((u8*) gm_803DBFD8 +
-                                              entry_idx * 4 + 0x11F0),
-                                    -1);
+                                lb_80011E24(gm_804D682C, &ptcl_jobj2,
+                                            *(s32*) ((u8*) gm_803DBFD8 +
+                                                     entry_idx * 4 + 0x11F0),
+                                            -1);
                                 if (entry_idx == 0) {
                                     p = ptcl_jobj2->u.ptcl;
                                     tally_color = *(s32*) &gm_804D42CC;
@@ -728,8 +772,8 @@ void fn_801AB200(HSD_GObj* gobj)
                     text_arr[j]->text_color.b = 0;
                     if (selected == 0x4B && j == 2) {
                         line_num = gm_80164840(0x16U) * 2;
-                        HSD_SisLib_803A6368(text_arr[j], gm_80164840(7U) +
-                                                             line_num + 0xBEC);
+                        HSD_SisLib_803A6368(
+                            text_arr[j], 0xBEC + gm_80164840(7U) + line_num);
                     } else if (j == 2 && check_failed == 1) {
                         if (lbLang_IsSavedLanguageJP() != 0) {
                             HSD_SisLib_803A6368(text_arr[j],
@@ -765,7 +809,7 @@ void fn_801AB200(HSD_GObj* gobj)
                     if (selected < 7) {
                         lb_80011E24(gm_804D682C, &ptcl_jobj3,
                                     *(s32*) ((u8*) gm_803DBFD8 + selected * 4 +
-                                              0x11F0),
+                                             0x11F0),
                                     -1);
                         if (selected == 0) {
                             p = ptcl_jobj3->u.ptcl;
@@ -831,15 +875,16 @@ void fn_801AB200(HSD_GObj* gobj)
 
         if (gm_804D6814 >= 0x1285 && gm_804D680C == NULL) {
             tally_count = 0;
+            tally_color2 = gm_804DAAEC;
             for (j = 0; j < 6; j++) {
                 HSD_SisLib_803A5CC4(gm_80480D58[j]);
                 gm_80480D58[j] = NULL;
             }
 
             gm_804D6810 = 0;
-            tally_text = HSD_SisLib_803A6754(0, 0);
-            gm_804D680C = tally_text;
-            tally_text->default_kerning = 1;
+            gm_804D680C = HSD_SisLib_803A6754(0, 0);
+            gm_804D680C->default_kerning = 1;
+            tally_text = gm_804D680C;
             tally_text->pos_x = 85.0f;
             tally_text->pos_y = 130.0f;
             tally_text->pos_z = -280.0f;
@@ -853,7 +898,6 @@ void fn_801AB200(HSD_GObj* gobj)
             line_num = HSD_SisLib_803A6B98(
                 gm_804D680C, 0.0f, 0.0f, (char*) ((u8*) gm_803DBFD8 + 0x1264),
                 tally_count);
-            tally_color2 = gm_804DAAEC;
             HSD_SisLib_803A74F0(gm_804D680C, line_num,
                                 (GXColor*) &tally_color2);
 
@@ -880,8 +924,8 @@ void fn_801AB200(HSD_GObj* gobj)
         }
     }
 
-    HSD_JObjSetTranslateX(
-        jobj_pair[0], ((f32*) ((u8*) gm_803DBFD8 + 0xF78))[gm_804D6810]);
+    HSD_JObjSetTranslateX(jobj_pair[0],
+                          ((f32*) ((u8*) gm_803DBFD8 + 0xF78))[gm_804D6810]);
 
     if (button == 0x1000) {
         if (gm_804D681C == 1) {
@@ -926,12 +970,9 @@ void fn_801AB200(HSD_GObj* gobj)
         gm_804D6820 = 0x3C;
     }
 
-    if (gm_804D6814 >=
-        *(s32*) ((u8*) gm_803DBFD8 + gm_804D684C * 8 + 0xF88))
-    {
+    if (gm_804D6814 >= *(s32*) ((u8*) gm_803DBFD8 + gm_804D684C * 8 + 0xF88)) {
         lbAudioAx_800237A8(
-            *(s32*) ((u8*) gm_803DBFD8 + gm_804D684C * 8 + 0xF8C), 0x7F,
-            0x40);
+            *(s32*) ((u8*) gm_803DBFD8 + gm_804D684C * 8 + 0xF8C), 0x7F, 0x40);
         gm_804D684C += 1;
     }
 }
@@ -947,15 +988,18 @@ void fn_801AC67C(HSD_GObj* gobj)
     }
 }
 
-/* 3DD0F0 */ static HSD_CObjDesc gm_803DD0F0 = { 0 };
+/* 3DD23C */ static char gm_803DD23C[] = {
+    0x25, 0x64, 0x20, 0x82, 0x67, 0x82, 0x68, 0x82, 0x73, 0,
+};
 
 void gm_801AC6D8_OnEnter(void* unused)
 {
     HSD_JObj* jobj_arr[2];
     HSD_CObj* cobj;
-    HSD_GObj* gobj;
-    int i;
+    HSD_JObj* jobj;
     int const gx_link = 11;
+    int i;
+    HSD_GObj* gobj;
     PAD_STACK(0x10);
 
     efLib_Init();
@@ -983,23 +1027,25 @@ void gm_801AC6D8_OnEnter(void* unused)
     }
     {
         HSD_GObj* gobj = GObj_Create(19, 20, 0);
-        HSD_CObj* cobj = HSD_CObjLoadDesc(&gm_803DD0F0);
+        HSD_CObj* cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) &gm_803DD0F0);
         gm_804D6834 = cobj;
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
         GObj_SetupGXLinkMax(gobj, fn_801AAA28, 8);
         gobj->gxlink_prios = 1LL << gx_link;
     }
     {
+        HSD_LObj* lobj;
         HSD_GObj* gobj = GObj_Create(gx_link, 3, 0);
-        HSD_LObj* lobj = lb_80011AC4(gm_804D6840->lights);
+        lobj = lb_80011AC4(gm_804D6840->lights);
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
         GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
         HSD_LObjReqAnimAll(lobj, 0.0F);
         HSD_GObj_SetupProc(gobj, fn_801AAABC, 0);
     }
     {
+        HSD_Fog* fog;
         HSD_GObj* gobj = GObj_Create(0xA, 3, 0);
-        HSD_Fog* fog = HSD_FogLoadDesc(gm_804D6840->fogs[0].desc);
+        fog = HSD_FogLoadDesc(gm_804D6840->fogs[0].desc);
         gm_804D6838 = fog;
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848, fog);
         GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 3, 0);
@@ -1025,8 +1071,10 @@ void gm_801AC6D8_OnEnter(void* unused)
         HSD_GObj_SetupProc(gobj, fn_801AAB18, 0);
     }
     {
+        HSD_JObj* temp_jobj;
         HSD_GObj* gobj = GObj_Create(14, 15, 0);
-        HSD_JObj* jobj = HSD_JObjLoadJoint(gm_804D6844[0]->joint);
+        HSD_JObj* jobj;
+        jobj = HSD_JObjLoadJoint(gm_804D6844[0]->joint);
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
         GObj_SetupGXLink(gobj, NULL, 9, 0);
         gm_8016895C(jobj, gm_804D6844[0], 0);
@@ -1034,11 +1082,11 @@ void gm_801AC6D8_OnEnter(void* unused)
         {
             /// @todo Length of #gm_804D6844 is 10
             for (i = 1; i < 10; i++) {
-                HSD_JObj* jobj = HSD_JObjLoadJoint(gm_804D6844[i]->joint);
-                gm_8016895C(jobj, gm_804D6844[i], 0);
-                HSD_JObjReqAnimAll(jobj, 0.0F);
-                while (jobj->child != NULL) {
-                    HSD_JObjReparent(jobj->child, jobj);
+                temp_jobj = HSD_JObjLoadJoint(gm_804D6844[i]->joint);
+                gm_8016895C(temp_jobj, gm_804D6844[i], 0);
+                HSD_JObjReqAnimAll(temp_jobj, 0.0F);
+                while (temp_jobj->child != NULL) {
+                    HSD_JObjReparent(temp_jobj->child, jobj);
                 }
             }
         }
@@ -1046,7 +1094,7 @@ void gm_801AC6D8_OnEnter(void* unused)
     }
     {
         HSD_GObj* gobj = GObj_Create(14, 15, 0);
-        HSD_JObj* jobj = HSD_JObjLoadJoint(gm_804D6840->models[0]->joint);
+        jobj = HSD_JObjLoadJoint(gm_804D6840->models[0]->joint);
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
         GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, gx_link, 0);
         gm_8016895C(jobj, gm_804D6840->models[0], 0);

@@ -28,6 +28,7 @@ typedef struct ftCo_DatAttrs_xBC_t ftCo_DatAttrs_xBC_t;
 typedef struct ftCommonData ftCommonData;
 typedef struct ftData ftData;
 typedef struct ftData_UnkCountStruct ftData_UnkCountStruct;
+typedef struct ftData_x58_t ftData_x58_t;
 typedef struct ftData_x8 ftData_x8;
 typedef struct ftData_x8_x8 ftData_x8_x8;
 typedef struct ftDynamics ftDynamics;

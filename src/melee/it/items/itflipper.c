@@ -5,12 +5,12 @@
 
 #include "ft/ftlib.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_3F14.h"
-#include "it/ithitbox.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
+#include "it/ithitbox.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbcollision.h"
 #include "lb/lbvector.h"
@@ -430,7 +430,7 @@ bool itFlipper_UnkMotion6_Anim(Item_GObj* gobj)
     if (ip->xDD4_itemVar.flipper.xDE4 == 0.0F) {
         Item_80268E5C(gobj, 5, 0x12);
     }
-    it_80291344(gobj);
+    return it_80291344(gobj);
 }
 
 void itFlipper_UnkMotion6_Phys(Item_GObj* gobj)
@@ -552,10 +552,11 @@ static inline void it_3F14_DmgRecv_CE8(Item_GObj* gobj, Vec3* vel, Vec3* pos,
         HSD_GObj* fighter = ip->xCEC_fighterGObj;
         if (ftLib_80086960(fighter)) {
             Item* ip = GET_ITEM(gobj);
-            itFlipper_DatAttrs* attrs = itFlipper_GetAttrs(ip);
+            itFlipper_DatAttrs* attrs;
             /// @todo Eliminate this no-op branch (perturbs scheduling).
             if (pos != NULL) {
             }
+            attrs = itFlipper_GetAttrs(ip);
             ftLib_800866DC(fighter, pos);
             ftLib_80086BEC(fighter, vel);
             speed = attrs->x18 * sqrtf__Ff(vel->x * vel->x + vel->y * vel->y);

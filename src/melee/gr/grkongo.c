@@ -95,10 +95,6 @@ grKg_StageData grKg_803E1800 = {
 
 char grKg_803E1858[] = "grkongo.c";
 char grKg_803E1A00[];
-static inline char* grKongo_801D828C_TaruKeepMsg(void)
-{
-    return &grKg_803E1A00[0];
-}
 static const lbColl_80008D30_arg1 grKg_803B7FB0 = {
     1, 1, 361, 0, 0, 180, 0, 0, 0,
 };
@@ -324,8 +320,8 @@ void grKongo_801D577C(Ground_GObj* arg0)
     case 3: {
         f32 angular_vel;
         angular_vel = gp->gv.kongo3.xE0;
-        limit_angle =
-            0.5f * (angular_vel * (angular_vel / DegToRad(grKg_804D6980->unk34)));
+        limit_angle = 0.5f * (angular_vel *
+                              (angular_vel / DegToRad(grKg_804D6980->unk34)));
         if (angular_vel > 0.0f) {
             angle_delta = gp->gv.kongo3.xD4 - gp->gv.kongo3.xD8;
         } else if (angular_vel < 0.0f) {
@@ -423,8 +419,8 @@ void grKongo_801D577C(Ground_GObj* arg0)
         gp->gv.kongo2.xE8 -= grKg_804D6980->unk5C;
         if (gp->gv.kongo2.xE8 < 0.0f) {
             gp->gv.kongo2.xE8 = 0.0f;
-            gp->gv.kongo2.xCE = random_adder(
-                *(s32*) &grKg_804D6980->unk58, *(s32*) &grKg_804D6980->unk54);
+            gp->gv.kongo2.xCE = random_adder(*(s32*) &grKg_804D6980->unk58,
+                                             *(s32*) &grKg_804D6980->unk54);
             gp->gv.kongo3.xC8 = 0;
         }
         break;
@@ -439,8 +435,7 @@ void grKongo_801D577C(Ground_GObj* arg0)
             {
                 f32 rand_val = HSD_Randf();
                 f32 diff = grKg_804D6980->unk24 - grKg_804D6980->unk20;
-                gp->gv.kongo3.xCA =
-                    (diff * rand_val) + grKg_804D6980->unk20;
+                gp->gv.kongo3.xCA = (diff * rand_val) + grKg_804D6980->unk20;
             }
             gp->gv.kongo.u.taru.keep = item_gobj;
             gp->gv.kongo3.xC6 = 1;
@@ -643,8 +638,7 @@ void grKongo_801D828C(HSD_GObj* gobj)
     if (gp->gv.kongo3.xC6 != 1) {
         return;
     }
-    HSD_ASSERTMSG(1719, gp->gv.kongo.u.taru.keep,
-                  grKongo_801D828C_TaruKeepMsg());
+    HSD_ASSERT(1719, gp->gv.kongo.u.taru.keep);
     if (((u8*) gp->gv.kongo.u.taru.keep)[2] == 8) {
         gp->gv.kongo3.xC6 = 0;
         gp->gv.kongo.u.taru.keep = NULL;
@@ -777,12 +771,11 @@ void grKongo_801D6668(Ground_GObj* arg0)
     jobj = arg0->hsd_obj;
 
     if ((gp->gv.kongo.xCC + step) <= 1.0) {
-        splArcLengthPoint(&sp28, gp->gv.kongo2.xC4,
-                          gp->gv.kongo.xCC);
-        splArcLengthPoint(&sp1C, gp->gv.kongo2.xC4,
-                          gp->gv.kongo.xCC + step);
+        splArcLengthPoint(&sp28, gp->gv.kongo2.xC4, gp->gv.kongo.xCC);
+        splArcLengthPoint(&sp1C, gp->gv.kongo2.xC4, gp->gv.kongo.xCC + step);
         dx = sp28.x - sp1C.x;
-        dz = sp28.z - sp1C.z;
+        dz = sp28.z;
+        dz -= sp1C.z;
         dy = sp28.y - sp1C.y;
         dx *= dx;
         dy *= dy;
@@ -873,9 +866,7 @@ void grKongo_801D69B0(HSD_GObj* gobj)
     struct _struct_grKg_803E188C_0x18* entry;
     u32 i;
 
-    for (entry = &grKg_803E188C[i = 0U]; i < 0xFU;
-         i += 1, entry += 1)
-    {
+    for (entry = &grKg_803E188C[i = 0U]; i < 0xFU; i += 1, entry += 1) {
         entry->unk4 = Ground_801C3FA4(gobj, (s32) entry->unk0);
         entry->unkC = entry->unk8;
         rot_x = entry->unkC;
@@ -1132,8 +1123,7 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
     grKongo_801D6AFC();
 
     for (i = 0U; i < 15U; i++) {
-        grKg_803E188C[i].unk14 =
-            (f32) (37.8 * tanf(-grKg_803E188C[i].unkC));
+        grKg_803E188C[i].unk14 = (f32) (37.8 * tanf(-grKg_803E188C[i].unkC));
     }
 
     displacement =
@@ -1547,10 +1537,10 @@ void grKongo_801D7BBC(HSD_GObj* gobj)
     }
     {
         f32 rand = HSD_Randf();
-        roll =
-            rand * (grKg_804D6980->unk10 * (grKg_804DAFA4 - grKg_804D6980->unk18) +
-                    (grKg_804D6980->unk10 * grKg_804D6980->unk18 +
-                     (grKg_804D6980->unk8 + roll)));
+        roll = rand *
+               (grKg_804D6980->unk10 * (grKg_804DAFA4 - grKg_804D6980->unk18) +
+                (grKg_804D6980->unk10 * grKg_804D6980->unk18 +
+                 (grKg_804D6980->unk8 + roll)));
     }
     {
         f32 r = HSD_Randf();

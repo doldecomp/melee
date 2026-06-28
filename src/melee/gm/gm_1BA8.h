@@ -1,16 +1,12 @@
-#ifndef MELEE_GM_1BA8_H
-#define MELEE_GM_1BA8_H
-
-#include <placeholder.h>
+#ifndef GALE01_1BA8FC
+#define GALE01_1BA8FC
 
 #include "gm/types.h"
 
-#include <melee/ft/forward.h>
-#include <melee/gm/forward.h>
-#include <melee/mn/forward.h>
+#include "melee/ft/forward.h"
+#include "melee/gm/forward.h"
+#include "melee/mn/forward.h"
 #include <sysdolphin/baselib/forward.h>
-
-struct EventData;
 
 /* 1BA8FC */ UNK_RET gm_801BA8FC(UNK_PARAMS);
 /* 1BA938 */ void gm_801BA938(struct EventData*, int lo, int hi, bool);
@@ -95,7 +91,7 @@ struct EventData;
 /* 1BF65C */ void gm_801BF65C(s32, s8);
 /* 1BF670 */ u8 gm_801BF670(s32);
 /* 1BF684 */ void gm_801BF684(s16);
-/* 1BF694 */ u8 gm_801BF694(void); ///< @returns InternalStageId
+/* 1BF694 */ u8 gm_801BF694(void);
 /* 1BF6A8 */ void gm_801BF6A8(s8);
 /* 1BF6B8 */ u8 gm_801BF6B8(void);
 /* 1BF6C8 */ void gm_801BF6C8(s8);
@@ -112,6 +108,7 @@ struct EventData;
 /* 1BF8D8 */ void gm_801BF8D8(GameScene*);
 /* 1BF8F8 */ void gm_801BF8F8(GameScene*);
 /* 1BF920 */ void gm_801BF920(GameScene*);
+/* 3DDBE0 */ extern GameScene gm_803DDBE0_Scenes[5];
 /* 3DF94C */ extern gm_803DF94C_t* gm_803DF94C[];
 
 #endif

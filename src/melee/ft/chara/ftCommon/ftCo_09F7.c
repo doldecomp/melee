@@ -64,50 +64,50 @@ void ftCo_8009F834(Fighter_GObj* gobj, int arg1, enum Fighter_Part arg2,
     f32 sp80;
     f32 sp7C;
     int gfx_id;
-    Fighter* temp_r30;
+    Fighter* fp;
     Fighter* temp_r9;
     Fighter* temp_r9_2;
-    enum Fighter_Part var_r27;
+    enum Fighter_Part part;
     f32 temp_f1;
-    f32 temp_f1_2;
+    f32 scale_y;
     f32 temp_f2;
-    f32 temp_f2_2;
-    f32 var_f1;
-    f32 var_f1_2;
+    f32 z_range;
+    f32 floor_angle;
+    f32 random_or_angle;
     u8 temp_r3;
     PAD_STACK(68);
 
     gfx_id = arg1;
-    var_r27 = arg2;
-    temp_r30 = gobj->user_data;
+    part = arg2;
+    fp = gobj->user_data;
     if (arg4 == 0) {
         goto block_2;
     }
-    temp_r30->x2219_b0 = true;
+    fp->x2219_b0 = true;
 block_2:
-    if (var_r27 != 0x8D) {
+    if (part != 0x8D) {
         goto block_5;
     }
 
-    var_r27 = ((int*) temp_r30->ft_data->x54)[temp_r30->x2220_b0];
+    part = ((int*) fp->ft_data->x54)[fp->x2220_b0];
 
-    temp_r30->x2220_b0++;
-    if (temp_r30->x2220_b0 < 5) {
+    fp->x2220_b0++;
+    if (fp->x2220_b0 < 5) {
         goto block_9;
     }
-    temp_r30->x2220_b0 = 0;
+    fp->x2220_b0 = 0;
     goto block_9;
 block_5:
-    if (var_r27 != 0x8E) {
+    if (part != 0x8E) {
         goto block_7;
     }
-    var_r27 = temp_r30->ft_data->x8->x10;
+    part = fp->ft_data->x8->x10;
     goto block_9;
 block_7:
     if (arg3 == 0) {
         goto block_9;
     }
-    var_r27 = ftParts_GetBoneIndex(temp_r30, var_r27);
+    part = ftParts_GetBoneIndex(fp, part);
 block_9:
     if (gfx_id < 0x250) {
         goto block_11;
@@ -123,8 +123,8 @@ block_11:
     temp_f2 = 2.0f * arg6->z;
     spA8.z += temp_f2 * temp_f1;
     temp_r9 = gobj->user_data;
-    efAsync_Spawn(gobj, &temp_r9->x60C, 2, gfx_id,
-                  temp_r30->parts[var_r27].joint, &spA8);
+    efAsync_Spawn(gobj, &temp_r9->x60C, 2, gfx_id, fp->parts[part].joint,
+                  &spA8);
     return;
 block_12:
     switch (gfx_id) {
@@ -173,54 +173,54 @@ block_12:
     }
 block_61:
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 0, gfx_id,
-                  temp_r30->parts[var_r27].joint);
+                  fp->parts[part].joint);
     return;
 block_62:
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 7, gfx_id,
-                  temp_r30->parts[var_r27].joint, arg5);
+                  fp->parts[part].joint, arg5);
     return;
 block_63:
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3, gfx_id,
-                  temp_r30->parts[var_r27].joint,
-                  &temp_r30->ft_data->x0->x168);
+                  fp->parts[part].joint, &fp->ft_data->x0->x168);
     return;
-block_64:
-    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3, gfx_id,
-                  temp_r30->parts[var_r27].joint, &temp_r30->facing_dir);
+block_64: {
+    HSD_JObj* joint = fp->parts[part].joint;
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3, gfx_id, joint,
+                  &fp->facing_dir);
+}
     return;
 block_65:
     sp9C = *arg5;
     sp98 = 0.017453292f * (256.0f * arg6->x);
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 6, gfx_id,
-                  temp_r30->parts[var_r27].joint, &sp9C,
-                  &temp_r30->facing_dir, &sp98);
+                  fp->parts[part].joint, &sp9C, &fp->facing_dir, &sp98);
     return;
 block_66:
-    temp_f1_2 = temp_r30->x34_scale.y;
-    sp94 = temp_f1_2 * temp_r30->co_attrs.x144;
+    scale_y = fp->x34_scale.y;
+    sp94 = scale_y * fp->co_attrs.x144;
     temp_r9_2 = gobj->user_data;
-    efAsync_Spawn(gobj, &temp_r9_2->x60C, 3, 0x438,
-                  temp_r30->parts[var_r27].joint, &sp94);
+    efAsync_Spawn(gobj, &temp_r9_2->x60C, 3, 0x438, fp->parts[part].joint,
+                  &sp94);
     return;
 block_67:
     sp90 = 0.0f;
-    if (temp_r30->ground_or_air != GA_Ground) {
+    if (fp->ground_or_air != GA_Ground) {
         goto block_69;
     }
-    var_f1 = atan2f(-temp_r30->coll_data.floor.normal.x,
-                    temp_r30->coll_data.floor.normal.y);
-    sp90 = var_f1;
+    floor_angle =
+        atan2f(-fp->coll_data.floor.normal.x, fp->coll_data.floor.normal.y);
+    sp90 = floor_angle;
 block_69:
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3, gfx_id,
-                  temp_r30->parts[var_r27].joint, &sp90);
+                  fp->parts[part].joint, &sp90);
     return;
 block_70:
     sp84 = *arg5;
     sp84.x += 2.0f * arg6->x * (HSD_Randf() - 0.5f);
     sp84.y += 2.0f * arg6->y * (HSD_Randf() - 0.5f);
-    var_f1_2 = HSD_Randf() - 0.5f;
-    temp_f2_2 = 2.0f * arg6->z;
-    sp84.z += temp_f2_2 * var_f1_2;
+    random_or_angle = HSD_Randf() - 0.5f;
+    z_range = 2.0f * arg6->z;
+    sp84.z += random_or_angle * z_range;
     if (gfx_id >= 0x412) {
         goto block_98;
     }
@@ -364,54 +364,54 @@ block_119:
     goto block_128;
 block_122:
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, gfx_id,
-                  temp_r30->parts[var_r27].joint, &sp84,
-                  &p_ftCommonData->x564);
+                  fp->parts[part].joint, &sp84, &p_ftCommonData->x564);
     return;
-block_123:
-    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 2, gfx_id,
-                  temp_r30->parts[var_r27].joint, &sp84);
+block_123: {
+    HSD_JObj* joint = fp->parts[part].joint;
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 2, gfx_id, joint, &sp84);
+}
     return;
 block_124:
     sp80 = 0.0f;
-    if (temp_r30->ground_or_air != GA_Ground) {
+    if (fp->ground_or_air != GA_Ground) {
         goto block_126;
     }
-    var_f1_2 = atan2f(-temp_r30->coll_data.floor.normal.x,
-                      temp_r30->coll_data.floor.normal.y);
-    sp80 = var_f1_2;
-block_126:
-    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, gfx_id,
-                  temp_r30->parts[var_r27].joint, &sp84, &sp80);
+    random_or_angle =
+        atan2f(-fp->coll_data.floor.normal.x, fp->coll_data.floor.normal.y);
+    sp80 = random_or_angle;
+block_126: {
+    HSD_JObj* joint = fp->parts[part].joint;
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, gfx_id, joint, &sp84,
+                  &sp80);
+}
     return;
 block_127:
-    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 8, 2,
-                  temp_r30->parts[var_r27].joint, &sp84);
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 8, 2, fp->parts[part].joint,
+                  &sp84);
     return;
 block_128:
-    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 8, 3,
-                  temp_r30->parts[var_r27].joint, &sp84);
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 8, 3, fp->parts[part].joint,
+                  &sp84);
     return;
 block_129:
-    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 8, 4,
-                  temp_r30->parts[var_r27].joint, &sp84);
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 8, 4, fp->parts[part].joint,
+                  &sp84);
     return;
 block_130:
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, gfx_id,
-                  temp_r30->parts[var_r27].joint, &sp84,
-                  &temp_r30->facing_dir);
+                  fp->parts[part].joint, &sp84, &fp->facing_dir);
     return;
 block_131:
     sp7C = 0.0f;
-    if (temp_r30->ground_or_air != GA_Ground) {
+    if (fp->ground_or_air != GA_Ground) {
         goto block_133;
     }
-    var_f1_2 = atan2f(-temp_r30->coll_data.floor.normal.x,
-                      temp_r30->coll_data.floor.normal.y);
-    sp7C = var_f1_2;
+    random_or_angle =
+        atan2f(-fp->coll_data.floor.normal.x, fp->coll_data.floor.normal.y);
+    sp7C = random_or_angle;
 block_133:
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 6, gfx_id,
-                  temp_r30->parts[var_r27].joint, &sp84,
-                  &temp_r30->facing_dir, &sp7C);
+                  fp->parts[part].joint, &sp84, &fp->facing_dir, &sp7C);
     return;
 block_134:
     OSReport("no effect from animlist %d\n", gfx_id);

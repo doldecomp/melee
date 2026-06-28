@@ -21,12 +21,9 @@
 #include "lb/lbvector.h"
 #include "lb/types.h"
 #include "mp/mplib.h"
-
-#include <math_ppc.h>
-
-extern Vec3 grPushOn_803B844C;
 #include "sysdolphin/baselib/lobj.h"
 
+#include <math_ppc.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/random.h>
@@ -62,11 +59,17 @@ static struct {
     struct grPushOn_Lookup x10c[0x21];
 }* grPushOn_804D6AB8;
 
-extern Vec3 grPushOn_803B8440;
-extern Vec3 grPushOn_803B8458;
-extern Vec3 grPushOn_803B8464;
-extern u8 grPushOn_804D4934;
-extern u8 grPushOn_804D4948;
+/// @todo .sdata order hack
+static void order_sdata(void)
+{
+    (void) "0";
+}
+
+Vec3 const grPushOn_803B8440 = { 0 };
+Vec3 const grPushOn_803B844C = { 0 };
+Vec3 const grPushOn_803B8458 = { 0.0f, 100.0f, 0.0f };
+Vec3 const grPushOn_803B8464 = { 0.0f, 100.0f, 0.0f };
+float grPushOn_804D4934 = 16.0f;
 
 StageCallbacks grPushOn_803E7AC8[3] = {
     { grPushOn_802184CC, grPushOn_80218590, grPushOn_80218598,
@@ -165,65 +168,6 @@ HSD_LightDesc grPushOn_803E7B74 = {
     NULL,
     NULL,
     { &grPushOn_804D4934 },
-};
-
-HSD_LightDesc grPushOn_803E7B90 = {
-    NULL,
-    NULL,
-    0xA,
-    0,
-    { 0xFF, 0xFF, 0xFF, 0xFF },
-    NULL,
-    NULL,
-    { &grPushOn_804D4948 },
-};
-
-static struct grPushOn_LightConfig light_configs[9] = {
-    { { 0xBE, 0xE6, 0xE6, 0xFF },
-      { -12.0F, 735.0F, -20.0F },
-      0.1F,
-      800.0F,
-      3 },
-    { { 0xF0, 0xF0, 0xF0, 0xFF },
-      { 250.0F, 708.0F, -30.0F },
-      0.4F,
-      500.0F,
-      3 },
-    { { 0xC3, 0x56, 0xCD, 0xFF },
-      { 550.0F, 655.0F, -50.0F },
-      0.2F,
-      600.0F,
-      3 },
-    { { 0xF0, 0xF0, 0xF0, 0xFF },
-      { 860.0F, 550.0F, -30.0F },
-      0.1F,
-      700.0F,
-      3 },
-    { { 0x7C, 0xE7, 0xFF, 0xFF },
-      { 1150.0F, 675.0F, -60.0F },
-      0.2F,
-      800.0F,
-      3 },
-    { { 0xFF, 0x4B, 0x4B, 0xFF },
-      { 1400.0F, 370.0F, -60.0F },
-      0.01F,
-      500.0F,
-      3 },
-    { { 0xE6, 0xE6, 0xE6, 0xFF },
-      { 1580.0F, 20.0F, -30.0F },
-      0.1F,
-      500.0F,
-      3 },
-    { { 0xFF, 0x6E, 0x6E, 0xFF },
-      { 2093.0F, 120.0F, -20.0F },
-      0.3F,
-      600.0F,
-      3 },
-    { { 0xBE, 0xE6, 0xFF, 0xFF },
-      { 1700.0F, 630.0F, -20.0F },
-      0.2F,
-      800.0F,
-      3 },
 };
 
 void grPushOn_802184CC(Ground_GObj* gobj)
@@ -346,7 +290,6 @@ bool grPushOn_80218880(Ground_GObj* arg)
     return false;
 }
 
-
 void grPushOn_80218ED0(Ground_GObj* arg) {}
 
 HSD_LObj* grPushOn_80218ED4(HSD_GObj* gobj)
@@ -371,6 +314,67 @@ HSD_LObj* grPushOn_80218ED4(HSD_GObj* gobj)
     }
     return new_lobj;
 }
+
+float grPushOn_804D4948 = 16.0f;
+
+HSD_LightDesc grPushOn_803E7B90 = {
+    NULL,
+    NULL,
+    0xA,
+    0,
+    { 0xFF, 0xFF, 0xFF, 0xFF },
+    NULL,
+    NULL,
+    { &grPushOn_804D4948 },
+};
+
+static struct grPushOn_LightConfig light_configs[9] = {
+    { { 0xBE, 0xE6, 0xE6, 0xFF },
+      { -12.0F, 735.0F, -20.0F },
+      0.1F,
+      800.0F,
+      3 },
+    { { 0xF0, 0xF0, 0xF0, 0xFF },
+      { 250.0F, 708.0F, -30.0F },
+      0.4F,
+      500.0F,
+      3 },
+    { { 0xC3, 0x56, 0xCD, 0xFF },
+      { 550.0F, 655.0F, -50.0F },
+      0.2F,
+      600.0F,
+      3 },
+    { { 0xF0, 0xF0, 0xF0, 0xFF },
+      { 860.0F, 550.0F, -30.0F },
+      0.1F,
+      700.0F,
+      3 },
+    { { 0x7C, 0xE7, 0xFF, 0xFF },
+      { 1150.0F, 675.0F, -60.0F },
+      0.2F,
+      800.0F,
+      3 },
+    { { 0xFF, 0x4B, 0x4B, 0xFF },
+      { 1400.0F, 370.0F, -60.0F },
+      0.01F,
+      500.0F,
+      3 },
+    { { 0xE6, 0xE6, 0xE6, 0xFF },
+      { 1580.0F, 20.0F, -30.0F },
+      0.1F,
+      500.0F,
+      3 },
+    { { 0xFF, 0x6E, 0x6E, 0xFF },
+      { 2093.0F, 120.0F, -20.0F },
+      0.3F,
+      600.0F,
+      3 },
+    { { 0xBE, 0xE6, 0xFF, 0xFF },
+      { 1700.0F, 630.0F, -20.0F },
+      0.2F,
+      800.0F,
+      3 },
+};
 
 HSD_LObj* grPushOn_80218FC0(HSD_GObj* gobj)
 {
@@ -411,18 +415,18 @@ void grPushOn_802190D0(HSD_GObj* gobj)
     HSD_LObj* cur = gobj->hsd_obj;
     f32 scale = Ground_801C0498();
     struct grPushOn_LightConfig* entry;
-    GXColor color;
     Vec3 pos;
-    s32 i;
+    GXColor color;
     HSD_LObj* lobj;
+    u32 i;
 
     lobj = cur == NULL ? NULL : cur->next;
     entry = light_configs;
+    i = 0;
 
-    for (i = 0; i < 9 && lobj != NULL; i++, entry++) {
-        // Equivalent to HSD_LObjGetType(lobj); inlined here to match
-        // the original assembly (the real function is in lobj.c).
-        HSD_ASSERT(0x2BA, (u32) (lobj->flags & LOBJ_TYPE_MASK) == LOBJ_POINT);
+    while (i < 9 && lobj != NULL) {
+        HSD_ASSERTMSG(698, (lobj->flags & LOBJ_TYPE_MASK) == LOBJ_POINT,
+                      "HSD_LObjGetType(lobj)==LOBJ_POINT");
         lobj->flags = LOBJ_POINT | LOBJ_DIFFUSE;
         color = entry->color;
         HSD_LObjSetColor(lobj, color);
@@ -433,6 +437,8 @@ void grPushOn_802190D0(HSD_GObj* gobj)
         HSD_LObjSetPosition(lobj, &pos);
         HSD_LObjSetDistAttn(lobj, scale * entry->ref_dist, entry->ref_br,
                             entry->dist_func);
+        entry++;
+        i++;
         lobj = lobj == NULL ? NULL : lobj->next;
     }
 }
@@ -471,26 +477,25 @@ int grPushOn_80219230(int arg0)
         }
         i++;
     }
-    HSD_ASSERT(0x35DU, 0);
+    HSD_ASSERT(861, 0);
 }
 
 void grPushOn_80218888(Ground_GObj* arg0)
 {
     Vec3 sp10C;
     Vec3 sp100;
+    s32 light_order[20];
+    f32 light_distances[20];
     Vec3 sp54;
     Vec3 sp48;
     Vec3 sp3C;
     GXColor sp38;
     Vec3 sp2C;
-    s32 sp24;
-    s32 spB0[20];
-    f32 sp60[20];
     Ground* gp = arg0->user_data;
     HSD_GObj* fighter;
     s32 i;
     s32 j;
-    PAD_STACK(0x10);
+    PAD_STACK(0x14);
 
     fighter = Ground_801C57A4();
     if (fighter != NULL) {
@@ -506,7 +511,7 @@ void grPushOn_80218888(Ground_GObj* arg0)
             HSD_LObj* lobj = gp->u.pushon.lobjs[i];
             s32 type = lobj->flags & 3;
             if (type == 0) {
-                sp60[i] = -100.0f;
+                light_distances[i] = -100.0f;
             } else if ((u32) (type - 1) <= 1) {
                 f32 dx;
                 f32 dy;
@@ -514,11 +519,9 @@ void grPushOn_80218888(Ground_GObj* arg0)
                 HSD_LObjGetPosition(lobj, &sp54);
                 dx = sp10C.x - sp54.x;
                 dy = sp10C.y - sp54.y;
-                d2 = (dx * dx) + (dy * dy);
-                if (d2 > 0.0f) {
-                    d2 = sqrtf(d2);
-                }
-                sp60[i] = d2;
+                dx *= dx;
+                d2 = dy * dy;
+                light_distances[i] = sqrtf(dx + d2);
             } else if (type == 3) {
                 f32 dx;
                 HSD_LObjGetPosition(lobj, &sp48);
@@ -526,14 +529,14 @@ void grPushOn_80218888(Ground_GObj* arg0)
                 if (dx < 0.0f) {
                     dx = -dx;
                 }
-                sp60[i] = dx;
+                light_distances[i] = dx;
             } else {
                 HSD_ASSERT(0x1C5, 0);
             }
-            if (sp60[i] < 10.0f) {
-                sp60[i] = 10.0f;
+            if (light_distances[i] < 10.0f) {
+                light_distances[i] = 10.0f;
             }
-            spB0[i] = i;
+            light_order[i] = i;
         }
 
         for (i = 0; i < gp->u.pushon.count; i++) {
@@ -541,33 +544,35 @@ void grPushOn_80218888(Ground_GObj* arg0)
             s32 best_j = 0;
             s32 tmp;
             for (j = i; j < gp->u.pushon.count; j++) {
-                f32 d = sp60[spB0[j]];
+                f32 d = light_distances[light_order[j]];
                 if (best > d) {
                     best_j = j;
                     best = d;
                 }
             }
-            tmp = spB0[i];
-            spB0[i] = spB0[best_j];
-            spB0[best_j] = tmp;
+            tmp = light_order[i];
+            light_order[i] = light_order[best_j];
+            light_order[best_j] = tmp;
         }
 
         for (i = 0; i < gp->u.pushon.count; i++) {
             if (i < 5) {
-                HSD_LObjClearFlags(gp->u.pushon.lobjs[spB0[i]], 0x20);
+                HSD_LObjClearFlags(gp->u.pushon.lobjs[light_order[i]], 0x20);
             } else {
-                HSD_LObjSetFlags(gp->u.pushon.lobjs[spB0[i]], 0x20);
+                HSD_LObjSetFlags(gp->u.pushon.lobjs[light_order[i]], 0x20);
             }
         }
 
         {
-            f32 mindist = sp60[spB0[1]];
+            f32 mindist;
             f32 sumsq;
             sp3C = grPushOn_803B844C;
+            mindist = light_distances[light_order[1]];
             for (i = 1; i < gp->u.pushon.count; i++) {
-                if (HSD_LObjGetPosition(gp->u.pushon.lobjs[spB0[i]],
-                                        &sp100) != 0) {
-                    f32 w = mindist / sp60[spB0[i]];
+                if (HSD_LObjGetPosition(gp->u.pushon.lobjs[light_order[i]],
+                                        &sp100) != 0)
+                {
+                    f32 w = mindist / light_distances[light_order[i]];
                     lbVector_Sub(&sp100, &sp10C);
                     if (sp100.y < 100.0f) {
                         if (sp100.y < 0.0f) {
@@ -583,10 +588,8 @@ void grPushOn_80218888(Ground_GObj* arg0)
                     lbVector_Add(&sp3C, &sp100);
                 }
             }
-            sumsq = (sp3C.z * sp3C.z) + ((sp3C.x * sp3C.x) + (sp3C.y * sp3C.y));
-            if (sumsq > 0.0f) {
-                sumsq = sqrtf(sumsq);
-            }
+            sumsq = sqrtf(sumsq = (sp3C.z * sp3C.z) +
+                                  ((sp3C.x * sp3C.x) + (sp3C.y * sp3C.y)));
             if (sumsq < 0.01f) {
                 sp3C.y = 100.0f;
             }
@@ -600,36 +603,36 @@ void grPushOn_80218888(Ground_GObj* arg0)
             HSD_LObjSetFlags(gp->u.pushon.point_light, 0x400);
 
             {
-                f32 diff = sp60[spB0[2]] - sp60[spB0[1]];
-                HSD_LObjGetColor(gp->u.pushon.lobjs[spB0[1]], &sp38);
+                f32 diff = light_distances[light_order[2]] -
+                           light_distances[light_order[1]];
+                HSD_LObjGetColor(gp->u.pushon.lobjs[light_order[1]], &sp38);
                 if (diff < 50.0f) {
                     f32 t = diff / 50.0f;
                     sp38.r = (s8) ((f32) (u8) sp38.r * t);
                     sp38.g = (u8) (s32) ((f32) sp38.g * t);
                     sp38.b = (u8) (s32) ((f32) sp38.b * t);
                 }
-                sp24 = *(s32*) &sp38;
-                HSD_LObjSetColor(gp->u.pushon.spot_light, *(GXColor*) &sp24);
-                if (HSD_LObjGetPosition(gp->u.pushon.lobjs[spB0[1]], &sp2C) ==
-                    0) {
+                HSD_LObjSetColor(gp->u.pushon.spot_light, sp38);
+                if (HSD_LObjGetPosition(gp->u.pushon.lobjs[light_order[1]],
+                                        &sp2C) == 0)
+                {
                     sp2C.z = 0.0f;
                     sp2C.y = 0.0f;
                     sp2C.x = 0.0f;
                 }
                 HSD_LObjSetPosition(gp->u.pushon.spot_light, &sp2C);
-                if (HSD_LObjGetInterest(gp->u.pushon.lobjs[spB0[1]], &sp2C) ==
-                    0) {
+                if (HSD_LObjGetInterest(gp->u.pushon.lobjs[light_order[1]],
+                                        &sp2C) == 0)
+                {
                     sp2C.z = 0.0f;
                     sp2C.y = 0.0f;
                     sp2C.x = 0.0f;
                 }
                 HSD_LObjSetInterest(gp->u.pushon.spot_light, &sp2C);
                 gp->u.pushon.spot_light->flags =
-                    gp->u.pushon.lobjs[spB0[1]]->flags;
-                gp->u.pushon.spot_light->flags =
-                    gp->u.pushon.spot_light->flags & 0xFFFB;
-                gp->u.pushon.spot_light->flags =
-                    gp->u.pushon.spot_light->flags | 8;
+                    gp->u.pushon.lobjs[light_order[1]]->flags;
+                gp->u.pushon.spot_light->flags &= ~4;
+                gp->u.pushon.spot_light->flags |= 8;
             }
         }
     }

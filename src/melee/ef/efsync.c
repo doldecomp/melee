@@ -56,7 +56,6 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
     f64 half_pi;
     f32 va_f32_1;
     f32 rand_f32;
-    f32 rand_rot_y;
     f32 rand_rot_x;
     f32 rand_param_x;
     f32 rand_param_y;
@@ -138,14 +137,16 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
             HSD_JObjSetRotationZ(jobj_1, va_f32_1);
         }
         break;
-    case 0x4C3:
-        ret_obj = efLib_CreateGenerator_AddAppSRT(0x24CU);
-        if (ret_obj != NULL) {
+    case 0x4C3: {
+        HSD_Generator* gen = efLib_CreateGenerator_AddAppSRT(0x24CU);
+        if (gen != NULL) {
             va_vec3 = va_arg(vlist, Vec3*);
-            psAppSRT = ((HSD_Generator*) ret_obj)->appsrt;
+            ret_obj = gen;
+            psAppSRT = gen->appsrt;
             psAppSRT->translate = *va_vec3;
         }
         break;
+    }
     case 0x4C4:
         ret_obj = efLib_Create_Attach_Scale_FacingDir(0x1B5B, gobj,
                                                       va_arg(vlist, void*));
@@ -253,6 +254,8 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
             effect = efLib_Create_Attach_Pos(0x1FU, gobj, &translate);
         }
         if (effect != NULL) {
+            f32 rand_rot_y;
+
             effect->update = efLib_Cb_SetOffset_FromParams;
             effect->lifetime = 0x32;
             rand_rot_y = M_TAU * HSD_Randf();

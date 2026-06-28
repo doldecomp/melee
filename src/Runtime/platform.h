@@ -103,7 +103,9 @@ typedef void (*Event)(void);
 #define _Static_assert static_assert
 #endif
 #endif
-#ifdef __MWERKS__
+#ifdef M2CTX
+#define STATIC_ASSERT(cond)
+#elif defined(__MWERKS__)
 #define STATIC_ASSERT(cond)                                                   \
     struct {                                                                  \
         int x[1 - 2 * !(cond)];                                               \

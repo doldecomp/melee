@@ -70,11 +70,13 @@ void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
     s32 pad3;
     s32 pad4;
     int i;
+    s32 count;
     HSD_JObj* jobj;
-    Vec3* pos;
+    Vec3 v;
     u8* counts;
     f32 scale;
-    Vec3 v;
+    Vec3* pos;
+    HSD_GObj** gobj_ptr;
 
     Camera_80028B9C(6);
     lb_8000FCDC();
@@ -100,9 +102,11 @@ void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
 
     counts = (u8*) spawn_count;
     pos = grLib_801C9A10() + 1;
+    gobj_ptr = un_804A2E98 + 1;
     for (i = 1; i < 4; i++) {
         Player_80036E20(CKIND_KIRBY, un_804D6F74, 6);
-        Player_80031DA8(counts[i - 1], spawn_mode);
+        count = counts[i - 1];
+        Player_80031DA8(count, spawn_mode);
         Player_SetFlagsBit1(i);
         Player_SetPlayerCharacter(i, CKIND_KIRBY);
         Player_SetCostumeId(i, spawn_mode);
@@ -112,17 +116,18 @@ void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
         Player_80032768(i, &initial_pos);
         Player_SetUnk4D(i, counts[i - 1]);
         Player_80036F34(i, i + 0xA);
-        un_804A2E98[i - 1] = Player_GetEntity(i);
-        jobj = GET_JOBJ(un_804A2E98[i - 1]);
+        gobj_ptr[-1] = Player_GetEntity(i);
+        jobj = GET_JOBJ(gobj_ptr[-1]);
         HSD_JObjReqAnimAll(jobj, 140.0f);
         HSD_JObjAnimAll(jobj);
-        HSD_JObjGetTranslation2(GET_JOBJ(un_804A2E98[i - 1]), &v);
+        HSD_JObjGetTranslation2(GET_JOBJ(gobj_ptr[-1]), &v);
         scale = getScale();
         v.x *= scale;
         v.y *= scale;
         v.z *= scale;
         *pos = v;
         HSD_JObjReqAnimAll(jobj, 0.0f);
+        gobj_ptr++;
         pos++;
     }
     lbAudioAx_80026F2C(0x1C);

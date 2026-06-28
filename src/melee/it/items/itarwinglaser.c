@@ -252,7 +252,7 @@ void it_802E7654(Item_GObj* owner, HSD_JObj* bone, Vec3* target, s32 type,
     *(u32*) &spawn.prev_pos.x = *(u32*) &sp28.x;
     *(u32*) &spawn.prev_pos.y = *(u32*) &sp28.y;
     *(u32*) &spawn.prev_pos.z = *(u32*) &sp28.z;
-    *(u32*) &spawn.prev_pos.y = *(u32*) &sp28.y;
+    *(volatile u32*) &spawn.prev_pos.y = *(u32*) &spawn.prev_pos.y;
     spawn.facing_dir = 0.0f;
     spawn.x3C_damage = 0;
     spawn.vel.z = 0.0f;

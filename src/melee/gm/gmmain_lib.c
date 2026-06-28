@@ -772,8 +772,12 @@ void gmMainLib_8015DB80(void)
 s32 gmMainLib_8015DBF4(s32 arg0)
 {
     extern VsModeData gm_80497618;
+    struct gmm_x0* load_gmm;
+    struct gmm_x0_528_t* config;
+    GameRules* gr;
     s32 j;
     u8 val;
+    u8* ptr;
 
 #define ADJ_NAMETAG_78(field)                                                 \
     do {                                                                      \
@@ -785,38 +789,85 @@ s32 gmMainLib_8015DBF4(s32 arg0)
         }                                                                     \
     } while (0)
 
-#define ADJ_VMD(vmd)                                                          \
+#define ADJ_NAMETAG_PAIR(field, store_field)                                  \
     do {                                                                      \
-        for (j = 0; j < 6; j++) {                                             \
-            ADJ_NAMETAG_78((vmd)->data.players[j].xA);                        \
+        ptr = &(store_field);                                                 \
+        if ((field) == (u8) arg0) {                                           \
+            *ptr = 0x78;                                                      \
+        } else if (*ptr > (u8) arg0 && *ptr != 0x78) {                        \
+            *ptr -= 1;                                                        \
         }                                                                     \
     } while (0)
 
-    ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_51C.x4);
+#define ADJ_NAMETAG_STANDALONE_PAIR(field, store_field)                       \
+    do {                                                                      \
+        ptr = &(store_field);                                                 \
+        val = (field);                                                        \
+        if (val == (u8) arg0) {                                               \
+            *ptr = 0x78;                                                      \
+        } else if (val > (u8) arg0 && val != 0x78) {                          \
+            *ptr = val - 1;                                                   \
+        }                                                                     \
+    } while (0)
+
+#define ADJ_NAMETAG_PRELOADED(store_field)                                    \
+    do {                                                                      \
+        ptr = &(store_field);                                                 \
+        if (val == (u8) arg0) {                                               \
+            *ptr = 0x78;                                                      \
+        } else if (val > (u8) arg0 && val != 0x78) {                          \
+            *ptr = val - 1;                                                   \
+        }                                                                     \
+    } while (0)
+
+#define ADJ_VMD(load_vmd_expr, store_vmd_expr)                                \
+    do {                                                                      \
+        VsModeData* store_vmd = (store_vmd_expr);                             \
+        for (j = 0; j < 6; j++) {                                             \
+            ADJ_NAMETAG_PAIR((load_vmd_expr)->data.players[j].xA,             \
+                             store_vmd->data.players[j].xA);                  \
+        }                                                                     \
+    } while (0)
+
+#define ADJ_VMD_SINGLE(vmd_expr)                                              \
+    do {                                                                      \
+        VsModeData* vmd = (vmd_expr);                                         \
+        for (j = 0; j < 6; j++) {                                             \
+            ADJ_NAMETAG_PAIR(vmd->data.players[j].xA,                         \
+                             vmd->data.players[j].xA);                        \
+        }                                                                     \
+    } while (0)
+
+    val = gmMainLib_804D3EE0->unk_51C.x4;
+    load_gmm = gmMainLib_804D3EE0;
+    config = &load_gmm->unk_51C;
+    ADJ_NAMETAG_PRELOADED(config->x4);
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_522.x4);
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_528.x4);
-    ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_530.x4);
+    ADJ_NAMETAG_STANDALONE_PAIR(*((u8*) config + 0x18),
+                                *((u8*) config + 0x18));
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_530.unk_584.unk_586);
 
-    ADJ_VMD(&gm_80497618);
+    ADJ_VMD_SINGLE(&gm_80497618);
 
-    ADJ_VMD(&gmMainLib_804D3EE0->unk_1490);
-    ADJ_VMD(&gmMainLib_804D3EE0->unk_D10);
-    ADJ_VMD(&gmMainLib_804D3EE0->unk_590);
-    ADJ_VMD(&gmMainLib_804D3EE0->unk_6D0);
-    ADJ_VMD(&gmMainLib_804D3EE0->unk_810);
-    ADJ_VMD(&gmMainLib_804D3EE0->unk_950);
-    ADJ_VMD(&gmMainLib_804D3EE0->unk_A90);
-    ADJ_VMD(&gmMainLib_804D3EE0->unk_BD0);
-    ADJ_VMD(&gmMainLib_804D3EE0->unk_E50);
-    ADJ_VMD(&gmMainLib_804D3EE0->unk_F90);
-    ADJ_VMD(&gmMainLib_804D3EE0->unk_10D0);
-    ADJ_VMD(&gmMainLib_804D3EE0->unk_1210);
-    ADJ_VMD(&gmMainLib_804D3EE0->unk_1350);
-    ADJ_VMD(&gmMainLib_804D3EE0->unk_1490);
+    ADJ_VMD(&load_gmm->unk_1490, &load_gmm->unk_1490);
+    ADJ_VMD(&load_gmm->unk_D10, &load_gmm->unk_D10);
+    ADJ_VMD(&load_gmm->unk_590, &load_gmm->unk_590);
+    ADJ_VMD(&load_gmm->unk_6D0, &load_gmm->unk_6D0);
+    ADJ_VMD(&load_gmm->unk_810, &load_gmm->unk_810);
+    ADJ_VMD(&load_gmm->unk_950, &load_gmm->unk_950);
+    ADJ_VMD(&load_gmm->unk_A90, &load_gmm->unk_A90);
+    ADJ_VMD(&load_gmm->unk_BD0, &load_gmm->unk_BD0);
+    ADJ_VMD(&load_gmm->unk_E50, &load_gmm->unk_E50);
+    ADJ_VMD(&load_gmm->unk_F90, &load_gmm->unk_F90);
+    ADJ_VMD(&load_gmm->unk_10D0, &load_gmm->unk_10D0);
+    ADJ_VMD(&load_gmm->unk_1210, &load_gmm->unk_1210);
+    ADJ_VMD(&load_gmm->unk_1350, &load_gmm->unk_1350);
+    ADJ_VMD(&load_gmm->unk_1490, &load_gmm->unk_1490);
 
     {
-        GameRules* gr = &gmMainLib_804D3EE0->x1850;
+        gr = &gmMainLib_804D3EE0->x1850;
+        (void) gr;
 
         val = gr->unk_x10;
         if (val == (u8) arg0) {
@@ -841,6 +892,10 @@ s32 gmMainLib_8015DBF4(s32 arg0)
     }
 
 #undef ADJ_VMD
+#undef ADJ_VMD_SINGLE
+#undef ADJ_NAMETAG_PAIR
+#undef ADJ_NAMETAG_STANDALONE_PAIR
+#undef ADJ_NAMETAG_PRELOADED
 #undef ADJ_NAMETAG_78
 
     return arg0;
@@ -857,16 +912,16 @@ void gmMainLib_8015EA80(void)
         }
     }
     {
-        VsModeData* base = &gmMainLib_804D3EE0->unk_590;
+        char* base = (char*) gmMainLib_804D3EE0 + 0x588;
         s32 j;
         for (i = 0; i < 6; i++) {
             for (j = 0; j < 6; j++) {
-                base[i].data.players[j].handicap = 9;
+                base[0x78 + i * 0x140 + j * 0x24] = 9;
             }
         }
         for (i = 7; i < 13; i++) {
             for (j = 0; j < 6; j++) {
-                base[i].data.players[j].handicap = 9;
+                base[0x78 + i * 0x140 + j * 0x24] = 9;
             }
         }
     }
@@ -1077,13 +1132,14 @@ void InitializePersistentNameData(s32 arg0)
 void gmMainLib_8015F150(void)
 {
     s32 i;
+
     PAD_STACK(8);
 
     for (i = 0; i < 0x19; i++) {
-        int j;
-        struct FighterData* data = &gmMainLib_804D3EE0->thing.x1F2C[(u8) i];
-        for (j = 0; j < 0x19; j++) {
-            data->fighter_kos[j] = 0;
+        int j = 0;
+        struct FighterData* base = gmMainLib_804D3EE0->thing.x1F2C;
+        for (; j < 0x19; j++) {
+            base[(u8) i].fighter_kos[j] = 0;
         }
         gmMainLib_8015EF30(
             (struct gmMainLib_8015EF30_s*) &gmMainLib_804D3EE0->thing
@@ -1193,18 +1249,19 @@ void gmMainLib_8015F588(bool arg0)
 
 /// #gmMainLib_8015F600
 
-static u8 gmMainLib_804D3EE4;
+static s8 gmMainLib_804D3EE4[] = { 0 };
 
 void gmMainLib_8015F600(int arg0, int arg1)
 {
-    s32 i;
-    PAD_STACK(112);
+    s32 lang;
+    PAD_STACK(96);
 
     if (arg0 == 1) {
         s32 j = 0;
         do {
+            s32 i;
             struct FighterData* fdata = gmMainLib_804D3EE0->thing.x1F2C;
-            for (i = 0; i < 25; i++) {
+            for (i = 0; 25 > i; i++) {
                 fdata[(u8) j].fighter_kos[i] = 0;
             }
             gmMainLib_8015EF30(
@@ -1227,7 +1284,6 @@ void gmMainLib_8015F600(int arg0, int arg1)
             *(struct gmm_x1CB0*) gmMainLib_803D4A60;
 
         {
-            s32 lang;
             switch (lbLang_GetLanguageSetting()) {
             case 0:
                 lang = 0;
@@ -1248,37 +1304,41 @@ void gmMainLib_8015F600(int arg0, int arg1)
         }
     } else {
         s32 bank_offset = (arg0 - 2) * 19;
-        s32 j;
+        s32 j = 0;
 
-        j = 0;
         do {
-            s32 idx = j + bank_offset;
-            struct NameTagData* data =
-                &gmMainLib_804D3EE0->thing.x2FF8[(u8) idx / 19]
-                     .inner[(u8) idx % 19];
+            struct NameTagData* data;
+            struct NameTagDataBank* bank;
+            s32 i;
+            s32 idx;
+            idx = j + bank_offset;
+            bank = gmMainLib_804D3EE0->thing.x2FF8;
+            data = &bank[(u8) idx / 19].inner[(u8) idx % 19];
 
             for (i = 0; i < 120; i++) {
                 data->vs_kos[i] = 0;
             }
             gmMainLib_8015EF30((struct gmMainLib_8015EF30_s*) &data->sd_count);
 
-            for (i = 0; i < 25; i++) {
+            for (i = 0; 25 > i; i++) {
                 data->play_time_by_fighter[i] = 0;
             }
             data->x1A2 = 5;
 
+            bank = gmMainLib_804D3EE0->thing.x2FF8;
+            data = &bank[(u8) idx / 19].inner[(u8) idx % 19];
             {
                 char* src = mnName_8023749C((s32) (u8) idx);
                 if (src != NULL) {
                     s32 k = 0;
-                    while ((s8) gmMainLib_804D3EE4 != (s8) (u8) *src) {
+                    while (gmMainLib_804D3EE4[0] != (s8) (u8) *src) {
                         data->namedata[k] = (u8) *src;
                         k++;
                         src++;
                     }
-                    data->namedata[k] = gmMainLib_804D3EE4;
+                    data->namedata[k] = gmMainLib_804D3EE4[0];
                 } else {
-                    data->namedata[0] = (u8) gmMainLib_804D3EE4;
+                    data->namedata[0] = gmMainLib_804D3EE4[0];
                 }
             }
             data->x1A1 = 1;

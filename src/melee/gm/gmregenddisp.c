@@ -1,5 +1,4 @@
-#include "gm_1A4C.h"
-
+#include "gm_1A7A.h"
 #include "gm_unsplit.h"
 
 #include "ft/forward.h"
@@ -12,167 +11,24 @@
 #include "lb/lbaudio_ax.h"
 #include "lb/lbbgflash.h"
 #include "lb/lbmthp.h"
-#include "mn/mnmain.h"
 #include "sc/types.h"
 #include "ty/toy.h"
 #include "ty/tydisplay.h"
 
-#include <sysdolphin/baselib/archive.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/fog.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/sobjlib.h>
-
-extern Event gm_804D6724;
-
-void fn_801A7A44(HSD_GObj* gobj)
-{
-    HSD_JObjAnimAll(GET_JOBJ(gobj));
-}
-
-void fn_801A7A68(HSD_GObj* gobj)
-{
-    HSD_JObjAnimAll(GET_JOBJ(gobj));
-}
-
-static HSD_GObj* gm_804D67B0;
-static HSD_GObj* gm_804D67B4;
-
-void fn_801A7A8C(HSD_GObj* gobj)
-{
-    HSD_CObj* cobj = GET_COBJ(gobj);
-    HSD_CObjAnim(cobj);
-    if (cobj->aobj->curr_frame == cobj->aobj->end_frame) {
-        HSD_GObjPLink_80390228(gm_804D67B0);
-        HSD_GObjPLink_80390228(gm_804D67B4);
-        mn_8022F0F0(3);
-        gm_801A9630();
-        HSD_GObjPLink_80390228(gobj);
-    }
-}
-
-void gm_801A7B00(void)
-{
-    HSD_CObj* cobj;
-    HSD_LObj* lobj;
-    HSD_GObj* gobj;
-    HSD_GObj* cam_gobj;
-    HSD_JObj* jobj;
-    HSD_JObj* child;
-    HSD_JObj* target;
-    s32 char_idx;
-    f32 val;
-    f32 scale;
-    PAD_STACK(0x30);
-
-    // Light GObj
-    gobj = GObj_Create(0xB, 3, 0);
-    lobj = lb_80011AC4(gm_804D67A8->lights);
-    HSD_GObjObject_80390A70(gobj, (u8) HSD_GObj_804D784A, lobj);
-    GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
-
-    // Camera GObj
-    cam_gobj = GObj_Create(0x13, 0x14, 0);
-    cobj =
-        lb_80013B14((HSD_CameraDescPerspective*) gm_804D67A8->cameras[0].desc);
-    HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_804D784B, cobj);
-    GObj_SetupGXLinkMax(cam_gobj, HSD_GObj_803910D8, 8);
-    cam_gobj->gxlink_prios = 0x801;
-    HSD_CObjAddAnim(cobj, gm_804D67A8->cameras[0].anims[0]);
-    HSD_CObjReqAnim(cobj, 0.0f);
-    HSD_CObjAnim(cobj);
-    HSD_GObj_SetupProc(cam_gobj, fn_801A7A8C, 0);
-
-    // Main JObj GObj
-    gobj = GObj_Create(0xE, 0xF, 0);
-    gm_804D67B0 = gobj;
-    jobj = HSD_JObjLoadJoint(gm_804D6798);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
-    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
-    gm_8016895C(jobj, gm_804D67A8->models[0], 0);
-    HSD_JObjReqAnimAll(jobj, 0.0f);
-    HSD_JObjAnimAll(jobj);
-    HSD_GObj_SetupProc(gobj, fn_801A7A44, 0x17);
-
-    gm_801A4B90();
-
-    // Character display GObj
-    gobj = GObj_Create(0xE, 0xF, 0);
-    gm_804D67B4 = gobj;
-    jobj = HSD_JObjLoadJoint(gm_804D67AC->models[0]->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
-    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
-
-    char_idx = gm_801A659C(gm_801BEFB0());
-    child = jobj == NULL ? NULL : jobj->child;
-
-    val = -un_803060BC(char_idx, 0);
-    HSD_JObjSetTranslateXWithMtxDirty(child, val);
-    val = -un_803060BC(char_idx, 1);
-    HSD_JObjSetTranslateYWithMtxDirty(child, val);
-    val = -un_803060BC(char_idx, 2);
-    HSD_JObjSetTranslateZWithMtxDirty(child, val);
-
-    val = -(0.017453292f * un_803060BC(char_idx, 5));
-    HSD_JObjSetRotationYWithMtxDirty(child, val);
-
-    scale = 1.0f / un_803060BC(char_idx, 3);
-    val = un_803060BC(char_idx, 4);
-    scale = val * scale;
-    HSD_JObjSetScaleXWithMtxDirty(child, scale);
-    HSD_JObjSetScaleYWithMtxDirty(child, scale);
-    HSD_JObjSetScaleZWithMtxDirty(child, scale);
-
-    HSD_GObj_SetupProc(gobj, fn_801A7A68, 0x17);
-
-    // Walk JObj tree to find constraint target
-    target = HSD_JObjGetChild(GET_JOBJ(gm_804D67B0));
-    target = HSD_JObjGetChild(target);
-    target = HSD_JObjGetChild(target);
-    target = HSD_JObjGetChild(target);
-    target = HSD_JObjGetChild(target);
-    if (target == NULL) {
-        target = NULL;
-    } else {
-        target = target->next;
-    }
-
-    lb_8000C1C0((HSD_JObj*) gobj->hsd_obj, target);
-    lb_8000C290((HSD_JObj*) gobj->hsd_obj, target);
-}
-
-inline s32 fn_801A7FB4_inline(void)
-{
-    s32 i;
-    s32 count;
-    count = 0;
-    for (i = count; i < 0x1A; i++) {
-        if (un_803048C0(gm_801A659C(i)) ? true : false) {
-            count++;
-        }
-    }
-    return count;
-}
-
-inline s32 fn_801A7FB4_inline2(void)
-{
-    s32 count;
-    s32 i;
-    count = 0;
-    for (i = count; i < 0x1A; i++) {
-        if (un_803048C0(gm_801A659C(i)) ? true : false) {
-            count++;
-        }
-    }
-    return count;
-}
+#include <baselib/archive.h>
+#include <baselib/cobj.h>
+#include <baselib/debug.h>
+#include <baselib/fog.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjobject.h>
+#include <baselib/gobjplink.h>
+#include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
+#include <baselib/lobj.h>
+#include <baselib/random.h>
+#include <baselib/sobjlib.h>
+#include <MSL/math.h>
 
 void fn_801A7FB4(HSD_GObj* gobj)
 {
@@ -199,6 +55,11 @@ void fn_801A7FB4(HSD_GObj* gobj)
     } else {
         HSD_FogInterpretAnim(fog);
     }
+}
+
+static void order_sdata2(void)
+{
+    (void) 0.0f;
 }
 
 void fn_801A80CC(HSD_GObj* gobj)
@@ -229,50 +90,51 @@ void gm_801A8114(HSD_JObj* arg0, int arg1)
     HSD_JObjSetRotationY(transJobj, 0.017453292f * un_803060BC(arg1, 5));
 
     scale = un_803060BC(arg1, 3) * (1.0F / un_803060BC(arg1, 4));
-    if (transJobj == NULL) {
-        __assert("gmregenddisp.c", 0x16BU, "transJobj");
-    }
+    HSD_ASSERT(363, transJobj);
 
     HSD_JObjSetScaleX(transJobj, scale);
     HSD_JObjSetScaleY(transJobj, scale);
     HSD_JObjSetScaleZ(transJobj, scale);
 }
 
-static char lbl_803DB49C[][0xC] = {
-    "Captain  ",
-    "Donkey   ",
-    "Fox      ",
-    "GameWatch",
-    "Kirby    ",
-    "Koopa    ",
-    "Link     ",
-    "Luigi    ",
-    "Mario    ",
-    "Mars     ",
-    "Mewtwo   ",
-    "Ness     ",
-    "Peach    ",
-    "Pikachu  ",
-    "PopoNana ",
-    "Purin    ",
-    "Samus    ",
-    "Yoshi    ",
-    "Ze->Se   ",
-    "Se->Ze   ",
-    "Falco    ",
-    "Clink    ",
-    "Drmario  ",
-    "Emblem   ",
-    "Pichu    ",
-    "Ganon    ",
-    "MasterH  ",
-    "Boy      ",
-    "Girl     ",
-    "GKoops   ",
-    "CrezyH   ",
-    "Sandbag  ",
-    "POPO     ",
-};
+static void order_data_0(void)
+{
+    (void) "Captain  ";
+    (void) "Donkey   ";
+    (void) "Fox      ";
+    (void) "GameWatch";
+    (void) "Kirby    ";
+    (void) "Koopa    ";
+    (void) "Link     ";
+    (void) "Luigi    ";
+    (void) "Mario    ";
+    (void) "Mars     ";
+
+    (void) "Mewtwo   ";
+    (void) "Ness     ";
+    (void) "Peach    ";
+    (void) "Pikachu  ";
+    (void) "PopoNana ";
+
+    (void) "Purin    ";
+    (void) "Samus    ";
+    (void) "Yoshi    ";
+    (void) "Ze->Se   ";
+    (void) "Se->Ze   ";
+    (void) "Falco    ";
+    (void) "Clink    ";
+    (void) "Drmario  ";
+    (void) "Emblem   ";
+    (void) "Pichu    ";
+    (void) "Ganon    ";
+    (void) "MasterH  ";
+    (void) "Boy      ";
+    (void) "Girl     ";
+    (void) "GKoops   ";
+    (void) "CrezyH   ";
+    (void) "Sandbag  ";
+    (void) "POPO     ";
+}
 
 void fn_801A851C(HSD_GObj* gobj)
 {
@@ -282,8 +144,6 @@ void fn_801A851C(HSD_GObj* gobj)
         lbAudioAx_800237A8(0x7EF41, 0x7F, 0x40);
     }
 }
-
-#include <MSL/math.h>
 
 void gm_801A85E4(HSD_JObj* jobj, s32 arg1, s32 arg2)
 {
@@ -303,8 +163,7 @@ void gm_801A85E4(HSD_JObj* jobj, s32 arg1, s32 arg2)
         angle =
             0.017453292f * ((45.0f * (f32) idx) + (2.0f * HSD_Randf()) - 1.0f);
         HSD_JObjSetTranslateX(jobj, 25.0f * cosf(angle));
-        HSD_JObjSetTranslateZ(jobj,
-                              0.9f * ((25.0f * -sinf(angle)) + -18.0f));
+        HSD_JObjSetTranslateZ(jobj, 0.9f * ((25.0f * -sinf(angle)) + -18.0f));
     } else if (arg1 <= 0xC) {
         arg2 = 0xC - arg1;
         temp_idx = arg2 + 8;
@@ -316,8 +175,7 @@ void gm_801A85E4(HSD_JObj* jobj, s32 arg1, s32 arg2)
         angle = 0.017453292f *
                 ((25.714285f * (f32) (idx - 5)) + (4.0f * HSD_Randf()) - 2.0f);
         HSD_JObjSetTranslateX(jobj, 50.0f * cosf(angle));
-        HSD_JObjSetTranslateZ(jobj,
-                              0.9f * ((50.0f * -sinf(angle)) + -18.0f));
+        HSD_JObjSetTranslateZ(jobj, 0.9f * ((50.0f * -sinf(angle)) + -18.0f));
     } else if (arg1 <= 0x15) {
         arg2 = 0x15 - arg1;
         temp_idx = arg2 + 0x11;
@@ -329,8 +187,7 @@ void gm_801A85E4(HSD_JObj* jobj, s32 arg1, s32 arg2)
         angle =
             0.017453292f * ((22.5f * (f32) (idx - 0xD)) + HSD_Randf() - 0.5f);
         HSD_JObjSetTranslateX(jobj, 75.0f * cosf(angle));
-        HSD_JObjSetTranslateZ(jobj,
-                              0.8f * ((75.0f * -sinf(angle)) + -18.0f));
+        HSD_JObjSetTranslateZ(jobj, 0.8f * ((75.0f * -sinf(angle)) + -18.0f));
     } else if (arg1 == 0x16) {
         HSD_JObjSetTranslateX(jobj, -80.0f);
         HSD_JObjSetTranslateZ(jobj, -70.0f);
@@ -435,13 +292,9 @@ void gm_801A9094(void)
             HSD_JObjSetScaleX(root, 1.8f);
             HSD_JObjSetScaleY(root, 1.8f);
             HSD_JObjSetScaleZ(root, 1.8f);
-            if (joint == NULL) {
-                __assert("jobj.h", 0x2F5U, "joint");
-            }
+            HSD_ASSERT(0x2F5, joint);
             child = HSD_JObjLoadJoint(joint);
-            if (child == NULL) {
-                __assert("jobj.h", 0x2F7U, "jobj");
-            }
+            HSD_ASSERTMSG(0x2F7, child, "jobj");
             HSD_JObjAddChild(root, child);
             HSD_JObjAddAnimAll(child, NULL, matanim, NULL);
             HSD_JObjReqAnimAll(child, (f32) dsp->x05);
@@ -619,93 +472,51 @@ static u8 gm_804D67C8;
 static u8 gm_804D67C9;
 
 char* gm_803DB8B8[] = {
-    // clang-format off
-    "GmRegendSimpleCaptain.thp",
-    "GmRegendSimpleDonkey.thp",
-    "GmRegendSimpleFox.thp",
-    "GmRegendSimpleGamewatch.thp",
-    "GmRegendSimpleKirby.thp",
-    "GmRegendSimpleKoopa.thp",
-    "GmRegendSimpleLink.thp",
-    "GmRegendSimpleLuigi.thp",
-    "GmRegendSimpleMario.thp",
-    "GmRegendSimpleMarth.thp",
-    "GmRegendSimpleMewtwo.thp",
-    "GmRegendSimpleNess.thp",
-    "GmRegendSimplePeach.thp",
-    "GmRegendSimplePikachu.thp",
-    "GmRegendSimplePoponana.thp",
-    "GmRegendSimplePurin.thp",
-    "GmRegendSimpleSamus.thp",
-    "GmRegendSimpleYoshi.thp",
-    "GmRegendSimpleZeldaseak.thp",
-    "GmRegendSimpleFalco.thp",
-    "GmRegendSimpleClink.thp",
-    "GmRegendSimpleDrmario.thp",
-    "GmRegendSimpleRoy.thp",
-    "GmRegendSimplePichu.thp",
-    "GmRegendSimpleGanon.thp",
-    // clang-format on
+    "GmRegendSimpleCaptain.thp",   "GmRegendSimpleDonkey.thp",
+    "GmRegendSimpleFox.thp",       "GmRegendSimpleGamewatch.thp",
+    "GmRegendSimpleKirby.thp",     "GmRegendSimpleKoopa.thp",
+    "GmRegendSimpleLink.thp",      "GmRegendSimpleLuigi.thp",
+    "GmRegendSimpleMario.thp",     "GmRegendSimpleMarth.thp",
+    "GmRegendSimpleMewtwo.thp",    "GmRegendSimpleNess.thp",
+    "GmRegendSimplePeach.thp",     "GmRegendSimplePikachu.thp",
+    "GmRegendSimplePoponana.thp",  "GmRegendSimplePurin.thp",
+    "GmRegendSimpleSamus.thp",     "GmRegendSimpleYoshi.thp",
+    "GmRegendSimpleZeldaseak.thp", "GmRegendSimpleZeldaseak.thp",
+    "GmRegendSimpleFalco.thp",     "GmRegendSimpleClink.thp",
+    "GmRegendSimpleDrmario.thp",   "GmRegendSimpleRoy.thp",
+    "GmRegendSimplePichu.thp",     "GmRegendSimpleGanon.thp",
 };
 
 char* gm_803DBBF4[] = {
-    // clang-format off
-    "GmRegendAdventureCaptain.thp",
-    "GmRegendAdventureDonkey.thp",
-    "GmRegendAdventureFox.thp",
-    "GmRegendAdventureGamewatch.thp",
-    "GmRegendAdventureKirby.thp",
-    "GmRegendAdventureKoopa.thp",
-    "GmRegendAdventureLink.thp",
-    "GmRegendAdventureLuigi.thp",
-    "GmRegendAdventureMario.thp",
-    "GmRegendAdventureMarth.thp",
-    "GmRegendAdventureMewtwo.thp",
-    "GmRegendAdventureNess.thp",
-    "GmRegendAdventurePeach.thp",
-    "GmRegendAdventurePikachu.thp",
-    "GmRegendAdventurePoponana.thp",
-    "GmRegendAdventurePurin.thp",
-    "GmRegendAdventureSamus.thp",
-    "GmRegendAdventureYoshi.thp",
-    "GmRegendAdventureZeldaseak.thp",
-    "GmRegendAdventureFalco.thp",
-    "GmRegendAdventureClink.thp",
-    "GmRegendAdventureDrmario.thp",
-    "GmRegendAdventureRoy.thp",
-    "GmRegendAdventurePichu.thp",
-    "GmRegendAdventureGanon.thp",
-    // clang-format on
+    "GmRegendAdventureCaptain.thp",   "GmRegendAdventureDonkey.thp",
+    "GmRegendAdventureFox.thp",       "GmRegendAdventureGamewatch.thp",
+    "GmRegendAdventureKirby.thp",     "GmRegendAdventureKoopa.thp",
+    "GmRegendAdventureLink.thp",      "GmRegendAdventureLuigi.thp",
+    "GmRegendAdventureMario.thp",     "GmRegendAdventureMarth.thp",
+    "GmRegendAdventureMewtwo.thp",    "GmRegendAdventureNess.thp",
+    "GmRegendAdventurePeach.thp",     "GmRegendAdventurePikachu.thp",
+    "GmRegendAdventurePoponana.thp",  "GmRegendAdventurePurin.thp",
+    "GmRegendAdventureSamus.thp",     "GmRegendAdventureYoshi.thp",
+    "GmRegendAdventureZeldaseak.thp", "GmRegendAdventureZeldaseak.thp",
+    "GmRegendAdventureFalco.thp",     "GmRegendAdventureClink.thp",
+    "GmRegendAdventureDrmario.thp",   "GmRegendAdventureRoy.thp",
+    "GmRegendAdventurePichu.thp",     "GmRegendAdventureGanon.thp",
 };
 
 char* gm_803DBF10[] = {
-    // clang-format off
-    "GmRegendAllstarCaptain.thp",
-    "GmRegendAllstarDonkey.thp",
-    "GmRegendAllstarFox.thp",
-    "GmRegendAllstarGamewatch.thp",
-    "GmRegendAllstarKirby.thp",
-    "GmRegendAllstarKoopa.thp",
-    "GmRegendAllstarLink.thp",
-    "GmRegendAllstarLuigi.thp",
-    "GmRegendAllstarMario.thp",
-    "GmRegendAllstarMarth.thp",
-    "GmRegendAllstarMewtwo.thp",
-    "GmRegendAllstarNess.thp",
-    "GmRegendAllstarPeach.thp",
-    "GmRegendAllstarPikachu.thp",
-    "GmRegendAllstarPoponana.thp",
-    "GmRegendAllstarPurin.thp",
-    "GmRegendAllstarSamus.thp",
-    "GmRegendAllstarYoshi.thp",
-    "GmRegendAllstarZeldaseak.thp",
-    "GmRegendAllstarFalco.thp",
-    "GmRegendAllstarClink.thp",
-    "GmRegendAllstarDrmario.thp",
-    "GmRegendAllstarRoy.thp",
-    "GmRegendAllstarPichu.thp",
-    "GmRegendAllstarGanon.thp",
-    // clang-format on
+    "GmRegendAllstarCaptain.thp",   "GmRegendAllstarDonkey.thp",
+    "GmRegendAllstarFox.thp",       "GmRegendAllstarGamewatch.thp",
+    "GmRegendAllstarKirby.thp",     "GmRegendAllstarKoopa.thp",
+    "GmRegendAllstarLink.thp",      "GmRegendAllstarLuigi.thp",
+    "GmRegendAllstarMario.thp",     "GmRegendAllstarMarth.thp",
+    "GmRegendAllstarMewtwo.thp",    "GmRegendAllstarNess.thp",
+    "GmRegendAllstarPeach.thp",     "GmRegendAllstarPikachu.thp",
+    "GmRegendAllstarPoponana.thp",  "GmRegendAllstarPurin.thp",
+    "GmRegendAllstarSamus.thp",     "GmRegendAllstarYoshi.thp",
+    "GmRegendAllstarZeldaseak.thp", "GmRegendAllstarZeldaseak.thp",
+    "GmRegendAllstarFalco.thp",     "GmRegendAllstarClink.thp",
+    "GmRegendAllstarDrmario.thp",   "GmRegendAllstarRoy.thp",
+    "GmRegendAllstarPichu.thp",     "GmRegendAllstarGanon.thp",
 };
 
 void gm_801A9B30_OnEnter(UNK_T unused)

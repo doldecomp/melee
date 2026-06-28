@@ -20,8 +20,8 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/ithitbox.h"
 #include "it/item.h"
+#include "it/ithitbox.h"
 #include "it/types.h"
 #include "lb/lb_00B0.h"
 #include "mp/mplib.h"
@@ -207,11 +207,11 @@ void it_802F063C(Item_GObj* gobj, Item_GObj* arg1)
         translate.x = 0.0f;
         translate.z = 0.0f;
         translate.y =
-            sqrtf_store(((pos_0.x - pos_2.x) * (pos_0.x - pos_2.x)) +
-                            ((pos_0.y - pos_2.y) * (pos_0.y - pos_2.y)) +
-                            ((z_diff = pos_0.z - pos_2.z) *
-                             (pos_0.z - pos_2.z)),
-                        &sqrt_0) *
+            sqrtf_store(
+                ((pos_0.x - pos_2.x) * (pos_0.x - pos_2.x)) +
+                    ((pos_0.y - pos_2.y) * (pos_0.y - pos_2.y)) +
+                    ((z_diff = pos_0.z - pos_2.z) * (pos_0.z - pos_2.z)),
+                &sqrt_0) *
             -(sqrtf_store(((pos_0.x - pos_1.x) * (pos_0.x - pos_1.x)) +
                               ((pos_0.y - pos_1.y) * (pos_0.y - pos_1.y)),
                           &sqrt_1) /

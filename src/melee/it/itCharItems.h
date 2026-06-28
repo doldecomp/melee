@@ -463,11 +463,7 @@ typedef struct itLinkBoomerangAttributes {
     /* x44 */ HSD_Joint* x44;
     /* x48 */ HSD_Joint* x48;
     /* x4C */ AnimBundle x4C_anim;
-    /* x50 */ HSD_MatAnimJoint* x50_matanim;
-    /* x54 */ HSD_ShapeAnimJoint* x54_shapeanim;
     /* x58 */ AnimBundle x58_anim;
-    /* x5C */ HSD_MatAnimJoint* x5C_matanim;
-    /* x60 */ HSD_ShapeAnimJoint* x60_shapeanim;
 } itLinkBoomerangAttributes;
 
 typedef struct {

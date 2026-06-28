@@ -97,19 +97,21 @@ static void fn_8019F2D4(u32 arg0);
 static void fn_8019EFC4(HSD_PadStatus* pad)
 {
     HSD_JObj* child_next;
+    HSD_JObj* jobj;
 
-    child_next = lbl_80479A98.x28->hsd_obj;
+    jobj = lbl_80479A98.x28->hsd_obj;
     if ((u8) lbl_80479A98.x60 != 0) {
-        if (child_next == NULL) {
-            child_next = NULL;
+        if (jobj == NULL) {
+            jobj = NULL;
         } else {
-            child_next = child_next->child;
+            jobj = jobj->child;
         }
-        if (child_next == NULL) {
-            child_next = NULL;
+        if (jobj == NULL) {
+            jobj = NULL;
         } else {
-            child_next = child_next->next;
+            jobj = jobj->next;
         }
+        child_next = jobj;
         if (lbl_80479A98.x70 != 0) {
             lbl_80479A98.x64++;
             if ((lbl_80479A98.x64 % 5 == 0) && lbl_80479A98.x70 != 0) {
@@ -179,9 +181,6 @@ static void fn_8019F1D0(void)
 
 static void fn_8019F2D4(u32 arg0)
 {
-    HSD_JObj* jobj;
-    HSD_MObj* mobj;
-
     if (lbl_804D66C8.x4 == 0xA) {
         gm_80167858((s8) lbl_80479A98.x15, lbl_80479A98.x16, 0xD, 0xA);
     }
@@ -189,6 +188,9 @@ static void fn_8019F2D4(u32 arg0)
         gm_80167858((s8) lbl_80479A98.x15, lbl_80479A98.x16, 0xD, 0x14);
     }
     if ((u8) lbl_80479A98.x0 == 0) {
+        HSD_JObj* jobj;
+        HSD_MObj* mobj;
+
         if (lbl_804D66C8.x4 < 0x50) {
             lbl_804D66C8.x4++;
         } else {
@@ -209,6 +211,9 @@ static void fn_8019F2D4(u32 arg0)
         HSD_MObjAnim(mobj);
         return;
     } else if ((u8) lbl_80479A98.x0 == 1) {
+        HSD_JObj* jobj;
+        HSD_MObj* mobj;
+
         if ((u8) lbl_80479A98.x14 != 0) {
             mobj = lbl_804D66C8.x0->u.dobj->mobj;
             HSD_MObjReqAnim(mobj, 0.0f);
@@ -258,6 +263,9 @@ static void fn_8019F2D4(u32 arg0)
             return;
         }
     } else if ((u8) lbl_80479A98.x0 == 8) {
+        HSD_JObj* jobj;
+        HSD_MObj* mobj;
+
         jobj = lbl_804D66C0.x0;
         HSD_JObjReqAnimAll(jobj, (f32) lbl_804D66C8.x4);
         HSD_JObjAnimAll(jobj);
@@ -359,9 +367,20 @@ static void fn_8019F810(void)
     fn_8019F1D0();
 }
 
+static inline s32 fn_8019F9C4_GetCharIdx(CharacterKind arg0)
+{
+    switch (gm_801A4310()) {
+    case 3:
+        return gm_80160474(arg0, GM_CLASSIC);
+    case 4:
+        return gm_80160474(arg0, GM_ADVENTURE);
+    default:
+        return gm_80160474(arg0, GM_ALLSTAR);
+    }
+}
+
 void fn_8019F9C4(u32 arg0)
 {
-    HSD_Archive* archive;
     HSD_CObj* cobj;
     HSD_GObj* gobj;
     HSD_GObj* cam_gobj;
@@ -371,40 +390,24 @@ void fn_8019F9C4(u32 arg0)
     HSD_JObj* node;
     HSD_JObj** ptr;
     s32 char_idx;
-    u32 char_kind;
     s32 i;
     f32 f;
     f32 scale;
     PAD_STACK(8);
 
-    switch (gm_801A4310()) {
-    case 3:
-        char_idx = gm_80160474(arg0, GM_CLASSIC);
-        break;
-    case 4:
-        char_idx = gm_80160474(arg0, GM_ADVENTURE);
-        break;
-    default:
-        char_idx = gm_80160474(arg0, GM_ALLSTAR);
-        break;
-    }
-    if (char_idx == -1) {
-        char_kind = 8;
-    } else {
-        char_kind = arg0;
-    }
+    char_idx = fn_8019F9C4_GetCharIdx(arg0);
+    arg0 = (char_idx == -1) ? 8 : arg0;
     fn_80168F7C();
-    archive = lbArchive_80016DBC("GmGover.dat", &lbl_804D669C,
-                                 "ScGamRegGover_scene_data", 0);
-    lbl_804D6698 = archive;
+    lbl_804D6698 = lbArchive_80016DBC("GmGover.dat", &lbl_804D669C,
+                                      "ScGamRegGover_scene_data", 0);
     lbArchive_80016DBC("GmGoCoin.dat", &lbl_804D66A0,
                        "ScGamRegGover_scene_data", 0);
     un_803124BC();
     un_803102D0();
     {
         u8 game_mode = gm_801A4310();
-        char* model_name = gm_80160564(char_kind, game_mode);
-        char* scene_name = gm_801604DC(char_kind, game_mode);
+        char* model_name = gm_80160564(arg0, game_mode);
+        char* scene_name = gm_801604DC(arg0, game_mode);
         lbArchive_LoadSymbols(scene_name, &lbl_804D66AC, model_name, 0);
         lbArchive_LoadSymbols("GmGoAnim.dat", &lbl_804D66A4,
                               "ScGamRegGover_scene_data", 0);
@@ -417,8 +420,10 @@ void fn_8019F9C4(u32 arg0)
     cam_gobj->gxlink_prios = 0x801;
 
     gobj = GObj_Create(0xB, 0xF, 0);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A,
-                            lb_80011AC4(lbl_804D669C->lights));
+    {
+        HSD_LObj* lobj = lb_80011AC4(lbl_804D669C->lights);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
+    }
     GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
 
     gobj = GObj_Create(0xE, 0xF, 0);
@@ -583,17 +588,7 @@ void fn_8019F9C4(u32 arg0)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
 
-    switch (gm_801A4310()) {
-    case 3:
-        char_idx = gm_80160474(char_kind, GM_CLASSIC);
-        break;
-    case 4:
-        char_idx = gm_80160474(char_kind, GM_ADVENTURE);
-        break;
-    default:
-        char_idx = gm_80160474(char_kind, GM_ALLSTAR);
-        break;
-    }
+    char_idx = fn_8019F9C4_GetCharIdx(arg0);
 
     if (jobj == NULL) {
         child = NULL;

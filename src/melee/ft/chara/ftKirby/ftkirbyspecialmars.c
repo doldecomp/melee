@@ -66,9 +66,34 @@ void fn_8010B2E8(Fighter_GObj* gobj)
     fp->mv.kb.specialn_ms.cur_frame = 0;
 }
 
+inline void setupStartAccessory(HSD_GObj* gobj, Vec3* scale)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    HSD_JObj* jobj;
+    KirbyHatStruct* mars_hat;
+    KirbyHatStruct* fe_hat;
+
+    mars_hat = ft_80459B88.hats[FTKIND_MARS - 1];
+    fe_hat = ft_80459B88.hats[FTKIND_EMBLEM - 1];
+
+    if (fp->fv.kb.hat.kind == FTKIND_MARS) {
+        ftCommon_SetAccessory(fp, (HSD_Joint*) mars_hat->hat_dynamics[0]);
+    } else {
+        ftCommon_SetAccessory(fp, (HSD_Joint*) fe_hat->hat_dynamics[0]);
+    }
+
+    scale->x = scale->y = scale->z = ftCommon_GetModelScale(fp);
+    jobj = fp->x20A0_accessory;
+    HSD_JObjSetScale(jobj, scale);
+    lb_8000C2F8(fp->x20A0_accessory,
+                fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint);
+}
+
 void ftKb_SpecialNMs_8010B2FC(HSD_GObj* gobj)
 {
-    PAD_STACK(4 * 6);
+    Vec3 scale;
+    UNUSED u64 pad;
+    PAD_STACK(4 * 2);
     {
         ftKb_DatAttrs* da;
         struct ftKb_SpecialNMs_DatAttrs* ms_da;
@@ -101,23 +126,7 @@ void ftKb_SpecialNMs_8010B2FC(HSD_GObj* gobj)
     }
 
     ftAnim_8006EBA4(gobj);
-
-    {
-        Fighter* fp = GET_FIGHTER(gobj);
-        Vec3 scale;
-
-        if (fp->fv.kb.hat.kind == FTKIND_MARS) {
-            ftCommon_SetAccessory(fp, ft_80459B88.x0->x0[FTKIND_MARS].next);
-        } else {
-            ftCommon_SetAccessory(fp, ft_80459B88.x0->x0[FTKIND_EMBLEM].next);
-        }
-
-        scale.x = scale.y = scale.z = ftCommon_GetModelScale(fp);
-        HSD_JObjSetScale(fp->x20A0_accessory, &scale);
-        lb_8000C2F8(
-            fp->x20A0_accessory,
-            fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint);
-    }
+    setupStartAccessory(gobj, &scale);
 }
 
 void ftKb_SpecialNMs_8010B4A0(HSD_GObj* gobj)
@@ -431,10 +440,10 @@ void ftKb_SpecialNMs_8010BC90(Fighter_GObj* gobj)
 void ftKb_MsSpecialNEnd_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftKb_DatAttrs* da = fp->dat_attrs;
-    struct ftKb_SpecialNMs_DatAttrs* ms_da;
     s32 i;
-    HitCapsule* hit;
+    struct ftKb_SpecialNMs_DatAttrs* ms_da;
+    Fighter* hit_fp;
+    ftKb_DatAttrs* da = fp->dat_attrs;
     PAD_STACK(24);
     if ((s32) fp->fv.kb.hat.kind == FTKIND_MARS) {
         ms_da = &da->ms;
@@ -442,17 +451,18 @@ void ftKb_MsSpecialNEnd_Anim(Fighter_GObj* gobj)
         ms_da = &da->fe;
     }
     if (fp->cmd_vars[0] == 0U) {
-        hit = fp->x914;
+        hit_fp = fp;
         i = 0;
         do {
-            if ((s32) hit->state == 1) {
-                f32 dmg = (f32) (ms_da->base_damage +
-                                 (fp->mv.kb.specialhi.x0 / 30) *
+            if ((s32) hit_fp->x914[0].state == 1) {
+                f32 dmg =
+                    (f32) (s32) (ms_da->base_damage +
+                                 (fp->mv.kb.specialn_ms.cur_frame / 30) *
                                      ms_da->additional_damage_per_iteration);
-                ftColl_8007ABD0(hit, (u32) dmg, gobj);
+                ftColl_8007ABD0(hit_fp->x914, (u32) dmg, gobj);
             }
             i += 1;
-            hit = (HitCapsule*) ((u8*) hit + sizeof(HitCapsule));
+            hit_fp = (Fighter*) ((u8*) hit_fp + sizeof(HitCapsule));
         } while (i < 4);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -464,9 +474,9 @@ void ftKb_MsSpecialAirNEnd_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     s32 i;
-    ftKb_DatAttrs* da = fp->dat_attrs;
     struct ftKb_SpecialNMs_DatAttrs* ms_da;
-    HitCapsule* hit;
+    Fighter* hit_fp;
+    ftKb_DatAttrs* da = fp->dat_attrs;
     PAD_STACK(24);
     if ((s32) fp->fv.kb.hat.kind == FTKIND_MARS) {
         ms_da = &da->ms;
@@ -474,17 +484,18 @@ void ftKb_MsSpecialAirNEnd_Anim(Fighter_GObj* gobj)
         ms_da = &da->fe;
     }
     if (fp->cmd_vars[0] == 0U) {
-        hit = fp->x914;
+        hit_fp = fp;
         i = 0;
         do {
-            if ((s32) hit->state == 1) {
-                f32 dmg = (f32) (ms_da->base_damage +
-                                 (fp->mv.kb.specialhi.x0 / 30) *
+            if ((s32) hit_fp->x914[0].state == 1) {
+                f32 dmg =
+                    (f32) (s32) (ms_da->base_damage +
+                                 (fp->mv.kb.specialn_ms.cur_frame / 30) *
                                      ms_da->additional_damage_per_iteration);
-                ftColl_8007ABD0(hit, (u32) dmg, gobj);
+                ftColl_8007ABD0(hit_fp->x914, (u32) dmg, gobj);
             }
             i += 1;
-            hit = (HitCapsule*) ((u8*) hit + sizeof(HitCapsule));
+            hit_fp = (Fighter*) ((u8*) hit_fp + sizeof(HitCapsule));
         } while (i < 4);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {

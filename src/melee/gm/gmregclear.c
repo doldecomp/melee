@@ -652,28 +652,32 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
 {
     u8 colors[3];
     s32 var_r20;
-    u8 var_r22;
-    u8 var_r21;
-    s32 var_r28;
+    u8 enemy_level;
+    u8 enemy_cpu_type;
+    s32 player_idx;
     s32 var_r4;
     u8 var_r6;
     s32 var_r4_2;
     u8 var_r3;
-    s32 var_r25;
-    s32 var_r25_3;
-    s32 var_r23_2;
-    s8* temp_r24;
-    u8 temp_r0_2;
-    f32 temp_f29;
-    f32 temp_f28;
-    u8* var_r26;
+    s32 color_idx;
+    s32 enemy_idx;
+    s8* enemy_kind;
+    u8 player_kind;
+    s32 player_offset;
+    f32 attack_ratio;
+    f32 defense_ratio;
+    u8* color_iter;
     s32 sp8;
+    typedef struct StartMeleePlayerCursor {
+        char pad[0x60];
+        PlayerInitData player;
+    } StartMeleePlayerCursor;
 
     PAD_STACK(24);
 
     var_r20 = 0;
-    var_r22 = 0;
-    var_r21 = 0;
+    enemy_level = 0;
+    enemy_cpu_type = 0;
     arg1->x0.xC.xC = 1;
     fn_8017E21C();
     fn_8016F030(arg0);
@@ -777,84 +781,85 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     arg0->players[0].spawn_dir = (s8) arg1->x0.xA;
 
     {
-        u8 var_r5;
+        u8 team_color;
         if (arg1->x58 != NULL) {
-            var_r5 = arg1->x58((u8) count, arg1->x0.cpu_level, 0);
+            team_color = arg1->x58((u8) count, arg1->x0.cpu_level, 0);
         } else {
-            var_r5 = 0;
+            team_color = 0;
         }
 
         {
-            var_r28 = fn_8017DD7C(arg0->players, arg1->x0.xC.x24, var_r5) + 1;
+            player_idx =
+                fn_8017DD7C(arg0->players, arg1->x0.xC.x24, team_color) + 1;
             arg0->rules.is_teams = 1;
         }
     }
 
-    temp_f29 = arg1->x64((u8) count, arg1->x0.cpu_level);
-    temp_f28 = arg1->x68((u8) count, arg1->x0.cpu_level);
+    attack_ratio = arg1->x64((u8) count, arg1->x0.cpu_level);
+    defense_ratio = arg1->x68((u8) count, arg1->x0.cpu_level);
 
-    var_r26 = colors;
+    color_iter = colors;
     {
-        u8* var_r24 = var_r26;
-        s8* var_r18 = arg2;
-        for (var_r25 = 0; var_r25 < 3; var_r25++) {
-            u8 temp_r23 = gm_80169238((u8) *var_r18);
-            u8 var_r0;
+        u8* out_color = color_iter;
+        s8* kind_iter = arg2;
+        for (color_idx = 0; color_idx < 3; color_idx++) {
+            u8 num_colors = gm_80169238((u8) *kind_iter);
+            u8 color_id;
             if (arg1->x54 != NULL) {
-                u8 temp_r3_3;
-                temp_r3_3 =
-                    arg1->x54((u8) count, arg1->x0.cpu_level, (u8) var_r25);
-                if (temp_r23 != 0) {
-                    var_r0 = temp_r3_3 % temp_r23;
+                u8 requested_color;
+                requested_color =
+                    arg1->x54((u8) count, arg1->x0.cpu_level, (u8) color_idx);
+                if (num_colors != 0) {
+                    color_id = requested_color % num_colors;
                 } else {
-                    var_r0 = 0;
+                    color_id = 0;
                 }
             } else {
-                var_r0 = 0;
+                color_id = 0;
             }
-            *var_r24 = var_r0;
-            var_r24 += 1;
-            var_r18 += 1;
+            *out_color = color_id;
+            out_color += 1;
+            kind_iter += 1;
         }
     }
 
     {
         s32 temp_r3_4 = arg1->x0.x8 & 8;
         if ((temp_r3_4 != 0) && ((u8) arg1->x0.xC.x11 == 0)) {
-            s32 var_r4_3;
-            s32 var_r23;
+            s32 base_enemy_count;
+            s32 event_enemy_count;
             s32 var_r24_2;
             s32 var_r25_2;
             u8 temp_r4;
-            u32 temp_r3_5;
+            u32 stage_flags;
 
-            var_r4_3 = 0;
+            base_enemy_count = 0;
             if ((s32) (u8) arg2[0] != 0x21) {
-                var_r4_3 = 1;
+                base_enemy_count = 1;
             }
             {
                 s8* p = &arg2[1];
                 if ((s32) *p != 0x21) {
-                    var_r4_3 += 1;
+                    base_enemy_count += 1;
                 }
                 if ((s32) p[1] != 0x21) {
-                    var_r4_3 += 1;
+                    base_enemy_count += 1;
                 }
             }
             arg1->x0.xC.xC = 3;
-            var_r23 = var_r4_3;
+            event_enemy_count = base_enemy_count;
             var_r24_2 = 0;
             var_r25_2 = 0;
             sp8 = 0;
             if (arg1->x4C != NULL) {
-                var_r22 = arg1->x4C((u8) count, arg1->x0.cpu_level, 0U);
+                enemy_level = arg1->x4C((u8) count, arg1->x0.cpu_level, 0U);
             }
 
             temp_r4 = (u8) arg2[0];
             if ((s8) temp_r4 != 4) {
                 if ((u8) (temp_r4 - 0x1B) <= 1U) {
                     arg0->rules.x0_3 = 6;
-                    var_r23 = 5;
+                    event_enemy_count = 5;
                     colors[0] = 0;
                     var_r24_2 = 1;
                     var_r25_2 = 1;
@@ -865,13 +870,14 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
                 }
             }
 
-            temp_r3_5 = Ground_801C5AD0(Stage_8022519C(arg7));
+            stage_flags = Ground_801C5AD0(Stage_8022519C(arg7));
 
             gm_8016A22C((s8) (u8) arg2[0], (s8) arg2[1], (s8) arg2[2],
                         colors[0], colors[1], (s32) colors[2], var_r24_2,
                         var_r25_2, sp8, (u8) arg1->x0.ckind, arg1->x0.color,
-                        (s32) var_r22, (s32) arg3, var_r23, (s32) temp_r3_5,
-                        (s32) arg5, (s32) arg4, temp_f29, temp_f28);
+                        (s32) enemy_level, (s32) arg3, event_enemy_count,
+                        (s32) stage_flags, (s32) arg5, (s32) arg4,
+                        attack_ratio, defense_ratio);
             gm_8016A21C(&arg0->rules);
             arg1->x0.xC.x11 = 0;
             if (arg1->x0.x8 & 4) {
@@ -890,94 +896,97 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     gmRegSetupEnemyColorTable((s8) (u8) arg1->x0.ckind, arg1->x0.color, arg2,
                               colors);
 
-    var_r25_3 = var_r28 * 0x24;
-    var_r23_2 = 0;
+    player_offset = player_idx * 0x24;
+    enemy_idx = 0;
     for (;;) {
-        temp_r24 = &arg2[var_r23_2];
-        if ((s32) (u8) temp_r24[0] != 0x21) {
+        enemy_kind = &arg2[enemy_idx];
+        if ((s32) (u8) enemy_kind[0] != 0x21) {
             if (arg1->x0.x8 & 8) {
                 if (arg1->x4C != NULL) {
-                    var_r22 = arg1->x4C((u8) count, arg1->x0.cpu_level, 0U);
+                    enemy_level =
+                        arg1->x4C((u8) count, arg1->x0.cpu_level, 0U);
                 }
                 if (arg1->x50 != NULL) {
-                    var_r21 = arg1->x50((u8) count, arg1->x0.cpu_level, 0U);
+                    enemy_cpu_type =
+                        arg1->x50((u8) count, arg1->x0.cpu_level, 0U);
                 }
             } else {
                 if (arg1->x4C != NULL) {
-                    var_r22 =
-                        arg1->x4C((u8) count, arg1->x0.cpu_level, var_r23_2);
+                    u8 selected_enemy_level =
+                        arg1->x4C((u8) count, arg1->x0.cpu_level, enemy_idx);
+                    enemy_level = selected_enemy_level;
                 }
                 if (arg1->x50 != NULL) {
-                    var_r21 =
-                        arg1->x50((u8) count, arg1->x0.cpu_level, var_r23_2);
+                    enemy_cpu_type =
+                        arg1->x50((u8) count, arg1->x0.cpu_level, enemy_idx);
                 }
             }
             {
-                PlayerInitData* p =
-                    (PlayerInitData*) ((u8*) arg0 + var_r25_3 + 0x60);
-                gm_8016795C(p);
-                p->slot_type = 1;
-                p->c_kind = (s8) (u8) temp_r24[0];
-                p->stocks = 1;
-                p->cpu_level = var_r22;
-                p->xE = var_r21;
-                p->x18 = temp_f29;
-                p->x1C = temp_f28;
-                p->color = *var_r26;
+                StartMeleePlayerCursor* player_slot =
+                    (StartMeleePlayerCursor*) ((u8*) arg0 + player_offset);
+                gm_8016795C(&player_slot->player);
+                player_slot->player.slot_type = 1;
+                player_slot->player.c_kind = (s8) (u8) enemy_kind[0];
+                player_slot->player.stocks = 1;
+                player_slot->player.cpu_level = enemy_level;
+                player_slot->player.xE = enemy_cpu_type;
+                player_slot->player.x18 = attack_ratio;
+                player_slot->player.x1C = defense_ratio;
+                player_slot->player.color = *color_iter;
                 if (arg1->x0.x8 & 2) {
-                    p->x20 = 2.0f;
-                    p->xB = 2;
+                    player_slot->player.x20 = 2.0f;
+                    player_slot->player.xB = 2;
                 } else {
-                    p->x20 = 1.0f;
-                    p->xB = 0;
+                    player_slot->player.x20 = 1.0f;
+                    player_slot->player.xB = 0;
                 }
                 if (arg1->x0.x8 & 4) {
-                    p->xC_b2 = 1;
-                    p->xE = 0x1B;
+                    player_slot->player.xC_b2 = 1;
+                    player_slot->player.xE = 0x1B;
                 }
-                if ((s32) p->c_kind == 0x1D) {
-                    p->xC_b1 = 0;
+                if ((s32) player_slot->player.c_kind == 0x1D) {
+                    player_slot->player.xC_b1 = 0;
                 }
-                temp_r0_2 = (u8) p->c_kind;
-                if (((s8) temp_r0_2 == 0x1A) || ((s8) temp_r0_2 == 0x1E)) {
-                    p->xC_b7 = 1;
-                    p->hp = 0x12C;
-                    p->xD_b2 = 1;
-                    p->xD_b0 = 1;
-                    p->xD_b2 = 1;
-                    p->spawn_dir = -1;
-                    if ((s32) p->c_kind == 0x1E) {
-                        p->slot_type = 3;
+                player_kind = (u8) player_slot->player.c_kind;
+                if (((s8) player_kind == 0x1A) || ((s8) player_kind == 0x1E)) {
+                    player_slot->player.xC_b7 = 1;
+                    player_slot->player.hp = 0x12C;
+                    player_slot->player.xD_b2 = 1;
+                    player_slot->player.xD_b0 = 1;
+                    player_slot->player.xD_b2 = 1;
+                    player_slot->player.spawn_dir = -1;
+                    if ((s32) player_slot->player.c_kind == 0x1E) {
+                        player_slot->player.slot_type = 3;
                     }
                     var_r20 += 1;
                 }
                 if ((u8) arg0->rules.is_teams == 1) {
-                    p->team = 4;
+                    player_slot->player.team = 4;
                 }
             }
-            var_r28 += 1;
-            var_r25_3 += 0x24;
-            if (var_r28 >= 6) {
+            player_idx += 1;
+            player_offset += 0x24;
+            if (player_idx >= 6) {
                 break;
             }
         } else {
-            if (((s32) var_r23_2 == 0) && ((s32) temp_r24[1] == 0x1A)) {
-                ((PlayerInitData*) ((u8*) arg0 + var_r25_3 + 0x60))
-                    ->slot_type = 3;
-                var_r28 += 1;
-                var_r25_3 += 0x24;
+            if (((s32) enemy_idx == 0) && ((s32) enemy_kind[1] == 0x1A)) {
+                ((StartMeleePlayerCursor*) ((u8*) arg0 + player_offset))
+                    ->player.slot_type = 3;
+                player_idx += 1;
+                player_offset += 0x24;
             }
         }
-        var_r23_2 += 1;
-        var_r26 += 1;
-        if ((s32) var_r23_2 >= 3) {
+        enemy_idx += 1;
+        color_iter += 1;
+        if ((s32) enemy_idx >= 3) {
             break;
         }
     }
 
     {
         s32 i;
-        for (i = var_r28; i < 6; i++) {
+        for (i = player_idx; i < 6; i++) {
             arg0->players[i].slot_type = 3;
         }
     }
@@ -1165,57 +1174,60 @@ s32 gm_8017DB88(void* arg0, u8 arg1, s32 arg2, s32 arg3, u8* arg4, u8 arg5,
                 u8 (*arg8)(s32, s32, u8), f32 (*arg9)(s32, s32),
                 f32 (*arg10)(s32, s32))
 {
-    RegClearCharEntry* out;
     u8 chars[4];
-    u8* p;
     s32 count;
     s32 i;
     u8 val;
     f32 fval;
 
     count = fn_8017DE54(arg1, arg4);
-    chars[1] = 0x21;
-    out = arg0;
-    chars[2] = 0x21;
-    p = chars;
-    i = 0;
-    chars[3] = 0x21;
-    chars[0] = arg5;
-    for (; i < count; i++) {
-        p[1] = fn_8017D9C0(chars, arg4);
-        out->x0 = p[1];
-        if (arg8 != NULL) {
-            val = arg8(arg3, arg2, (u8) i);
-        } else {
-            val = 0;
+    {
+        RegClearCharEntry* out;
+        u8* p;
+
+        chars[1] = 0x21;
+        out = arg0;
+        chars[2] = 0x21;
+        p = chars;
+        i = 0;
+        chars[3] = 0x21;
+        chars[0] = arg5;
+        for (; i < count; i++) {
+            p[1] = fn_8017D9C0(chars, arg4);
+            out->x0 = p[1];
+            if (arg8 != NULL) {
+                val = arg8(arg3, arg2, (u8) i);
+            } else {
+                val = 0;
+            }
+            out->x1 = val;
+            if (arg6 != NULL) {
+                val = arg6(arg3, arg2, (u8) i);
+            } else {
+                val = 0;
+            }
+            out->x2 = val;
+            if (arg7 != NULL) {
+                val = arg7(arg3, arg2, (u8) i);
+            } else {
+                val = 0;
+            }
+            out->x3 = val;
+            if (arg9 != NULL) {
+                fval = arg9(arg3, arg2);
+            } else {
+                fval = 0.0f;
+            }
+            out->x4 = fval;
+            if (arg10 != NULL) {
+                fval = arg10(arg3, arg2);
+            } else {
+                fval = 0.0f;
+            }
+            out->x8 = fval;
+            p++;
+            out++;
         }
-        out->x1 = val;
-        if (arg6 != NULL) {
-            val = arg6(arg3, arg2, (u8) i);
-        } else {
-            val = 0;
-        }
-        out->x2 = val;
-        if (arg7 != NULL) {
-            val = arg7(arg3, arg2, (u8) i);
-        } else {
-            val = 0;
-        }
-        out->x3 = val;
-        if (arg9 != NULL) {
-            fval = arg9(arg3, arg2);
-        } else {
-            fval = 0.0f;
-        }
-        out->x4 = fval;
-        if (arg10 != NULL) {
-            fval = arg10(arg3, arg2);
-        } else {
-            fval = 0.0f;
-        }
-        out->x8 = fval;
-        p++;
-        out++;
     }
     for (; i < 3; i++) {
         ((RegClearCharEntry*) arg0)[i].x0 = 0x21;
@@ -1733,11 +1745,13 @@ void fn_8017EE40(int arg0_int)
 {
     MatchEnd* arg0 = (MatchEnd*) arg0_int;
     struct StartMeleeRules* rules;
+    UnkAllstarData* allstar;
     gmm_x0_528_t* main_data;
     u32 total_time;
     int i;
 
     rules = gm_8016AE50();
+    allstar = &lbl_80472CB0;
 
     if (fn_8017E318() > 0) {
         ((u8_bits*) &arg0->_x448[2])->b3 = 1;
@@ -1745,10 +1759,10 @@ void fn_8017EE40(int arg0_int)
 
     if (rules->x4_5) {
         main_data = gmMainLib_8015CDC8();
-        total_time = lbl_80472CB0.x0.xC.x20 + gm_8016AEDC();
+        total_time = allstar->x0.xC.x20 + gm_8016AEDC();
         ((u8_bits*) &arg0->_x448[0])->b7 = 1;
 
-        if ((u8) lbl_80472CB0.x0.cpu_level == 4) {
+        if ((u8) allstar->x0.cpu_level == 4) {
             ((u8_bits*) &arg0->_x448[0])->b4 = 1;
         }
 
@@ -1758,21 +1772,21 @@ void fn_8017EE40(int arg0_int)
             ((u8_bits*) &arg0->_x448[2])->b7 = 1;
         }
 
-        if ((u32) lbl_80472CB0.x0.xC.x1C == 0U &&
+        if ((u32) allstar->x0.xC.x1C == 0U &&
             (u32) arg0->player_standings[0].x44 == 0U)
         {
             ((u8_bits*) &arg0->_x448[1])->b1 = 1;
         }
 
-        if ((u8) lbl_80472CB0.x0.xC.xE != 0) {
+        if ((u8) allstar->x0.xC.xE != 0) {
             ((u8_bits*) &arg0->_x448[2])->b5 = 1;
         }
 
-        if ((u8) lbl_80472CB0.x0.xC.xF != 0) {
+        if ((u8) allstar->x0.xC.xF != 0) {
             ((u8_bits*) &arg0->_x448[2])->b4 = 1;
         }
 
-        if ((u8) lbl_80472CB0.x0.xC.xD != 0) {
+        if ((u8) allstar->x0.xC.xD != 0) {
             ((u8_bits*) &arg0->_x448[1])->b0 = 1;
         } else if ((s8) arg0->player_standings[0].stocks ==
                    (s32) main_data->stocks)
@@ -1939,13 +1953,13 @@ s32 fn_8017F2A4(HSD_Text** arg0, f32 farg0, f32 farg1)
 
 s32 fn_8017F47C(HSD_Text** arg0, int arg1)
 {
+    u8 mask;
+    s32 val;
     s32* p;
     s32 i;
     int entry;
     s32 prev_idx;
-    u8 mask;
     s32 idx;
-    s32 val;
 
     entry = arg1;
     prev_idx = -999;
@@ -3314,21 +3328,29 @@ void fn_80181E18(void)
 
 void gm_80182174(void)
 {
-    u8* data = lbl_803D8D08;
-    s32 mode;
     s32 i;
     RegClearSpawnEntry* src;
     RegClearSpawnEntry* dst;
+    RegClearSpawnEntry** spawn_table_22;
+    RegClearSpawnEntry** spawn_table_23;
+    RegClearSpawnEntry** spawn_table_24;
+    RegClearSpawnEntry** spawn_table_25;
+    RegClearSpawnEntry** spawn_table_26;
+    s32 mode;
 
     mode = gm_801A4310();
+    spawn_table_25 = &lbl_80472ED8.x6B4;
+    spawn_table_22 = &lbl_80472ED8.x6A8;
+    spawn_table_23 = &lbl_80472ED8.x6AC;
+    spawn_table_26 = &lbl_80472ED8.x6B8;
+    spawn_table_24 = &lbl_80472ED8.x6B0;
 
-    lbArchive_80016DBC((const char*) &data[0x480], &lbl_80472ED8.x6A4,
-                       (const char*) &data[0x490], &lbl_80472ED8.x6A8,
-                       (const char*) &data[0x4AC], &lbl_80472ED8.x6AC,
-                       (const char*) &data[0x4C8], &lbl_80472ED8.x6B0,
-                       (const char*) &data[0x4E4], &lbl_80472ED8.x6B4,
-                       (const char*) &data[0x500], &lbl_80472ED8.x6B8,
-                       (const char*) &data[0x51C], 0);
+    lbArchive_80016DBC(
+        "GmKumite.dat", &lbl_80472ED8.x6A4, "gmKumiteSystemTable10man",
+        spawn_table_22, "gmKumiteSystemTable100man", spawn_table_23,
+        "gmKumiteSystemTable10min", spawn_table_24, "gmKumiteSystemTable60min",
+        spawn_table_25, "gmKumiteSystemTableEndless", spawn_table_26,
+        "gmKumiteSystemTableMercilessly", 0);
 
     lbl_80472ED8.x0 = 0;
     lbl_80472ED8.x4 = 0;
@@ -3336,14 +3358,14 @@ void gm_80182174(void)
 
     gm_8016795C(&lbl_80472ED8.xC);
 
-    lbl_80472ED8.xC.c_kind = 0x1B;
-    lbl_80472ED8.xC.slot_type = 1;
-    lbl_80472ED8.xC.stocks = 1;
-    lbl_80472ED8.xC.xD_b4 = 1;
+    ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.c_kind = 0x1B;
+    ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.slot_type = 1;
+    ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.stocks = 1;
+    ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.xD_b4 = 1;
 
     switch (mode) {
     case 0x21:
-        src = lbl_80472ED8.x6A4;
+        src = ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->x6A4;
         dst = lbl_80472ED8.x54;
         for (i = 0; i < 101; i++) {
             dst->x0 = src->x0;
@@ -3361,7 +3383,7 @@ void gm_80182174(void)
         }
         break;
     case 0x22:
-        src = lbl_80472ED8.x6A8;
+        src = *spawn_table_22;
         dst = lbl_80472ED8.x54;
         for (i = 0; i < 101; i++) {
             dst->x0 = src->x0;
@@ -3379,7 +3401,7 @@ void gm_80182174(void)
         }
         break;
     case 0x23:
-        src = lbl_80472ED8.x6AC;
+        src = *spawn_table_23;
         dst = lbl_80472ED8.x54;
         for (i = 0; i < 101; i++) {
             dst->x0 = src->x0;
@@ -3397,7 +3419,7 @@ void gm_80182174(void)
         }
         break;
     case 0x24:
-        src = lbl_80472ED8.x6B0;
+        src = *spawn_table_24;
         dst = lbl_80472ED8.x54;
         for (i = 0; i < 101; i++) {
             dst->x0 = src->x0;
@@ -3415,7 +3437,7 @@ void gm_80182174(void)
         }
         break;
     case 0x25:
-        src = lbl_80472ED8.x6B4;
+        src = *spawn_table_25;
         dst = lbl_80472ED8.x54;
         for (i = 0; i < 101; i++) {
             dst->x0 = src->x0;
@@ -3433,7 +3455,7 @@ void gm_80182174(void)
         }
         break;
     case 0x26:
-        src = lbl_80472ED8.x6B8;
+        src = *spawn_table_26;
         dst = lbl_80472ED8.x54;
         for (i = 0; i < 101; i++) {
             dst->x0 = src->x0;
@@ -3476,11 +3498,11 @@ bool gm_80182510(void)
 
 void gm_80182554(int arg0, int arg1)
 {
-    lbl_80472ED8.x6C8 = arg0;
-    lbl_80472ED8.x6C4 = arg1;
-    lbl_80472ED8.x6BC = 0;
-    lbl_80472ED8.x6C0 = 0;
-    lbl_80472ED8.x6BE = 0;
+    lbl_80473594.xC = arg0;
+    lbl_80473594.x8 = arg1;
+    lbl_80473594.x0 = 0;
+    lbl_80473594.x4 = 0;
+    lbl_80473594.x2 = 0;
 }
 
 typedef struct {
@@ -3727,61 +3749,70 @@ s32 gm_80182578(void)
     PAD_STACK(0x48);
 }
 
-void fn_80182B5C(void)
+static inline RecordBlock* fn_80182B5C_GetRecordBlocks(void)
+{
+    return (RecordBlock*) lbl_803D8D08;
+}
+
+static inline u32 fn_80182B5C_GetScore(void)
 {
     RecordBlock* blocks = (RecordBlock*) lbl_803D8D08;
-    int mode = lbl_80472ED8.x6C4;
     int idx = lbl_80472ED8.x6C8;
+    int mode = lbl_80472ED8.x6C4;
+
+    switch (mode) {
+    case 33:
+        return blocks[0].scores[idx];
+    case 34:
+        return blocks[1].scores[idx];
+    case 35:
+        return blocks[2].scores[idx];
+    case 36:
+        return blocks[3].scores[idx];
+    case 37:
+        return blocks[4].scores[idx];
+    case 38:
+        return blocks[5].scores[idx];
+    default:
+        return 0;
+    }
+}
+
+static inline int fn_80182B5C_GetTime(void)
+{
+    RecordBlock* blocks = fn_80182B5C_GetRecordBlocks();
+    int idx = lbl_80472ED8.x6C8;
+    int mode = lbl_80472ED8.x6C4;
+
+    switch (mode) {
+    case 33:
+        return blocks[0].times[idx];
+    case 34:
+        return blocks[1].times[idx];
+    case 35:
+        return blocks[2].times[idx];
+    case 36:
+        return blocks[3].times[idx];
+    case 37:
+        return blocks[4].times[idx];
+    case 38:
+        return blocks[5].times[idx];
+    default:
+        return 0;
+    }
+}
+
+void fn_80182B5C(void)
+{
+    RecordBlock* blocks = fn_80182B5C_GetRecordBlocks();
     int var_r6;
+    int idx = lbl_80472ED8.x6C8;
     u32 var_r30;
+    int mode = lbl_80472ED8.x6C4;
 
-    switch (mode) {
-    case 33:
-        var_r6 = blocks[0].times[idx];
-        break;
-    case 34:
-        var_r6 = blocks[1].times[idx];
-        break;
-    case 35:
-        var_r6 = blocks[2].times[idx];
-        break;
-    case 36:
-        var_r6 = blocks[3].times[idx];
-        break;
-    case 37:
-        var_r6 = blocks[4].times[idx];
-        break;
-    case 38:
-        var_r6 = blocks[5].times[idx];
-        break;
-    default:
-        var_r6 = 0;
-        break;
-    }
+    var_r6 = fn_80182B5C_GetTime();
 
-    switch (mode) {
-    case 33:
-        var_r30 = blocks[0].scores[idx];
-        break;
-    case 34:
-        var_r30 = blocks[1].scores[idx];
-        break;
-    case 35:
-        var_r30 = blocks[2].scores[idx];
-        break;
-    case 36:
-        var_r30 = blocks[3].scores[idx];
-        break;
-    case 37:
-        var_r30 = blocks[4].scores[idx];
-        break;
-    case 38:
-        var_r30 = blocks[5].scores[idx];
-        break;
-    default:
-        var_r30 = 0;
-        break;
-    }
+    var_r30 = fn_80182B5C_GetScore();
 
     switch (mode) {
     case 33:

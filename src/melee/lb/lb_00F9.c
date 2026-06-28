@@ -71,9 +71,9 @@ const struct {
 };
 
 char lb_803BA150[] = "active deffect:\0[NULL]\n\n\0\0\0\0"
-                      "free deffect:\0\0\0[NULL]\n\n\n\0\0\0"
-                      "translate\0\0\0"
-                      "!(jobj->flags & JOBJ_USE_QUATERNION)\0\0\0\0\0\0";
+                     "free deffect:\0\0\0[NULL]\n\n\n\0\0\0"
+                     "translate\0\0\0"
+                     "!(jobj->flags & JOBJ_USE_QUATERNION)\0\0\0\0\0\0";
 
 lb_803BA248_fn lb_803BA248[] = {
     lb_80013BB0, lb_80013BB8, lb_80013BE4, lb_80013C18, lb_80013D68,
@@ -101,29 +101,19 @@ void lb_8000F9F8(HSD_JObj* jobj)
 void lb_8000FA94(void)
 {
     int i;
-    struct DynamicsData* next;
-    struct lb_80011A50_t* next2;
 
     for (i = 0; i < 0x140; i++) {
         lb_804D63A0->entries[i].desc.lb_unk0.jobj = NULL;
-        if (i < 0x13F) {
-            next = &lb_804D63A0->entries[i] + 1;
-        } else {
-            next = NULL;
-        }
-        lb_804D63A0->entries[i].next = next;
+        lb_804D63A0->entries[i].next =
+            (i < 0x13F) ? &lb_804D63A0->entries[i] + 1 : NULL;
     }
 
     cur_data = &lb_804D63A0->entries[0];
 
     for (i = 0; i < 8; i++) {
         lb_804D63A8->entries[i].x0 = 0;
-        if (i < 7) {
-            next2 = &lb_804D63A8->entries[i] + 1;
-        } else {
-            next2 = NULL;
-        }
-        lb_804D63A8->entries[i].next = next2;
+        lb_804D63A8->entries[i].next =
+            (i < 7) ? &lb_804D63A8->entries[i] + 1 : NULL;
     }
 
     lb_804D63AC = &lb_804D63A8->entries[0];
@@ -165,7 +155,7 @@ static inline struct DynamicsData* popDynamicsData(void)
 void lb_8000FD48(HSD_JObj* jobj, DynamicsDesc* desc, size_t max_count)
 {
     struct DynamicsData* prev;
-    PAD_STACK(0x20);
+    PAD_STACK(0x10);
 
     if (desc == NULL) {
         return;
@@ -180,8 +170,7 @@ void lb_8000FD48(HSD_JObj* jobj, DynamicsDesc* desc, size_t max_count)
 
     while ((s32) desc->count < (s32) max_count) {
         if ((s32) desc->count == 0) {
-            prev = popDynamicsData();
-            desc->data = prev;
+            desc->data = (prev = popDynamicsData());
         } else {
             prev->next = popDynamicsData();
             prev = prev->next;
@@ -215,53 +204,49 @@ void lb_8000FD48(HSD_JObj* jobj, DynamicsDesc* desc, size_t max_count)
         desc->count++;
     }
 
+    prev = desc->data;
     {
-        struct DynamicsData* cur = desc->data;
         struct DynamicsData* next;
 
-        while ((next = cur->next) != NULL) {
+        while ((next = prev->next) != NULL) {
             f32 dx, dy, dz, dist_sq;
 
-            dx = cur->desc.lb_unk0.unk_2C.x - next->desc.lb_unk0.unk_2C.x;
-            dy = cur->desc.lb_unk0.unk_2C.y - next->desc.lb_unk0.unk_2C.y;
-            dz = cur->desc.lb_unk0.unk_2C.z - next->desc.lb_unk0.unk_2C.z;
-            dist_sq = dx * dx + dy * dy + dz * dz;
-            if (dist_sq > 0.0f) {
-                dist_sq = sqrtf(dist_sq);
+            dx = prev->desc.lb_unk0.unk_2C.x - next->desc.lb_unk0.unk_2C.x;
+            dy = prev->desc.lb_unk0.unk_2C.y - next->desc.lb_unk0.unk_2C.y;
+            dz = prev->desc.lb_unk0.unk_2C.z - next->desc.lb_unk0.unk_2C.z;
+            if ((dist_sq = dz * dz + (dx * dx + dy * dy)) > 0.0f) {
+                volatile float y;
+                double guess = __frsqrte((double) dist_sq);
+                guess = .5 * guess * (3.0 - guess * guess * dist_sq);
+                guess = .5 * guess * (3.0 - guess * guess * dist_sq);
+                guess = .5 * guess * (3.0 - guess * guess * dist_sq);
+                y = (float) (dist_sq * guess);
+                dist_sq = y;
             }
-            cur->desc.lb_unk0.unk_48 = dist_sq;
+            prev->desc.lb_unk0.unk_48 = dist_sq;
 
-            next = cur->next;
+            next = prev->next;
             {
                 f32 tx, ty, tz;
 
-                tx = next->desc.lb_unk0.translate.x;
-                if (tx < 0.0f) {
-                    tx = -tx;
-                }
-                ty = next->desc.lb_unk0.translate.y;
-                if (ty < 0.0f) {
-                    ty = -ty;
-                }
-                tz = next->desc.lb_unk0.translate.z;
-                if (tz < 0.0f) {
-                    tz = -tz;
-                }
+                tx = ABS(next->desc.lb_unk0.translate.x);
+                ty = ABS(next->desc.lb_unk0.translate.y);
+                tz = ABS(next->desc.lb_unk0.translate.z);
 
                 if (tz > ty) {
                     if (tz > tx) {
-                        cur->desc.lb_unk0.unk_54 = -1;
+                        prev->desc.lb_unk0.unk_54 = -1;
                     } else {
-                        cur->desc.lb_unk0.unk_54 = 0;
+                        prev->desc.lb_unk0.unk_54 = 0;
                     }
                 } else if (ty > tx) {
-                    cur->desc.lb_unk0.unk_54 = 1;
+                    prev->desc.lb_unk0.unk_54 = 1;
                 } else {
-                    cur->desc.lb_unk0.unk_54 = 0;
+                    prev->desc.lb_unk0.unk_54 = 0;
                 }
             }
 
-            cur = cur->next;
+            prev = prev->next;
         }
     }
 }
@@ -898,13 +883,16 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
             s32 axis = cur->desc.lb_unk0.unk_54;
             if (axis == -1) {
                 f32 rot_z = HSD_JObjGetRotationZ(jobj);
-                HSD_JObjSetRotationZ(jobj, 0.9f * rot_z);
+                rot_z *= 0.9f;
+                HSD_JObjSetRotationZ(jobj, rot_z);
             } else if (axis == 0) {
                 f32 rot_x = HSD_JObjGetRotationX(jobj);
-                HSD_JObjSetRotationX(jobj, 0.9f * rot_x);
+                rot_x *= 0.9f;
+                HSD_JObjSetRotationX(jobj, rot_x);
             } else {
                 f32 rot_y = HSD_JObjGetRotationY(jobj);
-                HSD_JObjSetRotationY(jobj, 0.9f * rot_y);
+                rot_y *= 0.9f;
+                HSD_JObjSetRotationY(jobj, rot_y);
             }
         }
 
@@ -1232,7 +1220,8 @@ int lb_80011E24(HSD_JObj* root, HSD_JObj** result, ...)
                         break;
                     }
                     if (HSD_JObjGetNext(HSD_JObjGetParent(saved)) != NULL) {
-                        next_node = saved = HSD_JObjGetNext(HSD_JObjGetParent(saved));
+                        next_node = saved =
+                            HSD_JObjGetNext(HSD_JObjGetParent(saved));
                         break;
                     }
                     saved = HSD_JObjGetParent(saved);
@@ -1364,26 +1353,18 @@ void lb_800122C8(HSD_ImageDesc* image_desc, u16 origx, u16 origy, bool clear)
 void lb_800122F0(HSD_ImageDesc* img, GXTexObj* tex, f32 factor)
 {
     GXColor color0, color1, color2;
-    f32 temp;
-    f32 mul179;
 
-    temp = 120.0f * factor;
-    mul179 = 179.0f * factor;
-
-    color0.r = (u8) (s8) (255.0f - mul179);
-    color1.r = (u8) (s8) (150.0f * factor);
-    color2.r = (u8) (s8) (29.0f * factor);
-
+    color0.r = (u8) (s8) (255.0f - (179.0f * factor));
     color0.g = (u8) (s8) (68.4f * factor);
-    color1.g = (u8) (s8) (255.0f - temp);
-    color2.g = (u8) (s8) (26.099998f * factor);
-
     color0.b = (u8) (s8) (60.8f * factor);
-    color1.b = (u8) (s8) temp;
-    color2.b = (u8) (s8) - ((231.8f * factor) - 255.0f);
 
-    color0.a = 0;
-    color1.a = 0;
+    color1.r = (u8) (s8) (150.0f * factor);
+    color1.g = (u8) (s8) (255.0f - (120.0f * factor));
+    color1.b = (u8) (s8) (120.0f * factor);
+
+    color2.r = (u8) (s8) (29.0f * factor);
+    color2.g = (u8) (s8) (26.099998f * factor);
+    color2.b = (u8) (s8) (255.0f - (231.8f * factor));
 
     GXInitTexObj(tex, img->image_ptr, img->width, img->height, img->format,
                  GX_CLAMP, GX_CLAMP, (u8) img->mipmap);
@@ -1710,11 +1691,11 @@ static struct {
 void fn_80013614(HSD_GObj* gobj)
 {
     struct CameraBlurData* data = gobj->user_data;
+    u8 pad4[4];
     Mtx view_mtx;
     Mtx view_mtx2;
-    GXColor color;
     GXTexObj tex_obj;
-    PAD_STACK(16);
+    PAD_STACK(12);
 
     if (data->x18 != NULL) {
         data->x18(gobj);
@@ -1789,13 +1770,16 @@ void fn_80013614(HSD_GObj* gobj)
         height = image->height;
         lb_8001285C(image, &tex_obj);
 
-        color.a = x10;
-        GXSetTevColor(GX_TEVREG0, color);
-        GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
-                        GX_CA_ZERO);
-        GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
-                        GX_TEVPREV);
-        lb_8001271C(&tex_obj, x0, x4, (f32) width, (f32) height, x8, xC);
+        {
+            GXColor color;
+            color.a = x10;
+            GXSetTevColor(GX_TEVREG0, color);
+            GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
+                            GX_CA_ZERO);
+            GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO,
+                            GX_CS_SCALE_1, 1, GX_TEVPREV);
+            lb_8001271C(&tex_obj, x0, x4, (f32) width, (f32) height, x8, xC);
+        }
         HSD_StateInvalidate(2);
     }
 }
@@ -2163,9 +2147,8 @@ bool lb_80014638(struct lb_80014638_arg0_t* arg0,
     }
     {
         float z = sp18.z;
-        if (((sp24.z - sp30.z) < 0.0F
-                 ? -(sp24.z - sp30.z)
-                 : sp24.z - sp30.z) < 0.00001F)
+        if (((sp24.z - sp30.z) < 0.0F ? -(sp24.z - sp30.z) : sp24.z - sp30.z) <
+            0.00001F)
         {
             z = 0.0F;
         } else {

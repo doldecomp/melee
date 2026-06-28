@@ -1,14 +1,15 @@
 #include "itgamewatchturtle.h"
 
+#include "it/itzako.h"
+
 #include <sysdolphin/baselib/gobj.h>
 #include <melee/db/db.h>
 #include <melee/ft/chara/ftGameWatch/ftGw_AttackAir.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
-#include <melee/it/itzako.h>
 #include <melee/it/item.h>
 #include <melee/it/items/types.h>
-#include "it/itzako.h"
+#include <melee/it/itzako.h>
 
 ItemStateTable it_803F7918[] = {
     {
