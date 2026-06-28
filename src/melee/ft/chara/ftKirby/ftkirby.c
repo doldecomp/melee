@@ -4232,9 +4232,8 @@ void ftKb_SpecialN_800F10A4(Fighter_GObj* gobj)
     ftKb_SpecialN_800EF69C(gobj, 3, ft_80459B88.hats[FTKIND_CAPTAIN]);
 }
 
-void ftKb_SpecialN_800F10D4_inline(Fighter_GObj* gobj, int arg1,
-                                   KirbyHatStruct* hat);
-void ftKb_SpecialN_800F10D4_inline(Fighter_GObj* gobj, int arg1,
+
+static void ftKb_SpecialN_800F10D4_inline(Fighter_GObj* gobj, int arg1,
                                    KirbyHatStruct* hat)
 {
     ftKb_SpecialN_800EF040(gobj, arg1, hat);
