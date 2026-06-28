@@ -2166,14 +2166,14 @@ void fn_80188910(HSD_JObj* arg0)
     }
 }
 
-int fn_80188B3C_inline(void)
+static int fn_801884F8_noinline(void)
 {
     return fn_801884F8();
 }
 
-static int fn_80188B3C_inline_2(void)
+static int fn_801884F8_noinline_2(void)
 {
-    return fn_80188B3C_inline();
+    return fn_801884F8_noinline();
 }
 
 void fn_80188B3C(HSD_JObj* arg0)
@@ -2185,7 +2185,7 @@ void fn_80188B3C(HSD_JObj* arg0)
     if (fn_801884F8_inline() > 999) {
         val = 999;
     } else {
-        val = fn_80188B3C_inline_2();
+        val = fn_801884F8_noinline_2();
     }
 
     jobjs[2] = arg0;

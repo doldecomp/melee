@@ -1343,16 +1343,16 @@ void grBigBlue_801E8A1C(int idx)
     }
 }
 
-static f32 grBigBlue_801E8B84_but_inline1(f32 right, f32 left, f32 bottom,
-                                          f32 top)
+static f32 grBigBlue_801E8B84_noinline_1(f32 right, f32 left, f32 bottom,
+                                         f32 top)
 {
     return grBigBlue_801E8B84(right, left, bottom, top);
 }
 
-static f32 grBigBlue_801E8B84_but_inline2(f32 right, f32 left, f32 bottom,
-                                          f32 top)
+static f32 grBigBlue_801E8B84_noinline_2(f32 right, f32 left, f32 bottom,
+                                         f32 top)
 {
-    return grBigBlue_801E8B84_but_inline1(right, left, bottom, top);
+    return grBigBlue_801E8B84_noinline_1(right, left, bottom, top);
 }
 
 /// @todo Currently 94.71% match - needs pointer advancement and i variable
@@ -1382,7 +1382,7 @@ f32 grBigBlue_801E8B84(f32 right, f32 left, f32 bottom, f32 top)
 }
 
 
-static f32 grBigBlue_801E8D04_inline(f32 right, f32 left, f32 bottom, f32 top)
+static f32 grBigBlue_801E8B84_noinline(f32 right, f32 left, f32 bottom, f32 top)
 {
     return grBigBlue_801E8B84(right, left, bottom, top);
 }
@@ -1394,7 +1394,7 @@ f32 grBigBlue_801E8D04(void)
     val2 = Stage_GetCamBoundsLeftOffset();
     val3 = Stage_GetCamBoundsBottomOffset();
     val4 = Stage_GetCamBoundsTopOffset();
-    return grBigBlue_801E8D04_inline(val4, val3, val2, val1);
+    return grBigBlue_801E8B84_noinline(val4, val3, val2, val1);
 }
 
 void grBigBlue_801E8D64(Ground_GObj* gobj)
@@ -1558,7 +1558,7 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
                         f32 cam_right = Stage_GetCamBoundsRightOffset();
                         f32 cam_left = Stage_GetCamBoundsLeftOffset();
                         f32 cam_bot = Stage_GetCamBoundsBottomOffset();
-                        if (pos.y <= grBigBlue_801E8D04_inline(
+                        if (pos.y <= grBigBlue_801E8B84_noinline(
                                          Stage_GetCamBoundsTopOffset(),
                                          cam_bot, cam_left, cam_right))
                         {
@@ -1683,9 +1683,9 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
             f32 cam_right2 = Stage_GetCamBoundsRightOffset();
             f32 cam_left2 = Stage_GetCamBoundsLeftOffset();
             f32 cam_bot2 = Stage_GetCamBoundsBottomOffset();
-            bound_y = grBigBlue_801E8B84_but_inline2(
-                Stage_GetCamBoundsTopOffset(), cam_bot2, cam_left2,
-                cam_right2);
+            bound_y =
+                grBigBlue_801E8B84_noinline_2(Stage_GetCamBoundsTopOffset(),
+                                              cam_bot2, cam_left2, cam_right2);
         }
         check_pos = pos;
         check_h = grBigBlue_801EC58C(&check_pos, NULL, 500.0f);
@@ -1882,7 +1882,7 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
                     cam_left = Stage_GetCamBoundsLeftOffset();
                     cam_bot = Stage_GetCamBoundsBottomOffset();
                     cam_top = Stage_GetCamBoundsTopOffset();
-                    bounds_y = grBigBlue_801E8B84_but_inline2(
+                    bounds_y = grBigBlue_801E8B84_noinline_2(
                         cam_top, cam_bot, cam_left, cam_right);
                     if (pos.y <= bounds_y) {
                         collision = 1;
@@ -1916,7 +1916,7 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
         f32 cam_top = Stage_GetCamBoundsTopOffset();
         f32 cam_bot = Stage_GetCamBoundsBottomOffset();
         f32 left_x = pos.x - (68.0f * Ground_801C0498() / 2 + 20.0f);
-        f32 bounds_y = grBigBlue_801E8B84_but_inline2(
+        f32 bounds_y = grBigBlue_801E8B84_noinline_2(
             cam_top, cam_bot, left_x,
             pos.x + (68.0f * Ground_801C0498() / 2 + 20.0f));
         f32 surface_y;

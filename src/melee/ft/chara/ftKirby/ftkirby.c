@@ -4232,9 +4232,8 @@ void ftKb_SpecialN_800F10A4(Fighter_GObj* gobj)
     ftKb_SpecialN_800EF69C(gobj, 3, ft_80459B88.hats[FTKIND_CAPTAIN]);
 }
 
-
-static void ftKb_SpecialN_800F10D4_inline(Fighter_GObj* gobj, int arg1,
-                                   KirbyHatStruct* hat)
+static void ftKb_SpecialN_800EF040_noinline(Fighter_GObj* gobj, int arg1,
+                                            KirbyHatStruct* hat)
 {
     ftKb_SpecialN_800EF040(gobj, arg1, hat);
 }
@@ -4250,7 +4249,7 @@ void ftKb_SpecialN_800F10D4(Fighter_GObj* gobj)
         return;
     }
     temp_r28 = ft_80459B88.hats[14];
-    ftKb_SpecialN_800F10D4_inline(gobj, 0xF, temp_r28);
+    ftKb_SpecialN_800EF040_noinline(gobj, 0xF, temp_r28);
     fp->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
     fp->fv.kb.hat.x1C.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
     ftKb_SpecialN_800EF0E4(gobj, 0xF, sp14);
