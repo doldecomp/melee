@@ -31,10 +31,10 @@
 #include "it/itzako.h"
 #include "it/types.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbdvd.h"
 #include "lb/lbshadow.h"
+#include "lb/lbspdisplay.h"
 #include "lb/lbvector.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
@@ -1359,7 +1359,7 @@ static bool Ground_801C24F8(s32 arg0, u32 arg1, s32* arg2)
                     }
                     break;
                 case 5:
-                    if (un_803048C0(0x11A) &&
+                    if (Toy_803048C0(0x11A) &&
                         (phi_r30->x16 > HSD_Randi(RANDI_MAX) || temp_r25))
                     {
                         arg1 |= 2;
@@ -3218,7 +3218,7 @@ void Ground_801C5878(void)
         StageInfo* stageinfo = &stage_info;
         int display_id;
         display_id = tyDisplay_8031C2EC();
-        un_8031C454(display_id);
+        tyDisplay_8031C454(display_id);
         stageinfo->x6E4[0] = display_id;
     } else {
         stage_info.x6E4[0] = -1;
@@ -3233,7 +3233,7 @@ Item_GObj* Ground_801C58E0(s32 arg0, s32 arg1)
     Vec3 sp10;
     Ground_801C2D24(arg1, &sp10);
     result = it_802F2094(0, &sp10, tmp, 0);
-    un_80304A58(tmp);
+    Toy_80304A58(tmp);
     return result;
 }
 
@@ -3283,14 +3283,14 @@ int Ground_801C5940(void)
 
 void Ground_801C5A28(void)
 {
-    un_803124BC();
-    un_8031234C(0);
-    un_80305918(0, 0, 1);
+    Toy_803124BC();
+    Toy_8031234C(0);
+    Toy_80305918(0, 0, 1);
 }
 
 void Ground_801C5A60(void)
 {
-    un_8031234C(1);
+    Toy_8031234C(1);
 }
 
 void Ground_801C5A84(s32 arg0)

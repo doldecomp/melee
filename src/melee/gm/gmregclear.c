@@ -44,13 +44,13 @@
 #include <melee/if/iftime.h>
 #include <melee/it/item.h>
 #include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbbgflash.h>
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lbcardnew.h>
 #include <melee/lb/lblanguage.h>
+#include <melee/lb/lbspdisplay.h>
 #include <melee/lb/lbtime.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/pl/player.h>
@@ -1423,7 +1423,7 @@ void fn_8017E3C8(void)
     PAD_STACK(8);
     for (i = 0; i < 12; i++) {
         if (lbl_804706D8[i].x0 != -1) {
-            Trophy_SetUnlockState(lbl_804706D8[i].x0, lbl_804706D8[i].x2);
+            Toy_SetUnlockState(lbl_804706D8[i].x0, lbl_804706D8[i].x2);
         }
     }
 }

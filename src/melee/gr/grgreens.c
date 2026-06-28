@@ -29,8 +29,8 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/items/itwhispyapple.h>
 #include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbspdisplay.h>
 #include <melee/mp/mplib.h>
 
 #define Gr_Greens_Block_Status_None 0

@@ -10,8 +10,8 @@
 #include "if/ifstock.h"
 #include "if/iftime.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
+#include "lb/lbspdisplay.h"
 #include "sc/types.h"
 
 #include <baselib/cobj.h>

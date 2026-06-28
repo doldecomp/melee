@@ -75,5 +75,7 @@ lb_800122C8(HSD_ImageDesc* image_desc, u16 origx, u16 origy,
                               struct lb_80014638_arg1_t*);
 /* 014770 */ bool lb_80014770(Vec3*, int);
 /* 0149E0 */ bool lb_800149E0(Mtx, u32);
+/* 4D3760 */ extern GXColor lb_804D3760;
+/* 4D3764 */ extern GXColor lb_804D3764;
 
 #endif

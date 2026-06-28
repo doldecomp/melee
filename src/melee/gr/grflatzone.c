@@ -9,7 +9,7 @@
 #include "gr/stage.h"
 #include "gr/types.h"
 #include "it/inlines.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 #include "mp/mplib.h"
 
 #include <baselib/gobjgxlink.h>

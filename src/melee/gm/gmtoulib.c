@@ -17,8 +17,8 @@
 
 #include "ft/forward.h"
 
-#include "lb/lb_00F9.h"
 #include "lb/lblanguage.h"
+#include "lb/lbspdisplay.h"
 #include "mn/mnmain.h"
 #include "mn/mnname.h"
 #include "mn/mnstagesel.h"

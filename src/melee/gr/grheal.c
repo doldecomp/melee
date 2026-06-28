@@ -19,13 +19,13 @@
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/stage.h"
-#include "if/textlib.h"
 #include "it/it_26B1.h"
 #include "it/items/itcoin.h"
 #include "it/types.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 #include "mp/mplib.h"
+#include "ty/toy.h"
 
 typedef struct grHeal_UnkVec4 {
     Vec3 pos;
@@ -234,7 +234,7 @@ void grHeal_8021F180(Ground_GObj* gobj)
         line_id = Ground_801C5840();
         if (line_id != -1) {
             it_802F2094(NULL, &coin_pos.pos, line_id, 0);
-            un_80304A58(line_id);
+            Toy_80304A58(line_id);
         }
     }
 

@@ -17,7 +17,7 @@
 #include <melee/it/it_26B1.h>
 #include <melee/it/items/itheiho.h>
 #include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbspdisplay.h>
 
 /* 1E302C */ static void grStory_801E302C(bool);
 /* 1E36D0 */ static DynamicsDesc* grStory_801E36D0(enum_t);

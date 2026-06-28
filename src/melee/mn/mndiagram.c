@@ -17,9 +17,9 @@
 #include "gm/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00CE.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
+#include "lb/lbspdisplay.h"
 #include "mn/inlines.h"
 #include "mn/mndiagram2.h"
 #include "mn/mndiagram3.h"
@@ -2034,8 +2034,6 @@ void mnDiagram_80241730(HSD_GObj* arg0, int arg1, int arg2)
     }
 }
 
-#pragma push
-#pragma dont_reuse_strings off
 /// @brief Updates scroll arrow visibility based on cursor position and
 ///        available entries beyond the visible range.
 /// @param[in] gobj The diagram GObj containing arrow JObjs in user_data.
@@ -2205,7 +2203,6 @@ void mnDiagram_802417D0(HSD_GObj* gobj)
         }
     }
 }
-#pragma pop
 
 void mnDiagram_ExitAnimProc(HSD_GObj* gobj)
 {

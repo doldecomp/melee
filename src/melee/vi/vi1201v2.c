@@ -14,10 +14,10 @@
 #include "gr/stage.h"
 #include "it/item.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbshadow.h"
+#include "lb/lbspdisplay.h"
 #include "mn/mnmain.h"
 #include "mp/mpcoll.h"
 #include "pl/player.h"
@@ -47,6 +47,13 @@ typedef struct un_80400304_t {
     char gmrgstnd_dat[0x10];
     char stand_scene[0x0C];
 } un_80400304_t;
+
+/// @todo .sdata2 order hack
+static void order_sdata2(void)
+{
+    (void) 0.55f;
+    (void) 1.0f;
+}
 
 Vec3 un_804002F8 = { 0.0f, 0.0f, 0.0f };
 un_80400304_t un_80400304 = {
@@ -257,7 +264,7 @@ void un_80320A40_OnEnter(void* arg)
     }
     lbArchive_LoadSymbols(un_80400304.gmrgstnd_dat, &un_804D7014,
                           un_80400304.stand_scene, NULL);
-    un_803124BC();
+    Toy_803124BC();
     un_804D7018 =
         lbArchive_LoadSymbols(viGetCharAnimByIndex(char_index), NULL);
 
@@ -300,14 +307,14 @@ void un_80320A40_OnEnter(void* arg)
         child = jobj->child;
     }
 
-    HSD_JObjSetTranslateXWithMtxDirty(child, -un_803060BC(0x1E, 0));
-    HSD_JObjSetTranslateYWithMtxDirty(child, -un_803060BC(0x1E, 1));
-    HSD_JObjSetTranslateZWithMtxDirty(child, -un_803060BC(0x1E, 2));
+    HSD_JObjSetTranslateXWithMtxDirty(child, -Toy_803060BC(0x1E, 0));
+    HSD_JObjSetTranslateYWithMtxDirty(child, -Toy_803060BC(0x1E, 1));
+    HSD_JObjSetTranslateZWithMtxDirty(child, -Toy_803060BC(0x1E, 2));
 
-    scale = -un_803060BC(0x1E, 5);
+    scale = -Toy_803060BC(0x1E, 5);
     HSD_JObjSetRotationYWithMtxDirty(child, scale);
 
-    scale = 0.55f * (un_803060BC(0x1E, 4) * (1.0f / un_803060BC(0x1E, 3)));
+    scale = 0.55f * (Toy_803060BC(0x1E, 4) * (1.0f / Toy_803060BC(0x1E, 3)));
 
     HSD_JObjSetScaleXWithMtxDirty(child, scale);
     HSD_JObjSetScaleYWithMtxDirty(child, scale);

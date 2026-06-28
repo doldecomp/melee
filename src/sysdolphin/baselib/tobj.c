@@ -8,7 +8,8 @@
 #include "mtx.h"
 #include "tev.h"
 
-#include <__mem.h>
+#include <placeholder.h>
+
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <MetroTRK/intrinsics.h>

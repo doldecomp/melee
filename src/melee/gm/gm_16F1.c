@@ -1611,7 +1611,7 @@ bool fn_80172664(void)
 
 bool fn_80172698(void)
 {
-    if (un_GetTrophyTotal() >= 0x32) {
+    if (Toy_GetTrophyTotal() >= 0x32) {
         return true;
     }
     return false;
@@ -1619,7 +1619,7 @@ bool fn_80172698(void)
 
 bool fn_801726CC(void)
 {
-    if (un_GetTrophyTotal() >= 0x64) {
+    if (Toy_GetTrophyTotal() >= 0x64) {
         return true;
     }
     return false;
@@ -1627,7 +1627,7 @@ bool fn_801726CC(void)
 
 bool fn_80172700(void)
 {
-    if (un_GetTrophyTotal() >= 0x96) {
+    if (Toy_GetTrophyTotal() >= 0x96) {
         return true;
     }
     return false;
@@ -1635,7 +1635,7 @@ bool fn_80172700(void)
 
 bool fn_80172734(void)
 {
-    if (un_GetTrophyTotal() >= 0xC8) {
+    if (Toy_GetTrophyTotal() >= 0xC8) {
         return true;
     }
     return false;
@@ -1643,7 +1643,7 @@ bool fn_80172734(void)
 
 bool fn_80172768(void)
 {
-    if (un_GetTrophyTotal() >= 0xFA) {
+    if (Toy_GetTrophyTotal() >= 0xFA) {
         return true;
     }
     return false;
@@ -1705,10 +1705,10 @@ int gm_80172898(u16 arg0)
             count++;
         }
     }
-    if (un_803048C0(0xE6) > 0 && gmMainLib_8015D94C(0x3F) == 0) {
+    if (Toy_803048C0(0xE6) > 0 && gmMainLib_8015D94C(0x3F) == 0) {
         gmMainLib_8015D818(0x3F);
     }
-    if (un_803048C0(0xC9) > 0 && gmMainLib_8015D94C(0x40) == 0) {
+    if (Toy_803048C0(0xC9) > 0 && gmMainLib_8015D94C(0x40) == 0) {
         gmMainLib_8015D818(0x40);
     }
     fn_8017280C();
@@ -1775,19 +1775,19 @@ void gm_801729EC(void)
         }
     }
 
-    if (un_803048C0(0xE6) == 0) {
+    if (Toy_803048C0(0xE6) == 0) {
         u32* tmp = gmMainLib_8015D804(0x3F);
         *tmp = 0;
         gmMainLib_8015D8B0(0x3FU);
         gmMainLib_8015D924(0x3FU);
     }
-    if (un_803048C0(0xC9) == 0) {
+    if (Toy_803048C0(0xC9) == 0) {
         u32* tmp = gmMainLib_8015D804(0x40);
         *tmp = 0;
         gmMainLib_8015D8B0(0x40U);
         gmMainLib_8015D924(0x40U);
     }
-    if (un_803048C0(0x96) == 0) {
+    if (Toy_803048C0(0x96) == 0) {
         u32* tmp = gmMainLib_8015D804(0x1A);
         *tmp = 0;
         gmMainLib_8015D8B0(0x1AU);
@@ -2547,13 +2547,13 @@ void gm_80173EEC(void)
 void gm_80174180(void)
 {
     if (fn_80162CCC() != 0 && gm_80162EC8() != 0) {
-        un_80305918(4, 0, 0);
+        Toy_80305918(4, 0, 0);
     }
     if (gm_GetVsPlayMatchTotal() >= 0xC8) {
-        un_80305918(5, 0, 0);
+        Toy_80305918(5, 0, 0);
     }
     if (gm_80164ABC() != 0) {
-        un_80305918(6, 0, 0);
+        Toy_80305918(6, 0, 0);
     }
 }
 

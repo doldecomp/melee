@@ -156,6 +156,7 @@ struct DevText {
     /* +2C */ struct DevText* prev;
     /* +30 */ struct DevText* next;
 };
+STATIC_ASSERT(sizeof(struct DevText) == 0x34);
 
 struct un_804D6EF4_t {
     /* +0x00 */ u32 x00;

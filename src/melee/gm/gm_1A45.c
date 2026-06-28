@@ -9,11 +9,11 @@
 #include "db/db.h"
 #include "gm/gmscdata.h"
 #include "if/ifcoget.h"
-#include "lb/lb_00F9.h"
 #include "lb/lb_0195.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbcardgame.h"
 #include "lb/lbheap.h"
+#include "lb/lbspdisplay.h"
 
 #include <dolphin/os/OSThread.h>
 #include <baselib/controller.h>

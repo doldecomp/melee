@@ -9,9 +9,9 @@
 #include "gm/gm_1601.h"
 #include "gm/gm_unsplit.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
+#include "lb/lbspdisplay.h"
 #include "sc/types.h"
 #include "ty/toy.h"
 #include "ty/tylist.h"
@@ -48,12 +48,12 @@ static void vi1202_SetupChild(HSD_JObj* child)
 {
     f32 scale;
 
-    HSD_JObjSetTranslateXWithMtxDirty(child, -un_803060BC(0x1F, 0));
-    HSD_JObjSetTranslateYWithMtxDirty(child, -un_803060BC(0x1F, 1));
-    HSD_JObjSetTranslateZWithMtxDirty(child, -un_803060BC(0x1F, 2));
-    HSD_JObjSetRotationYWithMtxDirty(child, -un_803060BC(0x1F, 5));
+    HSD_JObjSetTranslateXWithMtxDirty(child, -Toy_803060BC(0x1F, 0));
+    HSD_JObjSetTranslateYWithMtxDirty(child, -Toy_803060BC(0x1F, 1));
+    HSD_JObjSetTranslateZWithMtxDirty(child, -Toy_803060BC(0x1F, 2));
+    HSD_JObjSetRotationYWithMtxDirty(child, -Toy_803060BC(0x1F, 5));
 
-    scale = 0.49f * (un_803060BC(0x1F, 4) * (1.0f / un_803060BC(0x1F, 3)));
+    scale = 0.49f * (Toy_803060BC(0x1F, 4) * (1.0f / Toy_803060BC(0x1F, 3)));
 
     HSD_JObjSetScaleXWithMtxDirty(child, scale);
     HSD_JObjSetScaleYWithMtxDirty(child, scale);
@@ -118,7 +118,7 @@ void vi1202_OnEnter(void* arg)
     lbArchive_LoadSymbols("TyKoopaR.dat", &un_804D7048,
                           "ToyKoopaRModel_TopN_joint", NULL);
     lbArchive_LoadSymbols("GmRgStnd.dat", &un_804D7044, "standScene", NULL);
-    un_803124BC();
+    Toy_803124BC();
 
     gobj = GObj_Create(0xB, 0x3, 0);
     lobj = lb_80011AC4(un_804D7040->lights);

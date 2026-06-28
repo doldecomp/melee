@@ -1,7 +1,6 @@
 #ifndef _cobj_h_
 #define _cobj_h_
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "baselib/forward.h" // IWYU pragma: export

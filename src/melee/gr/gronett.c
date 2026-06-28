@@ -25,7 +25,7 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 #include "lb/types.h"
 #include "mp/mplib.h"
 
@@ -35,7 +35,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-StageCallbacks grOt_803E27E0[6] = {
+/* 3E27E0 */ static StageCallbacks grOt_803E27E0[6] = {
     { NULL, NULL, NULL, NULL, 0 },
     { NULL, NULL, NULL, NULL, 0 },
     { grOnett_801E38DC, grOnett_801E3920, grOnett_801E3928, grOnett_801E392C,
@@ -48,7 +48,7 @@ StageCallbacks grOt_803E27E0[6] = {
       0xC0000000 },
 };
 
-StageData grOt_803E2858 = {
+/* 3E2858 */ StageData grOt_803E2858 = {
     0x14,
     grOt_803E27E0,
     "/GrOt",

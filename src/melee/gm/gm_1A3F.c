@@ -4,6 +4,7 @@
 #include "gmmain_lib.h"
 
 #include "db/db.h"
+#include "dolphin/vi/vifuncs.h"
 #include "gm/gmscdata.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbdvd.h"
@@ -11,9 +12,8 @@
 #include "lb/lbmthp.h"
 #include "lb/lbsnap.h"
 #include "lb/types.h"
-#include "ty/tylist.h"
+#include "ty/toy.h"
 
-#include <dolphin/vi.h>
 #include <baselib/controller.h>
 #include <baselib/devcom.h>
 #include <baselib/sislib.h>
@@ -54,8 +54,8 @@ void gm_801A3F48(GameScene* scene)
     lb_8001C5A4();
     lb_8001D1F4();
     lbSnap_8001E27C();
-    un_803127D4();
-    un_8031C8B8();
+    Toy_803127D4();
+    tyDisplay_8031C8B8();
 }
 
 inline u8 nextScene(GameScene* scenes)

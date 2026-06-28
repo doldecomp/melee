@@ -666,9 +666,9 @@ Item_GObj* it_8027CC88(Item_GObj* item_gobj_arg)
         if (grLib_801C9E40() == 0) {
             var_r30 = Ground_801C5840();
             if (var_r30 != -1) {
-                temp_r3 = un_8031C354(var_r30, sp1C, 0xA, 0x63);
-                temp_r3_2 =
-                    temp_r3 + un_8031C354(var_r30, &sp1C[temp_r3], 0xA, 2);
+                temp_r3 = tyDisplay_8031C354(var_r30, sp1C, 0xA, 0x63);
+                temp_r3_2 = temp_r3 + tyDisplay_8031C354(
+                                          var_r30, &sp1C[temp_r3], 0xA, 2);
                 if (temp_r3_2 != 0) {
                     var_r30 = (&sp1C[0])[HSD_Randi(temp_r3_2)];
                 }

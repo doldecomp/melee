@@ -421,13 +421,13 @@ Item_GObj* it_802F2094(HSD_GObj* arg0, Vec3* pos, int arg2, int arg3)
                 ip->xDD4_itemVar.coin.xC = attr->x4;
                 break;
             }
-            var_r29 = un_8031C5E4(arg2);
+            var_r29 = tyDisplay_8031C5E4(arg2);
         } else {
             Item_80267454(gobj);
             it_802756D0(gobj);
             it_8026B390(gobj);
             ip->xD5C = 0;
-            var_r29 = un_8031C5E4(arg2);
+            var_r29 = tyDisplay_8031C5E4(arg2);
         }
         HSD_GObjObject_80390B0C(gobj);
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, var_r29);

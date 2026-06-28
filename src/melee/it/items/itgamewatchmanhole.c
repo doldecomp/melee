@@ -10,7 +10,7 @@
 #include "it/item.h"
 #include "it/itzako.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
 bool itGamewatchmanhole_UnkMotion0_Anim(Item_GObj* gobj);
 

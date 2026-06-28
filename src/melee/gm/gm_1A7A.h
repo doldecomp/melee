@@ -3,11 +3,7 @@
 
 #include <placeholder.h>
 
-#include "gm/gmregtyfall.h"
-#include "if/textlib.h"
-
 #include <baselib/forward.h>
-#include <melee/gm/forward.h>
 
 /* 1A7A44 */ void fn_801A7A44(HSD_GObj*);
 /* 1A7A68 */ void fn_801A7A68(HSD_GObj*);
@@ -26,32 +22,5 @@
 /* 1A9630 */ void gm_801A9630(void);
 /* 1A9B30 */ void gm_801A9B30_OnEnter(UNK_T);
 /* 1A9D0C */ void gm_801A9D0C_OnFrame(void);
-
-/// @todo Figure out where this goes
-inline s32 fn_801A7FB4_inline(void)
-{
-    s32 i;
-    s32 count;
-    count = 0;
-    for (i = count; i < 0x1A; i++) {
-        if (un_803048C0(gm_801A659C(i)) ? true : false) {
-            count++;
-        }
-    }
-    return count;
-}
-
-inline s32 fn_801A7FB4_inline2(void)
-{
-    s32 count;
-    s32 i;
-    count = 0;
-    for (i = count; i < 0x1A; i++) {
-        if (un_803048C0(gm_801A659C(i)) ? true : false) {
-            count++;
-        }
-    }
-    return count;
-}
 
 #endif

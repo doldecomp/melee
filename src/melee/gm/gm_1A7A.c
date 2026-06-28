@@ -5,14 +5,13 @@
 #include "gm/gm_1BA8.h"
 #include "gm/gmregtyfall.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 #include "mn/mnmain.h"
 #include "sc/types.h"
 #include "ty/toy.h"
 
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -21,8 +20,6 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/sobjlib.h>
 
 extern Event gm_804D6724;
 
@@ -107,18 +104,18 @@ void gm_801A7B00(void)
     char_idx = gm_801A659C(gm_801BEFB0());
     child = jobj == NULL ? NULL : jobj->child;
 
-    val = -un_803060BC(char_idx, 0);
+    val = -Toy_803060BC(char_idx, 0);
     HSD_JObjSetTranslateXWithMtxDirty(child, val);
-    val = -un_803060BC(char_idx, 1);
+    val = -Toy_803060BC(char_idx, 1);
     HSD_JObjSetTranslateYWithMtxDirty(child, val);
-    val = -un_803060BC(char_idx, 2);
+    val = -Toy_803060BC(char_idx, 2);
     HSD_JObjSetTranslateZWithMtxDirty(child, val);
 
-    val = -(0.017453292f * un_803060BC(char_idx, 5));
+    val = -(0.017453292f * Toy_803060BC(char_idx, 5));
     HSD_JObjSetRotationYWithMtxDirty(child, val);
 
-    scale = 1.0f / un_803060BC(char_idx, 3);
-    val = un_803060BC(char_idx, 4);
+    scale = 1.0f / Toy_803060BC(char_idx, 3);
+    val = Toy_803060BC(char_idx, 4);
     scale = val * scale;
     HSD_JObjSetScaleXWithMtxDirty(child, scale);
     HSD_JObjSetScaleYWithMtxDirty(child, scale);

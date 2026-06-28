@@ -26,7 +26,7 @@
 #include "ft/inlines.h"
 #include "ftCommon/ftCo_Bury.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 #include "MSL/math.h"
 
 #include <runtime.h>

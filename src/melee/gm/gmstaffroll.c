@@ -7,16 +7,16 @@
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "gm/gmmain_lib.h"
-#include "if/textlib.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbbgflash.h"
 #include "lb/lblanguage.h"
+#include "lb/lbspdisplay.h"
 #include "sc/types.h"
+#include "ty/toy.h"
 
-#include <trigf.h>
+#include <math_ppc.h> // IWYU pragma: keep
 #include <baselib/particle.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
@@ -26,7 +26,6 @@
 #include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/lobj.h>
@@ -151,19 +150,19 @@ bool gm_801AA688(void)
 
 void gm_801AA6D8(s16 arg0)
 {
-    un_803048C0(arg0);
+    Toy_803048C0(arg0);
 }
 
 bool gm_801AA6FC(void)
 {
     PAD_STACK(4);
-    return un_803048C0(0x10B) || un_803048C0(0x10A) || un_803048C0(0x109);
+    return Toy_803048C0(0x10B) || Toy_803048C0(0x10A) || Toy_803048C0(0x109);
 }
 
 bool gm_801AA774(void)
 {
     PAD_STACK(4);
-    return un_803048C0(0x107) || un_803048C0(0x108);
+    return Toy_803048C0(0x107) || Toy_803048C0(0x108);
 }
 
 void gm_801AA7C4_OnFrame(void)
@@ -428,8 +427,6 @@ void fn_801AAB74(HSD_GObj* gobj)
         }
     }
 }
-
-#include <math_ppc.h>
 
 typedef struct StaffRollPoints {
     s32 particles[7];

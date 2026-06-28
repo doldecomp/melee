@@ -30,8 +30,8 @@
 #define TYPE_ROBJ 1
 #define TYPE_JOBJ 12
 
-typedef struct _HSD_FObj {
-    struct _HSD_FObj* next;
+struct HSD_FObj {
+    struct HSD_FObj* next;
     u8* ad;
     u8* ad_head;
     u32 length;
@@ -49,7 +49,7 @@ typedef struct _HSD_FObj {
     f32 p1;
     f32 d0;
     f32 d1;
-} HSD_FObj;
+};
 
 typedef struct _HSD_FObjDesc {
     struct _HSD_FObjDesc* next;

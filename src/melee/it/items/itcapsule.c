@@ -14,7 +14,7 @@
 #include "it/item.h"
 #include "it/ithitbox.h"
 #include "it/types.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>

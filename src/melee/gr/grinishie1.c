@@ -20,8 +20,8 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
+#include "lb/lbspdisplay.h"
 
 #include "mp/forward.h"
 

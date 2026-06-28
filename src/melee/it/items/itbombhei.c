@@ -10,7 +10,7 @@
 #include "it/it_3F14.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
 #define GET_ATTRS(ip)                                                         \
     ((itBombHeiAttributes*) ip->xC4_article_data->x4_specialAttributes)

@@ -114,7 +114,7 @@ void HSD_FogInit(HSD_Fog* fog, HSD_FogDesc* desc)
         } else {
             f32 v[6];
             GXGetViewportv(v);
-            fog->type = 2;
+            fog->type = GX_FOG_LIN;
             fog->start = v[4];
             fog->end = v[5];
             fog->color.r = 0xFF;

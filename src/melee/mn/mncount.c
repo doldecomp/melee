@@ -1,5 +1,7 @@
 #include "placeholder.h"
 
+#include "ty/toy.h"
+
 #include <baselib/gobj.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -14,10 +16,8 @@
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/types.h>
-#include <melee/if/textlib.h>
-#include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbspdisplay.h>
 #include <melee/mn/inlines.h>
 #include <melee/mn/mncount.h>
 #include <melee/mn/mndiagram.h>
@@ -504,7 +504,7 @@ unsigned int mnCount_GetRowValue_Number(int row)
         ret = mnCount_CountUnlockedMaps();
         break;
     case TROPHY_TOTAL:
-        ret = un_GetTrophyTotal();
+        ret = Toy_GetTrophyTotal();
         break;
     case NAME_TOTAL:
         ret = GetNameCount();

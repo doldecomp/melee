@@ -11,8 +11,8 @@
 #include "gr/inlines.h"
 #include "gr/types.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbdvd.h"
+#include "lb/lbspdisplay.h"
 #include "mp/mplib.h"
 
 #include <dolphin/gx/GXTexture.h>

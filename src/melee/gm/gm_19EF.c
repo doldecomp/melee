@@ -20,9 +20,9 @@
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/sislib.h>
 #include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbspdisplay.h>
 #include <melee/sc/types.h>
 #include <melee/ty/toy.h>
 #include <melee/ty/tylist.h>
@@ -402,8 +402,8 @@ void fn_8019F9C4(u32 arg0)
                                       "ScGamRegGover_scene_data", 0);
     lbArchive_80016DBC("GmGoCoin.dat", &lbl_804D66A0,
                        "ScGamRegGover_scene_data", 0);
-    un_803124BC();
-    un_803102D0();
+    Toy_803124BC();
+    Toy_803102D0();
     {
         u8 game_mode = gm_801A4310();
         char* model_name = gm_80160564(arg0, game_mode);
@@ -596,12 +596,12 @@ void fn_8019F9C4(u32 arg0)
         child = jobj->child;
     }
 
-    HSD_JObjSetTranslateX(child, un_803060BC(char_idx, 0));
-    HSD_JObjSetTranslateY(child, un_803060BC(char_idx, 1));
-    HSD_JObjSetTranslateZ(child, un_803060BC(char_idx, 2));
-    HSD_JObjSetRotationY(child, 0.017453292f * un_803060BC(char_idx, 5));
-    f = un_803060BC(char_idx, 4);
-    scale = un_803060BC(char_idx, 3) / f;
+    HSD_JObjSetTranslateX(child, Toy_803060BC(char_idx, 0));
+    HSD_JObjSetTranslateY(child, Toy_803060BC(char_idx, 1));
+    HSD_JObjSetTranslateZ(child, Toy_803060BC(char_idx, 2));
+    HSD_JObjSetRotationY(child, 0.017453292f * Toy_803060BC(char_idx, 5));
+    f = Toy_803060BC(char_idx, 4);
+    scale = Toy_803060BC(char_idx, 3) / f;
     HSD_JObjSetScaleX(child, scale);
     HSD_JObjSetScaleY(child, scale);
     HSD_JObjSetScaleZ(child, scale);
