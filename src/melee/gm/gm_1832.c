@@ -1647,7 +1647,7 @@ void fn_80187C9C(HSD_GObj* gobj, int arg1)
 
 void fn_80187CF4(HSD_GObj* gobj)
 {
-    HSD_JObj* jobj = GET_JOBJ(gobj);
+    HSD_JObj* jobj = gobj->user_data;
     int state = lbl_804736C0.x37.state2;
     DynamicModelDesc* desc;
     int anim_state;
@@ -1705,7 +1705,7 @@ void fn_80187CF4(HSD_GObj* gobj)
         }
         break;
     }
-    HSD_JObjAnimAll(GET_JOBJ(gobj));
+    HSD_JObjAnimAll(gobj->user_data);
 }
 
 static char lbl_804D4138[] = "IrNml";
@@ -1979,24 +1979,21 @@ inline int fn_801884F8_inline(void)
     return result;
 }
 
-#pragma push
-#pragma dont_inline on
 int fn_801884F8(void)
 {
     int result;
-    int* ptr = (int*) &lbl_80473700;
 
     result = pl_80041300(0);
     if (result != 0) {
-        ptr[65] = result;
-        ptr[66] = 1;
+        lbl_80473700.result_cache[0] = result;
+        lbl_80473700.result_cache[1] = 1;
     }
-    if (ptr[66] != 0) {
-        result = ptr[65];
+    if (lbl_80473700.result_cache[1] != 0) {
+        result = lbl_80473700.result_cache[0];
     }
     return result;
 }
-#pragma pop
+
 void fn_80188550(int arg0)
 {
     int current = lbl_80473700.count;
@@ -2169,6 +2166,16 @@ void fn_80188910(HSD_JObj* arg0)
     }
 }
 
+static int fn_801884F8_noinline(void)
+{
+    return fn_801884F8();
+}
+
+static int fn_801884F8_noinline_2(void)
+{
+    return fn_801884F8_noinline();
+}
+
 void fn_80188B3C(HSD_JObj* arg0)
 {
     HSD_JObj* jobjs[3];
@@ -2178,7 +2185,7 @@ void fn_80188B3C(HSD_JObj* arg0)
     if (fn_801884F8_inline() > 999) {
         val = 999;
     } else {
-        val = fn_801884F8();
+        val = fn_801884F8_noinline_2();
     }
 
     jobjs[2] = arg0;

@@ -1028,6 +1028,7 @@ end_common:
 
 void fn_80175A94(s32 slot, Vec3* position)
 {
+    u32 unused;
     MatchEnd* me;
     s32 var_r29;
     f32 x_pos;
@@ -1037,7 +1038,7 @@ void fn_80175A94(s32 slot, Vec3* position)
     f32 new_var4;
     GXColor* color_ptr;
     Vec3 sp24;
-    PAD_STACK(16);
+    PAD_STACK(8);
 
     me = lbl_8046DBE8.x94;
     if (me->x5 == 3) {
@@ -1059,8 +1060,9 @@ void fn_80175A94(s32 slot, Vec3* position)
     new_var->player_data[slot].ko_time->default_kerning = 1;
 
     if (me->x5 == 2) {
-        GXColor sp14;
         GXColor sp18;
+        GXColor sp14;
+        PAD_STACK(4);
         me = lbl_8046DBE8.x94;
         sp14 = fn_8017507C(slot);
         if (me->player_standings[slot].slot_type != 3) {

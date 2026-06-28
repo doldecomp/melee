@@ -1254,6 +1254,21 @@ struct grBigBlue_PlatformVars {
 ///   lateral(+20), direction(+2C), gravity(+30), height(+34),
 ///   velocity(+38), accel(+3C), rotation(+40), amplitude(+44),
 ///   angular_vel(+48).
+
+/// Per-lane data for the Big Blue car gobj (ID 33), 0x40-byte stride from
+/// gp+D4. Only the fields read by the game logic are named here.
+struct grBigBlue_CarLane {
+    /* +00 gp+D4 */ u8 state;
+    /* +01 gp+D5 */ u8 x1;
+    /* +02 gp+D6 */ s8 x2;
+    /* +03 gp+D7 */ u8 x3;
+    /* +04 gp+D8 */ s32 x4;
+    /* +08 gp+DC */ s32 x8;
+    /* +0C gp+E0 */ Vec3 pos;
+    /* +18 gp+EC */ u8 pad_18[0x40 - 0x18];
+};
+STATIC_ASSERT(sizeof(struct grBigBlue_CarLane) == 0x40);
+
 struct grBigBlue_GroundVars {
     union {
         struct {
@@ -1278,6 +1293,10 @@ struct grBigBlue_GroundVars {
             /* +20 gp+E4 */ struct grBigBlue_GroundData data[3];
         };
         struct grBigBlue_PlatformVars platform;
+        struct {
+            /* +00 gp+C4 */ u8 pad_C4[0x10];
+            /* +10 gp+D4 */ struct grBigBlue_CarLane lanes[4];
+        } car;
     };
 };
 

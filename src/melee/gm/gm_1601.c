@@ -2421,36 +2421,13 @@ void gm_80164910(int arg0)
     }
 }
 
-s32 gm_80164A0C(u8 arg0)
+void gm_80164A0C(u8 arg0)
 {
-    s32 var_ctr;
-    s32 var_r3;
-    u16* temp_r31 = gmMainLib_8015ED8C();
-    u8 var_r0;
-
-    // Selected character
-    u8 key = lbl_803B78C8[arg0].idx;
-
-    // These are 6 big, should the loop be over that somehow with var_r4 as i?
-    const struct lbl_803B78C8_0x6* var_r4 = lbl_803B78C8;
-    var_r3 = 0;
-    for (var_ctr = 0xB; var_ctr != 0; var_ctr -= 1) {
-        if (key == var_r4[1].idx) {
-            var_r3 = (s32) ((const u8*) lbl_803B75F8 + (var_r3 * 6));
-            var_r0 = *(u8*) (var_r3 + 0x2D0);
-            goto done;
-        }
-        var_r4 += 6;
-        var_r3 += 1;
+    u16* unlockable_character_bitfield = gmMainLib_8015ED8C();
+    u8 idx = fn_801605EC(lbl_803B78A4[arg0]);
+    if (idx != NUM_UNLOCKABLE_CHARACTERS) {
+        *unlockable_character_bitfield &= (u16) ~(1ULL << idx);
     }
-
-    var_r0 = 0xB;
-
-done:
-    if (var_r0 != 0xB) {
-        *temp_r31 &= (u16) ~(1ULL << var_r0);
-    }
-    return var_r3;
 }
 
 /// Are all unlockable characters unlocked?
