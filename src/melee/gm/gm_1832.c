@@ -1979,24 +1979,21 @@ inline int fn_801884F8_inline(void)
     return result;
 }
 
-#pragma push
-#pragma dont_inline on
 int fn_801884F8(void)
 {
     int result;
-    int* ptr = (int*) &lbl_80473700;
 
     result = pl_80041300(0);
     if (result != 0) {
-        ptr[65] = result;
-        ptr[66] = 1;
+        lbl_80473700.result_cache[0] = result;
+        lbl_80473700.result_cache[1] = 1;
     }
-    if (ptr[66] != 0) {
-        result = ptr[65];
+    if (lbl_80473700.result_cache[1] != 0) {
+        result = lbl_80473700.result_cache[0];
     }
     return result;
 }
-#pragma pop
+
 void fn_80188550(int arg0)
 {
     int current = lbl_80473700.count;
@@ -2169,6 +2166,16 @@ void fn_80188910(HSD_JObj* arg0)
     }
 }
 
+int fn_80188B3C_inline(void)
+{
+    return fn_801884F8();
+}
+int fn_80188B3C_inline_2(void);
+int fn_80188B3C_inline_2(void)
+{
+    return fn_80188B3C_inline();
+}
+
 void fn_80188B3C(HSD_JObj* arg0)
 {
     HSD_JObj* jobjs[3];
@@ -2178,7 +2185,7 @@ void fn_80188B3C(HSD_JObj* arg0)
     if (fn_801884F8_inline() > 999) {
         val = 999;
     } else {
-        val = fn_801884F8();
+        val = fn_80188B3C_inline_2();
     }
 
     jobjs[2] = arg0;
