@@ -140,6 +140,17 @@ static inline itFlipper_DatAttrs* itFlipper_GetAttrs(Item* ip)
     return ip->xC4_article_data->x4_specialAttributes;
 }
 
+static inline f32 itFlipper_SpinSpeedFromFighter(Item_GObj* gobj,
+                                                 HSD_GObj* fighter, Vec3* pos,
+                                                 Vec3* vel)
+{
+    Item* ip = GET_ITEM(gobj);
+    itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    ftLib_800866DC(fighter, pos);
+    ftLib_80086BEC(fighter, vel);
+    return attrs->x18 * sqrtf__Ff(vel->x * vel->x + vel->y * vel->y);
+}
+
 static inline void it_80290CE8_inline(Item_GObj* gobj, Vec3* vel, Vec3* pos,
                                       f32 speed)
 {
@@ -149,14 +160,7 @@ static inline void it_80290CE8_inline(Item_GObj* gobj, Vec3* vel, Vec3* pos,
     if (ip->xCF4_fighterGObjUnk != NULL) {
         HSD_GObj* fighter = ip->xCF4_fighterGObjUnk;
         if (ftLib_80086960(fighter)) {
-            Item* ip = GET_ITEM(gobj);
-            itFlipper_DatAttrs* attrs = itFlipper_GetAttrs(ip);
-            /// @todo Eliminate this no-op branch (perturbs scheduling).
-            if (pos != NULL) {
-            }
-            ftLib_800866DC(fighter, pos);
-            ftLib_80086BEC(fighter, vel);
-            speed = attrs->x18 * sqrtf__Ff(vel->x * vel->x + vel->y * vel->y);
+            speed = itFlipper_SpinSpeedFromFighter(gobj, fighter, pos, vel);
         }
         ip->xCF4_fighterGObjUnk = NULL;
     }
@@ -460,6 +464,7 @@ bool it_3F14_Logic20_DmgDealt(Item_GObj* gobj)
     u8 _pad[8];
     Vec3 pos2;
     Vec3 vel;
+    PAD_STACK(8);
     if (ip->xDD4_itemVar.flipper.xDD8 == 0) {
         if (ip->xDD4_itemVar.flipper.xDD4 >= 6) {
             itColl_BounceOffVictim(gobj);
@@ -551,15 +556,7 @@ static inline void it_3F14_DmgRecv_CE8(Item_GObj* gobj, Vec3* vel, Vec3* pos,
     if (ip->xCEC_fighterGObj != NULL) {
         HSD_GObj* fighter = ip->xCEC_fighterGObj;
         if (ftLib_80086960(fighter)) {
-            Item* ip = GET_ITEM(gobj);
-            itFlipper_DatAttrs* attrs;
-            /// @todo Eliminate this no-op branch (perturbs scheduling).
-            if (pos != NULL) {
-            }
-            attrs = itFlipper_GetAttrs(ip);
-            ftLib_800866DC(fighter, pos);
-            ftLib_80086BEC(fighter, vel);
-            speed = attrs->x18 * sqrtf__Ff(vel->x * vel->x + vel->y * vel->y);
+            speed = itFlipper_SpinSpeedFromFighter(gobj, fighter, pos, vel);
         }
         ip->xCEC_fighterGObj = NULL;
     }
@@ -574,6 +571,7 @@ bool it_3F14_Logic20_DmgReceived(Item_GObj* gobj)
     u8 _pad[8];
     Vec3 vec;
     Vec3 vel;
+    PAD_STACK(8);
     if (ip->xDD4_itemVar.flipper.xDD8 != 0) {
         ip->xDD4_itemVar.flipper.xDDC = attrs->x14;
         it_3F14_DmgRecv_CE8(gobj, &vel, &pos, 10.0f);
