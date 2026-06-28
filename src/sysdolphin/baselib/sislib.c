@@ -189,11 +189,11 @@ void HSD_SisLib_Free(void* ptr)
         return;
     }
     if ((u8*) free_cur == ((u8*) alloc_cur->data + alloc_cur->size)) {
-        u32 new_size = alloc_cur->size + sizeof(SisBlock);
         SisBlock* old_next;
-        new_size = new_size + free_cur->size;
+        u32 new_size;
 
         old_next = free_cur->next;
+        new_size = free_cur->size + alloc_cur->size + sizeof(SisBlock);
 
         if (alloc_prev != NULL) {
             alloc_prev->next = alloc_cur->next;
