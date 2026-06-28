@@ -2170,8 +2170,8 @@ int fn_80188B3C_inline(void)
 {
     return fn_801884F8();
 }
-int fn_80188B3C_inline_2(void);
-int fn_80188B3C_inline_2(void)
+
+static int fn_80188B3C_inline_2(void)
 {
     return fn_80188B3C_inline();
 }
