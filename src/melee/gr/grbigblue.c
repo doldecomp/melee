@@ -17,16 +17,17 @@
 #include "gr/inlines.h"
 #include "gr/stage.h"
 #include "gr/types.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
+#include "it/itspawn.h"
+#include "it/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
-#include "MSL/math_ppc.h"
 
 #include <math.h>
-#include <trigf.h>
+#include <math_ppc.h> // IWYU pragma: keep
+#include <trigf.h>    // IWYU pragma: keep
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
@@ -1381,8 +1382,8 @@ f32 grBigBlue_801E8B84(f32 right, f32 left, f32 bottom, f32 top)
     return result;
 }
 
-
-static f32 grBigBlue_801E8B84_noinline(f32 right, f32 left, f32 bottom, f32 top)
+static f32 grBigBlue_801E8B84_noinline(f32 right, f32 left, f32 bottom,
+                                       f32 top)
 {
     return grBigBlue_801E8B84(right, left, bottom, top);
 }

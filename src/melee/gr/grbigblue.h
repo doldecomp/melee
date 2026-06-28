@@ -1,8 +1,6 @@
 #ifndef GALE01_1E57BC
 #define GALE01_1E57BC
 
-#include <placeholder.h>
-
 #include "baselib/forward.h"
 #include "gr/forward.h"
 #include "lb/forward.h"
@@ -78,4 +76,5 @@
 /* 1EFB9C */ void fn_801EFB9C(HSD_GObj*, int);
 /* 1EFC0C */ DynamicsDesc* grBigBlue_801EFC0C(enum_t);
 /* 1EFC14 */ bool grBigBlue_801EFC14(Vec3*, int arg, HSD_JObj* jobj);
+
 #endif
