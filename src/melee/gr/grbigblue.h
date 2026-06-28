@@ -78,7 +78,4 @@
 /* 1EFB9C */ void fn_801EFB9C(HSD_GObj*, int);
 /* 1EFC0C */ DynamicsDesc* grBigBlue_801EFC0C(enum_t);
 /* 1EFC14 */ bool grBigBlue_801EFC14(Vec3*, int arg, HSD_JObj* jobj);
-
-f32 grBigBlue_801E8B84_but_inline1(f32 right, f32 left, f32 bottom, f32 top);
-f32 grBigBlue_801E8B84_but_inline2(f32 right, f32 left, f32 bottom, f32 top);
 #endif

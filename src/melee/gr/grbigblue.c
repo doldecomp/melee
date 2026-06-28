@@ -1343,12 +1343,14 @@ void grBigBlue_801E8A1C(int idx)
     }
 }
 
-f32 grBigBlue_801E8B84_but_inline1(f32 right, f32 left, f32 bottom, f32 top)
+static f32 grBigBlue_801E8B84_but_inline1(f32 right, f32 left, f32 bottom,
+                                          f32 top)
 {
     return grBigBlue_801E8B84(right, left, bottom, top);
 }
 
-f32 grBigBlue_801E8B84_but_inline2(f32 right, f32 left, f32 bottom, f32 top)
+static f32 grBigBlue_801E8B84_but_inline2(f32 right, f32 left, f32 bottom,
+                                          f32 top)
 {
     return grBigBlue_801E8B84_but_inline1(right, left, bottom, top);
 }
