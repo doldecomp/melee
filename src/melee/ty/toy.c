@@ -1464,8 +1464,9 @@ void _Toy_80306C5C(HSD_GObj* arg0)
     unsigned char new_var;
     HSD_LObj* lobj;
     HSD_LObj* next;
-    void* unused1;
-    void* unused2;
+
+    PAD_STACK(16);
+
     idx = 0;
     offset = (new_var = idx) * 0xC;
     base = (TyLightData*) Toy_sbss_804D6ED4;

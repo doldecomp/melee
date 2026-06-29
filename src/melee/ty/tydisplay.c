@@ -871,19 +871,20 @@ void _tyDisplay_80319994(s32 arg0)
 
 void _tyDisplay_80319EF0(void)
 {
+    u8 _[8];
     Vec3 interest;
     Vec3 sp28;
     Vec3 eyepos;
     TyDspGrid* grid = _tyDisplay_804D6F14;
     TyDspConfig* cfg = _tyDisplay_804D6F18;
+    HSD_CObj* cobj = (HSD_CObj*) cfg->x00->hsd_obj;
     TyDspBgData* bg = _tyDisplay_804D6F1C;
-    HSD_CObj* cobj;
     f32 range;
     f32 scale;
     PAD_STACK(16);
 
-    cobj = (HSD_CObj*) cfg->x00->hsd_obj;
-    range = grid->x0C_max_x - grid->x04_min_x;
+    range = grid->x0C_max_x;
+    range -= grid->x04_min_x;
     if (range < 0.0f) {
         range = -range;
     }
@@ -894,7 +895,8 @@ void _tyDisplay_80319EF0(void)
     interest.y = 0.0f;
     {
         f32 zmin = grid->x08_min_z;
-        f32 zrange = grid->x10_max_z - zmin;
+        f32 zrange = grid->x10_max_z;
+        zrange -= zmin;
         if (zrange < 0.0f) {
             zrange = -zrange;
         }
@@ -920,7 +922,7 @@ void _tyDisplay_80319EF0(void)
     cfg->x44 = 1.0f;
 
     while (500.0f * tanf(0.017453292f * (cfg->x44 * 0.5f)) < cfg->x40 * 0.5f) {
-        cfg->x44 = cfg->x44 + 0.1f;
+        cfg->x44 += 0.1f;
     }
 
     if (cfg->x44 < 3.0f) {
@@ -1456,10 +1458,17 @@ static void order_data_110(void)
     913.0f / 750.0f,
 };
 
+/// @todo .data order hack
+static void order_data_18C(void)
+{
+    /* +18C */ (void) "ScMenDisplay_cam_int1_camera";
+}
+
 void _tyDisplay_8031B328(void)
 {
     TyDspBgData* ptr = _tyDisplay_804D6F1C;
     ToyCameraControl* scene = (ToyCameraControl*) Toy_sbss_804D6ED4;
+    char* strbase = "ToyDspPanel_Top_joint";
     LightList** lightData;
     HSD_FogDesc* fogDesc;
     TyDspBgData* temp3;
@@ -1471,7 +1480,7 @@ void _tyDisplay_8031B328(void)
 
     if ((temp3 = ptr)->archive == NULL) {
         OSReport("*** BG data aren't being loaded!\n");
-        OSPanic(__FILE__, 1113, "0");
+        OSPanic(__FILE__, 1113, "");
     }
 
     if ((lightData = HSD_ArchiveGetPublicAddress(
@@ -1488,8 +1497,8 @@ void _tyDisplay_8031B328(void)
         HSD_LObjSetColor(lobj, _tyDisplay_color_C8C8C8FF);
     }
 
-    if ((fogDesc = HSD_ArchiveGetPublicAddress(
-             temp3->archive, "ScMenDisplay_cam_int1_camera")) != NULL)
+    if ((fogDesc = HSD_ArchiveGetPublicAddress(temp3->archive,
+                                                strbase + 0x44)) != NULL)
     {
         scene->x08 = GObj_Create(3, 4, 0);
         HSD_GObjObject_80390A70(scene->x08, temp2 = HSD_GObj_804D7848,

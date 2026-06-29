@@ -2060,7 +2060,6 @@ s32 fn_80026650(void)
 
 void fn_800267B0(void)
 {
-    lbAudioAx_PoolAlloc* st = &lbl_80433710;
     int* arr_274;
     s8(*arr_5d0)[4];
     int* arr_194;

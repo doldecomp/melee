@@ -438,12 +438,23 @@ bool fn_80213B1C(Ground_GObj* ground_gobj, Fighter_GObj* fighter_gobj,
     return false;
 }
 
+static inline int get_whispy_dir(Ground_GObj* gobj, Vec3* pos)
+{
+    HSD_JObj* jobj = gobj->hsd_obj;
+    HSD_JObjGetTranslation(jobj, pos);
+    return ftLib_800864A8(pos, NULL) == 1.0f ? 1 : 0;
+}
+
 void grGreens_80213C10(Ground_GObj* gobj)
 {
     Ground_GObj* bg_gobj = Ground_801C2BA4(4);
     Ground* gp = GET_GROUND(gobj);
     Ground* bg_gp = GET_GROUND(bg_gobj);
-    PAD_STACK(0x50);
+    HSD_JObj* jobj;
+    Vec3 pos;
+    Vec3 pos2;
+    Vec3 apple_pos;
+    PAD_STACK(0x28);
     gp->gv.greens2.x18 = 0;
 
     if (grGr_804D6AAC != 0) {
@@ -491,8 +502,6 @@ void grGreens_80213C10(Ground_GObj* gobj)
 
     case 1:
         if (gp->gv.greens2.x10 != 0) {
-            HSD_JObj* jobj;
-            Vec3 pos;
             int dir;
 
             gp->gv.greens2.x10 = 0;
@@ -595,33 +604,13 @@ void grGreens_80213C10(Ground_GObj* gobj)
             Camera_80030E44(1, NULL);
             gp->gv.greens2.x18 = gp->gv.greens2.x14 + 1;
             if (grAnime_801C84A4(gobj, 0, 7) != 0) {
-                HSD_JObj* jobj;
-                int new_dir;
                 int wind_dir;
-                int wind_done;
 
                 gp->gv.greens2.xC++;
-                wind_done = 0;
-                if ((float) gp->gv.greens2.xC > grGr_params->x54) {
-                    return;
-                }
-
-                if ((float) gp->gv.greens2.xC > grGr_params->x58) {
-                    Vec3 pos;
-
-                    jobj = gobj->hsd_obj;
-                    HSD_JObjGetTranslation(jobj, &pos);
-                    if (ftLib_800864A8(&pos, NULL) == 1.0f) {
-                        new_dir = 1;
-                    } else {
-                        new_dir = 0;
-                    }
-                    if (gp->gv.greens2.x14 != new_dir) {
-                        wind_done = 1;
-                    }
-                }
-
-                if (wind_done) {
+                if ((float) gp->gv.greens2.xC > grGr_params->x54 ||
+                    ((float) gp->gv.greens2.xC > grGr_params->x58 &&
+                     gp->gv.greens2.x14 != get_whispy_dir(gobj, &pos2)))
+                {
                     gp->gv.greens2.x8++;
                     gp->gv.greens2.xC = 0;
                     grAnime_801C8138(
@@ -693,20 +682,20 @@ void grGreens_80213C10(Ground_GObj* gobj)
                 ((gp->gv.greens2.xC - grGr_params->x64) % grGr_params->x68) ==
                     0)
             {
-                Vec3 pos;
                 float rand;
                 float sign;
                 float diff;
 
                 rand = HSD_Randf();
                 sign = gp->gv.greens2.x24 == 0 ? -1.0f : 1.0f;
-                pos.x = sign * (40.0f * rand);
+                apple_pos.x = sign * (40.0f * rand);
                 rand = HSD_Randf();
                 diff = grGr_params->x70 - grGr_params->x6C;
-                pos.y = (diff * rand) + grGr_params->x6C;
-                pos.z = -40.0f;
+                apple_pos.y = (diff * rand) + grGr_params->x6C;
+                apple_pos.z = -40.0f;
                 lbAudioAx_800237A8(0x68FB3, 0x7F, 0x40);
-                it_802EE200(gobj, &pos, grGr_params->x74, grGr_params->x78);
+                it_802EE200(gobj, &apple_pos, grGr_params->x74,
+                            grGr_params->x78);
                 gp->gv.greens2.x20--;
                 gp->gv.greens2.x24 = (gp->gv.greens2.x24 + 1) & 1;
             }

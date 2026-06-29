@@ -869,9 +869,8 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
 
             {
                 s32 sub_state = gp->gv.bigblue.data[i].x2C;
-                s32 phase = gp->gv.bigblue.data[i].x34;
 
-                if (sub_state == 0 || phase == 3) {
+                if (sub_state == 0 || gp->gv.bigblue.data[i].x34 == 3) {
                     if (gp->gv.bigblue.data[i].x30 == 0 && sub_state != 0) {
                         gp->gv.bigblue.data[i].xC.y = cur_pos.y;
                         gp->gv.bigblue.data[i].x4 = grBb_804D69C8->xB0;
@@ -928,7 +927,7 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                     }
                     gp->gv.bigblue.data[i].x18.y = (f32) dir_val;
 
-                    if (phase == 2) {
+                    if (gp->gv.bigblue.data[i].x34 == 2) {
                         cur_pos.y += gp->gv.bigblue.data[i].x44.y;
                         gp->gv.bigblue.data[i].xC.x = euler.x;
                         {

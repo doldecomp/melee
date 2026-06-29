@@ -3569,7 +3569,7 @@ bool mpCheckAll(Vec3* pos_out, int* line_id_out, u32* flags_out,
                            normal_out, 0xF, joint_id_skip, joint_id_only);
 }
 
-static inline int mpLineGetNextCheckInline(MapLine* line, int result)
+static inline int mpLineGetNextCheckInline(MapLine* line, s16 result)
 {
     if (result != -1) {
         u32 flags = groundCollLine[result].flags;
@@ -3587,7 +3587,7 @@ static inline int mpLineGetNextCheckInline(MapLine* line, int result)
     return line->next_id0;
 }
 
-static inline int mpLineGetPrevCheckInline(MapLine* line, int result)
+static inline int mpLineGetPrevCheckInline(MapLine* line, s16 result)
 {
     if (result != -1) {
         u32 flags = groundCollLine[result].flags;
@@ -3605,7 +3605,7 @@ static inline int mpLineGetPrevCheckInline(MapLine* line, int result)
     return line->prev_id0;
 }
 
-static inline int mpLineGetPrevCheckInlineVtx(MapLine* line, int result,
+static inline int mpLineGetPrevCheckInlineVtx(MapLine* line, s16 result,
                                               CollVtx* vtx)
 {
     if (result != -1) {
@@ -3644,6 +3644,7 @@ static inline int mpLineGetNextCheckInlineVtx(MapLine* line, s16 result,
     return result;
 }
 
+
 int mpLineNextNonFloor(int line_id)
 {
     MapLine* line;
@@ -3679,14 +3680,13 @@ int mpLinePrevNonFloor(int line_id)
 
     LINEID_CHECK(4148, line_id);
     line = groundCollLine[line_id].x0;
-    new_id = line->prev_id1;
-    new_id = mpLineGetPrevCheckInline(line, new_id);
+    new_id = mpLineGetPrevCheckInline(line, line->prev_id1);
     while (new_id != -1 && new_id != line_id &&
            groundCollLine[new_id].flags & CollLine_Floor)
     {
         line = groundCollLine[new_id].x0;
         new_id = line->prev_id1;
-        new_id = mpLineGetPrevCheckInline(line, new_id);
+        new_id = mpLineGetPrevCheckInlineVtx(line, new_id, groundCollVtx);
     }
     valid_id = false;
     if ((new_id != -1) && (new_id != line_id)) {
@@ -3727,19 +3727,19 @@ int mpLinePrevNonCeiling(int line_id)
 
 int mpLineNextNonCeiling(int line_id)
 {
+    MapLine* first_line;
     MapLine* line;
     int new_id;
     bool valid_id;
     LINEID_CHECK(4166, line_id);
-    line = groundCollLine[line_id].x0;
-    new_id = line->next_id1;
-    new_id = mpLineGetNextCheckInline(line, new_id);
+    first_line = groundCollLine[line_id].x0;
+    new_id = mpLineGetNextCheckInline(first_line, first_line->next_id1);
     while (new_id != -1 && new_id != line_id &&
            groundCollLine[new_id].flags & CollLine_Ceiling)
     {
         line = groundCollLine[new_id].x0;
         new_id = line->next_id1;
-        new_id = mpLineGetNextCheckInline(line, new_id);
+        new_id = mpLineGetNextCheckInlineVtx(line, new_id, groundCollVtx);
     }
     valid_id = false;
     if (new_id != -1 && new_id != line_id) {
@@ -3753,19 +3753,20 @@ int mpLineNextNonCeiling(int line_id)
 
 int mpLineNextNonLeftWall(int line_id)
 {
+    MapLine* first_line;
     MapLine* line;
     int new_id;
     bool valid_id;
 
     LINEID_CHECK(4175, line_id);
-    line = groundCollLine[line_id].x0;
-    new_id = mpLineGetNextCheckInline(line, line->next_id1);
+    first_line = groundCollLine[line_id].x0;
+    new_id = mpLineGetNextCheckInline(first_line, first_line->next_id1);
     while (new_id != -1 && new_id != line_id &&
            groundCollLine[new_id].flags & CollLine_LeftWall)
     {
         line = groundCollLine[new_id].x0;
         new_id = line->next_id1;
-        new_id = mpLineGetNextCheckInline(line, new_id);
+        new_id = mpLineGetNextCheckInlineVtx(line, new_id, groundCollVtx);
     }
     valid_id = false;
     if ((new_id != -1) && (new_id != line_id)) {

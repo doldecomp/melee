@@ -436,7 +436,7 @@ bool ftColl_8007699C(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
 static inline bool ftColl_8007699C_dontinline(Fighter* fp0, HitCapsule* hit0,
                                               Fighter* fp1, HitCapsule* hit1)
 {
-    ftColl_8007699C(fp0, hit0, fp1, hit1);
+    return ftColl_8007699C(fp0, hit0, fp1, hit1);
 }
 
 void ftColl_80076CBC(Fighter* fp0, HitCapsule* hit0, Fighter* fp1)
@@ -1675,7 +1675,7 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
                                     if (this_fp->x221B_b0) {
                                         var_r3 = true;
                                         if (this_fp->x221B_b3) {
-                                            if (-1.0f == this_fp->facing_dir) {
+                                            if (*(float const*) &ftColl_804D82F0 == this_fp->facing_dir) {
                                                 if (this_fp->cur_pos .x < victim_fp->cur_pos .x) {
                                                     var_r3 = false;
                                                 }

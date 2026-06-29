@@ -784,23 +784,31 @@ const char* gm_80160A60(int arg0)
     return NULL;
 }
 
+static inline void gm_80160B40_init_text(HSD_Text* text, HSD_Text** tmp_text)
+{
+    *tmp_text = text;
+    if (lbLang_IsSavedLanguageUS()) {
+        text->default_kerning = 1;
+    }
+}
+
 void gm_80160B40(HSD_Text* text, u8 ckind, u8 arg2)
 {
-    HSD_Text* tmp_text = text;
     u8 tmp_ckind = ckind;
+    HSD_Text* tmp_text;
     f32 var_f31;
     const char* str;
 
-    if (lbLang_IsSavedLanguageUS()) {
-        tmp_text->default_kerning = 1;
-    }
+    gm_80160B40_init_text(text, &tmp_text);
     str = arg2 ? fn_801609E0(tmp_ckind) : gm_80160980(tmp_ckind);
     if (lbLang_IsSavedLanguageUS()) {
         bool tmp = arg2 && lbl_803D50E4[tmp_ckind] != NULL;
-        var_f31 = tmp ? lbl_803B7784[tmp_ckind] : lbl_803B767C[tmp_ckind];
+        var_f31 = tmp ? lbl_803B75F8[tmp_ckind + 0x63]
+                      : lbl_803B75F8[tmp_ckind + 0x21];
     } else {
         bool tmp = arg2 && lbl_803D5060[tmp_ckind] != NULL;
-        var_f31 = tmp ? lbl_803B7700[tmp_ckind] : lbl_803B75F8[tmp_ckind];
+        var_f31 = tmp ? lbl_803B75F8[tmp_ckind + 0x42]
+                      : lbl_803B75F8[tmp_ckind];
     }
     HSD_SisLib_803A6B98(tmp_text, 0.0F, 0.0F, str);
     tmp_text->font_size.x *= var_f31;
@@ -1318,44 +1326,47 @@ void gm_801623FC(int arg0)
 
 s32 gm_8016247C(s32 arg0)
 {
-    u32 var_r4;
-    u32 var_r3;
-    u32 var_r29;
-    u32* temp_r31;
-    u32* temp_r5;
-    u32* temp_r30_2;
-    u32* temp_r3;
-    s32 temp_r29 = *gmMainLib_8015CCF0();
-    u32* temp_r30 = gmMainLib_8015CCFC();
+    u32 total;
+    u32 session_total;
+    u32 capped_total;
+    u32* high_score_ptr;
+    u32* session_high_score_ptr;
+    u32* current_score_ptr;
+    u32* session_high_score_ptr2;
+    s32 current_score = *gmMainLib_8015CCF0();
+    u32* high_score_ptr2 = gmMainLib_8015CCFC();
 
-    temp_r5 = &gmMainLib_8015EDBC()->x14;
+    session_high_score_ptr = &gmMainLib_8015EDBC()->x14;
 
-    var_r4 = MAX(-1U, *temp_r30 + arg0);
-    *temp_r30 = var_r4;
+    total = ((*high_score_ptr2 + arg0) > (u32) -1) ? (u32) -1
+                                                    : *high_score_ptr2 + arg0;
+    *high_score_ptr2 = total;
 
-    var_r3 = MAX(-1U, *temp_r5 + arg0);
-    *temp_r5 = var_r3;
+    session_total = ((*session_high_score_ptr + arg0) > (u32) -1)
+                        ? (u32) -1
+                        : *session_high_score_ptr + arg0;
+    *session_high_score_ptr = session_total;
 
-    arg0 = temp_r29 + arg0;
+    arg0 = current_score + arg0;
     if ((u32) arg0 > 0x270FU) {
         arg0 = 0x270FU;
     }
-    var_r29 = arg0;
+    capped_total = arg0;
 
-    temp_r30_2 = gmMainLib_8015CCF0();
-    temp_r31 = gmMainLib_8015CCFC();
-    temp_r3 = &gmMainLib_8015EDBC()->x14;
+    current_score_ptr = gmMainLib_8015CCF0();
+    high_score_ptr = gmMainLib_8015CCFC();
+    session_high_score_ptr2 = &gmMainLib_8015EDBC()->x14;
 
-    if ((u32) arg0 > (u32) *temp_r31) {
-        *temp_r31 = arg0;
+    if ((u32) arg0 > (u32) *high_score_ptr) {
+        *high_score_ptr = arg0;
     }
-    if ((u32) arg0 > (u32) *temp_r3) {
-        *temp_r3 = arg0;
+    if ((u32) arg0 > (u32) *session_high_score_ptr2) {
+        *session_high_score_ptr2 = arg0;
     }
     if ((u32) arg0 > 0x270FU) {
-        var_r29 = 0x270FU;
+        capped_total = 0x270FU;
     }
-    *temp_r30_2 = var_r29;
+    *current_score_ptr = capped_total;
     return arg0;
 }
 

@@ -491,9 +491,9 @@ bool NameContainsOnlySpaces(void)
 inline void CopyCurrentNameToNametag(struct NameTagData* nametag)
 {
     u8* text;
-    s32 idx;
     u8* ptr;
     u8 ch;
+    s32 idx;
 
     text = (u8*) mnNameNew_CurrentNameText;
     idx = 0;
@@ -504,21 +504,21 @@ inline void CopyCurrentNameToNametag(struct NameTagData* nametag)
             idx += 1;
             ptr += 1;
         }
-        if ((s8) ch != (s8) * (text += 3)) {
+        if (ch != (s8) * (text += 3)) {
             ptr = text;
             while ((s8) mnNameNew_NullCharacter != (s8) (ch = *ptr)) {
                 nametag->namedata[idx] = (s8) ch;
                 idx += 1;
                 ptr += 1;
             }
-            if ((s8) ch != (s8) * (text += 3)) {
+            if (ch != (s8) * (text += 3)) {
                 ptr = text;
                 while ((s8) mnNameNew_NullCharacter != (s8) (ch = *ptr)) {
                     nametag->namedata[idx] = (s8) ch;
                     idx += 1;
                     ptr += 1;
                 }
-                if ((s8) ch != (s8) * (text += 3)) {
+                if (ch != (s8) * (text += 3)) {
                     ptr = text;
                     while ((s8) mnNameNew_NullCharacter != (s8) (ch = *ptr)) {
                         nametag->namedata[idx] = (s8) ch;
@@ -1424,6 +1424,11 @@ s32 mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, u8 arg2)
     return (s32) gobj;
 }
 
+static inline f32* fn_8023DAEC_inline_end_frame(MnNameNewDataLayout* layout)
+{
+    return &layout->anim[1].end_frame;
+}
+
 s32 mnNameNew_8023DA08(NameNewEntry* arg0)
 {
     AnimLoopSettings* anim;
@@ -1464,7 +1469,7 @@ void fn_8023DAEC(HSD_GObj* arg0)
 
     data = arg0->user_data;
     layout = (MnNameNewDataLayout*) mnNameNew_803EDA58;
-    end_frame = &layout->anim[1].end_frame;
+    end_frame = fn_8023DAEC_inline_end_frame(layout);
     if (data->key_text != NULL) {
         HSD_SisLib_803A5CC4(data->key_text);
         data->key_text = NULL;
