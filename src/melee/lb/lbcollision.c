@@ -1148,7 +1148,8 @@ block_26:
     {
         return 0;
     }
-    hit_end_max_z = hit_end_z + broadphase_radius;
+    hit_end_max_z = hit_end_z;
+    hit_end_max_z += broadphase_radius;
     if ((hit_end_max_z < hurt_start_copy.z) && (hit_end_max_z < hurt_end->z)) {
         return 0;
     }

@@ -2205,7 +2205,8 @@ void hsd_80394668(void)
                     d0[1] = s0[1];
 
                     s0 = src + pos;
-                    d0 = dst + pos;
+                    d0 = dst;
+                    d0 += pos;
                     pos += 2;
                     d0[0] = (u8) (((s0[0] - 0x10) & 0xFFFFFF) + 0x10);
                     d0[1] = s0[1];

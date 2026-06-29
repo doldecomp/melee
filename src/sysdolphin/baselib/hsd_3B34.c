@@ -448,7 +448,8 @@ static void fn_803B376C(u8* arg0)
         scratch_f30_4 = scratch_f11_6 + scratch_f29_2;
         scratch_f27_6 = -scratch_f28_6 + scratch_f8_4;
         scratch_f29_3 = -scratch_f11_6 + scratch_f29_2;
-        scratch_f28_7 = scratch_f28_6 + scratch_f8_4;
+        scratch_f28_7 = scratch_f28_6;
+        scratch_f28_7 += scratch_f8_4;
         {
             f64 scratch_f30_5 = 0.19509 * (f64) scratch_f30_4;
             work_r4_2[56] =
