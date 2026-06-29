@@ -1209,9 +1209,9 @@ s32 fn_803ACC0C(CardState* state, s32 block_idx, s32 file_id, s32 seq_num,
                 void* expected_data, s32 data_size)
 {
     s32 result;
-    s32 retries;
     u8* buf;
     u32 sector_size;
+    s32 retries;
     u8* data;
     s32 offset;
     PAD_STACK(4);
@@ -1228,7 +1228,10 @@ s32 fn_803ACC0C(CardState* state, s32 block_idx, s32 file_id, s32 seq_num,
     offset = sector_size * (block_idx + offset - 1);
 
     for (; retries < 10; retries++) {
-        result = CARDRead(&state->file_info, buf, sector_size, offset);
+        {
+            s32 tmp = CARDRead(&state->file_info, buf, sector_size, offset);
+            result = tmp;
+        }
         if (result != -1) {
             break;
         }
