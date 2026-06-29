@@ -3186,8 +3186,8 @@ void Camera_8002DDC4(void* arg0)
         f32 dx, dy, dz;
 
         smooth = globals->x78;
-        dx = cam->transform_copy.target_position.x;
-        dx -= cam->transform_copy.position.x;
+        dx = cam->transform_copy.target_position.x -
+             cam->transform_copy.position.x;
         dy = cam->transform_copy.target_position.y -
              cam->transform_copy.position.y;
         dz = cam->transform_copy.target_position.z -

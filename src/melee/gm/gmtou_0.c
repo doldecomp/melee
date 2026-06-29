@@ -2497,8 +2497,7 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
                 idx = lbl_804799B8.x2 + lbl_804799B8.x3;
                 tm->x37[idx].x5 = 0;
                 adj = fn_8018F6DC(fn_8018F3BC(candidate));
-                idx = lbl_804799B8.x2;
-                idx += lbl_804799B8.x3;
+                idx = lbl_804799B8.x2 + lbl_804799B8.x3;
                 tm->x37[idx].x3 = adj;
                 break;
             }
