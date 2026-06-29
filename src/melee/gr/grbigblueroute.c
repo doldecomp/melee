@@ -610,6 +610,7 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
         re->x18 = grBb_Route_804D6A68->x3C;
 
         re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
+        (void) re;
         re->x1C = 0.0F;
 
         {

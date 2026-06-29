@@ -1446,6 +1446,7 @@ HSD_GObj* fn_8017A318(s32 arg0)
     vi = ((s32) variant <= 2) ? variant : 3;
 
     kind_data = disp->state.char_kind[arg0];
+    (void) kind_data;
     {
         f32* y_off = data->kind[kind_data].y_off;
         eye.y += y_off[vi];
@@ -1481,7 +1482,7 @@ HSD_GObj* fn_8017A318(s32 arg0)
     }
 
     vi = ((s32) variant <= 2) ? variant : 3;
-    if ((1.0f - data->kind[kind_data].z_scale[vi]) < 0.0f) {
+    if ((1.0f - data->kind[kind_data].z_scale[vi]) < 0.0) {
         vi = ((s32) variant <= 2) ? variant : 3;
         eye.z += 100.0f * (1.0f - data->kind[kind_data].z_scale[vi]);
     } else {
@@ -1692,6 +1693,7 @@ void fn_8017AA78(u8* arg0)
         s32 a;
         s32 b;
         a = lbl_804D3FD0;
+        (void) a;
         b = lbl_804D3FD4;
         state->dim_w1[0] = a;
         state->dim_w1[1] = b;

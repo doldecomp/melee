@@ -1071,6 +1071,7 @@ s32 HSD_AudioGetAuxHeapSize(AXDriverAuxType type, void* param)
         ch1 = ((delay->delay[1] - 5) * 32 + 159) / 160 * 640;
         ch2 = ((delay->delay[2] - 5) * 32 + 159) / 160 * 640;
         result = ch0 + ch1 + ch2;
+        (void) result;
         break;
     }
     }

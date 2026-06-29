@@ -3562,6 +3562,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
         }
 
         trigger = Toy_80305B88();
+        (void) trigger;
 
         if (trigger & 0x10) {
             lbAudioAx_80024030(0);
@@ -4401,6 +4402,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
                     gm_801677E8(0);
                 } else {
                     button = HSD_PadCopyStatus[1].button;
+                    (void) button;
                     if (button != 0) {
                         gm_801677E8(1);
                     } else {

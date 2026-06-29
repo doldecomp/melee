@@ -527,6 +527,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     digit_offset = ones_offset + tens_offset;
     digit_jobj = state->jobjs[Tens];
     pos = state->translation_x[Tens] + digit_offset;
+    (void) pos;
     if (digit_jobj == NULL) {
         __assert("jobj.h", 932, "jobj");
     }

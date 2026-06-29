@@ -208,6 +208,7 @@ void grVenom_8020362C(void)
         }
     } else {
         x20_ptr = &ext->x20[0];
+        (void) x20_ptr;
         i = 0;
         if (x20_ptr[0] != NULL) {
             x20_next = x20_ptr + 1;

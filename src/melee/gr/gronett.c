@@ -653,6 +653,7 @@ void grOnett_801E43E0(Ground_GObj* gobj)
                 }
 
                 new_jobj = gp->gv.onettcar.car_jobjs[gp->gv.onettcar.next_car];
+                (void) new_jobj;
                 HSD_JObjSetTranslateX(new_jobj, -642.0f);
                 HSD_JObjSetTranslateZ(new_jobj, 56.0f);
                 HSD_JObjSetRotationY(new_jobj->child, M_PI);
@@ -823,6 +824,7 @@ void grOnett_801E5214(Ground_GObj* gobj)
         }
 
         jobj = gp->gv.onett.awnings[i].jobj;
+        (void) jobj;
         HSD_JObjSetTranslateY(jobj, gp->gv.onett.awnings[i].velocity +
                                         (gp->gv.onett.awnings[i].initial_y +
                                          gp->gv.onett.awnings[i].accumulator));

@@ -1522,6 +1522,7 @@ void tyFigupon_OnEnter_80317D80(void* arg0)
     _tyFigupon_80317A60();
     ef4_2 = _tyFigupon_804D6EF4;
     ed4 = (TyFiguponED4*) Toy_sbss_804D6ED4;
+    (void) ed4;
     if (ef4_2->archive == NULL) {
         OSReport("*** BG data aren't being loaded!\n");
         OSPanic(__FILE__, 1575, "");

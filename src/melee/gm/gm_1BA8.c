@@ -1087,6 +1087,7 @@ s32 gm_801BC00C(void)
             event_entry =
                 *(void**) ((u8*) event_levels[idx]->x10 + entry_offset + 0x10);
             ckind = *(u8*) event_entry;
+            (void) ckind;
             costume = *((u8*) event_entry + 3);
             {
                 struct EventData* ev2 = &gmMainLib_804D3EE0->unk_530;
@@ -3407,8 +3408,7 @@ void gm_801BF128(void)
         prev = gm_801BF6F8();
     } while (gm_801BF6D8() == prev);
 
-    count = 0;
-    c = 0;
+    c = (count = 0);
     do {
         if (gm_80164430(gm_801641CC(c)) != 0) {
             stage_pool[count] = c;

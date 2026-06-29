@@ -112,6 +112,7 @@ void fn_80190ABC(int mode)
         } else {
             display_val =
                 *(u16*) (table + opt * 2 + 0x34) + (&tm->match_type)[opt];
+            (void) display_val;
         }
         HSD_SisLib_803A6368(tm->x500[opt], display_val);
         break;
@@ -1156,9 +1157,9 @@ s32 fn_80192938(void)
         }
     }
 
-    start = 0;
     tm->x4B8[0].x2 = 0;
-    tm->x4B8[1].x2 = 0;
+    tm->x4B8[1].x2 = (start = 0);
+    start = 0;
     tm->x4B8[2].x2 = 0;
     tm->x4B8[3].x2 = 0;
 
@@ -1490,6 +1491,7 @@ void fn_801937C4(s32* arg0, u32 arg1, u32 arg2)
 
         lbAudioAx_80024030(1);
         table = (u8*) &lbl_803D9F80;
+        (void) table;
         idx = arg0[0];
         arg0[0] = idx + 1;
         idx = arg0[0];
@@ -1575,6 +1577,7 @@ void fn_80193B58(s32* arg0, u32 arg1, u32 arg2)
         if (*mt == 0) {
             idx = arg0[0];
             ptr = arg0 + idx;
+            (void) ptr;
             val = *++ptr;
             if (val > (s32) TmSettingTable_GetMin(idx, *mt)) {
                 *ptr = val - 1;
@@ -1739,6 +1742,7 @@ void fn_80193FCC(s32* arg0, u32 arg1, u32 arg2)
             idx = arg0[0];
             entry = table + (idx << 1) + (*mt != 0);
             ptr = arg0 + idx;
+            (void) ptr;
             val = *++ptr;
             if (val > (s32) entry[0x40]) {
                 *ptr = val - 1;
@@ -2479,6 +2483,7 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
         group = ((cur_pos / 5) + 1) * 5;
         for (i = 1; i < 5; i++) {
             candidate = cur_pos + i;
+            (void) candidate;
             if (candidate >= group) {
                 candidate -= 5;
             }

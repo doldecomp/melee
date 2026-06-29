@@ -259,6 +259,7 @@ void grCorneria_801DCE1C(void)
                         }
 
                         arwing_group = &data->arwing_group[0];
+                        (void) arwing_group;
                         if (*arwing_group == 4) {
                             group = 1;
                         } else {
@@ -1433,6 +1434,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
         {
             HSD_GObj* item;
             item = gp->gv.corneria2.xE0;
+            (void) item;
             if (item != NULL) {
                 Ground_801C4A08(item);
             }

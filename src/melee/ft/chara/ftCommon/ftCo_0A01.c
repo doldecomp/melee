@@ -1807,6 +1807,7 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
         island_pos = island->x14;
         ex = island_pos.x;
         ey = island_pos.y;
+        (void) ey;
         ez = island_pos.z;
         if (ex < fp->x1A88.half_width + Stage_GetBlastZoneLeftOffset() ||
             ex > Stage_GetBlastZoneRightOffset() - data->half_width ||
@@ -1989,6 +1990,7 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
         island_pos = island->x8;
         ex = island_pos.x;
         ey = island_pos.y;
+        (void) ey;
         ez = island_pos.z;
         if (ex < fp->x1A88.half_width + Stage_GetBlastZoneLeftOffset() ||
             ex > Stage_GetBlastZoneRightOffset() - data->half_width ||
@@ -3267,6 +3269,7 @@ s32 ftCo_800A6D2C(Fighter* fp, Vec3* arg1)
             if (result != 0) {
                 fy = floor_pos.y;
                 fx = floor_pos.x;
+                (void) fx;
                 if (fy >= fp->cur_pos.y - data->x558) {
                     if (!ftCo_800A6700_inline0(fp, fx, fy)) {
                         dx = fx - fp->cur_pos.x;
@@ -3335,7 +3338,7 @@ bool ftCo_800A6FC4(Fighter* fp, Vec3* arg1, Vec3* arg2)
         line_id = -1;
         my = 0.5f * (a.y + b.y);
         mx = 0.5f * (a.x + b.x);
-        result = mpCheckFloor(mx, my + 10.0, mx, my - 10.0, 0.0f, &floor_pos,
+        result = mpCheckFloor(mx, my + 10.0, mx, my - 10.0f, 0.0f, &floor_pos,
                               &line_id, &flags, &floor_normal, -1, -1, -1,
                               NULL, NULL);
         if (result != 0) {
@@ -3540,7 +3543,7 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
                         if (d < 0.0f) {
                             d = -d;
                         }
-                        if (d < 5.0) {
+                        if (d < 5.0f) {
                             f32 x38_edge = data->x56C + fp1->x1A88.x564;
                             if (fp0->x1A88.x60 == 0) {
                                 data->x54.x = 5.0 + island->x8.x;
@@ -3695,7 +3698,7 @@ void ftCo_800A7AAC(Fighter* fp)
                 if (d < 0.0f) {
                     d = -d;
                 }
-                if (d < 5.0) {
+                if (d < 5.0f) {
                     if (data->x60 == 0) {
                         data->x54.x = island->x14.x - 5.0;
                         data->x54.y = island->x14.y;
@@ -3974,7 +3977,7 @@ void ftCo_800A866C(Fighter* fp)
             blocked = false;
             {
                 f32 top = 1.0f + iy;
-                f32 bottom = iy - 50.0f;
+                f32 bottom = iy - 50.0;
                 found = mpCheckFloor(ix, top, ix, bottom, 0.0f, &floor_pos,
                                      &line_id, &flags, &floor_normal, -1, -1,
                                      -1, NULL, NULL);
@@ -4127,8 +4130,8 @@ void ftCo_800A8940(Fighter* fp)
     line_id = -1;
     py = rnd2 * (island->x14.y - island->x8.y) + chosen->x8.y;
     result =
-        mpCheckFloor(px, py + 5.0f, px, py - 100.0f, 0.0f, &floor_pos,
-                     &line_id, &flags, &floor_normal, -1, -1, -1, NULL, NULL);
+        mpCheckFloor(px, py + 5.0f, px, py - 100.0, 0.0f, &floor_pos, &line_id,
+                     &flags, &floor_normal, -1, -1, -1, NULL, NULL);
     if (result != 0) {
         line = line_id;
         blocked = ftCo_800A6A98_inline0(line);
@@ -5386,7 +5389,7 @@ void ftCo_800ABBA8(Fighter* fp)
         cy = fp->cur_pos.y;
         blocked = 0;
         line_id = -1;
-        result = mpCheckFloor(cx, cy, cx, cy - 1000.0, 0.0f, &sp74, &line_id,
+        result = mpCheckFloor(cx, cy, cx, cy - 1000.0f, 0.0f, &sp74, &line_id,
                               &flags, &sp68, -1, -1, -1, NULL, NULL);
         if (result != 0) {
             int line = line_id;
@@ -5465,6 +5468,7 @@ void ftCo_800ABBA8(Fighter* fp)
         vf0 = dxx / v;
     }
     grav_ptr = &fp->co_attrs.grav;
+    (void) grav_ptr;
     g = *grav_ptr;
     if (g < 0.00001f && g > -0.00001f) {
         vf5 = 1000.0f;
@@ -6550,6 +6554,7 @@ void ftCo_800AE7AC(Fighter* fp, Vec3* arg1, int arg2)
             bottom = Stage_GetBlastZoneBottomOffset();
             sum_y = Stage_GetBlastZoneTopOffset() + bottom;
             cy = 0.5f * sum_y;
+            (void) cy;
             dir.x = cx - fp->cur_pos.x;
             dy = cy - fp->cur_pos.y;
             dir.y = dy;

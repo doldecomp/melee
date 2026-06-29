@@ -131,7 +131,7 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
     fpVx = fp->pos_delta.x;
     tgtX = target->cur_pos.x;
     tgtVx = target->pos_delta.x;
-    if (target->facing_dir > 0.0f) {
+    if (target->facing_dir > 0.0) {
         rangeF = target->x1A88.x55C;
         rangeB = target->x1A88.x560;
     } else {
@@ -222,6 +222,7 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
             diry = -list->x08 * fp->x34_scale.y;
         }
         scale = fp->x34_scale.y;
+        (void) scale;
         if (list->x14 * scale * halfRange > relPredY &&
             list->x10 * scale * halfRange < relPredY + x568 &&
             dirx * halfRange < relx + rangeF &&
@@ -404,7 +405,7 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
             } else {
                 v = -(tgtTermNeg - tgtVy) / tgtGrav;
             }
-            if (v <= 0.0f) {
+            if (v <= 0.0) {
                 relPredY = (tgtVy * t + tgtY) - fpPredY;
             } else if (t < v) {
                 sq = sqrtf(t);
@@ -429,6 +430,7 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
             diry = -list->x08 * fp->x34_scale.y;
         }
         scale = fp->x34_scale.y;
+        (void) scale;
         if ((list->x14 * scale + reach) * halfRange > relPredY &&
             list->x10 * scale * halfRange < relPredY + x568 &&
             dirx * halfRange < relx + rangeF &&
@@ -618,6 +620,7 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
             diry = list->x0C * fp->x34_scale.y;
         } else {
             dirx = -list->x0C * fp->x34_scale.y;
+            (void) dirx;
             diry = -list->x08 * fp->x34_scale.y;
         }
         scale = fp->x34_scale.y;

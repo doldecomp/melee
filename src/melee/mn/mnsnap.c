@@ -227,6 +227,7 @@ static void mnSnap_8025329C(void)
     } else if ((u32) (result - 2) <= 1) {
         p52 = &snap->load_idx;
         flags = &snap->thumb_loaded[0];
+        (void) flags;
         flags[*p52 % 4] = 1;
         p51 = &snap->pending_loads;
         *p52 += 1;
@@ -284,6 +285,7 @@ void mnSnap_80253640(s32 page)
     *p51 = count;
     i = 0;
     p52 = &snap->load_idx;
+    (void) p52;
     *p52 = 0;
     p58 = &snap->thumb_loaded[0];
     *p58 = 0;
@@ -1684,6 +1686,7 @@ void fn_802545C4(void)
             }
             slot = mnSnap_804A0A10.active_slot;
             card_status = mnSnap_804A0A10.card_status;
+            (void) card_status;
             cursor = mnSnap_804A0A10.cursor_idx;
             other_slot = slot ^ 1;
             result = card_status[other_slot];

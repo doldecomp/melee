@@ -2000,6 +2000,7 @@ void Camera_8002C5B4(Camera_x2D0* arg0)
     }
 
     cam_offset = &cam->x314;
+    (void) cam_offset;
     temp_pos = *cam_offset;
     lbVector_Add(&temp_pos, cam_pos);
 
@@ -2558,6 +2559,7 @@ check_done2:
     Camera_8002A0C0(&bounds3, transform);
 
     count_ptr = &cam->x2B8;
+    (void) count_ptr;
     if (*count_ptr > 1000) {
         cam->x2B4 = cam->x2B0;
         *count_ptr = 1;
@@ -2637,6 +2639,7 @@ void Camera_8002D318(void* unused)
 
             globals = &cm_803BCCA0;
             x = *target_x;
+            (void) x;
             y = *target_y;
             smooth = globals->x64;
             dx = x - cam->transform.interest.x;
@@ -2916,6 +2919,7 @@ void Camera_8002D85C(void* unused)
         tgt_fov_ptr = &cam->transform.target_fov;
         *tgt_fov_ptr = globals->x6C;
         delta = *tgt_fov_ptr - cam->transform.fov;
+        (void) delta;
         smooth = globals->x70;
         cam->transform.fov = delta * smooth + cam->transform.fov;
     }
@@ -3158,6 +3162,7 @@ void Camera_8002DDC4(void* arg0)
         f32 delta;
 
         delta = cam->transform.target_fov - cam->transform.fov;
+        (void) delta;
         cam->transform.fov = delta * globals->x7C + cam->transform.fov;
     }
     cam->transform_copy.target_fov = Stage_GetCamFixedFov();

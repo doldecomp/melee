@@ -1169,6 +1169,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             col_result = mnDiagram_GetVisibleNameFrom(
                 sorted, (u8) data->name_cursor_pos, (u8) cur);
             row = mn_804A04F0.hovered_selection >> 8;
+            (void) row;
             row_result = mnDiagram_GetVisibleNameFrom(
                 sorted, data->name_cursor_pos >> 8, row);
             mnDiagram_80241310(col_result, row_result, 1);

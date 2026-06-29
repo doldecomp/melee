@@ -1148,7 +1148,8 @@ block_26:
     {
         return 0;
     }
-    hit_end_max_z = hit_end_z + broadphase_radius;
+    hit_end_max_z = hit_end_z;
+    hit_end_max_z += broadphase_radius;
     if ((hit_end_max_z < hurt_start_copy.z) && (hit_end_max_z < hurt_end->z)) {
         return 0;
     }
@@ -1168,6 +1169,7 @@ block_39:
     hit_start_mid_x = hit_delta.x * hit_delta.x;
     hit_start_mid_y = hit_delta.y * hit_delta.y;
     hurt_end_z = hurt_end->z;
+    (void) hurt_end_z;
     start_delta_x = hit_start_copy.x - hurt_start_copy.x;
     hurt_delta_z = hurt_end_z - hurt_start_copy.z;
     segment_dot = (hit_delta.x * hurt_delta_x) + segment_dot;

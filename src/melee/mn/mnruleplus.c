@@ -888,6 +888,7 @@ HSD_GObj* mn_80233218(MenuState state)
 
             if (i == 5) {
                 als = &mn_803ED1D0.x7C[selected == i];
+                (void) als;
             } else {
                 als = &mn_803ED1D0.x64[selected == i];
             }

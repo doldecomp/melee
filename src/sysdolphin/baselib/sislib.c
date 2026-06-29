@@ -846,6 +846,7 @@ s32 HSD_SisLib_803A67EC(u8* data, u8* string)
             out_idx += 1;
             sjis_hi = 0x82;
             sjis_lo = (u8) *char_ptr + 0x20;
+            (void) sjis_lo;
         } else {
             data[out_idx] = 0xB;
             out_idx += 1;
@@ -969,6 +970,7 @@ int HSD_SisLib_803A6B98(HSD_Text* text, float x, float y, const char* fmt, ...)
             }
         }
         tail_src = encoded + copied_bytes;
+        (void) tail_src;
         tail_count = encoded_len - copied_bytes;
         if (copied_bytes < encoded_len) {
             do {
@@ -1166,6 +1168,7 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
                     }
                 }
                 tail_src = &playhead[shrink_diff + i];
+                (void) tail_src;
                 remainder = tail_len - i;
                 dst = &playhead[i];
                 if (i < tail_len) {
@@ -1444,6 +1447,7 @@ loop_3:
                                                 (((glyph_code - 0x2000) * 2) &
                                                  0x1FFFE));
                     kern_right = kern_data->right;
+                    (void) kern_right;
                     kern_left = kern_data->left;
                     kern_width = kern_left + (kern_right - 2);
                     *out_width =
@@ -1698,6 +1702,7 @@ void HSD_SisLib_803A7684(HSD_Text* text, u8* cursor, u8 flags)
         if (old_x6E < (s32) (text->x6C + 5)) {
             new_x6E = old_x6E + 0x10;
             old_buf = (u8*) text->string_buffer;
+            (void) old_buf;
             text->string_buffer = HSD_SisLib_Alloc(new_x6E);
             text->x6E = (u16) new_x6E;
             idx = 0;
@@ -1767,6 +1772,7 @@ s32 HSD_SisLib_803A7F0C(HSD_Text* text, s32 flags)
     while (pos >= 0) {
         entry = text->string_buffer[pos];
         entry_type = entry & 0x7F;
+        (void) entry_type;
         entry_flags = entry & 0x80;
         switch (entry_type) { /* irregular */
         case 1:

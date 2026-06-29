@@ -556,6 +556,7 @@ void fn_80196FFC(HSD_GObj* gobj)
 
     lbl_804799D8.x2A[pnum].loop = table.states[state].loop;
     cur_frame = lbl_804799D8.x2A[pnum].cur;
+    (void) cur_frame;
     end_frame = lbl_804799D8.x2A[pnum].end;
     loop_flag = lbl_804799D8.x2A[pnum].loop;
 
@@ -767,6 +768,7 @@ void fn_801977AC(HSD_GObj* gobj)
         u8 counter;
 
         counter_ptr = &lbl_804799D8.x1D[pnum];
+        (void) counter_ptr;
         counter = *counter_ptr;
         if (counter < 0x28) {
             *counter_ptr = counter + 1;
