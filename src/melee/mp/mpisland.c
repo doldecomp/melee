@@ -544,6 +544,7 @@ void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
         }
 
         mpisp = *arg1;
+        (void) mpisp;
         if (mpisp != NULL) {
             *arg1 = mpisp->next;
         } else {

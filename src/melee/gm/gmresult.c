@@ -265,6 +265,7 @@ void fn_80174468(u8 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
             loop_i = 0;
             loop_n++;
             loop_ptr = me->x44C[slot].x0;
+            (void) loop_ptr;
             do {
                 loop_val = *loop_ptr;
                 if (loop_val != 0) {

@@ -585,6 +585,7 @@ void mn_8022FEC8(HSD_GObj* arg0, HSD_JObj* arg1, u8 arg2, u8 arg3)
             if (arg3 == 0) {
                 frame =
                     (f32*) (base + 0x134 + (0xC * base[0x1DD + (arg2 << 1)]));
+                (void) frame;
             } else {
                 frame = (f32*) (base + 0x134 + (0xC * (arg3 - 1)));
             }
@@ -1140,6 +1141,7 @@ HSD_GObj* mn_80230E38(int arg0)
     }
 
     descs = (StaticModelDesc**) (mn_803EC600 + 0x1EC);
+    (void) descs;
     count_ptr = (u16*) (mn_803EC600 + 0x208);
     cursor_frames = (f32*) (mn_803EC600 + 0x10);
     data_curr = data8;

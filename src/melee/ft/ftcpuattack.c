@@ -222,6 +222,7 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
             diry = -list->x08 * fp->x34_scale.y;
         }
         scale = fp->x34_scale.y;
+        (void) scale;
         if (list->x14 * scale * halfRange > relPredY &&
             list->x10 * scale * halfRange < relPredY + x568 &&
             dirx * halfRange < relx + rangeF &&
@@ -429,6 +430,7 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
             diry = -list->x08 * fp->x34_scale.y;
         }
         scale = fp->x34_scale.y;
+        (void) scale;
         if ((list->x14 * scale + reach) * halfRange > relPredY &&
             list->x10 * scale * halfRange < relPredY + x568 &&
             dirx * halfRange < relx + rangeF &&
@@ -618,6 +620,7 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
             diry = list->x0C * fp->x34_scale.y;
         } else {
             dirx = -list->x0C * fp->x34_scale.y;
+            (void) dirx;
             diry = -list->x08 * fp->x34_scale.y;
         }
         scale = fp->x34_scale.y;

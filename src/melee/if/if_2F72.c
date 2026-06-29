@@ -281,6 +281,7 @@ void fn_802F7994(HSD_GObj* gobj)
             slot = 1;
         } else {
             cmp = ptr[3];
+            (void) cmp;
             ptr += 2;
             if (cmp == gobj) {
                 slot = 2;

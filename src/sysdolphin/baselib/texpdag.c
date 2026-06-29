@@ -281,6 +281,7 @@ int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list)
                         u8 dep_count2 = list[last].nb_dep;
                         deps2 = list[last].depend;
                         dep_entry2 = &list[l];
+                        (void) dep_entry2;
                         for (l = 0; l < (int) dep_count2; l++) {
                             if (*deps2 == dep_entry2) {
                                 break;

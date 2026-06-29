@@ -2224,6 +2224,7 @@ void grStadium_801D4548(Ground_GObj* gobj)
         if (temp_r0_3 <= yaku->x14) {
             float tmp;
             temp_r30 = temp_r31->u.stadium.xE8->hsd_obj;
+            (void) temp_r30;
             tmp = 0.95f * temp_r0_3 / yaku->x14 + 0.05F;
             HSD_JObjSetScaleY(temp_r30, tmp * temp_f31);
             temp_r4_8 = temp_r31->u.stadium.xD8;

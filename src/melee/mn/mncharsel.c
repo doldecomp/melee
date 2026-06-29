@@ -3735,6 +3735,7 @@ void fn_802633B0(HSD_GObj* gobj)
             tag->x8 = new_pos;
             page = (s32) (scroll_pos * 0.03125f);
             new_page = (s32) (new_pos * 0.03125f);
+            (void) new_page;
             if (new_pos > 0.0f) {
                 tag->x8 = 0.0f;
             }

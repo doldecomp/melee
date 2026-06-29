@@ -520,6 +520,7 @@ void fn_8024B2B0(HSD_GObj* arg0)
         return;
     }
     menu_data = mnSoundTest_804D6C40->user_data;
+    (void) menu_data;
     if (menu_data->unk8 < 1.0f) {
         menu_data->unk8 -= 0.02f;
         if (menu_data->unk8 <= 0.0f) {

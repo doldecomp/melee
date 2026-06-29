@@ -1807,6 +1807,7 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
         island_pos = island->x14;
         ex = island_pos.x;
         ey = island_pos.y;
+        (void) ey;
         ez = island_pos.z;
         if (ex < fp->x1A88.half_width + Stage_GetBlastZoneLeftOffset() ||
             ex > Stage_GetBlastZoneRightOffset() - data->half_width ||
@@ -1989,6 +1990,7 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
         island_pos = island->x8;
         ex = island_pos.x;
         ey = island_pos.y;
+        (void) ey;
         ez = island_pos.z;
         if (ex < fp->x1A88.half_width + Stage_GetBlastZoneLeftOffset() ||
             ex > Stage_GetBlastZoneRightOffset() - data->half_width ||
@@ -3267,6 +3269,7 @@ s32 ftCo_800A6D2C(Fighter* fp, Vec3* arg1)
             if (result != 0) {
                 fy = floor_pos.y;
                 fx = floor_pos.x;
+                (void) fx;
                 if (fy >= fp->cur_pos.y - data->x558) {
                     if (!ftCo_800A6700_inline0(fp, fx, fy)) {
                         dx = fx - fp->cur_pos.x;
@@ -5465,6 +5468,7 @@ void ftCo_800ABBA8(Fighter* fp)
         vf0 = dxx / v;
     }
     grav_ptr = &fp->co_attrs.grav;
+    (void) grav_ptr;
     g = *grav_ptr;
     if (g < 0.00001f && g > -0.00001f) {
         vf5 = 1000.0f;
@@ -6550,6 +6554,7 @@ void ftCo_800AE7AC(Fighter* fp, Vec3* arg1, int arg2)
             bottom = Stage_GetBlastZoneBottomOffset();
             sum_y = Stage_GetBlastZoneTopOffset() + bottom;
             cy = 0.5f * sum_y;
+            (void) cy;
             dir.x = cx - fp->cur_pos.x;
             dy = cy - fp->cur_pos.y;
             dir.y = dy;

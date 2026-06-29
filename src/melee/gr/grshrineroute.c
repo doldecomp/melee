@@ -968,6 +968,7 @@ void grShrineRoute_8020A21C(Ground_GObj* gobj)
                     f32 dx2 = dx * dx;
                     f32 dy2 = dy * dy;
                     dist_sq = dx2 + dy2;
+                    (void) dist_sq;
                 }
                 *dp = sqrtf(dist_sq);
             } else if (type == 3) {

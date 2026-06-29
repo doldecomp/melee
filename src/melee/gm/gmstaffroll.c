@@ -514,6 +514,7 @@ void fn_801AB200(HSD_GObj* gobj)
     }
 
     sq_x = vel_x * vel_x + 6400.0f;
+    (void) sq_x;
     vel_y = (f32) adj_val;
     sq_x = sqrtf(sq_x);
     vel_x = vel_x * 0.00038461538f * sq_x;

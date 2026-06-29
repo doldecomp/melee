@@ -440,6 +440,7 @@ void fn_80247510(HSD_GObj* gobj)
                 lbAudioAx_80024030(2);
                 data->x0[1]--;
                 data2 = mnVibration_804D6C28->user_data;
+                (void) data2;
                 cursor_jobj = data->cursor_gobj->hsd_obj;
                 jobj17 = data2->jobjs[17];
                 cursor_row = data->x0[1];

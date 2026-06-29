@@ -1145,6 +1145,7 @@ void hsd_803B4A2C(void)
     work_r27 = 0;
     do {
         work_r5 = (s32) * (lbl_80430C40 + *work_r28) / (s32) lbl_804D6398;
+        (void) work_r5;
         work_r3 = (u8) work_r5;
         scratch_r4_6 = hsd_804D79A0;
         if (scratch_r4_6 < &hsd_804D79A4[hsd_804D79A8]) {
@@ -1431,8 +1432,8 @@ s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
     base = HSD_804D2648_BUF;
     hsd_804D79A8 = arg4;
     hsd_804D79AC = 0;
+    hsd_804D79A4 = (hsd_804D79A0 = (u8*) arg3);
     hsd_804D79A0 = (u8*) arg3;
-    hsd_804D79A4 = (u8*) arg3;
     M2C_FIELD(base, s32*, 0x820) = 0;
     M2C_FIELD(base, s32*, 0x81C) = 0;
     M2C_FIELD(base, s32*, 0x818) = 0;
@@ -1773,8 +1774,7 @@ s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
         } else {
             longjmp((__jmp_buf*) base, 1);
         }
-        hsd_804D79B0 = 0;
-        hsd_804D79AC = 0;
+        hsd_804D79AC = (hsd_804D79B0 = 0);
     }
     if ((u8*) hsd_804D79A0 < &hsd_804D79A4[hsd_804D79A8]) {
         scratch_r3_20 = hsd_804D79A0;

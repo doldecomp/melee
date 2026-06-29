@@ -900,6 +900,7 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     enemy_idx = 0;
     for (;;) {
         enemy_kind = &arg2[enemy_idx];
+        (void) enemy_kind;
         if ((s32) (u8) enemy_kind[0] != 0x21) {
             if (arg1->x0.x8 & 8) {
                 if (arg1->x4C != NULL) {

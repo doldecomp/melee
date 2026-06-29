@@ -2163,6 +2163,7 @@ float ftColl_80079AB0(Fighter* fp, HitCapsule* hit, int unk_count, float arg3,
         result = decay * result;
         result = ftd->x11C * result + ftd->x120;
         x24_f = ftColl_804D8314 * (float) (u32) hit->x24;
+        (void) x24_f;
         result = x24_f * result + (float) (u32) hit->x2C;
         result = arg3 * result;
         result = attack * result;
@@ -2229,6 +2230,7 @@ float ftColl_80079C70(Fighter* fp, Fighter* attacker, HitCapsule* hit,
         result = decay * result;
         result = ftd->x11C * result + ftd->x120;
         x24_f = ftColl_804D8314 * (float) (u32) hit->x24;
+        (void) x24_f;
         result = x24_f * result + (float) (u32) hit->x2C;
         result = arg3 * result;
         result = attack * result;
@@ -2459,6 +2461,7 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
                 result = decay * result;
                 result = ftd->x11C * result + ftd->x120;
                 x24_f = ftColl_804D8314 * (float) (u32) hit->x24;
+                (void) x24_f;
                 result = x24_f * result + (float) (u32) hit->x2C;
                 result = stage * result;
                 result = attack * result;

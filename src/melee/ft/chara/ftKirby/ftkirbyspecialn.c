@@ -2694,6 +2694,7 @@ void ftKb_EatWait_IASA(Fighter_GObj* gobj)
             block_26:
                 fp2 = GET_FIGHTER(gobj);
                 stickX = fp2->input.lstick.x;
+                (void) stickX;
                 absX = ABS(stickX);
                 if (absX < ((ftKb_DatAttrs*) fp2->dat_attrs)
                                ->specialn_x_axis_range_walk)
@@ -2826,6 +2827,7 @@ void ftKb_SpecialAirNCaptureWait_IASA(Fighter_GObj* gobj)
             block_26:
                 fp3 = getFighter(gobj2);
                 stickX = fp3->input.lstick.x;
+                (void) stickX;
                 da = fp3->dat_attrs;
                 if (stickX < 0.0f) {
                     absX = -stickX;

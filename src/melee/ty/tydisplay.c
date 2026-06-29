@@ -560,8 +560,8 @@ void _tyDisplay_80319540(s32 arg0)
         remainder = count % (s8) cfg->x75;
     }
 
+    row = (col = 0);
     col = 0;
-    row = 0;
     for (i = 0; i < count; i++) {
         if (i == 0) {
             grid->pos[i].x = 0.0f;
@@ -631,8 +631,8 @@ void _tyDisplay_80319540(s32 arg0)
                 sort[mid] = tmp;
             }
 
+            j = (pivot = 0);
             pivot = 0;
-            j = 0;
             for (n = 1; n2 >= n; n++) {
                 if (sort[n].val > sort[0].val) {
                     pivot += 1;

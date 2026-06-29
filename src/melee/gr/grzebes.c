@@ -434,6 +434,7 @@ void grZebes_801D881C(HSD_GObj* gobj)
             gp->gv.zebes5.xF6 = (s16) (gp->gv.zebes5.xF6 + 1);
             divisor = grZe_804D6990->x10;
             eq_counter = gp->gv.zebes5.xF6;
+            (void) eq_counter;
             spawn_phase = eq_counter / divisor;
             if (eq_counter % divisor == 0) {
                 s32 mirror = 6 - spawn_phase;
@@ -980,6 +981,7 @@ void grZebes_801D99E0(HSD_GObj* gobj)
 
             delay_max =
                 grZe_804D6990->xA0_entries[gp->gv.zebes5.xC4].x4_delay_max;
+            (void) delay_max;
             delay_min =
                 grZe_804D6990->xA0_entries[gp->gv.zebes5.xC4].x2_delay_min;
             if (delay_max > delay_min) {
@@ -2002,6 +2004,7 @@ s32 grZebes_801DBB60(HSD_GObj* yaku)
             grZe_BubbleEntry* bp = bubbles;
 
             inv_len_sq = 1.0f / (dx * dx + dy * dy);
+            (void) inv_len_sq;
 
             for (k = 0; k < 20; k++, bp++) {
                 if (bp->x00_active == 1 && k != 0 && k != 6) {

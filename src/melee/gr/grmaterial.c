@@ -335,6 +335,7 @@ static void fn_801C8EF8(HSD_MObj* mobj, u32 rendermode)
     HSD_TObjSetupVolatileTev(tobj, mobj_rendermode);
 
     gp = HSD_GObj_804D7814->user_data;
+    (void) gp;
     if (grMaterial_GetOverlay(gp)->x7C_color_enable || gp->x10_flags.b6) {
         sp_cnst = *(HSD_TECnst*) (base + 0xC4);
         sp_tevdesc = *(HSD_TevDesc*) (base + 0x50);

@@ -1087,6 +1087,7 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
 
                 target_y = gp->gv.bigblue.data[i].xC.z;
                 y_diff = cur_pos.y - target_y;
+                (void) y_diff;
                 if (y_diff < 0.0f) {
                     y_diff = -y_diff;
                 }
@@ -1701,6 +1702,7 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
         }
 
         target_y = *(f32*) (bp + 0xD0);
+        (void) target_y;
         diff_y = pos.y - target_y;
         if (diff_y < 0.0f) {
             diff_y = -diff_y;
@@ -1992,6 +1994,7 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
                 speed_range =
                     (grBb_804D69C8->x100 - grBb_804D69C8->xFC) / 0.1f;
                 speed = randi(speed_range) * 0.1f;
+                (void) speed;
                 if (speed == 0.0f) {
                     speed = grBb_804D69C8->xFC;
                 }
@@ -3052,6 +3055,7 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
                                   JOBJ_HIDDEN);
 
             jobj = ((HSD_JObj**) gp->gv.bigblue.xC8)[line_idx];
+            (void) jobj;
 
             HSD_JObjSetTranslate(jobj, (Vec3*) (car + 0xE0));
 
@@ -4483,6 +4487,7 @@ bool grBigBlue_801EEF00(Ground_GObj* gobj, s32 index)
 
         target = *(f32*) (gp + offset + 0xD8);
         abs_speed = *(f32*) (gp + offset + 0xFC);
+        (void) abs_speed;
         if (abs_speed < 0.0F) {
             abs_speed = -abs_speed;
         }

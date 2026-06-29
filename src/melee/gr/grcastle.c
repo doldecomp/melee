@@ -619,6 +619,7 @@ void grCastle_801CDC44(Ground_GObj* gobj)
                 }
                 cur = gp->gv.castle8.plat[0].pos;
                 min_val = grCs_804D6970->x14;
+                (void) min_val;
                 if ((cur - min_val) < speed) {
                     gp->gv.castle8.plat[0].pos = min_val;
                 } else {

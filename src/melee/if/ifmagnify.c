@@ -372,6 +372,7 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
                 }
             }
             y_inv = 1.0f - y_blend;
+            (void) y_inv;
             for (j = 0; j < 4; j++) {
                 if (world_pos.y > Stage_GetCamBoundsTopOffset()) {
                     y_class = 0.0f;
