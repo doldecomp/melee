@@ -2542,8 +2542,8 @@ check_done2:
     if (cam->x2BC == 1.0f) {
         target_dx = cam->transform.target_position.x -
                     cam->transform.target_interest.x;
-        target_dy = cam->transform.target_position.y -
-                    cam->transform.target_interest.y;
+        target_dy = cam->transform.target_position.y;
+        target_dy -= cam->transform.target_interest.y;
         target_dz = cam->transform.target_position.z -
                     cam->transform.target_interest.z;
         cam->x2C0 =
