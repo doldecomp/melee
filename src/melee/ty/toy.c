@@ -2783,19 +2783,19 @@ void _Toy_80309404(HSD_GObj* gobj)
         u8 pad2[0x10];
     } eye_pad;
     Vec3 eye_pos;
-    Vec3 transition_eye;
-    Vec3 transition_interest;
     HSD_CObj* cobj;
+    Vec3 transition_interest;
+    Vec3 transition_eye;
     Toy26B8* base;
     ToyED8Data* ed8;
     Toy6E68* state;
-    ToyAnimState* anim;
     ToyCameraControl* ed4;
+    ToyAnimState* anim;
     f32 dist;
     f32 tmp;
-    f32 rotate_update;
-    f32 movement_update;
     f32 zoom_update;
+    f32 movement_update;
+    f32 rotate_update;
     u32 trigger;
     u32 button;
     s32 sign;
@@ -5704,22 +5704,26 @@ void _Toy_80310B48(HSD_GObj* gobj)
         lbAudioAx_80024030(1);
         Toy_80311960();
         valptr = (s16*) editor;
-        i = 0;
-        do {
-            if (valptr[3] != 0) {
-                Toy_80305918((s8) i, 0, 0);
-                buttons = Toy_80305B88();
-                if (buttons & 0x1000) {
-                    _Toy_803053C4(i, (s32) valptr[3], 0);
-                } else {
-                    _Toy_803053C4(i, (s32) valptr[3], 1);
+        {
+            s32 slot;
+
+            slot = 0;
+            do {
+                if (valptr[3] != 0) {
+                    Toy_80305918(slot, 0, 0);
+                    buttons = Toy_80305B88();
+                    if (buttons & 0x1000) {
+                        _Toy_803053C4(slot, (s32) valptr[3], 0);
+                    } else {
+                        _Toy_803053C4(slot, (s32) valptr[3], 1);
+                    }
+                } else if (slot == 2) {
+                    Toy_80305918(slot, 0, 0);
                 }
-            } else if (i == 2) {
-                Toy_80305918((s8) i, 0, 0);
-            }
-            i += 1;
-            valptr += 1;
-        } while (i < 9);
+                slot += 1;
+                valptr += 1;
+            } while (slot < 9);
+        }
         Toy_80305918(0, 1, 0);
         Toy_80305918(1, 1, 0);
         Toy_80305918(8, 1, 0);
@@ -5795,15 +5799,13 @@ skip_decrement:
         DevText_Erase(_Toy_sbss_804D6E98);
         DevText_SetCursorXY(_Toy_sbss_804D6E98, 0, 0);
         i = 0;
-        valptr = (s16*) editor;
         do {
             if (i == (s8) editor->selected_slot) {
-                _Toy_803109A0(i, (s32) valptr[3], 1);
+                _Toy_803109A0(i, (s32) editor->values[i], 1);
             } else {
-                _Toy_803109A0(i, (s32) valptr[3], 0);
+                _Toy_803109A0(i, (s32) editor->values[i], 0);
             }
             i += 1;
-            valptr += 1;
         } while (i < 9);
     }
 }
@@ -6120,7 +6122,7 @@ void _Toy_80312050(HSD_GObj* gobj, int code)
     UNUSED u64 framepad;
     Vec3 interest;
     Vec3 sp98;
-    UNUSED u8 pad[16];
+    UNUSED u8 pad[12];
     Mtx viewMtx;
     Vec3 up;
     Vec3 left;
@@ -6130,7 +6132,6 @@ void _Toy_80312050(HSD_GObj* gobj, int code)
     TyViewData* data;
     u8 color_ff;
     u8 color_00;
-    PAD_STACK(4);
 
     data = _Toy_sbss_804D6E6C;
     cobj = HSD_CObjGetCurrent();

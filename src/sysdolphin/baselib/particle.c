@@ -97,15 +97,17 @@ typedef struct {
     /* 0x04 */ void (*callback)(void* dst, s32 x, s32 y, s32 val, void* self);
 } GlyphEntry;
 
+typedef struct {
+    s32 count;
+    u32 color;
+} DispBar;
+
 typedef struct _DispItem {
     /* 0x00 */ struct _DispItem* next;
     /* 0x04 */ s32 type;
     /* 0x08 */ union {
         char text[128];
-        struct {
-            s32 count;
-            u32 color;
-        } bars[1];
+        DispBar bars[1];
         u8 gradient[8];
     } content;
 } DispItem;
@@ -829,6 +831,17 @@ static const u32 lbl_804DE8E0 = 0xFFFFFFFF;
 // @TODO: Currently 89.78% match - needs minor control flow and register fixes
 void hsd_8039254C(void)
 {
+    s32 col_pos;
+    s32 first;
+    f32 line;
+    HSD_SList* event_node;
+    s32 type;
+    s32 char_count;
+    s32 total_ticks;
+    DispItem* bar_ptr;
+    f32 bar_y;
+    f32 bar_x;
+    f32 t2;
     GXColor default_col;
     GXColor bar_col;
     GXColor bg_col3;
@@ -842,18 +855,6 @@ void hsd_8039254C(void)
     GXColor* p_bg_col1 = &bg_col1;
     GXColor* p_txt_col = &txt_col;
     GXColor* p_bg_col2 = &bg_col2;
-    s32 col_pos;
-    s32 first;
-    f32 line;
-    HSD_SList* event_node;
-    s32 type;
-    s32 char_count;
-    s32 total_ticks;
-    DispItem* bar_ptr;
-    f32 bar_y;
-    f32 bar_x;
-    f32 t2;
-    PAD_STACK(8);
 
     col_pos = 60;
     first = 1;
@@ -891,11 +892,14 @@ void hsd_8039254C(void)
                                 char_count++;
                             } else {
                                 j++;
-                                switch ((s8) item->content.text[j]) {
-                                case 'c':
-                                case 'C':
-                                    j += 6;
-                                    break;
+                                {
+                                    char* tmp = item->content.text;
+                                    switch ((s8) tmp[j]) {
+                                    case 'c':
+                                    case 'C':
+                                        j += 6;
+                                        break;
+                                    }
                                 }
                             }
                             j++;
@@ -915,7 +919,7 @@ void hsd_8039254C(void)
                 txt_col = default_col;
                 hsd_80391AC8(item->content.text, p_txt_col,
                              (f32) (col_pos * 10), 10.0F * line);
-                col_pos = 2 + char_count + col_pos;
+                col_pos = col_pos + (2 + char_count);
                 break;
             case 2:
                 if (col_pos != 0) {
@@ -938,7 +942,7 @@ void hsd_8039254C(void)
                     s32 count;
                     while ((count = bar_ptr->content.bars[0].count) > 0) {
                         total_ticks += count;
-                        bar_ptr = (DispItem*) ((u8*) bar_ptr + 8);
+                        bar_ptr = (DispItem*) &bar_ptr->content.bars[1];
                     }
                 }
                 if (total_ticks > 0) {
@@ -953,20 +957,23 @@ void hsd_8039254C(void)
                     hsd_80391A04(10.0F, 10.0F, 12);
                     bar_y = (10.0F * line) + 2.0F;
                     bar_x = 0.0F;
-                    bar_ptr = item;
                     {
                         s32 count;
-                        while ((count = bar_ptr->content.bars[0].count) > 0) {
+                        DispItem* bar_draw_ptr = item;
+                        while ((count = bar_draw_ptr->content.bars[0].count) >
+                               0) {
                             f32 prev_x;
                             prev_x = bar_x;
                             bar_col =
-                                *(GXColor*) &bar_ptr->content.bars[0].color;
+                                *(GXColor*) &bar_draw_ptr->content.bars[0].color;
                             bar_x +=
                                 (600.0F / (f32) total_ticks) * (f32) count;
                             hsd_80391F28(p_bar_col, prev_x, bar_y, bar_x,
                                          bar_y,
-                                         (f32) bar_ptr->content.bars[0].count);
-                            bar_ptr = (DispItem*) ((u8*) bar_ptr + 8);
+                                         (f32) bar_draw_ptr->content.bars[0]
+                                             .count);
+                            bar_draw_ptr =
+                                (DispItem*) &bar_draw_ptr->content.bars[1];
                         }
                     }
                     col_pos = 60;
@@ -4167,11 +4174,12 @@ void* fn_80397814(void* arg)
     /* Clear display list */
     {
         ExcptNode** head = &sp->xD0;
+        ExcptNode* next;
         ExcptNode* cur;
         keybuf = (u32*) head;
         cur = *head;
         while (cur != NULL) {
-            ExcptNode* next = cur->next;
+            next = cur->next;
             cur->next = NULL;
             cur = next;
         }

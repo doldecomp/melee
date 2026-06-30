@@ -60,15 +60,6 @@ void pl_80038144(HSD_GObj*, HSD_GObj*, int, UNK_T, int, int, int);
 int ftColl_803C0C40[] = { 141, 142, 143 };
 int ftColl_803C0C4C[] = { 107, 108, 109 };
 
-UNUSED static int ftColl_803C0CAC[] = {
-    1000, 1002, 1001, 1004, 1145, 1005, -1, -1, -1,
-    1000, 1000, -1,   -1,   1046, -1,   -1, 0,
-};
-UNUSED static char ftColl_803C0CF0[] =
-    "in ftCollisionSetHitStatus illegal parts!\n";
-UNUSED static char assert_msg_1[] = "fighter hit num over!\n";
-UNUSED static char assert_msg_2[] = "fighter dynamics hit num over!\n";
-
 struct UnkSize320_t {
     u8 x0[0x320];
 };
@@ -239,7 +230,7 @@ bool ftColl_80076640(Fighter* fp, float* dmg)
     }
     if (!fp->x221C_b4) {
         if (*dmg > 500) {
-            HSD_ASSERTREPORT(0xB7, NULL, "attack power over 500!! %f\n", *dmg);
+            HSD_ASSERTREPORT(0xB7, 0, "attack power over 500!! %f\n", *dmg);
         }
         fp->dmg.x1838_percentTemp += *dmg;
         if (env_dmg > fp->dmg.x183C_applied) {
@@ -264,7 +255,7 @@ void ftColl_80076764(int arg0, enum_t arg1, Fighter_GObj* arg2,
         entry->size_of_xC = arg3->count;
         ++dmg_log0_idx;
     } else {
-        HSD_ASSERTREPORT(0xF9, NULL, "damage log over %d!!\n",
+        HSD_ASSERTREPORT(0xF9, 0, "damage log over %d!!\n",
                          ARRAY_SIZE(dmg_log0));
     }
 }
@@ -502,19 +493,6 @@ void ftColl_80076CBC(Fighter* fp0, HitCapsule* hit0, Fighter* fp1)
     }
 }
 
-struct ftCollSFX {
-    int x0;
-    int x4;
-    int x8;
-    int xC;
-    int x10;
-    int x14;
-};
-
-struct ftCollSFX lbl_803C0C40 = {
-    0x8D, 0x8E, 0x8C, 0x6B, 0x6C, 0x6D,
-};
-
 /// @todo #ftColl_80076808
 inline void inlineB0(Fighter* fp0, HitCapsule* hitbox, Fighter* fp1, int arg3)
 {
@@ -558,7 +536,7 @@ static inline bool inlineB2(Fighter* fp1, float dmg, int var_r24_3)
     int var_r0_3;
     if (fp1->x221C_b4 == 0) {
         if (dmg > 500.0f) {
-            HSD_ASSERTREPORT(0xB7, NULL, "attack power over 500!! %f", dmg);
+            HSD_ASSERTREPORT(0xB7, 0, "attack power over 500!! %f\n", dmg);
         }
         fp1->dmg.x1838_percentTemp =
             (float) (fp1->dmg.x1838_percentTemp + dmg);
@@ -593,7 +571,7 @@ bool ftColl_80076ED8(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
                      HitCapsule* hit1)
 {
     float dmg = inlineB3(fp0, hit0, fp1);
-    PAD_STACK(32);
+    PAD_STACK(24);
     if (inlineB1(hit0)) {
         if (dmg_log0_idx == 0 && !fp1->dmg.x189C_unk_num_frames) {
             if (checkTipLog(fp1, hit0) == HitCapsule_Disabled) {
@@ -613,8 +591,12 @@ bool ftColl_80076ED8(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
                     if (len == 0 && count != 0) {
                         len = 1;
                     }
-                    if ((int) temp_dmg > fp1->dmg.x1840) {
-                        fp1->dmg.x1840 = temp_dmg;
+                    {
+                        int temp_int = temp_dmg;
+                        int temp_int2 = temp_dmg;
+                        if (temp_int > fp1->dmg.x1840) {
+                            fp1->dmg.x1840 = temp_int2;
+                        }
                     }
                     if (fp0->x1064_thrownHitbox.owner != NULL) {
                         fp = GET_FIGHTER(fp0->x1064_thrownHitbox.owner);
@@ -634,7 +616,7 @@ bool ftColl_80076ED8(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
                             entry->size_of_xC = len;
                             ++dmg_log1_idx;
                         } else {
-                            HSD_ASSERTREPORT(0x110, NULL, "tip log over %d!! ",
+                            HSD_ASSERTREPORT(0x110, 0, "tip log over %d!!\n",
                                              ARRAY_SIZE(dmg_log1));
                         }
                     }
@@ -645,7 +627,16 @@ bool ftColl_80076ED8(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
             }
         }
     } else {
-        int int_dmg = getEnvDmg(dmg);
+        int int_dmg;
+        if (dmg) {
+            if ((int) dmg) {
+                int_dmg = dmg;
+            } else {
+                int_dmg = 1;
+            }
+        } else {
+            int_dmg = 0;
+        }
 
         dmg_log1_idx = 0;
         {
@@ -700,8 +691,8 @@ bool ftColl_80076ED8(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
                             damageLog2->size_of_xC = len;
                             dmg_log0_idx++;
                         } else {
-                            HSD_ASSERTREPORT(0xe3, NULL,
-                                             "damage log over %d!! ",
+                            HSD_ASSERTREPORT(0xe3, 0,
+                                             "damage log over %d!!\n",
                                              ARRAY_SIZE(dmg_log1));
                         }
                         inner_ret = true;
@@ -720,6 +711,15 @@ bool ftColl_80076ED8(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
     }
     return false;
 }
+
+UNUSED static int ftColl_803C0CAC[] = {
+    1000, 1002, 1001, 1004, 1145, 1005, -1, -1, -1,
+    1000, 1000, -1,   -1,   1046, -1,   -1, 0,
+};
+UNUSED static char ftColl_803C0CF0[] =
+    "in ftCollisionSetHitStatus illegal parts!\n";
+UNUSED static char assert_msg_1[] = "fighter hit num over!\n";
+UNUSED static char assert_msg_2[] = "fighter dynamics hit num over!\n";
 
 void ftColl_80077464(Item* item, HitCapsule* hit, Fighter* fp)
 {
@@ -1112,8 +1112,8 @@ bool ftColl_80077C60(Item* item, HitCapsule* hit, Fighter* fp,
                 item->xC34_damageDealt = 1;
                 break;
             }
+            pl_8003E17C(fp->player_id, fp->x221F_b4, item->entity);
         }
-        pl_8003E17C(fp->player_id, fp->x221F_b4, item->entity);
         return false;
     }
 
@@ -1160,12 +1160,16 @@ bool ftColl_80077C60(Item* item, HitCapsule* hit, Fighter* fp,
 
                         half_raw = int_raw / 2;
                         half_raw_f = (float) half_raw;
-                        if (half_raw_f == 0.0f && int_raw != 0) {
+                        if (!half_raw_f && int_raw != 0) {
                             half_raw_f = 1.0f;
                         }
 
-                        if ((int) f4 > fp->dmg.x1840) {
-                            fp->dmg.x1840 = (int) f4;
+                        {
+                            int f4_int = (int) f4;
+                            int f4_int2 = (int) f4;
+                            if (f4_int > fp->dmg.x1840) {
+                                fp->dmg.x1840 = f4_int2;
+                            }
                         }
 
                         {
@@ -1184,8 +1188,8 @@ bool ftColl_80077C60(Item* item, HitCapsule* hit, Fighter* fp,
                                 entry->size_of_xC = (size_t) half_raw_f;
                                 dmg_log1_idx++;
                             } else {
-                                HSD_ASSERTREPORT(0x110, NULL,
-                                                 "tip log over %d!! ",
+                                HSD_ASSERTREPORT(0x110, 0,
+                                                 "tip log over %d!!\n",
                                                  ARRAY_SIZE(dmg_log1));
                             }
                         }
@@ -1199,13 +1203,14 @@ bool ftColl_80077C60(Item* item, HitCapsule* hit, Fighter* fp,
         }
 
         {
+            DmgLogEntry* entry;
             bool inner_ret;
+            bool should_log;
             int mode;
 
-            dmg_log1_idx = 0;
+            dmg_log1_idx = (mode = 0);
             inner_ret = false;
 
-            mode = 0;
             if (hit->x41_b5) {
                 mode = 5;
             }
@@ -1217,7 +1222,8 @@ bool ftColl_80077C60(Item* item, HitCapsule* hit, Fighter* fp,
                 item->xC34_damageDealt = (int) scaled_dmg;
                 item->xCF4_fighterGObjUnk = fp->gobj;
 
-                vel_x = item->x40_vel.x;
+                vel_x_mag = item->x40_vel.x;
+                vel_x = vel_x_mag;
                 if (vel_x < 0.0f) {
                     vel_x_mag = -vel_x;
                 } else {
@@ -1243,7 +1249,17 @@ bool ftColl_80077C60(Item* item, HitCapsule* hit, Fighter* fp,
             if (fp->x1988 == 0 && fp->x198C == 0 && !fp->x221D_b6 &&
                 hit2->state == HitCapsule_Disabled)
             {
-                int dmg_count = getEnvDmg(scaled_dmg);
+                int dmg_count;
+
+                if (scaled_dmg) {
+                    if ((int) scaled_dmg) {
+                        dmg_count = scaled_dmg;
+                    } else {
+                        dmg_count = 1;
+                    }
+                } else {
+                    dmg_count = 0;
+                }
 
                 if (fp->x221C_b4) {
                     fp->dmg.x1834 -= scaled_dmg;
@@ -1255,25 +1271,25 @@ bool ftColl_80077C60(Item* item, HitCapsule* hit, Fighter* fp,
 
                 if (!fp->x221C_b4) {
                     if (scaled_dmg > 500.0f) {
-                        HSD_ASSERTREPORT(0xB7, NULL,
-                                         "attack power over 500!! %f",
+                        HSD_ASSERTREPORT(0xB7, 0,
+                                         "attack power over 500!! %f\n",
                                          scaled_dmg);
                     }
                     fp->dmg.x1838_percentTemp += scaled_dmg;
                     if (dmg_count > fp->dmg.x183C_applied) {
                         fp->dmg.x183C_applied = dmg_count;
                     }
-                    inner_ret = true;
+                    should_log = true;
                 } else {
-                    inner_ret = false;
+                    should_log = false;
                 }
 
-                if (inner_ret) {
+                if (should_log) {
                     FighterKind kind;
                     HSD_GObj* entity = item->entity;
                     kind = (FighterKind) item->kind;
                     if (dmg_log0_idx < 20U) {
-                        DmgLogEntry* entry = &dmg_log0[dmg_log0_idx];
+                        entry = &dmg_log0[dmg_log0_idx];
                         entry->x0 = 2;
                         entry->kind = kind;
                         entry->gobj = entity;
@@ -1284,7 +1300,7 @@ bool ftColl_80077C60(Item* item, HitCapsule* hit, Fighter* fp,
                         entry->size_of_xC = (size_t) raw_dmg;
                         dmg_log0_idx++;
                     } else {
-                        HSD_ASSERTREPORT(0xE3, NULL, "damage log over %d!! ",
+                        HSD_ASSERTREPORT(0xE3, 0, "damage log over %d!!\n",
                                          ARRAY_SIZE(dmg_log1));
                     }
                     inner_ret = true;
@@ -2934,8 +2950,7 @@ void ftColl_8007B128(Fighter_GObj* fighter_gobj, int bone_id,
         }
     }
 
-    HSD_ASSERTREPORT(0x888, NULL,
-                     "in ftCollisionSetHitStatus illegal parts!\n");
+    HSD_ASSERTREPORT(0x888, 0, ftColl_803C0CF0);
 }
 
 /// @todo @p shield is #AbsorbDesc, and #AbsorbDesc is part of #ShieldDesc
@@ -2988,34 +3003,35 @@ void ftColl_8007B320(Fighter_GObj* gobj)
     PAD_STACK(8);
 
     if (x30->count > 0xF) {
-        HSD_ASSERTREPORT(0x8C9, NULL, "too many hurt capsules\n");
+        HSD_ASSERTREPORT(0x8C9, 0, assert_msg_1);
     }
 
     fp->hurt_capsules_len = x30->count;
     for (i = 0; i < (u32) x30->count; i++) {
+        FighterHurtCapsule* hurt = &fp->hurt_capsules[i];
         ftHurtboxInit* init = &x30->inits[i];
-        fp->hurt_capsules[i].capsule.bone_idx = init->bone_idx;
-        fp->hurt_capsules[i].height = init->height;
-        fp->hurt_capsules[i].is_grabbable = init->is_grabbable;
-        fp->hurt_capsules[i].capsule.state = HurtCapsule_Enabled;
-        fp->hurt_capsules[i].capsule.bone =
-            fp->parts[fp->hurt_capsules[i].capsule.bone_idx].joint;
-        fp->hurt_capsules[i].capsule.a_offset = init->a_offset;
-        fp->hurt_capsules[i].capsule.b_offset = init->b_offset;
-        fp->hurt_capsules[i].capsule.scale = init->scale;
+        hurt->capsule.bone_idx = init->bone_idx;
+        hurt->height = init->height;
+        hurt->is_grabbable = init->is_grabbable;
+        hurt->capsule.state = HurtCapsule_Enabled;
+        hurt->capsule.bone = fp->parts[hurt->capsule.bone_idx].joint;
+        hurt->capsule.a_offset = init->a_offset;
+        hurt->capsule.b_offset = init->b_offset;
+        hurt->capsule.scale = init->scale;
     }
 
     if (dyn->x4 > 0xB) {
-        HSD_ASSERTREPORT(0x8DF, NULL, "too many x1670 entries\n");
+        HSD_ASSERTREPORT(0x8DF, 0, assert_msg_2);
     }
 
     fp->x166C = dyn->x4;
     for (i = 0; i < (u32) dyn->x4; i++) {
+        Fighter_x1670_t* dst = &fp->x1670[i];
         struct ftData_x38* init = &dyn->x8[i];
-        fp->x1670[i].x24 = init->x0;
-        fp->x1670[i].jobj = fp->parts[init->x0].joint;
-        fp->x1670[i].v1 = init->x4;
-        fp->x1670[i].v2 = init->x10;
+        dst->x24 = init->x0;
+        dst->jobj = fp->parts[init->x0].joint;
+        dst->v1 = init->x4;
+        dst->v2 = init->x10;
     }
 }
 
@@ -3430,7 +3446,7 @@ void ftColl_8007BE3C(Fighter_GObj* gobj)
 
     if (!fp->x221C_b4) {
         if (fp->dmg.x1898 > 500.0f) {
-            HSD_ASSERTREPORT(0xB7, NULL, "attack power over 500!! %f\n",
+            HSD_ASSERTREPORT(0xB7, 0, "attack power over 500!! %f\n",
                              fp->dmg.x1898);
         }
         fp->dmg.x1838_percentTemp += fp->dmg.x1898;

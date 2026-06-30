@@ -1137,6 +1137,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
 }
 #pragma pop
 
+static u8 mnNameNew_803EE35C_pad[0x4F4] = { 0 };
 static char mnNameNew_803EE35C[] = "Can't get user_data.\n";
 static char mnNameNew_803EE374[] = "mnnamenew.c";
 static char mnNameNew_803EE380[] = "user_data";
@@ -1373,6 +1374,16 @@ s32 mnNameNew_8023D130(GlyphVariantEntry* arg0, u8 arg1, u8 arg2, s32 arg3)
 
 extern const Vec3 mnNameNew_803B8528;
 
+static inline void mnNameNew_GlyphVariantSetup_InitJobjs(GlyphVariantEntry* user_data,
+                                                         HSD_JObj* jobj)
+{
+    s32 i;
+
+    for (i = 0; i < 7; i++) {
+        lb_80011E24(jobj, &user_data->jobjs[i], i, -1);
+    }
+}
+
 s32 mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, u8 arg2)
 {
     f32 base_y;
@@ -1410,10 +1421,7 @@ s32 mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, u8 arg2)
     GObj_InitUserData(gobj, 0U, fn_8023D0F8, user_data);
 
     user_data->selection = mn_804A04F0.confirmed_selection;
-    i = 0;
-    for (; i < 7; i++) {
-        lb_80011E24(jobj, &user_data->jobjs[i], i, -1);
-    }
+    mnNameNew_GlyphVariantSetup_InitJobjs(user_data, jobj);
 
     sp2C = mnNameNew_803B8528;
 
@@ -1451,7 +1459,7 @@ s32 mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, u8 arg2)
         variant = HSD_JObjLoadJoint(variant_desc[0]);
         HSD_JObjAddAnimAll(variant, variant_desc[1], variant_desc[2],
                            variant_desc[3]);
-        HSD_JObjReqAnimAll(variant, (f32) (i == user_data->selection));
+        HSD_JObjReqAnimAll(variant, (f32) (user_data->selection == i));
         HSD_JObjAnimAll(variant);
         HSD_JObjSetTranslateX(variant, dx * (f32) (i / 2));
         HSD_JObjSetTranslateY(variant, dy * (f32) (i % 2));

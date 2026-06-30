@@ -1138,7 +1138,6 @@ void fn_80161C90(MatchEnd* arg0, int arg1, u16* arg2)
     s32 flag;
 
     PAD_STACK(8);
-
     s->unk0 = (s->unk0 + p->self_destructs > 0xFFFF)
                   ? 0xFFFF
                   : s->unk0 + p->self_destructs;
@@ -1156,13 +1155,20 @@ void fn_80161C90(MatchEnd* arg0, int arg1, u16* arg2)
         s->unk18 = p->x4C;
     }
     s->unk1A = (s->unk1A + 1 > 0xFFFF) ? 0xFFFF : s->unk1A + 1;
-    if (arg1 == fn_80165548(arg0, fn_80165418(arg0), fn_801654A0(arg0))) {
-        flag = 1;
-    } else {
-        flag = 0;
-    }
-    if (flag != 0) {
-        s->unk1C = (s->unk1C + 1 > 0xFFFF) ? 0xFFFF : s->unk1C + 1;
+    {
+        s32 fn_801654A0();
+        s32 fn_80165418();
+        s32 fn_80165548();
+        if (arg1 == fn_80165548(arg0, fn_80165418(arg0),
+                                  fn_801654A0(arg0)))
+        {
+            flag = 1;
+        } else {
+            flag = 0;
+        }
+        if (flag != 0) {
+            s->unk1C = (s->unk1C + 1 > 0xFFFF) ? 0xFFFF : s->unk1C + 1;
+        }
     }
     if (arg1 == fn_80161154(arg0)) {
         flag = 1;
@@ -1182,11 +1188,14 @@ void fn_80161C90(MatchEnd* arg0, int arg1, u16* arg2)
     if (arg0->player_standings[1].slot_type != 3) {
         count += 1;
     }
-    if (arg0->player_standings[2].slot_type != 3) {
-        count += 1;
-    }
-    if (arg0->player_standings[3].slot_type != 3) {
-        count += 1;
+    {
+        MatchPlayerData* pp = &arg0->player_standings[2];
+        if (pp->slot_type != 3) {
+            count += 1;
+        }
+        if (pp[1].slot_type != 3) {
+            count += 1;
+        }
     }
     count = s->unk24 + count;
     if (count > 0xFFFF) {
@@ -2451,8 +2460,13 @@ void gm_80164910(int arg0)
 
 void gm_80164A0C(u8 arg0)
 {
-    u16* unlockable_character_bitfield = gmMainLib_8015ED8C();
-    u8 idx = fn_801605EC(lbl_803B78A4[arg0]);
+    u16* unlockable_character_bitfield;
+    u8 idx;
+    u8 internal_id;
+
+    unlockable_character_bitfield = gmMainLib_8015ED8C();
+    internal_id = lbl_803B78A4[arg0];
+    idx = fn_801605EC(internal_id);
     if (idx != NUM_UNLOCKABLE_CHARACTERS) {
         *unlockable_character_bitfield &= (u16) ~(1ULL << idx);
     }
@@ -4767,17 +4781,16 @@ long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
 
 void fn_80169C54(s8 arg0, s8 arg1)
 {
-    s32* bp;
     struct lbl_8046B488_t* st;
+    s32* bp;
     s8* pc;
     s8* cp;
     s32 buf[7];
     s32 n;
-    s32 count;
     s32 j;
     s32 k;
     s32 p;
-    s8 ch;
+    s32 ch;
 
     PAD_STACK(8);
 
@@ -4795,6 +4808,7 @@ void fn_80169C54(s8 arg0, s8 arg1)
     for (j = 0; j < 3; j++) {
         if ((s32) *pc == 4) {
             if (st->xB == 0) {
+                s32 count;
                 count = gm_80169238_noinline(4U);
                 for (k = 0; k < count; k++) {
                     bp[k] = k;
@@ -4818,7 +4832,7 @@ void fn_80169C54(s8 arg0, s8 arg1)
         cp = (s8*) st;
         do {
             ch = *cp;
-            if (ch != 0x21 && ch != 4) {
+            if (0x21 != ch && ch != 4) {
                 p = Player_800325C8((CharacterKind) ch, 0);
                 if ((p != -1) && (p != 4)) {
                     for (k = 0; k < n; k++) {

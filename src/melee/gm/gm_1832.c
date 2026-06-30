@@ -286,32 +286,31 @@ void fn_8018325C(HSD_GObj* arg0, int arg1)
 
 void fn_80184138(HSD_GObj* arg0, int arg1)
 {
-    u8 _padA[8];
     Vec3 pos;
-    Vec3 scale;
     HSD_JObj* jobj = arg0->hsd_obj;
     HSD_JObj* src = lbl_804735A8.x4[1];
-    int kind;
     f32 scl, xoff, yoff;
+    HSD_JObj* jobj2;
     int i;
+
+    PAD_STACK(16);
 
     HSD_JObjGetTranslation(src, &pos);
     HSD_JObjSetTranslate(jobj, &pos);
 
-    kind = lbl_8047368C.model_scale_kind;
-    if (kind == 2) {
+    if (lbl_8047368C.model_scale_kind == 2) {
         scl = lbl_804D6604->x37C[lbl_8047368C.xF4[arg1]].x08;
     } else {
         scl = 1.0f;
     }
 
-    if (kind == 2) {
+    if (lbl_8047368C.model_scale_kind == 2) {
         xoff = lbl_804D6604->x37C[lbl_8047368C.xF4[arg1]].x00;
     } else {
         xoff = 0.0f;
     }
 
-    if (kind == 2) {
+    if (lbl_8047368C.model_scale_kind == 2) {
         yoff = lbl_804D6604->x37C[lbl_8047368C.xF4[arg1]].x04;
     } else {
         yoff = 0.0f;
@@ -329,7 +328,7 @@ void fn_80184138(HSD_GObj* arg0, int arg1)
         jobj, yoff + (lbl_804D6604->x6C[lbl_8047368C.xF4[arg1]].x04 +
                       lbl_804D6604->x18[lbl_8047368C.xF0].vals[arg1]));
 
-    if (kind == 2) {
+    if (lbl_8047368C.model_scale_kind == 2) {
         HSD_JObjSetScaleX(
             jobj, lbl_804D6604->x6C[lbl_8047368C.xF4[arg1]].x08.x * scl);
         HSD_JObjSetScaleY(
@@ -352,7 +351,8 @@ void fn_80184138(HSD_GObj* arg0, int arg1)
         if (Player_GetEntity(i) == arg0) {
             HSD_GObj* entity2 = Player_GetEntityAtIndex(i, 1);
             if (entity2 != NULL) {
-                HSD_JObj* jobj2 = entity2->hsd_obj;
+                Vec3 scale;
+                jobj2 = entity2->hsd_obj;
                 HSD_JObjGetTranslation(jobj, &pos);
                 HSD_JObjSetTranslate(jobj2, &pos);
                 HSD_JObjGetScale(jobj, &scale);
@@ -1946,14 +1946,15 @@ int fn_8018846C(void)
 inline int fn_801884F8_inline(void)
 {
     int result;
+    TrainingModeState* state = &lbl_80473700;
 
     result = pl_80041300(0);
     if (result != 0) {
-        lbl_80473700.result_cache[0] = result;
-        lbl_80473700.result_cache[1] = 1;
+        state->result_cache[0] = result;
+        state->result_cache[1] = 1;
     }
-    if (lbl_80473700.result_cache[1] != 0) {
-        result = lbl_80473700.result_cache[0];
+    if (state->result_cache[1] != 0) {
+        result = state->result_cache[0];
     }
     return result;
 }
@@ -2160,10 +2161,20 @@ static int fn_801884F8_noinline_2(void)
 void fn_80188B3C(HSD_JObj* arg0)
 {
     HSD_JObj* jobjs[3];
+    TrainingModeState* state = &lbl_80473700;
     int i;
     int val;
 
-    if (fn_801884F8_inline() > 999) {
+    val = pl_80041300(0);
+    if (val != 0) {
+        state->result_cache[0] = val;
+        state->result_cache[1] = 1;
+    }
+    if (state->result_cache[1] != 0) {
+        val = state->result_cache[0];
+    }
+
+    if (val > 999) {
         val = 999;
     } else {
         val = fn_801884F8_noinline_2();

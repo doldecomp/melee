@@ -4360,12 +4360,12 @@ static void fn_800301D0(HSD_GObj* gobj, int arg1)
 
         Camera_800310A0(2);
         if (cm_80452C68.x398_b2) {
-            prio8_a = 0;
+            prio8_a = (prio8_a = 0);
         } else {
             prio8_a = 8;
         }
         if (cm_80452C68.x398_b4) {
-            prio1_a = 0;
+            prio1_a = (prio1_a = 0);
         } else {
             prio1_a = 1;
         }
@@ -4374,7 +4374,7 @@ static void fn_800301D0(HSD_GObj* gobj, int arg1)
 
         Camera_800310A0(1);
         if (cm_80452C68.x398_b2) {
-            prio8_b = 0;
+            prio8_b = (prio8_b = 0);
         } else {
             prio8_b = 8;
         }
@@ -4383,7 +4383,7 @@ static void fn_800301D0(HSD_GObj* gobj, int arg1)
 
         Camera_800310A0(0);
         if (cm_80452C68.x398_b2) {
-            prio8_b = 0;
+            prio8_b = (prio8_b = 0);
         } else {
             prio8_b = 8;
         }
@@ -4392,7 +4392,7 @@ static void fn_800301D0(HSD_GObj* gobj, int arg1)
 
         lbRefract_80022560();
         if (cm_80452C68.x398_b4) {
-            prio1_b = 0;
+            prio1_b = (prio1_b = 0);
         } else {
             prio1_b = 1;
         }
@@ -4400,12 +4400,12 @@ static void fn_800301D0(HSD_GObj* gobj, int arg1)
 
         Camera_80031074(0);
         if (cm_80452C68.x398_b2) {
-            prio8_a = 0;
+            prio8_a = (prio8_a = 0);
         } else {
             prio8_a = 8;
         }
         if (cm_80452C68.x398_b4) {
-            prio1_a = 0;
+            prio1_a = (prio1_a = 0);
         } else {
             prio1_a = 1;
         }
@@ -4413,7 +4413,7 @@ static void fn_800301D0(HSD_GObj* gobj, int arg1)
         HSD_GObj_80390ED0(gobj, 4);
 
         if (cm_80452C68.x398_b4) {
-            prio1_b = 0;
+            prio1_b = (prio1_b = 0);
         } else {
             prio1_b = 1;
         }
@@ -4421,7 +4421,7 @@ static void fn_800301D0(HSD_GObj* gobj, int arg1)
 
         HSD_FogSet(NULL);
         if (cm_80452C68.x398_b3) {
-            prio8_b = 0;
+            prio8_b = (prio8_b = 0);
         } else {
             prio8_b = 0x80;
         }
@@ -4430,7 +4430,7 @@ static void fn_800301D0(HSD_GObj* gobj, int arg1)
 
         Camera_800310A0(3);
         if (cm_80452C68.x398_b2) {
-            prio8_b = 0;
+            prio8_b = (prio8_b = 0);
         } else {
             prio8_b = 8;
         }

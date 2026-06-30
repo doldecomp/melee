@@ -3701,19 +3701,17 @@ int mpLinePrevNonFloor(int line_id)
 int mpLinePrevNonCeiling(int line_id)
 {
     MapLine* line;
-    CollVtx* vtx;
     int new_id;
     bool valid_id;
     LINEID_CHECK(4157, line_id);
     line = groundCollLine[line_id].x0;
     new_id = mpLineGetPrevCheckInline(line, line->prev_id1);
-    vtx = groundCollVtx;
     while (new_id != -1 && new_id != line_id &&
            groundCollLine[new_id].flags & CollLine_Ceiling)
     {
         line = groundCollLine[new_id].x0;
         new_id = line->prev_id1;
-        new_id = mpLineGetPrevCheckInlineVtx(line, new_id, vtx);
+        new_id = mpLineGetPrevCheckInlineVtx(line, new_id, groundCollVtx);
     }
     valid_id = false;
     if ((new_id != -1) && (new_id != line_id)) {
@@ -3781,19 +3779,17 @@ int mpLineNextNonLeftWall(int line_id)
 int mpLinePrevNonLeftWall(int line_id)
 {
     MapLine* line;
-    CollVtx* vtx;
     int new_id;
     bool valid_id;
     LINEID_CHECK(4184, line_id);
     line = groundCollLine[line_id].x0;
     new_id = mpLineGetPrevCheckInline(line, line->prev_id1);
-    vtx = groundCollVtx;
     while (new_id != -1 && new_id != line_id &&
-           !!(groundCollLine[new_id].flags & CollLine_LeftWall))
+           groundCollLine[new_id].flags & CollLine_LeftWall)
     {
         line = groundCollLine[new_id].x0;
         new_id = line->prev_id1;
-        new_id = mpLineGetPrevCheckInlineVtx(line, new_id, vtx);
+        new_id = mpLineGetPrevCheckInline(line, new_id);
     }
     valid_id = false;
     if ((new_id != -1) && (new_id != line_id)) {
@@ -6661,16 +6657,14 @@ void mpLib_DrawCrosses(s16* idx, int len, GXColor arg2)
     Vec3* vtx;
     int idx_i;
     int out_count;
-    PAD_STACK(4);
 
-    out_vtx = (vtx = mpLib_80458888);
+    vtx = mpLib_80458888;
     for (idx_ptr = &idx[idx_i = 0], out_count = 0;
          idx_i < len && out_count < 0x80; idx_i++)
     {
         if (Ground_801C2D24(*idx_ptr, &sp34)) {
+            vtx[out_count] = sp34;
             out_count += 1;
-            *out_vtx = sp34;
-            out_vtx++;
         }
         idx_ptr += 1;
     }

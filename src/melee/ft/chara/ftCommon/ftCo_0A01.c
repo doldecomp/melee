@@ -1940,17 +1940,22 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
     return 0;
 }
 
+static inline float ftCo_800A4038_inline0(Fighter* fp)
+{
+    return fp->co_attrs.terminal_vel;
+}
+
 bool ftCo_800A4038(Fighter* fp, bool arg1)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
     s32 t;
-    Vec3 sp58;
-    Vec3 sp64;
-    Vec3 sp38;
-    Vec3 sp44;
     Vec3 island_pos;
     u32 flags;
     int line_id;
+    Vec3 floor_normal;
+    Vec3 floor_pos;
+    Vec3 alt_floor_normal;
+    Vec3 alt_floor_pos;
     f32 ex;
     f32 ey;
     f32 ez;
@@ -1960,7 +1965,6 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
     f32 dist;
     f32 ddx;
     f32 ddy;
-    f32 land_y;
     s32 frames;
     mp_UnkStruct0* island;
     s32 result;
@@ -2005,6 +2009,7 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
         }
         dx = ex - fp->cur_pos.x;
         if (dx > 0.0f) {
+            f32 land_y;
             t = dx / fp->co_attrs.air_drift_max;
             if (frames <= 0) {
                 land_y = fp->pos_delta.y * t + fp->cur_pos.y;
@@ -2016,7 +2021,7 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
                 land_y = fp->cur_pos.y +
                          ((fp->pos_delta.y * frames -
                            0.5 * (fp->co_attrs.grav * sqrtf((f32) frames))) -
-                          (f32) (t - frames) * fp->co_attrs.terminal_vel);
+                          (f32) (t - frames) * ftCo_800A4038_inline0(fp));
             }
             if (arg1 != 0) {
                 if (!(land_y + data->x558 < ey)) {
@@ -2025,8 +2030,9 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
                     px = 5.0 + ex;
                     {
                         s32 floor_result = mpCheckFloor(
-                            px, 5.0f + ey, px, ey - 5.0f, 0.0f, &sp58,
-                            &line_id, &flags, &sp64, -1, -1, -1, NULL, NULL);
+                            px, 5.0f + ey, px, ey - 5.0f, 0.0f, &floor_pos,
+                            &line_id, &flags, &floor_normal, -1, -1, -1,
+                            NULL, NULL);
                         result = floor_result;
                     }
                     if (result != 0 && ftCo_800A1B38_noinline(line_id) != 0) {
@@ -2056,10 +2062,11 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
                         ok = 0;
                     }
                     if (ok != 0) {
-                        if (data->x60 == 0) {
-                            data->x54.x = px;
-                            data->x54.y = ey;
-                            data->x38 = 5.0f;
+                        struct Fighter_x1A88_t* data2 = &fp->x1A88;
+                        if (fp->x1A88.x60 == 0) {
+                            data2->x54.x = px;
+                            data2->x54.y = ey;
+                            data2->x38 = 5.0f;
                             ftCo_800A1CC4(
                                 fp,
                                 ftCo_803C6594[stage_info.internal_stage_id]);
@@ -2075,8 +2082,9 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
                 valid = 0;
                 ddx = px - fp->cur_pos.x;
                 result = mpCheckFloor(px, 5.0f + ey, px, ey - 5.0f, 0.0f,
-                                      &sp38, &line_id, &flags, &sp44, -1, -1,
-                                      -1, NULL, NULL);
+                                      &alt_floor_pos, &line_id, &flags,
+                                      &alt_floor_normal, -1, -1, -1, NULL,
+                                      NULL);
                 if (result != 0 && ftCo_800A1B38_noinline(line_id) != 0) {
                 } else {
                     valid = result;
@@ -2105,7 +2113,7 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
                 if (ok != 0) {
                     dist = sqrtf(ddx * ddx + ddy * ddy);
                     if (data->x5C > dist) {
-                        if (data->x60 == 0) {
+                        if (fp->x1A88.x60 == 0) {
                             data->x54.x = px;
                             data->x54.y = ey;
                             data->x38 = 5.0f;
@@ -3219,7 +3227,7 @@ s32 ftCo_800A6A98(Fighter* fp, Vec3* arg1)
 
 s32 ftCo_800A6D2C(Fighter* fp, Vec3* arg1)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    f32 dist;
     mp_UnkStruct0* island;
     Vec3 b;
     Vec3 a;
@@ -3237,7 +3245,7 @@ s32 ftCo_800A6D2C(Fighter* fp, Vec3* arg1)
     f32 fx;
     f32 dx;
     f32 dy;
-    f32 dist;
+    struct Fighter_x1A88_t* data = &fp->x1A88;
     f32 best;
 
     PAD_STACK(4);
@@ -3247,7 +3255,7 @@ s32 ftCo_800A6D2C(Fighter* fp, Vec3* arg1)
     for (island = mpIsland_80458E88.next; island != NULL;
          island = island->next)
     {
-        if (ftCo_800A2718(island) == 0 && island != cur_island) {
+        if (ftCo_800A2718(island) == 0 && cur_island != island) {
             a = island->x8;
             b = island->x14;
             HSD_Randf();
@@ -4453,7 +4461,7 @@ void ftCo_800A9904(Fighter* fp)
     u32 ceiling_flags;
 
     f32 x_time;
-    f32 temp_f3;
+    f32 gravity;
     f32 predicted_y;
     f32 terminal_time;
 
@@ -4475,30 +4483,32 @@ void ftCo_800A9904(Fighter* fp)
             ftCo_800A96B8(fp);
         }
     } else if (data->xFA_b5) {
+        f32* grav_p;
         f32 dx = data->x54.x - fp->cur_pos.x;
         if (is_small(fp->pos_delta.x)) {
             x_time = 1000.0F;
         } else {
             x_time = dx / fp->pos_delta.x;
         }
-        if (is_small(fp->co_attrs.grav)) {
+        gravity = *(grav_p = &fp->co_attrs.grav);
+        if (is_small(gravity)) {
             terminal_time = 1000.0F;
         } else {
             terminal_time = -(-fp->co_attrs.terminal_vel - fp->pos_delta.y) /
-                            fp->co_attrs.grav;
+                            gravity;
         }
         if (terminal_time <= 0.0F) {
             predicted_y = (fp->pos_delta.y * x_time) + fp->cur_pos.y;
         } else if (x_time < terminal_time) {
-            predicted_y =
-                fp->cur_pos.y + (fp->pos_delta.y * x_time -
-                                 0.5 * (fp->co_attrs.grav * sqrtf(x_time)));
+            predicted_y = fp->cur_pos.y +
+                          (fp->pos_delta.y * x_time -
+                           0.5 * (*grav_p * sqrtf(x_time)));
         } else {
-            predicted_y =
-                fp->cur_pos.y +
-                (fp->pos_delta.y * terminal_time -
-                 0.5 * (fp->co_attrs.grav * sqrtf(terminal_time)) -
-                 ((x_time - terminal_time) * ftCo_800A9904_inline0(fp)));
+            predicted_y = fp->cur_pos.y +
+                          (fp->pos_delta.y * terminal_time -
+                           0.5 * (*grav_p * sqrtf(terminal_time)) -
+                           ((x_time - terminal_time) *
+                            ftCo_800A9904_inline0(fp)));
         }
         {
             int stick = 4.7000003F * (data->level + 1) + 80.0f;
