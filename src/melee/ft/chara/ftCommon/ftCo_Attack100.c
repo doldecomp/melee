@@ -2323,8 +2323,7 @@ static inline void fn_800DAADC_applyMotion(s32 msid, Fighter_GObj* arg1,
     temp_r31 = GET_FIGHTER(arg1);
     fn_800DAC78(arg0, sp24);
     if (temp_r30->ground_or_air == GA_Ground) {
-        temp_r31->x2170 =
-            sp24->y + temp_r30->cur_pos.y - temp_r31->cur_pos.y;
+        temp_r31->x2170 = sp24->y + temp_r30->cur_pos.y - temp_r31->cur_pos.y;
     } else {
         temp_r31->x2170 = 0.0F;
         temp_r30->cur_pos.x += sp24->x;
