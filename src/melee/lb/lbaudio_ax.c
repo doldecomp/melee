@@ -2461,6 +2461,7 @@ void lbAudioAx_80027648(void)
 {
     int i;
     s32 result;
+    u8 operand_pad[4];
 
     goto check;
 loop:

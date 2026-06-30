@@ -3947,7 +3947,8 @@ void _Toy_8030B530(HSD_GObj* arg0)
                         } else {
                             cnt = *gmMainLib_8015CC90();
                         }
-                        lk = cnt + cur_idx;
+                        lk = cnt;
+                        lk += cur_idx;
                         entry = M2C_FIELD(display, u8**, 0x138);
                         {
                             s16 tid = Toy_sbss_804D6EDC[lk - 1];

@@ -3165,6 +3165,7 @@ s32 ftCo_800A6A98(Fighter* fp, Vec3* arg1)
     f32 dx;
     f32 dy;
     f32 dist;
+    u8 operand_pad[12];
 
     best = -1.0f;
     for (island = mpIsland_80458E88.next; island != NULL;
@@ -6484,6 +6485,7 @@ void ftCo_800AE7AC(Fighter* fp, Vec3* arg1, int arg2)
     ItemKind kind;
     s32 is_food;
     s32 do_act;
+    u8 operand_pad[4];
     u8 _[8];
     Vec3 dir;
     Vec3 out;
@@ -6552,7 +6554,8 @@ void ftCo_800AE7AC(Fighter* fp, Vec3* arg1, int arg2)
             left = Stage_GetBlastZoneLeftOffset();
             cx = 0.5f * (Stage_GetBlastZoneRightOffset() + left);
             bottom = Stage_GetBlastZoneBottomOffset();
-            sum_y = Stage_GetBlastZoneTopOffset() + bottom;
+            sum_y = Stage_GetBlastZoneTopOffset();
+            sum_y += bottom;
             cy = 0.5f * sum_y;
             (void) cy;
             dir.x = cx - fp->cur_pos.x;
@@ -8748,6 +8751,7 @@ void ftCo_800B2AFC(Fighter* fp)
     int line26;
     Vec3 floor_normal26;
     Vec3 floor_pos26;
+    u8 operand_pad[8];
 
     PAD_STACK(0x8);
 
@@ -9094,6 +9098,7 @@ void ftCo_800B33B0(Fighter* fp)
     f32 fy;
     f32 sx;
     f32 sy;
+    u8 operand_pad[8];
 
     if (*timer % 300 == 0) {
         if (HSD_Randf() < 0.04f * data->level + 0.3f) {

@@ -373,6 +373,7 @@ static inline soundtest_user_data* fn_8024AED0_GetUserData(void)
 
 void fn_8024AED0(HSD_GObj* arg0)
 {
+    u8 operand_pad[24];
     HSD_JObj* temp_r27_2;
     HSD_JObj* sp7C;
     void* sp50;

@@ -1106,6 +1106,7 @@ static ? grKg_803B7FB0;                             /* unable to generate initia
 
 void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
 {
+    s32 line_id;
     Ground* gp;
     _struct_grKg_803E188C_0x18* table;
     _struct_grKg_803E188C_0x18* entry;
@@ -1115,7 +1116,6 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
     f32 angular_vel;
     f32 temp;
     f32 displacement;
-    s32 line_id;
     u32 i;
     PAD_STACK(0x18);
 

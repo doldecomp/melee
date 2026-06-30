@@ -1720,6 +1720,7 @@ void fn_80193FCC(s32* arg0, u32 arg1, u32 arg2)
     s32 clamp_val;
     int* mt = &gm_804771C4.match_type;
     TmData* tm;
+    u8 operand_pad[4];
 
     if (*mt != 0) {
         lbl_804D665C = fn_8018F808();
