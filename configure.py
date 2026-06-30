@@ -995,6 +995,7 @@ config.libs = [
             Object(NonMatching, "melee/gm/gm_1601.c"),
             Object(NonMatching, "melee/gm/gm_16AE.c"),
             Object(NonMatching, "melee/gm/gm_16F1.c"),
+            Object(Matching, "melee/gm/gm_1736.c"),
             Object(NonMatching, "melee/gm/gmresult.c"),
             Object(NonMatching, "melee/gm/gmresultplayer.c"),
             Object(Matching, "melee/gm/gm_17AD.c"),
