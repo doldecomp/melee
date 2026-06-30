@@ -2132,12 +2132,17 @@ melee/gm/gm_16AE.c:
 	.sdata2     start:0x804DA298 end:0x804DA2E8
 
 melee/gm/gm_16F1.c:
-	.text       start:0x8016F180 end:0x80174274
+	.text       start:0x8016F180 end:0x801736DC
 	.rodata     start:0x803B7A44 end:0x803B7B18
-	.data       start:0x803D5648 end:0x803D6488
-	.bss        start:0x8046DBC8 end:0x8046DBE8
+	.data       start:0x803D5648 end:0x803D6450
+	.bss        start:0x8046DBC8 end:0x8046DBD8
 	.sbss       start:0x804D65A0 end:0x804D65B8
 	.sdata2     start:0x804DA2E8 end:0x804DA300
+
+melee/gm/gm_1736.c:
+	.text       start:0x801736DC end:0x80174274
+	.data       start:0x803D6450 end:0x803D6488
+	.bss        start:0x8046DBD8 end:0x8046DBE8
 
 melee/gm/gmresult.c:
 	.text       start:0x80174274 end:0x80177724
