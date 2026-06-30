@@ -74,7 +74,7 @@
 /* 16BE80 */ int gm_8016BE80(void);
 /* 16BF74 */ int fn_8016BF74(void);
 /* 16C0C8 */ int fn_8016C0C8(void);
-/* 16C35C */ int fn_8016C35C(void);
+/* 16C35C */ int gm_GetMatchResult(void);
 /* 16C46C */ void fn_8016C46C(int);
 /* 16C4F4 */ void fn_8016C4F4(struct lbl_8046B6A0_24C_t*);
 /* 16C5C0 */ bool gm_8016C5C0(int pl_slot);

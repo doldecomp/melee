@@ -842,7 +842,7 @@ int fn_8016C0C8(void)
     return 0;
 }
 
-int fn_8016C35C(void)
+int gm_GetMatchResult(void)
 {
     int temp_r3;
     int temp_r3_2;
@@ -1331,7 +1331,7 @@ void fn_8016CFE0(void)
         }
         goto block_50;
     } else {
-        tmp->match_result = fn_8016C35C();
+        tmp->match_result = gm_GetMatchResult();
         if (tmp->match_result == 0) {
             fn_8016CA68(tmp, 1);
             if (tmp->unk_4 != 0) {
@@ -1342,7 +1342,7 @@ void fn_8016CFE0(void)
         }
     block_50:
         fn_8016B918();
-        tmp->match_result = fn_8016C35C();
+        tmp->match_result = gm_GetMatchResult();
     }
     if (tmp->match_result != 0) {
     block_51:
@@ -1378,7 +1378,7 @@ void gm_8016D32C_OnFrame(void)
         }
     }
     fn_8016CD98(tmp);
-    tmp->match_result = fn_8016C35C();
+    tmp->match_result = gm_GetMatchResult();
     if (tmp->match_result != 0) {
         fn_8016C7F0();
         gm_801A4B60();
