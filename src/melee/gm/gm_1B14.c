@@ -469,16 +469,17 @@ void gm_801B1834(GameScene* arg0)
 void gm_801B18D4(GameScene* arg0)
 {
     StartMeleeData* smd;
+    StartMeleeData* src = &gm_804876D8;
     s32 i;
 
     smd = gm_801A427C(arg0);
 
     for (i = 0; i < 4; i++) {
-        smd->players[i] = gm_804876D8.players[i];
+        smd->players[i] = src->players[i];
     }
 
     /// @todo :: figure out how to call this not inlined
-    gm_801B0474(smd, &gm_80487810.match_end);
+    gm_801B0474(smd, &((MatchExitInfo*) (src + 1))->match_end);
 }
 #pragma dont_inline reset
 

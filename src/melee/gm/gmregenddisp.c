@@ -359,17 +359,9 @@ void gm_801A8114_inline(HSD_JObj* arg0, int arg1)
     gm_801A8114(arg0, arg1);
 }
 
-void gm_801A9630(void)
+static inline void gm_801A9630_init(void)
 {
     int i;
-    HSD_CObj* cobj;
-    HSD_Fog* fog;
-    HSD_GObj* cam_gobj;
-    HSD_GObj* gobj;
-    HSD_JObj* jobj;
-    HSD_JObj* child;
-    HSD_JObj* target;
-    HSD_LObj* lobj;
     PAD_STACK(8);
 
     for (i = 0; i < 0x1A; i++) {
@@ -386,26 +378,43 @@ void gm_801A9630(void)
             gm_80480AD0[i] = 0;
         }
     }
+}
+
+void gm_801A9630(void)
+{
+    int i;
+    HSD_CObj* cobj;
+    HSD_GObj* fog_gobj;
+    HSD_Fog* fog;
+    HSD_GObj* light_gobj;
+    HSD_GObj* cam_gobj;
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+    HSD_JObj* child;
+    HSD_JObj* target;
+    HSD_LObj* lobj;
+
+    gm_801A9630_init();
 
     // Fog GObj
-    gobj = GObj_Create(0xE, 3, 0);
+    fog_gobj = GObj_Create(0xE, 3, 0);
     fog = HSD_FogLoadDesc(gm_804D67A4->fogs->desc);
-    HSD_GObjObject_80390A70(gobj, (u8) HSD_GObj_804D7848, fog);
-    GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
+    HSD_GObjObject_80390A70(fog_gobj, (u8) HSD_GObj_804D7848, fog);
+    GObj_SetupGXLink(fog_gobj, HSD_GObj_FogCallback, 0, 0);
     HSD_Fog_8037DE7C(fog, gm_804D67A4->fogs->anims[0]->aobjdesc);
     HSD_FogReqAnim(fog, 0.0f);
     HSD_FogInterpretAnim(fog);
-    HSD_GObj_SetupProc(gobj, fn_801A7FB4, 0x17);
+    HSD_GObj_SetupProc(fog_gobj, fn_801A7FB4, 0x17);
 
     // Light GObj
-    gobj = GObj_Create(0xB, 3, 0);
+    light_gobj = GObj_Create(0xB, 3, 0);
     lobj = lb_80011AC4(gm_804D67A4->lights);
-    HSD_GObjObject_80390A70(gobj, (u8) HSD_GObj_804D784A, lobj);
-    GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
+    HSD_GObjObject_80390A70(light_gobj, (u8) HSD_GObj_804D784A, lobj);
+    GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0, 0);
     HSD_LObjAddAnimAll(lobj, (*gm_804D67A4->lights)->anims[0]);
     HSD_LObjReqAnimAll(lobj, 0.0f);
     HSD_LObjAnimAll(lobj);
-    HSD_GObj_SetupProc(gobj, fn_801A80CC, 0x17);
+    HSD_GObj_SetupProc(light_gobj, fn_801A80CC, 0x17);
 
     // Camera GObj
     cam_gobj = GObj_Create(0x13, 0x14, 0);
@@ -434,7 +443,10 @@ void gm_801A9630(void)
     // Background JObj GObj 2
     gobj = GObj_Create(0xE, 0xF, 0);
     gm_804D67BC = gobj;
-    jobj = HSD_JObjLoadJoint(gm_804D67AC->models[0]->joint);
+    {
+        HSD_JObj* tmp = HSD_JObjLoadJoint(gm_804D67AC->models[0]->joint);
+        jobj = tmp;
+    }
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
     gm_8016895C(jobj, gm_804D67A4->models[0], 0);
@@ -519,6 +531,15 @@ char* gm_803DBF10[] = {
     "GmRegendAllstarPichu.thp",     "GmRegendAllstarGanon.thp",
 };
 
+typedef struct gmRegendThpTables {
+    u8 pad0[0x278];
+    const char* simple[26];
+    u8 pad1[0x5B4 - 0x278 - 26 * 4];
+    const char* adventure[26];
+    u8 pad2[0x8D0 - 0x5B4 - 26 * 4];
+    const char* allstar[26];
+} gmRegendThpTables;
+
 void gm_801A9B30_OnEnter(UNK_T unused)
 {
     struct {
@@ -531,10 +552,12 @@ void gm_801A9B30_OnEnter(UNK_T unused)
         u8 pad[0x40 - 0x18];
         u32 x40;
     }* temp_r3_3;
-    s32 temp_r31;
+    s32 ckind;
     HSD_GObj* gobj;
     HSD_GObj* temp_r29;
     const char* thpfile;
+    gmRegendThpTables* thpfile_base =
+        (gmRegendThpTables*) "GmRegendSimpleCaptain.thp";
     s32 var_r3_3;
     int var_r3;
 
@@ -551,20 +574,20 @@ void gm_801A9B30_OnEnter(UNK_T unused)
     gobj = GObj_Create(0xE, 0xF, 0);
     HSD_GObjObject_80390A70(gobj, HSD_SObjLib_804D7960, NULL);
     GObj_SetupGXLink(gobj, lbMthp8001F928, 0xB, 0);
-    temp_r31 = gm_801BEFB0();
+    ckind = gm_801BEFB0();
     var_r3 = gm_801A4310();
     if (var_r3 == GM_DEBUG_GOVER) {
         var_r3 = gm_801BF050();
     }
     switch (var_r3) {
     case GM_CLASSIC_GOVER:
-        thpfile = gm_803DB8B8[temp_r31];
+        thpfile = thpfile_base->simple[ckind];
         break;
     case GM_ADVENTURE_GOVER:
-        thpfile = gm_803DBBF4[temp_r31];
+        thpfile = thpfile_base->adventure[ckind];
         break;
     default:
-        thpfile = gm_803DBF10[temp_r31];
+        thpfile = thpfile_base->allstar[ckind];
         break;
     }
     lbMthp8001FAA0(thpfile, 0x230, 0x1A0);

@@ -149,22 +149,23 @@ static void mnStageSw_802359C8(MnStageSwData* data)
 
 static s32 mnStageSw_80235C58(u8 arg0)
 {
-    s32 low;
-    s32 found;
-    s32 i;
-    s32 idx;
-    u8 high;
-    s32 curr;
-    s32 next;
     u8 end;
+    s32 found;
+    s32 upper;
+    s32 next;
+    u8 lower;
+    u8 upper_u8;
+    s32 i;
     u8 start;
+    s32 idx;
+    s32 curr;
 
     if (arg0 < 15) {
-        low = 0;
-        high = 14;
+        lower = 0;
+        upper = 14;
     } else {
-        low = 15;
-        high = 28;
+        lower = 15;
+        upper = 28;
     }
     if (arg0 < 15) {
         start = 0;
@@ -199,17 +200,18 @@ loop_done:
     idx = arg0;
     i = 1;
     next = idx + 1;
-    curr = idx + 1;
+    curr = arg0 + 1;
+    upper_u8 = upper;
     while (true) {
         s32 temp = idx - i;
         s32 prev = temp;
 
-        if (low <= prev &&
+        if (lower <= prev &&
             gm_80164430(gm_801641CC(mnStageSw_803ED4C4[(u8) prev])) != 0)
         {
             return prev;
         }
-        if (next <= high &&
+        if (next <= upper_u8 &&
             gm_80164430(gm_801641CC(mnStageSw_803ED4C4[(u8) curr])) != 0)
         {
             return idx + i;
@@ -293,11 +295,7 @@ static void fn_80235F80(HSD_GObj* gobj)
     u8* user_data;
 
     user_data = mnStageSw_804D6BF0->user_data;
-    {
-        u32 tmp = mn_80229624(4U);
-        mn_804A04F0.buttons = tmp;
-        buttons = tmp;
-    }
+    buttons = mn_804A04F0.buttons = mn_80229624(4U);
     count = 0;
     PAD_STACK(0x28);
     if (buttons & 0x20) {
@@ -315,7 +313,7 @@ static void fn_80235F80(HSD_GObj* gobj)
             if (mn_804A04F0.hovered_selection < NUM_STAGES) {
                 if (mn_804A04F0.confirmed_selection != 0) {
                     user_data = mnStageSw_804D6BF0->user_data;
-                    for (i = count; i < NUM_STAGES; i++) {
+                    for (i = 0; i < NUM_STAGES; i++) {
                         if (user_data[i + 2] != 0) {
                             count++;
                         }
@@ -505,14 +503,13 @@ static void mnStageSw_80236548(HSD_GObj* gobj, u8 arg1, u8 arg2)
 #pragma inline_depth(0)
 static void fn_80236998(HSD_GObj* gobj)
 {
-    u64 pad2;
-    HSD_JObj* child;
     HSD_JObj* jobj;
     MnStageSwData* data;
     AnimLoopSettings* anims;
     s32 changed_menu;
     s32 changed_hovered;
     u64 pad3;
+    HSD_JObj* child;
     s32 changed_confirmed;
     u8 state;
 
@@ -522,7 +519,6 @@ static void fn_80236998(HSD_GObj* gobj)
     data = gobj->user_data;
     state = data->x1F;
     PAD_STACK(4);
-    (void) pad2;
     if ((state == 0 || state == 1 || state == 3) &&
         data->x0 != (u8) mn_804A04F0.cur_menu)
     {
@@ -642,16 +638,17 @@ static void fn_80236998(HSD_GObj* gobj)
 
 static HSD_GObj* mnStageSw_80236CBC(s8 arg0)
 {
-    AnimLoopSettings* anims = mnStageSw_803ED488;
-    struct StaticModelDesc* mdl = &MenMainConSs_Top;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
     HSD_JObj* sp48;
     MnStageSwData* user_data;
+    AnimLoopSettings* anims = mnStageSw_803ED488;
+    struct StaticModelDesc* mdl = &MenMainConSs_Top;
     f32 y_spacing;
     u8 hovered;
     HSD_JObj* cursor_anim_jobj;
     s32 i;
+    u8* stage_ids;
 
     gobj = GObj_Create(6, 7, 0x80);
     mnStageSw_804D6BF0 = gobj;
@@ -670,22 +667,18 @@ static HSD_GObj* mnStageSw_80236CBC(s8 arg0)
     HSD_ASSERTREPORT(0x397, user_data, "Can't get user_data.\n");
     GObj_InitUserData(gobj, 0, HSD_Free, user_data);
 
+    i = 0;
     user_data->x0 = mn_804A04F0.cur_menu;
-    {
-        u8 idx = 0;
-
-        user_data->x1 = (u8) mn_804A04F0.hovered_selection;
-        user_data->x1F = arg0;
-        for (; idx < NUM_STAGES; idx++) {
-            u8 stage_id = mnStageSw_803ED4C4[idx];
-
-            if (gm_80164430(gm_801641CC(stage_id)) != 0) {
-                user_data->x2[idx] =
-                    ((1 << stage_id) & gmMainLib_8015CC58()->stage_mask) != 0;
-            } else {
-                user_data->x2[idx] = 0;
-            }
+    user_data->x1 = (u8) mn_804A04F0.hovered_selection;
+    user_data->x1F = arg0;
+    stage_ids = mnStageSw_803ED4C4;
+    for (; (u8) i < NUM_STAGES; i++) {
+        if (gm_80164430(gm_801641CC(mnStageSw_803ED4C4[(u8) i])) != 0) {
+            user_data->x2[(u8) i] = gm_80164250(*stage_ids);
+        } else {
+            user_data->x2[(u8) i] = 0;
         }
+        stage_ids++;
     }
 
     for (i = 0; i < 6; i++) {

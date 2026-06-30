@@ -18,6 +18,14 @@
 
 extern u64 __shr2u(u32, u32, s32);
 
+/// @todo .sdata2 order hack
+static void sdata2_order(void)
+{
+    (void) 4503601774854144.0;
+    (void) 0.0F;
+    (void) 0.99F;
+}
+
 void it_8026C47C(struct it_8026C47C_arg0_t* arg_struct)
 {
     u32 it_kind;
@@ -50,6 +58,11 @@ void it_8026C47C(struct it_8026C47C_arg0_t* arg_struct)
     }
 }
 
+typedef struct it_8026C530_Weights {
+    u16 x0;
+    u16 x2;
+} it_8026C530_Weights;
+
 static inline s32 it_8026C530_pi1317(s32 arg3)
 {
     return arg3 - 1;
@@ -57,49 +70,50 @@ static inline s32 it_8026C530_pi1317(s32 arg3)
 s32 it_8026C530(s32 arg0, ItemPickTable* arg1, s32 arg2, s32 arg3)
 {
     s32 last;
-    s32 var_r5;
-    u16* temp_r10;
+    s32 lower;
+    u16* weights;
     s32 mid;
-    s32 temp_r6;
-    s32 temp_r7;
-    u16* temp_r9;
+    s32 left_mid;
+    s32 right_mid;
+    u16* next_weights;
 
-    var_r5 = arg2;
+    lower = arg2;
     last = it_8026C530_pi1317(arg3);
-    if (var_r5 == last) {
-        return var_r5;
+    if (lower == last) {
+        return lower;
     }
-    temp_r10 = arg1->xC;
-    mid = (var_r5 + arg3) / 2;
-    if (temp_r10[mid] > arg0) {
-        if (var_r5 == (mid - 1)) {
+    weights = arg1->xC;
+    mid = (lower + arg3) / 2;
+    if (weights[mid] > arg0) {
+        if (lower == (mid - 1)) {
+            lower = arg2;
         } else {
-            temp_r6 = (var_r5 + mid) / 2;
-            if (temp_r10[temp_r6] > arg0) {
-                var_r5 = it_8026C530(arg0, arg1, var_r5, temp_r6);
-            } else if (temp_r10[temp_r6 + 1] > arg0) {
-                var_r5 = temp_r6;
+            left_mid = (lower + mid) / 2;
+            if (weights[left_mid] > arg0) {
+                lower = it_8026C530(arg0, arg1, lower, left_mid);
+            } else if (weights[left_mid + 1] > arg0) {
+                lower = left_mid;
             } else {
-                var_r5 = it_8026C530(arg0, arg1, temp_r6, mid);
+                lower = it_8026C530(arg0, arg1, left_mid, mid);
             }
         }
-        return var_r5;
+        return lower;
     }
-    temp_r9 = (u16*) ((u8*) temp_r10 + 2);
-    if (temp_r9[mid] > arg0) {
+    next_weights = &((it_8026C530_Weights*) weights)->x2;
+    if (next_weights[mid] > arg0) {
         return mid;
     }
     if (mid == last) {
         return mid;
     }
-    temp_r7 = (mid + arg3) / 2;
-    if (temp_r10[temp_r7] > arg0) {
-        return it_8026C530(arg0, arg1, mid, temp_r7);
+    right_mid = (mid + arg3) / 2;
+    if (weights[right_mid] > arg0) {
+        return it_8026C530(arg0, arg1, mid, right_mid);
     }
-    if (temp_r9[temp_r7] > arg0) {
-        return temp_r7;
+    if (next_weights[right_mid] > arg0) {
+        return right_mid;
     }
-    return it_8026C530(arg0, arg1, temp_r7, arg3);
+    return it_8026C530(arg0, arg1, right_mid, arg3);
 }
 
 /// argument is definitely size 0x10
@@ -195,37 +209,42 @@ void fn_8026C88C(HSD_GObj* gobj)
     Item_GObj* spawn_gobj;
     SpawnItem spawn;
     bool chk;
+    Vec3* pos;
 
     if (db_AreItemSpawnsEnabled() != 0U) {
         alloc->x0--;
         if ((s32) alloc->x0 == 0) {
             spawn.kind = it_8026C75C(&alloc->x4);
             if ((s32) spawn.kind != -1) {
-                if (it_8026CB3C(&spawn.prev_pos)) {
-                    spawn.pos = spawn.prev_pos;
-                    spawn.facing_dir = it_8026B684(&spawn.prev_pos);
+                pos = &spawn.prev_pos;
+                if (it_8026CB3C(pos)) {
+                    spawn.pos = *pos;
+                    spawn.facing_dir = it_8026B684(pos);
+                    chk = true;
                     spawn.x3C_damage = 0;
                     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
                     spawn.x0_parent_gobj = NULL;
                     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
                     spawn.x44_flag.b0 = 1;
                     spawn.x40 = 0;
-                    chk = true;
                 } else {
                     chk = false;
                 }
                 if (chk) {
                     spawn_gobj = Item_80268B18(&spawn);
                     if (spawn_gobj != NULL) {
-                        efSync_Spawn(0x420, spawn_gobj, &spawn.prev_pos);
+                        efSync_Spawn(0x420, spawn_gobj, pos);
                         it_80274ED8();
                     }
                 }
             } ///< @todo Make a FLT_RAND(min, max) define or inline
             {
-                s32* range = &it_804D6D28->xFC[gm_8016AE80() * 2];
-                f32 randf = HSD_Randf();
-                *alloc_x0 = (range[1] - range[0]) * randf + range[0];
+                pos = (Vec3*) &it_804D6D28->xFC[gm_8016AE80() * 2];
+                {
+                    s32* range = (s32*) pos;
+                    f32 randf = HSD_Randf();
+                    *alloc_x0 = (range[1] - range[0]) * randf + range[0];
+                }
                 *alloc_x0 *= Ground_801C2AE8(Stage_80225194());
             }
         }
@@ -297,10 +316,9 @@ void it_8026CB9C(s32* counts, u64 mask, f32 weight)
     *(item_kinds = &spawner->x4.x4) = HSD_MemAlloc(cnt * 4);
     *(weights = &spawner->x4.xC) = HSD_MemAlloc(cnt * 4);
 
-    cnt2 = 0;
-    p2 = counts;
+    idx = (cnt2 = 0);
     mask = backup;
-    idx = cnt2;
+    p2 = counts;
     it_kind2 = 0;
     cumulative = 0;
     while (it_kind2 < It_Kind_L_Gun_Ray) {
@@ -325,14 +343,15 @@ void it_8026CD50(s32* counts, u64 mask, f32 weight)
         ItemPickTable monster;
     } ItemSpawnTables;
     ItemSpawnTables* tables = (ItemSpawnTables*) &it_804A0E30;
-    u16** weights;
-    u8** item_kinds;
     s32* p;
     s32 cnt;
     ItemKind it_kind;
     ItemKind it_kind2;
     s32 cnt2;
     s32* p2;
+    u8** item_kinds;
+    s32 idx;
+    u16** weights;
     s32 cumulative;
     u64 backup;
 
@@ -352,16 +371,17 @@ void it_8026CD50(s32* counts, u64 mask, f32 weight)
     *(item_kinds = &tables->common.x4) = HSD_MemAlloc(cnt * 4);
     *(weights = &tables->common.xC) = HSD_MemAlloc(cnt * 4);
 
+    idx = (cnt2 = 0);
     mask = backup;
     p2 = counts + It_Kind_BombHei;
-    cumulative = (cnt2 = 0);
-    cnt2 = 0;
+    cumulative = 0;
     it_kind2 = It_Kind_BombHei;
     while (it_kind2 < It_Kind_L_Gun_Ray) {
         if ((mask & 1) && *p2 != 0) {
             (*item_kinds)[cnt2] = it_kind2;
-            (*weights)[cnt2] = cumulative;
+            (*weights)[idx] = cumulative;
             cnt2++;
+            idx++;
             cumulative = (cumulative + ((weight * *p2) + 0.99f));
         }
         p2++;

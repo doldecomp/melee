@@ -379,11 +379,14 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                  float pos_y, bool use_floor_fn, Fighter_Part part,
                  int first_active, bool ground_check)
 {
-    u8 _padA[152];
-    Mtx parent_mtx, temp_mtx, bone_mtx, constrained_mtx, trans_mtx, scale_mtx;
+    HSD_JObj* parent_jobj;
+    u8 _padB[36];
+    Mtx parent_mtx, temp_mtx;
     Vec3 natural_dir, current_dir, link_dir;
+    Mtx bone_mtx, constrained_mtx, trans_mtx, scale_mtx;
+    u8 _padA[132];
     Vec3 cross_vec, local_axis;
-    Vec3 gnd_norm;
+    s32 idx;
     Quaternion angle_quat, euler_quat, result_quat;
     Quaternion euler_angles;
     Vec3 collision_point;
@@ -399,10 +402,9 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
 
     struct DynamicsData* cur;
     HSD_JObj* jobj;
-    HSD_JObj* parent_jobj;
     struct lb_Collider* collider;
     s32 on_ground;
-    s32 idx;
+    Vec3 gnd_norm;
     s32 skip_count;
 
     if ((u8) lb_804D63B8 != 0) {
@@ -427,22 +429,22 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
     if ((s32) part > 0) {
         s32 rem8 = (s32) part - 8;
         if ((s32) part > 8) {
-            s32 n = (u32) (rem8 + 7) >> 3;
+            u32 n = (u32) (rem8 + 7) >> 3;
             if (rem8 > 0) {
                 do {
                     cur = cur->next->next->next->next->next->next->next->next;
                     idx += 8;
                     skip_count += 8;
-                } while (--n);
+                } while (--n != 0);
             }
         }
         if (skip_count < (s32) part) {
-            s32 rem = (s32) part - skip_count;
+            u32 rem = (s32) part - skip_count;
             do {
                 cur = cur->next;
                 idx++;
                 skip_count++;
-            } while (--rem);
+            } while (--rem != 0);
         }
     }
 
@@ -513,7 +515,7 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
             Vec3 saved_dir = link_dir;
 
             /* Apply stiffness blend toward natural direction */
-            if (cur->desc.lb_unk0.unk_4C * desc->pos.x < 1.0f) {
+            if (cur->desc.lb_unk0.unk_4C * desc->pos.x < 1.0) {
                 f32 stiff_angle = ABS(lbVector_Angle(&link_dir, &current_dir));
                 if (stiff_angle != 0.0f) {
                     PSVECCrossProduct(&link_dir, &current_dir, &cross_vec);
@@ -777,17 +779,18 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                                 if (height_diff < 0.0f) {
                                     height_diff = -height_diff;
                                 }
-                                horiz_sq = -(height_diff * height_diff -
-                                             bone_len * bone_len);
+                                {
+                                    f32 tmp_p27864 =
+                                        -(height_diff * height_diff -
+                                          bone_len * bone_len);
+                                    horiz_sq = tmp_p27864;
+                                }
                                 if (horiz_sq > 0.0f) {
                                     horiz_sq = sqrtf(horiz_sq);
                                 }
                                 {
                                     f32 ground_angle =
-                                        atan2f(horiz_sq, height_diff);
-                                    if (ground_angle < 0.0f) {
-                                        ground_angle = -ground_angle;
-                                    }
+                                        ABS(atan2f(horiz_sq, height_diff));
                                     PSVECCrossProduct(&gnd_norm, &link_dir,
                                                       &floor_cross2);
                                     lbVector_Normalize(&floor_cross2);
@@ -880,15 +883,15 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
             s32 axis = cur->desc.lb_unk0.unk_54;
             if (axis == -1) {
                 f32 rot_z = HSD_JObjGetRotationZ(jobj);
-                rot_z *= 0.9f;
+                rot_z = rot_z * 0.9f;
                 HSD_JObjSetRotationZ(jobj, rot_z);
             } else if (axis == 0) {
                 f32 rot_x = HSD_JObjGetRotationX(jobj);
-                rot_x *= 0.9f;
+                rot_x = rot_x * 0.9f;
                 HSD_JObjSetRotationX(jobj, rot_x);
             } else {
                 f32 rot_y = HSD_JObjGetRotationY(jobj);
-                rot_y *= 0.9f;
+                rot_y = rot_y * 0.9f;
                 HSD_JObjSetRotationY(jobj, rot_y);
             }
         }
@@ -1490,7 +1493,6 @@ void lb_80012994(HSD_ImageDesc* img, u8 alpha, u8 blur_size, f32 x, f32 y,
                  f32 scale_x, f32 scale_y, f32 color_factor)
 {
     GXTexObj tex;
-    GXColor color;
     u16 w = img->width;
     u16 h = img->height;
     f32 y_p1, x_p1, y_m1, x_m1;
@@ -1499,18 +1501,20 @@ void lb_80012994(HSD_ImageDesc* img, u8 alpha, u8 blur_size, f32 x, f32 y,
     f32 off2 = 2.0f * off1;
 
     lb_800122F0(img, &tex, color_factor);
-    PAD_STACK(88);
+    PAD_STACK(0x5C);
 
-    color.a = alpha;
-    GXSetTevColor(GX_TEVREG0, color);
+#define color_slot(i) (((GXColor*) &tex)[i])
+
+    color_slot(-4).a = alpha;
+    GXSetTevColor(GX_TEVREG0, color_slot(-4));
     GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
                     GX_CA_ZERO);
     GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
                     GX_TEVPREV);
     lb_8001271C(&tex, x, y, (f32) w, (f32) h, scale_x, scale_y);
 
-    color.a = 0x7F;
-    GXSetTevColor(GX_TEVREG0, color);
+    color_slot(-6).a = 0x7F;
+    GXSetTevColor(GX_TEVREG0, color_slot(-6));
     GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
                     GX_CA_ZERO);
     GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
@@ -1518,8 +1522,8 @@ void lb_80012994(HSD_ImageDesc* img, u8 alpha, u8 blur_size, f32 x, f32 y,
     x_p1 = x + off1;
     lb_8001271C(&tex, x_p1, y, (f32) w, (f32) h, scale_x, scale_y);
 
-    color.a = 0xA9;
-    GXSetTevColor(GX_TEVREG0, color);
+    color_slot(-8).a = 0xA9;
+    GXSetTevColor(GX_TEVREG0, color_slot(-8));
     GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
                     GX_CA_ZERO);
     GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
@@ -1527,8 +1531,8 @@ void lb_80012994(HSD_ImageDesc* img, u8 alpha, u8 blur_size, f32 x, f32 y,
     x_m1 = x - off1;
     lb_8001271C(&tex, x_m1, y, (f32) w, (f32) h, scale_x, scale_y);
 
-    color.a = 0xBF;
-    GXSetTevColor(GX_TEVREG0, color);
+    color_slot(-10).a = 0xBF;
+    GXSetTevColor(GX_TEVREG0, color_slot(-10));
     GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
                     GX_CA_ZERO);
     GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
@@ -1536,8 +1540,8 @@ void lb_80012994(HSD_ImageDesc* img, u8 alpha, u8 blur_size, f32 x, f32 y,
     y_p1 = y + off1;
     lb_8001271C(&tex, x, y_p1, (f32) w, (f32) h, scale_x, scale_y);
 
-    color.a = 0xCC;
-    GXSetTevColor(GX_TEVREG0, color);
+    color_slot(-12).a = 0xCC;
+    GXSetTevColor(GX_TEVREG0, color_slot(-12));
     GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
                     GX_CA_ZERO);
     GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
@@ -1545,40 +1549,40 @@ void lb_80012994(HSD_ImageDesc* img, u8 alpha, u8 blur_size, f32 x, f32 y,
     y_m1 = y - off1;
     lb_8001271C(&tex, x, y_m1, (f32) w, (f32) h, scale_x, scale_y);
 
-    color.a = 0xD4;
-    GXSetTevColor(GX_TEVREG0, color);
+    color_slot(-14).a = 0xD4;
+    GXSetTevColor(GX_TEVREG0, color_slot(-14));
     GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
                     GX_CA_ZERO);
     GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
                     GX_TEVPREV);
     lb_8001271C(&tex, x_p1, y_p1, (f32) w, (f32) h, scale_x, scale_y);
 
-    color.a = 0xDA;
-    GXSetTevColor(GX_TEVREG0, color);
+    color_slot(-16).a = 0xDA;
+    GXSetTevColor(GX_TEVREG0, color_slot(-16));
     GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
                     GX_CA_ZERO);
     GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
                     GX_TEVPREV);
     lb_8001271C(&tex, x_m1, y_m1, (f32) w, (f32) h, scale_x, scale_y);
 
-    color.a = 0xDF;
-    GXSetTevColor(GX_TEVREG0, color);
+    color_slot(-18).a = 0xDF;
+    GXSetTevColor(GX_TEVREG0, color_slot(-18));
     GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
                     GX_CA_ZERO);
     GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
                     GX_TEVPREV);
     lb_8001271C(&tex, x_p1, y_m1, (f32) w, (f32) h, scale_x, scale_y);
 
-    color.a = 0xE2;
-    GXSetTevColor(GX_TEVREG0, color);
+    color_slot(-20).a = 0xE2;
+    GXSetTevColor(GX_TEVREG0, color_slot(-20));
     GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
                     GX_CA_ZERO);
     GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
                     GX_TEVPREV);
     lb_8001271C(&tex, x_m1, y_p1, (f32) w, (f32) h, scale_x, scale_y);
 
-    color.a = 0xE5;
-    GXSetTevColor(GX_TEVREG0, color);
+    color_slot(-22).a = 0xE5;
+    GXSetTevColor(GX_TEVREG0, color_slot(-22));
     GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
                     GX_CA_ZERO);
     GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
@@ -1586,8 +1590,8 @@ void lb_80012994(HSD_ImageDesc* img, u8 alpha, u8 blur_size, f32 x, f32 y,
     x_p2 = x + off2;
     lb_8001271C(&tex, x_p2, y, (f32) w, (f32) h, scale_x, scale_y);
 
-    color.a = 0xE7;
-    GXSetTevColor(GX_TEVREG0, color);
+    color_slot(-24).a = 0xE7;
+    GXSetTevColor(GX_TEVREG0, color_slot(-24));
     GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
                     GX_CA_ZERO);
     GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
@@ -1595,40 +1599,40 @@ void lb_80012994(HSD_ImageDesc* img, u8 alpha, u8 blur_size, f32 x, f32 y,
     x_m2 = x - off2;
     lb_8001271C(&tex, x_m2, y, (f32) w, (f32) h, scale_x, scale_y);
 
-    color.a = 0xE9;
-    GXSetTevColor(GX_TEVREG0, color);
+    color_slot(-26).a = 0xE9;
+    GXSetTevColor(GX_TEVREG0, color_slot(-26));
     GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
                     GX_CA_ZERO);
     GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
                     GX_TEVPREV);
     lb_8001271C(&tex, x_p2, y_p1, (f32) w, (f32) h, scale_x, scale_y);
 
-    color.a = 0xEB;
-    GXSetTevColor(GX_TEVREG0, color);
+    color_slot(-28).a = 0xEB;
+    GXSetTevColor(GX_TEVREG0, color_slot(-28));
     GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
                     GX_CA_ZERO);
     GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
                     GX_TEVPREV);
     lb_8001271C(&tex, x_m2, y_p1, (f32) w, (f32) h, scale_x, scale_y);
 
-    color.a = 0xEC;
-    GXSetTevColor(GX_TEVREG0, color);
+    color_slot(-30).a = 0xEC;
+    GXSetTevColor(GX_TEVREG0, color_slot(-30));
     GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
                     GX_CA_ZERO);
     GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
                     GX_TEVPREV);
     lb_8001271C(&tex, x_p2, y_m1, (f32) w, (f32) h, scale_x, scale_y);
 
-    color.a = 0xEE;
-    GXSetTevColor(GX_TEVREG0, color);
+    color_slot(-32).a = 0xEE;
+    GXSetTevColor(GX_TEVREG0, color_slot(-32));
     GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
                     GX_CA_ZERO);
     GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
                     GX_TEVPREV);
     lb_8001271C(&tex, x_m2, y_m1, (f32) w, (f32) h, scale_x, scale_y);
 
-    color.a = 0xEF;
-    GXSetTevColor(GX_TEVREG0, color);
+    color_slot(-34).a = 0xEF;
+    GXSetTevColor(GX_TEVREG0, color_slot(-34));
     GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
                     GX_CA_ZERO);
     GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
@@ -1636,8 +1640,8 @@ void lb_80012994(HSD_ImageDesc* img, u8 alpha, u8 blur_size, f32 x, f32 y,
     y_p2 = y + off2;
     lb_8001271C(&tex, x, y_p2, (f32) w, (f32) h, scale_x, scale_y);
 
-    color.a = 0xF0;
-    GXSetTevColor(GX_TEVREG0, color);
+    color_slot(-36).a = 0xF0;
+    GXSetTevColor(GX_TEVREG0, color_slot(-36));
     GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
                     GX_CA_ZERO);
     GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
@@ -1645,32 +1649,32 @@ void lb_80012994(HSD_ImageDesc* img, u8 alpha, u8 blur_size, f32 x, f32 y,
     y_m2 = y - off2;
     lb_8001271C(&tex, x, y_m2, (f32) w, (f32) h, scale_x, scale_y);
 
-    color.a = 0xF0;
-    GXSetTevColor(GX_TEVREG0, color);
+    color_slot(-38).a = 0xF0;
+    GXSetTevColor(GX_TEVREG0, color_slot(-38));
     GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
                     GX_CA_ZERO);
     GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
                     GX_TEVPREV);
     lb_8001271C(&tex, x_p1, y_p2, (f32) w, (f32) h, scale_x, scale_y);
 
-    color.a = 0xF1;
-    GXSetTevColor(GX_TEVREG0, color);
+    color_slot(-40).a = 0xF1;
+    GXSetTevColor(GX_TEVREG0, color_slot(-40));
     GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
                     GX_CA_ZERO);
     GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
                     GX_TEVPREV);
     lb_8001271C(&tex, x_p1, y_m2, (f32) w, (f32) h, scale_x, scale_y);
 
-    color.a = 0xF2;
-    GXSetTevColor(GX_TEVREG0, color);
+    color_slot(-42).a = 0xF2;
+    GXSetTevColor(GX_TEVREG0, color_slot(-42));
     GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
                     GX_CA_ZERO);
     GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
                     GX_TEVPREV);
     lb_8001271C(&tex, x_m1, y_p2, (f32) w, (f32) h, scale_x, scale_y);
 
-    color.a = 0xF2;
-    GXSetTevColor(GX_TEVREG0, color);
+    color_slot(-44).a = 0xF2;
+    GXSetTevColor(GX_TEVREG0, color_slot(-44));
     GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
                     GX_CA_ZERO);
     GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
@@ -1678,6 +1682,8 @@ void lb_80012994(HSD_ImageDesc* img, u8 alpha, u8 blur_size, f32 x, f32 y,
     lb_8001271C(&tex, x_m1, y_m2, (f32) w, (f32) h, scale_x, scale_y);
 
     HSD_StateInvalidate(2);
+
+#undef color_slot
 }
 static struct {
     u8 pad_0[0x28];

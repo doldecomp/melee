@@ -539,13 +539,17 @@ void ifMagnify_802FC618(void)
 
 void ifMagnify_802FC750(void)
 {
-    ifMagnify* base = &ifMagnify_804A1DE0;
+    ifMagnify* base;
+    ifMagnify* cur;
+    s32 offset;
     HSD_GObj** gobj_ptr;
     s32 i;
 
-    for (i = 0; i < 6; i++) {
-        if (*(HSD_GObj**) ((u8*) base + (i << 4) + 0x14) != NULL) {
-            gobj_ptr = (HSD_GObj**) ((u32) base + (i << 4) + 0x14);
+    base = &ifMagnify_804A1DE0;
+    for (cur = base, offset = (i = 0), offset <<= 4; i < 6;
+         i += 1, cur = (ifMagnify*) ((u32) cur + 0x10), offset += 0x10) {
+        if (cur->player[0].gobj != NULL) {
+            gobj_ptr = (HSD_GObj**) ((u32) base + offset + 0x14);
             HSD_GObjPLink_80390228(*gobj_ptr);
             *gobj_ptr = NULL;
         }

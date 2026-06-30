@@ -51,6 +51,11 @@
 /* 4D6694 */ extern SceneDesc* lbl_804D6694;
 /* 3B7D18 */ extern s32 lbl_803B7D18[9];
 
+typedef union TmAnimFrameTable {
+    s32 words[9];
+    u16 halfwords[9 * sizeof(s32) / sizeof(u16)];
+} TmAnimFrameTable;
+
 struct lbl_803DA2E0_t lbl_803DA2E0 = {
     {
         0x00, 0x01, 0x02, 0x03, 0x05, 0x06, 0x0C, 0x06, 0x06,
@@ -135,25 +140,25 @@ void fn_8019BF8C(HSD_GObj* gobj)
 void fn_8019C048(HSD_GObj* gobj)
 {
     TmData* tmd;
-    HSD_JObj* jobj;
     s32 idx;
     f32 x;
-    s32 table[9];
-    PAD_STACK(8);
+    TmAnimFrameTable table;
+    HSD_JObj* jobj;
+    PAD_STACK(4);
 
     tmd = gm_8018F634();
     idx = fn_8018F62C(gobj);
-    jobj = gobj->hsd_obj;
+    jobj = GET_JOBJ(gobj);
 
-    table[0] = lbl_803B7D18[0];
-    table[1] = lbl_803B7D18[1];
-    table[2] = lbl_803B7D18[2];
-    table[3] = lbl_803B7D18[3];
-    table[4] = lbl_803B7D18[4];
-    table[5] = lbl_803B7D18[5];
-    table[6] = lbl_803B7D18[6];
-    table[7] = lbl_803B7D18[7];
-    table[8] = lbl_803B7D18[8];
+    table.words[0] = lbl_803B7D18[0];
+    table.words[1] = lbl_803B7D18[1];
+    table.words[2] = lbl_803B7D18[2];
+    table.words[3] = lbl_803B7D18[3];
+    table.words[4] = lbl_803B7D18[4];
+    table.words[6] = lbl_803B7D18[6];
+    table.words[5] = lbl_803B7D18[5];
+    table.words[7] = lbl_803B7D18[7];
+    table.words[8] = lbl_803B7D18[8];
 
     if ((s8) (u8) HSD_PadMasterStatus[(u8) idx].err != 0) {
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
@@ -184,10 +189,9 @@ void fn_8019C048(HSD_GObj* gobj)
 
     tmd->x524[2]->hidden = 0;
 
-    lbl_80479A58.x1D[idx].a = ((u16*) table)[lbl_80479A58.x1D[idx].x0 * 3 + 0];
-    lbl_80479A58.x1D[idx].c = ((u16*) table)[lbl_80479A58.x1D[idx].x0 * 3 + 1];
-    lbl_80479A58.x1D[idx].x2 =
-        ((u16*) table)[lbl_80479A58.x1D[idx].x0 * 3 + 2];
+    lbl_80479A58.x1D[idx].a = table.halfwords[lbl_80479A58.x1D[idx].x0 * 3];
+    lbl_80479A58.x1D[idx].c = table.halfwords[lbl_80479A58.x1D[idx].x0 * 3 + 1];
+    lbl_80479A58.x1D[idx].x2 = table.halfwords[lbl_80479A58.x1D[idx].x0 * 3 + 2];
 
     if (lbl_80479A58.x1D[idx].b < lbl_80479A58.x1D[idx].a) {
         lbl_80479A58.x1D[idx].b = lbl_80479A58.x1D[idx].a;
@@ -1020,6 +1024,9 @@ void gm_8019E634(void)
     s32 results[4];
     TmData* tmd;
     s32 hmn_cpu;
+    MatchEnd* match_end;
+    s32* results_base;
+    s32* result_ptr;
     s32 i, j;
     u64 audio_mask;
 
@@ -1032,19 +1039,23 @@ void gm_8019E634(void)
     indices[3] = lbl_803B7D3C[3];
 
     /* Get match results per player */
-    for (i = 0; i < (s32) tmd->x30; i++) {
-        results[i] = fn_80166CBC(&gm_80477738, i);
+    match_end = &gm_80477738;
+    results_base = results;
+    for (result_ptr = results_base, i = 0; i < (s32) tmd->x30;
+         result_ptr++, i++)
+    {
+        *result_ptr = fn_80166CBC(match_end, i);
     }
 
     /* Bubble sort results, keeping indices in parallel */
     for (i = 0; i < (s32) (tmd->x30 - 1); i++) {
         for (j = 0; j < (s32) ((tmd->x30 - 1) - i); j++) {
-            if (results[j] > results[j + 1]) {
-                s32 tr = results[j];
+            if (results_base[j] > results_base[j + 1]) {
+                s32 tr = results_base[j];
                 s32 ti = indices[j];
-                results[j] = results[j + 1];
+                results_base[j] = results_base[j + 1];
                 indices[j] = indices[j + 1];
-                results[j + 1] = tr;
+                results_base[j + 1] = tr;
                 indices[j + 1] = ti;
             }
         }
@@ -1052,16 +1063,19 @@ void gm_8019E634(void)
 
     /* Handicap adjustment */
     if ((u8) gmMainLib_8015CC34()->handicap == 1) {
-        u32 hbuf_init;
+        union {
+            u32 word;
+            u8 bytes[4];
+        } hbuf_data;
         u8* hbuf;
 
-        hbuf_init = lbl_804DA948;
-        hbuf = (u8*) &hbuf_init;
+        hbuf_data.word = *(u32*) &lbl_804DA948;
+        hbuf = hbuf_data.bytes;
 
         /* Read handicap from x37 entries */
         for (i = 0; i < 4; i++) {
             if (i < (s32) tmd->x30) {
-                s32 id = results[i];
+                s32 id = results_base[i];
                 TmData* p = gm_8018F634();
                 for (j = 0; j < (s32) p->x2E; j++) {
                     if (id != (s32) p->x37[j].xF) {
@@ -1080,7 +1094,7 @@ void gm_8019E634(void)
         /* Write back adjusted handicap */
         for (i = 0; i < 4; i++) {
             if (i < (s32) tmd->x30) {
-                s32 id = results[i];
+                s32 id = results_base[i];
                 TmData* p = gm_8018F634();
                 for (j = 0; j < (s32) p->x2E; j++) {
                     if (id != (s32) p->x37[j].xF) {

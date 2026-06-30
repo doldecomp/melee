@@ -13,6 +13,10 @@ extern s32 hsd_804D79C0;
 extern s32 hsd_804D79C4;
 extern u8 hsd_804D79C8;
 
+typedef struct HSD_JpegWork {
+    u8 data[2084];
+} HSD_JpegWork;
+
 u8 lbl_80431090[0x5A8] = {
     0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
     0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
@@ -263,6 +267,7 @@ read_huffman_code:
 #pragma dont_inline on
 void hsd_803B5EA0(s32 arg0)
 {
+    u8* base;
     s32 scratch_r29;
     s32 scratch_r29_2;
     s32 scratch_r29_3;
@@ -283,6 +288,8 @@ void hsd_803B5EA0(s32 arg0)
     s32 scratch_r27;
     s32* scratch_r5;
 
+    work_r29 = 1;
+    base = hsd_804D2E70;
     scratch_r27 = hsd_803B5D70(0, arg0);
     if (scratch_r27 > 0) {
         work_r3 = hsd_803B5C4C(scratch_r27);
@@ -292,9 +299,8 @@ void hsd_803B5EA0(s32 arg0)
     } else {
         work_r3 = 0;
     }
-    scratch_r5 = (s32*) (hsd_804D2E70 + (arg0 * 4));
+    scratch_r5 = (s32*) (base + (arg0 * 4));
     scratch_r5[0x206] = (s32) (scratch_r5[0x206] + work_r3);
-    work_r29 = 1;
     HSD_COEFF(0) = (s32) scratch_r5[0x206];
     while (work_r29 < 0x40) {
         if ((scratch_r3_2 = hsd_803B5D70(1, arg0)) == 0) {
@@ -323,7 +329,7 @@ void hsd_803B5EA0(s32 arg0)
                         scratch_r29_6 = scratch_r29_5 + 1;
                         HSD_COEFF(lbl_80431638[scratch_r29_4]) = 0;
                         HSD_COEFF(lbl_80431638[scratch_r29_5]) = 0;
-                        work_r29 = scratch_r29_6 + 1 + 1;
+                        work_r29 = scratch_r29_6 + 1;
                         HSD_COEFF(lbl_80431638[scratch_r29_6]) = 0;
                         HSD_COEFF(lbl_80431638[work_r29 - 1]) = 0;
                         work_ctr_3 -= 1;
@@ -690,6 +696,11 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
 
 s32 hsd_803B6BE4(char* arg0, s32 arg1, void* arg2)
 {
+    s32* base_s32;
+    u8* base;
+    u8* quant_table;
+    s32 work_r28;
+    s32 work_r29;
     s32 scratch_r6_4;
     s32 scratch_r7;
     s32 scratch_r7_3;
@@ -729,10 +740,6 @@ s32 hsd_803B6BE4(char* arg0, s32 arg1, void* arg2)
     u8* scratch_r5_9;
     u8* scratch_r6;
     u8* scratch_r6_2;
-    u8* quant_table;
-    u8* base;
-    s32 work_r28;
-    s32 work_r29;
     u8* work_r24;
     u8* work_r24_2;
     u8* work_r4;
@@ -744,18 +751,20 @@ s32 hsd_803B6BE4(char* arg0, s32 arg1, void* arg2)
     u8* work_r5_2;
 
     PAD_STACK(0x48);
-    quant_table = lbl_80431090;
-    base = hsd_804D2E70;
+    base_s32 = (s32*) hsd_804D2E70;
     hsd_804D79C0 = arg1;
+    quant_table = lbl_80431090;
     hsd_804D79B8 = (u8*) arg0;
     hsd_804D79BC = (u8*) arg0;
-    M2C_FIELD(base, s32*, 0x820) = 0;
-    M2C_FIELD(base, s32*, 0x81C) = 0;
-    M2C_FIELD(base, s32*, 0x818) = 0;
+    base = ((HSD_JpegWork*) base_s32)->data;
+    base_s32[0x208] = 0;
+    base_s32[0x207] = 0;
+    base_s32[0x206] = 0;
     hsd_804D79C4 = 0;
-    if (__setjmp((__jmp_buf*) base) != 0) {
+    if (__setjmp((__jmp_buf*) base_s32) != 0) {
         return 0;
     }
+    scratch_r5 = &hsd_804D79BC[hsd_804D79C0];
 loop_3:
     if (*(u16*) hsd_804D79B8 == 0xFFDB) {
         work_r4 = lbl_80431638;
@@ -791,12 +800,13 @@ loop_3:
     } else {
         scratch_r0_2 = hsd_804D79B8 + 1;
         hsd_804D79B8 = scratch_r0_2;
-        if (scratch_r0_2 >= &hsd_804D79BC[hsd_804D79C0]) {
+        if (scratch_r0_2 >= scratch_r5) {
             longjmp((__jmp_buf*) base, 1);
         } else {
             goto loop_3;
         }
     }
+    scratch_r5 = &hsd_804D79BC[hsd_804D79C0];
 loop_11:
     if (*(u16*) hsd_804D79B8 == 0xFFDB) {
         work_r4_2 = lbl_80431638;
@@ -840,12 +850,13 @@ loop_11:
     } else {
         scratch_r0_4 = hsd_804D79B8 + 1;
         hsd_804D79B8 = scratch_r0_4;
-        if (scratch_r0_4 >= &hsd_804D79BC[hsd_804D79C0]) {
+        if (scratch_r0_4 >= scratch_r5) {
             longjmp((__jmp_buf*) base, 1);
         } else {
             goto loop_11;
         }
     }
+    scratch_r5 = &hsd_804D79BC[hsd_804D79C0];
 loop_19:
     if (*(u16*) hsd_804D79B8 == 0xFFC0) {
         hsd_804D79B8 += 5;
@@ -856,12 +867,13 @@ loop_19:
     } else {
         scratch_r0_5 = hsd_804D79B8 + 1;
         hsd_804D79B8 = scratch_r0_5;
-        if (scratch_r0_5 >= &hsd_804D79BC[hsd_804D79C0]) {
+        if (scratch_r0_5 >= scratch_r5) {
             longjmp((__jmp_buf*) base, 1);
         } else {
             goto loop_19;
         }
     }
+    scratch_r5 = &hsd_804D79BC[hsd_804D79C0];
 loop_24:
     if (*(u16*) hsd_804D79B8 == 0xFFDA) {
         hsd_804D79B8 += 2;
@@ -869,7 +881,7 @@ loop_24:
     } else {
         scratch_r0_6 = hsd_804D79B8 + 1;
         hsd_804D79B8 = scratch_r0_6;
-        if (scratch_r0_6 >= &hsd_804D79BC[hsd_804D79C0]) {
+        if (scratch_r0_6 >= scratch_r5) {
             longjmp((__jmp_buf*) base, 1);
         } else {
             goto loop_24;

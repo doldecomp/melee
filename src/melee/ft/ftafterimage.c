@@ -32,8 +32,9 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 {
     Fighter* fp;
     itSword_UnkBytes* params;
-    AfterimageVtx vtx_buf[151];
     f32 cumDist[3];
+    AfterimageVtx vtx_buf[151];
+    f32 d2;
     Vec3 delta, prevPos, crossProd, tempDir;
     s32 numVerts;
     s32 nextIdx;
@@ -141,11 +142,9 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                 delta.z = entry->xC.z * x20FC + entry->x0.z - prevPos.z;
 
                 if (i != (s8) (u8) fp->x2100 - 1) {
-                    f32 d2 = delta.z * delta.z +
-                             (delta.x * delta.x + delta.y * delta.y);
-                    if (d2 > 0.0f) {
-                        d2 = sqrtf(d2);
-                    }
+                    d2 = delta.z * delta.z +
+                         (delta.x * delta.x + delta.y * delta.y);
+                    d2 = sqrtf(d2);
                     totalDist += d2;
                     *dp = totalDist;
                     dp++;

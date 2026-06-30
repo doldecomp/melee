@@ -420,6 +420,11 @@ loop2_check:
     *arg1 = prev_a;
 }
 
+static inline MapJoint* mpIsland_GetJointInner(CollJoint* joints)
+{
+    return joints->inner;
+}
+
 void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
                        int arg3, int arg4, int arg5, bool arg6)
 {
@@ -443,7 +448,7 @@ void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
     float min_x;
     float max_x;
     int i;
-    PAD_STACK(16);
+    PAD_STACK(12);
 
     type_flag = arg3 | 0x10;
     prev = NULL;
@@ -468,7 +473,7 @@ void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
     joints = &joints[arg2];
     lines = mpGetGroundCollLine();
     vtx = mpGetGroundCollVtx();
-    inner = joints->inner;
+    inner = mpIsland_GetJointInner(joints);
     z_val = mpIsland_804D8158;
 
     end_total = inner->dynamic_start + inner->dynamic_count;
@@ -543,8 +548,7 @@ void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
             } while (i != link);
         }
 
-        mpisp = *arg1;
-        if (mpisp != NULL) {
+        if ((mpisp = *arg1) != NULL) {
             *arg1 = mpisp->next;
         } else {
             mpisp = HSD_MemAlloc(0x2C);

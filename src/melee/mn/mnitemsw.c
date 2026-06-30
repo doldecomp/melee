@@ -205,16 +205,15 @@ void mnItemSw_80233B68(MnItemSwData* arg0, u32 arg1)
 
 void fn_80233E10(HSD_GObj* gobj)
 {
+    MnItemSwData* data;
     u8* order;
     u32 buttons;
     s32 i;
-    MnItemSwData* data;
 
     PAD_STACK(0x20);
 
     data = (MnItemSwData*) mnItemSw_804D6BE8->user_data;
-    buttons = mn_80229624(4);
-    mn_804A04F0.buttons = buttons;
+    buttons = Menu_GetAllInputs();
     i = 0;
 
     if (buttons & MenuInput_Back) {
@@ -264,22 +263,28 @@ void fn_80233E10(HSD_GObj* gobj)
         sfxForward();
         switch ((s32) gm_801A4310()) {
         case 1:
-            order = mnItemSw_803ED340.item_order;
-            data = (MnItemSwData*) mnItemSw_804D6BE8->user_data;
-            for (i = 0; i < 0x1F; i++, order++) {
-                mn_8022E978(*order, data->items[i]);
+            {
+                u8* order2 = mnItemSw_803ED340.item_order;
+                MnItemSwData* data2 =
+                    (MnItemSwData*) mnItemSw_804D6BE8->user_data;
+                for (i = 0; i < 0x1F; i++, order2++) {
+                    mn_8022E978(*order2, data2->items[i]);
+                }
+                gmMainLib_8015CC58()->item_freq = data2->x21 - 1;
             }
-            gmMainLib_8015CC58()->item_freq = data->x21 - 1;
             lb_8001CE00();
             mn_80229860(2);
             return;
         default:
-            order = mnItemSw_803ED340.item_order;
-            data = (MnItemSwData*) mnItemSw_804D6BE8->user_data;
-            for (i = 0; i < 0x1F; i++, order++) {
-                mn_8022E978(*order, data->items[i]);
+            {
+                u8* order2 = mnItemSw_803ED340.item_order;
+                MnItemSwData* data2 =
+                    (MnItemSwData*) mnItemSw_804D6BE8->user_data;
+                for (i = 0; i < 0x1F; i++, order2++) {
+                    mn_8022E978(*order2, data2->items[i]);
+                }
+                gmMainLib_8015CC58()->item_freq = data2->x21 - 1;
             }
-            gmMainLib_8015CC58()->item_freq = data->x21 - 1;
             lb_8001CE00();
             mn_8022F4CC();
             return;

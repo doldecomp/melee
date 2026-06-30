@@ -36,6 +36,20 @@ static void order_data(void)
 /* @todo Currently ~98.4% match - register allocation differences
  * remain: r28/r29 swap (scan/cap_ptr) and loop/local register swaps
  * in the allocation table scan and report indentation loops. */
+static inline u32* HSD_LeakGetCapacityPtr(HSD_LeakChecker* lc)
+{
+    return &lc->capacity;
+}
+
+static inline void HSD_LeakReportSpaces(u32 count)
+{
+    u32 i;
+
+    for (i = 0; i < count; i++) {
+        OSReport(" ");
+    }
+}
+
 int HSD_Leak_80387DF8(int indent)
 {
     u32 val;
@@ -60,22 +74,16 @@ int HSD_Leak_80387DF8(int indent)
     leak_count = 0;
 
     if (lc->table == NULL) {
-        for (i = 0; i < (u32) indent; i++) {
-            OSReport(" ");
-        }
+        HSD_LeakReportSpaces(indent);
         OSReport("Leak checker is not initialized.\n");
         return 0;
     }
 
-    for (i = 0; i < (u32) indent; i++) {
-        OSReport(" ");
-    }
+    HSD_LeakReportSpaces(indent);
     OSReport("Begin memory leak check ...\n");
 
-    for (j = 0; j < (u32) (indent + 2); j++) {
-        OSReport(" ");
-    }
-    cap_ptr = &lc->capacity;
+    HSD_LeakReportSpaces(indent + 2);
+    cap_ptr = HSD_LeakGetCapacityPtr(lc);
     OSReport("number of registered ptr: %d / %d (peak %d)\n", lc->used,
              *cap_ptr, lc->peak);
 
@@ -87,10 +95,10 @@ int HSD_Leak_80387DF8(int indent)
             if ((word & 3) == 0) {
                 u32 top = word >> 28;
                 if (top == 8 || top == 0xC) {
-                    u32 phys_addr = word & 0x0FFFFFFF;
-                    if (phys_addr >= heap_start_align && val > phys_addr) {
-                        u32 virt = phys_addr | 0x80000000;
-                        u32* hdr = (u32*) (virt - 0x20);
+                    if ((word & 0x0FFFFFFF) >= heap_start_align &&
+                        val > (word & 0x0FFFFFFF))
+                    {
+                        u32* hdr = (u32*) ((word | 0x80000000) - 0x20);
                         if (*hdr == HEAP_MAGIC) {
                             u32 reg_idx = hdr[1];
                             if ((u32) (reg_idx + 0x10000) != 0xFFFF &&
@@ -112,16 +120,16 @@ int HSD_Leak_80387DF8(int indent)
     /* Check allocation table for leaks */
     i = indent;
     i += 2;
-    val = (u32) lc->table;
-    scan = (u32*) (val + (*cap_ptr << 2));
-    ofs = 0;
-    for (heap_start_align = 0; heap_start_align < *cap_ptr; heap_start_align++)
+    scan = lc->table;
+    val = (u32) (scan + *cap_ptr);
+    heap_start_align = 0;
+    for (ofs = 0; ofs < *cap_ptr; ofs++)
     {
-        u32* ep = (u32*) ((u32) lc->table + ofs);
+        u32* ep = (u32*) ((u32) lc->table + heap_start_align);
         heap_start_phys = (u32*) *ep;
         if ((u32) heap_start_phys & 1) {
             *ep = (u32) heap_start_phys & ~1u;
-        } else if ((u32*) val <= heap_start_phys && heap_start_phys < scan) {
+        } else if (scan <= heap_start_phys && heap_start_phys < (u32*) val) {
         } else if (heap_start_phys != NULL) {
             u32* block = (u32*) heap_start_phys;
             if (block[0] == HEAP_MAGIC) {
@@ -150,7 +158,7 @@ int HSD_Leak_80387DF8(int indent)
         next_leak:
             leak_count++;
         }
-        ofs += 4;
+        heap_start_align += 4;
     }
 
     if (leak_count > 0) {

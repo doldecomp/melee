@@ -598,6 +598,9 @@ s32 lbRefract_PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc)
             s32 hi;
             s32 count;
             s32 copied;
+            s32 n;
+            u32 iters;
+            s32 remaining;
             if ((display[offset++] & 0xF8) == 0) {
                 break;
             }
@@ -605,15 +608,14 @@ s32 lbRefract_PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc)
             ptr = display + offset;
             hi = ptr[0];
             copied = 0;
-            count = ptr[1];
+            count = (hi << 8) | ptr[1];
             offset += 2;
-            count = (count & ~0xFF00) | (hi << 8);
 
             if (count > 0) {
-                s32 n = count - 8;
+                n = count - 8;
 
                 if (count > 8) {
-                    u32 iters = (u32) (n + 7) >> 3U;
+                    iters = (u32) (n + 7) >> 3U;
 
                     if (n > 0) {
                         do {
@@ -638,20 +640,12 @@ s32 lbRefract_PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc)
                     }
                 }
 
-                {
-                    u8* sp = src + offset;
-                    u8* dp = dst + offset;
-
-                    if (copied < count) {
-                        s32 remaining = count - copied;
-
-                        do {
-                            *dp = *sp;
-                            sp += stride;
-                            offset += stride;
-                            dp += stride;
-                        } while (--remaining != 0);
-                    }
+                remaining = count - copied;
+                if (copied < count) {
+                    do {
+                        dst[offset] = src[offset];
+                        offset += stride;
+                    } while (--remaining != 0);
                 }
             }
         }

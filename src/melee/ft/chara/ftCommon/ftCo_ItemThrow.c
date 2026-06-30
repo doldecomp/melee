@@ -26,7 +26,11 @@
 
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/item.h"
+
+void Item_8026ABD8(HSD_GObj* gobj, Vec3* pos, float);
+void Item_8026AC74(HSD_GObj* gobj, Vec3*, Vec3*, float);
+void Item_8026AD20(HSD_GObj* gobj, Vec3*, Vec3*, float, int);
+
 #include "lb/lb_00B0.h"
 #include "pl/plbonuslib.h"
 
@@ -520,6 +524,11 @@ void ftCo_ItemThrow_Anim(Fighter_GObj* gobj)
     }
 }
 
+static inline float getItemThrowFsm(Fighter* fp)
+{
+    return -fp->cmd_timer / fp->frame_speed_mul;
+}
+
 void ftCo_80095EFC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -542,14 +551,18 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                     fp->cmd_vars[1] = 0;
                 }
                 {
-                    float fsm = -fp->cmd_timer / fp->frame_speed_mul;
-                    float cd_xB4 = co_attrs->xB4;
-                    float base_throw_speed =
-                        cd_xB4 * ((ftCo_ItemThrowAttrs*)
-                                      Fighter_804D6550)[fp->motion_id -
-                                                        ftCo_MS_LightThrowF]
-                                     .x8;
-                    float throw_speed = throw_scale * base_throw_speed;
+                    float fsm;
+                    float cd_xB4;
+                    ftCo_ItemThrowAttrs* attrs;
+                    float base_throw_speed;
+                    float throw_speed;
+                    fsm = getItemThrowFsm(fp);
+                    cd_xB4 = co_attrs->xB4;
+                    attrs = (ftCo_ItemThrowAttrs*) Fighter_804D6550;
+                    attrs += fp->motion_id;
+                    base_throw_speed =
+                        cd_xB4 * attrs[-ftCo_MS_LightThrowF].x8;
+                    throw_speed = throw_scale * base_throw_speed;
                     {
                         vec2.x = fsm * (fp->mv.co.itemthrow4.x8.x - vec0.x) +
                                  vec0.x;
@@ -577,7 +590,7 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                                     ftCommon_8007EBAC(fp, 27, 0);
                                 }
                                 Item_8026AD20(fp->item_gobj, &vec2, &vec1,
-                                              throw_speed);
+                                              throw_speed, true);
                             } else {
                                 if (it_8026B2B4(fp->item_gobj) == 1) {
                                     ftCommon_8007EBAC(fp, 28, 0);
@@ -585,7 +598,7 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                                     ftCommon_8007EBAC(fp, 26, 0);
                                 }
                                 Item_8026AD20(fp->item_gobj, &vec2, &vec1,
-                                              throw_speed);
+                                              throw_speed, false);
                             }
                         }
                     }

@@ -331,11 +331,14 @@ HSD_GObj* grZakoGenerator_801CAE04(grZakoGenerator_SpawnDesc* arg0)
 
 void grZakoGenerator_801CAEB0(int arg0, int arg1)
 {
+    grZakoGenerator_Data** data_p = &lbl_8049F030.x4;
     s16 val = arg1;
-    if (lbl_8049F030.x4->sentinel.x0 == -1) {
-        lbl_8049F030.x4->sentinel.x0 = val;
-        lbl_8049F030.x4->sentinel.x8 = arg0;
-        lbl_8049F030.x4->sentinel.x4 = NULL;
+    grZakoGenerator_Entry* sentinel = &(*data_p)->sentinel;
+
+    if (sentinel->x0 == -1) {
+        sentinel->x0 = val;
+        sentinel->x8 = arg0;
+        (*data_p)->sentinel.x4 = NULL;
     }
 }
 

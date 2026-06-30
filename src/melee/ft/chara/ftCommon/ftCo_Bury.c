@@ -188,9 +188,12 @@ void ftCo_800C0B20(Fighter_GObj* gobj)
             HitCapsule hit;
             Fighter* fp = GET_FIGHTER(gobj);
             float f = ftColl_800765F0(fp, NULL, unk_anim->count);
+            int hurt_idx = 0;
             fp->bury_timer_1 = p_ftCommonData->bury_timer_unk1;
             if (ftColl_80076640(fp, &f)) {
-                FighterHurtCapsule* hurt = &fp->hurt_capsules[0];
+                FighterHurtCapsule* hurt;
+                hurt_idx *= sizeof(FighterHurtCapsule);
+                hurt = (FighterHurtCapsule*) ((intptr_t) fp + hurt_idx + 0x11A0);
                 ftColl_80076764(3, 1, 0, unk_anim, fp, hurt);
 
                 /// @todo Eliminate cast

@@ -25,7 +25,9 @@ void lbArq_80014AC4(lbArqHandle* handle)
     intr = OSDisableInterrupts();
 
     /* Remove from current list (indexed by state) */
-    prev = &global->list[node->state];
+    prev = (lbArqNode**) (node->state * 4);
+    prev = (lbArqNode**) ((uintptr_t) prev + 0x1E0);
+    prev = (lbArqNode**) ((uintptr_t) prev + (uintptr_t) global);
     while (*prev != node) {
         prev = &(*prev)->next;
     }
