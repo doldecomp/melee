@@ -713,7 +713,8 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                     if (a1.y > b_y) {
                         {
                             float y;
-                            y = a1.y + sum_pq;
+                            y = a1.y;
+                            y += sum_pq;
                             if (y < c1.y && y < d->y) {
                                 return false;
                             }

@@ -3896,7 +3896,8 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
         }
 
         /* Override: check other platforms heading toward self */
-        self = gp + offset;
+        self = gp;
+        self += offset;
         for (j = 0; j < 4; j++) {
             u32 st;
             u8* p;

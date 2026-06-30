@@ -2904,7 +2904,8 @@ void Camera_8002D85C(void* unused)
 
             dx = cam->transform.target_interest.x - cam->transform.interest.x;
             dy = cam->transform.target_interest.y - cam->transform.interest.y;
-            dz = cam->transform.target_interest.z - cam->transform.interest.z;
+            dz = cam->transform.target_interest.z;
+            dz -= cam->transform.interest.z;
             cam->transform.interest.x += dx * cm_803BCCA0.x64;
             cam->transform.interest.y += dy * cm_803BCCA0.x64;
             cam->transform.interest.z += dz * cm_803BCCA0.x64;
