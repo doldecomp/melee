@@ -821,7 +821,8 @@ void fn_802461BC(HSD_GObj* gobj)
                 data->row_labels[i] = t;
                 i_u8 = i;
                 limit = (data->is_name_mode != 0) ? 0x18 : 0x15;
-                v = base_idx_u8 + i_u8;
+                v = base_idx_u8;
+                v += i_u8;
                 if (v >= limit) {
                     v = v - limit;
                 } else {
