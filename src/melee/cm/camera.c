@@ -1959,6 +1959,7 @@ void Camera_8002C5B4(Camera_x2D0* arg0)
     f32 pitch;
     f32 yaw;
     f32 limit;
+    u8 operand_pad[8];
     PAD_STACK(16);
 
     cam = &cm_80452C68;
