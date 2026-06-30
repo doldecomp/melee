@@ -212,7 +212,7 @@ static inline struct grGreens_BlockVars* getBlock(Ground* gp, int i, int j)
 static inline Vec* getVec(Ground* gp, int i, int j);
 static inline Vec* getVec(Ground* gp, int i, int j)
 {
-    return &gp->gv.greens.x4[i * 6 + j];
+    return &((Vec(*)[6]) gp->gv.greens.x4)[i][j];
 }
 
 void grGreens_80213458(bool arg)
@@ -973,11 +973,11 @@ void grGreens_80215358(Ground_GObj* gobj, int col, int row, int arg3, int arg4)
     unsigned char arr[30];
     int m;
     int n;
-    int num;
-    int type;
     Ground_GObj* block_gobj;
-    HSD_JObj* jobj;
     Item_GObj* item_gobj;
+    HSD_JObj* jobj;
+    int type;
+    int num;
     int x24_or_x28;
     float grMaterial_801C8DE0_paramA;
     float grMaterial_801C8DE0_paramB;

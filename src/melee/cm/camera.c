@@ -1944,22 +1944,20 @@ void Camera_8002C1A8(void)
 
 void Camera_8002C5B4(Camera_x2D0* arg0)
 {
-    Vec3 cross1;
-    Vec3 cross2;
+    UNUSED u64 pad;
     Vec3 temp_pos;
+    Vec3 cross1;
+    f32 xz_dist;
+    Vec3 cross2;
     Camera* cam;
     Camera_x2D0* params;
-    Vec3* cam_pos;
-    Vec3* cam_offset;
+    f32* eye_offset_z;
     Vec3* eye_offset;
     f32* eye_offset_y;
-    f32* eye_offset_z;
     f32 len_3d;
-    f32 xz_dist;
     f32 pitch;
     f32 yaw;
     f32 limit;
-    PAD_STACK(16);
 
     cam = &cm_80452C68;
     params = arg0;
@@ -1968,40 +1966,38 @@ void Camera_8002C5B4(Camera_x2D0* arg0)
         params->callback(arg0);
     }
 
-    cam_pos = &cam->x308;
     limit = params->x_max;
-    if (cam_pos->x > limit) {
-        cam_pos->x = limit;
+    if (cm_80452C68.x308.x > limit) {
+        cm_80452C68.x308.x = limit;
     } else {
         limit = params->x_min;
-        if (cam_pos->x < limit) {
-            cam_pos->x = limit;
+        if (cm_80452C68.x308.x < limit) {
+            cm_80452C68.x308.x = limit;
         }
     }
 
     limit = params->y_max;
-    if (cam_pos->y > limit) {
-        cam_pos->y = limit;
+    if (cm_80452C68.x308.y > limit) {
+        cm_80452C68.x308.y = limit;
     } else {
         limit = params->y_min;
-        if (cam_pos->y < limit) {
-            cam_pos->y = limit;
+        if (cm_80452C68.x308.y < limit) {
+            cm_80452C68.x308.y = limit;
         }
     }
 
     limit = params->z_max;
-    if (cam_pos->z > limit) {
-        cam_pos->z = limit;
+    if (cm_80452C68.x308.z > limit) {
+        cm_80452C68.x308.z = limit;
     } else {
         limit = params->z_min;
-        if (cam_pos->z < limit) {
-            cam_pos->z = limit;
+        if (cm_80452C68.x308.z < limit) {
+            cm_80452C68.x308.z = limit;
         }
     }
 
-    cam_offset = &cam->x314;
-    temp_pos = *cam_offset;
-    lbVector_Add(&temp_pos, cam_pos);
+    temp_pos = cm_80452C68.x314;
+    lbVector_Add(&temp_pos, &cm_80452C68.x308);
 
     if (temp_pos.x > params->x_max) {
         temp_pos.x = params->x_max;
@@ -2021,12 +2017,12 @@ void Camera_8002C5B4(Camera_x2D0* arg0)
         temp_pos.z = params->z_min;
     }
 
-    lbVector_Sub(&temp_pos, cam_pos);
-    *cam_offset = temp_pos;
+    lbVector_Sub(&temp_pos, &cm_80452C68.x308);
+    cm_80452C68.x314 = temp_pos;
 
     eye_offset = &cam->pause_eye_offset;
-    eye_offset_y = &eye_offset->y;
-    eye_offset_z = &eye_offset->z;
+    eye_offset_y = &cam->pause_eye_offset.y;
+    eye_offset_z = &cam->pause_eye_offset.z;
 
     len_3d =
         sqrtf((*eye_offset_z * *eye_offset_z) +
@@ -2063,6 +2059,25 @@ void Camera_8002C5B4(Camera_x2D0* arg0)
     }
 }
 
+static inline void Camera_8002C908_Init(Camera* cam,
+                                        CameraTransformState** transform,
+                                        CameraBounds* bounds)
+{
+    *transform = &cam->transform;
+    Camera_8002958C(bounds, *transform);
+    Camera_8002C1A8();
+}
+
+static inline Vec3* Camera_8002C908_GetOffset(Camera* cam)
+{
+    return &cam->x314;
+}
+
+static inline Camera* Camera_8002C908_GetCamera(void)
+{
+    return &cm_80452C68;
+}
+
 void Camera_8002C908(void* arg0)
 {
     CameraBounds bounds;
@@ -2075,12 +2090,10 @@ void Camera_8002C908(void* arg0)
     s32 valid;
     Vec3* pos_ptr;
 
-    cam = &cm_80452C68;
+    cam = Camera_8002C908_GetCamera();
     Camera_80030DF8();
     Camera_800293E0();
-    transform = &cam->transform;
-    Camera_8002958C(&bounds, transform);
-    Camera_8002C1A8();
+    Camera_8002C908_Init(cam, &transform, &bounds);
     pos_ptr = &cam->x308;
     slot_ptr = &cam->x304;
 
@@ -2117,16 +2130,18 @@ loop_check: {
     {
         Vec3* position;
         Vec3* tgt_interest;
+        Vec3* tgt_interest2;
         Vec3* tgt_position;
         CameraUnkGlobals* globals;
         f32 coeff;
 
         tgt_interest = &transform->target_interest;
-        transform->target_interest = *pos_ptr;
-        lbVector_Add(tgt_interest, &cam->x314);
+        tgt_interest2 = &cam->transform.target_interest;
+        *tgt_interest2 = *pos_ptr;
+        lbVector_Add(tgt_interest, Camera_8002C908_GetOffset(cam));
 
         tgt_position = &transform->target_position;
-        transform->target_position = *tgt_interest;
+        cam->transform.target_position = *tgt_interest2;
         lbVector_Add(tgt_position, &cam->pause_eye_offset);
 
         position = &transform->position;
@@ -2146,10 +2161,10 @@ loop_check: {
         sp10.z *= coeff;
         lbVector_Add(&transform->interest, &sp10);
 
-        transform->target_fov = cam->x32C;
-        transform->fov =
-            (transform->target_fov - transform->fov) * globals->x88 +
-            transform->fov;
+        cam->transform.target_fov = cam->x32C;
+        cam->transform.fov =
+            (cam->transform.target_fov - cam->transform.fov) * globals->x88 +
+            cam->transform.fov;
     }
     Camera_8002A28C(&bounds);
     Camera_8002A0C0(&bounds, transform);
@@ -2894,7 +2909,7 @@ void Camera_8002D85C(void* unused)
             f32 dz;
 
             subj_pos = &subject->x1C;
-            cam->transform.target_interest.x = subject->x1C.x;
+            cam->transform.target_interest.x = subj_pos->x;
             cam->transform.target_interest.y = subj_pos->y;
             cam->transform.target_interest.z = subj_pos->z;
 
@@ -3108,9 +3123,8 @@ check_done2:
 void Camera_8002DDC4(void* arg0)
 {
     CameraBounds bounds;
-    Vec3 spC;
+    Vec3* interest;
     Vec3* tgt_interest;
-    CameraTransformState* transform;
     Camera* cam;
     Vec3* tgt_position;
     CameraTransformState* transform_copy;
@@ -3119,8 +3133,8 @@ void Camera_8002DDC4(void* arg0)
 
     cam = &cm_80452C68;
     Camera_80030DF8();
-    transform = &cam->transform;
-    tgt_interest = &transform->target_interest;
+    interest = &cam->transform.interest;
+    tgt_interest = interest + 1;
     Stage_80224CAC(tgt_interest);
     globals = &cm_803BCCA0;
     transform_copy = &cam->transform_copy;
@@ -3140,14 +3154,20 @@ void Camera_8002DDC4(void* arg0)
         f32 dx, dy, dz;
 
         smooth = globals->x74;
-        dx = cam->transform_copy.target_interest.x -
+        {
+            f32 tmp_p91781 = cam->transform_copy.target_interest.x -
              cam->transform_copy.interest.x;
+            dx = tmp_p91781;
+        }
         dy = cam->transform_copy.target_interest.y -
              cam->transform_copy.interest.y;
         dz = cam->transform_copy.target_interest.z -
              cam->transform_copy.interest.z;
-        cam->transform_copy.interest.x =
-            dx * smooth + cam->transform_copy.interest.x;
+        {
+            f32 tmp_p92115 = dx * smooth;
+            cam->transform_copy.interest.x =
+            tmp_p92115 + cam->transform_copy.interest.x;
+        }
         cam->transform_copy.interest.y =
             dy * smooth + cam->transform_copy.interest.y;
         cam->transform_copy.interest.z =
@@ -3158,16 +3178,15 @@ void Camera_8002DDC4(void* arg0)
         f32 delta;
 
         delta = cam->transform.target_fov - cam->transform.fov;
-        cam->transform.fov = delta * globals->x7C + cam->transform.fov;
+        cam->transform.fov += delta * globals->x7C;
     }
     cam->transform_copy.target_fov = Stage_GetCamFixedFov();
-    tgt_position = &transform->target_position;
+    tgt_position = interest + 3;
     {
         f32 delta;
 
         delta = cam->transform_copy.target_fov - cam->transform_copy.fov;
-        cam->transform_copy.fov =
-            delta * globals->x7C + cam->transform_copy.fov;
+        cam->transform_copy.fov += delta * globals->x7C;
     }
     Stage_SetVecToFixedCamPos(tgt_position);
     {
@@ -3199,11 +3218,14 @@ void Camera_8002DDC4(void* arg0)
         cam->transform_copy.position.z =
             dz * smooth + cam->transform_copy.position.z;
     }
-    lbVector_Diff(tgt_interest, tgt_position, &spC);
-    bounds.z_pos =
-        sqrtf__Ff((spC.z * spC.z) + ((spC.x * spC.x) + (spC.y * spC.y)));
+    {
+        Vec3 spC;
+        lbVector_Diff(tgt_interest, tgt_position, &spC);
+        bounds.z_pos = sqrtf__Ff((spC.z * spC.z) +
+                                  ((spC.x * spC.x) + (spC.y * spC.y)));
+    }
     Camera_8002A28C(&bounds);
-    Camera_8002A0C0(&bounds, transform);
+    Camera_8002A0C0(&bounds, &cam->transform);
 }
 
 s32 Camera_8002DFE4(Vec3* arg0, Vec3* interest,
@@ -4432,10 +4454,10 @@ static void fn_800301D0(HSD_GObj* gobj, int arg1)
 
 void Camera_800304E0(HSD_GObj* gobj)
 {
-    s64 var_r4;
-    s64 var_r0;
-    s64 var_r3;
-    s64 var_r3_2;
+    s64 prio8_a;
+    s64 prio1;
+    s64 prio8_b;
+    s64 prio8_c;
     HSD_CObj* cobj;
     PAD_STACK(32);
 
@@ -4449,34 +4471,34 @@ void Camera_800304E0(HSD_GObj* gobj)
         Camera_800310A0(2);
 
         if (cm_80452C68.x398_b2) {
-            var_r4 = 0;
+            prio8_a = (prio8_a = 0);
         } else {
-            var_r4 = 8;
+            prio8_a = 8;
         }
         if (cm_80452C68.x398_b4) {
-            var_r0 = 0;
+            prio1 = (prio1 = 0);
         } else {
-            var_r0 = 1;
+            prio1 = 1;
         }
-        gobj->gxlink_prios = var_r0 | var_r4;
+        gobj->gxlink_prios = prio1 | prio8_a;
         HSD_GObj_80390ED0(gobj, 7);
 
         Camera_800310A0(1);
         if (cm_80452C68.x398_b2) {
-            var_r3 = 0;
+            prio8_b = (prio8_b = 0);
         } else {
-            var_r3 = 8;
+            prio8_b = 8;
         }
-        gobj->gxlink_prios = var_r3;
+        gobj->gxlink_prios = prio8_b;
         HSD_GObj_80390ED0(gobj, 7);
 
         Camera_800310A0(0);
         if (cm_80452C68.x398_b2) {
-            var_r3_2 = 0;
+            prio8_c = (prio8_c = 0);
         } else {
-            var_r3_2 = 8;
+            prio8_c = 8;
         }
-        gobj->gxlink_prios = var_r3_2;
+        gobj->gxlink_prios = prio8_c;
         HSD_GObj_80390ED0(gobj, 7);
 
         gobj->gxlink_prios = 0x70;
@@ -4930,14 +4952,16 @@ void Camera_800311EC(HSD_GObj* gobj, u64 prios)
 
     a = inline_cam_gx_b1();
     b = inline_cam_gx_b0();
-    gobj->gxlink_prios = prios | b | a;
+    b = prios | b;
+    gobj->gxlink_prios = b | a;
     HSD_GObj_80390ED0(gobj, 3);
 
     cm_80452C68.x398_b6_b7 = 0;
 
     a = inline_cam_gx_b0();
     b = inline_cam_gx_b4();
-    gobj->gxlink_prios = inline_cam_gx_b1() | (b | a);
+    prios = inline_cam_gx_b1();
+    gobj->gxlink_prios = prios | (b | a);
     HSD_GObj_80390ED0(gobj, 3);
 }
 

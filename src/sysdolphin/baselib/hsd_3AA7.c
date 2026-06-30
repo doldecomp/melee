@@ -1385,30 +1385,19 @@ s32 fn_803ACF30(CardState* state, s32 file_id, s32 seq_num, s32 version)
 
 static inline u8* fn_803ACFC0_payload_dst(CardState* state, s32 hdr_offset)
 {
-    return state->x0 + hdr_offset + 0x20;
+    return hdr_offset + state->x0 + 0x20;
 }
 
 static inline u8* fn_803ACFC0_header(CardState* state, s32 hdr_offset)
 {
-    return state->x0 + hdr_offset;
+    return hdr_offset + state->x0;
 }
 
-static inline s32 fn_803ACFC0_write_block(CardState* state, s32 offset)
+static inline u8* fn_803ACFC0_checksum_start(s32 hdr_offset, CardState* state)
 {
-    u8* buf;
-    s32 retries;
-    s32 result;
-    u32 write_size = state->x8;
-
-    buf = state->x0;
-    for (retries = 0; retries < 10; retries++) {
-        result = CARDWrite(&state->file_info, buf, write_size, offset);
-        if (result != -1) {
-            break;
-        }
-    }
-    return result;
+    return hdr_offset + state->x0;
 }
+
 
 s32 fn_803ACFC0(CardState* state, s32 block_idx, s32 file_id, s32 seq_num,
                 void* payload, s32 payload_size, s32 version)
@@ -1450,15 +1439,15 @@ s32 fn_803ACFC0(CardState* state, s32 block_idx, s32 file_id, s32 seq_num,
     }
 
     if (payload_size > 0) {
-        memcpy(fn_803ACFC0_payload_dst(state, hdr_offset), payload,
+        memcpy(&fn_803ACFC0_header(state, hdr_offset)[0x20], payload,
                payload_size);
     }
 
     {
         s32 remaining = (state->x8 - hdr_offset) - payload_size - 0x20;
         if (remaining != 0) {
-            memset(state->x0 + (payload_size + 0x20) + hdr_offset, 0,
-                   remaining);
+            buf = hdr_offset + state->x0;
+            memset(buf + payload_size + 0x20, 0, remaining);
         }
     }
 
@@ -1469,11 +1458,55 @@ s32 fn_803ACFC0(CardState* state, s32 block_idx, s32 file_id, s32 seq_num,
     (state->x0 + hdr_offset)[0x12] = (u8) seq_num;
 
     fn_803AC3F8(state, fn_803ACFC0_header(state, hdr_offset) + 0x13, version);
-    hsd_803B2FA0(state->x0 + hdr_offset, state->x8 - hdr_offset);
+    hsd_803B2FA0(fn_803ACFC0_checksum_start(hdr_offset, state),
+                 state->x8 - hdr_offset);
 
-    result = fn_803ACFC0_write_block(state, offset);
+    {
+        s32 write_retries;
+        u8* write_buf;
+        u32 write_size;
+        write_size = state->x8;
+        write_retries = 0;
+        write_buf = state->x0;
+        for (; write_retries < 10; write_retries++) {
+            result = CARDWrite(&state->file_info, write_buf, write_size, offset);
+            if (result != -1) {
+                break;
+            }
+        }
+    }
 
     return result;
+}
+
+static inline int fn_803AD16C_file_type_nonzero(CardState* state, s32 file_id)
+{
+    return state->x28[file_id] != 0;
+}
+
+static inline s32 fn_803AD16C_total_blocks(CardState* state)
+{
+    return state->x460;
+}
+
+static inline s32 fn_803AD16C_logical_index(s32 blocks_before, s32 i)
+{
+    return blocks_before + i;
+}
+
+static inline s32 fn_803AD16C_file_size(CardState* state, s32 file_id)
+{
+    return state->x4C[file_id];
+}
+
+static inline s32 fn_803AD16C_seq_at(s32* seq, s32 phys)
+{
+    return seq[phys];
+}
+
+static inline int fn_803AD16C_nonnegative(s32 logical)
+{
+    return logical >= 0;
 }
 
 s32 fn_803AD16C(CardState* state)
@@ -1490,7 +1523,7 @@ s32 fn_803AD16C(CardState* state)
     s32 phys;
     s32 blocks_before;
     s32 file_blocks;
-    PAD_STACK(68);
+    PAD_STACK(56);
 
     result = 0;
     for (i = 0; i <= state->x460; i++) {
@@ -1519,12 +1552,13 @@ s32 fn_803AD16C(CardState* state)
         for (pass = 0; pass <= state->x460; pass++) {
             s32 cur_seq = -1;
 
-            for (phys = 0; phys <= state->x460; phys++) {
+            for (phys = 0; phys <= fn_803AD16C_total_blocks(state); phys++) {
                 if (work[phys] >= 0) {
                     s32 logical = work[phys] - blocks_before;
                     if (logical >= 0 && logical < file_blocks) {
                         if (cur_seq == -1 ||
-                            fn_803ACB74(cur_seq, seq[phys]) > 0)
+                            fn_803ACB74(
+                                cur_seq, fn_803AD16C_seq_at(seq, phys)) > 0)
                         {
                             cur_seq = seq[phys];
                         }
@@ -1537,7 +1571,7 @@ s32 fn_803AD16C(CardState* state)
 
             for (phys = 0; phys <= state->x460; phys++) {
                 s32 logical = work[phys] - blocks_before;
-                if (logical >= 0 && logical < file_blocks &&
+                if (fn_803AD16C_nonnegative(logical) && logical < file_blocks &&
                     cur_seq == seq[phys])
                 {
                     filemap[logical] = phys;
@@ -1586,7 +1620,7 @@ s32 fn_803AD16C(CardState* state)
     }
 
     for (file_id = 0; file_id < 9; file_id++) {
-        if (state->x4C[file_id] <= 0 ||
+        if (fn_803AD16C_file_size(state, file_id) <= 0 ||
             (state->x28[file_id] != 1 && state->x28[file_id] != 2))
         {
             continue;
@@ -1596,7 +1630,7 @@ s32 fn_803AD16C(CardState* state)
         blocks_before = fn_803AC6B8(state, file_id);
 
         for (i = 0; i < file_blocks; i++) {
-            s32 logical = blocks_before + i;
+            s32 logical = fn_803AD16C_logical_index(blocks_before, i);
             if (newmap[logical] >= 0) {
                 for (phys = 1; phys <= state->x460; phys++) {
                     if (phys != newmap[logical] &&
@@ -1610,7 +1644,8 @@ s32 fn_803AD16C(CardState* state)
     }
 
     for (file_id = 0; file_id < 9; file_id++) {
-        if (state->x4C[file_id] <= 0 || state->x28[file_id] != 0) {
+        if (state->x4C[file_id] <= 0 ||
+            fn_803AD16C_file_type_nonzero(state, file_id)) {
             continue;
         }
 
@@ -4535,13 +4570,13 @@ s32 fn_803B26CC(CardState* state, s32 file_id, s32 seq_num, s32 version,
     s32 saved;
     s32 snap;
     CardBufEntry* entries = (CardBufEntry*) hsd_804D1138;
-    PAD_STACK(24);
+    PAD_STACK(12);
 
     state->x24 = hsd_803AC340(&state->x3B0);
-    hsd_804D7998 = hsd_804D7984;
 
     result = 0;
-    for (i = 0; i < (0x2F + state->x24 + state->x8) / state->x8; i++) {
+    for (i = 0, hsd_804D7998 = hsd_804D7984;
+         i < (0x2F + state->x24 + state->x8) / state->x8; i++) {
         buf[0] = 11;
         buf[1] = (s32) state;
         buf[2] = (s32) i;

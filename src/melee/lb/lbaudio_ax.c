@@ -175,60 +175,55 @@ s32 lbAudioAx_800233EC(s32 arg0)
 
     if (fn_80026E58(0x21) == 1) {
         slot = lbAudioAx_800233EC_inline(arg0, base);
-
-        if (slot != 0xD) {
-            if (slot < 0xD) {
-                if (slot < 0xC) {
-                    if (slot >= 6) {
-                        goto table_1;
+        do {
+            if (slot != 0xD) {
+                if (slot < 0xD) {
+                    if (slot < 0xC) {
+                        if (slot >= 6) {
+                        } else {
+                            break;
+                        }
+                    } else {
+                        break;
                     }
-                    goto ret;
-                }
-                goto ret;
-            } else if (slot < 0x20) {
-                if (slot >= 0xF) {
+                } else if (slot < 0x20) {
+                    if (slot >= 0xF) {
+                    } else {
+                        break;
+                    }
                 } else {
-                    goto ret;
+                    break;
                 }
-                goto table_1;
-            } else {
-                goto ret;
             }
-        }
-    table_1:
-
-    {
-        int* p = (int*) (base + 0x13A4);
-        int i;
-        for (i = 0; i < 0x4A; p += 2, i++) {
-            if (arg0 == *p) {
-                return *(int*) (base + (i << 3) + 0x13A8);
+            {
+                int* p = (int*) (base + 0x13A4);
+                int i;
+                for (i = 0; i < 0x4A; p += 2, i++) {
+                    if (arg0 == *p) {
+                        return ((int (*)[2]) (base + 0x13A4))[i][1];
+                    }
+                }
             }
-        }
-    }
-        goto ret;
-    }
-
-    slot = lbAudioAx_800233EC_inline(arg0, base);
-
-    if (slot == 0x21) {
+        } while (0);
     } else {
-        goto ret;
+        slot = lbAudioAx_800233EC_inline(arg0, base);
+        do {
+            if (slot == 0x21) {
+            } else {
+                break;
+            }
+            {
+                int* p = (int*) (base + 0x13A4);
+                int i;
+                for (i = 0; i < 0x4A; p += 2, i++) {
+                    if (arg0 == p[1]) {
+                        return ((int (*)[2]) (base + 0x13A4))[i][0];
+                    }
+                }
+            }
+        } while (0);
     }
-    goto table_2;
-table_2:
 
-{
-    int* p = (int*) (base + 0x13A4);
-    int i;
-    for (i = 0; i < 0x4A; p += 2, i++) {
-        if (arg0 == p[1]) {
-            return *(int*) (base + (i << 3) + 0x13A4);
-        }
-    }
-}
-
-ret:
     return arg0;
 }
 

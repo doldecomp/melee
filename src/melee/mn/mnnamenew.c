@@ -202,26 +202,29 @@ extern const GXColor mnNameNew_804DBF48;
 
 s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
 {
-    HSD_JObj* key_jobj;
-    HSD_JObj* ref1;
-    HSD_JObj* ref2;
-    HSD_Text* text;
     Vec3 sp50;
     GXColor sp4C;
     GXColor sp48;
     GXColor sp44;
+    MnNameNewDataLayout* layout;
+    HSD_JObj* key_jobj;
+    HSD_Text* text;
+    HSD_JObj* ref1;
+    HSD_JObj* ref2;
     char** str_table;
     f32 x_range;
     f32 y_range;
+    f32 pos_x;
+    f32 pos_y;
+    f32 pos_z;
     f32 base_x;
     f32 base_y;
     f32 font_x;
     f32 col_x;
     s32 i;
     GXColor* color_ptr;
-    MnNameNewDataLayout* layout;
 
-    FORCE_PAD_STACK(20);
+    FORCE_PAD_STACK(16);
 
     layout = (MnNameNewDataLayout*) mnNameNew_803EDA58;
     sp4C = mnNameNew_804DBF44;
@@ -242,46 +245,75 @@ s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
         break;
     }
 
-    text = arg0->key_text;
-    if (text != NULL) {
-        HSD_SisLib_803A5CC4(text);
+    if (arg0->key_text != NULL) {
+        HSD_SisLib_803A5CC4(arg0->key_text);
     }
     text = HSD_SisLib_803A6754(0, (s32) mn_804D6BB5);
     arg0->key_text = text;
 
-    key_jobj = HSD_JObjGetChild(arg0->jobjs[16]);
+    key_jobj = arg0->jobjs[16];
+    if (key_jobj == NULL) {
+        key_jobj = NULL;
+    } else {
+        key_jobj = key_jobj->child;
+    }
     for (i = 0; i < 50; i++) {
         if (i == 0x2D) {
             break;
         }
-        key_jobj = HSD_JObjGetNext(key_jobj);
+        if (key_jobj == NULL) {
+            key_jobj = NULL;
+        } else {
+            key_jobj = key_jobj->next;
+        }
     }
 
-    lb_8000B1CC(key_jobj, &mnNameNew_803EE324, &sp50);
-    text->pos_x = sp50.x;
-    text->pos_y = -sp50.y;
-    text->pos_z = sp50.z;
+    lb_8000B1CC(key_jobj, &layout->x8CC, &sp50);
+    pos_x = sp50.x;
+    pos_y = -sp50.y;
+    pos_z = sp50.z;
+    text->pos_x = pos_x;
+    text->pos_y = pos_y;
+    text->pos_z = pos_z;
     text->font_size.x = 0.03f;
     text->font_size.y = 0.04f;
     text->text_color = mnNameNew_804D4F6C;
 
-    ref1 = HSD_JObjGetChild(arg0->jobjs[16]);
+    ref1 = arg0->jobjs[16];
+    if (ref1 == NULL) {
+        ref1 = NULL;
+    } else {
+        ref1 = ref1->child;
+    }
     for (i = 0; i < 50; i++) {
         if (i == 0x28) {
             break;
         }
-        ref1 = HSD_JObjGetNext(ref1);
+        if (ref1 == NULL) {
+            ref1 = NULL;
+        } else {
+            ref1 = ref1->next;
+        }
     }
 
     base_x = HSD_JObjGetTranslationX(key_jobj);
     x_range = HSD_JObjGetTranslationX(ref1) - base_x;
 
-    ref2 = HSD_JObjGetChild(arg0->jobjs[16]);
+    ref2 = arg0->jobjs[16];
+    if (ref2 == NULL) {
+        ref2 = NULL;
+    } else {
+        ref2 = ref2->child;
+    }
     for (i = 0; i < 50; i++) {
         if (i == 0x2E) {
             break;
         }
-        ref2 = HSD_JObjGetNext(ref2);
+        if (ref2 == NULL) {
+            ref2 = NULL;
+        } else {
+            ref2 = ref2->next;
+        }
     }
 
     base_y = HSD_JObjGetTranslationY(key_jobj);
@@ -1155,10 +1187,11 @@ void mnNameNew_8023CE4C(void)
     char* name_ptr;
     s32 i;
     HSD_Text* text;
+    f32 z;
 
     PAD_STACK(4);
 
-    data = ((HSD_GObj*) mnNameNew_804D6C08)->user_data;
+    data = mnNameNew_804D6C08->user_data;
     jobj_a = data->jobjs[14];
     jobj_b = data->jobjs[15];
     first_x = HSD_JObjGetTranslationX(jobj_a);
@@ -1170,11 +1203,12 @@ void mnNameNew_8023CE4C(void)
     lb_8000B1CC(jobj_a, &mnNameNew_803EE330, &sp24);
     name_ptr = mnNameNew_CurrentNameText;
     y_minus = -sp24.y;
+    z = sp24.z;
     name_char_color_ptr = &name_char_color;
     text->pos_x = sp24.x;
     i = 0;
     text->pos_y = y_minus;
-    text->pos_z = sp24.z;
+    text->pos_z = z;
     text->font_size.x = 0.04f;
     text->font_size.y = 0.05f;
     text->text_color = mnNameNew_804D4F6C;
@@ -1388,10 +1422,14 @@ s32 mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, u8 arg2)
     } else {
         key_jobj = HSD_JObjGetChild(arg0->jobjs[16]);
         for (i = 0; i < 50; i++) {
-            if ((s32) arg2 == i) {
+            if (i == (s32) arg2) {
                 break;
             }
-            key_jobj = HSD_JObjGetNext(key_jobj);
+            if (key_jobj == NULL) {
+                key_jobj = NULL;
+            } else {
+                key_jobj = key_jobj->next;
+            }
         }
     }
 

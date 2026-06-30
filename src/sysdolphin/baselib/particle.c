@@ -3,7 +3,18 @@
 typedef struct {
     /* 0x00 */ void* next;
     /* 0x04 */ s32 type;
-    /* 0x08 */ u8 content[0x80];
+    /* 0x08 */ union {
+        u8 bytes[0x80];
+        char text[0x80];
+        struct {
+            s32 count;
+            u32 color;
+        } bars[16];
+        struct {
+            f32 pos;
+            u32 color;
+        } gradient[16];
+    } content;
 } PerfDispItem;
 
 static PerfDispItem hsd_804CE3F8[6];
@@ -47,7 +58,7 @@ typedef struct _ExcptNode {
 
 typedef struct _EventData {
     /* 0x00 */ u8 _pad[0x10];
-    /* 0x10 */ u32* entries;
+    /* 0x10 */ char** entries;
     /* 0x14 */ s32 index;
 } EventData;
 
@@ -57,6 +68,15 @@ typedef struct _MCCPacket {
     /* 0x4 */ u8 _x4_pad : 7;
     /* 0x5 */ u8 x5;
 } MCCPacket;
+
+typedef struct _ParticleFontData {
+    /* 0x0000 */ u8 _pad0[0x968];
+    /* 0x0968 */ u8 x968[0x38];
+    /* 0x09A0 */ u8 _pad9A0[0x38];
+    /* 0x09D8 */ u8 x9D8[0x38];
+    /* 0x0A10 */ u8 _padA10[0x1110];
+    /* 0x1B20 */ u8 x1B20[0x38];
+} ParticleFontData;
 
 typedef struct _DispData {
     /* 0x00 */ u8 _pad[0x10];
@@ -255,10 +275,13 @@ f32 DrawASCII(int chr, float x, float y, GXColor* color)
         cx = (f32) ((f64) lbl_804D6070 * 0.3 + (f64) x);
         GXWGFifo.f32 = cx;
         GXWGFifo.f32 = (f32) ((f64) lbl_804D6074 * 0.3 + (f64) y);
+        {
+            u8 alpha = color->a;
+            a = alpha;
+        }
         r = color->r;
         g = color->g;
         b = color->b;
-        a = color->a;
         GXWGFifo.u8 = r;
         GXWGFifo.u8 = g;
         GXWGFifo.u8 = b;
@@ -1024,62 +1047,62 @@ void* fn_80392A3C(void)
     s32 bar_count;
     s32 count;
     PerfDispItem* entry;
+    PerfDispItem* entry2;
 
     count = 0;
     numFrames = lbl_804D6088;
     if (0 != numFrames) {
+        u8* counts = &hsd_804CE3F8[0].content.bytes[0];
+        u8* colors = &hsd_804CE3F8[0].content.bytes[4];
         hsd_804CE3F8[0].type = 1;
-        ((s32*) &hsd_804CE3F8[0].content[0])[0] = 1;
-        bar_count = 1;
+        *(s32*) counts = 1;
+        bar_count = count;
+        bar_count++;
         green = lbl_804D6098;
-        ((s32*) &hsd_804CE3F8[0].content[4])[0] = green;
+        *(s32*) colors = green;
         if (numFrames > 1) {
             s32 val = numFrames - 1;
             if (val > 3) {
                 val = 3;
             }
-            {
-                s32 idx = bar_count;
-                ((s32*) &hsd_804CE3F8[0].content[0])[idx * 2] = val;
-                ((s32*) &hsd_804CE3F8[0].content[4])[idx * 2] = lbl_804D60A4;
-            }
+            *(s32*) (counts + bar_count * 8) = val;
+            *(s32*) (colors + bar_count * 8) = lbl_804D60A4;
             bar_count = 2;
         }
         if (numFrames > 4) {
-            ((s32*) &hsd_804CE3F8[0].content[0])[bar_count * 2] =
-                numFrames - 4;
-            ((s32*) &hsd_804CE3F8[0].content[4])[bar_count * 2] = lbl_804D6094;
+            *(s32*) (counts + bar_count * 8) = numFrames - 4;
+            *(s32*) (colors + bar_count * 8) = lbl_804D6094;
             bar_count++;
         }
-        ((s32*) &hsd_804CE3F8[0].content[0])[bar_count * 2] = -1;
+        *(s32*) (counts + bar_count * 8) = -1;
         hsd_804CE3F8[0].next = &hsd_804CE3F8[1];
         hsd_804CE3F8[1].type = 2;
         count = 4;
-        ((f32*) &hsd_804CE3F8[1].content[0])[0] =
+        ((f32*) &hsd_804CE3F8[1].content.bytes[0])[0] =
             hsd_804D7860 / (f32) numFrames;
-        ((s32*) &hsd_804CE3F8[1].content[0])[1] = lbl_804D609C;
-        ((f32*) &hsd_804CE3F8[1].content[0])[2] =
+        ((s32*) &hsd_804CE3F8[1].content.bytes[0])[1] = lbl_804D609C;
+        ((f32*) &hsd_804CE3F8[1].content.bytes[0])[2] =
             (f32) (s32) (0.9999F + hsd_804D7860) / (f32) numFrames;
-        ((s32*) &hsd_804CE3F8[1].content[0])[3] = lbl_804D60A0;
-        ((f32*) &hsd_804CE3F8[1].content[0])[4] = -1.0F;
+        ((s32*) &hsd_804CE3F8[1].content.bytes[0])[3] = lbl_804D60A0;
+        ((f32*) &hsd_804CE3F8[1].content.bytes[0])[4] = -1.0F;
         hsd_804CE3F8[1].next = &hsd_804CE3F8[2];
         hsd_804CE3F8[2].type = 2;
-        ((f32*) &hsd_804CE3F8[2].content[0])[0] =
+        ((f32*) &hsd_804CE3F8[2].content.bytes[0])[0] =
             hsd_804D785C / (f32) numFrames;
-        ((s32*) &hsd_804CE3F8[2].content[0])[1] = lbl_804D6090;
-        ((f32*) &hsd_804CE3F8[2].content[0])[2] = -1.0F;
+        ((s32*) &hsd_804CE3F8[2].content.bytes[0])[1] = lbl_804D6090;
+        ((f32*) &hsd_804CE3F8[2].content.bytes[0])[2] = -1.0F;
         hsd_804CE3F8[2].next = &hsd_804CE3F8[3];
         hsd_804CE3F8[3].type = 2;
-        ((f32*) &hsd_804CE3F8[3].content[0])[0] =
+        ((f32*) &hsd_804CE3F8[3].content.bytes[0])[0] =
             hsd_804D7858 / (f32) numFrames;
-        ((s32*) &hsd_804CE3F8[3].content[0])[1] = green;
-        ((f32*) &hsd_804CE3F8[3].content[0])[2] = -1.0F;
+        ((s32*) &hsd_804CE3F8[3].content.bytes[0])[1] = green;
+        ((f32*) &hsd_804CE3F8[3].content.bytes[0])[2] = -1.0F;
         hsd_804CE3F8[3].next = &hsd_804CE3F8[4];
     }
     if (lbl_804D608C != 0) {
         hsd_804CE3F8[count].type = 0;
         entry = &hsd_804CE3F8[count];
-        sprintf((char*) &entry->content,
+        sprintf(entry->content.text,
                 "\\c00ff00%2.3f \\cffffff%2.3f \\c00ffff%2.3f  "
                 "\\c00ff00%2.3f \\cffffff%2.3f \\c00ffff%2.3f",
                 hsd_804D7858, hsd_804D785C, hsd_804D7860, hsd_804D7864,
@@ -1088,11 +1111,11 @@ void* fn_80392A3C(void)
         count++;
         if (hsd_804D7888 != 0) {
             hsd_804CE3F8[count].type = 0;
-            entry = &hsd_804CE3F8[count];
-            sprintf((char*) &entry->content,
+            entry2 = &hsd_804CE3F8[count];
+            sprintf(entry2->content.text,
                     "\\c00ff00%2.3f \\cffffff%2.3f \\c00ffff%2.3f",
                     hsd_804D787C, hsd_804D7880, hsd_804D7884);
-            entry->next = &hsd_804CE3F8[count + 1];
+            entry2->next = &hsd_804CE3F8[count + 1];
             count++;
         }
     }
@@ -1218,7 +1241,7 @@ extern int hsd_804D78A0;
 // @TODO: Currently 92.84% match - needs minor register allocation fix
 void hsd_80392E80(void)
 {
-    s32 status;
+    enum MCC_CONNECT status;
     s32 event;
     s32 head;
     u32 ticksPerUnit;
@@ -1226,7 +1249,7 @@ void hsd_80392E80(void)
     s32 waiting;
     s32 intr;
     s32* channel_flags;
-    PAD_STACK(16);
+    PAD_STACK(12);
 
     ticksPerUnit = *(u32*) 0x800000F8 >> 2;
 
@@ -1240,7 +1263,7 @@ void hsd_80392E80(void)
         head = hsd_804D789C + 1;
         event = hsd_804CE728[hsd_804D789C];
         hsd_804D7898 -= 1;
-        hsd_804D789C = head - (head / 256) * 256;
+        hsd_804D789C = head % 256;
         OSRestoreInterrupts(intr);
 
         switch (event) {
@@ -1272,8 +1295,7 @@ void hsd_80392E80(void)
                 waiting = 1;
                 startTick = OSGetTick();
                 for (;;) {
-                    if (MCCGetConnectionStatus(
-                            0xF, (enum MCC_CONNECT*) &status) != 0 &&
+                    if (MCCGetConnectionStatus(0xF, &status) != 0 &&
                         status == 3)
                     {
                         waiting = 0;
@@ -1580,10 +1602,9 @@ void hsd_80393844(void)
 
         {
             s32 idx = hsd_804D78B8;
-            ParticleLogEntry* entry = &base[idx];
-            type = entry->x0;
-            flags = entry->x4;
-            value = entry->x8;
+            type = base[idx].x0;
+            flags = base[idx].x4;
+            value = base[idx].x8;
             hsd_804D78BC -= 1;
             hsd_804D78B8 = (idx + 1) % 256;
         }
@@ -1652,12 +1673,11 @@ int hsd_80393A5C(char* filename, int data, int size)
     int fd;
     f32 written_f;
     f32 elapsed;
-    PAD_STACK(8);
 
     if (hsd_804D78A0 == 0) {
         ready = 0;
     } else if (FIOQuery() == 0) {
-        ready = hsd_804D78A0 = 0;
+        hsd_804D78A0 = ready = 0;
     } else {
         ready = 1;
     }
@@ -1678,7 +1698,7 @@ int hsd_80393A5C(char* filename, int data, int size)
         return -1;
     }
 
-    written_f = (f32) (u32) FIOFwrite(fd, (void*) data, size);
+    written_f = (f32) (u32) FIOFwrite(fd, (u32*) data, size);
 
     if ((f32) (s32) size != written_f) {
         OSReport("cannot save file\n");
@@ -1689,7 +1709,7 @@ int hsd_80393A5C(char* filename, int data, int size)
     FIOFclose(fd);
     elapsed = (f32) (OSGetTick() - start) / (f32) (*(u32*) 0x800000F8 >> 2);
     OSReport("Done %s size:%d time:%f spped:%fkbps\n", filename, size, elapsed,
-             8.0F * (f32) (u32) size / elapsed * (1.0F / 1024.0F));
+             8.0F * (f32) size / elapsed * (1.0F / 1024.0F));
     return size;
 }
 
@@ -2310,8 +2330,8 @@ void hsd_80394950(OSContext* ctx)
     i = 0;
     p = (u8*) ctx;
     do {
-        OSReport("R%02d=%08X:%08X (%e, %e)\n", i, *(u32*) (p + 0x90),
-                 *(u32*) (p + 0x94), *(f32*) (p + 0x90), *(f32*) (p + 0x94));
+        OSReport("R%02d=%08X:%08X (%e, %e)\n", i, ((u32*) p)[0x24],
+                 ((u32*) p)[0x25], ((f32*) p)[0x24], ((f32*) p)[0x25]);
         i++;
         p += 8;
     } while (i < 32);
@@ -2521,11 +2541,11 @@ void hsd_80394E8C(void* node_ptr)
 extern u8 lbl_8040AB00[];
 extern u8 lbl_8040AB20[];
 
-// @TODO: Currently 93.04% match - BSS relocation and register allocation
+// @TODO: Currently 94.46% match - BSS relocation and register allocation
 // differences remain
 void hsd_80394F48(void* data)
 {
-    void* base_color = lbl_8040AB00;
+    u8* base_color = lbl_8040AB00;
     struct ParticleScreenState* sp = &hsd_804CF810;
     EventData* dp = data;
     s32 num_entries;
@@ -2546,7 +2566,7 @@ void hsd_80394F48(void* data)
 
     PAD_STACK(64);
 
-    num_entries = strlen((char*) dp->entries[0]);
+    num_entries = strlen(dp->entries[0]);
     px50 = &sp->x50;
     pxC8 = &sp->xC8;
     pxCC = &sp->xCC;
@@ -2562,10 +2582,10 @@ void hsd_80394F48(void* data)
 
     b6 = sp->x0_b6;
     if (sp->x0_b7 != 0) {
-        hsd_803922FC((void*) ((u8*) sp->x4C + 0x968), *px4, *px8, b6,
+        hsd_803922FC(((ParticleFontData*) sp->x4C)->x968, *px4, *px8, b6,
                      (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
     } else {
-        hsd_803921B8((void*) ((u8*) sp->x4C + 0x968), *px4, *px8,
+        hsd_803921B8(((ParticleFontData*) sp->x4C)->x968, *px4, *px8,
                      (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
     }
 
@@ -2574,10 +2594,10 @@ void hsd_80394F48(void* data)
     while (i < num_entries) {
         b6 = sp->x0_b6;
         if (sp->x0_b7 != 0) {
-            hsd_803922FC((void*) ((u8*) sp->x4C + 0x9D8), *px4, *px8, b6,
+            hsd_803922FC(((ParticleFontData*) sp->x4C)->x9D8, *px4, *px8, b6,
                          (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
         } else {
-            hsd_803921B8((void*) ((u8*) sp->x4C + 0x9D8), *px4, *px8,
+            hsd_803921B8(((ParticleFontData*) sp->x4C)->x9D8, *px4, *px8,
                          (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
         }
         i++;
@@ -2586,54 +2606,54 @@ void hsd_80394F48(void* data)
 
     b6 = sp->x0_b6;
     if (sp->x0_b7 != 0) {
-        hsd_803922FC((void*) ((u8*) sp->x4C + 0x968), *px4, *px8, b6,
+        hsd_803922FC(((ParticleFontData*) sp->x4C)->x968, *px4, *px8, b6,
                      (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
     } else {
-        hsd_803921B8((void*) ((u8*) sp->x4C + 0x968), *px4, *px8,
+        hsd_803921B8(((ParticleFontData*) sp->x4C)->x968, *px4, *px8,
                      (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
     }
 
     *px4 += 11;
-    i = 0;
+    entry_idx = 0;
     x_base = col_start * 11 + 0x14;
-    hi_color = (u8*) base_color + 0x20;
+    hi_color = base_color + 0x20;
     cur_row = row_start - 1;
 
-    while (dp->entries[i] != 0) {
+    while (dp->entries[entry_idx] != 0) {
         *px4 = x_base;
         *px8 = (*px40 - 0x28) - (cur_row + 1) * 14;
         cur_row--;
 
         b6 = sp->x0_b6;
         if (sp->x0_b7 != 0) {
-            hsd_803922FC((void*) ((u8*) sp->x4C + 0x1B20), *px4, *px8, b6,
+            hsd_803922FC(((ParticleFontData*) sp->x4C)->x1B20, *px4, *px8, b6,
                          (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
         } else {
-            hsd_803921B8((void*) ((u8*) sp->x4C + 0x1B20), *px4, *px8,
+            hsd_803921B8(((ParticleFontData*) sp->x4C)->x1B20, *px4, *px8,
                          (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
         }
 
-        if (i == dp->index) {
+        if (entry_idx == dp->index) {
             *px50 = hi_color;
         } else {
             *px50 = base_color;
         }
 
         *px4 += 11;
-        hsd_80394434((void*) dp->entries[i]);
+        hsd_80394434(dp->entries[entry_idx]);
 
-        *px4 += strlen((char*) dp->entries[i]) * 11;
+        *px4 += strlen(dp->entries[entry_idx]) * 11;
         *px50 = base_color;
 
         b6 = sp->x0_b6;
         if (sp->x0_b7 != 0) {
-            hsd_803922FC((void*) ((u8*) sp->x4C + 0x1B20), *px4, *px8, b6,
+            hsd_803922FC(((ParticleFontData*) sp->x4C)->x1B20, *px4, *px8, b6,
                          (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
         } else {
-            hsd_803921B8((void*) ((u8*) sp->x4C + 0x1B20), *px4, *px8,
+            hsd_803921B8(((ParticleFontData*) sp->x4C)->x1B20, *px4, *px8,
                          (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
         }
-        i++;
+        entry_idx++;
     }
 
     *px50 = base_color;
@@ -2642,45 +2662,42 @@ void hsd_80394F48(void* data)
 
     b6 = sp->x0_b6;
     if (sp->x0_b7 != 0) {
-        hsd_803922FC((void*) ((u8*) sp->x4C + 0x968), *px4, *px8, b6,
+        hsd_803922FC(((ParticleFontData*) sp->x4C)->x968, *px4, *px8, b6,
                      (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
     } else {
-        hsd_803921B8((void*) ((u8*) sp->x4C + 0x968), *px4, *px8,
+        hsd_803921B8(((ParticleFontData*) sp->x4C)->x968, *px4, *px8,
                      (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
     }
 
     {
-        struct ParticleScreenState* sp = &hsd_804CF810;
-        s32 b6;
-        {
-            s32 j = 0;
-            *px4 += 11;
-            while (j < num_entries) {
-                if (sp->x0_b7 != 0) {
-                    hsd_803922FC((void*) ((u8*) sp->x4C + 0x9D8), *px4, *px8,
-                                 sp->x0_b6, (&sp->x24)[sp->x34], sp->x3C,
-                                 *px40, sp->x44, *px50);
-                } else {
-                    hsd_803921B8((void*) ((u8*) sp->x4C + 0x9D8), *px4, *px8,
-                                 (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44,
-                                 *px50);
-                }
-                j++;
-                *px4 += 11;
-            }
-        }
-
-        b6 = sp->x0_b6;
-        if (sp->x0_b7 != 0) {
-            hsd_803922FC((void*) ((u8*) sp->x4C + 0x968), *px4, *px8, b6,
-                         (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
-        } else {
-            hsd_803921B8((void*) ((u8*) sp->x4C + 0x968), *px4, *px8,
-                         (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
-        }
-
+        s32 j = 0;
         *px4 += 11;
+        while (j < num_entries) {
+            b6 = sp->x0_b6;
+            if (sp->x0_b7 != 0) {
+                hsd_803922FC(((ParticleFontData*) sp->x4C)->x9D8, *px4, *px8,
+                             b6, (&sp->x24)[sp->x34], sp->x3C, *px40,
+                             sp->x44, *px50);
+            } else {
+                hsd_803921B8(((ParticleFontData*) sp->x4C)->x9D8, *px4, *px8,
+                             (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44,
+                             *px50);
+            }
+            j++;
+            *px4 += 11;
+        }
     }
+
+    b6 = sp->x0_b6;
+    if (sp->x0_b7 != 0) {
+        hsd_803922FC(((ParticleFontData*) sp->x4C)->x968, *px4, *px8, b6,
+                     (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
+    } else {
+        hsd_803921B8(((ParticleFontData*) sp->x4C)->x968, *px4, *px8,
+                     (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
+    }
+
+    *px4 += 11;
     *pxC8 += 4;
     *pxCC -= dp->index + 1;
 }
@@ -2698,7 +2715,7 @@ s32 hsd_80395550(void* event_ptr)
             if (counter > 0) {
                 data->index = counter - 1;
             } else {
-                u32* base = data->entries;
+                char** base = data->entries;
                 s32 count = 0;
                 while (base[count + 1] != 0) {
                     count++;
@@ -2709,7 +2726,7 @@ s32 hsd_80395550(void* event_ptr)
         }
         case 0x4: {
             s32 idx = data->index;
-            u32* base = data->entries;
+            char** base = data->entries;
             if (base[idx + 1] != 0) {
                 data->index = idx + 1;
             } else {
@@ -2918,119 +2935,113 @@ extern struct {
 // @TODO: Currently 92.03% match - needs register allocation fix
 s32 hsd_80395A78(void)
 {
-    struct ParticleScreenState* sp = &hsd_804CF810;
-    s32* pxC = &sp->x0C;
-    s32* px18 = &sp->x18;
-    s32* px10 = &sp->x10;
-    s32* px14 = &sp->x14;
     u32 bit;
-    u32 new_col_u;
     s32 new_scroll;
+    s32 new_col;
     PAD_STACK(8);
 
     bit = 1;
-    while (bit <= sp->xBC) {
-        switch (sp->xBC & bit) {
+    while (bit <= hsd_804CF810.xBC) {
+        switch (hsd_804CF810.xBC & bit) {
         case 0x8:
-            if (*px10 < sp->x1C - 1) {
-                *px10 = *px10 + 1;
+            if (hsd_804CF810.x10 < hsd_804CF810.x1C - 1) {
+                hsd_804CF810.x10 = hsd_804CF810.x10 + 1;
             } else {
-                *px14 = *px14 + 1;
+                hsd_804CF810.x14 += 1;
             }
             return 1;
         case 0x4:
-            if (*px10 > 0) {
-                *px10 = *px10 - 1;
-                return 1;
-            }
-            if (*px14 > 0) {
-                *px14 = *px14 - 1;
-                return 1;
-            }
-            goto next_bit;
-        case 0x1:
-            if (*pxC > 0) {
-                *pxC = *pxC - 1;
-            } else if (*px18 > 0) {
-                *px18 = *px18 - 1;
+            if (hsd_804CF810.x10 > 0) {
+                hsd_804CF810.x10 -= 1;
+            } else if (hsd_804CF810.x14 > 0) {
+                hsd_804CF810.x14 -= 1;
             } else {
-                goto next_bit;
+                break;
             }
-            while (!(u8) hsd_80394128(*pxC + *px18, *px10 + *px14)) {
-                if (*pxC > 0) {
-                    *pxC = *pxC - 1;
-                } else if (*px18 > 0) {
-                    *px18 = *px18 - 1;
+            return 1;
+        case 0x1:
+            if (hsd_804CF810.x0C > 0) {
+                hsd_804CF810.x0C -= 1;
+            } else if (hsd_804CF810.x18 > 0) {
+                hsd_804CF810.x18 -= 1;
+            } else {
+                break;
+            }
+            while (!(u8) hsd_80394128(hsd_804CF810.x0C + hsd_804CF810.x18,
+                                      hsd_804CF810.x10 + hsd_804CF810.x14)) {
+                if (hsd_804CF810.x0C > 0) {
+                    hsd_804CF810.x0C -= 1;
+                } else if (hsd_804CF810.x18 > 0) {
+                    hsd_804CF810.x18 -= 1;
                 } else {
                     break;
                 }
             }
             return 1;
         case 0x2:
-            new_scroll = *px18;
-            new_col_u = *pxC;
-            if ((u32) *pxC < (u32) (sp->x20 - 1)) {
-                new_col_u += 1;
+            new_col = hsd_804CF810.x0C;
+            new_scroll = hsd_804CF810.x18;
+            if ((u32) hsd_804CF810.x0C < (u32) (hsd_804CF810.x20 - 1)) {
+                new_col += 1;
             } else {
                 new_scroll += 1;
             }
-            if ((u8) hsd_80394128(new_col_u + new_scroll, *px10 + *px14)) {
-                *pxC = new_col_u;
-                *px18 = new_scroll;
+            if ((u8) hsd_80394128(new_col + new_scroll,
+                                  hsd_804CF810.x10 + hsd_804CF810.x14)) {
+                hsd_804CF810.x0C = new_col;
+                hsd_804CF810.x18 = new_scroll;
                 return 1;
             }
-            goto next_bit;
-        case 0x100: {
-            ExcptNode* node = (ExcptNode*) &lbl_8040BC3C;
+            break;
+        case 0x100:
             lbl_8040BC3C.x10 = hsd_80395970();
             lbl_8040BC3C.x18 = &lbl_8040BAF0;
-            if (node != NULL) {
-                fn_80394DF4(node);
-                node->next = (ExcptNode*) sp->xD0;
-                sp->xD0 = node;
-                if (node->callback != NULL) {
-                    node->callback(node);
+            if ((ExcptNode*) &lbl_8040BC3C != NULL) {
+                fn_80394DF4((ExcptNode*) &lbl_8040BC3C);
+                ((ExcptNode*) &lbl_8040BC3C)->next =
+                    (ExcptNode*) hsd_804CF810.xD0;
+                hsd_804CF810.xD0 = &lbl_8040BC3C;
+                if (((ExcptNode*) &lbl_8040BC3C)->callback != NULL) {
+                    ((ExcptNode*) &lbl_8040BC3C)
+                        ->callback((ExcptNode*) &lbl_8040BC3C);
                 }
-                sp->x0_b5 = 1;
+                hsd_804CF810.x0_b5 = 1;
             }
             return 1;
-        }
-        case 0x400: {
-            ExcptNode* node = (ExcptNode*) &lbl_8040BC3C;
+        case 0x400:
             lbl_8040BC3C.x18 = &lbl_8040BAF0;
-            if (node != NULL) {
-                fn_80394DF4(node);
-                node->next = (ExcptNode*) sp->xD0;
-                sp->xD0 = node;
-                if (node->callback != NULL) {
-                    node->callback(node);
+            if ((ExcptNode*) &lbl_8040BC3C != NULL) {
+                fn_80394DF4((ExcptNode*) &lbl_8040BC3C);
+                ((ExcptNode*) &lbl_8040BC3C)->next =
+                    (ExcptNode*) hsd_804CF810.xD0;
+                hsd_804CF810.xD0 = &lbl_8040BC3C;
+                if (((ExcptNode*) &lbl_8040BC3C)->callback != NULL) {
+                    ((ExcptNode*) &lbl_8040BC3C)
+                        ->callback((ExcptNode*) &lbl_8040BC3C);
                 }
-                sp->x0_b5 = 1;
+                hsd_804CF810.x0_b5 = 1;
             }
             return 1;
-        }
-        case 0x1000: {
-            ExcptNode* node = (ExcptNode*) lbl_8040BA5C;
-            if (node != NULL) {
-                fn_80394DF4(node);
-                node->next = (ExcptNode*) sp->xD0;
-                sp->xD0 = node;
-                if (node->callback != NULL) {
-                    node->callback(node);
+        case 0x1000:
+            if ((ExcptNode*) lbl_8040BA5C != NULL) {
+                fn_80394DF4((ExcptNode*) lbl_8040BA5C);
+                ((ExcptNode*) lbl_8040BA5C)->next =
+                    (ExcptNode*) hsd_804CF810.xD0;
+                hsd_804CF810.xD0 = lbl_8040BA5C;
+                if (((ExcptNode*) lbl_8040BA5C)->callback != NULL) {
+                    ((ExcptNode*) lbl_8040BA5C)
+                        ->callback((ExcptNode*) lbl_8040BA5C);
                 }
-                sp->x0_b5 = 1;
+                hsd_804CF810.x0_b5 = 1;
             }
             return 1;
-        }
         default:
-        next_bit:
-            bit <<= 1;
             break;
         }
+        bit <<= 1;
     }
     return 0;
 }
-
 extern u8 lbl_8040BEC4[];
 
 static inline void ps_remove_node(struct ParticleScreenState* sp, void* node)
@@ -3096,18 +3107,17 @@ s32 hsd_80395D88(void* data)
             s32 i;
             OSContext* ctx;
             OSContext** ctx_ptr;
-            u32* ctx_words;
             s32 saved;
 
             if (*(ctx_ptr = &sp->xD4) != NULL) {
                 saved = hsd_80393D2C(1);
-                ctx_words = (u32*) *ctx_ptr;
+                ctx = *ctx_ptr;
                 OSReport(msg + 0x728);
                 i = 0;
                 do {
-                    OSReport(msg + 0x760, i, ctx_words[i], ctx_words[i],
-                             i + 0x10, ctx_words[i + 0x10],
-                             ctx_words[i + 0x10]);
+                    OSReport(msg + 0x760, i, ctx->gpr[i], ctx->gpr[i],
+                             i + 0x10, ctx->gpr[i + 0x10],
+                             ctx->gpr[i + 0x10]);
                     i++;
                 } while (i < 0x10);
                 hsd_80394950(*ctx_ptr);
@@ -3148,15 +3158,15 @@ s32 hsd_80395D88(void* data)
             return 1;
         }
         default:
-            return 0;
+            break;
         }
+        break;
     }
     case -1:
         ps_remove_node(sp, data);
         return 1;
-    default:
-        return 0;
     }
+    return 0;
 }
 
 void hsd_80396130(void)
@@ -3923,7 +3933,7 @@ void hsd_803975D4(void)
         }
     }
     cur_pads = (PADStatus*) ((u8*) sp + 0x54);
-    memcpy((u8*) cur_pads + 0x30, cur_pads, 0x30);
+    memcpy(&sp->_pad4[0x30], cur_pads, 0x30);
     PADRead(cur_pads);
     PADClamp(cur_pads);
     for (port = 0; port < 4; port++) {
@@ -4156,15 +4166,17 @@ void* fn_80397814(void* arg)
     VISetBlack(0);
 
     /* Clear display list */
-    keybuf = (u32*) &sp->xD0;
     {
-        void* cur = sp->xD0;
+        ExcptNode** head = &sp->xD0;
+        ExcptNode* cur;
+        keybuf = (u32*) head;
+        cur = *head;
         while (cur != NULL) {
-            void* next = *(void**) cur;
-            *(void**) cur = NULL;
+            ExcptNode* next = cur->next;
+            cur->next = NULL;
             cur = next;
         }
-        *(void**) keybuf = NULL;
+        *head = NULL;
     }
 
     /* Link exception node */
@@ -4183,23 +4195,33 @@ void* fn_80397814(void* arg)
 
     /* Initial display setup */
     {
-        s32* fb_ptr = (s32*) &sp->x40;
-        s32* fb2_ptr = (s32*) &sp->x44;
+        s32* fb_ptr;
+        s32* fb2_ptr;
         u32 retrace2;
         u32 next_retrace2;
-        s32* col_ptr = &sp->x34;
-        s32* x14_ptr = &sp->x14;
-        s32* x18_ptr = &sp->x18;
-        s32* x20_ptr = &sp->x20;
-        s32* nrows_ptr = &sp->x1C;
-        s32* fb_array = &sp->x24;
-        s32* x3C_ptr = &sp->x3C;
+        s32* col_ptr;
+        s32* x18_ptr;
+        s32* x14_ptr;
+        s32* x20_ptr;
+        s32* nrows_ptr;
+        s32* fb_array;
+        s32* x3C_ptr;
         s32* c8_ptr;
         s32* cc_ptr;
         s32* size_ptr;
         void* lbl_ptr;
         s32 fb_idx;
         PSNode* node;
+
+        fb_ptr = (s32*) &sp->x40;
+        fb2_ptr = (s32*) &sp->x44;
+        col_ptr = &sp->x34;
+        x18_ptr = &sp->x18;
+        x14_ptr = &sp->x14;
+        x20_ptr = &sp->x20;
+        nrows_ptr = &sp->x1C;
+        fb_array = &sp->x24;
+        x3C_ptr = &sp->x3C;
 
         hsd_80394544(*x18_ptr, *x14_ptr, *x20_ptr, *nrows_ptr, 20,
                      *fb_ptr - 40, fb_array[*col_ptr], *x3C_ptr, *fb_ptr,
@@ -4255,7 +4277,8 @@ void* fn_80397814(void* arg)
                 if (*(void* (**) (void*) )((u8*) disp_node + 0xC) != NULL) {
                     result = (s32) (*(void* (**) (void*) )((u8*) disp_node +
                                                            0xC))(disp_node);
-                    if (result != 0) {
+                    if (result == 0) {
+                    } else {
                         goto walk_done;
                     }
                 }
@@ -7492,12 +7515,17 @@ void hsd_8039D0A0(HSD_Generator* gen)
     HSD_Particle* prt;
     HSD_Particle* next;
     HSD_Particle** head;
+    HSD_JObj** jobj_base;
+    s8* base;
     u16 idnum;
 
     prev = NULL;
+    base = (s8*) hsd_804D08E8;
     idnum = gen->idnum;
-    head = (HSD_Particle**) &hsd_804D0908[gen->linkNo];
-    prt = (HSD_Particle*) *head;
+    head = (HSD_Particle**) (base + gen->linkNo * 4);
+    jobj_base = (HSD_JObj**) base;
+    prt = head[8];
+    head = (HSD_Particle**) ((u32) head + 0x20);
 
     while (prt != NULL) {
         next = prt->next;
@@ -7524,13 +7552,13 @@ void hsd_8039D0A0(HSD_Generator* gen)
 
             if (prt->kind & 0x8000) {
                 s32 jidx = (prt->kind >> 12) & 7;
-                if (hsd_804D08E8[jidx] != NULL) {
-                    HSD_JObjUnref(hsd_804D08E8[jidx]);
-                    hsd_804D08E8[jidx] = NULL;
+                if (jobj_base[jidx] != NULL) {
+                    HSD_JObjUnref(jobj_base[jidx]);
+                    jobj_base[jidx] = NULL;
                 }
             }
 
-            HSD_ObjFree(&hsd_804D0F60.alloc_data, prt);
+            HSD_ObjFree((HSD_ObjAllocData*) (base + 0x20), prt);
             hsd_804D78E2--;
         } else {
             prev = prt;
