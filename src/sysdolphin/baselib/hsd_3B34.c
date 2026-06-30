@@ -1103,6 +1103,7 @@ void hsd_803B4A2C(void)
     u8* scratch_r4_7;
     u8* scratch_r4_8;
     u8* scratch_r4_9;
+    u8 operand_pad[4];
 
     jmp_buf = &hsd_804D2648;
     scratch_r4 = hsd_804D79A0;

@@ -393,6 +393,7 @@ void fn_8024AED0(HSD_GObj* arg0)
     soundtest_user_data* temp_r28_5;
     soundtest_user_data* input_data;
     u64 events;
+    u8 operand_pad[24];
 
     soundtest_user_data* user_data = mnSoundTest_804D6C40->user_data;
     PAD_STACK(64);

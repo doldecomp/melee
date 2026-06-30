@@ -828,6 +828,7 @@ void hsd_8039254C(void)
     f32 bar_y;
     f32 bar_x;
     f32 t2;
+    u8 operand_pad[8];
     PAD_STACK(8);
 
     col_pos = 60;

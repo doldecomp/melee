@@ -170,6 +170,7 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
     u8 arrow_kind;
     u8 slot_type;
     u8 teams_enabled;
+    u8 operand_pad[20];
 
     if (arg1 != 0) {
         return;

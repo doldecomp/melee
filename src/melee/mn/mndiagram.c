@@ -1152,6 +1152,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
     s32 found;
     s32 cur;
     s32 count2;
+    u8 operand_pad[4];
     PAD_STACK(64);
     mn_804A04F0.buttons = input;
     count2 = 0;
