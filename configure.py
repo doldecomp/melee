@@ -820,7 +820,7 @@ config.libs = [
             # Nana
             Object(Matching, "melee/ft/chara/ftNana/ftNn_Init.c"),
             Object(Matching, "melee/ft/chara/ftNana/ftNn_SpecialHi.c"),
-            Object(NonMatching, "melee/ft/chara/ftNana/ftNn_SpecialS.c"),
+            Object(Matching, "melee/ft/chara/ftNana/ftNn_SpecialS.c"),
             # Pikachu
             Object(Matching, "melee/ft/chara/ftPikachu/ftPk_Init.c"),
             Object(Matching, "melee/ft/chara/ftPikachu/ftPk_SpecialN.c"),
