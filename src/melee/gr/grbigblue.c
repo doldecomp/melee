@@ -3814,7 +3814,8 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
         s32 counter;
         s32 j;
 
-        self = gp + offset;
+        self = gp;
+        self += offset;
         counter = *(s32*) (self + 0xF0);
         *(s32*) (self + 0xF0) = counter - 1;
 

@@ -6099,7 +6099,8 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     vel_mag_sq = pp->vel.x * pp->vel.x + pp->vel.y * pp->vel.y;
                     dx = jobj->mtx[0][3] - pp->pos.x;
                     vel_mag_sq += pp->vel.z * pp->vel.z;
-                    dy = jobj->mtx[1][3] - pp->pos.y;
+                    dy = jobj->mtx[1][3];
+                    dy -= pp->pos.y;
                     dz = jobj->mtx[2][3] - pp->pos.z;
                     vel_mag = sqrtf(vel_mag_sq);
                     dist_sq = dy * dy + dx * dx;

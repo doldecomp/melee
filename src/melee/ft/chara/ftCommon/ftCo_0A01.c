@@ -6552,7 +6552,8 @@ void ftCo_800AE7AC(Fighter* fp, Vec3* arg1, int arg2)
             left = Stage_GetBlastZoneLeftOffset();
             cx = 0.5f * (Stage_GetBlastZoneRightOffset() + left);
             bottom = Stage_GetBlastZoneBottomOffset();
-            sum_y = Stage_GetBlastZoneTopOffset() + bottom;
+            sum_y = Stage_GetBlastZoneTopOffset();
+            sum_y += bottom;
             cy = 0.5f * sum_y;
             (void) cy;
             dir.x = cx - fp->cur_pos.x;

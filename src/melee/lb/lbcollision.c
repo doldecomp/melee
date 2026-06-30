@@ -814,7 +814,8 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                                 float diff_dc_z;
                                                 float dot;
                                                 a2 = a0;
-                                                diff_dc_z = d->z - c->z;
+                                                diff_dc_z = d->z;
+                                                diff_dc_z -= c->z;
                                                 scl_e = 0.0f;
                                                 dot =
                                                     diff_dc_z * (c3.z - a2.z) +

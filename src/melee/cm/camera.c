@@ -3079,8 +3079,8 @@ check_done2:
             cam->transform.target_interest.x;
         y = cam->transform.target_position.y -
             cam->transform.target_interest.y;
-        z = cam->transform.target_position.z -
-            cam->transform.target_interest.z;
+        z = cam->transform.target_position.z;
+        z -= cam->transform.target_interest.z;
         dx2 = x * x;
         dy2 = y * y;
         dz2 = z * z;
