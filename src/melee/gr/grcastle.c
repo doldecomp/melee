@@ -820,7 +820,7 @@ void grCastle_801CE3AC(Ground_GObj* gobj)
         Vec3 pos;
         Vec3 offset;
 
-        jobj = GET_JOBJ(gp->gv.castle5.xCC);
+        jobj = HSD_GObjGetHSDObj(gp->gv.castle5.xCC);
         rot = grCs_803B7EB8;
 
         offset.z = 0.0f;

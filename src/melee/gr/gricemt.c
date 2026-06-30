@@ -1155,48 +1155,51 @@ void grIceMt_801F8CDC(Ground_GObj* gobj, s16* joint_indices, int block_num,
 s32 fn_801F8E58(Ground_GObj* arg0, s32* out)
 {
     s32 list[12];
-    s32 max;
-    s32 i;
-    s32 pick;
-    s32 chosen;
+    typedef struct IceMtTimerCursor {
+        s16 pad[0x6E];
+        s16 xDC;
+    } IceMtTimerCursor;
     Ground* gp;
-    s16 a;
-    s16 b;
+    s32* outp;
+    s32* p;
+    IceMtTimerCursor* timer;
+    s32 i;
+    s32 max;
+    s32 chosen;
+    IceMtTimerCursor* timer_base;
+    s32 a;
+    s32 b;
     s32 d;
 
     max = 0;
+    p = &list[max];
+    outp = out;
     gp = arg0->user_data;
-
-    {
-        Ground* g = gp;
-        s32* p = &list[max];
-        for (i = 0; i < 12; i++) {
-            if (g->gv.icemt.xDC == 0 && (Stage_80225194() != 0xD4 || i >= 4)) {
-                *p = i;
-                p++;
-                max++;
-            }
-            g = (Ground*) ((u8*) g + 2);
+    timer = (IceMtTimerCursor*) gp;
+    timer_base = timer;
+    for (i = 0; i < 12; i++) {
+        if (timer->xDC == 0 && (Stage_80225194() != 0xD4 || i >= 4)) {
+            *p = i;
+            p++;
+            max++;
         }
+        timer = (IceMtTimerCursor*) ((s16*) timer + 1);
     }
 
     HSD_ASSERT(0x81D, max);
-    pick = max != 0 ? HSD_Randi(max) : 0;
-    chosen = list[pick];
+    chosen = list[max != 0 ? HSD_Randi(max) : 0];
 
-    {
-        Ground* g = gp;
-        for (i = 0; i < 12; i++) {
-            if (g->gv.icemt.xDC > 0) {
-                g->gv.icemt.xDC--;
-            }
-            g = (Ground*) ((u8*) g + 2);
+    timer = timer_base;
+    for (i = 0; i < 12; i++) {
+        if (timer->xDC > 0) {
+            timer->xDC--;
         }
+        timer = (IceMtTimerCursor*) ((s16*) timer + 1);
     }
 
-    (&gp->gv.icemt.xDC)[chosen] = *(s16*) ((u8*) grIm_804D69F4 + 2);
-    a = *(s16*) ((u8*) grIm_804D69F4 + 0x36);
-    b = *(s16*) ((u8*) grIm_804D69F4 + 0x38);
+    (&gp->gv.icemt.xDC)[chosen] = ((s16*) grIm_804D69F4)[1];
+    a = ((s16*) grIm_804D69F4)[0x36 / 2];
+    b = ((s16*) grIm_804D69F4)[0x38 / 2];
     if (a > b) {
         d = a - b;
         a = b + (d != 0 ? HSD_Randi(d) : 0);
@@ -1204,7 +1207,7 @@ s32 fn_801F8E58(Ground_GObj* arg0, s32* out)
         d = b - a;
         a = a + (d != 0 ? HSD_Randi(d) : 0);
     }
-    *out = a;
+    *outp = a;
     return chosen;
 }
 

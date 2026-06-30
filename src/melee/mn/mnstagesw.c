@@ -463,14 +463,17 @@ static void mnStageSw_80236548(HSD_GObj* gobj, u8 arg1, u8 arg2)
         HSD_JObjClearFlagsAll(cursor_jobj, JOBJ_HIDDEN);
         delta_y = HSD_JObjGetTranslationY(data->x30) -
                   HSD_JObjGetTranslationY(data->x2C);
+        (void) delta_y;
         if (sel < 15) {
             x = HSD_JObjGetTranslationX(data->x2C);
+            (void) x;
             HSD_JObjSetTranslateX(cursor_jobj, x);
             HSD_JObjSetTranslateY(cursor_jobj,
                                   delta_y * (f32) sel +
                                       HSD_JObjGetTranslationY(data->x2C));
         } else {
             x = HSD_JObjGetTranslationX(data->x34);
+            (void) x;
             HSD_JObjSetTranslateX(cursor_jobj, x);
             HSD_JObjSetTranslateY(cursor_jobj,
                                   delta_y * (f32) (sel - 15) +

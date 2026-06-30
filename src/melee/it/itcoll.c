@@ -793,6 +793,7 @@ void it_80270E30(Item_GObj* arg_item_gobj)
 {
     f32 sp18;
     Vec3 hurt_pos;
+    Vec3* hurt_pos_ptr = &hurt_pos;
     DamageLogEntry* damage_log;
     HSD_GObj* item_owner_gobj;
     f32 knockback_cap;
@@ -807,10 +808,10 @@ void it_80270E30(Item_GObj* arg_item_gobj)
     UNUSED s32 unused_int0;
     UNUSED s32 unused_int1;
     s32 element;
-    u32 index;
     Item* item;
     Item* arg_item;
     DamageLogEntry* temp_r29;
+    u32 index;
     u32 index2;
     HitCapsule* hit2;
     ItemAttr* attr;
@@ -880,7 +881,7 @@ void it_80270E30(Item_GObj* arg_item_gobj)
                     }
                 } else {
                     hurt_pos = hit->hurt_coll_pos;
-                    efSync_Spawn(0x3E8, arg_item_gobj, &hurt_pos,
+                    efSync_Spawn(0x3E8, arg_item_gobj, hurt_pos_ptr,
                                  &damage_log->x8->damage);
                 }
             }

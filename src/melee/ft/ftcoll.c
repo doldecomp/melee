@@ -40,7 +40,8 @@
 #include "pl/player.h"
 #include "pl/plbonuslib.h"
 #include "pl/plstale.h"
-#include "pl/pltrick.h"
+void pl_80037ECC(HSD_GObj*);
+void pl_80038144(HSD_GObj*, HSD_GObj*, int, UNK_T, int, int, int);
 
 #include <common_structs.h>
 #include <math.h>
@@ -1373,18 +1374,13 @@ void ftColl_8007861C(Fighter_GObj* arg0, Fighter_GObj* gobj, int arg2,
                      int arg3, int arg4, UNK_T arg5, int arg6, UNK_T arg7,
                      int arg8)
 {
-    Fighter* attacker;
     Fighter* victim;
+    Fighter* attacker;
     s32 grounded;
     s32 prev_source_ply;
-    u16 attack_instance = arg6;
-    PAD_STACK(8);
+    int attack_instance = arg6;
 
-    if (arg0 != NULL) {
-        attacker = GET_FIGHTER(arg0);
-    } else {
-        attacker = NULL;
-    }
+    attacker = arg0 != NULL ? GET_FIGHTER(arg0) : NULL;
 
     victim = GET_FIGHTER(gobj);
     grounded = 0;
@@ -2252,13 +2248,16 @@ float ftColl_80079EA8(Fighter* fp, HitCapsule* hit, int unk_count)
     ftCommonData* ftd = p_ftCommonData;
     float decay;
     float result;
-    float w = fp->co_attrs.weight * ftd->xF4;
-    PAD_STACK(8);
+    u32 x28 = hit->x28;
+    float weight_mul;
+    PAD_STACK(16);
 
-    if (hit->x28 != 0) {
+    weight_mul = fp->co_attrs.weight * ftd->xF4;
+    if (x28 != 0) {
+        float one;
         float x118;
-        float one = ftColl_804D82EC;
 
+        one = *(float const*) &ftColl_804D82EC;
         decay = ftd->xF8;
         x118 = ftd->x118;
 
@@ -2267,9 +2266,9 @@ float ftColl_80079EA8(Fighter* fp, HitCapsule* hit, int unk_count)
             (one *
              (one *
               ((ftColl_804D8314 * (float) (u32) hit->x24 *
-                (ftd->x11C * ((decay - ((w * decay) / (one + w))) *
+                (ftd->x11C * ((decay - ((weight_mul * decay) / (one + weight_mul))) *
                               (x118 * ftd->x110 +
-                               ftd->x114 * (x118 * (float) (u32) hit->x28))) +
+                               ftd->x114 * (x118 * (float) x28))) +
                  ftd->x120)) +
                (float) (u32) hit->x2C)));
     } else {
@@ -2286,20 +2285,21 @@ float ftColl_80079EA8(Fighter* fp, HitCapsule* hit, int unk_count)
         }
 
         {
-            float one = ftColl_804D82EC;
+            float one;
+            float damage;
 
+            one = *(float const*) &ftColl_804D82EC;
             decay = ftd->xF8;
+            damage = (float) count + fp->dmg.x1838_percentTemp;
             result =
                 one *
                 (one *
                  (one * ((ftColl_804D8314 * (float) (u32) hit->x24 *
                           (ftd->x11C *
-                               ((decay - ((w * decay) / (one + w))) *
-                                (ftd->x110 * ((float) count +
-                                              fp->dmg.x1838_percentTemp) +
+                               ((decay - ((weight_mul * decay) / (one + weight_mul))) *
+                                (ftd->x110 * damage +
                                  ftd->x114 * ((float) (u32) unk_count *
-                                              ((float) count +
-                                               fp->dmg.x1838_percentTemp)))) +
+                                              damage))) +
                            ftd->x120)) +
                          (float) (u32) hit->x2C)));
         }

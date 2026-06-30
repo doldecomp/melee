@@ -1399,6 +1399,7 @@ void Toy_80306954(HSD_GObj* gobj, int unused)
     char* tbl;
     char* entry;
 
+    tbl = _Toy_str_TyLight_dat;
     state = Toy_sbss_804D6ED4;
     if (HSD_CObjSetCurrent((HSD_CObj*) gobj->hsd_obj)) {
         if (_Toy_sbss_804D6E50 == 0) {
@@ -1567,7 +1568,7 @@ void Toy_80306D70(s32 arg0)
         s32 idx;
         u8 kind;
 
-        base = (TyLightFile*) 0x803FDD18;
+        base = (TyLightFile*) _Toy_str_TyLight_dat;
         data = (TyLightData*) Toy_sbss_804D6ED4;
 
         if (data->archive != NULL && data->gobj != NULL) {
@@ -1815,21 +1816,27 @@ void _Toy_8030715C(f32 cstick_x, f32 cstick_y)
     1, 7, 22, 20, 18, 21, 19, 17, 23,
 };
 
+typedef union ToyPanelLabelData {
+    char bytes[1];
+    char* ptrs[1];
+} ToyPanelLabelData;
+
 void Toy_80307470(s32 arg0)
 {
-    ToyGlobalsS_* tg;
-    char* data;
     HSD_AnimJoint* anim;
-    HSD_MatAnimJoint* matanim;
-    HSD_ShapeAnimJoint* shapanim;
-    HSD_Joint* joint;
     HSD_JObj* loaded_jobj;
+    HSD_Joint* joint;
+    HSD_MatAnimJoint* matanim;
+    ToyGlobalsS_* tg;
+    ToyPanelLabelData* data;
     char** label;
+    char** anim_label;
+    HSD_ShapeAnimJoint* shapanim;
     u8 kind;
 
     PAD_STACK(24);
 
-    data = (void*) 0x803FDD18;
+    data = (ToyPanelLabelData*) _Toy_str_TyLight_dat;
     tg = (ToyGlobalsS_*) Toy_sbss_804D6ED8;
 
     if (tg->x50 == NULL) {
@@ -1842,24 +1849,24 @@ void Toy_80307470(s32 arg0)
         tg->x0 = NULL;
     }
 
-    label = (char**) (data + arg0 * 4);
+    label = &data->ptrs[arg0];
     joint = HSD_ArchiveGetPublicAddress(tg->x50, *(label += 0x188 / 4));
 
     if (joint != NULL) {
         tg->x0 = GObj_Create(9, 9, 0);
 
         loaded_jobj = HSD_JObjLoadJoint(joint);
-        label = (char**) (data + arg0 * 0xC);
-        anim = HSD_ArchiveGetPublicAddress(tg->x50, label[0x224 / 4]);
-        matanim = HSD_ArchiveGetPublicAddress(tg->x50, label[0x228 / 4]);
-        shapanim = HSD_ArchiveGetPublicAddress(tg->x50, label[0x22C / 4]);
+        anim_label = &data->ptrs[arg0 * 3];
+        anim = HSD_ArchiveGetPublicAddress(tg->x50, anim_label[0x224 / 4]);
+        matanim = HSD_ArchiveGetPublicAddress(tg->x50, anim_label[0x228 / 4]);
+        shapanim = HSD_ArchiveGetPublicAddress(tg->x50, anim_label[0x22C / 4]);
         HSD_JObjAddAnimAll(loaded_jobj, anim, matanim, shapanim);
         HSD_JObjReqAnimAll(loaded_jobj, 0.0f);
         kind = HSD_GObj_804D7849;
         HSD_GObjObject_80390A70(tg->x0, kind, loaded_jobj);
         GObj_SetupGXLink(tg->x0, HSD_GObj_JObjCallback, 0x3C, 0);
 
-        lb_8001204C(loaded_jobj, (void*) ((u8*) tg + 0x10), _Toy_803FE3F8, 9);
+        lb_8001204C(loaded_jobj, (HSD_JObj**) &tg->x10, _Toy_803FE3F8, 9);
 
         Toy_803083D8(tg->x30, 0x3E7);
         return;
@@ -1884,6 +1891,7 @@ void _Toy_803075E8(s32 arg0)
 
     PAD_STACK(88);
 
+    data = _Toy_str_TyLight_dat;
     td = (ToyED8Data*) Toy_sbss_804D6ED8;
 
     if (td->archive == NULL) {

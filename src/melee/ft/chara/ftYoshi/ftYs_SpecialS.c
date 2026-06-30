@@ -516,9 +516,7 @@ ftYs_SpecialS_UpdateLoop1Rotation(Fighter* fp, ftYoshiAttributes* attributes,
 
     {
         f32 x10 = fp->mv.ys.specials.x10;
-        f32 abs_x10 = ABS(x10);
-        f32 abs_x10_2 = ABS(x10);
-        f32 total = 0.7F * abs_x10 + abs_x10_2;
+        f32 total = ABS(x10) + 0.7F * ABS(x10);
 
         if (x10 > 0.0F) {
             f32 vel = perm_vel_inline(fp);

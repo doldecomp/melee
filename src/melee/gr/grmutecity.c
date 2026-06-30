@@ -1083,19 +1083,16 @@ void grMuteCity_801F106C(s32 i)
 void grMuteCity_801F1328(void)
 {
     s32* arr = grMc_8049F440;
-    s32* p;
     int i;
-    s32 offset;
     int j;
 
-    for (offset = 4, i = 1; i < 30; i++, offset += 4) {
-        p = (s32*) ((u32) arr + offset);
+    for (i = 1; i < 30; i++) {
         for (j = i; j >= 0; j--) {
-            s32 temp = p[0];
-            s32 prev = p[-1];
-            if (grMc_8049F4B8[temp].x0 > grMc_8049F4B8[prev].x0) {
-                p[0] = prev;
-                *--p = temp;
+            s32 temp = arr[j];
+            s32 prev = arr[j - 1];
+            if (grMc_8049F4B8[prev].x0 < grMc_8049F4B8[temp].x0) {
+                arr[j] = prev;
+                arr[j - 1] = temp;
             } else {
                 break;
             }
@@ -1139,16 +1136,16 @@ void grMuteCity_801F1328(void)
             grMc_8049F4B8[arr[idx]].x20 |= 1;
 
             {
+                f32 dz =
+                    grMc_8049F4B8[arr[i]].x1C - grMc_8049F4B8[arr[idx]].x1C;
                 f32 dx =
                     grMc_8049F4B8[arr[i]].x14 - grMc_8049F4B8[arr[idx]].x14;
                 f32 dy =
                     grMc_8049F4B8[arr[i]].x18 - grMc_8049F4B8[arr[idx]].x18;
-                f32 dz =
-                    grMc_8049F4B8[arr[i]].x1C - grMc_8049F4B8[arr[idx]].x1C;
+                f32 dz2 = dz * dz;
                 f32 dx2 = dx * dx;
                 f32 dy2 = dy * dy;
-                f32 dz2 = dz * dz;
-                if ((dz2 + (dx2 + dy2)) < 900.0f) {
+                if ((dz2 + (dy2 + dx2)) < 900.0f) {
                     grMc_8049F4B8[arr[i]].x20 |= 8;
                     grMc_8049F4B8[arr[idx]].x20 |= 8;
                 }

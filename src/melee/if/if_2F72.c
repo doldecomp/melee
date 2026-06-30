@@ -226,6 +226,7 @@ HSD_GObj* fn_802F77F8(HSD_GObj* gobj, u8 slot, s32 arg2)
 {
     void** base = lbl_804A1340;
     HSD_JObj* jobj;
+    DynamicModelDesc* model;
     Vec3* pos;
 
     if (base[0] == NULL) {
@@ -242,7 +243,8 @@ HSD_GObj* fn_802F77F8(HSD_GObj* gobj, u8 slot, s32 arg2)
         if (jobj != NULL) {
             HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
             GObj_SetupGXLink(gobj, fn_802F770C, 11, 0);
-            gm_8016895C(jobj, *(DynamicModelDesc**) base[0], (u8) arg2);
+            model = *(DynamicModelDesc**) base[0];
+            gm_8016895C(jobj, model, arg2 & 0xFF);
             HSD_JObjReqAnimAll(jobj, 0.0f);
             HSD_JObjAnimAll(jobj);
 

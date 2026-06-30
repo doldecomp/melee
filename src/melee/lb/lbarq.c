@@ -75,8 +75,8 @@ void lbArq_80014BD0(u32 source, void* dest, size_t length,
     lbArqNode* rp;
     lbArqNode* tmp;
     lbArqNode** tail;
-    lbArqNode** free_head;
     BOOL intr;
+    lbArqNode** free_head;
 
     PAD_STACK(16);
     DCInvalidateRange(dest, length);

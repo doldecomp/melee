@@ -816,38 +816,46 @@ void gm_80160B40(HSD_Text* text, u8 ckind, u8 arg2)
 
 void gm_80160C90(HSD_Text* text, u8 fighter_id, bool arg2)
 {
-    f32 name_scale;
-    bool use_alt_name;
+    HSD_Text* tmp_text = text;
+    u8 tmp_ckind = fighter_id;
     const char* str;
+    f32 size;
+    bool use_alt_name;
 
     if (lbLang_IsSavedLanguageUS() != 0) {
         text->default_kerning = 1;
     }
-    str = ((u8) arg2 != 0) ? fn_801609E0(fighter_id) : gm_80160980(fighter_id);
+    str = (u8) arg2 ? fn_801609E0(tmp_ckind) : gm_80160980(tmp_ckind);
+
     if (lbLang_IsSavedLanguageUS() != 0) {
+        f32 temp;
         use_alt_name = false;
-        if ((u8) arg2 != 0 && lbl_803D50E4[fighter_id] != NULL) {
+        if ((u8) arg2 && lbl_803D50E4[tmp_ckind] != NULL) {
             use_alt_name = true;
         }
         if (use_alt_name) {
-            name_scale = lbl_803B7784[fighter_id];
+            temp = lbl_803B7784[tmp_ckind];
         } else {
-            name_scale = lbl_803B767C[fighter_id];
+            temp = lbl_803B767C[tmp_ckind];
         }
+        size = temp;
     } else {
+        f32 temp;
         use_alt_name = false;
-        if ((u8) arg2 != 0 && lbl_803D5060[fighter_id] != NULL) {
+        if ((u8) arg2 && lbl_803D5060[tmp_ckind] != NULL) {
             use_alt_name = true;
         }
         if (use_alt_name) {
-            name_scale = lbl_803B7700[fighter_id];
+            temp = lbl_803B7700[tmp_ckind];
         } else {
-            name_scale = lbl_803B75F8[fighter_id];
+            temp = lbl_803B75F8[tmp_ckind];
         }
+        size = temp;
     }
     HSD_SisLib_803A7548(
-        text, HSD_SisLib_803A6B98(text, 0.0F, 0.0F, str, use_alt_name),
-        name_scale, 1.0F);
+        tmp_text,
+        HSD_SisLib_803A6B98(tmp_text, 0.0F, 0.0F, str, use_alt_name), size,
+        1.0F);
 }
 
 void fn_80160DE8(HSD_JObj* arg0, u8 arg1, s32 arg2, u8 arg3, f32 farg0,
@@ -2852,86 +2860,76 @@ s32 fn_8016588C(lbl_8046B6A0_24C_t* arg0, s32 arg1)
     s32 v;
     s32 lim;
 
+    PAD_STACK(0x18);
+
     if (gm_801A4310() == 0x1F) {
         if (arg0->x58[arg1].x28 != 0) {
-            v = (u8) (arg0->x58[arg1].x28 / 60 + 0xFF000001);
+            v = arg0->x58[arg1].x28 / 60 + 0xFF000001;
         } else {
             v = arg0->x58[arg1].x9;
         }
+        lim = (1 << 24) - 1;
+        if (lim < 0) {
+            lim = -lim;
+        }
+        if (v > lim) {
+            v = lim;
+        } else if (v < -lim) {
+            v = -lim;
+        }
+    } else if (arg0->x5 == 2) {
+        v = ((MatchPlayerData*) arg0->x58)[arg1].x1C;
+        lim = (1 << 24) - 1;
+        if (lim < 0) {
+            lim = -lim;
+        }
+        if (v > lim) {
+            v = lim;
+        } else if (v < -lim) {
+            v = -lim;
+        }
+    } else if (arg0->x5 == 1) {
+        if ((s8) arg0->x58[arg1].x8 != 0) {
+            v = (s8) arg0->x58[arg1].x8;
+        } else {
+            v = arg0->x58[arg1].x28 / 60 + 0xFF000001;
+        }
+        lim = (1 << 24) - 1;
+        if (lim < 0) {
+            lim = -lim;
+        }
+        if (v > lim) {
+            v = lim;
+        } else if (v < -lim) {
+            v = -lim;
+        }
+    } else if (arg0->x5 == 3) {
+        pl_80039450(arg1);
+        v = fn_8016FFD4(arg0, 2, (u8) arg1);
+        lim = (1 << 24) - 1;
+        if (lim < 0) {
+            lim = -lim;
+        }
+        if (v > lim) {
+            v = lim;
+        } else if (v < -lim) {
+            v = -lim;
+        }
     } else {
-        switch (arg0->x5) {
-        case 2:
-            v = arg0->x58[arg1].x1C;
-            lim = (1 << 24) - 1;
-            if (lim < 0) {
-                lim = -lim;
-            }
-            if (v > lim) {
-                return lim;
-            }
-            if (v < -lim) {
-                return -lim;
-            }
-            break;
-        case 1:
-            if ((s8) arg0->x58[arg1].x8 != 0) {
-                v = (u8) (s8) arg0->x58[arg1].x8;
-            } else {
-                v = (u8) (arg0->x58[arg1].x28 / 60 + 0xFF000001);
-            }
-            lim = (1 << 24) - 1;
-            if (lim < 0) {
-                lim = -lim;
-            }
-            if (v > lim) {
-                return lim;
-            }
-            if (v < -lim) {
-                return -lim;
-            }
-            break;
-        case 3:
-            pl_80039450(arg1);
-            v = (u8) fn_8016FFD4(arg0, 2, (u8) arg1);
-            lim = (1 << 24) - 1;
-            if (lim < 0) {
-                lim = -lim;
-            }
-            if (v > lim) {
-                return lim;
-            }
-            if (v < -lim) {
-                return -lim;
-            }
-            break;
-        default: {
-            u16 a = arg0->x58[arg1].xA;
-            v = (u8) ((arg0->x58[arg1].x20 - (arg0->x58[arg1].x24 - a)) +
-                      a * (s8) arg0->xC);
-            break;
-            lim = (1 << 24) - 1;
-            if (lim < 0) {
-                lim = -lim;
-            }
-            if (v > lim) {
-                return lim;
-            }
-            if (v < -lim) {
-                return -lim;
-            }
+        u16 a = arg0->x58[arg1].xA;
+        v = a * (s8) arg0->xC;
+        v += arg0->x58[arg1].x20 - (arg0->x58[arg1].x24 - a);
+        lim = (1 << 24) - 1;
+        if (lim < 0) {
+            lim = -lim;
         }
+        if (v > lim) {
+            v = lim;
+        } else if (v < -lim) {
+            v = -lim;
         }
     }
-    lim = (1 << 24) - 1;
-    if (lim < 0) {
-        lim = -lim;
-    }
-    if (v > lim) {
-        return lim;
-    }
-    if (v < -lim) {
-        return -lim;
-    }
+
     return v;
 }
 
@@ -4694,7 +4692,6 @@ long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
     s8* src;
     u8 tmp;
     s8 result;
-
     switch (arg0) {
     case 1:
         i = 0;
@@ -4724,34 +4721,36 @@ long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
 
         count = 0;
         for (i = 0; i < 0xD; i++) {
-            if ((s8) list[0] != -1) {
+            if ((s8) *list != -1) {
                 count += 1;
                 if (count > 0x10) {
-                    list[0] = -1;
+                    *list = -1;
                 }
             }
-            if ((s8) list[1] != -1) {
+            if ((s8) *++list != -1) {
                 count += 1;
                 if (count > 0x10) {
-                    list[1] = -1;
+                    *list = -1;
                 }
             }
-            list += 2;
+            list++;
         }
 
-        dst = arg1;
-        src = arg2;
-        i = 0;
-        while ((s8) *src != -2) {
-            while ((s8) lbl_8046B488.x1C0[i] == -1) {
-                i = (i + 1) % 27;
+        {
+            s8* dst2 = arg1;
+            s8* src2 = arg2;
+            s32 idx = 0;
+            while ((s8) *src2 != -2) {
+                while ((s8) lbl_8046B488.x1C0[idx] == -1) {
+                    idx = (idx + 1) % 27;
+                }
+                result = Player_800325C8(
+                    (CharacterKind) (s8) lbl_8046B488.x1C0[idx], 0);
+                *dst2 = result;
+                idx += 1;
+                src2 += 1;
+                dst2 += 1;
             }
-            result =
-                Player_800325C8((CharacterKind) (s8) lbl_8046B488.x1C0[i], 0);
-            *dst = result;
-            i += 1;
-            src += 1;
-            dst += 1;
         }
         break;
     case 0:
@@ -5012,23 +5011,37 @@ gm_8016A404_event_player_init_cb(struct lbl_8046B488_t* gp)
     return &state->event_player_init_cb;
 }
 
-static inline u8 gm_8016A22C_kind(struct lbl_8046B488_t* gp, int idx)
+struct gm_8016A22C_kinds {
+    u8 kind[3];
+};
+
+struct gm_8016A22C_buffers {
+    /* 0x000 */ char pad_0[0x20];
+    /* 0x020 */ u8 x20[0xA2 - 0x20];
+    /* 0x0A2 */ u8 xA2[0x124 - 0xA2];
+};
+
+static inline struct gm_8016A22C_kinds*
+gm_8016A22C_kind_array(struct lbl_8046B488_t* gp)
 {
-    switch (idx) {
-    case 0:
-        return gp->x0;
-    case 1:
-        return gp->x1;
-    }
-    return gp->x2;
+    return (struct gm_8016A22C_kinds*) gp;
 }
+
+static inline struct gm_8016A22C_buffers*
+gm_8016A22C_buffers(struct lbl_8046B488_t* gp)
+{
+    return (struct gm_8016A22C_buffers*) gp;
+}
+
 
 s32 gm_8016A22C(s8 k0, s8 k1, s8 k2, u8 a3, u8 a4, int a5, int mode, int a7,
                 u8 color, u8 p87, u8 p8b, int x6, int x7, int x9, int xA,
                 int flag2, int flag1, f32 f1, f32 f2)
 {
-    u8* kinds;
     int i;
+    struct gm_8016A22C_kinds* kinds;
+    struct gm_8016A22C_buffers* bufs;
+    u8 x7_tmp;
 
     memzero(&lbl_8046B488, 0x1C0);
 
@@ -5039,6 +5052,10 @@ s32 gm_8016A22C(s8 k0, s8 k1, s8 k2, u8 a3, u8 a4, int a5, int mode, int a7,
     lbl_8046B488.x3 = a3;
     lbl_8046B488.x4 = a4;
     lbl_8046B488.x5 = (u8) a5;
+
+    lbl_8046B488.x1AC = p87;
+    lbl_8046B488.x1AD = 0x21;
+    lbl_8046B488.x1B2 = p8b;
 
     lbl_8046B488.x6 = (u8) x6;
     lbl_8046B488.x7 = (u8) x7;
@@ -5065,34 +5082,38 @@ s32 gm_8016A22C(s8 k0, s8 k1, s8 k2, u8 a3, u8 a4, int a5, int mode, int a7,
 
     lbl_8046B488.xC = a3;
 
-    lbl_8046B488.x1AC = p87;
-    lbl_8046B488.x1AD = 0x21;
-    lbl_8046B488.x1B2 = p8b;
+    x7_tmp = lbl_8046B488.x7;
+    memzero(lbl_8046B488.x20, x7_tmp);
+    {
+        s8* p = &lbl_8046B488.x20[x7_tmp];
+        *p = -2;
+    }
 
-    memzero(lbl_8046B488.x20, lbl_8046B488.x7);
-    lbl_8046B488.x20[lbl_8046B488.x7] = (s8) -2;
+    {
+        struct lbl_8046B488_t* tmp = &lbl_8046B488;
+        fn_80169900_noinline(lbl_8046B488.xD, tmp, lbl_8046B488.xA2,
+                             lbl_8046B488.x20);
+    }
 
-    fn_80169900_noinline(lbl_8046B488.xD, &lbl_8046B488, lbl_8046B488.xA2,
-                         lbl_8046B488.x20);
-
-    kinds = (u8*) &lbl_8046B488.x0;
+    kinds = gm_8016A22C_kind_array(&lbl_8046B488);
+    bufs = gm_8016A22C_buffers(&lbl_8046B488);
 
     switch (lbl_8046B488.xB) {
     case 0:
         for (i = 0; i < 3; i++) {
-            fn_801695BC_noinline(kinds[i], p87, p8b, (u8*) lbl_8046B488.xA2,
-                                 (u8*) lbl_8046B488.x20);
+            fn_801695BC_noinline(kinds->kind[i], p87, p8b, bufs->xA2,
+                                 bufs->x20);
         }
         break;
 
-    case 1:
+    case 1: {
+        u8 c = lbl_8046B488.xC;
         for (i = 0; i < 3; i++) {
-            fn_801697FC_noinline(
-                kinds[i], lbl_8046B488.xC, p87, p8b,
-                lbl_8046B488
-                    .x20); // This was being inlined, hence the no-inline
+            fn_801697FC_noinline(kinds->kind[i], c, p87, p8b,
+                                 lbl_8046B488.x20);
         }
         break;
+    }
     }
 
     return fn_80169A84(lbl_8046B488.xE, lbl_8046B488.x124, lbl_8046B488.x20);

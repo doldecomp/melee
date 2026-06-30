@@ -1286,6 +1286,7 @@ int ftCo_800B7638(Fighter* fp)
 
 void ftCo_800B77E8(Fighter* fp)
 {
+    u8 _[0x28];
     struct Fighter_x1A88_t* cpu = &fp->x1A88;
     ftCo_CollData c1;
     ftCo_CollData c2;
@@ -1529,7 +1530,8 @@ void ftCo_800B77E8(Fighter* fp)
                 can_attack = 1;
             } else if (fp->facing_dir > 0.0) {
                 y = fp->cur_pos.y;
-                x = fp->cur_pos.x + 27.0f;
+                x = fp->cur_pos.x;
+                x += 27.0f;
                 if (ftCo_800A0FB0(&c6.p, &c6.line, &c6.flags, &c6.n, -1, -1,
                                   -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
                 {
@@ -1576,7 +1578,8 @@ void ftCo_800B77E8(Fighter* fp)
                 can_attack = 1;
             } else if (fp->facing_dir > 0.0) {
                 y = fp->cur_pos.y;
-                x = fp->cur_pos.x + 53.0f;
+                x = fp->cur_pos.x;
+                x += 53.0f;
                 if (ftCo_800A0FB0(&c7.p, &c7.line, &c7.flags, &c7.n, -1, -1,
                                   -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
                 {
@@ -1623,7 +1626,8 @@ void ftCo_800B77E8(Fighter* fp)
                 can_attack = 1;
             } else if (fp->facing_dir > 0.0) {
                 y = fp->cur_pos.y;
-                x = fp->cur_pos.x + 16.0f;
+                x = fp->cur_pos.x;
+                x += 16.0f;
                 if (ftCo_800A0FB0(&c8.p, &c8.line, &c8.flags, &c8.n, -1, -1,
                                   -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
                 {
@@ -1706,7 +1710,8 @@ void ftCo_800B77E8(Fighter* fp)
             can_attack = 1;
         } else if (fp->facing_dir > 0.0) {
             y = fp->cur_pos.y;
-            x = fp->cur_pos.x + 32.0f;
+            x = fp->cur_pos.x;
+            x += 32.0f;
             if (ftCo_800A0FB0(&c10.p, &c10.line, &c10.flags, &c10.n, -1, -1,
                               -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
             {

@@ -70,7 +70,9 @@ typedef struct _MCCPacket {
 } MCCPacket;
 
 typedef struct _ParticleFontData {
-    /* 0x0000 */ u8 _pad0[0x968];
+    /* 0x0000 */ u8 _pad0[0x700];
+    /* 0x0700 */ u8 x700[0x38];
+    /* 0x0738 */ u8 _pad738[0x230];
     /* 0x0968 */ u8 x968[0x38];
     /* 0x09A0 */ u8 _pad9A0[0x38];
     /* 0x09D8 */ u8 x9D8[0x38];
@@ -2162,11 +2164,6 @@ extern u8 lbl_8040AB40[];
 
 // @TODO: Currently 88.35% match - register allocation/loop counter
 // differences remain
-static inline s32 hsd_80394668_get_interlace(struct ParticleScreenState* sp)
-{
-    return sp->x0_b6;
-}
-
 #pragma push
 #pragma global_optimizer off
 void hsd_80394668(void)
@@ -2177,17 +2174,16 @@ void hsd_80394668(void)
     if ((u32) sp->x2C != 0) {
         /* Copy XFB data with brightness adjustment */
         u8* src = (u8*) sp->x2C;
-        s32 offset = sp->x34;
-        u8* dst = (u8*) (&sp->x24)[offset];
-        u32 half_count = ((u32) sp->x48 + 1) >> 1;
+        u8* dst = 0;
+        u32 count = ((u32) sp->x48 + 1) >> 1;
         s32 pos = 0;
+        dst += (&sp->x24)[sp->x34];
 
-        if ((u32) sp->x48 > 0) {
-            u32 unrolled = half_count >> 3;
-            u32 remainder;
+        if (sp->x48 > 0) {
+            u32 n = count >> 3;
 
-            if (unrolled != 0) {
-                do {
+            while (n != 0) {
+                {
                     u8* s0 = src + pos;
                     u8* d0 = dst + pos;
                     pos += 2;
@@ -2235,13 +2231,12 @@ void hsd_80394668(void)
                     pos += 2;
                     d0[0] = (u8) (((s0[0] - 0x10) & 0xFFFFFF) + 0x10);
                     d0[1] = s0[1];
-                } while (--unrolled != 0);
-                remainder = half_count & 7;
-                if (remainder == 0) {
-                    return;
+                    n--;
                 }
-            } else {
-                remainder = half_count;
+            }
+            count &= 7;
+            if (count == 0) {
+                return;
             }
 
             do {
@@ -2251,23 +2246,24 @@ void hsd_80394668(void)
                 pos += 2;
                 d1[0] = (u8) (((luma - 0x10) & 0xFFFFFF) + 0x10);
                 d1[1] = s1[1];
-            } while (--remainder != 0);
+            } while (--count != 0);
         }
     } else {
         /* Draw console text to framebuffer */
+        void* saved_color;
+        s32 row;
         void** x50_ptr = &sp->x50;
         s32* x4_ptr = &sp->x4;
         s32* x40_ptr = &sp->x40;
         s32* x8_ptr = &sp->x8;
-        void* saved_color = *x50_ptr;
-        s32 row;
-        s32 col;
-        s32 cur_x;
 
+        saved_color = *x50_ptr;
         *x50_ptr = lbl_8040AB40;
         row = 0;
 
         while (row <= sp->x1C) {
+            s32 col;
+            s32 cur_x;
             s32 y_off = (row + 1) * 14;
             col = 0;
             cur_x = 0x14;
@@ -2275,15 +2271,18 @@ void hsd_80394668(void)
             while (col < sp->x20) {
                 *x4_ptr = cur_x;
                 *x8_ptr = (*x40_ptr - 0x28) - y_off;
-                if (sp->x0_b7 != 0) {
-                    s32 interlace = hsd_80394668_get_interlace(sp);
-                    hsd_803922FC((void*) ((u8*) sp->x4C + 0x700), *x4_ptr,
-                                 *x8_ptr, interlace, (&sp->x24)[sp->x34],
-                                 sp->x3C, *x40_ptr, sp->x44, *x50_ptr);
-                } else {
-                    hsd_803921B8((void*) ((u8*) sp->x4C + 0x700), *x4_ptr,
-                                 *x8_ptr, (&sp->x24)[sp->x34], sp->x3C,
-                                 *x40_ptr, sp->x44, *x50_ptr);
+                {
+                    s32 interlace = sp->x0_b6;
+                    if (sp->x0_b7 != 0) {
+                        hsd_803922FC(((ParticleFontData*) sp->x4C)->x700,
+                                     *x4_ptr, *x8_ptr, interlace,
+                                     (&sp->x24)[sp->x34], sp->x3C, *x40_ptr,
+                                     sp->x44, *x50_ptr);
+                    } else {
+                        hsd_803921B8(((ParticleFontData*) sp->x4C)->x700,
+                                     *x4_ptr, *x8_ptr, (&sp->x24)[sp->x34],
+                                     sp->x3C, *x40_ptr, sp->x44, *x50_ptr);
+                    }
                 }
                 cur_x += 11;
                 col++;
@@ -3740,15 +3739,15 @@ void hsd_80397110(void)
     struct ParticleScreenState* sp = &hsd_804CF810;
     extern u8 lbl_8040BEC4[];
     u8* base = lbl_8040AB00;
+    void* saved;
+    s32 offset;
     void** px50 = &sp->x50;
     s32* px4 = &sp->x4;
     s32* px40 = &sp->x40;
     s32* px8 = &sp->x8;
     char buf[32];
-    void* saved;
-    u32 i;
     s32 row;
-    s32 offset;
+    u32 i;
     u32* spr_entry;
     char* padding;
     PAD_STACK(32);
@@ -8711,13 +8710,16 @@ HSD_Generator* hsd_8039EFAC(s32 linkNo, s32 bank, s32 gfx_id, HSD_JObj* jobj)
 
 // @TODO: Currently 80.79% match - .bss.0 section anchor hoist causes
 // register-allocation cascade (extra saved reg + frame shift)
+static inline s32 ps_get_cmdlist_bound(s32 bank)
+{
+    return (s32) psCmdListArray[bank];
+}
+
 HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
 {
-    HSD_PSCmdList** cmdListArr;
-    HSD_PSCmdList* cl;
+    HSD_PSCmdList*** cmdListSlot;
     HSD_PSTexGroup* tg;
     HSD_Generator* gen;
-    s32 ofs;
     f32 vel_mag;
     f32 horiz_mag;
     f32 abs_vx;
@@ -8731,40 +8733,38 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
     if (linkNo >= 8) {
         return NULL;
     }
-    if (idx >= psNumCmdList[bank]) {
+    if (idx >= ps_get_cmdlist_bound(bank)) {
         return NULL;
     }
 
-    cmdListArr = psCmdListArray[bank];
-    ofs = idx * 4;
-    if ((u32) * ((s32*) cmdListArr + idx) == 0) {
+    cmdListSlot = (HSD_PSCmdList***) &ptclref_804D0E5C[bank];
+#define CMDLIST_ENTRY ((*cmdListSlot)[idx])
+    if (CMDLIST_ENTRY == NULL) {
         return NULL;
     }
 
     gen = hsd_8039D9C8();
     if (gen != NULL) {
-        cl = ((HSD_PSCmdList**) cmdListArr)[idx];
-
-        gen->type = cl->type;
+        gen->type = CMDLIST_ENTRY->type;
         gen->bank = bank;
         gen->linkNo = linkNo;
-        gen->kind = cl->kind;
-        gen->texGroup = cl->texGroup;
-        gen->life = cl->life;
-        gen->genLife = cl->genLife;
-        gen->pos.x = 0.0F;
-        gen->pos.y = 0.0F;
+        gen->kind = CMDLIST_ENTRY->kind;
+        gen->texGroup = CMDLIST_ENTRY->texGroup;
+        gen->life = CMDLIST_ENTRY->life;
+        gen->genLife = CMDLIST_ENTRY->genLife;
         gen->pos.z = 0.0F;
-        gen->vel.x = cl->vx;
-        gen->vel.y = cl->vy;
-        gen->vel.z = cl->vz;
-        gen->grav = cl->grav;
-        gen->fric = cl->fric;
-        gen->angle = cl->angle;
-        gen->cmdList = cl->cmdList;
-        gen->radius = cl->radius;
-        gen->size = cl->size;
-        gen->random = cl->random;
+        gen->pos.y = 0.0F;
+        gen->pos.x = 0.0F;
+        gen->vel.x = CMDLIST_ENTRY->vx;
+        gen->vel.y = CMDLIST_ENTRY->vy;
+        gen->vel.z = CMDLIST_ENTRY->vz;
+        gen->grav = CMDLIST_ENTRY->grav;
+        gen->fric = CMDLIST_ENTRY->fric;
+        gen->size = CMDLIST_ENTRY->size;
+        gen->cmdList = CMDLIST_ENTRY->cmdList;
+        gen->radius = CMDLIST_ENTRY->radius;
+        gen->angle = CMDLIST_ENTRY->angle;
+        gen->random = CMDLIST_ENTRY->random;
 
         if (gen->kind & 0x100) {
             f1 = gen->random;
@@ -8785,7 +8785,7 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
         }
 
         tg = psTexGroupArray[bank][gen->texGroup];
-        if (tg != NULL && tg->palnum != 0) {
+        if (tg != NULL && tg->palflag != 0) {
             gen->kind |= 0x10;
         }
 
@@ -8797,62 +8797,60 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
         case 0:
         case 3:
         case 4: {
-            HSD_PSCmdList* c = ((HSD_PSCmdList**) cmdListArr)[idx];
+            HSD_PSCmdList* c = CMDLIST_ENTRY;
             f32 p1 = c->param1;
             if (p1 == 0.0F && c->param2 == 0.0F) {
                 gen->aux.disc.minAngle = 0.0F;
                 gen->aux.disc.maxAngle = 6.2831855F;
             } else {
                 gen->aux.disc.minAngle = p1;
-                gen->aux.disc.maxAngle =
-                    ((HSD_PSCmdList**) cmdListArr)[idx]->param2;
+                gen->aux.disc.maxAngle = CMDLIST_ENTRY->param2;
             }
             break;
         }
         case 1:
-            gen->aux.line.x2 = ((HSD_PSCmdList**) cmdListArr)[idx]->param1;
-            gen->aux.line.y2 = ((HSD_PSCmdList**) cmdListArr)[idx]->param2;
-            gen->aux.line.z2 = ((HSD_PSCmdList**) cmdListArr)[idx]->param3;
+            gen->aux.line.x2 = CMDLIST_ENTRY->param1;
+            gen->aux.line.y2 = CMDLIST_ENTRY->param2;
+            gen->aux.line.z2 = CMDLIST_ENTRY->param3;
             break;
         case 6:
         case 7: {
-            HSD_PSCmdList* c = ((HSD_PSCmdList**) cmdListArr)[idx];
+            HSD_PSCmdList* c = CMDLIST_ENTRY;
             f32 p1 = c->param1;
             if (p1 == 0.0F && c->param2 == 0.0F) {
                 gen->aux.cone.minAngle = 0.0F;
                 gen->aux.cone.maxAngle = 6.2831855F;
             } else {
                 gen->aux.cone.minAngle = p1;
-                gen->aux.cone.maxAngle =
-                    ((HSD_PSCmdList**) cmdListArr)[idx]->param2;
+                gen->aux.cone.maxAngle = CMDLIST_ENTRY->param2;
             }
-            gen->aux.cone.height = ((HSD_PSCmdList**) cmdListArr)[idx]->param3;
+            gen->aux.cone.height = CMDLIST_ENTRY->param3;
             break;
         }
         case 5: {
-            f0 = ((HSD_PSCmdList**) cmdListArr)[idx]->param1;
-            gen->aux.rect.x = f0;
+            f0 = CMDLIST_ENTRY->param1;
+            gen->aux.disc.minAngle = f0;
             gen->aux.rect.xx = f0;
-            f0 = ((HSD_PSCmdList**) cmdListArr)[idx]->param2;
-            gen->aux.rect.y = f0;
-            gen->aux.rect.zx = f0;
-            f0 = ((HSD_PSCmdList**) cmdListArr)[idx]->param3;
-            gen->aux.rect.z = f0;
-            gen->aux.rect.zy = f0;
-            gen->aux.rect.zz = 0.0F;
+            f0 = CMDLIST_ENTRY->param2;
+            gen->aux.disc.maxAngle = f0;
+            gen->aux.rect.yy = f0;
+            f0 = CMDLIST_ENTRY->param3;
+            gen->aux.line.z2 = f0;
+            gen->aux.rect.zz = f0;
+            gen->aux.rect.zy = 0.0F;
+            gen->aux.rect.zx = 0.0F;
             gen->aux.rect.yz = 0.0F;
-            gen->aux.rect.yy = 0.0F;
-            gen->aux.rect.xy = 0.0F;
-            gen->aux.rect.xz = 0.0F;
             gen->aux.rect.yx = 0.0F;
+            gen->aux.rect.xz = 0.0F;
+            gen->aux.rect.xy = 0.0F;
             gen->aux.rect.flag = 0;
-            if (((HSD_PSCmdList**) cmdListArr)[idx]->param1 < 0.0F) {
+            if (CMDLIST_ENTRY->param1 < 0.0F) {
                 gen->aux.rect.flag |= 1;
             }
-            if (((HSD_PSCmdList**) cmdListArr)[idx]->param2 < 0.0F) {
+            if (CMDLIST_ENTRY->param2 < 0.0F) {
                 gen->aux.rect.flag |= 2;
             }
-            if (((HSD_PSCmdList**) cmdListArr)[idx]->param3 < 0.0F) {
+            if (CMDLIST_ENTRY->param3 < 0.0F) {
                 gen->aux.rect.flag |= 4;
             }
             break;
@@ -8905,15 +8903,13 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
             } else {
                 gen->aux.sphere.lonMid = atan2f(gen->vel.z, gen->vel.x);
             }
-            gen->aux.sphere.latRange =
-                ((HSD_PSCmdList**) cmdListArr)[idx]->param1;
+            gen->aux.sphere.latRange = CMDLIST_ENTRY->param1;
             f1 = gen->aux.sphere.latRange;
             if (f1 < 0.0F) {
                 gen->aux.sphere.latRange = -f1;
                 gen->aux.sphere.speed = -gen->aux.sphere.speed;
             }
-            gen->aux.sphere.lonRange =
-                ((HSD_PSCmdList**) cmdListArr)[idx]->param2;
+            gen->aux.sphere.lonRange = CMDLIST_ENTRY->param2;
             break;
         }
         default:
@@ -8936,6 +8932,7 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
             ((void (*)(HSD_Generator*)) hsd_804D7900)(gen);
         }
     }
+#undef CMDLIST_ENTRY
     return gen;
 }
 

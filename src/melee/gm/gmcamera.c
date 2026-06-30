@@ -455,7 +455,7 @@ void gmCamera_801A2BF0(void)
     HSD_JObj** px8;
     u32* px18;
     f32 var_f1;
-    f32 var_f31;
+    f32 translate_x;
     gmCameraUnkStruct* gcus = &gmCamera_80479BC8.gcus;
 
     px8 = &gcus->x8;
@@ -472,8 +472,39 @@ void gmCamera_801A2BF0(void)
     px18 = &gcus->x18;
     *px18 = 0;
     lb_80011E24(*px8, &jobj_b, 0xC, -1);
-    var_f31 = gmCamera_801A2BF0_get_translate_x(px18);
-    HSD_JObjSetTranslateX(jobj_b, var_f31);
+    translate_x = gmCamera_801A2BF0_get_translate_x(px18);
+    HSD_JObjSetTranslateX(jobj_b, translate_x);
+}
+
+static inline void gmCamera_801A2D44_update_selection(HSD_JObj** jobj_b,
+                                                       HSD_JObj** jobj)
+{
+    gmCameraUnkStruct* gcus = &gmCamera_80479BC8.gcus;
+    u32* px18;
+    f32 translate_x;
+
+    px18 = &gcus->x18;
+    if ((HSD_PadCopyStatus[3].trigger & 0x40001) && (s32) *px18 != 0) {
+        lbAudioAx_80024030(2);
+        *px18 = 0;
+        lb_80011E24(gcus->x8, &(*jobj), 0xC, -1);
+        if ((s32) *px18 != 0) {
+            translate_x = 5.0f;
+        } else {
+            translate_x = -5.0f;
+        }
+        HSD_JObjSetTranslateX(*jobj, translate_x);
+    } else if ((HSD_PadCopyStatus[3].trigger & 0x80002) && (s32) *px18 != 1) {
+        lbAudioAx_80024030(2);
+        *px18 = 1;
+        lb_80011E24(gcus->x8, &(*jobj_b), 0xC, -1);
+        if ((s32) *px18 != 0) {
+            translate_x = 5.0f;
+        } else {
+            translate_x = -5.0f;
+        }
+        HSD_JObjSetTranslateX(*jobj_b, translate_x);
+    }
 }
 
 void gmCamera_801A2D44(void)
@@ -481,9 +512,7 @@ void gmCamera_801A2D44(void)
     gmCameraUnkStruct* gcus = &gmCamera_80479BC8.gcus;
     HSD_JObj* jobj;
     HSD_JObj* jobj_b;
-    u32* px18;
-    f32 var_f31;
-    PAD_STACK(24);
+    PAD_STACK(16);
 
     if ((lbSnap_8001D338(0) != 0) || (lbSnap_8001D338(1) != 0)) {
         gmCamera_801A3048(2);
@@ -504,28 +533,7 @@ void gmCamera_801A2D44(void)
         gmCamera_801A3048(0);
         return;
     }
-    px18 = &gcus->x18;
-    if ((HSD_PadCopyStatus[3].trigger & 0x40001) && (s32) *px18 != 0) {
-        lbAudioAx_80024030(2);
-        *px18 = 0;
-        lb_80011E24(gcus->x8, &jobj, 0xC, -1);
-        if ((s32) *px18 != 0) {
-            var_f31 = 5.0f;
-        } else {
-            var_f31 = -5.0f;
-        }
-        HSD_JObjSetTranslateX(jobj, var_f31);
-    } else if ((HSD_PadCopyStatus[3].trigger & 0x80002) && (s32) *px18 != 1) {
-        lbAudioAx_80024030(2);
-        *px18 = 1;
-        lb_80011E24(gcus->x8, &jobj_b, 0xC, -1);
-        if ((s32) *px18 != 0) {
-            var_f31 = 5.0f;
-        } else {
-            var_f31 = -5.0f;
-        }
-        HSD_JObjSetTranslateX(jobj_b, var_f31);
-    }
+    gmCamera_801A2D44_update_selection(&jobj_b, &jobj);
 }
 
 void gmCamera_801A2FBC(void)

@@ -81,6 +81,9 @@
 /* 4D6F28 */ static s32 _tyDisplay_804D6F28;
 /* 4D6F2C */ static HSD_GObj* _tyDisplay_804D6F2C;
 
+extern TyDspNameTables _tyDisplay_803B8988;
+extern TyDspArchNames _tyDisplay_803B8A34;
+
 STATIC_ASSERT(sizeof(_tyDisplay_devtext_buf) == 0x36);
 STATIC_ASSERT(sizeof(_tyDisplay_804A2DD0) == 0x18);
 
@@ -637,149 +640,165 @@ void _tyDisplay_80318CB4(s32 arg0)
 
 void _tyDisplay_80319540(s32 arg0)
 {
-    TyDspGrid* grid = _tyDisplay_804D6F14;
+    s32 use_arg = arg0;
     TyDspConfig* cfg = _tyDisplay_804D6F18;
-    s32 count;
-    s32 col, row, remainder;
+    TyDspGrid* cur;
     s32 i;
+    s32 remainder;
+    s32 col;
+    s32 row;
     s32 n2;
+    TyDspGrid* grid = _tyDisplay_804D6F14;
     PAD_STACK(0x28);
 
     memzero(grid, 0x12E4);
 
+    row = 0;
+    col = 0;
     grid->x08_min_z = -3.5f;
     grid->x04_min_x = -3.5f;
     grid->x10_max_z = 3.5f;
     grid->x0C_max_x = 3.5f;
 
-    count = cfg->x08;
-    if (count <= 1) {
+    if (cfg->x08 <= 1) {
         remainder = 0;
     } else {
-        remainder = count % (s8) cfg->x75;
+        remainder = cfg->x08 % (s8) cfg->x75;
     }
 
-    col = 0;
-    row = 0;
-    for (i = 0; i < count; i++) {
-        if (i == 0) {
-            grid->pos[i].x = 0.0f;
-            grid->pos[i].z = 0.0f;
-        } else {
-            f32 x = 9.0f * (f32) col;
-            if (arg0 != 0 && (row % 2) != 0) {
-                x = x + 3.5f;
+    {
+        cur = grid;
+        i = 0;
+        while (i < cfg->x08) {
+            if (i == 0) {
+                cur->pos[0].x = 0.0f;
+                cur->pos[0].z = 0.0f;
+            } else {
+                cur->pos[0].x = 9.0f * (f32) col;
+                if (use_arg != 0 && (row % 2) != 0) {
+                    cur->pos[0].x += 3.5f;
+                }
+                cur->pos[0].z = 9.0f * (f32) row;
             }
-            grid->pos[i].x = x;
-            grid->pos[i].z = 9.0f * (f32) row;
-        }
 
-        col += 1;
-        if (remainder != 0) {
-            remainder -= 1;
-            if (remainder == 0) {
+            col += 1;
+            if (remainder != 0) {
+                remainder -= 1;
+                if (remainder == 0) {
+                    col = 0;
+                    row += 1;
+                }
+            } else if (col >= (s8) cfg->x75) {
                 col = 0;
                 row += 1;
             }
-        } else if (col >= (s8) cfg->x75) {
-            col = 0;
-            row += 1;
-        }
 
-        {
-            f32 px = grid->pos[i].x;
-            if (px < grid->x04_min_x) {
-                grid->x04_min_x = px;
+            {
+                f32 px = cur->pos[0].x;
+                if (px < grid->x04_min_x) {
+                    grid->x04_min_x = px;
+                }
             }
-        }
-        {
-            f32 px = grid->pos[i].x;
-            if (px > grid->x0C_max_x) {
-                grid->x0C_max_x = px;
+            {
+                f32 px = cur->pos[0].x;
+                if (px > grid->x0C_max_x) {
+                    grid->x0C_max_x = px;
+                }
             }
-        }
-        {
-            f32 pz = grid->pos[i].z;
-            if (pz < grid->x08_min_z) {
-                grid->x08_min_z = pz;
+            {
+                f32 pz = cur->pos[0].z;
+                if (pz < grid->x08_min_z) {
+                    grid->x08_min_z = pz;
+                }
             }
-        }
-        {
-            f32 pz = grid->pos[i].z;
-            if (pz > grid->x10_max_z) {
-                grid->x10_max_z = pz;
+            {
+                f32 pz = cur->pos[0].z;
+                if (pz > grid->x10_max_z) {
+                    grid->x10_max_z = pz;
+                }
             }
+            cur = (TyDspGrid*) ((size_t) cur + sizeof(TyDspPos));
+            i++;
         }
-
-        count = cfg->x08;
     }
 
-    _tyDisplay_80318B1C(count);
+    _tyDisplay_80318B1C(cfg->x08);
 
-    if (count > 1) {
-        n2 = (count / 3) * 2;
+    if (cfg->x08 > 1) {
+        n2 = (cfg->x08 / 3) * 2;
         if (n2 > 0) {
+            TySortElem tmp0, tmp1, tmp2;
             s32 mid = n2 / 2;
-            s32 pivot, j, n;
-            TySortElem tmp;
-            TySortElem* sort = grid->sort;
+            s32 pivot, n, j;
 
             if (mid != 0) {
-                tmp = sort[0];
-                sort[0] = sort[mid];
-                sort[mid] = tmp;
+                tmp0 = grid->sort[0];
+                grid->sort[0] = grid->sort[mid];
+                grid->sort[mid] = tmp0;
             }
 
             pivot = 0;
             j = 0;
             for (n = 1; n2 >= n; n++) {
-                if (sort[n].val > sort[0].val) {
+                if (*(s32*) &grid->sort[n].val >
+                    *(s32*) &grid->sort[0].val)
+                {
                     pivot += 1;
                     j += 8;
                     if (pivot != n) {
-                        TySortElem* s = (TySortElem*) ((u8*) grid->sort + j);
-                        tmp = *s;
-                        *s = sort[n];
-                        sort[n] = tmp;
+                        TySortElem* s = (TySortElem*) ((size_t) grid + j + 0x14);
+                        tmp1 = *s;
+                        *s = grid->sort[n];
+                        grid->sort[n] = tmp1;
                     }
                 }
             }
 
             if (pivot != 0) {
-                TySortElem* s = &sort[pivot];
-                tmp = sort[0];
-                sort[0] = *s;
-                *s = tmp;
+                tmp2 = grid->sort[0];
+                grid->sort[0] = grid->sort[pivot];
+                grid->sort[pivot] = tmp2;
             }
 
-            _tyDisplay_80318714(sort, 0, pivot - 1);
-            _tyDisplay_80318714(sort, pivot + 1, n2);
+            _tyDisplay_80318714(grid->sort, 0, pivot - 1);
+            _tyDisplay_80318714(grid->sort, pivot + 1, n2);
         }
     }
 
     {
+        struct TyDspGridElemIter {
+            u8 pad_sort[0x14];
+            TySortElem sort;
+            u8 pad_pos[0x960];
+            TyDspPos pos;
+        }* cur;
         s32 k;
-        s32 off = 0;
+        s32 off;
 
-        for (k = 0; k < cfg->x08; k++) {
+        k = 0;
+        off = 0;
+        cur = (struct TyDspGridElemIter*) grid;
+        for (; k < cfg->x08; k++) {
             HSD_GObj* gobj;
-            HSD_JObj** jobjArr;
-            cfg->x78 = _tyDisplay_8031BC54(grid->sort[0].key);
+            cfg->x78 = _tyDisplay_8031BC54(cur->sort.key);
             gobj = cfg->x78;
             if (gobj != NULL) {
-                jobjArr = _tyDisplay_804D6F10;
-                jobjArr[k] = (HSD_JObj*) gobj->hsd_obj;
+                *(HSD_JObj**) ((size_t) _tyDisplay_804D6F10 + off) =
+                    (HSD_JObj*) gobj->hsd_obj;
                 {
-                    f32 xpos = grid->pos[k].x;
-                    HSD_JObj* jobj = jobjArr[k];
-                    HSD_JObjSetTranslateX(jobj, xpos);
+                    f32 xpos = cur->pos.x;
+                    HSD_JObjSetTranslateX(
+                        *(HSD_JObj**) ((size_t) _tyDisplay_804D6F10 + off),
+                        xpos);
                 }
                 {
-                    f32 zpos = grid->pos[k].z;
-                    HSD_JObj* jobj = jobjArr[k];
-                    HSD_JObjSetTranslateZ(jobj, zpos);
+                    f32 zpos = cur->pos.z;
+                    HSD_JObjSetTranslateZ(
+                        *(HSD_JObj**) ((size_t) _tyDisplay_804D6F10 + off),
+                        zpos);
                 }
             }
+            cur = (struct TyDspGridElemIter*) ((size_t) cur + sizeof(TyDspPos));
             off += 4;
         }
     }
@@ -2021,7 +2040,6 @@ s32 _tyDisplay_8031BBF4(s8 arg0)
 
 HSD_GObj* _tyDisplay_8031BC54(s32 arg0)
 {
-#if 0
     char buf[44];
     HSD_GObj* gobj;
     s32 id = arg0;
@@ -2064,7 +2082,7 @@ HSD_GObj* _tyDisplay_8031BC54(s32 arg0)
 
     {
         char* temp2;
-        temp2 = (char*) matanim_names.entries[(s8) cat];
+        temp2 = matanim_names.entries[(s8) cat];
         Toy_80306A48(child, NULL, temp2, NULL, data->archives[c2],
                      (long) entry->x05);
     }
@@ -2074,7 +2092,7 @@ HSD_GObj* _tyDisplay_8031BC54(s32 arg0)
     HSD_JObjSetTranslateZ(child, entry->x0C);
 
     HSD_JObjAddChild(root, HSD_JObjLoadJoint(HSD_ArchiveGetPublicAddress(
-                               data->archives[41], "ToyDspStand_Top_joint")));
+                               data->archives[41], _tyDisplay_803FF01C)));
 
     if (_tyDisplay_804D6F24 != NULL) {
         DevText_Erase(_tyDisplay_804D6F24);
@@ -2085,9 +2103,6 @@ HSD_GObj* _tyDisplay_8031BC54(s32 arg0)
     }
 
     return gobj;
-#else
-    NOT_IMPLEMENTED;
-#endif
 }
 
 static inline HSD_JObj* un_8031BF34_inline(void)

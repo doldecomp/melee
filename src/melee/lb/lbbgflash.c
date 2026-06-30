@@ -77,20 +77,23 @@ void fn_8001FC08(void)
     // When I try it just stays a loop in the asm
     BgFlashData* data = &lbl_80433658;
     f32 val;
+    f32 cur_val;
+    f32* cur;
+    u8 target;
 
     if (data->x20[0] > 0.0f) {
-        u8 target = data->x8.r;
-        f32* cur = &data->x10[0];
-        val = *cur + data->x20[0];
+        target = data->x8.r;
+        cur_val = *(cur = &data->x10[0]);
+        val = cur_val + data->x20[0];
         if (val < (f32) target) {
             *cur = val;
         } else {
             *cur = (f32) target;
         }
     } else {
-        u8 target = data->x8.r;
-        f32* cur = &data->x10[0];
-        val = *cur + data->x20[0];
+        target = data->x8.r;
+        cur_val = *(cur = &data->x10[0]);
+        val = cur_val + data->x20[0];
         if (val > (f32) target) {
             *cur = val;
         } else {
@@ -99,18 +102,18 @@ void fn_8001FC08(void)
     }
 
     if (data->x20[1] > 0.0f) {
-        u8 target = data->x8.g;
-        f32* cur = &data->x10[1];
-        val = *cur + data->x20[1];
+        target = data->x8.g;
+        cur_val = *(cur = &data->x10[1]);
+        val = cur_val + data->x20[1];
         if (val < (f32) target) {
             *cur = val;
         } else {
             *cur = (f32) target;
         }
     } else {
-        u8 target = data->x8.g;
-        f32* cur = &data->x10[1];
-        val = *cur + data->x20[1];
+        target = data->x8.g;
+        cur_val = *(cur = &data->x10[1]);
+        val = cur_val + data->x20[1];
         if (val > (f32) target) {
             *cur = val;
         } else {
@@ -119,18 +122,18 @@ void fn_8001FC08(void)
     }
 
     if (data->x20[2] > 0.0f) {
-        u8 target = data->x8.b;
-        f32* cur = &data->x10[2];
-        val = *cur + data->x20[2];
+        target = data->x8.b;
+        cur_val = *(cur = &data->x10[2]);
+        val = cur_val + data->x20[2];
         if (val < (f32) target) {
             *cur = val;
         } else {
             *cur = (f32) target;
         }
     } else {
-        u8 target = data->x8.b;
-        f32* cur = &data->x10[2];
-        val = *cur + data->x20[2];
+        target = data->x8.b;
+        cur_val = *(cur = &data->x10[2]);
+        val = cur_val + data->x20[2];
         if (val > (f32) target) {
             *cur = val;
         } else {
@@ -139,18 +142,18 @@ void fn_8001FC08(void)
     }
 
     if (data->x20[3] > 0.0f) {
-        u8 target = data->x8.a;
-        f32* cur = &data->x10[3];
-        val = *cur + data->x20[3];
+        target = data->x8.a;
+        cur_val = *(cur = &data->x10[3]);
+        val = cur_val + data->x20[3];
         if (val < (f32) target) {
             *cur = val;
         } else {
             *cur = (f32) target;
         }
     } else {
-        u8 target = data->x8.a;
-        f32* cur = &data->x10[3];
-        val = *cur + data->x20[3];
+        target = data->x8.a;
+        cur_val = *(cur = &data->x10[3]);
+        val = cur_val + data->x20[3];
         if (val > (f32) target) {
             *cur = val;
         } else {
@@ -518,7 +521,7 @@ void fn_80020AEC(HSD_JObj* jobj, Mtx out)
     Mtx tmp;
     Vec3 col;
     volatile f32 scale_mag;
-    u8 _[16];
+    u8 _[4];
 
     if (jobj == NULL) {
         parent = NULL;
@@ -587,12 +590,10 @@ void fn_80020AEC(HSD_JObj* jobj, Mtx out)
             } else {
                 grandpar = cur->parent;
             }
-            HSD_JObjGetMtxPtr(cur);
-            HSD_JObjGetMtxPtr(grandpar);
-            HSD_MtxInverseConcat(grandpar->mtx, cur->mtx, tmp);
+            HSD_MtxInverseConcat(HSD_JObjGetMtxPtr(grandpar),
+                                 HSD_JObjGetMtxPtr(cur), tmp);
         } else {
-            HSD_JObjGetMtxPtr(cur);
-            PSMTXCopy(cur->mtx, tmp);
+            PSMTXCopy(HSD_JObjGetMtxPtr(cur), tmp);
         }
 
         for (i = 0; i < 3; i++) {
@@ -630,16 +631,13 @@ void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
     Mtx resultMtx;
     volatile f32 tmp;
     f32 z_col_z;
-    f32 dx = dir->x;
-    f32 dy = dir->y;
-    f32 dz = dir->z;
-    f32 mag_sq;
     f32 angle;
     f32 z_col_y;
     f32 z_col_x;
-    f32 dx2 = dx * dx;
-    f32 dy2 = dy * dy;
-    dz2 = dz * dz;
+    f32 mag_sq;
+    f32 dx2 = dir->x * dir->x;
+    f32 dy2 = dir->y * dir->y;
+    dz2 = dir->z * dir->z;
     (void) dz2;
     if (dx2 + dy2 + dz2 == 0.0f) {
         return;
@@ -650,8 +648,8 @@ void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
     z_col_y = jobj->mtx[1][2];
     z_col_x = jobj->mtx[0][2];
     z_col_z = jobj->mtx[2][2];
-    mag_sq = z_col_x * z_col_x + z_col_y * z_col_y;
-    mag_sq = z_col_z * z_col_z + mag_sq;
+    z_col_x = SQ(z_col_x) + SQ(z_col_y); mag_sq = z_col_x;
+    mag_sq = SQ(z_col_z) + mag_sq;
     if (mag_sq > 0.0f) {
         f64 e = __frsqrte(mag_sq);
         e = 0.5 * e * -(((f64) mag_sq * (e * e)) - 3.0);

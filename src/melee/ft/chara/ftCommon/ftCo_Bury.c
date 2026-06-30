@@ -73,7 +73,7 @@ void ftCo_800C08A0(Fighter_GObj* gobj, Fighter_GObj* arg1, DynamicsDesc* arg2,
                    ftCommon_BuryType arg3)
 {
     float f;
-    struct SmallerHitCapsule hit;
+    u8 _[4];
     int hurt_idx;
     FighterHurtCapsule* p_hurt;
     Fighter* fp = GET_FIGHTER(gobj);
@@ -90,7 +90,9 @@ void ftCo_800C08A0(Fighter_GObj* gobj, Fighter_GObj* arg1, DynamicsDesc* arg2,
         break;
     }
     if (ftColl_80076640(fp, &f) != 0) {
-        p_hurt = &fp->hurt_capsules[hurt_idx];
+        struct SmallerHitCapsule hit;
+        hurt_idx *= sizeof(FighterHurtCapsule);
+        p_hurt = (FighterHurtCapsule*) ((intptr_t) fp + hurt_idx + 0x11A0);
         ftColl_80076764(3, arg3, arg1, arg2, fp, p_hurt);
         lbColl_80008D30((HitCapsule*) &hit, (lbColl_80008D30_arg1*) arg2);
         ftColl_80078384(fp, p_hurt, (HitCapsule*) &hit);

@@ -1619,7 +1619,7 @@ static inline bool isDuplicateCostume(int door)
 {
     int num_doors;
     int j;
-    CSSDoor* temp_r30 = &mnCharSel_803F0DFC.doors[door];
+    CSSDoor* base_door = &mnCharSel_803F0DFC.doors[door];
 
     if (mnCharSel_804D6CB0->match_type == TRAINING_MODE) {
         num_doors = 2;
@@ -1628,10 +1628,36 @@ static inline bool isDuplicateCostume(int door)
     }
 
     for (j = 0; j < num_doors; j++) {
-        CSSDoor* var_r5 = &mnCharSel_803F0DFC.doors[j];
-        if (door != j && var_r5->p_kind != 3 && var_r5->sel_icon < 0x19 &&
-            var_r5->sel_icon == temp_r30->sel_icon &&
-            temp_r30->costume == var_r5->costume)
+        CSSDoor* other_door = &mnCharSel_803F0DFC.doors[j];
+        if (door != j && other_door->p_kind != 3 &&
+            other_door->sel_icon < 0x19 &&
+            other_door->sel_icon == base_door->sel_icon &&
+            base_door->costume == other_door->costume)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+static inline bool isDuplicateCostume2(int door, CSSData* css, u8 door_count)
+{
+    int num_doors;
+    int j;
+    CSSDoor* base_door = &mnCharSel_803F0DFC.doors[door];
+
+    if (css->match_type == TRAINING_MODE) {
+        num_doors = 2;
+    } else {
+        num_doors = door_count;
+    }
+
+    for (j = 0; j < num_doors; j++) {
+        CSSDoor* other_door = &mnCharSel_803F0DFC.doors[j];
+        if (door != j && other_door->p_kind != 3 &&
+            other_door->sel_icon < 0x19 &&
+            other_door->sel_icon == base_door->sel_icon &&
+            base_door->costume == other_door->costume)
         {
             return true;
         }
@@ -1644,12 +1670,14 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
     HSD_JObj* sp18;
     s32 icon_idx;
     int player;
-    CSSIcon* icons = (CSSIcon*) (&mnCharSel_803F0A48 + 1);
-    PAD_STACK(8);
+    CSSAllData* all_data = (CSSAllData*) &mnCharSel_803F0A48;
+    u8* char_kinds;
+    CSSIcon* icon;
 
     do {
-        icon_idx = HSD_Randi(0x19);
-    } while (icons[icon_idx].state == 0);
+        s32 temp = HSD_Randi(0x19);
+        icon_idx = temp;
+    } while ((icon = &all_data->icons[icon_idx])->state == 0);
 
     if (mnCharSel_804D6CF5 == 1) {
         if (door != 0) {
@@ -1661,17 +1689,20 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
         player = door;
     }
 
+    char_kinds = &all_data->icons[0].char_kind;
     mnCharSel_804D6CB0->data.data.players[player].c_kind =
-        icons[icon_idx].char_kind;
+        char_kinds[icon_idx * sizeof(CSSIcon)];
 
     mnCharSel_803F0DFC.doors[door].sel_icon = (u8) icon_idx;
     if (mnCharSel_803F0DFC.doors[door].sel_icon !=
         mnCharSel_803F0DFC.doors[door].sel_icon_prev)
     {
+        CSSData* css = mnCharSel_804D6CB0;
+        u8 door_count = mnCharSel_804D6CF5;
         u8 costume = 0;
         while (1) {
             mnCharSel_803F0DFC.doors[door].costume = costume;
-            if (!isDuplicateCostume(door)) {
+            if (!isDuplicateCostume2(door, css, door_count)) {
                 break;
             }
             costume++;
@@ -1679,8 +1710,8 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
     }
 
     mnCharSel_804A0BD0[door]->x5 = 0;
-    mnCharSel_804A0BD0[door]->x8 = 3.4f + icons[icon_idx].bound_l;
-    mnCharSel_804A0BD0[door]->xC = -3.0f + icons[icon_idx].bound_u;
+    mnCharSel_804A0BD0[door]->x8 = 3.4f + all_data->icons[icon_idx].bound_l;
+    mnCharSel_804A0BD0[door]->xC = -3.0f + all_data->icons[icon_idx].bound_u;
     if (arg1 != 0) {
         mnCharSel_804A0BD0[door]->x10 = mnCharSel_804A0BD0[door]->x8;
         mnCharSel_804A0BD0[door]->x14 = mnCharSel_804A0BD0[door]->xC;
@@ -1689,21 +1720,21 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
                             mnCharSel_804A0BC0[mnCharSel_804D6CF5 - 1]->gobj);
 
     if (mnCharSel_804D6CF5 == 1) {
-        lb_80011E24(mnCharSel_804D6CC0, &sp18, icons[icon_idx].joint_id_1p,
-                    -1);
+        lb_80011E24(mnCharSel_804D6CC0, &sp18,
+                    all_data->icons[icon_idx].joint_id_1p, -1);
     } else {
-        lb_80011E24(mnCharSel_804D6CC0, &sp18, icons[icon_idx].joint_id_vs,
-                    -1);
+        lb_80011E24(mnCharSel_804D6CC0, &sp18,
+                    all_data->icons[icon_idx].joint_id_vs, -1);
     }
     HSD_ForeachAnim(sp18, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim, AOBJ_ARG_AF,
                     10.0);
 
-    icons[icon_idx].anim_timer = 0xC;
+    all_data->icons[icon_idx].anim_timer = 0xC;
 
     {
         u8 sel = mnCharSel_803F0DFC.doors[door].sel_icon;
-        lbAudioAx_80023870(icons[sel].sfx, 0x7F, 0x40, sel + 0x8A);
-        gm_80168C5C((u32) icons[sel].char_kind);
+        lbAudioAx_80023870(all_data->icons[sel].sfx, 0x7F, 0x40, sel + 0x8A);
+        gm_80168C5C((u32) char_kinds[sel * sizeof(CSSIcon)]);
     }
 }
 

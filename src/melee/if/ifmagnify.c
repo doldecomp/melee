@@ -466,8 +466,11 @@ void ifMagnify_802FC3C0(s32 slot)
             (ifMagnifyImageDescCopy*) &ifMagnify_804A1DE0;
 
         copy_base->image_descs[slot] = *ifMagnify_804A1DE0.player[0].idesc;
-        player->idesc = &((ifMagnifyImageDescBase*) &ifMagnify_804A1DE0)
-                             ->image_descs[slot - 1];
+        {
+            HSD_ImageDesc* tmp =
+                ((ifMagnifyImageDescBase*) &ifMagnify_804A1DE0)->image_descs;
+            player->idesc = &tmp[slot - 1];
+        }
         player->idesc->image_ptr = HSD_MemAlloc(
             (GXGetTexBufferSize(player->idesc->width, player->idesc->height,
                                 player->idesc->format, 0, 0) +

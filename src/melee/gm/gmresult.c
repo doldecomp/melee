@@ -558,6 +558,33 @@ static StatsList lbl_803D6878[] = {
     { 3, 0x00, NULL },
 };
 
+static inline void fn_80174B4C_blk14829(ResultsData* data, s32 slot,
+                                        struct ResultsPlayerData** pdata,
+                                        StatsList** list)
+{
+    s32 i;
+    PAD_STACK(56);
+
+    (*pdata) = &data->player_data[slot];
+    (*list) = lbl_803D6878;
+
+    /// Clear existing stats text
+    for (i = 0; i < 10; i++) {
+        if ((*pdata)->stats_text[0][i] != NULL) {
+            HSD_SisLib_803A5CC4((*pdata)->stats_text[0][i]);
+            (*pdata)->stats_text[0][i] = NULL;
+        }
+        if ((*pdata)->stats_text[1][i] != NULL) {
+            HSD_SisLib_803A5CC4((*pdata)->stats_text[1][i]);
+            (*pdata)->stats_text[1][i] = NULL;
+        }
+        if ((*pdata)->stats_text[2][i] != NULL) {
+            HSD_SisLib_803A5CC4((*pdata)->stats_text[2][i]);
+            (*pdata)->stats_text[2][i] = NULL;
+        }
+    }
+}
+
 void fn_80174B4C(ResultsData* data, s32 slot)
 {
     struct ResultsPlayerData* pdata;
@@ -570,26 +597,9 @@ void fn_80174B4C(ResultsData* data, s32 slot)
     Vec3 pos;
     f32 offset;
     s32 start_entry;
-    PAD_STACK(56);
+    PAD_STACK(40);
 
-    pdata = &data->player_data[slot];
-    list = lbl_803D6878;
-
-    /// Clear existing stats text
-    for (i = 0; i < 10; i++) {
-        if (pdata->stats_text[0][i] != NULL) {
-            HSD_SisLib_803A5CC4(pdata->stats_text[0][i]);
-            pdata->stats_text[0][i] = NULL;
-        }
-        if (pdata->stats_text[1][i] != NULL) {
-            HSD_SisLib_803A5CC4(pdata->stats_text[1][i]);
-            pdata->stats_text[1][i] = NULL;
-        }
-        if (pdata->stats_text[2][i] != NULL) {
-            HSD_SisLib_803A5CC4(pdata->stats_text[2][i]);
-            pdata->stats_text[2][i] = NULL;
-        }
-    }
+    fn_80174B4C_blk14829(data, slot, &pdata, &list);
 
     /// Look up stats list
     if ((s32) pdata->page != 2) {
@@ -1588,31 +1598,30 @@ void fn_80176D3C(Vec3* positions)
     ResultsData* data = &lbl_8046DBE8;
     MatchEnd* me;
     Vec3* pos;
-    MatchPlayerData* p;
     DynamicModelDesc* models[3];
-    HSD_JObj* jobj;
-    HSD_GObj* gobj;
+    MatchEnd* me_iter;
     s32 winner;
     s32 i;
     PAD_STACK(8);
 
     me = data->x94;
     pos = positions;
-    p = me->player_standings;
+    me_iter = me;
     models[0] = data->flmsce->models[3];
     models[1] = data->flmsce->models[2];
     models[2] = data->flmsce->models[1];
 
     i = 0;
     do {
-        if (p->slot_type == Gm_PKind_NA) {
+        if (me_iter->player_standings[0].slot_type == Gm_PKind_NA) {
             goto loop_end;
         }
 
         if (me->is_teams == 0) {
-            winner = p->is_big_loser;
+            winner = me_iter->player_standings[0].is_big_loser;
         } else {
-            winner = me->team_standings[p->team].is_big_loser;
+            winner = me->team_standings[me_iter->player_standings[0].team]
+                         .is_big_loser;
         }
 
         if (winner > 3) {
@@ -1625,22 +1634,26 @@ void fn_80176D3C(Vec3* positions)
             goto loop_end;
         }
 
-        gobj = GObj_Create(14, 15, 0);
-        jobj = HSD_JObjLoadJoint(models[winner - 1]->joint);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
-        GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 11, 0);
+        {
+            HSD_GObj* gobj;
+            HSD_JObj* jobj;
+            gobj = GObj_Create(14, 15, 0);
+            jobj = HSD_JObjLoadJoint(models[winner - 1]->joint);
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+            GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 11, 0);
 
-        HSD_JObjSetTranslate(jobj, pos);
+            HSD_JObjSetTranslate(jobj, pos);
 
-        gm_8016895C(jobj, models[winner - 1], 0);
-        HSD_JObjReqAnimAll(jobj, 0.0F);
-        HSD_JObjAnimAll(jobj);
-        HSD_GObj_SetupProc(gobj, fn_80176D18, 1);
-        fn_80179F6C(i, (int) gobj);
+            gm_8016895C(jobj, models[winner - 1], 0);
+            HSD_JObjReqAnimAll(jobj, 0.0F);
+            HSD_JObjAnimAll(jobj);
+            HSD_GObj_SetupProc(gobj, fn_80176D18, 1);
+            fn_80179F6C(i, (int) gobj);
+        }
 
     loop_end:
         i++;
-        p++;
+        me_iter = (MatchEnd*) ((MatchPlayerData*) me_iter + 1);
         pos++;
     } while (i < 4);
 }

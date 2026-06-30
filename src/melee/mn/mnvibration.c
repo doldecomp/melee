@@ -835,12 +835,12 @@ void fn_80248A78(HSD_GObj* arg0)
 {
     MnVibrationData* data;
     f32 frame;
-    HSD_JObj* cursor_jobj;
-    HSD_GObj* cursor_gobj;
     MnVibrationAssets* assets;
     MnVibrationData* data2;
-    MnVibrationData* data3;
+    HSD_GObj* cursor_gobj;
     HSD_JObj* loaded_joint;
+    MnVibrationData* data3;
+    HSD_JObj* cursor_jobj;
     HSD_JObj* jobj;
     HSD_JObj* jobj2;
     HSD_JObj* jobj3;
@@ -954,9 +954,8 @@ void fn_80248A78(HSD_GObj* arg0)
             cursor_gobj = GObj_Create(6U, 7U, 0x80U);
             data2->cursor_gobj = cursor_gobj;
             loaded_joint = HSD_JObjLoadJoint(assets->SCl_Top_joint);
-            HSD_GObjObject_80390A70((HSD_GObj*) ((u8*) cursor_gobj + 0),
-                                    HSD_GObj_804D7849,
-                                    (HSD_JObj*) ((u8*) loaded_joint + 0));
+            HSD_GObjObject_80390A70(cursor_gobj, HSD_GObj_804D7849,
+                                    loaded_joint);
             GObj_SetupGXLink(cursor_gobj, HSD_GObj_JObjCallback, 4U, 0x80U);
             HSD_GObj_SetupProc(cursor_gobj, fn_80248084, 0U);
             data3 = arg0->user_data;
@@ -965,8 +964,8 @@ void fn_80248A78(HSD_GObj* arg0)
             cursor_row = data2->x0[1];
             base_y = mnVibration_JObjGetTranslationY(jobj17);
             jobj18 = data3->jobjs[18];
-            jobj17 = data3->jobjs[17];
             spacing = mnVibration_GetCursorYSpacing(base_y, jobj18);
+            jobj17 = data3->jobjs[17];
             temp_x = mnVibration_JObjGetTranslationX(jobj17);
             mnVibration_JObjSetTranslateX(cursor_jobj, temp_x);
             jobj17 = data3->jobjs[17];

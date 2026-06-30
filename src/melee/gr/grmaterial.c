@@ -290,11 +290,14 @@ void grMaterial_801C8E74(void)
 
 static void fn_801C8EF8(HSD_MObj* mobj, u32 rendermode)
 {
-    HSD_TECnst sp_cnst;
-    HSD_TevDesc sp_tevdesc;
-    GXColor sp114;
-    Ground* gp;
     HSD_TObj* tobj;
+    u8 pad1[0xC];
+    GXColor sp114;
+    HSD_TevDesc sp_tevdesc;
+    u8 pad2[0x54];
+    HSD_TECnst sp_cnst;
+    u8 pad3[0x10];
+    Ground* gp;
     HSD_TObj** cur_tobj;
     s32 reg1_lt4_for_kcsel;
     s32 temp;
@@ -303,8 +306,6 @@ static void fn_801C8EF8(HSD_MObj* mobj, u32 rendermode)
     s32 reg1_lt4;
     s32 reg1;
     u32 mobj_rendermode;
-    char* base = (char*) &grMaterial_803E0A20;
-    PAD_STACK(0x74);
 
     HSD_StateInitTev();
     mobj_rendermode = mobj->rendermode;
@@ -336,8 +337,8 @@ static void fn_801C8EF8(HSD_MObj* mobj, u32 rendermode)
 
     gp = HSD_GObj_804D7814->user_data;
     if (grMaterial_GetOverlay(gp)->x7C_color_enable || gp->x10_flags.b6) {
-        sp_cnst = *(HSD_TECnst*) (base + 0xC4);
-        sp_tevdesc = *(HSD_TevDesc*) (base + 0x50);
+        sp_cnst = grMaterial_803E0A20.texp_tmpl;
+        sp_tevdesc = grMaterial_803E0A20.tevdesc_tmpl;
         sp_tevdesc.stage = HSD_StateAssignTev();
         if (grMaterial_GetOverlay(gp)->x7C_color_enable) {
             reg1 = lbGetFreeColorRegister(0, mobj, NULL);

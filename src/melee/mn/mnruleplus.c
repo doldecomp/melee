@@ -1,7 +1,9 @@
-#include "mnruleplus.h"
-
 #include "placeholder.h"
 #include "platform.h"
+
+#include "mn/types.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 #include "baselib/debug.h"
 #include "baselib/gobj.h"
@@ -38,6 +40,38 @@ extern StaticModelDesc MenMainNmRl_Top;
 extern MenuKindData mn_803EB6B0[];
 extern HSD_GObj* mn_804D6BE0;
 extern f32 mn_804D6BE4;
+
+typedef struct _MenuRulesPlusData {
+    MenuKind8 menu_kind;
+    u8 hovered_selection;
+    union {
+        struct {
+            u8 time_limit;
+            u8 friendly_fire;
+            u8 pause;
+            u8 score;
+            u8 sd_penalty;
+        };
+        u8 values[5];
+    } rule_values;
+    u8 x7;
+    MenuState8 state;
+    HSD_JObj* xC[10];
+    HSD_JObj* x34[6][7];
+    HSD_Text* description;
+} MenuRulesPlusData;
+
+typedef struct mn_803ED1D0_t {
+    u16 x0[7];
+    u16 xE[6];
+    float text_start_frames[12];
+    AnimLoopSettings x4C;
+    AnimLoopSettings x58;
+    AnimLoopSettings x64[2];
+    AnimLoopSettings x7C[2];
+    AnimLoopSettings x94;
+} mn_803ED1D0_t;
+STATIC_ASSERT(sizeof(mn_803ED1D0_t) == 0xA0);
 
 mn_803ED1D0_t mn_803ED1D0 = {
     { 3, 4, 5, 6, 7, 8, 9 },
@@ -284,22 +318,34 @@ static inline void mnRulePlus_AnimZeros(HSD_JObj** jobjs)
 
 void mn_802324E4(u8 time_limit, MenuRulesPlusData* data)
 {
+    s32 i;
     JObjIndices local_indices;
     HSD_JObj** jobjs;
-    s32 i;
 
     jobjs = data->x34[0];
     local_indices = mn_804DBE40;
     if (time_limit == 0) {
-        for (i = 0; i < 4; i++) {
-            HSD_JObjSetFlagsAll(jobjs[local_indices.idx[i]], JOBJ_HIDDEN);
+        i = 0;
+        while (1) {
+            u8 idx = local_indices.idx[i];
+            HSD_JObjSetFlagsAll(jobjs[idx], JOBJ_HIDDEN);
+            i++;
+            if (i >= 4) {
+                break;
+            }
         }
         HSD_JObjReqAnimAll(jobjs[4], 1.0f);
         HSD_JObjAnimAll(jobjs[4]);
         return;
     }
-    for (i = 0; i < 4; i++) {
-        HSD_JObjClearFlagsAll(jobjs[local_indices.idx[i]], JOBJ_HIDDEN);
+    i = 0;
+    while (1) {
+        u8 idx = local_indices.idx[i];
+        HSD_JObjClearFlagsAll(jobjs[idx], JOBJ_HIDDEN);
+        i++;
+        if (i >= 4) {
+            break;
+        }
     }
     HSD_JObjReqAnimAll(jobjs[4], mn_804D6BE4);
     HSD_JObjAnimAll(jobjs[4]);

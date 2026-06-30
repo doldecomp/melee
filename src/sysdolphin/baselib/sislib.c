@@ -874,9 +874,46 @@ s32 HSD_SisLib_803A67EC(u8* data, u8* string)
     return out_idx;
 }
 
+static inline void HSD_SisLib_803A6B98_inline0(HSD_Text* text, u8** cur,
+                                               s32 encoded_len, u8* encoded,
+                                               s32* copied_bytes)
+{
+    s32 i;
+    s32 tail_count;
+    u8* bulk_src;
+    u8* tail_src;
+    u32 bulk_count;
+
+    *(*cur)++ = (u8) (s32) (256.0F * text->x34.y);
+    if (encoded_len > 0) {
+        if (encoded_len > 8) {
+            bulk_count = (u32) ((encoded_len - 8) + 7) >> 3U;
+            bulk_src = encoded;
+            if ((encoded_len - 8) > 0) {
+                for (; bulk_count != 0; bulk_count--) {
+                    *copied_bytes += 8;
+                    for (i = 0; i < 8; i++) {
+                        *(*cur)++ = bulk_src[i];
+                    }
+                    bulk_src += 8;
+                }
+            }
+        }
+        tail_src = encoded + *copied_bytes;
+        tail_count = encoded_len - *copied_bytes;
+        if (*copied_bytes < encoded_len) {
+            do {
+                *(*cur)++ = *tail_src++;
+                tail_count -= 1;
+            } while (tail_count != 0);
+        }
+    }
+    *(*cur)++ = 0xF;
+}
+
 int HSD_SisLib_803A6B98(HSD_Text* text, float x, float y, const char* fmt, ...)
 {
-    u8 buffer[128];
+    u8 buffer[104];
     u8 encoded[128];
     s32 x_coord;
     s32 y_coord;
@@ -884,17 +921,12 @@ int HSD_SisLib_803A6B98(HSD_Text* text, float x, float y, const char* fmt, ...)
     SisBlock* alloc;
     s32 encoded_len;
     s32 copied_bytes;
-    s32 i;
-    s32 tail_count;
     u8* copy_dst;
     u8* copy_src;
     u8* new_buf;
     s32 copy_idx;
-    u8* bulk_src;
-    u8* tail_src;
     u32 required_size;
     u32 old_size;
-    u32 bulk_count;
     u8** cur;
     va_list args;
 
@@ -908,11 +940,11 @@ int HSD_SisLib_803A6B98(HSD_Text* text, float x, float y, const char* fmt, ...)
         encoded_len = HSD_SisLib_803A67EC(encoded, buffer);
     }
 
-    old_buf = alloc->data;
     old_size = alloc->size;
-    required_size =
-        (HSD_SisLib_BytePtr(alloc->next) - HSD_SisLib_BytePtr(old_buf)) + 0x11;
-    required_size += encoded_len;
+    required_size = (HSD_SisLib_BytePtr(alloc->next) -
+                     HSD_SisLib_BytePtr(old_buf = alloc->data)) +
+                    0x11;
+    required_size = encoded_len + required_size;
     if (old_size < required_size) {
         alloc->size =
             old_size + ((((u32) (required_size - old_size) >> 7U) + 1) << 7);
@@ -951,33 +983,8 @@ int HSD_SisLib_803A6B98(HSD_Text* text, float x, float y, const char* fmt, ...)
     *(*cur)++ = (u8) (s32) text->x34.x;
     *(*cur)++ = (u8) (s32) (256.0F * text->x34.x);
     *(*cur)++ = (u8) (s32) text->x34.y;
-    *(*cur)++ = (u8) (s32) (256.0F * text->x34.y);
-
-    if (encoded_len > 0) {
-        if (encoded_len > 8) {
-            bulk_count = (u32) ((encoded_len - 8) + 7) >> 3U;
-            bulk_src = encoded;
-            if ((encoded_len - 8) > 0) {
-                do {
-                    copied_bytes += 8;
-                    for (i = 0; i < 8; i++) {
-                        *(*cur)++ = bulk_src[i];
-                    }
-                    bulk_src += 8;
-                    bulk_count -= 1;
-                } while (bulk_count != 0);
-            }
-        }
-        tail_src = encoded + copied_bytes;
-        tail_count = encoded_len - copied_bytes;
-        if (copied_bytes < encoded_len) {
-            do {
-                *(*cur)++ = *tail_src++;
-                tail_count -= 1;
-            } while (tail_count != 0);
-        }
-    }
-    *(*cur)++ = 0xF;
+    HSD_SisLib_803A6B98_inline0(text, cur, encoded_len, encoded,
+                                &copied_bytes);
     *(*cur)++ = 0xD;
     **cur = 0;
     return ((sisLib_803A7664_t*) alloc)->xC++;
@@ -1047,7 +1054,6 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
     s32 old_size;
     HSD_Text* old_buf;
     s32 new_size;
-    s32 grow_diff;
     s32 shrink_diff;
     s32 tail_len;
     s32 copy_idx;
@@ -1083,7 +1089,7 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
         }
         if (old_size < new_size) {
             old_end = alloc->next;
-            grow_diff = new_size - old_size;
+            result = new_size - old_size;
             old_buf = alloc->data;
             cur_size = alloc->size;
             tail_len = (u8*) old_end - playhead;
@@ -1117,7 +1123,7 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
                 HSD_SisLib_Free(old_buf);
                 playhead = (u8*) alloc->next - tail_len;
             }
-            dst = &playhead[grow_diff + tail_len];
+            dst = &playhead[result + tail_len];
             src = &playhead[tail_len];
             if (tail_len > 0) {
                 bulk_count = (u32) tail_len >> 3U;
@@ -1144,7 +1150,7 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
                 } while (remainder != 0);
             }
         grow_done:
-            alloc->next = (SisBlock*) ((u8*) alloc->next + grow_diff);
+            alloc->next = (SisBlock*) (HSD_SisLib_BytePtr(alloc->next) + result);
         } else if (old_size > new_size) {
             shrink_diff = old_size - new_size;
             i = 0;
@@ -1177,7 +1183,8 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
                     } while (remainder != 0);
                 }
             }
-            alloc->next = (SisBlock*) ((u8*) alloc->next - shrink_diff);
+            alloc->next =
+                (SisBlock*) (HSD_SisLib_BytePtr(alloc->next) - shrink_diff);
         }
         i = 0;
         if (new_size > 0) {
@@ -1348,7 +1355,6 @@ void HSD_SisLib_803A8134(void* cursor, HSD_Text* text, f32* out_width,
     TextGlyphTexture* glyph_tex;
     u8* default_kerning = HSD_SisLib_8040CB00;
     f32 line_height;
-    f32 line_height_2;
     f32 saved_scale_x;
     f32 saved_scale_y;
     f32 saved_spacing;
@@ -1445,7 +1451,8 @@ loop_3:
                                                  0x1FFFE));
                     kern_right = kern_data->right;
                     kern_left = kern_data->left;
-                    kern_width = kern_left + (kern_right - 2);
+                    kern_width = kern_right - 2;
+                    kern_width = kern_left + kern_width;
                     *out_width =
                         -((text->x80.x * (f32) kern_width) - *out_width);
                 } else {
@@ -1454,7 +1461,8 @@ loop_3:
                             ->data[((glyph_code - 0x4000) * 2) & 0x1FFFE];
                     kern_right = kern_data_2->right;
                     kern_left = kern_data_2->left;
-                    kern_width = kern_left + (kern_right - 2);
+                    kern_width = kern_right - 2;
+                    kern_width = kern_left + kern_width;
                     *out_width =
                         -((text->x80.x * (f32) kern_width) - *out_width);
                 }
@@ -1752,7 +1760,6 @@ s32 HSD_SisLib_803A7F0C(HSD_Text* text, s32 flags)
 {
     u8 entry;
     s32 flag_hi;
-    s32 entry_type;
     s32 entry_flags;
     s32 target_type;
     s32 result;
@@ -1765,17 +1772,16 @@ s32 HSD_SisLib_803A7F0C(HSD_Text* text, s32 flags)
     result = 0;
     remove_size = 0;
     while (pos >= 0) {
-        entry = text->string_buffer[pos];
-        entry_type = entry & 0x7F;
+        entry = HSD_SisLib_BytePtr(text->string_buffer)[pos];
         entry_flags = entry & 0x80;
-        switch (entry_type) { /* irregular */
+        switch (entry & 0x7F) { /* irregular */
         case 1:
             pos -= 4;
             if (target_type == 1) {
                 text->x78.x =
-                    (f32) * (s16*) (text->string_buffer + pos) * 0.00390625F;
-                text->x78.y = (f32) * (s16*) (text->string_buffer + pos + 2) *
-                              0.00390625F;
+                    (f32) * (s16*) (text->string_buffer + pos) / 256.0F;
+                text->x78.y =
+                    (f32) * (s16*) (text->string_buffer + pos + 2) / 256.0F;
                 if (flag_hi == entry_flags) {
                     remove_size = 5;
                 }
@@ -1798,9 +1804,9 @@ s32 HSD_SisLib_803A7F0C(HSD_Text* text, s32 flags)
             pos -= 4;
             if (target_type == 3) {
                 text->x80.x =
-                    (f32) * (u16*) (text->string_buffer + pos) * 0.00390625F;
-                text->x80.y = (f32) * (u16*) (text->string_buffer + pos + 2) *
-                              0.00390625F;
+                    (f32) * (u16*) (text->string_buffer + pos) / 256.0F;
+                text->x80.y =
+                    (f32) * (u16*) (text->string_buffer + pos + 2) / 256.0F;
                 if (flag_hi == entry_flags) {
                     remove_size = 5;
                 }

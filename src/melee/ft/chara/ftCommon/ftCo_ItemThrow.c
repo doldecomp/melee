@@ -479,27 +479,30 @@ void ftCo_80095D5C(Fighter* fp, Vec3* arg1)
 {
     float vel;
     float angle;
-    u8* array_element;
+    ftCo_ItemThrowAttrs* attrs;
     u32 cmd_var0 = fp->cmd_vars[0];
 
     vel = 1;
     if (cmd_var0 != 0) {
         vel = 0.01f * ((cmd_var0 >> 12) & 0x3FF);
     }
-    array_element = (u8*) Fighter_804D6550 + (fp->motion_id * 3);
+    attrs = &((ftCo_ItemThrowAttrs*) Fighter_804D6550)[fp->motion_id];
     vel *= fp->co_attrs.item_throw_velocity_multiplier *
-           *(float*) (array_element - 0x468);
+           attrs[-ftCo_MS_LightThrowF].velocity_mul;
     if (cmd_var0 != 0) {
-        s16 s16_var1 = ((s16*) &fp->cmd_vars)[1];
-        int int_angle = (s16_var1 << 20) >> 20;
+        struct cmd_var_bits {
+            s16 pad : 4;
+            s16 angle : 12;
+        }* bits = (struct cmd_var_bits*) ((s16*) &fp->cmd_vars + 1);
+        int int_angle = bits->angle;
         if (int_angle == 361) {
-            angle = *(float*) (array_element - 0x464);
+            angle = attrs[-ftCo_MS_LightThrowF].angle;
         } else {
             angle = deg_to_rad * int_angle;
         }
         fp->cmd_vars[0] = 0;
     } else {
-        angle = *(float*) (array_element - 0x464);
+        angle = attrs[-ftCo_MS_LightThrowF].angle;
     }
     arg1->x = fp->mv.co.itemthrow.facing_dir * (vel * cosf(angle));
     arg1->y = vel * sinf(angle);

@@ -295,7 +295,7 @@ void fn_8022F538(HSD_GObj* arg0)
             return;
         }
         mn_804A04F0.confirmed_selection =
-            ((u8*) data)[mn_804A04F0.hovered_selection + 2];
+            (&data->x2)[mn_804A04F0.hovered_selection];
         return;
     }
     if ((buttons & 2) != 0) {
@@ -318,13 +318,14 @@ void fn_8022F538(HSD_GObj* arg0)
             return;
         }
         mn_804A04F0.confirmed_selection =
-            ((u8*) data)[mn_804A04F0.hovered_selection + 2];
+            (&data->x2)[mn_804A04F0.hovered_selection];
         return;
     }
 
-    if (mn_804A04F0.hovered_selection == 5 ||
-        mn_804A04F0.hovered_selection == 6)
-    {
+    if (mn_804A04F0.hovered_selection == 5) {
+        return;
+    }
+    if (mn_804A04F0.hovered_selection == 6) {
         return;
     }
     if (mn_804A04F0.hovered_selection == 1 && data->x2 == 1) {

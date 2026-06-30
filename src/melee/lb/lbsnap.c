@@ -206,7 +206,6 @@ void lbSnap_8001DA5C(int arg0)
     u8* dst = lbSnap_GetMemSnapIconData();
     int dst_x;
     int ctr;
-    PAD_STACK(8);
 
     for (dst_x = 0; dst_x < 32; dst_x++) {
         int src_x = (dst_x * 204 / 32) + 138;
