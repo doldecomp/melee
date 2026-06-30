@@ -1838,6 +1838,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
     f32 dx;
     f32 dy;
     f32 mag_sq;
+    u8 operand_pad[4];
 
     if ((u8) mnCharSel_804D6CB0->match_type == TRAINING_MODE) {
         n_doors = 2;

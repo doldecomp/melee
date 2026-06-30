@@ -1123,6 +1123,7 @@ static inline void mnDiagram_SaveCursorToGameRules(Diagram* d)
 /// mnDiagram_Get{Prev,Next}*Index helpers shared with mndiagram2.
 void mnDiagram_InputProc(HSD_GObj* gobj)
 {
+    u8* ptr;
     HSD_GObjProc* proc;
     u8 row_result;
     s32 i;
@@ -1133,7 +1134,6 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
     Diagram* data = mnDiagram_804D6C10->user_data;
     u32 input = mn_80229624(4);
     s32 count = 0;
-    u8* ptr;
     s32 col;
     s32 row;
     s32 row2;

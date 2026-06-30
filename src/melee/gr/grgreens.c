@@ -595,10 +595,10 @@ void grGreens_80213C10(Ground_GObj* gobj)
             Camera_80030E44(1, NULL);
             gp->gv.greens2.x18 = gp->gv.greens2.x14 + 1;
             if (grAnime_801C84A4(gobj, 0, 7) != 0) {
+                int wind_done;
                 HSD_JObj* jobj;
                 int new_dir;
                 int wind_dir;
-                int wind_done;
 
                 gp->gv.greens2.xC++;
                 wind_done = 0;
@@ -1113,6 +1113,7 @@ void fn_80215B84(Item_GObj* item_gobj, Ground* gp, Vec* arg2, HSD_GObj* gobj,
     int j;
     int row = -1;
     int col = 0;
+    u8 operand_pad[4];
 
     for (i = 0; i < 5; i++) {
         for (j = 0; j < 6; j++) {

@@ -156,8 +156,8 @@ ifMagnifyPlayer* ifMagnify_802FB73C(ifMagnifyPlayer* arg0, Vec2* arg1,
 
 void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
 {
-    S32Vec2 screen_pos;
     Vec2 pos;
+    S32Vec2 screen_pos;
     Vec2 out;
     Vec3 translate;
     GXColor color;
@@ -227,6 +227,7 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
 
 void ifMagnify_802FBBDC(HSD_GObj* arg0)
 {
+    f32 right;
     ifMagnify* magnify;
     HSD_CObj* cobj;
     HSD_GObj* fighter_gobj;
@@ -234,7 +235,6 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
     f32 top;
     f32 bottom;
     f32 left;
-    f32 right;
     Vec3 interest_pos;
     GXColor colors[4];
     Vec3 world_pos;

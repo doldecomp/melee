@@ -828,6 +828,7 @@ void ftColl_80077688(Item* item, HitCapsule* hurt, Fighter* fp, Vec3* pos,
 {
     int dmg;
     int mode;
+    u8 operand_pad[8];
     PAD_STACK(16);
 
     if (hurt->x41_b6) {

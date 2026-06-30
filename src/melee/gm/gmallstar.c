@@ -590,6 +590,7 @@ void fn_801B5AA8(int arg0)
 
 void gm_801B5ACC(GameScene* arg0)
 {
+    u8 operand_pad[8];
     s8 chars[3];
     StartMeleeData* data;
     u8* base;
