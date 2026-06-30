@@ -481,9 +481,9 @@ struct ftCommonData {
     /* +6C8 */ int x6C8;
     /* +6CC */ int x6CC;
     /* +6D0 */ float x6D0;
-    /* +6D4 */ UNK_T x6D4;
+    /* +6D4 */ int x6D4;
     /// @todo expand to actual size
-    /* +6D8 */ void* x6D8[1];
+    /* +6D8 */ int x6D8[1];
     /* +6DC */ GXColor x6DC_colorsByPlayer[4];
     /* +6EC */ u8 x6EC[0x6F0 - 0x6EC];
     /* +6F0 */ float metal_armor;
@@ -962,7 +962,7 @@ struct Fighter_DemoStrings {
 
 struct ftDeviceUnk3 {
     Ground_GObj* ground;
-    u32 type;
+    u32 type; ///< ftCommon_BuryType for ftDevice_BuryThings
     ftDevice_Callback0 active_cb;
 };
 
@@ -972,6 +972,7 @@ struct ftDeviceUnk4 {
 };
 STATIC_ASSERT(sizeof(struct ftDeviceUnk4) == 0x8);
 
+/// TODO same as ftDeviceUnk3
 struct ftDeviceUnk5 {
     UNK_T x0;
     ftCommon_BuryType x4;
