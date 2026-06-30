@@ -1363,6 +1363,7 @@ f32 grBigBlue_801E8B84(f32 right, f32 left, f32 bottom, f32 top)
     Ground* gp = Ground_801C2BA4(33)->user_data;
     int i = 0;
     f32 result = grBb_804DB310;
+    u8 operand_pad[4];
 
     for (i = 0; i < 4; i++) {
         if ((unsigned) (gp->gv.bigblue.car.lanes[i].state >> 2 & 0x3F) != 1U) {
@@ -3813,7 +3814,8 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
         s32 counter;
         s32 j;
 
-        self = gp + offset;
+        self = gp;
+        self += offset;
         counter = *(s32*) (self + 0xF0);
         *(s32*) (self + 0xF0) = counter - 1;
 
@@ -3894,7 +3896,8 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
         }
 
         /* Override: check other platforms heading toward self */
-        self = gp + offset;
+        self = gp;
+        self += offset;
         for (j = 0; j < 4; j++) {
             u32 st;
             u8* p;

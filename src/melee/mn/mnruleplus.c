@@ -740,6 +740,7 @@ void fn_80232F44(HSD_GObj* gobj)
 
 HSD_GObj* mn_80233218(MenuState state)
 {
+    u8 operand_pad[4];
     HSD_JObj* jobj_parts[17];
     u16 jobj_map[17];
     HSD_GObj* gobj;

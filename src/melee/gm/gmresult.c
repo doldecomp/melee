@@ -1158,6 +1158,7 @@ static const struct {
 
 void fn_80175DC8(HSD_GObj* gobj)
 {
+    HSD_JObj* spCC;
     HSD_JObj* sp108;
     HSD_JObj* sp104;
     HSD_JObj* sp100;
@@ -1167,7 +1168,6 @@ void fn_80175DC8(HSD_GObj* gobj)
     HSD_JObj* spE4;
     HSD_JObj* spDC;
     HSD_JObj* spD4;
-    HSD_JObj* spCC;
     HSD_JObj* spC4;
     HSD_JObj* spBC;
     HSD_JObj* spB4;

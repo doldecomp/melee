@@ -835,7 +835,8 @@ void lbBgFlash_80021410(void* arg0)
                     lbVector_Angle(&temp_delta, &pos1_from_pos0));
 
     dx = data->pos0.x - data->pos4.x;
-    dz = data->pos0.z - data->pos4.z;
+    dz = data->pos0.z;
+    dz -= data->pos4.z;
     dy = data->pos0.y - data->pos4.y;
     dx *= dx;
     dy *= dy;
@@ -850,7 +851,8 @@ void lbBgFlash_80021410(void* arg0)
     }
 
     dx = data->pos0.x - data->pos1.x;
-    dz = data->pos0.z - data->pos1.z;
+    dz = data->pos0.z;
+    dz -= data->pos1.z;
     dy = data->pos0.y - data->pos1.y;
     dx *= dx;
     dy *= dy;
@@ -866,7 +868,8 @@ void lbBgFlash_80021410(void* arg0)
     data->len0 = len_bc;
 
     dx = data->pos1.x - data->pos3.x;
-    dz = data->pos1.z - data->pos3.z;
+    dz = data->pos1.z;
+    dz -= data->pos3.z;
     dy = data->pos1.y - data->pos3.y;
     dx *= dx;
     dy *= dy;

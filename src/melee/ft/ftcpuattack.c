@@ -73,6 +73,7 @@ typedef struct ftCo_CollData {
 
 int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
 {
+    u8 operand_pad[24];
     ftCo_AttackEntry sp3C[32];
     ftCo_AttackEntry* list = arg2;
     ftCo_AttackEntry* sel;
@@ -483,6 +484,7 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
 
 int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
 {
+    u8 operand_pad[12];
     ftCo_AttackEntry sp34[32];
     ftCo_x50_t* x50 = arg1;
     ftCo_x50_attr* attrs;
@@ -1837,9 +1839,9 @@ bool ftCo_800B89CC(Fighter* fp)
 
 bool ftCo_800B8A9C(Fighter* fp)
 {
+    int sp34;
     u8 _[0x38];
     u32 sp38;
-    int sp34;
     Vec3 sp28;
     Vec3 sp1C;
     Fighter** target_pp;

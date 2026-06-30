@@ -927,6 +927,7 @@ s32 fn_80161004(MatchEnd* match_end)
 
 s32 fn_80161154(MatchEnd* arg0)
 {
+    u8 operand_pad[4];
     u8 spC[4];
     MatchPlayerData* var_r31;
     s32 idx;
@@ -4266,6 +4267,7 @@ void gm_80168FC4(void)
 
 s32 fn_80169000(void* arg0, void* arg1)
 {
+    u8 operand_pad[4];
     u8 handicaps[4];
     u8 positions[4];
     u8* p = (u8*) arg0;

@@ -739,6 +739,7 @@ static inline void get_pitch_angle(CameraBounds* bounds, Vec3* scroll_offset,
 
 void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
 {
+    f32 unused_f31;
     u8 _padA[8];
     Vec3 scroll_offset;
     f32 pitch_angle;
@@ -751,7 +752,6 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
     f32 tan_fov_u;
     f32 min_h;
     f32 pan_angle;
-    f32 unused_f31;
     f32 mid_x;
     f32 horiz_offset;
     f32 fov_l;
@@ -1959,6 +1959,7 @@ void Camera_8002C5B4(Camera_x2D0* arg0)
     f32 pitch;
     f32 yaw;
     f32 limit;
+    u8 operand_pad[8];
     PAD_STACK(16);
 
     cam = &cm_80452C68;
@@ -2541,8 +2542,8 @@ check_done2:
     if (cam->x2BC == 1.0f) {
         target_dx = cam->transform.target_position.x -
                     cam->transform.target_interest.x;
-        target_dy = cam->transform.target_position.y -
-                    cam->transform.target_interest.y;
+        target_dy = cam->transform.target_position.y;
+        target_dy -= cam->transform.target_interest.y;
         target_dz = cam->transform.target_position.z -
                     cam->transform.target_interest.z;
         cam->x2C0 =
@@ -2862,6 +2863,7 @@ void Camera_8002D85C(void* unused)
     s16* count_ptr;
     f32 left_off;
     s32 check_result;
+    u8 operand_pad[4];
     PAD_STACK(16);
 
     cam = &cm_80452C68;
@@ -2903,7 +2905,8 @@ void Camera_8002D85C(void* unused)
 
             dx = cam->transform.target_interest.x - cam->transform.interest.x;
             dy = cam->transform.target_interest.y - cam->transform.interest.y;
-            dz = cam->transform.target_interest.z - cam->transform.interest.z;
+            dz = cam->transform.target_interest.z;
+            dz -= cam->transform.interest.z;
             cam->transform.interest.x += dx * cm_803BCCA0.x64;
             cam->transform.interest.y += dy * cm_803BCCA0.x64;
             cam->transform.interest.z += dz * cm_803BCCA0.x64;
@@ -3074,12 +3077,12 @@ check_done2:
         f32 dy2;
         f32 dz2;
 
-        x = cam->transform.target_position.x -
-            cam->transform.target_interest.x;
+        x = cam->transform.target_position.x;
+        x -= cam->transform.target_interest.x;
         y = cam->transform.target_position.y -
             cam->transform.target_interest.y;
-        z = cam->transform.target_position.z -
-            cam->transform.target_interest.z;
+        z = cam->transform.target_position.z;
+        z -= cam->transform.target_interest.z;
         dx2 = x * x;
         dy2 = y * y;
         dz2 = z * z;

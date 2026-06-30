@@ -2572,6 +2572,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     u16 var_r28;
     u8 mask;
     u8 var_r0;
+    u8 operand_pad[8];
 
     var_r27 = 0;
     var_r28 = arg4->x58[0].xE;

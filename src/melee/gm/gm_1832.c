@@ -420,6 +420,7 @@ static const char* const lbl_803B7C58[] = { "IrAls", "IrEzTarg", "IrEzTuki",
 void fn_80184AB8(HSD_GObj* arg0)
 {
     HSD_JObj* sp110;
+    u8 operand_pad[4];
     char sp10[0x100];
     HSD_JObj* jobj;
     s32 i;
@@ -1100,6 +1101,7 @@ void fn_80186634(void* arg0)
     HSD_GObj* gobj3;
     HSD_JObj* jobj;
     HSD_GObj* gobj4;
+    u8 operand_pad[8];
     const char* names[4];
     PAD_STACK(8);
 
@@ -2420,9 +2422,9 @@ void fn_801891F4(void)
                 }
             }
             if (buttons & 0x100ULL) {
+                HSD_JObj* jobj;
                 Vec3 pos;
                 s16 item;
-                HSD_JObj* jobj;
                 lbAudioAx_80024030(8);
                 item = *(s16*) &((s32*) lbl_803D9828)[sub->menu_values[1]];
                 jobj = Player_GetEntity(0)->hsd_obj;

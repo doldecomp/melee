@@ -804,6 +804,7 @@ static const u32 lbl_804DE8E0 = 0xFFFFFFFF;
 // @TODO: Currently 89.78% match - needs minor control flow and register fixes
 void hsd_8039254C(void)
 {
+    s32 char_count;
     GXColor default_col;
     GXColor bar_col;
     GXColor bg_col3;
@@ -822,12 +823,12 @@ void hsd_8039254C(void)
     f32 line;
     HSD_SList* event_node;
     s32 type;
-    s32 char_count;
     s32 total_ticks;
     DispItem* bar_ptr;
     f32 bar_y;
     f32 bar_x;
     f32 t2;
+    u8 operand_pad[8];
     PAD_STACK(8);
 
     col_pos = 60;
@@ -6096,10 +6097,13 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     }
                     HSD_JObjSetupMatrix(jobj);
                     vel_mag_sq = pp->vel.x * pp->vel.x + pp->vel.y * pp->vel.y;
-                    dx = jobj->mtx[0][3] - pp->pos.x;
+                    dx = jobj->mtx[0][3];
+                    dx -= pp->pos.x;
                     vel_mag_sq += pp->vel.z * pp->vel.z;
-                    dy = jobj->mtx[1][3] - pp->pos.y;
-                    dz = jobj->mtx[2][3] - pp->pos.z;
+                    dy = jobj->mtx[1][3];
+                    dy -= pp->pos.y;
+                    dz = jobj->mtx[2][3];
+                    dz -= pp->pos.z;
                     vel_mag = sqrtf(vel_mag_sq);
                     dist_sq = dy * dy + dx * dx;
                     dist_sq += dz * dz;
@@ -7904,6 +7908,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     f32 elevation;
     f32 tmp;
     f32 angle3;
+    u8 operand_pad[12];
     PAD_STACK(16);
 
     angle3 = 0.0F;
@@ -8699,6 +8704,7 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
     f32 horiz_mag;
     f32 abs_vx;
     f32 mag;
+    u8 operand_pad[4];
     f32 f0, f1, f3;
     u32 shape;
 

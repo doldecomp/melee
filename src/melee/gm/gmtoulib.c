@@ -2356,10 +2356,10 @@ static inline int gm_801905F0_inline0(int c_kind)
 
 void gm_801905F0(StartMeleeData* arg0)
 {
+    int i;
     u8 _padA[8];
     TmData* tm = &gm_804771C4;
     GameRules* temp_r31 = gmMainLib_8015CC34();
-    int i;
     TmVsData sp18;
 
     gm_80168FC4();

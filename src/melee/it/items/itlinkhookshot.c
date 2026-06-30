@@ -1765,7 +1765,8 @@ void it_802A6474(ItemLink* link_0, ItemLink* link_1, Vec3* pos,
     }
 
     target_dy = pos->y - cur_link->pos.y;
-    target_dx = pos->x - cur_link->pos.x;
+    target_dx = pos->x;
+    target_dx -= cur_link->pos.x;
     target_dz = pos->z - cur_link->pos.z;
     target_len = target_dy * target_dy;
     target_len = (target_dx * target_dx) + target_len;
