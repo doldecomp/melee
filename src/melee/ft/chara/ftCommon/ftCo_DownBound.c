@@ -63,6 +63,10 @@ void ftCo_80097630(Fighter* fp, enum_t* sfx_ids, float threshold)
                127, 64);
 }
 
+static inline void ftCo_800976A4_inline(Fighter* fp, float* dist)
+{
+    *dist *= fp->co_attrs.weight;
+}
 void ftCo_800976A4(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -76,11 +80,10 @@ void ftCo_800976A4(Fighter_GObj* gobj)
     int arg3;
     Vec3 vec1;
     Vec3 vec0;
-    PAD_STACK(8);
     vel_x = fp->self_vel.x + fp->x8c_kb_vel.x;
     vel_y = fp->self_vel.y + fp->x8c_kb_vel.y;
     dist = sqrtf(SQ(vel_x) + SQ(vel_y));
-    dist *= fp->co_attrs.weight;
+    ftCo_800976A4_inline(fp, &dist);
     ef_id = 1031;
     arg2 = 1;
     if (ft_80084C74(gobj, sfx_ids, &arg2, &arg3)) {

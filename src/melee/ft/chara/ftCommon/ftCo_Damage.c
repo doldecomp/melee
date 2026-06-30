@@ -258,7 +258,7 @@ static void inlineA1(Fighter_GObj* gobj)
 
 static inline int* getDamageMotionIds(enum_t kb_level)
 {
-    return ((int (*)[4][3]) ftCo_803C5520)[0][kb_level];
+    return ((int(*)[4][3]) ftCo_803C5520)[0][kb_level];
 }
 
 void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
@@ -355,7 +355,7 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
         if (!(temp_f1_2 < M_PI_2)) {
             goto block_23;
         }
-        msid = ((int (*)[4][3])
+        msid = ((int(*)[4][3])
                     ftCo_803C5520)[0][kb_level][fp->dmg.x184c_damaged_hurtbox];
         ftCommon_8007D5D4(fp);
         ftCo_Damage_CalcVel(fp, pos.x, pos.y);
@@ -366,7 +366,7 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
             goto block_27;
         }
         ftCommon_8007D5D4(fp);
-        msid = ((int (*)[4][3])
+        msid = ((int(*)[4][3])
                     ftCo_803C5520)[0][kb_level][fp->dmg.x184c_damaged_hurtbox];
         if (!(temp_f1_2 >
               (float) (M_PI_2 +
@@ -386,7 +386,7 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
         fp->xF0_ground_kb_vel = 0;
         goto block_28;
     block_27:
-        msid = ((int (*)[4][3])
+        msid = ((int(*)[4][3])
                     ftCo_803C5520)[0][kb_level][fp->dmg.x184c_damaged_hurtbox];
         fp->xF0_ground_kb_vel = pos.x;
         temp_f2 = fp->xF0_ground_kb_vel;
@@ -742,7 +742,8 @@ static bool inlineB0(Fighter_GObj* gobj)
 #pragma inline_depth(0)
 void ftCo_8008EB58(Fighter_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* tmp_p21265 = gobj->user_data;
+    Fighter* fp = tmp_p21265;
     float kb_applied = fp->dmg.kb_applied;
     bool should_update;
     enum_t kb_level;

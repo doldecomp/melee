@@ -12,6 +12,21 @@
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
+static void sdata2_order(void)
+{
+    (void) 0.5f;
+    (void) 0.0f;
+    (void) -1.0f;
+    (void) 1.0f;
+    (void) 4503601774854144.0;
+    (void) 1.5f;
+    (void) 9.99999975e-06f;
+    (void) 0.5;
+    (void) 3.0;
+    (void) 0.850000024f;
+    (void) 0.00999999978f;
+}
+
 const Vec3 it_803B8570 = { 0.0f, 0.0f, 0.0f };
 const Vec3 it_803B857C = { 0.0f, 0.0f, 0.0f };
 
@@ -74,22 +89,6 @@ void it_802759DC(Item_GObj* item_gobj1, Item_GObj* item_gobj2)
             item1->pos = sp44;
         }
     }
-}
-
-static f32 sdata2_ordering(void)
-{
-    volatile f32 data_0 = -1.0f;
-    volatile f32 data_1 = 1.0f;
-    volatile f64 data_2 = 4503601774854144.0;
-    volatile f32 data_3 = 1.5f;
-    volatile f32 data_4 = 0.00001f;
-    volatile f64 data_5 = 0.5;
-    volatile f64 data_6 = 3.0;
-    volatile f32 data_7 = 0.85f;
-    volatile f32 data_8 = 0.01f;
-
-    return data_0 + data_1 + data_2 + data_3 + data_4 + data_5 + data_6 +
-           data_7 + data_8;
 }
 
 void it_80275BC8(Item_GObj* item_gobj, HSD_GObj* arg_gobj)

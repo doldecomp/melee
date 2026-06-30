@@ -6410,7 +6410,8 @@ void ftCo_800ADE48(Fighter* fp)
                                                                                         0
                                                                                     ? 1
                                                                                     : 0;
-                                                                        } else {
+                                                                        } else
+                                                                        {
                                                                             found =
                                                                                 1;
                                                                         }
@@ -7467,6 +7468,26 @@ void ftCo_800B00F8(Fighter* fp)
     ftCo_800ADE48(fp);
 }
 
+static inline void ftCo_800B04DC_inline0(Fighter* fp,
+                                         struct Fighter_x1A88_t** data,
+                                         bool* is_food)
+{
+    *data = &fp->x1A88;
+    (*data)->xF8_b0 = (*is_food = true);
+    (*data)->xF9_b2 = false;
+}
+
+static inline void ftCo_800B04DC_inline1(struct Fighter_x1A88_t* data,
+                                         Fighter* fp, Fighter** target,
+                                         Fighter*** target_slot,
+                                         Item_GObj** item_gobj)
+{
+    data->xF9_b7 = false;
+    data->xF9_b1 = true;
+    *target = ftCo_800A4BEC(fp);
+    *(*target_slot = &fp->x1A88.x44) = *target;
+}
+
 void ftCo_800B04DC(Fighter* fp)
 {
     Fighter** target_slot;
@@ -7476,24 +7497,17 @@ void ftCo_800B04DC(Fighter* fp)
     Fighter* target;
     f32 dist;
     bool is_food;
-    u8 _[8];
+    u8 _pad[8];
     Vec3 approach_pos;
-    volatile f32 unused;
+    PAD_STACK(4);
 
-    PAD_STACK(0xC);
+    ftCo_800B04DC_inline0(fp, &data, &is_food);
 
-    data = &fp->x1A88;
-    data->xF8_b0 = (is_food = true);
-    data->xF9_b2 = false;
     data->xF9_b4 = false;
     data->xF9_b3 = false;
     data->xF9_b5 = false;
     data->xF9_b6 = false;
-    data->xF9_b7 = false;
-    data->xF9_b1 = true;
-
-    target = ftCo_800A4BEC(fp);
-    *(target_slot = &fp->x1A88.x44) = target;
+    ftCo_800B04DC_inline1(data, fp, &target, &target_slot, &item_gobj);
 
     item_gobj = fp->item_gobj;
     if (item_gobj != NULL) {

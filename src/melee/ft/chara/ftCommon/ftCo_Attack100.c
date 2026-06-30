@@ -2313,15 +2313,31 @@ void fn_800DAA40(Fighter_GObj* arg0, Fighter_GObj* arg1)
         temp_r31->cur_pos.z += sp18.z;
     }
 }
-void fn_800DAADC(Fighter_GObj* arg0, Fighter_GObj* arg1)
+static inline void fn_800DAADC_applyMotion(s32 msid, Fighter_GObj* arg1,
+                                           Fighter_GObj* arg0, Vec3* sp24)
 {
-    Fighter* fp = GET_FIGHTER(arg0);
     Fighter* temp_r30;
     Fighter* temp_r31;
-    volatile u8 pad8[8];
+    fn_800DA8E4(arg0, arg1, msid);
+    temp_r30 = GET_FIGHTER(arg0);
+    temp_r31 = GET_FIGHTER(arg1);
+    fn_800DAC78(arg0, sp24);
+    if (temp_r30->ground_or_air == GA_Ground) {
+        temp_r31->x2170 =
+            sp24->y + temp_r30->cur_pos.y - temp_r31->cur_pos.y;
+    } else {
+        temp_r31->x2170 = 0.0F;
+        temp_r30->cur_pos.x += sp24->x;
+        temp_r30->cur_pos.y += sp24->y;
+        temp_r30->cur_pos.z += sp24->z;
+    }
+}
+void fn_800DAADC(Fighter_GObj* arg0, Fighter_GObj* arg1)
+{
+    u8 _pad[4];
+    Fighter* fp = GET_FIGHTER(arg0);
     Vec3 sp24;
     FtMotionId msid;
-
     PAD_STACK(4);
 
     if (fp->ground_or_air == GA_Ground) {
@@ -2329,19 +2345,7 @@ void fn_800DAADC(Fighter_GObj* arg0, Fighter_GObj* arg1)
     } else {
         msid = ftCo_MS_CapturePulledHi;
     }
-    fn_800DA8E4(arg0, arg1, msid);
-
-    temp_r30 = GET_FIGHTER(arg0);
-    temp_r31 = GET_FIGHTER(arg1);
-    fn_800DAC78(arg0, &sp24);
-    if (temp_r30->ground_or_air == GA_Ground) {
-        temp_r31->x2170 = sp24.y + temp_r30->cur_pos.y - temp_r31->cur_pos.y;
-    } else {
-        temp_r31->x2170 = 0.0F;
-        temp_r30->cur_pos.x += sp24.x;
-        temp_r30->cur_pos.y += sp24.y;
-        temp_r30->cur_pos.z += sp24.z;
-    }
+    fn_800DAADC_applyMotion(msid, arg1, arg0, &sp24);
 
     fp->coll_cb(arg0);
     HSD_JObjSetTranslate(GET_JOBJ(arg0), &fp->cur_pos);

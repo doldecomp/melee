@@ -524,16 +524,22 @@ void grGreatBay_801F545C(Ground_GObj* gobj)
     return;
 }
 
-void grGreatBay_801F5460(Ground_GObj* gobj)
+static inline void grGreatBay_801F5460_inline(Ground_GObj* gobj,
+                                              HSD_JObj* jobj)
 {
-    HSD_JObj* jobj_tmp = gobj->hsd_obj;
-    HSD_JObj* jobj = jobj_tmp;
     Ground* gp = GET_GROUND(gobj);
-
     Ground_801C2ED0(jobj, gp->map_id);
     gp->xC_callback = NULL;
     mpJointSetCb1(5, gp, grGreatBay_801F5914);
     mpJointListAdd(5);
+}
+
+void grGreatBay_801F5460(Ground_GObj* gobj)
+{
+    HSD_JObj* jobj = gobj->hsd_obj;
+    Ground* gp = gobj->user_data;
+
+    grGreatBay_801F5460_inline(gobj, jobj);
     HSD_JObjSetTranslateX(jobj, 1000.0f);
     HSD_JObjSetTranslateY(jobj, 1000.0f);
     Ground_801C2FE0(gobj);

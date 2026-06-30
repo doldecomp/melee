@@ -2424,7 +2424,8 @@ void gm_80164910(int arg0)
 void gm_80164A0C(u8 arg0)
 {
     u16* unlockable_character_bitfield = gmMainLib_8015ED8C();
-    u8 idx = fn_801605EC(lbl_803B78A4[arg0]);
+    s32 tmp_p52845 = lbl_803B78A4[arg0];
+    u8 idx = fn_801605EC(tmp_p52845);
     if (idx != NUM_UNLOCKABLE_CHARACTERS) {
         *unlockable_character_bitfield &= (u16) ~(1ULL << idx);
     }

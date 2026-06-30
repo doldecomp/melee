@@ -94,7 +94,7 @@ void fn_80023254(s32 arg0)
     int* arr_b44;
     int* local_ptr;
     s8(*arr_5d0)[4];
-    int (*arr_4e4)[2];
+    int(*arr_4e4)[2];
     int count;
     int j;
     int n;
@@ -114,7 +114,7 @@ void fn_80023254(s32 arg0)
     for (count = 0; count <= 0x37; count++) {
         local_ptr = local_arr;
         arr_5d0 = (s8(*)[4])(base + 0x2D0);
-        arr_4e4 = (int (*)[2])(base + 0x11E4);
+        arr_4e4 = (int(*)[2])(base + 0x11E4);
         j = 0;
 
         do {
@@ -125,7 +125,7 @@ void fn_80023254(s32 arg0)
                 goto next;
             }
 
-            if ((u32) ((int (*)[2])(base + 0x11E4))[*arr_b44][0] >=
+            if ((u32) ((int(*)[2])(base + 0x11E4))[*arr_b44][0] >=
                 (u32) (*arr_4e4)[0])
             {
                 goto next;
@@ -155,10 +155,10 @@ void fn_80023254(s32 arg0)
 
 static inline int lbAudioAx_800233EC_inline(s32 arg0, char* base)
 {
-    int (*ranges)[2];
+    int(*ranges)[2];
     int i;
     if (arg0 >= 0 && arg0 < 0x83D60) {
-        ranges = (int (*)[2])(base + 0x5D4);
+        ranges = (int(*)[2])(base + 0x5D4);
         for (i = 0; i < 0x37; ranges++, i++) {
             if ((*ranges)[0] <= arg0 && arg0 <= (*ranges)[1]) {
                 return i;
@@ -362,7 +362,7 @@ s32 lbAudioAx_80023B24(s32 arg0)
     s32 off;
 
     if (arg0 >= 0 && arg0 < 0x83D60) {
-        int (*ranges)[2] = s32_arr_803BB8D4;
+        int(*ranges)[2] = s32_arr_803BB8D4;
         for (slot = 0; slot < 0x37; slot++, ranges++) {
             if ((*ranges)[0] <= arg0 && arg0 <= (*ranges)[1]) {
                 break;
@@ -2058,6 +2058,7 @@ s32 fn_80026650(void)
     return -1;
 }
 
+#pragma global_optimizer off
 void fn_800267B0(void)
 {
     lbAudioAx_PoolAlloc* st = &lbl_80433710;
@@ -2065,7 +2066,7 @@ void fn_800267B0(void)
     s8(*arr_5d0)[4];
     int* arr_194;
     int* arr_354;
-    int (*arr_4e4)[2];
+    int(*arr_4e4)[2];
     int j;
     int i;
 
@@ -2113,6 +2114,7 @@ void fn_800267B0(void)
     HSD_SynthSFXBankDeflag(2);
     HSD_SynthSFXBankDeflagSync();
 }
+#pragma global_optimizer on
 
 void fn_800268B4(void)
 {

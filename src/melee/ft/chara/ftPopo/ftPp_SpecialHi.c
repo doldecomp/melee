@@ -22,18 +22,16 @@
 #include <math.h>
 #include <trigf.h>
 
-static float sdata2_ordering(void)
+static void sdata2_order(void)
 {
-    float data_0 = 0.0f;
-    double data_1 = 0.5;
-    double data_2 = 3.0;
-    float data_3 = 3.0f;
-    float data_4 = 5.0f;
-    float data_5 = 1.0f;
-    float data_6 = -1.0f;
-    double data_7 = 0.5;
-    return data_7 + data_6 + data_5 + data_4 + data_3 + data_2 + data_1 +
-           data_0;
+    (void) 0.0f;
+    (void) 0.5;
+    (void) 3.0;
+    (void) 3.0f;
+    (void) 5.0f;
+    (void) 1.0f;
+    (void) -1.0f;
+    (void) 1.5707963267948966;
 }
 
 static inline float my_sqrtf(float x, volatile float* y)
