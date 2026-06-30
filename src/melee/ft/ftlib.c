@@ -744,7 +744,7 @@ bool ftLib_80087074(HSD_GObj* gobj, Vec3* v)
     return false;
 }
 
-bool ftLib_800870BC(HSD_GObj* gobj, void** val)
+bool ftLib_800870BC(HSD_GObj* gobj, int* val)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x61A_controller_index) {
