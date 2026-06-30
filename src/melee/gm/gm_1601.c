@@ -511,7 +511,7 @@ bool gm_80160474(CharacterKind ckind, GameModeKind scene)
 
 char* gm_801604DC(CharacterKind ckind, GameModeKind scene)
 {
-    s32 var_r3;
+    s16 var_r3;
 
     switch (scene) {
     case GM_CLASSIC_GOVER:
@@ -531,7 +531,7 @@ char* gm_801604DC(CharacterKind ckind, GameModeKind scene)
 
 char* gm_80160564(CharacterKind ckind, GameModeKind scene)
 {
-    s32 var_r3;
+    s16 var_r3;
 
     switch (scene) {
     case GM_CLASSIC_GOVER:
@@ -1330,10 +1330,10 @@ s32 gm_8016247C(s32 arg0)
 
     temp_r5 = &gmMainLib_8015EDBC()->x14;
 
-    var_r4 = MAX(-1U, *temp_r30 + arg0);
+    var_r4 = (*temp_r30 + arg0 > -1U) ? -1U : *temp_r30 + arg0;
     *temp_r30 = var_r4;
 
-    var_r3 = MAX(-1U, *temp_r5 + arg0);
+    var_r3 = (*temp_r5 + arg0 > -1U) ? -1U : *temp_r5 + arg0;
     *temp_r5 = var_r3;
 
     arg0 = temp_r29 + arg0;
