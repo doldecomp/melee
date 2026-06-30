@@ -41,21 +41,20 @@ void ftCo_800C06C0(void)
     {
         int i;
         for (i = 0; i < 4; i++) {
-            ft_80459A68[i].ground = 0;
+            ft_80459A68[i].ground = NULL;
         }
     }
 }
 
 void ftCo_800C06E8(Ground_GObj* gobj, int arg1, void* func)
 {
-    struct ftDeviceUnk3* base = ft_80459A68;
     int i;
 
     for (i = 0; i < 1; i++) {
-        if (base[i].ground == NULL) {
-            base[i].ground = gobj;
-            base[i].type = arg1;
-            base[i].active_cb = func;
+        if (ft_80459A68[i].ground == NULL) {
+            ft_80459A68[i].ground = gobj;
+            ft_80459A68[i].type = arg1;
+            ft_80459A68[i].active_cb = func;
             ft_804D6578.x0++;
             return;
         }

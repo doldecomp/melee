@@ -719,7 +719,7 @@ void it_8027CE64(Item_GObj* item_gobj, HSD_GObj* fighter_gobj,
     ftLib_8008770C(fighter_gobj, (void*) &sp18);
     it_80278574(item_gobj, &sp18);
     ftLib_80087744(fighter_gobj, &item->xBC8);
-    item->x5C8 = ftLib_800870BC(item->owner, (void**) &item->xBC4);
+    item->x5C8 = ftLib_800870BC(item->owner, (int*) &item->xBC4);
     it_80274594(item_gobj);
     item->xDD4_itemVar.gamewatch.attr = arg_attr_address;
 }
