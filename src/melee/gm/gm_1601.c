@@ -511,7 +511,7 @@ bool gm_80160474(CharacterKind ckind, GameModeKind scene)
 
 char* gm_801604DC(CharacterKind ckind, GameModeKind scene)
 {
-    s32 var_r3;
+    s16 var_r3;
 
     switch (scene) {
     case GM_CLASSIC_GOVER:
@@ -531,7 +531,7 @@ char* gm_801604DC(CharacterKind ckind, GameModeKind scene)
 
 char* gm_80160564(CharacterKind ckind, GameModeKind scene)
 {
-    s32 var_r3;
+    s16 var_r3;
 
     switch (scene) {
     case GM_CLASSIC_GOVER:
