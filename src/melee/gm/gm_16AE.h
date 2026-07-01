@@ -86,8 +86,8 @@
 /* 16C75C */ /* static */ int gm_8016C75C(HSD_GObj*);
 /* 16C7D0 */ void fn_8016C7D0(HSD_GObj*);
 /* 16C7F0 */ void fn_8016C7F0(void);
-/* 16CA68 */ void fn_8016CA68(lbl_8046B6A0_t*, int);
-/* 16CBE8 */ void fn_8016CBE8(lbl_8046B6A0_t*, int);
+/* 16CA68 */ void gm_DoPauseChecksAndRoutine(lbl_8046B6A0_t*, int);
+/* 16CBE8 */ void gm_DoUnpauseChecksAndRoutine(lbl_8046B6A0_t*, int);
 /* 16CD98 */ void fn_8016CD98(lbl_8046B6A0_t*);
 /* 16CF4C */ void fn_8016CF4C(int, int);
 /* 16CFE0 */ void fn_8016CFE0(void);

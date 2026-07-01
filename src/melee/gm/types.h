@@ -483,7 +483,7 @@ struct lbl_8046B6A0_t {
     /* 0x0001 */ s8 pauser;
     /* 0x0002 */ u8 pause_timer;
     /* 0x0003 */ u8 unk_3;
-    /* 0x0004 */ u8 unk_4;
+    /* 0x0004 */ u8 unpause_timer;
     /* 0x0005 */ u8 hud_enabled;
     /* 0x0006 */ u8 terminate_match;
     /* 0x0007 */ u8 is_singleplayer;

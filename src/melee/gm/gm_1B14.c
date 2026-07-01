@@ -856,7 +856,7 @@ void gm_PrepCameraModeVSScene(GameScene* arg0)
     start->rules.x3_1 = false;
     start->rules.x4_0 = false;
 
-    start->rules.x38 = gm_80165268;
+    start->rules.x38_on_unpause_override = gm_80165268;
     start->rules.x3C_on_pause_override = gm_80165268;
     start->rules.x40_check_for_pauser_override = gm_CameraModeVSGetPauser;
     start->rules.x44 = gmCamera_801A31FC;
@@ -864,7 +864,7 @@ void gm_PrepCameraModeVSScene(GameScene* arg0)
     start->rules.x4C = gmCamera_801A30E4;
 
     start->rules.xD = 1;
-    start->rules.x2_4 = false;
+    start->rules.is_paused = false;
 
     for (i = 0; i < 6; i++) {
         start->players[i] = vs->data.players[i];

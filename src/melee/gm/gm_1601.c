@@ -2628,7 +2628,7 @@ bool gm_80165084(void)
 
 void fn_801650E8(void)
 {
-    Ground_801C5800();
+    Ground_EnableMatchCamera();
 }
 
 void gm_EnablePlayerPauseCamera(int playerSlot, int playerId)
@@ -3843,9 +3843,9 @@ void gm_80167BC8(VsModeData* vs_data)
     }
 
     if (rules->pause != 0) {
-        vs_data->data.rules.x2_4 = 0;
+        vs_data->data.rules.is_paused = 0;
     } else {
-        vs_data->data.rules.x2_4 = 1;
+        vs_data->data.rules.is_paused = 1;
     }
     if ((rules->score_display != 0) && (rules->mode == 0)) {
         vs_data->data.rules.x3_0 = 1;

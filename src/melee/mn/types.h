@@ -128,7 +128,7 @@ struct StartMeleeRules {
     u32 x2_1 : 1;
     u32 x2_2 : 1;
     u32 x2_3 : 1; ///< single-button mode enabled
-    u32 x2_4 : 1;
+    u32 is_paused : 1;
     u32 x2_5 : 1;
     u32 x2_6 : 1;
     u32 x2_7 : 1;
@@ -142,7 +142,7 @@ struct StartMeleeRules {
     u32 x3_6 : 1;
     u32 x3_7 : 1;
 
-    u32 x4_0 : 1;
+    u32 x4_0 : 1; ///< pause camera enabled?
     u32 x4_1 : 1;
     u32 x4_2 : 1;
     u32 x4_3 : 1;
@@ -180,11 +180,15 @@ struct StartMeleeRules {
     float x2C;
     float x30;        // damage ratio
     float x34;        // game speed
-    void (*x38)(int); // on unpause callback
-    void (*x3C_on_pause_override)(int); // on pause callback (conditional?). When set, this method is called when a player presses Start
-                                        // during a match. Otherwise, gm_EnablePlayerPauseCamera is called
-    int (*x40_check_for_pauser_override)(void); // When set, this method is used for checking if a player has pressed
-                                                // pause. Otherwise falls back to gm_DefaultVSGetPauser
+    void (*x38_on_unpause_override)(int); // on unpause callback. When set, this method is called with the pauser playerId when a player
+                                          // unpauses the match. If not set, falls back to Ground_EnableMatchCamera
+                                          // x4_0 must also be true.
+    void (*x3C_on_pause_override)(int); // on pause callback. When set, this method is called when a player presses Start
+                                        // during an unpaused match. Otherwise, gm_EnablePlayerPauseCamera is called
+                                        // x4_0 must also be true.
+    int (*x40_check_for_pauser_override)(void); // When set, this method is used for checking if a player/which player has pressed
+                                                // pause while unpaused. Otherwise falls back to gm_DefaultVSGetPauser
+                                                // (x4_0 must also be true)
     void (*x44)(void); // on VS match start callback
     void (*x48)(void); // ingame pre-frame callback
     void (*x4C)(void); // ingame post-frame callback
