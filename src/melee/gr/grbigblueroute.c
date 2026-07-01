@@ -874,6 +874,7 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                 break;
             }
             case 3: {
+                Vec3 orient;
                 f32 prog;
                 f32 angle;
                 f32 t;
@@ -882,7 +883,6 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                 Vec3 air;
                 Vec3 tangent;
                 Vec3 side;
-                Vec3 orient;
                 Vec3 p0;
                 Vec3 p1;
                 Vec3 road_tan;

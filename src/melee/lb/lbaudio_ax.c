@@ -90,6 +90,7 @@ int lbAudioAx_80023220(int idx)
 
 void fn_80023254(s32 arg0)
 {
+    int* shift_ptr;
     int local_arr[0x38];
     int* arr_b44;
     int* local_ptr;
@@ -98,7 +99,6 @@ void fn_80023254(s32 arg0)
     int count;
     int j;
     int n;
-    int* shift_ptr;
     int i;
     char* base;
 

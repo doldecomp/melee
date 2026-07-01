@@ -132,6 +132,8 @@ void ftKb_SpecialNMs_8010B2FC(HSD_GObj* gobj)
 
 void ftKb_SpecialNMs_8010B4A0(HSD_GObj* gobj)
 {
+    KirbyHatStruct* fe_hat;
+    KirbyHatStruct* mars_hat;
     PAD_STACK(8);
     {
         ftKb_DatAttrs* da;
@@ -173,8 +175,8 @@ void ftKb_SpecialNMs_8010B4A0(HSD_GObj* gobj)
     {
         Fighter* fp = GET_FIGHTER(gobj);
         Vec3 scale;
-        KirbyHatStruct* mars_hat = ft_80459B88.hats[FTKIND_MARS - 1];
-        KirbyHatStruct* fe_hat = ft_80459B88.hats[FTKIND_EMBLEM - 1];
+        mars_hat = ft_80459B88.hats[FTKIND_MARS - 1];
+        fe_hat = ft_80459B88.hats[FTKIND_EMBLEM - 1];
 
         if (fp->fv.kb.hat.kind == FTKIND_MARS) {
             ftCommon_SetAccessory(fp, (HSD_Joint*) mars_hat->hat_dynamics[0]);

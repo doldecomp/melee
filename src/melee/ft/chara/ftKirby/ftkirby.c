@@ -3507,14 +3507,13 @@ void ftKb_SpecialN_800EF438(Fighter_GObj* gobj, KirbyHatStruct* hat)
     s32 sp20;
     HSD_Joint* root = (HSD_Joint*) hat->hat_dynamics[2];
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 total_dobjs;
     s32 part_off;
-    s32 dst_off;
     HSD_DObj* dobj;
     HSD_MObj* mobj;
     HSD_JObj* jobj;
     HSD_DObj* tail;
     s32 group_count;
+    s32 total_dobjs;
 
     if (root != NULL) {
         s32 byte_off;
@@ -3553,7 +3552,6 @@ void ftKb_SpecialN_800EF438(Fighter_GObj* gobj, KirbyHatStruct* hat)
                     }
                     lb_8000CE30(tail, dobj);
                 }
-                dst_off = byte_off;
                 for (;;) {
                     HSD_DObj** dst;
                     if (dobj == NULL) {
@@ -3565,13 +3563,13 @@ void ftKb_SpecialN_800EF438(Fighter_GObj* gobj, KirbyHatStruct* hat)
                                  ftKb_Init_804D3DAC);
                     }
                     dst = (HSD_DObj**) fp->fv.gw.x224C_greenhouseGObj;
-                    dst[dst_off / (s32) sizeof(*dst)] = dobj;
+                    dst[byte_off / (s32) sizeof(*dst)] = dobj;
                     mobj = dobj->mobj;
                     if (mobj != NULL) {
                         hsdChangeClass(mobj, &ftMObj);
                     }
                     dobj = (dobj != NULL) ? dobj->next : NULL;
-                    dst_off += 4;
+                    byte_off += 4;
                     byte_off += 4;
                     total_dobjs += 1;
                     group_count += 1;

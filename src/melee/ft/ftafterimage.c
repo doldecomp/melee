@@ -32,6 +32,8 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 {
     Fighter* fp;
     itSword_UnkBytes* params;
+    u32 n4;
+    s32 numSubdiv;
     AfterimageVtx vtx_buf[151];
     f32 cumDist[3];
     Vec3 delta, prevPos, crossProd, tempDir;
@@ -196,11 +198,10 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
             vp = &vtx_buf[0];
 
             while (remaining >= 0) {
-                struct Fighter_x20B0_t* curEntry;
                 f32 outerScale, innerScale;
                 s32 alpha;
 
-                curEntry = &fp->x20B0[curIdx2];
+                struct Fighter_x20B0_t* curEntry = &fp->x20B0[curIdx2];
                 outerScale = interpFactor * outerDiff + blendedOuter;
                 innerScale = interpFactor * innerDiff + blendedInner;
                 numVerts += 2;
@@ -245,7 +246,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                         f32 angle =
                             lbVector_Angle(&curEntry->xC, &nextEntry->xC);
                         f32 subdivAngle = angle / AFTERIMAGE_ANGLE_STEP;
-                        s32 numSubdiv = (s32) subdivAngle;
+                        numSubdiv = (s32) subdivAngle;
                         interpFactor = 1.0f - (*distPtr / totalDist);
 
                         if (numSubdiv != 0) {
@@ -347,7 +348,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
             if (numVerts > 1) {
                 AfterimageVtx* p = &vtx_buf[1];
                 u32 count = (u32) (numVerts - 1);
-                u32 n4 = count >> 2;
+                n4 = count >> 2;
                 if (n4 != 0) {
                     do {
                         GXPosition3f32(p[0].x, p[0].y, p[0].z);

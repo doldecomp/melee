@@ -1658,6 +1658,10 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
     s32 popped = 0;
     int i;
     grZe_BubbleEntry* ptr;
+    f32 dist;
+    f32 dx;
+    f32 dist2;
+    f32 dx2;
     PAD_STACK(8);
 
     ptr = base;
@@ -1693,8 +1697,9 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                     grZe_BubbleEntry* left = &base[idx - 1];
                     if (left->x00_active != 0) {
                         f32 dy = left->x0C_y - cur->x0C_y;
-                        f32 dx = left->x08_x - cur->x08_x;
-                        f32 dist = dx * dx + dy * dy;
+                        dx = left->x08_x;
+                        dx -= cur->x08_x;
+                        dist = dx * dx + dy * dy;
                         if (dist > zero) {
                             dist = sqrtf(dist);
                         }
@@ -1718,8 +1723,9 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                         grZe_BubbleEntry* right = &base[idx + 1];
                         if (right->x00_active != 0) {
                             f32 dy2 = right->x0C_y - cur->x0C_y;
-                            f32 dx2 = right->x08_x - cur->x08_x;
-                            f32 dist2 = dx2 * dx2 + dy2 * dy2;
+                            dx2 = right->x08_x;
+                            dx2 -= cur->x08_x;
+                            dist2 = dx2 * dx2 + dy2 * dy2;
                             if (dist2 > zero) {
                                 dist2 = sqrtf(dist2);
                             }
@@ -1913,6 +1919,7 @@ s32 grZebes_801DBB60(HSD_GObj* yaku)
     grZe_BubbleEntry* bubbles = grZe_8049F170;
     s32 count = 0;
     f32 max_dist_sq = -1.0f;
+    grZe_BubbleEntry* ej;
 
     HSD_ASSERT(0x898, yaku);
 
@@ -1959,7 +1966,7 @@ s32 grZebes_801DBB60(HSD_GObj* yaku)
                 f32 ei_x = ei->x08_x;
                 f32 ei_size = ei->x18_size;
                 s32 rem = 20 - j;
-                grZe_BubbleEntry* ej = &bubbles[j];
+                ej = &bubbles[j];
                 if (j < 20) {
                     for (; rem != 0; ej++, j++, rem--) {
                         if (ej->x00_active == 1 && j != 0 && j != 6) {

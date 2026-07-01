@@ -925,14 +925,13 @@ s32 gm_801BBB64(void)
             ev->x50[2] = ((u8*) event_entry)[3];
             return (s32) event_entry;
         }
-        return result;
     case 43:
         x4 = (*pp)->x4;
         event_entry = (void*) x4->x4;
         ev->x4C[2] = *(s8*) event_entry;
         event_entry = (void*) x4->x4;
         ev->x50[2] = ((u8*) event_entry)[3];
-        result = (s32) event_entry;
+        return result = (s32) event_entry;
         /* fallthrough */
     default:
         return result;

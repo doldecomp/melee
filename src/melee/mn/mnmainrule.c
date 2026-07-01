@@ -518,7 +518,6 @@ void mn_8022FD18(u8 arg0)
 void mn_8022FEC8(HSD_GObj* arg0, HSD_JObj* arg1, u8 arg2, u8 arg3)
 {
     struct mn_8022FB88_arg1_t* data;
-    HSD_JObj* digit_jobj;
     HSD_JObj* tens_jobj;
     HSD_JObj* ones_jobj;
     f32* frame;
@@ -526,6 +525,7 @@ void mn_8022FEC8(HSD_GObj* arg0, HSD_JObj* arg1, u8 arg2, u8 arg3)
     struct mn_8022FEC8_jobj_ref_t* tens_ref;
     struct mn_8022FEC8_jobj_ref_t* ones_ref;
     u8* base;
+    HSD_JObj* digit_jobj;
 
     PAD_STACK(0x18);
 

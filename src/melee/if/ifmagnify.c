@@ -227,6 +227,8 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
 
 void ifMagnify_802FBBDC(HSD_GObj* arg0)
 {
+    int i;
+    f32 mix2;
     f32 right;
     ifMagnify* magnify;
     HSD_CObj* cobj;
@@ -247,10 +249,8 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
     f32 y_class;
     f32 mix0;
     f32 mix1;
-    f32 mix2;
     f32 mix3;
     GXColor result;
-    int i;
     int j;
     u8* color_ids;
     bool should_display;

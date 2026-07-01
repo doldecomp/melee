@@ -2783,12 +2783,11 @@ u8 fn_80165548(MatchEnd* me, s8 arg1, s32 team)
                 }
                 if (result >= 0) {
                     ret += result;
-                    return ret;
                 }
             }
         }
     } else {
-        ret = arg1;
+        return ret = arg1;
     }
 
     return ret;
@@ -3236,11 +3235,11 @@ float fn_80166A8C(register Vec3* src, register Vec3* dst)
 s32 gm_80166A98(MatchEnd* arg0, s32 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,
                 s8 arg6, u8 arg7, u8 arg_sp8, u8 arg_spC)
 {
-    s32 score0;
     s32 score1;
     s32 score2;
     s32 score3;
     u32 i;
+    s32 score0;
 
     memzero(arg0, 0x227C);
 
@@ -5085,7 +5084,6 @@ void fn_8016A4C8(void)
     Vec3 spawn_pos;
     f32 facing_dir;
     s32 spawn_enabled;
-    s32 active_slot;
     s32 cpu_type;
     s32 cpu_type_roll;
     s32 matching_slot;
@@ -5221,7 +5219,7 @@ void fn_8016A4C8(void)
         }
     }
     if ((s32) gp->x7 == 0) {
-        active_slot = 0;
+        s32 active_slot = 0;
     scan_active_spawn:
         if (Player_GetPlayerSlotType(active_slot) != Gm_PKind_NA &&
             Player_GetFlagsBit1(active_slot) != 0 &&

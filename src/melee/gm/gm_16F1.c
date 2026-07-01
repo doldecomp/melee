@@ -490,6 +490,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
     struct lbl_803B7A60_t* zeroes = &lbl_803B7A60;
     u8* flags = rules->pad3F0;
     struct lbl_8046B6A0_24C_58_t* x58 = rules->x58;
+    s32 player_net;
     s32 scores[6];
     u8 rankings[7];
 
@@ -738,7 +739,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
         s32 vals[4];
         s32* base;
         int i, j;
-        s32 player_net = x58[arg1].x24 - x58[arg1].xA;
+        player_net = x58[arg1].x24 - x58[arg1].xA;
         if ((u32) player_net >= 3) {
             base = vals;
             {

@@ -618,7 +618,6 @@ void hsd_803921B8(void* bitmap, s32 x, s32 y, s32 dst, s32 w, s32 h,
     s32 off_y;
     GlyphEntry* table;
     s32 bit_off;
-    s32 col;
     s32 x2;
     s32 data_off;
     u32 word;
@@ -649,7 +648,7 @@ void hsd_803921B8(void* bitmap, s32 x, s32 y, s32 dst, s32 w, s32 h,
     x2 = x * 2;
     data_off = off_y * 4;
     while (off_y < 14 && (u32) y < h) {
-        col = x;
+        s32 col = x;
         bit_x = off_x;
         cur_dst = dst + (y * v_stride) + x2;
         while ((u32) col < max_x) {
@@ -2244,7 +2243,6 @@ void hsd_80394668(void)
         s32* x8_ptr = &sp->x8;
         void* saved_color = *x50_ptr;
         s32 row;
-        s32 col;
         s32 cur_x;
 
         *x50_ptr = lbl_8040AB40;
@@ -2252,7 +2250,7 @@ void hsd_80394668(void)
 
         while (row <= sp->x1C) {
             s32 y_off = (row + 1) * 14;
-            col = 0;
+            s32 col = 0;
             cur_x = 0x14;
 
             while (col < sp->x20) {
@@ -3403,9 +3401,9 @@ static char* lbl_804D62F8 = "| INPUT ADDRESS : 8%07X |";
 // @TODO: Currently 92.87% match - .bss.0 relocation caps match percentage
 void hsd_80396884(void)
 {
+    s32 x_base;
     char buf[32];
     void* saved;
-    s32 x_base;
     u8 ch;
     s32 b6;
     PAD_STACK(28);
@@ -3570,8 +3568,6 @@ void hsd_80396E40(s32 keycode)
     s32* px40 = &sp->x40;
     s32* px8 = &sp->x8;
     char buf[64];
-    void* saved;
-    s32 row;
     s32 i;
     s32 spr_u;
     s32 spr_l;
@@ -3589,8 +3585,8 @@ void hsd_80396E40(s32 keycode)
     s32 j;
     char ch;
 
-    saved = *px50;
-    row = sp->x1C - 1;
+    void* saved = *px50;
+    s32 row = sp->x1C - 1;
     *px50 = lbl_8040AB00;
     *px4 = 0x106;
     *px8 = (*px40 - 0x28) - (row + 1) * 14;
@@ -3732,6 +3728,7 @@ static char lbl_804D6350[8] = "";
 void hsd_80397110(void)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
+    void* saved;
     extern u8 lbl_8040BEC4[];
     u8* base = lbl_8040AB00;
     void** px50 = &sp->x50;
@@ -3739,7 +3736,6 @@ void hsd_80397110(void)
     s32* px40 = &sp->x40;
     s32* px8 = &sp->x8;
     char buf[32];
-    void* saved;
     u32 i;
     s32 row;
     s32 offset;
@@ -4015,6 +4011,7 @@ void* fn_80397814(void* arg)
     u32 retrace;
     u32 next_retrace;
     u32* keybuf;
+    void* next;
     PAD_STACK(160);
 
     ctx = arg;
@@ -4164,7 +4161,7 @@ void* fn_80397814(void* arg)
     {
         void* cur = sp->xD0;
         while (cur != NULL) {
-            void* next = *(void**) cur;
+            next = *(void**) cur;
             *(void**) cur = NULL;
             cur = next;
         }
@@ -4804,9 +4801,8 @@ done_cmd:
                     *(u32*) ((u8*) tg + ofs) += (u32) texBank;
                 } else if (tg->palnum != 0) {
                     /* Multiple palette pointers (palnum > 0) */
-                    s32 ti;
                     s32 ofs;
-                    ti = (s32) tg->num;
+                    s32 ti = (s32) tg->num;
                     (void) ti;
                     ofs = ti * 4;
                     for (; (u32) ti < ((HSD_PSTexGroup*) cur[0])->num +
@@ -7908,6 +7904,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     f32 elevation;
     f32 tmp;
     f32 angle3;
+    f32 comb;
     u8 operand_pad[12];
     PAD_STACK(16);
 
@@ -8074,7 +8071,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         {
             f32 c1 = cosf(angle1);
             f32 s1 = sinf(angle1);
-            f32 comb = rot_mtx[2][2] * c1 + rot_mtx[1][2] * s1;
+            comb = rot_mtx[2][2] * c1 + rot_mtx[1][2] * s1;
             *(s32*) &comb &= 0x7FFFFFFF;
             if (comb < 1.1754944e-38F) {
                 if (rot_mtx[0][2] >= 0.0F) {

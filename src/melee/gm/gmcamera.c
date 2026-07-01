@@ -599,12 +599,12 @@ void fn_801A31D8(HSD_GObj* gobj)
 
 void gmCamera_801A31FC(void)
 {
-    HSD_GObj* gobj_a;
     HSD_GObj* gobj_b;
     HSD_JObj* jobj_a;
     HSD_JObj* jobj_b;
     HSD_Joint** joint_a;
     DynamicModelDesc* mdl_b;
+    HSD_GObj* gobj_a;
     void (*cb)(void);
     gmCameraUnkStruct* gcus = &gmCamera_80479BC8.gcus;
     PAD_STACK(24);

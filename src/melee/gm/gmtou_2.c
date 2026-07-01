@@ -507,9 +507,9 @@ void fn_8019D074(HSD_GObj* gobj)
 
 void fn_8019D1BC(void)
 {
+    HSD_JObj* jobj;
     TmData* tmd;
     HSD_GObj* gobj;
-    HSD_JObj* jobj;
     HSD_JObj* c;
     s32 i;
     f32 pos;
@@ -1053,11 +1053,9 @@ void gm_8019E634(void)
 
     /* Handicap adjustment */
     if ((u8) gmMainLib_8015CC34()->handicap == 1) {
-        u32 hbuf_init;
         u8* hbuf;
 
-        hbuf_init = lbl_804DA948;
-        hbuf = (u8*) &hbuf_init;
+        hbuf = (u8*) &lbl_804DA948;
 
         /* Read handicap from x37 entries */
         for (i = 0; i < 4; i++) {

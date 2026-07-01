@@ -332,12 +332,11 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
 {
     u8 operand_pad[8];
     {
-        Vec3 vec4;
         Vec3 arg4_offset;
         Vec3 arg5_offset;
         float temp_f1;
         float unk_sum = arg6 + arg7;
-        vec4 = *arg0;
+        Vec3 vec4 = *arg0;
         (void) vec4;
         arg4_offset = vec4;
         {
@@ -660,6 +659,7 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
 {
     Vec3 a1;
     float sum_pq = p + q;
+    float temp_f7_3;
     u8 operand_pad[12];
 
     Vec3 a0;
@@ -796,7 +796,7 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                 float temp_f5_2 =
                                     lbColl_804D7A18 * diff_dc_x + c1.x;
                                 float temp_f6_2 = a1.y - temp_f7_2;
-                                float temp_f7_3 = b_y - temp_f7_2;
+                                temp_f7_3 = b_y - temp_f7_2;
                                 {
                                     float temp_scl_f;
                                     float f4 = a1.x - temp_f5_2;

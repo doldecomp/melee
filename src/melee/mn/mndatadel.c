@@ -166,11 +166,11 @@ static inline struct WarnCmnData* mnDataDel_GetWarnData(void)
 void fn_8024ECCC(HSD_GObj* arg0)
 {
     HSD_JObj* panel;
-    struct WarnCmnData* data;
     HSD_JObj* root;
     HSD_JObj* exclaim;
     HSD_JObj* cursor_no;
     HSD_JObj* cursor_yes;
+    struct WarnCmnData* data;
     u8 _pad[10];
     f32 curr_frame;
     HSD_Text* text;

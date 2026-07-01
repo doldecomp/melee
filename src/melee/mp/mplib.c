@@ -5473,6 +5473,7 @@ void mpJointGetCb2(int joint_id, mpLib_Callback* cb, Ground** gr)
 
 void mpLib_800581DC(int joint_id0, int joint_id1)
 {
+    MapJoint* cd1;
     struct pair {
         s16 start;
         s16 count;
@@ -5553,7 +5554,7 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
         int vid_r26; /* r26 */
         int vid;
         int vstart1_r4;
-        MapJoint* cd1 = j1_r10->inner;
+        cd1 = j1_r10->inner;
         vstart1_r4 = cd1->vtx_start;
         vcount1 = cd1->vtx_count;
         vid = vstart1_r4;
@@ -5571,10 +5572,9 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
             // find every line with the first vert
             for (var_r25 = 0; var_r25 < 5; var_r25++) {
                 int i_r23;
-                int lstart_r24;
                 int lcount_r22;
                 CollLine* lines; /* r5 */
-                lstart_r24 = ((struct pair*) j0_r9->inner)[var_r25].start;
+                int lstart_r24 = ((struct pair*) j0_r9->inner)[var_r25].start;
                 (void) lstart_r24;
                 lcount_r22 = ((struct pair*) j0_r9->inner)[var_r25].count;
                 lines = &line_base[lstart_r24];

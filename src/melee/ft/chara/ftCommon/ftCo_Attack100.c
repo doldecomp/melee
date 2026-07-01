@@ -528,11 +528,11 @@ bool ftCo_800D72A0(Fighter* fp)
 
 void ftCo_800D74A4(Fighter_GObj* gobj)
 {
+    struct Fighter_x2D0_t* p;
     extern f32 ftCo_804D9018;
     Vec3 vel;
     Fighter* fp;
     s32 msid;
-    struct Fighter_x2D0_t* p;
     struct Fighter_x2D0_t* tmp;
     PAD_STACK(0x14);
     fp = gobj->user_data;

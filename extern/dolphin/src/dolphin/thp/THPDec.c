@@ -1034,9 +1034,9 @@ static u8 __THPHuffGenerateSizeTable(THPFileInfo* info, u8 tab_index, int huffma
 static u8 __THPHuffGenerateCodeTable(THPFileInfo* info, u8 tab_index)
 {
     THPFileInfoHuffmanSizeView* huff;
-    s32 si;
     s32 p;
     u32 code;
+    s32 si;
 
     huff = (THPFileInfoHuffmanSizeView*) info;
 

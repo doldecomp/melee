@@ -3151,7 +3151,6 @@ s32 ftCo_800A6A98(Fighter* fp, Vec3* arg1)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
     mp_UnkStruct0* island;
-    f32 best;
     Vec3 floor_pos;
     Vec3 floor_normal;
     int line_id;
@@ -3165,9 +3164,10 @@ s32 ftCo_800A6A98(Fighter* fp, Vec3* arg1)
     f32 dx;
     f32 dy;
     f32 dist;
+    f32 fx;
     u8 operand_pad[12];
 
-    best = -1.0f;
+    f32 best = -1.0f;
     for (island = mpIsland_80458E88.next; island != NULL;
          island = island->next)
     {
@@ -3192,7 +3192,7 @@ s32 ftCo_800A6A98(Fighter* fp, Vec3* arg1)
             if (result != 0 && line_id != -1 &&
                 (mpLineGetFlags(line_id) & LINE_FLAG_PLATFORM))
             {
-                f32 fx = floor_pos.x;
+                fx = floor_pos.x;
                 if (!(floor_pos.y < fp->cur_pos.y + data->x568)) {
                     if (!ftCo_800A4768_inline0(fp, &floor_pos)) {
                         dx = fx - fp->cur_pos.x;

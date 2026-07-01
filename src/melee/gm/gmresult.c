@@ -942,7 +942,6 @@ end_common:
 void fn_80175880(s32 slot)
 {
     MatchEnd* me;
-    u32 new_var2;
     s32 var_r30;
     u8 winner;
     GXColor sp10;
@@ -951,6 +950,7 @@ void fn_80175880(s32 slot)
     s32 skip;
     u32 seconds;
     u32 minutes;
+    u32 new_var2;
 
     me = lbl_8046DBE8.x94;
     sp10 = fn_8017507C(slot);
@@ -1707,10 +1707,10 @@ void fn_801771C0(ResultsData* data)
     MatchEnd* me;
     MatchPlayerData* p;
     MatchPlayerData* q;
-    s32 result;
     s32 i;
     s32 j;
     u8 our_team;
+    s32 result;
 
     me = data->x94;
     data->x4 = fn_80165418(me);

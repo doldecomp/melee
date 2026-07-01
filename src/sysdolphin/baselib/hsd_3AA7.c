@@ -3014,6 +3014,7 @@ s32 fn_803B0120(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     CardBufEntry* entries = (CardBufEntry*) hsd_804D1138;
     s32 saved;
     s32 snap;
+    s32 ofs;
     s32 block_map[3][64];
     s32* secondary_ptr;
     s32* free_ptr;
@@ -3074,7 +3075,7 @@ s32 fn_803B0120(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     } else {
         s32 retries;
         s32 fd = state->x4;
-        s32 ofs = state->x20;
+        ofs = state->x20;
         for (retries = 0; retries < 10; retries++) {
             result = CARDFastOpen(fd, ofs, &state->file_info);
             if (result != -1) {

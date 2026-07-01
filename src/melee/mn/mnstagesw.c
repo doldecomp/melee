@@ -641,7 +641,6 @@ static HSD_GObj* mnStageSw_80236CBC(s8 arg0)
 {
     AnimLoopSettings* anims = mnStageSw_803ED488;
     struct StaticModelDesc* mdl = &MenMainConSs_Top;
-    HSD_GObj* gobj;
     HSD_JObj* jobj;
     HSD_JObj* sp48;
     MnStageSwData* user_data;
@@ -649,8 +648,9 @@ static HSD_GObj* mnStageSw_80236CBC(s8 arg0)
     u8 hovered;
     HSD_JObj* cursor_anim_jobj;
     s32 i;
+    u8 idx;
 
-    gobj = GObj_Create(6, 7, 0x80);
+    HSD_GObj* gobj = GObj_Create(6, 7, 0x80);
     mnStageSw_804D6BF0 = gobj;
 
     jobj = HSD_JObjLoadJoint(mdl->joint);
@@ -669,7 +669,7 @@ static HSD_GObj* mnStageSw_80236CBC(s8 arg0)
 
     user_data->x0 = mn_804A04F0.cur_menu;
     {
-        u8 idx = 0;
+        idx = 0;
 
         user_data->x1 = (u8) mn_804A04F0.hovered_selection;
         user_data->x1F = arg0;

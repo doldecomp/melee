@@ -719,7 +719,6 @@ s32 hsd_803B6BE4(char* arg0, s32 arg1, void* arg2)
     u8* scratch_r5_14;
     u8* scratch_r5_15;
     u8* scratch_r5_16;
-    u8* scratch_r5_17;
     u8* scratch_r5_2;
     u8* scratch_r5_3;
     u8* scratch_r5_4;
@@ -728,8 +727,6 @@ s32 hsd_803B6BE4(char* arg0, s32 arg1, void* arg2)
     u8* scratch_r5_7;
     u8* scratch_r5_8;
     u8* scratch_r5_9;
-    u8* scratch_r6;
-    u8* scratch_r6_2;
     u8* quant_table;
     u8* base;
     s32 work_r28;
@@ -884,7 +881,7 @@ loop_24:
                 work_r5 = work_r24;
                 work_r4_3 = &base[0x718];
                 for (work_r3_3 = 0; work_r3_3 < 0x40; work_r3_3 += 8) {
-                    scratch_r6 = quant_table + work_r3_3;
+                    u8* scratch_r6 = quant_table + work_r3_3;
                     scratch_r0_7 = M2C_FIELD(scratch_r6, u8*, 0);
                     M2C_FIELD(work_r5, s32*, 0) =
                         (s32) (M2C_FIELD(work_r4_3, s32*, 0) * scratch_r0_7);
@@ -920,7 +917,7 @@ loop_24:
             work_r4_4 = work_r24_2;
             work_r5_2 = &base[0x518];
             for (work_r3_4 = 0; work_r3_4 < 0x40; work_r3_4 += 8) {
-                scratch_r6_2 = quant_table + 0x40 + work_r3_4;
+                u8* scratch_r6_2 = quant_table + 0x40 + work_r3_4;
                 scratch_r7_2 = M2C_FIELD(scratch_r6_2, u8*, 0);
                 M2C_FIELD(work_r5_2, s32*, 0) =
                     (s32) (M2C_FIELD(work_r4_4, s32*, 0) * scratch_r7_2);
@@ -952,7 +949,7 @@ loop_24:
             hsd_803B5EA0(2);
             work_r4_5 = &base[0x618];
             for (work_r3_5 = 0; work_r3_5 < 0x40; work_r3_5 += 8) {
-                scratch_r5_17 = quant_table + 0x40 + work_r3_5;
+                u8* scratch_r5_17 = quant_table + 0x40 + work_r3_5;
                 scratch_r6_3 = M2C_FIELD(scratch_r5_17, u8*, 0);
                 M2C_FIELD(work_r4_5, s32*, 0) =
                     (s32) (M2C_FIELD(work_r24_2, s32*, 0) * scratch_r6_3);

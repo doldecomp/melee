@@ -1,4 +1,6 @@
+#define TOY_INTERNAL_TROPHY_ID_AS_S32
 #include "toy.h"
+#undef TOY_INTERNAL_TROPHY_ID_AS_S32
 
 #include "m2c_macros.h"
 #include "math.h"
@@ -1507,11 +1509,11 @@ void Toy_80306D14(void)
 
 void Toy_80306D70(s32 arg0)
 {
+    TyLightFile* base;
     UNUSED u8 framepad[8];
 
     {
         LightList** sp14;
-        TyLightFile* base;
         TyLightData* data;
         char* sym;
         s32 idx;
@@ -2133,7 +2135,7 @@ void _Toy_80307F64(s32 arg0, s32 arg1)
     }
 }
 
-char* Toy_8030813C(s16 arg0, enum_t unused)
+char* Toy_8030813C(s32 arg0, enum_t unused)
 {
     char* ptr;
     s32 i;
@@ -3456,6 +3458,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
     void* ed8 = Toy_sbss_804D6ED8;
     void* ed4 = Toy_sbss_804D6ED4;
     ToyAnimState* anim = &base->anim;
+    s16 tid;
 
     if (base->x3F0 != NULL) {
         HSD_JObj* jobj_child;
@@ -3942,7 +3945,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
                         lk += cur_idx;
                         entry = M2C_FIELD(display, u8**, 0x138);
                         {
-                            s16 tid = Toy_sbss_804D6EDC[lk - 1];
+                            tid = Toy_sbss_804D6EDC[lk - 1];
                             oa = *(HSD_Archive**) (entry + 0x14);
                             md = Toy_8030813C(tid, lk);
                             if (oa != NULL) {
@@ -5963,19 +5966,19 @@ void Toy_OnEnter_80311AB0(void* arg0)
 
     _Toy_sbss_804D6E68 = HSD_MemAlloc(sizeof(*_Toy_sbss_804D6E68));
     Toy_sbss_804D6ED8 = HSD_MemAlloc(sizeof(*Toy_sbss_804D6ED8));
-    Toy_sbss_804D6ED4 = HSD_MemAlloc(sizeof(*Toy_sbss_804D6ED4));
-    Toy_sbss_804D6EDC = HSD_MemAlloc(sizeof(*Toy_sbss_804D6EDC));
-    _Toy_sbss_804D6E64 = HSD_MemAlloc(sizeof(*_Toy_sbss_804D6E64));
+    Toy_sbss_804D6ED4 = HSD_MemAlloc(0xE4);
+    Toy_sbss_804D6EDC = HSD_MemAlloc(0x24A);
+    _Toy_sbss_804D6E64 = HSD_MemAlloc(0x6DE);
     Toy_sbss_804D6EE0 = HSD_MemAlloc(sizeof(*Toy_sbss_804D6EE0));
-    _Toy_sbss_804D6E6C = HSD_MemAlloc(sizeof(*_Toy_sbss_804D6E6C));
+    _Toy_sbss_804D6E6C = HSD_MemAlloc(0x8);
 
     memzero(_Toy_sbss_804D6E68, sizeof(*_Toy_sbss_804D6E68));
     memzero(Toy_sbss_804D6ED8, sizeof(*Toy_sbss_804D6ED8));
-    memzero(Toy_sbss_804D6ED4, sizeof(*Toy_sbss_804D6ED4));
-    memzero(Toy_sbss_804D6EDC, sizeof(*Toy_sbss_804D6EDC));
-    memzero(_Toy_sbss_804D6E64, sizeof(*_Toy_sbss_804D6E64));
+    memzero(Toy_sbss_804D6ED4, 0xE4);
+    memzero(Toy_sbss_804D6EDC, 0x24A);
+    memzero(_Toy_sbss_804D6E64, 0x6DE);
     memzero(Toy_sbss_804D6EE0, sizeof(*Toy_sbss_804D6EE0));
-    memzero(_Toy_sbss_804D6E6C, sizeof(*_Toy_sbss_804D6E6C));
+    memzero(_Toy_sbss_804D6E6C, 0x8);
 
     Toy_8031263C();
 
