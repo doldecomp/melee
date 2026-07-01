@@ -70,7 +70,7 @@
 /* 02F474 */ void Camera_SetModeToStandard(void);
 /* 02F488 */ s32 Camera_SetBounds(Vec4*);
 /* 02F4D4 */ void Camera_SetUpPauseCamera(s8, s8, s32);
-/* 02F73C */ void Camera_8002F73C(s8, s8);
+/* 02F73C */ void Camera_SetUpPauseCameraWithDefaultZoom(s8, s8);
 /* 02F760 */ void Camera_8002F760(s8, s8);
 /* 02F784 */ void Camera_8002F784(s8, s8);
 /* 02F7AC */ void Camera_8002F7AC(s8);
