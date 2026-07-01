@@ -1,7 +1,22 @@
 #include "gmregclear.h"
 
-#include "gm_unsplit.h"
 #include "platform.h"
+
+#include <melee/gm/gm_16AE.h>
+#include <melee/gm/gm_16F1.h>
+#include <melee/gm/gm_17AD.h>
+#include <melee/gm/gm_17BA.h>
+#include <melee/gm/gm_1832.h>
+#include <melee/gm/gm_19EF.h>
+#include <melee/gm/gm_1A3F.h>
+#include <melee/gm/gm_1A45.h>
+#include <melee/gm/gm_1A7A.h>
+#include <melee/gm/gm_1ADD.h>
+#include <melee/gm/gm_1AED.h>
+#include <melee/gm/gm_1BA8.h>
+#include <melee/gm/gm_1BFA.h>
+#include <melee/gm/gmtoulib.h>
+void gm_801B0620();
 
 #include "baselib/forward.h"
 
@@ -29,7 +44,6 @@
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gm_1A36.h>
-#include <melee/gm/gm_1B03.h>
 #include <melee/gm/gmadventure.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/gmregcommon.h>
@@ -685,7 +699,7 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     u8 enemy_cpu_type;
     s32 player_idx;
     f32 attack_ratio;
-    u8 player_stocks;
+    s32 player_stocks;
     s32 player_ckind;
     u8 flags;
     s32 color_idx;
@@ -1897,6 +1911,13 @@ int fn_8017F294(void)
 {
     return lbl_80472D28.x104;
 }
+
+static const char* const gmRegClear_ErrorMessages[] = {
+    "Error : Cannot open archive file (File Name : %s).",
+    "Error : gobj don\'t get (gmRegClearAddModel)\n",
+    "gmregclear.c",
+    "Error : jobj don\'t get (gmRegClearAddModel)\n",
+};
 
 s32 fn_8017F2A4(HSD_Text** arg0, f32 farg0, f32 farg1)
 {
@@ -3188,27 +3209,36 @@ int fn_80181BFC(int* arg0)
 }
 #pragma dont_inline reset
 
+static inline s32 fn_80181C80_CountPlayers(volatile s32* out)
+{
+    s32 i;
+    s32 count = 0;
+
+    for (i = 1; i < 6; i++) {
+        if (Player_GetFalls(i) == 0 &&
+            Player_GetPlayerSlotType(i) != Gm_PKind_NA)
+        {
+            count++;
+        } else {
+            *out = i;
+        }
+    }
+    return count;
+}
+
 s32 fn_80181C80(s32 arg0)
 {
     lbl_80472ED8_t* data = &lbl_80472ED8;
-    s32 var_r29;
-    s32 var_r30;
+    s32 count;
     volatile s32 sp38;
     volatile s32 sp3C;
     PlayerInitData sp10;
 
     gm_801A4310();
-    for (var_r29 = 1, var_r30 = 0, sp10 = data->xC; var_r29 < 6; var_r29++) {
-        if (Player_GetFalls(var_r29) == 0 &&
-            Player_GetPlayerSlotType(var_r29) != Gm_PKind_NA)
-        {
-            var_r30++;
-        } else {
-            sp38 = var_r29;
-        }
-    }
+    sp10 = data->xC;
+    count = fn_80181C80_CountPlayers(&sp38);
 
-    if ((s32) data->x54[arg0].x4 > var_r30 && data->x8 > 0x5A) {
+    if ((data->x54 + arg0)->x4 > count && data->x8 > 0x5A) {
         if (Player_GetPlayerSlotType(sp38) != Gm_PKind_NA) {
             Player_SetFalls(sp38, 0);
             Player_SetSuicideCount(sp38, 0);
@@ -3224,9 +3254,8 @@ s32 fn_80181C80(s32 arg0)
         gm_8016EDDC(sp38, &sp10);
         Player_SetNametagSlotID(sp38, 0x78);
         un_802FD28C(sp38);
-        data->x0 += 1;
+        return data->x0++;
     }
-    PAD_STACK(4);
 }
 
 static inline s32 fn_80181E18_ComputeRemaining100(s32 count)

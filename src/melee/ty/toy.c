@@ -464,6 +464,7 @@ s32 Toy_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
                     goto add_obtained;
                 }
             } else {
+                if (arg2 == 0) {
             add_obtained:
                 if (gm_8016B498() != 0 || (u8) gm_801A4310() == 0xC) {
                     flags = default_flags;
@@ -477,6 +478,7 @@ s32 Toy_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
                     new_arr[new_count++] = trophy;
                 }
                 total++;
+                }
             }
         }
         trophy++;
@@ -2422,9 +2424,7 @@ HSD_GObj* Toy_803087F4(void* arg0)
     HSD_JObj* trophy_jobj;
     HSD_Joint* joint;
     s16 trophy_id;
-    enum_t unused_arg;
     char* model_name;
-    f32 v1, v2, v3, v4, v5;
     f32 scale, rot;
     UNUSED u8 pad[0x10];
     char buf[0x48];
@@ -2434,8 +2434,9 @@ HSD_GObj* Toy_803087F4(void* arg0)
     anim = &Toy_804A2AA8;
 
     if (entry->x14 == NULL) {
+        char* Toy_8030813C();
         trophy_id = entry->x10;
-        model_name = Toy_8030813C(trophy_id, unused_arg);
+        model_name = Toy_8030813C(trophy_id);
         if (entry->x14 != NULL) {
             lbArchive_80016EFC(entry->x14);
             entry->x14 = NULL;
@@ -2489,12 +2490,6 @@ HSD_GObj* Toy_803087F4(void* arg0)
         DevText_Erase(_Toy_sbss_804D6E9C);
         DevText_SetCursorXY(_Toy_sbss_804D6E9C, 0, 0);
 
-        v5 = Toy_803060BC((s32) anim->xC, 5);
-        v4 = Toy_803060BC((s32) anim->xC, 4);
-        v3 = Toy_803060BC((s32) anim->xC, 3);
-        v2 = Toy_803060BC((s32) anim->xC, 2);
-        v1 = Toy_803060BC((s32) anim->xC, 1);
-
         sprintf(buf,
                 "X   %3.2f\n"
                 "Y   %3.2f\n"
@@ -2503,7 +2498,12 @@ HSD_GObj* Toy_803087F4(void* arg0)
                 "SS  %3.2f\n"
                 "MD  %3.2f",
 
-                Toy_803060BC((s32) anim->xC, 0), v1, v2, v3, v4, v5);
+                Toy_803060BC((s32) anim->xC, 0),
+                Toy_803060BC((s32) anim->xC, 1),
+                Toy_803060BC((s32) anim->xC, 2),
+                Toy_803060BC((s32) anim->xC, 3),
+                Toy_803060BC((s32) anim->xC, 4),
+                Toy_803060BC((s32) anim->xC, 5));
         DevText_Print(_Toy_sbss_804D6E9C, buf);
     }
 
@@ -6119,15 +6119,6 @@ void Toy_OnFrame_80312018(void)
 
 void _Toy_80312050(HSD_GObj* gobj, int code)
 {
-    UNUSED u64 framepad;
-    Vec3 interest;
-    Vec3 sp98;
-    UNUSED u8 pad[12];
-    Mtx viewMtx;
-    Vec3 up;
-    Vec3 left;
-    Vec3 eye;
-    Vec3 scaled;
     HSD_CObj* cobj;
     TyViewData* data;
     u8 color_ff;
@@ -6137,6 +6128,15 @@ void _Toy_80312050(HSD_GObj* gobj, int code)
     cobj = HSD_CObjGetCurrent();
 
     if (data->x4 == 0) {
+        Vec3 interest;
+        Vec3 endpoint;
+        UNUSED u8 pad[16];
+        Mtx viewMtx;
+        Vec3 up;
+        Vec3 left;
+        Vec3 eye;
+        Vec3 scaled;
+
         HSD_CObjGetInterest(cobj, &interest);
         HSD_CObjGetLeftVector(cobj, &left);
         HSD_CObjGetUpVector(cobj, &up);
@@ -6152,37 +6152,37 @@ void _Toy_80312050(HSD_GObj* gobj, int code)
         GXBegin(GX_LINES, GX_VTXFMT0, 6);
 
         PSVECScale(&left, &scaled, -3.25f);
-        PSVECAdd(&scaled, &interest, &sp98);
+        PSVECAdd(&scaled, &interest, &endpoint);
 
         color_ff = 0xFF;
         color_00 = 0;
 
-        GXPosition3f32(sp98.x, sp98.y, sp98.z);
+        GXPosition3f32(endpoint.x, endpoint.y, endpoint.z);
         GXColor4u8(color_ff, color_00, color_00, color_ff);
 
         PSVECScale(&left, &scaled, +3.25f);
-        PSVECAdd(&scaled, &interest, &sp98);
-        GXPosition3f32(sp98.x, sp98.y, sp98.z);
+        PSVECAdd(&scaled, &interest, &endpoint);
+        GXPosition3f32(endpoint.x, endpoint.y, endpoint.z);
         GXColor4u8(color_ff, color_00, color_00, color_ff);
 
         PSVECScale(&up, &scaled, -3.25f);
-        PSVECAdd(&scaled, &interest, &sp98);
-        GXPosition3f32(sp98.x, sp98.y, sp98.z);
+        PSVECAdd(&scaled, &interest, &endpoint);
+        GXPosition3f32(endpoint.x, endpoint.y, endpoint.z);
         GXColor4u8(color_00, color_ff, color_00, color_ff);
 
         PSVECScale(&up, &scaled, +3.25f);
-        PSVECAdd(&scaled, &interest, &sp98);
-        GXPosition3f32(sp98.x, sp98.y, sp98.z);
+        PSVECAdd(&scaled, &interest, &endpoint);
+        GXPosition3f32(endpoint.x, endpoint.y, endpoint.z);
         GXColor4u8(color_00, color_ff, color_00, color_ff);
 
         PSVECScale(&eye, &scaled, -3.25f);
-        PSVECAdd(&scaled, &interest, &sp98);
-        GXPosition3f32(sp98.x, sp98.y, sp98.z);
+        PSVECAdd(&scaled, &interest, &endpoint);
+        GXPosition3f32(endpoint.x, endpoint.y, endpoint.z);
         GXColor4u8(color_00, color_00, color_ff, color_ff);
 
         PSVECScale(&eye, &scaled, +3.25f);
-        PSVECAdd(&scaled, &interest, &sp98);
-        GXPosition3f32(sp98.x, sp98.y, sp98.z);
+        PSVECAdd(&scaled, &interest, &endpoint);
+        GXPosition3f32(endpoint.x, endpoint.y, endpoint.z);
         GXColor4u8(color_00, color_00, color_ff, color_ff);
     }
 }

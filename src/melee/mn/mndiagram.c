@@ -798,15 +798,16 @@ static inline int mnDiagram_SumNameKOs(u8 field_index)
 
 void mnDiagram_8023FC28(void)
 {
-    u32 totals[0x78];
+    int j;
     int max_idx;
     u8* dst_iter;
     int i;
     mnDiagram_Assets* assets = (mnDiagram_Assets*) &mnDiagram_804A0750;
     u8* dst = assets->sorted_names;
     u32* tp;
+    u8* candidate;
     int n;
-    int j;
+    u32 totals[0x78];
     PAD_STACK(12);
 
     dst_iter = dst;
@@ -817,15 +818,17 @@ void mnDiagram_8023FC28(void)
     }
 
     for (i = 0; i < 0x78; i++) {
+        j = i;
+        candidate = &mnDiagram_804A076C.sorted_names[++j];
         max_idx = i;
-        for (j = i + 1; j < 0x78; j++) {
-            if ((GetNameText(mnDiagram_804A076C.sorted_names[j]) != NULL) &&
+        for (; j < 0x78; candidate++, j++) {
+            if ((GetNameText(*candidate) != NULL) &&
                 ((totals[mnDiagram_804A076C.sorted_names[max_idx]] <
-                  totals[mnDiagram_804A076C.sorted_names[j]]) ||
+                  totals[*candidate]) ||
                  ((GetNameText(
                        (0, mnDiagram_804A076C.sorted_names[max_idx])) ==
                    NULL) &&
-                  (GetNameText(mnDiagram_804A076C.sorted_names[j]) != NULL))))
+                  (GetNameText(*candidate) != NULL))))
             {
                 max_idx = j;
             }

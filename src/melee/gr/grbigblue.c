@@ -2425,8 +2425,6 @@ void grBigBlue_801EB004(Ground_GObj* gobj)
     }
 }
 
-/// @todo Currently partial match - needs register allocation and
-/// bitfield rlwimi fixes.
 void grBigBlue_801EB4AC(Ground_GObj* gobj)
 {
     typedef struct grBb_B4C4HalfBits {
@@ -2449,6 +2447,7 @@ void grBigBlue_801EB4AC(Ground_GObj* gobj)
     } grBb_B4C7Nibbles;
     u8* gp = (u8*) GET_GROUND(gobj);
     grBb_TrackEntry* entry;
+    HSD_JObj* new_jobj;
     HSD_JObj* jobj;
     s32 count = 0;
     Vec3 sp_pos;
@@ -2573,14 +2572,12 @@ void grBigBlue_801EB4AC(Ground_GObj* gobj)
     /* Store new lane index into gp+0xC6 */
     ((grBb_B4C6Lo7Bits*) (gp + 0xC6))->lane = random_lane;
 
-    HSD_ASSERT(979, jobj);
-
-    /* Save current jobj translate (struct copy generates lwz/stw) */
-    sp_pos = jobj->translate;
+    /* Save current jobj translate */
+    HSD_JObjGetTranslation2(jobj, &sp_pos);
 
     /* Get new lane jobj and unhide */
-    jobj = Ground_801C3FA4(gobj, entry->jobj_index);
-    HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
+    new_jobj = Ground_801C3FA4(gobj, entry->jobj_index);
+    HSD_JObjClearFlagsAll(new_jobj, JOBJ_HIDDEN);
 
     /* Add current lane deltas (re-extract lane each time, no CSE) */
     sp_pos.x += grBb_TrackEntries[(*(u32*) (gp + 0xC4) >> 15) & 0x7F].delta.x;
@@ -2588,7 +2585,7 @@ void grBigBlue_801EB4AC(Ground_GObj* gobj)
     sp_pos.z += grBb_TrackEntries[(*(u32*) (gp + 0xC4) >> 15) & 0x7F].delta.z;
 
     /* Set translate on new jobj (inline expands assert + dirty) */
-    HSD_JObjSetTranslate(jobj, &sp_pos);
+    HSD_JObjSetTranslate(new_jobj, &sp_pos);
 
     /* If lane 11: activate joints and reset bitfield */
     if (random_lane == 11) {
@@ -2692,8 +2689,8 @@ u32 lbl_803E3010[] = {
 
 void grBigBlue_801EBAF8(Ground_GObj* gobj)
 {
-    u8* gp = (u8*) GET_GROUND(gobj);
-    HSD_JObj* jobj = gobj->hsd_obj;
+    u8* gp;
+    HSD_JObj* jobj;
     u8 pad[8];
     Vec3 bone_pos;
     Vec3 vel;
@@ -2701,11 +2698,16 @@ void grBigBlue_801EBAF8(Ground_GObj* gobj)
     Vec3 center;
     Vec3 normal_out;
     Vec3 target;
+    f32 drift_speed;
     f32 target_y;
     f32 rot_z;
     f32 angular_vel;
     grBb_TrackEntry* entry;
     PAD_STACK(8);
+    PAD_STACK(4);
+
+    jobj = gobj->hsd_obj;
+    gp = gobj->user_data;
 
     center.z = 0.0F;
     center.x = 0.0F;
@@ -2788,7 +2790,7 @@ void grBigBlue_801EBAF8(Ground_GObj* gobj)
                                       120.0F * Ground_801C0498());
     }
 
-    if (target_y != grBb_804DB310 &&
+    if (grBb_804DB310 != target_y &&
         (!((grBb_ByteBits*) (gp + 0xC4))->b1 || target_y > center.y))
     {
         f32 max_steer = grBb_804D69C8->x70;
@@ -2815,14 +2817,15 @@ void grBigBlue_801EBAF8(Ground_GObj* gobj)
         if (!((grBb_ByteBits*) (gp + 0xC4))->b1) {
             lbVector_Diff((Vec3*) (gp + 0xD4), (Vec3*) (gp + 0xC8),
                           (Vec3*) (gp + 0xE0));
+            drift_speed = grBb_804D69C8->x7C * Ground_801C0498();
             {
-                f32 speed = grBb_804D69C8->x7C * Ground_801C0498();
-                *(f32*) (gp + 0xEC) = sinf(*(f32*) (gp + 0xF8)) * speed;
+                f32 s = sinf(*(f32*) (gp + 0xF8));
+                *(f32*) (gp + 0xEC) = s * drift_speed;
             }
             ((grBb_ByteBits*) (gp + 0xC4))->b1 = 1;
         }
 
-        if (target_y != grBb_804DB310) {
+        if (grBb_804DB310 != target_y) {
             *(f32*) (gp + 0xEC) =
                 -(3.0F * (grBb_804D69C8->x78 * Ground_801C0498()) -
                   *(f32*) (gp + 0xEC));
@@ -2918,8 +2921,8 @@ void grBigBlue_801EBAF8(Ground_GObj* gobj)
 
     {
         HSD_GObj* car = Ground_801C2BA4(2);
-        if (car != NULL) {
-            HSD_JObj* car_jobj = car->hsd_obj;
+        HSD_JObj* car_jobj;
+        if (car != NULL && (car_jobj = car->hsd_obj) != NULL) {
             HSD_JObjSetTranslate(car_jobj, &vel);
             HSD_JObjSetRotationZ(car_jobj, *(f32*) (gp + 0xF8));
         }
@@ -2927,8 +2930,8 @@ void grBigBlue_801EBAF8(Ground_GObj* gobj)
 
     {
         HSD_GObj* car = Ground_801C2BA4(1);
-        if (car != NULL) {
-            HSD_JObj* car_jobj = car->hsd_obj;
+        HSD_JObj* car_jobj;
+        if (car != NULL && (car_jobj = car->hsd_obj) != NULL) {
             HSD_JObjSetTranslate(car_jobj, &vel);
             HSD_JObjSetRotationZ(car_jobj, *(f32*) (gp + 0xF8));
         }

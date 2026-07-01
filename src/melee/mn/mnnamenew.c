@@ -522,37 +522,39 @@ bool NameContainsOnlySpaces(void)
 
 inline void CopyCurrentNameToNametag(struct NameTagData* nametag)
 {
-    u8* text;
-    u8* ptr;
-    u8 ch;
     s32 idx;
+    u8* text;
+    u8 ch;
+    s8 null_ch;
 
     text = (u8*) mnNameNew_CurrentNameText;
+    null_ch = (s8) mnNameNew_NullCharacter;
     idx = 0;
-    if ((s8) mnNameNew_NullCharacter != (s8) *text) {
+    if (null_ch != (s8) *text) {
+        u8* ptr;
         ptr = text;
-        while ((s8) mnNameNew_NullCharacter != (s8) (ch = *ptr)) {
+        while ((null_ch = (s8) mnNameNew_NullCharacter) != (s8) (ch = *ptr)) {
             nametag->namedata[idx] = (s8) ch;
             idx += 1;
             ptr += 1;
         }
-        if (ch != (s8) * (text += 3)) {
+        if (null_ch != (s8) * (text += 3)) {
             ptr = text;
-            while ((s8) mnNameNew_NullCharacter != (s8) (ch = *ptr)) {
+            while ((null_ch = (s8) mnNameNew_NullCharacter) != (s8) (ch = *ptr)) {
                 nametag->namedata[idx] = (s8) ch;
                 idx += 1;
                 ptr += 1;
             }
-            if (ch != (s8) * (text += 3)) {
+            if (null_ch != (s8) * (text += 3)) {
                 ptr = text;
-                while ((s8) mnNameNew_NullCharacter != (s8) (ch = *ptr)) {
+                while ((null_ch = (s8) mnNameNew_NullCharacter) != (s8) (ch = *ptr)) {
                     nametag->namedata[idx] = (s8) ch;
                     idx += 1;
                     ptr += 1;
                 }
-                if (ch != (s8) * (text += 3)) {
+                if (null_ch != (s8) * (text += 3)) {
                     ptr = text;
-                    while ((s8) mnNameNew_NullCharacter != (s8) (ch = *ptr)) {
+                    while ((null_ch = (s8) mnNameNew_NullCharacter) != (s8) (ch = *ptr)) {
                         nametag->namedata[idx] = (s8) ch;
                         idx += 1;
                         ptr += 1;
@@ -1337,10 +1339,10 @@ s32 mnNameNew_8023D130(GlyphVariantEntry* arg0, u8 arg1, u8 arg2, s32 arg3)
         HSD_JObjGetTranslationX(jobj18) - HSD_JObjGetTranslationX(jobj14);
     y_range =
         -(HSD_JObjGetTranslationY(jobj1C) - HSD_JObjGetTranslationY(jobj14));
-    table_upper =
-        AddCharacterToName_getGlyphs(layout->upper_glyphs, (u8) arg3);
     table_lower =
         AddCharacterToName_getGlyphs(layout->lower_glyphs, (u8) arg3);
+    table_upper =
+        AddCharacterToName_getGlyphs(layout->upper_glyphs, (u8) arg3);
     for (i = 0; i < (s32) arg1; i++) {
         if ((u8) (arg3 - 0x30) <= 1U) {
             if ((i % 2) != 0) {

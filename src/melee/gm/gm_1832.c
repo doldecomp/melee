@@ -1223,7 +1223,7 @@ static struct enterdata {
     int x0, x4;
 } lbl_804D6618;
 
-static struct {
+static struct ClassicIntroSceneData {
     int x0, x4;
     HSD_JObj* x8;
     HSD_JObj* xC;
@@ -1267,16 +1267,21 @@ void gm_80186E30_OnEnter(void* arg0_)
     gm_80168F88();
 }
 
+/// @todo .sdata2 order hack
+static const f32 classic_intro_sdata2_order[2] = { 10000.0f, 0.0f };
+static const f32 classic_intro_anim_start_frame[1] = { 0.0f };
+
 void fn_80186EFC(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
+    struct ClassicIntroSceneData* data = &lbl_804736B0;
     PAD_STACK(8);
-    HSD_JObjReqAnimAll(lbl_804736B0.xC, 0.0F);
+    HSD_JObjReqAnimAll(data->xC, classic_intro_anim_start_frame[0]);
     HSD_JObjAnimAll(jobj);
     if (lbl_804736B0.x4 < 0x8C) {
         lbl_804736B0.x4++;
     } else {
-        lbl_804736B0.x0 = 1;
+        data->x0 = 1;
     }
 }
 
@@ -1975,19 +1980,20 @@ int fn_801884F8(void)
 
 void fn_80188550(int arg0)
 {
-    int current = lbl_80473700.count;
+    TrainingModeState* state = &lbl_80473700;
+    int current = state->count;
     int j;
     int to_remove;
 
     if (arg0 != current) {
-        if (arg0 > lbl_80473700.count) {
+        if (arg0 > state->count) {
             PlayerInitData* player;
             int i;
             int skip;
             int remaining;
 
-            skip = lbl_80473700.count;
-            player = lbl_80473700.players;
+            skip = state->count;
+            player = state->players;
             remaining = arg0 - current;
             i = 0;
             j = 0;
@@ -2025,7 +2031,7 @@ void fn_80188550(int arg0)
                 }
             }
         }
-        lbl_80473700.count = arg0;
+        state->count = arg0;
     }
 }
 
@@ -2238,9 +2244,11 @@ void fn_80188EE8(HSD_GObj* gobj)
     TrainingModeState* state = &lbl_80473700;
     CssSubStruct* sub = &state->css;
     HSD_JObj* jobj;
+    HSD_JObj* cursor_jobj;
     HSD_Text* text;
     s32 val;
     s32* menu_values;
+    TrainingItemEntry* item_table;
 
     PAD_STACK(8);
 
@@ -2264,9 +2272,9 @@ void fn_80188EE8(HSD_GObj* gobj)
     HSD_JObjReqAnimAll(sub->jobjs[1], (f32) (u32) sub->anim_frames[1]);
     HSD_JObjAnimAll(sub->jobjs[1]);
 
-    jobj = sub->jobjs[1];
     sub->text->pos_x =
-        (12.0f * (9.798828f + HSD_JObjGetTranslationX(jobj))) + 50.0f;
+        (12.0f * (9.798828f + HSD_JObjGetTranslationX(jobj = sub->jobjs[1]))) +
+        50.0f;
     sub->text->pos_y = 150.0f;
 
     fn_80188738(sub->jobjs[9]);
@@ -2295,7 +2303,8 @@ void fn_80188EE8(HSD_GObj* gobj)
     if (lbLang_IsSettingUS() != 0 && val == 0x13) {
         HSD_SisLib_803A6368(text, 0x17);
     } else {
-        HSD_SisLib_803A6368(text, (s32) TrainingItemTable_GetTextId(val));
+        item_table = TrainingItemTable_Get();
+        HSD_SisLib_803A6368(text, (s32) item_table[val].text_id);
     }
 
     jobj = sub->jobjs[32];
@@ -2311,12 +2320,12 @@ void fn_80188EE8(HSD_GObj* gobj)
     HSD_JObjSetFlags(sub->jobjs[25], JOBJ_HIDDEN);
 
     val = state->css.menu_values[6];
-    jobj = sub->jobjs[26];
+    cursor_jobj = sub->jobjs[26];
     if (val == 2 && state->mode == 3) {
         val = 3;
     }
-    HSD_JObjReqAnimAll(jobj, (f32) val);
-    HSD_JObjAnimAll(jobj);
+    HSD_JObjReqAnimAll(cursor_jobj, (f32) val);
+    HSD_JObjAnimAll(cursor_jobj);
 }
 
 #pragma dont_inline off

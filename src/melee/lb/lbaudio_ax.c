@@ -2540,6 +2540,7 @@ s32 lbAudioAx_8002785C(void)
             HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
         }
     }
+    return 0;
 }
 
 void lbAudioAx_80027AB0(s32 arg0)

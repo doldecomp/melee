@@ -831,31 +831,39 @@ static const u32 lbl_804DE8E0 = 0xFFFFFFFF;
 // @TODO: Currently 89.78% match - needs minor control flow and register fixes
 void hsd_8039254C(void)
 {
-    s32 col_pos;
-    s32 first;
-    f32 line;
-    HSD_SList* event_node;
     s32 type;
     s32 char_count;
     s32 total_ticks;
+    s32 count;
     DispItem* bar_ptr;
+    DispItem* bar_draw_ptr;
+    f32 line;
     f32 bar_y;
     f32 bar_x;
     f32 t2;
     GXColor default_col;
-    GXColor bar_col;
-    GXColor bg_col3;
-    GXColor bg_col2;
+    GXColor bg_col0;
     GXColor bg_col1;
     GXColor txt_col;
-    GXColor bg_col0;
-    GXColor* p_bar_col = &bar_col;
-    GXColor* p_bg_col3 = &bg_col3;
-    GXColor* p_bg_col0 = &bg_col0;
-    GXColor* p_bg_col1 = &bg_col1;
-    GXColor* p_txt_col = &txt_col;
-    GXColor* p_bg_col2 = &bg_col2;
+    GXColor bg_col2;
+    GXColor bg_col3;
+    GXColor bar_col;
+    GXColor* p_bg_col0;
+    GXColor* p_bg_col1;
+    GXColor* p_txt_col;
+    GXColor* p_bg_col2;
+    GXColor* p_bg_col3;
+    GXColor* p_bar_col;
+    s32 col_pos;
+    s32 first;
+    HSD_SList* event_node;
 
+    p_bar_col = &bar_col;
+    p_bg_col3 = &bg_col3;
+    p_bg_col2 = &bg_col2;
+    p_bg_col1 = &bg_col1;
+    p_txt_col = &txt_col;
+    p_bg_col0 = &bg_col0;
     col_pos = 60;
     first = 1;
     line = 1.0F;
@@ -939,10 +947,9 @@ void hsd_8039254C(void)
                 bar_ptr = item;
                 total_ticks = 0;
                 {
-                    s32 count;
                     while ((count = bar_ptr->content.bars[0].count) > 0) {
                         total_ticks += count;
-                        bar_ptr = (DispItem*) &bar_ptr->content.bars[1];
+                        bar_ptr = (DispItem*) ((DispBar*) bar_ptr + 1);
                     }
                 }
                 if (total_ticks > 0) {
@@ -958,8 +965,7 @@ void hsd_8039254C(void)
                     bar_y = (10.0F * line) + 2.0F;
                     bar_x = 0.0F;
                     {
-                        s32 count;
-                        DispItem* bar_draw_ptr = item;
+                        bar_draw_ptr = item;
                         while ((count = bar_draw_ptr->content.bars[0].count) >
                                0) {
                             f32 prev_x;
@@ -973,7 +979,7 @@ void hsd_8039254C(void)
                                          (f32) bar_draw_ptr->content.bars[0]
                                              .count);
                             bar_draw_ptr =
-                                (DispItem*) &bar_draw_ptr->content.bars[1];
+                                (DispItem*) ((DispBar*) bar_draw_ptr + 1);
                         }
                     }
                     col_pos = 60;
@@ -1599,8 +1605,6 @@ void hsd_80393840(void) {}
 void hsd_80393844(void)
 {
     ParticleLogEntry* base = hsd_804CEB40;
-    u8* resp_status = (u8*) (base + 0x100) + 0x44;
-    u8* req_status = (u8*) (base + 0x100) + 0x84;
     s32 type;
     u32 flags;
     s32 value;
@@ -1643,7 +1647,7 @@ void hsd_80393844(void)
             hsd_804D78A8 = value & 0x7F;
             if (MCCRead(0xF, hsd_804D78A8 << 5, (u8*) &base[0x10A].x8, 0x20,
                         0) != 0 &&
-                !((*req_status >> 7) & 1))
+                !((MCCPacket*) &base[0x10A].x8)->x4_b7)
             {
                 u8 cmd;
                 memset((u8*) &base[0x105].x4, 0, 0x20);
@@ -2057,38 +2061,47 @@ s32 hsd_803941E8(void* xfb_out_ptr, void* xfb_cur_ptr)
 
 extern u8 lbl_804088B8[];
 
-// @TODO: Currently 99.61% match - .bss.0 relocation symbol instead of
-/// hsd_804CF810
 void hsd_80394314(void)
 {
-    memset(&hsd_804CF810, 0, 0xD8);
-    hsd_803941E8(&hsd_804CF810.x24, &hsd_804CF810.x2C);
+    void* sp = &hsd_804CF810;
+
+    memset(sp, 0, 0xD8);
+    hsd_803941E8(&((struct ParticleScreenState*) sp)->x24,
+                 &((struct ParticleScreenState*) sp)->x2C);
 
     {
         s32 mode;
-        if (hsd_804CF810.x28 != 0) {
+        if (((struct ParticleScreenState*) sp)->x28 != 0) {
             mode = 2;
         } else {
             mode = 1;
         }
-        hsd_804CF810.x38 = mode;
+        ((struct ParticleScreenState*) sp)->x38 = mode;
     }
 
-    hsd_804CF810.x34 = 0;
-    hsd_804CF810.x30 = &HSD_VIData;
-    hsd_804CF810.x3C = ((u16*) hsd_804CF810.x30)[2];
-    hsd_804CF810.x40 = ((u16*) hsd_804CF810.x30)[4];
-    hsd_804CF810.x44 = (((u16) hsd_804CF810.x3C + 15) * 2) & 0x1FFE0;
-    hsd_804CF810.x48 = hsd_804CF810.x44 * hsd_804CF810.x40;
-    hsd_804CF810.x4 = 0;
-    hsd_804CF810.x8 = hsd_804CF810.x40;
-    hsd_804CF810.x18 = 0;
-    hsd_804CF810.x14 = 0;
-    hsd_804CF810.x20 = (u32) (hsd_804CF810.x3C - 0x28) / 11;
-    hsd_804CF810.x1C = (u32) (hsd_804CF810.x40 - 0x50) / 14;
-    hsd_804CF810.x4C = lbl_804088B8;
-    hsd_804CF810.x50 = 0;
-    hsd_804CF810.xC4 = 0;
+    ((struct ParticleScreenState*) sp)->x34 = 0;
+    ((struct ParticleScreenState*) sp)->x30 = &HSD_VIData;
+    ((struct ParticleScreenState*) sp)->x3C =
+        ((u16*) ((struct ParticleScreenState*) sp)->x30)[2];
+    ((struct ParticleScreenState*) sp)->x40 =
+        ((u16*) ((struct ParticleScreenState*) sp)->x30)[4];
+    ((struct ParticleScreenState*) sp)->x44 =
+        (((u16) ((struct ParticleScreenState*) sp)->x3C + 15) * 2) & 0x1FFE0;
+    ((struct ParticleScreenState*) sp)->x48 =
+        ((struct ParticleScreenState*) sp)->x44 *
+        ((struct ParticleScreenState*) sp)->x40;
+    ((struct ParticleScreenState*) sp)->x4 = 0;
+    ((struct ParticleScreenState*) sp)->x8 =
+        ((struct ParticleScreenState*) sp)->x40;
+    ((struct ParticleScreenState*) sp)->x18 = 0;
+    ((struct ParticleScreenState*) sp)->x14 = 0;
+    ((struct ParticleScreenState*) sp)->x20 =
+        (u32) (((struct ParticleScreenState*) sp)->x3C - 0x28) / 11;
+    ((struct ParticleScreenState*) sp)->x1C =
+        (u32) (((struct ParticleScreenState*) sp)->x40 - 0x50) / 14;
+    ((struct ParticleScreenState*) sp)->x4C = lbl_804088B8;
+    ((struct ParticleScreenState*) sp)->x50 = 0;
+    ((struct ParticleScreenState*) sp)->xC4 = 0;
 }
 
 // @TODO: Currently 94.99% match - obj file has extra addi for lis/addi
@@ -3023,6 +3036,21 @@ static inline void ps_remove_node(struct ParticleScreenState* sp, void* node)
     sp->x0_b5 = 1;
 }
 
+static inline void ps_clear_nodes(struct ParticleScreenState* sp)
+{
+    void** head_ptr;
+    ExcptNode* cur;
+
+    cur = *(head_ptr = &sp->xD0);
+    while (cur != NULL) {
+        ExcptNode* next = cur->next;
+        cur->next = NULL;
+        cur = next;
+    }
+    *head_ptr = NULL;
+    sp->x0_b5 = 1;
+}
+
 // @TODO: Currently 99.38% match - remaining register allocation differences
 s32 hsd_80395D88(void* data)
 {
@@ -3099,19 +3127,9 @@ s32 hsd_80395D88(void* data)
         case 7:
             hsd_80394E8C(lbl_8040BEC4);
             return 1;
-        case 8: {
-            void** head_ptr;
-            ExcptNode* cur;
-            cur = *(head_ptr = &sp->xD0);
-            while (cur != NULL) {
-                ExcptNode* next = cur->next;
-                cur->next = NULL;
-                cur = next;
-            }
-            *head_ptr = NULL;
-            sp->x0_b5 = 1;
+        case 8:
+            ps_clear_nodes(sp);
             return 1;
-        }
         default:
             break;
         }
@@ -4158,19 +4176,19 @@ void* fn_80397814(void* arg)
 
     /* Initial display setup */
     {
+        s32* x3C_ptr;
+        s32* x20_ptr;
+        s32* x14_ptr;
+        s32* x18_ptr;
+        s32* c8_ptr;
+        s32* cc_ptr;
         s32* fb_ptr;
         s32* fb2_ptr;
         u32 retrace2;
         u32 next_retrace2;
         s32* col_ptr;
-        s32* x18_ptr;
-        s32* x14_ptr;
-        s32* x20_ptr;
         s32* nrows_ptr;
         s32* fb_array;
-        s32* x3C_ptr;
-        s32* c8_ptr;
-        s32* cc_ptr;
         s32* size_ptr;
         void* lbl_ptr;
         s32 fb_idx;
