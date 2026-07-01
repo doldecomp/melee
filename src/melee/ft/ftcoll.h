@@ -44,7 +44,7 @@
 /* 0784B4 */ void ftColl_800784B4(Fighter*, HitCapsule*, HitCapsule*);
 /* 078538 */ void ftColl_80078538(Fighter_GObj*, Vec3*, u32, float, float);
 /* 07861C */ UNK_RET ftColl_8007861C(Fighter_GObj*, Fighter_GObj* gobj, int,
-                                     int, int, UNK_T, u16, UNK_T, int);
+                                     int, int, UNK_T, int, UNK_T, int);
 /* 078710 */ void ftColl_80078710(Fighter_GObj*, Fighter_GObj*, UNK_T arg2);
 /* 078754 */ void ftColl_80078754(Fighter_GObj*, Fighter_GObj*, bool);
 /* 0787B4 */ void ftColl_800787B4(Item_GObj*, Fighter_GObj*, int);

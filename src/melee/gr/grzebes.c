@@ -443,7 +443,6 @@ void grZebes_801D881C(HSD_GObj* gobj)
             gp->gv.zebes5.xF6 = (s16) (gp->gv.zebes5.xF6 + 1);
             divisor = grZe_804D6990->x10;
             eq_counter = gp->gv.zebes5.xF6;
-            (void) eq_counter;
             spawn_phase = eq_counter / divisor;
             if (eq_counter % divisor == 0) {
                 s32 mirror = 6 - spawn_phase;
@@ -452,8 +451,7 @@ void grZebes_801D881C(HSD_GObj* gobj)
                     f32 scale_min = grZe_804D6990->x58;
                     grZe_BubbleSpawnPos* pos =
                         (grZe_BubbleSpawnPos*) grZe_8049F140;
-                    grZebes_801DAE70(spawn_phase, 4,
-                                     pos[spawn_phase].x14_x,
+                    grZebes_801DAE70(spawn_phase, 4, pos[spawn_phase].x14_x,
                                      pos[spawn_phase].x18_y,
                                      (grZe_804D6990->x5C - scale_min) * rand +
                                          scale_min);

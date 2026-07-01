@@ -219,28 +219,27 @@ s32 gm_801BAC9C(GameScene* arg0, s32 arg1)
     StartMeleeData* data = gm_801A427C(arg0);
     s32 i;
     s32 found;
-    s32 k;
     s32 count = 0;
+    s32 k;
     struct gm_event_char_list* src =
         (struct gm_event_char_list*) (*gm_804D6900)[ev->unk_535]->x4;
     PAD_STACK(8);
 
     for (i = 0; i < 0x21; i++) {
-        u8 c = src->c_kind[i];
+        u8* ptr = &src->c_kind[i];
+        u8 c = *ptr;
         if ((s32) c == 0x21) {
             break;
         }
-        {
-            found = 0;
-            for (k = 0; k < arg1; k++) {
-                if (data->players[k].c_kind == (s8) c) {
-                    found++;
-                }
+        found = 0;
+        for (k = 0; k < arg1; k++) {
+            if (data->players[k].c_kind == (s8) *ptr) {
+                found++;
             }
-            if (found == 0) {
-                chars[count] = c;
-                count++;
-            }
+        }
+        if (found == 0) {
+            chars[count] = c;
+            count++;
         }
     }
     return chars[HSD_Randi(count)];
@@ -336,21 +335,18 @@ void gm_801BAD70(GameScene* arg0)
     StartMeleeData* md = gm_801A427C(arg0);
     u8* r3b = (u8*) md;
     u8 level = ev->unk_535;
-    gm_803DF94C_t** event_info = gm_803DF94C;
-    struct gm_804D6900_t** levels;
-    struct gm_804D6900_t** lvlpp;
-    struct gm_evlevel* level_info;
     s32 player_idx;
     s32 player_init_off;
-    s32 spawn_off;
-    PAD_STACK(0x20);
+    struct gm_804D6900_t** levels;
+    gm_803DF94C_t** event_info = gm_803DF94C;
+    struct gm_804D6900_t** lvlpp;
+    PAD_STACK(0x18);
 
     lbArchive_LoadSymbols("GmEvent.dat", &gm_804D6900,
                           "sqEventInitDataLevelTbl", 0);
     levels = gm_804D6900[0];
     gm_80167A64(&md->rules);
     lvlpp = &levels[level];
-    level_info = (struct gm_evlevel*) *lvlpp;
     md->rules.x0_0 = (*lvlpp)->x8->x0_0;
     md->rules.x0_3 = (*lvlpp)->x8->x0_3;
     md->rules.x0_6 = (*lvlpp)->x8->x0_6;
@@ -410,11 +406,11 @@ void gm_801BAD70(GameScene* arg0)
     if (((struct gm_evinit*) (*lvlpp)->x8)->unk24 != 1.0f) {
         ev->x1C = ((struct gm_evinit*) (*lvlpp)->x8)->unk24;
     }
-    if (level_info->kind == 2) {
+    if (((struct gm_evlevel*) *lvlpp)->kind == 2) {
         struct gm_evstage_list* stage_list;
         u16 stage;
         ev->xB_4 = 1;
-        stage_list = level_info->x10;
+        stage_list = ((struct gm_evlevel*) *lvlpp)->x10;
         stage = stage_list->stage[ev->x20];
         md->rules.xE = stage;
         ev->x48 = (InternalStageId) stage;
@@ -429,22 +425,22 @@ void gm_801BAD70(GameScene* arg0)
     player_idx = 0;
     player_init_off = 0;
     r3b[0x85] = 3;
-    spawn_off = 0;
     r3b[0xA9] = 3;
     r3b[0xCD] = 3;
     r3b[0xF1] = 3;
     r3b[0x115] = 3;
 
-    while (player_idx < (s32) ((level_info->flags >> 5) & 7)) {
-        gm_801BAB40_src* init = level_info->player_init[player_idx];
-        while (init == NULL) {
+    while (player_idx <
+           (s32) ((((struct gm_evlevel*) *lvlpp)->flags >> 5) & 7))
+    {
+        while (((struct gm_evlevel*) *lvlpp)->player_init[player_idx] == NULL)
+        {
             player_idx += 1;
             player_init_off += 0x24;
-            spawn_off += 4;
-            init = level_info->player_init[player_idx];
         }
-        gm_801BAB40((PlayerInitData*) (r3b + player_init_off + 0x60),
-                    (int) init);
+        gm_801BAB40(
+            (PlayerInitData*) (r3b + player_init_off + 0x60),
+            (int) ((struct gm_evlevel*) *lvlpp)->player_init[player_idx]);
         if (player_idx == 0) {
             gm_801B05F4((PlayerInitData*) (r3b + 0x60), ev->x6);
             ev->x7 = r3b[0x69];
@@ -466,11 +462,16 @@ void gm_801BAD70(GameScene* arg0)
             r3b[0x6C] = (r3b[0x6C] & ~0x80) |
                         ((gm_801677F8(ev->x6, r3b[0x6A]) << 7) & 0x80);
         } else {
-            if (init->team == 0) {
+            if (((struct gm_evlevel*) *lvlpp)->player_init[player_idx]->team ==
+                0)
+            {
                 r3b[player_init_off + 0x69] = r3b[0x69];
                 ((PlayerInitData*) (r3b + player_init_off + 0x60))->xD_b1 = 1;
             }
-            if ((s8) init->c_kind == 0x21) {
+            if ((s8) ((struct gm_evlevel*) *lvlpp)
+                    ->player_init[player_idx]
+                    ->c_kind == 0x21)
+            {
                 s8* t = &ev->x8 + player_idx - 1;
                 s8 v = *t;
                 if (v == -1) {
@@ -512,16 +513,15 @@ void gm_801BAD70(GameScene* arg0)
         }
         player_idx += 1;
         player_init_off += 0x24;
-        spawn_off += 4;
     }
 
-    if (level_info->kind == 2) {
+    if (((struct gm_evlevel*) *lvlpp)->kind == 2) {
         if (ev->x20 > 0) {
             r3b[0x62] = (s8) ev->x24;
-            *(s16*) (r3b + 0x70) = (s16) ev->x28;
+            *(u16*) (r3b + 0x70) = ev->x28;
             ((PlayerInitData*) (r3b + 0x60))->xC_b1 = 0;
             {
-                u8 c = ev->x38;
+                s8 c = ev->x38;
                 if (c != 0x21) {
                     r3b[0x60] = c;
                     ev->x0 = c;
@@ -530,7 +530,8 @@ void gm_801BAD70(GameScene* arg0)
             }
         }
         {
-            struct gm_evspawn_table* spawn_table = level_info->x10;
+            struct gm_evspawn_table* spawn_table =
+                ((struct gm_evlevel*) *lvlpp)->x10;
             gm_801BAB40((PlayerInitData*) (r3b + 0x84),
                         (int) spawn_table->entries[ev->x20]);
         }
@@ -580,43 +581,48 @@ void gm_801BAD70(GameScene* arg0)
         md->players[1].xD_b2 = 1;
         md->players[2].xD_b2 = 1;
     }
-    if (level_info->kind == 1) {
-        struct gm_evbonus* bonus = level_info->xC;
-        int var_r9;
+    if (((struct gm_evlevel*) *lvlpp)->kind == 1) {
+        int x5_flag;
         s8 k;
         s32 sp8;
         ev->xB_3 = 1;
-        if (bonus->x5 == 1) {
-            var_r9 = 1;
-            if ((s8) ev->x0 == bonus->c_kind) {
-                u8 c;
-                if ((u8) ev->x1 == (c = bonus->color)) {
-                    if (c <= 2) {
-                        c = c + 1;
-                    } else {
-                        c = 0;
+        {
+            struct gm_evbonus* bonus = ((struct gm_evlevel*) *lvlpp)->xC;
+            if (bonus->x5 == 1) {
+                x5_flag = 1;
+                if ((s8) ev->x0 == bonus->c_kind) {
+                    u8 c;
+                    if ((u8) ev->x1 == (c = bonus->color)) {
+                        if (c <= 2) {
+                            c = c + 1;
+                        } else {
+                            c = 0;
+                        }
+                        ev->x50[1] = c;
                     }
-                    ev->x50[1] = c;
                 }
+            } else {
+                x5_flag = 0;
             }
-        } else {
-            var_r9 = 0;
         }
-        k = bonus->c_kind;
-        sp8 = (k == 4) ? bonus->x17 : 0;
-        gm_8016A22C(k, 0x21, 0x21, ev->x50[1], 0, 0, var_r9, 0, sp8, ev->x0,
-                    ev->x1, bonus->x1, bonus->x2, bonus->x3, bonus->x4, 0, 1,
-                    bonus->x8, bonus->xC);
-        gm_8016A414(bonus->x10);
+        {
+            struct gm_evbonus* bonus = ((struct gm_evlevel*) *lvlpp)->xC;
+            k = bonus->c_kind;
+            sp8 = (k == 4) ? bonus->x17 : 0;
+            gm_8016A22C(k, 0x21, 0x21, ev->x50[1], 0, 0, x5_flag, 0, sp8,
+                        ev->x0, ev->x1, bonus->x1, bonus->x2, bonus->x3,
+                        bonus->x4, 0, 1, bonus->x8, bonus->xC);
+        }
+        gm_8016A414(((struct gm_evlevel*) *lvlpp)->xC->x10);
         gm_8016A21C(&md->rules);
-        if ((bonus->flags >> 7) & 1) {
+        if ((((struct gm_evlevel*) *lvlpp)->xC->flags >> 7) & 1) {
             gm_8016A434();
         }
         if (event_info[level]->x4 != NULL) {
             gm_8016A404((s32) event_info[level]->x4);
         }
-        if (bonus->x15 != 0) {
-            gm_8016A424((s8) bonus->x15);
+        if (((struct gm_evlevel*) *lvlpp)->xC->x15 != 0) {
+            gm_8016A424((s8) ((struct gm_evlevel*) *lvlpp)->xC->x15);
         }
     }
     {
@@ -659,7 +665,7 @@ void gm_801BB758(GameScene* arg0)
     MatchExitInfo* exit = gm_801A4284(arg0);
     u8 stage = ev->unk_535;
     u8 b;
-    u8 kind;
+    CharacterKind kind;
     s32 t;
 
     gm_8016A164();
@@ -744,6 +750,7 @@ void gm_801BB758(GameScene* arg0)
     if (ev->xB_1) {
         int sid = gm_8017335C();
         if ((u16) sid != 0x148) {
+            void gm_80164504();
             gm_80164504(sid);
         }
     }
@@ -752,7 +759,8 @@ void gm_801BB758(GameScene* arg0)
     }
     gm_80173EEC();
     gm_80172898(0x10);
-    if (kind != 0x21) {
+    if ((u8) kind != 0x21) {
+        void gm_801736E8();
         gm_801736E8(ev->x0, ev->x1, ev->x6, ev->x4, kind, 1);
         gm_801A42F8(0x14);
         return;
@@ -813,17 +821,13 @@ void gm_801BBA60_OnInit(void)
 s32 gm_801BBB64(void)
 {
     struct gm_804D6900_t** pp;
-    struct EventData* ev;
-    struct gm_804D6900_t** tbl;
-    s32 idx;
+    struct EventData* ev = &gmMainLib_804D3EE0->unk_530;
+    struct gm_804D6900_t** tbl = gm_804D6900[0];
+    u8 idx = gmMainLib_804D3EE0->unk_530.unk_535;
     s8* player_init;
     void* event_entry;
     struct gm_804D6900_x4_t* x4;
-    s32 result;
 
-    ev = &gmMainLib_804D3EE0->unk_530;
-    tbl = gm_804D6900[0];
-    idx = gmMainLib_804D3EE0->unk_530.unk_535;
     if (*tbl[idx]->x14 != 0x21) {
         ev->x44 = 0;
     } else {
@@ -870,7 +874,7 @@ s32 gm_801BBB64(void)
         } else {
             ev->x50[1] = 0xFF;
         }
-        if (((u8*) (*pp)->xC)[0x17] == 1) {
+        if ((s32) ((struct gm_evbonus*) (*pp)->xC)->x17 == 1) {
             ev->x45 = 1;
         } else {
             ev->x45 = 0;
@@ -879,7 +883,6 @@ s32 gm_801BBB64(void)
         ev->x45 = 0;
     }
 
-    result = idx;
     switch (idx) {
     case 9:
     case 19:
@@ -925,18 +928,16 @@ s32 gm_801BBB64(void)
             ev->x50[2] = ((u8*) event_entry)[3];
             return (s32) event_entry;
         }
-        return result;
+        break;
     case 43:
         x4 = (*pp)->x4;
         event_entry = (void*) x4->x4;
         ev->x4C[2] = *(s8*) event_entry;
         event_entry = (void*) x4->x4;
         ev->x50[2] = ((u8*) event_entry)[3];
-        result = (s32) event_entry;
-        /* fallthrough */
-    default:
-        return result;
+        return (s32) event_entry;
     }
+    return idx;
 }
 
 void gm_801BBEA8_OnLoad(void)
@@ -991,6 +992,22 @@ void fn_801BBFE8(void)
     gm_801BC00C();
 }
 
+static inline void gm_801BC00C_inline(gm_801BAB40_src* event_entry)
+{
+    u8 ckind = event_entry->c_kind;
+    u8 costume = event_entry->color;
+    struct EventData* ev2 = &gmMainLib_804D3EE0->unk_530;
+
+    if ((s8) ev2->x0 == (s8) ckind && (u8) ev2->x1 == costume) {
+        if (costume <= 2) {
+            costume += 1;
+        } else {
+            costume = 0;
+        }
+    }
+    gm_8016A9E8(ckind, (s8) costume);
+}
+
 s32 gm_801BC00C(void)
 {
     struct gm_804D6900_t** event_levels;
@@ -1004,7 +1021,7 @@ s32 gm_801BC00C(void)
     s32 i;
     s32 entry_offset;
     s8 chr;
-    PAD_STACK(0x40);
+    PAD_STACK(0x38);
 
     gmMainLib_804D3EE0->unk_530.xB_1 = 0;
     ev->x10 = 0;
@@ -1086,96 +1103,23 @@ s32 gm_801BC00C(void)
         {
             event_entry =
                 *(void**) ((u8*) event_levels[idx]->x10 + entry_offset + 0x10);
-            ckind = *(u8*) event_entry;
-            (void) ckind;
-            costume = *((u8*) event_entry + 3);
-            {
-                struct EventData* ev2 = &gmMainLib_804D3EE0->unk_530;
-                if ((s8) ev2->x0 == (s8) ckind && (u8) ev2->x1 == costume) {
-                    if (costume <= 2) {
-                        costume += 1;
-                    } else {
-                        costume = 0;
-                    }
-                }
-            }
-            gm_8016A9E8(ckind, (s8) costume);
+            gm_801BC00C_inline(event_entry);
         }
         break;
     case 35:
         if (ev->x20 == 0) {
             event_entry = ((void**) ((u8*) event_levels[idx]->x10 + 0x10))[0];
-            ckind = *(u8*) event_entry;
-            costume = *((u8*) event_entry + 3);
-            {
-                struct EventData* ev2 = &gmMainLib_804D3EE0->unk_530;
-                if ((s8) ev2->x0 == (s8) ckind && (u8) ev2->x1 == costume) {
-                    if (costume <= 2) {
-                        costume += 1;
-                    } else {
-                        costume = 0;
-                    }
-                }
-            }
-            gm_8016A9E8(ckind, (s8) costume);
+            gm_801BC00C_inline(event_entry);
             event_entry = ((void**) ((u8*) event_levels[idx]->x10 + 0x10))[2];
-            ckind = *(u8*) event_entry;
-            costume = *((u8*) event_entry + 3);
-            {
-                struct EventData* ev2 = &gmMainLib_804D3EE0->unk_530;
-                if ((s8) ev2->x0 == (s8) ckind && (u8) ev2->x1 == costume) {
-                    if (costume <= 2) {
-                        costume += 1;
-                    } else {
-                        costume = 0;
-                    }
-                }
-            }
-            gm_8016A9E8(ckind, (s8) costume);
+            gm_801BC00C_inline(event_entry);
             event_entry = ((void**) ((u8*) event_levels[idx]->x10 + 0x10))[3];
-            ckind = *(u8*) event_entry;
-            costume = *((u8*) event_entry + 3);
-            {
-                struct EventData* ev2 = &gmMainLib_804D3EE0->unk_530;
-                if ((s8) ev2->x0 == (s8) ckind && (u8) ev2->x1 == costume) {
-                    if (costume <= 2) {
-                        costume += 1;
-                    } else {
-                        costume = 0;
-                    }
-                }
-            }
-            gm_8016A9E8(ckind, (s8) costume);
+            gm_801BC00C_inline(event_entry);
         }
         if (ev->x20 <= 1) {
             event_entry = ((void**) ((u8*) event_levels[idx]->x10 + 0x10))[1];
-            ckind = *(u8*) event_entry;
-            costume = *((u8*) event_entry + 3);
-            {
-                struct EventData* ev2 = &gmMainLib_804D3EE0->unk_530;
-                if ((s8) ev2->x0 == (s8) ckind && (u8) ev2->x1 == costume) {
-                    if (costume <= 2) {
-                        costume += 1;
-                    } else {
-                        costume = 0;
-                    }
-                }
-            }
-            gm_8016A9E8(ckind, (s8) costume);
+            gm_801BC00C_inline(event_entry);
             event_entry = ((void**) ((u8*) event_levels[idx]->x10 + 0x10))[4];
-            ckind = *(u8*) event_entry;
-            costume = *((u8*) event_entry + 3);
-            {
-                struct EventData* ev2 = &gmMainLib_804D3EE0->unk_530;
-                if ((s8) ev2->x0 == (s8) ckind && (u8) ev2->x1 == costume) {
-                    if (costume <= 2) {
-                        costume += 1;
-                    } else {
-                        costume = 0;
-                    }
-                }
-            }
-            gm_8016A9E8(ckind, (s8) costume);
+            gm_801BC00C_inline(event_entry);
         }
         break;
     }
@@ -3357,8 +3301,6 @@ void gm_801BF128(void)
     s32 b;
     s32 pick;
     s32 dup;
-    s32 prev;
-    u8 cur_id;
     PAD_STACK(0x38);
 
     count = 0;
@@ -3403,12 +3345,16 @@ void gm_801BF128(void)
         ((u8*) gmMainLib_804D3EE0)[j + 2] += 1;
     } while (c < 4);
     gm_801BF6C8(HSD_Randi(4));
-    do {
-        gm_801BF6E8(HSD_Randi(4));
-        prev = gm_801BF6F8();
-    } while (gm_801BF6D8() == prev);
+    {
+        s32 prev;
+        do {
+            gm_801BF6E8(HSD_Randi(4));
+            prev = gm_801BF6F8();
+        } while (gm_801BF6D8() == prev);
+    }
 
-    c = (count = 0);
+    count = 0;
+    c = 0;
     do {
         if (gm_80164430(gm_801641CC(c)) != 0) {
             stage_pool[count] = c;
@@ -3429,10 +3375,13 @@ void gm_801BF128(void)
             }
         }
     }
-    do {
-        pick = stage_pool[HSD_Randi(8)];
-        cur_id = gm_801BF694();
-    } while ((s32) gm_801641CC((u8) pick) == (s32) cur_id);
+    {
+        u32 cur_id;
+        do {
+            pick = stage_pool[HSD_Randi(8)];
+            cur_id = gm_801BF694();
+        } while ((s32) gm_801641CC((u8) pick) == (s32) cur_id);
+    }
     gm_801BF684(gm_801641CC((u8) pick));
     ((u8*) gmMainLib_804D3EE0)[pick + 0x1C] += 1;
     gm_801BF6A8(HSD_Randi(4));

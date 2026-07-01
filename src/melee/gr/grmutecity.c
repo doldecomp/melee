@@ -1082,7 +1082,6 @@ void grMuteCity_801F106C(s32 i)
 
 void grMuteCity_801F1328(void)
 {
-    s32 offset;
     s32* arr = grMc_8049F440;
     int i;
     int j;

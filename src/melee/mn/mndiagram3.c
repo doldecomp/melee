@@ -80,7 +80,6 @@ void mnDiagram3_80245BA4(HSD_GObj* gobj)
             stat_table = (u16*) (base + ((int) stat_type << 1));
             icon_x_offset = mnDiagram3_804DC010;
             row_spacing = row1_y;
-            (void) row_spacing;
             row_spacing = row_spacing - row0_y;
             max_distance = 0x5F5E0FF;
             max_percentage = 0x98967F;
@@ -664,7 +663,10 @@ void fn_802461BC(HSD_GObj* gobj)
                 data->row_labels[i] = t;
                 i_u8 = i;
                 limit = (data->is_name_mode != 0) ? 0x18 : 0x15;
-                v = base_idx_u8 + i_u8;
+                {
+                    int tmp = base_idx_u8 + i_u8;
+                    v = tmp;
+                }
                 if (v >= limit) {
                     v = v - limit;
                 } else {
@@ -742,8 +744,10 @@ void fn_802461BC(HSD_GObj* gobj)
                 data->row_labels[i] = t;
                 i_u8 = i;
                 limit = (data->is_name_mode != 0) ? 0x18 : 0x15;
-                v = base_idx_u8 + i_u8;
-                (void) v;
+                {
+                    int tmp = base_idx_u8 + i_u8;
+                    v = tmp;
+                }
                 if (v >= limit) {
                     v = v - limit;
                 } else {
@@ -821,8 +825,10 @@ void fn_802461BC(HSD_GObj* gobj)
                 data->row_labels[i] = t;
                 i_u8 = i;
                 limit = (data->is_name_mode != 0) ? 0x18 : 0x15;
-                v = base_idx_u8;
-                v += i_u8;
+                {
+                    int tmp = base_idx_u8 + i_u8;
+                    v = tmp;
+                }
                 if (v >= limit) {
                     v = v - limit;
                 } else {
