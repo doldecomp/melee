@@ -16,6 +16,16 @@
 
 #include <baselib/gobjproc.h>
 
+static void sdata2_order(void)
+{
+    (void) 0.00390599994f;
+    (void) 4503599627370496.0;
+    (void) 4503601774854144.0;
+    (void) 1.0f;
+    (void) 0.0f;
+    (void) 3.40282347e+38f;
+}
+
 ItCmd it_803F22A8[16] = {
     it_80278F2C, it_802790C0, it_80279544, it_802795EC,
     it_80279680, it_802796C4, it_8027978C, it_802796FC,
@@ -29,21 +39,6 @@ typedef struct itAnimlistCmdUnk {
     u16 x0_b14 : 2;
     u16 x2;
 } itAnimlistCmdUnk;
-
-static f32 sdata2_ordering(f32 arg)
-{
-    volatile f32 data_0 = arg;
-    volatile f64 data_1 = arg;
-
-    data_0 += 0.003906f;
-    data_1 += 4503599627370496.0;
-    data_1 += 4503601774854144.0;
-    data_0 += 1.0f;
-    if (data_0 > 0.0f) {
-        data_0 += F32_MAX;
-    }
-    return data_0 + data_1;
-}
 
 void it_80278F2C(Item_GObj* item_gobj, CommandInfo* cmd)
 {

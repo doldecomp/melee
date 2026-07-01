@@ -3290,6 +3290,14 @@ inline s32 fn_800F9260_inline(HSD_GObj* gobj)
     return pick;
 }
 
+static inline HSD_JObj* fn_800F9260_GetPartJoint(s32 bone, Fighter* fp)
+{
+    return fp->parts[bone].joint;
+}
+static inline s32 fn_800F9260_GetLHandBone(Fighter* fp)
+{
+    return ftParts_GetBoneIndex(fp, FtPart_LHandN);
+}
 void fn_800F9260(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -3298,7 +3306,6 @@ void fn_800F9260(HSD_GObj* gobj)
     s32 bone;
     s32 pick;
     HSD_JObj* joint;
-    PAD_STACK(0x8);
 
     if (fp->fv.kb.hat.kind != 4) {
         if (fp->throw_flags_b0) {
@@ -3314,8 +3321,8 @@ void fn_800F9260(HSD_GObj* gobj)
             if (fp->fv.kb.hat.kind == FTKIND_MARIO) {
                 it_8029B6F8((Item_GObj*) gobj, &sp44, It_Kind_Kirby_MarioFire,
                             fp->facing_dir);
-                bone = ftParts_GetBoneIndex(fp, FtPart_LHandN);
-                joint = fp->parts[bone].joint;
+                bone = fn_800F9260_GetLHandBone(fp);
+                joint = fn_800F9260_GetPartJoint(bone, fp);
                 efSync_Spawn(0x49F, gobj, joint, &fp->facing_dir);
                 return;
             }
