@@ -107,28 +107,19 @@ typedef enum GameSceneKind {
 } GameSceneKind;
 
 typedef enum MatchOutcome {
-    OUTCOME_NONE, ///< Match in progress, or no match played since boot
-    OUTCOME_TIMEOUT,
-    OUTCOME_ELIMINATION,
-    OUTCOME_1P_BATTLE_VICTORY, ///< Seen when player beats any story mode stage that is a single battle
-    OUTCOME_1P_GAME_OVER,
-    OUTCOME_1P_HORDE_BATTLE_VICTORY, ///< Applies to any victory in story mode against a horde of (usually weak) enemies.
-    OUTCOME_1P_BONUS_STAGE_END, ///< Applies to all stages that aren't just a single match. Target Test,
-                                        ///< Undergrond Maze, Grand Prix, Race to the finish, etc;
-    OUTCOME_LRASTART,
-    OUTCOME_RETRY,
-    OUTCOME_TERMINATED, ///< Seen when beating master hand in classic mode, finishing a home run contest, and beating multiman melee.
-                               ///< Also seen at the end of an event match. Win or lose.
+    /* 0 */ OUTCOME_NONE, ///< Match in progress, or no match played since boot
+    /* 1 */ OUTCOME_TIMEOUT,
+    /* 2 */ OUTCOME_ELIMINATION,
+    /* 3 */ OUTCOME_TEAM_ELIMINATION, ///< Seen when a team battle ends
+                              ///< Also seen when player beats any story mode stage that is a single battle
+    /* 4 */ OUTCOME_1P_GAME_OVER,
+    /* 5 */ OUTCOME_1P_HORDE_BATTLE_VICTORY, ///< Applies to any victory in story mode against a horde of (usually weak) enemies.
+    /* 6 */ OUTCOME_1P_BONUS_STAGE_END, ///< Applies to all stages that aren't just a single match. Target Test,
+                                ///< Undergrond Maze, Grand Prix, Race to the finish, etc;
+    /* 7 */ OUTCOME_NO_CONTEST,
+    /* 8 */ OUTCOME_RETRY,
+    /* 9 */ OUTCOME_TERMINATED,
 } MatchOutcome;
-
-typedef enum MatchStatus {
-    MATCH_IN_PROGERSS,
-    MATCH_ENDING,
-    MATCH_1P_SCORING,
-    MATCH_COMPLETE
-} MatchStatus;
-                           ///<                            ///< 2 during scores screen in classic/adventure mode
-                           ///< 3 after player presses start during scores screen in classic/adventure mode
 
 struct gm_801677C0_s;
 struct lbl_8046B488_t;
