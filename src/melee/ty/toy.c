@@ -2183,7 +2183,11 @@ char* Toy_8030813C(s32 arg0, enum_t unused)
 
 void Toy_80308250(u8* arg0, s32 arg1, s32 arg2)
 {
+#ifdef MWERKS_GEKKO
     char* Toy_8030813C(s16 arg0, enum_t unused);
+#else
+    char* Toy_8030813C(s32 arg0, enum_t unused);
+#endif
     void* sym;
     char* ptr;
     ptr = Toy_8030813C(arg1, arg1);
