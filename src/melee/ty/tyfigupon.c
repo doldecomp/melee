@@ -1196,17 +1196,17 @@ void _tyFigupon_80316C24(HSD_GObj* arg0)
 
 void _tyFigupon_8031753C(void)
 {
-    u8 _padA[24];
+    s32 new_count;
     struct un_804D6EF4_t* ef4 = _tyFigupon_804D6EF4;
     HSD_Joint* joint;
+    HSD_Joint* bet_joint;
+    HSD_Joint* par_joint;
+    HSD_Joint* panel_joint;
     HSD_JObj* jobj;
-    s32 total;
-    DigitInit digits_s;
-    s32* digit_ptr;
-    s32* digit_iter;
+    s32 count;
     s32 i;
     s32 trophy_total;
-    s32 new_count;
+    u8 _padA[24];
 
     if (ef4->archive == NULL) {
         OSReport("*** BG data aren't being loaded!\n");
@@ -1216,12 +1216,19 @@ void _tyFigupon_8031753C(void)
         HSD_GObjPLink_80390228((HSD_GObj*) ef4->x00);
         ef4->x00 = 0;
     }
-    joint = HSD_ArchiveGetPublicAddress(ef4->archive,
-                                        "ToyFigurePonPanel_Top_joint");
-    if (joint != NULL) {
+    panel_joint = HSD_ArchiveGetPublicAddress(ef4->archive,
+                                              "ToyFigurePonPanel_Top_joint");
+    if (panel_joint != NULL) {
+        s32 total;
+        DigitInit digits_s;
+        s32* digit_ptr;
+        s32* digit_iter;
         ef4->x00 = (u32) GObj_Create(9, 9, 0);
-        jobj = HSD_JObjLoadJoint(joint);
-        HSD_GObjObject_80390A70((HSD_GObj*) ef4->x00, HSD_GObj_804D7849, jobj);
+        jobj = HSD_JObjLoadJoint(panel_joint);
+        {
+            HSD_GObj* gobj = (HSD_GObj*) ef4->x00;
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        }
         GObj_SetupGXLink((HSD_GObj*) ef4->x00, HSD_GObj_JObjCallback, 0x3C, 1);
         lb_8001204C(jobj, ef4->jobjs, _tyFigupon_803FEB88, 0xD);
         _tyFigupon_80314AA8(ef4->jobjs[0xC], NULL,
@@ -1231,7 +1238,10 @@ void _tyFigupon_8031753C(void)
                                             "ToyFigurePonBg_Top_joint");
         ef4->unk4 = GObj_Create(9, 9, 0);
         jobj = HSD_JObjLoadJoint(joint);
-        HSD_GObjObject_80390A70(ef4->unk4, HSD_GObj_804D7849, jobj);
+        {
+            HSD_GObj* gobj = ef4->unk4;
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        }
         GObj_SetupGXLink(ef4->unk4, HSD_GObj_JObjCallback, 0x3C, 0);
         _tyFigupon_80314AA8(jobj, "ToyFigurePonBg_Top_animjoint",
                             "ToyFigurePonBg_Top_matanim_joint",
@@ -1273,11 +1283,11 @@ void _tyFigupon_8031753C(void)
             HSD_JObjAnimAll(jobj);
         }
 
-        joint = HSD_ArchiveGetPublicAddress(ef4->archive,
-                                            "ToyFigurePonBet_Top_joint");
-        for (i = 0; i < 2; i++) {
-            jobj = HSD_JObjLoadJoint(joint);
-            HSD_JObjAddChild(ef4->jobjs[6 + i], jobj);
+        bet_joint = HSD_ArchiveGetPublicAddress(ef4->archive,
+                                                "ToyFigurePonBet_Top_joint");
+        for (count = 0; count < 2; count++) {
+            jobj = HSD_JObjLoadJoint(bet_joint);
+            HSD_JObjAddChild(ef4->jobjs[6 + count], jobj);
             _tyFigupon_80314AA8(jobj, "ToyFigurePonBet_Top_animjoint",
                                 "ToyFigurePonBet_Top_matanim_joint",
                                 "ToyFigurePonBet_Top_shapeanim_joint");
@@ -1292,7 +1302,10 @@ void _tyFigupon_8031753C(void)
                                             "ToyFigurePonLever_Top_joint");
         ef4->x08 = (u32) GObj_Create(9, 9, 0);
         jobj = HSD_JObjLoadJoint(joint);
-        HSD_GObjObject_80390A70((HSD_GObj*) ef4->x08, HSD_GObj_804D7849, jobj);
+        {
+            HSD_GObj* gobj = (HSD_GObj*) ef4->x08;
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        }
         GObj_SetupGXLink((HSD_GObj*) ef4->x08, HSD_GObj_JObjCallback, 0x3C, 0);
         _tyFigupon_80314AA8(jobj, "ToyFigurePonLever_Top_animjoint",
                             "ToyFigurePonLever_Top_matanim_joint",
@@ -1301,11 +1314,13 @@ void _tyFigupon_8031753C(void)
 
         trophy_total = _tyFigupon_80314B54();
         new_count = 0;
-        for (i = 0; i < 9; i++) {
+        i = new_count;
+        do {
             if (i != 8 && (u32) i > 1U && Toy_80304B0C(i) != 0) {
                 new_count += Toy_80304B94(i);
             }
-        }
+            i += 1;
+        } while (i < 9);
         if (new_count - trophy_total != 0) {
             HSD_JObjReqAnimAll(ef4->jobjs[0xE], 0.0f);
         } else {
@@ -1314,11 +1329,11 @@ void _tyFigupon_8031753C(void)
         HSD_JObjAnimAll(ef4->jobjs[0xE]);
 
         ef4->x0C = (u32) GObj_Create(9, 9, 0);
-        joint = HSD_ArchiveGetPublicAddress(ef4->archive,
-                                            "ToyFigurePonPar_Top_joint");
-        for (i = 0; i < 3; i++) {
-            jobj = HSD_JObjLoadJoint(joint);
-            HSD_JObjAddChild(ef4->jobjs[9 + i], jobj);
+        par_joint = HSD_ArchiveGetPublicAddress(ef4->archive,
+                                                "ToyFigurePonPar_Top_joint");
+        for (count = 0; count < 3; count++) {
+            jobj = HSD_JObjLoadJoint(par_joint);
+            HSD_JObjAddChild(ef4->jobjs[9 + count], jobj);
             _tyFigupon_80314AA8(jobj, "ToyFigurePonPar_Top_animjoint",
                                 "ToyFigurePonPar_Top_matanim_joint",
                                 "ToyFigurePonPar_Top_shapeanim_joint");
@@ -1462,6 +1477,11 @@ void _tyFigupon_80317A60(void)
     HSD_GObj_80390CD4(data->x0);
 }
 
+static inline TyFiguponED4* tyFigupon_GetED4(void)
+{
+    return (TyFiguponED4*) Toy_sbss_804D6ED4;
+}
+
 static inline void tyFigupon_UpdateRemainingCount(struct un_804D6EF4_t* ef4)
 {
     s32 total_b54;
@@ -1480,22 +1500,34 @@ static inline void tyFigupon_UpdateRemainingCount(struct un_804D6EF4_t* ef4)
     ef4->x54 = count - total_b54;
 }
 
+static inline void tyFigupon_InitScene(struct un_804D6EF4_t** ef4_2,
+                                       TyFiguponED4** ed4)
+{
+    _tyFigupon_80317A60();
+    *ef4_2 = _tyFigupon_804D6EF4;
+    *ed4 = tyFigupon_GetED4();
+    if ((*ef4_2)->archive == NULL) {
+        OSReport("*** BG data aren't being loaded!\n");
+        OSPanic(__FILE__, 1575, "");
+    }
+}
+
 void tyFigupon_OnEnter_80317D80(void* arg0)
 {
     s16 x54;
+    s32 x5E;
+    TyFiguponData* data;
     struct un_804D6EF4_t* ef4;
-    struct un_804D6EF4_t* ef4_2;
     TyFiguponED4* ed4;
+    struct un_804D6EF4_t* ef4_2;
     HSD_Joint* joint;
     HSD_JObj* jobj;
     void* ud;
-    s32 x5E;
-    TyFiguponData* data;
     f32 total;
     f32 pct;
     char* archive_name;
     void* sp20;
-    PAD_STACK(20);
+    PAD_STACK(16);
 
     _tyFigupon_804D6EF0 = HSD_MemAlloc(0x34);
     _tyFigupon_804D6EF4 = HSD_MemAlloc(0x60);
@@ -1519,14 +1551,7 @@ void tyFigupon_OnEnter_80317D80(void* arg0)
     ef4->archive = lbArchive_LoadSymbols(archive_name, &sp20,
                                          "ToyFigurePonPanel_Top_joint", 0);
     ef4->x58 = 0;
-    _tyFigupon_80317A60();
-    ef4_2 = _tyFigupon_804D6EF4;
-    ed4 = (TyFiguponED4*) Toy_sbss_804D6ED4;
-    (void) ed4;
-    if (ef4_2->archive == NULL) {
-        OSReport("*** BG data aren't being loaded!\n");
-        OSPanic(__FILE__, 1575, "");
-    }
+    tyFigupon_InitScene(&ef4_2, &ed4);
     {
         LightList** temp = HSD_ArchiveGetPublicAddress(
             ef4_2->archive, "ScMenFigure_scene_lights");
@@ -1538,8 +1563,10 @@ void tyFigupon_OnEnter_80317D80(void* arg0)
                 HSD_GObj* gobj = (HSD_GObj*) ed4->x0;
                 HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
             }
-            GObj_SetupGXLink((HSD_GObj*) ed4->x0, HSD_GObj_LObjCallback, 0x34,
-                             0);
+            {
+                HSD_GObj* gobj = (HSD_GObj*) ed4->x0;
+                GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0x34, 0);
+            }
         }
     }
     memzero(Toy_sbss_804D6ED4, 0xE4);

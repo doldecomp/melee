@@ -1503,8 +1503,8 @@ HSD_GObj* fn_8017A318(s32 arg0)
 Fighter_GObj* fn_8017A67C(CharacterKind kind, int arg1, int arg2)
 {
     ResultsPlayerConfig* config = &lbl_803B7B68;
-    ResultsDisplayData* disp = &lbl_8046E1B0;
-    MatchEnd* match_end = &disp->state.match_end;
+    lbl_8046E3AC_t* state = &lbl_8046E3AC;
+    MatchEnd* match_end = &state->match_end;
     HSD_GObj* gobj = NULL;
     int slot_type;
 
@@ -1517,11 +1517,11 @@ Fighter_GObj* fn_8017A67C(CharacterKind kind, int arg1, int arg2)
     }
 
     if (gm_80160438(kind) != NULL) {
-        f32 cz, cy, cx;
+        Vec3 pos;
+        Vec3 pos2;
+        f32 sp[4];
         PAD_STACK(0xC);
-        *(s32*) &cx = *(s32*) &config->x74;
-        *(s32*) &cy = *(s32*) &config->x78;
-        *(s32*) &cz = *(s32*) &config->x7C;
+        pos = *(Vec3*) &config->x74;
 
         if ((u32) (kind - 0x12) <= 1U) {
             if ((int) (s8) match_end->player_standings[arg2].character_id == 7)
@@ -1563,29 +1563,22 @@ Fighter_GObj* fn_8017A67C(CharacterKind kind, int arg1, int arg2)
             }
 
             if (variant != 4) {
-                u8 override = disp->state.costume_override[arg2];
+                u8 override = state->costume_override[arg2];
                 if (override != 0) {
                     variant = override - 1;
                 }
             }
 
             if (slot_type == 0) {
-                f32 px, py, pz;
-                *(s32*) &px = *(s32*) &config->x80;
-                *(s32*) &py = *(s32*) &config->x84;
-                *(s32*) &pz = *(s32*) &config->x88;
-                py = 100.0f * (f32) (arg2 + 1);
-                Player_80032A04(arg2, (Vec3*) &px);
+                pos2 = *(Vec3*) &config->x80;
+                pos2.y = 100.0f * (f32) (arg2 + 1);
+                Player_80032A04(arg2, &pos2);
                 Player_SetScale(arg2, 1.8f * lbl_803D7058[kind]);
                 Player_80036F34(arg2, variant);
             } else {
-                f32 sp[4];
                 int var_idx;
                 f32 scale;
-                *(s32*) &sp[0] = *(s32*) &config->x8C;
-                *(s32*) &sp[1] = *(s32*) &config->x90;
-                *(s32*) &sp[2] = *(s32*) &config->x94;
-                *(s32*) &sp[3] = *(s32*) &config->x98;
+                *(Vec4*) sp = *(Vec4*) &config->x8C;
                 if (variant <= 2) {
                     var_idx = variant;
                 } else {
@@ -1596,12 +1589,12 @@ Fighter_GObj* fn_8017A67C(CharacterKind kind, int arg1, int arg2)
                 Player_SetScale(
                     arg2,
                     scale * (sp[slot_type] * (20.0f / Player_800360D8(arg2))));
-                cy = 100.0f * (f32) (arg2 + 1);
-                Player_80032A04(arg2, (Vec3*) &cx);
+                pos.y = 100.0f * (f32) (arg2 + 1);
+                Player_80032A04(arg2, &pos);
             }
 
-            disp->state.variant[arg2] = (u8) variant;
-            disp->state.char_kind[arg2] = (s32) kind;
+            state->variant[arg2] = (u8) variant;
+            state->char_kind[arg2] = (s32) kind;
             gobj = Player_GetEntity(arg2);
         }
     }

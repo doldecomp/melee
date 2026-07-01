@@ -87,9 +87,11 @@ int lbHeap_800158E8(int arg0)
 void lbHeap_80015900(void)
 {
     s32 temp_r0;
+    struct lbHeap_HeapOffsetView* base_view;
     struct lbHeap_HeapOffsetView* destroy_view;
-    struct Heap* bounds_heap;
+    struct lbHeap_HeapOffsetView* bounds_view;
     struct lbHeap_HeapOffsetView* create_view;
+    struct Heap* bounds_heap;
     s32 destroy_i;
     s32 heap_offset;
     s32 bounds_i;
@@ -100,6 +102,8 @@ void lbHeap_80015900(void)
     u32 arena_hi;
     struct Heap* main_heap;
     struct Heap* aram_heap;
+
+    base_view = lbHeap_GetHeapOffsetView(0x38);
 
     /// @remarks 0 and 1 are reserved for HSD and ARAM
     for (destroy_i = 2, heap_offset = 0x38; destroy_i < 6;
@@ -116,8 +120,8 @@ void lbHeap_80015900(void)
     aram_lo = lbHeap_80431FA0.aram_lo;
     aram_hi = lbHeap_80431FA0.aram_hi;
 
-    for (bounds_i = 2; bounds_i < 4; bounds_i++) {
-        bounds_heap = &lbHeap_80431FA0.heap_array[bounds_i * 2 - 2];
+    for (bounds_i = 2, bounds_view = base_view; bounds_i < 4; bounds_i++) {
+        bounds_heap = &bounds_view->heap;
         if (bounds_heap->transient == 0) {
             switch (bounds_heap->type) {
             case 1:
@@ -142,7 +146,9 @@ void lbHeap_80015900(void)
             }
         }
 
-        bounds_heap++;
+        bounds_view = (struct lbHeap_HeapOffsetView*) ((u32) bounds_view +
+                                                       sizeof(struct Heap));
+        bounds_heap = &bounds_view->heap;
         if (bounds_heap->transient == 0) {
             switch (bounds_heap->type) {
             case 1:
@@ -166,6 +172,8 @@ void lbHeap_80015900(void)
                 break;
             }
         }
+        bounds_view = (struct lbHeap_HeapOffsetView*) ((u32) bounds_view +
+                                                       sizeof(struct Heap));
     }
 
     main_heap = &lbHeap_80431FA0.heap_array[0];

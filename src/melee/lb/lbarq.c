@@ -25,7 +25,9 @@ void lbArq_80014AC4(lbArqHandle* handle)
     intr = OSDisableInterrupts();
 
     /* Remove from current list (indexed by state) */
-    prev = &global->list[node->state];
+    prev = (lbArqNode**) (node->state * 4);
+    prev = (lbArqNode**) ((uintptr_t) prev + 0x1E0);
+    prev = (lbArqNode**) ((uintptr_t) prev + (uintptr_t) global);
     while (*prev != node) {
         prev = &(*prev)->next;
     }
@@ -75,8 +77,8 @@ void lbArq_80014BD0(u32 source, void* dest, size_t length,
     lbArqNode* rp;
     lbArqNode* tmp;
     lbArqNode** tail;
-    lbArqNode** free_head;
     BOOL intr;
+    lbArqNode** free_head;
 
     PAD_STACK(16);
     DCInvalidateRange(dest, length);

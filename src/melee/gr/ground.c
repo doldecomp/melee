@@ -1982,7 +1982,6 @@ void Ground_801C34AC(s32 map_id, HSD_JObj* root, struct HSD_Joint* joint)
 
 void Ground_801C36F4(int map_id, HSD_JObj* root, UNK_T joint)
 {
-    HSD_JObj* parent;
     HSD_JObj* jobj;
     UnkStageDat* stage_dat;
     UnkArchiveStruct* archive;
@@ -2026,8 +2025,8 @@ entry_found:
         jobj = stage_info.x280[i];
         (void) jobj;
         if (jobj != NULL) {
-            while ((parent = jobj->parent) != NULL) {
-                jobj = parent;
+            while (jobj->parent != NULL) {
+                jobj = jobj->parent;
             }
             if (jobj == root) {
                 stage_info.x280[i] = NULL;

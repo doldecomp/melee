@@ -104,9 +104,9 @@ grOk_StageData grOk_803E65E8 = {
 
 static lbColl_80008D30_arg1 grOk_803B8408;
 
-static inline int* grOldKongo_GetHitTimer(Ground* gp)
+static inline s16* grOldKongo_GetHitTimer(Ground* gp)
 {
-    return &gp->gv.oldkongo.hit_timer;
+    return (s16*) &gp->gv.oldkongo.hit_timer;
 }
 
 void grOldKongo_8020F468(bool arg) {}
@@ -290,11 +290,11 @@ void grOldKongo_8020F888(Ground_GObj* arg0)
     f32 hit_angle;
     f32 angle_delta;
     f32 xec_max;
-    int hit_timer;
+    s16 hit_timer;
     s16 state_timer;
     s16 release_timer;
     s16 timer;
-    int* hit_timer_ptr;
+    s16* hit_timer_ptr;
     gobj = arg0;
     gp = GET_GROUND(gobj);
     jobj = Ground_801C3FA4(gobj, 1);
@@ -309,29 +309,25 @@ void grOldKongo_8020F888(Ground_GObj* arg0)
         } else if (y_speed < 0.0f) {
             angle_delta = gp->gv.oldkongo.xDC - gp->gv.oldkongo.xD8;
         } else {
-            HSD_ASSERT(0x18CU, NULL);
+            HSD_ASSERT(0x18CU, 0);
         }
         if (angle_delta < 0.0f) {
             angle_delta += M_TAU;
         }
-        if (angle_delta < angle_limit) {
-            if ((s16) gp->gv.oldkongo.xC4 == 3) {
-                gp->gv.oldkongo.xC4 = 0;
+        if (!(angle_delta < angle_limit)) {
+            abs_y_speed = gp->gv.oldkongo.xE4;
+            if (abs_y_speed < 0.0f) {
+                abs_y_speed = -abs_y_speed;
             }
-            break;
-        }
-        abs_y_speed = gp->gv.oldkongo.xE4;
-        if (abs_y_speed < 0.0f) {
-            abs_y_speed = -abs_y_speed;
-        }
-        if (angle_delta < abs_y_speed) {
-            if ((s16) gp->gv.oldkongo.xC4 == 3) {
-                gp->gv.oldkongo.xC4 = 0;
+            if (!(angle_delta < abs_y_speed)) {
+                if ((s16) gp->gv.oldkongo.xC4 == 2) {
+                    gp->gv.oldkongo.xC4 = 3;
+                }
+                break;
             }
-            break;
         }
-        if ((s16) gp->gv.oldkongo.xC4 == 2) {
-            gp->gv.oldkongo.xC4 = 3;
+        if ((s16) gp->gv.oldkongo.xC4 == 3) {
+            gp->gv.oldkongo.xC4 = 0;
         }
         break;
     case 0:
@@ -443,16 +439,15 @@ void grOldKongo_8020F888(Ground_GObj* arg0)
     case 1:
         if (gp->gv.oldkongo.keep == NULL) {
             gp->gv.oldkongo.xC6 = 0;
-            goto block_123;
+        } else {
+            release_timer = gp->gv.oldkongo.xCA;
+            gp->gv.oldkongo.xCA = release_timer - 1;
+            if (release_timer >= 0) {
+                return;
+            }
+            gp->gv.oldkongo.xC6 = 2;
         }
-        release_timer = gp->gv.oldkongo.xCA;
-        gp->gv.oldkongo.xCA = release_timer - 1;
-        if (release_timer >= 0) {
-            return;
-        }
-        gp->gv.oldkongo.xC6 = 2;
     case 2:
-    block_123:
         grAnime_801C7FF8(gobj, 2, 7, 2, 0.0f, 1.0f);
         grMaterial_801C95C4(gobj);
         hit_timer_ptr = grOldKongo_GetHitTimer(gp);
@@ -478,12 +473,8 @@ void grOldKongo_8020F888(Ground_GObj* arg0)
                 hit_angle = (f32) ((f64) hit_angle - M_TAU);
             }
             hit_angle = 57.29578f * hit_angle;
-            {
-                Fighter_GObj* fighter_gobj = gp->gv.oldkongo.keep;
-
-                if (fighter_gobj->p_link == 8) {
-                    ftCo_8009EC70(fighter_gobj, &sp3C, &hit, hit_angle);
-                }
+            if (gp->gv.oldkongo.keep->p_link == 8) {
+                ftCo_8009EC70(gp->gv.oldkongo.keep, &sp3C, &hit, hit_angle);
             }
             gp->gv.oldkongo.xC6 = 4;
             Ground_801C5440(gp, 0, 0x12AU);

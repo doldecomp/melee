@@ -779,6 +779,11 @@ bool grShrineRoute_80209BE4(Ground_GObj* arg)
     return false;
 }
 
+inline f32 grShrineRoute_8020A8A4_rand(void)
+{
+    return HSD_Randf();
+}
+
 void grShrineRoute_80209BEC(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
@@ -804,8 +809,7 @@ void grShrineRoute_80209BEC(Ground_GObj* gobj)
         gp->gv.shrineroute3.xCC = -0.0008726646f;
     }
 
-    next = HSD_JObjGetRotationX(jobj) + (vel = gp->gv.shrineroute3.xC8);
-    rot = next;
+    rot = next = HSD_JObjGetRotationX(jobj) + (vel = gp->gv.shrineroute3.xC8);
     if (next > 0.2617994f) {
         rot = 0.2617994f;
         if (vel < 0.0f) {
@@ -813,7 +817,7 @@ void grShrineRoute_80209BEC(Ground_GObj* gobj)
         }
         gp->gv.shrineroute3.xC8 = -vel;
         gp->gv.shrineroute3.xD0 =
-            0.00006981317f * -HSD_Randf() - 0.000017453292f;
+            0.00006981317f * -grShrineRoute_8020A8A4_rand() - 0.000017453292f;
     } else if (rot < -0.2617994f) {
         rot = -0.2617994f;
         if (vel < 0.0f) {
@@ -825,8 +829,7 @@ void grShrineRoute_80209BEC(Ground_GObj* gobj)
     }
     HSD_JObjSetRotationX(jobj, rot);
 
-    next2 = HSD_JObjGetRotationY(jobj) + (vel = gp->gv.shrineroute3.xCC);
-    rot = next2;
+    rot = next2 = HSD_JObjGetRotationY(jobj) + (vel = gp->gv.shrineroute3.xCC);
     if (next2 > 0.17453292f) {
         rot = 0.17453292f;
         if (vel < 0.0f) {
@@ -834,7 +837,7 @@ void grShrineRoute_80209BEC(Ground_GObj* gobj)
         }
         gp->gv.shrineroute3.xCC = -vel;
         gp->gv.shrineroute3.xD4 =
-            0.00006981317f * -HSD_Randf() - 0.000017453292f;
+            0.00006981317f * -grShrineRoute_8020A8A4_rand() - 0.000017453292f;
     } else if (rot < -0.17453292f) {
         rot = -0.17453292f;
         if (vel < 0.0f) {
@@ -1135,11 +1138,6 @@ bool grShrineRoute_8020A894(Ground_GObj* arg)
 void grShrineRoute_8020A89C(Ground_GObj* arg) {}
 
 void grShrineRoute_8020A8A0(Ground_GObj* arg) {}
-
-inline f32 grShrineRoute_8020A8A4_rand(void)
-{
-    return HSD_Randf();
-}
 
 void grShrineRoute_8020A8A4(Ground_GObj* gobj)
 {

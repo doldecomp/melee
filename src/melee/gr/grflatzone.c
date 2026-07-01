@@ -350,7 +350,7 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
         gp->gv.flatzone.xD4 = grFz_804D6AB0->unk20;
         if (gp->gv.flatzone2.xC8 == 1.0f) {
             pos.x = grFz_804D6AB0->unk24;
-            gp->gv.flatzone.xD4 = (s32) ((f32) gp->gv.flatzone.xD4 * 0.5f);
+            gp->gv.flatzone.xD4 = (s32) ((f32) gp->gv.flatzone.xD4 / 2.0f);
         } else {
             pos.x = grFz_804D6AB0->unk28;
             {

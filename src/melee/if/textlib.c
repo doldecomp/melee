@@ -416,20 +416,22 @@ static inline GXColor adjust(GXColor c)
 
 void un_80302FFC(struct un_80304138_objalloc_t* arg0)
 {
+    int max_x = 1;
+    int cursor_x;
     struct un_80304138_objalloc_t_x8* x8 = arg0->x8;
-    struct un_80304138_objalloc_t_x8* thing;
-    int cursor_x = 1;
+    struct un_80304138_objalloc_t_x8* thing = x8;
     int cursor_y;
-    GXColor color;
-    for (thing = x8; thing->x0 != 9; thing++) {
-        if (thing->x0 != 0 && thing->x0 != 1) {
-            int len = DevText_StrLen(thing->x8);
-            if (len + 1 > cursor_x) {
-                cursor_x = len + 1;
+    for (; x8->x0 != 9; x8++) {
+        if (x8->x0 != 0 && x8->x0 != 1) {
+            int len = DevText_StrLen(x8->x8);
+            if (len + 1 > max_x) {
+                max_x = len + 1;
             }
         }
     }
+    cursor_x = max_x;
     if (arg0->x1 & 0x10) {
+        GXColor color;
         DevText_StoreColorIndex(arg0->x4, 0);
         color = adjust(un_804D5A0C);
         DevText_SetTextColor(arg0->x4, color);
@@ -450,6 +452,7 @@ void un_80302FFC(struct un_80304138_objalloc_t* arg0)
         DevText_SetTextColor(arg0->x4, un_804D5A14);
         DevText_SetBGColor(arg0->x4, un_804D5A08);
     }
+    x8 = thing;
     for (cursor_y = 0; cursor_y < arg0->x4->h; cursor_y++) {
         if (x8->x0 == 0) {
             DevText_StoreColorIndex(arg0->x4, 2);

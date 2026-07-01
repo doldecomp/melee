@@ -54,24 +54,26 @@ static void mnSound_VolumeAnim(HSD_JObj* jobj, s32 sound_music_mix,
 
 static void mnSound_ChannelAnim(HSD_JObj* jobj, s32 channel)
 {
-    HSD_JObj* jobj_anim[3];
+    HSD_JObj* jobj_anim_0;
+    HSD_JObj* jobj_anim_1;
+    HSD_JObj* jobj_anim_2;
     f32 right_frame, left_frame;
-    lb_80011E24(jobj, &jobj_anim[0], 8, -1);
-    lb_80011E24(jobj, &jobj_anim[1], 10, -1);
-    lb_80011E24(jobj, &jobj_anim[2], 9, -1);
-    left_frame = mn_8022F298(jobj_anim[1]);
-    right_frame = mn_8022F298(jobj_anim[2]);
+    lb_80011E24(jobj, &jobj_anim_0, 8, -1);
+    lb_80011E24(jobj, &jobj_anim_1, 10, -1);
+    lb_80011E24(jobj, &jobj_anim_2, 9, -1);
+    left_frame = mn_8022F298(jobj_anim_1);
+    right_frame = mn_8022F298(jobj_anim_2);
 
-    HSD_JObjReqAnimAll(jobj_anim[0], channel);
-    HSD_JObjAnimAll(jobj_anim[0]);
+    HSD_JObjReqAnimAll(jobj_anim_0, channel);
+    HSD_JObjAnimAll(jobj_anim_0);
 
-    HSD_JObjReqAnimAll(jobj_anim[1], left_frame);
-    mn_8022F3D8(jobj_anim[1], 0xFFU, MOBJ_MASK);
-    HSD_JObjAnimAll(jobj_anim[1]);
+    HSD_JObjReqAnimAll(jobj_anim_1, left_frame);
+    mn_8022F3D8(jobj_anim_1, 0xFFU, MOBJ_MASK);
+    HSD_JObjAnimAll(jobj_anim_1);
 
-    HSD_JObjReqAnimAll(jobj_anim[2], right_frame);
-    mn_8022F3D8(jobj_anim[2], 0xFFU, MOBJ_MASK);
-    HSD_JObjAnimAll(jobj_anim[2]);
+    HSD_JObjReqAnimAll(jobj_anim_2, right_frame);
+    mn_8022F3D8(jobj_anim_2, 0xFFU, MOBJ_MASK);
+    HSD_JObjAnimAll(jobj_anim_2);
 }
 
 static inline void mnSound_InitCenterText(Menu* menu, s32 val)
@@ -84,11 +86,26 @@ static inline void mnSound_InitCenterText(Menu* menu, s32 val)
     HSD_SisLib_803A6368(text, val);
 }
 
-void mnSound_802492CC(HSD_GObj* gobj)
+static inline void mnSound_UpdateCenterText(void)
 {
     Menu* menu = GET_MENU(mnSound_804D6C30);
+    s32 text_id;
+    if (menu->text != NULL) {
+        HSD_SisLib_803A5CC4(menu->text);
+    }
+    if (menu->unk2 == 0) {
+        text_id = 0xBB;
+    } else {
+        text_id = 0xBC;
+    }
+    mnSound_InitCenterText(menu, text_id);
+}
+
+void mnSound_802492CC(HSD_GObj* gobj)
+{
     u64 events;
-    PAD_STACK(8);
+    u8 mix;
+    Menu* menu = GET_MENU(mnSound_804D6C30);
     if (mn_804D6BC8.cooldown != 0) {
         Menu_DecrementAnimTimer();
         return;
@@ -110,19 +127,7 @@ void mnSound_802492CC(HSD_GObj* gobj)
         } else {
             menu->unk2 = 0;
         }
-        {
-            Menu* menu = GET_MENU(mnSound_804D6C30);
-            s32 text_id;
-            if (menu->text != NULL) {
-                HSD_SisLib_803A5CC4(menu->text);
-            }
-            if (menu->unk2 == 0) {
-                text_id = 0xBB;
-            } else {
-                text_id = 0xBC;
-            }
-            mnSound_InitCenterText(menu, text_id);
-        }
+        mnSound_UpdateCenterText();
         return;
     }
     if (events & MenuInput_Left) {
@@ -135,12 +140,11 @@ void mnSound_802492CC(HSD_GObj* gobj)
                 lbAudioAx_80024C08(menu->unk1);
             }
         } else if ((s8) menu->unk3 > -100) {
-            u8 mix;
             // move towards sounds
             lbAudioAx_80024030(2);
             menu->unk3 -= 5;
             mix = menu->unk3;
-            mnSound_VolumeAnim(GET_JOBJ(mnSound_804D6C30), mix, 15);
+            mnSound_VolumeAnim(GET_JOBJ(mnSound_804D6C30), mix, 5);
             gm_801602C0(mix);
             gmMainLib_8015ED80(GET_MENU(mnSound_804D6C30)->unk3);
         }
@@ -154,21 +158,52 @@ void mnSound_802492CC(HSD_GObj* gobj)
                 lbAudioAx_80024C08(menu->unk1);
             }
         } else if ((s8) menu->unk3 < 100) {
-            u8 mix;
             // move towards music
             lbAudioAx_80024030(2);
             menu->unk3 += 5;
             mix = menu->unk3;
-            mnSound_VolumeAnim(GET_JOBJ(mnSound_804D6C30), mix, 18);
+            mnSound_VolumeAnim(GET_JOBJ(mnSound_804D6C30), mix, 6);
             gm_801602C0(mix);
             gmMainLib_8015ED80(GET_MENU(mnSound_804D6C30)->unk3);
         }
     }
 }
 
+static inline void mnSound_80249A1C_OnSoundSelected(HSD_GObj* gobj,
+                                                    HSD_JObj** jobj_out)
+{
+    AnimLoopSettings* anim = mnSound_803EEED8;
+    Menu* menu = GET_MENU(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    if ((u8) menu->unk2 == 0) {
+        if ((u8) menu->unk1 == 0) {
+            lb_80011E24(jobj, jobj_out, 0xA, -1);
+        } else {
+            lb_80011E24(jobj, jobj_out, 9, -1);
+        }
+        mn_8022EC18(*jobj_out, anim, 0x80);
+    }
+}
+
+static inline void
+mnSound_80249A1C_ChooseVolumeAnim(HSD_JObj* jobj, AnimLoopSettings* settings)
+{
+    AnimLoopSettings* anim = mnSound_803EEED8;
+    f32 cursor_frame = mn_8022F298(jobj);
+    if ((anim[5].start_frame <= cursor_frame) &&
+        (cursor_frame <= anim[5].end_frame))
+    {
+        *settings = anim[5];
+    } else {
+        *settings = anim[6];
+    }
+}
+
 void fn_80249A1C(HSD_GObj* arg0)
 {
+    AnimLoopSettings* anim = mnSound_803EEED8;
     Menu* menu = GET_MENU(arg0);
+    HSD_JObj* jobj = arg0->hsd_obj;
     HSD_JObj* sp40;
     HSD_JObj* sp3C;
     UNUSED u8 pad38[4];
@@ -176,11 +211,8 @@ void fn_80249A1C(HSD_GObj* arg0)
     AnimLoopSettings sp28;
     UNUSED u8 pad24[4];
     HSD_JObj* sp20;
-    f32 cursor_frame;
     u8 temp_r4;
-    AnimLoopSettings* anim = mnSound_803EEED8;
-    HSD_JObj* jobj = arg0->hsd_obj;
-    PAD_STACK(16);
+    PAD_STACK(8);
     if ((u8) mn_804A04F0.cur_menu != 0x14) {
         HSD_GObjPLink_80390228(arg0);
         HSD_SisLib_803A5CC4(menu->text);
@@ -196,23 +228,9 @@ void fn_80249A1C(HSD_GObj* arg0)
         HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         return;
     }
-    if ((u8) menu->unk2 == 0) {
-        if ((u8) menu->unk1 == 0) {
-            lb_80011E24(jobj, &sp34, 0xA, -1);
-        } else {
-            lb_80011E24(jobj, &sp34, 9, -1);
-        }
-        mn_8022EC18(sp34, anim, 0x80);
-    }
+    mnSound_80249A1C_OnSoundSelected(arg0, &sp34);
     lb_80011E24((HSD_JObj*) arg0->hsd_obj, &sp20, 6, -1);
-    cursor_frame = mn_8022F298(sp20);
-    if ((anim[5].start_frame <= cursor_frame) &&
-        (cursor_frame <= anim[5].end_frame))
-    {
-        sp28 = anim[5];
-    } else {
-        sp28 = anim[6];
-    }
+    mnSound_80249A1C_ChooseVolumeAnim(sp20, &sp28);
     mn_8022ED6C(sp20, &sp28);
     lb_80011E24(jobj, &sp40, 0xE, -1);
     {
@@ -228,18 +246,19 @@ void fn_80249A1C(HSD_GObj* arg0)
 
 void mnSound_80249C08(int unused)
 {
+    StaticModelDesc* model = &mnSound_804A08A8;
+    AnimLoopSettings* anims = mnSound_803EEED8;
     HSD_GObj* gobj = GObj_Create(HSD_GOBJ_CLASS_ITEM, 7U, 0x80U);
     HSD_JObj* jobj;
     Menu* user_data;
     HSD_GObjProc* proc;
     PAD_STACK(24);
     mnSound_804D6C30 = gobj;
-    jobj = HSD_JObjLoadJoint(mnSound_804A08A8.joint);
+    jobj = HSD_JObjLoadJoint(model->joint);
     HSD_GObjObject_80390A70((HSD_GObj*) gobj, (u8) HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink((HSD_GObj*) gobj, HSD_GObj_JObjCallback, 4U, 0x80);
-    HSD_JObjAddAnimAll(jobj, mnSound_804A08A8.animjoint,
-                       mnSound_804A08A8.matanim_joint,
-                       mnSound_804A08A8.shapeanim_joint);
+    HSD_JObjAddAnimAll(jobj, model->animjoint, model->matanim_joint,
+                       model->shapeanim_joint);
     HSD_JObjReqAnimAll(jobj, 0.0F);
     {
         Menu* alloc = HSD_MemAlloc(8);
@@ -275,7 +294,7 @@ void mnSound_80249C08(int unused)
     {
         HSD_JObj* sp5C;
         lb_80011E24(jobj, &sp5C, 6, -1);
-        HSD_JObjReqAnimAll(sp5C, mnSound_803EEED8[5].end_frame);
+        HSD_JObjReqAnimAll(sp5C, anims[5].end_frame);
         HSD_JObjAnimAll(sp5C);
     }
 
@@ -287,12 +306,11 @@ void mnSound_80249C08(int unused)
         gm_801602C0(user_data->unk3);
         lb_80011E24(jobj, &sp64, 0xE, -1);
         {
-            AnimLoopSettings* anim = &mnSound_803EEED8[user_data->unk2];
+            AnimLoopSettings* anim = &anims[user_data->unk2];
             mn_8022ED6C(sp64, anim + 1);
         }
         lb_80011E24(jobj, &sp60, 0xB, -1);
-        HSD_JObjReqAnimAll(sp60,
-                           mnSound_803EEED8[user_data->unk1 + 3].end_frame);
+        HSD_JObjReqAnimAll(sp60, anims[user_data->unk1 + 3].end_frame);
         HSD_JObjAnimAll(sp60);
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     }

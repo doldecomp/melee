@@ -13,7 +13,11 @@ typedef unsigned int usize_t;
 typedef signed int intptr_t;
 typedef unsigned int uintptr_t;
 
+#if defined(__clang__) || defined(__GNUC__)
+#define offsetof(type, member) __builtin_offsetof(type, member)
+#else
 #define offsetof(type, member) ((size_t) &(((type*) 0)->member))
+#endif
 
 #ifndef NULL
 #define NULL 0L
