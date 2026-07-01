@@ -98,7 +98,7 @@ void Toy_80306D70(s32 arg0);
 HSD_LObj* Toy_LoadLObjList(LightList**, s32*);
 void Toy_80307470(s32);
 void Toy_80307E84(HSD_GObj* gobj);
-char* Toy_8030813C(s32 arg0, enum_t unused);
+char* Toy_8030813C(s16 arg0, enum_t unused);
 void Toy_80308250(u8* arg0, s32 arg1, s32 arg2);
 s32 Toy_803082F8(s16 idx);
 void Toy_80308328(s32 arg0);
@@ -2175,7 +2175,7 @@ void _Toy_80307F64(s32 arg0, s32 arg1)
     }
 }
 
-char* Toy_8030813C(s32 arg0, enum_t unused)
+char* Toy_8030813C(s16 arg0, enum_t unused)
 {
     char* ptr;
     s32 i;
@@ -2223,7 +2223,6 @@ char* Toy_8030813C(s32 arg0, enum_t unused)
 
 void Toy_80308250(u8* arg0, s32 arg1, s32 arg2)
 {
-    char* Toy_8030813C(s16 arg0, enum_t unused);
     void* sym;
     char* ptr;
     ptr = Toy_8030813C(arg1, arg1);
