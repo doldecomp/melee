@@ -1724,7 +1724,6 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
     s32 var_r28;
     s32 var_r30;
     s32 var_r30_2;
-    s8 temp_r25;
     u8 temp_r26;
     TextWrapper* gp2;
     Ground* gp;
@@ -1790,7 +1789,7 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
         {
             temp_r3_4 = Player_GetEntity(var_r30_2);
             if (temp_r3_4 != NULL && gm_8016C6C0(temp_r3_4) == 0) {
-                temp_r25 = Player_GetPlayerSlotType(var_r30_2);
+                s8 temp_r25 = Player_GetPlayerSlotType(var_r30_2);
                 temp_r26 = gm_8016B168();
                 sp28[0] = gm_80160968(gm_80160854(
                     var_r30_2, Player_GetTeam(var_r30_2), temp_r26, temp_r25));

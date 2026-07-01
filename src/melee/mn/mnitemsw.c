@@ -665,9 +665,9 @@ void fn_80234C24(HSD_GObj* gobj)
         if (((u16) mn_804A04F0.hovered_selection == 0x1F) ||
             ((u16) mn_804A04F0.hovered_selection == 0x20))
         {
-            u8* order = mnItemSw_803ED340.item_order;
-            s32 i = 0;
             MnItemSwData* dat;
+            s32 i = 0;
+            u8* order = mnItemSw_803ED340.item_order;
 
             data->x21 = (u8) mn_804A04F0.confirmed_selection;
             dat = (MnItemSwData*) gobj->user_data;
@@ -726,15 +726,15 @@ HSD_GObj* mnItemSw_802351A0(s32 arg0)
 {
     struct StaticModelDesc* mdl = &MenMainConIs_Top;
     struct MnItemSwTable* tbl = &mnItemSw_803ED340;
-    HSD_GObj* gobj;
     HSD_JObj* jobj;
     MnItemSwData* user_data;
     s32 i;
     f32 y_spacing;
     u8 cursor;
     HSD_JObj* cjobj;
+    HSD_JObj* item_jobj;
 
-    gobj = GObj_Create(6, 7, 0x80);
+    HSD_GObj* gobj = GObj_Create(6, 7, 0x80);
     mnItemSw_804D6BE8 = gobj;
 
     jobj = HSD_JObjLoadJoint(mdl->joint);
@@ -781,7 +781,7 @@ HSD_GObj* mnItemSw_802351A0(s32 arg0)
                 HSD_JObjGetTranslationY(user_data->jobjs[4]);
 
     for (i = 0; i < 0x1F; i++) {
-        HSD_JObj* item_jobj = mnItemSw_80235020((u8) i, user_data);
+        item_jobj = mnItemSw_80235020((u8) i, user_data);
         if (i < 0x10) {
             HSD_JObjAddChild(user_data->jobjs[4], item_jobj);
             HSD_JObjAddTranslationY(item_jobj, y_spacing * (f32) i);

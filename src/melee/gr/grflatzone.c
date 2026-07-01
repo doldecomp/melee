@@ -691,7 +691,6 @@ void grFlatzone_8021805C(Ground_GObj* gobj)
 
 void grFlatzone_80218060(s32 arg0)
 {
-    s16* tbl = grFz_803E7A68;
     HSD_GObj* gobj;
     Ground* gp;
     PAD_STACK(8);
@@ -713,20 +712,20 @@ void grFlatzone_80218060(s32 arg0)
                     if (v == (u8) gp->gv.pad_0[4]) {
                         goto loop_4;
                     }
-                } while (tbl[v * 5 + 1] == -1);
+                } while (grFz_803E7A68[v * 5 + 1] == -1);
                 do {
                     {
                         s32 randi = HSD_Randi(4);
                         v = randi + 1;
                     }
-                } while (tbl[gp->gv.flatzone.xC7 * 5 +
-                             (u8) (gp->gv.pad_0[5] = v)] == -1);
+                } while (grFz_803E7A68[gp->gv.flatzone.xC7 * 5 +
+                                       (u8) (gp->gv.pad_0[5] = v)] == -1);
             }
             gp->gv.pad_0[6] = 0;
             gp->gv.flatzone.xCC =
                 (s16) rand_int(grFz_804D6AB0->unkC, grFz_804D6AB0->unk8);
-            gp->gv.flatzone.xC5 =
-                (u8) tbl[gp->gv.flatzone.xC7 * 5 + (u8) gp->gv.pad_0[5]];
+            gp->gv.flatzone.xC5 = (u8)
+                grFz_803E7A68[gp->gv.flatzone.xC7 * 5 + (u8) gp->gv.pad_0[5]];
             grAnime_801C8138(gobj, gp->map_id, (s32) gp->gv.flatzone.xC5);
         }
     }

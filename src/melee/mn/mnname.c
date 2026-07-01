@@ -266,6 +266,8 @@ s32 mnName_SortNames(HSD_GObj* arg0)
     u8* order = mnName_NameDisplayOrder;
     MnName_GObj* data = (MnName_GObj*) arg0->user_data;
     s32 result;
+    u8* pi;
+    u8* pj;
     PAD_STACK(8);
 
     if ((u8) data->gobj.p_priority == 0) {
@@ -278,12 +280,12 @@ s32 mnName_SortNames(HSD_GObj* arg0)
 
     {
         s32 i;
-        u8* pi = mnName_NameDisplayOrder;
+        pi = mnName_NameDisplayOrder;
 
         i = 0;
         do {
             s32 j = i + 1;
-            u8* pj = &mnName_NameDisplayOrder[i] + 1;
+            pj = &mnName_NameDisplayOrder[i] + 1;
 
             while (j < 0x78) {
                 u8 idx1 = *pi;

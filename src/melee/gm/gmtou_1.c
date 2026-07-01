@@ -2347,6 +2347,7 @@ extern u8 lbl_803B7D04[20];
 /// Handles match countdown, audio transitions, and end conditions.
 void fn_8019AF50(s32* arg0, u32 arg1, u32 arg2)
 {
+    u8* entry;
     typedef struct {
         s32 d[5];
     } TimerFmt;
@@ -2379,7 +2380,7 @@ void fn_8019AF50(s32* arg0, u32 arg1, u32 arg2)
 
             do {
                 if (bp[0x30] != 0 && bp[0x4C] == 0) {
-                    u8* entry = (u8*) &lbl_80473AB8[bracketIdx];
+                    entry = (u8*) &lbl_80473AB8[bracketIdx];
                     lbl_804D6680[1] = entry[j * 0x2C + 0x4D];
                     break;
                 }

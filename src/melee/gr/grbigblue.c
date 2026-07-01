@@ -1483,6 +1483,7 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
     Ground* gp = gobj->user_data;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     u8* bp = (u8*) gp;
+    u8* p;
     PAD_STACK(76);
 
     HSD_JObjGetTranslation2(jobj, &pos);
@@ -1523,7 +1524,7 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
                 }
             }
             {
-                u8* p = mgp + 0x54;
+                p = mgp + 0x54;
                 if ((s8) mgp[0x139] != 0) {
                     count++;
                     if (cars_avail != 0U) {
@@ -2385,12 +2386,12 @@ void grBigBlue_801EB4AC(Ground_GObj* gobj)
         u8 hi : 4;
         u8 lo : 4;
     } grBb_B4C7Nibbles;
+    f32 vel_threshold;
     u8* gp = (u8*) GET_GROUND(gobj);
     s32 count = 0;
     HSD_JObj* jobj;
     grBb_TrackEntry* entry;
     Vec3 sp_pos;
-    f32 vel_threshold;
     f32 delta_threshold;
     s32 random_lane;
 
@@ -2634,6 +2635,7 @@ void grBigBlue_801EBAF8(Ground_GObj* gobj)
 {
     u8* gp = (u8*) GET_GROUND(gobj);
     HSD_JObj* jobj = gobj->hsd_obj;
+    f32 speed;
     u8 pad[8];
     Vec3 bone_pos;
     Vec3 vel;
@@ -2758,7 +2760,7 @@ void grBigBlue_801EBAF8(Ground_GObj* gobj)
             lbVector_Diff((Vec3*) (gp + 0xD4), (Vec3*) (gp + 0xC8),
                           (Vec3*) (gp + 0xE0));
             {
-                f32 speed = grBb_804D69C8->x7C * Ground_801C0498();
+                speed = grBb_804D69C8->x7C * Ground_801C0498();
                 *(f32*) (gp + 0xEC) = sinf(*(f32*) (gp + 0xF8)) * speed;
             }
             ((grBb_ByteBits*) (gp + 0xC4))->b1 = 1;
@@ -3940,6 +3942,7 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
     s32 result = 0;
     Ground* gp = gobj->user_data;
     Vec3 pos;
+    u8* base;
     PAD_STACK(12);
 
     switch (arg2) {
@@ -3975,7 +3978,7 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
     case 10: {
         s32 offset = arg1 << 6;
         {
-            u8* base = (u8*) gp + offset;
+            base = (u8*) gp + offset;
             *(s32*) (base + 0xF0) = 0x14;
         }
         {

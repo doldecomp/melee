@@ -694,6 +694,7 @@ void _tyDisplay_80319994(s32 arg0)
     s32 n2;
     s32 pivot;
     s32 count;
+    HSD_JObj** jobj_slot;
 
     PAD_STACK(0x38);
 
@@ -843,7 +844,7 @@ void _tyDisplay_80319994(s32 arg0)
         s32 k;
         TyDspPos* pos = grid->pos;
         TySortElem* sort = grid->sort;
-        HSD_JObj** jobj_slot = _tyDisplay_804D6F10;
+        jobj_slot = _tyDisplay_804D6F10;
 
         for (k = 0; k < cfg->x08; k++) {
             HSD_GObj* gobj;

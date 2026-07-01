@@ -202,7 +202,6 @@ extern const GXColor mnNameNew_804DBF48;
 
 s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
 {
-    HSD_JObj* key_jobj;
     HSD_JObj* ref1;
     HSD_JObj* ref2;
     HSD_Text* text;
@@ -220,6 +219,7 @@ s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
     s32 i;
     GXColor* color_ptr;
     MnNameNewDataLayout* layout;
+    HSD_JObj* key_jobj;
 
     FORCE_PAD_STACK(20);
 
@@ -1265,7 +1265,6 @@ void fn_8023D0F8(void* arg0)
 s32 mnNameNew_8023D130(GlyphVariantEntry* arg0, u8 arg1, u8 arg2, s32 arg3)
 {
     Vec3 sp30;
-    GXColor sp2C;
     HSD_JObj* jobj14;
     HSD_JObj* jobj1C;
     HSD_JObj* jobj18;
@@ -1284,6 +1283,7 @@ s32 mnNameNew_8023D130(GlyphVariantEntry* arg0, u8 arg1, u8 arg2, s32 arg3)
     char** table_lower;
     GXColor* sp2C_ptr;
     MnNameNewDataLayout* layout;
+    GXColor sp2C;
 
     layout = (MnNameNewDataLayout*) mnNameNew_803EDA58;
     text = HSD_SisLib_803A6754(0, (s32) mn_804D6BB4);

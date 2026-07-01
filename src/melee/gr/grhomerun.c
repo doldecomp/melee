@@ -772,13 +772,13 @@ void grHomeRun_8021E4FC(Ground_GObj* arg) {}
 
 HSD_GObj* grHomeRun_8021E500(s16 arg0)
 {
-    HSD_JObj* jobj;
     s32 gobj_id;
     HSD_GObj* gobj;
     HSD_JObj* child;
     Ground* gp;
     s32 idx;
     f32 offset;
+    HSD_JObj* jobj;
 
     idx = (arg0 / grHr_804D6ADC) % 4;
     if (idx == 0) {

@@ -542,11 +542,11 @@ void _tyList_80313774(void)
     s8* state_tail = (s8*) M2C_FIELD(&state, HSD_GObj**, 0x2AC);
     TyListArg* entry;
     HSD_JObj* root_jobj;
-    f32 step;
     f32 pos;
     s16 idx;
     s32 i;
     s32 trophy_total;
+    f32 step;
 
     PAD_STACK(0x40);
 

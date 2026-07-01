@@ -688,6 +688,7 @@ extern f32 grVe_804DB7D4; // 9200
 
 void grVenom_8020454C(Ground_GObj* gobj)
 {
+    f32 frame;
     Vec3 sp1C;
     s32 visible;
     Ground* gp;
@@ -696,7 +697,6 @@ void grVenom_8020454C(Ground_GObj* gobj)
     HSD_GObj* lgobj;
     HSD_LObj* lobj;
     HSD_LObj* next;
-    f32 frame;
     f32 hi;
     f32 lo;
     PAD_STACK(12);

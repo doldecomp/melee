@@ -799,9 +799,9 @@ void fn_80191FD4(HSD_GObj* gobj)
     TmData* tm;
     HSD_JObj* jobj;
     HSD_JObj* child;
-    HSD_JObj* sibling;
     u32 idx;
     s32 slot;
+    HSD_JObj* sibling;
     enum CSSIconHud hud;
 
     tm = gm_8018F634();
@@ -2688,7 +2688,6 @@ void fn_80195AF0(s32* state_ptr, u32 buttons, u32 trigger)
 void fn_80195CCC(s32* arg, u32 buttons, u32 trigger)
 {
     TmData_80194F30* tm_alt = (TmData_80194F30*) arg;
-    s32 selected;
     s32 slot;
     TmData* tm;
     u8 count;
@@ -2758,7 +2757,7 @@ void fn_80195CCC(s32* arg, u32 buttons, u32 trigger)
 
     if (trigger & 0x100) {
         if (GetNameText(lbl_804799B8.x5 + (lbl_804799B8.x6 * 4)) != NULL) {
-            selected = lbl_804799B8.x5 + (lbl_804799B8.x6 * 4);
+            s32 selected = lbl_804799B8.x5 + (lbl_804799B8.x6 * 4);
             slot = lbl_804799B8.x2 + lbl_804799B8.x3;
             tm = gm_8018F634();
             count = tm->x2E;

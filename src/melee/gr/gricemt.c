@@ -1154,8 +1154,9 @@ void grIceMt_801F8CDC(Ground_GObj* gobj, s16* joint_indices, int block_num,
 
 s32 fn_801F8E58(Ground_GObj* arg0, s32* out)
 {
+    Ground* g;
+    s32* p;
     s32 list[12];
-    s32 max;
     s32 i;
     s32 pick;
     s32 chosen;
@@ -1164,12 +1165,12 @@ s32 fn_801F8E58(Ground_GObj* arg0, s32* out)
     s16 b;
     s32 d;
 
-    max = 0;
+    s32 max = 0;
     gp = arg0->user_data;
 
     {
-        Ground* g = gp;
-        s32* p = &list[max];
+        g = gp;
+        p = &list[max];
         for (i = 0; i < 12; i++) {
             if (g->gv.icemt.xDC == 0 && (Stage_80225194() != 0xD4 || i >= 4)) {
                 *p = i;
