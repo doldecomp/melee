@@ -4,6 +4,7 @@
 #include "platform.h"
 
 #include "baselib/forward.h"
+#include "gm/forward.h"
 
 #include <math_ppc.h>
 #include <dolphin/gx.h>
@@ -1529,9 +1530,9 @@ u8 gm_8017E76C(u8 difficulty, u8 stage_slot, u8 arg2)
     return lbl_803D7AC0[stage_slot + difficulty * 5].pad_6[0x10 + (arg2 * 3)];
 }
 
-void gm_8017E7A0(u8 arg0)
+void gm_8017E7A0(u8 matchResult)
 {
-    if (arg0 == 1) {
+    if (matchResult == OUTCOME_TIMEOUT) {
         Player_LoseStock(0);
         ifStatus_802F6948(0);
         ifStatus_802F6E3C(0);
@@ -1543,7 +1544,7 @@ bool gm_8017E7E0(void)
     return lbl_80472C30.x7C == 0x14;
 }
 
-void gm_8017E7FC(u8 arg0)
+void gm_8017E7FC(u8 matchResult)
 {
     UnkAdventureData* r31 = &lbl_80472C30;
     bool cond;
@@ -2603,7 +2604,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     case 3:
         temp = gm_8016AE38();
         state->x118 = 1;
-        if ((u8) temp->match_result == 6) {
+        if ((u8) temp->match_result == OUTCOME_UNK_1P_BONUS_STAGE_END) {
             grPushOn_80219204(Ground_801C1DD4(), (int*) &sp5C, (int*) &sp58);
             var_r27 = sp5C;
             var_r28 = (u16) sp58;

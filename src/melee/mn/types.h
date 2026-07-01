@@ -5,6 +5,7 @@
 
 #include <placeholder.h>
 
+#include "gm/forward.h"
 #include "mn/forward.h" // IWYU pragma: export
 
 #include <baselib/sislib.h>
@@ -186,7 +187,7 @@ struct StartMeleeRules {
     void (*x44)(void); // on VS match start callback
     void (*x48)(void); // ingame pre-frame callback
     void (*x4C)(void); // ingame post-frame callback
-    void (*x50)(u8);   // on VS match end callback
+    void (*x50)(u8);   // on VS match end callback.  Passed a MatchOutcome
     struct {
         u8 pad_x0[0x10];
         u8 x10_b0 : 1;

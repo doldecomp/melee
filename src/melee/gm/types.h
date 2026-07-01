@@ -405,7 +405,7 @@ STATIC_ASSERT(sizeof(struct gmm_x0) == 0x8518);
 
 struct lbl_8046B6A0_24C_t {
     UNK_T x0;
-    u8 x4;
+    u8 x4; ///< MatchOutcome
     u8 x5; ///< match mode
     u8 is_teams;
     u8 x7;
@@ -479,7 +479,11 @@ struct Placeholder_8016AE38_flags_2 {
 };
 
 struct lbl_8046B6A0_t {
-    /* 0x0000 */ u8 unk_0;
+    /* 0x0000 */ u8 unk_0; ///< 0 During a match
+                           ///< 1 While GAME! or "TIMEOUT!" is displayed/match
+                           ///< is frozen on final frame 2 While in 1p and
+                           ///< scores are shown calculating 3 When match is
+                           ///< finished. Stays 0 when LRA+Start ends a match
     /* 0x0001 */ s8 pauser;
     /* 0x0002 */ u8 pause_timer;
     /* 0x0003 */ u8 unk_3;
@@ -487,8 +491,10 @@ struct lbl_8046B6A0_t {
     /* 0x0005 */ u8 hud_enabled;
     /* 0x0006 */ u8 terminate_match;
     /* 0x0007 */ u8 is_singleplayer;
-    /* 0x0008 */ u8 match_result;
-    /* 0x0009 */ u8 unk_9;
+    /* 0x0008 */ u8 match_result; ///< MatchOutcome
+                                  ///< Sticky, stays until a new match starts
+    /* 0x0009 */ u8 unk_9; //< 1 during classic mode stage-clear points screen
+                           // and between stages
     /* 0x000A */ u8 unk_A;
     /* 0x000B */ u8 unk_B; // end graphic / SFX type
     /* 0x000C */ u8 unk_C;
