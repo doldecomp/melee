@@ -25,7 +25,7 @@ rustPlatform.buildRustPackage rec {
   };
 
   cargoBuildFlags = [
-    "--workspace" "--exclude objdiff-wasm"
+    "--workspace" "--exclude objdiff-wasm" "--exclude objdiff-gui"
   ];
 
   cargoTestFlags = cargoBuildFlags;
