@@ -3520,14 +3520,14 @@ s32 fn_80167638(s32 arg0, Vec3* arg1, Vec3* arg2)
 {
     UNUSED u8 pad[8];
     struct lbl_803B7A44_t sp;
-    s8 chr;
     Vec3* offset = arg2;
     Vec3* pos = arg1;
-    s32 idx;
-    s32 ret = arg0;
     lbl_8046B6A0_t* info;
     struct MatchInfoStride_80167638* stride;
+    s32 ret = arg0;
+    s32 idx;
     u8 x8;
+    s8 chr;
 
     PAD_STACK(4);
 
@@ -3585,6 +3585,7 @@ s32 fn_80167638(s32 arg0, Vec3* arg1, Vec3* arg2)
     }
     return ret;
 }
+
 
 void gm_801677C0(struct gm_801677C0_s* arg0)
 {
@@ -4484,14 +4485,19 @@ void fn_80169574(ssize_t size, s8* buf)
     buf[size] = -2;
 }
 
+static inline s8* fn_801695BC_rand_color(s32 ncolors, s8* colors)
+{
+    return &colors[HSD_Randi(ncolors)];
+}
+
 s32 fn_801695BC(u8 arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
 {
-    u8 colors[12];
+    s8 colors[12];
     u8 ncolors;
     s32 ncolors_s32;
     s32 color_i;
     s32 i;
-    u8 tmp;
+    s8 tmp;
     s32 tmp2;
 
     ncolors = gm_80169238_noinline(arg0);
@@ -4501,10 +4507,10 @@ s32 fn_801695BC(u8 arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
             colors[i] = (s8) i;
         }
         if ((s8) arg1 == (s8) arg0) {
-            colors[(s8) arg2] = 0xFF;
+            colors[(s8) arg2] = -1;
         }
         for (i = 0; i < ncolors_s32; i++) {
-            u8* other = &colors[HSD_Randi(ncolors_s32)];
+            s8* other = fn_801695BC_rand_color(ncolors_s32, colors);
             tmp = *other;
             *other = colors[i];
             colors[i] = tmp;
@@ -4514,7 +4520,7 @@ s32 fn_801695BC(u8 arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
             u8* p = arg3;
             for (i = 0; (s8) arg4[i] != -2; i++) {
                 if ((s8) arg0 == (s8) *p) {
-                    if ((s8) colors[color_i % ncolors_s32] == -1) {
+                    if (colors[color_i % ncolors_s32] == -1) {
                         color_i += 1;
                     }
                     arg4[i] = colors[color_i % ncolors_s32];

@@ -456,14 +456,12 @@ void grBigBlue_801E6364(Ground_GObj* gobj)
     HSD_ASSERT(783, car_gobj);
     grFZeroCar_801CAFBC(car_gobj, grBb_803E2D84, 30, 1);
 
+    cur = car_gobj->hsd_obj;
     i = 0;
-    {
-        HSD_JObj* root = car_gobj->hsd_obj;
-        if (root == NULL) {
-            cur = NULL;
-        } else {
-            cur = root->child;
-        }
+    if (cur == NULL) {
+        cur = NULL;
+    } else {
+        cur = cur->child;
     }
     rot_y = grBb_804DB304;
     scale_base = grBb_804DB2F0;

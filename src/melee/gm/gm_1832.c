@@ -683,6 +683,17 @@ void fn_80185408(int x, float arg8, float arg9, float argA, float argB)
     HSD_StateInvalidate(-1);
 }
 
+/// @todo .sdata2 order hack
+static void splash_sdata2_order(void)
+{
+    (void) 280.0f;
+    (void) 290.0f;
+    (void) 40.0f;
+    (void) -60.0f;
+    (void) 160.0f;
+    (void) U32_TO_F32;
+}
+
 extern float MSL_TrigF_80400770[];
 extern float MSL_TrigF_80400774[];
 #pragma dont_inline on
@@ -754,7 +765,9 @@ void fn_8018575C(HSD_GObj* gobj)
 void fn_801857C4(HSD_GObj* arg0)
 {
     HSD_SObjDesc2 desc;
+    UNUSED u8 pad_b[8];
     Vec3 pos_copy;
+    UNUSED u8 pad_a[8];
     Vec3 pos;
     HSD_SObj* sobj;
     u64 num_cols;
@@ -763,8 +776,6 @@ void fn_801857C4(HSD_GObj* arg0)
     u8* img_idx;
     u32 delay;
     s32 i;
-
-    PAD_STACK(0x10);
 
     if (lbl_804735E8.xE1 != 0) {
         HSD_GObjPLink_80390228(lbl_804D65F0);
@@ -821,6 +832,7 @@ s32 fn_80185A0C(void)
     HSD_GObj* gobj2;
     HSD_GObj* gobj;
     HSD_GObj* gobj3;
+    HSD_CObj* cobj;
     HSD_GObjProc* proc;
     s32 i, v;
     u8 count;
@@ -868,8 +880,8 @@ s32 fn_80185A0C(void)
     HSD_GObj_SetupProc(GObj_Create(0x13, 1, 0), fn_801857C4, 0);
 
     gobj3 = GObj_Create(0x13, 0x14, 0);
-    HSD_GObjObject_80390A70(gobj3, HSD_GObj_804D784B,
-                            HSD_CObjLoadDesc(lbl_804D6600->cameras->desc));
+    cobj = HSD_CObjLoadDesc(lbl_804D6600->cameras->desc);
+    HSD_GObjObject_80390A70(gobj3, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(gobj3, (GObj_RenderFunc) (Event) fn_801852FC, 0);
     gobj3->gxlink_prios = 0x61;
     lbl_804D65F0 = gobj3;
@@ -1268,7 +1280,7 @@ void gm_80186E30_OnEnter(void* arg0_)
 }
 
 /// @todo .sdata2 order hack
-static const f32 classic_intro_sdata2_order[2] = { 10000.0f, 0.0f };
+static const f32 classic_intro_sdata2_order[1] = { 0.0f };
 static const f32 classic_intro_anim_start_frame[1] = { 0.0f };
 
 void fn_80186EFC(HSD_GObj* gobj)
@@ -2095,7 +2107,8 @@ void fn_80188738(HSD_JObj* arg0)
     jobjs[0] = (jobjs[1] == NULL) ? NULL : jobjs[1]->next;
 
     if ((val / 100) != 0) {
-        HSD_JObjReqAnimAll(jobjs[0], (f32) (val / 100));
+        int temp = val;
+        HSD_JObjReqAnimAll(jobjs[0], (f32) (temp / 100));
     } else {
         HSD_JObjReqAnimAll(jobjs[0], 10.0f);
     }
@@ -2329,6 +2342,11 @@ void fn_80188EE8(HSD_GObj* gobj)
 }
 
 #pragma dont_inline off
+static inline u32 gm_801891F4_GetTickRate(void)
+{
+    return *(u32*) 0x800000F8 >> 2;
+}
+
 void fn_801891F4(void)
 {
     CssSubStruct* sub;
@@ -2420,8 +2438,8 @@ void fn_801891F4(void)
             }
             if (buttons & 0x100ULL) {
                 Vec3 pos;
-                s16 item;
                 HSD_JObj* jobj;
+                s16 item;
                 lbAudioAx_80024030(8);
                 item = *(s16*) &((s32*) lbl_803D9828)[sub->menu_values[1]];
                 jobj = Player_GetEntity(0)->hsd_obj;
@@ -2584,7 +2602,7 @@ void fn_801891F4(void)
             sub->anim_frames[22] = 0x14;
             lb_80019880(__cvt_dbl_usll(
                 (f64) (0.016666668f / ((f32*) speeds.v)[sub->menu_values[0]] *
-                       (f32) (*(u32*) 0x800000F8 >> 2))));
+                       (f32) gm_801891F4_GetTickRate())));
 
             fn_80188550(sub->menu_values[2] + 1);
 
@@ -2696,7 +2714,7 @@ TrainingModeState* gm_80189CDC(StartMeleeData* arg0)
     state->mode = (s32) (arg0->players[0].slot - 1);
     state->count = 1;
 
-    for (i = 0; i < 27; i++) {
+    for (i = 0; 0x1B > i; i++) {
         state->char_data[i] = 0;
     }
 }

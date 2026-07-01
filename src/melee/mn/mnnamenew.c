@@ -1646,9 +1646,10 @@ void fn_8023DBE8(HSD_GObj* arg0)
         mnNameNew_8023B0F8(arg0, data->x1);
     }
 
-    frame = mn_8022F298(data->jobjs[13]);
-    cursor = data->cursor_pos;
-    if (frame != (mnNameNew_804D4C10 + (f32) cursor)) {
+    if ((mnNameNew_804D4C10 + (f32) data->cursor_pos) !=
+        mn_8022F298(data->jobjs[13]))
+    {
+        cursor = data->cursor_pos;
         jobj = ((NameNewEntry*) arg0->user_data)->jobjs[13];
         HSD_JObjReqAnimAll(jobj, mnNameNew_804D4C10 + (f32) cursor);
         HSD_JObjAnimAll(jobj);

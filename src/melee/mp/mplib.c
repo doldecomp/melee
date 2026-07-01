@@ -1545,17 +1545,23 @@ bool mpLineIntersectionH(float* int_x, float* int_y, float a0x, float a0y,
     return true;
 }
 
+static inline CollLine* mpLineGetCollLine(int line_id)
+{
+    return &groundCollLine[line_id];
+}
+
 void mpLib_8004ED5C(int line_id, float* x0_out, float* y0_out, float* x1_out,
                     float* y1_out)
 {
     bool calculated_distance = false;
-    MapLine* line_r11 = groundCollLine[line_id].x0;
+    CollLine* line = mpLineGetCollLine(line_id);
+    MapLine* line_r11 = line->x0;
 
     float x0_f0 = groundCollVtx[line_r11->v0_idx].pos.x;
     float y0_f1 = groundCollVtx[line_r11->v0_idx].pos.y;
     float x1_f2 = groundCollVtx[line_r11->v1_idx].pos.x;
     float y1_f3 = groundCollVtx[line_r11->v1_idx].pos.y;
-    float distance = 0.0F;
+    float distance;
     PAD_STACK(8);
 
     if (mpLineGetPrev(line_id) != -1) {
@@ -4016,6 +4022,7 @@ int mpLib_80053950_Ceiling(int line_id)
 
 int mpLib_80053A04_Ceiling(int line_id)
 {
+    MapLine* line;
     int result;
     int new_id;
     LINEID_CHECK(4334, line_id);
@@ -4025,7 +4032,8 @@ int mpLib_80053A04_Ceiling(int line_id)
             new_id = -1;
         } else if (new_id != groundCollLine[line_id].x0->prev_id1) {
             line_id = new_id;
-            new_id = mpLineGetPrevInline(new_id);
+            new_id = mpLineGetPrevCheckInline2(
+                (line = groundCollLine[new_id].x0)->prev_id1, line);
             continue;
         }
         break;
@@ -4120,22 +4128,24 @@ void mpFloorGetRight(int line_id, Vec3* pos_out)
     u32 kind;
     int new_id;
     int line_offset;
-    PAD_STACK(8);
 
     LINEID_CHECK(4465, line_id);
 
     new_id = line_id;
-    kind = groundCollLine[line_id].flags & LINE_FLAG_KIND;
+    kind = mpLineGetKindInline(line_id);
     do {
+        MapLine* line;
         line_offset = new_id * sizeof(CollLine);
-        new_id = mpLineGetNext(new_id);
+        line = ((CollLine*) (line_offset + (int) groundCollLine))->x0;
+        new_id = line->next_id1;
+        new_id = mpLineGetNextCheckInline(line, new_id);
     } while (new_id != -1 &&
              kind == (groundCollLine[new_id].flags & LINE_FLAG_KIND));
 
     {
         CollVtx* vtx =
-            &groundCollVtx[groundCollLine[line_offset / sizeof(CollLine)]
-                               .x0->v1_idx];
+            &groundCollVtx[((CollLine*) (line_offset + (int) groundCollLine))
+                               ->x0->v1_idx];
         pos_out->x = vtx->pos.x;
         pos_out->y = vtx->pos.y;
         pos_out->z = 0.0F;
@@ -4194,8 +4204,8 @@ void mpCeilingGetRight(int line_id, Vec3* pos_out)
 
     {
         CollVtx* vtx =
-            &groundCollVtx[((CollLine*) (line_offset + (int) groundCollLine))
-                               ->x0->v0_idx];
+            &groundCollVtx[groundCollLine[line_offset / sizeof(CollLine)]
+                               .x0->v0_idx];
         pos_out->x = vtx->pos.x;
         pos_out->y = vtx->pos.y;
         pos_out->z = 0.0F;
@@ -4204,31 +4214,27 @@ void mpCeilingGetRight(int line_id, Vec3* pos_out)
 
 void mpCeilingGetLeft(int line_id, Vec3* pos_out)
 {
-    int line_offset;
-    int new_id;
     u32 kind;
+    int new_id;
+    int line_offset;
 
     LINEID_CHECK(4492, line_id);
 
     new_id = line_id;
     kind = mpLineGetKindInline(line_id);
-    while (true) {
+    do {
         MapLine* line;
         line_offset = new_id * sizeof(CollLine);
         line = ((CollLine*) (line_offset + (int) groundCollLine))->x0;
-        new_id = mpLineGetNextCheckInline(line, line->next_id1);
-
-        if (new_id == -1 ||
-            kind != (groundCollLine[new_id].flags & LINE_FLAG_KIND))
-        {
-            break;
-        }
-    }
+        new_id = line->next_id1;
+        new_id = mpLineGetNextCheckInline(line, new_id);
+    } while (new_id != -1 &&
+             !(kind != (groundCollLine[new_id].flags & LINE_FLAG_KIND)));
 
     {
         CollVtx* vtx =
-            &groundCollVtx[((CollLine*) (line_offset + (int) groundCollLine))
-                               ->x0->v1_idx];
+            &groundCollVtx[groundCollLine[line_offset / sizeof(CollLine)]
+                               .x0->v1_idx];
         pos_out->x = vtx->pos.x;
         pos_out->y = vtx->pos.y;
         pos_out->z = 0.0F;
@@ -4243,6 +4249,8 @@ void mpLeftWallGetTop(int line_id, Vec3* pos_out)
 
     LINEID_CHECK(4501, line_id);
 
+    if (line_id != -1) {
+    }
     new_id = line_id;
     kind = mpLineGetKindInline(line_id);
     do {
@@ -6718,7 +6726,6 @@ void mpLib_80059E60(void)
 void mpLib_DrawCrosses(s16* idx, int len, GXColor arg2)
 {
     Vec3 sp34;
-    s16* idx_ptr;
     Vec3* out_vtx;
     int i;
     Vec3* vtx;
@@ -6726,14 +6733,14 @@ void mpLib_DrawCrosses(s16* idx, int len, GXColor arg2)
     int out_count;
 
     vtx = mpLib_80458888;
-    for (idx_ptr = &idx[idx_i = 0], out_count = 0;
-         idx_i < len && out_count < 0x80; idx_i++)
+    out_vtx = vtx;
+    for (idx_i = 0, out_count = 0; idx_i < len && out_count < 0x80;
+         idx_i++)
     {
-        if (Ground_801C2D24(*idx_ptr, &sp34)) {
-            vtx[out_count] = sp34;
+        if (Ground_801C2D24(idx[idx_i], &sp34)) {
+            out_vtx[out_count] = sp34;
             out_count += 1;
         }
-        idx_ptr += 1;
     }
 
     if (!out_count) {

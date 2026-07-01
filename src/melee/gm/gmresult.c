@@ -1,6 +1,20 @@
 #include "gmresult.h"
 
-#include "gm/gmresult.static.h"
+#include "gm/types.h"
+
+#define GMRESULT_CAT(a, b) a##b
+#define GMRESULT_LBL(addr) GMRESULT_CAT(lbl_, addr)
+#define GMRESULT_STATIC_OBJECT(type, name) static type name
+#define GMRESULT_STATIC_U32_PAIR(name, a, b) static u32 name[2] = { a, b }
+#define GMRESULT_GLOBAL_U32(name, value) u32 name = value
+#define GMRESULT_STATIC_STR(name, value) static char name[] = value
+#define GMRESULT_STATS_TABLE(name) static StatsEntry name[]
+
+GMRESULT_STATIC_OBJECT(struct ResultsData, GMRESULT_LBL(8046DBE8));
+GMRESULT_STATIC_U32_PAIR(GMRESULT_LBL(804D3F8C), 0x817C817C, 0x817C0000);
+GMRESULT_GLOBAL_U32(GMRESULT_LBL(804D3FA0), 0x817C0000);
+GMRESULT_GLOBAL_U32(GMRESULT_LBL(804D3FA4), 0x817B0000);
+GMRESULT_STATIC_STR(GMRESULT_LBL(804D3FB0), "0");
 
 #include "gm_unsplit.h"
 #include "gmresultplayer.h"
@@ -93,7 +107,7 @@ typedef struct StatsEntry {
     /* 0x02 */ u8 pad_2[2];
     /* 0x04 */ s32 (*check)(s32);
     /* 0x08 */ u32 (*get)(s32);
-    /* 0x0C */ u8 pad_C[4];
+    /* 0x0C */ void* xC;
 } StatsEntry;
 
 typedef struct StatsList {
@@ -551,12 +565,103 @@ s32 fn_80174A60(StatsList* list, s32 slot)
 }
 
 /// Static data for stats lists
-static StatsList lbl_803D6878[] = {
-    { 0, 0x0D, NULL },
-    { 1, 0x30, NULL },
-    { 2, 0x02, NULL },
-    { 3, 0x00, NULL },
+GMRESULT_STATIC_STR(GMRESULT_LBL(804D3F68), "P");
+GMRESULT_STATIC_STR(GMRESULT_LBL(804D3F6C), "%");
+GMRESULT_STATIC_STR(GMRESULT_LBL(804D3F70), "GmRst");
+GMRESULT_STATIC_STR(GMRESULT_LBL(804D3F78), "pnlsce");
+GMRESULT_STATIC_STR(GMRESULT_LBL(804D3F80), "flmsce");
+
+GMRESULT_STATS_TABLE(GMRESULT_LBL(803D6488)) = {
+    { 0x08, { 0 }, NULL, NULL, NULL },
+    { 0x08, { 0 }, NULL, NULL, NULL },
+    { -1, { 0 }, fn_8017AE70, (u32 (*)(s32)) fn_8017BB94, GMRESULT_LBL(804D3F68) },
+    { -1, { 0 }, fn_8017AED8, (u32 (*)(s32)) fn_8017BC50, NULL },
+    { -1, { 0 }, fn_8017AF40, (u32 (*)(s32)) fn_8017BD0C, NULL },
+    { -1, { 0 }, fn_8017AFA8, (u32 (*)(s32)) fn_8017BDC8, NULL },
+    { 0x09, { 0 }, NULL, NULL, NULL },
+    { -1, { 0 }, fn_8017B07C, (u32 (*)(s32)) fn_8017BB94, GMRESULT_LBL(804D3F6C) },
+    { -1, { 0 }, fn_8017B0E4, (u32 (*)(s32)) fn_8017BC50, NULL },
+    { -1, { 0 }, fn_8017B14C, (u32 (*)(s32)) fn_8017BD0C, NULL },
+    { -1, { 0 }, fn_8017B1B4, (u32 (*)(s32)) fn_8017BDC8, NULL },
+    { 0x0C, { 0 }, fn_8017B21C, NULL, NULL },
+    { 0x0C, { 0 }, NULL, NULL, NULL },
 };
+
+GMRESULT_STATS_TABLE(GMRESULT_LBL(803D6558)) = {
+    { 0x0A, { 0 }, NULL, NULL, NULL },
+    { 0x0A, { 0 }, NULL, NULL, NULL },
+    { 0x0B, { 0 }, fn_8017AE0C, NULL, NULL },
+    { 0x0E, { 0 }, NULL, NULL, NULL },
+    { 0x0F, { 0 }, fn_8017B010, NULL, NULL },
+    { 0x0C, { 0 }, NULL, NULL, NULL },
+    { 0x0D, { 0 }, fn_8017B21C, NULL, NULL },
+    { 0x10, { 0 }, NULL, NULL, NULL },
+    { 0x11, { 0 }, fn_8017B280, NULL, NULL },
+    { 0x12, { 0 }, NULL, NULL, NULL },
+    { 0x13, { 0 }, fn_8017B2E4, NULL, NULL },
+    { 0x14, { 0 }, NULL, NULL, NULL },
+    { 0x15, { 0 }, fn_8017B348, NULL, NULL },
+    { 0x16, { 0 }, NULL, NULL, NULL },
+    { 0x17, { 0 }, fn_8017B3AC, NULL, NULL },
+    { 0x18, { 0 }, NULL, NULL, NULL },
+    { 0x19, { 0 }, fn_8017B410, NULL, NULL },
+    { 0x1A, { 0 }, NULL, NULL, NULL },
+    { 0x1B, { 0 }, fn_8017B4D0, NULL, NULL },
+    { 0x1C, { 0 }, NULL, NULL, NULL },
+    { 0x1D, { 0 }, fn_8017B534, NULL, NULL },
+    { 0x1E, { 0 }, NULL, NULL, NULL },
+    { 0x1F, { 0 }, fn_8017B598, NULL, NULL },
+    { 0x20, { 0 }, NULL, NULL, NULL },
+    { 0x21, { 0 }, fn_8017B5FC, NULL, NULL },
+    { 0x22, { 0 }, NULL, NULL, NULL },
+    { 0x23, { 0 }, fn_8017B660, NULL, NULL },
+    { 0x24, { 0 }, NULL, NULL, NULL },
+    { 0x25, { 0 }, fn_8017B6C4, NULL, NULL },
+    { 0x26, { 0 }, NULL, NULL, NULL },
+    { 0x27, { 0 }, fn_8017B728, NULL, NULL },
+    { 0x28, { 0 }, NULL, NULL, NULL },
+    { 0x29, { 0 }, fn_8017B78C, NULL, NULL },
+    { 0x2A, { 0 }, NULL, NULL, NULL },
+    { 0x2B, { 0 }, fn_8017B7F0, NULL, NULL },
+    { 0x2C, { 0 }, NULL, NULL, NULL },
+    { 0x2D, { 0 }, fn_8017B854, NULL, NULL },
+    { 0x2E, { 0 }, NULL, NULL, NULL },
+    { 0x2F, { 0 }, fn_8017B8B8, NULL, NULL },
+    { 0x30, { 0 }, NULL, NULL, NULL },
+    { 0x31, { 0 }, fn_8017B91C, NULL, NULL },
+    { 0x32, { 0 }, NULL, NULL, NULL },
+    { 0x33, { 0 }, fn_8017B9F4, NULL, NULL },
+    { 0x34, { 0 }, NULL, NULL, NULL },
+    { 0x35, { 0 }, (s32 (*)(s32)) fn_8017BACC, NULL, NULL },
+    { 0x36, { 0 }, NULL, NULL, NULL },
+    { 0x37, { 0 }, (s32 (*)(s32)) fn_8017BB30, NULL, NULL },
+    { 0x36, { 0 }, NULL, NULL, NULL },
+};
+
+GMRESULT_STATS_TABLE(GMRESULT_LBL(803D6858)) = {
+    { 0x08, { 0 }, NULL, NULL, NULL },
+    { 0x08, { 0 }, NULL, NULL, NULL },
+};
+
+static StatsList lbl_803D6878[] = {
+    { 0, 0x0D, { 0 }, GMRESULT_LBL(803D6488) },
+    { 1, 0x30, { 0 }, GMRESULT_LBL(803D6558) },
+    { 2, 0x02, { 0 }, GMRESULT_LBL(803D6858) },
+    { 3, 0x00, { 0 }, NULL },
+};
+
+GMRESULT_STATIC_STR(GMRESULT_LBL(803D6898), "Error : Cannot read archive file (File Name : %s).");
+GMRESULT_STATIC_STR(GMRESULT_LBL(803D68CC), "%d\x81\x46%02d");
+GMRESULT_STATIC_STR(GMRESULT_LBL(803D68D8), "SdRst.usd");
+GMRESULT_STATIC_STR(GMRESULT_LBL(803D68E4), "SIS_ResultData");
+GMRESULT_STATIC_STR(GMRESULT_LBL(803D68F4), "SdRst.dat");
+GMRESULT_STATIC_STR(GMRESULT_LBL(803D6900), "Error : gobj dont't get (gmResultAddPanelCamera)\n");
+GMRESULT_STATIC_STR(GMRESULT_LBL(803D6934), "gmresult.c");
+GMRESULT_STATIC_STR(GMRESULT_LBL(803D6940), "Error : cobj dont't get (gmResultAddPanelCamera)\n");
+GMRESULT_STATIC_STR(GMRESULT_LBL(803D6974), "Error : gobj dont't get (gmResultAddLight)\n");
+GMRESULT_STATIC_STR(GMRESULT_LBL(803D69A0), "Error : lobj dont't get (gmResultAddLight)\n");
+GMRESULT_STATIC_STR(GMRESULT_LBL(803D69CC), "Error : gobj dont't get (gmResultAddModel)\n");
+GMRESULT_STATIC_STR(GMRESULT_LBL(803D69F8), "translate");
 
 static inline void fn_80174B4C_blk14829(ResultsData* data, s32 slot,
                                         struct ResultsPlayerData** pdata,
@@ -1784,26 +1889,38 @@ void fn_801771C0(ResultsData* data)
 
 extern HSD_Archive* lbl_804D65B8;
 
-static inline void gm_80177368_OnEnter_blk51337(ResultsData* data,
-                                                MatchEnd* match_end)
+#undef __FILE__
+#define __FILE__ GMRESULT_LBL(803D6934)
+
+static inline void gmResultLoadArchive(ResultsData* data)
 {
-    int i;
-
-    fn_8017A004();
-    if (!gm_801743A4(match_end->result)) {
-        lbAudioAx_80023F28(fn_80160400(
-            match_end->player_standings[data->x6].character_kind));
+    lbl_804D65B8 = lbArchive_80016DBC(
+        GMRESULT_LBL(804D3F70), &data->pnlsce, GMRESULT_LBL(804D3F78),
+        &data->flmsce, GMRESULT_LBL(804D3F80), 0);
+    if (data->pnlsce == NULL) {
+        (OSReport)(GMRESULT_LBL(803D6898), GMRESULT_LBL(804D3F70));
     }
-
-    for (i = 0; i < 4; i++) {
-        if (match_end->player_standings[i].slot_type != Gm_PKind_NA) {
-            fn_8017A9B4(i);
-            data->player_data[i].fighter_gobj = fn_8017A67C(
-                match_end->player_standings[i].character_kind,
-                match_end->player_standings[i].x3, i);
-            data->player_data[i].camera = fn_8017A318(i);
-        }
+    if (data->flmsce == NULL) {
+        (OSReport)(GMRESULT_LBL(803D6898), GMRESULT_LBL(804D3F70));
     }
+}
+
+static inline void gmResultReportLightGObj(void)
+{
+    (OSReport)(GMRESULT_LBL(803D6974));
+    HSD_ASSERTMSG(0x68C, 0, GMRESULT_LBL(804D3FB0));
+}
+
+static inline void gmResultReportLightLObj(void)
+{
+    (OSReport)(GMRESULT_LBL(803D69A0));
+    HSD_ASSERTMSG(0x68F, 0, GMRESULT_LBL(804D3FB0));
+}
+
+static inline void gmResultReportModelGObj(void)
+{
+    (OSReport)(GMRESULT_LBL(803D69CC));
+    HSD_ASSERTMSG(0x6A2, 0, GMRESULT_LBL(804D3FB0));
 }
 
 void gm_80177368_OnEnter(void* arg0_)
@@ -1816,6 +1933,8 @@ void gm_80177368_OnEnter(void* arg0_)
     ResultsData* data = &lbl_8046DBE8;
     int i;
     ResultsStatsInfo* info;
+    MatchEnd* me_iter;
+    ResultsData* data_iter;
 
     PAD_STACK(0x28);
 
@@ -1860,39 +1979,45 @@ void gm_80177368_OnEnter(void* arg0_)
         }
     }
     un_802FF1B4();
-    lbl_804D65B8 = lbArchive_80016DBC("GmRst", &data->pnlsce, "pnlsce",
-                                      &data->flmsce, "flmsce", 0);
-    if (data->pnlsce == NULL) {
-        OSReport("Error : Cannot read archive file (File Name : %s).",
-                 "GmRst");
-    }
-    if (data->flmsce == NULL) {
-        OSReport("Error : Cannot read archive file (File Name : %s).",
-                 "GmRst");
-    }
+    gmResultLoadArchive(data);
     fn_80176A6C();
     light_gobj = GObj_Create(0xB, 3, 0);
     if (light_gobj == NULL) {
-        OSReport("Error : gobj dont't get (gmResultAddLight)\n");
-        HSD_ASSERT(0x68C, 0);
+        gmResultReportLightGObj();
     }
     lobj = lb_80011AC4(data->pnlsce->lights);
     if (lobj == NULL) {
-        OSReport("Error : lobj dont't get (gmResultAddLight)\n");
-        HSD_ASSERT(0x68F, 0);
+        gmResultReportLightLObj();
     }
     HSD_GObjObject_80390A70(light_gobj, (u8) HSD_GObj_804D784A, lobj);
     GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0xA, 0);
     model_gobj = GObj_Create(0xE, 0xF, 0);
     data->x18 = model_gobj;
     if (model_gobj == NULL) {
-        OSReport("Error : gobj dont't get (gmResultAddModel)\n");
-        HSD_ASSERT(0x6A2, 0);
+        gmResultReportModelGObj();
     }
     HSD_GObj_SetupProc(model_gobj, fn_80179350, 0);
     fn_80176F60();
     fn_8017AA78(&arg0->x1);
-    gm_80177368_OnEnter_blk51337(data, match_end);
+    fn_8017A004();
+    if (!gm_801743A4(match_end->result)) {
+        lbAudioAx_80023F28(fn_80160400(
+            match_end->player_standings[data->x6].character_kind));
+    }
+
+    me_iter = match_end;
+    data_iter = data;
+    for (i = 0; i < 4; i++) {
+        if (me_iter->player_standings[0].slot_type != Gm_PKind_NA) {
+            fn_8017A9B4(i);
+            data_iter->player_data[0].fighter_gobj = fn_8017A67C(
+                me_iter->player_standings[0].character_kind,
+                me_iter->player_standings[0].x3, i);
+            data_iter->player_data[0].camera = fn_8017A318(i);
+        }
+        me_iter = (MatchEnd*) ((MatchPlayerData*) me_iter + 1);
+        data_iter = (ResultsData*) ((struct ResultsPlayerData*) data_iter + 1);
+    }
 }
 
 void gm_80177704_OnLeave(void* unused)

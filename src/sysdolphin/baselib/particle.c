@@ -124,6 +124,56 @@ struct EventPriority {
     int priority;
 };
 
+typedef struct MCCErrorMessages {
+    char no_initialize[0x18];
+    char no_response[0xC];
+    char ping_error[0xC];
+    char initialize_hio[0x1C];
+    char read_hio_mailbox[0x1C];
+    char write_hio_mailbox[0x1C];
+    char read_hio_memory[0x1C];
+    char write_hio_memory[0x1C];
+    char read_hio_status[0x1C];
+    char flush_channel_info[0x1C];
+    char load_channel_info[0x1C];
+    char not_enough_memory[0x18];
+    char invalid_function_parameter[0x1C];
+    char invalid_channel_parameter[0x1C];
+    char invalid_data_size[0x14];
+    char invalid_offset_parameter[0x1C];
+    char already_opened[0x20];
+    char already_closed[0x20];
+    char already_locked[0x20];
+    char already_unlocked[0x20];
+    char read_write_busy[0x1C];
+    char unknown_error[0x10];
+} MCCErrorMessages;
+
+static MCCErrorMessages mcc_error_messages = {
+    "MCC is no initialize",
+    "No responce",
+    "PING error",
+    "Could not initialize HIO",
+    "Could not read HIO mailbox",
+    "Could not write HIO mailbox",
+    "Could not read HIO memory",
+    "Could not write HIO memory",
+    "Could not read HIO status",
+    "Could not flush channelInfo",
+    "Could not load channelInfo",
+    "Not enough memory block",
+    "Invalid function parameter",
+    "Invalid channel parameter",
+    "Invalid data size",
+    "Invalid offset parameter",
+    "Channel was (already) opened",
+    "Channel was (already) closed",
+    "Channel was (already) locked",
+    "Channel was (already) unlocked",
+    "Channel (read/write) busy",
+    "Unknown error",
+};
+
 void DrawRectangle(f32 x_min, f32 y_min, f32 w, f32 h, GXColor* color)
 {
     f32 x_max;
@@ -1163,70 +1213,70 @@ u8 fn_80392CD8(char* caller)
     case 0:
         return err;
     case 1:
-        msg = "MCC is no initialize";
+        msg = mcc_error_messages.no_initialize;
         break;
     case 2:
-        msg = "No responce";
+        msg = mcc_error_messages.no_response;
         break;
     case 3:
-        msg = "PING error";
+        msg = mcc_error_messages.ping_error;
         break;
     case 4:
-        msg = "Could not initialize HIO";
+        msg = mcc_error_messages.initialize_hio;
         break;
     case 5:
-        msg = "Could not read HIO mailbox";
+        msg = mcc_error_messages.read_hio_mailbox;
         break;
     case 6:
-        msg = "Could not write HIO mailbox";
+        msg = mcc_error_messages.write_hio_mailbox;
         break;
     case 7:
-        msg = "Could not read HIO memory";
+        msg = mcc_error_messages.read_hio_memory;
         break;
     case 8:
-        msg = "Could not write HIO memory";
+        msg = mcc_error_messages.write_hio_memory;
         break;
     case 9:
-        msg = "Could not read HIO status";
+        msg = mcc_error_messages.read_hio_status;
         break;
     case 10:
-        msg = "Could not flush channelInfo";
+        msg = mcc_error_messages.flush_channel_info;
         break;
     case 11:
-        msg = "Could not load channelInfo";
+        msg = mcc_error_messages.load_channel_info;
         break;
     case 12:
-        msg = "Not enough memory block";
+        msg = mcc_error_messages.not_enough_memory;
         break;
     case 13:
-        msg = "Invalid function parameter";
+        msg = mcc_error_messages.invalid_function_parameter;
         break;
     case 14:
-        msg = "Invalid channel parameter";
+        msg = mcc_error_messages.invalid_channel_parameter;
         break;
     case 15:
-        msg = "Invalid data size";
+        msg = mcc_error_messages.invalid_data_size;
         break;
     case 16:
-        msg = "Invalid offset parameter";
+        msg = mcc_error_messages.invalid_offset_parameter;
         break;
     case 17:
-        msg = "Channel was (already) opened";
+        msg = mcc_error_messages.already_opened;
         break;
     case 18:
-        msg = "Channel was (already) closed";
+        msg = mcc_error_messages.already_closed;
         break;
     case 19:
-        msg = "Channel was (already) locked";
+        msg = mcc_error_messages.already_locked;
         break;
     case 20:
-        msg = "Channel was (already) unlocked";
+        msg = mcc_error_messages.already_unlocked;
         break;
     case 21:
-        msg = "Channel (read/write) busy";
+        msg = mcc_error_messages.read_write_busy;
         break;
     default:
-        msg = "Unknown error";
+        msg = mcc_error_messages.unknown_error;
         break;
     }
 
@@ -2299,8 +2349,14 @@ void hsd_80394950(OSContext* ctx)
     i = 0;
     p = (u8*) ctx;
     do {
-        OSReport("R%02d=%08X:%08X (%e, %e)\n", i, ((u32*) p)[0x24],
-                 ((u32*) p)[0x25], ((f32*) p)[0x24], ((f32*) p)[0x25]);
+        OSReport("R%02d=%08X:%08X (%e, %e)\n"
+                 "\0\0\0- MISC ----------------------------------------------\n"
+                 "\0\0SRR0=%08X SRR1=%08X\n"
+                 "\0\0\0\0CR  =%08X LR  =%08X\n"
+                 "\0\0\0\0CTR =%08X XER =%08X\n"
+                 "\0\0\0\0GQR%d=%08X GQR%d=%08X\n",
+                 i, ((u32*) p)[0x24], ((u32*) p)[0x25],
+                 ((f32*) p)[0x24], ((f32*) p)[0x25]);
         i++;
         p += 8;
     } while (i < 32);
@@ -2316,7 +2372,7 @@ void Exception_ReportStackTrace(OSContext* ctx, int max_depth)
     u32 i;
     u32* sp;
 
-    OSReport("- STACK ---------------------------------\n");
+    OSReport("- STACK ---------------------------------------------\n");
     OSReport(" Address:  Back Chain  LR Save\n");
 
     sp = (u32*) ctx->gpr[1];
