@@ -114,7 +114,7 @@ typedef enum MatchOutcome {
                                       ///< Also seen when player beats any 1p mode stage that is a single non-horde,
                                       ///< non-event-match battle
     /* 4 */ OUTCOME_1P_GAME_OVER,
-    /* 5 */ OUTCOME_1P_HORDE_BATTLE_VICTORY, ///< Applies to any victory in story mode against a horde of (usually weak) enemies.
+    /* 5 */ OUTCOME_UNK_1P_HORDE_BATTLE_VICTORY, ///< Applies to any victory in story mode against a horde of (usually weak) enemies.
     /* 6 */ OUTCOME_UNK_1P_BONUS_STAGE_END,  ///< Applies to all stages that aren't just a single match. Target Test,
                                              ///< Undergrond Maze, Grand Prix, Race to the finish, etc;
     /* 7 */ OUTCOME_NO_CONTEST,
