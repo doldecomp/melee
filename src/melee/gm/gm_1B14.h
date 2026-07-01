@@ -38,7 +38,7 @@
 /* 1B25D4 */ void gm_801B25D4(GameScene*);
 /* 1B26AC */ void gm_801B26AC(GameScene*);
 /* 1B2704 */ void gm_801B2704(GameScene*);
-/* 1B2790 */ void gm_801B2790(GameScene*);
+/* 1B2790 */ void gm_PrepCameraModeVSScene(GameScene*);
 /* 1B2AF8 */ void gm_801B2AF8(GameScene*);
 /* 1B2B7C */ void gm_801B2B7C_OnInit(void);
 /* 3DD9A0 */ extern GameScene gm_803DD9A0_Scenes[9];

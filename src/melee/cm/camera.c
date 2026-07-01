@@ -3863,7 +3863,7 @@ s32 fn_8002F488(Vec4* arg0)
     return 1;
 }
 
-void Camera_8002F4D4(s8 arg0, s8 arg1, s32 arg2)
+void Camera_SetUpPauseCamera(s8 pauserSlot, s8 pauserId, s32 arg2)
 {
     Vec3* target_interest;
     Vec3* pause_eye_offset;
@@ -3871,16 +3871,16 @@ void Camera_8002F4D4(s8 arg0, s8 arg1, s32 arg2)
     f32 var_f31;
     PAD_STACK(32);
 
-    if ((arg0 < 0 || arg0 >= 6) && (u8) (arg0 - 10) > 1) {
-        arg0 = 0;
+    if ((pauserSlot < 0 || pauserSlot >= 6) && (u8) (pauserSlot - 10) > 1) {
+        pauserSlot = 0;
     }
-    if ((arg1 < 0 || arg1 >= 4) && (u8) (arg1 - 4) > 1) {
-        arg1 = 4;
+    if ((pauserId < 0 || pauserId>= 4) && (u8) (pauserId - 4) > 1) {
+        pauserId = 4;
     }
 
     cm_80452C68.mode = CAMERA_PAUSE;
-    cm_80452C68.x2C4 = arg0;
-    cm_80452C68.x2C5 = arg1;
+    cm_80452C68.x2C4 = pauserSlot;
+    cm_80452C68.x2C5 = pauserId;
     cm_80452C68.x2D0.x_min = Stage_GetCamBoundsLeftOffset();
     cm_80452C68.x2D0.x_max = Stage_GetCamBoundsRightOffset();
     cm_80452C68.x2D0.y_max = Stage_GetCamBoundsTopOffset();
@@ -3952,14 +3952,14 @@ void Camera_8002F4D4(s8 arg0, s8 arg1, s32 arg2)
     }
 }
 
-void Camera_8002F73C(s8 arg0, s8 arg1)
+void Camera_8002F73C(s8 pauserSlot, s8 pauserId)
 {
-    Camera_8002F4D4(arg0, arg1, 0);
+    Camera_SetUpPauseCamera(pauserSlot, pauserId, 0);
 }
 
 void Camera_8002F760(s8 arg0, s8 arg1)
 {
-    Camera_8002F4D4(arg0, arg1, 1);
+    Camera_SetUpPauseCamera(arg0, arg1, 1);
 }
 
 /// Camera_SetModeTraining

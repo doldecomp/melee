@@ -5,6 +5,7 @@
 #include "gmvsdata.h"
 
 #include "gm/gm_1A3F.h"
+#include "gm/gm_1BA8.h"
 #include "gm/gmmovieend.h"
 #include "melee/gm/gm_unsplit.h"
 #include "melee/gm/gmcamera.h"
@@ -286,7 +287,7 @@ GameScene gm_803DDB80_Scenes[] = {
     { 0xFF },
 };
 
-GameScene gm_803DDBE0_Scenes[] = {
+GameScene gm_CameraModeScenes[] = {
     {
         0x00,
         0x03,
@@ -327,7 +328,7 @@ GameScene gm_803DDBE0_Scenes[] = {
         0x03,
         0x03,
         0,
-        gm_801B2790,
+        gm_PrepCameraModeVSScene,
         gm_801B2AF8,
         {
             GS_VS,
@@ -832,7 +833,7 @@ void gm_801B2704(GameScene* arg0)
     gm_SetPendingScene(1);
 }
 
-void gm_801B2790(GameScene* arg0)
+void gm_PrepCameraModeVSScene(GameScene* arg0)
 {
     VsModeData* vs;
     StartMeleeData* start;
@@ -857,7 +858,7 @@ void gm_801B2790(GameScene* arg0)
 
     start->rules.x38 = gm_80165268;
     start->rules.x3C = gm_80165268;
-    start->rules.x40_check_for_pauser = gm_8016BE80;
+    start->rules.x40_check_for_pauser = gm_VSModeGetPauser;
     start->rules.x44 = gmCamera_801A31FC;
     start->rules.x48 = gmCamera_801A3098;
     start->rules.x4C = gmCamera_801A30E4;

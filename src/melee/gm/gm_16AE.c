@@ -603,59 +603,59 @@ bool gm_AnyControllerPressedZ(void)
 
 int gm_DefaultCheckForPauser(void)
 {
-    HSD_PadStatus* temp_r3_3;
-    HSD_PadStatus* temp_r4;
-    bool var_r0_2;
-    bool var_r0_3;
-    int var_r30;
-    int var_r29;
-    int temp_r3;
+    HSD_PadStatus* mpPadStatus;
+    HSD_PadStatus* spPadStatus;
+    bool spPausePressed;
+    bool mpPausePressed;
+    int mpPlayerId;
+    int mpPlayerSlot;
+    int spPlayerId;
     PAD_STACK(0x18);
 
     if (gm_8016B41C() || gm_801A4310() == GM_CHALLENGER_APPROACH ||
         (gm_801A4310() == GM_VS && gm_801A42C4() == 0x81))
     {
-        temp_r3 = Player_GetPlayerId(0);
-        temp_r4 = &HSD_PadCopyStatus[(u8) temp_r3];
-        if (temp_r4->err == 0) {
+        spPlayerId = Player_GetPlayerId(0);
+        spPadStatus = &HSD_PadCopyStatus[(u8) spPlayerId];
+        if (spPadStatus->err == 0) {
             if (DbLevel >= 3) {
-                if ((temp_r4->trigger & HSD_PAD_DPADUP) &&
-                    (temp_r4->button & HSD_PAD_X))
+                if ((spPadStatus->trigger & HSD_PAD_DPADUP) &&
+                    (spPadStatus->button & HSD_PAD_X))
                 {
-                    var_r0_2 = 1;
+                    spPausePressed = 1;
                 } else {
-                    var_r0_2 = 0;
+                    spPausePressed = 0;
                 }
             } else {
-                var_r0_2 = temp_r4->trigger & HSD_PAD_START;
+                spPausePressed = spPadStatus->trigger & HSD_PAD_START;
             }
-            if (var_r0_2 != 0) {
-                return temp_r3;
+            if (spPausePressed != 0) {
+                return spPlayerId;
             }
         }
     } else {
-        for (var_r30 = 0; var_r30 < PAD_MAX_CONTROLLERS; var_r30++) {
-            temp_r3_3 = &HSD_PadCopyStatus[(u8) var_r30];
-            if (temp_r3_3->err == 0) {
+        for (mpPlayerId = 0; mpPlayerId < PAD_MAX_CONTROLLERS; mpPlayerId++) {
+            mpPadStatus = &HSD_PadCopyStatus[(u8) mpPlayerId];
+            if (mpPadStatus->err == 0) {
                 if (DbLevel >= 3) {
-                    if ((temp_r3_3->trigger & HSD_PAD_DPADUP) &&
-                        (temp_r3_3->button & HSD_PAD_X))
+                    if ((mpPadStatus->trigger & HSD_PAD_DPADUP) &&
+                        (mpPadStatus->button & HSD_PAD_X))
                     {
-                        var_r0_3 = 1;
+                        mpPausePressed = 1;
                     } else {
-                        var_r0_3 = 0;
+                        mpPausePressed = 0;
                     }
                 } else {
-                    var_r0_3 = temp_r3_3->trigger & HSD_PAD_START;
+                    mpPausePressed = mpPadStatus->trigger & HSD_PAD_START;
                 }
-                if (var_r0_3) {
-                    for (var_r29 = 0; var_r29 < 6; var_r29++) {
-                        if (Player_GetPlayerSlotType(var_r29) != Gm_PKind_NA &&
-                            Player_GetEntity(var_r29) != NULL &&
-                            Player_8003219C(var_r29) == 0 &&
-                            var_r30 == Player_GetPlayerId(var_r29))
+                if (mpPausePressed) {
+                    for (mpPlayerSlot = 0; mpPlayerSlot < 6; mpPlayerSlot++) {
+                        if (Player_GetPlayerSlotType(mpPlayerSlot) != Gm_PKind_NA &&
+                            Player_GetEntity(mpPlayerSlot) != NULL &&
+                            Player_8003219C(mpPlayerSlot) == 0 &&
+                            mpPlayerId == Player_GetPlayerId(mpPlayerSlot))
                         {
-                            return var_r30;
+                            return mpPlayerId;
                         }
                     }
                 }
@@ -665,7 +665,7 @@ int gm_DefaultCheckForPauser(void)
     return -1;
 }
 
-int gm_8016BE80(void)
+int gm_VSModeGetPauser(void)
 {
     HSD_PadStatus* temp_r3;
     bool var_r0;
@@ -1068,14 +1068,14 @@ void fn_8016C7F0(void)
     }
 }
 
-static inline s8 fn_8016CA68_inline(int pauser)
+static inline s8 gm_GetSlotByPlayerId(int pauserId)
 {
-    int var_r30;
-    for (var_r30 = 0; var_r30 < 6; var_r30++) {
-        if (pauser == Player_GetPlayerId(var_r30) &&
-            Player_GetPlayerSlotType(var_r30) == Gm_PKind_Human)
+    u8 slot;
+    for (slot = 0; slot < 6; slot++) {
+        if (pauserId == Player_GetPlayerId(slot) &&
+            Player_GetPlayerSlotType(slot) == Gm_PKind_Human)
         {
-            return var_r30;
+            return slot;
         }
     }
     return -1;
@@ -1084,7 +1084,7 @@ static inline s8 fn_8016CA68_inline(int pauser)
 void fn_8016CA68(lbl_8046B6A0_t* arg0, int arg1)
 {
     int pauser;
-    s8 var_r0;
+    s8 pauserSlot;
     u8 var_r4;
 
     if (arg0->unk_4 == 0 && arg0->hud_enabled != 0 && !arg0->x24C8.x2_4) {
@@ -1115,11 +1115,11 @@ void fn_8016CA68(lbl_8046B6A0_t* arg0, int arg1)
             }
             gm_801A4634((long long) arg1);
             if (arg0->x24C8.x4_0) {
-                var_r0 = fn_8016CA68_inline(pauser);
+                pauserSlot = gm_GetSlotByPlayerId(pauser);
                 if (arg0->x24C8.x3C != NULL) {
-                    arg0->x24C8.x3C(var_r0);
+                    arg0->x24C8.x3C(pauserSlot);
                 } else {
-                    fn_80165108(var_r0, pauser);
+                    fn_80165108(pauserSlot, pauser);
                 }
             }
             HSD_PadRumblePauseAll();

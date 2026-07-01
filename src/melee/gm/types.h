@@ -54,7 +54,7 @@ struct GameScene {
 /// @note Colloquially known as "Major Scene"
 struct GameMode {
     u8 preload;
-    u8 idx;
+    u8 idx; ///< GameModeKind
 
     void (*Load)(void);
     void (*Unload)(void);

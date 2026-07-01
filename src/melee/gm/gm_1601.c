@@ -2631,17 +2631,17 @@ void fn_801650E8(void)
     Ground_801C5800();
 }
 
-void fn_80165108(int slot, int arg1)
+void fn_80165108(int playerSlot, int playerId)
 {
-    if (slot == -1) {
+    if (playerSlot == -1) {
         Camera_8002F73C(0xB, 5);
         return;
     }
-    if (((Player_GetPlayerSlotType(slot) == Gm_PKind_Human) ||
-         (Player_GetPlayerSlotType(slot) == Gm_PKind_Cpu)) &&
-        (Player_GetEntity(slot) != NULL))
+    if (((Player_GetPlayerSlotType(playerSlot) == Gm_PKind_Human) ||
+         (Player_GetPlayerSlotType(playerSlot) == Gm_PKind_Cpu)) &&
+        (Player_GetEntity(playerSlot) != NULL))
     {
-        Camera_8002F73C(slot, arg1);
+        Camera_8002F73C(playerSlot, playerId);
     }
 }
 

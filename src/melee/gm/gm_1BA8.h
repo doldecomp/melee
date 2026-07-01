@@ -108,7 +108,7 @@
 /* 1BF8D8 */ void gm_801BF8D8(GameScene*);
 /* 1BF8F8 */ void gm_801BF8F8(GameScene*);
 /* 1BF920 */ void gm_801BF920(GameScene*);
-/* 3DDBE0 */ extern GameScene gm_803DDBE0_Scenes[5];
+/* 3DDBE0 */ extern GameScene gm_CameraModeScenes[5];
 /* 3DF94C */ extern gm_803DF94C_t* gm_803DF94C[];
 
 #endif
