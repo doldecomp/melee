@@ -857,7 +857,7 @@ void gm_801B2790(GameScene* arg0)
 
     start->rules.x38 = gm_80165268;
     start->rules.x3C = gm_80165268;
-    start->rules.x40 = gm_8016BE80;
+    start->rules.x40_check_for_pauser = gm_8016BE80;
     start->rules.x44 = gmCamera_801A31FC;
     start->rules.x48 = gmCamera_801A3098;
     start->rules.x4C = gmCamera_801A30E4;

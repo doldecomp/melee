@@ -68,9 +68,9 @@
 /* 16B88C */ void fn_8016B88C(int);
 /* 16B8D4 */ void gm_8016B8D4(s32, u8 slot_type);
 /* 16B918 */ void fn_8016B918(void);
-/* 16BAF4 */ bool fn_8016BAF4(void);
-/* 16BBB4 */ bool fn_8016BBB4(void);
-/* 16BC74 */ int fn_8016BC74(void);
+/* 16BAF4 */ bool gm_AnyControllerPressedStart(void);
+/* 16BBB4 */ bool gm_AnyControllerPressedZ(void);
+/* 16BC74 */ int gm_DefaultGetPauser(void);
 /* 16BE80 */ int gm_8016BE80(void);
 /* 16BF74 */ int fn_8016BF74(void);
 /* 16C0C8 */ int fn_8016C0C8(void);

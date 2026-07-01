@@ -554,7 +554,9 @@ void fn_8016B918(void)
         temp_r3_2 = Player_GetPlayerId(i);
         if (DbLevel >= 3) {
             temp_r3_3 = &HSD_PadCopyStatus[(u8) temp_r3_2];
-            if ((temp_r3_3->trigger & 8) && (temp_r3_3->button & HSD_PAD_X)) {
+            if ((temp_r3_3->trigger & HSD_PAD_DPADUP) &&
+                (temp_r3_3->button & HSD_PAD_X))
+            {
                 var_r0_2 = true;
             } else {
                 var_r0_2 = false;
@@ -575,31 +577,31 @@ void fn_8016B918(void)
     }
 }
 
-bool fn_8016BAF4(void)
+bool gm_AnyControllerPressedStart(void)
 {
     int i;
     for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
         HSD_PadStatus* pad = &HSD_PadMasterStatus[(u8) i];
-        if (pad->err == 0 && (pad->trigger & 0x1000)) {
+        if (pad->err == 0 && (pad->trigger & HSD_PAD_START)) {
             return true;
         }
     }
     return false;
 }
 
-bool fn_8016BBB4(void)
+bool gm_AnyControllerPressedZ(void)
 {
     int i;
     for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
         HSD_PadStatus* pad = &HSD_PadMasterStatus[(u8) i];
-        if (pad->err == 0 && (pad->trigger & 0x10)) {
+        if (pad->err == 0 && (pad->trigger & HSD_PAD_Z)) {
             return true;
         }
     }
     return false;
 }
 
-int fn_8016BC74(void)
+int gm_DefaultCheckForPauser(void)
 {
     HSD_PadStatus* temp_r3_3;
     HSD_PadStatus* temp_r4;
@@ -617,13 +619,15 @@ int fn_8016BC74(void)
         temp_r4 = &HSD_PadCopyStatus[(u8) temp_r3];
         if (temp_r4->err == 0) {
             if (DbLevel >= 3) {
-                if ((temp_r4->trigger & 8) && (temp_r4->button & HSD_PAD_X)) {
+                if ((temp_r4->trigger & HSD_PAD_DPADUP) &&
+                    (temp_r4->button & HSD_PAD_X))
+                {
                     var_r0_2 = 1;
                 } else {
                     var_r0_2 = 0;
                 }
             } else {
-                var_r0_2 = temp_r4->trigger & 0x1000;
+                var_r0_2 = temp_r4->trigger & HSD_PAD_START;
             }
             if (var_r0_2 != 0) {
                 return temp_r3;
@@ -634,7 +638,7 @@ int fn_8016BC74(void)
             temp_r3_3 = &HSD_PadCopyStatus[(u8) var_r30];
             if (temp_r3_3->err == 0) {
                 if (DbLevel >= 3) {
-                    if ((temp_r3_3->trigger & 8) &&
+                    if ((temp_r3_3->trigger & HSD_PAD_DPADUP) &&
                         (temp_r3_3->button & HSD_PAD_X))
                     {
                         var_r0_3 = 1;
@@ -642,7 +646,7 @@ int fn_8016BC74(void)
                         var_r0_3 = 0;
                     }
                 } else {
-                    var_r0_3 = temp_r3_3->trigger & 0x1000;
+                    var_r0_3 = temp_r3_3->trigger & HSD_PAD_START;
                 }
                 if (var_r0_3) {
                     for (var_r29 = 0; var_r29 < 6; var_r29++) {
@@ -673,13 +677,15 @@ int gm_8016BE80(void)
         temp_r3 = &HSD_PadCopyStatus[(u8) var_r30];
         if (temp_r3->err == 0) {
             if (DbLevel >= 3) {
-                if ((temp_r3->trigger & 8) && (temp_r3->button & HSD_PAD_X)) {
+                if ((temp_r3->trigger & HSD_PAD_DPADUP) &&
+                    (temp_r3->button & HSD_PAD_X))
+                {
                     var_r0 = 1;
                 } else {
                     var_r0 = 0;
                 }
             } else {
-                var_r0 = temp_r3->trigger & 0x1000;
+                var_r0 = temp_r3->trigger & HSD_PAD_START;
             }
             if (var_r0 != 0) {
                 if (var_r30 == 3) {
@@ -1062,11 +1068,11 @@ void fn_8016C7F0(void)
     }
 }
 
-static inline s8 fn_8016CA68_inline(int var_r31)
+static inline s8 fn_8016CA68_inline(int pauser)
 {
     int var_r30;
     for (var_r30 = 0; var_r30 < 6; var_r30++) {
-        if (var_r31 == Player_GetPlayerId(var_r30) &&
+        if (pauser == Player_GetPlayerId(var_r30) &&
             Player_GetPlayerSlotType(var_r30) == Gm_PKind_Human)
         {
             return var_r30;
@@ -1077,17 +1083,17 @@ static inline s8 fn_8016CA68_inline(int var_r31)
 
 void fn_8016CA68(lbl_8046B6A0_t* arg0, int arg1)
 {
-    int var_r31;
+    int pauser;
     s8 var_r0;
     u8 var_r4;
 
     if (arg0->unk_4 == 0 && arg0->hud_enabled != 0 && !arg0->x24C8.x2_4) {
-        if (arg0->x24C8.x40 != NULL) {
-            var_r31 = arg0->x24C8.x40();
+        if (arg0->x24C8.x40_check_for_pauser != NULL) {
+            pauser = arg0->x24C8.x40_check_for_pauser();
         } else {
-            var_r31 = fn_8016BC74();
+            pauser = gm_DefaultCheckForPauser();
         }
-        if (var_r31 != -1) {
+        if (pauser != -1) {
             lbAudioAx_80024E84(1);
             lbAudioAx_80024030(5);
             ifAll_802F3394();
@@ -1105,19 +1111,19 @@ void fn_8016CA68(lbl_8046B6A0_t* arg0, int arg1)
                 if (arg0->x24C8.x3_1) {
                     var_r4 |= 4;
                 }
-                gm_801A0FEC(var_r31, var_r4);
+                gm_801A0FEC(pauser, var_r4);
             }
             gm_801A4634((long long) arg1);
             if (arg0->x24C8.x4_0) {
-                var_r0 = fn_8016CA68_inline(var_r31);
+                var_r0 = fn_8016CA68_inline(pauser);
                 if (arg0->x24C8.x3C != NULL) {
                     arg0->x24C8.x3C(var_r0);
                 } else {
-                    fn_80165108(var_r0, var_r31);
+                    fn_80165108(var_r0, pauser);
                 }
             }
             HSD_PadRumblePauseAll();
-            arg0->pauser = var_r31;
+            arg0->pauser = pauser;
             arg0->pause_timer = 0xA;
         }
     }
@@ -1132,13 +1138,15 @@ static inline int fn_8016CBE8_inline(void)
         pad = &HSD_PadCopyStatus[(u8) i];
         if (pad->err == 0) {
             if (DbLevel >= 3) {
-                if ((pad->trigger & 8) && (pad->button & HSD_PAD_X)) {
+                if ((pad->trigger & HSD_PAD_DPADUP) &&
+                    (pad->button & HSD_PAD_X))
+                {
                     var_r0 = true;
                 } else {
                     var_r0 = false;
                 }
             } else {
-                var_r0 = pad->trigger & 0x1000;
+                var_r0 = pad->trigger & HSD_PAD_START;
             }
             if (var_r0) {
                 return i;
@@ -1914,7 +1922,7 @@ void fn_8016E730(StartMeleeData* arg0)
     lbl_8046B6A0_t* r30;
 
     db_Setup();
-    gm_801A4B08(fn_8016BAF4, fn_8016BBB4);
+    gm_801A4B08(gm_AnyControllerPressedStart, gm_AnyControllerPressedZ);
     gm_801A4B40(db_RunEveryFrame);
     gm_801A4B50(1);
     lb_80019880((0.016666667F / arg0->rules.x34) * OS_TIMER_CLOCK);
