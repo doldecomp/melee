@@ -5,6 +5,8 @@
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
 
+#include "gm/forward.h"
+
 #include <m2c_macros.h>
 #include <math.h>
 #include <sysdolphin/baselib/controller.h>
@@ -405,7 +407,9 @@ float fn_8016B5B0(void)
     if (gm_8016B41C()) {
         float var_f1 = 3.0F;
         if (lbl_8046B6A0.unk_0 != 0) {
-            if (tmp->match_result == 1 || tmp->match_result == 4) {
+            if (tmp->match_result == OUTCOME_TIMEOUT ||
+                tmp->match_result == OUTCOME_1P_GAME_OVER)
+            {
                 var_f1 *= 1.1F;
             }
         }
@@ -705,196 +709,196 @@ int gm_CameraModeVSGetPauser(void)
     return -1;
 }
 
-int fn_8016BF74(void)
+MatchOutcome gm_GetFFAOutcome(void)
 {
-    bool var_r0;
+    bool isSingleplayer;
     int var_r0_2;
-    bool var_r0_3;
+    bool notSingleplayer;
     lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
     PAD_STACK(0x8);
 
     if (lbl_8046B6A0.x24C8.x4_2 && Player_GetP1Stock() == 0) {
-        return 4;
+        return OUTCOME_1P_GAME_OVER;
     }
     if (lbl_8046B6A0.is_singleplayer == 1) {
-        var_r0 = true;
+        isSingleplayer = true;
     } else {
-        var_r0 = false;
+        isSingleplayer = false;
     }
-    if (var_r0 && fn_8016A1E4() != 0 && fn_801693A8() == 0) {
+    if (isSingleplayer && fn_8016A1E4() != 0 && fn_801693A8() == 0) {
         var_r0_2 = 5;
     } else {
         var_r0_2 = 0;
     }
     if (var_r0_2 != 0) {
-        return 5;
+        return OUTCOME_UNK_1P_HORDE_BATTLE_VICTORY;
     }
     if (lbl_8046B6A0.is_singleplayer == 0) {
-        var_r0_3 = 1;
+        notSingleplayer = 1;
     } else {
-        var_r0_3 = 0;
+        notSingleplayer = 0;
     }
-    if (var_r0_3 != 0 && !lbl_8046B6A0.x24C8.x5_1 &&
+    if (notSingleplayer != 0 && !lbl_8046B6A0.x24C8.x5_1 &&
         (lbl_8046B6A0.x24C8.x0_0 == 1 || tmp->x24C8.x4_2))
     {
         int i;
-        int var_r31 = 0;
-        int var_r29 = 0;
+        int eliminatedPlayers = 0;
+        int playerCount = 0;
         for (i = 0; i < 6; i++) {
             if (Player_GetPlayerSlotType(i) != Gm_PKind_NA) {
                 if (Player_GetStocks(i) == 0) {
-                    var_r31 += 1;
+                    eliminatedPlayers += 1;
                 }
-                var_r29 += 1;
+                playerCount += 1;
             }
         }
 
-        if (var_r31 >= var_r29 - 1) {
-            return 2;
+        if (eliminatedPlayers >= playerCount - 1) {
+            return OUTCOME_ELIMINATION;
         }
     }
-    return 0;
+    return OUTCOME_NONE;
 }
 
-int fn_8016C0C8(void)
+MatchOutcome gm_GetTeamBattleOutcome(void)
 {
     int i;
-    bool var_r0;
+    bool isSingleplayer;
     int var_r0_2;
-    bool var_r0_3;
-    bool var_r0_4;
-    int var_r29;
-    int var_r29_2;
-    int var_r28;
-    int var_r28_2;
-    int var_r27;
-    int var_r27_2;
+    bool notSinglePlayer;
+    bool notSinglePlayer_2;
+    int slot;
+    int eliminatedTeamCount;
+    int enemyStocksCount;
+    int teamCount;
+    int enemyCharacterCount;
+    int slot_2;
 
-    s16 sp14[5];
+    s16 teamStocks[5];
     PAD_STACK(0xC);
 
     if (lbl_8046B6A0.x24C8.x4_2) {
-        var_r28 = 0;
-        var_r27 = 0;
+        enemyStocksCount = 0;
+        enemyCharacterCount = 0;
         if (Player_GetP1Stock() == 0) {
-            return 4;
+            return OUTCOME_1P_GAME_OVER;
         }
         if (lbl_8046B6A0.is_singleplayer == 1) {
-            var_r0 = true;
+            isSingleplayer = true;
         } else {
-            var_r0 = false;
+            isSingleplayer = false;
         }
-        if (var_r0 && fn_8016A1E4() != 0 && fn_801693A8() == 0) {
+        if (isSingleplayer && fn_8016A1E4() != 0 && fn_801693A8() == 0) {
             var_r0_2 = 5;
         } else {
             var_r0_2 = 0;
         }
         if (var_r0_2 != 0) {
-            return 5;
+            return OUTCOME_UNK_1P_HORDE_BATTLE_VICTORY;
         }
         if (lbl_8046B6A0.is_singleplayer == 0) {
-            var_r0_3 = true;
+            notSinglePlayer = true;
         } else {
-            var_r0_3 = false;
+            notSinglePlayer = false;
         }
-        if (var_r0_3 && !lbl_8046B6A0.x24C8.x5_1) {
-            for (var_r29 = 0; var_r29 < 6; var_r29++) {
-                if (Player_GetFlagsBit1(var_r29) == 0 &&
-                    Player_GetPlayerSlotType(var_r29) != Gm_PKind_NA &&
-                    Player_GetEntity(var_r29) != NULL)
+        if (notSinglePlayer && !lbl_8046B6A0.x24C8.x5_1) {
+            for (slot = 0; slot < 6; slot++) {
+                if (Player_GetFlagsBit1(slot) == 0 &&
+                    Player_GetPlayerSlotType(slot) != Gm_PKind_NA &&
+                    Player_GetEntity(slot) != NULL)
                 {
-                    if (Player_GetTeam(var_r29) != Player_GetTeam(0)) {
-                        var_r28 += Player_GetStocks(var_r29);
-                        var_r27 += 1;
+                    if (Player_GetTeam(slot) != Player_GetTeam(0)) {
+                        enemyStocksCount += Player_GetStocks(slot);
+                        enemyCharacterCount += 1;
                     }
                 }
             }
-            if (var_r27 != 0 && var_r28 == 0) {
-                return 3;
+            if (enemyCharacterCount != 0 && enemyStocksCount == 0) {
+                return OUTCOME_TEAM_ELIMINATION;
             }
         }
     }
     if (lbl_8046B6A0.is_singleplayer == 0) {
-        var_r0_4 = true;
+        notSinglePlayer_2 = true;
     } else {
-        var_r0_4 = false;
+        notSinglePlayer_2 = false;
     }
-    if (var_r0_4 && lbl_8046B6A0.x24C8.x0_0 == 1) {
-        var_r28_2 = 0;
-        var_r29_2 = 0;
-        memset(sp14, -1, sizeof(sp14));
+    if (notSinglePlayer_2 && lbl_8046B6A0.x24C8.x0_0 == 1) {
+        teamCount = 0;
+        eliminatedTeamCount = 0;
+        memset(teamStocks, -1, sizeof(teamStocks));
 
-        for (var_r27_2 = 0; var_r27_2 < 6; var_r27_2++) {
-            if (Player_GetPlayerSlotType(var_r27_2) != Gm_PKind_NA) {
-                if (sp14[Player_GetTeam(var_r27_2)] == -1) {
-                    sp14[Player_GetTeam(var_r27_2)] =
-                        Player_GetStocks(var_r27_2);
-                    var_r28_2++;
+        for (slot_2 = 0; slot_2 < 6; slot_2++) {
+            if (Player_GetPlayerSlotType(slot_2) != Gm_PKind_NA) {
+                if (teamStocks[Player_GetTeam(slot_2)] == -1) {
+                    teamStocks[Player_GetTeam(slot_2)] =
+                        Player_GetStocks(slot_2);
+                    teamCount++;
                 } else {
-                    sp14[Player_GetTeam(var_r27_2)] +=
-                        Player_GetStocks(var_r27_2);
+                    teamStocks[Player_GetTeam(slot_2)] +=
+                        Player_GetStocks(slot_2);
                 }
             }
         }
 
         for (i = 0; i < 5; i++) {
-            if (sp14[i] == 0) {
-                var_r29_2++;
+            if (teamStocks[i] == 0) {
+                eliminatedTeamCount++;
             }
         }
-        if (var_r29_2 >= var_r28_2 - 1) {
-            return 3;
+        if (eliminatedTeamCount >= teamCount - 1) {
+            return OUTCOME_TEAM_ELIMINATION;
         }
     }
-    return 0;
+    return OUTCOME_NONE;
 }
 
-int fn_8016C35C(void)
+MatchOutcome gm_GetMatchOutcome(void)
 {
-    int temp_r3;
-    int temp_r3_2;
+    MatchOutcome teamBattleOutcome;
+    MatchOutcome ffaOutcome;
     lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
     PAD_STACK(0x8);
 
-    if (lbl_8046B6A0.match_result != 0) {
+    if (lbl_8046B6A0.match_result != OUTCOME_NONE) {
         return lbl_8046B6A0.match_result;
     }
     if (lbl_8046B6A0.terminate_match == 1) {
-        return 9;
+        return OUTCOME_TERMINATED;
     }
     if (lbl_8046B6A0.x24C8.x5_0) {
-        return 0;
+        return OUTCOME_NONE;
     }
     if (tmp->x24C8.x0_6) {
         if (tmp->x24C8.x0_7) {
             if (lbl_8046B6A0.timer_seconds == lbl_8046B6A0.x24C8.x10 &&
                 lbl_8046B6A0.unk_2C == 0)
             {
-                return 1;
+                return OUTCOME_TIMEOUT;
             }
         } else {
             if (lbl_8046B6A0.timer_seconds == 0 && lbl_8046B6A0.unk_2C == 0x3B)
             {
-                return 1;
+                return OUTCOME_TIMEOUT;
             }
         }
     }
     if (!lbl_8046B6A0.x24C8.is_teams) {
-        temp_r3_2 = fn_8016BF74();
-        if (temp_r3_2 != 0) {
-            return temp_r3_2;
+        ffaOutcome = gm_GetFFAOutcome();
+        if (ffaOutcome != OUTCOME_NONE) {
+            return ffaOutcome;
         }
     }
     if (lbl_8046B6A0.x24C8.is_teams == true) {
-        temp_r3 = fn_8016C0C8();
-        if (temp_r3 != 0) {
-            return temp_r3;
+        teamBattleOutcome = gm_GetTeamBattleOutcome();
+        if (teamBattleOutcome != 0) {
+            return teamBattleOutcome;
         }
     }
     if (Ground_801C1D84() != 0) {
-        return 6;
+        return OUTCOME_UNK_1P_BONUS_STAGE_END;
     }
-    return 0;
+    return OUTCOME_NONE;
 }
 
 void fn_8016C46C(int arg0)
@@ -1006,7 +1010,7 @@ void fn_8016C7F0(void)
     UnkAllstarData* temp_r30;
 
     if (lbl_8046B6A0.x24C8.x50 != NULL) {
-        lbl_8046B6A0.x24C8.x50(lbl_8046B6A0.match_result);
+        lbl_8046B6A0.x24C8.x50((MatchOutcome) lbl_8046B6A0.match_result);
     }
     HSD_PadRumbleRemoveAll();
     for (var_r29 = 0; var_r29 < PAD_MAX_CONTROLLERS; var_r29++) {
@@ -1018,7 +1022,9 @@ void fn_8016C7F0(void)
     lbAudioAx_80023694();
     lbAudioAx_80024C84();
     ifTime_FreeCountdown();
-    if (lbl_8046B6A0.match_result == 4 && lbl_8046B6A0.x24C8.x4_3) {
+    if (lbl_8046B6A0.match_result == OUTCOME_1P_GAME_OVER &&
+        lbl_8046B6A0.x24C8.x4_3)
+    {
         gm_80167858(Player_GetPlayerId(0), Player_GetNametagSlotID(0), 0xD, 0);
         Camera_80030E44(4, NULL);
     }
@@ -1259,11 +1265,11 @@ void fn_8016CD98(lbl_8046B6A0_t* arg0)
     }
 }
 
-void fn_8016CF4C(int arg0, int arg1)
+void fn_8016CF4C(int arg0, MatchOutcome matchResult)
 {
     gm_801A10FC(arg0);
-    lbl_8046B6A0.match_result = arg1;
-    if (arg1 != 8 && DbLevel >= 3) {
+    lbl_8046B6A0.match_result = matchResult;
+    if (matchResult != OUTCOME_RETRY && DbLevel >= 3) {
         gm_801A4674(1);
         if (lbl_8046B6A0.x24C8.xD > 1) {
             lbl_8046B6A0.unk_30 = lbl_8046B6A0.x24C8.xD - 1;
@@ -1351,8 +1357,8 @@ void fn_8016CFE0(void)
         }
         goto block_50;
     } else {
-        tmp->match_result = fn_8016C35C();
-        if (tmp->match_result == 0) {
+        tmp->match_result = gm_GetMatchOutcome();
+        if (tmp->match_result == OUTCOME_NONE) {
             gm_DoPauseChecksAndRoutine(tmp, 1);
             if (tmp->unpause_timer != 0) {
                 tmp->unpause_timer--;
@@ -1362,9 +1368,9 @@ void fn_8016CFE0(void)
         }
     block_50:
         fn_8016B918();
-        tmp->match_result = fn_8016C35C();
+        tmp->match_result = gm_GetMatchOutcome();
     }
-    if (tmp->match_result != 0) {
+    if (tmp->match_result != OUTCOME_NONE) {
     block_51:
         fn_8016C7F0();
         ifStatus_802F7034(fn_8016B88C);
@@ -1398,8 +1404,8 @@ void gm_8016D32C_OnFrame(void)
         }
     }
     fn_8016CD98(tmp);
-    tmp->match_result = fn_8016C35C();
-    if (tmp->match_result != 0) {
+    tmp->match_result = gm_GetMatchOutcome();
+    if (tmp->match_result != OUTCOME_NONE) {
         fn_8016C7F0();
         gm_801A4B60();
     }
@@ -1436,7 +1442,9 @@ static inline void fn_8016D634_inline(struct lbl_8046B6A0_24C_t* dst)
         dst->x4 = tmp->match_result;
         gm_80166378(dst);
         fn_8016C46C_dontinline((int) dst);
-        if (tmp->match_result != 7 && tmp->match_result != 8) {
+        if (tmp->match_result != OUTCOME_NO_CONTEST &&
+            tmp->match_result != OUTCOME_RETRY)
+        {
             fn_8016C4F4(dst);
         }
         tmp->match_over = 1;
@@ -1460,7 +1468,8 @@ void fn_8016D634(void)
         pl_80040688(0, lbl_8046B6A0.unk_D, fn_8016D538());
     }
     gm_801A4B1C();
-    if (lbl_8046B6A0.x24C8.x4_4 && lbl_8046B6A0.match_result != 1 &&
+    if (lbl_8046B6A0.x24C8.x4_4 &&
+        lbl_8046B6A0.match_result != OUTCOME_TIMEOUT &&
         (lbl_8046B6A0.x24C8.x9 == 1 || Player_GetStocks(0) > 0))
     {
         un_802FD668();
@@ -1476,7 +1485,9 @@ void fn_8016D634(void)
             copied_dst->x4 = tmp->match_result;
             gm_80166378(copied_dst);
             fn_8016C46C_dontinline((int) copied_dst);
-            if (tmp->match_result != 7 && tmp->match_result != 8) {
+            if (tmp->match_result != OUTCOME_NO_CONTEST &&
+                tmp->match_result != OUTCOME_RETRY)
+            {
                 fn_8016C4F4(copied_dst);
             }
             tmp->match_over = 1;
@@ -2036,7 +2047,9 @@ void gm_8016E9C8(void* arg0_raw)
         arg0->xC.x4 = lbl_8046B6A0.match_result;
         gm_80166378(&arg0->xC);
         fn_8016C46C_dontinline((int) &arg0->xC);
-        if (tmp->match_result != 7 && tmp->match_result != 8) {
+        if (tmp->match_result != OUTCOME_NO_CONTEST &&
+            tmp->match_result != OUTCOME_RETRY)
+        {
             fn_8016C4F4(&arg0->xC);
         }
         tmp->match_over = 1;
@@ -2052,7 +2065,9 @@ void gm_8016E9C8(void* arg0_raw)
     arg0->x8 = Ground_801C5ABC();
 
     if (gm_8016B3D8() || gm_8016E9C8_inline() || gm_801A4310() == GM_VS) {
-        if (lbl_8046B6A0.match_result != 7 && lbl_8046B6A0.match_result != 8) {
+        if (lbl_8046B6A0.match_result != OUTCOME_NO_CONTEST &&
+            lbl_8046B6A0.match_result != OUTCOME_RETRY)
+        {
             for (i = 0; i < 6; i++) {
                 if (Player_GetPlayerSlotType(i) == Gm_PKind_Human) {
                     gmMainLib_8015D00C(

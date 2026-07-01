@@ -72,9 +72,9 @@
 /* 16BBB4 */ bool gm_AnyControllerPressedZ(void);
 /* 16BC74 */ int gm_DefaultVSGetPauser(void);
 /* 16BE80 */ int gm_CameraModeVSGetPauser(void);
-/* 16BF74 */ int fn_8016BF74(void);
-/* 16C0C8 */ int fn_8016C0C8(void);
-/* 16C35C */ int fn_8016C35C(void);
+/* 16BF74 */ MatchOutcome gm_GetFFAOutcome(void);
+/* 16C0C8 */ MatchOutcome gm_GetTeamBattleOutcome(void);
+/* 16C35C */ MatchOutcome gm_GetMatchOutcome(void);
 /* 16C46C */ void fn_8016C46C(int);
 /* 16C4F4 */ void fn_8016C4F4(struct lbl_8046B6A0_24C_t*);
 /* 16C5C0 */ bool gm_8016C5C0(int pl_slot);
@@ -111,7 +111,7 @@
  */
 /* 16CBE8 */ void gm_DoUnpauseChecksAndRoutine(lbl_8046B6A0_t*, int);
 /* 16CD98 */ void fn_8016CD98(lbl_8046B6A0_t*);
-/* 16CF4C */ void fn_8016CF4C(int, int);
+/* 16CF4C */ void fn_8016CF4C(int, MatchOutcome);
 /* 16CFE0 */ void fn_8016CFE0(void);
 /* 16D32C */ void gm_8016D32C_OnFrame(void);
 /* 16D538 */ bool fn_8016D538(void);
