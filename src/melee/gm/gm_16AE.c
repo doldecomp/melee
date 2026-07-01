@@ -1088,8 +1088,8 @@ void fn_8016CA68(lbl_8046B6A0_t* arg0, int arg1)
     u8 var_r4;
 
     if (arg0->unk_4 == 0 && arg0->hud_enabled != 0 && !arg0->x24C8.x2_4) {
-        if (arg0->x24C8.x40_check_for_pauser != NULL) {
-            pauser = arg0->x24C8.x40_check_for_pauser();
+        if (arg0->x24C8.x40_check_for_pauser_override != NULL) {
+            pauser = arg0->x24C8.x40_check_for_pauser_override();
         } else {
             pauser = gm_DefaultVSGetPauser();
         }
@@ -1116,8 +1116,8 @@ void fn_8016CA68(lbl_8046B6A0_t* arg0, int arg1)
             gm_801A4634((long long) arg1);
             if (arg0->x24C8.x4_0) {
                 pauserSlot = gm_GetSlotByPlayerId(pauser);
-                if (arg0->x24C8.x3C != NULL) {
-                    arg0->x24C8.x3C(pauserSlot);
+                if (arg0->x24C8.x3C_on_pause_override != NULL) {
+                    arg0->x24C8.x3C_on_pause_override(pauserSlot);
                 } else {
                     gm_EnablePlayerPauseCamera(pauserSlot, pauser);
                 }

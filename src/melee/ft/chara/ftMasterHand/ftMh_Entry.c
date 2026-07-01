@@ -152,7 +152,7 @@ static void ftMh_MS_343_801511FC(HSD_GObj* gobj)
     }
     case ftMh_UnkEnum0_Unk09: {
         if (--fp->mv.mh.unk4.x8 == 0) {
-            Camera_8002F474();
+            Camera_SetModeToStandard();
             fp->mv.mh.unk4.x0 = ftMh_UnkEnum0_Unk10;
         }
         return;

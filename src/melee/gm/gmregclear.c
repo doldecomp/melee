@@ -741,7 +741,7 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
         arg1->x0.xC.xC = 5;
         switch ((s32) arg1->x0.x9) {
         case 1:
-            arg0->rules.x3C = gm_80165290;
+            arg0->rules.x3C_on_pause_override = gm_80165290;
             arg0->rules.x9 = 1;
             arg0->rules.x3_1 = 0;
             arg0->players[0].xC_b1 = 0;
@@ -3961,7 +3961,7 @@ void fn_80182F40(HSD_GObj* unused)
         break;
     case 2:
         if (gm_801A4BA8() == 0x370 || Player_800368F8(gm_801BF6F8()) == 0) {
-            Camera_8002F474();
+            Camera_SetModeToStandard();
             for (i = 0; i < 4; i++) {
                 Player_SetPlayerAndEntityCpuLevel(i, 9);
                 Player_SetMoreFlagsBit4(i, 0);

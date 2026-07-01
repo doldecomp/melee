@@ -3196,9 +3196,9 @@ f32 Ground_801C57F0(void)
 void Ground_801C5800(void)
 {
     if (stage_info.param->x4C_fixed_cam) {
-        Camera_8002F8F4();
+        Camera_SetModeToFixed();
     } else {
-        Camera_8002F474();
+        Camera_SetModeToStandard();
     }
 }
 

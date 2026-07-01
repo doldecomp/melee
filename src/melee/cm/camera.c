@@ -3849,12 +3849,12 @@ void Camera_8002F3AC(void)
     cm_80452C68.transform_copy.fov = cm_80452C68.transform_copy.target_fov;
 }
 
-void Camera_8002F474(void)
+void Camera_SetModeToStandard(void)
 {
     cm_80452C68.mode = CAMERA_STANDARD;
 }
 
-s32 fn_8002F488(Vec4* arg0)
+s32 Camera_SetBounds(Vec4* arg0)
 {
     arg0->z = Stage_GetCamBoundsLeftOffset();
     arg0->w = Stage_GetCamBoundsRightOffset();
@@ -3893,7 +3893,7 @@ void Camera_SetUpPauseCamera(s8 pauserSlot, s8 pauserId, s32 arg2)
     cm_80452C68.x2D0.angle_left = Stage_GetCamAngleRadiansLeft();
     cm_80452C68.x2D0.unk28 = Stage_GetPauseCamZPosMin();
     cm_80452C68.x2D0.unk2C = Stage_GetPauseCamZPosMax();
-    cm_80452C68.x2D0.callback = (void (*)(Camera_x2D0*))(Event) fn_8002F488;
+    cm_80452C68.x2D0.callback = (void (*)(Camera_x2D0*))(Event) Camera_SetBounds;
 
     switch (arg2) {
     case 0:

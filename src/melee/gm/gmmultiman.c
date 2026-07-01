@@ -294,7 +294,7 @@ void gm_801B6428(GameScene* arg0)
     temp_r3->rules.x3_7 = true;
     temp_r3->rules.x9 = 1;
     temp_r3->rules.xB = -1;
-    temp_r3->rules.x3C = gm_80165290;
+    temp_r3->rules.x3C_on_pause_override = gm_80165290;
     gm_80167A14(temp_r3->players);
     if (temp_r31->unk_584 == 0xE) {
         var_r4_2 = 0x20;

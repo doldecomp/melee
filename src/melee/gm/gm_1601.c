@@ -2672,7 +2672,7 @@ void gm_80165268(int unused)
 
 void gm_80165290(int x)
 {
-    Camera_8002F8F4();
+    Camera_SetModeToFixed();
 }
 
 void fn_801652B0(s32 arg0, s32 arg1)

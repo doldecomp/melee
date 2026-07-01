@@ -181,9 +181,10 @@ struct StartMeleeRules {
     float x30;        // damage ratio
     float x34;        // game speed
     void (*x38)(int); // on unpause callback
-    void (*x3C)(int); // on pause callback (conditional?)
-    int (*x40_check_for_pauser)(void); // When set, this method is used for checking if a player has pressed
-                                       // pause. Otherwise falls back to gm_DefaultVSGetPauser
+    void (*x3C_on_pause_override)(int); // on pause callback (conditional?). When set, this method is called when a player presses Start
+                                        // during a match. Otherwise, gm_EnablePlayerPauseCamera is called
+    int (*x40_check_for_pauser_override)(void); // When set, this method is used for checking if a player has pressed
+                                                // pause. Otherwise falls back to gm_DefaultVSGetPauser
     void (*x44)(void); // on VS match start callback
     void (*x48)(void); // ingame pre-frame callback
     void (*x4C)(void); // ingame post-frame callback
