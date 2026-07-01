@@ -183,7 +183,7 @@ struct StartMeleeRules {
     void (*x38)(int); // on unpause callback
     void (*x3C)(int); // on pause callback (conditional?)
     int (*x40_check_for_pauser)(void); // When set, this method is used for checking if a player has pressed
-                                                // pause. Otherwise falls back to gm_DefaultVSGetPauser
+                                       // pause. Otherwise falls back to gm_DefaultVSGetPauser
     void (*x44)(void); // on VS match start callback
     void (*x48)(void); // ingame pre-frame callback
     void (*x4C)(void); // ingame post-frame callback
