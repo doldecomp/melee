@@ -549,7 +549,8 @@ void ifMagnify_802FC750(void)
 
     base = &ifMagnify_804A1DE0;
     for (cur = base, offset = (i = 0), offset <<= 4; i < 6;
-         i += 1, cur = (ifMagnify*) ((u32) cur + 0x10), offset += 0x10) {
+         i += 1, cur = (ifMagnify*) ((u32) cur + 0x10), offset += 0x10)
+    {
         if (cur->player[0].gobj != NULL) {
             gobj_ptr = (HSD_GObj**) ((u32) base + offset + 0x14);
             HSD_GObjPLink_80390228(*gobj_ptr);

@@ -137,10 +137,10 @@ void lbRefract_80021CE8(void* arg0, s32 arg1)
                 f64 est = __frsqrte((f64) dist_sq);
                 est = 0.5 * est * -(((f64) dist_sq * (est * est)) - 3.0);
                 est = 0.5 * est * -(((f64) dist_sq * (est * est)) - 3.0);
-                *sqrt_dist_ptr = (f32) ((f64) dist_sq *
-                                        (0.5 * est *
-                                         -(((f64) dist_sq * (est * est)) -
-                                           3.0)));
+                *sqrt_dist_ptr =
+                    (f32) ((f64) dist_sq *
+                           (0.5 * est *
+                            -(((f64) dist_sq * (est * est)) - 3.0)));
                 dist_sq = *sqrt_dist_ptr;
             }
             dist = dist_sq;

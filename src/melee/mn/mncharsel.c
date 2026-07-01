@@ -754,11 +754,11 @@ void mnCharSel_8025DB34(u8 arg0)
                         int j;
                         for (j = 0; j < num_doors; j++) {
                             CSSDoor* cur_door = &mnCharSel_803F0DFC.doors[j];
-                        if ((int) arg0 != j && cur_door->p_kind != 3 &&
-                            cur_door->sel_icon < 0x19U &&
-                            cur_door->sel_icon == door2->sel_icon &&
-                            door2->costume == cur_door->costume)
-                        {
+                            if ((int) arg0 != j && cur_door->p_kind != 3 &&
+                                cur_door->sel_icon < 0x19U &&
+                                cur_door->sel_icon == door2->sel_icon &&
+                                door2->costume == cur_door->costume)
+                            {
                                 found = 1;
                                 break;
                             }
@@ -1284,7 +1284,7 @@ static struct CSSCharModel {
 void fn_8025F0E0(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    struct CSSCursorData* (*sp58)[4];
+    struct CSSCursorData*(*sp58)[4];
     HSD_JObj* sp54;
     HSD_JObj* sp4C;
     HSD_JObj* sp48;
@@ -1438,8 +1438,9 @@ void fn_8025F0E0(HSD_GObj* gobj)
 
                         {
                             u8 cpuslider2_joint = doors->cpuslider2_joint;
-                            fval = (f32) mnCharSel_804D6CB0->data.data.players[i]
-                                       .cpu_level;
+                            fval =
+                                (f32) mnCharSel_804D6CB0->data.data.players[i]
+                                    .cpu_level;
                             lb_80011E24(mnCharSel_804D6CC0, &sp38,
                                         cpuslider2_joint, -1);
                         }
@@ -1453,31 +1454,36 @@ void fn_8025F0E0(HSD_GObj* gobj)
                             lb_80011E24(mnCharSel_804D6CC0, &sp34,
                                         doors->slidername_joint, -1);
                             HSD_ForeachAnim(sp34, JOBJ_TYPE, ALL_TYPE_MASK,
-                                            HSD_AObjReqAnim, AOBJ_ARG_AF, 50.0f);
+                                            HSD_AObjReqAnim, AOBJ_ARG_AF,
+                                            50.0f);
                             HSD_JObjAnimAll(sp34);
                             HSD_ForeachAnim(sp34, JOBJ_TYPE, ALL_TYPE_MASK,
-                                            HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+                                            HSD_AObjStopAnim, AOBJ_ARG_AOV, 0,
+                                            0);
                         } else {
                             lb_80011E24(mnCharSel_804D6CC0, &sp30,
                                         doors->slidername_joint, -1);
                             HSD_ForeachAnim(sp30, JOBJ_TYPE, ALL_TYPE_MASK,
-                                            HSD_AObjReqAnim, AOBJ_ARG_AF, 40.0f);
+                                            HSD_AObjReqAnim, AOBJ_ARG_AF,
+                                            40.0f);
                             HSD_JObjAnimAll(sp30);
                             HSD_ForeachAnim(sp30, JOBJ_TYPE, ALL_TYPE_MASK,
-                                            HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+                                            HSD_AObjStopAnim, AOBJ_ARG_AOV, 0,
+                                            0);
                         }
                         {
                             u8 cpuslider_joint = doors->cpuslider_joint;
-                            fval = (f32) mnCharSel_804D6CB0->data.data.players[i]
-                                       .cpu_level;
+                            fval =
+                                (f32) mnCharSel_804D6CB0->data.data.players[i]
+                                    .cpu_level;
                             lb_80011E24(mnCharSel_804D6CC0, &sp30,
                                         cpuslider_joint, -1);
                         }
-                        HSD_ForeachAnim(sp30, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
-                                        AOBJ_ARG_AF, fval);
+                        HSD_ForeachAnim(sp30, JOBJ_TYPE, TOBJ_MASK,
+                                        HSD_AObjReqAnim, AOBJ_ARG_AF, fval);
                         HSD_JObjAnimAll(sp30);
-                        HSD_ForeachAnim(sp30, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
-                                        AOBJ_ARG_AOV, 0, 0);
+                        HSD_ForeachAnim(sp30, JOBJ_TYPE, TOBJ_MASK,
+                                        HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
                     }
                 }
             }
@@ -3717,7 +3723,8 @@ void fn_802633B0(HSD_GObj* gobj)
     }
 
     if ((u8) mnCharSel_804D6CF5 == 1) {
-        lb_80011E24(mnCharSel_804D6CC0, &list_jobj, mnCharSel_803F0DFC.xc4, -1);
+        lb_80011E24(mnCharSel_804D6CC0, &list_jobj, mnCharSel_803F0DFC.xc4,
+                    -1);
         trigger = HSD_PadCopyStatus[(u8) mnCharSel_804D6CF0].trigger;
     } else {
         lb_80011E24(mnCharSel_804D6CC0, &list_jobj,
@@ -3759,8 +3766,8 @@ void fn_802633B0(HSD_GObj* gobj)
         t = tag->timer + 1;
         tag->timer = t;
         if (t > 0xAU) {
-            HSD_ForeachAnim(list_jobj, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjStopAnim,
-                            AOBJ_ARG_AOV, 0, 0);
+            HSD_ForeachAnim(list_jobj, JOBJ_TYPE, ALL_TYPE_MASK,
+                            HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
             ((HSD_Text*) tag->name_ls)->hidden = 0;
             tag->state = 3;
         }
@@ -3807,7 +3814,8 @@ void fn_802633B0(HSD_GObj* gobj)
         }
 
         if ((u8) mnCharSel_804D6CF5 == 1) {
-            lb_80011E24(mnCharSel_804D6CC0, &arrow_jobj, mnCharSel_803F0DFC.xc7, -1);
+            lb_80011E24(mnCharSel_804D6CC0, &arrow_jobj,
+                        mnCharSel_803F0DFC.xc7, -1);
         } else {
             lb_80011E24(mnCharSel_804D6CC0, &arrow_jobj,
                         mnCharSel_803F0DFC.tags[tag->port].x7, -1);
@@ -3820,7 +3828,8 @@ void fn_802633B0(HSD_GObj* gobj)
         }
 
         if ((u8) mnCharSel_804D6CF5 == 1) {
-            lb_80011E24(mnCharSel_804D6CC0, &arrow_jobj, mnCharSel_803F0DFC.xc8, -1);
+            lb_80011E24(mnCharSel_804D6CC0, &arrow_jobj,
+                        mnCharSel_803F0DFC.xc8, -1);
         } else {
             lb_80011E24(mnCharSel_804D6CC0, &arrow_jobj,
                         mnCharSel_803F0DFC.tags[tag->port].kostar_text_joint,
@@ -3895,10 +3904,9 @@ void fn_802633B0(HSD_GObj* gobj)
                             mnCharSel_803F0DFC.tags[tag->port].list_joint, -1);
             }
             lb_8000B1CC(list_origin_jobj, NULL, &list_origin);
-            cursor_row = 0.5f * (0.8f +
-                               (list_origin.y - mnCharSel_804A0BC0[tag->port]
-                                                    ->x10)) -
-                      (tag->x8 * 0.03125f);
+            cursor_row = 0.5f * (0.8f + (list_origin.y -
+                                         mnCharSel_804A0BC0[tag->port]->x10)) -
+                         (tag->x8 * 0.03125f);
             row = (s32) cursor_row;
 
             if ((s32) cursor_row == 0) {
@@ -4066,11 +4074,11 @@ void fn_802633B0(HSD_GObj* gobj)
                 lb_80011E24(mnCharSel_804D6CC0, &handicap_slider_jobj,
                             mnCharSel_803F0DFC.doors[port].cpuslider_joint,
                             -1);
-                HSD_ForeachAnim(handicap_slider_jobj, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
-                                AOBJ_ARG_AF, hval_f);
+                HSD_ForeachAnim(handicap_slider_jobj, JOBJ_TYPE, TOBJ_MASK,
+                                HSD_AObjReqAnim, AOBJ_ARG_AF, hval_f);
                 HSD_JObjAnimAll(handicap_slider_jobj);
-                HSD_ForeachAnim(handicap_slider_jobj, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
-                                AOBJ_ARG_AOV, 0, 0);
+                HSD_ForeachAnim(handicap_slider_jobj, JOBJ_TYPE, TOBJ_MASK,
+                                HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
                 list_jobj = handicap_slider_jobj;
                 {
                     u8 port3;

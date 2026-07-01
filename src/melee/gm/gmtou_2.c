@@ -190,8 +190,10 @@ void fn_8019C048(HSD_GObj* gobj)
     tmd->x524[2]->hidden = 0;
 
     lbl_80479A58.x1D[idx].a = table.halfwords[lbl_80479A58.x1D[idx].x0 * 3];
-    lbl_80479A58.x1D[idx].c = table.halfwords[lbl_80479A58.x1D[idx].x0 * 3 + 1];
-    lbl_80479A58.x1D[idx].x2 = table.halfwords[lbl_80479A58.x1D[idx].x0 * 3 + 2];
+    lbl_80479A58.x1D[idx].c =
+        table.halfwords[lbl_80479A58.x1D[idx].x0 * 3 + 1];
+    lbl_80479A58.x1D[idx].x2 =
+        table.halfwords[lbl_80479A58.x1D[idx].x0 * 3 + 2];
 
     if (lbl_80479A58.x1D[idx].b < lbl_80479A58.x1D[idx].a) {
         lbl_80479A58.x1D[idx].b = lbl_80479A58.x1D[idx].a;

@@ -364,9 +364,7 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
         ftCommon_8007D5D4(fp);
         msid = ((int (*)[4][3])
                     ftCo_803C5520)[0][kb_level][fp->dmg.x184c_damaged_hurtbox];
-        if (!(temp_f1_2 >
-              (M_PI_2 + (double) p_ftCommonData->x1E8_radians)))
-        {
+        if (!(temp_f1_2 > (M_PI_2 + (double) p_ftCommonData->x1E8_radians))) {
             goto block_26;
         }
         ftCo_Damage_CalcVel(fp, pos.x, -pos.y * p_ftCommonData->x1EC);
@@ -404,9 +402,7 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
         msid = 0x5A;
         goto block_36;
     block_33:
-        if (!(fp->dmg.x1830_percent >=
-              (float) (s32) p_ftCommonData->x23C))
-        {
+        if (!(fp->dmg.x1830_percent >= (float) (s32) p_ftCommonData->x23C)) {
             goto block_36;
         }
         if (!(HSD_Randf() < p_ftCommonData->x240)) {
@@ -459,8 +455,7 @@ block_62:
 block_63:
     fp->mv.co.damage.x4 = should_collide;
     fp->mv.co.damage.x19 = 0;
-    fp->hitlag_cb =
-        ftCo_Damage_OnEveryHitlag;
+    fp->hitlag_cb = ftCo_Damage_OnEveryHitlag;
     fp->x670_timer_lstick_tilt_x = 0xFE;
     fp->x671_timer_lstick_tilt_y = 0xFE;
     fp->post_hitlag_cb = ftCo_Damage_OnExitHitlag;

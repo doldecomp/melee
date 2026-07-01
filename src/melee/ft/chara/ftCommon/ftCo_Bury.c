@@ -193,7 +193,8 @@ void ftCo_800C0B20(Fighter_GObj* gobj)
             if (ftColl_80076640(fp, &f)) {
                 FighterHurtCapsule* hurt;
                 hurt_idx *= sizeof(FighterHurtCapsule);
-                hurt = (FighterHurtCapsule*) ((intptr_t) fp + hurt_idx + 0x11A0);
+                hurt =
+                    (FighterHurtCapsule*) ((intptr_t) fp + hurt_idx + 0x11A0);
                 ftColl_80076764(3, 1, 0, unk_anim, fp, hurt);
 
                 /// @todo Eliminate cast

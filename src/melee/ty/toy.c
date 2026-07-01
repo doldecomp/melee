@@ -98,6 +98,7 @@ void Toy_80306D70(s32 arg0);
 HSD_LObj* Toy_LoadLObjList(LightList**, s32*);
 void Toy_80307470(s32);
 void Toy_80307E84(HSD_GObj* gobj);
+char* Toy_8030813C(s32 arg0, enum_t unused);
 void Toy_80308250(u8* arg0, s32 arg1, s32 arg2);
 s32 Toy_803082F8(s16 idx);
 void Toy_80308328(s32 arg0);
@@ -2222,7 +2223,6 @@ char* Toy_8030813C(s32 arg0, enum_t unused)
 
 void Toy_80308250(u8* arg0, s32 arg1, s32 arg2)
 {
-    char* Toy_8030813C(s16 arg0, enum_t unused);
     void* sym;
     char* ptr;
     ptr = Toy_8030813C(arg1, arg1);
@@ -2433,9 +2433,8 @@ HSD_GObj* Toy_803087F4(void* arg0)
     anim = &Toy_804A2AA8;
 
     if (entry->x14 == NULL) {
-        char* Toy_8030813C();
         trophy_id = entry->x10;
-        model_name = Toy_8030813C(trophy_id);
+        model_name = Toy_8030813C(trophy_id, trophy_id);
         if (entry->x14 != NULL) {
             lbArchive_80016EFC(entry->x14);
             entry->x14 = NULL;
@@ -5258,7 +5257,7 @@ void Toy_80310324(void)
     ToyGlobalsS_* tg5;
     ToyGlobalsS_* tg6;
     ToySubStructS_* sub;
-    UNK_T syms[4];
+    UNK_T syms[6];
     s32 one;
     s32 var_r0;
     HSD_SObj* sobj;

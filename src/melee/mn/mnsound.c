@@ -185,8 +185,8 @@ static inline void mnSound_80249A1C_OnSoundSelected(HSD_GObj* gobj,
     }
 }
 
-static inline void mnSound_80249A1C_ChooseVolumeAnim(HSD_JObj* jobj,
-                                                     AnimLoopSettings* settings)
+static inline void
+mnSound_80249A1C_ChooseVolumeAnim(HSD_JObj* jobj, AnimLoopSettings* settings)
 {
     AnimLoopSettings* anim = mnSound_803EEED8;
     f32 cursor_frame = mn_8022F298(jobj);

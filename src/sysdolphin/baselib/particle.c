@@ -4206,7 +4206,7 @@ void* fn_80397814(void* arg)
 
     /* Clear display list */
     {
-        ExcptNode** head = &sp->xD0;
+        ExcptNode** head = (ExcptNode**) &sp->xD0;
         ExcptNode* next;
         ExcptNode* cur;
         keybuf = (u32*) head;

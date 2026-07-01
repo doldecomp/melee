@@ -1056,8 +1056,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                     p++;
                 }
             }
-            if (!((*(struct lbl_8046B6A0_24C_58_t (*)[6]) x58)[arg1].x3 &
-                  1) &&
+            if (!((*(struct lbl_8046B6A0_24C_58_t(*)[6]) x58)[arg1].x3 & 1) &&
                 rankings[arg1] == 0 && x58[arg1].x20 == 0)
             {
                 return 1;
@@ -1080,18 +1079,17 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                         p++;
                     }
                 }
-                if (!((*(struct lbl_8046B6A0_24C_58_t (*)[6]) x58)[arg1]
-                          .x3 &
+                if (!((*(struct lbl_8046B6A0_24C_58_t(*)[6]) x58)[arg1].x3 &
                       1) &&
                     x58[arg1].x5 == 0 && x58[arg1].x20 == 0)
                 {
                     return 1;
                 }
             } else {
-                if (!((*(struct lbl_8046B6A0_24C_58_t (*)[6]) x58)[arg1]
-                          .x3 &
+                if (!((*(struct lbl_8046B6A0_24C_58_t(*)[6]) x58)[arg1].x3 &
                       1) &&
-                    x58[arg1].x20 == 0) {
+                    x58[arg1].x20 == 0)
+                {
                     return 1;
                 }
             }

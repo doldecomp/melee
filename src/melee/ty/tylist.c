@@ -784,9 +784,7 @@ void _tyList_80313BD8(HSD_GObj* gobj)
         g->x0F = 0;
     }
 
-    if ((f30 < 0.0f && f30 != (f32) (s8) g->x10) ||
-        (Toy_80305B88() & 0x41))
-    {
+    if ((f30 < 0.0f && f30 != (f32) (s8) g->x10) || (Toy_80305B88() & 0x41)) {
         g->x10 = (s8) f30;
         state->x29B = state->x29B - 1;
         if ((s8) state->x29B < 0) {
@@ -797,9 +795,7 @@ void _tyList_80313BD8(HSD_GObj* gobj)
         return;
     }
 
-    if ((f30 > 0.0f && f30 != (f32) (s8) g->x10) ||
-        (Toy_80305B88() & 0x22))
-    {
+    if ((f30 > 0.0f && f30 != (f32) (s8) g->x10) || (Toy_80305B88() & 0x22)) {
         g->x10 = (s8) f30;
         state->x29B = state->x29B + 1;
         if ((s8) state->x29B >= 3) {

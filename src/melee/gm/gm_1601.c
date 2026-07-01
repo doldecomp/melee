@@ -1155,9 +1155,6 @@ void fn_80161C90(MatchEnd* arg0, int arg1, u16* arg2)
     }
     s->unk1A = (s->unk1A + 1 > 0xFFFF) ? 0xFFFF : s->unk1A + 1;
     {
-        s32 fn_801654A0();
-        s32 fn_80165418();
-        s32 fn_80165548();
         if (arg1 == fn_80165548(arg0, fn_80165418(arg0), fn_801654A0(arg0))) {
             flag = 1;
         } else {

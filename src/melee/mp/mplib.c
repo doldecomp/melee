@@ -3650,7 +3650,6 @@ static inline int mpLineGetNextCheckInlineVtx(MapLine* line, s16 result,
     return result;
 }
 
-
 int mpLineNextNonFloor(int line_id)
 {
     MapLine* line;
@@ -6735,9 +6734,7 @@ void mpLib_DrawCrosses(s16* idx, int len, GXColor arg2)
 
     vtx = mpLib_80458888;
     out_vtx = vtx;
-    for (idx_i = 0, out_count = 0; idx_i < len && out_count < 0x80;
-         idx_i++)
-    {
+    for (idx_i = 0, out_count = 0; idx_i < len && out_count < 0x80; idx_i++) {
         if (Ground_801C2D24(idx[idx_i], &sp34)) {
             out_vtx[out_count] = sp34;
             out_count += 1;

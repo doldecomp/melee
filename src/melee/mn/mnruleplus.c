@@ -1,10 +1,6 @@
 #include "placeholder.h"
 #include "platform.h"
 
-#include "mn/types.h"
-
-#include <sysdolphin/baselib/forward.h>
-
 #include "baselib/debug.h"
 #include "baselib/gobj.h"
 #include "baselib/gobjgxlink.h"
@@ -26,7 +22,10 @@
 #include "mn/mnmain.h"
 #include "mn/mnmainrule.h"
 #include "mn/mnstagesw.h"
+#include "mn/types.h"
 #include "sc/types.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/os.h>
 
@@ -548,13 +547,11 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
             HSD_JObj* tree = data->x34[hovered][0];
             if ((s32) hovered_u8 != 5 && (s32) hovered_u8 < 5) {
                 switch ((s32) hovered_u8) {
-                case 0:
-                    {
-                        MenuRulesPlusData* data2 =
-                            (MenuRulesPlusData*) gobj->user_data;
-                        mn_802324E4(confirmed, data2);
-                    }
-                    break;
+                case 0: {
+                    MenuRulesPlusData* data2 =
+                        (MenuRulesPlusData*) gobj->user_data;
+                    mn_802324E4(confirmed, data2);
+                } break;
                 default:
                     if ((s32) hovered_u8 >= 0) {
                         if (mn_804A04F0.buttons & 4) {

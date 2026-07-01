@@ -2,22 +2,6 @@
 
 #include "platform.h"
 
-#include <melee/gm/gm_16AE.h>
-#include <melee/gm/gm_16F1.h>
-#include <melee/gm/gm_17AD.h>
-#include <melee/gm/gm_17BA.h>
-#include <melee/gm/gm_1832.h>
-#include <melee/gm/gm_19EF.h>
-#include <melee/gm/gm_1A3F.h>
-#include <melee/gm/gm_1A45.h>
-#include <melee/gm/gm_1A7A.h>
-#include <melee/gm/gm_1ADD.h>
-#include <melee/gm/gm_1AED.h>
-#include <melee/gm/gm_1BA8.h>
-#include <melee/gm/gm_1BFA.h>
-#include <melee/gm/gmtoulib.h>
-void gm_801B0620();
-
 #include "baselib/forward.h"
 
 #include <math_ppc.h>
@@ -43,10 +27,25 @@ void gm_801B0620();
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_16AE.h>
+#include <melee/gm/gm_16F1.h>
+#include <melee/gm/gm_17AD.h>
+#include <melee/gm/gm_17BA.h>
+#include <melee/gm/gm_1832.h>
+#include <melee/gm/gm_19EF.h>
 #include <melee/gm/gm_1A36.h>
+#include <melee/gm/gm_1A3F.h>
+#include <melee/gm/gm_1A45.h>
+#include <melee/gm/gm_1A7A.h>
+#include <melee/gm/gm_1ADD.h>
+#include <melee/gm/gm_1AED.h>
+#include <melee/gm/gm_1B03.h>
+#include <melee/gm/gm_1BA8.h>
+#include <melee/gm/gm_1BFA.h>
 #include <melee/gm/gmadventure.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/gmregcommon.h>
+#include <melee/gm/gmtoulib.h>
 #include <melee/gm/types.h>
 #include <melee/gr/ground.h>
 int grPushOn_80219230(int);
@@ -1199,19 +1198,19 @@ s32 gm_8017DB88(void* arg0, u8 arg1, s32 arg2, s32 arg3, u8* arg4, u8 arg5,
             p[1] = fn_8017D9C0(chars, arg4);
             out->x0 = p[1];
             if (arg8 != NULL) {
-                val = ((s32 (*)(s32, s32, u8)) arg8)(arg3, arg2, (u8) i);
+                val = arg8(arg3, arg2, (u8) i);
             } else {
                 val = 0;
             }
             out->x1 = val;
             if (arg6 != NULL) {
-                val = ((s32 (*)(s32, s32, u8)) arg6)(arg3, arg2, (u8) i);
+                val = arg6(arg3, arg2, (u8) i);
             } else {
                 val = 0;
             }
             out->x2 = val;
             if (arg7 != NULL) {
-                val = ((s32 (*)(s32, s32, u8)) arg7)(arg3, arg2, (u8) i);
+                val = arg7(arg3, arg2, (u8) i);
             } else {
                 val = 0;
             }

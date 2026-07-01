@@ -2065,8 +2065,8 @@ void mnDiagram_802417D0(HSD_GObj* gobj)
     jobj = data->jobjs[3];
     mn_8022ED6C(jobj, &tbl->arrow_anim);
     if (data->is_name_mode != 0) {
-        result = mnDiagram_GetVisibleNameFrom(
-            sorted, (u8) data->name_cursor_pos, 10);
+        result = mnDiagram_GetVisibleNameFrom(sorted,
+                                              (u8) data->name_cursor_pos, 10);
         if ((u8) result != 0x78) {
             HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         } else {
@@ -2114,8 +2114,8 @@ void mnDiagram_802417D0(HSD_GObj* gobj)
     jobj3 = data->jobjs[6];
     mn_8022ED6C(jobj3, &tbl->arrow_anim);
     if (data->is_name_mode != 0) {
-        result2 = mnDiagram_GetVisibleNameFrom(
-            sorted, data->name_cursor_pos >> 8, 7);
+        result2 = mnDiagram_GetVisibleNameFrom(sorted,
+                                               data->name_cursor_pos >> 8, 7);
         if (result2 != 0x78) {
             HSD_JObjClearFlagsAll(jobj3, JOBJ_HIDDEN);
         } else {

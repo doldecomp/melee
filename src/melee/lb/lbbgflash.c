@@ -648,7 +648,8 @@ void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
     z_col_y = jobj->mtx[1][2];
     z_col_x = jobj->mtx[0][2];
     z_col_z = jobj->mtx[2][2];
-    z_col_x = SQ(z_col_x) + SQ(z_col_y); mag_sq = z_col_x;
+    z_col_x = SQ(z_col_x) + SQ(z_col_y);
+    mag_sq = z_col_x;
     mag_sq = SQ(z_col_z) + mag_sq;
     if (mag_sq > 0.0f) {
         f64 e = __frsqrte(mag_sq);

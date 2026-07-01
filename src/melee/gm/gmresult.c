@@ -106,7 +106,7 @@ typedef struct StatsEntry {
     /* 0x00 */ s16 value;
     /* 0x02 */ u8 pad_2[2];
     /* 0x04 */ s32 (*check)(s32);
-    /* 0x08 */ u32 (*get)(s32);
+    /* 0x08 */ const char* (*get)(int);
     /* 0x0C */ void* xC;
 } StatsEntry;
 
@@ -575,15 +575,15 @@ GMRESULT_STATIC_STR(GMRESULT_LBL(804D3F80), "flmsce");
 GMRESULT_STATS_TABLE(GMRESULT_LBL(803D6488)) = {
     { 0x08, { 0 }, NULL, NULL, NULL },
     { 0x08, { 0 }, NULL, NULL, NULL },
-    { -1, { 0 }, fn_8017AE70, (u32 (*)(s32)) fn_8017BB94, GMRESULT_LBL(804D3F68) },
-    { -1, { 0 }, fn_8017AED8, (u32 (*)(s32)) fn_8017BC50, NULL },
-    { -1, { 0 }, fn_8017AF40, (u32 (*)(s32)) fn_8017BD0C, NULL },
-    { -1, { 0 }, fn_8017AFA8, (u32 (*)(s32)) fn_8017BDC8, NULL },
+    { -1, { 0 }, fn_8017AE70, fn_8017BB94, GMRESULT_LBL(804D3F68) },
+    { -1, { 0 }, fn_8017AED8, fn_8017BC50, NULL },
+    { -1, { 0 }, fn_8017AF40, fn_8017BD0C, NULL },
+    { -1, { 0 }, fn_8017AFA8, fn_8017BDC8, NULL },
     { 0x09, { 0 }, NULL, NULL, NULL },
-    { -1, { 0 }, fn_8017B07C, (u32 (*)(s32)) fn_8017BB94, GMRESULT_LBL(804D3F6C) },
-    { -1, { 0 }, fn_8017B0E4, (u32 (*)(s32)) fn_8017BC50, NULL },
-    { -1, { 0 }, fn_8017B14C, (u32 (*)(s32)) fn_8017BD0C, NULL },
-    { -1, { 0 }, fn_8017B1B4, (u32 (*)(s32)) fn_8017BDC8, NULL },
+    { -1, { 0 }, fn_8017B07C, fn_8017BB94, GMRESULT_LBL(804D3F6C) },
+    { -1, { 0 }, fn_8017B0E4, fn_8017BC50, NULL },
+    { -1, { 0 }, fn_8017B14C, fn_8017BD0C, NULL },
+    { -1, { 0 }, fn_8017B1B4, fn_8017BDC8, NULL },
     { 0x0C, { 0 }, fn_8017B21C, NULL, NULL },
     { 0x0C, { 0 }, NULL, NULL, NULL },
 };
@@ -651,17 +651,23 @@ static StatsList lbl_803D6878[] = {
     { 3, 0x00, { 0 }, NULL },
 };
 
-GMRESULT_STATIC_STR(GMRESULT_LBL(803D6898), "Error : Cannot read archive file (File Name : %s).");
+GMRESULT_STATIC_STR(GMRESULT_LBL(803D6898),
+                    "Error : Cannot read archive file (File Name : %s).");
 GMRESULT_STATIC_STR(GMRESULT_LBL(803D68CC), "%d\x81\x46%02d");
 GMRESULT_STATIC_STR(GMRESULT_LBL(803D68D8), "SdRst.usd");
 GMRESULT_STATIC_STR(GMRESULT_LBL(803D68E4), "SIS_ResultData");
 GMRESULT_STATIC_STR(GMRESULT_LBL(803D68F4), "SdRst.dat");
-GMRESULT_STATIC_STR(GMRESULT_LBL(803D6900), "Error : gobj dont't get (gmResultAddPanelCamera)\n");
+GMRESULT_STATIC_STR(GMRESULT_LBL(803D6900),
+                    "Error : gobj dont't get (gmResultAddPanelCamera)\n");
 GMRESULT_STATIC_STR(GMRESULT_LBL(803D6934), "gmresult.c");
-GMRESULT_STATIC_STR(GMRESULT_LBL(803D6940), "Error : cobj dont't get (gmResultAddPanelCamera)\n");
-GMRESULT_STATIC_STR(GMRESULT_LBL(803D6974), "Error : gobj dont't get (gmResultAddLight)\n");
-GMRESULT_STATIC_STR(GMRESULT_LBL(803D69A0), "Error : lobj dont't get (gmResultAddLight)\n");
-GMRESULT_STATIC_STR(GMRESULT_LBL(803D69CC), "Error : gobj dont't get (gmResultAddModel)\n");
+GMRESULT_STATIC_STR(GMRESULT_LBL(803D6940),
+                    "Error : cobj dont't get (gmResultAddPanelCamera)\n");
+GMRESULT_STATIC_STR(GMRESULT_LBL(803D6974),
+                    "Error : gobj dont't get (gmResultAddLight)\n");
+GMRESULT_STATIC_STR(GMRESULT_LBL(803D69A0),
+                    "Error : lobj dont't get (gmResultAddLight)\n");
+GMRESULT_STATIC_STR(GMRESULT_LBL(803D69CC),
+                    "Error : gobj dont't get (gmResultAddModel)\n");
 GMRESULT_STATIC_STR(GMRESULT_LBL(803D69F8), "translate");
 
 static inline void fn_80174B4C_blk14829(ResultsData* data, s32 slot,
@@ -705,7 +711,7 @@ void fn_80174B4C(ResultsData* data, s32 slot)
     s32 entry_idx;
     f32 offset;
     s32 start_entry;
-    void (*render_callback)();
+    void (*render_callback)(void*);
     PAD_STACK(40);
 
     fn_80174B4C_blk14829(data, slot, &pdata, &list_base);
@@ -758,7 +764,7 @@ void fn_80174B4C(ResultsData* data, s32 slot)
     }
 
     /// Create text objects for visible entries
-    render_callback = fn_801749B8;
+    render_callback = (void (*)(void*))(Event) fn_801749B8;
     entry_idx = start_entry;
     while (count < 10) {
         if (list->count <= entry_idx + 1) {
@@ -1895,9 +1901,9 @@ extern HSD_Archive* lbl_804D65B8;
 
 static inline void gmResultLoadArchive(ResultsData* data)
 {
-    lbl_804D65B8 = lbArchive_80016DBC(
-        GMRESULT_LBL(804D3F70), &data->pnlsce, GMRESULT_LBL(804D3F78),
-        &data->flmsce, GMRESULT_LBL(804D3F80), 0);
+    lbl_804D65B8 = lbArchive_80016DBC(GMRESULT_LBL(804D3F70), &data->pnlsce,
+                                      GMRESULT_LBL(804D3F78), &data->flmsce,
+                                      GMRESULT_LBL(804D3F80), 0);
     if (data->pnlsce == NULL) {
         (OSReport)(GMRESULT_LBL(803D6898), GMRESULT_LBL(804D3F70));
     }
@@ -2002,8 +2008,8 @@ void gm_80177368_OnEnter(void* arg0_)
     fn_8017AA78(&arg0->x1);
     fn_8017A004();
     if (!gm_801743A4(match_end->result)) {
-        lbAudioAx_80023F28(fn_80160400(
-            match_end->player_standings[data->x6].character_kind));
+        lbAudioAx_80023F28(
+            fn_80160400(match_end->player_standings[data->x6].character_kind));
     }
 
     me_iter = match_end;
@@ -2011,9 +2017,9 @@ void gm_80177368_OnEnter(void* arg0_)
     for (i = 0; i < 4; i++) {
         if (me_iter->player_standings[0].slot_type != Gm_PKind_NA) {
             fn_8017A9B4(i);
-            data_iter->player_data[0].fighter_gobj = fn_8017A67C(
-                me_iter->player_standings[0].character_kind,
-                me_iter->player_standings[0].x3, i);
+            data_iter->player_data[0].fighter_gobj =
+                fn_8017A67C(me_iter->player_standings[0].character_kind,
+                            me_iter->player_standings[0].x3, i);
             data_iter->player_data[0].camera = fn_8017A318(i);
         }
         me_iter = (MatchEnd*) ((MatchPlayerData*) me_iter + 1);

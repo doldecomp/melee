@@ -304,28 +304,6 @@ s32 mnName_SortNames(HSD_GObj* arg0)
                 {
                     bool e1, e2;
 
-                if ((s8) mnName_StringTerminator ==
-                    (s8) GetPersistentNameData((s32) idx1)->namedata[0])
-                {
-                    e1 = 0;
-                } else {
-                    e1 = 1;
-                }
-                if (e1 != 0) {
-                    if ((s8) mnName_StringTerminator ==
-                        (s8) GetPersistentNameData((s32) idx2)->namedata[0])
-                    {
-                        e2 = 0;
-                    } else {
-                        e2 = 1;
-                    }
-                    if (e2 != 0) {
-                        result = CompareNameStrings(name1, name2);
-                    } else {
-                        goto block_15;
-                    }
-                } else {
-                block_15:
                     if ((s8) mnName_StringTerminator ==
                         (s8) GetPersistentNameData((s32) idx1)->namedata[0])
                     {
@@ -333,7 +311,7 @@ s32 mnName_SortNames(HSD_GObj* arg0)
                     } else {
                         e1 = 1;
                     }
-                    if (e1 == 0) {
+                    if (e1 != 0) {
                         if ((s8) mnName_StringTerminator ==
                             (s8) GetPersistentNameData((s32) idx2)
                                 ->namedata[0])
@@ -342,13 +320,13 @@ s32 mnName_SortNames(HSD_GObj* arg0)
                         } else {
                             e2 = 1;
                         }
-                        if (e2 == 0) {
-                            result = 0;
+                        if (e2 != 0) {
+                            result = CompareNameStrings(name1, name2);
                         } else {
-                            goto block_24;
+                            goto block_15;
                         }
                     } else {
-                    block_24:
+                    block_15:
                         if ((s8) mnName_StringTerminator ==
                             (s8) GetPersistentNameData((s32) idx1)
                                 ->namedata[0])
@@ -358,12 +336,36 @@ s32 mnName_SortNames(HSD_GObj* arg0)
                             e1 = 1;
                         }
                         if (e1 == 0) {
-                            result = 1;
+                            if ((s8) mnName_StringTerminator ==
+                                (s8) GetPersistentNameData((s32) idx2)
+                                    ->namedata[0])
+                            {
+                                e2 = 0;
+                            } else {
+                                e2 = 1;
+                            }
+                            if (e2 == 0) {
+                                result = 0;
+                            } else {
+                                goto block_24;
+                            }
                         } else {
-                            result = 2;
+                        block_24:
+                            if ((s8) mnName_StringTerminator ==
+                                (s8) GetPersistentNameData((s32) idx1)
+                                    ->namedata[0])
+                            {
+                                e1 = 0;
+                            } else {
+                                e1 = 1;
+                            }
+                            if (e1 == 0) {
+                                result = 1;
+                            } else {
+                                result = 2;
+                            }
                         }
                     }
-                }
                 }
                 if (result == 1) {
                     u8 tmp = *pi;

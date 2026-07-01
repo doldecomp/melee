@@ -406,7 +406,7 @@ void fn_80184AB8(HSD_GObj* arg0)
     char sp10[0x100];
     HSD_JObj* jobj;
     s32 i;
-    char* name;
+    const char* name;
 
     PAD_STACK(4);
 
@@ -1812,7 +1812,8 @@ void gm_80187F48_OnEnter(void* arg0_)
         lbl_804736C0.x8 = cam_gobj;
         cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) *lbl_804736C0.x4);
         HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_804D784B, cobj);
-        GObj_SetupGXLinkMax(cam_gobj, (GObj_RenderFunc) Camera_800304E0, 8);
+        GObj_SetupGXLinkMax(cam_gobj,
+                            (GObj_RenderFunc) (Event) Camera_800304E0, 8);
         HSD_GObj_SetupProc(cam_gobj, fn_80187910, 0);
         HSD_CObjAddAnim(cobj, *(HSD_CameraAnim**) lbl_804736C0.x4[1]);
         HSD_CObjReqAnim(cobj, 0.0f);

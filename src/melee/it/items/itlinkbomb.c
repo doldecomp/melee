@@ -400,7 +400,8 @@ static inline void itLinkbomb_UnkMotion3_Anim_inline2(HSD_GObj* gobj)
     it_8029DB5C(gobj);
 }
 
-static inline void itLinkbomb_UnkMotion3_Anim_blk10932r(Item_GObj* gobj, Item* ip)
+static inline void itLinkbomb_UnkMotion3_Anim_blk10932r(Item_GObj* gobj,
+                                                        Item* ip)
 {
     itLinkBombAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
     if (!it_80272C6C(gobj)) {
@@ -426,7 +427,8 @@ static inline void itLinkbomb_UnkMotion3_Anim_blk10913(void)
 
 bool itLinkbomb_UnkMotion3_Anim(Item_GObj* gobj)
 {
-    itLinkBombAttributes* attrs = GET_ITEM(gobj)->xC4_article_data->x4_specialAttributes;
+    itLinkBombAttributes* attrs =
+        GET_ITEM(gobj)->xC4_article_data->x4_specialAttributes;
     itLinkbomb_UnkMotion3_Anim_blk10913();
     itLinkbomb_UnkMotion3_Anim_blk10932r(gobj, GET_ITEM(gobj));
     return false;

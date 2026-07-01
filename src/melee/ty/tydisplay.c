@@ -2090,7 +2090,7 @@ HSD_GObj* _tyDisplay_8031BC54(s32 arg0)
 
     {
         char* temp2;
-        temp2 = matanim_names.entries[(s8) cat];
+        temp2 = (char*) matanim_names.entries[(s8) cat];
         Toy_80306A48(child, NULL, temp2, NULL, data->archives[c2],
                      (long) entry->x05);
     }

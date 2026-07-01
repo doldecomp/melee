@@ -560,8 +560,7 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                     cd_xB4 = co_attrs->xB4;
                     attrs = (ftCo_ItemThrowAttrs*) Fighter_804D6550;
                     attrs += fp->motion_id;
-                    base_throw_speed =
-                        cd_xB4 * attrs[-ftCo_MS_LightThrowF].x8;
+                    base_throw_speed = cd_xB4 * attrs[-ftCo_MS_LightThrowF].x8;
                     throw_speed = throw_scale * base_throw_speed;
                     {
                         vec2.x = fsm * (fp->mv.co.itemthrow4.x8.x - vec0.x) +

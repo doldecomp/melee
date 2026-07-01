@@ -478,7 +478,7 @@ void gmCamera_801A2BF0(void)
 }
 
 static inline void gmCamera_801A2D44_update_selection(HSD_JObj** jobj_b,
-                                                       HSD_JObj** jobj)
+                                                      HSD_JObj** jobj)
 {
     gmCameraUnkStruct* gcus = &gmCamera_80479BC8.gcus;
     u32* px18;

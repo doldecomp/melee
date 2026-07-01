@@ -146,8 +146,7 @@ void grVenom_8020362C(void)
                         if (ext->x38[0] == 4) {
                             mode = 1;
                         } else {
-                            mode =
-                                (HSD_Randf() > grVe_804D6A30->x10) ? 1 : 4;
+                            mode = (HSD_Randf() > grVe_804D6A30->x10) ? 1 : 4;
                         }
                         grVe_804D6A34 = 0;
                         *x2c_ptr = idx;

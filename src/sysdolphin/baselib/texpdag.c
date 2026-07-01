@@ -285,7 +285,8 @@ int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list)
                             deps2++;
                         }
                         if (l >= list[last].nb_dep) {
-                            list[last].depend[list[last].nb_dep++] = dep_entry2;
+                            list[last].depend[list[last].nb_dep++] =
+                                dep_entry2;
                             dep_entry2->nb_ref++;
                         }
                         break;
