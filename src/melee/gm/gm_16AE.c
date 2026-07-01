@@ -1071,7 +1071,7 @@ void fn_8016C7F0(void)
 
 static inline s8 gm_GetSlotByPlayerId(int pauserId)
 {
-    u8 slot;
+    int slot;
     for (slot = 0; slot < 6; slot++) {
         if (pauserId == Player_GetPlayerId(slot) &&
             Player_GetPlayerSlotType(slot) == Gm_PKind_Human)
