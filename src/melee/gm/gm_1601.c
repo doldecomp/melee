@@ -2495,137 +2495,67 @@ static inline bool fn_80164B48_check(u8 idx, u16* ptr)
     return false;
 }
 
+static inline u8 fn_80164B48_lookup(s32 t, const u8* es, const u8* base)
+{
+    s32 i;
+
+    for (i = 0; i < 0xB; i++) {
+        if (t == (s32) es[1]) {
+            return (base + i * 6)[0x2D0];
+        }
+        es += 6;
+    }
+    return 0xB;
+}
+
 bool fn_80164B48(void)
 {
     const u8* base = (const u8*) lbl_803B75F8;
-    s32 t;
     u8 idx;
     u16* ptr;
     const u8* es_base;
     s32 ok = 0;
 
-    PAD_STACK(16);
+    PAD_STACK(8);
 
     ptr = gmMainLib_8015ED8C();
-    t = base[0x2C2];
     es_base = base + 0x2D0;
-    idx = 0xB;
-    {
-        s32 i;
-        const u8* es;
-
-        es = es_base;
-        for (i = 0; i < 0xB; i++) {
-            if (t == (s32) es[1]) {
-                idx = (base + i * 6)[0x2D0];
-                break;
-            }
-            es += 6;
-        }
-    }
+    idx = fn_80164B48_lookup(base[0x2C2], es_base, base);
     ok = fn_80164B48_check(idx, ptr);
     if (ok == 0) {
         return 0;
     }
 
     ptr = gmMainLib_8015ED8C();
-    t = base[0x2C5];
-    idx = 0xB;
-    {
-        s32 i;
-        const u8* es;
-
-        es = es_base;
-        for (i = 0; i < 0xB; i++) {
-            if (t == (s32) es[1]) {
-                idx = (base + i * 6)[0x2D0];
-                break;
-            }
-            es += 6;
-        }
-    }
+    idx = fn_80164B48_lookup(base[0x2C5], es_base, base);
     ok = fn_80164B48_check(idx, ptr);
     if (ok == 0) {
         return 0;
     }
 
     ptr = gmMainLib_8015ED8C();
-    t = base[0x2C1];
-    idx = 0xB;
-    {
-        s32 i;
-        const u8* es;
-
-        es = es_base;
-        for (i = 0; i < 0xB; i++) {
-            if (t == (s32) es[1]) {
-                idx = (base + i * 6)[0x2D0];
-                break;
-            }
-            es += 6;
-        }
-    }
+    idx = fn_80164B48_lookup(base[0x2C1], es_base, base);
     ok = fn_80164B48_check(idx, ptr);
     if (ok == 0) {
         return 0;
     }
 
     ptr = gmMainLib_8015ED8C();
-    t = base[0x2C0];
-    idx = 0xB;
-    {
-        s32 i;
-        const u8* es;
-
-        es = es_base;
-        for (i = 0; i < 0xB; i++) {
-            if (t == (s32) es[1]) {
-                idx = (base + i * 6)[0x2D0];
-                break;
-            }
-            es += 6;
-        }
-    }
+    idx = fn_80164B48_lookup(base[0x2C0], es_base, base);
     ok = fn_80164B48_check(idx, ptr);
     if (ok == 0) {
         return 0;
     }
 
     ptr = gmMainLib_8015ED8C();
-    t = base[0x2C4];
-    idx = 0xB;
-    {
-        s32 i;
-        const u8* es;
-
-        es = es_base;
-        for (i = 0; i < 0xB; i++) {
-            if (t == (s32) es[1]) {
-                idx = (base + i * 6)[0x2D0];
-                break;
-            }
-            es += 6;
-        }
-    }
+    idx = fn_80164B48_lookup(base[0x2C4], es_base, base);
     ok = fn_80164B48_check(idx, ptr);
     if (ok == 0) {
         return 0;
     }
 
     ptr = gmMainLib_8015ED8C();
-    t = base[0x2C3];
-    idx = 0xB;
-    {
-        s32 i;
-
-        for (i = 0; i < 0xB; i++) {
-            if (t == (s32) es_base[1]) {
-                idx = (base + i * 6)[0x2D0];
-                break;
-            }
-            es_base += 6;
-        }
-    }
+    idx = fn_80164B48_lookup(base[0x2C3], es_base, base);
     ok = fn_80164B48_check(idx, ptr);
     if (ok == 0) {
         return 0;
@@ -2723,7 +2653,6 @@ void fn_801652B0(s32 arg0, s32 arg1)
 
 void* fn_801652D8(void)
 {
-    u32 val;
     s32 idx;
     HSD_VIInfo* vi = &HSD_VIData;
     PerfLabelLine* lines = &lbl_8046B378.line0;
@@ -2735,10 +2664,7 @@ void* fn_801652D8(void)
 
     lines[0].next = &lines[1];
 
-    val = gm_801A4BB8();
-
-    idx = 1;
-    sprintf(lines[idx].text, "\\ce0e0ff%5d", (int) val);
+    sprintf(lines[idx = 1].text, "\\ce0e0ff%5d", (int) gm_801A4BB8());
 
     lines[1].next = &lines[2];
     lines[1].next = NULL;
@@ -3592,14 +3518,15 @@ struct MatchInfoStride_80167638 {
 
 s32 fn_80167638(s32 arg0, Vec3* arg1, Vec3* arg2)
 {
+    UNUSED u8 pad[8];
     struct lbl_803B7A44_t sp;
+    s8 chr;
+    Vec3* offset = arg2;
     Vec3* pos = arg1;
+    s32 idx;
     s32 ret = arg0;
     lbl_8046B6A0_t* info;
     struct MatchInfoStride_80167638* stride;
-    s32 idx;
-    Vec3* offset = arg2;
-    s8 chr;
     u8 x8;
 
     PAD_STACK(4);
@@ -4562,14 +4489,15 @@ s32 fn_801695BC(u8 arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
     u8 colors[12];
     u8 ncolors;
     s32 ncolors_s32;
-    s32 i;
     s32 color_i;
-    s8 tmp;
+    s32 i;
+    u8 tmp;
+    s32 tmp2;
 
     ncolors = gm_80169238_noinline(arg0);
     if ((s8) arg0 != 0x21) {
         ncolors_s32 = ncolors;
-        for (i = 0; i < ncolors_s32; i++) {
+        for (i = 0; i < ncolors; i++) {
             colors[i] = (s8) i;
         }
         if ((s8) arg1 == (s8) arg0) {
@@ -4586,9 +4514,9 @@ s32 fn_801695BC(u8 arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
             u8* p = arg3;
             for (i = 0; (s8) arg4[i] != -2; i++) {
                 if ((s8) arg0 == (s8) *p) {
-                if ((s8) colors[color_i % ncolors_s32] == -1) {
-                    color_i += 1;
-                }
+                    if ((s8) colors[color_i % ncolors_s32] == -1) {
+                        color_i += 1;
+                    }
                     arg4[i] = colors[color_i % ncolors_s32];
                     color_i += 1;
                 }
@@ -4598,9 +4526,9 @@ s32 fn_801695BC(u8 arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
         for (i = 1; (s8) arg4[i] != -2; i++) {
             if ((s8) arg0 == (s8) arg3[i] && (s8) arg0 == (s8) arg3[i - 1]) {
                 if (HSD_Randi(2) != 0) {
-                    tmp = (s8) arg4[i];
+                    tmp2 = (s8) arg4[i];
                     arg4[i] = arg4[i - 1];
-                    arg4[i - 1] = tmp;
+                    arg4[i - 1] = tmp2;
                 }
             }
         }
@@ -4866,6 +4794,23 @@ void fn_80169C54(s8 arg0, s8 arg1)
     }
 }
 
+static inline void fn_80169F50_inline(s32 arg1, struct lbl_8046B488_t* gp,
+                                      int temp_arg0)
+{
+    s32 i;
+    if (temp_arg0 == 4 && gp->xE != 0) {
+        for (i = 0; gp->x20[i] != -2; i++) {
+            if (gp->x20[i] == -1) {
+                continue;
+            }
+            if (gp->x124[i] == -1) {
+                continue;
+            }
+            Player_80031DA8(gp->x124[i], arg1);
+        }
+    }
+}
+
 void fn_80169F50(s8 arg0, s8 arg1)
 {
     struct lbl_8046B488_t* gp = &lbl_8046B488;
@@ -4904,17 +4849,7 @@ void fn_80169F50(s8 arg0, s8 arg1)
         }
     }
 
-    if (temp_arg0 == 4 && gp->xE != 0) {
-        for (i = 0; gp->x20[i] != -2; i++) {
-            if (gp->x20[i] == -1) {
-                continue;
-            }
-            if (gp->x124[i] == -1) {
-                continue;
-            }
-            Player_80031DA8(gp->x124[i], arg1);
-        }
-    }
+    fn_80169F50_inline(arg1, gp, temp_arg0);
 }
 
 void fn_8016A09C(void)

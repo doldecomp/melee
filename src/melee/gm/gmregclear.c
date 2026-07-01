@@ -50,7 +50,6 @@
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lbcardnew.h>
 #include <melee/lb/lblanguage.h>
-#include <melee/lb/lbspdisplay.h>
 #include <melee/lb/lbtime.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/pl/player.h>
@@ -154,6 +153,17 @@ typedef struct AllstarStageEntry {
     /* 0x14 */ u8 pad_14[0x6];
 } AllstarStageEntry;
 STATIC_ASSERT(sizeof(AllstarStageEntry) == 0x1A);
+
+HSD_LObj* lb_80011AC4(LightList**);
+int lb_80011E24(HSD_JObj*, HSD_JObj**, ...);
+int lb_8001204C(HSD_JObj*, HSD_JObj**, u16*, int);
+HSD_ImageDesc* lb_800121FC(HSD_ImageDesc* image_desc, int width, int height,
+                            GXTexFmt format, s16 entry_num);
+void lb_800122C8(HSD_ImageDesc* image_desc, u16 origx, u16 origy, bool clear);
+void lb_800138CC(HSD_GObj* gobj, HSD_GObjEvent arg1);
+void lb_800138D8(HSD_GObj* gobj, s8 arg1);
+HSD_GObj* lb_800138EC(s32 arg0, GObj_RenderFunc render_func, u32 arg2,
+                       s8 arg3, f32 x, f32 y, f32 w, f32 h);
 
 extern AdventureStageEntry lbl_803D7AC0[110];
 extern AllstarStageEntry lbl_803D85F0[55];
@@ -2528,6 +2538,26 @@ s32 fn_801803FC(void* arg0)
     PAD_STACK(4);
 }
 
+static inline void fn_80180630_CheckArchive(HSD_Archive* archive, void* sp38)
+{
+    struct lbl_80472D28_t* state = &lbl_80472D28;
+    state->x48 = archive;
+    if (sp38 == NULL) {
+        OSReport("Error : Cannot open archive file (File Name : %s).",
+                 "GmRegClr");
+    }
+}
+
+static inline HSD_GObj* fn_80180630_CreateCameraGObj(void)
+{
+    return GObj_Create(0xEU, 0xEU, 0U);
+}
+
+static inline void* fn_80180630_LoadLightList(struct lbl_80472D28_t* state)
+{
+    return lb_80011AC4(state->x5C);
+}
+
 void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
                  lbl_8046B6A0_24C_t* arg4)
 {
@@ -2543,13 +2573,13 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     lbl_8046B6A0_t* temp;
     s32 total;
     s32 var_r4;
-    s32 var_r27;
+    s32 special_score;
     s32 var_r3;
     u16 var_r28;
     u8 mask;
     u8 var_r0;
 
-    var_r27 = 0;
+    special_score = 0;
     var_r28 = arg4->x58[0].xE;
     memzero(state, 0x120);
     state->xD4 = -1;
@@ -2580,7 +2610,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
         state->x118 = 1;
         if ((u8) temp->match_result == 6) {
             grPushOn_80219204(Ground_801C1DD4(), (int*) &sp5C, (int*) &sp58);
-            var_r27 = sp5C;
+            special_score = sp5C;
             var_r28 = (u16) sp58;
             state->x108 = 0x1F4;
         }
@@ -2590,7 +2620,10 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
         break;
     }
 
-    fn_8016F344(gm_8016B774());
+    {
+        struct lbl_8046B6A0_24C_t* tmp = gm_8016B774();
+        fn_8016F344(tmp);
+    }
 
     if (state->x11A == 0 && state->x118 == 0 && state->x119 == 0 &&
         (mask = fn_8017F008(), fn_8016F9A8(gm_8016B774(), 0, mask, 0) != 0))
@@ -2616,7 +2649,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
         state->xE8 = fn_8017F1B8();
     }
 
-    state->xF0 = state->xDC + (state->xD0 + var_r27 + state->xE8);
+    state->xF0 = state->xDC + (state->xE8 + state->xD0 + special_score);
     state->xFC = arg0 + arg1;
     state->xCC = arg1;
 
@@ -2632,19 +2665,15 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
 
     archive =
         lbArchive_80016DBC("GmRegClr", &sp38, "ScGamRegClear_scene_data", 0);
-    state->x48 = archive;
-    if (sp38 == NULL) {
-        OSReport("Error : Cannot open archive file (File Name : %s).",
-                 "GmRegClr", archive);
-    }
+    fn_80180630_CheckArchive(archive, sp38);
     fn_80168A6C(sp38, &state->x4C, 0);
 
     light_gobj = GObj_Create(0xBU, 3U, 0U);
     HSD_GObjObject_80390A70(light_gobj, (u8) HSD_GObj_804D784A,
-                            lb_80011AC4(state->x5C));
+                            fn_80180630_LoadLightList(state));
     GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0xAU, 0U);
 
-    cam_gobj = GObj_Create(0xEU, 0xEU, 0U);
+    cam_gobj = fn_80180630_CreateCameraGObj();
     HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_804D784B,
                             HSD_CObjLoadDesc(state->x60));
     GObj_SetupGXLinkMax(cam_gobj, HSD_GObj_803910D8, 8U);
@@ -2670,8 +2699,8 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
 
     Camera_8002F7AC(0);
     lb_800121FC(&state->x30, 0x280, 0x1E0, GX_TF_RGB5A3, 0);
-    state->x2C = cam_gobj;
-    lb_800138EC((s32) &state->x30, NULL, 2U, 0x32, 0.0f, 0.0f, 1.0f, 1.0f);
+    state->x2C = lb_800138EC((s32) &state->x30, NULL, 2U, 0x32, 0.0f,
+                              0.0f, 1.0f, 1.0f);
     lb_800138D8(state->x2C, 1);
     lb_800138CC(state->x2C, fn_8017FE54);
 
@@ -3200,6 +3229,11 @@ s32 fn_80181C80(s32 arg0)
     PAD_STACK(4);
 }
 
+static inline s32 fn_80181E18_ComputeRemaining100(s32 count)
+{
+    return 0x64 - (count + lbl_80472ED8.x4);
+}
+
 void fn_80181E18(void)
 {
     s32 mode;
@@ -3267,7 +3301,7 @@ void fn_80181E18(void)
             if (temp < 0) {
                 temp = 0;
             }
-            ifStock_802FA2D0(0x64 - (temp + lbl_80472ED8.x4));
+            ifStock_802FA2D0(fn_80181E18_ComputeRemaining100(temp));
             break;
         default:
             temp = entry_idx - fn_80181BFC(NULL);
@@ -3806,38 +3840,37 @@ void fn_80182B5C(void)
     score = fn_80182B5C_GetScore(blocks);
 
     if (mode < 0x25) {
-        if (mode >= 0x21) {
-            switch (mode) {
-            case 0x21:
-            case 0x22:
-                if (mode == 0x21) {
-                    gmMainLib_8015D6BC(gm_80164024((u8) idx));
-                } else {
-                    gmMainLib_8015D710(gm_80164024((u8) idx));
-                }
-                if (lbl_80472ED8.x6BC != 0) {
-                    if ((u32) lbl_80472ED8.x6C0 < score) {
-                        gm_8016B350(0x9C40);
-                        gm_8016B364(0x144);
-                        gm_80167858((s32) lbl_80472ED8.x6CC,
-                                    (s32) lbl_80472ED8.x6CD, 0xD, 0x5A);
-                    }
-                } else {
-                    gm_8016B364(0x148);
-                    gm_8016B378(0x28);
-                }
-                break;
-            default:
-                if (lbl_80472ED8.x6BC != 0 &&
-                    (s32) lbl_80472ED8.x6BE > time)
-                {
+        switch (mode) {
+        case 0x21:
+        case 0x22:
+            if (mode == 0x21) {
+                gmMainLib_8015D6BC(gm_80164024((u8) idx));
+            } else {
+                gmMainLib_8015D710(gm_80164024((u8) idx));
+            }
+            if (lbl_80472ED8.x6BC != 0) {
+                if ((u32) lbl_80472ED8.x6C0 < score) {
                     gm_8016B350(0x9C40);
                     gm_8016B364(0x144);
                     gm_80167858((s32) lbl_80472ED8.x6CC,
                                 (s32) lbl_80472ED8.x6CD, 0xD, 0x5A);
                 }
-                break;
+            } else {
+                gm_8016B364(0x148);
+                gm_8016B378(0x28);
             }
+            break;
+        case 0x23:
+        case 0x24:
+            if (lbl_80472ED8.x6BC != 0 &&
+                (s32) lbl_80472ED8.x6BE > time)
+            {
+                gm_8016B350(0x9C40);
+                gm_8016B364(0x144);
+                gm_80167858((s32) lbl_80472ED8.x6CC,
+                            (s32) lbl_80472ED8.x6CD, 0xD, 0x5A);
+            }
+            break;
         }
     } else if (mode < 0x27) {
         if ((s32) lbl_80472ED8.x6BE > time) {

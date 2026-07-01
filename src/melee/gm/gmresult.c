@@ -589,17 +589,21 @@ void fn_80174B4C(ResultsData* data, s32 slot)
 {
     struct ResultsPlayerData* pdata;
     StatsList* list;
+    StatsList* list_base;
     s32 i;
-    s32 entry_idx;
+    Vec3 pos;
     s32 entry_offset;
     s32 count;
     s32 visible_count;
-    Vec3 pos;
+    HSD_Text* text;
+    s32 entry_idx;
     f32 offset;
     s32 start_entry;
+    void (*render_callback)();
     PAD_STACK(40);
 
-    fn_80174B4C_blk14829(data, slot, &pdata, &list);
+    fn_80174B4C_blk14829(data, slot, &pdata, &list_base);
+    list = list_base;
 
     /// Look up stats list
     if ((s32) pdata->page != 2) {
@@ -612,6 +616,7 @@ void fn_80174B4C(ResultsData* data, s32 slot)
 
     count = 0;
     pos = pdata->stats_position;
+    PAD_STACK(8);
 
     offset = pdata->scroll_offset;
     start_entry = (s32) (10.0F * offset) / 10;
@@ -647,6 +652,7 @@ void fn_80174B4C(ResultsData* data, s32 slot)
     }
 
     /// Create text objects for visible entries
+    render_callback = fn_801749B8;
     entry_idx = start_entry;
     while (count < 10) {
         if (list->count <= entry_idx + 1) {
@@ -662,26 +668,26 @@ void fn_80174B4C(ResultsData* data, s32 slot)
 
         pdata->stats_text[0][count] =
             HSD_SisLib_803A5ACC(0, 0, pos.x, -pos.y, pos.z, 11.0F, 10.0F);
-        pdata->stats_text[0][count]->default_fitting = 1;
-        pdata->stats_text[0][count]->x34.x = 0.05F;
-        pdata->stats_text[0][count]->x34.y = 0.0546875F;
-        pdata->stats_text[0][count]->render_callback =
-            (void (*)(void*)) fn_801749B8;
+        text = pdata->stats_text[0][count];
+        text->default_fitting = 1;
+        text->x34.x = 0.05F;
+        text->x34.y = 0.0546875F;
+        text->render_callback = render_callback;
 
         pdata->stats_text[1][count] = HSD_SisLib_803A6754(0, 0);
-        pdata->stats_text[1][count]->pos_x = pos.x;
-        pdata->stats_text[1][count]->pos_y = -pos.y;
-        pdata->stats_text[1][count]->pos_z = pos.z;
-        pdata->stats_text[1][count]->render_callback =
-            (void (*)(void*)) fn_801749B8;
+        text = pdata->stats_text[1][count];
+        text->pos_x = pos.x;
+        text->pos_y = -pos.y;
+        text->pos_z = pos.z;
+        text->render_callback = render_callback;
 
         pdata->stats_text[2][count] = HSD_SisLib_803A6754(0, 0);
-        pdata->stats_text[2][count]->pos_x = 11.0F + pos.x;
-        pdata->stats_text[2][count]->pos_y = -pos.y;
-        pdata->stats_text[2][count]->pos_z = pos.z;
-        pdata->stats_text[2][count]->render_callback =
-            (void (*)(void*)) fn_801749B8;
-        pdata->stats_text[2][count]->default_alignment = 2;
+        text = pdata->stats_text[2][count];
+        text->pos_x = 11.0F + pos.x;
+        text->pos_y = -pos.y;
+        text->pos_z = pos.z;
+        text->render_callback = render_callback;
+        text->default_alignment = 2;
 
         pos.y -= 1.75F;
         fn_80174468(slot, pdata->stats_text[0][count],
@@ -1598,6 +1604,7 @@ void fn_80176D3C(Vec3* positions)
     ResultsData* data = &lbl_8046DBE8;
     MatchEnd* me;
     Vec3* pos;
+    u8 _[8];
     DynamicModelDesc* models[3];
     MatchEnd* me_iter;
     s32 winner;
@@ -1606,7 +1613,9 @@ void fn_80176D3C(Vec3* positions)
 
     me = data->x94;
     pos = positions;
-    me_iter = me;
+    if (me && me) {
+    }
+    me_iter = data->x94;
     models[0] = data->flmsce->models[3];
     models[1] = data->flmsce->models[2];
     models[2] = data->flmsce->models[1];
@@ -1775,17 +1784,40 @@ void fn_801771C0(ResultsData* data)
 
 extern HSD_Archive* lbl_804D65B8;
 
+static inline void gm_80177368_OnEnter_blk51337(ResultsData* data,
+                                                MatchEnd* match_end)
+{
+    int i;
+
+    fn_8017A004();
+    if (!gm_801743A4(match_end->result)) {
+        lbAudioAx_80023F28(fn_80160400(
+            match_end->player_standings[data->x6].character_kind));
+    }
+
+    for (i = 0; i < 4; i++) {
+        if (match_end->player_standings[i].slot_type != Gm_PKind_NA) {
+            fn_8017A9B4(i);
+            data->player_data[i].fighter_gobj = fn_8017A67C(
+                match_end->player_standings[i].character_kind,
+                match_end->player_standings[i].x3, i);
+            data->player_data[i].camera = fn_8017A318(i);
+        }
+    }
+}
+
 void gm_80177368_OnEnter(void* arg0_)
 {
     ResultsMatchInfo* arg0 = arg0_;
-    HSD_LObj* temp_r3_3;
-    HSD_GObj* temp_r3_2;
-    HSD_GObj* temp_r3_4;
-    MatchEnd* temp_r29;
+    HSD_GObj* light_gobj;
+    HSD_LObj* lobj;
+    HSD_GObj* model_gobj;
+    MatchEnd* match_end;
     ResultsData* data = &lbl_8046DBE8;
     int i;
+    ResultsStatsInfo* info;
 
-    PAD_STACK(0x20);
+    PAD_STACK(0x28);
 
     memzero(&lbl_8046DBE8, 0x5A8);
     lbl_8046DBE8.x1 = 0;
@@ -1794,12 +1826,12 @@ void gm_80177368_OnEnter(void* arg0_)
     lbl_8046DBE8.x0_4 = arg0->x0_0;
     lbl_8046DBE8.x0_5 = arg0->x0_1;
 
-    temp_r29 = lbl_8046DBE8.x94;
+    match_end = lbl_8046DBE8.x94;
     if (gm_801743A4(lbl_8046DBE8.x94->result)) {
         lbl_8046DBE8.num_pages = 2;
     } else {
         lbl_8046DBE8.num_pages = 3;
-        if (temp_r29->x5 == 3) {
+        if (match_end->x5 == 3) {
             lbl_8046DBE8.player_data[0].page = 2;
             lbl_8046DBE8.player_data[1].page = 2;
             lbl_8046DBE8.player_data[2].page = 2;
@@ -1807,20 +1839,22 @@ void gm_80177368_OnEnter(void* arg0_)
         }
     }
     if (fn_801701B8() == 0) {
-        for (i = 0; i < 4; i++) {
-            lbl_8046E190[i].x0 = 2;
-            lbl_8046E190[i].x1 = fn_80174284_noinline(i) * 2 + 2;
+        info = lbl_8046E190;
+        for (i = 0; i < 4; i++, info++) {
+            info->x0 = 2;
+            info->x1 = fn_80174284_noinline(i) * 2 + 2;
         }
     } else {
-        for (i = 0; i < 4; i++) {
-            lbl_8046E190[i].x0 = 2;
-            lbl_8046E190[i].x1 = 0;
+        info = lbl_8046E190;
+        for (i = 0; i < 4; i++, info++) {
+            info->x0 = 2;
+            info->x1 = 0;
         }
     }
     fn_801771C0(&lbl_8046DBE8);
-    if (temp_r29->player_standings[data->x6].slot_type == Gm_PKind_Human) {
-        if (!gm_801743A4(temp_r29->result) &&
-            temp_r29->player_standings[data->x6].x3_6)
+    if (match_end->player_standings[data->x6].slot_type == Gm_PKind_Human) {
+        if (!gm_801743A4(match_end->result) &&
+            match_end->player_standings[data->x6].x3_6)
         {
             lb_80014574(data->x6, 3, 0x20, 0);
         }
@@ -1837,42 +1871,28 @@ void gm_80177368_OnEnter(void* arg0_)
                  "GmRst");
     }
     fn_80176A6C();
-    temp_r3_2 = GObj_Create(0xB, 3, 0);
-    if (temp_r3_2 == NULL) {
+    light_gobj = GObj_Create(0xB, 3, 0);
+    if (light_gobj == NULL) {
         OSReport("Error : gobj dont't get (gmResultAddLight)\n");
         HSD_ASSERT(0x68C, 0);
     }
-    temp_r3_3 = lb_80011AC4(data->pnlsce->lights);
-    if (temp_r3_3 == NULL) {
+    lobj = lb_80011AC4(data->pnlsce->lights);
+    if (lobj == NULL) {
         OSReport("Error : lobj dont't get (gmResultAddLight)\n");
         HSD_ASSERT(0x68F, 0);
     }
-    HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D784A, temp_r3_3);
-    GObj_SetupGXLink(temp_r3_2, HSD_GObj_LObjCallback, 0xA, 0);
-    temp_r3_4 = GObj_Create(0xE, 0xF, 0);
-    data->x18 = temp_r3_4;
-    if (temp_r3_4 == NULL) {
+    HSD_GObjObject_80390A70(light_gobj, (u8) HSD_GObj_804D784A, lobj);
+    GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0xA, 0);
+    model_gobj = GObj_Create(0xE, 0xF, 0);
+    data->x18 = model_gobj;
+    if (model_gobj == NULL) {
         OSReport("Error : gobj dont't get (gmResultAddModel)\n");
         HSD_ASSERT(0x6A2, 0);
     }
-    HSD_GObj_SetupProc(temp_r3_4, fn_80179350, 0);
+    HSD_GObj_SetupProc(model_gobj, fn_80179350, 0);
     fn_80176F60();
     fn_8017AA78(&arg0->x1);
-    fn_8017A004();
-    if (!gm_801743A4(temp_r29->result)) {
-        lbAudioAx_80023F28(
-            fn_80160400(temp_r29->player_standings[data->x6].character_kind));
-    }
-
-    for (i = 0; i < 4; i++) {
-        if (temp_r29->player_standings[i].slot_type != Gm_PKind_NA) {
-            fn_8017A9B4(i);
-            data->player_data[i].fighter_gobj =
-                fn_8017A67C(temp_r29->player_standings[i].character_kind,
-                            temp_r29->player_standings[i].x3, i);
-            data->player_data[i].camera = fn_8017A318(i);
-        }
-    }
+    gm_80177368_OnEnter_blk51337(data, match_end);
 }
 
 void gm_80177704_OnLeave(void* unused)

@@ -2053,6 +2053,7 @@ void mnDiagram_802417D0(HSD_GObj* gobj)
     s32 result;
     u8* ptr2;
     HSD_JObj* jobj2;
+    HSD_JObj* jobj3;
     PAD_STACK(8);
 
     // Right arrow (jobjs[3])
@@ -2105,15 +2106,15 @@ void mnDiagram_802417D0(HSD_GObj* gobj)
     }
 
     // Down arrow (jobjs[6])
-    jobj = data->jobjs[6];
-    mn_8022ED6C(jobj, &tbl->arrow_anim);
+    jobj3 = data->jobjs[6];
+    mn_8022ED6C(jobj3, &tbl->arrow_anim);
     if (data->is_name_mode != 0) {
         result2 = mnDiagram_GetVisibleNameFrom(
             sorted, data->name_cursor_pos >> 8, 7);
         if (result2 != 0x78) {
-            HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
+            HSD_JObjClearFlagsAll(jobj3, JOBJ_HIDDEN);
         } else {
-            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+            HSD_JObjSetFlagsAll(jobj3, JOBJ_HIDDEN);
         }
     } else {
         // Fighter mode - check if 7 more rows exist
@@ -2139,9 +2140,9 @@ void mnDiagram_802417D0(HSD_GObj* gobj)
         } while (count >= 0);
     dn_fc_done:
         if (result2 != 0x19) {
-            HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
+            HSD_JObjClearFlagsAll(jobj3, JOBJ_HIDDEN);
         } else {
-            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+            HSD_JObjSetFlagsAll(jobj3, JOBJ_HIDDEN);
         }
     }
 }

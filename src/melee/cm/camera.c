@@ -1662,6 +1662,9 @@ static inline void OrthonormalizeBasis(Vec3* forward, Vec3* up, Vec3* right)
     lbVector_Normalize(up);
 }
 
+#define Camera_8002BD88_GET_SCALE(view_dir) \
+    (((view_dir) * cm_803BCCA0.xBC) + cm_803BCCA0.xC0)
+
 s32 Camera_8002BC78(Vec3* forward, Vec3* up, Vec3* right)
 {
     s32 clamp_result = 0;
@@ -1701,29 +1704,31 @@ void Camera_8002BD88(f32 x, f32 y)
     up = cm_WorldUp;
     pos = cm_80452C68.pause_eye_offset;
     forward = pos;
-    forward.x *= -1.0F;
-    forward.y *= -1.0F;
-    forward.z *= -1.0F;
+    forward.x *= *(f32*) &cm_804D7E10;
+    forward.y *= *(f32*) &cm_804D7E10;
+    forward.z *= *(f32*) &cm_804D7E10;
     view_dir = lbVector_Normalize(&forward);
 
-    if (view_dir < 1.0F) {
-        forward.y = 0.0F;
-        forward.x = 0.0F;
-        forward.z = 1.0F;
-        cm_80452C68.pause_eye_distance = 10.0F;
+    if (view_dir < *(f32*) &cm_804D7E04) {
+        forward.y = *(f32*) &cm_804D7E14;
+        forward.x = *(f32*) &cm_804D7E14;
+        forward.z = *(f32*) &cm_804D7E04;
+        cm_80452C68.pause_eye_distance = *(f32*) &cm_804D7E4C;
     }
 
     clamp_result = Camera_8002BC78(&forward, &up, &right);
     if (clamp_result == 1) {
-        if (y < 0.0F) {
-            y = 0.0F;
+        scale = *(f32*) &cm_804D7E14;
+        if (y < scale) {
+            y = scale;
         }
-        x = 0.0F;
+        x = *(volatile f32*) &cm_804D7E14;
     } else if (clamp_result == -1) {
-        if (y > 0.0F) {
-            y = 0.0F;
+        scale = *(f32*) &cm_804D7E14;
+        if (y > scale) {
+            y = scale;
         }
-        x = 0.0F;
+        x = *(volatile f32*) &cm_804D7E14;
     }
 
     OrthonormalizeBasis(&forward, &up, &right);
@@ -1733,18 +1738,16 @@ void Camera_8002BD88(f32 x, f32 y)
     // lbVector_Normalize(&up);
     cm_80452C68.pause_up = up;
 
-    if (y != 0.0F) {
-        scale = y * ((view_dir * cm_803BCCA0.xBC) + cm_803BCCA0.xC0);
-        // scale = y * ((view_dir * cm_803BCCA0._44[0x1E]) +
-        // cm_803BCCA0._44[0x1F]);
+    if (*(f32*) &cm_804D7E14 != y) {
+        scale = y * Camera_8002BD88_GET_SCALE(view_dir);
         up.x *= scale;
         up.y *= scale;
         up.z *= scale;
         lbVector_Add(&pos, &up);
     }
 
-    if (x != 0.0F) {
-        scale = x * ((view_dir * 0.025F) + 0.2F);
+    if (*(f32*) &cm_804D7E14 != x) {
+        scale = x * Camera_8002BD88_GET_SCALE(view_dir);
         right.x *= -scale;
         right.y *= -scale;
         right.z *= -scale;
@@ -1758,6 +1761,7 @@ void Camera_8002BD88(f32 x, f32 y)
     pos.z *= scale;
     cm_80452C68.pause_eye_offset = pos;
 }
+#undef Camera_8002BD88_GET_SCALE
 
 void Camera_8002C010(f32 farg0, f32 farg1)
 {
@@ -1826,19 +1830,17 @@ void Camera_8002C1A8(void)
 
     Camera_8002B694(&inputs, cm_80452C68.x305);
 
-    substick_y_val = 0.0f;
-    substick_x_val = 0.0f;
+    zoom_dir = x_move = y_move = substick_x_val = substick_y_val =
+        *(volatile const f32*) &cm_804D7E14;
     stick_x = inputs.stick_x;
-    y_move = 0.0f;
     stick_y = inputs.stick_y;
-    x_move = 0.0f;
     substick_x = inputs.substick_x;
     substick_y = inputs.substick_y;
     dir = 0;
-    zoom_dir = 0.0f;
 
     {
         u64 x18_btns = inputs.x18._u64;
+        u64 x10_btns = inputs.x10._u64;
 
         if ((x18_btns & PAD_TRIGGER_R) != 0) {
             dir = 1;
@@ -1846,99 +1848,121 @@ void Camera_8002C1A8(void)
             dir = -1;
         }
 
-        if ((inputs.x10._u64 & PAD_BUTTON_UP) != 0) {
-            y_move = 1.0f;
-        } else if ((inputs.x10._u64 & PAD_BUTTON_DOWN) != 0) {
-            y_move = -1.0f;
+        if ((x10_btns & PAD_BUTTON_UP) != 0) {
+            y_move = *(volatile const f32*) &cm_804D7E04;
+        } else if ((x10_btns & PAD_BUTTON_DOWN) != 0) {
+            y_move = *(volatile const f32*) &cm_804D7E10;
         }
 
-        if ((inputs.x10._u64 & PAD_BUTTON_LEFT) != 0) {
-            x_move = -1.0f;
-        } else if ((inputs.x10._u64 & PAD_BUTTON_RIGHT) != 0) {
-            x_move = 1.0f;
+        if ((x10_btns & PAD_BUTTON_LEFT) != 0) {
+            x_move = *(volatile const f32*) &cm_804D7E10;
+        } else if ((x10_btns & PAD_BUTTON_RIGHT) != 0) {
+            x_move = *(volatile const f32*) &cm_804D7E04;
         }
 
-        if ((inputs.x10._u64 & PAD_BUTTON_X) != 0) {
-            zoom_dir = 1.0f;
-        } else if ((inputs.x10._u64 & PAD_BUTTON_Y) != 0) {
-            zoom_dir = -1.0f;
+        if ((x10_btns & PAD_BUTTON_X) != 0) {
+            zoom_dir = *(volatile const f32*) &cm_804D7E04;
+        } else if ((x10_btns & PAD_BUTTON_Y) != 0) {
+            zoom_dir = *(volatile const f32*) &cm_804D7E10;
         }
 
-        if ((inputs.x10._u64 & PAD_BUTTON_A) != 0) {
-            abs_f1 = ABS(stick_x);
-            if (abs_f1 > 0.125) {
+        if ((x10_btns & PAD_BUTTON_A) != 0) {
+            abs_f1 = (stick_x < *(volatile const f32*) &cm_804D7E14)
+                         ? -stick_x
+                         : stick_x;
+            if (abs_f1 > *(volatile const f64*) &cm_804D7EA0) {
                 x_move = stick_x;
             }
-            abs_f1 = ABS(stick_y);
-            if (abs_f1 > 0.125) {
+            abs_f1 = (stick_y < *(volatile const f32*) &cm_804D7E14)
+                         ? -stick_y
+                         : stick_y;
+            if (abs_f1 > *(volatile const f64*) &cm_804D7EA0) {
                 y_move = stick_y;
             }
-            stick_y = 0.0f;
+            stick_y = *(volatile const f32*) &cm_804D7E14;
         }
     }
 
-    abs_f1 = ABS(stick_y);
-    if (abs_f1 > 0.125) {
+    abs_f1 = (stick_y < *(volatile const f32*) &cm_804D7E14) ? -stick_y
+                                                             : stick_y;
+    if (abs_f1 > *(volatile const f64*) &cm_804D7EA0) {
         zoom_dir = -stick_y;
     }
 
-    abs_f1 = ABS(substick_x);
-    if (abs_f1 > 0.125) {
+    abs_f1 = (substick_x < *(volatile const f32*) &cm_804D7E14) ? -substick_x
+                                                                 : substick_x;
+    if (abs_f1 > *(volatile const f64*) &cm_804D7EA0) {
         substick_x_val = substick_x;
     }
 
-    abs_f1 = ABS(substick_y);
-    if (abs_f1 > 0.125) {
+    abs_f1 = (substick_y < *(volatile const f32*) &cm_804D7E14) ? -substick_y
+                                                                 : substick_y;
+    if (abs_f1 > *(volatile const f64*) &cm_804D7EA0) {
         substick_y_val = substick_y;
     }
 
     if (dir != 0) {
+        f32 reset_zero;
+
         scale = cm_80452C68.x32C * cm_803BCCA0.x8C + cm_803BCCA0.x90;
         cm_80452C68.x304 = Camera_8002BA00(cm_80452C68.x304, dir);
         slot = cm_80452C68.x304;
-        cm_80452C68.x314.x = cm_80452C68.x314.y = cm_80452C68.x314.z = 0.0f;
-        cm_80452C68.pause_eye_offset.x = 0.0f;
-        cm_80452C68.pause_eye_offset.y = 5.0f;
-        cm_80452C68.pause_eye_offset.z = 20.0f;
-        cm_80452C68.pause_up.x = 0.0f;
-        cm_80452C68.pause_up.y = 1.0f;
-        cm_80452C68.pause_up.z = 0.0f;
+        reset_zero = *(volatile const f32*) &cm_804D7E14;
+        cm_80452C68.x314.x = cm_80452C68.x314.y =
+            cm_80452C68.x314.z = reset_zero;
+        cm_80452C68.pause_eye_offset.x = reset_zero;
+        cm_80452C68.pause_eye_offset.y = *(volatile const f32*) &cm_804D7E90;
+        cm_80452C68.pause_eye_offset.z = *(volatile const f32*) &cm_804D7E94;
+        cm_80452C68.pause_up.x = reset_zero;
+        cm_80452C68.pause_up.y = *(volatile const f32*) &cm_804D7E04;
+        cm_80452C68.pause_up.z = reset_zero;
         if (slot == 0xA) {
-            cm_80452C68.pause_eye_distance = 3.0f * scale;
+            cm_80452C68.pause_eye_distance =
+                *(volatile const f32*) &cm_804D7E98 * scale;
         } else {
             cm_80452C68.pause_eye_distance = scale;
         }
-        Camera_8002BAA8(0.0f);
+        Camera_8002BAA8(*(volatile const f32*) &cm_804D7E14);
     }
 
-    if (zoom_dir != 0.0f) {
+    if (*(volatile const f32*) &cm_804D7E14 != zoom_dir) {
         Camera_8002BAA8(zoom_dir);
     }
 
-    if (x_move != 0.0f || y_move != 0.0f) {
-        if (cm_80452C68.x304 == 0xA) {
-            if (sqrtf__Ff(cm_80452C68.pause_eye_offset.z *
-                              cm_80452C68.pause_eye_offset.z +
-                          (cm_80452C68.pause_eye_offset.x *
-                               cm_80452C68.pause_eye_offset.x +
-                           cm_80452C68.pause_eye_offset.y *
-                               cm_80452C68.pause_eye_offset.y)) < 1.0f)
-            {
-                cm_80452C68.pause_eye_distance = 1.0f;
+    {
+        f32 move_zero = *(volatile const f32*) &cm_804D7E14;
+
+        if (move_zero != x_move || move_zero != y_move) {
+            if (cm_80452C68.x304 == 0xA) {
+                if (sqrtf__Ff(cm_80452C68.pause_eye_offset.z *
+                                  cm_80452C68.pause_eye_offset.z +
+                              (cm_80452C68.pause_eye_offset.x *
+                                   cm_80452C68.pause_eye_offset.x +
+                               cm_80452C68.pause_eye_offset.y *
+                                   cm_80452C68.pause_eye_offset.y)) <
+                    *(const f32*) &cm_804D7E04)
+                {
+                    cm_80452C68.pause_eye_distance =
+                        *(const f32*) &cm_804D7E04;
+                }
+                if (*(volatile const f32*) &cm_804D7E14 != y_move) {
+                    cm_80452C68.x314.y += y_move;
+                }
+                if (*(volatile const f32*) &cm_804D7E14 != x_move) {
+                    cm_80452C68.x314.x += x_move;
+                }
+            } else {
+                Camera_8002C010(x_move, y_move);
             }
-            if (y_move != 0.0f) {
-                cm_80452C68.x314.y += y_move;
-            }
-            if (x_move != 0.0f) {
-                cm_80452C68.x314.x += x_move;
-            }
-        } else {
-            Camera_8002C010(x_move, y_move);
         }
     }
 
-    if (substick_x_val != 0.0f || substick_y_val != 0.0f) {
-        Camera_8002BD88(substick_x_val, substick_y_val);
+    {
+        f32 rotate_zero = *(volatile const f32*) &cm_804D7E14;
+
+        if (rotate_zero != substick_x_val || rotate_zero != substick_y_val) {
+            Camera_8002BD88(substick_x_val, substick_y_val);
+        }
     }
 }
 
@@ -2583,6 +2607,17 @@ check_done2:
     cam->x2B0 = cam->x2B4 / (f32) *count_ptr;
 }
 }
+static inline float Camera_8002D318_GetFovDelta(Camera* cam)
+{
+    return cam->transform.target_fov - cam->transform.fov;
+}
+
+static inline float Camera_8002D318_GetPitchDistance(f32* pitch_ptr,
+                                                     f32 distance)
+{
+    return distance * cosf(*pitch_ptr);
+}
+
 void Camera_8002D318(void* unused)
 {
     Camera* cam;
@@ -2715,7 +2750,7 @@ fov_done:
     f32 horiz_dist;
 
     pitch_ptr = &cam->pitch_offset;
-    horiz_dist = distance * cosf(*pitch_ptr);
+    horiz_dist = Camera_8002D318_GetPitchDistance(pitch_ptr, distance);
     yaw_ptr = &cam->yaw_offset;
     cam->transform.target_position.x =
         cam->transform.target_interest.x + horiz_dist * sinf(*yaw_ptr);
@@ -2728,19 +2763,21 @@ fov_done:
     {
         CameraUnkGlobals* globals;
         f32 smooth;
-        f32 x, y, z;
+        f32 x, dx;
+        f32 y, dy;
+        f32 z, dz;
 
         x = cam->transform.target_position.x;
-        globals = &cm_803BCCA0;
         y = cam->transform.target_position.y;
-        z = cam->transform.target_position.z;
+        globals = &cm_803BCCA0;
         smooth = globals->x68;
-        cam->transform.position.x = (x - cam->transform.position.x) * smooth +
-                                    cam->transform.position.x;
-        cam->transform.position.y = (y - cam->transform.position.y) * smooth +
-                                    cam->transform.position.y;
-        cam->transform.position.z = (z - cam->transform.position.z) * smooth +
-                                    cam->transform.position.z;
+        dx = x - cam->transform.position.x;
+        z = cam->transform.target_position.z;
+        dy = y - cam->transform.position.y;
+        dz = z - cam->transform.position.z;
+        cam->transform.position.x = dx * smooth + cam->transform.position.x;
+        cam->transform.position.y = dy * smooth + cam->transform.position.y;
+        cam->transform.position.z = dz * smooth + cam->transform.position.z;
     }
     return;
 
@@ -2768,8 +2805,7 @@ fallback: {
     smooth_ptr = &globals->x44;
     fov_ptr = &globals->x40;
     cam->transform.target_fov = *fov_ptr;
-    cam->transform.fov +=
-        (cam->transform.target_fov - cam->transform.fov) * *smooth_ptr;
+    cam->transform.fov += Camera_8002D318_GetFovDelta(cam) * *smooth_ptr;
     Camera_80029BC4(&bounds, transform);
 
     if (Camera_80030AF8()) {
@@ -2863,6 +2899,7 @@ void Camera_8002D85C(void* unused)
     f32* pitch_ptr;
     f32* yaw_ptr;
     CmSubject* subject;
+    f32 horiz_dist;
     f32 distance;
     CameraTransformState* transform;
     CameraTransformState* transform2;
@@ -2977,8 +3014,6 @@ fov_done:
     }
 
     {
-        f32 horiz_dist;
-
         horiz_dist = distance * cosf(*pitch_ptr);
         cam->transform.target_position.x =
             cam->transform.target_interest.x + horiz_dist * sinf(*yaw_ptr);
@@ -3129,7 +3164,6 @@ void Camera_8002DDC4(void* arg0)
     Vec3* tgt_position;
     CameraTransformState* transform_copy;
     CameraUnkGlobals* globals;
-    f32 smooth;
 
     cam = &cm_80452C68;
     Camera_80030DF8();
@@ -3140,6 +3174,7 @@ void Camera_8002DDC4(void* arg0)
     transform_copy = &cam->transform_copy;
     {
         f32 dx, dy, dz;
+        f32 smooth;
 
         dx = cam->transform.target_interest.x - cam->transform.interest.x;
         smooth = globals->x74;
@@ -3152,22 +3187,16 @@ void Camera_8002DDC4(void* arg0)
     Stage_80224CAC(&transform_copy->target_interest);
     {
         f32 dx, dy, dz;
+        f32 smooth;
 
         smooth = globals->x74;
-        {
-            f32 tmp_p91781 = cam->transform_copy.target_interest.x -
+        dx = cam->transform_copy.target_interest.x -
              cam->transform_copy.interest.x;
-            dx = tmp_p91781;
-        }
         dy = cam->transform_copy.target_interest.y -
              cam->transform_copy.interest.y;
         dz = cam->transform_copy.target_interest.z -
              cam->transform_copy.interest.z;
-        {
-            f32 tmp_p92115 = dx * smooth;
-            cam->transform_copy.interest.x =
-            tmp_p92115 + cam->transform_copy.interest.x;
-        }
+        cam->transform_copy.interest.x += dx * smooth;
         cam->transform_copy.interest.y =
             dy * smooth + cam->transform_copy.interest.y;
         cam->transform_copy.interest.z =
@@ -3191,6 +3220,7 @@ void Camera_8002DDC4(void* arg0)
     Stage_SetVecToFixedCamPos(tgt_position);
     {
         f32 dx, dy, dz;
+        f32 smooth;
 
         dx = cam->transform.target_position.x - cam->transform.position.x;
         smooth = globals->x78;
@@ -3203,6 +3233,7 @@ void Camera_8002DDC4(void* arg0)
     Stage_SetVecToFixedCamPos(&transform_copy->target_position);
     {
         f32 dx, dy, dz;
+        f32 smooth;
 
         smooth = globals->x78;
         dx = cam->transform_copy.target_position.x -

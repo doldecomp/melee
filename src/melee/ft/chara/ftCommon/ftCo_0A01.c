@@ -86,6 +86,32 @@ typedef struct ftCo_803C6594_t {
 /* static */ extern ftCo_803C6594_t* ftCo_803C6594[];
 /* 0A2638 */ static void ftCo_800B1DA0(Fighter* fp);
 
+static void sdata2_order(void)
+{
+    (void) 0.0f;
+    (void) 30.0;
+    (void) 0.6f;
+    (void) 0.8f;
+    (void) 0.9f;
+    (void) 0.05;
+    (void) S32_TO_F32;
+    (void) 1.0f;
+    (void) 9.0;
+    (void) 18.0;
+    (void) 4.0;
+    (void) 0.0;
+    (void) 0.5;
+    (void) 1000.0f;
+    (void) 5.0;
+    (void) 5.0f;
+    (void) 15.0f;
+    (void) 40.0f;
+    (void) 50.0f;
+    (void) 10.0f;
+    (void) 10.0;
+    (void) 0.5f;
+}
+
 void ftCo_800A0148(Fighter* fp)
 {
     struct Fighter_x1A88_t* x1A88 = &fp->x1A88;
@@ -3318,8 +3344,8 @@ bool ftCo_800A6FC4(Fighter* fp, Vec3* arg1, Vec3* arg2)
     mp_UnkStruct0* cur_island;
     struct Fighter_x1A88_t* data;
     f32 px;
-    f32 fy;
     f32 fx;
+    f32 fy;
     f32 mx;
     f32 my;
     f32 dx;
@@ -3345,13 +3371,14 @@ bool ftCo_800A6FC4(Fighter* fp, Vec3* arg1, Vec3* arg2)
         b = island->x14;
         a = island->x8;
         HSD_Randf();
-        blocked = 0;
         line_id = -1;
-        my = a.y + b.y;
-        mx = a.x + b.x;
-        result = mpCheckFloor(0.5f * mx, 10.0 + 0.5f * my, 0.5f * mx,
-                              0.5f * my - 10.0, 0.0f, &floor_pos, &line_id,
-                              &flags, &floor_normal, -1, -1, -1, NULL, NULL);
+        blocked = 0;
+        my = 0.5f * (a.y + b.y);
+        mx = 0.5f * (a.x + b.x);
+        result = mpCheckFloor(mx, 10.0 + my, mx, my - 10.0, 0.0f,
+                              &floor_pos, &line_id,
+                              &flags, &floor_normal, -1, -1, -1, NULL,
+                              (Fighter_GObj*) blocked);
         if (result != 0) {
             line = line_id;
             if (grBigBlue_801EF844(line) || grInishie1_801FCAAC(line) ||
@@ -3396,7 +3423,7 @@ bool ftCo_800A6FC4(Fighter* fp, Vec3* arg1, Vec3* arg2)
         px = a.x + 5.0;
         result = mpCheckFloor(px, a.y + 10.0, px, a.y - 10.0, 0.0f, &floor_pos,
                               &line_id, &flags, &floor_normal, -1, -1, -1,
-                              NULL, NULL);
+                              NULL, (Fighter_GObj*) blocked);
         if (result != 0) {
             line = line_id;
             if (grBigBlue_801EF844(line) || grInishie1_801FCAAC(line) ||
@@ -3412,7 +3439,10 @@ bool ftCo_800A6FC4(Fighter* fp, Vec3* arg1, Vec3* arg2)
             continue;
         }
         fx = floor_pos.x;
-        fy = floor_pos.y;
+        {
+            f32 floor_y = floor_pos.y;
+            fy = floor_y;
+        }
         dir.x = fx - fp->cur_pos.x;
         dir.y = fy - fp->cur_pos.y;
         dir.z = 0.0f;
@@ -3438,7 +3468,7 @@ bool ftCo_800A6FC4(Fighter* fp, Vec3* arg1, Vec3* arg2)
         px = b.x - 5.0;
         result = mpCheckFloor(px, b.y + 10.0, px, b.y - 10.0, 0.0f, &floor_pos,
                               &line_id, &flags, &floor_normal, -1, -1, -1,
-                              NULL, NULL);
+                              NULL, (Fighter_GObj*) blocked);
         if (result != 0) {
             line = line_id;
             if (grBigBlue_801EF844(line) || grInishie1_801FCAAC(line) ||
@@ -6532,12 +6562,13 @@ void ftCo_800AE7AC(Fighter* fp, Vec3* arg1, int arg2)
     Vec3 dir;
     Vec3 out;
     f32 left;
+    f32 sum_x;
     f32 cx;
     f32 bottom;
     f32 sum_y;
     f32 cy;
     f32 dy;
-    PAD_STACK(4);
+    PAD_STACK(8);
 
     data0->xF8_b0 = true;
     data0->xF9_b3 = false;
@@ -6598,9 +6629,11 @@ void ftCo_800AE7AC(Fighter* fp, Vec3* arg1, int arg2)
             data3 = &fp->x1A88;
             if (fp->ground_or_air != GA_Air) {
                 left = Stage_GetBlastZoneLeftOffset();
-                cx = (Stage_GetBlastZoneRightOffset() + left) * 0.5f;
+                sum_x = Stage_GetBlastZoneRightOffset();
+                cx = 0.5f * (sum_x += left);
                 bottom = Stage_GetBlastZoneBottomOffset();
-                cy = (Stage_GetBlastZoneTopOffset() + bottom) * 0.5f;
+                sum_y = Stage_GetBlastZoneTopOffset();
+                cy = 0.5f * (sum_y += bottom);
                 dir.x = cx - fp->cur_pos.x;
                 dir.y = cy - fp->cur_pos.y;
                 dir.z = 0.0f;
@@ -9149,25 +9182,27 @@ void ftCo_800B33B0(Fighter* fp)
     Vec3 target_floor_normal;
     int line2;
     u32 flags2;
-    u32 flags1;
-    int line1;
-    s32 found;
-    Vec3 floor_pos;
-    Vec3 ceiling_normal;
-    int line3;
-    u32 flags3;
     f32 fx;
-    Vec3 floor_normal;
+    f32 below;
+    f32 tmp;
+    s32 found;
     s32 result;
     s32 in_bounds;
     s32 blocked;
     f32 vx;
     f32 vy;
     f32 vmag;
-    Vec3 ceiling_pos;
     f32 fy;
     f32 sx;
     f32 sy;
+    u32 flags1;
+    int line1;
+    Vec3 floor_normal;
+    Vec3 floor_pos;
+    u32 flags3;
+    int line3;
+    Vec3 ceiling_normal;
+    Vec3 ceiling_pos;
 
     if (*timer % 300 == 0) {
         if (HSD_Randf() < 0.04f * data->level + 0.3f) {
@@ -9181,11 +9216,13 @@ void ftCo_800B33B0(Fighter* fp)
     fx = fp->cur_pos.x;
     line1 = -1;
     {
-        f32 tmp = 10.0 + fy;
+        sy = fy;
+        sx = fx;
+        below = sy - 1000.0;
+        tmp = 10.0 + sy;
         {
-            Vec3* floor_normal_p = &floor_normal;
-            result = mpCheckFloor(fx, tmp, fx, fy - 1000.0, 0.0f, &floor_pos,
-                                  &line1, &flags1, floor_normal_p, -1, -1, -1,
+            result = mpCheckFloor(sx, tmp, sx, below, 0.0f, &floor_pos,
+                                  &line1, &flags1, &floor_normal, -1, -1, -1,
                                   NULL, (Fighter_GObj*) found);
         }
     }
@@ -9194,10 +9231,13 @@ void ftCo_800B33B0(Fighter* fp)
         found = result;
     }
     if (found != 0) {
-        f32 floor_y = floor_pos.y;
-        struct Fighter_x1A88_t* temp_data = &fp->x1A88;
-        f32 floor_x = floor_pos.x;
+        f32 floor_x;
+        f32 floor_y;
+        struct Fighter_x1A88_t* temp_data;
         s32 oob;
+        floor_y = floor_pos.y;
+        temp_data = &fp->x1A88;
+        floor_x = floor_pos.x;
         if (floor_x < fp->x1A88.half_width + Stage_GetBlastZoneLeftOffset() ||
             floor_x >
                 Stage_GetBlastZoneRightOffset() - temp_data->half_width ||
@@ -9237,12 +9277,13 @@ void ftCo_800B33B0(Fighter* fp)
     }
     if (data->xF9_b0) {
         if (data->x30 != 0) {
-            data->x30 = data->x30 - 1;
+            data->x30 -= 1;
         } else {
             data->xF9_b0 = false;
         }
     } else {
-        data->x30 = 120.0f * (0.5f * (0.5f * HSD_Randf()));
+        f32 rand = HSD_Randf();
+        data->x30 = 120.0f * (0.5f * (0.5f * rand));
     }
     if (data->x60 != 0) {
         data->x60 = data->x60 - 1;

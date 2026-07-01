@@ -1669,6 +1669,7 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
 {
     HSD_JObj* sp18;
     s32 icon_idx;
+    s32 icon_offset;
     int player;
     CSSAllData* all_data = (CSSAllData*) &mnCharSel_803F0A48;
     u8* char_kinds;
@@ -1677,6 +1678,7 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
     do {
         s32 temp = HSD_Randi(0x19);
         icon_idx = temp;
+        icon_offset = icon_idx * sizeof(CSSIcon);
     } while ((icon = &all_data->icons[icon_idx])->state == 0);
 
     if (mnCharSel_804D6CF5 == 1) {
@@ -1691,7 +1693,7 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
 
     char_kinds = &all_data->icons[0].char_kind;
     mnCharSel_804D6CB0->data.data.players[player].c_kind =
-        char_kinds[icon_idx * sizeof(CSSIcon)];
+        char_kinds[icon_offset];
 
     mnCharSel_803F0DFC.doors[door].sel_icon = (u8) icon_idx;
     if (mnCharSel_803F0DFC.doors[door].sel_icon !=
@@ -3666,9 +3668,8 @@ static GXColor mnCharSel_804DC564 = { 100, 100, 100, 255 };
 
 void fn_802633B0(HSD_GObj* gobj)
 {
-    HSD_JObj* handicap_slider_jobj;
-    HSD_JObj* list_jobj;
     HSD_JObj* arrow_jobj;
+    HSD_JObj* list_jobj;
     GXColor white;
     GXColor gray;
     HSD_JObj* list_origin_jobj;
@@ -3677,6 +3678,7 @@ void fn_802633B0(HSD_GObj* gobj)
     GXColor row_color;
     GXColor used_row_color;
     GXColor white_copy;
+    HSD_JObj* handicap_slider_jobj;
     CSSTagData* tag;
     int port;
     s32 num_entries;
@@ -3892,9 +3894,8 @@ void fn_802633B0(HSD_GObj* gobj)
             }
             lb_8000B1CC(list_origin_jobj, NULL, &list_origin);
             cursor_row = 0.5f * (0.8f +
-                               (list_origin.y - ((struct CSSCharModel*)
-                                              mnCharSel_804A0BC0[tag->port])
-                                             ->x10)) -
+                               (list_origin.y - mnCharSel_804A0BC0[tag->port]
+                                                    ->x10)) -
                       (tag->x8 * 0.03125f);
             row = (s32) cursor_row;
 
@@ -3956,17 +3957,17 @@ void fn_802633B0(HSD_GObj* gobj)
                     }
                     mnCharSel_804D6CF6 = 4;
                     {
-                        struct CSSCharModel** model_ptr;
+                        struct CSSCursorData** cursor_ptr;
                         s32 k;
-                        model_ptr = (struct CSSCharModel**) mnCharSel_804A0BC0;
+                        cursor_ptr = mnCharSel_804A0BC0;
                         for (k = 0; k < (s32) mnCharSel_804D6CF5; k++) {
-                            if (((u8) (*model_ptr)->x5 == 1) &&
+                            if (((u8) (*cursor_ptr)->x5 == 1) &&
                                 (mnCharSel_8025FDEC((u8) k) == 0))
                             {
                                 mnCharSel_8025DB34((u8) k);
-                                (*model_ptr)->x5 = 2;
+                                (*cursor_ptr)->x5 = 2;
                             }
-                            model_ptr += 1;
+                            cursor_ptr += 1;
                         }
                     }
                     return;

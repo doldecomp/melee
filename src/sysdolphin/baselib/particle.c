@@ -1049,6 +1049,11 @@ static s32 lbl_804D60A4 = (s32) 0xC0C000FF;
 
 // @TODO: Currently 89.63% match - needs register allocation and expression
 // fixes
+static inline PerfDispItem* get_perf_disp_item(s32 count)
+{
+    return &hsd_804CE3F8[count];
+}
+
 void* fn_80392A3C(void)
 {
     volatile s32 green;
@@ -1110,7 +1115,7 @@ void* fn_80392A3C(void)
     }
     if (lbl_804D608C != 0) {
         hsd_804CE3F8[count].type = 0;
-        entry = &hsd_804CE3F8[count];
+        entry = get_perf_disp_item(count);
         sprintf(entry->content.text,
                 "\\c00ff00%2.3f \\cffffff%2.3f \\c00ffff%2.3f  "
                 "\\c00ff00%2.3f \\cffffff%2.3f \\c00ffff%2.3f",
@@ -1677,8 +1682,9 @@ void hsd_80393A54(int level)
 // encoding
 int hsd_80393A5C(char* filename, int data, int size)
 {
+    u32* data_p;
     int ready;
-    s32 start;
+    u32 start;
     int fd;
     f32 written_f;
     f32 elapsed;
@@ -1707,7 +1713,8 @@ int hsd_80393A5C(char* filename, int data, int size)
         return -1;
     }
 
-    written_f = (f32) (u32) FIOFwrite(fd, (u32*) data, size);
+    data_p = (u32*) data;
+    written_f = (f32) (u32) FIOFwrite(fd, data_p, size);
 
     if ((f32) (s32) size != written_f) {
         OSReport("cannot save file\n");
@@ -1903,13 +1910,12 @@ void hsd_80393EF4(int col_delta, int row_delta)
                 *col_ptr = byte_val;
             }
         } else {
-            int* col_ptr = &sp->x14;
-            u32 col = *col_ptr;
+            u32 col = sp->x14;
             col_delta = -col_delta;
             if (col > (u32) col_delta) {
-                *col_ptr = col - (u32) col_delta;
+                sp->x14 = col - (u32) col_delta;
             } else {
-                *col_ptr = 0;
+                sp->x14 = 0;
             }
         }
     } else if (row_delta < 0) {
@@ -2181,86 +2187,29 @@ void hsd_80394668(void)
     if ((u32) sp->x2C != 0) {
         /* Copy XFB data with brightness adjustment */
         u8* src = (u8*) sp->x2C;
-        u8* dst = 0;
-        u32 count = ((u32) sp->x48 + 1) >> 1;
+        u32 size = sp->x48;
+        u32 count = (size + 1) >> 1;
         s32 pos = 0;
-        dst += (&sp->x24)[sp->x34];
+        s32* dst_base = (s32*) sp + sp->x34;
+        u8* dst = 0;
+        dst += dst_base[9];
 
-        if (sp->x48 > 0) {
-            u32 n = count >> 3;
-
-            while (n != 0) {
-                {
-                    u8* s0 = src + pos;
-                    u8* d0 = dst + pos;
-                    pos += 2;
-                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFFFFFF) + 0x10);
-                    d0[1] = s0[1];
-
-                    s0 = src + pos;
-                    d0 = dst + pos;
-                    pos += 2;
-                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFFFFFF) + 0x10);
-                    d0[1] = s0[1];
-
-                    s0 = src + pos;
-                    d0 = dst + pos;
-                    pos += 2;
-                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFFFFFF) + 0x10);
-                    d0[1] = s0[1];
-
-                    s0 = src + pos;
-                    d0 = dst + pos;
-                    pos += 2;
-                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFFFFFF) + 0x10);
-                    d0[1] = s0[1];
-
-                    s0 = src + pos;
-                    d0 = dst + pos;
-                    pos += 2;
-                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFFFFFF) + 0x10);
-                    d0[1] = s0[1];
-
-                    s0 = src + pos;
-                    d0 = dst + pos;
-                    pos += 2;
-                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFFFFFF) + 0x10);
-                    d0[1] = s0[1];
-
-                    s0 = src + pos;
-                    d0 = dst + pos;
-                    pos += 2;
-                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFFFFFF) + 0x10);
-                    d0[1] = s0[1];
-
-                    s0 = src + pos;
-                    d0 = dst + pos;
-                    pos += 2;
-                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFFFFFF) + 0x10);
-                    d0[1] = s0[1];
-                    n--;
-                }
-            }
-            count &= 7;
-            if (count == 0) {
-                return;
-            }
-
-            do {
+        if (size > 0) {
+            while (count != 0) {
                 u8* s1 = src + pos;
-                u8 luma = s1[0];
                 u8* d1 = dst + pos;
                 pos += 2;
-                d1[0] = (u8) (((luma - 0x10) & 0xFFFFFF) + 0x10);
+                d1[0] = (u8) (((s1[0] - 0x10) & 0xFFFFFF) + 0x10);
                 d1[1] = s1[1];
-            } while (--count != 0);
+                count--;
+            }
         }
     } else {
         /* Draw console text to framebuffer */
         void* saved_color;
         s32 row;
-        void** x50_ptr = &sp->x50;
         s32* x4_ptr = &sp->x4;
+        void** x50_ptr = &sp->x50;
         s32* x40_ptr = &sp->x40;
         s32* x8_ptr = &sp->x8;
 
@@ -2269,9 +2218,10 @@ void hsd_80394668(void)
         row = 0;
 
         while (row <= sp->x1C) {
-            s32 col;
+            s32 y_off;
             s32 cur_x;
-            s32 y_off = (row + 1) * 14;
+            s32 col;
+            y_off = (row + 1) * 14;
             col = 0;
             cur_x = 0x14;
 
@@ -2938,12 +2888,11 @@ extern struct {
     /* 0x18 */ void* x18;
 } lbl_8040BC3C;
 
-// @TODO: Currently 92.03% match - needs register allocation fix
 s32 hsd_80395A78(void)
 {
     u32 bit;
-    s32 new_scroll;
     s32 new_col;
+    s32 new_scroll;
     PAD_STACK(8);
 
     bit = 1;
@@ -2987,7 +2936,7 @@ s32 hsd_80395A78(void)
         case 0x2:
             new_col = hsd_804CF810.x0C;
             new_scroll = hsd_804CF810.x18;
-            if ((u32) hsd_804CF810.x0C < (u32) (hsd_804CF810.x20 - 1)) {
+            if ((u32) new_col < (u32) (hsd_804CF810.x20 - 1)) {
                 new_col += 1;
             } else {
                 new_scroll += 1;
@@ -3195,12 +3144,35 @@ static inline s32 hsd_80396188_calc_col(void)
     return ((hsd_804CF810.x20 - 0x2E) / 2) * 11 + 20;
 }
 
-// @TODO: Currently 95.69% match - needs register allocation fix
+// @TODO: Currently 95.83% match - needs register allocation fix
+static inline void hsd_80396188_draw_rows(char* buf, s32 col, u32** addr)
+{
+    s32 i;
+
+    hsd_80394434(lbl_804D62CC);
+    i = 0;
+    do {
+        s32 row = 4 - i;
+        hsd_804CF810.x4 = col;
+        hsd_804CF810.x8 = (hsd_804CF810.x40 - 0x28) - (row + 1) * 14;
+        sprintf(buf, lbl_804D62D0, *addr, (*addr)[0], (*addr)[1], (*addr)[2],
+                (*addr)[3]);
+        hsd_80394434(buf);
+        {
+            u32 memsize = OSGetPhysicalMemSize();
+            *addr = (u32*) ((((u32) *addr & 0x0FFFFFFF) + memsize + 0x10) %
+                                memsize +
+                            0x80000000);
+        }
+        i++;
+    } while (i < 4);
+    hsd_804CF810.x4 = col;
+}
+
 void hsd_80396188(void)
 {
     void* saved;
     s32 col;
-    s32 i;
     u32* addr;
     char buf[64];
     PAD_STACK(20);
@@ -3211,23 +3183,7 @@ void hsd_80396188(void)
     hsd_804CF810.x50 = lbl_8040AB00;
     hsd_804CF810.x4 = col;
     hsd_804CF810.x8 = hsd_804CF810.x40 - 0x7C;
-    hsd_80394434(lbl_804D62CC);
-    i = 0;
-    do {
-        s32 row = 4 - i;
-        hsd_804CF810.x4 = col;
-        hsd_804CF810.x8 = (hsd_804CF810.x40 - 0x28) - (row + 1) * 14;
-        sprintf(buf, lbl_804D62D0, addr, addr[0], addr[1], addr[2], addr[3]);
-        hsd_80394434(buf);
-        {
-            u32 memsize = OSGetPhysicalMemSize();
-            addr = (u32*) ((((u32) addr & 0x0FFFFFFF) + memsize + 0x10) %
-                               memsize +
-                           0x80000000);
-        }
-        i++;
-    } while (i < 4);
-    hsd_804CF810.x4 = col;
+    hsd_80396188_draw_rows(buf, col, &addr);
     hsd_804CF810.x8 = hsd_804CF810.x40 - 0x36;
     hsd_80394434(lbl_804D62D4);
     hsd_804CF810.x50 = saved;
@@ -7911,7 +7867,6 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
 {
     Mtx rot_mtx;
     Vec3 vel_out;
-    Vec3 vel_temp;
     Vec3 tmpvec;
     Vec3 emit_pos;
     Vec3 vel_copy;
@@ -8103,38 +8058,46 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             *(s32*) &comb &= 0x7FFFFFFF;
             if (comb < 1.1754944e-38F) {
                 if (rot_mtx[0][2] >= 0.0F) {
-                    elevation = 1.5707964F;
+                    angle3 = 1.5707964F;
                 } else {
-                    elevation = -1.5707964F;
+                    angle3 = -1.5707964F;
                 }
             } else {
-                elevation = atan2f(rot_mtx[0][2],
-                                   rot_mtx[2][2] * c1 + rot_mtx[1][2] * s1);
+                angle3 = atan2f(rot_mtx[0][2],
+                                rot_mtx[2][2] * c1 + rot_mtx[1][2] * s1);
             }
-            angle3 = elevation;
         }
     }
 
     /* Angle step computation (pre-loop) */
     if (gen->angle < 0.0F) {
-        u32 shape = gen->type & 0xF;
-        if (shape == 0 || shape == 3 || shape == 4) {
+        switch (gen->type & 0xF) {
+        case 0:
+        case 3:
+        case 4: {
             f32 min_a = gen->aux.disc.minAngle;
             f32 rnd = HSD_Randf();
             f32 range = gen->aux.disc.maxAngle - min_a;
             angle_step = range / (f32) (s32) gen->count;
             cur_angle = angle_step * rnd + min_a;
-        } else if (shape == 6 || shape == 7) {
+            break;
+        }
+        case 6:
+        case 7: {
             f32 min_a = gen->aux.cone.minAngle;
             f32 rnd = HSD_Randf();
             f32 range = gen->aux.cone.maxAngle - min_a;
             angle_step = range / (f32) (s32) gen->count;
             cur_angle = angle_step * rnd + min_a;
-        } else {
+            break;
+        }
+        default: {
             f32 rnd = HSD_Randf();
             cur_angle = (f32) ((f64) 6.2831855F * (f64) rnd);
             angle_step =
                 (f32) ((f64) 6.2831855F / (f64) (f32) (s32) gen->count);
+            break;
+        }
         }
     }
 
@@ -8337,6 +8300,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
 
         case 5: /* rect */
         {
+            Vec3 vel_temp;
             f32 rx = HSD_Randf();
             f32 ry = HSD_Randf();
             f32 rz = HSD_Randf();

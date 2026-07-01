@@ -1016,24 +1016,25 @@ void fn_803AC3F8(void* arg0, u8* data, s32 file_idx)
 
 void hsd_803AC558(struct CardState* file_desc, u8* data)
 {
+    u8* cur = data + 1;
     int i;
+
     for (i = 0; i < 3; i++) {
-        u8 byte1 = data[1];
-        u8 file_idx;
-        u32 size;
-        u8 flags;
-        data++;
-        file_idx = data[-1];
-        size = (u32) data[1] | ((byte1 << 8) & 0x3F00);
-        flags = (byte1 >> 6) & 3;
+        u8 byte1 = cur[0];
+        u8 file_idx = cur[-1];
+        u8 mid = cur[1];
+        u32 size = (u32) mid | ((byte1 << 8) & 0x3F00);
+        u8 low = cur[2];
+        u8 flags = (byte1 >> 6) & 3;
         size <<= 8;
-        size |= data[2];
-        data += 3;
+        size |= low;
+        cur += 3;
 
         if (size != 0 && file_desc->x4C[file_idx] == 0) {
             file_desc->x28[file_idx] = flags;
             file_desc->x4C[file_idx] = size;
         }
+        cur++;
     }
 }
 

@@ -1700,11 +1700,9 @@ end:
 }
 
 // TODO: This is 100% permute-able
-bool fn_80025E38(HSD_GObj* gobj)
+static inline void fn_80025E38_inline(HSD_GObj* gobj)
 {
     lbAudioAx_UserData* ud;
-    s32 end_val;
-    s32 start_val;
     f32 diff;
     f32 ratio;
 
@@ -1712,29 +1710,31 @@ bool fn_80025E38(HSD_GObj* gobj)
         ud = gobj->user_data;
         if (ud != NULL) {
             if (ud->current_frame <= ud->end_frame) {
-                start_val = ud->start_val;
-                end_val = ud->end_val;
-
-                if (end_val > start_val) {
-                    diff = (f32) end_val - (f32) start_val;
+                if (ud->start_val < ud->end_val) {
+                    diff = (f32) ud->end_val - (f32) ud->start_val;
                     if (diff < 0.0f) {
                         diff = -diff;
                     }
                     ratio = (f32) ud->current_frame / (f32) ud->end_frame;
-                    ud->x20 = start_val + (s32) (ratio * diff);
+                    ud->x20 = ud->start_val + (s32) (ratio * diff);
                 } else {
-                    diff = (f32) end_val - (f32) start_val;
+                    diff = (f32) ud->end_val - (f32) ud->start_val;
                     if (diff < 0.0f) {
                         diff = -diff;
                     }
                     ratio = (f32) ud->current_frame / (f32) ud->end_frame;
-                    ud->x20 = end_val - (s32) (ratio * diff);
+                    ud->x20 = ud->end_val - (s32) (ratio * diff);
                 }
             } else {
                 ud->x20 = 0x7F;
             }
         }
     }
+}
+
+bool fn_80025E38(HSD_GObj* gobj)
+{
+    fn_80025E38_inline(gobj);
 
     return false;
 }
@@ -2470,36 +2470,29 @@ s32 fn_80027488(void)
 }
 #pragma dont_inline reset
 
-void lbAudioAx_80027648(void)
+static inline s32 fn_80027488_inline(void)
 {
     int i;
-    s32 result;
 
-    goto check;
-loop:
-    HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
-
-check: {
-    int* q = lbl_80433984;
-    int* p = lbl_804338A4;
-    for (i = 0; i < 55; p++, q++, i++) {
-        if (*p == 1 && *q == -1) {
-            result = 1;
-            goto end;
+    for (i = 0; i < 55; i++) {
+        if (lbl_804338A4[i] == 1 && lbl_80433984[i] == -1) {
+            return 1;
         }
     }
-}
 
     for (i = 0; i < 55; i++) {
         if (lbl_804338A4[i] == 1 && lbl_80433984[i] == 1) {
             lbl_80433984[i] = 2;
         }
     }
-    result = 0;
 
-end:
-    if (result == 1) {
-        goto loop;
+    return 0;
+}
+
+void lbAudioAx_80027648(void)
+{
+    while (fn_80027488_inline() == 1) {
+        HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
     }
 }
 
@@ -2797,7 +2790,7 @@ void lbAudioAx_8002838C(void)
     ARInit((u32*) &lbl_80433B44[0x38], 0x10);
     ARQInit();
     AIInit(NULL);
-    PAD_STACK(8);
+    PAD_STACK(4);
 
     lbl_804D643C = *(int*) (lbl_803BB300 + 0x11E4);
     lbl_804D6440 = *(int*) (lbl_803BB300 + 0x137C);
@@ -2825,7 +2818,7 @@ void lbAudioAx_8002838C(void)
     ptr = lbl_803BB300 + ((*(volatile int*) ((char*) lbl_80433B44)) << 3);
     lbl_804D6444 += *(int*) (ptr + 0x11E4);
 
-    lbl_804D6438 = lbl_804D643C + (lbl_804D6440 + lbl_804D6444);
+    lbl_804D6438 = lbl_804D643C + lbl_804D6440 + lbl_804D6444;
     lbl_804D3870 = lbl_804D6438;
 
     AXDriver_8038E498(0x40, 0, 0x40, lbl_804D3870);
