@@ -1,10 +1,11 @@
 #include "gm_16AE.h"
 
 #include "gm_16AE.static.h"
-#include "gm/forward.h"
 
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
+
+#include "gm/forward.h"
 
 #include <m2c_macros.h>
 #include <math.h>
@@ -406,7 +407,9 @@ float fn_8016B5B0(void)
     if (gm_8016B41C()) {
         float var_f1 = 3.0F;
         if (lbl_8046B6A0.unk_0 != 0) {
-            if (tmp->match_result == OUTCOME_TIMEOUT || tmp->match_result == OUTCOME_1P_GAME_OVER) {
+            if (tmp->match_result == OUTCOME_TIMEOUT ||
+                tmp->match_result == OUTCOME_1P_GAME_OVER)
+            {
                 var_f1 *= 1.1F;
             }
         }
@@ -1012,7 +1015,9 @@ void fn_8016C7F0(void)
     lbAudioAx_80023694();
     lbAudioAx_80024C84();
     ifTime_FreeCountdown();
-    if (lbl_8046B6A0.match_result == OUTCOME_1P_GAME_OVER && lbl_8046B6A0.x24C8.x4_3) {
+    if (lbl_8046B6A0.match_result == OUTCOME_1P_GAME_OVER &&
+        lbl_8046B6A0.x24C8.x4_3)
+    {
         gm_80167858(Player_GetPlayerId(0), Player_GetNametagSlotID(0), 0xD, 0);
         Camera_80030E44(4, NULL);
     }
@@ -1417,7 +1422,9 @@ static inline void fn_8016D634_inline(struct lbl_8046B6A0_24C_t* dst)
         dst->x4 = tmp->match_result;
         gm_80166378(dst);
         fn_8016C46C_dontinline((int) dst);
-        if (tmp->match_result != OUTCOME_NO_CONTEST && tmp->match_result != OUTCOME_RETRY) {
+        if (tmp->match_result != OUTCOME_NO_CONTEST &&
+            tmp->match_result != OUTCOME_RETRY)
+        {
             fn_8016C4F4(dst);
         }
         tmp->match_over = 1;
@@ -1441,7 +1448,8 @@ void fn_8016D634(void)
         pl_80040688(0, lbl_8046B6A0.unk_D, fn_8016D538());
     }
     gm_801A4B1C();
-    if (lbl_8046B6A0.x24C8.x4_4 && lbl_8046B6A0.match_result != OUTCOME_TIMEOUT &&
+    if (lbl_8046B6A0.x24C8.x4_4 &&
+        lbl_8046B6A0.match_result != OUTCOME_TIMEOUT &&
         (lbl_8046B6A0.x24C8.x9 == 1 || Player_GetStocks(0) > 0))
     {
         un_802FD668();
@@ -1457,7 +1465,9 @@ void fn_8016D634(void)
             copied_dst->x4 = tmp->match_result;
             gm_80166378(copied_dst);
             fn_8016C46C_dontinline((int) copied_dst);
-            if (tmp->match_result != OUTCOME_NO_CONTEST && tmp->match_result != OUTCOME_RETRY) {
+            if (tmp->match_result != OUTCOME_NO_CONTEST &&
+                tmp->match_result != OUTCOME_RETRY)
+            {
                 fn_8016C4F4(copied_dst);
             }
             tmp->match_over = 1;
@@ -2017,7 +2027,9 @@ void gm_8016E9C8(void* arg0_raw)
         arg0->xC.x4 = lbl_8046B6A0.match_result;
         gm_80166378(&arg0->xC);
         fn_8016C46C_dontinline((int) &arg0->xC);
-        if (tmp->match_result != OUTCOME_NO_CONTEST && tmp->match_result != OUTCOME_RETRY) {
+        if (tmp->match_result != OUTCOME_NO_CONTEST &&
+            tmp->match_result != OUTCOME_RETRY)
+        {
             fn_8016C4F4(&arg0->xC);
         }
         tmp->match_over = 1;
@@ -2033,7 +2045,9 @@ void gm_8016E9C8(void* arg0_raw)
     arg0->x8 = Ground_801C5ABC();
 
     if (gm_8016B3D8() || gm_8016E9C8_inline() || gm_801A4310() == GM_VS) {
-        if (lbl_8046B6A0.match_result != OUTCOME_NO_CONTEST && lbl_8046B6A0.match_result != OUTCOME_RETRY) {
+        if (lbl_8046B6A0.match_result != OUTCOME_NO_CONTEST &&
+            lbl_8046B6A0.match_result != OUTCOME_RETRY)
+        {
             for (i = 0; i < 6; i++) {
                 if (Player_GetPlayerSlotType(i) == Gm_PKind_Human) {
                     gmMainLib_8015D00C(

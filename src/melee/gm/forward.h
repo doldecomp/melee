@@ -111,12 +111,19 @@ typedef enum MatchOutcome {
     /* 1 */ OUTCOME_TIMEOUT,
     /* 2 */ OUTCOME_ELIMINATION,
     /* 3 */ OUTCOME_TEAM_ELIMINATION, ///< Seen when a team battle ends
-                                      ///< Also seen when player beats any 1p mode stage that is a single non-horde,
-                                      ///< non-event-match battle
+                                      ///< Also seen when player beats any 1p
+                                      ///< mode stage that is a single
+                                      ///< non-horde, non-event-match battle
     /* 4 */ OUTCOME_1P_GAME_OVER,
-    /* 5 */ OUTCOME_UNK_1P_HORDE_BATTLE_VICTORY, ///< Applies to any victory in story mode against a horde of (usually weak) enemies.
-    /* 6 */ OUTCOME_UNK_1P_BONUS_STAGE_END,  ///< Applies to all stages that aren't just a single match. Target Test,
-                                             ///< Undergrond Maze, Grand Prix, Race to the finish, etc;
+    /* 5 */ OUTCOME_UNK_1P_HORDE_BATTLE_VICTORY, ///< Applies to any victory in
+                                                 ///< story mode against a
+                                                 ///< horde of (usually weak)
+                                                 ///< enemies.
+    /* 6 */ OUTCOME_UNK_1P_BONUS_STAGE_END, ///< Applies to all stages that
+                                            ///< aren't just a single match.
+                                            ///< Target Test, Undergrond Maze,
+                                            ///< Grand Prix, Race to the
+                                            ///< finish, etc;
     /* 7 */ OUTCOME_NO_CONTEST,
     /* 8 */ OUTCOME_RETRY,
     /* 9 */ OUTCOME_TERMINATED,
