@@ -724,7 +724,7 @@ MatchOutcome gm_GetFFAOutcome(void)
         var_r0_2 = 0;
     }
     if (var_r0_2 != 0) {
-        return OUTCOME_1P_HORDE_BATTLE_VICTORY;
+        return OUTCOME_UNK_1P_HORDE_BATTLE_VICTORY;
     }
     if (lbl_8046B6A0.is_singleplayer == 0) {
         notSingleplayer = 1;
@@ -787,7 +787,7 @@ MatchOutcome gm_GetTeamBattleOutcome(void)
             var_r0_2 = 0;
         }
         if (var_r0_2 != 0) {
-            return OUTCOME_1P_HORDE_BATTLE_VICTORY;
+            return OUTCOME_UNK_1P_HORDE_BATTLE_VICTORY;
         }
         if (lbl_8046B6A0.is_singleplayer == 0) {
             notSinglePlayer = true;
