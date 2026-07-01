@@ -128,7 +128,10 @@ struct StartMeleeRules {
     u32 x2_1 : 1;
     u32 x2_2 : 1;
     u32 x2_3 : 1; ///< single-button mode enabled
-    u32 disable_pausing : 1;
+    u32 disable_pausing
+        : 1; ///< When set, pausing is disabled for both active gameplay and
+             ///< pause menus. Sourced from the rules pause option and from
+             ///< several game-mode setups.
     u32 x2_5 : 1;
     u32 x2_6 : 1;
     u32 x2_7 : 1;

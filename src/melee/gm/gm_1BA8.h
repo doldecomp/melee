@@ -108,6 +108,12 @@
 /* 1BF8D8 */ void gm_801BF8D8(GameScene*);
 /* 1BF8F8 */ void gm_801BF8F8(GameScene*);
 /* 1BF920 */ void gm_801BF920(GameScene*);
+/**
+ * Scene table for #GM_CAMERA_MODE.
+ *
+ * The only game-mode scenes that install a @c x40_check_for_pauser_override
+ * callback (#gm_CameraModeVSGetPauser).
+ */
 /* 3DDBE0 */ extern GameScene gm_CameraModeScenes[5];
 /* 3DF94C */ extern gm_803DF94C_t* gm_803DF94C[];
 

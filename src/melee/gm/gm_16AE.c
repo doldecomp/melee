@@ -1132,6 +1132,12 @@ void gm_DoPauseChecksAndRoutine(lbl_8046B6A0_t* arg0, int arg1)
     }
 }
 
+/**
+ * @brief Returns the player id pressing unpause, or @c -1 if none.
+ *
+ * In retail builds, checks for a newly pressed Start button. When @c DbLevel
+ * >= 3, accepts D-Pad Up (@c HSD_PAD_DPADUP, @c 1 << 3) plus X instead.
+ */
 static inline int gm_GetPlayerPressingUnpause(void)
 {
     HSD_PadStatus* pad;
