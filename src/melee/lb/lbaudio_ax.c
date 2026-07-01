@@ -2058,6 +2058,7 @@ s32 fn_80026650(void)
     return -1;
 }
 
+#pragma global_optimizer off
 void fn_800267B0(void)
 {
     lbAudioAx_PoolAlloc* st = &lbl_80433710;
@@ -2113,6 +2114,7 @@ void fn_800267B0(void)
     HSD_SynthSFXBankDeflag(2);
     HSD_SynthSFXBankDeflagSync();
 }
+#pragma global_optimizer on
 
 void fn_800268B4(void)
 {
