@@ -700,34 +700,33 @@ void _tyList_80313BD8(HSD_GObj* gobj)
         }
     }
 
-    /* Fall-through label: block_17 */
     f30 = Toy_80305D00();
     f31 = Toy_80305DB0();
     if (f30 < -0.8f) {
-        M2C_FIELD(g, s8*, 0x12) = M2C_FIELD(g, s8*, 0x12) + 1;
+        g->x12 = g->x12 + 1;
         f30 = -1.0f;
         f31 = 0.0f;
     } else if (f30 > 0.8f) {
-        M2C_FIELD(g, s8*, 0x12) = M2C_FIELD(g, s8*, 0x12) + 1;
+        g->x12 = g->x12 + 1;
         f30 = 1.0f;
         f31 = 0.0f;
     } else if (f31 < -0.6f || (Toy_80305C44() & 4)) {
-        M2C_FIELD(g, s8*, 0x12) = M2C_FIELD(g, s8*, 0x12) + 1;
+        g->x12 = g->x12 + 1;
         f30 = 0.0f;
         f31 = 1.0f;
     } else if (f31 > 0.6f || (Toy_80305C44() & 8)) {
-        M2C_FIELD(g, s8*, 0x12) = M2C_FIELD(g, s8*, 0x12) + 1;
+        g->x12 = g->x12 + 1;
         f30 = 0.0f;
         f31 = -1.0f;
     } else {
         f31 = 0.0f;
-        M2C_FIELD(g, s8*, 0xF) = 0;
+        g->x0F = 0;
         f30 = f31;
-        M2C_FIELD(g, s8*, 0x12) = 0;
-        M2C_FIELD(g, s8*, 0x14) = 6;
-        M2C_FIELD(g, s8*, 0x13) = 0;
-        M2C_FIELD(g, s8*, 0x11) = 0;
-        M2C_FIELD(g, s8*, 0x10) = 0;
+        g->x12 = 0;
+        g->x14 = 6;
+        g->x13 = 0;
+        g->x11 = 0;
+        g->x10 = 0;
     }
 
     if (mn_8022F218() != 0) {
@@ -762,34 +761,30 @@ void _tyList_80313BD8(HSD_GObj* gobj)
         return;
     }
 
-    if ((s8) M2C_FIELD(g, s8*, 0x12) > (s8) M2C_FIELD(g, s8*, 0x14)) {
-        M2C_FIELD(g, s8*, 0x12) = M2C_FIELD(g, s8*, 0x14) + 1;
-        M2C_FIELD(g, s8*, 0x14) = 3;
-        M2C_FIELD(g, s8*, 0xF) = 0;
+    if ((s8) g->x12 > (s8) g->x14) {
+        g->x12 = g->x14 + 1;
+        g->x14 = 3;
+        g->x0F = 0;
     }
 
-    if ((f30 < 0.0f && f30 != (f32) (s8) M2C_FIELD(g, s8*, 0x10)) ||
-        (Toy_80305B88() & 0x41))
-    {
-        M2C_FIELD(g, s8*, 0x10) = (s8) f30;
+    if ((f30 < 0.0f && f30 != (f32) (s8) g->x10) || (Toy_80305B88() & 0x41)) {
+        g->x10 = (s8) f30;
         state->x29B = state->x29B - 1;
         if ((s8) state->x29B < 0) {
             state->x29B = 2;
         }
-        _tyList_80312BAC(state, M2C_FIELD(g, s8*, 0xC));
+        _tyList_80312BAC(state, g->x0C);
         lbAudioAx_80024030(1);
         return;
     }
 
-    if ((f30 > 0.0f && f30 != (f32) (s8) M2C_FIELD(g, s8*, 0x10)) ||
-        (Toy_80305B88() & 0x22))
-    {
-        M2C_FIELD(g, s8*, 0x10) = (s8) f30;
+    if ((f30 > 0.0f && f30 != (f32) (s8) g->x10) || (Toy_80305B88() & 0x22)) {
+        g->x10 = (s8) f30;
         state->x29B = state->x29B + 1;
         if ((s8) state->x29B >= 3) {
             state->x29B = 0;
         }
-        _tyList_80312BAC(state, M2C_FIELD(g, s8*, 0xC));
+        _tyList_80312BAC(state, g->x0C);
         lbAudioAx_80024030(1);
         return;
     }
@@ -830,53 +825,53 @@ void _tyList_80313BD8(HSD_GObj* gobj)
     if (f31 == 0.0f) {
         return;
     }
-    if ((s8) M2C_FIELD(g, s8*, 0xF) != 0) {
+    if ((s8) g->x0F != 0) {
         return;
     }
-    M2C_FIELD(g, s8*, 0xF) = 1;
-    M2C_FIELD(g, s8*, 0xC) = (s8) ((f32) (s8) M2C_FIELD(g, s8*, 0xC) + f31);
-    if ((s8) M2C_FIELD(g, s8*, 0xC) < 0) {
-        M2C_FIELD(g, s8*, 0xC) = 0;
-    } else if ((s8) M2C_FIELD(g, s8*, 0xC) > (s8) state->entryCount - 3) {
-        M2C_FIELD(g, s8*, 0xC) = state->entryCount - 3;
+    g->x0F = 1;
+    g->x0C = (s8) ((f32) (s8) g->x0C + f31);
+    if ((s8) g->x0C < 0) {
+        g->x0C = 0;
+    } else if ((s8) g->x0C > (s8) state->entryCount - 3) {
+        g->x0C = state->entryCount - 3;
     }
 
-    if ((s8) M2C_FIELD(g, s8*, 0xC) != (s8) M2C_FIELD(g, s8*, 0xD)) {
+    if ((s8) g->x0C != (s8) g->x0D) {
         i = 0;
-        M2C_FIELD(g, s8*, 0x12) = 0;
+        g->x12 = 0;
         p = &state->entries[0];
-        M2C_FIELD(g, s8*, 0x13) = 0;
-        M2C_FIELD(g, s8*, 0x11) = (s8) f31;
+        g->x13 = 0;
+        g->x11 = (s8) f31;
         for (; i < (s8) state->entryCount; i++, p++) {
-            if (((s8*) p)[0x24] == M2C_FIELD(g, s8*, 0xC)) {
+            if (((s8*) p)[0x24] == g->x0C) {
                 state->selectedIdx = p->idx;
                 state->x278 = p;
                 lbAudioAx_80024030(2);
                 HSD_JObjSetTranslateY(state->x288, p->x30);
             }
-            _tyList_80312904(p, M2C_FIELD(state, s8*, 0x2B8));
+            _tyList_80312904(p, ((s8*) state)[0x2B8]);
         }
-        M2C_FIELD(g, s8*, 0xD) = M2C_FIELD(g, s8*, 0xC);
+        g->x0D = g->x0C;
         return;
     }
 
     if (Toy_GetTrophyTotal() <= 10) {
         return;
     }
-    if ((s8) M2C_FIELD(g, s8*, 0x11) == 0) {
-        M2C_FIELD(g, s8*, 0x13) = 5;
-        M2C_FIELD(g, s8*, 0x12) = M2C_FIELD(g, s8*, 0x14) + 1;
-        M2C_FIELD(g, s8*, 0x14) = 3;
-        M2C_FIELD(g, s8*, 0xF) = 0;
+    if ((s8) g->x11 == 0) {
+        g->x13 = 5;
+        g->x12 = g->x14 + 1;
+        g->x14 = 3;
+        g->x0F = 0;
     }
-    M2C_FIELD(g, s8*, 0x11) = (s8) f31;
-    v = M2C_FIELD(g, s8*, 0x13);
+    g->x11 = (s8) f31;
+    v = g->x13;
     if (v == 0) {
-        M2C_FIELD(g, s8*, 0x13) = 1;
+        g->x13 = 1;
         return;
     }
     if (v < 5) {
-        M2C_FIELD(g, s8*, 0x13) = v + 1;
+        g->x13 = v + 1;
         return;
     }
 

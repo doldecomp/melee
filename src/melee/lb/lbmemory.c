@@ -273,8 +273,8 @@ void lbMemory_80015320(int arg0, Handle* handle, int arg2, int cancelflag)
     int enabled;
     void** currentp;
     u32 size;
-    u32 current;
     u32 old;
+    u32 current;
     Handle* next;
 
     alloc = &g_alloc;
@@ -288,12 +288,14 @@ void lbMemory_80015320(int arg0, Handle* handle, int arg2, int cancelflag)
     if (handle != NULL) {
         if ((old = (u32) handle->x4_lo) != current) {
             handle->x4_lo = (void*) current;
+            arg0 = old;
             *currentp = (void*) ((u32) handle->x4_lo + (u32) handle->x8_hi);
 
             if ((u32) handle->x4_lo < 0x80000000U) {
                 HSD_DevComRequest(
-                    0, old, current, ((u32) handle->x8_hi + 0x1F) & 0xFFFFFFE0,
-                    0x1B, 1, (HSD_DevComCallback) (Event) lbMemory_80015320,
+                    0, arg0, current,
+                    ((u32) handle->x8_hi + 0x1F) & 0xFFFFFFE0, 0x1B, 1,
+                    (HSD_DevComCallback) (Event) lbMemory_80015320,
                     handle->x0_next);
                 return;
             } else {

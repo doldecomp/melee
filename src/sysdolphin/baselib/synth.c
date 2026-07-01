@@ -1205,13 +1205,42 @@ extern s32 HSD_Synth_804D7764;
 extern u32 HSD_Synth_804D7770;
 extern u32 HSD_Synth_804D7774;
 
+static inline void HSD_Synth_8038ADD0_inline(u32 pos)
+{
+    BOOL intr;
+    s32 src;
+
+    if ((s32) ((HSD_Synth_804D776C + 1) % 3) != pos) {
+        intr = OSDisableInterrupts();
+        if (HSD_Synth_804D7778 != 0 ||
+            HSD_Synth_804D7768 != HSD_Synth_804D776C)
+        {
+            OSRestoreInterrupts(intr);
+            return;
+        }
+        if (getNode(HSD_Synth_804D7760) != NULL) {
+            src = lbl_804C4540[HSD_Synth_804D776C].x8;
+            if (src == -1) {
+                HSD_Synth_804D776C = (HSD_Synth_804D776C + 1) % 3;
+            } else {
+                HSD_Synth_804D7768 = (HSD_Synth_804D776C + 1) % 3;
+                HSD_Synth_804D7778 = 1;
+                HSD_DevComRequest(
+                    HSD_Synth_804D7764, src,
+                    (uintptr_t) &lbl_804C4540[HSD_Synth_804D7768], 0x20, 0x21,
+                    0, (HSD_DevComCallback) (Event) HSD_Synth_8038AD74,
+                    (struct HSD_SynthStreamHeader*) (src + 0x20));
+            }
+        }
+        OSRestoreInterrupts(intr);
+    }
+}
+
 void HSD_Synth_8038ADD0(void)
 {
     struct HSD_SynthSFXNode* node = getNode(HSD_Synth_804D7760);
     u32 pos;
     s32 i;
-    BOOL intr;
-    s32 src;
 
     if (node == NULL) {
         return;
@@ -1254,30 +1283,7 @@ void HSD_Synth_8038ADD0(void)
             }
         }
     }
-    if ((s32) ((HSD_Synth_804D776C + 1) % 3) != pos) {
-        intr = OSDisableInterrupts();
-        if (HSD_Synth_804D7778 != 0 ||
-            HSD_Synth_804D7768 != HSD_Synth_804D776C)
-        {
-            OSRestoreInterrupts(intr);
-            return;
-        }
-        if (getNode(HSD_Synth_804D7760) != NULL) {
-            src = lbl_804C4540[HSD_Synth_804D776C].x8;
-            if (src == -1) {
-                HSD_Synth_804D776C = (HSD_Synth_804D776C + 1) % 3;
-            } else {
-                HSD_Synth_804D7768 = (HSD_Synth_804D776C + 1) % 3;
-                HSD_Synth_804D7778 = 1;
-                HSD_DevComRequest(
-                    HSD_Synth_804D7764, src,
-                    (uintptr_t) &lbl_804C4540[HSD_Synth_804D7768], 0x20, 0x21,
-                    0, (HSD_DevComCallback) (Event) HSD_Synth_8038AD74,
-                    (void*) (src + 0x20));
-            }
-        }
-        OSRestoreInterrupts(intr);
-    }
+    HSD_Synth_8038ADD0_inline(pos);
 }
 
 void HSD_Synth_8038B120(void)

@@ -681,7 +681,7 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
     Vec3 pos;
     Vec3 rot;
     Vec3 fighter_pos;
-    PAD_STACK(0x44);
+    PAD_STACK(0x40);
 
     fighter = Ground_801C57A4();
     if (fighter != NULL) {
@@ -817,15 +817,15 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                 f32 frac;
                 f32 angle;
                 Vec3 road;
-                Vec3 road_tan;
-                Vec3 road_rot;
-                Vec3 p0;
-                Vec3 p1;
-                Vec3 up;
                 Vec3 air;
-                Vec3 tangent;
-                Vec3 side;
+                Vec3 road_rot;
+                Vec3 road_tan;
+                Vec3 p1;
+                Vec3 p0;
                 Vec3 orient;
+                Vec3 side;
+                Vec3 up;
+                Vec3 tangent;
 
                 prog = (RE_ENTRY->x4 - RE_ENTRY->x24) / (1.0f - RE_ENTRY->x24);
                 t = RE_ENTRY->x4;
@@ -878,14 +878,14 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                 f32 angle;
                 f32 t;
                 f32 frac;
-                Vec3 up;
-                Vec3 air;
-                Vec3 tangent;
-                Vec3 side;
                 Vec3 orient;
-                Vec3 p0;
-                Vec3 p1;
+                Vec3 side;
+                Vec3 up;
+                Vec3 tangent;
                 Vec3 road_tan;
+                Vec3 p1;
+                Vec3 p0;
+                Vec3 air;
                 Vec3 road;
 
                 prog =

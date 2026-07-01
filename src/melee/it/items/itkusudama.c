@@ -269,7 +269,7 @@ void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3)
         }
         {
             ItemKind* spawn_ptr = &spawned[i];
-            for (; i < count; i++, spawn_ptr++) {
+            for (; i < count; spawn_ptr++, i++) {
                 ItemKind rand_kind = it_8026F3AC();
                 Vec3 vel;
                 Vec3 pos;

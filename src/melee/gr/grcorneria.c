@@ -2048,15 +2048,26 @@ void fn_801E12D4(Item_GObj* gobj, Ground* gr, Vec3* pos, HSD_GObj* arg3,
     }
 }
 
+static inline f32 grCn_GetX1C(void)
+{
+    return grCn_804D69A0->x1C;
+}
+
+static inline HSD_JObj* grCn_GetCannonJObj2(Ground_GObj* gobj)
+{
+    return Ground_801C3FA4(gobj, 2);
+}
+
 void grCorneria_801E1348(Ground_GObj* gobj)
 {
     Vec3 sp40;
+    u8 unused[8];
     Vec3 sp2C;
     Vec3 sp20;
     Ground* gp = GET_GROUND(gobj);
     grCn_Data* data = &grCn_803E1D38;
 
-    PAD_STACK(24);
+    PAD_STACK(12);
 
     switch (gp->gv.corneria.x108) {
     case 0:
@@ -2100,7 +2111,7 @@ void grCorneria_801E1348(Ground_GObj* gobj)
         return;
     case 1:
         if (gp->gv.corneria.x10C == 0) {
-            hsd_8039D580(Ground_801C3FA4(gobj, 2));
+            hsd_8039D580(grCn_GetCannonJObj2(gobj));
             hsd_8039D580(Ground_801C3FA4(gobj, 3));
             Item_80268E5C((HSD_GObj*) gp->gv.corneria.left_cannon, 0,
                           ITEM_ANIM_UPDATE);
@@ -2169,9 +2180,11 @@ void grCorneria_801E1348(Ground_GObj* gobj)
             return;
         }
         {
+            s32 rand_range = grCn_804D69A0->x18;
             s32 range = grCn_804D69A0->x18;
-            gp->gv.corneria.x110 = (s32) (grCn_804D69A0->x1C +
-                                          (range != 0 ? HSD_Randi(range) : 0));
+            gp->gv.corneria.x110 =
+                (s32) (grCn_GetX1C() +
+                       (range != 0 ? HSD_Randi(rand_range) : 0));
         }
         gp->gv.corneria.x10C = 0;
         gp->gv.corneria.x108 = 0;
@@ -2199,7 +2212,8 @@ void grCorneria_801E1878(Ground_GObj* gobj)
     Vec3 pos;
     Ground* gr = GET_GROUND(gobj);
     HSD_JObj* jobj = gobj->hsd_obj;
-    HSD_JObj* target_jobj = gr->gv.corneria.x128->hsd_obj;
+    HSD_JObj* tmp = gr->gv.corneria.x128->hsd_obj;
+    HSD_JObj* target_jobj = tmp;
 
     HSD_JObjGetTranslation(jobj, &pos);
     HSD_JObjSetTranslate(target_jobj, &pos);

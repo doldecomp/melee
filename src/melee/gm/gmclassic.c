@@ -404,17 +404,17 @@ static inline void gmClassic_InitMatchupOrder(const gmClassicMatchup* matchups,
 static gmClassicMatchup* gmClassic_801B2BA4(gmClassicMatchup* arg0, u8* arg1,
                                             gm_803DDEC8Struct* arg2)
 {
-    gmClassicMatchup* result;
-    gmClassicMatchup* entry;
-    gm_803DDEC8Struct* temp;
-    u8* order;
-    s32 outer;
-    s8 target_char;
-    int cur_char;
-    s32 j;
     s32 k;
+    s32 j;
+    gm_803DDEC8Struct* temp;
     s32 count;
-    s32 stage1;
+    s8 target_char;
+    gmClassicMatchup* entry;
+    gmClassicMatchup* result;
+    gmClassicMatchup* count_entry;
+    s32 cur_char;
+    s32 outer;
+    u8* order;
 
     result = NULL;
     target_char = (s8) gmMainLib_8015CDC8()->c_kind;
@@ -450,8 +450,8 @@ loop:
 
         for (temp = arg2; temp->x0 != 0xD; temp++) {
             if (temp->xC != NULL) {
-                stage1 = Stage_8022519C((InternalStageId) entry->x00);
-                if (Stage_8022519C((InternalStageId) temp->xC->x00) == stage1)
+                if (Stage_8022519C((InternalStageId) temp->xC->x00) ==
+                    Stage_8022519C((InternalStageId) entry->x00))
                 {
                     result = entry;
                     goto next;
@@ -467,7 +467,9 @@ next:
     order++;
 check:
     count = 0;
-    while (arg0[count].x00 != 0x148) {
+    count_entry = arg0;
+    while (count_entry->x00 != 0x148) {
+        count_entry++;
         count++;
     }
     if (outer < count) {

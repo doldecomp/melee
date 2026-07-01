@@ -249,8 +249,10 @@ void it_802E7654(Item_GObj* owner, HSD_JObj* bone, Vec3* target, s32 type,
 
     lb_8000B1CC(bone, NULL, &sp28);
     spawn.kind = It_Kind_Arwing_Laser;
-    *(u32*) &spawn.prev_pos.x = *(u32*) &sp28.x;
-    *(u32*) &spawn.prev_pos.y = *(u32*) &sp28.y;
+    new_gobj = (Item_GObj*) *(u32*) &sp28.x;
+    ip = (Item*) *(u32*) &sp28.y;
+    *(u32*) &spawn.prev_pos.x = (u32) new_gobj;
+    *(u32*) &spawn.prev_pos.y = (u32) ip;
     *(u32*) &spawn.prev_pos.z = *(u32*) &sp28.z;
     *(volatile u32*) &spawn.prev_pos.y = *(u32*) &spawn.prev_pos.y;
     spawn.facing_dir = 0.0f;

@@ -130,30 +130,28 @@ void grVenom_8020362C(void)
                 }
                 combined = group_b | group_a;
                 if (combined != 2) {
-                    if (combined < 2) {
-                        if (combined == 0) {
-                            {
-                                s32* x2c_base = ext->x2C;
-                                x2c_ptr = &x2c_base[0];
-                            }
-                            idx = ext->x2C[0];
-                            while (idx == *x2c_ptr) {
-                                idx = HSD_Randi(0xB) + 1;
-                            }
-                            x38_ptr = &ext->x38[0];
-                            if (ext->x38[0] == 4) {
-                                mode = 1;
-                            } else {
-                                mode =
-                                    (HSD_Randf() > grVe_804D6A30->x10) ? 1 : 4;
-                            }
-                            grVe_804D6A34 = 0;
-                            *x2c_ptr = idx;
-                            *x38_ptr = mode;
-                            ext->x20[grVe_804D6A34] = grVenom_80203EAC(2);
-                        } else {
-                            return;
+                    if (combined >= 2) {
+                        return;
+                    }
+                    if (combined == 0) {
+                        {
+                            s32* x2c_base = ext->x2C;
+                            x2c_ptr = &x2c_base[0];
                         }
+                        idx = ext->x2C[0];
+                        while (idx == *x2c_ptr) {
+                            idx = HSD_Randi(0xB) + 1;
+                        }
+                        x38_ptr = &ext->x38[0];
+                        if (ext->x38[0] == 4) {
+                            mode = 1;
+                        } else {
+                            mode = (HSD_Randf() > grVe_804D6A30->x10) ? 1 : 4;
+                        }
+                        grVe_804D6A34 = 0;
+                        *x2c_ptr = idx;
+                        *x38_ptr = mode;
+                        ext->x20[grVe_804D6A34] = grVenom_80203EAC(2);
                         return;
                     }
                     return;
@@ -225,7 +223,6 @@ void grVenom_8020362C(void)
             if (grVe_804D6A38 <= 0) {
                 has_active = 0;
                 x2c_ptr = &ext->x2C[0];
-                x20_ptr = &ext->x20[0];
                 for (j = 0; j < 3; j++) {
                     if (j != i) {
                         if (x2c_ptr[j] < 8) {

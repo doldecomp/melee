@@ -206,7 +206,6 @@ void lbSnap_8001DA5C(int arg0)
     u8* dst = lbSnap_GetMemSnapIconData();
     int dst_x;
     int ctr;
-    PAD_STACK(8);
 
     for (dst_x = 0; dst_x < 32; dst_x++) {
         int src_x = (dst_x * 204 / 32) + 138;
@@ -250,9 +249,9 @@ int lbSnap_8001DC0C(int arg0)
     lbSnap_80433380.x0->x34 = ft_80087C1C();
     lbSnap_80433380.x0->x8 = 3;
     hsd_803B5C2C(lbSnap_80433380.x0->x8);
-    lbSnap_80433380.x0->xC =
-        hsd_803B51C8(arg0, lbSnap_80433380.x0->x4, lbSnap_80433380.x0->x6,
-                     lbSnap_80433380.x0->x38, 256000);
+    lbSnap_80433380.x0->xC = hsd_803B51C8(
+        (u8*) arg0, lbSnap_80433380.x0->x4, lbSnap_80433380.x0->x6,
+        (u8*) lbSnap_80433380.x0->x38, 256000);
     if (lbSnap_80433380.x0->xC != 0) {
         ret = 1;
     }

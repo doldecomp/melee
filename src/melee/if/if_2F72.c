@@ -226,6 +226,7 @@ HSD_GObj* fn_802F77F8(HSD_GObj* gobj, u8 slot, s32 arg2)
 {
     void** base = lbl_804A1340;
     HSD_JObj* jobj;
+    DynamicModelDesc* model;
     Vec3* pos;
 
     if (base[0] == NULL) {
@@ -242,7 +243,8 @@ HSD_GObj* fn_802F77F8(HSD_GObj* gobj, u8 slot, s32 arg2)
         if (jobj != NULL) {
             HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
             GObj_SetupGXLink(gobj, fn_802F770C, 11, 0);
-            gm_8016895C(jobj, *(DynamicModelDesc**) base[0], (u8) arg2);
+            model = *(DynamicModelDesc**) base[0];
+            gm_8016895C(jobj, model, arg2 & 0xFF);
             HSD_JObjReqAnimAll(jobj, 0.0f);
             HSD_JObjAnimAll(jobj);
 
@@ -262,42 +264,43 @@ void fn_802F7994(HSD_GObj* gobj)
     HSD_JObj* jobj;
     void** base = lbl_804A1340;
     void** ptr;
+    void** ptr2;
+    void** ptr4;
     void** entry;
     s32 slot;
     s32 idx;
-    void* cmp;
+    void* temp;
     f32 frame;
+    PAD_STACK(8);
 
     jobj = gobj->hsd_obj;
     frame = lbGetJObjCurrFrame(jobj);
 
-    if (base[1] == gobj) {
+    ptr = base;
+    if (ptr[1] == gobj) {
         slot = 0;
     } else {
-        ptr = base;
-        ptr += 2;
-        cmp = ptr[1];
-        if (cmp == gobj) {
+        if ((temp = (ptr += 2)[1]) == gobj) {
             slot = 1;
         } else {
-            cmp = ptr[3];
-            (void) cmp;
-            ptr += 2;
-            if (cmp == gobj) {
+            ptr2 = ptr;
+            temp = ptr2[3];
+            ptr4 = ptr2 + 2;
+            if (temp == gobj) {
                 slot = 2;
             } else {
-                cmp = ptr[3];
-                ptr += 2;
-                if (cmp == gobj) {
+                temp = ptr4[3];
+                ptr = ptr4 + 2;
+                if (temp == gobj) {
                     slot = 3;
                 } else {
-                    cmp = ptr[3];
-                    ptr += 2;
-                    if (cmp == gobj) {
+                    temp = ptr[3];
+                    ptr2 = ptr + 2;
+                    if (temp == gobj) {
                         slot = 4;
                     } else {
-                        cmp = ptr[3];
-                        if (cmp == gobj) {
+                        temp = ptr2[3];
+                        if (temp == gobj) {
                             slot = 5;
                         } else {
                             slot = -1;
@@ -312,7 +315,7 @@ void fn_802F7994(HSD_GObj* gobj)
         if (frame > 12.0f && base[slot * 2 + 2] == NULL) {
             idx = (u8) slot << 1;
             entry = base + idx;
-            base[idx + 2] = fn_802F77F8(*++entry, (u8) slot, 1);
+            base[idx + 2] = fn_802F77F8(*(entry += 2), (u8) slot, 1);
             if (base[idx + 2] != NULL) {
                 HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F7670, 0x11);
             }
@@ -328,27 +331,33 @@ void fn_802F7994(HSD_GObj* gobj)
 
 void if_802F7AF8(s32 slot)
 {
-    s32 idx;
-    void** entry;
+    void** base;
+    s32 slot2;
+    u32 idx;
     void** base1;
-    void** base = lbl_804A1340;
-    s32 slot2 = Player_80036428(slot);
+    void** entry;
+    void** dst;
     HSD_GObj* result;
 
-    idx = slot << 1;
-    entry = base + idx;
+    base = lbl_804A1340;
+    slot2 = Player_80036428(slot);
+
+    idx = (slot << 3) & 0x7F8;
+    entry = base + (idx >> 2);
     result = fn_802F77F8(*++entry, (u8) slot, 1);
     base1 = &base[1];
-    base1[idx] = result;
-    if (base1[idx] != NULL) {
+    dst = base1 + (idx >> 2);
+    *dst = result;
+    if (*dst != NULL) {
         HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F75D4, 0x11);
     }
 
-    idx = (u8) slot2 << 1;
-    entry = base + idx;
+    idx = (slot2 << 3) & 0x7F8;
+    entry = base + (idx >> 2);
     result = fn_802F77F8(*++entry, (u8) slot2, 2);
-    base1[idx] = result;
-    if (base1[idx] != NULL) {
+    dst = base1 + (idx >> 2);
+    *dst = result;
+    if (*dst != NULL) {
         HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F75D4, 0x11);
     }
 }

@@ -94,11 +94,14 @@ void lbShadow_8000E9F0(Vec3* p, HSD_Spline* spline, f32 u)
         f32 u2 = t * t;
         f32 car1, car0, car3, car2;
         cp = &spline->cv[idx];
+        car0 = (((-3.0F * u2) + (4.0F * t)) - 1.0F);
         car1 = (3.0F * (2.0F - tension) * u2) + (2.0F * (tension - 3.0F) * t);
-        car0 = tension * (((-3.0F * u2) + (4.0F * t)) - 1.0F);
-        car3 = tension * ((3.0F * u2) - (2.0F * t));
-        car2 = tension + ((3.0F * (tension - 2.0F) * u2) +
-                          (2.0F * -((2.0F * tension) - 3.0F) * t));
+        car3 = (3.0F * u2) - (2.0F * t);
+        car2 = (3.0F * (tension - 2.0F) * u2) +
+               (2.0F * (3.0F - (2.0F * tension)) * t);
+        car0 = tension * car0;
+        car3 = tension * car3;
+        car2 = tension + car2;
         p->x = (cp[3].x * car3) +
                ((cp[2].x * car2) + ((cp[0].x * car0) + (cp[1].x * car1)));
         {

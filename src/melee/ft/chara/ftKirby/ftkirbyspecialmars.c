@@ -132,7 +132,10 @@ void ftKb_SpecialNMs_8010B2FC(HSD_GObj* gobj)
 
 void ftKb_SpecialNMs_8010B4A0(HSD_GObj* gobj)
 {
-    PAD_STACK(8);
+    u32 unused1;
+    u32 unused2;
+    Vec3 scale;
+    PAD_STACK(4 * 3);
     {
         ftKb_DatAttrs* da;
         struct ftKb_SpecialNMs_DatAttrs* ms_da;
@@ -169,26 +172,7 @@ void ftKb_SpecialNMs_8010B4A0(HSD_GObj* gobj)
     }
 
     ftAnim_8006EBA4(gobj);
-
-    {
-        Fighter* fp = GET_FIGHTER(gobj);
-        Vec3 scale;
-        KirbyHatStruct* mars_hat = ft_80459B88.hats[FTKIND_MARS - 1];
-        KirbyHatStruct* fe_hat = ft_80459B88.hats[FTKIND_EMBLEM - 1];
-
-        if (fp->fv.kb.hat.kind == FTKIND_MARS) {
-            ftCommon_SetAccessory(fp, (HSD_Joint*) mars_hat->hat_dynamics[0]);
-        } else {
-            ftCommon_SetAccessory(fp, (HSD_Joint*) fe_hat->hat_dynamics[0]);
-        }
-
-        scale.x = scale.y = scale.z = ftCommon_GetModelScale(fp);
-        HSD_JObjSetScale(fp->x20A0_accessory, &scale);
-        lb_8000C2F8(
-            fp->x20A0_accessory,
-            fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint);
-    }
-    PAD_STACK(0x10);
+    setupStartAccessory(gobj, &scale);
 }
 
 void ftKb_MsSpecialNStart_Anim(HSD_GObj* gobj)

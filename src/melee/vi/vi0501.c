@@ -101,8 +101,9 @@ void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
     Player_80036F34(0, 8);
 
     counts = (u8*) spawn_count;
-    pos = grLib_801C9A10() + 1;
+    pos = grLib_801C9A10();
     gobj_ptr = un_804A2E98 + 1;
+    pos = pos + 1;
     for (i = 1; i < 4; i++) {
         Player_80036E20(CKIND_KIRBY, un_804D6F74, 6);
         count = counts[i - 1];
