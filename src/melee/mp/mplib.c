@@ -5659,6 +5659,7 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
                 int lcount_r22;
                 CollLine* lines; /* r5 */
                 lstart_r24 = ((struct pair*) j0_r9->inner)[var_r25].start;
+                (void) lstart_r24;
                 lcount_r22 = ((struct pair*) j0_r9->inner)[var_r25].count;
                 lines = &line_base[lstart_r24];
                 for (i_r23 = 0; i_r23 < lcount_r22; i_r23++) {

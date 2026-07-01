@@ -259,6 +259,7 @@ void grCorneria_801DCE1C(void)
                         }
 
                         arwing_group = &data->arwing_group[0];
+                        (void) arwing_group;
                         if (*arwing_group == 4) {
                             group = 1;
                         } else {
@@ -791,6 +792,7 @@ extern Vec3 grCn_803B80A8;
 
 void grCorneria_801DE024(Ground_GObj* gobj)
 {
+    UNUSED u8 pad1[8];
     grCn_Data* data = &grCn_803E1D38;
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -799,7 +801,6 @@ void grCorneria_801DE024(Ground_GObj* gobj)
     Vec3 pos;
     HSD_GObj* ship_gobj = Ground_801C2BA4(3);
     HSD_JObj* ship_jobj = ship_gobj->hsd_obj;
-    UNUSED u8 pad1[8];
     if (ship_jobj != NULL) {
         f32 y = HSD_JObjGetTranslationY(ship_jobj);
         HSD_JObjSetTranslateY(jobj, y);
@@ -1433,6 +1434,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
         {
             HSD_GObj* item;
             item = gp->gv.corneria2.xE0;
+            (void) item;
             if (item != NULL) {
                 Ground_801C4A08(item);
             }

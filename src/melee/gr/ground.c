@@ -1216,6 +1216,7 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lightset)
         desc = *(HSD_LightDesc**) *out;
         if (desc->flags & 3) {
             dat = archive->unk4;
+            (void) dat;
             count = dat->unk1C;
             if (count != 0) {
                 for (i = 0; i < count; i++) {

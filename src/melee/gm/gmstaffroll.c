@@ -468,6 +468,7 @@ void fn_801AB200(HSD_GObj* gobj)
     HSD_JObj* hover_jobj;
     HSD_JObj* cursor_jobj;
     HSD_JObj* temp_jobj;
+    u8 operand_pad[4];
     HSD_JObj* jobj_pair[2];
     Vec3 xform_result;
     f32 proj[8];
@@ -534,6 +535,7 @@ void fn_801AB200(HSD_GObj* gobj)
     }
 
     sq_x = vel_x * vel_x + 6400.0f;
+    (void) sq_x;
     vel_y = (f32) adj_val;
     sq_x = sqrtf(sq_x);
     vel_x = vel_x * 0.00038461538f * sq_x;

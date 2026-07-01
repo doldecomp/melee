@@ -828,6 +828,7 @@ void it_80270E30(Item_GObj* arg_item_gobj)
         while (index < it_804D6D18) {
             hit = damage_log->x8;
             attr = arg_item->xCC_item_attr;
+            (void) attr;
             if (hit->x28 != 0) {
                 knockback = (0.01f * hit->x24 *
                              ((it_804D6D28->x80_float[11] *

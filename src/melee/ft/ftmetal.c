@@ -175,12 +175,12 @@ void ft_800C85B8(Fighter_GObj* gobj)
 
     PAD_STACK(0xC);
 
-    dobj_count = 0;
-    joint_idx = 0;
     fp = GET_FIGHTER(gobj);
     joint = fp->ft_data->x5C;
     sp20 = joint;
-    sp1C = 0;
+    sp1C = (joint_idx = 0);
+    joint_idx = (dobj_count = 0);
+    dobj_count = 0;
     while (sp20 != 0) {
         if (ftParts_8007506C(fp->kind, joint_idx) != 0) {
             joint_idx++;

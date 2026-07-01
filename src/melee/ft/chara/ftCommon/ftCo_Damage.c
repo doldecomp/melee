@@ -735,7 +735,8 @@ static bool inlineB0(Fighter_GObj* gobj)
 #pragma inline_depth(0)
 void ftCo_8008EB58(Fighter_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* tmp_p21265 = gobj->user_data;
+    Fighter* fp = tmp_p21265;
     float kb_applied = fp->dmg.kb_applied;
     bool should_update;
     enum_t kb_level;

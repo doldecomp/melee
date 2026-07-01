@@ -12,20 +12,17 @@
 #include <math.h>
 #include <baselib/random.h>
 
-static f32 sdata2_ordering(void)
+static void sdata2_order(void)
 {
-    volatile f32 data_0 = 1.0f;
-    volatile f32 data_1 = 0.5f;
-    volatile f32 data_2 = 0.0f;
-    volatile f64 data_3 = M_PI_2;
-    volatile f32 data_4 = (f32) M_PI / 4.0f;
-    volatile f32 data_5 = M_PI_2;
-    volatile f64 data_6 = M_PI;
-    volatile f64 data_7 = 4503601774854144.0;
-    volatile f32 data_8 = 60.0f;
-
-    return data_0 + data_1 + data_2 + data_3 + data_4 + data_5 + data_6 +
-           data_7 + data_8;
+    (void) 1.0f;
+    (void) 0.5f;
+    (void) 0.0f;
+    (void) 1.5707963267948966;
+    (void) 0.785398185f;
+    (void) 1.57079637f;
+    (void) 3.1415926535897931;
+    (void) 4503601774854144.0;
+    (void) 60.0f;
 }
 
 ItemStateTable it_803F55D0[] = {

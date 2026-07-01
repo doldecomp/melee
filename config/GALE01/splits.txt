@@ -999,9 +999,17 @@ melee/ft/ftlipstickswing.c:
 	.sdata2     start:0x804D8F10 end:0x804D8F14
 
 melee/ft/ft_0CDD.c:
-	.text       start:0x800CDD14 end:0x800CECE8
+	.text       start:0x800CDD14 end:0x800CDF5C
 	.sdata      start:0x804D3CC0 end:0x804D3CD0
-	.sdata2     start:0x804D8F18 end:0x804D8F30
+	.sdata2     start:0x804D8F18 end:0x804D8F20
+
+melee/ft/ft_0CDF.c:
+	.text       start:0x800CDF5C end:0x800CE3E0
+	.sdata2     start:0x804D8F20 end:0x804D8F28
+
+melee/ft/ft_0CE3.c:
+	.text       start:0x800CE3E0 end:0x800CECE8
+	.sdata2     start:0x804D8F28 end:0x804D8F30
 
 melee/ft/ftattacks4combo.c:
 	.text       start:0x800CECE8 end:0x800CEE70
@@ -2132,12 +2140,17 @@ melee/gm/gm_16AE.c:
 	.sdata2     start:0x804DA298 end:0x804DA2E8
 
 melee/gm/gm_16F1.c:
-	.text       start:0x8016F180 end:0x80174274
+	.text       start:0x8016F180 end:0x801736DC
 	.rodata     start:0x803B7A44 end:0x803B7B18
-	.data       start:0x803D5648 end:0x803D6488
-	.bss        start:0x8046DBC8 end:0x8046DBE8
+	.data       start:0x803D5648 end:0x803D6450
+	.bss        start:0x8046DBC8 end:0x8046DBD8
 	.sbss       start:0x804D65A0 end:0x804D65B8
 	.sdata2     start:0x804DA2E8 end:0x804DA300
+
+melee/gm/gm_1736.c:
+	.text       start:0x801736DC end:0x80174274
+	.data       start:0x803D6450 end:0x803D6488
+	.bss        start:0x8046DBD8 end:0x8046DBE8
 
 melee/gm/gmresult.c:
 	.text       start:0x80174274 end:0x80177724

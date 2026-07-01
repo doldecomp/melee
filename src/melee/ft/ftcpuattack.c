@@ -73,6 +73,7 @@ typedef struct ftCo_CollData {
 
 int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
 {
+    u8 operand_pad[24];
     ftCo_AttackEntry sp3C[32];
     ftCo_AttackEntry* list = arg2;
     ftCo_AttackEntry* sel;
@@ -131,7 +132,7 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
     fpVx = fp->pos_delta.x;
     tgtX = target->cur_pos.x;
     tgtVx = target->pos_delta.x;
-    if (target->facing_dir > 0.0f) {
+    if (target->facing_dir > 0.0) {
         rangeF = target->x1A88.x55C;
         rangeB = target->x1A88.x560;
     } else {
@@ -222,6 +223,7 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
             diry = -list->x08 * fp->x34_scale.y;
         }
         scale = fp->x34_scale.y;
+        (void) scale;
         if (list->x14 * scale * halfRange > relPredY &&
             list->x10 * scale * halfRange < relPredY + x568 &&
             dirx * halfRange < relx + rangeF &&
@@ -404,7 +406,7 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
             } else {
                 v = -(tgtTermNeg - tgtVy) / tgtGrav;
             }
-            if (v <= 0.0f) {
+            if (v <= 0.0) {
                 relPredY = (tgtVy * t + tgtY) - fpPredY;
             } else if (t < v) {
                 sq = sqrtf(t);
@@ -429,6 +431,7 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
             diry = -list->x08 * fp->x34_scale.y;
         }
         scale = fp->x34_scale.y;
+        (void) scale;
         if ((list->x14 * scale + reach) * halfRange > relPredY &&
             list->x10 * scale * halfRange < relPredY + x568 &&
             dirx * halfRange < relx + rangeF &&
@@ -481,6 +484,7 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
 
 int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
 {
+    u8 operand_pad[12];
     ftCo_AttackEntry sp34[32];
     ftCo_x50_t* x50 = arg1;
     ftCo_x50_attr* attrs;
@@ -618,6 +622,7 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
             diry = list->x0C * fp->x34_scale.y;
         } else {
             dirx = -list->x0C * fp->x34_scale.y;
+            (void) dirx;
             diry = -list->x08 * fp->x34_scale.y;
         }
         scale = fp->x34_scale.y;
@@ -1839,9 +1844,9 @@ bool ftCo_800B89CC(Fighter* fp)
 
 bool ftCo_800B8A9C(Fighter* fp)
 {
+    int sp34;
     u8 _[0x38];
     u32 sp38;
-    int sp34;
     Vec3 sp28;
     Vec3 sp1C;
     Fighter** target_pp;

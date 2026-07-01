@@ -139,6 +139,7 @@ HSD_Text* gmCamera_801A2334(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4)
     temp_r6 = arg0 * 0x10;
     temp_r5 = (gmCameraUnkStruct2*) ((int) gcus + temp_r6);
     temp_r0 = temp_r5->x24;
+    (void) temp_r0;
     switch (temp_r0) {
     case 0:
         if ((s32) temp_r5->x2C == 0) {

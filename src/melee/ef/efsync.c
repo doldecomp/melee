@@ -224,6 +224,7 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
         ret_obj = efLib_Create_Attach_Pos(0x1F46U, gobj, va_arg(vlist, Vec3*));
         if (ret_obj != NULL) {
             jobj_1 = gobj->hsd_obj;
+            (void) jobj_1;
             HSD_JObjGetScale(jobj_1, &scale);
             jobj_2 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
             HSD_JObjSetScale(jobj_2, &scale);

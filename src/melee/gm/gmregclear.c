@@ -917,6 +917,7 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     enemy_idx = 0;
     for (;;) {
         enemy_kind = &arg2[enemy_idx];
+        (void) enemy_kind;
         if ((s32) (u8) enemy_kind[0] != 0x21) {
             if (arg1->x0.x8 & 8) {
                 if (arg1->x4C != NULL) {
@@ -2612,6 +2613,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     u16 coins;
     u8 mask;
     u8 var_r0;
+    u8 operand_pad[8];
 
     special_score = 0;
     coins = arg4->x58[0].xE;

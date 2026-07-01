@@ -279,6 +279,7 @@ void fn_80174468(u8 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
             loop_i = 0;
             loop_n++;
             loop_ptr = me->x44C[slot].x0;
+            (void) loop_ptr;
             do {
                 loop_val = *loop_ptr;
                 if (loop_val != 0) {
@@ -1278,6 +1279,7 @@ static const struct {
 
 void fn_80175DC8(HSD_GObj* gobj)
 {
+    HSD_JObj* spCC;
     HSD_JObj* sp108;
     HSD_JObj* sp104;
     HSD_JObj* sp100;
@@ -1287,7 +1289,6 @@ void fn_80175DC8(HSD_GObj* gobj)
     HSD_JObj* spE4;
     HSD_JObj* spDC;
     HSD_JObj* spD4;
-    HSD_JObj* spCC;
     HSD_JObj* spC4;
     HSD_JObj* spBC;
     HSD_JObj* spB4;

@@ -166,6 +166,7 @@ void grKinokoRoute_80207634(Ground_GObj* gobj)
     Vec3 cam_offset;
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj;
+    u8 operand_pad[8];
 
     jobj = Ground_801C2CF4(0x94);
     if (jobj != NULL) {

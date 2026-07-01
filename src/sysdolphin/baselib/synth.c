@@ -102,6 +102,7 @@ void HSD_SynthSFXSampleLoadCallback(int result, int length, void* addr,
             void** bucket;
 
             n = *HSD_Synth_804D7734;
+            (void) n;
             nshift = n << 6;
             nbytes = nshift + 8;
             memcpy((u8*) HSD_Synth_804D7730 + 8, HSD_Synth_804D7734, nbytes);

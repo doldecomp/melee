@@ -171,6 +171,7 @@ void mnEvent_8024D15C(s32 idx, s32 event_id)
     }
 
     text_slot = &data->texts[idx];
+    (void) text_slot;
     if (*text_slot != NULL) {
         HSD_SisLib_803A5CC4(data->texts[idx]);
     }

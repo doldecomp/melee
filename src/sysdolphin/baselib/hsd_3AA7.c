@@ -449,6 +449,7 @@ s32 hsd_803AAA48(void)
             }
             cmd->type = 0;
             hsd_804D7980 = (hsd_804D7980 + 1) % 128;
+            (void) hsd_804D7980;
             continue;
         case 4:
             if (hsd_804D7988.status != 1) {
@@ -2427,6 +2428,7 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                             }
                             if (cmd_result < 0) {
                                 snap = hsd_804D7998;
+                                (void) snap;
                                 if (snap >= 0) {
                                     saved = snap;
                                     while (saved != hsd_804D7984) {
@@ -3435,6 +3437,7 @@ s32 fn_803B0120(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
             s32 chunk;
             if (logical == 0) {
                 chunk = (state->x8 - 0x20) - ((state->x24 + 0x30) % state->x8);
+                (void) chunk;
             } else {
                 chunk = state->x8 - 0x20;
             }
@@ -3964,6 +3967,7 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
             hsd_803B2B20(arg0->x0, sector_size, &digest[digest_idx]);
 
             write_size = arg0->x8;
+            (void) write_size;
             buf = arg0->x0;
             offset = write_size * block_idx;
             for (retries = 0; retries < 10; retries++) {

@@ -690,7 +690,9 @@ config.libs = [
             Object(Matching, "melee/ft/ft_0CD3.c"),
             Object(Matching, "melee/ft/ftstarrodswing.c"),
             Object(Matching, "melee/ft/ftlipstickswing.c"),
-            Object(NonMatching, "melee/ft/ft_0CDD.c"),
+            Object(Matching, "melee/ft/ft_0CDD.c"),
+            Object(Matching, "melee/ft/ft_0CDF.c"),
+            Object(NonMatching, "melee/ft/ft_0CE3.c"),
             Object(Matching, "melee/ft/ftattacks4combo.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemParasolOpen.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemParasolFall.c"),
@@ -818,7 +820,7 @@ config.libs = [
             # Nana
             Object(Matching, "melee/ft/chara/ftNana/ftNn_Init.c"),
             Object(Matching, "melee/ft/chara/ftNana/ftNn_SpecialHi.c"),
-            Object(NonMatching, "melee/ft/chara/ftNana/ftNn_SpecialS.c"),
+            Object(Matching, "melee/ft/chara/ftNana/ftNn_SpecialS.c"),
             # Pikachu
             Object(Matching, "melee/ft/chara/ftPikachu/ftPk_Init.c"),
             Object(Matching, "melee/ft/chara/ftPikachu/ftPk_SpecialN.c"),
@@ -995,6 +997,7 @@ config.libs = [
             Object(NonMatching, "melee/gm/gm_1601.c"),
             Object(NonMatching, "melee/gm/gm_16AE.c"),
             Object(NonMatching, "melee/gm/gm_16F1.c"),
+            Object(Matching, "melee/gm/gm_1736.c"),
             Object(NonMatching, "melee/gm/gmresult.c"),
             Object(NonMatching, "melee/gm/gmresultplayer.c"),
             Object(Matching, "melee/gm/gm_17AD.c"),

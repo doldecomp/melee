@@ -1294,7 +1294,8 @@ void fn_8016CFE0(void)
     int var_r29;
     s64 var_r29_2;
     int var_r4;
-    PAD_STACK(0x18);
+    u8 operand_pad[8];
+    PAD_STACK(0x10);
 
     fn_8016CFE0_inline();
 
@@ -1312,9 +1313,12 @@ void fn_8016CFE0(void)
             u64 buttons = gm_801A36A0(tmp->pauser);
             if ((var_r29_2 & buttons) != 0) {
                 buttons = gm_801A3680(tmp->pauser);
-                if ((var_r29_2 & buttons) == var_r29_2) {
-                    fn_8016CF4C_dontinline(var_r4, 7);
-                    return;
+                {
+                    u64 tmp_p29927 = var_r29_2 & buttons;
+                    if ((tmp_p29927) == var_r29_2) {
+                        fn_8016CF4C_dontinline(var_r4, 7);
+                        return;
+                    }
                 }
             }
         }

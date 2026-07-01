@@ -273,10 +273,11 @@ static inline void ftPp_SpecialS_0_Coll_inline3(Fighter_GObj* gobj)
 }
 
 static inline void ftPp_SpecialS_0_Coll_inline4(Fighter_GObj* nana_gobj,
-                                                 Fighter* popo_fp,
-                                                 Fighter* nana_fp,
-                                                 Fighter_GObj* popo_gobj)
+                                                Fighter* popo_fp,
+                                                Fighter* nana_fp,
+                                                Fighter_GObj* popo_gobj)
 {
+    PAD_STACK(0x10);
     if (!ftPp_SpecialS_8011F964(popo_gobj) &&
         !ftPp_SpecialS_8011F6FC(popo_gobj))
     {
@@ -304,10 +305,10 @@ static inline void ftPp_SpecialS_0_Coll_inline4(Fighter_GObj* nana_gobj,
 
 void ftPp_SpecialS_0_Coll(Fighter_GObj* nana_gobj)
 {
-    u8 _[16];
     Fighter* nana_fp = GET_FIGHTER(nana_gobj);
     Fighter_GObj* popo_gobj = Player_GetEntityAtIndex(nana_fp->player_id, 0);
     Fighter* popo_fp = GET_FIGHTER(popo_gobj);
+    PAD_STACK(0x10);
     ftPp_SpecialS_0_Coll_inline4(nana_gobj, popo_fp, nana_fp, popo_gobj);
     ftPp_SpecialS_0_Coll_inline(nana_gobj);
     ftPp_SpecialS_0_Coll_inline2(nana_gobj);
@@ -328,12 +329,12 @@ static inline void ftPp_SpecialS_1_Coll_inline3(Fighter_GObj* gobj)
     ftNn_Init_80123B3C_inline(gobj);
 }
 
-static inline void ftPp_SpecialS_1_Coll_inline(Fighter_GObj* nana_gobj,
+static inline void ftPp_SpecialS_1_Coll_inline4(Fighter_GObj* nana_gobj,
                                                 Fighter* popo_fp,
                                                 Fighter* nana_fp,
                                                 Fighter_GObj* popo_gobj)
 {
-    u8 _[16];
+    PAD_STACK(0x10);
     if (!ftPp_SpecialS_8011F964(popo_gobj) &&
         !ftPp_SpecialS_8011F6FC(popo_gobj))
     {
@@ -361,11 +362,11 @@ static inline void ftPp_SpecialS_1_Coll_inline(Fighter_GObj* nana_gobj,
 
 void ftPp_SpecialS_1_Coll(Fighter_GObj* nana_gobj)
 {
-    u8 _[16];
     Fighter* nana_fp = GET_FIGHTER(nana_gobj);
     Fighter_GObj* popo_gobj = Player_GetEntityAtIndex(nana_fp->player_id, 0);
     Fighter* popo_fp = GET_FIGHTER(popo_gobj);
-    ftPp_SpecialS_1_Coll_inline(nana_gobj, popo_fp, nana_fp, popo_gobj);
+    PAD_STACK(0x10);
+    ftPp_SpecialS_1_Coll_inline4(nana_gobj, popo_fp, nana_fp, popo_gobj);
     ftPp_SpecialS_0_Coll_inline(nana_gobj);
     ftPp_SpecialS_0_Coll_inline2(nana_gobj);
 }

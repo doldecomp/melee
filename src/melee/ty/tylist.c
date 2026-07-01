@@ -234,6 +234,7 @@ void _tyList_80312BAC(TyListState* state, s8 arg1)
 
     jobj = state->jobj;
     row = state->x270;
+    (void) row;
     if (jobj != NULL) {
         f32 y = row->x30;
         if (jobj == NULL) {

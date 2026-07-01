@@ -271,6 +271,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 
                             basePosX = curEntry->x0.x;
                             basePosY = curEntry->x0.y;
+                            (void) basePosY;
                             basePosZ = curEntry->x0.z;
 
                             stepPosX = frac * (nextEntry->x0.x - basePosX);

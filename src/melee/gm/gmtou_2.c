@@ -559,6 +559,7 @@ void fn_8019D1BC(void)
         gobj = fn_8019035C(0, lbl_804D6694->models[10], 0, 0x1A, 2, 1,
                            fn_8019C3EC, pos);
         jobj = GET_JOBJ(gobj);
+        (void) jobj;
         HSD_JObjSetTranslateY(jobj, -2.5f);
         fn_8018FBD8(gobj, i);
         fn_8019BA08((u8) i, jobj);

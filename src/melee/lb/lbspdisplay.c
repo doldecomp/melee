@@ -449,6 +449,7 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
     }
 
     parent_jobj = cur->desc.lb_unk0.jobj->parent;
+    (void) parent_jobj;
     if (parent_jobj != NULL) {
         HSD_JObjSetMtxDirty(parent_jobj);
         HSD_JObjSetupMatrix(parent_jobj);

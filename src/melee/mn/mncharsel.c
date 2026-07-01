@@ -1885,6 +1885,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
     f32 dx;
     f32 dy;
     f32 mag_sq;
+    u8 operand_pad[4];
 
     if ((u8) mnCharSel_804D6CB0->match_type == TRAINING_MODE) {
         n_doors = 2;
@@ -3782,6 +3783,7 @@ void fn_802633B0(HSD_GObj* gobj)
             tag->x8 = new_pos;
             page = (s32) (scroll_pos * 0.03125f);
             new_page = (s32) (new_pos * 0.03125f);
+            (void) new_page;
             if (new_pos > 0.0f) {
                 tag->x8 = 0.0f;
             }

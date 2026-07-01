@@ -506,7 +506,8 @@ static void fn_803B61B4(u8* arg0)
         work_r4_2[0] = (s32) (scratch_f27_2 + scratch_f11_2);
         work_r4_2[8] = (s32) (scratch_f24_3 + scratch_f12_3);
         scratch_f9_3 = -scratch_f26 + scratch_f9_2;
-        scratch_f24_4 = scratch_f10_3 - scratch_f26_2;
+        scratch_f24_4 = scratch_f10_3;
+        scratch_f24_4 -= scratch_f26_2;
         work_r4_2[16] = (s32) (scratch_f25_4 + scratch_f23_3);
         work_r4_2[24] = (s32) (scratch_f24_4 + scratch_f9_3);
         work_r4_2[32] = (s32) (scratch_f24_4 - scratch_f9_3);

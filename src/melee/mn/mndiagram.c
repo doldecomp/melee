@@ -1126,6 +1126,7 @@ static inline void mnDiagram_SaveCursorToGameRules(Diagram* d)
 /// mnDiagram_Get{Prev,Next}*Index helpers shared with mndiagram2.
 void mnDiagram_InputProc(HSD_GObj* gobj)
 {
+    u8* ptr;
     HSD_GObjProc* proc;
     u8 row_result;
     s32 i;
@@ -1136,7 +1137,6 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
     Diagram* data = mnDiagram_804D6C10->user_data;
     u32 input = mn_80229624(4);
     s32 count = 0;
-    u8* ptr;
     s32 col;
     s32 row;
     s32 row2;
@@ -1155,6 +1155,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
     s32 found;
     s32 cur;
     s32 count2;
+    u8 operand_pad[4];
     PAD_STACK(64);
     mn_804A04F0.buttons = input;
     count2 = 0;
@@ -1172,6 +1173,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             col_result = mnDiagram_GetVisibleNameFrom(
                 sorted, (u8) data->name_cursor_pos, (u8) cur);
             row = mn_804A04F0.hovered_selection >> 8;
+            (void) row;
             row_result = mnDiagram_GetVisibleNameFrom(
                 sorted, data->name_cursor_pos >> 8, row);
             mnDiagram_80241310(col_result, row_result, 1);

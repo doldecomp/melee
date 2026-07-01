@@ -812,6 +812,7 @@ HSD_GObj* grHomeRun_8021E500(s16 arg0)
     gobj = grHomeRun_8021C82C_noinline(gobj_id);
     HSD_ASSERT(0x3D5, gobj);
     jobj = GET_JOBJ(gobj);
+    (void) jobj;
     HSD_ASSERT(0x3D6, jobj);
     gp = GET_GROUND(gobj);
     HSD_ASSERT(0x3D7, gp);

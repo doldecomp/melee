@@ -372,6 +372,7 @@ static inline soundtest_user_data* fn_8024AED0_GetUserData(void)
 
 void fn_8024AED0(HSD_GObj* arg0)
 {
+    u8 operand_pad[24];
     HSD_JObj* temp_r27_2;
     HSD_JObj* sp7C;
     char left_text_buf;
@@ -520,6 +521,7 @@ void fn_8024B2B0(HSD_GObj* arg0)
         return;
     }
     menu_data = mnSoundTest_804D6C40->user_data;
+    (void) menu_data;
     if (menu_data->unk8 < 1.0f) {
         menu_data->unk8 -= 0.02f;
         if (menu_data->unk8 <= 0.0f) {

@@ -330,6 +330,7 @@ inline bool end(Vec3* a, Vec3* b, float unk_sum)
 bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
                      Vec3* arg4, Vec3* arg5, float arg6, float arg7)
 {
+    u8 operand_pad[8];
     {
         Vec3 vec4;
         Vec3 arg4_offset;
@@ -659,6 +660,7 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
 {
     Vec3 a1;
     float sum_pq = p + q;
+    u8 operand_pad[12];
 
     Vec3 a0;
     PAD_STACK(72);
@@ -713,7 +715,8 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                     if (a1.y > b_y) {
                         {
                             float y;
-                            y = a1.y + sum_pq;
+                            y = a1.y;
+                            y += sum_pq;
                             if (y < c1.y && y < d->y) {
                                 return false;
                             }
@@ -814,7 +817,8 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                                 float diff_dc_z;
                                                 float dot;
                                                 a2 = a0;
-                                                diff_dc_z = d->z - c->z;
+                                                diff_dc_z = d->z;
+                                                diff_dc_z -= c->z;
                                                 scl_e = 0.0f;
                                                 dot =
                                                     diff_dc_z * (c3.z - a2.z) +
@@ -850,7 +854,8 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                                 float diff_dc_y1;
                                                 float diff_dc_z1;
                                                 diff_dc_y1 = d_y - c->y;
-                                                diff_dc_z1 = d->z - c->z;
+                                                diff_dc_z1 = d->z;
+                                                diff_dc_z1 -= c->z;
                                                 {
                                                     Vec3 b0;
 
@@ -958,7 +963,8 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
         float diff_ef_y;
         float diff_ef_x;
         diff_ef_y = e->y - f->y;
-        diff_ef_x = e->x - f->x;
+        diff_ef_x = e->x;
+        diff_ef_x -= f->x;
         if (sum_pq * sum_pq < diff_ef_x * diff_ef_x + (diff_ef_y * diff_ef_y))
         {
             return false;
@@ -1148,7 +1154,8 @@ block_26:
     {
         return 0;
     }
-    hit_end_max_z = hit_end_z + broadphase_radius;
+    hit_end_max_z = hit_end_z;
+    hit_end_max_z += broadphase_radius;
     if ((hit_end_max_z < hurt_start_copy.z) && (hit_end_max_z < hurt_end->z)) {
         return 0;
     }
@@ -1168,6 +1175,7 @@ block_39:
     hit_start_mid_x = hit_delta.x * hit_delta.x;
     hit_start_mid_y = hit_delta.y * hit_delta.y;
     hurt_end_z = hurt_end->z;
+    (void) hurt_end_z;
     start_delta_x = hit_start_copy.x - hurt_start_copy.x;
     hurt_delta_z = hurt_end_z - hurt_start_copy.z;
     segment_dot = (hit_delta.x * hurt_delta_x) + segment_dot;
