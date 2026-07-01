@@ -1,6 +1,7 @@
 #include "gm_16AE.h"
 
 #include "gm_16AE.static.h"
+#include "gm/forward.h"
 
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
@@ -405,7 +406,7 @@ float fn_8016B5B0(void)
     if (gm_8016B41C()) {
         float var_f1 = 3.0F;
         if (lbl_8046B6A0.unk_0 != 0) {
-            if (tmp->match_result == 1 || tmp->match_result == 4) {
+            if (tmp->match_result == OUTCOME_TIMEOUT || tmp->match_result == OUTCOME_1P_GAME_OVER) {
                 var_f1 *= 1.1F;
             }
         }

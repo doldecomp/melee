@@ -107,17 +107,28 @@ typedef enum GameSceneKind {
 } GameSceneKind;
 
 typedef enum MatchOutcome {
-    OUTCOME_NONE,
+    OUTCOME_NONE, ///< Match in progress, or no match played since boot
     OUTCOME_TIMEOUT,
     OUTCOME_ELIMINATION,
-    OUTCOME_0x3,
-    OUTCOME_0x4,
-    OUTCOME_0x5,
-    OUTCOME_0x6,
+    OUTCOME_1P_BATTLE_VICTORY, ///< Seen when player beats any story mode stage that is a single battle
+    OUTCOME_1P_GAME_OVER,
+    OUTCOME_1P_HORDE_BATTLE_VICTORY, ///< Applies to any victory in story mode against a horde of (usually weak) enemies.
+    OUTCOME_1P_BONUS_STAGE_END, ///< Applies to all stages that aren't just a single match. Target Test,
+                                        ///< Undergrond Maze, Grand Prix, Race to the finish, etc;
     OUTCOME_LRASTART,
     OUTCOME_RETRY,
-    OUTCOME_0x9,
+    OUTCOME_TERMINATED, ///< Seen when beating master hand in classic mode, finishing a home run contest, and beating multiman melee.
+                               ///< Also seen at the end of an event match. Win or lose.
 } MatchOutcome;
+
+typedef enum MatchStatus {
+    MATCH_IN_PROGERSS,
+    MATCH_ENDING,
+    MATCH_1P_SCORING,
+    MATCH_COMPLETE
+} MatchStatus;
+                           ///<                            ///< 2 during scores screen in classic/adventure mode
+                           ///< 3 after player presses start during scores screen in classic/adventure mode
 
 struct gm_801677C0_s;
 struct lbl_8046B488_t;

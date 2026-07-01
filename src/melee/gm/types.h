@@ -479,7 +479,7 @@ struct Placeholder_8016AE38_flags_2 {
 };
 
 struct lbl_8046B6A0_t {
-    /* 0x0000 */ u8 unk_0;
+    /* 0x0000 */ u8 unk_0;  ///< MatchStatus
     /* 0x0001 */ s8 pauser;
     /* 0x0002 */ u8 pause_timer;
     /* 0x0003 */ u8 unk_3;
@@ -487,8 +487,9 @@ struct lbl_8046B6A0_t {
     /* 0x0005 */ u8 hud_enabled;
     /* 0x0006 */ u8 terminate_match;
     /* 0x0007 */ u8 is_singleplayer;
-    /* 0x0008 */ u8 match_result;
-    /* 0x0009 */ u8 unk_9;
+    /* 0x0008 */ u8 match_result; ///< MatchOutcome
+                                  ///< Sticky, stays until a new match starts
+    /* 0x0009 */ u8 unk_9; //< 1 during classic mode stage-clear points screen and between stages
     /* 0x000A */ u8 unk_A;
     /* 0x000B */ u8 unk_B; // end graphic / SFX type
     /* 0x000C */ u8 unk_C;
