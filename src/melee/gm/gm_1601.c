@@ -4254,6 +4254,7 @@ void gm_80168FC4(void)
 
 s32 fn_80169000(void* arg0, void* arg1)
 {
+    u8 operand_pad[4];
     u8 handicaps[4];
     u8 positions[4];
     u8* p = (u8*) arg0;

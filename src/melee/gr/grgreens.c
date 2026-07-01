@@ -1118,6 +1118,7 @@ void fn_80215B84(Item_GObj* item_gobj, Ground* gp, Vec* arg2, HSD_GObj* gobj,
     int j;
     int row = -1;
     int col = 0;
+    u8 operand_pad[4];
 
     for (i = 0; i < 5; i++) {
         for (j = 0; j < 6; j++) {

@@ -267,6 +267,7 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
 
     if (entry->x1 != 0) {
         px3 = &entry->x3;
+        (void) px3;
         x3 = *px3;
         if (x3 == 0 && entry->x4 != 0) {
             switch (entry->x4) {
@@ -871,6 +872,7 @@ void fn_8018B090(HSD_GObj* arg0)
         return;
     case 37:
         base = &lbl_80473AB8[idx];
+        (void) base;
         cam = (f32*) ((u8*) &lbl_803D9D20 + 0x8C);
         if (base->x18 == 0) {
             lbl_804D6630 = 0x78;

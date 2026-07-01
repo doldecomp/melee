@@ -874,6 +874,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
             case 0x36:
                 lbAudioAx_80024030(0);
                 cursor = data->cursor_pos;
+                (void) cursor;
                 {
                     char* slot = &name_text[cursor * 3];
                     if ((s8) mnNameNew_NullCharacter != (s8) slot[0]) {
@@ -1345,10 +1346,11 @@ s32 mnNameNew_8023D130(GlyphVariantEntry* arg0, u8 arg1, u8 arg2, s32 arg3)
         HSD_JObjGetTranslationX(jobj18) - HSD_JObjGetTranslationX(jobj14);
     y_range =
         -(HSD_JObjGetTranslationY(jobj1C) - HSD_JObjGetTranslationY(jobj14));
-    table_lower =
-        AddCharacterToName_getGlyphs(layout->lower_glyphs, (u8) arg3);
     table_upper =
         AddCharacterToName_getGlyphs(layout->upper_glyphs, (u8) arg3);
+    table_lower =
+        AddCharacterToName_getGlyphs(layout->lower_glyphs, (u8) arg3);
+    (void) table_lower;
     for (i = 0; i < (s32) arg1; i++) {
         if ((u8) (arg3 - 0x30) <= 1U) {
             if ((i % 2) != 0) {

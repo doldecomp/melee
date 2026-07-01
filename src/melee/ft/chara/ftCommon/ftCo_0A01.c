@@ -3836,7 +3836,7 @@ void ftCo_800A7AAC(Fighter* fp)
                 if (d < 0.0f) {
                     d = -d;
                 }
-                if (d < 5.0) {
+                if (d < 5.0f) {
                     if (data->x60 == 0) {
                         data->x54.x = island->x14.x - 5.0;
                         data->x54.y = island->x14.y;

@@ -824,6 +824,7 @@ void grOnett_801E5214(Ground_GObj* gobj)
         }
 
         jobj = gp->gv.onett.awnings[i].jobj;
+        (void) jobj;
         HSD_JObjSetTranslateY(jobj, gp->gv.onett.awnings[i].velocity +
                                         (gp->gv.onett.awnings[i].initial_y +
                                          gp->gv.onett.awnings[i].accumulator));

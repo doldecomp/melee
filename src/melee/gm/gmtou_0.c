@@ -1583,6 +1583,7 @@ void fn_80193B58(s32* arg0, u32 arg1, u32 arg2)
         if (*mt == 0) {
             idx = arg0[0];
             ptr = arg0 + idx;
+            (void) ptr;
             val = *++ptr;
             if (val > (s32) TmSettingTable_GetMin(idx, *mt)) {
                 *ptr = val - 1;

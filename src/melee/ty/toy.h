@@ -46,7 +46,7 @@
 /* 306EEC */ HSD_LObj* Toy_LoadLObjList(LightList**, s32*);
 /* 307470 */ void Toy_80307470(s32);
 /* 307E84 */ void Toy_80307E84(HSD_GObj* gobj);
-/* 30813C */ char* Toy_8030813C(s32 arg0, enum_t unused);
+/* 30813C */ char* Toy_8030813C(s16 arg0, enum_t unused);
 /* 308250 */ void Toy_80308250(u8* arg0, s32 arg1, s32 arg2);
 /* 3082F8 */ s32 Toy_803082F8(s16 idx);
 /* 308328 */ void Toy_80308328(s32 arg0);

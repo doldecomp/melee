@@ -667,7 +667,7 @@ void gm_801BB758(GameScene* arg0)
     MatchExitInfo* exit = gm_801A4284(arg0);
     u8 stage = ev->unk_535;
     u8 b;
-    CharacterKind kind;
+    u8 kind;
     s32 t;
 
     gm_8016A164();

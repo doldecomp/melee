@@ -2261,29 +2261,26 @@ float ftColl_80079EA8(Fighter* fp, HitCapsule* hit, u32 unk_count)
     ftCommonData* ftd = p_ftCommonData;
     float decay;
     float result;
-    u32 x28 = hit->x28;
-    float weight_mul;
-    PAD_STACK(16);
+    float w = fp->co_attrs.weight;
+    PAD_STACK(8);
+    w *= ftd->xF4;
 
-    weight_mul = fp->co_attrs.weight * ftd->xF4;
-    if (x28 != 0) {
-        float one;
+    if (hit->x28 != 0) {
         float x118;
+        float one = 1.0F;
 
-        one = *(float const*) &ftColl_804D82EC;
         decay = ftd->xF8;
         x118 = ftd->x118;
 
         result =
             one *
             (one *
-             (one *
-              ((ftColl_804D8314 * (float) (u32) hit->x24 *
-                (ftd->x11C *
-                     ((decay - ((weight_mul * decay) / (one + weight_mul))) *
-                      (x118 * ftd->x110 + ftd->x114 * (x118 * (float) x28))) +
-                 ftd->x120)) +
-               (float) (u32) hit->x2C)));
+             (one * ((0.01F * hit->x24 *
+                      (ftd->x11C * ((ftd->xF8 - ((w * ftd->xF8) / (one + w))) *
+                                    (x118 * ftd->x110 +
+                                     ftd->x114 * (x118 * hit->x28))) +
+                       ftd->x120)) +
+                     hit->x2C)));
     } else {
         s32 count;
 
@@ -2291,30 +2288,28 @@ float ftColl_80079EA8(Fighter* fp, HitCapsule* hit, u32 unk_count)
             if (fp->x2224_b2) {
                 count = (s32) ftd->x6D8[0];
             } else {
-                count = (s32) ftd->x6D4;
+                count = ftd->x6D4;
             }
         } else {
             count = (s32) fp->dmg.x1830_percent;
         }
 
         {
-            float one;
-            float damage;
+            float one = 1.0F;
 
-            one = *(float const*) &ftColl_804D82EC;
-            decay = ftd->xF8;
-            damage = (float) count + fp->dmg.x1838_percentTemp;
             result =
                 one *
                 (one *
-                 (one * ((ftColl_804D8314 * (float) (u32) hit->x24 *
-                          (ftd->x11C * ((decay - ((weight_mul * decay) /
-                                                  (one + weight_mul))) *
-                                        (ftd->x110 * damage +
-                                         ftd->x114 * ((float) (u32) unk_count *
-                                                      damage))) +
-                           ftd->x120)) +
-                         (float) (u32) hit->x2C)));
+                 (one *
+                  ((0.01F * hit->x24 *
+                    (ftd->x11C *
+                         ((ftd->xF8 - ((w * ftd->xF8) / (one + w))) *
+                          (ftd->x110 * (count + fp->dmg.x1838_percentTemp) +
+                           ftd->x114 *
+                               (unk_count *
+                                (count + fp->dmg.x1838_percentTemp)))) +
+                     ftd->x120)) +
+                   hit->x2C)));
         }
     }
 

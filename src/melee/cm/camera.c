@@ -739,6 +739,7 @@ static inline void get_pitch_angle(CameraBounds* bounds, Vec3* scroll_offset,
 
 void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
 {
+    f32 unused_f31;
     u8 _padA[8];
     Vec3 scroll_offset;
     f32 pitch_angle;
@@ -751,7 +752,6 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
     f32 tan_fov_u;
     f32 min_h;
     f32 pan_angle;
-    f32 unused_f31;
     f32 mid_x;
     f32 horiz_offset;
     f32 fov_l;
@@ -2577,8 +2577,8 @@ check_done2:
     if (cam->x2BC == 1.0f) {
         target_dx = cam->transform.target_position.x -
                     cam->transform.target_interest.x;
-        target_dy = cam->transform.target_position.y -
-                    cam->transform.target_interest.y;
+        target_dy = cam->transform.target_position.y;
+        target_dy -= cam->transform.target_interest.y;
         target_dz = cam->transform.target_position.z -
                     cam->transform.target_interest.z;
         cam->x2C0 =
@@ -2595,6 +2595,7 @@ check_done2:
     Camera_8002A0C0(&bounds3, transform);
 
     count_ptr = &cam->x2B8;
+    (void) count_ptr;
     if (*count_ptr > 1000) {
         cam->x2B4 = cam->x2B0;
         *count_ptr = 1;

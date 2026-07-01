@@ -2441,8 +2441,8 @@ void fn_801891F4(void)
                 }
             }
             if (buttons & 0x100ULL) {
-                Vec3 pos;
                 HSD_JObj* jobj;
+                Vec3 pos;
                 s16 item;
                 lbAudioAx_80024030(8);
                 item = *(s16*) &((s32*) lbl_803D9828)[sub->menu_values[1]];
@@ -2611,6 +2611,7 @@ void fn_801891F4(void)
             fn_80188550(sub->menu_values[2] + 1);
 
             cpu_type = sub->menu_values[3];
+            (void) cpu_type;
             count = lbl_80473700.count;
             sub->x03 = (u8) cpu_type;
             for (i = 0; i < 4; i++) {

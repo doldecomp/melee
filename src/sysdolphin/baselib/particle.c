@@ -2880,6 +2880,7 @@ void hsd_803957C0(u8 input)
         struct ParticleScreenState* draw_sp = &hsd_804CF810;
         x4_ptr = &draw_sp->x4;
         x40_ptr = &draw_sp->x40;
+        (void) x40_ptr;
         x8_ptr = &draw_sp->x8;
         b6 = draw_sp->x0_b6;
 
@@ -4866,6 +4867,7 @@ done_cmd:
                     s32 ti;
                     s32 ofs;
                     ti = (s32) tg->num;
+                    (void) ti;
                     ofs = ti * 4;
                     for (; (u32) ti < ((HSD_PSTexGroup*) cur[0])->num +
                                           ((HSD_PSTexGroup*) cur[0])->palnum;
@@ -5622,6 +5624,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     }
 
                     linkNo = pp->linkNo;
+                    (void) linkNo;
                     if (linkNo >= 8) {
                         child = NULL;
                     } else if (bank >= 65) {
@@ -6154,14 +6157,17 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     }
                     HSD_JObjSetupMatrix(jobj);
                     vel_mag_sq = pp->vel.x * pp->vel.x + pp->vel.y * pp->vel.y;
-                    dx = jobj->mtx[0][3] - pp->pos.x;
+                    dx = jobj->mtx[0][3];
+                    dx -= pp->pos.x;
                     vel_mag_sq += pp->vel.z * pp->vel.z;
-                    dy = jobj->mtx[1][3] - pp->pos.y;
-                    dz = jobj->mtx[2][3] - pp->pos.z;
+                    dy = jobj->mtx[1][3];
+                    dy -= pp->pos.y;
+                    dz = jobj->mtx[2][3];
+                    dz -= pp->pos.z;
                     vel_mag = sqrtf(vel_mag_sq);
                     dist_sq = dy * dy + dx * dx;
                     dist_sq += dz * dz;
-                    if (dist_sq == 0.0F) {
+                    if (dist_sq == 0.0) {
                         break;
                     }
                     dist = sqrtf(dist_sq);
@@ -8909,6 +8915,7 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
             f32 vy = gen->vel.y;
             f32 vz = gen->vel.z;
             mag = (vz * vz) + (vx * vx + vy * vy);
+            (void) mag;
             if (mag > 0.0F) {
                 f64 x = __frsqrte((f64) mag);
                 x = 0.5 * x * -(((f64) mag * (x * x)) - 3.0);
