@@ -3952,7 +3952,7 @@ void Camera_SetUpPauseCamera(s8 pauserSlot, s8 pauserId, s32 arg2)
     }
 }
 
-void Camera_8002F73C(s8 pauserSlot, s8 pauserId)
+void Camera_SetUpPauseCameraWithDefaultZoom(s8 pauserSlot, s8 pauserId)
 {
     Camera_SetUpPauseCamera(pauserSlot, pauserId, 0);
 }

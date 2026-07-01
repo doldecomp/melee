@@ -1119,7 +1119,7 @@ void fn_8016CA68(lbl_8046B6A0_t* arg0, int arg1)
                 if (arg0->x24C8.x3C != NULL) {
                     arg0->x24C8.x3C(pauserSlot);
                 } else {
-                    fn_80165108(pauserSlot, pauser);
+                    gm_EnablePlayerPauseCamera(pauserSlot, pauser);
                 }
             }
             HSD_PadRumblePauseAll();

@@ -2631,17 +2631,17 @@ void fn_801650E8(void)
     Ground_801C5800();
 }
 
-void fn_80165108(int playerSlot, int playerId)
+void gm_EnablePlayerPauseCamera(int playerSlot, int playerId)
 {
     if (playerSlot == -1) {
-        Camera_8002F73C(0xB, 5);
+        Camera_SetUpPauseCameraWithDefaultZoom(0xB, 5);
         return;
     }
     if (((Player_GetPlayerSlotType(playerSlot) == Gm_PKind_Human) ||
          (Player_GetPlayerSlotType(playerSlot) == Gm_PKind_Cpu)) &&
         (Player_GetEntity(playerSlot) != NULL))
     {
-        Camera_8002F73C(playerSlot, playerId);
+        Camera_SetUpPauseCameraWithDefaultZoom(playerSlot, playerId);
     }
 }
 
