@@ -167,19 +167,23 @@ void fn_8031FCBC(HSD_GObj* gobj)
 static inline void un_8031FD18_SetupScene(void)
 {
     s32 i;
+    HSD_GObj* new_var;
     HSD_JObj* jobj;
     HSD_GObj* gobj;
 
-    for (i = 0; un_804D6FE0->models[i] != NULL; i++) {
+    i = 0;
+    while (un_804D6FE0->models[i] != NULL) {
         gobj = GObj_Create(0xE, 0xF, 0);
         jobj = HSD_JObjLoadJoint(un_804D6FE0->models[i]->joint);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
-        GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
+        new_var = gobj;
+        HSD_GObjObject_80390A70(new_var, HSD_GObj_804D7849, jobj);
+        GObj_SetupGXLink(new_var, HSD_GObj_JObjCallback, 0xB, 0);
         gm_8016895C(jobj, un_804D6FE0->models[i], 0);
         HSD_JObjReqAnimAll(jobj, 0.0f);
         HSD_JObjAnimAll(jobj);
-        HSD_GObj_SetupProc(gobj, fn_8031FAA8, 0);
+        HSD_GObj_SetupProc(new_var, fn_8031FAA8, 0);
         lb_80011E24(jobj, &un_804D6FF0, 3, -1);
+        i++;
     }
 
     Camera_80028B9C(6);
@@ -200,16 +204,16 @@ void un_8031FD18_OnEnter(void* arg)
     u8 char_index;
     HSD_CObj* cobj;
     HSD_GObj* gobj;
-    HSD_JObj* jobj;
-    HSD_JObj* child;
     HSD_Fog* fog;
+    HSD_JObj* child;
+    HSD_JObj* jobj;
     HSD_LObj* lobj;
     f32 scale;
-    char pad[24];
+    PAD_STACK(24);
 
     un_804D6FFC = input[0];
     un_804D6FFD = input[1];
-    un_804D7000 = (void*) 0U;
+    un_804D7000 = NULL;
 
     lbAudioAx_800236DC();
     efLib_Init();

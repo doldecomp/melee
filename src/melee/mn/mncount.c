@@ -531,46 +531,52 @@ unsigned int mnCount_GetRowValue_Number(int row)
 void mnCount_CreateRow(HSD_GObj* gobj, int visible_row, mnCount_row data_row)
 {
     MnCountData* userdata = GET_MNCOUNT(gobj);
+    HSD_Text** label_text;
     HSD_Text* text;
-    unsigned int row_value;
     int row_value_2;
+    HSD_Text** value_text;
+    HSD_Text** tmp_p14730;
+    HSD_Text** tmp_p14708;
+    HSD_Text** tmp_p15235;
     float y;
-    char buf2[8];
     static GXColor text_color = { 0xAA, 0xAA, 0xAA, 0xFF };
-    if (userdata->labels[visible_row] != NULL) {
+    tmp_p14730 = userdata->labels;
+    tmp_p14708 = tmp_p14730 + visible_row;
+    label_text = tmp_p14708;
+    if (*label_text != NULL) {
         HSD_SisLib_803A5CC4(userdata->labels[visible_row]);
-        userdata->labels[visible_row] = NULL;
+        *label_text = NULL;
     }
     y = (1.4f * visible_row) + -6.4f;
     text = HSD_SisLib_803A5ACC(0, 1, -13.0f, y, 17.0f, 500.0f, 38.38772f);
-    userdata->labels[visible_row] = text;
+    *label_text = text;
     text->font_size.x = 0.03f;
     text->font_size.y = 0.03f;
     text->text_color = text_color;
     HSD_SisLib_803A6368(text, mnCount_sis_idx[data_row]);
-    if (userdata->values[visible_row] != NULL) {
-        {
-            HSD_Text* volatile value_text = userdata->values[visible_row];
-            HSD_SisLib_803A5CC4(value_text);
-        }
-        userdata->values[visible_row] = NULL;
+    tmp_p15235 = userdata->values;
+    value_text = tmp_p15235 + visible_row;
+    if (*value_text != NULL) {
+        HSD_SisLib_803A5CC4(userdata->values[visible_row]);
+        *value_text = NULL;
     }
     text = HSD_SisLib_803A6754(0, 1);
-    userdata->values[visible_row] = text;
+    *value_text = text;
     text->pos_x = 13.0f;
     text->pos_y = y;
     text->pos_z = 17.0f;
     text->text_color = mn_804D4B64;
     text->default_alignment = 2;
     if (inline_is_row_time(data_row)) {
-        char buf1[8];
+        unsigned int row_value;
+        char buf2;
         text->font_size.x = 0.03f;
         text->font_size.y = 0.03f;
         row_value = mnCount_GetRowValue_Number(data_row);
-        mn_8022EA78(buf1, 2, row_value / 60 / 60);
-        mn_8022EA78(buf2, 2, row_value / 60 % 60);
+        mn_8022EA78(&buf2, 2, row_value / 60 / 60);
+        mn_8022EA78(&buf2, 2, row_value / 60 % 60);
         HSD_SisLib_803A6B98(text, 0.0f, 0.0f, "%u:%s", row_value / 60 / 60,
-                            buf2);
+                            &buf2);
     } else if (inline_is_row_char(data_row)) {
         text->font_size.x = 0.03f;
         text->font_size.y = 0.03f;

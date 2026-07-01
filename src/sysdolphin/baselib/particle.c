@@ -3,7 +3,18 @@
 typedef struct {
     /* 0x00 */ void* next;
     /* 0x04 */ s32 type;
-    /* 0x08 */ u8 content[0x80];
+    /* 0x08 */ union {
+        u8 bytes[0x80];
+        char text[0x80];
+        struct {
+            s32 count;
+            u32 color;
+        } bars[16];
+        struct {
+            f32 pos;
+            u32 color;
+        } gradient[16];
+    } content;
 } PerfDispItem;
 
 static PerfDispItem hsd_804CE3F8[6];
@@ -47,7 +58,7 @@ typedef struct _ExcptNode {
 
 typedef struct _EventData {
     /* 0x00 */ u8 _pad[0x10];
-    /* 0x10 */ u32* entries;
+    /* 0x10 */ char** entries;
     /* 0x14 */ s32 index;
 } EventData;
 
@@ -57,6 +68,17 @@ typedef struct _MCCPacket {
     /* 0x4 */ u8 _x4_pad : 7;
     /* 0x5 */ u8 x5;
 } MCCPacket;
+
+typedef struct _ParticleFontData {
+    /* 0x0000 */ u8 _pad0[0x700];
+    /* 0x0700 */ u8 x700[0x38];
+    /* 0x0738 */ u8 _pad738[0x230];
+    /* 0x0968 */ u8 x968[0x38];
+    /* 0x09A0 */ u8 _pad9A0[0x38];
+    /* 0x09D8 */ u8 x9D8[0x38];
+    /* 0x0A10 */ u8 _padA10[0x1110];
+    /* 0x1B20 */ u8 x1B20[0x38];
+} ParticleFontData;
 
 typedef struct _DispData {
     /* 0x00 */ u8 _pad[0x10];
@@ -75,15 +97,17 @@ typedef struct {
     /* 0x04 */ void (*callback)(void* dst, s32 x, s32 y, s32 val, void* self);
 } GlyphEntry;
 
+typedef struct {
+    s32 count;
+    u32 color;
+} DispBar;
+
 typedef struct _DispItem {
     /* 0x00 */ struct _DispItem* next;
     /* 0x04 */ s32 type;
     /* 0x08 */ union {
         char text[128];
-        struct {
-            s32 count;
-            u32 color;
-        } bars[1];
+        DispBar bars[1];
         u8 gradient[8];
     } content;
 } DispItem;
@@ -98,6 +122,56 @@ typedef union {
 struct EventPriority {
     Event event;
     int priority;
+};
+
+typedef struct MCCErrorMessages {
+    char no_initialize[0x18];
+    char no_response[0xC];
+    char ping_error[0xC];
+    char initialize_hio[0x1C];
+    char read_hio_mailbox[0x1C];
+    char write_hio_mailbox[0x1C];
+    char read_hio_memory[0x1C];
+    char write_hio_memory[0x1C];
+    char read_hio_status[0x1C];
+    char flush_channel_info[0x1C];
+    char load_channel_info[0x1C];
+    char not_enough_memory[0x18];
+    char invalid_function_parameter[0x1C];
+    char invalid_channel_parameter[0x1C];
+    char invalid_data_size[0x14];
+    char invalid_offset_parameter[0x1C];
+    char already_opened[0x20];
+    char already_closed[0x20];
+    char already_locked[0x20];
+    char already_unlocked[0x20];
+    char read_write_busy[0x1C];
+    char unknown_error[0x10];
+} MCCErrorMessages;
+
+static MCCErrorMessages mcc_error_messages = {
+    "MCC is no initialize",
+    "No responce",
+    "PING error",
+    "Could not initialize HIO",
+    "Could not read HIO mailbox",
+    "Could not write HIO mailbox",
+    "Could not read HIO memory",
+    "Could not write HIO memory",
+    "Could not read HIO status",
+    "Could not flush channelInfo",
+    "Could not load channelInfo",
+    "Not enough memory block",
+    "Invalid function parameter",
+    "Invalid channel parameter",
+    "Invalid data size",
+    "Invalid offset parameter",
+    "Channel was (already) opened",
+    "Channel was (already) closed",
+    "Channel was (already) locked",
+    "Channel was (already) unlocked",
+    "Channel (read/write) busy",
+    "Unknown error",
 };
 
 void DrawRectangle(f32 x_min, f32 y_min, f32 w, f32 h, GXColor* color)
@@ -255,10 +329,13 @@ f32 DrawASCII(int chr, float x, float y, GXColor* color)
         cx = (f32) ((f64) lbl_804D6070 * 0.3 + (f64) x);
         GXWGFifo.f32 = cx;
         GXWGFifo.f32 = (f32) ((f64) lbl_804D6074 * 0.3 + (f64) y);
+        {
+            u8 alpha = color->a;
+            a = alpha;
+        }
         r = color->r;
         g = color->g;
         b = color->b;
-        a = color->a;
         GXWGFifo.u8 = r;
         GXWGFifo.u8 = g;
         GXWGFifo.u8 = b;
@@ -804,33 +881,39 @@ static const u32 lbl_804DE8E0 = 0xFFFFFFFF;
 // @TODO: Currently 89.78% match - needs minor control flow and register fixes
 void hsd_8039254C(void)
 {
-    s32 char_count;
-    GXColor default_col;
-    GXColor bar_col;
-    GXColor bg_col3;
-    GXColor bg_col2;
-    GXColor bg_col1;
-    GXColor txt_col;
-    GXColor bg_col0;
-    GXColor* p_bar_col = &bar_col;
-    GXColor* p_bg_col3 = &bg_col3;
-    GXColor* p_bg_col0 = &bg_col0;
-    GXColor* p_bg_col1 = &bg_col1;
-    GXColor* p_txt_col = &txt_col;
-    GXColor* p_bg_col2 = &bg_col2;
-    s32 col_pos;
-    s32 first;
-    f32 line;
-    HSD_SList* event_node;
     s32 type;
+    s32 char_count;
     s32 total_ticks;
+    s32 count;
     DispItem* bar_ptr;
+    DispItem* bar_draw_ptr;
+    f32 line;
     f32 bar_y;
     f32 bar_x;
     f32 t2;
-    u8 operand_pad[8];
-    PAD_STACK(8);
+    GXColor default_col;
+    GXColor bg_col0;
+    GXColor bg_col1;
+    GXColor txt_col;
+    GXColor bg_col2;
+    GXColor bg_col3;
+    GXColor bar_col;
+    GXColor* p_bg_col0;
+    GXColor* p_bg_col1;
+    GXColor* p_txt_col;
+    GXColor* p_bg_col2;
+    GXColor* p_bg_col3;
+    GXColor* p_bar_col;
+    s32 col_pos;
+    s32 first;
+    HSD_SList* event_node;
 
+    p_bar_col = &bar_col;
+    p_bg_col3 = &bg_col3;
+    p_bg_col2 = &bg_col2;
+    p_bg_col1 = &bg_col1;
+    p_txt_col = &txt_col;
+    p_bg_col0 = &bg_col0;
     col_pos = 60;
     first = 1;
     line = 1.0F;
@@ -841,7 +924,6 @@ void hsd_8039254C(void)
         DispItem* item;
         DispCallback cb;
         cb = (DispCallback) ((void**) event_node->data)[0];
-        (void) cb;
         item = cb(event_node->data);
 
         while (item != NULL) {
@@ -868,11 +950,14 @@ void hsd_8039254C(void)
                                 char_count++;
                             } else {
                                 j++;
-                                switch ((s8) item->content.text[j]) {
-                                case 'c':
-                                case 'C':
-                                    j += 6;
-                                    break;
+                                {
+                                    char* tmp = item->content.text;
+                                    switch ((s8) tmp[j]) {
+                                    case 'c':
+                                    case 'C':
+                                        j += 6;
+                                        break;
+                                    }
                                 }
                             }
                             j++;
@@ -892,7 +977,7 @@ void hsd_8039254C(void)
                 txt_col = default_col;
                 hsd_80391AC8(item->content.text, p_txt_col,
                              (f32) (col_pos * 10), 10.0F * line);
-                col_pos = 2 + char_count + col_pos;
+                col_pos = col_pos + (2 + char_count);
                 break;
             case 2:
                 if (col_pos != 0) {
@@ -912,10 +997,9 @@ void hsd_8039254C(void)
                 bar_ptr = item;
                 total_ticks = 0;
                 {
-                    s32 count;
                     while ((count = bar_ptr->content.bars[0].count) > 0) {
                         total_ticks += count;
-                        bar_ptr = (DispItem*) ((u8*) bar_ptr + 8);
+                        bar_ptr = (DispItem*) ((DispBar*) bar_ptr + 1);
                     }
                 }
                 if (total_ticks > 0) {
@@ -930,20 +1014,23 @@ void hsd_8039254C(void)
                     hsd_80391A04(10.0F, 10.0F, 12);
                     bar_y = (10.0F * line) + 2.0F;
                     bar_x = 0.0F;
-                    bar_ptr = item;
                     {
-                        s32 count;
-                        while ((count = bar_ptr->content.bars[0].count) > 0) {
+                        bar_draw_ptr = item;
+                        while ((count = bar_draw_ptr->content.bars[0].count) >
+                               0)
+                        {
                             f32 prev_x;
                             prev_x = bar_x;
                             bar_col =
-                                *(GXColor*) &bar_ptr->content.bars[0].color;
+                                *(GXColor*) &bar_draw_ptr->content.bars[0]
+                                     .color;
                             bar_x +=
                                 (600.0F / (f32) total_ticks) * (f32) count;
-                            hsd_80391F28(p_bar_col, prev_x, bar_y, bar_x,
-                                         bar_y,
-                                         (f32) bar_ptr->content.bars[0].count);
-                            bar_ptr = (DispItem*) ((u8*) bar_ptr + 8);
+                            hsd_80391F28(
+                                p_bar_col, prev_x, bar_y, bar_x, bar_y,
+                                (f32) bar_draw_ptr->content.bars[0].count);
+                            bar_draw_ptr =
+                                (DispItem*) ((DispBar*) bar_draw_ptr + 1);
                         }
                     }
                     col_pos = 60;
@@ -1019,6 +1106,11 @@ static s32 lbl_804D60A4 = (s32) 0xC0C000FF;
 
 // @TODO: Currently 89.63% match - needs register allocation and expression
 // fixes
+static inline PerfDispItem* get_perf_disp_item(s32 count)
+{
+    return &hsd_804CE3F8[count];
+}
+
 void* fn_80392A3C(void)
 {
     volatile s32 green;
@@ -1026,62 +1118,62 @@ void* fn_80392A3C(void)
     s32 bar_count;
     s32 count;
     PerfDispItem* entry;
+    PerfDispItem* entry2;
 
     count = 0;
     numFrames = lbl_804D6088;
     if (0 != numFrames) {
+        u8* counts = &hsd_804CE3F8[0].content.bytes[0];
+        u8* colors = &hsd_804CE3F8[0].content.bytes[4];
         hsd_804CE3F8[0].type = 1;
-        ((s32*) &hsd_804CE3F8[0].content[0])[0] = 1;
-        bar_count = 1;
+        *(s32*) counts = 1;
+        bar_count = count;
+        bar_count++;
         green = lbl_804D6098;
-        ((s32*) &hsd_804CE3F8[0].content[4])[0] = green;
+        *(s32*) colors = green;
         if (numFrames > 1) {
             s32 val = numFrames - 1;
             if (val > 3) {
                 val = 3;
             }
-            {
-                s32 idx = bar_count;
-                ((s32*) &hsd_804CE3F8[0].content[0])[idx * 2] = val;
-                ((s32*) &hsd_804CE3F8[0].content[4])[idx * 2] = lbl_804D60A4;
-            }
+            *(s32*) (counts + bar_count * 8) = val;
+            *(s32*) (colors + bar_count * 8) = lbl_804D60A4;
             bar_count = 2;
         }
         if (numFrames > 4) {
-            ((s32*) &hsd_804CE3F8[0].content[0])[bar_count * 2] =
-                numFrames - 4;
-            ((s32*) &hsd_804CE3F8[0].content[4])[bar_count * 2] = lbl_804D6094;
+            *(s32*) (counts + bar_count * 8) = numFrames - 4;
+            *(s32*) (colors + bar_count * 8) = lbl_804D6094;
             bar_count++;
         }
-        ((s32*) &hsd_804CE3F8[0].content[0])[bar_count * 2] = -1;
+        *(s32*) (counts + bar_count * 8) = -1;
         hsd_804CE3F8[0].next = &hsd_804CE3F8[1];
         hsd_804CE3F8[1].type = 2;
         count = 4;
-        ((f32*) &hsd_804CE3F8[1].content[0])[0] =
+        ((f32*) &hsd_804CE3F8[1].content.bytes[0])[0] =
             hsd_804D7860 / (f32) numFrames;
-        ((s32*) &hsd_804CE3F8[1].content[0])[1] = lbl_804D609C;
-        ((f32*) &hsd_804CE3F8[1].content[0])[2] =
+        ((s32*) &hsd_804CE3F8[1].content.bytes[0])[1] = lbl_804D609C;
+        ((f32*) &hsd_804CE3F8[1].content.bytes[0])[2] =
             (f32) (s32) (0.9999F + hsd_804D7860) / (f32) numFrames;
-        ((s32*) &hsd_804CE3F8[1].content[0])[3] = lbl_804D60A0;
-        ((f32*) &hsd_804CE3F8[1].content[0])[4] = -1.0F;
+        ((s32*) &hsd_804CE3F8[1].content.bytes[0])[3] = lbl_804D60A0;
+        ((f32*) &hsd_804CE3F8[1].content.bytes[0])[4] = -1.0F;
         hsd_804CE3F8[1].next = &hsd_804CE3F8[2];
         hsd_804CE3F8[2].type = 2;
-        ((f32*) &hsd_804CE3F8[2].content[0])[0] =
+        ((f32*) &hsd_804CE3F8[2].content.bytes[0])[0] =
             hsd_804D785C / (f32) numFrames;
-        ((s32*) &hsd_804CE3F8[2].content[0])[1] = lbl_804D6090;
-        ((f32*) &hsd_804CE3F8[2].content[0])[2] = -1.0F;
+        ((s32*) &hsd_804CE3F8[2].content.bytes[0])[1] = lbl_804D6090;
+        ((f32*) &hsd_804CE3F8[2].content.bytes[0])[2] = -1.0F;
         hsd_804CE3F8[2].next = &hsd_804CE3F8[3];
         hsd_804CE3F8[3].type = 2;
-        ((f32*) &hsd_804CE3F8[3].content[0])[0] =
+        ((f32*) &hsd_804CE3F8[3].content.bytes[0])[0] =
             hsd_804D7858 / (f32) numFrames;
-        ((s32*) &hsd_804CE3F8[3].content[0])[1] = green;
-        ((f32*) &hsd_804CE3F8[3].content[0])[2] = -1.0F;
+        ((s32*) &hsd_804CE3F8[3].content.bytes[0])[1] = green;
+        ((f32*) &hsd_804CE3F8[3].content.bytes[0])[2] = -1.0F;
         hsd_804CE3F8[3].next = &hsd_804CE3F8[4];
     }
     if (lbl_804D608C != 0) {
         hsd_804CE3F8[count].type = 0;
-        entry = &hsd_804CE3F8[count];
-        sprintf((char*) &entry->content,
+        entry = get_perf_disp_item(count);
+        sprintf(entry->content.text,
                 "\\c00ff00%2.3f \\cffffff%2.3f \\c00ffff%2.3f  "
                 "\\c00ff00%2.3f \\cffffff%2.3f \\c00ffff%2.3f",
                 hsd_804D7858, hsd_804D785C, hsd_804D7860, hsd_804D7864,
@@ -1090,11 +1182,11 @@ void* fn_80392A3C(void)
         count++;
         if (hsd_804D7888 != 0) {
             hsd_804CE3F8[count].type = 0;
-            entry = &hsd_804CE3F8[count];
-            sprintf((char*) &entry->content,
+            entry2 = &hsd_804CE3F8[count];
+            sprintf(entry2->content.text,
                     "\\c00ff00%2.3f \\cffffff%2.3f \\c00ffff%2.3f",
                     hsd_804D787C, hsd_804D7880, hsd_804D7884);
-            entry->next = &hsd_804CE3F8[count + 1];
+            entry2->next = &hsd_804CE3F8[count + 1];
             count++;
         }
     }
@@ -1122,70 +1214,70 @@ u8 fn_80392CD8(char* caller)
     case 0:
         return err;
     case 1:
-        msg = "MCC is no initialize";
+        msg = mcc_error_messages.no_initialize;
         break;
     case 2:
-        msg = "No responce";
+        msg = mcc_error_messages.no_response;
         break;
     case 3:
-        msg = "PING error";
+        msg = mcc_error_messages.ping_error;
         break;
     case 4:
-        msg = "Could not initialize HIO";
+        msg = mcc_error_messages.initialize_hio;
         break;
     case 5:
-        msg = "Could not read HIO mailbox";
+        msg = mcc_error_messages.read_hio_mailbox;
         break;
     case 6:
-        msg = "Could not write HIO mailbox";
+        msg = mcc_error_messages.write_hio_mailbox;
         break;
     case 7:
-        msg = "Could not read HIO memory";
+        msg = mcc_error_messages.read_hio_memory;
         break;
     case 8:
-        msg = "Could not write HIO memory";
+        msg = mcc_error_messages.write_hio_memory;
         break;
     case 9:
-        msg = "Could not read HIO status";
+        msg = mcc_error_messages.read_hio_status;
         break;
     case 10:
-        msg = "Could not flush channelInfo";
+        msg = mcc_error_messages.flush_channel_info;
         break;
     case 11:
-        msg = "Could not load channelInfo";
+        msg = mcc_error_messages.load_channel_info;
         break;
     case 12:
-        msg = "Not enough memory block";
+        msg = mcc_error_messages.not_enough_memory;
         break;
     case 13:
-        msg = "Invalid function parameter";
+        msg = mcc_error_messages.invalid_function_parameter;
         break;
     case 14:
-        msg = "Invalid channel parameter";
+        msg = mcc_error_messages.invalid_channel_parameter;
         break;
     case 15:
-        msg = "Invalid data size";
+        msg = mcc_error_messages.invalid_data_size;
         break;
     case 16:
-        msg = "Invalid offset parameter";
+        msg = mcc_error_messages.invalid_offset_parameter;
         break;
     case 17:
-        msg = "Channel was (already) opened";
+        msg = mcc_error_messages.already_opened;
         break;
     case 18:
-        msg = "Channel was (already) closed";
+        msg = mcc_error_messages.already_closed;
         break;
     case 19:
-        msg = "Channel was (already) locked";
+        msg = mcc_error_messages.already_locked;
         break;
     case 20:
-        msg = "Channel was (already) unlocked";
+        msg = mcc_error_messages.already_unlocked;
         break;
     case 21:
-        msg = "Channel (read/write) busy";
+        msg = mcc_error_messages.read_write_busy;
         break;
     default:
-        msg = "Unknown error";
+        msg = mcc_error_messages.unknown_error;
         break;
     }
 
@@ -1220,7 +1312,7 @@ extern int hsd_804D78A0;
 // @TODO: Currently 92.84% match - needs minor register allocation fix
 void hsd_80392E80(void)
 {
-    s32 status;
+    enum MCC_CONNECT status;
     s32 event;
     s32 head;
     u32 ticksPerUnit;
@@ -1228,7 +1320,7 @@ void hsd_80392E80(void)
     s32 waiting;
     s32 intr;
     s32* channel_flags;
-    PAD_STACK(16);
+    PAD_STACK(12);
 
     ticksPerUnit = *(u32*) 0x800000F8 >> 2;
 
@@ -1242,7 +1334,7 @@ void hsd_80392E80(void)
         head = hsd_804D789C + 1;
         event = hsd_804CE728[hsd_804D789C];
         hsd_804D7898 -= 1;
-        hsd_804D789C = head - (head / 256) * 256;
+        hsd_804D789C = head % 256;
         OSRestoreInterrupts(intr);
 
         switch (event) {
@@ -1274,8 +1366,7 @@ void hsd_80392E80(void)
                 waiting = 1;
                 startTick = OSGetTick();
                 for (;;) {
-                    if (MCCGetConnectionStatus(
-                            0xF, (enum MCC_CONNECT*) &status) != 0 &&
+                    if (MCCGetConnectionStatus(0xF, &status) != 0 &&
                         status == 3)
                     {
                         waiting = 0;
@@ -1565,8 +1656,6 @@ void hsd_80393840(void) {}
 void hsd_80393844(void)
 {
     ParticleLogEntry* base = hsd_804CEB40;
-    u8* resp_status = (u8*) (base + 0x100) + 0x44;
-    u8* req_status = (u8*) (base + 0x100) + 0x84;
     s32 type;
     u32 flags;
     s32 value;
@@ -1582,10 +1671,9 @@ void hsd_80393844(void)
 
         {
             s32 idx = hsd_804D78B8;
-            ParticleLogEntry* entry = &base[idx];
-            type = entry->x0;
-            flags = entry->x4;
-            value = entry->x8;
+            type = base[idx].x0;
+            flags = base[idx].x4;
+            value = base[idx].x8;
             hsd_804D78BC -= 1;
             hsd_804D78B8 = (idx + 1) % 256;
         }
@@ -1610,7 +1698,7 @@ void hsd_80393844(void)
             hsd_804D78A8 = value & 0x7F;
             if (MCCRead(0xF, hsd_804D78A8 << 5, (u8*) &base[0x10A].x8, 0x20,
                         0) != 0 &&
-                !((*req_status >> 7) & 1))
+                !((MCCPacket*) &base[0x10A].x8)->x4_b7)
             {
                 u8 cmd;
                 memset((u8*) &base[0x105].x4, 0, 0x20);
@@ -1649,17 +1737,17 @@ void hsd_80393A54(int level)
 // encoding
 int hsd_80393A5C(char* filename, int data, int size)
 {
+    u32* data_p;
     int ready;
-    s32 start;
+    u32 start;
     int fd;
     f32 written_f;
     f32 elapsed;
-    PAD_STACK(8);
 
     if (hsd_804D78A0 == 0) {
         ready = 0;
     } else if (FIOQuery() == 0) {
-        ready = hsd_804D78A0 = 0;
+        hsd_804D78A0 = ready = 0;
     } else {
         ready = 1;
     }
@@ -1680,7 +1768,8 @@ int hsd_80393A5C(char* filename, int data, int size)
         return -1;
     }
 
-    written_f = (f32) (u32) FIOFwrite(fd, (void*) data, size);
+    data_p = (u32*) data;
+    written_f = (f32) (u32) FIOFwrite(fd, data_p, size);
 
     if ((f32) (s32) size != written_f) {
         OSReport("cannot save file\n");
@@ -1691,7 +1780,7 @@ int hsd_80393A5C(char* filename, int data, int size)
     FIOFclose(fd);
     elapsed = (f32) (OSGetTick() - start) / (f32) (*(u32*) 0x800000F8 >> 2);
     OSReport("Done %s size:%d time:%f spped:%fkbps\n", filename, size, elapsed,
-             8.0F * (f32) (u32) size / elapsed * (1.0F / 1024.0F));
+             8.0F * (f32) size / elapsed * (1.0F / 1024.0F));
     return size;
 }
 
@@ -1876,13 +1965,12 @@ void hsd_80393EF4(int col_delta, int row_delta)
                 *col_ptr = byte_val;
             }
         } else {
-            int* col_ptr = &sp->x14;
-            u32 col = *col_ptr;
+            u32 col = sp->x14;
             col_delta = -col_delta;
             if (col > (u32) col_delta) {
-                *col_ptr = col - (u32) col_delta;
+                sp->x14 = col - (u32) col_delta;
             } else {
-                *col_ptr = 0;
+                sp->x14 = 0;
             }
         }
     } else if (row_delta < 0) {
@@ -2024,38 +2112,47 @@ s32 hsd_803941E8(void* xfb_out_ptr, void* xfb_cur_ptr)
 
 extern u8 lbl_804088B8[];
 
-// @TODO: Currently 99.61% match - .bss.0 relocation symbol instead of
-/// hsd_804CF810
 void hsd_80394314(void)
 {
-    memset(&hsd_804CF810, 0, 0xD8);
-    hsd_803941E8(&hsd_804CF810.x24, &hsd_804CF810.x2C);
+    void* sp = &hsd_804CF810;
+
+    memset(sp, 0, 0xD8);
+    hsd_803941E8(&((struct ParticleScreenState*) sp)->x24,
+                 &((struct ParticleScreenState*) sp)->x2C);
 
     {
         s32 mode;
-        if (hsd_804CF810.x28 != 0) {
+        if (((struct ParticleScreenState*) sp)->x28 != 0) {
             mode = 2;
         } else {
             mode = 1;
         }
-        hsd_804CF810.x38 = mode;
+        ((struct ParticleScreenState*) sp)->x38 = mode;
     }
 
-    hsd_804CF810.x34 = 0;
-    hsd_804CF810.x30 = &HSD_VIData;
-    hsd_804CF810.x3C = ((u16*) hsd_804CF810.x30)[2];
-    hsd_804CF810.x40 = ((u16*) hsd_804CF810.x30)[4];
-    hsd_804CF810.x44 = (((u16) hsd_804CF810.x3C + 15) * 2) & 0x1FFE0;
-    hsd_804CF810.x48 = hsd_804CF810.x44 * hsd_804CF810.x40;
-    hsd_804CF810.x4 = 0;
-    hsd_804CF810.x8 = hsd_804CF810.x40;
-    hsd_804CF810.x18 = 0;
-    hsd_804CF810.x14 = 0;
-    hsd_804CF810.x20 = (u32) (hsd_804CF810.x3C - 0x28) / 11;
-    hsd_804CF810.x1C = (u32) (hsd_804CF810.x40 - 0x50) / 14;
-    hsd_804CF810.x4C = lbl_804088B8;
-    hsd_804CF810.x50 = 0;
-    hsd_804CF810.xC4 = 0;
+    ((struct ParticleScreenState*) sp)->x34 = 0;
+    ((struct ParticleScreenState*) sp)->x30 = &HSD_VIData;
+    ((struct ParticleScreenState*) sp)->x3C =
+        ((u16*) ((struct ParticleScreenState*) sp)->x30)[2];
+    ((struct ParticleScreenState*) sp)->x40 =
+        ((u16*) ((struct ParticleScreenState*) sp)->x30)[4];
+    ((struct ParticleScreenState*) sp)->x44 =
+        (((u16) ((struct ParticleScreenState*) sp)->x3C + 15) * 2) & 0x1FFE0;
+    ((struct ParticleScreenState*) sp)->x48 =
+        ((struct ParticleScreenState*) sp)->x44 *
+        ((struct ParticleScreenState*) sp)->x40;
+    ((struct ParticleScreenState*) sp)->x4 = 0;
+    ((struct ParticleScreenState*) sp)->x8 =
+        ((struct ParticleScreenState*) sp)->x40;
+    ((struct ParticleScreenState*) sp)->x18 = 0;
+    ((struct ParticleScreenState*) sp)->x14 = 0;
+    ((struct ParticleScreenState*) sp)->x20 =
+        (u32) (((struct ParticleScreenState*) sp)->x3C - 0x28) / 11;
+    ((struct ParticleScreenState*) sp)->x1C =
+        (u32) (((struct ParticleScreenState*) sp)->x40 - 0x50) / 14;
+    ((struct ParticleScreenState*) sp)->x4C = lbl_804088B8;
+    ((struct ParticleScreenState*) sp)->x50 = 0;
+    ((struct ParticleScreenState*) sp)->xC4 = 0;
 }
 
 // @TODO: Currently 94.99% match - obj file has extra addi for lis/addi
@@ -2144,11 +2241,6 @@ extern u8 lbl_8040AB40[];
 
 // @TODO: Currently 88.35% match - register allocation/loop counter
 // differences remain
-static inline s32 hsd_80394668_get_interlace(struct ParticleScreenState* sp)
-{
-    return sp->x0_b6;
-}
-
 #pragma push
 #pragma global_optimizer off
 void hsd_80394668(void)
@@ -2159,114 +2251,59 @@ void hsd_80394668(void)
     if ((u32) sp->x2C != 0) {
         /* Copy XFB data with brightness adjustment */
         u8* src = (u8*) sp->x2C;
-        s32 offset = sp->x34;
-        u8* dst = (u8*) (&sp->x24)[offset];
-        u32 half_count = ((u32) sp->x48 + 1) >> 1;
+        u32 size = sp->x48;
+        u32 count = (size + 1) >> 1;
         s32 pos = 0;
+        s32* dst_base = (s32*) sp + sp->x34;
+        u8* dst = 0;
+        dst += dst_base[9];
 
-        if ((u32) sp->x48 > 0) {
-            u32 unrolled = half_count >> 3;
-            u32 remainder;
-
-            if (unrolled != 0) {
-                do {
-                    u8* s0 = src + pos;
-                    u8* d0 = dst + pos;
-                    pos += 2;
-                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFFFFFF) + 0x10);
-                    d0[1] = s0[1];
-
-                    s0 = src + pos;
-                    d0 = dst + pos;
-                    pos += 2;
-                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFFFFFF) + 0x10);
-                    d0[1] = s0[1];
-
-                    s0 = src + pos;
-                    d0 = dst + pos;
-                    pos += 2;
-                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFFFFFF) + 0x10);
-                    d0[1] = s0[1];
-
-                    s0 = src + pos;
-                    d0 = dst + pos;
-                    pos += 2;
-                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFFFFFF) + 0x10);
-                    d0[1] = s0[1];
-
-                    s0 = src + pos;
-                    d0 = dst + pos;
-                    pos += 2;
-                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFFFFFF) + 0x10);
-                    d0[1] = s0[1];
-
-                    s0 = src + pos;
-                    d0 = dst + pos;
-                    pos += 2;
-                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFFFFFF) + 0x10);
-                    d0[1] = s0[1];
-
-                    s0 = src + pos;
-                    d0 = dst;
-                    d0 += pos;
-                    pos += 2;
-                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFFFFFF) + 0x10);
-                    d0[1] = s0[1];
-
-                    s0 = src + pos;
-                    d0 = dst + pos;
-                    pos += 2;
-                    d0[0] = (u8) (((s0[0] - 0x10) & 0xFFFFFF) + 0x10);
-                    d0[1] = s0[1];
-                } while (--unrolled != 0);
-                remainder = half_count & 7;
-                if (remainder == 0) {
-                    return;
-                }
-            } else {
-                remainder = half_count;
-            }
-
-            do {
+        if (size > 0) {
+            while (count != 0) {
                 u8* s1 = src + pos;
-                u8 luma = s1[0];
                 u8* d1 = dst + pos;
                 pos += 2;
-                d1[0] = (u8) (((luma - 0x10) & 0xFFFFFF) + 0x10);
+                d1[0] = (u8) (((s1[0] - 0x10) & 0xFFFFFF) + 0x10);
                 d1[1] = s1[1];
-            } while (--remainder != 0);
+                count--;
+            }
         }
     } else {
         /* Draw console text to framebuffer */
-        void** x50_ptr = &sp->x50;
+        void* saved_color;
+        s32 row;
         s32* x4_ptr = &sp->x4;
+        void** x50_ptr = &sp->x50;
         s32* x40_ptr = &sp->x40;
         s32* x8_ptr = &sp->x8;
-        void* saved_color = *x50_ptr;
-        s32 row;
-        s32 col;
-        s32 cur_x;
 
+        saved_color = *x50_ptr;
         *x50_ptr = lbl_8040AB40;
         row = 0;
 
         while (row <= sp->x1C) {
-            s32 y_off = (row + 1) * 14;
+            s32 y_off;
+            s32 cur_x;
+            s32 col;
+            y_off = (row + 1) * 14;
             col = 0;
             cur_x = 0x14;
 
             while (col < sp->x20) {
                 *x4_ptr = cur_x;
                 *x8_ptr = (*x40_ptr - 0x28) - y_off;
-                if (sp->x0_b7 != 0) {
-                    s32 interlace = hsd_80394668_get_interlace(sp);
-                    hsd_803922FC((void*) ((u8*) sp->x4C + 0x700), *x4_ptr,
-                                 *x8_ptr, interlace, (&sp->x24)[sp->x34],
-                                 sp->x3C, *x40_ptr, sp->x44, *x50_ptr);
-                } else {
-                    hsd_803921B8((void*) ((u8*) sp->x4C + 0x700), *x4_ptr,
-                                 *x8_ptr, (&sp->x24)[sp->x34], sp->x3C,
-                                 *x40_ptr, sp->x44, *x50_ptr);
+                {
+                    s32 interlace = sp->x0_b6;
+                    if (sp->x0_b7 != 0) {
+                        hsd_803922FC(((ParticleFontData*) sp->x4C)->x700,
+                                     *x4_ptr, *x8_ptr, interlace,
+                                     (&sp->x24)[sp->x34], sp->x3C, *x40_ptr,
+                                     sp->x44, *x50_ptr);
+                    } else {
+                        hsd_803921B8(((ParticleFontData*) sp->x4C)->x700,
+                                     *x4_ptr, *x8_ptr, (&sp->x24)[sp->x34],
+                                     sp->x3C, *x40_ptr, sp->x44, *x50_ptr);
+                    }
                 }
                 cur_x += 11;
                 col++;
@@ -2313,8 +2350,15 @@ void hsd_80394950(OSContext* ctx)
     i = 0;
     p = (u8*) ctx;
     do {
-        OSReport("R%02d=%08X:%08X (%e, %e)\n", i, *(u32*) (p + 0x90),
-                 *(u32*) (p + 0x94), *(f32*) (p + 0x90), *(f32*) (p + 0x94));
+        OSReport(
+            "R%02d=%08X:%08X (%e, %e)\n"
+            "\0\0\0- MISC ----------------------------------------------\n"
+            "\0\0SRR0=%08X SRR1=%08X\n"
+            "\0\0\0\0CR  =%08X LR  =%08X\n"
+            "\0\0\0\0CTR =%08X XER =%08X\n"
+            "\0\0\0\0GQR%d=%08X GQR%d=%08X\n",
+            i, ((u32*) p)[0x24], ((u32*) p)[0x25], ((f32*) p)[0x24],
+            ((f32*) p)[0x25]);
         i++;
         p += 8;
     } while (i < 32);
@@ -2330,7 +2374,7 @@ void Exception_ReportStackTrace(OSContext* ctx, int max_depth)
     u32 i;
     u32* sp;
 
-    OSReport("- STACK ---------------------------------\n");
+    OSReport("- STACK ---------------------------------------------\n");
     OSReport(" Address:  Back Chain  LR Save\n");
 
     sp = (u32*) ctx->gpr[1];
@@ -2524,11 +2568,11 @@ void hsd_80394E8C(void* node_ptr)
 extern u8 lbl_8040AB00[];
 extern u8 lbl_8040AB20[];
 
-// @TODO: Currently 93.04% match - BSS relocation and register allocation
+// @TODO: Currently 94.46% match - BSS relocation and register allocation
 // differences remain
 void hsd_80394F48(void* data)
 {
-    void* base_color = lbl_8040AB00;
+    u8* base_color = lbl_8040AB00;
     struct ParticleScreenState* sp = &hsd_804CF810;
     EventData* dp = data;
     s32 num_entries;
@@ -2549,7 +2593,7 @@ void hsd_80394F48(void* data)
 
     PAD_STACK(64);
 
-    num_entries = strlen((char*) dp->entries[0]);
+    num_entries = strlen(dp->entries[0]);
     px50 = &sp->x50;
     pxC8 = &sp->xC8;
     pxCC = &sp->xCC;
@@ -2565,10 +2609,10 @@ void hsd_80394F48(void* data)
 
     b6 = sp->x0_b6;
     if (sp->x0_b7 != 0) {
-        hsd_803922FC((void*) ((u8*) sp->x4C + 0x968), *px4, *px8, b6,
+        hsd_803922FC(((ParticleFontData*) sp->x4C)->x968, *px4, *px8, b6,
                      (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
     } else {
-        hsd_803921B8((void*) ((u8*) sp->x4C + 0x968), *px4, *px8,
+        hsd_803921B8(((ParticleFontData*) sp->x4C)->x968, *px4, *px8,
                      (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
     }
 
@@ -2577,10 +2621,10 @@ void hsd_80394F48(void* data)
     while (i < num_entries) {
         b6 = sp->x0_b6;
         if (sp->x0_b7 != 0) {
-            hsd_803922FC((void*) ((u8*) sp->x4C + 0x9D8), *px4, *px8, b6,
+            hsd_803922FC(((ParticleFontData*) sp->x4C)->x9D8, *px4, *px8, b6,
                          (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
         } else {
-            hsd_803921B8((void*) ((u8*) sp->x4C + 0x9D8), *px4, *px8,
+            hsd_803921B8(((ParticleFontData*) sp->x4C)->x9D8, *px4, *px8,
                          (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
         }
         i++;
@@ -2589,54 +2633,54 @@ void hsd_80394F48(void* data)
 
     b6 = sp->x0_b6;
     if (sp->x0_b7 != 0) {
-        hsd_803922FC((void*) ((u8*) sp->x4C + 0x968), *px4, *px8, b6,
+        hsd_803922FC(((ParticleFontData*) sp->x4C)->x968, *px4, *px8, b6,
                      (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
     } else {
-        hsd_803921B8((void*) ((u8*) sp->x4C + 0x968), *px4, *px8,
+        hsd_803921B8(((ParticleFontData*) sp->x4C)->x968, *px4, *px8,
                      (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
     }
 
     *px4 += 11;
-    i = 0;
+    entry_idx = 0;
     x_base = col_start * 11 + 0x14;
-    hi_color = (u8*) base_color + 0x20;
+    hi_color = base_color + 0x20;
     cur_row = row_start - 1;
 
-    while (dp->entries[i] != 0) {
+    while (dp->entries[entry_idx] != 0) {
         *px4 = x_base;
         *px8 = (*px40 - 0x28) - (cur_row + 1) * 14;
         cur_row--;
 
         b6 = sp->x0_b6;
         if (sp->x0_b7 != 0) {
-            hsd_803922FC((void*) ((u8*) sp->x4C + 0x1B20), *px4, *px8, b6,
+            hsd_803922FC(((ParticleFontData*) sp->x4C)->x1B20, *px4, *px8, b6,
                          (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
         } else {
-            hsd_803921B8((void*) ((u8*) sp->x4C + 0x1B20), *px4, *px8,
+            hsd_803921B8(((ParticleFontData*) sp->x4C)->x1B20, *px4, *px8,
                          (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
         }
 
-        if (i == dp->index) {
+        if (entry_idx == dp->index) {
             *px50 = hi_color;
         } else {
             *px50 = base_color;
         }
 
         *px4 += 11;
-        hsd_80394434((void*) dp->entries[i]);
+        hsd_80394434(dp->entries[entry_idx]);
 
-        *px4 += strlen((char*) dp->entries[i]) * 11;
+        *px4 += strlen(dp->entries[entry_idx]) * 11;
         *px50 = base_color;
 
         b6 = sp->x0_b6;
         if (sp->x0_b7 != 0) {
-            hsd_803922FC((void*) ((u8*) sp->x4C + 0x1B20), *px4, *px8, b6,
+            hsd_803922FC(((ParticleFontData*) sp->x4C)->x1B20, *px4, *px8, b6,
                          (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
         } else {
-            hsd_803921B8((void*) ((u8*) sp->x4C + 0x1B20), *px4, *px8,
+            hsd_803921B8(((ParticleFontData*) sp->x4C)->x1B20, *px4, *px8,
                          (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
         }
-        i++;
+        entry_idx++;
     }
 
     *px50 = base_color;
@@ -2645,45 +2689,42 @@ void hsd_80394F48(void* data)
 
     b6 = sp->x0_b6;
     if (sp->x0_b7 != 0) {
-        hsd_803922FC((void*) ((u8*) sp->x4C + 0x968), *px4, *px8, b6,
+        hsd_803922FC(((ParticleFontData*) sp->x4C)->x968, *px4, *px8, b6,
                      (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
     } else {
-        hsd_803921B8((void*) ((u8*) sp->x4C + 0x968), *px4, *px8,
+        hsd_803921B8(((ParticleFontData*) sp->x4C)->x968, *px4, *px8,
                      (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
     }
 
     {
-        struct ParticleScreenState* sp = &hsd_804CF810;
-        s32 b6;
-        {
-            s32 j = 0;
-            *px4 += 11;
-            while (j < num_entries) {
-                if (sp->x0_b7 != 0) {
-                    hsd_803922FC((void*) ((u8*) sp->x4C + 0x9D8), *px4, *px8,
-                                 sp->x0_b6, (&sp->x24)[sp->x34], sp->x3C,
-                                 *px40, sp->x44, *px50);
-                } else {
-                    hsd_803921B8((void*) ((u8*) sp->x4C + 0x9D8), *px4, *px8,
-                                 (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44,
-                                 *px50);
-                }
-                j++;
-                *px4 += 11;
-            }
-        }
-
-        b6 = sp->x0_b6;
-        if (sp->x0_b7 != 0) {
-            hsd_803922FC((void*) ((u8*) sp->x4C + 0x968), *px4, *px8, b6,
-                         (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
-        } else {
-            hsd_803921B8((void*) ((u8*) sp->x4C + 0x968), *px4, *px8,
-                         (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
-        }
-
+        s32 j = 0;
         *px4 += 11;
+        while (j < num_entries) {
+            b6 = sp->x0_b6;
+            if (sp->x0_b7 != 0) {
+                hsd_803922FC(((ParticleFontData*) sp->x4C)->x9D8, *px4, *px8,
+                             b6, (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44,
+                             *px50);
+            } else {
+                hsd_803921B8(((ParticleFontData*) sp->x4C)->x9D8, *px4, *px8,
+                             (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44,
+                             *px50);
+            }
+            j++;
+            *px4 += 11;
+        }
     }
+
+    b6 = sp->x0_b6;
+    if (sp->x0_b7 != 0) {
+        hsd_803922FC(((ParticleFontData*) sp->x4C)->x968, *px4, *px8, b6,
+                     (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
+    } else {
+        hsd_803921B8(((ParticleFontData*) sp->x4C)->x968, *px4, *px8,
+                     (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
+    }
+
+    *px4 += 11;
     *pxC8 += 4;
     *pxCC -= dp->index + 1;
 }
@@ -2701,7 +2742,7 @@ s32 hsd_80395550(void* event_ptr)
             if (counter > 0) {
                 data->index = counter - 1;
             } else {
-                u32* base = data->entries;
+                char** base = data->entries;
                 s32 count = 0;
                 while (base[count + 1] != 0) {
                     count++;
@@ -2712,7 +2753,7 @@ s32 hsd_80395550(void* event_ptr)
         }
         case 0x4: {
             s32 idx = data->index;
-            u32* base = data->entries;
+            char** base = data->entries;
             if (base[idx + 1] != 0) {
                 data->index = idx + 1;
             } else {
@@ -2919,122 +2960,117 @@ extern struct {
     /* 0x18 */ void* x18;
 } lbl_8040BC3C;
 
-// @TODO: Currently 92.03% match - needs register allocation fix
 s32 hsd_80395A78(void)
 {
-    struct ParticleScreenState* sp = &hsd_804CF810;
-    s32* pxC = &sp->x0C;
-    s32* px18 = &sp->x18;
-    s32* px10 = &sp->x10;
-    s32* px14 = &sp->x14;
     u32 bit;
-    u32 new_col_u;
+    s32 new_col;
     s32 new_scroll;
     PAD_STACK(8);
 
     bit = 1;
-    while (bit <= sp->xBC) {
-        switch (sp->xBC & bit) {
+    while (bit <= hsd_804CF810.xBC) {
+        switch (hsd_804CF810.xBC & bit) {
         case 0x8:
-            if (*px10 < sp->x1C - 1) {
-                *px10 = *px10 + 1;
+            if (hsd_804CF810.x10 < hsd_804CF810.x1C - 1) {
+                hsd_804CF810.x10 = hsd_804CF810.x10 + 1;
             } else {
-                *px14 = *px14 + 1;
+                hsd_804CF810.x14 += 1;
             }
             return 1;
         case 0x4:
-            if (*px10 > 0) {
-                *px10 = *px10 - 1;
-                return 1;
-            }
-            if (*px14 > 0) {
-                *px14 = *px14 - 1;
-                return 1;
-            }
-            goto next_bit;
-        case 0x1:
-            if (*pxC > 0) {
-                *pxC = *pxC - 1;
-            } else if (*px18 > 0) {
-                *px18 = *px18 - 1;
+            if (hsd_804CF810.x10 > 0) {
+                hsd_804CF810.x10 -= 1;
+            } else if (hsd_804CF810.x14 > 0) {
+                hsd_804CF810.x14 -= 1;
             } else {
-                goto next_bit;
+                break;
             }
-            while (!(u8) hsd_80394128(*pxC + *px18, *px10 + *px14)) {
-                if (*pxC > 0) {
-                    *pxC = *pxC - 1;
-                } else if (*px18 > 0) {
-                    *px18 = *px18 - 1;
+            return 1;
+        case 0x1:
+            if (hsd_804CF810.x0C > 0) {
+                hsd_804CF810.x0C -= 1;
+            } else if (hsd_804CF810.x18 > 0) {
+                hsd_804CF810.x18 -= 1;
+            } else {
+                break;
+            }
+            while (!(u8) hsd_80394128(hsd_804CF810.x0C + hsd_804CF810.x18,
+                                      hsd_804CF810.x10 + hsd_804CF810.x14))
+            {
+                if (hsd_804CF810.x0C > 0) {
+                    hsd_804CF810.x0C -= 1;
+                } else if (hsd_804CF810.x18 > 0) {
+                    hsd_804CF810.x18 -= 1;
                 } else {
                     break;
                 }
             }
             return 1;
         case 0x2:
-            new_scroll = *px18;
-            new_col_u = *pxC;
-            if ((u32) *pxC < (u32) (sp->x20 - 1)) {
-                new_col_u += 1;
+            new_col = hsd_804CF810.x0C;
+            new_scroll = hsd_804CF810.x18;
+            if ((u32) new_col < (u32) (hsd_804CF810.x20 - 1)) {
+                new_col += 1;
             } else {
                 new_scroll += 1;
             }
-            if ((u8) hsd_80394128(new_col_u + new_scroll, *px10 + *px14)) {
-                *pxC = new_col_u;
-                *px18 = new_scroll;
+            if ((u8) hsd_80394128(new_col + new_scroll,
+                                  hsd_804CF810.x10 + hsd_804CF810.x14))
+            {
+                hsd_804CF810.x0C = new_col;
+                hsd_804CF810.x18 = new_scroll;
                 return 1;
             }
-            goto next_bit;
-        case 0x100: {
-            ExcptNode* node = (ExcptNode*) &lbl_8040BC3C;
+            break;
+        case 0x100:
             lbl_8040BC3C.x10 = hsd_80395970();
             lbl_8040BC3C.x18 = &lbl_8040BAF0;
-            if (node != NULL) {
-                fn_80394DF4(node);
-                node->next = (ExcptNode*) sp->xD0;
-                sp->xD0 = node;
-                if (node->callback != NULL) {
-                    node->callback(node);
+            if ((ExcptNode*) &lbl_8040BC3C != NULL) {
+                fn_80394DF4((ExcptNode*) &lbl_8040BC3C);
+                ((ExcptNode*) &lbl_8040BC3C)->next =
+                    (ExcptNode*) hsd_804CF810.xD0;
+                hsd_804CF810.xD0 = &lbl_8040BC3C;
+                if (((ExcptNode*) &lbl_8040BC3C)->callback != NULL) {
+                    ((ExcptNode*) &lbl_8040BC3C)
+                        ->callback((ExcptNode*) &lbl_8040BC3C);
                 }
-                sp->x0_b5 = 1;
+                hsd_804CF810.x0_b5 = 1;
             }
             return 1;
-        }
-        case 0x400: {
-            ExcptNode* node = (ExcptNode*) &lbl_8040BC3C;
+        case 0x400:
             lbl_8040BC3C.x18 = &lbl_8040BAF0;
-            if (node != NULL) {
-                fn_80394DF4(node);
-                node->next = (ExcptNode*) sp->xD0;
-                sp->xD0 = node;
-                if (node->callback != NULL) {
-                    node->callback(node);
+            if ((ExcptNode*) &lbl_8040BC3C != NULL) {
+                fn_80394DF4((ExcptNode*) &lbl_8040BC3C);
+                ((ExcptNode*) &lbl_8040BC3C)->next =
+                    (ExcptNode*) hsd_804CF810.xD0;
+                hsd_804CF810.xD0 = &lbl_8040BC3C;
+                if (((ExcptNode*) &lbl_8040BC3C)->callback != NULL) {
+                    ((ExcptNode*) &lbl_8040BC3C)
+                        ->callback((ExcptNode*) &lbl_8040BC3C);
                 }
-                sp->x0_b5 = 1;
+                hsd_804CF810.x0_b5 = 1;
             }
             return 1;
-        }
-        case 0x1000: {
-            ExcptNode* node = (ExcptNode*) lbl_8040BA5C;
-            if (node != NULL) {
-                fn_80394DF4(node);
-                node->next = (ExcptNode*) sp->xD0;
-                sp->xD0 = node;
-                if (node->callback != NULL) {
-                    node->callback(node);
+        case 0x1000:
+            if ((ExcptNode*) lbl_8040BA5C != NULL) {
+                fn_80394DF4((ExcptNode*) lbl_8040BA5C);
+                ((ExcptNode*) lbl_8040BA5C)->next =
+                    (ExcptNode*) hsd_804CF810.xD0;
+                hsd_804CF810.xD0 = lbl_8040BA5C;
+                if (((ExcptNode*) lbl_8040BA5C)->callback != NULL) {
+                    ((ExcptNode*) lbl_8040BA5C)
+                        ->callback((ExcptNode*) lbl_8040BA5C);
                 }
-                sp->x0_b5 = 1;
+                hsd_804CF810.x0_b5 = 1;
             }
             return 1;
-        }
         default:
-        next_bit:
-            bit <<= 1;
             break;
         }
+        bit <<= 1;
     }
     return 0;
 }
-
 extern u8 lbl_8040BEC4[];
 
 static inline void ps_remove_node(struct ParticleScreenState* sp, void* node)
@@ -3058,6 +3094,21 @@ static inline void ps_remove_node(struct ParticleScreenState* sp, void* node)
         *(void**) node = NULL;
         *head_ptr = next;
     }
+    sp->x0_b5 = 1;
+}
+
+static inline void ps_clear_nodes(struct ParticleScreenState* sp)
+{
+    void** head_ptr;
+    ExcptNode* cur;
+
+    cur = *(head_ptr = &sp->xD0);
+    while (cur != NULL) {
+        ExcptNode* next = cur->next;
+        cur->next = NULL;
+        cur = next;
+    }
+    *head_ptr = NULL;
     sp->x0_b5 = 1;
 }
 
@@ -3100,18 +3151,16 @@ s32 hsd_80395D88(void* data)
             s32 i;
             OSContext* ctx;
             OSContext** ctx_ptr;
-            u32* ctx_words;
             s32 saved;
 
             if (*(ctx_ptr = &sp->xD4) != NULL) {
                 saved = hsd_80393D2C(1);
-                ctx_words = (u32*) *ctx_ptr;
+                ctx = *ctx_ptr;
                 OSReport(msg + 0x728);
                 i = 0;
                 do {
-                    OSReport(msg + 0x760, i, ctx_words[i], ctx_words[i],
-                             i + 0x10, ctx_words[i + 0x10],
-                             ctx_words[i + 0x10]);
+                    OSReport(msg + 0x760, i, ctx->gpr[i], ctx->gpr[i],
+                             i + 0x10, ctx->gpr[i + 0x10], ctx->gpr[i + 0x10]);
                     i++;
                 } while (i < 0x10);
                 hsd_80394950(*ctx_ptr);
@@ -3138,29 +3187,19 @@ s32 hsd_80395D88(void* data)
         case 7:
             hsd_80394E8C(lbl_8040BEC4);
             return 1;
-        case 8: {
-            void** head_ptr;
-            ExcptNode* cur;
-            cur = *(head_ptr = &sp->xD0);
-            while (cur != NULL) {
-                ExcptNode* next = cur->next;
-                cur->next = NULL;
-                cur = next;
-            }
-            *head_ptr = NULL;
-            sp->x0_b5 = 1;
+        case 8:
+            ps_clear_nodes(sp);
             return 1;
-        }
         default:
-            return 0;
+            break;
         }
+        break;
     }
     case -1:
         ps_remove_node(sp, data);
         return 1;
-    default:
-        return 0;
     }
+    return 0;
 }
 
 void hsd_80396130(void)
@@ -3183,12 +3222,35 @@ static inline s32 hsd_80396188_calc_col(void)
     return ((hsd_804CF810.x20 - 0x2E) / 2) * 11 + 20;
 }
 
-// @TODO: Currently 95.69% match - needs register allocation fix
+// @TODO: Currently 95.83% match - needs register allocation fix
+static inline void hsd_80396188_draw_rows(char* buf, s32 col, u32** addr)
+{
+    s32 i;
+
+    hsd_80394434(lbl_804D62CC);
+    i = 0;
+    do {
+        s32 row = 4 - i;
+        hsd_804CF810.x4 = col;
+        hsd_804CF810.x8 = (hsd_804CF810.x40 - 0x28) - (row + 1) * 14;
+        sprintf(buf, lbl_804D62D0, *addr, (*addr)[0], (*addr)[1], (*addr)[2],
+                (*addr)[3]);
+        hsd_80394434(buf);
+        {
+            u32 memsize = OSGetPhysicalMemSize();
+            *addr = (u32*) ((((u32) *addr & 0x0FFFFFFF) + memsize + 0x10) %
+                                memsize +
+                            0x80000000);
+        }
+        i++;
+    } while (i < 4);
+    hsd_804CF810.x4 = col;
+}
+
 void hsd_80396188(void)
 {
     void* saved;
     s32 col;
-    s32 i;
     u32* addr;
     char buf[64];
     PAD_STACK(20);
@@ -3199,23 +3261,7 @@ void hsd_80396188(void)
     hsd_804CF810.x50 = lbl_8040AB00;
     hsd_804CF810.x4 = col;
     hsd_804CF810.x8 = hsd_804CF810.x40 - 0x7C;
-    hsd_80394434(lbl_804D62CC);
-    i = 0;
-    do {
-        s32 row = 4 - i;
-        hsd_804CF810.x4 = col;
-        hsd_804CF810.x8 = (hsd_804CF810.x40 - 0x28) - (row + 1) * 14;
-        sprintf(buf, lbl_804D62D0, addr, addr[0], addr[1], addr[2], addr[3]);
-        hsd_80394434(buf);
-        {
-            u32 memsize = OSGetPhysicalMemSize();
-            addr = (u32*) ((((u32) addr & 0x0FFFFFFF) + memsize + 0x10) %
-                               memsize +
-                           0x80000000);
-        }
-        i++;
-    } while (i < 4);
-    hsd_804CF810.x4 = col;
+    hsd_80396188_draw_rows(buf, col, &addr);
     hsd_804CF810.x8 = hsd_804CF810.x40 - 0x36;
     hsd_80394434(lbl_804D62D4);
     hsd_804CF810.x50 = saved;
@@ -3734,15 +3780,15 @@ void hsd_80397110(void)
     struct ParticleScreenState* sp = &hsd_804CF810;
     extern u8 lbl_8040BEC4[];
     u8* base = lbl_8040AB00;
+    void* saved;
+    s32 offset;
     void** px50 = &sp->x50;
     s32* px4 = &sp->x4;
     s32* px40 = &sp->x40;
     s32* px8 = &sp->x8;
     char buf[32];
-    void* saved;
-    u32 i;
     s32 row;
-    s32 offset;
+    u32 i;
     u32* spr_entry;
     char* padding;
     PAD_STACK(32);
@@ -3927,7 +3973,7 @@ void hsd_803975D4(void)
         }
     }
     cur_pads = (PADStatus*) ((u8*) sp + 0x54);
-    memcpy((u8*) cur_pads + 0x30, cur_pads, 0x30);
+    memcpy(&sp->_pad4[0x30], cur_pads, 0x30);
     PADRead(cur_pads);
     PADClamp(cur_pads);
     for (port = 0; port < 4; port++) {
@@ -4160,15 +4206,18 @@ void* fn_80397814(void* arg)
     VISetBlack(0);
 
     /* Clear display list */
-    keybuf = (u32*) &sp->xD0;
     {
-        void* cur = sp->xD0;
+        ExcptNode** head = (ExcptNode**) &sp->xD0;
+        ExcptNode* next;
+        ExcptNode* cur;
+        keybuf = (u32*) head;
+        cur = *head;
         while (cur != NULL) {
-            void* next = *(void**) cur;
-            *(void**) cur = NULL;
+            next = cur->next;
+            cur->next = NULL;
             cur = next;
         }
-        *(void**) keybuf = NULL;
+        *head = NULL;
     }
 
     /* Link exception node */
@@ -4187,23 +4236,33 @@ void* fn_80397814(void* arg)
 
     /* Initial display setup */
     {
-        s32* fb_ptr = (s32*) &sp->x40;
-        s32* fb2_ptr = (s32*) &sp->x44;
-        u32 retrace2;
-        u32 next_retrace2;
-        s32* col_ptr = &sp->x34;
-        s32* x14_ptr = &sp->x14;
-        s32* x18_ptr = &sp->x18;
-        s32* x20_ptr = &sp->x20;
-        s32* nrows_ptr = &sp->x1C;
-        s32* fb_array = &sp->x24;
-        s32* x3C_ptr = &sp->x3C;
+        s32* x3C_ptr;
+        s32* x20_ptr;
+        s32* x14_ptr;
+        s32* x18_ptr;
         s32* c8_ptr;
         s32* cc_ptr;
+        s32* fb_ptr;
+        s32* fb2_ptr;
+        u32 retrace2;
+        u32 next_retrace2;
+        s32* col_ptr;
+        s32* nrows_ptr;
+        s32* fb_array;
         s32* size_ptr;
         void* lbl_ptr;
         s32 fb_idx;
         PSNode* node;
+
+        fb_ptr = (s32*) &sp->x40;
+        fb2_ptr = (s32*) &sp->x44;
+        col_ptr = &sp->x34;
+        x18_ptr = &sp->x18;
+        x14_ptr = &sp->x14;
+        x20_ptr = &sp->x20;
+        nrows_ptr = &sp->x1C;
+        fb_array = &sp->x24;
+        x3C_ptr = &sp->x3C;
 
         hsd_80394544(*x18_ptr, *x14_ptr, *x20_ptr, *nrows_ptr, 20,
                      *fb_ptr - 40, fb_array[*col_ptr], *x3C_ptr, *fb_ptr,
@@ -4259,7 +4318,8 @@ void* fn_80397814(void* arg)
                 if (*(void* (**) (void*) )((u8*) disp_node + 0xC) != NULL) {
                     result = (s32) (*(void* (**) (void*) )((u8*) disp_node +
                                                            0xC))(disp_node);
-                    if (result != 0) {
+                    if (result == 0) {
+                    } else {
                         goto walk_done;
                     }
                 }
@@ -7501,12 +7561,17 @@ void hsd_8039D0A0(HSD_Generator* gen)
     HSD_Particle* prt;
     HSD_Particle* next;
     HSD_Particle** head;
+    HSD_JObj** jobj_base;
+    s8* base;
     u16 idnum;
 
     prev = NULL;
+    base = (s8*) hsd_804D08E8;
     idnum = gen->idnum;
-    head = (HSD_Particle**) &hsd_804D0908[gen->linkNo];
-    prt = (HSD_Particle*) *head;
+    head = (HSD_Particle**) (base + gen->linkNo * 4);
+    jobj_base = (HSD_JObj**) base;
+    prt = head[8];
+    head = (HSD_Particle**) ((u32) head + 0x20);
 
     while (prt != NULL) {
         next = prt->next;
@@ -7533,9 +7598,9 @@ void hsd_8039D0A0(HSD_Generator* gen)
 
             if (prt->kind & 0x8000) {
                 s32 jidx = (prt->kind >> 12) & 7;
-                if (hsd_804D08E8[jidx] != NULL) {
-                    HSD_JObjUnref(hsd_804D08E8[jidx]);
-                    hsd_804D08E8[jidx] = NULL;
+                if (jobj_base[jidx] != NULL) {
+                    HSD_JObjUnref(jobj_base[jidx]);
+                    jobj_base[jidx] = NULL;
                 }
             }
 
@@ -7885,7 +7950,6 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
 {
     Mtx rot_mtx;
     Vec3 vel_out;
-    Vec3 vel_temp;
     Vec3 tmpvec;
     Vec3 emit_pos;
     Vec3 vel_copy;
@@ -7908,7 +7972,6 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     f32 elevation;
     f32 tmp;
     f32 angle3;
-    u8 operand_pad[12];
     PAD_STACK(16);
 
     angle3 = 0.0F;
@@ -8078,38 +8141,46 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             *(s32*) &comb &= 0x7FFFFFFF;
             if (comb < 1.1754944e-38F) {
                 if (rot_mtx[0][2] >= 0.0F) {
-                    elevation = 1.5707964F;
+                    angle3 = 1.5707964F;
                 } else {
-                    elevation = -1.5707964F;
+                    angle3 = -1.5707964F;
                 }
             } else {
-                elevation = atan2f(rot_mtx[0][2],
-                                   rot_mtx[2][2] * c1 + rot_mtx[1][2] * s1);
+                angle3 = atan2f(rot_mtx[0][2],
+                                rot_mtx[2][2] * c1 + rot_mtx[1][2] * s1);
             }
-            angle3 = elevation;
         }
     }
 
     /* Angle step computation (pre-loop) */
     if (gen->angle < 0.0F) {
-        u32 shape = gen->type & 0xF;
-        if (shape == 0 || shape == 3 || shape == 4) {
+        switch (gen->type & 0xF) {
+        case 0:
+        case 3:
+        case 4: {
             f32 min_a = gen->aux.disc.minAngle;
             f32 rnd = HSD_Randf();
             f32 range = gen->aux.disc.maxAngle - min_a;
             angle_step = range / (f32) (s32) gen->count;
             cur_angle = angle_step * rnd + min_a;
-        } else if (shape == 6 || shape == 7) {
+            break;
+        }
+        case 6:
+        case 7: {
             f32 min_a = gen->aux.cone.minAngle;
             f32 rnd = HSD_Randf();
             f32 range = gen->aux.cone.maxAngle - min_a;
             angle_step = range / (f32) (s32) gen->count;
             cur_angle = angle_step * rnd + min_a;
-        } else {
+            break;
+        }
+        default: {
             f32 rnd = HSD_Randf();
             cur_angle = (f32) ((f64) 6.2831855F * (f64) rnd);
             angle_step =
                 (f32) ((f64) 6.2831855F / (f64) (f32) (s32) gen->count);
+            break;
+        }
         }
     }
 
@@ -8123,7 +8194,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         case 6:
         case 7: {
             /* Compute radius */
-            if (gen->radius < 0.0) {
+            if (gen->radius < 0.0F) {
                 sin_az = -gen->radius;
                 radius = 0.0F;
             } else {
@@ -8312,6 +8383,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
 
         case 5: /* rect */
         {
+            Vec3 vel_temp;
             f32 rx = HSD_Randf();
             f32 ry = HSD_Randf();
             f32 rz = HSD_Randf();
@@ -8693,18 +8765,20 @@ HSD_Generator* hsd_8039EFAC(s32 linkNo, s32 bank, s32 gfx_id, HSD_JObj* jobj)
 
 // @TODO: Currently 80.79% match - .bss.0 section anchor hoist causes
 // register-allocation cascade (extra saved reg + frame shift)
+static inline s32 ps_get_cmdlist_bound(s32 bank)
+{
+    return psNumCmdList[bank];
+}
+
 HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
 {
-    HSD_PSCmdList** cmdListArr;
-    HSD_PSCmdList* cl;
+    HSD_PSCmdList*** cmdListSlot;
     HSD_PSTexGroup* tg;
     HSD_Generator* gen;
-    s32 ofs;
     f32 vel_mag;
     f32 horiz_mag;
     f32 abs_vx;
     f32 mag;
-    u8 operand_pad[4];
     f32 f0, f1, f3;
     u32 shape;
 
@@ -8714,40 +8788,38 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
     if (linkNo >= 8) {
         return NULL;
     }
-    if (idx >= psNumCmdList[bank]) {
+    if (idx >= ps_get_cmdlist_bound(bank)) {
         return NULL;
     }
 
-    cmdListArr = psCmdListArray[bank];
-    ofs = idx * 4;
-    if ((u32) * ((s32*) cmdListArr + idx) == 0) {
+    cmdListSlot = &psCmdListArray[bank];
+#define CMDLIST_ENTRY ((*cmdListSlot)[idx])
+    if (CMDLIST_ENTRY == NULL) {
         return NULL;
     }
 
     gen = hsd_8039D9C8();
     if (gen != NULL) {
-        cl = ((HSD_PSCmdList**) cmdListArr)[idx];
-
-        gen->type = cl->type;
+        gen->type = CMDLIST_ENTRY->type;
         gen->bank = bank;
         gen->linkNo = linkNo;
-        gen->kind = cl->kind;
-        gen->texGroup = cl->texGroup;
-        gen->life = cl->life;
-        gen->genLife = cl->genLife;
-        gen->pos.x = 0.0F;
-        gen->pos.y = 0.0F;
+        gen->kind = CMDLIST_ENTRY->kind;
+        gen->texGroup = CMDLIST_ENTRY->texGroup;
+        gen->life = CMDLIST_ENTRY->life;
+        gen->genLife = CMDLIST_ENTRY->genLife;
         gen->pos.z = 0.0F;
-        gen->vel.x = cl->vx;
-        gen->vel.y = cl->vy;
-        gen->vel.z = cl->vz;
-        gen->grav = cl->grav;
-        gen->fric = cl->fric;
-        gen->angle = cl->angle;
-        gen->cmdList = cl->cmdList;
-        gen->radius = cl->radius;
-        gen->size = cl->size;
-        gen->random = cl->random;
+        gen->pos.y = 0.0F;
+        gen->pos.x = 0.0F;
+        gen->vel.x = CMDLIST_ENTRY->vx;
+        gen->vel.y = CMDLIST_ENTRY->vy;
+        gen->vel.z = CMDLIST_ENTRY->vz;
+        gen->grav = CMDLIST_ENTRY->grav;
+        gen->fric = CMDLIST_ENTRY->fric;
+        gen->size = CMDLIST_ENTRY->size;
+        gen->cmdList = CMDLIST_ENTRY->cmdList;
+        gen->radius = CMDLIST_ENTRY->radius;
+        gen->angle = CMDLIST_ENTRY->angle;
+        gen->random = CMDLIST_ENTRY->random;
 
         if (gen->kind & 0x100) {
             f1 = gen->random;
@@ -8768,7 +8840,7 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
         }
 
         tg = psTexGroupArray[bank][gen->texGroup];
-        if (tg != NULL && tg->palnum != 0) {
+        if (tg != NULL && tg->palflag != 0) {
             gen->kind |= 0x10;
         }
 
@@ -8780,46 +8852,44 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
         case 0:
         case 3:
         case 4: {
-            HSD_PSCmdList* c = ((HSD_PSCmdList**) cmdListArr)[idx];
+            HSD_PSCmdList* c = CMDLIST_ENTRY;
             f32 p1 = c->param1;
             if (p1 == 0.0F && c->param2 == 0.0F) {
                 gen->aux.disc.minAngle = 0.0F;
                 gen->aux.disc.maxAngle = 6.2831855F;
             } else {
                 gen->aux.disc.minAngle = p1;
-                gen->aux.disc.maxAngle =
-                    ((HSD_PSCmdList**) cmdListArr)[idx]->param2;
+                gen->aux.disc.maxAngle = CMDLIST_ENTRY->param2;
             }
             break;
         }
         case 1:
-            gen->aux.line.x2 = ((HSD_PSCmdList**) cmdListArr)[idx]->param1;
-            gen->aux.line.y2 = ((HSD_PSCmdList**) cmdListArr)[idx]->param2;
-            gen->aux.line.z2 = ((HSD_PSCmdList**) cmdListArr)[idx]->param3;
+            gen->aux.line.x2 = CMDLIST_ENTRY->param1;
+            gen->aux.line.y2 = CMDLIST_ENTRY->param2;
+            gen->aux.line.z2 = CMDLIST_ENTRY->param3;
             break;
         case 6:
         case 7: {
-            HSD_PSCmdList* c = ((HSD_PSCmdList**) cmdListArr)[idx];
+            HSD_PSCmdList* c = CMDLIST_ENTRY;
             f32 p1 = c->param1;
             if (p1 == 0.0F && c->param2 == 0.0F) {
                 gen->aux.cone.minAngle = 0.0F;
                 gen->aux.cone.maxAngle = 6.2831855F;
             } else {
                 gen->aux.cone.minAngle = p1;
-                gen->aux.cone.maxAngle =
-                    ((HSD_PSCmdList**) cmdListArr)[idx]->param2;
+                gen->aux.cone.maxAngle = CMDLIST_ENTRY->param2;
             }
-            gen->aux.cone.height = ((HSD_PSCmdList**) cmdListArr)[idx]->param3;
+            gen->aux.cone.height = CMDLIST_ENTRY->param3;
             break;
         }
         case 5: {
-            f0 = ((HSD_PSCmdList**) cmdListArr)[idx]->param1;
+            f0 = CMDLIST_ENTRY->param1;
             gen->aux.rect.x = f0;
             gen->aux.rect.xx = f0;
-            f0 = ((HSD_PSCmdList**) cmdListArr)[idx]->param2;
+            f0 = CMDLIST_ENTRY->param2;
             gen->aux.rect.y = f0;
             gen->aux.rect.zx = f0;
-            f0 = ((HSD_PSCmdList**) cmdListArr)[idx]->param3;
+            f0 = CMDLIST_ENTRY->param3;
             gen->aux.rect.z = f0;
             gen->aux.rect.zy = f0;
             gen->aux.rect.zz = 0.0F;
@@ -8829,13 +8899,13 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
             gen->aux.rect.xz = 0.0F;
             gen->aux.rect.yx = 0.0F;
             gen->aux.rect.flag = 0;
-            if (((HSD_PSCmdList**) cmdListArr)[idx]->param1 < 0.0F) {
+            if (CMDLIST_ENTRY->param1 < 0.0F) {
                 gen->aux.rect.flag |= 1;
             }
-            if (((HSD_PSCmdList**) cmdListArr)[idx]->param2 < 0.0F) {
+            if (CMDLIST_ENTRY->param2 < 0.0F) {
                 gen->aux.rect.flag |= 2;
             }
-            if (((HSD_PSCmdList**) cmdListArr)[idx]->param3 < 0.0F) {
+            if (CMDLIST_ENTRY->param3 < 0.0F) {
                 gen->aux.rect.flag |= 4;
             }
             break;
@@ -8889,15 +8959,13 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
             } else {
                 gen->aux.sphere.lonMid = atan2f(gen->vel.z, gen->vel.x);
             }
-            gen->aux.sphere.latRange =
-                ((HSD_PSCmdList**) cmdListArr)[idx]->param1;
+            gen->aux.sphere.latRange = CMDLIST_ENTRY->param1;
             f1 = gen->aux.sphere.latRange;
             if (f1 < 0.0F) {
                 gen->aux.sphere.latRange = -f1;
                 gen->aux.sphere.speed = -gen->aux.sphere.speed;
             }
-            gen->aux.sphere.lonRange =
-                ((HSD_PSCmdList**) cmdListArr)[idx]->param2;
+            gen->aux.sphere.lonRange = CMDLIST_ENTRY->param2;
             break;
         }
         default:
@@ -8920,6 +8988,7 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
             ((void (*)(HSD_Generator*)) hsd_804D7900)(gen);
         }
     }
+#undef CMDLIST_ENTRY
     return gen;
 }
 

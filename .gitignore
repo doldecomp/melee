@@ -5,6 +5,7 @@ ctx_includes.h
 *.s.c
 objdiff.json
 compile_commands.json
+.pi-sessions/
 
 # decompctx output
 ctx.*

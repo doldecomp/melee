@@ -119,9 +119,8 @@ void lbRefract_80021CE8(void* arg0, s32 arg1)
     f32 dist;
     f32 param0;
     f32* params;
-    volatile f32 sp18;
 
-    PAD_STACK(20);
+    PAD_STACK(16);
 
     param_idx = arg1 * 2;
     x_step = 2.0f / (f32) (u32) (cb->width - 1);
@@ -133,13 +132,16 @@ void lbRefract_80021CE8(void* arg0, s32 arg1)
         x = -1.0f;
         for (row = 0; row < (u32) cb->width; row++) {
             if ((dist_sq = x * x + y_sq) > 0.0f) {
+                f32 sqrt_dist;
+                f32* sqrt_dist_ptr = &sqrt_dist;
                 f64 est = __frsqrte((f64) dist_sq);
                 est = 0.5 * est * -(((f64) dist_sq * (est * est)) - 3.0);
                 est = 0.5 * est * -(((f64) dist_sq * (est * est)) - 3.0);
-                sp18 = (f32) ((f64) dist_sq *
-                              (0.5 * est *
-                               -(((f64) dist_sq * (est * est)) - 3.0)));
-                dist_sq = sp18;
+                *sqrt_dist_ptr =
+                    (f32) ((f64) dist_sq *
+                           (0.5 * est *
+                            -(((f64) dist_sq * (est * est)) - 3.0)));
+                dist_sq = *sqrt_dist_ptr;
             }
             dist = dist_sq;
             if (dist_sq > 1.0f) {
@@ -170,8 +172,8 @@ void lbRefract_80021CE8(void* arg0, s32 arg1)
             }
             ((void (*)(lbRefract_CallbackData*, s32, s32, s32, s32, u32,
                        u32)) cb->callback0)(
-                cb, row, col, 0, 0, (u32) (127.0f * (y * param0) + 128.0f),
-                (u32) (127.0f * (x * param0) + 128.0f));
+                cb, row, col, 0, 0, (u32) (127.0f * (x * param0) + 128.0f),
+                (u32) (127.0f * (y * param0) + 128.0f));
             x += x_step;
         }
         y += y_step;
@@ -596,6 +598,9 @@ s32 lbRefract_PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc)
             s32 hi;
             s32 count;
             s32 copied;
+            s32 n;
+            u32 iters;
+            s32 remaining;
             if ((display[offset++] & 0xF8) == 0) {
                 break;
             }
@@ -603,15 +608,14 @@ s32 lbRefract_PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc)
             ptr = display + offset;
             hi = ptr[0];
             copied = 0;
-            count = ptr[1];
+            count = (hi << 8) | ptr[1];
             offset += 2;
-            count = (count & ~0xFF00) | (hi << 8);
 
             if (count > 0) {
-                s32 n = count - 8;
+                n = count - 8;
 
                 if (count > 8) {
-                    u32 iters = (u32) (n + 7) >> 3U;
+                    iters = (u32) (n + 7) >> 3U;
 
                     if (n > 0) {
                         do {
@@ -636,20 +640,12 @@ s32 lbRefract_PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc)
                     }
                 }
 
-                {
-                    u8* sp = src + offset;
-                    u8* dp = dst + offset;
-
-                    if (copied < count) {
-                        s32 remaining = count - copied;
-
-                        do {
-                            *dp = *sp;
-                            sp += stride;
-                            offset += stride;
-                            dp += stride;
-                        } while (--remaining != 0);
-                    }
+                remaining = count - copied;
+                if (copied < count) {
+                    do {
+                        dst[offset] = src[offset];
+                        offset += stride;
+                    } while (--remaining != 0);
                 }
             }
         }
