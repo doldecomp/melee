@@ -864,7 +864,7 @@ void gm_PrepCameraModeVSScene(GameScene* arg0)
     start->rules.x4C = gmCamera_801A30E4;
 
     start->rules.xD = 1;
-    start->rules.is_paused = false;
+    start->rules.disable_pausing = false;
 
     for (i = 0; i < 6; i++) {
         start->players[i] = vs->data.players[i];

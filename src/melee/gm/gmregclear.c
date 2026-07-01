@@ -269,7 +269,7 @@ void fn_8017C1A4(HSD_GObj* unused)
     case 0:
         if (tmp->x8 == 0) {
             temp_r3_2 = gm_8016AE38();
-            temp_r3_2->x24C8.is_paused = false;
+            temp_r3_2->x24C8.disable_pausing = false;
             temp_r3_2->hud_enabled = 0;
             lbAudioAx_800237A8(0x81650, 0x7F, 0x40);
             ftLib_80086824();
@@ -1007,7 +1007,7 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
         arg0->rules.x1_3 = 1;
         arg0->rules.x1_4 = 1;
         arg0->rules.x0_3 = 3;
-        arg0->rules.is_paused = 1;
+        arg0->rules.disable_pausing = 1;
         arg0->rules.x7 = 0;
         arg0->rules.x44 = (void (*)(void)) fn_8017C71C;
         arg1->x0.xC.xC = 6;

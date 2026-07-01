@@ -128,7 +128,7 @@ struct StartMeleeRules {
     u32 x2_1 : 1;
     u32 x2_2 : 1;
     u32 x2_3 : 1; ///< single-button mode enabled
-    u32 is_paused : 1;
+    u32 disable_pausing : 1;
     u32 x2_5 : 1;
     u32 x2_6 : 1;
     u32 x2_7 : 1;

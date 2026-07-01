@@ -3843,9 +3843,9 @@ void gm_80167BC8(VsModeData* vs_data)
     }
 
     if (rules->pause != 0) {
-        vs_data->data.rules.is_paused = 0;
+        vs_data->data.rules.disable_pausing = 0;
     } else {
-        vs_data->data.rules.is_paused = 1;
+        vs_data->data.rules.disable_pausing = 1;
     }
     if ((rules->score_display != 0) && (rules->mode == 0)) {
         vs_data->data.rules.x3_0 = 1;

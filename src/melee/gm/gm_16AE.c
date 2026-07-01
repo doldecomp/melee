@@ -1087,7 +1087,7 @@ void gm_DoPauseChecksAndRoutine(lbl_8046B6A0_t* arg0, int arg1)
     s8 pauserSlot;
     u8 var_r4;
 
-    if (arg0->unpause_timer == 0 && arg0->hud_enabled != 0 && !arg0->x24C8.is_paused) {
+    if (arg0->unpause_timer == 0 && arg0->hud_enabled != 0 && !arg0->x24C8.disable_pausing) {
         if (arg0->x24C8.x40_check_for_pauser_override != NULL) {
             pauser = arg0->x24C8.x40_check_for_pauser_override();
         } else {
@@ -1167,7 +1167,7 @@ void gm_DoUnpauseChecksAndRoutine(lbl_8046B6A0_t* arg0, int arg1)
     if (arg0->hud_enabled == 0) {
         return;
     }
-    if (arg0->x24C8.is_paused) {
+    if (arg0->x24C8.disable_pausing) {
         return;
     }
 
