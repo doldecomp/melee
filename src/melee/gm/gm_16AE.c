@@ -665,7 +665,7 @@ int gm_DefaultCheckForPauser(void)
     return -1;
 }
 
-int gm_VSModeGetPauser(void)
+int gm_CameraModeVSGetPauser(void)
 {
     HSD_PadStatus* temp_r3;
     bool var_r0;
