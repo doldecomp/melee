@@ -886,7 +886,7 @@ MatchOutcome gm_GetMatchOutcome(void)
         }
     }
     if (Ground_801C1D84() != 0) {
-        return OUTCOME_1P_BONUS_STAGE_END;
+        return OUTCOME_UNK_1P_BONUS_STAGE_END;
     }
     return OUTCOME_NONE;
 }

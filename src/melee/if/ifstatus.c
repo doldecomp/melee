@@ -1236,7 +1236,7 @@ void ifStatus_802F7034(UNK_T arg0)
         return;
     }
     if (big_thing->x24C8.x5_1) {
-        if (mr == OUTCOME_1P_BONUS_STAGE_END) {
+        if (mr == OUTCOME_UNK_1P_BONUS_STAGE_END) {
             ifStatus_802F6EA4(7, a, b, c, arg0, NULL);
             return;
         }

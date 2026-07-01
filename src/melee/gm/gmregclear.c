@@ -2604,7 +2604,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     case 3:
         temp = gm_8016AE38();
         state->x118 = 1;
-        if ((u8) temp->match_result == OUTCOME_1P_BONUS_STAGE_END) {
+        if ((u8) temp->match_result == OUTCOME_UNK_1P_BONUS_STAGE_END) {
             grPushOn_80219204(Ground_801C1DD4(), (int*) &sp5C, (int*) &sp58);
             var_r27 = sp5C;
             var_r28 = (u16) sp58;
