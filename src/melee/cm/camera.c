@@ -3874,7 +3874,7 @@ void Camera_SetUpPauseCamera(s8 pauserSlot, s8 pauserId, s32 arg2)
     if ((pauserSlot < 0 || pauserSlot >= 6) && (u8) (pauserSlot - 10) > 1) {
         pauserSlot = 0;
     }
-    if ((pauserId < 0 || pauserId>= 4) && (u8) (pauserId - 4) > 1) {
+    if ((pauserId < 0 || pauserId >= 4) && (u8) (pauserId - 4) > 1) {
         pauserId = 4;
     }
 
@@ -3893,7 +3893,8 @@ void Camera_SetUpPauseCamera(s8 pauserSlot, s8 pauserId, s32 arg2)
     cm_80452C68.x2D0.angle_left = Stage_GetCamAngleRadiansLeft();
     cm_80452C68.x2D0.unk28 = Stage_GetPauseCamZPosMin();
     cm_80452C68.x2D0.unk2C = Stage_GetPauseCamZPosMax();
-    cm_80452C68.x2D0.callback = (void (*)(Camera_x2D0*))(Event) Camera_SetBounds;
+    cm_80452C68.x2D0.callback =
+        (void (*)(Camera_x2D0*))(Event) Camera_SetBounds;
 
     switch (arg2) {
     case 0:
