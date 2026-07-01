@@ -569,7 +569,8 @@ void grPura_80213224(HSD_DObj* dobj)
 
 void grPura_80213250(HSD_JObj* jobj)
 {
-    HSD_JObj* child = jobj->child;
+    HSD_JObj* _perm_alias16145 = jobj->child;
+    HSD_JObj* child = _perm_alias16145;
     HSD_DObj* sibling_iter;
     HSD_DObj* iter;
     HSD_DObj* next;

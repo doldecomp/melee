@@ -1025,16 +1025,19 @@ void fn_80192690(HSD_GObj* gobj)
 void fn_80192758(HSD_GObj* gobj)
 {
     TmData* tmdata;
-    HSD_JObj* jobj;
+    u8 val;
     u8* data;
     u8* data3;
     u8* data2;
     HSD_JObj* child;
-    u8 val;
+    HSD_JObj* jobj;
 
     data = (u8*) &lbl_804799B8;
     tmdata = gm_8018F634();
-    jobj = gobj->hsd_obj;
+    {
+        HSD_JObj* tmp_p26447 = gobj->hsd_obj;
+        jobj = tmp_p26447;
+    }
 
     if (tmdata->cur_option <= 9) {
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
