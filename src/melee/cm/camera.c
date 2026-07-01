@@ -4027,7 +4027,7 @@ void Camera_8002F7AC(s8 slot)
     cm_80452C68.yaw_offset = ((cm_804D7ED8 * randf) - cm_804D7EE0);
 }
 
-void Camera_8002F8F4(void)
+void Camera_SetModeToFixed(void)
 {
     cm_80452C68.mode = CAMERA_FIXED;
 }
