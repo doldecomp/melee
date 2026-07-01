@@ -23,6 +23,19 @@
 #include <math.h>
 #include <sysdolphin/baselib/random.h>
 
+static void sdata2_order(void)
+{
+    (void) 0.0199999996f;
+    (void) 0.0f;
+    (void) 0.0174532924f;
+    (void) 1.5707963267948966;
+    (void) 1.0f;
+    (void) 5.0f;
+    (void) 0.5f;
+    (void) 3.1415926535897931;
+    (void) -3.1415926535897931;
+}
+
 ItemStateTable it_803F6A28[5] = {
     { -1, itLinkarrow_UnkMotion0_Anim, itLinkarrow_UnkMotion0_Phys,
       itLinkarrow_UnkMotion0_Coll },
@@ -95,13 +108,6 @@ f32 it_803F6A84[] = {
     2.0f, 4.0f, 6.0f, 8.0f, 10.0f, 12.0f, 14.0f, 16.0f,
     2.0f, 3.0f, 4.0f, 5.0f, 6.0f,  7.0f,  8.0f,  9.0f,
 };
-
-static f32 sdata2_ordering(void)
-{
-    volatile f32 zero = 0.0f;
-
-    return zero;
-}
 
 s32 itLinkArrow_802A81C4(Item_GObj* gobj)
 {

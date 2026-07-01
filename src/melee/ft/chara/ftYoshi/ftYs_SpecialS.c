@@ -519,6 +519,7 @@ ftYs_SpecialS_UpdateLoop1Rotation(Fighter* fp, ftYoshiAttributes* attributes,
         f32 abs_x10 = ABS(x10);
         f32 abs_x10_2 = ABS(x10);
         f32 total = 0.7F * abs_x10 + abs_x10_2;
+        (void) total;
 
         if (x10 > 0.0F) {
             f32 vel = perm_vel_inline(fp);
@@ -576,7 +577,7 @@ ftYs_SpecialS_UpdateLoop1Rotation(Fighter* fp, ftYoshiAttributes* attributes,
 void ftYs_SpecialAirSLoop_1_Anim(Fighter_GObj* gobj)
 {
     f32 angle;
-    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = gobj->user_data;
     ftYoshiAttributes* attributes = fp->dat_attrs;
     Vec3 scale;
     f32 dir;
@@ -600,7 +601,7 @@ void ftYs_SpecialAirSLoop_1_Anim(Fighter_GObj* gobj)
 
     if (fp->mv.ys.specials.x28 % attributes->xA4 == 0) {
         Vec3* floor_normal = &fp->coll_data.floor.normal;
-        dir = (perm_vel_inline(fp) < 0.0F) ? -1.0F : 1.0F;
+        dir = (fp->gr_vel < 0.0F) ? -1.0F : 1.0F;
         angle = atan2f(-floor_normal->x, floor_normal->y);
         efSync_Spawn(0x3FF, gobj, &fp->cur_pos, &dir, &angle);
     }
