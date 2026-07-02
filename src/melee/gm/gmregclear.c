@@ -270,7 +270,7 @@ void fn_8017C1A4(HSD_GObj* unused)
     case 0:
         if (tmp->x8 == 0) {
             temp_r3_2 = gm_8016AE38();
-            temp_r3_2->x24C8.x2_4 = false;
+            temp_r3_2->x24C8.disable_pausing = false;
             temp_r3_2->hud_enabled = 0;
             lbAudioAx_800237A8(0x81650, 0x7F, 0x40);
             ftLib_80086824();
@@ -742,7 +742,7 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
         arg1->x0.xC.xC = 5;
         switch ((s32) arg1->x0.x9) {
         case 1:
-            arg0->rules.x3C = gm_80165290;
+            arg0->rules.on_pause_override = gm_80165290;
             arg0->rules.x9 = 1;
             arg0->rules.x3_1 = 0;
             arg0->players[0].xC_b1 = 0;
@@ -1008,7 +1008,7 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
         arg0->rules.x1_3 = 1;
         arg0->rules.x1_4 = 1;
         arg0->rules.x0_3 = 3;
-        arg0->rules.x2_4 = 1;
+        arg0->rules.disable_pausing = 1;
         arg0->rules.x7 = 0;
         arg0->rules.x44 = (void (*)(void)) fn_8017C71C;
         arg1->x0.xC.xC = 6;
@@ -3962,7 +3962,7 @@ void fn_80182F40(HSD_GObj* unused)
         break;
     case 2:
         if (gm_801A4BA8() == 0x370 || Player_800368F8(gm_801BF6F8()) == 0) {
-            Camera_8002F474();
+            Camera_SetModeToStandard();
             for (i = 0; i < 4; i++) {
                 Player_SetPlayerAndEntityCpuLevel(i, 9);
                 Player_SetMoreFlagsBit4(i, 0);

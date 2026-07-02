@@ -54,7 +54,7 @@ struct GameScene {
 /// @note Colloquially known as "Major Scene"
 struct GameMode {
     u8 preload;
-    u8 idx;
+    u8 idx; ///< GameModeKind
 
     void (*Load)(void);
     void (*Unload)(void);
@@ -485,9 +485,16 @@ struct lbl_8046B6A0_t {
                            ///< scores are shown calculating 3 When match is
                            ///< finished. Stays 0 when LRA+Start ends a match
     /* 0x0001 */ s8 pauser;
-    /* 0x0002 */ u8 pause_timer;
+    /* 0x0002 */ u8
+        pause_timer; ///< Frames remaining before unpause input is accepted
+                     ///< after pausing. Set to @c 0xA on pause and decremented
+                     ///< each frame while paused.
     /* 0x0003 */ u8 unk_3;
-    /* 0x0004 */ u8 unk_4;
+    /* 0x0004 */ u8
+        unpause_timer; ///< Frames remaining before pause input is accepted
+                       ///< after unpausing. Set to @c 0xA on unpause and
+                       ///< decremented each frame while unpaused. Mirrors
+                       ///< #lbl_8046B6A0_t::pause_timer semantics.
     /* 0x0005 */ u8 hud_enabled;
     /* 0x0006 */ u8 terminate_match;
     /* 0x0007 */ u8 is_singleplayer;

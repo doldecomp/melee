@@ -68,10 +68,10 @@
 /* 16B88C */ void fn_8016B88C(int);
 /* 16B8D4 */ void gm_8016B8D4(s32, u8 slot_type);
 /* 16B918 */ void fn_8016B918(void);
-/* 16BAF4 */ bool fn_8016BAF4(void);
-/* 16BBB4 */ bool fn_8016BBB4(void);
-/* 16BC74 */ int fn_8016BC74(void);
-/* 16BE80 */ int gm_8016BE80(void);
+/* 16BAF4 */ bool gm_AnyControllerPressedStart(void);
+/* 16BBB4 */ bool gm_AnyControllerPressedZ(void);
+/* 16BC74 */ int gm_DefaultVSGetPauser(void);
+/* 16BE80 */ int gm_CameraModeVSGetPauser(void);
 /* 16BF74 */ MatchOutcome gm_GetFFAOutcome(void);
 /* 16C0C8 */ MatchOutcome gm_GetTeamBattleOutcome(void);
 /* 16C35C */ MatchOutcome gm_GetMatchOutcome(void);
@@ -86,8 +86,8 @@
 /* 16C75C */ /* static */ int gm_8016C75C(HSD_GObj*);
 /* 16C7D0 */ void fn_8016C7D0(HSD_GObj*);
 /* 16C7F0 */ void fn_8016C7F0(void);
-/* 16CA68 */ void fn_8016CA68(lbl_8046B6A0_t*, int);
-/* 16CBE8 */ void fn_8016CBE8(lbl_8046B6A0_t*, int);
+/* 16CA68 */ void gm_DoPauseChecksAndRoutine(lbl_8046B6A0_t*, int);
+/* 16CBE8 */ void gm_DoUnpauseChecksAndRoutine(lbl_8046B6A0_t*, int);
 /* 16CD98 */ void fn_8016CD98(lbl_8046B6A0_t*);
 /* 16CF4C */ void fn_8016CF4C(int, MatchOutcome);
 /* 16CFE0 */ void fn_8016CFE0(void);
