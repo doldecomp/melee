@@ -403,26 +403,26 @@ typedef struct itHeiho_ItemVars {
 } itHeiho_ItemVars;
 
 typedef struct itFlipper_ItemVars {
-    s32 xDD4;
-    s32 xDD8;
-    s32 xDDC;
-    f32 xDE0;
-    f32 xDE4;
-    s32 xDE8;
-    HSD_JObj* xDEC;
+    s32 xDD4_flightTimer; // frames until settling (when thrown)
+    bool xDD8_isSettled;
+    s32 xDDC_hitboxTimer;
+    f32 xDE0_spinAngle;
+    f32 xDE4_spinVel;
+    bool xDE8_isStageFixed;
+    HSD_JObj* xDEC_stageAnchor;
 } itFlipper_ItemVars;
 
 typedef struct itFlipper_DatAttrs {
-    /* +0  */ s32 x0;
-    /* +4  */ s32 x4;
-    /* +8  */ s32 x8;
-    /* +C  */ f32 xC;
-    /* +10 */ f32 x10;
-    /* +14 */ s32 x14;
-    /* +18 */ f32 x18;
-    /* +1C */ f32 x1C;
-    /* +20 */ f32 x20;
-    /* +24 */ f32 x24;
+    /* +0  */ s32 x0_throwDuration; // # airborne frames when thrown
+    /* +4  */ s32 x4_smashThrowDuration;
+    /* +8  */ s32 x8_lifetime;
+    /* +C  */ f32 xC_wallBounce;
+    /* +10 */ f32 x10_floorBounce;
+    /* +14 */ s32 x14_hitboxInterval;
+    /* +18 */ f32 x18_spinMultiplier;
+    /* +1C */ f32 x1C_baseSpinOnHit;
+    /* +20 */ f32 x20_spinDecay;
+    /* +24 */ f32 x24_maxSpinVel;
 } itFlipper_DatAttrs;
 
 typedef struct itHarisen_DatAttrs {

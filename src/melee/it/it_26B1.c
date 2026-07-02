@@ -925,7 +925,7 @@ HSD_GObj* it_8026BE84(BobOmbRain* bobOmbRain)
         break;
 
     case 20:
-        gobj = it_80290938(bobOmbRain->x4);
+        gobj = itFlipper_Spawn(bobOmbRain->x4);
         break;
 
     case 8:
