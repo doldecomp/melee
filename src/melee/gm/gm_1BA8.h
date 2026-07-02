@@ -111,8 +111,9 @@
 /**
  * Scene table for #GM_CAMERA_MODE.
  *
- * The only game-mode scenes that install a @c x40_check_for_pauser_override
- * callback (#gm_CameraModeVSGetPauser).
+ * The only game-mode scenes that install a
+ * #StartMeleeRules::check_for_pauser_override callback
+ * (#gm_CameraModeVSGetPauser).
  */
 /* 3DDBE0 */ extern GameScene gm_CameraModeScenes[5];
 /* 3DF94C */ extern gm_803DF94C_t* gm_803DF94C[];

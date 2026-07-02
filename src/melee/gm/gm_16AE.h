@@ -92,7 +92,7 @@
  * Runs when the match is not paused. Skipped while @c unpause_timer is
  * non-zero, the HUD is disabled, or @c disable_pausing is set. On a successful
  * pause, sets @c pause_timer to @c 0xA and optionally invokes
- * @c x3C_on_pause_override or #gm_EnablePlayerPauseCamera.
+ * #StartMeleeRules::on_pause_override or #gm_EnablePlayerPauseCamera.
  *
  * @param[in] arg0 Match state (#lbl_8046B6A0_t).
  * @param[in] arg1 Pause context id passed to #gm_801A4634.
@@ -104,7 +104,7 @@
  * Runs when the match is paused. Skipped while @c pause_timer is non-zero, the
  * HUD is disabled, or @c disable_pausing is set. Only the original pauser may
  * unpause. On success, sets @c unpause_timer to @c 0xA and optionally invokes
- * @c x38_on_unpause_override or #Ground_EnableMatchCamera.
+ * #StartMeleeRules::on_unpause_override or #Ground_EnableMatchCamera.
  *
  * @param[in] arg0 Match state (#lbl_8046B6A0_t).
  * @param[in] arg1 Unpause context id passed to #gm_801A4674.

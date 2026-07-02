@@ -655,7 +655,7 @@ void gm_801B1F70(GameScene* arg0)
     gm_80167A64(&data->rules);
 
     data->rules = vs->data.rules;
-    data->rules.x3C_on_pause_override = fn_801B1F6C;
+    data->rules.on_pause_override = fn_801B1F6C;
 
     data->rules.x3_6 = true;
     data->rules.x2_5 = false;
@@ -856,9 +856,9 @@ void gm_PrepCameraModeVSScene(GameScene* arg0)
     start->rules.x3_1 = false;
     start->rules.x4_0 = false;
 
-    start->rules.x38_on_unpause_override = gm_80165268;
-    start->rules.x3C_on_pause_override = gm_80165268;
-    start->rules.x40_check_for_pauser_override = gm_CameraModeVSGetPauser;
+    start->rules.on_unpause_override = gm_80165268;
+    start->rules.on_pause_override = gm_80165268;
+    start->rules.check_for_pauser_override = gm_CameraModeVSGetPauser;
     start->rules.x44 = gmCamera_801A31FC;
     start->rules.x48 = gmCamera_801A3098;
     start->rules.x4C = gmCamera_801A30E4;

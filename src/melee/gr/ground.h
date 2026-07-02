@@ -148,10 +148,10 @@
 /**
  * @brief Restores the in-match camera mode after unpause.
  *
- * Selects standard or fixed camera according to the stage's @c x4C_fixed_cam
- * parameter. Both underlying calls only set the camera mode, without
- * additional setup. Used when a paused match resumes and no @c
- * x38_on_unpause_override is installed.
+ * Selects standard or fixed camera according to the stage's
+ * #UnkStage6B0::x4C_fixed_cam parameter. Both underlying calls only set the
+ * camera mode, without additional setup. Used when a paused match resumes and
+ * no #StartMeleeRules::on_unpause_override is installed.
  */
 /* 1C5800 */ void Ground_EnableMatchCamera(void);
 /* 1C5840 */ s32 Ground_801C5840(void);

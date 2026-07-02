@@ -1097,8 +1097,8 @@ void gm_DoPauseChecksAndRoutine(lbl_8046B6A0_t* arg0, int arg1)
     if (arg0->unpause_timer == 0 && arg0->hud_enabled != 0 &&
         !arg0->x24C8.disable_pausing)
     {
-        if (arg0->x24C8.x40_check_for_pauser_override != NULL) {
-            pauser = arg0->x24C8.x40_check_for_pauser_override();
+        if (arg0->x24C8.check_for_pauser_override != NULL) {
+            pauser = arg0->x24C8.check_for_pauser_override();
         } else {
             pauser = gm_DefaultVSGetPauser();
         }
@@ -1125,8 +1125,8 @@ void gm_DoPauseChecksAndRoutine(lbl_8046B6A0_t* arg0, int arg1)
             gm_801A4634((long long) arg1);
             if (arg0->x24C8.x4_0) {
                 pauserSlot = gm_GetSlotByPlayerId(pauser);
-                if (arg0->x24C8.x3C_on_pause_override != NULL) {
-                    arg0->x24C8.x3C_on_pause_override(pauserSlot);
+                if (arg0->x24C8.on_pause_override != NULL) {
+                    arg0->x24C8.on_pause_override(pauserSlot);
                 } else {
                     gm_EnablePlayerPauseCamera(pauserSlot, pauser);
                 }
@@ -1195,8 +1195,8 @@ void gm_DoUnpauseChecksAndRoutine(lbl_8046B6A0_t* arg0, int arg1)
         gm_801A10FC(i);
         HSD_PadRumbleUnpauseAll();
         if (arg0->x24C8.x4_0) {
-            if (arg0->x24C8.x38_on_unpause_override != NULL) {
-                arg0->x24C8.x38_on_unpause_override(i);
+            if (arg0->x24C8.on_unpause_override != NULL) {
+                arg0->x24C8.on_unpause_override(i);
             } else {
                 Ground_EnableMatchCamera();
             }
@@ -1978,8 +1978,8 @@ void fn_8016E730(StartMeleeData* arg0)
     Camera_8002F3AC();
     fn_801A1134();
     un_80321900();
-    if (lbl_8046B6A0.x24C8.x38_on_unpause_override != NULL) {
-        lbl_8046B6A0.x24C8.x38_on_unpause_override(0);
+    if (lbl_8046B6A0.x24C8.on_unpause_override != NULL) {
+        lbl_8046B6A0.x24C8.on_unpause_override(0);
         Camera_8002F3AC();
     }
     ifAll_802F390C();

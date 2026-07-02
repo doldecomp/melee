@@ -742,7 +742,7 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
         arg1->x0.xC.xC = 5;
         switch ((s32) arg1->x0.x9) {
         case 1:
-            arg0->rules.x3C_on_pause_override = gm_80165290;
+            arg0->rules.on_pause_override = gm_80165290;
             arg0->rules.x9 = 1;
             arg0->rules.x3_1 = 0;
             arg0->players[0].xC_b1 = 0;

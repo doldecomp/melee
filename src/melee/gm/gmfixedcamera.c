@@ -165,7 +165,7 @@ void gm_801B9F8C(GameScene* scene)
 
 void fn_801B9FB8(StartMeleeData* arg0, StartMeleeData* arg1)
 {
-    arg0->rules.x38_on_unpause_override = gm_80165290;
+    arg0->rules.on_unpause_override = gm_80165290;
 }
 
 void gm_801B9FC8(GameScene* scene)
