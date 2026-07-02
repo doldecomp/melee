@@ -363,7 +363,7 @@ void gm_801BAD70(GameScene* arg0)
     md->rules.x1_7 = (*lvlpp)->x8->x1_1;
     md->rules.x2_2 = 0;
     md->rules.x2_3 = 0;
-    md->rules.x2_4 = 0;
+    md->rules.disable_pausing = 0;
     md->rules.x2_5 = (*lvlpp)->x8->x1_2;
     md->rules.x3_1 = 1;
     md->rules.x3_2 = 1;
@@ -3488,7 +3488,7 @@ void gm_801BF4DC(GameScene* arg0)
     temp_r31->rules.x1_0 = false;
     temp_r31->rules.x1_2 = true;
     temp_r31->rules.x1_3 = true;
-    temp_r31->rules.x2_4 = true;
+    temp_r31->rules.disable_pausing = true;
     temp_r31->rules.x7 = 0;
     temp_r31->rules.x44 = gm_80183218;
     temp_r31->rules.x34 = 1.0F;

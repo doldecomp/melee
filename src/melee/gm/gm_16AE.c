@@ -558,7 +558,9 @@ void fn_8016B918(void)
         temp_r3_2 = Player_GetPlayerId(i);
         if (DbLevel >= 3) {
             temp_r3_3 = &HSD_PadCopyStatus[(u8) temp_r3_2];
-            if ((temp_r3_3->trigger & 8) && (temp_r3_3->button & HSD_PAD_X)) {
+            if ((temp_r3_3->trigger & HSD_PAD_DPADUP) &&
+                (temp_r3_3->button & HSD_PAD_X))
+            {
                 var_r0_2 = true;
             } else {
                 var_r0_2 = false;
@@ -579,83 +581,86 @@ void fn_8016B918(void)
     }
 }
 
-bool fn_8016BAF4(void)
+bool gm_AnyControllerPressedStart(void)
 {
     int i;
     for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
         HSD_PadStatus* pad = &HSD_PadMasterStatus[(u8) i];
-        if (pad->err == 0 && (pad->trigger & 0x1000)) {
+        if (pad->err == 0 && (pad->trigger & HSD_PAD_START)) {
             return true;
         }
     }
     return false;
 }
 
-bool fn_8016BBB4(void)
+bool gm_AnyControllerPressedZ(void)
 {
     int i;
     for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
         HSD_PadStatus* pad = &HSD_PadMasterStatus[(u8) i];
-        if (pad->err == 0 && (pad->trigger & 0x10)) {
+        if (pad->err == 0 && (pad->trigger & HSD_PAD_Z)) {
             return true;
         }
     }
     return false;
 }
 
-int fn_8016BC74(void)
+int gm_DefaultVSGetPauser(void)
 {
-    HSD_PadStatus* temp_r3_3;
-    HSD_PadStatus* temp_r4;
-    bool var_r0_2;
-    bool var_r0_3;
-    int var_r30;
-    int var_r29;
-    int temp_r3;
+    HSD_PadStatus* mpPadStatus;
+    HSD_PadStatus* spPadStatus;
+    bool spPausePressed;
+    bool mpPausePressed;
+    int mpPlayerId;
+    int mpPlayerSlot;
+    int spPlayerId;
     PAD_STACK(0x18);
 
     if (gm_8016B41C() || gm_801A4310() == GM_CHALLENGER_APPROACH ||
         (gm_801A4310() == GM_VS && gm_801A42C4() == 0x81))
     {
-        temp_r3 = Player_GetPlayerId(0);
-        temp_r4 = &HSD_PadCopyStatus[(u8) temp_r3];
-        if (temp_r4->err == 0) {
+        spPlayerId = Player_GetPlayerId(0);
+        spPadStatus = &HSD_PadCopyStatus[(u8) spPlayerId];
+        if (spPadStatus->err == 0) {
             if (DbLevel >= 3) {
-                if ((temp_r4->trigger & 8) && (temp_r4->button & HSD_PAD_X)) {
-                    var_r0_2 = 1;
+                if ((spPadStatus->trigger & HSD_PAD_DPADUP) &&
+                    (spPadStatus->button & HSD_PAD_X))
+                {
+                    spPausePressed = 1;
                 } else {
-                    var_r0_2 = 0;
+                    spPausePressed = 0;
                 }
             } else {
-                var_r0_2 = temp_r4->trigger & 0x1000;
+                spPausePressed = spPadStatus->trigger & HSD_PAD_START;
             }
-            if (var_r0_2 != 0) {
-                return temp_r3;
+            if (spPausePressed != 0) {
+                return spPlayerId;
             }
         }
     } else {
-        for (var_r30 = 0; var_r30 < PAD_MAX_CONTROLLERS; var_r30++) {
-            temp_r3_3 = &HSD_PadCopyStatus[(u8) var_r30];
-            if (temp_r3_3->err == 0) {
+        for (mpPlayerId = 0; mpPlayerId < PAD_MAX_CONTROLLERS; mpPlayerId++) {
+            mpPadStatus = &HSD_PadCopyStatus[(u8) mpPlayerId];
+            if (mpPadStatus->err == 0) {
                 if (DbLevel >= 3) {
-                    if ((temp_r3_3->trigger & 8) &&
-                        (temp_r3_3->button & HSD_PAD_X))
+                    if ((mpPadStatus->trigger & HSD_PAD_DPADUP) &&
+                        (mpPadStatus->button & HSD_PAD_X))
                     {
-                        var_r0_3 = 1;
+                        mpPausePressed = 1;
                     } else {
-                        var_r0_3 = 0;
+                        mpPausePressed = 0;
                     }
                 } else {
-                    var_r0_3 = temp_r3_3->trigger & 0x1000;
+                    mpPausePressed = mpPadStatus->trigger & HSD_PAD_START;
                 }
-                if (var_r0_3) {
-                    for (var_r29 = 0; var_r29 < 6; var_r29++) {
-                        if (Player_GetPlayerSlotType(var_r29) != Gm_PKind_NA &&
-                            Player_GetEntity(var_r29) != NULL &&
-                            Player_8003219C(var_r29) == 0 &&
-                            var_r30 == Player_GetPlayerId(var_r29))
+                if (mpPausePressed) {
+                    for (mpPlayerSlot = 0; mpPlayerSlot < 6; mpPlayerSlot++) {
+                        if (Player_GetPlayerSlotType(mpPlayerSlot) !=
+                                Gm_PKind_NA &&
+                            Player_GetEntity(mpPlayerSlot) != NULL &&
+                            Player_8003219C(mpPlayerSlot) == 0 &&
+                            mpPlayerId == Player_GetPlayerId(mpPlayerSlot))
                         {
-                            return var_r30;
+                            return mpPlayerId;
                         }
                     }
                 }
@@ -665,7 +670,7 @@ int fn_8016BC74(void)
     return -1;
 }
 
-int gm_8016BE80(void)
+int gm_CameraModeVSGetPauser(void)
 {
     HSD_PadStatus* temp_r3;
     bool var_r0;
@@ -677,13 +682,15 @@ int gm_8016BE80(void)
         temp_r3 = &HSD_PadCopyStatus[(u8) var_r30];
         if (temp_r3->err == 0) {
             if (DbLevel >= 3) {
-                if ((temp_r3->trigger & 8) && (temp_r3->button & HSD_PAD_X)) {
+                if ((temp_r3->trigger & HSD_PAD_DPADUP) &&
+                    (temp_r3->button & HSD_PAD_X))
+                {
                     var_r0 = 1;
                 } else {
                     var_r0 = 0;
                 }
             } else {
-                var_r0 = temp_r3->trigger & 0x1000;
+                var_r0 = temp_r3->trigger & HSD_PAD_START;
             }
             if (var_r0 != 0) {
                 if (var_r30 == 3) {
@@ -1068,32 +1075,34 @@ void fn_8016C7F0(void)
     }
 }
 
-static inline s8 fn_8016CA68_inline(int var_r31)
+static inline s8 gm_GetSlotByPlayerId(int pauserId)
 {
-    int var_r30;
-    for (var_r30 = 0; var_r30 < 6; var_r30++) {
-        if (var_r31 == Player_GetPlayerId(var_r30) &&
-            Player_GetPlayerSlotType(var_r30) == Gm_PKind_Human)
+    int slot;
+    for (slot = 0; slot < 6; slot++) {
+        if (pauserId == Player_GetPlayerId(slot) &&
+            Player_GetPlayerSlotType(slot) == Gm_PKind_Human)
         {
-            return var_r30;
+            return slot;
         }
     }
     return -1;
 }
 
-void fn_8016CA68(lbl_8046B6A0_t* arg0, int arg1)
+void gm_DoPauseChecksAndRoutine(lbl_8046B6A0_t* arg0, int arg1)
 {
-    int var_r31;
-    s8 var_r0;
+    int pauser;
+    s8 pauserSlot;
     u8 var_r4;
 
-    if (arg0->unk_4 == 0 && arg0->hud_enabled != 0 && !arg0->x24C8.x2_4) {
-        if (arg0->x24C8.x40 != NULL) {
-            var_r31 = arg0->x24C8.x40();
+    if (arg0->unpause_timer == 0 && arg0->hud_enabled != 0 &&
+        !arg0->x24C8.disable_pausing)
+    {
+        if (arg0->x24C8.check_for_pauser_override != NULL) {
+            pauser = arg0->x24C8.check_for_pauser_override();
         } else {
-            var_r31 = fn_8016BC74();
+            pauser = gm_DefaultVSGetPauser();
         }
-        if (var_r31 != -1) {
+        if (pauser != -1) {
             lbAudioAx_80024E84(1);
             lbAudioAx_80024030(5);
             ifAll_802F3394();
@@ -1111,50 +1120,58 @@ void fn_8016CA68(lbl_8046B6A0_t* arg0, int arg1)
                 if (arg0->x24C8.x3_1) {
                     var_r4 |= 4;
                 }
-                gm_801A0FEC(var_r31, var_r4);
+                gm_801A0FEC(pauser, var_r4);
             }
             gm_801A4634((long long) arg1);
             if (arg0->x24C8.x4_0) {
-                var_r0 = fn_8016CA68_inline(var_r31);
-                if (arg0->x24C8.x3C != NULL) {
-                    arg0->x24C8.x3C(var_r0);
+                pauserSlot = gm_GetSlotByPlayerId(pauser);
+                if (arg0->x24C8.on_pause_override != NULL) {
+                    arg0->x24C8.on_pause_override(pauserSlot);
                 } else {
-                    fn_80165108(var_r0, var_r31);
+                    gm_EnablePlayerPauseCamera(pauserSlot, pauser);
                 }
             }
             HSD_PadRumblePauseAll();
-            arg0->pauser = var_r31;
+            arg0->pauser = pauser;
             arg0->pause_timer = 0xA;
         }
     }
 }
 
-static inline int fn_8016CBE8_inline(void)
+/**
+ * @brief Returns the player id pressing unpause, or @c -1 if none.
+ *
+ * In retail builds, checks for a newly pressed Start button. When @c DbLevel
+ * >= 3, accepts D-Pad Up (@c HSD_PAD_DPADUP, @c 1 << 3) plus X instead.
+ */
+static inline int gm_GetPlayerPressingUnpause(void)
 {
     HSD_PadStatus* pad;
     bool var_r0;
-    int i;
-    for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
-        pad = &HSD_PadCopyStatus[(u8) i];
+    int playerId;
+    for (playerId = 0; playerId < PAD_MAX_CONTROLLERS; playerId++) {
+        pad = &HSD_PadCopyStatus[(u8) playerId];
         if (pad->err == 0) {
             if (DbLevel >= 3) {
-                if ((pad->trigger & 8) && (pad->button & HSD_PAD_X)) {
+                if ((pad->trigger & HSD_PAD_DPADUP) &&
+                    (pad->button & HSD_PAD_X))
+                {
                     var_r0 = true;
                 } else {
                     var_r0 = false;
                 }
             } else {
-                var_r0 = pad->trigger & 0x1000;
+                var_r0 = pad->trigger & HSD_PAD_START;
             }
             if (var_r0) {
-                return i;
+                return playerId;
             }
         }
     }
     return -1;
 }
 
-void fn_8016CBE8(lbl_8046B6A0_t* arg0, int arg1)
+void gm_DoUnpauseChecksAndRoutine(lbl_8046B6A0_t* arg0, int arg1)
 {
     int i;
     PAD_STACK(0x14);
@@ -1165,11 +1182,11 @@ void fn_8016CBE8(lbl_8046B6A0_t* arg0, int arg1)
     if (arg0->hud_enabled == 0) {
         return;
     }
-    if (arg0->x24C8.x2_4) {
+    if (arg0->x24C8.disable_pausing) {
         return;
     }
 
-    i = fn_8016CBE8_inline();
+    i = gm_GetPlayerPressingUnpause();
 
     if (i != -1 && i == arg0->pauser) {
         lbAudioAx_80024E84(0);
@@ -1178,13 +1195,13 @@ void fn_8016CBE8(lbl_8046B6A0_t* arg0, int arg1)
         gm_801A10FC(i);
         HSD_PadRumbleUnpauseAll();
         if (arg0->x24C8.x4_0) {
-            if (arg0->x24C8.x38 != NULL) {
-                arg0->x24C8.x38(i);
+            if (arg0->x24C8.on_unpause_override != NULL) {
+                arg0->x24C8.on_unpause_override(i);
             } else {
-                Ground_801C5800();
+                Ground_EnableMatchCamera();
             }
         }
-        arg0->unk_4 = 0xA;
+        arg0->unpause_timer = 0xA;
     }
 }
 
@@ -1308,7 +1325,7 @@ void fn_8016CFE0(void)
     fn_8016A4C8();
     fn_8016758C();
     if (gm_801A45E8(1) != 0) {
-        var_r4 = fn_8016CBE8_inline();
+        var_r4 = gm_GetPlayerPressingUnpause();
         if (DbLevel >= 3) {
             var_r29 = 0x160;
         } else {
@@ -1334,7 +1351,7 @@ void fn_8016CFE0(void)
                 return;
             }
         }
-        fn_8016CBE8(tmp, 1);
+        gm_DoUnpauseChecksAndRoutine(tmp, 1);
         if (tmp->pause_timer != 0) {
             tmp->pause_timer--;
         }
@@ -1342,9 +1359,9 @@ void fn_8016CFE0(void)
     } else {
         tmp->match_result = gm_GetMatchOutcome();
         if (tmp->match_result == OUTCOME_NONE) {
-            fn_8016CA68(tmp, 1);
-            if (tmp->unk_4 != 0) {
-                tmp->unk_4--;
+            gm_DoPauseChecksAndRoutine(tmp, 1);
+            if (tmp->unpause_timer != 0) {
+                tmp->unpause_timer--;
             }
         } else {
             goto block_51;
@@ -1375,15 +1392,15 @@ void gm_8016D32C_OnFrame(void)
 
     fn_8016758C();
     if (gm_801A45E8(2) != 0) {
-        fn_8016CBE8_inline();
-        fn_8016CBE8(tmp, 2);
+        gm_GetPlayerPressingUnpause();
+        gm_DoUnpauseChecksAndRoutine(tmp, 2);
         if (tmp->pause_timer != 0) {
             tmp->pause_timer--;
         }
     } else {
-        fn_8016CA68(tmp, 2);
-        if (tmp->unk_4 != 0) {
-            tmp->unk_4--;
+        gm_DoPauseChecksAndRoutine(tmp, 2);
+        if (tmp->unpause_timer != 0) {
+            tmp->unpause_timer--;
         }
     }
     fn_8016CD98(tmp);
@@ -1928,7 +1945,7 @@ void fn_8016E730(StartMeleeData* arg0)
     lbl_8046B6A0_t* r30;
 
     db_Setup();
-    gm_801A4B08(fn_8016BAF4, fn_8016BBB4);
+    gm_801A4B08(gm_AnyControllerPressedStart, gm_AnyControllerPressedZ);
     gm_801A4B40(db_RunEveryFrame);
     gm_801A4B50(1);
     lb_80019880((0.016666667F / arg0->rules.x34) * OS_TIMER_CLOCK);
@@ -1957,12 +1974,12 @@ void fn_8016E730(StartMeleeData* arg0)
     Camera_80030730(Ground_801C20D0());
     fn_8016E2BC();
     Stage_80225298();
-    Ground_801C5800();
+    Ground_EnableMatchCamera();
     Camera_8002F3AC();
     fn_801A1134();
     un_80321900();
-    if (lbl_8046B6A0.x24C8.x38 != NULL) {
-        lbl_8046B6A0.x24C8.x38(0);
+    if (lbl_8046B6A0.x24C8.on_unpause_override != NULL) {
+        lbl_8046B6A0.x24C8.on_unpause_override(0);
         Camera_8002F3AC();
     }
     ifAll_802F390C();
