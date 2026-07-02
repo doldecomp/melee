@@ -1983,7 +1983,7 @@ s32 fn_8017F47C(HSD_Text** arg0, int arg1)
 
         if (p[8] != val) {
             if (val < 0) {
-                HSD_SisLib_803A70A0(*arg0, i, "%s%d", "\x81\x7c", -val);
+                HSD_SisLib_803A70A0(*arg0, i, "%s%d", "－", -val);
             } else {
                 HSD_SisLib_803A70A0(*arg0, i, "%d", val);
             }
@@ -2109,7 +2109,7 @@ void fn_8017F608(void* arg0)
                 p->xD4 = p->xD0;
             } else if (p->xD8 < 0x3C) {
                 p->x74->default_kerning = 1;
-                str = HSD_SisLib_803A6B98(p->x74, 0.0f, 0.0f, "%d\x82w%d",
+                str = HSD_SisLib_803A6B98(p->x74, 0.0f, 0.0f, "%dＸ%d",
                                           p->xD0 / p->x108, p->x108);
                 HSD_SisLib_803A7548(p->x74, str, 0.089999996f, 0.065f);
             } else {

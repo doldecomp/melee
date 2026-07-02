@@ -13,7 +13,7 @@
 
 /* 1DCCFC */ void grCorneria_801DCCFC(void);
 /* 1DCE1C */ void grCorneria_801DCE1C(void);
-/* 1DD2C0 */ void grCorneria_801DD2C0(void);
+/* 1DD2C0 */ void grCorneria_801DD2C0(int);
 /* 1DD350 */ void grCorneria_801DD350(void);
 /* 1DD478 */ void grCorneria_801DD478(void);
 /* 1DD508 */ void grCorneria_801DD508(void);

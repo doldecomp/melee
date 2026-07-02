@@ -42,11 +42,6 @@
 #include <baselib/particle.h>
 #include <baselib/random.h>
 
-int grCn_803E1D80[3] = { 0, 0, 0 };
-int grCn_803E2190[5] = { 0, 0, 1, 2, 5 };
-
-int grCn_804D466C = -1;
-
 typedef struct grCn_StageData {
     /* 0x00 */ f32 x0;
     /* 0x04 */ f32 x4;
@@ -86,12 +81,169 @@ static int grCn_804D69A8;
 static int grCn_804D69AC;
 static int grCn_804D69B0;
 
+static S16Vec3 grCn_803E1D38_[] = {
+    { 0x0003, 0x0003, 0x0000 }, { 0x0004, 0x0003, 0x0000 },
+    { 0x0000, 0x000D, 0x0000 }, { 0x0001, 0x000E, 0x0000 },
+    { 0x0002, 0x000F, 0x0000 }, { 0x0005, 0x0010, 0x0000 },
+    { 0x0006, 0x0011, 0x0000 }, { 0x0007, 0x0012, 0x0000 },
+    { 0x0000, 0x0000, 0x0000 }, { 0x0000, 0x0000, 0x0000 },
+    { 0x0000, 0x0000, 0x0000 }, { 0x0000, 0x0000, 0x0000 },
+};
+
+int grCn_803E1D80[3] = { 0, 0, 0 };
+
+StageCallbacks grCn_803E1D8C[] = {
+    {
+        grCorneria_801DD620,
+        grCorneria_801DD64C,
+        grCorneria_801DD654,
+        grCorneria_801DD658,
+        0x00000000,
+    },
+    {
+        grCorneria_801DDAC4,
+        grCorneria_801DDCE8,
+        grCorneria_801DE024,
+        grCorneria_801DE4BC,
+        0x00000000,
+    },
+    {
+        grCorneria_801DE8E4,
+        grCorneria_801DEC00,
+        grCorneria_801DED50,
+        grCorneria_801DF8CC,
+        0x00000000,
+    },
+    {
+        grCorneria_801DD674,
+        grCorneria_801DD9A0,
+        grCorneria_801DD9A8,
+        grCorneria_801DDAC0,
+        0x80000000,
+    },
+    {
+        grCorneria_801E0140,
+        grCorneria_801E01A0,
+        grCorneria_801E01A8,
+        grCorneria_801E03C4,
+        0x00000000,
+    },
+    {
+        grCorneria_801E0DE4,
+        grCorneria_801E0E0C,
+        grCorneria_801E0E14,
+        grCorneria_801E0E3C,
+        0x20000000,
+    },
+    {
+        grCorneria_801DFBF0,
+        grCorneria_801DFC1C,
+        grCorneria_801DFC24,
+        grCorneria_801DFC28,
+        0x00000000,
+    },
+    {
+        grCorneria_801E0C3C,
+        grCorneria_801E0D28,
+        grCorneria_801E0D30,
+        grCorneria_801E0DE0,
+        0x40000000,
+    },
+    {
+        grCorneria_801DFC2C,
+        grCorneria_801DFC90,
+        grCorneria_801DFC98,
+        grCorneria_801DFEB4,
+        0x00000000,
+    },
+    {
+        grCorneria_801DFEB8,
+        grCorneria_801DFF18,
+        grCorneria_801DFF20,
+        grCorneria_801E013C,
+        0x00000000,
+    },
+    {
+        grCorneria_801DF8D0,
+        grCorneria_801DFBC4,
+        grCorneria_801DFBCC,
+        grCorneria_801DFBEC,
+        0x00000000,
+    },
+    {
+        grCorneria_801E1054,
+        grCorneria_801E1058,
+        grCorneria_801E1060,
+        grCorneria_801E12CC,
+        0x00000000,
+    },
+    {
+        grCorneria_801E0F30,
+        grCorneria_801E0F64,
+        grCorneria_801E0F6C,
+        grCorneria_801E1030,
+        0x00000000,
+    },
+    {
+        grCorneria_Arwing_801DE4C0,
+        grCorneria_801DE560,
+        grCorneria_801DE568,
+        grCorneria_801DE8E0,
+        0x00000000,
+    },
+    {
+        grCorneria_Arwing_801DE4C0,
+        grCorneria_801DE560,
+        grCorneria_801DE568,
+        grCorneria_801DE8E0,
+        0x00000000,
+    },
+    {
+        grCorneria_Arwing_801DE4C0,
+        grCorneria_801DE560,
+        grCorneria_801DE568,
+        grCorneria_801DE8E0,
+        0x00000000,
+    },
+    {
+        grCorneria_Arwing_801DE4C0,
+        grCorneria_801DE560,
+        grCorneria_801DE568,
+        grCorneria_801DE8E0,
+        0x00000000,
+    },
+    {
+        grCorneria_Arwing_801DE4C0,
+        grCorneria_801DE560,
+        grCorneria_801DE568,
+        grCorneria_801DE8E0,
+        0x00000000,
+    },
+    { grCorneria_Arwing_801DE4C0, grCorneria_801DE560, grCorneria_801DE568,
+      grCorneria_801DE8E0, 0x00000000 },
+};
+
+StageData grCn_803E1F08 = {
+    CORNERIA,
+    grCn_803E1D8C,
+    "/GrCn",
+    grCorneria_801DD350,
+    grCorneria_801DD2C0,
+    grCorneria_801DD478,
+    grCorneria_801DD508,
+    grCorneria_801DD52C,
+    grCorneria_801E2EE4,
+    grCorneria_801E2EEC,
+    0x00000001,
+    (void*) &grCn_803E1D38_,
+    8,
+};
+
 typedef struct {
     int data[3];
 } grCn_Entry;
 
 typedef struct grCn_Data {
-    /* 0x000 */ u8 pad0[0x30];
     /* 0x030 */ HSD_GObj* arwing_gobj[3];
     /* 0x03C */ s32 arwing_type[3];
     /* 0x048 */ s32 arwing_group[3];
@@ -120,7 +272,6 @@ typedef struct grCn_Data {
     } dialog_joints[5];
     /* 0x4CC */ grCn_Entry entries[][5];
 } grCn_Data;
-
 extern grCn_Data grCn_803E1D38;
 
 void grCorneria_801DCCFC(void)
@@ -341,7 +492,7 @@ void grCorneria_801DCE1C(void)
     }
 }
 
-void grCorneria_801DD2C0(void)
+void grCorneria_801DD2C0(int unused)
 {
     void* obj;
     int rand;
@@ -436,53 +587,6 @@ bool grCorneria_801DD52C(void)
     return false;
 }
 
-static u8 grCn_callback_pad[0x34] = { 0 };
-
-StageCallbacks grCn_803E1D8C[19] = {
-    { grCorneria_801DD620, grCorneria_801DD64C, grCorneria_801DD654,
-      grCorneria_801DD658, 0 },
-    { grCorneria_801DDAC4, grCorneria_801DDCE8, grCorneria_801DE024,
-      grCorneria_801DE4BC, 0 },
-    { grCorneria_801DE8E4, grCorneria_801DEC00, grCorneria_801DED50,
-      grCorneria_801DF8CC, 0 },
-    { grCorneria_801DD674, grCorneria_801DD9A0, grCorneria_801DD9A8,
-      grCorneria_801DDAC0, 0x80000000 },
-    { grCorneria_801E0140, grCorneria_801E01A0, grCorneria_801E01A8,
-      grCorneria_801E03C4, 0 },
-    { grCorneria_801E0DE4, grCorneria_801E0E0C, grCorneria_801E0E14,
-      grCorneria_801E0E3C, 0x20000000 },
-    { grCorneria_801DFBF0, grCorneria_801DFC1C, grCorneria_801DFC24,
-      grCorneria_801DFC28, 0 },
-    { grCorneria_801E0C3C, grCorneria_801E0D28, grCorneria_801E0D30,
-      grCorneria_801E0DE0, 0x40000000 },
-    { grCorneria_801DFC2C, grCorneria_801DFC90, grCorneria_801DFC98,
-      grCorneria_801DFEB4, 0 },
-    { grCorneria_801DFEB8, grCorneria_801DFF18, grCorneria_801DFF20,
-      grCorneria_801E013C, 0 },
-    { grCorneria_801DF8D0, grCorneria_801DFBC4, grCorneria_801DFBCC,
-      grCorneria_801DFBEC, 0 },
-    { grCorneria_801E1054, grCorneria_801E1058, grCorneria_801E1060,
-      grCorneria_801E12CC, 0 },
-    { grCorneria_801E0F30, grCorneria_801E0F64, grCorneria_801E0F6C,
-      grCorneria_801E1030, 0 },
-    { grCorneria_Arwing_801DE4C0, grCorneria_801DE560, grCorneria_801DE568,
-      grCorneria_801DE8E0, 0 },
-    { grCorneria_Arwing_801DE4C0, grCorneria_801DE560, grCorneria_801DE568,
-      grCorneria_801DE8E0, 0 },
-    { grCorneria_Arwing_801DE4C0, grCorneria_801DE560, grCorneria_801DE568,
-      grCorneria_801DE8E0, 0 },
-    { grCorneria_Arwing_801DE4C0, grCorneria_801DE560, grCorneria_801DE568,
-      grCorneria_801DE8E0, 0 },
-    { grCorneria_Arwing_801DE4C0, grCorneria_801DE560, grCorneria_801DE568,
-      grCorneria_801DE8E0, 0 },
-    { grCorneria_Arwing_801DE4C0, grCorneria_801DE560, grCorneria_801DE568,
-      grCorneria_801DE8E0, 0 },
-};
-
-static u8 grCn_report_pad[0x34] = { 1 };
-char grCn_803E1F3C[0x24] = "%s:%d: couldn t get gobj(id=%d)\n";
-char grCn_803E1F60[0x10] = "grcorneria.c";
-
 #pragma push
 #pragma dont_inline on
 HSD_GObj* grCorneria_801DD534(int arg0)
@@ -507,7 +611,8 @@ HSD_GObj* grCorneria_801DD534(int arg0)
             HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
-        OSReport(grCn_803E1F3C, grCn_803E1F60, 0x26A, arg0);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grcorneria.c", 0x26A,
+                 arg0);
     }
 
     return gobj;
@@ -885,6 +990,8 @@ void grCorneria_801DE024(Ground_GObj* gobj)
 }
 
 void grCorneria_801DE4BC(Ground_GObj* arg) {}
+
+int grCn_803E2190[5] = { 0, 0, 1, 2, 5 };
 
 void grCorneria_Arwing_801DE4C0(Ground_GObj* gobj)
 {
@@ -1827,7 +1934,7 @@ int grCorneria_801E0A74(f32* arg0)
             return 4;
         }
     }
-    HSD_ASSERTREPORT(0x9CB, NULL, "grCorneriaGetPosMapKind2\n");
+    HSD_ASSERTREPORT(0x9CB, 0, "grcorneria.c    grCorneriaGetPosMapKind2\n");
     return -1;
 }
 
@@ -1884,6 +1991,8 @@ void grCorneria_801E0E14(Ground_GObj* gobj)
 }
 
 void grCorneria_801E0E3C(Ground_GObj* arg) {}
+
+int grCn_804D466C = -1;
 
 void grCorneria_801E0E40(void)
 {
@@ -2024,7 +2133,7 @@ void grCorneria_801E1060(Ground_GObj* gobj)
         Fake_HSD_JObjSetTranslateX(bg->hsd_obj, pos);
     }
     pos = pos -
-          (4800.0f * Ground_801C0498() / 2 + 3200.0f * Ground_801C0498() / 2);
+          (3200.0f * Ground_801C0498() / 2 + 4800.0f * Ground_801C0498() / 2);
 
     bg = Ground_801C2BA4(4);
     if (bg != NULL) {
@@ -2637,7 +2746,7 @@ void grCorneria_801E2AF4(void)
 bool grCorneria_801E2B80(void)
 {
     int rand;
-    HSD_GObj* gobj;
+    HSD_GObj* wgobj;
     PAD_STACK(44);
 
     if (stage_info.internal_stage_id == CORNERIA) {
@@ -2645,9 +2754,9 @@ bool grCorneria_801E2B80(void)
             return false;
         }
         rand = HSD_Randi(5) + 8;
-        gobj = grCorneria_801DD534(12);
-        HSD_ASSERT(3598, gobj);
-        grCorneria_801E0F34(gobj, rand);
+        wgobj = grCorneria_801DD534(12);
+        HSD_ASSERT(3598, wgobj);
+        grCorneria_801E0F34(wgobj, rand);
         return true;
     } else if (stage_info.internal_stage_id == VENOM) {
         return grVenom_80206BF0(2);
@@ -2658,7 +2767,7 @@ bool grCorneria_801E2B80(void)
 bool grCorneria_801E2C34(void)
 {
     int rand;
-    HSD_GObj* gobj;
+    HSD_GObj* wgobj;
     PAD_STACK(44);
 
     if (stage_info.internal_stage_id == CORNERIA) {
@@ -2666,9 +2775,9 @@ bool grCorneria_801E2C34(void)
             return false;
         }
         rand = HSD_Randi(5) + 13;
-        gobj = grCorneria_801DD534(12);
-        HSD_ASSERT(3598, gobj);
-        grCorneria_801E0F34(gobj, rand);
+        wgobj = grCorneria_801DD534(12);
+        HSD_ASSERT(3598, wgobj);
+        grCorneria_801E0F34(wgobj, rand);
         return true;
     } else if (stage_info.internal_stage_id == VENOM) {
         return grVenom_80206BF0(20);

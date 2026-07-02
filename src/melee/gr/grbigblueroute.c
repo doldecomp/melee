@@ -290,7 +290,7 @@ void grBigBlueRoute_8020BC68(Ground_GObj* gobj)
 {
     Vec3 origin;
     Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj;
+    HSD_JObj* reb0_jobj;
 
     grAnime_801C8138(gobj, gp->map_id, 0);
     gp->x8_callback = NULL;
@@ -299,7 +299,7 @@ void grBigBlueRoute_8020BC68(Ground_GObj* gobj)
     gp->gv.bigblueroute2.xC8 = 0;
 
     if (Ground_801C2D24(148, &origin)) {
-        jobj = Ground_801C2CF4(127);
+        HSD_JObj* jobj = Ground_801C2CF4(127);
         gp->gv.bigblueroute2.tracks[0].jobj = jobj;
         if (jobj != NULL) {
             jobj = gp->gv.bigblueroute2.tracks[0].jobj;
@@ -341,10 +341,12 @@ void grBigBlueRoute_8020BC68(Ground_GObj* gobj)
         gp->gv.bigblueroute2.tracks[3].jobj = NULL;
     }
 
-    jobj = Ground_801C2CF4(4);
-    HSD_ASSERT(452, jobj != NULL);
-    HSD_JObjGetTranslation(jobj, &gp->gv.bigblueroute2.xCC);
-    Ground_801C10B8(gobj, grBigBlueRoute_8020BC34);
+    {
+        HSD_JObj* reb0_jobj = Ground_801C2CF4(4);
+        HSD_ASSERT(452, reb0_jobj);
+        HSD_JObjGetTranslation(reb0_jobj, &gp->gv.bigblueroute2.xCC);
+        Ground_801C10B8(gobj, grBigBlueRoute_8020BC34);
+    }
 }
 
 bool grBigBlueRoute_8020BF30(Ground_GObj* arg)
@@ -533,7 +535,7 @@ s32 grBigBlueRoute_8020C530(Ground_GObj* arg0)
             }
         }
     }
-    HSD_ASSERT(0X2E5, NULL);
+    HSD_ASSERT(0X2E5, 0);
 }
 
 /// @todo Currently 92.06% match - register allocation (gp in r30 vs r31)
@@ -655,7 +657,7 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
                         re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
                         re->x28 = (void*) item;
                         if (item != NULL) {
-                            grMaterial_801C8E28((HSD_GObj*) item);
+                            grMaterial_801C8E28((void*) item->hsd_obj);
                         }
                     }
                 }
@@ -674,14 +676,14 @@ static const Vec3 grBb_Route_803B83E0 = { 0.0f, 1.0f, 0.0f };
 void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
 {
     HSD_JObj* jobj;
-    Ground* gp = gobj->user_data;
+    Ground* gp = GET_GROUND(gobj);
     HSD_JObj* root_jobj = gobj->hsd_obj;
     HSD_GObj* fighter;
     int i;
     Vec3 pos;
     Vec3 rot;
     Vec3 fighter_pos;
-    PAD_STACK(0x44);
+    PAD_STACK(0x3C);
 
     fighter = Ground_801C57A4();
     if (fighter != NULL) {
@@ -1116,14 +1118,14 @@ void grBigBlueRoute_8020DED4(Vec3* pos)
     f32 x = pos->x;
     f32 y = pos->y;
 
-    if (x < 20.0f * Ground_801C0498()) {
-        x = 20.0f * Ground_801C0498();
+    if (x < -1140 * Ground_801C0498()) {
+        x = -1140 * Ground_801C0498();
     }
 
-    if (y < 250.0f * Ground_801C0498()) {
-        y = 250.0f * Ground_801C0498();
-    } else if (y > -3.0f * Ground_801C0498()) {
-        y = -3.0f * Ground_801C0498();
+    if (y < 20.0f * Ground_801C0498()) {
+        y = 20.0f * Ground_801C0498();
+    } else if (y > 250 * Ground_801C0498()) {
+        y = 250 * Ground_801C0498();
     }
 
     Ground_801C38BC(x, y);

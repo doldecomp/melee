@@ -3904,7 +3904,7 @@ void Camera_SetUpPauseCamera(s8 pauserSlot, s8 pauserId, s32 arg2)
         var_f31 = cm_80452C68.x2D0.unk28;
         break;
     default:
-        __assert(cm_803BCBD0, 0xEDF, cm_804D3938);
+        __assert(cm_803BCBD0, 0xEDF, "0");
         break;
     }
 
