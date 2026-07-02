@@ -143,6 +143,16 @@ struct lbl_8046B488_t;
 /* 16505C */ void gm_8016505C(void);
 /* 165084 */ bool gm_80165084(void);
 /* 1650E8 */ void fn_801650E8(void);
+/**
+ * @brief Enables the pause camera for the given player.
+ *
+ * If @p playerSlot is @c -1, switches to the pause camera with slot @c 0xB and
+ * id @c 5 (see #Camera_SetUpPauseCamera). Otherwise, switches only when the
+ * slot is a human or CPU with an active entity.
+ *
+ * @param[in] playerSlot Player slot to center the pause camera on.
+ * @param[in] playerId   Controller port / player id of the pauser.
+ */
 /* 165108 */ void gm_EnablePlayerPauseCamera(int, int);
 /* 165190 */ void fn_80165190(s32, s32);
 /* 1651FC */ void fn_801651FC(s32, s32);

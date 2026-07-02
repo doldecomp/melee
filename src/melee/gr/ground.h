@@ -145,14 +145,6 @@
 /* 1C57A4 */ HSD_GObj* Ground_801C57A4(void);
 /* 1C57C8 */ HSD_GObj* Ground_801C57C8(void);
 /* 1C57F0 */ f32 Ground_801C57F0(void);
-/**
- * @brief Restores the in-match camera mode after unpause.
- *
- * Selects standard or fixed camera according to the stage's
- * #UnkStage6B0::x4C_fixed_cam parameter. Both underlying calls only set the
- * camera mode, without additional setup. Used when a paused match resumes and
- * no #StartMeleeRules::on_unpause_override is installed.
- */
 /* 1C5800 */ void Ground_EnableMatchCamera(void);
 /* 1C5840 */ s32 Ground_801C5840(void);
 /* 1C58E0 */ Item_GObj* Ground_801C58E0(s32, s32);

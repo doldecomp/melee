@@ -86,29 +86,7 @@
 /* 16C75C */ /* static */ int gm_8016C75C(HSD_GObj*);
 /* 16C7D0 */ void fn_8016C7D0(HSD_GObj*);
 /* 16C7F0 */ void fn_8016C7F0(void);
-/**
- * @brief Checks for pause input and runs the pause routine when unpaused.
- *
- * Runs when the match is not paused. Skipped while @c unpause_timer is
- * non-zero, the HUD is disabled, or @c disable_pausing is set. On a successful
- * pause, sets @c pause_timer to @c 0xA and optionally invokes
- * #StartMeleeRules::on_pause_override or #gm_EnablePlayerPauseCamera.
- *
- * @param[in] arg0 Match state (#lbl_8046B6A0_t).
- * @param[in] arg1 Pause context id passed to #gm_801A4634.
- */
 /* 16CA68 */ void gm_DoPauseChecksAndRoutine(lbl_8046B6A0_t*, int);
-/**
- * @brief Checks for unpause input and runs the unpause routine when paused.
- *
- * Runs when the match is paused. Skipped while @c pause_timer is non-zero, the
- * HUD is disabled, or @c disable_pausing is set. Only the original pauser may
- * unpause. On success, sets @c unpause_timer to @c 0xA and optionally invokes
- * #StartMeleeRules::on_unpause_override or #Ground_EnableMatchCamera.
- *
- * @param[in] arg0 Match state (#lbl_8046B6A0_t).
- * @param[in] arg1 Unpause context id passed to #gm_801A4674.
- */
 /* 16CBE8 */ void gm_DoUnpauseChecksAndRoutine(lbl_8046B6A0_t*, int);
 /* 16CD98 */ void fn_8016CD98(lbl_8046B6A0_t*);
 /* 16CF4C */ void fn_8016CF4C(int, MatchOutcome);

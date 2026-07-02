@@ -493,8 +493,8 @@ struct lbl_8046B6A0_t {
     /* 0x0004 */ u8
         unpause_timer; ///< Frames remaining before pause input is accepted
                        ///< after unpausing. Set to @c 0xA on unpause and
-                       ///< decremented each frame while unpaused. Mirrors @c
-                       ///< pause_timer semantics.
+                       ///< decremented each frame while unpaused. Mirrors
+                       ///< #lbl_8046B6A0_t::pause_timer semantics.
     /* 0x0005 */ u8 hud_enabled;
     /* 0x0006 */ u8 terminate_match;
     /* 0x0007 */ u8 is_singleplayer;
