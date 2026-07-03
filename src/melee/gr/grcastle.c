@@ -3,9 +3,7 @@
 #include "placeholder.h"
 #include "types.h"
 
-#include "baselib/debug.h"
 #include "cm/camera.h"
-#include "ft/ft_0C31.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
 #include "gm/gm_16AE.h"
@@ -17,9 +15,8 @@
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
-#include "it/it_2725.h"
+#include "it/itdrop.h"
 #include "it/ithitbox.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbspdisplay.h"
@@ -27,6 +24,7 @@
 #include "lb/types.h"
 #include "mp/mplib.h"
 
+#include <trigf.h> // IWYU pragma: keep
 #include <dolphin/mtx.h>
 #include <baselib/archive.h>
 #include <baselib/gobj.h>
@@ -35,9 +33,7 @@
 #include <baselib/jobj.h>
 #include <baselib/psstructs.h>
 #include <baselib/random.h>
-#include <baselib/spline.h>
 #include <MetroTRK/intrinsics.h>
-#include <MSL/trigf.h>
 
 S16Vec3 grCs_803E0FE8[] = {
     { 4, 6, 1 },
@@ -1144,6 +1140,8 @@ void grCastle_801CEACC(Ground_GObj* gobj)
         gp->gv.castle10.effect_b[2] = NULL;
         gp->gv.castle10.x120[2] = 2;
         break;
+    default:
+        break;
     }
 
     grCastle_801D0298(gobj, 0);
@@ -1265,6 +1263,8 @@ void grCastle_801CF0F4(Ground_GObj* gobj)
     case MUTECITY:
         gp->gv.castle7.xD0 = grCastle_801CD4D0(5);
         return;
+    default:
+        break;
     }
 }
 
