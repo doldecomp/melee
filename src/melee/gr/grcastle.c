@@ -3,9 +3,7 @@
 #include "placeholder.h"
 #include "types.h"
 
-#include "baselib/debug.h"
 #include "cm/camera.h"
-#include "ft/ft_0C31.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
 #include "gm/gm_16AE.h"
@@ -17,9 +15,8 @@
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
-#include "it/it_2725.h"
+#include "it/itdrop.h"
 #include "it/ithitbox.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbspdisplay.h"
@@ -27,6 +24,7 @@
 #include "lb/types.h"
 #include "mp/mplib.h"
 
+#include <trigf.h> // IWYU pragma: keep
 #include <dolphin/mtx.h>
 #include <baselib/archive.h>
 #include <baselib/gobj.h>
@@ -35,19 +33,7 @@
 #include <baselib/jobj.h>
 #include <baselib/psstructs.h>
 #include <baselib/random.h>
-#include <baselib/spline.h>
 #include <MetroTRK/intrinsics.h>
-#include <MSL/trigf.h>
-
-static const unkCastleCallback grCs_803B7F28[5] = {
-    grCastle_801D0550, grCastle_801D059C, grCastle_801D05E8,
-    grCastle_801D0634, grCastle_801D0680,
-};
-
-static const unkCastleCallback2 grCs_803B7F3C[5] = {
-    grCastle_801D06CC, grCastle_801D0744, grCastle_801D07BC,
-    grCastle_801D0834, grCastle_801D08AC,
-};
 
 S16Vec3 grCs_803E0FE8[] = {
     { 4, 6, 1 },
@@ -61,7 +47,7 @@ StageCallbacks grCs_803E0FF4[21] = {
     { grCastle_801CE7E8, grCastle_801CE858, grCastle_801CE860,
       grCastle_801CE8E4, 0 },
     { grCastle_801CD658, grCastle_801CD8A0, grCastle_801CD8A8,
-      grCastle_801CD960, 0 },
+      grCastle_801CD960, 0xC0000000 },
     { grCastle_801CD5BC, grCastle_801CD600, grCastle_801CD608,
       grCastle_801CD60C, 0 },
     { grCastle_801CEACC, grCastle_801CEEFC, grCastle_801CEF04,
@@ -178,21 +164,8 @@ typedef struct grCastle_PlatSubObj {
     /* 0x0C */ f32 wind;
 } grCastle_PlatSubObj;
 
-static f32 grCs_804D45E0 = 0.017453292f;
-static u8 grCs_804D45E4 = 1;
-
 static grCastleParams* grCs_804D6970;
 static struct lb_80011A50_t* grCs_804D6974;
-
-static const Quaternion grCs_803B7EB8 = { 0.0f, 0.0f, 0.0f, 1.0f };
-
-typedef struct grCastle_BlinkTable {
-    s16 data[19];
-} grCastle_BlinkTable;
-
-static const grCastle_BlinkTable grCs_803B7EC8 = {
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
-};
 
 static const Vec3 grCs_803B7E9C = { -257.0f, 13.5f, -252.0f };
 
@@ -212,24 +185,22 @@ static const grCastle_DynEntries grCs_803B7EA8 = { {
     { 94, 6 },
 } };
 
-typedef struct grCastle_YOffsets {
-    f32 v[6];
-} grCastle_YOffsets;
+static const Quaternion grCs_803B7EB8 = { 0.0f, 0.0f, 0.0f, 0.0f };
 
-static const grCastle_YOffsets grCs_803B7F50 = { {
-    4.0f,
-    6.0f,
-    7.0f,
-    6.0f,
-    4.0f,
-    -1.0f,
-} };
+typedef struct grCastle_BlinkTable {
+    s16 data[19];
+} grCastle_BlinkTable;
+
+static const grCastle_BlinkTable grCs_803B7EC8 = {
+    { 0x201, 0x201, 0x201, 0x201, 0x201, 0x201, 0x101, 0x101, 0x101, 0x101,
+      0x101, 0x101, 0x101, 0x101, 0x101, 0x102, 0x102, 0x102, 0x1ff }
+};
 
 typedef struct grCastle_WeightTable {
     s32 w[3];
 } grCastle_WeightTable;
 
-static const grCastle_WeightTable grCs_803B7EF0 = { { 0, 0, 0 } };
+static const grCastle_WeightTable grCs_803B7EF0 = { { 100, 100, 100 } };
 
 typedef struct grCastle_TargetEntry {
     s16 map_id;
@@ -241,17 +212,40 @@ typedef struct grCastle_TargetTable {
 } grCastle_TargetTable;
 
 static const grCastle_TargetTable grCs_803B7EFC = { {
-    { 0, 0 },
-    { 0, 0 },
-    { 0, 0 },
-    { 0, 0 },
-    { 0, 0 },
-    { 0, 0 },
-    { 0, 0 },
-    { 0, 0 },
-    { 0, 0 },
-    { 0, 0 },
-    { 0, 0 },
+    { 3, 16 },
+    { 3, 17 },
+    { 3, 14 },
+    { 3, 15 },
+    { 3, 18 },
+    { 3, 19 },
+    { 3, 21 },
+    { 3, 22 },
+    { 3, 20 },
+    { 6, 2 },
+    { 6, 5 },
+} };
+
+static const unkCastleCallback grCs_803B7F28[5] = {
+    grCastle_801D0550, grCastle_801D059C, grCastle_801D05E8,
+    grCastle_801D0634, grCastle_801D0680,
+};
+
+static const unkCastleCallback2 grCs_803B7F3C[5] = {
+    grCastle_801D06CC, grCastle_801D0744, grCastle_801D07BC,
+    grCastle_801D0834, grCastle_801D08AC,
+};
+
+typedef struct grCastle_YOffsets {
+    f32 v[6];
+} grCastle_YOffsets;
+
+static const grCastle_YOffsets grCs_803B7F50 = { {
+    4.0f,
+    6.0f,
+    7.0f,
+    6.0f,
+    4.0f,
+    -1.0f,
 } };
 
 void grCastle_801CD338(bool arg0)
@@ -1146,6 +1140,8 @@ void grCastle_801CEACC(Ground_GObj* gobj)
         gp->gv.castle10.effect_b[2] = NULL;
         gp->gv.castle10.x120[2] = 2;
         break;
+    default:
+        break;
     }
 
     grCastle_801D0298(gobj, 0);
@@ -1267,6 +1263,8 @@ void grCastle_801CF0F4(Ground_GObj* gobj)
     case MUTECITY:
         gp->gv.castle7.xD0 = grCastle_801CD4D0(5);
         return;
+    default:
+        break;
     }
 }
 
@@ -1854,6 +1852,17 @@ bool grCastle_801D09B8(void* unused, HSD_GObj* gobj, Vec3* arg2)
     return false;
 }
 
+void grCastle_801D0A9C(Vec3* arg0, f32 arg8)
+{
+    HSD_Generator* gen = grLib_801C96F8(0x7530, 0x1E, arg0);
+    if (gen != NULL) {
+        HSD_psAppSRT* srt = gen->appsrt;
+        srt->scale.x *= arg8;
+        srt->scale.y *= arg8;
+        srt->scale.z *= arg8;
+    }
+}
+
 DynamicsDesc* grCastle_801D0B04(enum_t arg)
 {
     return false;
@@ -1877,17 +1886,8 @@ bool grCastle_801D0B0C(Vec3* v, int arg1, HSD_JObj* jobj)
     return 0;
 }
 
-void grCastle_801D0A9C(Vec3* arg0, f32 arg8)
-{
-    HSD_Generator* gen = grLib_801C96F8(0x7530, 0x1E, arg0);
-    if (gen != NULL) {
-        HSD_psAppSRT* srt = gen->appsrt;
-        srt->scale.x *= arg8;
-        srt->scale.y *= arg8;
-        srt->scale.z *= arg8;
-    }
-}
-
+static f32 grCs_804D45E0 = 0.017453292f;
+static u8 grCs_804D45E4 = 1;
 void grCastle_801D0BBC(void)
 {
     f32 angle;
