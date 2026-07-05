@@ -585,8 +585,8 @@ void ftKb_SpecialAirLw_IASA(Fighter_GObj* gobj)
 
     if (fbKb_SpecialLw_IASA_Inline(gobj)) {
         temp_r28 = fp->x221C_b4;
-        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirLwEnd,
-                                  0x04440012U, 0.0f, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirLwEnd, 0x04440012U,
+                                  0.0f, 1.0f, 0.0f, NULL);
         fp->x221C_b4 = temp_r28;
         ftKb_SpecialN_set_cbs2(gobj);
         efSync_Spawn(0x49C, gobj, temp_r31);
