@@ -19,13 +19,13 @@
 #include "lb/lbspdisplay.h"
 #include "mp/mplib.h"
 
+#include <math_ppc.h> // IWYU pragma: keep
 #include <dolphin/os.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/random.h>
-#include <MSL/math_ppc.h>
 
 /* 1D84A0 */ static void grZebes_801D84A0(bool arg);
 /* 1D8528 */ static void grZebes_801D8528(void);
@@ -295,11 +295,25 @@ typedef struct {
 } grZe_803B7FF0_t;
 
 static const grZe_803B7FF0_t grZe_803B7FF0 = {
-    { 0.0f, 0.0f, 0.0f },     { 8.2f, -4.55f, 0.0f },    { 7.59f, 2.5f, 0.0f },
-    { 8.589f, 1.215f, 0.0f }, { 23.151f, 1.207f, 0.0f },
-};
+    // clang-format off
+    {    0.0f,   0.0f, 0.0f }, {   8.2f, -4.55f, 0.0f },
+    {   7.59f,   2.5f, 0.0f }, { 8.589f, 1.215f, 0.0f },
+    { 23.151f, 1.207f, 0.0f },
+}; // clang-format on
 
-u8 grZe_803E1B90[0xF0] = { 0 };
+Vec3 grZe_803E1B90[20] = {
+    // clang-format off
+    { -40.5f, -10.0f, 13.0f }, { -40.5f, -24.0f, 13.0f },
+    {  -5.5f, -13.0f, 23.5f }, {  -5.5f, -27.0f, 23.5f },
+    {  -5.5f,   0.5f,  0.0f }, {  -5.5f, -10.0f,  0.0f },
+    {  -8.0f,   4.5f, 32.0f }, {  -8.0f, -14.5f, 32.0f },
+    { -34.0f,   0.5f, 24.0f }, { -34.0f, -17.5f, 24.0f },
+    { -23.5f, -12.0f,  5.5f }, { -23.5f, -23.0f,  5.5f },
+    {   6.5f,   4.0f, 18.0f }, {   6.5f, -10.5f, 18.0f },
+    {  10.0f,   0.5f,  9.5f }, {  10.0f, -10.0f,  9.5f },
+    { -21.5f,   2.0f, 15.5f }, { -21.5f, -16.0f, 15.5f },
+    { -59.0f,  27.5f,  6.0f }, { -59.0f,  17.0f,  6.0f },
+}; // clang-format on
 
 void grZebes_801D8644(HSD_GObj* gobj)
 {
@@ -352,6 +366,14 @@ bool grZebes_801D8814(Ground_GObj* arg)
 {
     return false;
 }
+
+Vec3 grZe_803E1C80[8] = {
+    // clang-format off
+    { 42.5f, -11.0f,  0.0f }, { 42.5f, -25.0f,  0.0f },
+    { 30.0f,   1.0f, 11.0f }, { 30.0f, -17.0f, 11.0f },
+    { 45.0f,  -5.0f,  7.5f }, { 45.0f, -14.0f,  7.5f },
+    { 56.0f,  15.0f,  6.0f }, { 56.0f,   4.5f,  6.0f },
+}; // clang-format on
 
 void grZebes_801D881C(HSD_GObj* gobj)
 {
@@ -600,8 +622,6 @@ void grZebes_801D881C(HSD_GObj* gobj)
 }
 
 void grZebes_801D90FC(Ground_GObj* arg) {}
-
-u8 grZe_803E1C80[0x6C] = { 0 };
 
 void grZebes_801D9100(HSD_GObj* gobj)
 {
@@ -1087,14 +1107,15 @@ const grZe_BubbleConfig grZe_803B8044 = {
     },
 };
 
+grZe_ColorEntry table[3] = {
+    { -320.0f, 0.0f, 0.0f, 0.0f },
+    { -80.0f, 1.0f, 20.0f, 30.0f },
+    { 90.0f, 90.0f, 75.0f, 0.0f },
+};
+
 void grZebes_801DA0C4(f32 level)
 {
     GXColor color;
-    grZe_ColorEntry table[3] = {
-        { -320.0f, 0.0f, 0.0f, 0.0f },
-        { -80.0f, 1.0f, 20.0f, 30.0f },
-        { 90.0f, 90.0f, 75.0f, 0.0f },
-    };
     u32 idx = 0;
 
     while (idx < 3U && level > table[idx].threshold) {
