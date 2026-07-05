@@ -15,6 +15,9 @@
 #include "it/itCommonItems.h"
 #include "it/item.h"
 #include "it/items/itnokonoko.h"
+#include "it/ithitbox.h"
+#include "it/itmaplib.h"
+#include "it/itzako.h"
 #include "lb/lb_00B0.h"
 #include "mp/mpcoll.h"
 #include "MSL/math.h"
@@ -423,9 +426,9 @@ void it_802E11E0(Item_GObj* gobj)
         coll_facing = 1;
     }
     mpCollSetFacingDir(&ip->x378_itemColl, coll_facing);
-    HSD_JObjSetFlagsAll(ip->xBBC_dynamicBoneTable->bones[0], 0x10);
-    HSD_JObjClearFlagsAll(ip->xBBC_dynamicBoneTable->bones[18], 0x10);
-    HSD_JObjClearFlagsAll(ip->xBBC_dynamicBoneTable->bones[11], 0x10);
+    HSD_JObjSetFlagsAll(ip->xBBC_dynamicBoneTable->bones[0], JOBJ_HIDDEN);
+    HSD_JObjClearFlagsAll(ip->xBBC_dynamicBoneTable->bones[18], JOBJ_HIDDEN);
+    HSD_JObjClearFlagsAll(ip->xBBC_dynamicBoneTable->bones[11], JOBJ_HIDDEN);
     it_802756D0(gobj);
     it_80274C88(gobj);
     it_80275474(gobj);
@@ -466,11 +469,15 @@ bool itPatapata_UnkMotion4_Anim(Item_GObj* gobj)
         toggle = ip->xDD4_itemVar.patapata.x44 ^ 1;
         ip->xDD4_itemVar.patapata.x44 = toggle;
         if (toggle != 0) {
-            HSD_JObjSetFlagsAll(ip->xBBC_dynamicBoneTable->bones[18], 0x10);
-            HSD_JObjSetFlagsAll(ip->xBBC_dynamicBoneTable->bones[11], 0x10);
+            HSD_JObjSetFlagsAll(ip->xBBC_dynamicBoneTable->bones[18],
+                                JOBJ_HIDDEN);
+            HSD_JObjSetFlagsAll(ip->xBBC_dynamicBoneTable->bones[11],
+                                JOBJ_HIDDEN);
         } else {
-            HSD_JObjClearFlagsAll(ip->xBBC_dynamicBoneTable->bones[18], 0x10);
-            HSD_JObjClearFlagsAll(ip->xBBC_dynamicBoneTable->bones[11], 0x10);
+            HSD_JObjClearFlagsAll(ip->xBBC_dynamicBoneTable->bones[18],
+                                  JOBJ_HIDDEN);
+            HSD_JObjClearFlagsAll(ip->xBBC_dynamicBoneTable->bones[11],
+                                  JOBJ_HIDDEN);
         }
     } else {
         ip->xDD4_itemVar.patapata.x28 -= 1;

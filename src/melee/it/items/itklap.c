@@ -6,6 +6,9 @@
 #include "it/it_2725.h"
 #include "it/itcoll.h"
 #include "it/item.h"
+#include "it/ithitbox.h"
+#include "it/itmaplib.h"
+#include "it/itzako.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbcollision.h"
 

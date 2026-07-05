@@ -3,7 +3,7 @@
 #include "baselib/forward.h"
 
 #include "db/db.h"
-#include "ftKirby/ftKb_Init.h"
+#include "ftKirby/ftkirbyspecialpeach.h"
 #include "ftPeach/ftPe_SpecialN.h"
 
 #include "it/forward.h"
@@ -14,18 +14,10 @@
 #include "it/item.h"
 #include "lb/lb_00B0.h"
 
-ItemStateTable it_803F7528[] = { {
-                                     0,
-                                     itPeachtoad_UnkMotion0_Anim,
-                                     NULL,
-                                     NULL,
-                                 },
-                                 {
-                                     1,
-                                     itPeachtoad_UnkMotion1_Anim,
-                                     NULL,
-                                     NULL,
-                                 } };
+ItemStateTable it_803F7528[] = {
+    { 0, itPeachtoad_UnkMotion0_Anim, NULL, NULL },
+    { 1, itPeachtoad_UnkMotion1_Anim, NULL, NULL },
+};
 
 static inline void itpeachtoad_inline_1(Item* item)
 {

@@ -12,12 +12,12 @@
 #include "gr/types.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
-#include "it/it_2725.h"
 #include "it/item.h"
 #include "it/items/itleadead.h"
 #include "it/items/itlikelike.h"
 #include "it/items/itnokonoko.h"
 #include "it/items/itpatapata.h"
+#include "it/itzako.h"
 #include "it/types.h"
 #include "lb/lb_00B0.h"
 
@@ -128,9 +128,7 @@ grZakoGenerator_Data* grZakoGenerator_801CA67C(void)
     int i;
     PAD_STACK(8);
 
-    if (data == NULL) {
-        __assert("grzakogenerator.c", 0x52, "pointp");
-    }
+    HSD_ASSERTMSG(0x52, data, "pointp");
 
     for (i = 0; i < 80; i++) {
         data->entries[i].x0 = i + 0x20;
@@ -260,9 +258,9 @@ void grZakoGenerator_801CAC14(HSD_GObj* gobj)
     s32 kind = itGetKind(gobj);
 
     if (kind == 0x9F) {
-        grZakoGenerator_Data* data = lbl_8049F030.x4;
-        if (data->sentinel.x4 == gobj) {
-            data->sentinel.x4 = NULL;
+        grZakoGenerator_Entry* sentinel = &lbl_8049F030.x4->sentinel;
+        if (sentinel->x4 == gobj) {
+            sentinel->x4 = NULL;
         }
     } else {
         s32 idx = ip->xDD4_itemVar.zako.idx;
@@ -281,9 +279,11 @@ void grZakoGenerator_801CACB8(Item_GObj* gobj)
     it_8027CE18(gobj);
 
     if (kind == 0x9F) {
-        if (lbl_8049F030.x4->sentinel.x4 == gobj) {
-            lbl_8049F030.x4->sentinel.x0 = -1;
-            lbl_8049F030.x4->sentinel.x4 = NULL;
+        grZakoGenerator_Data* data = lbl_8049F030.x4;
+        grZakoGenerator_Entry* sentinel = &data->sentinel;
+        if (sentinel->x4 == gobj) {
+            sentinel->x0 = -1;
+            data->sentinel.x4 = NULL;
         }
     } else {
         s32 idx = ip->xDD4_itemVar.zako.idx;

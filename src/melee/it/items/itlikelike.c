@@ -6,7 +6,7 @@
 #include <platform.h>
 
 #include "cm/camera.h"
-#include "ft/ft_0C31.h"
+#include "ft/ftCo_800C78B0.h"
 #include "ft/ftlib.h"
 
 #include "it/forward.h"
@@ -15,9 +15,13 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/it_3F14.h"
 #include "it/itcoll.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
+#include "it/ithitbox.h"
+#include "it/itmaplib.h"
+#include "it/itzako.h"
 #include "lb/lb_00B0.h"
 #include "lb/types.h"
 #include "mp/mpcoll.h"

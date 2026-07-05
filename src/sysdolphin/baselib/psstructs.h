@@ -103,7 +103,18 @@ struct HSD_psAppSRT {
     float ssx; /* 0x64 */
     float ssy; /* 0x68 */
 
-    u8 x6C_fill[0x9C - 0x6C]; /* 0x6C */
+    f32 x6C; /* 0x6C */
+    f32 x70; /* 0x70 */
+    f32 x74; /* 0x74 */
+    f32 x78; /* 0x78 */
+    f32 x7C; /* 0x7C */
+    f32 x80; /* 0x80 */
+    f32 x84; /* 0x84 */
+    f32 x88; /* 0x88 */
+    f32 x8C; /* 0x8C */
+    f32 x90; /* 0x90 */
+    f32 x94; /* 0x94 */
+    f32 x98; /* 0x98 */
 
     void (*freefunc)(struct HSD_psAppSRT* appSrt); /* 0x9C */
 

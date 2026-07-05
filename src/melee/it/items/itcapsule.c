@@ -9,10 +9,12 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/it_3F14.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
+#include "it/ithitbox.h"
 #include "it/types.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
@@ -102,7 +104,7 @@ void it_8027CFE8(Item_GObj* item_gobj)
     Vec3 sp14;
 
     it_8026B3A8(item_gobj);
-    HSD_JObjSetFlagsAll(jobj, 0x10);
+    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     it->x5D0_animFrameSpeed = 1.0F;
     it_80273454(item_gobj);
     it->xDD4_itemVar.capsule.x4 = true;

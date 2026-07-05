@@ -14,10 +14,10 @@
 #include "forward.h"
 
 #include "ft/fighter.h"
-#include "ft/ft_0852.h"
 #include "ft/ft_0877.h"
 #include "ft/ftanim.h"
 #include "ft/ftcamera.h"
+#include "ft/ftdata.h"
 #include "ft/ftdynamics.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"

@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-typedef struct _GObjFuncs GObjFuncs;
+typedef struct GObjFuncs GObjFuncs;
 typedef struct HSD_AnimJoint HSD_AnimJoint;
 typedef struct HSD_AObj HSD_AObj;
 typedef struct HSD_AObjDesc HSD_AObjDesc;
@@ -27,7 +27,7 @@ typedef struct HSD_Envelope HSD_Envelope;
 typedef struct HSD_EnvelopeDesc HSD_EnvelopeDesc;
 typedef struct HSD_Exp HSD_Exp;
 typedef struct HSD_ExpDesc HSD_ExpDesc;
-typedef struct _HSD_FObj HSD_FObj;
+typedef struct HSD_FObj HSD_FObj;
 typedef struct HSD_Fog HSD_Fog;
 typedef struct HSD_FogAdj HSD_FogAdj;
 typedef struct HSD_FogAdjDesc HSD_FogAdjDesc;
@@ -95,8 +95,8 @@ typedef struct HSD_WObjInfo HSD_WObjInfo;
 typedef struct PadLibData PadLibData;
 typedef struct RumbleCommand RumbleCommand;
 typedef struct RumbleInfo RumbleInfo;
+typedef struct SisBlock SisBlock;
 typedef struct sislib_UnkAlloc3 sislib_UnkAlloc3;
-typedef struct sislib_UnkAllocData sislib_UnkAllocData;
 typedef struct TextKerning TextKerning;
 typedef union HSD_CObjDesc HSD_CObjDesc;
 typedef union HSD_ObjData HSD_ObjData;

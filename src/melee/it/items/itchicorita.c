@@ -6,8 +6,10 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/it_279C.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
+#include "it/itmaplib.h"
 
 ItemStateTable it_803F7A98[] = {
     { 0, itChicorita_UnkMotion0_Anim, itChicorita_UnkMotion0_Phys,
@@ -95,8 +97,8 @@ bool itChicorita_UnkMotion0_Anim(HSD_GObj* item_gobj)
             item = item_gobj->user_data;
             article = item->xC4_article_data;
             attr = article->x4_specialAttributes;
-            if (item->xDD4_itemVar.chicorita.x60 == -1)
-            { // This check will never succeed?
+            if (item->xDD4_itemVar.chicorita.x60 ==
+                -1) { // This check will never succeed?
                 item->xDD4_itemVar.chicorita.x60 = attr->x4;
             }
             Item_80268E5C(item_gobj, 0, ITEM_ANIM_UPDATE);

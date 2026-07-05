@@ -1,5 +1,5 @@
-#include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
+#include "lb/lbspdisplay.h"
 #include "mn/mnmain.h"
 #include "mn/types.h"
 
@@ -25,6 +25,7 @@ typedef enum _MenuInput {
 } MenuInput;
 
 #define GET_MENU(gobj) ((Menu*) HSD_GObjGetUserData(gobj))
+#define GET_DIAGRAM(gobj) ((Diagram*) HSD_GObjGetUserData(gobj))
 
 static inline void Menu_DecrementAnimTimer(void)
 {

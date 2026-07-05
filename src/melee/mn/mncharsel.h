@@ -26,7 +26,7 @@
 /* 2633B0 */ void fn_802633B0(HSD_GObj*);
 /* 264070 */ void mnCharSel_80264070(void);
 /* 26407C */ void fn_8026407C(HSD_GObj*);
-/* 2640A0 */ UNK_RET mnCharSel_802640A0(UNK_PARAMS);
+/* 2640A0 */ s32 mnCharSel_802640A0(void);
 /* 26688C */ void mnCharSel_8026688C_OnEnter(void*);
 /* 2669F4 */ void mnCharSel_802669F4_OnFrame(void);
 /* 266D70 */ void mnCharSel_80266D70_OnLeave(void*);

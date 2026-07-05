@@ -10,6 +10,7 @@
 #include "it/it_2725.h"
 #include "it/itcoll.h"
 #include "it/item.h"
+#include "it/ithitbox.h"
 
 #include <baselib/jobj.h>
 

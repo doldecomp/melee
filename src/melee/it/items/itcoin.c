@@ -15,6 +15,9 @@
 #include "it/itcoll.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
+#include "it/ithitbox.h"
+#include "it/itmaplib.h"
+#include "it/itzako.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbvector.h"
 #include "mp/mpcoll.h"
@@ -70,20 +73,20 @@ void it_802F13B4(Item_GObj* gobj, int arg1)
             ((Camera_80031144() < attr->x48) &&
              (grFigureGet_80219C50(ip->xDD4_itemVar.coin.x14) == 0)))
         {
-            HSD_JObjSetFlagsAll(jobj, 0x10);
-            HSD_JObjClearFlagsAll(jobj->next, 0x10);
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+            HSD_JObjClearFlagsAll(jobj->next, JOBJ_HIDDEN);
         } else {
-            HSD_JObjSetFlagsAll(jobj->next, 0x10);
-            HSD_JObjClearFlagsAll(jobj, 0x10);
+            HSD_JObjSetFlagsAll(jobj->next, JOBJ_HIDDEN);
+            HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         }
     } else if (((gm_801A45E8(1) != 0) && (Ground_801C1D84() == 0)) ||
                (Camera_80031144() < attr->x48))
     {
-        HSD_JObjSetFlagsAll(jobj, 0x10);
-        HSD_JObjClearFlagsAll(jobj->next, 0x10);
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+        HSD_JObjClearFlagsAll(jobj->next, JOBJ_HIDDEN);
     } else {
-        HSD_JObjSetFlagsAll(jobj->next, 0x10);
-        HSD_JObjClearFlagsAll(jobj, 0x10);
+        HSD_JObjSetFlagsAll(jobj->next, JOBJ_HIDDEN);
+        HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
     }
     it_8026EECC(gobj, arg1);
 }
@@ -184,7 +187,7 @@ void itCoin_Logic116_PickedUp(Item_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
     HSD_JObj* child = HSD_JObjGetChild(jobj);
 
-    HSD_JObjClearFlagsAll(child, 0x10);
+    HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
     Item_80268E5C(gobj, 2, ITEM_UNK_0x1);
 }
 
@@ -418,13 +421,13 @@ Item_GObj* it_802F2094(HSD_GObj* arg0, Vec3* pos, int arg2, int arg3)
                 ip->xDD4_itemVar.coin.xC = attr->x4;
                 break;
             }
-            var_r29 = un_8031C5E4(arg2);
+            var_r29 = tyDisplay_8031C5E4(arg2);
         } else {
             Item_80267454(gobj);
             it_802756D0(gobj);
             it_8026B390(gobj);
             ip->xD5C = 0;
-            var_r29 = un_8031C5E4(arg2);
+            var_r29 = tyDisplay_8031C5E4(arg2);
         }
         HSD_GObjObject_80390B0C(gobj);
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, var_r29);

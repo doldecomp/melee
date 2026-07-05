@@ -6,19 +6,19 @@
 #include <platform.h>
 
 #include "cm/camera.h"
+#include "cm/types.h"
 
 #include "forward.h"
 
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
-#include "gr/grlib.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/stage.h"
 #include "gr/types.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 #include "mp/mplib.h"
 
 #include <dolphin/mtx.h>
@@ -278,6 +278,7 @@ void grFourside_801F3274(Ground_GObj* gobj)
     HSD_JObj* crane_iron = Ground_801C3FA4(gobj, 4);
     float fVar1;
     float temp_fVar1;
+    PAD_STACK(0x1C);
     // Ground_801C2ED0(jobj,gp->map_id);
     // grAnime_801C7FF8(gobj,0,7,0,0.0f,0.0f);
     switch (gp->gv.foursideCrane.x0) {
@@ -337,7 +338,7 @@ void grFourside_801F3274(Ground_GObj* gobj)
                 gp->gv.foursideCrane.x10 =
                     gp->gv.foursideCrane.x10 -
                     (((s32) fVar1 != 0 ? HSD_Randi(fVar1) : 0) + temp_fVar1);
-                gp->gv.foursideCrane.x1.b1 = 0;
+                gp->gv.foursideCrane.x1.b1 = 1;
                 OSReport("pos = %f : tgrpos = %f\n", gp->gv.foursideCrane.xC,
                          gp->gv.foursideCrane.x10);
                 gp->gv.foursideCrane.x0 = 5;
@@ -382,9 +383,11 @@ void grFourside_801F3274(Ground_GObj* gobj)
         }
         break;
     case 7:
-        temp_fVar1 = fVar1 = gp->gv.foursideCrane.x1C;
+        fVar1 = gp->gv.foursideCrane.x1C;
         if (fVar1 < 0.0f) {
             temp_fVar1 = -fVar1;
+        } else {
+            temp_fVar1 = fVar1;
         }
         if (temp_fVar1 > gp->gv.foursideCrane.x14) {
             gp->gv.foursideCrane.xC = gp->gv.foursideCrane.x10;
@@ -430,7 +433,7 @@ void grFourside_801F37FC(Ground_GObj* gobj)
     gp->gv.foursideUfo.x2 = 0;
     gp->gv.foursideUfo.xC = 0;
     gp->gv.foursideUfo.x3 = 0;
-    HSD_JObjSetFlagsAll(jobj, 16);
+    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     mpLib_80057BC0(4);
     gp->x10_flags.b5 = 1;
 }
@@ -440,24 +443,20 @@ bool grFourside_801F388C(Ground_GObj* arg)
     return false;
 }
 
-void grFourside_801F3894(Ground_GObj* arg0)
+static inline void grFourside_801F3894_inline(Ground_GObj* gobj, Ground* gp,
+                                              HSD_JObj* jobj, u8 state,
+                                              u8 prev_building)
 {
-    Ground* gp = arg0->user_data;
-    HSD_JObj* jobj = arg0->hsd_obj;
-    u8 state = gp->gv.foursideUfo.x0;
-    u8 prev_building = gp->gv.foursideUfo.x1;
     switch (state) {
     case 0: {
         s32 timer = gp->gv.foursideUfo.x4;
         if (timer <= 0) {
-            s16 prob = 0;
+            s32 prob = 0;
             if (gp->gv.foursideUfo.x8 != 0) {
-                prob = grFs_804D69D8->x46;
+                prob = (s16) grFs_804D69D8->x46;
             }
-            if ((s16) gp->gv.foursideUfo.x2 >=
-                (s16) grFs_804D69D8->ufo_challenge)
-            {
-                prob = grFs_804D69D8->x48;
+            if (gp->gv.foursideUfo.x2 >= (s16) grFs_804D69D8->ufo_challenge) {
+                prob = (s16) grFs_804D69D8->x48;
             }
             if (prob != 0 && HSD_Randi(prob) == 0) {
                 s32 building;
@@ -467,11 +466,11 @@ void grFourside_801F3894(Ground_GObj* arg0)
                 } while (prev_building == building);
                 if (building == 2 || grFourside_801F3F10() == 0) {
                     gp->gv.foursideUfo.x1 = building;
-                    grAnime_801C8138(arg0, gp->map_id,
+                    grAnime_801C8138(gobj, gp->map_id,
                                      gp->gv.foursideUfo.x1 * 4);
                     mpLib_80055E9C(4);
                     mpLib_80057424(4);
-                    HSD_JObjClearFlagsAll(jobj, 0x10);
+                    HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
                     mpJointListAdd(4);
                     gp->gv.foursideUfo.xC = Camera_80029020();
                     gp->gv.foursideUfo.x3 = 0;
@@ -487,7 +486,7 @@ void grFourside_801F3894(Ground_GObj* arg0)
         break;
     }
     case 1: {
-        if (grAnime_801C83D0(arg0, 0, 7) != 0) {
+        if (grAnime_801C83D0(gobj, 0, 7) != 0) {
             s32 rand_add = grFs_804D69D8->ufo_stay_time_add;
             s32 var_r6;
             if (rand_add != 0) {
@@ -496,12 +495,12 @@ void grFourside_801F3894(Ground_GObj* arg0)
                 var_r6 = 0;
             }
             gp->gv.foursideUfo.x4 = grFs_804D69D8->ufo_stay_time + var_r6;
-            grAnime_801C8138(arg0, gp->map_id, (prev_building * 4) + 1);
+            grAnime_801C8138(gobj, gp->map_id, (prev_building * 4) + 1);
             Camera_800290D4(gp->gv.foursideUfo.xC);
             gp->gv.foursideUfo.xC = 0;
             gp->gv.foursideUfo.x0 = 2;
         }
-        grFourside_801F3B70(arg0);
+        grFourside_801F3B70(gobj);
         if (gp->gv.foursideUfo.x3 == 1) {
             u8 building = gp->gv.foursideUfo.x1;
             if (building == 0) {
@@ -518,8 +517,8 @@ void grFourside_801F3894(Ground_GObj* arg0)
     case 2: {
         s32 timer = gp->gv.foursideUfo.x4;
         if (timer <= 0) {
-            if (grAnime_801C84A4(arg0, 0, 7) != 0) {
-                grAnime_801C8138(arg0, gp->map_id, (prev_building * 4) + 2);
+            if (grAnime_801C84A4(gobj, 0, 7) != 0) {
+                grAnime_801C8138(gobj, gp->map_id, (prev_building * 4) + 2);
                 gp->gv.foursideUfo.x0 = 4;
             }
         } else {
@@ -530,7 +529,7 @@ void grFourside_801F3894(Ground_GObj* arg0)
     case 4: {
         s32 timer = gp->gv.foursideUfo.x4;
         if (timer >= 0x3C) {
-            HSD_JObjSetFlagsAll(jobj, 0x10);
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             mpLib_80057BC0(4);
             gp->gv.foursideUfo.x4 = grFs_804D69D8->ufo_wait;
             gp->gv.foursideUfo.x0 = 0;
@@ -540,8 +539,19 @@ void grFourside_801F3894(Ground_GObj* arg0)
         break;
     }
     }
-    Ground_801C2FE0(arg0);
+    Ground_801C2FE0(gobj);
     gp->gv.foursideUfo.x8 = 0;
+}
+
+void grFourside_801F3894(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    u8 state = gp->gv.foursideUfo.x0;
+    u8 prev_building = gp->gv.foursideUfo.x1;
+    HSD_JObj* jobj = gobj->hsd_obj;
+    PAD_STACK(8);
+
+    grFourside_801F3894_inline(gobj, gp, jobj, state, prev_building);
 }
 
 void grFourside_801F3B6C(Ground_GObj* arg) {}
@@ -599,6 +609,8 @@ void grFourside_801F3CC8(Ground_GObj* gobj)
     HSD_JObj* heli_jobj = Ground_801C3FA4(gobj, 2);
     HSD_GObj* other;
     Ground* other_gp;
+    bool other_active;
+    PAD_STACK(0x14);
 
     switch (gp->gv.fourside2.x0) {
     case 0:
@@ -608,6 +620,11 @@ void grFourside_801F3CC8(Ground_GObj* gobj)
             if (other_gp->gv.fourside2.x1 == 2 ||
                 other_gp->gv.fourside2.x0 == 0)
             {
+                other_active = false;
+            } else {
+                other_active = true;
+            }
+            if (other_active == false) {
                 HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
                 grAnime_801C8138(gobj, gp->map_id, 0);
                 gp->gv.fourside2.x1 = 0;
@@ -636,6 +653,11 @@ void grFourside_801F3CC8(Ground_GObj* gobj)
             if (other_gp->gv.fourside2.x1 == 2 ||
                 other_gp->gv.fourside2.x0 == 0)
             {
+                other_active = false;
+            } else {
+                other_active = true;
+            }
+            if (other_active == false) {
                 grAnime_801C8138(gobj, gp->map_id, 2);
                 gp->gv.fourside2.x0 = 3;
                 Ground_801C53EC(0x704E2);

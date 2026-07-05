@@ -1,4 +1,4 @@
-#include "lb_0192.h"
+#include "lb_0195.h"
 #include "lbarchive.h"
 
 #include "lbdvd.static.h"
@@ -8,6 +8,8 @@
 #include "types.h"
 
 #include <placeholder.h>
+
+#include "gm/gm_1B14.h"
 
 #include <dolphin/dvd.h>
 #include <dolphin/os/OSInterrupt.h>
@@ -142,16 +144,13 @@ void* lbDvd_80017740(int type, int entry_num, int transient_heap, int heap,
         }
     }
 
-    if (free_index == -1) {
-        __assert("lbdvd.c", 0x1C1, "free_index != -1");
-    }
+    HSD_ASSERT(0x1C1, free_index != -1);
     entry = &preloadCache.entries[free_index];
     entry->state = 1;
     entry->type = type;
     entry->entry_num = entry_num;
     if (lbHeap_80015BB8(heap)) {
-        OSReport("%d, %d\n", heap, entry_num);
-        __assert("lbdvd.c", 0x1CB, "0");
+        HSD_ASSERTREPORT(0x1CB, 0, "%d, %d\n", heap, entry_num);
     }
     entry->heap = heap;
     entry->size = size;
@@ -181,9 +180,9 @@ void lbDvd_80017960(void)
     int i;
     u8 _[4];
 
-    if (preloadCache.new_scene.game_cache.major_id != MJ_COUNT) {
-        switch (preloadCache.new_scene.game_cache.major_id) {
-        case MJ_CAMERA_MODE:
+    if (preloadCache.new_scene.game_cache.mode_id != GM_COUNT) {
+        switch (preloadCache.new_scene.game_cache.mode_id) {
+        case GM_CAMERA_MODE:
             gm_801B23F0();
             break;
         }
@@ -331,7 +330,7 @@ void lbDvd_80017E64(int key, int index, void* value, bool cancelflag)
 {
     PreloadEntry* preloadEntry = &preloadCache.entries[index];
     if (cancelflag != 0) {
-        __assert(__FILE__, 827, "0");
+        HSD_ASSERT(827, 0);
     } else {
         preloadEntry->state = 3;
     }
@@ -389,7 +388,7 @@ void* lbDvd_GetPreloadedArchive(ssize_t entry_num)
             break;
 
         default:
-            __assert(__FILE__, 864, "0");
+            HSD_ASSERT(864, 0);
             break;
         }
 
@@ -407,7 +406,7 @@ struct lbDvd_803B72C0_t {
     int x8;
 };
 
-static void inline1(void)
+static inline void inline1(void)
 {
     struct lbDvd_803B72C0_t spA0 = { 2, "LbRb.dat" };
     if (preloadCache.new_scene.is_heap_persistent[0]) {
@@ -419,7 +418,7 @@ static void inline1(void)
     }
 }
 
-static void inline2(void)
+static inline void inline2(void)
 {
     int i;
     int temp_r3_6;
@@ -446,9 +445,8 @@ HSD_Archive* lbDvd_8001819C(const char* basename)
     HSD_Archive* archive;
     char* filename = lbFile_80016204(basename);
     archive = lbDvd_GetPreloadedArchive(DVDConvertPathToEntrynum(filename));
-    if (g_debugLevel != 0 && preloadCache.preloaded && archive == NULL) {
-        OSReport("[LbDvd] %s is not PRELOADed.\n", filename);
-        __assert(__FILE__, 948, "0");
+    if (DbLevel != 0 && preloadCache.preloaded && archive == NULL) {
+        HSD_ASSERTREPORT(948, 0, "[LbDvd] %s is not PRELOADed.\n", filename);
     }
     return archive;
 }
@@ -460,18 +458,17 @@ PreloadCacheScene* lbDvd_8001822C(void)
 
 void lbDvd_8001823C(void)
 {
-    preloadCache.scene.major_scene_changes =
-        preloadCache.new_scene.major_scene_changes + 1;
+    preloadCache.scene.mode_scene_changes =
+        preloadCache.new_scene.mode_scene_changes + 1;
 }
 
 void lbDvd_80018254(void)
 {
     bool enabled;
     PreloadEntry* entry;
-    struct lbDvd_803B72C0_t* var_r26;
     int i;
 
-    u8 _[0x18];
+    PAD_STACK(0x18);
 
     if (memcmp(&preloadCache.new_scene, &preloadCache.scene,
                sizeof(PreloadCacheScene)) == 0)
@@ -508,19 +505,25 @@ void lbDvd_80018254(void)
         break;
     }
 
-    for (i = 0; i < (signed) ARRAY_SIZE(preloadCache.entries); i++) {
-        entry = &preloadCache.entries[i];
-        if (entry->load_score < 0) {
-            if (entry->state == 1) {
-                if (preloadCache.entries[i].archive != NULL) {
-                    lbHeap_80015CA8(entry->heap, entry->archive->addr);
+    {
+        PreloadEntry* cleanup_entry;
+        int j;
+        for (j = 0; j < (signed) ARRAY_SIZE(preloadCache.entries); j++) {
+            cleanup_entry = &preloadCache.entries[j];
+            if (cleanup_entry->load_score < 0) {
+                if (cleanup_entry->state == 1) {
+                    if (preloadCache.entries[j].archive != NULL) {
+                        lbHeap_80015CA8(cleanup_entry->heap,
+                                        cleanup_entry->archive->addr);
+                    }
+                    if (cleanup_entry->raw_data != NULL) {
+                        lbHeap_80015CA8(cleanup_entry->heap,
+                                        cleanup_entry->raw_data->addr);
+                    }
+                    *cleanup_entry = lbDvd_803BA68C;
+                } else if (cleanup_entry->state == 4) {
+                    cleanup_entry->state = 3;
                 }
-                if (entry->raw_data != NULL) {
-                    lbHeap_80015CA8(entry->heap, entry->raw_data->addr);
-                }
-                *entry = lbDvd_803BA68C;
-            } else if (entry->state == 4) {
-                entry->state = 3;
             }
         }
     }
@@ -737,8 +740,8 @@ void lbDvd_80018CF4(int arg0)
     int i;
 
     if (preloadCache.persistent_heaps != arg0) {
-        preloadCache.scene.major_scene_changes =
-            preloadCache.new_scene.major_scene_changes + 1;
+        preloadCache.scene.mode_scene_changes =
+            preloadCache.new_scene.mode_scene_changes + 1;
     }
     preloadCache.persistent_heaps = arg0;
     lbHeap_800158D0(2, 1);

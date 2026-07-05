@@ -7,6 +7,8 @@
 #include "object.h"
 #include "wobj.h"
 
+#include <placeholder.h>
+
 #include "dolphin/gx/GXEnum.h"
 
 #include "forward.h"
@@ -72,7 +74,7 @@ s32 HSD_LObjGetLightMaskSpecular(void)
 
 u32 HSD_LObjGetType(HSD_LObj* lobj)
 {
-    return lobj->flags & 0x3;
+    return lobj->flags & LOBJ_TYPE_MASK;
 }
 
 void HSD_LObjSetActive(HSD_LObj* lobj)
@@ -337,7 +339,7 @@ void HSD_LObjSetupSpecularInit(Mtx pmtx)
             break;
 
         default:
-            __assert(__FILE__, 617, "0");
+            HSD_ASSERT(617, 0);
         }
         PSVECNormalize(&half, &half);
         GXInitLightDir(&lobj->spec_lightobj, half.x, half.y, half.z);
@@ -362,7 +364,7 @@ static void setup_diffuse_lightobj(HSD_LObj* lobj)
     case LOBJ_INFINITE:
         break;
     default:
-        __assert(__FILE__, 642, "0");
+        HSD_ASSERT(642, 0);
     }
 
     if (lobj->flags & LOBJ_ALPHA) {
@@ -396,7 +398,7 @@ static void setup_spec_lightobj(HSD_LObj* lobj, Mtx mtx, s32 spec_id)
             VECNormalize(&lobj->lvec, &lobj->lvec);
             break;
         default:
-            __assert(__FILE__, 680, "0");
+            HSD_ASSERT(680, 0);
         }
         lobj->flags |= 0x100;
         lightmask_specular |= spec_id;

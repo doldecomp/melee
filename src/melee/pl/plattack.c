@@ -10,48 +10,34 @@ void plAttack_80037590(void)
     unk_804D6480 = 1;
 }
 
+static inline void clearAttackStats(struct plAttackStats* s)
+{
+    int i;
+    for (i = 0; i < StatsAttack_Count; i++) {
+        s->by_attack_counts[i] = 0;
+    }
+    s->total = 0;
+    s->thrown_item_count = 0;
+    s->aerials_count = 0;
+    s->specials_count = 0;
+    s->x1A0_count = 0;
+    s->x1A4_count = 0;
+    s->x1A8 = 0;
+}
+
 ///< brief resets the players stats
 void plAttack_8003759C(u32 slot)
 {
     plActionStats* stats;
-    s32 i;
+    int i;
 
     stats = Player_GetActionStats((s32) slot);
 
-    for (i = 2; i < StatsAttack_Count; i++) {
-        stats->attacks.by_attack_counts[i] = 0;
-    }
-    stats->attacks.total = 0;
-    stats->attacks.thrown_item_count = 0;
-    stats->attacks.aerials_count = 0;
-    stats->attacks.specials_count = 0;
-    stats->attacks.x1A0_count = 0;
-    stats->attacks.x1A4_count = 0;
-    stats->attacks.x1A8 = 0;
+    clearAttackStats(&stats->attacks);
+    clearAttackStats(&stats->hits);
+    clearAttackStats(&stats->x358_hits);
 
-    for (i = 2; i < StatsAttack_Count; i++) {
-        stats->hits.by_attack_counts[i] = 0;
-    }
-    stats->hits.total = 0;
-    stats->hits.thrown_item_count = 0;
-    stats->hits.aerials_count = 0;
-    stats->hits.specials_count = 0;
-    stats->hits.x1A0_count = 0;
-    stats->hits.x1A4_count = 0;
-    stats->hits.x1A8 = 0;
-
-    for (i = 2; i < StatsAttack_Count; i++) {
-        stats->x358_hits.by_attack_counts[i] = 0;
-    }
-    stats->x358_hits.total = 0;
-    stats->x358_hits.thrown_item_count = 0;
-    stats->x358_hits.aerials_count = 0;
-    stats->x358_hits.specials_count = 0;
-    stats->x358_hits.x1A0_count = 0;
-    stats->x358_hits.x1A4_count = 0;
-    stats->x358_hits.x1A8 = 0;
-
-    for (i = 2; i < StatsAttack_Count; i++) {
+    for (i = 0; i < StatsAttack_Count; i++) {
         stats->x504[i] = 0;
     }
     stats->x568 = 0;

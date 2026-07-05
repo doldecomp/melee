@@ -7,7 +7,7 @@
 #include <sysdolphin/baselib/hsd_3AA7.h>
 #include <sysdolphin/baselib/hsd_3B27.h>
 #include <sysdolphin/baselib/memory.h>
-#include <melee/lb/lb_0192.h>
+#include <melee/lb/lb_0195.h>
 #include <MSL/strtoul.h>
 
 int lb_80019BB8(int card_result)
@@ -51,9 +51,7 @@ struct CardTask* lb_80019C38(void)
             break;
         }
     }
-    if (i == 0xB) {
-        __assert("lbcardnew.c", 0x154, "i != LbCardNewTaskArray_Max");
-    }
+    HSD_ASSERTMSG(0x154, i != 0xB, "i != LbCardNewTaskArray_Max");
     return result;
 }
 
@@ -250,9 +248,7 @@ int lb_8001A184(void)
         if (lb_80432A68.unk_10 != NULL) {
             *(s32*) lb_80432A68.unk_10 = 0;
         }
-        if (lb_80432A68.work_area == NULL) {
-            __assert("lbcardnew.c", 0x23F, "_p(work_area)");
-        }
+        HSD_ASSERTMSG(0x23F, lb_80432A68.work_area, "_p(work_area)");
         enabled = OSDisableInterrupts();
         did_disable = 1;
         mount_result = CARDMountAsync(lb_80432A68.chan, lb_80432A68.work_area,
@@ -371,9 +367,7 @@ int lb_8001A594(char* filename, void* file_entries)
                 open_result = CARDOpen(lb_80432A68.chan, filename,
                                        &lb_80432A68.file_info);
                 CARDClose(&lb_80432A68.file_info);
-                if (lb_80432A68.lib_area == NULL) {
-                    __assert("lbcardnew.c", 0x2C8, "_p(lib_area)");
-                }
+                HSD_ASSERTMSG(0x2C8, lb_80432A68.lib_area, "_p(lib_area)");
                 hsd_803B24E4(&lb_80432A68.unk_A8, lb_80432A68.chan, 0x2000,
                              lb_80432A68.lib_area);
                 if (open_result == 0) {
@@ -642,7 +636,6 @@ int lb_8001B14C(void)
     int count;
     int i;
     struct SnapshotNode** scan;
-    lbCardNew_SnapshotEntry* snapshot_entries;
 
     head = NULL;
     disk_id = DVDGetCurrentDiskID();
@@ -655,7 +648,6 @@ int lb_8001B14C(void)
     }
     nodes = HSD_MemAlloc(0x5F4);
     node = nodes;
-    snapshot_entries = lb_80432A68.snapshot_entries;
     company = (char*) stat[0].company;
     game = (char*) stat[0].gameName;
     count = 0;
@@ -684,14 +676,14 @@ int lb_8001B14C(void)
 
         copy_scan = &head;
         for (j = 0; j < count; j++) {
-            snapshot_entries[j].time = (*copy_scan)->time;
-            snapshot_entries[j].file_no = (*copy_scan)->file_no;
-            snapshot_entries[j].blocks = (*copy_scan)->blocks;
+            lb_80432A68.snapshot_entries[j].time = (*copy_scan)->time;
+            lb_80432A68.snapshot_entries[j].file_no = (*copy_scan)->file_no;
+            lb_80432A68.snapshot_entries[j].blocks = (*copy_scan)->blocks;
             copy_scan = &(*copy_scan)->next;
         }
     }
     for (i = count; i < 0x7F; i++) {
-        snapshot_entries[i].file_no = -1;
+        lb_80432A68.snapshot_entries[i].file_no = -1;
     }
     HSD_Free(nodes);
     lb_80432A68.unk_34 = 0;
@@ -1143,9 +1135,8 @@ int lb_8001C4A8(void* file_entries, void* icon_data)
         i = 0;
         while (entry->file_size != -1) {
             if (entry->file_size != 0) {
-                hsd_803AC3E0((struct hsd_803AC3E0_arg0_t*) ctx, i,
-                             entry->file_size, entry->file_flags,
-                             entry->data_size);
+                hsd_803AC3E0((struct CardState*) ctx, i, entry->file_size,
+                             entry->file_flags, entry->data_size);
             }
             i++;
             entry++;

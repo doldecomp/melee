@@ -1,6 +1,8 @@
+#define MNDIAGRAM_SOURCE
 #include "mndiagram.static.h"
 #include "mndiagram2.static.h"
 
+#include "baselib/debug.h"
 #include "baselib/gobj.h"
 #include "baselib/gobjgxlink.h"
 #include "baselib/gobjobject.h"
@@ -15,14 +17,16 @@
 #include "gm/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00CE.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
+#include "lb/lbspdisplay.h"
 #include "mn/inlines.h"
 #include "mn/mndiagram2.h"
 #include "mn/mndiagram3.h"
 #include "mn/mnmain.h"
 #include "mn/mnname.h"
+
+#define GET_DIAGRAM(gobj) ((Diagram*) HSD_GObjGetUserData(gobj))
 
 /// Sorted fighter indices array (25 fighters + padding)
 typedef struct mnDiagram_804A0750_t {
@@ -44,15 +48,15 @@ typedef struct mnDiagram_Assets {
     /* 0x19 */ u8 pad_19[3];
     /* 0x1C */ u8 sorted_names[0x78];
     /* 0x94 */ void* SubB1[4];
-    /* 0xA4 */ void* ConB2[4];
-    /* 0xB4 */ void* ConB3[4];
-    /* 0xC4 */ void* CursorB3[4];
+    /* 0xA4 */ void* NmB[4];
+    /* 0xB4 */ void* FaceB[4];
+    /* 0xC4 */ void* CursorB1[4];
     /* 0xD4 */ void* ConB1[4];
-    /* 0xE4 */ void* CursorB1_FaceB[4];
-    /* 0xF4 */ void* FaceB_NmB[4];
-    /* 0x104 */ void* NmB_shape[1];
+    /* 0xE4 */ void* ConB2[4];
+    /* 0xF4 */ void* ConB3[4];
+    /* 0x104 */ void* CursorB3[5];
 } mnDiagram_Assets;
-STATIC_ASSERT(sizeof(mnDiagram_Assets) == 0x108);
+STATIC_ASSERT(sizeof(mnDiagram_Assets) == 0x118);
 
 /// User data structure for mnDiagram_PopupCleanup callback.
 /// Overlay of Diagram - only accesses text array.
@@ -68,11 +72,22 @@ typedef struct mnDiagram_AnimData {
     /* 0x0C */ HSD_JObj* jobj;             ///< JObj for exit animation
 } mnDiagram_AnimData;
 
+/// Head label for the contiguous mnDiagram popup animation data run.
+typedef struct mnDiagram_PopupAnimTableHead {
+    /* 0x00 */ Point3d points[3];
+} mnDiagram_PopupAnimTableHead;
+
 /// BSS variables - sorted player arrays
 mnDiagram_804A0750_t mnDiagram_804A0750;
 mnDiagram_804A076C_t mnDiagram_804A076C;
 
-static AnimLoopSettings mnDiagram_803EE768 = { 0.0f, 9.0f, -0.1f };
+static mnDiagram_PopupAnimTableHead mnDiagram_PopupAnimTable = {
+    {
+        { 4.0F, 1.0F, 0.0F },
+        { -3.0F, 0.8F, 0.0F },
+        { -1.0F, 0.7F, 0.0F },
+    },
+};
 
 static u8 mnDiagram_803EE74C[0x1C] = {
     8,    1,    6,    0x10, 0x11, 4,   2,   0xD, 0xB, 0,
@@ -80,11 +95,29 @@ static u8 mnDiagram_803EE74C[0x1C] = {
     0x18, 0x13, 0x14, 0x17, 0x16, 0,   0,   0,
 };
 
-static Point3d mnDiagram_803EE728[3] = {
-    { 4.0F, 1.0F, 0.0F },
-    { -3.0F, 0.8F, 0.0F },
-    { -1.0F, 0.7F, 0.0F },
+static AnimLoopSettings mnDiagram_803EE768 = { 0.0f, 9.0f, -0.1f };
+
+/// Trailing animation settings overlaid by mnDiagram_AnimTable.
+static f32 mnDiagram_PopupExitAnimFrames[] = {
+    10.0f, 19.0f, -0.1f, 0.0f, 199.0f, 0.0f, 0.0f, 10.0f, -0.1f,
 };
+
+/// Overlay over &mnDiagram_PopupAnimTable to reach the trailing
+/// animation/text-layout data the popup/cursor procs read at fixed offsets.
+typedef struct mnDiagram_AnimTable {
+    /* 0x00 */ Point3d points[3];
+    /* 0x24 */ u8 pad_24[0x1C];
+    /* 0x40 */ AnimLoopSettings x40;
+    /* 0x4C */ u8 pad_4C[0xC];
+    /* 0x58 */ AnimLoopSettings arrow_anim;
+    /* 0x64 */ AnimLoopSettings cursor_anim;
+    /* 0x70 */ char x70[0x18];
+    /* 0x88 */ char x88[0xC];
+    /* 0x94 */ char x94[0x14];
+} mnDiagram_AnimTable;
+
+#define GET_DIAGRAM_ANIM_TABLE()                                              \
+    ((mnDiagram_AnimTable*) &mnDiagram_PopupAnimTable)
 
 static s32 mnDiagram_804D4FA0 = 0xFF;
 
@@ -147,12 +180,12 @@ u32 mnDiagram_ConvertDistanceForDisplay(u32 distance)
     return distance / 100;
 }
 
-s32 mnDiagram_GetHitPercentage(u8 is_name_mode, u8 player_index)
+s32 mnDiagram_GetHitPercentage(int is_name_mode, u8 player_index)
 {
     f32 player_attacks;
     f32 tag_player_attacks;
 
-    if (is_name_mode != 0) {
+    if ((u8) is_name_mode != 0) {
         if (GetPersistentNameData(player_index)->attacks_total != 0) {
             tag_player_attacks =
                 GetPersistentNameData(player_index)->attacks_total;
@@ -179,7 +212,7 @@ s32 mnDiagram_GetPlayPercentage(u8 is_name_mode, u8 player_index)
     s32 i;
     f32 zero = 0.0f;
 
-    if (is_name_mode != 0) {
+    if ((u8) is_name_mode != 0) {
         total_play_time = 0.0f;
         i = 0;
         do {
@@ -209,12 +242,12 @@ s32 mnDiagram_GetPlayPercentage(u8 is_name_mode, u8 player_index)
     return 0;
 }
 
-s32 mnDiagram_GetAveragePlayerCount(u8 is_name_mode, u8 player_index)
+s32 mnDiagram_GetAveragePlayerCount(int is_name_mode, u8 player_index)
 {
     f32 temp_f31;
     f32 temp_f31_2;
 
-    if (is_name_mode != 0) {
+    if ((u8) is_name_mode != 0) {
         if ((u16) GetPersistentNameData((s32) player_index)->match_count != 0)
         {
             temp_f31_2 =
@@ -299,6 +332,35 @@ int mnDiagram_GetFighterTotalKOs(u8 field_index)
     return total;
 }
 
+static inline int mnDiagram_SumFighterKOs(u8 field_index)
+{
+    int total = 0;
+    int i;
+    for (i = 0; i < 25; i++) {
+        if (mn_IsFighterUnlocked(i) != 0) {
+            total +=
+                GetPersistentFighterData(field_index)->fighter_kos[(u8) i];
+        }
+    }
+    return total;
+}
+
+static inline int mnDiagram_SumFighterKOsClamped(u8 field_index)
+{
+    int total = 0;
+    int i;
+    for (i = 0; i < 25; i++) {
+        if (mn_IsFighterUnlocked(i) != 0) {
+            total +=
+                GetPersistentFighterData(field_index)->fighter_kos[(u8) i];
+        }
+    }
+    if (total > 999999) {
+        total = 999999;
+    }
+    return total;
+}
+
 /// @brief Gets total falls (deaths) of a fighter against all other fighters.
 /// @details Iterates through all unlocked fighters and sums how many times
 ///          each fighter KO'd the target fighter. This is the column sum
@@ -322,6 +384,20 @@ int mnDiagram_GetFighterTotalFalls(u8 field_index)
 {
     PAD_STACK(16);
     return mnDiagram_SumFighterFalls(field_index);
+}
+
+/// @brief Counts the number of unlocked fighters (inline-expanded form).
+/// @return Number of unlocked fighters.
+static inline int mnDiagram_CountUnlockedFightersInline(void)
+{
+    int count = 0;
+    int i;
+    for (i = 0; i < 0x19; i++) {
+        if (mn_IsFighterUnlocked(i)) {
+            count++;
+        }
+    }
+    return count;
 }
 
 /// @brief Formats a number with optional decimal places.
@@ -587,32 +663,32 @@ int mnDiagram_GetRankedFighterForName(int rank, int name_idx,
     return 0x19;
 }
 
-u8 mnDiagram_GetLeastPlayedFighter(u8 name_idx)
+static inline int mnDiagram_AllPlayTimesZero(u8 name)
 {
     int i;
-    int name;
     int offset;
-    int result;
-    int min_fighter;
-    int count;
 
-    // Check if all play times are zero
     i = 0;
-    name = name_idx;
     offset = i;
     for (;;) {
         if (GetPersistentNameData(name)->play_time_by_fighter[i] != 0U) {
-            result = 0;
-            break;
+            return 0;
         }
         i++;
         offset += 4;
         if (i >= 0x19) {
-            result = 1;
-            break;
+            return 1;
         }
     }
-    if (result != 0) {
+}
+
+u8 mnDiagram_GetLeastPlayedFighter(u8 name_idx)
+{
+    int i;
+    int min_fighter;
+    int count;
+
+    if (mnDiagram_AllPlayTimesZero(name_idx)) {
         return 0x19;
     }
 
@@ -620,9 +696,9 @@ u8 mnDiagram_GetLeastPlayedFighter(u8 name_idx)
     min_fighter = 0;
     for (i = 1; i < 0x19; i++) {
         if (mn_IsFighterUnlocked(i) != 0) {
-            if (GetPersistentNameData(name)
+            if (GetPersistentNameData(name_idx)
                     ->play_time_by_fighter[min_fighter] >
-                GetPersistentNameData(name)->play_time_by_fighter[i])
+                GetPersistentNameData(name_idx)->play_time_by_fighter[i])
             {
                 min_fighter = i;
             }
@@ -633,7 +709,7 @@ u8 mnDiagram_GetLeastPlayedFighter(u8 name_idx)
     count = 0;
     for (i = 0; i < 0x19; i++) {
         if (mn_IsFighterUnlocked(i) != 0 &&
-            GetPersistentNameData(name)->play_time_by_fighter[i] == 0U)
+            GetPersistentNameData(name_idx)->play_time_by_fighter[i] == 0U)
         {
             count++;
         }
@@ -646,8 +722,9 @@ u8 mnDiagram_GetLeastPlayedFighter(u8 name_idx)
     count = 0;
     for (i = 0; i < 0x19; i++) {
         if (mn_IsFighterUnlocked(i) != 0 && i != min_fighter) {
-            if (GetPersistentNameData(name)->play_time_by_fighter[i] ==
-                GetPersistentNameData(name)->play_time_by_fighter[min_fighter])
+            if (GetPersistentNameData(name_idx)->play_time_by_fighter[i] ==
+                GetPersistentNameData(name_idx)
+                    ->play_time_by_fighter[min_fighter])
             {
                 count++;
             }
@@ -663,82 +740,103 @@ u8 mnDiagram_GetLeastPlayedFighter(u8 name_idx)
 void mnDiagram_8023FA6C(void)
 {
     u32 totals[0x19];
-    int i, j;
-    u8* src = mnDiagram_803EE74C;
     u8* dst = mnDiagram_804A0750.sorted_fighters;
-    PAD_STACK(8);
+    u8* dst_iter;
+    u8* candidate;
+    int i, j;
+    PAD_STACK(12);
 
-    for (i = 0; i < 0x19; i++) {
-        u32 total = 0;
-        dst[i] = src[i];
-        for (j = 0; j < 0x19; j++) {
-            if (mn_IsFighterUnlocked(j) != 0) {
-                total += GetPersistentFighterData(src[i])->fighter_kos[j];
-            }
-        }
-        totals[src[i]] = total;
+    dst_iter = dst;
+    for (i = 0; i < 0x19; i++, dst_iter++) {
+        u8 fighter;
+        *dst_iter = mnDiagram_803EE74C[i];
+        fighter = mnDiagram_803EE74C[i];
+        totals[mnDiagram_803EE74C[i]] = mnDiagram_SumFighterKOs(fighter);
     }
 
     for (i = 0; i < 0x19; i++) {
-        int max_idx = i;
-        for (j = i + 1; j < 0x19; j++) {
-            if ((mn_IsFighterUnlocked(dst[j]) != 0) &&
-                ((totals[dst[max_idx]] < totals[dst[j]]) ||
-                 (mn_IsFighterUnlocked(dst[max_idx]) == 0)))
-            {
-                max_idx = j;
+        int max_idx;
+        j = i;
+        candidate = &dst[++j];
+        max_idx = i;
+        for (; j < 0x19; candidate++, j++) {
+            if (mn_IsFighterUnlocked(*candidate) != 0) {
+                if ((totals[mnDiagram_804A0750.sorted_fighters[max_idx]] <
+                     totals[*candidate]) ||
+                    ((mn_IsFighterUnlocked(
+                          mnDiagram_804A0750.sorted_fighters[max_idx]) == 0) &&
+                     (mn_IsFighterUnlocked(*candidate) != 0)))
+                {
+                    max_idx = j;
+                }
             }
         }
         if (max_idx != i) {
-            u8* p = &dst[max_idx];
-            int n = max_idx - i;
-            u8 temp = *p;
-            while (n > 0) {
-                *p = *(p - 1);
-                p--;
-                n--;
+            u8 temp = mnDiagram_804A0750.sorted_fighters[max_idx];
+            while (max_idx > i) {
+                mnDiagram_804A0750.sorted_fighters[max_idx] =
+                    mnDiagram_804A0750.sorted_fighters[max_idx - 1];
+                max_idx--;
             }
-            dst[i] = temp;
+            mnDiagram_804A0750.sorted_fighters[i] = temp;
         }
     }
+}
+
+static inline int mnDiagram_SumNameKOs(u8 field_index)
+{
+    int total;
+    int j;
+    total = 0;
+    for (j = total; j < 0x78; j++) {
+        if (GetNameText(j & 0xFF)) {
+            total += GetPersistentNameData(field_index)->vs_kos[(u8) j];
+        }
+    }
+    return total;
 }
 
 void mnDiagram_8023FC28(void)
 {
     u32 totals[0x78];
-    int i, j;
-    u8* dst = ((mnDiagram_Assets*) &mnDiagram_804A0750)->sorted_names;
-    PAD_STACK(16);
+    int max_idx;
+    u8* dst_iter;
+    int i;
+    mnDiagram_Assets* assets = (mnDiagram_Assets*) &mnDiagram_804A0750;
+    u8* dst = assets->sorted_names;
+    u32* tp;
+    int n;
+    int j;
+    PAD_STACK(12);
 
-    for (i = 0; i < 0x78; i++) {
-        u32 total = 0;
-        dst[i] = (u8) i;
-        for (j = 0; j < 0x78; j++) {
-            if (GetNameText((u8) j) != NULL) {
-                total += GetPersistentNameData((u8) i)->vs_kos[(u8) j];
-            }
-        }
-        totals[i] = total;
+    dst_iter = dst;
+    tp = totals;
+    for (n = 0; n < 0x78; n++, dst_iter++, tp++) {
+        *dst_iter = (u8) n;
+        *tp = mnDiagram_SumNameKOs(n & 0xFF);
     }
 
     for (i = 0; i < 0x78; i++) {
-        int max_idx = i;
+        max_idx = i;
         for (j = i + 1; j < 0x78; j++) {
-            if ((GetNameText(dst[j]) != NULL) &&
-                ((totals[dst[max_idx]] < totals[dst[j]]) ||
-                 (GetNameText(dst[max_idx]) == NULL)))
+            if ((GetNameText(mnDiagram_804A076C.sorted_names[j]) != NULL) &&
+                ((totals[mnDiagram_804A076C.sorted_names[max_idx]] <
+                  totals[mnDiagram_804A076C.sorted_names[j]]) ||
+                 ((GetNameText(
+                       (0, mnDiagram_804A076C.sorted_names[max_idx])) ==
+                   NULL) &&
+                  (GetNameText(mnDiagram_804A076C.sorted_names[j]) != NULL))))
             {
                 max_idx = j;
             }
         }
         if (max_idx != i) {
-            u8* p = &dst[max_idx];
-            int n = max_idx - i;
-            u8 temp = *p;
-            while (n > 0) {
+            u8* p = &assets->sorted_fighters[max_idx];
+            u8 temp = *(p += sizeof(mnDiagram_804A0750_t));
+            while (max_idx > i) {
                 *p = *(p - 1);
                 p--;
-                n--;
+                max_idx--;
             }
             dst[i] = temp;
         }
@@ -779,52 +877,392 @@ void mnDiagram_PopupInputProc(HSD_GObj* gobj)
     }
 }
 
+static inline u8 mnDiagram_GetVisibleNameFrom(u8* sorted, int start, int rank)
+{
+    u8* p;
+    u8* p2;
+    int remaining;
+    int idx;
+
+    p = sorted;
+    p = p + start;
+    remaining = rank;
+    idx = start;
+    p = p + 0x1C;
+    while (remaining > 0) {
+        p2 = p;
+    loop:
+        idx++;
+        p2++;
+        p++;
+        if (idx >= 0x78) {
+            return 0x78;
+        }
+        if (GetNameText(*p2) == NULL) {
+            goto loop;
+        }
+        remaining--;
+    }
+    p = sorted;
+    p += idx;
+    return p[0x1C];
+}
+
+static inline u8 mnDiagram_GetVisibleFighterFrom(u8* sorted, int start,
+                                                 int rank)
+{
+    u8* p;
+    u8* p2;
+    int remaining;
+    int idx;
+
+    p = sorted + start;
+    remaining = rank;
+    idx = start;
+    while (remaining > 0) {
+        p2 = p;
+    loop:
+        idx++;
+        p2++;
+        p++;
+        if (idx >= 0x19) {
+            return 0x19;
+        }
+        if (mn_IsFighterUnlocked(*p2) == 0) {
+            goto loop;
+        }
+        remaining--;
+    }
+    return sorted[idx];
+}
+
+static inline s32 mnDiagram_FindPrevFighter(u8* sorted, s32 cur)
+{
+    u8* p = sorted + cur;
+    s32 found = cur;
+loop:
+    found--;
+    p--;
+    if (found < 0) {
+        return cur;
+    }
+    if (mn_IsFighterUnlocked(*p) == 0) {
+        goto loop;
+    }
+    return (u8) found;
+}
+
+static inline u8 mnDiagram_FindNextFighter(u8* sorted, s32 cur)
+{
+    u8* p = sorted + cur;
+    s32 found = cur;
+loop:
+    found++;
+    p++;
+    if (found >= 0x19) {
+        return cur;
+    }
+    if (mn_IsFighterUnlocked(*p) == 0) {
+        goto loop;
+    }
+    return found;
+}
+
+static inline s32 mnDiagram_FindPrevName(s32 cur)
+{
+    s32 found = cur;
+loop:
+    found--;
+    if (found < 0) {
+        return cur;
+    }
+    if (GetNameText(found & 0xFF) == NULL) {
+        goto loop;
+    }
+    return (u8) found;
+}
+
+static inline s32 mnDiagram_FindPrevNameWrap(s32 cur)
+{
+    s32 found = cur;
+loop:
+    found--;
+    if (found < 0) {
+        return (u8) cur;
+    }
+    if (GetNameText(found & 0xFF) == NULL) {
+        goto loop;
+    }
+    return (u8) found;
+}
+
+static inline s32 mnDiagram_FindPrevFighterWrap(u8* sorted, s32 cur)
+{
+    u8* p = sorted + cur;
+    s32 found = cur;
+loop:
+    found--;
+    p--;
+    if (found < 0) {
+        return (u8) cur;
+    }
+    if (mn_IsFighterUnlocked(*p) == 0) {
+        goto loop;
+    }
+    return (u8) found;
+}
+
+static inline u8 mnDiagram_FindNextName(s32 cur)
+{
+    s32 found = cur;
+loop:
+    found++;
+    if (found >= 0x78) {
+        return cur;
+    }
+    if (GetNameText(found & 0xFF) == NULL) {
+        goto loop;
+    }
+    return found;
+}
+
+static inline int mnDiagram_GetVisibleNameCursorFrom(u8* sorted, int start,
+                                                     int rank)
+{
+    u8* p;
+    u8* p2;
+    int remaining;
+    int idx;
+
+    p = sorted + start;
+    remaining = rank;
+    idx = start;
+    p = p + 0x1C;
+    while (remaining > 0) {
+        p2 = p;
+    loop:
+        idx++;
+        p2++;
+        p++;
+        if (idx >= 0x78) {
+            return 0x78;
+        }
+        if (GetNameText(*p2) == NULL) {
+            goto loop;
+        }
+        remaining--;
+    }
+    p = sorted;
+    p += idx;
+    return p[0x1C];
+}
+
+static inline u8 mnDiagram_GetVisibleFighterCursorFrom(u8* sorted, int start,
+                                                       int rank)
+{
+    u8* p;
+    u8* p2;
+    int remaining;
+    int idx;
+    u8 result;
+
+    remaining = rank;
+    idx = start;
+    p = sorted + start;
+    while (remaining >= 0) {
+        if (remaining == 0) {
+            result = sorted[idx];
+            break;
+        }
+        p2 = p;
+    loop:
+        idx++;
+        p2++;
+        p++;
+        if (idx >= 0x19) {
+            result = 0x19;
+            break;
+        }
+        if (mn_IsFighterUnlocked(*p2) == 0) {
+            goto loop;
+        }
+        remaining--;
+    }
+    return result;
+}
+
+/// @brief Persists the current name/fighter cursor positions and mode into
+///        the shared GameRules block on menu exit / page change.
+static inline void mnDiagram_SaveCursorToGameRules(Diagram* d)
+{
+    gmMainLib_8015CC34()->xE = (u8) (d->fighter_cursor_pos >> 8);
+    gmMainLib_8015CC34()->xF = (u8) d->fighter_cursor_pos;
+    gmMainLib_8015CC34()->unk_x10 = (u8) (d->name_cursor_pos >> 8);
+    gmMainLib_8015CC34()->x11 = (u8) d->name_cursor_pos;
+    gmMainLib_8015CC34()->xD = d->is_name_mode;
+}
+
+/// @brief Per-frame input handler for the VS Records "diagram" grid screen.
+///
+/// Dispatches the current frame's menu input:
+///   - A (0x10):    open the detail popup (mnDiagram_PopupInputProc) for the
+///                  highlighted cell, mapping the display cursor
+///                  (mn_804A04F0.hovered_selection = row<<8 | col) to the
+///                  underlying name/fighter id via the col-th/row-th visible
+///                  entry, then enter the detail page (mnDiagram_80241310).
+///   - B (0x20):    save cursor state and back out (mn_80229894).
+///   - Start/Z (0xC0): save cursor state and advance to page 2
+///                  (mnDiagram2_Init) or page 3 (mnDiagram3_8024714C).
+///   - L/R (0xC00): toggle between name-tag and fighter axes, clamping the
+///                  cursor to the valid entry count.
+///   - D-pad (1/2/4/8): move the cursor within the grid, scrolling the data
+///                  window by a page when moving past a visible edge.
+///
+/// The "visible entry" scans skip locked fighters / empty name slots, and are
+/// factored into the mnDiagram_GetVisible*From /
+/// mnDiagram_Get{Prev,Next}*Index helpers shared with mndiagram2.
 void mnDiagram_InputProc(HSD_GObj* gobj)
 {
+    u8* ptr;
     HSD_GObjProc* proc;
+    u8 row_result;
+    s32 i;
+    u8* ptr2;
+    u8* ptr3;
+    short new_var;
+    u8* sorted = mnDiagram_804A0750.sorted_fighters;
     Diagram* data = mnDiagram_804D6C10->user_data;
-    u64 input = Menu_GetAllInputs();
-    PAD_STACK(80);
-
-    if ((u32) input & 0x10) {
-        lbAudioAx_80024030(1);
+    u32 input = mn_80229624(4);
+    s32 count = 0;
+    s32 col;
+    s32 row;
+    s32 row2;
+    s32 new_var2;
+    s32 row3;
+    s32 row4;
+    s32 row5;
+    s32 row6;
+    u8 col_result;
+    u8 col_result2;
+    u8 row_result2;
+    u8 col_result3;
+    u8 col_result4;
+    u8 row_result3;
+    u8 row_result4;
+    s32 found;
+    s32 cur;
+    s32 count2;
+    u8 operand_pad[4];
+    PAD_STACK(64);
+    mn_804A04F0.buttons = input;
+    count2 = 0;
+    if (input & 0x10) {
+        cur = 1;
+        lbAudioAx_80024030(cur);
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+        i = 0;
         proc = HSD_GObj_SetupProc(
-            gobj, (void (*)(HSD_GObj*)) mnDiagram_PopupInputProc, 0);
+            gobj, (void (*)(HSD_GObj*)) mnDiagram_PopupInputProc, i);
         proc->flags_3 = HSD_GObj_804D783C;
         if (data->is_name_mode != 0) {
-            u8 col_idx = (u8) data->name_cursor_pos;
-            u8 row_idx = data->name_cursor_pos >> 8;
-            mnDiagram_80241310(col_idx, row_idx, 1);
-        } else {
-            u8 col_idx = (u8) data->fighter_cursor_pos;
-            u8 row_idx = data->fighter_cursor_pos >> 8;
-            mnDiagram_80241310(col_idx, row_idx, 0);
+            col = mn_804A04F0.hovered_selection;
+            cur = col;
+            col_result = mnDiagram_GetVisibleNameFrom(
+                sorted, (u8) data->name_cursor_pos, (u8) cur);
+            row = mn_804A04F0.hovered_selection >> 8;
+            (void) row;
+            row_result = mnDiagram_GetVisibleNameFrom(
+                sorted, data->name_cursor_pos >> 8, row);
+            mnDiagram_80241310(col_result, row_result, 1);
+            return;
         }
+        i = (u8) data->fighter_cursor_pos;
+        col = (u8) mn_804A04F0.hovered_selection;
+        ptr = sorted + i;
+        goto fc_test;
+    fc_outer:
+        if (col == 0) {
+            col_result2 = sorted[i];
+        } else {
+            ptr2 = ptr;
+        fc_inner:
+            i++;
+
+            ptr2++;
+            ptr++;
+            if (i >= 0x19) {
+                col_result2 = 0x19;
+            } else if (mn_IsFighterUnlocked(*ptr2) != 0) {
+                col--;
+            fc_test:
+                if (col >= 0) {
+                    goto fc_outer;
+                }
+
+            } else {
+                goto fc_inner;
+            }
+        }
+
+        row2 = mn_804A04F0.hovered_selection >> 8;
+        i = data->fighter_cursor_pos >> 8;
+        ptr = sorted + i;
+        goto fr_test;
+    fr_outer:
+        if (row2 == 0) {
+            row_result2 = sorted[i];
+        } else {
+            ptr2 = ptr;
+        fr_inner:
+            i++;
+
+            ptr2++;
+            ptr++;
+            if (i >= 0x19) {
+                row_result2 = 0x19;
+            } else if (mn_IsFighterUnlocked(*ptr2) != 0) {
+                row2--;
+            fr_test:
+                if (row2 >= 0) {
+                    goto fr_outer;
+                }
+
+            } else {
+                goto fr_inner;
+            }
+        }
+
+        mnDiagram_80241310(col_result2, row_result2, 0);
         return;
     }
     if (input & 0x20) {
         lbAudioAx_80024030(0);
-        mn_804A04F0.entering_menu = 0;
-        gmMainLib_8015CC34()->xE = (u8) (data->fighter_cursor_pos >> 8);
-        gmMainLib_8015CC34()->xF = (u8) data->fighter_cursor_pos;
-        gmMainLib_8015CC34()->unk_x10 = (u8) (data->name_cursor_pos >> 8);
-        gmMainLib_8015CC34()->x11 = (u8) data->name_cursor_pos;
-        gmMainLib_8015CC34()->xD = data->is_name_mode;
-        mn_80229894(0x1C, 0, 3);
+        mn_804A04F0.entering_menu = count2;
+        {
+            Diagram* d = mnDiagram_804D6C10->user_data;
+            gmMainLib_8015CC34()->xE = (u8) (d->fighter_cursor_pos >> 8);
+            gmMainLib_8015CC34()->xF = (u8) d->fighter_cursor_pos;
+            gmMainLib_8015CC34()->unk_x10 = (u8) (d->name_cursor_pos >> 8);
+            gmMainLib_8015CC34()->x11 = (u8) d->name_cursor_pos;
+            gmMainLib_8015CC34()->xD = d->is_name_mode;
+            mn_80229894(0x1C, 0, 3);
+        }
         return;
     }
     if (input & 0xC0) {
         lbAudioAx_80024030(1);
-        gmMainLib_8015CC34()->xE = (u8) (data->fighter_cursor_pos >> 8);
-        gmMainLib_8015CC34()->xF = (u8) data->fighter_cursor_pos;
-        gmMainLib_8015CC34()->unk_x10 = (u8) (data->name_cursor_pos >> 8);
-        gmMainLib_8015CC34()->x11 = (u8) data->name_cursor_pos;
-        gmMainLib_8015CC34()->xD = data->is_name_mode;
-        HSD_GObjPLink_80390228(gobj);
-        if (input & 0x40) {
-            mnDiagram3_8024714C(NULL);
-        } else {
+        {
+            Diagram* d = mnDiagram_804D6C10->user_data;
+            gmMainLib_8015CC34()->xE = (u8) (d->fighter_cursor_pos >> 8);
+            gmMainLib_8015CC34()->xF = (u8) d->fighter_cursor_pos;
+            gmMainLib_8015CC34()->unk_x10 = (u8) (d->name_cursor_pos >> 8);
+            gmMainLib_8015CC34()->x11 = (u8) d->name_cursor_pos;
+            gmMainLib_8015CC34()->xD = d->is_name_mode;
+            HSD_GObjPLink_80390228(gobj);
+            if (input & 0x40) {
+                mnDiagram3_8024714C(0L);
+                return;
+            }
             mnDiagram2_Init();
         }
         return;
@@ -835,39 +1273,320 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             return;
         }
         lbAudioAx_80024030(1);
-        data->is_name_mode = (data->is_name_mode == 0) ? 1 : 0;
-        mnDiagram_UpdateScrollArrowVisibility(
-            mnDiagram_804D6C10, mnDiagram_CountUnlockedFighters());
+        data->is_name_mode = (data->is_name_mode == 0) ? (1) : (count2);
         if (data->is_name_mode != 0) {
+            count = GetNameCount();
+            if (((s32) ((u8) mn_804A04F0.hovered_selection)) >= count) {
+                mn_804A04F0.hovered_selection =
+                    (mn_804A04F0.hovered_selection & 0xFF00) |
+                    ((u8) (count - 1));
+            }
+            if ((mn_804A04F0.hovered_selection >> 8) >= count) {
+                mn_804A04F0.hovered_selection =
+                    ((u8) mn_804A04F0.hovered_selection) | ((count - 1) << 8);
+            }
+            mnDiagram_UpdateScrollArrowVisibility(mnDiagram_804D6C10, count);
             mnDiagram_80241730(mnDiagram_804D6C10, (u8) data->name_cursor_pos,
                                data->name_cursor_pos >> 8);
-        } else {
-            mnDiagram_80241730(mnDiagram_804D6C10,
-                               (u8) data->fighter_cursor_pos,
-                               data->fighter_cursor_pos >> 8);
+            return;
         }
+        count = 0;
+        ptr3 = sorted;
+        for (i = 0; i < 0x19; i++) {
+            if (mn_IsFighterUnlocked(i) != 0) {
+                count++;
+            }
+        }
+
+        new_var2 = count;
+        if (((s32) ((u8) mn_804A04F0.hovered_selection)) >= new_var2) {
+            mn_804A04F0.hovered_selection =
+                (mn_804A04F0.hovered_selection & 0xFF00) |
+                ((u8) (new_var2 - 1));
+        }
+        if ((mn_804A04F0.hovered_selection >> 8) >= new_var2) {
+            mn_804A04F0.hovered_selection =
+                ((u8) mn_804A04F0.hovered_selection) | ((new_var2 - 1) << 8);
+        }
+        mnDiagram_UpdateScrollArrowVisibility(mnDiagram_804D6C10, new_var2);
+        mnDiagram_80241730(mnDiagram_804D6C10, (u8) data->fighter_cursor_pos,
+                           data->fighter_cursor_pos >> 8);
         return;
     }
-    // D-pad navigation
     if (data->is_name_mode != 0) {
+        count = GetNameCount();
         if (input & 1) {
-            lbAudioAx_80024030(2);
+            col = (u8) mn_804A04F0.hovered_selection;
+            if ((col > 0) && (count > (col - 1))) {
+                lbAudioAx_80024030(2);
+                mn_804A04F0.hovered_selection =
+                    (mn_804A04F0.hovered_selection & 0xFF00) |
+                    ((col - 1) & 0xFF);
+                return;
+            }
+            if (count > 0xA) {
+                cur = (u8) data->name_cursor_pos;
+                found = (u8) mnDiagram_FindPrevName(cur);
+                if (cur != found) {
+                    lbAudioAx_80024030(2);
+                    data->name_cursor_pos =
+                        (data->name_cursor_pos & 0xFF00) | found;
+                    mnDiagram_80241730(mnDiagram_804D6C10,
+                                       (u8) data->name_cursor_pos,
+                                       data->name_cursor_pos >> 8);
+                }
+            }
         } else if (input & 2) {
-            lbAudioAx_80024030(2);
+            col = (u8) mn_804A04F0.hovered_selection;
+            if ((col < 9) && (count > (col + 1))) {
+                lbAudioAx_80024030(2);
+                mn_804A04F0.hovered_selection =
+                    (mn_804A04F0.hovered_selection & 0xFF00) |
+                    ((col + 1) & 0xFF);
+                return;
+            }
+            if (count > 0xA) {
+                cur = (u8) data->name_cursor_pos;
+                found = mnDiagram_FindNextName(cur);
+                if (cur != found) {
+                    row2 = 0xA;
+                    ptr2 = sorted + cur;
+                    ptr2 = ptr2 + 0x1C;
+                dn_n_outer:
+                    ptr = ptr2;
+
+                dn_n_inner:
+                    cur++;
+
+                    ptr++;
+                    ptr2++;
+                    if (cur >= 0x78) {
+                        col_result3 = 0x78;
+                    } else if (GetNameText(*ptr) != 0L) {
+                        row2--;
+                        if (row2 <= 0) {
+                            col_result3 = sorted[cur + 0x1C];
+                        } else {
+                            goto dn_n_outer;
+                        }
+                    } else {
+                        goto dn_n_inner;
+                    }
+                    if (col_result3 != 0x78) {
+                        lbAudioAx_80024030(2);
+                        data->name_cursor_pos =
+                            (data->name_cursor_pos & 0xFF00) | found;
+                        mnDiagram_80241730(mnDiagram_804D6C10,
+                                           (u8) data->name_cursor_pos,
+                                           data->name_cursor_pos >> 8);
+                    }
+                }
+            }
         } else if (input & 4) {
-            lbAudioAx_80024030(2);
+            row3 = mn_804A04F0.hovered_selection >> 8;
+            if ((0 < row3) && (count > (row3 - 1))) {
+                lbAudioAx_80024030(2);
+                mn_804A04F0.hovered_selection =
+                    ((u8) mn_804A04F0.hovered_selection) | ((row3 - 1) << 8);
+                return;
+            }
+            if (count > 7) {
+                cur = data->name_cursor_pos >> 8;
+                found = (u8) mnDiagram_FindPrevNameWrap(cur);
+                if (cur != found) {
+                    lbAudioAx_80024030(2);
+                    data->name_cursor_pos =
+                        ((u8) data->name_cursor_pos) | (found << 8);
+                    mnDiagram_80241730(mnDiagram_804D6C10,
+                                       (u8) data->name_cursor_pos,
+                                       data->name_cursor_pos >> 8);
+                }
+            }
         } else if (input & 8) {
-            lbAudioAx_80024030(2);
+            row4 = mn_804A04F0.hovered_selection >> 8;
+            if ((row4 < 6) && (count > (row4 + 1))) {
+                lbAudioAx_80024030(2);
+                mn_804A04F0.hovered_selection =
+                    ((u8) mn_804A04F0.hovered_selection) | ((row4 + 1) << 8);
+                return;
+            }
+            if (count > 7) {
+                cur = data->name_cursor_pos >> 8;
+                found = mnDiagram_FindNextName(cur);
+                if (cur != found) {
+                    row2 = 7;
+                    ptr2 = sorted + cur;
+                    ptr2 = ptr2 + 0x1C;
+                rt_n_outer:
+                    ptr = ptr2;
+
+                rt_n_inner:
+                    cur++;
+
+                    ptr++;
+                    ptr2++;
+                    if (cur >= 0x78) {
+                        row_result3 = 0x78;
+                    } else if (GetNameText(*ptr) != 0L) {
+                        row2--;
+                        if (row2 <= 0) {
+                            row_result3 = sorted[cur + 0x1C];
+                        } else {
+                            goto rt_n_outer;
+                        }
+                    } else {
+                        goto rt_n_inner;
+                    }
+                    if (row_result3 != 0x78) {
+                        lbAudioAx_80024030(2);
+                        data->name_cursor_pos =
+                            ((u8) data->name_cursor_pos) | (found << 8);
+                        mnDiagram_80241730(mnDiagram_804D6C10,
+                                           (u8) data->name_cursor_pos,
+                                           data->name_cursor_pos >> 8);
+                    }
+                }
+            }
         }
     } else {
+        new_var = 0;
+        for (count = count2; count < 0x19; count++) {
+            if (mn_IsFighterUnlocked(count) != new_var) {
+                count2++;
+            }
+        }
+
         if (input & 1) {
-            lbAudioAx_80024030(2);
+            col = (u8) mn_804A04F0.hovered_selection;
+            if ((col > new_var) && (count2 > (col - 1))) {
+                lbAudioAx_80024030(2);
+                mn_804A04F0.hovered_selection =
+                    (mn_804A04F0.hovered_selection & 0xFF00) |
+                    ((col - 1) & 0xFF);
+                return;
+            }
+            if (count2 > 0xA) {
+                cur = (u8) data->fighter_cursor_pos;
+                found = (u8) mnDiagram_FindPrevFighter(sorted, cur);
+                if (cur != found) {
+                    lbAudioAx_80024030(2);
+                    data->fighter_cursor_pos =
+                        (data->fighter_cursor_pos & 0xFF00) | found;
+                    mnDiagram_80241730(mnDiagram_804D6C10,
+                                       (u8) data->fighter_cursor_pos,
+                                       data->fighter_cursor_pos >> 8);
+                }
+            }
         } else if (input & 2) {
-            lbAudioAx_80024030(2);
+            col = (u8) mn_804A04F0.hovered_selection;
+            if ((col < 9) && (count2 > (col + 1))) {
+                lbAudioAx_80024030(2);
+                mn_804A04F0.hovered_selection =
+                    (mn_804A04F0.hovered_selection & 0xFF00) |
+                    ((col + 1) & 0xFF);
+                return;
+            }
+            if (count2 > 0xA) {
+                cur = (u8) data->fighter_cursor_pos;
+                ptr = sorted + cur;
+                row5 = mnDiagram_FindNextFighter(sorted, cur);
+                found = row5;
+                row2 = 0xA;
+            dn_f_outer:
+                if (row2 == new_var) {
+                    col_result4 = sorted[cur];
+                } else {
+                    ptr3 = ptr;
+                dn_f_inner:
+                    cur++;
+
+                    ptr3++;
+                    ptr++;
+                    if (cur >= 0x19) {
+                        col_result4 = 0x19;
+                    } else if (mn_IsFighterUnlocked(*ptr3) != new_var) {
+                        row2--;
+                        if (row2 >= new_var) {
+                            goto dn_f_outer;
+                        }
+                    } else {
+                        goto dn_f_inner;
+                    }
+                }
+
+                if (col_result4 != 0x19) {
+                    lbAudioAx_80024030(2);
+                    data->fighter_cursor_pos =
+                        (data->fighter_cursor_pos & 0xFF00) | found;
+                    mnDiagram_80241730(mnDiagram_804D6C10,
+                                       (u8) data->fighter_cursor_pos,
+                                       data->fighter_cursor_pos >> 8);
+                }
+            }
         } else if (input & 4) {
-            lbAudioAx_80024030(2);
+            row5 = mn_804A04F0.hovered_selection >> 8;
+            if ((row5 > new_var) && (count2 > (row5 - 1))) {
+                lbAudioAx_80024030(2);
+                mn_804A04F0.hovered_selection =
+                    ((u8) mn_804A04F0.hovered_selection) | ((row5 - 1) << 8);
+                return;
+            }
+            if (count2 > 7) {
+                cur = data->fighter_cursor_pos >> 8;
+                found = (u8) mnDiagram_FindPrevFighterWrap(sorted, cur);
+                if (cur != found) {
+                    lbAudioAx_80024030(2);
+                    data->fighter_cursor_pos =
+                        ((u8) data->fighter_cursor_pos) | (found << 8);
+                    mnDiagram_80241730(mnDiagram_804D6C10,
+                                       (u8) data->fighter_cursor_pos,
+                                       data->fighter_cursor_pos >> 8);
+                }
+            }
         } else if (input & 8) {
-            lbAudioAx_80024030(2);
+            row6 = mn_804A04F0.hovered_selection >> 8;
+            if ((row6 < 6) && (count2 > (row6 + 1))) {
+                lbAudioAx_80024030(2);
+                mn_804A04F0.hovered_selection =
+                    ((u8) mn_804A04F0.hovered_selection) | ((row6 + 1) << 8);
+                return;
+            }
+            if (count2 > 7) {
+                cur = data->fighter_cursor_pos >> 8;
+                ptr = sorted + cur;
+                found = mnDiagram_FindNextFighter(sorted, cur);
+                row2 = 7;
+            rt_f_outer:
+                if (row2 == new_var) {
+                    row_result4 = sorted[cur];
+                } else {
+                    ptr3 = ptr;
+                rt_f_inner:
+                    cur++;
+
+                    ptr3++;
+                    ptr++;
+                    if (cur >= 0x19) {
+                        row_result4 = 0x19;
+                    } else if (mn_IsFighterUnlocked(*ptr3) != new_var) {
+                        row2--;
+                        if (row2 >= new_var) {
+                            goto rt_f_outer;
+                        }
+                    } else {
+                        goto rt_f_inner;
+                    }
+                }
+
+                if (row_result4 != 0x19) {
+                    lbAudioAx_80024030(2);
+                    data->fighter_cursor_pos =
+                        ((u8) data->fighter_cursor_pos) | (found << 8);
+                    mnDiagram_80241730(mnDiagram_804D6C10,
+                                       (u8) data->fighter_cursor_pos,
+                                       data->fighter_cursor_pos >> 8);
+                }
+            }
         }
     }
 }
@@ -896,88 +1615,160 @@ void mnDiagram_PopupCleanup(void* arg0)
 
 typedef struct mnDiagram_PopupData {
     /* 0x00 */ HSD_JObj* jobjs[14];
-    /* 0x38 */ HSD_Text* text[6];
+    /* 0x38 */ HSD_Text* text[5];
 } mnDiagram_PopupData;
+STATIC_ASSERT(sizeof(mnDiagram_PopupData) == 0x4C);
+
+typedef struct mnDiagram_MainOverlay {
+    /* 0x00 */ HSD_JObj* jobjs[14];
+    /* 0x38 */ HSD_Text* text[6];
+} mnDiagram_MainOverlay;
+
+inline Vec3* mnDiagram_PopupAnimProc_Inline(mnDiagram_AnimTable* arg0,
+                                            int arg1)
+{
+    return &arg0->points[arg1];
+}
 
 void mnDiagram_PopupAnimProc(void* arg0)
 {
     mnDiagram_PopupData* data = ((HSD_GObj*) arg0)->user_data;
     HSD_Text* text;
-    char* base = (char*) mnDiagram_803EE728;
-    Point3d pos;
+    mnDiagram_AnimTable* tbl = GET_DIAGRAM_ANIM_TABLE();
+    Vec3 pos;
+    float new_var;
     f32 anim_frame;
-    PAD_STACK(24);
+    PAD_STACK(0x18);
 
     HSD_JObjAnimAll(data->jobjs[5]);
 
     text = data->text[0];
-    lb_8000B1CC(data->jobjs[8], (Point3d*) base, &pos);
-    text->pos_x = pos.x;
-    text->pos_y = -pos.y;
-    text->pos_z = pos.z;
+    lb_8000B1CC(data->jobjs[8], mnDiagram_PopupAnimProc_Inline(tbl, 0), &pos);
+    {
+        f32 y = pos.y;
+        f32 z = pos.z;
+        text->pos_x = pos.x;
+        text->pos_y = (new_var = -y);
+        text->pos_z = z;
+    }
     text->default_alignment = 0;
 
     HSD_JObjAnim(data->jobjs[9]);
     if (data->text[1] != NULL) {
-        lb_8000B1CC(data->jobjs[11], (Point3d*) (base + 0xC), &pos);
-        data->text[1]->pos_x = pos.x;
-        data->text[1]->pos_y = -pos.y;
-        data->text[1]->pos_z = pos.z;
+        HSD_Text* t;
+        f32 y;
+        f32 z;
+        lb_8000B1CC(data->jobjs[11], mnDiagram_PopupAnimProc_Inline(tbl, 1),
+                    &pos);
+        y = pos.y;
+        z = pos.z;
+        t = data->text[1];
+        t->pos_x = pos.x;
+        t->pos_y = (new_var = -y);
+        t->pos_z = z;
         text->default_alignment = 1;
     }
     if (data->text[2] != NULL) {
-        lb_8000B1CC(data->jobjs[10], (Point3d*) (base + 0x18), &pos);
-        data->text[2]->pos_x = pos.x;
-        data->text[2]->pos_y = -pos.y;
-        data->text[2]->pos_z = pos.z;
+        HSD_Text* t;
+        f32 y;
+        f32 z;
+        lb_8000B1CC(data->jobjs[10], mnDiagram_PopupAnimProc_Inline(tbl, 2),
+                    &pos);
+        y = pos.y;
+        z = pos.z;
+        t = data->text[2];
+        t->pos_x = pos.x;
+        t->pos_y = (new_var = -y);
+        t->pos_z = z;
         text->default_alignment = 1;
     }
 
     HSD_JObjAnim(data->jobjs[1]);
-    lb_8000B1CC(data->jobjs[3], (Point3d*) (base + 0xC), &pos);
-    data->text[3]->pos_x = pos.x;
-    data->text[3]->pos_y = -pos.y;
-    data->text[3]->pos_z = pos.z;
+    {
+        HSD_Text* t;
+        f32 y;
+        f32 z;
+        lb_8000B1CC(data->jobjs[3], mnDiagram_PopupAnimProc_Inline(tbl, 1),
+                    &pos);
+        y = pos.y;
+        z = pos.z;
+        t = data->text[3];
+        t->pos_x = pos.x;
+        t->pos_y = (new_var = -y);
+        t->pos_z = z;
+    }
     text->default_alignment = 1;
 
     if (data->text[4] != NULL) {
-        lb_8000B1CC(data->jobjs[2], (Point3d*) (base + 0x18), &pos);
-        data->text[4]->pos_x = pos.x;
-        data->text[4]->pos_y = -pos.y;
-        data->text[4]->pos_z = pos.z;
+        HSD_Text* t;
+        f32 y;
+        f32 z;
+        lb_8000B1CC(data->jobjs[2], mnDiagram_PopupAnimProc_Inline(tbl, 2),
+                    &pos);
+        y = pos.y;
+        z = pos.z;
+        t = data->text[4];
+        t->pos_x = pos.x;
+        t->pos_y = (new_var = -y);
+        t->pos_z = z;
         text->default_alignment = 1;
     }
 
-    anim_frame =
-        mn_8022EFD8(data->jobjs[12], (AnimLoopSettings*) (base + 0x64));
-    lb_8000B1CC(data->jobjs[13], (Point3d*) (base + 0xC), &pos);
-    data->text[3]->pos_x = pos.x;
-    data->text[3]->pos_y = -pos.y;
-    data->text[3]->pos_z = pos.z;
+    anim_frame = mn_8022EFD8(data->jobjs[12], &tbl->cursor_anim);
+    {
+        HSD_Text* t;
+        f32 y;
+        f32 z;
+        lb_8000B1CC(data->jobjs[13], mnDiagram_PopupAnimProc_Inline(tbl, 1),
+                    &pos);
+        y = pos.y;
+        z = pos.z;
+        t = data->text[3];
+        t->pos_x = pos.x;
+        t->pos_y = (new_var = -y);
+        t->pos_z = z;
+    }
     text->default_alignment = 1;
 
-    if (anim_frame == *(f32*) (base + 0x68)) {
+    if (anim_frame == tbl->cursor_anim.end_frame) {
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
     }
+}
+
+inline void mnDiagram_FormatPopupNumber(char* buf, u32 val)
+{
+    int digit_count = mn_GetDigitCount(val);
+    int i;
+
+    for (i = 0; i < digit_count; i++) {
+        buf[digit_count - 1 - i] = mn_GetDigitAt(val, i) + '0';
+    }
+    buf[digit_count] = mnDiagram_804D4FA4;
 }
 
 void mnDiagram_80240D94(void* arg0, s32 arg1, s32 arg2, s32 arg3)
 {
     mnDiagram_PopupData* data = ((HSD_GObj*) arg0)->user_data;
+    mnDiagram_AnimTable* tbl = GET_DIAGRAM_ANIM_TABLE();
     Point3d pos;
+    float new_var;
     char buf[8];
-    u16 kos;
-    u16 sd_count;
+    u32 kos;
+    u32 sd_count;
 
     HSD_Text* text = HSD_SisLib_803A6754(0, 1);
     PAD_STACK(24);
     data->text[0] = text;
-    lb_8000B1CC(data->jobjs[8], mnDiagram_803EE728, &pos);
+    lb_8000B1CC(data->jobjs[8], &tbl->points[0], &pos);
     text->font_size.x = 0.0521f;
     text->font_size.y = 0.0521f;
-    text->pos_x = pos.x;
-    text->pos_y = -pos.y;
-    text->pos_z = pos.z;
+    {
+        f32 y = pos.y;
+        f32 z = pos.z;
+        text->pos_x = pos.x;
+        text->pos_y = (new_var = -y);
+        text->pos_z = z;
+    }
     text->default_alignment = 0;
     *(s32*) &text->text_color = mnDiagram_804D4FA0;
 
@@ -988,91 +1779,143 @@ void mnDiagram_80240D94(void* arg0, s32 arg1, s32 arg2, s32 arg3)
     }
 
     if ((arg3 != 0) && (arg1 != arg2)) {
-        text = HSD_SisLib_803A6754(0, 1);
-        data->text[2] = text;
-        lb_8000B1CC(data->jobjs[10], &mnDiagram_803EE728[2], &pos);
-        text->font_size.x = 0.035f;
-        text->font_size.y = 0.05f;
-        text->pos_x = pos.x;
-        text->pos_y = -pos.y;
-        text->pos_z = pos.z;
-        text->default_alignment = 1;
-        HSD_SisLib_803A6B98(text, 0.0f, 0.0f, GetNameText((u8) arg2));
+        {
+            HSD_Text* label_text;
 
-        text = HSD_SisLib_803A6754(0, 1);
-        data->text[4] = text;
-        lb_8000B1CC(data->jobjs[2], &mnDiagram_803EE728[2], &pos);
-        text->font_size.x = 0.035f;
-        text->font_size.y = 0.05f;
-        text->pos_x = pos.x;
-        text->pos_y = -pos.y;
-        text->pos_z = pos.z;
-        text->default_alignment = 1;
-        HSD_SisLib_803A6B98(text, 0.0f, 0.0f, GetNameText((u8) arg2));
+            label_text = HSD_SisLib_803A6754(0, 1);
+            data->text[2] = label_text;
+            lb_8000B1CC(data->jobjs[10], &tbl->points[2], &pos);
+            label_text->font_size.x = 0.035f;
+            label_text->font_size.y = 0.05f;
+            {
+                f32 y = pos.y;
+                f32 z = pos.z;
+                label_text->pos_x = pos.x;
+                label_text->pos_y = (new_var = -y);
+                label_text->pos_z = z;
+            }
+            label_text->default_alignment = 1;
+            HSD_SisLib_803A6B98(label_text, 0.0f, 0.0f,
+                                GetNameText(arg2 & 0xFF));
+        }
+
+        {
+            HSD_Text* label_text;
+
+            label_text = HSD_SisLib_803A6754(0, 1);
+            data->text[4] = label_text;
+            lb_8000B1CC(data->jobjs[2], &tbl->points[2], &pos);
+            label_text->font_size.x = 0.035f;
+            label_text->font_size.y = 0.05f;
+            {
+                f32 y = pos.y;
+                f32 z = pos.z;
+                label_text->pos_x = pos.x;
+                label_text->pos_y = (new_var = -y);
+                label_text->pos_z = z;
+            }
+            label_text->default_alignment = 1;
+            HSD_SisLib_803A6B98(label_text, 0.0f, 0.0f,
+                                GetNameText((u8) arg2));
+        }
     }
 
     if ((arg3 == 0) || (arg1 != arg2)) {
         text = HSD_SisLib_803A6754(0, 1);
         data->text[1] = text;
-        lb_8000B1CC(data->jobjs[11], &mnDiagram_803EE728[1], &pos);
+        lb_8000B1CC(data->jobjs[11], &tbl->points[1], &pos);
         text->font_size.x = 0.0521f;
         text->font_size.y = 0.0521f;
         text->default_alignment = 1;
-        text->pos_x = pos.x;
-        text->pos_y = -pos.y;
-        text->pos_z = pos.z;
+        {
+            f32 y = pos.y;
+            f32 z = pos.z;
+            text->pos_x = pos.x;
+            text->pos_y = (new_var = -y);
+            text->pos_z = z;
+        }
 
         if (arg3 != 0) {
-            kos = GetPersistentNameData(arg1)->vs_kos[arg2];
+            kos = GetPersistentNameData((u8) arg1)->vs_kos[(u8) arg2];
+            mnDiagram_FormatPopupNumber(buf, kos);
         } else {
-            kos = GetPersistentFighterData(arg1)->fighter_kos[arg2];
+            kos = GetPersistentFighterData((u8) arg1)->fighter_kos[(u8) arg2];
+            mnDiagram_FormatPopupNumber(buf, kos);
         }
-        mnDiagram_IntToStr(buf, kos);
         HSD_SisLib_803A6B98(text, 0.0f, 0.0f, buf);
     }
 
-    text = HSD_SisLib_803A6754(0, 1);
-    data->text[3] = text;
     if (arg1 == arg2) {
-        lb_8000B1CC(data->jobjs[13], &mnDiagram_803EE728[1], &pos);
-        if (arg3 != 0) {
-            sd_count = GetPersistentNameData(arg1)->sd_count;
-        } else {
-            sd_count = GetPersistentFighterData(arg1)->sd_count;
+        text = HSD_SisLib_803A6754(0, 1);
+        data->text[3] = text;
+        lb_8000B1CC(data->jobjs[13], &tbl->points[1], &pos);
+        text->font_size.x = 0.0521f;
+        text->font_size.y = 0.0521f;
+        text->default_alignment = 1;
+        {
+            f32 y = pos.y;
+            f32 z = pos.z;
+            text->pos_x = pos.x;
+            text->pos_y = (new_var = -y);
+            text->pos_z = z;
         }
-        mnDiagram_IntToStr(buf, sd_count);
+        if (arg3 != 0) {
+            sd_count = GetPersistentNameData((u8) arg1)->sd_count;
+            mnDiagram_FormatPopupNumber(buf, sd_count);
+        } else {
+            sd_count = GetPersistentFighterData((u8) arg1)->sd_count;
+            mnDiagram_FormatPopupNumber(buf, sd_count);
+        }
+        HSD_SisLib_803A6B98(text, 0.0f, 0.0f, buf);
     } else {
-        lb_8000B1CC(data->jobjs[3], &mnDiagram_803EE728[1], &pos);
-        if (arg3 != 0) {
-            kos = GetPersistentNameData((u8) arg2)->vs_kos[arg1];
-        } else {
-            kos = GetPersistentFighterData((u8) arg2)->fighter_kos[arg1];
+        text = HSD_SisLib_803A6754(0, 1);
+        data->text[3] = text;
+        {
+            Point3d* point = &tbl->points[1];
+            lb_8000B1CC(data->jobjs[3], point, &pos);
         }
-        mnDiagram_IntToStr(buf, kos);
+        text->font_size.x = 0.0521f;
+        text->font_size.y = 0.0521f;
+        text->default_alignment = 1;
+        {
+            f32 y = pos.y;
+            f32 z = pos.z;
+            text->pos_x = pos.x;
+            text->pos_y = (new_var = -y);
+            text->pos_z = z;
+        }
+        if (arg3 != 0) {
+            u32 count = GetPersistentNameData((u8) arg2)->vs_kos[(u8) arg1];
+            mnDiagram_FormatPopupNumber(buf, count);
+        } else {
+            u32 count =
+                GetPersistentFighterData((u8) arg2)->fighter_kos[(u8) arg1];
+            mnDiagram_FormatPopupNumber(buf, count);
+        }
+        HSD_SisLib_803A6B98(text, 0.0f, 0.0f, buf);
     }
-    text->font_size.x = 0.0521f;
-    text->font_size.y = 0.0521f;
-    text->default_alignment = 1;
-    text->pos_x = pos.x;
-    text->pos_y = -pos.y;
-    text->pos_z = pos.z;
-    HSD_SisLib_803A6B98(text, 0.0f, 0.0f, buf);
+}
+
+/// @todo .sdata2 order hack
+static void order_sdata2(void)
+{
+    (void) -1.0f;
+    (void) S32_TO_F32;
 }
 
 void mnDiagram_80241310(s32 arg0, s32 arg1, s32 arg2)
 {
-    Diagram* data;
-    char* base;
+    int i;
+    mnDiagram_AnimTable* tbl;
     void** joint_data;
+    Diagram* data;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
-    mnDiagram_PopupData* popup_data;
-    int i;
-    PAD_STACK(8);
+    mnDiagram_PopupData* user_data;
 
-    data = mnDiagram_804D6C10->user_data;
-    base = (char*) &mnDiagram_803EE728;
+    tbl = GET_DIAGRAM_ANIM_TABLE();
     joint_data = mnDiagram_804A07E4;
+    data = GET_DIAGRAM(mnDiagram_804D6C10);
 
     gobj = GObj_Create(6, 7, 0x80);
     data->popup_gobj = gobj;
@@ -1080,23 +1923,24 @@ void mnDiagram_80241310(s32 arg0, s32 arg1, s32 arg2)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 6, 0x80);
     HSD_JObjAddAnimAll(jobj, joint_data[1], joint_data[2], joint_data[3]);
-    HSD_JObjReqAnimAll(jobj, 0.0f);
+    HSD_JObjReqAnimAll(jobj, mnDiagram_804DBF84);
     HSD_JObjAnimAll(jobj);
 
-    popup_data = HSD_MemAlloc(sizeof(mnDiagram_PopupData));
-    if (popup_data == NULL) {
-        OSReport(base + 0x70);
-        __assert(base + 0x88, 0x5F8, base + 0x94);
+    user_data = HSD_MemAlloc(sizeof(mnDiagram_PopupData));
+    if (user_data == NULL) {
+        OSReport(tbl->x70);
+        __assert(tbl->x88, 0x5F8, tbl->x94);
     }
-    GObj_InitUserData(gobj, 0, mnDiagram_PopupCleanup, popup_data);
-    popup_data->text[4] = NULL;
-    popup_data->text[3] = NULL;
-    popup_data->text[2] = NULL;
-    popup_data->text[1] = NULL;
-    popup_data->text[0] = NULL;
+
+    GObj_InitUserData(gobj, 0, mnDiagram_PopupCleanup, user_data);
+    user_data->text[4] = NULL;
+    user_data->text[3] = NULL;
+    user_data->text[2] = NULL;
+    user_data->text[1] = NULL;
+    user_data->text[0] = NULL;
 
     for (i = 0; i < 14; i++) {
-        lb_80011E24(jobj, &popup_data->jobjs[i], i, -1);
+        lb_80011E24(jobj, &user_data->jobjs[i], i, -1);
     }
 
     HSD_GObj_SetupProc(gobj, (void (*)(HSD_GObj*)) mnDiagram_PopupAnimProc, 0);
@@ -1104,35 +1948,35 @@ void mnDiagram_80241310(s32 arg0, s32 arg1, s32 arg2)
 
     if (arg2 != 0) {
         if (arg0 == arg1) {
-            HSD_JObjSetFlagsAll(popup_data->jobjs[9], JOBJ_HIDDEN);
+            HSD_JObjSetFlagsAll(user_data->jobjs[9], JOBJ_HIDDEN);
         }
         if (arg0 == arg1) {
-            HSD_JObjSetFlagsAll(popup_data->jobjs[1], JOBJ_HIDDEN);
+            HSD_JObjSetFlagsAll(user_data->jobjs[1], JOBJ_HIDDEN);
         }
         if (arg0 != arg1) {
-            HSD_JObjSetFlagsAll(popup_data->jobjs[12], JOBJ_HIDDEN);
+            HSD_JObjSetFlagsAll(user_data->jobjs[12], JOBJ_HIDDEN);
         }
     } else {
         HSD_JObj* icon = mnDiagram_80242B38(arg0, 1);
         mn_8022F3D8(icon, 1, TOBJ_MASK);
         mn_8022F3D8(icon, 0xA, TOBJ_MASK);
-        HSD_JObjAddChild(popup_data->jobjs[7], icon);
+        HSD_JObjAddChild(user_data->jobjs[7], icon);
 
         icon = mnDiagram_80242B38(arg1, 1);
-        HSD_JObjSetTranslateX(icon, -1.0f);
+        HSD_JObjSetTranslateX(icon, mnDiagram_804DBF94);
         mn_8022F3D8(icon, 1, TOBJ_MASK);
-        HSD_JObjAddChild(popup_data->jobjs[10], icon);
+        HSD_JObjAddChild(user_data->jobjs[10], icon);
 
         if (arg0 == arg1) {
-            HSD_JObjSetFlagsAll(popup_data->jobjs[1], JOBJ_HIDDEN);
+            HSD_JObjSetFlagsAll(user_data->jobjs[1], JOBJ_HIDDEN);
         } else {
             icon = mnDiagram_80242B38(arg1, 1);
-            HSD_JObjSetTranslateX(icon, -1.0f);
+            HSD_JObjSetTranslateX(icon, mnDiagram_804DBF94);
             mn_8022F3D8(icon, 1, TOBJ_MASK);
-            HSD_JObjAddChild(popup_data->jobjs[2], icon);
+            HSD_JObjAddChild(user_data->jobjs[2], icon);
         }
         if (arg0 != arg1) {
-            HSD_JObjSetFlagsAll(popup_data->jobjs[12], JOBJ_HIDDEN);
+            HSD_JObjSetFlagsAll(user_data->jobjs[12], JOBJ_HIDDEN);
         }
     }
 }
@@ -1152,7 +1996,7 @@ static inline HSD_JObj* mnDiagram_GetJObjChild(HSD_JObj* jobj)
 
 void mnDiagram_80241668(void* arg0)
 {
-    mnDiagram_PopupData* data = mnDiagram_GetUserData(arg0);
+    mnDiagram_MainOverlay* data = mnDiagram_GetUserData(arg0);
     HSD_JObj* child;
 
     child = mnDiagram_GetJObjChild(data->jobjs[9]);
@@ -1180,9 +2024,9 @@ void mnDiagram_80241668(void* arg0)
     }
 }
 
-void mnDiagram_80241730(void* arg0, int arg1, int arg2)
+void mnDiagram_80241730(HSD_GObj* arg0, int arg1, int arg2)
 {
-    Diagram* data = ((HSD_GObj*) arg0)->user_data;
+    Diagram* data = GET_DIAGRAM(arg0);
     mnDiagram_80241668(arg0);
     mnDiagram_8024227C(arg0, arg1, arg2, (u8) (data->is_name_mode == 1));
     if (data->is_name_mode == 0) {
@@ -1192,178 +2036,175 @@ void mnDiagram_80241730(void* arg0, int arg1, int arg2)
     }
 }
 
-#pragma push
-#pragma dont_reuse_strings off
+/// @brief Updates scroll arrow visibility based on cursor position and
+///        available entries beyond the visible range.
+/// @param[in] gobj The diagram GObj containing arrow JObjs in user_data.
+/// @details Checks 4 arrows: right (10 more cols?), left (cursor > 0?),
+///          up (cursor row > 0?), down (7 more rows?). Hides arrows when
+///          there's nothing to scroll to, shows them when there is.
 void mnDiagram_802417D0(HSD_GObj* gobj)
 {
     u8 result2;
     Diagram* data = gobj->user_data;
-    char* base = (char*) mnDiagram_803EE728;
+    mnDiagram_AnimTable* tbl = GET_DIAGRAM_ANIM_TABLE();
     HSD_JObj* jobj;
-    u8* sorted = (u8*) &mnDiagram_804A0750;
+    u8* sorted = mnDiagram_804A0750.sorted_fighters;
     s32 i;
     u8* ptr;
-    u8* ptr2;
     s32 count;
+    s32 result;
+    u8* ptr2;
     HSD_JObj* jobj2;
-    u8 result;
     PAD_STACK(8);
 
     // Right arrow (jobjs[3])
     jobj = data->jobjs[3];
-    mn_8022ED6C(jobj, (AnimLoopSettings*) (base + 0x58));
-    if (data->is_name_mode != 0) {
+    mn_8022ED6C(jobj, &tbl->arrow_anim);
+    result = data->is_name_mode;
+    if (result != 0) {
         // Name mode - check if 10 more names exist
         count = 10;
-        i = (u8) data->name_cursor_pos;
+        i = data->name_cursor_pos;
+        i = (u8) i;
         ptr = sorted + i;
         ptr = ptr + 0x1C;
-    loop1:
-        ptr2 = ptr;
-    loop2:
-        i++;
-        ptr2++;
-        ptr++;
-        if (i >= 0x78) {
-            result = 0x78;
-        } else if (GetNameText(*ptr2) == NULL) {
-            goto loop2;
-        } else {
+        while (count > 0) {
+            ptr2 = ptr;
+            do {
+                i++;
+                ptr2++;
+                ptr++;
+                if (i >= 0x78) {
+                    result = 0x78;
+                    goto right_done;
+                }
+            } while (GetNameText(*ptr2) == NULL);
             count--;
-            if (count > 0) {
-                goto loop1;
-            }
-            result = sorted[i + 0x1C];
         }
+        result = sorted[i + 0x1C];
+    right_done:;
         if ((u8) result != 0x78) {
-            HSD_JObjClearFlagsAll(jobj, 0x10U);
+            HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         } else {
-            HSD_JObjSetFlagsAll(jobj, 0x10U);
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         }
     } else {
         // Fighter mode - check if 10 more fighters exist
         count = 10;
         i = (u8) data->fighter_cursor_pos;
         ptr = sorted + i;
-    loop3:
-        if (count == 0) {
-            result = sorted[i];
-        } else {
-            ptr2 = ptr;
-        loop4:
-            i++;
-            ptr2++;
-            ptr++;
-            if (i >= 0x19) {
-                result = 0x19;
-            } else if (mn_IsFighterUnlocked(*ptr2) == 0) {
-                goto loop4;
-            } else {
-                count--;
-                if (count >= 0) {
-                    goto loop3;
-                }
+        do {
+            if (count == 0) {
+                result = sorted[i];
+                break;
             }
-        }
+            ptr2 = ptr;
+            do {
+                i++;
+                ptr2++;
+                ptr++;
+                if (i >= 0x19) {
+                    result = 0x19;
+                    goto fc_right_done;
+                }
+            } while (mn_IsFighterUnlocked(*ptr2) == 0);
+            count--;
+        } while (count >= 0);
+    fc_right_done:
         if ((u8) result != 0x19) {
-            HSD_JObjClearFlagsAll(jobj, 0x10U);
+            HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         } else {
-            HSD_JObjSetFlagsAll(jobj, 0x10U);
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         }
     }
 
     // Left arrow (jobjs[4])
     jobj2 = data->jobjs[4];
-    mn_8022ED6C(jobj2, (AnimLoopSettings*) (base + 0x58));
+    mn_8022ED6C(jobj2, &tbl->arrow_anim);
     if (data->is_name_mode != 0) {
         result = (u8) data->name_cursor_pos;
     } else {
         result = (u8) data->fighter_cursor_pos;
     }
     if (result != 0) {
-        HSD_JObjClearFlagsAll(jobj2, 0x10U);
+        HSD_JObjClearFlagsAll(jobj2, JOBJ_HIDDEN);
     } else {
-        HSD_JObjSetFlagsAll(jobj2, 0x10U);
+        HSD_JObjSetFlagsAll(jobj2, JOBJ_HIDDEN);
     }
 
     // Up arrow (jobjs[5])
     jobj2 = data->jobjs[5];
-    mn_8022ED6C(jobj2, (AnimLoopSettings*) (base + 0x58));
+    mn_8022ED6C(jobj2, &tbl->arrow_anim);
     if (data->is_name_mode != 0) {
         i = data->name_cursor_pos >> 8;
     } else {
         i = data->fighter_cursor_pos >> 8;
     }
     if (i != 0) {
-        HSD_JObjClearFlagsAll(jobj2, 0x10U);
+        HSD_JObjClearFlagsAll(jobj2, JOBJ_HIDDEN);
     } else {
-        HSD_JObjSetFlagsAll(jobj2, 0x10U);
+        HSD_JObjSetFlagsAll(jobj2, JOBJ_HIDDEN);
     }
 
     // Down arrow (jobjs[6])
     jobj = data->jobjs[6];
-    mn_8022ED6C(jobj, (AnimLoopSettings*) (base + 0x58));
+    mn_8022ED6C(jobj, &tbl->arrow_anim);
     if (data->is_name_mode != 0) {
         // Name mode - check if 7 more rows exist
         count = 7;
         i = data->name_cursor_pos >> 8;
         ptr = sorted + i;
         ptr = ptr + 0x1C;
-    loop5:
-        ptr2 = ptr;
-    loop6:
-        i++;
-        ptr2++;
-        ptr++;
-        if (i >= 0x78) {
-            result2 = 0x78;
-        } else if (GetNameText(*ptr2) == NULL) {
-            goto loop6;
-        } else {
+        while (count > 0) {
+            ptr2 = ptr;
+            do {
+                i++;
+                ptr2++;
+                ptr++;
+                if (i >= 0x78) {
+                    result2 = 0x78;
+                    goto dn_name_done;
+                }
+            } while (GetNameText(*ptr2) == NULL);
             count--;
-            if (count > 0) {
-                goto loop5;
-            }
-            result2 = sorted[i + 0x1C];
         }
+        result2 = sorted[i + 0x1C];
+    dn_name_done:
         if (result2 != 0x78) {
-            HSD_JObjClearFlagsAll(jobj, 0x10U);
+            HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         } else {
-            HSD_JObjSetFlagsAll(jobj, 0x10U);
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         }
     } else {
         // Fighter mode - check if 7 more rows exist
         count = 7;
         i = data->fighter_cursor_pos >> 8;
         ptr = sorted + i;
-    loop7:
-        if (count == 0) {
-            result2 = sorted[i];
-        } else {
-            ptr2 = ptr;
-        loop8:
-            i++;
-            ptr2++;
-            ptr++;
-            if (i >= 0x19) {
-                result2 = 0x19;
-            } else if (mn_IsFighterUnlocked(*ptr2) == 0) {
-                goto loop8;
-            } else {
-                count--;
-                if (count >= 0) {
-                    goto loop7;
-                }
+        do {
+            if (count == 0) {
+                result2 = sorted[i];
+                break;
             }
-        }
+            ptr2 = ptr;
+            do {
+                i++;
+                ptr2++;
+                ptr++;
+                if (i >= 0x19) {
+                    result2 = 0x19;
+                    goto dn_fc_done;
+                }
+            } while (mn_IsFighterUnlocked(*ptr2) == 0);
+            count--;
+        } while (count >= 0);
+    dn_fc_done:
         if (result2 != 0x19) {
-            HSD_JObjClearFlagsAll(jobj, 0x10U);
+            HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         } else {
-            HSD_JObjSetFlagsAll(jobj, 0x10U);
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         }
     }
 }
-#pragma pop
 
 void mnDiagram_ExitAnimProc(HSD_GObj* gobj)
 {
@@ -1374,7 +2215,7 @@ void mnDiagram_ExitAnimProc(HSD_GObj* gobj)
     data = gobj->user_data;
     mnDiagram_802417D0(gobj);
     jobj = data->jobj;
-    table = mnDiagram_803EE774;
+    table = mnDiagram_PopupExitAnimFrames;
     if (mn_8022ED6C(jobj, (AnimLoopSettings*) table) >= table[1]) {
         HSD_GObjPLink_80390228(gobj);
     }
@@ -1390,30 +2231,27 @@ void mnDiagram_UpdateScrollArrowVisibility(void* gobj, int count)
     void* data = ((HSD_GObj*) gobj)->user_data;
     PAD_STACK(8);
     if (count <= 7) {
-        HSD_JObjSetFlagsAll(((HSD_JObj**) data)[7], 0x10U);
-        HSD_JObjSetFlagsAll(((HSD_JObj**) data)[8], 0x10U);
+        HSD_JObjSetFlagsAll(((HSD_JObj**) data)[7], JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(((HSD_JObj**) data)[8], JOBJ_HIDDEN);
     } else {
-        HSD_JObjClearFlagsAll(((HSD_JObj**) data)[7], 0x10U);
-        HSD_JObjClearFlagsAll(((HSD_JObj**) data)[8], 0x10U);
+        HSD_JObjClearFlagsAll(((HSD_JObj**) data)[7], JOBJ_HIDDEN);
+        HSD_JObjClearFlagsAll(((HSD_JObj**) data)[8], JOBJ_HIDDEN);
     }
     if (count <= 10) {
-        HSD_JObjSetFlagsAll(((HSD_JObj**) data)[6], 0x10U);
-        HSD_JObjSetFlagsAll(((HSD_JObj**) data)[5], 0x10U);
+        HSD_JObjSetFlagsAll(((HSD_JObj**) data)[6], JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(((HSD_JObj**) data)[5], JOBJ_HIDDEN);
     } else {
-        HSD_JObjClearFlagsAll(((HSD_JObj**) data)[6], 0x10U);
-        HSD_JObjClearFlagsAll(((HSD_JObj**) data)[5], 0x10U);
+        HSD_JObjClearFlagsAll(((HSD_JObj**) data)[6], JOBJ_HIDDEN);
+        HSD_JObjClearFlagsAll(((HSD_JObj**) data)[5], JOBJ_HIDDEN);
     }
 }
 
 void mnDiagram_OnFrame(HSD_GObj* gobj)
 {
-    Diagram* data = gobj->user_data;
-    Diagram* data2;
+    Diagram* data = GET_DIAGRAM(gobj);
     HSD_GObjProc* proc;
-    u8 col_idx;
-    s32 row_idx;
+    Diagram* data2;
     int count;
-    PAD_STACK(8);
 
     if ((mn_804A04F0.cur_menu != 0x1E) || (mn_804A04F0.x10 != 0)) {
         if (mn_804A04F0.cur_menu == 0x1E) {
@@ -1424,20 +2262,27 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         proc = HSD_GObj_SetupProc(gobj, mnDiagram_ExitAnimProc, 0);
         proc->flags_3 = HSD_GObj_804D783C;
-        HSD_JObjSetFlagsAll(data->jobjs[2], 0x10);
+        HSD_JObjSetFlagsAll(data->jobjs[2], JOBJ_HIDDEN);
         mnDiagram_80241668(gobj);
         return;
     }
 
     if (data->anim_state == 1) {
-        if (mn_8022ED6C(data->jobjs[1], &mnDiagram_803EE768) >=
-            mnDiagram_803EE768.end_frame)
-        {
-            HSD_JObjClearFlagsAll(data->jobjs[2], 0x10);
+        HSD_JObj* jobj;
+        f32 frame;
+        f32 end_frame;
+
+        frame = mn_8022ED6C(data->jobjs[1], &mnDiagram_803EE768);
+        end_frame = mnDiagram_803EE768.end_frame;
+        jobj = data->jobjs[2];
+        if (frame >= end_frame) {
+            HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
             data->anim_state = 0;
             mnDiagram_802433AC();
             if (data->is_name_mode != 0) {
                 u16 indices = data->name_cursor_pos;
+                s32 row_idx;
+                u8 col_idx;
                 data2 = gobj->user_data;
                 row_idx = indices >> 8;
                 col_idx = (u8) indices;
@@ -1451,11 +2296,13 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
                 }
             } else {
                 u16 indices = data->fighter_cursor_pos;
+                s32 row_idx;
+                u8 col_idx;
                 data2 = gobj->user_data;
                 row_idx = indices >> 8;
                 col_idx = (u8) indices;
                 mnDiagram_80241668(gobj);
-                mnDiagram_8024227C(gobj, col_idx, row_idx,
+                mnDiagram_8024227C(gobj, col_idx, indices >> 8,
                                    (u8) (data2->is_name_mode == 1));
                 if (data2->is_name_mode == 0) {
                     mnDiagram_80242C0C(gobj, col_idx, row_idx);
@@ -1468,9 +2315,23 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
             } else {
                 count = mnDiagram_CountUnlockedFighters();
             }
-            mnDiagram_UpdateScrollArrowVisibility(gobj, count);
+            data2 = gobj->user_data;
+            if (count <= 7) {
+                HSD_JObjSetFlagsAll(((HSD_JObj**) data2)[7], JOBJ_HIDDEN);
+                HSD_JObjSetFlagsAll(((HSD_JObj**) data2)[8], JOBJ_HIDDEN);
+            } else {
+                HSD_JObjClearFlagsAll(((HSD_JObj**) data2)[7], JOBJ_HIDDEN);
+                HSD_JObjClearFlagsAll(((HSD_JObj**) data2)[8], JOBJ_HIDDEN);
+            }
+            if (count <= 10) {
+                HSD_JObjSetFlagsAll(((HSD_JObj**) data2)[6], JOBJ_HIDDEN);
+                HSD_JObjSetFlagsAll(((HSD_JObj**) data2)[5], JOBJ_HIDDEN);
+            } else {
+                HSD_JObjClearFlagsAll(((HSD_JObj**) data2)[6], JOBJ_HIDDEN);
+                HSD_JObjClearFlagsAll(((HSD_JObj**) data2)[5], JOBJ_HIDDEN);
+            }
         } else {
-            HSD_JObjSetFlagsAll(data->jobjs[2], 0x10);
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         }
     }
     mnDiagram_802417D0(gobj);
@@ -1478,8 +2339,11 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
 
 void mnDiagram_80241E78(void* arg0, u8 arg1, u8 arg2, int arg3)
 {
+    Diagram* data_alias;
+    f32 row_offset_adj;
     HSD_JObj* jobj;
     HSD_JObj* jobj2;
+    Diagram* user_data;
     Diagram* data;
     void** joint_data;
     s32 digit_count;
@@ -1487,15 +2351,15 @@ void mnDiagram_80241E78(void* arg0, u8 arg1, u8 arg2, int arg3)
     s32 i;
     f32 x_spacing;
     f32 y_spacing;
-    f32 y_offset;
     f32 base;
     f32 row_offset;
     f32 col_offset;
-    f32 row_offset_adj;
     u8 col = arg1;
     u8 row = arg2;
+    f32 y_offset;
 
     data = ((HSD_GObj*) arg0)->user_data;
+    data_alias = data;
 
     jobj = data->jobjs[11];
     base = HSD_JObjGetTranslationX(jobj);
@@ -1510,188 +2374,85 @@ void mnDiagram_80241E78(void* arg0, u8 arg1, u8 arg2, int arg3)
     jobj = data->jobjs[9];
     base = HSD_JObjGetTranslationY(jobj);
     jobj2 = data->jobjs[10];
-    y_offset = HSD_JObjGetTranslationY(jobj2) - base;
+    y_offset = HSD_JObjGetTranslationY(jobj2);
+    (void) y_offset;
+    y_offset -= base;
 
     digit_count = mn_GetDigitCount(arg3);
     col_offset = y_spacing * (f32) col;
     row_offset = y_offset * (f32) row;
-    row_offset_adj = row_offset - 1.0f;
+    row_offset_adj = row_offset - 0.4f;
 
     joint_data = mnDiagram_804A07F4;
     for (i = 0; i < digit_count; i++) {
         digit = mn_GetDigitAt(arg3, i);
         jobj = HSD_JObjLoadJoint(joint_data[0]);
         HSD_JObjAddAnimAll(jobj, joint_data[1], joint_data[2], joint_data[3]);
-        HSD_JObjReqAnimAll(jobj, (f32) digit);
+        base = (f32) digit;
+        HSD_JObjReqAnimAll(jobj, base);
         HSD_JObjAnimAll(jobj);
         if (col < 7) {
             HSD_JObjSetTranslateX(jobj, (x_spacing * (f32) i) + col_offset);
         } else {
             HSD_JObjSetTranslateX(jobj,
-                                  (x_spacing * (f32) i) + col_offset + 1.0f);
+                                  (x_spacing * (f32) i) + col_offset + 0.4f);
         }
         if (row < 10) {
             HSD_JObjSetTranslateY(jobj, row_offset);
         } else {
             HSD_JObjSetTranslateY(jobj, row_offset_adj);
         }
-        HSD_JObjAddChild(data->jobjs[11], jobj);
+        HSD_JObjAddChild(data_alias->jobjs[11], jobj);
     }
 }
 
 void mnDiagram_8024227C(void* arg0, s32 arg1, s32 arg2, u8 arg3)
 {
-    register void* gobj = arg0;
-    register s32 arg1_r = arg1;
-    register s32 arg2_r = arg2;
-    register u8 is_name = arg3;
-    register u8* base = (u8*) &mnDiagram_804A0750;
-    register s32 cap = 0xF423F;
+    s32 var_r22_2;
+    s32 arg1_r = arg1;
+    s32 arg2_r = arg2;
+    u8 is_name = arg3;
+    mnDiagram_Assets* assets = (mnDiagram_Assets*) &mnDiagram_804A0750;
+    s32 cap = 0xF423F;
     s32 var_r16_6;
-    s32 var_r17_10;
-    s32 var_r17_11;
-    s32 var_r17_5;
     s32 var_r17_7;
     s32 var_r17_8;
-    s32 var_r17_9;
-    s32 var_r18;
-    s32 var_r18_10;
-    s32 var_r18_11;
-    s32 var_r18_12;
     s32 var_r18_3;
-    s32 var_r18_4;
-    s32 var_r18_5;
-    s32 var_r18_6;
-    s32 var_r18_8;
-    s32 var_r18_9;
-    s32 var_r19;
     s32 var_r19_2;
-    s32 var_r19_3;
-    s32 var_r19_4;
-    s32 var_r19_6;
     s32 var_r22;
-    s32 var_r22_2;
     s32 var_r22_3;
     s32 var_r30;
     s32 var_r3;
     s32 var_r17_4;
     s32 var_r19_5;
-    u8 var_r0;
-    u8 var_r0_2;
-    u8 var_r17_6;
-    u8 var_r18_2;
-    u8 var_r18_7;
-    u8 var_r21;
-    u8 var_r23;
+    unsigned long long var_r0_2;
+    s32 var_r17_6;
+    s32 var_r23;
     u8 var_r24;
-    u8* var_r15;
-    u8* var_r15_2;
-    u8* var_r15_3;
-    u8* var_r16;
-    u8* var_r16_2;
-    u8* var_r16_3;
-    u8* var_r16_4;
-    u8* var_r16_5;
-    u8* var_r16_7;
-    u8* var_r17;
-    u8* var_r17_2;
-    u8* var_r17_3;
-    PAD_STACK(32);
+    u8* sorted;
 
     var_r30 = 0;
     do {
         if (var_r30 == 0xA) {
             var_r22 = 0;
             do {
+                sorted = (u8*) assets;
                 if (is_name != 0) {
                     var_r3 = GetNameCount();
                     if (var_r3 > var_r22) {
-                        var_r18 = var_r22;
-                        var_r19 = arg2_r;
-                        var_r16 = base + arg2_r + 0x1C;
-                    loop_11:
-                        if (var_r18 <= 0) {
-                            var_r0 = *(base + var_r19 + 0x1C);
-                        } else {
-                            var_r17 = var_r16;
-                        loop_7:
-                            var_r19 += 1;
-                            var_r17 += 1;
-                            var_r16 += 1;
-                            if (var_r19 >= 0x78) {
-                                var_r0 = 0x78;
-                            } else {
-                                if (GetNameText((s32) *var_r17) != NULL) {
-                                    var_r18 -= 1;
-                                    goto loop_11;
-                                }
-                                goto loop_7;
-                            }
-                        }
-                        var_r19_2 = 0;
-                        var_r18_2 = 0;
-                        do {
-                            if (GetNameText((s32) var_r18_2) != NULL) {
-                                var_r19_2 +=
-                                    GetPersistentNameData((u8) var_r18_2)
-                                        ->vs_kos[var_r0];
-                            }
-                            var_r18_2 += 1;
-                        } while ((s32) var_r18_2 < 0x78);
-                        if (var_r19_2 > cap) {
-                            var_r19_2 = cap;
-                        }
-                        mnDiagram_80241E78(gobj, (u8) var_r22, (u8) var_r30,
+                        var_r19_2 = mnDiagram_SumNameFalls(
+                            mnDiagram_GetVisibleNameCursorFrom(sorted, arg2_r,
+                                                               var_r22));
+                        mnDiagram_80241E78(arg0, (u8) var_r22, (u8) var_r30,
                                            var_r19_2);
                     }
                 } else {
-                    var_r18_3 = 0;
-                    var_r19_3 = 0;
-                    do {
-                        var_r3 = mn_IsFighterUnlocked(var_r19_3);
-                        if (var_r3 != 0) {
-                            var_r18_3 += 1;
-                        }
-                        var_r19_3 += 1;
-                    } while (var_r19_3 < 0x19);
+                    var_r18_3 = mnDiagram_CountUnlockedFightersInline();
                     if (var_r18_3 > var_r22) {
-                        var_r19_4 = var_r22;
-                        var_r18_4 = arg2_r;
-                        var_r17_2 = base + arg2_r;
-                    loop_33:
-                        if (var_r19_4 >= 0) {
-                            if (var_r19_4 == 0) {
-                                var_r21 = *(base + var_r18_4);
-                            } else {
-                                var_r16_2 = var_r17_2;
-                            loop_29:
-                                var_r18_4 += 1;
-                                var_r16_2 += 1;
-                                var_r17_2 += 1;
-                                if (var_r18_4 >= 0x19) {
-                                    var_r21 = 0x19;
-                                } else {
-                                    if (mn_IsFighterUnlocked(
-                                            (s32) *var_r16_2) != 0)
-                                    {
-                                        var_r19_4 -= 1;
-                                        goto loop_33;
-                                    }
-                                    goto loop_29;
-                                }
-                            }
-                        }
-                        var_r19_5 = 0;
-                        var_r18_5 = 0;
-                        do {
-                            if (mn_IsFighterUnlocked(var_r18_5) != 0) {
-                                var_r19_5 +=
-                                    GetPersistentFighterData((u8) var_r18_5)
-                                        ->fighter_kos[var_r21];
-                            }
-                            var_r18_5 += 1;
-                        } while (var_r18_5 < 0x19);
-                        mnDiagram_80241E78(gobj, (u8) var_r22, (u8) var_r30,
+                        var_r19_5 = mnDiagram_SumFighterFalls(
+                            mnDiagram_GetVisibleFighterCursorFrom(
+                                sorted, arg2_r, var_r22));
+                        mnDiagram_80241E78(arg0, (u8) var_r22, (u8) var_r30,
                                            var_r19_5);
                     }
                 }
@@ -1702,176 +2463,52 @@ void mnDiagram_8024227C(void* arg0, s32 arg1, s32 arg2, u8 arg3)
             if (var_r3 > var_r30) {
                 var_r22_2 = 0;
                 do {
+                    sorted = (u8*) assets;
                     if ((var_r22_2 == 7) ||
                         (var_r3 = GetNameCount(), (var_r3 > var_r22_2)))
                     {
-                        var_r19_6 = var_r30;
-                        var_r18_6 = arg1_r;
-                        var_r17_3 = base + arg1_r + 0x1C;
-                    loop_52:
-                        if (var_r19_6 <= 0) {
-                            var_r0_2 = *(base + var_r18_6 + 0x1C);
-                        } else {
-                            var_r16_3 = var_r17_3;
-                        loop_48:
-                            var_r18_6 += 1;
-                            var_r16_3 += 1;
-                            var_r17_3 += 1;
-                            if (var_r18_6 >= 0x78) {
-                                var_r0_2 = 0x78;
-                            } else {
-                                if (GetNameText((s32) *var_r16_3) != NULL) {
-                                    var_r19_6 -= 1;
-                                    goto loop_52;
-                                }
-                                goto loop_48;
-                            }
-                        }
+                        var_r0_2 = (u8) mnDiagram_GetVisibleNameCursorFrom(
+                            sorted, arg1_r, var_r30);
                         if (var_r22_2 == 7) {
-                            var_r17_4 = 0;
-                            var_r18_7 = 0;
-                            do {
-                                if (GetNameText((s32) var_r18_7) != NULL) {
-                                    var_r17_4 +=
-                                        GetPersistentNameData((u8) var_r0_2)
-                                            ->vs_kos[var_r18_7];
-                                }
-                                var_r18_7 += 1;
-                            } while ((s32) var_r18_7 < 0x78);
-                            mnDiagram_80241E78(gobj, (u8) var_r22_2,
+                            var_r17_4 = mnDiagram_GetNameTotalKOs(var_r0_2);
+                            mnDiagram_80241E78(arg0, (u8) var_r22_2,
                                                (u8) var_r30, var_r17_4);
                         } else {
-                            var_r18_8 = var_r22_2;
-                            var_r17_5 = arg2_r;
-                            var_r15 = base + arg2_r + 0x1C;
-                        loop_66:
-                            if (var_r18_8 <= 0) {
-                                var_r17_6 = *(base + var_r17_5 + 0x1C);
-                            } else {
-                                var_r16_4 = var_r15;
-                            loop_62:
-                                var_r17_5 += 1;
-                                var_r16_4 += 1;
-                                var_r15 += 1;
-                                if (var_r17_5 >= 0x78) {
-                                    var_r17_6 = 0x78;
-                                } else {
-                                    if (GetNameText((s32) *var_r16_4) != NULL)
-                                    {
-                                        var_r18_8 -= 1;
-                                        goto loop_66;
-                                    }
-                                    goto loop_62;
-                                }
-                            }
+                            var_r17_6 = mnDiagram_GetVisibleNameCursorFrom(
+                                sorted, arg2_r, var_r22_2);
                             mnDiagram_80241E78(
-                                gobj, (u8) var_r22_2, (u8) var_r30,
+                                arg0, (u8) var_r22_2, (u8) var_r30,
                                 GetPersistentNameData((u8) var_r0_2)
-                                    ->vs_kos[var_r17_6]);
+                                    ->vs_kos[(u8) var_r17_6]);
                         }
                     }
                     var_r22_2 += 1;
                 } while (var_r22_2 <= 7);
             }
         } else {
-            var_r17_7 = 0;
-            var_r18_9 = 0;
-            do {
-                var_r3 = mn_IsFighterUnlocked(var_r18_9);
-                if (var_r3 != 0) {
-                    var_r17_7 += 1;
-                }
-                var_r18_9 += 1;
-            } while (var_r18_9 < 0x19);
+            var_r17_7 = mnDiagram_CountUnlockedFightersInline();
             if (var_r17_7 > var_r30) {
                 var_r22_3 = 0;
                 do {
+                    sorted = (u8*) assets;
                     if (var_r22_3 != 7) {
-                        var_r17_8 = 0;
-                        var_r18_10 = 0;
-                        do {
-                            var_r3 = mn_IsFighterUnlocked(var_r18_10);
-                            if (var_r3 != 0) {
-                                var_r17_8 += 1;
-                            }
-                            var_r18_10 += 1;
-                        } while (var_r18_10 < 0x19);
+                        var_r17_8 = mnDiagram_CountUnlockedFightersInline();
                         if (var_r17_8 > var_r22_3) {
                             goto block_83;
                         }
                     } else {
                     block_83:
-                        var_r18_11 = var_r30;
-                        var_r17_9 = arg1_r;
-                        var_r16_5 = base + arg1_r;
-                    loop_91:
-                        if (var_r18_11 >= 0) {
-                            if (var_r18_11 == 0) {
-                                var_r23 = *(base + var_r17_9);
-                            } else {
-                                var_r15_2 = var_r16_5;
-                            loop_87:
-                                var_r17_9 += 1;
-                                var_r15_2 += 1;
-                                var_r16_5 += 1;
-                                if (var_r17_9 >= 0x19) {
-                                    var_r23 = 0x19;
-                                } else {
-                                    if (mn_IsFighterUnlocked(
-                                            (s32) *var_r15_2) != 0)
-                                    {
-                                        var_r18_11 -= 1;
-                                        goto loop_91;
-                                    }
-                                    goto loop_87;
-                                }
-                            }
-                        }
+                        var_r23 = mnDiagram_GetVisibleFighterCursorFrom(
+                            sorted, arg1_r, var_r30);
                         if (var_r22_3 == 7) {
-                            var_r16_6 = 0;
-                            var_r17_10 = 0;
-                            do {
-                                if (mn_IsFighterUnlocked(var_r17_10) != 0) {
-                                    var_r16_6 +=
-                                        GetPersistentFighterData((u8) var_r23)
-                                            ->fighter_kos[var_r17_10];
-                                }
-                                var_r17_10 += 1;
-                            } while (var_r17_10 < 0x19);
-                            if (var_r16_6 > cap) {
-                                var_r16_6 = cap;
-                            }
-                            mnDiagram_80241E78(gobj, (u8) var_r22_3,
-                                               (u8) var_r30, var_r16_6);
-                        } else {
-                            var_r18_12 = var_r22_3;
-                            var_r17_11 = arg2_r;
-                            var_r16_7 = base + arg2_r;
-                        loop_108:
-                            if (var_r18_12 >= 0) {
-                                if (var_r18_12 == 0) {
-                                    var_r24 = *(base + var_r17_11);
-                                } else {
-                                    var_r15_3 = var_r16_7;
-                                loop_104:
-                                    var_r17_11 += 1;
-                                    var_r15_3 += 1;
-                                    var_r16_7 += 1;
-                                    if (var_r17_11 >= 0x19) {
-                                        var_r24 = 0x19;
-                                    } else {
-                                        if (mn_IsFighterUnlocked(
-                                                (s32) *var_r15_3) != 0)
-                                        {
-                                            var_r18_12 -= 1;
-                                            goto loop_108;
-                                        }
-                                        goto loop_104;
-                                    }
-                                }
-                            }
                             mnDiagram_80241E78(
-                                gobj, (u8) var_r22_3, (u8) var_r30,
+                                arg0, (u8) var_r22_3, (u8) var_r30,
+                                mnDiagram_SumFighterKOsClamped(var_r23));
+                        } else {
+                            var_r24 = mnDiagram_GetVisibleFighterCursorFrom(
+                                sorted, arg2_r, var_r22_3);
+                            mnDiagram_80241E78(
+                                arg0, (u8) var_r22_3, (u8) var_r30,
                                 GetPersistentFighterData((u8) var_r23)
                                     ->fighter_kos[var_r24]);
                         }
@@ -1886,61 +2523,67 @@ void mnDiagram_8024227C(void* arg0, s32 arg1, s32 arg2, u8 arg3)
 
 void mnDiagram_802427B4(void* arg0, s32 arg1, s32 arg2)
 {
-    Diagram* data = ((HSD_GObj*) arg0)->user_data;
-    HSD_Text* text;
     int i;
-    int count;
-    u8 name_id;
+    Diagram* data = ((HSD_GObj*) arg0)->user_data;
+    u8* sorted = mnDiagram_804A0750.sorted_fighters;
+    HSD_Text* text;
+    HSD_Text* row_text;
+    Vec3 pos;
     f32 x_spacing;
     f32 y_spacing;
 
     // Column headers
     text = HSD_SisLib_803A6754(0, 1);
-    PAD_STACK(104);
     data->col_header_text = text;
     text->font_size.x = 0.02f;
     text->font_size.y = 0.03f;
-
-    x_spacing = 1.0f;
-    if (data->jobjs[9] != NULL && data->jobjs[10] != NULL) {
-        x_spacing = data->jobjs[10]->translate.x - data->jobjs[9]->translate.x;
+    {
+        HSD_JObj* j = data->jobjs[7];
+        pos.z = HSD_JObjGetTranslationZ(j);
+        pos.y = -0.5f - HSD_JObjGetTranslationY(j);
+        pos.x = -1.3f + HSD_JObjGetTranslationX(j);
+        text->pos_x = pos.x;
+        text->pos_y = pos.y;
+        text->pos_z = pos.z;
     }
-    if (data->jobjs[9] != NULL) {
-        text->pos_x = data->jobjs[9]->translate.x - 1.3f;
-        text->pos_y = -data->jobjs[9]->translate.y - 0.5f;
-        text->pos_z = data->jobjs[9]->translate.z;
-    }
 
-    count = GetNameCount();
     for (i = 0; i < 7; i++) {
-        if (count > i) {
-            name_id = mnDiagram_804A076C.sorted_names[arg2 + i];
-            HSD_SisLib_803A6B98(text, (x_spacing * (f32) i) / 0.02f, 0.0f,
+        if (GetNameCount() > i) {
+            u8 name_byte;
+            s32 name_id;
+            name_byte = mnDiagram_GetVisibleNameFrom(sorted, arg2, i);
+            name_id = name_byte;
+            x_spacing = HSD_JObjGetTranslationX(data->jobjs[8]) -
+                        HSD_JObjGetTranslationX(data->jobjs[7]);
+            HSD_SisLib_803A6B98(text, (x_spacing * i) / 0.02f, 0.0f,
                                 GetNameText(name_id));
         }
     }
 
     // Row headers
-    text = HSD_SisLib_803A6754(0, 1);
-    data->row_header_text = text;
-    text->font_size.x = 0.02f;
-    text->font_size.y = 0.03f;
-
-    y_spacing = 1.0f;
-    if (data->jobjs[11] != NULL && data->jobjs[12] != NULL) {
-        y_spacing =
-            data->jobjs[12]->translate.y - data->jobjs[11]->translate.y;
-    }
-    if (data->jobjs[11] != NULL) {
-        text->pos_x = data->jobjs[11]->translate.x - 1.3f;
-        text->pos_y = -data->jobjs[11]->translate.y - 0.5f;
-        text->pos_z = data->jobjs[11]->translate.z;
+    row_text = HSD_SisLib_803A6754(0, 1);
+    data->row_header_text = row_text;
+    row_text->font_size.x = 0.02f;
+    row_text->font_size.y = 0.03f;
+    {
+        HSD_JObj* j = data->jobjs[9];
+        pos.z = HSD_JObjGetTranslationZ(j);
+        pos.y = -0.5f - HSD_JObjGetTranslationY(j);
+        pos.x = -1.3f + HSD_JObjGetTranslationX(j);
+        row_text->pos_x = pos.x;
+        row_text->pos_y = pos.y;
+        row_text->pos_z = pos.z;
     }
 
     for (i = 0; i < 0xA; i++) {
-        if (count > i) {
-            name_id = mnDiagram_804A076C.sorted_names[arg1 + i];
-            HSD_SisLib_803A6B98(text, 0.0f, -((y_spacing * (f32) i) / 0.03f),
+        if (GetNameCount() > i) {
+            u8 name_byte;
+            s32 name_id;
+            name_byte = mnDiagram_GetVisibleNameFrom(sorted, arg1, i);
+            name_id = name_byte;
+            y_spacing = HSD_JObjGetTranslationY(data->jobjs[10]) -
+                        HSD_JObjGetTranslationY(data->jobjs[9]);
+            HSD_SisLib_803A6B98(row_text, 0.0f, -((y_spacing * i) / 0.03f),
                                 GetNameText(name_id));
         }
     }
@@ -1970,105 +2613,172 @@ HSD_JObj* mnDiagram_80242B38(int idx, int arg1)
 
 void mnDiagram_80242C0C(void* arg0, int arg1, int arg2)
 {
-    Diagram* data = ((HSD_GObj*) arg0)->user_data;
-    void** joint_data;
-    HSD_JObj* jobj;
-    HSD_JObj* sp_jobj;
-    int i;
     int count;
-    u8 fighter_id;
+    u8* pr;
+    u8* p2;
+    int remr;
+    HSD_JObj* jobj;
+    Diagram* data = GET_DIAGRAM(arg0);
+    mnDiagram_Assets* assets = (mnDiagram_Assets*) &mnDiagram_804A0750;
+    void** joint_data;
+    u8 stack_obj[8];
+    HSD_JObj* sp_jobj;
+    u8 stack_obj2[4];
+    HSD_JObj* sp_jobj2;
+    u8 stack_obj3[20];
+    int k;
+    int idx;
+    int remaining;
+    u8* p;
+    u8* sorted;
+    int fighter_id;
+    u8* pr2;
     f32 x_spacing;
     f32 y_spacing;
-    PAD_STACK(80);
+    int fighter_idr;
+    int i;
 
-    joint_data = (void**) &mnDiagram_804A0834;
+    (void) &stack_obj;
+    (void) &stack_obj2;
+    (void) &stack_obj3;
 
     // Column headers (fighter icons)
+    joint_data = assets->FaceB;
     for (i = 0; i < 7; i++) {
-        count = mnDiagram_CountUnlockedFighters();
+        sorted = mnDiagram_804A0750.sorted_fighters;
+        for (count = k = 0; k < 0x19; k++) {
+            if (mn_IsFighterUnlocked(k) != 0) {
+                count++;
+            }
+        }
         if (count > i) {
-            fighter_id = mnDiagram_804A0750.sorted_fighters[arg2 + i];
+            remaining = i;
+            idx = arg2;
+            p = sorted + idx;
+            while (remaining >= 0) {
+                if (remaining == 0) {
+                    fighter_id = sorted[idx];
+                    goto col_found;
+                }
+                p2 = p;
+            col_inner:
+                idx++;
+                p2++;
+                p++;
+                if (idx >= 0x19) {
+                    fighter_id = 0x19;
+                    goto col_found;
+                }
+                if (mn_IsFighterUnlocked(*p2) == 0) {
+                    goto col_inner;
+                }
+                remaining--;
+            }
+        col_found:
             jobj = HSD_JObjLoadJoint(joint_data[0]);
             HSD_JObjAddAnimAll(jobj, joint_data[1], joint_data[2],
                                joint_data[3]);
             HSD_JObjReqAnimAll(jobj, 0.0f);
             HSD_JObjAnimAll(jobj);
             lb_80011E24(jobj, &sp_jobj, 2, -1);
-            HSD_JObjReqAnimAll(sp_jobj, (f32) fighter_id);
+            HSD_JObjReqAnimAll(sp_jobj, (f32) (fighter_id & 0xFF));
             HSD_JObjAnimAll(sp_jobj);
-
-            if (data->jobjs[9] != NULL && data->jobjs[10] != NULL) {
-                x_spacing =
-                    data->jobjs[10]->translate.x - data->jobjs[9]->translate.x;
-                HSD_JObjSetTranslateX(jobj, x_spacing * (f32) i);
-            }
-            HSD_JObjAddChild(data->jobjs[9], jobj);
+            x_spacing = HSD_JObjGetTranslationX(data->jobjs[8]) -
+                        HSD_JObjGetTranslationX(data->jobjs[7]);
+            HSD_JObjSetTranslateX(jobj, x_spacing * i);
+            HSD_JObjAddChild(data->jobjs[7], jobj);
         }
     }
 
     // Row headers (fighter icons)
+    joint_data = assets->FaceB;
     for (i = 0; i < 0xA; i++) {
-        count = mnDiagram_CountUnlockedFighters();
+        sorted = mnDiagram_804A0750.sorted_fighters;
+        count = 0;
+        for (k = 0; k < 0x19; k++) {
+            if (mn_IsFighterUnlocked(k) != 0) {
+                count++;
+            }
+        }
         if (count > i) {
-            fighter_id = mnDiagram_804A0750.sorted_fighters[arg1 + i];
+            remr = i;
+            idx = arg1;
+            pr = sorted + idx;
+            while (remr >= 0) {
+                if (remr == 0) {
+                    fighter_idr = sorted[idx];
+                    goto row_found;
+                }
+                pr2 = pr;
+            row_inner:
+                idx++;
+                pr2++;
+                pr++;
+                if (idx >= 0x19) {
+                    fighter_idr = 0x19;
+                    goto row_found;
+                }
+                if (mn_IsFighterUnlocked(*pr2) == 0) {
+                    goto row_inner;
+                }
+                remr--;
+            }
+        row_found:
             jobj = HSD_JObjLoadJoint(joint_data[0]);
             HSD_JObjAddAnimAll(jobj, joint_data[1], joint_data[2],
                                joint_data[3]);
             HSD_JObjReqAnimAll(jobj, 0.0f);
             HSD_JObjAnimAll(jobj);
-            lb_80011E24(jobj, &sp_jobj, 2, -1);
-            HSD_JObjReqAnimAll(sp_jobj, (f32) fighter_id);
-            HSD_JObjAnimAll(sp_jobj);
-
-            if (data->jobjs[11] != NULL && data->jobjs[12] != NULL) {
-                y_spacing = data->jobjs[12]->translate.y -
-                            data->jobjs[11]->translate.y;
-                HSD_JObjSetTranslateY(jobj, y_spacing * (f32) i);
-            }
-            HSD_JObjAddChild(data->jobjs[11], jobj);
+            lb_80011E24(jobj, &sp_jobj2, 2, -1);
+            HSD_JObjReqAnimAll(sp_jobj2, (f32) (fighter_idr & 0xFF));
+            HSD_JObjAnimAll(sp_jobj2);
+            y_spacing = HSD_JObjGetTranslationY(data->jobjs[10]) -
+                        HSD_JObjGetTranslationY(data->jobjs[9]);
+            HSD_JObjSetTranslateY(jobj, y_spacing * i);
+            HSD_JObjAddChild(data->jobjs[9], jobj);
         }
     }
 }
 
+static inline Diagram* mnDiagram_GetCurrentDiagramData(void)
+{
+    return mnDiagram_804D6C10->user_data;
+}
+
 void mnDiagram_CursorProc(HSD_GObj* gobj)
 {
-    Diagram* data;
     HSD_JObj* sp_jobj;
+    u16* selection;
     int col;
     int row;
     f32 x_spacing;
     f32 y_spacing;
-    f32 x_pos;
-    f32 y_pos;
-    PAD_STACK(40);
+    Diagram* data;
+    PAD_STACK(8);
 
     if ((mn_804A04F0.cur_menu != 0x1E) || (mn_804A04F0.x10 != 0)) {
         HSD_GObjPLink_80390228(gobj);
         return;
     }
 
-    data = mnDiagram_804D6C10->user_data;
+    data = mnDiagram_GetCurrentDiagramData();
     lb_80011E24((HSD_JObj*) gobj->hsd_obj, &sp_jobj, 3, -1);
 
-    col = mn_804A04F0.hovered_selection >> 8;
-    if (data->jobjs[9] != NULL && data->jobjs[10] != NULL) {
-        x_spacing = data->jobjs[10]->translate.x - data->jobjs[9]->translate.x;
-        x_pos = x_spacing * (f32) (col - 3);
-        HSD_JObjSetTranslateX(sp_jobj, x_pos);
-    }
+    selection = (u16*) &mn_804A04F0;
+    col = *++selection >> 8;
+    x_spacing = HSD_JObjGetTranslationX(data->jobjs[8]) -
+                HSD_JObjGetTranslationX(data->jobjs[7]);
+    HSD_JObjSetTranslateX(sp_jobj, x_spacing * (col - 3));
 
     lb_80011E24((HSD_JObj*) gobj->hsd_obj, &sp_jobj, 4, -1);
-    row = (u8) mn_804A04F0.hovered_selection;
-    if (data->jobjs[11] != NULL && data->jobjs[12] != NULL) {
-        y_spacing =
-            data->jobjs[12]->translate.y - data->jobjs[11]->translate.y;
-        y_pos = (y_spacing * ((f32) row - 4.5f)) - 0.1f;
-        HSD_JObjSetTranslateY(sp_jobj, y_pos);
-    }
+    row = *selection & 0xFF;
+    y_spacing = HSD_JObjGetTranslationY(data->jobjs[10]) -
+                HSD_JObjGetTranslationY(data->jobjs[9]);
+    HSD_JObjSetTranslateY(sp_jobj, y_spacing * (row - 4.5) - 0.1F);
 
     lb_80011E24((HSD_JObj*) gobj->hsd_obj, &sp_jobj, 2, -1);
-    HSD_JObjSetTranslateX(sp_jobj, x_pos);
-    HSD_JObjSetTranslateY(sp_jobj, y_pos);
+    HSD_JObjSetTranslateX(sp_jobj, x_spacing * (col - 3));
+    HSD_JObjSetTranslateY(sp_jobj, y_spacing * (row - 4.5) - 0.1F);
 }
 
 void mnDiagram_802433AC(void)
@@ -2088,19 +2798,25 @@ void mnDiagram_802433AC(void)
 
 void mnDiagram_80243434(u8 arg0)
 {
+    int col_idx;
+    s32 row_idx;
+    Diagram* d;
+    int col_idx2;
+    s32 row_idx2;
+    Diagram* d2;
     HSD_GObj* gobj;
-    HSD_GObj* cursor_gobj;
     HSD_JObj* jobj;
-    Diagram* data;
-    void** joint_data;
-    HSD_GObjProc* proc;
-    int i;
+    HSD_JObj* anim_jobj;
+    Diagram* user_data;
+    Diagram* data2;
     int count;
+    void** joint_data;
+    mnDiagram_AnimTable* tbl = GET_DIAGRAM_ANIM_TABLE();
+    int i;
     u16 indices;
-    u8 col_idx;
-    u8 row_idx;
-    PAD_STACK(32);
+    u8 stack_obj[8];
 
+    (void) &stack_obj;
     joint_data = (void**) &mnDiagram_804A0824;
     gobj = GObj_Create(6, 7, 0x80);
     mnDiagram_804D6C10 = gobj;
@@ -2108,81 +2824,92 @@ void mnDiagram_80243434(u8 arg0)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 6, 0x80);
     HSD_JObjAddAnimAll(jobj, joint_data[1], joint_data[2], joint_data[3]);
-    HSD_JObjReqAnimAll(jobj, 0.0f);
+    HSD_JObjReqAnimAll(jobj, mnDiagram_804DBF84);
 
-    data = HSD_MemAlloc(sizeof(Diagram));
-    data->saved_menu = mn_804A04F0.cur_menu;
-    data->saved_selection = mn_804A04F0.hovered_selection;
-    data->anim_state = arg0;
-    data->fighter_cursor_pos = 0;
-    data->name_cursor_pos = 0;
-    data->popup_gobj = NULL;
-    data->col_header_text = NULL;
-    data->row_header_text = NULL;
+    user_data = HSD_MemAlloc(sizeof(Diagram));
+    HSD_ASSERTREPORT(0x90E, user_data, "Can't get user_data.\n");
+    user_data->saved_menu = mn_804A04F0.cur_menu;
+    user_data->saved_selection = mn_804A04F0.hovered_selection;
+    user_data->anim_state = arg0;
+    user_data->fighter_cursor_pos = (u8) user_data->fighter_cursor_pos;
+    user_data->fighter_cursor_pos &= 0xFF00;
+    user_data->name_cursor_pos = (u8) user_data->name_cursor_pos;
+    user_data->name_cursor_pos &= 0xFF00;
+    user_data->popup_gobj = NULL;
+    user_data->row_header_text = NULL;
+    user_data->col_header_text = NULL;
 
     if (GetNameCount() != 0) {
-        data->is_name_mode = gmMainLib_8015CC34()->xD;
+        user_data->is_name_mode = gmMainLib_8015CC34()->xD;
     } else {
         gmMainLib_8015CC34()->xD = 0;
-        data->is_name_mode = 0;
+        user_data->is_name_mode = gmMainLib_8015CC34()->xD;
     }
 
-    GObj_InitUserData(gobj, 0, HSD_Free, data);
+    GObj_InitUserData(gobj, 0, HSD_Free, user_data);
 
     for (i = 0; i < 13; i++) {
-        lb_80011E24(jobj, &data->jobjs[i], i, -1);
+        lb_80011E24(jobj, &user_data->jobjs[i], i, -1);
     }
 
-    proc =
-        HSD_GObj_SetupProc(gobj, (void (*)(HSD_GObj*)) mnDiagram_OnFrame, 0);
+    HSD_GObj_SetupProc(gobj, (void (*)(HSD_GObj*)) mnDiagram_OnFrame, 0);
 
     if (arg0 == 0) {
-        HSD_JObjReqAnimAll(data->jobjs[3], 9.0f);
-        HSD_JObjAnimAll(data->jobjs[3]);
+        anim_jobj = user_data->jobjs[1];
+        HSD_JObjReqAnimAll(anim_jobj, tbl->x40.end_frame);
+        HSD_JObjAnimAll(anim_jobj);
 
-        cursor_gobj = GObj_Create(6, 7, 0x80);
-        HSD_GObjObject_80390A70(
-            cursor_gobj, HSD_GObj_804D7849,
-            HSD_JObjLoadJoint((HSD_Joint*) mnDiagram_804A0814));
-        GObj_SetupGXLink(cursor_gobj, HSD_GObj_JObjCallback, 4, 0x80);
-        HSD_GObj_SetupProc(cursor_gobj, mnDiagram_CursorProc, 0);
+        mnDiagram_802433AC();
 
-        if (data->is_name_mode != 0) {
+        if (user_data->is_name_mode != 0) {
             count = GetNameCount();
         } else {
             count = mnDiagram_CountUnlockedFighters();
         }
 
+        data2 = GET_DIAGRAM(gobj);
         if (count <= 7) {
-            HSD_JObjSetFlagsAll(data->jobjs[7], 0x10);
-            HSD_JObjSetFlagsAll(data->jobjs[8], 0x10);
+            HSD_JObjSetFlagsAll(data2->jobjs[5], JOBJ_HIDDEN);
+            HSD_JObjSetFlagsAll(data2->jobjs[6], JOBJ_HIDDEN);
         } else {
-            HSD_JObjClearFlagsAll(data->jobjs[7], 0x10);
-            HSD_JObjClearFlagsAll(data->jobjs[8], 0x10);
+            HSD_JObjClearFlagsAll(data2->jobjs[5], JOBJ_HIDDEN);
+            HSD_JObjClearFlagsAll(data2->jobjs[6], JOBJ_HIDDEN);
         }
 
         if (count <= 0xA) {
-            HSD_JObjSetFlagsAll(data->jobjs[6], 0x10);
-            HSD_JObjSetFlagsAll(data->jobjs[5], 0x10);
+            HSD_JObjSetFlagsAll(data2->jobjs[4], JOBJ_HIDDEN);
+            HSD_JObjSetFlagsAll(data2->jobjs[3], JOBJ_HIDDEN);
         } else {
-            HSD_JObjClearFlagsAll(data->jobjs[6], 0x10);
-            HSD_JObjClearFlagsAll(data->jobjs[5], 0x10);
+            HSD_JObjClearFlagsAll(data2->jobjs[4], JOBJ_HIDDEN);
+            HSD_JObjClearFlagsAll(data2->jobjs[3], JOBJ_HIDDEN);
         }
 
-        if (data->is_name_mode != 0) {
-            indices = data->name_cursor_pos;
-            col_idx = (u8) indices;
+        if (user_data->is_name_mode != 0) {
+            indices = user_data->name_cursor_pos;
             row_idx = indices >> 8;
+            col_idx = indices & 0xFF;
+            d = GET_DIAGRAM(gobj);
             mnDiagram_80241668(gobj);
-            mnDiagram_8024227C(gobj, col_idx, row_idx, 1);
-            mnDiagram_802427B4(gobj, col_idx, row_idx);
+            mnDiagram_8024227C(gobj, col_idx, row_idx,
+                               (u8) (d->is_name_mode == 1));
+            if (d->is_name_mode == 0) {
+                mnDiagram_80242C0C(gobj, col_idx, row_idx);
+            } else {
+                mnDiagram_802427B4(gobj, col_idx, row_idx);
+            }
         } else {
-            indices = data->fighter_cursor_pos;
-            col_idx = (u8) indices;
-            row_idx = indices >> 8;
+            indices = user_data->fighter_cursor_pos;
+            row_idx2 = indices >> 8;
+            col_idx2 = indices & 0xFF;
+            d2 = GET_DIAGRAM(gobj);
             mnDiagram_80241668(gobj);
-            mnDiagram_8024227C(gobj, col_idx, row_idx, 0);
-            mnDiagram_80242C0C(gobj, col_idx, row_idx);
+            mnDiagram_8024227C(gobj, col_idx2, row_idx2,
+                               (u8) (d2->is_name_mode == 1));
+            if (d2->is_name_mode == 0) {
+                mnDiagram_80242C0C(gobj, col_idx2, row_idx2);
+            } else {
+                mnDiagram_802427B4(gobj, col_idx2, row_idx2);
+            }
         }
     }
 }
@@ -2190,31 +2917,35 @@ void mnDiagram_80243434(u8 arg0)
 /// Initialize VS Records diagram screen.
 /// @param arg0 If non-zero, load DAT archive symbols
 /// @param arg1 Initial mode (passed to mnDiagram_80243434)
-void mnDiagram_802437E8(s32 arg0, s32 arg1)
+void mnDiagram_802437E8(u8 arg0, u8 arg1)
 {
     mnDiagram_Assets* assets = (mnDiagram_Assets*) &mnDiagram_804A0750;
+    HSD_GObj* gobj;
     HSD_GObjProc* proc;
-    PAD_STACK(24);
+    HSD_Archive* archive;
+    u8 mode_storage[4];
 
+    mode_storage[0] = arg1;
     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
     mn_804A04F0.cur_menu = 0x1E;
     mn_804A04F0.x10 = 0;
     mn_804A04F0.hovered_selection = 0;
 
     if (arg0) {
+        archive = mn_804D6BB8;
         lbArchive_LoadSections(
-            mn_804D6BB8, &assets->ConB1[0], "MenMainConB1_Top_joint",
+            archive, &assets->ConB1[0], "MenMainConB1_Top_joint",
             &assets->ConB1[1], "MenMainConB1_Top_animjoint", &assets->ConB1[2],
             "MenMainConB1_Top_matanim_joint", &assets->ConB1[3],
-            "MenMainConB1_Top_shapeanim_joint", &assets->CursorB1_FaceB[0],
-            "MenMainCursorB1_Top_joint", &assets->CursorB1_FaceB[1],
-            "MenMainFaceB_Top_joint", &assets->CursorB1_FaceB[2],
-            "MenMainFaceB_Top_animjoint", &assets->CursorB1_FaceB[3],
-            "MenMainFaceB_Top_matanim_joint", &assets->FaceB_NmB[0],
-            "MenMainFaceB_Top_shapeanim_joint", &assets->FaceB_NmB[1],
-            "MenMainNmB_Top_joint", &assets->FaceB_NmB[2],
-            "MenMainNmB_Top_animjoint", &assets->FaceB_NmB[3],
-            "MenMainNmB_Top_matanim_joint", &assets->NmB_shape[0],
+            "MenMainConB1_Top_shapeanim_joint", &assets->CursorB1[0],
+            "MenMainCursorB1_Top_joint", &assets->FaceB[0],
+            "MenMainFaceB_Top_joint", &assets->FaceB[1],
+            "MenMainFaceB_Top_animjoint", &assets->FaceB[2],
+            "MenMainFaceB_Top_matanim_joint", &assets->FaceB[3],
+            "MenMainFaceB_Top_shapeanim_joint", &assets->NmB[0],
+            "MenMainNmB_Top_joint", &assets->NmB[1],
+            "MenMainNmB_Top_animjoint", &assets->NmB[2],
+            "MenMainNmB_Top_matanim_joint", &assets->NmB[3],
             "MenMainNmB_Top_shapeanim_joint", &assets->SubB1[0],
             "MenMainSubB1_Top_joint", &assets->SubB1[1],
             "MenMainSubB1_Top_animjoint", &assets->SubB1[2],
@@ -2233,9 +2964,10 @@ void mnDiagram_802437E8(s32 arg0, s32 arg1)
 
     mnDiagram_8023FA6C();
     mnDiagram_8023FC28();
-    mnDiagram_80243434((u8) arg1);
+    mnDiagram_80243434(mode_storage[0]);
 
-    proc = HSD_GObj_SetupProc(GObj_Create(0, 1, 0x80),
-                              (void (*)(HSD_GObj*)) mnDiagram_InputProc, 0);
+    gobj = GObj_Create(0, 1, 0x80);
+    proc =
+        HSD_GObj_SetupProc(gobj, (void (*)(HSD_GObj*)) mnDiagram_InputProc, 0);
     proc->flags_3 = HSD_GObj_804D783C;
 }

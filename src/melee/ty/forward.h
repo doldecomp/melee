@@ -1,8 +1,66 @@
 #ifndef MELEE_TY_FORWARD_H
 #define MELEE_TY_FORWARD_H
 
-#include <placeholder.h>
-
+struct un_804D6EE0_t;
+typedef struct DigitInit DigitInit;
+typedef struct PosArray PosArray;
+typedef struct PosArrayFull PosArrayFull;
+typedef struct SisFontData SisFontData;
 typedef struct Toy Toy;
+typedef struct Toy26B8 Toy26B8;
+typedef struct Toy26B8_2 Toy26B8_2;
+typedef struct Toy6E68 Toy6E68;
+typedef struct ToyAnimState ToyAnimState;
+typedef struct ToyCameraControl ToyCameraControl;
+typedef struct ToyDataJObj ToyDataJObj;
+typedef struct ToyDataX8 ToyDataX8;
+typedef struct ToyED8Data ToyED8Data;
+typedef struct ToyEntry ToyEntry;
+typedef struct ToyGlobalsS_ ToyGlobalsS_;
+typedef struct ToyJObjNode ToyJObjNode;
+typedef struct ToyListEntry ToyListEntry;
+typedef struct ToyNameData ToyNameData;
+typedef struct ToyParamEditor ToyParamEditor;
+typedef struct ToySubStructS_ ToySubStructS_;
+typedef struct ToyTable ToyTable;
+typedef struct ToyTransitionObj ToyTransitionObj;
+typedef struct TrophyData TrophyData;
+typedef struct Ty25Entry Ty25Entry;
+typedef struct TyArchiveData TyArchiveData;
+typedef struct TyCameraData_ TyCameraData_;
+typedef struct TyCleanupObj TyCleanupObj;
+typedef struct tyDispData tyDispData;
+typedef struct TyDisplayData TyDisplayData;
+typedef struct TyDspArchiveHolder TyDspArchiveHolder;
+typedef struct TyDspArchNames TyDspArchNames;
+typedef struct TyDspBaseData TyDspBaseData;
+typedef struct TyDspBgData TyDspBgData;
+typedef struct TyDspConfig TyDspConfig;
+typedef struct TyDspEntry TyDspEntry;
+typedef struct TyDspGrid TyDspGrid;
+typedef struct TyDspNameTables TyDspNameTables;
+typedef struct TyDspPos TyDspPos;
+typedef struct TyFiguponData TyFiguponData;
+typedef struct TyFiguponED4 TyFiguponED4;
+typedef struct TyFiguponInner TyFiguponInner;
+typedef struct TyFiguponUD TyFiguponUD;
+typedef struct TyGObjX8_ TyGObjX8_;
+typedef struct TyLightArray_ TyLightArray_;
+typedef struct TyLightData TyLightData;
+typedef struct TyLightFile TyLightFile;
+typedef struct TyLightGObj_ TyLightGObj_;
+typedef struct TyLightIndexEntry TyLightIndexEntry;
+typedef struct TyLightSymbolEntry TyLightSymbolEntry;
+typedef struct TyListArg TyListArg;
+typedef struct TyListData TyListData;
+typedef struct TyListGobjEntry TyListGobjEntry;
+typedef struct TyListRow TyListRow;
+typedef struct TyListState TyListState;
+typedef struct TyListWaitData TyListWaitData;
+typedef struct TyModeState TyModeState;
+typedef struct TySortElem TySortElem;
+typedef struct tyUnkStruct tyUnkStruct;
+typedef struct TyViewData TyViewData;
+typedef struct un_804D6E68_t un_804D6E68_t;
 
 #endif

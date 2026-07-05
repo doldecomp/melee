@@ -32,7 +32,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 {
     Fighter* fp;
     itSword_UnkBytes* params;
-    AfterimageVtx vtx_buf[152];
+    AfterimageVtx vtx_buf[151];
     f32 cumDist[3];
     Vec3 delta, prevPos, crossProd, tempDir;
     s32 numVerts;
@@ -65,11 +65,13 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
     GXSetCullMode(GX_CULL_NONE);
 
     if (fp->x2101_bits_8) {
-        s32 kind = itGetKind(fp->item_gobj);
-        if (kind == It_Kind_Sword) {
+        switch (itGetKind(fp->item_gobj)) {
+        case It_Kind_Sword:
             params = it_80285300(fp->item_gobj);
-        } else {
+            break;
+        default:
             HSD_ASSERTREPORT(0x7C, NULL, "no afterimage item!\n");
+            break;
         }
     } else {
         switch (fp->kind) {
@@ -270,6 +272,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 
                             basePosX = curEntry->x0.x;
                             basePosY = curEntry->x0.y;
+                            (void) basePosY;
                             basePosZ = curEntry->x0.z;
 
                             stepPosX = frac * (nextEntry->x0.x - basePosX);

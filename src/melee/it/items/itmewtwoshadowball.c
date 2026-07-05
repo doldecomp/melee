@@ -1,33 +1,79 @@
 #include "itmewtwoshadowball.h"
 
-#include "placeholder.h"
-
-#include "db/db.h"
+#include "baselib/jobj.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
-#include "ft/chara/ftKirby/ftKb_Init.h"
+#include "ft/chara/ftKirby/ftkirbyspecialmewtwo.h"
 #include "ft/chara/ftMewtwo/ftMt_SpecialN.h"
 #include "ft/ftlib.h"
-
-#include "it/forward.h"
-
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
-#include "MSL/trigf.h"
 
-#include <math.h>
-#include <baselib/jobj.h>
 #include <baselib/mtx.h>
 #include <baselib/random.h>
+#include <MSL/trigf.h>
 
-extern s32 it_803F7880[];
+/* 2C5B18 */ static void it_802C5B18(Item_GObj*, Item_GObj*);
 
-void it_802C4D10(Item_GObj* gobj)
+ItemStateTable it_803F7760[] = {
+    { 0, itMewtwoshadowball_UnkMotion0_Anim,
+      itMewtwoshadowball_UnkMotion0_Phys, itMewtwoshadowball_UnkMotion0_Coll },
+    { 1, itMewtwoshadowball_UnkMotion8_Anim,
+      itMewtwoshadowball_UnkMotion8_Phys, itMewtwoshadowball_UnkMotion8_Coll },
+    { 2, itMewtwoshadowball_UnkMotion8_Anim,
+      itMewtwoshadowball_UnkMotion8_Phys, itMewtwoshadowball_UnkMotion8_Coll },
+    { 3, itMewtwoshadowball_UnkMotion8_Anim,
+      itMewtwoshadowball_UnkMotion8_Phys, itMewtwoshadowball_UnkMotion8_Coll },
+    { 4, itMewtwoshadowball_UnkMotion8_Anim,
+      itMewtwoshadowball_UnkMotion8_Phys, itMewtwoshadowball_UnkMotion8_Coll },
+    { 5, itMewtwoshadowball_UnkMotion8_Anim,
+      itMewtwoshadowball_UnkMotion8_Phys, itMewtwoshadowball_UnkMotion8_Coll },
+    { 6, itMewtwoshadowball_UnkMotion8_Anim,
+      itMewtwoshadowball_UnkMotion8_Phys, itMewtwoshadowball_UnkMotion8_Coll },
+    { 7, itMewtwoshadowball_UnkMotion8_Anim,
+      itMewtwoshadowball_UnkMotion8_Phys, itMewtwoshadowball_UnkMotion8_Coll },
+    { 8, itMewtwoshadowball_UnkMotion8_Anim,
+      itMewtwoshadowball_UnkMotion8_Phys, itMewtwoshadowball_UnkMotion8_Coll },
+    { 9, itMewtwoshadowball_UnkMotion9_Anim,
+      itMewtwoshadowball_UnkMotion9_Phys, itMewtwoshadowball_UnkMotion9_Coll },
+    { 1, itMewtwoshadowball_UnkMotion17_Anim,
+      itMewtwoshadowball_UnkMotion17_Phys,
+      itMewtwoshadowball_UnkMotion17_Coll },
+    { 2, itMewtwoshadowball_UnkMotion17_Anim,
+      itMewtwoshadowball_UnkMotion17_Phys,
+      itMewtwoshadowball_UnkMotion17_Coll },
+    { 3, itMewtwoshadowball_UnkMotion17_Anim,
+      itMewtwoshadowball_UnkMotion17_Phys,
+      itMewtwoshadowball_UnkMotion17_Coll },
+    { 4, itMewtwoshadowball_UnkMotion17_Anim,
+      itMewtwoshadowball_UnkMotion17_Phys,
+      itMewtwoshadowball_UnkMotion17_Coll },
+    { 5, itMewtwoshadowball_UnkMotion17_Anim,
+      itMewtwoshadowball_UnkMotion17_Phys,
+      itMewtwoshadowball_UnkMotion17_Coll },
+    { 6, itMewtwoshadowball_UnkMotion17_Anim,
+      itMewtwoshadowball_UnkMotion17_Phys,
+      itMewtwoshadowball_UnkMotion17_Coll },
+    { 7, itMewtwoshadowball_UnkMotion17_Anim,
+      itMewtwoshadowball_UnkMotion17_Phys,
+      itMewtwoshadowball_UnkMotion17_Coll },
+    { 8, itMewtwoshadowball_UnkMotion17_Anim,
+      itMewtwoshadowball_UnkMotion17_Phys,
+      itMewtwoshadowball_UnkMotion17_Coll },
+};
+
+s32 it_803F7880[] = {
+    0x00030DAA,
+    0x00030DAD,
+    0x00030DB0,
+};
+
+u32 it_802C4D10(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itMewtwoShadowball_DatAttrs* attr =
@@ -37,11 +83,13 @@ void it_802C4D10(Item_GObj* gobj)
     if (ip->xDD4_itemVar.mewtwoshadowball.x4C > 0) {
         ip->xDD4_itemVar.mewtwoshadowball.x48++;
         if (ip->xDD4_itemVar.mewtwoshadowball.x48 >= attr->x20) {
+            f32 rand;
             ip->xDD4_itemVar.mewtwoshadowball.x48 = 0;
+            rand = HSD_Randf();
             ip->xDD4_itemVar.mewtwoshadowball.x3C +=
-                ((M_PI / 4) * (2.0f * (HSD_Randf() - 0.5f)));
+                ((M_PI / 4) * (2.0f * (rand - 0.5f)));
             ip->xDD4_itemVar.mewtwoshadowball.x44 =
-                -ip->xDD4_itemVar.mewtwoshadowball.x40 / (attr->x20 / 2);
+                -ip->xDD4_itemVar.mewtwoshadowball.x40 / (0.5f * attr->x20);
             Item_8026AF0C(ip, it_803F7880[HSD_Randi(3)], 127, 64);
         }
         ip->xDD4_itemVar.mewtwoshadowball.x40 +=
@@ -229,11 +277,13 @@ Item_GObj* it_802C519C(Item_GObj* parent, Vec3* pos, s32 kind, s32 max_charge,
 void it_802C53F0(Item_GObj* gobj, Vec3* pos, float angle, float charge,
                  float max_charge)
 {
+    HSD_JObj* jobj;
     Item* ip = GET_ITEM(gobj);
     itMewtwoShadowball_DatAttrs* attr =
         ip->xC4_article_data->x4_specialAttributes;
-    HSD_JObj* jobj;
-    PAD_STACK(8);
+    Vec3 rot;
+    Vec3 tr;
+    PAD_STACK(4);
 
     ip->xDD4_itemVar.mewtwoshadowball.x4.x = angle;
     it_80275158(gobj, attr->x0);
@@ -244,16 +294,13 @@ void it_802C53F0(Item_GObj* gobj, Vec3* pos, float angle, float charge,
     if (charge > max_charge) {
         charge = max_charge;
     }
-    ip->xDD4_itemVar.mewtwoshadowball.x18 = (s32) charge;
-    ip->xDD4_itemVar.mewtwoshadowball.x1C = (s32) max_charge;
+    ip->xDD4_itemVar.mewtwoshadowball.x18 = charge;
+    ip->xDD4_itemVar.mewtwoshadowball.x1C = max_charge;
 
-    if (ip->xDD4_itemVar.mewtwoshadowball.x2C != NULL &&
+    if (ip->xDD4_itemVar.mewtwoshadowball.x2C &&
         ip->owner == ip->xDD4_itemVar.mewtwoshadowball.x2C)
     {
-        Vec3 rot;
-        Vec3 tr;
-
-        it_802C5B18(gobj);
+        it_802C5B18(gobj, ip->xDD4_itemVar.mewtwoshadowball.x2C);
         HSD_MtxGetRotation(
             ftLib_80086630(ip->xDD4_itemVar.mewtwoshadowball.x2C, ip->xDC4)
                 ->mtx,
@@ -294,7 +341,8 @@ void it_802C53F0(Item_GObj* gobj, Vec3* pos, float angle, float charge,
         ip->x40_vel.z = 0.0f;
         ip->xDD4_itemVar.mewtwoshadowball.x14 = 1;
         ip->xDD4_itemVar.mewtwoshadowball.x4C = 0;
-        jobj = HSD_JObjGetChild(gobj->hsd_obj);
+        jobj = gobj->hsd_obj;
+        jobj = HSD_JObjGetChild(jobj);
         tr.x = tr.y = tr.z = 1.0f;
         HSD_JObjSetScale(jobj, &tr);
     }
@@ -317,6 +365,8 @@ void it_2725_Logic101_Destroyed(Item_GObj* gobj)
                 case It_Kind_Kirby_MewtwoShadowBall:
                     ftKb_SpecialNMt_80107040(
                         ip->xDD4_itemVar.mewtwoshadowball.x2C);
+                    break;
+                default:
                     break;
                 }
             }
@@ -347,12 +397,13 @@ void it_2725_Logic101_PickedUp(Item_GObj* gobj)
 
 bool itMewtwoshadowball_UnkMotion0_Anim(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
+    Item* ip = gobj->user_data;
     itMewtwoShadowball_DatAttrs* attr =
         ip->xC4_article_data->x4_specialAttributes;
-    HSD_JObj* grandchild = itGetJObjGrandchild(gobj);
-    Vec3 scale;
+    HSD_JObj* grandchild = HSD_JObjGetChild(HSD_JObjGetChild(GET_JOBJ(gobj)));
     Vec3 trans;
+    Vec3 scale;
+    PAD_STACK(4);
 
     if (ip->xDD4_itemVar.mewtwoshadowball.x2C != NULL &&
         ip->owner == ip->xDD4_itemVar.mewtwoshadowball.x2C)
@@ -397,7 +448,7 @@ bool itMewtwoshadowball_UnkMotion0_Anim(Item_GObj* gobj)
             }
             break;
         default:
-            return false;
+            break;
         }
     }
     scale.x = scale.y = scale.z =
@@ -429,9 +480,9 @@ bool itMewtwoshadowball_UnkMotion0_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_802C5B18(Item_GObj* gobj)
+void it_802C5B18(Item_GObj* gobj, Item_GObj* arg1)
 {
-    Item* ip = gobj->user_data;
+    Item* ip = GET_ITEM(gobj);
     itMewtwoShadowball_DatAttrs* attr =
         ip->xC4_article_data->x4_specialAttributes;
     it_80275158(gobj, attr->x0);
@@ -453,7 +504,6 @@ void it_802C5B18(Item_GObj* gobj)
         0.5F * ((f32) ip->xDD4_itemVar.mewtwoshadowball.x18 /
                 ip->xDD4_itemVar.mewtwoshadowball.x1C) +
         0.5F;
-    PAD_STACK(8);
 }
 
 bool itMewtwoshadowball_UnkMotion8_Anim(Item_GObj* gobj)
@@ -508,11 +558,12 @@ bool itMewtwoshadowball_UnkMotion9_Coll(Item_GObj* gobj)
 void fn_802C5E18(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    // cursed, wtf
-    bool _unused = ip->xDD4_itemVar.mewtwoshadowball.x18 ==
-                   ip->xDD4_itemVar.mewtwoshadowball.x1C;
-    if (_unused) {
-        return;
+
+    if (ip->xDD4_itemVar.mewtwoshadowball.x18 ==
+        ip->xDD4_itemVar.mewtwoshadowball.x1C)
+    {
+        if (ip == NULL) {
+        }
     }
     ip->xDD4_itemVar.mewtwoshadowball.x20++;
     ip->xDD4_itemVar.mewtwoshadowball.x20 =

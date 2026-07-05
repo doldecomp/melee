@@ -55,19 +55,15 @@ static inline void pl_80037BC0_inline(struct plAttackStats* stats,
 
 void pl_80037C60(Fighter_GObj* fgp, s32 prev2070_int)
 {
-    /// @todo stack is still misaligned for this volatile hack...
-    // maybe an inline somewhere? idk
     Fighter* fp;
     plActionStats* acp;
     u8 attack_id;
-    volatile s32 prev2070_word;
     union Struct2070 prev_union;
     union Struct2070 ev;
 
-    prev2070_word = prev2070_int;
     fp = GET_FIGHTER(fgp);
     acp = Player_GetActionStats(fp->player_id);
-    prev_union.x2070_int = (s32) prev2070_word;
+    prev_union = *(union Struct2070*) &prev2070_int;
 
     if ((int) fp->x2070.x2072_b2) {
         acp->x5BC_b0 = 1;
@@ -211,9 +207,9 @@ void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj, s32 x18d4_int,
                  ft_800898B4_t* ev_data, u16 attack_instance, s32 arg5,
                  s32 source_ply)
 {
+    Fighter* attacker_fp2;
     Fighter* attacker_fp;
     Fighter* victim_fp;
-    Fighter* attacker_fp2;
     plActionStats* acp;
     plActionStats* acp2;
     s32 attacked_from_behind;
@@ -236,7 +232,7 @@ void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj, s32 x18d4_int,
 
     victim_fp = GET_FIGHTER(victim_gobj);
     attacked_from_behind = 0;
-    ev.x2070_int = x18d4_int;
+    ev = *(union Struct2070*) &x18d4_int;
 
     if (attacker_fp != NULL && ev.x2073 != 0) {
         f32 facing_dir = victim_fp->facing_dir;
@@ -282,7 +278,10 @@ void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj, s32 x18d4_int,
                 attacker_fp2 = GET_FIGHTER(attacker_gobj);
                 acp2 = Player_GetActionStats(attacker_fp2->player_id);
                 ev_hits.x2070_int = ev_reload.x2070_int;
-                pl_80037BC0_inline(&acp2->hits, &ev_hits);
+                {
+                    union Struct2070* ev_hits_ptr = &ev_hits;
+                    pl_80037BC0_inline(&acp2->hits, ev_hits_ptr);
+                }
 
                 if (ev_data != NULL) {
                     temp = &acp2->hits;
@@ -302,7 +301,10 @@ void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj, s32 x18d4_int,
                         acp2->x358_hits.by_attack_counts[attack_id2])
                 {
                     ev_best.x2070_int = ev_reload.x2070_int;
-                    pl_80037BC0_inline(&acp2->x358_hits, &ev_best);
+                    {
+                        union Struct2070* ev_best_ptr = &ev_best;
+                        pl_80037BC0_inline(&acp2->x358_hits, ev_best_ptr);
+                    }
 
                     if (ev_data != NULL) {
                         temp = &acp2->x358_hits;
@@ -328,7 +330,10 @@ void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj, s32 x18d4_int,
                 }
 
                 h_player = victim_fp->player_id;
-                x18d4_x3 = victim_fp->dmg.x18d4.x3;
+                {
+                    s32 tmp_x18d4_x3 = victim_fp->dmg.x18d4.x3;
+                    x18d4_x3 = tmp_x18d4_x3;
+                }
                 HSD_ASSERT(0x7E, 0 <= h_player && h_player < 8);
                 if (x18d4_x3 < 0x64) {
                     acp->x504[x18d4_x3] |= 1 << (u8) h_player;
@@ -338,9 +343,10 @@ void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj, s32 x18d4_int,
                 pl_8003ED0C(attacker_fp->player_id, attacker_fp->x221F_b4,
                             victim_fp->player_id, victim_fp->x221F_b4,
                             victim_fp->dmg.x1830_percent);
+                x18d4_x3 = ev_data->xC;
                 pl_8003EA40(attacker_fp->player_id, attacker_fp->x221F_b4,
                             victim_fp->player_id, victim_fp->x221F_b4,
-                            ev_data->xC);
+                            x18d4_x3);
                 pl_800403FC(attacker_fp->player_id, attacker_fp->x221F_b4,
                             victim_fp->player_id, victim_fp->x221F_b4,
                             victim_fp->dmg.x18d4.x3);
@@ -415,7 +421,7 @@ bool pl_80038628(HSD_GObj* gobj, int kind)
 {
     Fighter* fp;
 
-    HSD_ASSERT(0x1A1, kind >= 1 && kind <= 0x10);
+    HSD_ASSERT(0x1A1, PlATK_AttackNormal_Start <= kind && kind <= PlATK_AttackNormal_End);
     fp = GET_FIGHTER(gobj);
     if (pl_803BCE70[kind - 1] == -1) {
         return true;

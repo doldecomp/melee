@@ -1,10 +1,10 @@
 #include "gm_1A3F.h"
 
 #include "gm_1A45.h"
-#include "gm_1A4C.h"
 #include "gmmain_lib.h"
 
 #include "db/db.h"
+#include "dolphin/vi/vifuncs.h"
 #include "gm/gmscdata.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbdvd.h"
@@ -12,9 +12,8 @@
 #include "lb/lbmthp.h"
 #include "lb/lbsnap.h"
 #include "lb/types.h"
-#include "ty/tylist.h"
+#include "ty/toy.h"
 
-#include <dolphin/vi.h>
 #include <baselib/controller.h>
 #include <baselib/devcom.h>
 #include <baselib/sislib.h>
@@ -27,7 +26,7 @@
 
 static GameState gm_80479D30;
 
-void gm_801A3F48(MinorScene* scene)
+void gm_801A3F48(GameScene* scene)
 {
     PreloadCacheScene* temp_r31;
 
@@ -55,18 +54,18 @@ void gm_801A3F48(MinorScene* scene)
     lb_8001C5A4();
     lb_8001D1F4();
     lbSnap_8001E27C();
-    un_803127D4();
-    un_8031C8B8();
+    Toy_803127D4();
+    tyDisplay_8031C8B8();
 }
 
-inline u8 matchMinor(MinorScene* scenes)
+inline u8 nextScene(GameScene* scenes)
 {
     int i;
     u8 var_r3_3;
-    MinorScene* cur = scenes;
+    GameScene* cur = scenes;
 
     for (i = 0; scenes[i].idx != 0xFF; i++) {
-        if (cur->idx > gm_80479D30.nums.curr_minor) {
+        if (cur->idx > gm_80479D30.routing.curr_scene) {
             return scenes[i].idx;
         }
         cur++;
@@ -79,10 +78,10 @@ inline u8 matchMinor(MinorScene* scenes)
     return var_r3_3;
 }
 
-inline MinorScene* getScene(MinorScene* scene)
+inline GameScene* findScene(GameScene* scene)
 {
     int i, j;
-    for (i = gm_80479D30.nums.curr_minor; i < 0xFF; i++) {
+    for (i = gm_80479D30.routing.curr_scene; i < 0xFF; i++) {
         for (j = 0; scene[j].idx != 0xFF; j++) {
             if (i == scene[j].idx) {
                 return &scene[j];
@@ -92,26 +91,26 @@ inline MinorScene* getScene(MinorScene* scene)
     return NULL;
 }
 
-void gm_801A4014(MajorScene* major_scene)
+void gm_801A4014(GameMode* mode)
 {
-    MinorSceneHandler* handler;
-    MinorScene* minor_scene;
+    GameSceneHandler* handler;
+    GameScene* scene;
     GameState* gm;
-    struct MinorSceneInfo* info;
+    struct GameSceneInfo* info;
     u32 unused[2];
 
     gm = &gm_80479D30;
 
-    minor_scene = getScene(major_scene->minor_scenes);
+    scene = findScene(mode->scenes);
 
-    gm->nums.curr_minor = minor_scene->idx;
+    gm->routing.curr_scene = scene->idx;
 
-    gm_801A3F48(minor_scene);
-    if (minor_scene->Prep != NULL) {
-        minor_scene->Prep(minor_scene);
+    gm_801A3F48(scene);
+    if (scene->Prep != NULL) {
+        scene->Prep(scene);
     }
-    info = &minor_scene->info;
-    handler = gm_801A4CE0(minor_scene->info.class_id);
+    info = &scene->info;
+    handler = gm_801A4CE0(scene->info.class_id);
     gm_801A4BD4();
     gm_801A4B88(info);
     if (handler->OnLoad != NULL) {
@@ -122,17 +121,17 @@ void gm_801A4014(MajorScene* major_scene)
         handler->OnLeave(info->leave_data);
     }
     if (!gmMainLib_8046B0F0.resetting) {
-        if (minor_scene->Decide != NULL) {
-            minor_scene->Decide(minor_scene);
+        if (scene->Decide != NULL) {
+            scene->Decide(scene);
         }
 
-        gm_80479D30.nums.prev_minor = gm->nums.curr_minor;
+        gm_80479D30.routing.prev_scene = gm->routing.curr_scene;
 
-        if (gm->nums.pending_minor) {
-            gm->nums.curr_minor = gm->nums.pending_minor - 1;
-            gm->nums.pending_minor = 0;
+        if (gm->routing.pending_scene) {
+            gm->routing.curr_scene = gm->routing.pending_scene - 1;
+            gm->routing.pending_scene = 0;
         } else {
-            gm->nums.curr_minor = matchMinor(major_scene->minor_scenes);
+            gm->routing.curr_scene = nextScene(mode->scenes);
         }
     }
     lb_8001CDB4();
@@ -154,40 +153,40 @@ void gm_801A4014(MajorScene* major_scene)
         memzero(&gm_80479D30, 0x14);
         gm_801A3EF4();
         gmMainLib_8046B0F0.x0 = true;
-        gm_801A42F8(MJ_BOOT);
+        gm_801A42F8(GM_BOOT);
         HSD_VISetBlack(0);
     }
 }
 
-void* gm_801A427C(MinorScene* scene)
+void* gm_801A427C(GameScene* scene)
 {
     return scene->info.load_data;
 }
 
-void* gm_801A4284(MinorScene* scene)
+void* gm_801A4284(GameScene* scene)
 {
     return scene->info.leave_data;
 }
 
-void gm_SetSceneMinor(u8 arg0)
+void gm_SetScene(u8 arg0)
 {
-    gm_80479D30.nums.curr_minor = arg0;
-    gm_80479D30.nums.prev_minor = arg0;
+    gm_80479D30.routing.curr_scene = arg0;
+    gm_80479D30.routing.prev_scene = arg0;
 }
 
-void gm_SetScenePendingMinor(u8 pending_minor)
+void gm_SetPendingScene(u8 pending_scene)
 {
-    gm_80479D30.nums.pending_minor = pending_minor + 1;
+    gm_80479D30.routing.pending_scene = pending_scene + 1;
 }
 
 u8 gm_801A42B4(void)
 {
-    return gm_80479D30.nums.prev_minor;
+    return gm_80479D30.routing.prev_scene;
 }
 
 u8 gm_801A42C4(void)
 {
-    return gm_80479D30.nums.curr_minor;
+    return gm_80479D30.routing.curr_scene;
 }
 
 void gm_801A42D4(void)
@@ -195,25 +194,25 @@ void gm_801A42D4(void)
     gm_80479D30.pending = 1;
 }
 
-void gm_801A42E8(s8 pending_major)
+void gm_801A42E8(s8 pending_mode)
 {
-    gm_80479D30.nums.pending_major = pending_major;
+    gm_80479D30.routing.pending_mode = pending_mode;
 }
 
-void gm_801A42F8(int pending_major)
+void gm_801A42F8(int pending_mode)
 {
-    gm_80479D30.nums.pending_major = pending_major;
+    gm_80479D30.routing.pending_mode = pending_mode;
     gm_80479D30.pending = 1;
 }
 
 u8 gm_801A4310(void)
 {
-    return gm_80479D30.nums.curr_major;
+    return gm_80479D30.routing.curr_mode;
 }
 
 u8 gm_801A4320(void)
 {
-    return gm_80479D30.nums.prev_major;
+    return gm_80479D30.routing.prev_mode;
 }
 
 void gm_801A4330(u8 (*arg0)(void))
@@ -221,31 +220,31 @@ void gm_801A4330(u8 (*arg0)(void))
     gm_80479D30.data = arg0;
 }
 
-bool gm_801A4340(u8 major_scene)
+bool gm_801A4340(u8 mode)
 {
-    switch (major_scene) {
-    case MJ_CLASSIC:
-    case MJ_ADVENTURE:
-    case MJ_ALLSTAR:
-    case MJ_TARGET_TEST:
-    case MJ_TRAINING:
-    case MJ_HOME_RUN_CONTEST:
-    case MJ_10MAN_VS:
-    case MJ_100MAN_VS:
-    case MJ_3MIN_VS:
-    case MJ_15MIN_VS:
-    case MJ_ENDLESS_VS:
-    case MJ_CRUEL_VS:
-    case MJ_EVENT:
+    switch (mode) {
+    case GM_CLASSIC:
+    case GM_ADVENTURE:
+    case GM_ALLSTAR:
+    case GM_TARGET_TEST:
+    case GM_TRAINING:
+    case GM_HOME_RUN_CONTEST:
+    case GM_10MAN_VS:
+    case GM_100MAN_VS:
+    case GM_3MIN_VS:
+    case GM_15MIN_VS:
+    case GM_ENDLESS_VS:
+    case GM_CRUEL_VS:
+    case GM_EVENT:
         return true;
     }
     return false;
 }
 
-inline MajorScene* findSceneMatching(u8 idx)
+inline GameMode* findMode(u8 idx)
 {
-    MajorScene* cur;
-    for (cur = gm_801A50AC(); cur->idx != MJ_COUNT; cur++) {
+    GameMode* cur;
+    for (cur = gm_801A50AC(); cur->idx != GM_COUNT; cur++) {
         if (cur->idx == idx) {
             return cur;
         }
@@ -253,81 +252,81 @@ inline MajorScene* findSceneMatching(u8 idx)
     return NULL;
 }
 
-u8 gm_801A43A0(u8 major_kind)
+u8 gm_801A43A0(u8 mode_kind)
 {
     u8 temp_r3;
-    MajorScene* major_scene;
-    MajorScene* var_r3_2;
+    GameMode* mode;
+    GameMode* var_r3_2;
     GameState* gamestate = &gm_80479D30;
     u64 unused;
 
-    major_scene = findSceneMatching(major_kind);
+    mode = findMode(mode_kind);
 
     gm_80479D30.pending = 0;
-    gm_80479D30.nums.curr_minor = 0;
-    gm_80479D30.nums.prev_minor = 0;
-    gm_80479D30.nums.pending_minor = 0;
-    lbDvd_80018F58(major_scene->preload);
-    if (major_scene->Load != NULL) {
-        major_scene->Load();
+    gm_80479D30.routing.curr_scene = 0;
+    gm_80479D30.routing.prev_scene = 0;
+    gm_80479D30.routing.pending_scene = 0;
+    lbDvd_80018F58(mode->preload);
+    if (mode->Load != NULL) {
+        mode->Load();
     }
     while (!gamestate->pending) {
         if (gm_80479D30.data != NULL &&
-            (temp_r3 = gm_80479D30.data(), temp_r3 != MJ_COUNT))
+            (temp_r3 = gm_80479D30.data(), temp_r3 != GM_COUNT))
         {
-            gm_80479D30.nums2 = gm_80479D30.nums;
+            gm_80479D30.backup = gm_80479D30.routing;
             gamestate->pending = 0;
-            gamestate->nums.curr_minor = 0;
-            gamestate->nums.prev_minor = 0;
-            gamestate->nums.pending_minor = 0;
+            gamestate->routing.curr_scene = 0;
+            gamestate->routing.prev_scene = 0;
+            gamestate->routing.pending_scene = 0;
 
-            var_r3_2 = findSceneMatching(temp_r3);
+            var_r3_2 = findMode(temp_r3);
 
             gm_801A4014(var_r3_2);
             if (!gmMainLib_8046B0F0.resetting) {
-                gm_80479D30.nums = gm_80479D30.nums2;
+                gm_80479D30.routing = gm_80479D30.backup;
             }
         } else {
-            gm_801A4014(major_scene);
+            gm_801A4014(mode);
         }
     }
-    if (!gmMainLib_8046B0F0.resetting && major_scene->Unload != NULL) {
-        major_scene->Unload();
+    if (!gmMainLib_8046B0F0.resetting && mode->Unload != NULL) {
+        mode->Unload();
     }
-    return gm_80479D30.nums.pending_major;
+    return gm_80479D30.routing.pending_mode;
 }
 
 /// UnclePunch: Scene_Main
 void gm_801A4510(void)
 {
     u32 unused;
-    MajorScene* major_scenes;
+    GameMode* modes;
     GameState* gamestate = &gm_80479D30;
     int i;
 
     gm_801A50AC();
     memzero(&gm_80479D30, sizeof(GameState));
-    major_scenes = gm_801A50AC();
-    for (i = 0; major_scenes[i].idx != MJ_COUNT; i++) {
-        if (major_scenes[i].Init != NULL) {
-            major_scenes[i].Init();
+    modes = gm_801A50AC();
+    for (i = 0; modes[i].idx != GM_COUNT; i++) {
+        if (modes[i].Init != NULL) {
+            modes[i].Init();
         }
     }
     if (VIGetDTVStatus() != 0 &&
         (db_gameLaunchButtonState & 0x200 || OSGetProgressiveMode() == 1))
     {
-        gm_80479D30.nums.curr_major = MJ_PROGRESSIVE_SCAN;
+        gm_80479D30.routing.curr_mode = GM_PROGRESSIVE_SCAN;
     } else {
-        gm_80479D30.nums.curr_major = MJ_BOOT;
+        gm_80479D30.routing.curr_mode = GM_BOOT;
     }
-    gm_80479D30.nums.prev_major = MJ_COUNT;
+    gm_80479D30.routing.prev_mode = GM_COUNT;
 
     while (true) {
-        u8 major = gm_801A43A0(gm_80479D30.nums.curr_major);
+        u8 major = gm_801A43A0(gm_80479D30.routing.curr_mode);
         if (gmMainLib_8046B0F0.resetting) {
             gmMainLib_8046B0F0.resetting = false;
         }
-        gamestate->nums.prev_major = gamestate->nums.curr_major;
-        gamestate->nums.curr_major = major;
+        gamestate->routing.prev_mode = gamestate->routing.curr_mode;
+        gamestate->routing.curr_mode = major;
     }
 }

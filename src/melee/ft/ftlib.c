@@ -17,14 +17,14 @@
 #include "ftCommon/forward.h"
 
 #include "ftGameWatch/ftGw_Init.h"
-#include "ftKirby/ftKb_Init.h"
+#include "ftKirby/ftkirby.h"
 #include "gm/gm_unsplit.h"
 
 #include "it/forward.h"
 
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 #include "pl/player.h"
 #include "pl/plbonuslib.h"
 
@@ -744,7 +744,7 @@ bool ftLib_80087074(HSD_GObj* gobj, Vec3* v)
     return false;
 }
 
-bool ftLib_800870BC(HSD_GObj* gobj, void** val)
+bool ftLib_800870BC(HSD_GObj* gobj, int* val)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x61A_controller_index) {
@@ -1044,9 +1044,7 @@ float ftLib_8008777C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ground_or_air != GA_Ground) {
-        __assert("ftlib.c", 1517, "fp->ground_or_air == GA_Ground");
-    }
+    HSD_ASSERT(1517, fp->ground_or_air == GA_Ground);
 
     {
         CollData* cd = Fighter_GetCollData(fp);

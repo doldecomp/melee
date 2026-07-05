@@ -8,7 +8,9 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/it_279C.h"
 #include "it/item.h"
+#include "it/itmaplib.h"
 
 #include <baselib/random.h>
 
@@ -137,7 +139,7 @@ void it_802CA074(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     Vec3 scale;
 
-    HSD_JObjSetFlagsAll(jobj, 0x10);
+    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
     ip->entered_hitlag = efLib_PauseAll;
     ip->exited_hitlag = efLib_ResumeAll;
@@ -169,7 +171,7 @@ bool itKabigon_UnkMotion1_Anim(Item_GObj* gobj)
         if (ip->xDD4_itemVar.kabigon.x6C <= 0) {
             HSD_JObj* jobj = GET_JOBJ(gobj);
             ip->xDAC_itcmd_var0 = 1;
-            HSD_JObjClearFlagsAll(jobj, 0x10);
+            HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
             ip->pos.y = Stage_GetBlastZoneTopOffset();
             ip->x40_vel.y = ip->xDD4_itemVar.kabigon.x64;
             Camera_80030E44(2, NULL);

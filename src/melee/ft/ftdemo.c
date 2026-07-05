@@ -13,6 +13,12 @@
 #include "ft/ft_0C31.h"
 #include "ft/ft_0C88.h"
 #include "ft/ftanim.h"
+#include "ft/ftCo_800C7070.h"
+#include "ft/ftCo_800C70D0.h"
+#include "ft/ftCo_800C7178.h"
+#include "ft/ftCo_800C7220.h"
+#include "ft/ftCo_800C739C.h"
+#include "ft/ftCo_800C7434.h"
 #include "ft/ftcoll.h"
 #include "ft/ftdata.h"
 #include "ft/ftdrawcommon.h"
@@ -152,8 +158,7 @@ char* ftDemo_GetMotionFileString(int cb_idx, int cb_arg)
     if (ftData_803C24EC[cb_idx] != NULL) {
         return ftData_803C24EC[cb_idx](cb_arg);
     } else {
-        OSReport("no demo vi anim! %d\n", cb_arg);
-        __assert("ftdemo.c", 296, "0");
+        HSD_ASSERTREPORT(296, 0, "no demo vi anim! %d\n", cb_arg);
     }
 }
 

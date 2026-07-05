@@ -1,5 +1,7 @@
 #include "placeholder.h"
 
+#include "ty/toy.h"
+
 #include <baselib/gobj.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -14,10 +16,8 @@
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/types.h>
-#include <melee/if/textlib.h>
-#include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbspdisplay.h>
 #include <melee/mn/inlines.h>
 #include <melee/mn/mncount.h>
 #include <melee/mn/mndiagram.h>
@@ -31,6 +31,10 @@
 #define NUM_CHARACTERS 25
 #define MAX_SCROLL 20
 
+AnimLoopSettings mnCount_803EFA88[2] = {
+    { 0.0f, 19.0f, -0.1f },
+    { 20.0f, 29.0f, -0.1f },
+};
 static AnimLoopSettings mnCount_803EFAA0 = { 0.0f, 199.0f, 0.0f };
 static StaticModelDesc model_desc;
 static HSD_GObj* menu_gobj;
@@ -305,9 +309,8 @@ s32 mnCount_8025072C(CountEntry* entries, s32 start_idx, bool mode)
 #undef GET_KOS
 #undef GET_FALLS
 
-static inline bool mnCount_8025092C_inline(void)
+static inline bool mnCount_8025092C_inline(int i)
 {
-    int i;
     for (i = 0; i < NUM_CHARACTERS; i++) {
         if (mnCount_GetMatchTime(i) != 0) {
             return false;
@@ -318,81 +321,102 @@ static inline bool mnCount_8025092C_inline(void)
 
 s32 mnCount_8025092C(s32 rank, u32 (*getVal)(s32), bool mode)
 {
-    CountEntry entries[NUM_CHARACTERS];
-    int i, j, min;
-    PAD_STACK(8);
-    if (mnCount_8025092C_inline()) {
-        return NUM_CHARACTERS;
-    }
-    for (i = 0; i < NUM_CHARACTERS; i++) {
-        entries[i].id = i;
-        entries[i].val = getVal(i);
-    }
-    for (i = 0; i < NUM_CHARACTERS; i++) {
-        min = i;
-        for (j = i + 1; j < NUM_CHARACTERS; j++) {
-            if (entries[j].val < entries[min].val) {
-                min = j;
-            }
+    PAD_STACK(12);
+    {
+        CountEntry entries[NUM_CHARACTERS];
+        CountEntry tmp;
+        int i, j, min;
+        if (mnCount_8025092C_inline(0)) {
+            return NUM_CHARACTERS;
         }
-        if (min != i) {
-            CountEntry tmp = entries[min];
-            for (j = min; j > i; j--) {
-                entries[j] = entries[j - 1];
-            }
-            entries[i] = tmp;
+        for (i = 0; i < NUM_CHARACTERS; i++) {
+            entries[i].id = i;
+            entries[i].val = getVal(i);
         }
-    }
-    for (i = 0; i < NUM_CHARACTERS; i++) {
-        if (!gm_80164840(gm_8016400C(entries[i].id))) {
-            continue;
-        }
-        if (rank != 0) {
-            rank--;
+        for (i = 0; i < NUM_CHARACTERS; i++) {
+            min = i;
             for (j = i + 1; j < NUM_CHARACTERS; j++) {
-                if (!gm_80164840(gm_8016400C(entries[j].id))) {
-                    continue;
+                if (entries[min].val < entries[j].val) {
+                    min = j;
                 }
-                if (getVal(entries[i].id) == getVal(entries[j].id)) {
-                    i++;
-                    if (rank != 0) {
-                        rank--;
-                    } else {
-                        return NUM_CHARACTERS;
+            }
+            if (min != i) {
+                tmp = entries[min];
+                for (j = min; j > i; j--) {
+                    entries[j] = entries[j - 1];
+                }
+                entries[i] = tmp;
+            }
+        }
+        for (i = 0; i < NUM_CHARACTERS; i++) {
+            if (!gm_80164840(gm_8016400C(entries[i].id))) {
+                continue;
+            }
+            if (rank != 0) {
+                rank--;
+                for (j = i + 1; j < NUM_CHARACTERS; j++) {
+                    if (!gm_80164840(gm_8016400C(entries[j].id))) {
+                        continue;
+                    }
+                    if (getVal(entries[i].id) == getVal(entries[j].id)) {
+                        i++;
+                        if (rank != 0) {
+                            rank--;
+                        } else {
+                            return NUM_CHARACTERS;
+                        }
                     }
                 }
-            }
-        } else {
-            for (j = i + 1; j < NUM_CHARACTERS; j++) {
-                if (!gm_80164840(gm_8016400C(entries[j].id))) {
-                    continue;
+            } else {
+                for (j = i + 1; j < NUM_CHARACTERS; j++) {
+                    if (!gm_80164840(gm_8016400C(entries[j].id))) {
+                        continue;
+                    }
+                    if (getVal(entries[i].id) == getVal(entries[j].id)) {
+                        return mnCount_8025072C(entries, i, mode);
+                    }
                 }
-                if (getVal(entries[i].id) == getVal(entries[j].id)) {
-                    return mnCount_8025072C(entries, i, mode);
-                }
+                return entries[i].id;
             }
-            return entries[i].id;
+        }
+        return NUM_CHARACTERS;
+    }
+}
+
+static inline int mnCount_CountUnlockedChars(void)
+{
+    int i;
+    int c = 0;
+    for (i = 0; i < NUM_CHARACTERS; i++) {
+        if (gm_80164840(gm_8016400C((u8) i))) {
+            c += 1;
         }
     }
-    return NUM_CHARACTERS;
+    return c;
+}
+
+static inline int mnCount_CountUnlockedMaps(void)
+{
+    int i;
+    int c = 0;
+    for (i = 0; i < NUM_STAGES; i++) {
+        if (gm_80164430(gm_801641CC((u8) i))) {
+            c += 1;
+        }
+    }
+    return c;
 }
 
 int mnCount_GetRowValue_Character(mnCount_row row)
 {
     int c;
-    int i;
     switch (row) {
     case LONGEST_TIME:
         return mnCount_8025035C(0, mnCount_GetMatchTime);
     case SECOND_LONGEST_TIME:
         return mnCount_8025035C(1, mnCount_GetMatchTime);
     case SHORTEST_TIME:
-        c = 0;
-        for (i = 0; i < NUM_CHARACTERS; i++) {
-            if (gm_80164840(gm_8016400C(i))) {
-                c += 1;
-            }
-        }
+        c = mnCount_CountUnlockedChars();
         if (c < 3) {
             return NUM_CHARACTERS;
         }
@@ -416,10 +440,14 @@ int mnCount_GetRowValue_Character(mnCount_row row)
     }
 }
 
+static inline unsigned int mnCount_GetCombinedVSPlayTimeValue(void)
+{
+    return *(unsigned int*) gmMainLib_GetCombinedVSPlayTime();
+}
+
 unsigned int mnCount_GetRowValue_Number(int row)
 {
     unsigned int ret;
-    PAD_STACK(8);
     switch (row) {
     case POWER_COUNT:
         ret = *(unsigned int*) gmMainLib_GetPowerCount();
@@ -437,7 +465,7 @@ unsigned int mnCount_GetRowValue_Number(int row)
         ret = *(unsigned int*) gmMainLib_GetVsPlayTime();
         break;
     case COMBINED_VS_PLAY_TIME:
-        ret = *(unsigned int*) gmMainLib_GetCombinedVSPlayTime();
+        ret = mnCount_GetCombinedVSPlayTimeValue();
         break;
     case VS_PLAY_MATCH_TOTAL:
         ret = gm_GetVsPlayMatchTotal();
@@ -469,28 +497,14 @@ unsigned int mnCount_GetRowValue_Number(int row)
     case SELFDESTRUCT_TOTAL:
         ret = *(unsigned int*) gmMainLib_GetSelfDestructTotal();
         break;
-    case AVAILABLE_CHARACTERS: {
-        int i, c;
-        c = 0;
-        for (i = 0; i < NUM_CHARACTERS; i++) {
-            if (gm_80164840(gm_8016400C(i))) {
-                c++;
-            }
-        }
-        ret = c;
-    } break;
-    case AVAILABLE_MAPS: {
-        int i, c;
-        c = 0;
-        for (i = 0; i < NUM_STAGES; i++) {
-            if (gm_80164430(gm_801641CC(i))) {
-                c++;
-            }
-        }
-        ret = c;
-    } break;
+    case AVAILABLE_CHARACTERS:
+        ret = mnCount_CountUnlockedChars();
+        break;
+    case AVAILABLE_MAPS:
+        ret = mnCount_CountUnlockedMaps();
+        break;
     case TROPHY_TOTAL:
-        ret = un_GetTrophyTotal();
+        ret = Toy_GetTrophyTotal();
         break;
     case NAME_TOTAL:
         ret = GetNameCount();
@@ -521,7 +535,6 @@ void mnCount_CreateRow(HSD_GObj* gobj, int visible_row, mnCount_row data_row)
     unsigned int row_value;
     int row_value_2;
     float y;
-    char buf1[8];
     char buf2[8];
     static GXColor text_color = { 0xAA, 0xAA, 0xAA, 0xFF };
     if (userdata->labels[visible_row] != NULL) {
@@ -536,7 +549,10 @@ void mnCount_CreateRow(HSD_GObj* gobj, int visible_row, mnCount_row data_row)
     text->text_color = text_color;
     HSD_SisLib_803A6368(text, mnCount_sis_idx[data_row]);
     if (userdata->values[visible_row] != NULL) {
-        HSD_SisLib_803A5CC4(userdata->values[visible_row]);
+        {
+            HSD_Text* volatile value_text = userdata->values[visible_row];
+            HSD_SisLib_803A5CC4(value_text);
+        }
         userdata->values[visible_row] = NULL;
     }
     text = HSD_SisLib_803A6754(0, 1);
@@ -547,6 +563,7 @@ void mnCount_CreateRow(HSD_GObj* gobj, int visible_row, mnCount_row data_row)
     text->text_color = mn_804D4B64;
     text->default_alignment = 2;
     if (inline_is_row_time(data_row)) {
+        char buf1[8];
         text->font_size.x = 0.03f;
         text->font_size.y = 0.03f;
         row_value = mnCount_GetRowValue_Number(data_row);
@@ -559,7 +576,7 @@ void mnCount_CreateRow(HSD_GObj* gobj, int visible_row, mnCount_row data_row)
         text->font_size.y = 0.03f;
         row_value_2 = mnCount_GetRowValue_Character(data_row);
         if (row_value_2 == NUM_CHARACTERS) {
-            HSD_SisLib_803A6B98(text, 0.0f, 0.0f, "－");
+            HSD_SisLib_803A6B98(text, 0.0f, 0.0f, "\201| ");
         } else {
             gm_80160B40(text, gm_8016400C(row_value_2), 0);
         }
@@ -634,10 +651,10 @@ void fn_802514B8(HSD_GObj* gobj)
     HSD_GObjPLink_80390228(gobj);
 }
 
-void fn_802514D8(HSD_GObj* gobj)
+static inline void fn_802514D8_inline(MnCountData* userdata, HSD_GObj* gobj)
 {
-    MnCountData* userdata = GET_MNCOUNT(gobj);
     HSD_GObjProc* proc;
+    HSD_JObj* jobj;
     PAD_STACK(16);
     if (mn_804A04F0.cur_menu != MENU_KIND_RECORDS_MISC) {
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
@@ -649,15 +666,17 @@ void fn_802514D8(HSD_GObj* gobj)
             MnCountData* userdata2 = GET_MNCOUNT(gobj);
             MnCountData* userdata3 = userdata2;
             int i;
+            HSD_Text* label_null = NULL;
+            HSD_Text* value_null = NULL;
 
             for (i = 0; i < MNCOUNT_VISIBLE_ROWS; i++) {
                 if (userdata2->labels[i] != NULL) {
                     HSD_SisLib_803A5CC4(userdata3->labels[i]);
-                    userdata2->labels[i] = NULL;
+                    userdata2->labels[i] = label_null;
                 }
                 if (userdata2->values[i] != NULL) {
                     HSD_SisLib_803A5CC4(userdata3->values[i]);
-                    userdata2->values[i] = NULL;
+                    userdata2->values[i] = value_null;
                 }
             }
 
@@ -666,8 +685,8 @@ void fn_802514D8(HSD_GObj* gobj)
     } else {
         // mnCount_UpdateArrowIndicators
 
-        HSD_JObj* jobj = gobj->hsd_obj;
         HSD_JObj* child;
+        jobj = gobj->hsd_obj;
 
         // up arrow
         lb_80011E24(jobj, &child, 2, -1);
@@ -689,13 +708,20 @@ void fn_802514D8(HSD_GObj* gobj)
     }
 }
 
-void fn_80251640(HSD_GObj* gobj)
+void fn_802514D8(HSD_GObj* gobj)
 {
     MnCountData* userdata = GET_MNCOUNT(gobj);
+    PAD_STACK(4);
+    fn_802514D8_inline(userdata, gobj);
+}
+
+void fn_80251640(HSD_GObj* gobj)
+{
     HSD_GObjProc* proc;
     int i;
     HSD_JObj* jobj;
     StaticModelDesc* md;
+    MnCountData* userdata = GET_MNCOUNT(gobj);
     PAD_STACK(24);
 
     if (mn_804A04F0.cur_menu != MENU_KIND_RECORDS_MISC) {

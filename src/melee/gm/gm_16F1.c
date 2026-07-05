@@ -4,10 +4,9 @@
 
 #include "gm_unsplit.h"
 
-#include "if/textlib.h"
-
 #include <melee/gm/gm_16AE.h>
 #include <melee/gm/gmmain_lib.h>
+#include <melee/if/textlib.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbtime.h>
@@ -154,8 +153,8 @@ int fn_8016F39C(HSD_Text** arg0, void* arg1, u8 arg2, u16 arg3, u8 arg4,
                 u8 arg5)
 {
     struct lbl_803D5A4C_t* curr;
-    int count = 0;
     int idx;
+    int count = 0;
     int matched;
     u8 flags;
     u16 item_id;
@@ -185,6 +184,7 @@ int fn_8016F39C(HSD_Text** arg0, void* arg1, u8 arg2, u16 arg3, u8 arg4,
 
         if (matched != 0) {
             curr = lbl_803D5A4C;
+            item_id = 0;
             while (curr->kind != idx) {
                 if (curr->kind == 0x29A) {
                     break;
@@ -197,8 +197,6 @@ int fn_8016F39C(HSD_Text** arg0, void* arg1, u8 arg2, u16 arg3, u8 arg4,
                 } else {
                     item_id = curr->x2;
                 }
-            } else {
-                item_id = 0;
             }
             HSD_SisLib_803A6368(arg0[count], item_id);
             count++;
@@ -209,7 +207,7 @@ int fn_8016F39C(HSD_Text** arg0, void* arg1, u8 arg2, u16 arg3, u8 arg4,
         idx++;
     }
     return count;
-    PAD_STACK(16);
+    PAD_STACK(8);
 }
 
 int fn_8016F548(void* arg0, u16 arg1, u8 mask, u8 player_id)
@@ -399,21 +397,6 @@ int fn_8016FAD4(struct lbl_8046B6A0_24C_t* rules, int kind, int flags,
         if (pr == 0) {
             return lbl_803D5648[entry->x2 - 2] * 2;
         }
-        {
-            int active = 0;
-            if (x58[0].x0 != 3) {
-                active++;
-            }
-            if (x58[1].x0 != 3) {
-                active++;
-            }
-            if (x58[2].x0 != 3) {
-                active++;
-            }
-            if (x58[3].x0 != 3) {
-                active++;
-            }
-        }
         if (pr == rankings[6]) {
             return lbl_803D5648[entry->x2 - 2] / 2;
         }
@@ -450,18 +433,16 @@ int fn_8016FFD4(struct lbl_8046B6A0_24C_t* arg0, int arg1, u8 arg2)
 {
     int i;
     int count = 0;
-    u8 flags;
 
     for (i = 0; (u32) i < 0x101U; i++) {
         if ((s16) lbl_803D5A4C[i].kind < 0xD7) {
-            flags = fn_8016F180(i);
-            if ((u8) arg1 & flags && pl_80039418((u8) arg2, i) != 0) {
+            if ((u8) arg1 & (u8) fn_8016F180(i) &&
+                pl_80039418((u8) arg2, i) != 0)
+            {
                 count += fn_8016FAD4(arg0, i, arg1, arg2);
             }
         } else {
-            flags = fn_8016F180(i);
-
-            if ((u8) arg1 & flags) {
+            if ((u8) arg1 & (u8) fn_8016F180(i)) {
                 if ((unsigned) fn_801701C0(arg0, (u8) arg2, i) != 0) {
                     count += fn_8016FAD4(arg0, i, arg1, arg2);
                 }
@@ -528,64 +509,39 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
     if (rules->x5 == 3) {
         fn_80171B64((struct lbl_804D65A8_t*) rankings);
     } else {
-        s32* score_ptr = scores;
+        int k;
 
-        if (x58[0].x0 != 3) {
-            u16 xA = x58[0].xA;
-            scores[0] =
-                (x58[0].x20 - (x58[0].x24 - xA)) + ((s8) rules->xC * xA);
-        }
-        {
-            int k;
-            struct lbl_8046B6A0_24C_58_t* p = &x58[1];
-            s32* sp = score_ptr + 1;
-            for (k = 1; k < 6; k++) {
-                if (p->x0 != 3) {
-                    u16 xA = p->xA;
-                    *sp = (p->x20 - (p->x24 - xA)) + ((s8) rules->xC * xA);
-                }
-                p++;
-                sp++;
+        for (k = 0; k < 6; k++) {
+            if (x58[k].x0 != 3) {
+                u16 xA = x58[k].xA;
+                scores[k] =
+                    (x58[k].x20 - (x58[k].x24 - xA)) + ((s8) rules->xC * xA);
             }
         }
 
         {
-            struct lbl_8046B6A0_24C_58_t* x58_p = x58;
-            s32* sc_p = score_ptr;
-            u8* rk_p = rankings;
             int idx;
             for (idx = 0; idx < 6; idx++) {
-                if (x58_p->x0 != 3) {
-                    s32 my_score = *sc_p;
+                if (x58[idx].x0 != 3) {
+                    s32 my_score = scores[idx];
+                    int j;
 
-                    if (x58[0].x0 != 3 && idx != 0 && my_score < scores[0]) {
-                        *rk_p = *rk_p + 1;
-                    }
-
-                    {
-                        struct lbl_8046B6A0_24C_58_t* q = &x58[1];
-                        s32* sq = score_ptr + 1;
-                        int j;
-                        for (j = 1; j < 6; j++) {
-                            if (q->x0 != 3 && idx != j && my_score < *sq) {
-                                *rk_p = *rk_p + 1;
-                            }
-                            q++;
-                            sq++;
+                    for (j = 0; j < 6; j++) {
+                        if (x58[j].x0 != 3 && idx != j && my_score < scores[j])
+                        {
+                            rankings[idx]++;
                         }
                     }
 
-                    if (rankings[6] < *rk_p) {
-                        rankings[6] = *rk_p;
+                    if (rankings[6] < rankings[idx]) {
+                        rankings[6] = rankings[idx];
                     }
                 }
-
-                x58_p++;
-                sc_p++;
-                rk_p++;
             }
         }
     }
+
+    PAD_STACK(4);
 
     switch (arg2) {
     case 0xD7:
@@ -596,7 +552,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
             struct lbl_8046B6A0_24C_58_t* p = x58;
             int i;
             for (i = 0; i < 4; i++) {
-                if (p->x0 != 3 && arg1 != i && rankings[i] == 0) {
+                if (p->x0 != 3 && i != arg1 && rankings[i] == 0) {
                     return 0;
                 }
                 p++;
@@ -615,7 +571,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
             struct lbl_8046B6A0_24C_58_t* p = x58;
             int i;
             for (i = 0; i < 4; i++) {
-                if (p->x0 != 3 && arg1 != i && rankings[i] == rankings[6]) {
+                if (p->x0 != 3 && i != arg1 && rankings[i] == rankings[6]) {
                     return 0;
                 }
                 p++;
@@ -656,51 +612,53 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
 
     case 0xDB: {
         s32 vals[4];
+        s32* base;
         int i, j;
-        if (x58[arg1].x20 < 3) {
-            return 0;
-        }
-        vals[0] = zeroes->x0[0];
-        vals[1] = zeroes->x0[1];
-        vals[2] = zeroes->x0[2];
-        vals[3] = zeroes->x0[3];
-        {
-            struct lbl_8046B6A0_24C_58_t* p = x58;
-            s32* vp = vals;
-            for (i = 0; i < 4; i++) {
-                if (p->x0 != 3) {
-                    *vp = p->x20;
-                }
-                p++;
-                vp++;
+        if (x58[arg1].x20 >= 3) {
+            base = vals;
+            {
+                typedef struct {
+                    s32 a, b, c, d;
+                } copy_t;
+                *(copy_t*) base = *(copy_t*) zeroes->x0;
             }
-        }
-        for (j = 3; j >= 1; j--) {
-            s32* p = vals;
-            for (i = j; i > 0; i--) {
-                if (p[0] < p[1]) {
-                    s32 tmp = p[0];
-                    p[0] = p[1];
-                    p[1] = tmp;
+            {
+                struct lbl_8046B6A0_24C_58_t* p = x58;
+                s32* vp = base;
+                for (i = 0; i < 4; i++) {
+                    if (p->x0 != 3) {
+                        *vp = p->x20;
+                    }
+                    p++;
+                    vp++;
                 }
-                p++;
             }
-        }
-        if (vals[0] == x58[arg1].x20 && vals[0] >= vals[1] * 2) {
-            return 1;
+            for (j = 3; j >= 1; j--) {
+                s32* p = base;
+                for (i = j; i > 0; i--) {
+                    if (p[0] < p[1]) {
+                        s32 tmp = p[0];
+                        p[0] = p[1];
+                        p[1] = tmp;
+                    }
+                    p++;
+                }
+            }
+            if (base[0] == x58[arg1].x20 && base[0] >= base[1] * 2) {
+                return 1;
+            }
         }
         return 0;
     }
 
     case 0xDC: {
         if ((unsigned) fn_801701C0(arg0, arg1, 0xDB) == 0) {
-            s32 player_kills = x58[arg1].x20;
             {
                 struct lbl_8046B6A0_24C_58_t* p = x58;
                 int i;
                 for (i = 0; i < 4; i++) {
-                    if (p->x0 != 3 && arg1 != i &&
-                        (u32) p->x20 >= (u32) player_kills)
+                    if (p->x0 != 3 && i != arg1 &&
+                        (u32) p->x20 >= (u32) x58[arg1].x20)
                     {
                         return 0;
                     }
@@ -716,51 +674,53 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
 
     case 0xDD: {
         s32 vals[4];
+        s32* base;
         int i, j;
-        if (x58[arg1].x40 < 3) {
-            return 0;
-        }
-        vals[0] = zeroes->x10[0];
-        vals[1] = zeroes->x10[1];
-        vals[2] = zeroes->x10[2];
-        vals[3] = zeroes->x10[3];
-        {
-            struct lbl_8046B6A0_24C_58_t* p = x58;
-            s32* vp = vals;
-            for (i = 0; i < 4; i++) {
-                if (p->x0 != 3) {
-                    *vp = p->x40;
-                }
-                p++;
-                vp++;
+        if (x58[arg1].x40 >= 3) {
+            base = vals;
+            {
+                typedef struct {
+                    s32 a, b, c, d;
+                } copy_t;
+                *(copy_t*) base = *(copy_t*) zeroes->x10;
             }
-        }
-        for (j = 3; j >= 1; j--) {
-            s32* p = vals;
-            for (i = j; i > 0; i--) {
-                if (p[0] < p[1]) {
-                    s32 tmp = p[0];
-                    p[0] = p[1];
-                    p[1] = tmp;
+            {
+                struct lbl_8046B6A0_24C_58_t* p = x58;
+                s32* vp = base;
+                for (i = 0; i < 4; i++) {
+                    if (p->x0 != 3) {
+                        *vp = p->x40;
+                    }
+                    p++;
+                    vp++;
                 }
-                p++;
             }
-        }
-        if (vals[0] == x58[arg1].x40 && vals[0] >= vals[1] * 2) {
-            return 1;
+            for (j = 3; j >= 1; j--) {
+                s32* p = base;
+                for (i = j; i > 0; i--) {
+                    if (p[0] < p[1]) {
+                        s32 tmp = p[0];
+                        p[0] = p[1];
+                        p[1] = tmp;
+                    }
+                    p++;
+                }
+            }
+            if (base[0] == x58[arg1].x40 && base[0] >= base[1] * 2) {
+                return 1;
+            }
         }
         return 0;
     }
 
     case 0xDE: {
         if ((unsigned) fn_801701C0(arg0, arg1, 0xDD) == 0) {
-            s32 player_deaths = x58[arg1].x40;
             {
                 struct lbl_8046B6A0_24C_58_t* p = x58;
                 int i;
                 for (i = 0; i < 4; i++) {
-                    if (p->x0 != 3 && arg1 != i &&
-                        (u32) p->x40 >= (u32) player_deaths)
+                    if (p->x0 != 3 && i != arg1 &&
+                        (u32) p->x40 >= (u32) x58[arg1].x40)
                     {
                         return 0;
                     }
@@ -776,54 +736,57 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
 
     case 0xDF: {
         s32 vals[4];
+        s32* base;
         int i, j;
         s32 player_net = x58[arg1].x24 - x58[arg1].xA;
-        if ((u32) player_net < 3) {
-            return 0;
-        }
-        vals[0] = zeroes->x20[0];
-        vals[1] = zeroes->x20[1];
-        vals[2] = zeroes->x20[2];
-        vals[3] = zeroes->x20[3];
-        {
-            struct lbl_8046B6A0_24C_58_t* p = x58;
-            s32* vp = vals;
-            for (i = 0; i < 4; i++) {
-                if (p->x0 != 3) {
-                    *vp = p->x24 - p->xA;
-                }
-                p++;
-                vp++;
+        if ((u32) player_net >= 3) {
+            base = vals;
+            {
+                typedef struct {
+                    s32 a, b, c, d;
+                } copy_t;
+                *(copy_t*) base = *(copy_t*) zeroes->x20;
             }
-        }
-        for (j = 3; j >= 1; j--) {
-            s32* p = vals;
-            for (i = j; i > 0; i--) {
-                if (p[0] < p[1]) {
-                    s32 tmp = p[0];
-                    p[0] = p[1];
-                    p[1] = tmp;
+            {
+                struct lbl_8046B6A0_24C_58_t* p = x58;
+                s32* vp = base;
+                for (i = 0; i < 4; i++) {
+                    if (p->x0 != 3) {
+                        *vp = p->x24 - p->xA;
+                    }
+                    p++;
+                    vp++;
                 }
-                p++;
             }
-        }
-        if (vals[0] == (s32) (x58[arg1].x24 - x58[arg1].xA) &&
-            vals[0] >= vals[1] * 2)
-        {
-            return 1;
+            for (j = 3; j >= 1; j--) {
+                s32* p = base;
+                for (i = j; i > 0; i--) {
+                    if (p[0] < p[1]) {
+                        s32 tmp = p[0];
+                        p[0] = p[1];
+                        p[1] = tmp;
+                    }
+                    p++;
+                }
+            }
+            if ((u32) base[0] == (u32) (x58[arg1].x24 - x58[arg1].xA) &&
+                base[0] >= base[1] * 2)
+            {
+                return 1;
+            }
         }
         return 0;
     }
 
     case 0xE0: {
         if ((unsigned) fn_801701C0(arg0, arg1, 0xDF) == 0) {
-            s32 player_net = x58[arg1].x24 - x58[arg1].xA;
             {
                 struct lbl_8046B6A0_24C_58_t* p = x58;
                 int i;
                 for (i = 0; i < 4; i++) {
-                    if (p->x0 != 3 && arg1 != i &&
-                        (u32) (p->x24 - p->xA) >= (u32) player_net)
+                    if (p->x0 != 3 && i != arg1 &&
+                        (u32) (p->x24 - p->xA) >=
+                            (u32) (x58[arg1].x24 - x58[arg1].xA))
                     {
                         return 0;
                     }
@@ -839,50 +802,52 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
 
     case 0xE1: {
         s32 vals[4];
+        s32* base;
         int i, j;
-        if (x58[arg1].xA < 3) {
-            return 0;
-        }
-        vals[0] = zeroes->x30[0];
-        vals[1] = zeroes->x30[1];
-        vals[2] = zeroes->x30[2];
-        vals[3] = zeroes->x30[3];
-        {
-            struct lbl_8046B6A0_24C_58_t* p = x58;
-            s32* vp = vals;
-            for (i = 0; i < 4; i++) {
-                if (p->x0 != 3) {
-                    *vp = p->xA;
-                }
-                p++;
-                vp++;
+        if (x58[arg1].xA >= 3) {
+            base = vals;
+            {
+                typedef struct {
+                    s32 a, b, c, d;
+                } copy_t;
+                *(copy_t*) base = *(copy_t*) zeroes->x30;
             }
-        }
-        for (j = 3; j >= 1; j--) {
-            s32* p = vals;
-            for (i = j; i > 0; i--) {
-                if (p[0] < p[1]) {
-                    s32 tmp = p[0];
-                    p[0] = p[1];
-                    p[1] = tmp;
+            {
+                struct lbl_8046B6A0_24C_58_t* p = x58;
+                s32* vp = base;
+                for (i = 0; i < 4; i++) {
+                    if (p->x0 != 3) {
+                        *vp = p->xA;
+                    }
+                    p++;
+                    vp++;
                 }
-                p++;
             }
-        }
-        if ((u32) vals[0] == (u32) x58[arg1].xA && vals[0] >= vals[1] * 2) {
-            return 1;
+            for (j = 3; j >= 1; j--) {
+                s32* p = base;
+                for (i = j; i > 0; i--) {
+                    if (p[0] < p[1]) {
+                        s32 tmp = p[0];
+                        p[0] = p[1];
+                        p[1] = tmp;
+                    }
+                    p++;
+                }
+            }
+            if (base[0] == x58[arg1].xA && base[0] >= base[1] * 2) {
+                return 1;
+            }
         }
         return 0;
     }
 
     case 0xE2: {
         if ((unsigned) fn_801701C0(arg0, arg1, 0xE1) == 0) {
-            u16 player_sds = x58[arg1].xA;
             {
                 struct lbl_8046B6A0_24C_58_t* p = x58;
                 int i;
                 for (i = 0; i < 4; i++) {
-                    if (p->x0 != 3 && arg1 != i && p->xA >= player_sds) {
+                    if (p->x0 != 3 && i != arg1 && p->xA >= x58[arg1].xA) {
                         return 0;
                     }
                     p++;
@@ -1034,20 +999,21 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
 
     case 0xF9: {
         f32 vals[4];
+        f32* base = vals;
         int i, j;
         {
             typedef struct {
                 s32 a, b, c, d;
             } copy_t;
-            *(copy_t*) vals = *(copy_t*) zeroes->x40;
+            *(copy_t*) base = *(copy_t*) zeroes->x40;
         }
         for (i = 0; i < 4; i++) {
             if (x58[i].x0 != 3) {
-                vals[i] = pl_800407C8(i);
+                base[i] = pl_800407C8(i);
             }
         }
         for (j = 3; j >= 1; j--) {
-            f32* p = vals;
+            f32* p = base;
             for (i = j; i > 0; i--) {
                 if (p[0] < p[1]) {
                     f32 tmp = p[0];
@@ -1057,7 +1023,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 p++;
             }
         }
-        if (vals[0] == pl_800407C8(arg1) && vals[0] > 2.0f * vals[1]) {
+        if (base[0] == pl_800407C8(arg1) && base[0] > 2.0f * base[1]) {
             return 1;
         }
         return 0;
@@ -1090,7 +1056,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
             struct lbl_8046B6A0_24C_58_t* p = x58;
             int i;
             for (i = 0; i < 4; i++) {
-                if (p->x0 != 3 && arg1 != i && (p->x3 & 1)) {
+                if (p->x0 != 3 && i != arg1 && (p->x3 & 1)) {
                     return 0;
                 }
                 p++;
@@ -1101,7 +1067,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 struct lbl_8046B6A0_24C_58_t* p = x58;
                 int i;
                 for (i = 0; i < 4; i++) {
-                    if (p->x0 != 3 && arg1 != i && rankings[i] == 0) {
+                    if (p->x0 != 3 && i != arg1 && rankings[i] == 0) {
                         return 0;
                     }
                     p++;
@@ -1124,7 +1090,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                     struct lbl_8046B6A0_24C_58_t* p = x58;
                     int i;
                     for (i = 0; i < 4; i++) {
-                        if (p->x0 != 3 && arg1 != i && p->x5 == 0) {
+                        if (p->x0 != 3 && i != arg1 && p->x5 == 0) {
                             return 0;
                         }
                         p++;
@@ -1146,7 +1112,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
 
     case 0xFD:
         if ((unsigned) pl_800408DC(arg1) != 0 &&
-            rules->x7 == (u8) pl_800408DC(arg1))
+            rules->x7 == (unsigned) pl_800408DC(arg1))
         {
             return 1;
         }
@@ -1168,10 +1134,12 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 mode = 6;
             }
             if (mode == 0) {
-                vals[0] = zeroes->x50[0];
-                vals[1] = zeroes->x50[1];
-                vals[2] = zeroes->x50[2];
-                vals[3] = zeroes->x50[3];
+                {
+                    typedef struct {
+                        u32 a, b, c, d;
+                    } copy_t;
+                    *(copy_t*) vals = *(copy_t*) zeroes->x50;
+                }
                 for (i = 0; i < 4; i++) {
                     if (x58[i].x0 != 3 && pl_800408B8(i) != 0) {
                         vals[i] = pl_800408B8(i);
@@ -1179,7 +1147,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 }
                 for (j = 3; j >= 1; j--) {
                     u32* p = vals;
-                    for (i = j; i > 0; i--) {
+                    for (i = j; (u32) i > 0; i--) {
                         if (p[0] > p[1]) {
                             u32 tmp = p[0];
                             p[0] = p[1];
@@ -1211,10 +1179,12 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 mode = 6;
             }
             if (mode == 0) {
-                vals[0] = zeroes->x60[0];
-                vals[1] = zeroes->x60[1];
-                vals[2] = zeroes->x60[2];
-                vals[3] = zeroes->x60[3];
+                {
+                    typedef struct {
+                        u32 a, b, c, d;
+                    } copy_t;
+                    *(copy_t*) vals = *(copy_t*) zeroes->x60;
+                }
                 for (i = 0; i < 4; i++) {
                     if (x58[i].x0 != 3) {
                         vals[i] = pl_80040894(i);
@@ -1222,7 +1192,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 }
                 for (j = 3; j >= 1; j--) {
                     u32* p = vals;
-                    for (i = j; i > 0; i--) {
+                    for (i = j; (u32) i > 0; i--) {
                         if (p[0] < p[1]) {
                             u32 tmp = p[0];
                             p[0] = p[1];
@@ -1244,8 +1214,6 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
     default:
         return 0;
     }
-
-    PAD_STACK(4);
 }
 
 int fn_80171A88(void)
@@ -1289,31 +1257,28 @@ void fn_80171B64(struct lbl_804D65A8_t* arg0)
 
 int fn_80171BA4(void* arg0)
 {
-    u8 _padA[8];
-    int scores[6];
     int player;
+    int j;
     int ko_count;
     int falls;
     u32 suicides;
     int team;
-    int j;
     int result;
-    u8* var_r30;
-    int* var_r28;
-    int* var_r29;
+    u8* rules;
+    int scores[6];
 
+    rules = arg0;
     memzero(scores, sizeof(scores));
     memzero(lbl_804D65A8, 6);
     lbl_804D65B0 = Gm_PKind_Human;
 
-    var_r28 = scores;
     player = 0;
     do {
         if (Player_GetPlayerSlotType(player) != Gm_PKind_NA) {
             ko_count = 0;
             falls = Player_GetFalls(player);
             suicides = Player_GetSuicideCount(player);
-            if (*((u8*) arg0 + 6) == 1) {
+            if (rules[6] == 1) {
                 team = Player_GetTeam(player);
                 j = 0;
                 do {
@@ -1344,38 +1309,31 @@ int fn_80171BA4(void* arg0)
                     j++;
                 } while (j < 6);
             }
-            *var_r28 = (ko_count - (falls - (int) suicides)) +
-                       ((int) suicides * (s8) * ((u8*) arg0 + 0xC));
+            scores[player] = (ko_count - (falls -= (int) suicides)) +
+                             ((int) suicides * (s8) rules[0xC]);
         }
         player++;
-        var_r28 += 1;
     } while (player < 6);
 
-    var_r29 = scores;
     player = 0;
-    var_r30 = lbl_804D65A8;
     do {
         result = Player_GetPlayerSlotType(player);
         if (result != Gm_PKind_NA) {
             j = 0;
-            var_r28 = scores;
             do {
                 if (Player_GetPlayerSlotType(j) != Gm_PKind_NA &&
-                    player != j && *var_r29 < *var_r28)
+                    player != j && scores[player] < scores[j])
                 {
-                    *var_r30 += 1;
+                    lbl_804D65A8[player] += 1;
                 }
                 j++;
-                var_r28 += 1;
             } while (j < 6);
-            result = (int) *var_r30;
+            result = lbl_804D65A8[player];
             if (lbl_804D65B0 < result) {
                 lbl_804D65B0 = result;
             }
         }
         player++;
-        var_r29 += 1;
-        var_r30 += 1;
     } while (player < 6);
     return result;
 }
@@ -1652,7 +1610,7 @@ bool fn_80172664(void)
 
 bool fn_80172698(void)
 {
-    if (un_GetTrophyTotal() >= 0x32) {
+    if (Toy_GetTrophyTotal() >= 0x32) {
         return true;
     }
     return false;
@@ -1660,7 +1618,7 @@ bool fn_80172698(void)
 
 bool fn_801726CC(void)
 {
-    if (un_GetTrophyTotal() >= 0x64) {
+    if (Toy_GetTrophyTotal() >= 0x64) {
         return true;
     }
     return false;
@@ -1668,7 +1626,7 @@ bool fn_801726CC(void)
 
 bool fn_80172700(void)
 {
-    if (un_GetTrophyTotal() >= 0x96) {
+    if (Toy_GetTrophyTotal() >= 0x96) {
         return true;
     }
     return false;
@@ -1676,7 +1634,7 @@ bool fn_80172700(void)
 
 bool fn_80172734(void)
 {
-    if (un_GetTrophyTotal() >= 0xC8) {
+    if (Toy_GetTrophyTotal() >= 0xC8) {
         return true;
     }
     return false;
@@ -1684,7 +1642,7 @@ bool fn_80172734(void)
 
 bool fn_80172768(void)
 {
-    if (un_GetTrophyTotal() >= 0xFA) {
+    if (Toy_GetTrophyTotal() >= 0xFA) {
         return true;
     }
     return false;
@@ -1746,10 +1704,10 @@ int gm_80172898(u16 arg0)
             count++;
         }
     }
-    if (un_803048C0(0xE6) > 0 && gmMainLib_8015D94C(0x3F) == 0) {
+    if (Toy_803048C0(0xE6) > 0 && gmMainLib_8015D94C(0x3F) == 0) {
         gmMainLib_8015D818(0x3F);
     }
-    if (un_803048C0(0xC9) > 0 && gmMainLib_8015D94C(0x40) == 0) {
+    if (Toy_803048C0(0xC9) > 0 && gmMainLib_8015D94C(0x40) == 0) {
         gmMainLib_8015D818(0x40);
     }
     fn_8017280C();
@@ -1816,19 +1774,19 @@ void gm_801729EC(void)
         }
     }
 
-    if (un_803048C0(0xE6) == 0) {
+    if (Toy_803048C0(0xE6) == 0) {
         u32* tmp = gmMainLib_8015D804(0x3F);
         *tmp = 0;
         gmMainLib_8015D8B0(0x3FU);
         gmMainLib_8015D924(0x3FU);
     }
-    if (un_803048C0(0xC9) == 0) {
+    if (Toy_803048C0(0xC9) == 0) {
         u32* tmp = gmMainLib_8015D804(0x40);
         *tmp = 0;
         gmMainLib_8015D8B0(0x40U);
         gmMainLib_8015D924(0x40U);
     }
-    if (un_803048C0(0x96) == 0) {
+    if (Toy_803048C0(0x96) == 0) {
         u32* tmp = gmMainLib_8015D804(0x1A);
         *tmp = 0;
         gmMainLib_8015D8B0(0x1AU);
@@ -2019,12 +1977,29 @@ bool fn_80172FAC(void)
     return var_r31;
 }
 
+static inline s32 fn_80173098_CountUnlocked(void)
+{
+    s32 i;
+    s32 count;
+
+    count = 0;
+    for (i = 0; i < 0x19; i++) {
+        if (gmMainLib_8015D0F4(i) != 0) {
+            count++;
+        } else if (gmMainLib_8015D21C(i) != 0) {
+            count++;
+        } else if (gmMainLib_8015D344(i) != 0) {
+            count++;
+        }
+    }
+    return count;
+}
+
 u8 fn_80173098(int arg0)
 {
     Unk1PData* temp_r3;
     UnkAdventureData* temp_r31;
     int var_r31;
-    int i;
 
     temp_r3 = fn_8017DEC8(arg0);
     if (temp_r3->xC.xD == 0) {
@@ -2035,16 +2010,8 @@ u8 fn_80173098(int arg0)
             return CKIND_DRMARIO;
         }
     }
-    var_r31 = 0;
-    for (i = 0; i < 0x19; i++) {
-        if (gmMainLib_8015D0F4(i) != 0) {
-            var_r31++;
-        } else if (gmMainLib_8015D21C(i) != 0) {
-            var_r31++;
-        } else if (gmMainLib_8015D344(i) != 0) {
-            var_r31++;
-        }
-    }
+    var_r31 = fn_80173098_CountUnlocked();
+    (void) var_r31;
     if (var_r31 >= 10 && !gm_80164840(CKIND_CLINK)) {
         return CKIND_CLINK;
     }
@@ -2189,416 +2156,4 @@ bool fn_8017367C(void)
         gmMainLib_8015EDC8()->x6 = true;
     }
     return gmMainLib_8015EDC8()->x6;
-}
-
-lbl_8046DBD8_t* gm_801736DC(void)
-{
-    return &lbl_8046DBD8;
-}
-
-void gm_801736E8(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5)
-{
-    lbl_8046DBD8_t* tmp = &lbl_8046DBD8;
-    memzero(tmp, sizeof(lbl_8046DBD8));
-    tmp->x0 = arg0;
-    tmp->x1 = arg1;
-    tmp->x2 = arg2;
-    tmp->x3 = arg3;
-    tmp->x4 = arg4;
-    tmp->x5 = arg5;
-}
-
-#pragma push
-#pragma dont_inline on
-bool gm_80173754(s8 arg0, u8 arg1)
-{
-    if (gm_801721EC()) {
-        memzero(&lbl_8046DBD8, sizeof(lbl_8046DBD8));
-        lbl_8046DBD8.x0 = CHKIND_NONE;
-        lbl_8046DBD8.x2 = arg1;
-        lbl_8046DBD8.x5 = arg0;
-        gm_801A42E8(MJ_CHALLENGER_APPROACH);
-        gm_801A42D4();
-        return true;
-    }
-    return false;
-}
-#pragma pop
-
-u8 gm_801737D8(void)
-{
-    return lbl_8046DBD8.x6;
-}
-
-void gm_801737E8_OnLoad(void)
-{
-    lbl_8046DBD8.x6 = gm_801A4320();
-    if (lbl_8046DBD8.x0 == CHKIND_NONE) {
-        gm_SetSceneMinor(2);
-    } else {
-        gm_SetSceneMinor(0);
-    }
-}
-
-void fn_80173834(u8 ckind, u8 major, int arg2)
-{
-    bool temp_r31;
-    bool temp_r30 = gm_80160474(ckind, major);
-
-    if (arg2) {
-        gmMainLib_8015DA68(temp_r30);
-    }
-    fn_80172C78(temp_r30);
-    if (ckind == CKIND_ZELDA) {
-        temp_r31 = gm_80160474(CKIND_SEAK, major);
-        if (arg2) {
-            gmMainLib_8015DA68(temp_r31);
-        }
-        fn_80172C78(temp_r31);
-    }
-    if (ckind == CKIND_SEAK) {
-        temp_r31 = gm_80160474(CKIND_ZELDA, major);
-        if (arg2) {
-            gmMainLib_8015DA68(temp_r31);
-        }
-        fn_80172C78(temp_r31);
-    }
-}
-
-#pragma push
-#pragma dont_inline on
-void gm_8017390C(int arg0, int arg1)
-{
-    Unk1PData* temp_r3_2;
-    Unk1PData* temp_r3_3;
-    UnkAdventureData* temp_r3;
-
-    switch (arg0) { /* irregular */
-    case 0:
-        temp_r3 = gm_8017E424();
-        if (temp_r3->x76 != 0) {
-            fn_80172C78(0xE7);
-        }
-        if (arg1 != 0) {
-            fn_80173834(temp_r3->x0.ckind, 4, 1);
-            if (temp_r3->x0.xC.xD == 0 && temp_r3->x77 != 0) {
-                fn_80172C78(0x51);
-            }
-            if (temp_r3->x0.xC.xD == 0 && temp_r3->x0.cpu_level >= 3) {
-                fn_80172C78(0x53);
-            }
-            if (temp_r3->x0.xC.x20 < 0x101D0) {
-                fn_80172C78(0xE3);
-            }
-        }
-        break;
-    case 1:
-        if (arg1 != 0) {
-            temp_r3_2 = fn_8017DEC8(1);
-            fn_80173834(temp_r3_2->ckind, 3, 1);
-            if (temp_r3_2->xC.xD == 0 && temp_r3_2->cpu_level >= 3) {
-                fn_80172C78(0x52);
-            }
-            if (temp_r3_2->xC.x20 < 0x4650) {
-                fn_80172C78(0x11A);
-            }
-        }
-        break;
-    case 2:
-        if (arg1 != 0) {
-            temp_r3_3 = fn_8017DEC8(2);
-            fn_80173834(temp_r3_3->ckind, 5, 1);
-            fn_80172C78(0xBE);
-            if (temp_r3_3->xC.xD == 0) {
-                fn_80172C78(0xCC);
-            }
-            if (temp_r3_3->cpu_level >= 3) {
-                fn_80172C78(0x86);
-            }
-        }
-        break;
-    }
-}
-#pragma pop
-
-void gm_80173AA4(void)
-{
-    int i;
-    u32 var_r30 = 0;
-
-    if (gmMainLib_8015D640()) {
-        fn_80172C78(0xBC);
-        for (i = 0; i < 0x19; i++) {
-            var_r30 += *gmMainLib_8015D450(i);
-        }
-        if (var_r30 < 0x15F90) {
-            fn_80172C78(0x9B);
-        }
-        if (var_r30 < 0xAFC8) {
-            fn_80172C78(0x122);
-        }
-    }
-}
-
-void gm_80173B30(u32 arg0)
-{
-    u32 var_r31 = 0;
-    int i;
-
-    if (arg0 >= 0x7530) {
-        fn_80172C78(0xBD);
-    }
-    if (arg0 >= 0xAFC8) {
-        fn_80172C78(0xCB);
-    }
-    for (i = 0; i < 0x19; i++) {
-        var_r31 = lbTime_8000AEE4(var_r31, *gmMainLib_8015D084(i));
-    }
-    if (var_r31 >= 0x7A120) {
-        fn_80172C78(0x8D);
-    }
-}
-
-void gm_80173BC4(s8 arg0)
-{
-    u8 temp_r31;
-    int i;
-    int var_r29;
-    int temp_r28;
-
-    var_r29 = 0;
-    temp_r28 = gmMainLib_8015EDBC()->x114[gm_80164024(arg0)];
-    for (i = 0; i < 0x19; i++) {
-        var_r29 += gmMainLib_8015EDBC()->x114[i];
-    }
-    if (temp_r28 >= 0xA) {
-        fn_80172C78(0x6D);
-    }
-    if (temp_r28 >= 0x14) {
-        fn_80172C78(0x5B);
-    }
-    if (var_r29 >= 0x7D) {
-        fn_80172C78(0x6E);
-    }
-}
-
-void gm_80173C70(s8 c_kind, u32 arg1, u32 arg2, int arg3)
-{
-    if (arg3 != 0) {
-        if (gm_801A4310() == MJ_15MIN_VS) {
-            fn_80172C78(0x50);
-        }
-        if (gm_801A4310() == MJ_100MAN_VS && arg2 <= 0x3840) {
-            fn_80172C78(0x4E);
-        }
-        if (gm_801A4310() == MJ_15MIN_VS) {
-            fn_80172C78(0x50);
-        }
-    }
-    if (gm_801A4310() == MJ_ENDLESS_VS && arg1 >= 100) {
-        fn_80172C78(0x4F);
-    }
-    if (gm_801A4310() == MJ_CRUEL_VS && arg1 >= 5) {
-        fn_80172C78(0x10E);
-    }
-}
-
-static struct lbl_803D6450_t {
-    u8 x0;
-    u8 x1;
-    u16 x2;
-} lbl_803D6450[] = {
-    { 0x02, 0x00, 0x0067 }, { 0x02, 0x01, 0x0067 }, { 0x0D, 0x02, 0x00C0 },
-    { 0x19, 0x02, 0x0092 }, { 0x2C, 0x02, 0x00BB }, { 0x2E, 0x02, 0x00DD },
-    { 0x32, 0x02, 0x00BF },
-};
-
-static inline int inline0(int arg0)
-{
-    struct lbl_803D6450_t* r30 = lbl_803D6450;
-    int i;
-    for (i = 0; i < ARRAY_SIZE(lbl_803D6450); i++) {
-        if (r30[i].x1 == 2 || r30[i].x1 == lbLang_GetLanguageSetting()) {
-            if (gm_801BEBC0(r30[i].x0) == gm_801BEBC0(arg0)) {
-                return r30[i].x2;
-            }
-        }
-    }
-    return -1;
-}
-
-void gm_80173D3C(int arg0)
-{
-    int var_r0 = inline0(arg0);
-    if (var_r0 != -1) {
-        fn_80172C78(var_r0);
-    }
-}
-
-static struct lbl_803D646C_t {
-    u16 x0;
-    u16 x2;
-} lbl_803D646C[] = {
-    { 0x032, 0xB5 }, { 0x064, 0xB9 }, { 0x096, 0xAE }, { 0x0C8, 0x8C },
-    { 0x00A, 0x55 }, { 0x064, 0x56 }, { 0x3E8, 0x54 },
-};
-
-void gm_80173DE4(MatchEnd* arg0)
-{
-    u32 temp_r30;
-    u32 var_r29_2;
-    int i;
-
-    temp_r30 = gmMainLib_8015EDBC()->x0;
-
-    for (i = 0; i < ARRAY_SIZE(lbl_803D646C); i++) {
-        if (temp_r30 >= lbl_803D646C[i].x0) {
-            fn_80172C78(lbl_803D646C[i].x2);
-        }
-    }
-    if (gmMainLib_8015EDBC()->x4 >= 100) {
-        fn_80172C78(0x76);
-    }
-    if (gmMainLib_8015EDBC()->xC >= 1000) {
-        fn_80172C78(0xE2);
-    }
-    var_r29_2 = 0;
-
-    for (i = 0; i < 6; i++) {
-        if (arg0->player_standings[i].slot_type == 0) {
-            var_r29_2 =
-                lbTime_8000AEC8(var_r29_2, arg0->player_standings[i].x50);
-        }
-    }
-    if (lbTime_8000AEC8(var_r29_2, gmMainLib_8015EDBC()->x10) >= 0xF4240) {
-        fn_80172C78(0xB0);
-    }
-}
-
-static inline bool gm_80173EEC_inline(void)
-{
-    int i;
-    bool result = true;
-
-    for (i = 0; i < 0x100; i++) {
-        if (i == 0x29) {
-            continue;
-        }
-        if (i == 0x42 || i == 0x43) {
-            continue;
-        }
-        if (i == 0xB9) {
-            continue;
-        }
-        if (i == 0xC9 || i == 0xCA) {
-            continue;
-        }
-        if (i == 9) {
-            continue;
-        }
-        if (!gmMainLib_8015DADC(i)) {
-            result = false;
-            break;
-        }
-    }
-    return result;
-}
-
-void gm_80173EEC(void)
-{
-    int i;
-    u8 ckind;
-    u16* temp_r29;
-
-    for (i = 0; i < 0x19; i++) {
-        temp_r29 = &gmMainLib_8015EDBC()->x18[i];
-        if (*temp_r29 >= 100) {
-            ckind = gm_8016400C(i);
-            fn_80172C78(gm_80160474(ckind, MJ_CLASSIC));
-            if (ckind == CKIND_ZELDA) {
-                fn_80172C78(gm_80160474(CKIND_SEAK, MJ_CLASSIC));
-            }
-            if (ckind == CKIND_SEAK) {
-                fn_80172C78(gm_80160474(CKIND_ZELDA, MJ_CLASSIC));
-            }
-        }
-        if (*temp_r29 >= 200) {
-            ckind = gm_8016400C(i);
-            fn_80172C78(gm_80160474(ckind, MJ_ADVENTURE));
-            if (ckind == CKIND_ZELDA) {
-                fn_80172C78(gm_80160474(CKIND_SEAK, MJ_ADVENTURE));
-            }
-            if (ckind == CKIND_SEAK) {
-                fn_80172C78(gm_80160474(CKIND_ZELDA, MJ_ADVENTURE));
-            }
-        }
-        if (*temp_r29 >= 300) {
-            ckind = gm_8016400C(i);
-            fn_80172C78(gm_80160474(ckind, MJ_ALLSTAR));
-            if (ckind == CKIND_ZELDA) {
-                fn_80172C78(gm_80160474(CKIND_SEAK, MJ_ALLSTAR));
-            }
-            if (ckind == CKIND_SEAK) {
-                fn_80172C78(gm_80160474(CKIND_ZELDA, MJ_ALLSTAR));
-            }
-        }
-    }
-
-    if (fn_80164B48() != 0) {
-        fn_80172C78(0xA0);
-    }
-    if (gm_80164ABC()) {
-        fn_80172C78(0x9F);
-    }
-    if (gmMainLib_8015EE90() != 0) {
-        fn_80172C78(0xDC);
-    }
-    if (gmMainLib_8015EDBC()->x14 >= 0x2710) {
-        fn_80172C78(0x10C);
-    }
-    if (gmMainLib_8015D94C(0x1A) != 0) {
-        fn_80172C78(0x96);
-    }
-    if (un_803045A0() != 0) {
-        fn_80172C78(0x116);
-    }
-    if (un_80304690() != 0) {
-        fn_80172C78(0xAF);
-    }
-    if (un_80304780() != 0) {
-        fn_80172C78(0x100);
-    }
-
-    if (gm_80173EEC_inline()) {
-        fn_80172C78(0x123);
-    }
-}
-
-void gm_80174180(void)
-{
-    if (fn_80162CCC() != 0 && gm_80162EC8() != 0) {
-        un_80305918(4, 0, 0);
-    }
-    if (gm_GetVsPlayMatchTotal() >= 0xC8) {
-        un_80305918(5, 0, 0);
-    }
-    if (gm_80164ABC() != 0) {
-        un_80305918(6, 0, 0);
-    }
-}
-
-void gm_801741FC(void)
-{
-    int i;
-    for (i = 0; i < 0x12C; i++) {
-        gmMainLib_8015DA40(i);
-    }
-}
-
-void gm_80174238(void)
-{
-    int i;
-    for (i = 0; i < 0x12C; i++) {
-        gmMainLib_8015DA68(i);
-    }
 }

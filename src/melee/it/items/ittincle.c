@@ -2,10 +2,13 @@
 
 #include "gr/ground.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
+#include "it/ithitbox.h"
+#include "it/itmaplib.h"
+#include "it/itzako.h"
 #include "lb/lb_00B0.h"
 
 #include <baselib/random.h>
@@ -100,8 +103,6 @@ static void data_ordering(void)
     HSD_JObjSetRotationY(NULL, 10.0f);
 }
 
-extern Vec3 it_803B8740;
-
 void it_802EB5C8(Item_GObj* gobj)
 {
     Vec3 pos;
@@ -163,7 +164,7 @@ void it_802EB6DC(Item_GObj* gobj)
     ip->xDD4_itemVar.tincle.x38 = 0.0f;
     ip->xDD4_itemVar.tincle.x4C = 0.0f;
     it_802756D0(gobj);
-    HSD_JObjSetFlagsAll(GET_JOBJ(gobj), 0x10);
+    HSD_JObjSetFlagsAll(GET_JOBJ(gobj), JOBJ_HIDDEN);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
     it_802EC9E8(gobj);
 }
@@ -202,7 +203,7 @@ void it_802EB870(Item_GObj* gobj)
     ip->xDD4_itemVar.tincle.x5C = sa->x20 + s;
     ip->x40_vel.y = -sa->x18;
     ip->x40_vel.x = 0.0f;
-    HSD_JObjClearFlagsAll(GET_JOBJ(gobj), 0x10);
+    HSD_JObjClearFlagsAll(GET_JOBJ(gobj), JOBJ_HIDDEN);
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
     it_802EC9E8(gobj);
 }
@@ -251,7 +252,7 @@ void it_802EBA00(Item_GObj* gobj)
 
     ip->xDC8_word.flags.x1A = 1;
 
-    HSD_JObjClearFlagsAll(GET_JOBJ(gobj), 0x10);
+    HSD_JObjClearFlagsAll(GET_JOBJ(gobj), JOBJ_HIDDEN);
 
     Item_80268E5C(gobj, 2, ITEM_UNK_0x1);
 
@@ -805,24 +806,29 @@ void it_802EC9E8(Item_GObj* gobj)
 
 Item_GObj* it_802ECA70(HSD_GObj* gobj)
 {
-    u8 _pad[80];
-    Vec3 pos = it_803B8740;
-    u8 _pad2[4];
-    Item_GObj* new_gobj = it_8027B5B0(It_Kind_Tincle, &pos, NULL, NULL, 1);
+    PAD_STACK(20 * 4);
+    {
+        Vec3 pos = { 0.0f, 200.0f, 0.0f };
+        PAD_STACK(4);
+        {
+            Item_GObj* new_gobj =
+                it_8027B5B0(It_Kind_Tincle, &pos, NULL, NULL, 1);
 
-    if (new_gobj != NULL) {
-        Item* ip = GET_ITEM(new_gobj);
+            if (new_gobj != NULL) {
+                Item* ip = GET_ITEM(new_gobj);
 
-        ip->scl = Ground_801C0498();
-        HSD_JObjSetScaleX(new_gobj->hsd_obj, ip->scl);
-        HSD_JObjSetScaleY(new_gobj->hsd_obj, ip->scl);
-        HSD_JObjSetScaleZ(new_gobj->hsd_obj, ip->scl);
-        ip->facing_dir = 0.0f;
-        ip->xDD4_itemVar.tincle.x64 = gobj;
-        ip->x378_itemColl.joint_id_skip = 5;
-        it_802EB6DC(new_gobj);
+                ip->scl = Ground_801C0498();
+                HSD_JObjSetScaleX(new_gobj->hsd_obj, ip->scl);
+                HSD_JObjSetScaleY(new_gobj->hsd_obj, ip->scl);
+                HSD_JObjSetScaleZ(new_gobj->hsd_obj, ip->scl);
+                ip->facing_dir = 0.0f;
+                ip->xDD4_itemVar.tincle.x64 = gobj;
+                ip->x378_itemColl.joint_id_skip = 5;
+                it_802EB6DC(new_gobj);
+            }
+            return new_gobj;
+        }
     }
-    return new_gobj;
 }
 
 int it_802ECC8C(Item_GObj* arg0)

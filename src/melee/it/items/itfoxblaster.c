@@ -13,7 +13,7 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <melee/ft/chara/ftFox/ftFx_SpecialN.h>
-#include <melee/ft/chara/ftKirby/ftKb_Init.h>
+#include <melee/ft/chara/ftKirby/ftkirby.h>
 #include <melee/it/item.h>
 #include <melee/lb/lbrefract.h>
 
@@ -116,10 +116,10 @@ void it_802ADDD0(Item_GObj* item_gobj, s32 visibility)
     switch (item->xDD4_itemVar.foxblaster.set_sfx_var2) {
     case 0:
     case 2:
-        HSD_JObjSetFlagsAll(child_jobj, 0x10);
+        HSD_JObjSetFlagsAll(child_jobj, JOBJ_HIDDEN);
         return;
     case 1:
-        HSD_JObjClearFlagsAll(child_jobj, 0x10);
+        HSD_JObjClearFlagsAll(child_jobj, JOBJ_HIDDEN);
         break;
     }
 }

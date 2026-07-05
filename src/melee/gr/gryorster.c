@@ -13,7 +13,7 @@
 #include "gr/inlines.h"
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 #include "mp/mplib.h"
 
 #include <baselib/gobj.h>
@@ -276,120 +276,142 @@ void grYorster_802024F0(Ground* gp, s32 joint_id, CollData* coll_data,
 void grYorster_8020266C(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
+    Ground* gp2 = gp;
     s32 i;
     PAD_STACK(8);
 
     for (i = 0; i < 9; i++) {
-        struct grYorster_TrackElement* entry = &gp->gv.yorster.elements[i];
-        s32 joint = Ground_801C32D4(gp->map_id, entry->x14);
+        s32 joint =
+            Ground_801C32D4(gp->map_id, gp2->gv.yorster.elements[i].x14);
 
-        switch ((s8) entry->x01) {
-        default: {
+        switch ((s8) gp->gv.yorster.elements[i].x01) {
+        case 0:
+        case 1: {
             s32 advance = 0;
 
-            if (entry->x04 >= grYt_804D6A20.x0->x08) {
+            if (gp->gv.yorster.elements[i].x04 >= grYt_804D6A20.x0->x08) {
                 s32 frames_left;
-                f32 end_frame = (f32) grYt_804D6A20.x0->x1C;
+                f32 end_frame;
 
-                grMaterial_801C8E28(entry->x1C);
-                entry->x04 -= grYt_804D6A20.x0->x08;
-                if (entry->x04 >= grYt_804D6A20.x0->x0C) {
+                grMaterial_801C8E28(gp2->gv.yorster.elements[i].x1C);
+                gp->gv.yorster.elements[i].x04 -= grYt_804D6A20.x0->x08;
+                if (gp->gv.yorster.elements[i].x04 >= grYt_804D6A20.x0->x0C) {
                     frames_left = 0;
                 } else {
-                    frames_left = (s32) (grYt_804D6A20.x0->x0C - entry->x04);
+                    frames_left = (s32) (grYt_804D6A20.x0->x0C -
+                                         gp->gv.yorster.elements[i].x04);
                 }
-                if (end_frame >= lbGetJObjEndFrame(entry->x18)) {
-                    end_frame = lbGetJObjEndFrame(entry->x18);
+                end_frame = (f32) grYt_804D6A20.x0->x1C;
+                if (end_frame >=
+                    lbGetJObjEndFrame(gp2->gv.yorster.elements[i].x18))
+                {
+                    end_frame =
+                        lbGetJObjEndFrame(gp2->gv.yorster.elements[i].x18);
                 }
                 advance = 1;
-                entry->x10 = (s32) ((f32) frames_left *
-                                    (end_frame / grYt_804D6A20.x0->x0C));
-            } else if (entry->x08 >= grYt_804D6A20.x0->x00) {
+                gp->gv.yorster.elements[i].x10 =
+                    (s32) ((f32) frames_left *
+                           (end_frame / grYt_804D6A20.x0->x0C));
+            } else if (gp->gv.yorster.elements[i].x08 >= grYt_804D6A20.x0->x00)
+            {
                 s32 frames_left;
-                f32 end_frame = (f32) grYt_804D6A20.x0->x1C;
+                f32 end_frame;
 
-                grMaterial_801C8E28(entry->x1C);
-                entry->x08 -= grYt_804D6A20.x0->x00;
-                if (entry->x08 <= grYt_804D6A20.x0->x00) {
-                    entry->x08 = grYt_804D6A20.x0->x00;
+                grMaterial_801C8E28(gp2->gv.yorster.elements[i].x1C);
+                gp->gv.yorster.elements[i].x08 -= grYt_804D6A20.x0->x00;
+                if (gp->gv.yorster.elements[i].x08 <= grYt_804D6A20.x0->x00) {
+                    gp->gv.yorster.elements[i].x08 = grYt_804D6A20.x0->x00;
                 }
-                if (entry->x08 >= grYt_804D6A20.x0->x04) {
+                if (gp->gv.yorster.elements[i].x08 >= grYt_804D6A20.x0->x04) {
                     frames_left = 0;
                 } else {
                     frames_left =
-                        (s32) (10.0f * (grYt_804D6A20.x0->x04 - entry->x08));
+                        (s32) (10.0f * (grYt_804D6A20.x0->x04 -
+                                        gp->gv.yorster.elements[i].x08));
                 }
-                if (end_frame >= lbGetJObjEndFrame(entry->x18)) {
-                    end_frame = lbGetJObjEndFrame(entry->x18);
+                end_frame = (f32) grYt_804D6A20.x0->x1C;
+                if (end_frame >=
+                    lbGetJObjEndFrame(gp2->gv.yorster.elements[i].x18))
+                {
+                    end_frame =
+                        lbGetJObjEndFrame(gp2->gv.yorster.elements[i].x18);
                 }
                 advance = 1;
-                entry->x10 =
-                    (s32) ((f32) frames_left /
-                           (10.0f * grYt_804D6A20.x0->x04) * end_frame);
-                entry->x08 = 0.0f;
+                gp->gv.yorster.elements[i].x10 =
+                    (s32) ((f32) frames_left *
+                           (end_frame / (10.0f * grYt_804D6A20.x0->x04)));
+                gp->gv.yorster.elements[i].x08 = 0.0f;
                 Ground_801C53EC(0xE);
             }
             if (advance != 0) {
-                entry->x0C = grYt_804D6A20.x0->x18;
-                entry->x01 = 2;
+                gp->gv.yorster.elements[i].x0C = grYt_804D6A20.x0->x18;
+                gp->gv.yorster.elements[i].x01 = 2;
             }
             break;
         }
         case 2:
-            if (entry->x0C <= 0) {
-                grAnime_801C7FF8(gobj, entry->x14, 7, 0, (f32) entry->x10,
-                                 1.0f);
+            if (gp->gv.yorster.elements[i].x0C <= 0) {
+                grAnime_801C7FF8(gobj, gp2->gv.yorster.elements[i].x14, 7, 0,
+                                 (f32) gp2->gv.yorster.elements[i].x10, 1.0f);
                 mpLib_80057BC0(joint);
-                entry->x01 = 3;
-                entry->x0C = entry->x10;
+                gp->gv.yorster.elements[i].x01 = 3;
+                gp->gv.yorster.elements[i].x0C =
+                    gp->gv.yorster.elements[i].x10;
             } else {
-                entry->x0C--;
+                gp->gv.yorster.elements[i].x0C--;
             }
             break;
         case 3:
-            if (entry->x0C >= 0x143) {
+            if (gp->gv.yorster.elements[i].x0C >= 0x143) {
                 Vec3 pos;
-                HSD_JObjGetTranslation(entry->x18, &pos);
+                HSD_JObjGetTranslation(gp2->gv.yorster.elements[i].x18, &pos);
 
                 if (grLib_801C9EE8(&pos, 10.0f * Ground_801C0498() - 2.0f)) {
-                    grAnime_801C7FF8(gobj, entry->x14, 7, 2, 0.0f, 0.3f);
-                    entry->x0C = 0;
-                    entry->x01 = 4;
+                    grAnime_801C7FF8(gobj, gp2->gv.yorster.elements[i].x14, 7,
+                                     2, 0.0f, 0.3f);
+                    gp->gv.yorster.elements[i].x0C = 0;
+                    gp->gv.yorster.elements[i].x01 = 4;
                 } else {
-                    grAnime_801C7FF8(gobj, entry->x14, 7, 1, 0.0f, 1.0f);
+                    grAnime_801C7FF8(gobj, gp2->gv.yorster.elements[i].x14, 7,
+                                     1, 0.0f, 1.0f);
                     mpJointListAdd(joint);
-                    grMaterial_801C8E08(entry->x1C);
-                    entry->x04 = 0.0f;
-                    entry->x08 = 0.0f;
-                    entry->x01 = 1;
-                    OSReport("*** End Frame = %d\n", entry->x0C);
+                    grMaterial_801C8E08(gp2->gv.yorster.elements[i].x1C);
+                    gp->gv.yorster.elements[i].x04 = 0.0f;
+                    gp->gv.yorster.elements[i].x08 = 0.0f;
+                    gp->gv.yorster.elements[i].x01 = 1;
+                    OSReport("*** End Frame = %d\n",
+                             gp2->gv.yorster.elements[i].x0C);
                 }
             } else {
-                entry->x0C++;
+                gp->gv.yorster.elements[i].x0C++;
             }
             break;
         case 4:
-            if (grAnime_801C84A4(gobj, entry->x14, 7) != 0 ||
-                entry->x0C >= 0x19)
+            if (grAnime_801C84A4(gobj, gp2->gv.yorster.elements[i].x14, 7) !=
+                    0 ||
+                gp->gv.yorster.elements[i].x0C >= 0x19)
             {
                 Vec3 pos;
 
-                entry->x0C = 0;
-                HSD_JObjGetTranslation(entry->x18, &pos);
+                gp->gv.yorster.elements[i].x0C = 0;
+                HSD_JObjGetTranslation(gp2->gv.yorster.elements[i].x18, &pos);
                 if (!grLib_801C9EE8(&pos, 10.0f * Ground_801C0498() * 0.5f)) {
-                    grAnime_801C7FF8(gobj, entry->x14, 7, 1, 0.0f, 1.0f);
+                    grAnime_801C7FF8(gobj, gp2->gv.yorster.elements[i].x14, 7,
+                                     1, 0.0f, 1.0f);
                     mpJointListAdd(joint);
-                    grMaterial_801C8E08(entry->x1C);
-                    entry->x04 = 0.0f;
-                    entry->x08 = 0.0f;
-                    entry->x01 = 1;
+                    grMaterial_801C8E08(gp2->gv.yorster.elements[i].x1C);
+                    gp->gv.yorster.elements[i].x04 = 0.0f;
+                    gp->gv.yorster.elements[i].x08 = 0.0f;
+                    gp->gv.yorster.elements[i].x01 = 1;
                 }
             } else {
-                entry->x0C++;
+                gp->gv.yorster.elements[i].x0C++;
             }
             break;
+        default:
+            break;
         }
-        entry->x08 = 0.0f;
+        gp->gv.yorster.elements[i].x08 = 0.0f;
     }
 }
 

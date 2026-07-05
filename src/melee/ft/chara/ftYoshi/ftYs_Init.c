@@ -398,8 +398,7 @@ void ftYs_Init_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg)
             attr_r26->xC = HSD_AObjGetEndFrame(aobj_r24);
         } else {
             if (attr_r26->xC != HSD_AObjGetEndFrame(aobj_r24)) {
-                OSReport("yoshi matanim frame not same\n");
-                __assert(__FILE__, 97, "0");
+                HSD_ASSERTREPORT(97, 0, "yoshi matanim frame not same\n");
             }
         }
     }
@@ -483,8 +482,7 @@ void ftYs_Init_OnLoad(HSD_GObj* gobj)
     other_attr = ft->ext_attr;
 
     if (!temp) {
-        OSReport("yoshi parts_model NULL!!\n");
-        __assert(__FILE__, 113, "0");
+        HSD_ASSERTREPORT(113, 0, "yoshi parts_model NULL!!\n");
     }
 
     other_attr->xC = 0.0f;

@@ -19,7 +19,7 @@
 /* 03E334 */ u32 pl_8003E334(int, int pl_itemlog_kind);
 /* 03E39C */ int pl_8003E39C(int);
 /* 03E420 */ u32 pl_8003E420(int);
-/* 03E4A4 */ void pl_8003E4A4(u8 slot, bool, void*, int);
+/* 03E4A4 */ void pl_8003E4A4(int slot, bool, void*, int);
 /* 03E70C */ void pl_8003E70C(Item_GObj* igobj);
 /* 03E7D4 */ u32 pl_8003E7D4(int, int kind);
 /* 03E854 */ void pl_8003E854(int, int, Item_GObj*);
@@ -80,7 +80,7 @@
 /* 040A54 */ int pl_80040A54(int);
 /* 040A78 */ int pl_80040A78(int);
 /* 040A9C */ int pl_80040A9C(int);
-/* 040AF0 */ void pl_80040AF0(int);
+/* 040AF0 */ u32 pl_80040AF0(int);
 /* 040B18 */ int pl_80040B18(int);
 /* 040B3C */ unsigned int pl_80040B3C(int);
 /* 040B64 */ unsigned int pl_80040B64(int);

@@ -5,6 +5,7 @@
 
 #include <placeholder.h>
 
+#include "gm/forward.h"
 #include "mn/forward.h" // IWYU pragma: export
 
 #include <baselib/sislib.h>
@@ -128,7 +129,10 @@ struct StartMeleeRules {
     u32 x2_1 : 1;
     u32 x2_2 : 1;
     u32 x2_3 : 1; ///< single-button mode enabled
-    u32 x2_4 : 1;
+    u32 disable_pausing
+        : 1; ///< When set, pausing is disabled for both active gameplay and
+             ///< pause menus. Sourced from the rules pause option and from
+             ///< several game-mode setups.
     u32 x2_5 : 1;
     u32 x2_6 : 1;
     u32 x2_7 : 1;
@@ -142,7 +146,7 @@ struct StartMeleeRules {
     u32 x3_6 : 1;
     u32 x3_7 : 1;
 
-    u32 x4_0 : 1;
+    u32 x4_0 : 1; ///< pause camera enabled?
     u32 x4_1 : 1;
     u32 x4_2 : 1;
     u32 x4_3 : 1;
@@ -178,15 +182,27 @@ struct StartMeleeRules {
     u64 x20; // item mask
     int x28;
     float x2C;
-    float x30;         // damage ratio
-    float x34;         // game speed
-    void (*x38)(int);  // on unpause callback
-    void (*x3C)(int);  // on pause callback (conditional?)
-    int (*x40)(void);  // on pause callback
+    float x30; // damage ratio
+    float x34; // game speed
+    void (*on_unpause_override)(
+        int); ///< on unpause callback. When set, this method is called with
+              ///< the pauser playerId when a player unpauses the match. If not
+              ///< set, falls back to #Ground_EnableMatchCamera;
+              ///< #StartMeleeRules::x4_0 must also be true.
+    void (*on_pause_override)(
+        int); ///< on pause callback. When set, this method is called when a
+              ///< player presses Start during an unpaused match. Otherwise,
+              ///< #gm_EnablePlayerPauseCamera is called;
+              ///< #StartMeleeRules::x4_0 must also be true.
+    int (*check_for_pauser_override)(
+        void); ///< When set, this method is used for checking if a
+               ///< player/which player has pressed pause while unpaused.
+               ///< Otherwise falls back to #gm_DefaultVSGetPauser;
+               ///< #StartMeleeRules::x4_0 must also be true.
     void (*x44)(void); // on VS match start callback
     void (*x48)(void); // ingame pre-frame callback
     void (*x4C)(void); // ingame post-frame callback
-    void (*x50)(u8);   // on VS match end callback
+    void (*x50)(u8);   // on VS match end callback.  Passed a MatchOutcome
     struct {
         u8 pad_x0[0x10];
         u8 x10_b0 : 1;
@@ -395,7 +411,7 @@ struct CSSDoorsData {
     u8 xce;
     u8 scroll_flag;
     float xcf;
-    float xd3;
+    HSD_Text* xd3;
     float xd7;
     float xdb;
     float xdf;

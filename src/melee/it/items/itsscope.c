@@ -11,6 +11,7 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/it_3F14.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
 
@@ -135,7 +136,7 @@ static inline int it_80291DAC_level(Item_GObj* gobj, int arg1)
 int it_80291DAC(Item_GObj* gobj, int arg1)
 {
     Item* ip = GET_ITEM(gobj);
-    int level;
+    s32 level;
     int cost;
     int i;
     PAD_STACK(12);
@@ -156,8 +157,9 @@ int it_80291DAC(Item_GObj* gobj, int arg1)
             }
             level--;
         }
+    } else {
+        return level;
     }
-    return level;
 }
 
 void it_80291F14(Item_GObj* gobj, int charge_level)

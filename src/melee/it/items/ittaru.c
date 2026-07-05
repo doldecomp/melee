@@ -7,10 +7,15 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/it_3F14.h"
+#include "it/itanimlist.h"
 #include "it/itcoll.h"
+#include "it/iteffect.h"
 #include "it/item.h"
+#include "it/ithitbox.h"
+#include "it/itmaplib.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 #include "lb/lbvector.h"
 
 #include <string.h>

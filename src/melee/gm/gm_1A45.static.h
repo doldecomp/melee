@@ -15,6 +15,6 @@
 /* 4D672C */ HSD_GObj* gm_804D672C;
 /* 4D6728 */ UNK_T gm_804D6728;
 /* 4D6724 */ void (*gm_804D6724)(void);
-/* 4D6720 */ struct MinorSceneInfo* gm_804D6720;
+/* 4D6720 */ struct GameSceneInfo* gm_804D6720;
 
 #endif

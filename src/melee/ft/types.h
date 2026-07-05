@@ -33,12 +33,9 @@
 #include "ftYoshi/types.h"
 #include "ftZakoBoy/types.h"
 #include "ftZelda/types.h"
-#include "gr/types.h"
 
 #include "it/forward.h"
 
-#include "lb/lbanim.h"
-#include "lb/lbcommand.h"
 #include "lb/types.h"
 
 #include <baselib/forward.h>
@@ -484,9 +481,9 @@ struct ftCommonData {
     /* +6C8 */ int x6C8;
     /* +6CC */ int x6CC;
     /* +6D0 */ float x6D0;
-    /* +6D4 */ UNK_T x6D4;
+    /* +6D4 */ int x6D4;
     /// @todo expand to actual size
-    /* +6D8 */ void* x6D8[1];
+    /* +6D8 */ int x6D8[1];
     /* +6DC */ GXColor x6DC_colorsByPlayer[4];
     /* +6EC */ u8 x6EC[0x6F0 - 0x6EC];
     /* +6F0 */ float metal_armor;
@@ -664,7 +661,7 @@ struct ftData {
     /* +4C */ FtSFX* x4C_sfx;
     /* +50 */ Vec2* x50;
     /* +54 */ int x54;
-    /* +58 */ void* x58;
+    /* +58 */ struct ftData_x58_t* x58;
     /* +5C */ HSD_Joint* x5C;
 };
 
@@ -844,14 +841,14 @@ typedef struct itPickup {
     /* +20 */ Vec4 air_light_offset;
 } itPickup;
 
-typedef struct {
+struct UnkCostumeStruct {
     /*  +0 */ HSD_Joint* joint;
     /*  +4 */ HSD_MatAnimJoint* x4;
     /*  +8 */ u32 pad_x8; // Probably a pointer.
     /*  +C */ u32 pad_xC;
     /* +10 */ u32 pad_x10;
     /* +14 */ HSD_Archive* x14_archive;
-} UnkCostumeStruct;
+};
 
 struct UnkCostumeList {
     UnkCostumeStruct* costume_list;
@@ -965,7 +962,7 @@ struct Fighter_DemoStrings {
 
 struct ftDeviceUnk3 {
     Ground_GObj* ground;
-    u32 type;
+    u32 type; ///< ftCommon_BuryType for ftDevice_BuryThings
     ftDevice_Callback0 active_cb;
 };
 
@@ -975,6 +972,7 @@ struct ftDeviceUnk4 {
 };
 STATIC_ASSERT(sizeof(struct ftDeviceUnk4) == 0x8);
 
+/// TODO same as ftDeviceUnk3
 struct ftDeviceUnk5 {
     UNK_T x0;
     ftCommon_BuryType x4;
@@ -1022,7 +1020,7 @@ struct Fighter_x1A88_t {
     /*  +44 */ Fighter* x44;
     /*  +48 */ UNK_T x48;
     /*  +4C */ Item* x4C;
-    /*  +50 */ int x50;
+    /*  +50 */ u32 x50;
     /*  +54 */ Vec2 x54;
     /*  +5C */ float x5C;
     /*  +60 */ int x60;
@@ -1853,11 +1851,11 @@ struct ftData_80085FD4_ret {
     /* +14 */ u32 x14;
 };
 
-typedef struct ArticleDynamicBones {
+struct ArticleDynamicBones {
     BoneDynamicsDesc array[Ft_Dynamics_NumMax];
-} ArticleDynamicBones;
+};
 
-typedef struct ftDynamics {
+struct ftDynamics {
     /// @todo Very similar to #ItemDynamics.
     struct {
         /*  +0 */ int dynamicsNum;
@@ -1866,13 +1864,13 @@ typedef struct ftDynamics {
     /*  +8 */ int x4;
     /*  +C */ struct ftData_x38* x8;
     /* +10 */ FigaTree*** x10;
-} ftDynamics;
+};
 
-typedef struct KirbyHatStruct {
+struct KirbyHatStruct {
     /*  +0 */ HSD_Joint* hat_joint;
     /*  +4 */ FtPartsDesc desc;
     /*  +C */ ftDynamics* hat_dynamics[5];
-} KirbyHatStruct;
+};
 
 typedef struct Kirby_Unk {
     /*  +0 */ HSD_Joint* x0;
@@ -1924,5 +1922,20 @@ typedef struct DmgLogEntry {
     /* +24 */ size_t size_of_xC;
 } DmgLogEntry;
 STATIC_ASSERT(sizeof(struct DmgLogEntry) == 0x28);
+
+struct ftData_x58_t {
+    /* 0x00 */ u8 x0;
+    /* 0x01 */ u8 x1;
+    /* 0x02 */ u8 pad_02[2];
+    /* 0x04 */ f32 x4;
+    /* 0x08 */ u8 x8;
+    /* 0x09 */ u8 x9;
+    /* 0x0A */ u8 pad_0A[2];
+    /* 0x0C */ f32 xC;
+    /* 0x10 */ u8 x10;
+    /* 0x11 */ u8 x11;
+    /* 0x12 */ u8 pad_12[6];
+    /* 0x18 */ f32 x18;
+};
 
 #endif

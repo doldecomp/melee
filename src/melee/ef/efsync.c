@@ -56,7 +56,6 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
     f64 half_pi;
     f32 va_f32_1;
     f32 rand_f32;
-    f32 rand_rot_y;
     f32 rand_rot_x;
     f32 rand_param_x;
     f32 rand_param_y;
@@ -138,14 +137,16 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
             HSD_JObjSetRotationZ(jobj_1, va_f32_1);
         }
         break;
-    case 0x4C3:
-        ret_obj = efLib_CreateGenerator_AddAppSRT(0x24CU);
-        if (ret_obj != NULL) {
+    case 0x4C3: {
+        HSD_Generator* gen = efLib_CreateGenerator_AddAppSRT(0x24CU);
+        if (gen != NULL) {
             va_vec3 = va_arg(vlist, Vec3*);
-            psAppSRT = ((HSD_Generator*) ret_obj)->appsrt;
+            ret_obj = gen;
+            psAppSRT = gen->appsrt;
             psAppSRT->translate = *va_vec3;
         }
         break;
+    }
     case 0x4C4:
         ret_obj = efLib_Create_Attach_Scale_FacingDir(0x1B5B, gobj,
                                                       va_arg(vlist, void*));
@@ -181,8 +182,9 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
             } else {
                 half_pi = M_PI_2;
             }
+            va_f32_1 = half_pi;
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationY(jobj_1, half_pi);
+            HSD_JObjSetRotationY(jobj_1, va_f32_1);
             jobj_2 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
             HSD_JObjAnimAll(jobj_2);
         }
@@ -196,8 +198,9 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
             } else {
                 half_pi = M_PI_2;
             }
+            va_f32_1 = half_pi;
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationY(jobj_1, half_pi);
+            HSD_JObjSetRotationY(jobj_1, va_f32_1);
             jobj_2 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
             HSD_JObjAnimAll(jobj_2);
         }
@@ -214,6 +217,7 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
         ret_obj = efLib_Create_Attach_Pos(0x1F46U, gobj, va_arg(vlist, Vec3*));
         if (ret_obj != NULL) {
             jobj_1 = gobj->hsd_obj;
+            (void) jobj_1;
             HSD_JObjGetScale(jobj_1, &scale);
             jobj_2 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
             HSD_JObjSetScale(jobj_2, &scale);
@@ -251,6 +255,8 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
             effect = efLib_Create_Attach_Pos(0x1FU, gobj, &translate);
         }
         if (effect != NULL) {
+            f32 rand_rot_y;
+
             effect->update = efLib_Cb_SetOffset_FromParams;
             effect->lifetime = 0x32;
             rand_rot_y = M_TAU * HSD_Randf();
@@ -325,8 +331,9 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
             } else {
                 half_pi = M_PI_2;
             }
+            va_f32_1 = half_pi;
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationY(jobj_1, half_pi);
+            HSD_JObjSetRotationY(jobj_1, va_f32_1);
             jobj_2 = GET_JOBJ(gobj);
             HSD_JObjGetScale(jobj_2, &scale_6);
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
@@ -501,8 +508,9 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
             } else {
                 half_pi = M_PI_2;
             }
+            va_f32_1 = half_pi;
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationY(jobj_1, half_pi);
+            HSD_JObjSetRotationY(jobj_1, va_f32_1);
             ((EF_Effect*) ret_obj)->attach_jobj = fp->parts[85].joint;
             ((EF_Effect*) ret_obj)->update = efLib_Cb_LifetimeEndSpawn;
             ((EF_Effect*) ret_obj)->lifetime = 6;
@@ -558,8 +566,9 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
             } else {
                 half_pi = M_PI_2;
             }
+            va_f32_1 = half_pi;
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationY(jobj_1, half_pi);
+            HSD_JObjSetRotationY(jobj_1, va_f32_1);
         }
         hsd_8039EFAC(0, 0x12, 0x4650, jobj_1);
         break;
@@ -605,8 +614,9 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
             } else {
                 half_pi = M_PI_2;
             }
+            va_f32_1 = half_pi;
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationY(jobj_1, half_pi);
+            HSD_JObjSetRotationY(jobj_1, va_f32_1);
         }
         break;
     case 0x50F:
@@ -618,8 +628,9 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
             } else {
                 half_pi = M_PI_2;
             }
+            va_f32_1 = half_pi;
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationY(jobj_1, half_pi);
+            HSD_JObjSetRotationY(jobj_1, va_f32_1);
         }
         break;
     case 0x510:

@@ -6,10 +6,10 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sislib.h>
-#include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lblanguage.h>
+#include <melee/lb/lbspdisplay.h>
 #include <melee/mn/inlines.h>
 #include <melee/mn/mnlanguage.h>
 #include <melee/mn/mnmain.h>
@@ -173,10 +173,7 @@ void mnLanguage_8024C3C4(HSD_GObj* arg0_unused)
     HSD_JObjReqAnimAll(jobj, 0.0F);
     HSD_JObjAnimAll(jobj);
     user_data = HSD_MemAlloc(8);
-    if (user_data == NULL) {
-        OSReport("Can't get user_data.\n");
-        __assert("mnlanguage.c", 0x163, "user_data");
-    }
+    HSD_ASSERTREPORT(0x163, user_data, "Can't get user_data.\n");
     lang = lbLang_GetSavedLanguage();
     user_data->x0 = lang;
     user_data->x1 = lang;

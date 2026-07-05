@@ -6,9 +6,13 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/it_3F14.h"
 #include "it/item.h"
 #include "it/items/itfreeze.h"
 #include "it/items/itwhitebea.h"
+#include "it/ithitbox.h"
+#include "it/itmaplib.h"
+#include "it/itzako.h"
 #include "lb/lblanguage.h"
 #include "mp/mpcoll.h"
 

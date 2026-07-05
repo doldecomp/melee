@@ -14,14 +14,21 @@
 #include "gr/stage.h"
 #include "it/inlines.h"
 #include "it/it_2725.h"
+#include "it/it_279C.h"
+#include "it/it_3F14.h"
+#include "it/itanimlist.h"
 #include "it/itcoll.h"
+#include "it/iteffect.h"
+#include "it/ithitbox.h"
+#include "it/itmaplib.h"
+#include "it/itmaterial.h"
 #include "it/types.h"
 
 #include "lb/forward.h"
 
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
+#include "lb/lbspdisplay.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
@@ -448,8 +455,7 @@ static void Item_802676F4(HSD_GObj* gobj)
 
 static /// @remarks #Item_8026862C loads two integers into this,
        ///          but the second one goes _?
-    bool
-    Item_8026784C(enum_t dropItem, int _)
+    bool Item_8026784C(enum_t dropItem, int _)
 {
     bool result = false;
 
@@ -550,8 +556,8 @@ void Item_80267978(HSD_GObj* gobj)
         item_data->xC4_article_data = it_804A0F60[idx];
         item_data->xB8_itemLogicTable = &it_803F4D20[idx];
         if (item_data->xC4_article_data == NULL) {
-            OSReport("not found zako model data! check ground dat file!\n");
-            __assert("item.c", 686, "0");
+            HSD_ASSERTREPORT(
+                686, 0, "not found zako model data! check ground dat file!\n");
         }
     }
     item_data->xBC_itemStateContainer = item_data->xB8_itemLogicTable->states;
@@ -745,7 +751,6 @@ void Item_802680CC(HSD_GObj* gobj)
 }
 
 extern HSD_DObj* HSD_JObjGetDObj(HSD_JObj*);
-extern void* it_803F1F90[];
 
 static void Item_8026814C(HSD_GObj* gobj)
 {
@@ -764,7 +769,7 @@ static void Item_8026814C(HSD_GObj* gobj)
         if (var_r29 != NULL) {
             temp_r0 = var_r29->mobj;
             if (temp_r0 != NULL) {
-                hsdChangeClass(temp_r0, &it_803F1F90);
+                hsdChangeClass(temp_r0, &it_mobj);
             }
             var_r29 = var_r0 = (var_r29 != NULL) ? var_r29->next : NULL;
             goto loop_2;
@@ -804,8 +809,7 @@ static void Item_8026814C(HSD_GObj* gobj)
 }
 
 static /// @todo Needs some serious cleaning.
-    bool
-    Item_802682F0(HSD_GObj* gobj)
+    bool Item_802682F0(HSD_GObj* gobj)
 {
     s32 var_r4;
     Item* item_data;
@@ -896,10 +900,6 @@ static void Item_80268560(HSD_GObj* gobj)
 }
 
 extern void ftLib_8008702C(s32);
-extern struct sdata_ItemGXLink it_803F1418[];
-extern struct sdata_ItemGXLink it_803F2310[];
-extern struct sdata_ItemGXLink it_803F2F28[];
-extern struct sdata_ItemGXLink it_803F4CA8[];
 
 static void foobar(HSD_GObj* gobj)
 {
@@ -1161,8 +1161,6 @@ void Item_80268E40(Item* item_data, struct ItemStateDesc* itemStateDesc)
     item_data->x524_cmd.loop_count = 0;
     item_data->x524_cmd.timer = 0.0f;
 }
-
-extern struct Fighter_804D653C_t* it_804D6D04;
 
 /// Change item state
 void Item_80268E5C(HSD_GObj* gobj, enum_t msid, Item_StateChangeFlags flags)
@@ -1501,8 +1499,7 @@ static void Item_80269B60(HSD_GObj* gobj)
 static /// @remarks Somewhat arbitrary. Does not run on Hook Shot / Grapple
        /// Beam,
     ///          rather items such as the Barrel Cannon.
-    void
-    Item_80269BE4(HSD_GObj* gobj)
+    void Item_80269BE4(HSD_GObj* gobj)
 {
     Item* item_data = gobj->user_data;
     if (item_data->xDD0_flag.b5) {
@@ -1994,8 +1991,7 @@ void Item_8026A8EC(Item_GObj* gobj)
     Item* ip = (Item*) HSD_GObjGetUserData(gobj);
 
     if (!it_80272D1C(gobj) || ip == NULL) {
-        OSReport("===== Not Found Item_Struct!! =====\n");
-        __assert("item.c", 2405, "0");
+        HSD_ASSERTREPORT(2405, 0, "===== Not Found Item_Struct!! =====\n");
     }
 
     it_802725D4(gobj);

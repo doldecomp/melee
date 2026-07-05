@@ -1,9 +1,6 @@
 #include "mplib.h"
 
 #include "mpisland.h"
-
-#include "mplib.static.h"
-
 #include "placeholder.h"
 #include "platform.h"
 #include "stdbool.h"
@@ -52,33 +49,768 @@
     do {                                                                      \
         if ((line_id) == -1 || (line_id) >= mpLib_804D64B4->line_count)       \
             HSD_ASSERTREPORT(line, 0, "%s:%d:not found lineID=%d\n",          \
-                             __FILE__, line, line_id);                        \
+                             __FILE__, line, line_id);                                   \
     } while (0)
 
-static Vec2 mpLib_803BF718[2] = { { -1.0F, -400.0F }, { 1.0F, -400.0F } };
-static MapLine mpLib_803BF728 = { 0, 1, -1, -1, -1, -1, 1, 0 };
-static MapJoint mpLib_803BF738 = {
-    1, 0, 0, 0, 0, -9.0F, -408.0F, 9.0F, -392.0F, 2,
+struct mpLib_803BF248_t_x4 {
+    float x0;
+    int x4[4];
+    int x14[3];
+    int x20[4];
+    int x30[3];
+    int x3C[4];
+    int x4C[3];
 };
-static MapCollData mpLib_803BF760 = {
-    /*  +0 */ mpLib_803BF718,
-    /*  +4 */ 2,
-    /*  +8 */ &mpLib_803BF728,
-    /*  +C */ 0x00000001,
-    /* +10 */ 0,
-    /* +12 */ 1,
-    /* +14 */ 0,
-    /* +16 */ 0,
-    /* +18 */ 0,
-    /* +1A */ 0,
-    /* +1C */ 0,
-    /* +1E */ 0,
-    /* +20 */ 0,
-    /* +22 */ 0,
-    /* +24 */ &mpLib_803BF738,
-    /* +28 */ 0x00000001,
-    /* +2C */ 0x00000000,
+
+struct mpLib_803BF248_t {
+    InternalStageId id;
+    struct mpLib_803BF248_t_x4* (*x4)[20];
 };
+
+/* 458868 */ mpCollisionBox mpLib_80458868[2];
+
+/* 04E97C */ static bool mpLineIntersection(float a0x, float a0y, float a1x,
+                                            float a1y, float b0x, float b0y,
+                                            float b1x, float b1y, float* int_x,
+                                            float* int_y);
+/* 4D64B0 */ static bool didCheckBounding;
+/* 4D64B4 */ static MapCollData* mpLib_804D64B4;
+/* 4D64B8 */ static CollVtx* groundCollVtx;
+/* 4D64BC */ static CollLine* groundCollLine;
+/* 4D64C0 */ static CollJoint* groundCollJoint;
+/* 4D64C4 */ static CollJoint* jointListStart;
+/* 4D64C8 */ static CollJoint* jointListEnd;
+/* 4D64CC */ static s32 mpLib_804D64CC;
+/* 4D64D0 */ static s32 mpLib_804D64D0;
+/* 4D64D4 */ static s32 mpLib_804D64D4;
+/* 4D64D8 */ static s32 mpLib_804D64D8;
+/* 4D64DC */ static s32 mpLib_804D64DC;
+/* 4D64E0 */ static s32 mpLib_804D64E0;
+/* 4D64E4 */ static s32 mpLib_804D64E4;
+/* 458888 */ Vec3 mpLib_80458888[0x200];
+
+struct mpLib_803BF248_t_x4 mpLib_803BD3D8 = {
+    1.0F,         { -1, -1, -1, -1 }, { 0, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { -1, -1, -1, -1 }, { 0, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD430 = {
+    1.0F,         { 0x161, 0x161, 0x161, 0x161 },
+    { 1, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { 0x036, 0x037, 0x038, 0x039 },
+    { 1, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD488 = {
+    1.5F,         { 0x152, 0x152, 0x152, 0x152 },
+    { 1, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { 0x01D, 0x01E, 0x01F, 0x020 },
+    { 1, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD4E0 = {
+    1.0F,         { 0x155, 0x155, 0x155, 0x155 },
+    { 1, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { 0x022, 0x023, 0x024, 0x025 },
+    { 1, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD538 = {
+    1.0F,         { 0x16D, 0x16D, 0x16D, 0x16D },
+    { 1, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { 0x00E, 0x00F, 0x010, 0x011 },
+    { 0, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD590 = {
+    1.0F,         { 0x15B, 0x15B, 0x15B, 0x15B },
+    { 1, -1, 0 }, { 0x04B, 0x04B, 0x04C, 0x04C },
+    { 1, -1, 0 }, { 0x02C, 0x02D, 0x02E, 0x02F },
+    { 1, -1, 1 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD5E8 = {
+    1.0F,         { 0x158, 0x158, 0x158, 0x158 },
+    { 1, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { 0x027, 0x028, 0x029, 0x02A },
+    { 1, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD640 = {
+    1.0F,         { 0x16A, 0x16A, 0x16A, 0x16A },
+    { 1, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { 0x03B, 0x03C, 0x03D, 0x03E },
+    { 1, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD698 = {
+    1.0F,         { 0x15E, 0x15E, 0x15E, 0x15E },
+    { 0, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { 0x031, 0x032, 0x033, 0x034 },
+    { 0, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD6F0 = {
+    1.0F,         { -1, -1, -1, -1 }, { 0, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { -1, -1, -1, -1 }, { 0, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD748 = {
+    1.0F,         { 0x14F, 0x14F, 0x14F, 0x14F },
+    { 1, -1, 0 }, { 0x20E, 0x20E, 0x20E, 0x20E },
+    { 0, -1, 0 }, { 0x018, 0x019, 0x01A, 0x01B },
+    { 1, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD7A0 = {
+    1.0F,
+    { 0x14F, 0x14F, 0x14F, 0x14F },
+    { 1, 0x00007537, 0 },
+    { 0x20E, 0x20E, 0x20E, 0x20E },
+    { 0, 0x00007538, 0 },
+    { 0x018, 0x019, 0x01A, 0x01B },
+    { 1, 0x0000753B, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD7F8 = {
+    1.0F,
+    { 0x14F, 0x14F, 0x14F, 0x14F },
+    { 1, 0x00007539, 0 },
+    { 0x20E, 0x20E, 0x20E, 0x20E },
+    { 0, 0x00007533, 0 },
+    { 0x018, 0x019, 0x01A, 0x01B },
+    { 1, 0x0000753A, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD850 = {
+    1.0F,
+    { 0x14F, 0x14F, 0x14F, 0x14F },
+    { 1, 0x0000754A, 0 },
+    { 0x20E, 0x20E, 0x20E, 0x20E },
+    { 0, 0x00007539, 0 },
+    { 0x018, 0x019, 0x01A, 0x01B },
+    { 1, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD8A8 = {
+    1.0F,         { -1, -1, -1, -1 }, { 0, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { -1, -1, -1, -1 }, { 0, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD900 = {
+    0.1F,         { -1, -1, -1, -1 }, { 0, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { -1, -1, -1, -1 }, { 0, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD958 = {
+    0.9F,         { -1, -1, -1, -1 }, { 0, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { -1, -1, -1, -1 }, { 0, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BD9B0 = {
+    1.0F,         { 0x14C, 0x14C, 0x14C, 0x14C },
+    { 1, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { 0x013, 0x014, 0x015, 0x016 },
+    { 1, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BDA08 = {
+    1.0F,
+    { 0x14C, 0x14C, 0x14C, 0x14C },
+    { 1, 0x00007531, 0 },
+    { -1, -1, -1, -1 },
+    { 0, 0x00007532, 0 },
+    { 0x013, 0x014, 0x015, 0x016 },
+    { 1, 0x00007533, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BDA60 = {
+    0.2F,         { 0x164, 0x164, 0x164, 0x164 },
+    { 1, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { 0x036, 0x037, 0x038, 0x039 },
+    { 1, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BDAB8 = {
+    1.0F,         { 0x170, 0x170, 0x170, 0x170 },
+    { 0, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { 0x040, 0x041, 0x042, 0x043 },
+    { 0, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BDB10 = {
+    0.1F,         { 0x15E, 0x15E, 0x15E, 0x15E },
+    { 1, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { 0x031, 0x032, 0x033, 0x034 },
+    { 1, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BDB68 = {
+    1.0F,         { 0x167, 0x167, 0x167, 0x167 },
+    { 1, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { 0x03B, 0x03C, 0x03D, 0x03E },
+    { 1, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4 mpLib_803BDBC0 = {
+    1.0F,         { -1, -1, -1, -1 }, { 0, -1, 0 }, { -1, -1, -1, -1 },
+    { 0, -1, 0 }, { -1, -1, -1, -1 }, { 0, -1, 0 },
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BDC18[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BDC68[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BDCB8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BDD08[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BDD58[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BDDA8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BDDF8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BDE48[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BDE98[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BDEE8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BDF38[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BDF88[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BDFD8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD7A0, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE028[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE078[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE0C8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE118[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD850, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE168[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE1B8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE208[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE258[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE2A8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE2F8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BDA08, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE348[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE398[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE3E8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE438[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE488[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE4D8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE528[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE578[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE5C8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE618[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD7F8, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE668[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE6B8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE708[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE758[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE7A8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE7F8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE848[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE898[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE8E8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE938[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE988[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BE9D8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEA28[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEA78[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEAC8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEB18[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEB68[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEBB8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEC08[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEC58[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BECA8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BECF8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BED48[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BED98[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEDE8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEE38[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEE88[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEED8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEF28[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEF78[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BEFC8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BF018[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BF068[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BF0B8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BF108[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BF158[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BF1A8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+static struct mpLib_803BF248_t_x4* mpLib_803BF1F8[20] = {
+    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
+    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
+    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
+    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
+};
+
+/// clang-format off
+static struct mpLib_803BF248_t mpLib_803BF248[0x47] = {
+    { InternalStageID_Unk00, &mpLib_803BDC18 },
+    { TEST, &mpLib_803BDC68 },
+    { CASTLE, &mpLib_803BDCB8 },
+    { RCRUISE, &mpLib_803BDD08 },
+    { KONGO, &mpLib_803BDD58 },
+    { GARDEN, &mpLib_803BDDA8 },
+    { GREATBAY, &mpLib_803BDDF8 },
+    { SHRINE, &mpLib_803BDE48 },
+    { ZEBES, &mpLib_803BDE98 },
+    { KRAID, &mpLib_803BDEE8 },
+    { STORY, &mpLib_803BDF38 },
+    { YORSTER, &mpLib_803BDF88 },
+    { IZUMI, &mpLib_803BDFD8 },
+    { GREENS, &mpLib_803BE028 },
+    { CORNERIA, &mpLib_803BE078 },
+    { VENOM, &mpLib_803BE0C8 },
+    { PSTADIUM, &mpLib_803BE118 },
+    { PURA, &mpLib_803BE168 },
+    { MUTECITY, &mpLib_803BE1B8 },
+    { BIGBLUE, &mpLib_803BE208 },
+    { ONETT, &mpLib_803BE258 },
+    { FOURSIDE, &mpLib_803BE2A8 },
+    { ICEMTN, &mpLib_803BE2F8 },
+    { InternalStageID_Unk23, &mpLib_803BE348 },
+    { INISHIE1, &mpLib_803BE398 },
+    { INISHIE2, &mpLib_803BE3E8 },
+    { InternalStageID_Unk26, &mpLib_803BE438 },
+    { FLATZONE, &mpLib_803BE488 },
+    { OLDPUPUPU, &mpLib_803BE4D8 },
+    { OLDYOSHI, &mpLib_803BE528 },
+    { OLDKONGO, &mpLib_803BE578 },
+    { KINOKOROUTE, &mpLib_803BE5C8 },
+    { SHRINEROUTE, &mpLib_803BE618 },
+    { ZEBESROUTE, &mpLib_803BE668 },
+    { BIGBLUEROUTE, &mpLib_803BE6B8 },
+    { InternalStageID_Unk35, &mpLib_803BE708 },
+    { BATTLE, &mpLib_803BE758 },
+    { LAST, &mpLib_803BE7A8 },
+    { FIGUREGET, &mpLib_803BE7F8 },
+    { PUSHON, &mpLib_803BE848 },
+    { TMARIO, &mpLib_803BE898 },
+    { TCAPTAIN, &mpLib_803BE8E8 },
+    { TCLINK, &mpLib_803BE938 },
+    { TDONKEY, &mpLib_803BE988 },
+    { TDRMARIO, &mpLib_803BE9D8 },
+    { TFALCO, &mpLib_803BEA28 },
+    { TFOX, &mpLib_803BEA78 },
+    { TICECLIMBER, &mpLib_803BEAC8 },
+    { TKIRBY, &mpLib_803BEB18 },
+    { TKOOPA, &mpLib_803BEB68 },
+    { TLINK, &mpLib_803BEBB8 },
+    { TLUIGI, &mpLib_803BEC08 },
+    { TMARS, &mpLib_803BEC58 },
+    { TMEWTWO, &mpLib_803BECA8 },
+    { TNESS, &mpLib_803BECF8 },
+    { TPEACH, &mpLib_803BED48 },
+    { TPICHU, &mpLib_803BED98 },
+    { TPIKACHU, &mpLib_803BEDE8 },
+    { TPURIN, &mpLib_803BEE38 },
+    { TSAMUS, &mpLib_803BEE88 },
+    { TSEAK, &mpLib_803BEED8 },
+    { TYOSHI, &mpLib_803BEF28 },
+    { TZELDA, &mpLib_803BEF78 },
+    { TGAMEWATCH, &mpLib_803BEFC8 },
+    { TEMBLEM, &mpLib_803BF018 },
+    { TGANON, &mpLib_803BF068 },
+    { HEAL, &mpLib_803BF0B8 },
+    { HOMERUN, &mpLib_803BF108 },
+    { FIGURE1, &mpLib_803BF158 },
+    { FIGURE2, &mpLib_803BF1A8 },
+    { FIGURE3, &mpLib_803BF1F8 },
+};
+/// clang-format on
+
+extern Vec2 mpLib_803BF718[2];
+extern MapLine mpLib_803BF728;
+extern MapJoint mpLib_803BF738;
+extern MapCollData mpLib_803BF760;
 
 MapCollData* mpLib_8004D164(void)
 {
@@ -151,9 +883,6 @@ void mpLibLoad(MapCollData* coll_data)
     float f1;
     float f2;
     float f31;
-    float* temp_r30;
-    float* temp_r29;
-    float* temp_r28;
     CollJoint* joint_prev; // r27
     CollJoint* joint;      // r26
     int start;
@@ -172,12 +901,9 @@ void mpLibLoad(MapCollData* coll_data)
         coll_data = &mpLib_803BF760;
     }
     f31 = Ground_801C0498();
-    temp_r29 = &mpLib_80458868[0].right;
     mpLib_80458868[0].right = F32_MAX;
     mpLib_80458868[0].top = F32_MAX;
-    temp_r28 = &mpLib_80458868[0].left;
     mpLib_80458868[0].left = -F32_MAX;
-    temp_r30 = &mpLib_80458868[0].bottom;
     mpLib_80458868[0].bottom = -F32_MAX;
     for (i = 0; i < coll_data->joint_count; i++) {
         joint = &groundCollJoint[i];
@@ -206,7 +932,7 @@ void mpLibLoad(MapCollData* coll_data)
 
     count = coll_data->floor_count;
     start = coll_data->floor_start;
-    while (count-- > 0) {
+    for (; count > 0; count--) {
         groundCollLine[start].flags =
             coll_data->lines[start].hi_flags | LINE_FLAG_ENABLED;
         groundCollLine[start].x0 = &coll_data->lines[start];
@@ -264,14 +990,14 @@ void mpLibLoad(MapCollData* coll_data)
         if (mpLib_80458868[0].top < f1) {
             mpLib_80458868[0].top = f1;
         }
-        if (*temp_r30 > f1) {
-            *temp_r30 = f1;
+        if (mpLib_80458868[0].bottom > f1) {
+            mpLib_80458868[0].bottom = f1;
         }
-        if (*temp_r29 < f2) {
-            *temp_r29 = f2;
+        if (mpLib_80458868[0].right < f2) {
+            mpLib_80458868[0].right = f2;
         }
-        if (*temp_r28 > f2) {
-            *temp_r28 = f2;
+        if (mpLib_80458868[0].left > f2) {
+            mpLib_80458868[0].left = f2;
         }
         i++;
     }
@@ -829,7 +1555,7 @@ void mpLib_8004ED5C(int line_id, float* x0_out, float* y0_out, float* x1_out,
     float y0_f1 = groundCollVtx[line_r11->v0_idx].pos.y;
     float x1_f2 = groundCollVtx[line_r11->v1_idx].pos.x;
     float y1_f3 = groundCollVtx[line_r11->v1_idx].pos.y;
-    float distance;
+    float distance = 0.0F;
     PAD_STACK(8);
 
     if (mpLineGetPrev(line_id) != -1) {
@@ -868,6 +1594,7 @@ bool mpCheckFloor(float ax, float ay, float bx, float by, float y_offset,
     int i_r28;
     bool result_r27;
     bool already_checked;
+    PAD_STACK(8);
 
     result_r27 = false;
     min_dist2_f30 = F32_MAX;
@@ -899,16 +1626,21 @@ bool mpCheckFloor(float ax, float ay, float bx, float by, float y_offset,
         for (; i_r28 < var_r25; i_r28 += 1, line_r26 += 1) {
             float px_sp54;
             float py_sp50;
+            u8 pad[4];
             float x0_sp48;
             float y0_sp44;
             float x1_sp40;
             float y1_sp3C;
+            float dist2;
+            int line_offset;
         block_8:
             if (cb != NULL && !cb(gobj, line_r26 - groundCollLine)) {
                 continue;
             }
 
-            if (line_id_skip == line_r26 - groundCollLine) {
+            if (line_id_skip ==
+                (line_offset = (s32) line_r26 - (s32) groundCollLine) / 8)
+            {
                 continue;
             }
 
@@ -919,19 +1651,15 @@ bool mpCheckFloor(float ax, float ay, float bx, float by, float y_offset,
                 continue;
             }
 
-            mpLib_8004ED5C((line_r26 - groundCollLine) / 8, &x0_sp48, &y0_sp44,
-                           &x1_sp40, &y1_sp3C);
+            mpLib_8004ED5C(line_offset / 8, &x0_sp48, &y0_sp44, &x1_sp40,
+                           &y1_sp3C);
             y0_sp44 += y_offset;
             y1_sp3C += y_offset;
             if (ABS(y0_sp44 - y1_sp3C) > 0.0001) {
                 if (mpLineIntersection(x0_sp48, y0_sp44, x1_sp40, y1_sp3C, ax,
                                        ay, bx, by, &px_sp54, &py_sp50))
                 {
-                    float dx = px_sp54 - ax;
-                    float dy = py_sp50 - ay;
-                    float dx2 = dx * dx;
-                    float dy2 = dy * dy;
-                    float dist2 = dx2 + dy2;
+                    dist2 = SQ(px_sp54 - ax) + SQ(py_sp50 - ay);
                     if (min_dist2_f30 > dist2) {
                         min_dist2_f30 = dist2;
                         if (vec_out != NULL) {
@@ -959,11 +1687,7 @@ bool mpCheckFloor(float ax, float ay, float bx, float by, float y_offset,
                     mpLineIntersectionH(&px_sp54, &py_sp50, x0_sp48, y0_sp44,
                                         x1_sp40, ax, ay, bx, by))
                 {
-                    float dx = px_sp54 - ax;
-                    float dx2 = dx * dx;
-                    float dy = py_sp50 - ay;
-                    float dy2 = dy * dy;
-                    float dist2 = dx2 + dy2;
+                    dist2 = SQ(px_sp54 - ax) + SQ(py_sp50 - ay);
                     if (min_dist2_f30 > dist2) {
                         min_dist2_f30 = dist2;
                         if (vec_out != NULL) {
@@ -2845,16 +3569,97 @@ bool mpCheckAll(Vec3* pos_out, int* line_id_out, u32* flags_out,
                            normal_out, 0xF, joint_id_skip, joint_id_only);
 }
 
+static inline int mpLineGetNextCheckInline(MapLine* line, int result)
+{
+    if (result != -1) {
+        u32 flags = groundCollLine[result].flags;
+
+        if ((flags & LINE_FLAG_ENABLED) && !(flags & LINE_FLAG_HIDDEN)) {
+            CollVtx* v1 = &groundCollVtx[line->v1_idx];
+            CollVtx* v0 = &groundCollVtx[groundCollLine[result].x0->v0_idx];
+
+            if (SQ(v1->pos.x - v0->pos.x) + SQ(v1->pos.y - v0->pos.y) < 4.0) {
+                return result;
+            }
+        }
+    }
+
+    return line->next_id0;
+}
+
+static inline int mpLineGetPrevCheckInline(MapLine* line, int result)
+{
+    if (result != -1) {
+        u32 flags = groundCollLine[result].flags;
+
+        if ((flags & LINE_FLAG_ENABLED) && !(flags & LINE_FLAG_HIDDEN)) {
+            CollVtx* v0 = &groundCollVtx[line->v0_idx];
+            CollVtx* v1 = &groundCollVtx[groundCollLine[result].x0->v1_idx];
+
+            if (SQ(v0->pos.x - v1->pos.x) + SQ(v0->pos.y - v1->pos.y) < 4.0) {
+                return result;
+            }
+        }
+    }
+
+    return line->prev_id0;
+}
+
+static inline int mpLineGetPrevCheckInlineVtx(MapLine* line, int result,
+                                              CollVtx* vtx)
+{
+    if (result != -1) {
+        u32 flags = groundCollLine[result].flags;
+
+        if ((flags & LINE_FLAG_ENABLED) && !(flags & LINE_FLAG_HIDDEN)) {
+            CollVtx* v0 = &vtx[line->v0_idx];
+            CollVtx* v1 = &vtx[groundCollLine[result].x0->v1_idx];
+
+            if (SQ(v0->pos.x - v1->pos.x) + SQ(v0->pos.y - v1->pos.y) < 4.0) {
+                return result;
+            }
+        }
+    }
+
+    return line->prev_id0;
+}
+
+static inline int mpLineGetNextCheckInlineVtx(MapLine* line, s16 result,
+                                              CollVtx* vtx)
+{
+    if (result != -1) {
+        u32 flags = groundCollLine[result].flags;
+
+        if ((flags & LINE_FLAG_ENABLED) && !(flags & LINE_FLAG_HIDDEN)) {
+            CollVtx* v1 = &vtx[line->v1_idx];
+            CollVtx* v0 = &vtx[groundCollLine[result].x0->v0_idx];
+
+            if (SQ(v1->pos.x - v0->pos.x) + SQ(v1->pos.y - v0->pos.y) < 4.0) {
+                return result;
+            }
+        }
+    }
+
+    result = line->next_id0;
+    return result;
+}
+
 int mpLineNextNonFloor(int line_id)
 {
+    MapLine* line;
     int new_id;
     bool valid_id;
+
     LINEID_CHECK(4139, line_id);
-    new_id = mpLineGetNext(line_id);
+    line = groundCollLine[line_id].x0;
+    new_id = line->next_id1;
+    new_id = mpLineGetNextCheckInline(line, new_id);
     while (new_id != -1 && new_id != line_id &&
            groundCollLine[new_id].flags & CollLine_Floor)
     {
-        new_id = mpLineGetNext(new_id);
+        line = groundCollLine[new_id].x0;
+        new_id = line->next_id1;
+        new_id = mpLineGetNextCheckInline(line, new_id);
     }
     valid_id = false;
     if ((new_id != -1) && (new_id != line_id)) {
@@ -2868,14 +3673,20 @@ int mpLineNextNonFloor(int line_id)
 
 int mpLinePrevNonFloor(int line_id)
 {
+    MapLine* line;
     int new_id;
     bool valid_id;
+
     LINEID_CHECK(4148, line_id);
-    new_id = mpLineGetPrev(line_id);
+    line = groundCollLine[line_id].x0;
+    new_id = line->prev_id1;
+    new_id = mpLineGetPrevCheckInline(line, new_id);
     while (new_id != -1 && new_id != line_id &&
            groundCollLine[new_id].flags & CollLine_Floor)
     {
-        new_id = mpLineGetPrev(new_id);
+        line = groundCollLine[new_id].x0;
+        new_id = line->prev_id1;
+        new_id = mpLineGetPrevCheckInline(line, new_id);
     }
     valid_id = false;
     if ((new_id != -1) && (new_id != line_id)) {
@@ -2889,14 +3700,20 @@ int mpLinePrevNonFloor(int line_id)
 
 int mpLinePrevNonCeiling(int line_id)
 {
+    MapLine* line;
+    CollVtx* vtx;
     int new_id;
     bool valid_id;
     LINEID_CHECK(4157, line_id);
-    new_id = mpLineGetPrev(line_id);
+    line = groundCollLine[line_id].x0;
+    new_id = mpLineGetPrevCheckInline(line, line->prev_id1);
+    vtx = groundCollVtx;
     while (new_id != -1 && new_id != line_id &&
            groundCollLine[new_id].flags & CollLine_Ceiling)
     {
-        new_id = mpLineGetPrev(new_id);
+        line = groundCollLine[new_id].x0;
+        new_id = line->prev_id1;
+        new_id = mpLineGetPrevCheckInlineVtx(line, new_id, vtx);
     }
     valid_id = false;
     if ((new_id != -1) && (new_id != line_id)) {
@@ -2910,14 +3727,19 @@ int mpLinePrevNonCeiling(int line_id)
 
 int mpLineNextNonCeiling(int line_id)
 {
+    MapLine* line;
     int new_id;
     bool valid_id;
     LINEID_CHECK(4166, line_id);
-    new_id = mpLineGetNext(line_id);
+    line = groundCollLine[line_id].x0;
+    new_id = line->next_id1;
+    new_id = mpLineGetNextCheckInline(line, new_id);
     while (new_id != -1 && new_id != line_id &&
            groundCollLine[new_id].flags & CollLine_Ceiling)
     {
-        new_id = mpLineGetNext(new_id);
+        line = groundCollLine[new_id].x0;
+        new_id = line->next_id1;
+        new_id = mpLineGetNextCheckInline(line, new_id);
     }
     valid_id = false;
     if (new_id != -1 && new_id != line_id) {
@@ -2931,14 +3753,19 @@ int mpLineNextNonCeiling(int line_id)
 
 int mpLineNextNonLeftWall(int line_id)
 {
+    MapLine* line;
     int new_id;
     bool valid_id;
+
     LINEID_CHECK(4175, line_id);
-    new_id = mpLineGetNext(line_id);
+    line = groundCollLine[line_id].x0;
+    new_id = mpLineGetNextCheckInline(line, line->next_id1);
     while (new_id != -1 && new_id != line_id &&
            groundCollLine[new_id].flags & CollLine_LeftWall)
     {
-        new_id = mpLineGetNext(new_id);
+        line = groundCollLine[new_id].x0;
+        new_id = line->next_id1;
+        new_id = mpLineGetNextCheckInline(line, new_id);
     }
     valid_id = false;
     if ((new_id != -1) && (new_id != line_id)) {
@@ -2952,17 +3779,23 @@ int mpLineNextNonLeftWall(int line_id)
 
 int mpLinePrevNonLeftWall(int line_id)
 {
+    MapLine* line;
+    CollVtx* vtx;
     int new_id;
     bool valid_id;
     LINEID_CHECK(4184, line_id);
-    new_id = mpLineGetPrev(line_id);
+    line = groundCollLine[line_id].x0;
+    new_id = mpLineGetPrevCheckInline(line, line->prev_id1);
+    vtx = groundCollVtx;
     while (new_id != -1 && new_id != line_id &&
-           groundCollLine[new_id].flags & CollLine_LeftWall)
+           !!(groundCollLine[new_id].flags & CollLine_LeftWall))
     {
-        new_id = mpLineGetPrev(new_id);
+        line = groundCollLine[new_id].x0;
+        new_id = line->prev_id1;
+        new_id = mpLineGetPrevCheckInlineVtx(line, new_id, vtx);
     }
     valid_id = false;
-    if (new_id != -1 && new_id != line_id) {
+    if ((new_id != -1) && (new_id != line_id)) {
         valid_id = true;
     }
     if (valid_id) {
@@ -2973,14 +3806,20 @@ int mpLinePrevNonLeftWall(int line_id)
 
 int mpLinePrevNonRightWall(int line_id)
 {
+    MapLine* line;
+    CollVtx* vtx;
     int new_id;
     bool valid_id;
     LINEID_CHECK(4193, line_id);
-    new_id = mpLineGetPrev(line_id);
+    line = groundCollLine[line_id].x0;
+    new_id = mpLineGetPrevCheckInline(line, line->prev_id1);
+    vtx = groundCollVtx;
     while (new_id != -1 && new_id != line_id &&
            groundCollLine[new_id].flags & CollLine_RightWall)
     {
-        new_id = mpLineGetPrev(new_id);
+        line = groundCollLine[new_id].x0;
+        new_id = line->prev_id1;
+        new_id = mpLineGetPrevCheckInlineVtx(line, new_id, vtx);
     }
     valid_id = false;
     if (new_id != -1 && new_id != line_id) {
@@ -2994,14 +3833,19 @@ int mpLinePrevNonRightWall(int line_id)
 
 int mpLineNextNonRightWall(int line_id)
 {
+    MapLine* first_line;
+    MapLine* line;
     int new_id;
     bool valid_id;
     LINEID_CHECK(4202, line_id);
-    new_id = mpLineGetNext(line_id);
+    first_line = groundCollLine[line_id].x0;
+    new_id = mpLineGetNextCheckInline(first_line, first_line->next_id1);
     while (new_id != -1 && new_id != line_id &&
            groundCollLine[new_id].flags & CollLine_RightWall)
     {
-        new_id = mpLineGetNext(new_id);
+        line = groundCollLine[new_id].x0;
+        new_id = line->next_id1;
+        new_id = mpLineGetNextCheckInlineVtx(line, new_id, groundCollVtx);
     }
     valid_id = false;
     if ((new_id != -1) && (new_id != line_id)) {
@@ -3041,16 +3885,38 @@ int mpLib_80053448_Floor(int line_id)
     return -1;
 }
 
+static inline int mpLineGetNextInline(int line_id)
+{
+    MapLine* line = groundCollLine[line_id].x0;
+    int result = line->next_id1;
+
+    if (result != -1) {
+        u32 flags = groundCollLine[result].flags;
+
+        if ((flags & LINE_FLAG_ENABLED) && !(flags & LINE_FLAG_HIDDEN)) {
+            CollVtx* v1 = &groundCollVtx[line->v1_idx];
+            CollVtx* v0 = &groundCollVtx[groundCollLine[result].x0->v0_idx];
+
+            if (SQ(v1->pos.x - v0->pos.x) + SQ(v1->pos.y - v0->pos.y) < 4.0) {
+                return result;
+            }
+        }
+    }
+
+    return line->next_id0;
+}
+
 int mpLib_800534FC_Floor(int line_id)
 {
     int new_id;
     LINEID_CHECK(4272, line_id);
-    new_id = mpLineGetNext(line_id);
+    new_id = mpLineGetNextInline(line_id);
     while (new_id != -1) {
         if (!(groundCollLine[new_id].flags & CollLine_Floor)) {
             new_id = -1;
         } else if (new_id != groundCollLine[line_id].x0->next_id1) {
-            new_id = mpLineGetNext(new_id);
+            line_id = new_id;
+            new_id = mpLineGetNextInline(new_id);
             continue;
         }
         break;
@@ -3064,21 +3930,25 @@ int mpLib_800534FC_Floor(int line_id)
 int mpLib_800536CC_Floor(int line_id)
 {
     int new_id;
+    int result;
     LINEID_CHECK(4293, line_id);
     new_id = mpLineGetPrev(line_id);
     while (new_id != -1) {
         if (!(groundCollLine[new_id].flags & CollLine_Floor)) {
             new_id = -1;
         } else if (new_id != groundCollLine[line_id].x0->prev_id1) {
+            line_id = new_id;
             new_id = mpLineGetPrev(new_id);
             continue;
         }
         break;
     }
     if (new_id != -1) {
-        return new_id;
+        result = new_id;
+    } else {
+        result = -1;
     }
-    return -1;
+    return result;
 }
 
 int mpLib_8005389C_Ceiling(int line_id)
@@ -3132,6 +4002,7 @@ int mpLib_80053A04_Ceiling(int line_id)
 
 int mpLib_80053BD4_Ceiling(int line_id)
 {
+    int result;
     int new_id;
     LINEID_CHECK(4355, line_id);
     new_id = mpLineGetNext(line_id);
@@ -3146,15 +4017,17 @@ int mpLib_80053BD4_Ceiling(int line_id)
         break;
     }
     if (new_id != -1) {
-        return new_id;
+        result = new_id;
+    } else {
+        result = -1;
     }
-    return -1;
+    return result;
 }
 
 void mpLib_80053DA4_Floor(int line_id, Vec3* pos_out)
 {
     int r29 = line_id;
-    int r5;
+    s16 r5;
     CollVtx* temp_r3;
 
     LINEID_CHECK(4428, r29);
@@ -3178,25 +4051,25 @@ skip:
 
 void mpLib_80053ECC_Floor(int line_id, Vec* vec)
 {
-    CollVtx* temp_r3;
+    s16 prev_id;
+    CollVtx* vtx;
 
     LINEID_CHECK(4448, line_id);
 
-    while (true) {
-        int new_id = groundCollLine[line_id].x0->prev_id0;
-        if ((new_id != -1) && (groundCollLine[new_id].flags & CollLine_Floor))
-        {
-            line_id = new_id;
-        } else {
-            break;
-        }
+    goto skip;
+loop:
+    line_id = prev_id;
+skip:
+    prev_id = groundCollLine[line_id].x0->prev_id0;
+    if (prev_id != -1 && (groundCollLine[prev_id].flags & CollLine_Floor)) {
+        goto loop;
     }
 
     LINEID_CHECK(4453, line_id);
 
-    temp_r3 = &groundCollVtx[groundCollLine[line_id].x0->v0_idx];
-    vec->x = temp_r3->pos.x;
-    vec->y = temp_r3->pos.y;
+    vtx = &groundCollVtx[groundCollLine[line_id].x0->v0_idx];
+    vec->x = vtx->pos.x;
+    vec->y = vtx->pos.y;
     vec->z = 0.0F;
 }
 
@@ -3204,6 +4077,7 @@ void mpFloorGetRight(int line_id, Vec3* pos_out)
 {
     u32 kind;
     int new_id;
+    PAD_STACK(8);
 
     LINEID_CHECK(4465, line_id);
 
@@ -3229,6 +4103,7 @@ void mpFloorGetLeft(int line_id, Vec3* pos_out)
 {
     u32 kind;
     int new_id;
+    PAD_STACK(8);
 
     LINEID_CHECK(4474, line_id);
 
@@ -3254,6 +4129,7 @@ void mpCeilingGetRight(int line_id, Vec3* pos_out)
 {
     u32 kind;
     int new_id;
+    PAD_STACK(8);
 
     LINEID_CHECK(4483, line_id);
 
@@ -3279,6 +4155,7 @@ void mpCeilingGetLeft(int line_id, Vec3* pos_out)
 {
     u32 kind;
     int new_id;
+    PAD_STACK(8);
 
     LINEID_CHECK(4492, line_id);
 
@@ -3300,28 +4177,34 @@ void mpCeilingGetLeft(int line_id, Vec3* pos_out)
     }
 }
 
+static inline u32 mpLineGetKindInline(int line_id)
+{
+    return groundCollLine[line_id].flags & LINE_FLAG_KIND;
+}
+
 void mpLeftWallGetTop(int line_id, Vec3* pos_out)
 {
     u32 kind;
     int new_id;
+    int line_offset;
 
     LINEID_CHECK(4501, line_id);
 
     new_id = line_id;
-    kind = groundCollLine[line_id].flags & LINE_FLAG_KIND;
-    while (true) {
-        int good_id = new_id;
+    kind = mpLineGetKindInline(line_id);
+    do {
+        line_offset = new_id * sizeof(CollLine);
         new_id = mpLineGetNext(new_id);
+    } while (new_id != -1 &&
+             kind == (groundCollLine[new_id].flags & LINE_FLAG_KIND));
 
-        if (new_id == -1 ||
-            kind != (groundCollLine[new_id].flags & LINE_FLAG_KIND))
-        {
-            CollVtx* vtx = &groundCollVtx[groundCollLine[good_id].x0->v1_idx];
-            pos_out->x = vtx->pos.x;
-            pos_out->y = vtx->pos.y;
-            pos_out->z = 0.0F;
-            return;
-        }
+    {
+        CollVtx* vtx =
+            &groundCollVtx[((CollLine*) ((u8*) groundCollLine + line_offset))
+                               ->x0->v1_idx];
+        pos_out->x = vtx->pos.x;
+        pos_out->y = vtx->pos.y;
+        pos_out->z = 0.0F;
     }
 }
 
@@ -3329,24 +4212,25 @@ void mpLeftWallGetBottom(int line_id, Vec3* pos_out)
 {
     u32 kind;
     int new_id;
+    int line_offset;
 
     LINEID_CHECK(4510, line_id);
 
     new_id = line_id;
-    kind = groundCollLine[line_id].flags & LINE_FLAG_KIND;
-    while (true) {
-        int good_id = new_id;
+    kind = mpLineGetKindInline(line_id);
+    do {
+        line_offset = new_id * sizeof(CollLine);
         new_id = mpLineGetPrev(new_id);
+    } while (new_id != -1 &&
+             kind == (groundCollLine[new_id].flags & LINE_FLAG_KIND));
 
-        if (new_id == -1 ||
-            kind != (groundCollLine[new_id].flags & LINE_FLAG_KIND))
-        {
-            CollVtx* vtx = &groundCollVtx[groundCollLine[good_id].x0->v0_idx];
-            pos_out->x = vtx->pos.x;
-            pos_out->y = vtx->pos.y;
-            pos_out->z = 0.0F;
-            return;
-        }
+    {
+        CollVtx* vtx =
+            &groundCollVtx[groundCollLine[line_offset / sizeof(CollLine)]
+                               .x0->v0_idx];
+        pos_out->x = vtx->pos.x;
+        pos_out->y = vtx->pos.y;
+        pos_out->z = 0.0F;
     }
 }
 
@@ -3354,24 +4238,25 @@ void mpRightWallGetTop(int line_id, Vec3* pos_out)
 {
     u32 kind;
     int new_id;
+    int line_offset;
 
     LINEID_CHECK(4519, line_id);
 
     new_id = line_id;
-    kind = groundCollLine[line_id].flags & LINE_FLAG_KIND;
-    while (true) {
-        int good_id = new_id;
+    kind = mpLineGetKindInline(line_id);
+    do {
+        line_offset = new_id * sizeof(CollLine);
         new_id = mpLineGetPrev(new_id);
+    } while (new_id != -1 &&
+             kind == (groundCollLine[new_id].flags & LINE_FLAG_KIND));
 
-        if (new_id == -1 ||
-            kind != (groundCollLine[new_id].flags & LINE_FLAG_KIND))
-        {
-            CollVtx* vtx = &groundCollVtx[groundCollLine[good_id].x0->v0_idx];
-            pos_out->x = vtx->pos.x;
-            pos_out->y = vtx->pos.y;
-            pos_out->z = 0.0F;
-            return;
-        }
+    {
+        CollVtx* vtx =
+            &groundCollVtx[groundCollLine[line_offset / sizeof(CollLine)]
+                               .x0->v0_idx];
+        pos_out->x = vtx->pos.x;
+        pos_out->y = vtx->pos.y;
+        pos_out->z = 0.0F;
     }
 }
 
@@ -3379,24 +4264,25 @@ void mpRightWallGetBottom(int line_id, Vec3* pos_out)
 {
     u32 kind;
     int new_id;
+    int line_offset;
 
     LINEID_CHECK(4528, line_id);
 
     new_id = line_id;
-    kind = groundCollLine[line_id].flags & LINE_FLAG_KIND;
-    while (true) {
-        int good_id = new_id;
+    kind = mpLineGetKindInline(line_id);
+    do {
+        line_offset = new_id * sizeof(CollLine);
         new_id = mpLineGetNext(new_id);
+    } while (new_id != -1 &&
+             kind == (groundCollLine[new_id].flags & LINE_FLAG_KIND));
 
-        if (new_id == -1 ||
-            kind != (groundCollLine[new_id].flags & LINE_FLAG_KIND))
-        {
-            CollVtx* vtx = &groundCollVtx[groundCollLine[good_id].x0->v1_idx];
-            pos_out->x = vtx->pos.x;
-            pos_out->y = vtx->pos.y;
-            pos_out->z = 0.0F;
-            return;
-        }
+    {
+        CollVtx* vtx =
+            &groundCollVtx[groundCollLine[line_offset / sizeof(CollLine)]
+                               .x0->v1_idx];
+        pos_out->x = vtx->pos.x;
+        pos_out->y = vtx->pos.y;
+        pos_out->z = 0.0F;
     }
 }
 
@@ -3482,10 +4368,52 @@ bool mpLib_80054ED8(int line_id)
     return true;
 }
 
+static inline int mpLineGetNextFrom(MapLine* line, u32* flags_base)
+{
+    int result = line->next_id1;
+
+    if (result != -1) {
+        u32 flags = flags_base[result * 2];
+
+        if ((flags & LINE_FLAG_ENABLED) && !(flags & LINE_FLAG_HIDDEN)) {
+            CollVtx* v1 = &groundCollVtx[line->v1_idx];
+            CollVtx* v0 = &groundCollVtx[groundCollLine[result].x0->v0_idx];
+
+            if (SQ(v1->pos.x - v0->pos.x) + SQ(v1->pos.y - v0->pos.y) < 4.0) {
+                return result;
+            }
+        }
+    }
+
+    return line->next_id0;
+}
+
+static inline int mpLineGetPrevFrom(MapLine* line, u32* flags_base)
+{
+    int result = line->prev_id1;
+
+    if (result != -1) {
+        u32 flags = flags_base[result * 2];
+
+        if ((flags & LINE_FLAG_ENABLED) && !(flags & LINE_FLAG_HIDDEN)) {
+            CollVtx* v0 = &groundCollVtx[line->v0_idx];
+            CollVtx* v1 = &groundCollVtx[groundCollLine[result].x0->v1_idx];
+
+            if (SQ(v0->pos.x - v1->pos.x) + SQ(v0->pos.y - v1->pos.y) < 4.0) {
+                return result;
+            }
+        }
+    }
+
+    return line->prev_id0;
+}
+
 bool mpLinesConnected(int start_id, int target_id)
 {
     int line_id;
     u32 kind;
+    MapLine* start_line;
+    u32* flags_base;
 
     LINEID_CHECK(4656, start_id);
     LINEID_CHECK(4657, target_id);
@@ -3493,8 +4421,10 @@ bool mpLinesConnected(int start_id, int target_id)
         return true;
     }
 
-    kind = groundCollLine[start_id].flags & LINE_FLAG_KIND;
-    line_id = mpLineGetNext(start_id);
+    start_line = groundCollLine[start_id].x0;
+    flags_base = &groundCollLine->flags;
+    kind = flags_base[start_id * 2] & LINE_FLAG_KIND;
+    line_id = mpLineGetNextFrom(start_line, flags_base);
     while (line_id != -1 &&
            kind == (groundCollLine[line_id].flags & LINE_FLAG_KIND))
     {
@@ -3505,7 +4435,7 @@ bool mpLinesConnected(int start_id, int target_id)
         line_id = mpLineGetNext(line_id);
     }
 
-    line_id = mpLineGetPrev(start_id);
+    line_id = mpLineGetPrevFrom(start_line, flags_base);
     while (line_id != -1 &&
            kind == (groundCollLine[line_id].flags & LINE_FLAG_KIND))
     {
@@ -3677,12 +4607,10 @@ void mpJointUnhide(int joint_id)
         line++;
     }
 
-    count = joint->inner->vtx_count;
     vtx = &groundCollVtx[joint->inner->vtx_start];
-    while (count-- > 0) {
+    for (i = joint->inner->vtx_count; i > 0; i--, vtx++) {
         vtx->x10 = vtx->pos.x;
         vtx->x14 = vtx->pos.y;
-        vtx++;
     }
 }
 
@@ -3764,8 +4692,8 @@ void mpLib_80055E9C(int joint_id)
     float f2;
     float f3;
     u8 _[4];
-    float m1_3;
     float m0_3;
+    float m1_3;
     float m0_0;
     CollJoint* joint;
     HSD_JObj* jobj;
@@ -3811,7 +4739,7 @@ void mpLib_80055E9C(int joint_id)
     var_r25 = 0;
     HSD_JObjSetupMatrix(jobj);
     mtx = HSD_JObjGetMtxPtr(jobj);
-    m0_0 = mtx[0][0];
+    m0_0 = ((volatile float*) mtx)[0];
     if (m0_0 == mtx[1][1] && m0_0 == mtx[2][2]) {
         m0_3 = mtx[0][3];
         m1_3 = mtx[1][3];
@@ -3834,11 +4762,12 @@ void mpLib_80055E9C(int joint_id)
 
     i = 0;
     v_r26 = &groundCollVtx[joint->inner->vtx_start];
+    f31 = 0.0F;
 
     while (i < vtx_count) {
         sp28.x = v_r26->x0;
         sp28.y = v_r26->x4;
-        sp28.z = 0.0F;
+        sp28.z = f31;
         PSMTXMultVec(jobj->mtx, &sp28, &sp28);
         v_r26->pos.x = sp28.x;
         v_r26->pos.y = sp28.y;
@@ -3853,8 +4782,9 @@ void mpLib_80055E9C(int joint_id)
     }
     {
         mtx = HSD_JObjGetMtxPtr(jobj);
-        if (mtx[0][1] != 0.0F || mtx[0][2] != 0.0F || mtx[1][0] != 0.0F ||
-            mtx[1][2] != 0.0F || mtx[2][0] != 0.0F || mtx[2][1] != 0.0F)
+        f1 = 0.0F;
+        if (f1 != mtx[0][1] || f1 != mtx[0][2] || f1 != mtx[1][0] ||
+            f1 != mtx[1][2] || f1 != mtx[2][0] || f1 != mtx[2][1])
         {
             joint->flags |= CollJoint_B9;
         }
@@ -4041,7 +4971,7 @@ bool mpGetSpeed(int line_id, Vec3* pos, Vec3* speed)
     speed->x = new_x - pos->x;
     speed->y = new_y - pos->y;
     speed->z = 0.0F;
-    if (g_debugLevel >= 3) {
+    if (DbLevel >= 3) {
         if (ABS(speed->x) > 10000.0F || ABS(speed->y) > 10000.0F) {
             OSReport("%s:%d: Error: mpGetSpeed() x=%f y=%f\n", __FILE__, 5333,
                      speed->x, speed->y);
@@ -4052,738 +4982,6 @@ bool mpGetSpeed(int line_id, Vec3* pos, Vec3* speed)
     }
     return true;
 }
-
-struct mpLib_803BF248_t_x4 {
-    float x0;
-    int x4[4];
-    int x14[3];
-    int x20[4];
-    int x30[3];
-    int x3C[4];
-    int x4C[3];
-};
-
-struct mpLib_803BF248_t {
-    InternalStageId id;
-    struct mpLib_803BF248_t_x4* (*x4)[20];
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD3D8 = {
-    1.0F,         { -1, -1, -1, -1 }, { 0, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { -1, -1, -1, -1 }, { 0, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD430 = {
-    1.0F,         { 0x161, 0x161, 0x161, 0x161 },
-    { 1, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { 0x036, 0x037, 0x038, 0x039 },
-    { 1, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD488 = {
-    1.5F,         { 0x152, 0x152, 0x152, 0x152 },
-    { 1, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { 0x01D, 0x01E, 0x01F, 0x020 },
-    { 1, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD4E0 = {
-    1.0F,         { 0x155, 0x155, 0x155, 0x155 },
-    { 1, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { 0x022, 0x023, 0x024, 0x025 },
-    { 1, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD538 = {
-    1.0F,         { 0x16D, 0x16D, 0x16D, 0x16D },
-    { 1, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { 0x00E, 0x00F, 0x010, 0x011 },
-    { 0, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD590 = {
-    1.0F,         { 0x15B, 0x15B, 0x15B, 0x15B },
-    { 1, -1, 0 }, { 0x04B, 0x04B, 0x04C, 0x04C },
-    { 1, -1, 0 }, { 0x02C, 0x02D, 0x02E, 0x02F },
-    { 1, -1, 1 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD5E8 = {
-    1.0F,         { 0x158, 0x158, 0x158, 0x158 },
-    { 1, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { 0x027, 0x028, 0x029, 0x02A },
-    { 1, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD640 = {
-    1.0F,         { 0x16A, 0x16A, 0x16A, 0x16A },
-    { 1, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { 0x03B, 0x03C, 0x03D, 0x03E },
-    { 1, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD698 = {
-    1.0F,         { 0x15E, 0x15E, 0x15E, 0x15E },
-    { 0, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { 0x031, 0x032, 0x033, 0x034 },
-    { 0, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD6F0 = {
-    1.0F,         { -1, -1, -1, -1 }, { 0, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { -1, -1, -1, -1 }, { 0, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD748 = {
-    1.0F,         { 0x14F, 0x14F, 0x14F, 0x14F },
-    { 1, -1, 0 }, { 0x20E, 0x20E, 0x20E, 0x20E },
-    { 0, -1, 0 }, { 0x018, 0x019, 0x01A, 0x01B },
-    { 1, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD7A0 = {
-    1.0F,
-    { 0x14F, 0x14F, 0x14F, 0x14F },
-    { 1, 0x00007537, 0 },
-    { 0x20E, 0x20E, 0x20E, 0x20E },
-    { 0, 0x00007538, 0 },
-    { 0x018, 0x019, 0x01A, 0x01B },
-    { 1, 0x0000753B, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD7F8 = {
-    1.0F,
-    { 0x14F, 0x14F, 0x14F, 0x14F },
-    { 1, 0x00007539, 0 },
-    { 0x20E, 0x20E, 0x20E, 0x20E },
-    { 0, 0x00007533, 0 },
-    { 0x018, 0x019, 0x01A, 0x01B },
-    { 1, 0x0000753A, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD850 = {
-    1.0F,
-    { 0x14F, 0x14F, 0x14F, 0x14F },
-    { 1, 0x0000754A, 0 },
-    { 0x20E, 0x20E, 0x20E, 0x20E },
-    { 0, 0x00007539, 0 },
-    { 0x018, 0x019, 0x01A, 0x01B },
-    { 1, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD8A8 = {
-    1.0F,         { -1, -1, -1, -1 }, { 0, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { -1, -1, -1, -1 }, { 0, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD900 = {
-    0.1F,         { -1, -1, -1, -1 }, { 0, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { -1, -1, -1, -1 }, { 0, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD958 = {
-    0.9F,         { -1, -1, -1, -1 }, { 0, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { -1, -1, -1, -1 }, { 0, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BD9B0 = {
-    1.0F,         { 0x14C, 0x14C, 0x14C, 0x14C },
-    { 1, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { 0x013, 0x014, 0x015, 0x016 },
-    { 1, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BDA08 = {
-    1.0F,
-    { 0x14C, 0x14C, 0x14C, 0x14C },
-    { 1, 0x00007531, 0 },
-    { -1, -1, -1, -1 },
-    { 0, 0x00007532, 0 },
-    { 0x013, 0x014, 0x015, 0x016 },
-    { 1, 0x00007533, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BDA60 = {
-    0.2F,         { 0x164, 0x164, 0x164, 0x164 },
-    { 1, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { 0x036, 0x037, 0x038, 0x039 },
-    { 1, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BDAB8 = {
-    1.0F,         { 0x170, 0x170, 0x170, 0x170 },
-    { 0, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { 0x040, 0x041, 0x042, 0x043 },
-    { 0, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BDB10 = {
-    0.1F,         { 0x15E, 0x15E, 0x15E, 0x15E },
-    { 1, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { 0x031, 0x032, 0x033, 0x034 },
-    { 1, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BDB68 = {
-    1.0F,         { 0x167, 0x167, 0x167, 0x167 },
-    { 1, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { 0x03B, 0x03C, 0x03D, 0x03E },
-    { 1, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4 mpLib_803BDBC0 = {
-    1.0F,         { -1, -1, -1, -1 }, { 0, -1, 0 }, { -1, -1, -1, -1 },
-    { 0, -1, 0 }, { -1, -1, -1, -1 }, { 0, -1, 0 },
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BDC18[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BDC68[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BDCB8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BDD08[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BDD58[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BDDA8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BDDF8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BDE48[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BDE98[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BDEE8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BDF38[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BDF88[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BDFD8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD7A0, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE028[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE078[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE0C8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE118[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD850, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE168[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE1B8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE208[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE258[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE2A8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE2F8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BDA08, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE348[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE398[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE3E8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE438[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE488[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE4D8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE528[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE578[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE5C8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE618[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD7F8, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE668[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE6B8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE708[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE758[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE7A8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE7F8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE848[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE898[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE8E8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE938[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE988[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BE9D8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEA28[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEA78[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEAC8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEB18[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEB68[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEBB8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEC08[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEC58[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BECA8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BECF8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BED48[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BED98[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEDE8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEE38[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEE88[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEED8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEF28[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEF78[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BEFC8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BF018[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BF068[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BF0B8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BF108[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BF158[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BF1A8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-static struct mpLib_803BF248_t_x4* mpLib_803BF1F8[20] = {
-    &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
-    &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
-    &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
-    &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
-};
-
-/// clang-format off
-static struct mpLib_803BF248_t mpLib_803BF248[0x47] = {
-    { InternalStageID_Unk00, &mpLib_803BDC18 },
-    { TEST, &mpLib_803BDC68 },
-    { CASTLE, &mpLib_803BDCB8 },
-    { RCRUISE, &mpLib_803BDD08 },
-    { KONGO, &mpLib_803BDD58 },
-    { GARDEN, &mpLib_803BDDA8 },
-    { GREATBAY, &mpLib_803BDDF8 },
-    { SHRINE, &mpLib_803BDE48 },
-    { ZEBES, &mpLib_803BDE98 },
-    { KRAID, &mpLib_803BDEE8 },
-    { STORY, &mpLib_803BDF38 },
-    { YORSTER, &mpLib_803BDF88 },
-    { IZUMI, &mpLib_803BDFD8 },
-    { GREENS, &mpLib_803BE028 },
-    { CORNERIA, &mpLib_803BE078 },
-    { VENOM, &mpLib_803BE0C8 },
-    { PSTADIUM, &mpLib_803BE118 },
-    { PURA, &mpLib_803BE168 },
-    { MUTECITY, &mpLib_803BE1B8 },
-    { BIGBLUE, &mpLib_803BE208 },
-    { ONETT, &mpLib_803BE258 },
-    { FOURSIDE, &mpLib_803BE2A8 },
-    { ICEMTN, &mpLib_803BE2F8 },
-    { InternalStageID_Unk23, &mpLib_803BE348 },
-    { INISHIE1, &mpLib_803BE398 },
-    { INISHIE2, &mpLib_803BE3E8 },
-    { InternalStageID_Unk26, &mpLib_803BE438 },
-    { FLATZONE, &mpLib_803BE488 },
-    { OLDPUPUPU, &mpLib_803BE4D8 },
-    { OLDYOSHI, &mpLib_803BE528 },
-    { OLDKONGO, &mpLib_803BE578 },
-    { KINOKOROUTE, &mpLib_803BE5C8 },
-    { SHRINEROUTE, &mpLib_803BE618 },
-    { ZEBESROUTE, &mpLib_803BE668 },
-    { BIGBLUEROUTE, &mpLib_803BE6B8 },
-    { InternalStageID_Unk35, &mpLib_803BE708 },
-    { BATTLE, &mpLib_803BE758 },
-    { LAST, &mpLib_803BE7A8 },
-    { FIGUREGET, &mpLib_803BE7F8 },
-    { PUSHON, &mpLib_803BE848 },
-    { TMARIO, &mpLib_803BE898 },
-    { TCAPTAIN, &mpLib_803BE8E8 },
-    { TCLINK, &mpLib_803BE938 },
-    { TDONKEY, &mpLib_803BE988 },
-    { TDRMARIO, &mpLib_803BE9D8 },
-    { TFALCO, &mpLib_803BEA28 },
-    { TFOX, &mpLib_803BEA78 },
-    { TICECLIMBER, &mpLib_803BEAC8 },
-    { TKIRBY, &mpLib_803BEB18 },
-    { TKOOPA, &mpLib_803BEB68 },
-    { TLINK, &mpLib_803BEBB8 },
-    { TLUIGI, &mpLib_803BEC08 },
-    { TMARS, &mpLib_803BEC58 },
-    { TMEWTWO, &mpLib_803BECA8 },
-    { TNESS, &mpLib_803BECF8 },
-    { TPEACH, &mpLib_803BED48 },
-    { TPICHU, &mpLib_803BED98 },
-    { TPIKACHU, &mpLib_803BEDE8 },
-    { TPURIN, &mpLib_803BEE38 },
-    { TSAMUS, &mpLib_803BEE88 },
-    { TSEAK, &mpLib_803BEED8 },
-    { TYOSHI, &mpLib_803BEF28 },
-    { TZELDA, &mpLib_803BEF78 },
-    { TGAMEWATCH, &mpLib_803BEFC8 },
-    { TEMBLEM, &mpLib_803BF018 },
-    { TGANON, &mpLib_803BF068 },
-    { HEAL, &mpLib_803BF0B8 },
-    { HOMERUN, &mpLib_803BF108 },
-    { FIGURE1, &mpLib_803BF158 },
-    { FIGURE2, &mpLib_803BF1A8 },
-    { FIGURE3, &mpLib_803BF1F8 },
-};
-/// clang-format on
 
 float mpLib_800569EC(u32 unk)
 {
@@ -4994,9 +5192,8 @@ void mpLib_80057424(int joint_id)
     CollJoint* joint = &groundCollJoint[joint_id];
     MapJoint* j_inner = joint->inner;
     u32 count = j_inner->vtx_count;
-    s16 start = j_inner->vtx_start;
     int new_var;
-    CollVtx* vtx = &groundCollVtx[start];
+    CollVtx* vtx = &groundCollVtx[j_inner->vtx_start];
     for (joint_id = 0; joint_id < (new_var = count); joint_id++) {
         vtx->x10 = vtx->pos.x;
         vtx->x14 = vtx->pos.y;
@@ -5144,7 +5341,7 @@ void mpLib_80057BC0(int joint_id)
     j_inner = joint->inner;
     count = j_inner->floor_count;
     line_r6 = &groundCollLine[j_inner->floor_start];
-    while (count-- > 0) {
+    for (; count > 0; count--) {
         line_r6->flags &= ~LINE_FLAG_ENABLED;
         line_r6++;
     }
@@ -5152,7 +5349,7 @@ void mpLib_80057BC0(int joint_id)
     j_inner = joint->inner;
     count = j_inner->ceiling_count;
     line_r6 = &groundCollLine[j_inner->ceiling_start];
-    while (count-- > 0) {
+    for (; count > 0; count--) {
         line_r6->flags &= ~LINE_FLAG_ENABLED;
         line_r6++;
     }
@@ -5160,7 +5357,7 @@ void mpLib_80057BC0(int joint_id)
     j_inner = joint->inner;
     count = j_inner->left_wall_count;
     line_r6 = &groundCollLine[j_inner->left_wall_start];
-    while (count-- > 0) {
+    for (; count > 0; count--) {
         line_r6->flags &= ~LINE_FLAG_ENABLED;
         line_r6++;
     }
@@ -5168,7 +5365,7 @@ void mpLib_80057BC0(int joint_id)
     j_inner = joint->inner;
     count = j_inner->right_wall_count;
     line_r6 = &groundCollLine[j_inner->right_wall_start];
-    while (count-- > 0) {
+    for (; count > 0; count--) {
         line_r6->flags &= ~LINE_FLAG_ENABLED;
         line_r6++;
     }
@@ -5176,7 +5373,7 @@ void mpLib_80057BC0(int joint_id)
     j_inner = joint->inner;
     count = j_inner->dynamic_count;
     line_r6 = &groundCollLine[j_inner->dynamic_start];
-    while (count-- > 0) {
+    for (; count > 0; count--) {
         line_r6->flags &= ~LINE_FLAG_ENABLED;
         line_r6++;
     }
@@ -5282,6 +5479,7 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
     };
     CollJoint* j0_r9;
     CollJoint* j1_r10;
+    CollLine* line_base;
     int i;
     MapJoint* cd0;
     int vcount0;
@@ -5290,31 +5488,30 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
 
     j0_r9 = &groundCollJoint[joint_id0];
     j1_r10 = &groundCollJoint[joint_id1];
+    line_base = groundCollLine;
     for (i = 0; i < 5; i++) {
         int j;
         int idx;
         struct pair* pair; /* r4 */
         int count;         /* r0 */
         int temp;          /* r0 */
-        int start;         /* r8 */
         CollLine* lines;   /* r5 */
 
         pair = (struct pair*) j0_r9->inner + i;
         count = pair->count;
-        start = pair->start;
-        idx = start;
-        lines = &groundCollLine[start];
+        lines = line_base;
+        lines += (idx = pair->start);
         for (j = 0; j < count; j++, idx++) {
             temp = lines[j].x0->prev_id1;
             if (temp != -1) {
-                temp = groundCollLine[temp].x0->next_id1;
+                temp = line_base[temp].x0->next_id1;
                 if (temp != -1 && idx != temp) {
                     lines[j].x0->prev_id1 = -1;
                 }
             }
             temp = lines[j].x0->next_id1;
             if (temp != -1) {
-                temp = groundCollLine[temp].x0->prev_id1;
+                temp = line_base[temp].x0->prev_id1;
                 if (temp != -1 && idx != temp) {
                     lines[j].x0->next_id1 = -1;
                 }
@@ -5323,20 +5520,19 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
 
         pair = (struct pair*) j1_r10->inner + i;
         count = pair->count;
-        start = pair->start;
-        idx = start;
-        lines = &groundCollLine[start];
+        lines = line_base;
+        lines += (idx = pair->start);
         for (j = 0; j < count; j++, idx++) {
             temp = lines->x0->prev_id1;
             if (temp != -1) {
-                temp = groundCollLine[temp].x0->next_id1;
+                temp = line_base[temp].x0->next_id1;
                 if (temp != -1 && idx != temp) {
                     lines->x0->prev_id1 = -1;
                 }
             }
             temp = lines->x0->next_id1;
             if (temp != -1) {
-                temp = groundCollLine[temp].x0->prev_id1;
+                temp = line_base[temp].x0->prev_id1;
                 if (temp != -1 && idx != temp) {
                     lines->x0->next_id1 = -1;
                 }
@@ -5357,8 +5553,9 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
         int vid_r26; /* r26 */
         int vid;
         int vstart1_r4;
-        vstart1_r4 = j1_r10->inner->vtx_start;
-        vcount1 = j1_r10->inner->vtx_count;
+        MapJoint* cd1 = j1_r10->inner;
+        vstart1_r4 = cd1->vtx_start;
+        vcount1 = cd1->vtx_count;
         vid = vstart1_r4;
         vid_r26 = vstart1_r4;
         for (v = 0; v < vcount1; v++, vid++, vid_r26++) {
@@ -5378,8 +5575,9 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
                 int lcount_r22;
                 CollLine* lines; /* r5 */
                 lstart_r24 = ((struct pair*) j0_r9->inner)[var_r25].start;
+                (void) lstart_r24;
                 lcount_r22 = ((struct pair*) j0_r9->inner)[var_r25].count;
-                lines = &groundCollLine[lstart_r24];
+                lines = &line_base[lstart_r24];
                 for (i_r23 = 0; i_r23 < lcount_r22; i_r23++) {
                     int j;
                     s16 lstart_r20;
@@ -5394,7 +5592,7 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
                                 ((struct pair*) j1_r10->inner)[j].start;
                             lcount_r17 =
                                 ((struct pair*) j1_r10->inner)[j].count;
-                            iter_r3 = &groundCollLine[lstart_r20];
+                            iter_r3 = &line_base[lstart_r20];
                             for (k = 0; k < lcount_r17; k++) {
                                 if (vid_r26 == iter_r3->x0->v1_idx) {
                                     lines[i_r23].x0->prev_id1 = lstart_r20 + k;
@@ -5412,7 +5610,7 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
                                 ((struct pair*) j1_r10->inner)[j].count;
                             lstart_r20 =
                                 ((struct pair*) j1_r10->inner)[j].start;
-                            iter_r3 = &groundCollLine[lstart_r20];
+                            iter_r3 = &line_base[lstart_r20];
                             for (k = 0; k < lcount_r17; k++) {
                                 if (vid_r26 == iter_r3->x0->v0_idx) {
                                     lines[i_r23].x0->next_id1 = lstart_r20 + k;
@@ -5457,22 +5655,17 @@ void mpLib_80058614_Floor(void)
     // CollLine* var_r31;
     CollJoint* joint_r7;
     int count_r8;
-    int count_r5 = 0;
+    int count_r5;
     int i;
-    CollLine* line_r31;
-    int count_r30;
-    int count_r29;
     int j;
     PAD_STACK(8);
 
     joint_r7 = groundCollJoint;
     count_r8 = mpLib_804D64B4->joint_count;
-    for (i = 0; i < count_r8; i++) {
-        if (joint_r7[i].xE) {
+    for (count_r5 = 0; count_r5 < count_r8; count_r5++) {
+        if (joint_r7[count_r5].xE) {
             break;
         }
-
-        count_r5++;
     }
 
     if (count_r5 == count_r8) {
@@ -5493,6 +5686,9 @@ void mpLib_80058614_Floor(void)
         }
 
         {
+            CollLine* line_r31;
+            int count_r30;
+            int count_r29;
             MapJoint* j_inner = joint_r7->inner;
             line_r31 = &groundCollLine[j_inner->floor_start];
             count_r30 = j_inner->floor_count;
@@ -5564,14 +5760,15 @@ void mpLib_800587FC(HSD_GObj* gobj)
 
 void mpLib_80058820(void)
 {
+    mpCollisionBox* box = mpLib_80458868;
     HSD_GObj* gobj = GObj_Create(1, 6, 0);
     HSD_ASSERT(6314, gobj);
     HSD_GObj_SetupProc(gobj, mpLib_800587FC, 4);
-    mpLib_80458868[0].right = +10000.0F;
-    mpLib_80458868[0].top = +10000.0F;
-    mpLib_80458868[0].left = -10000.0F;
-    mpLib_80458868[0].bottom = -10000.0F;
-    mpLib_80458868[1] = mpLib_80458868[0];
+    box[0].right = 10000.0F;
+    box[0].top = 10000.0F;
+    box[0].left = -10000.0F;
+    box[0].bottom = -10000.0F;
+    box[1] = box[0];
 }
 
 bool mpCheckedBounding(void)
@@ -5690,6 +5887,8 @@ void mpUncheckBounding(void)
 
     didCheckBounding = false;
 }
+
+static char lbl_803BF526[0x18] = "";
 
 static HSD_Chan mpLib_803BF540 = {
     NULL,
@@ -5865,10 +6064,13 @@ void mpLib_DrawEcbs(CollData* cd)
     GXEnd();
 }
 
+static const GXColor mpLib_804D80E0 = { 0xFF, 0x37, 0x37, 0x80 };
+static const GXColor mpLib_804D80E4 = { 0x37, 0x37, 0xFF, 0x80 };
+
 void mpLib_DrawSnapping(void)
 {
-    GXColor sp110 = { 0xFF, 0x37, 0x37, 0x80 };
-    GXColor sp10C = { 0x37, 0x37, 0xFF, 0x80 };
+    GXColor left_snap_color = mpLib_804D80E0;
+    GXColor right_snap_color = mpLib_804D80E4;
     HSD_GObj* item_r28;
     HSD_GObj* ft_r27;
     bool var_r31;
@@ -5900,7 +6102,7 @@ void mpLib_DrawSnapping(void)
                 float pos_y = cd->cur_pos.y;
                 float f30 = 0.5F * cd->ledge_snap_height;
 
-                mpLib_SetupDraw(sp10C);
+                mpLib_SetupDraw(right_snap_color);
                 GXBegin(GX_LINESTRIP, GX_VTXFMT0, 5);
                 GXPosition3f32(inner_x + cd->ledge_snap_x,
                                f30 + (pos_y + cd->ledge_snap_y),
@@ -5919,7 +6121,7 @@ void mpLib_DrawSnapping(void)
 
                 pos_y = cd->cur_pos.y;
                 inner_x = cd->cur_pos.x + cd->ecb.left.x;
-                mpLib_SetupDraw(sp110);
+                mpLib_SetupDraw(left_snap_color);
                 GXBegin(GX_LINESTRIP, GX_VTXFMT0, 5);
 
                 GXPosition3f32(inner_x - cd->ledge_snap_x,
@@ -5941,8 +6143,7 @@ void mpLib_DrawSnapping(void)
         }
     }
 
-    item_r28 = HSD_GObj_Entities->items;
-    if (item_r28 != NULL) {
+    if ((item_r28 = HSD_GObj_Entities->items) != NULL) {
         if (!var_r31) {
             Mtx sp7C;
             PAD_STACK(0x40);
@@ -6025,6 +6226,12 @@ void mpLib_DrawMatchingLines(int value, int flag, GXColor color)
     }
     GXEnd();
 }
+
+static const GXColor mpLib_804D80F0 = { 0xFF, 0x40, 0x40, 0xFF };
+static const GXColor mpLib_804D80F4 = { 0x40, 0x40, 0xFF, 0xFF };
+static const GXColor mpLib_804D80F8 = { 0xFF, 0x40, 0xFF, 0xFF };
+static const GXColor mpLib_804D80FC = { 0x80, 0x80, 0x80, 0xFF };
+static const GXColor mpLib_804D8100 = { 0x80, 0x80, 0x80, 0xFF };
 
 static const GXColor mpLib_FloorColor = { 0xC0, 0xC0, 0xC0, 0xFF };
 static const GXColor mpLib_CeilingColor = { 0xC0, 0x80, 0x80, 0xFF };
@@ -6377,11 +6584,12 @@ void mpLib_80059554(void)
     }
 }
 
-static const GXColor mpLib_804D80F0 = { 0xFF, 0x40, 0x40, 0xFF };
-static const GXColor mpLib_804D80F4 = { 0x40, 0x40, 0xFF, 0xFF };
-static const GXColor mpLib_804D80F8 = { 0xFF, 0x40, 0xFF, 0xFF };
-static const GXColor mpLib_804D80FC = { 0x80, 0x80, 0x80, 0xFF };
-static const GXColor mpLib_804D8100 = { 0x80, 0x80, 0x80, 0xFF };
+static const GXColor mpLib_804D8128 = { 0x7D, 0x7D, 0xFF, 0xFF };
+static const GXColor mpLib_804D812C = { 0x7D, 0xFF, 0x80, 0xFF };
+static const GXColor mpLib_804D8130 = { 0xFF, 0xFF, 0x80, 0xFF };
+static const GXColor mpLib_804D8134 = { 0xFF, 0x40, 0x40, 0xFF };
+static const GXColor mpLib_804D8138 = { 0xFF, 0x40, 0xC0, 0xFF };
+static const GXColor mpLib_804D813C = { 0xFF, 0xFF, 0xFF, 0xFF };
 
 void mpLib_80059E60(void)
 {
@@ -6430,37 +6638,33 @@ void mpLib_80059E60(void)
 void mpLib_DrawCrosses(s16* idx, int len, GXColor arg2)
 {
     Vec3 sp34;
-    s16* var_r31;
-    Vec3* var_r30;
-    Vec3* temp_r29;
+    s16* idx_ptr;
+    Vec3* out_vtx;
     int i;
-    int j;
     Vec3* vtx;
-    int var_r28;
-    int len_r27;
+    int idx_i;
+    int out_count;
+    PAD_STACK(4);
 
-    var_r28 = 0;
-    vtx = mpLib_80458888;
-    var_r30 = vtx;
-    j = 0;
-    var_r31 = idx;
-    len_r27 = 0;
-    for (var_r28 = 0; var_r28 < len && len_r27 < 0x80; var_r28++) {
-        if (Ground_801C2D24(*var_r31, &sp34)) {
-            len_r27 += 1;
-            *var_r30 = sp34;
-            var_r30++;
+    out_vtx = (vtx = mpLib_80458888);
+    for (idx_ptr = &idx[idx_i = 0], out_count = 0;
+         idx_i < len && out_count < 0x80; idx_i++)
+    {
+        if (Ground_801C2D24(*idx_ptr, &sp34)) {
+            out_count += 1;
+            *out_vtx = sp34;
+            out_vtx++;
         }
-        var_r31 += 1;
+        idx_ptr += 1;
     }
 
-    if (!len_r27) {
+    if (!out_count) {
         return;
     }
 
     mpLib_SetupDraw(arg2);
-    GXBegin(GX_LINES, GX_VTXFMT0, len_r27 * 6);
-    for (i = 0; i < len_r27; i++) {
+    GXBegin(GX_LINES, GX_VTXFMT0, out_count * 6);
+    for (i = 0; i < out_count; i++) {
         GXPosition3f32(vtx->x - 3.0F, vtx->y, vtx->z);
         GXPosition3f32(3.0F + vtx->x, vtx->y, vtx->z);
         GXPosition3f32(vtx->x, vtx->y - 3.0F, vtx->z);
@@ -6471,43 +6675,32 @@ void mpLib_DrawCrosses(s16* idx, int len, GXColor arg2)
     }
 }
 
-static s16 mpLib_ItemSpawnVtxIds[0x15] = {
-    0x7F, 0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89,
-    0x8A, 0x8B, 0x8C, 0x8D, 0x8E, 0x8F, 0x90, 0x91, 0x92, 0x93,
+enum {
+    mpLib_EnemySpawnVtxIds = 0x16,
+    mpLib_TrophySpawnVtxIds = 0x66,
+    mpLib_ExitVtxIds = 0x80,
 };
 
-static s16 mpLib_EnemySpawnVtxIds[0x50] = {
-    0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0x29, 0x2A, 0x2B,
-    0x2C, 0x2D, 0x2E, 0x2F, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37,
-    0x38, 0x39, 0x3A, 0x3B, 0x3C, 0x3D, 0x3E, 0x3F, 0x40, 0x41, 0x42, 0x43,
-    0x44, 0x45, 0x46, 0x47, 0x48, 0x49, 0x4A, 0x4B, 0x4C, 0x4D, 0x4E, 0x4F,
-    0x50, 0x51, 0x52, 0x53, 0x54, 0x55, 0x56, 0x57, 0x58, 0x59, 0x5A, 0x5B,
-    0x5C, 0x5D, 0x5E, 0x5F, 0x60, 0x61, 0x62, 0x63, 0x64, 0x65, 0x66, 0x67,
-    0x68, 0x69, 0x6A, 0x6B, 0x6C, 0x6D, 0x6E, 0x6F,
-};
-
-static s16 mpLib_TrophySpawnVtxIds[0x19] = {
-    0xDC, 0xDD, 0xDE, 0xDF, 0xE0, 0xE1, 0xE2, 0xE3, 0xE4,
-    0xE5, 0xE6, 0xE7, 0xE8, 0xE9, 0xEA, 0xEB, 0xEC, 0xED,
-    0xEE, 0xEF, 0xF0, 0xF1, 0xF2, 0xF3, 0xF4,
-};
-
-static s16 mpLib_ExitVtxIds[0x2E] = {
-    0x99, 0x9A, 0x9B, 0x9C, 0x9D, 0x9E, 0x9F, 0xA0, 0xA1, 0xA2, 0xA3, 0xA4,
-    0xA5, 0xA6, 0xA7, 0xA8, 0xA9, 0xAA, 0xAB, 0xAC, 0xAD, 0xAE, 0xAF, 0xB0,
-    0xB1, 0xB2, 0xB3, 0xB4, 0xB5, 0xB6, 0xB7, 0xB8, 0xB9, 0xBA, 0xBB, 0xBC,
-    0xBD, 0xBE, 0xBF, 0xC0, 0xC1, 0xC2, 0xC3, 0xC4, 0xC5, 0xC6
+static s16 mpLib_ItemSpawnVtxIds[] = {
+    0x7F, 0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8A,
+    0x8B, 0x8C, 0x8D, 0x8E, 0x8F, 0x90, 0x91, 0x92, 0x93, 0,    0x20, 0x21,
+    0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0x29, 0x2A, 0x2B, 0x2C, 0x2D,
+    0x2E, 0x2F, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39,
+    0x3A, 0x3B, 0x3C, 0x3D, 0x3E, 0x3F, 0x40, 0x41, 0x42, 0x43, 0x44, 0x45,
+    0x46, 0x47, 0x48, 0x49, 0x4A, 0x4B, 0x4C, 0x4D, 0x4E, 0x4F, 0x50, 0x51,
+    0x52, 0x53, 0x54, 0x55, 0x56, 0x57, 0x58, 0x59, 0x5A, 0x5B, 0x5C, 0x5D,
+    0x5E, 0x5F, 0x60, 0x61, 0x62, 0x63, 0x64, 0x65, 0x66, 0x67, 0x68, 0x69,
+    0x6A, 0x6B, 0x6C, 0x6D, 0x6E, 0x6F, 0xDC, 0xDD, 0xDE, 0xDF, 0xE0, 0xE1,
+    0xE2, 0xE3, 0xE4, 0xE5, 0xE6, 0xE7, 0xE8, 0xE9, 0xEA, 0xEB, 0xEC, 0xED,
+    0xEE, 0xEF, 0xF0, 0xF1, 0xF2, 0xF3, 0xF4, 0,    0x99, 0x9A, 0x9B, 0x9C,
+    0x9D, 0x9E, 0x9F, 0xA0, 0xA1, 0xA2, 0xA3, 0xA4, 0xA5, 0xA6, 0xA7, 0xA8,
+    0xA9, 0xAA, 0xAB, 0xAC, 0xAD, 0xAE, 0xAF, 0xB0, 0xB1, 0xB2, 0xB3, 0xB4,
+    0xB5, 0xB6, 0xB7, 0xB8, 0xB9, 0xBA, 0xBB, 0xBC, 0xBD, 0xBE, 0xBF, 0xC0,
+    0xC1, 0xC2, 0xC3, 0xC4, 0xC5, 0xC6,
 };
 
 static s16 mpLib_SpawnVtxIds[4] = { 0, 1, 2, 3 };
 static s16 mpLib_RespawnVtxIds[4] = { 4, 5, 6, 7 };
-
-static const GXColor mpLib_804D8128 = { 0x7D, 0x7D, 0xFF, 0xFF };
-static const GXColor mpLib_804D812C = { 0x7D, 0xFF, 0x80, 0xFF };
-static const GXColor mpLib_804D8130 = { 0xFF, 0xFF, 0x80, 0xFF };
-static const GXColor mpLib_804D8134 = { 0xFF, 0x40, 0x40, 0xFF };
-static const GXColor mpLib_804D8138 = { 0xFF, 0x40, 0xC0, 0xFF };
-static const GXColor mpLib_804D813C = { 0xFF, 0xFF, 0xFF, 0xFF };
 
 void mpLib_DrawSpecialPoints(void)
 {
@@ -6515,9 +6708,12 @@ void mpLib_DrawSpecialPoints(void)
     mpLib_DrawCrosses(mpLib_SpawnVtxIds, 0x04, mpLib_804D8128);
     mpLib_DrawCrosses(mpLib_RespawnVtxIds, 0x04, mpLib_804D812C);
     mpLib_DrawCrosses(mpLib_ItemSpawnVtxIds, 0x15, mpLib_804D8130);
-    mpLib_DrawCrosses(mpLib_EnemySpawnVtxIds, 0x50, mpLib_804D8134);
-    mpLib_DrawCrosses(mpLib_TrophySpawnVtxIds, 0x19, mpLib_804D8138);
-    mpLib_DrawCrosses(mpLib_ExitVtxIds, 0x2E, mpLib_804D813C);
+    mpLib_DrawCrosses(&mpLib_ItemSpawnVtxIds[mpLib_EnemySpawnVtxIds], 0x50,
+                      mpLib_804D8134);
+    mpLib_DrawCrosses(&mpLib_ItemSpawnVtxIds[mpLib_TrophySpawnVtxIds], 0x19,
+                      mpLib_804D8138);
+    mpLib_DrawCrosses(&mpLib_ItemSpawnVtxIds[mpLib_ExitVtxIds], 0x2E,
+                      mpLib_804D813C);
 }
 
 void mpLib_8005A2DC(void)
@@ -6532,6 +6728,31 @@ void mpLib_8005A2DC(void)
     }
     HSD_StateInvalidate(-1);
 }
+
+Vec2 mpLib_803BF718[2] = { { -1.0F, -400.0F }, { 1.0F, -400.0F } };
+MapLine mpLib_803BF728 = { 0, 1, -1, -1, -1, -1, 1, 0 };
+MapJoint mpLib_803BF738 = {
+    1, 0, 0, 0, 0, -9.0F, -408.0F, 9.0F, -392.0F, 2,
+};
+MapCollData mpLib_803BF760 = {
+    /*  +0 */ mpLib_803BF718,
+    /*  +4 */ 2,
+    /*  +8 */ &mpLib_803BF728,
+    /*  +C */ 0x00000001,
+    /* +10 */ 0,
+    /* +12 */ 1,
+    /* +14 */ 0,
+    /* +16 */ 0,
+    /* +18 */ 0,
+    /* +1A */ 0,
+    /* +1C */ 0,
+    /* +1E */ 0,
+    /* +20 */ 0,
+    /* +22 */ 0,
+    /* +24 */ &mpLib_803BF738,
+    /* +28 */ 0x00000001,
+    /* +2C */ 0x00000000,
+};
 
 static const GXColor mpLib_804D8140 = { 0xFF, 0xFF, 0xC0, 0xFF };
 static const GXColor mpLib_804D8144 = { 0xFF, 0xFF, 0xFF, 0x80 };

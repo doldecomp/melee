@@ -3,20 +3,29 @@
 #include <placeholder.h>
 
 #include <MSL/math.h>
-#include <MSL/math_ppc.h>
 #include <MSL/trigf.h>
 
-/// @todo Currently 95.55% match - stack frame 8 bytes too large (80 vs 72)
+inline float sqrtf(float x)
+{
+    volatile float y;
+    if (x > 0.0f) {
+        double guess = __frsqrte((double) x); // returns an approximation to
+        guess = .5 * guess * (3.0 - guess * guess * x); // now have 12 sig bits
+        guess = .5 * guess * (3.0 - guess * guess * x); // now have 24 sig bits
+        guess = .5 * guess * (3.0 - guess * guess * x); // now have 32 sig bits
+        y = (float) (x * guess);
+        return y;
+    }
+    return x;
+}
+
 s32 MatToQuat(Mtx m, Quaternion* q)
 {
+    f32 q3[3];
     int nxt[] = { 1, 2, 0 };
     f32 lenCol[3];
-    f32 q3[3];
-    f32 tr;
     f32 s;
-    f32 sc0;
-    f32 sc1;
-    f32 sc2;
+    f32 scale;
     int i;
     int j;
     int k;
@@ -28,37 +37,33 @@ s32 MatToQuat(Mtx m, Quaternion* q)
     lenCol[2] =
         sqrtf(m[0][2] * m[0][2] + m[1][2] * m[1][2] + m[2][2] * m[2][2]);
 
-    sc0 = m[0][0] / lenCol[0];
-    sc1 = m[1][1] / lenCol[1];
-    sc2 = m[2][2] / lenCol[2];
+    s = m[0][0] / lenCol[0] + m[1][1] / lenCol[1] + m[2][2] / lenCol[2];
 
-    tr = sc0 + sc1 + sc2;
-
-    if (tr > 0.0F) {
-        s = sqrtf(1.0F + tr);
+    if (s > 0.0F) {
+        s = sqrtf(1.0F + s);
         q->w = 0.5F * s;
-        sc0 = 0.5F / s;
-        q->x = sc0 * ((m[2][1] / lenCol[1]) - (m[1][2] / lenCol[2]));
-        q->y = sc0 * ((m[0][2] / lenCol[2]) - (m[2][0] / lenCol[0]));
-        q->z = sc0 * ((m[1][0] / lenCol[0]) - (m[0][1] / lenCol[1]));
+        scale = 0.5F / s;
+        q->x = scale * ((m[2][1] / lenCol[1]) - (m[1][2] / lenCol[2]));
+        q->y = scale * ((m[0][2] / lenCol[2]) - (m[2][0] / lenCol[0]));
+        q->z = scale * ((m[1][0] / lenCol[0]) - (m[0][1] / lenCol[1]));
     } else {
         i = 0;
-        if (sc1 > sc0) {
+        if (m[1][1] / lenCol[1] > m[0][0] / lenCol[0]) {
             i = 1;
         }
-        if (sc2 > m[i][i] / lenCol[i]) {
+        if (m[2][2] / lenCol[2] > m[i][i] / lenCol[i]) {
             i = 2;
         }
         j = nxt[i];
         k = nxt[j];
 
-        s = sqrtf(1.0F + ((m[i][i] / lenCol[i]) - (m[j][j] / lenCol[j])) -
-                  (m[k][k] / lenCol[k]));
-        sc0 = 0.5F / s;
+        s = sqrtf(1.0F + (((m[i][i] / lenCol[i]) - (m[j][j] / lenCol[j])) -
+                          (m[k][k] / lenCol[k])));
+        scale = 0.5F / s;
         q3[i] = 0.5F * s;
-        q->w = sc0 * ((m[k][j] / lenCol[j]) - (m[j][k] / lenCol[k]));
-        q3[j] = sc0 * ((m[j][i] / lenCol[i]) + (m[i][j] / lenCol[j]));
-        q3[k] = sc0 * ((m[k][i] / lenCol[i]) + (m[i][k] / lenCol[k]));
+        q->w = scale * ((m[k][j] / lenCol[j]) - (m[j][k] / lenCol[k]));
+        q3[j] = scale * ((m[j][i] / lenCol[i]) + (m[i][j] / lenCol[j]));
+        q3[k] = scale * ((m[k][i] / lenCol[i]) + (m[i][k] / lenCol[k]));
         q->x = q3[0];
         q->y = q3[1];
         q->z = q3[2];
@@ -85,34 +90,24 @@ s32 HSD_QuatLib_8037EB28(Mtx m, Vec3* euler)
     return 0;
 }
 
-/// @todo Currently 87.16% match - temp register allocation (f3/f5, f4/f6
-/// swapped) likely due to mwcc scheduler behavior
 s32 HSD_QuatLib_8037EC4C(Quaternion* p, Quaternion* q, Quaternion* out)
 {
-    f32 py;
-    f32 qx;
-    f32 qy;
-    f32 px;
-    f32 qz;
-    f32 pw;
-    f32 pz;
-    f32 qw;
+    f32 x;
+    f32 y;
+    f32 z;
+    f32 w;
 
-    pw = p->w;
-    qy = q->y;
-    qx = q->x;
-    py = p->y;
-    pz = p->z;
-    px = p->x;
-    qz = q->z;
-    qw = q->w;
+    x = q->w * p->x + p->w * q->x + (p->y * q->z - q->y * p->z);
+    y = q->w * p->y + p->w * q->y + (q->x * p->z - p->x * q->z);
+    z = q->w * p->z + p->w * q->z + (p->x * q->y - q->x * p->y);
+    w = p->w * q->w - (p->z * q->z + (p->x * q->x + p->y * q->y));
 
-    out->x = qw * px + pw * qx + (py * qz - qy * pz);
-    out->y = qw * py + pw * qy + (qx * pz - px * qz);
-    out->z = qw * pz + pw * qz + (px * qy - qx * py);
-    out->w = pw * qw - (pz * qz + (px * qx + py * qy));
+    out->x = x;
+    out->y = y;
+    out->z = z;
+    out->w = w;
 
-    PAD_STACK(24);
+    PAD_STACK(16);
     return 0;
 }
 
@@ -198,9 +193,8 @@ s32 HSD_QuatLib_8037EF28(Quaternion* p, Quaternion* q, Quaternion* out, f32 t)
         out->w = p->z;
 
         if (t < 0.5F) {
-            t2 = 2.0F * t;
-            sp = sinf((f32) (M_PI_2 * (1.0F - t2)));
-            sq = sinf((f32) (M_PI_2 * t2));
+            sp = sinf((f32) (M_PI_2 * (1.0F - (2.0F * t))));
+            sq = sinf((f32) (M_PI_2 * (2.0F * t)));
             out->x = sp * p->x + sq * q->x;
             out->y = sp * p->y + sq * q->y;
             out->z = sp * p->z + sq * q->z;

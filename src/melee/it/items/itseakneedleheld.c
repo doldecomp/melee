@@ -1,6 +1,6 @@
 #include "itseakneedleheld.h"
 
-#include "ft/chara/ftKirby/ftKb_Init.h"
+#include "ft/chara/ftKirby/ftkirbyspecialdonkey.h"
 #include "ft/chara/ftSeak/ftSk_SpecialS.h"
 
 #include "ft/forward.h"

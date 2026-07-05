@@ -71,10 +71,16 @@ typedef struct gmClassic_803DDEC8Data {
 } gmClassic_803DDEC8Data;
 STATIC_ASSERT(sizeof(gmClassic_803DDEC8Data) == 0x2F0);
 
+typedef struct gmClassicSceneData {
+    /* 0x000 */ GameScene scenes[26];
+    /* 0x270 */ gmClassic_803DDEC8Data matchups;
+} gmClassicSceneData;
+STATIC_ASSERT(sizeof(gmClassicSceneData) == 0x560);
+
 extern gmClassic_80490880Data gmClassic_80490880;
 extern gmClassic_803DDEC8Data gmClassic_803DDEC8;
 
-MinorScene gm_803DDC58_MinorScenes[] = {
+GameScene gm_803DDC58_Scenes[] = {
     {
         0x00,
         3,
@@ -82,7 +88,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gmClassic_801B3500,
         NULL,
         {
-            MN_INTRO_EASY,
+            GS_INTRO_EASY,
             &gmClassic_80490880,
             &gmClassic_804D68D0,
         },
@@ -94,7 +100,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gmClassic_801B3A34,
         gmClassic_801B3B40,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -106,7 +112,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gmClassic_801B3500,
         NULL,
         {
-            MN_INTRO_EASY,
+            GS_INTRO_EASY,
             &gmClassic_80490880,
             &gmClassic_804D68D0,
         },
@@ -118,7 +124,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gmClassic_801B3A34,
         gmClassic_801B3B40,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -130,7 +136,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gmClassic_801B3500,
         NULL,
         {
-            MN_INTRO_EASY,
+            GS_INTRO_EASY,
             &gmClassic_80490880,
             &gmClassic_804D68D0,
         },
@@ -142,7 +148,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gmClassic_801B3A34,
         gmClassic_801B3B40,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -154,7 +160,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gmClassic_801B3500,
         NULL,
         {
-            MN_INTRO_EASY,
+            GS_INTRO_EASY,
             &gmClassic_80490880,
             &gmClassic_804D68D0,
         },
@@ -166,7 +172,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gmClassic_801B3A34,
         gmClassic_801B3B40,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -178,7 +184,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gmClassic_801B3500,
         NULL,
         {
-            MN_INTRO_EASY,
+            GS_INTRO_EASY,
             &gmClassic_80490880,
             &gmClassic_804D68D0,
         },
@@ -190,7 +196,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gmClassic_801B3A34,
         gmClassic_801B3B40,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -202,7 +208,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gmClassic_801B3500,
         NULL,
         {
-            MN_INTRO_EASY,
+            GS_INTRO_EASY,
             &gmClassic_80490880,
             &gmClassic_804D68D0,
         },
@@ -214,7 +220,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gmClassic_801B3A34,
         gmClassic_801B3B40,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -226,7 +232,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gmClassic_801B3500,
         NULL,
         {
-            MN_INTRO_EASY,
+            GS_INTRO_EASY,
             &gmClassic_80490880,
             &gmClassic_804D68D0,
         },
@@ -238,7 +244,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gmClassic_801B3A34,
         gmClassic_801B3B40,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -250,7 +256,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gmClassic_801B3500,
         NULL,
         {
-            MN_INTRO_EASY,
+            GS_INTRO_EASY,
             &gmClassic_80490880,
             &gmClassic_804D68D0,
         },
@@ -262,7 +268,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gmClassic_801B3A34,
         gmClassic_801B3B40,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -274,7 +280,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gmClassic_801B3500,
         NULL,
         {
-            MN_INTRO_EASY,
+            GS_INTRO_EASY,
             &gmClassic_80490880,
             &gmClassic_804D68D0,
         },
@@ -286,7 +292,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gmClassic_801B3A34,
         gmClassic_801B3B40,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -298,7 +304,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gmClassic_801B3500,
         NULL,
         {
-            MN_INTRO_EASY,
+            GS_INTRO_EASY,
             &gmClassic_80490880,
             &gmClassic_804D68D0,
         },
@@ -310,7 +316,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gmClassic_801B3A34,
         gmClassic_801B3B40,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -322,7 +328,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gmClassic_801B3500,
         NULL,
         {
-            MN_INTRO_EASY,
+            GS_INTRO_EASY,
             &gmClassic_80490880,
             &gmClassic_804D68D0,
         },
@@ -334,7 +340,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gmClassic_801B3A34,
         gmClassic_801B3B40,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -345,7 +351,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         0,
         NULL,
         gmClassic_801B3F18,
-        { MN_COMING_SOON, NULL, NULL },
+        { GS_COMING_SOON, NULL, NULL },
     },
     {
         0x69,
@@ -354,7 +360,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gmClassic_801B3D44,
         gmClassic_801B3D84,
         {
-            MN_GAMEOVER,
+            GS_GAMEOVER,
             &gmClassic_80470850,
             &gmClassic_80470850,
         },
@@ -366,7 +372,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gmClassic_801B3DD8,
         gmClassic_801B3E44,
         {
-            MN_CSS,
+            GS_CSS,
             &gmClassic_80470708,
             &gmClassic_80470708,
         },
@@ -401,6 +407,7 @@ static gmClassicMatchup* gmClassic_801B2BA4(gmClassicMatchup* arg0, u8* arg1,
     gmClassicMatchup* result;
     gmClassicMatchup* entry;
     gm_803DDEC8Struct* temp;
+    u8* order;
     s32 outer;
     s8 target_char;
     int cur_char;
@@ -409,60 +416,63 @@ static gmClassicMatchup* gmClassic_801B2BA4(gmClassicMatchup* arg0, u8* arg1,
     s32 count;
     s32 stage1;
 
-    target_char = (s8) gmMainLib_8015CDC8()->c_kind;
     result = NULL;
+    target_char = (s8) gmMainLib_8015CDC8()->c_kind;
+    order = arg1;
     outer = 0;
 
-    do {
-        entry = &arg0[*arg1];
-        for (j = 0; j < 3; j++) {
-            cur_char = entry->x02[j];
+    goto check;
+loop:
+    entry = &arg0[*order];
+    for (j = 0; j < 3; j++) {
+        cur_char = entry->x02[j];
 
-            if (cur_char == 0x21) {
-                continue;
-            }
-            if (gm_80164430(entry->x00) == 0) {
-                goto next;
-            }
-            if (gm_80164840(cur_char) == 0) {
-                goto next;
-            }
-            if (cur_char == target_char) {
-                goto next;
-            }
-
-            for (temp = arg2; temp->x0 != 0xD; temp++) {
-                for (k = 0; k < 3; k++) {
-                    if (temp->xC != NULL && cur_char == temp->xC->x02[k]) {
-                        goto next;
-                    }
-                }
-            }
-
-            for (temp = arg2; temp->x0 != 0xD; temp++) {
-                if (temp->xC != NULL) {
-                    stage1 = Stage_8022519C((InternalStageId) entry->x00);
-                    if (stage1 ==
-                        Stage_8022519C((InternalStageId) temp->xC->x00))
-                    {
-                        result = entry;
-                        goto next;
-                    }
-                }
-            }
+        if (cur_char == 0x21) {
+            continue;
         }
-        if (result == NULL) {
+        if (gm_80164430(entry->x00) == 0) {
             goto next;
         }
-        return entry;
-    next:
-        outer++;
-        arg1++;
-        count = 0;
-        while (arg0[count].x00 != 0x148) {
-            count++;
+        if (gm_80164840(cur_char) == 0) {
+            goto next;
         }
-    } while (outer < count);
+        if (cur_char == target_char) {
+            goto next;
+        }
+
+        for (temp = arg2; temp->x0 != 0xD; temp++) {
+            for (k = 0; k < 3; k++) {
+                if (temp->xC != NULL && cur_char == temp->xC->x02[k]) {
+                    goto next;
+                }
+            }
+        }
+
+        for (temp = arg2; temp->x0 != 0xD; temp++) {
+            if (temp->xC != NULL) {
+                stage1 = Stage_8022519C((InternalStageId) entry->x00);
+                if (Stage_8022519C((InternalStageId) temp->xC->x00) == stage1)
+                {
+                    result = entry;
+                    goto next;
+                }
+            }
+        }
+    }
+    if (entry != NULL) {
+        return entry;
+    }
+next:
+    outer++;
+    order++;
+check:
+    count = 0;
+    while (arg0[count].x00 != 0x148) {
+        count++;
+    }
+    if (outer < count) {
+        goto loop;
+    }
 
     if (result != NULL) {
         return result;
@@ -481,12 +491,12 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
 {
     gmClassic_80490880Data* o = &gmClassic_80490880;
     gm_803DDEC8Struct* ptr;
-    gmClassic_803DDEC8Data* d = &gmClassic_803DDEC8;
+    gmClassicSceneData* scene_data = (gmClassicSceneData*) gm_803DDC58_Scenes;
 
     for (ptr = arg0; (u8) ptr->x0 != 0xD; ptr++) {
         if (ptr->x1 & 8) {
             gmClassicMatchup* result =
-                gmClassic_801B2BA4(d->x2B0, o->x80, arg0);
+                gmClassic_801B2BA4(scene_data->matchups.x2B0, o->x80, arg0);
             if (result != NULL) {
                 ptr->xC = result;
             } else {
@@ -500,7 +510,7 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
         u8 flags = ptr->x1;
         if ((flags & 2) && !(flags & 0x20)) {
             gmClassicMatchup* result =
-                gmClassic_801B2BA4(d->x26C, o->x74, arg0);
+                gmClassic_801B2BA4(scene_data->matchups.x26C, o->x74, arg0);
             if (result != NULL) {
                 ptr->xC = result;
             } else {
@@ -514,7 +524,7 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
         u8 flags = ptr->x1;
         if ((flags & 0x10) && !(flags & 0x20)) {
             gmClassicMatchup* result =
-                gmClassic_801B2BA4(d->x1B8, o->x54, arg0);
+                gmClassic_801B2BA4(scene_data->matchups.x1B8, o->x54, arg0);
             if (result != NULL) {
                 ptr->xC = result;
             } else {
@@ -528,7 +538,7 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
         u8 flags = ptr->x1;
         if (flags == 0 || flags == 4) {
             gmClassicMatchup* result =
-                gmClassic_801B2BA4(d->x0CC, o->x2C, arg0);
+                gmClassic_801B2BA4(scene_data->matchups.x0CC, o->x2C, arg0);
             if (result != NULL) {
                 ptr->xC = result;
             } else {
@@ -557,7 +567,7 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
 
     for (ptr = arg0; (u8) ptr->x0 != 0xD; ptr++) {
         if (ptr->x1 & 0x20) {
-            ptr->xC = d->x0C0;
+            ptr->xC = scene_data->matchups.x0C0;
             return ptr;
         }
     }
@@ -567,21 +577,23 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
 void gmClassic_OnLoad(void)
 {
     UnkAllstarData* data;
+    gmClassicSceneData* scene_data = (gmClassicSceneData*) gm_803DDC58_Scenes;
+    gmClassic_80490880Data* o = &gmClassic_80490880;
     gm_803DDEC8Struct* entry;
     s32 i;
-    PAD_STACK(40);
+    PAD_STACK(32);
 
-    for (entry = gmClassic_803DDEC8.x00; entry->x0 != 0x0D; entry++) {
+    for (entry = scene_data->matchups.x00; entry->x0 != 0x0D; entry++) {
         entry->xC = NULL;
     }
 
-    gmClassic_InitMatchupOrder(gmClassic_803DDEC8.x2B0,
+    gmClassic_InitMatchupOrder(scene_data->matchups.x2B0,
                                gmClassic_80490880.x80);
-    gmClassic_InitMatchupOrder(gmClassic_803DDEC8.x26C,
+    gmClassic_InitMatchupOrder(scene_data->matchups.x26C,
                                gmClassic_80490880.x74);
-    gmClassic_InitMatchupOrder(gmClassic_803DDEC8.x1B8,
+    gmClassic_InitMatchupOrder(scene_data->matchups.x1B8,
                                gmClassic_80490880.x54);
-    gmClassic_InitMatchupOrder(gmClassic_803DDEC8.x0CC,
+    gmClassic_InitMatchupOrder(scene_data->matchups.x0CC,
                                gmClassic_80490880.x2C);
 
     data = gm_8017EB30();
@@ -591,7 +603,7 @@ void gmClassic_OnLoad(void)
     for (i = 0; i < 2; i++) {
         s32 j;
         for (j = 0; j < 6; j++) {
-            gm_804908A0[i * 6 + j] = 0;
+            o->x20[i * 6 + j] = 0;
         }
     }
 
@@ -609,7 +621,7 @@ void gmClassic_OnLoad(void)
     data->x6C = gm_8017EC00;
     data->x70 = gm_8017EC50;
 
-    gm_SetSceneMinor(0x70U);
+    gm_SetScene(0x70U);
     gm_80172174();
     Ground_801C5A28();
 }
@@ -625,7 +637,7 @@ void gmClassic_OnInit(void)
     temp_r3->x5 = 0;
 }
 
-void gmClassic_801B3500(MinorScene* arg0)
+void gmClassic_801B3500(GameScene* arg0)
 {
     gmClassicIntroData* sd;
     gm_803DDEC8Struct* entry;
@@ -706,9 +718,11 @@ void gmClassic_801B3500(MinorScene* arg0)
 
     gm_8017DB88(ad->x0.xC.x24, entry->x1, ad->x0.cpu_level,
                 (u8) gm_8017BE84(arg0->idx), sd->x10, sd->x0D[0],
-                (u8(*)(s32, s32, u8)) ad->x58, (u8(*)(s32, s32, u8)) ad->x5C,
-                (u8(*)(s32, s32, u8)) ad->x60, (f32(*)(s32, s32)) ad->x6C,
-                (f32(*)(s32, s32)) ad->x70);
+                (u8 (*)(s32, s32, u8))(Event) ad->x58,
+                (u8 (*)(s32, s32, u8))(Event) ad->x5C,
+                (u8 (*)(s32, s32, u8))(Event) ad->x60,
+                (f32 (*)(s32, s32))(Event) ad->x6C,
+                (f32 (*)(s32, s32))(Event) ad->x70);
 
     for (i = 1; i < 3; i++) {
         sd->x0D[i] = gm_8017DB6C((gm_8017DB6C_arg0_t*) ad->x0.xC.x24, i - 1);
@@ -846,7 +860,7 @@ void gmClassic_801B3500(MinorScene* arg0)
     lbAudioAx_80027168();
 }
 
-void gmClassic_801B3A34(MinorScene* arg0)
+void gmClassic_801B3A34(GameScene* arg0)
 {
     StartMeleeData* temp_r30;
     gm_803DDEC8Struct* temp_r31;
@@ -885,7 +899,7 @@ void gmClassic_801B3A34(MinorScene* arg0)
     gm_8016F088(new_var);
 }
 
-void gmClassic_801B3B40(MinorScene* arg0)
+void gmClassic_801B3B40(GameScene* arg0)
 {
     MatchExitInfo* mei;
     UnkAllstarData* asd;
@@ -960,19 +974,19 @@ void gmClassic_801B3B40(MinorScene* arg0)
     }
 }
 
-void gmClassic_801B3D44(MinorScene* scene)
+void gmClassic_801B3D44(GameScene* scene)
 {
     struct DebugGameOverData* temp_r31 = gm_801A427C(scene);
     gm_8017C9A8(temp_r31, &gm_8017EB30()->x0, 1);
 }
 
-void gmClassic_801B3D84(MinorScene* scene)
+void gmClassic_801B3D84(GameScene* scene)
 {
     DebugGameOverData* temp_r30 = gm_801A4284(scene);
     gm_8017CA38(temp_r30, &gm_8017EB30()->x0, gmMainLib_8015CDC8(), 1);
 }
 
-void gmClassic_801B3DD8(MinorScene* scene)
+void gmClassic_801B3DD8(GameScene* scene)
 {
     CSSData* css = gm_801A427C(scene);
     struct gmm_x0_528_t* temp_r31 = gmMainLib_8015CDC8();
@@ -981,7 +995,7 @@ void gmClassic_801B3DD8(MinorScene* scene)
     lbDvd_800174BC();
 }
 
-void gmClassic_801B3E44(MinorScene* scene)
+void gmClassic_801B3E44(GameScene* scene)
 {
     CSSData* temp_r30 = gm_801A4284(scene);
     gmm_x0_528_t* temp_r29 = gmMainLib_8015CDC8();
@@ -1001,12 +1015,12 @@ void gmClassic_801B3E44(MinorScene* scene)
     temp_r31->x0.stocks = temp_r29->stocks;
     temp_r31->x0.x4 = temp_r29->x4;
     gmClassic_801B2D54(r4);
-    gm_SetScenePendingMinor(temp_r29->x5 << 3);
+    gm_SetPendingScene(temp_r29->x5 << 3);
     gm_80168F88();
 }
 
-void gmClassic_801B3F18(MinorScene* scene)
+void gmClassic_801B3F18(GameScene* scene)
 {
-    gm_801A42E8(MJ_MENU);
+    gm_801A42E8(GM_MENU);
     gm_801A42D4();
 }

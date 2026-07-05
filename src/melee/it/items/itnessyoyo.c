@@ -2,10 +2,6 @@
 
 #include "math.h"
 
-#include <placeholder.h>
-
-#include "baselib/forward.h"
-
 #include "ft/chara/ftNess/ftNs_AttackHi4.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
@@ -19,12 +15,19 @@
 #include "lb/lbvector.h"
 #include "mp/mpcoll.h"
 
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
-#include <baselib/gobjuserdata.h>
 
-extern double __frsqrte(double);
+ItemStateTable it_803F7558[] = {
+    { -1, itNessyoyo_UnkMotion3_Anim, itNessyoyo_UnkMotion0_Phys, NULL },
+    { -1, itNessyoyo_UnkMotion3_Anim, itNessyoyo_UnkMotion1_Phys, NULL },
+    { -1, itNessyoyo_UnkMotion3_Anim, itNessyoyo_UnkMotion2_Phys, NULL },
+    { -1, itNessyoyo_UnkMotion3_Anim, itNessyoyo_UnkMotion3_Phys, NULL },
+};
+
+const Vec3 it_803B8698 = { 0.0f, 0.0f, 0.0f };
+
+static const f32 it_zero = 0.0f;
 
 void it_802BE598(Item_GObj* gobj)
 {
@@ -44,12 +47,13 @@ void it_802BE5D8(void* arg, float frame)
     HSD_JObj* jobj = ip->xDD4_itemVar.nessyoyo.x18;
     HSD_JObjRemoveAnimAll(jobj);
     HSD_JObjAddAnimAll(jobj, NULL, attrs->x58_yoyo_matanim, NULL);
+    /// @todo Eliminate this no-op branch (pools 0.0f into .sdata2 slot 0).
+    if (frame == 0.0f) {
+    }
     lb_8000BA0C(jobj, 1.0F);
     HSD_JObjReqAnimAll(jobj, frame);
     HSD_JObjAnimAll(jobj);
 }
-
-extern const Vec3 it_803B8698;
 
 static inline HSD_JObj* it_802BE65C_LoadString(Item* ip)
 {
@@ -218,8 +222,6 @@ void itNessyoyo_UnkMotion0_Phys(Item_GObj* gobj)
     it_802BF900(GET_ITEM(gobj));
 }
 
-extern const f32 it_804DD150;
-
 void itNessyoyo_UnkMotion1_Phys(Item_GObj* gobj)
 {
     Vec3 pos;
@@ -230,9 +232,9 @@ void itNessyoyo_UnkMotion1_Phys(Item_GObj* gobj)
     ItemLink* link1 = ip->xDD4_itemVar.nessyoyo.x8;
 
     PSMTXIdentity(m);
-    m[0][3] = it_804DD150;
-    m[1][3] = it_804DD150;
-    m[2][3] = it_804DD150;
+    m[0][3] = 0.0f;
+    m[1][3] = 0.0f;
+    m[2][3] = 0.0f;
     HSD_JObjSetupMatrix(link1->jobj);
     PSMTXConcat(link1->jobj->mtx, m, m);
     pos.x = m[0][3];
@@ -252,9 +254,9 @@ void itNessyoyo_UnkMotion2_Phys(Item_GObj* gobj)
     ItemLink* link1 = ip->xDD4_itemVar.nessyoyo.x8;
 
     PSMTXIdentity(m);
-    m[0][3] = it_804DD150;
-    m[1][3] = it_804DD150;
-    m[2][3] = it_804DD150;
+    m[0][3] = 0.0f;
+    m[1][3] = 0.0f;
+    m[2][3] = 0.0f;
     HSD_JObjSetupMatrix(link1->jobj);
     PSMTXConcat(link1->jobj->mtx, m, m);
     pos.x = m[0][3];
@@ -275,18 +277,18 @@ void itNessyoyo_UnkMotion3_Phys(Item_GObj* gobj)
     ItemLink* link2 = ip->xDD4_itemVar.nessyoyo.xC;
 
     PSMTXIdentity(m);
-    m[0][3] = it_804DD150;
-    m[1][3] = it_804DD150;
-    m[2][3] = it_804DD150;
+    m[0][3] = 0.0f;
+    m[1][3] = 0.0f;
+    m[2][3] = 0.0f;
     HSD_JObjSetupMatrix(link2->jobj);
     PSMTXConcat(link2->jobj->mtx, m, m);
     pos.x = m[0][3];
     pos.y = m[1][3];
     pos.z = m[2][3];
     if (it_802BF800(link2, &pos, attrs, ip, ip->xDD4_itemVar.nessyoyo.x4)) {
-        zero_vec.z = it_804DD150;
-        zero_vec.y = it_804DD150;
-        zero_vec.x = it_804DD150;
+        zero_vec.z = 0.0f;
+        zero_vec.y = 0.0f;
+        zero_vec.x = 0.0f;
         it_802C0010(gobj, &zero_vec);
         {
             HSD_GObj* owner = ip->xDD4_itemVar.nessyoyo.x10;
@@ -311,12 +313,11 @@ static inline bool itNessyoyo_UnkMotion3_Anim_inline(Item_GObj* gobj)
     return true;
 }
 
-bool itNessyoyo_UnkMotion3_Anim(Item_GObj* gobj)
+static inline void itNessyoyo_UnkMotion3_Anim_UpdateRotation(Item* ip)
 {
-    Item* ip = GET_ITEM(gobj);
     Fighter* fp = GET_FIGHTER(ip->xDD4_itemVar.nessyoyo.x10);
     HSD_JObj* child;
-    PAD_STACK(24);
+    PAD_STACK(16);
     // probably should be HSD_JObjGetChild
     if (ip->xDD4_itemVar.nessyoyo.x18 == NULL) {
         child = NULL;
@@ -329,6 +330,13 @@ bool itNessyoyo_UnkMotion3_Anim(Item_GObj* gobj)
         rot += fp->fv.ns.x223C;
         HSD_JObjSetRotationX(child, rot);
     }
+}
+
+bool itNessyoyo_UnkMotion3_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(16);
+    itNessyoyo_UnkMotion3_Anim_UpdateRotation(ip);
     if (itNessyoyo_UnkMotion3_Anim_inline(gobj)) {
         it_802BE958_inline(gobj);
         return true;
@@ -446,6 +454,30 @@ s32 it_802BF28C(ItemLink* link, Vec3* target, itYoyoAttributes* attrs,
     }
 }
 
+static inline void it_802BF4A0_adjust_tail(ItemLink* cur, Vec3* target,
+                                           Vec3* dir2, f32 size)
+{
+    ItemLink* tail;
+    ItemLink* prev;
+
+    prev = cur->prev;
+    tail = cur;
+    it_802A3C98(&tail->pos, target, dir2);
+    cur->pos.x = (dir2->x * size) + target->x;
+    cur->pos.y = (dir2->y * size) + target->y;
+    cur->pos.z = (dir2->z * size) + target->z;
+
+    while (prev != NULL) {
+        if (it_802A3C98(&prev->pos, &tail->pos, dir2) > size) {
+            prev->pos.x = (dir2->x * size) + tail->pos.x;
+            prev->pos.y = (dir2->y * size) + tail->pos.y;
+            prev->pos.z = (dir2->z * size) + tail->pos.z;
+        }
+        tail = prev;
+        prev = prev->prev;
+    }
+}
+
 s32 it_802BF4A0(ItemLink* link, Vec3* target, itYoyoAttributes* attrs,
                 Item* ip)
 {
@@ -455,8 +487,6 @@ s32 it_802BF4A0(ItemLink* link, Vec3* target, itYoyoAttributes* attrs,
     Vec3 dir2;
     ItemLink* cur;
     ItemLink* next;
-    ItemLink* tail;
-    ItemLink* prev;
     s32 coll_flags;
     s32 count;
     f32 size;
@@ -528,28 +558,13 @@ s32 it_802BF4A0(ItemLink* link, Vec3* target, itYoyoAttributes* attrs,
         next = next->next;
     }
 
-    prev = cur->prev;
-    tail = cur;
-    it_802A3C98(&tail->pos, target, &dir2);
-    cur->pos.x = (dir2.x * size) + target->x;
-    cur->pos.y = (dir2.y * size) + target->y;
-    cur->pos.z = (dir2.z * size) + target->z;
-
-    while (prev != NULL) {
-        if (it_802A3C98(&prev->pos, &tail->pos, &dir2) > size) {
-            prev->pos.x = (dir2.x * size) + tail->pos.x;
-            prev->pos.y = (dir2.y * size) + tail->pos.y;
-            prev->pos.z = (dir2.z * size) + tail->pos.z;
-        }
-        tail = prev;
-        prev = prev->prev;
-    }
+    it_802BF4A0_adjust_tail(cur, target, &dir2, size);
 
     link->vel.x *= 0.9f;
     return 2;
 }
 
-bool it_802BF800(ItemLink* cur, Vec3* pos, itYoyoAttributes* attrs, Item* ip,
+bool it_802BF800(ItemLink* item, Vec3* pos, itYoyoAttributes* attrs, Item* ip,
                  f32 dist)
 {
     u8 _padA[16];
@@ -557,7 +572,8 @@ bool it_802BF800(ItemLink* cur, Vec3* pos, itYoyoAttributes* attrs, Item* ip,
     f32 len;
     f32 step;
     f32 size = attrs->xC_SIZE * ftLib_80086A0C(ip->owner);
-    ItemLink* prev = cur->prev;
+    ItemLink* prev = item->prev;
+    ItemLink* cur = item;
     while (prev != NULL && !cur->x2C_b0) {
         cur = prev;
         prev = prev->prev;
@@ -581,7 +597,7 @@ bool it_802BF800(ItemLink* cur, Vec3* pos, itYoyoAttributes* attrs, Item* ip,
     return true;
 }
 
-extern const Vec3 it_803B86A4;
+const Vec3 it_803B86A4 = { 0.0f, 0.0f, 1.8f };
 
 void it_802BF900(Item* ip)
 {
@@ -631,7 +647,7 @@ void it_802BFAFC(Item* ip, Vec3* target)
     u8 _pad[4];
     Mtx m;
     f32 scale;
-    u8 _pad2[16];
+    u8 _pad2[8];
 
     while (!link->x2C_b0) {
         link = link->prev;
@@ -654,7 +670,7 @@ void it_802BFAFC(Item* ip, Vec3* target)
             prev_pos = link->pos;
         }
 
-        jobj = link->gobj->hsd_obj;
+        jobj = GET_JOBJ(link->gobj);
         link_pos = link->pos;
         HSD_JObjSetTranslate(jobj, &link_pos);
 
@@ -727,7 +743,7 @@ static inline float my_sqrtf(float x)
     static const double _half = .5;
     static const double _three = 3.0;
 
-    u8 _[12] = { 0 };
+    u32 _0 = 0, _1 = 0, _2 = 0;
 
     volatile float y;
     if (x > 0) {
@@ -752,9 +768,9 @@ void it_802BFEC4(Item_GObj* gobj)
     ItemLink* link1 = ip->xDD4_itemVar.nessyoyo.x8;
 
     PSMTXIdentity(m);
-    m[0][3] = it_804DD150;
-    m[1][3] = it_804DD150;
-    m[2][3] = it_804DD150;
+    m[0][3] = 0.0f;
+    m[1][3] = 0.0f;
+    m[2][3] = 0.0f;
     HSD_JObjSetupMatrix(link2->jobj);
     PSMTXConcat(link2->jobj->mtx, m, m);
     ip->xDD4_itemVar.nessyoyo.x4 =
@@ -773,9 +789,9 @@ void it_802C0010(Item_GObj* gobj, Vec3* vel)
     ItemLink* link1 = GET_ITEM(gobj)->xDD4_itemVar.nessyoyo.x8;
 
     PSMTXIdentity(m);
-    m[0][3] = it_804DD150;
-    m[1][3] = it_804DD150;
-    m[2][3] = it_804DD150;
+    m[0][3] = 0.0f;
+    m[1][3] = 0.0f;
+    m[2][3] = 0.0f;
     HSD_JObjSetupMatrix(link1->jobj);
     PSMTXConcat(link1->jobj->mtx, m, m);
     pos.x = m[0][3];
@@ -789,38 +805,12 @@ void it_802C0010(Item_GObj* gobj, Vec3* vel)
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
 }
 
-#ifdef MWERKS_GEKKO
-
-#pragma push
-asm void it_2725_Logic59_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
-{
-    // clang-format off
-    nofralloc
-    mflr r0
-    stw r0, 0x4(r1)
-    stwu r1, -0x20(r1)
-    stw r31, 0x1c(r1)
-    stw r30, 0x18(r1)
-    mr r30, r4
-    lwz r31, 0x2c(r3)
-    bl it_8026B894
-    lwz r0, 0xde4(r31)
-    cmplw r0, r30
-    lwz r0, 0x24(r1)
-    lwz r31, 0x1c(r1)
-    lwz r30, 0x18(r1)
-    addi r1, r1, 0x20
-    mtlr r0
-    blr
-    // clang-format on
-}
-#pragma pop
-
-#else
-
 void it_2725_Logic59_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
-    NOT_IMPLEMENTED;
+    Item* ip = GET_ITEM(gobj);
+    it_8026B894(gobj, ref_gobj);
+    {
+        HSD_GObj* volatile* owner_ptr = &ip->xDD4_itemVar.nessyoyo.x10;
+        (void) ((*owner_ptr == ref_gobj) ? 0 : 0);
+    }
 }
-
-#endif

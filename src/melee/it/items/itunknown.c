@@ -6,7 +6,9 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/it_279C.h"
 #include "it/item.h"
+#include "it/itmaplib.h"
 #include "lb/lbvector.h"
 
 #include <baselib/random.h>
@@ -97,7 +99,7 @@ void it_802CE8D0(Item_GObj* gobj)
     Vec3 cam_pos;
     Vec3 dir;
 
-    HSD_JObjSetFlagsAll(gobj->hsd_obj, 0x10);
+    HSD_JObjSetFlagsAll(gobj->hsd_obj, JOBJ_HIDDEN);
     ip->x40_vel.x = 0.0f;
     ip->x40_vel.y = 0.0f;
     ip->x40_vel.z = 0.0f;

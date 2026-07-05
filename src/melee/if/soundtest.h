@@ -13,7 +13,7 @@
 /* 2FF934 */ void un_802FF934(void);
 /* 2FF958 */ int un_802FF958(void);
 /* 2FF99C */ int un_802FF99C(int);
-/* 2FF9DC */ UNK_RET un_802FF9DC(UNK_PARAMS);
+/* 2FF9DC */ s32 un_802FF9DC(void);
 /* 2FFB58 */ int un_802FFB58(int);
 /* 2FFBAC */ int un_802FFBAC(int);
 /* 2FFC30 */ bool un_802FFC30(void);

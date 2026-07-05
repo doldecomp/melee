@@ -19,7 +19,7 @@ typedef struct {
 static unk_struct_0_t gm_804D6940;
 static u32 gm_804D6948[2];
 
-MinorScene gm_803DFDD8_MinorScenes[] = {
+GameScene gm_803DFDD8_Scenes[] = {
     {
         0,
         1,
@@ -35,7 +35,7 @@ MinorScene gm_803DFDD8_MinorScenes[] = {
     },
 };
 
-void gm_801BF948(MinorScene* scene)
+void gm_801BF948(GameScene* scene)
 {
     unk_struct_0_t* temp_r3 = gm_801A427C(scene);
     temp_r3->x4 = 0;
@@ -56,30 +56,30 @@ enum {
     LANG_JP = 0,
 };
 
-void gm_801BF9A8(MinorScene* data)
+void gm_801BF9A8(GameScene* data)
 {
     struct sceneData* scene_data = gm_801A4284(data);
 
-    if (!un_803048C0(TROPHY_PIKMIN)) {
+    if (!Toy_803048C0(TROPHY_PIKMIN)) {
         if (!lb_8001C2D8(0, "01",
                          lbLang_GetLanguageSetting() == LANG_JP ? "GPIJ"
                                                                 : "GPIE",
                          "Pikmin dataFile"))
         {
-            un_803124BC();
-            Trophy_SetUnlockState(TROPHY_PIKMIN, true);
+            Toy_803124BC();
+            Toy_SetUnlockState(TROPHY_PIKMIN, true);
         }
     }
 
     // Set scene exit callback?
     gm_801A4330(lb_8001CE78);
 
-    // Enter major scene
+    // Enter mode
     // Gekko "boot to CSS" code changes scene_id to a hardcoded 2
     gm_801A42F8(scene_data->scene_id);
 }
 
-MinorScene gm_803DFE18_MinorScenes[] = {
+GameScene gm_803DFE18_Scenes[] = {
     {
         0,
         3,
@@ -95,7 +95,7 @@ MinorScene gm_803DFE18_MinorScenes[] = {
     },
 };
 
-void gm_801BFA3C(MinorScene* scene)
+void gm_801BFA3C(GameScene* scene)
 {
     unk_struct_0_t* temp_r3 = gm_801A427C(scene);
     temp_r3->x4 = 0;

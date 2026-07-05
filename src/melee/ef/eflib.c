@@ -26,7 +26,7 @@
 #include "ft/inlines.h"
 #include "ftCommon/ftCo_Bury.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 #include "MSL/math.h"
 
 #include <runtime.h>
@@ -147,7 +147,8 @@ inline HSD_Generator* eflib_generator_add_appsrt(HSD_Generator* generator,
             {                                                                 \
                 _parent = NULL;                                               \
             }                                                                 \
-            else {                                                            \
+            else                                                              \
+            {                                                                 \
                 _parent = (_jobj)->parent;                                    \
             }                                                                 \
         } while (_parent != NULL);                                            \
@@ -682,7 +683,7 @@ void efLib_particles_proc_aux(HSD_GObj* gobj)
 HSD_Generator* efLib_CreateGenerator(s32 gfx_id, Vec3* pos)
 {
     HSD_Generator* generator;
-    u8 linkNo;
+    int linkNo;
 
     linkNo = 0;
     switch (gfx_id) {
@@ -1298,9 +1299,9 @@ void efLib_Cb_ftMr_SpecialLw(EF_Effect* effect)
     fighter = GET_FIGHTER(effect->parent_gobj);
 
     if (fighter->motion_id == 349) {
-        HSD_JObjClearFlagsAll(eff_child_nxt_jobj, 0x10U);
+        HSD_JObjClearFlagsAll(eff_child_nxt_jobj, JOBJ_HIDDEN);
     } else {
-        HSD_JObjSetFlagsAll(eff_child_nxt_jobj, 0x10U);
+        HSD_JObjSetFlagsAll(eff_child_nxt_jobj, JOBJ_HIDDEN);
     }
     if ((fighter->cmd_vars[3] != 0U) &&
         (*(s32*) &fighter->mv.co.common.x4.z != 0))
@@ -1328,9 +1329,9 @@ void efLib_Cb_ftLg_SpecialLw(EF_Effect* effect)
     fighter = GET_FIGHTER(effect->parent_gobj);
 
     if (fighter->motion_id == 357) {
-        HSD_JObjClearFlagsAll(eff_child_nxt_jobj, 0x10U);
+        HSD_JObjClearFlagsAll(eff_child_nxt_jobj, JOBJ_HIDDEN);
     } else {
-        HSD_JObjSetFlagsAll(eff_child_nxt_jobj, 0x10U);
+        HSD_JObjSetFlagsAll(eff_child_nxt_jobj, JOBJ_HIDDEN);
     }
 
     if ((fighter->cmd_vars[3] != 0U) &&
@@ -1355,9 +1356,9 @@ void efLib_Cb_ftKp_SpecialHi(EF_Effect* effect)
     jobj_1 = GET_JOBJ(effect->gobj);
     jobj_2 = GET_JOBJ(effect->next->gobj);
     if ((fighter = GET_FIGHTER(effect->parent_gobj))->motion_id == 359) {
-        HSD_JObjClearFlagsAll(jobj_2, 0x10U);
+        HSD_JObjClearFlagsAll(jobj_2, JOBJ_HIDDEN);
     } else {
-        HSD_JObjSetFlagsAll(jobj_2, 0x10U);
+        HSD_JObjSetFlagsAll(jobj_2, JOBJ_HIDDEN);
     }
     if ((fighter->cmd_vars[2] & 1) && ((s32) fighter->mv.co.common.x10 != 0)) {
         rotate_z = -atan2f(fighter->coll_data.floor.normal.x,
@@ -1416,7 +1417,7 @@ void efLib_SetTevKonstColor(HSD_JObj* jobj, s32 count, u32 konst, u32 tev0)
 
 /* 458F60 */ EF_ParamEntry efLib_ParamTable[0x8];
 
-void efLib_SetParamAlpha(HSD_GObj* gobj, u8 alpha, f32 unused_1, f32 unused_2)
+void efLib_SetParamAlpha(HSD_GObj* gobj, u8 alpha)
 {
     s32 idx;
 

@@ -10,7 +10,7 @@
 #include "ft/ftdemo.h"
 #include "ft/ftlib.h"
 #include "ft/types.h"
-#include "ftKirby/ftKb_Init.h"
+#include "ftKirby/ftkirby.h"
 #include "gm/gm_unsplit.h"
 #include "if/ifstatus.h"
 #include "lb/lbarchive.h"
@@ -97,8 +97,7 @@ static inline bool hasExtraFighterId(ftMapping* data)
 static inline void Player_CheckSlot(int slot)
 {
     if (slot < 0 || !(slot < PL_SLOT_MAX)) {
-        OSReport("cant get player struct! %d\n", slot);
-        __assert(__FILE__, 102, "0");
+        HSD_ASSERTREPORT(102, 0, "cant get player struct! %d\n", slot);
     }
 }
 

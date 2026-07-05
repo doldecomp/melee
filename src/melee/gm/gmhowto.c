@@ -10,7 +10,7 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbmthp.h>
 
-static int gm_803DD2C0[] = {
+static u32 gm_803DD2C0[] = {
     1,  19, 856, 1,  1,   85, 279, 1,  1,   59,  17,  1,  1,     59, 19,
     1,  1,  59,  35, 1,   1,  27,  37, 1,   1,   59,  43, 1,     1,  59,
     39, 1,  1,   59, 499, 1,  1,   67, 892, 1,   240, 2,  63,    1,  1,
@@ -66,11 +66,11 @@ void gm_801ACD8C_OnFrame(void)
         }
         if (gm_801A36A0(4) & 0x1100) {
             lbAudioAx_80024030(1);
-            gm_801A42E8(MJ_TITLE);
+            gm_801A42E8(GM_TITLE);
             gm_801A42D4();
         } else if (gmMainLib_8015DB00() != 5) {
             gmMainLib_8015DB18();
-            gm_SetScenePendingMinor(0);
+            gm_SetPendingScene(0);
         }
     }
 }

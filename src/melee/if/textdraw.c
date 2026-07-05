@@ -1,5 +1,7 @@
 #include "textdraw.h"
 
+#include "platform.h"
+
 #include "if/types.h"
 
 #include <printf.h>
@@ -52,7 +54,14 @@
 };
 
 /// .bss
-/* 4A1FD8 */ static DevText devtext_pool[32];
+
+/// @note Not necessarily a struct but definitely 0x6B0 unallocated.
+///       #DevText is definitely size 0x34 based on #DevText_InitPool.
+/* 4A1FD8 */ struct DevText_Pool {
+    struct DevText entries[32];
+    char pad[0x6B0 - 0x680];
+} devtext_pool;
+STATIC_ASSERT(sizeof(struct DevText_Pool) == 0x6B0);
 
 /// .sbss
 /* 4D6E18 */ static DevText* devtext_drawlist;
@@ -114,34 +123,37 @@ HSD_GObj* DevText_GetGObj(void)
     return devtext_gobj;
 }
 
+#pragma push
+#pragma dont_inline on
 void DevText_InitPool(void)
 {
-    DevText* text = devtext_pool;
+    DevText* text = devtext_pool.entries;
     int i;
-    devtext_pool[0].prev = NULL;
+    devtext_pool.entries[0].prev = NULL;
     for (i = 0; i < 31; i++) {
-        devtext_pool[i + 1].prev = &devtext_pool[i];
-        devtext_pool[i].next = &devtext_pool[i + 1];
+        devtext_pool.entries[i + 1].prev = &devtext_pool.entries[i];
+        devtext_pool.entries[i].next = &devtext_pool.entries[i + 1];
     }
-    devtext_pool[31].next = NULL;
-    devtext_poolhead = devtext_pool;
+    devtext_pool.entries[31].next = NULL;
+    devtext_poolhead = devtext_pool.entries;
     devtext_drawlist = NULL;
 }
+#pragma pop
 
 void DevText_Remove(DevText** ptext)
 {
     DevText* text = *ptext;
-    struct DevText* new_var; // Permuter slop
-    DevText* new_var3;       // Permuter slop
-    new_var = text->next;
-    if (new_var) {
-        new_var->prev = text->prev;
+    DevText* next;
+    DevText* cur;
+    next = text->next;
+    if (next) {
+        next->prev = text->prev;
     }
-    new_var3 = *ptext;
+    cur = *ptext;
     if ((*ptext)->prev) {
         (*ptext)->prev->next = (*ptext)->next;
     } else {
-        if (new_var3->next != 0) {
+        if (cur->next != 0) {
             *ptext = (*ptext)->next;
         } else {
             *ptext = NULL;
@@ -193,27 +205,40 @@ void DevText_SetupCObj(void)
 
 void DevText_Draw(DevText* text)
 {
-    PAD_STACK(24);
+    PAD_STACK(8);
     hsd_80391A04(text->scale_x, text->scale_y, text->line_width);
     if ((text->flags & DEVTEXT_FLAG_HIDEBACKGROUND) == 0) {
-        DrawRectangle(text->x - 8, text->y - 8, text->scale_x * text->w + 8,
-                      text->scale_y * text->h + 8, &text->bg_color);
-        DrawRectangle(text->x - 4, text->y - 4, text->scale_x * text->w + 4,
-                      text->scale_y * text->h + 4, &text->bg_color);
+        GXColor color = text->bg_color;
+        {
+            GXColor* color_ptr = &color;
+            DrawRectangle(text->x - 8, text->y - 8,
+                          text->scale_x * text->w + 8,
+                          text->scale_y * text->h + 8, color_ptr);
+        }
+        {
+            GXColor color = text->bg_color;
+            GXColor* color_ptr = &color;
+            DrawRectangle(text->x - 4, text->y - 4,
+                          text->scale_x * text->w + 4,
+                          text->scale_y * text->h + 4, color_ptr);
+        }
     }
     if ((text->flags & DEVTEXT_FLAG_HIDETEXT) == 0) {
-        int row = 0;
+        GXColor color;
+        GXColor* color_ptr = &color;
         int y = text->y;
+        int row = 0;
         while (row < text->h) {
-            int col = 0;
             int x = text->x;
+            int col = 0;
             while (col < text->w) {
                 int index = (col + text->w * row) * 2;
-                int chr = text->buf[index];
+                u8* buf = (u8*) &text->buf[index];
+                s8 chr = buf[0];
+                u8 color_idx = (buf[1] & 0xC0) >> 6;
                 if (chr) {
-                    GXColor* color =
-                        &text->text_colors[text->buf[index + 1] >> 6];
-                    DrawASCII(chr, x, y, color);
+                    color = text->text_colors[color_idx];
+                    DrawASCII(chr, x, y, color_ptr);
                 }
                 x += text->scale_x;
                 col++;
@@ -221,18 +246,16 @@ void DevText_Draw(DevText* text)
             y += text->scale_y;
             row++;
         }
-    }
-    if ((text->flags & DEVTEXT_FLAG_SHOWCURSOR) == 1) {
-        text->unk++;
-        if (text->unk < 16) {
-            if (8 < text->unk) {
+        if (text->flags & DEVTEXT_FLAG_SHOWCURSOR) {
+            text->unk++;
+            if (text->unk > 16) {
+                text->unk = 0;
+            } else if (8 < text->unk) {
                 GXColor color = { 0xFF, 0xFF, 0xFF, 0xC0 };
                 DrawRectangle(text->x + text->scale_x * text->cursor_x,
-                              text->y + text->scale_y * text->cursor_y,
+                              text->y + text->scale_y * text->cursor_y - 4,
                               text->scale_x, text->scale_y, &color);
             }
-        } else {
-            text->unk = 0;
         }
     }
 }
@@ -252,6 +275,8 @@ void DevText_DrawAll(HSD_GObj* gobj, int pass)
     }
 }
 
+#pragma push
+#pragma dont_inline on
 void DevText_CreateCObj(int classifier, int p_link, int gobj_priority,
                         int gx_link, u8 gx_priority)
 {
@@ -267,11 +292,13 @@ void DevText_CreateCObj(int classifier, int p_link, int gobj_priority,
         }
     }
 }
+#pragma pop
 
 HSD_GObj* DevText_Setup(int classifier, int p_link, int priority, int gx_link,
                         int render_priority, u8 camera_priority)
 {
     HSD_GObj* gobj;
+    PAD_STACK(8);
 
     devtext_setup_classifier = classifier;
     devtext_setup_p_link = p_link;
@@ -286,7 +313,7 @@ HSD_GObj* DevText_Setup(int classifier, int p_link, int priority, int gx_link,
                        devtext_setup_priority);
     if (gobj) {
         GObj_SetupGXLink(gobj, DevText_DrawAll, devtext_setup_gx_link,
-                         devtext_setup_render_priority);
+                         devtext_setup_render_priority & 0xFF);
     }
     devtext_gobj = gobj;
     return devtext_gobj;

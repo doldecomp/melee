@@ -524,8 +524,8 @@ static inline void doEndColl(Fighter_GObj* gobj)
                     NULL, &lpos);
         rpos.z = lpos.z = 0;
         item_gobj = fp->item_gobj;
-        it_802A850C(fp->fv.lk.arrow_gobj, &rpos, &lpos, 5 * deg_to_rad,
-                    fp->mv.lk.specialn.x0.y, da->x0);
+        itLinkArrow_802A850C(fp->fv.lk.arrow_gobj, &rpos, &lpos,
+                             5 * deg_to_rad, fp->mv.lk.specialn.x0.y, da->x0);
         ftLk_SpecialN_UnsetArrow(gobj);
         fp->item_gobj = item_gobj;
         ftpickupitem_80094818(gobj, false);

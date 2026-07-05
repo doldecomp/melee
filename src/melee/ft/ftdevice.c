@@ -7,18 +7,10 @@
 #include <dolphin/os/OSError.h>
 #include <baselib/debug.h>
 
-#pragma force_active on
-
-/* literal */ extern char ftDevice_803C6B18[];
-/* literal */ extern char ftDevice_803C6B40[];
-/* literal */ extern char ftDevice_803C6B4C[];
-/* literal */ extern char ftDevice_803C6B78[];
-/* literal */ extern char ftCo_804D3C18[];
-
 struct ftDeviceUnk3 ft_80459A68[4];
-static int ft_804D6570;
 struct ftDeviceUnk4 ft_804D6578;
 int ftDevice_BuryThingCount;
+int ft_804D6570;
 
 ColorOverlay* ftCo_800C0658(Fighter* fp)
 {
@@ -49,27 +41,25 @@ void ftCo_800C06C0(void)
     {
         int i;
         for (i = 0; i < 4; i++) {
-            ft_80459A68[i].ground = 0;
+            ft_80459A68[i].ground = NULL;
         }
     }
 }
 
 void ftCo_800C06E8(Ground_GObj* gobj, int arg1, void* func)
 {
-    struct ftDeviceUnk3* base = ft_80459A68;
     int i;
 
     for (i = 0; i < 1; i++) {
-        if (base[i].ground == NULL) {
-            base[i].ground = gobj;
-            base[i].type = arg1;
-            base[i].active_cb = func;
+        if (ft_80459A68[i].ground == NULL) {
+            ft_80459A68[i].ground = gobj;
+            ft_80459A68[i].type = arg1;
+            ft_80459A68[i].active_cb = func;
             ft_804D6578.x0++;
             return;
         }
     }
-    OSReport("fighter chk device wind func num over!\n");
-    __assert("ftdevice.c", 0x49, "0");
+    HSD_ASSERTREPORT(0x49, 0, "fighter chk device wind func num over!\n");
 }
 
 void ftCo_800C0764(Ground_GObj* arg0, u32 arg1, void* arg2)
@@ -89,8 +79,7 @@ void ftCo_800C0764(Ground_GObj* arg0, u32 arg1, void* arg2)
         }
         ptr++;
     }
-    OSReport("fighter chk device catch func num over!\n");
-    __assert("ftdevice.c", 0x6FU, "0");
+    HSD_ASSERTREPORT(0x6FU, 0, "fighter chk device catch func num over!\n");
 }
 
 /// @todo pretty sure arg2 is a ftDevice callback, but unsure if its
@@ -112,6 +101,5 @@ void ftCo_800C07F8(Ground_GObj* arg0, u32 arg1, void* arg2)
         }
         ptr++;
     }
-    OSReport("fighter chk device coll func num over!\n");
-    __assert("ftdevice.c", 0x95, "0");
+    HSD_ASSERTREPORT(0x95, 0, "fighter chk device coll func num over!\n");
 }

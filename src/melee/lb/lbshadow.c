@@ -27,20 +27,20 @@ void lbShadow_8000E9F0(Vec3* p, HSD_Spline* spline, f32 u)
     Vec3* cp;
     s16 idx;
     f32 t;
-
-    PAD_STACK(16);
+    f32 orig_u;
 
     if (u < 0.0F || u > 1.0F) {
         return;
     }
 
-    t = u * (spline->numcv - 1);
-    idx = (s16) t;
-    t = t - (f32) idx;
+    orig_u = u;
+    u *= spline->numcv - 1;
+    idx = (s16) u;
+    t = u - (f32) idx;
 
     switch (spline->type) {
     case 0:
-        if (u == 1.0F) {
+        if (orig_u == 1.0F) {
             idx -= 1;
         }
         cp = &spline->cv[idx];
@@ -51,8 +51,8 @@ void lbShadow_8000E9F0(Vec3* p, HSD_Spline* spline, f32 u)
     case 1: {
         f32 t2, u_1, bez1, bez0, bez2;
         cp = &spline->cv[idx * 3];
-        bez1 = -((4.0F * t) - 1.0F);
         t2 = 3.0F * (t * t);
+        bez1 = 1.0F - (4.0F * t);
         u_1 = t - 1.0F;
         bez1 = 3.0F * (bez1 + t2);
         bez0 = -3.0F * u_1 * u_1;
@@ -72,8 +72,14 @@ void lbShadow_8000E9F0(Vec3* p, HSD_Spline* spline, f32 u)
         u_1 = 1.0F - t;
         half = 0.5F;
         b1 = half * ((3.0F * u2) - (4.0F * t));
-        b0 = u_1 * (-half * u_1);
-        b2 = half * (1.0F + ((-3.0F * u2) + (2.0F * t)));
+        {
+            f32 b0_tmp = u_1 * (-half * u_1);
+            b0 = b0_tmp;
+        }
+        {
+            f32 b2_tmp = half * (1.0F + ((-3.0F * u2) + (2.0F * t)));
+            b2 = b2_tmp;
+        }
         b3 = half * u2;
         p->x = (cp[3].x * b3) +
                ((cp[2].x * b2) + ((cp[0].x * b0) + (cp[1].x * b1)));
@@ -95,8 +101,11 @@ void lbShadow_8000E9F0(Vec3* p, HSD_Spline* spline, f32 u)
                           (2.0F * -((2.0F * tension) - 3.0F) * t));
         p->x = (cp[3].x * car3) +
                ((cp[2].x * car2) + ((cp[0].x * car0) + (cp[1].x * car1)));
-        p->y = (cp[3].y * car3) +
-               ((cp[2].y * car2) + ((cp[0].y * car0) + (cp[1].y * car1)));
+        {
+            f32 car0_y = cp[0].y * car0;
+            p->y = (cp[3].y * car3) +
+                   ((cp[2].y * car2) + ((car0_y) + (cp[1].y * car1)));
+        }
         p->z = (cp[3].z * car3) +
                ((cp[2].z * car2) + ((cp[0].z * car0) + (cp[1].z * car1)));
         break;
@@ -108,9 +117,7 @@ void lbShadow_8000ED54(LbShadow* lbshadow, HSD_JObj* jobj)
 {
     HSD_Shadow* shadow;
 
-    if (lbshadow == NULL) {
-        __assert("lbshadow.c", 0x36, "lbshadow");
-    }
+    HSD_ASSERT(0x36, lbshadow);
     shadow = HSD_ShadowAlloc();
     if (shadow != NULL) {
         HSD_CObjSetProjectionType(shadow->camera, PROJ_ORTHO);
@@ -137,9 +144,7 @@ void lbShadow_8000ED54(LbShadow* lbshadow, HSD_JObj* jobj)
 
 void lbShadow_8000EE8C(LbShadow* lbshadow)
 {
-    if (lbshadow == NULL) {
-        __assert("lbshadow.c", 0x62U, "lbshadow");
-    }
+    HSD_ASSERT(0x62U, lbshadow);
     if (lbshadow->shadow != NULL) {
         HSD_ShadowRemove(lbshadow->shadow);
     }
@@ -284,6 +289,24 @@ void lbShadow_8000F214(HSD_Shadow* shadow)
     GXEnd();
 }
 
+static inline f32 lbShadow_Sqrtf(f32 x)
+{
+    static const f64 half = 0.5F;
+    static const f64 three = 3.0F;
+    u8 _[0x38] = { 0 };
+    volatile f32 y;
+
+    if (x > 0.0f) {
+        f64 guess = __frsqrte((f64) x);
+        guess = half * guess * (three - guess * guess * x);
+        guess = half * guess * (three - guess * guess * x);
+        guess = half * guess * (three - guess * guess * x);
+        y = (f32) (x * guess);
+        return y;
+    }
+    return x;
+}
+
 void lbShadow_8000F38C(s32 arg0)
 {
     HSD_ViewingRect rect;
@@ -299,10 +322,14 @@ void lbShadow_8000F38C(s32 arg0)
     f32 dist;
     s32 noLight;
     HSD_GObj* gobj;
+    HSD_GObj* nextGx;
+    s32 hasObj;
+    s32 i;
+    HSD_Shadow* shadow2;
     HSD_LObj* lobj;
     HSD_LObj* fallback;
 
-    PAD_STACK(0x48);
+    PAD_STACK(0x10);
 
     noLight = 0;
 
@@ -318,7 +345,7 @@ void lbShadow_8000F38C(s32 arg0)
     {
         HSD_GObj* lgobj;
         for (lgobj = HSD_GObjGXLinkHead[4]; lgobj != NULL;) {
-            HSD_GObj* nextGx = lgobj->next_gx;
+            nextGx = lgobj->next_gx;
             lobj = (HSD_LObj*) lgobj->hsd_obj;
             while (lobj != NULL) {
                 if (lobj->flags & 3) {
@@ -360,11 +387,9 @@ void lbShadow_8000F38C(s32 arg0)
 
     lbVector_Diff(&lightPos, &lightDir, &lightVec);
 
-    dist = lightVec.x * lightVec.x;
-    dist = (lightVec.z * lightVec.z) + (dist + (lightVec.y * lightVec.y));
-    if (dist > 0.0f) {
-        dist = sqrtf(dist);
-    }
+    dist = (lightVec.z * lightVec.z) +
+           (dist = (lightVec.x * lightVec.x) + (lightVec.y * lightVec.y));
+    dist = lbShadow_Sqrtf(dist);
 
     if (dist < 0.001f) {
         noLight = 1;
@@ -381,8 +406,8 @@ void lbShadow_8000F38C(s32 arg0)
         f32 xz_sq = (lightVec.x * lightVec.x) + (lightVec.z * lightVec.z);
         if (xz_sq > 0.0000010000001f) {
             upVec.z = 0.0f;
-            upVec.y = 1.0f;
             upVec.x = 0.0f;
+            upVec.y = 1.0f;
             lbVector_Diff(&lightDir, &lightPos, &normDir);
             if (lbVector_Normalize(&normDir) < 100.0f) {
                 lightPos.x = -((100.0f * normDir.x) - lightDir.x);
@@ -413,15 +438,15 @@ void lbShadow_8000F38C(s32 arg0)
         {
             Fighter* fp2 = gobj->user_data;
             if (fp2->x20A4.shadow != NULL) {
-                s32 hasObj = 0;
+                hasObj = 0;
                 HSD_ShadowDeleteObject(fp2->x20A4.shadow, NULL);
 
                 if (fp2->x21FC_flag.b7) {
                     if (!fp2->invisible && !fp2->x221E_b5 &&
                         fp2->x5AC.xC[1] != NULL)
                     {
-                        HSD_ShadowAddObject(fp2->x20A4.shadow,
-                                            (HSD_JObj*) gobj->hsd_obj);
+                        HSD_JObj* jobj = (HSD_JObj*) gobj->hsd_obj;
+                        HSD_ShadowAddObject(fp2->x20A4.shadow, jobj);
                         hasObj = 1;
                     }
                     if (fp2->x20A0_accessory != NULL) {
@@ -454,7 +479,7 @@ void lbShadow_8000F38C(s32 arg0)
 
         if (fp->x20A4.shadow != NULL && cm != NULL && !fp->x20A4.x0_b3) {
             u8 intensity = Ground_801C0508();
-            HSD_Shadow* shadow2 = fp->x20A4.shadow;
+            shadow2 = fp->x20A4.shadow;
 
             if (shadow2 == NULL) {
                 __assert("shadow.h", 0x63, "shadow");
@@ -472,7 +497,7 @@ void lbShadow_8000F38C(s32 arg0)
                 HSD_ViewingRectInit(&rect, &eyePos, &interestPos, &upVec, 0);
 
                 {
-                    s32 i = 0;
+                    i = 0;
                     do {
                         f32 scale = cm->x48.z;
                         f32 top = 1.2f * scale;

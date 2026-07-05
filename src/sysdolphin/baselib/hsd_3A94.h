@@ -24,4 +24,6 @@ typedef struct {
 /* 4D7994 */ extern s32 hsd_804D7994;
 /* 4D79A8 */ extern UNK_T hsd_804D79A8;
 
+/* 3A949C */ void hsd_803A949C(s32 chan, s32 arg1);
+
 #endif

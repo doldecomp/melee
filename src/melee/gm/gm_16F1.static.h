@@ -11,8 +11,6 @@ static struct {
     } x2[6];
 } lbl_8046DBC8;
 
-/* 46DBD8 */ static lbl_8046DBD8_t lbl_8046DBD8;
-
 static int lbl_803D5648[] = {
     ///< @todo this is the start of a data section
     0x000003E8, 0xFFFFFC18, 0x000007D0, 0xFFFFFA24, 0x00000BB8, 0x000005DC,

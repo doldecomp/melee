@@ -25,11 +25,11 @@
 #include "ftCommon/ftCo_Guard.h"
 #include "ftCommon/ftCo_SpecialS.h"
 #include "ftDrMario/ftDr_Init.h"
-#include "ftKirby/ftKb_Init.h"
+#include "ftKirby/ftkirby.h"
 #include "ftPeach/ftPe_Init.h"
 #include "ftZelda/ftZd_Init.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
 #include <baselib/gobj.h>
 #include <melee/cm/camera.h>
@@ -124,7 +124,7 @@ void ftCo_800DEAE8(Fighter_GObj* gobj, FtMotionId msid0, FtMotionId msid1)
 void ftCo_800DEBD0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (g_debugLevel >= 3) {
+    if (DbLevel >= 3) {
         if (fp->kind == FTKIND_PEACH) {
             ftPe_Init_8011B93C(gobj);
         }

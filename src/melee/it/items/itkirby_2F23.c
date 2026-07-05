@@ -1,10 +1,12 @@
 #include "itkirby_2F23.h"
 
-#include "ft/chara/ftKirby/ftKb_Init.h"
+#include "ft/chara/ftKirby/ftkirby.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/ithitbox.h"
+#include "it/itmaplib.h"
 
 #include <MetroTRK/intrinsics.h>
 #include <MSL/math.h>

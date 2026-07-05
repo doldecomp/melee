@@ -8,6 +8,11 @@
 #include "gr/forward.h"
 #include "lb/forward.h"
 
+typedef struct grHeal_UnkData {
+    s32 x0;
+    s32 x4;
+} grHeal_UnkData;
+
 /* 21EF38 */ void grHeal_8021EF38(bool);
 /* 21EF3C */ void grHeal_8021EF3C(void);
 /* 21EFBC */ void grHeal_8021EFBC(void);
@@ -42,5 +47,7 @@
 /* 21F79C */ void grHeal_8021F79C(s32, s32, s32);
 /* 21F830 */ DynamicsDesc* grHeal_8021F830(enum_t);
 /* 21F838 */ bool grHeal_8021F838(Vec3*, int, HSD_JObj*);
+
+/* 4D6AF0 */ extern grHeal_UnkData* grHeal_804D6AF0[2];
 
 #endif

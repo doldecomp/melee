@@ -25,7 +25,7 @@
 #include "lb/forward.h"
 
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 #include "lb/types.h"
 
 #include "mp/forward.h"
@@ -47,7 +47,7 @@ typedef struct grFigureGet_Data {
     f32 xC;
     f32 x10;
     f32 x14;
-} grFigureGet_Data;
+} grFigureGet_Params;
 
 static Vec3 const grFigureGet_803B8470 = { 0.0f, 0.0f, 0.0f };
 
@@ -92,7 +92,7 @@ StageData grFigureGet_803E7D34 = {
     0,
 };
 
-extern grFigureGet_Data* grFigureGet_804D6AC0;
+static grFigureGet_Params* yakumono_param;
 extern f32 grFigureGet_804DBB60;
 extern f32 grFigureGet_804DBB64;
 
@@ -102,7 +102,7 @@ void grFigureGet_OnDemoInit(int unused) {}
 
 void grFigureGet_OnInit(void)
 {
-    grFigureGet_804D6AC0 = Ground_801C49F8();
+    yakumono_param = Ground_801C49F8();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grFigureGet_802195CC(0);
@@ -172,15 +172,15 @@ void grFigureGet_802196F0(Ground_GObj* gobj)
     gp->xC_callback = NULL;
     tyDisplay_8031C2CC();
     i0 = HSD_Randi(3);
-    gp->gv.figureget.x10[i0] = un_80305058(0, 0x63, 0, 65.0f);
+    gp->gv.figureget.x10[i0] = Toy_80305058(0, 0x63, 0, 65.0f);
     i1 = i0 + 1;
     if (i1 >= 3) {
         i1 = 0;
     }
     gp->gv.figureget.x10[i1] = Ground_801C5840();
-    if (un_8031C354(gp->gv.figureget.x10[i1], &sp14, 1, 2) == 0) {
+    if (tyDisplay_8031C354(gp->gv.figureget.x10[i1], &sp14, 1, 2) == 0) {
         do {
-            temp_r3 = un_80305058(2, 0x63, 1, 75.0f);
+            temp_r3 = Toy_80305058(2, 0x63, 1, 75.0f);
             sp14 = temp_r3;
         } while (gp->gv.figureget.x10[i1] == temp_r3);
     }
@@ -190,16 +190,16 @@ void grFigureGet_802196F0(Ground_GObj* gobj)
     }
     gp->gv.figureget.x10[i1] = sp14;
     for (var_r29_3 = 0; var_r29_3 < 3; var_r29_3++) {
-        un_8031C454(gp->gv.figureget.x10[var_r29_3]);
+        tyDisplay_8031C454(gp->gv.figureget.x10[var_r29_3]);
     }
     PAD_STACK(8);
-    temp_r3_2 = grFigureGet_804D6AC0->x4;
+    temp_r3_2 = yakumono_param->x4;
     if (temp_r3_2 != 0) {
         var_r6 = HSD_Randi(temp_r3_2);
     } else {
         var_r6 = 0;
     }
-    gp->gv.figureget.x0 = grFigureGet_804D6AC0->x0 + var_r6;
+    gp->gv.figureget.x0 = yakumono_param->x0 + var_r6;
     gp->gv.figureget.x4 = 0;
     gp->gv.figureget.x8 = 0;
     gp->gv.figureget.xC = 0;
@@ -236,13 +236,13 @@ void grFigureGet_80219898(Ground_GObj* gobj)
     {
         ftLib_80086984(var_r28)->joint_id_skip = 0;
     }
-    if (gp->gv.figureget.x4 < grFigureGet_804D6AC0->x8) {
+    if (gp->gv.figureget.x4 < yakumono_param->x8) {
         temp_r3 = gp->gv.figureget.x0;
         if (temp_r3 == 0) {
             pos = grFigureGet_803B8470;
             gp->gv.figureget.x4 += 1;
-            var_f2 = grFigureGet_804D6AC0->x10;
-            var_f2 = var_f2 - grFigureGet_804D6AC0->xC;
+            var_f2 = yakumono_param->x10;
+            var_f2 = var_f2 - yakumono_param->xC;
             if (var_f2 < 0.0f) {
                 var_f2 = -var_f2;
             }
@@ -259,19 +259,19 @@ void grFigureGet_80219898(Ground_GObj* gobj)
             if (HSD_Randi(var_r30) == 0) {
                 pos.x *= -1.0f;
             }
-            pos.y = grFigureGet_804D6AC0->x14 + Stage_GetCamBoundsTopOffset();
+            pos.y = yakumono_param->x14 + Stage_GetCamBoundsTopOffset();
             temp_r6 = gp->gv.figureget.x4;
             temp_r3_2 = it_802F2094(
                 gobj, &pos, gp->gv.figureget.x10[temp_r6 - 1], temp_r6);
             gp->gv.figureget.x34[gp->gv.figureget.x4 - 1] = temp_r3_2;
             it_802F2014(temp_r3_2, 0);
-            temp_r3 = grFigureGet_804D6AC0->x4;
+            temp_r3 = yakumono_param->x4;
             if (temp_r3 != 0) {
                 var_r3 = HSD_Randi(temp_r3);
             } else {
                 var_r3 = 0;
             }
-            gp->gv.figureget.x0 = grFigureGet_804D6AC0->x0 + var_r3;
+            gp->gv.figureget.x0 = yakumono_param->x0 + var_r3;
         } else {
             gp->gv.figureget.x0 = temp_r3 - 1;
         }

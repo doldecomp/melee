@@ -2,6 +2,7 @@
 
 #include "ft/forward.h"
 
+#include "ft/ftdata.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 
@@ -13,6 +14,7 @@ ftData* gFtDataList[FTKIND_MAX];
 ft_8045993C_t ft_8045993C[6];
 
 int ft_8045996C[FTKIND_MAX];
+UnkCostumeStruct lbl_804599F0[5];
 
 void ft_8008521C(HSD_GObj* gobj)
 {
@@ -36,25 +38,29 @@ inline void ft_800852B0_Reset_ft_8045993C(int i)
 
 void ft_800852B0(void)
 {
-    struct UnkCostumeList* var_r8 = CostumeListsForeachCharacter;
-    ftData_UnkCountStruct* var_r9 = ftData_Table_Unk0;
-    ftData_UnkCountStruct* var_r10 = ftData_UnkIntPairs;
+    ftData_UnkCountStruct* unk0 =
+        (ftData_UnkCountStruct*) &CostumeListsForeachCharacter[FTKIND_MAX];
+    ftData_UnkCountStruct* pairs =
+        (ftData_UnkCountStruct*) ((u8*) CostumeListsForeachCharacter + 5940);
     int i;
+    int new_var = 0;
 
-    for (i = 0; i < FTKIND_MAX; ++var_r8, ++var_r9, ++var_r10, ++i) {
-        int costume_idx = 0;
+    for (i = 0; i < FTKIND_MAX; ++i) {
+        int costume_idx = new_var;
         gFtDataList[i] = NULL;
-        for (costume_idx = 0; costume_idx < (s32) var_r8->numCostumes;
+        for (costume_idx = new_var;
+             costume_idx < (s32) CostumeListsForeachCharacter[i].numCostumes;
              ++costume_idx)
         {
-            var_r8->costume_list[costume_idx].joint = NULL;
-            // Probably a pointer but no idea what kind of thing it points to.
-            var_r8->costume_list[costume_idx].pad_x8 = NULL;
+            CostumeListsForeachCharacter[i].costume_list[costume_idx].joint =
+                NULL;
+            CostumeListsForeachCharacter[i].costume_list[costume_idx].pad_x8 =
+                NULL;
         }
-        var_r9->data = NULL;
-        var_r10->data = NULL;
+        unk0[i].data = NULL;
+        pairs[i].data = NULL;
     }
-    ft_800852B0_Reset_ft_8045993C(0);
+    ft_800852B0_Reset_ft_8045993C(new_var);
     ft_800852B0_Reset_ft_8045993C(1);
     ft_800852B0_Reset_ft_8045993C(2);
     ft_800852B0_Reset_ft_8045993C(3);

@@ -1,12 +1,18 @@
 #include "lbarq.h"
 
+#include <trigf.h>
 #include <dolphin/os.h>
 #include <baselib/debug.h>
 
-u32 lbArq_80014ABC(lbArqNode* arg0)
+/* 4316C0 */ lbArqGlobal lbArq_804316C0;
+
+#pragma push
+#pragma dont_inline on
+lbArqState lbArq_80014ABC(lbArqNode* arg0)
 {
     return arg0->state;
 }
+#pragma pop
 
 void lbArq_80014AC4(lbArqHandle* handle)
 {
@@ -25,14 +31,14 @@ void lbArq_80014AC4(lbArqHandle* handle)
     }
     *prev = node->next;
 
-    /* Add to done list (list[2]) */
-    tail = &global->list[2];
+    /* Add to done list */
+    tail = &global->list[LB_ARQ_STATE_DONE];
     while (*tail != NULL) {
         tail = &(*tail)->next;
     }
     *tail = node;
     node->next = NULL;
-    node->state = 2;
+    node->state = LB_ARQ_STATE_DONE;
 
     OSRestoreInterrupts(intr);
 
@@ -49,14 +55,14 @@ void lbArq_80014AC4(lbArqHandle* handle)
         }
         *prev = node->next;
 
-        /* Add to free list (list[0]) */
-        tail = &global->list[0];
+        /* Add to free list */
+        tail = &global->list[LB_ARQ_STATE_FREE];
         while (*tail != NULL) {
             tail = &(*tail)->next;
         }
         *tail = node;
         node->next = NULL;
-        node->state = 0;
+        node->state = LB_ARQ_STATE_FREE;
 
         OSRestoreInterrupts(intr);
     }
@@ -67,33 +73,36 @@ void lbArq_80014BD0(u32 source, void* dest, size_t length,
 {
     lbArqGlobal* global = &lbArq_804316C0;
     lbArqNode* rp;
+    lbArqNode* tmp;
     lbArqNode** tail;
     lbArqNode** free_head;
     BOOL intr;
 
+    PAD_STACK(16);
     DCInvalidateRange(dest, length);
     intr = OSDisableInterrupts();
-    rp = global->list[0];
-    free_head = &global->list[0];
+    tmp = global->list[LB_ARQ_STATE_FREE];
+    rp = tmp;
+    free_head = &global->list[LB_ARQ_STATE_FREE];
     HSD_ASSERT(0x67, rp);
     *free_head = rp->next;
     rp->callback = callback;
     rp->callback_arg = callback_arg;
 
-    tail = &global->list[1];
+    tail = &global->list[LB_ARQ_STATE_PENDING];
     while (*tail != NULL) {
         tail = &(*tail)->next;
     }
     *tail = rp;
     rp->next = NULL;
-    rp->state = 1;
+    rp->state = LB_ARQ_STATE_PENDING;
 
     ARQPostRequest(&rp->arq, (u32) rp, 1, 0, source, (u32) dest, length,
                    (ARQCallback) lbArq_80014AC4);
 
     if (rp->callback == NULL) {
         OSRestoreInterrupts(intr);
-        while (lbArq_80014ABC(rp) != 2) {
+        while (lbArq_80014ABC(rp) != LB_ARQ_STATE_DONE) {
         }
         intr = OSDisableInterrupts();
         tail = &global->list[rp->state];
@@ -106,7 +115,7 @@ void lbArq_80014BD0(u32 source, void* dest, size_t length,
         }
         *free_head = rp;
         rp->next = NULL;
-        rp->state = 0;
+        rp->state = LB_ARQ_STATE_FREE;
     }
     OSRestoreInterrupts(intr);
 }
@@ -114,22 +123,22 @@ void lbArq_80014BD0(u32 source, void* dest, size_t length,
 void lbArq_80014D2C(void)
 {
     lbArqGlobal* global = &lbArq_804316C0;
-    lbArqNode* nodes = (lbArqNode*) global;
+    lbArqNode* nodes = global->nodes;
     lbArqNode* node;
     int i;
 
-    global->list[0] = NULL;
-    global->list[1] = NULL;
-    global->list[2] = NULL;
-    global->list[0] = nodes;
+    global->list[LB_ARQ_STATE_FREE] = NULL;
+    global->list[LB_ARQ_STATE_PENDING] = NULL;
+    global->list[LB_ARQ_STATE_DONE] = NULL;
+    global->list[LB_ARQ_STATE_FREE] = nodes;
 
     for (i = 0; i < 9; i++) {
         node = &nodes[i];
         node->next = node + 1;
-        node->state = 0;
+        node->state = LB_ARQ_STATE_FREE;
     }
     node->next = NULL;
-    node->state = 0;
+    node->state = LB_ARQ_STATE_FREE;
 
     PAD_STACK(8);
 }

@@ -7,7 +7,7 @@
 #include <common_structs.h>
 
 extern char db_build_timestamp[];
-extern int g_debugLevel;
+extern int DbLevel;
 extern u16 db_gameLaunchButtonState;
 extern char** db_bonus_names;
 extern char** db_motionstate_names;
@@ -77,9 +77,7 @@ extern int db_MiscVisualEffectsStatus;
                                      float);
 /* 227FE0 */ static void fn_80227FE0(HSD_GObj* camera, float x, float y);
 /* 228124 */ static void fn_80228124(HSD_GObj* camera, Vec3*, float, float);
-/* 228318 */ void fn_SetupSoundInfo(void);
-/* 2283F0 */ void fn_UpdateSoundInfo(void);
-/* 228620 */ void fn_CheckSoundInfo(int player);
+
 /* 22873C */ void fn_CheckMiscVisualEffects(int player);
 /* 2287C4 */ void fn_Setup5xSpeed(UNK_PARAMS);
 /* 2287D8 */ void fn_Check5xSpeed(int player);

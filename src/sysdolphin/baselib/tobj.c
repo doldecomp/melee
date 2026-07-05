@@ -8,7 +8,8 @@
 #include "mtx.h"
 #include "tev.h"
 
-#include <__mem.h>
+#include <placeholder.h>
+
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <MetroTRK/intrinsics.h>
@@ -377,6 +378,7 @@ static void MakeTextureMtx(HSD_TObj* tobj)
         no_assert = true;
     }
 
+    /// @todo Convert to @c HSD_ASSERT once a byte-matching form is found.
     if (!no_assert) {
         __assert(__FILE__, 589, "tobj->repeat_s && tobj->repeat_t");
     }
@@ -1215,8 +1217,8 @@ void HSD_TObjSetup(HSD_TObj* tobj)
             }
 
             GXInitTexObjCI(&texobj, imagedesc->image_ptr, imagedesc->width,
-                           imagedesc->height, (GXCITexFmt) imagedesc->format,
-                           tobj->wrap_s, tobj->wrap_t,
+                           imagedesc->height, imagedesc->format, tobj->wrap_s,
+                           tobj->wrap_t,
                            imagedesc->mipmap ? GX_TRUE : GX_FALSE,
                            tlut->tlut_name);
             if (min_filter == GX_LIN_MIP_LIN) {

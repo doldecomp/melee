@@ -1,5 +1,7 @@
 #include "itgamewatchturtle.h"
 
+#include "it/itzako.h"
+
 #include <sysdolphin/baselib/gobj.h>
 #include <melee/db/db.h>
 #include <melee/ft/chara/ftGameWatch/ftGw_AttackAir.h>
@@ -7,8 +9,7 @@
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>
 #include <melee/it/items/types.h>
-
-void it_8027CE64(HSD_GObj*, Item_GObj*, s32); /* extern */
+#include <melee/it/itzako.h>
 
 ItemStateTable it_803F7918[] = {
     {
@@ -29,7 +30,7 @@ Item_GObj* it_802C6F40(HSD_GObj* parent, Vec3* pos, Fighter_Part arg2, f32 dir)
 {
     SpawnItem spawn_item;
     HSD_GObj* item_gobj;
-    int* temp_r30;
+    void** temp_r30;
 
     spawn_item.kind = It_Kind_GameWatch_Turtle;
     spawn_item.prev_pos = *pos;

@@ -5,7 +5,6 @@
 #include "db/db.h"
 #include "ft/chara/ftPikachu/ftPk_SpecialLw.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/itCharItems.h"
@@ -13,6 +12,8 @@
 
 #include "it/items/forward.h"
 
+#include "it/itgroundcoll.h"
+#include "it/ithitbox.h"
 #include "it/types.h"
 #include "MSL/math.h"
 
@@ -51,9 +52,10 @@ Item_GObj* it_802B1DF8(Item_GObj* owner, Vec3* pos, Vec3* vel, s32 count,
     SpawnItem spawn;
     u8 _pad[4];
     u32 x40 = Item_8026AE60();
-    Item_GObj* first;
-    Item_GObj* item_gobj;
     s32 cur_delay;
+    void* new_var;
+    Item_GObj* item_gobj;
+    Item_GObj* first;
     Item_GObj* prev = NULL;
     int i;
 
@@ -62,21 +64,21 @@ Item_GObj* it_802B1DF8(Item_GObj* owner, Vec3* pos, Vec3* vel, s32 count,
     spawn.prev_pos.z = 0.0f;
     spawn.pos = spawn.prev_pos;
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    cur_delay = 0;
     spawn.facing_dir = -1.0f;
-    spawn.x3C_damage = 0;
+    spawn.x3C_damage = (cur_delay = 0);
+    cur_delay = 0;
     spawn.x0_parent_gobj = owner;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
     spawn.x44_flag.b0 = true;
     spawn.x40 = x40;
 
-    for (i = 0; i < count; i++) {
+    for (first = NULL, i = 0; i < count; i++) {
         item_gobj = Item_80268B18(&spawn);
         if (i == 0) {
             first = item_gobj;
         }
         if (item_gobj != NULL) {
-            Item* ip = GET_ITEM(item_gobj);
+            Item* ip = (Item*) (new_var = HSD_GObjGetUserData(item_gobj));
             itPikachuthunderAttributes* attrs =
                 ip->xC4_article_data->x4_specialAttributes;
             if (prev != NULL) {
@@ -231,7 +233,7 @@ void it_802B22B8(Item_GObj* gobj)
     it_802B22B8_inline(gobj);
 }
 
-static inline f32 pika_scale(f32 a, f32 b)
+static f32 pika_scale(f32 a, f32 b)
 {
     f32 f = 10000.0f * a / b;
     f = ((s32) (f + 1)) / 10000.0f;

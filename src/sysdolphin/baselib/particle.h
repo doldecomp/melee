@@ -143,7 +143,7 @@ struct hsd_804D0F60_t {
 /* 39EE24 */ void hsd_8039EE24(u32);
 /* 39EFAC */ HSD_Generator* hsd_8039EFAC(s32 linkNo, s32 bank, s32 gfx_id,
                                          HSD_JObj*);
-/* 39F05C */ HSD_Generator* hsd_8039F05C(s8 linkNo, s32 bank, s32 idx);
+/* 39F05C */ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx);
 /* 39F6CC */ HSD_Generator* hsd_8039F6CC(s32 linkNo, s32 bank, s32 gfx_id,
                                          HSD_JObj*);
 

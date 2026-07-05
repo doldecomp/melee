@@ -36,7 +36,23 @@
 #include <melee/ef/efsync.h>
 #include <melee/mp/mplib.h>
 
-#define SIGNF(x) ((x) > 0.0f ? 1.0f : -1.0f)
+static void sdata2_order(void)
+{
+    (void) 1.5707963267948966;
+    (void) 0.0f;
+    (void) 1.57079637f;
+    (void) 1.0f;
+    (void) 0.5f;
+    (void) 6.2831853071795862;
+    (void) -1.0f;
+    (void) 9.99999975e-05f;
+    (void) 0.0174532924f;
+    (void) 4503601774854144.0;
+    (void) 0.20000000000000001;
+    (void) 4.7123889803846897;
+    (void) 3.1415926535897931;
+    (void) -0.0500000007f;
+}
 
 static inline void ftPr_JObjSetRotationY(HSD_JObj* jobj, f32 y, f32* base)
 {

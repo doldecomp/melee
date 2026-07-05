@@ -1,15 +1,13 @@
 #include "textlib.h"
 
+#include "platform.h"
+
 #include "baselib/controller.h"
 #include "baselib/debug.h"
-#include "dolphin/os.h"
-#include "gm/gm_unsplit.h"
-#include "gm/gmmain_lib.h"
 #include "if/textdraw.h"
 #include "if/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbaudio_ax.h"
-#include "lb/lblanguage.h"
 #include "ty/toy.h"
 
 #include <printf.h>
@@ -31,19 +29,24 @@
 #include <MSL/stdio.h>
 #include <MSL/string.h>
 
+struct unk_series {
+    s16 values[26];
+};
+
 /// ?
 /* 4D6E18 */ extern DevText* devtext_drawlist;
 /* 4D6E38 */ extern DevText* devtext_poolhead;
-unsigned short un_804A26B8[1000];
-unsigned short un_804A284C[1000];
-short* un_804D6EB4;
+/* 4DDC88 */ extern GXColor un_804DDC88;
+/* 4DDC8C */ extern GXColor un_804DDC8C;
+/* 4DDC90 */ extern GXColor un_804DDC90;
+/* 4DDC94 */ extern GXColor un_804DDC94;
+/* 4DDC98 */ extern GXColor un_804DDC98;
+/* 4DDC9C */ extern f32 un_804DDC9C;
+/* 4DDCA0 */ extern f32 un_804DDCA0;
+
 struct un_80304138_objalloc_t* un_804D6E40;
 struct un_80304138_objalloc_t_x8* un_804D6E48;
-struct idk {
-    short idk[26];
-} un_803B8810;
-struct idk un_803B87DC;
-struct idk un_803B87A8;
+
 unsigned char un_804D6E4C;
 
 /// .bss
@@ -57,10 +60,10 @@ GXColor red = { 0xFF, 0x80, 0x80, 0xFF };
 GXColor green = { 0x80, 0xFF, 0x80, 0xFF };
 GXColor blue = { 0x80, 0x80, 0xFF, 0xFF };
 
-GXColor color_08 = { 0x40, 0x50, 0x80, 0x80 };
-GXColor color_0C = { 0xE2, 0xE2, 0xE2, 0xFF };
-GXColor color_10 = { 0xFF, 0x80, 0x20, 0xFF };
-GXColor color_14 = { 0xA0, 0xA0, 0xFF, 0xFF };
+GXColor un_804D5A08 = { 0x40, 0x50, 0x80, 0x80 };
+GXColor un_804D5A0C = { 0xE2, 0xE2, 0xE2, 0xFF };
+GXColor un_804D5A10 = { 0xFF, 0x80, 0x20, 0xFF };
+GXColor un_804D5A14 = { 0xA0, 0xA0, 0xFF, 0xFF };
 
 static inline DevText* find_by_id(char id)
 {
@@ -76,8 +79,9 @@ static inline DevText* find_by_id(char id)
 DevText* DevText_Create(char id, int x, int y, int w, int h, char* buf)
 {
     DevText* text;
-    GXColor bg = { 0x60, 0xD0, 0xB0, 0x70 };
-    PAD_STACK(0x60 - 0x48);
+    UNUSED u32 pad;
+    GXColor bg = un_804DDC88;
+    PAD_STACK(0x14);
 
     if ((text = find_by_id(id))) {
         return NULL;
@@ -89,9 +93,7 @@ DevText* DevText_Create(char id, int x, int y, int w, int h, char* buf)
         text = NULL;
     }
     if (text == NULL) {
-        // HSD_ASSERT
-        OSReport("TW : Screen alloc Fail\n");
-        __assert("textlib.c", 309, "0");
+        HSD_ASSERTREPORT(309, 0, "TW : Screen alloc Fail\n");
     }
     if (text != NULL) {
         text->x = x;
@@ -100,13 +102,13 @@ DevText* DevText_Create(char id, int x, int y, int w, int h, char* buf)
         text->h = h;
         text->cursor_x = 0;
         text->cursor_y = 0;
-        text->scale_x = 10.0;
-        text->scale_y = 16.0;
+        text->scale_x = un_804DDC9C;
+        text->scale_y = un_804DDCA0;
         text->bg_color = bg;
-        text->text_colors[0] = white;
-        text->text_colors[1] = red;
-        text->text_colors[2] = green;
-        text->text_colors[3] = blue;
+        text->text_colors[0] = un_804DDC8C;
+        text->text_colors[1] = un_804DDC90;
+        text->text_colors[2] = un_804DDC94;
+        text->text_colors[3] = un_804DDC98;
         text->id = (int) id;
         text->line_width = 10;
         text->flags = DEVTEXT_FLAG_SHOWCURSOR;
@@ -144,11 +146,24 @@ inline int DevText_Clamp(int val, int max)
     }
 }
 
+#pragma push
+#pragma dont_inline on
 void DevText_SetCursorXY(DevText* text, int x, int y)
 {
-    text->cursor_x = DevText_Clamp(x, text->w);
-    text->cursor_y = DevText_Clamp(y, text->h);
+    if (text->w <= x) {
+        x = text->w - 1;
+    } else if (x < 0) {
+        x = 0;
+    }
+    text->cursor_x = x;
+    if (text->h <= y) {
+        y = text->h - 1;
+    } else if (y < 0) {
+        y = 0;
+    }
+    text->cursor_y = y;
 }
+#pragma pop
 
 void DevText_SetCursorX(DevText* text, int x)
 {
@@ -165,25 +180,37 @@ void DevText_80302AC0(DevText* text)
     text->flags |= (1 << 5);
 }
 
+#pragma push
+#pragma dont_inline on
 void DevText_ShowBackground(DevText* text)
 {
     text->flags &= ~(1 << 6);
 }
+#pragma pop
 
+#pragma push
+#pragma dont_inline on
 void DevText_HideBackground(DevText* text)
 {
     text->flags |= (1 << 6);
 }
+#pragma pop
 
+#pragma push
+#pragma dont_inline on
 void DevText_ShowText(DevText* text)
 {
     text->flags &= ~(1 << 7);
 }
+#pragma pop
 
+#pragma push
+#pragma dont_inline on
 void DevText_HideText(DevText* text)
 {
     text->flags |= (1 << 7);
 }
+#pragma pop
 
 void DevText_SetScale(DevText* text, f32 x, f32 y)
 {
@@ -203,13 +230,18 @@ void DevText_SetXY(DevText* text, int x, int y)
     text->y = y;
 }
 
+#pragma push
+#pragma dont_inline on
 u8 DevText_StoreColorIndex(DevText* text, u8 index)
 {
     u8 old = text->current_color;
     text->current_color = index;
     return old;
 }
+#pragma pop
 
+#pragma push
+#pragma dont_inline on
 GXColor DevText_SetTextColor(DevText* text, GXColor color)
 {
     int index = text->current_color;
@@ -217,18 +249,25 @@ GXColor DevText_SetTextColor(DevText* text, GXColor color)
     text->text_colors[index] = color;
     return old;
 }
+#pragma pop
 
+#pragma push
+#pragma dont_inline on
 GXColor DevText_SetBGColor(DevText* text, GXColor color)
 {
     GXColor old = text->bg_color;
     text->bg_color = color;
     return old;
 }
+#pragma pop
 
+#pragma push
+#pragma dont_inline on
 void DevText_Erase(DevText* text)
 {
     memzero(text->buf, 2 * text->w * text->h);
 }
+#pragma pop
 
 inline void DevText_AdvanceLine(DevText* text)
 {
@@ -240,15 +279,22 @@ inline void DevText_AdvanceLine(DevText* text)
     }
 }
 
+typedef struct DevTextGlyph {
+    u8 chr;
+    u8 color : 2;
+    u8 unk : 6;
+} DevTextGlyph;
+
 void DevText_Print(DevText* text, char* str)
 {
-    PAD_STACK(8);
-    if (str) {
-        while (*str) {
-            if (*str != '\n') {
-                int index = (text->cursor_x + text->cursor_y * text->w) * 2;
-                text->buf[index] = *str;
-                text->buf[index + 1] = text->current_color << 6;
+    char* cur;
+    if (str != NULL) {
+        cur = str;
+        while (*cur) {
+            if (*cur != '\n') {
+                int index = text->cursor_x + text->cursor_y * text->w;
+                ((DevTextGlyph*) text->buf)[index].chr = *cur;
+                ((DevTextGlyph*) text->buf)[index].color = text->current_color;
                 if (text->cursor_x < text->w - 1) {
                     text->cursor_x++;
                 } else if ((text->flags & DEVTEXT_FLAG_NOWRAP) == 0) {
@@ -257,17 +303,20 @@ void DevText_Print(DevText* text, char* str)
             } else {
                 DevText_AdvanceLine(text);
             }
-            str++;
+            cur++;
         }
     }
 }
 
+#pragma push
+#pragma dont_inline on
 void DevText_PrintInt(DevText* text, int num)
 {
     char str[16];
     DevText_NumToStr(num, str);
     DevText_Print(text, str);
 }
+#pragma pop
 
 void DevText_Printf(DevText* text, char* format, ...)
 {
@@ -371,6 +420,7 @@ void un_80302FFC(struct un_80304138_objalloc_t* arg0)
     struct un_80304138_objalloc_t_x8* thing;
     int cursor_x = 1;
     int cursor_y;
+    GXColor color;
     for (thing = x8; thing->x0 != 9; thing++) {
         if (thing->x0 != 0 && thing->x0 != 1) {
             int len = DevText_StrLen(thing->x8);
@@ -381,23 +431,27 @@ void un_80302FFC(struct un_80304138_objalloc_t* arg0)
     }
     if (arg0->x1 & 0x10) {
         DevText_StoreColorIndex(arg0->x4, 0);
-        DevText_SetTextColor(arg0->x4, adjust(color_0C));
+        color = adjust(un_804D5A0C);
+        DevText_SetTextColor(arg0->x4, color);
         DevText_StoreColorIndex(arg0->x4, 1);
-        DevText_SetTextColor(arg0->x4, adjust(color_10));
+        color = adjust(un_804D5A10);
+        DevText_SetTextColor(arg0->x4, color);
         DevText_StoreColorIndex(arg0->x4, 2);
-        DevText_SetTextColor(arg0->x4, adjust(color_14));
-        DevText_SetBGColor(arg0->x4, adjust(color_08));
+        color = adjust(un_804D5A14);
+        DevText_SetTextColor(arg0->x4, color);
+        color = adjust(un_804D5A08);
+        DevText_SetBGColor(arg0->x4, color);
     } else {
         DevText_StoreColorIndex(arg0->x4, 0);
-        DevText_SetTextColor(arg0->x4, color_0C);
+        DevText_SetTextColor(arg0->x4, un_804D5A0C);
         DevText_StoreColorIndex(arg0->x4, 1);
-        DevText_SetTextColor(arg0->x4, color_10);
+        DevText_SetTextColor(arg0->x4, un_804D5A10);
         DevText_StoreColorIndex(arg0->x4, 2);
-        DevText_SetTextColor(arg0->x4, color_14);
-        DevText_SetBGColor(arg0->x4, color_08);
+        DevText_SetTextColor(arg0->x4, un_804D5A14);
+        DevText_SetBGColor(arg0->x4, un_804D5A08);
     }
     for (cursor_y = 0; cursor_y < arg0->x4->h; cursor_y++) {
-        if (arg0->x0 == 0) {
+        if (x8->x0 == 0) {
             DevText_StoreColorIndex(arg0->x4, 2);
         } else if (arg0->x0 == cursor_y) {
             DevText_StoreColorIndex(arg0->x4, 1);
@@ -430,18 +484,17 @@ void un_80302FFC(struct un_80304138_objalloc_t* arg0)
             DevText_Printf(arg0->x4, "%3.2f", *(float*) x8->x10);
             break;
         }
-        arg0++;
+        x8++;
     }
 }
 
 bool un_80303444(struct un_80304138_objalloc_t* arg0)
 {
     bool ret = false;
-    struct un_80304138_objalloc_t_x8* x8 = arg0->x8;
-    switch (x8[arg0->x0].x0) {
+    switch (arg0->x8[arg0->x0].x0) {
     case 2: {
-        int* q = x8[arg0->x0].x10;
-        if (*q < x8[arg0->x0].x18 - 1.0f) {
+        int* q = arg0->x8[arg0->x0].x10;
+        if (*q < arg0->x8[arg0->x0].x18 - 1.0f) {
             *q += 1;
             ret = true;
             arg0->x1 = arg0->x1 | 1;
@@ -450,18 +503,18 @@ bool un_80303444(struct un_80304138_objalloc_t* arg0)
         break;
     }
     case 3: {
-        int* q = x8[arg0->x0].x10;
-        if (*q + x8[arg0->x0].x1C <= x8[arg0->x0].x18) {
+        int* q = arg0->x8[arg0->x0].x10;
+        if (*q + arg0->x8[arg0->x0].x1C <= arg0->x8[arg0->x0].x18) {
             ret = true;
-            *q += x8[arg0->x0].x1C;
+            *q += arg0->x8[arg0->x0].x1C;
             arg0->x1 = arg0->x1 | 1;
             lbAudioAx_80024030(2);
         }
         break;
     }
     case 5: {
-        unsigned char* q = x8[arg0->x0].x10;
-        int idk = x8[arg0->x0].x1C;
+        unsigned char* q = arg0->x8[arg0->x0].x10;
+        int idk = arg0->x8[arg0->x0].x1C;
         if (*q + (idk & 0xFF) <= 0xFF) {
             *q += idk;
         } else {
@@ -473,8 +526,8 @@ bool un_80303444(struct un_80304138_objalloc_t* arg0)
         break;
     }
     case 6: {
-        unsigned short* q = x8[arg0->x0].x10;
-        int idk = x8[arg0->x0].x1C;
+        unsigned short* q = arg0->x8[arg0->x0].x10;
+        int idk = arg0->x8[arg0->x0].x1C;
         if (*q + (idk & 0xFFFF) <= 0xFFFF) {
             *q += idk;
         } else {
@@ -487,12 +540,12 @@ bool un_80303444(struct un_80304138_objalloc_t* arg0)
     }
     case 4:
     case 7: {
-        int* q = x8[arg0->x0].x10;
-        unsigned int idk = x8[arg0->x0].x1C;
+        unsigned int* q = arg0->x8[arg0->x0].x10;
+        unsigned int idk = arg0->x8[arg0->x0].x1C;
         if (*q + (idk & 0xFFFFFFFF) <= 0xFFFFFFFF) {
             *q += idk;
         } else {
-            *q -= 0x100000000 - idk;
+            *q -= (unsigned int) (0x100000000 - idk);
         }
         ret = true;
         arg0->x1 = arg0->x1 | 1;
@@ -500,9 +553,9 @@ bool un_80303444(struct un_80304138_objalloc_t* arg0)
         break;
     }
     case 8: {
-        float* q = x8[arg0->x0].x10;
-        if (*q + x8[arg0->x0].x1C <= x8[arg0->x0].x18) {
-            *q += x8[arg0->x0].x1C;
+        float* q = arg0->x8[arg0->x0].x10;
+        if (*q + arg0->x8[arg0->x0].x1C <= arg0->x8[arg0->x0].x18) {
+            *q += arg0->x8[arg0->x0].x1C;
             ret = true;
             arg0->x1 = arg0->x1 | 1;
             lbAudioAx_80024030(2);
@@ -642,34 +695,36 @@ void un_80303AC4(struct un_80304138_objalloc_t* arg0)
             un_804D6E44->xC(6);
         }
     } else if (buttons & (0x10000000 | HSD_PAD_Y)) { // up
-        int i;
-        int w;
-        for (i = arg0->x0; i >= 0; i--) {
+        u8 j = arg0->x0;
+        int i = j;
+        (void) j;
+        for (i--; i >= 0; i--) {
             if (arg0->x8[i].x0 != NULL) {
-                w = i;
+                (void) i;
                 goto up_found;
             }
         }
-        w = -1;
+        i = -1;
     up_found:
-        if (w != -1) {
-            arg0->x0 = w;
+        if (i != -1) {
+            arg0->x0 = i;
             arg0->x1 = arg0->x1 | 1;
             lbAudioAx_80024030(2);
         }
     } else if (buttons & (0x20000000 | HSD_PAD_X)) { // down
-        int i;
-        int w;
-        for (i = arg0->x0; i < arg0->x4->h; i++) {
+        u8 j = arg0->x0;
+        int i = j;
+        (void) j;
+        for (i++; i < arg0->x4->h; i++) {
             if (arg0->x8[i].x0 != NULL) {
-                w = i;
+                (void) i;
                 goto down_found;
             }
         }
-        w = -1;
+        i = -1;
     down_found:
-        if (w != -1) {
-            arg0->x0 = w;
+        if (i != -1) {
+            arg0->x0 = i;
             arg0->x1 = arg0->x1 | 1;
             lbAudioAx_80024030(2);
         }
@@ -760,30 +815,35 @@ void fn_80303EF4(HSD_GObj* gobj)
     }
 }
 
+#pragma push
+#pragma dont_inline on
 void un_80303FD4(HSD_GObj* arg0, struct un_80304138_objalloc_t* arg1,
                  struct un_80304138_objalloc_t_x8* arg2, int arg3, int arg4,
                  int arg5)
 {
+    struct un_80304138_objalloc_t_x8* new_var2;
     int i;
     int count;
+    int new_var;
     int count2 = 0;
     int size;
+    int v;
     void* buf;
     struct un_80304138_objalloc_t* un;
     PAD_STACK(8);
 
     arg1->x8 = arg2;
-    arg1->x1 = 0;
+    count = (arg1->x1 = 0);
     arg1->prev = NULL;
     arg1->next = NULL;
+    new_var = 0;
     arg1->x10 = arg0;
 
-    count = 0;
     while (arg1->x8[count].x0 != 9) {
         count++;
     }
 
-    size = un_80302EA4(arg1->x8);
+    size = un_80302EA4(new_var2 = arg1->x8);
     un_804D6E44 = arg1;
     buf = HSD_MemAlloc(size * count * 2);
     if (buf != NULL) {
@@ -795,8 +855,8 @@ void un_80303FD4(HSD_GObj* arg0, struct un_80304138_objalloc_t* arg1,
         arg1->x4 = DevText_Create(count2 + 0x78, arg4, arg5, size, count, buf);
         if (arg1->x4 != NULL) {
             DevText_Show(arg0, arg1->x4);
-            for (i = 0; arg1->x8[i].x0 != 0; i++) {
-                if (arg1->x8[i].x0 == 9) {
+            for (i = new_var; (v = arg1->x8[i].x0) != 0; i++) {
+                if (v == 9) {
                     i = 0;
                     break;
                 }
@@ -806,12 +866,17 @@ void un_80303FD4(HSD_GObj* arg0, struct un_80304138_objalloc_t* arg1,
             DevText_HideCursor(arg1->x4);
             DevText_SetScale(arg1->x4, 10.0f, 17.0f);
             un_804D6E48 = NULL;
-            for (i = 0; arg1->x8[i].x0 != 9; i++) {
-                un_80302E00(&arg1->x8[i], 4);
+            {
+                struct un_80304138_objalloc_t_x8* p = arg1->x8;
+                while (p->x0 != 9) {
+                    un_80302E00(p, 4);
+                    p++;
+                }
             }
         }
     }
 }
+#pragma pop
 
 void un_80304138(void)
 {
@@ -842,9 +907,13 @@ void un_80304210(struct un_80304138_objalloc_t* arg0, void* arg1, int arg2,
     struct un_80304138_objalloc_t* obj = HSD_ObjAlloc(&un_804A2688);
     if (obj != NULL) {
         DevText* text = arg0->x4;
-        un_80303FD4(arg0->x10, obj, arg1, arg2,
-                    text->x + arg3 + text->scale_x * text->w,
-                    text->y + arg4 + text->scale_y * arg0->x0);
+        f32 x = text->scale_x * (f32) text->w;
+        {
+            s32 x_pos = (s32) ((f32) arg3 + x);
+            s32 y_pos = (s32) (text->scale_y * (f32) arg0->x0 + (f32) arg4);
+            un_80303FD4(arg0->x10, obj, arg1, arg2, text->x + x_pos,
+                        text->y + y_pos);
+        }
         arg0->x1 = arg0->x1 | 0x10;
         arg0->prev = obj;
         obj->next = arg0;
@@ -900,11 +969,11 @@ bool un_80304470(void)
     int sum = 0;
     int count;
     for (i = 0; i < 8; i++) {
-        sum += un_80304B94(i);
+        sum += Toy_80304B94(i);
     }
     count = 0;
     for (i = 0; i < 0x125; i++) {
-        if (i != 0xE6 && i != 0xC9 && un_803048C0(i)) {
+        if (i != 0xE6 && i != 0xC9 && Toy_803048C0(i)) {
             count++;
         }
     }
@@ -921,11 +990,11 @@ bool un_80304510(void)
     int sum = 0;
     int count;
     for (i = 0; i < 9; i++) {
-        sum += un_80304B94(i);
+        sum += Toy_80304B94(i);
     }
     count = 0;
     for (i = 0; i < 0x125; i++) {
-        if (un_803048C0(i)) {
+        if (Toy_803048C0(i)) {
             count++;
         }
     }
@@ -938,265 +1007,64 @@ bool un_80304510(void)
 
 bool un_803045A0(void)
 {
-    struct idk sp = un_803B87A8;
+    s16 sp[] = {
+        0,  3,  6,  9,  12, 15, 18, 21, 24, 27, 30, 33, 36,
+        39, 42, 45, 48, 51, 54, 57, 60, 63, 66, 69, 72, 75,
+    };
     unsigned int i;
     unsigned int count = 0;
-    for (i = 0; i < 26; i++) {
-        if (un_803048C0(sp.idk[i])) {
+    for (i = 0; i < ARRAY_SIZE(sp); i++) {
+        if (Toy_803048C0(sp[i])) {
             count++;
         }
     }
-    if (count == 26) {
+    if (count == ARRAY_SIZE(sp)) {
         return 1;
     } else {
         return 0;
     }
 }
 
+/// @todo Duplicate code of #un_803045A0 with different data
 bool un_80304690(void)
 {
-    struct idk sp = un_803B87DC;
+    s16 sp[] = {
+        1,  4,  7,  10, 13, 16, 19, 22, 25, 28, 31, 34, 37,
+        40, 43, 46, 49, 52, 55, 58, 61, 64, 67, 70, 73, 76,
+    };
+
     unsigned int i;
     unsigned int count = 0;
-    for (i = 0; i < 26; i++) {
-        if (un_803048C0(sp.idk[i])) {
+    for (i = 0; i < ARRAY_SIZE(sp); i++) {
+        if (Toy_803048C0(sp[i])) {
             count++;
         }
     }
-    if (count == 26) {
+    if (count == ARRAY_SIZE(sp)) {
         return 1;
     } else {
         return 0;
     }
 }
 
+/// @todo Duplicate code of #un_803045A0 with different data
 bool un_80304780(void)
 {
-    struct idk sp = un_803B8810;
+    s16 sp[] = {
+        2,  5,  8,  11, 14, 17, 20, 23, 26, 29, 32, 35, 38,
+        41, 44, 47, 50, 53, 56, 59, 62, 65, 68, 71, 74, 77,
+    };
+
     unsigned int i;
     unsigned int count = 0;
-    for (i = 0; i < 26; i++) {
-        if (un_803048C0(sp.idk[i])) {
+    for (i = 0; i < ARRAY_SIZE(sp); i++) {
+        if (Toy_803048C0(sp[i])) {
             count++;
         }
     }
-    if (count == 26) {
+    if (count == ARRAY_SIZE(sp)) {
         return 1;
     } else {
         return 0;
     }
-}
-
-int un_GetTrophyTotal(void)
-{
-    if (gm_8016B498() || gm_801A4310() == MJ_TOY_LOTTERY) {
-        return (short) un_804A284C[0x258 / 2];
-    } else {
-        return *gmMainLib_8015CC90();
-    }
-}
-
-inline static unsigned short* idk(void)
-{
-    if (gm_8016B498() || gm_801A4310() == MJ_TOY_LOTTERY) {
-        return &un_804A284C[5];
-    } else {
-        return gmMainLib_8015CC78();
-    }
-}
-
-int un_803048C0(int arg0)
-{
-    return idk()[arg0] & 0xFF;
-}
-
-bool un_80304924(int arg0)
-{
-    return idk()[arg0] & 0x8000;
-}
-
-void un_80304988(int arg0)
-{
-    unsigned short* v = idk();
-    v[arg0] = v[arg0] ^ 0x8000;
-}
-
-bool un_803049F4(int arg0)
-{
-    return idk()[arg0] & 0x4000;
-}
-
-void un_80304A58(int arg0)
-{
-    unsigned short* v = idk();
-    if (un_803049F4(arg0)) {
-        v[arg0] = v[arg0] ^ 0x4000;
-    }
-}
-
-bool un_80304B0C(int arg0)
-{
-    unsigned short* v;
-    unsigned short s;
-    if (gm_8016B498() || gm_801A4310() == MJ_TOY_LOTTERY) {
-        s = un_804A284C[3] | un_804A284C[4];
-        v = &s;
-    } else {
-        v = gmMainLib_8015CC84();
-    }
-    if (*v & (1 << arg0)) {
-        return 1;
-    } else {
-        return 0;
-    }
-}
-
-int un_80304B94(int option)
-{
-    int res;
-    switch (option) {
-    case 0:
-        if (lbLang_IsSettingJP()) {
-            res = 0x4;
-        } else {
-            res = 0x4;
-        }
-        break;
-    case 1:
-        if (lbLang_IsSettingJP()) {
-            res = 0xA;
-        } else {
-            res = 0xA;
-        }
-        break;
-    case 2:
-        if (lbLang_IsSettingJP()) {
-            res = 0x11;
-        } else {
-            res = 0x10;
-        }
-        break;
-    case 3:
-        if (lbLang_IsSettingJP()) {
-            res = 0x17;
-        } else {
-            res = 0x17;
-        }
-        break;
-    case 4:
-        if (lbLang_IsSettingJP()) {
-            res = 0xC;
-        } else {
-            res = 0xC;
-        }
-        break;
-    case 5:
-        if (lbLang_IsSettingJP()) {
-            res = 0x48;
-        } else {
-            res = 0x48;
-        }
-        break;
-    case 6:
-        if (lbLang_IsSettingJP()) {
-            res = 0x1B;
-        } else {
-            res = 0x1B;
-        }
-        break;
-    case 7:
-        if (lbLang_IsSettingJP()) {
-            res = 0x7E;
-        } else {
-            res = 0x7E;
-        }
-        break;
-    case 8:
-        if (lbLang_IsSettingJP()) {
-            res = 0x2;
-        } else {
-            res = 0x2;
-        }
-        break;
-    }
-    return res;
-}
-
-bool un_80304CC8(int arg0)
-{
-    short* v = un_804D6EB4;
-    if (lbLang_IsSettingUS()) {
-        for (; *v != -1; v++) {
-            if (*v == arg0) {
-                return 0;
-            }
-        }
-    }
-    return 1;
-}
-
-int un_80304D30(void)
-{
-    int i;
-    int x;
-    int count;
-    int count2;
-    int idk;
-    int* qwe;
-    int sp14[36 / 4];
-    if (un_80304470()) {
-        return 0;
-    }
-    memzero(sp14, 36);
-    count = 0;
-    for (i = 0; i < 0x125; i++) {
-        if (un_80304CC8(i)) {
-            if (un_803048C0(i)) {
-                x = un_803060BC(i, 6);
-                sp14[x]++;
-                if (x != 8 && x != 1) {
-                    count++;
-                }
-            }
-        }
-    }
-
-    idk = 6;
-    qwe = sp14;
-    while (idk != 0) {
-        if (idk <= (unsigned int) 2 || *qwe == 0 || *qwe != un_80304B94(idk)) {
-            break;
-        }
-        for (i = 0; i < idk; i++) {
-            if (1 < (unsigned int) idk && idk != 3) {
-                if (!un_80304B0C(idk)) {
-                    un_804A284C[0] = 2;
-                    un_80305918(idk, 0, 0);
-                }
-            }
-        }
-        i = idk + 1;
-        while (un_80304B94(i) == 0) {
-            i++;
-        }
-        if (4 <= idk && idk <= 6) {
-            if (!un_80304B0C(idk)) {
-                un_804A284C[0] = 2;
-                un_80305918(idk, 0, 0);
-                break;
-            }
-        }
-        idk--;
-        qwe--;
-    }
-
-    count2 = 0;
-    for (i = 0; i < 8; i++) {
-        if (x != 8 && x != 1) {
-            if (un_80304B0C(i)) {
-                count2 += un_80304B94(i);
-            }
-        }
-    }
-    return count2 - count;
 }

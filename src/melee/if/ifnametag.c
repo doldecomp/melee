@@ -4,8 +4,8 @@
 #include "gm/gm_unsplit.h"
 #include "if/ifall.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
+#include "lb/lbspdisplay.h"
 #include "lb/lbvector.h"
 #include "mn/mnmain.h"
 #include "mn/mnname.h"
@@ -228,9 +228,9 @@ void fn_802FCC44(HSD_GObj* gobj)
         (un_804D6D70[*slot] || Player_GetNametagSlotID(*slot) != 'x' ||
          Player_80036058(*slot) || gm_8016B258(*slot)))
     {
-        HSD_JObjClearFlags(HSD_JObjGetChild(jobj), 0x10);
+        HSD_JObjClearFlags(HSD_JObjGetChild(jobj), JOBJ_HIDDEN);
     } else {
-        HSD_JObjSetFlags(HSD_JObjGetChild(jobj), 0x10);
+        HSD_JObjSetFlags(HSD_JObjGetChild(jobj), JOBJ_HIDDEN);
         if (has_nametag(*slot)) {
             HSD_SisLib_803A746C(un_804D6D78, un_804A1EF8[*slot], -5000.0f,
                                 0.0f);

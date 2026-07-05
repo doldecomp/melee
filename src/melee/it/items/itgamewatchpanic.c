@@ -5,8 +5,8 @@
 #include "ft/ftlib.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
-#include "it/it_2725.h"
 #include "it/item.h"
+#include "it/itzako.h"
 
 /* 2C7FAC */ static bool itGamewatchpanic_UnkMotion1_Anim(Item_GObj*);
 

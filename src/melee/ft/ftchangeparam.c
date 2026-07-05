@@ -7,6 +7,7 @@
 
 float ftCo_CalcYScaledKnockback(float arg0, float scale, float arg2)
 {
+    /// @todo Convert to @c HSD_ASSERT once a byte-matching form is found.
     if (scale == 0.0F) {
         __assert("ftchangeparam.c", 0x1E, "scale != 0.0F");
     }
@@ -24,7 +25,7 @@ float ftCo_CalcYScaledKnockback(float arg0, float scale, float arg2)
 
 void ftCo_800CF6E8(ftCo_DatAttrs* attr, f32 scale)
 {
-    PAD_STACK(4);
+    f32* cur;
 
     if (scale != 1.0f) {
         attr->slow_walk_max = ftCo_CalcYScaledKnockback(
@@ -69,12 +70,12 @@ void ftCo_800CF6E8(ftCo_DatAttrs* attr, f32 scale)
                                       scale, Fighter_804D6524->x58);
         attr->xB4 =
             ftCo_CalcYScaledKnockback(attr->xB4, scale, Fighter_804D6524->x5C);
-        attr->xBC.size = ftCo_CalcYScaledKnockback(attr->xBC.size, scale,
-                                                   Fighter_804D6524->x60);
-        attr->xDC =
-            ftCo_CalcYScaledKnockback(attr->xDC, scale, Fighter_804D6524->x64);
-        attr->kirby_b_star_damage = ftCo_CalcYScaledKnockback(
-            attr->kirby_b_star_damage, scale, Fighter_804D6524->x68);
+        cur = &attr->xBC.size;
+        *cur = ftCo_CalcYScaledKnockback(*cur, scale, Fighter_804D6524->x60);
+        cur = &attr->xDC;
+        *cur = ftCo_CalcYScaledKnockback(*cur, scale, Fighter_804D6524->x64);
+        cur[1] =
+            ftCo_CalcYScaledKnockback(cur[1], scale, Fighter_804D6524->x68);
         attr->normal_landing_lag = ftCo_CalcYScaledKnockback(
             attr->normal_landing_lag, scale, Fighter_804D6524->x6C);
         attr->landingairn_lag = ftCo_CalcYScaledKnockback(
@@ -108,21 +109,22 @@ void ftCo_800CF6E8(ftCo_DatAttrs* attr, f32 scale)
 
 void ftCo_800D0CBC(Fighter_GObj* fgp)
 {
-    Fighter* fp;
     struct Fighter_x2D0_t* temp_r30;
+    Fighter* fp;
     f32 scale;
+    f32 orig_scale;
     s32 i;
     s32 count;
-    PAD_STACK(16);
+    PAD_STACK(8);
 
     fp = fgp->user_data;
-    scale = fp->x34_scale.y;
-    temp_r30 = fp->x2D0;
-    count = temp_r30->x28;
+    count = (temp_r30 = fp->x2D0)->x28;
+    scale = 1.0f;
 
-    if (scale != 1.0f) {
-        /// @todo figure out the correct args
-        scale = ftCo_CalcYScaledKnockback(1.0f, scale, Fighter_804D6524->x28);
+    if (scale != fp->x34_scale.y) {
+        orig_scale = fp->x34_scale.y;
+        scale *=
+            ftCo_CalcYScaledKnockback(1.0f, orig_scale, Fighter_804D6524->x28);
     }
 
     if (fp->x197C != NULL) {
@@ -228,11 +230,8 @@ void ftCo_800D105C(Fighter_GObj* fgp)
         fp->co_attrs.weight *= Fighter_804D6518->x4;
     }
 
-    if (ftKindCalcIndiviParamTable[fp->kind] == NULL) {
-        OSReport("don\'t set ftKindCalcIndiviParamTable!!\n");
-        __assert("ftchangeparam.c", 0x10d,
-                 "ftKindCalcIndiviParamTable[fp->kind] != NULL");
-    }
+    HSD_ASSERTREPORT(0x10d, ftKindCalcIndiviParamTable[fp->kind] != NULL,
+                     "don\'t set ftKindCalcIndiviParamTable!!\n");
     ftKindCalcIndiviParamTable[fp->kind](fgp);
 
     if (fp->x2D0 != NULL) {

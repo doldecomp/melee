@@ -10,9 +10,13 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/it_3F14.h"
 #include "it/itcoll.h"
 #include "it/item.h"
 #include "it/items/itnokonoko.h"
+#include "it/ithitbox.h"
+#include "it/itmaplib.h"
+#include "it/itzako.h"
 #include "lb/lb_00B0.h"
 #include "mp/mpcoll.h"
 
@@ -696,8 +700,8 @@ void it_802DF230(Item_GObj* gobj)
     } else {
         f32 factor;
         if (angle > 2147483600.0f || angle < -2147483600.0f) {
-            OSReport("*** ZGShell Restoration Rot Y Irregul!\n");
-            __assert("itzgshell.c", 0x3A1, "0");
+            HSD_ASSERTREPORT(0x3A1, 0,
+                             "*** ZGShell Restoration Rot Y Irregul!\n");
         }
         angle = (f32) ((s32) angle % 360);
         HSD_JObjSetRotationY(jobj, deg_to_rad * angle);

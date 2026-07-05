@@ -80,7 +80,7 @@ static inline void ftCo_800D4F24_inline(Fighter_GObj* gobj)
     temp_r31->x2219_b1 = 1;
     temp_r31->x221E_b1 = 1;
     temp_r31->x221E_b2 = 1;
-    ftMaterial_800BFD04(gobj);
+    ftCo_800BFD04(gobj);
 }
 
 void ftCo_800D4F24(Fighter_GObj* gobj, int index)

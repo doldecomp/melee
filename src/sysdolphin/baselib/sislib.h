@@ -27,10 +27,9 @@ typedef struct SIS {
     /*0x04*/ TextGlyphTexture* textures;
 } SIS;
 
-/// @todo give actual names?
-struct sislib_UnkAllocData {
-    sislib_UnkAllocData* data_0;
-    HSD_Text* data_1;
+struct SisBlock {
+    SisBlock* next;
+    HSD_Text* data;
     u32 size;
 };
 
@@ -73,7 +72,7 @@ struct HSD_Text {
         void*);      ///< callback in the text renderer (HSD_SisLib_803A84BC)
     SIS* sis_buffer; ///< SIS text buffer
     UNK_T x60;       ///< position in text buffer
-    sislib_UnkAllocData* alloc_data;
+    SisBlock* alloc_data;
     char* string_buffer; ///< raw string buffer
     u16 x6C;             ///< string length?
     u16 x6E;             ///< alloc size?
@@ -109,8 +108,8 @@ extern SIS* HSD_SisLib_804D1124[5];
 extern u32 lbl_8040C8C0[144];
 extern u32 HSD_SisLib_8040C680[144];
 
-extern sislib_UnkAllocData* HSD_SisLib_804D7970;
-extern sislib_UnkAllocData* HSD_SisLib_804D7974;
+extern SisBlock* free_head;
+extern SisBlock* used_head;
 extern HSD_Text* HSD_SisLib_804D7978;
 extern sislib_UnkAlloc3* HSD_SisLib_804D797C;
 
@@ -122,7 +121,7 @@ HSD_Archive* HSD_SisLib_803A945C(char*);
 void HSD_SisLib_803A84BC(HSD_GObj*, int);
 s32 HSD_SisLib_803A7F0C(HSD_Text*, s32);
 void HSD_SisLib_803A8134(void*, HSD_Text*, f32*, f32*);
-void HSD_SisLib_803A7684(UNK_T, u8, u8);
+void HSD_SisLib_803A7684(HSD_Text*, u8*, u8);
 void HSD_SisLib_803A7664(HSD_Text*);
 void HSD_SisLib_803A75E0(HSD_Text*, s32);
 void HSD_SisLib_803A7548(HSD_Text*, int, float, float);
@@ -134,15 +133,15 @@ int HSD_SisLib_803A6B98(HSD_Text* arg0, float, float, const char*, ...);
 s32 HSD_SisLib_803A67EC(u8*, u8*);
 HSD_Text* HSD_SisLib_803A6754(int arg0, s32 arg1);
 void HSD_SisLib_803A660C(s32, s32, s32);
-void HSD_SisLib_803A6530(s32, s32, s32);
+u8* HSD_SisLib_803A6530(s32, s32, s32);
 u8* HSD_SisLib_803A6478(u8*, u8*);
 void HSD_SisLib_803A6368(HSD_Text*, s32);
 void HSD_SisLib_803A62A0(s32, char*, char*);
 s32 HSD_SisLib_803A611C(int, HSD_GObj*, u16, u8, u8, u8, u8, u32);
 void lbl_803A60EC(void);
 HSD_Text* HSD_SisLib_803A5ACC(int, s32, f32, f32, f32, f32, f32);
-void* HSD_SisLib_803A5798(s32);
-void HSD_SisLib_803A594C(void*);
+void* HSD_SisLib_Alloc(s32);
+void HSD_SisLib_Free(void*);
 void HSD_SisLib_803A5CC4(HSD_Text*);
 void HSD_SisLib_803A5A2C(void*);
 void HSD_SisLib_803A5D30(void);

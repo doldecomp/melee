@@ -1,5 +1,7 @@
 #include "itkusudama.h"
 
+#include "math.h"
+
 #include <placeholder.h>
 #include <platform.h>
 
@@ -10,12 +12,37 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/it_3F14.h"
 #include "it/itCommonItems.h"
+#include "it/itdrop.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
+#include "it/ithitbox.h"
+#include "it/itmaplib.h"
+#include "it/itspawn.h"
 #include "sysdolphin/baselib/random.h"
+
+ItemStateTable it_803F59F8[] = {
+    { -1, itKusudama_UnkMotion0_Anim, itKusudama_UnkMotion0_Phys,
+      itKusudama_UnkMotion0_Coll },
+    { 0, itKusudama_UnkMotion1_Anim, itKusudama_UnkMotion1_Phys,
+      itKusudama_UnkMotion1_Coll },
+    { -1, itKusudama_UnkMotion2_Anim, itKusudama_UnkMotion2_Phys,
+      itKusudama_UnkMotion2_Coll },
+    { 1, itKusudama_UnkMotion3_Anim, itKusudama_UnkMotion3_Phys,
+      itKusudama_UnkMotion3_Coll },
+    { -1, itKusudama_UnkMotion4_Anim, itKusudama_UnkMotion4_Phys, NULL },
+    { 2, itKusudama_UnkMotion6_Anim, itKusudama_UnkMotion6_Phys,
+      itKusudama_UnkMotion5_Coll },
+    { 2, itKusudama_UnkMotion6_Anim, itKusudama_UnkMotion6_Phys,
+      itKusudama_UnkMotion6_Coll },
+    { 3, itKusudama_UnkMotion7_Anim, itKusudama_UnkMotion7_Phys,
+      itKusudama_UnkMotion7_Coll },
+    { 4, itKusudama_UnkMotion8_Anim, itKusudama_UnkMotion8_Phys,
+      itKusudama_UnkMotion8_Coll },
+};
 
 HSD_GObj* it_802896CC(Vec3* arg0)
 {
@@ -57,8 +84,8 @@ void it_802897C8(Item_GObj* gobj, f32 angle)
     f32 f;
     f32 rotx;
 
-    if (angle > 3.1415927f) {
-        angle -= 6.2831855f;
+    if (angle > M_PI_F) {
+        angle -= M_TAU_F;
     }
     if (ip->facing_dir == -1.0f) {
         angle *= -1.0f;
@@ -86,13 +113,26 @@ void it_80289910(Item_GObj* gobj, f32 angle)
     HSD_JObj* jobj = gobj->hsd_obj;
     PAD_STACK(8);
 
-    if (angle > 3.1415927f) {
-        angle -= 6.2831855f;
+    if (angle > M_PI_F) {
+        angle -= M_TAU_F;
     }
     if (ip->facing_dir == -1.0f) {
         angle *= -1.0f;
     }
     HSD_JObjSetRotationX(jobj, angle);
+}
+
+static void it_8028A544_inline(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* jobj = gobj->hsd_obj;
+    f32 roty;
+    if (ip->facing_dir == 1.0f) {
+        roty = 4.694936f;
+    } else {
+        roty = -4.694936f;
+    }
+    HSD_JObjSetRotationY(jobj, roty);
 }
 
 void it_80289A00(Item_GObj* gobj)
@@ -104,16 +144,16 @@ void it_80289A00(Item_GObj* gobj)
 
     roty = HSD_JObjGetRotationY(jobj);
     if (ip->facing_dir == 1.0f) {
-        if (roty > 1.5707964f + attrs->x28) {
+        if (roty > M_PI_2_F + attrs->x28) {
             roty -= attrs->x28;
         } else {
-            roty = 1.5707964f;
+            roty = M_PI_2_F;
         }
     } else {
-        if (roty < -1.5707964f - attrs->x28) {
+        if (roty < -M_PI_2_F - attrs->x28) {
             roty += attrs->x28;
         } else {
-            roty = -1.5707964f;
+            roty = -M_PI_2_F;
         }
     }
     HSD_JObjSetRotationY(jobj, roty);
@@ -144,32 +184,38 @@ static inline void it_80289BE8_inline(Item_GObj* gobj, f32 vel_scale,
     vel->z = 0.0f;
 }
 
-static inline ItemKind it_80289BE8_spawn(Item_GObj* gobj, ItemKind kind,
-                                         f32 vel_scale, Vec3* pos, Vec3* vel)
+/// @todo .sdata2 order hack
+static void sdata2_order(void)
 {
-    Item_GObj* spawned_gobj;
-
-    it_80289BE8_inline(gobj, vel_scale, pos, vel);
-
-    spawned_gobj = it_8026F5C8(gobj, kind, pos);
-    if (spawned_gobj) {
-        it_8026F53C(spawned_gobj, vel, true);
-        it_80274ED8();
-        return kind;
-    }
-    return -1;
+    (void) 5.0f;
+    (void) 1.2f;
+    (void) 0.6f;
+    (void) 0.3f;
+    (void) 0.1f;
+    (void) 0.05f;
+    (void) 0.025f;
+    (void) 1.4f;
+    (void) 0.7f;
+    (void) 0.35f;
+    (void) 1.8f;
+    (void) 0.9f;
+    (void) 0.45f;
+    (void) S32_TO_F32;
 }
 
 void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3)
 {
+    ItemKind prev_kind;
     ItemKind spawned[15];
     Vec3 pos;
     Vec3 vel;
+    itKusudamaAttributes* attr;
     Item* ip = GET_ITEM(gobj);
-    itKusudamaAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
-    s32 count;
     int i;
+    s32 count;
     PAD_STACK(8);
+
+    attr = ip->xC4_article_data->x4_specialAttributes;
 
     pos = ip->pos;
     pos.y -= 5.0f;
@@ -196,10 +242,11 @@ void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3)
 
     i = HSD_Randi(arg1 + arg2 + arg3);
     if (i < arg1) {
-        ItemKind prev_kind;
-        ItemKind kind = attr->x10;
+        ItemKind kind;
         count = attr->x14;
-        if (kind == It_Kind_M_Ball && it_8026C704() == true) {
+        (void) count;
+        kind = (ItemKind) attr->x10;
+        if (attr->x10 == It_Kind_M_Ball && it_8026C704() == true) {
             i = HSD_Randi(arg2 + arg3);
             goto food_or_random;
         }
@@ -220,24 +267,27 @@ void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3)
                 spawned[i] = kind;
             }
         }
-        for (; i < count; i++) {
-            ItemKind rand_kind = it_8026F3AC();
-            Vec3 vel;
-            Vec3 pos;
-            PAD_STACK(8);
-            if (rand_kind != -1) {
-                Item_GObj* spawned_gobj;
-                it_80289BE8_inline(gobj, 1.2f, &pos, &vel);
-                spawned_gobj = it_8026F5C8(gobj, rand_kind, &pos);
-                if (spawned_gobj != NULL) {
-                    it_8026F53C(spawned_gobj, &vel, true);
-                    it_80274ED8();
-                    prev_kind = rand_kind;
-                } else {
-                    prev_kind = -1;
+        {
+            ItemKind* spawn_ptr = &spawned[i];
+            for (; i < count; i++, spawn_ptr++) {
+                ItemKind rand_kind = it_8026F3AC();
+                Vec3 vel;
+                Vec3 pos;
+                PAD_STACK(8);
+                if (rand_kind != -1) {
+                    Item_GObj* spawned_gobj;
+                    it_80289BE8_inline(gobj, 1.2f, &pos, &vel);
+                    spawned_gobj = it_8026F5C8(gobj, rand_kind, &pos);
+                    if (spawned_gobj != NULL) {
+                        it_8026F53C(spawned_gobj, &vel, true);
+                        it_80274ED8();
+                        prev_kind = rand_kind;
+                    } else {
+                        prev_kind = -1;
+                    }
                 }
+                *spawn_ptr = prev_kind;
             }
-            spawned[i] = prev_kind;
         }
     } else {
         i -= arg1;
@@ -255,10 +305,10 @@ void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3)
                 }
             }
         } else {
-            ItemKind prev_kind;
             Vec3 vel;
             Vec3 pos;
-            count = HSD_Randi(2) + 3;
+            count = HSD_Randi(2);
+            count += 3;
             for (i = 0; i < count; i++) {
                 ItemKind rand_kind = it_8026F3AC();
                 if (rand_kind != -1) {
@@ -302,7 +352,7 @@ bool it_8028A114(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 static inline void it_8028A190_inline(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    f32 rotx = 1.5707964f;
+    f32 rotx = M_PI_2;
     HSD_JObj* jobj = gobj->hsd_obj;
     if (ip->facing_dir == -1.0f) {
         rotx *= -1.0f;
@@ -322,7 +372,7 @@ void it_8028A190(Item_GObj* gobj)
 
 bool itKusudama_UnkMotion0_Anim(Item_GObj* gobj)
 {
-    it_802897C8(gobj, 1.5707964f);
+    it_802897C8(gobj, M_PI_2);
     return false;
 }
 
@@ -371,7 +421,7 @@ void it_8028A3CC(Item_GObj* gobj)
 
 bool itKusudama_UnkMotion2_Anim(Item_GObj* gobj)
 {
-    it_802897C8(gobj, 1.5707964f);
+    it_802897C8(gobj, M_PI_2);
     return false;
 }
 
@@ -386,19 +436,6 @@ bool itKusudama_UnkMotion2_Coll(Item_GObj* gobj)
 {
     it_8026E15C(gobj, it_8028A190);
     return false;
-}
-
-static inline void it_8028A544_inline(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    HSD_JObj* jobj = gobj->hsd_obj;
-    f32 roty;
-    if (ip->facing_dir == 1.0f) {
-        roty = 4.694936f;
-    } else {
-        roty = -4.694936f;
-    }
-    HSD_JObjSetRotationY(jobj, roty);
 }
 
 void it_8028A544(Item_GObj* gobj)
@@ -531,7 +568,7 @@ void itKusudama_Logic4_Dropped(Item_GObj* gobj)
 
 static inline void itKusudama_UnkMotion6_Coll_inline2(Item_GObj* gobj)
 {
-    it_80289910(gobj, 1.5707964f);
+    it_80289910(gobj, M_PI_2);
 }
 
 static inline void itKusudama_UnkMotion6_Coll_inline(Item_GObj* gobj)

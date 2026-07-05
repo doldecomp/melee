@@ -18,11 +18,28 @@
 #include <it/it_26B1.h>
 #include <MetroTRK/intrinsics.h>
 #include <MSL/math.h>
-#include <MSL/math_ppc.h>
 
 /// @todo Lots of 6s in here
 /// pl_8004049C seems to indicate it might have actually been
 /// `Gm_Player_NumMax`
+
+static inline float my_sqrtf(float x)
+{
+    u8 _[4] = { 0 };
+    volatile float y;
+    const double half = 0.5;
+    const double three = 3.0;
+
+    if (x > 0.0f) {
+        double guess = __frsqrte((double) x);
+        guess = half * guess * (three - guess * guess * x);
+        guess = half * guess * (three - guess * guess * x);
+        guess = half * guess * (three - guess * guess * x);
+        y = (float) (x * guess);
+        return y;
+    }
+    return x;
+}
 
 /* 03D514 */ static void plBonusLib_8003D514(int);
 
@@ -508,7 +525,55 @@ u32 pl_8003E420(int arg0)
     return sum;
 }
 
-/// pl_8003E4A4
+inline int match_item_kind(int kind)
+{
+    if (kind >= 0 && kind < 0x23) {
+        return kind;
+    } else {
+        switch (kind) {
+        case 0xCD:
+            return 0x23;
+        case 0xE1:
+            return 0x24;
+        case 0xE2:
+            return 0x25;
+        case 0x28:
+            return 0x26;
+        default:
+            return -1;
+        }
+    }
+}
+
+void pl_8003E4A4(int slot, bool arg1, void* arg2, int count)
+{
+    pl_StaleMoveTableExt_t* table = Player_GetStaleMoveTableIndexPtr2(slot);
+    int* moves = arg2;
+    u32 seen[0x27];
+    int i;
+
+    for (i = 0; i < 0x27; i++) {
+        seen[i] = 0;
+    }
+
+    for (i = 0; i < count; i++) {
+        if (match_item_kind(moves[i]) < 0x27) {
+            seen[match_item_kind(moves[i])] = 1;
+        }
+    }
+
+    for (i = 0; i < 0x27; i++) {
+        if (seen[i] == 1) {
+            table->x0_staleMoveTable.x7AC[i]++;
+            if ((u32) table->x0_staleMoveTable.x7AC[i] == pl_804D6470->x138) {
+                pl_80038788(slot, 0x9D, 1);
+                table->x0_staleMoveTable.x7AC[i] = 0;
+            }
+        } else {
+            table->x0_staleMoveTable.x7AC[i] = 0;
+        }
+    }
+}
 
 void pl_8003E70C(Item_GObj* igobj)
 {
@@ -696,26 +761,6 @@ void pl_8003ED0C(int arg0, int arg1, int r5, int arg3, float arg2)
     temp_r3->x0_staleMoveTable.xCA0 = pl_CalculateAverage(temp_f30, total);
 }
 
-inline int match_item_kind(int kind)
-{
-    if (kind >= 0 && kind < 0x23) {
-        return kind;
-    } else {
-        switch (kind) {
-        case 0xCD:
-            return 0x23;
-        case 0xE1:
-            return 0x24;
-        case 0xE2:
-            return 0x25;
-        case 0x28:
-            return 0x26;
-        default:
-            return -1;
-        }
-    }
-}
-
 void fn_8003EE2C(int arg0, int arg1)
 {
     pl_StaleMoveTableExt_t* temp_r31;
@@ -837,7 +882,80 @@ void fn_8003EE2C(int arg0, int arg1)
     }
 }
 
-/// fn_8003F294
+inline unsigned int plBonusLib_8003F294_inline(plActionStats* stats,
+                                               int attack)
+{
+    return pl_800386D8(stats, attack);
+}
+
+void fn_8003F294(int slot, int index)
+{
+    pl_StaleMoveTableExt_t* table = Player_GetStaleMoveTableIndexPtr2(slot);
+    unsigned int new_var;
+    unsigned int threshold;
+    plActionStats* stats;
+    int threshold2;
+
+    PAD_STACK(24);
+
+    Player_GetEntityAtIndex(slot, index);
+    stats = Player_GetActionStats(slot);
+
+    do {
+        if (index == 1) {
+            return;
+        }
+    } while (0);
+
+    pl_8003906C(slot, 0x3B, 0L, pl_804D6470->x70,
+                threshold2 = pl_804D6470->x74,
+                plBonusLib_8003F294_inline(stats, 0x6B), &table->xD9C);
+    pl_8003906C(slot, 0x45, 0L, pl_804D6470->x90, threshold = pl_804D6470->x94,
+                plBonusLib_8003F294_inline(stats, 0x70), &table->xDA0);
+    {
+        int e8 = pl_800386E8((pl_800386E8_arg0_t*) stats);
+        pl_8003906C(slot, 0x49, 0L, pl_804D6470->xA8,
+                    threshold = pl_804D6470->xAC, e8, &table->xDA4);
+    }
+    pl_8003906C(slot, 0x54, 0L, pl_804D6470->xC4, threshold = pl_804D6470->xC8,
+                plBonusLib_8003F294_inline(stats, 0x6F), &table->xDA8);
+    pl_8003906C(slot, -1, (unsigned int*) &table->xDC8, pl_804D6470->x18,
+                threshold = pl_804D6470->x1C, stats->hits.total, &table->xDAC);
+    pl_8003906C(slot, 0x13, 0L, pl_804D6470->x2C, threshold = pl_804D6470->x30,
+                stats->attacks.total, &table->xDB0);
+    threshold = (unsigned int) pl_804D6470->xE4;
+    pl_8003906C(slot, 0x5C, 0L, pl_804D6470->xE0, threshold, table->xD70,
+                &table->xDB4);
+    pl_8003906C(slot, 0x99, 0L, pl_804D6470->x130,
+                threshold = pl_804D6470->x134, table->xD34, &table->xDB8);
+    threshold = pl_804D6470->x80;
+    pl_8003906C(slot, 0x3D, 0L, pl_804D6470->x7C, threshold,
+                table->x0_staleMoveTable.xCD8, &table->xDBC);
+
+    {
+        pl_StaleMoveTableExt_t* t2 = Player_GetStaleMoveTableIndexPtr2(slot);
+        f32 mag =
+            sqrtf__Ff(t2->x0_staleMoveTable.xCDC * t2->x0_staleMoveTable.xCDC +
+                      t2->x0_staleMoveTable.xCE0 * t2->x0_staleMoveTable.xCE0);
+        f32 x8c = *((f32*) &pl_804D6470->x8C);
+        pl_80039238(slot, 0x44, 0L, pl_804D6470->x88, &table->xDC0, x8c, mag);
+    }
+
+    if (pl_8003906C(slot, -1, (unsigned int*) &table->xDCC, pl_804D6470->xB8,
+                    new_var = pl_804D6470->xBC, table->xCF4, &table->xDC4))
+    {
+        u32 v = gm_8016AEDC();
+        u32 xb8 = pl_804D6470->xB8;
+        if (xb8 == v) {
+            if (table->xD5C <= xb8) {
+                table->xDD1.bit5 = 1;
+            }
+        } else if (table->xDD1.bit5 && table->xD5C > xb8) {
+            table->xDD1.bit5 = 0;
+        }
+        table->xD5C = -1;
+    }
+}
 
 void fn_8003F53C(int arg0, int arg1)
 {
@@ -864,6 +982,123 @@ void fn_8003F53C(int arg0, int arg1)
             }
             temp_r31->xD58 = 0U;
         }
+    }
+}
+
+void fn_8003F654(int slot, int index, Vec3* pos, Vec3* prevPos)
+{
+    f32 new_var;
+    s32 b34_result;
+    pl_StaleMoveTableExt_t* table = Player_GetStaleMoveTableIndexPtr2(slot);
+    Fighter_GObj* entity = Player_GetEntityAtIndex(slot, index);
+    int b34;
+    int teammate_slot;
+    float avg_sum;
+    int i;
+    int count;
+    Vec3* prev_pos2;
+    f32 dist;
+    f32 sum;
+    f32 abs;
+    f32 pos_x2;
+    f32 y_delta;
+    Vec3 other_pos;
+    Vec3 cam_pos;
+
+    if (pl_Verify_gm_8016AEDC() && (index != 1)) {
+        prev_pos2 = prevPos;
+        switch (ftLib_8008732C(entity)) {
+        case 0:
+            break;
+        default:
+            return;
+        }
+
+        b34_result = ft_80087B34(entity);
+        b34 = b34_result;
+        if (b34 == 1) {
+            dist = my_sqrtf(((prevPos->x - pos->x) * (prevPos->x - pos->x)) +
+                            ((prev_pos2->y - pos->y) * (prevPos->y - pos->y)));
+            teammate_slot = ftLib_80087300(entity);
+            table->xD80 += dist;
+            if (dist > table->xD84) {
+                table->xD84 = dist;
+            }
+            if (teammate_slot != 6) {
+                pl_StaleMoveTableExt_t* teammate_table =
+                    Player_GetStaleMoveTableIndexPtr2(teammate_slot);
+                if (dist > teammate_table->xD88) {
+                    teammate_table->xD88 = dist;
+                }
+            }
+        } else {
+            if (b34 == 0) {
+                if (ftLib_800865CC(entity) == 0) {
+                    abs = pos->x - prevPos->x;
+                    if (abs < 0.0f) {
+                        abs = -abs;
+                    } else {
+                        abs = +abs;
+                    }
+                    table->xD74 += abs;
+                } else {
+                    y_delta = pos->y - prevPos->y;
+                    abs = y_delta;
+                    if (y_delta > 0.0f) {
+                        if (abs < 0.0f) {
+                            abs = -abs;
+                        } else {
+                            abs = +abs;
+                        }
+                        table->xD78 += abs;
+                    } else {
+                        if (abs < 0.0f) {
+                            abs = -abs;
+                        } else {
+                            abs = +abs;
+                        }
+                        table->xD7C += abs;
+                    }
+                }
+            }
+        }
+
+        sum = 0.0f;
+        count = 0;
+        {
+            for (i = 0; 6 > i; i++) {
+                if ((((i != slot) && (!pl_CheckIfSameTeam(slot, i))) &&
+                     Player_8003221C(i)) &&
+                    (!ftLib_8008732C(Player_GetEntity(i))))
+                {
+                    Player_LoadPlayerCoords(i, &other_pos);
+                    pos_x2 = pos->x;
+                    abs = other_pos.x;
+                    abs = pos_x2 - abs;
+                    if (abs < 0.0f) {
+                        abs = -abs;
+                    }
+                    sum += abs;
+                    count++;
+                }
+            }
+        }
+
+        if (count != 0) {
+            table->xD90++;
+            avg_sum = pl_CalculateAverage(sum, count);
+            avg_sum = (table->xD8C * (table->xD90 - 1)) + avg_sum;
+            table->xD8C = pl_CalculateAverage(avg_sum, table->xD90);
+        }
+
+        table->xD98++;
+        Stage_UnkSetVec3TCam_Offset(&cam_pos);
+        abs = pos->x - cam_pos.x;
+        if (abs < 0.0f) {
+            abs = -abs;
+        }
+        dist = (table->xD94 * (table->xD98 - 1)) + (new_var = abs);
+        table->xD94 = pl_CalculateAverage(dist, table->xD98);
     }
 }
 
@@ -1159,6 +1394,8 @@ void pl_8004049C(int player, ItemKind arg1)
     }
     if (var_r0 == 0) {
         OSReport("zako ko player illegal ! :%d\n", player);
+        /// @todo Convert to @c HSD_ASSERT once a byte-matching form is
+        /// found.
         __assert("plbonuslib.c", 1559,
                  "0 <= player && player < Gm_Player_NumMax");
     }
@@ -1238,7 +1475,7 @@ void pl_80040688(int arg0, int arg1, int arg2)
         bits = &temp_r3->x0_staleMoveTable.xCBC;
         xCC0 = &temp_r3->x0_staleMoveTable.xCC0;
 
-        if (!unk_cond(arg1, arg2)) {
+        if (!unk_cond(arg1, temp_r0)) {
             temp_r0_2 = bits->x3;
             if (temp_r0_2 >= 0x33 && temp_r0_2 <= 0x3D) {
                 pl_80038788(temp_r0, 0x2A, 1);
@@ -1260,8 +1497,8 @@ float pl_800407C8(int arg0)
     temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
     temp_r5 = temp_r3->x0_staleMoveTable.xCEC;
     if (temp_r5 != 0) {
-        float tmp = temp_r3->x0_staleMoveTable.xCEC;
-        temp_f31 = temp_r3->x0_staleMoveTable.xCF0;
+        float tmp = (u32) temp_r3->x0_staleMoveTable.xCEC;
+        temp_f31 = (u32) temp_r3->x0_staleMoveTable.xCF0;
         return pl_CalculateAverage(temp_f31, tmp);
     }
     return 0.0f;
@@ -1352,9 +1589,9 @@ int pl_80040A9C(int arg0)
     return sum;
 }
 
-void pl_80040AF0(int arg0)
+u32 pl_80040AF0(int arg0)
 {
-    pl_800386D8(Player_GetActionStats(arg0), 0x70);
+    return pl_800386D8(Player_GetActionStats(arg0), 0x70);
 }
 
 int pl_80040B18(int arg0)

@@ -17,7 +17,7 @@
 #include "ftCommon/ftCo_Landing.h"
 #include "ftCommon/types.h"
 #include "mp/mplib.h"
-#include "vi/vi1202.h"
+#include "sfx/crowdsfx.h"
 
 #include <common_structs.h>
 #include <math.h>

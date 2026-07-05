@@ -31,7 +31,7 @@
 #include "ftCommon/ftCo_ItemParasolOpen.h"
 #include "ftCommon/ftCo_JumpAerial.h"
 #include "ftCommon/types.h"
-#include "ftKirby/ftKb_Init.h"
+#include "ftKirby/ftkirby.h"
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>

@@ -15,56 +15,6 @@
 #define NUM_UNLOCKABLE_CHARACTERS 11
 #define NUM_UNLOCKABLE_STAGES 11
 
-struct lbl_8046B488_t {
-    /* 0x000 */ s8 x0;
-    /* 0x001 */ s8 x1;
-    /* 0x002 */ s8 x2;
-    /* 0x003 */ s8 x3;
-    /* 0x004 */ s8 x4;
-    /* 0x005 */ s8 x5;
-    /* 0x006 */ u8 x6;
-    /* 0x007 */ u8 x7;
-    /* 0x008 */ u8 x8;
-    /* 0x009 */ u8 x9;
-    /* 0x00A */ u8 xA;
-    /* 0x00B */ u8 xB;
-    /* 0x00C */ u8 xC;
-    /* 0x00D */ u8 xD;
-    /* 0x00E */ u8 xE;
-    /* 0x00F */ u8 xF;
-    /* 0x010:0 */ u8 unk_10_b0 : 1;
-    /* 0x010:1 */ u8 unk_10_b1 : 1;
-    /* 0x010:2 */ u8 unk_10_b2 : 1;
-    /* 0x010:3 */ u8 unk_10_b3 : 1;
-    /* 0x010:4 */ u8 unk_10_b4 : 1;
-    /* 0x010:5 */ u8 unk_10_b5 : 1;
-    /* 0x010:6 */ u8 unk_10_b6 : 1;
-    /* 0x010:7 */ u8 unk_10_b7 : 1;
-    /* 0x011 */ char pad_11[0x14 - 0x11];
-    /* 0x014 */ f32 x14;
-    /* 0x018 */ f32 x18;
-    /* 0x01C */ f32 x1C;
-    /* 0x020 */ s8 x20[0xA2 - 0x20];
-    /* 0x0A2 */ s8 xA2[0x124 - 0xA2];
-    /* 0x124 */ s8 x124[0x1A6 - 0x124];
-    /* 0x1A6 */ s8 x1A6[0x1AC - 0x1A6];
-    /* 0x1AC */ u8 x1AC;
-    /* 0x1AD */ u8 x1AD;
-    /* 0x1AE */ s8 x1AE[0x1B2 - 0x1AE];
-    /* 0x1B2 */ u8 x1B2;
-    /* 0x1AE */ s8 x1B3[0x1B8 - 0x1B3];
-    /* 0x1B8 */ GmRouteCallback x1B8;
-    /* 0x1BC */ char pad_1BC[0x1E0 - 0x1BC];
-}; /* size = 0x1E0 */
-STATIC_ASSERT(sizeof(struct lbl_8046B488_t) == 0x1E0);
-
-struct fn_80166CBC_arg0_t {
-    /* +0 */ char pad_0[0x5E];
-    /* +5E */ u8 x5E;
-    /* +5F */ char pad_5F[0xA8 - 0x5F];
-};
-STATIC_ASSERT(sizeof(struct fn_80166CBC_arg0_t) == 0xA8);
-
 /// struct ResultsData {
 ///     /*  +0 */ char pad_0[0x94];
 ///     /* +94 */ int x94;
@@ -96,8 +46,6 @@ struct ResultAnimEntry {
 };
 
 /* 166A8C */ static f32 fn_80166A8C(Vec3*, Vec3*);
-/* 166CBC */ static u8 fn_80166CBC(struct fn_80166CBC_arg0_t* arg0,
-                                   ssize_t index);
 /* 1693A8 */ static s32 fn_801693A8(void);
 /* 16A1E4 */ static s32 fn_8016A1E4(void);
 

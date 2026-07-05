@@ -5,9 +5,9 @@
 #include "if/textdraw.h"
 #include "if/textlib.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
+#include "lb/lbspdisplay.h"
 #include "sc/types.h"
 
 #include <printf.h>
@@ -27,6 +27,9 @@
 #include <baselib/sislib.h>
 #include <MSL/stdio.h>
 #include <MSL/string.h>
+
+/* 4DDC28 */ extern float un_804DDC28;
+/* 4DDC2C */ extern float un_804DDC2C;
 
 /// .data
 /* 3F9E08 */ static struct {
@@ -55,29 +58,34 @@ struct un_804A1F58_x8_t {
     HSD_GObj* x0;
     HSD_Text* x4;
     unsigned int x8;
+    unsigned int xC;
+    unsigned char x10;
 };
 
-// TODO: sizeof(un_804A1F58) should be 0x80, see un_802FF498
-// change 0x80 to sizeof(un_804A1F58) when done
+static u8 un_804A1F48[0x10];
+
 /* 4A1F58 */ static struct un_804A1F58_t {
     unsigned int x0;
-    unsigned char x4;
-    struct un_804A1F58_x8_t x8;
-} un_804A1F58[7];
+    char pad_x4[4];
+    struct un_804A1F58_x8_t x8[6];
+} un_804A1F58;
 
 /// .sbss
 /* 4D6DA0 */ static void* un_804D6DA0;
 /* 4D6DA4 */ static SceneDesc* un_804D6DA4;
 
+/// .sdata2
+/* 4DDC20 */ extern float un_804DDC20;
+
 void fn_802FED14(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = HSD_GObjGetHSDObj(gobj);
     if (!un_803F9E08.x0.b1) {
-        HSD_JObjSetFlagsAll(jobj, 0x10);
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         return;
     }
     if (un_803F9E08.x1 <= un_803F9E08.x2) {
-        HSD_JObjClearFlagsAll(jobj, 0x10);
+        HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         if (un_803F9E08.x1 < un_803F9E08.x2) {
             if (un_803F9E08.x0.b567) {
                 un_803F9E08.x0.b567--;
@@ -121,8 +129,8 @@ void un_802FEFAC(void)
     GObj_SetupGXLink(gobj_ui, HSD_GObj_JObjCallback, 15, 0);
     HSD_GObj_SetupProc(gobj_ui, fn_802FED14, 17);
     gm_8016895C(jobj_ui, un_804D6DA4->models[0], 0);
-    HSD_JObjSetFlagsAll(jobj_ui, 0x10);
-    HSD_JObjReqAnimAll(jobj_ui, 0.0);
+    HSD_JObjSetFlagsAll(jobj_ui, JOBJ_HIDDEN);
+    HSD_JObjReqAnimAll(jobj_ui, un_804DDC20);
     HSD_JObjAnimAll(jobj_ui);
     un_803F9E08.xC = gobj_ui;
 }
@@ -159,23 +167,26 @@ void un_802FF1B4(void)
     un_802FEFAC();
 }
 
-void fn_802FF218(HSD_GObj* arg0)
+static inline int fn_802FF218_inline(HSD_GObj* arg0)
 {
     int x;
-    int y;
-    PAD_STACK(24);
     for (x = 0; x < 6; x++) {
-        if (un_804A1F58[x].x8.x0 == arg0) {
-            y = x;
-            goto _done;
+        if (un_804A1F58.x8[x].x0 == arg0) {
+            return x;
         }
     }
-    y = -1;
-_done:
+    return -1;
+}
+
+void fn_802FF218(HSD_GObj* arg0)
+{
+    int y;
+    PAD_STACK(32);
+    y = fn_802FF218_inline(arg0);
     if (y >= 0) {
-        if (un_804A1F58[y].x0 == 1) {
-            HSD_SisLib_803A70A0(un_804A1F58[y].x8.x4, un_804A1F58[y].x8.x8,
-                                "");
+        struct un_804A1F58_x8_t* thing = &un_804A1F58.x8[y];
+        if (thing->x10 == 1) {
+            HSD_SisLib_803A70A0(thing->x4, thing->x8, "  ");
         } else {
             int s;
             gm_8016B774();
@@ -183,10 +194,9 @@ _done:
             if (s > 9999) {
                 s = 9999;
             }
-            if (un_804A1F58[y].x0 != s) {
-                HSD_SisLib_803A70A0(un_804A1F58[y].x8.x4, un_804A1F58[y].x8.x8,
-                                    "%d", s);
-                un_804A1F58[y].x0 = s;
+            if (thing->xC != s) {
+                HSD_SisLib_803A70A0(thing->x4, thing->x8, "%d", s);
+                thing->xC = s;
             }
         }
     }
@@ -200,9 +210,9 @@ void un_802FF364(int slot)
     Vec3* ifAll;
     struct un_804A1F58_x8_t* thing;
     HSD_GObj* gobj;
-    struct un_804A1F58_t* base = un_804A1F58;
+    struct un_804A1F58_t* base = &un_804A1F58;
     PAD_STACK(0x10);
-    thing = &base[slot].x8;
+    thing = &base->x8[slot];
     ifAll = ifAll_802F3424(slot);
     gobj = thing->x0;
     if ((thing && thing) && thing) {
@@ -221,9 +231,9 @@ void un_802FF364(int slot)
     if (s > 9999) {
         s = 9999;
     }
-    thing->x8 =
-        HSD_SisLib_803A6B98(thing->x4, ifAll->x, ifAll->y + 3.2f, "%d", s);
-    HSD_SisLib_803A7548(thing->x4, thing->x8, 0.06, 0.06);
+    thing->x8 = HSD_SisLib_803A6B98(thing->x4, ifAll->x,
+                                    un_804DDC28 + ifAll->y, "%d", s);
+    HSD_SisLib_803A7548(thing->x4, thing->x8, un_804DDC2C, un_804DDC2C);
     thing->x4->render_callback = fn_802FF360;
     thing->x0 = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
     HSD_GObj_SetupProc(thing->x0, fn_802FF218, 17);
@@ -232,33 +242,39 @@ void un_802FF364(int slot)
 void un_802FF498(void)
 {
     PAD_STACK(8);
-    memzero(un_804A1F58,
-            0x80); // TODO: change to sizeof(un_802FF498) when size fixed
-    un_804A1F58->x0 =
+    memzero(&un_804A1F58, sizeof(un_804A1F58));
+    un_804A1F58.x0 =
         HSD_SisLib_803A611C(2, ifAll_802F3404(), 14, 15, 0, 11, 0, 19);
 }
 
 void un_802FF4FC(void)
 {
     int i;
-    PAD_STACK(8);
+    struct un_804A1F58_t* base = &un_804A1F58;
     for (i = 0; i < 6; i++) {
-        if (un_804A1F58[i].x8.x0) {
-            HSD_GObjPLink_80390228(un_804A1F58[i].x8.x0);
+        struct un_804A1F58_x8_t* thing;
+        thing = (0, &base->x8[i]);
+        if (thing->x0) {
+            HSD_GObjPLink_80390228(thing->x0);
         }
-        if (un_804A1F58[i].x8.x4) {
-            HSD_SisLib_803A5CC4(un_804A1F58[i].x8.x4);
+        if (thing->x4) {
+            HSD_SisLib_803A5CC4(thing->x4);
         }
     }
+    (void) base;
 }
 
 void un_802FF570(void)
 {
     int i;
+    struct un_804A1F58_x8_t* thing;
+    HSD_Text* text;
     for (i = 0; i < 6; i++) {
-        un_804A1F58[i + 1].x4 = 1;
-        if (un_804A1F58[i].x8.x4) {
-            un_804A1F58[i].x8.x4->hidden = 1;
+        thing = &un_804A1F58.x8[i];
+        thing->x10 = 1;
+        text = thing->x4;
+        if (text) {
+            text->hidden = 1;
         }
     }
 }
@@ -266,16 +282,16 @@ void un_802FF570(void)
 void un_802FF620(void)
 {
     int i;
-    struct un_804A1F58_t* base = un_804A1F58;
-    PAD_STACK(8);
+    struct un_804A1F58_t* base = &un_804A1F58;
     for (i = 0; i < 6; i++) {
-        base[i + 1].x4 = 0;
-        if (base[i].x8.x4) {
+        struct un_804A1F58_x8_t* thing = (0, &base->x8[i]);
+        thing->x10 = 0;
+
+        if (thing->x4) {
             un_802FF364(i);
-            base[i].x8.x4->hidden = 0;
+            thing->x4->hidden = 0;
         }
     }
-    base[i].x8 = base[i].x8;
 }
 
 void un_802FF6A0(void)

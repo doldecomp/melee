@@ -53,6 +53,12 @@
 /* static */ float const ftCo_804D85AC = 0.01;
 /* static */ float const ftCo_804D85B0 = deg_to_rad;
 
+typedef struct ftCo_ItemThrowAttrs {
+    float velocity_mul;
+    float angle;
+    float x8;
+} ftCo_ItemThrowAttrs;
+
 bool ftCo_80094E54(Fighter* fp)
 {
     if (fp->input.x668 & HSD_PAD_A &&
@@ -348,14 +354,14 @@ void ftCo_800958FC(HSD_GObj* gobj, FtMotionId msid)
 {
     Fighter* temp_r4;
     Fighter* fp;
-    float temp_f2;
+    float base_throw_speed;
 
     fp = GET_FIGHTER(gobj);
     fp->cmd_vars[0] = 0;
     fp->cmd_vars[1] = 0;
     fp->throw_flags = 0;
 
-    temp_f2 = getAnimSpeed(gobj, msid);
+    base_throw_speed = getAnimSpeed(gobj, msid);
     temp_r4 = GET_FIGHTER(gobj);
     switch (msid) {
     case 0x5F:
@@ -370,7 +376,8 @@ void ftCo_800958FC(HSD_GObj* gobj, FtMotionId msid)
         temp_r4->mv.co.itemthrow.facing_dir = temp_r4->facing_dir;
         break;
     }
-    Fighter_ChangeMotionState(gobj, msid, 0, 0.0F, temp_f2, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, msid, 0, 0.0F, base_throw_speed, 0.0F,
+                              NULL);
     ftAnim_8006EBA4(gobj);
 
     fp->accessory4_cb = ftCo_80095EFC;
@@ -472,28 +479,27 @@ void ftCo_80095D5C(Fighter* fp, Vec3* arg1)
 {
     float vel;
     float angle;
-    void* array_element;
+    u8* array_element;
     u32 cmd_var0 = fp->cmd_vars[0];
-    float vel_mul = 1;
-    ftCo_DatAttrs* co_attrs = &fp->co_attrs;
+
+    vel = 1;
     if (cmd_var0 != 0) {
-        vel_mul = 0.01f * ((cmd_var0 >> 12) & 0x3FF);
+        vel = 0.01f * ((cmd_var0 >> 12) & 0x3FF);
     }
-    array_element = Fighter_804D6550 + (fp->motion_id * 3);
-    vel = vel_mul * (co_attrs->item_throw_velocity_multiplier *
-                     M2C_FIELD(array_element, float*, -0x468));
+    array_element = (u8*) Fighter_804D6550 + (fp->motion_id * 3);
+    vel *= fp->co_attrs.item_throw_velocity_multiplier *
+           *(float*) (array_element - 0x468);
     if (cmd_var0 != 0) {
-        u32 s16_var1 = ((s16*) &fp->cmd_vars)[1];
-        int int_angle = s16_var1 << 20;
-        int_angle = int_angle >> 20;
+        s16 s16_var1 = ((s16*) &fp->cmd_vars)[1];
+        int int_angle = (s16_var1 << 20) >> 20;
         if (int_angle == 361) {
-            angle = M2C_FIELD(array_element, float*, -0x464);
+            angle = *(float*) (array_element - 0x464);
         } else {
             angle = deg_to_rad * int_angle;
         }
         fp->cmd_vars[0] = 0;
     } else {
-        angle = M2C_FIELD(array_element, float*, -0x464);
+        angle = *(float*) (array_element - 0x464);
     }
     arg1->x = fp->mv.co.itemthrow.facing_dir * (vel * cosf(angle));
     arg1->y = vel * sinf(angle);
@@ -514,36 +520,36 @@ void ftCo_ItemThrow_Anim(Fighter_GObj* gobj)
 void ftCo_80095EFC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Item_GObj* item_gobj = fp->item_gobj;
     Vec3 vec0;
     Vec3 vec1;
     Vec3 vec2;
 
     PAD_STACK(0x8);
 
-    if (item_gobj != NULL) {
-        lb_8000B1CC(it_80272C90(item_gobj), NULL, &vec0);
+    if (fp->item_gobj != NULL) {
+        lb_8000B1CC(it_80272C90(fp->item_gobj), NULL, &vec0);
         if (ftCheckThrowB3(fp)) {
             ftCo_80095D5C(fp, &vec1);
             {
                 u32 cmd_var1 = fp->cmd_vars[1];
-                float var_f4 = 1;
+                ftCo_DatAttrs* co_attrs = &fp->co_attrs;
+                float throw_scale = 1;
                 if (cmd_var1 != 0) {
+                    throw_scale = 0.01f * (cmd_var1 & 0x3FFFFF);
                     fp->cmd_vars[1] = 0;
-                    var_f4 = 0.01f * (cmd_var1 & 0x3FFFFF);
                 }
                 {
-                    float vec0_x = vec0.x;
                     float fsm = -fp->cmd_timer / fp->frame_speed_mul;
-                    float cd_xB4 = M2C_FIELD(fp + 0x110, float*, 0xB4);
-                    float temp_f2 =
-                        cd_xB4 *
-                        M2C_FIELD((Fighter_804D6550 + (fp->motion_id * 3)),
-                                  float*, -0x460);
-                    float temp_f4 = var_f4 * temp_f2;
+                    float cd_xB4 = co_attrs->xB4;
+                    float base_throw_speed =
+                        cd_xB4 * ((ftCo_ItemThrowAttrs*)
+                                      Fighter_804D6550)[fp->motion_id -
+                                                        ftCo_MS_LightThrowF]
+                                     .x8;
+                    float throw_speed = throw_scale * base_throw_speed;
                     {
-                        vec2.x = fsm * (fp->mv.co.itemthrow4.x8.x - vec0_x) +
-                                 vec0_x;
+                        vec2.x = fsm * (fp->mv.co.itemthrow4.x8.x - vec0.x) +
+                                 vec0.x;
                         {
                             float vec1_y =
                                 fsm * (fp->mv.co.itemthrow4.x8.y - vec0.y) +
@@ -551,22 +557,24 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                             vec2.y = vec1_y;
                             vec2.z = 0;
                             pl_8003E978(fp->player_id, fp->x221F_b4,
-                                        fp->item_gobj, vec1_y, temp_f2, cd_xB4,
-                                        temp_f4, vec0_x, vec0.y, fsm);
+                                        fp->item_gobj, vec1_y,
+                                        base_throw_speed, cd_xB4, throw_speed,
+                                        vec0.x, vec0.y, fsm);
                         }
                         {
                             FtMoveId msid = fp->motion_id;
-                            if (msid == ftCo_MS_LightThrowDrop) {
+                            if (msid == (FtMoveId) ftCo_MS_LightThrowDrop) {
                                 Item_8026AC74(fp->item_gobj, &vec2, &vec1,
-                                              temp_f4);
-                            } else if (msid >= ftCo_MS_LightThrowF4) {
+                                              throw_speed);
+                            } else if (msid >= (FtMoveId) ftCo_MS_LightThrowF4)
+                            {
                                 if (it_8026B2B4(fp->item_gobj) == 1) {
                                     ftCommon_8007EBAC(fp, 29, 0);
                                 } else {
                                     ftCommon_8007EBAC(fp, 27, 0);
                                 }
                                 Item_8026AD20(fp->item_gobj, &vec2, &vec1,
-                                              temp_f4);
+                                              throw_speed);
                             } else {
                                 if (it_8026B2B4(fp->item_gobj) == 1) {
                                     ftCommon_8007EBAC(fp, 28, 0);
@@ -574,7 +582,7 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                                     ftCommon_8007EBAC(fp, 26, 0);
                                 }
                                 Item_8026AD20(fp->item_gobj, &vec2, &vec1,
-                                              temp_f4);
+                                              throw_speed);
                             }
                         }
                     }
@@ -593,18 +601,24 @@ void ftCo_ItemThrow_Phys(Fighter_GObj* gobj)
     ft_80084F3C(gobj);
 }
 
+#pragma push
+#pragma global_optimizer off
 void ftCo_LightThrowDash_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommonData* cd = p_ftCommonData;
     if (fp->cur_anim_frame <= cd->x408) {
-        ft_80085030(gobj, cd->x40C * (cd->x404 * fp->co_attrs.gr_friction),
+        if (cd != NULL) {
+            // Needed for matching register allocation.
+        }
+        ft_80085030(gobj, (cd->x404 * fp->co_attrs.gr_friction) * cd->x40C,
                     fp->facing_dir);
     } else {
         ft_80085030(gobj, p_ftCommonData->x404 * fp->co_attrs.gr_friction,
                     fp->facing_dir);
     }
 }
+#pragma pop
 
 void ftCo_LightThrowAir_Phys(Fighter_GObj* gobj)
 {

@@ -8,6 +8,8 @@
 #include "it/items/itfoods.h"
 #include "it/items/itfreeze.h"
 #include "it/items/types.h"
+#include "it/itmaplib.h"
+#include "it/itzako.h"
 #include "MSL/math.h"
 
 #include <baselib/dobj.h>

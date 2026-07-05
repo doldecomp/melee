@@ -25,7 +25,7 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 #include "lb/types.h"
 #include "mp/mplib.h"
 
@@ -35,7 +35,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-StageCallbacks grOt_803E27E0[6] = {
+/* 3E27E0 */ static StageCallbacks grOt_803E27E0[6] = {
     { NULL, NULL, NULL, NULL, 0 },
     { NULL, NULL, NULL, NULL, 0 },
     { grOnett_801E38DC, grOnett_801E3920, grOnett_801E3928, grOnett_801E392C,
@@ -48,7 +48,7 @@ StageCallbacks grOt_803E27E0[6] = {
       0xC0000000 },
 };
 
-StageData grOt_803E2858 = {
+/* 3E2858 */ StageData grOt_803E2858 = {
     0x14,
     grOt_803E27E0,
     "/GrOt",
@@ -83,10 +83,10 @@ static struct grOnett_StageParam {
     /* 0x38 */ f32 x38;
     /* 0x3C */ f32 x3C;
     /* 0x40 */ f32 x40;
-    /* 0x44 */ s32 x44;
-    /* 0x48 */ s32 x48;
-    /* 0x4C */ s32 x4C;
-    /* 0x50 */ s32 x50;
+    /* 0x44 */ f32 x44;
+    /* 0x48 */ f32 x48;
+    /* 0x4C */ f32 x4C;
+    /* 0x50 */ f32 x50;
     /* 0x54 */ f32 x54;
     /* 0x58 */ f32 x58;
     /* 0x5C */ f32 x5C;
@@ -177,9 +177,7 @@ void grOnett_801E3930(Ground_GObj* gobj)
     mpJointSetCb1(0, gp, grOnett_801E54B4);
     mpJointSetCb1(1, gp, grOnett_801E54B4);
     gp->gv.onett.subject = Camera_80029020();
-    if (gp->gv.onett.subject == NULL) {
-        __assert("gronett.c", 331, "gp->u.map.subject");
-    }
+    HSD_ASSERTMSG(331, gp->gv.onett.subject, "gp->u.map.subject");
     gp->gv.onett.subject->x40.x = -40.0f;
     gp->gv.onett.subject->x40.y = 40.0f;
     gp->gv.onett.subject->x48.x = 20.0f;
@@ -196,7 +194,7 @@ void grOnett_801E3A34(Ground_GObj* gobj)
 {
     HSD_JObj* jobj;
     Ground* gp;
-    PAD_STACK(24);
+    PAD_STACK(8);
     gp = GET_GROUND(gobj);
     jobj = GET_JOBJ(gobj);
 
@@ -204,13 +202,12 @@ void grOnett_801E3A34(Ground_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
     gp->x10_flags.b5 = 1;
 
+    gp->gv.onett.subject = NULL;
+
     gp->gv.onett.awnings[0].initial = 0.0f;
     gp->gv.onett.awnings[0].jobj = Ground_801C3FA4(gobj, 0xE);
-    {
-        HSD_JObj* awj = gp->gv.onett.awnings[0].jobj;
-        HSD_ASSERT(1006, awj);
-        gp->gv.onett.awnings[0].initial_y = awj->translate.y;
-    }
+    gp->gv.onett.awnings[0].initial_y =
+        HSD_JObjGetTranslationY(gp->gv.onett.awnings[0].jobj);
     gp->gv.onett.awnings[0].accumulator = 0.0f;
     gp->gv.onett.awnings[0].velocity = 0.0f;
     gp->gv.onett.awnings[0].counter_prev = 0;
@@ -220,11 +217,8 @@ void grOnett_801E3A34(Ground_GObj* gobj)
 
     gp->gv.onett.awnings[1].initial = 0.0f;
     gp->gv.onett.awnings[1].jobj = Ground_801C3FA4(gobj, 0xF);
-    {
-        HSD_JObj* awj = gp->gv.onett.awnings[1].jobj;
-        HSD_ASSERT(1006, awj);
-        gp->gv.onett.awnings[1].initial_y = awj->translate.y;
-    }
+    gp->gv.onett.awnings[1].initial_y =
+        HSD_JObjGetTranslationY(gp->gv.onett.awnings[1].jobj);
     gp->gv.onett.awnings[1].accumulator = 0.0f;
     gp->gv.onett.awnings[1].velocity = 0.0f;
     gp->gv.onett.awnings[1].counter_prev = 0;
@@ -232,9 +226,7 @@ void grOnett_801E3A34(Ground_GObj* gobj)
     gp->gv.onett.awnings[1].flag = 0;
     gp->gv.onett.awnings[1].cooldown = 0;
 
-    gp->gv.onett.subject = NULL;
-
-    gp->gv.onett.timer = rand_range(grOt_804D69C0->x24, grOt_804D69C0->x28);
+    gp->gv.onett.timer = rand_range(grOt_804D69C0->x28, grOt_804D69C0->x24);
     gp->gv.onett.gen = NULL;
 
     Ground_801C4E70(Ground_801C3FA4(gobj, 16), Ground_801C3FA4(gobj, 17),
@@ -407,6 +399,9 @@ void grOnett_801E40E4(Ground* gp, s32 arg1, CollData* cd, s32 arg3,
     if (arg4 == 1) {
         gp->gv.onett_building.hit_count += 1;
         switch (gp->gv.onett_building.state) {
+        case 4:
+        case 5:
+            break;
         case 0:
             if (gp->gv.onett_building.hit_count < grOt_804D69C0->x34) {
                 gp->gv.onett_building.next_state = 1;
@@ -453,9 +448,8 @@ void grOnett_801E41C8(Ground_GObj* gobj)
     gp->gv.onettcar.unk_jobj2 = Ground_801C3FA4(gobj, 0x14);
 
     for (i = 0; i < 4; i++) {
-        HSD_JObj* jobj = gp->gv.onettcar.car_jobjs[i];
-        HSD_JObjSetTranslateX(jobj, 726.0f);
-        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+        HSD_JObjSetTranslateX(gp->gv.onettcar.car_jobjs[i], 726.0f);
+        HSD_JObjSetFlagsAll(gp->gv.onettcar.car_jobjs[i], JOBJ_HIDDEN);
         gp->gv.onettcar.car_items[i] =
             grMaterial_801C8CFC(0, 0, gp, gp->gv.onettcar.car_jobjs[i],
                                 grOnett_801E5030, NULL, NULL);
@@ -485,7 +479,7 @@ void grOnett_801E43E0(Ground_GObj* gobj)
     s8 saved_car = gp->gv.onettcar.curr_car;
     Vec3 pos = { 0.0f, 0.0f, 0.0f };
     f32 cam_x, cam_y, cam_z;
-    PAD_STACK(32);
+    PAD_STACK(36);
 
     if (!gp->gv.onettcar.x0_b0) {
         HSD_JObj* car_jobj;
@@ -496,14 +490,15 @@ void grOnett_801E43E0(Ground_GObj* gobj)
         car_jobj = gp->gv.onettcar.car_jobjs[saved_car];
         car_jobj2 = gp->gv.onettcar.car_jobjs2[saved_car];
 
-        switch (gp->gv.onettcar.state_a) {
+        switch ((s8) gp->gv.onettcar.state_a) {
         case 0: {
             s8 old_car = gp->gv.onettcar.curr_car;
             HSD_JObj* new_jobj;
-            do {
+            while (gp->gv.onettcar.curr_car == old_car ||
+                   gp->gv.onettcar.curr_car == gp->gv.onettcar.next_car)
+            {
                 gp->gv.onettcar.curr_car = HSD_Randi(4);
-            } while (gp->gv.onettcar.curr_car == old_car ||
-                     gp->gv.onettcar.curr_car == gp->gv.onettcar.next_car);
+            }
 
             new_jobj = gp->gv.onettcar.car_jobjs[gp->gv.onettcar.curr_car];
             HSD_JObjSetTranslateX(new_jobj, 726.0f);
@@ -644,19 +639,21 @@ void grOnett_801E43E0(Ground_GObj* gobj)
 
         /* State machine B: left-to-right car */
         {
-            u8 state_b = gp->gv.onettcar.state_b;
+            s8 state_b = gp->gv.onettcar.state_b;
             s8 next = gp->gv.onettcar.next_car;
             HSD_JObj* b_jobj = gp->gv.onettcar.car_jobjs[next];
 
             switch (state_b) {
             case 0: {
                 HSD_JObj* new_jobj;
-                do {
+                while (gp->gv.onettcar.next_car == next ||
+                       gp->gv.onettcar.next_car == gp->gv.onettcar.curr_car)
+                {
                     gp->gv.onettcar.next_car = HSD_Randi(4);
-                } while (gp->gv.onettcar.next_car == next ||
-                         gp->gv.onettcar.next_car == gp->gv.onettcar.curr_car);
+                }
 
                 new_jobj = gp->gv.onettcar.car_jobjs[gp->gv.onettcar.next_car];
+                (void) new_jobj;
                 HSD_JObjSetTranslateX(new_jobj, -642.0f);
                 HSD_JObjSetTranslateZ(new_jobj, 56.0f);
                 HSD_JObjSetRotationY(new_jobj->child, M_PI);
@@ -767,24 +764,25 @@ void grOnett_801E5194(Ground* gp, s32 car_idx, s32 sound_type)
 
 void grOnett_801E5214(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
+    Ground* gp = gobj->user_data;
     int i;
-    PAD_STACK(8);
     for (i = 0; i < 2; i++) {
-        struct grOnett_AwningData* awn = &gp->gv.onett.awnings[i];
-        f32 disp, vel, error, abs_ratio, accel, force;
-        f32 max_disp;
+        f32 disp, vel, abs_ratio, force, error, spring;
         HSD_JObj* jobj;
 
-        max_disp = -grOt_804D69C0->max_displacement;
-        if (awn->accumulator < max_disp) {
-            awn->accumulator = max_disp;
+        if (gp->gv.onett.awnings[i].accumulator <
+            -grOt_804D69C0->max_displacement)
+        {
+            gp->gv.onett.awnings[i].accumulator =
+                -grOt_804D69C0->max_displacement;
         }
 
-        disp = awn->accumulator;
-        vel = awn->velocity;
-        error = disp - vel;
-        accel = awn->initial + grOt_804D69C0->spring_constant;
+        disp = gp->gv.onett.awnings[i].accumulator;
+        error = disp - gp->gv.onett.awnings[i].velocity;
+        vel = gp->gv.onett.awnings[i].velocity;
+        force = gp->gv.onett.awnings[i].initial;
+        spring = grOt_804D69C0->spring_constant;
+        force += spring;
 
         if (error < 0.0f) {
             abs_ratio = -error;
@@ -793,14 +791,13 @@ void grOnett_801E5214(Ground_GObj* gobj)
         }
         abs_ratio /= grOt_804D69C0->max_displacement;
 
-        if (error < 0.0f) {
-            force = -(grOt_804D69C0->spring_force * abs_ratio - accel);
+        if (error < 0.0) {
+            force = -(grOt_804D69C0->spring_force * abs_ratio - force);
         } else {
-            force = grOt_804D69C0->spring_force * abs_ratio + accel;
+            force = grOt_804D69C0->spring_force * abs_ratio + force;
         }
 
-        force = (force - grOt_804D69C0->spring_constant) *
-                (1.0f - grOt_804D69C0->damping);
+        force = (force - spring) * (1.0f - grOt_804D69C0->damping);
 
         if (force > grOt_804D69C0->max_velocity) {
             force = grOt_804D69C0->max_velocity;
@@ -811,40 +808,44 @@ void grOnett_801E5214(Ground_GObj* gobj)
         if ((ABS(vel - disp) < grOt_804D69C0->pos_threshold) &&
             (ABS(force) < grOt_804D69C0->vel_threshold))
         {
-            awn->velocity = disp;
-            awn->initial = 0.0f;
+            gp->gv.onett.awnings[i].velocity = disp;
+            gp->gv.onett.awnings[i].initial = 0.0f;
         } else {
-            awn->initial = force;
-            awn->velocity += force;
+            gp->gv.onett.awnings[i].initial = force;
+            gp->gv.onett.awnings[i].velocity += force;
             {
                 f32 lim = grOt_804D69C0->max_displacement;
-                if (awn->velocity > lim) {
-                    awn->velocity = lim;
-                } else if (awn->velocity < -lim) {
-                    awn->velocity = -lim;
+                if (gp->gv.onett.awnings[i].velocity > lim) {
+                    gp->gv.onett.awnings[i].velocity = lim;
+                } else if (gp->gv.onett.awnings[i].velocity < -lim) {
+                    gp->gv.onett.awnings[i].velocity = -lim;
                 }
             }
         }
 
-        jobj = awn->jobj;
-        HSD_JObjSetTranslateY(jobj, awn->velocity +
-                                        (awn->initial_y + awn->accumulator));
+        jobj = gp->gv.onett.awnings[i].jobj;
+        (void) jobj;
+        HSD_JObjSetTranslateY(jobj, gp->gv.onett.awnings[i].velocity +
+                                        (gp->gv.onett.awnings[i].initial_y +
+                                         gp->gv.onett.awnings[i].accumulator));
 
-        if (awn->cooldown == 0 &&
-            (awn->counter_prev != awn->counter || awn->flag != 0))
+        if (gp->gv.onett.awnings[i].cooldown == 0 &&
+            (gp->gv.onett.awnings[i].counter_prev !=
+                 gp->gv.onett.awnings[i].counter ||
+             gp->gv.onett.awnings[i].flag != 0))
         {
-            grLib_801C9808(0x7533, 0x1E, awn->jobj);
+            grLib_801C9808(0x7533, 0x1E, gp->gv.onett.awnings[i].jobj);
             Ground_801C5440(gp, 0, 0x5F375);
-            awn->cooldown = 0xA;
+            gp->gv.onett.awnings[i].cooldown = 0xA;
         }
 
-        awn->accumulator = 0.0f;
-        awn->counter_prev = awn->counter;
-        awn->counter = 0;
-        awn->flag = 0;
+        gp->gv.onett.awnings[i].accumulator = 0.0f;
+        gp->gv.onett.awnings[i].counter_prev = gp->gv.onett.awnings[i].counter;
+        gp->gv.onett.awnings[i].counter = 0;
+        gp->gv.onett.awnings[i].flag = 0;
 
-        if (awn->cooldown != 0) {
-            awn->cooldown--;
+        if (gp->gv.onett.awnings[i].cooldown != 0) {
+            gp->gv.onett.awnings[i].cooldown--;
         }
     }
 }
@@ -872,17 +873,21 @@ void grOnett_801E54B4(Ground* gp, s32 arg1, CollData* cd, s32 arg3,
 
 void grOnett_801E5538(Ground_GObj* gobj)
 {
+    s32 new_var2;
     Ground* gp = GET_GROUND(gobj);
-    if (gp->gv.onett.timer-- < 0) {
+    s32 new_var;
+    new_var2 = gp->gv.onett.timer--;
+    new_var = new_var2;
+    if (new_var < 0) {
         if (gp->gv.onett.gen != NULL) {
             gp->gv.onett.timer =
-                rand_range(grOt_804D69C0->x24, grOt_804D69C0->x28);
+                rand_range(grOt_804D69C0->x28, grOt_804D69C0->x24);
             grLib_801C9834(gp->gv.onett.gen);
             gp->gv.onett.gen = NULL;
             return;
         }
         gp->gv.onett.timer =
-            rand_range(grOt_804D69C0->x2C, grOt_804D69C0->x30);
+            rand_range(grOt_804D69C0->x30, grOt_804D69C0->x2C);
         {
             HSD_JObj* jobj = Ground_801C3FA4(gobj, 6);
             if (jobj != NULL) {

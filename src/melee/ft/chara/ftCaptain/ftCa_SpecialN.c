@@ -15,7 +15,7 @@
 #include "ft/ftlib.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
 #include <dolphin/mtx.h>
 

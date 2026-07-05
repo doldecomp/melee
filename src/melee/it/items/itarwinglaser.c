@@ -36,16 +36,16 @@ static bool itArwinglaser_UnkMotion3_Coll(Item_GObj*);
 static bool itArwinglaser_UnkMotion5_Coll(Item_GObj*);
 
 ItemStateTable it_803F8DE8[] = {
-    { 0, (HSD_GObjPredicate) itArwinglaser_UnkMotion2_Anim,
+    { 0, (HSD_GObjPredicate) (Event) itArwinglaser_UnkMotion2_Anim,
       (HSD_GObjEvent) itArwinglaser_UnkMotion2_Phys,
       itArwinglaser_UnkMotion2_Coll },
-    { 1, (HSD_GObjPredicate) itArwinglaser_UnkMotion3_Anim,
+    { 1, (HSD_GObjPredicate) (Event) itArwinglaser_UnkMotion3_Anim,
       (HSD_GObjEvent) itArwinglaser_UnkMotion3_Phys,
       itArwinglaser_UnkMotion3_Coll },
-    { 2, (HSD_GObjPredicate) itArwinglaser_UnkMotion2_Anim,
+    { 2, (HSD_GObjPredicate) (Event) itArwinglaser_UnkMotion2_Anim,
       (HSD_GObjEvent) itArwinglaser_UnkMotion2_Phys,
       itArwinglaser_UnkMotion2_Coll },
-    { 3, (HSD_GObjPredicate) itArwinglaser_UnkMotion3_Anim,
+    { 3, (HSD_GObjPredicate) (Event) itArwinglaser_UnkMotion3_Anim,
       (HSD_GObjEvent) itArwinglaser_UnkMotion3_Phys,
       itArwinglaser_UnkMotion3_Coll },
     { 4, NULL, NULL, itArwinglaser_UnkMotion5_Coll },
@@ -59,11 +59,16 @@ static Vec2 it_803F8E48[] = {
     { 200.0f, 0.0f },
 };
 
+static inline s32 itArwinglaser_GetCollArg(Item* ip)
+{
+    return ip->xDD4_itemVar.arwinglaser.xE48;
+}
+
 s32 it_802E70BC(Item_GObj* gobj)
 {
     Item* ip;
+    int i;
     s32 hit_count;
-    s32 i;
     int sp44;
     u32 sp40;
     Vec3 sp34;
@@ -78,38 +83,46 @@ s32 it_802E70BC(Item_GObj* gobj)
     sp1C.z = 0.0f;
     sp28.z = 0.0f;
     if (it_8026EA9C(gobj, &sp1C, &sp28, &sp34, &sp44, &sp40,
-                    ip->xDD4_itemVar.arwinglaser.xE48) != 0)
+                    itArwinglaser_GetCollArg(ip)))
     {
         mpGetSpeed(sp44, &ip->pos, &ip->x40_vel);
         return 1;
     }
-    i = 0;
-    hit_count = 0;
-    for (i = 0; i < 4; i++) {
+    i = (hit_count = 0);
+    while (i < 4) {
+        // surely fake
+        u32 copy_x;
+        u32 copy_y;
         sp1C = sp10;
-        sp28 = sp1C;
+        copy_x = *(u32*) &sp1C.x;
+        copy_y = *(u32*) &sp1C.y;
+        *(u32*) &sp28.x = copy_x;
+        copy_x = *(u32*) &sp1C.z;
+        *(u32*) &sp28.y = copy_y;
+        *(u32*) &sp28.z = copy_x;
         sp28.x += it_803F8E48[i].x;
         sp28.y += it_803F8E48[i].y;
         sp1C.z = 0.0f;
         sp28.z = 0.0f;
         if (it_8026EA9C(gobj, &sp1C, &sp28, &sp34, &sp44, &sp40,
-                        ip->xDD4_itemVar.arwinglaser.xE48) != 0)
+                        itArwinglaser_GetCollArg(ip)))
         {
             sp1C = sp10;
             sp1C.z = 0.0f;
             sp28.z = 0.0f;
             if (it_8026EA9C(gobj, &sp28, &sp1C, &sp34, &sp44, &sp40,
-                            ip->xDD4_itemVar.arwinglaser.xE48) != 0 &&
+                            itArwinglaser_GetCollArg(ip)) &&
                 !(mpLineGetFlags(sp44) & 0x100))
             {
                 hit_count++;
             }
         } else if (it_8026EA9C(gobj, &sp28, &sp1C, &sp34, &sp44, &sp40,
-                               ip->xDD4_itemVar.arwinglaser.xE48) != 0 &&
+                               itArwinglaser_GetCollArg(ip)) &&
                    !(mpLineGetFlags(sp44) & 0x100))
         {
             hit_count++;
         }
+        i++;
     }
     if (hit_count != 0) {
         return 1;
@@ -123,6 +136,7 @@ Item_GObj* it_802E72E0(Item_GObj* parent, HSD_JObj* bone, s32 type, f32 scale,
     SpawnItem spawn;
     Vec3 sp24;
     Item_GObj* new_gobj;
+    f32 z;
 
     lb_8000B1CC(bone, NULL, &sp24);
     switch (type) {
@@ -132,7 +146,6 @@ Item_GObj* it_802E72E0(Item_GObj* parent, HSD_JObj* bone, s32 type, f32 scale,
         break;
     case 4:
     case 5: {
-        f32 z;
         if (type == 4) {
             z = sp24.z;
             if (z < 0.0f) {
@@ -149,8 +162,7 @@ Item_GObj* it_802E72E0(Item_GObj* parent, HSD_JObj* bone, s32 type, f32 scale,
         break;
     }
     }
-    spawn.pos = sp24;
-    spawn.prev_pos = sp24;
+    spawn.prev_pos = spawn.pos = sp24;
     spawn.kind = 0xEA;
     spawn.facing_dir = scale;
     spawn.x3C_damage = 0;
@@ -186,7 +198,7 @@ Item_GObj* it_802E72E0(Item_GObj* parent, HSD_JObj* bone, s32 type, f32 scale,
             it_802E7A4C(new_gobj);
             switch (ip->xDD4_itemVar.arwinglaser.xE38) {
             case 0:
-                HSD_JObjSetFlagsAll(jobj, 0x10U);
+                HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
                 ip->xDD4_itemVar.arwinglaser.xE40 =
                     it_802E72E0(new_gobj, bone, 4, scale, scale_mult);
                 ip->xDD4_itemVar.arwinglaser.xE44 =
@@ -200,7 +212,6 @@ Item_GObj* it_802E72E0(Item_GObj* parent, HSD_JObj* bone, s32 type, f32 scale,
             break;
         case 4:
         case 5: {
-            f32 z;
             ip->xDD4_itemVar.arwinglaser.xE40 = NULL;
             ip->xDD4_itemVar.arwinglaser.xE44 = NULL;
             ip->xDD4_itemVar.arwinglaser.xE00 = 0.0f;
@@ -226,19 +237,22 @@ Item_GObj* it_802E72E0(Item_GObj* parent, HSD_JObj* bone, s32 type, f32 scale,
     return new_gobj;
 }
 
-void it_802E7654(s32 owner, HSD_JObj* bone, Vec3* target, s32 type, s32 arg4,
-                 f32 scale)
+void it_802E7654(Item_GObj* owner, HSD_JObj* bone, Vec3* target, s32 type,
+                 s32 arg4, f32 scale)
 {
     SpawnItem spawn;
     Vec3 sp28;
-    HSD_JObj* jobj;
-    Item* ip;
     Item_GObj* new_gobj;
+    Item* ip;
+    HSD_JObj* jobj;
     f32 rot;
 
     lb_8000B1CC(bone, NULL, &sp28);
-    spawn.kind = 0xEA;
-    spawn.prev_pos = sp28;
+    spawn.kind = It_Kind_Arwing_Laser;
+    *(u32*) &spawn.prev_pos.x = *(u32*) &sp28.x;
+    *(u32*) &spawn.prev_pos.y = *(u32*) &sp28.y;
+    *(u32*) &spawn.prev_pos.z = *(u32*) &sp28.z;
+    *(volatile u32*) &spawn.prev_pos.y = *(u32*) &spawn.prev_pos.y;
     spawn.facing_dir = 0.0f;
     spawn.x3C_damage = 0;
     spawn.vel.z = 0.0f;
@@ -256,7 +270,7 @@ void it_802E7654(s32 owner, HSD_JObj* bone, Vec3* target, s32 type, s32 arg4,
         ip->xDD4_itemVar.arwinglaser.xE18 = ip->xDD4_itemVar.arwinglaser.xE24;
         ip->xDD4_itemVar.arwinglaser.xE30 = 0;
         ip->xDD4_itemVar.arwinglaser.xDFC = Ground_801C0498();
-        ip->xDD4_itemVar.arwinglaser.xDF4 = (Item_GObj*) (s32) owner;
+        ip->xDD4_itemVar.arwinglaser.xDF4 = owner;
         ip->xDD4_itemVar.arwinglaser.xDF8 = bone;
         ip->xDD4_itemVar.arwinglaser.xE34 = scale;
         ip->xDD4_itemVar.arwinglaser.xE38 = type;

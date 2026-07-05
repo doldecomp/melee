@@ -7,6 +7,7 @@
 #include "it/it_2725.h"
 #include "it/itcoll.h"
 #include "it/item.h"
+#include "it/itmaplib.h"
 #include "pl/plbonuslib.h"
 
 ItemStateTable it_803F62C0[] = {

@@ -1,3 +1,4 @@
+/// @file Seems to deal with the challenger approaching functions.
 #include "gm_1BFA.h"
 
 #include "gm_unsplit.h"
@@ -14,14 +15,12 @@
 
 #include <melee/gm/types.h>
 
-/// @remarks this file seems to deal with the challenger approaching functions.
-
 extern UNK_T gm_804D6860[];
 extern StartMeleeData gm_80480530;
 extern MatchExitInfo gm_80479D98;
 extern struct un_804A1F48_t un_804A1F48[];
 
-MinorScene gm_803DFE48_MinorScenes[] = {
+GameScene gm_803DFE48_Scenes[] = {
     {
         0,
         2,
@@ -29,7 +28,7 @@ MinorScene gm_803DFE48_MinorScenes[] = {
         gm_801BFA6C,
         NULL,
         {
-            MN_APPROACH,
+            GS_APPROACH,
             gm_804D6860,
             gm_804D6860,
         },
@@ -41,7 +40,7 @@ MinorScene gm_803DFE48_MinorScenes[] = {
         gm_801BFABC,
         gm_801BFBA8,
         {
-            MN_VS,
+            GS_VS,
             &gm_80480530,
             &gm_80479D98,
         },
@@ -53,7 +52,7 @@ MinorScene gm_803DFE48_MinorScenes[] = {
         gm_801BFCFC,
         gm_801BFF7C,
         {
-            MN_PRIZE_INTERFACE,
+            GS_PRIZE_INTERFACE,
             un_804A1F48,
             NULL,
         },
@@ -61,7 +60,7 @@ MinorScene gm_803DFE48_MinorScenes[] = {
     { -1 },
 };
 
-void gm_801BFA6C(MinorScene* arg0)
+void gm_801BFA6C(GameScene* arg0)
 {
     lbl_8046DBD8_t* temp_r3;
     VsApproachData* temp_r31;
@@ -75,7 +74,7 @@ void gm_801BFA6C(MinorScene* arg0)
     lb_8001CE00();
 }
 
-void gm_801BFABC(MinorScene* arg0)
+void gm_801BFABC(GameScene* arg0)
 {
     lbl_8046DBD8_t* temp_r31;
     StartMeleeData* temp_r30;
@@ -100,7 +99,7 @@ void gm_801BFABC(MinorScene* arg0)
     gm_8016F088(temp_r30);
 }
 
-void gm_801BFBA8(MinorScene* arg0)
+void gm_801BFBA8(GameScene* arg0)
 {
     lbl_8046DBD8_t* temp_r31;
     u8 temp_r0;
@@ -126,8 +125,9 @@ void gm_801BFBA8(MinorScene* arg0)
     }
 }
 
-/// @remarks unsure about this return type.
-s32** gm_801BFC60(s16 arg0, s32 arg1, s16 arg2, s32 arg3, void** arg4)
+#pragma push
+#pragma dont_inline on
+static UNK_T* gm_801BFC60(u32 arg0, s32 arg1, u32 arg2, u32 arg3, UNK_T* arg4)
 {
     struct un_804A1F48_t* temp_r3;
 
@@ -145,52 +145,54 @@ s32** gm_801BFC60(s16 arg0, s32 arg1, s16 arg2, s32 arg3, void** arg4)
         *arg4 = temp_r3;
         return (&temp_r3->x8);
     }
-    return (s32**) arg4;
+    return arg4;
 }
+#pragma pop
 
 static u8 gm_8049E558[0x170];
 
-void gm_801BFCFC(MinorScene* arg0)
+void gm_801BFCFC(GameScene* arg0)
 {
     s32 var_r27_2;
-    s32 var_r30;
-    u32 var_r25;
-    u32 var_r25_2;
-    u32 var_r28_3;
     u32* temp_r29;
-    u32* temp_r29_2;
-    u8* var_r26;
     u8* var_r27;
     u8* var_r28;
+    UNK_T* temp_r3;
     u8* var_r28_2;
-    s32** temp_r3;
-    s32** var_r31;
+    u32 var_r25_2;
+    int var_r25;
+    u32* temp_r29_2;
+    u32 var_r28_3;
+    UNK_T* var_r31;
+    s32 var_r30;
+    u8* var_r26;
 
-    var_r27 = gm_8049E558;
+    PAD_STACK(8);
+
     gm_801A427C(arg0);
     var_r31 = NULL;
     gm_801736DC();
     var_r30 = 0;
     memzero(gm_8049E558, 0x42);
     memzero(&gm_8049E558[0x44], 0x125);
-    un_803124BC();
+    Toy_803124BC();
 
     /// @remarks these for loops were converted from the do-whiles with very
     /// little scrutiny... take them with a grain of salt
     var_r28 = gm_8049E558;
     for (var_r25 = 0; (s32) var_r25 < 0x42; var_r25++) {
         if (gm_8017219C(var_r25) != 0) {
-            temp_r3 = gm_801BFC60((s16) var_r25, var_r30, 0,
-                                  *gmMainLib_8015D804((s32) var_r25),
-                                  (void*) var_r31);
+            temp_r3 = gm_801BFC60(var_r25, var_r30, 0,
+                                  *gmMainLib_8015D804((s32) var_r25), var_r31);
             *var_r28 = 1;
-            var_r31 = temp_r3;
+            var_r31 = (void**) temp_r3;
             var_r30 += 1;
         }
         var_r28 += 1;
     }
 
-    var_r26 = &gm_8049E558[0x44];
+    var_r26 = gm_8049E558;
+    var_r26 += 0x44;
     var_r28_2 = var_r26;
     for (var_r25_2 = 0; (s32) var_r25_2 < 0x125; var_r25_2++) {
         if (gmMainLib_8015DA1C(var_r25_2) != 0) {
@@ -198,12 +200,12 @@ void gm_801BFCFC(MinorScene* arg0)
                 temp_r29 = gmMainLib_8015D970((s32) var_r25_2);
                 *temp_r29 = lbTime_8000AFBC();
                 gmMainLib_8015DA40(var_r25_2);
-                Trophy_SetUnlockState((s32) (s16) var_r25_2, 1);
+                Toy_SetUnlockState((s32) (s16) var_r25_2, 1);
             }
-            *var_r28_2 = un_803048C0((s32) var_r25_2);
-            var_r31 = gm_801BFC60(0x3E, var_r30, (s16) var_r25_2,
-                                  *gmMainLib_8015D970((s32) var_r25_2),
-                                  (void*) var_r31);
+            *var_r28_2 = Toy_803048C0((s32) var_r25_2);
+            var_r31 = (void**) gm_801BFC60(
+                0x3E, var_r30, var_r25_2, *gmMainLib_8015D970((s32) var_r25_2),
+                var_r31);
             var_r30 += 1;
         }
         var_r28_2 += 1;
@@ -212,30 +214,31 @@ void gm_801BFCFC(MinorScene* arg0)
     gm_80173EEC();
     gm_80172898(0xFFFFU);
 
+    var_r27 = gm_8049E558;
     for (var_r28_3 = 0; (s32) var_r28_3 < 0x42; var_r28_3++) {
         if (((u8) *var_r27 == 0) && (gm_8017219C(var_r28_3) != 0)) {
-            var_r31 = gm_801BFC60((s16) var_r28_3, var_r30, 0,
-                                  *gmMainLib_8015D804((s32) var_r28_3),
-                                  (void*) var_r31);
+            var_r31 = (void**) gm_801BFC60(
+                var_r28_3, var_r30, 0, *gmMainLib_8015D804((s32) var_r28_3),
+                var_r31);
             var_r30 += 1;
         }
         var_r27 += 1;
     }
 
     for (var_r27_2 = 0; var_r27_2 < 0x125; var_r27_2++) {
-        if ((((s32) *var_r26 < un_803048C0(var_r27_2)) ||
-             (un_803048C0(var_r27_2) == 0)) &&
+        if ((((s32) *var_r26 < Toy_803048C0(var_r27_2)) ||
+             (Toy_803048C0(var_r27_2) == 0)) &&
             (gmMainLib_8015DA1C((u32) var_r27_2) != 0))
         {
             if (gmMainLib_8015DA90((u32) var_r27_2) == 0) {
                 temp_r29_2 = gmMainLib_8015D970(var_r27_2);
                 *temp_r29_2 = lbTime_8000AFBC();
                 gmMainLib_8015DA40((u32) var_r27_2);
-                Trophy_SetUnlockState((s32) (s16) var_r27_2, 1);
+                Toy_SetUnlockState((s32) (s16) var_r27_2, 1);
             }
             var_r31 =
-                gm_801BFC60(0x3E, var_r30, (s16) var_r27_2,
-                            *gmMainLib_8015D970(var_r27_2), (void*) var_r31);
+                (void**) gm_801BFC60(0x3E, var_r30, var_r27_2,
+                                     *gmMainLib_8015D970(var_r27_2), var_r31);
             var_r30 += 1;
         }
         var_r26 += 1;
@@ -251,7 +254,7 @@ void gm_801BFCFC(MinorScene* arg0)
     lb_8001CE00();
 }
 
-void gm_801BFF7C(MinorScene* arg0)
+void gm_801BFF7C(GameScene* arg0)
 {
     gm_801A42E8((s8) gm_801736DC()->x5);
     gm_801A42D4();

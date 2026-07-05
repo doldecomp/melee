@@ -176,6 +176,8 @@ bool lbArchive_80016F80(HSD_Archive** archive, const char* filename)
 bool lbArchive_80017040(HSD_Archive** dst, const char* filename, void* symbols,
                         ...)
 {
+    void* tmp;
+    HSD_Archive* archive2;
     HSD_Archive* archive;
     bool preloaded;
     va_list args;
@@ -186,7 +188,19 @@ bool lbArchive_80017040(HSD_Archive** dst, const char* filename, void* symbols,
     if (archive != NULL) {
         preloaded = true;
     } else {
-        archive = lbArchive_LoadArchive(filename);
+        // Inlined lbArchive_LoadArchive
+        {
+            void* data;
+            size_t length;
+            u32 pad;
+            u32 pad2;
+            data = lbHeap_80015BD0(0, OSRoundUp32B(lbFile_800163D8(filename)));
+            tmp = data;
+            archive2 = lbHeap_80015BD0(0, sizeof(HSD_Archive));
+            lbFile_8001668C(filename, tmp, &length);
+            lbArchive_InitializeDAT(archive2, tmp, length);
+            archive = archive2;
+        }
         preloaded = false;
     }
 
@@ -203,6 +217,8 @@ bool lbArchive_80017040(HSD_Archive** dst, const char* filename, void* symbols,
 bool lbArchive_800171CC(HSD_Archive** dst, const char* filename, void* symbols,
                         ...)
 {
+    void* tmp;
+    HSD_Archive* archive2;
     HSD_Archive* archive;
     bool preloaded;
     va_list args;
@@ -213,7 +229,19 @@ bool lbArchive_800171CC(HSD_Archive** dst, const char* filename, void* symbols,
     if (archive != NULL) {
         preloaded = true;
     } else {
-        archive = lbArchive_LoadArchive(filename);
+        // Inlined lbArchive_LoadArchive
+        {
+            void* data;
+            size_t length;
+            u32 pad;
+            u32 pad2;
+            data = lbHeap_80015BD0(0, OSRoundUp32B(lbFile_800163D8(filename)));
+            tmp = data;
+            archive2 = lbHeap_80015BD0(0, sizeof(HSD_Archive));
+            lbFile_8001668C(filename, tmp, &length);
+            lbArchive_InitializeDAT(archive2, tmp, length);
+            archive = archive2;
+        }
         preloaded = false;
     }
 

@@ -1,53 +1,98 @@
 #include "gmregtyfall.h"
 
-#include "gm/gmregtyfall.static.h"
-
 #include "gm_unsplit.h"
+#include "math.h"
 
-#include "baselib/jobj.h"
+#include "cm/camera.h"
+#include "ef/efasync.h"
+#include "ef/eflib.h"
+#include "ft/ftdemo.h"
+#include "gr/ground.h"
+#include "gr/stage.h"
+#include "it/item.h"
+#include "lb/lb_00B0.h"
+#include "lb/lbarchive.h"
+#include "lb/lbaudio_ax.h"
+#include "lb/lbspdisplay.h"
+#include "mn/mnmain.h"
+#include "mp/mpcoll.h"
+#include "pl/player.h"
+#include "sc/types.h"
+#include "ty/toy.h"
+#include "ty/tylist.h"
 
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/sobjlib.h>
-#include <sysdolphin/baselib/tobj.h>
-#include <melee/cm/camera.h>
-#include <melee/ef/efasync.h>
-#include <melee/ef/eflib.h>
-#include <melee/ft/ft_0C31.h>
-#include <melee/ft/ftdemo.h>
-#include <melee/gr/ground.h>
-#include <melee/gr/stage.h>
-#include <melee/it/item.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/mn/mnmain.h>
-#include <melee/mp/mpcoll.h>
-#include <melee/pl/player.h>
-#include <melee/sc/types.h>
-#include <melee/ty/toy.h>
-#include <melee/ty/tylist.h>
+#include <baselib/cobj.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjobject.h>
+#include <baselib/gobjplink.h>
+#include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
+#include <baselib/memory.h>
+#include <baselib/sobjlib.h>
+#include <baselib/tobj.h>
 
-static Vec3 gm_803DB2C8 = { 0, 182, 0 };
-static Vec3 gm_803DB2D4 = { 0, 125, 0 };
-static Vec3 gm_803DB2E0 = { 0.5, -7, 0 };
+struct ImageDesc_Array {
+    HSD_ImageDesc x0[2][2];
+    u8 x60[0xC];
+};
+
+/* 4D67AC */ SceneDesc* gm_804D67AC;
+/* 4D67A8 */ SceneDesc* gm_804D67A8;
+/* 4D67A4 */ SceneDesc* gm_804D67A4;
+/* 4D67A0 */ SceneDesc* gm_804D67A0;
+/* 4D679C */ HSD_Archive* gm_804D679C;
+/* 4D6798 */ HSD_Joint* gm_804D6798;
+/* 4D6794 */ int gm_804D6794;
+/* 4D6790 */ int gm_804D6790;
+/* 4D6788 */ struct HSD_SObjDesc gm_804D6788;
+/* 4D6784 */ int gm_804D6784;
+/* 4D6780 */ int gm_804D6780;
+/* 4D677C */ HSD_GObj* gm_804D677C;
+/* 4D6778 */ HSD_GObj* gm_804D6778;
+/* 4D6774 */ int gm_804D6774;
+/* 4D6770 */ int gm_804D6770;
+/* 4D676C */ HSD_GObj* gm_804D676C;
+/* 4D6768 */ HSD_GObj* gm_804D6768;
+/* 4D6760 */ struct HSD_SObjDesc gm_804D6760;
+/* 4D675C */ int gm_804D675C;
+/* 4D6758 */ int gm_804D6758;
+/* 4D6754 */ HSD_GObj* gm_804D6754;
+/* 4D6750 */ int gm_804D6750;
+/* 4D674C */ HSD_GObj* gm_804D674C;
+/* 4D6748 */ SceneDesc* gm_804D6748;
+/* 4D6744 */ HSD_Archive* gm_804D6744;
+/* 4D6740 */ u8 gm_804D6740;
+/* 4809D0 */ HSD_ImageDesc gm_804809D0[2];
+/* 4808F8 */ static struct ImageDesc_Array gm_804808F8;
+/* 480964 */ static struct ImageDesc_Array gm_80480964;
+
+/* 3DB2C8 */ Vec3 gm_803DB2C8 = { 0.0f, 182.0f, 0.0f };
+/* 3DB2D4 */ Vec3 gm_803DB2D4 = { 0.0f, 125, 0.0f };
+/* 3DB2E0 */ Vec3 gm_803DB2E0 = { 0.5f, -7.0f, 0.0f };
+
+static struct {
+    u8 x0, x1, x2, x3;
+} gm_804D4278 = { 0xAA, 0xAA, 0xFF, 0xFF };
+
+static void order_sdata2(void)
+{
+    (void) 60.0f;
+    (void) 0.0f;
+    (void) deg_to_rad;
+    (void) 1.0f;
+}
 
 #pragma push
 #pragma dont_inline on
 bool gm_801A659C(int arg0)
 {
     switch (gm_801A4310()) {
-    case MJ_CLASSIC_GOVER:
+    case GM_CLASSIC_GOVER:
         return gm_80160474(arg0, 3);
-    case MJ_ADVENTURE_GOVER:
+    case GM_ADVENTURE_GOVER:
         return gm_80160474(arg0, 4);
-    case MJ_DEBUG_GOVER:
+    case GM_DEBUG_GOVER:
         return gm_80160474(arg0, gm_801BF050());
     default:
         return gm_80160474(arg0, 5);
@@ -62,34 +107,6 @@ void gm_801A6630(int arg0)
 }
 #pragma pop
 
-static int gm_804D6750;
-static HSD_GObj* gm_804D6754;
-static int gm_804D6758;
-static int gm_804D675C;
-static struct {
-    HSD_ImageDesc* x0;
-    UNK_T x4;
-} gm_804D6760;
-static HSD_GObj* gm_804D677C;
-static int gm_804D6780;
-static int gm_804D6784;
-static struct {
-    HSD_ImageDesc* x0;
-    UNK_T x4;
-} gm_804D6788;
-static int gm_804D6790;
-static int gm_804D6794;
-
-static HSD_ImageDesc gm_804808F8[2][2];
-static u8 bss_pad_0[0xC];
-static HSD_ImageDesc gm_80480964[2][2];
-static u8 bss_pad_1[0xC];
-static HSD_ImageDesc gm_804809D0[2];
-
-static struct {
-    u8 x0, x1, x2, x3;
-} gm_804D4278 = { 0xAA, 0xAA, 0xFF, 0xFF };
-
 void fn_801A6664(HSD_GObj* arg0)
 {
     HSD_SObj* temp_r3;
@@ -98,10 +115,10 @@ void fn_801A6664(HSD_GObj* arg0)
     HSD_JObjAnimAll((HSD_JObj*) arg0->hsd_obj);
     if ((s32) gm_804D6758 != 0) {
         HSD_SObjLib_803A4740(gm_804D6754->hsd_obj);
-        gm_804D6760.x0 = &gm_804808F8[gm_804D675C][0];
-        gm_804D6760.x4 = NULL;
-        temp_r3 = HSD_SObjLib_803A477C(gm_804D6754, (s32) &gm_804D6760, 0, 0,
-                                       0x80, 0);
+        gm_804D6760.image = &gm_804808F8.x0[gm_804D675C][0];
+        gm_804D6760.tlut = NULL;
+        temp_r3 =
+            HSD_SObjLib_803A477C(gm_804D6754, &gm_804D6760, 0, 0, 0x80, 0);
         temp_r3->x10 = 60.0f;
         temp_r3->x14 = 0.0f;
         gm_804D675C = gm_804D675C == 0;
@@ -128,10 +145,10 @@ void fn_801A6664(HSD_GObj* arg0)
         }
         gm_804D6790 = 7;
         HSD_SObjLib_803A4740(gm_804D677C->hsd_obj);
-        gm_804D6788.x0 = &gm_804809D0[gm_804D6784];
-        gm_804D6788.x4 = 0;
-        temp_r3_2 = HSD_SObjLib_803A477C(gm_804D677C, (s32) &gm_804D6788, 0, 0,
-                                         0x80, 0);
+        gm_804D6788.image = &gm_804809D0[gm_804D6784];
+        gm_804D6788.tlut = NULL;
+        temp_r3_2 =
+            HSD_SObjLib_803A477C(gm_804D677C, &gm_804D6788, 0, 0, 0x80, 0);
         temp_r3_2->x10 = 60.0f;
         temp_r3_2->x14 = 0.0f;
         temp_r3_2->x3C = gm_804D4278.x0;
@@ -162,9 +179,6 @@ void fn_801A6868(HSD_GObj* unused)
         Player_80032A04(0, &spC);
     }
 }
-
-static HSD_Archive* gm_804D6744;
-static HSD_GObj* gm_804D674C;
 
 static float gm_803DB2EC[] = {
     0.6f, 0.5f,  0.75f, 0.7f,  0.7f, 0.4f, 0.8f, 0.75f, 0.9f, 0.7f, 0.6f,
@@ -228,24 +242,24 @@ void fn_801A6A48(HSD_GObj* gobj, int arg1)
     }
 }
 
+static void order_data(void)
+{
+    (void) "!(jobj->flags & JOBJ_USE_QUATERNION)";
+}
+
 void fn_801A6ACC(HSD_GObj* gobj, int unused)
 {
     PAD_STACK(0x18);
     if (HSD_CObjSetCurrent(gobj->hsd_obj)) {
         Camera_800313E0(gobj, 1);
         gm_804D6758 = 1;
-        HSD_ImageDescCopyFromEFB(&gm_804808F8[gm_804D675C][0], 0x3C, 0, 0, 0);
-        HSD_ImageDescCopyFromEFB(&gm_804808F8[gm_804D675C][1], 0x3C, 0, 1, 1);
+        HSD_ImageDescCopyFromEFB(&gm_804808F8.x0[gm_804D675C][0], 0x3C, 0, 0,
+                                 0);
+        HSD_ImageDescCopyFromEFB(&gm_804808F8.x0[gm_804D675C][1], 0x3C, 0, 1,
+                                 1);
         HSD_CObjEndCurrent();
     }
 }
-
-extern HSD_GObj* gm_804D6768;
-extern HSD_GObj* gm_804D676C;
-extern int gm_804D6770;
-extern int gm_804D6774;
-extern HSD_GObj* gm_804D6778;
-extern HSD_GObj* gm_804D677C;
 
 void fn_801A6B6C(HSD_GObj* gobj)
 {
@@ -263,10 +277,10 @@ void fn_801A6B6C(HSD_GObj* gobj)
         HSD_GObjPLink_80390228(gm_804D676C);
         HSD_GObjPLink_80390228(gm_804D677C);
         mn_8022F0F0(3);
-        HSD_Free(gm_80480964[0][0].image_ptr);
-        HSD_Free(gm_80480964[0][1].image_ptr);
-        HSD_Free(gm_80480964[1][0].image_ptr);
-        HSD_Free(gm_80480964[1][1].image_ptr);
+        HSD_Free(gm_80480964.x0[0][0].image_ptr);
+        HSD_Free(gm_80480964.x0[0][1].image_ptr);
+        HSD_Free(gm_80480964.x0[1][0].image_ptr);
+        HSD_Free(gm_80480964.x0[1][1].image_ptr);
         gm_801A7B00();
         HSD_GObjPLink_80390228(gobj);
     }
@@ -276,15 +290,6 @@ void fn_801A6C30(HSD_GObj* gobj)
 {
     HSD_CObjAnim(gobj->hsd_obj);
 }
-
-static u8 gm_804D6740;
-static SceneDesc* gm_804D6748;
-HSD_Joint* gm_804D6798;
-HSD_Archive* gm_804D679C;
-SceneDesc* gm_804D67A0;
-SceneDesc* gm_804D67A4;
-SceneDesc* gm_804D67A8;
-SceneDesc* gm_804D67AC;
 
 void gm_801A6C54(void)
 {
@@ -304,10 +309,10 @@ void gm_801A6C54(void)
     HSD_GObj_SetupProc(gobj, fn_801A6C30, 0);
 
     for (i = 0; i < 2; i++) {
-        gm_804808F8[i][0].image_ptr = NULL;
-        gm_804808F8[i][1].image_ptr = NULL;
-        lb_800121FC(&gm_804808F8[i][0], 0x1EA, 0x1E0, 5, 0);
-        lb_800121FC(&gm_804808F8[i][1], 0x1EA, 0x1E0, 0x16, 0);
+        gm_804808F8.x0[i][0].image_ptr = NULL;
+        gm_804808F8.x0[i][1].image_ptr = NULL;
+        lb_800121FC(&gm_804808F8.x0[i][0], 0x1EA, 0x1E0, 5, 0);
+        lb_800121FC(&gm_804808F8.x0[i][1], 0x1EA, 0x1E0, 0x16, 0);
     }
 }
 
@@ -338,39 +343,34 @@ void gm_801A6DC0(void)
     HSD_GObj_SetupProc(gobj, fn_801A6B6C, 0);
 
     for (i = 0; i < 2; i++) {
-        gm_80480964[i][0].image_ptr = NULL;
-        gm_80480964[i][1].image_ptr = NULL;
-        lb_800121FC(&gm_80480964[i][0], 0x1EA, 0x1E0, 5, 0);
-        lb_800121FC(&gm_80480964[i][1], 0x1EA, 0x1E0, 0x16, 0);
+        gm_80480964.x0[i][0].image_ptr = NULL;
+        gm_80480964.x0[i][1].image_ptr = NULL;
+        lb_800121FC(&gm_80480964.x0[i][0], 0x1EA, 0x1E0, 5, 0);
+        lb_800121FC(&gm_80480964.x0[i][1], 0x1EA, 0x1E0, 0x16, 0);
     }
-}
-
-static void data_reorder(HSD_JObj* jobj)
-{
-    HSD_JObjSetRotationX(jobj, 0);
 }
 
 void gm_801A6EE4(void)
 {
-    MajorSceneKind var_r29;
+    GameModeKind var_r29;
 
     PAD_STACK(4);
 
     gm_801A4B90();
-    un_803124BC();
-    un_803102D0();
+    Toy_803124BC();
+    Toy_803102D0();
     switch (gm_801A4310()) {
-    case MJ_CLASSIC_GOVER:
-        var_r29 = MJ_CLASSIC;
+    case GM_CLASSIC_GOVER:
+        var_r29 = GM_CLASSIC;
         break;
-    case MJ_ADVENTURE_GOVER:
-        var_r29 = MJ_ADVENTURE;
+    case GM_ADVENTURE_GOVER:
+        var_r29 = GM_ADVENTURE;
         break;
-    case MJ_DEBUG_GOVER:
+    case GM_DEBUG_GOVER:
         var_r29 = gm_801BF050();
         break;
     default:
-        var_r29 = MJ_ALLSTAR;
+        var_r29 = GM_ALLSTAR;
         break;
     }
     lbArchive_LoadSymbols(gm_801604DC(gm_801BEFB0(), var_r29), &gm_804D6798,
@@ -381,12 +381,12 @@ void gm_801A6EE4(void)
         "cut3BgScene", 0);
     lbArchive_LoadSymbols("GmRgStnd.dat", &gm_804D67AC, "standScene", 0);
     switch (var_r29) {
-    case MJ_CLASSIC_GOVER:
-    case MJ_CLASSIC:
+    case GM_CLASSIC_GOVER:
+    case GM_CLASSIC:
         gm_804D679C = lbArchive_LoadSymbols("TyMcCmDs.dat", NULL);
         break;
-    case MJ_ADVENTURE_GOVER:
-    case MJ_ADVENTURE:
+    case GM_ADVENTURE_GOVER:
+    case GM_ADVENTURE:
         gm_804D679C = lbArchive_LoadSymbols("TyMcR1Ds.dat", NULL);
         break;
     default:
@@ -514,21 +514,21 @@ void gm_801A7070_OnEnter(void* unused)
 
     temp_r29 = gm_801A659C(gm_801BEFB0());
     var_r27_2 = HSD_JObjGetChild(temp_r3_7);
-    temp_f31_2 = -un_803060BC(temp_r29, 0);
-    fake_tyfall_HSD_JObjSetTranslateX(var_r27_2, temp_f31_2);
-    temp_f31_3 = -un_803060BC(temp_r29, 1);
-    fake_tyfall_HSD_JObjSetTranslateY(var_r27_2, temp_f31_3);
-    temp_f31_4 = -un_803060BC(temp_r29, 2);
-    fake_tyfall_HSD_JObjSetTranslateZ(var_r27_2, temp_f31_4);
+    temp_f31_2 = -Toy_803060BC(temp_r29, 0);
+    HSD_JObjSetTranslateXWithMtxDirty(var_r27_2, temp_f31_2);
+    temp_f31_3 = -Toy_803060BC(temp_r29, 1);
+    HSD_JObjSetTranslateYWithMtxDirty(var_r27_2, temp_f31_3);
+    temp_f31_4 = -Toy_803060BC(temp_r29, 2);
+    HSD_JObjSetTranslateZWithMtxDirty(var_r27_2, temp_f31_4);
 
-    temp_f31_5 = -(0.017453292f * un_803060BC(temp_r29, 5));
-    fake_tyfall_HSD_JObjSetRotationY(var_r27_2, temp_f31_5);
-    temp_f31_6 = 1.0f / un_803060BC(temp_r29, 3);
-    temp_f31_7 = un_803060BC(temp_r29, 4);
+    temp_f31_5 = -(0.017453292f * Toy_803060BC(temp_r29, 5));
+    HSD_JObjSetRotationYWithMtxDirty(var_r27_2, temp_f31_5);
+    temp_f31_6 = 1.0f / Toy_803060BC(temp_r29, 3);
+    temp_f31_7 = Toy_803060BC(temp_r29, 4);
     temp_f31_7 = temp_f31_7 * temp_f31_6;
-    fake_tyfall_HSD_JObjSetScaleX(var_r27_2, temp_f31_7);
-    fake_tyfall_HSD_JObjSetScaleY(var_r27_2, temp_f31_7);
-    fake_tyfall_HSD_JObjSetScaleZ(var_r27_2, temp_f31_7);
+    HSD_JObjSetScaleXWithMtxDirty(var_r27_2, temp_f31_7);
+    HSD_JObjSetScaleYWithMtxDirty(var_r27_2, temp_f31_7);
+    HSD_JObjSetScaleZWithMtxDirty(var_r27_2, temp_f31_7);
     temp_f31_8 = gm_803DB2EC[gm_801BEFB0()];
     HSD_JObjSetScaleX(temp_r3_7, temp_f31_8);
     HSD_JObjSetScaleY(temp_r3_7, temp_f31_8);

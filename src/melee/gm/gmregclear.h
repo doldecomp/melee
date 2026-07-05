@@ -51,7 +51,7 @@
 /* 17E424 */ UnkAdventureData* gm_8017E424(void);
 /* 17E430 */ u8 gm_8017E430(void); ///< returns a player slot
 /* 17E440 */ u8 gm_8017E440(void);
-/* 17E48C */ u8 gm_8017E48C(MinorScene*);
+/* 17E48C */ u8 gm_8017E48C(GameScene*);
 /* 17E4C4 */ struct gm_803DE650_t* gm_8017E4C4(u8);
 /* 17E500 */ u8 gm_8017E500(u8, u8);
 /* 17E528 */ f32 gm_8017E528(u8, u8);
