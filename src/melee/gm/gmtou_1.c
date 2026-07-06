@@ -1355,8 +1355,7 @@ extern f32 lbl_804DA86C;
 extern f32 lbl_804DA870;
 extern f32 lbl_804DA874;
 
-/// @todo 99.75% — all instructions and registers match; stack frame is 8
-/// bytes larger than target (0x110 vs 0x108, one extra unused temp slot).
+/// Matched bar data relocations
 void fn_80198EBC(void)
 {
     TmData* td;
