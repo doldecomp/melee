@@ -783,6 +783,9 @@ void fn_801977AC(HSD_GObj* gobj)
     }
 }
 
+/// @todo 99.80%: all 180 instructions match; the residual is anonymous
+/// sdata2 literal naming (int-to-float conversion constants and the
+/// section-relative lbl_804799D8 reloc) from the TU split.
 void fn_80197AF0(HSD_GObj* gobj)
 {
     TmData* tm;
@@ -792,7 +795,6 @@ void fn_80197AF0(HSD_GObj* gobj)
     f32 x;
     u8 players;
     u8 state;
-    u16* counter;
 
     tm = gm_8018F634();
     pnum = fn_8018F62C(gobj);
@@ -842,13 +844,12 @@ void fn_80197AF0(HSD_GObj* gobj)
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     }
 
-    counter = &lbl_804799D8.x12[pnum];
-    if (*counter < 0x258U) {
-        *counter = (u16) (*counter + 1);
+    if (lbl_804799D8.x12[pnum] < 0x258U) {
+        lbl_804799D8.x12[pnum]++;
     } else {
-        *counter = 0U;
+        lbl_804799D8.x12[pnum] = 0;
     }
-    fn_8019044C(jobj, (f32) *counter);
+    fn_8019044C(jobj, (f32) lbl_804799D8.x12[pnum]);
 }
 
 /// Updates visibility of a menu JObj based on current menu option.
