@@ -2016,17 +2016,24 @@ void gm_8019A828(void)
     gm_8018F634()->cur_option = 0x1B;
 }
 
-void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
+/// @todo 98.90%: all instruction shapes match except two coalescing artifacts
+/// (the &lbl_804799D8 materialization takes a temp+copy, and the ready-check
+/// loop's x2A walker copies its base instead of reusing it) plus a
+/// callee-saved rotation (tm/arg2 swapped one slot down the r25-r29 order).
+/// The ((u8*) d8)[i + 0x44] form is required for the x44 strength-reduction
+/// walker; d8->x44[i] compiles to per-site address computation instead.
+void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
 {
     s32 ready_count = 0;
-    s32 pad_err = 0;
-    TmData* tm = (TmData*) arg0;
     struct Lbl804799D8_t* d8 = &lbl_804799D8;
+    s32 pad_err = 0;
     s32 i;
     PAD_STACK(0x28);
 
-    if (tm->cur_option == 0x1B) {
-        fn_8019B81C(arg0);
+    switch (tm->cur_option) {
+    case 0x1B:
+        fn_8019B81C((s32*) tm);
+        break;
     }
 
     if (tm->cur_option == 0x1D) {
@@ -2131,39 +2138,12 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                     ent->xA6 = t2->x4B8[2].x0;
                     ent->xD2 = t2->x4B8[3].x0;
 
-                    {
-                        u8 s0 = tm->x4B8[0].x0;
-                        if (s0 == 0) {
+                    for (i = 0; i < 4; i++) {
+                        u8 st = tm->x4B8[i].x0;
+                        if (st == 0) {
                             hmn_count += 1;
                         }
-                        if (s0 != 3) {
-                            active_count += 1;
-                        }
-                    }
-                    {
-                        u8 s1 = tm->x4B8[1].x0;
-                        if (s1 == 0) {
-                            hmn_count += 1;
-                        }
-                        if (s1 != 3) {
-                            active_count += 1;
-                        }
-                    }
-                    {
-                        u8 s2 = tm->x4B8[2].x0;
-                        if (s2 == 0) {
-                            hmn_count += 1;
-                        }
-                        if (s2 != 3) {
-                            active_count += 1;
-                        }
-                    }
-                    {
-                        u8 s3 = tm->x4B8[3].x0;
-                        if (s3 == 0) {
-                            hmn_count += 1;
-                        }
-                        if (s3 != 3) {
+                        if (st != 3) {
                             active_count += 1;
                         }
                     }
@@ -2181,10 +2161,11 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
 
                     {
                         TmData* t3 = gm_8018F634();
-                        s32 stype2 = t3->stage_selection_type;
+                        s32 stype2;
                         s32 cond2;
 
                         t3->x2D = 1;
+                        stype2 = t3->stage_selection_type;
                         if ((stype2 == 2 && (u8) t3->x32 == 0) || stype2 == 3)
                         {
                             cond2 = 1;
@@ -2215,7 +2196,7 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
         } else {
             d8->x0 = 0;
 
-            for (i = 0; i < (s32) tm->x30;) {
+            for (i = 0; i < (s32) tm->x30; i++) {
                 if ((s8) (u8) HSD_PadMasterStatus[(u8) i].err == 0 &&
                     tm->x4B8[i].x0 == 0)
                 {
@@ -2223,9 +2204,9 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
 
                     if (buttons & 0x1100) {
                         lbAudioAx_80024030(1);
-                        if (d8->x44[i] == 7) {
-                            d8->x44[i] = 6;
-                        } else if (d8->x44[i] == 8) {
+                        if (((u8*) d8)[i + 0x44] == 7) {
+                            ((u8*) d8)[i + 0x44] = 6;
+                        } else if (((u8*) d8)[i + 0x44] == 8) {
                             u8 np = gm_8018F634()->x30;
                             s32 count4 = 0;
                             s32 j;
@@ -2236,7 +2217,7 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                                 }
                             }
                             if (count4 < (s32) (tm->x30 - 1)) {
-                                d8->x44[i] = 6;
+                                ((u8*) d8)[i + 0x44] = 6;
                                 d8->x2A[i].state = 4;
                             }
                         } else {
@@ -2256,9 +2237,9 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                             }
                         }
                     } else if (buttons & 0x400) {
-                        if (d8->x44[i] != 6) {
+                        if (((u8*) d8)[i + 0x44] != 6) {
                             lbAudioAx_80024030(0);
-                            d8->x44[i] = 6;
+                            ((u8*) d8)[i + 0x44] = 6;
                         } else {
                             u8 pstate2 = d8->x2A[i].state;
                             if (pstate2 == 0 || pstate2 == 3 || pstate2 == 5) {
@@ -2273,7 +2254,7 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                                 }
                                 if (count5 < (s32) (tm->x30 - 1)) {
                                     lbAudioAx_80024030(0);
-                                    d8->x44[i] = 7;
+                                    ((u8*) d8)[i + 0x44] = 7;
                                 }
                             } else if (pstate2 == 2) {
                                 lbAudioAx_80024030(0);
@@ -2282,18 +2263,17 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                             }
                         }
                     } else if ((buttons & 0x10000) || (buttons & 8)) {
-                        if (d8->x44[i] == 8) {
+                        if (((u8*) d8)[i + 0x44] == 8) {
                             lbAudioAx_80024030(2);
-                            d8->x44[i] = 7;
+                            ((u8*) d8)[i + 0x44] = 7;
                         }
                     } else if (((buttons & 0x20000) || (buttons & 4)) &&
-                               d8->x44[i] == 7)
+                               ((u8*) d8)[i + 0x44] == 7)
                     {
                         lbAudioAx_80024030(2);
-                        d8->x44[i] = 8;
+                        ((u8*) d8)[i + 0x44] = 8;
                     }
                 }
-                i++;
             }
         }
     }
@@ -2445,7 +2425,7 @@ void gm_8019B2DC_OnFrame(void)
             cond = 0;
         }
         if (cond != 0) {
-            fn_8019A86C((s32*) data, arg1, arg2);
+            fn_8019A86C(data, arg1, arg2);
         } else {
             fn_8019AF50((s32*) data, arg1, arg2);
         }
