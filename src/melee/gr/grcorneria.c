@@ -244,6 +244,7 @@ typedef struct {
 } grCn_Entry;
 
 typedef struct grCn_Data {
+    /* 0x000 */ u8 pad0[0x30];
     /* 0x030 */ HSD_GObj* arwing_gobj[3];
     /* 0x03C */ s32 arwing_type[3];
     /* 0x048 */ s32 arwing_group[3];

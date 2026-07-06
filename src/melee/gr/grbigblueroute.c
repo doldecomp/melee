@@ -284,13 +284,11 @@ void grBigBlueRoute_8020BC34(Ground_GObj* gobj)
     gp->u.car.xC4 = grBigBlueRoute_8020B9D4(4);
 }
 
-/// @todo Currently 99.83% match - remaining diffs are anonymous string-pool
-/// symbols (translate/reb0_jobj) vs the target's single grBb_Route_803E61D4
 void grBigBlueRoute_8020BC68(Ground_GObj* gobj)
 {
     Vec3 origin;
     Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* reb0_jobj;
+    HSD_JObj* jobj;
 
     grAnime_801C8138(gobj, gp->map_id, 0);
     gp->x8_callback = NULL;
@@ -299,7 +297,7 @@ void grBigBlueRoute_8020BC68(Ground_GObj* gobj)
     gp->gv.bigblueroute2.xC8 = 0;
 
     if (Ground_801C2D24(148, &origin)) {
-        HSD_JObj* jobj = Ground_801C2CF4(127);
+        jobj = Ground_801C2CF4(127);
         gp->gv.bigblueroute2.tracks[0].jobj = jobj;
         if (jobj != NULL) {
             jobj = gp->gv.bigblueroute2.tracks[0].jobj;
@@ -341,12 +339,10 @@ void grBigBlueRoute_8020BC68(Ground_GObj* gobj)
         gp->gv.bigblueroute2.tracks[3].jobj = NULL;
     }
 
-    {
-        HSD_JObj* reb0_jobj = Ground_801C2CF4(4);
-        HSD_ASSERT(452, reb0_jobj);
-        HSD_JObjGetTranslation(reb0_jobj, &gp->gv.bigblueroute2.xCC);
-        Ground_801C10B8(gobj, grBigBlueRoute_8020BC34);
-    }
+    jobj = Ground_801C2CF4(4);
+    HSD_ASSERT(452, jobj != NULL);
+    HSD_JObjGetTranslation(jobj, &gp->gv.bigblueroute2.xCC);
+    Ground_801C10B8(gobj, grBigBlueRoute_8020BC34);
 }
 
 bool grBigBlueRoute_8020BF30(Ground_GObj* arg)
