@@ -1401,7 +1401,7 @@ void fn_80198EBC(void)
 
         gobj = fn_8019035C(0, lbl_804D6674->models[12], 0, 0x1A, 2, 1,
                            fn_80196FFC, anim_rate);
-        jobj = GET_JOBJ(gobj);
+        jobj = gobj->hsd_obj;
         fn_8018FBD8(gobj, i);
         c = HSD_JObjGetChild(jobj);
         HSD_MObjRemoveAnimByFlags(c->u.dobj->mobj, 4);
@@ -1427,7 +1427,7 @@ void fn_80198EBC(void)
 
         gobj = fn_8019035C(0, lbl_804D6674->models[10], 0, 0x1A, 2, 1,
                            fn_801973F8, anim_rate);
-        jobj = GET_JOBJ(gobj);
+        jobj = gobj->hsd_obj;
         fn_8018FBD8(gobj, i);
 
         c = HSD_JObjGetChild(jobj);
