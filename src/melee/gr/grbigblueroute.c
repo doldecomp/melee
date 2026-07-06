@@ -653,7 +653,7 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
                         re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
                         re->x28 = (void*) item;
                         if (item != NULL) {
-                            grMaterial_801C8E28((void*) item->hsd_obj);
+                            grMaterial_801C8E28((HSD_GObj*) item);
                         }
                     }
                 }
