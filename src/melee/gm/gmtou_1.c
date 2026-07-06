@@ -783,9 +783,6 @@ void fn_801977AC(HSD_GObj* gobj)
     }
 }
 
-/// @todo 99.80%: all 180 instructions match; the residual is anonymous
-/// sdata2 literal naming (int-to-float conversion constants and the
-/// section-relative lbl_804799D8 reloc) from the TU split.
 void fn_80197AF0(HSD_GObj* gobj)
 {
     TmData* tm;
