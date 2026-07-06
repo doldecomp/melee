@@ -1140,7 +1140,7 @@ struct Lbl804799D8_t {
     } x2A[4];
     u8 _pad0[2]; // 0x42-0x43
     u8 x44[4];   // 0x44 per-player state
-    u8* x48;     // 0x48
+    struct MatchEnd* x48; // 0x48 current tournament match results
     u8 x4C;      // 0x4C
     u8 x4D;      // 0x4D
     u8 x4E[20];  // 0x4E

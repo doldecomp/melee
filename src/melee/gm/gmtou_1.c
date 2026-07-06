@@ -60,6 +60,39 @@
 
 /* 4D663C */ HSD_GObj* lbl_804D663C;
 
+/// Repeating per-slot unit of BracketEntry starting at x2C (mirrors the
+/// definition in gmtoulib.c).
+typedef struct BracketEntrySlot {
+    /* 0x00 */ HSD_GObj* x2C;
+    /* 0x04 */ u8 x30;
+    /* 0x05 */ u8 pad31;
+    /* 0x06 */ u8 x32;
+    /* 0x07 */ u8 pad33;
+    /* 0x08 */ s32 x34;
+    /* 0x0C */ s32 x38;
+    /* 0x10 */ s32 x3C;
+    /* 0x14 */ s32 x40;
+    /* 0x18 */ s32 x44;
+    /* 0x1C */ s32 x48;
+    /* 0x20 */ u8 x4C;
+    /* 0x21 */ u8 x4D;
+    /* 0x22 */ u8 x4E;
+    /* 0x23 */ u8 x4F;
+    /* 0x24 */ u8 x50;
+    /* 0x25 */ u8 x51;
+    /* 0x26 */ u8 x52;
+    /* 0x27 */ u8 pad53;
+    /* 0x28 */ u16 x54;
+    /* 0x2A */ u8 pad56[0x2C - 0x2A];
+} BracketEntrySlot;
+STATIC_ASSERT(sizeof(BracketEntrySlot) == 0x2C);
+
+/// A macro rather than an inline function (like gmtoulib.c's
+/// BracketEntry_GetSlot): MWCC reserves 8 bytes of stack per inlined call,
+/// which would break the frame size of fn_8019A158.
+#define GET_BRACKET_SLOT(entry, slot_idx) \
+    (&((BracketEntrySlot*) &(entry)->x2C)[slot_idx])
+
 void fn_80196510(void)
 {
     int stage;
@@ -1684,11 +1717,15 @@ void fn_80199AF0(void)
     }
 }
 
-/// @todo 94.39%: all loops and shapes match; the residual is a callee-saved
-/// rotation (mode/slot/td1 and the two lbl_804799D8 base registers each
+/// @todo 96.28%: all loops and shapes match; the residual is a callee-saved
+/// rotation (the lbl_804799D8 bases and the tail's entry/offset temps each
 /// colored one register off), a zero/constant register collision in the
-/// x4E-clear remainder loop, and one load scheduled across a walker update
-/// in the slot search.
+/// x4E-clear remainder loop, and the model-index load staying indexed
+/// (lbzx) instead of rematerializing the entry base. The four per-slot
+/// bracket loops keep byte-offset walkers: GET_BRACKET_SLOT only matches in
+/// straight-line code; in loops the cast base keeps the +0x2C out of the
+/// displacement, unlike a true member array (typing them needs a slots[4]
+/// array inside BracketEntry itself).
 void fn_8019A158(void)
 {
     TmData* td1;
@@ -1702,12 +1739,12 @@ void fn_8019A158(void)
     s32 i;
     UNUSED u8 unused[8];
     s32 local1, local2;
-    u8* me;
+    MatchEnd* me;
     u8* cursor;
     PAD_STACK(4);
 
     td1 = gm_8018F634();
-    lbl_804799D8.x48 = (u8*) &gm_80477738;
+    lbl_804799D8.x48 = &gm_80477738;
     lbl_804799D8.x0 = mode = 0;
 
     td2 = gm_8018F634();
@@ -1725,11 +1762,12 @@ void fn_8019A158(void)
         slot = local2;
     } else {
         for (i = 0; i < 4; i++) {
-            if (me[0x58] != 3 && me[0x5E] == 0) {
+            if (me->player_standings[i].slot_type != 3 &&
+                me->player_standings[i].is_small_loser == 0)
+            {
                 slot = i;
                 goto found;
             }
-            me += 0xA8;
         }
         slot = -1;
     found:;
@@ -1761,11 +1799,16 @@ void fn_8019A158(void)
                 cursor[0x4C] = 3;
             } else {
                 u8 v;
-                me = lbl_804799D8.x48 + i * 0xA8;
-                v = me[0x5E];
-                me[0x5D] = v;
+                /// @todo The byte-offset walker is required: any
+                /// player_standings[i] pointer is biased +0x58 from the
+                /// MatchEnd base the original codegen walks from.
+                u8* p = (u8*) lbl_804799D8.x48 + i * 0xA8;
+                v = p[0x5E];
+                p[0x5D] = v;
                 cursor[0x4C] = v;
-                if (lbl_804799D8.x48[i * 0xA8 + 0x5E] == 0) {
+                if (lbl_804799D8.x48->player_standings[i].is_small_loser ==
+                    0)
+                {
                     sel = i;
                 }
             }
@@ -1808,17 +1851,17 @@ void fn_8019A158(void)
 
         {
             u8 v = lbl_80473AB8[bracket_idx].x4C;
-            lbl_804799D8.x48[0x5D] = v;
-            lbl_804799D8.x48[0x5E] = v;
+            lbl_804799D8.x48->player_standings[0].is_big_loser = v;
+            lbl_804799D8.x48->player_standings[0].is_small_loser = v;
             v = lbl_80473AB8[bracket_idx].x78;
-            lbl_804799D8.x48[0x105] = v;
-            lbl_804799D8.x48[0x106] = v;
+            lbl_804799D8.x48->player_standings[1].is_big_loser = v;
+            lbl_804799D8.x48->player_standings[1].is_small_loser = v;
             v = lbl_80473AB8[bracket_idx].xA4;
-            lbl_804799D8.x48[0x1AD] = v;
-            lbl_804799D8.x48[0x1AE] = v;
+            lbl_804799D8.x48->player_standings[2].is_big_loser = v;
+            lbl_804799D8.x48->player_standings[2].is_small_loser = v;
             v = lbl_80473AB8[bracket_idx].xD0;
-            lbl_804799D8.x48[0x255] = v;
-            lbl_804799D8.x48[0x256] = v;
+            lbl_804799D8.x48->player_standings[3].is_big_loser = v;
+            lbl_804799D8.x48->player_standings[3].is_small_loser = v;
         }
 
         cursor = (u8*) bracket;
@@ -1833,7 +1876,7 @@ void fn_8019A158(void)
     {
         lbl_804799D8.x4C = sel;
         lbl_804799D8.x4D =
-            ((u8*) &lbl_80473AB8[bracket_idx])[sel * 0x2C + 0x4E];
+            GET_BRACKET_SLOT(&lbl_80473AB8[bracket_idx], sel)->x4E;
 
         if (lbl_804799D8.x4D == 0 && lbl_80473AB8[bracket_idx].x18 != 0) {
             u8 s = lbl_804799D8.x4C;
