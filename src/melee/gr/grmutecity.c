@@ -37,32 +37,15 @@
 #include <baselib/psstructs.h>
 #include <MSL/math_ppc.h>
 
-extern s16 grMc_803E34A4[];
-extern Vec3 grMc_803B81B8;
+const Vec3 grMc_803B81B8 = { 0.0f, 0.0f, 0.0f };
 
 typedef void (*grMc_SpeedFn)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32);
-
-typedef struct grMc_CmdEntry {
-    s32 frame;
-    s16 cmd;
-    s16 param;
-    f32 fval;
-} grMc_CmdEntry;
-
-extern grMc_CmdEntry grMc_803E34E0[];
-
-typedef struct grMc_TrackInitData {
-    f32 pos;
-    f32 speed;
-} grMc_TrackInitData;
-
-extern grMc_TrackInitData grMc_803E3B7C[];
 
 static s32 grMc_8049F440[30];
 
 #include "grmutecity.static.h"
 
-u8 grMc_803E30B0[0x14] = { 0 };
+u16 grMc_803E30B0[10] = { 6, 29, 6, 7, 29, 8, 8, 29, 9 };
 
 StageCallbacks grMc_803E30C4[39] = {
     {
@@ -391,11 +374,6 @@ static grMc_UnkStruct* grMc_804D69D0;
 
 static s32 grMc_804D69D4;
 
-static f32 light_ref_br = 40000.0f;
-static f32 light_ref_dist = 0.99f;
-static s32 grMc_804D46CC = 0x1;
-#define light_dist_func grMc_804D46CC
-
 void grMuteCity_801EFC68(bool arg) {}
 
 void grMuteCity_801EFC6C(void)
@@ -533,6 +511,11 @@ void grMuteCity_801EFDF8(Ground_GObj* gobj)
     }
 }
 
+static f32 light_ref_br = 40000.0f;
+static f32 light_ref_dist = 0.99f;
+static s32 grMc_804D46CC = 0x1;
+#define light_dist_func grMc_804D46CC
+
 bool grMuteCity_801F0118(Ground_GObj* arg)
 {
     return false;
@@ -636,6 +619,13 @@ bool grMuteCity_801F043C(Ground_GObj* arg)
 void grMuteCity_801F0444(Ground_GObj* arg) {}
 
 void grMuteCity_801F0448(Ground_GObj* arg) {}
+// clang-format off
+s16 grMc_803E34A4[30] = {
+    2,  3,  4,  6,  7,  8,  9,  10, 11, 12,
+    1,  13, 14, 15, 16, 17, 18, 19, 20, 21,
+    22, 23, 24, 25, 26, 27, 32, 33, 34, 35
+};
+// clang-format on
 
 void grMuteCity_801F044C(Ground_GObj* gobj)
 {
@@ -653,6 +643,150 @@ bool grMuteCity_801F04A8(Ground_GObj* arg)
 void grMuteCity_801F04B0(Ground_GObj* arg) {}
 
 void grMuteCity_801F04B4(Ground_GObj* arg) {}
+
+typedef struct grMc_CmdEntry {
+    s32 frame;
+    s16 cmd;
+    s16 param;
+    f32 fval;
+} grMc_CmdEntry;
+
+// clang-format off
+grMc_CmdEntry grMc_803E34E0[] = {
+    { -1,11,  2,   0.0f},
+    { -1,11,  3,   0.0f},
+    { -1,11,  6,   0.0f},
+    { -1,11,  4,   0.0f},
+    { -1,11,  7,   0.0f},
+    { -1, 4,  0,   0.0f},
+    { -1, 4,  1,   0.0f},
+    { -1, 4,  6,   0.0f},
+    { -1, 4,  2,   0.0f},
+    { -1, 4,  5,   0.0f},
+    { -1, 4,  7,   0.0f},
+    { -1, 4,  8,   0.0f},
+    { -1,10,  0,   0.0f},
+    { -1, 9,  0,   0.932775f},
+    { -1,18,  0,   0.0f},
+    { -1, 7,  0,   0.0f},
+    { -1,17,  0,   0.0f},
+    { -1,13,  0,  90.0f},
+    { 180,17,  0,   0.0f},
+    { 384,19,  0,   0.0f},
+    {  -1, 6,  0,   0.0f},
+    {  -1,10,  0,   0.0f},
+    { 475, 2,  0,   0.0f},
+    { 475, 1,340,   0.0f},
+    {  -1,20,120,   0.0f},
+    {  -1, 1, 60,   0.0f},
+    {  -1, 3,  0,   0.0f},
+    { 530,21,  0,   0.0f},
+    { 567,18,  0,   0.0f},
+    {  -1, 7,  0,   0.0f},
+    { 708,26,  1,   0.0f},
+    { 800,19,  0,   0.0f},
+    {  -1, 6,  0,   0.0f},
+    {  -1,10,  1,   0.0f},
+    {  -1,12,  2,   0.0f},
+    {  -1, 5,  0,   0.0f},
+    {  -1, 5,  7,   0.0f},
+    {  -1, 5,  8,   0.0f},
+    {  -1,15,  0,-270.0f},
+    {  -1,16,  0, 270.0f},
+    { 890, 2,  0,   0.0f},
+    { 890, 1,340,   0.0f},
+    {  -1,20,120,   0.0f},
+    {  -1, 1, 60,   0.0f},
+    {  -1, 3,  0,   0.0f},
+    { 950,21,  0,   0.0f},
+    { 980,18,  0,   0.0f},
+    {  -1, 4,  0,   0.0f},
+    {  -1, 4,  7,   0.0f},
+    {  -1, 4,  8,   0.0f},
+    {  -1,11,  2,   0.0f},
+    {  -1, 7,  0,   0.0f},
+    {  -1,17,  0,   0.0f},
+    {1000,13,  0,  40.0f},
+    {  -1,14,  0,   0.0f},
+    {  -1,15,  0, -50.0f},
+    {  -1,16,  0,  50.0f},
+    {1080,23,  1,   0.0f},
+    {  -1,24,  1,   0.0f},
+    { 708,26,  0,   0.0f},
+    {1130,19,  0,   0.0f},
+    {  -1,23,  0,   0.0f},
+    {  -1,24,  0,   0.0f},
+    {  -1, 6,  0,   0.0f},
+    {  -1,17,  0,   0.0f},
+    {  -1,14,  0, -30.0f},
+    {  -1,10,  0,   0.0f},
+    {  -1,12,  7,   0.0f},
+    {  -1, 5,  5,   0.0f},
+    {1223, 2,  0,   0.0f},
+    {1223, 1,340,   0.0f},
+    {  -1,20,120,   0.0f},
+    {  -1, 1, 60,   0.0f},
+    {  -1, 3,  0,   0.0f},
+    {1280,21,  0,   0.0f},
+    {1312,18,  0,   0.0f},
+    {  -1,26,  2,   0.0f},
+    {  -1,11,  7,   0.0f},
+    {  -1, 4,  5,   0.0f},
+    {  -1,17,  0,   0.0f},
+    {  -1, 7,  0,   0.0f},
+    {1404,19,  0,   0.0f},
+    {  -1, 6,  0,   0.0f},
+    {  -1,10,  2,   0.0f},
+    {  -1,12,  3,   0.0f},
+    {  -1, 5,  1,   0.0f},
+    {1495, 2,  0,   0.0f},
+    {  -1,25,  1,   0.0f},
+    {1495, 1,340,   0.0f},
+    {  -1,20,120,   0.0f},
+    {  -1, 1, 60,   0.0f},
+    {  -1, 3,  0,   0.0f},
+    {1550,21,  0,   0.0f},
+    {1585,18,  0,   0.0f},
+    {  -1, 7,  0,   0.0f},
+    {  -1,25,  0,   0.0f},
+    {  -1,11,  3,   0.0f},
+    {  -1, 4,  1,   0.0f},
+    {2045,19,  0,   0.0f},
+    {  -1, 6,  0,   0.0f},
+    {  -1,10,  0,   0.0f},
+    {  -1,12,  6,   0.0f},
+    {  -1, 5,  6,   0.0f},
+    {  -1,22,  0,   1.0f},
+    {2135, 2,  0,   0.0f},
+    {2135, 1,340,   0.0f},
+    {  -1,20,120,   0.0f},
+    {  -1, 1, 60,   0.0f},
+    {  -1, 3,  0,   0.0f},
+    {  -1,22,  0,   0.0f},
+    {2190,21,  0,   0.0f},
+    {2225,18,  0,   0.0f},
+    {  -1, 7,  0,   0.0f},
+    {  -1,11,  6,   0.0f},
+    {  -1, 4,  6,   0.0f},
+    {2273, 8,  0,   0.0f},
+    {3290, 9,  0,   0.86445f},
+    {3300,13,  0,  90.0f},
+    {3390,19,  0,   0.0f},
+    {  -1, 6,  0,   0.0f},
+    {  -1,10,  0,   0.0f},
+    {  -1,12,  4,   0.0f},
+    {  -1, 5,  2,   0.0f},
+    {3510, 2,  0,   0.0f},
+    {3510, 1,340,   0.0f},
+    {  -1,20,120,   0.0f},
+    {  -1, 1, 60,   0.0f},
+    {  -1, 3,  0,   0.0f},
+    {3570,21,  0,   0.0f},
+    {3599,18,  0,   0.0f},
+    {  -1, 7,  0,   0.0f},
+    {9999, 0,  0,   0.0f},
+};
+// clang-format on
 
 void grMuteCity_801F04B8(Ground_GObj* gobj)
 {
@@ -960,6 +1094,29 @@ void grMuteCity_801F0D20(Ground_GObj* gobj)
     mpLib_8005667C(4);
 }
 
+typedef struct grMc_TrackInitData {
+    f32 pos;
+    f32 speed;
+} grMc_TrackInitData;
+// clang-format off
+grMc_TrackInitData grMc_803E3B7C[30] = {
+    {0.9999f,0.37f},{0.9999f,0.87f},
+    {0.9988f,0.37f},{0.9988f,0.87f},
+    {0.9977f,0.37f},{0.9977f,0.87f},
+    {0.9966f,0.37f},{0.9966f,0.87f},
+    {0.9955f,0.37f},{0.9955f,0.87f},
+    {0.9944f,0.37f},{0.9944f,0.87f},
+    {0.9933f,0.37f},{0.9933f,0.87f},
+    {0.9922f,0.37f},{0.9922f,0.87f},
+    {0.9911f,0.37f},{0.9911f,0.87f},
+    {0.9900f,0.37f},{0.9900f,0.87f},
+    {0.9889f,0.37f},{0.9889f,0.87f},
+    {0.9878f,0.37f},{0.9878f,0.87f},
+    {0.9867f,0.37f},{0.9867f,0.87f},
+    {0.9856f,0.37f},{0.9856f,0.87f},
+    {0.9845f,0.37f},{0.9845f,0.87f},
+};
+// clang-format on
 void grMuteCity_801F0F4C(Ground_GObj* gobj)
 {
     f32 pos;
@@ -1302,6 +1459,40 @@ void grMuteCity_801F1A0C(HSD_GObj* gobj, Ground* gp)
     Ground_801C53EC(0x5CC60);
 }
 
+grMc_SpeedFn* grMc_803E3C6C[30] = {
+    0,
+    // grMuteCity_801F173C,
+    // grMuteCity_801F1754,
+    // grMuteCity_801F176C,
+    // grMuteCity_801F1784,
+    // grMuteCity_801F179C,
+    // grMuteCity_801F17B4,
+    // grMuteCity_801F17CC,
+    // grMuteCity_801F17E4,
+    // grMuteCity_801F17FC,
+    // grMuteCity_801F1814,
+    // grMuteCity_801F182C,
+    // grMuteCity_801F1844,
+    // grMuteCity_801F185C,
+    // grMuteCity_801F1874,
+    // grMuteCity_801F188C,
+    // grMuteCity_801F18A4,
+    // grMuteCity_801F18BC,
+    // grMuteCity_801F18D4,
+    // grMuteCity_801F18EC,
+    // grMuteCity_801F1904,
+    // grMuteCity_801F191C,
+    // grMuteCity_801F1934,
+    // grMuteCity_801F194C,
+    // grMuteCity_801F1964,
+    // grMuteCity_801F197C,
+    // grMuteCity_801F1994,
+    // grMuteCity_801F19AC,
+    // grMuteCity_801F19C4,
+    // grMuteCity_801F19DC,
+    // grMuteCity_801F19E4,
+};
+
 void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
 {
     Vec3 car_pos;
@@ -1619,8 +1810,7 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
                 if (!car->x22_flags.b0 && (u32) car->x24 == 0) {
                     Item_GObj* item_gobj = grMaterial_801C8CFC(
                         0, 2, car_gp, jobj, grMuteCity_801F1A0C,
-                        ((grMc_SpeedFn*) (grMc_803E30B0 + 0xBBC))[car_idx],
-                        NULL);
+                        ((grMc_SpeedFn*) (grMc_803E3C6C))[car_idx], NULL);
                     if (item_gobj != NULL) {
                         grMaterial_801C8DE0(item_gobj, 0.0f, 0.0f, -12.0f,
                                             0.0f, 0.0f, 2.0f, 15.0f);
