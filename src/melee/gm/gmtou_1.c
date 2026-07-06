@@ -484,7 +484,6 @@ void fn_80196FFC(HSD_GObj* gobj)
     f32 x;
     u8 players;
     u8 state;
-    /* unused; affects stack layout */
     u8 start_frame, cur_frame, end_frame, loop_flag;
 
     tm = gm_8018F634();
