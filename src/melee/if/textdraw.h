@@ -20,5 +20,6 @@
                                      u8 camera_priority);
 /* 3027A0 */ void DevText_AddToList(DevText** list, DevText* text);
 /* 302810 */ void DevText_Show(HSD_GObj* gobj, DevText* text);
+/* 302834 */ DevText* DevText_Create(char, int, int, int, int, char*);
 
 #endif

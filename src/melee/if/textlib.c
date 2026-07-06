@@ -21,21 +21,68 @@
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/gobjuserdata.h>
+#include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/memory.h>
 #include <baselib/particle.h>
 #include <baselib/sislib.h>
+#include <baselib/video.h>
+#include <baselib/wobj.h>
 #include <MSL/math.h>
 #include <MSL/stdio.h>
 #include <MSL/string.h>
 
-struct unk_series {
-    s16 values[26];
+/// .data
+/* 3FDC20 */ static HSD_WObjDesc devtext_eyepos = {
+    NULL, { 0.0f, 40.241424560546875f, 300.2409973144531f }, NULL
+};
+/* 3FDC34 */ static HSD_WObjDesc devtext_interest = { NULL,
+                                                      { 0.0f, 10.0f, 0.0f },
+                                                      NULL };
+/* 3FDC48 */ static HSD_CameraDescPerspective devtext_CObjDesc = {
+    NULL,
+    0,
+    1,
+    0,
+    640,
+    0,
+    480,
+    0,
+    640,
+    0,
+    480,
+    &devtext_eyepos,
+    &devtext_interest,
+    0,
+    NULL,
+    0.1f,
+    32768.0f,
+    30.0f,
+    1.3636000156402588f,
 };
 
+/// .bss
+
+/// @note Not necessarily a struct but definitely 0x6B0 unallocated.
+///       #DevText is definitely size 0x34 based on #DevText_InitPool.
+/* 4A1FD8 */ struct DevText_Pool {
+    struct DevText entries[32];
+    char pad[0x6B0 - 0x680];
+} devtext_pool;
+STATIC_ASSERT(sizeof(struct DevText_Pool) == 0x6B0);
+
+/// .sbss
+/* 4D6E18 */ static DevText* devtext_drawlist;
+/* 4D6E1C */ static HSD_GObj* devtext_gobj;
+/* 4D6E20 */ static HSD_CObj* devtext_cobj;
+/* 4D6E24 */ static int devtext_setup_classifier;
+/* 4D6E28 */ static int devtext_setup_p_link;
+/* 4D6E2C */ static int devtext_setup_priority;
+/* 4D6E30 */ static int devtext_setup_gx_link;
+/* 4D6E34 */ static int devtext_setup_render_priority;
+/* 4D6E38 */ static DevText* devtext_poolhead;
+
 /// ?
-/* 4D6E18 */ extern DevText* devtext_drawlist;
-/* 4D6E38 */ extern DevText* devtext_poolhead;
 /* 4DDC88 */ extern GXColor un_804DDC88;
 /* 4DDC8C */ extern GXColor un_804DDC8C;
 /* 4DDC90 */ extern GXColor un_804DDC90;
@@ -44,26 +91,291 @@ struct unk_series {
 /* 4DDC9C */ extern f32 un_804DDC9C;
 /* 4DDCA0 */ extern f32 un_804DDCA0;
 
-struct un_80304138_objalloc_t* un_804D6E40;
-struct un_80304138_objalloc_t_x8* un_804D6E48;
+#pragma push
+#pragma dont_inline on
+int DevText_StrLen(char* str)
+{
+    if (str) {
+        int length = 0;
+        while (*str++) {
+            length++;
+        }
+        return length;
+    }
+    return 0;
+}
+#pragma pop
 
-unsigned char un_804D6E4C;
+void DevText_NumToStr(int num, char* str)
+{
+    int length = 0;
+    int i;
+    char* strEnd;
 
-/// .bss
-/* 4A2688 */ static HSD_ObjAllocData un_804A2688;
+    if (num < 0) {
+        *str = '-';
+        num = -num;
+        str++;
+    }
 
-/// .sbss
-/* 4D6E44 */ static struct un_80304138_objalloc_t* un_804D6E44;
+    strEnd = str;
+    do {
+        *strEnd = (num % 10) + '0';
+        num = num / 10;
+        strEnd++;
+        length++;
+    } while (num != 0);
+    *strEnd = '\0';
+    strEnd--;
+    length >>= 1;
 
-GXColor white = { 0xFF, 0xFF, 0xFF, 0xFF };
-GXColor red = { 0xFF, 0x80, 0x80, 0xFF };
-GXColor green = { 0x80, 0xFF, 0x80, 0xFF };
-GXColor blue = { 0x80, 0x80, 0xFF, 0xFF };
+    for (i = 0; i != length; i++) {
+        char temp = *str;
+        *str = *strEnd;
+        *strEnd = temp;
+        strEnd--;
+        str++;
+    }
+}
 
-GXColor un_804D5A08 = { 0x40, 0x50, 0x80, 0x80 };
-GXColor un_804D5A0C = { 0xE2, 0xE2, 0xE2, 0xFF };
-GXColor un_804D5A10 = { 0xFF, 0x80, 0x20, 0xFF };
-GXColor un_804D5A14 = { 0xA0, 0xA0, 0xFF, 0xFF };
+#pragma push
+#pragma dont_inline on
+HSD_GObj* DevText_GetGObj(void)
+{
+    return devtext_gobj;
+}
+#pragma pop
+
+#pragma push
+#pragma dont_inline on
+void DevText_InitPool(void)
+{
+    DevText* text = devtext_pool.entries;
+    int i;
+    devtext_pool.entries[0].prev = NULL;
+    for (i = 0; i < 31; i++) {
+        devtext_pool.entries[i + 1].prev = &devtext_pool.entries[i];
+        devtext_pool.entries[i].next = &devtext_pool.entries[i + 1];
+    }
+    devtext_pool.entries[31].next = NULL;
+    devtext_poolhead = devtext_pool.entries;
+    devtext_drawlist = NULL;
+}
+#pragma pop
+
+void DevText_Remove(DevText** ptext)
+{
+    DevText* text = *ptext;
+    DevText* next;
+    DevText* cur;
+    next = text->next;
+    if (next) {
+        next->prev = text->prev;
+    }
+    cur = *ptext;
+    if ((*ptext)->prev) {
+        (*ptext)->prev->next = (*ptext)->next;
+    } else {
+        if (cur->next != 0) {
+            *ptext = (*ptext)->next;
+        } else {
+            *ptext = NULL;
+        }
+    }
+    text->next = devtext_poolhead;
+    text->prev = NULL;
+    devtext_poolhead = text;
+}
+
+void DevText_SetupCObj(void)
+{
+    if (devtext_cobj == NULL) {
+        HSD_RectS16 viewport;
+        Scissor scissor;
+        Vec3 eyepos = { 0, 0, 1 };
+        Vec3 interest = { 0, 0, 0 };
+        float roll = 0;
+        float near = 0;
+        float far = 2;
+        float top = -20;
+        float bottom = 500;
+        float left = -20;
+        float right = 660;
+
+        viewport.xmin = 0;
+        viewport.xmax = 640;
+        viewport.ymin = 0;
+        viewport.ymax = 480;
+
+        scissor.left = 0;
+        scissor.right = 640;
+        scissor.top = 0;
+        scissor.bottom = 480;
+
+        devtext_cobj = HSD_CObjAlloc();
+        HSD_CObjSetProjectionType(devtext_cobj, 3);
+        HSD_CObjSetViewport(devtext_cobj, &viewport);
+        HSD_CObjSetScissor(devtext_cobj, &scissor);
+        HSD_CObjSetEyePosition(devtext_cobj, &eyepos);
+        HSD_CObjSetInterest(devtext_cobj, &interest);
+        HSD_CObjSetRoll(devtext_cobj, roll);
+        HSD_CObjSetNear(devtext_cobj, near);
+        HSD_CObjSetFar(devtext_cobj, far);
+        HSD_CObjSetOrtho(devtext_cobj, top, bottom, left, right);
+    }
+    HSD_CObjSetCurrent(devtext_cobj);
+}
+
+void DevText_Draw(DevText* text)
+{
+    PAD_STACK(8);
+    hsd_80391A04(text->scale_x, text->scale_y, text->line_width);
+    if ((text->flags & DEVTEXT_FLAG_HIDEBACKGROUND) == 0) {
+        GXColor color = text->bg_color;
+        {
+            GXColor* color_ptr = &color;
+            DrawRectangle(text->x - 8, text->y - 8,
+                          text->scale_x * text->w + 8,
+                          text->scale_y * text->h + 8, color_ptr);
+        }
+        {
+            GXColor color = text->bg_color;
+            GXColor* color_ptr = &color;
+            DrawRectangle(text->x - 4, text->y - 4,
+                          text->scale_x * text->w + 4,
+                          text->scale_y * text->h + 4, color_ptr);
+        }
+    }
+    if ((text->flags & DEVTEXT_FLAG_HIDETEXT) == 0) {
+        GXColor color;
+        GXColor* color_ptr = &color;
+        int y = text->y;
+        int row = 0;
+        while (row < text->h) {
+            int x = text->x;
+            int col = 0;
+            while (col < text->w) {
+                int index = (col + text->w * row) * 2;
+                u8* buf = (u8*) &text->buf[index];
+                s8 chr = buf[0];
+                u8 color_idx = (buf[1] & 0xC0) >> 6;
+                if (chr) {
+                    color = text->text_colors[color_idx];
+                    DrawASCII(chr, x, y, color_ptr);
+                }
+                x += text->scale_x;
+                col++;
+            }
+            y += text->scale_y;
+            row++;
+        }
+        if (text->flags & DEVTEXT_FLAG_SHOWCURSOR) {
+            text->unk++;
+            if (text->unk > 16) {
+                text->unk = 0;
+            } else if (8 < text->unk) {
+                GXColor color = { 0xFF, 0xFF, 0xFF, 0xC0 };
+                DrawRectangle(text->x + text->scale_x * text->cursor_x,
+                              text->y + text->scale_y * text->cursor_y - 4,
+                              text->scale_x, text->scale_y, &color);
+            }
+        }
+    }
+}
+
+void DevText_DrawAll(HSD_GObj* gobj, int pass)
+{
+    PAD_STACK(8);
+
+    if ((unsigned int) pass == HSD_RP_BOTTOMHALF) {
+        DevText* text = devtext_drawlist;
+        HSD_FogSet(NULL);
+        DevText_SetupCObj();
+        while (text) {
+            DevText_Draw(text);
+            text = text->next;
+        }
+    }
+}
+
+#pragma push
+#pragma dont_inline on
+void DevText_CreateCObj(int classifier, int p_link, int gobj_priority,
+                        int gx_link, u8 gx_priority)
+{
+    HSD_GObj* gobj = GObj_Create(classifier, p_link, gobj_priority);
+    if (gobj) {
+        HSD_CObj* cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) &devtext_CObjDesc);
+        if (cobj) {
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+            GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, gx_priority);
+            gobj->gxlink_prios = 1LL << gx_link;
+        } else {
+            HSD_GObjPLink_80390228(gobj);
+        }
+    }
+}
+#pragma pop
+
+HSD_GObj* DevText_Setup(int classifier, int p_link, int priority, int gx_link,
+                        int render_priority, u8 camera_priority)
+{
+    HSD_GObj* gobj;
+    PAD_STACK(8);
+
+    devtext_setup_classifier = classifier;
+    devtext_setup_p_link = p_link;
+    devtext_setup_priority = priority;
+    devtext_setup_gx_link = gx_link;
+    devtext_setup_render_priority = render_priority;
+    devtext_cobj = NULL;
+
+    DevText_CreateCObj(classifier, p_link, priority, gx_link, camera_priority);
+    DevText_InitPool();
+    gobj = GObj_Create(devtext_setup_classifier, devtext_setup_p_link,
+                       devtext_setup_priority);
+    if (gobj) {
+        GObj_SetupGXLink(gobj, DevText_DrawAll, devtext_setup_gx_link,
+                         devtext_setup_render_priority & 0xFF);
+    }
+    devtext_gobj = gobj;
+    return devtext_gobj;
+}
+
+void DevText_AddToList(DevText** list, DevText* text)
+{
+    if (*list) {
+        DevText* next = *list;
+        DevText* prev = NULL;
+
+        while (next) {
+            if (text->id >= next->id) {
+                prev = next;
+                next = next->next;
+            } else {
+                break;
+            }
+        }
+
+        text->next = next;
+        // next->prev = text;
+
+        if (prev) {
+            prev->next = text;
+            text->prev = prev;
+        } else {
+            text->prev = NULL;
+            *list = text;
+        }
+    } else {
+        *list = text;
+    }
+}
+
+void DevText_Show(HSD_GObj* gobj, DevText* text)
+{
+    DevText_AddToList(&devtext_drawlist, text);
+}
 
 static inline DevText* find_by_id(char id)
 {
@@ -121,6 +433,31 @@ DevText* DevText_Create(char id, int x, int y, int w, int h, char* buf)
     }
     return text;
 }
+
+struct unk_series {
+    s16 values[26];
+};
+
+struct un_80304138_objalloc_t* un_804D6E40;
+struct un_80304138_objalloc_t_x8* un_804D6E48;
+
+unsigned char un_804D6E4C;
+
+/// .bss
+/* 4A2688 */ static HSD_ObjAllocData un_804A2688;
+
+/// .sbss
+/* 4D6E44 */ static struct un_80304138_objalloc_t* un_804D6E44;
+
+GXColor white = { 0xFF, 0xFF, 0xFF, 0xFF };
+GXColor red = { 0xFF, 0x80, 0x80, 0xFF };
+GXColor green = { 0x80, 0xFF, 0x80, 0xFF };
+GXColor blue = { 0x80, 0x80, 0xFF, 0xFF };
+
+GXColor un_804D5A08 = { 0x40, 0x50, 0x80, 0x80 };
+GXColor un_804D5A0C = { 0xE2, 0xE2, 0xE2, 0xFF };
+GXColor un_804D5A10 = { 0xFF, 0x80, 0x20, 0xFF };
+GXColor un_804D5A14 = { 0xA0, 0xA0, 0xFF, 0xFF };
 
 void DevText_EraseFirstLine(DevText* text)
 {

@@ -1,5 +1,5 @@
-#ifndef GALE01_302834
-#define GALE01_302834
+#ifndef GALE01_3029B4
+#define GALE01_3029B4
 
 #include <placeholder.h>
 #include <platform.h>
@@ -9,7 +9,6 @@
 
 #include <dolphin/gx.h>
 
-/* 302834 */ DevText* DevText_Create(char, int, int, int, int, char*);
 /* 3029B4 */ void DevText_EraseFirstLine(DevText* text);
 /* 302A3C */ void DevText_SetCursorXY(DevText* text, int x, int y);
 /* 302A88 */ void DevText_SetCursorX(DevText* text, int x);
