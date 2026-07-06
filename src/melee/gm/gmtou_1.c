@@ -708,18 +708,21 @@ void fn_801976D4(HSD_GObj* gobj)
     }
 }
 
+/// @todo 98.85%: all 261 instructions match except one adjacent schedule
+/// swap (the jobj load and the pnum save trade places after the
+/// fn_8018F62C call); the rest is anonymous literal-pool reloc naming.
 void fn_801977AC(HSD_GObj* gobj)
 {
     TmData* tm;
-    s32 pnum;
     HSD_JObj* jobj;
+    s32 pnum;
     s32 in_range;
     f32 x;
     u8 players;
 
     tm = gm_8018F634();
     pnum = fn_8018F62C(gobj);
-    jobj = gobj->hsd_obj;
+    jobj = GET_JOBJ(gobj);
 
     if (gm_8018F634()->cur_option >= 0x1B && gm_8018F634()->cur_option <= 0x1E)
     {
@@ -748,18 +751,11 @@ void fn_801977AC(HSD_GObj* gobj)
     fn_8018FDC4(jobj, lbl_804DA81C + x, lbl_804DA820, lbl_804DA818);
 
     if (lbl_804799D8.x2A[pnum].state == 4) {
-        u8* counter_ptr;
-        u8 counter;
-
-        counter_ptr = &lbl_804799D8.x1D[pnum];
-        (void) counter_ptr;
-        counter = *counter_ptr;
-        if (counter < 0x28) {
-            *counter_ptr = counter + 1;
+        if (lbl_804799D8.x1D[pnum] < 0x28) {
+            lbl_804799D8.x1D[pnum]++;
         }
-        counter = *counter_ptr;
-
-        HSD_JObjSetTranslateY(jobj, lbl_803DA0D0.bounce_y[counter]);
+        HSD_JObjSetTranslateY(jobj,
+                              lbl_803DA0D0.bounce_y[lbl_804799D8.x1D[pnum]]);
     } else {
         lbl_804799D8.x1D[pnum] = 0;
     }
@@ -792,7 +788,6 @@ void fn_80197AF0(HSD_GObj* gobj)
     f32 x;
     u8 players;
     u8 state;
-    u16* counter;
 
     tm = gm_8018F634();
     pnum = fn_8018F62C(gobj);
@@ -842,13 +837,12 @@ void fn_80197AF0(HSD_GObj* gobj)
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     }
 
-    counter = &lbl_804799D8.x12[pnum];
-    if (*counter < 0x258U) {
-        *counter = (u16) (*counter + 1);
+    if (lbl_804799D8.x12[pnum] < 0x258U) {
+        lbl_804799D8.x12[pnum]++;
     } else {
-        *counter = 0U;
+        lbl_804799D8.x12[pnum] = 0;
     }
-    fn_8019044C(jobj, (f32) *counter);
+    fn_8019044C(jobj, (f32) lbl_804799D8.x12[pnum]);
 }
 
 /// Updates visibility of a menu JObj based on current menu option.
@@ -2466,33 +2460,40 @@ void gm_8019B2DC_OnFrame(void)
 
 /// Transitions to results screen after a tournament match.
 /// Ranks players, preloads stage/character data, and starts audio.
+/// @todo ~99% — all 278 instructions/shapes match; residual is a pure
+/// callee-saved register rotation (rank/match colored r28/r27 vs target
+/// r29/r28, and the char/costume fill loop's two walkers swapped r28<->r29).
 void fn_8019B458(s32* arg0)
 {
+    struct Preload {
+        s32 stage;
+        s32 char_ids[4];
+        s32 costumes[4];
+    } req;
     TmData* tm = (TmData*) arg0;
     struct Lbl804799D8_t* d8 = &lbl_804799D8;
-    s32 i;
     s32 rank;
+    s32 i;
+    s32 j;
     s32 x24;
+    s32 entrants;
     TmData* td;
-
-    s32 costumes[4];
-    s32 charIDs[4];
     PAD_STACK(0x10);
 
-    rank = 0;
     tm->x24++;
-    d8->x0 = rank;
+    d8->x0 = rank = 0;
     tm->pad_x34[0] = tm->x33;
 
     td = gm_8018F634();
+    entrants = td->entrants;
     x24 = td->x24;
 
-    if (x24 > (s32) lbl_803DA0D0.rank_thresholds[td->entrants][5]) {
+    if (x24 > (s32) lbl_803DA0D0.rank_thresholds[entrants][5]) {
         rank = 6;
     } else {
-        for (i = 5; i >= 0; i--) {
-            if (x24 <= (s32) lbl_803DA0D0.rank_thresholds[td->entrants][i]) {
-                rank = i;
+        for (j = 5; j >= 0; j--) {
+            if (x24 <= (s32) lbl_803DA0D0.rank_thresholds[entrants][j]) {
+                rank = j;
             }
         }
     }
@@ -2500,13 +2501,17 @@ void fn_8019B458(s32* arg0)
     tm->x33 = rank;
 
     {
-        s32 match = fn_80196CF8();
-        TmData* td2 = gm_8018F634();
+        s32 match;
+        TmData* td2;
+
+        match = fn_80196CF8();
+        td2 = gm_8018F634();
         fn_80198D18();
 
         {
-            HSD_GObj* gobj = fn_8019035C(0, lbl_804D6670->models[3], match,
-                                         0x1A, 3, 1, fn_80196EEC, 0.0f);
+            HSD_GObj* gobj =
+                fn_8019035C(0, lbl_804D6670->models[3], match, 0x1A, 3, 1,
+                            fn_80196EEC, lbl_804DA808);
 
             if ((s32) td2->pad_x34[0] == match) {
                 HSD_JObjSetFlagsAll(gobj->hsd_obj, JOBJ_HIDDEN);
@@ -2522,23 +2527,25 @@ void fn_8019B458(s32* arg0)
         }
 
         fn_80198BA0();
-        fn_8018E618(tm->entrants, 4.5f, tm->x2C);
+        fn_8018E618(tm->entrants, lbl_804DA810, tm->x2C);
         fn_8018E85C(lbl_804D6670->models[4], tm->x2C);
         fn_8018FA24();
 
         tm->cur_option = 0x14;
         tm->x2C = 0;
 
-        for (i = 0; i < 4; i++) {
-            if (tm->x4B8[i].x0 != 3) {
-                charIDs[i] = fn_8018F6FC(tm->x4B8[i].x1);
-                costumes[i] = tm->x4B8[i].x3;
-            }
-        }
-
         {
-            volatile InternalStageId stageID;
             s32 use_random_stage;
+            /* declared here (not in the cache block below) to keep &req in
+             * a callee-saved register across both entry-fill loops */
+            struct Preload* q = &req;
+
+            for (i = 0; i < 4; i++) {
+                if (tm->x4B8[i].x0 != 3) {
+                    req.char_ids[i] = fn_8018F6FC(tm->x4B8[i].x1);
+                    req.costumes[i] = tm->x4B8[i].x3;
+                }
+            }
 
             if ((tm->stage_selection_type == 0 && tm->x32 == 0) ||
                 tm->stage_selection_type == 1)
@@ -2561,9 +2568,9 @@ void fn_8019B458(s32* arg0)
                     }
                 } while (true);
                 lbl_804D4194 = lbl_804D4190;
-                stageID = lbl_804D4190;
+                req.stage = lbl_804D4190;
             } else {
-                stageID = tm->x28;
+                req.stage = tm->x28;
             }
 
             {
@@ -2571,24 +2578,11 @@ void fn_8019B458(s32* arg0)
                 struct GameCache* gc = &scene->game_cache;
                 lbDvd_800174BC();
 
-                if (tm->x4B8[0].x0 != 3) {
-                    gc->entries[0].char_id = charIDs[0];
-                    gc->entries[0].color = costumes[0];
-                }
-
-                if (tm->x4B8[1].x0 != 3) {
-                    gc->entries[1].char_id = charIDs[1];
-                    gc->entries[1].color = costumes[1];
-                }
-
-                if (tm->x4B8[2].x0 != 3) {
-                    gc->entries[2].char_id = charIDs[2];
-                    gc->entries[2].color = costumes[2];
-                }
-
-                if (tm->x4B8[3].x0 != 3) {
-                    gc->entries[3].char_id = charIDs[3];
-                    gc->entries[3].color = costumes[3];
+                for (i = 0; i < 4; i++) {
+                    if (tm->x4B8[i].x0 != 3) {
+                        gc->entries[i].char_id = q->char_ids[i];
+                        gc->entries[i].color = q->costumes[i];
+                    }
                 }
 
                 {
@@ -2601,7 +2595,7 @@ void fn_8019B458(s32* arg0)
                         skip_stage_cache = 0;
                     }
                     if (skip_stage_cache == 0) {
-                        gc->stage_id = stageID;
+                        gc->stage_id = req.stage;
                     }
                 }
 
@@ -2612,10 +2606,10 @@ void fn_8019B458(s32* arg0)
                 u64 audio_mask = 0;
                 for (i = 0; i < 4; i++) {
                     if (tm->x4B8[i].x0 != 3) {
-                        audio_mask |= lbAudioAx_80026E84(charIDs[i]);
+                        audio_mask |= lbAudioAx_80026E84(req.char_ids[i]);
                     }
                 }
-                audio_mask |= lbAudioAx_80026EBC(stageID);
+                audio_mask |= lbAudioAx_80026EBC(req.stage);
                 lbAudioAx_80026F2C(0x1C);
                 lbAudioAx_8002702C(0xC, audio_mask);
                 lbAudioAx_80027168();
