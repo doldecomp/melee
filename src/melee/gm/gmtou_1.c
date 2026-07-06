@@ -2345,8 +2345,6 @@ extern u8 lbl_803B7D04[20];
 
 /// Tournament match timer display/audio state machine.
 /// Handles match countdown, audio transitions, and end conditions.
-/// @todo 99.9% — two encodings differ in the timer-copy loop guard
-/// (cmplwi 0/ble vs cmplwi 1/blt, semantically identical).
 void fn_8019AF50(s32* arg0, u32 arg1, u32 arg2)
 {
     typedef struct {
@@ -2409,15 +2407,15 @@ void fn_8019AF50(s32* arg0, u32 arg1, u32 arg2)
         if (lbl_804799D8.x0 < 0xFAU) {
             lbl_804799D8.x0++;
             if (lbl_804799D8.x0 >= 0x64U) {
+                int i;
                 u32 count = (u32) (lbl_804799D8.x0 - 0x64) / 15;
                 u8* base = (u8*) &lbl_804799D8;
                 u8* dest = (u8*) &sp_buf;
-                while (count >= 1) {
+                for (i = 0; i < count; i++) {
                     dest[0] = base[0x4E];
                     dest[1] = base[0x4F];
                     base += 2;
                     dest += 2;
-                    count--;
                 }
             }
             HSD_SisLib_803A70A0(tm->x524[3], 0, (char*) &sp_buf);
