@@ -2345,6 +2345,8 @@ extern u8 lbl_803B7D04[20];
 
 /// Tournament match timer display/audio state machine.
 /// Handles match countdown, audio transitions, and end conditions.
+/// @todo 99.9% — two encodings differ in the timer-copy loop guard
+/// (cmplwi 0/ble vs cmplwi 1/blt, semantically identical).
 void fn_8019AF50(s32* arg0, u32 arg1, u32 arg2)
 {
     typedef struct {
@@ -2353,7 +2355,6 @@ void fn_8019AF50(s32* arg0, u32 arg1, u32 arg2)
     TimerFmt sp_buf;
     u32 buttons;
     TmData* tm = (TmData*) arg0;
-    u32* counter = &lbl_804799D8.x0;
     s32 bracketIdx;
 
     sp_buf = *(TimerFmt*) lbl_803B7D04;
@@ -2375,18 +2376,17 @@ void fn_8019AF50(s32* arg0, u32 arg1, u32 arg2)
         } else if (lbl_804D6680[0] == 0) {
             u8* bp = (u8*) &lbl_80473AB8[bracketIdx];
             s32 j = 0;
-            s32 n = 4;
+            s32 n;
 
-            do {
+            for (n = 4; n != 0; n--) {
                 if (bp[0x30] != 0 && bp[0x4C] == 0) {
-                    u8* entry = (u8*) &lbl_80473AB8[bracketIdx];
-                    lbl_804D6680[1] = entry[j * 0x2C + 0x4D];
+                    lbl_804D6680[1] =
+                        (&lbl_80473AB8[bracketIdx].x4D)[j * 0x2C];
                     break;
                 }
                 bp += 0x2C;
                 j++;
-                n--;
-            } while (n != 0);
+            }
 
             lbAudioAx_80023F28(fn_80160400(fn_8018F6FC(lbl_804D6680[1])));
             lbl_804D6680[0] = 1;
@@ -2406,13 +2406,13 @@ void fn_8019AF50(s32* arg0, u32 arg1, u32 arg2)
     }
 
     if (lbl_80473AB8[bracketIdx].x18 != 0) {
-        if (*counter < 0xFAU) {
-            (*counter)++;
-            if (*counter >= 0x64U) {
-                s32 count = (u32) (*counter - 0x64) / 15;
-                u8* base = (u8*) counter;
+        if (lbl_804799D8.x0 < 0xFAU) {
+            lbl_804799D8.x0++;
+            if (lbl_804799D8.x0 >= 0x64U) {
+                u32 count = (u32) (lbl_804799D8.x0 - 0x64) / 15;
+                u8* base = (u8*) &lbl_804799D8;
                 u8* dest = (u8*) &sp_buf;
-                while (count > 0) {
+                while (count >= 1) {
                     dest[0] = base[0x4E];
                     dest[1] = base[0x4F];
                     base += 2;
@@ -2422,24 +2422,24 @@ void fn_8019AF50(s32* arg0, u32 arg1, u32 arg2)
             }
             HSD_SisLib_803A70A0(tm->x524[3], 0, (char*) &sp_buf);
         } else {
-            *counter += 2;
+            lbl_804799D8.x0 += 2;
             if (lbl_804799D8.x4D != 1) {
-                if (*counter > 0xFAU) {
-                    *counter = 0xFA;
+                if (lbl_804799D8.x0 > 0xFAU) {
+                    lbl_804799D8.x0 = 0xFA;
                 }
             }
-            HSD_SisLib_803A70A0(tm->x524[3], 0, (char*) counter + 0x4E);
+            HSD_SisLib_803A70A0(tm->x524[3], 0, (char*) &lbl_804799D8 + 0x4E);
         }
     } else {
-        if (*counter < 0xFAU) {
-            *counter = 0xFA;
+        if (lbl_804799D8.x0 < 0xFAU) {
+            lbl_804799D8.x0 = 0xFA;
         }
     }
 
     if (*arg0 == 0x27) {
-        if (*counter >= 0xFAU) {
+        if (lbl_804799D8.x0 >= 0xFAU) {
             if (tm->x33 == 6) {
-                if (*counter >= 0x1C20U || (buttons & 0x1100)) {
+                if (lbl_804799D8.x0 >= 0x1C20U || (buttons & 0x1100)) {
                     gm_801A42F8(1);
                     gm_801A4B60();
                 }
