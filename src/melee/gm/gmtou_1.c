@@ -90,7 +90,7 @@ STATIC_ASSERT(sizeof(BracketEntrySlot) == 0x2C);
 /// A macro rather than an inline function (like gmtoulib.c's
 /// BracketEntry_GetSlot): MWCC reserves 8 bytes of stack per inlined call,
 /// which would break the frame size of fn_8019A158.
-#define GET_BRACKET_SLOT(entry, slot_idx) \
+#define GET_BRACKET_SLOT(entry, slot_idx)                                     \
     (&((BracketEntrySlot*) &(entry)->x2C)[slot_idx])
 
 void fn_80196510(void)
@@ -1806,8 +1806,7 @@ void fn_8019A158(void)
                 v = p[0x5E];
                 p[0x5D] = v;
                 cursor[0x4C] = v;
-                if (lbl_804799D8.x48->player_standings[i].is_small_loser ==
-                    0)
+                if (lbl_804799D8.x48->player_standings[i].is_small_loser == 0)
                 {
                     sel = i;
                 }

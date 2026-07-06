@@ -1138,16 +1138,16 @@ struct Lbl804799D8_t {
         u8 done;  // +4
         u8 loop;  // +5
     } x2A[4];
-    u8 _pad0[2]; // 0x42-0x43
-    u8 x44[4];   // 0x44 per-player state
+    u8 _pad0[2];          // 0x42-0x43
+    u8 x44[4];            // 0x44 per-player state
     struct MatchEnd* x48; // 0x48 current tournament match results
-    u8 x4C;      // 0x4C
-    u8 x4D;      // 0x4D
-    u8 x4E[20];  // 0x4E
-    u8 _pad1[2]; // 0x62-0x63
-    Vec3 x64;    // 0x64
-    Vec3 x70;    // 0x70
-    u8 _pad2[4]; // 0x7C-0x7F
+    u8 x4C;               // 0x4C
+    u8 x4D;               // 0x4D
+    u8 x4E[20];           // 0x4E
+    u8 _pad1[2];          // 0x62-0x63
+    Vec3 x64;             // 0x64
+    Vec3 x70;             // 0x70
+    u8 _pad2[4];          // 0x7C-0x7F
 };
 
 /// @todo :: this isnt exactly right
