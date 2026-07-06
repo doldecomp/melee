@@ -1530,9 +1530,6 @@ void fn_80198EBC(void)
                 (void (*)(HSD_GObj*)) fn_80198584, lbl_804DA808);
 }
 
-/// @todo 99.82%: all 511 instructions match in count and shape; the residual
-/// is a two-register callee-saved swap (the biased selections pointer colors
-/// r29 vs the target's r30, and the second walk loop's counter r30 vs r29).
 void fn_80199AF0(void)
 {
     TmData* td1;
@@ -1541,6 +1538,7 @@ void fn_80199AF0(void)
     HSD_JObj* next;
     HSD_GObj* gobj;
     s32 slot;
+    s32 j;
     s32 mode;
     s32 bracket_idx;
     s32 result;
@@ -1633,7 +1631,7 @@ void fn_80199AF0(void)
             HSD_JObjSetTranslateZ(jobj, 10000.0f);
         }
     } else {
-        for (i = 1; i <= 12; i++) {
+        for (j = 1; j <= 12; j++) {
             if (jobj == NULL) {
                 next = NULL;
             } else {
@@ -1642,9 +1640,9 @@ void fn_80199AF0(void)
             jobj = next;
             HSD_JObjSetTranslateZ(jobj, 10000.0f);
 
-            if ((s32) lbl_803DA0D0.icon_model_map[td1->x4B8[slot].x1] == i) {
+            if ((s32) lbl_803DA0D0.icon_model_map[td1->x4B8[slot].x1] == j) {
                 HSD_JObjSetTranslateZ(jobj, 0.0f);
-                for (slot = i + 1; slot <= 12; slot++) {
+                for (slot = j + 1; slot <= 12; slot++) {
                     if (jobj == NULL) {
                         next = NULL;
                     } else {
