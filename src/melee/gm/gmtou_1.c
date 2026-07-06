@@ -224,7 +224,7 @@ void fn_801967E0(s32 arg0)
         return;
     }
 
-    if (rand < (s32) (lbl_80473AB8[arg0].x7D + lbl_80473AB8[arg0].x51)) {
+    if (rand < (s32) (lbl_80473AB8[arg0].x51 + lbl_80473AB8[arg0].x7D)) {
         lbl_80473AB8[arg0].x78 = 0;
         rand = HSD_Randi(lbl_80473AB8[arg0].x51 + lbl_80473AB8[arg0].xA9 +
                          lbl_80473AB8[arg0].xD5);
@@ -264,8 +264,8 @@ void fn_801967E0(s32 arg0)
         return;
     }
 
-    if (rand < (s32) (lbl_80473AB8[arg0].xA9 + lbl_80473AB8[arg0].x51 +
-                      lbl_80473AB8[arg0].x7D))
+    if (rand < (s32) (lbl_80473AB8[arg0].xA9 +
+                      (lbl_80473AB8[arg0].x51 + lbl_80473AB8[arg0].x7D)))
     {
         lbl_80473AB8[arg0].xA4 = 0;
         rand = HSD_Randi(lbl_80473AB8[arg0].x51 + lbl_80473AB8[arg0].x7D +
