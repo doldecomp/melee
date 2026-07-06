@@ -708,9 +708,6 @@ void fn_801976D4(HSD_GObj* gobj)
     }
 }
 
-/// @todo 98.85%: all 261 instructions match except one adjacent schedule
-/// swap (the jobj load and the pnum save trade places after the
-/// fn_8018F62C call); the rest is anonymous literal-pool reloc naming.
 void fn_801977AC(HSD_GObj* gobj)
 {
     TmData* tm;
@@ -721,8 +718,7 @@ void fn_801977AC(HSD_GObj* gobj)
     u8 players;
 
     tm = gm_8018F634();
-    pnum = fn_8018F62C(gobj);
-    jobj = GET_JOBJ(gobj);
+    jobj = (pnum = fn_8018F62C(gobj), GET_JOBJ(gobj));
 
     if (gm_8018F634()->cur_option >= 0x1B && gm_8018F634()->cur_option <= 0x1E)
     {
