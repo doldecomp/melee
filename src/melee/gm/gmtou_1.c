@@ -1534,6 +1534,9 @@ void fn_80198EBC(void)
                 (void (*)(HSD_GObj*)) fn_80198584, lbl_804DA808);
 }
 
+/// @todo 99.82%: all 511 instructions match in count and shape; the residual
+/// is a two-register callee-saved swap (the biased selections pointer colors
+/// r29 vs the target's r30, and the second walk loop's counter r30 vs r29).
 void fn_80199AF0(void)
 {
     TmData* td1;
@@ -1541,14 +1544,15 @@ void fn_80199AF0(void)
     HSD_JObj* jobj;
     HSD_JObj* next;
     HSD_GObj* gobj;
-    s32 mode;
     s32 slot;
+    s32 mode;
     s32 bracket_idx;
     s32 result;
     s32 i;
+    UNUSED u8 unused[4];
     s32 local1;
     s32 local2;
-    PAD_STACK(16);
+    PAD_STACK(4);
 
     td1 = gm_8018F634();
     td2 = gm_8018F634();
@@ -1568,26 +1572,15 @@ void fn_80199AF0(void)
         slot = local2;
     } else {
         u8* p = (u8*) &gm_80477738;
-        if (p[0x58] != 3 && p[0x5E] == 0) {
-            slot = 0;
-        } else {
-            p += 0xA8;
+        for (i = 0; i < 4; i++) {
             if (p[0x58] != 3 && p[0x5E] == 0) {
-                slot = 1;
-            } else {
-                p += 0xA8;
-                if (p[0x58] != 3 && p[0x5E] == 0) {
-                    slot = 2;
-                } else {
-                    p += 0xA8;
-                    if (p[0x58] != 3 && p[0x5E] == 0) {
-                        slot = 3;
-                    } else {
-                        slot = -1;
-                    }
-                }
+                slot = i;
+                goto found;
             }
+            p += 0xA8;
         }
+        slot = -1;
+    found:;
     }
 
     bracket_idx = fn_8018F74C();
@@ -1625,18 +1618,10 @@ void fn_80199AF0(void)
     gobj = fn_8019035C(0, lbl_804D6670->models[2], 0, 0x1A, 3, 1, fn_80198824,
                        lbl_804DA808);
 
-    if (gobj->hsd_obj == NULL) {
-        jobj = NULL;
-    } else {
-        jobj = ((HSD_JObj*) gobj->hsd_obj)->child;
-    }
+    jobj = HSD_JObjGetChild(GET_JOBJ(gobj));
 
     lbl_804799D8.x8 = mode * 0x14;
-    if (mode == 2) {
-        lbl_804799D8.xC = 0x96;
-    } else {
-        lbl_804799D8.xC = mode * 0x14 + 0x13;
-    }
+    lbl_804799D8.xC = (mode == 2) ? 0x96 : mode * 0x14 + 0x13;
 
     HSD_JObjSetTranslateZ(jobj, 10000.0f);
 
@@ -1649,7 +1634,7 @@ void fn_80199AF0(void)
                 next = jobj->next;
             }
             jobj = next;
-            HSD_JObjSetTranslateZ(next, 10000.0f);
+            HSD_JObjSetTranslateZ(jobj, 10000.0f);
         }
     } else {
         for (i = 1; i <= 12; i++) {
@@ -1659,10 +1644,10 @@ void fn_80199AF0(void)
                 next = jobj->next;
             }
             jobj = next;
-            HSD_JObjSetTranslateZ(next, 10000.0f);
+            HSD_JObjSetTranslateZ(jobj, 10000.0f);
 
             if ((s32) lbl_803DA0D0.icon_model_map[td1->x4B8[slot].x1] == i) {
-                HSD_JObjSetTranslateZ(next, 0.0f);
+                HSD_JObjSetTranslateZ(jobj, 0.0f);
                 for (slot = i + 1; slot <= 12; slot++) {
                     if (jobj == NULL) {
                         next = NULL;
@@ -1670,7 +1655,7 @@ void fn_80199AF0(void)
                         next = jobj->next;
                     }
                     jobj = next;
-                    HSD_JObjSetTranslateZ(next, 10000.0f);
+                    HSD_JObjSetTranslateZ(jobj, 10000.0f);
                 }
                 break;
             }
