@@ -459,8 +459,6 @@ void fn_80196EEC(HSD_GObj* gobj)
     }
 }
 
-extern s32 lbl_803B7CE0[9];
-
 typedef struct TmPlayerAnimFrames {
     u16 start;
     u16 end;
@@ -474,8 +472,11 @@ typedef union TmPlayerAnimFrameTable {
 } TmPlayerAnimFrameTable;
 STATIC_ASSERT(sizeof(TmPlayerAnimFrameTable) == sizeof(s32) * 9);
 
+extern TmPlayerAnimFrameTable lbl_803B7CE0;
+
 void fn_80196FFC(HSD_GObj* gobj)
 {
+    TmPlayerAnimFrameTable table;
     TmData* tm;
     HSD_JObj* jobj;
     s32 pnum;
@@ -483,8 +484,8 @@ void fn_80196FFC(HSD_GObj* gobj)
     f32 x;
     u8 players;
     u8 state;
+    /* unused; affects stack layout */
     u8 start_frame, cur_frame, end_frame, loop_flag;
-    TmPlayerAnimFrameTable table;
 
     tm = gm_8018F634();
     pnum = fn_8018F62C(gobj);
@@ -493,15 +494,7 @@ void fn_80196FFC(HSD_GObj* gobj)
         jobj = jobj_tmp;
     }
 
-    table.words[1] = lbl_803B7CE0[1];
-    table.words[0] = lbl_803B7CE0[0];
-    table.words[2] = lbl_803B7CE0[2];
-    table.words[3] = lbl_803B7CE0[3];
-    table.words[4] = lbl_803B7CE0[4];
-    table.words[5] = lbl_803B7CE0[5];
-    table.words[7] = lbl_803B7CE0[7];
-    table.words[6] = lbl_803B7CE0[6];
-    table.words[8] = lbl_803B7CE0[8];
+    table = lbl_803B7CE0;
 
     if ((s32) gm_8018F634()->cur_option >= 0x1B &&
         (s32) gm_8018F634()->cur_option <= 0x1E)
@@ -546,33 +539,25 @@ void fn_80196FFC(HSD_GObj* gobj)
 
     tm->x524[2]->hidden = 0;
 
-    state = lbl_804799D8.x2A[pnum].state;
-    lbl_804799D8.x2A[pnum].end = table.states[state].end;
-    lbl_804799D8.x2A[pnum].start = table.states[state].start;
-    {
-        u8 start = lbl_804799D8.x2A[pnum].start;
-        start_frame = start;
+    lbl_804799D8.x2A[pnum].start =
+        table.states[lbl_804799D8.x2A[pnum].state].start;
+    lbl_804799D8.x2A[pnum].end =
+        table.states[lbl_804799D8.x2A[pnum].state].end;
+    lbl_804799D8.x2A[pnum].loop =
+        table.states[lbl_804799D8.x2A[pnum].state].loop;
+
+    if (lbl_804799D8.x2A[pnum].cur < lbl_804799D8.x2A[pnum].start) {
+        lbl_804799D8.x2A[pnum].cur = lbl_804799D8.x2A[pnum].start;
     }
 
-    lbl_804799D8.x2A[pnum].loop = table.states[state].loop;
-    cur_frame = lbl_804799D8.x2A[pnum].cur;
-    (void) cur_frame;
-    end_frame = lbl_804799D8.x2A[pnum].end;
-    loop_flag = lbl_804799D8.x2A[pnum].loop;
-
-    if (cur_frame < start_frame) {
-        lbl_804799D8.x2A[pnum].cur = start_frame;
-        cur_frame = start_frame;
-    }
-
-    if (cur_frame < end_frame) {
-        lbl_804799D8.x2A[pnum].cur = (u8) (cur_frame + 1);
+    if (lbl_804799D8.x2A[pnum].cur < lbl_804799D8.x2A[pnum].end) {
+        lbl_804799D8.x2A[pnum].cur++;
     } else {
         lbl_804799D8.x2A[pnum].done = 1;
-        if (loop_flag != 0) {
-            lbl_804799D8.x2A[pnum].cur = start_frame;
+        if (lbl_804799D8.x2A[pnum].loop != 0) {
+            lbl_804799D8.x2A[pnum].cur = lbl_804799D8.x2A[pnum].start;
         } else {
-            lbl_804799D8.x2A[pnum].cur = end_frame;
+            lbl_804799D8.x2A[pnum].cur = lbl_804799D8.x2A[pnum].end;
         }
     }
 
