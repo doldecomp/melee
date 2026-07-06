@@ -74,35 +74,10 @@ typedef struct CamDesc {
 } CamDesc;
 extern CamDesc lbl_803B7CA8;
 
-typedef struct BracketEntrySlot {
-    /* 0x00 */ HSD_GObj* x2C;
-    /* 0x04 */ u8 x30;
-    /* 0x05 */ u8 pad31;
-    /* 0x06 */ u8 x32;
-    /* 0x07 */ u8 pad33;
-    /* 0x08 */ s32 x34;
-    /* 0x0C */ s32 x38;
-    /* 0x10 */ s32 x3C;
-    /* 0x14 */ s32 x40;
-    /* 0x18 */ s32 x44;
-    /* 0x1C */ s32 x48;
-    /* 0x20 */ u8 x4C;
-    /* 0x21 */ u8 x4D;
-    /* 0x22 */ u8 x4E;
-    /* 0x23 */ u8 x4F;
-    /* 0x24 */ u8 x50;
-    /* 0x25 */ u8 x51;
-    /* 0x26 */ u8 x52;
-    /* 0x27 */ u8 pad53;
-    /* 0x28 */ u16 x54;
-    /* 0x2A */ u8 pad56[0x2C - 0x2A];
-} BracketEntrySlot;
-STATIC_ASSERT(sizeof(BracketEntrySlot) == 0x2C);
-
 static inline BracketEntrySlot* BracketEntry_GetSlot(BracketEntry* entry,
                                                      s32 slot_idx)
 {
-    return &((BracketEntrySlot*) &entry->x2C)[slot_idx];
+    return &entry->slots[slot_idx];
 }
 
 void fn_8018A514(int count, float val)
@@ -161,32 +136,32 @@ void fn_8018A514(int count, float val)
         entries[i].x26 = src->x1D;
         entries[i].x27 = src->x1F;
         entries[i].x28 = src->x20;
-        entries[i].x52 = 9;
-        entries[i].x32 = 0;
-        entries[i].x7E = 9;
-        entries[i].x5E = 0;
-        entries[i].xAA = 9;
-        entries[i].x8A = 0;
-        entries[i].xD6 = 9;
-        entries[i].xB6 = 0;
-        entries[i].x30 = src->x21;
-        entries[i].x5C = src->x22;
-        entries[i].x88 = src->x23;
-        entries[i].xB4 = src->x24;
+        entries[i].slots[0].x52 = 9;
+        entries[i].slots[0].x32 = 0;
+        entries[i].slots[1].x52 = 9;
+        entries[i].slots[1].x32 = 0;
+        entries[i].slots[2].x52 = 9;
+        entries[i].slots[2].x32 = 0;
+        entries[i].slots[3].x52 = 9;
+        entries[i].slots[3].x32 = 0;
+        entries[i].slots[0].x30 = src->x21;
+        entries[i].slots[1].x30 = src->x22;
+        entries[i].slots[2].x30 = src->x23;
+        entries[i].slots[3].x30 = src->x24;
         src++;
     }
 
     if (region == 0) {
         if (count == 1) {
-            entries[5].x5E = 1;
+            entries[5].slots[1].x32 = 1;
         } else if (count == 3) {
-            entries[10].x32 = 1;
-            entries[11].x5E = 1;
+            entries[10].slots[0].x32 = 1;
+            entries[11].slots[1].x32 = 1;
         } else if (count == 5) {
-            entries[23].x5E = 1;
+            entries[23].slots[1].x32 = 1;
         } else if (count == 7) {
-            entries[46].x5E = 1;
-            entries[47].x5E = 1;
+            entries[46].slots[1].x32 = 1;
+            entries[47].slots[1].x32 = 1;
         }
     }
     PAD_STACK(24);
@@ -208,15 +183,15 @@ void fn_8018A970(int arg0)
 
     if (arg0 < 9) {
         if (arg0 == 1) {
-            lbl_80473AB8[5].x5E = 1;
+            lbl_80473AB8[5].slots[1].x32 = 1;
         } else if (arg0 == 3) {
-            lbl_80473AB8[10].x32 = 1;
-            lbl_80473AB8[11].x5E = 1;
+            lbl_80473AB8[10].slots[0].x32 = 1;
+            lbl_80473AB8[11].slots[1].x32 = 1;
         } else if (arg0 == 5) {
-            lbl_80473AB8[23].x5E = 1;
+            lbl_80473AB8[23].slots[1].x32 = 1;
         } else if (arg0 == 7) {
-            lbl_80473AB8[46].x5E = 1;
-            lbl_80473AB8[47].x5E = 1;
+            lbl_80473AB8[46].slots[1].x32 = 1;
+            lbl_80473AB8[47].slots[1].x32 = 1;
         }
     }
 }
@@ -964,7 +939,7 @@ void fn_8018C8D4(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
         c3 = c0;
         DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4, &c3);
         if (data->x20.g == 0) {
-            if (data->x4C == 0) {
+            if (data->slots[0].x4C == 0) {
                 half_h = arg4 / 2;
                 c4 = data->x20;
                 DrawRectangle((f32) arg1, (f32) (arg2 + half_h), thickness,
@@ -1000,7 +975,7 @@ void fn_8018C8D4(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
         DrawRectangle((f32) right, (f32) mid_y, thickness, (f32) half_h, &c9);
 
         if (data->x20.g == 0) {
-            if (data->x4C == 0) {
+            if (data->slots[0].x4C == 0) {
                 c10 = data->x20;
                 DrawRectangle((f32) (arg1 + 0x2B), (f32) mid_y, thickness,
                               (f32) half_h, &c10);
@@ -1009,7 +984,7 @@ void fn_8018C8D4(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                               (f32) (half - 0x2B), neg_thickness, &c11);
                 return;
             }
-            if (data->x78 == 0) {
+            if (data->slots[1].x4C == 0) {
                 c12 = data->x20;
                 DrawRectangle((f32) right, (f32) mid_y, thickness,
                               (f32) half_h, &c12);
@@ -1060,7 +1035,7 @@ void fn_8018C8D4(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                       &c21);
 
         if (data->x20.g == 0) {
-            if (data->x4C == 0) {
+            if (data->slots[0].x4C == 0) {
                 two_third_y = arg2 + ((arg4 * 2) / 3);
                 c22 = data->x20;
                 DrawRectangle((f32) arg1, (f32) two_third_y, thickness,
@@ -1073,7 +1048,7 @@ void fn_8018C8D4(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                               thickness, (f32) ((arg4 / 6) - 1), &c24);
                 return;
             }
-            if (data->x78 == 0) {
+            if (data->slots[1].x4C == 0) {
                 two_third_y = arg2 + ((arg4 * 2) / 3);
                 c25 = data->x20;
                 DrawRectangle((f32) right, (f32) two_third_y, thickness,
@@ -1086,7 +1061,7 @@ void fn_8018C8D4(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                               thickness, (f32) ((arg4 / 6) - 1), &c27);
                 return;
             }
-            if (data->xA4 == 0) {
+            if (data->slots[2].x4C == 0) {
                 c28 = data->x20;
                 DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) third_h,
                               &c28);
@@ -1153,7 +1128,7 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
     }
 
     if (data->x20.g == 0) {
-        if (data->x4C == 0) {
+        if (data->slots[0].x4C == 0) {
             c4 = data->x20;
             {
                 GXColor* color = &c4;
@@ -1189,7 +1164,7 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
     }
 
     if (tm->entrants == 1) {
-        if (data->x5E != 0) {
+        if (data->slots[1].x32 != 0) {
             bottom = arg2 + arg4;
             c8 = c0;
             {
@@ -1197,7 +1172,7 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                 DrawRectangle((f32) right, (f32) bottom, thickness, -70.0f,
                               color);
             }
-            if (data->x20.g == 0 && data->x4C != 0) {
+            if (data->x20.g == 0 && data->slots[0].x4C != 0) {
                 c9 = data->x20;
                 DrawRectangle((f32) right, (f32) bottom, thickness, -70.0f,
                               &c9);
@@ -1205,7 +1180,7 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
         }
         return;
     } else if (tm->entrants == 3) {
-        if (data->x32 != 0) {
+        if (data->slots[0].x32 != 0) {
             bottom = arg2 + arg4;
             c10 = c0;
             {
@@ -1213,12 +1188,12 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                 DrawRectangle((f32) arg1, (f32) bottom, thickness, -60.0f,
                               color);
             }
-            if (data->x20.g == 0 && data->x4C == 0) {
+            if (data->x20.g == 0 && data->slots[0].x4C == 0) {
                 c11 = data->x20;
                 DrawRectangle((f32) arg1, (f32) bottom, thickness, -60.0f,
                               &c11);
             }
-        } else if (data->x5E != 0) {
+        } else if (data->slots[1].x32 != 0) {
             bottom = arg2 + arg4;
             c12 = c0;
             {
@@ -1226,14 +1201,14 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                 DrawRectangle((f32) right, (f32) bottom, thickness, -60.0f,
                               color);
             }
-            if (data->x20.g == 0 && data->x4C != 0) {
+            if (data->x20.g == 0 && data->slots[0].x4C != 0) {
                 c13 = data->x20;
                 DrawRectangle((f32) right, (f32) bottom, thickness, -60.0f,
                               &c13);
             }
         }
     } else if (tm->entrants == 5) {
-        if (data->x5E != 0) {
+        if (data->slots[1].x32 != 0) {
             bottom = arg2 + arg4;
             c14 = c0;
             {
@@ -1241,14 +1216,14 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                 DrawRectangle((f32) right, (f32) bottom, thickness, -40.0f,
                               color);
             }
-            if (data->x20.g == 0 && data->x4C != 0) {
+            if (data->x20.g == 0 && data->slots[0].x4C != 0) {
                 c15 = data->x20;
                 DrawRectangle((f32) right, (f32) bottom, thickness, -40.0f,
                               &c15);
             }
         }
     } else if (tm->entrants == 7) {
-        if (data->x5E != 0) {
+        if (data->slots[1].x32 != 0) {
             if (data->x2 == 0) {
                 bottom = arg2 + arg4;
                 c16 = c0;
@@ -1257,7 +1232,7 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                     DrawRectangle((f32) right, (f32) bottom, thickness, -30.0f,
                                   color);
                 }
-                if (data->x20.g == 0 && data->x4C != 0) {
+                if (data->x20.g == 0 && data->slots[0].x4C != 0) {
                     c17 = data->x20;
                     {
                         GXColor* color = &c17;
@@ -1273,7 +1248,7 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                     DrawRectangle((f32) right, (f32) bottom, thickness, -30.0f,
                                   color);
                 }
-                if (data->x20.g == 0 && data->x4C != 0) {
+                if (data->x20.g == 0 && data->slots[0].x4C != 0) {
                     c19 = data->x20;
                     DrawRectangle((f32) right, (f32) bottom, thickness, -30.0f,
                                   &c19);
@@ -1317,7 +1292,7 @@ void fn_8018DC18(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                   neg_thickness, &c4);
 
     if (data->x20.g == 0) {
-        if (data->x4C == 0) {
+        if (data->slots[0].x4C == 0) {
             c5 = data->x20;
             DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4, &c5);
             c6 = data->x20;
@@ -1325,7 +1300,7 @@ void fn_8018DC18(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                           neg_thickness, &c6);
             return;
         }
-        if (data->x78 == 0) {
+        if (data->slots[1].x4C == 0) {
             c7 = data->x20;
             DrawRectangle((f32) center, (f32) arg2, thickness, (f32) arg4,
                           &c7);
@@ -1393,7 +1368,7 @@ void fn_8018DF68(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                   neg_thickness, &sp44);
 
     if (data->x20.g == 0) {
-        if (data->x4C == 0) {
+        if (data->slots[0].x4C == 0) {
             sp40 = data->x20;
             DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
                           &sp40);
@@ -1402,7 +1377,7 @@ void fn_8018DF68(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                           neg_thickness, &sp3C);
             return;
         }
-        if (data->x78 == 0) {
+        if (data->slots[1].x4C == 0) {
             sp38 = data->x20;
             DrawRectangle((f32) left_third, (f32) arg2, thickness, (f32) arg4,
                           &sp38);
@@ -1412,7 +1387,7 @@ void fn_8018DF68(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                           neg_thickness, &sp34);
             return;
         }
-        if (data->xA4 == 0) {
+        if (data->slots[2].x4C == 0) {
             sp30 = data->x20;
             DrawRectangle((f32) right_third, (f32) arg2, thickness, (f32) arg4,
                           &sp30);
@@ -1501,10 +1476,10 @@ void fn_8018E618(int arg0, f32 farg0, int arg1)
     for (i = 0; i < 0x40; i++) {
         if (arg1 != 0) {
             lbl_80473AB8[i].x0 = 0;
-            lbl_80473AB8[i].x4E = 3;
-            lbl_80473AB8[i].x7A = 3;
-            lbl_80473AB8[i].xA6 = 3;
-            lbl_80473AB8[i].xD2 = 3;
+            lbl_80473AB8[i].slots[0].x4E = 3;
+            lbl_80473AB8[i].slots[1].x4E = 3;
+            lbl_80473AB8[i].slots[2].x4E = 3;
+            lbl_80473AB8[i].slots[3].x4E = 3;
         }
     }
 
