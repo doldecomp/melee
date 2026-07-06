@@ -2021,7 +2021,9 @@ void gm_8019A828(void)
 /// loop's x2A walker copies its base instead of reusing it) plus a
 /// callee-saved rotation (tm/arg2 swapped one slot down the r25-r29 order).
 /// The ((u8*) d8)[i + 0x44] form is required for the x44 strength-reduction
-/// walker; d8->x44[i] compiles to per-site address computation instead.
+/// walker (base must be the register variable d8 itself, displacement 0x44):
+/// d8->x44[i] scores 95.61%, a u8* alias of d8->x44 scores 96.66%, and
+/// lbl_804799D8.x44[i] scores 98.51%, vs 98.90% for this form.
 void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
 {
     s32 ready_count = 0;
