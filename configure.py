@@ -1395,8 +1395,16 @@ config.libs = [
             Object(NonMatching, "melee/if/ifprize.c"),
             Object(NonMatching, "melee/if/ifcoget.c"),
             Object(NonMatching, "melee/if/soundtest.c"),
-            Object(NonMatching, "melee/if/textdraw.c"),
-            Object(NonMatching, "melee/if/textlib.c"),
+            Object(
+                NonMatching,
+                "melee/if/textdraw.c",
+                extra_cflags=["-inline noauto"],
+            ),
+            Object(
+                NonMatching,
+                "melee/if/textlib.c",
+                extra_cflags=["-inline noauto"],
+            ),
         ],
     ),
     MeleeLib(

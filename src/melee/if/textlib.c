@@ -146,8 +146,6 @@ inline int DevText_Clamp(int val, int max)
     }
 }
 
-#pragma push
-#pragma dont_inline on
 void DevText_SetCursorXY(DevText* text, int x, int y)
 {
     if (text->w <= x) {
@@ -163,7 +161,6 @@ void DevText_SetCursorXY(DevText* text, int x, int y)
     }
     text->cursor_y = y;
 }
-#pragma pop
 
 void DevText_SetCursorX(DevText* text, int x)
 {
@@ -180,37 +177,25 @@ void DevText_80302AC0(DevText* text)
     text->flags |= (1 << 5);
 }
 
-#pragma push
-#pragma dont_inline on
 void DevText_ShowBackground(DevText* text)
 {
     text->flags &= ~(1 << 6);
 }
-#pragma pop
 
-#pragma push
-#pragma dont_inline on
 void DevText_HideBackground(DevText* text)
 {
     text->flags |= (1 << 6);
 }
-#pragma pop
 
-#pragma push
-#pragma dont_inline on
 void DevText_ShowText(DevText* text)
 {
     text->flags &= ~(1 << 7);
 }
-#pragma pop
 
-#pragma push
-#pragma dont_inline on
 void DevText_HideText(DevText* text)
 {
     text->flags |= (1 << 7);
 }
-#pragma pop
 
 void DevText_SetScale(DevText* text, f32 x, f32 y)
 {
@@ -230,18 +215,13 @@ void DevText_SetXY(DevText* text, int x, int y)
     text->y = y;
 }
 
-#pragma push
-#pragma dont_inline on
 u8 DevText_StoreColorIndex(DevText* text, u8 index)
 {
     u8 old = text->current_color;
     text->current_color = index;
     return old;
 }
-#pragma pop
 
-#pragma push
-#pragma dont_inline on
 GXColor DevText_SetTextColor(DevText* text, GXColor color)
 {
     int index = text->current_color;
@@ -249,25 +229,18 @@ GXColor DevText_SetTextColor(DevText* text, GXColor color)
     text->text_colors[index] = color;
     return old;
 }
-#pragma pop
 
-#pragma push
-#pragma dont_inline on
 GXColor DevText_SetBGColor(DevText* text, GXColor color)
 {
     GXColor old = text->bg_color;
     text->bg_color = color;
     return old;
 }
-#pragma pop
 
-#pragma push
-#pragma dont_inline on
 void DevText_Erase(DevText* text)
 {
     memzero(text->buf, 2 * text->w * text->h);
 }
-#pragma pop
 
 inline void DevText_AdvanceLine(DevText* text)
 {
@@ -308,15 +281,12 @@ void DevText_Print(DevText* text, char* str)
     }
 }
 
-#pragma push
-#pragma dont_inline on
 void DevText_PrintInt(DevText* text, int num)
 {
     char str[16];
     DevText_NumToStr(num, str);
     DevText_Print(text, str);
 }
-#pragma pop
 
 void DevText_Printf(DevText* text, char* format, ...)
 {
@@ -815,8 +785,6 @@ void fn_80303EF4(HSD_GObj* gobj)
     }
 }
 
-#pragma push
-#pragma dont_inline on
 void un_80303FD4(HSD_GObj* arg0, struct un_80304138_objalloc_t* arg1,
                  struct un_80304138_objalloc_t_x8* arg2, int arg3, int arg4,
                  int arg5)
@@ -876,7 +844,6 @@ void un_80303FD4(HSD_GObj* arg0, struct un_80304138_objalloc_t* arg1,
         }
     }
 }
-#pragma pop
 
 void un_80304138(void)
 {

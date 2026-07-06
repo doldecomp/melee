@@ -123,8 +123,6 @@ HSD_GObj* DevText_GetGObj(void)
     return devtext_gobj;
 }
 
-#pragma push
-#pragma dont_inline on
 void DevText_InitPool(void)
 {
     DevText* text = devtext_pool.entries;
@@ -138,7 +136,6 @@ void DevText_InitPool(void)
     devtext_poolhead = devtext_pool.entries;
     devtext_drawlist = NULL;
 }
-#pragma pop
 
 void DevText_Remove(DevText** ptext)
 {
@@ -275,8 +272,6 @@ void DevText_DrawAll(HSD_GObj* gobj, int pass)
     }
 }
 
-#pragma push
-#pragma dont_inline on
 void DevText_CreateCObj(int classifier, int p_link, int gobj_priority,
                         int gx_link, u8 gx_priority)
 {
@@ -292,7 +287,6 @@ void DevText_CreateCObj(int classifier, int p_link, int gobj_priority,
         }
     }
 }
-#pragma pop
 
 HSD_GObj* DevText_Setup(int classifier, int p_link, int priority, int gx_link,
                         int render_priority, u8 camera_priority)
