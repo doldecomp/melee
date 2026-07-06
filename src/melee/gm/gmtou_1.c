@@ -708,18 +708,21 @@ void fn_801976D4(HSD_GObj* gobj)
     }
 }
 
+/// @todo 98.85%: all 261 instructions match except one adjacent schedule
+/// swap (the jobj load and the pnum save trade places after the
+/// fn_8018F62C call); the rest is anonymous literal-pool reloc naming.
 void fn_801977AC(HSD_GObj* gobj)
 {
     TmData* tm;
-    s32 pnum;
     HSD_JObj* jobj;
+    s32 pnum;
     s32 in_range;
     f32 x;
     u8 players;
 
     tm = gm_8018F634();
     pnum = fn_8018F62C(gobj);
-    jobj = gobj->hsd_obj;
+    jobj = GET_JOBJ(gobj);
 
     if (gm_8018F634()->cur_option >= 0x1B && gm_8018F634()->cur_option <= 0x1E)
     {
@@ -748,18 +751,11 @@ void fn_801977AC(HSD_GObj* gobj)
     fn_8018FDC4(jobj, lbl_804DA81C + x, lbl_804DA820, lbl_804DA818);
 
     if (lbl_804799D8.x2A[pnum].state == 4) {
-        u8* counter_ptr;
-        u8 counter;
-
-        counter_ptr = &lbl_804799D8.x1D[pnum];
-        (void) counter_ptr;
-        counter = *counter_ptr;
-        if (counter < 0x28) {
-            *counter_ptr = counter + 1;
+        if (lbl_804799D8.x1D[pnum] < 0x28) {
+            lbl_804799D8.x1D[pnum]++;
         }
-        counter = *counter_ptr;
-
-        HSD_JObjSetTranslateY(jobj, lbl_803DA0D0.bounce_y[counter]);
+        HSD_JObjSetTranslateY(jobj,
+                              lbl_803DA0D0.bounce_y[lbl_804799D8.x1D[pnum]]);
     } else {
         lbl_804799D8.x1D[pnum] = 0;
     }
