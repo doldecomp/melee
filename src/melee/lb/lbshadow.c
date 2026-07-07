@@ -22,14 +22,16 @@
 #include <melee/lb/types.h>
 #include <MSL/math_ppc.h>
 
-/// @todo 97.53%: two residuals. (1) case 1: one scheduler pair-swap — ours
-///       emits {fmuls 3*(t*t); lwz cv; fnmsubs 1-4t}, target {fnmsubs; lwz;
-///       fmuls}. (2) case 2: one fp-home chain — u2 colors f7 (target f9),
-///       cascading b1→f4 (target f7) and b3→f6 (target f4); ours reuses
-///       dying operand homes, target takes fresh regs. Exhausted: all 4!
-///       statement orders per case in two allocation states, decl-order and
-///       decl-init permutations, temp-block add/remove, two-step defs, cp
-///       placement (~130 variants).
+/// @todo 97.81%: case 2 now byte-matches — reversing the decl order
+///       (f32 b3, b2, b1, b0, half, u_1, u2) lands u2 in f9 and collapses the
+///       whole fp-register rotation that ~130 earlier variants couldn't move.
+///       Sole residual is in case 1: a scheduler pair-swap. The constants and
+///       the cv load sit correctly; only the two independent fp ops tie-break
+///       the other way — target emits {fnmsubs bez1; lwz; fmuls t2}, ours
+///       {fmuls t2; lwz; fnmsubs bez1} (target schedules the later-ready
+///       fnmsubs first). Terminal: ~57 more variants here (9 statement orders,
+///       40 decl permutations, comma/fused/chain/join-reposition levers) all
+///       leave the pair.
 void lbShadow_8000E9F0(Vec3* p, HSD_Spline* spline, f32 u)
 {
     Vec3* cp;
@@ -76,7 +78,7 @@ void lbShadow_8000E9F0(Vec3* p, HSD_Spline* spline, f32 u)
         return;
     }
     case 2: {
-        f32 u2, u_1, half, b1, b0, b2, b3;
+        f32 b3, b2, b1, b0, half, u_1, u2;
         cp = &spline->cv[idx];
         u2 = t * t;
         u_1 = 1.0F - t;
