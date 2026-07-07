@@ -35,17 +35,21 @@
 /* 0C4A38 */ static void ftCo_800C4A38(Fighter_GObj* gobj);
 /* 0C4C60 */ static void ftCo_800C4C60(Fighter_GObj* gobj);
 
-/* literal */ float const ftCo_804D8D48 = 0;
-/* literal */ float const ftCo_804D8D4C = 1;
-/* literal */ float const ftCo_804D8D50 = M_PI_2;
-/* literal */ SDATA char ftCo_804D3C58[] = "jobj.h";
-/* literal */ SDATA char ftCo_804D3C60[] = "jobj";
+static inline ftCo_DatAttrs* fpGetAttrs(Fighter* fp)
+{
+    return &fp->co_attrs;
+}
+
+static inline Vec2* fpGet2C4(Fighter* fp)
+{
+    return &fp->x2C4;
+}
 
 void ftCo_800C4724(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    it_80294430(fp->item_gobj, fp->co_attrs.x164, fp->x2C4.y);
+    it_80294430(fp->item_gobj, fpGet2C4(fp)->y, fpGetAttrs(fp)->x164);
     fp->mv.co.warpstar.facing_dir = fp->facing_dir;
     fp->facing_dir = 0;
     fp->mv.co.warpstar.x1C = 120;
