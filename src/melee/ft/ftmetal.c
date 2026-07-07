@@ -12,8 +12,6 @@
 #include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
 
-static s8 ftCo_804D3C90 = 0;
-
 void ft_800C8170(Fighter* fp)
 {
     int i;
