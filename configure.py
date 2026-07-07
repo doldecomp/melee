@@ -1099,7 +1099,7 @@ config.libs = [
             Object(Matching, "melee/gr/grfigure2.c"),
             Object(Matching, "melee/gr/grfigure3.c"),
             Object(Matching, "melee/gr/groldyoshi.c"),
-            Object(NonMatching, "melee/gr/groldkongo.c"),
+            Object(Matching, "melee/gr/groldkongo.c"),
             Object(NonMatching, "melee/gr/groldpupupu.c"),
             Object(NonMatching, "melee/gr/grpura.c"),
             Object(NonMatching, "melee/gr/grgreens.c"),
