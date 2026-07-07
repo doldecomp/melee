@@ -22,12 +22,22 @@
 #include <melee/lb/types.h>
 #include <MSL/math_ppc.h>
 
+/// @todo 97.53%: two residuals. (1) case 1: one scheduler pair-swap — ours
+///       emits {fmuls 3*(t*t); lwz cv; fnmsubs 1-4t}, target {fnmsubs; lwz;
+///       fmuls}. (2) case 2: one fp-home chain — u2 colors f7 (target f9),
+///       cascading b1→f4 (target f7) and b3→f6 (target f4); ours reuses
+///       dying operand homes, target takes fresh regs. Exhausted: all 4!
+///       statement orders per case in two allocation states, decl-order and
+///       decl-init permutations, temp-block add/remove, two-step defs, cp
+///       placement (~130 variants).
 void lbShadow_8000E9F0(Vec3* p, HSD_Spline* spline, f32 u)
 {
     Vec3* cp;
     s16 idx;
     f32 t;
     f32 orig_u;
+
+    PAD_STACK(8);
 
     if (u < 0.0F || u > 1.0F) {
         return;
@@ -54,8 +64,8 @@ void lbShadow_8000E9F0(Vec3* p, HSD_Spline* spline, f32 u)
         t2 = 3.0F * (t * t);
         bez1 = 1.0F - (4.0F * t);
         u_1 = t - 1.0F;
-        bez1 = 3.0F * (bez1 + t2);
         bez0 = -3.0F * u_1 * u_1;
+        bez1 = 3.0F * (bez1 + t2);
         bez2 = 3.0F * ((2.0F * t) - t2);
         p->x = (cp[3].x * t2) +
                ((cp[2].x * bez2) + ((cp[0].x * bez0) + (cp[1].x * bez1)));
@@ -71,15 +81,12 @@ void lbShadow_8000E9F0(Vec3* p, HSD_Spline* spline, f32 u)
         u2 = t * t;
         u_1 = 1.0F - t;
         half = 0.5F;
-        b1 = half * ((3.0F * u2) - (4.0F * t));
         {
             f32 b0_tmp = u_1 * (-half * u_1);
             b0 = b0_tmp;
         }
-        {
-            f32 b2_tmp = half * (1.0F + ((-3.0F * u2) + (2.0F * t)));
-            b2 = b2_tmp;
-        }
+        b1 = half * ((3.0F * u2) - (4.0F * t));
+        b2 = half * (1.0F + ((-3.0F * u2) + (2.0F * t)));
         b3 = half * u2;
         p->x = (cp[3].x * b3) +
                ((cp[2].x * b2) + ((cp[0].x * b0) + (cp[1].x * b1)));
@@ -90,22 +97,19 @@ void lbShadow_8000E9F0(Vec3* p, HSD_Spline* spline, f32 u)
         return;
     }
     case 3: {
-        f32 tension = spline->tension;
         f32 u2 = t * t;
+        f32 tension = spline->tension;
         f32 car1, car0, car3, car2;
         cp = &spline->cv[idx];
-        car1 = (3.0F * (2.0F - tension) * u2) + (2.0F * (tension - 3.0F) * t);
         car0 = tension * (((-3.0F * u2) + (4.0F * t)) - 1.0F);
-        car3 = tension * ((3.0F * u2) - (2.0F * t));
+        car1 = (3.0F * (2.0F - tension) * u2) + (2.0F * (tension - 3.0F) * t);
         car2 = tension + ((3.0F * (tension - 2.0F) * u2) +
                           (2.0F * -((2.0F * tension) - 3.0F) * t));
+        car3 = tension * ((3.0F * u2) - (2.0F * t));
         p->x = (cp[3].x * car3) +
                ((cp[2].x * car2) + ((cp[0].x * car0) + (cp[1].x * car1)));
-        {
-            f32 car0_y = cp[0].y * car0;
-            p->y = (cp[3].y * car3) +
-                   ((cp[2].y * car2) + ((car0_y) + (cp[1].y * car1)));
-        }
+        p->y = (cp[3].y * car3) +
+               ((cp[2].y * car2) + ((cp[0].y * car0) + (cp[1].y * car1)));
         p->z = (cp[3].z * car3) +
                ((cp[2].z * car2) + ((cp[0].z * car0) + (cp[1].z * car1)));
         break;
@@ -307,6 +311,15 @@ static inline f32 lbShadow_Sqrtf(f32 x)
     return x;
 }
 
+/// @todo 99.67%: one instruction — target materializes fallback's NULL as
+///       addi r28,r24,0 (recycling lobj's zero register); ours emits
+///       li r28,0. 18 source variants (assignment chains, casts, for-init
+///       placement, while forms, block decls) all canonicalize to li.
+///       Every codebase twin of the li+addi zero pair comes from
+///       loop-preheader counter CSE, u64 zero halves, or join-opaque
+///       copies — none reachable here; ftAnim_IsFramesRemaining proves the
+///       recycle is compiler-state-dependent (identical source recycles in
+///       one if/else arm only).
 void lbShadow_8000F38C(s32 arg0)
 {
     HSD_ViewingRect rect;
