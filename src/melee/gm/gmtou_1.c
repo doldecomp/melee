@@ -708,9 +708,6 @@ void fn_801976D4(HSD_GObj* gobj)
     }
 }
 
-/// @todo 98.85%: all 261 instructions match except one adjacent schedule
-/// swap (the jobj load and the pnum save trade places after the
-/// fn_8018F62C call); the rest is anonymous literal-pool reloc naming.
 void fn_801977AC(HSD_GObj* gobj)
 {
     TmData* tm;
@@ -721,8 +718,7 @@ void fn_801977AC(HSD_GObj* gobj)
     u8 players;
 
     tm = gm_8018F634();
-    pnum = fn_8018F62C(gobj);
-    jobj = GET_JOBJ(gobj);
+    jobj = (pnum = fn_8018F62C(gobj), GET_JOBJ(gobj));
 
     if (gm_8018F634()->cur_option >= 0x1B && gm_8018F634()->cur_option <= 0x1E)
     {
@@ -1534,9 +1530,6 @@ void fn_80198EBC(void)
                 (void (*)(HSD_GObj*)) fn_80198584, lbl_804DA808);
 }
 
-/// @todo 99.82%: all 511 instructions match in count and shape; the residual
-/// is a two-register callee-saved swap (the biased selections pointer colors
-/// r29 vs the target's r30, and the second walk loop's counter r30 vs r29).
 void fn_80199AF0(void)
 {
     TmData* td1;
@@ -1545,6 +1538,7 @@ void fn_80199AF0(void)
     HSD_JObj* next;
     HSD_GObj* gobj;
     s32 slot;
+    s32 j;
     s32 mode;
     s32 bracket_idx;
     s32 result;
@@ -1637,7 +1631,7 @@ void fn_80199AF0(void)
             HSD_JObjSetTranslateZ(jobj, 10000.0f);
         }
     } else {
-        for (i = 1; i <= 12; i++) {
+        for (j = 1; j <= 12; j++) {
             if (jobj == NULL) {
                 next = NULL;
             } else {
@@ -1646,9 +1640,9 @@ void fn_80199AF0(void)
             jobj = next;
             HSD_JObjSetTranslateZ(jobj, 10000.0f);
 
-            if ((s32) lbl_803DA0D0.icon_model_map[td1->x4B8[slot].x1] == i) {
+            if ((s32) lbl_803DA0D0.icon_model_map[td1->x4B8[slot].x1] == j) {
                 HSD_JObjSetTranslateZ(jobj, 0.0f);
-                for (slot = i + 1; slot <= 12; slot++) {
+                for (slot = j + 1; slot <= 12; slot++) {
                     if (jobj == NULL) {
                         next = NULL;
                     } else {
