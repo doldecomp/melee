@@ -61,6 +61,14 @@ void un_8031D9E4(int arg0, int arg1, int arg2)
     un_804D6F84[3] = arg2;
 }
 
+/// @todo 99.32%: one three-web color rotation in the spawn loop — the
+///       counts+i-1 address temp (shared color with the jobj deref for
+///       HSD_JObjGetTranslation2) colors before the two strength-reduced
+///       walkers (ours r27, then r26/r25); the target colors it last (r25,
+///       recycling char_kind's dead home) after the walkers (r27/r26).
+///       Exhausted: full decl-position sweep, block scoping, count/counts
+///       elimination and def-site moves, index/count types, user-walker
+///       forms; the construct is unique codebase-wide (twin-scan).
 void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
                  int spawn_count)
 {
@@ -76,7 +84,6 @@ void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
     u8* counts;
     f32 scale;
     Vec3* pos;
-    HSD_GObj** gobj_ptr;
 
     Camera_80028B9C(6);
     lb_8000FCDC();
@@ -101,8 +108,7 @@ void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
     Player_80036F34(0, 8);
 
     counts = (u8*) spawn_count;
-    pos = grLib_801C9A10() + 1;
-    gobj_ptr = un_804A2E98 + 1;
+    pos = grLib_801C9A10();
     for (i = 1; i < 4; i++) {
         Player_80036E20(CKIND_KIRBY, un_804D6F74, 6);
         count = counts[i - 1];
@@ -116,19 +122,17 @@ void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
         Player_80032768(i, &initial_pos);
         Player_SetUnk4D(i, counts[i - 1]);
         Player_80036F34(i, i + 0xA);
-        gobj_ptr[-1] = Player_GetEntity(i);
-        jobj = GET_JOBJ(gobj_ptr[-1]);
+        un_804A2E98[i - 1] = Player_GetEntity(i);
+        jobj = GET_JOBJ(un_804A2E98[i - 1]);
         HSD_JObjReqAnimAll(jobj, 140.0f);
         HSD_JObjAnimAll(jobj);
-        HSD_JObjGetTranslation2(GET_JOBJ(gobj_ptr[-1]), &v);
+        HSD_JObjGetTranslation2(GET_JOBJ(un_804A2E98[i - 1]), &v);
         scale = getScale();
         v.x *= scale;
         v.y *= scale;
         v.z *= scale;
-        *pos = v;
+        pos[i] = v;
         HSD_JObjReqAnimAll(jobj, 0.0f);
-        gobj_ptr++;
-        pos++;
     }
     lbAudioAx_80026F2C(0x1C);
     lbAudioAx_8002702C(0xC, 0x80000004000);
