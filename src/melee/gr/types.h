@@ -461,7 +461,7 @@ struct grSmashTaunt_GroundVars {
     /* +0x18 */ s16 joint_idx0;
     /* +0x1A */ s16 joint_idx1;
     /* +0x1C */ s16 joint_idx2;
-    /* +0x20 */ void* text;
+    /* +0x20 */ HSD_Text* text;
     /* +0x24 */ f32 xE8;
     /* +0x28 */ f32 xEC;
 };
