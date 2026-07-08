@@ -1717,15 +1717,12 @@ void fn_80199AF0(void)
     }
 }
 
-/// @todo 96.28%: all loops and shapes match; the residual is a callee-saved
-/// rotation (the lbl_804799D8 bases and the tail's entry/offset temps each
-/// colored one register off), a zero/constant register collision in the
-/// x4E-clear remainder loop, and the model-index load staying indexed
-/// (lbzx) instead of rematerializing the entry base. The four per-slot
-/// bracket loops keep byte-offset walkers: GET_BRACKET_SLOT only matches in
-/// straight-line code; in loops the cast base keeps the +0x2C out of the
-/// displacement, unlike a true member array (typing them needs a slots[4]
-/// array inside BracketEntry itself).
+/// @todo 96.28%: regswap (the lbl_804799D8 base and the tail's entry/offset
+/// temps land one register off), a register collision in the x4E-clear loop,
+/// and the model-index load staying indexed (lbzx) instead of rematerializing
+/// the entry base. The per-slot bracket loops use byte-offset walkers because
+/// GET_BRACKET_SLOT only folds +0x2C into the displacement in straight-line
+/// code, not loops.
 void fn_8019A158(void)
 {
     TmData* td1;
@@ -1799,9 +1796,8 @@ void fn_8019A158(void)
                 cursor[0x4C] = 3;
             } else {
                 u8 v;
-                /// @todo The byte-offset walker is required: any
-                /// player_standings[i] pointer is biased +0x58 from the
-                /// MatchEnd base the original codegen walks from.
+                /// @todo byte-offset walker: player_standings[i] is biased
+                /// +0x58 from the MatchEnd base the original walks from.
                 u8* p = (u8*) lbl_804799D8.x48 + i * 0xA8;
                 v = p[0x5E];
                 p[0x5D] = v;
