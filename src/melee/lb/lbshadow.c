@@ -22,16 +22,8 @@
 #include <melee/lb/types.h>
 #include <MSL/math_ppc.h>
 
-/// @todo 97.81%: case 2 now byte-matches — reversing the decl order
-///       (f32 b3, b2, b1, b0, half, u_1, u2) lands u2 in f9 and collapses the
-///       whole fp-register rotation that ~130 earlier variants couldn't move.
-///       Sole residual is in case 1: a scheduler pair-swap. The constants and
-///       the cv load sit correctly; only the two independent fp ops tie-break
-///       the other way — target emits {fnmsubs bez1; lwz; fmuls t2}, ours
-///       {fmuls t2; lwz; fnmsubs bez1} (target schedules the later-ready
-///       fnmsubs first). Terminal: ~57 more variants here (9 statement orders,
-///       40 decl permutations, comma/fused/chain/join-reposition levers) all
-///       leave the pair.
+/// @todo 98.16%: case 1 emits the fp ops as {fmuls t2; lwz; fnmsubs bez1};
+///       target is {fnmsubs bez1; lwz; fmuls t2}.
 void lbShadow_8000E9F0(Vec3* p, HSD_Spline* spline, f32 u)
 {
     Vec3* cp;
@@ -313,15 +305,6 @@ static inline f32 lbShadow_Sqrtf(f32 x)
     return x;
 }
 
-/// @todo 99.67%: one instruction — target materializes fallback's NULL as
-///       addi r28,r24,0 (recycling lobj's zero register); ours emits
-///       li r28,0. 18 source variants (assignment chains, casts, for-init
-///       placement, while forms, block decls) all canonicalize to li.
-///       Every codebase twin of the li+addi zero pair comes from
-///       loop-preheader counter CSE, u64 zero halves, or join-opaque
-///       copies — none reachable here; ftAnim_IsFramesRemaining proves the
-///       recycle is compiler-state-dependent (identical source recycles in
-///       one if/else arm only).
 void lbShadow_8000F38C(s32 arg0)
 {
     HSD_ViewingRect rect;
