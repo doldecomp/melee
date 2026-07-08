@@ -934,7 +934,7 @@ struct grRCruise_Entry {
 
 struct grRCruise_SubEntry {
     /* 0x00 */ u8 x00;
-    /* 0x01 */ u8 pad_01;
+    /* 0x01 */ u8 x01 : 1;
     /* 0x02 */ s16 x02;
     /* 0x04 */ s32 x04;
     /* 0x08 */ s32 x08;
@@ -1540,20 +1540,16 @@ struct grPushOn_GroundVars {
 };
 
 struct ScrollVars {
-    /* +00 gp+C4 */ u8 x00;
-    /* +01 gp+C5 */ u8 pad_01[3];
+    /* +00 gp+C4 */ u8 x0 : 1;
     /* +04 gp+C8 */ Vec3 x04;
     /* +10 gp+D4 */ Vec3 x10;
     /* +1C gp+E0 */ Vec3 x1C;
-    /* +28 gp+EC */
-    union {
-        HSD_JObj* scroll_jobj;
-        HSD_GObj* anim_gobj;
-    };
-    /* +2C gp+F0 */ HSD_JObj* cam_jobj;
-    /* +30 gp+F4 */ HSD_JObj* ctr_jobj;
-    /* +34 gp+F8 */ HSD_JObj* x34[3];
-    /* +40 gp+104 */ HSD_JObj* x40;
+    /* +28 gp+EC */ HSD_GObj* anim_gobj;
+    /* +2C gp+F0 */ HSD_JObj* int_jobj;
+    /* +30 gp+F4 */ HSD_JObj* cam_jobj;
+    /* +34 gp+F8 */ HSD_JObj* ctr_jobj;
+    /* +38 gp+FC */ HSD_JObj* x38[3];
+    /* +44 gp+108 */ HSD_JObj* x44;
 };
 
 struct grHomeRun_GroundVars {
