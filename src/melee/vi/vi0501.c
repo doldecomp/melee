@@ -61,14 +61,8 @@ void un_8031D9E4(int arg0, int arg1, int arg2)
     un_804D6F84[3] = arg2;
 }
 
-/// @todo 99.32%: one three-web color rotation in the spawn loop — the
-///       counts+i-1 address temp (shared color with the jobj deref for
-///       HSD_JObjGetTranslation2) colors before the two strength-reduced
-///       walkers (ours r27, then r26/r25); the target colors it last (r25,
-///       recycling char_kind's dead home) after the walkers (r27/r26).
-///       Exhausted: full decl-position sweep, block scoping, count/counts
-///       elimination and def-site moves, index/count types, user-walker
-///       forms; the construct is unique codebase-wide (twin-scan).
+/// @todo 99.32%: regswap in the spawn loop — the counts[i-1] address temp
+///       lands in r27; target uses r25 (shifting the two loop walkers).
 void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
                  int spawn_count)
 {
