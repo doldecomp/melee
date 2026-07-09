@@ -10,13 +10,14 @@
 #include <melee/mn/types.h>
 
 typedef struct mnDiagram3_PosTable {
-    /* 0x00 */ Vec3 x0;
-    /* 0x0C */ Vec3 xC;
-    /* 0x18 */ Vec3 x18;
+    /* 0x00 */ Vec3 x0;  ///< title_pos (3.3,0.5,0)
+    /* 0x0C */ Vec3 xC;  ///< rank_name_pos (-2,0.57,0)
+    /* 0x18 */ Vec3 x18; ///< value_pos (8,0.57,0)
 } mnDiagram3_PosTable;
 
 typedef struct mnDiagram3_StatTable {
-    /* 0x00 */ u16 indices[0x30];
+    /* 0x00 */ u16 label_ids[24];      ///< SIS string ids, 0x62..0x79
+    /* 0x30 */ u16 unit_glyph_ids[24]; ///< mnDiagram2 unit/icon column entries
 } mnDiagram3_StatTable;
 
 /* 3EEC10 */ extern AnimLoopSettings mnDiagram3_803EEC10;
@@ -37,6 +38,6 @@ typedef struct mnDiagram3_StatTable {
 /* 4DC010 */ extern f32 mnDiagram3_804DC010;
 /* 4DC014 */ extern f32 mnDiagram3_804DC014;
 
-/* 2461BC */ void fn_802461BC(HSD_GObj* gobj);
+/* 2461BC */ void mnDiagram3_HandleInput(HSD_GObj* gobj);
 
 #endif
