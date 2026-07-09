@@ -159,28 +159,22 @@ do { \
     ASSERTMSGLINE(line, ((u32)(val) & ~((1 << (size)) - 1)) == 0, str_reg_field_out_of_range); \
     (reg) = ((u32)(reg) & ~(((1 << (size)) - 1) << (shift))) | ((u32)(val) << (shift)); \
 } while (0)
-#pragma optimization_level 0
-#pragma scheduling off
-#pragma global_optimizer off
 void GXSetCPUFifo(GXFifoObj *fifo)
 {
+    struct __GXFifoObj *realFifo = (struct __GXFifoObj *)fifo;
     BOOL enabled;
-    register struct __GXFifoObj *realFifo = (struct __GXFifoObj *)fifo;
-    register u32 reg1;
-    register u32 reg2;
+    u32 reg;
 
     enabled = OSDisableInterrupts();
 
     CPUFifo = realFifo;
     if (CPUFifo == GPFifo)
     {
-        reg1 = 0;
-
         __piReg[3] = (u32)realFifo->base & 0x3FFFFFFF;
         __piReg[4] = (u32)realFifo->top & 0x3FFFFFFF;
-        SET_REG_FIELD(0x294, reg1, 21, 5, ((u32)realFifo->wrPtr & 0x3FFFFFFF) >> 5);
-        SET_REG_FIELD(0x295, reg1, 1, 26, 0);
-        __piReg[5] = reg1;
+        reg = (u32)realFifo->wrPtr & 0x3FFFFFE0;
+        reg &= 0xFBFFFFFF;
+        __piReg[5] = reg;
         CPGPLinked = GX_TRUE;
         __GXWriteFifoIntReset(1, 1);
         __GXWriteFifoIntEnable(1, 0);
@@ -194,21 +188,17 @@ void GXSetCPUFifo(GXFifoObj *fifo)
             CPGPLinked = GX_FALSE;
         }
         __GXWriteFifoIntEnable(0, 0);
-        reg2 = 0;
         __piReg[3] = (u32)realFifo->base & 0x3FFFFFFF;
         __piReg[4] = (u32)realFifo->top & 0x3FFFFFFF;
-        SET_REG_FIELD(0x2B7, reg2, 21, 5, ((u32)realFifo->wrPtr & 0x3FFFFFFF) >> 5);
-        SET_REG_FIELD(0x2B8, reg2, 1, 26, 0);
-        __piReg[5] = reg2;
+        reg = (u32)realFifo->wrPtr & 0x3FFFFFE0;
+        reg &= 0xFBFFFFFF;
+        __piReg[5] = reg;
     }
 
     __sync();
 
     OSRestoreInterrupts(enabled);
 }
-#pragma optimization_level reset
-#pragma scheduling reset
-#pragma global_optimizer reset
 #else
 void GXSetCPUFifo(GXFifoObj *fifo)
 {
