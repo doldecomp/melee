@@ -199,6 +199,7 @@ void GXSetCPUFifo(GXFifoObj *fifo)
 
     OSRestoreInterrupts(enabled);
 }
+#pragma peephole on
 #else
 void GXSetCPUFifo(GXFifoObj *fifo)
 {
