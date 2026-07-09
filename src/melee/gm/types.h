@@ -191,7 +191,7 @@ struct NameTagData {
     /* 0x134 */ u32 play_time_by_fighter[25];
     /* 0x198 */ char namedata[8];
     /* 0x1A0 */ s8 x1A0;
-    /* 0x1A1 */ u8 x1A1;
+    /* 0x1A1 */ u8 rumble_toggle;
     /* 0x1A2 */ s8 x1A2;
     /* 0x1A3 */ u8 padding_x1A2;
 };
