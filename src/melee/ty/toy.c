@@ -2650,7 +2650,7 @@ void _Toy_80308F04(HSD_CObj* cobj)
 
             _Toy_80308DC8(cobj);
 
-            _Toy_sbss_804D6E80 = _Toy_sbss_804D6E80 + 0.0013187003F;
+            _Toy_sbss_804D6E80 += 0.0013187003F;
             if (top != _Toy_sbss_804D6E80) {
                 f32 val = _Toy_sbss_804D6E80;
                 if (val > 0.049584F) {
@@ -2659,7 +2659,7 @@ void _Toy_80308F04(HSD_CObj* cobj)
                 HSD_CObjSetTop(cobj, val);
             }
 
-            _Toy_sbss_804D6E84 = _Toy_sbss_804D6E84 + 0.00008119978F;
+            _Toy_sbss_804D6E84 += 0.00008119978F;
             if (bottom != _Toy_sbss_804D6E84) {
                 f32 val = _Toy_sbss_804D6E84;
                 if (val > -0.035585F) {
@@ -2668,7 +2668,7 @@ void _Toy_80308F04(HSD_CObj* cobj)
                 HSD_CObjSetBottom(cobj, val);
             }
 
-            _Toy_sbss_804D6E88 = _Toy_sbss_804D6E88 + 0.0032531999F;
+            _Toy_sbss_804D6E88 += 0.0032531999F;
             if (right != _Toy_sbss_804D6E88) {
                 f32 val = _Toy_sbss_804D6E88;
                 if (val > 0.076839F) {
@@ -2677,7 +2677,7 @@ void _Toy_80308F04(HSD_CObj* cobj)
                 HSD_CObjSetRight(cobj, val);
             }
 
-            _Toy_sbss_804D6E8C = _Toy_sbss_804D6E8C + 0.0017468001F;
+            _Toy_sbss_804D6E8C += 0.0017468001F;
             if (left != _Toy_sbss_804D6E8C) {
                 HSD_CObjSetLeft(cobj, _Toy_sbss_804D6E8C);
             }

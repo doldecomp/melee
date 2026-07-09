@@ -135,7 +135,7 @@
 /* 19A158 */ void fn_8019A158(void);
 /* 19A71C */ void fn_8019A71C(s32* arg0, u32 arg1, u32 arg2);
 /* 19A828 */ void gm_8019A828(void);
-/* 19A86C */ void fn_8019A86C(s32*, u32, u32);
+/* 19A86C */ void fn_8019A86C(TmData*, u32, u32);
 /* 19AF50 */ void fn_8019AF50(s32*, u32, u32);
 /* 19B2DC */ void gm_8019B2DC_OnFrame(void);
 /* 19B458 */ void fn_8019B458(s32* arg0);
