@@ -16,6 +16,7 @@
 #include "baselib/jobj.h"
 #include "baselib/sislib.h"
 #include "cm/cmsnap.h"
+#include "dolphin/pad.h"
 #include "gm/gm_1601.h"
 #include "gm/gm_16AE.h"
 #include "gm/gm_1A36.h"
@@ -705,11 +706,17 @@ void gmCamera_801A34FC_OnFrame(void)
         mn_8022F268();
         *gmCamera_80479C20.x0 = 2;
         gm_801A4B60();
-    } else if (button = gm_801A36A0(4), (button & 0x1100) | (button & 0)) {
+    } else if (button =
+                   gm_GetButtonsPressedSinceLastFrame(PAD_ALL_CONTROLLERS),
+               (button & (HSD_PAD_START | HSD_PAD_A)) | (button & 0))
+    {
         lbAudioAx_80024030(1);
         *gmCamera_80479C20.x0 = 0;
         gm_801A4B60();
-    } else if (button = gm_801A36A0(4), (button & 0x200) | (button & 0)) {
+    } else if (button =
+                   gm_GetButtonsPressedSinceLastFrame(PAD_ALL_CONTROLLERS),
+               (button & PAD_BUTTON_B) | (button & 0))
+    {
         lbAudioAx_80024030(0);
         *gmCamera_80479C20.x0 = 1;
         gm_801A4B60();

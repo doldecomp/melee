@@ -15,6 +15,7 @@
 
 #include "cm/types.h"
 #include "dolphin/mtx.h"
+#include "dolphin/pad.h"
 #include "dolphin/types.h"
 
 #include "ft/forward.h"
@@ -1500,7 +1501,7 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
     f32 substick_y;
     f32 temp_x;
     f32 temp_y;
-    s32 var_r4;
+    s32 current_slot;
     s32 var_r5;
     u64 temp_ret;
     PAD_STACK(8);
@@ -1510,14 +1511,16 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
         inputs->stick_y = 0.0f;
         inputs->substick_x = 0.0f;
         inputs->substick_y = 0.0f;
-        inputs->x18._u64 = 0;
-        inputs->x10._u64 = 0;
+        inputs->buttons_pressed_since_last_frame = 0;
+        inputs->buttons_pressed = 0;
         return;
     }
     if (slot == 4) {
         /// @todo there is probably a bigger inline
-        for (var_r4 = 0; var_r4 < 4; var_r4++) {
-            pad = get_slot_pad(var_r4);
+        for (current_slot = 0; current_slot < PAD_MAX_CONTROLLERS;
+             current_slot++)
+        {
+            pad = get_slot_pad(current_slot);
             temp_x = get_stick_x(pad);
             temp_y = get_stick_y(pad);
             stick_x = temp_x;
@@ -1536,7 +1539,7 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
             }
         }
 
-        if (var_r4 == 4) {
+        if (current_slot == 4) {
             stick_y = 0.0f;
             stick_x = 0.0f;
         }
@@ -1569,10 +1572,10 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
         inputs->stick_y = stick_y;
         inputs->substick_x = substick_x;
         inputs->substick_y = substick_y;
-        temp_ret = gm_801A3680(4U);
-        inputs->x10._u64 = temp_ret;
-        temp_ret = gm_801A36A0(4U);
-        inputs->x18._u64 = temp_ret;
+        temp_ret = gm_GetButtonsPressed(PAD_ALL_CONTROLLERS);
+        inputs->buttons_pressed = temp_ret;
+        temp_ret = gm_GetButtonsPressedSinceLastFrame(PAD_ALL_CONTROLLERS);
+        inputs->buttons_pressed_since_last_frame = temp_ret;
         return;
     }
     pad = get_slot_pad(slot);
@@ -1580,10 +1583,10 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
     inputs->stick_y = pad->nml_stickY;
     inputs->substick_x = pad->nml_subStickX;
     inputs->substick_y = pad->nml_subStickY;
-    temp_ret = gm_801A3680(slot);
-    inputs->x10._u64 = temp_ret;
-    temp_ret = gm_801A36A0(slot);
-    inputs->x18._u64 = temp_ret;
+    temp_ret = gm_GetButtonsPressed(slot);
+    inputs->buttons_pressed = temp_ret;
+    temp_ret = gm_GetButtonsPressedSinceLastFrame(slot);
+    inputs->buttons_pressed_since_last_frame = temp_ret;
 }
 
 s32 Camera_8002BA00(s32 slot, s32 arg1)
@@ -1838,7 +1841,7 @@ void Camera_8002C1A8(void)
     zoom_dir = 0.0f;
 
     {
-        u64 x18_btns = inputs.x18._u64;
+        u64 x18_btns = inputs.buttons_pressed_since_last_frame;
 
         if ((x18_btns & PAD_TRIGGER_R) != 0) {
             dir = 1;
@@ -1846,25 +1849,25 @@ void Camera_8002C1A8(void)
             dir = -1;
         }
 
-        if ((inputs.x10._u64 & PAD_BUTTON_UP) != 0) {
+        if ((inputs.buttons_pressed & PAD_BUTTON_UP) != 0) {
             y_move = 1.0f;
-        } else if ((inputs.x10._u64 & PAD_BUTTON_DOWN) != 0) {
+        } else if ((inputs.buttons_pressed & PAD_BUTTON_DOWN) != 0) {
             y_move = -1.0f;
         }
 
-        if ((inputs.x10._u64 & PAD_BUTTON_LEFT) != 0) {
+        if ((inputs.buttons_pressed & PAD_BUTTON_LEFT) != 0) {
             x_move = -1.0f;
-        } else if ((inputs.x10._u64 & PAD_BUTTON_RIGHT) != 0) {
+        } else if ((inputs.buttons_pressed & PAD_BUTTON_RIGHT) != 0) {
             x_move = 1.0f;
         }
 
-        if ((inputs.x10._u64 & PAD_BUTTON_X) != 0) {
+        if ((inputs.buttons_pressed & PAD_BUTTON_X) != 0) {
             zoom_dir = 1.0f;
-        } else if ((inputs.x10._u64 & PAD_BUTTON_Y) != 0) {
+        } else if ((inputs.buttons_pressed & PAD_BUTTON_Y) != 0) {
             zoom_dir = -1.0f;
         }
 
-        if ((inputs.x10._u64 & PAD_BUTTON_A) != 0) {
+        if ((inputs.buttons_pressed & PAD_BUTTON_A) != 0) {
             abs_f1 = ABS(stick_x);
             if (abs_f1 > 0.125) {
                 x_move = stick_x;
@@ -2193,18 +2196,18 @@ void Camera_8002CB0C(CameraBounds* bounds)
     stick_y = inputs.stick_y;
 
     {
-        u64 x18_btns = inputs.x18._u64;
-        u64 x10_btns = inputs.x10._u64;
+        u64 newly_pressed_btns = inputs.buttons_pressed_since_last_frame;
+        u64 pressed_btns = inputs.buttons_pressed;
 
-        if ((x18_btns & PAD_TRIGGER_R) != 0) {
+        if ((newly_pressed_btns & PAD_TRIGGER_R) != 0) {
             dir = 1;
-        } else if ((x18_btns & PAD_TRIGGER_L) != 0) {
+        } else if ((newly_pressed_btns & PAD_TRIGGER_L) != 0) {
             dir = -1;
         }
 
-        if ((x10_btns & PAD_BUTTON_X) != 0) {
+        if ((pressed_btns & PAD_BUTTON_X) != 0) {
             zoom_dir = 1.0f;
-        } else if ((x10_btns & PAD_BUTTON_Y) != 0) {
+        } else if ((pressed_btns & PAD_BUTTON_Y) != 0) {
             zoom_dir = -1.0f;
         }
     }

@@ -13,6 +13,7 @@
 #include "baselib/fog.h"
 #include "baselib/gobjgxlink.h"
 #include "baselib/gobjobject.h"
+#include "dolphin/pad.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbdvd.h"
@@ -2262,7 +2263,7 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                 {
                     u32 buttons = fn_8018F640(i);
 
-                    if (buttons & 0x1100) {
+                    if (buttons & (PAD_BUTTON_A | PAD_BUTTON_START)) {
                         lbAudioAx_80024030(1);
                         if (d8->x44[i] == 7) {
                             d8->x44[i] = 6;
@@ -2296,7 +2297,7 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                                 d8->x2A[i].state = 1;
                             }
                         }
-                    } else if (buttons & 0x400) {
+                    } else if (buttons & PAD_BUTTON_X) {
                         if (d8->x44[i] != 6) {
                             lbAudioAx_80024030(0);
                             d8->x44[i] = 6;
@@ -2322,12 +2323,15 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                                 d8->x2A[i].done = 0;
                             }
                         }
-                    } else if ((buttons & 0x10000) || (buttons & 8)) {
+                    } else if ((buttons & PAD_STICK_UP) ||
+                               (buttons & PAD_BUTTON_UP))
+                    {
                         if (d8->x44[i] == 8) {
                             lbAudioAx_80024030(2);
                             d8->x44[i] = 7;
                         }
-                    } else if (((buttons & 0x20000) || (buttons & 4)) &&
+                    } else if (((buttons & PAD_STICK_DOWN) ||
+                                (buttons & PAD_BUTTON_DOWN)) &&
                                d8->x44[i] == 7)
                     {
                         lbAudioAx_80024030(2);
@@ -2400,9 +2404,10 @@ void fn_8019AF50(s32* arg0, u32 arg1, u32 arg2)
     }
 
     if (lbl_804799D8.x4D != 1) {
-        buttons = (u32) gm_801A36A0(lbl_804799D8.x4C);
+        buttons = (u32) gm_GetButtonsPressedSinceLastFrame(lbl_804799D8.x4C);
     } else {
-        buttons = (u32) gm_801A36A0(4);
+        buttons =
+            (u32) gm_GetButtonsPressedSinceLastFrame(PAD_ALL_CONTROLLERS);
     }
 
     if (lbl_80473AB8[bracketIdx].x18 != 0) {
@@ -2439,7 +2444,9 @@ void fn_8019AF50(s32* arg0, u32 arg1, u32 arg2)
     if (*arg0 == 0x27) {
         if (*counter >= 0xFAU) {
             if (tm->x33 == 6) {
-                if (*counter >= 0x1C20U || (buttons & 0x1100)) {
+                if (*counter >= 0x1C20U ||
+                    (buttons & (PAD_BUTTON_A | PAD_BUTTON_START)))
+                {
                     gm_801A42F8(1);
                     gm_801A4B60();
                 }

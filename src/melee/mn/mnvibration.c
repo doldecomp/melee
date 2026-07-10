@@ -1,5 +1,7 @@
 #include "mnvibration.h"
 
+#include "dolphin/pad.h"
+
 #include <baselib/debug.h>
 #undef HSD_ASSERT
 #define HSD_ASSERT(line, cond)                                                \
@@ -261,7 +263,7 @@ void fn_80247510(HSD_GObj* gobj)
     Menu_GetAllInputs();
 
     // Handle B button - exit menu
-    inputs = gm_801A36A0(4);
+    inputs = gm_GetButtonsPressedSinceLastFrame(PAD_ALL_CONTROLLERS);
     if (inputs & PAD_CANCEL) {
         MnVibrationData* exit_data;
         lbAudioAx_80024030(0);
@@ -291,7 +293,7 @@ void fn_80247510(HSD_GObj* gobj)
     // Check A button per controller for rumble toggle
     for (i = 0; i < 4; i++) {
         if (data->x0[i + 2] == 0) {
-            inputs = gm_801A36A0(i);
+            inputs = gm_GetButtonsPressedSinceLastFrame(i);
             if (inputs & PAD_CONFIRM) {
                 HSD_JObj* temp_jobj;
                 lbAudioAx_80024030(1);
@@ -356,7 +358,7 @@ void fn_80247510(HSD_GObj* gobj)
 
     // Check for up/down navigation
     for (i = 0; i < 4; i++) {
-        inputs = gm_801A36A0(i);
+        inputs = gm_GetButtonsPressedSinceLastFrame(i);
         if ((inputs & PAD_ANY_LEFT) && data->x0[i + 2] == 1) {
             lbAudioAx_80024030(2);
             data->x0[i + 2] = 0;
