@@ -1,3 +1,4 @@
+/// @file @todo Which uses of @c DEBUG are todo's and which are real?
 #include <stddef.h>
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/gx.h>
