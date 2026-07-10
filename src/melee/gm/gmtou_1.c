@@ -2212,7 +2212,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
                             }
                         }
                     } else if (buttons & PAD_BUTTON_X) {
-                        if (lbl_804799D8->x44[i] != 6) {
+                        if (lbl_804799D8.x44[i] != 6) {
                             lbAudioAx_80024030(0);
                             lbl_804799D8.x44[i] = 6;
                         } else {
