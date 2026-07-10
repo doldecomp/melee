@@ -257,7 +257,7 @@ void CreateNameAtIndex(s32 slot)
 {
     s32 idx = slot & 0xFF;
     GetPersistentNameData(idx)->namedata[0] = mnName_StringTerminator;
-    GetPersistentNameData(idx)->x1A1 = true;
+    GetPersistentNameData(idx)->rumble_toggle = true;
     InitializePersistentNameData(slot);
 }
 
@@ -483,7 +483,7 @@ void mnName_ConfirmNameDeleteInput(HSD_GObj* arg0)
                 mn_804D6BC8.cooldown = 5;
                 GetPersistentNameData(nameIdxInt)->namedata[0] = term;
             }
-            GetPersistentNameData(nameIdxInt)->x1A1 = 1;
+            GetPersistentNameData(nameIdxInt)->rumble_toggle = 1;
             InitializePersistentNameData((s32) nameIdx);
             if ((s32) gobj2->gx_link > (s32) (mnName_GetColumnCount() - 1)) {
                 gobj2->gx_link = 0;

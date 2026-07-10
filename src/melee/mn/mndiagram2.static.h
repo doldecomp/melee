@@ -15,7 +15,17 @@ typedef struct {
     /* 0x0C */ HSD_ShapeAnimJoint* xC;
 } mnDiagram_ArchiveData;
 
-/* 3EEAD0 */ extern u8 mnDiagram2_803EEAD0[0x90];
+/// Row-layout constants for the VS Records stat rows (fighter/name mode).
+typedef struct MnDiagram2RowLayout {
+    /* 0x00 */ Vec3 header_pos;
+    /* 0x0C */ Vec3 label_pos;
+    /* 0x18 */ Vec3 value_pos;
+    /* 0x24 */ Vec3 icon_pos;
+    /* 0x30 */ u16 label_ids[24];      ///< SIS string ids, 0x4A..0x61
+    /* 0x60 */ u16 unit_glyph_ids[24]; ///< times/players/%/coins/ft/none glyph
+} MnDiagram2RowLayout;
+
+/* 3EEAD0 */ extern MnDiagram2RowLayout mnDiagram2_803EEAD0;
 /* 3EEB60 */ extern AnimLoopSettings mnDiagram2_803EEB60[2];
 /* 4A0834 */ extern mnDiagram_ArchiveData mnDiagram_804A0834;
 /* 4D4FB8 */ extern GXColor mnDiagram2_804D4FB8;
