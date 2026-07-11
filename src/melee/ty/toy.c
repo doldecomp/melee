@@ -2382,7 +2382,6 @@ void _Toy_803084A0(s32 arg0)
 
 HSD_GObj* Toy_803087F4(void* arg0)
 {
-    char* Toy_8030813C();
     ToyEntryData* entry = arg0;
     ToyAnimState* anim;
     HSD_JObj* parent_jobj;
@@ -2400,7 +2399,7 @@ HSD_GObj* Toy_803087F4(void* arg0)
 
     if (entry->x14 == NULL) {
         trophy_id = entry->x10;
-        model_name = Toy_8030813C(trophy_id);
+        model_name = Toy_8030813C(trophy_id, trophy_id);
         if (entry->x14 != NULL) {
             lbArchive_80016EFC(entry->x14);
             entry->x14 = NULL;

@@ -2,7 +2,11 @@
 
 #include "gm_1BA8.static.h"
 
+#define gm_801732D8 gm_801732D8_wide
+#define gm_8017335C gm_8017335C_wide
 #include "gm_unsplit.h"
+#undef gm_801732D8
+#undef gm_8017335C
 
 #include "vi/vi1201v1.h"
 
@@ -82,6 +86,9 @@ GameScene gm_803DF618_Scenes[] = {
 
 extern u8 gm_804D68F8;
 extern u8 gm_804D68F9;
+
+u8 gm_801732D8(u8);
+u16 gm_8017335C(void);
 
 void gm_801BA8FC(void)
 {
@@ -667,7 +674,7 @@ void gm_801BB758(GameScene* arg0)
     MatchExitInfo* exit = gm_801A4284(arg0);
     u8 stage = ev->unk_535;
     u8 b;
-    CharacterKind kind;
+    u8 kind;
     s32 t;
 
     gm_8016A164();
@@ -750,9 +757,8 @@ void gm_801BB758(GameScene* arg0)
         gmMainLib_8015CF84();
     }
     if (ev->xB_1) {
-        int sid = gm_8017335C();
-        if ((u16) sid != 0x148) {
-            void gm_80164504();
+        u16 sid = gm_8017335C();
+        if (sid != 0x148) {
             gm_80164504(sid);
         }
     }
@@ -761,8 +767,7 @@ void gm_801BB758(GameScene* arg0)
     }
     gm_80173EEC();
     gm_80172898(0x10);
-    if ((u8) kind != 0x21) {
-        void gm_801736E8();
+    if (kind != 0x21) {
         gm_801736E8(ev->x0, ev->x1, ev->x6, ev->x4, kind, 1);
         gm_801A42F8(0x14);
         return;
