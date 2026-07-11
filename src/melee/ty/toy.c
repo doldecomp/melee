@@ -2417,6 +2417,7 @@ void _Toy_803084A0(s32 arg0)
 
 HSD_GObj* Toy_803087F4(void* arg0)
 {
+    char* Toy_8030813C();
     ToyEntryData* entry = arg0;
     ToyAnimState* anim;
     HSD_JObj* parent_jobj;
@@ -2434,7 +2435,7 @@ HSD_GObj* Toy_803087F4(void* arg0)
 
     if (entry->x14 == NULL) {
         trophy_id = entry->x10;
-        model_name = Toy_8030813C(trophy_id, trophy_id);
+        model_name = Toy_8030813C(trophy_id);
         if (entry->x14 != NULL) {
             lbArchive_80016EFC(entry->x14);
             entry->x14 = NULL;
@@ -5257,13 +5258,15 @@ void Toy_80310324(void)
     ToyGlobalsS_* tg5;
     ToyGlobalsS_* tg6;
     ToySubStructS_* sub;
-    UNK_T syms[6];
+    UNK_T syms[4];
     s32 one;
     s32 var_r0;
     HSD_SObj* sobj;
     HSD_GObj* gobj;
     u16* flags;
     f32 two;
+
+    PAD_STACK(4);
 
     toy = (void*) &_Toy_804A26B8;
     tg = (ToyGlobalsS_*) Toy_sbss_804D6ED8;
@@ -5274,7 +5277,7 @@ void Toy_80310324(void)
     if (tg->x50 == NULL) {
         tg->x50 = lbArchive_LoadSymbols(
             lbLang_IsSavedLanguageJP() ? "TyMnView.dat" : "TyMnView.usd",
-            &syms[5], _Toy_803FDEA0[0], NULL);
+            &syms[4], _Toy_803FDEA0[0], NULL);
     }
 
     memzero(_Toy_sbss_804D6E68, 0x64);
@@ -5285,8 +5288,8 @@ void Toy_80310324(void)
 
     if ((tg2 = (ToyGlobalsS_*) Toy_sbss_804D6ED8)->x54 == NULL) {
         tg2->x54 = lbArchive_LoadSymbols(
-            "TyMnBg.dat", &syms[2], _Toy_803FE038[0], &syms[3],
-            _Toy_803FE038[1], &syms[4], _Toy_803FE038[2], 0);
+            "TyMnBg.dat", &syms[1], _Toy_803FE038[0], &syms[2],
+            _Toy_803FE038[1], &syms[3], _Toy_803FE038[2], 0);
 
         tg2->x8 = GObj_Create(4, 5, 0);
         GObj_SetupGXLink(tg2->x8, HSD_SObjLib_803A49E0, 0x32, 0);
@@ -5295,7 +5298,7 @@ void Toy_80310324(void)
         two = 2.0f;
         one = 1;
         do {
-            sobj = HSD_SObjLib_803A477C(tg2->x8, syms[i + 2], 0, 0, 0x80, 0);
+            sobj = HSD_SObjLib_803A477C(tg2->x8, syms[i + 1], 0, 0, 0x80, 0);
             *(f32*) ((char*) sobj + 0x1C) = two;
             i += 1;
             *(f32*) ((char*) sobj + 0x20) = two;

@@ -699,7 +699,7 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     u8 enemy_cpu_type;
     s32 player_idx;
     f32 attack_ratio;
-    s32 player_stocks;
+    u8 player_stocks;
     s32 player_ckind;
     u8 flags;
     s32 color_idx;
@@ -884,7 +884,10 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
                 }
             }
 
-            stage_flags = Ground_801C5AD0(Stage_8022519C(arg7));
+            {
+                s32 stage_id = Stage_8022519C(arg7);
+                stage_flags = Ground_801C5AD0(stage_id);
+            }
 
             {
                 u8 player_ckind = (u8) arg1->x0.ckind;
@@ -1177,7 +1180,7 @@ s32 gm_8017DB88(void* arg0, u8 arg1, s32 arg2, s32 arg3, u8* arg4, u8 arg5,
                 f32 (*arg10)(s32, s32))
 {
     u8 chars[4];
-    u8 val;
+    s32 val;
     f32 fval;
 
     {

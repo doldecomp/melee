@@ -667,7 +667,7 @@ void gm_801BB758(GameScene* arg0)
     MatchExitInfo* exit = gm_801A4284(arg0);
     u8 stage = ev->unk_535;
     u8 b;
-    u8 kind;
+    CharacterKind kind;
     s32 t;
 
     gm_8016A164();
@@ -752,7 +752,8 @@ void gm_801BB758(GameScene* arg0)
     if (ev->xB_1) {
         int sid = gm_8017335C();
         if ((u16) sid != 0x148) {
-            gm_80164504((u16) sid);
+            void gm_80164504();
+            gm_80164504(sid);
         }
     }
     if (ev->xB_1) {
@@ -761,6 +762,7 @@ void gm_801BB758(GameScene* arg0)
     gm_80173EEC();
     gm_80172898(0x10);
     if ((u8) kind != 0x21) {
+        void gm_801736E8();
         gm_801736E8(ev->x0, ev->x1, ev->x6, ev->x4, kind, 1);
         gm_801A42F8(0x14);
         return;
