@@ -914,7 +914,7 @@ void grGreens_80214FA8(Ground_GObj* gobj)
         if (jobj != NULL) {
             HSD_JObjSetFlags(jobj, JOBJ_HIDDEN);
         } else {
-            HSD_ASSERT(1203, 0);
+            __assert(grGr_803E7728, 1203, "0");
         }
     }
     for (j = 0; j < 5; j++) {
