@@ -1263,7 +1263,7 @@ typedef struct gm_804736B0_t {
     HSD_JObj* xC;
 } gm_804736B0_t;
 
-extern gm_804736B0_t lbl_804736B0;
+gm_804736B0_t lbl_804736B0;
 extern f32 lbl_804DA5C8;
 
 /// Classic Mode intro scene enter data (0x20 bytes)
