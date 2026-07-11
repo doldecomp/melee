@@ -580,7 +580,7 @@ s32 WriteCharactersForNameAtIndex(u8 arg0, s32 arg1)
     nametag = GetPersistentNameData((s32) arg0);
     CopyCurrentNameToNametag(nametag);
     ret = GetRumbleSettingOfPort(arg1);
-    nametag->x1A1 = ret;
+    nametag->rumble_toggle = ret;
     return ret;
 }
 

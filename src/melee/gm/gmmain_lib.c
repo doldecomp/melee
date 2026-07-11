@@ -1340,7 +1340,7 @@ void gmMainLib_8015F600(int arg0, int arg1)
                     data->namedata[0] = gmMainLib_804D3EE4[0];
                 }
             }
-            data->x1A1 = 1;
+            data->rumble_toggle = 1;
             j++;
         } while (j < 19);
     }
