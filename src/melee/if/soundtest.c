@@ -91,7 +91,7 @@ struct un_803FA128_x130_t {
     f32 xEC;
 };
 
-/* 3FA128 */ struct un_803FA128_t {
+/* 3FA128 */ static struct un_803FA128_t {
     u8 _pad0[0x130];
     struct un_803FA128_x130_t x130;
     u16 x220;
@@ -875,15 +875,14 @@ bool un_80300AB8(bool update_scene)
 bool un_80300AF4(int arg0)
 {
     if (arg0 == 1) {
+        struct un_803FA258_t* data;
         lbAudioAx_80024030(1);
-        {
-            struct un_803FA258_t* data = &un_803FA258;
-            data->x4[1] = 0x3F;
-            data->x4[3] = 0xE;
-            data->x24[1] = 3;
-            data->x24[2] = 3;
-            data->x24[3] = 3;
-        }
+        data = &un_803FA258;
+        data->x4[1] = 0x3F;
+        data->x4[3] = 0xE;
+        data->x24[1] = 3;
+        data->x24[2] = 3;
+        data->x24[3] = 3;
         gm_SetPendingScene(4);
         gm_801A4B60();
     }

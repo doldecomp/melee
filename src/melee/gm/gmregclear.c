@@ -2972,9 +2972,6 @@ void fn_80181598(void)
 static DynamicModelDesc** lbl_804D65CC;
 static DynamicModelDesc** lbl_804D65D0;
 extern HSD_Archive* lbl_804D65C8;
-extern const char lbl_803D8CD8[];
-extern const char lbl_803D8CE4[];
-extern const char lbl_803D8CFC[];
 
 void fn_80181708(void)
 {
@@ -3033,10 +3030,10 @@ void fn_80181708(void)
 
 void gm_80181998(void)
 {
-    lbl_804D65C8 = lbArchive_80016DBC(lbl_803D8CD8, &lbl_804D65CC,
-                                      lbl_803D8CE4, 0);
-    lbl_804D65C8 = lbArchive_80016DBC(lbl_803D8CFC, &lbl_804D65D0,
-                                      lbl_803D8CE4, 0);
+    lbl_804D65C8 = lbArchive_80016DBC("IfHrNoCn", &lbl_804D65CC,
+                                      "ScInfCnt_scene_models", 0);
+    lbl_804D65C8 = lbArchive_80016DBC("IfHrReco", &lbl_804D65D0,
+                                      "ScInfCnt_scene_models", 0);
     fn_80181708();
 }
 
@@ -3504,11 +3501,11 @@ bool gm_80182510(void)
 
 void gm_80182554(int arg0, int arg1)
 {
-    lbl_80472ED8.x6C8 = arg0;
-    lbl_80472ED8.x6C4 = arg1;
-    lbl_80472ED8.x6BC = 0;
-    lbl_80472ED8.x6C0 = 0;
-    lbl_80472ED8.x6BE = 0;
+    lbl_80473594.xC = arg0;
+    lbl_80473594.x8 = arg1;
+    lbl_80473594.x0 = 0;
+    lbl_80473594.x4 = 0;
+    lbl_80473594.x2 = 0;
 }
 
 typedef struct {
