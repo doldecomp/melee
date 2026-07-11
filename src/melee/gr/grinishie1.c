@@ -106,7 +106,8 @@ typedef struct {
 } grInishie1_stuff;
 
 grInishie1_stuff* grI1_804D69F8;
-Vec3 grI1_803B8268;
+extern Vec3 grI1_803B8268;
+extern f32 grI1_804DB5F4;
 
 #define DOBJ_LOOP(jobj)                                                       \
     {                                                                         \
@@ -679,7 +680,7 @@ void grInishie1_801FBA34(HSD_GObj* gobj, HSD_JObj* jobj)
     Vec3 vec;
     lb_8000B1CC(jobj, NULL, &sp1C);
     vec = grI1_803B8268;
-    sp1C.y += 5.0f;
+    sp1C.y += grI1_804DB5F4;
     it_8026F7C8(&sp1C, &vec, 0);
 }
 
