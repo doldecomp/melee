@@ -80,6 +80,7 @@ GameScene gm_803DF618_Scenes[] = {
 
 extern u8 gm_804D68F8;
 extern u8 gm_804D68F9;
+extern f32 gm_804DAC88;
 
 void gm_801BA8FC(void)
 {
@@ -3491,7 +3492,7 @@ void gm_801BF4DC(GameScene* arg0)
     temp_r31->rules.disable_pausing = true;
     temp_r31->rules.x7 = 0;
     temp_r31->rules.x44 = gm_80183218;
-    temp_r31->rules.x34 = 1.0F;
+    temp_r31->rules.x34 = gm_804DAC88;
     temp_r31->rules.xE = (u16) gm_801BF694();
     gm_80167A14(temp_r31->players);
 

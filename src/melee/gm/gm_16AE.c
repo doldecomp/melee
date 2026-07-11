@@ -1317,7 +1317,6 @@ void fn_8016CFE0(void)
     int var_r29;
     s64 var_r29_2;
     int var_r4;
-    u8 operand_pad[8];
     PAD_STACK(0x10);
 
     fn_8016CFE0_inline();
