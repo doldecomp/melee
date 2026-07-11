@@ -1938,7 +1938,7 @@ bool gm_8018841C(void)
     return false;
 }
 
-static TrainingModeState lbl_80473700;
+TrainingModeState lbl_80473700;
 
 int gm_80188454(int idx)
 {
@@ -1983,7 +1983,7 @@ inline int fn_801884F8_inline(void)
 
 int fn_801884F8(void)
 {
-    int result;
+    s32 result;
 
     result = pl_80041300(0);
     if (result != 0) {

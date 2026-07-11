@@ -774,10 +774,11 @@ inline Item* GET_ITEM2(Item_GObj* arg0)
 void fn_801FBF6C(Item_GObj* item_gobj, Ground* gp, Vec3* pos, HSD_GObj* arg3,
                  f32 arg4)
 {
-    HSD_GObj* new_var;
     s32 i;
     HSD_GObj* map_gobj;
-    Item* ip = GET_ITEM2(item_gobj);
+    Item* ip;
+
+    ip = GET_ITEM2(item_gobj);
 
     for (i = 0; i < 19; i++) {
         if (gp->gv.inishie1.blocks[i].jobj2 ==
@@ -792,11 +793,12 @@ void fn_801FBF6C(Item_GObj* item_gobj, Ground* gp, Vec3* pos, HSD_GObj* arg3,
     }
 
     map_gobj = Ground_801C2BA4(3);
-    HSD_ASSERT(0x425, map_gobj);
+    if (map_gobj == NULL) {
+        __assert("grinishie1.c", 0x425, "map_gobj");
+    }
 
-    new_var = map_gobj;
     grInishie1_801FB0AC(map_gobj, i);
-    grInishie1_801FBCEC(new_var, i);
+    grInishie1_801FBCEC(map_gobj, i);
     PAD_STACK(16);
 }
 
