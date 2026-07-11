@@ -687,17 +687,6 @@ void fn_80185408(int x, float arg8, float arg9, float argA, float argB)
     HSD_StateInvalidate(-1);
 }
 
-/// @todo .sdata2 order hack
-static void splash_sdata2_order(void)
-{
-    (void) 280.0f;
-    (void) 290.0f;
-    (void) 40.0f;
-    (void) -60.0f;
-    (void) 160.0f;
-    (void) U32_TO_F32;
-}
-
 extern float MSL_TrigF_80400770[];
 extern float MSL_TrigF_80400774[];
 #pragma dont_inline on
@@ -1283,16 +1272,12 @@ void gm_80186E30_OnEnter(void* arg0_)
     gm_80168F88();
 }
 
-/// @todo .sdata2 order hack
-static const f32 classic_intro_sdata2_order[1] = { 0.0f };
-static const f32 classic_intro_anim_start_frame[1] = { 0.0f };
-
 void fn_80186EFC(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
     struct ClassicIntroSceneData* data = &lbl_804736B0;
     PAD_STACK(8);
-    HSD_JObjReqAnimAll(data->xC, classic_intro_anim_start_frame[0]);
+    HSD_JObjReqAnimAll(data->xC, 0.0f);
     HSD_JObjAnimAll(jobj);
     if (lbl_804736B0.x4 < 0x8C) {
         lbl_804736B0.x4++;

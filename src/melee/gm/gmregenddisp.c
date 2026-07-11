@@ -531,15 +531,6 @@ char* gm_803DBF10[] = {
     "GmRegendAllstarPichu.thp",     "GmRegendAllstarGanon.thp",
 };
 
-typedef struct gmRegendThpTables {
-    u8 pad0[0x278];
-    const char* simple[26];
-    u8 pad1[0x5B4 - 0x278 - 26 * 4];
-    const char* adventure[26];
-    u8 pad2[0x8D0 - 0x5B4 - 26 * 4];
-    const char* allstar[26];
-} gmRegendThpTables;
-
 void gm_801A9B30_OnEnter(UNK_T unused)
 {
     struct {
@@ -556,8 +547,6 @@ void gm_801A9B30_OnEnter(UNK_T unused)
     HSD_GObj* gobj;
     HSD_GObj* temp_r29;
     const char* thpfile;
-    gmRegendThpTables* thpfile_base =
-        (gmRegendThpTables*) "GmRegendSimpleCaptain.thp";
     s32 var_r3_3;
     int var_r3;
 
@@ -581,13 +570,13 @@ void gm_801A9B30_OnEnter(UNK_T unused)
     }
     switch (var_r3) {
     case GM_CLASSIC_GOVER:
-        thpfile = thpfile_base->simple[ckind];
+        thpfile = gm_803DB8B8[ckind];
         break;
     case GM_ADVENTURE_GOVER:
-        thpfile = thpfile_base->adventure[ckind];
+        thpfile = gm_803DBBF4[ckind];
         break;
     default:
-        thpfile = thpfile_base->allstar[ckind];
+        thpfile = gm_803DBF10[ckind];
         break;
     }
     lbMthp8001FAA0(thpfile, 0x230, 0x1A0);

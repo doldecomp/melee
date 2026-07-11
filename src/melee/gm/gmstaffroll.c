@@ -115,8 +115,8 @@ typedef struct StaffRollPtclNode {
     /* 0x0C */ struct StaffRollPtclNode* xC;
 } StaffRollPtclNode;
 
-/* 3DBFD8 */ static StaffEntryData z[198] = { 0 };
-static StaffRollExtraData z_pad = { 0 };
+/* 3DBFD8 */ static StaffEntryData gm_803DBFD8[198] = { 0 };
+static StaffRollExtraData gm_803DBFD8_extra = { 0 };
 
 /* 3DD0C8 */ static HSD_WObjDesc gm_803DD0C8 = {
     NULL,
@@ -314,7 +314,7 @@ void fn_801AAB74(HSD_GObj* gobj)
     entry_idx = staff_idx = 0;
     child = jobj->child;
     gm_804D6800 = 0;
-    entry_data = z;
+    entry_data = gm_803DBFD8;
     {
         int temp = entry_idx * 15;
         name_page_jp = temp + 3;
@@ -608,8 +608,8 @@ void fn_801AB200(HSD_GObj* gobj)
                 if (entry_idx != 0xB7 && entry_idx < 0xC0) {
                     hover_jobj = sort_entry->jobj;
                     half_size =
-                        0.16875f *
-                        (f32) z[entry_idx].x11[lbLang_IsSavedLanguageUS()];
+                        0.16875f * (f32) gm_803DBFD8[entry_idx]
+                                       .x11[lbLang_IsSavedLanguageUS()];
                     corners = gm_803DD1C8.corners;
                     corners[1].x = -half_size;
                     corners[0].x = -half_size;
@@ -711,7 +711,7 @@ void fn_801AB200(HSD_GObj* gobj)
             HSD_JObjReqAnimAll(temp_jobj, 0.0f);
             lbAudioAx_800237A8(0x7A12A, 0x7F, 0x40);
 
-            entry_data = &z[selected];
+            entry_data = &gm_803DBFD8[selected];
             check_failed = 0;
             if (entry_data->check != NULL &&
                 entry_data->check(entry_data->check_arg) == 0)
@@ -735,7 +735,7 @@ void fn_801AB200(HSD_GObj* gobj)
                 gm_804D6810 = entry_data->x0;
 
                 if (j == 0) {
-                    x_pos = z_pad.x_positions[gm_804D6810];
+                    x_pos = gm_803DBFD8_extra.x_positions[gm_804D6810];
                     gm_80480D58[0] = HSD_SisLib_803A5ACC(
                         0, 0, 1.45f + x_pos, 0.86f, 0.0f, 0.0f, 100.0f);
                 } else if (j == 1) {
@@ -749,12 +749,12 @@ void fn_801AB200(HSD_GObj* gobj)
                     } else {
                         offset2 = 0.0f;
                     }
-                    x_pos = z_pad.x_positions[gm_804D6810];
+                    x_pos = gm_803DBFD8_extra.x_positions[gm_804D6810];
                     gm_80480D58[1] = HSD_SisLib_803A5ACC(
                         0, 0, offset2 + (3.0f + x_pos + offset1), 0.86f, 0.0f,
                         0.0f, 100.0f);
                 } else {
-                    x_pos = z_pad.x_positions[gm_804D6810];
+                    x_pos = gm_803DBFD8_extra.x_positions[gm_804D6810];
                     text_arr[j] = HSD_SisLib_803A5ACC(
                         0, 0, 1.45f + x_pos, (0.19f * (f32) j) + 0.67f, 0.0f,
                         0.0f, 100.0f);
@@ -941,7 +941,8 @@ void fn_801AB200(HSD_GObj* gobj)
         }
     }
 
-    HSD_JObjSetTranslateX(jobj_pair[0], z_pad.x_positions[gm_804D6810]);
+    HSD_JObjSetTranslateX(jobj_pair[0],
+                          gm_803DBFD8_extra.x_positions[gm_804D6810]);
 
     if (button == 0x1000) {
         if (gm_804D681C == 1) {
@@ -986,8 +987,9 @@ void fn_801AB200(HSD_GObj* gobj)
         gm_804D6820 = 0x3C;
     }
 
-    if (gm_804D6814 >= z_pad.sfx_cues[gm_804D684C].frame) {
-        lbAudioAx_800237A8(z_pad.sfx_cues[gm_804D684C].sfx, 0x7F, 0x40);
+    if (gm_804D6814 >= gm_803DBFD8_extra.sfx_cues[gm_804D684C].frame) {
+        lbAudioAx_800237A8(gm_803DBFD8_extra.sfx_cues[gm_804D684C].sfx, 0x7F,
+                           0x40);
         gm_804D684C += 1;
     }
 }

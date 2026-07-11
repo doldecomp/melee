@@ -2,19 +2,11 @@
 
 #include "gm/types.h"
 
-#define GMRESULT_CAT(a, b) a##b
-#define GMRESULT_LBL(addr) GMRESULT_CAT(lbl_, addr)
-#define GMRESULT_STATIC_OBJECT(type, name) static type name
-#define GMRESULT_STATIC_U32_PAIR(name, a, b) static u32 name[2] = { a, b }
-#define GMRESULT_GLOBAL_U32(name, value) u32 name = value
-#define GMRESULT_STATIC_STR(name, value) static char name[] = value
-#define GMRESULT_STATS_TABLE(name) static StatsEntry name[]
-
-GMRESULT_STATIC_OBJECT(struct ResultsData, GMRESULT_LBL(8046DBE8));
-GMRESULT_STATIC_U32_PAIR(GMRESULT_LBL(804D3F8C), 0x817C817C, 0x817C0000);
-GMRESULT_GLOBAL_U32(GMRESULT_LBL(804D3FA0), 0x817C0000);
-GMRESULT_GLOBAL_U32(GMRESULT_LBL(804D3FA4), 0x817B0000);
-GMRESULT_STATIC_STR(GMRESULT_LBL(804D3FB0), "0");
+static struct ResultsData lbl_8046DBE8;
+static char lbl_804D3F8C[8] = "\x81\x7C\x81\x7C\x81\x7C";
+char lbl_804D3FA0[4] = "\x81\x7C";
+char lbl_804D3FA4[4] = "\x81\x7B";
+static char lbl_804D3FB0[] = "0";
 
 #include "gm_unsplit.h"
 #include "gmresultplayer.h"
@@ -96,7 +88,7 @@ void fn_80174380(void)
 
 bool gm_801743A4(u8 outcome)
 {
-    if (outcome == OUTCOME_LRASTART || outcome == OUTCOME_RETRY) {
+    if (outcome == OUTCOME_NO_CONTEST || outcome == OUTCOME_RETRY) {
         return true;
     }
     return false;
@@ -358,7 +350,7 @@ void fn_80174468(u8 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
             result = ((s32 (*)(u8))(Event) entry->check)(slot);
             if (result < 0) {
                 value_id = HSD_SisLib_803A6B98(text3, const_zero, const_neg30,
-                                               "%s", &lbl_804D3F8C);
+                                               "%s", lbl_804D3F8C);
             } else {
                 value_id = HSD_SisLib_803A6B98(text3, const_zero, const_neg30,
                                                "%d", result);
@@ -442,16 +434,16 @@ void fn_80174468(u8 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
             found2:
                 stat_value = *(s32*) &me->x44C[slot].x0[loop_i * 4 + 0x104];
                 if (stat_value < 0) {
-                    value_id = HSD_SisLib_803A6B98(text3, const_zero,
-                                                   const_neg30, "%s%d",
-                                                   &lbl_804D3FA0, -stat_value);
+                    value_id =
+                        HSD_SisLib_803A6B98(text3, const_zero, const_neg30,
+                                            "%s%d", lbl_804D3FA0, -stat_value);
                 } else {
                     value_id = HSD_SisLib_803A6B98(
                         text3, const_zero, const_neg30, "%d", stat_value);
                 }
             } else {
                 value_id = HSD_SisLib_803A6B98(text3, const_zero, const_neg30,
-                                               "%s", &lbl_804D3FA0);
+                                               "%s", lbl_804D3FA0);
             }
         }
         if (list->mode != 2) {
@@ -566,21 +558,21 @@ s32 fn_80174A60(StatsList* list, s32 slot)
 }
 
 /// Static data for stats lists
-GMRESULT_STATIC_STR(GMRESULT_LBL(804D3F68), "P");
-GMRESULT_STATIC_STR(GMRESULT_LBL(804D3F6C), "%");
-GMRESULT_STATIC_STR(GMRESULT_LBL(804D3F70), "GmRst");
-GMRESULT_STATIC_STR(GMRESULT_LBL(804D3F78), "pnlsce");
-GMRESULT_STATIC_STR(GMRESULT_LBL(804D3F80), "flmsce");
+static char lbl_804D3F68[] = "P";
+static char lbl_804D3F6C[] = "%";
+static char lbl_804D3F70[] = "GmRst";
+static char lbl_804D3F78[] = "pnlsce";
+static char lbl_804D3F80[] = "flmsce";
 
-GMRESULT_STATS_TABLE(GMRESULT_LBL(803D6488)) = {
+static StatsEntry lbl_803D6488[] = {
     { 0x08, { 0 }, NULL, NULL, NULL },
     { 0x08, { 0 }, NULL, NULL, NULL },
-    { -1, { 0 }, fn_8017AE70, fn_8017BB94, GMRESULT_LBL(804D3F68) },
+    { -1, { 0 }, fn_8017AE70, fn_8017BB94, lbl_804D3F68 },
     { -1, { 0 }, fn_8017AED8, fn_8017BC50, NULL },
     { -1, { 0 }, fn_8017AF40, fn_8017BD0C, NULL },
     { -1, { 0 }, fn_8017AFA8, fn_8017BDC8, NULL },
     { 0x09, { 0 }, NULL, NULL, NULL },
-    { -1, { 0 }, fn_8017B07C, fn_8017BB94, GMRESULT_LBL(804D3F6C) },
+    { -1, { 0 }, fn_8017B07C, fn_8017BB94, lbl_804D3F6C },
     { -1, { 0 }, fn_8017B0E4, fn_8017BC50, NULL },
     { -1, { 0 }, fn_8017B14C, fn_8017BD0C, NULL },
     { -1, { 0 }, fn_8017B1B4, fn_8017BDC8, NULL },
@@ -588,7 +580,7 @@ GMRESULT_STATS_TABLE(GMRESULT_LBL(803D6488)) = {
     { 0x0C, { 0 }, NULL, NULL, NULL },
 };
 
-GMRESULT_STATS_TABLE(GMRESULT_LBL(803D6558)) = {
+static StatsEntry lbl_803D6558[] = {
     { 0x0A, { 0 }, NULL, NULL, NULL },
     { 0x0A, { 0 }, NULL, NULL, NULL },
     { 0x0B, { 0 }, fn_8017AE0C, NULL, NULL },
@@ -639,36 +631,33 @@ GMRESULT_STATS_TABLE(GMRESULT_LBL(803D6558)) = {
     { 0x36, { 0 }, NULL, NULL, NULL },
 };
 
-GMRESULT_STATS_TABLE(GMRESULT_LBL(803D6858)) = {
+static StatsEntry lbl_803D6858[] = {
     { 0x08, { 0 }, NULL, NULL, NULL },
     { 0x08, { 0 }, NULL, NULL, NULL },
 };
 
 static StatsList lbl_803D6878[] = {
-    { 0, 0x0D, { 0 }, GMRESULT_LBL(803D6488) },
-    { 1, 0x30, { 0 }, GMRESULT_LBL(803D6558) },
-    { 2, 0x02, { 0 }, GMRESULT_LBL(803D6858) },
+    { 0, 0x0D, { 0 }, lbl_803D6488 },
+    { 1, 0x30, { 0 }, lbl_803D6558 },
+    { 2, 0x02, { 0 }, lbl_803D6858 },
     { 3, 0x00, { 0 }, NULL },
 };
 
-GMRESULT_STATIC_STR(GMRESULT_LBL(803D6898),
-                    "Error : Cannot read archive file (File Name : %s).");
-GMRESULT_STATIC_STR(GMRESULT_LBL(803D68CC), "%d\x81\x46%02d");
-GMRESULT_STATIC_STR(GMRESULT_LBL(803D68D8), "SdRst.usd");
-GMRESULT_STATIC_STR(GMRESULT_LBL(803D68E4), "SIS_ResultData");
-GMRESULT_STATIC_STR(GMRESULT_LBL(803D68F4), "SdRst.dat");
-GMRESULT_STATIC_STR(GMRESULT_LBL(803D6900),
-                    "Error : gobj dont't get (gmResultAddPanelCamera)\n");
-GMRESULT_STATIC_STR(GMRESULT_LBL(803D6934), "gmresult.c");
-GMRESULT_STATIC_STR(GMRESULT_LBL(803D6940),
-                    "Error : cobj dont't get (gmResultAddPanelCamera)\n");
-GMRESULT_STATIC_STR(GMRESULT_LBL(803D6974),
-                    "Error : gobj dont't get (gmResultAddLight)\n");
-GMRESULT_STATIC_STR(GMRESULT_LBL(803D69A0),
-                    "Error : lobj dont't get (gmResultAddLight)\n");
-GMRESULT_STATIC_STR(GMRESULT_LBL(803D69CC),
-                    "Error : gobj dont't get (gmResultAddModel)\n");
-GMRESULT_STATIC_STR(GMRESULT_LBL(803D69F8), "translate");
+static char lbl_803D6898[] =
+    "Error : Cannot read archive file (File Name : %s).";
+static char lbl_803D68CC[] = "%d\x81\x46%02d";
+static char lbl_803D68D8[] = "SdRst.usd";
+static char lbl_803D68E4[] = "SIS_ResultData";
+static char lbl_803D68F4[] = "SdRst.dat";
+static char lbl_803D6900[] =
+    "Error : gobj dont't get (gmResultAddPanelCamera)\n";
+static char lbl_803D6934[] = "gmresult.c";
+static char lbl_803D6940[] =
+    "Error : cobj dont't get (gmResultAddPanelCamera)\n";
+static char lbl_803D6974[] = "Error : gobj dont't get (gmResultAddLight)\n";
+static char lbl_803D69A0[] = "Error : lobj dont't get (gmResultAddLight)\n";
+static char lbl_803D69CC[] = "Error : gobj dont't get (gmResultAddModel)\n";
+static char lbl_803D69F8[] = "translate";
 
 static inline void fn_80174B4C_blk14829(ResultsData* data, s32 slot,
                                         struct ResultsPlayerData** pdata,
@@ -945,17 +934,17 @@ void fn_80175240(s32 slot)
         sp30.g = 0xA0;
         sp30.b = 0xA0;
         temp_r3 =
-            HSD_SisLib_803A6B98(*temp_r31, 0.0f, 0.0f, "%s", &lbl_804D3FA0);
+            HSD_SisLib_803A6B98(*temp_r31, 0.0f, 0.0f, "%s", lbl_804D3FA0);
         HSD_SisLib_803A7548(*temp_r31, temp_r3, 0.11f, 0.08f);
         sp20 = sp30;
         HSD_SisLib_803A74F0(*temp_r31, temp_r3, &sp20);
         temp_r3 = HSD_SisLib_803A6B98(*temp_r31, 0.0f, -temp_f31, "%s",
-                                      &lbl_804D3FA0);
+                                      lbl_804D3FA0);
         HSD_SisLib_803A7548(*temp_r31, temp_r3, 0.11f, 0.08f);
         sp1C = sp30;
         HSD_SisLib_803A74F0(*temp_r31, temp_r3, &sp1C);
         temp_r3 = HSD_SisLib_803A6B98(*temp_r31, 0.0f, -temp_f31 - temp_f30,
-                                      "%s", &lbl_804D3FA0);
+                                      "%s", lbl_804D3FA0);
         HSD_SisLib_803A7548(*temp_r31, temp_r3, 0.11f, 0.08f);
         sp18 = sp30;
         HSD_SisLib_803A74F0(*temp_r31, temp_r3, &sp18);
@@ -983,11 +972,11 @@ void fn_8017556C(s32 slot)
             }
             var_r28 = HSD_SisLib_803A6B98(
                 lbl_8046DBE8.player_data[slot].ko_time, 0.0F, -30.0F, "%s%d",
-                &lbl_804D3FA0, var_r6);
+                lbl_804D3FA0, var_r6);
         } else if (var_r6 > 0) {
             var_r28 = HSD_SisLib_803A6B98(
                 lbl_8046DBE8.player_data[slot].ko_time, 0.0F, -30.0F, "%s%d",
-                &lbl_804D3FA4, var_r6);
+                lbl_804D3FA4, var_r6);
         } else {
             var_r28 =
                 HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time,
@@ -998,7 +987,7 @@ void fn_8017556C(s32 slot)
         sp10.g = 0xA0;
         sp10.b = 0xA0;
         var_r28 = HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time,
-                                      0.0F, -30.0F, "%s", &lbl_804D3FA0);
+                                      0.0F, -30.0F, "%s", lbl_804D3FA0);
     }
     HSD_SisLib_803A7548(lbl_8046DBE8.player_data[slot].ko_time, var_r28, 0.11F,
                         0.08F);
@@ -1040,11 +1029,11 @@ void fn_801756E0(s32 slot)
         }
         var_r28 =
             HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time, 0.0F,
-                                -30.0F, "%s%d", &lbl_804D3FA0, var_r6);
+                                -30.0F, "%s%d", lbl_804D3FA0, var_r6);
     } else if (0 < var_r6) {
         var_r28 =
             HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time, 0.0F,
-                                -30.0F, "%s%d", &lbl_804D3FA4, var_r6);
+                                -30.0F, "%s%d", lbl_804D3FA4, var_r6);
     } else {
         var_r28 = HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time,
                                       0.0F, -30.0F, "%d", var_r6);
@@ -1056,7 +1045,7 @@ grey_out:
     sp10.g = 0xA0;
     sp10.b = 0xA0;
     var_r28 = HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time, 0.0F,
-                                  -30.0F, "%s", &lbl_804D3FA0);
+                                  -30.0F, "%s", lbl_804D3FA0);
 end_common:
     HSD_SisLib_803A7548(lbl_8046DBE8.player_data[slot].ko_time, var_r28, 0.08F,
                         0.08F);
@@ -1202,7 +1191,7 @@ void fn_80175A94(s32 slot, Vec3* position)
             sp14.g = 0xA0;
             sp14.b = 0xA0;
             var_r29 = HSD_SisLib_803A6B98(new_var->player_data[slot].ko_time,
-                                          0.0F, -30.0F, "%s", &lbl_804D3FA0);
+                                          0.0F, -30.0F, "%s", lbl_804D3FA0);
         }
         HSD_SisLib_803A7548(new_var->player_data[slot].ko_time, var_r29, 0.09F,
                             0.08F);
@@ -1902,37 +1891,37 @@ void fn_801771C0(ResultsData* data)
 extern HSD_Archive* lbl_804D65B8;
 
 #undef __FILE__
-#define __FILE__ GMRESULT_LBL(803D6934)
+#define __FILE__ lbl_803D6934
 
 static inline void gmResultLoadArchive(ResultsData* data)
 {
-    lbl_804D65B8 = lbArchive_80016DBC(GMRESULT_LBL(804D3F70), &data->pnlsce,
-                                      GMRESULT_LBL(804D3F78), &data->flmsce,
-                                      GMRESULT_LBL(804D3F80), 0);
+    lbl_804D65B8 =
+        lbArchive_80016DBC(lbl_804D3F70, &data->pnlsce, lbl_804D3F78,
+                           &data->flmsce, lbl_804D3F80, 0);
     if (data->pnlsce == NULL) {
-        (OSReport)(GMRESULT_LBL(803D6898), GMRESULT_LBL(804D3F70));
+        (OSReport)(lbl_803D6898, lbl_804D3F70);
     }
     if (data->flmsce == NULL) {
-        (OSReport)(GMRESULT_LBL(803D6898), GMRESULT_LBL(804D3F70));
+        (OSReport)(lbl_803D6898, lbl_804D3F70);
     }
 }
 
 static inline void gmResultReportLightGObj(void)
 {
-    (OSReport)(GMRESULT_LBL(803D6974));
-    HSD_ASSERTMSG(0x68C, 0, GMRESULT_LBL(804D3FB0));
+    (OSReport)(lbl_803D6974);
+    HSD_ASSERTMSG(0x68C, 0, lbl_804D3FB0);
 }
 
 static inline void gmResultReportLightLObj(void)
 {
-    (OSReport)(GMRESULT_LBL(803D69A0));
-    HSD_ASSERTMSG(0x68F, 0, GMRESULT_LBL(804D3FB0));
+    (OSReport)(lbl_803D69A0);
+    HSD_ASSERTMSG(0x68F, 0, lbl_804D3FB0);
 }
 
 static inline void gmResultReportModelGObj(void)
 {
-    (OSReport)(GMRESULT_LBL(803D69CC));
-    HSD_ASSERTMSG(0x6A2, 0, GMRESULT_LBL(804D3FB0));
+    (OSReport)(lbl_803D69CC);
+    HSD_ASSERTMSG(0x6A2, 0, lbl_804D3FB0);
 }
 
 void gm_80177368_OnEnter(void* arg0_)

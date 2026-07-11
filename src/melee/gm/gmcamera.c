@@ -343,7 +343,7 @@ void gmCamera_801A28AC(void)
         void* temp_r4 = cmSnap_80031618();
         gmCamera_80479BC8.gcus.x1C = temp_r4;
         if (temp_r4) {
-            if (lbSnap_8001DC0C((int) gmCamera_80479BC8.gcus.x1C) != 0) {
+            if (lbSnap_8001DC0C(gmCamera_80479BC8.gcus.x1C) != 0) {
                 gmCamera_80479BC8.gcus.x20 = lbSnap_8001DF20();
                 gmCamera_801A3048(2);
             } else {

@@ -17,8 +17,8 @@
 /* 01D4A4 */ void lbSnap_8001D4A4(int, char*);
 /* 01D5FC */ int lbSnap_8001D5FC(int, int);
 /* 01D7B0 */ int lbSnap_8001D7B0(int, int, int);
-/* 01DA5C */ void lbSnap_8001DA5C(int);
-/* 01DC0C */ int lbSnap_8001DC0C(int);
+/* 01DA5C */ void lbSnap_8001DA5C(u8*);
+/* 01DC0C */ int lbSnap_8001DC0C(u8*);
 /* 01DE8C */ int lbSnap_8001DE8C(void*);
 /* 01DF20 */ int lbSnap_8001DF20(void);
 /* 01DF6C */ int lbSnap_8001DF6C(int);

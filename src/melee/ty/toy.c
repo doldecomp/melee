@@ -1,9 +1,12 @@
+#include "toy.h"
+
 #include "m2c_macros.h"
 #include "math.h"
 #include "math_ppc.h" // IWYU pragma: keep
 #include "placeholder.h"
 #include "platform.h"
 #include "stddef.h"
+#include "toy.h"
 
 #include "toy.static.h"
 
@@ -35,6 +38,7 @@
 #include "MSL/math.h"
 #include "MSL/math_ppc.h"
 #include "sc/types.h"
+#include "ty/toy.h"
 #include "ty/types.h"
 
 #include <dolphin/gx.h>
@@ -62,61 +66,6 @@
 #include <baselib/state.h>
 #include <baselib/tobj.h>
 #include <baselib/wobj.h>
-
-int Toy_GetTrophyTotal(void);
-s32 Toy_803048C0(int);
-bool Toy_80304924(int);
-void Toy_80304988(int);
-bool Toy_803049F4(int);
-void Toy_80304A58(int);
-bool Toy_80304B0C(int);
-int Toy_80304B94(int);
-bool Toy_80304CC8(int);
-int _Toy_80304D30(void);
-s32 Toy_80305058(s32, s32, s32, f32);
-void Toy_SetUnlockState(enum_t, bool);
-void Toy_80305918(signed char, long, long);
-s32 Toy_80305B88(void);
-s32 Toy_80305C44(void);
-float Toy_80305D00(void);
-float Toy_80305DB0(void);
-float Toy_80305EB4(void);
-float Toy_80305FB8(void);
-float Toy_803060BC(int, int);
-s16 Toy_803062BC(s32 trophyId);
-s32 Toy_803063D4(s32, s32, s32);
-void Toy_803067BC(s32, s32);
-void Toy_803068E0(HSD_GObj* gobj, int);
-void Toy_80306930(HSD_GObj*, int);
-void Toy_80306954(HSD_GObj* gobj, int);
-void Toy_80306A48(HSD_JObj*, char*, char*, char*, HSD_Archive*, long);
-HSD_GObjProc* Toy_80306B18(HSD_GObj* gobj, s32 anim_frame, s32 val1, s32 val2);
-void Toy_80306BB8(HSD_GObj* gobj);
-void Toy_RemoveUserData(void* ptr);
-void Toy_80306D14(void);
-void Toy_80306D70(s32 arg0);
-HSD_LObj* Toy_LoadLObjList(LightList**, s32*);
-void Toy_80307470(s32);
-void Toy_80307E84(HSD_GObj* gobj);
-char* Toy_8030813C(s16 arg0, enum_t unused);
-void Toy_80308250(u8* arg0, s32 arg1, s32 arg2);
-s32 Toy_803082F8(s16 idx);
-void Toy_80308328(s32 arg0);
-s32 Toy_80308354(s16 idx);
-void Toy_803083D8(HSD_JObj* jobj, s32 arg1);
-HSD_GObj* Toy_803087F4(UNK_T);
-void Toy_803102D0(void);
-void Toy_80310324(void);
-void Toy_80310660(s32 arg0);
-void Toy_80311680(void);
-void Toy_80311960(void);
-void Toy_OnEnter_80311AB0(UNK_T);
-void Toy_OnFrame_80312018(void);
-void Toy_OnInit_803122D0(void);
-void Toy_8031234C(s32);
-void Toy_803124BC(void);
-void Toy_8031263C(void);
-void Toy_803127D4(void);
 
 int Toy_GetTrophyTotal(void)
 {
@@ -2125,13 +2074,11 @@ void Toy_80307E84(HSD_GObj* gobj)
 void _Toy_80307F64(s32 arg0, s32 arg1)
 {
     s8 idx;
-    char* strings;
     Toy26B8* base;
     ToyAnimState* state;
     HSD_JObj* jobj1;
     HSD_JObj* jobj2;
 
-    strings = _Toy_str_TyLight_dat;
     base = (Toy26B8*) &_Toy_804A26B8;
     state = &base->anim;
     idx = base->anim.x0E;
@@ -2146,15 +2093,23 @@ void _Toy_80307F64(s32 arg0, s32 arg1)
                 state->x11 = (s8) arg0;
                 state->x10 = (s8) arg0;
                 if (arg0 == 1) {
-                    Toy_80306A48(jobj1, 0, strings + 0x438, 0,
-                                 Toy_sbss_804D6EC8, 0);
-                    Toy_80306A48(jobj2, 0, strings + 0x438, 0,
-                                 Toy_sbss_804D6EC8, 0);
+                    Toy_80306A48(
+                        jobj1, 0,
+                        "ToyStandModel_TopN_ACTION_action1_matanim_joint", 0,
+                        Toy_sbss_804D6EC8, 0);
+                    Toy_80306A48(
+                        jobj2, 0,
+                        "ToyStandModel_TopN_ACTION_action1_matanim_joint", 0,
+                        Toy_sbss_804D6EC8, 0);
                 } else {
-                    Toy_80306A48(jobj1, 0, strings + 0x4C8, 0,
-                                 Toy_sbss_804D6EC8, 0);
-                    Toy_80306A48(jobj2, 0, strings + 0x4C8, 0,
-                                 Toy_sbss_804D6EC8, 0);
+                    Toy_80306A48(
+                        jobj1, 0,
+                        "ToyStandModel_TopN_ACTION_action2_matanim_joint", 0,
+                        Toy_sbss_804D6EC8, 0);
+                    Toy_80306A48(
+                        jobj2, 0,
+                        "ToyStandModel_TopN_ACTION_action2_matanim_joint", 0,
+                        Toy_sbss_804D6EC8, 0);
                 }
                 state->x0F = 0xA;
                 HSD_GObj_SetupProc(state->gobj, Toy_80307E84, 0);
@@ -2162,15 +2117,21 @@ void _Toy_80307F64(s32 arg0, s32 arg1)
             }
         } else {
             if (arg0 == 1) {
-                Toy_80306A48(jobj1, 0, strings + 0x438, 0, Toy_sbss_804D6EC8,
-                             10);
-                Toy_80306A48(jobj2, 0, strings + 0x438, 0, Toy_sbss_804D6EC8,
-                             10);
+                Toy_80306A48(jobj1, 0,
+                             "ToyStandModel_TopN_ACTION_action1_matanim_joint",
+                             0, Toy_sbss_804D6EC8, 10);
+                Toy_80306A48(jobj2, 0,
+                             "ToyStandModel_TopN_ACTION_action1_matanim_joint",
+                             0, Toy_sbss_804D6EC8, 10);
             } else {
-                Toy_80306A48(jobj1, 0, strings + 0x4C8, 0, Toy_sbss_804D6EC8,
-                             10);
-                Toy_80306A48(jobj2, 0, strings + 0x4C8, 0, Toy_sbss_804D6EC8,
-                             10);
+                Toy_80306A48(
+                    jobj1, 0,
+                    "ToyStandModel_TopN_ACTION_action1_shapeanim_joint", 0,
+                    Toy_sbss_804D6EC8, 10);
+                Toy_80306A48(
+                    jobj2, 0,
+                    "ToyStandModel_TopN_ACTION_action1_shapeanim_joint", 0,
+                    Toy_sbss_804D6EC8, 10);
             }
             HSD_JObjRemoveAnimAll(jobj1);
             HSD_JObjRemoveAnimAll(jobj2);
@@ -2683,7 +2644,7 @@ void _Toy_80308F04(HSD_CObj* cobj)
 
             _Toy_80308DC8(cobj);
 
-            _Toy_sbss_804D6E80 = _Toy_sbss_804D6E80 + 0.0013187003F;
+            _Toy_sbss_804D6E80 += 0.0013187003F;
             if (top != _Toy_sbss_804D6E80) {
                 f32 val = _Toy_sbss_804D6E80;
                 if (val > 0.049584F) {
@@ -2692,7 +2653,7 @@ void _Toy_80308F04(HSD_CObj* cobj)
                 HSD_CObjSetTop(cobj, val);
             }
 
-            _Toy_sbss_804D6E84 = _Toy_sbss_804D6E84 + 0.00008119978F;
+            _Toy_sbss_804D6E84 += 0.00008119978F;
             if (bottom != _Toy_sbss_804D6E84) {
                 f32 val = _Toy_sbss_804D6E84;
                 if (val > -0.035585F) {
@@ -2701,7 +2662,7 @@ void _Toy_80308F04(HSD_CObj* cobj)
                 HSD_CObjSetBottom(cobj, val);
             }
 
-            _Toy_sbss_804D6E88 = _Toy_sbss_804D6E88 + 0.0032531999F;
+            _Toy_sbss_804D6E88 += 0.0032531999F;
             if (right != _Toy_sbss_804D6E88) {
                 f32 val = _Toy_sbss_804D6E88;
                 if (val > 0.076839F) {
@@ -2710,7 +2671,7 @@ void _Toy_80308F04(HSD_CObj* cobj)
                 HSD_CObjSetRight(cobj, val);
             }
 
-            _Toy_sbss_804D6E8C = _Toy_sbss_804D6E8C + 0.0017468001F;
+            _Toy_sbss_804D6E8C += 0.0017468001F;
             if (left != _Toy_sbss_804D6E8C) {
                 HSD_CObjSetLeft(cobj, _Toy_sbss_804D6E8C);
             }

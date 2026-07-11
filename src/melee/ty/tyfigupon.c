@@ -1188,8 +1188,7 @@ void _tyFigupon_80316C24(HSD_GObj* arg0)
     }
 }
 
-/* 3B8974 */ static TyFiguponDigitInit const _tyFigupon_803B8974 = { { 0, 0, 0,
-                                                                       0 } };
+/* 3B8974 */ static DigitInit const _tyFigupon_803B8974 = { 0, 0, 0, 0 };
 /* 3FEB88 */ static u16 _tyFigupon_803FEB88[] = {
     4, 2, 3, 5, 6, 7, 8, 9, 13, 10, 11, 12, 14,
 };
@@ -1221,7 +1220,9 @@ void _tyFigupon_8031753C(void)
                                               "ToyFigurePonPanel_Top_joint");
     if (panel_joint != NULL) {
         s32 total;
-        TyFiguponDigitInit digits_s;
+        DigitInit digits_s;
+        s32* digit_ptr;
+        s32* digit_iter;
         ef4->x00 = (u32) GObj_Create(9, 9, 0);
         jobj = HSD_JObjLoadJoint(panel_joint);
         {
@@ -1257,23 +1258,25 @@ void _tyFigupon_8031753C(void)
         HSD_JObjAnimAll(jobj);
 
         digits_s = _tyFigupon_803B8974;
-        count = 0;
         total = (s32) (gm_801623D8() / 10u);
         joint = HSD_ArchiveGetPublicAddress(ef4->archive,
                                             "ToyFigurePonNm_Top_joint");
+        digit_ptr = &digits_s.x0;
+        digit_iter = digit_ptr;
         do {
-            digits_s.digits[count++] = total % 10;
+            *digit_iter = total % 10;
             total /= 10;
+            digit_iter++;
         } while (total > 0);
 
-        for (i = 0; i < 3; i++) {
+        for (i = 0; i < 3; i++, digit_ptr++) {
             jobj = HSD_JObjLoadJoint(joint);
             HSD_JObjAddChild(ef4->jobjs[3 + i], jobj);
             _tyFigupon_80314AA8(jobj, "ToyFigurePonNm_Top_animjoint",
                                 "ToyFigurePonNm_Top_matanim_joint",
                                 "ToyFigurePonNm_Top_shapeanim_joint");
-            if (digits_s.digits[i] != 0) {
-                HSD_JObjReqAnimAll(jobj, (f32) (50 - digits_s.digits[i] * 5));
+            if (*digit_ptr != 0) {
+                HSD_JObjReqAnimAll(jobj, (f32) (50 - *digit_ptr * 5));
             } else {
                 HSD_JObjReqAnimAll(jobj, 0.0f);
             }

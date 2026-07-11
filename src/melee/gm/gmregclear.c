@@ -3,6 +3,7 @@
 #include "platform.h"
 
 #include "baselib/forward.h"
+#include "gm/forward.h"
 
 #include <math_ppc.h>
 #include <dolphin/gx.h>
@@ -48,8 +49,7 @@
 #include <melee/gm/gmtoulib.h>
 #include <melee/gm/types.h>
 #include <melee/gr/ground.h>
-int grPushOn_80219230(int);
-void grPushOn_80219204(s16, int*, int*);
+#include <melee/gr/grpushon.h>
 #include <melee/gr/stage.h>
 #include <melee/if/ifcoget.h>
 #include <melee/if/ifnametag.h>
@@ -64,6 +64,7 @@ void grPushOn_80219204(s16, int*, int*);
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lbcardnew.h>
 #include <melee/lb/lblanguage.h>
+#include <melee/lb/lbspdisplay.h>
 #include <melee/lb/lbtime.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/pl/player.h>
@@ -167,17 +168,6 @@ typedef struct AllstarStageEntry {
     /* 0x14 */ u8 pad_14[0x6];
 } AllstarStageEntry;
 STATIC_ASSERT(sizeof(AllstarStageEntry) == 0x1A);
-
-HSD_LObj* lb_80011AC4(LightList**);
-int lb_80011E24(HSD_JObj*, HSD_JObj**, ...);
-int lb_8001204C(HSD_JObj*, HSD_JObj**, u16*, int);
-HSD_ImageDesc* lb_800121FC(HSD_ImageDesc* image_desc, int width, int height,
-                           GXTexFmt format, s16 entry_num);
-void lb_800122C8(HSD_ImageDesc* image_desc, u16 origx, u16 origy, bool clear);
-void lb_800138CC(HSD_GObj* gobj, HSD_GObjEvent arg1);
-void lb_800138D8(HSD_GObj* gobj, s8 arg1);
-HSD_GObj* lb_800138EC(s32 arg0, GObj_RenderFunc render_func, u32 arg2, s8 arg3,
-                      f32 x, f32 y, f32 w, f32 h);
 
 extern AdventureStageEntry lbl_803D7AC0[110];
 extern AllstarStageEntry lbl_803D85F0[55];
@@ -293,7 +283,7 @@ void fn_8017C1A4(HSD_GObj* unused)
     case 0:
         if (tmp->x8 == 0) {
             temp_r3_2 = gm_8016AE38();
-            temp_r3_2->x24C8.x2_4 = false;
+            temp_r3_2->x24C8.disable_pausing = false;
             temp_r3_2->hud_enabled = 0;
             lbAudioAx_800237A8(0x81650, 0x7F, 0x40);
             ftLib_80086824();
@@ -767,7 +757,7 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
         arg1->x0.xC.xC = 5;
         switch ((s32) arg1->x0.x9) {
         case 1:
-            arg0->rules.x3C = gm_80165290;
+            arg0->rules.on_pause_override = gm_80165290;
             arg0->rules.x9 = 1;
             arg0->rules.x3_1 = 0;
             arg0->players[0].xC_b1 = 0;
@@ -1019,7 +1009,7 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
         arg0->rules.x1_3 = 1;
         arg0->rules.x1_4 = 1;
         arg0->rules.x0_3 = 3;
-        arg0->rules.x2_4 = 1;
+        arg0->rules.disable_pausing = 1;
         arg0->rules.x7 = 0;
         arg0->rules.x44 = (void (*)(void)) fn_8017C71C;
         arg1->x0.xC.xC = 6;
@@ -1533,9 +1523,9 @@ u8 gm_8017E76C(u8 difficulty, u8 stage_slot, u8 arg2)
     return lbl_803D7AC0[stage_slot + difficulty * 5].pad_6[0x10 + (arg2 * 3)];
 }
 
-void gm_8017E7A0(u8 arg0)
+void gm_8017E7A0(u8 matchResult)
 {
-    if (arg0 == 1) {
+    if (matchResult == OUTCOME_TIMEOUT) {
         Player_LoseStock(0);
         ifStatus_802F6948(0);
         ifStatus_802F6E3C(0);
@@ -1547,7 +1537,7 @@ bool gm_8017E7E0(void)
     return lbl_80472C30.x7C == 0x14;
 }
 
-void gm_8017E7FC(u8 arg0)
+void gm_8017E7FC(u8 matchResult)
 {
     UnkAdventureData* r31 = &lbl_80472C30;
     bool cond;
@@ -1993,7 +1983,7 @@ s32 fn_8017F47C(HSD_Text** arg0, int arg1)
 
         if (p[8] != val) {
             if (val < 0) {
-                HSD_SisLib_803A70A0(*arg0, i, "%s%d", "\x81\x7c", -val);
+                HSD_SisLib_803A70A0(*arg0, i, "%s%d", "－", -val);
             } else {
                 HSD_SisLib_803A70A0(*arg0, i, "%d", val);
             }
@@ -2119,7 +2109,7 @@ void fn_8017F608(void* arg0)
                 p->xD4 = p->xD0;
             } else if (p->xD8 < 0x3C) {
                 p->x74->default_kerning = 1;
-                str = HSD_SisLib_803A6B98(p->x74, 0.0f, 0.0f, "%d\x82w%d",
+                str = HSD_SisLib_803A6B98(p->x74, 0.0f, 0.0f, "%dＸ%d",
                                           p->xD0 / p->x108, p->x108);
                 HSD_SisLib_803A7548(p->x74, str, 0.089999996f, 0.065f);
             } else {
@@ -2646,7 +2636,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     case 3:
         temp = gm_8016AE38();
         state->x118 = 1;
-        if ((u8) temp->match_result == 6) {
+        if ((u8) temp->match_result == OUTCOME_UNK_1P_BONUS_STAGE_END) {
             grPushOn_80219204(Ground_801C1DD4(), (int*) &sp5C, (int*) &sp58);
             special_score = sp5C;
             coins = (u16) sp58;
@@ -2736,8 +2726,8 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
 
     Camera_8002F7AC(0);
     lb_800121FC(&state->x30, 0x280, 0x1E0, GX_TF_RGB5A3, 0);
-    state->x2C =
-        lb_800138EC((s32) &state->x30, NULL, 2U, 0x32, 0.0f, 0.0f, 1.0f, 1.0f);
+    state->x2C = cam_gobj;
+    lb_800138EC((s32) &state->x30, NULL, 2U, 0x32, 0.0f, 0.0f, 1.0f, 1.0f);
     lb_800138D8(state->x2C, 1);
     lb_800138CC(state->x2C, fn_8017FE54);
 
@@ -4036,7 +4026,7 @@ void fn_80182F40(HSD_GObj* unused)
         break;
     case 2:
         if (gm_801A4BA8() == 0x370 || Player_800368F8(gm_801BF6F8()) == 0) {
-            Camera_8002F474();
+            Camera_SetModeToStandard();
             for (i = 0; i < 4; i++) {
                 Player_SetPlayerAndEntityCpuLevel(i, 9);
                 Player_SetMoreFlagsBit4(i, 0);

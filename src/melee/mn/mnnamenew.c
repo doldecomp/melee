@@ -580,7 +580,7 @@ s32 WriteCharactersForNameAtIndex(u8 arg0, s32 arg1)
     nametag = GetPersistentNameData((s32) arg0);
     CopyCurrentNameToNametag(nametag);
     ret = GetRumbleSettingOfPort(arg1);
-    nametag->x1A1 = ret;
+    nametag->rumble_toggle = ret;
     return ret;
 }
 
@@ -1146,7 +1146,6 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
 }
 #pragma pop
 
-static u8 mnNameNew_803EE35C_pad[0x4F4] = { 0 };
 static char mnNameNew_803EE35C[] = "Can't get user_data.\n";
 static char mnNameNew_803EE374[] = "mnnamenew.c";
 static char mnNameNew_803EE380[] = "user_data";

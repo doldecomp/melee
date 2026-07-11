@@ -803,12 +803,10 @@ void gm_80160B40(HSD_Text* text, u8 ckind, u8 arg2)
     str = arg2 ? fn_801609E0(tmp_ckind) : gm_80160980(tmp_ckind);
     if (lbLang_IsSavedLanguageUS()) {
         bool tmp = arg2 && lbl_803D50E4[tmp_ckind] != NULL;
-        var_f31 = tmp ? lbl_803B75F8[tmp_ckind + 0x63]
-                      : lbl_803B75F8[tmp_ckind + 0x21];
+        var_f31 = tmp ? lbl_803B7784[tmp_ckind] : lbl_803B767C[tmp_ckind];
     } else {
         bool tmp = arg2 && lbl_803D5060[tmp_ckind] != NULL;
-        var_f31 =
-            tmp ? lbl_803B75F8[tmp_ckind + 0x42] : lbl_803B75F8[tmp_ckind];
+        var_f31 = tmp ? lbl_803B7700[tmp_ckind] : lbl_803B75F8[tmp_ckind];
     }
     HSD_SisLib_803A6B98(tmp_text, 0.0F, 0.0F, str);
     tmp_text->font_size.x *= var_f31;
@@ -2607,20 +2605,20 @@ bool gm_80165084(void)
 
 void fn_801650E8(void)
 {
-    Ground_801C5800();
+    Ground_EnableMatchCamera();
 }
 
-void fn_80165108(int slot, int arg1)
+void gm_EnablePlayerPauseCamera(int playerSlot, int playerId)
 {
-    if (slot == -1) {
-        Camera_8002F73C(0xB, 5);
+    if (playerSlot == -1) {
+        Camera_SetUpPauseCameraWithDefaultZoom(0xB, 5);
         return;
     }
-    if (((Player_GetPlayerSlotType(slot) == Gm_PKind_Human) ||
-         (Player_GetPlayerSlotType(slot) == Gm_PKind_Cpu)) &&
-        (Player_GetEntity(slot) != NULL))
+    if (((Player_GetPlayerSlotType(playerSlot) == Gm_PKind_Human) ||
+         (Player_GetPlayerSlotType(playerSlot) == Gm_PKind_Cpu)) &&
+        (Player_GetEntity(playerSlot) != NULL))
     {
-        Camera_8002F73C(slot, arg1);
+        Camera_SetUpPauseCameraWithDefaultZoom(playerSlot, playerId);
     }
 }
 
@@ -2651,7 +2649,7 @@ void gm_80165268(int unused)
 
 void gm_80165290(int x)
 {
-    Camera_8002F8F4();
+    Camera_SetModeToFixed();
 }
 
 void fn_801652B0(s32 arg0, s32 arg1)
@@ -3620,7 +3618,7 @@ bool gm_801677F8(int port, int arg1)
         if (GetRumbleSettingOfPort(port) != 0) {
             result = true;
         }
-    } else if (GetPersistentNameData(arg1)->x1A1 != 0) {
+    } else if (GetPersistentNameData(arg1)->rumble_toggle != 0) {
         result = true;
     }
     return result;
@@ -3843,9 +3841,9 @@ void gm_80167BC8(VsModeData* vs_data)
     }
 
     if (rules->pause != 0) {
-        vs_data->data.rules.x2_4 = 0;
+        vs_data->data.rules.disable_pausing = 0;
     } else {
-        vs_data->data.rules.x2_4 = 1;
+        vs_data->data.rules.disable_pausing = 1;
     }
     if ((rules->score_display != 0) && (rules->mode == 0)) {
         vs_data->data.rules.x3_0 = 1;

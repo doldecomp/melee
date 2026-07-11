@@ -1231,12 +1231,12 @@ void ifStatus_802F7034(UNK_T arg0)
         return;
     }
     mr = big_thing->match_result;
-    if (mr == 1) {
+    if (mr == OUTCOME_TIMEOUT) {
         ifStatus_802F6EA4(0, a, b, c, arg0, NULL);
         return;
     }
     if (big_thing->x24C8.x5_1) {
-        if (mr == 6) {
+        if (mr == OUTCOME_UNK_1P_BONUS_STAGE_END) {
             ifStatus_802F6EA4(7, a, b, c, arg0, NULL);
             return;
         }

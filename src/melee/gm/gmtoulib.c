@@ -1413,7 +1413,7 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
     }
 }
 
-static GXColor const lbl_804DA698 = { 0xFF, 0xFF, 0x00, 0xFF };
+static GXColor const col = { 0xFF, 0xFF, 0x00, 0xFF };
 
 static inline int fn_8018DC18_inline0(BracketEntry* data)
 {
@@ -1432,7 +1432,7 @@ void fn_8018DC18(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
     GXColor c0, c1, c2, c3, c4, c5, c6, c7;
     BracketEntry* data = (BracketEntry*) arg0;
 
-    c0 = lbl_804DA698;
+    c0 = col;
     thickness = data->x1C;
     c1 = c0;
     {
@@ -2576,9 +2576,9 @@ void gm_801905F0(StartMeleeData* arg0)
         break;
     }
     if (rules->pause != 0) {
-        arg0->rules.x2_4 = false;
+        arg0->rules.disable_pausing = false;
     } else {
-        arg0->rules.x2_4 = true;
+        arg0->rules.disable_pausing = true;
     }
     if (rules->score_display != 0 && !arg0->rules.x0_0) {
         arg0->rules.x3_0 = true;

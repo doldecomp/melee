@@ -395,17 +395,17 @@ void mn_8022FB88(u8 arg0, void* arg1)
     struct mn_8022FB88_arg1_t* data = arg1;
     u8* sp14;
     s32 sp10;
-    HSD_JObj* temp_r29;
+    u8* var_r29;
     HSD_JObj* temp_r29_2;
     HSD_JObj* temp_r29_3;
     int new_var;
     HSD_JObj* temp_r31;
     HSD_JObj* temp_r28;
-    s32 var_r27;
+    HSD_JObj* temp_r29;
     s32 var_r28;
-    u8* var_r29;
     u8* var_r29_2;
     HSD_JObj** temp_r27_2;
+    s32 var_r27;
 
     sp14 = mn_804DBDFC;
     if (arg0 == 0) {

@@ -3192,12 +3192,12 @@ f32 Ground_801C57F0(void)
     return stage_info.x6E0;
 }
 
-void Ground_801C5800(void)
+void Ground_EnableMatchCamera(void)
 {
     if (stage_info.param->x4C_fixed_cam) {
-        Camera_8002F8F4();
+        Camera_SetModeToFixed();
     } else {
-        Camera_8002F474();
+        Camera_SetModeToStandard();
     }
 }
 

@@ -49,7 +49,6 @@
 
 /* 4DA734 */ extern f32 lbl_804DA734; // 666.0f
 /* 4DA70C */ extern f32 lbl_804DA70C; // 87.0f
-/* 4DA6E8 */ extern f32 lbl_804DA6E8; // 0.0f
 
 typedef void (*lbl_803D9FD8_fn)(s32*, u32, u32);
 
@@ -1407,21 +1406,19 @@ void fn_801935B8(void)
     TmData* tm;
     HSD_GObj* gobj;
     HSD_Fog* fog;
-    u8* state;
-    u8* table;
+    struct Lbl804799B8_t* state;
+    TmSettingTable* table;
     s32 i;
 
-    state = &lbl_804799B8.x0;
-    table = lbl_803D9F80.pad_0;
+    state = &lbl_804799B8;
+    table = &lbl_803D9F80;
     tm = gm_8018F634();
     fn_8018FBE0(0, 0, 0, 5, 5, 0x3e7, 3);
     fn_801902F0((s32) fn_80190174(lbl_804D664C->cameras->desc));
     fn_80193308();
     fn_8019027C(lbl_804D664C->lights);
-    fn_8019035C(0, lbl_804D664C->models[5], 0, 0x1A, 2, 1, fn_801910E0,
-                lbl_804DA6E8);
-    fn_8019035C(0, lbl_804D664C->models[4], 0, 0x1A, 2, 1, fn_80191154,
-                lbl_804DA6E8);
+    fn_8019035C(0, lbl_804D664C->models[5], 0, 0x1A, 2, 1, fn_801910E0, 0.0f);
+    fn_8019035C(0, lbl_804D664C->models[4], 0, 0x1A, 2, 1, fn_80191154, 0.0f);
     fn_80192BB0();
     fn_80192E6C();
     gobj = GObj_Create(0xE, 0x1A, 0);
@@ -1430,19 +1427,19 @@ void fn_801935B8(void)
     GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
 
     lbl_804D6658 = 0;
-    *(u16*) (state + 0xC) = 0;
-    state[0xE] = 0;
-    state[0xF] = 0;
-    state[0x1C] = 0;
+    state->xC_counter = 0;
+    state->xE = 0;
+    state->xF = 0;
+    state->pad2[12] = 0;
 
     for (i = 0; i < 6; i++) {
-        state[0x10 + i] = 0xa;
-        state[0x16 + i] = 0;
-        (&tm->match_type)[i] = table[0x40 + i * 2];
+        state->pad2[i] = 0xa;
+        state->pad2[i + 6] = 0;
+        (&tm->match_type)[i] = table->min[i][0];
     }
 
-    state[1] = 0;
-    state[0] = gmMainLib_8015CC34()->handicap;
+    state->x1 = 0;
+    state->x0 = gmMainLib_8015CC34()->handicap;
 
     tm->x32 = 0;
     for (i = 0; i < 25; i++) {
@@ -2288,7 +2285,7 @@ typedef struct TmData_80194F30 {
 /// Handles tournament settings menu input (entrant configuration).
 void fn_80194F30(s32* state_ptr, u32 buttons, u32 trigger)
 {
-    u8* state = &lbl_804799B8.x0;
+    struct Lbl804799B8_t* state = &lbl_804799B8;
     TmData* tm = (TmData*) state_ptr;
     TmData_80194F30* tm_alt = (TmData_80194F30*) state_ptr;
     s32 idx;
@@ -2309,7 +2306,7 @@ void fn_80194F30(s32* state_ptr, u32 buttons, u32 trigger)
         case 16:
             lbAudioAx_80024030(2);
             *state_ptr = 0xC;
-            state[1] = 0;
+            state->x1 = 0;
             break;
         }
     } else if (buttons & 0x80002) {
@@ -2321,65 +2318,61 @@ void fn_80194F30(s32* state_ptr, u32 buttons, u32 trigger)
             *state_ptr = 0xC;
             break;
         case 12:
-            if (state[0] != 0) {
+            if (state->x0 != 0) {
                 lbAudioAx_80024030(2);
                 *state_ptr = 0x10;
             }
             break;
         }
     } else if (buttons & 0x10008) {
-        if (*state_ptr != 0x10 || state[1] == 0) {
-            u8* pos_ptr = state + 2;
-            if (state[2] != 0) {
+        if (*state_ptr != 0x10 || state->x1 == 0) {
+            u8* pos_ptr = &state->x2;
+            if (state->x2 != 0) {
                 lbAudioAx_80024030(2);
                 *pos_ptr -= 1;
                 fn_80190ABC(5);
             } else {
-                pos_ptr = state + 3;
-                if (state[3] != 0) {
+                pos_ptr = &state->x3;
+                if (state->x3 != 0) {
                     lbAudioAx_80024030(2);
                     *pos_ptr -= 1;
-                    state[4] -= 1;
+                    state->x4 -= 1;
                     fn_80190ABC(5);
                     fn_80190ABC(6);
                 }
             }
         } else {
-            u8* volatile x_ptr = state + 2;
-            u8* y_ptr = state + 3;
-            idx = state[2] + state[3];
+            idx = state->x2 + state->x3;
             if (tm->x37[idx].x2 > 1) {
                 lbAudioAx_80024030(2);
-                idx = *x_ptr + *y_ptr;
+                idx = state->x2 + state->x3;
                 tm->x37[idx].x2 -= 1;
             }
         }
     } else if (buttons & 0x20004) {
-        if (*state_ptr != 0x10 || state[1] == 0) {
-            u8* pos_ptr = state + 2;
-            if (state[2] < 0xB) {
-                if (state[2] + state[3] < tm->x2E - 1) {
+        if (*state_ptr != 0x10 || state->x1 == 0) {
+            u8* pos_ptr = &state->x2;
+            if (state->x2 < 0xB) {
+                if (state->x2 + state->x3 < tm->x2E - 1) {
                     lbAudioAx_80024030(2);
                     *pos_ptr += 1;
                     fn_80190ABC(5);
                 }
             } else {
-                pos_ptr = state + 3;
-                if (state[2] + state[3] < tm->x2E - 1) {
+                pos_ptr = &state->x3;
+                if (state->x2 + state->x3 < tm->x2E - 1) {
                     lbAudioAx_80024030(2);
                     *pos_ptr += 1;
-                    state[4] += 1;
+                    state->x4 += 1;
                     fn_80190ABC(5);
                     fn_80190ABC(6);
                 }
             }
         } else {
-            u8* x_ptr = state + 2;
-            u8* y_ptr = state + 3;
-            idx = state[2] + state[3];
+            idx = state->x2 + state->x3;
             if (tm->x37[idx].x2 < 9) {
                 lbAudioAx_80024030(2);
-                idx = *x_ptr + *y_ptr;
+                idx = state->x2 + state->x3;
                 tm->x37[idx].x2 += 1;
             }
         }
@@ -2390,31 +2383,31 @@ void fn_80194F30(s32* state_ptr, u32 buttons, u32 trigger)
         case 12:
         case 10:
             lbAudioAx_80024030(1);
-            idx = state[2] + state[3];
+            idx = state->x2 + state->x3;
             tm->x37[idx].x4 = tm->x37[idx].x3;
-            idx = state[2] + state[3];
+            idx = state->x2 + state->x3;
             tm->x37[idx].x8 = tm->x37[idx].x7;
-            idx = state[2] + state[3];
+            idx = state->x2 + state->x3;
             tm_alt->x37[idx].xB = tm->x37[idx].x9;
-            idx = state[2] + state[3];
+            idx = state->x2 + state->x3;
             tm->x37[idx].x6 = tm->x37[idx].x5;
             *state_ptr += 1;
             return;
         case 16:
-            if (state[0] != 1) {
-                if (state[1] != 1) {
+            if (state->x0 != 1) {
+                if (state->x1 != 1) {
                     lbAudioAx_80024030(1);
                 }
-                state[1] = 1;
+                state->x1 = 1;
                 return;
             }
             break;
         }
     } else if (trigger & 0x200) {
         lbAudioAx_80024030(0);
-        if (*state_ptr != 0x10 || state[1] == 0) {
+        if (*state_ptr != 0x10 || state->x1 == 0) {
             *state_ptr = 6;
-            state[0xE] = 0;
+            state->xE = 0;
             if (gm_804771C4.match_type == 0) {
                 TmData* tmdata = gm_8018F634();
                 fn_8018EC7C();
@@ -2423,7 +2416,7 @@ void fn_80194F30(s32* state_ptr, u32 buttons, u32 trigger)
                 fn_80190520(-278.0f, 255.0f, 0.0f);
             }
         } else {
-            state[1] = 0;
+            state->x1 = 0;
         }
     }
 }

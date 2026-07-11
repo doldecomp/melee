@@ -1709,31 +1709,31 @@ void Camera_8002BD88(f32 x, f32 y)
     up = cm_WorldUp;
     pos = cm_80452C68.pause_eye_offset;
     forward = pos;
-    forward.x *= *(f32*) &cm_804D7E10;
-    forward.y *= *(f32*) &cm_804D7E10;
-    forward.z *= *(f32*) &cm_804D7E10;
+    forward.x *= -1.0F;
+    forward.y *= -1.0F;
+    forward.z *= -1.0F;
     view_dir = lbVector_Normalize(&forward);
 
-    if (view_dir < *(f32*) &cm_804D7E04) {
-        forward.y = *(f32*) &cm_804D7E14;
-        forward.x = *(f32*) &cm_804D7E14;
-        forward.z = *(f32*) &cm_804D7E04;
-        cm_80452C68.pause_eye_distance = *(f32*) &cm_804D7E4C;
+    if (view_dir < 1.0F) {
+        forward.y = 0.0F;
+        forward.x = 0.0F;
+        forward.z = 1.0F;
+        cm_80452C68.pause_eye_distance = 10.0F;
     }
 
     clamp_result = Camera_8002BC78(&forward, &up, &right);
     if (clamp_result == 1) {
-        scale = *(f32*) &cm_804D7E14;
+        scale = 0.0F;
         if (y < scale) {
             y = scale;
         }
-        x = *(volatile f32*) &cm_804D7E14;
+        x = 0.0F;
     } else if (clamp_result == -1) {
-        scale = *(f32*) &cm_804D7E14;
+        scale = 0.0F;
         if (y > scale) {
             y = scale;
         }
-        x = *(volatile f32*) &cm_804D7E14;
+        x = 0.0F;
     }
 
     OrthonormalizeBasis(&forward, &up, &right);
@@ -1743,7 +1743,7 @@ void Camera_8002BD88(f32 x, f32 y)
     // lbVector_Normalize(&up);
     cm_80452C68.pause_up = up;
 
-    if (*(f32*) &cm_804D7E14 != y) {
+    if (y != 0.0F) {
         scale = y * Camera_8002BD88_GET_SCALE(view_dir);
         up.x *= scale;
         up.y *= scale;
@@ -1751,7 +1751,7 @@ void Camera_8002BD88(f32 x, f32 y)
         lbVector_Add(&pos, &up);
     }
 
-    if (*(f32*) &cm_804D7E14 != x) {
+    if (x != 0.0F) {
         scale = x * Camera_8002BD88_GET_SCALE(view_dir);
         right.x *= -scale;
         right.y *= -scale;
@@ -1835,8 +1835,7 @@ void Camera_8002C1A8(void)
 
     Camera_8002B694(&inputs, cm_80452C68.x305);
 
-    zoom_dir = x_move = y_move = substick_x_val = substick_y_val =
-        *(volatile const f32*) &cm_804D7E14;
+    zoom_dir = x_move = y_move = substick_x_val = substick_y_val = 0.0f;
     stick_x = inputs.stick_x;
     stick_y = inputs.stick_y;
     substick_x = inputs.substick_x;
@@ -1854,53 +1853,48 @@ void Camera_8002C1A8(void)
         }
 
         if ((x10_btns & PAD_BUTTON_UP) != 0) {
-            y_move = *(volatile const f32*) &cm_804D7E04;
+            y_move = 1.0f;
         } else if ((x10_btns & PAD_BUTTON_DOWN) != 0) {
-            y_move = *(volatile const f32*) &cm_804D7E10;
+            y_move = -1.0f;
         }
 
         if ((x10_btns & PAD_BUTTON_LEFT) != 0) {
-            x_move = *(volatile const f32*) &cm_804D7E10;
+            x_move = -1.0f;
         } else if ((x10_btns & PAD_BUTTON_RIGHT) != 0) {
-            x_move = *(volatile const f32*) &cm_804D7E04;
+            x_move = 1.0f;
         }
 
         if ((x10_btns & PAD_BUTTON_X) != 0) {
-            zoom_dir = *(volatile const f32*) &cm_804D7E04;
+            zoom_dir = 1.0f;
         } else if ((x10_btns & PAD_BUTTON_Y) != 0) {
-            zoom_dir = *(volatile const f32*) &cm_804D7E10;
+            zoom_dir = -1.0f;
         }
 
         if ((x10_btns & PAD_BUTTON_A) != 0) {
-            abs_f1 = (stick_x < *(volatile const f32*) &cm_804D7E14) ? -stick_x
-                                                                     : stick_x;
-            if (abs_f1 > *(volatile const f64*) &cm_804D7EA0) {
+            abs_f1 = ABS(stick_x);
+            if (abs_f1 > 0.125) {
                 x_move = stick_x;
             }
-            abs_f1 = (stick_y < *(volatile const f32*) &cm_804D7E14) ? -stick_y
-                                                                     : stick_y;
-            if (abs_f1 > *(volatile const f64*) &cm_804D7EA0) {
+            abs_f1 = ABS(stick_y);
+            if (abs_f1 > 0.125) {
                 y_move = stick_y;
             }
-            stick_y = *(volatile const f32*) &cm_804D7E14;
+            stick_y = 0.0f;
         }
     }
 
-    abs_f1 =
-        (stick_y < *(volatile const f32*) &cm_804D7E14) ? -stick_y : stick_y;
-    if (abs_f1 > *(volatile const f64*) &cm_804D7EA0) {
+    abs_f1 = ABS(stick_y);
+    if (abs_f1 > 0.125) {
         zoom_dir = -stick_y;
     }
 
-    abs_f1 = (substick_x < *(volatile const f32*) &cm_804D7E14) ? -substick_x
-                                                                : substick_x;
-    if (abs_f1 > *(volatile const f64*) &cm_804D7EA0) {
+    abs_f1 = ABS(substick_x);
+    if (abs_f1 > 0.125) {
         substick_x_val = substick_x;
     }
 
-    abs_f1 = (substick_y < *(volatile const f32*) &cm_804D7E14) ? -substick_y
-                                                                : substick_y;
-    if (abs_f1 > *(volatile const f64*) &cm_804D7EA0) {
+    abs_f1 = ABS(substick_y);
+    if (abs_f1 > 0.125) {
         substick_y_val = substick_y;
     }
 
@@ -1910,30 +1904,29 @@ void Camera_8002C1A8(void)
         scale = cm_80452C68.x32C * cm_803BCCA0.x8C + cm_803BCCA0.x90;
         cm_80452C68.x304 = Camera_8002BA00(cm_80452C68.x304, dir);
         slot = cm_80452C68.x304;
-        reset_zero = *(volatile const f32*) &cm_804D7E14;
+        reset_zero = 0.0f;
         cm_80452C68.x314.x = cm_80452C68.x314.y = cm_80452C68.x314.z =
             reset_zero;
         cm_80452C68.pause_eye_offset.x = reset_zero;
-        cm_80452C68.pause_eye_offset.y = *(volatile const f32*) &cm_804D7E90;
-        cm_80452C68.pause_eye_offset.z = *(volatile const f32*) &cm_804D7E94;
+        cm_80452C68.pause_eye_offset.y = 5.0f;
+        cm_80452C68.pause_eye_offset.z = 20.0f;
         cm_80452C68.pause_up.x = reset_zero;
-        cm_80452C68.pause_up.y = *(volatile const f32*) &cm_804D7E04;
+        cm_80452C68.pause_up.y = 1.0f;
         cm_80452C68.pause_up.z = reset_zero;
         if (slot == 0xA) {
-            cm_80452C68.pause_eye_distance =
-                *(volatile const f32*) &cm_804D7E98 * scale;
+            cm_80452C68.pause_eye_distance = 3.0f * scale;
         } else {
             cm_80452C68.pause_eye_distance = scale;
         }
-        Camera_8002BAA8(*(volatile const f32*) &cm_804D7E14);
+        Camera_8002BAA8(0.0f);
     }
 
-    if (*(volatile const f32*) &cm_804D7E14 != zoom_dir) {
+    if (zoom_dir != 0.0f) {
         Camera_8002BAA8(zoom_dir);
     }
 
     {
-        f32 move_zero = *(volatile const f32*) &cm_804D7E14;
+        f32 move_zero = 0.0f;
 
         if (move_zero != x_move || move_zero != y_move) {
             if (cm_80452C68.x304 == 0xA) {
@@ -1942,16 +1935,14 @@ void Camera_8002C1A8(void)
                               (cm_80452C68.pause_eye_offset.x *
                                    cm_80452C68.pause_eye_offset.x +
                                cm_80452C68.pause_eye_offset.y *
-                                   cm_80452C68.pause_eye_offset.y)) <
-                    *(const f32*) &cm_804D7E04)
+                                   cm_80452C68.pause_eye_offset.y)) < 1.0f)
                 {
-                    cm_80452C68.pause_eye_distance =
-                        *(const f32*) &cm_804D7E04;
+                    cm_80452C68.pause_eye_distance = 1.0f;
                 }
-                if (*(volatile const f32*) &cm_804D7E14 != y_move) {
+                if (move_zero != y_move) {
                     cm_80452C68.x314.y += y_move;
                 }
-                if (*(volatile const f32*) &cm_804D7E14 != x_move) {
+                if (move_zero != x_move) {
                     cm_80452C68.x314.x += x_move;
                 }
             } else {
@@ -1961,7 +1952,7 @@ void Camera_8002C1A8(void)
     }
 
     {
-        f32 rotate_zero = *(volatile const f32*) &cm_804D7E14;
+        f32 rotate_zero = 0.0f;
 
         if (rotate_zero != substick_x_val || rotate_zero != substick_y_val) {
             Camera_8002BD88(substick_x_val, substick_y_val);
@@ -3898,12 +3889,12 @@ void Camera_8002F3AC(void)
     cm_80452C68.transform_copy.fov = cm_80452C68.transform_copy.target_fov;
 }
 
-void Camera_8002F474(void)
+void Camera_SetModeToStandard(void)
 {
     cm_80452C68.mode = CAMERA_STANDARD;
 }
 
-s32 fn_8002F488(Vec4* arg0)
+s32 Camera_SetBounds(Vec4* arg0)
 {
     arg0->z = Stage_GetCamBoundsLeftOffset();
     arg0->w = Stage_GetCamBoundsRightOffset();
@@ -3912,7 +3903,7 @@ s32 fn_8002F488(Vec4* arg0)
     return 1;
 }
 
-void Camera_8002F4D4(s8 arg0, s8 arg1, s32 arg2)
+void Camera_SetUpPauseCamera(s8 pauserSlot, s8 pauserId, s32 arg2)
 {
     Vec3* target_interest;
     Vec3* pause_eye_offset;
@@ -3920,16 +3911,16 @@ void Camera_8002F4D4(s8 arg0, s8 arg1, s32 arg2)
     f32 var_f31;
     PAD_STACK(32);
 
-    if ((arg0 < 0 || arg0 >= 6) && (u8) (arg0 - 10) > 1) {
-        arg0 = 0;
+    if ((pauserSlot < 0 || pauserSlot >= 6) && (u8) (pauserSlot - 10) > 1) {
+        pauserSlot = 0;
     }
-    if ((arg1 < 0 || arg1 >= 4) && (u8) (arg1 - 4) > 1) {
-        arg1 = 4;
+    if ((pauserId < 0 || pauserId >= 4) && (u8) (pauserId - 4) > 1) {
+        pauserId = 4;
     }
 
     cm_80452C68.mode = CAMERA_PAUSE;
-    cm_80452C68.x2C4 = arg0;
-    cm_80452C68.x2C5 = arg1;
+    cm_80452C68.x2C4 = pauserSlot;
+    cm_80452C68.x2C5 = pauserId;
     cm_80452C68.x2D0.x_min = Stage_GetCamBoundsLeftOffset();
     cm_80452C68.x2D0.x_max = Stage_GetCamBoundsRightOffset();
     cm_80452C68.x2D0.y_max = Stage_GetCamBoundsTopOffset();
@@ -3942,7 +3933,8 @@ void Camera_8002F4D4(s8 arg0, s8 arg1, s32 arg2)
     cm_80452C68.x2D0.angle_left = Stage_GetCamAngleRadiansLeft();
     cm_80452C68.x2D0.unk28 = Stage_GetPauseCamZPosMin();
     cm_80452C68.x2D0.unk2C = Stage_GetPauseCamZPosMax();
-    cm_80452C68.x2D0.callback = (void (*)(Camera_x2D0*))(Event) fn_8002F488;
+    cm_80452C68.x2D0.callback =
+        (void (*)(Camera_x2D0*))(Event) Camera_SetBounds;
 
     switch (arg2) {
     case 0:
@@ -3952,7 +3944,7 @@ void Camera_8002F4D4(s8 arg0, s8 arg1, s32 arg2)
         var_f31 = cm_80452C68.x2D0.unk28;
         break;
     default:
-        __assert(cm_803BCBD0, 0xEDF, cm_804D3938);
+        __assert(cm_803BCBD0, 0xEDF, "0");
         break;
     }
 
@@ -4001,14 +3993,14 @@ void Camera_8002F4D4(s8 arg0, s8 arg1, s32 arg2)
     }
 }
 
-void Camera_8002F73C(s8 arg0, s8 arg1)
+void Camera_SetUpPauseCameraWithDefaultZoom(s8 pauserSlot, s8 pauserId)
 {
-    Camera_8002F4D4(arg0, arg1, 0);
+    Camera_SetUpPauseCamera(pauserSlot, pauserId, 0);
 }
 
 void Camera_8002F760(s8 arg0, s8 arg1)
 {
-    Camera_8002F4D4(arg0, arg1, 1);
+    Camera_SetUpPauseCamera(arg0, arg1, 1);
 }
 
 /// Camera_SetModeTraining
@@ -4076,7 +4068,7 @@ void Camera_8002F7AC(s8 slot)
     cm_80452C68.yaw_offset = ((cm_804D7ED8 * randf) - cm_804D7EE0);
 }
 
-void Camera_8002F8F4(void)
+void Camera_SetModeToFixed(void)
 {
     cm_80452C68.mode = CAMERA_FIXED;
 }

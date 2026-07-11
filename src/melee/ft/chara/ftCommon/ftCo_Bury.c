@@ -91,8 +91,7 @@ void ftCo_800C08A0(Fighter_GObj* gobj, Fighter_GObj* arg1, DynamicsDesc* arg2,
     }
     if (ftColl_80076640(fp, &f) != 0) {
         struct SmallerHitCapsule hit;
-        hurt_idx *= sizeof(FighterHurtCapsule);
-        p_hurt = (FighterHurtCapsule*) ((intptr_t) fp + hurt_idx + 0x11A0);
+        p_hurt = &fp->hurt_capsules[hurt_idx];
         ftColl_80076764(3, arg3, arg1, arg2, fp, p_hurt);
         lbColl_80008D30((HitCapsule*) &hit, (lbColl_80008D30_arg1*) arg2);
         ftColl_80078384(fp, p_hurt, (HitCapsule*) &hit);
@@ -192,9 +191,7 @@ void ftCo_800C0B20(Fighter_GObj* gobj)
             fp->bury_timer_1 = p_ftCommonData->bury_timer_unk1;
             if (ftColl_80076640(fp, &f)) {
                 FighterHurtCapsule* hurt;
-                hurt_idx *= sizeof(FighterHurtCapsule);
-                hurt =
-                    (FighterHurtCapsule*) ((intptr_t) fp + hurt_idx + 0x11A0);
+                hurt = &fp->hurt_capsules[hurt_idx];
                 ftColl_80076764(3, 1, 0, unk_anim, fp, hurt);
 
                 /// @todo Eliminate cast
