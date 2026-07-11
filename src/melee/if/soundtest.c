@@ -91,7 +91,7 @@ struct un_803FA128_x130_t {
     f32 xEC;
 };
 
-/* 3FA128 */ static struct un_803FA128_t {
+/* 3FA128 */ struct un_803FA128_t {
     u8 _pad0[0x130];
     struct un_803FA128_x130_t x130;
     u16 x220;
