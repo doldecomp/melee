@@ -3905,25 +3905,69 @@ static inline int mpLineGetNextInline(int line_id)
     return groundCollLine[line_id].x0->next_id0;
 }
 
+static inline int mpLineGetNextFloorInline(int line_id)
+{
+    MapLine* line;
+    int result = (line = groundCollLine[line_id].x0)->next_id1;
+
+    if (result != -1) {
+        u32 flags = groundCollLine[result].flags;
+
+        if ((flags & LINE_FLAG_ENABLED) && !(flags & LINE_FLAG_HIDDEN)) {
+            CollVtx* v1 = &groundCollVtx[line->v1_idx];
+            CollVtx* v0 = &groundCollVtx[groundCollLine[result].x0->v0_idx];
+
+            if (SQ(v1->pos.x - v0->pos.x) + SQ(v1->pos.y - v0->pos.y) < 4.0) {
+                return result;
+            }
+        }
+    }
+
+    return line->next_id0;
+}
+
+static inline int mpLineGetNextCheckInline2(int result, MapLine* line)
+{
+    if (result != -1) {
+        u32 flags = groundCollLine[result].flags;
+
+        if ((flags & LINE_FLAG_ENABLED) && !(flags & LINE_FLAG_HIDDEN)) {
+            CollVtx* v1 = &groundCollVtx[line->v1_idx];
+            CollVtx* v0 = &groundCollVtx[groundCollLine[result].x0->v0_idx];
+
+            if (SQ(v1->pos.x - v0->pos.x) + SQ(v1->pos.y - v0->pos.y) < 4.0) {
+                return result;
+            }
+        }
+    }
+
+    return line->next_id0;
+}
+
 int mpLib_800534FC_Floor(int line_id)
 {
+    MapLine* line;
     int new_id;
+    int result;
     LINEID_CHECK(4272, line_id);
-    new_id = mpLineGetNextInline(line_id);
+    new_id = mpLineGetNextFloorInline(line_id);
     while (new_id != -1) {
         if (!(groundCollLine[new_id].flags & CollLine_Floor)) {
             new_id = -1;
         } else if (new_id != groundCollLine[line_id].x0->next_id1) {
             line_id = new_id;
-            new_id = mpLineGetNextInline(new_id);
+            new_id = mpLineGetNextCheckInline2(
+                (line = groundCollLine[new_id].x0)->next_id1, line);
             continue;
         }
         break;
     }
     if (new_id != -1) {
-        return new_id;
+        result = new_id;
+    } else {
+        result = -1;
     }
-    return -1;
+    return result;
 }
 
 static inline int mpLineGetPrevInline(int line_id)

@@ -1628,6 +1628,9 @@ void fn_80175DC8(HSD_GObj* gobj)
     }
 }
 
+#undef __FILE__
+#define __FILE__ GMRESULT_LBL(803D6934)
+
 void fn_80176A6C(void)
 {
     HSD_GObj* gobj;
@@ -1635,14 +1638,14 @@ void fn_80176A6C(void)
 
     gobj = GObj_Create(0x13U, 0x14U, 0U);
     if (gobj == NULL) {
-        OSReport("Error : gobj dont\'t get (gmResultAddPanelCamera)\n");
-        HSD_ASSERT(0x662, 0);
+        (OSReport)(GMRESULT_LBL(803D6900));
+        HSD_ASSERTMSG(0x662, 0, GMRESULT_LBL(804D3FB0));
     }
 
     cobj = HSD_CObjLoadDesc(lbl_8046DBE8.pnlsce->cameras->desc);
     if (cobj == NULL) {
-        OSReport("Error : cobj dont\'t get (gmResultAddPanelCamera)\n");
-        HSD_ASSERT(0x668, 0);
+        (OSReport)(GMRESULT_LBL(803D6940));
+        HSD_ASSERTMSG(0x668, 0, GMRESULT_LBL(804D3FB0));
     }
 
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
@@ -1655,9 +1658,9 @@ void fn_80176A6C(void)
 
     HSD_SisLib_803A611C(0, gobj, 9U, 0xDU, 0U, 0xEU, 0U, 0x13U);
     if (lbLang_IsSavedLanguageUS() != 0) {
-        HSD_SisLib_803A62A0(0, "SdRst.usd", "SIS_ResultData");
+        HSD_SisLib_803A62A0(0, GMRESULT_LBL(803D68D8), GMRESULT_LBL(803D68E4));
     } else {
-        HSD_SisLib_803A62A0(0, "SdRst.dat", "SIS_ResultData");
+        HSD_SisLib_803A62A0(0, GMRESULT_LBL(803D68F4), GMRESULT_LBL(803D68E4));
     }
     lbl_8046DBE8.cobj = cobj;
 }
@@ -1715,11 +1718,12 @@ void fn_80176D3C(Vec3* positions)
 {
     ResultsData* data = &lbl_8046DBE8;
     MatchEnd* me;
+    MatchEnd* me_iter;
     Vec3* pos;
     u8 _[8];
     DynamicModelDesc* models[3];
-    MatchEnd* me_iter;
     s32 winner;
+    DynamicModelDesc** model;
     s32 i;
     PAD_STACK(8);
 
@@ -1759,13 +1763,14 @@ void fn_80176D3C(Vec3* positions)
             HSD_GObj* gobj;
             HSD_JObj* jobj;
             gobj = GObj_Create(14, 15, 0);
-            jobj = HSD_JObjLoadJoint(models[winner - 1]->joint);
+            model = &models[winner] - 1;
+            jobj = HSD_JObjLoadJoint((*model)->joint);
             HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
             GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 11, 0);
 
             HSD_JObjSetTranslate(jobj, pos);
 
-            gm_8016895C(jobj, models[winner - 1], 0);
+            gm_8016895C(jobj, *model, 0);
             HSD_JObjReqAnimAll(jobj, 0.0F);
             HSD_JObjAnimAll(jobj);
             HSD_GObj_SetupProc(gobj, fn_80176D18, 1);

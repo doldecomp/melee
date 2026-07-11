@@ -1054,14 +1054,13 @@ u32 fn_803AC634(struct CardState* file_desc, s32 file_idx)
     }
 
     if (file_idx == 0) {
-        u32 sector_size = file_desc->x8;
         u32 usable;
+        u32 sector_size = file_desc->x8;
         s32 remaining;
 
         remaining = file_desc->x4C[0];
-        remaining = remaining - (s32) ((sector_size - 0x20) -
+        remaining = remaining - (s32) ((usable = sector_size - 0x20) -
                                        (file_desc->x24 + 48) % sector_size);
-        usable = sector_size - 0x20;
         if (remaining <= 0) {
             return 1;
         }
@@ -1598,11 +1597,6 @@ static inline s32 fn_803AD16C_queue_cmd(s32* cmd)
     return fn_803AC168(cmd);
 }
 
-static inline s32 fn_803AD16C_newmap_at(s32* newmap, s32 logical)
-{
-    return newmap[logical];
-}
-
 s32 fn_803AD16C(CardState* state)
 {
     s32 work[64];
@@ -1754,19 +1748,19 @@ s32 fn_803AD16C(CardState* state)
 
         for (i = 0; i < file_blocks; i++) {
             s32 logical = blocks_before + i;
-            s32 src = fn_803AD16C_newmap_at(newmap, logical);
+            s32 src = newmap[logical];
             s32 dup;
             s32 target_seq;
             s32 ret;
 
-            if (src < 0) {
+            if (newmap[logical] < 0) {
                 continue;
             }
 
             target_seq = state->x270[src];
             dup = -1;
             for (phys = 1; phys <= state->x460; phys++) {
-                if (phys != src && state->x170[phys] == logical) {
+                if (phys != newmap[logical] && state->x170[phys] == logical) {
                     if (dup < 0) {
                         dup = phys;
                     } else {
@@ -1803,14 +1797,14 @@ s32 fn_803AD16C(CardState* state)
                     }
                 }
                 if (dup >= 0) {
-                    if (src == 0 || dup == 0) {
+                    if (newmap[logical] == 0 || dup == 0) {
                         ret = -0x101;
                     } else {
                         s32 cmd[9];
-                        pad = fn_803ACBE8(state, src);
+                        pad = fn_803ACBE8(state, newmap[logical]);
                         cmd[0] = 0xF;
                         cmd[1] = (s32) state;
-                        cmd[3] = src;
+                        cmd[3] = newmap[logical];
                         cmd[7] = pad;
                         ret = fn_803AC168(cmd);
                         if (ret >= 0) {
@@ -1830,14 +1824,14 @@ s32 fn_803AD16C(CardState* state)
                     }
                 }
             } else if (state->x270[dup] != target_seq) {
-                if (src == 0 || dup == 0) {
+                if (newmap[logical] == 0 || dup == 0) {
                     ret = -0x101;
                 } else {
                     s32 cmd[9];
-                    pad = fn_803ACBE8(state, src);
+                    pad = fn_803ACBE8(state, newmap[logical]);
                     cmd[0] = 0xF;
                     cmd[1] = (s32) state;
-                    cmd[3] = src;
+                    cmd[3] = newmap[logical];
                     cmd[7] = pad;
                     {
                         s32 cmd_result = fn_803AC168(cmd);

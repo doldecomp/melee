@@ -1182,10 +1182,16 @@ static char mnNameNew_803EE6E4[] = "mnNameRefuseNameUs";
 static char mnNameNew_803EE6F8[] = "mnNameAutoName";
 static char mnNameNew_803EE708[] = "mnNameRefuseName";
 
+static inline NameNewEntry* mnNameNew_GetEntryData(void)
+{
+    return mnNameNew_804D6C08->user_data;
+}
+
 void mnNameNew_8023CE4C(void)
 {
     Vec3 sp24;
     GXColor name_char_color;
+    GXColor* name_char_color_ptr;
     NameNewEntry* data;
     HSD_JObj* jobj_a;
     HSD_JObj* jobj_b;
@@ -1193,15 +1199,13 @@ void mnNameNew_8023CE4C(void)
     float y_minus;
     f32 char_spacing;
     f32 first_x;
-    GXColor* name_char_color_ptr;
-    char* name_ptr;
     s32 i;
     HSD_Text* text;
     f32 z;
 
     PAD_STACK(4);
 
-    data = mnNameNew_804D6C08->user_data;
+    data = mnNameNew_GetEntryData();
     jobj_a = data->jobjs[14];
     jobj_b = data->jobjs[15];
     first_x = HSD_JObjGetTranslationX(jobj_a);
@@ -1211,7 +1215,6 @@ void mnNameNew_8023CE4C(void)
     }
     text = HSD_SisLib_803A6754(0, mn_804D6BB5);
     lb_8000B1CC(jobj_a, &mnNameNew_803EE330, &sp24);
-    name_ptr = mnNameNew_CurrentNameText;
     y_minus = -sp24.y;
     z = sp24.z;
     name_char_color_ptr = &name_char_color;
@@ -1223,14 +1226,15 @@ void mnNameNew_8023CE4C(void)
     text->font_size.y = 0.05f;
     text->text_color = mnNameNew_804D4F6C;
     for (; i < 4; i++) {
-        if ((s8) mnNameNew_NullCharacter == (s8) *name_ptr) {
+        if ((s8) mnNameNew_NullCharacter ==
+            (s8) mnNameNew_CurrentNameText[i * 3])
+        {
             break;
         }
         HSD_SisLib_803A6B98(text, (char_spacing * (f32) i) / text->font_size.x,
-                            0.0f, name_ptr);
+                            0.0f, &mnNameNew_CurrentNameText[i * 3]);
         name_char_color = mnNameNew_804D4F78;
         HSD_SisLib_803A74F0(text, i, name_char_color_ptr);
-        name_ptr += 3;
     }
     data->name_disp_text = text;
 }
@@ -1306,8 +1310,6 @@ void fn_8023D0F8(void* arg0)
 
 s32 mnNameNew_8023D130(GlyphVariantEntry* arg0, u8 arg1, u8 arg2, s32 arg3)
 {
-    Vec3 sp30;
-    GXColor sp2C;
     HSD_JObj* jobj14;
     HSD_JObj* jobj1C;
     HSD_JObj* jobj18;
@@ -1324,18 +1326,20 @@ s32 mnNameNew_8023D130(GlyphVariantEntry* arg0, u8 arg1, u8 arg2, s32 arg3)
     f32 pos_z;
     char** table_upper;
     char** table_lower;
-    GXColor* sp2C_ptr;
+    GXColor* glyph_color_ptr;
     MnNameNewDataLayout* layout;
+    Vec3 text_pos;
+    GXColor glyph_color;
 
     layout = (MnNameNewDataLayout*) mnNameNew_803EDA58;
     text = HSD_SisLib_803A6754(0, (s32) mn_804D6BB4);
     jobj14 = arg0->jobjs[4];
     jobj18 = arg0->jobjs[5];
     jobj1C = arg0->jobjs[6];
-    lb_8000B1CC(jobj14, &layout->x8CC, &sp30);
-    pos_x = sp30.x;
-    pos_y = -sp30.y;
-    pos_z = sp30.z;
+    lb_8000B1CC(jobj14, &layout->x8CC, &text_pos);
+    pos_x = text_pos.x;
+    pos_y = -text_pos.y;
+    pos_z = text_pos.z;
     text->pos_x = pos_x;
     text->pos_y = pos_y;
     text->pos_z = pos_z;
@@ -1374,9 +1378,9 @@ s32 mnNameNew_8023D130(GlyphVariantEntry* arg0, u8 arg1, u8 arg2, s32 arg3)
         } else {
             color_ptr = &mnNameNew_804D4F74;
         }
-        sp2C = *color_ptr;
-        sp2C_ptr = &sp2C;
-        HSD_SisLib_803A74F0(text, i, sp2C_ptr);
+        glyph_color = *color_ptr;
+        glyph_color_ptr = &glyph_color;
+        HSD_SisLib_803A74F0(text, i, glyph_color_ptr);
     }
     arg0->text = text;
     return (s32) text;

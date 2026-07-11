@@ -1820,19 +1820,16 @@ void fn_80025FAC(HSD_GObj* gobj, void* userdata, void* params)
         }
         }
 
-        {
-            s32 type = ud->xC;
-            if (type == 9) {
-                goto case9;
-            }
-            if (type >= 9) {
-                goto done;
-            }
-            if (type >= 0) {
-                goto normal;
-            }
-            goto done;
-        normal:
+        switch (ud->xC) {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+        case 8:
             if (ud->current_frame < 0) {
                 ud->current_frame = 0;
             }
@@ -1849,8 +1846,8 @@ void fn_80025FAC(HSD_GObj* gobj, void* userdata, void* params)
                 ud->voice_id =
                     lbAudioAx_80023870(ud->x14, ud->x20, ud->x2C.pan, group);
             }
-            goto done;
-        case9:
+            break;
+        case 9:
             if (ud->current_frame < 0) {
                 ud->current_frame = 0;
             }
@@ -1858,7 +1855,7 @@ void fn_80025FAC(HSD_GObj* gobj, void* userdata, void* params)
                 ud->end_frame = 0;
             }
             ud->voice_id = sp->x28;
-        done:;
+            break;
         }
     }
 }
@@ -2776,48 +2773,53 @@ void lbAudioAx_8002835C(void)
     HSD_ObjAllocInit(&lbl_80433710.alloc, 0x48, 4);
 }
 
+typedef struct lbAudioAx_PoolAllocFull {
+    HSD_ObjAllocData alloc;
+    s32 x2C[17];
+    s32 x70[17];
+    int xB4[0x38];
+    int x194[0x38];
+    int x274[0x38];
+    int x354[0x38];
+    int x434[0x38];
+    u32 x514[0x10];
+    u8 x554[0xD400];
+    u8 xD954[0x11C00];
+} lbAudioAx_PoolAllocFull;
+
 void lbAudioAx_8002838C(void)
 {
     struct AXFX_REVERBSTD rvbStd;
     struct AXFX_DELAY delay;
-    lbAudioAx_PoolAlloc* st = &lbl_80433710;
+    lbAudioAx_PoolAllocFull* st = (lbAudioAx_PoolAllocFull*) &lbl_80433710;
+    int (*offsets)[2] = offsets_arr_803BC4E4;
     int* p1;
     int* p2;
     int* p3;
     int* p4;
     int i;
-    char* ptr;
 
-    ARInit((u32*) &lbl_80433B44[0x38], 0x10);
+    ARInit(st->x514, 0x10);
     ARQInit();
     AIInit(NULL);
     PAD_STACK(4);
 
-    lbl_804D643C = *(int*) (lbl_803BB300 + 0x11E4);
-    lbl_804D6440 = *(int*) (lbl_803BB300 + 0x137C);
-    lbl_804D6440 += *(int*) (lbl_803BB300 + 0x11EC);
-    lbl_804D6440 += *(int*) (lbl_803BB300 + 0x1394);
+    lbl_804D643C = offsets[0][0];
+    lbl_804D6440 = offsets[0x33][0];
+    lbl_804D6440 += offsets[1][0];
+    lbl_804D6440 += offsets[0x36][0];
 
     fn_80023254(3);
-    ptr = lbl_803BB300 + ((*(volatile int*) ((char*) lbl_80433B44)) << 3);
-    lbl_804D6444 = *(int*) (ptr + 0x11E4);
+    lbl_804D6444 = offsets[st->x434[0]][0];
 
     fn_80023254(4);
-    ptr = lbl_803BB300 + ((*(volatile int*) ((char*) lbl_80433B44)) << 3);
-    lbl_804D6444 += *(int*) (ptr + 0x11E4);
-    ptr =
-        lbl_803BB300 + ((*(volatile int*) ((char*) lbl_80433B44 + 0x4)) << 3);
-    lbl_804D6444 += *(int*) (ptr + 0x11E4);
-    ptr =
-        lbl_803BB300 + ((*(volatile int*) ((char*) lbl_80433B44 + 0x8)) << 3);
-    lbl_804D6444 += *(int*) (ptr + 0x11E4);
-    ptr =
-        lbl_803BB300 + ((*(volatile int*) ((char*) lbl_80433B44 + 0xC)) << 3);
-    lbl_804D6444 += *(int*) (ptr + 0x11E4);
+    lbl_804D6444 += offsets[st->x434[0]][0];
+    lbl_804D6444 += offsets[st->x434[1]][0];
+    lbl_804D6444 += offsets[st->x434[2]][0];
+    lbl_804D6444 += offsets[st->x434[3]][0];
 
     fn_80023254(5);
-    ptr = lbl_803BB300 + ((*(volatile int*) ((char*) lbl_80433B44)) << 3);
-    lbl_804D6444 += *(int*) (ptr + 0x11E4);
+    lbl_804D6444 += offsets[st->x434[0]][0];
 
     lbl_804D6438 = lbl_804D643C + lbl_804D6440 + lbl_804D6444;
     lbl_804D3870 = lbl_804D6438;
@@ -2828,24 +2830,22 @@ void lbAudioAx_8002838C(void)
     rvbStd.time = 1.88f;
     HSD_ASSERT(0xF6E, HSD_AudioGetAuxHeapSize(2, &rvbStd) < 53*1024);
 
-    AXDriver_8038E30C(0, 2, &rvbStd, (u8*) ((char*) lbl_80433B44 + 0x120),
-                      0xD400);
+    AXDriver_8038E30C(0, 2, &rvbStd, st->x554, 0xD400);
 
     AXDriver_8038E37C(AXDRIVER_AUX_DELAY, &delay);
     HSD_ASSERTMSG(0xF72, HSD_AudioGetAuxHeapSize(2, &delay) < 71 * 1024,
                   "HSD_AudioGetAuxHeapSize(2, &delay) < 71*1024");
 
-    AXDriver_8038E30C(1, 4, &delay, (u8*) ((char*) lbl_80433B44 + 0xD520),
-                      0x11C00);
+    AXDriver_8038E30C(1, 4, &delay, st->xD954, 0x11C00);
 
     HSD_SynthSFXAllocateBank(lbl_804D643C);
     HSD_SynthSFXAllocateBank(lbl_804D6440);
     HSD_SynthSFXAllocateBank(lbl_804D6444);
 
-    p1 = lbl_804337C4;
-    p2 = lbl_804338A4;
-    p3 = lbl_80433984;
-    p4 = lbl_80433A64;
+    p1 = st->xB4;
+    p2 = st->x194;
+    p3 = st->x274;
+    p4 = st->x354;
     for (i = 0; i < 7; i++) {
         p1[0] = -1;
         p2[0] = -1;
@@ -2997,8 +2997,8 @@ s32 lbAudioAx_80028690(void)
     {
         int i;
         for (i = 0; i <= 16; i++) {
-            st->x2C[i] = 0x83D60;
-            st->x70[i] = 0;
+            ((s32(*)[17]) & st->x2C)[0][i] = 0x83D60;
+            ((s32(*)[17]) & st->x2C)[1][i] = 0;
         }
     }
 

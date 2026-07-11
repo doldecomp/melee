@@ -1275,95 +1275,65 @@ void grVenom_80205758(Ground_GObj* gobj)
 void grVenom_80205AD0(Ground_GObj* arg) {}
 
 /// grVenom_80205AD4
-/// @todo Currently 98.62% match - needs register allocation fixes
 void grVenom_80205AD4(Ground_GObj* gobj)
 {
-    s32 zero;
-    s32* base;
-    Ground* gp;
-    HSD_JObj* jobj;
+    s32* data = (s32*) &grVe_803E5348;
+    Ground* gp = gobj->user_data;
+    HSD_JObj* jobj = GET_JOBJ(gobj);
     f32 scale;
-    s32* data;
-    s32 type;
-    Ground_GObj* other;
-    Ground* other_gp;
-    HSD_JObj* jobj2;
-    grVe_TimingData* attr;
 
-    zero = 0;
-    gp = gobj->user_data;
-    jobj = gobj->hsd_obj;
-    base = (s32*) &grVe_803E5348;
     scale = Ground_801C0498();
-
     gp->gv.venom.xC8 = grVe_804D6A34;
-    *(s32*) &gp->gv.venom.xEC = zero;
-    *(s32*) &gp->gv.venom.xE8 = zero;
-    *(s32*) &gp->gv.venom.xE4 = zero;
-    *(s32*) &gp->gv.venom.xE0 = zero;
-
+    *(s32*) &gp->gv.venom.xEC = 0;
+    *(s32*) &gp->gv.venom.xE8 = 0;
+    *(s32*) &gp->gv.venom.xE4 = 0;
+    *(s32*) &gp->gv.venom.xE0 = 0;
     grAnime_801C7FF8(gobj, 7, 7, 0, 0.0F, 1.0F);
     grAnime_801C7FF8(gobj, 8, 7, 0, 0.0F, 1.0F);
     grAnime_801C8098(gobj, 2, 7, 3, 0.0F, 1.0F);
 
-    data = base + gp->gv.venom.xC8;
-    type = data[11];
-
-    if (type < 8) {
-        if (type >= 1) {
-            goto venom_80205AD4_spawn;
+    switch (data[gp->gv.venom.xC8 + 11]) {
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7: {
+        HSD_GObj* other =
+            grVenom_80203EAC(data[data[gp->gv.venom.xC8 + 14] + 0xC9]);
+        gp->gv.venom.linked_gobj = other;
+        if (other != NULL) {
+            Ground* other_gp = GET_GROUND(gp->gv.venom.linked_gobj);
+            if (other_gp != NULL) {
+                other_gp->gv.venom.xC8 = gp->gv.venom.xC8;
+            }
         }
-        goto venom_80205AD4_default;
+        break;
     }
-    if (type >= 0xC) {
-        goto venom_80205AD4_default;
+    case 8:
+    case 9:
+    case 10:
+    case 11:
+        lb_8000C2F8(
+            Ground_801C3FA4(gobj, 0),
+            Ground_801C3FA4((HSD_GObj*) data[gp->gv.venom.xC8 + 8], 5));
+        gp->gv.venom.linked_gobj = NULL;
+        break;
+    default:
+        *(s32*) &gp->gv.venom.xE0 = -1;
+        *(s32*) &gp->gv.venom.xE4 = -1;
+        break;
     }
-    goto venom_80205AD4_link;
-
-venom_80205AD4_spawn: {
-    s32 idx = data[14];
-    s32* data2 = base + idx;
-    other = (Ground_GObj*) grVenom_80203EAC(data2[0xC9]);
-    gp->gv.venom.linked_gobj = other;
-    if (other != NULL) {
-        other = gp->gv.venom.linked_gobj;
-        other_gp = other->user_data;
-        if (other_gp != NULL) {
-            other_gp->gv.venom.xC8 = gp->gv.venom.xC8;
-        }
-    }
-    goto venom_80205AD4_done;
-}
-
-venom_80205AD4_link:
-    jobj2 = Ground_801C3FA4((HSD_GObj*) data[8], 5);
-    lb_8000C2F8(Ground_801C3FA4(gobj, 0), jobj2);
-    gp->gv.venom.linked_gobj = NULL;
-    goto venom_80205AD4_done;
-
-venom_80205AD4_default:
-    *(s32*) &gp->gv.venom.xE0 = -1;
-    *(s32*) &gp->gv.venom.xE4 = -1;
-
-venom_80205AD4_done:
-
-    attr = grVe_804D6A30;
-    HSD_JObjSetScaleX(jobj, scale * attr->x34);
-
-    attr = grVe_804D6A30;
-    HSD_JObjSetScaleY(jobj, scale * attr->x34);
-
-    attr = grVe_804D6A30;
-    HSD_JObjSetScaleZ(jobj, scale * attr->x34);
-
+    HSD_JObjSetScaleX(jobj, scale * grVe_804D6A30->x34);
+    HSD_JObjSetScaleY(jobj, scale * grVe_804D6A30->x34);
+    HSD_JObjSetScaleZ(jobj, scale * grVe_804D6A30->x34);
     gp->gv.venom.xC4_flags.b0 = false;
-    *(s32*) &gp->gv.venom.xD4 = zero;
-    gp->gv.venom.xF0 = zero;
-    gp->gv.venom.xF4 = zero;
-
-    attr = grVe_804D6A30;
-    gp->gv.venom.xF8 = (s32) attr->x2C;
-    gp->gv.venom.xFC = zero;
+    *(s32*) &gp->gv.venom.xD4 = 0;
+    gp->gv.venom.xF0 = 0;
+    gp->gv.venom.xF4 = 0;
+    gp->gv.venom.xF8 = (s32) grVe_804D6A30->x2C;
+    gp->gv.venom.xFC = 0;
     gp->gv.venom.x100 = HSD_Randi(2);
 }
 

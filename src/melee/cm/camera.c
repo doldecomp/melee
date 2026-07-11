@@ -726,10 +726,11 @@ static inline void get_pitch_angle(CameraBounds* bounds, Vec3* scroll_offset,
             cm_803BCCA0.x1C;
     }
 
-    *pitch_angle = ((bounds->y_min - scroll_offset->y) +
-                    (bounds->y_max - scroll_offset->y)) *
-                       (0.5f - pitch_blend) +
-                   scroll_offset->y;
+    {
+        f32 sum = (bounds->y_min - scroll_offset->y) +
+                  (bounds->y_max - scroll_offset->y);
+        *pitch_angle = sum * (0.5f - pitch_blend) + scroll_offset->y;
+    }
     {
         f32 info_x24 = Stage_GetCamInfoX24();
         *pitch_angle += cm_803BCCA0.x8;
@@ -740,8 +741,8 @@ static inline void get_pitch_angle(CameraBounds* bounds, Vec3* scroll_offset,
 void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
 {
     f32 unused_f31;
-    u8 _padA[8];
     Vec3 scroll_offset;
+    u8 _padA[4];
     f32 pitch_angle;
     f32 min_v;
     f32 horiz_frustum_dist;
@@ -779,8 +780,11 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
     HSD_ASSERTMSG(0x4FB, fov_d < (f32) M_PI_2, "fov_d<MTXDegToRad(90.0F)");
 
     tan_fov_u = tanf(fov_u);
-    vert_frustum_dist =
-        (bounds->y_max - bounds->y_min) / (tan_fov_u + tanf(fov_d));
+    {
+        f32 tan_fov_d = tanf(fov_d);
+        vert_frustum_dist =
+            (bounds->y_max - bounds->y_min) / (tan_fov_u + tan_fov_d);
+    }
     Stage_GetCamBoundsBottomOffset();
     Stage_GetCamBoundsTopOffset();
     vert_offset = vert_frustum_dist * tanf(pan_angle);
@@ -790,8 +794,9 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
     mid_x = 0.5f * (bounds->x_min + bounds->x_max);
     {
         f32 info_x20 = Stage_GetCamInfoX20();
+        f32 x_offset = mid_x - scroll_offset2.x;
         vert_offset = deg_to_rad * cm_803BCCA0.x14;
-        pan_angle = -(deg_to_rad * ((mid_x - scroll_offset2.x) * info_x20));
+        pan_angle = -(deg_to_rad * (x_offset * info_x20));
     }
     if (pan_angle > vert_offset) {
         pan_angle = vert_offset;
@@ -3156,13 +3161,13 @@ check_done2:
 }
 void Camera_8002DDC4(void* arg0)
 {
-    CameraBounds bounds;
     Vec3* interest;
     Vec3* tgt_interest;
     Camera* cam;
     Vec3* tgt_position;
     CameraTransformState* transform_copy;
     CameraUnkGlobals* globals;
+    CameraBounds bounds;
 
     cam = &cm_80452C68;
     Camera_80030DF8();
@@ -3175,7 +3180,7 @@ void Camera_8002DDC4(void* arg0)
         f32 dx, dy, dz;
         f32 smooth;
 
-        dx = cam->transform.target_interest.x - cam->transform.interest.x;
+        dx = cam->transform.target_interest.x - interest->x;
         smooth = globals->x74;
         dy = cam->transform.target_interest.y - cam->transform.interest.y;
         dz = cam->transform.target_interest.z - cam->transform.interest.z;

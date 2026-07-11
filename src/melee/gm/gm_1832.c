@@ -2712,8 +2712,7 @@ TrainingModeState* gm_80189CDC(StartMeleeData* arg0)
     arg0->rules.x5_0 = 1;
 
     for (i = 0; i < 4; i++) {
-        state->css.saved_players[i] = arg0->players[i];
-        state->players[i] = state->css.saved_players[i];
+        state->players[i] = state->css.saved_players[i] = arg0->players[i];
     }
 
     state->mode = (s32) (arg0->players[0].slot - 1);

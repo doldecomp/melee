@@ -1735,6 +1735,11 @@ void hsd_80393A54(int level)
 
 // @TODO: Currently 95.53% match - lis hoisting, extra li r0, BSS relocation
 // encoding
+static inline f32 kbps_scale(void)
+{
+    return 1.0F / 1024.0F;
+}
+
 int hsd_80393A5C(char* filename, int data, int size)
 {
     u32* data_p;
@@ -1779,8 +1784,11 @@ int hsd_80393A5C(char* filename, int data, int size)
 
     FIOFclose(fd);
     elapsed = (f32) (OSGetTick() - start) / (f32) (*(u32*) 0x800000F8 >> 2);
-    OSReport("Done %s size:%d time:%f spped:%fkbps\n", filename, size, elapsed,
-             8.0F * (f32) size / elapsed * (1.0F / 1024.0F));
+    {
+        f32 bits = 8.0F * (f32) size;
+        OSReport("Done %s size:%d time:%f spped:%fkbps\n", filename, size,
+                 elapsed, bits / elapsed * kbps_scale());
+    }
     return size;
 }
 
@@ -2965,6 +2973,7 @@ s32 hsd_80395A78(void)
     u32 bit;
     s32 new_col;
     s32 new_scroll;
+    s32 sum;
     PAD_STACK(8);
 
     bit = 1;
@@ -3014,9 +3023,8 @@ s32 hsd_80395A78(void)
             } else {
                 new_scroll += 1;
             }
-            if ((u8) hsd_80394128(new_col + new_scroll,
-                                  hsd_804CF810.x10 + hsd_804CF810.x14))
-            {
+            sum = new_col + new_scroll;
+            if ((u8) hsd_80394128(sum, hsd_804CF810.x10 + hsd_804CF810.x14)) {
                 hsd_804CF810.x0C = new_col;
                 hsd_804CF810.x18 = new_scroll;
                 return 1;
@@ -5141,6 +5149,7 @@ void hsd_80398F8C(HSD_Particle* pp, f32 angle)
     f32 abs_z;
     f32 temp;
     f32 abs_temp;
+    f32 angle_copy;
     PAD_STACK(16);
 
     {
@@ -5187,10 +5196,11 @@ void hsd_80398F8C(HSD_Particle* pp, f32 angle)
 
     rand_angle = (f32) (3.141592653589793 * HSD_Randf() * 2.0);
 
-    sin_angle = vx * sinf(angle);
+    angle_copy = angle;
+    sin_angle = vx * sinf(angle_copy);
     cos_rand = sin_angle * cosf(rand_angle);
     sin_rand = sin_angle * sinf(rand_angle);
-    cos_angle = vx * cosf(angle);
+    cos_angle = vx * cosf(angle_copy);
 
     pp->vel.x = cos_rand * cos_e + cos_angle * sin_e;
     pp->vel.y = cos_e * (cos_angle * sin_a) +

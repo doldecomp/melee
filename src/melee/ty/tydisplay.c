@@ -392,6 +392,34 @@ void _tyDisplay_80318B1C(s32 arg0)
     }
 }
 
+static inline f32 _tyDisplay_80318CB4_calc_dist_sq(f32 dz, f32 dx)
+{
+    return dx * dx + dz * dz;
+}
+
+static inline void _tyDisplay_80318CB4_place_toys(TyDspGrid* grid,
+                                                  TyDspConfig* cfg)
+{
+    s32 k;
+    s32 pos_idx = 0;
+    s32 jobj_idx = 0;
+
+    for (k = 0; k < cfg->x08; k++) {
+        HSD_GObj* gobj;
+        cfg->x78 = _tyDisplay_8031BC54(grid->sort[k].key);
+        gobj = cfg->x78;
+        if (gobj != NULL) {
+            _tyDisplay_804D6F10[jobj_idx] = (HSD_JObj*) gobj->hsd_obj;
+            HSD_JObjSetTranslateX(_tyDisplay_804D6F10[jobj_idx],
+                                  grid->pos[pos_idx].x);
+            HSD_JObjSetTranslateZ(_tyDisplay_804D6F10[jobj_idx],
+                                  grid->pos[pos_idx].z);
+            jobj_idx++;
+            pos_idx++;
+        }
+    }
+}
+
 void _tyDisplay_80318CB4(s32 arg0)
 {
     s32 n2;
@@ -471,8 +499,8 @@ void _tyDisplay_80318CB4(s32 arg0)
                     }
                     for (k = i - 1; k >= start; k--) {
                         f32 dx = grid->pos[i].x - grid->pos[k].x;
-                        f32 dz = grid->pos[i].z - grid->pos[k].z;
-                        f32 dist = sqrtf(dx * dx + dz * dz);
+                        f32 dist = sqrtf(_tyDisplay_80318CB4_calc_dist_sq(
+                            grid->pos[i].z - grid->pos[k].z, dx));
                         if (dist > 2.1474836e9f || dist < -2.1474836e9f) {
                             OSReport("*** tyDisplay Atari Irregul!\n");
                             HSD_ASSERT(0xC6, 0);
@@ -621,25 +649,7 @@ void _tyDisplay_80318CB4(s32 arg0)
         }
     }
 
-    {
-        s32 k;
-        s32 posIdx = 0;
-        s32 jobjIdx = 0;
-        for (k = 0; k < cfg->x08; k++) {
-            HSD_GObj* gobj;
-            cfg->x78 = _tyDisplay_8031BC54(grid->sort[k].key);
-            gobj = cfg->x78;
-            if (gobj != NULL) {
-                _tyDisplay_804D6F10[jobjIdx] = (HSD_JObj*) gobj->hsd_obj;
-                HSD_JObjSetTranslateX(_tyDisplay_804D6F10[jobjIdx],
-                                      grid->pos[posIdx].x);
-                HSD_JObjSetTranslateZ(_tyDisplay_804D6F10[jobjIdx],
-                                      grid->pos[posIdx].z);
-                jobjIdx++;
-                posIdx++;
-            }
-        }
-    }
+    _tyDisplay_80318CB4_place_toys(grid, cfg);
 }
 
 void _tyDisplay_8031830C(TySortElem* base, s32 lo, s32 hi)
@@ -1025,24 +1035,20 @@ void _tyDisplay_80319EF0(void)
     f32 scale;
     PAD_STACK(16);
 
-    range = grid->x0C_max_x;
-    range -= grid->x04_min_x;
-    if (range < 0.0f) {
+    if ((range = grid->x0C_max_x - grid->x04_min_x) < 0.0f) {
         range = -range;
     }
-    interest.x = range * 0.5f + grid->x04_min_x;
+    interest.x = range / 2.0f + grid->x04_min_x;
     if (grid->x00 == 3) {
         interest.x = 0.0f;
     }
     interest.y = 0.0f;
     {
-        f32 zmin = grid->x08_min_z;
-        f32 zrange = grid->x10_max_z;
-        zrange -= zmin;
-        if (zrange < 0.0f) {
-            zrange = -zrange;
+        f32 zmin;
+        if ((range = grid->x10_max_z - (zmin = grid->x08_min_z)) < 0.0f) {
+            range = -range;
         }
-        interest.z = zrange * 0.5f + zmin;
+        interest.z = range / 2.0f + zmin;
     }
     eyepos = interest;
     interest.z -= 10.0f;
@@ -1063,7 +1069,7 @@ void _tyDisplay_80319EF0(void)
     }
     cfg->x44 = 1.0f;
 
-    while (500.0f * tanf(0.017453292f * (cfg->x44 * 0.5f)) < cfg->x40 * 0.5f) {
+    while (500.0f * tanf(0.017453292f * (cfg->x44 / 2.0f)) < cfg->x40 / 2.0f) {
         cfg->x44 += 0.1f;
     }
 
@@ -1088,25 +1094,25 @@ void _tyDisplay_80319EF0(void)
         switch (mode) {
         case 0:
         case 1:
-            cfg->x54 = -((14.0f + cfg->x40) * 0.5f - cfg->x5C.x);
-            cfg->x58 = (14.0f + cfg->x40) * 0.5f + cfg->x5C.x;
+            cfg->x54 = -((14.0f + cfg->x40) / 2.0f - cfg->x5C.x);
+            cfg->x58 = (14.0f + cfg->x40) / 2.0f + cfg->x5C.x;
             break;
         case 2:
-            cfg->x54 = -((7.0f + cfg->x40) * 0.5f - cfg->x5C.x);
-            cfg->x58 = (7.0f + cfg->x40) * 0.5f + cfg->x5C.x;
+            cfg->x54 = -((7.0f + cfg->x40) / 2.0f - cfg->x5C.x);
+            cfg->x58 = (7.0f + cfg->x40) / 2.0f + cfg->x5C.x;
             break;
         case 3:
-            cfg->x54 = -(cfg->x40 * 0.5f - cfg->x5C.x);
-            cfg->x58 = cfg->x40 * 0.5f + cfg->x5C.x;
+            cfg->x54 = -(cfg->x40 / 2.0f - cfg->x5C.x);
+            cfg->x58 = cfg->x40 / 2.0f + cfg->x5C.x;
             break;
         }
     }
 
     {
         f32 xdiff = cfg->x58 - cfg->x54;
-        cfg->x1C = 57.29578f * lb_8000D008(xdiff * 0.5f, 500.0f);
+        cfg->x1C = 57.29578f * lb_8000D008(xdiff / 2.0f, 500.0f);
     }
-    cfg->x18 = 57.29578f * lb_8000D008(cfg->x40 * 0.5f, 500.0f);
+    cfg->x18 = 57.29578f * lb_8000D008(cfg->x40 / 2.0f, 500.0f);
 
     {
         HSD_JObjSetTranslate((HSD_JObj*) bg->gobj4->hsd_obj, &eyepos);

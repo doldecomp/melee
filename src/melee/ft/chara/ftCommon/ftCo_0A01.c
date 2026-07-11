@@ -3255,26 +3255,26 @@ bool ftCo_800A6700(Fighter* fp, Vec3* arg1, Vec3* arg2)
 
 s32 ftCo_800A6A98(Fighter* fp, Vec3* arg1)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
-    mp_UnkStruct0* island;
+    UNUSED u8 _[4];
+    f32 dist;
     Vec3 b;
     Vec3 a;
     Vec3 floor_pos;
     Vec3 floor_normal;
-    u32 flags;
     int line_id;
+    u32 flags;
     f32 mx;
     f32 my;
     s32 result;
     s32 blocked;
+    s32 line;
     f32 fy;
     f32 fx;
     f32 dx;
     f32 dy;
-    f32 dist;
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    mp_UnkStruct0* island;
     f32 best;
-
-    PAD_STACK(4);
 
     best = -1.0f;
     for (island = mpIsland_80458E88.next; island != NULL;
@@ -3291,7 +3291,7 @@ s32 ftCo_800A6A98(Fighter* fp, Vec3* arg1)
                                   &floor_pos, &line_id, &flags, &floor_normal,
                                   -1, -1, -1, NULL, (Fighter_GObj*) blocked);
             if (result != 0) {
-                int line = line_id;
+                line = line_id;
                 if (grBigBlue_801EF844(line) || grInishie1_801FCAAC(line) ||
                     grCorneria_801E2D90(line) || grVenom_80206D10(line))
                 {
@@ -3306,6 +3306,7 @@ s32 ftCo_800A6A98(Fighter* fp, Vec3* arg1)
             {
                 fy = floor_pos.y;
                 fx = floor_pos.x;
+                (void) fx;
                 if (!(fy < fp->cur_pos.y + data->x568)) {
                     if (!ftCo_800A6700_inline0(fp, fx, fy)) {
                         dx = fx - fp->cur_pos.x;
@@ -7060,6 +7061,74 @@ void ftCo_800AEFB8(Fighter* fp)
     ftCo_800ADE48(fp);
 }
 
+static inline void ftCo_800AF290_update_target(Fighter* fp)
+{
+    struct Fighter_x1A88_t* data;
+
+    data = &fp->x1A88;
+    if (ftCo_800A1C44_dontinline(fp)) {
+        data->xF8_b6 = false;
+    } else {
+        if ((data->x44 != NULL) && (fp->ground_or_air == GA_Ground)) {
+            if (ftCo_800A1AB4(fp, data->x44) < Fighter_804D64FC->x20[fp->kind])
+            {
+                data->xF8_b6 = true;
+            } else {
+                data->xF8_b6 = false;
+            }
+        } else {
+            data->xF8_b6 = false;
+        }
+    }
+}
+
+static inline bool ftCo_800AF290_should_act(Fighter* fp)
+{
+    struct Fighter_x1A88_t* data;
+
+    data = &fp->x1A88;
+    if (data->x18 != data->x20 && data->x18 != data->x1C) {
+        data->x60 = 0;
+    }
+    if (data->x18 == 4) {
+        return false;
+    } else {
+        data->xFA_b2 = false;
+        return true;
+    }
+}
+
+static inline void ftCo_800AF290_inline0(Fighter* fp, bool is_food)
+{
+    Item_GObj* item_gobj;
+    ItemKind kind;
+    struct Fighter_x1A88_t* data;
+
+    data = &fp->x1A88;
+    item_gobj = fp->item_gobj;
+    if (item_gobj != NULL) {
+        kind = GET_ITEM(item_gobj)->kind;
+        if (kind == It_Kind_Heart) {
+            is_food = true;
+        } else if (kind == It_Kind_Tomato) {
+            is_food = true;
+        } else if (kind == It_Kind_Foods) {
+            is_food = true;
+        } else {
+            is_food = false;
+        }
+        if (is_food == false) {
+            data->x4C = NULL;
+            return;
+        }
+    }
+    if (fp->x2168 != 0) {
+        data->x4C = NULL;
+    } else {
+        data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
+    }
+}
+
 void ftCo_800AF290(Fighter* fp)
 {
     Vec3 sp54;
@@ -7068,20 +7137,15 @@ void ftCo_800AF290(Fighter* fp)
 
     Fighter* target;
     Fighter* nearby_fp;
-    Item_GObj* item_gobj;
-    ItemKind kind;
     f32 dx;
     f32 dy;
     f32 dist;
     s32 cmd;
-    s32 do_act;
     s32 redirect;
     bool is_food;
     Fighter** target_slot;
     struct Fighter_x1A88_t* data;
-    struct Fighter_x1A88_t* item_data;
-    struct Fighter_x1A88_t* data2;
-    PAD_STACK(0x14);
+    PAD_STACK(8);
 
     data = &fp->x1A88;
     cmd = ftCo_800A229C(fp, &sp54);
@@ -7101,16 +7165,7 @@ void ftCo_800AF290(Fighter* fp)
         data->xF9_b7 = false;
         data->xF9_b1 = true;
         ftCo_800A20A0_dontinline(fp);
-        if (data->x18 != data->x20 && data->x18 != data->x1C) {
-            data->x60 = 0;
-        }
-        if (data->x18 == 4) {
-            do_act = false;
-        } else {
-            data->xFA_b2 = false;
-            do_act = true;
-        }
-        if (do_act) {
+        if (ftCo_800AF290_should_act(fp)) {
             ftCo_800A80E4_dontinline(fp);
         }
         ftCo_800ADE48(fp);
@@ -7139,48 +7194,9 @@ void ftCo_800AF290(Fighter* fp)
 
     target = ftCo_800A4BEC(fp);
     *(target_slot = &fp->x1A88.x44) = target;
-    item_data = &fp->x1A88;
-
-    do {
-        item_gobj = fp->item_gobj;
-        if (item_gobj != NULL) {
-            kind = GET_ITEM(item_gobj)->kind;
-            if (kind == It_Kind_Heart) {
-                is_food = true;
-            } else if (kind == It_Kind_Tomato) {
-                is_food = true;
-            } else if (kind == It_Kind_Foods) {
-                is_food = true;
-            } else {
-                is_food = false;
-            }
-            if (is_food == false) {
-                item_data->x4C = NULL;
-                break;
-            }
-        }
-        if (fp->x2168 != 0) {
-            item_data->x4C = NULL;
-        } else {
-            item_data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
-        }
-    } while (0);
+    ftCo_800AF290_inline0(fp, is_food);
     fp->x1A88.x50 = ftCo_800A648C(fp);
-    data2 = &fp->x1A88;
-    if (ftCo_800A1C44_dontinline(fp)) {
-        data2->xF8_b6 = false;
-    } else {
-        target = data2->x44;
-        if (target != NULL && fp->ground_or_air == GA_Ground) {
-            if (ftCo_800A1AB4(fp, target) < Fighter_804D64FC->x20[fp->kind]) {
-                data2->xF8_b6 = true;
-            } else {
-                data2->xF8_b6 = false;
-            }
-        } else {
-            data2->xF8_b6 = false;
-        }
-    }
+    ftCo_800AF290_update_target(fp);
     target = data->x44;
     if (target != NULL) {
         dy = fp->cur_pos.y - target->cur_pos.y;
@@ -7190,17 +7206,7 @@ void ftCo_800AF290(Fighter* fp)
             return;
         }
     }
-    data2 = &fp->x1A88;
-    if (data2->x18 != data2->x20 && data2->x18 != data2->x1C) {
-        data2->x60 = 0;
-    }
-    if (data2->x18 == 4) {
-        do_act = false;
-    } else {
-        data2->xFA_b2 = false;
-        do_act = true;
-    }
-    if (do_act) {
+    if (ftCo_800AF290_should_act(fp)) {
         if (data->x4C != NULL) {
             ftCo_800A866C(fp);
         } else {
