@@ -173,6 +173,8 @@ static MCCErrorMessages mcc_error_messages = {
     "Channel (read/write) busy",
     "Unknown error",
 };
+static char mcc_error_caller_fmt[] = "%s: MCC Error, %s (%d)\n";
+static char mcc_error_fmt[] = "MCC Error, %s (%d)\n";
 
 static u16 numPeakParticles;
 
@@ -1281,9 +1283,9 @@ u8 fn_80392CD8(char* caller)
     }
 
     if (caller != NULL) {
-        OSReport("%s: MCC Error, %s (%d)\n", caller, msg, err);
+        OSReport(mcc_error_caller_fmt, caller, msg, err);
     } else {
-        OSReport("MCC Error, %s (%d)\n", msg, err);
+        OSReport(mcc_error_fmt, msg, err);
     }
     return err;
 }
