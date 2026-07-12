@@ -203,11 +203,7 @@ static void sdata2_order(void)
     (void) S32_TO_F32;
 }
 
-/// @todo 99.57%: pure callee-saved recoloring. Retail colors @c prev_kind
-/// into r29 before homing @c arg1 (r27); we home @c arg1 first (r29), and
-/// every later web (spawn walker, counts, rand kind) shifts with it. Decl
-/// order/position/scope sweeps, split counters, and user copies of @c arg1
-/// all compile byte-identical.
+/// @todo Only differs by register allocation.
 void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3)
 {
     ItemKind prev_kind;
