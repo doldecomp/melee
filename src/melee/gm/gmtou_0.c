@@ -36,6 +36,75 @@
 #include <baselib/random.h>
 #include <baselib/sislib.h>
 
+static void sdata2_order(void)
+{
+    (void) 4.5f;
+    (void) 130.0f;
+    (void) -278.0f;
+    (void) 255.0f;
+    (void) 0.0f;
+    (void) 537.0f;
+    (void) 149.0f;
+    (void) 409.0f;
+    (void) 47.0f;
+    (void) 143.0f;
+    (void) 183.0f;
+    (void) 48.5999985f;
+    (void) 514.0f;
+    (void) 87.0f;
+    (void) S32_TO_F32;
+    (void) U32_TO_F32;
+    (void) 1.0f;
+    (void) 16.0f;
+    (void) 6.0f;
+    (void) 5.0f;
+    (void) 25.0f;
+    (void) 666.0f;
+    (void) 12.8000078f;
+    (void) 2.62000084f;
+    (void) 0.100000001f;
+    (void) 201.0f;
+    (void) 200.0f;
+    (void) 0.899999976f;
+    (void) -1.79999995f;
+    (void) 7.18999958f;
+    (void) 2.70000005f;
+    (void) 2.29999995f;
+    (void) 0.300000012f;
+    (void) 11.5f;
+    (void) 3.5f;
+    (void) -12.3000011f;
+    (void) 0.649999976f;
+    (void) 0.660000026f;
+    (void) -3.0f;
+    (void) 4.5000062f;
+    (void) 0.200000003f;
+    (void) -1.0f;
+    (void) 10.0999928f;
+    (void) 28195.498f;
+    (void) 124.5f;
+    (void) 45.0f;
+    (void) 391.0f;
+    (void) 30.0f;
+    (void) 393.0f;
+    (void) 221.699997f;
+    (void) 360.0f;
+    (void) 40.0f;
+    (void) 160.0f;
+    (void) 48.0f;
+    (void) 123.0f;
+    (void) 113.0f;
+    (void) 35.7000008f;
+    (void) 343.0f;
+    (void) 0.5f;
+    (void) 0.579999983f;
+    (void) 0.550000012f;
+    (void) 0.850000024f;
+    (void) 1.35000002f;
+    (void) -19.5f;
+    (void) 13.0f;
+}
+
 /* 4D664C */ extern SceneDesc* lbl_804D664C;
 /* 4DA704 */ extern f32 lbl_804DA704; // 48.6f
 /* 4DA708 */ extern f32 lbl_804DA708; // 514.0f
@@ -254,23 +323,22 @@ void fn_801910E0(HSD_GObj* gobj)
 
 void fn_80191154(HSD_GObj* gobj)
 {
-    struct Lbl804799B8_t* state;
+    u8* base_ptr;
     TmData* tm;
-    u8* xE_ptr;
     HSD_JObj* jobj;
-    HSD_JObj* jobj_copy;
+    u8* xE_ptr;
+    u8 val;
 
-    state = &lbl_804799B8;
+    base_ptr = &lbl_804799B8.x0;
     tm = gm_8018F634();
     jobj = gobj->hsd_obj;
 
     if (tm->cur_option < 9) {
-        if (state->xE > 0x27U) {
-            state->xE = 0xA;
+        if ((u8) *(xE_ptr = base_ptr + 0xE) > 0x27U) {
+            *xE_ptr = 0xA;
         }
     } else {
-        xE_ptr = &state->xE;
-        if (*xE_ptr == 0x31) {
+        if ((u8) *(xE_ptr = base_ptr + 0xE) == 0x31) {
             fn_80190ABC(6);
             fn_80190ABC(5);
             tm->cur_option = 0xA;
@@ -279,9 +347,9 @@ void fn_80191154(HSD_GObj* gobj)
             *xE_ptr = 0x32;
         }
     }
-    jobj_copy = &jobj[0];
-    fn_8019044C(jobj_copy, (float) state->xE);
-    state->xE++;
+    val = *(base_ptr += 0xE);
+    fn_8019044C(jobj, (f32) val);
+    *base_ptr = *base_ptr + 1;
 }
 
 static inline u8 fn_80191240_dec_flash_timer(void)
@@ -406,7 +474,7 @@ void fn_801913BC(HSD_GObj* gobj)
             tm->x500[idx]->hidden = 1;
         }
 
-        if (tm->cur_option >= 3 && tm->match_type == 0) {
+        if (tm->cur_option >= 3 && gm_804771C4.match_type == 0) {
             tm->x4E4->hidden = 0;
         } else {
             tm->x4E4->hidden = 1;
@@ -414,8 +482,8 @@ void fn_801913BC(HSD_GObj* gobj)
 
         cur = tm->cur_option;
         if ((s32) idx == cur) {
-            counter_ptr = &(&lbl_804799B8.x0)[0x10 + idx];
-            if (*counter_ptr >= 0x14U) {
+            counter_ptr = &lbl_804799B8.x0 + idx;
+            if (*(counter_ptr += 0x10) >= 0x14U) {
                 *counter_ptr = 0xA;
             }
             fn_8019044C(jobj, (f32) *counter_ptr);
@@ -483,10 +551,10 @@ void fn_80191678(HSD_GObj* gobj)
     HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
 }
 
-/// @todo Currently 99.84% match - remaining mismatch is stack slot placement
 /// Updates menu option selection animation.
 void fn_8019175C(HSD_GObj* gobj)
 {
+    UNUSED u8 pad[8];
     HSD_JObj* jobjs[3];
     HSD_JObj* first_child;
     HSD_JObj* option_a;
@@ -500,7 +568,7 @@ void fn_8019175C(HSD_GObj* gobj)
 
     tm = gm_8018F634();
     fn_8018F62C(gobj);
-    root_jobj = GET_JOBJ(gobj);
+    root_jobj = gobj->hsd_obj;
     jobj = root_jobj;
 
     if (tm->cur_option >= 9) {
@@ -787,6 +855,11 @@ void fn_80191E9C(HSD_GObj* gobj)
     fn_8019044C(jobj, (f32) tm->x37[idx].x2);
 }
 
+static inline int fn_80191FD4_is_selected(u32 hud, s32 slot, TmData* tm)
+{
+    return (s32) tm->x37[slot].x3 == hud;
+}
+
 void fn_80191FD4(HSD_GObj* gobj)
 {
     TmData* tm;
@@ -866,7 +939,7 @@ void fn_80191FD4(HSD_GObj* gobj)
     x2_ptr = &state->x2;
     x3_ptr = &state->x3;
     slot = *x2_ptr + *x3_ptr;
-    if ((s32) tm->x37[slot].x3 == hud) {
+    if (fn_80191FD4_is_selected(hud, slot, tm)) {
         fn_8019044C(child, (f32) (state->xA + 0xA));
     } else {
         hud = fn_8018F6DC(fn_8018F3BC((s32) idx));
@@ -947,7 +1020,6 @@ void fn_8019237C(HSD_GObj* gobj)
         lbl_804DA734);
 }
 
-/// @todo Currently 97.76% match
 static inline HSD_JObj* fn_8019249C_get_jobj(HSD_GObj* gobj)
 {
     return gobj->hsd_obj;
@@ -985,6 +1057,7 @@ void fn_8019249C(HSD_GObj* gobj)
     child = HSD_JObjGetNext(child);
     child = HSD_JObjGetNext(child);
     child = HSD_JObjGetNext(child);
+    HSD_JObjGetNext(child);
     child2 = HSD_JObjGetNext(child);
     child2 = HSD_JObjGetNext(child2);
     child2 = HSD_JObjGetNext(child2);
@@ -994,6 +1067,7 @@ void fn_8019249C(HSD_GObj* gobj)
         child3 = child2->next;
     }
     child2 = child3;
+    HSD_JObjGetNext(child2);
 
     if (cur_option == 0xD) {
         fn_8019044C(child, 0.0F);
@@ -1196,7 +1270,7 @@ s32 fn_80192938(void)
     tm->x24 = 0;
     tm->pad_x34[0] = 0xFF;
     tm->x33 = 0xFF;
-    return (s32) handicap;
+    return handicap & 0xFF;
 }
 #pragma pop
 
@@ -1752,7 +1826,10 @@ void fn_80193FCC(s32* arg0, u32 arg1, u32 arg2)
             u8* min_entry = table + 0x40;
             idx = arg0[0];
             ptr = arg0 + idx;
-            val = *++ptr;
+            {
+                s32 next = *++ptr;
+                val = next;
+            }
             clamp_expr = idx << 1;
             if (val > (s32) min_entry[clamp_expr + (*mt != 0)]) {
                 *ptr = val - 1;
@@ -1983,7 +2060,7 @@ void fn_80194658(s32* arg0, u32 arg1, u32 arg2)
 
     ptr = arg0 + idx;
     val = fn_80194658_get_value(ptr);
-    ptr++;
+    ptr = arg0 + idx + 1;
 
     if (0 == dir) {
         if (lbl_804D665C < 2) {
@@ -2145,12 +2222,10 @@ void fn_801949B4(s32* arg0, u32 arg1, u32 arg2)
     }
 }
 
-/// @todo Currently 84.75% match - needs register allocation fix
 void fn_80194BC4(s32* arg0, u32 arg1, u32 arg2)
 {
     int* match_type_ptr = &gm_804771C4.match_type;
-    u8* data_ptr = lbl_803D9F80.pad_0;
-    u8* lookup_ptr;
+    TmSettingTable* table = &lbl_803D9F80;
     s32 value;
     s32* arr_ptr;
     s32 option;
@@ -2162,28 +2237,26 @@ void fn_80194BC4(s32* arg0, u32 arg1, u32 arg2)
     if (arg1 & 0x40001) {
         lbAudioAx_80024030(2);
         lbl_804799B8.x7 = 5;
-        option = *arg0;
-        lookup_ptr = data_ptr + (option << 1);
+        option = arg0[0];
         arr_ptr = arg0 + option;
-        value = *(++arr_ptr);
-        lookup_ptr += (*match_type_ptr != 0);
-        if (value > lookup_ptr[0x40]) {
+        value = *++arr_ptr;
+
+        if (value > (s32) table->min[option][!!*match_type_ptr]) {
             *arr_ptr = value - 1;
         } else {
-            *arr_ptr = lookup_ptr[0x4C];
+            *arr_ptr = (s32) table->max[option][!!*match_type_ptr];
         }
     } else if (arg1 & 0x80002) {
         lbAudioAx_80024030(2);
         lbl_804799B8.x8 = 5;
-        option = *arg0;
-        lookup_ptr = data_ptr + (option << 1);
+        option = arg0[0];
         arr_ptr = arg0 + option;
-        value = *(++arr_ptr);
-        lookup_ptr += (*match_type_ptr != 0);
-        if (value < lookup_ptr[0x4C]) {
+        value = *++arr_ptr;
+
+        if (value < (s32) table->max[option][!!*match_type_ptr]) {
             *arr_ptr = value + 1;
         } else {
-            *arr_ptr = lookup_ptr[0x40];
+            *arr_ptr = (s32) table->min[option][!!*match_type_ptr];
         }
     }
 
@@ -2338,14 +2411,12 @@ void fn_80194F30(s32* state_ptr, u32 buttons, u32 trigger)
     } else if (buttons & 0x10008) {
         if (*state_ptr != 0x10 || state->x1 == 0) {
             u8* pos_ptr;
-            pos_ptr = &state->x2;
-            if (*pos_ptr != 0) {
+            if (*(pos_ptr = &state->x2) != 0) {
                 lbAudioAx_80024030(2);
                 *pos_ptr -= 1;
                 fn_80190ABC(5);
             } else {
-                pos_ptr = &state->x3;
-                if (*pos_ptr != 0) {
+                if (*(pos_ptr = &state->x3) != 0) {
                     lbAudioAx_80024030(2);
                     *pos_ptr -= 1;
                     state->x4 -= 1;
@@ -2356,9 +2427,7 @@ void fn_80194F30(s32* state_ptr, u32 buttons, u32 trigger)
         } else {
             u8* pos_ptr;
             u8* scroll_ptr;
-            pos_ptr = &state->x3;
-            scroll_ptr = &state->x2;
-            idx = state->x2 + state->x3;
+            idx = *(scroll_ptr = &state->x2) + *(pos_ptr = &state->x3);
             if (tm->x37[idx].x2 > 1) {
                 lbAudioAx_80024030(2);
                 idx = *scroll_ptr + *pos_ptr;
@@ -2368,16 +2437,16 @@ void fn_80194F30(s32* state_ptr, u32 buttons, u32 trigger)
     } else if (buttons & 0x20004) {
         if (*state_ptr != 0x10 || state->x1 == 0) {
             u8* pos_ptr;
-            pos_ptr = &state->x2;
-            if (state->x2 < 0xB) {
-                if (state->x2 + state->x3 < tm->x2E - 1) {
+            u8* scroll_ptr;
+            u8 pos = *(scroll_ptr = &state->x2);
+            if (pos < 0xB) {
+                if (pos + state->x3 < tm->x2E - 1) {
                     lbAudioAx_80024030(2);
-                    *pos_ptr += 1;
+                    *scroll_ptr += 1;
                     fn_80190ABC(5);
                 }
             } else {
-                pos_ptr = &state->x3;
-                if (state->x2 + *pos_ptr < tm->x2E - 1) {
+                if (pos + *(pos_ptr = &state->x3) < tm->x2E - 1) {
                     lbAudioAx_80024030(2);
                     *pos_ptr += 1;
                     state->x4 += 1;
@@ -2388,9 +2457,7 @@ void fn_80194F30(s32* state_ptr, u32 buttons, u32 trigger)
         } else {
             u8* pos_ptr;
             u8* scroll_ptr;
-            pos_ptr = &state->x3;
-            scroll_ptr = &state->x2;
-            idx = state->x2 + state->x3;
+            idx = *(scroll_ptr = &state->x2) + *(pos_ptr = &state->x3);
             if (tm->x37[idx].x2 < 9) {
                 lbAudioAx_80024030(2);
                 idx = *scroll_ptr + *pos_ptr;
@@ -2416,17 +2483,19 @@ void fn_80194F30(s32* state_ptr, u32 buttons, u32 trigger)
             return;
         case 16:
             if (state->x0 != 1) {
-                if (state->x1 != 1) {
+                u8* flag_ptr;
+                if (*(flag_ptr = &state->x1) != 1) {
                     lbAudioAx_80024030(1);
                 }
-                state->x1 = 1;
+                *flag_ptr = 1;
                 return;
             }
             break;
         }
     } else if (trigger & 0x200) {
+        u8* flag_ptr;
         lbAudioAx_80024030(0);
-        if (*state_ptr != 0x10 || state->x1 == 0) {
+        if (*state_ptr != 0x10 || *(flag_ptr = &state->x1) == 0) {
             *state_ptr = 6;
             state->xE = 0;
             if (gm_804771C4.match_type == 0) {
@@ -2437,7 +2506,7 @@ void fn_80194F30(s32* state_ptr, u32 buttons, u32 trigger)
                 fn_80190520(-278.0f, 255.0f, 0.0f);
             }
         } else {
-            state->x1 = 0;
+            *flag_ptr = 0;
         }
     }
 }
@@ -2538,10 +2607,13 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
             }
         }
     } else if (buttons & 0x10008) {
+        s32 temp;
+
         step = 5;
         for (i = 1; i < 5; i++) {
-            candidate = cur_pos - step;
-            if (candidate < 0) {
+            temp = cur_pos - step;
+            candidate = temp;
+            if (temp < 0) {
                 candidate += 25;
             }
             adj = fn_8018F6DC(fn_8018F3BC(candidate));
@@ -2649,7 +2721,6 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
     }
 }
 
-/// @todo Currently 93.5% match - permuter couldn't improve
 /// Handles name entry/selection input for tournament mode.
 void fn_80195AF0(s32* state_ptr, u32 buttons, u32 trigger)
 {
@@ -2680,9 +2751,7 @@ void fn_80195AF0(s32* state_ptr, u32 buttons, u32 trigger)
     if (trigger & 0x100) {
         lbAudioAx_80024030(1);
         tm_alt = (TmData_80194F30*) state_ptr;
-        x2 = &menu->x2;
-        x3 = &menu->x3;
-        idx = *x2 + *(x2 + 1);
+        idx = *(x2 = &menu->x2) + *(x3 = &menu->x3);
         tm_alt->x37[idx].xB = tm_alt->x37[idx].x9;
         switch (*state_ptr) {
         case 0xD:

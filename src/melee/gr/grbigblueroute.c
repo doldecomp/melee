@@ -534,21 +534,12 @@ s32 grBigBlueRoute_8020C530(Ground_GObj* arg0)
     HSD_ASSERT(0X2E5, 0);
 }
 
-/// @todo Currently 92.06% match - register allocation (gp in r30 vs r31)
-/// and addressing-mode choices for RouteEntry stores.
-void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
+/// @todo Register allocation and addressing-mode choices for RouteEntry
+/// stores.
+static inline void grBigBlueRoute_SpawnRoute(Ground* gp, Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
     s32 route_idx;
     PAD_STACK(8);
-
-    if (!((f32) gp->u.car.x108 < 1.0f + grBb_Route_804D6A68->x40)) {
-        return;
-    }
-
-    if (gp->u.car.x10A-- >= 0) {
-        return;
-    }
 
     if (gp->u.car.x108 == 0) {
         route_idx = 30;
@@ -664,6 +655,26 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
     gp->u.car.x108++;
 }
 
+static inline int grBigBlueRoute_DelayRoute(Ground* gp)
+{
+    return gp->u.car.x10A-- >= 0;
+}
+
+void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+
+    if (!((f32) gp->u.car.x108 < 1.0f + grBb_Route_804D6A68->x40)) {
+        return;
+    }
+
+    if (grBigBlueRoute_DelayRoute(gp)) {
+        return;
+    }
+
+    grBigBlueRoute_SpawnRoute(gp, gobj);
+}
+
 static const Vec3 grBb_Route_803B83E0 = { 0.0f, 1.0f, 0.0f };
 
 /// @todo Currently 89.41% match - SYSTEMIC: float-constant hoisting order and
@@ -679,7 +690,7 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
     Vec3 pos;
     Vec3 rot;
     Vec3 fighter_pos;
-    PAD_STACK(0x3C);
+    PAD_STACK(0x2C);
 
     fighter = Ground_801C57A4();
     if (fighter != NULL) {
@@ -885,6 +896,7 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                 Vec3 p1;
                 Vec3 road_tan;
                 Vec3 road;
+                Vec3 air_rot;
 
                 prog =
                     (RE_ENTRY->x14 - RE_ENTRY->x24) / (1.0f - RE_ENTRY->x24);
@@ -900,6 +912,7 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                 PSVECCrossProduct(&tangent, &side, &up);
                 grBigBlueRoute_8020DD64(&up);
                 Ground_801C5AEC(&orient, &tangent, &side, &up);
+                air_rot = orient;
                 {
                     f32 s = 45.0f * Ground_801C0498();
                     up.x *= s;
@@ -924,7 +937,7 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                 pos.y *= prog;
                 pos.z *= prog;
                 lbVector_Add(&pos, &air);
-                rot = orient;
+                rot = air_rot;
 
                 if (RE_ENTRY->x14 == 1.0f) {
                     RE_ENTRY->flags.b2_5 = 0;

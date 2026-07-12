@@ -879,7 +879,7 @@ static inline void HSD_SisLib_803A6B98_inline0(HSD_Text* text, u8** cur,
 
 int HSD_SisLib_803A6B98(HSD_Text* text, float x, float y, const char* fmt, ...)
 {
-    u8 buffer[104];
+    u8 buffer[112];
     u8 encoded[128];
     s32 x_coord;
     s32 y_coord;
@@ -1018,8 +1018,7 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
     u8 buffer[128];
     u8 encoded[128];
     s32 old_size;
-    HSD_Text* old_buf;
-    s32 new_size;
+    u8* new_buf;
     s32 shrink_diff;
     s32 tail_len;
     s32 copy_idx;
@@ -1030,7 +1029,7 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
     u32 bulk_count;
     u8* entry;
     u8* playhead;
-    u8* new_buf;
+    va_list args;
     u8* copy_src;
     u8* copy_dst;
     u8* src;
@@ -1039,7 +1038,7 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
     SisBlock* alloc;
     s32 result;
     SisBlock* old_end;
-    va_list args;
+    s32 new_size;
 
     entry = fn_803A6FEC((u8*) text->sis_buffer, entry_idx, &old_size);
     if (entry != NULL) {
@@ -1054,6 +1053,7 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
             new_size = 0;
         }
         if (old_size < new_size) {
+            HSD_Text* old_buf;
             old_end = alloc->next;
             result = new_size - old_size;
             old_buf = alloc->data;

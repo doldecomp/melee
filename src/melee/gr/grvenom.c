@@ -25,6 +25,61 @@
 #include <baselib/lobj.h>
 #include <baselib/random.h>
 #include <baselib/sislib.h>
+#include "MSL/math.h"
+
+static void sdata2_order(void)
+{
+    (void) -1.0f;
+    (void) 1.0f;
+    (void) 0.0f;
+    (void) 1.04719758f;
+    (void) -100000.0f;
+    (void) 10000.0f;
+    (void) 100000.0f;
+    (void) 1000.0f;
+    (void) -60000.0f;
+    (void) 0.0;
+    (void) 1033.0f;
+    (void) 1086.0f;
+    (void) 1185.0f;
+    (void) 1238.0f;
+    (void) 1063.0f;
+    (void) 1116.0f;
+    (void) 1215.0f;
+    (void) 1268.0f;
+    (void) 2460.0f;
+    (void) 6440.0f;
+    (void) 9330.0f;
+    (void) 2747.0f;
+    (void) 3030.0f;
+    (void) 3393.0f;
+    (void) 3727.0f;
+    (void) 6880.0f;
+    (void) 9600.0f;
+    (void) 9835.0f;
+    (void) 4070.0f;
+    (void) 7220.0f;
+    (void) 4200.0f;
+    (void) 3800.0f;
+    (void) 4400.0f;
+    (void) 6100.0f;
+    (void) 7210.0f;
+    (void) 6810.0f;
+    (void) 7410.0f;
+    (void) 9200.0f;
+    (void) 0.0f;
+    (void) -0.134765625f;
+    (void) 1.45533512e+28f;
+    (void) 1.6866933e+28f;
+    (void) 50.0f;
+    (void) 6.2831853071795862;
+    (void) -3.1415926535897931;
+    (void) 3.1415926535897931;
+    (void) 20.0f;
+    (void) -100.0f;
+    (void) -2000.0f;
+    (void) 5.0f;
+}
 
 /// Forward declaration of grVe_Data for use by multiple functions
 /// @todo This struct should be defined in gr/types.h or a proper header
@@ -38,7 +93,148 @@ typedef struct grVe_Data {
     char x2BC[0x30];
 } grVe_Data;
 
-extern grVe_Data grVe_803E5348;
+/// Collision link points consumed via #StageData.x2C (see
+/// #Ground_801C2FE0): each entry is (coll line, map id, unused).
+/// Data ownership: retail .data of this TU starts here (0x803E5348);
+/// tail entries are the zero padding observed in the reference object.
+static S16Vec3 grVe_CollLinks[9] = {
+    { 0, 5, 0 }, { 1, 5, 0 }, { 2, 9, 0 }, { 4, 10, 0 }, { 3, 13, 0 },
+};
+
+/// Per-Arwing group indices into #grVe_ArwingJoints (cf. Corneria's
+/// grCn_803E1D68.arwing_group).
+static int grVe_ArwingGroups[3] = { 0 };
+
+StageCallbacks grVe_Callbacks[16] = {
+    {
+        grVenom_80203F98,
+        grVenom_80203FC4,
+        grVenom_80203FCC,
+        grVenom_80203FD0,
+        0,
+    },
+    {
+        grVenom_80206B94,
+        grVenom_80206BBC,
+        grVenom_80206BC4,
+        grVenom_80206BEC,
+        0x20000000,
+    },
+    {
+        grVenom_80204F20,
+        grVenom_802052D8,
+        grVenom_802053B0,
+        grVenom_802056AC,
+        0,
+    },
+    {
+        grVenom_80205AD4,
+        grVenom_80205DF0,
+        grVenom_80205F30,
+        grVenom_80206870,
+        0,
+    },
+    {
+        grVenom_80203FD4,
+        grVenom_802040A4,
+        grVenom_802040AC,
+        grVenom_802040B0,
+        0,
+    },
+    {
+        grVenom_802040F0,
+        grVenom_8020427C,
+        grVenom_80204284,
+        grVenom_80204424,
+        0xC0000000,
+    },
+    {
+        grVenom_80206874,
+        grVenom_80206B68,
+        grVenom_80206B70,
+        grVenom_80206B90,
+        0,
+    },
+    {
+        grVenom_80204428,
+        grVenom_80204544,
+        grVenom_8020454C,
+        grVenom_80204B84,
+        0,
+    },
+    {
+        grVenom_80204CE0,
+        grVenom_80204CE4,
+        grVenom_80204CEC,
+        grVenom_80204DB0,
+        0,
+    },
+    {
+        grVenom_80204DD4,
+        grVenom_80204EF4,
+        grVenom_80204EFC,
+        grVenom_80204F1C,
+        0,
+    },
+    {
+        grVenom_802056B0,
+        grVenom_80205750,
+        grVenom_80205758,
+        grVenom_80205AD0,
+        0,
+    },
+    {
+        grVenom_802056B0,
+        grVenom_80205750,
+        grVenom_80205758,
+        grVenom_80205AD0,
+        0,
+    },
+    {
+        grVenom_802056B0,
+        grVenom_80205750,
+        grVenom_80205758,
+        grVenom_80205AD0,
+        0,
+    },
+    {
+        grVenom_802056B0,
+        grVenom_80205750,
+        grVenom_80205758,
+        grVenom_80205AD0,
+        0,
+    },
+    {
+        grVenom_802056B0,
+        grVenom_80205750,
+        grVenom_80205758,
+        grVenom_80205AD0,
+        0,
+    },
+    {
+        grVenom_802056B0,
+        grVenom_80205750,
+        grVenom_80205758,
+        grVenom_80205AD0,
+        0,
+    },
+};
+
+StageData grVe_StageData = {
+    VENOM,
+    grVe_Callbacks,
+    "/GrVe",
+    grVenom_80203B18,
+    grVenom_80203B14,
+    grVenom_80203DD0,
+    grVenom_80203E80,
+    grVenom_80203EA4,
+    grVenom_80206D74,
+    grVenom_80206D7C,
+    0x00000001,
+    grVe_CollLinks,
+    5,
+};
 
 /// @todo Move these local structs to proper headers
 typedef struct grVe_ExtData {
@@ -46,9 +242,11 @@ typedef struct grVe_ExtData {
     void* x20[3];
     s32 x2C[3];
     s32 x38[3];
+    char pad44[0x338 - 0x44];
+    s32 x338[5];
 } grVe_ExtData;
 
-#define VE_DATA ((grVe_ExtData*) &grVe_803E5348)
+#define VE_DATA ((grVe_ExtData*) &grVe_CollLinks)
 
 typedef struct grVe_TimingData {
     f32 x0;
@@ -80,6 +278,11 @@ typedef struct grVe_GroundData {
 } grVe_GroundData;
 
 /// grVenom_8020362C
+
+static inline s32* grVe_GetArwingTypes(grVe_ExtData* ext)
+{
+    return ext->x2C;
+}
 
 void grVenom_8020362C(void)
 {
@@ -135,7 +338,7 @@ void grVenom_8020362C(void)
                             return;
                         }
                         {
-                            s32* x2c_base = ext->x2C;
+                            s32* x2c_base = grVe_GetArwingTypes(ext);
                             x2c_ptr = &x2c_base[0];
                         }
                         idx = *x2c_ptr;
@@ -319,7 +522,7 @@ void grVenom_80203B18(void)
     HSD_LObj* next;
     PAD_STACK(0xC);
 
-    data = (s32*) &grVe_803E5348;
+    data = (s32*) &grVe_CollLinks;
     grVe_804D6A30 = Ground_801C49F8();
     grVenom_80203EAC(4);
     stage_info.unk8C.b4 = 0;
@@ -444,7 +647,7 @@ Ground_GObj* grVenom_80203EAC(int gobj_id)
 {
     Ground_GObj* gobj;
     Ground* gp;
-    grVe_Data* base = &grVe_803E5348;
+    grVe_Data* base = (grVe_Data*) &grVe_CollLinks;
     StageCallbacks* callbacks =
         &((StageCallbacks*) ((char*) base + 0x44))[gobj_id];
 
@@ -465,11 +668,21 @@ Ground_GObj* grVenom_80203EAC(int gobj_id)
             HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
-        OSReport(&base->x1B8_file[0], &base->x1DC_func[0], 0x23B, gobj_id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grvenom.c", 0x23B,
+                 gobj_id);
     }
 
     return gobj;
 }
+
+/// Per-state map animation ids, read via the stage data base pointer
+/// (`base[state + 0x7A]`, see #grVenom_802053B0); trailing entries are
+/// the zero/3/6 words observed in the reference object.
+static int grVe_AnimIds[53] = {
+    -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0, 0, 0, 0, 0, 0,
+    0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0,
+    0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  3, 3, 3, 3, 6,
+};
 
 void grVenom_80203F98(Ground_GObj* gobj)
 {
@@ -980,16 +1193,21 @@ bool grVenom_80204EF4(Ground_GObj* arg)
     return false;
 }
 
-bool grVenom_80204EFC(Ground_GObj* arg)
+void grVenom_80204EFC(Ground_GObj* arg)
 {
-    return Ground_801C2FE0(arg);
+    Ground_801C2FE0(arg);
 }
 
 void grVenom_80204F1C(Ground_GObj* arg) {}
 
+/// Error message read through the stage data base pointer in
+/// #grVenom_80204F20 (`base + 0x2BC`); sits between #grVe_AnimIds and
+/// the TU's pooled assert strings in the reference object.
+static char grVe_UserDataErrorMsg[] = "arwin:user data error\n";
+
 void grVenom_80204F20(Ground_GObj* arg0)
 {
-    s32* base = (s32*) &grVe_803E5348;
+    s32* base = (s32*) &grVe_CollLinks;
     Ground* gp = arg0->user_data;
     HSD_JObj* jobj = arg0->hsd_obj;
     u32 idx = grVe_804D6A34;
@@ -1066,7 +1284,7 @@ void grVenom_802052E0(Ground_GObj* gobj, Vec3* pos)
 {
     u8* new_var2;
     Vec3 jobj_pos;
-    s32* spawn_table = (s32*) &grVe_803E5348;
+    s32* spawn_table = (s32*) &grVe_CollLinks;
     Ground* gp;
     HSD_JObj* jobj;
     s32* new_var;
@@ -1097,9 +1315,6 @@ void grVenom_802052E0(Ground_GObj* gobj, Vec3* pos)
 }
 
 /// grVenom_802053B0
-/// @todo Currently 99.95% match - data relocation ownership remains
-
-extern f32 grVe_804DB740;
 
 void grVenom_802053B0(Ground_GObj* gobj)
 {
@@ -1114,7 +1329,7 @@ void grVenom_802053B0(Ground_GObj* gobj)
     PAD_STACK(0x10);
 
     gp = gobj->user_data;
-    base = (s32*) &grVe_803E5348;
+    base = (s32*) &grVe_CollLinks;
     jobj = gobj->hsd_obj;
     ptr = base + gp->gv.venom.xC8;
 
@@ -1153,20 +1368,20 @@ void grVenom_802053B0(Ground_GObj* gobj)
             break;
         case 1:
             if (grVenom_80205E84(&sp28) == 0) {
-                gp->gv.venom.xD8 = 2;
+                *(s32*) &gp->gv.venom.xD8 = 2;
             }
             break;
         case 2:
             if (grVenom_80205E84(&sp28) == 1) {
                 lbAudioAx_800237A8(0x6B6C2, 0x7F, 0x40);
-                gp->gv.venom.xD8 = 3;
+                *(s32*) &gp->gv.venom.xD8 = 3;
             }
             break;
         }
         goto type_done;
 
     far_type:
-        HSD_JObjSetRotationY(jobj, grVe_804DB740);
+        HSD_JObjSetRotationY(jobj, 0.0F);
 
         gp2 = gobj->user_data;
         grVenom_802052E0(gobj, &sp1C);
@@ -1180,13 +1395,13 @@ void grVenom_802053B0(Ground_GObj* gobj)
             break;
         case 1:
             if (grVenom_80205E84(&sp1C) == 0) {
-                gp2->gv.venom.xD8 = 2;
+                *(s32*) &gp2->gv.venom.xD8 = 2;
             }
             break;
         case 2:
             if (grVenom_80205E84(&sp1C) == 1) {
                 lbAudioAx_800237A8(0x6B6C2, 0x7F, 0x40);
-                gp2->gv.venom.xD8 = 3;
+                *(s32*) &gp2->gv.venom.xD8 = 3;
             }
             break;
         }
@@ -1203,10 +1418,17 @@ void grVenom_802053B0(Ground_GObj* gobj)
 
 void grVenom_802056AC(Ground_GObj* arg) {}
 
+/// Per-state animation ids (cf. Corneria's grCn_803E214C).
+static int grVe_StateAnims[10] = { -1, -1, 1, 0, 2, 2, 4, 4, 5, 5 };
+
+/// Per-group map animation ids (cf. Corneria's grCn_803E217C).
+static int grVe_MapAnims[5] = { 0x0A, 0x0A, 0x0B, 0x0C, 0x0D };
+
+/// Joint id per Arwing group (cf. Corneria's grCn_803E2190).
+static int grVe_ArwingJoints[5] = { 4, 4, 4, 4, 3 };
+
 /// grVenom_802056B0
 
-extern int grVe_803E5380[];
-extern int grVe_803E5680[];
 extern u32 grVe_804D6A34;
 
 void grVenom_802056B0(Ground_GObj* gobj)
@@ -1220,8 +1442,8 @@ void grVenom_802056B0(Ground_GObj* gobj)
 
     Ground_801C2ED0(jobj, gp->map_id);
     gp->gv.venom.xC8 = grVe_804D6A34;
-    joint_idx = grVe_803E5380;
-    joints = grVe_803E5680;
+    joint_idx = grVe_ArwingGroups;
+    joints = grVe_ArwingJoints;
     gp->gv.venom.xD0 = 0;
     gp->gv.venom.xDC = 0.0F;
     gp->gv.venom.xE8 = 0.0F;
@@ -1248,20 +1470,13 @@ extern f64 grVe_804DB800;
 
 void grVenom_80205758(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
-    s32* base = (s32*) &grVe_803E5348;
-    HSD_JObj* jobj = gobj->hsd_obj;
-    s32* entry = base + gp->gv.venom.xC8;
-    f32 v;
-    f32 scale;
-    PAD_STACK(8);
+    grVe_ExtData* data = VE_DATA;
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
 
-    if ((u32) entry[8] != 0U) {
-        v = gp->gv.venom.xE8;
-        if (v < 0.0F) {
-            v = -v;
-        }
-        if (v < grVe_804DB7E8) {
+    if (data->x20[gp->gv.venom.xC8] != NULL) {
+        f32 angle = ABS(gp->gv.venom.xE8);
+        if (angle < grVe_804DB7E8) {
             gp->gv.venom.xE8 = 0.0F;
             while (gp->gv.venom.xDC < grVe_804DB7F8) {
                 gp->gv.venom.xDC += grVe_804DB7F0;
@@ -1269,11 +1484,7 @@ void grVenom_80205758(Ground_GObj* gobj)
             while (gp->gv.venom.xDC > grVe_804DB800) {
                 gp->gv.venom.xDC -= grVe_804DB7F0;
             }
-            v = gp->gv.venom.xDC;
-            if (v < 0.0F) {
-                v = -v;
-            }
-            if (v < grVe_804DB744) {
+            if (ABS(gp->gv.venom.xDC) < grVe_804DB744) {
                 HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
             } else {
                 HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
@@ -1281,27 +1492,39 @@ void grVenom_80205758(Ground_GObj* gobj)
         } else {
             HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         }
-
         HSD_JObjSetTranslate(jobj, (Vec3*) &gp->gv.venom.xE0);
-
-        scale = Ground_801C0498();
-        HSD_JObjSetScaleX(jobj, scale * grVe_804D6A30->x34);
-        HSD_JObjSetScaleY(jobj, scale * grVe_804D6A30->x34);
-        HSD_JObjSetScaleZ(jobj, scale * grVe_804D6A30->x34);
-
+        {
+            f32 scale = Ground_801C0498();
+            {
+                f32 s = scale * grVe_804D6A30->x34;
+                HSD_JObjSetScaleX(jobj, s);
+            }
+            {
+                f32 s = scale * grVe_804D6A30->x34;
+                HSD_JObjSetScaleY(jobj, s);
+            }
+            {
+                f32 s = scale * grVe_804D6A30->x34;
+                HSD_JObjSetScaleZ(jobj, s);
+            }
+        }
         Ground_801C2FE0(gobj);
     } else {
-        mpLib_80057BC0(base[entry[14] + 0xCE]);
+        mpLib_80057BC0(data->x338[data->x38[gp->gv.venom.xC8]]);
         Ground_801C4A08(gobj);
     }
 }
+
+/// Per-group animation flags (cf. Corneria's grCn_803E21B0); the
+/// trailing zero word is present in the reference object.
+static int grVe_AnimFlags[6] = { 1, 1, 1, 1, 1, 0 };
 
 void grVenom_80205AD0(Ground_GObj* arg) {}
 
 /// grVenom_80205AD4
 void grVenom_80205AD4(Ground_GObj* gobj)
 {
-    s32* data = (s32*) &grVe_803E5348;
+    s32* data = (s32*) &grVe_CollLinks;
     Ground* gp = gobj->user_data;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     f32 scale;
@@ -1415,7 +1638,6 @@ extern Vec3 grVe_803B82DC;
 
 void grVenom_80205F30(Ground_GObj* gobj)
 {
-    u8 padA0[8];
     Vec3 sp94;
     Vec3 sp88;
     u8 pad70[0x18];
@@ -1436,12 +1658,12 @@ void grVenom_80205F30(Ground_GObj* gobj)
     s32 type_idx;
     HSD_JObj* helper;
 
-    base = (s32*) &grVe_803E5348;
+    base = (s32*) &grVe_CollLinks;
     gp = gobj->user_data;
     jobj = gobj->hsd_obj;
     sp94 = grVe_803B82D0;
     sp88 = grVe_803B82DC;
-    PAD_STACK(0x28);
+    PAD_STACK(0x20);
 
     if (grVe_804D6A3C != 0) {
         return;
@@ -1455,7 +1677,14 @@ void grVenom_80205F30(Ground_GObj* gobj)
         }
 
         state = base[gp->gv.venom.xC8 + 11];
-        if (state >= 1 && state < 8) {
+        switch (state) {
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
             HSD_JObjSetRotationY(jobj, 0.0F);
 
             {
@@ -1558,7 +1787,11 @@ void grVenom_80205F30(Ground_GObj* gobj)
                     }
                 }
             }
-        } else if (state >= 8 && state < 0xC) {
+            break;
+        case 8:
+        case 9:
+        case 10:
+        case 11:
             if (!(gp->gv.venom.xF0 & 7) && HSD_Randi(8) == 0) {
                 gp->gv.venom.xFC = 0;
                 type_idx = base[gp->gv.venom.xC8 + 11];
@@ -1664,6 +1897,7 @@ void grVenom_80205F30(Ground_GObj* gobj)
                                         0);
                 }
             }
+            break;
         }
 
         gp->gv.venom.xF0 = gp->gv.venom.xF0 + 1;
@@ -1692,7 +1926,7 @@ void grVenom_80206870(Ground_GObj* arg) {}
 /// @todo Currently 99.60% match - needs register allocation fixes
 void grVenom_80206874(Ground_GObj* gobj)
 {
-    s32* data = (s32*) &grVe_803E5348;
+    s32* data = (s32*) &grVe_CollLinks;
     Ground* gp = gobj->user_data;
     HSD_JObj* jobj = gobj->hsd_obj;
     f32 scale;
@@ -1857,7 +2091,7 @@ DynamicsDesc* grVenom_80206D74(enum_t arg)
     return false;
 }
 
-bool grVenom_80206D7C(Vec3* pos, s32 arg1, HSD_JObj* arg2)
+bool grVenom_80206D7C(Vec3* pos, int arg1, HSD_JObj* arg2)
 {
     Vec3 sp20;
     Vec3 sp14;

@@ -1393,8 +1393,7 @@ HSD_GObj* mn_8022B3A0(u8 state)
     HSD_JObj* sp48[12];
     HSD_JObj* sp2C[7];
     StaticModelDesc* top = &MenMainConTop_Top;
-    HSD_GObj* gobj;
-    HSD_JObj* cursor_jobj;
+    MenuKind menu_kind;
     int temp_r31;
     HSD_JObj* temp_r16_2;
     u8 hovered_selection;
@@ -1403,11 +1402,10 @@ HSD_GObj* mn_8022B3A0(u8 state)
     AnimLoopSettings* var_r4_3;
     u8 option_count;
     u8 cur_menu;
-    MenuKind menu_kind;
+    HSD_GObj* gobj;
     MainMenuData* user_data;
     AnimLoopSettings* anim_loop;
     int i;
-    HSD_JObj* jobj;
     AnimLoopSettings* tmp;
     u8 var_r17;
     u32 var_r17_int;
@@ -1466,6 +1464,8 @@ HSD_GObj* mn_8022B3A0(u8 state)
     for (i = 0; i < option_count; i++) {
         StaticModelDesc* top = &MenMainCursor_Top;
         if (mn_80229938(mn_804A04F0.cur_menu, i) != 0) {
+            HSD_JObj* jobj;
+            HSD_JObj* cursor_jobj;
             menu_kind = mn_804A04F0.cur_menu;
             var_r16_2 = mn_80229A04(menu_kind, i);
             HSD_JObjReqAnim(sp48[var_r16_2], var_r17_int);

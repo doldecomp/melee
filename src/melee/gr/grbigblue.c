@@ -923,7 +923,10 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
             fwd.x = speed_val;
             fwd.z = 0.0f;
             fwd.y = 0.0f;
-            lbVector_ApplyEulerRotation(&fwd, &euler);
+            {
+                Vec3* fwd_ptr = &fwd;
+                lbVector_ApplyEulerRotation(fwd_ptr, &euler);
+            }
             lbVector_Add(&fwd, &pos);
 
             {
@@ -936,10 +939,7 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
             back.x = speed_val;
             back.z = 0.0f;
             back.y = 0.0f;
-            {
-                Vec3* back_ptr = &back;
-                lbVector_ApplyEulerRotation(back_ptr, &euler);
-            }
+            lbVector_ApplyEulerRotation(&back, &euler);
             lbVector_Add(&back, &pos);
 
             {
@@ -1038,15 +1038,15 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                             gp->gv.bigblue.data[i].x44.y = 0.0f;
                             gp->gv.bigblue.data[i].x18.z = 0.0f;
                             gp->gv.bigblue.data[i].x18.y = 0.0f;
-                            gp->gv.bigblue.data[i].x34 = 4;
+                            gp->gv.bigblue.data[i].x34 = 3;
                         }
                     } else if (gp->gv.bigblue.data[i].x4 <= 0) {
                         gp->gv.bigblue.data[i].x44.y = grBb_804D69C8->xAC;
                         gp->gv.bigblue.data[i].x4 = grBb_804D69C8->xB4;
-                        gp->gv.bigblue.data[i].x34 = 3;
+                        gp->gv.bigblue.data[i].x34 = 2;
                     } else {
-                        f32 prev_x = gp->gv.bigblue.data[i].x24;
                         f32 prev_y = gp->gv.bigblue.data[i].x28;
+                        f32 prev_x = gp->gv.bigblue.data[i].x24;
 
                         if (prev_x < prev_y) {
                             gp->gv.bigblue.data[i].x18.z =
@@ -1373,12 +1373,12 @@ void grBigBlue_801E8A1C(int idx)
     ItemKind* candPtr;
     ItemKind* validPtr;
     int i;
-    int validCount = 0;
+    int validCount;
     ItemKind candidates[5];
     ItemKind valid[5];
     HSD_JObj* platform = gp->gv.bigblue.xD4[idx];
 
-    i = 0;
+    i = validCount = 0;
     candidates[0] = grBb_803B8120[0];
     candidates[1] = grBb_803B8120[1];
     candPtr = candidates + i;
@@ -3061,10 +3061,11 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
     s32 lo;
     s32 hi;
     HSD_JObj* jobj;
+    PAD_STACK(8);
 
     for (i = 0; i < 30; i++) {
         u8 val;
-        mpJointSetCb1(*(s16*) ((u8*) grBb_803E2938 + 0x4C4 + i * 2), gp,
+        mpJointSetCb1(lbl_803E2DFC[i], gp,
                       (mpLib_Callback) fn_801EF60C);
         HSD_JObjSetFlagsAll(((HSD_JObj**) gp->gv.bigblue.xC8)[i], JOBJ_HIDDEN);
         val = HSD_Randi(2) ? 0 : 2;
@@ -3172,9 +3173,7 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
             *(s32*) (car + 0xF0) = lo;
 
             {
-                Ground_801C5440(
-                    gp, k,
-                    ((u32*) ((u8*) grBb_803E2938 + 0x6D8))[HSD_Randi(4)]);
+                Ground_801C5440(gp, k, lbl_803E3010[HSD_Randi(4)]);
             }
 
             *(f32*) (car + 0xEC) = 1.0F;
@@ -3925,15 +3924,16 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
                     break;
                 case 3: {
                     u8* p = gp;
+                    s32 i;
                     s32 right_cnt = 0;
                     s32 left_cnt = 0;
                     s32 right_10 = 0;
                     s32 left_10 = 0;
 
-                    for (j = 0; j < 4; j++, p += 0x40) {
+                    for (i = 0; i < 4; p += 0x40, i++) {
                         u32 st;
 
-                        if (j == index) {
+                        if (i == index) {
                             continue;
                         }
 
@@ -4183,7 +4183,6 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
 
                 car_d4 = car + 0xD4;
                 car_e0 = (Vec3*) (car + 0xE0);
-                car_ec = (f32*) (car + 0xEC);
 
                 {
                     register s32 dir_val;
@@ -4238,6 +4237,7 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
                     *(s32*) (car + 0xF0) = lo;
                 }
 
+                car_ec = (f32*) (car_e0 + 1);
                 ((u8*) gp->gv.bigblue.xCC)[slot] = 1;
                 *car_ec = 0.0f;
 
@@ -4327,7 +4327,6 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
 
                 car_d4 = car + 0xD4;
                 car_e0 = (Vec3*) (car + 0xE0);
-                car_ec = (f32*) (car + 0xEC);
 
                 {
                     register s32 dir_val;
@@ -4382,6 +4381,7 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
                     *(s32*) (car + 0xF0) = lo;
                 }
 
+                car_ec = (f32*) (car_e0 + 1);
                 ((u8*) gp->gv.bigblue.xCC)[slot] = 1;
                 *car_ec = 0.0f;
 
@@ -4461,7 +4461,7 @@ bool grBigBlue_801EEF00(Ground_GObj* gobj, s32 index)
     offset = index << 6;
     gp = (u8*) gobj->user_data;
 
-    switch ((gp[offset + 0xD4] >> 2) & 0x3F) {
+    switch ((*(volatile u8*) (gp + offset + 0xD4) >> 2) & 0x3F) {
     case 1:
         return 0;
 

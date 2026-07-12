@@ -1162,20 +1162,15 @@ s32 fn_801F8E58(Ground_GObj* arg0, s32* out)
     s32 a;
     IceMtTimerCursor* timer;
     s32* p;
-    s32* outp;
     s32 i;
     s32 max;
     s32 chosen;
     IceMtTimerCursor* timer_base;
-    Ground* gp;
     s32 b;
     s32 d;
 
-    max = 0;
-    p = &list[max];
-    outp = out;
-    gp = arg0->user_data;
-    timer = (IceMtTimerCursor*) gp;
+    p = &list[max = 0];
+    timer = arg0->user_data;
     timer_base = timer;
     for (i = 0; i < 12; i++) {
         if (timer->xDC == 0 && (Stage_80225194() != 0xD4 || i >= 4)) {
@@ -1197,7 +1192,7 @@ s32 fn_801F8E58(Ground_GObj* arg0, s32* out)
         timer = (IceMtTimerCursor*) ((s16*) timer + 1);
     }
 
-    (&gp->gv.icemt.xDC)[chosen] = ((s16*) grIm_804D69F4)[1];
+    (&timer_base->xDC)[chosen] = ((s16*) grIm_804D69F4)[1];
     a = ((s16*) grIm_804D69F4)[0x36 / 2];
     b = ((s16*) grIm_804D69F4)[0x38 / 2];
     if (a > b) {
@@ -1207,7 +1202,7 @@ s32 fn_801F8E58(Ground_GObj* arg0, s32* out)
         d = b - a;
         a = a + (d != 0 ? HSD_Randi(d) : 0);
     }
-    *outp = a;
+    *out = a;
     return chosen;
 }
 

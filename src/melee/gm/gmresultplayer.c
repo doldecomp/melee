@@ -88,9 +88,8 @@ typedef struct {
 typedef struct {
     /* 0x000 */ u8 pad[0x10];
     /* 0x010 */ CameraKindParams kind[(0x6D0 - 0x10) / 0x30];
-    /* 0x6D0 */ f32 slot_x_off[4];
-    /* 0x6E0 */ f32 slot_y_off[4];
-    /* 0x6F0 */ u8 pad_6F0[0xF08 - 0x6F0];
+    /* 0x6D0 */ f32 slot_off[(0xF00 - 0x6D0) / 0x30][3][4];
+    /* 0xF00 */ u8 pad_F00[0xF08 - 0xF00];
     /* 0xF08 */ HSD_CObjDesc cobj_desc;
 } CameraKindData;
 
@@ -274,11 +273,14 @@ static const float scroll_speed = 0.2F;
 static inline bool scrollDown(int slot, float amount)
 {
     int scroll_max;
+    // Preserve the original register move for the nested call.
+    int arg = slot;
     ResultsData* data = &lbl_8046DBE8;
     amount *= scroll_speed;
 
     scroll_max = fn_80174A60(fn_801748EC(&lbl_803D6878,
-                                         data->player_data[slot].page, slot),
+                                         data->player_data[slot].page,
+                                         slot | arg),
                              slot) -
                  10;
     if (data->player_data[slot].scroll_offset < scroll_max) {
@@ -1123,6 +1125,22 @@ int fn_80179854(void)
 
 extern s32 ftLib_800876B4(HSD_GObj*);
 
+static inline HSD_ImageDesc* get_player_img2(int slot,
+                                             ResultsDisplayData* disp)
+{
+    return &disp->player_img2[slot];
+}
+
+static inline int get_big_loser(int slot, MatchEnd* match_end)
+{
+    return match_end->player_standings[slot].is_big_loser;
+}
+
+static inline HSD_JObj** get_result_jobjs(ResultsDisplayData* disp)
+{
+    return disp->jobjs;
+}
+
 void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
 {
     ResultsDisplayData* disp = &lbl_8046E1B0;
@@ -1137,11 +1155,14 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
 
     cobj = (HSD_CObj*) arg0->hsd_obj;
 
-    lookup =
-        match_end->is_teams == 0
-            ? match_end->player_standings[arg2].is_big_loser
-            : match_end->team_standings[match_end->player_standings[arg2].team]
-                  .is_big_loser;
+    if (match_end->is_teams == 0) {
+        lookup = get_big_loser(arg2, match_end);
+    } else {
+        lookup =
+            match_end->team_standings[match_end->player_standings[arg2].team]
+                .is_big_loser;
+    }
+    cobj = (HSD_CObj*) arg0->hsd_obj;
 
     if (lookup != 0) {
         HSD_JObj* root = (HSD_JObj*) disp->gobjs[arg2]->hsd_obj;
@@ -1161,7 +1182,8 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
             Camera_800313E0(arg0, 0);
 
             {
-                HSD_ImageDesc* desc = &disp->player_img2[arg2];
+                HSD_ImageDesc* image_desc = disp->player_img2;
+                HSD_ImageDesc* desc = &image_desc[arg2];
 
                 HSD_ImageDescCopyFromEFB(
                     desc,
@@ -1214,7 +1236,7 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
                     Camera_800313E0(arg0, 0);
 
                     {
-                        HSD_ImageDesc* desc = &disp->player_img2[arg2];
+                        HSD_ImageDesc* desc = get_player_img2(arg2, disp);
 
                         HSD_ImageDescCopyFromEFB(
                             desc,
@@ -1237,7 +1259,7 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
 
                         disp->state.player_flags[arg2] = 1;
                         {
-                            HSD_JObj* jobj2 = disp->jobjs[arg2];
+                            HSD_JObj* jobj2 = get_result_jobjs(disp)[arg2];
                             jobj2->u.dobj->next->mobj->tobj->imagedesc = desc;
                         }
                     }
@@ -1465,11 +1487,11 @@ HSD_GObj* fn_8017A318(s32 arg0)
             f32 x_off, y_off;
 
             interest.x = interest_x;
-            x_off = data->slot_x_off[slot];
+            x_off = data->slot_off[kind_data][0][slot];
             eye.x += x_off;
             interest.x += x_off;
 
-            y_off = data->slot_y_off[slot];
+            y_off = data->slot_off[kind_data][1][slot];
             eye.y += y_off;
             interest.y += y_off;
         }

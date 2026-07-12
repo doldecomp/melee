@@ -586,11 +586,11 @@ void gm_801B1C24(GameScene* arg0)
         vs->data.players[2].slot = 0;
         vs->data.players[3].slot = 0;
     } else {
-        j = 1;
+        s32 k = 1;
         for (i = 0; i < 4; i++) {
             if (gm_804D68C0 != i) {
-                vs->data.players[j].slot = i + 1;
-                j++;
+                vs->data.players[k].slot = i + 1;
+                k++;
             }
         }
     }

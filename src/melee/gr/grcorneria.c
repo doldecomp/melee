@@ -1220,17 +1220,17 @@ void grCorneria_801DED50(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Vec3 pos = grCn_803B80B4;
-    PAD_STACK(8);
+    grCn_Data* data = (grCn_Data*) grCn_803E1D38;
 
     if (grCn_804D69AC) {
         return;
     }
 
-    if (grCn_803E1D68.arwing_gobj[gp->gv.corneria2.xC8] != NULL) {
-        if (grCn_803E1D68.arwing_group[gp->gv.corneria2.xC8] == 4) {
+    if (data->arwing_gobj[gp->gv.corneria2.xC8] != NULL) {
+        if (data->arwing_group[gp->gv.corneria2.xC8] == 4) {
             HSD_JObjSetRotationZ(Ground_801C3FA4(gobj, 1), 0.0f);
         }
-        switch (grCn_803E1D68.arwing_type[gp->gv.corneria2.xC8]) {
+        switch (data->arwing_type[gp->gv.corneria2.xC8]) {
         case 0:
         case 1:
         case 2:
@@ -1250,8 +1250,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                     gp->gv.corneria2.xF4 = new_state;
                     grAnime_801C8098(
                         gobj,
-                        grCn_803E214C[grCn_803E1D68
-                                          .arwing_group[gp->gv.corneria2.xC8]],
+                        grCn_803E214C[data->arwing_group[gp->gv.corneria2.xC8]],
                         7,
                         (&grCn_803E21B0[gp->gv.corneria2.xF4])[get_grp_off(
                             gobj)],
@@ -1259,8 +1258,9 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                 } else {
                     HSD_JObjSetRotationZ(
                         Ground_801C3FA4(
-                            gobj, grCn_803E21B0[grCn_803E1D68.arwing_group
-                                                    [gp->gv.corneria2.xC8]]),
+                            gobj,
+                            grCn_803E21B0[data->arwing_group
+                                             [gp->gv.corneria2.xC8]]),
                         0.0f);
                 }
                 gp->gv.corneria2.xF8 -= 1;
@@ -1276,15 +1276,14 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                 break;
             }
             {
-                HSD_GObj* arwing =
-                    grCn_803E1D68.arwing_gobj[gp->gv.corneria2.xC8];
+                HSD_GObj* arwing = data->arwing_gobj[gp->gv.corneria2.xC8];
                 if (arwing != NULL) {
                     Ground* arwing_gp = GET_GROUND(arwing);
                     Ground* ship_gp = GET_GROUND(Ground_801C2BA4(3));
                     Vec3 sp64;
                     lb_8000B1CC(Ground_801C3FA4(arwing, 4), NULL, &sp64);
                     {
-                        int* types = grCn_803E1D68.arwing_type;
+                        s32* types = data->arwing_type;
                         int atype = types[arwing_gp->gv.corneria2.xC8];
                         pos.x = ship_gp->gv.corneria.offset_x +
                                 (-sp64.z + lbl_803E2068[atype].x);
@@ -1304,8 +1303,8 @@ void grCorneria_801DED50(Ground_GObj* gobj)
             lb_8000B1CC(
                 Ground_801C3FA4(
                     gobj,
-                    grCn_803E21B0[grCn_803E1D68
-                                      .arwing_group[gp->gv.corneria2.xC8]]),
+                    grCn_803E21B0[data->arwing_group
+                                      [gp->gv.corneria2.xC8]]),
                 NULL, &pos);
             {
                 f32 rot_z;
@@ -1321,8 +1320,8 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                 }
                 rot_z = HSD_JObjGetRotationZ(Ground_801C3FA4(
                     gobj,
-                    grCn_803E21B0[grCn_803E1D68
-                                      .arwing_group[gp->gv.corneria2.xC8]]));
+                    grCn_803E21B0[data->arwing_group
+                                      [gp->gv.corneria2.xC8]]));
                 angle = rot_z;
                 {
                     HSD_GObj* item = gp->gv.corneria2.xDC;
@@ -1410,7 +1409,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
             }
             {
                 HSD_GObj* arwing;
-                if ((arwing = grCn_803E1D68.arwing_gobj[gp->gv.corneria2.xC8]))
+                if ((arwing = data->arwing_gobj[gp->gv.corneria2.xC8]))
                 {
                     Ground* arwing_gp = GET_GROUND(arwing);
                     Ground* ship_gp = GET_GROUND(Ground_801C2BA4(3));
@@ -1418,8 +1417,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                     lb_8000B1CC(Ground_801C3FA4(arwing, 4), NULL, &sp48);
                     {
                         s32 atype =
-                            grCn_803E1D68
-                                .arwing_type[arwing_gp->gv.corneria2.xC8];
+                            data->arwing_type[arwing_gp->gv.corneria2.xC8];
                         pos.x = ship_gp->gv.corneria.offset_x +
                                 (-sp48.z + lbl_803E2068[atype].x);
                         pos.y = sp48.y + lbl_803E2068[atype].y;
@@ -1453,7 +1451,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                 {
                     s32 grp_off = -1;
                     {
-                        int* groups = grCn_803E1D68.arwing_group;
+                        s32* groups = data->arwing_group;
                         int g = groups[GET_GROUND(gobj)->gv.corneria2.xC8];
                         switch (g) {
                         case 0:
@@ -2642,8 +2640,8 @@ void grCorneria_801E25C4(HSD_GObj* gobj, void* gv, int line, int arg3,
     v->joint_idx2 = 5;
     v->state = 0;
     v->timer = 0xA;
-    grAnime_801C8098(gobj, joint0, 7, 0, 0.0f, 1.0f);
     grAnime_801C8098(gobj, joint1, 7, 0, 0.0f, 1.0f);
+    grAnime_801C8098(gobj, joint0, 7, 0, 0.0f, 1.0f);
     grAnime_801C8098(gobj, 5, 7, 0, 0.0f, 1.0f);
     HSD_JObjAnimAll(gobj->hsd_obj);
 }

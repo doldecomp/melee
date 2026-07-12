@@ -1133,6 +1133,7 @@ void fn_80161C90(MatchEnd* arg0, int arg1, u16* arg2)
     struct gm_stats* s = (struct gm_stats*) arg2;
     u32 count;
     s32 flag;
+    s32 i;
 
     PAD_STACK(8);
     s->unk0 = (s->unk0 + p->self_destructs > 0xFFFF)
@@ -1174,18 +1175,8 @@ void fn_80161C90(MatchEnd* arg0, int arg1, u16* arg2)
                    ? 0xFFFFFFFFU
                    : s->unk20 + arg0->frame_count / 60;
     count = 0;
-    if (arg0->player_standings[0].slot_type != 3) {
-        count = 1;
-    }
-    if (arg0->player_standings[1].slot_type != 3) {
-        count += 1;
-    }
-    {
-        MatchPlayerData* pp = &arg0->player_standings[2];
-        if (pp->slot_type != 3) {
-            count += 1;
-        }
-        if (pp[1].slot_type != 3) {
+    for (i = 0; i < 4; i++) {
+        if (arg0->player_standings[i].slot_type != 3) {
             count += 1;
         }
     }
@@ -3224,8 +3215,8 @@ s32 gm_80166A98(MatchEnd* arg0, s32 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,
 
     arg0->player_standings[0].score = score0;
     arg0->player_standings[1].score = score1;
-    arg0->player_standings[2].score = score2;
-    arg0->player_standings[3].score = score3;
+    arg0->player_standings[2].score = 0xA - arg7;
+    arg0->player_standings[3].score = 0xA - arg_spC;
     arg0->player_standings[0].x30 = score0;
     arg0->player_standings[1].x30 = score1;
     arg0->player_standings[2].x30 = score2;
@@ -4654,10 +4645,10 @@ long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
         p = list;
         do {
             s8* q;
-            q = &lbl_8046B488.x1C0[HSD_Randi(0x1B)];
-            tmp = *q;
+            q = &lbl_8046B488.x0 + HSD_Randi(0x1B);
+            tmp = q[0x1C0];
             i += 1;
-            *q = (u8) *p;
+            q[0x1C0] = (u8) *p;
             *p = tmp;
             p += 1;
         } while (i < 0x1A);
@@ -4673,21 +4664,19 @@ long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
             list++;
         }
 
-        {
-            s8* dst2 = arg1;
-            s8* src2 = arg2;
-            s32 idx = 0;
-            while ((s8) *src2 != -2) {
-                while ((s8) lbl_8046B488.x1C0[idx] == -1) {
-                    idx = (idx + 1) % 27;
-                }
-                result = Player_800325C8(
-                    (CharacterKind) (s8) lbl_8046B488.x1C0[idx], 0);
-                *dst2 = result;
-                idx += 1;
-                src2 += 1;
-                dst2 += 1;
+        dst = arg1;
+        src = arg2;
+        i = 0;
+        while ((s8) *src != -2) {
+            while ((s8) lbl_8046B488.x1C0[i] == -1) {
+                i = (i + 1) % 27;
             }
+            result = Player_800325C8(
+                (CharacterKind) (s8) lbl_8046B488.x1C0[i], 0);
+            *dst = result;
+            i += 1;
+            src += 1;
+            dst += 1;
         }
         break;
     case 0:

@@ -223,6 +223,11 @@ HSD_JObj* mnVibration_GetNameRowJObj(s32 count)
 }
 #pragma pop
 
+static inline f32 mnVibration_GetCursorYSpacing(f32 base_y, HSD_JObj* jobj)
+{
+    return mnVibration_JObjGetTranslationY(jobj) - base_y;
+}
+
 void mnVibration_HandleInput(HSD_GObj* gobj)
 {
     HSD_JObj* cursor_jobj;
@@ -429,7 +434,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                 cursor_row = data->x0[1];
                 base_y = HSD_JObjGetTranslationY(jobj17);
                 jobj18 = data2->jobjs[18];
-                spacing = HSD_JObjGetTranslationY(jobj18) - base_y;
+                spacing = mnVibration_GetCursorYSpacing(base_y, jobj18);
                 temp_x = HSD_JObjGetTranslationX(jobj17);
                 HSD_JObjSetTranslateX(cursor_jobj, temp_x);
                 jobj17 = data2->jobjs[17];
@@ -799,11 +804,6 @@ void mnVibration_Think(HSD_GObj* gobj)
         }
         port_idx += 1;
     } while ((s32) port_idx < 4);
-}
-
-static inline f32 mnVibration_GetCursorYSpacing(f32 base_y, HSD_JObj* jobj)
-{
-    return mnVibration_JObjGetTranslationY(jobj) - base_y;
 }
 
 void mnVibration_IntroProc(HSD_GObj* arg0)

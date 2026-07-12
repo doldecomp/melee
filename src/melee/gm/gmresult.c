@@ -1,4 +1,8 @@
+#define fn_80174468(a, b, c, d, e, f)                                      \
+    fn_80174468(s32 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3, \
+                struct StatsList* list, s32 entry_idx)
 #include "gmresult.h"
+#undef fn_80174468
 
 #include "gm/types.h"
 
@@ -14,6 +18,10 @@ GMRESULT_STATIC_OBJECT(struct ResultsData, GMRESULT_LBL(8046DBE8));
 GMRESULT_STATIC_U32_PAIR(GMRESULT_LBL(804D3F8C), 0x817C817C, 0x817C0000);
 GMRESULT_GLOBAL_U32(GMRESULT_LBL(804D3FA0), 0x817C0000);
 GMRESULT_GLOBAL_U32(GMRESULT_LBL(804D3FA4), 0x817B0000);
+union {
+    u32 words[2];
+    char text[8];
+} GMRESULT_LBL(804D3FA8) = { { 0x817C8146, 0x817C0000 } };
 GMRESULT_STATIC_STR(GMRESULT_LBL(804D3FB0), "0");
 
 #include "gm_unsplit.h"
@@ -239,7 +247,7 @@ static s32 find_nth_nonzero(u8* arr, s32 n)
     return i;
 }
 
-void fn_80174468(u8 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
+void fn_80174468(s32 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
                  StatsList* list, s32 entry_idx)
 {
     StatsEntry* entry;
@@ -257,7 +265,7 @@ void fn_80174468(u8 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
     /* Float constants preloaded into registers */
     f32 const_zero = 0.0F;
     f32 const_neg30 = -30.0F;
-    PAD_STACK(12);
+    PAD_STACK(4);
 
     label_id = -1;
     value_id = -1;
@@ -271,81 +279,13 @@ void fn_80174468(u8 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
         /// Mode 2: special handling for pairs
         if ((entry_idx & 1) == 1 && entry_idx < list->count) {
             MatchEnd* me = lbl_8046DBE8.x94;
-            /* Inlined 8x unrolled find_nth_nonzero */
-            loop_n = entry_idx / 2;
-            loop_outer = 32;
-            loop_i = 0;
-            loop_n++;
+            loop_n = entry_idx / 2 + 1;
             loop_ptr = me->x44C[slot].x0;
-            (void) loop_ptr;
-            do {
-                loop_val = *loop_ptr;
-                if (loop_val != 0) {
-                    loop_n--;
-                    if (loop_n == 0) {
-                        goto found1;
-                    }
+            for (loop_i = 0; loop_i < 256; loop_i++, loop_ptr++) {
+                if (*loop_ptr != 0 && --loop_n == 0) {
+                    break;
                 }
-                loop_val = *++loop_ptr;
-                loop_i++;
-                if (loop_val != 0) {
-                    loop_n--;
-                    if (loop_n == 0) {
-                        goto found1;
-                    }
-                }
-                loop_val = *++loop_ptr;
-                loop_i++;
-                if (loop_val != 0) {
-                    loop_n--;
-                    if (loop_n == 0) {
-                        goto found1;
-                    }
-                }
-                loop_val = *++loop_ptr;
-                loop_i++;
-                if (loop_val != 0) {
-                    loop_n--;
-                    if (loop_n == 0) {
-                        goto found1;
-                    }
-                }
-                loop_val = *++loop_ptr;
-                loop_i++;
-                if (loop_val != 0) {
-                    loop_n--;
-                    if (loop_n == 0) {
-                        goto found1;
-                    }
-                }
-                loop_val = *++loop_ptr;
-                loop_i++;
-                if (loop_val != 0) {
-                    loop_n--;
-                    if (loop_n == 0) {
-                        goto found1;
-                    }
-                }
-                loop_val = *++loop_ptr;
-                loop_i++;
-                if (loop_val != 0) {
-                    loop_n--;
-                    if (loop_n == 0) {
-                        goto found1;
-                    }
-                }
-                loop_val = *++loop_ptr;
-                loop_i++;
-                if (loop_val != 0) {
-                    loop_n--;
-                    if (loop_n == 0) {
-                        goto found1;
-                    }
-                }
-                loop_ptr++;
-                loop_i++;
-            } while (--loop_outer);
-        found1:
+            }
             idx = fn_8016F1F0(loop_i);
             HSD_SisLib_803A6368(text1, (u16) fn_8016F280(idx) + 60);
         }
@@ -353,7 +293,7 @@ void fn_80174468(u8 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
 
     if (list->mode == 2 || entry->check != NULL) {
         if (list->mode != 2) {
-            result = ((s32 (*)(u8))(Event) entry->check)(slot);
+            result = ((s32 (*)(s32))(Event) entry->check)(slot);
             if (result < 0) {
                 value_id = HSD_SisLib_803A6B98(text3, const_zero, const_neg30,
                                                "%s", &lbl_804D3F8C);
@@ -365,80 +305,13 @@ void fn_80174468(u8 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
             idx = (entry_idx / 2) - 1;
             if (idx >= 0) {
                 MatchEnd* me = lbl_8046DBE8.x94;
-                /* Inlined 8x unrolled find_nth_nonzero */
-                loop_n = idx;
-                loop_outer = 32;
-                loop_i = 0;
-                loop_n++;
+                loop_n = idx + 1;
                 loop_ptr = me->x44C[slot].x0;
-                do {
-                    loop_val = *loop_ptr;
-                    if (loop_val != 0) {
-                        loop_n--;
-                        if (loop_n == 0) {
-                            goto found2;
-                        }
+                for (loop_i = 0; loop_i < 256; loop_i++, loop_ptr++) {
+                    if (*loop_ptr != 0 && --loop_n == 0) {
+                        break;
                     }
-                    loop_val = *++loop_ptr;
-                    loop_i++;
-                    if (loop_val != 0) {
-                        loop_n--;
-                        if (loop_n == 0) {
-                            goto found2;
-                        }
-                    }
-                    loop_val = *++loop_ptr;
-                    loop_i++;
-                    if (loop_val != 0) {
-                        loop_n--;
-                        if (loop_n == 0) {
-                            goto found2;
-                        }
-                    }
-                    loop_val = *++loop_ptr;
-                    loop_i++;
-                    if (loop_val != 0) {
-                        loop_n--;
-                        if (loop_n == 0) {
-                            goto found2;
-                        }
-                    }
-                    loop_val = *++loop_ptr;
-                    loop_i++;
-                    if (loop_val != 0) {
-                        loop_n--;
-                        if (loop_n == 0) {
-                            goto found2;
-                        }
-                    }
-                    loop_val = *++loop_ptr;
-                    loop_i++;
-                    if (loop_val != 0) {
-                        loop_n--;
-                        if (loop_n == 0) {
-                            goto found2;
-                        }
-                    }
-                    loop_val = *++loop_ptr;
-                    loop_i++;
-                    if (loop_val != 0) {
-                        loop_n--;
-                        if (loop_n == 0) {
-                            goto found2;
-                        }
-                    }
-                    loop_val = *++loop_ptr;
-                    loop_i++;
-                    if (loop_val != 0) {
-                        loop_n--;
-                        if (loop_n == 0) {
-                            goto found2;
-                        }
-                    }
-                    loop_ptr++;
-                    loop_i++;
-                } while (--loop_outer);
-            found2:
+                }
                 stat_value = *(s32*) &me->x44C[slot].x0[loop_i * 4 + 0x104];
                 if (stat_value < 0) {
                     value_id = HSD_SisLib_803A6B98(text3, const_zero,
@@ -457,14 +330,14 @@ void fn_80174468(u8 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
             if (entry->get != NULL) {
                 label_id = HSD_SisLib_803A6B98(
                     text2, const_zero, const_neg30, "%s",
-                    ((u8 * (*) (u8))(Event) entry->get)(slot));
+                    ((u8 * (*) (s32))(Event) entry->get)(slot));
             }
         }
     } else if (list->mode != 2) {
         if (entry->get != NULL) {
             label_id =
                 HSD_SisLib_803A6B98(text2, const_zero, const_neg30, "%s",
-                                    ((u8 * (*) (u8))(Event) entry->get)(slot));
+                                    ((u8 * (*) (s32))(Event) entry->get)(slot));
         }
     }
 
@@ -1070,89 +943,57 @@ end_common:
 void fn_80175880(s32 slot)
 {
     MatchEnd* me;
-    u32 new_var2;
-    s32 var_r30;
-    u8 winner;
-    GXColor sp10;
-    GXColor spC;
-    GXColor* new_var;
-    s32 skip;
+    s32 line_num;
     u32 seconds;
     u32 minutes;
+    u32 display_seconds;
+    GXColor color;
+    GXColor color_copy;
+    GXColor* color_p;
 
     me = lbl_8046DBE8.x94;
-    sp10 = fn_8017507C(slot);
-    if (me->player_standings[slot].slot_type == Gm_PKind_NA) {
-        goto grey_out;
-    }
-
-    winner = lbl_8046DBE8.x6;
-    if (winner == slot) {
-        goto show_normal;
-    }
-
-    if (me->is_teams == 1) {
-        if (me->team_standings[me->player_standings[slot].team].is_big_loser ==
-            0)
+    color = fn_8017507C(slot);
+    if (me->player_standings[slot].slot_type != Gm_PKind_NA) {
+        if (lbl_8046DBE8.x6 == slot ||
+            (me->is_teams == 1 &&
+             me->team_standings[me->player_standings[slot].team]
+                     .is_big_loser == 0 &&
+             ((s8) me->player_standings[slot].stocks > 0 ||
+              (me->player_standings[slot].x28 == me->frame_count &&
+               (s8) me->player_standings[lbl_8046DBE8.x6].stocks == 0))) ||
+            (gm_801743A4(me->result) &&
+             ((s8) me->player_standings[slot].stocks > 0 ||
+              me->player_standings[slot].score ==
+                  me->player_standings[lbl_8046DBE8.x6].score)))
         {
-            if ((s8) me->player_standings[slot].stocks > 0) {
-                goto show_normal;
+            line_num =
+                HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time,
+                                    0.0F, -30.0F, lbl_804D3FA8.text);
+        } else {
+            seconds = me->player_standings[slot].x28 / 60;
+            display_seconds = seconds;
+            if (seconds > 5999) {
+                display_seconds = 5999;
             }
-            if (me->player_standings[slot].x28 == me->frame_count) {
-                if ((s8) me->player_standings[winner].stocks == 0) {
-                    goto show_normal;
-                }
-            }
+            minutes = display_seconds / 60;
+            line_num = HSD_SisLib_803A6B98(
+                lbl_8046DBE8.player_data[slot].ko_time, 0.0F, -30.0F,
+                lbl_803D68CC, minutes, display_seconds % 60);
         }
-    }
-
-    if (me->result == 7 || me->result == 8) {
-        skip = 1;
     } else {
-        skip = 0;
+        color.r = 0xA0;
+        color.g = 0xA0;
+        color.b = 0xA0;
+        line_num = HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time,
+                                       0.0F, -30.0F, "%s", &lbl_804D3FA0);
     }
 
-    if (skip != 0) {
-        if ((s8) me->player_standings[slot].stocks > 0) {
-            goto show_normal;
-        }
-        if (me->player_standings[slot].score ==
-            me->player_standings[winner].score)
-        {
-            goto show_normal;
-        }
-    }
-
-    seconds = me->player_standings[slot].x28 / 60;
-    if (seconds > 5999) {
-        seconds = 5999;
-    }
-    minutes = seconds / 60;
-    new_var2 = minutes * 60;
-    var_r30 =
-        HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time, 0.0F,
-                            -30.0F, "%02d:%02d", minutes, seconds - new_var2);
-    goto end_common;
-
-show_normal:
-    var_r30 = HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time, 0.0F,
-                                  -30.0F, NULL);
-    goto end_common;
-
-grey_out:
-    sp10.r = 0xA0;
-    sp10.g = 0xA0;
-    sp10.b = 0xA0;
-    var_r30 = HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time, 0.0F,
-                                  -30.0F, NULL, 0);
-
-end_common:
-    HSD_SisLib_803A7548(lbl_8046DBE8.player_data[slot].ko_time, var_r30, 0.11f,
-                        0.08F);
-    spC = sp10;
-    new_var = &spC;
-    HSD_SisLib_803A74F0(lbl_8046DBE8.player_data[slot].ko_time, var_r30,
-                        new_var);
+    HSD_SisLib_803A7548(lbl_8046DBE8.player_data[slot].ko_time, line_num,
+                        0.11F, 0.08F);
+    color_copy = color;
+    color_p = &color_copy;
+    HSD_SisLib_803A74F0(lbl_8046DBE8.player_data[slot].ko_time, line_num,
+                        color_p);
 }
 
 static inline MatchEnd* fn_80175A94_get_match_end(void)

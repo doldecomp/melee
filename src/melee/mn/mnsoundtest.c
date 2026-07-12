@@ -516,7 +516,7 @@ void fn_8024B2B0(HSD_GObj* arg0)
         user_data->unk0 = state;
         state = user_data->unk0;
         gobj = mnSoundTest_804D6C40;
-        mnSoundTest_8024ABF8(gobj, (u8) (-(s32) state == 0));
+        mnSoundTest_8024ABF8(gobj, state == 0);
         mnSoundTest_8024AD58(gobj, state);
         return;
     }

@@ -118,7 +118,10 @@ typedef union {
     u8 idx[4];
 } JObjIndices;
 
-f32 mn_804D4B98 = 1.0f;
+/// Anim frame requested for the time-limit value jobj when the time limit
+/// is disabled. Retail mn_802324E4 loads this TU-owned .sdata variable
+/// (see symbols.txt) instead of materializing an .sdata2 constant.
+f32 mnRulePlus_TimeLimitOffFrame = 1.0f;
 volatile const f64 mn_804DBE38 = 4503599627370496.0;
 const JObjIndices mn_804DBE40 = { 0x02030506 };
 volatile f32 mn_804DBE44 = 0.0f;
@@ -333,7 +336,7 @@ void mn_802324E4(u8 time_limit, MenuRulesPlusData* data)
                 break;
             }
         }
-        HSD_JObjReqAnimAll(jobjs[4], 1.0f);
+        HSD_JObjReqAnimAll(jobjs[4], mnRulePlus_TimeLimitOffFrame);
         HSD_JObjAnimAll(jobjs[4]);
         return;
     }
@@ -826,15 +829,15 @@ HSD_GObj* mn_80233218(MenuState state)
         jobj_map[i] = (u16) i;
     }
 
+    desc = &MenMainConRl_Top;
     gobj = GObj_Create(6, 7, 0x80);
     mn_804D6BE0 = gobj;
-    root_jobj = HSD_JObjLoadJoint(MenMainConRl_Top.joint);
+    root_jobj = HSD_JObjLoadJoint(desc->joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, root_jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
     HSD_GObj_SetupProc(gobj, fn_80232F44, 0);
-    HSD_JObjAddAnimAll(root_jobj, MenMainConRl_Top.animjoint,
-                       MenMainConRl_Top.matanim_joint,
-                       MenMainConRl_Top.shapeanim_joint);
+    HSD_JObjAddAnimAll(root_jobj, desc->animjoint, desc->matanim_joint,
+                       desc->shapeanim_joint);
     HSD_JObjReqAnimAll(root_jobj, 0.0f);
     HSD_JObjAnimAll(root_jobj);
 

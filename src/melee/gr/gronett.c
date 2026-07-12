@@ -473,6 +473,11 @@ bool grOnett_801E43D8(Ground_GObj* gobj)
     return false;
 }
 
+static inline f32 grOnett_GetRandomCarSpeed(void)
+{
+    return grOt_804D69C0->x58 * HSD_Randf();
+}
+
 void grOnett_801E43E0(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
@@ -670,7 +675,7 @@ void grOnett_801E43E0(Ground_GObj* gobj)
                 }
                 gp->gv.onettcar.timer_b = grOt_804D69C0->x48;
                 gp->gv.onettcar.speed_b =
-                    grOt_804D69C0->x58 * HSD_Randf() + grOt_804D69C0->x54;
+                    grOnett_GetRandomCarSpeed() + grOt_804D69C0->x54;
                 gp->gv.onettcar.state_b = 2;
                 return;
             }

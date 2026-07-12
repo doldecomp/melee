@@ -210,7 +210,7 @@ void fn_8001ECF4(THPDecComp* data, void* buf)
     data->frame_buffers = (u32*) buf;
     count = data->unk_104;
     data->unk_64 = 0;
-    uv_size = y_size >> 2U;
+    uv_size = (width * height) >> 2U;
     var_r29 = (u8*) buf + (((count * 4) + 0x1F) & 0xFFFFFFE0);
     if (((s32) data->unk_6C != 0) && ((s32) data->unk_11C != 0)) {
         var_r24 = data->first_frame_size;
@@ -405,14 +405,26 @@ static inline u32 lbMthp_GetFrame(u32** rate_table, u32 counter)
     return frame;
 }
 
+static inline void lbMthp_GetPlayer(struct lbl_804333E0_t** streamPlayer,
+                                    u32*** rate_table)
+{
+    *streamPlayer = &MoviePlayer;
+    *rate_table = &(*streamPlayer)->rate_table;
+}
+
+static inline THPDecComp* lbMthp_GetDecoder(
+    struct lbl_804333E0_t* streamPlayer)
+{
+    return (THPDecComp*) streamPlayer;
+}
+
 void fn_8001F2A4(OSAlarm* alarm, OSContext* context)
 {
     struct lbl_804333E0_t* streamPlayer;
     u32** rate_table;
     u32 frame;
 
-    streamPlayer = &MoviePlayer;
-    rate_table = &streamPlayer->rate_table;
+    lbMthp_GetPlayer(&streamPlayer, &rate_table);
 
     frame = lbMthp_GetFrame(rate_table, streamPlayer->unk_80);
 
@@ -434,7 +446,7 @@ void fn_8001F2A4(OSAlarm* alarm, OSContext* context)
     frame = lbMthp_GetFrame(rate_table, streamPlayer->unk_80);
 
     if ((u32) streamPlayer->unk_78 != frame) {
-        fn_8001F06C((THPDecComp*) streamPlayer);
+        fn_8001F06C(lbMthp_GetDecoder(streamPlayer));
     }
 }
 
@@ -464,7 +476,10 @@ void lbMthp_8001F410(const char* filename, u32* rate_table, void* buf,
     OSCreateAlarm(&MoviePlayer.alarm);
     period = __cvt_dbl_usll(OSSecondsToTicks(1.0f / 60));
     start = __cvt_dbl_usll(OSSecondsToTicks(1.0f / 60));
-    OSSetPeriodicAlarm(&MoviePlayer.alarm, start, period, fn_8001F2A4);
+    OSSetPeriodicAlarm(
+        (OSAlarm*) ((uintptr_t) &MoviePlayer +
+                    offsetof(struct lbl_804333E0_t, alarm)),
+        start, period, fn_8001F2A4);
 }
 
 void lbMthp_8001F578(void)

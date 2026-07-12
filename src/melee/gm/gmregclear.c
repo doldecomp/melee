@@ -679,6 +679,38 @@ static inline s32 gm_8017CE34_CountEnemies(s8* arg0)
     return count;
 }
 
+static inline void gm_8017CE34_SetupColors(UnkAdventureData* arg1,
+                                             s32 count, s8* arg2, u8* colors)
+{
+    s32 color_idx;
+
+    {
+        u8* out_color = colors;
+        s8* kind_iter = arg2;
+        for (color_idx = 0; color_idx < 3; color_idx++) {
+            u8 kind = (u8) *kind_iter;
+            u8 num_colors = gm_80169238(kind);
+            u8 color_id;
+            if (arg1->x54 != NULL) {
+                u8 requested_color;
+                requested_color =
+                    arg1->x54((u8) count, arg1->x0.cpu_level,
+                              (u8) color_idx);
+                if (num_colors != 0) {
+                    color_id = requested_color % num_colors;
+                } else {
+                    color_id = 0;
+                }
+            } else {
+                color_id = 0;
+            }
+            *out_color = color_id;
+            out_color += 1;
+            kind_iter += 1;
+        }
+    }
+}
+
 s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
                 u8 arg3, u8 arg4, u8 arg5, s32 arg6, InternalStageId arg7,
                 s32 count, s32 arg9)
@@ -692,7 +724,6 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     u8 player_stocks;
     s32 player_ckind;
     u8 flags;
-    s32 color_idx;
     s8* enemy_kind;
     f32 defense_ratio;
     u8 enemy_ckind;
@@ -814,30 +845,7 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     attack_ratio = arg1->x64((u8) count, arg1->x0.cpu_level);
     defense_ratio = arg1->x68((u8) count, arg1->x0.cpu_level);
 
-    {
-        u8* out_color = colors;
-        s8* kind_iter = arg2;
-        for (color_idx = 0; color_idx < 3; color_idx++) {
-            u8 kind = (u8) *kind_iter;
-            u8 num_colors = gm_80169238(kind);
-            u8 color_id;
-            if (arg1->x54 != NULL) {
-                u8 requested_color;
-                requested_color =
-                    arg1->x54((u8) count, arg1->x0.cpu_level, (u8) color_idx);
-                if (num_colors != 0) {
-                    color_id = requested_color % num_colors;
-                } else {
-                    color_id = 0;
-                }
-            } else {
-                color_id = 0;
-            }
-            *out_color = color_id;
-            out_color += 1;
-            kind_iter += 1;
-        }
-    }
+    gm_8017CE34_SetupColors(arg1, count, arg2, colors);
     color_iter = colors;
 
     {
@@ -2800,16 +2808,16 @@ void fn_80180C60(HSD_GObj* gobj)
     typedef struct {
         u8 b76 : 2, b54 : 2, b32 : 2, b10 : 2;
     } x0_2bits;
-    HSD_JObj* jobj;
     typedef struct fn_80180C60_state {
         struct lbl_80472E48_t e48;
         s32 ec8[4];
     } fn_80180C60_state;
     fn_80180C60_state* state = (fn_80180C60_state*) &lbl_80472E48;
+    s32 d;
     s32* max_dist;
     s32 dist;
     s32 disp;
-    s32 d;
+    HSD_JObj* jobj;
     u32 b76;
 
     dist = (s32) (0.1f * Ground_801C57F0());
@@ -2884,12 +2892,11 @@ void fn_80180C60(HSD_GObj* gobj)
             JOBJ_HIDDEN);
     }
 
-    if (lbLang_IsSavedLanguageUS() != 0) {
-        disp = (s32) ((f64) (f32) dist / 0.304788);
-    } else {
-        disp = dist;
-    }
-    if (disp > 0x1869F) {
+    d = lbLang_IsSavedLanguageUS() != 0
+            ? (s32) ((f64) (f32) dist / 0.304788)
+            : dist;
+    disp = d;
+    if (d > 0x1869F) {
         disp = 0x1869F;
     }
 
@@ -3427,7 +3434,11 @@ void gm_80182174(void)
     RegClearSpawnEntry** spawn_table_25;
     RegClearSpawnEntry** spawn_table_26;
     s32 mode;
+    const void* raw;
+    const char* base;
 
+    raw = lbl_803D8D08;
+    base = raw;
     mode = gm_801A4310();
     spawn_table_25 = &lbl_80472ED8.x6B4;
     spawn_table_22 = &lbl_80472ED8.x6A8;
@@ -3436,11 +3447,11 @@ void gm_80182174(void)
     spawn_table_24 = &lbl_80472ED8.x6B0;
 
     lbArchive_80016DBC(
-        "GmKumite.dat", &lbl_80472ED8.x6A4, "gmKumiteSystemTable10man",
-        spawn_table_22, "gmKumiteSystemTable100man", spawn_table_23,
-        "gmKumiteSystemTable10min", spawn_table_24, "gmKumiteSystemTable60min",
-        spawn_table_25, "gmKumiteSystemTableEndless", spawn_table_26,
-        "gmKumiteSystemTableMercilessly", 0);
+        base + 0x480, &lbl_80472ED8.x6A4, base + 0x490,
+        spawn_table_22, base + 0x4AC, spawn_table_23,
+        base + 0x4C8, spawn_table_24, base + 0x4E4,
+        spawn_table_25, base + 0x500, spawn_table_26,
+        base + 0x51C, 0);
 
     lbl_80472ED8.x0 = 0;
     lbl_80472ED8.x4 = 0;
@@ -3569,7 +3580,6 @@ void gm_80182174(void)
     HSD_GObj_SetupProc(GObj_Create(0xFU, 0x11U, 0U),
                        (HSD_GObjEvent) fn_80181E18, 0x15U);
     gm_80168F88();
-    PAD_STACK(8);
 }
 
 bool gm_80182510(void)
@@ -3677,113 +3687,112 @@ s32 gm_80182578(void)
         break;
     }
 
-    if (mode < 0x25) {
-        if (mode < 0x23) {
-            if (mode < 0x21) {
-                return mode;
-            }
-            if (mode == 0x21) {
-                mode = gmMainLib_8015D6BC(gm_80164024((u8) idx));
-            } else {
-                mode = gmMainLib_8015D710(gm_80164024((u8) idx));
-            }
-            if ((u8) lbl_80472ED8.x6BC != 0) {
-                u32 score_store = (u32) lbl_80472ED8.x6C0;
-                if (score_store < score_val) {
-                    int m = lbl_80472ED8.x6C4;
-                    int i = lbl_80472ED8.x6C8;
-                    switch (m) {
-                    case 33:
-                        blocks[0].icons[i] = (u8) lbl_80472ED8.x6BC;
-                        break;
-                    case 34:
-                        blocks[1].icons[i] = (u8) lbl_80472ED8.x6BC;
-                        break;
-                    case 35:
-                        blocks[2].icons[i] = (u8) lbl_80472ED8.x6BC;
-                        break;
-                    case 36:
-                        blocks[3].icons[i] = (u8) lbl_80472ED8.x6BC;
-                        break;
-                    case 37:
-                        blocks[4].icons[i] = (u8) lbl_80472ED8.x6BC;
-                        break;
-                    case 38:
-                        blocks[5].icons[i] = (u8) lbl_80472ED8.x6BC;
-                        break;
-                    }
-                    switch (m) {
-                    case 33:
-                        blocks[0].scores[i] = score_store;
-                        break;
-                    case 34:
-                        blocks[1].scores[i] = score_store;
-                        break;
-                    case 35:
-                        blocks[2].scores[i] = score_store;
-                        break;
-                    case 36:
-                        blocks[3].scores[i] = score_store;
-                        break;
-                    case 37:
-                        blocks[4].scores[i] = score_store;
-                        break;
-                    case 38:
-                        blocks[5].scores[i] = score_store;
-                        break;
-                    }
-                    {
-                        u16 time_store = lbl_80472ED8.x6BE;
-                        switch (m) {
-                        case 33:
-                            blocks[0].times[i] = time_store;
-                            break;
-                        case 34:
-                            blocks[1].times[i] = time_store;
-                            break;
-                        case 35:
-                            blocks[2].times[i] = time_store;
-                            break;
-                        case 36:
-                            blocks[3].times[i] = time_store;
-                            break;
-                        case 37:
-                            blocks[4].times[i] = time_store;
-                            break;
-                        case 38:
-                            blocks[5].times[i] = time_store;
-                            break;
-                        }
-                    }
-                }
-                return mode;
-            }
-            if ((s32) lbl_80472ED8.x6BE > (s32) time_val && mode == 0) {
+    switch (mode) {
+    case 0x21:
+    case 0x22:
+        if (mode == 0x21) {
+            mode = gmMainLib_8015D6BC(gm_80164024((u8) idx));
+        } else {
+            mode = gmMainLib_8015D710(gm_80164024((u8) idx));
+        }
+        if ((u8) lbl_80472ED8.x6BC != 0) {
+            u32 score_store = (u32) lbl_80472ED8.x6C0;
+            if (score_store < score_val) {
                 int m = lbl_80472ED8.x6C4;
                 int i = lbl_80472ED8.x6C8;
                 switch (m) {
                 case 33:
-                    blocks[0].times[i] = (u16) lbl_80472ED8.x6BE;
+                    blocks[0].icons[i] = (u8) lbl_80472ED8.x6BC;
                     break;
                 case 34:
-                    blocks[1].times[i] = (u16) lbl_80472ED8.x6BE;
+                    blocks[1].icons[i] = (u8) lbl_80472ED8.x6BC;
                     break;
                 case 35:
-                    blocks[2].times[i] = (u16) lbl_80472ED8.x6BE;
+                    blocks[2].icons[i] = (u8) lbl_80472ED8.x6BC;
                     break;
                 case 36:
-                    blocks[3].times[i] = (u16) lbl_80472ED8.x6BE;
+                    blocks[3].icons[i] = (u8) lbl_80472ED8.x6BC;
                     break;
                 case 37:
-                    blocks[4].times[i] = (u16) lbl_80472ED8.x6BE;
+                    blocks[4].icons[i] = (u8) lbl_80472ED8.x6BC;
                     break;
                 case 38:
-                    blocks[5].times[i] = (u16) lbl_80472ED8.x6BE;
+                    blocks[5].icons[i] = (u8) lbl_80472ED8.x6BC;
                     break;
+                }
+                switch (m) {
+                case 33:
+                    blocks[0].scores[i] = score_store;
+                    break;
+                case 34:
+                    blocks[1].scores[i] = score_store;
+                    break;
+                case 35:
+                    blocks[2].scores[i] = score_store;
+                    break;
+                case 36:
+                    blocks[3].scores[i] = score_store;
+                    break;
+                case 37:
+                    blocks[4].scores[i] = score_store;
+                    break;
+                case 38:
+                    blocks[5].scores[i] = score_store;
+                    break;
+                }
+                {
+                    u16 time_store = lbl_80472ED8.x6BE;
+                    switch (m) {
+                    case 33:
+                        blocks[0].times[i] = time_store;
+                        break;
+                    case 34:
+                        blocks[1].times[i] = time_store;
+                        break;
+                    case 35:
+                        blocks[2].times[i] = time_store;
+                        break;
+                    case 36:
+                        blocks[3].times[i] = time_store;
+                        break;
+                    case 37:
+                        blocks[4].times[i] = time_store;
+                        break;
+                    case 38:
+                        blocks[5].times[i] = time_store;
+                        break;
+                    }
                 }
             }
             return mode;
         }
+        if ((s32) lbl_80472ED8.x6BE > (s32) time_val && mode == 0) {
+            int m = lbl_80472ED8.x6C4;
+            int i = lbl_80472ED8.x6C8;
+            switch (m) {
+            case 33:
+                blocks[0].times[i] = (u16) lbl_80472ED8.x6BE;
+                break;
+            case 34:
+                blocks[1].times[i] = (u16) lbl_80472ED8.x6BE;
+                break;
+            case 35:
+                blocks[2].times[i] = (u16) lbl_80472ED8.x6BE;
+                break;
+            case 36:
+                blocks[3].times[i] = (u16) lbl_80472ED8.x6BE;
+                break;
+            case 37:
+                blocks[4].times[i] = (u16) lbl_80472ED8.x6BE;
+                break;
+            case 38:
+                blocks[5].times[i] = (u16) lbl_80472ED8.x6BE;
+                break;
+            }
+        }
+        break;
+    case 0x23:
+    case 0x24:
         if ((u8) lbl_80472ED8.x6BC != 0) {
             u16 time_store = gm_80182578_GetTime();
             if ((s32) time_store > (s32) time_val) {
@@ -3829,8 +3838,9 @@ s32 gm_80182578(void)
                 }
             }
         }
-        return mode;
-    } else if (mode < 0x27) {
+        break;
+    case 0x25:
+    case 0x26:
         if ((s32) lbl_80472ED8.x6BE > (s32) time_val) {
             switch (mode) {
             case 33:
@@ -3853,8 +3863,9 @@ s32 gm_80182578(void)
                 break;
             }
         }
-        return mode;
+        break;
     }
+
     return mode;
     PAD_STACK(0x48);
 }

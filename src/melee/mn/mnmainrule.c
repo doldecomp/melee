@@ -467,11 +467,11 @@ void mn_8022FD18(u8 arg0)
     HSD_JObj** jobjs;
     HSD_JObj* jobj;
     struct mn_8022FB88_arg1_t* data;
-    s32 i;
     u8* ptr0;
     u8* ptr1;
     u8* ptr2;
     u8* ptr3;
+    s32 i;
     struct mn_8022FB88_arg1_t* data2;
     u8 val;
 
@@ -525,7 +525,6 @@ void mn_8022FD18(u8 arg0)
 void mn_8022FEC8(HSD_GObj* arg0, HSD_JObj* arg1, u8 arg2, u8 arg3)
 {
     struct mn_8022FB88_arg1_t* data;
-    HSD_JObj* digit_jobj;
     HSD_JObj* tens_jobj;
     HSD_JObj* ones_jobj;
     f32* frame;
@@ -533,10 +532,11 @@ void mn_8022FEC8(HSD_GObj* arg0, HSD_JObj* arg1, u8 arg2, u8 arg3)
     struct mn_8022FEC8_jobj_ref_t* tens_ref;
     struct mn_8022FEC8_jobj_ref_t* ones_ref;
     u8* base;
+    HSD_JObj* digit_jobj;
 
     PAD_STACK(0x18);
 
-    data = arg0->user_data;
+    data = HSD_GObjGetUserData(arg0);
     base = mn_803EC600;
     switch ((s32) arg2) {
     case 1:
@@ -687,12 +687,8 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
     indices[13] = 13;
     indices[14] = 14;
     indices[15] = 15;
-    i = 16;
-    idx = &indices[i];
-    while (i < 0x11) {
-        *idx = i;
-        idx++;
-        i++;
+    for (i = 16; i < 17; i++) {
+        indices[i] = i;
     }
 
     for (i = 0; i < count; i++) {
@@ -1205,9 +1201,12 @@ HSD_GObj* mn_80230E38(int arg0)
 
             if ((u32) (i - 5) > 1U) {
                 jobj = HSD_JObjLoadJoint((*descs)->joint);
-                HSD_JObjAddAnimAll(jobj, (*descs)->animjoint,
-                                   (*descs)->matanim_joint,
-                                   (*descs)->shapeanim_joint);
+                {
+                    HSD_MatAnimJoint* matanim_joint = (*descs)->matanim_joint;
+                    HSD_JObjAddAnimAll(jobj, (*descs)->animjoint,
+                                       matanim_joint,
+                                       (*descs)->shapeanim_joint);
+                }
                 HSD_JObjReqAnimAll(jobj, mn_804DBE00);
                 HSD_JObjAnimAll(jobj);
                 for (j = 0; j < *count_ptr; j++) {

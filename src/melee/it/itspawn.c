@@ -207,7 +207,6 @@ ItemKind it_8026C75C(ItemPickTable* arg_struct)
 static inline void it_8026C88C_inline(RandomItemSpawner* alloc,
                                       SpawnItem* spawn)
 {
-    s32* alloc_x0 = &alloc->x0;
     Vec3* pos;
     s32 chk;
     Item_GObj* spawn_gobj;
@@ -239,13 +238,11 @@ static inline void it_8026C88C_inline(RandomItemSpawner* alloc,
                 }
             } ///< @todo Make a FLT_RAND(min, max) define or inline
             {
-                pos = (Vec3*) &it_804D6D28->xFC[gm_8016AE80() * 2];
-                {
-                    s32* range = (s32*) pos;
-                    f32 randf = HSD_Randf();
-                    *alloc_x0 = (range[1] - range[0]) * randf + range[0];
-                }
-                *alloc_x0 *= Ground_801C2AE8(Stage_80225194());
+                s32* range = &it_804D6D28->xFC[gm_8016AE80() * 2];
+                f32 randf = HSD_Randf();
+                f32 diff = range[1] - range[0];
+                alloc->x0 = diff * randf + range[0];
+                alloc->x0 *= Ground_801C2AE8(Stage_80225194());
             }
         }
     }

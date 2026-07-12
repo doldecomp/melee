@@ -196,10 +196,32 @@ u32 AXDriver_8038C678(u32 param_type, u32 param_value)
     }
 }
 
+/// MSL sqrtf expansion (src/MSL/math_ppc.h) writing its result through a
+/// caller-provided slot, as in sqrtf_store in lbcollision.c and mplib.c.
+/// Evidence: retail AXDriver_8038BF6C keeps its eight sqrt results in
+/// adjacent 4-byte stack temps at frame offsets 0x10..0x2C (an 8-byte
+/// aligned base), one slot per call in source order, each accessed as a
+/// stfs/lfs pair. The volatile-qualified accesses through the slot pointer
+/// pin those pairs without changing behavior.
+static inline float sqrtf_store(float x, volatile float* y)
+{
+    if (x > 0.0F) {
+        double guess = __frsqrte((double) x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        *y = (float) (x * guess);
+        return *(volatile float*) y;
+    }
+    return x;
+}
+
 void AXDriver_8038BF6C(HSD_SM* v)
 {
     u32 flag;
     int i;
+    /// sqrtf result slots; retail frame offsets 0x10..0x2C (base aligned 8)
+    float sqrt_tmp[8] ATTRIBUTE_ALIGN(8);
 
     for (i = 0; i <= 9; i++) {
         flag = 1 << i;
@@ -209,10 +231,12 @@ void AXDriver_8038BF6C(HSD_SM* v)
             case 0x1: {
                 float left_vol = (v->x26 * v->x24[0]) / 65535.0F;
                 float right_vol = (v->x27 * v->x24[1]) / 65535.0F;
-                float left_sqrt = sqrtf(left_vol);
-                float left_inv_sqrt = sqrtf(1.0F - left_vol);
-                float right_sqrt = sqrtf(right_vol);
-                float right_inv_sqrt = sqrtf(1.0F - right_vol);
+                float left_sqrt = sqrtf_store(left_vol, &sqrt_tmp[7]);
+                float left_inv_sqrt =
+                    sqrtf_store(1.0F - left_vol, &sqrt_tmp[6]);
+                float right_sqrt = sqrtf_store(right_vol, &sqrt_tmp[5]);
+                float right_inv_sqrt =
+                    sqrtf_store(1.0F - right_vol, &sqrt_tmp[4]);
                 float tmp2 = left_inv_sqrt * right_inv_sqrt;
                 float pitch1 = powf(2.0F, v->x20 / 1200.0F);
                 float pitch2 = powf(2.0F, v->fadetime / 1200.0F);
@@ -260,10 +284,12 @@ void AXDriver_8038BF6C(HSD_SM* v)
             case 0x80: {
                 float left_vol = (v->x26 * v->x24[0]) / 65535.0F;
                 float right_vol = (v->x27 * v->x24[1]) / 65535.0F;
-                float left_sqrt = sqrtf(left_vol);
-                float left_inv_sqrt = sqrtf(1.0F - left_vol);
-                float right_sqrt = sqrtf(right_vol);
-                float right_inv_sqrt = sqrtf(1.0F - right_vol);
+                float left_sqrt = sqrtf_store(left_vol, &sqrt_tmp[3]);
+                float left_inv_sqrt =
+                    sqrtf_store(1.0F - left_vol, &sqrt_tmp[2]);
+                float right_sqrt = sqrtf_store(right_vol, &sqrt_tmp[1]);
+                float right_inv_sqrt =
+                    sqrtf_store(1.0F - right_vol, &sqrt_tmp[0]);
 
                 HSD_SynthSFXSetMix(
                     v->vID, left_inv_sqrt * (left_inv_sqrt * right_inv_sqrt),

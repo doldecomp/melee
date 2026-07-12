@@ -37,7 +37,6 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
     f32 cumDist[3];
     AfterimageVtx vtx_buf[151];
     f32 d2;
-    Vec3 delta, prevPos, crossProd, tempDir;
     s32 numVerts;
     s32 nextIdx;
 
@@ -132,12 +131,14 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 
         cumDist[0] = 0.0f;
         totalDist = 0.0f;
-        prevPos.x = prevPos.y = prevPos.z = 0.0f;
         dp = &cumDist[1];
 
         {
+            Vec3 delta, prevPos;
             s32 i;
             s32 curIdx = ringIdx;
+
+            prevPos.x = prevPos.y = prevPos.z = 0.0f;
 
             for (i = (s8) (u8) fp->x2100 - 1; i >= 0; i--) {
                 struct Fighter_x20B0_t* entry = &fp->x20B0[curIdx];
@@ -173,6 +174,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
         }
 
         {
+            Vec3 crossProd, tempDir;
             f32 scaleDiff = x20FC - x20F8;
             s32 curIdx2;
             f32 blendedInner = params->x0 * scaleDiff + x20F8;

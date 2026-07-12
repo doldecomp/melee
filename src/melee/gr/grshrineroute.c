@@ -1266,8 +1266,8 @@ s32 grShrineRoute_8020AE08(HSD_GObj* gobj, HSD_GObj* player_gobj, s32* out)
 void grShrineRoute_8020AF38(HSD_GObj* gobj, s32 arg1)
 {
     Ground* gp = GET_GROUND(gobj);
-    HSD_GObj* pgobj;
     HSD_GObj** symbolp;
+    HSD_GObj* pgobj;
     HSD_JObj* jobj;
     f32 scale;
     s32 ix = arg1 - 0xBD;
@@ -1276,7 +1276,8 @@ void grShrineRoute_8020AF38(HSD_GObj* gobj, s32 arg1)
     pgobj = Ground_801C57A4();
 
     if (gp->gv.shrineroute.symbols[ix] != NULL) {
-        symbolp = gp->gv.shrineroute.symbols + ix;
+        symbolp = gp->gv.shrineroute.symbols;
+        symbolp += ix;
         scale = 0.7f;
         if (((Ground*) (*symbolp)->user_data)->map_id == 1) {
             scale *= grSh_Route_804D6A58->x14;

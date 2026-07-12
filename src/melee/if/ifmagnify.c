@@ -4,7 +4,6 @@
 #include "cm/camera.h"
 #include "ft/ftdrawcommon.h"
 #include "ft/ftlib.h"
-#include "gm/gm_1601.h"
 #include "gm/gm_16AE.h"
 #include "gm/types.h"
 #include "gr/ground.h"
@@ -30,6 +29,9 @@
 #include <baselib/memory.h>
 #include <baselib/mobj.h>
 #include <baselib/tobj.h>
+
+u32 gm_80160854(u8, u8, u8, u8);
+GXColor gm_80160968(u32);
 
 /* 3F97E8 */ extern HSD_CameraDescPerspective ifMagnify_803F97E8;
 static char ifMagnify_803F988C[] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
@@ -162,15 +164,18 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
     Vec3 translate;
     GXColor color;
     GXColor color_copy;
+    GXColor* color_ptr;
     HSD_GObj* fighter_gobj;
     ifMagnifyPlayer* player;
     s32 slot;
     bool is_colored;
     bool should_display;
-    u8 arrow_kind;
+    s32 arrow_kind;
     u8 slot_type;
     u8 teams_enabled;
     u8 operand_pad[12];
+
+    PAD_STACK(8);
 
     if (arg1 != 0) {
         return;
@@ -206,16 +211,17 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
             if ((player->state.unk == 4) || (player->state.unk == 2)) {
                 slot_type = Player_GetPlayerSlotType(slot);
                 teams_enabled = gm_8016B168();
-                color =
-                    gm_80160968(gm_80160854((u8) slot, Player_GetTeam(slot),
-                                            teams_enabled, slot_type));
+                color = gm_80160968(
+                    (u8) gm_80160854((u8) slot, Player_GetTeam(slot),
+                                     teams_enabled, slot_type));
+                color_ptr = &color_copy;
                 color_copy = color;
                 if (player->state.unk == 2) {
                     arrow_kind = 1;
                 } else {
                     arrow_kind = 2;
                 }
-                un_802FD928((u8) slot, arrow_kind, &color_copy);
+                un_802FD928((u8) slot, arrow_kind, color_ptr);
                 is_colored = true;
             }
         }
@@ -229,17 +235,16 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
 {
     int i;
     f32 mix2;
-    f32 right;
+    int j;
     ifMagnify* magnify;
     HSD_CObj* cobj;
-    HSD_GObj* fighter_gobj;
+    u8* color_ids;
     ifMagnifyPlayer* player;
     f32 top;
     f32 bottom;
     f32 left;
-    Vec3 interest_pos;
-    GXColor colors[4];
-    Vec3 world_pos;
+    HSD_GObj* fighter_gobj;
+    bool should_display;
     f32 x_blend;
     f32 y_blend;
     f32 x_inv;
@@ -251,9 +256,9 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
     f32 mix1;
     f32 mix3;
     GXColor result;
-    int j;
-    u8* color_ids;
-    bool should_display;
+    f32 right;
+    Vec3 interest_pos;
+    GXColor colors[4];
     bool is_outside;
 
     magnify = &ifMagnify_804A1DE0;
@@ -277,6 +282,7 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
         }
 
         for (i = 0; i < 6; i++) {
+            Vec3 world_pos;
             player = &magnify->player[i];
             fighter_gobj = Player_GetEntity(i);
             if (player->state.ignore_offscreen || fighter_gobj == NULL ||

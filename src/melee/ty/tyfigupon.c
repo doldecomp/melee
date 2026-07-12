@@ -1222,7 +1222,6 @@ void _tyFigupon_8031753C(void)
         s32 total;
         DigitInit digits_s;
         s32* digit_ptr;
-        s32* digit_iter;
         ef4->x00 = (u32) GObj_Create(9, 9, 0);
         jobj = HSD_JObjLoadJoint(panel_joint);
         {
@@ -1258,15 +1257,14 @@ void _tyFigupon_8031753C(void)
         HSD_JObjAnimAll(jobj);
 
         digits_s = _tyFigupon_803B8974;
+        count = 0;
         total = (s32) (gm_801623D8() / 10u);
         joint = HSD_ArchiveGetPublicAddress(ef4->archive,
                                             "ToyFigurePonNm_Top_joint");
         digit_ptr = &digits_s.x0;
-        digit_iter = digit_ptr;
         do {
-            *digit_iter = total % 10;
+            digit_ptr[count++] = total % 10;
             total /= 10;
-            digit_iter++;
         } while (total > 0);
 
         for (i = 0; i < 3; i++, digit_ptr++) {
@@ -1385,11 +1383,13 @@ void _tyFigupon_80317A60(void)
     HSD_CameraDescPerspective* cam_desc;
     HSD_CObj* cobj;
     HSD_GObj* gobj;
+    struct un_804D6EF4_t* ef4;
     HSD_Text* text;
     PAD_STACK(40);
 
+    ef4 = _tyFigupon_804D6EF4;
     cam_desc = HSD_ArchiveGetPublicAddress(
-        _tyFigupon_804D6EF4->archive, Toy_str_ScMenFigure_cam_int1_camera);
+        ef4->archive, Toy_str_ScMenFigure_cam_int1_camera);
     data->x0 = GObj_Create(1, 2, 0);
     cobj = lb_80013B14(cam_desc);
     _tyFigupon_804D6F04 = (HSD_CObjDesc*) cam_desc;

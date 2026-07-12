@@ -53,7 +53,6 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
     Vec3 scale_6;
     Vec3 unused;
     HSD_psAppSRT* psAppSRT;
-    HSD_Generator* generator;
     void* ret_obj;
     EF_Effect* ret_eff;
     HSD_JObj* jobj_2;
@@ -317,20 +316,21 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
     case 0x4D7:
         ret_obj = hsd_8039EFAC(0, 0xB, 0x2AF9, va_arg(vlist, HSD_JObj*));
         break;
-    case 0x4D8:
-        ret_obj = efLib_CreateGenerator_AddAppSRT(0x61U);
-        if (ret_obj != NULL) {
+    case 0x4D8: {
+        HSD_Generator* generator = efLib_CreateGenerator_AddAppSRT(0x61U);
+        if (generator != NULL) {
             va_vec3 = va_arg(vlist, Vec3*);
-            psAppSRT = ((HSD_Generator*) ret_obj)->appsrt;
+            psAppSRT = generator->appsrt;
             psAppSRT->translate = *va_vec3;
             jobj_1 = GET_JOBJ(gobj);
             HSD_JObjGetScale(jobj_1, &scale_4);
-            generator = ret_obj;
+            ret_obj = generator;
             generator->appsrt->scale.x = generator->appsrt->scale.y =
                 generator->appsrt->scale.z = scale_4.y;
             generator->appsrt->rot.y = M_PI_2;
         }
         break;
+    }
     case 0x4D9:
         ret_obj = efLib_Create_Attach_Pos(0x2EE0U, gobj, va_arg(vlist, Vec3*));
         if (ret_obj != NULL) {
@@ -340,11 +340,11 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
                 half_pi = M_PI_2;
             }
             va_f32_1 = half_pi;
-            HSD_JObjSetRotationY(GET_JOBJ(((EF_Effect*) ret_obj)->gobj),
-                                 va_f32_1);
+            ret_eff = ret_obj;
+            HSD_JObjSetRotationY(GET_JOBJ(ret_eff->gobj), va_f32_1);
             jobj_2 = GET_JOBJ(gobj);
             HSD_JObjGetScale(jobj_2, &scale_6);
-            jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
+            jobj_1 = GET_JOBJ(ret_eff->gobj);
             HSD_JObjSetScale(jobj_1, &scale_6);
         }
         break;
@@ -389,7 +389,7 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
             while (HSD_JObjGetParent(jobj_2) != NULL) {
                 jobj_2 = HSD_JObjGetParent(jobj_2);
             }
-            HSD_JObjGetScale(jobj_1, &scale_5);
+            HSD_JObjGetScale(jobj_2, &scale_5);
             ((EF_Effect*) ret_obj)->params = *va_arg(vlist, Vec3*);
             efSync_GetEffect(ret_obj)->params.y *= scale_5.y;
         }
@@ -471,10 +471,11 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
         if (ret_obj != NULL) {
             jobj_1 = GET_JOBJ(gobj);
             HSD_JObjGetScale(jobj_1, &scale_4);
-            if (GET_JOBJ(((EF_Effect*) ret_obj)->gobj) == NULL) {
+            ret_eff = ret_obj;
+            if (GET_JOBJ(ret_eff->gobj) == NULL) {
                 __assert("jobj.h", 823, "jobj");
             }
-            jobj_2 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
+            jobj_2 = GET_JOBJ(ret_eff->gobj);
             HSD_JObjSetScale(jobj_2, &scale_4);
         }
         break;
@@ -536,32 +537,34 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
     case 0x503:
         ret_obj = efLib_CreateGenerator(0x6AU, va_arg(vlist, Vec3*));
         break;
-    case 0x504:
-        ret_obj = efLib_CreateGenerator_AddAppSRT(0x6DU);
-        if (ret_obj != NULL) {
+    case 0x504: {
+        HSD_Generator* generator = efLib_CreateGenerator_AddAppSRT(0x6DU);
+        if (generator != NULL) {
             va_vec3 = va_arg(vlist, Vec3*);
-            psAppSRT = ((HSD_Generator*) ret_obj)->appsrt;
+            psAppSRT = generator->appsrt;
             psAppSRT->translate = *va_vec3;
             jobj_1 = GET_JOBJ(gobj);
             HSD_JObjGetScale(jobj_1, &scale_3);
-            generator = ret_obj;
+            ret_obj = generator;
             generator->appsrt->scale.x = generator->appsrt->scale.y =
                 generator->appsrt->scale.z = scale_3.y;
         }
         break;
-    case 0x505:
-        ret_obj = efLib_CreateGenerator_AddAppSRT(0x79U);
-        if (ret_obj != NULL) {
+    }
+    case 0x505: {
+        HSD_Generator* generator = efLib_CreateGenerator_AddAppSRT(0x79U);
+        if (generator != NULL) {
             va_vec3 = va_arg(vlist, Vec3*);
-            psAppSRT = ((HSD_Generator*) ret_obj)->appsrt;
+            psAppSRT = generator->appsrt;
             psAppSRT->translate = *va_vec3;
             jobj_1 = gobj->hsd_obj;
             HSD_JObjGetScale(jobj_1, &scale_2);
-            generator = ret_obj;
+            ret_obj = generator;
             generator->appsrt->scale.x = generator->appsrt->scale.y =
                 generator->appsrt->scale.z = scale_2.y;
         }
         break;
+    }
     case 0x506:
         ret_obj = efLib_CreateGenerator(0x4658U, va_arg(vlist, Vec3*));
         break;

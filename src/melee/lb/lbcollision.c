@@ -462,7 +462,7 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
             float d2_x = arg3_x - arg5_offset.x;
             float arg3_z = arg3->z;
             float d2_z = arg3_z - arg5_offset.z;
-            float d1_dot_d2 = d1_z * d2_z + d1_x * d2_x + d1_y * d2_y;
+            float d1_dot_d2 = d1_x * d2_x + d1_z * d2_z + d1_y * d2_y;
             float d2_z_sq = d2_z * d2_z;
             float d2_len_sq = d2_z_sq + d2_x * d2_x + d2_y * d2_y;
             float offset_delta_x = arg4_offset.x - arg5_offset.x;
@@ -655,6 +655,11 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
     }
 }
 
+static inline float lbColl_Dot2(float ay, float by, float bx, float ax)
+{
+    return ax * bx + by * ay;
+}
+
 bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                      float p, float q, float r)
 {
@@ -754,7 +759,8 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                         float diff_dc_x = d_x - c1.x;
 
                         float dot2_diff_ba_dc =
-                            diff_ba_x * diff_dc_x + diff_dc_y * diff_ba_y;
+                            lbColl_Dot2(diff_ba_y, diff_dc_y, diff_dc_x,
+                                        diff_ba_x);
 
                         float sqdist2_dc =
                             diff_dc_x * diff_dc_x + diff_dc_y * diff_dc_y;
@@ -1003,10 +1009,11 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float local_delta_x;
     float hurt_mid_z;
     Vec3 hit_start_copy;
+    u8 operand_pad[4];
     Vec3 hurt_start_copy;
     Vec3 hit_delta;
     float start_delta_z;
-    float candidate_hit_param;
+    float hit_start_dot;
     float scaled_hurt_radius;
     float hurt_mid_x;
     float hurt_mid_y;
@@ -1044,7 +1051,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float hit_end_max_y;
     float hurt_len_sq;
     float hit_end_max_z;
-    float hit_start_dot;
+    float candidate_hit_param;
     float hit_end_x;
     float hit_len_sq;
     float hit_end_mid_x;
@@ -1433,8 +1440,8 @@ block_39:
     scaled_hurt_radius = (hurt_radius * closest_dist) / local_dist;
     contact_lerp = scaled_hurt_radius / closest_dist;
     allowed_distance = hit_radius + scaled_hurt_radius;
-    hurt_closest_x = hurt_closest->x;
     *out_overlap = allowed_distance - closest_dist;
+    hurt_closest_x = hurt_closest->x;
     out_contact_pos->x =
         (contact_lerp * (hit_closest->x - hurt_closest_x)) + hurt_closest_x;
     hurt_closest_y = hurt_closest->y;

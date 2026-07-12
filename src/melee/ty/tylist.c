@@ -70,6 +70,8 @@ typedef struct TyListGobjEntryInner {
     /* 0x12 */ s8 x12;
     /* 0x13 */ s8 x13;
     /* 0x14 */ s8 x14;
+    /* 0x15 */ u8 pad_15[3];
+    /* 0x18 */ HSD_GObj* x18;
 } TyListGobjEntryInner;
 typedef struct TyListAuxState {
     /* 0x00 */ u8 pad_0[0x18];
@@ -160,13 +162,13 @@ void _tyList_80312904(void* arg0, s8 arg1)
 
     if (arg1 != 0x63) {
         if ((s8) row->x24 == arg1) {
-            row->text0->text_color = lb_804D3764;
-            row->text1->text_color = lb_804D3764;
-            row->text2->text_color = lb_804D3764;
+            row->text0->text_color = lb_ColorBlack;
+            row->text1->text_color = lb_ColorBlack;
+            row->text2->text_color = lb_ColorBlack;
         } else {
-            row->text0->text_color = lb_804D3760;
-            row->text1->text_color = lb_804D3760;
-            row->text2->text_color = lb_804D3760;
+            row->text0->text_color = lb_ColorWhite;
+            row->text1->text_color = lb_ColorWhite;
+            row->text2->text_color = lb_ColorWhite;
         }
     }
 
@@ -206,119 +208,70 @@ void _tyList_80312904(void* arg0, s8 arg1)
 
 void _tyList_80312BAC(TyListState* state, s8 arg1)
 {
-    s32 i;
     s16 old_idx;
-    s32 var_r28;
-    ToyED8Data* archive = Toy_sbss_804D6ED8;
+    s32 i;
+    TyListArg* first_row;
     TyListArg* row;
-    HSD_JObj* jobj;
+    ToyED8Data* archive = Toy_sbss_804D6ED8;
+    s32 trophy_idx;
 
     old_idx = Toy_sbss_804D6EDC[state->selectedIdx];
     Toy_803067BC((s8) state->x29B, (s8) state->x29C);
     state->selectedIdx = Toy_803062BC((s32) old_idx);
 
     if (Toy_GetTrophyTotal() <= 0xA) {
-        var_r28 = state->selectedIdx;
+        trophy_idx = state->selectedIdx;
         i = 0;
         while (i < (s8) state->x278->x24 + 1) {
-            if (--var_r28 < 0) {
-                var_r28 = Toy_GetTrophyTotal() - 1;
+            if (--trophy_idx < 0) {
+                trophy_idx = Toy_GetTrophyTotal() - 1;
             }
             i++;
         }
     } else {
-        var_r28 = state->selectedIdx;
+        trophy_idx = state->selectedIdx;
         i = 0;
         while (i < (s8) state->x278->x24 + 1) {
-            if (--var_r28 < 0) {
-                var_r28 = Toy_GetTrophyTotal() - 1;
+            if (--trophy_idx < 0) {
+                trophy_idx = Toy_GetTrophyTotal() - 1;
             }
             i++;
         }
     }
 
-    jobj = state->jobj;
-    row = state->x270;
-    (void) row;
-    if (jobj != NULL) {
-        f32 y = row->x30;
-        if (jobj == NULL) {
-            __assert("jobj.h", 0x3B3, "jobj");
-        }
-        jobj->translate.y = y;
-        if (!(jobj->flags & 0x02000000)) {
-            if (jobj == NULL) {
-                goto done_first_dirty;
-            }
-            if (jobj == NULL) {
-                __assert("jobj.h", 0x234, "jobj");
-            }
-            {
-                u32 flags = jobj->flags;
-                s32 skip = 0;
-                if (!(flags & 0x800000) && (flags & 0x40)) {
-                    skip = 1;
-                }
-                if (skip == 0) {
-                    HSD_JObjSetMtxDirtySub(jobj);
-                }
-            }
-        }
+    first_row = state->x270;
+    row = first_row;
+    if (state->jobj != NULL) {
+        HSD_JObjSetTranslateY(state->jobj, first_row->x30);
     }
-done_first_dirty:
 
     for (i = 0; i < (s8) state->entryCount; i++) {
-        row->idx = var_r28;
+        row->idx = trophy_idx;
         _tyList_80312904(row, arg1);
         _tyList_80313464(row);
         if (row->x24 >= 0 && row->x24 < (s8) state->entryCount - 2 &&
             row->idx == Toy_GetTrophyTotal() - 1)
         {
-            HSD_JObj* jobj2 = state->jobj;
-            if (jobj2 != NULL) {
-                f32 y = row->x30;
-                if (jobj2 == NULL) {
-                    __assert("jobj.h", 0x3B3, "jobj");
-                }
-                jobj2->translate.y = y;
-                if (!(jobj2->flags & 0x02000000)) {
-                    if (jobj2 == NULL) {
-                        goto done_inner_dirty;
-                    }
-                    if (jobj2 == NULL) {
-                        __assert("jobj.h", 0x234, "jobj");
-                    }
-                    {
-                        u32 flags = jobj2->flags;
-                        s32 skip = 0;
-                        if (!(flags & 0x800000) && (flags & 0x40)) {
-                            skip = 1;
-                        }
-                        if (skip == 0) {
-                            HSD_JObjSetMtxDirtySub(jobj2);
-                        }
-                    }
-                }
+            if (state->jobj != NULL) {
+                HSD_JObjSetTranslateY(state->jobj, row->x30);
             }
         }
-    done_inner_dirty:
         row = row->links[1];
-        var_r28++;
-        if (var_r28 >= Toy_GetTrophyTotal()) {
-            var_r28 = 0;
+        trophy_idx++;
+        if (trophy_idx >= Toy_GetTrophyTotal()) {
+            trophy_idx = 0;
         }
     }
 
     i = 0;
     while (i < 3) {
-        HSD_JObj* anim_jobj = *((HSD_JObj**) ((u8*) archive + i * 4 + 0x18));
-        if (i == state->x29B) {
-            HSD_JObjReqAnim(anim_jobj, 1.0f);
+        if (i == (s8) state->x29B) {
+            HSD_JObjReqAnim(archive->jobjs[i], 1.0f);
         } else {
-            HSD_JObjReqAnim(anim_jobj, 0.0f);
+            HSD_JObjReqAnim(archive->jobjs[i], 0.0f);
         }
-        HSD_AObjSetRate(anim_jobj->u.dobj->mobj->tobj->aobj, 0.0f);
-        HSD_JObjAnim(anim_jobj);
+        HSD_AObjSetRate(archive->jobjs[i]->u.dobj->mobj->tobj->aobj, 0.0f);
+        HSD_JObjAnim(archive->jobjs[i]);
         i++;
     }
 }
@@ -561,9 +514,9 @@ void _tyList_80313774(void)
     TyListGobjEntry* state_tail = (TyListGobjEntry*) (state + 1);
     TyListArg* entry;
     HSD_JObj* root_jobj;
-    f32 step;
     f32 pos;
-    s16 idx;
+    f32 step;
+    s32 idx;
     s32 entry_count;
     s32 i;
     s32 trophy_total;
@@ -575,11 +528,9 @@ void _tyList_80313774(void)
     state->x29C = mode->x2;
 
     if (Toy_GetTrophyTotal() <= 0xA) {
-        state_tail->x0D = mode->x3;
-        state_tail->x0C = mode->x3;
+        state_tail->x0C = state_tail->x0D = mode->x3;
     } else {
-        state_tail->x0D = mode->x3;
-        state_tail->x0C = mode->x3;
+        state_tail->x0C = state_tail->x0D = mode->x3;
     }
 
     trophy_total = Toy_GetTrophyTotal();
@@ -621,8 +572,9 @@ void _tyList_80313774(void)
         NULL, "ToyFigurePanel_listpos01_joint", 0.0f, 0.0f, 0.0f);
     root_jobj = GET_JOBJ(state->gobj);
     HSD_JObjGetTranslationX(root_jobj);
-    step = 5.11f - HSD_JObjGetTranslationY(root_jobj);
+    step = HSD_JObjGetTranslationY(root_jobj);
     HSD_JObjGetTranslationZ(root_jobj);
+    step = 5.11f - step;
     pos = -step;
     state->x2A8 = step;
 
@@ -631,8 +583,7 @@ void _tyList_80313774(void)
         *(s32*) &entry->x28 = i;
         entry->jobjs[0] = _tyList_80313508(
             state->gobj, "ToyFigureListBase_Top_joint", 0.0f, pos, 0.0f);
-        entry->jobjs[2] =
-            entry->jobjs[0] != NULL ? entry->jobjs[0]->child : NULL;
+        entry->jobjs[2] = HSD_JObjGetChild(entry->jobjs[0]);
         Toy_80306A48(entry->jobjs[0], NULL,
                      "ToyFigureListBase_Top_matanim_joint", NULL,
                      archive->data, 0);
@@ -644,7 +595,7 @@ void _tyList_80313774(void)
                                               17.2f, 192.0f, 64.0f);
         entry->x30 = pos;
         entry->x24 = i - 1;
-        entry->idx = idx;
+        entry->idx = (s16) idx;
         idx++;
         if (idx >= Toy_GetTrophyTotal()) {
             idx = 0;
@@ -1099,12 +1050,14 @@ void tyList_803147C4(void)
 void _tyList_803148E4(s32 arg0)
 {
     TyListState* state = (TyListState*) &_tyList_804A2AC0;
-    TyListGobjEntry* entry = M2C_FIELD(state, TyListGobjEntry**, 0x2AC);
+    TyListGobjEntryInner* entry =
+        (TyListGobjEntryInner*) &_tyList_804A2D6C;
     TyArchiveData* archive;
     HSD_GObj** gobj_2C4;
     PAD_STACK(8);
 
-    gobj_2C4 = M2C_FIELD(state, HSD_GObj***, 0x2C4);
+    gobj_2C4 =
+        &((TyListGobjEntryInner*) &_tyList_804A2D6C)->x18;
     archive = (TyArchiveData*) Toy_sbss_804D6ED8;
 
     if (Toy_GetTrophyTotal() != 0) {

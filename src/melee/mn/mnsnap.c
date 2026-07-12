@@ -117,14 +117,20 @@ void mnSnap_80253184(void)
 {
     s32* p50;
     mnSnap_State* snap = &mnSnap_804A0A10;
-    s32* p4F;
     s32* p52;
+    s32* p4F;
     s32* p57;
 
     p4F = &snap->cur_page;
-    p52 = &snap->load_idx;
+    {
+        s32* load_idx = &snap->load_idx;
+        p52 = load_idx;
+    }
     p50 = &snap->active_slot;
-    snap->card_result = lbSnap_8001E058(*p50, *p52 + (*p4F * 4));
+    {
+        s32 index = *p52 + (*p4F * 4);
+        snap->card_result = lbSnap_8001E058(*p50, index);
+    }
     p57 = &snap->card_result;
     if (*p57 == 8) {
         mnSnap_80254298();
@@ -158,6 +164,32 @@ void mnSnap_80253184(void)
 
 /// @todo The HSD_ASSERT chain (lines 193-199) is an inline from tobj.h.
 /// Polls card read result and updates thumbnail display.
+static inline s32* mnSnap_GetLoadIdx(mnSnap_State* snap)
+{
+    return &snap->load_idx;
+}
+
+static inline void* mnSnap_GetThumbImage(s32* load_idx)
+{
+    return mnSnap_thumb_imgs[*load_idx % 4];
+}
+
+static inline HSD_DObj* mnSnap_GetDObj(HSD_JObj* jobj)
+{
+    return jobj->u.dobj;
+}
+
+static inline HSD_JObj* mnSnap_GetThumbJObj(s32* load_idx,
+                                            mnSnap_State* snap)
+{
+    return snap->thumb_jobjs[*load_idx];
+}
+
+static inline HSD_ImageDesc* mnSnap_GetImageDesc(HSD_JObj* jobj)
+{
+    return jobj->u.dobj->next->next->mobj->tobj->imagedesc;
+}
+
 static void mnSnap_8025329C(void)
 {
     mnSnap_State* snap = &mnSnap_804A0A10;
@@ -175,10 +207,10 @@ static void mnSnap_8025329C(void)
         HSD_JObj* jobj;
         void* img;
 
-        p52 = &snap->load_idx;
+        p52 = mnSnap_GetLoadIdx(snap);
         if (lbSnap_8001DE8C(mnSnap_thumb_imgs[snap->load_idx % 4]) == 1) {
-            img = mnSnap_thumb_imgs[*p52 % 4];
-            jobj = snap->thumb_jobjs[*p52];
+            img = mnSnap_GetThumbImage(p52);
+            jobj = mnSnap_GetThumbJObj(p52, snap);
             HSD_ASSERT(193, jobj);
             HSD_ASSERT(194, jobj->u.dobj);
             HSD_ASSERT(195, jobj->u.dobj->next);
@@ -186,9 +218,10 @@ static void mnSnap_8025329C(void)
             HSD_ASSERT(197, jobj->u.dobj->next->next->mobj);
             HSD_ASSERT(198, jobj->u.dobj->next->next->mobj->tobj);
             HSD_ASSERT(199, jobj->u.dobj->next->next->mobj->tobj->imagedesc);
-            jobj->u.dobj->next->next->mobj->tobj->imagedesc->image_ptr = img;
+            mnSnap_GetImageDesc(jobj)->image_ptr = img;
             jobj->u.dobj->next->next->mobj->tobj->imagedesc->width = 0x280;
-            jobj->u.dobj->next->next->mobj->tobj->imagedesc->height = 0x1E0;
+            mnSnap_GetDObj(jobj)->next->next->mobj->tobj->imagedesc->height =
+                0x1E0;
         } else {
             flags = &snap->thumb_loaded[0];
             flags[*p52 % 4] = 1;
@@ -358,6 +391,7 @@ void mnSnap_80253964(void)
     }
 
     for (i = 0; i < 2; i++) {
+        (void) mnSnap_804A0A10.card_status[i];
         HSD_SisLib_803A7664(mnSnap_804A0A10.count_texts[i]);
         if (mnSnap_804A0A10.state >= 4 && mnSnap_804A0A10.card_status[i] == 1)
         {
@@ -576,8 +610,8 @@ void mnSnap_80254014(void)
 /// Configures the Yes/No dialog button positions based on language setting.
 void mnSnap_8025409C(s32 dlg_type)
 {
-    HSD_JObj* right;
     HSD_JObj* left;
+    HSD_JObj* right;
     s32* p5E;
     HSD_JObj** p38;
     HSD_JObj** p39;
@@ -700,8 +734,8 @@ void mnSnap_80254298(void)
 
     {
         /* walk strides through card_status (s16 at byte 0x128) */
-        s16* walk = (s16*) snap;
         s32 byte_off = 4;
+        s16* walk = (s16*) snap;
 
         for (i = 0; i < 2; i++, byte_off += 8, walk++) {
             if (walk[0x94] != 0) { /* snap->card_status[i] */
@@ -798,6 +832,7 @@ void fn_802545C4(void)
     u64 buttons;
     s32 state;
     s32 byte_off;
+    s32 byte_off2;
     s32 i;
     s32 result;
     s32 slot;
@@ -1076,18 +1111,18 @@ void fn_802545C4(void)
                         }
                         HSD_JObjReqAnimAll(
                             *((HSD_JObj**) ((((u32) (&mnSnap_804A0A10)) +
-                                             byte_off) +
+                                             byte_off2) +
                                             0x98)),
                             t);
                     } else {
                         HSD_JObjReqAnimAll(
                             *((HSD_JObj**) ((((u32) (&mnSnap_804A0A10)) +
-                                             byte_off) +
+                                             byte_off2) +
                                             0x98)),
                             2.0F);
                     }
                     HSD_JObjAnimAll(*(
-                        (HSD_JObj**) ((((u32) (&mnSnap_804A0A10)) + byte_off) +
+                        (HSD_JObj**) ((((u32) (&mnSnap_804A0A10)) + byte_off2) +
                                       0x98)));
                 }
 
@@ -1097,8 +1132,8 @@ void fn_802545C4(void)
             {
                 lbAudioAx_80024030(2);
                 mnSnap_804A0A10.active_slot = 0;
-                byte_off = 4;
-                for (i = 0; i < 2; i++, byte_off += 8) {
+                byte_off2 = 4;
+                for (i = 0; i < 2; i++, byte_off2 += 8) {
                     if (mnSnap_804A0A10.card_status[i] != 0) {
                         if (mnSnap_804A0A10.active_slot == i) {
                             t = 1.0F;
@@ -2402,8 +2437,8 @@ void mnSnap_80257F24(void)
 {
     mnSnap_State* snap = &mnSnap_804A0A10;
     s32 zero = 0;
-    HSD_GObj* gobj;
     HSD_JObj* jobj;
+    HSD_GObj* gobj;
     HSD_JObj* jobj2;
     HSD_JObj* pos_start;
     HSD_JObj* pos_end;
@@ -2445,7 +2480,10 @@ void mnSnap_80257F24(void)
     snap->state = zero;
     snap->timer = 6;
     snap->photo_count[0] = zero;
-    snap->photo_count[1] = zero;
+    {
+        s32* photo_count = snap->photo_count;
+        photo_count[1] = zero;
+    }
     snap->card_status[0] = zero;
     snap->card_status[1] = zero;
 

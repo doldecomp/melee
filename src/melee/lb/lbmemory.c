@@ -268,14 +268,14 @@ u32 lbMemory_8001529C(Handle* h, void* arg1, u32 arg2)
 
 void lbMemory_80015320(int arg0, Handle* handle, int arg2, int cancelflag)
 {
-    u32 current;
-    struct LBMgr* mgr;
     int enabled;
-    void** currentp;
     u32 size;
     u32 old;
-    struct Allocator* alloc;
+    void** currentp;
     Handle* next;
+    struct LBMgr* mgr;
+    struct Allocator* alloc;
+    u32 current;
 
     alloc = &g_alloc;
     currentp = &alloc->x6E4;

@@ -1506,8 +1506,7 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
     f32 substick_y;
     f32 temp_x;
     f32 temp_y;
-    s32 var_r4;
-    s32 var_r5;
+    s32 idx;
     u64 temp_ret;
     PAD_STACK(8);
 
@@ -1522,8 +1521,8 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
     }
     if (slot == 4) {
         /// @todo there is probably a bigger inline
-        for (var_r4 = 0; var_r4 < 4; var_r4++) {
-            pad = get_slot_pad(var_r4);
+        for (idx = 0; idx < 4; idx++) {
+            pad = get_slot_pad(idx);
             temp_x = get_stick_x(pad);
             temp_y = get_stick_y(pad);
             stick_x = temp_x;
@@ -1542,13 +1541,13 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
             }
         }
 
-        if (var_r4 == 4) {
+        if (idx == 4) {
             stick_y = 0.0f;
             stick_x = 0.0f;
         }
 
-        for (var_r5 = 0; var_r5 < 4; var_r5++) {
-            pad = get_slot_pad(var_r5);
+        for (idx = 0; idx < 4; idx++) {
+            pad = get_slot_pad(idx);
             temp_x = pad->nml_subStickX;
             temp_y = pad->nml_subStickY;
             substick_x = temp_x;
@@ -1567,7 +1566,7 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
             }
         }
 
-        if (var_r5 == 4) {
+        if (idx == 4) {
             substick_y = 0.0f;
             substick_x = 0.0f;
         }
@@ -1900,20 +1899,18 @@ void Camera_8002C1A8(void)
     }
 
     if (dir != 0) {
-        f32 reset_zero;
-
         scale = cm_80452C68.x32C * cm_803BCCA0.x8C + cm_803BCCA0.x90;
         cm_80452C68.x304 = Camera_8002BA00(cm_80452C68.x304, dir);
         slot = cm_80452C68.x304;
-        reset_zero = 0.0f;
+        abs_f1 = 0.0f;
         cm_80452C68.x314.x = cm_80452C68.x314.y = cm_80452C68.x314.z =
-            reset_zero;
-        cm_80452C68.pause_eye_offset.x = reset_zero;
+            abs_f1;
+        cm_80452C68.pause_eye_offset.x = abs_f1;
         cm_80452C68.pause_eye_offset.y = 5.0f;
         cm_80452C68.pause_eye_offset.z = 20.0f;
-        cm_80452C68.pause_up.x = reset_zero;
+        cm_80452C68.pause_up.x = abs_f1;
         cm_80452C68.pause_up.y = 1.0f;
-        cm_80452C68.pause_up.z = reset_zero;
+        cm_80452C68.pause_up.z = abs_f1;
         if (slot == 0xA) {
             cm_80452C68.pause_eye_distance = 3.0f * scale;
         } else {
@@ -1927,9 +1924,9 @@ void Camera_8002C1A8(void)
     }
 
     {
-        f32 move_zero = 0.0f;
+        abs_f1 = 0.0f;
 
-        if (move_zero != x_move || move_zero != y_move) {
+        if (abs_f1 != x_move || abs_f1 != y_move) {
             if (cm_80452C68.x304 == 0xA) {
                 if (sqrtf__Ff(cm_80452C68.pause_eye_offset.z *
                                   cm_80452C68.pause_eye_offset.z +
@@ -1940,10 +1937,10 @@ void Camera_8002C1A8(void)
                 {
                     cm_80452C68.pause_eye_distance = 1.0f;
                 }
-                if (move_zero != y_move) {
+                if (abs_f1 != y_move) {
                     cm_80452C68.x314.y += y_move;
                 }
-                if (move_zero != x_move) {
+                if (abs_f1 != x_move) {
                     cm_80452C68.x314.x += x_move;
                 }
             } else {
@@ -1953,9 +1950,9 @@ void Camera_8002C1A8(void)
     }
 
     {
-        f32 rotate_zero = 0.0f;
+        abs_f1 = 0.0f;
 
-        if (rotate_zero != substick_x_val || rotate_zero != substick_y_val) {
+        if (abs_f1 != substick_x_val || abs_f1 != substick_y_val) {
             Camera_8002BD88(substick_x_val, substick_y_val);
         }
     }
@@ -2690,7 +2687,10 @@ void Camera_8002D318(void* unused)
             x = *target_x;
             y = *target_y;
             smooth = globals->x64;
-            dx = x - cam->transform.interest.x;
+            {
+                f32 dx_delta = x - cam->transform.interest.x;
+                dx = dx_delta;
+            }
             z = cam->transform.target_interest.z;
             dy = y - cam->transform.interest.y;
             dz = z - cam->transform.interest.z;
@@ -2806,7 +2806,8 @@ fallback: {
     smooth_ptr = &globals->x44;
     fov_ptr = &globals->x40;
     cam->transform.target_fov = *fov_ptr;
-    cam->transform.fov += Camera_8002D318_GetFovDelta(cam) * *smooth_ptr;
+    cam->transform.fov = cam->transform.fov +
+                         Camera_8002D318_GetFovDelta(cam) * *smooth_ptr;
     Camera_80029BC4(&bounds, transform);
 
     if (Camera_80030AF8()) {
@@ -2945,9 +2946,7 @@ void Camera_8002D85C(void* unused)
             f32* target_x;
             CameraUnkGlobals* globals;
             f32 smooth;
-            f32 x, dx;
-            f32 y, dy;
-            f32 z, dz;
+            f32 dx, dy, dz;
 
             pos = &subject->x1C;
             target_x = &cam->transform.target_interest.x;
@@ -2958,13 +2957,11 @@ void Camera_8002D85C(void* unused)
             cam->transform.target_interest.z = pos->z;
 
             globals = &cm_803BCCA0;
-            x = *target_x;
-            y = *target_y;
             smooth = globals->x64;
-            dx = x - cam->transform.interest.x;
-            z = cam->transform.target_interest.z;
-            dy = y - cam->transform.interest.y;
-            dz = z - cam->transform.interest.z;
+            dx = *target_x - cam->transform.interest.x;
+            dy = *target_y - cam->transform.interest.y;
+            dz = cam->transform.target_interest.z -
+                 cam->transform.interest.z;
             cam->transform.interest.x =
                 dx * smooth + cam->transform.interest.x;
             cam->transform.interest.y =

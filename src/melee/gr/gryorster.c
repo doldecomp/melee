@@ -202,7 +202,10 @@ static inline void grYorster_InitTrackElements(Ground* gp, HSD_GObj* gobj)
             grYorster_802024F0);
         grMaterial_801C8DE0(gp->gv.yorster.elements[i].x1C, 0.0f, 0.0f, 0.0f,
                             0.0f, 0.0f, 0.0f, 5.0f);
-        grMaterial_801C8E08(gp->gv.yorster.elements[i].x1C);
+        {
+            HSD_GObj* material_gobj = gp->gv.yorster.elements[i].x1C;
+            grMaterial_801C8E08(material_gobj);
+        }
         grAnime_801C7FF8(gobj, gp->gv.yorster.elements[i].x14, 7, 1, 0.0f,
                          0.0f);
     }
@@ -286,9 +289,11 @@ void grYorster_802024F0(Ground* gp, s32 joint_id, CollData* coll_data,
 
 void grYorster_8020266C(HSD_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
-    Ground* gp2 = gp;
+    Ground* gp;
+    Ground* gp2;
     s32 i;
+
+    gp2 = gp = gobj->user_data;
     PAD_STACK(8);
 
     for (i = 0; i < 9; i++) {
@@ -372,10 +377,12 @@ void grYorster_8020266C(HSD_GObj* gobj)
                 gp->gv.yorster.elements[i].x0C--;
             }
             break;
-        case 3:
+        case 3: {
+            Vec3 pos;
+            Vec3 unused;
+
             if (gp->gv.yorster.elements[i].x0C >= 0x143) {
-                Vec3 pos;
-                HSD_JObjGetTranslation(gp2->gv.yorster.elements[i].x18, &pos);
+                HSD_JObjGetTranslation(gp->gv.yorster.elements[i].x18, &pos);
 
                 if (grLib_801C9EE8(&pos, 10.0f * Ground_801C0498() - 2.0f)) {
                     grAnime_801C7FF8(gobj, gp2->gv.yorster.elements[i].x14, 7,
@@ -402,10 +409,8 @@ void grYorster_8020266C(HSD_GObj* gobj)
                     0 ||
                 gp->gv.yorster.elements[i].x0C >= 0x19)
             {
-                Vec3 pos;
-
                 gp->gv.yorster.elements[i].x0C = 0;
-                HSD_JObjGetTranslation(gp2->gv.yorster.elements[i].x18, &pos);
+                HSD_JObjGetTranslation(gp->gv.yorster.elements[i].x18, &pos);
                 if (!grLib_801C9EE8(&pos, (10.0f * Ground_801C0498()) / 2.0f))
                 {
                     grAnime_801C7FF8(gobj, gp2->gv.yorster.elements[i].x14, 7,
@@ -420,6 +425,7 @@ void grYorster_8020266C(HSD_GObj* gobj)
                 gp->gv.yorster.elements[i].x0C++;
             }
             break;
+        }
         default:
             break;
         }

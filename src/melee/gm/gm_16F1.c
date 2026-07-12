@@ -636,9 +636,9 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 s32* p = base;
                 for (i = j; i > 0; i--) {
                     if (p[0] < p[1]) {
-                        s32 tmp = p[0];
-                        p[0] = p[1];
-                        p[1] = tmp;
+                        s32 tmp = p[1];
+                        p[1] = p[0];
+                        p[0] = tmp;
                     }
                     p++;
                 }
@@ -698,9 +698,9 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 s32* p = base;
                 for (i = j; i > 0; i--) {
                     if (p[0] < p[1]) {
-                        s32 tmp = p[0];
-                        p[0] = p[1];
-                        p[1] = tmp;
+                        s32 tmp = p[1];
+                        p[1] = p[0];
+                        p[0] = tmp;
                     }
                     p++;
                 }
@@ -761,9 +761,9 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 s32* p = base;
                 for (i = j; i > 0; i--) {
                     if (p[0] < p[1]) {
-                        s32 tmp = p[0];
-                        p[0] = p[1];
-                        p[1] = tmp;
+                        s32 tmp = p[1];
+                        p[1] = p[0];
+                        p[0] = tmp;
                     }
                     p++;
                 }
@@ -826,9 +826,9 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 s32* p = base;
                 for (i = j; i > 0; i--) {
                     if (p[0] < p[1]) {
-                        s32 tmp = p[0];
-                        p[0] = p[1];
-                        p[1] = tmp;
+                        s32 tmp = p[1];
+                        p[1] = p[0];
+                        p[0] = tmp;
                     }
                     p++;
                 }
@@ -1015,9 +1015,9 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
             f32* p = base;
             for (i = j; i > 0; i--) {
                 if (p[0] < p[1]) {
-                    f32 tmp = p[0];
-                    p[0] = p[1];
-                    p[1] = tmp;
+                    f32 tmp = p[1];
+                    p[1] = p[0];
+                    p[0] = tmp;
                 }
                 p++;
             }
@@ -1152,9 +1152,9 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                     u32* p = vals;
                     for (i = j; (u32) i > 0; i--) {
                         if (p[0] > p[1]) {
-                            u32 tmp = p[0];
-                            p[0] = p[1];
-                            p[1] = tmp;
+                            u32 tmp = p[1];
+                            p[1] = p[0];
+                            p[0] = tmp;
                         }
                         p++;
                     }
@@ -1197,9 +1197,9 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                     u32* p = vals;
                     for (i = j; (u32) i > 0; i--) {
                         if (p[0] < p[1]) {
-                            u32 tmp = p[0];
-                            p[0] = p[1];
-                            p[1] = tmp;
+                            u32 tmp = p[1];
+                            p[1] = p[0];
+                            p[0] = tmp;
                         }
                         p++;
                     }

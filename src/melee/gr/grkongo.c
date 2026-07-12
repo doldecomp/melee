@@ -438,7 +438,6 @@ void grKongo_801D577C(Ground_GObj* arg0)
             gp->gv.kongo3.xC6 = 1;
             Ground_801C5440(gp, 0, 0x129U);
             grMaterial_801C9604(arg0, grKg_804D6980->unk84, 0);
-            return;
         }
         return;
     }
@@ -990,7 +989,6 @@ void grKongo_801D6AFC(void)
             var_ctr_4 -= 1;
         } while (var_ctr_4 != 0);
     }
-    deltas = sp8;
     {
         s32 var_ctr_5 = 3;
         _struct_grKg_803E188C_0x18* var_r3_5 = grKg_803E188C;
@@ -1005,6 +1003,7 @@ void grKongo_801D6AFC(void)
             var_ctr_5 -= 1;
         } while (var_ctr_5 != 0);
     }
+    deltas = sp8;
     {
         s32 var_ctr_6 = 3;
         f32* delta_init = deltas;

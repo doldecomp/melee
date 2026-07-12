@@ -3265,11 +3265,12 @@ static inline void ftKb_SpecialN_800EED50_inline(s32 arg0, s32 arg1)
         {
             Fighter_CostumeStrings* costumes = ftKb_Init_803CB3E8[arg0];
             if (costumes != NULL) {
-                struct {
+                typedef struct {
                     HSD_Joint* joint;
                     HSD_MatAnimJoint* matanim;
-                }* item = (void*) ftKb_Init_803C9FC8[arg0];
-                item = &item[arg1];
+                } HatCostume;
+                HatCostume* item =
+                    &((HatCostume*) ftKb_Init_803C9FC8[arg0])[arg1];
                 if (item->joint == NULL) {
                     Fighter_CostumeStrings* cs = &costumes[arg1];
                     if (cs->matanim_joint_name != NULL) {
@@ -3494,20 +3495,20 @@ void ftKb_SpecialN_800EF35C(Fighter_GObj* gobj, int arg1, u8* arg2)
         HSD_MatAnimJoint* matanim;
     }* costume_data = (void*) ftKb_Init_803C9FC8[arg1];
     HSD_MatAnimJoint* matanimjoint = costume_data[fp->x619_costume_id].matanim;
-    int i = 0;
     int idx = 0;
+    arg1 = 0;
     PAD_STACK(4);
     while (matanimjoint != NULL) {
-        if (ftParts_8007506C(fp->kind, i) != 0) {
+        if (ftParts_8007506C(fp->kind, arg1) != 0) {
+            arg1++;
             arg2++;
-            i++;
         } else {
             if (matanimjoint->matanim != NULL) {
                 HSD_DObjAddAnimAll(fp->fv.kb.hat.x14.data[*arg2],
                                    matanimjoint->matanim, NULL);
             }
+            arg1++;
             arg2++;
-            i++;
             ftAnim_GetNextMatAnimJointInTree(&matanimjoint, &idx);
         }
     }
@@ -3528,6 +3529,7 @@ void ftKb_SpecialN_800EF438(Fighter_GObj* gobj, KirbyHatStruct* hat)
     HSD_DObj* tail;
     s32 group_count;
 
+    PAD_STACK(4);
     if (root != NULL) {
         s32 byte_off;
         ftPartsPObjSetDefaultClass();
@@ -3549,9 +3551,9 @@ void ftKb_SpecialN_800EF438(Fighter_GObj* gobj, KirbyHatStruct* hat)
             jobj = ((FighterBone*) ((u8*) parts + part_off))->joint;
             dobj = HSD_DObjLoadDesc((HSD_DObjDesc*) sp24->u.dobjdesc);
             if (dobj != NULL) {
-                FighterBone* flag_bone = bone;
                 tail = HSD_JObjGetDObj(jobj);
-                flag_bone->flags2_b7 = true;
+                fp->parts[(u32) part_off / sizeof(*fp->parts)].flags2_b7 =
+                    true;
                 HSD_DObjResolveRefsAll(dobj, (HSD_DObjDesc*) sp24->u.dobjdesc);
                 if (tail == NULL) {
                     HSD_JObjAddDObj(jobj, dobj);
@@ -3577,7 +3579,7 @@ void ftKb_SpecialN_800EF438(Fighter_GObj* gobj, KirbyHatStruct* hat)
                                  ftKb_Init_804D3DAC);
                     }
                     dst = (HSD_DObj**) fp->fv.gw.x224C_greenhouseGObj;
-                    dst[dst_off / (s32) sizeof(*dst)] = dobj;
+                    dst[(u32) dst_off / sizeof(*dst)] = dobj;
                     mobj = dobj->mobj;
                     if (mobj != NULL) {
                         hsdChangeClass(mobj, &ftMObj);

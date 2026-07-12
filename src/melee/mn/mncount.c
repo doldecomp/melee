@@ -547,8 +547,9 @@ void mnCount_CreateRow(HSD_GObj* gobj, int visible_row, mnCount_row data_row)
         HSD_SisLib_803A5CC4(userdata->labels[visible_row]);
         *label_text = NULL;
     }
-    y = (1.4f * visible_row) + -6.4f;
-    text = HSD_SisLib_803A5ACC(0, 1, -13.0f, y, 17.0f, 500.0f, 38.38772f);
+    text = HSD_SisLib_803A5ACC(0, 1, -13.0f,
+                               y = (1.4f * visible_row) + -6.4f, 17.0f,
+                               500.0f, 38.38772f);
     *label_text = text;
     text->font_size.x = 0.03f;
     text->font_size.y = 0.03f;
@@ -569,14 +570,14 @@ void mnCount_CreateRow(HSD_GObj* gobj, int visible_row, mnCount_row data_row)
     text->default_alignment = 2;
     if (inline_is_row_time(data_row)) {
         unsigned int row_value;
-        char buf2;
+        char buf[4];
         text->font_size.x = 0.03f;
         text->font_size.y = 0.03f;
         row_value = mnCount_GetRowValue_Number(data_row);
-        mn_8022EA78(&buf2, 2, row_value / 60 / 60);
-        mn_8022EA78(&buf2, 2, row_value / 60 % 60);
+        mn_8022EA78(buf, 2, row_value / 60 / 60);
+        mn_8022EA78(&buf[-4], 2, row_value / 60 % 60);
         HSD_SisLib_803A6B98(text, 0.0f, 0.0f, "%u:%s", row_value / 60 / 60,
-                            &buf2);
+                            *(char (*)[4]) &buf - 4);
     } else if (inline_is_row_char(data_row)) {
         text->font_size.x = 0.03f;
         text->font_size.y = 0.03f;
@@ -724,13 +725,12 @@ void fn_802514D8(HSD_GObj* gobj)
 void fn_80251640(HSD_GObj* gobj)
 {
     HSD_GObjProc* proc;
-    HSD_JObj* jobj;
-    HSD_Text* label_null;
-    StaticModelDesc* md;
+    HSD_Text* value_null;
     MnCountData* userdata = GET_MNCOUNT(gobj);
+    StaticModelDesc* md;
     MnCountData* userdata3;
     int i;
-    HSD_Text* value_null;
+    HSD_JObj* jobj;
     PAD_STACK(24);
 
     if (mn_804A04F0.cur_menu != MENU_KIND_RECORDS_MISC) {
@@ -738,6 +738,7 @@ void fn_80251640(HSD_GObj* gobj)
         proc = HSD_GObj_SetupProc(gobj, fn_802514B8, 0);
         proc->flags_3 = HSD_GObj_804D783C;
         {
+            HSD_Text* label_null;
             // inline_free_text
 
             MnCountData* userdata2 = GET_MNCOUNT(gobj);
@@ -801,10 +802,17 @@ static void mnCount_InitUserData_noinline(MnCountData* userdata)
     mnCount_InitUserData(userdata);
 }
 
+static inline void mnCount_InitGObjUserData(HSD_GObj* gobj)
+{
+    MnCountData* userdata = HSD_MemAlloc(sizeof(MnCountData));
+    HSD_ASSERTREPORT(0x512, userdata, "Can't get user_data.\n");
+    mnCount_InitUserData_noinline(userdata);
+    GObj_InitUserData(gobj, 0, HSD_Free, userdata);
+}
+
 void mnCount_Create(void)
 {
     HSD_GObj* gobj;
-    MnCountData* userdata;
     HSD_GObjProc* proc;
 
     mn_804D6BC8.cooldown = 5;
@@ -821,10 +829,7 @@ void mnCount_Create(void)
     gobj = GObj_Create(6, 7, 0x80);
     menu_gobj = gobj;
 
-    userdata = HSD_MemAlloc(sizeof(MnCountData));
-    HSD_ASSERTREPORT(0x512, userdata, "Can't get user_data.\n");
-    mnCount_InitUserData_noinline(userdata);
-    GObj_InitUserData(gobj, 0, HSD_Free, userdata);
+    mnCount_InitGObjUserData(gobj);
 
     proc = HSD_GObj_SetupProc(gobj, fn_80251640, 0);
     proc->flags_3 = HSD_GObj_804D783C;

@@ -1845,8 +1845,7 @@ void fn_8016E2BC(void)
     float var_f1_2;
     bool var_r0;
     int i;
-    bool is_teams;
-    PAD_STACK(0xC);
+    PAD_STACK(0x10);
 
     Player_80036DA4();
     if (tmp->is_singleplayer == 1) {
@@ -1864,10 +1863,12 @@ void fn_8016E2BC(void)
             }
         }
         Player_80032768(0, &sp24);
-        is_teams = tmp->x24C8.is_teams == true;
-        Player_SetUnk45(0, fn_80160840(gm_80160854(
-                               Player_GetPlayerId(0), Player_GetTeam(0),
-                               is_teams, Player_GetPlayerSlotType(0))));
+        {
+            bool is_teams = tmp->x24C8.is_teams == true;
+            Player_SetUnk45(0, fn_80160840(gm_80160854(
+                                   Player_GetPlayerId(0), Player_GetTeam(0),
+                                   is_teams, Player_GetPlayerSlotType(0))));
+        }
         Player_80031AD0(0);
         if (tmp->FighterMatchInfo[0].x4_b4) {
             lbAudioAx_800237A8(0x41F4E, 0x7F, 0x40);
@@ -1892,13 +1893,15 @@ void fn_8016E2BC(void)
                     }
                 }
                 Player_80032768(i, &sp18);
-                is_teams = tmp->x24C8.is_teams == true;
-                Player_SetUnk45(
-                    i, fn_80160840(gm_80160854(Player_GetPlayerId(i),
-                                               Player_GetTeam(i), is_teams,
-                                               Player_GetPlayerSlotType(i))));
+                {
+                    bool is_teams = tmp->x24C8.is_teams == true;
+                    Player_SetUnk45(
+                        i, fn_80160840(gm_80160854(Player_GetPlayerId(i),
+                                                   Player_GetTeam(i), is_teams,
+                                                   Player_GetPlayerSlotType(i))));
+                }
                 Player_80031AD0(i);
-                if (tmp->FighterMatchInfo[i].x4_b4) {
+                if (lbl_8046B6A0.FighterMatchInfo[i].x4_b4) {
                     lbAudioAx_800237A8(0x41F4E, 0x7F, 0x40);
                 }
             }

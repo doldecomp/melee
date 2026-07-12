@@ -1073,7 +1073,7 @@ void fn_80186634(void* arg0)
     HSD_JObj* jobj;
     HSD_GObj* gobj4;
     const char* names[4];
-    PAD_STACK(8);
+    PAD_STACK(16);
 
     lbArchive_80016DBC("GmIntEz.dat", &lbl_804D6604, "gmIntroEasyTable", 0);
     Camera_80028B9C(0xC);
@@ -1140,7 +1140,9 @@ void fn_80186634(void* arg0)
         GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0xB, 0);
         fn_80186080();
         break;
-    default:
+    case 0:
+    case 1:
+    case 2:
         gobj2 = GObj_Create(0x13, 0x14, 0);
         cobj1 = HSD_CObjLoadDesc(lbl_804D65FC->cameras[0].desc);
         cobj2 = HSD_CObjLoadDesc(lbl_804D6600->cameras[0].desc);

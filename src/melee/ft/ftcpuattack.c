@@ -89,28 +89,28 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
     f32 acc;
     f32 t;
     f32 fpPredY;
-    f32 relx;
     f32 relPredY;
     f32 v;
     f32 sq;
     f32 scale;
     f32 diry;
-    f32 rangeF;
-    f32 rangeB;
-    f32 halfRange;
-    f32 fpTermNeg;
-    f32 tgtTermNeg;
-    f32 fpY;
-    f32 fpVy;
-    f32 tgtVx;
-    f32 tgtY;
-    f32 tgtVy;
-    f32 tgtGrav;
     f32 fpX;
+    f32 fpY;
     f32 fpVx;
-    f32 x568;
+    f32 fpVy;
+    f32 fpTermNeg;
     f32 fpGrav;
     f32 tgtX;
+    f32 tgtY;
+    f32 tgtVx;
+    f32 tgtVy;
+    f32 tgtTermNeg;
+    f32 tgtGrav;
+    f32 rangeF;
+    f32 rangeB;
+    f32 x568;
+    f32 relx;
+    f32 halfRange;
 
     cpu->x74.y = 0.0f;
     cpu->x74.x = 0.0f;
@@ -312,9 +312,9 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
     f32 tgtGrav;
     f32 fpX;
     f32 fpVx;
-    f32 tgtX;
-    f32 fpGrav;
     f32 x568;
+    f32 fpGrav;
+    f32 tgtX;
 
     PAD_STACK(0x10);
 
@@ -338,14 +338,14 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
     tgtVx = target->pos_delta.x;
     tgtVy = target->pos_delta.y;
     tgtGrav = target->co_attrs.grav;
-    x568 = target->x1A88.x568;
-    if (target->facing_dir > 0.0f) {
+    if (target->facing_dir > 0.0) {
         rangeF = target->x1A88.x55C;
         rangeB = target->x1A88.x560;
     } else {
         rangeF = target->x1A88.x560;
         rangeB = target->x1A88.x55C;
     }
+    x568 = target->x1A88.x568;
     count = 0;
     while (list->cmd) {
         f32 dirx;
@@ -482,7 +482,7 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
 
 int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
 {
-    u8 operand_pad[12];
+    u8 operand_pad[4];
     ftCo_AttackEntry sp34[32];
     ftCo_x50_t* x50 = arg1;
     ftCo_x50_attr* attrs;
@@ -625,7 +625,7 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
         }
         scale = fp->x34_scale.y;
         if (list->x14 * scale > relPredY &&
-            list->x10 * scale < relPredY + yBound && dirx < relx + sizeHalf &&
+            relPredY + yBound > list->x10 * scale && dirx < relx + sizeHalf &&
             diry > relx - sizeHalf)
         {
             if (cpu->xC8 != 0) {
@@ -2804,6 +2804,7 @@ bool ftCo_800BB104(Fighter* fp, Fighter* arg1, Vec3* arg2, f32 arg3)
 
 int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
 {
+    UNUSED u8 padD8[8];
     Vec3 dst;
     HitCapsule* hit;
     int i;
@@ -2812,7 +2813,7 @@ int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
     bool result;
     struct Fighter_x1A88_t* temp_r31 = &fp->x1A88;
 
-    PAD_STACK(0x38);
+    PAD_STACK(8);
 
     if (ip->owner == fp->gobj) {
         return 0;
@@ -2833,14 +2834,17 @@ int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
         return 0;
     }
 
-    if (fp->x1A88.level < 3) {
-        count = (s32) (20.0f * HSD_Randf()) + 10;
-    } else if (temp_r31->level < 6) {
-        count = (s32) (10.0f * HSD_Randf()) + 5;
-    } else if (temp_r31->level < 9) {
-        count = (s32) (5.0f * HSD_Randf()) + 3;
-    } else {
-        count = 1;
+    {
+        struct Fighter_x1A88_t* cpu = &fp->x1A88;
+        if (fp->x1A88.level < 3) {
+            count = (s32) (20.0f * HSD_Randf()) + 10;
+        } else if (cpu->level < 6) {
+            count = (s32) (10.0f * HSD_Randf()) + 5;
+        } else if (cpu->level < 9) {
+            count = (s32) (5.0f * HSD_Randf()) + 3;
+        } else {
+            count = 1;
+        }
     }
 
     dst.x = fp->pos_delta.x * count + arg2->x;
@@ -2851,27 +2855,25 @@ int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
         if (count < 21) {
             Vec3 spB8;
             Vec3 spAC;
+            UNUSED u8 padA0[0xC];
             Vec3 sp94;
+            f32 dx, dy, dz;
             for (i = 0; i < 4; i++) {
                 state = ip->x5D4_hitboxes[i].hit.state;
                 hit = &ip->x5D4_hitboxes[i].hit;
                 if (state != HitCapsule_Disabled &&
                     state != HitCapsule_Enabled && !hit->x43_b2 &&
-                    hit->element != 0xB && !lbColl_8000ACFC(fp, hit))
+                    hit->element != 0xB && !lbColl_8000ACFC(fp, hit) &&
+                    (dx = hit->x4C.x - hit->x58.x,
+                     dy = hit->x4C.y - hit->x58.y,
+                     dz = hit->x4C.z - hit->x58.z,
+                     sp94.x = dx * count + hit->x4C.x,
+                     sp94.y = dy * count + hit->x4C.y,
+                     sp94.z = dz * count + hit->x4C.z,
+                     lbColl_80006094(&hit->x4C, &sp94, arg2, &dst, &spAC,
+                                     &spB8, hit->scale, arg3)))
                 {
-                    f32 dx = hit->x4C.x - hit->x58.x;
-                    f32 dy = hit->x4C.y - hit->x58.y;
-                    f32 dz = hit->x4C.z - hit->x58.z;
-                    sp94.x = dx * count + hit->x4C.x;
-                    sp94.y = dy * count + hit->x4C.y;
-                    sp94.z = dz * count + hit->x4C.z;
-                    if (lbColl_80006094(&hit->x4C, &sp94, arg2, &dst, &spAC,
-                                        &spB8, hit->scale, arg3))
-                    {
-                        result = true;
-                    } else {
-                        result = false;
-                    }
+                    result = true;
                 } else {
                     result = false;
                 }
@@ -2879,31 +2881,28 @@ int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
                     return 2;
                 }
             }
-            return 0;
         } else {
             Vec3 sp84;
             Vec3 sp78;
+            UNUSED u8 pad6C[0xC];
             Vec3 sp60;
+            f32 dx, dy, dz;
             for (i = 0; i < 4; i++) {
                 state = ip->x5D4_hitboxes[i].hit.state;
                 hit = &ip->x5D4_hitboxes[i].hit;
                 if (state != HitCapsule_Disabled &&
                     state != HitCapsule_Enabled && !hit->x43_b2 &&
-                    hit->element != 0xB && !lbColl_8000ACFC(fp, hit))
+                    hit->element != 0xB && !lbColl_8000ACFC(fp, hit) &&
+                    (dx = hit->x4C.x - hit->x58.x,
+                     dy = hit->x4C.y - hit->x58.y,
+                     dz = hit->x4C.z - hit->x58.z,
+                     sp60.x = dx * count + hit->x4C.x,
+                     sp60.y = dy * count + hit->x4C.y,
+                     sp60.z = dz * count + hit->x4C.z,
+                     lbColl_80006094(&hit->x4C, &sp60, arg2, &dst, &sp78,
+                                     &sp84, hit->scale, arg3)))
                 {
-                    f32 dx = hit->x4C.x - hit->x58.x;
-                    f32 dy = hit->x4C.y - hit->x58.y;
-                    f32 dz = hit->x4C.z - hit->x58.z;
-                    sp60.x = dx * count + hit->x4C.x;
-                    sp60.y = dy * count + hit->x4C.y;
-                    sp60.z = dz * count + hit->x4C.z;
-                    if (lbColl_80006094(&hit->x4C, &sp60, arg2, &dst, &sp78,
-                                        &sp84, hit->scale, arg3))
-                    {
-                        result = true;
-                    } else {
-                        result = false;
-                    }
+                    result = true;
                 } else {
                     result = false;
                 }
@@ -2914,34 +2913,29 @@ int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
                     return 2;
                 }
             }
-            return 0;
         }
-    }
-
-    {
+    } else {
         Vec3 sp50;
         Vec3 sp44;
+        UNUSED u8 pad38[0xC];
         Vec3 sp2C;
+        UNUSED u8 pad24[8];
+        f32 dx, dy, dz;
         for (i = 0; i < 4; i++) {
             state = ip->x5D4_hitboxes[i].hit.state;
             hit = &ip->x5D4_hitboxes[i].hit;
             if (state != HitCapsule_Disabled && state != HitCapsule_Enabled &&
                 !hit->x43_b2 && hit->element != 0xB &&
-                !lbColl_8000ACFC(fp, hit))
+                !lbColl_8000ACFC(fp, hit) &&
+                (dx = hit->x4C.x - hit->x58.x, dy = hit->x4C.y - hit->x58.y,
+                 dz = hit->x4C.z - hit->x58.z,
+                 sp2C.x = dx * count + hit->x4C.x,
+                 sp2C.y = dy * count + hit->x4C.y,
+                 sp2C.z = dz * count + hit->x4C.z,
+                 lbColl_80006094(&hit->x4C, &sp2C, arg2, &dst, &sp44, &sp50,
+                                 hit->scale, arg3)))
             {
-                f32 dx = hit->x4C.x - hit->x58.x;
-                f32 dy = hit->x4C.y - hit->x58.y;
-                f32 dz = hit->x4C.z - hit->x58.z;
-                sp2C.x = dx * count + hit->x4C.x;
-                sp2C.y = dy * count + hit->x4C.y;
-                sp2C.z = dz * count + hit->x4C.z;
-                if (lbColl_80006094(&hit->x4C, &sp2C, arg2, &dst, &sp44, &sp50,
-                                    hit->scale, arg3))
-                {
-                    result = true;
-                } else {
-                    result = false;
-                }
+                result = true;
             } else {
                 result = false;
             }

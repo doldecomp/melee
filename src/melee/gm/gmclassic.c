@@ -407,16 +407,16 @@ static inline void gmClassic_InitMatchupOrder(const gmClassicMatchup* matchups,
 static gmClassicMatchup* gmClassic_801B2BA4(gmClassicMatchup* arg0, u8* arg1,
                                             gm_803DDEC8Struct* arg2)
 {
+    s32 outer;
     s32 k;
     s32 j;
     gm_803DDEC8Struct* temp;
     s32 count;
-    s8 target_char;
     gmClassicMatchup* entry;
     gmClassicMatchup* result;
     gmClassicMatchup* count_entry;
     s32 cur_char;
-    s32 outer;
+    s32 target_char;
     u8* order;
 
     result = NULL;
@@ -594,8 +594,7 @@ void gmClassic_OnLoad(void)
 
     gmClassic_InitMatchupOrder(scene_data->matchups.x2B0,
                                gmClassic_80490880.x80);
-    gmClassic_InitMatchupOrder(scene_data->matchups.x26C,
-                               gmClassic_80490880.x74);
+    gmClassic_InitMatchupOrder(scene_data->matchups.x26C, o->x74);
     gmClassic_InitMatchupOrder(scene_data->matchups.x1B8,
                                gmClassic_80490880.x54);
     gmClassic_InitMatchupOrder(scene_data->matchups.x0CC,
@@ -654,7 +653,6 @@ void gmClassic_801B3500(GameScene* arg0)
     int count;
     u64 audio;
     s8 ckind;
-    PreloadCacheSceneEntry* ep;
 
     sd = gm_801A427C(arg0);
     entry = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->idx)];
@@ -751,74 +749,25 @@ void gmClassic_801B3500(GameScene* arg0)
     lbDvd_80018C2C(0xC7);
     lbDvd_80017700(4);
 
-    {
-        s8 echar;
-
-        ep = &gc->entries[count];
-
-        echar = entry->xC->x02[0];
+    for (i = 0; i < 3; i++) {
+        s8 echar = entry->xC->x02[i];
         if (echar != 0x21) {
-            ep->char_id = echar;
+            gc->entries[count].char_id = echar;
             if (entry->x1 & 8) {
-                ep->color = 0xFF;
+                gc->entries[count].color = 0xFF;
             } else {
-                ep->color = sd->x16[0];
-            }
-            count++;
-            ep++;
-        }
-
-        echar = entry->xC->x02[1];
-        if (echar != 0x21) {
-            ep->char_id = echar;
-            if (entry->x1 & 8) {
-                ep->color = 0xFF;
-            } else {
-                ep->color = sd->x16[1];
-            }
-            count++;
-            ep++;
-        }
-
-        echar = entry->xC->x02[2];
-        if (echar != 0x21) {
-            ep->char_id = echar;
-            if (entry->x1 & 8) {
-                ep->color = 0xFF;
-            } else {
-                ep->color = sd->x16[2];
+                gc->entries[count].color = sd->x16[i];
             }
             count++;
         }
     }
 
-    {
-        s8 achar;
-        Unk1PData_x24* ap;
-
-        ep = &gc->entries[count];
-        ap = ad->x0.xC.x24;
-
-        achar = ap->ckind;
+    for (i = 0; i < 3; i++) {
+        s8 achar = ad->x0.xC.x24[i].ckind;
         if (achar != 0x21) {
-            ep->char_id = achar;
-            ep->color = ap->x1;
-            ep++;
-        }
-        ap++;
-
-        achar = ap->ckind;
-        if (achar != 0x21) {
-            ep->char_id = achar;
-            ep->color = ap->x1;
-            ep++;
-        }
-        ap++;
-
-        achar = ap->ckind;
-        if (achar != 0x21) {
-            ep->char_id = achar;
-            ep->color = ap->x1;
+            gc->entries[count].char_id = achar;
+            gc->entries[count].color = ad->x0.xC.x24[i].x1;
+            count++;
         }
     }
 
@@ -851,9 +800,9 @@ void gmClassic_801B3500(GameScene* arg0)
         int j;
 
         for (j = 0; j < 3; j++) {
-            s8 echar = entry->xC->x02[j];
-            if (echar != 0x21) {
-                audio |= lbAudioAx_80026E84(echar);
+            int echar = entry->xC->x02[j];
+            if ((s8) echar != 0x21) {
+                audio |= lbAudioAx_80026E84((s8) echar);
                 if (entry->xC->x02[j] == 4) {
                     audio |= ((u64) 2 << 32) | 0x4000;
                 }

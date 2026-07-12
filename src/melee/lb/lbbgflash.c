@@ -253,7 +253,7 @@ void fn_8001FEC4(HSD_GObj* gobj, s32 code)
             s32* pY;
             s32 y2;
 
-            for (pY = &data->x38, y2 = data->x38; y2 <= 0x1E0; y2 += data->x32)
+            for (y2 = *(pY = &data->x38); y2 <= 0x1E0; y2 += data->x32)
             {
                 if (y2 == *pY) {
                     s32 right;
@@ -838,13 +838,16 @@ void lbBgFlash_80021410(void* arg0)
     dx *= dx;
     dy *= dy;
     dz *= dz;
-    if ((len_bc = dz + (dx + dy)) > 0.0f) {
-        f64 e = __frsqrte(len_bc);
-        e = 0.5 * e * -(((f64) len_bc * (e * e)) - 3.0);
-        e = 0.5 * e * -(((f64) len_bc * (e * e)) - 3.0);
-        e = 0.5 * e * -(((f64) len_bc * (e * e)) - 3.0);
-        len_bc_mag = (f32) ((f64) len_bc * e);
-        len_bc = len_bc_mag;
+    {
+        int positive = (len_bc = dz + (dx + dy)) > 0.0f;
+        if (positive) {
+            f64 e = __frsqrte(len_bc);
+            e = 0.5 * e * -(((f64) len_bc * (e * e)) - 3.0);
+            e = 0.5 * e * -(((f64) len_bc * (e * e)) - 3.0);
+            e = 0.5 * e * -(((f64) len_bc * (e * e)) - 3.0);
+            len_bc_mag = (f32) ((f64) len_bc * e);
+            len_bc = len_bc_mag;
+        }
     }
     data->len0 = len_bc;
 

@@ -119,7 +119,9 @@ static void ftCo_DamageIce_OnHit(Fighter_GObj* gobj)
 
 static inline void ftCo_DamageIce_StartJump(Fighter* fp)
 {
-    float* ice_size = &fp->co_attrs.damageice_ice_size;
+    float* ice_size;
+    HSD_JObj* effect_joint;
+    float param;
 
     {
         ftCo_8009E140(fp, 0);
@@ -149,7 +151,14 @@ static inline void ftCo_DamageIce_StartJump(Fighter* fp)
     }
 
     ftCo_800909D0(fp);
-    ftCo_80090AC0(fp);
+
+    effect_joint = fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint;
+    ice_size = &fp->co_attrs.damageice_ice_size;
+    param = fp->x34_scale.y * *ice_size /
+            p_ftCommonData->damageice_ice_size;
+
+    ftCo_SpawnEffect_x415(fp->gobj, effect_joint, &param);
+    fp->x2219_b0 = true;
     ftColl_8007B0C0(fp->gobj, Intangible);
 
     {
@@ -195,7 +204,7 @@ void ftCo_DamageIce_Init(Fighter_GObj* gobj)
     Mtx rot_mtx_y;
     Quaternion rot_x;
     Mtx rot_mtx_x;
-    PAD_STACK(16);
+    PAD_STACK(24);
 
     fp = GET_FIGHTER(gobj);
 

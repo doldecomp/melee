@@ -91,7 +91,7 @@ struct un_803FA128_x130_t {
     f32 xEC;
 };
 
-/* 3FA128 */ static struct un_803FA128_t {
+struct un_803FA128_t {
     u8 _pad0[0x130];
     struct un_803FA128_x130_t x130;
     u16 x220;
@@ -100,7 +100,7 @@ struct un_803FA128_x130_t {
     u8 x225;
     u8 x226;
     u8 x227;
-} un_803FA128;
+};
 /* 3FA258 */ struct un_803FA258_t {
     int x0;
     int x4[4];
@@ -141,8 +141,49 @@ struct un_803FA128_x130_t {
     u8 x144[0x44];
     s32 x188;
 } un_803FA258 = { 0 };
-/* 3FA348 */ static u16 un_803FA348;
-/* 3FA34C */ static u8 un_803FA34C;
+/// Sound test state block at 3FA128: a 0x130-byte live-state area, the
+/// initialized rule defaults (retail .data bytes at 3FA258..3FA348 hold these
+/// non-zero defaults; the block is initialized data, not bss), and the
+/// 2-byte save-block offset at 3FA348. The block ends at 3FA34C so the saved
+/// byte there stays a separate object, mirroring the retail symbol extents.
+static struct SoundTestState {
+    u8 state[0x130];
+    struct un_803FA128_x130_t rules;
+    u16 save_offset;
+    u8 pad222[2];
+} sound_test_state = {
+    { 0 },
+    {
+        0,
+        0,
+        0x20,
+        0,
+        { 6, 8, 6, 6 },
+        8,
+        { 0, 0, 3, 3 },
+        0,
+        { 0, 0, 0, 0 },
+        { 0, 0, 0, 0 },
+        { 0, 0, 0, 0 },
+        { 0, 0, 0, 0 },
+        { 1.0F, 1.0F, 1.0F, 1.0F },
+        { 1.0F, 1.0F, 1.0F, 1.0F },
+        { 1.0F, 1.0F, 1.0F, 1.0F },
+        { 4, 4, 4, 4 },
+        { 5, 5, 5, 5 },
+        0,
+        { 0, 0, 0, 0 },
+        { 0, 0, 0, 1 },
+        1.0F,
+    },
+    0,
+    { 0 },
+};
+/// Lone saved-settings byte at 3FA34C; DATA forces it past MWCC's small-data
+/// threshold so it lands in .data next to the state block like retail
+/// (retail bytes 3FA34D..3FA34F are unnamed pad, so it must stay a separate
+/// 1-byte object rather than a member of the block above).
+/* 3FA34C */ DATA static u8 sound_test_saved_byte[1] = { 0 };
 /* 3FA32C */ static u8 un_803FA32C;
 /* 3FA658 */ static u8 un_803FA658[0x290] = { 0 };
 /* 3FA8E8 */ static u8 un_803FA8E8[0x15C] = { 0 };
@@ -457,7 +498,7 @@ void un_802FFEE0(s32* arg0)
 void un_802FFF2C(StartMeleeData* arg0)
 {
     StartMeleeRules* r = &arg0->rules;
-    struct un_803FA128_t* s = &un_803FA128;
+    struct un_803FA128_t* s = (struct un_803FA128_t*) &sound_test_state;
     struct un_803FA128_x130_t* sp;
     s32 i;
     u16 timer;
@@ -570,63 +611,68 @@ bool un_803002FC(bool update_scene)
 
 s32 un_80300338(void)
 {
+    struct un_803FA128_t* s = (struct un_803FA128_t*) &sound_test_state;
     u8* src;
 
     src = gmMainLib_8045A6C0;
-    src = src + un_803FA128.x220;
+    src = src + s->x220;
 
-    un_803FA128.x224 = src[0x1868];
-    un_803FA128.x225 = src[0x1869];
-    un_803FA128.x226 = src[0x186A];
-    un_803FA128.x227 = src[0x186B];
+    s->x224 = src[0x1868];
+    s->x225 = src[0x1869];
+    s->x226 = src[0x186A];
+    s->x227 = src[0x186B];
     return 0;
 }
 
 s32 un_80300378(void)
 {
+    struct un_803FA128_t* s = (struct un_803FA128_t*) &sound_test_state;
     u8* ptr;
 
-    un_803FA128.x220 &= 0xFFFE;
+    s->x220 &= 0xFFFE;
 
     ptr = gmMainLib_8045A6C0;
-    ptr = ptr + un_803FA128.x220;
+    ptr = ptr + s->x220;
 
-    un_803FA128.x224 = ptr[0x1868];
-    un_803FA128.x225 = ptr[0x1869];
-    un_803FA128.x226 = ptr[0x186A];
-    un_803FA128.x227 = ptr[0x186B];
+    s->x224 = ptr[0x1868];
+    s->x225 = ptr[0x1869];
+    s->x226 = ptr[0x186A];
+    s->x227 = ptr[0x186B];
 
     return 0;
 }
 
 s32 un_803003C4(void)
 {
+    struct un_803FA128_t* s = (struct un_803FA128_t*) &sound_test_state;
     u8* ptr;
 
-    un_803FA128.x220 &= 0xFFFC;
+    s->x220 &= 0xFFFC;
 
     ptr = gmMainLib_8045A6C0;
-    ptr = ptr + un_803FA128.x220;
+    ptr = ptr + s->x220;
 
-    un_803FA128.x224 = ptr[0x1868];
-    un_803FA128.x225 = ptr[0x1869];
-    un_803FA128.x226 = ptr[0x186A];
-    un_803FA128.x227 = ptr[0x186B];
+    s->x224 = ptr[0x1868];
+    s->x225 = ptr[0x1869];
+    s->x226 = ptr[0x186A];
+    s->x227 = ptr[0x186B];
 
     return 0;
 }
 
 s32 un_80300410(s32 arg0)
 {
+    struct un_803FA128_t* s = (struct un_803FA128_t*) &sound_test_state;
+
     if (arg0 == 1) {
         u8* dst;
         lbAudioAx_80024030(1);
         dst = gmMainLib_8045A6C0;
-        dst += un_803FA128.x220;
-        dst[0x1868] = un_803FA128.x224;
-        dst[0x1869] = un_803FA128.x225;
-        dst[0x186A] = un_803FA128.x226;
-        dst[0x186B] = un_803FA128.x227;
+        dst += s->x220;
+        dst[0x1868] = s->x224;
+        dst[0x1869] = s->x225;
+        dst[0x186A] = s->x226;
+        dst[0x186B] = s->x227;
     }
     return 0;
 }

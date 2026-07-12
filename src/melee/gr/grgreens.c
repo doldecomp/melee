@@ -156,6 +156,9 @@ grGr_StageData grGr_803E76D0 = {
 
 char grGr_803E7728[] = "grgreens.c";
 
+#undef __FILE__
+#define __FILE__ (&grGr_803E7728[0])
+
 static s32 grGr_803E7734[] = {
     0, 1, 0, 1, 0, 2, 0, 1, 0, 2,
 };
@@ -949,9 +952,9 @@ void grGreens_80214FA8(Ground_GObj* gobj)
 
 void grGreens_802150C4(Ground_GObj* gobj, int arg1, int arg2)
 {
-    Ground* gp = GET_GROUND(gobj);
-#define BLOCK(i, j)                                                           \
-    (((struct grGreens_BlockVars(*)[6]) gp->gv.greens.x8_blocks)[i][j])
+    struct grGreens_BlockVars (*blocks)[6] =
+        (struct grGreens_BlockVars(*)[6]) GET_GROUND(gobj)->gv.greens.x8_blocks;
+#define BLOCK(i, j) blocks[i][j]
 
     if (arg2 > 0 && arg1 > 0 && BLOCK(arg2 - 1, arg1 - 1).status == 3) {
         if (BLOCK(arg2 - 1, arg1).status == 3) {
@@ -1105,6 +1108,7 @@ void grGreens_802159B8(Ground* gp, int i, int j, int value)
     HSD_GObj* gobj = gp->gv.greens.x8_blocks[j * 6 + i].x10;
     Vec vec;
     float f;
+    UNUSED u8 pad[0x10];
 
     if (gobj != NULL && !gp->gv.greens.x8_blocks[j * 6 + i].x1_7) {
         gp->gv.greens.x8_blocks[j * 6 + i].x1_7 = 1;
@@ -1132,14 +1136,11 @@ void grGreens_802159B8(Ground* gp, int i, int j, int value)
     }
 }
 
-void fn_80215B84(Item_GObj* item_gobj, Ground* gp, Vec* arg2, HSD_GObj* gobj,
-                 float arg4)
+static inline bool find_block(Ground* gp, Item_GObj* item_gobj, int* row,
+                              int* col)
 {
     int i;
     int j;
-    int row = -1;
-    int col = 0;
-    u8 operand_pad[4];
 
     for (i = 0; i < 5; i++) {
         for (j = 0; j < 6; j++) {
@@ -1148,17 +1149,27 @@ void fn_80215B84(Item_GObj* item_gobj, Ground* gp, Vec* arg2, HSD_GObj* gobj,
             if (block->status != Gr_Greens_Block_Status_None &&
                 block->x10 == item_gobj)
             {
-                row = i;
-                col = j;
-                i = 5;
-                break;
+                *row = i;
+                *col = j;
+                return true;
             }
         }
     }
-    if (row == -1) {
+    return false;
+}
+
+void fn_80215B84(Item_GObj* item_gobj, Ground* gp, Vec* arg2, HSD_GObj* gobj,
+                 float arg4)
+{
+    Ground* ground = gp;
+    int col = -1;
+    int row;
+    HSD_GObj* hit = gobj;
+
+    if (!find_block(ground, item_gobj, &row, &col)) {
         HSD_ASSERT(1465, 0);
     }
-    grGreens_802159B8(gp, col, row, (s32) gobj);
+    grGreens_802159B8(ground, col, row, (s32) hit);
 }
 
 void fn_80215D50(Item_GObj* item_gobj, Ground* gp, HSD_GObj* gobj)
@@ -1282,9 +1293,11 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
                 {
                     struct grGreens_BlockVars* next =
                         getBlock(gp, next_row, col);
+                    struct grGreens_BlockVars* prev =
+                        getBlock(gp, next_row - 1, col);
                     float y = getVec(gp, next_row, col)->y;
-                    next->x8 = y - getVec(gp, next_row - 1, col)->y +
-                               getBlock(gp, next_row - 1, col)->x8;
+                    next->x8 =
+                        y - getVec(gp, next_row - 1, col)->y + prev->x8;
                 }
                 pos.x = getVec(gp, next_row, col)->x;
                 pos.y = getBlock(gp, next_row, col)->x8;
@@ -1524,8 +1537,8 @@ static inline int getBlockX18(Ground* gp, int i, int j)
 
 void grGreens_80216C20(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
     int j;
+    Ground* gp = GET_GROUND(gobj);
     int i;
 
     for (i = 0; i < 5; i++) {

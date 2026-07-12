@@ -400,14 +400,18 @@ static inline void itLinkbomb_UnkMotion3_Anim_inline2(HSD_GObj* gobj)
     it_8029DB5C(gobj);
 }
 
-static inline void itLinkbomb_UnkMotion3_Anim_blk10932r(Item_GObj* gobj,
-                                                        Item* ip)
+static inline void itLinkbomb_UnkMotion3_Anim_blk10932r(
+    Item_GObj* gobj, itLinkBombAttributes* attrs)
 {
-    itLinkBombAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    Item* ip;
+    Article* article;
     if (!it_80272C6C(gobj)) {
         it_8029EC34(gobj);
     }
+    ip = GET_ITEM(gobj);
     // permuterslop
+    if (article != NULL) {
+    }
     if (attrs != NULL) {
     }
     if (ip != NULL) {
@@ -430,7 +434,7 @@ bool itLinkbomb_UnkMotion3_Anim(Item_GObj* gobj)
     itLinkBombAttributes* attrs =
         GET_ITEM(gobj)->xC4_article_data->x4_specialAttributes;
     itLinkbomb_UnkMotion3_Anim_blk10913();
-    itLinkbomb_UnkMotion3_Anim_blk10932r(gobj, GET_ITEM(gobj));
+    itLinkbomb_UnkMotion3_Anim_blk10932r(gobj, attrs);
     return false;
 }
 

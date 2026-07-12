@@ -83,6 +83,12 @@ void ftCo_800C08A0(Fighter_GObj* gobj, Fighter_GObj* arg1, DynamicsDesc* arg2,
     case BuryType_Unk2:
         break;
     case BuryType_Unk1:
+        /// @remarks The redundant @c hurt_idx re-assignment gives the
+        /// variable a second reaching definition, which keeps MWCC's
+        /// global optimizer from folding the constant index into the
+        /// @c hurt_capsules address math (retail keeps the full
+        /// mulli/addi/add sequence at 800C0938).
+        hurt_idx = 0;
         fp->bury_timer_1 = p_ftCommonData->bury_timer_unk1;
         break;
     case BuryType_Unk3:
@@ -184,20 +190,18 @@ void ftCo_800C0B20(Fighter_GObj* gobj)
             unk_anim = Ground_801C5700(coll->left_facing_wall.index);
         }
         if (unk_anim != NULL) {
-            HitCapsule hit;
+            u8 _[8];
+            struct SmallerHitCapsule hit;
             Fighter* fp = GET_FIGHTER(gobj);
             float f = ftColl_800765F0(fp, NULL, unk_anim->count);
-            int hurt_idx = 0;
             fp->bury_timer_1 = p_ftCommonData->bury_timer_unk1;
             if (ftColl_80076640(fp, &f)) {
                 FighterHurtCapsule* hurt;
-                hurt = &fp->hurt_capsules[hurt_idx];
+                hurt = &fp->hurt_capsules[0];
                 ftColl_80076764(3, 1, 0, unk_anim, fp, hurt);
-
-                /// @todo Eliminate cast
-                lbColl_80008D30(&hit, (lbColl_80008D30_arg1*) unk_anim);
-
-                ftColl_80078384(fp, hurt, &hit);
+                lbColl_80008D30((HitCapsule*) &hit,
+                                (lbColl_80008D30_arg1*) unk_anim);
+                ftColl_80078384(fp, hurt, (HitCapsule*) &hit);
             }
             pl_8003EC30(fp->player_id, fp->x221F_b4, 1, f);
         }

@@ -475,47 +475,19 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
                     }
                 }
 #else
-            if (jobj_1 == NULL) {
-                jobj_2 = NULL;
-            } else {
-                jobj_2 = jobj_1->child;
-            }
+            jobj_2 = HSD_JObjGetChild(jobj_1);
             efLib_SetTevKonstColor(jobj_2, 0, u32_2, u32_1);
-            if (jobj_2 == NULL) {
-                jobj_2 = NULL;
-            } else {
-                jobj_2 = jobj_2->next;
-            }
-            efLib_SetTevKonstColor(jobj_2, 0, u32_2, u32_1);
-            if (jobj_2 == NULL) {
-                jobj_2 = NULL;
-            } else {
-                jobj_2 = jobj_2->next;
-            }
-            efLib_SetTevKonstColor(jobj_2, 0, u32_2, u32_1);
-            if (jobj_2 == NULL) {
-                jobj_2 = NULL;
-            } else {
-                jobj_2 = jobj_2->next;
-            }
-            efLib_SetTevKonstColor(jobj_2, 0, u32_2, u32_1);
-            if (jobj_2 == NULL) {
-                jobj_2 = NULL;
-            } else {
-                jobj_2 = jobj_2->next;
-            }
-            efLib_SetTevKonstColor(jobj_2, 0, u32_2, u32_1);
-            if (jobj_2 == NULL) {
-                jobj_2 = NULL;
-            } else {
-                jobj_2 = jobj_2->next;
-            }
-            efLib_SetTevKonstColor(jobj_2, 0, u32_2, u32_1);
-            if (jobj_2 == NULL) {
-                jobj_1 = NULL;
-            } else {
-                jobj_1 = jobj_2->next;
-            }
+            jobj_1 = HSD_JObjGetNext(jobj_2);
+            efLib_SetTevKonstColor(jobj_1, 0, u32_2, u32_1);
+            jobj_1 = HSD_JObjGetNext(jobj_1);
+            efLib_SetTevKonstColor(jobj_1, 0, u32_2, u32_1);
+            jobj_1 = HSD_JObjGetNext(jobj_1);
+            efLib_SetTevKonstColor(jobj_1, 0, u32_2, u32_1);
+            jobj_1 = HSD_JObjGetNext(jobj_1);
+            efLib_SetTevKonstColor(jobj_1, 0, u32_2, u32_1);
+            jobj_1 = HSD_JObjGetNext(jobj_1);
+            efLib_SetTevKonstColor(jobj_1, 0, u32_2, u32_1);
+            jobj_1 = HSD_JObjGetNext(jobj_1);
             efLib_SetTevKonstColor(jobj_1, 0, u32_2, u32_1);
 #endif
             ((EF_Effect*) ret_obj)->scale_flags |= EF_SCALE_INHERIT;

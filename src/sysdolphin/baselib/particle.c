@@ -757,7 +757,6 @@ void hsd_803922FC(void* bitmap, s32 x, s32 y, s32 parity, s32 dst, s32 w,
                   s32 h, s32 stride, void* tbl)
 {
     volatile s32 v_stride;
-    volatile s32 v_h;
     s32 bit_x;
     s32 cur_dst;
     u32 max_x;
@@ -765,7 +764,6 @@ void hsd_803922FC(void* bitmap, s32 x, s32 y, s32 parity, s32 dst, s32 w,
     s32 off_y;
     GlyphEntry* table;
     s32 bit_off;
-    s32 col;
     s32 x2;
     s32 data_off;
     s32 row_idx;
@@ -775,7 +773,6 @@ void hsd_803922FC(void* bitmap, s32 x, s32 y, s32 parity, s32 dst, s32 w,
     u8* bmp;
     GlyphEntry* entry;
 
-    v_h = h;
     v_stride = stride;
     bmp = bitmap;
     off_y = 0;
@@ -802,7 +799,8 @@ void hsd_803922FC(void* bitmap, s32 x, s32 y, s32 parity, s32 dst, s32 w,
     row_idx = y / 2;
     x2 = x * 2;
     data_off = off_y * 4;
-    while (off_y < 14 && (u32) y < v_h) {
+    while (off_y < 14 && (u32) y < h) {
+        s32 col;
         col = x;
         bit_x = off_x;
         cur_dst = dst + (row_idx * v_stride) + x2;
@@ -1124,7 +1122,8 @@ void* fn_80392A3C(void)
     numFrames = lbl_804D6088;
     if (0 != numFrames) {
         u8* counts = &hsd_804CE3F8[0].content.bytes[0];
-        u8* colors = &hsd_804CE3F8[0].content.bytes[4];
+        u8* colors_base = &hsd_804CE3F8[0].content.bytes[4];
+        u8* colors = colors_base;
         hsd_804CE3F8[0].type = 1;
         *(s32*) counts = 1;
         bar_count = count;
@@ -1968,12 +1967,13 @@ void hsd_80393EF4(int col_delta, int row_delta)
                 *col_ptr = byte_val;
             }
         } else {
-            u32 col = sp->x14;
+            int* col_ptr;
+            u32 col = *(col_ptr = &sp->x14);
             col_delta = -col_delta;
             if (col > (u32) col_delta) {
-                sp->x14 = col - (u32) col_delta;
+                *col_ptr = col - (u32) col_delta;
             } else {
-                sp->x14 = 0;
+                *col_ptr = 0;
             }
         }
     } else if (row_delta < 0) {
@@ -2716,7 +2716,7 @@ void hsd_80394F48(void* data)
         }
     }
 
-    b6 = sp->x0_b6;
+    b6 = hsd_804CF810.x0_b6;
     if (sp->x0_b7 != 0) {
         hsd_803922FC(((ParticleFontData*) sp->x4C)->x968, *px4, *px8, b6,
                      (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
@@ -2839,10 +2839,10 @@ void hsd_803957C0(u8 input)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
     s32* x10_ptr = &sp->x10;
-    s32* x4_ptr;
+    void** x50_ptr;
     s32* x8_ptr;
     s32* x40_ptr;
-    void** x50_ptr;
+    s32* x4_ptr;
     s32 col;
     s32 row;
     s32 b6;
@@ -3772,7 +3772,7 @@ static char lbl_804D6348[] = "  ";
 static char lbl_804D634C[] = " ";
 static char lbl_804D6350[8] = "";
 
-// @TODO: Currently 85.84% match - .bss.0 relocation causes register shift
+// @TODO: .bss.0 relocation causes register shift
 void hsd_80397110(void)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
@@ -3795,12 +3795,10 @@ void hsd_80397110(void)
     row = sp->x1C - 1;
     *px50 = base;
     *px4 = 20;
-    *px8 = (*px40 - 0x28) - (row + 1) * 14;
-    row--;
+    *px8 = (*px40 - 0x28) - (row-- + 1) * 14;
     hsd_80394434(SPR_BOX_TOP());
     *px4 = 20;
-    *px8 = (*px40 - 0x28) - (row + 1) * 14;
-    row--;
+    *px8 = (*px40 - 0x28) - (row-- + 1) * 14;
     hsd_80394434(SPR_BOX_HEADER());
     {
         u32* bec4 = (u32*) lbl_8040BEC4;
@@ -3811,7 +3809,8 @@ void hsd_80397110(void)
             if (spr_off + i >= 0x45) {
                 break;
             }
-            spr_entry = (u32*) (base + (spr_off * 16) + offset + 0x2D8);
+            spr_entry = (u32*) (base + spr_off * 16 + offset);
+            spr_entry += 0xB6;
             if (i == bec4[5]) {
                 if (spr_entry[3] != 0) {
                     ((void (*)(u32)) spr_entry[3])(spr_entry[0]);
@@ -3821,8 +3820,7 @@ void hsd_80397110(void)
                 *px50 = base;
             }
             *px4 = 20;
-            *px8 = (*px40 - 0x28) - (row + 1) * 14;
-            row--;
+            *px8 = (*px40 - 0x28) - (row-- + 1) * 14;
             if (spr_entry[0] == 0) {
                 hsd_80394434(SPR_GEKKO_ONLY());
             } else {
@@ -3859,8 +3857,7 @@ void hsd_80397110(void)
     *px50 = base;
     while (row > 0) {
         *px4 = 20;
-        *px8 = (*px40 - 0x28) - (row + 1) * 14;
-        row--;
+        *px8 = (*px40 - 0x28) - (row-- + 1) * 14;
         hsd_80394434(SPR_BLANK_ROW());
     }
     *px4 = 20;
@@ -4671,11 +4668,12 @@ void psInitDataBankLoad(int bank, int* cmdBank, int* texBank, u32* ref,
                         int* formBank)
 {
     s32* base = (s32*) hsd_804D08E8;
+    char* data =
+        "particle.c\0\0illigal form data (strange number of group)\n\0\0\0\0"
+        "psInitDataBanks: unknown version\n";
     u16 version;
-
     if (formBank != NULL && *formBank != *texBank) {
-        OSPanic("particle.c", 177,
-                "illigal form data (strange number of group)\n");
+        OSPanic(data, 177, data + 0xC);
     }
 
     (base + bank)[0x60 / 4] = (s32) ref;
@@ -4704,7 +4702,7 @@ void psInitDataBankLoad(int bank, int* cmdBank, int* texBank, u32* ref,
         break;
     }
     default:
-        OSPanic("particle.c", 207, "psInitDataBanks: unknown version\n");
+        OSPanic(data, 207, data + 0x3C);
     }
 }
 
@@ -6023,8 +6021,11 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     }
                     hsd_803983A4(srt->gp);
                     srt = pp->appsrt;
-                    HSD_MtxSRT(srt->mmtx, &srt->scale, (Vec3*) &srt->rot,
-                               &srt->translate, NULL);
+                    {
+                        Quaternion* rot = &srt->rot;
+                        HSD_MtxSRT(srt->mmtx, &srt->scale, (Vec3*) rot,
+                                   &srt->translate, NULL);
+                    }
                     pp->pos.x = pp->appsrt->mmtx[0][1] * pp->pos.y +
                                 pp->appsrt->mmtx[0][0] * pp->pos.x +
                                 pp->appsrt->mmtx[0][2] * pp->pos.z +

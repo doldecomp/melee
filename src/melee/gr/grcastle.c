@@ -1384,6 +1384,12 @@ void grCastle_801CF308(Ground_GObj* gobj)
     }
 }
 
+/// Preserve the original .sdata2 placement of the double-precision 0.5.
+static void grCastle_ForceSdata2Order(void)
+{
+    (void) 0.5;
+}
+
 void grCastle_801CF74C(Ground_GObj* gobj) {}
 
 void grCastle_801CF750(Ground* gp, s32 arg1, CollData* cd, s32 arg3,
@@ -1421,10 +1427,8 @@ void grCastle_801CF7B0(Ground_GObj* gobj)
                              : x2;
 }
 
-HSD_JObj* grCastle_801CF868(Ground_GObj* gobj)
+static inline void grCastle_UpdateSatellite(Ground* gp)
 {
-    Ground* gp = GET_GROUND(gobj);
-
     if ((gp->gv.castle12.xC4[0] != 0 || gp->gv.castle12.xC4[1] != 0 ||
          gp->gv.castle12.xC4[2] != 0) &&
         (gp->gv.castle12.xD0 == -1 ||
@@ -1517,6 +1521,13 @@ HSD_JObj* grCastle_801CF868(Ground_GObj* gobj)
             }
         }
     }
+}
+
+HSD_JObj* grCastle_801CF868(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    PAD_STACK(48);
+    grCastle_UpdateSatellite(gp);
 }
 
 void fn_801CFAFC(Item_GObj* item, Ground* gp, Vec3* pos, HSD_GObj* gobj)
@@ -1985,10 +1996,10 @@ void grCastle_801D0D84(HSD_JObj* jobj)
         }
     }
 
-    if (rot.y > 3.1415926535897931) {
-        rot.y = (f32) ((f64) rot.y - 6.2831853071795862);
-    } else if (rot.y < -3.1415926535897931) {
-        rot.y += 6.2831853071795862;
+    if (rot.y > 3.1415926292538643) {
+        rot.y = (f32) ((f64) rot.y - 6.2831852585077286);
+    } else if (rot.y < -3.1415926292538643) {
+        rot.y += 6.2831852585077286;
     }
 
     HSD_JObjSetRotation(jobj, &rot);

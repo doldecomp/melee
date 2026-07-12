@@ -1811,11 +1811,7 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
 
         car++;
         car_idx += 1;
-        if (jobj == NULL) {
-            jobj = NULL;
-        } else {
-            jobj = jobj->next;
-        }
+        jobj = jobj == NULL ? NULL : jobj->next;
     } while (car_idx < 0x1E);
 }
 

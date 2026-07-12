@@ -1003,11 +1003,11 @@ void mnDiagram2_Create(int arg0)
     HSD_GObj* gobj;
     Diagram2* new_var;
     int j;
-    u32 is_name;
+    int threshold;
     u8 entity_idx;
     int scroll;
     int i;
-    int threshold;
+    u32 is_name;
     HSD_JObj* jobj;
     int offset;
     Diagram2* user_data2;

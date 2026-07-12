@@ -365,12 +365,12 @@ s32 lbRefract_8002219C(lbRefract_CallbackData* data, s32 buffer, s32 format,
 void lbRefract_800222A4(void)
 {
     lbRefract_CallbackData cb;
-    void* buf;
+    struct lbRefract_DataLayout* data = &lbl_803BB0B0;
     u32 i;
+    void* buf;
 
     lbl_804336D0.refractionUserCount = 0;
-    lbArchive_LoadSymbols(lbl_803BB0B0.filename, &skip8_804D63E8,
-                          lbl_803BB0B0.symbol, 0);
+    lbArchive_LoadSymbols(data->filename, &skip8_804D63E8, data->symbol, 0);
     {
         s32 buf_size = GXGetTexBufferSize(0x140, 0xF0, 4, 0, 0);
         lbl_804336D0.image_ptr = HSD_MemAlloc(buf_size);
@@ -386,22 +386,22 @@ void lbRefract_800222A4(void)
 
         {
             HSD_ImageDesc* dst = &lbl_804336D0.unk_8[i];
-            *dst = lbl_803BB0B0.imagedesc0;
+            *dst = data->imagedesc0;
         }
 
-        lbl_803BB0B0.tobj1.imagedesc = &lbl_804336D0.unk_8[i];
+        data->tobj1.imagedesc = &lbl_804336D0.unk_8[i];
 
-        lbl_804336D0.unk_C[i] = HSD_TObjLoadDesc(&lbl_803BB0B0.tobj1);
+        lbl_804336D0.unk_C[i] = HSD_TObjLoadDesc(&data->tobj1);
 
-        lbl_803BB0B0.imagedesc0.image_ptr = (void*) lbl_804336D0.image_ptr;
-        lbl_803BB0B0.imagedesc0.format = 4;
-        lbl_803BB0B0.imagedesc0.width = 0x140;
-        lbl_803BB0B0.imagedesc0.height = 0xF0;
+        data->imagedesc0.image_ptr = lbl_804336D0.image_ptr;
+        data->imagedesc0.format = 4;
+        data->imagedesc0.width = 0x140;
+        data->imagedesc0.height = 0xF0;
 
-        lbl_804336D0.unk_8[i].image_ptr = buf;
-        lbl_804336D0.unk_8[i].format = 3;
-        lbl_804336D0.unk_8[i].width = 0x20;
-        lbl_804336D0.unk_8[i].height = 0x20;
+        lbl_804336D0.unk_8[(s32) i].image_ptr = buf;
+        lbl_804336D0.unk_8[(s32) i].format = 3;
+        lbl_804336D0.unk_8[(s32) i].width = 0x20;
+        lbl_804336D0.unk_8[(s32) i].height = 0x20;
     }
 }
 
@@ -466,17 +466,57 @@ static void lbRefract_DObjDispReset(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx,
     HSD_StateInvalidate(-1);
 }
 
+/* Initializer values mirror the retail .data image of this block
+ * (803BB0B0..803BB2F8): texture/half matrices, the two image descriptors
+ * (RGB565 640x240 source, IA8 32x32 tiles), their shared LOD settings, and
+ * the TObj pair chained tobj1 -> tobj0, plus the LbRf.dat archive names. */
 struct lbRefract_DataLayout lbl_803BB0B0 = {
-    { { 0 } },
-    { 0 },
-    { 0 },
-    { 0 },
-    { 0 },
-    { 0 },
-    { 0 },
-    { 0 },
-    "",
-    "",
+    { { 0.5F, 0.0F, 0.0F, 0.5F },
+      { 0.0F, -0.5F, 0.0F, 0.5F },
+      { 0.0F, 0.0F, 0.0F, 1.0F } },
+    { -0.5F, 0.0F, 0.0F, 0.0F, -0.5F, 0.0F },
+    { NULL, 0, 0, 4, 0, 0.0F, 0.0F },
+    { 1, 0.0F, 1, 1, 0 },
+    { NULL,
+      NULL,
+      0,
+      0,
+      { 0.0F, 0.0F, 0.0F },
+      { 1.0F, 1.0F, 1.0F },
+      { 0.0F, 0.0F, 0.0F },
+      0,
+      0,
+      1,
+      1,
+      0x83,
+      1.0F,
+      1,
+      &lbl_803BB0B0.imagedesc0,
+      NULL,
+      &lbl_803BB0B0.lod0,
+      NULL },
+    { NULL, 0, 0, 3, 0, 0.0F, 0.0F },
+    { 1, 0.0F, 1, 1, 0 },
+    { NULL,
+      &lbl_803BB0B0.tobj0,
+      1,
+      1,
+      { 0.0F, 0.0F, 0.0F },
+      { 1.0F, 1.0F, 1.0F },
+      { 0.0F, 0.0F, 0.0F },
+      0,
+      0,
+      1,
+      1,
+      0x81,
+      1.0F,
+      1,
+      &lbl_803BB0B0.imagedesc1,
+      NULL,
+      &lbl_803BB0B0.lod1,
+      NULL },
+    "LbRf.dat",
+    "lbRefData",
     { fn_80022650 },
     { fn_80022940 },
     "refract_class_library",
@@ -512,9 +552,9 @@ s32 lbRefract_PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc)
     }
 
     verts = pobj->verts;
-    last_offset = -1;
-    pnmtx_offset = -1;
     stride = 0;
+    pnmtx_offset = -1;
+    last_offset = -1;
 
     while (verts != NULL && (attr = verts->attr) != GX_VA_NULL) {
         if (attr < GX_VA_CLR0) {

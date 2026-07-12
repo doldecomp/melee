@@ -2339,6 +2339,14 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
         /* 0x28 */ float damage;
     };
 
+    float dir;
+    float angle;
+    float best_kb;
+    int angle_int;
+    u32 element;
+    int sfx_severity;
+    int best_idx;
+    int i;
     Fighter* fp;
     ftCo_DatAttrs* co;
     DmgLogEntry* entries;
@@ -2347,16 +2355,8 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
     struct DmgResult* out;
     ftCommonData* ftd;
     HitCapsule stack_hit;
-    float best_kb;
-    float dir;
-    float angle;
-    int angle_int;
-    u32 element;
-    int sfx_severity;
-    int best_idx;
-    int i;
 
-    PAD_STACK(0xB0);
+    PAD_STACK(0x98);
 
     if (idx == 0) {
         return;
@@ -2654,9 +2654,6 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
         element = env->element;
         break;
     }
-
-    default:
-        goto end;
     }
 
     if ((u32) best_entry->hit0->kb_angle == 0x16A) {
@@ -2740,7 +2737,6 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
         break;
     }
 
-end:
     if (out->element == 2) {
         fp->x1960_vibrateMult = p_ftCommonData->x1A4;
     }

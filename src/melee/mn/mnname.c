@@ -273,11 +273,11 @@ void CreateNameAtIndex(s32 slot)
 s32 mnName_SortNames(HSD_GObj* arg0)
 {
     s32 result;
-    s32 i;
-    char* name2;
-    u8 idx2;
-    u8* pi;
     u8* pj;
+    u8 idx2;
+    char* name2;
+    u8* pi;
+    s32 i;
     u8 idx1;
 
     arg0 = arg0->user_data;

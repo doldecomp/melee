@@ -223,7 +223,7 @@ void grHomeRun_8021CB20(Ground_GObj* gobj)
     HSD_CObj* cobj;
     s32 i;
     f32 gobjs_num;
-    PAD_STACK(24);
+    PAD_STACK(16);
 
     Ground_801C2ED0(jobj2, gp->map_id);
 
@@ -418,14 +418,11 @@ void grHomeRun_8021D680(Ground_GObj* gobj)
 
         x1 = (s32) (1.0F + ((2400.0F + cam_interest.x) /
                             (160.0F * Ground_801C0498())));
-        gp2 = GET_GROUND(
-            ((grHomeRun_MainGroundVars*) &gp->gv.homerun)->gobjs[0]);
+        gobj2 =
+            ((grHomeRun_MainGroundVars*) &gp->gv.homerun)->gobjs[0];
+        gp2 = GET_GROUND(gobj2);
         if (gp2->gv.homerun.xC4 < x0) {
-            {
-                HSD_GObj* first_gobj =
-                    ((grHomeRun_MainGroundVars*) &gp->gv.homerun)->gobjs[0];
-                Ground_801C4A08(first_gobj);
-            }
+            Ground_801C4A08(gobj2);
             for (i = 0; i < 63; i++) {
                 ((grHomeRun_MainGroundVars*) &gp->gv.homerun)->gobjs[i] =
                     ((grHomeRun_MainGroundVars*) &gp->gv.homerun)

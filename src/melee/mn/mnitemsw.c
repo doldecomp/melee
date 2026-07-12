@@ -213,7 +213,7 @@ void fn_80233E10(HSD_GObj* gobj)
     PAD_STACK(0x20);
 
     data = (MnItemSwData*) mnItemSw_804D6BE8->user_data;
-    buttons = Menu_GetAllInputs();
+    buttons = mn_804A04F0.buttons = mn_80229624(4U);
     i = 0;
 
     if (buttons & MenuInput_Back) {
@@ -731,10 +731,10 @@ HSD_GObj* mnItemSw_802351A0(s32 arg0)
     struct StaticModelDesc* mdl = &MenMainConIs_Top;
     struct MnItemSwTable* tbl = &mnItemSw_803ED340;
     f32 y_spacing;
-    u8 cursor;
+    u8* order;
     HSD_JObj* cjobj;
     s32 i;
-    u8* order;
+    u8 cursor;
 
     gobj = GObj_Create(6, 7, 0x80);
     mnItemSw_804D6BE8 = gobj;

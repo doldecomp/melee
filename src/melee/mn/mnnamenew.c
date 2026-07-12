@@ -1022,7 +1022,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
     s32 key_off;
     u8* key_char;
     s8 null_char;
-    u8* src;
+    char* src;
     u8* dest;
     s32 len;
     u8 cursor;
@@ -1207,40 +1207,41 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 len = 0;
 
                 {
-                    char* src_base = name_text;
-                    u8* dest_base = dest;
-                    char* src_iter = src_base;
-                    u8* dest_iter = dest_base;
+                    char* src_iter;
+                    u8* dest_iter;
 
+                    src = name_text;
+                    src_iter = src;
+                    dest_iter = dest;
                     for (; (s8) mnNameNew_NullCharacter != (s8) *src_iter;
-                         src_iter++, dest_iter++, dest_base++, len++)
+                         dest_iter++, dest++, len++, src_iter++)
                     {
                         *dest_iter = *src_iter;
                     }
 
-                    src_base += 3;
-                    src_iter = src_base;
-                    dest_iter = dest_base;
+                    src += 3;
+                    src_iter = src;
+                    dest_iter = dest;
                     for (; (s8) mnNameNew_NullCharacter != (s8) *src_iter;
-                         src_iter++, dest_iter++, dest_base++, len++)
+                         dest_iter++, dest++, len++, src_iter++)
                     {
                         *dest_iter = *src_iter;
                     }
 
-                    src_base += 3;
-                    src_iter = src_base;
-                    dest_iter = dest_base;
+                    src += 3;
+                    src_iter = src;
+                    dest_iter = dest;
                     for (; (s8) mnNameNew_NullCharacter != (s8) *src_iter;
-                         src_iter++, dest_iter++, dest_base++, len++)
+                         dest_iter++, dest++, len++, src_iter++)
                     {
                         *dest_iter = *src_iter;
                     }
 
-                    src_base += 3;
-                    src_iter = src_base;
-                    dest_iter = dest_base;
+                    src += 3;
+                    src_iter = src;
+                    dest_iter = dest;
                     for (; (s8) mnNameNew_NullCharacter != (s8) *src_iter;
-                         src_iter++, dest_iter++, dest_base++, len++)
+                         dest_iter++, dest++, len++, src_iter++)
                     {
                         *dest_iter = *src_iter;
                     }
@@ -1285,40 +1286,41 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 len = 0;
 
                 {
-                    char* src_base = name_text;
-                    u8* dest_base = dest;
-                    char* src_iter = src_base;
-                    u8* dest_iter = dest_base;
+                    char* src_iter;
+                    u8* dest_iter;
 
+                    src = name_text;
+                    src_iter = src;
+                    dest_iter = dest;
                     for (; (s8) mnNameNew_NullCharacter != (s8) *src_iter;
-                         src_iter++, dest_iter++, dest_base++, len++)
+                         dest_iter++, dest++, len++, src_iter++)
                     {
                         *dest_iter = *src_iter;
                     }
 
-                    src_base += 3;
-                    src_iter = src_base;
-                    dest_iter = dest_base;
+                    src += 3;
+                    src_iter = src;
+                    dest_iter = dest;
                     for (; (s8) mnNameNew_NullCharacter != (s8) *src_iter;
-                         src_iter++, dest_iter++, dest_base++, len++)
+                         dest_iter++, dest++, len++, src_iter++)
                     {
                         *dest_iter = *src_iter;
                     }
 
-                    src_base += 3;
-                    src_iter = src_base;
-                    dest_iter = dest_base;
+                    src += 3;
+                    src_iter = src;
+                    dest_iter = dest;
                     for (; (s8) mnNameNew_NullCharacter != (s8) *src_iter;
-                         src_iter++, dest_iter++, dest_base++, len++)
+                         dest_iter++, dest++, len++, src_iter++)
                     {
                         *dest_iter = *src_iter;
                     }
 
-                    src_base += 3;
-                    src_iter = src_base;
-                    dest_iter = dest_base;
+                    src += 3;
+                    src_iter = src;
+                    dest_iter = dest;
                     for (; (s8) mnNameNew_NullCharacter != (s8) *src_iter;
-                         src_iter++, dest_iter++, dest_base++, len++)
+                         dest_iter++, dest++, len++, src_iter++)
                     {
                         *dest_iter = *src_iter;
                     }

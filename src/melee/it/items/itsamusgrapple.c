@@ -78,6 +78,11 @@ static inline f32 samus_grapple_calc_grav(f32 vel_y)
     }
 }
 
+static inline Vec3* samus_grapple_vec2_as_vec3(void* pos)
+{
+    return pos;
+}
+
 static inline void samus_grapple_setup_pos(ItemLink* link, Vec3* pos, Mtx m)
 {
     PSMTXIdentity(m);
@@ -302,13 +307,13 @@ HSD_JObj* it_802B75FC(Item* ip, HSD_JObj* jobj_arg, s32 arg2, f32 scale)
     f32 coeff;
     f32 temp;
     HSD_JObj* result;
-    ItemLink* prev_link;
+    itSamusGrappleAttributes* attrs2;
     ItemLink* head_link;
     ItemLink* tail_link;
     ItemLink* link;
     HSD_GObj* link_gobj;
     itSamusGrappleAttributes* attrs;
-    itSamusGrappleAttributes* attrs2;
+    ItemLink* prev_link;
     HSD_JObj* tail_jobj;
     s32 i;
     Vec3 zero_vel;
@@ -581,12 +586,13 @@ void fn_802B805C(Item_GObj* gobj)
     itSamusGrappleAttributes* attrs;
     ItemLink* link;
     Fighter* fp;
-    Vec3 pos;
+    Vec2 pos;
     Vec3 normal;
     Vec3 pos2;
     u8 _padA[4];
     Mtx m;
-    PAD_STACK(28);
+    u8 _padB[4];
+    PAD_STACK(24);
 
     owner = ip->owner;
     attrs = ip->xC4_article_data->x4_specialAttributes;
@@ -600,9 +606,10 @@ void fn_802B805C(Item_GObj* gobj)
         return;
     }
 
-    samus_grapple_setup_pos(link, &pos, m);
+    samus_grapple_setup_pos(link, samus_grapple_vec2_as_vec3(&pos), m);
 
-    switch (it_802B9328(link, &pos, attrs, ip->owner->user_data)) {
+    switch (it_802B9328(link, samus_grapple_vec2_as_vec3(&pos), attrs,
+                        ip->owner->user_data)) {
     case 1:
         if (fp->motion_id == 0x165) {
             ftCo_800C3CC0(ip->owner);
@@ -637,7 +644,7 @@ void fn_802B805C(Item_GObj* gobj)
         ftCommon_8007E2F4(fp, 0);
         break;
     }
-    it_802A7168(ip, &pos, fp->x34_scale.y);
+    it_802A7168(ip, samus_grapple_vec2_as_vec3(&pos), fp->x34_scale.y);
     samus_grapple_anim(gobj);
 }
 

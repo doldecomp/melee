@@ -213,6 +213,11 @@ static void order_data(void)
     (void) "!(jobj->flags & JOBJ_USE_QUATERNION)";
 }
 
+static inline HSD_Fog* un_8031FD18_LoadFog(void)
+{
+    return HSD_FogLoadDesc(un_804D6FE0->fogs->desc);
+}
+
 void un_8031FD18_OnEnter(void* arg)
 {
     u8* input = arg;
@@ -297,7 +302,7 @@ void un_8031FD18_OnEnter(void* arg)
     lb_8000C290(jobj, un_804D6FF0);
 
     gobj = GObj_Create(0xB, 3, 0);
-    fog = HSD_FogLoadDesc(un_804D6FE0->fogs->desc);
+    fog = un_8031FD18_LoadFog();
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848, fog);
     GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
     HSD_GObj_SetupProc(gobj, fn_8031FCBC, 0);

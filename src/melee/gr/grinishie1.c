@@ -771,33 +771,34 @@ void grInishie1_801FBAA0(HSD_GObj* gobj, s32 index)
 {
     HSD_JObj* hatena_jobj;
     Vec3 position;
-    Ground* hatena_gp;
     Ground* gp = gobj->user_data;
-    struct grInishie1_GroundVars* vars = &gp->gv.inishie1;
-    struct grInishie1_Block* slot = &vars->blocks[index];
-
+    Ground* hatena_gp;
     HSD_GObj* hatena = grInishie1_801FA9B4(2);
-    if (hatena == NULL) {
-        return;
+    PAD_STACK(8);
+
+    if (hatena != NULL) {
+        hatena_gp = hatena->user_data;
+        HSD_ASSERTMSG(
+            0x39E, !gp->gv.inishie1.blocks[index].hatena_gobj,
+            "!mapgp->u.map.block[ix].hatena_gobj");
+
+        gp->gv.inishie1.blocks[index].hatena_gobj = hatena;
+
+        hatena_jobj = hatena->hsd_obj;
+        lb_8000B1CC(gp->gv.inishie1.blocks[index].jobj2, NULL, &position);
+        HSD_JObjSetTranslate(hatena_jobj, &position);
+
+        hatena_gp->gv.inishie13.xC4 =
+            gp->gv.inishie1.blocks[index].jobj2;
+
+        if (gp->gv.inishie1.blocks[index].x2 == 0 ||
+            gp->gv.inishie1.blocks[index].x2 == 1)
+        {
+            hatena_gp->gv.inishie13.xCC = 1;
+        }
+
+        DOBJ_LOOP(gp->gv.inishie1.blocks[index].jobj2);
     }
-
-    HSD_ASSERTMSG(0x39E, !slot->hatena_gobj,
-                  "!mapgp->u.map.block[ix].hatena_gobj");
-
-    slot->hatena_gobj = hatena;
-
-    hatena_jobj = hatena->hsd_obj;
-    lb_8000B1CC(slot->jobj, NULL, &position);
-    HSD_JObjSetTranslate(hatena_jobj, &position);
-
-    hatena_gp = hatena->user_data;
-    hatena_gp->gv.inishie13.xC4 = slot->jobj;
-
-    if (slot->status == 0 || slot->status == 1) {
-        hatena_gp->gv.inishie13.xCC = 1;
-    }
-
-    DOBJ_LOOP(slot->jobj);
 }
 
 void grInishie1_801FBC4C(HSD_GObj* gobj, u32 index)

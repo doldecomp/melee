@@ -113,83 +113,80 @@ u8* gmCamera_801A2224(u8* arg0, u32 arg1)
 HSD_Text* gmCamera_801A2334(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4)
 {
     HSD_Text* text;
-    gmCameraUnkStruct* gcus = &gmCamera_80479BC8.gcus;
-    s32 temp_r4;
-    s32 temp_r6;
-    s32 var_r0;
-    s32 var_r30;
-    s32 var_r5;
-    u32 temp_r0;
-    u32* temp_r27;
-    u8* temp_r3;
-    gmCameraUnkStruct2* temp_r5;
+    union _gmCameraUnkUnion* gcu = &gmCamera_80479BC8;
+    s32 blocks;
+    s32 result;
+    s32 group;
+    s32 label;
+    u32 status;
+    u32* blocks_ptr;
+    u8* digits;
 
-    text = HSD_SisLib_803A5ACC(3, (s32) gcus->x54, arg1, arg2, 0.0f, 640.0f,
-                               32.0f);
+    text = HSD_SisLib_803A5ACC(3, (s32) gcu->gcus.x54, arg1, arg2, 0.0f,
+                               640.0f, 32.0f);
     text->font_size.x = arg3;
     text->font_size.y = arg4;
     text->default_kerning = 1;
     if (arg0 == 0) {
-        var_r30 = 6;
-        temp_r3 = HSD_SisLib_803A6530(3, 6, 8);
+        group = 6;
+        digits = HSD_SisLib_803A6530(3, 6, 8);
     } else {
-        var_r30 = 7;
-        temp_r3 = HSD_SisLib_803A6530(3, 7, 9);
+        group = 7;
+        digits = HSD_SisLib_803A6530(3, 7, 9);
     }
-    temp_r6 = arg0 * 0x10;
-    temp_r5 = (gmCameraUnkStruct2*) ((int) gcus + temp_r6);
-    temp_r0 = temp_r5->x24;
-    (void) temp_r0;
-    switch (temp_r0) {
+    status = gcu->gcus4.x24[arg0].x0;
+    (void) status;
+    switch (status) {
     case 0:
-        if ((s32) temp_r5->x2C == 0) {
-            temp_r5->x30 = 3;
-            HSD_SisLib_803A660C(3, var_r30, 0xC);
+        if ((s32) gcu->gcus4.x24[arg0].x8 == 0) {
+            gcu->gcus4.x24[arg0].xC = 3;
+            HSD_SisLib_803A660C(3, group, 0xC);
         } else {
-            temp_r27 = &(temp_r5->x28);
-            temp_r4 = temp_r5->x28;
-            if (temp_r4 == 0) {
-                temp_r5->x30 = 2;
-                HSD_SisLib_803A660C(3, var_r30, 0xC);
+            gmCameraUnkStruct4* entries = gcu->gcus4.x24;
+            blocks_ptr = &entries[arg0].x4;
+            blocks = *blocks_ptr;
+            if (blocks == 0) {
+                gcu->gcus4.x24[arg0].xC = 2;
+                HSD_SisLib_803A660C(3, group, 0xC);
             } else {
-                if (temp_r4 >= (s32) gcus->x20) {
+                if (blocks >= (s32) gcu->gcus.x20) {
                     if (arg0 != 0) {
-                        var_r0 = 0;
+                        result = 0;
                     } else {
-                        var_r0 = 1;
+                        result = 1;
                     }
                 } else {
-                    var_r0 = 2;
+                    result = 2;
                 }
-                temp_r5->x30 = var_r0;
-                gmCamera_801A2224(temp_r3, *temp_r27);
-                if ((s32) *temp_r27 != 1) {
-                    var_r5 = 0xB;
+                gcu->gcus4.x24[arg0].xC = result;
+                gmCamera_801A2224(digits, *blocks_ptr);
+                if ((s32) *blocks_ptr != 1) {
+                    label = 0xB;
                 } else {
-                    var_r5 = 0xA;
+                    label = 0xA;
                 }
-                HSD_SisLib_803A660C(3, var_r30, var_r5);
+                HSD_SisLib_803A660C(3, group, label);
             }
         }
         break;
     case 15:
-        temp_r5->x30 = 5;
-        HSD_SisLib_803A660C(3, var_r30, 0x10);
+        gcu->gcus4.x24[arg0].xC = 5;
+        HSD_SisLib_803A660C(3, group, 0x10);
         break;
     case 9:
-        temp_r5->x30 = 4;
-        HSD_SisLib_803A660C(3, var_r30, 0xD);
+        gcu->gcus4.x24[arg0].xC = 4;
+        HSD_SisLib_803A660C(3, group, 0xD);
         break;
     case 12:
-        temp_r5->x30 = 4;
-        HSD_SisLib_803A660C(3, var_r30, 0xE);
+        gcu->gcus4.x24[arg0].xC = 4;
+        HSD_SisLib_803A660C(3, group, 0xE);
         break;
     default:
-        temp_r5->x30 = 4;
-        HSD_SisLib_803A660C(3, var_r30, 0xF);
+        gcu->gcus4.x24[arg0].xC = 4;
+        HSD_SisLib_803A660C(3, group, 0xF);
         break;
     }
-    HSD_SisLib_803A6368(text, var_r30);
+    HSD_SisLib_803A6368(text, group);
     return text;
 }
 
@@ -279,6 +276,7 @@ void gmCamera_801A26C0(void)
     lbl_8046B6A0_t* temp_r31;
     gmCameraUnkStruct* unk;
     s32 i;
+    s32 zero;
     PAD_STACK(4);
 
     temp_r31 = gm_8016AE38();
@@ -296,9 +294,11 @@ void gmCamera_801A26C0(void)
     }
     unk = &gmCamera_80479BC8.gcus;
     if (unk->x48[0] != NULL) {
-        for (i = 0; i < 3; i++) {
+        i = 0;
+        zero = i;
+        for (; i < 3; i++) {
             HSD_SisLib_803A5CC4(unk->x48[i]);
-            unk->x48[i] = NULL;
+            unk->x48[i] = (HSD_Text*) zero;
         }
     }
 }
@@ -491,29 +491,32 @@ static inline void gmCamera_801A2D44_update_selection(HSD_JObj** jobj_b,
     u32* px18;
     f32 translate_x;
 
-    px18 = &gcus->x18;
-    if ((HSD_PadCopyStatus[3].trigger & 0x40001) && (s32) gcus->x18 != 0) {
-        lbAudioAx_80024030(2);
-        *px18 = 0;
-        lb_80011E24(gcus->x8, &(*jobj), 0xC, -1);
-        if ((s32) *px18 != 0) {
-            translate_x = 5.0f;
-        } else {
-            translate_x = -5.0f;
+    if (HSD_PadCopyStatus[3].trigger & 0x40001) {
+        if ((s32) *(px18 = &gcus->x18) != 0) {
+            lbAudioAx_80024030(2);
+            *px18 = 0;
+            lb_80011E24(gcus->x8, &(*jobj), 0xC, -1);
+            if ((s32) *px18 != 0) {
+                translate_x = 5.0f;
+            } else {
+                translate_x = -5.0f;
+            }
+            HSD_JObjSetTranslateX(*jobj, translate_x);
+            return;
         }
-        HSD_JObjSetTranslateX(*jobj, translate_x);
-    } else if ((HSD_PadCopyStatus[3].trigger & 0x80002) &&
-               (s32) gcus->x18 != 1)
-    {
-        lbAudioAx_80024030(2);
-        *px18 = 1;
-        lb_80011E24(gcus->x8, &(*jobj_b), 0xC, -1);
-        if ((s32) *px18 != 0) {
-            translate_x = 5.0f;
-        } else {
-            translate_x = -5.0f;
+    }
+    if (HSD_PadCopyStatus[3].trigger & 0x80002) {
+        if ((s32) *(px18 = &gcus->x18) != 1) {
+            lbAudioAx_80024030(2);
+            *px18 = 1;
+            lb_80011E24(gcus->x8, &(*jobj_b), 0xC, -1);
+            if ((s32) *px18 != 0) {
+                translate_x = 5.0f;
+            } else {
+                translate_x = -5.0f;
+            }
+            HSD_JObjSetTranslateX(*jobj_b, translate_x);
         }
-        HSD_JObjSetTranslateX(*jobj_b, translate_x);
     }
 }
 
@@ -623,7 +626,6 @@ static inline HSD_JObj* gmCamera_SetJObj(HSD_JObj** dst, HSD_JObj* jobj)
 void gmCamera_801A31FC(void)
 {
     gmCameraUnkFuncTable* entry;
-    HSD_GObj* gobj_b;
     HSD_JObj* jobj_b;
     HSD_Joint** joint_a;
     DynamicModelDesc* mdl_b;
@@ -648,15 +650,15 @@ void gmCamera_801A31FC(void)
     GObj_SetupGXLink(gobj_a, HSD_GObj_JObjCallback, 0xB, 0);
     mdl_b =
         HSD_ArchiveGetPublicAddress(gcus->ifvscam, "IfCamera_Top_model_set");
-    gobj_b = GObj_Create(0xE, 0x10, 0);
+    gobj_a = GObj_Create(0xE, 0x10, 0);
     jobj_b = gmCamera_SetJObj(&gcus->x8, HSD_JObjLoadJoint(mdl_b->joint));
-    HSD_GObjObject_80390A70(gobj_b, HSD_GObj_804D7849, jobj_b);
-    GObj_SetupGXLink(gobj_b, HSD_GObj_JObjCallback, 0xB, 0);
+    HSD_GObjObject_80390A70(gobj_a, HSD_GObj_804D7849, jobj_b);
+    GObj_SetupGXLink(gobj_a, HSD_GObj_JObjCallback, 0xB, 0);
     gm_8016895C(jobj_b, mdl_b, 0);
     HSD_JObjReqAnimAll(jobj_b, 0.0f);
     HSD_JObjAnimAll(jobj_b);
     HSD_JObjSetFlagsAll(jobj_b, JOBJ_HIDDEN);
-    HSD_GObj_SetupProc(gobj_b, fn_801A31D8, 0);
+    HSD_GObj_SetupProc(gobj_a, fn_801A31D8, 0);
     gcus->x20 = 2;
     HSD_SisLib_803A62A0(3, "SdVsCam", "SIS_VsCameraData");
     gcus->x54 = HSD_SisLib_803A611C(3, NULL, 9, 0xD, 0, 0xE, 0, 0xB);

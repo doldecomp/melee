@@ -3532,6 +3532,7 @@ bool ftCo_800A6FC4(Fighter* fp, Vec3* arg1, Vec3* arg2)
 void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
 {
     struct Fighter_x1A88_t* data = &fp0->x1A88;
+    int* x60 = &fp0->x1A88.x60;
     Vec3 floor_pos;
     Vec3 floor_normal;
     int line_id;
@@ -3540,7 +3541,6 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
     Vec3 sp18;
     mp_UnkStruct0* island;
     mp_UnkStruct0* fp0_island;
-    s32 result;
     s32 blocked;
     s32 same_island;
     f32 fx;
@@ -3552,6 +3552,7 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
         return;
     }
     if (fp1->ground_or_air == GA_Air) {
+        s32 result;
         fx = fp1->cur_pos.x;
         fy = fp1->cur_pos.y;
         blocked = 0;
@@ -3576,7 +3577,6 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
         if (result != 0) {
             island = mpIsland_8005AB54(line_id);
             if (ftCo_800A2718(island) == 0) {
-                int* x60 = &fp0->x1A88.x60;
                 struct Fighter_x1A88_t* data2 = &fp0->x1A88;
                 f32 x38 = data->x56C + fp1->x1A88.x564;
                 f32 x = floor_pos.x;
@@ -3594,13 +3594,14 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
                         d = -d;
                     }
                     if (d < 5.0) {
+                        struct Fighter_x1A88_t* data2 = &fp0->x1A88;
                         f32 x38_edge = data->x56C + fp1->x1A88.x564;
                         f32 x = island->x14.x - 5.0;
                         f32 y = island->x14.y;
                         if (*x60 == 0) {
-                            data->x54.x = x;
-                            data->x54.y = y;
-                            data->x38 = x38_edge;
+                            data2->x54.x = x;
+                            data2->x54.y = y;
+                            data2->x38 = x38_edge;
                             ftCo_800A1CC4(
                                 fp0,
                                 ftCo_803C6594[stage_info.internal_stage_id]);
@@ -3611,13 +3612,14 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
                             d = -d;
                         }
                         if (d < 5.0) {
+                            struct Fighter_x1A88_t* data2 = &fp0->x1A88;
                             f32 x38_edge = data->x56C + fp1->x1A88.x564;
                             f32 x = 5.0 + island->x8.x;
                             f32 y = island->x8.y;
                             if (*x60 == 0) {
-                                data->x54.x = x;
-                                data->x54.y = y;
-                                data->x38 = x38_edge;
+                                data2->x54.x = x;
+                                data2->x54.y = y;
+                                data2->x38 = x38_edge;
                                 ftCo_800A1CC4(
                                     fp0,
                                     ftCo_803C6594[stage_info
@@ -3634,7 +3636,7 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
                 f32 x38 = data->x56C + fp1->x1A88.x564;
                 f32 x = sp18.x;
                 f32 y = sp18.y;
-                if (fp0->x1A88.x60 == 0) {
+                if (*x60 == 0) {
                     data2->x54.x = x;
                     data2->x54.y = y;
                     data2->x38 = x38;
@@ -3649,7 +3651,7 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
         f32 x38 = data->x56C + fp1->x1A88.x564;
         f32 x = fp1->cur_pos.x;
         f32 y = fp1->cur_pos.y;
-        if (fp0->x1A88.x60 == 0) {
+        if (*x60 == 0) {
             data->x54.x = x;
             data->x54.y = y;
             data->x38 = x38;
@@ -3677,26 +3679,34 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
         {
             cx = fp0->cur_pos.x;
             if (data->x54.x - cx > 0.0f) {
-                if (cx < island->x8.x && data->x60 == 0) {
+                if (cx < island->x8.x) {
+                    struct Fighter_x1A88_t* data2 = &fp0->x1A88;
                     f32 x = 5.0 + island->x8.x;
                     f32 y = island->x8.y;
                     f32 x38 = data->x56C + fp1->x1A88.x564;
-                    data->x54.x = x;
-                    data->x54.y = y;
-                    data->x38 = x38;
-                    ftCo_800A1CC4(fp0,
-                                  ftCo_803C6594[stage_info.internal_stage_id]);
+                    if (*x60 == 0) {
+                        data2->x54.x = x;
+                        data2->x54.y = y;
+                        data2->x38 = x38;
+                        ftCo_800A1CC4(
+                            fp0,
+                            ftCo_803C6594[stage_info.internal_stage_id]);
+                    }
                 }
             } else {
-                if (cx > island->x14.x && data->x60 == 0) {
+                if (cx > island->x14.x) {
+                    struct Fighter_x1A88_t* data2 = &fp0->x1A88;
                     f32 x = island->x14.x - 5.0;
                     f32 y = island->x14.y;
                     f32 x38 = data->x56C + fp1->x1A88.x564;
-                    data->x54.x = x;
-                    data->x54.y = y;
-                    data->x38 = x38;
-                    ftCo_800A1CC4(fp0,
-                                  ftCo_803C6594[stage_info.internal_stage_id]);
+                    if (*x60 == 0) {
+                        data2->x54.x = x;
+                        data2->x54.y = y;
+                        data2->x38 = x38;
+                        ftCo_800A1CC4(
+                            fp0,
+                            ftCo_803C6594[stage_info.internal_stage_id]);
+                    }
                 }
             }
         }
@@ -3735,10 +3745,10 @@ void ftCo_800A7AAC(Fighter* fp)
     u32 flags;
     u8 _[0x18];
     Vec3 partner_pos;
-    mp_UnkStruct0* island;
+    s32 blocked;
     mp_UnkStruct0* fp_island;
     s32 result;
-    s32 blocked;
+    mp_UnkStruct0* island;
     s32 same_island;
     s32 sub;
     f32 d;
@@ -6276,6 +6286,11 @@ void ftCo_800ADC28(Fighter* fp)
     }
 }
 
+static inline bool ftCo_ItemCheck(Item* ip)
+{
+    return ftCo_800A5980((Fighter*) ip);
+}
+
 void ftCo_800ADE48(Fighter* fp)
 {
     s32 switch_cmd;
@@ -6570,20 +6585,7 @@ void ftCo_800ADE48(Fighter* fp)
                                                                     if (kind <
                                                                         7)
                                                                     {
-                                                                        if (kind <
-                                                                            0)
-                                                                        {
-                                                                            found =
-                                                                                ftCo_800A5980_dontinline(
-                                                                                    (Fighter*)
-                                                                                        ip) !=
-                                                                                        0
-                                                                                    ? 1
-                                                                                    : 0;
-                                                                        } else {
-                                                                            found =
-                                                                                1;
-                                                                        }
+                                                                        found = 1;
                                                                     } else {
                                                                         found =
                                                                             ftCo_800A5980_dontinline(
@@ -6597,13 +6599,7 @@ void ftCo_800ADE48(Fighter* fp)
                                                                     kind !=
                                                                     It_Kind_EvYoshiEgg)
                                                                 {
-                                                                    found =
-                                                                        ftCo_800A5980(
-                                                                            (Fighter*)
-                                                                                ip) !=
-                                                                                0
-                                                                            ? 1
-                                                                            : 0;
+                                                                    found = ftCo_ItemCheck(ip);
                                                                 } else {
                                                                     found = 1;
                                                                 }

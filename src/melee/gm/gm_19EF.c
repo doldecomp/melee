@@ -185,6 +185,12 @@ static inline void AnimMObj(HSD_MObj* mobj, f32 frame)
     HSD_MObjAnim(mobj);
 }
 
+static inline void AnimJObj(HSD_JObj* jobj, f32 frame)
+{
+    HSD_JObjReqAnimAll(jobj, frame);
+    HSD_JObjAnimAll(jobj);
+}
+
 static void fn_8019F2D4(u32 arg0)
 {
     if (lbl_804D66C8.x4 == 0xA) {
@@ -194,20 +200,14 @@ static void fn_8019F2D4(u32 arg0)
         gm_80167858((s8) lbl_80479A98.x15, lbl_80479A98.x16, 0xD, 0x14);
     }
     if ((u8) lbl_80479A98.x0 == 0) {
-        HSD_JObj* jobj;
-
         if (lbl_804D66C8.x4 < 0x50) {
             lbl_804D66C8.x4++;
         } else {
             lbl_80479A98.x0 = 1;
         }
         lbl_804D66C0.x4 = lbl_804D66C8.x4;
-        jobj = lbl_804D66C8.x0;
-        HSD_JObjReqAnimAll(jobj, (f32) lbl_804D66C8.x4);
-        HSD_JObjAnimAll(jobj);
-        jobj = lbl_804D66C0.x0;
-        HSD_JObjReqAnimAll(jobj, (f32) lbl_804D66C0.x4);
-        HSD_JObjAnimAll(jobj);
+        AnimJObj(lbl_804D66C8.x0, (f32) lbl_804D66C8.x4);
+        AnimJObj(lbl_804D66C0.x0, (f32) lbl_804D66C0.x4);
         AnimMObj(lbl_804D66C8.x0->u.dobj->mobj, 0.0f);
         AnimMObj(lbl_804D66C0.x0->u.dobj->mobj, 1.0f);
         return;
@@ -255,14 +255,8 @@ static void fn_8019F2D4(u32 arg0)
             return;
         }
     } else if ((u8) lbl_80479A98.x0 == 8) {
-        HSD_JObj* jobj;
-
-        jobj = lbl_804D66C0.x0;
-        HSD_JObjReqAnimAll(jobj, (f32) lbl_804D66C8.x4);
-        HSD_JObjAnimAll(jobj);
-        jobj = lbl_804D66C8.x0;
-        HSD_JObjReqAnimAll(jobj, (f32) lbl_804D66C8.x4);
-        HSD_JObjAnimAll(jobj);
+        AnimJObj(lbl_804D66C0.x0, (f32) lbl_804D66C8.x4);
+        AnimJObj(lbl_804D66C8.x0, (f32) lbl_804D66C8.x4);
         if (lbl_804D66C8.x4 < lbl_804D66C0.x4) {
             lbl_804D66C8.x4++;
         } else if ((u8) lbl_80479A98.x14 != 0) {
@@ -366,6 +360,25 @@ static inline s32 fn_8019F9C4_GetCharIdx(CharacterKind arg0)
     }
 }
 
+static inline void fn_8019F9C4_LoadArchives(CharacterKind arg0)
+{
+    lbl_804D6698 = lbArchive_80016DBC("GmGover.dat", &lbl_804D669C,
+                                      "ScGamRegGover_scene_data", 0);
+    lbArchive_80016DBC("GmGoCoin.dat", &lbl_804D66A0,
+                       "ScGamRegGover_scene_data", 0);
+    Toy_803124BC();
+    Toy_803102D0();
+    {
+        u8 game_mode = gm_801A4310();
+        char* model_name = gm_80160564(arg0, game_mode);
+        char* scene_name = gm_801604DC(arg0, game_mode);
+        lbArchive_LoadSymbols(scene_name, &lbl_804D66AC, model_name, 0);
+        lbArchive_LoadSymbols("GmGoAnim.dat", &lbl_804D66A4,
+                              "ScGamRegGover_scene_data", 0);
+        lbArchive_LoadSymbols("GmRgStnd.dat", &lbl_804D66A8, "standScene", 0);
+    }
+}
+
 void fn_8019F9C4(u32 arg0)
 {
     HSD_CObj* cobj;
@@ -385,21 +398,7 @@ void fn_8019F9C4(u32 arg0)
     char_idx = fn_8019F9C4_GetCharIdx(arg0);
     arg0 = (char_idx == -1) ? 8 : arg0;
     fn_80168F7C();
-    lbl_804D6698 = lbArchive_80016DBC("GmGover.dat", &lbl_804D669C,
-                                      "ScGamRegGover_scene_data", 0);
-    lbArchive_80016DBC("GmGoCoin.dat", &lbl_804D66A0,
-                       "ScGamRegGover_scene_data", 0);
-    Toy_803124BC();
-    Toy_803102D0();
-    {
-        u8 game_mode = gm_801A4310();
-        char* model_name = gm_80160564(arg0, game_mode);
-        char* scene_name = gm_801604DC(arg0, game_mode);
-        lbArchive_LoadSymbols(scene_name, &lbl_804D66AC, model_name, 0);
-        lbArchive_LoadSymbols("GmGoAnim.dat", &lbl_804D66A4,
-                              "ScGamRegGover_scene_data", 0);
-        lbArchive_LoadSymbols("GmRgStnd.dat", &lbl_804D66A8, "standScene", 0);
-    }
+    fn_8019F9C4_LoadArchives(arg0);
     cobj = HSD_CObjLoadDesc(lbl_804D669C->cameras->desc);
     cam_gobj = GObj_Create(0x13, 0x14, 0);
     HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_804D784B, cobj);

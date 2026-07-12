@@ -24,6 +24,13 @@
 #include <melee/mn/mnmain.h>
 #include <melee/mn/mnname.h>
 
+typedef struct mnDiagram3_SortEntry {
+    u8 name;
+    char pad[7];
+    s32 x8;
+    s32 xC;
+} mnDiagram3_SortEntry;
+
 void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
 {
     Vec3 sp6C;
@@ -60,7 +67,8 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
         limit = (data->is_name_mode != 0) ? 0x18 : 0x15;
 
         {
-            int val = scroll + offset;
+            int idx = scroll + offset;
+            int val = idx;
             if (val >= limit) {
                 val = val - limit;
             } else {
@@ -165,7 +173,7 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
                                                             ii);
                     }
                     {
-                        int val = M2C_FIELD(sp28, int*, 0xC);
+                        int val = ((mnDiagram3_SortEntry*) sp28)->xC;
                         mnDiagram_FormatDecimalNumber((char*) sp58, val, 0);
                     }
                     {

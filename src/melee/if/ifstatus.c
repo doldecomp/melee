@@ -698,7 +698,29 @@ void ifStatus_802F5E50(HSD_GObj* gobj, s32 arg1)
     }
 }
 
-void ifStatus_802F5EC0(IfDamageState* state, s32 player_idx)
+/// Loads the HUD parent joint through @p hud rather than a call-site member
+/// load. Evidence: with the member load at the call site the compiler
+/// assigns jobj to r27 and state to r29; retail keeps state in r28 and the
+/// loaded joint in r31 (objdiff rows 0x0..0x84 of ifStatus_802F5EC0). The
+/// inline argument copy reproduces retail's register assignment; codegen is
+/// otherwise identical (same lwz/bl sequence).
+static inline HSD_JObj* ifStatus_LoadHUDJoint(HudIndex* hud)
+{
+    return HSD_JObjLoadJoint(hud->unk258);
+}
+
+/// Converts the HUD joint for the ifStatus_802F6194 walk. Evidence: retail
+/// copies jobj through a scratch register before the call inside the loop
+/// (addi r27, r30, 0x0 / addi r3, r27, 0x0 at 0x190..0x1A0) where a direct
+/// cast argument compiles to a single addi r3, r30, 0x0; the inline return
+/// temp reproduces the extra register copy. No code is generated beyond the
+/// register moves retail shows.
+static inline HSD_GObj* ifStatus_JObjAsGObj(HSD_JObj* jobj)
+{
+    return (HSD_GObj*) jobj;
+}
+
+HSD_GObj* ifStatus_802F5EC0(IfDamageState* state, s32 player_idx)
 {
     HSD_GObj* gobj;
     HSD_MatAnimJoint** anim_base;
@@ -710,7 +732,7 @@ void ifStatus_802F5EC0(IfDamageState* state, s32 player_idx)
 
     if (state->HUD_parent_entity == NULL) {
         gobj = GObj_Create(0xE, 0xF, 0);
-        jobj = HSD_JObjLoadJoint(hud->unk258);
+        jobj = ifStatus_LoadHUDJoint(hud);
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
         GObj_SetupGXLink(gobj, (void (*)(HSD_GObj*, int)) ifStatus_802F5DE0,
                          0xB, 0);
@@ -731,7 +753,8 @@ void ifStatus_802F5EC0(IfDamageState* state, s32 player_idx)
     vec = ifAll_802F3424((u8) player_idx);
     HSD_JObjSetTranslate(jobj, vec);
     for (i = 0; i < 4; i++) {
-        state->jobjs[i] = (HSD_JObj*) ifStatus_802F6194((HSD_GObj*) jobj, i);
+        state->jobjs[i] =
+            (HSD_JObj*) ifStatus_802F6194(ifStatus_JObjAsGObj(jobj), i);
         state->translation_x[i] = HSD_JObjGetTranslationX(state->jobjs[i]);
         state->translation_y[i] = HSD_JObjGetTranslationY(state->jobjs[i]);
     }
@@ -751,6 +774,7 @@ void ifStatus_802F5EC0(IfDamageState* state, s32 player_idx)
     ifStatus_802F5B48(state->HUD_parent_entity);
     state->old_damage = !state->damage_percent;
     ifStatus_802F4EDC(state->HUD_parent_entity);
+    return state->HUD_parent_entity;
     PAD_STACK(0x18);
 }
 
@@ -796,23 +820,15 @@ static inline HSD_GObj* ifStatus_CreateMarkGObj(void)
     return GObj_Create(0xE, 0xF, 0);
 }
 
-void ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
+static inline void ifStatus_SetupMark(IfDamageState* state, s32 player_idx,
+                                      CharacterKind* chara, HSD_JObj** jobj,
+                                      HSD_TObj** tobj)
 {
-    HSD_GObj* gobj;
-    HSD_JObj* jobj;
-    HSD_TObj* tobj;
-    Vec3* vec;
-    HSD_MObj* mobj;
-    GXColor color;
-    CharacterKind chara;
-    u8 slot;
-    u8 team;
-    u8 hud_color;
     HudIndex* hud = &ifStatus_HudInfo;
     u8 idx = player_idx;
-    PAD_STACK(0x10);
+    HSD_GObj* gobj;
 
-    chara = Player_GetPlayerCharacter(idx);
+    *chara = Player_GetPlayerCharacter(idx);
     if (state->next == NULL) {
         ifAll_802F3690();
         gobj = ifStatus_CreateMarkGObj();
@@ -820,31 +836,56 @@ void ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
             HSD_ASSERTREPORT(0x30A, 0,
                              "Error : gobj dont't get (ifAddMark)\n");
         }
-        jobj = HSD_JObjLoadJoint((HSD_Joint*) hud->unk268);
-        if (jobj == NULL) {
+        *jobj = HSD_JObjLoadJoint((HSD_Joint*) hud->unk268);
+        if (*jobj == NULL) {
             HSD_ASSERTREPORT(0x30E, 0,
                              "Error : jobj dont't get (ifAddMark)\n");
         }
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, *jobj);
         GObj_SetupGXLink(gobj, (void (*)(HSD_GObj*, int)) ifStatus_802F5E50,
                          0xB, 0);
         state->next = gobj;
     } else {
-        jobj = state->next->hsd_obj;
+        *jobj = state->next->hsd_obj;
     }
-    tobj = jobj->child->u.dobj->mobj->tobj;
-    lb_8000C07C(jobj, 0, (HSD_AnimJoint**) hud->unk26C,
+    *tobj = (*jobj)->child->u.dobj->mobj->tobj;
+    lb_8000C07C(*jobj, 0, (HSD_AnimJoint**) hud->unk26C,
                 (HSD_MatAnimJoint**) hud->unk270,
                 (HSD_ShapeAnimJoint**) hud->unk274);
+}
+
+static inline void ifStatus_SetMarkPosition(s32 idx, HSD_JObj* jobj)
+{
+    Vec3* vec;
+
+    vec = ifAll_802F3424(idx);
+    HSD_JObjSetTranslate(jobj, vec);
+    HSD_JObjAddTranslationX(jobj, 0.25f);
+}
+
+void ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
+{
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+    HSD_TObj* tobj;
+    Vec3* vec;
+    HSD_MObj* mobj;
+    u8 hud_color;
+    CharacterKind chara;
+    u8 slot;
+    u8 team;
+    GXColor color;
+    HudIndex* hud = &ifStatus_HudInfo;
+    u8 idx = player_idx;
+
+    ifStatus_SetupMark(state, player_idx, &chara, &jobj, &tobj);
     if (chara == CKIND_MASTERH || (u32) (chara - CKIND_GKOOPS) <= 1) {
         chara = CKIND_BOY;
     }
     HSD_TObjReqAnimAll(tobj, 0.5f + gm_80168B34(chara, 0, 0));
     HSD_AObjSetRate(tobj->aobj, 0.1f);
     HSD_TObjAnim(tobj);
-    vec = ifAll_802F3424(idx);
-    HSD_JObjSetTranslate(jobj, vec);
-    HSD_JObjAddTranslationX(jobj, 0.25f);
+    ifStatus_SetMarkPosition(idx, jobj);
     slot = Player_GetPlayerSlotType(idx);
     hud_color = gm_8016B168();
     team = Player_GetTeam(idx);

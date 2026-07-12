@@ -244,10 +244,12 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
     BracketEntry* entries = lbl_80473AB8;
     BracketEntry* entry;
     u8* sub;
+    s32 entry_offset;
+    s32 slot_offset;
     s32* p34;
-    s32* p3C;
-    s32* p44;
     s32* p38;
+    s32* p44;
+    s32* p3C;
     s32* p40;
     s32* p48;
     u8* px3;
@@ -255,8 +257,13 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
 
     TmData* tm = gm_8018F634();
 
-    entry = &entries[entry_idx];
-    sub = (u8*) entry + slot_idx * (s32) 0x2C;
+    entry_offset = entry_idx * 0xDC;
+    slot_offset = slot_idx * 0x2C;
+    {
+        u8* bytes = &entries->x0;
+        entry = (BracketEntry*) (bytes + entry_offset);
+    }
+    sub = slot_offset + &entries->x0 + entry_offset;
 
     p34 = (s32*) (sub + 0x34);
     p3C = (s32*) (sub + 0x3C);
@@ -483,6 +490,11 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
     HSD_JObjSetTranslateY(jobj, -(f32) *p48);
 }
 
+static inline f32* GetBracketCamY(f32* cam)
+{
+    return &cam[1];
+}
+
 void fn_8018B090(HSD_GObj* arg0)
 {
     TmData* tm = gm_8018F634();
@@ -585,7 +597,7 @@ void fn_8018B090(HSD_GObj* arg0)
             } else {
                 mn_8022F410(&cam[0], &cam[3], cam[6]);
             }
-            if (mn_8022F410(&cam[1], &cam[4], cam[7]) < 0) {
+            if (mn_8022F410(GetBracketCamY(cam), &cam[4], cam[7]) < 0) {
                 mn_8022F410(&cam[1], &cam[4], cam[7]);
             } else {
                 mn_8022F410(&cam[1], &cam[4], cam[7]);
@@ -1256,10 +1268,9 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
     s32 right;
     s32 bottom;
     GXColor c0, c1, c2, c3, c4, c5, c6, c7, c8, c9;
-    GXColor c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20;
+    GXColor c10, c11, c12, c13, c14, c15, c16, c17, c18;
 
     tm = gm_8018F634();
-    c20 = lbl_804DA684;
     c0 = lbl_804DA684;
     thickness = data->x1C;
     c1 = lbl_804DA684;
@@ -1405,9 +1416,9 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                                   color);
                 }
                 if (data->x20.g == 0 && data->x4C != 0) {
-                    c19 = data->x20;
+                    c17 = data->x20;
                     DrawRectangle((f32) right, (f32) bottom, thickness, -30.0f,
-                                  &c19);
+                                  &c17);
                 }
             }
         }
@@ -1463,7 +1474,7 @@ void fn_8018DC18(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                       neg_thickness, color);
     }
 
-    if (fn_8018DC18_inline0(arg0) == 0) {
+    if (!fn_8018DC18_inline0(arg0)) {
         if (((BracketEntry*) arg0)->x4C == 0) {
             c5 = ((BracketEntry*) arg0)->x20;
             DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4, &c5);
@@ -1502,7 +1513,6 @@ void fn_8018DF68(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
     GXColor slot0_horizontal_color;
     GXColor slot0_vertical_color;
     GXColor horizontal_color;
-    GXColor slot1_vertical_color;
     GXColor slot3_vertical_color;
     GXColor slot3_horizontal_color;
     f32 neg_thickness;
@@ -1554,6 +1564,7 @@ void fn_8018DF68(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
             return;
         }
         if (((BracketEntry*) arg0)->x78 == 0) {
+            GXColor slot1_vertical_color;
             GXColor slot1_horizontal_color;
             slot1_vertical_color = ((BracketEntry*) arg0)->x20;
             DrawRectangle((f32) left_third, (f32) arg2, thickness, (f32) arg4,
@@ -2275,6 +2286,8 @@ void fn_8018FA24(void)
     s32 player_count;
     s32 i;
     BracketEntry* entry;
+
+    PAD_STACK(8);
 
     tmdata = (u8*) &gm_804771C4 + 0xc;
 

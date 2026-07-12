@@ -462,8 +462,7 @@ void gm_801BAD70(GameScene* arg0)
                 ev->x1 = c;
                 ev->x50[0] = c;
             }
-            r3b[0x6C] = (r3b[0x6C] & ~0x80) |
-                        ((gm_801677F8(ev->x6, r3b[0x6A]) << 7) & 0x80);
+            md->players[0].xC_b0 = gm_801677F8(ev->x6, r3b[0x6A]);
         } else {
             if (((struct gm_evlevel*) *lvlpp)->player_init[player_idx]->team ==
                 0)
@@ -972,6 +971,12 @@ void fn_801BBFE8(void)
     gm_801BC00C();
 }
 
+typedef struct gmEventLevelData {
+    u8 count;
+    u8 pad_x1[0xF];
+    gm_801BAB40_src* entries[1];
+} gmEventLevelData;
+
 static inline void gm_801BC00C_inline(gm_801BAB40_src* event_entry)
 {
     u8 ckind = event_entry->c_kind;
@@ -1079,7 +1084,8 @@ s32 gm_801BC00C(void)
     case 39:
     case 48:
         for (i = ev->x20, entry_offset = i * 4;
-             i < (s32) * (u8*) event_levels[idx]->x10; i++, entry_offset += 4)
+             i < ((gmEventLevelData*) event_levels[idx]->x10)->count;
+             entry_offset += 4, i++)
         {
             event_entry =
                 *(void**) ((u8*) event_levels[idx]->x10 + entry_offset + 0x10);
@@ -2629,9 +2635,9 @@ void gm_801BDE94(HSD_GObj* arg0)
             break;
         case 2:
             if (Player_GetStocks(3) <= 0) {
-                struct EventData* ev2 = &gmMainLib_804D3EE0->unk_530;
                 struct gm_evspawn* sp =
                     ((struct gm_evx10*) tbl[level]->x10)->unk1C;
+                struct EventData* ev2 = &gmMainLib_804D3EE0->unk_530;
                 u8 color = sp->unk3;
                 if ((s8) ev2->x0 == sp->unk0 && (u8) ev2->x1 == color) {
                     if (color <= 2) {
@@ -2669,9 +2675,9 @@ void gm_801BDE94(HSD_GObj* arg0)
             break;
         case 1:
             if (Player_GetStocks(2) <= 0) {
-                struct EventData* ev2 = &gmMainLib_804D3EE0->unk_530;
                 struct gm_evspawn* sp =
                     ((struct gm_evx10*) tbl[level]->x10)->unk20;
+                struct EventData* ev2 = &gmMainLib_804D3EE0->unk_530;
                 u8 color = sp->unk3;
                 if ((s8) ev2->x0 == sp->unk0 && (u8) ev2->x1 == color) {
                     if (color <= 2) {

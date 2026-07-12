@@ -242,8 +242,8 @@ static float calcAngle(float angle)
 
 static void inlineA0(Fighter_GObj* gobj, Fighter* fp, float* angle)
 {
-    efAsync_Spawn(gobj, &fp->x60C, 4U, 0x406U, fp->parts[FtPart_TopN].joint,
-                  angle);
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 4U, 0x406U,
+                  fp->parts[FtPart_TopN].joint, angle);
 }
 
 static void inlineA1(Fighter_GObj* gobj)
@@ -803,9 +803,16 @@ static inline void inlineB2(Fighter_GObj* gobj)
 }
 
 /// @todo Inline depth.
-static inline bool inlineB3(Fighter_GObj* gobj)
+static inline void inlineB3(Fighter_GObj* gobj)
 {
-    return inlineB0(gobj);
+    Fighter* fp = gobj->user_data;
+    float kb_applied = fp->dmg.kb_applied;
+    if (kb_applied == 0 ||
+        (fp->allow_sdi && fp->x221A_b3 &&
+         fp->dmg.kb_applied < fp->dmg.x18A8 + p_ftCommonData->x140))
+    {
+        ftCo_8008E9D0(gobj);
+    }
 }
 
 void ftCo_8008EC90(Fighter_GObj* gobj)
@@ -890,9 +897,7 @@ void ftCo_8008EC90(Fighter_GObj* gobj)
                                 fp->dmg.x183C_applied;
                             other_fp->x1960_vibrateMult =
                                 fp->x1960_vibrateMult;
-                            if (inlineB3(gobj)) {
-                                ftCo_8008E9D0(gobj);
-                            }
+                            inlineB3(gobj);
                             fp->x1828 = 2;
                             goto ret_A8C;
                         }

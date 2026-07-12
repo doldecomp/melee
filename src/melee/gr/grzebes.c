@@ -1720,10 +1720,11 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
 
     {
         grZe_YakumonoParam* yaku = grZe_804D6990;
-        for (i = 0; i < 20; i++) {
-            if (base[i].x00_active != 0) {
-                base[i].x10 = 0.0f;
-                base[i].x14 = -yaku->x84;
+        int j;
+        for (j = 0; j < 20; j++) {
+            if (base[j].x00_active != 0) {
+                base[j].x10 = 0.0f;
+                base[j].x14 = -yaku->x84;
             }
         }
     }
@@ -1960,14 +1961,14 @@ s32 grZebes_801DBB60(HSD_GObj* yaku)
     grZe_BubbleEntry* bubbles = state->bubbles;
     s32 count = 0;
     f32 max_dist_sq = -1.0f;
+    grZe_BubbleEntry* ej;
 
     HSD_ASSERT(0x898, yaku);
 
     {
-        grZe_BubbleEntry* p = bubbles;
         int i;
-        for (i = 0; i < 20; i++, p++) {
-            if (p->x00_active == 1 && i != 0 && i != 6) {
+        for (i = 0; i < 20; i++) {
+            if (bubbles[i].x00_active == 1 && i != 0 && i != 6) {
                 count++;
                 last_idx = i;
                 if (count > 2) {
@@ -2006,7 +2007,7 @@ s32 grZebes_801DBB60(HSD_GObj* yaku)
                 f32 ei_x = ei->x08_x;
                 f32 ei_size = ei->x18_size;
                 s32 rem = 20 - j;
-                grZe_BubbleEntry* ej = &bubbles[j];
+                ej = &bubbles[j];
                 if (j < 20) {
                     for (; rem != 0; ej++, j++, rem--) {
                         if (ej->x00_active == 1 && j != 0 && j != 6) {
@@ -2273,35 +2274,36 @@ void grZebes_801DC744(s32 arg0, u8 arg1)
         f32 x_base = p_x + bubble_r;
         f32 x_range = (base[1].x - p_x) - 2.0f * bubble_r;
         f32 y_range = base[1].y - y_min;
-        f64 mid_x = 0.5 * x_range + x_base;
-        f64 lo_x, hi_x, lo_y, hi_y, near_max_y, max_y;
 
-        grZebes_801DAE70(7, arg1, (f32) mid_x, (f32) (0.5 * y_range + y_min),
-                         1.0f);
+        grZebes_801DAE70(7, arg1, (f32) (0.5 * x_range + x_base),
+                         (f32) (0.5 * y_range + y_min), 1.0f);
 
-        hi_y = 0.8 * y_range + y_min;
-        grZebes_801DAE70(8, arg1, (f32) (0.2 * x_range + x_base), (f32) hi_y,
-                         1.2f);
+        grZebes_801DAE70(8, arg1, (f32) (0.2 * x_range + x_base),
+                         (f32) (0.8 * y_range + y_min), 1.2f);
 
-        hi_x = 0.8 * x_range + x_base;
-        lo_y = 0.2 * y_range + y_min;
-        grZebes_801DAE70(9, arg1, (f32) hi_x, (f32) lo_y, 1.1f);
+        grZebes_801DAE70(9, arg1, (f32) (0.8 * x_range + x_base),
+                         (f32) (0.2 * y_range + y_min), 1.1f);
 
-        grZebes_801DAE70(10, arg1, (f32) hi_x, (f32) hi_y, 1.1f);
+        {
+            f64 hi_x = 0.8 * x_range + x_base;
+            grZebes_801DAE70(10, arg1, (f32) hi_x,
+                             (f32) (0.8 * y_range + y_min), 1.1f);
+        }
 
-        grZebes_801DAE70(11, arg1, (f32) mid_x, (f32) lo_y, 1.2f);
+        grZebes_801DAE70(11, arg1, (f32) (0.5 * x_range + x_base),
+                         (f32) (0.2 * y_range + y_min), 1.2f);
 
-        near_max_y = 0.9 * y_range + y_min;
-        grZebes_801DAE70(12, arg1, (f32) mid_x, (f32) near_max_y, 1.3f);
+        grZebes_801DAE70(12, arg1, (f32) (0.5 * x_range + x_base),
+                         (f32) (0.9 * y_range + y_min), 1.3f);
 
-        grZebes_801DAE70(13, arg1, (f32) mid_x, (f32) near_max_y, 1.3f);
+        grZebes_801DAE70(13, arg1, (f32) (0.5 * x_range + x_base),
+                         (f32) (0.9 * y_range + y_min), 1.3f);
 
-        max_y = (f64) y_min + (f64) y_range;
-        grZebes_801DAE70(14, arg1, (f32) (0.6 * x_range + x_base), (f32) max_y,
-                         1.1f);
+        grZebes_801DAE70(14, arg1, (f32) (0.6 * x_range + x_base),
+                         (f32) ((f64) y_min + (f64) y_range), 1.1f);
 
-        grZebes_801DAE70(15, arg1, (f32) (0.2 * x_range + x_base), (f32) max_y,
-                         1.0f);
+        grZebes_801DAE70(15, arg1, (f32) (0.2 * x_range + x_base),
+                         (f32) ((f64) y_min + (f64) y_range), 1.0f);
     }
 }
 

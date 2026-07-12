@@ -124,19 +124,19 @@ static void fn_8031D168(HSD_GObj* gobj)
 
 void un_8031D288_OnEnter(void* data)
 {
-    HSD_GObj* cam_gobj;
     u8 char_index;
-    HSD_CObj* cobj;
+    HSD_Fog* fog;
     HSD_GObj* fog_gobj;
     HSD_LObj* lobj;
     HSD_GObj* light_gobj;
-    HSD_Fog* fog;
-    HSD_JObj* jobj;
-    HSD_GObj* gobj2;
+    HSD_CObj* cobj;
+    HSD_GObj* cam_gobj;
     int i;
+    HSD_JObj* jobj;
     HSD_GObj* gobj;
     HSD_GObj* cam_gobj2;
     HSD_JObj* jobj2;
+    HSD_GObj* gobj2;
     ViCharaDesc* desc;
 
     desc = (ViCharaDesc*) data;

@@ -257,13 +257,13 @@ void un_80320A40_OnEnter(void* arg)
 
     un_804D701C = lbArchive_LoadSymbols(un_80400304.vi1201v2_dat, &un_804D7010,
                                         un_80400304.visual1201v2_scene, NULL);
+    lbArchive_LoadSymbols(un_80400304.tykoopa_dat, &un_804D7020,
+                          un_80400304.toykoopa_model_topn_joint, NULL);
     {
-        char* toykoopa_joint = un_80400304.toykoopa_model_topn_joint;
-        char* tykoopa_dat = un_80400304.tykoopa_dat;
-        lbArchive_LoadSymbols(tykoopa_dat, &un_804D7020, toykoopa_joint, NULL);
+        char* gmrgstnd_dat = un_80400304.gmrgstnd_dat;
+        lbArchive_LoadSymbols(gmrgstnd_dat, &un_804D7014,
+                              un_80400304.stand_scene, NULL);
     }
-    lbArchive_LoadSymbols(un_80400304.gmrgstnd_dat, &un_804D7014,
-                          un_80400304.stand_scene, NULL);
     Toy_803124BC();
     un_804D7018 =
         lbArchive_LoadSymbols(viGetCharAnimByIndex(char_index), NULL);

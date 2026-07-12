@@ -394,26 +394,33 @@ void grPura_802125F0(HSD_GObj* arg0)
     }
 }
 
+static inline void grPura_80212CD4_inline(Ground* gp, HSD_JObj* jobj,
+                                         HSD_JObj** node)
+{
+    u32 i;
+
+    for (i = 0; i < 25; i++) {
+        gp->gv.pura3.xC4[i] = NULL;
+        gp->gv.pura3.x128[i] = NULL;
+    }
+    if (jobj == NULL) {
+        *node = NULL;
+    } else {
+        *node = jobj->child;
+    }
+}
+
 void grPura_80212CD4(HSD_GObj* arg0)
 {
     Ground* gp = arg0->user_data;
     Ground* gp2 = gp;
     HSD_JObj* jobj = arg0->hsd_obj;
     s32 j;
-    u32 i;
     HSD_JObj* node;
     Vec3 subject_pos;
 
-    for (i = 0; i < 25; i++) {
-        gp->gv.pura3.xC4[i] = NULL;
-        gp->gv.pura3.x128[i] = NULL;
-    }
+    grPura_80212CD4_inline(gp, jobj, &node);
 
-    if (jobj == NULL) {
-        node = NULL;
-    } else {
-        node = jobj->child;
-    }
     if (node != NULL) {
         if (node == NULL) {
             node = NULL;

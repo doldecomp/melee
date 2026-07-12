@@ -4367,6 +4367,7 @@ melee/if/soundtest.c:
 	.text       start:0x802FF7DC end:0x80301E44
 	.data       start:0x803F9F28 end:0x803FDC20
 	.sdata      start:0x804D5850 end:0x804D5A40
+	.sdata2     start:0x804DDC40 end:0x804DDC48
 
 melee/if/textdraw.c:
 	.text       start:0x80301E44 end:0x803029B4

@@ -437,26 +437,23 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     }
 
     gc = &lbDvd_8001822C()->game_cache;
-    slot_idx = 1;
     lbDvd_80018C6C();
+    slot_idx = 1;
     gc->entries[0].char_id = (s32) (s8) arg0->x0.ckind;
     gc->entries[0].color = arg0->x0.color;
     lbDvd_80018254();
     lbDvd_80018C2C(0xC7);
     lbDvd_80017700(4);
 
-    {
-        s32 idx = slot_idx;
-        for (i = 0; i < 3; i++) {
-            if ((s8) chars_ptr[i] != 0x21) {
-                gc->entries[idx].char_id = chars_ptr[i];
-                if (is_last_round != 0) {
-                    gc->entries[idx].color = 0xFF;
-                } else {
-                    gc->entries[idx].color = colors_ptr[i];
-                }
-                idx++;
+    for (i = 0; i < 3; i++) {
+        if (chars[i] != 0x21) {
+            gc->entries[slot_idx].char_id = chars[i];
+            if (is_last_round != 0) {
+                gc->entries[slot_idx].color = 0xFF;
+            } else {
+                gc->entries[slot_idx].color = colors[i];
             }
+            slot_idx++;
         }
     }
 

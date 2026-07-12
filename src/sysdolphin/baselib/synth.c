@@ -67,9 +67,12 @@ void HSD_SynthSFXSampleLoadCallback(int result, int length, void* addr,
         dnw = total - header_size;
         *(u32*) ((u8*) HSD_Synth_804D7730 + (dnw & ~3)) =
             hsd_SynthSFXLoadBuf[4];
-        ((u32*) HSD_Synth_804D7730)[(dnw >> 2) + 1] = hsd_SynthSFXLoadBuf[5];
-        ((u32*) HSD_Synth_804D7730)[(dnw >> 2) + 2] = hsd_SynthSFXLoadBuf[6];
-        ((u32*) HSD_Synth_804D7730)[(dnw >> 2) + 3] = hsd_SynthSFXLoadBuf[7];
+        ((u32*) HSD_Synth_804D7730)[((dnw & ~3) >> 2) + 1] =
+            hsd_SynthSFXLoadBuf[5];
+        ((u32*) HSD_Synth_804D7730)[((dnw & ~3) >> 2) + 2] =
+            hsd_SynthSFXLoadBuf[6];
+        ((u32*) HSD_Synth_804D7730)[((dnw & ~3) >> 2) + 3] =
+            hsd_SynthSFXLoadBuf[7];
         HSD_Synth_804D7734 = (u32*) ((u8*) HSD_Synth_804D7730 + (dnw & ~3));
 
         bankID = HSD_Synth_804C2A60[0].bankID;
@@ -870,6 +873,7 @@ s32 HSD_Synth_8038A000(void)
     struct HSD_SynthSFXNode** pnode;
     AXPBVE ve;
 
+    PAD_STACK(8);
     intr = OSDisableInterrupts();
     if (HSD_Synth_804D7758 != 0) {
         int ch;
@@ -907,7 +911,7 @@ s32 HSD_Synth_8038A000(void)
         {
             int k;
             for (k = 0; k < USERVOL_NUM; k++) {
-                if (node->user_vol[k].x4 != 0) {
+                if (*(volatile int*) &node->user_vol[k].x4 != 0) {
                     int c = node->user_vol[k].x4;
                     (&node->unk28)[k * 3] =
                         ((&node->unk28)[k * 3] * ((f32) c - 1.0f)) / (f32) c +

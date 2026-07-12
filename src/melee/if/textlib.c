@@ -622,8 +622,7 @@ bool un_80303720(struct un_80304138_objalloc_t* arg0)
     case 4:
     case 7: {
         int* q = arg0->x8[arg0->x0].x10;
-        unsigned int idk = arg0->x8[arg0->x0].x1C;
-        *q = *q - idk;
+        *q -= (unsigned int) arg0->x8[arg0->x0].x1C;
         ret = true;
         arg0->x1 = arg0->x1 | 1;
         lbAudioAx_80024030(2);

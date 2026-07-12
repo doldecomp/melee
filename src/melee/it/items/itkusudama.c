@@ -206,6 +206,8 @@ static void sdata2_order(void)
 void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3)
 {
     ItemKind prev_kind;
+    ItemKind rand_kind;
+    ItemKind* spawn_ptr;
     ItemKind spawned[15];
     Vec3 pos;
     Vec3 vel;
@@ -268,12 +270,12 @@ void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3)
             }
         }
         {
-            ItemKind* spawn_ptr = &spawned[i];
+            spawn_ptr = &spawned[i];
             for (; i < count; spawn_ptr++, i++) {
-                ItemKind rand_kind = it_8026F3AC();
                 Vec3 vel;
                 Vec3 pos;
                 PAD_STACK(8);
+                rand_kind = it_8026F3AC();
                 if (rand_kind != -1) {
                     Item_GObj* spawned_gobj;
                     it_80289BE8_inline(gobj, 1.2f, &pos, &vel);
@@ -310,7 +312,7 @@ void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3)
             count = HSD_Randi(2);
             count += 3;
             for (i = 0; i < count; i++) {
-                ItemKind rand_kind = it_8026F3AC();
+                rand_kind = it_8026F3AC();
                 if (rand_kind != -1) {
                     Item_GObj* spawned_gobj;
                     it_80289BE8_inline(gobj, 1.2f, &pos, &vel);
