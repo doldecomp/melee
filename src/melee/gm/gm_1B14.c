@@ -29,7 +29,7 @@
 
 /* 4D68C0 */ static u8 gm_804D68C0;
 /* 4D68C1 */ static u8 gm_804D68C1;
-/* 4D68C8 */ static UNK_T gm_804D68C8[1];
+/* 4D68C8 */ static s64 gm_804D68C8;
 
 GameScene gm_803DD9A0_Scenes[] = {
     {
@@ -296,8 +296,8 @@ GameScene gm_CameraModeScenes[] = {
         gm_801B2510,
         {
             GS_CAMERA_VS,
-            gm_804D68C8,
-            gm_804D68C8,
+            &gm_804D68C8,
+            &gm_804D68C8,
         },
     },
     {
