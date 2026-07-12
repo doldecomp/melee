@@ -2488,11 +2488,8 @@ static inline void fn_8019B458_UpdateRank(TmData* tm, struct Lbl804799D8_t* d8)
     tm->x33 = rank;
 }
 
-/// @todo 99.77% — all 278 instructions/shapes match; residual is one pure
-/// two-register swap: the entry-fill loop's two walkers (tm- and req-derived
-/// IVs) trade r28<->r29. Walker spellings, a user tm pointer, a q = &req
-/// pointer, and a helper-inline form of the loop all canonicalize to the
-/// same swap.
+/// @todo 99.77%: all instructions match; the entry-fill loop's two pointer
+/// walkers have r28 and r29 swapped.
 void fn_8019B458(s32* arg0)
 {
     struct Preload {
