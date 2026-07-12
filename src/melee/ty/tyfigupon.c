@@ -62,7 +62,7 @@
 /* 315C44 */ static void _tyFigupon_80315C44(HSD_GObj*);
 /* 316170 */ static void _tyFigupon_80316170(HSD_GObj*);
 /* 31638C */ static s32 _tyFigupon_8031638C(s16);
-/* 316420 */ static void _tyFigupon_80316420(s16);
+/* 316420 */ static void _tyFigupon_80316420(s32);
 /* 3168DC */ static void _tyFigupon_803168DC(HSD_GObj*);
 /* 316BF8 */ static void _tyFigupon_80316BF8(HSD_GObj*);
 /* 316C24 */ static void _tyFigupon_80316C24(HSD_GObj*);
@@ -323,9 +323,7 @@ void _tyFigupon_803153EC(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 
     num = arg0;
     temp_r30 = _tyFigupon_804D6EF4;
-    digits_s.s.x8 = 0;
-    digits_s.s.x4 = (count = 0);
-    digits_s.s.x0 = (count = 0);
+    digits_s.s.x0 = digits_s.s.x4 = digits_s.s.x8 = (count = (count = 0));
     do {
         digits_s.digits[count++] = num % 10;
         num /= 10;
@@ -472,7 +470,7 @@ void _tyFigupon_803155C8(void)
                     pct = 99.9f;
                 }
                 data->x20 = Toy_80305058(0x63, 3, 0, pct);
-                _tyFigupon_80316420(data->x20);
+                _tyFigupon_80316420((s16) data->x20);
                 {
                     s32 inv = _tyFigupon_80314B54();
                     // TODO: Initialization of this for loop is off
@@ -570,7 +568,7 @@ static void order_data_108(void)
 
 void _tyFigupon_80315C44(HSD_GObj* arg0)
 {
-    TyFiguponUD* ud;
+    TyFiguponUD* ud = HSD_GObjGetUserData(arg0);
     struct un_804D6EF4_t* ef4 = _tyFigupon_804D6EF4;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
@@ -581,7 +579,6 @@ void _tyFigupon_80315C44(HSD_GObj* arg0)
 
     PAD_STACK(24);
 
-    ud = arg0->user_data;
     if (ud != NULL) {
         if (ud->x8 != 0) {
             if (ud->x10 == 0 && ud->x14 == 0 && ud->x18 != 0) {
@@ -631,7 +628,10 @@ void _tyFigupon_80315C44(HSD_GObj* arg0)
                 ud->x2C = i;
                 ud->x28 = i;
                 do {
-                    ((s32*) ud)[i + 10] = count % 10;
+                    {
+                        s32 idx = i + 10;
+                        ((s32*) ud)[idx] = count % 10;
+                    }
                     count /= 10;
                     i++;
                 } while (count > 0);
@@ -758,19 +758,20 @@ s32 _tyFigupon_8031638C(s16 arg0)
     return var_r30;
 }
 
-void _tyFigupon_80316420(s16 arg0)
+void _tyFigupon_80316420(s32 arg0)
 {
+    s16 id = arg0;
     struct un_804D6EF4_t* ef4 = _tyFigupon_804D6EF4;
     TyFiguponData* data = _tyFigupon_804D6EF0;
     ToyAnimState* aa8 = &Toy_804A2AA8;
-    s32 temp_r31;
+    s32 count;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
     f32 angle;
 
-    PAD_STACK(32);
+    PAD_STACK(24);
 
-    temp_r31 = Toy_803048C0(arg0);
+    count = Toy_803048C0(id);
     Toy_80308250((void*) _tyFigupon_804D6EF8, arg0, 0);
     gobj = Toy_803087F4(_tyFigupon_804D6EF8);
     HSD_JObjClearFlagsAll(aa8->jobj[0], JOBJ_HIDDEN);
@@ -786,16 +787,15 @@ void _tyFigupon_80316420(s16 arg0)
     HSD_JObjSetRotationY(jobj, 0.017453292f * angle);
     HSD_GObj_SetupProc(gobj, _tyFigupon_80316170, 0);
     HSD_GObj_80390CD4(gobj);
-    if (temp_r31 == 0) {
+    if (count == 0) {
         Toy_80306B18(data->x8, 0, 0x48, 1);
         HSD_GObj_80390CD4(data->x8);
     }
     Toy_SetUnlockState(arg0, 1);
     Toy_8031234C(1);
     lb_8001CE00();
-    Toy_80308328(arg0);
-    HSD_SisLib_803A6368(data->x14, temp_r31);
-    Toy_803083D8(ef4->jobjs[0xC], arg0);
+    HSD_SisLib_803A6368(data->x14, Toy_80308328(arg0));
+    Toy_803083D8(ef4->jobjs[0xC], id);
     if (((TyModeState*) Toy_804A284C)->x0 == 2) {
         if ((u32) data->x10 == 0) {
             data->x10 = (s32) HSD_GObj_SetupProc(
@@ -1197,13 +1197,13 @@ void _tyFigupon_80316C24(HSD_GObj* arg0)
 void _tyFigupon_8031753C(void)
 {
     s32 new_count;
-    struct un_804D6EF4_t* ef4 = _tyFigupon_804D6EF4;
+    s32 count;
     HSD_Joint* joint;
     HSD_Joint* bet_joint;
     HSD_Joint* par_joint;
     HSD_Joint* panel_joint;
     HSD_JObj* jobj;
-    s32 count;
+    struct un_804D6EF4_t* ef4 = _tyFigupon_804D6EF4;
     s32 i;
     s32 trophy_total;
     u8 _padA[24];
@@ -1385,12 +1385,11 @@ void _tyFigupon_80317A60(void)
     HSD_CameraDescPerspective* cam_desc;
     HSD_CObj* cobj;
     HSD_GObj* gobj;
-    struct un_804D6EF4_t* new_var; // Permuter slop
     HSD_Text* text;
     PAD_STACK(40);
-    new_var = _tyFigupon_804D6EF4;
-    cam_desc = HSD_ArchiveGetPublicAddress(new_var->archive,
-                                           "ScMenFigure_scene_lights");
+
+    cam_desc = HSD_ArchiveGetPublicAddress(
+        _tyFigupon_804D6EF4->archive, Toy_str_ScMenFigure_cam_int1_camera);
     data->x0 = GObj_Create(1, 2, 0);
     cobj = lb_80013B14(cam_desc);
     _tyFigupon_804D6F04 = (HSD_CObjDesc*) cam_desc;
@@ -1398,26 +1397,16 @@ void _tyFigupon_80317A60(void)
     GObj_SetupGXLinkMax(data->x0, _tyFigupon_80314BE4, 0);
     gobj = data->x0;
     gobj->gxlink_prios = 0x5010000000000000ULL;
+
     data->x4 = GObj_Create(1, 2, 0);
-    // cobj = lb_80013B14(&_Toy_803FE68C);
-    // _tyFigupon_804D6F08 = &_Toy_803FE68C;
-    // Unholiest of Permuter slop
-    HSD_GObjObject_80390A70(
-        data->x4,
-        (((((((((((HSD_GObj_804D784B & 0xFFFFFFFFFFFFFFFFu) &
-                  0xFFFFFFFFFFFFFFFFu) &
-                 0xFFFFFFFFFFFFFFFFu) &
-                0xFFFFFFFFFFFFFFFFu) &
-               0xFFFFFFFFFFFFFFFFu) &
-              0xFFFFFFFFFFFFFFFFu) &
-             0xFFFFFFFFFFFFFFFFu) &
-            0xFFFFFFFFFFFFFFFFu) &
-           0xFFFFFFFFFFFFFFFFu) &
-          0xFFFFFFFFFFFFFFFFu) &
-         0xFFFFFFFFFFFFFFFFu) &
-            0xFFFFFFFFFFFFFFFFu,
-        cobj);
-    GObj_SetupGXLinkMax(data->x4, (GObj_RenderFunc) (Event) Toy_803068E0, 0);
+    cobj = lb_80013B14(
+        (HSD_CameraDescPerspective*) ((u32) "ToyFigurePonPanel_Top_joint" +
+                                      0x4EC));
+    _tyFigupon_804D6F08 =
+        (HSD_CameraDescPerspective*) ((u32) "ToyFigurePonPanel_Top_joint" +
+                                      0x4EC);
+    HSD_GObjObject_80390A70(data->x4, HSD_GObj_804D784B, cobj);
+    GObj_SetupGXLinkMax(data->x4, Toy_803068E0, 0);
     gobj = data->x4;
     gobj->gxlink_prios = 0x2680000000000000ULL;
 

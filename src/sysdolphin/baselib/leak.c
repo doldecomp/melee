@@ -121,9 +121,10 @@ int HSD_Leak_80387DF8(int indent)
     i = indent;
     i += 2;
     scan = lc->table;
+    ofs = 0;
     val = (u32) (scan + *cap_ptr);
     heap_start_align = 0;
-    for (ofs = 0; ofs < *cap_ptr; ofs++) {
+    for (; ofs < *cap_ptr; ofs++) {
         u32* ep = (u32*) ((u32) lc->table + heap_start_align);
         heap_start_phys = (u32*) *ep;
         if ((u32) heap_start_phys & 1) {

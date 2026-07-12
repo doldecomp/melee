@@ -439,7 +439,7 @@ void grCorneria_801DCE1C(void)
                         int i;
 
                         for (i = 0; i < 3; i++) {
-                            if (count == i) {
+                            if (i == count) {
                                 continue;
                             }
                             switch (grCn_803E1D68.arwing_type[i]) {
@@ -2330,19 +2330,25 @@ void grCorneria_801E1348(Ground_GObj* gobj)
 
 void grCorneria_801E1878(Ground_GObj* gobj)
 {
-    Vec3 pos;
     Ground* gr = GET_GROUND(gobj);
     HSD_JObj* jobj = gobj->hsd_obj;
     HSD_JObj* tmp = gr->gv.corneria.x128->hsd_obj;
     HSD_JObj* target_jobj = tmp;
 
-    HSD_JObjGetTranslation(jobj, &pos);
-    HSD_JObjSetTranslate(target_jobj, &pos);
+    /// @remarks Splitting the pad around a scoped @c pos places the vector
+    /// at sp+0x18 as in the target; a function-scope @c pos with a single
+    /// PAD_STACK(16) leaves it at sp+0x24 (six reg-save/load instructions
+    /// arg-mismatch, 99.90%).
+    PAD_STACK(8);
+    {
+        Vec3 pos;
+        HSD_JObjGetTranslation(jobj, &pos);
+        HSD_JObjSetTranslate(target_jobj, &pos);
+    }
+    PAD_STACK(8);
 
     Ground_801C39C0();
     Ground_801C3BB4();
-
-    PAD_STACK(16);
 }
 
 void grCorneria_801E1970(Ground_GObj* gobj)

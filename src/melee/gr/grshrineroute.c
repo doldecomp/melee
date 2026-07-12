@@ -1278,8 +1278,7 @@ void grShrineRoute_8020AF38(HSD_GObj* gobj, s32 arg1)
     if (gp->gv.shrineroute.symbols[ix] != NULL) {
         symbolp = gp->gv.shrineroute.symbols + ix;
         scale = 0.7f;
-        if (((Ground*) gp->gv.shrineroute.symbols[ix]->user_data)->map_id == 1)
-        {
+        if (((Ground*) (*symbolp)->user_data)->map_id == 1) {
             scale *= grSh_Route_804D6A58->x14;
         } else {
             scale *= grSh_Route_804D6A58->x18;

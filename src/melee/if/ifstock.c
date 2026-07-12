@@ -42,18 +42,23 @@ struct IfStockStealAnim {
     Vec3 end;
 };
 
+struct IfStockStealData {
+    unsigned char x0[12];
+    struct IfStockStealAnim anim[2];
+};
+
 int ifStock_802F7EFC(int arg0, int arg1)
 {
     Vec3 pos;
     struct ifStock_804A1378* stock;
     struct ifStock_804A1378_x204* arg0_data;
-    struct ifStock_804A1378_x204* arg1_data;
-    struct IfStockStealAnim* anim;
+    struct IfStockStealData* arg1_data;
     int slot;
+    int stocks;
     int i, j;
     stock = &ifStock_804A1378;
     arg0_data = &stock->x204[arg0];
-    arg1_data = &stock->x204[arg1];
+    arg1_data = (struct IfStockStealData*) &stock->x204[arg1];
     if (Player_GetStocks(arg1) == 0) {
         return 1;
     }
@@ -71,27 +76,27 @@ int ifStock_802F7EFC(int arg0, int arg1)
     arg1_data->x0[slot + 5] = 1;
     arg0_data->x0[2] = 0;
     arg1_data->x0[slot - 2] = arg0;
-    if (stock->player[arg1].stocks <= 5 && stock->player[arg1].stocks > 0) {
-        arg1_data->x0[stock->player[arg1].stocks + 4] = 10;
+    stocks = stock->player[arg1].stocks;
+    if (stocks <= 5 && stocks > 0) {
+        arg1_data->x0[stocks + 4] = 10;
     }
     i = 0;
-    if (stock->player[arg1].stocks <= 5 && stock->player[arg1].stocks > 0) {
+    if (stocks <= 5 && stocks > 0) {
         i = 1;
     }
     if (i != 0) {
-        j = stock->player[arg1].stocks;
+        j = stocks;
     } else {
         j = 1;
     }
     HSD_JObjGetTranslation(stock->player[arg1].x4[0], &pos);
     HSD_JObjReqAnimAll(stock->player[arg1].x4[j], 0.0f);
     HSD_JObjAnimAll(stock->player[arg1].x4[j]);
-    anim = (struct IfStockStealAnim*) &arg1_data
-               ->x0[0xC + (slot - 5) * sizeof(struct IfStockStealAnim)];
-    HSD_JObjGetTranslation(stock->player[arg1].x4[j], &anim->start);
-    anim->start.x += pos.x;
-    anim->start.y += pos.y;
-    anim->start.z += pos.z;
+    HSD_JObjGetTranslation(stock->player[arg1].x4[j],
+                           &arg1_data->anim[slot - 5].start);
+    arg1_data->anim[slot - 5].start.x += pos.x;
+    arg1_data->anim[slot - 5].start.y += pos.y;
+    arg1_data->anim[slot - 5].start.z += pos.z;
     i = 0;
     if (Player_GetStocks(arg0) < 5 && Player_GetStocks(arg0) > 0) {
         i = 1;
@@ -104,26 +109,32 @@ int ifStock_802F7EFC(int arg0, int arg1)
     HSD_JObjGetTranslation(stock->player[arg0].x4[0], &pos);
     HSD_JObjReqAnimAll(stock->player[arg0].x4[j], 0.0f);
     HSD_JObjAnimAll(stock->player[arg0].x4[j]);
-    HSD_JObjGetTranslation(stock->player[arg0].x4[1], &anim->end);
-    anim->end.x += (2.4f * j) + pos.x;
-    anim->end.y = anim->start.y;
-    anim->end.z += pos.z;
-    anim->mid.x = 0.5f * (anim->end.x + anim->start.x);
-    anim->mid.z = 0.5f * (anim->end.z + anim->start.z);
-    anim->mid.y = 10.0f + anim->start.y;
+    HSD_JObjGetTranslation(stock->player[arg0].x4[1],
+                           &arg1_data->anim[slot - 5].end);
+    arg1_data->anim[slot - 5].end.x += (2.4f * j) + pos.x;
+    arg1_data->anim[slot - 5].end.y = arg1_data->anim[slot - 5].start.y;
+    arg1_data->anim[slot - 5].end.z += pos.z;
+    arg1_data->anim[slot - 5].mid.x =
+        0.5f *
+        (arg1_data->anim[slot - 5].end.x + arg1_data->anim[slot - 5].start.x);
+    arg1_data->anim[slot - 5].mid.z =
+        0.5f *
+        (arg1_data->anim[slot - 5].end.z + arg1_data->anim[slot - 5].start.z);
+    arg1_data->anim[slot - 5].mid.y =
+        10.0f + arg1_data->anim[slot - 5].start.y;
     return 0;
 }
 
 void ifStock_802F8298(HSD_GObj* gobj)
 {
-    struct IfStockUserData* user_data;
+    HSD_JObj* jobj_anim;
     HSD_JObj* jobj;
     struct ifStock_804A1378* stock;
-    HSD_JObj* jobj2;
-    HSD_JObj* jobj_anim;
     int i;
+    struct IfStockUserData* user_data;
+    HSD_JObj* jobj2;
     Vec3 vecA, vecB;
-    PAD_STACK(24);
+    PAD_STACK(20);
     user_data = GET_IFSTOCK(gobj);
     jobj = gobj->hsd_obj;
     stock = &ifStock_804A1378;
@@ -261,8 +272,10 @@ static inline void ifStock_802F89F8_inline(struct IfStockUserData* user_data,
         if (i < count) {
             int divisor;
             divisor = 1;
-            for (j = 0; j < i; j++) {
-                divisor *= 10;
+            if (i != 0) {
+                for (j = 0; j < i; j++) {
+                    divisor *= 10;
+                }
             }
             HSD_JObjClearFlagsAll(
                 ifStock_804A1378.player[user_data->player].x4[13 - i],
@@ -306,8 +319,8 @@ void ifStock_802F89F8(HSD_GObj* gobj)
     int count;
     Player_GetCoins(player);
     PAD_STACK(32);
-    coins = Player_GetCoins(user_data->player);
-    ifStock_804A1378.player[user_data->player].coins = coins;
+    coins = ifStock_804A1378.player[user_data->player].coins =
+        Player_GetCoins(user_data->player);
     if ((u32) coins > 99999U) {
         coins = 99999;
     }
@@ -517,15 +530,15 @@ HSD_GObj* ifStock_802F96D0(int a, int b, float x, float y)
 void ifStock_802F98E8(unsigned char player, int b)
 {
     struct ifStock_804A1378* stock = &ifStock_804A1378;
-    HSD_GObj* gobj;
-    HSD_JObj* jobj;
-    struct ifStock_804A1378_x204* user_data;
-    struct ifStock_804A1378_per_player* r26;
     int i;
-    unsigned char* data;
+    struct ifStock_804A1378_x204* user_data;
+    HSD_JObj* jobj;
     lbl_8046B6A0_t* ae44;
+    struct ifStock_804A1378_per_player* r26;
+    unsigned char* data;
     PAD_STACK(16);
     if (stock->x0 != NULL) {
+        HSD_GObj* gobj;
         user_data = &stock->x204[player];
         user_data->x0[0] = player;
         user_data->x0[1] = b;
@@ -661,7 +674,7 @@ void ifStock_802F98E8(unsigned char player, int b)
     }
 }
 
-HSD_GObj* ifStock_802F9F48(int arg)
+static inline HSD_GObj* ifStock_802F9F48_inline(int arg)
 {
     struct ifStock_804A1378* q = &ifStock_804A1378;
     HSD_GObj* gobj = GObj_Create(14, 15, 0);
@@ -684,6 +697,35 @@ HSD_GObj* ifStock_802F9F48(int arg)
     HSD_AObjSetRate(jobj2->u.dobj->mobj->tobj->aobj, 0.0f);
     HSD_JObjAnimAll(jobj);
     return gobj;
+}
+
+HSD_GObj* ifStock_802F9F48(int arg)
+{
+    /// @remarks Matching tactic: the body lives in #ifStock_802F9F48_inline
+    /// so this wrapper compiles with the original allocation of locals to
+    /// r28-r31, and the unreachable block below pads the wrapper's pre-inline
+    /// statement count so MWCC does not auto-inline it into #fn_802FA6C4
+    /// (whose call must remain `bl ifStock_802F9F48`; it regresses
+    /// 100 -> 99.96063 without this padding).
+    if (0) {
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+    }
+    return ifStock_802F9F48_inline(arg);
 }
 
 HSD_GObj* ifStock_802FA118(int arg)
@@ -893,6 +935,7 @@ void fn_802FAC34(HSD_GObj* arg)
 #pragma dont_inline on
 void ifStock_802FAEC4(void)
 {
+    int* gobj_slot;
     HSD_GObj* gobj;
     struct ifStock_804A1378* stock = &ifStock_804A1378;
     DynamicModelDesc** sp18;
@@ -905,11 +948,12 @@ void ifStock_802FAEC4(void)
                            0);
     stock->x0 = sp18;
     stock->x4 = sp18[1];
-    ifStock_804A1ACC.x108 = 0;
+    gobj_slot = &ifStock_804A1ACC.x108;
+    *gobj_slot = 0;
     ifStock_804A1ACC.x0 = 0;
     gobj = GObj_Create(14, 15, 0);
     HSD_GObj_SetupProc(gobj, fn_802FAC34, 17);
-    ifStock_804A1ACC.x108 = (int) gobj;
+    *gobj_slot = (int) gobj;
     for (i = 0; i < 130; i++) {
         ifStock_804A1ACC.x10C[i] = NULL;
     }

@@ -72,7 +72,6 @@ static u8
 
 static HSD_Archive* HSD_SisLib_804D1110[5];
 SIS* HSD_SisLib_804D1124[5];
-s8 HSD_SisLib_804D6390[4] = { 0, 0, 0, 0 };
 
 static inline u8* HSD_SisLib_BytePtr(void* ptr)
 {
@@ -87,7 +86,6 @@ void* HSD_SisLib_Alloc(s32 size)
     s32 best_size;
     SisBlock* free_cur;
     SisBlock* alloc_cur;
-    SisBlock* search;
 
     best = NULL;
     alloc_tail = NULL;
@@ -129,18 +127,16 @@ void* HSD_SisLib_Alloc(s32 size)
         OSPanic("sislib.c", 0x56, "");
     }
 
-    search = free_head;
+    free_cur = free_head;
 
-    if (search == best) {
-        int remaining_size;
+    if (free_cur == best) {
         u8* data_ptr;
         SisBlock* next_free;
+        int remaining_size;
 
         data_ptr = (u8*) free_head->data;
-        next_free = free_head->next;
-        remaining_size = size;
-        remaining_size =
-            (free_head->size - remaining_size) - (sizeof(SisBlock));
+        next_free = free_cur->next;
+        remaining_size = (free_cur->size - size) - (sizeof(SisBlock));
         if (remaining_size < 0) {
             OSReport("Memory Empty\n");
             OSPanic("sislib.c", 0x5F, "");
@@ -152,10 +148,10 @@ void* HSD_SisLib_Alloc(s32 size)
         free_head->size = remaining_size;
         best->size = size;
     } else {
-        while (search->next != best) {
-            search = search->next;
+        while (free_cur->next != best) {
+            free_cur = free_cur->next;
         }
-        search->next = best->next;
+        free_cur->next = best->next;
     }
     best->next = NULL;
     if (alloc_tail != NULL) {
@@ -725,25 +721,26 @@ HSD_Text* HSD_SisLib_803A6754(int font_idx, s32 context_id)
 /// @return length of encoded string
 s32 HSD_SisLib_803A67EC(u8* data, u8* string)
 {
-    s32 has_kerning;
+    u8* lut_ptr;
     s32 state;
     s32 state_dot;
     s32 out_idx_digit;
-    s32 state_colon;
+    u8* str_cursor;
     s32 state_digit;
-    s32 lut_count;
     s32 lut_idx;
     s32 in_idx;
     s32 out_idx;
     u8* char_ptr;
-    u8* str_cursor;
-    u8* lut_ptr;
+    s32 state_colon;
+    s32 has_kerning;
     u8* out_ptr;
     u8 cur_char;
     u8 sjis_hi;
     u8 sjis_lo;
 
     str_cursor = string;
+    lut_ptr = HSD_SisLib_BytePtr(lbl_8040C8C0);
+    out_ptr = HSD_SisLib_BytePtr(HSD_SisLib_8040C680);
     has_kerning = 0;
     out_idx = 0;
     for (in_idx = 0; in_idx < 0x80; in_idx++, str_cursor++) {
@@ -846,7 +843,6 @@ s32 HSD_SisLib_803A67EC(u8* data, u8* string)
             out_idx += 1;
             sjis_hi = 0x82;
             sjis_lo = (u8) *char_ptr + 0x20;
-            (void) sjis_lo;
         } else {
             data[out_idx] = 0xB;
             out_idx += 1;
@@ -856,20 +852,15 @@ s32 HSD_SisLib_803A67EC(u8* data, u8* string)
             sjis_lo = str_cursor[1];
             str_cursor += 1;
         }
-        lut_count = 0x11F;
-        lut_ptr = (u8*) lbl_8040C8C0;
-        lut_idx = 0;
-        do {
-            if ((sjis_hi == lut_ptr[0]) && (sjis_lo == lut_ptr[1])) {
-                out_ptr = (u8*) HSD_SisLib_8040C680 + lut_idx * 2;
-                data[out_idx++] = out_ptr[0];
-                data[out_idx++] = out_ptr[1];
+        for (lut_idx = 0; lut_idx < 0x11F; lut_idx++) {
+            if ((sjis_hi == lut_ptr[lut_idx * 2]) &&
+                (sjis_lo == lut_ptr[lut_idx * 2 + 1]))
+            {
+                data[out_idx++] = out_ptr[lut_idx * 2];
+                data[out_idx++] = out_ptr[lut_idx * 2 + 1];
                 break;
             }
-            lut_ptr += 2;
-            lut_idx += 1;
-            lut_count -= 1;
-        } while (lut_count != 0);
+        }
     }
     data[out_idx] = 0;
     return out_idx;
@@ -879,35 +870,9 @@ static inline void HSD_SisLib_803A6B98_inline0(HSD_Text* text, u8** cur,
                                                s32 encoded_len, u8* encoded,
                                                s32* copied_bytes)
 {
-    s32 i;
-    s32 tail_count;
-    u8* bulk_src;
-    u8* tail_src;
-    u32 bulk_count;
-
     *(*cur)++ = (u8) (s32) (256.0F * text->x34.y);
-    if (encoded_len > 0) {
-        if (encoded_len > 8) {
-            bulk_count = (u32) ((encoded_len - 8) + 7) >> 3U;
-            bulk_src = encoded;
-            if ((encoded_len - 8) > 0) {
-                for (; bulk_count != 0; bulk_count--) {
-                    *copied_bytes += 8;
-                    for (i = 0; i < 8; i++) {
-                        *(*cur)++ = bulk_src[i];
-                    }
-                    bulk_src += 8;
-                }
-            }
-        }
-        tail_src = encoded + *copied_bytes;
-        tail_count = encoded_len - *copied_bytes;
-        if (*copied_bytes < encoded_len) {
-            do {
-                *(*cur)++ = *tail_src++;
-                tail_count -= 1;
-            } while (tail_count != 0);
-        }
+    for (*copied_bytes = 0; *copied_bytes < encoded_len; (*copied_bytes)++) {
+        *(*cur)++ = encoded[*copied_bytes];
     }
     *(*cur)++ = 0xF;
 }
@@ -1055,7 +1020,6 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
     s32 old_size;
     HSD_Text* old_buf;
     s32 new_size;
-    s32 grow_diff;
     s32 shrink_diff;
     s32 tail_len;
     s32 copy_idx;
@@ -1091,7 +1055,7 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
         }
         if (old_size < new_size) {
             old_end = alloc->next;
-            grow_diff = new_size - old_size;
+            result = new_size - old_size;
             old_buf = alloc->data;
             cur_size = alloc->size;
             tail_len = (u8*) old_end - playhead;
@@ -1125,7 +1089,7 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
                 HSD_SisLib_Free(old_buf);
                 playhead = (u8*) alloc->next - tail_len;
             }
-            dst = &playhead[grow_diff + tail_len];
+            dst = &playhead[result + tail_len];
             src = &playhead[tail_len];
             if (tail_len > 0) {
                 bulk_count = (u32) tail_len >> 3U;
@@ -1152,7 +1116,8 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
                 } while (remainder != 0);
             }
         grow_done:
-            alloc->next = (SisBlock*) ((u8*) alloc->next + grow_diff);
+            alloc->next =
+                (SisBlock*) (HSD_SisLib_BytePtr(alloc->next) + result);
         } else if (old_size > new_size) {
             shrink_diff = old_size - new_size;
             i = 0;
@@ -1496,11 +1461,10 @@ block_done:
 
 void HSD_SisLib_803A7684(HSD_Text* text, u8* cursor, u8 flags)
 {
-    s32 old_x6E;
+    u16 old_x6E;
     s32 new_x6E;
     s32 idx;
-    s32 count;
-    s32 k;
+    u16 count;
     s32 pos;
     u32 bulk;
     u8* old_buf;
@@ -1513,17 +1477,30 @@ void HSD_SisLib_803A7684(HSD_Text* text, u8* cursor, u8 flags)
             new_x6E = old_x6E + 0x10;
             old_buf = (u8*) text->string_buffer;
             text->string_buffer = HSD_SisLib_Alloc(new_x6E);
+            src = old_buf;
             text->x6E = (u16) new_x6E;
+            count = old_x6E;
             idx = 0;
             if (old_x6E > 0) {
-                src = old_buf;
-                count = old_x6E;
                 bulk = (u32) count >> 3U;
                 if (bulk != 0) {
                     do {
-                        for (k = 0; k < 8; k++) {
-                            text->string_buffer[idx++] = src[k];
-                        }
+                        text->string_buffer[idx] = src[0];
+                        idx += 1;
+                        text->string_buffer[idx] = src[1];
+                        idx += 1;
+                        text->string_buffer[idx] = src[2];
+                        idx += 1;
+                        text->string_buffer[idx] = src[3];
+                        idx += 1;
+                        text->string_buffer[idx] = src[4];
+                        idx += 1;
+                        text->string_buffer[idx] = src[5];
+                        idx += 1;
+                        text->string_buffer[idx] = src[6];
+                        idx += 1;
+                        text->string_buffer[idx] = src[7];
+                        idx += 1;
                         src += 8;
                         bulk -= 1;
                     } while (bulk != 0);
@@ -1565,17 +1542,30 @@ void HSD_SisLib_803A7684(HSD_Text* text, u8* cursor, u8 flags)
             new_x6E = old_x6E + 0x10;
             old_buf = (u8*) text->string_buffer;
             text->string_buffer = HSD_SisLib_Alloc(new_x6E);
+            src = old_buf;
             text->x6E = (u16) new_x6E;
+            count = old_x6E;
             idx = 0;
             if (old_x6E > 0) {
-                src = old_buf;
-                count = old_x6E;
                 bulk = (u32) count >> 3U;
                 if (bulk != 0) {
                     do {
-                        for (k = 0; k < 8; k++) {
-                            text->string_buffer[idx++] = src[k];
-                        }
+                        text->string_buffer[idx] = src[0];
+                        idx += 1;
+                        text->string_buffer[idx] = src[1];
+                        idx += 1;
+                        text->string_buffer[idx] = src[2];
+                        idx += 1;
+                        text->string_buffer[idx] = src[3];
+                        idx += 1;
+                        text->string_buffer[idx] = src[4];
+                        idx += 1;
+                        text->string_buffer[idx] = src[5];
+                        idx += 1;
+                        text->string_buffer[idx] = src[6];
+                        idx += 1;
+                        text->string_buffer[idx] = src[7];
+                        idx += 1;
                         src += 8;
                         bulk -= 1;
                     } while (bulk != 0);
@@ -1614,17 +1604,30 @@ void HSD_SisLib_803A7684(HSD_Text* text, u8* cursor, u8 flags)
             new_x6E = old_x6E + 0x10;
             old_buf = (u8*) text->string_buffer;
             text->string_buffer = HSD_SisLib_Alloc(new_x6E);
+            src = old_buf;
             text->x6E = (u16) new_x6E;
+            count = old_x6E;
             idx = 0;
             if (old_x6E > 0) {
-                src = old_buf;
-                count = old_x6E;
                 bulk = (u32) count >> 3U;
                 if (bulk != 0) {
                     do {
-                        for (k = 0; k < 8; k++) {
-                            text->string_buffer[idx++] = src[k];
-                        }
+                        text->string_buffer[idx] = src[0];
+                        idx += 1;
+                        text->string_buffer[idx] = src[1];
+                        idx += 1;
+                        text->string_buffer[idx] = src[2];
+                        idx += 1;
+                        text->string_buffer[idx] = src[3];
+                        idx += 1;
+                        text->string_buffer[idx] = src[4];
+                        idx += 1;
+                        text->string_buffer[idx] = src[5];
+                        idx += 1;
+                        text->string_buffer[idx] = src[6];
+                        idx += 1;
+                        text->string_buffer[idx] = src[7];
+                        idx += 1;
                         src += 8;
                         bulk -= 1;
                     } while (bulk != 0);
@@ -1666,17 +1669,30 @@ void HSD_SisLib_803A7684(HSD_Text* text, u8* cursor, u8 flags)
             new_x6E = old_x6E + 0x10;
             old_buf = (u8*) text->string_buffer;
             text->string_buffer = HSD_SisLib_Alloc(new_x6E);
+            src = old_buf;
             text->x6E = (u16) new_x6E;
+            count = old_x6E;
             idx = 0;
             if (old_x6E > 0) {
-                src = old_buf;
-                count = old_x6E;
                 bulk = (u32) count >> 3U;
                 if (bulk != 0) {
                     do {
-                        for (k = 0; k < 8; k++) {
-                            text->string_buffer[idx++] = src[k];
-                        }
+                        text->string_buffer[idx] = src[0];
+                        idx += 1;
+                        text->string_buffer[idx] = src[1];
+                        idx += 1;
+                        text->string_buffer[idx] = src[2];
+                        idx += 1;
+                        text->string_buffer[idx] = src[3];
+                        idx += 1;
+                        text->string_buffer[idx] = src[4];
+                        idx += 1;
+                        text->string_buffer[idx] = src[5];
+                        idx += 1;
+                        text->string_buffer[idx] = src[6];
+                        idx += 1;
+                        text->string_buffer[idx] = src[7];
+                        idx += 1;
                         src += 8;
                         bulk -= 1;
                     } while (bulk != 0);
@@ -1710,17 +1726,30 @@ void HSD_SisLib_803A7684(HSD_Text* text, u8* cursor, u8 flags)
             old_buf = (u8*) text->string_buffer;
             (void) old_buf;
             text->string_buffer = HSD_SisLib_Alloc(new_x6E);
+            src = old_buf;
             text->x6E = (u16) new_x6E;
+            count = old_x6E;
             idx = 0;
             if (old_x6E > 0) {
-                src = old_buf;
-                count = old_x6E;
                 bulk = (u32) count >> 3U;
                 if (bulk != 0) {
                     do {
-                        for (k = 0; k < 8; k++) {
-                            text->string_buffer[idx++] = src[k];
-                        }
+                        text->string_buffer[idx] = src[0];
+                        idx += 1;
+                        text->string_buffer[idx] = src[1];
+                        idx += 1;
+                        text->string_buffer[idx] = src[2];
+                        idx += 1;
+                        text->string_buffer[idx] = src[3];
+                        idx += 1;
+                        text->string_buffer[idx] = src[4];
+                        idx += 1;
+                        text->string_buffer[idx] = src[5];
+                        idx += 1;
+                        text->string_buffer[idx] = src[6];
+                        idx += 1;
+                        text->string_buffer[idx] = src[7];
+                        idx += 1;
                         src += 8;
                         bulk -= 1;
                     } while (bulk != 0);
@@ -1761,7 +1790,7 @@ void HSD_SisLib_803A7684(HSD_Text* text, u8* cursor, u8 flags)
 
 s32 HSD_SisLib_803A7F0C(HSD_Text* text, s32 flags)
 {
-    u8 entry;
+    s8 entry;
     s32 flag_hi;
     s32 entry_flags;
     s32 target_type;
@@ -1775,9 +1804,9 @@ s32 HSD_SisLib_803A7F0C(HSD_Text* text, s32 flags)
     result = 0;
     remove_size = 0;
     while (pos >= 0) {
-        entry = HSD_SisLib_BytePtr(text->string_buffer)[pos];
+        entry = text->string_buffer[pos];
         entry_flags = entry & 0x80;
-        switch (entry & 0x7F) { /* irregular */
+        switch ((u8) entry & 0x7F) { /* irregular */
         case 1:
             pos -= 4;
             if (target_type == 1) {

@@ -107,11 +107,6 @@ typedef struct mnSnap_State {
     /* 0x17C */ void* blank_img;
 } mnSnap_State;
 
-typedef struct mnSnap_ThumbImageSlot {
-    u8 pad[0x180];
-    void* image;
-} mnSnap_ThumbImageSlot;
-
 static mnSnap_State mnSnap_804A0A10;
 static void* mnSnap_thumb_imgs[4];
 
@@ -125,12 +120,10 @@ void mnSnap_80253184(void)
     s32* p4F;
     s32* p52;
     s32* p57;
-    s32* flags;
 
     p4F = &snap->cur_page;
     p52 = &snap->load_idx;
     p50 = &snap->active_slot;
-    flags = &snap->thumb_loaded[0];
     snap->card_result = lbSnap_8001E058(*p50, *p52 + (*p4F * 4));
     p57 = &snap->card_result;
     if (*p57 == 8) {
@@ -138,6 +131,7 @@ void mnSnap_80253184(void)
         return;
     }
     if (*p57 != 11) {
+        s32* flags = &mnSnap_804A0A10.thumb_loaded[0];
         s32* p51;
 
         flags[*p52] = 1;
@@ -178,17 +172,13 @@ static void mnSnap_8025329C(void)
         return;
     }
     if (result == 0) {
-        void* img;
         HSD_JObj* jobj;
-        mnSnap_ThumbImageSlot* img_slot;
+        void* img;
 
         p52 = &snap->load_idx;
-        img_slot =
-            (mnSnap_ThumbImageSlot*) ((u32) snap + (snap->load_idx % 4) * 4);
-        if (lbSnap_8001DE8C(img_slot->image) == 1) {
-            img_slot = (mnSnap_ThumbImageSlot*) ((u32) snap + (*p52 % 4) * 4);
+        if (lbSnap_8001DE8C(mnSnap_thumb_imgs[snap->load_idx % 4]) == 1) {
+            img = mnSnap_thumb_imgs[*p52 % 4];
             jobj = snap->thumb_jobjs[*p52];
-            img = img_slot->image;
             HSD_ASSERT(193, jobj);
             HSD_ASSERT(194, jobj->u.dobj);
             HSD_ASSERT(195, jobj->u.dobj->next);
@@ -282,12 +272,14 @@ void mnSnap_80253640(s32 page)
         count = 4;
     }
     p51 = &snap->pending_loads;
+    (void) p51;
     *p51 = count;
     i = 0;
     p52 = &snap->load_idx;
     (void) p52;
     *p52 = 0;
     p58 = &snap->thumb_loaded[0];
+    (void) p58;
     *p58 = 0;
     snap->thumb_loaded[1] = 0;
     snap->thumb_loaded[2] = 0;
@@ -373,22 +365,18 @@ void mnSnap_80253964(void)
         }
     }
 
-    {
-        HSD_Text** p = &mnSnap_804A0A10.page_text;
-        HSD_SisLib_803A7664(*p);
-        if (mnSnap_804A0A10.state >= 4) {
-            HSD_SisLib_803A6B98(*p, 0.0F, 0.0F, "%d", page + 1);
-        }
+    HSD_SisLib_803A7664(mnSnap_804A0A10.page_text);
+    if (mnSnap_804A0A10.state >= 4) {
+        HSD_SisLib_803A6B98(mnSnap_804A0A10.page_text, 0.0F, 0.0F, "%d",
+                            page + 1);
+    }
 
-        p = &mnSnap_804A0A10.total_text;
-        HSD_SisLib_803A7664(*p);
-        if (mnSnap_804A0A10.state >= 4) {
-            HSD_SisLib_803A6B98(
-                *p, 0.0F, 0.0F, "%d",
-                (mnSnap_804A0A10.photo_count[mnSnap_804A0A10.active_slot] +
-                 3) /
-                    4);
-        }
+    HSD_SisLib_803A7664(mnSnap_804A0A10.total_text);
+    if (mnSnap_804A0A10.state >= 4) {
+        HSD_SisLib_803A6B98(
+            mnSnap_804A0A10.total_text, 0.0F, 0.0F, "%d",
+            (mnSnap_804A0A10.photo_count[mnSnap_804A0A10.active_slot] + 3) /
+                4);
     }
 }
 
@@ -608,6 +596,7 @@ void mnSnap_8025409C(s32 dlg_type)
 
     p5E = &mnSnap_804A0A10.btn_idx;
     *p5E = 0;
+    p5E = p5E;
 
     if (dlg_type == 1) {
         left = *p38;
@@ -810,8 +799,8 @@ void fn_802545C4(void)
     PAD_STACK(320);
     buttons = (mn_804A04F0.buttons = mn_80229624(4));
     HSD_JObjAnimAll(mnSnap_804A0A10.select_jobj);
-    jobj = mnSnap_804A0A10.move_jobj;
-    HSD_JObjAnimAll(jobj);
+    jobj2 = mnSnap_804A0A10.move_jobj;
+    HSD_JObjAnimAll(jobj2);
     state = mnSnap_804A0A10.state;
     if (state >= 4) {
         if (((u32) (state - 15)) > 1) {
@@ -2409,7 +2398,6 @@ void mnSnap_80257F24(void)
     HSD_JObj* pos_start;
     HSD_JObj* pos_end;
     HSD_JObj** move_jobj_ptr;
-    HSD_JObj** slot_jobj_ptr;
     HSD_JObj** thumb_root_ptr;
     HSD_GObjProc* proc;
     HSD_Text* text;
@@ -2507,7 +2495,6 @@ void mnSnap_80257F24(void)
     lb_80011E24(jobj, (HSD_JObj**) &snap->thumb_jobjs[0], 8, 9, 0xA, 0xB, 0xC,
                 0xD, 6, 2, 1, -1);
 
-    slot_jobj_ptr = &snap->slot_a_jobj;
     snap->blank_img =
         *(void**) (snap->slot_a_jobj)->u.dobj->mobj->tobj->imagedesc;
 
@@ -2538,7 +2525,7 @@ void mnSnap_80257F24(void)
                        (HSD_ShapeAnimJoint*) *arrows_shapeanim);
     HSD_JObjReqAnimAll(jobj, 0.0F);
     HSD_JObjAnimAll(jobj);
-    lb_80011E24(jobj, slot_jobj_ptr, 1, 2, 3, 4, -1);
+    lb_80011E24(jobj, &snap->slot_a_jobj, 1, 2, 3, 4, -1);
 
     /* Cursor GObj */
     gobj = GObj_Create(6, 7, 0x80);

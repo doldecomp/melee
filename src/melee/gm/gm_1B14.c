@@ -554,7 +554,6 @@ void gm_801B1C24(GameScene* arg0)
     VsModeData* vs = &gmMainLib_804D3EE0->unk_D10;
     CSSData* css = gm_801A4284(arg0);
     s32 i;
-    u64 mask;
     struct GameCache* cache;
     s32 j;
     PAD_STACK(0x10);
@@ -601,13 +600,17 @@ void gm_801B1C24(GameScene* arg0)
     cache->entries[3].char_id = (s8) vs->data.players[3].c_kind;
     cache->entries[3].color = vs->data.players[3].color;
     lbDvd_80018254();
-    mask = 0;
-    for (i = 0; i < 4; i++) {
-        mask |= lbAudioAx_80026E84(vs->data.players[i].c_kind);
+    {
+        u64 mask;
+        s32 k;
+        mask = 0;
+        for (k = 0; k < 4; k++) {
+            mask |= lbAudioAx_80026E84(vs->data.players[k].c_kind);
+        }
+        lbAudioAx_80026F2C(0x14);
+        lbAudioAx_8002702C(4, mask);
+        lbAudioAx_80027168();
     }
-    lbAudioAx_80026F2C(0x14);
-    lbAudioAx_8002702C(4, mask);
-    lbAudioAx_80027168();
 }
 
 void gm_801B1EB8(GameScene* arg0)

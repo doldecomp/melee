@@ -395,6 +395,16 @@ void gm_801A6EE4(void)
     }
 }
 
+static inline void gm_801A7070_InitTextures(void)
+{
+    int i;
+
+    for (i = 0; i < 2; i++) {
+        gm_804809D0[i].image_ptr = NULL;
+        lb_800121FC(&gm_804809D0[i], 0x1EA, 0x1E0, 5, 0);
+    }
+}
+
 void gm_801A7070_OnEnter(void* unused)
 {
     s32 temp_r29;
@@ -421,7 +431,6 @@ void gm_801A7070_OnEnter(void* unused)
     f32 temp_f31_8;
 
     HSD_JObj* temp_r3_8;
-    int i;
     HSD_GObj* gobj;
     HSD_LObj* lobj;
     PAD_STACK(108);
@@ -466,10 +475,7 @@ void gm_801A7070_OnEnter(void* unused)
     GObj_SetupGXLinkMax(temp_r27_3, HSD_SObjLib_803A54EC, 9);
     temp_r27_3->gxlink_prios = 0x200;
 
-    for (i = 0; i < 2; i++) {
-        gm_804809D0[i].image_ptr = NULL;
-        lb_800121FC(&gm_804809D0[i], 0x1EA, 0x1E0, 5, 0);
-    }
+    gm_801A7070_InitTextures();
 
     temp_r3 = GObj_Create(0xE, 0xD, 0);
     gm_804D677C = temp_r3;

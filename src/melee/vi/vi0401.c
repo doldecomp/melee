@@ -132,8 +132,11 @@ void un_8031D288_OnEnter(void* data)
     HSD_GObj* light_gobj;
     HSD_Fog* fog;
     HSD_JObj* jobj;
+    HSD_GObj* gobj2;
     int i;
     HSD_GObj* gobj;
+    HSD_GObj* cam_gobj2;
+    HSD_JObj* jobj2;
     ViCharaDesc* desc;
 
     desc = (ViCharaDesc*) data;
@@ -189,23 +192,23 @@ void un_8031D288_OnEnter(void* data)
         }
     }
 
-    cam_gobj = GObj_Create(0x13, 0x14, 0);
+    cam_gobj2 = GObj_Create(0x13, 0x14, 0);
     cobj =
         lb_80013B14((HSD_CameraDescPerspective*) un_804D6F50->cameras->desc);
-    HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_804D784B, cobj);
-    GObj_SetupGXLinkMax(cam_gobj, HSD_GObj_803910D8, 0x8);
-    cam_gobj->gxlink_prios = 0x801;
+    HSD_GObjObject_80390A70(cam_gobj2, HSD_GObj_804D784B, cobj);
+    GObj_SetupGXLinkMax(cam_gobj2, HSD_GObj_803910D8, 0x8);
+    cam_gobj2->gxlink_prios = 0x801;
 
     for (i = 0; un_804D6F4C->models[i] != NULL; i++) {
-        gobj = GObj_Create(0xE, 0xF, 0);
-        jobj = HSD_JObjLoadJoint(un_804D6F4C->models[i]->joint);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
-        GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
-        gm_8016895C(jobj, un_804D6F4C->models[i],
+        gobj2 = GObj_Create(0xE, 0xF, 0);
+        jobj2 = HSD_JObjLoadJoint(un_804D6F4C->models[i]->joint);
+        HSD_GObjObject_80390A70(gobj2, HSD_GObj_804D7849, jobj2);
+        GObj_SetupGXLink(gobj2, HSD_GObj_JObjCallback, 0xB, 0);
+        gm_8016895C(jobj2, un_804D6F4C->models[i],
                     (un_804D6F4C->models[i] != NULL) * 0);
-        HSD_JObjReqAnimAll(jobj, 0.0f);
-        HSD_JObjAnimAll(jobj);
-        HSD_GObj_SetupProc(gobj, fn_8031D168, 0x17);
+        HSD_JObjReqAnimAll(jobj2, 0.0f);
+        HSD_JObjAnimAll(jobj2);
+        HSD_GObj_SetupProc(gobj2, fn_8031D168, 0x17);
     }
     un_8031D030(desc->p1_char_index, desc->p1_costume_index);
     vi_8031C9B4(1, 0);

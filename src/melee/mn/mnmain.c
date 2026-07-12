@@ -1480,8 +1480,12 @@ HSD_GObj* mn_8022B3A0(u8 state)
             jobj = sp2C[1];
             HSD_JObjReqAnimAll(jobj, hovered_selection == i);
             HSD_JObjAnimAll(jobj);
-            HSD_JObjReqAnim(
-                jobj, mn_803EB6B0[mn_804A04F0.cur_menu].start_frame + 2 * i);
+            {
+                float offset = 2 * i;
+                float start_frame =
+                    mn_803EB6B0[mn_804A04F0.cur_menu].start_frame;
+                HSD_JObjReqAnim(jobj, start_frame + offset);
+            }
             mn_8022F3D8(jobj, 0xC, TOBJ_MASK);
             mn_8022F3D8(jobj, 0xD, TOBJ_MASK);
             mn_8022F3D8(jobj, 0xE, TOBJ_MASK);

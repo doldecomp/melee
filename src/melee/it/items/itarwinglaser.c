@@ -263,7 +263,10 @@ void it_802E7654(Item_GObj* owner, HSD_JObj* bone, Vec3* target, s32 type,
     spawn.x0_parent_gobj = NULL;
     spawn.x44_flag.b0 = false;
     spawn.x40 = 0;
-    new_gobj = Item_80268B18(&spawn);
+    {
+        SpawnItem* spawn_ptr = &spawn;
+        new_gobj = Item_80268B18(spawn_ptr);
+    }
     if (new_gobj != NULL) {
         ip = GET_ITEM(new_gobj);
         jobj = GET_JOBJ(new_gobj);

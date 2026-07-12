@@ -91,87 +91,69 @@ int lbAudioAx_80023220(int idx)
 void fn_80023254(s32 arg0)
 {
     int local_arr[0x38];
-    int* arr_b44;
-    int* init_b44;
-    int* local_ptr;
-    s8(*arr_5d0)[4];
-    int (*arr_4e4)[2];
+    int* list = lbl_80433B44;
+    int* init;
+    int* used;
+    s8* type;
+    int* priority;
     int count;
-    int j;
-    int n;
-    int* shift_ptr;
+    int index;
+    int* shift;
     int i;
     char* base;
 
     PAD_STACK(8);
 
-    arr_b44 = lbl_80433B44;
-    init_b44 = lbl_80433B44;
-    local_ptr = local_arr;
+    init = lbl_80433B44;
+    used = local_arr;
+    base = lbl_803BB300;
     count = 0;
-    for (i = 0; i < 7; i++, init_b44 += 8, local_ptr += 8) {
-        init_b44[0] = 0x37;
-        local_ptr[0] = 0;
-        init_b44[1] = 0x37;
-        local_ptr[1] = 0;
-        init_b44[2] = 0x37;
-        local_ptr[2] = 0;
-        init_b44[3] = 0x37;
-        local_ptr[3] = 0;
-        init_b44[4] = 0x37;
-        local_ptr[4] = 0;
-        init_b44[5] = 0x37;
-        local_ptr[5] = 0;
-        init_b44[6] = 0x37;
-        local_ptr[6] = 0;
-        init_b44[7] = 0x37;
-        local_ptr[7] = 0;
+    for (i = 0; i < 7; i++, init += 8, used += 8) {
+        init[0] = 0x37;
+        used[0] = 0;
+        init[1] = 0x37;
+        used[1] = 0;
+        init[2] = 0x37;
+        used[2] = 0;
+        init[3] = 0x37;
+        used[3] = 0;
+        init[4] = 0x37;
+        used[4] = 0;
+        init[5] = 0x37;
+        used[5] = 0;
+        init[6] = 0x37;
+        used[6] = 0;
+        init[7] = 0x37;
+        used[7] = 0;
     }
 
-    init_b44 = lbl_80433B44;
-    base = lbl_803BB300;
-
     do {
-        local_ptr = local_arr;
-        arr_5d0 = (s8(*)[4])(base + 0x2D0);
-        arr_4e4 = (int (*)[2])(base + 0x11E4);
-        j = 0;
-
+        used = local_arr;
+        type = (s8*) (base + 0x2D0);
+        priority = (int*) (base + 0x11E4);
+        index = 0;
         do {
-            if (arg0 != (s8) (*arr_5d0)[0]) {
-                goto next;
-            }
-            if (*local_ptr != 0) {
-                goto next;
-            }
-
-            if ((u32) ((int (*)[2])(base + 0x11E4))[*arr_b44][0] >=
-                (u32) (*arr_4e4)[0])
+            if (arg0 == (s8) *type && *used == 0 &&
+                (u32) ((int (*)[2])(base + 0x11E4))[*list][0] <
+                    (u32) *priority)
             {
-                goto next;
-            }
-
-            shift_ptr = &init_b44[0x37];
-            if (count < 0x37) {
-                n = 0x37 - count;
-                for (; n != 0; n--) {
-                    shift_ptr[0] = shift_ptr[-1];
-                    shift_ptr--;
+                shift = &lbl_80433B44[0x37];
+                if (count < 0x37) {
+                    for (i = count; i < 0x37; i++) {
+                        shift[0] = shift[-1];
+                        shift--;
+                    }
                 }
+                *list = index;
+                *used = 1;
             }
-
-            *arr_b44 = j;
-            *local_ptr = 1;
-
-        next:
-            j++;
-            arr_5d0++;
-            local_ptr++;
-            arr_4e4++;
-        } while (j <= 0x37);
-
-        arr_b44++;
+            index++;
+            type += 4;
+            used++;
+            priority += 2;
+        } while (index <= 0x37);
         count++;
+        list++;
     } while (count <= 0x37);
 }
 
@@ -2235,7 +2217,6 @@ void fn_800269AC(void)
 s32 fn_80026C04(s32 arg0)
 {
     char* base = lbl_803BB300;
-    lbAudioAx_PoolAlloc* st = &lbl_80433710;
     s32 priority;
     s32 slot;
 
@@ -2246,8 +2227,7 @@ s32 fn_80026C04(s32 arg0)
             if (arg0 == *arr_354) {
                 lbl_80433984[i] = 1;
                 {
-                    char* ptr = base + (i << 3);
-                    s32 offset = *(s32*) (ptr + 0x11E4);
+                    s32 offset = ((s32(*)[2])(base + 0x11E4))[i][0];
                     lbl_804D644C -= offset;
                     lbl_804D6450 -= offset;
                     lbl_804D6448 += offset;
@@ -2493,7 +2473,7 @@ void lbAudioAx_80027648(void)
     }
 }
 
-s32 lbAudioAx_8002785C(void)
+void lbAudioAx_8002785C(void)
 {
     u64 result = 0;
     int i;
@@ -2537,7 +2517,6 @@ s32 lbAudioAx_8002785C(void)
             HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
         }
     }
-    return 0;
 }
 
 void lbAudioAx_80027AB0(s32 arg0)
@@ -2621,6 +2600,29 @@ void lbAudioAx_80027DBC(void)
     fn_800269AC();
 }
 
+static inline int lbAudioAx_OtherVoiceVolume(int voice, int carry)
+{
+    return voice == -1 ? carry : 0x7F;
+}
+
+static inline void lbAudioAx_80027DF8_inline(void)
+{
+    if (lbl_804D640C == 0) {
+        s32 i;
+        s32* t = lbl_80433710.x70;
+        s32* sl = lbl_80433710.x2C;
+        for (i = 0; i < 16; i++) {
+            if (t[i] > 0) {
+                (t[i])--;
+            }
+            if (t[i] <= 0) {
+                sl[i] = 0x83D60;
+                t[i] = 0;
+            }
+        }
+    }
+}
+
 void lbAudioAx_80027DF8(void)
 {
     s32 carry;
@@ -2665,12 +2667,8 @@ void lbAudioAx_80027DF8(void)
             carry = 0;
             lbl_804D6428 = carry;
             lbl_804D38F0 = -1;
-            if (lbl_804D38F4 == -1) {
-                lbl_804D642C = carry;
-            } else {
-                carry = 0x7F;
-                lbl_804D642C = carry;
-            }
+            carry = lbAudioAx_OtherVoiceVolume(lbl_804D38F4, carry);
+            lbl_804D642C = carry;
         }
     }
 
@@ -2698,14 +2696,10 @@ void lbAudioAx_80027DF8(void)
         fn_80023750(0x83D60, lbl_804D642C, 0x40, 6, 4);
         {
             carry = 0;
-            lbl_804D642C = 0;
+            lbl_804D642C = carry;
             lbl_804D38F4 = -1;
-            if (lbl_804D38F0 == -1) {
-                lbl_804D6428 = carry;
-            } else {
-                carry = 0x7F;
-                lbl_804D6428 = carry;
-            }
+            carry = lbAudioAx_OtherVoiceVolume(lbl_804D38F0, carry);
+            lbl_804D6428 = carry;
         }
     }
 
@@ -2733,20 +2727,7 @@ void lbAudioAx_80027DF8(void)
         return;
     }
 
-    if (lbl_804D640C == 0) {
-        s32 i;
-        s32* t = lbl_80433710.x70;
-        s32* sl = lbl_80433710.x2C;
-        for (i = 0; i < 16; i++) {
-            if (t[i] > 0) {
-                (t[i])--;
-            }
-            if (t[i] <= 0) {
-                sl[i] = 0x83D60;
-                t[i] = 0;
-            }
-        }
-    }
+    lbAudioAx_80027DF8_inline();
 }
 
 void lbAudioAx_8002835C(void)

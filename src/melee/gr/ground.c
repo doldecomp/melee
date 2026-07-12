@@ -1163,6 +1163,11 @@ typedef struct LightOverrideEntry {
     /* 0x5 */ u8 _pad[3];
 } LightOverrideEntry;
 
+static inline HSD_LightDesc* get_light_desc_inline(LightList** list)
+{
+    return *(HSD_LightDesc**) *list;
+}
+
 LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lightset)
 {
     LightList** out;
@@ -1213,8 +1218,10 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lightset)
 
     out = lightset;
     while (*out != NULL) {
-        desc = *(HSD_LightDesc**) *out;
-        if (desc->flags & 3) {
+        u16* flags;
+        desc = get_light_desc_inline(out);
+        flags = &desc->flags;
+        if (*flags & 3) {
             dat = archive->unk4;
             (void) dat;
             count = dat->unk1C;
@@ -1240,9 +1247,9 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lightset)
                 out--;
             } else {
                 if (b6) {
-                    desc->flags |= 4;
+                    *flags |= 4;
                 } else {
-                    desc->flags &= ~4;
+                    *flags &= ~4;
                 }
                 if (b7) {
                     (*(HSD_LightDesc**) *out)->flags |= 8;
@@ -1897,6 +1904,7 @@ void Ground_801C34AC(s32 map_id, HSD_JObj* root, struct HSD_Joint* joint)
     UnkStageDat* stage_dat;
     UnkArchiveStruct* archive;
     int entry_count;
+    int i;
     struct {
         void* joint;
         s16* pairs;
@@ -1907,7 +1915,6 @@ void Ground_801C34AC(s32 map_id, HSD_JObj* root, struct HSD_Joint* joint)
     int prev_index;
     int jobj_index;
     int target;
-    int i;
     int j;
 
     jobj = root;
@@ -1926,14 +1933,17 @@ void Ground_801C34AC(s32 map_id, HSD_JObj* root, struct HSD_Joint* joint)
     if (entry_count == 0) {
         return;
     }
+    i = 0;
     entry = stage_dat->unk0;
-    for (i = 0; i < entry_count; i++, entry++) {
+    while (1) {
+        if (i >= entry_count) {
+            return;
+        }
         if (entry->joint == joint) {
             break;
         }
-    }
-    if (i >= entry_count) {
-        return;
+        entry++;
+        i++;
     }
     count = entry->pair_count;
     stageinfo = &stage_info;
@@ -1950,7 +1960,7 @@ void Ground_801C34AC(s32 map_id, HSD_JObj* root, struct HSD_Joint* joint)
             jobj_index = prev_index;
         }
         while (jobj != NULL) {
-            if (jobj_index == target) {
+            if (target == jobj_index) {
                 break;
             }
             if (!(jobj->flags & JOBJ_INSTANCE) &&

@@ -204,11 +204,10 @@ void fn_8001ECF4(THPDecComp* data, void* buf)
     u32 var_r25;
     u32 var_r24;
     u8* csizep;
-    PAD_STACK(8);
     width = data->width;
     height = data->height;
-    data->frame_buffers = (u32*) buf;
     y_size = width * height;
+    data->frame_buffers = (u32*) buf;
     count = data->unk_104;
     data->unk_64 = 0;
     uv_size = y_size >> 2U;
@@ -384,20 +383,18 @@ static inline u32 lbMthp_GetFrame(u32** rate_table, u32 counter)
     u32* rate_ptr = *rate_table;
     u32 frame = 0;
     u32 count;
-    u32 ticks;
     u32 total;
 
     if (rate_ptr != NULL) {
         for (;; rate_ptr += 2) {
             count = rate_ptr[0];
-            ticks = rate_ptr[1];
-            total = ticks * count;
+            total = count * rate_ptr[1];
             if (counter >= total) {
                 frame += count;
                 counter -= total;
                 continue;
             } else {
-                frame += counter / ticks;
+                frame += counter / rate_ptr[1];
                 break;
             }
         }
@@ -445,6 +442,8 @@ void lbMthp_8001F410(const char* filename, u32* rate_table, void* buf,
                      size_t heap_size, int loop)
 {
     size_t memoryRequired;
+    OSTime start;
+    OSTime period;
 
     HSD_ASSERT(833, !MoviePlayer.power);
     MoviePlayer.power = 1;
@@ -463,9 +462,9 @@ void lbMthp_8001F410(const char* filename, u32* rate_table, void* buf,
     MoviePlayer.unk_144 = 0;
     MoviePlayer.unk_148 = 1;
     OSCreateAlarm(&MoviePlayer.alarm);
-    OSSetPeriodicAlarm(
-        &MoviePlayer.alarm, __cvt_dbl_usll(OSSecondsToTicks(1.0f / 60)),
-        __cvt_dbl_usll(OSSecondsToTicks(1.0f / 60)), fn_8001F2A4);
+    period = __cvt_dbl_usll(OSSecondsToTicks(1.0f / 60));
+    start = __cvt_dbl_usll(OSSecondsToTicks(1.0f / 60));
+    OSSetPeriodicAlarm(&MoviePlayer.alarm, start, period, fn_8001F2A4);
 }
 
 void lbMthp_8001F578(void)

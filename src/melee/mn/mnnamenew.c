@@ -1,5 +1,7 @@
 #include "mnnamenew.h"
 
+#include "mnnamenew.static.h"
+
 #include "baselib/debug.h"
 #include "dolphin/gx/GXStruct.h"
 #include "gm/gm_1A3F.h"
@@ -30,6 +32,30 @@
 #include <dolphin/os.h>
 typedef char* GlyphRow[4];
 
+/// Glyph strings in the keyboard tables are read through
+/// mnNameNew_NullCharacter, which this translation unit declares
+/// volatile, so the tables store pointers to volatile characters.
+typedef volatile char GlyphChar;
+
+/// Maps keyboard cursor positions to jobj indices and glyph strings.
+/// Mirrors the key_jobj_ids/x34/xFC/character_bytes fields of
+/// MnNameNewDataLayout (data object at 0x803EDA7C).
+typedef struct MnNameNewKeyMap {
+    u16 key_jobj_ids[8];
+    GlyphChar* x34[50];
+    GlyphChar* xFC[50];
+    GlyphChar* character_bytes[50];
+} MnNameNewKeyMap;
+
+/// Lowercase/uppercase glyph variant rows for each key. Mirrors the
+/// lower_glyphs/upper_glyphs/x8CC fields of MnNameNewDataLayout (data
+/// object at 0x803EDCE4).
+typedef struct MnNameNewGlyphTable {
+    GlyphChar* lower_glyphs[50][4];
+    GlyphChar* upper_glyphs[50][4];
+    Vec3 x8CC;
+} MnNameNewGlyphTable;
+
 typedef struct MnNameNewDataLayout {
     AnimLoopSettings anim[3];
     u16 key_jobj_ids[8];
@@ -55,14 +81,12 @@ extern u8 mn_804D6BB4;
 extern u8 mn_804D6BB5;
 extern u8 mnNameNew_804D4F7C[4];
 extern char mnNameNew_SpaceCharacter[2];
-extern GlyphRow mnNameNew_803EDCE4[];
 extern void* mnNameNew_804A06F0[];
 extern void* mnNameNew_804A0700[];
 extern void* mnNameNew_804A0710[];
 extern void* mnNameNew_804A0720[];
 extern HSD_GObj* mnNameNew_804D6C08;
 
-extern u16 mnNameNew_803EDA7C[];
 extern StaticModelDesc MenMainBack_Top;
 extern StaticModelDesc MenMainPanel_Top;
 extern HSD_CObjDesc* MenMain_cam;
@@ -75,11 +99,259 @@ static AnimLoopSettings mnNameNew_803EDA58[3] = {
     { 0.0f, 10.0f, -0.1f },
 };
 
-extern char** mnNameNew_803EDA8C;
-extern char** mnNameNew_803EDB54;
-extern char** mnNameNew_803EDC1C;
-extern GlyphRow* mnNameNew_803EE004;
-extern Vec3 mnNameNew_803EE324;
+/// Contents restored from the target unit's .data section (symbols.txt:
+/// mnNameNew_KeyMap at 0x803EDA7C size 0x268, mnNameNew_GlyphTable at
+/// 0x803EDCE4 size 0x64C); see build/GALE01/asm/melee/mn/mnnamenew.s.
+static MnNameNewKeyMap mnNameNew_KeyMap = {
+    { 3, 10, 11, 7, 9, 8, 5, 5 },
+    { mnNameNew_804D4C14,       mnNameNew_804D4C18, mnNameNew_804D4C1C,
+      mnNameNew_804D4C20,       mnNameNew_804D4C24, mnNameNew_804D4C28,
+      mnNameNew_804D4C2C,       mnNameNew_804D4C30, mnNameNew_804D4C34,
+      mnNameNew_804D4C38,       mnNameNew_804D4C3C, mnNameNew_804D4C40,
+      mnNameNew_804D4C44,       mnNameNew_804D4C48, mnNameNew_804D4C4C,
+      mnNameNew_804D4C50,       mnNameNew_804D4C54, mnNameNew_804D4C58,
+      mnNameNew_804D4C5C,       mnNameNew_804D4C60, mnNameNew_804D4C64,
+      mnNameNew_804D4C68,       mnNameNew_804D4C6C, mnNameNew_804D4C70,
+      mnNameNew_804D4C74,       mnNameNew_804D4C78, mnNameNew_804D4C7C,
+      mnNameNew_804D4C80,       mnNameNew_804D4C84, mnNameNew_804D4C88,
+      mnNameNew_804D4C8C,       mnNameNew_804D4C90, mnNameNew_804D4C94,
+      mnNameNew_804D4C98,       mnNameNew_804D4C9C, mnNameNew_804D4CA0,
+      mnNameNew_804D4CA4,       mnNameNew_804D4CA8, mnNameNew_SpaceCharacter,
+      mnNameNew_SpaceCharacter, mnNameNew_804D4CB0, mnNameNew_804D4CB4,
+      mnNameNew_804D4CB8,       mnNameNew_804D4CBC, mnNameNew_804D4CC0,
+      mnNameNew_804D4CC4,       mnNameNew_804D4CC8, mnNameNew_804D4CCC,
+      mnNameNew_804D4CD0,       mnNameNew_804D4CD4 },
+    { mnNameNew_804D4CD8,       mnNameNew_804D4CDC, mnNameNew_804D4CE0,
+      mnNameNew_804D4CE4,       mnNameNew_804D4CE8, mnNameNew_804D4CEC,
+      mnNameNew_804D4CF0,       mnNameNew_804D4CF4, mnNameNew_804D4CF8,
+      mnNameNew_804D4CFC,       mnNameNew_804D4D00, mnNameNew_804D4D04,
+      mnNameNew_804D4D08,       mnNameNew_804D4D0C, mnNameNew_804D4D10,
+      mnNameNew_804D4D14,       mnNameNew_804D4D18, mnNameNew_804D4D1C,
+      mnNameNew_804D4D20,       mnNameNew_804D4D24, mnNameNew_804D4D28,
+      mnNameNew_804D4D2C,       mnNameNew_804D4D30, mnNameNew_804D4D34,
+      mnNameNew_804D4D38,       mnNameNew_804D4D3C, mnNameNew_804D4D40,
+      mnNameNew_804D4D44,       mnNameNew_804D4D48, mnNameNew_804D4D4C,
+      mnNameNew_804D4D50,       mnNameNew_804D4D54, mnNameNew_804D4D58,
+      mnNameNew_804D4D5C,       mnNameNew_804D4D60, mnNameNew_804D4D64,
+      mnNameNew_804D4D68,       mnNameNew_804D4D6C, mnNameNew_SpaceCharacter,
+      mnNameNew_SpaceCharacter, mnNameNew_804D4D70, mnNameNew_804D4D74,
+      mnNameNew_804D4D78,       mnNameNew_804D4D7C, mnNameNew_804D4D80,
+      mnNameNew_804D4D84,       mnNameNew_804D4D88, mnNameNew_804D4D8C,
+      mnNameNew_804D4CD0,       mnNameNew_804D4CD4 },
+    { mnNameNew_804D4D90,       mnNameNew_804D4D94,
+      mnNameNew_SpaceCharacter, mnNameNew_804D4D98,
+      mnNameNew_804D4D9C,       mnNameNew_804D4DA0,
+      mnNameNew_804D4DA4,       mnNameNew_SpaceCharacter,
+      mnNameNew_804D4DA8,       mnNameNew_804D4DAC,
+      mnNameNew_804D4DB0,       mnNameNew_804D4DB4,
+      mnNameNew_SpaceCharacter, mnNameNew_804D4DB8,
+      mnNameNew_804D4DBC,       mnNameNew_804D4DC0,
+      mnNameNew_804D4DC4,       mnNameNew_SpaceCharacter,
+      mnNameNew_804D4DC8,       mnNameNew_804D4DCC,
+      mnNameNew_804D4DD0,       mnNameNew_804D4DD4,
+      mnNameNew_804D4DD8,       mnNameNew_804D4DDC,
+      mnNameNew_804D4DE0,       mnNameNew_804D4DE4,
+      mnNameNew_804D4DE8,       mnNameNew_804D4DEC,
+      mnNameNew_804D4DF0,       mnNameNew_804D4DF4,
+      mnNameNew_804D4DF8,       mnNameNew_804D4DFC,
+      mnNameNew_804D4E00,       mnNameNew_804D4E04,
+      mnNameNew_804D4E08,       mnNameNew_804D4E0C,
+      mnNameNew_804D4E10,       mnNameNew_804D4E14,
+      mnNameNew_804D4E18,       mnNameNew_804D4E1C,
+      mnNameNew_804D4E20,       mnNameNew_804D4E24,
+      mnNameNew_804D4E28,       mnNameNew_804D4E2C,
+      mnNameNew_804D4E30,       mnNameNew_804D4E34,
+      mnNameNew_804D4E38,       mnNameNew_804D4E3C,
+      mnNameNew_804D4E40,       mnNameNew_804D4E44 },
+};
+
+static MnNameNewGlyphTable mnNameNew_GlyphTable = {
+    {
+        { mnNameNew_804D4C14, mnNameNew_804D4E48, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4C18, mnNameNew_804D4E50, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4C1C, mnNameNew_804D4E54, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4C20, mnNameNew_804D4E58, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4C24, mnNameNew_804D4E5C, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4C28, mnNameNew_804D4E60, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4C2C, mnNameNew_804D4E64, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4C30, mnNameNew_804D4E68, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4C34, mnNameNew_804D4E6C, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4C38, mnNameNew_804D4E70, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4C3C, mnNameNew_804D4E74, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4C40, mnNameNew_804D4E78, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4C44, mnNameNew_804D4E7C, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4C48, mnNameNew_804D4E80, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4C4C, mnNameNew_804D4E84, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4C50, mnNameNew_804D4E88, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4C54, mnNameNew_804D4E8C, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4C58, mnNameNew_804D4E90, mnNameNew_804D4E94,
+          &mnNameNew_NullCharacter },
+        { mnNameNew_804D4C5C, mnNameNew_804D4E98, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4C60, mnNameNew_804D4E9C, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4C64, &mnNameNew_NullCharacter,
+          &mnNameNew_NullCharacter, NULL },
+        { mnNameNew_804D4C68, &mnNameNew_NullCharacter,
+          &mnNameNew_NullCharacter, NULL },
+        { mnNameNew_804D4C6C, &mnNameNew_NullCharacter,
+          &mnNameNew_NullCharacter, NULL },
+        { mnNameNew_804D4C70, &mnNameNew_NullCharacter,
+          &mnNameNew_NullCharacter, NULL },
+        { mnNameNew_804D4C74, &mnNameNew_NullCharacter,
+          &mnNameNew_NullCharacter, NULL },
+        { mnNameNew_804D4C78, mnNameNew_804D4EA0, mnNameNew_804D4EA4,
+          &mnNameNew_NullCharacter },
+        { mnNameNew_804D4C7C, mnNameNew_804D4EA8, mnNameNew_804D4EAC,
+          &mnNameNew_NullCharacter },
+        { mnNameNew_804D4C80, mnNameNew_804D4EB0, mnNameNew_804D4EB4,
+          &mnNameNew_NullCharacter },
+        { mnNameNew_804D4C84, mnNameNew_804D4EB8, mnNameNew_804D4EBC,
+          &mnNameNew_NullCharacter },
+        { mnNameNew_804D4C88, mnNameNew_804D4EC0, mnNameNew_804D4EC4,
+          &mnNameNew_NullCharacter },
+        { mnNameNew_804D4C8C, &mnNameNew_NullCharacter,
+          &mnNameNew_NullCharacter, NULL },
+        { mnNameNew_804D4C90, &mnNameNew_NullCharacter,
+          &mnNameNew_NullCharacter, NULL },
+        { mnNameNew_804D4C94, &mnNameNew_NullCharacter,
+          &mnNameNew_NullCharacter, NULL },
+        { mnNameNew_804D4C98, &mnNameNew_NullCharacter,
+          &mnNameNew_NullCharacter, NULL },
+        { mnNameNew_804D4C9C, &mnNameNew_NullCharacter,
+          &mnNameNew_NullCharacter, NULL },
+        { mnNameNew_804D4CA0, mnNameNew_804D4EC8, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4CA4, mnNameNew_804D4ECC, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4CA8, mnNameNew_804D4ED0, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_SpaceCharacter, mnNameNew_804D4ED4,
+          &mnNameNew_NullCharacter, NULL },
+        { mnNameNew_SpaceCharacter, mnNameNew_804D4ED4,
+          &mnNameNew_NullCharacter, NULL },
+        { mnNameNew_804D4CB0, &mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4CB4, &mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4CB8, &mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4CBC, &mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4CC0, &mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4CC4, &mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4CC8, &mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4CCC, &mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4CD0, &mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4CD4, &mnNameNew_NullCharacter, NULL, NULL },
+    },
+    {
+        { mnNameNew_804D4CD8, mnNameNew_804D4ED8, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4CDC, mnNameNew_804D4EDC, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4CE0, mnNameNew_804D4EE0, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4CE4, mnNameNew_804D4EE4, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4CE8, mnNameNew_804D4EE8, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4CEC, mnNameNew_804D4EEC, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4CF0, mnNameNew_804D4EF0, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4CF4, mnNameNew_804D4EF4, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4CF8, mnNameNew_804D4EF8, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4CFC, mnNameNew_804D4EFC, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4D00, mnNameNew_804D4F00, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4D04, mnNameNew_804D4F04, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4D08, mnNameNew_804D4F08, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4D0C, mnNameNew_804D4F0C, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4D10, mnNameNew_804D4F10, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4D14, mnNameNew_804D4F14, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4D18, mnNameNew_804D4F18, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4D1C, mnNameNew_804D4F1C, mnNameNew_804D4F20,
+          &mnNameNew_NullCharacter },
+        { mnNameNew_804D4D20, mnNameNew_804D4F24, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4D24, mnNameNew_804D4F28, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4D28, &mnNameNew_NullCharacter,
+          &mnNameNew_NullCharacter, NULL },
+        { mnNameNew_804D4D2C, &mnNameNew_NullCharacter,
+          &mnNameNew_NullCharacter, NULL },
+        { mnNameNew_804D4D30, &mnNameNew_NullCharacter,
+          &mnNameNew_NullCharacter, NULL },
+        { mnNameNew_804D4D34, &mnNameNew_NullCharacter,
+          &mnNameNew_NullCharacter, NULL },
+        { mnNameNew_804D4D38, &mnNameNew_NullCharacter,
+          &mnNameNew_NullCharacter, NULL },
+        { mnNameNew_804D4D3C, mnNameNew_804D4F2C, mnNameNew_804D4F30,
+          &mnNameNew_NullCharacter },
+        { mnNameNew_804D4D40, mnNameNew_804D4F34, mnNameNew_804D4F38,
+          &mnNameNew_NullCharacter },
+        { mnNameNew_804D4D44, mnNameNew_804D4F3C, mnNameNew_804D4F40,
+          &mnNameNew_NullCharacter },
+        { mnNameNew_804D4D48, mnNameNew_804D4F44, mnNameNew_804D4F48,
+          &mnNameNew_NullCharacter },
+        { mnNameNew_804D4D4C, mnNameNew_804D4F4C, mnNameNew_804D4F50,
+          &mnNameNew_NullCharacter },
+        { mnNameNew_804D4D50, &mnNameNew_NullCharacter,
+          &mnNameNew_NullCharacter, NULL },
+        { mnNameNew_804D4D54, &mnNameNew_NullCharacter,
+          &mnNameNew_NullCharacter, NULL },
+        { mnNameNew_804D4D58, &mnNameNew_NullCharacter,
+          &mnNameNew_NullCharacter, NULL },
+        { mnNameNew_804D4D5C, &mnNameNew_NullCharacter,
+          &mnNameNew_NullCharacter, NULL },
+        { mnNameNew_804D4D60, &mnNameNew_NullCharacter,
+          &mnNameNew_NullCharacter, NULL },
+        { mnNameNew_804D4D64, mnNameNew_804D4F54, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4D68, mnNameNew_804D4F58, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4D6C, mnNameNew_804D4F5C, &mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_SpaceCharacter, mnNameNew_804D4ED4,
+          &mnNameNew_NullCharacter, NULL },
+        { mnNameNew_SpaceCharacter, mnNameNew_804D4ED4,
+          &mnNameNew_NullCharacter, NULL },
+        { mnNameNew_804D4D70, &mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4D74, &mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4D78, &mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4D7C, &mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4D80, &mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4D84, &mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4D88, &mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4D8C, &mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4F60, &mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4F64, &mnNameNew_NullCharacter, NULL, NULL },
+    },
+    { -0.8f, 0.4f, 0.0f },
+};
 
 static Vec3 mnNameNew_803EE330 = { -0.7f, 0.7f, 0.0f };
 
@@ -649,7 +921,7 @@ void mnNameNew_GlyphVariantInput(void)
     u16 old_hover;
     u8 old_sel;
     u8 cur_pos;
-    char** table;
+    GlyphChar** table;
     s32 total;
     s8 null_ch;
 
@@ -696,7 +968,7 @@ void mnNameNew_GlyphVariantInput(void)
             return;
         }
         null_ch = (s8) mnNameNew_NullCharacter;
-        table = (char**) &mnNameNew_803EDCE4[data->x1];
+        table = mnNameNew_GlyphTable.lower_glyphs[data->x1];
         while (null_ch != (s8) * *table) {
             table++;
             count++;
@@ -759,7 +1031,10 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
     PAD_STACK(12);
 
     name_text = mnNameNew_CurrentNameText;
-    data = ((HSD_GObj*) mnNameNew_804D6C08)->user_data;
+    {
+        NameNewEntry* entry = ((HSD_GObj*) mnNameNew_804D6C08)->user_data;
+        data = entry;
+    }
     layout = (MnNameNewDataLayout*) mnNameNew_803EDA58;
 
     if (data->variant_gobj != NULL) {
@@ -988,7 +1263,10 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 }
                 if (n != 0) {
                     lbAudioAx_80024030(1);
-                    CreateNameAtIndex((s32) data->name_index);
+                    {
+                        u8 name_index = data->name_index;
+                        CreateNameAtIndex((s32) name_index);
+                    }
                     WriteCharactersForNameAtIndex(data->name_index,
                                                   (s32) mn_802295AC());
                     mnNameNew_8023B224(1U);
@@ -1145,41 +1423,6 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
     }
 }
 #pragma pop
-
-static char mnNameNew_803EE35C[] = "Can't get user_data.\n";
-static char mnNameNew_803EE374[] = "mnnamenew.c";
-static char mnNameNew_803EE380[] = "user_data";
-static char mnNameNew_803EE38C[] = "MenMainBack_Top_joint";
-static char mnNameNew_803EE3A4[] = "MenMainBack_Top_animjoint";
-static char mnNameNew_803EE3C0[] = "MenMainBack_Top_matanim_joint";
-static char mnNameNew_803EE3E0[] = "MenMainBack_Top_shapeanim_joint";
-static char mnNameNew_803EE400[] = "ScMenMain_cam_int1_camera";
-static char mnNameNew_803EE41C[] = "ScMenMain_scene_lights";
-static char mnNameNew_803EE434[] = "ScMenMain_fog";
-static char mnNameNew_803EE444[] = "MenMainPanel_Top_joint";
-static char mnNameNew_803EE45C[] = "MenMainPanel_Top_animjoint";
-static char mnNameNew_803EE478[] = "MenMainPanel_Top_matanim_joint";
-static char mnNameNew_803EE498[] = "MenMainPanel_Top_shapeanim_joint";
-static char mnNameNew_803EE4BC[] = "MenMainConEtNw_Top_joint";
-static char mnNameNew_803EE4D8[] = "MenMainConEtNw_Top_animjoint";
-static char mnNameNew_803EE4F8[] = "MenMainConEtNw_Top_matanim_joint";
-static char mnNameNew_803EE51C[] = "MenMainConEtNw_Top_shapeanim_joint";
-static char mnNameNew_803EE540[] = "MenMainBaseEtNw_Top_joint";
-static char mnNameNew_803EE55C[] = "MenMainBaseEtNw_Top_animjoint";
-static char mnNameNew_803EE57C[] = "MenMainBaseEtNw_Top_matanim_joint";
-static char mnNameNew_803EE5A0[] = "MenMainBaseEtNw_Top_shapeanim_joint";
-static char mnNameNew_803EE5C4[] = "MenMainSubEtNw_Top_joint";
-static char mnNameNew_803EE5E0[] = "MenMainSubEtNw_Top_animjoint";
-static char mnNameNew_803EE600[] = "MenMainSubEtNw_Top_matanim_joint";
-static char mnNameNew_803EE624[] = "MenMainSubEtNw_Top_shapeanim_joint";
-static char mnNameNew_803EE648[] = "MenMainSbaseEtNw_Top_joint";
-static char mnNameNew_803EE664[] = "MenMainSbaseEtNw_Top_animjoint";
-static char mnNameNew_803EE684[] = "MenMainSbaseEtNw_Top_matanim_joint";
-static char mnNameNew_803EE6A8[] = "MenMainSbaseEtNw_Top_shapeanim_joint";
-static char mnNameNew_803EE6D0[] = "mnNameAutoNameUs";
-static char mnNameNew_803EE6E4[] = "mnNameRefuseNameUs";
-static char mnNameNew_803EE6F8[] = "mnNameAutoName";
-static char mnNameNew_803EE708[] = "mnNameRefuseName";
 
 static inline NameNewEntry* mnNameNew_GetEntryData(void)
 {
@@ -1596,7 +1839,7 @@ void fn_8023DBE8(HSD_GObj* arg0)
 
     if ((s32) cursor != (s32) mn_804A04F0.hovered_selection) {
         if (cursor >= 0x32U && cursor < 0x3AU) {
-            jobj = data->jobjs[mnNameNew_803EDA7C[cursor - 0x32]];
+            jobj = data->jobjs[mnNameNew_KeyMap.key_jobj_ids[cursor - 0x32]];
         } else {
             parent = data->jobjs[16];
             if (parent == NULL) {
@@ -1626,7 +1869,7 @@ void fn_8023DBE8(HSD_GObj* arg0)
 
         sel = (u8) mn_804A04F0.hovered_selection;
         if (sel >= 0x32U && sel < 0x3AU) {
-            jobj = data->jobjs[mnNameNew_803EDA7C[sel - 0x32]];
+            jobj = data->jobjs[mnNameNew_KeyMap.key_jobj_ids[sel - 0x32]];
         } else {
             parent = data->jobjs[16];
             if (parent == NULL) {

@@ -242,9 +242,7 @@ static s32 find_nth_nonzero(u8* arr, s32 n)
 void fn_80174468(u8 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
                  StatsList* list, s32 entry_idx)
 {
-    ResultsData* data = &lbl_8046DBE8;
     StatsEntry* entry;
-    MatchEnd* me;
     s32 label_id;
     s32 value_id;
     s32 result;
@@ -259,12 +257,11 @@ void fn_80174468(u8 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
     /* Float constants preloaded into registers */
     f32 const_zero = 0.0F;
     f32 const_neg30 = -30.0F;
-    PAD_STACK(8);
+    PAD_STACK(12);
 
     label_id = -1;
     value_id = -1;
     entry = &list->entries[entry_idx];
-    me = data->x94;
 
     if (list->mode != 2) {
         if (entry->value >= 0) {
@@ -273,6 +270,7 @@ void fn_80174468(u8 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
     } else {
         /// Mode 2: special handling for pairs
         if ((entry_idx & 1) == 1 && entry_idx < list->count) {
+            MatchEnd* me = lbl_8046DBE8.x94;
             /* Inlined 8x unrolled find_nth_nonzero */
             loop_n = entry_idx / 2;
             loop_outer = 32;
@@ -366,6 +364,7 @@ void fn_80174468(u8 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
         } else if ((entry_idx & 1) == 0) {
             idx = (entry_idx / 2) - 1;
             if (idx >= 0) {
+                MatchEnd* me = lbl_8046DBE8.x94;
                 /* Inlined 8x unrolled find_nth_nonzero */
                 loop_n = idx;
                 loop_outer = 32;
@@ -549,13 +548,11 @@ s32 fn_80174A60(StatsList* list, s32 slot)
 {
     s32 i;
     s32 count;
-    StatsEntry* entry;
 
     count = 0;
     if (list->mode != 2) {
         for (i = 0; i < list->count; i++) {
-            entry = &list->entries[i];
-            if (fn_801743C4(slot, entry)) {
+            if (fn_801743C4(slot, &list->entries[i])) {
                 count++;
             }
         }
@@ -703,6 +700,7 @@ void fn_80174B4C(ResultsData* data, s32 slot)
     StatsList* list;
     StatsList* list_base;
     s32 i;
+    u8 pad[8];
     Vec3 pos;
     s32 entry_offset;
     s32 count;
@@ -728,7 +726,6 @@ void fn_80174B4C(ResultsData* data, s32 slot)
 
     count = 0;
     pos = pdata->stats_position;
-    PAD_STACK(8);
 
     offset = pdata->scroll_offset;
     start_entry = (s32) (10.0F * offset) / 10;
@@ -782,8 +779,10 @@ void fn_80174B4C(ResultsData* data, s32 slot)
             HSD_SisLib_803A5ACC(0, 0, pos.x, -pos.y, pos.z, 11.0F, 10.0F);
         text = pdata->stats_text[0][count];
         text->default_fitting = 1;
+        text = pdata->stats_text[0][count];
         text->x34.x = 0.05F;
         text->x34.y = 0.0546875F;
+        text = pdata->stats_text[0][count];
         text->render_callback = render_callback;
 
         pdata->stats_text[1][count] = HSD_SisLib_803A6754(0, 0);
@@ -791,6 +790,7 @@ void fn_80174B4C(ResultsData* data, s32 slot)
         text->pos_x = pos.x;
         text->pos_y = -pos.y;
         text->pos_z = pos.z;
+        text = pdata->stats_text[1][count];
         text->render_callback = render_callback;
 
         pdata->stats_text[2][count] = HSD_SisLib_803A6754(0, 0);
@@ -798,6 +798,7 @@ void fn_80174B4C(ResultsData* data, s32 slot)
         text->pos_x = 11.0F + pos.x;
         text->pos_y = -pos.y;
         text->pos_z = pos.z;
+        text = pdata->stats_text[2][count];
         text->render_callback = render_callback;
         text->default_alignment = 2;
 
@@ -1154,6 +1155,11 @@ end_common:
                         new_var);
 }
 
+static inline MatchEnd* fn_80175A94_get_match_end(void)
+{
+    return lbl_8046DBE8.x94;
+}
+
 void fn_80175A94(s32 slot, Vec3* position)
 {
     u32 unused;
@@ -1191,7 +1197,7 @@ void fn_80175A94(s32 slot, Vec3* position)
         GXColor sp18;
         GXColor sp14;
         PAD_STACK(4);
-        me = lbl_8046DBE8.x94;
+        me = fn_80175A94_get_match_end();
         sp14 = fn_8017507C(slot);
         if (me->player_standings[slot].slot_type != 3) {
             var_r29 = HSD_SisLib_803A6B98(new_var->player_data[slot].ko_time,
@@ -1843,60 +1849,39 @@ void fn_80176F60(void)
 void fn_801771C0(ResultsData* data)
 {
     MatchEnd* me;
-    MatchPlayerData* p;
-    MatchPlayerData* q;
-    s32 result;
     s32 i;
+    s32 result;
     s32 j;
-    u8 our_team;
 
     me = data->x94;
     data->x4 = fn_80165418(me);
     data->x5 = fn_801654A0(me);
 
-    if (me->is_teams != 1) {
+    if (me->is_teams == 1) {
+        for (i = 0; i < 4; i++) {
+            if (me->player_standings[i].slot_type != Gm_PKind_NA &&
+                me->player_standings[i].team == data->x5)
+            {
+                result = i;
+                for (j = 0; j < 4; j++) {
+                    if (me->player_standings[j].slot_type != Gm_PKind_NA &&
+                        me->player_standings[j].team == data->x5 && i != j &&
+                        me->player_standings[i].is_small_loser >
+                            me->player_standings[j].is_small_loser)
+                    {
+                        result = -1;
+                        break;
+                    }
+                }
+                if (result >= 0) {
+                    data->x6 = result;
+                    break;
+                }
+            }
+        }
+    } else {
         data->x6 = data->x4;
-        return;
     }
-
-    p = me->player_standings;
-    i = 0;
-    do {
-        if (p->slot_type == Gm_PKind_NA) {
-            goto next_iter;
-        }
-        our_team = data->x5;
-        if (p->team != our_team) {
-            goto next_iter;
-        }
-
-        result = i;
-        q = me->player_standings;
-        for (j = 0; j < 4; j++, q++) {
-            if (q->slot_type == Gm_PKind_NA) {
-                continue;
-            }
-            if (q->team != our_team) {
-                continue;
-            }
-            if (i == j) {
-                continue;
-            }
-            if (p->is_small_loser > q->is_small_loser) {
-                result = -1;
-                break;
-            }
-        }
-
-        if (result >= 0) {
-            data->x6 = result;
-            return;
-        }
-
-    next_iter:
-        p++;
-        i++;
-    } while (i < 4);
 }
 
 extern HSD_Archive* lbl_804D65B8;

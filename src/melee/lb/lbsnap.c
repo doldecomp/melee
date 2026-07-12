@@ -176,9 +176,12 @@ int lbSnap_8001D7B0(int chan, int index, int jndex)
 #define RGB565_MASK_G (0x07E0)
 #define RGB565_MASK_B (0x001F)
 
-#define RGB565_TO_RGB5A3(x)                                                   \
-    (((x) & RGB5A3_MASK_B) | (((x) >> 1) & (RGB5A3_MASK_R | RGB5A3_MASK_G)) | \
-     RGB5A3_MASK_A)
+static inline u16 RGB565_TO_RGB5A3(u16 pixel)
+{
+    u16 result = pixel & RGB5A3_MASK_B;
+    result |= (pixel >> 1) & (RGB5A3_MASK_R | RGB5A3_MASK_G);
+    return result | RGB5A3_MASK_A;
+}
 
 static inline int lbSnap_GetTiledRGBOffset(int x, int y, int tile_stride)
 {

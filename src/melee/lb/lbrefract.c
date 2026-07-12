@@ -120,7 +120,7 @@ void lbRefract_80021CE8(void* arg0, s32 arg1)
     f32 param0;
     f32* params;
 
-    PAD_STACK(16);
+    PAD_STACK(12);
 
     param_idx = arg1 * 2;
     x_step = 2.0f / (f32) (u32) (cb->width - 1);
@@ -135,6 +135,7 @@ void lbRefract_80021CE8(void* arg0, s32 arg1)
                 f32 sqrt_dist;
                 f32* sqrt_dist_ptr = &sqrt_dist;
                 f64 est = __frsqrte((f64) dist_sq);
+                PAD_STACK(4);
                 est = 0.5 * est * -(((f64) dist_sq * (est * est)) - 3.0);
                 est = 0.5 * est * -(((f64) dist_sq * (est * est)) - 3.0);
                 *sqrt_dist_ptr =
@@ -598,55 +599,18 @@ s32 lbRefract_PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc)
             s32 hi;
             s32 count;
             s32 copied;
-            s32 n;
-            u32 iters;
-            s32 remaining;
             if ((display[offset++] & 0xF8) == 0) {
                 break;
             }
 
             ptr = display + offset;
             hi = ptr[0];
-            copied = 0;
             count = (hi << 8) | ptr[1];
             offset += 2;
 
-            if (count > 0) {
-                n = count - 8;
-
-                if (count > 8) {
-                    iters = (u32) (n + 7) >> 3U;
-
-                    if (n > 0) {
-                        do {
-                            dst[offset] = src[offset];
-                            offset += stride;
-                            dst[offset] = src[offset];
-                            offset += stride;
-                            dst[offset] = src[offset];
-                            offset += stride;
-                            dst[offset] = src[offset];
-                            offset += stride;
-                            dst[offset] = src[offset];
-                            offset += stride;
-                            dst[offset] = src[offset];
-                            offset += stride;
-                            dst[offset] = src[offset];
-                            offset += stride;
-                            dst[offset] = src[offset];
-                            offset += stride;
-                            copied += 8;
-                        } while (--iters != 0);
-                    }
-                }
-
-                remaining = count - copied;
-                if (copied < count) {
-                    do {
-                        dst[offset] = src[offset];
-                        offset += stride;
-                    } while (--remaining != 0);
-                }
+            for (copied = 0; copied < count; copied++) {
+                dst[offset] = src[offset];
+                offset += stride;
             }
         }
 

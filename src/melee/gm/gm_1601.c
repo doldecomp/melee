@@ -511,7 +511,7 @@ bool gm_80160474(CharacterKind ckind, GameModeKind scene)
 
 char* gm_801604DC(CharacterKind ckind, GameModeKind scene)
 {
-    s16 trophy_id;
+    s32 trophy_id;
 
     switch (scene) {
     case GM_CLASSIC_GOVER:
@@ -531,7 +531,7 @@ char* gm_801604DC(CharacterKind ckind, GameModeKind scene)
 
 char* gm_80160564(CharacterKind ckind, GameModeKind scene)
 {
-    s16 toy_id;
+    s32 toy_id;
 
     switch (scene) {
     case GM_CLASSIC_GOVER:
@@ -812,7 +812,7 @@ void gm_80160B40(HSD_Text* text, u8 ckind, u8 arg2)
     tmp_text->font_size.x *= var_f31;
 }
 
-void gm_80160C90(HSD_Text* text, u8 fighter_id, bool arg2)
+void gm_80160C90(HSD_Text* text, u8 fighter_id, u8 arg2)
 {
     HSD_Text* tmp_text = text;
     u8 tmp_ckind = fighter_id;
@@ -823,12 +823,12 @@ void gm_80160C90(HSD_Text* text, u8 fighter_id, bool arg2)
     if (lbLang_IsSavedLanguageUS() != 0) {
         text->default_kerning = 1;
     }
-    str = (u8) arg2 ? fn_801609E0(tmp_ckind) : gm_80160980(tmp_ckind);
+    str = arg2 ? fn_801609E0(tmp_ckind) : gm_80160980(tmp_ckind);
 
     if (lbLang_IsSavedLanguageUS() != 0) {
         f32 temp;
         use_alt_name = false;
-        if ((u8) arg2 && lbl_803D50E4[tmp_ckind] != NULL) {
+        if (arg2 && lbl_803D50E4[tmp_ckind] != NULL) {
             use_alt_name = true;
         }
         if (use_alt_name) {
@@ -840,7 +840,7 @@ void gm_80160C90(HSD_Text* text, u8 fighter_id, bool arg2)
     } else {
         f32 temp;
         use_alt_name = false;
-        if ((u8) arg2 && lbl_803D5060[tmp_ckind] != NULL) {
+        if (arg2 && lbl_803D5060[tmp_ckind] != NULL) {
             use_alt_name = true;
         }
         if (use_alt_name) {
@@ -2203,12 +2203,12 @@ void fn_801640B0(u64* item_mask)
 
 float fn_8016419C(u8 arg0)
 {
-    return lbl_803B7930[arg0 - 1].x;
+    return gm_HandicapDamageRatios[arg0 - 1].x;
 }
 
 float fn_801641B4(u8 arg0)
 {
-    return lbl_803B7930[arg0 - 1].y;
+    return gm_HandicapDamageRatios[arg0 - 1].y;
 }
 
 u16 gm_801641CC(u8 arg0)
@@ -2805,6 +2805,7 @@ s32 fn_8016588C(lbl_8046B6A0_24C_t* arg0, s32 arg1)
 {
     s32 v;
     s32 lim;
+    s32 result;
 
     PAD_STACK(0x18);
 
@@ -2815,68 +2816,69 @@ s32 fn_8016588C(lbl_8046B6A0_24C_t* arg0, s32 arg1)
             v = arg0->x58[arg1].x9;
         }
         lim = (1 << 24) - 1;
+        result = v;
         if (lim < 0) {
             lim = -lim;
         }
         if (v > lim) {
-            v = lim;
+            result = lim;
         } else if (v < -lim) {
-            v = -lim;
+            result = -lim;
         }
     } else if (arg0->x5 == 2) {
-        v = ((MatchPlayerData*) arg0->x58)[arg1].x1C;
+        result = ((MatchPlayerData*) arg0->x58)[arg1].x1C;
         lim = (1 << 24) - 1;
         if (lim < 0) {
             lim = -lim;
         }
-        if (v > lim) {
-            v = lim;
-        } else if (v < -lim) {
-            v = -lim;
+        if (result > lim) {
+            result = lim;
+        } else if (result < -lim) {
+            result = -lim;
         }
     } else if (arg0->x5 == 1) {
         if ((s8) arg0->x58[arg1].x8 != 0) {
-            v = (s8) arg0->x58[arg1].x8;
+            result = (s8) arg0->x58[arg1].x8;
         } else {
-            v = arg0->x58[arg1].x28 / 60 + 0xFF000001;
+            result = arg0->x58[arg1].x28 / 60 + 0xFF000001;
         }
         lim = (1 << 24) - 1;
         if (lim < 0) {
             lim = -lim;
         }
-        if (v > lim) {
-            v = lim;
-        } else if (v < -lim) {
-            v = -lim;
+        if (result > lim) {
+            result = lim;
+        } else if (result < -lim) {
+            result = -lim;
         }
     } else if (arg0->x5 == 3) {
         pl_80039450(arg1);
-        v = fn_8016FFD4(arg0, 2, (u8) arg1);
+        result = fn_8016FFD4(arg0, 2, (u8) arg1);
         lim = (1 << 24) - 1;
         if (lim < 0) {
             lim = -lim;
         }
-        if (v > lim) {
-            v = lim;
-        } else if (v < -lim) {
-            v = -lim;
+        if (result > lim) {
+            result = lim;
+        } else if (result < -lim) {
+            result = -lim;
         }
     } else {
         u16 a = arg0->x58[arg1].xA;
-        v = a * (s8) arg0->xC;
-        v += arg0->x58[arg1].x20 - (arg0->x58[arg1].x24 - a);
+        result = a * (s8) arg0->xC;
+        result += arg0->x58[arg1].x20 - (arg0->x58[arg1].x24 - a);
         lim = (1 << 24) - 1;
         if (lim < 0) {
             lim = -lim;
         }
-        if (v > lim) {
-            v = lim;
-        } else if (v < -lim) {
-            v = -lim;
+        if (result > lim) {
+            result = lim;
+        } else if (result < -lim) {
+            result = -lim;
         }
     }
 
-    return v;
+    return result;
 }
 
 struct fn_80165AC0_loser_bits {
@@ -3198,10 +3200,10 @@ float fn_80166A8C(register Vec3* src, register Vec3* dst)
 s32 gm_80166A98(MatchEnd* arg0, s32 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,
                 s8 arg6, u8 arg7, u8 arg_sp8, u8 arg_spC)
 {
-    s32 score0;
-    s32 score1;
-    s32 score2;
-    s32 score3;
+    s32 score0 = 0xA - arg3;
+    s32 score1 = 0xA - arg5;
+    s32 score2 = 0xA - arg7;
+    s32 score3 = 0xA - arg_spC;
     u32 i;
 
     memzero(arg0, 0x227C);
@@ -3210,13 +3212,9 @@ s32 gm_80166A98(MatchEnd* arg0, s32 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,
     arg0->x5 = 0;
     arg0->is_teams = 0;
 
-    score0 = 0xA - arg3;
     arg0->player_standings[0].character_kind = arg2;
-    score1 = 0xA - arg5;
     arg0->player_standings[1].character_kind = arg4;
-    score2 = 0xA - arg7;
     arg0->player_standings[2].character_kind = arg6;
-    score3 = 0xA - arg_spC;
     arg0->player_standings[3].character_kind = arg_sp8;
 
     // Apply player color to all 4 players?
@@ -3716,7 +3714,7 @@ void gm_80167BC8(VsModeData* vs_data)
     struct gmm_x1CB0* prefs;
     s32 i;
     s8* handicap;
-    PAD_STACK(56);
+    PAD_STACK(72);
 
     rules = gmMainLib_8015CC34();
     prefs = gmMainLib_8015CC58();
@@ -3766,23 +3764,26 @@ void gm_80167BC8(VsModeData* vs_data)
             handicap =
                 gmMainLib_8015CE44(i, (s32) vs_data->data.players[i].xA);
             if (handicap != NULL) {
-                vs_data->data.players[i].handicap =
-                    *handicap; ///< @todo :: fix these to actually get the
-                               ///< offensive and
-                // defensive ratios just not sure how to setup the structs
-                vs_data->data.players[i].x18 = lbl_803B7930[(u8) *handicap].x;
-                vs_data->data.players[i].x1C = lbl_803B7930[(u8) *handicap].y;
+                vs_data->data.players[i].handicap = *handicap;
+                vs_data->data.players[i].x18 =
+                    gm_HandicapDamageRatios[(u8) *handicap - 1].x;
+                vs_data->data.players[i].x1C =
+                    gm_HandicapDamageRatios[(u8) *handicap - 1].y;
             } else {
                 vs_data->data.players[i].handicap = 5;
-                vs_data->data.players[i].x18 = 0.61f;
-                vs_data->data.players[i].x1C = 1.6393442f;
+                vs_data->data.players[i].x18 = gm_HandicapDamageRatios[4].x;
+                vs_data->data.players[i].x1C = gm_HandicapDamageRatios[4].y;
             }
             break;
         case 2:
             vs_data->data.players[i].x18 =
-                lbl_803B7930[(u8) vs_data->data.players[i].handicap].x;
+                gm_HandicapDamageRatios
+                    [(u8) vs_data->data.players[i].handicap - 1]
+                        .x;
             vs_data->data.players[i].x1C =
-                lbl_803B7930[(u8) vs_data->data.players[i].handicap].y;
+                gm_HandicapDamageRatios
+                    [(u8) vs_data->data.players[i].handicap - 1]
+                        .y;
             break;
         }
     }
@@ -3790,43 +3791,19 @@ void gm_80167BC8(VsModeData* vs_data)
     vs_data->data.rules.x1_7 = (rules->friendly_fire & 1);
     vs_data->data.rules.x30 = 0.1f * rules->damage_ratio;
     vs_data->data.rules.xB = (s8) prefs->item_freq;
-    prefs = gmMainLib_8015CC58(); ///< @todo :: some weird item copy thing that
-                                  ///< needs to be fixed
+    prefs = gmMainLib_8015CC58();
     i = 0;
     do {
-        if ((s32) lbl_803B7844[i] != 0x23) {
-            // prefs->item_mask = vs_data->data.rules.x20;
-            if ((prefs->item_mask & (1LL << i))) {
-                vs_data->data.rules.x20 |= (1LL << prefs->item_mask);
+        u8 item = lbl_803B7844[(u8) i];
+        if ((s32) item != 0x23) {
+            if (prefs->item_mask & (1LL << i)) {
+                vs_data->data.rules.x20 |= 1LL << item;
             } else {
-                vs_data->data.rules.x20 &= ~(1LL << prefs->item_mask);
+                vs_data->data.rules.x20 &= ~(1LL << item);
             }
         }
+        i++;
     } while (i < 0x20);
-    // this is what decomp.py spits out
-    // temp_r31 = gmMainLib_8015CC58();
-    // var_r28_2 = 0;
-    // do {
-    //     if ((s32) lbl_803B75F8.pad_x24C[var_r28_2] != 0x23) {
-    //         __shl2i();
-    //         if ((((temp_r31->unkC & M2C_ERROR(/* Read from unset register
-    //         $r4 */)) ^ 0) | ((temp_r31->unk8 & M2C_ERROR(/* Read from unset
-    //         register $r3 */)) ^ 0)) != 0) {
-    //             __shl2i();
-    //             arg0->unk2C = (s32) (arg0->unk2C | M2C_ERROR(/* Read from
-    //             unset register $r4 */)); arg0->unk28 = (s32) (arg0->unk28 |
-    //             M2C_ERROR(/* Read from unset register $r3 */));
-    //         } else {
-    //             __shl2i();
-    //             arg0->unk2C = (s32) (arg0->unk2C & ~(M2C_ERROR(/* Read from
-    //             unset register $r4 */) | M2C_ERROR(/* Read from unset
-    //             register $r4 */))); arg0->unk28 = (s32) (arg0->unk28 &
-    //             ~(M2C_ERROR(/* Read from unset register $r3 */) |
-    //             M2C_ERROR(/* Read from unset register $r3 */)));
-    //         }
-    //     }
-    //     var_r28_2 += 1;
-    // } while (var_r28_2 < 0x20);
 
     switch (gmMainLib_8015ED30()) {
     case 1:
@@ -4274,8 +4251,6 @@ s32 fn_80169000(void* arg0, void* arg1)
     u8* hb = (u8*) arg1;
     s32 count;
     s32 i;
-    u8* cur;
-    u8 v;
     UNUSED u8 pad[16];
 
     count = 0;
@@ -4290,23 +4265,29 @@ s32 fn_80169000(void* arg0, void* arg1)
         p += 0xA8;
     }
 
-    cur = &handicaps[positions[0]];
-    v = *cur;
-    if (v >= 2 && handicaps[positions[count - 1]] <= 8) {
-        *cur = v - 1;
+    if (handicaps[positions[0]] >= 2 && handicaps[positions[count - 1]] <= 8) {
+        handicaps[positions[0]] -= 1;
         handicaps[positions[count - 1]] += 1;
-    } else if (v == 1 && handicaps[positions[count - 1]] <= 7) {
-        handicaps[positions[count - 1]] += 2;
-    } else if (v >= 3 && handicaps[positions[count - 1]] == 9) {
-        *cur -= 2;
+    } else if (handicaps[positions[0]] == 1 &&
+               handicaps[positions[count - 1]] <= 7)
+    {
+        handicaps[positions[count - 1]] = handicaps[positions[count - 1]] + 2;
+    } else if (handicaps[positions[0]] >= 3 &&
+               handicaps[positions[count - 1]] == 9)
+    {
+        handicaps[positions[0]] -= 2;
     } else if (count >= 3) {
-        if (v == 1 && handicaps[positions[count - 1]] == 8) {
+        if (handicaps[positions[0]] == 1 &&
+            handicaps[positions[count - 1]] == 8)
+        {
             handicaps[positions[count - 1]] += 1;
             if (handicaps[positions[1]] >= 2) {
                 handicaps[positions[1]] -= 1;
             }
-        } else if (v == 2 && handicaps[positions[count - 1]] == 9) {
-            *cur -= 1;
+        } else if (handicaps[positions[0]] == 2 &&
+                   handicaps[positions[count - 1]] == 9)
+        {
+            handicaps[positions[0]] -= 1;
             if (handicaps[positions[1]] >= 2) {
                 handicaps[positions[1]] -= 1;
             }
@@ -4654,7 +4635,10 @@ long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
     switch (arg0) {
     case 1:
         i = 0;
-        list = lbl_8046B488.x1C0;
+        {
+            s8* list_start = lbl_8046B488.x1C0;
+            list = list_start;
+        }
         p = list;
         do {
             if (i != 4 && gm_80164840_noinline((u8) i) != 0) {
@@ -4679,14 +4663,8 @@ long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
         } while (i < 0x1A);
 
         count = 0;
-        for (i = 0; i < 0xD; i++) {
+        for (i = 0; i < 0x1A; i++) {
             if ((s8) *list != -1) {
-                count += 1;
-                if (count > 0x10) {
-                    *list = -1;
-                }
-            }
-            if ((s8) * ++list != -1) {
                 count += 1;
                 if (count > 0x10) {
                     *list = -1;

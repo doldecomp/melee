@@ -1125,6 +1125,7 @@ void lb_80011B74(HSD_DObj* dobj, u32 flags)
 void lb_80011C18(HSD_JObj* jobj, u32 flags)
 {
     HSD_JObj* cur;
+    PAD_STACK(8);
 
     cur = jobj->child;
     if (cur != NULL) {
@@ -1159,8 +1160,10 @@ void lb_80011C18(HSD_JObj* jobj, u32 flags)
     if (checkJObjFlags(jobj)) {
         HSD_DObj* dobj = jobj->u.dobj;
         if (dobj != NULL) {
-            if (dobj->next != NULL) {
-                lb_80011B74(dobj->next, flags);
+            HSD_DObj* next = dobj->next;
+            dobj = jobj->u.dobj;
+            if (next != NULL) {
+                lb_80011B74(next, flags);
             }
             dobj->mobj->rendermode |= flags;
         }
@@ -1699,7 +1702,7 @@ void fn_80013614(HSD_GObj* gobj)
     Mtx view_mtx;
     Mtx view_mtx2;
     GXTexObj tex_obj;
-    PAD_STACK(12);
+    PAD_STACK(4);
 
     if (data->x18 != NULL) {
         data->x18(gobj);
@@ -1776,6 +1779,7 @@ void fn_80013614(HSD_GObj* gobj)
 
         {
             GXColor color;
+            PAD_STACK(8);
             color.a = x10;
             GXSetTevColor(GX_TEVREG0, color);
             GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,

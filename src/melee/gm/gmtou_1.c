@@ -1968,11 +1968,12 @@ void gm_8019A828(void)
     gm_8018F634()->cur_option = 0x1B;
 }
 
-/// @todo 99.86%: all instruction shapes and callee-saved registers match;
-/// two scratch-register tie-breaks remain (the ready loop's err/state temps
-/// trade r7/r3, and the bracket-entry fill's address/value temps trade
-/// r0/r4). Decl orders, block-scope promotion, split counters, and comma
-/// expressions all compile to identical instructions with the same colors.
+static inline u8 get_pad_error(s32 i)
+{
+    return (u8) HSD_PadMasterStatus[(u8) i].err;
+}
+
+/// @todo The bracket-entry fill's address/value temps trade r0/r4.
 void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
 {
     s32 ready_count = 0;
@@ -2031,7 +2032,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
             if (tm->x4B8[i].x0 == 1) {
                 ready_count += 1;
             } else {
-                u8 err = (u8) HSD_PadMasterStatus[(u8) i].err;
+                u8 err = get_pad_error(i);
                 if ((s8) err != 0) {
                     pad_err = 1;
                 }
@@ -2421,9 +2422,9 @@ void gm_8019B2DC_OnFrame(void)
 
 /// Transitions to results screen after a tournament match.
 /// Ranks players, preloads stage/character data, and starts audio.
-/// @todo ~99% — all 278 instructions/shapes match; residual is a pure
-/// callee-saved register rotation (rank/match colored r28/r27 vs target
-/// r29/r28, and the char/costume fill loop's two walkers swapped r28<->r29).
+/// @todo 99.56% — all instruction shapes match; residual is a pure
+/// two-register callee-saved swap: rank colors r28 vs the target's r29,
+/// and the char/costume fill loop's two walkers trade r28<->r29 with it.
 void fn_8019B458(s32* arg0)
 {
     struct Preload {
@@ -2434,6 +2435,8 @@ void fn_8019B458(s32* arg0)
     TmData* tm = (TmData*) arg0;
     struct Lbl804799D8_t* d8 = &lbl_804799D8;
     s32 rank;
+    s32 match;
+    TmData* td2;
     s32 i;
     s32 j;
     s32 x24;
@@ -2462,9 +2465,6 @@ void fn_8019B458(s32* arg0)
     tm->x33 = rank;
 
     {
-        s32 match;
-        TmData* td2;
-
         match = fn_80196CF8();
         td2 = gm_8018F634();
         fn_80198D18();

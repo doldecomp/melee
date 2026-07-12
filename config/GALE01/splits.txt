@@ -1269,6 +1269,7 @@ melee/ft/chara/ftKirby/ftkirby.c:
 	.text       start:0x800EE528 end:0x800F1F68
 	.rodata     start:0x803B7548 end:0x803B7570
 	.data       start:0x803C8368 end:0x803CB6D8
+	.sdata      start:0x804D3D98 end:0x804D3DAC
 	.sdata2     start:0x804D9350 end:0x804D9364
 
 melee/ft/chara/ftKirby/ftkirbyattackdash.c:
@@ -1352,6 +1353,7 @@ melee/ft/chara/ftKirby/ftkirbyyoshiegg.c:
 
 melee/ft/chara/ftKirby/ftkirbyspecialmars.c:
 	.text       start:0x8010B1F4 end:0x8010C288
+	.sdata      start:0x804D3E00 end:0x804D3E0D
 	.sdata2     start:0x804D9570 end:0x804D9580
 
 melee/ft/chara/ftKirby/ftkirbyspecialpeach.c:
@@ -2317,11 +2319,17 @@ melee/gm/gm_1A7A.c:
 	.sdata2     start:0x804DAA18 end:0x804DAA28
 
 melee/gm/gmregenddisp.c:
-	.text       start:0x801A7FB4 end:0x801A9DD0
-	.data       start:0x803DB458 end:0x803DBF78
+	.text       start:0x801A7FB4 end:0x801A9B30
+	.data       start:0x803DB458 end:0x803DB640
 	.bss        start:0x80480A00 end:0x80480B38
 	.sdata      start:0x804D42A0 end:0x804D42B8
-	.sdata2     start:0x804DAA28 end:0x804DAAA8
+	.sdata2     start:0x804DAA28 end:0x804DAAA0
+
+melee/gm/gm_1A9B.c:
+	.text       start:0x801A9B30 end:0x801A9DD0
+	.data       start:0x803DB640 end:0x803DBF78
+	.sbss       start:0x804D67C8 end:0x804D67CA
+	.sdata2     start:0x804DAAA0 end:0x804DAAA8
 
 melee/gm/gmopening.c:
 	.text       start:0x801A9DD0 end:0x801AA644
@@ -2480,7 +2488,7 @@ melee/gm/gm_1BA8.c:
 	.bss        start:0x80497758 end:0x8049E558
 	.sdata      start:0x804D4330 end:0x804D44C8
 	.sbss       start:0x804D6900 end:0x804D6940
-	.sdata2     start:0x804DAC78 end:0x804DAC88
+	.sdata2     start:0x804DAC78 end:0x804DAC8C
 
 melee/gm/gm_1BF9.c:
 	.text       start:0x801BF948 end:0x801BFA6C
@@ -2660,7 +2668,7 @@ melee/gr/gricemt.c:
 
 melee/gr/grinishie1.c:
 	.text       start:0x801FA908 end:0x801FCBC0
-	.rodata     start:0x803B8268 end:0x803B8278
+	.rodata     start:0x803B8268 end:0x803B8274
 	.data       start:0x803E48C8 end:0x803E4A60
 	.sdata      start:0x804D4748 end:0x804D4760
 	.sbss       start:0x804D69F8 end:0x804D6A00

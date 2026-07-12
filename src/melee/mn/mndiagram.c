@@ -1248,7 +1248,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             return;
         }
         i = (u8) data->fighter_cursor_pos;
-        col = (u8) mn_804A04F0.hovered_selection;
+        col = mn_804A04F0.hovered_selection;
         ptr = sorted + i;
         goto fc_test;
     fc_outer:

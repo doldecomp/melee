@@ -587,13 +587,13 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
         (&((RouteEntry*) gp->u.car.car_info)[route_idx])->flags.b2_5 = 1;
 
         re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
-        re->x4 = 0.0F;
+        re->x4 = 1.0F;
 
         re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
         re->x8 = grBb_Route_804D6A68->x20;
 
         re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
-        re->xC = 0.0F;
+        re->xC = 0.5F;
 
         {
             f32 rand = HSD_Randf();
@@ -900,7 +900,6 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                 PSVECCrossProduct(&tangent, &side, &up);
                 grBigBlueRoute_8020DD64(&up);
                 Ground_801C5AEC(&orient, &tangent, &side, &up);
-                rot = orient;
                 {
                     f32 s = 45.0f * Ground_801C0498();
                     up.x *= s;
@@ -925,6 +924,7 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                 pos.y *= prog;
                 pos.z *= prog;
                 lbVector_Add(&pos, &air);
+                rot = orient;
 
                 if (RE_ENTRY->x14 == 1.0f) {
                     RE_ENTRY->flags.b2_5 = 0;

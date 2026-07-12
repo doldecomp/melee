@@ -1024,6 +1024,7 @@ config.libs = [
             Object(NonMatching, "melee/gm/gmregtyfall.c"),
             Object(NonMatching, "melee/gm/gm_1A7A.c"),
             Object(NonMatching, "melee/gm/gmregenddisp.c"),
+            Object(Matching, "melee/gm/gm_1A9B.c"),
             Object(Matching, "melee/gm/gmopening.c"),
             Object(NonMatching, "melee/gm/gmstaffroll.c"),
             Object(Matching, "melee/gm/gmhowto.c"),

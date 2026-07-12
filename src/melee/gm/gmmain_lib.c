@@ -844,7 +844,7 @@ s32 gmMainLib_8015DBF4(s32 arg0)
     ADJ_NAMETAG_PRELOADED(config->x4);
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_522.x4);
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_528.x4);
-    ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_530.x4);
+    ADJ_NAMETAG_STANDALONE_PAIR(load_gmm->unk_530.x4, load_gmm->unk_530.x4);
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_530.unk_584.unk_586);
 
     ADJ_VMD_SINGLE(&gm_80497618);
@@ -1128,16 +1128,14 @@ void InitializePersistentNameData(s32 arg0)
     data->x1A2 = 5;
 }
 
-void gmMainLib_8015F150(void)
+static inline void ResetPersistentFighterData(void)
 {
     s32 i;
-
-    PAD_STACK(8);
 
     for (i = 0; i < 0x19; i++) {
         int j = 0;
         struct FighterData* base = gmMainLib_804D3EE0->thing.x1F2C;
-        for (; j < 0x19; j++) {
+        for (; 0x19 > j; j++) {
             base[(u8) i].fighter_kos[j] = 0;
         }
         gmMainLib_8015EF30(
@@ -1145,6 +1143,13 @@ void gmMainLib_8015F150(void)
                 .x1F2C[(u8) i]
                 .sd_count);
     }
+}
+
+void gmMainLib_8015F150(void)
+{
+    PAD_STACK(8);
+
+    ResetPersistentFighterData();
 }
 
 void gmMainLib_8015F260(void)
@@ -1259,13 +1264,14 @@ void gmMainLib_8015F600(int arg0, int arg1)
         s32 j = 0;
         do {
             s32 i;
+            u8 slot = j;
             struct FighterData* fdata = gmMainLib_804D3EE0->thing.x1F2C;
             for (i = 0; 25 > i; i++) {
-                fdata[(u8) j].fighter_kos[i] = 0;
+                fdata[slot].fighter_kos[i] = 0;
             }
             gmMainLib_8015EF30(
                 (struct gmMainLib_8015EF30_s*) &gmMainLib_804D3EE0->thing
-                    .x1F2C[(u8) j]
+                    .x1F2C[slot]
                     .sd_count);
             j++;
         } while (j < 25);
@@ -1314,7 +1320,7 @@ void gmMainLib_8015F600(int arg0, int arg1)
             bank = gmMainLib_804D3EE0->thing.x2FF8;
             data = &bank[(u8) idx / 19].inner[(u8) idx % 19];
 
-            for (i = 0; i < 120; i++) {
+            for (i = 0; 120 > i; i++) {
                 data->vs_kos[i] = 0;
             }
             gmMainLib_8015EF30((struct gmMainLib_8015EF30_s*) &data->sd_count);

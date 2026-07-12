@@ -260,6 +260,21 @@ void gm_801A8D54(s32* arg0)
     }
 }
 
+static inline s32 gm_801A9094_get_entry(s32* entries, s32 i)
+{
+    return entries[i];
+}
+
+static inline HSD_Joint* gm_801A9094_get_bg(void)
+{
+    return HSD_ArchiveGetPublicAddress(gm_804D679C, "ToyDspStand_Top_joint");
+}
+
+static inline HSD_GObj* gm_801A9094_create_gobj(void)
+{
+    return GObj_Create(0xE, 0xF, 0);
+}
+
 void gm_801A9094(void)
 {
     s32 sp8C[0x1A];
@@ -277,15 +292,14 @@ void gm_801A9094(void)
     i = 0x19;
     do {
         if (sp8C[i] != 0x1A) {
-            dsp = tyDisplay_8031B9DC(gm_801A659C(sp8C[i]));
+            dsp = tyDisplay_8031B9DC(
+                gm_801A659C(gm_801A9094_get_entry(sp8C, i)));
             joint = HSD_ArchiveGetPublicAddress(
                 gm_804D679C, (const char*) tyDisplay_8031BB34((s8) dsp->x04));
             matanim = HSD_ArchiveGetPublicAddress(
                 gm_804D679C, tyDisplay_8031BB94((s8) dsp->x04));
-            bg_joint = HSD_ArchiveGetPublicAddress(gm_804D679C,
-                                                   "ToyDspStand_Top_joint");
-            gobj = GObj_Create(0xE, 0xF, 0);
-            gm_80480A00[sp8C[i]] = gobj;
+            bg_joint = gm_801A9094_get_bg();
+            gm_80480A00[sp8C[i]] = gobj = gm_801A9094_create_gobj();
             root = HSD_JObjAlloc();
             HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, root);
             GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
@@ -380,41 +394,53 @@ static inline void gm_801A9630_init(void)
     }
 }
 
+static inline void gm_801A9630_fog(void)
+{
+    HSD_GObj* gobj;
+    HSD_Fog* fog;
+
+    gobj = GObj_Create(0xE, 3, 0);
+    fog = HSD_FogLoadDesc(gm_804D67A4->fogs->desc);
+    HSD_GObjObject_80390A70(gobj, (u8) HSD_GObj_804D7848, fog);
+    GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
+    HSD_Fog_8037DE7C(fog, gm_804D67A4->fogs->anims[0]->aobjdesc);
+    HSD_FogReqAnim(fog, 0.0f);
+    HSD_FogInterpretAnim(fog);
+    HSD_GObj_SetupProc(gobj, fn_801A7FB4, 0x17);
+}
+
+static inline void gm_801A9630_light(void)
+{
+    HSD_GObj* gobj;
+    HSD_LObj* lobj;
+
+    gobj = GObj_Create(0xB, 3, 0);
+    lobj = lb_80011AC4(gm_804D67A4->lights);
+    HSD_GObjObject_80390A70(gobj, (u8) HSD_GObj_804D784A, lobj);
+    GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
+    HSD_LObjAddAnimAll(lobj, (*gm_804D67A4->lights)->anims[0]);
+    HSD_LObjReqAnimAll(lobj, 0.0f);
+    HSD_LObjAnimAll(lobj);
+    HSD_GObj_SetupProc(gobj, fn_801A80CC, 0x17);
+}
+
 void gm_801A9630(void)
 {
     int i;
     HSD_CObj* cobj;
-    HSD_GObj* fog_gobj;
-    HSD_Fog* fog;
-    HSD_GObj* light_gobj;
     HSD_GObj* cam_gobj;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
     HSD_JObj* child;
     HSD_JObj* target;
-    HSD_LObj* lobj;
 
     gm_801A9630_init();
 
     // Fog GObj
-    fog_gobj = GObj_Create(0xE, 3, 0);
-    fog = HSD_FogLoadDesc(gm_804D67A4->fogs->desc);
-    HSD_GObjObject_80390A70(fog_gobj, (u8) HSD_GObj_804D7848, fog);
-    GObj_SetupGXLink(fog_gobj, HSD_GObj_FogCallback, 0, 0);
-    HSD_Fog_8037DE7C(fog, gm_804D67A4->fogs->anims[0]->aobjdesc);
-    HSD_FogReqAnim(fog, 0.0f);
-    HSD_FogInterpretAnim(fog);
-    HSD_GObj_SetupProc(fog_gobj, fn_801A7FB4, 0x17);
+    gm_801A9630_fog();
 
     // Light GObj
-    light_gobj = GObj_Create(0xB, 3, 0);
-    lobj = lb_80011AC4(gm_804D67A4->lights);
-    HSD_GObjObject_80390A70(light_gobj, (u8) HSD_GObj_804D784A, lobj);
-    GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0, 0);
-    HSD_LObjAddAnimAll(lobj, (*gm_804D67A4->lights)->anims[0]);
-    HSD_LObjReqAnimAll(lobj, 0.0f);
-    HSD_LObjAnimAll(lobj);
-    HSD_GObj_SetupProc(light_gobj, fn_801A80CC, 0x17);
+    gm_801A9630_light();
 
     // Camera GObj
     cam_gobj = GObj_Create(0x13, 0x14, 0);
@@ -478,149 +504,4 @@ void gm_801A9630(void)
     lb_8000C1C0(jobj, target);
     lb_8000C290(jobj, target);
     HSD_GObj_SetupProc(gobj, fn_801A80F0, 0x17);
-}
-
-static u8 gm_804D67C8;
-static u8 gm_804D67C9;
-
-char* gm_803DB8B8[] = {
-    "GmRegendSimpleCaptain.thp",   "GmRegendSimpleDonkey.thp",
-    "GmRegendSimpleFox.thp",       "GmRegendSimpleGamewatch.thp",
-    "GmRegendSimpleKirby.thp",     "GmRegendSimpleKoopa.thp",
-    "GmRegendSimpleLink.thp",      "GmRegendSimpleLuigi.thp",
-    "GmRegendSimpleMario.thp",     "GmRegendSimpleMarth.thp",
-    "GmRegendSimpleMewtwo.thp",    "GmRegendSimpleNess.thp",
-    "GmRegendSimplePeach.thp",     "GmRegendSimplePikachu.thp",
-    "GmRegendSimplePoponana.thp",  "GmRegendSimplePurin.thp",
-    "GmRegendSimpleSamus.thp",     "GmRegendSimpleYoshi.thp",
-    "GmRegendSimpleZeldaseak.thp", "GmRegendSimpleZeldaseak.thp",
-    "GmRegendSimpleFalco.thp",     "GmRegendSimpleClink.thp",
-    "GmRegendSimpleDrmario.thp",   "GmRegendSimpleRoy.thp",
-    "GmRegendSimplePichu.thp",     "GmRegendSimpleGanon.thp",
-};
-
-char* gm_803DBBF4[] = {
-    "GmRegendAdventureCaptain.thp",   "GmRegendAdventureDonkey.thp",
-    "GmRegendAdventureFox.thp",       "GmRegendAdventureGamewatch.thp",
-    "GmRegendAdventureKirby.thp",     "GmRegendAdventureKoopa.thp",
-    "GmRegendAdventureLink.thp",      "GmRegendAdventureLuigi.thp",
-    "GmRegendAdventureMario.thp",     "GmRegendAdventureMarth.thp",
-    "GmRegendAdventureMewtwo.thp",    "GmRegendAdventureNess.thp",
-    "GmRegendAdventurePeach.thp",     "GmRegendAdventurePikachu.thp",
-    "GmRegendAdventurePoponana.thp",  "GmRegendAdventurePurin.thp",
-    "GmRegendAdventureSamus.thp",     "GmRegendAdventureYoshi.thp",
-    "GmRegendAdventureZeldaseak.thp", "GmRegendAdventureZeldaseak.thp",
-    "GmRegendAdventureFalco.thp",     "GmRegendAdventureClink.thp",
-    "GmRegendAdventureDrmario.thp",   "GmRegendAdventureRoy.thp",
-    "GmRegendAdventurePichu.thp",     "GmRegendAdventureGanon.thp",
-};
-
-char* gm_803DBF10[] = {
-    "GmRegendAllstarCaptain.thp",   "GmRegendAllstarDonkey.thp",
-    "GmRegendAllstarFox.thp",       "GmRegendAllstarGamewatch.thp",
-    "GmRegendAllstarKirby.thp",     "GmRegendAllstarKoopa.thp",
-    "GmRegendAllstarLink.thp",      "GmRegendAllstarLuigi.thp",
-    "GmRegendAllstarMario.thp",     "GmRegendAllstarMarth.thp",
-    "GmRegendAllstarMewtwo.thp",    "GmRegendAllstarNess.thp",
-    "GmRegendAllstarPeach.thp",     "GmRegendAllstarPikachu.thp",
-    "GmRegendAllstarPoponana.thp",  "GmRegendAllstarPurin.thp",
-    "GmRegendAllstarSamus.thp",     "GmRegendAllstarYoshi.thp",
-    "GmRegendAllstarZeldaseak.thp", "GmRegendAllstarZeldaseak.thp",
-    "GmRegendAllstarFalco.thp",     "GmRegendAllstarClink.thp",
-    "GmRegendAllstarDrmario.thp",   "GmRegendAllstarRoy.thp",
-    "GmRegendAllstarPichu.thp",     "GmRegendAllstarGanon.thp",
-};
-
-void gm_801A9B30_OnEnter(UNK_T unused)
-{
-    struct {
-        int x0;
-        int x4;
-        int x8;
-        int xC;
-        float x10;
-        float x14;
-        u8 pad[0x40 - 0x18];
-        u32 x40;
-    }* temp_r3_3;
-    s32 ckind;
-    HSD_GObj* gobj;
-    HSD_GObj* temp_r29;
-    const char* thpfile;
-    s32 var_r3_3;
-    int var_r3;
-
-    gm_804D67C8 = 0x1E;
-    gm_804D67C9 = 0;
-    temp_r29 = GObj_Create(0x13, 0x14, 0);
-    HSD_SObjLib_803A55DC(temp_r29, 0x280, 0x1E0, 8);
-    temp_r29->gxlink_prios = 0x800;
-    lbAudioAx_80026F2C(0x12);
-    lbAudioAx_8002702C(2, 0x10);
-    lbAudioAx_80027168();
-    lbAudioAx_80027648();
-    lbBgFlash_800209F4();
-    gobj = GObj_Create(0xE, 0xF, 0);
-    HSD_GObjObject_80390A70(gobj, HSD_SObjLib_804D7960, NULL);
-    GObj_SetupGXLink(gobj, lbMthp8001F928, 0xB, 0);
-    ckind = gm_801BEFB0();
-    var_r3 = gm_801A4310();
-    if (var_r3 == GM_DEBUG_GOVER) {
-        var_r3 = gm_801BF050();
-    }
-    switch (var_r3) {
-    case GM_CLASSIC_GOVER:
-        thpfile = gm_803DB8B8[ckind];
-        break;
-    case GM_ADVENTURE_GOVER:
-        thpfile = gm_803DBBF4[ckind];
-        break;
-    default:
-        thpfile = gm_803DBF10[ckind];
-        break;
-    }
-    lbMthp8001FAA0(thpfile, 0x230, 0x1A0);
-    temp_r3_3 = lbMthp8001F890(gobj);
-    temp_r3_3->x10 = 320.0F;
-    temp_r3_3->x14 = 240.0F;
-    temp_r3_3->x40 |= 2;
-    switch (gm_801A4310()) {
-    case GM_CLASSIC_GOVER:
-        var_r3_3 = gm_8017DFF4(1);
-        break;
-    case GM_ADVENTURE_GOVER:
-        var_r3_3 = gm_8017DFF4(0);
-        break;
-    default:
-        var_r3_3 = gm_8017DFF4(2);
-        break;
-    }
-    if (var_r3_3 == 4) {
-        lbAudioAx_800237A8(0x9C45, 0x7F, 0x40);
-    } else {
-        lbAudioAx_800237A8(0x9C41, 0x7F, 0x40);
-    }
-}
-
-void gm_801A9D0C_OnFrame(void)
-{
-    if (gm_804D67C8 != 0) {
-        gm_804D67C8--;
-    } else if (gm_804D67C9 != 0) {
-        gm_804D67C9--;
-        if (gm_804D67C9 == 0) {
-            if (gm_801A4310() == GM_DEBUG_GOVER) {
-                gm_801A6630(6);
-            } else {
-                gm_801A6630(1);
-            }
-        }
-    } else {
-        if (gm_801A36A0(gm_801BF010()) & 0x1100) {
-            lbBgFlash_8002063C(0x3C);
-            gm_804D67C9 = 0x3C;
-            lbAudioAx_80023694();
-            lbAudioAx_80024030(1);
-        }
-    }
 }

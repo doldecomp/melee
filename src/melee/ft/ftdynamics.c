@@ -472,7 +472,8 @@ void ftCo_8009DC54(Fighter* fp)
                      "fighter dynamics num over!\n");
     {
         ssize_t bone_idx = idx * 2 + 1;
-        BoneDynamicsDesc* dyn = fp->dynamic_bone_sets;
+        DynamicsDesc* desc;
+        ssize_t dyn_idx = 0;
         ssize_t i = 0;
         do {
             HSD_JObj* cur = fp->fv.kb.hat.jobj;
@@ -493,18 +494,20 @@ void ftCo_8009DC54(Fighter* fp)
                 cur = cur->next;
             }
             {
-                DynamicsDesc* desc = &fp->dynamic_bone_sets[i + 1].dyn_desc;
-                lb_8000FD48(
-                    cur, desc,
-                    data->x2C->ftDynamicBones->array[bone_idx].dyn_desc.count);
-                dyn[1].bone_id = FtPart_TopN;
+                desc = &fp->dynamic_bone_sets[i + 1].dyn_desc;
+                {
+                    ArticleDynamicBones* bones = data->x2C->ftDynamicBones;
+                    lb_8000FD48(cur, desc,
+                                bones->array[bone_idx].dyn_desc.count);
+                }
+                fp->dynamic_bone_sets[dyn_idx + 1].bone_id = FtPart_TopN;
                 lb_80011710(
                     &data->x2C->ftDynamicBones->array[bone_idx].dyn_desc,
                     desc);
             }
             i++;
             bone_idx++;
-            dyn++;
+            dyn_idx++;
         } while (i < 2);
     }
 }

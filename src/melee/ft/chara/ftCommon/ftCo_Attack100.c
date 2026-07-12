@@ -509,19 +509,23 @@ bool ftCo_800D730C(Fighter_GObj* gobj, bool arg1)
 
 bool ftCo_800D72A0(Fighter* fp)
 {
-    if (fp->x2D0->x2C != -1) {
-        if (fp->x2D0->x2C <= fp->motion_id &&
-            fp->motion_id < fp->x2D0->x2C + fp->x2D0->x28)
-        {
-            return true;
-        }
+    s32 start;
+    s32 start_alt;
+    s32 motion_id;
+    struct Fighter_x2D0_t* x2D0;
+
+    x2D0 = fp->x2D0;
+    start = x2D0->x2C;
+    if (start != -1 && start <= (motion_id = fp->motion_id) &&
+        motion_id < start + x2D0->x28)
+    {
+        return true;
     }
-    if (fp->x2D0->x30 != -1) {
-        if (fp->x2D0->x30 <= fp->motion_id &&
-            fp->motion_id < fp->x2D0->x30 + fp->x2D0->x28)
-        {
-            return true;
-        }
+    start_alt = x2D0->x30;
+    if (start_alt != -1 && start_alt <= (motion_id = fp->motion_id) &&
+        motion_id < start_alt + x2D0->x28)
+    {
+        return true;
     }
     return false;
 }
@@ -532,23 +536,24 @@ void ftCo_800D74A4(Fighter_GObj* gobj)
     Vec3 vel;
     Fighter* fp;
     s32 msid;
-    struct Fighter_x2D0_t* p;
+    s32 msid2;
     struct Fighter_x2D0_t* tmp;
+    struct Fighter_x2D0_t* p;
     PAD_STACK(0x14);
+
     fp = gobj->user_data;
     p = fp->x2D0;
     fp->cmd_vars[0] = 0;
     tmp = fp->x2D0;
-    msid = fp->x1968_jumpsUsed +
-           ((struct Fighter_x2D0_t*) ((s32*) tmp + ftCo_800D7268(fp)))->x2C;
+    tmp = (struct Fighter_x2D0_t*) ((s32*) tmp + ftCo_800D7268(fp));
+    msid = tmp->x2C + fp->x1968_jumpsUsed;
     vel.x = fp->input.lstick.x * p->x8;
-    msid -= 1;
+    msid2 = msid - 1;
     tmp = fp->x2D0;
-    vel.y = p->x14[msid -
-                   ((struct Fighter_x2D0_t*) ((s32*) tmp + ftCo_800D7268(fp)))
-                       ->x2C];
+    tmp = (struct Fighter_x2D0_t*) ((s32*) tmp + ftCo_800D7268(fp));
+    vel.y = p->x14[msid2 - tmp->x2C];
     vel.z = ftCo_804D9018;
-    ftCo_800CBAC4(gobj, msid, &vel, false);
+    ftCo_800CBAC4(gobj, msid2, &vel, false);
     if ((fp->input.lstick.x * fp->facing_dir) < -p->x4) {
         *(s32*) &fp->mv.ca.specials.grav = p->x0;
     } else {
@@ -1421,7 +1426,8 @@ bool fn_800D9558(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* attrs;
     Item_GObj* item;
-    Item* it;
+    s32 frame;
+    s32 i;
     itSamusGrappleAttributes* grappleAttrs;
     HSD_GObj* segGobj;
     HSD_JObj* jobj;
@@ -1431,9 +1437,7 @@ bool fn_800D9558(Fighter_GObj* gobj)
     f32 grav;
     f32 my;
     f32 r;
-    s32 i;
-    s32 frame;
-    PAD_STACK(0x14);
+    PAD_STACK(0x10);
     if (fp->kind == FTKIND_SAMUS) {
         attrs = fp->dat_attrs;
         fp->mv.ca.specials.grav += 1.0;
@@ -1450,8 +1454,9 @@ bool fn_800D9558(Fighter_GObj* gobj)
             fp->accessory3_cb = (void (*)(HSD_GObj*)) it_802BACC4;
         } else if (grav > (f32) attrs->x9C) {
             if (grav <= (f32) attrs->xA8) {
+                Item* it;
+                it = GET_ITEM(fp->fv.ss.x223C);
                 item = fp->fv.ss.x223C;
-                it = GET_ITEM(item);
                 grappleAttrs = it->xC4_article_data->x4_specialAttributes;
                 if (item != NULL) {
                     for (i = 0, frame = 0x14; i < 6; i++, frame += 3) {
@@ -1751,6 +1756,11 @@ bool fn_800D952C(Fighter_GObj* gobj)
 
 static const Vec3 lbl_803B7510 = { 1.0f, 0.0f, 0.0f };
 
+static inline f32 fn_800D9930_inline(void)
+{
+    return HSD_Randf();
+}
+
 bool fn_800D9930(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -1797,11 +1807,12 @@ bool fn_800D9930(Fighter_GObj* gobj)
                             effPos.x = jobj->mtx[0][3];
                             effPos.y = jobj->mtx[1][3];
                             effPos.z = jobj->mtx[2][3];
-                            effPos.x = 4.0 * (HSD_Randf() - 0.5f) + effPos.x;
+                            effPos.x =
+                                4.0 * (fn_800D9930_inline() - 0.5f) + effPos.x;
                             effPos.y = 4.0 * (HSD_Randf() - 0.5f) + effPos.y;
                             r = HSD_Randf() - 0.5f;
                             effPos.z = 4.0 * r + effPos.z;
-                            efSync_Spawn(0x3F3, segGobj, &effPos, r);
+                            efSync_Spawn(0x3F3, segGobj, &effPos);
                         }
                     }
                 }

@@ -148,12 +148,11 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
                     value_text->text_color = mn_804D4B64;
                 }
 
-                if (mnDiagram2_IsIconOnlyStat(stat_type)) {
-                    mnDiagram2_GetAggregatedFighterRank(sp48, stat_type,
-                                                        (u8) i);
-                    if (sp48[0] == 0x19) {
-                        goto next;
-                    }
+                if (mnDiagram2_IsIconOnlyStat(stat_type) &&
+                    (mnDiagram2_GetAggregatedFighterRank(sp48, stat_type,
+                                                         (u8) i),
+                     sp48[0] != 0x19))
+                {
                     mnDiagram2_GetAggregatedFighterRank(sp38, stat_type,
                                                         (u8) i);
                     icon = mnDiagram_CreateFighterIcon(sp38[0], 0);

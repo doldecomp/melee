@@ -58,7 +58,7 @@ s32 fn_802F7288(HSD_GObj* gobj, Element_803F9628* entry)
 
 void if_802F73C4(HSD_GObj* gobj)
 {
-    Element_803F9628* const entries = ifStatus_803F9628;
+    Element_803F9628* const entries = ifStatus_ScInfCntModels.elements;
     Element_803F9628* entry;
     s32 i;
     Element_803F9628* curr;
@@ -94,7 +94,7 @@ found:
 
 void if_802F74D0(HSD_GObj* gobj)
 {
-    Element_803F9628* const entries = ifStatus_803F9628;
+    Element_803F9628* const entries = ifStatus_ScInfCntModels.elements;
     Element_803F9628* entry;
     s32 i;
     Element_803F9628* curr;
@@ -334,31 +334,30 @@ void if_802F7AF8(s32 slot)
     void** base;
     s32 slot2;
     u32 idx;
-    void** base1;
     void** entry;
     void** dst;
+    void** dst2;
     HSD_GObj* result;
 
     base = lbl_804A1340;
     slot2 = Player_80036428(slot);
 
     idx = (slot << 3) & 0x7F8;
-    entry = base + (idx >> 2);
-    result = fn_802F77F8(*++entry, (u8) slot, 1);
-    base1 = &base[1];
-    dst = base1 + (idx >> 2);
-    *dst = result;
-    if (*dst != NULL) {
+    entry = base;
+    entry += idx >> 2;
+    *(dst2 = (dst = &base[1]) + (idx >> 2)) =
+        fn_802F77F8(*++entry, (u8) slot, 1);
+    if (*dst2 != NULL) {
         HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F75D4, 0x11);
     }
 
     idx = (slot2 << 3) & 0x7F8;
-    entry = base + (idx >> 2);
-    result = fn_802F77F8(*++entry, (u8) slot2, 2);
-    dst = base1 + (idx >> 2);
-    *dst = result;
-    if (*dst != NULL) {
-        HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F75D4, 0x11);
+    base += idx >> 2;
+    result = fn_802F77F8(*++base, (u8) slot2, 2);
+    dst2 = dst + (idx >> 2);
+    *dst2 = result;
+    if (*dst2 != NULL) {
+        HSD_GObj_SetupProc(*base, (HSD_GObjEvent) fn_802F75D4, 0x11);
     }
 }
 

@@ -19,7 +19,10 @@ extern UNK_T gmClassic_804D68D0;
 
 typedef struct gmClassicMatchup {
     /* 0x00 */ u16 x00;
-    /* 0x02 */ s8 x02[3];
+    /* 0x02 */ union {
+        s8 x02[3];
+        u8 x02_u8[3];
+    };
     /* 0x05 */ u8 x05;
 } gmClassicMatchup;
 STATIC_ASSERT(sizeof(gmClassicMatchup) == 6);
@@ -386,7 +389,7 @@ static inline void gmClassic_InitMatchupOrder(const gmClassicMatchup* matchups,
     s32 count;
     s32 i;
 
-    for (count = 0; matchups[count].x00 != 0x148; count++) {
+    for (count = 0; matchups->x00 != 0x148; matchups++, count++) {
     }
 
     for (i = 0; i < count; i++) {
@@ -579,10 +582,10 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
 void gmClassic_OnLoad(void)
 {
     UnkAllstarData* data;
-    gmClassicSceneData* scene_data = (gmClassicSceneData*) gm_803DDC58_Scenes;
+    s32 i;
     gmClassic_80490880Data* o = &gmClassic_80490880;
     gm_803DDEC8Struct* entry;
-    s32 i;
+    gmClassicSceneData* scene_data = (gmClassicSceneData*) gm_803DDC58_Scenes;
     PAD_STACK(32);
 
     for (entry = scene_data->matchups.x00; entry->x0 != 0x0D; entry++) {
@@ -643,10 +646,10 @@ void gmClassic_801B3500(GameScene* arg0)
 {
     gmClassicIntroData* sd;
     gm_803DDEC8Struct* entry;
-    UnkAllstarData* ad;
-    int enemy_count;
     int ally_count;
     int i;
+    UnkAllstarData* ad;
+    int enemy_count;
     struct GameCache* gc;
     int count;
     u64 audio;
@@ -684,9 +687,6 @@ void gmClassic_801B3500(GameScene* arg0)
         case 3:
             sd->x04 = 3;
             break;
-        default:
-            sd->x04 = 0;
-            break;
         }
     } else {
         sd->x04 = 0;
@@ -709,31 +709,37 @@ void gmClassic_801B3500(GameScene* arg0)
     }
     sd->x0C = enemy_count;
 
-    ally_count = 1;
-    ckind = ad->x0.ckind;
-    if (ckind == 0x12 && ad->x0.xC.x12 != 0) {
-        sd->x0D[0] = 0x13;
-    } else {
-        sd->x0D[0] = ckind;
-    }
-    sd->x13[0] = ad->x0.color;
+    {
+        int j;
 
-    gm_8017DB88(ad->x0.xC.x24, entry->x1, ad->x0.cpu_level,
-                (u8) gm_8017BE84(arg0->idx), sd->x10, sd->x0D[0],
-                (u8 (*)(s32, s32, u8))(Event) ad->x58,
-                (u8 (*)(s32, s32, u8))(Event) ad->x5C,
-                (u8 (*)(s32, s32, u8))(Event) ad->x60,
-                (f32 (*)(s32, s32))(Event) ad->x6C,
-                (f32 (*)(s32, s32))(Event) ad->x70);
-
-    for (i = 1; i < 3; i++) {
-        sd->x0D[i] = gm_8017DB6C((gm_8017DB6C_arg0_t*) ad->x0.xC.x24, i - 1);
-        sd->x13[i] = gm_8017DB78((gm_8017DB6C_arg0_t*) ad->x0.xC.x24, i - 1);
-        if (sd->x0D[i] != 0x21) {
-            ally_count++;
+        ally_count = 1;
+        ckind = ad->x0.ckind;
+        if (ckind == 0x12 && ad->x0.xC.x12 != 0) {
+            sd->x0D[0] = 0x13;
+        } else {
+            sd->x0D[0] = ckind;
         }
+        sd->x13[0] = ad->x0.color;
+
+        gm_8017DB88(ad->x0.xC.x24, entry->x1, ad->x0.cpu_level,
+                    (u8) gm_8017BE84(arg0->idx), entry->xC->x02_u8, sd->x0D[0],
+                    (u8 (*)(s32, s32, u8))(Event) ad->x58,
+                    (u8 (*)(s32, s32, u8))(Event) ad->x5C,
+                    (u8 (*)(s32, s32, u8))(Event) ad->x60,
+                    (f32 (*)(s32, s32))(Event) ad->x6C,
+                    (f32 (*)(s32, s32))(Event) ad->x70);
+
+        for (j = 1; j < 3; j++) {
+            sd->x0D[j] =
+                gm_8017DB6C((gm_8017DB6C_arg0_t*) ad->x0.xC.x24, j - 1);
+            sd->x13[j] =
+                gm_8017DB78((gm_8017DB6C_arg0_t*) ad->x0.xC.x24, j - 1);
+            if (sd->x0D[j] != 0x21) {
+                ally_count++;
+            }
+        }
+        sd->x0B = ally_count;
     }
-    sd->x0B = ally_count;
     sd->x09 = ad->x0.x4;
 
     gc = &lbDvd_8001822C()->game_cache;
@@ -830,19 +836,27 @@ void gmClassic_801B3500(GameScene* arg0)
 
     audio = lbAudioAx_80026E84(ad->x0.ckind);
 
-    for (i = 0; i < 3; i++) {
-        s8 achar = ad->x0.xC.x24[i].ckind;
-        if (achar != 0x21) {
-            audio |= lbAudioAx_80026E84(achar);
+    {
+        int j;
+
+        for (j = 0; j < 3; j++) {
+            s8 achar = ad->x0.xC.x24[j].ckind;
+            if (achar != 0x21) {
+                audio |= lbAudioAx_80026E84(achar);
+            }
         }
     }
 
-    for (i = 0; i < 3; i++) {
-        s8 echar = entry->xC->x02[i];
-        if (echar != 0x21) {
-            audio |= lbAudioAx_80026E84(echar);
-            if (entry->xC->x02[i] == 4) {
-                audio |= ((u64) 2 << 32) | 0x4000;
+    {
+        int j;
+
+        for (j = 0; j < 3; j++) {
+            s8 echar = entry->xC->x02[j];
+            if (echar != 0x21) {
+                audio |= lbAudioAx_80026E84(echar);
+                if (entry->xC->x02[j] == 4) {
+                    audio |= ((u64) 2 << 32) | 0x4000;
+                }
             }
         }
     }

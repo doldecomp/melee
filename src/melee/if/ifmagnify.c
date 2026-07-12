@@ -156,9 +156,9 @@ ifMagnifyPlayer* ifMagnify_802FB73C(ifMagnifyPlayer* arg0, Vec2* arg1,
 
 void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
 {
-    Vec2 pos;
     S32Vec2 screen_pos;
     Vec2 out;
+    Vec2 pos;
     Vec3 translate;
     GXColor color;
     GXColor color_copy;
@@ -170,7 +170,7 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
     u8 arrow_kind;
     u8 slot_type;
     u8 teams_enabled;
-    u8 operand_pad[20];
+    u8 operand_pad[12];
 
     if (arg1 != 0) {
         return;
@@ -227,6 +227,8 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
 
 void ifMagnify_802FBBDC(HSD_GObj* arg0)
 {
+    int i;
+    f32 mix2;
     f32 right;
     ifMagnify* magnify;
     HSD_CObj* cobj;
@@ -247,10 +249,8 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
     f32 y_class;
     f32 mix0;
     f32 mix1;
-    f32 mix2;
     f32 mix3;
     GXColor result;
-    int i;
     int j;
     u8* color_ids;
     bool should_display;
@@ -468,11 +468,10 @@ void ifMagnify_802FC3C0(s32 slot)
             (ifMagnifyImageDescCopy*) &ifMagnify_804A1DE0;
 
         copy_base->image_descs[slot] = *ifMagnify_804A1DE0.player[0].idesc;
-        {
-            HSD_ImageDesc* tmp =
-                ((ifMagnifyImageDescBase*) &ifMagnify_804A1DE0)->image_descs;
-            player->idesc = &tmp[slot - 1];
-        }
+        copy_base =
+            (ifMagnifyImageDescCopy*) ((ifMagnifyImageDescBase*) &ifMagnify_804A1DE0)
+                ->image_descs;
+        player->idesc = &((HSD_ImageDesc*) copy_base)[slot - 1];
         player->idesc->image_ptr = HSD_MemAlloc(
             (GXGetTexBufferSize(player->idesc->width, player->idesc->height,
                                 player->idesc->format, 0, 0) +

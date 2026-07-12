@@ -500,7 +500,6 @@ void fn_8024B2B0(HSD_GObj* arg0)
     }
     inputs = mn_80229624(4U);
     mn_804A04F0.buttons = inputs;
-    mn_804A04F0.entering_menu = 0;
     if (inputs & MenuInput_Back) {
         mn_804A04F0.entering_menu = 0;
         mn_80229894(5, 2U, 3);
@@ -515,6 +514,7 @@ void fn_8024B2B0(HSD_GObj* arg0)
             state = 1;
         }
         user_data->unk0 = state;
+        state = user_data->unk0;
         gobj = mnSoundTest_804D6C40;
         mnSoundTest_8024ABF8(gobj, (u8) (-(s32) state == 0));
         mnSoundTest_8024AD58(gobj, state);

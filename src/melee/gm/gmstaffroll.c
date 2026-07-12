@@ -486,7 +486,6 @@ void fn_801AB200(HSD_GObj* gobj)
     s32 adj_val;
     f32 vel_x, vel_y;
     f32 sq_x, sq_y;
-    f32 cursor_vy;
     StaffRollPtclNode* p;
     int entry_idx;
     int broke;
@@ -505,11 +504,10 @@ void fn_801AB200(HSD_GObj* gobj)
     HSD_JObj* child_jobj;
     f32 fov_scale;
     f32 half_size;
-    Vec3* corners;
     f32 highlight_val;
     f32 offset1, offset2;
     HSD_Text* tally_text;
-    PAD_STACK(88);
+    PAD_STACK(80);
 
     lb_80011E24(root, &cursor_jobj, 7, -1);
 
@@ -534,24 +532,21 @@ void fn_801AB200(HSD_GObj* gobj)
         adj_val = 0;
     }
 
-    sq_x = vel_x * vel_x + 6400.0f;
-    (void) sq_x;
     vel_y = (f32) adj_val;
-    sq_x = sqrtf(sq_x);
-    vel_x = vel_x * 0.00038461538f * sq_x;
-    sq_y = vel_y * vel_y + 6400.0f;
-    sq_y = sqrtf(sq_y);
+    sq_x = sqrtf(vel_x * vel_x + 6400.0f);
+    vel_x *= 0.00038461538f * sq_x;
+    sq_y = sqrtf(vel_y * vel_y + 6400.0f);
 
-    cursor_vy = vel_y * (0.00038461538f * sq_y);
-    if (cursor_vy < -2.6f) {
-        cursor_vy = -2.6f;
+    vel_y *= 0.00038461538f * sq_y;
+    if (vel_y < -2.6f) {
+        vel_y = -2.6f;
     }
-    if (cursor_vy > 2.6f) {
-        cursor_vy = 2.6f;
+    if (vel_y > 2.6f) {
+        vel_y = 2.6f;
     }
 
     gm_804D6804.x0 = vel_x;
-    gm_804D6804.x4 = cursor_vy;
+    gm_804D6804.x4 = vel_y;
 
     HSD_JObjSetTranslateX(cursor_jobj, gm_804D6804.x0);
     HSD_JObjSetTranslateY(cursor_jobj, gm_804D6804.x4);
@@ -602,23 +597,21 @@ void fn_801AB200(HSD_GObj* gobj)
 
     if (gm_804D6814 < 0x1285) {
         for (i = 0; i < gm_804D6800; i++) {
-            SortBufEntry* sort_entry = &staffInfoSortBuf[i];
-            if (sort_entry->mtx[2][3] < -1.0f) {
-                entry_idx = sort_entry->index;
+            if (staffInfoSortBuf[i].mtx[2][3] < -1.0f) {
+                entry_idx = staffInfoSortBuf[i].index;
                 if (entry_idx != 0xB7 && entry_idx < 0xC0) {
-                    hover_jobj = sort_entry->jobj;
+                    hover_jobj = staffInfoSortBuf[i].jobj;
                     half_size =
                         0.16875f * (f32) gm_803DBFD8[entry_idx]
                                        .x11[lbLang_IsSavedLanguageUS()];
-                    corners = gm_803DD1C8.corners;
-                    corners[1].x = -half_size;
-                    corners[0].x = -half_size;
-                    corners[3].x = half_size;
-                    corners[2].x = half_size;
+                    gm_803DD1C8.corners[1].x = -half_size;
+                    gm_803DD1C8.corners[0].x = -half_size;
+                    gm_803DD1C8.corners[3].x = half_size;
+                    gm_803DD1C8.corners[2].x = half_size;
                     broke = 0;
                     for (j = 0; j < 4; j++) {
-                        PSMTXMultVec(sort_entry->mtx, &corners[j],
-                                     &xform_result);
+                        PSMTXMultVec(staffInfoSortBuf[i].mtx,
+                                     &gm_803DD1C8.corners[j], &xform_result);
                         if (xform_result.z >= -1.0f) {
                             broke = 1;
                             break;
@@ -1013,6 +1006,7 @@ void gm_801AC6D8_OnEnter(void* unused)
     int const gx_link = 11;
     int i;
     HSD_GObj* gobj;
+    HSD_GObj* final_gobj;
     PAD_STACK(0x10);
 
     efLib_Init();
@@ -1106,15 +1100,15 @@ void gm_801AC6D8_OnEnter(void* unused)
         HSD_GObj_SetupProc(gobj, fn_801AAB74, 1);
     }
     {
-        HSD_GObj* gobj = GObj_Create(14, 15, 0);
+        final_gobj = GObj_Create(14, 15, 0);
         jobj = HSD_JObjLoadJoint(gm_804D6840->models[0]->joint);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
-        GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, gx_link, 0);
+        HSD_GObjObject_80390A70(final_gobj, HSD_GObj_804D7849, jobj);
+        GObj_SetupGXLink(final_gobj, HSD_GObj_JObjCallback, gx_link, 0);
         gm_8016895C(jobj, gm_804D6840->models[0], 0);
         lb_80011E24(jobj, jobj_arr, ARRAY_SIZE(jobj_arr), 20, -1);
         HSD_JObjReqAnimAll(jobj_arr[0], 0.0F);
         HSD_JObjReqAnimAll(jobj_arr[1], 0.0F);
-        HSD_GObj_SetupProc(gobj, fn_801AB200, 13);
+        HSD_GObj_SetupProc(final_gobj, fn_801AB200, 13);
     }
     lbAudioAx_80027648();
     {

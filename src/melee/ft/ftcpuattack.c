@@ -108,9 +108,9 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
     f32 tgtGrav;
     f32 fpX;
     f32 fpVx;
-    f32 tgtX;
-    f32 fpGrav;
     f32 x568;
+    f32 fpGrav;
+    f32 tgtX;
 
     cpu->x74.y = 0.0f;
     cpu->x74.x = 0.0f;
@@ -122,16 +122,16 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
     }
     fpTermNeg = -fp->co_attrs.terminal_vel;
     tgtTermNeg = -target->co_attrs.terminal_vel;
+    fpX = fp->cur_pos.x;
     fpY = fp->cur_pos.y;
+    fpVx = fp->pos_delta.x;
     fpVy = fp->pos_delta.y;
     fpGrav = fp->co_attrs.grav;
-    tgtY = target->cur_pos.y;
-    tgtVy = target->pos_delta.y;
-    fpX = fp->cur_pos.x;
-    tgtGrav = target->co_attrs.grav;
-    fpVx = fp->pos_delta.x;
     tgtX = target->cur_pos.x;
+    tgtY = target->cur_pos.y;
     tgtVx = target->pos_delta.x;
+    tgtVy = target->pos_delta.y;
+    tgtGrav = target->co_attrs.grav;
     if (target->facing_dir > 0.0) {
         rangeF = target->x1A88.x55C;
         rangeB = target->x1A88.x560;
@@ -187,7 +187,7 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
         } else {
             fpPredY = fpVy * t + fpY;
         }
-        if ((u32) target->ground_or_air == GA_Air) {
+        if (target->ground_or_air == GA_Air) {
             if (tgtGrav < 0.00001f && tgtGrav > -0.00001f) {
                 nearzero = true;
             } else {
@@ -301,20 +301,20 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
     f32 diry;
     f32 rangeF;
     f32 rangeB;
+    f32 halfRange;
     f32 fpTermNeg;
     f32 tgtTermNeg;
-    f32 fpX;
     f32 fpY;
-    f32 fpVx;
     f32 fpVy;
-    f32 fpGrav;
-    f32 tgtX;
-    f32 tgtY;
     f32 tgtVx;
+    f32 tgtY;
     f32 tgtVy;
     f32 tgtGrav;
+    f32 fpX;
+    f32 fpVx;
+    f32 tgtX;
+    f32 fpGrav;
     f32 x568;
-    f32 halfRange;
 
     PAD_STACK(0x10);
 
@@ -338,6 +338,7 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
     tgtVx = target->pos_delta.x;
     tgtVy = target->pos_delta.y;
     tgtGrav = target->co_attrs.grav;
+    x568 = target->x1A88.x568;
     if (target->facing_dir > 0.0f) {
         rangeF = target->x1A88.x55C;
         rangeB = target->x1A88.x560;
@@ -345,12 +346,9 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
         rangeF = target->x1A88.x560;
         rangeB = target->x1A88.x55C;
     }
-    x568 = target->x1A88.x568;
     count = 0;
     while (list->cmd) {
         f32 dirx;
-        f32 yHi;
-        f32 yLo;
         found = false;
         if (list->x20 > cpu->level) {
             list++;
@@ -432,7 +430,7 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
         }
         scale = fp->x34_scale.y;
         (void) scale;
-        if ((list->x14 * scale + reach) * halfRange > relPredY &&
+        if ((scale * list->x14 + reach) * halfRange > relPredY &&
             list->x10 * scale * halfRange < relPredY + x568 &&
             dirx * halfRange < relx + rangeF &&
             diry * halfRange > relx - rangeB)
@@ -498,7 +496,7 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
     bool nearzero;
     f32 r;
     f32 sum;
-    f32 acc;
+    f32 fpTermNeg;
     f32 inv;
     f32 fpPredY;
     f32 relPredY;
@@ -506,18 +504,18 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
     f32 sq;
     f32 diry;
     f32 sizeHalf;
-    f32 fpTermNeg;
-    f32 fpY;
+    f32 acc;
     f32 fpVy;
-    f32 fpGrav;
+    f32 fpY;
     f32 fpX;
+    f32 fpGrav;
     f32 fpVx;
     f32 x50TermNeg;
     f32 x50Y;
     f32 x50Vy;
-    f32 x50Grav;
-    f32 x50X;
     f32 x50Vx;
+    f32 x50X;
+    f32 x50Grav;
     f32 yBound;
 
     cpu = &fp->x1A88;

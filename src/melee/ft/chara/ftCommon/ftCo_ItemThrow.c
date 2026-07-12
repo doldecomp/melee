@@ -566,13 +566,12 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                         vec2.x = fsm * (fp->mv.co.itemthrow4.x8.x - vec0.x) +
                                  vec0.x;
                         {
-                            float vec1_y =
+                            vec2.y =
                                 fsm * (fp->mv.co.itemthrow4.x8.y - vec0.y) +
                                 vec0.y;
-                            vec2.y = vec1_y;
                             vec2.z = 0;
                             pl_8003E978(fp->player_id, fp->x221F_b4,
-                                        fp->item_gobj, vec1_y,
+                                        fp->item_gobj, vec2.y,
                                         base_throw_speed, cd_xB4, throw_speed,
                                         vec0.x, vec0.y, fsm);
                         }

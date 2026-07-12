@@ -2708,7 +2708,18 @@ typedef struct ftKirby_CopyName {
     char* name;
 } ftKirby_CopyName;
 
-ftKirby_CopyName ftKb_Init_803CA9D0[FTKIND_MAX] = {
+/// @remark Matching tactic: `__declspec(weak)` on this table and on
+/// #ftKb_Init_803CB3E8 keeps MWCC from pooling the copy-ability tables
+/// through one shared .data base register in #ftKb_SpecialN_800EEC34 and
+/// #ftKb_SpecialN_800EED50. MWCC only applies pooled-data addressing when a
+/// function references at least three same-section objects whose section
+/// offsets are already fixed; a weak definition may be overridden at link
+/// time, so it never qualifies. The retail code materializes each table
+/// address independently (evidence: with these two markers removed,
+/// ftKb_SpecialN_800EEC34 drops from 100% to 88.13% and
+/// ftKb_SpecialN_800EED50 from 96.75% to 80.48%, both via `...data.0`
+/// anchored pooling; no other symbol in the unit changes either way).
+__declspec(weak) ftKirby_CopyName ftKb_Init_803CA9D0[FTKIND_MAX] = {
     { "PlKbCpMr.dat", "ftDataKirbyCopyMario" },
     { "PlKbCpFx.dat", "ftDataKirbyCopyFox" },
     { "PlKbCpCa.dat", "ftDataKirbyCopyCaptain" },
@@ -2869,7 +2880,8 @@ Fighter_CostumeStrings ftKb_Init_803CB3A0[] = {
     { ftKb_Init_803CB358, ftKb_Init_803CB368, ftKb_Init_803CB380 },
 };
 
-Fighter_CostumeStrings* ftKb_Init_803CB3E8[] = {
+/// @remark `__declspec(weak)`: see #ftKb_Init_803CA9D0.
+__declspec(weak) Fighter_CostumeStrings* ftKb_Init_803CB3E8[] = {
     NULL,
     NULL,
     NULL,
@@ -3487,15 +3499,15 @@ void ftKb_SpecialN_800EF35C(Fighter_GObj* gobj, int arg1, u8* arg2)
     PAD_STACK(4);
     while (matanimjoint != NULL) {
         if (ftParts_8007506C(fp->kind, i) != 0) {
-            i++;
             arg2++;
+            i++;
         } else {
             if (matanimjoint->matanim != NULL) {
                 HSD_DObjAddAnimAll(fp->fv.kb.hat.x14.data[*arg2],
                                    matanimjoint->matanim, NULL);
             }
-            i++;
             arg2++;
+            i++;
             ftAnim_GetNextMatAnimJointInTree(&matanimjoint, &idx);
         }
     }
@@ -3608,9 +3620,8 @@ void ftKb_SpecialN_800EF69C(Fighter_GObj* gobj, int arg1, KirbyHatStruct* hat)
             dobj = (HSD_DObj*) jobj;
             if (jobj != NULL && (bone->flags_b6 || bone->flags2_b7)) {
                 u8* b9p = &((u8*) bone)[9];
-                u8 b9 = *b9p;
-                if ((b9 >> 1) & 1) {
-                    if ((b9 >> 2) & 1) {
+                if ((*b9p >> 1) & 1) {
+                    if ((*b9p >> 2) & 1) {
                         dobj =
                             *(HSD_DObj**) ((u8*) fp->x203C.data +
                                            ((((u8*) bone)[0xD] * 2) & 0x1FC));
@@ -3625,9 +3636,7 @@ void ftKb_SpecialN_800EF69C(Fighter_GObj* gobj, int arg1, KirbyHatStruct* hat)
                     HSD_DObjRemoveAll(HSD_JObjGetDObj(jobj));
                     lb_8000CE40(jobj, NULL);
                 }
-                ((FighterBone*) ((u8*) fp->parts + off))->flags2_b7 = false;
-                ((FighterBone*) ((u8*) fp->parts + off))->flags_b6 =
-                    ((FighterBone*) ((u8*) fp->parts + off))->flags2_b7;
+                fp->parts[i].flags_b6 = fp->parts[i].flags2_b7 = false;
             }
             off += 0x10;
             i += 1;
@@ -4238,28 +4247,31 @@ static void ftKb_SpecialN_800EF040_noinline(Fighter_GObj* gobj, int arg1,
     ftKb_SpecialN_800EF040(gobj, arg1, hat);
 }
 
+/// Load Yoshi's hat for Kirby's copy ability.
+/// @note The split Fighter* locals mirror the matched
+/// ftKb_SpecialN_800F11F0 and are required for register allocation.
 void ftKb_SpecialN_800F10D4(Fighter_GObj* gobj)
 {
-    u8 sp14[0x90];
+    u8 part_dobj_indices[0x88];
     Fighter* fp = gobj->user_data;
     Fighter* fp2 = gobj->user_data;
-    KirbyHatStruct* temp_r28;
-    PAD_STACK(4);
-    if (fp->fv.kb.hat.x14.data != NULL) {
+    KirbyHatStruct* hat;
+    PAD_STACK(8);
+    if (fp2->fv.kb.hat.x14.data != NULL) {
         return;
     }
-    temp_r28 = ft_80459B88.hats[14];
-    ftKb_SpecialN_800EF040_noinline(gobj, 0xF, temp_r28);
-    fp->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
-    fp->fv.kb.hat.x1C.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
-    ftKb_SpecialN_800EF0E4(gobj, 0xF, sp14);
-    ftKb_SpecialN_800EF35C(gobj, 0xF, sp14);
-    ftKb_SpecialN_800EF438(gobj, temp_r28);
-    ftParts_8007487C((FtPartsDesc*) temp_r28, &fp->fv.kb.hat.x24,
+    hat = ft_80459B88.hats[14];
+    ftKb_SpecialN_800EF040_noinline(gobj, 0xF, hat);
+    fp2->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
+    fp2->fv.kb.hat.x1C.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
+    ftKb_SpecialN_800EF0E4(gobj, 0xF, part_dobj_indices);
+    ftKb_SpecialN_800EF35C(gobj, 0xF, part_dobj_indices);
+    ftKb_SpecialN_800EF438(gobj, hat);
+    ftParts_8007487C((FtPartsDesc*) hat, &fp->fv.kb.hat.x24,
                      fp->x619_costume_id, &fp->fv.kb.hat.x14,
                      &fp->fv.kb.hat.x1C);
-    ftAnim_80070200(fp, (ftData_x8_x8*) &temp_r28->desc.vis_table,
-                    &fp->fv.kb.x44, &fp->fv.kb.hat.x14);
+    ftAnim_80070200(fp, (ftData_x8_x8*) &hat->desc.vis_table, &fp->fv.kb.x44,
+                    &fp->fv.kb.hat.x14);
     ftCo_8009D81C(fp2);
 }
 

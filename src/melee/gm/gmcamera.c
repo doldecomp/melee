@@ -200,7 +200,9 @@ void gmCamera_801A253C(s32* arg0, s32* arg1)
     s32* x30 = &gcus->x30;
     s32* x40 = &gcus->x40;
     s32* x44;
-    s32 result = MIN(*x40, *x30);
+    s32* min_a = x30;
+    s32* min_b = x40;
+    s32 result = MIN(*min_a, *min_b);
 
     gcus->x44 = result;
     x44 = &gcus->x44;
@@ -356,42 +358,47 @@ void gmCamera_801A28AC(void)
 void gmCamera_801A292C(void)
 {
     HSD_Text* text;
-    gmCameraUnkStruct* unk = &gmCamera_80479BC8.gcus;
-    HSD_Text** texts = unk->x48;
-    gmCameraUnkStruct4Ptrs* snaps = (gmCameraUnkStruct4Ptrs*) unk;
-    f32* tbl = gmCamera_803DA630;
     s32 i;
     f32 new_var;
-    PAD_STACK(4);
+    union {
+        gmCameraUnkStruct* gcus;
+        gmCameraUnkStruct4Ptrs* gcus4;
+    } unk;
+    HSD_Text** texts;
+    f32* tbl = gmCamera_803DA630;
+    PAD_STACK(8);
 
-    if (unk->x48[0] != NULL) {
+    unk.gcus = &gmCamera_80479BC8.gcus;
+    texts = unk.gcus->x48;
+
+    if (unk.gcus->x48[0] != NULL) {
         for (i = 0; i < 3; i++) {
-            HSD_SisLib_803A5CC4(unk->x48[i]);
-            unk->x48[i] = NULL;
+            HSD_SisLib_803A5CC4(unk.gcus->x48[i]);
+            unk.gcus->x48[i] = NULL;
         }
     }
 
     for (i = 0; i < 2; i++) {
-        snaps->x24[i].x0 = lbSnap_8001D40C(i);
-        if (!snaps->x24[i].x0) {
-            snaps->x24[i].x4 = lbSnap_8001D3B0(i);
-            snaps->x24[i].x8 = lbSnap_8001D3CC(i);
+        unk.gcus4->x24[i].x0 = lbSnap_8001D40C(i);
+        if (!unk.gcus4->x24[i].x0) {
+            unk.gcus4->x24[i].x4 = lbSnap_8001D3B0(i);
+            unk.gcus4->x24[i].x8 = lbSnap_8001D3CC(i);
         }
     }
 
-    text = HSD_SisLib_803A5ACC(3, (s32) unk->x54, tbl[10], tbl[11], 0.0f,
+    text = HSD_SisLib_803A5ACC(3, (s32) unk.gcus->x54, tbl[10], tbl[11], 0.0f,
                                640.0f, 32.0f);
     new_var = tbl[9];
     text->font_size.x = tbl[8];
     text->font_size.y = new_var;
     text->default_kerning = 1;
-    gmCamera_801A2224(HSD_SisLib_803A6530(3, 3, 4), unk->x20);
+    gmCamera_801A2224(HSD_SisLib_803A6530(3, 3, 4), unk.gcus->x20);
     HSD_SisLib_803A660C(3, 3, 5);
     HSD_SisLib_803A6368(text, 3);
-    unk->x48[2] = text;
+    unk.gcus->x48[2] = text;
     texts[0] = gmCamera_801A2334(0, tbl[2], tbl[3], tbl[0], tbl[1]);
-    unk->x48[1] = gmCamera_801A2334(1, tbl[6], tbl[7], tbl[4], tbl[5]);
-    unk->x44 = MIN(unk->x30, unk->x40);
+    unk.gcus->x48[1] = gmCamera_801A2334(1, tbl[6], tbl[7], tbl[4], tbl[5]);
+    unk.gcus->x44 = MIN(unk.gcus->x30, unk.gcus->x40);
 }
 
 void gmCamera_801A2AAC(void)
@@ -485,7 +492,7 @@ static inline void gmCamera_801A2D44_update_selection(HSD_JObj** jobj_b,
     f32 translate_x;
 
     px18 = &gcus->x18;
-    if ((HSD_PadCopyStatus[3].trigger & 0x40001) && (s32) *px18 != 0) {
+    if ((HSD_PadCopyStatus[3].trigger & 0x40001) && (s32) gcus->x18 != 0) {
         lbAudioAx_80024030(2);
         *px18 = 0;
         lb_80011E24(gcus->x8, &(*jobj), 0xC, -1);
@@ -495,7 +502,9 @@ static inline void gmCamera_801A2D44_update_selection(HSD_JObj** jobj_b,
             translate_x = -5.0f;
         }
         HSD_JObjSetTranslateX(*jobj, translate_x);
-    } else if ((HSD_PadCopyStatus[3].trigger & 0x80002) && (s32) *px18 != 1) {
+    } else if ((HSD_PadCopyStatus[3].trigger & 0x80002) &&
+               (s32) gcus->x18 != 1)
+    {
         lbAudioAx_80024030(2);
         *px18 = 1;
         lb_80011E24(gcus->x8, &(*jobj_b), 0xC, -1);
@@ -605,38 +614,42 @@ void fn_801A31D8(HSD_GObj* gobj)
     HSD_JObjAnimAll(gobj->hsd_obj);
 }
 
+static inline HSD_JObj* gmCamera_SetJObj(HSD_JObj** dst, HSD_JObj* jobj)
+{
+    *dst = jobj;
+    return jobj;
+}
+
 void gmCamera_801A31FC(void)
 {
-    HSD_GObj* gobj_a;
+    gmCameraUnkFuncTable* entry;
     HSD_GObj* gobj_b;
-    HSD_JObj* jobj_a;
     HSD_JObj* jobj_b;
     HSD_Joint** joint_a;
     DynamicModelDesc* mdl_b;
-    void (*cb)(void);
+    HSD_GObj* gobj_a;
     gmCameraUnkStruct* gcus = &gmCamera_80479BC8.gcus;
-    PAD_STACK(24);
+    PAD_STACK(8);
 
     cmSnap_800316B4();
     gcus->x14 = 1;
     gcus->xC = 0;
-    cb = gmCamera_803DA6B4[gcus->xC].x4;
-    if (cb != NULL) {
-        cb();
+    entry = &gmCamera_803DA6B4[gcus->xC];
+    if (entry->x4 != NULL) {
+        entry->x4();
     }
     gcus->ifvscam = lbArchive_LoadArchive("IfVsCam");
     joint_a = HSD_ArchiveGetPublicAddress(gcus->ifvscam,
                                           "IfCameraInfo_Top_model_set");
     gobj_a = GObj_Create(0xE, 0x10, 0);
-    jobj_a = HSD_JObjLoadJoint(*joint_a);
-    gcus->x4 = jobj_a;
-    HSD_GObjObject_80390A70(gobj_a, HSD_GObj_804D7849, jobj_a);
+    HSD_GObjObject_80390A70(
+        gobj_a, HSD_GObj_804D7849,
+        gmCamera_SetJObj(&gcus->x4, HSD_JObjLoadJoint(*joint_a)));
     GObj_SetupGXLink(gobj_a, HSD_GObj_JObjCallback, 0xB, 0);
     mdl_b =
         HSD_ArchiveGetPublicAddress(gcus->ifvscam, "IfCamera_Top_model_set");
     gobj_b = GObj_Create(0xE, 0x10, 0);
-    jobj_b = HSD_JObjLoadJoint(mdl_b->joint);
-    gcus->x8 = jobj_b;
+    jobj_b = gmCamera_SetJObj(&gcus->x8, HSD_JObjLoadJoint(mdl_b->joint));
     HSD_GObjObject_80390A70(gobj_b, HSD_GObj_804D7849, jobj_b);
     GObj_SetupGXLink(gobj_b, HSD_GObj_JObjCallback, 0xB, 0);
     gm_8016895C(jobj_b, mdl_b, 0);

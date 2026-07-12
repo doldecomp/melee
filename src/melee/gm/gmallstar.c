@@ -385,14 +385,15 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     u8 colors[3];
     s8* chars_ptr;
     u8* base;
-    s32 is_last_round;
+    s32 count;
     gm_803DEBE8_t* opp_data;
     s32 count_processed;
-    s32 count;
+    s32 is_last_round;
     struct GameCache* gc;
     s32 slot_idx;
-    u64 audio;
+    u8* colors_ptr;
     s32 i;
+    u64 audio;
     PAD_STACK(8);
 
     base = (u8*) gm_803DE930_Scenes;
@@ -413,8 +414,9 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
         chars[count_processed] = opp_data[count_processed].x3;
     }
 
+    colors_ptr = colors;
     {
-        u8* cp = colors;
+        u8* cp = colors_ptr;
         for (i = 0; i < 3; i++) {
             *cp = arg0->x54(arg1, arg0->x0.cpu_level, (u8) i);
             cp++;
@@ -422,16 +424,16 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     }
 
     gmRegSetupEnemyColorTable(arg0->x0.ckind, arg0->x0.color, chars_ptr,
-                              colors);
+                              colors_ptr);
 
     if ((s32) arg1 == 0xC) {
         chars_ptr[0] = 3;
-        colors[0] = 0;
+        colors_ptr[0] = 0;
         is_last_round = 1;
         chars_ptr[1] = 3;
-        colors[1] = 0;
+        colors_ptr[1] = 0;
         chars_ptr[2] = 3;
-        colors[2] = 0;
+        colors_ptr[2] = 0;
     }
 
     gc = &lbDvd_8001822C()->game_cache;
@@ -451,7 +453,7 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
                 if (is_last_round != 0) {
                     gc->entries[idx].color = 0xFF;
                 } else {
-                    gc->entries[idx].color = colors[i];
+                    gc->entries[idx].color = colors_ptr[i];
                 }
                 idx++;
             }
@@ -588,6 +590,18 @@ void fn_801B5AA8(int arg0)
     lbBgFlash_8002063C(0x78);
 }
 
+static inline void gmAllStarPreloadRemainingFighters(int round)
+{
+    s32 end_idx = (s32) gm_803DEC4C[round + 1].start;
+    gm_803DEBE8_t* opp = &gm_803DEBE8[end_idx];
+
+    while (end_idx < 0x19) {
+        gm_8016A998((s8) opp->x3, 0);
+        opp++;
+        end_idx++;
+    }
+}
+
 void gm_801B5ACC(GameScene* arg0)
 {
     u8 operand_pad[8];
@@ -629,7 +643,10 @@ void gm_801B5ACC(GameScene* arg0)
     data->players[0].xD_b2 = 1;
     data->rules.x7 = 9;
 
-    round = gm_8017BE84(arg0->idx);
+    {
+        u16 temp = gm_8017BE84(arg0->idx);
+        round = temp;
+    }
 
     {
         AllstarRoundInfo* ri = &gm_803DEC4C[round];
@@ -662,15 +679,7 @@ void gm_801B5ACC(GameScene* arg0)
     gm_8016F088(data);
     gm_8016A92C(&data->rules);
 
-    {
-        s32 end_idx = (s32) gm_803DEC4C[round + 1].start;
-        gm_803DEBE8_t* opp = &gm_803DEBE8[end_idx];
-        while (end_idx < 0x19) {
-            gm_8016A998((s8) opp->x3, 0);
-            opp++;
-            end_idx++;
-        }
-    }
+    gmAllStarPreloadRemainingFighters(round);
 
     gm_801B5324(allstar, round + 1);
     data->rules.x50 = (void (*)(u8))(Event) fn_801B5AA8;
@@ -750,7 +759,7 @@ void gm_801B60A4_OnLoad(void)
     gm_803DEBE8_t* var_r30;
     int temp;
     gm_803DEBE8_t tmp;
-    PAD_STACK(16);
+    PAD_STACK(12);
 
     data = &gm_80473A18;
     gmMainLib_8015CDE0();
@@ -790,42 +799,12 @@ void gm_801B60A4_OnLoad(void)
     }
 
     data->x74 = 0;
+    data->x9C = 0;
     {
-        UnkAllstarData* p = &gm_80473A18;
-        int i = 0x18;
-        data->x9C = 0;
+        int i;
         temp = 0x21;
-        p->x76[0] = temp;
-        p->x76[1] = temp;
-        p->x76[2] = temp;
-        p->x76[3] = temp;
-        p->x76[4] = temp;
-        p->x76[5] = temp;
-        p->x76[6] = temp;
-        p->x76[7] = temp;
-        p->x76[8] = temp;
-        p->x76[9] = temp;
-        p->x76[0xA] = temp;
-        p->x76[0xB] = temp;
-        p->x76[0xC] = temp;
-        p->x76[0xD] = temp;
-        p->x76[0xE] = temp;
-        p->x76[0xF] = temp;
-        p->x76[0x10] = temp;
-        p->x76[0x11] = temp;
-        p->x76[0x12] = temp;
-        p->x76[0x13] = temp;
-        p->x76[0x14] = temp;
-        p->x76[0x15] = temp;
-        p->x76[0x16] = temp;
-        p->x76[0x17] = temp;
-
-        if (i < 0x1A) {
-            u8* q = ((u8*) p) + i;
-            i = 0x1A - i;
-            do {
-                *(q++ + 0x76) = temp;
-            } while (--i != 0);
+        for (i = 0; i < 0x1A; i++) {
+            gm_80473A18.x76[i] = temp;
         }
     }
 

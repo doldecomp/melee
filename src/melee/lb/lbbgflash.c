@@ -82,19 +82,17 @@ void fn_8001FC08(void)
     u8 target;
 
     if (data->x20[0] > 0.0f) {
-        target = data->x8.r;
         cur_val = *(cur = &data->x10[0]);
         val = cur_val + data->x20[0];
-        if (val < (f32) target) {
+        if (val < (f32) (target = data->x8.r)) {
             *cur = val;
         } else {
             *cur = (f32) target;
         }
     } else {
-        target = data->x8.r;
         cur_val = *(cur = &data->x10[0]);
         val = cur_val + data->x20[0];
-        if (val > (f32) target) {
+        if (val > (f32) (target = data->x8.r)) {
             *cur = val;
         } else {
             *cur = (f32) target;
@@ -102,19 +100,17 @@ void fn_8001FC08(void)
     }
 
     if (data->x20[1] > 0.0f) {
-        target = data->x8.g;
         cur_val = *(cur = &data->x10[1]);
         val = cur_val + data->x20[1];
-        if (val < (f32) target) {
+        if (val < (f32) (target = data->x8.g)) {
             *cur = val;
         } else {
             *cur = (f32) target;
         }
     } else {
-        target = data->x8.g;
         cur_val = *(cur = &data->x10[1]);
         val = cur_val + data->x20[1];
-        if (val > (f32) target) {
+        if (val > (f32) (target = data->x8.g)) {
             *cur = val;
         } else {
             *cur = (f32) target;
@@ -122,19 +118,17 @@ void fn_8001FC08(void)
     }
 
     if (data->x20[2] > 0.0f) {
-        target = data->x8.b;
         cur_val = *(cur = &data->x10[2]);
         val = cur_val + data->x20[2];
-        if (val < (f32) target) {
+        if (val < (f32) (target = data->x8.b)) {
             *cur = val;
         } else {
             *cur = (f32) target;
         }
     } else {
-        target = data->x8.b;
         cur_val = *(cur = &data->x10[2]);
         val = cur_val + data->x20[2];
-        if (val > (f32) target) {
+        if (val > (f32) (target = data->x8.b)) {
             *cur = val;
         } else {
             *cur = (f32) target;
@@ -142,19 +136,17 @@ void fn_8001FC08(void)
     }
 
     if (data->x20[3] > 0.0f) {
-        target = data->x8.a;
         cur_val = *(cur = &data->x10[3]);
         val = cur_val + data->x20[3];
-        if (val < (f32) target) {
+        if (val < (f32) (target = data->x8.a)) {
             *cur = val;
         } else {
             *cur = (f32) target;
         }
     } else {
-        target = data->x8.a;
         cur_val = *(cur = &data->x10[3]);
         val = cur_val + data->x20[3];
-        if (val > (f32) target) {
+        if (val > (f32) (target = data->x8.a)) {
             *cur = val;
         } else {
             *cur = (f32) target;
@@ -264,9 +256,9 @@ void fn_8001FEC4(HSD_GObj* gobj, s32 code)
             for (pY = &data->x38, y2 = data->x38; y2 <= 0x1E0; y2 += data->x32)
             {
                 if (y2 == *pY) {
-                    s32 x34;
-                    u8 strip_h;
                     s32 right;
+                    u8 strip_h;
+                    s32 x34;
                     s32 neg_y;
                     s32 xr;
                     s32 neg_yh;
@@ -277,7 +269,7 @@ void fn_8001FEC4(HSD_GObj* gobj, s32 code)
                     right -= x34;
                     GXBegin(GX_QUADS, GX_VTXFMT0, 4);
                     neg_y = -y2;
-                    xr = right + x34;
+                    xr = x34 + right;
                     neg_yh = -(y2 + strip_h);
                     GXPosition2f32((f32) x34, (f32) neg_y);
                     GXColor4u8(0, 0, 0, 0xFF);
@@ -756,8 +748,8 @@ void lbBgFlash_80021410(void* arg0)
     f32 acos2;
     f64 rem;
     f32 dx;
-    f32 dy;
     f32 dz;
+    f32 dy;
     Vec3* pDiff;
     PAD_STACK(16);
 

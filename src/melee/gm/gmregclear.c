@@ -814,12 +814,12 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     attack_ratio = arg1->x64((u8) count, arg1->x0.cpu_level);
     defense_ratio = arg1->x68((u8) count, arg1->x0.cpu_level);
 
-    color_iter = colors;
     {
-        u8* out_color = color_iter;
+        u8* out_color = colors;
         s8* kind_iter = arg2;
         for (color_idx = 0; color_idx < 3; color_idx++) {
-            u8 num_colors = gm_80169238((u8) *kind_iter);
+            u8 kind = (u8) *kind_iter;
+            u8 num_colors = gm_80169238(kind);
             u8 color_id;
             if (arg1->x54 != NULL) {
                 u8 requested_color;
@@ -838,6 +838,7 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
             kind_iter += 1;
         }
     }
+    color_iter = colors;
 
     {
         s32 temp_r3_4 = arg1->x0.x8 & 8;
@@ -3058,7 +3059,7 @@ void fn_80181708(void)
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xBU, 0U);
     HSD_GObj_SetupProc(gobj, fn_80180C14, 0x15U);
     gm_8016895C(jobj, *lbl_804D65CC, 0);
-    HSD_JObjReqAnimAll(jobj, 1.0F);
+    HSD_JObjReqAnimAll(jobj, 0.0f);
     HSD_JObjAnimAll(jobj);
     HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
 
@@ -3068,7 +3069,7 @@ void fn_80181708(void)
     GObj_SetupGXLink(new_var, HSD_GObj_JObjCallback, 0xBU, 0U);
     HSD_GObj_SetupProc(new_var, fn_80180C60, 0x15U);
     gm_8016895C(jobj, *lbl_804D65D0, 0);
-    HSD_JObjReqAnimAll(jobj, 0.2F);
+    HSD_JObjReqAnimAll(jobj, 10.0f);
     HSD_JObjAnimAll(jobj);
     HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
 
@@ -3082,14 +3083,31 @@ void fn_80181708(void)
     gm_80168F88();
 }
 
+/// Archive/symbol name strings owned by this TU at 0x803D8CD8..0x803D8D04.
+/// The reference code in gm_80181998 addresses all three strings off the
+/// first string's symbol (base+0x0 / base+0xC / base+0x24), so the calls
+/// below reference gmRegClear_ArchiveNoContinue (declared in gmregclear.h)
+/// plus the fixed offsets of the two strings that follow it in the binary.
+/// Two details are load-bearing for the reference encoding: the definitions
+/// must FOLLOW this function (defining the data before use makes MWCC anchor
+/// at the section base instead of the symbol), and the third argument of the
+/// first call must be an integer expression (spelling both
+/// "ScInfCnt_scene_models" arguments as the same pointer expression makes
+/// MWCC CSE the address into a saved register; the reference recomputes it).
 void gm_80181998(void)
 {
-    lbl_804D65C8 = lbArchive_80016DBC("IfHrNoCn", &lbl_804D65CC,
-                                      "ScInfCnt_scene_models", 0);
-    lbl_804D65C8 = lbArchive_80016DBC("IfHrReco", &lbl_804D65D0,
-                                      "ScInfCnt_scene_models", 0);
+    lbl_804D65C8 =
+        lbArchive_80016DBC(gmRegClear_ArchiveNoContinue, &lbl_804D65CC,
+                           (u32) gmRegClear_ArchiveNoContinue + 0xC, 0);
+    lbl_804D65C8 =
+        lbArchive_80016DBC(gmRegClear_ArchiveNoContinue + 0x24, &lbl_804D65D0,
+                           gmRegClear_ArchiveNoContinue + 0xC, 0);
     fn_80181708();
 }
+
+char gmRegClear_ArchiveNoContinue[] = "IfHrNoCn";
+char gmRegClear_SceneModelsSymbol[] = "ScInfCnt_scene_models";
+char gmRegClear_ArchiveRecord[] = "IfHrReco";
 
 void gm_80181A00(s32 arg0, s32 arg1)
 {
@@ -3568,13 +3586,28 @@ bool gm_80182510(void)
     return false;
 }
 
+/// Original addresses these fields relative to #lbl_80472ED8 (reference
+/// relocations are lbl_80472ED8+0x6BC..+0x6C8): lbl_80473594 overlays
+/// lbl_80472ED8+0x6BC (0x80472ED8 + 0x6BC == 0x80473594), and gm_80182578
+/// below already reads the same storage via lbl_80472ED8.x6BC..x6C8.
 void gm_80182554(int arg0, int arg1)
 {
-    lbl_80473594.xC = arg0;
-    lbl_80473594.x8 = arg1;
-    lbl_80473594.x0 = 0;
-    lbl_80473594.x4 = 0;
-    lbl_80473594.x2 = 0;
+    typedef struct {
+        u8 pad_0[0x6BC];
+        u8 x6BC;
+        u8 pad_6BD;
+        u16 x6BE;
+        int x6C0;
+        int x6C4;
+        int x6C8;
+    } regclear_record_state;
+    regclear_record_state* s = (regclear_record_state*) &lbl_80472ED8;
+
+    s->x6C8 = arg0;
+    s->x6C4 = arg1;
+    s->x6BC = 0;
+    s->x6C0 = 0;
+    s->x6BE = 0;
 }
 
 typedef struct {
@@ -3582,6 +3615,11 @@ typedef struct {
     /* 0x6C */ u8 icons[28];
     /* 0x88 */ u16 times[28];
 } RecordBlock; /* 0xC0 */
+
+static inline u16 gm_80182578_GetTime(void)
+{
+    return lbl_80472ED8.x6BE;
+}
 
 s32 gm_80182578(void)
 {
@@ -3747,7 +3785,7 @@ s32 gm_80182578(void)
             return mode;
         }
         if ((u8) lbl_80472ED8.x6BC != 0) {
-            u16 time_store = lbl_80472ED8.x6BE;
+            u16 time_store = gm_80182578_GetTime();
             if ((s32) time_store > (s32) time_val) {
                 switch (mode) {
                 case 33:

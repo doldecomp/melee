@@ -284,8 +284,7 @@ struct gm_evinit {
     /* 0x06 */ u16 unk6;
     /* 0x08 */ u32 unk8;
     /* 0x0C */ u8 padC[4];
-    /* 0x10 */ u32 x10;
-    /* 0x14 */ s32 unk14;
+    /* 0x10 */ u64 x10;
     /* 0x18 */ s32 x18;
     /* 0x1C */ f32 x1C;
     /* 0x20 */ f32 unk20;
@@ -396,12 +395,7 @@ void gm_801BAD70(GameScene* arg0)
     md->rules.x10 = ((struct gm_evinit*) (*lvlpp)->x8)->unk8;
     md->rules.x14 = 0;
     md->rules.x18 = 0;
-    {
-        struct gm_evinit* init = (struct gm_evinit*) (*lvlpp)->x8;
-        u32 x10 = init->x10;
-        *(s32*) (r3b + 0x24) = init->unk14;
-        *(u32*) (r3b + 0x20) = x10;
-    }
+    md->rules.x20 = ((struct gm_evinit*) (*lvlpp)->x8)->x10;
     md->rules.x28 = ((struct gm_evinit*) (*lvlpp)->x8)->x18;
     md->rules.x30 = ((struct gm_evinit*) (*lvlpp)->x8)->x1C;
     md->rules.x34 = ((struct gm_evinit*) (*lvlpp)->x8)->unk20;
@@ -834,6 +828,7 @@ s32 gm_801BBB64(void)
     s8* player_init;
     void* event_entry;
     struct gm_804D6900_x4_t* x4;
+    int i;
 
     if (*tbl[idx]->x14 != 0x21) {
         ev->x44 = 0;
@@ -842,37 +837,15 @@ s32 gm_801BBB64(void)
     }
     pp = &tbl[idx];
     ev->x48 = (InternalStageId) * (u16*) ((u8*) (*pp)->x8 + 6);
-    player_init = (*pp)->x14;
-    if (player_init != NULL) {
-        ev->x4C[0] = *(u8*) player_init;
-        ev->x50[0] = ((u8*) (*pp)->x14)[3];
-    } else {
-        ev->x4C[0] = 0x21;
-        ev->x50[0] = 0;
-    }
-    player_init = (*pp)->x18;
-    if (player_init != NULL) {
-        ev->x4C[1] = *(u8*) player_init;
-        ev->x50[1] = ((u8*) (*pp)->x18)[3];
-    } else {
-        ev->x4C[1] = 0x21;
-        ev->x50[1] = 0;
-    }
-    player_init = *(s8**) ((u8*) *pp + 0x1C);
-    if (player_init != NULL) {
-        ev->x4C[2] = *player_init;
-        ev->x50[2] = ((u8*) *(s8**) ((u8*) *pp + 0x1C))[3];
-    } else {
-        ev->x4C[2] = 0x21;
-        ev->x50[2] = 0;
-    }
-    player_init = *(s8**) ((u8*) *pp + 0x20);
-    if (player_init != NULL) {
-        ev->x4C[3] = *player_init;
-        ev->x50[3] = ((u8*) *(s8**) ((u8*) *pp + 0x20))[3];
-    } else {
-        ev->x4C[3] = 0x21;
-        ev->x50[3] = 0;
+    for (i = 0; i < 4; i++) {
+        player_init = (&(*pp)->x14)[i];
+        if (player_init != NULL) {
+            ev->x4C[i] = *player_init;
+            ev->x50[i] = (&(*pp)->x14)[i][3];
+        } else {
+            ev->x4C[i] = 0x21;
+            ev->x50[i] = 0;
+        }
     }
     if (*(u8*) *pp == 1) {
         ev->x4C[1] = (s8) (*pp)->xC->unk0[0];
@@ -1930,6 +1903,16 @@ void gm_801BCAF0(HSD_GObj* gobj)
     }
 }
 
+/// Accessor for the event data block inside gmMainLib_804D3EE0.
+/// gm_801BCC9C needs this inline (instead of taking the address directly
+/// in its trailing block) so the compiler rematerializes the pointer in
+/// the order the reference object shows; with the direct expression the
+/// tail of the function schedules one load early and stays at 99.65%.
+static inline struct EventData* gm_GetEventData(void)
+{
+    return &gmMainLib_804D3EE0->unk_530;
+}
+
 void gm_801BCC9C(HSD_GObj* arg0)
 {
     struct gm_804D6900_t** temp_r29 = gm_804D6900[0];
@@ -1943,7 +1926,7 @@ void gm_801BCC9C(HSD_GObj* arg0)
     u8 costume;
     lbl_8046B6A0_t* mi;
     s32 var_r0;
-    PAD_STACK(0x40);
+    PAD_STACK(0x38);
 
     if (gmMainLib_804D3EE0->unk_530.xB_2) {
         ev->x10 -= 1;
@@ -1955,9 +1938,9 @@ void gm_801BCC9C(HSD_GObj* arg0)
     }
     if (Player_GetStocks(1) <= 0) {
         entry = &temp_r29[idx];
-        ev2 = &gmMainLib_804D3EE0->unk_530;
         inner = (u8*) (*entry)->x10;
         cd = ((struct gm_evspawn**) (inner + 0x10))[ev->x20];
+        ev2 = &gmMainLib_804D3EE0->unk_530;
         costume = cd->unk3;
         if ((s8) ev2->x0 == cd->unk0 && (u8) ev2->x1 == costume) {
             if (costume <= 2) {
@@ -1997,9 +1980,9 @@ void gm_801BCC9C(HSD_GObj* arg0)
         return;
     }
     {
-        struct EventData* temp_r31 = &gmMainLib_804D3EE0->unk_530;
+        struct EventData* ev3 = gm_GetEventData();
         mi = gm_8016AE38();
-        if (temp_r31->xB_0) {
+        if (ev3->xB_0) {
             var_r0 = 0;
         } else if (((*(u8*) &mi->x24C8 >> 1U) & 1) && gm_8016AEEC() == 0 &&
                    gm_8016AEFC() == 0x3B)
@@ -3351,6 +3334,7 @@ void gm_801BF128(void)
         c += 1;
         ((u8*) gmMainLib_804D3EE0)[j + 2] += 1;
     } while (c < 4);
+    count = 0;
     gm_801BF6C8(HSD_Randi(4));
     {
         s32 prev;
@@ -3360,7 +3344,6 @@ void gm_801BF128(void)
         } while (gm_801BF6D8() == prev);
     }
 
-    count = 0;
     c = 0;
     do {
         if (gm_80164430(gm_801641CC(c)) != 0) {
@@ -3427,43 +3410,52 @@ void gm_801BF3F8(void)
 
 void gm_801BF4DC(GameScene* arg0)
 {
-    StartMeleeData* temp_r31;
+    StartMeleeData* md;
     VsModeData* temp_r30;
     int i;
 
     temp_r30 = &gmMainLib_804D3EE0->unk_1710;
-    temp_r31 = gm_801A427C(arg0);
+    md = gm_801A427C(arg0);
     gm_80167BC8(temp_r30);
-    gm_8016F088(temp_r31);
+    gm_8016F088(md);
     gm_80168FC4();
-    gm_80167A64(&temp_r31->rules);
+    gm_80167A64(&md->rules);
 
-    temp_r31->rules.x0_0 = gm_801BF6B8();
-    temp_r31->rules.x0_6 = false;
-    temp_r31->rules.x10 = 0;
-    temp_r31->rules.x1_0 = false;
-    temp_r31->rules.x1_2 = true;
-    temp_r31->rules.x1_3 = true;
-    temp_r31->rules.disable_pausing = true;
-    temp_r31->rules.x7 = 0;
-    temp_r31->rules.x44 = gm_80183218;
-    temp_r31->rules.x34 = 1.0F;
-    temp_r31->rules.xE = (u16) gm_801BF694();
-    gm_80167A14(temp_r31->players);
+    md->rules.x0_0 = gm_801BF6B8();
+    md->rules.x0_6 = false;
+    md->rules.x10 = 0;
+    md->rules.x1_0 = false;
+    md->rules.x1_2 = true;
+    md->rules.x1_3 = true;
+    md->rules.disable_pausing = true;
+    md->rules.x7 = 0;
+    md->rules.x44 = gm_80183218;
+    md->rules.x34 = gm_DefaultGameSpeed;
+    md->rules.xE = (u16) gm_801BF694();
+    gm_80167A14(md->players);
 
     for (i = 0; i < 4; i++) {
         CharacterKind kind = gm_801BF648(i);
-        temp_r31->players[i].c_kind = kind;
-        temp_r31->players[i].color = gm_801BF670(i);
-        temp_r31->players[i].slot_type = Gm_PKind_Cpu;
-        temp_r31->players[i].cpu_level = 9;
-        temp_r31->players[i].xE = 4;
-        temp_r31->players[i].xC_b1 = false;
-        if (temp_r31->rules.x0_0 == 1) {
-            temp_r31->players[i].stocks = 0x63;
+        md->players[i].c_kind = kind;
+        md->players[i].color = gm_801BF670(i);
+        md->players[i].slot_type = Gm_PKind_Cpu;
+        md->players[i].cpu_level = 9;
+        md->players[i].xE = 4;
+        md->players[i].xC_b1 = false;
+        if (md->rules.x0_0 == 1) {
+            md->players[i].stocks = 0x63;
         }
     }
 }
+
+/// Default game speed (StartMeleeRules::x34) used by gm_801BF4DC.
+/// The reference object keeps this 1.0F as a distinct .sdata2 object at
+/// 0x804DAC88 (annotated scope:global in symbols.txt), separate from the
+/// pooled 1.0F literal at 0x804DAC78: literal pooling dedupes plain
+/// literals, so only a const object reproduces the second entry. It is
+/// declared in gm_1BA8.h and defined after its user so the load is not
+/// constant-folded back into the literal pool.
+const f32 gm_DefaultGameSpeed = 1.0F;
 
 void gm_801BF634(s32 arg0, s8 character_kind)
 {

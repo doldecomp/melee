@@ -413,7 +413,7 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
     u16* map_ptr;
     u16 map_idx;
     u16 selected;
-    PAD_STACK(12);
+    PAD_STACK(8);
 
     jobj_map[0] = 0;
     jobj_map[1] = 1;
@@ -427,8 +427,8 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
     jobj_map[9] = 9;
     jobj_map[10] = 10;
     jobj_map[11] = 11;
-    jobj_map[13] = 13;
     jobj_map[12] = 12;
+    jobj_map[13] = 13;
     jobj_map[14] = 14;
     jobj_map[15] = 15;
     map_idx = 16;
@@ -808,12 +808,12 @@ HSD_GObj* mn_80233218(MenuState state)
     s32 vis_before;
     s32 vis_total;
     s32 visible;
-    HSD_JObj* root_jobj;
+    AnimLoopSettings* als;
     HSD_JObj* option_jobj;
     HSD_JObj* cursor_jobj;
     HSD_JObj* value_jobj;
     StaticModelDesc* desc;
-    AnimLoopSettings* als;
+    HSD_JObj* root_jobj;
     f32* frame_ptr;
     u16* sub_count_ptr;
     GameRules* rules;
@@ -822,7 +822,7 @@ HSD_GObj* mn_80233218(MenuState state)
     selected = (u8) mn_804A04F0.hovered_selection;
     num_options = mn_803EB6B0[15].selection_count;
 
-    for (i = 0; i < 17; i++) {
+    for (i = 0; 17 > i; i++) {
         jobj_map[i] = (u16) i;
     }
 
@@ -944,7 +944,7 @@ HSD_GObj* mn_80233218(MenuState state)
             }
 
             if (i == 5) {
-                als = &mn_803ED1D0.x7C[selected == i];
+                als = &mn_803ED1D0.x7C[i == selected];
                 (void) als;
             } else {
                 als = &mn_803ED1D0.x64[selected == i];

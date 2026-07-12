@@ -1,5 +1,3 @@
-#include "mplib.h"
-
 #include "mpisland.h"
 #include "placeholder.h"
 #include "platform.h"
@@ -44,6 +42,13 @@
 #include <melee/cm/types.h>
 #include <melee/gr/stage.h>
 #include <melee/lb/types.h>
+
+bool mpCheckedBounding(void);
+void mpBoundingCheck(float left, float bottom, float right, float top);
+void mpBoundingCheck2(float x0, float y0, float x1, float y1);
+void mpBoundingCheck3(float x0, float y0, float x1, float y1, float x2,
+                      float y2, float x3, float y3);
+void mpUncheckBounding(void);
 
 #define LINEID_CHECK(line, line_id)                                           \
     do {                                                                      \
@@ -5598,6 +5603,14 @@ void mpJointGetCb2(int joint_id, mpLib_Callback* cb, Ground** gr)
     *gr = joint->x30;
 }
 
+static inline void mpLib_GetJointVtxRange(CollJoint* joint, int* start,
+                                          int* count)
+{
+    MapJoint* map_joint = joint->inner;
+    *start = map_joint->vtx_start;
+    *count = map_joint->vtx_count;
+}
+
 void mpLib_800581DC(int joint_id0, int joint_id1)
 {
     struct pair {
@@ -5609,12 +5622,17 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
     CollLine* line_base;
     int i;
     MapJoint* cd0;
-    int vcount0;
-    CollVtx* v0_r29;
     int vstart0;
+    int vcount0;
 
-    j0_r9 = &groundCollJoint[joint_id0];
-    j1_r10 = &groundCollJoint[joint_id1];
+    {
+        CollJoint* joint = &groundCollJoint[joint_id0];
+        j0_r9 = joint;
+    }
+    {
+        CollJoint* joint = &groundCollJoint[joint_id1];
+        j1_r10 = joint;
+    }
     line_base = groundCollLine;
     for (i = 0; i < 5; i++) {
         int j;
@@ -5668,29 +5686,33 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
         }
     }
 
-    cd0 = j0_r9->inner;       /*  r3 */
-    vstart0 = cd0->vtx_start; /*  r4 */
-    vcount0 = cd0->vtx_count; /* r31 */
+    mpLib_GetJointVtxRange(j0_r9, &vstart0, &vcount0);
 
-    v0_r29 = &groundCollVtx[vstart0];
     // for every pair of verts
-    for (i = 0; i < vcount0; i++) {
+    for (i = 0; i < vcount0; i++, vstart0++) {
+        CollVtx* v0_r29;
         int v;       /* r28 */
         int vcount1; /* r27 */
         int vid_r26; /* r26 */
-        int vid;
         int vstart1_r4;
         MapJoint* cd1 = j1_r10->inner;
-        vstart1_r4 = cd1->vtx_start;
+        {
+            CollVtx* vtx = &groundCollVtx[vstart0];
+            v0_r29 = vtx;
+        }
+        {
+            int start = cd1->vtx_start;
+            vstart1_r4 = start;
+        }
         vcount1 = cd1->vtx_count;
-        vid = vstart1_r4;
         vid_r26 = vstart1_r4;
-        for (v = 0; v < vcount1; v++, vid++, vid_r26++) {
+        for (v = 0; v < vcount1; v++, vid_r26++) {
             int var_r25;
+            CollVtx* v1 = &groundCollVtx[vid_r26];
 
             // ensure they are nearby
-            if (!(ABS(v0_r29[i].pos.x - groundCollVtx[vid].pos.x) < 2.0) ||
-                !(ABS(v0_r29[i].pos.y - groundCollVtx[vid].pos.y) < 2.0))
+            if (!(ABS(v0_r29->pos.x - v1->pos.x) < 2.0) ||
+                !(ABS(v0_r29->pos.y - v1->pos.y) < 2.0))
             {
                 continue;
             }
@@ -5710,7 +5732,7 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
                     s16 lstart_r20;
                     s16 lcount_r17;
                     CollLine* iter_r3;
-                    if (vstart0 + i == lines[i_r23].x0->v0_idx) {
+                    if (vstart0 == lines->x0->v0_idx) {
                         // if the first vert is that line's v0
                         // find every line with the second vert as v1
                         for (j = 0; j < 5; j++) {
@@ -5722,31 +5744,35 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
                             iter_r3 = &line_base[lstart_r20];
                             for (k = 0; k < lcount_r17; k++) {
                                 if (vid_r26 == iter_r3->x0->v1_idx) {
-                                    lines[i_r23].x0->prev_id1 = lstart_r20 + k;
+                                    lines->x0->prev_id1 = lstart_r20 + k;
                                     iter_r3->x0->next_id1 = lstart_r24;
                                 }
                                 iter_r3++;
                             }
                         }
-                    } else if (vstart0 + i == lines[i_r23].x0->v1_idx) {
+                    } else if (vstart0 == lines->x0->v1_idx) {
                         // else if the first vert is that line's v1
                         // find every line with the second vert as v0
                         for (j = 0; j < 5; j++) {
                             int k;
                             lcount_r17 =
                                 ((struct pair*) j1_r10->inner)[j].count;
-                            lstart_r20 =
-                                ((struct pair*) j1_r10->inner)[j].start;
+                            {
+                                s16 start =
+                                    ((struct pair*) j1_r10->inner)[j].start;
+                                lstart_r20 = start;
+                            }
                             iter_r3 = &line_base[lstart_r20];
                             for (k = 0; k < lcount_r17; k++) {
                                 if (vid_r26 == iter_r3->x0->v0_idx) {
-                                    lines[i_r23].x0->next_id1 = lstart_r20 + k;
+                                    lines->x0->next_id1 = lstart_r20 + k;
                                     iter_r3->x0->prev_id1 = lstart_r24;
                                 }
                                 iter_r3++;
                             }
                         }
                     }
+                    lines++;
                     lstart_r24++;
                 }
             }
@@ -6306,7 +6332,7 @@ void mpLib_DrawSnapping(void)
     }
 }
 
-void mpLib_DrawMatchingLines(int value, int flag, GXColor color)
+int mpLib_DrawMatchingLines(int value, int flag, GXColor color)
 {
     CollLine* line_r31;
     int count_r28;

@@ -305,11 +305,17 @@ HSD_JObj* it_802B75FC(Item* ip, HSD_JObj* jobj_arg, s32 arg2, f32 scale)
     ItemLink* prev_link;
     ItemLink* head_link;
     ItemLink* tail_link;
+    ItemLink* link;
+    HSD_GObj* link_gobj;
+    itSamusGrappleAttributes* attrs;
+    itSamusGrappleAttributes* attrs2;
+    HSD_JObj* tail_jobj;
     s32 i;
-    itSamusGrappleAttributes* attrs =
-        ip->xC4_article_data->x4_specialAttributes;
-    Vec3 zero_vel = it_803B8674;
+    Vec3 zero_vel;
     PAD_STACK(4);
+
+    attrs = ip->xC4_article_data->x4_specialAttributes;
+    zero_vel = it_803B8674;
 
     if (arg2 != 0) {
         coeff = attrs->x60;
@@ -342,8 +348,7 @@ HSD_JObj* it_802B75FC(Item* ip, HSD_JObj* jobj_arg, s32 arg2, f32 scale)
 
     prev_link = NULL;
     for (i = 0; i < attrs->x34; i++) {
-        HSD_GObj* link_gobj = GObj_Create(7, 0xA, 0);
-        ItemLink* link;
+        link_gobj = GObj_Create(7, 0xA, 0);
         if (link_gobj == NULL) {
             while (prev_link != NULL) {
                 HSD_GObjPLink_80390228(prev_link->gobj);
@@ -362,8 +367,6 @@ HSD_JObj* it_802B75FC(Item* ip, HSD_JObj* jobj_arg, s32 arg2, f32 scale)
             it_802B75FC_inline(link, &zero_vel, 1.0f);
             it_802B743C(link_gobj, ip, 0);
         } else if (i == attrs->x34 - 1) {
-            itSamusGrappleAttributes* attrs2;
-            HSD_JObj* tail_jobj;
             prev_link->prev = link;
             link->prev = NULL;
             tail_link = link;

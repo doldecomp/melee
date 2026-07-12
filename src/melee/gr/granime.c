@@ -286,6 +286,11 @@ static inline HSD_AObj* grAnime_801C69FC_noinline(HSD_AObj* aobj)
     return grAnime_801C69FC_inner(aobj);
 }
 
+static inline HSD_AObj* grAnime_GetAObj(HSD_JObj* jobj)
+{
+    return jobj->aobj;
+}
+
 void grAnime_801C6A54(HSD_JObj* jobj, HSD_AnimJoint* animjoint,
                       HSD_MatAnimJoint* matanimjoint,
                       HSD_ShapeAnimJoint* shapeanimjoint)
@@ -299,7 +304,7 @@ void grAnime_801C6A54(HSD_JObj* jobj, HSD_AnimJoint* animjoint,
                 HSD_AObjRemove(jobj->aobj);
             }
             jobj->aobj = HSD_AObjLoadDesc(animjoint->aobjdesc);
-            grAnime_801C69FC(jobj->aobj);
+            grAnime_801C69FC(grAnime_GetAObj(jobj));
         }
         grAnime_801C6960(jobj->robj, animjoint->robj_anim);
     }
@@ -677,8 +682,7 @@ void grAnime_801C7228(HSD_JObj* obj, int flags, void* func, u32 type,
             if ((flags & 4) && dobj->aobj != NULL) {
                 grAnime_801C6F50(dobj->aobj, dobj, 3, func, type, param);
             }
-            mobj = dobj->mobj;
-            if (mobj != NULL) {
+            if ((mobj = dobj->mobj) != NULL) {
                 if ((flags & 0x80) && mobj->aobj != NULL) {
                     grAnime_801C6F50(mobj->aobj, mobj, 8, func, type, param);
                 }

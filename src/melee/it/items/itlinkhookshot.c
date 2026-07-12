@@ -555,9 +555,9 @@ static void fn_802A3110(HSD_GObj* arg0)
     ItemLink* item_link;
     Fighter* fp;
 
-    fp = item->owner->user_data;
     attr = item->xC4_article_data->x4_specialAttributes;
-    (void) attr;
+    fp = item->owner->user_data;
+    (void) fp;
     item_link = item->xDD4_itemVar.linkhookshot.x0;
     fn_802A3110_inline(item_link, &vec);
 
@@ -1722,8 +1722,8 @@ void it_802A6474(ItemLink* link_0, ItemLink* link_1, Vec3* pos,
             segment_dx -= cur_link->pos.x;
             segment_dz = next_link->pos.z;
             segment_dz -= cur_link->pos.z;
-            segment_len = segment_dy * segment_dy;
-            segment_len = (segment_dx * segment_dx) + segment_len;
+            segment_len =
+                (segment_dx * segment_dx) + (segment_dy * segment_dy);
             segment_len = (segment_dz * segment_dz) + segment_len;
             if (segment_len > 0.0f) {
                 segment_len_tmp = my_sqrt(segment_len);
@@ -1754,8 +1754,7 @@ void it_802A6474(ItemLink* link_0, ItemLink* link_1, Vec3* pos,
     target_dx = pos->x;
     target_dx -= cur_link->pos.x;
     target_dz = pos->z - cur_link->pos.z;
-    target_len = target_dy * target_dy;
-    target_len = (target_dx * target_dx) + target_len;
+    target_len = (target_dx * target_dx) + (target_dy * target_dy);
     target_len = (target_dz * target_dz) + target_len;
     if (target_len > 0.0f) {
         target_len_tmp = my_sqrt(target_len);

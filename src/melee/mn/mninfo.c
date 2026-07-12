@@ -372,61 +372,60 @@ void fn_802523B8(HSD_GObj* gobj)
     HSD_GObjPLink_80390228(gobj);
 }
 
-void fn_802523D8(HSD_GObj* gobj)
+static inline void fn_802523D8_inline(MnInfoData* data, HSD_GObj* gobj)
 {
-    HSD_JObj* sp1C;
-    MnInfoData* data;
     HSD_GObjProc* proc;
-    MnInfoTextCursor* cursor_base;
-    HSD_Text* zero_right;
-    HSD_Text* zero_left;
-    s32 i;
     HSD_JObj* jobj;
-    MnInfoTextCursor* write_cursor;
-    MnInfoTextCursor* read_cursor;
     PAD_STACK(16);
 
-    data = gobj->user_data;
     if (mn_804A04F0.cur_menu != MENU_KIND_DATA_SPECIAL) {
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         proc = HSD_GObj_SetupProc(gobj, fn_802523B8, 0);
-        i = 0;
         proc->flags_3 = HSD_GObj_804D783C;
-        cursor_base = gobj->user_data;
-        write_cursor = cursor_base;
-        read_cursor = (MnInfoTextCursor*) &((HSD_Text**) cursor_base)[i];
-        zero_left = (HSD_Text*) i;
-        zero_right = (HSD_Text*) i;
-        do {
-            if (write_cursor->left != NULL) {
-                HSD_SisLib_803A5CC4(read_cursor->left);
-                write_cursor->left = zero_left;
+        {
+            MnInfoData* data2 = gobj->user_data;
+            MnInfoData* data3 = data2;
+            s32 i;
+            HSD_Text* left_null = NULL;
+            HSD_Text* right_null = NULL;
+
+            for (i = 0; i < 4; i++) {
+                if (data2->left_column[i] != NULL) {
+                    HSD_SisLib_803A5CC4(data3->left_column[i]);
+                    data2->left_column[i] = left_null;
+                }
+                if (data2->right_column[i] != NULL) {
+                    HSD_SisLib_803A5CC4(data3->right_column[i]);
+                    data2->right_column[i] = right_null;
+                }
             }
-            if (write_cursor->right != NULL) {
-                HSD_SisLib_803A5CC4(read_cursor->right);
-                write_cursor->right = zero_right;
-            }
-            i += 1;
-            write_cursor = (MnInfoTextCursor*) &((HSD_Text**) write_cursor)[1];
-            read_cursor = (MnInfoTextCursor*) &((HSD_Text**) read_cursor)[1];
-        } while (i < 4);
-        HSD_SisLib_803A5CC4(data->description);
-        return;
-    }
-    jobj = gobj->hsd_obj;
-    lb_80011E24(jobj, &sp1C, 2, -1);
-    if (data->scroll_idx != 0) {
-        HSD_JObjClearFlagsAll(sp1C, JOBJ_HIDDEN);
+            HSD_SisLib_803A5CC4(data->description);
+        }
     } else {
-        HSD_JObjSetFlagsAll(sp1C, JOBJ_HIDDEN);
+        HSD_JObj* child;
+
+        jobj = gobj->hsd_obj;
+        lb_80011E24(jobj, &child, 2, -1);
+        if (data->scroll_idx != 0) {
+            HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
+        } else {
+            HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
+        }
+        lb_80011E24(jobj, &child, 1, -1);
+        if ((data->scroll_idx + 4) < mnInfo_80251AA4()) {
+            HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
+        } else {
+            HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
+        }
+        mn_8022ED6C(jobj, (AnimLoopSettings*) mnInfo_803EFC08);
     }
-    lb_80011E24(jobj, &sp1C, 1, -1);
-    if ((data->scroll_idx + 4) < mnInfo_80251AA4()) {
-        HSD_JObjClearFlagsAll(sp1C, JOBJ_HIDDEN);
-    } else {
-        HSD_JObjSetFlagsAll(sp1C, JOBJ_HIDDEN);
-    }
-    mn_8022ED6C(jobj, (AnimLoopSettings*) mnInfo_803EFC08);
+}
+
+void fn_802523D8(HSD_GObj* gobj)
+{
+    MnInfoData* data = gobj->user_data;
+    PAD_STACK(12);
+    fn_802523D8_inline(data, gobj);
 }
 
 static inline void mnInfo_80252548_StopCurrentProc(void)
@@ -458,17 +457,16 @@ static inline void mnInfo_80252548_InitRowsAndObject(HSD_GObj* gobj,
 void fn_80252548(HSD_GObj* gobj)
 {
     HSD_GObjProc* proc;
-    HSD_JObj* jobj;
     HSD_Text* zero_left;
+    HSD_Text* zero_right;
     u8 id;
     u8* trophy;
-    MnInfoData* data;
+    MnInfoData* data = gobj->user_data;
     MnInfoTextCursor* write_cursor;
     s32 i;
-    HSD_Text* zero_right;
+    HSD_JObj* jobj;
     PAD_STACK(16);
 
-    data = gobj->user_data;
     if (mn_804A04F0.cur_menu != MENU_KIND_DATA_SPECIAL) {
         MnInfoTextCursor* read_cursor;
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);

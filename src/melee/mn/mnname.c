@@ -167,18 +167,22 @@ s32 CompareNameStrings(char* str1, char* str2)
             return 2;
         }
 
-        if (mnName_StringTerminator == str2[i]) {
-            if (checkStringRest(&str1[i])) {
-                return 0;
-            }
-            return 1;
-        }
+        {
+            char ch2 = str2[i];
 
-        if ((u8) *p1 > (u8) str2[i]) {
-            return 1;
-        }
-        if ((u8) *p1 < (u8) str2[i]) {
-            return 2;
+            if (mnName_StringTerminator == ch2) {
+                if (checkStringRest(&str1[i])) {
+                    return 0;
+                }
+                return 1;
+            }
+
+            if ((u8) *p1 > (u8) ch2) {
+                return 1;
+            }
+            if ((u8) *p1 < (u8) ch2) {
+                return 2;
+            }
         }
     }
 }
@@ -270,20 +274,18 @@ s32 mnName_SortNames(HSD_GObj* arg0)
 {
     s32 result;
     s32 i;
-    s32 j;
-    char* name1;
     char* name2;
     u8 idx2;
-    u8 idx1;
     u8* pi;
     u8* pj;
+    u8 idx1;
 
     arg0 = arg0->user_data;
     PAD_STACK(8);
 
     if (arg0->p_priority == 0) {
         s32 i;
-        for (i = 0; i < 0x78; i++) {
+        for (i = 0; 0x78 > i; i++) {
             mnName_NameDisplayOrder[i] = (u8) i;
         }
         return;
@@ -293,10 +295,12 @@ s32 mnName_SortNames(HSD_GObj* arg0)
         i = 0;
         pi = mnName_NameDisplayOrder;
         do {
+            s32 j;
             j = i + 1;
             pj = &mnName_NameDisplayOrder[i] + 1;
 
             while (j < 0x78) {
+                char* name1;
                 idx1 = *pi;
                 idx2 = *pj;
                 name1 = GetPersistentNameData((s32) idx1)->namedata;
@@ -553,10 +557,7 @@ void mnName_MainInput(HSD_GObj* arg0)
         mn_804D6BC8.cooldown = 5;
         switch ((s32) mn_804A04F0.hovered_selection) {
         case 24:
-            isFull = 0;
-            if (GetNameCount_noinline() >= 0x78) {
-                isFull = 1;
-            }
+            isFull = GetNameCount_noinline() < 0x78 ? 0 : 1;
             if (isFull == 0) {
                 s32 isValid;
                 s32 i;
@@ -617,11 +618,13 @@ void mnName_MainInput(HSD_GObj* arg0)
                 s32 col = ((HSD_GObj*) mnName_804D6BF8->user_data)->gx_link +
                           (sel / 6);
                 u8 nameIdx;
+                s32 idx;
                 colCount = mnName_GetColumnCount();
                 if (colCount > 4 && col >= colCount) {
                     col -= colCount;
                 }
-                nameIdx = mnName_NameDisplayOrder[(sel % 6) + (col * 6)];
+                idx = (sel % 6) + (col * 6);
+                nameIdx = mnName_NameDisplayOrder[idx];
                 if ((s8) mnName_StringTerminator ==
                     (s8) GetPersistentNameData((s32) nameIdx)->namedata[0])
                 {
@@ -1152,7 +1155,6 @@ void mnName_80239A24(HSD_GObj* gobj)
 {
     Vec3 sp6C;
     GXColor sp60;
-    s32 i;
     HSD_JObj* jobj;
     HSD_JObj* ref_jobj;
     HSD_JObj* ref_jobj2;
@@ -1165,6 +1167,7 @@ void mnName_80239A24(HSD_GObj* gobj)
     f32 row_height;
     f32 text_col_width;
     f32 text_row_height;
+    s32 i;
     MnNameArchive* archive = &mnName_804A06C0;
     MenuFlow* flow = &mn_804A04F0;
     MnName_GObj* data = (MnName_GObj*) gobj;

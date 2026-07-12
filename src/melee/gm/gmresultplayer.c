@@ -323,11 +323,13 @@ bool fn_80177B7C(int slot)
 
     {
         float stick_y = HSD_PadCopyStatus[(u8) slot].nml_stickY;
+        float abs_stick_y = stick_y;
         u32 trigger;
         bool result = false;
-        PAD_STACK(8);
+        PAD_STACK(16);
 
-        if (fabsf_bitwise(stick_y) < scroll_deadzone) {
+        *(u32*) &abs_stick_y &= ~0x80000000;
+        if (abs_stick_y < scroll_deadzone) {
             stick_y = 0;
         }
         trigger = HSD_PadCopyStatus[(u8) slot].trigger;
@@ -1143,11 +1145,7 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
 
     if (lookup != 0) {
         HSD_JObj* root = (HSD_JObj*) disp->gobjs[arg2]->hsd_obj;
-        if (root == NULL) {
-            child_jobj = NULL;
-        } else {
-            child_jobj = root->child;
-        }
+        child_jobj = root == NULL ? NULL : root->child;
     }
 
     if (HSD_CObjSetCurrent(cobj)) {
@@ -1397,7 +1395,7 @@ void fn_8017A078(s32 arg0)
 
 HSD_GObj* fn_8017A318(s32 arg0)
 {
-    ResultsPlayerConfig* config = &lbl_803B7B68;
+    u32* config = (u32*) &lbl_803B7B68;
     CameraKindData* data = &lbl_803D6A08;
     ResultsDisplayData* disp = &lbl_8046E1B0;
     MatchEnd* match_end = &disp->state.match_end;
@@ -1421,9 +1419,9 @@ HSD_GObj* fn_8017A318(s32 arg0)
     scissor[0] = lbl_804DA3F0;
     scissor[1] = lbl_804DA3F4;
 
-    eye = config->x4C;
-    interest = config->x58;
-    callbacks = config->x64;
+    eye = ((ResultsPlayerConfig*) config)->x4C;
+    interest = ((ResultsPlayerConfig*) config)->x58;
+    callbacks = ((ResultsPlayerConfig*) config)->x64;
     if (match_end->is_teams == 0) {
         slot = match_end->player_standings[arg0].is_big_loser;
     } else {
@@ -1688,6 +1686,7 @@ void fn_8017AA78(u8* arg0)
         a = lbl_804D3FD0;
         (void) a;
         b = lbl_804D3FD4;
+        (void) b;
         state->dim_w1[0] = a;
         state->dim_w1[1] = b;
         a = lbl_804D3FD8;

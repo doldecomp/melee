@@ -192,6 +192,21 @@ static inline void un_8031FD18_SetupScene(void)
     Ground_801C0378(0x40);
 }
 
+static inline void un_8031FD18_LoadArchives(u8* input)
+{
+    u8 char_index;
+
+    char_index = input[0];
+
+    un_804D6FE8 = lbArchive_LoadSymbols("Vi1201v1.dat", &un_804D6FE0,
+                                        "visual1201v1Scene", NULL);
+    lbArchive_LoadSymbols("TyKoopa.dat", &un_804D6FEC,
+                          "ToyKoopaModel_TopN_joint", NULL);
+    lbArchive_LoadSymbols("GmRgStnd.dat", &un_804D6FE4, "standScene", NULL);
+    Toy_803124BC();
+    un_804D6FE8 = lbArchive_LoadSymbols(gm_80160438(char_index), NULL);
+}
+
 /// @todo .data order hack
 static void order_data(void)
 {
@@ -201,7 +216,6 @@ static void order_data(void)
 void un_8031FD18_OnEnter(void* arg)
 {
     u8* input = arg;
-    u8 char_index;
     HSD_CObj* cobj;
     HSD_GObj* gobj;
     HSD_Fog* fog;
@@ -221,15 +235,7 @@ void un_8031FD18_OnEnter(void* arg)
     lbAudioAx_80023F28(0x59);
     lbAudioAx_80024E50(1);
 
-    char_index = input[0];
-
-    un_804D6FE8 = lbArchive_LoadSymbols("Vi1201v1.dat", &un_804D6FE0,
-                                        "visual1201v1Scene", NULL);
-    lbArchive_LoadSymbols("TyKoopa.dat", &un_804D6FEC,
-                          "ToyKoopaModel_TopN_joint", NULL);
-    lbArchive_LoadSymbols("GmRgStnd.dat", &un_804D6FE4, "standScene", NULL);
-    Toy_803124BC();
-    un_804D6FE8 = lbArchive_LoadSymbols(gm_80160438(char_index), NULL);
+    un_8031FD18_LoadArchives(input);
 
     gobj = GObj_Create(0x13, 0x14, 0);
     cobj =

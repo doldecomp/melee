@@ -607,6 +607,11 @@ int mnDiagram2_GetStatValue(int is_name_mode, u8 stat_type, u8 entity_idx)
 /// @param stat_type Stat category index (0-23)
 /// @param row_idx Row position (0-9, 10 visible rows)
 /// @param entity_idx Fighter or Name index for stat lookup
+static inline u16* mnDiagram2_GetStatRowEntry(int stat_type, char* base)
+{
+    return (u16*) (base + ((stat_type << 1) & 0x1FE));
+}
+
 void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                               u8 row_idx, u8 entity_idx)
 {
@@ -636,7 +641,7 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
     lb_8000B1CC(data->row0_ref, (Vec3*) (base + 0xC), &sp20);
 
     {
-        u32 r22 = (u8) row_idx;
+        u32 r22 = row_idx;
         f32 ny = -sp20.y;
         f32 temp_f31 = -f30 * (f32) r22;
         text = HSD_SisLib_803A5ACC(0, 1, sp20.x, ny + temp_f31, sp20.z,
@@ -645,7 +650,7 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
         {
             data->row_labels[row_idx] = text;
 
-            table = (u16*) (base + ((stat_type << 1) & 0x1FE));
+            table = mnDiagram2_GetStatRowEntry(stat_type, base);
             {
                 HSD_SisLib_803A6368(text, table[0x18]);
 

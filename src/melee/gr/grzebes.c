@@ -152,10 +152,19 @@ typedef struct grZe_BubbleSpawnPos {
 /* 8049F158 */ static Vec3 grZe_8049F158[2];
 /* 8049F170 */ static grZe_BubbleEntry grZe_8049F170[20];
 
+typedef struct grZe_BubbleScales {
+    f32 values[7];
+} grZe_BubbleScales;
+
 typedef struct grZe_BubbleConfig {
-    f32 x0_scales[7];
+    grZe_BubbleScales x0_scales;
     Vec3 x4_positions[4];
 } grZe_BubbleConfig;
+
+typedef struct grZe_BubbleState {
+    Vec3 positions[4];
+    grZe_BubbleEntry bubbles[20];
+} grZe_BubbleState;
 
 typedef struct grZe_AcidState {
     /* +00 */ u8 x00_state;
@@ -391,7 +400,7 @@ void grZebes_801D881C(HSD_GObj* gobj)
     s32 result;
     secondary_gobj = (HSD_GObj*) gp->gv.zebes5.xF0;
     result = grZebes_801DA528(gobj, &gp->gv.zebes5.xC8, 1, 2);
-    PAD_STACK(8);
+    PAD_STACK(16);
 
     if ((s32) gp->gv.zebes5.xEC != result) {
         gp->gv.zebes5.xEC = result;
@@ -465,9 +474,10 @@ void grZebes_801D881C(HSD_GObj* gobj)
             gp->gv.zebes5.xF6 = (s16) (gp->gv.zebes5.xF6 + 1);
             divisor = grZe_804D6990->x10;
             eq_counter = gp->gv.zebes5.xF6;
-            spawn_phase = eq_counter / divisor;
             if (eq_counter % divisor == 0) {
-                s32 mirror = 6 - spawn_phase;
+                s32 mirror;
+                spawn_phase = eq_counter / divisor;
+                mirror = 6 - spawn_phase;
                 if (spawn_phase < mirror) {
                     f32 rand = HSD_Randf();
                     f32 scale_min = grZe_804D6990->x58;
@@ -894,7 +904,7 @@ void grZebes_801D99E0(HSD_GObj* gobj)
 
             diff = gp->gv.zebes5.xD4;
             diff -= gp->gv.zebes5.xD8;
-            if (diff < 0.0f) {
+            if (0.0f > diff) {
                 diff = -diff;
             }
 
@@ -1098,7 +1108,7 @@ void grZebes_801D9F84(Ground_GObj* gobj)
 void grZebes_801DA0C0(Ground_GObj* arg) {}
 
 const grZe_BubbleConfig grZe_803B8044 = {
-    { 1.0f, 1.1f, 1.0f, 1.2f, 1.1f, 1.0f, 1.0f },
+    { { 1.0f, 1.1f, 1.0f, 1.2f, 1.1f, 1.0f, 1.0f } },
     {
         { 7.59f, 2.5f, 0.0f },
         { 24.05f, 2.2f, 0.0f },
@@ -1158,14 +1168,13 @@ void grZebes_801DA0C4(f32 level)
     }
 }
 
-static inline void grZebes_801DA254_inline1(HSD_LObj* lobj, GXColor color)
-{
-    HSD_LObjSetColor(lobj, color);
-}
+static inline void grZebes_801DA254_inline1(GXColor color) {}
 
-static inline void grZebes_801DA254_inline2(HSD_LObj* lobj, GXColor color)
+static inline void grZebes_801DA254_inline2(HSD_LObj* lobj, GXColor* color)
 {
-    grZebes_801DA254_inline1(lobj, color);
+    grZebes_801DA254_inline1(*color);
+    grZebes_801DA254_inline1(*color);
+    HSD_LObjSetColor(lobj, *color);
 }
 
 void grZebes_801DA254(Ground_GObj* gobj, f32 level)
@@ -1199,7 +1208,7 @@ void grZebes_801DA254(Ground_GObj* gobj, f32 level)
         result.g = (u8) (t * (f32) (c1.g - c2.g) + (f32) c2.g);
         result.b = (u8) (t * (f32) (c1.b - c2.b) + (f32) c2.b);
         result.a = 0xFF;
-        grZebes_801DA254_inline2(lobj, result);
+        grZebes_801DA254_inline2(lobj, &result);
     }
 }
 
@@ -1488,63 +1497,28 @@ void fn_801DAC90(Item_GObj* arg0, Ground* arg1, Vec3* arg2, HSD_GObj* arg3,
     }
 }
 
-typedef struct grZe_BubbleEntryRaw {
-    u8 pad_0[0x30];
-    u8 x30_active;
-    u8 pad_31;
-    s16 x32_timer;
-    HSD_JObj* x34;
-    f32 x38_x;
-    f32 x3C_y;
-    f32 x40;
-    f32 x44;
-    f32 x48_size;
-    f32 x4C;
-    HSD_GObj* x50_gobj;
-} grZe_BubbleEntryRaw;
-
-static inline HSD_GObj* grZebes_801DAE70_inline1(grZe_BubbleEntryRaw* entry)
-{
-    return entry->x50_gobj;
-}
-
-static inline grZe_BubbleEntryRaw* grZebes_801DAE70_pi43687(s32 arg0)
-{
-    return (grZe_BubbleEntryRaw*) (grZe_8049F140 + arg0 * 3);
-}
-
-static inline void grZebes_801DAE70_blk43660(void)
-{
-    PAD_STACK(0x10);
-}
-
 void grZebes_801DAE70(s32 arg0, u8 arg1, f32 x, f32 y, f32 scale)
 {
-    grZe_BubbleEntryRaw* entry = grZebes_801DAE70_pi43687(arg0);
-    u8* entry_active = entry->pad_0;
-    grZebes_801DAE70_blk43660();
-    PAD_STACK(8);
-    entry_active += 0x30;
-    if (*entry_active == 0) {
-        HSD_GObj** entry_gobj = &entry->x50_gobj;
-        if (*entry_gobj == NULL) {
+    if (grZe_8049F170[arg0].x00_active == 0) {
+        if (grZe_8049F170[arg0].x20_gobj == NULL) {
             Ground_GObj* gobj;
 
-            entry->x38_x = x;
-            entry->x3C_y = y;
-            entry->x40 = 0.0f;
-            entry->x44 = 0.0f;
-            entry->x4C = scale;
-            entry->x48_size = scale;
+            grZe_8049F170[arg0].x08_x = x;
+            grZe_8049F170[arg0].x0C_y = y;
+            grZe_8049F170[arg0].x10 = 0.0f;
+            grZe_8049F170[arg0].x14 = 0.0f;
+            grZe_8049F170[arg0].x1C = scale;
+            grZe_8049F170[arg0].x18_size = scale;
 
             if (arg0 == 0 || arg0 == 6) {
                 gobj = NULL;
             } else {
                 gobj = grZebes_801D8558(3);
                 if (gobj != NULL) {
-                    HSD_JObj* jobj = GET_JOBJ(gobj);
                     Ground* gp = GET_GROUND(gobj);
+                    HSD_JObj* jobj = GET_JOBJ(gobj);
                     Vec3 pos;
+                    u8 _[4];
 
                     pos.x = x;
                     pos.y = y;
@@ -1561,24 +1535,28 @@ void grZebes_801DAE70(s32 arg0, u8 arg1, f32 x, f32 y, f32 scale)
                 }
             }
 
-            *entry_active = arg1;
-            *entry_gobj = (HSD_GObj*) gobj;
-            entry->x34 = NULL;
+            grZe_8049F170[arg0].x00_active = arg1;
+            grZe_8049F170[arg0].x20_gobj = (HSD_GObj*) gobj;
+            grZe_8049F170[arg0].x04 = NULL;
         }
     }
 }
 
 s32 grZebes_801DB088(Ground* gp, s32 arg1)
 {
-    u8 _[0x48];
-    grZe_BubbleEntry* entry = &grZe_8049F170[arg1];
+    u8 _[0x38];
     s32 result = 0;
+    grZe_BubbleEntry* entry = &grZe_8049F170[arg1];
+    HSD_GObj** gobjp = &grZe_8049F170[arg1].x20_gobj;
+    HSD_JObj** jobjp = &grZe_8049F170[arg1].x04;
+    f32* targetp = &grZe_8049F170[arg1].x1C;
+    f32* sizep = &grZe_8049F170[arg1].x18_size;
     Item_GObj* mat;
     Ground* bgp;
 
     if (entry->x00_active != 0) {
-        if (entry->x20_gobj != NULL) {
-            bgp = GET_GROUND(entry->x20_gobj);
+        if (*gobjp != NULL) {
+            bgp = GET_GROUND(*gobjp);
 
             if (bgp != NULL) {
                 mat = bgp->gv.zebes3.xC4;
@@ -1593,26 +1571,24 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
 
                 {
                     f32 speed = grZe_804D6990->x68;
-                    f32 target = entry->x1C;
-                    f32 current = entry->x18_size;
+                    f32 target = *targetp;
+                    f32 current = *sizep;
                     f32 diff = target - current;
 
                     if (diff > speed) {
-                        entry->x18_size = current + speed;
+                        *sizep = current + speed;
                     } else if (diff < -speed) {
-                        entry->x18_size = current - speed;
+                        *sizep = current - speed;
                     } else {
-                        entry->x18_size = target;
+                        *sizep = target;
                     }
                 }
 
-                if (entry->x04 != NULL &&
-                    grAnime_801C83D0(entry->x20_gobj, 0, 7) != 0)
-                {
-                    HSD_JObjRemoveAll(entry->x04);
-                    entry->x04 = NULL;
+                if (*jobjp != NULL && grAnime_801C83D0(*gobjp, 0, 7) != 0) {
+                    HSD_JObjRemoveAll(*jobjp);
+                    *jobjp = NULL;
                     {
-                        HSD_JObj* jobj = (HSD_JObj*) entry->x20_gobj->hsd_obj;
+                        HSD_JObj* jobj = (HSD_JObj*) (*gobjp)->hsd_obj;
                         if (jobj != NULL) {
                             HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
                         }
@@ -1684,10 +1660,10 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
                         if (best_idx != -1) {
                             grZe_BubbleEntry* src = &grZe_8049F170[best_idx];
                             entry->x00_active = src->x00_active;
-                            entry->x04 = src->x04;
-                            entry->x18_size = src->x18_size;
-                            entry->x1C = src->x1C;
-                            entry->x20_gobj = src->x20_gobj;
+                            *jobjp = src->x04;
+                            *sizep = src->x18_size;
+                            *targetp = src->x1C;
+                            *gobjp = src->x20_gobj;
                             src->x00_active = 0;
                             src->x20_gobj = NULL;
                         } else {
@@ -1980,7 +1956,8 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
 s32 grZebes_801DBB60(HSD_GObj* yaku)
 {
     s32 last_idx;
-    grZe_BubbleEntry* bubbles = grZe_8049F170;
+    grZe_BubbleState* state = (grZe_BubbleState*) grZe_8049F140;
+    grZe_BubbleEntry* bubbles = state->bubbles;
     s32 count = 0;
     f32 max_dist_sq = -1.0f;
 
@@ -2272,14 +2249,11 @@ void grZebes_801DC408(Ground_GObj* gobj)
 
 void grZebes_801DC744(s32 arg0, u8 arg1)
 {
-    f32 scales[7];
+    grZe_BubbleScales scales;
     Vec3* base = grZe_8049F140;
     s32 i;
 
-    for (i = 0; i < 7; i++) {
-        scales[i] = grZe_803B8044.x0_scales[i];
-    }
-
+    scales = grZe_803B8044.x0_scales;
     if (arg0 & 1) {
         f32 x_start = base[2].x;
         f32 y_start = base[2].y;
@@ -2288,7 +2262,7 @@ void grZebes_801DC744(s32 arg0, u8 arg1)
 
         for (i = 0; i < 7; i++) {
             grZebes_801DAE70(i, arg1, x_step * (f32) i + x_start,
-                             y_step * (f32) i + y_start, scales[i]);
+                             y_step * (f32) i + y_start, scales.values[i]);
         }
     }
 

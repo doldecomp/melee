@@ -261,8 +261,8 @@ void grPura_802120E0(Ground_GObj* arg0)
         spilC = grPu_803E6AA0[gp->gv.pura.xC6];
         sp18 = grPu_803E6AA0[gp->gv.pura.xC4];
         cur = gp->gv.pura.xC8;
-        gp->gv.pura.xC8 = cur + 1;
         t = (f32) cur / 3600.0f;
+        gp->gv.pura.xC8 = cur + 1;
         sp18.r =
             (s8) (t * (f32) ((u8) spilC.r - (u8) sp18.r) + (f32) (u8) sp18.r);
         sp18.g =
@@ -399,6 +399,7 @@ void grPura_80212CD4(HSD_GObj* arg0)
     Ground* gp = arg0->user_data;
     Ground* gp2 = gp;
     HSD_JObj* jobj = arg0->hsd_obj;
+    s32 j;
     u32 i;
     HSD_JObj* node;
     Vec3 subject_pos;
@@ -419,25 +420,28 @@ void grPura_80212CD4(HSD_GObj* arg0)
         } else {
             node = node->child;
         }
-        for (i = 0; i < 25; i++) {
+        for (j = 0; j < 25; j++) {
             if (node == NULL) {
                 return;
             }
-            if ((gp->gv.pura3.x128[i] = Camera_80029020()) != NULL) {
-                gp->gv.pura3.xC4[i] = node;
-                lb_8000B1CC(gp2->gv.pura3.xC4[i], NULL, &subject_pos);
-                gp->gv.pura3.x128[i]->x10 = subject_pos;
-                if (HSD_JObjGetFlags(node) & 0x10) {
-                    gp->gv.pura3.x128[i]->x8 = 1;
-                } else {
-                    gp->gv.pura3.x128[i]->x8 = 0;
-                }
-                gp->gv.pura3.x128[i]->x48.x = 30.0f;
-                gp->gv.pura3.x128[i]->x48.y = -30.0f;
-                gp->gv.pura3.x128[i]->x40.x = -30.0f;
-                gp->gv.pura3.x128[i]->x40.y = 30.0f;
+            if ((gp->gv.pura3.x128[j] = Camera_80029020()) != NULL) {
+                gp->gv.pura3.xC4[j] = node;
                 {
-                    CmSubject* subject = gp->gv.pura3.x128[i];
+                    HSD_JObj** nodes = gp2->gv.pura3.xC4;
+                    lb_8000B1CC(nodes[j], NULL, &subject_pos);
+                }
+                gp->gv.pura3.x128[j]->x10 = subject_pos;
+                if (HSD_JObjGetFlags(node) & 0x10) {
+                    gp->gv.pura3.x128[j]->x8 = 1;
+                } else {
+                    gp->gv.pura3.x128[j]->x8 = 0;
+                }
+                gp->gv.pura3.x128[j]->x48.x = 30.0f;
+                gp->gv.pura3.x128[j]->x48.y = -30.0f;
+                gp->gv.pura3.x128[j]->x40.x = -30.0f;
+                gp->gv.pura3.x128[j]->x40.y = 30.0f;
+                {
+                    CmSubject* subject = gp->gv.pura3.x128[j];
                     subject->x2C = subject->x40;
                     subject->x34 = subject->x48;
                 }

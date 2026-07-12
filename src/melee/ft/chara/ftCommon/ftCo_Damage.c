@@ -232,7 +232,8 @@ void ftCo_Damage_CalcVel(Fighter* fp, float x, float y)
 static float calcAngle(float angle)
 {
     float x = cosf(angle) + cosf(M_PI_2_F);
-    float y = sinf(angle) + sinf(M_PI_2_F);
+    float temp = M_PI_2_F;
+    float y = sinf(angle) + sinf(temp);
     if (x * x + y * y <= 0.0001f) {
         return 0;
     }
@@ -714,8 +715,7 @@ static bool inlineB0(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     float kb_applied = fp->dmg.kb_applied;
-    // might not be correct?
-    if (kb_applied != 0) {
+    if (kb_applied == 0) {
         return true;
     }
     if (fp->allow_sdi && fp->x221A_b3 &&

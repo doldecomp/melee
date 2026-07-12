@@ -56,6 +56,7 @@ void gm_801A7B00(void)
     HSD_GObj* gobj;
     HSD_GObj* cam_gobj;
     HSD_JObj* jobj;
+    HSD_JObj* char_jobj;
     HSD_JObj* child;
     HSD_JObj* target;
     s32 char_idx;
@@ -97,12 +98,12 @@ void gm_801A7B00(void)
     // Character display GObj
     gobj = GObj_Create(0xE, 0xF, 0);
     gm_804D67B4 = gobj;
-    jobj = HSD_JObjLoadJoint(gm_804D67AC->models[0]->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    char_jobj = HSD_JObjLoadJoint(gm_804D67AC->models[0]->joint);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, char_jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
 
     char_idx = gm_801A659C(gm_801BEFB0());
-    child = jobj == NULL ? NULL : jobj->child;
+    child = char_jobj == NULL ? NULL : char_jobj->child;
 
     val = -Toy_803060BC(char_idx, 0);
     HSD_JObjSetTranslateXWithMtxDirty(child, val);

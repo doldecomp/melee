@@ -149,16 +149,16 @@ static void mnStageSw_802359C8(MnStageSwData* data)
 
 static s32 mnStageSw_80235C58(u8 arg0)
 {
-    u8 end;
-    s32 found;
-    s32 upper;
-    s32 next;
-    u8 lower;
     u8 upper_u8;
-    s32 i;
-    u8 start;
+    s32 next;
+    s32 upper;
     s32 idx;
     s32 curr;
+    u8 end;
+    u8 lower;
+    u8 start;
+    s32 found;
+    s32 i;
 
     if (arg0 < 15) {
         lower = 0;
@@ -200,7 +200,7 @@ loop_done:
     idx = arg0;
     i = 1;
     next = idx + 1;
-    curr = arg0 + 1;
+    curr = idx + 1;
     upper_u8 = upper;
     while (true) {
         s32 temp = idx - i;
@@ -516,7 +516,10 @@ static void fn_80236998(HSD_GObj* gobj)
     changed_menu = 0;
     changed_hovered = 0;
     changed_confirmed = 0;
-    data = gobj->user_data;
+    {
+        MnStageSwData* user_data = gobj->user_data;
+        data = user_data;
+    }
     state = data->x1F;
     PAD_STACK(4);
     if ((state == 0 || state == 1 || state == 3) &&
@@ -704,7 +707,7 @@ static HSD_GObj* mnStageSw_80236CBC(s8 arg0)
         HSD_JObjReqAnimAll(cursor_anim_jobj, mnStageSw_804D4BB8[enabled]);
         HSD_JObjAnimAll(cursor_anim_jobj);
         lb_80011E24(cursor_jobj, &sp48, 3, -1);
-        if (idx == hovered) {
+        if (hovered == idx) {
             HSD_JObjReqAnimAll(sp48, anims[0].start_frame);
             HSD_JObjAnimAll(sp48);
         } else {

@@ -782,9 +782,10 @@ void fn_8018B090(HSD_GObj* arg0)
             }
             if (var_r24 == 4) {
                 u8* w = bb + lbl_804D6634 * 0x2C;
-                u8* e = (u8*) &lbl_803D9D20 + tm->entrants * 4;
-                *(s32*) (w + 0x3C) = *(s32*) (e + 0xFC);
-                *(s32*) (w + 0x40) = *(s32*) (e + 0xFE);
+                *(s32*) (w + 0x3C) =
+                    *(s16*) &lbl_803D9D20.x0[tm->entrants * 4 + 0xFC];
+                *(s32*) (w + 0x40) =
+                    *(s16*) &lbl_803D9D20.x0[tm->entrants * 4 + 0xFE];
                 tm->cur_option = 0x22;
                 return;
             }
@@ -1267,7 +1268,7 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
         DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4, color);
     }
 
-    right = arg3 + arg1;
+    right = arg1 + arg3;
     c2 = c0;
     {
         GXColor* color = &c2;
@@ -1430,10 +1431,9 @@ void fn_8018DC18(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
     s32 half;
     s32 center;
     GXColor c0, c1, c2, c3, c4, c5, c6, c7;
-    BracketEntry* data = (BracketEntry*) arg0;
 
     c0 = col;
-    thickness = data->x1C;
+    thickness = ((BracketEntry*) arg0)->x1C;
     c1 = c0;
     {
         GXColor* color = &c1;
@@ -1463,17 +1463,17 @@ void fn_8018DC18(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                       neg_thickness, color);
     }
 
-    if (fn_8018DC18_inline0(data) == 0) {
-        if (data->x4C == 0) {
-            c5 = data->x20;
+    if (fn_8018DC18_inline0(arg0) == 0) {
+        if (((BracketEntry*) arg0)->x4C == 0) {
+            c5 = ((BracketEntry*) arg0)->x20;
             DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4, &c5);
-            c6 = data->x20;
+            c6 = ((BracketEntry*) arg0)->x20;
             DrawRectangle((f32) arg1, (f32) arg5, (f32) half + thickness,
                           neg_thickness, &c6);
             return;
         }
-        if (data->x78 == 0) {
-            c7 = data->x20;
+        if (((BracketEntry*) arg0)->x78 == 0) {
+            c7 = ((BracketEntry*) arg0)->x20;
             {
                 GXColor* color = &c7;
                 DrawRectangle((f32) center, (f32) arg2, thickness, (f32) arg4,
@@ -1481,9 +1481,9 @@ void fn_8018DC18(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
             }
             return;
         }
-        c7 = data->x20;
+        c7 = ((BracketEntry*) arg0)->x20;
         DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4, &c7);
-        c7 = data->x20;
+        c7 = ((BracketEntry*) arg0)->x20;
         DrawRectangle((f32) center, (f32) arg5, (f32) half + thickness,
                       neg_thickness, &c7);
     }
@@ -1499,12 +1499,10 @@ void fn_8018DF68(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
     GXColor line_color;
     GXColor left_third_color;
     GXColor right_third_color;
-    GXColor horizontal_color;
-    GXColor slot0_vertical_color;
     GXColor slot0_horizontal_color;
+    GXColor slot0_vertical_color;
+    GXColor horizontal_color;
     GXColor slot1_vertical_color;
-    GXColor slot1_horizontal_color;
-    GXColor slot2_vertical_color;
     GXColor slot3_vertical_color;
     GXColor slot3_horizontal_color;
     f32 neg_thickness;
@@ -1556,17 +1554,22 @@ void fn_8018DF68(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
             return;
         }
         if (((BracketEntry*) arg0)->x78 == 0) {
+            GXColor slot1_horizontal_color;
             slot1_vertical_color = ((BracketEntry*) arg0)->x20;
             DrawRectangle((f32) left_third, (f32) arg2, thickness, (f32) arg4,
                           &slot1_vertical_color);
             slot1_horizontal_color = ((BracketEntry*) arg0)->x20;
-            DrawRectangle((f32) left_third, (f32) arg5,
-                          ((f32) (arg3 / 2) + thickness) - (f32) third,
-                          neg_thickness, &slot1_horizontal_color);
+            {
+                GXColor* color = &slot1_horizontal_color;
+                DrawRectangle((f32) left_third, (f32) arg5,
+                              ((f32) (arg3 / 2) + thickness) - (f32) third,
+                              neg_thickness, color);
+            }
             return;
         }
         if (((BracketEntry*) arg0)->xA4 == 0) {
             GXColor slot2_horizontal_color;
+            GXColor slot2_vertical_color;
             slot2_vertical_color = ((BracketEntry*) arg0)->x20;
             DrawRectangle((f32) right_third, (f32) arg2, thickness, (f32) arg4,
                           &slot2_vertical_color);
@@ -2242,7 +2245,7 @@ void fn_8018F888(void)
 
     lbl_80473AB8[i].x20.g = 0;
 
-    if (gm_804771C4.x33 != 5) {
+    if (gm_804771C4.x37[0].x8 != 5) {
         return;
     }
 
@@ -2251,6 +2254,17 @@ void fn_8018F888(void)
     lbl_80473AB8[i + 1].x20.g = 0;
 }
 #pragma pop
+
+static inline int fn_8018FA24_inline0(int char_kind)
+{
+    if (char_kind < 0x13) {
+        return char_kind;
+    }
+    if (char_kind == 0x1D) {
+        return 5;
+    }
+    return char_kind + 1;
+}
 
 void fn_8018FA24(void)
 {
@@ -2261,9 +2275,6 @@ void fn_8018FA24(void)
     s32 player_count;
     s32 i;
     BracketEntry* entry;
-    s32 char_kind;
-
-    PAD_STACK(8);
 
     tmdata = (u8*) &gm_804771C4 + 0xc;
 
@@ -2285,21 +2296,12 @@ void fn_8018FA24(void)
         dst[0x4BC] = ptr[0x51];
         dst[0x4BD] = ptr[0x52];
         dst[0x4B9] = ptr[0x4D];
-        char_kind = dst[0x4B9];
-        if (char_kind >= 0x13) {
-            if (char_kind == 0x1D) {
-                char_kind = 5;
-            } else {
-                char_kind += 1;
-            }
-        }
-        Player_SetPlayerCharacter(player_idx, char_kind);
+        Player_SetPlayerCharacter(player_idx, fn_8018FA24_inline0(dst[0x4B9]));
         dst[0x4B8] = ptr[0x4E];
-        char_kind = dst[0x4B8];
-        if ((u32) char_kind != 3) {
+        if (dst[0x4B8] != 3) {
             player_count += 1;
         }
-        Player_SetSlottype(player_idx, char_kind);
+        Player_SetSlottype(player_idx, dst[0x4B8]);
         dst[0x4BB] = ptr[0x4F];
         Player_SetCostumeId(player_idx, dst[0x4BB]);
         dst[0x4BC] = ptr[0x51];

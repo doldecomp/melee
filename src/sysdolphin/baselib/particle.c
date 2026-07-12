@@ -287,8 +287,8 @@ f32 DrawASCII(int chr, float x, float y, GXColor* color)
 {
     s32 index;
     u8* glyph;
-    u8* ptr;
     s32 i;
+    u8* ptr;
     u8 p0, p1;
     u8 r, g, b, a;
     PAD_STACK(48);
@@ -388,8 +388,7 @@ f32 DrawASCII(int chr, float x, float y, GXColor* color)
     }
 
 draw_glyph:
-    glyph = &lbl_80408630[index * 13];
-    ptr = glyph;
+    ptr = glyph = &lbl_80408630[index * 13];
     i = 0;
     while (i < 0x29 && (u8) ptr[0] != 0xFF) {
         p0 = glyph[i++];
@@ -611,9 +610,9 @@ void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
 
     GXWGFifo.f32 = x1;
     i = 0;
+    a = color->a;
     GXWGFifo.f32 = y1;
 
-    a = color->a;
     b = color->b;
     g = color->g;
     r = color->r;
@@ -697,7 +696,6 @@ void hsd_803921B8(void* bitmap, s32 x, s32 y, s32 dst, s32 w, s32 h,
     s32 off_y;
     GlyphEntry* table;
     s32 bit_off;
-    s32 col;
     s32 x2;
     s32 data_off;
     u32 word;
@@ -728,6 +726,7 @@ void hsd_803921B8(void* bitmap, s32 x, s32 y, s32 dst, s32 w, s32 h,
     x2 = x * 2;
     data_off = off_y * 4;
     while (off_y < 14 && (u32) y < h) {
+        s32 col;
         col = x;
         bit_x = off_x;
         cur_dst = dst + (y * v_stride) + x2;
@@ -759,30 +758,29 @@ void hsd_803922FC(void* bitmap, s32 x, s32 y, s32 parity, s32 dst, s32 w,
 {
     volatile s32 v_stride;
     volatile s32 v_h;
-    s32 col;
-    s32 bit_off;
     s32 bit_x;
-    s32 off_x;
-    GlyphEntry* table;
+    s32 cur_dst;
     u32 max_x;
+    s32 off_x;
+    s32 off_y;
+    GlyphEntry* table;
+    s32 bit_off;
+    s32 col;
     s32 x2;
     s32 data_off;
     s32 row_idx;
     u32 word;
-    s32 cur_dst;
     s32 shift;
     s32 val;
     u8* bmp;
-    s32 off_y;
     GlyphEntry* entry;
 
     v_h = h;
     v_stride = stride;
     bmp = bitmap;
-    table = tbl;
     off_y = 0;
     off_x = 0;
-    if (table == NULL) {
+    if ((table = tbl) == NULL) {
         table = lbl_80408898;
     }
     if (y < 0) {
@@ -1151,25 +1149,25 @@ void* fn_80392A3C(void)
         hsd_804CE3F8[0].next = &hsd_804CE3F8[1];
         hsd_804CE3F8[1].type = 2;
         count = 4;
-        ((f32*) &hsd_804CE3F8[1].content.bytes[0])[0] =
+        hsd_804CE3F8[1].content.gradient[0].pos =
             hsd_804D7860 / (f32) numFrames;
-        ((s32*) &hsd_804CE3F8[1].content.bytes[0])[1] = lbl_804D609C;
-        ((f32*) &hsd_804CE3F8[1].content.bytes[0])[2] =
+        hsd_804CE3F8[1].content.gradient[0].color = lbl_804D609C;
+        hsd_804CE3F8[1].content.gradient[1].pos =
             (f32) (s32) (0.9999F + hsd_804D7860) / (f32) numFrames;
-        ((s32*) &hsd_804CE3F8[1].content.bytes[0])[3] = lbl_804D60A0;
-        ((f32*) &hsd_804CE3F8[1].content.bytes[0])[4] = -1.0F;
+        hsd_804CE3F8[1].content.gradient[1].color = lbl_804D60A0;
+        hsd_804CE3F8[1].content.gradient[2].pos = -1.0F;
         hsd_804CE3F8[1].next = &hsd_804CE3F8[2];
         hsd_804CE3F8[2].type = 2;
-        ((f32*) &hsd_804CE3F8[2].content.bytes[0])[0] =
+        hsd_804CE3F8[2].content.gradient[0].pos =
             hsd_804D785C / (f32) numFrames;
-        ((s32*) &hsd_804CE3F8[2].content.bytes[0])[1] = lbl_804D6090;
-        ((f32*) &hsd_804CE3F8[2].content.bytes[0])[2] = -1.0F;
+        hsd_804CE3F8[2].content.gradient[0].color = lbl_804D6090;
+        hsd_804CE3F8[2].content.gradient[1].pos = -1.0F;
         hsd_804CE3F8[2].next = &hsd_804CE3F8[3];
         hsd_804CE3F8[3].type = 2;
-        ((f32*) &hsd_804CE3F8[3].content.bytes[0])[0] =
+        hsd_804CE3F8[3].content.gradient[0].pos =
             hsd_804D7858 / (f32) numFrames;
-        ((s32*) &hsd_804CE3F8[3].content.bytes[0])[1] = green;
-        ((f32*) &hsd_804CE3F8[3].content.bytes[0])[2] = -1.0F;
+        hsd_804CE3F8[3].content.gradient[0].color = green;
+        hsd_804CE3F8[3].content.gradient[1].pos = -1.0F;
         hsd_804CE3F8[3].next = &hsd_804CE3F8[4];
     }
     if (lbl_804D608C != 0) {
@@ -1653,8 +1651,6 @@ void hsd_80393440(void* request, void* response)
 
 void hsd_80393840(void) {}
 
-// @TODO: Currently 99.29% match - stack frame/register allocation differences
-// remain
 void hsd_80393844(void)
 {
     ParticleLogEntry* base = hsd_804CEB40;
@@ -1671,14 +1667,11 @@ void hsd_80393844(void)
             return;
         }
 
-        {
-            s32 idx = hsd_804D78B8;
-            type = base[idx].x0;
-            flags = base[idx].x4;
-            value = base[idx].x8;
-            hsd_804D78BC -= 1;
-            hsd_804D78B8 = (idx + 1) % 256;
-        }
+        type = base[hsd_804D78B8].x0;
+        flags = base[hsd_804D78B8].x4;
+        value = base[hsd_804D78B8].x8;
+        hsd_804D78BC -= 1;
+        hsd_804D78B8 = (hsd_804D78B8 + 1) % 256;
 
         OSRestoreInterrupts(irq);
 
@@ -2516,24 +2509,22 @@ void Exception_ReportCodeline(u16 error, int dsisr, int dar, OSContext* ctx)
     }
 }
 
-// @TODO: Currently 97.87% match - lwz r0 + mr r4 instead of lwz r4
 void fn_80394DF4(void* node_ptr)
 {
+    struct ParticleScreenState* sp = &hsd_804CF810;
     ExcptNode* node = node_ptr;
     ExcptNode* prev;
     ExcptNode* head;
+    ExcptNode** head_ptr;
 
-    if (node == NULL) {
-        return;
-    }
-    head = (ExcptNode*) hsd_804CF810.xD0;
-    if (head == NULL) {
+    if (node == NULL || (head = *(head_ptr = (ExcptNode**) &sp->xD0)) == NULL)
+    {
         return;
     }
     if (head == node) {
-        hsd_804CF810.xD0 = head->next;
+        *head_ptr = head->next;
         node->next = NULL;
-        hsd_804CF810.x0_b5 = 1;
+        sp->x0_b5 = 1;
         return;
     }
     prev = head;
@@ -2541,7 +2532,7 @@ void fn_80394DF4(void* node_ptr)
         if (prev->next == node) {
             prev->next = node->next;
             node->next = NULL;
-            hsd_804CF810.x0_b5 = 1;
+            sp->x0_b5 = 1;
             return;
         }
         prev = prev->next;
@@ -2857,11 +2848,8 @@ void hsd_803957C0(u8 input)
     s32 b6;
     u8 ch;
     void* saved;
-    s32 saved_ch;
     PAD_STACK(24);
 
-    ch = input;
-    saved_ch = input;
     col = sp->x0C + sp->x18;
     row = *x10_ptr + sp->x14;
 
@@ -2905,7 +2893,7 @@ void hsd_803957C0(u8 input)
         }
     }
 
-    if ((u32) sp->xD0 == saved_ch) {
+    if ((u32) sp->xD0 == input) {
         struct ParticleScreenState* final_sp = &hsd_804CF810;
         *x4_ptr = (final_sp->x20 - 0x27) * 11 + 20;
         *x8_ptr = (*x40_ptr - 40) - (final_sp->x1C + 1) * 14;
@@ -3964,15 +3952,16 @@ void hsd_80397520(void* node_ptr)
     }
 }
 
-// @TODO: Currently 94.61% match - register allocation differences remain
+// @TODO: Currently 99.62% match - register allocation differences remain
 void hsd_803975D4(void)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
-    u32 reset_mask;
     PADStatus* cur_pads;
+    u32 reset_mask;
     s32 port;
     u16 buttons;
-    u16 new_press;
+    u16 changed;
+    u32 new_press;
 
     reset_mask = 0;
     if (OSGetResetSwitchState() != 0) {
@@ -3982,7 +3971,7 @@ void hsd_803975D4(void)
         for (;;) {
         }
     }
-    cur_pads = (PADStatus*) ((u8*) sp + 0x54);
+    cur_pads = (PADStatus*) sp->_pad4;
     memcpy(&sp->_pad4[0x30], cur_pads, 0x30);
     PADRead(cur_pads);
     PADClamp(cur_pads);
@@ -3994,40 +3983,13 @@ void hsd_803975D4(void)
     if (reset_mask != 0) {
         PADReset(reset_mask);
     }
-    port = 0;
-    if ((s8) sp->_pad4[0x3A] != 0) {
-        goto port1;
+    for (port = 0; port < 4; port++) {
+        if ((s8) sp->_pad4[0x3A + port * 0xC] == 0 &&
+            (s8) sp->_pad4[0xA + port * 0xC] == 0)
+        {
+            break;
+        }
     }
-    if ((s8) sp->_pad4[0xA] == 0) {
-        goto port_done;
-    }
-port1:
-    port = 1;
-    if ((s8) sp->_pad4[0x46] != 0) {
-        goto port2;
-    }
-    if ((s8) sp->_pad4[0x16] == 0) {
-        goto port_done;
-    }
-port2:
-    port = 2;
-    if ((s8) sp->_pad4[0x52] != 0) {
-        goto port3;
-    }
-    if ((s8) sp->_pad4[0x22] == 0) {
-        goto port_done;
-    }
-port3:
-    port = 3;
-    if ((s8) sp->_pad4[0x5E] != 0) {
-        goto port4;
-    }
-    if ((s8) sp->_pad4[0x2E] == 0) {
-        goto port_done;
-    }
-port4:
-    port = 4;
-port_done:
     if (port == 4) {
         sp->xBC = 0;
         sp->xC0 = 0;
@@ -4036,11 +3998,11 @@ port_done:
     *(s32*) ((u8*) sp + 0xB4) = port;
     buttons =
         ((PADStatus*) ((u8*) sp + 0x54))[*(s32*) ((u8*) sp + 0xB4)].button;
-    new_press =
+    changed =
         ((PADStatus*) ((u8*) sp + 0x84))[*(s32*) ((u8*) sp + 0xB4)].button ^
         buttons;
     sp->xC0 = buttons;
-    new_press = buttons & new_press;
+    new_press = (u16) (buttons & changed);
     if (new_press != 0) {
         *(s32*) ((u8*) sp + 0xB8) = 0;
     } else if (((PADStatus*) ((u8*) sp + 0x54))[*(s32*) ((u8*) sp + 0xB4)]
@@ -5257,7 +5219,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
     HSD_Generator* gchild;
     HSD_PSCmdList* cl;
     HSD_PSTexGroup* tg;
-    PAD_STACK(464);
+    PAD_STACK(456);
 
 #define fval (*(f32*) &hsd_804D78D0)
 #define fbytes (*(ParticleFloatBytes*) &hsd_804D78D0).bytes
@@ -7981,12 +7943,12 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     f32 angle3;
     PAD_STACK(16);
 
-    angle3 = 0.0F;
-    vel_mag_sq = angle3;
-
-    if (gen->count < 0.0F) {
+    if (gen->count < 1.0F) {
         return gen->count;
     }
+
+    angle3 = 0.0F;
+    vel_mag_sq = angle3;
 
     /* Copy velocity */
     vel_copy.x = gen->vel.x;
@@ -8624,11 +8586,12 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             f32 az_angle;
             f32 r2 = gen->radius;
             az_angle = (f32) ((f64) M_TAU * (f64) rnd);
-            cone_angle = (f32) ((f64) M_TAU * az_angle);
+            cone_angle = az_angle;
 
             if (r2 < 0.0F) {
                 sin_az = -r2;
             } else {
+                rnd = HSD_Randf();
                 if (rnd > 0.0F) {
                     f64 e = __frsqrte(rnd);
                     e = 0.5 * e * -(rnd * (e * e) - 3.0);
@@ -8645,9 +8608,9 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                 cos_r = cosf(cone_angle);
                 cos_az = sinf(radius);
                 vel_out.x = cos_az * cos_r;
-                sin_el = cosf(cone_angle);
+                sin_el = sinf(cone_angle);
                 sin_r = sinf(radius);
-                vel_out.y = cos_az * sin_r;
+                vel_out.y = sin_el * sin_r;
                 vel_out.z = cosf(radius);
             }
 
@@ -8770,12 +8733,11 @@ HSD_Generator* hsd_8039EFAC(s32 linkNo, s32 bank, s32 gfx_id, HSD_JObj* jobj)
     return gen;
 }
 
-// @TODO: Currently 80.79% match - .bss.0 section anchor hoist causes
+// @TODO: Currently 92.58% match - .bss.0 section anchor hoist causes
 // register-allocation cascade (extra saved reg + frame shift)
 HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
 {
-    HSD_PSCmdList** cmdListArr;
-    HSD_PSCmdList* cl;
+    HSD_PSCmdList*** cmdListArr;
     HSD_PSTexGroup* tg;
     HSD_Generator* gen;
     s32 ofs;
@@ -8797,36 +8759,34 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
         return NULL;
     }
 
-    cmdListArr = psCmdListArray[bank];
+    cmdListArr = (HSD_PSCmdList***) &ptclref_804D0E5C[bank];
     ofs = idx * 4;
-    if ((u32) * ((s32*) cmdListArr + idx) == 0) {
+    if ((*cmdListArr)[idx] == NULL) {
         return NULL;
     }
 
     gen = hsd_8039D9C8();
     if (gen != NULL) {
-        cl = ((HSD_PSCmdList**) cmdListArr)[idx];
-
-        gen->type = cl->type;
+        gen->type = (*cmdListArr)[idx]->type;
         gen->bank = bank;
         gen->linkNo = linkNo;
-        gen->kind = cl->kind;
-        gen->texGroup = cl->texGroup;
-        gen->life = cl->life;
-        gen->genLife = cl->genLife;
+        gen->kind = (*cmdListArr)[idx]->kind;
+        gen->texGroup = (*cmdListArr)[idx]->texGroup;
+        gen->life = (*cmdListArr)[idx]->life;
+        gen->genLife = (*cmdListArr)[idx]->genLife;
         gen->pos.x = 0.0F;
         gen->pos.y = 0.0F;
         gen->pos.z = 0.0F;
-        gen->vel.x = cl->vx;
-        gen->vel.y = cl->vy;
-        gen->vel.z = cl->vz;
-        gen->grav = cl->grav;
-        gen->fric = cl->fric;
-        gen->angle = cl->angle;
-        gen->cmdList = cl->cmdList;
-        gen->radius = cl->radius;
-        gen->size = cl->size;
-        gen->random = cl->random;
+        gen->vel.x = (*cmdListArr)[idx]->vx;
+        gen->vel.y = (*cmdListArr)[idx]->vy;
+        gen->vel.z = (*cmdListArr)[idx]->vz;
+        gen->grav = (*cmdListArr)[idx]->grav;
+        gen->fric = (*cmdListArr)[idx]->fric;
+        gen->size = (*cmdListArr)[idx]->size;
+        gen->cmdList = (*cmdListArr)[idx]->cmdList;
+        gen->radius = (*cmdListArr)[idx]->radius;
+        gen->angle = (*cmdListArr)[idx]->angle;
+        gen->random = (*cmdListArr)[idx]->random;
 
         if (gen->kind & 0x100) {
             f1 = gen->random;
@@ -8859,46 +8819,44 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
         case 0:
         case 3:
         case 4: {
-            HSD_PSCmdList* c = ((HSD_PSCmdList**) cmdListArr)[idx];
+            HSD_PSCmdList* c = (*cmdListArr)[idx];
             f32 p1 = c->param1;
             if (p1 == 0.0F && c->param2 == 0.0F) {
                 gen->aux.disc.minAngle = 0.0F;
                 gen->aux.disc.maxAngle = 6.2831855F;
             } else {
                 gen->aux.disc.minAngle = p1;
-                gen->aux.disc.maxAngle =
-                    ((HSD_PSCmdList**) cmdListArr)[idx]->param2;
+                gen->aux.disc.maxAngle = (*cmdListArr)[idx]->param2;
             }
             break;
         }
         case 1:
-            gen->aux.line.x2 = ((HSD_PSCmdList**) cmdListArr)[idx]->param1;
-            gen->aux.line.y2 = ((HSD_PSCmdList**) cmdListArr)[idx]->param2;
-            gen->aux.line.z2 = ((HSD_PSCmdList**) cmdListArr)[idx]->param3;
+            gen->aux.line.x2 = (*cmdListArr)[idx]->param1;
+            gen->aux.line.y2 = (*cmdListArr)[idx]->param2;
+            gen->aux.line.z2 = (*cmdListArr)[idx]->param3;
             break;
         case 6:
         case 7: {
-            HSD_PSCmdList* c = ((HSD_PSCmdList**) cmdListArr)[idx];
+            HSD_PSCmdList* c = (*cmdListArr)[idx];
             f32 p1 = c->param1;
             if (p1 == 0.0F && c->param2 == 0.0F) {
                 gen->aux.cone.minAngle = 0.0F;
                 gen->aux.cone.maxAngle = 6.2831855F;
             } else {
                 gen->aux.cone.minAngle = p1;
-                gen->aux.cone.maxAngle =
-                    ((HSD_PSCmdList**) cmdListArr)[idx]->param2;
+                gen->aux.cone.maxAngle = (*cmdListArr)[idx]->param2;
             }
-            gen->aux.cone.height = ((HSD_PSCmdList**) cmdListArr)[idx]->param3;
+            gen->aux.cone.height = (*cmdListArr)[idx]->param3;
             break;
         }
         case 5: {
-            f0 = ((HSD_PSCmdList**) cmdListArr)[idx]->param1;
+            f0 = (*cmdListArr)[idx]->param1;
             gen->aux.rect.x = f0;
             gen->aux.rect.xx = f0;
-            f0 = ((HSD_PSCmdList**) cmdListArr)[idx]->param2;
+            f0 = (*cmdListArr)[idx]->param2;
             gen->aux.rect.y = f0;
             gen->aux.rect.zx = f0;
-            f0 = ((HSD_PSCmdList**) cmdListArr)[idx]->param3;
+            f0 = (*cmdListArr)[idx]->param3;
             gen->aux.rect.z = f0;
             gen->aux.rect.zy = f0;
             gen->aux.rect.zz = 0.0F;
@@ -8908,13 +8866,13 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
             gen->aux.rect.xz = 0.0F;
             gen->aux.rect.yx = 0.0F;
             gen->aux.rect.flag = 0;
-            if (((HSD_PSCmdList**) cmdListArr)[idx]->param1 < 0.0F) {
+            if ((*cmdListArr)[idx]->param1 < 0.0F) {
                 gen->aux.rect.flag |= 1;
             }
-            if (((HSD_PSCmdList**) cmdListArr)[idx]->param2 < 0.0F) {
+            if ((*cmdListArr)[idx]->param2 < 0.0F) {
                 gen->aux.rect.flag |= 2;
             }
-            if (((HSD_PSCmdList**) cmdListArr)[idx]->param3 < 0.0F) {
+            if ((*cmdListArr)[idx]->param3 < 0.0F) {
                 gen->aux.rect.flag |= 4;
             }
             break;
@@ -8968,15 +8926,13 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
             } else {
                 gen->aux.sphere.lonMid = atan2f(gen->vel.z, gen->vel.x);
             }
-            gen->aux.sphere.latRange =
-                ((HSD_PSCmdList**) cmdListArr)[idx]->param1;
+            gen->aux.sphere.latRange = (*cmdListArr)[idx]->param1;
             f1 = gen->aux.sphere.latRange;
             if (f1 < 0.0F) {
                 gen->aux.sphere.latRange = -f1;
                 gen->aux.sphere.speed = -gen->aux.sphere.speed;
             }
-            gen->aux.sphere.lonRange =
-                ((HSD_PSCmdList**) cmdListArr)[idx]->param2;
+            gen->aux.sphere.lonRange = (*cmdListArr)[idx]->param2;
             break;
         }
         default:

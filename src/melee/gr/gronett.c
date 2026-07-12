@@ -478,8 +478,9 @@ void grOnett_801E43E0(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     s8 saved_car = gp->gv.onettcar.curr_car;
     Vec3 pos = { 0.0f, 0.0f, 0.0f };
+    u8 pad[4];
     f32 cam_x, cam_y, cam_z;
-    PAD_STACK(36);
+    PAD_STACK(32);
 
     if (!gp->gv.onettcar.x0_b0) {
         HSD_JObj* car_jobj;
@@ -779,16 +780,11 @@ void grOnett_801E5214(Ground_GObj* gobj)
 
         disp = gp->gv.onett.awnings[i].accumulator;
         error = disp - gp->gv.onett.awnings[i].velocity;
-        vel = gp->gv.onett.awnings[i].velocity;
         force = gp->gv.onett.awnings[i].initial;
         spring = grOt_804D69C0->spring_constant;
         force += spring;
 
-        if (error < 0.0f) {
-            abs_ratio = -error;
-        } else {
-            abs_ratio = error;
-        }
+        abs_ratio = ABS(error);
         abs_ratio /= grOt_804D69C0->max_displacement;
 
         if (error < 0.0) {
@@ -797,7 +793,8 @@ void grOnett_801E5214(Ground_GObj* gobj)
             force = grOt_804D69C0->spring_force * abs_ratio + force;
         }
 
-        force = (force - spring) * (1.0f - grOt_804D69C0->damping);
+        force -= spring;
+        force *= 1.0f - grOt_804D69C0->damping;
 
         if (force > grOt_804D69C0->max_velocity) {
             force = grOt_804D69C0->max_velocity;
@@ -805,6 +802,7 @@ void grOnett_801E5214(Ground_GObj* gobj)
             force = -grOt_804D69C0->max_velocity;
         }
 
+        vel = gp->gv.onett.awnings[i].velocity;
         if ((ABS(vel - disp) < grOt_804D69C0->pos_threshold) &&
             (ABS(force) < grOt_804D69C0->vel_threshold))
         {

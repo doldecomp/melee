@@ -332,12 +332,11 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
 {
     u8 operand_pad[8];
     {
-        Vec3 vec4;
         Vec3 arg4_offset;
         Vec3 arg5_offset;
         float temp_f1;
         float unk_sum = arg6 + arg7;
-        vec4 = *arg0;
+        Vec3 vec4 = *arg0;
         (void) vec4;
         arg4_offset = vec4;
         {
@@ -469,13 +468,14 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
             float offset_delta_x = arg4_offset.x - arg5_offset.x;
             float d1_len_sq = (d1_z * d1_z) + ((d1_x * d1_x) + (d1_y * d1_y));
             float offset_delta_z = arg4_offset.z - arg5_offset.z;
-            float d2_dot_offset_delta = d2_z * offset_delta_z +
-                                        d2_x * offset_delta_x +
-                                        d2_y * offset_delta_y;
+            float d2_y_offset = d2_y * offset_delta_y;
+            float d2_dot_offset_delta =
+                d2_z * offset_delta_z + d2_x * offset_delta_x + d2_y_offset;
             float d1_dot_offset_delta = (d1_z * offset_delta_z) +
                                         d1_x * offset_delta_x +
                                         d1_y * offset_delta_y;
-            float denom = d1_len_sq * d2_len_sq - d1_dot_d2 * d1_dot_d2;
+            float len_product = d1_len_sq * d2_len_sq;
+            float denom = len_product - d1_dot_d2 * d1_dot_d2;
 
             {
                 float arg5_scl;
@@ -660,9 +660,9 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
 {
     Vec3 a1;
     float sum_pq = p + q;
+    Vec3 a0;
     u8 operand_pad[12];
 
-    Vec3 a0;
     PAD_STACK(72);
 
     a0 = *a;
@@ -711,7 +711,8 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                 }
 
                 {
-                    float b_y = b->y;
+                    float loaded_b_y = b->y;
+                    float b_y = loaded_b_y;
                     if (a1.y > b_y) {
                         {
                             float y;
@@ -753,7 +754,7 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                         float diff_dc_x = d_x - c1.x;
 
                         float dot2_diff_ba_dc =
-                            diff_ba_x * diff_dc_x + diff_ba_y * diff_dc_y;
+                            diff_ba_x * diff_dc_x + diff_dc_y * diff_ba_y;
 
                         float sqdist2_dc =
                             diff_dc_x * diff_dc_x + diff_dc_y * diff_dc_y;
@@ -773,7 +774,6 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                         {
                             float scl_e;
                             float scl_f;
-                            float out0;
                             float out1;
                             if (approximatelyZero(sqdist2_dc)) {
                                 if (approximatelyZero(sqdist2_ba)) {
@@ -911,6 +911,7 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                     (scl_f > lbColl_804D7A00) ||
                                     (scl_f < lbColl_804D7A10))
                                 {
+                                    float out0;
                                     float result0;
                                     float temp_scl_e;
                                     {
@@ -996,7 +997,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
                      float* out_overlap, float hit_radius, float hurt_radius,
                      float broadphase_scale)
 {
-    float hurt_len_sq;
+    float hit_end_min_z;
     float closest_delta_x;
     float hit_start_mid_x;
     float local_delta_x;
@@ -1004,7 +1005,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     Vec3 hit_start_copy;
     Vec3 hurt_start_copy;
     Vec3 hit_delta;
-    Mtx inv_hurt_mtx;
+    float start_delta_z;
     float candidate_hit_param;
     float scaled_hurt_radius;
     float hurt_mid_x;
@@ -1025,7 +1026,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float local_delta_y;
     float start_delta_x;
     float start_delta_y;
-    float start_delta_z;
+    Mtx inv_hurt_mtx;
     float hurt_delta_x;
     float hit_start_max_x;
     float hit_end_min_x;
@@ -1041,7 +1042,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float hit_end_min_y;
     float hit_start_min_y;
     float hit_end_max_y;
-    float hit_end_min_z;
+    float hurt_len_sq;
     float hit_end_max_z;
     float hit_start_dot;
     float hit_end_x;
@@ -1053,14 +1054,14 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float hurt_end_x;
     float hit_end_z;
     float hurt_end_y;
-    float hurt_end_z;
+    float segment_dot;
     float hit_param;
     float local_dist;
     float hurt_param;
     float hurt_param_from_hit_start;
     float hurt_param_from_hit_end;
     float closest_dist;
-    float segment_dot;
+    float hurt_end_z;
     f64 local_rsqrt_estimate;
     f64 local_rsqrt_step1;
     f64 local_rsqrt_step2;
@@ -1363,8 +1364,8 @@ block_39:
     closest_delta_x = hit_closest->x - hurt_closest->x;
     closest_delta_z = hit_closest->z - hurt_closest->z;
     closest_dist_sq = (closest_delta_z * closest_delta_z) +
-                      ((closest_delta_x * closest_delta_x) +
-                       (closest_delta_y * closest_delta_y));
+                      ((closest_delta_y * closest_delta_y) +
+                       (closest_delta_x * closest_delta_x));
     if (closest_dist_sq > lbColl_804D79F8) {
         volatile float sp38;
 
@@ -1402,8 +1403,8 @@ block_39:
     HSD_MtxInverse(hurt_mtx, inv_hurt_mtx);
     PSMTXMultVec(inv_hurt_mtx, hit_closest, &hit_start_copy);
     PSMTXMultVec(inv_hurt_mtx, hurt_closest, &hit_delta);
-    local_delta_y = hit_start_copy.y - hit_delta.y;
     local_delta_x = hit_start_copy.x - hit_delta.x;
+    local_delta_y = hit_start_copy.y - hit_delta.y;
     local_delta_z = hit_start_copy.z - hit_delta.z;
     local_dist_sq =
         (local_delta_z * local_delta_z) +

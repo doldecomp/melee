@@ -1246,9 +1246,8 @@ void grMuteCity_801F1328(void)
     for (i = 1; i < 30; i++) {
         for (j = i; j >= 0; j--) {
             s32 temp = arr[j];
-            s32 prev = arr[j - 1];
-            if (grMc_8049F4B8[prev].x0 < grMc_8049F4B8[temp].x0) {
-                arr[j] = prev;
+            if (grMc_8049F4B8[arr[j]].x0 > grMc_8049F4B8[arr[j - 1]].x0) {
+                arr[j] = arr[j - 1];
                 arr[j - 1] = temp;
             } else {
                 break;
@@ -1508,11 +1507,7 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
     track_mid = 0.5f * (gp->gv.mutecity.xD4 + gp->gv.mutecity.xD8);
     Camera_GetTransformPosition(&spE8);
 
-    if (car_jobj == NULL) {
-        jobj = NULL;
-    } else {
-        jobj = car_jobj->child;
-    }
+    jobj = car_jobj == NULL ? NULL : car_jobj->child;
 
     {
         s32 timer = car_gp->gv.mutecity.xC4;
@@ -1838,14 +1833,18 @@ DynamicModelDesc* grMuteCity_801F28A8(void)
     return NULL;
 }
 
+typedef struct grMc_StackPadArg {
+    u32 x[4];
+} grMc_StackPadArg;
+
+static inline void grMc_StackPad(grMc_StackPadArg arg) {}
+
 void grMuteCity_801F290C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     HSD_GObj* lgobj;
     s32 i;
     HSD_LObj* lobj;
-    PAD_STACK(16);
-
     if (grLib_801C96E8(gobj) != 0) {
         if (gp->gv.mutecity2.xC4_flags.b0) {
             lgobj = HSD_GObj_Entities->xC;
@@ -1907,6 +1906,7 @@ void grMuteCity_801F290C(Ground_GObj* gobj)
         }
         gp->gv.mutecity2.xC4_flags.b0 = 1;
     }
+    grMc_StackPad(*(grMc_StackPadArg*) gp->gv.mutecity2.saved_colors);
 }
 
 void grMuteCity_801F2AB0(s32 arg0, HSD_JObj* arg1)

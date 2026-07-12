@@ -429,12 +429,13 @@ void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
                        int arg3, int arg4, int arg5, bool arg6)
 {
     mp_UnkStruct0* cur;
-    float z_val;
+    CollLine* lines;
+    u8 pad[12];
     u8 visited[0x600];
     mp_UnkStruct0* next;
     mp_UnkStruct0* prev;
     mp_UnkStruct0* mpisp;
-    CollLine* lines;
+    float z_val;
     CollVtx* vtx;
     CollJoint* joints;
     MapJoint* inner;
@@ -448,7 +449,6 @@ void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
     float min_x;
     float max_x;
     int i;
-    PAD_STACK(12);
 
     type_flag = arg3 | 0x10;
     prev = NULL;

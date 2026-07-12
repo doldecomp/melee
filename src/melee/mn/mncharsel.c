@@ -384,8 +384,9 @@ void mnCharSel_8025C020(int arg0)
             HSD_SisLib_803A70A0(mnCharSel_804D6CE4, 0, "%d 人抜き",
                                 gm_Get3MinMultimanTotalHighscore());
         } else {
+            int total_highscore = gm_Get3MinMultimanTotalHighscore();
             HSD_SisLib_803A70A0(mnCharSel_804D6CE4, 0, "%d ＫＯｓ",
-                                gm_Get3MinMultimanTotalHighscore());
+                                total_highscore);
         }
         break;
     case STADIUM_15_MIN_MELEE:
@@ -1752,9 +1753,9 @@ s32 mnCharSel_8025FDEC(u8 door)
     HSD_JObj* sp10;
     int player;
     s8 c_kind;
-    int icon_idx;
     CSSData* css;
     struct CSSCharModel** model_ptr;
+    int icon_idx;
     CSSAllData* all_data = (CSSAllData*) &mnCharSel_803F0A48;
 
     if (mnCharSel_804D6CF5 == 1) {
@@ -1813,15 +1814,19 @@ s32 mnCharSel_8025FDEC(u8 door)
 
         all_data->icons[icon_idx].anim_timer = 0xC;
 
-        if (mnCharSel_8025DAA0(door)) {
-            s8 costume = 0;
-            do {
-                mnCharSel_803F0DFC.doors[door].costume = costume;
-                if (!mnCharSel_8025DAA0(door)) {
-                    break;
-                }
-                costume++;
-            } while (1);
+        {
+            int door_idx = door;
+            if (mnCharSel_8025DAA0(door_idx)) {
+                s8 costume = 0;
+                CSSDoor* selected_door = &mnCharSel_803F0DFC.doors[door_idx];
+                do {
+                    selected_door->costume = costume;
+                    if (!mnCharSel_8025DAA0(door_idx)) {
+                        break;
+                    }
+                    costume++;
+                } while (1);
+            }
         }
 
         if (mnCharSel_804D6CF6 != 3 && mnCharSel_804D6CF6 != 4) {
@@ -2618,7 +2623,8 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                             {
                                 struct CSSCursorData* other =
                                     mnCharSel_804A0BC0[loop_i];
-                                if ((u8) other->x5 == 1 &&
+                                int other_state = (u8) other->x5;
+                                if (other_state == 1 &&
                                     mnCharSel_8025FDEC((u8) loop_i) == 0)
                                 {
                                     mnCharSel_8025DB34((u8) loop_i);
@@ -2929,13 +2935,11 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                                 sp98, NULL,
                                                                 (Point3d*) &sp88);
                                                             {
-                                                                f32 hdx_val =
+                                                                f32 hdx =
                                                                     cursor
                                                                         ->x10 -
                                                                     (1.7f +
                                                                      sp88.y);
-                                                                f32 hdx =
-                                                                    hdx_val;
                                                                 f32 hdy =
                                                                     cursor
                                                                         ->xC -
@@ -3700,6 +3704,7 @@ void fn_802633B0(HSD_GObj* gobj)
     f32 new_pos;
     s32 page;
     s32 new_page;
+    s32 row_idx;
 
     tag = gobj->user_data;
     port = tag->port;
@@ -3853,7 +3858,6 @@ void fn_802633B0(HSD_GObj* gobj)
             s32 j;
             s32 trunc;
             s32 page_off;
-            s32 row_idx;
             GXColor* name_color = &row_color;
             GXColor* used_name_color = &used_row_color;
             j = 0;
@@ -4547,31 +4551,30 @@ s32 mnCharSel_802640A0(void)
             }
         }
         lb_8000B1CC(sp108, NULL, &spEC);
-        text = HSD_SisLib_803A6754(0, ctx);
-        td->name_ls = (TextGlyphTexture*) text;
-        text->default_fitting = 1;
-        text->box_size_x = 154.0f;
-        text->box_size_y = 256.0f;
-        text->pos_x = spEC.x - 0.6f;
-        text->pos_y = (0.8f - spEC.y) - 1.0f;
-        text->pos_z = spEC.z;
-        text->font_size.x = 0.065f;
-        text->font_size.y = 0.065f;
-        text->x4E = 1;
-        text->hidden = 1;
-        HSD_SisLib_803A6B98(text, 0.0f, 0.0f,
+        td->name_ls = (TextGlyphTexture*) HSD_SisLib_803A6754(0, ctx);
+        ((HSD_Text*) td->name_ls)->default_fitting = 1;
+        ((HSD_Text*) td->name_ls)->box_size_x = 154.0f;
+        ((HSD_Text*) td->name_ls)->box_size_y = 256.0f;
+        ((HSD_Text*) td->name_ls)->pos_x = spEC.x - 0.6f;
+        ((HSD_Text*) td->name_ls)->pos_y = (0.8f - spEC.y) - 1.0f;
+        ((HSD_Text*) td->name_ls)->pos_z = spEC.z;
+        ((HSD_Text*) td->name_ls)->font_size.x = 0.065f;
+        ((HSD_Text*) td->name_ls)->font_size.y = 0.065f;
+        ((HSD_Text*) td->name_ls)->x4E = 1;
+        ((HSD_Text*) td->name_ls)->hidden = 1;
+        HSD_SisLib_803A6B98((HSD_Text*) td->name_ls, 0.0f, 0.0f,
                             "\x81\x45\x81\x45\x81\x45\x81\x45\x81\x45\x81\x45"
                             "\x81\x45\x81\x45\x81\x45\x81\x45\x81\x45");
         color = spE8;
-        HSD_SisLib_803A74F0(text, 0, &color);
-        HSD_SisLib_803A6B98(text, 0.0f, 0.0f,
+        HSD_SisLib_803A74F0((HSD_Text*) td->name_ls, 0, &color);
+        HSD_SisLib_803A6B98((HSD_Text*) td->name_ls, 0.0f, 0.0f,
                             "\x82\x6d\x82\x60\x82\x6c\x82\x64\x20\x82\x64\x82"
                             "\x6d\x82\x73\x82\x71\x82\x78");
         color = spE8;
-        HSD_SisLib_803A74F0(text, 1, &color);
+        HSD_SisLib_803A74F0((HSD_Text*) td->name_ls, 1, &color);
         found = 0;
         do {
-            HSD_SisLib_803A6B98(text, 10.0f, 0.0f,
+            HSD_SisLib_803A6B98((HSD_Text*) td->name_ls, 10.0f, 0.0f,
                                 "\x81\x45\x81\x45\x81\x45\x81\x45");
             found++;
         } while (found < 9);

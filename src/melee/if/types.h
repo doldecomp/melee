@@ -89,6 +89,15 @@ struct Element_803F9628 {
     /* +24 */ u32 x24;
 };
 
+/// Score-information-counter element table plus the archive section name
+/// ("ScInfCnt_scene_models") that ifStatus_802F7134 loads the element
+/// models from. The name string is a trailing member of this object; see
+/// the layout/relocation evidence at the definition in ifstatus.c.
+struct ScInfCntModels {
+    /* +000 */ Element_803F9628 elements[8];
+    /* +140 */ char scene_models_name[0x16];
+};
+
 struct Placeholder_8016AE50_flags {
     u8 unk80 : 1;
     u8 unk40 : 1;

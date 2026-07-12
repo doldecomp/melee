@@ -409,7 +409,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
     if (inputs_repeat & (0x10LL << 32)) {
         cursor_row = data->x0[1];
         if (cursor_row != 0) {
-            u8 name_row = cursor_row - 1;
+            s32 name_row = cursor_row - 1;
             name_idx = mnVibration_GetNameSlot(data, name_row);
             if (name_idx != 0xFF) {
                 MnVibrationData* data2;

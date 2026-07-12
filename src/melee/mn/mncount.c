@@ -724,10 +724,13 @@ void fn_802514D8(HSD_GObj* gobj)
 void fn_80251640(HSD_GObj* gobj)
 {
     HSD_GObjProc* proc;
-    int i;
     HSD_JObj* jobj;
+    HSD_Text* label_null;
     StaticModelDesc* md;
     MnCountData* userdata = GET_MNCOUNT(gobj);
+    MnCountData* userdata3;
+    int i;
+    HSD_Text* value_null;
     PAD_STACK(24);
 
     if (mn_804A04F0.cur_menu != MENU_KIND_RECORDS_MISC) {
@@ -738,19 +741,22 @@ void fn_80251640(HSD_GObj* gobj)
             // inline_free_text
 
             MnCountData* userdata2 = GET_MNCOUNT(gobj);
-            MnCountData* userdata3 = userdata2;
-            int i;
+            userdata3 = userdata2;
 
-            for (i = 0; i < MNCOUNT_VISIBLE_ROWS; i++) {
+            i = 0;
+            label_null = (HSD_Text*) i;
+            value_null = (HSD_Text*) i;
+            do {
                 if (userdata2->labels[i] != NULL) {
                     HSD_SisLib_803A5CC4(userdata3->labels[i]);
-                    userdata2->labels[i] = NULL;
+                    userdata2->labels[i] = label_null;
                 }
                 if (userdata2->values[i] != NULL) {
                     HSD_SisLib_803A5CC4(userdata3->values[i]);
-                    userdata2->values[i] = NULL;
+                    userdata2->values[i] = value_null;
                 }
-            }
+                i += 1;
+            } while (i < MNCOUNT_VISIBLE_ROWS);
 
             HSD_SisLib_803A5CC4(userdata->title);
         }

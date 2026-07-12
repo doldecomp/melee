@@ -904,23 +904,19 @@ s32 HSD_Synth_8038A000(void)
             *pnode = node->x20;
             continue;
         }
-        if (node->user_vol[0].x4 != 0) {
-            int c = node->user_vol[0].x4;
-            node->unk28 = (node->unk28 * ((f32) c - 1.0f)) / (f32) c +
-                          node->user_vol[0].volume / (f32) c;
-            node->user_vol[0].x4 -= 1;
-            if (node->user_vol[0].x4 != 0) {
-                active = 1;
-            }
-        }
-        if (node->user_vol[1].x4 != 0) {
-            int c = node->user_vol[1].x4;
-            node->user_vol[0].x8_float =
-                (node->user_vol[0].x8_float * ((f32) c - 1.0f)) / (f32) c +
-                node->user_vol[1].volume / (f32) c;
-            node->user_vol[1].x4 -= 1;
-            if (node->user_vol[1].x4 != 0) {
-                active = 1;
+        {
+            int k;
+            for (k = 0; k < USERVOL_NUM; k++) {
+                if (node->user_vol[k].x4 != 0) {
+                    int c = node->user_vol[k].x4;
+                    (&node->unk28)[k * 3] =
+                        ((&node->unk28)[k * 3] * ((f32) c - 1.0f)) / (f32) c +
+                        node->user_vol[k].volume / (f32) c;
+                    node->user_vol[k].x4 -= 1;
+                    if (node->user_vol[k].x4 != 0) {
+                        active = 1;
+                    }
+                }
             }
         }
         if (HSD_Synth_804C28E0_1784[node->xB].x178C != 0) {

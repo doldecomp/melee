@@ -20,14 +20,16 @@ void lbArq_80014AC4(lbArqHandle* handle)
     lbArqNode* node = handle->node;
     lbArqNode** prev;
     lbArqNode** tail;
+    uintptr_t offset;
     BOOL intr;
 
     intr = OSDisableInterrupts();
 
     /* Remove from current list (indexed by state) */
-    prev = (lbArqNode**) (node->state * 4);
-    prev = (lbArqNode**) ((uintptr_t) prev + 0x1E0);
-    prev = (lbArqNode**) ((uintptr_t) prev + (uintptr_t) global);
+    offset = node->state * 4;
+    offset += 0x1E0;
+    offset += (uintptr_t) global;
+    prev = (lbArqNode**) offset;
     while (*prev != node) {
         prev = &(*prev)->next;
     }

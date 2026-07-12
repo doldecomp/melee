@@ -94,11 +94,11 @@ inline void ftCo_800CE650_inline(HSD_GObj* gobj, int frame, int interval)
 
 inline void ftCo_800CE650_inline2(HSD_GObj* gobj)
 {
-    Vec3 sp30;
     Vec3 sp24;
+    Vec3 item_pos;
     Fighter* fp = GET_FIGHTER(gobj);
-    it_80292EF8(fp->item_gobj, &sp30);
-    ftCo_800CDE94(fp, &sp30, &sp24);
+    it_80292EF8(fp->item_gobj, &item_pos);
+    ftCo_800CDE94(fp, &item_pos, &sp24);
     if (!it_8026B594(fp->item_gobj)) {
         it_80292F14(fp->item_gobj, &sp24, fp->facing_dir);
     } else {
@@ -111,20 +111,20 @@ inline void ftCo_800CE650_inline2(HSD_GObj* gobj)
 
 inline void ftCo_800CE650_inline3(HSD_GObj* gobj)
 {
-    Vec3 spA0;
+    Vec3 joint_pos;
     Vec3 sp94;
+    Vec3 item_pos;
     float sp90;
-    Vec3 sp84;
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (it_8026B594(fp->item_gobj) == 0) {
         sp90 = 0.0F;
-        lb_8000B1CC(fp->parts->joint, NULL, &sp84);
-        efSync_Spawn(0x3FF, gobj, &sp84, &fp->facing_dir, &sp90);
+        lb_8000B1CC(fp->parts->joint, NULL, &joint_pos);
+        efSync_Spawn(0x3FF, gobj, &joint_pos, &fp->facing_dir, &sp90);
         ft_PlaySFX(fp, 0xEE, 0x7F, 0x40);
     } else {
-        it_80292EF8(fp->item_gobj, &spA0);
-        ftCo_800CDE94(fp, &spA0, &sp94);
+        it_80292EF8(fp->item_gobj, &item_pos);
+        ftCo_800CDE94(fp, &item_pos, &sp94);
         efSync_Spawn(0x405, gobj, &sp94);
         ft_PlaySFX(fp, 0xEF, 0x7F, 0x40);
     }

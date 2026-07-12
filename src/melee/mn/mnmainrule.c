@@ -143,7 +143,13 @@ struct mn_803EC818_t mn_803EC818[7] = {
 f32 mn_804D4B88 = 4.0F;
 f32 lbl_804D4B8C = 5.0F;
 f32 mn_804D4B90 = 1.0F;
-u8 mn_804D4B94[4] = { 1, 0x63, 0x2B, 0 };
+/// Stock count {min, max} for the Stock Match rule item (1-99). Retail
+/// .sdata has two objects here (0x804D4B94 size 0x2 and 0x804D4B96 size
+/// 0x1 per symbols.txt), not one 4-byte blob.
+u8 mn_StockCountLimits[2] = { 1, 0x63 };
+
+/// SIS text id for the rule value label when Mode is Stock Match.
+u8 mn_StockCountTextId = 0x2B;
 
 extern f32 mn_804D6BD8;
 extern u8* mn_804DBDFC;
@@ -329,7 +335,7 @@ void fn_8022F538(HSD_GObj* arg0)
         return;
     }
     if (mn_804A04F0.hovered_selection == 1 && data->x2 == 1) {
-        limits = mn_804D4B94;
+        limits = mn_StockCountLimits;
     } else {
         limits = mn_803EC7DC[mn_804A04F0.hovered_selection];
     }
@@ -577,7 +583,8 @@ void mn_8022FEC8(HSD_GObj* arg0, HSD_JObj* arg1, u8 arg2, u8 arg3)
     frame = NULL;
     if ((mn_804A04F0.buttons & 4) != 0) {
         if (arg2 == 0 || arg2 == 2 || arg2 == 4) {
-            frame = (f32*) (base + 0x170 +
+            u8* frame_base = base + 0x170;
+            frame = (f32*) (frame_base +
                             (0xC * (base[0x1DD + (arg2 << 1)] - arg3)));
         }
         HSD_JObjReqAnimAll(arg1, *frame);
@@ -633,7 +640,6 @@ void mn_80230198(HSD_GObj* gobj, HSD_JObj* jobj, u8 mode)
 }
 
 extern MenuKindData mn_803EB6B0[];
-extern u8 mn_804D4B96;
 extern struct mn_803EC818_t mn_803EC818[];
 extern f32 mn_804DBE18;
 extern f32 mn_804DBE1C;
@@ -645,24 +651,21 @@ extern s32 mn_804D6BD4;
 
 void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
 {
-    HSD_JObj* option_roots[8];
+    HSD_JObj* option_roots[7];
     HSD_JObj* roots[17];
-    u16 indices[19];
+    u16 indices[17];
     u8* base;
     struct mn_802307F8_t* data;
     u8* data8;
     u8 count;
-    u8 selected;
-    u8 hovered;
     s32 i;
     s32 j;
     s32 visible;
     s32 valid;
     u16* idx;
     AnimLoopSettings* settings;
-    HSD_JObj* jobj;
 
-    PAD_STACK(0x28);
+    PAD_STACK(0x20);
 
     base = mn_803EC600;
     count = mn_803EB6B0[13].selection_count;
@@ -721,26 +724,25 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
     }
 
     if (arg1 != 0) {
-        selected = data->x1;
+        u8 selected = data->x1;
+        u8 hovered;
         lb_8001204C(option_roots[selected], roots, indices, 0x11);
         HSD_JObjSetFlagsAll(roots[16], JOBJ_HIDDEN);
         HSD_JObjSetFlagsAll(roots[13], JOBJ_HIDDEN);
-        jobj = roots[2];
         if ((u8) (selected - 5) <= 1) {
-            HSD_JObjReqAnimAll(jobj, *(f32*) (base + 0x78));
+            HSD_JObjReqAnimAll(roots[2], *(f32*) (base + 0x78));
         } else {
-            HSD_JObjReqAnimAll(jobj, *(f32*) (base + 0x60));
+            HSD_JObjReqAnimAll(roots[2], *(f32*) (base + 0x60));
         }
-        HSD_JObjAnimAll(jobj);
-        jobj = roots[7];
+        HSD_JObjAnimAll(roots[2]);
         if (selected == 1 &&
             ((struct mn_8022FB88_arg1_t*) mn_804D6BD0->user_data)->x2 == 1)
         {
-            HSD_JObjReqAnim(jobj, mn_804D4B88);
+            HSD_JObjReqAnim(roots[7], mn_804D4B88);
         } else {
-            HSD_JObjReqAnim(jobj, *(f32*) (base + 0x10 + selected * 8));
+            HSD_JObjReqAnim(roots[7], *(f32*) (base + 0x10 + selected * 8));
         }
-        HSD_JObjAnim(jobj);
+        HSD_JObjAnim(roots[7]);
         HSD_JObjSetFlagsAll(roots[8], JOBJ_HIDDEN);
 
         hovered = mn_804A04F0.hovered_selection;
@@ -833,7 +835,7 @@ void mn_802307F8(struct mn_802307F8_t* arg0, s32 arg1, s32 arg2)
         arg0->text = NULL;
     }
     if ((arg1 == 1) && ((u8) arg0->x2 == 1)) {
-        text_id = mn_804D4B96;
+        text_id = mn_StockCountTextId;
     } else if ((arg1 == 1) || (arg1 == 3) || ((u32) (arg1 - 5) <= 1U)) {
         text_id = mn_803EC818[arg1].x0;
     } else {
@@ -1051,17 +1053,17 @@ s32 mn_80230D18(struct mn_802307F8_t* arg0, HSD_JObj* arg1, s8 arg2)
 
 HSD_GObj* mn_80230E38(int arg0)
 {
-    HSD_GObj* gobj;
-    HSD_JObj* jobj;
+    u8 operand_pad[4];
     u16 indices[17];
     HSD_JObj* roots[17];
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
     StaticModelDesc** descs;
     AnimLoopSettings* settings;
     struct mn_802307F8_t* user_data;
     HSD_JObj* parent;
     u16* count_ptr;
     f32* cursor_frames;
-    u16* idx;
     u8* data8;
     u8* data_curr;
     u8* p;
@@ -1074,32 +1076,13 @@ HSD_GObj* mn_80230E38(int arg0)
     s32 valid;
     s32 total_visible;
 
-    PAD_STACK(0x40);
+    PAD_STACK(0x38);
     mode = arg0;
     hovered = mn_804A04F0.hovered_selection;
     count = mn_803EB6B0[13].selection_count;
-    indices[0] = 0;
-    indices[1] = 1;
-    indices[2] = 2;
-    indices[3] = 3;
-    indices[4] = 4;
-    indices[5] = 5;
-    indices[6] = 6;
-    indices[7] = 7;
-    indices[8] = 8;
-    indices[9] = 9;
-    indices[10] = 10;
-    indices[11] = 11;
-    indices[12] = 12;
-    indices[13] = 13;
-    indices[14] = 14;
-    indices[15] = 15;
-    i = 16;
-    idx = &indices[i];
-    while (i < 0x11) {
-        *idx = i;
-        idx++;
-        i++;
+
+    for (i = 0; i < 17; i++) {
+        indices[i] = i;
     }
 
     gobj = GObj_Create(6, 7, 0x80);

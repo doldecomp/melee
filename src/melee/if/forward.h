@@ -9,6 +9,7 @@ typedef struct HudIndex HudIndex;
 typedef struct IfDamageState IfDamageState;
 typedef struct ifMagnify ifMagnify;
 typedef struct Placeholder_8016AE50_flags Placeholder_8016AE50_flags;
+typedef struct ScInfCntModels ScInfCntModels;
 typedef struct Thing_803F9628 Thing_803F9628;
 typedef struct UnknownClassTypeE UnknownClassTypeE;
 typedef struct un_80301C64_t un_80301C64_t;

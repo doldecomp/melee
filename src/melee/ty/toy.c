@@ -1783,9 +1783,9 @@ inline static void Toy_AddPanelAnims(HSD_JObj* jobj,
 void Toy_80307470(s32 arg0)
 {
     ToyGlobalsS_* tg;
-    HSD_Joint* joint;
     ToyPanelLabelData* data;
     char** label;
+    HSD_Joint* joint;
     HSD_JObj* loaded_jobj;
     u8 kind;
 
@@ -1877,7 +1877,10 @@ void _Toy_803075E8(s32 arg0)
             GObj_SetupGXLink(td->gobj, HSD_GObj_JObjCallback, 0x33, 0);
 
             ptr = (char**) (data + arg0 * 0xC);
-            joint = HSD_ArchiveGetPublicAddress(td->archive, ptr[0x290 / 4]);
+            joint = HSD_ArchiveGetPublicAddress(
+                td->archive,
+                ((struct ModelNamesDesc*) (data + arg0 * 0xC + 0x290))
+                    ->animjoint);
             data = HSD_ArchiveGetPublicAddress(td->archive, ptr[0x294 / 4]);
             shapanim =
                 HSD_ArchiveGetPublicAddress(td->archive, ptr[0x298 / 4]);
@@ -2124,14 +2127,12 @@ void _Toy_80307F64(s32 arg0, s32 arg1)
                              "ToyStandModel_TopN_ACTION_action1_matanim_joint",
                              0, Toy_sbss_804D6EC8, 10);
             } else {
-                Toy_80306A48(
-                    jobj1, 0,
-                    "ToyStandModel_TopN_ACTION_action1_shapeanim_joint", 0,
-                    Toy_sbss_804D6EC8, 10);
-                Toy_80306A48(
-                    jobj2, 0,
-                    "ToyStandModel_TopN_ACTION_action1_shapeanim_joint", 0,
-                    Toy_sbss_804D6EC8, 10);
+                Toy_80306A48(jobj1, 0,
+                             "ToyStandModel_TopN_ACTION_action2_matanim_joint",
+                             0, Toy_sbss_804D6EC8, 10);
+                Toy_80306A48(jobj2, 0,
+                             "ToyStandModel_TopN_ACTION_action2_matanim_joint",
+                             0, Toy_sbss_804D6EC8, 10);
             }
             HSD_JObjRemoveAnimAll(jobj1);
             HSD_JObjRemoveAnimAll(jobj2);
@@ -2140,7 +2141,7 @@ void _Toy_80307F64(s32 arg0, s32 arg1)
     }
 }
 
-char* Toy_8030813C(s16 arg0, enum_t unused)
+char* Toy_8030813C(s32 arg0, enum_t unused)
 {
     char* ptr;
     s32 i;
@@ -2188,6 +2189,9 @@ char* Toy_8030813C(s16 arg0, enum_t unused)
 
 void Toy_80308250(u8* arg0, s32 arg1, s32 arg2)
 {
+#ifdef __MWERKS__
+    char* Toy_8030813C(s16 arg0, enum_t unused);
+#endif
     void* sym;
     char* ptr;
     ptr = Toy_8030813C(arg1, arg1);
@@ -2212,9 +2216,9 @@ s32 Toy_803082F8(s16 idx)
     return Toy_803063D4((s16) Toy_80308354(idx), 2, 0x128);
 }
 
-void Toy_80308328(s32 arg0)
+s32 Toy_80308328(s32 arg0)
 {
-    Toy_803063D4((s16) arg0, 2, 0x128);
+    return Toy_803063D4((s16) arg0, 2, 0x128);
 }
 
 s32 Toy_80308354(s16 idx)
@@ -2398,8 +2402,15 @@ HSD_GObj* Toy_803087F4(void* arg0)
     anim = &Toy_804A2AA8;
 
     if (entry->x14 == NULL) {
+#ifdef __MWERKS__
+        char* Toy_8030813C();
+#endif
         trophy_id = entry->x10;
+#ifdef __MWERKS__
+        model_name = Toy_8030813C(trophy_id);
+#else
         model_name = Toy_8030813C(trophy_id, trophy_id);
+#endif
         if (entry->x14 != NULL) {
             lbArchive_80016EFC(entry->x14);
             entry->x14 = NULL;
@@ -2773,9 +2784,9 @@ void _Toy_80309404(HSD_GObj* gobj)
     state = _Toy_sbss_804D6E68;
     anim = &base->anim;
     ed4 = (ToyCameraControl*) Toy_sbss_804D6ED4;
-    rotate_update = 0.0f;
-    movement_update = 0.0f;
     zoom_update = 0.0f;
+    movement_update = 0.0f;
+    rotate_update = 0.0f;
 
     HSD_CObjGetEyePosition(cobj, &eye_pos);
     dist = _Toy_80309338(&eye_pos, NULL);
@@ -4140,14 +4151,15 @@ void _Toy_8030B530(HSD_GObj* arg0)
         }
 
         {
+            f32 moved_x = 0.3f * adj_sx;
+            f32 moved_y = 0.3f * adj_sy;
             f32 top = HSD_CObjGetTop(cobj);
             f32 bottom = HSD_CObjGetBottom(cobj);
             f32 right = HSD_CObjGetRight(cobj);
             f32 left = HSD_CObjGetLeft(cobj);
-            f32 left_copy = left;
             if (HSD_PadCopyStatus[1].trigger & 0x1000) {
-                OSReport("top = %f, bottom = %f, right = %f, left = %f\n",
-                         (u32) (s32) left_copy, top, bottom, right, left_copy);
+                OSReport("top = %f, bottom = %f, right = %f, left = %f\n", top,
+                         bottom, right, left);
                 return;
             }
             if (HSD_PadCopyStatus[1].button & 8) {
@@ -4167,29 +4179,36 @@ void _Toy_8030B530(HSD_GObj* arg0)
                 return;
             }
             if (HSD_PadCopyStatus[1].button & 1) {
-                f32 nr = HSD_CObjGetRight(cobj) - 0.001f;
-                f32 nl = HSD_CObjGetLeft(cobj) - 0.001f;
+                f32 nr = HSD_CObjGetRight(cobj);
+                f32 nl = HSD_CObjGetLeft(cobj);
+                nr -= 0.001f;
+                nl -= 0.001f;
                 HSD_CObjSetRight(cobj, nr);
                 HSD_CObjSetLeft(cobj, nl);
                 OSReport("right = %f, left = %f\n", nr, nl);
                 return;
             }
             if (HSD_PadCopyStatus[1].button & 2) {
-                f32 nr = HSD_CObjGetRight(cobj) + 0.001f;
-                f32 nl = HSD_CObjGetLeft(cobj) + 0.001f;
+                f32 nr = HSD_CObjGetRight(cobj);
+                f32 nl = HSD_CObjGetLeft(cobj);
+                nr += 0.001f;
+                nl += 0.001f;
                 HSD_CObjSetRight(cobj, nr);
                 HSD_CObjSetLeft(cobj, nl);
                 OSReport("right = %f, left = %f\n", nr, nl);
                 return;
             }
-            _Toy_8030715C(0.3f * adj_sx, 0.3f * adj_sy);
+            _Toy_8030715C(moved_x, moved_y);
         }
     }
 }
 
 void _Toy_8030E110(HSD_GObj* arg0)
 {
-    Vec3 sp140;
+    struct {
+        Vec3 vec;
+        u8 pad[8];
+    } sp140;
     Vec3 sp134;
     Vec3 sp128;
     void* spD8;
@@ -4211,7 +4230,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
     s16 trophy_id;
     HSD_Archive* archive;
 
-    PAD_STACK(176);
+    PAD_STACK(168);
 
     base = (Toy26B8*) &_Toy_804A26B8;
     anim = &base->anim;
@@ -4366,7 +4385,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
                 state->x5C = 0;
                 sp134 = _Toy_803B88F8;
                 sp128 = _Toy_803B8904;
-                HSD_CObjGetEyePosition(cobj, &sp140);
+                HSD_CObjGetEyePosition(cobj, &sp140.vec);
                 sp134.y = 8.0f;
                 HSD_CObjGetInterest(cobj, &sp128);
                 base->x0.x = (f32) ((sp134.x - sp128.x) / 10.0f);
@@ -5744,7 +5763,7 @@ skip_increment:
 
 skip_decrement:
 
-    if (dirX == 0.0f && dirY != 0.0f) {
+    if (!dirX && dirY) {
         lbAudioAx_80024030(2);
         editor->selected_slot =
             (u8) (s32) ((f32) (s8) editor->selected_slot + dirY);

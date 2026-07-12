@@ -459,7 +459,6 @@ void un_802FFF2C(StartMeleeData* arg0)
     StartMeleeRules* r = &arg0->rules;
     struct un_803FA128_t* s = &un_803FA128;
     struct un_803FA128_x130_t* sp;
-    StartMeleeData* data;
     s32 i;
     u16 timer;
 
@@ -502,39 +501,22 @@ void un_802FFF2C(StartMeleeData* arg0)
     r->xC = -1;
     r->x30 = s->x130.xEC;
     gm_80167A14(arg0->players);
-    data = arg0;
     sp = &s->x130;
-    for (i = 0; i < 2; i++) {
-        data->players[0].c_kind = sp->x10[0];
-        data->players[0].slot_type = sp->x24[0];
-        data->players[0].color = sp->x38[0];
-        data->players[0].sub_color = sp->x48[0];
-        data->players[0].team = sp->x58[0];
-        data->players[0].xC_b0 = sp->xDC[0];
-        data->players[0].x12 = sp->x68[0];
-        data->players[0].x18 = sp->x78[0];
-        data->players[0].x1C = sp->x88[0];
-        data->players[0].xE = sp->xA8[0];
-        data->players[0].cpu_level = sp->xB8[0];
-        data->players[0].stocks = s->x130.xCC[2];
-        data->players[0].xC_b1 = 0;
-        data->players[0].x20 = sp->x98[0];
-        data->players[1].c_kind = sp->x10[1];
-        data->players[1].slot_type = sp->x24[1];
-        data->players[1].color = sp->x38[1];
-        data->players[1].sub_color = sp->x48[1];
-        data->players[1].team = sp->x58[1];
-        data->players[1].xC_b0 = sp->xDC[1];
-        data->players[1].x12 = sp->x68[1];
-        data->players[1].x18 = sp->x78[1];
-        data->players[1].x1C = sp->x88[1];
-        data->players[1].xE = sp->xA8[1];
-        data->players[1].cpu_level = sp->xB8[1];
-        data->players[1].stocks = s->x130.xCC[2];
-        data->players[1].xC_b1 = 0;
-        data->players[1].x20 = sp->x98[1];
-        sp = (struct un_803FA128_x130_t*) &sp->x8;
-        data = (StartMeleeData*) &data->rules.x48;
+    for (i = 0; i < 4; i++) {
+        arg0->players[i].c_kind = sp->x10[i];
+        arg0->players[i].slot_type = sp->x24[i];
+        arg0->players[i].color = sp->x38[i];
+        arg0->players[i].sub_color = sp->x48[i];
+        arg0->players[i].team = sp->x58[i];
+        arg0->players[i].xC_b0 = sp->xDC[i];
+        arg0->players[i].x12 = sp->x68[i];
+        arg0->players[i].x18 = sp->x78[i];
+        arg0->players[i].x1C = sp->x88[i];
+        arg0->players[i].xE = sp->xA8[i];
+        arg0->players[i].cpu_level = sp->xB8[i];
+        arg0->players[i].stocks = s->x130.xCC[2];
+        arg0->players[i].xC_b1 = 0;
+        arg0->players[i].x20 = sp->x98[i];
     }
 }
 

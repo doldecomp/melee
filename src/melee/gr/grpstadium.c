@@ -2002,7 +2002,7 @@ void grStadium_801D435C(Ground_GObj* arg0)
         int i;
         cur = lbl_803E1630;
         for (i = 0; i < ARRAY_SIZE(lbl_803E1630); i++) {
-            gp->u.stadium.xD4 += cur++->scalar;
+            gp->u.stadium.xD4 = cur++->scalar + gp->u.stadium.xD4;
         }
     }
     var_r28 = 0;

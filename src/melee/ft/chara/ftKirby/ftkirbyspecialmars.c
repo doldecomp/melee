@@ -32,8 +32,6 @@
 #include <MSL/math.h>
 
 /* 10B2E8 */ static void fn_8010B2E8(Fighter_GObj* gobj);
-/* 4D9570 */ extern f32 ftKb_Init_804D9570;
-/* 4D9574 */ extern f32 ftKb_Init_804D9574;
 
 void fn_8010B1F4(Fighter_GObj* gobj)
 {
@@ -532,8 +530,8 @@ void ftKb_SpecialNPe_8010BF90(Fighter_GObj* gobj)
                    : ftKb_MS_FeSpecialAirNEnd0 + 1;
     }
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, msid, 0x0C4C708E, fp->cur_anim_frame,
-                              ftKb_Init_804D9574, ftKb_Init_804D9570, NULL);
+    Fighter_ChangeMotionState(gobj, msid, 0x0C4C708E, fp->cur_anim_frame, 1.0f,
+                              0.0f, NULL);
     if (fp->x2219_b0 == true) {
         fp->pre_hitlag_cb = efLib_PauseAll;
         fp->post_hitlag_cb = efLib_ResumeAll;
@@ -555,8 +553,8 @@ void ftKb_SpecialNPe_8010C06C(Fighter_GObj* gobj)
                    : ftKb_MS_FeSpecialNEnd0 + 1;
     }
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, msid, 0x0C4C708E, fp->cur_anim_frame,
-                              ftKb_Init_804D9574, ftKb_Init_804D9570, NULL);
+    Fighter_ChangeMotionState(gobj, msid, 0x0C4C708E, fp->cur_anim_frame, 1.0f,
+                              0.0f, NULL);
     if (fp->x2219_b0 == true) {
         fp->pre_hitlag_cb = efLib_PauseAll;
         fp->post_hitlag_cb = efLib_ResumeAll;

@@ -71,6 +71,11 @@ typedef struct TyListGobjEntryInner {
     /* 0x13 */ s8 x13;
     /* 0x14 */ s8 x14;
 } TyListGobjEntryInner;
+typedef struct TyListAuxState {
+    /* 0x00 */ u8 pad_0[0x18];
+    /* 0x18 */ HSD_GObj* gobj;
+    /* 0x1C */ u8 pad_1C[0x10];
+} TyListAuxState;
 /* 4A2AC0 */ static TyListState _tyList_804A2AC0;
 /* 4A2D6C */ static TyListGobjEntry _tyList_804A2D6C;
 /* 4D6EE8 */ static s32 _tyList_804D6EE8;
@@ -553,62 +558,71 @@ void _tyList_80313774(void)
     TyModeState* mode = (TyModeState*) Toy_804A284C;
     ToyGlobalsS_* disp = (ToyGlobalsS_*) Toy_sbss_804D6EE0;
     TyArchiveData* archive = (TyArchiveData*) Toy_sbss_804D6ED8;
-    s8* state_tail = (s8*) M2C_FIELD(&state, HSD_GObj**, 0x2AC);
+    TyListGobjEntry* state_tail = (TyListGobjEntry*) (state + 1);
     TyListArg* entry;
     HSD_JObj* root_jobj;
     f32 step;
     f32 pos;
     s16 idx;
+    s32 entry_count;
     s32 i;
     s32 trophy_total;
 
-    PAD_STACK(0x40);
+    PAD_STACK(0x38);
 
     state->selectedIdx = Toy_804A284C[0x12A];
     state->x29B = mode->x1;
     state->x29C = mode->x2;
 
     if (Toy_GetTrophyTotal() <= 0xA) {
-        state_tail[0xD] = mode->x3;
-        state_tail[0xC] = mode->x3;
+        state_tail->x0D = mode->x3;
+        state_tail->x0C = mode->x3;
     } else {
-        state_tail[0xD] = mode->x3;
-        state_tail[0xC] = mode->x3;
+        state_tail->x0D = mode->x3;
+        state_tail->x0C = mode->x3;
     }
 
     trophy_total = Toy_GetTrophyTotal();
     if (Toy_GetTrophyTotal() <= 0xA) {
         state->entryCount = trophy_total + 2;
-        idx = Toy_803062BC(disp->x140->x10);
+        entry_count = trophy_total + 2;
+        idx = Toy_803062BC(((ToyListEntry*) disp->x140)->prev->trophy_id);
     } else {
         state->entryCount = 0xC;
-        idx = Toy_803062BC(disp->x140->x10);
+        entry_count = 0xC;
+        idx = Toy_803062BC(((ToyListEntry*) disp->x140)->prev->trophy_id);
     }
 
-    for (i = 0; i < state->entryCount; i++) {
+    for (i = 0; i < entry_count; i++) {
         entry = &state->entries[i];
         if (i == 0) {
-            entry->links[0] = &state->entries[state->entryCount - 1];
+            entry->links[0] = &state->entries[entry_count - 1];
         } else {
             entry->links[0] = &state->entries[i - 1];
         }
-        if (i == state->entryCount - 1) {
+        if (i == entry_count - 1) {
             entry->links[1] = &state->entries[0];
         } else {
             entry->links[1] = &state->entries[i + 1];
         }
     }
 
-    state->x278 = &state->entries[1];
-    state->x270 = &state->entries[0];
-    state->x274 = &state->entries[state->entryCount - 1];
+    if (Toy_GetTrophyTotal() <= 0xA) {
+        state->x278 = &state->entries[1];
+        state->x270 = &state->entries[0];
+        state->x274 = &state->entries[state->entryCount - 1];
+    } else {
+        state->x278 = &state->entries[1];
+        state->x270 = &state->entries[0];
+        state->x274 = &state->entries[state->entryCount - 1];
+    }
 
     state->gobj = (HSD_GObj*) _tyList_80313508(
         NULL, "ToyFigurePanel_listpos01_joint", 0.0f, 0.0f, 0.0f);
-    root_jobj = (HSD_JObj*) state->gobj;
-    HSD_ASSERTMSG(0x3E1, root_jobj != NULL, "jobj");
-
-    step = 5.11f - root_jobj->translate.y;
+    root_jobj = GET_JOBJ(state->gobj);
+    HSD_JObjGetTranslationX(root_jobj);
+    step = 5.11f - HSD_JObjGetTranslationY(root_jobj);
+    HSD_JObjGetTranslationZ(root_jobj);
     pos = -step;
     state->x2A8 = step;
 
@@ -646,21 +660,21 @@ void _tyList_80313774(void)
     if (Toy_GetTrophyTotal() <= 0xA) {
         state->x288 = _tyList_80313508(
             state->gobj, "ToyFigureListCursor_Top_joint", 0.0f,
-            state->entries[state_tail[0xC] + 1].x30, 0.0f);
+            state->entries[state_tail->x0C + 1].x30, 0.0f);
     } else {
         state->x288 = _tyList_80313508(
             state->gobj, "ToyFigureListCursor_Top_joint", 0.0f,
-            state->entries[state_tail[0xC] + 1].x30, 0.0f);
+            state->entries[state_tail->x0C + 1].x30, 0.0f);
     }
 
-    for (i = 0; i < state_tail[0xC]; i++) {
+    for (i = 0; i < state_tail->x0C; i++) {
         _tyList_80313358(state, 0, 1, 1);
         _tyList_8031305C(state_tail, state, 0);
     }
 
     entry = &state->entries[0];
     for (i = 0; i < state->entryCount; i++) {
-        if (entry->x24 == state_tail[0xC]) {
+        if (entry->x24 == state_tail->x0C) {
             state->selectedIdx = entry->idx;
             state->x278 = entry;
             break;
@@ -668,14 +682,14 @@ void _tyList_80313774(void)
         entry++;
     }
 
-    _tyList_80312BAC(state, state_tail[0xC]);
+    _tyList_80312BAC(state, state_tail->x0C);
 }
 
 void _tyList_80313BD8(HSD_GObj* gobj)
 {
     TyListState* state;
-    s32 i;
     TyListArg* p;
+    s32 i;
     TyListGobjEntryInner* g;
     f32 f30;
     f32 f31;
@@ -970,6 +984,8 @@ void _tyList_8031457C(void)
     ToyED8Data* archive = Toy_sbss_804D6ED8;
     HSD_CameraDescPerspective* desc;
     HSD_CObj* cobj;
+    u8 kind;
+    UNUSED unsigned char pad[8];
     HSD_RectS16 viewport;
     Scissor scissor;
     Vec3 interest;
@@ -983,7 +999,8 @@ void _tyList_8031457C(void)
     if (desc != NULL) {
         entry->x0 = GObj_Create(1, 2, 0);
         cobj = lb_80013B14(desc);
-        HSD_GObjObject_80390A70(entry->x0, HSD_GObj_804D784B, cobj);
+        kind = HSD_GObj_804D784B;
+        HSD_GObjObject_80390A70(entry->x0, kind, cobj);
         GObj_SetupGXLinkMax(entry->x0, Toy_80306954, 0);
         entry->x0->gxlink_prios = 0x9010000000000000ULL;
         HSD_GObj_SetupProc(entry->x0, _tyList_8031438C, 0);
@@ -995,7 +1012,8 @@ void _tyList_8031457C(void)
     if (desc != NULL) {
         entry->x4 = GObj_Create(1, 2, 0);
         cobj = lb_80013B14(desc);
-        HSD_GObjObject_80390A70(entry->x4, HSD_GObj_804D784B, cobj);
+        kind = HSD_GObj_804D784B;
+        HSD_GObjObject_80390A70(entry->x4, kind, cobj);
         GObj_SetupGXLinkMax(entry->x4, _tyList_80314504, 0);
         entry->x4->gxlink_prios = 0x0210000000000000ULL;
         interest.x = 1.1f;
@@ -1027,21 +1045,34 @@ void _tyList_8031457C(void)
     }
 }
 
+static inline void _tyList_ClearAuxState(TyListState* state)
+{
+    memzero(state + 1, 0x18);
+    _tyList_8031457C();
+    memzero(&((TyListAuxState*) (state + 1))->gobj, 0x14);
+}
+
+static inline void _tyList_GetState(TyListState** state)
+{
+    *state = &_tyList_804A2AC0;
+}
+
 void tyList_803147C4(void)
 {
-    char* data = (char*) &_tyList_804A2AC0;
+    TyListState* state;
     TyArchiveData* archive;
     LightList** jobj;
     u8 new_var;
     HSD_GObj** gobj;
-    PAD_STACK(8);
 
-    memzero(data + 0x2AC, 0x18);
-    _tyList_8031457C();
-    memzero(data + 0x2C4, 0x14);
-
-    gobj = (HSD_GObj**) (data + 0x2C4);
-    archive = (TyArchiveData*) Toy_sbss_804D6ED8;
+    _tyList_GetState(&state);
+    _tyList_ClearAuxState(state);
+    {
+        TyArchiveData* loaded_archive = (TyArchiveData*) Toy_sbss_804D6ED8;
+        TyArchiveData* archive_data = loaded_archive;
+        archive = archive_data;
+    }
+    gobj = &((TyListAuxState*) (state + 1))->gobj;
 
     if (archive->data == NULL) {
         OSReport("*** BG data aren't being loaded!\n");
@@ -1059,7 +1090,7 @@ void tyList_803147C4(void)
 
     Toy_80307470(0);
     if (Toy_GetTrophyTotal() != 0) {
-        memzero(data, 0x2AC);
+        memzero(state, 0x2AC);
         _tyList_80313774();
     }
     HSD_PadRenewStatus();

@@ -1159,15 +1159,15 @@ s32 fn_801F8E58(Ground_GObj* arg0, s32* out)
         s16 pad[0x6E];
         s16 xDC;
     } IceMtTimerCursor;
-    Ground* gp;
-    s32* outp;
-    s32* p;
+    s32 a;
     IceMtTimerCursor* timer;
+    s32* p;
+    s32* outp;
     s32 i;
     s32 max;
     s32 chosen;
     IceMtTimerCursor* timer_base;
-    s32 a;
+    Ground* gp;
     s32 b;
     s32 d;
 
@@ -1775,12 +1775,17 @@ int grIceMt_801FA500(HSD_GObj* arg0, HSD_JObj* arg1)
         } else if (HSD_JObjGetNext(jobj) != NULL) {
             jobj = HSD_JObjGetNext(jobj);
         } else {
-            while (HSD_JObjGetParent(jobj) != NULL &&
-                   HSD_JObjGetNext(HSD_JObjGetParent(jobj)) == NULL)
-            {
+            while (true) {
+                if (HSD_JObjGetParent(jobj) == NULL) {
+                    jobj = NULL;
+                    break;
+                }
+                if (HSD_JObjGetNext(HSD_JObjGetParent(jobj)) != NULL) {
+                    jobj = HSD_JObjGetNext(HSD_JObjGetParent(jobj));
+                    break;
+                }
                 jobj = HSD_JObjGetParent(jobj);
             }
-            jobj = HSD_JObjGetNext(HSD_JObjGetParent(jobj));
         }
         count++;
     }

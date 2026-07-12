@@ -54,10 +54,10 @@ static void mnSound_VolumeAnim(HSD_JObj* jobj, s32 sound_music_mix,
 
 static void mnSound_ChannelAnim(HSD_JObj* jobj, s32 channel)
 {
-    HSD_JObj* jobj_anim_0;
     HSD_JObj* jobj_anim_1;
-    HSD_JObj* jobj_anim_2;
     f32 right_frame, left_frame;
+    HSD_JObj* jobj_anim_2;
+    HSD_JObj* jobj_anim_0;
     lb_80011E24(jobj, &jobj_anim_0, 8, -1);
     lb_80011E24(jobj, &jobj_anim_1, 10, -1);
     lb_80011E24(jobj, &jobj_anim_2, 9, -1);

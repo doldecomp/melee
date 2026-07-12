@@ -257,18 +257,12 @@ void ftKb_SpecialHi_800F37EC(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* dat_attr = fp->dat_attrs;
     PAD_STACK(16);
-    fp->mv.kb.speciallw.x48 = fp->mv.kb.speciallw.x3C;
-    fp->mv.kb.speciallw.x78 = fp->mv.kb.speciallw.x6C;
-    fp->mv.kb.speciallw.x88[3] = fp->mv.kb.speciallw.x88[2];
-    fp->mv.kb.speciallw.x88[7] = fp->mv.kb.speciallw.x88[6];
-    fp->mv.kb.speciallw.x3C = fp->mv.kb.speciallw.x30;
-    fp->mv.kb.speciallw.x6C = fp->mv.kb.speciallw.x60;
-    fp->mv.kb.speciallw.x88[2] = fp->mv.kb.speciallw.x88[1];
-    fp->mv.kb.speciallw.x88[6] = fp->mv.kb.speciallw.x88[5];
-    fp->mv.kb.speciallw.x30 = fp->mv.kb.speciallw.x24;
-    fp->mv.kb.speciallw.x60 = fp->mv.kb.speciallw.x54;
-    fp->mv.kb.speciallw.x88[1] = fp->mv.kb.speciallw.x88[0];
-    fp->mv.kb.speciallw.x88[5] = fp->mv.kb.speciallw.x88[4];
+    for (i = 3; i > 0; i--) {
+        (&fp->mv.kb.speciallw.x24)[i] = (&fp->mv.kb.speciallw.x24)[i - 1];
+        (&fp->mv.kb.speciallw.x54)[i] = (&fp->mv.kb.speciallw.x54)[i - 1];
+        fp->mv.kb.speciallw.x88[i] = fp->mv.kb.speciallw.x88[i - 1];
+        fp->mv.kb.speciallw.x88[i + 4] = fp->mv.kb.speciallw.x88[i + 3];
+    }
     fp->mv.kb.speciallw.x24 = fp->mv.kb.speciallw.x18;
     fp->mv.kb.speciallw.x88[0] = fp->mv.kb.speciallw.x84;
     fp->mv.kb.speciallw.x54.z = 0.0f;
@@ -761,6 +755,8 @@ void ftKb_SpecialAirLwStart_Coll(Fighter_GObj* gobj)
     ftKb_DatAttrs* da = fp->dat_attrs;
     Fighter* fp2;
     Fighter* fp3;
+    Vec3* vec;
+    f32* angles;
     s32 temp;
     f32 angle;
     struct ftKb_Init_803CB490_layout* p =
@@ -784,6 +780,8 @@ void ftKb_SpecialAirLwStart_Coll(Fighter_GObj* gobj)
         ftCommon_8007EBAC(fp, 0xE, 0x14);
         fp3 = GET_FIGHTER(gobj);
         angle = fp->mv.kb.specialhi.xC4;
+        vec = &fp3->mv.kb.speciallw.x24;
+        angles = fp3->mv.kb.speciallw.x88;
         fp3->mv.kb.speciallw.x54.x = fp3->mv.kb.speciallw.x24.x =
             fp->mv.kb.speciallw.x18.x;
         fp3->mv.kb.speciallw.x54.y = fp3->mv.kb.speciallw.x24.y =
@@ -791,6 +789,8 @@ void ftKb_SpecialAirLwStart_Coll(Fighter_GObj* gobj)
         fp3->mv.kb.speciallw.x54.z = fp3->mv.kb.speciallw.x24.z =
             fp->mv.kb.speciallw.x18.z;
         fp3->mv.kb.speciallw.x88[4] = fp3->mv.kb.speciallw.x88[0] = angle;
+        vec++;
+        angles++;
         fp3->mv.kb.speciallw.x60.x = fp3->mv.kb.speciallw.x30.x =
             fp->mv.kb.speciallw.x18.x;
         fp3->mv.kb.speciallw.x60.y = fp3->mv.kb.speciallw.x30.y =
@@ -802,16 +802,13 @@ void ftKb_SpecialAirLwStart_Coll(Fighter_GObj* gobj)
             fp->mv.kb.speciallw.x18.x;
         fp3->mv.kb.speciallw.x6C.y = fp3->mv.kb.speciallw.x3C.y =
             fp->mv.kb.speciallw.x18.y;
-        fp3->mv.kb.speciallw.x6C.z = fp3->mv.kb.speciallw.x3C.z =
-            fp->mv.kb.speciallw.x18.z;
-        fp3->mv.kb.speciallw.x88[6] = fp3->mv.kb.speciallw.x88[2] = angle;
-        fp3->mv.kb.speciallw.x78.x = fp3->mv.kb.speciallw.x48.x =
-            fp->mv.kb.speciallw.x18.x;
-        fp3->mv.kb.speciallw.x78.y = fp3->mv.kb.speciallw.x48.y =
-            fp->mv.kb.speciallw.x18.y;
-        fp3->mv.kb.speciallw.x78.z = fp3->mv.kb.speciallw.x48.z =
-            fp->mv.kb.speciallw.x18.z;
-        fp3->mv.kb.speciallw.x88[7] = fp3->mv.kb.speciallw.x88[3] = angle;
+        fp3->mv.kb.speciallw.x6C.z = (++vec)->z = fp->mv.kb.speciallw.x18.z;
+        fp3->mv.kb.speciallw.x88[6] = *++angles = angle;
+        angles++;
+        fp3->mv.kb.speciallw.x78.x = vec[1].x = fp->mv.kb.speciallw.x18.x;
+        fp3->mv.kb.speciallw.x78.y = vec[1].y = fp->mv.kb.speciallw.x18.y;
+        fp3->mv.kb.speciallw.x78.z = (++vec)->z = fp->mv.kb.speciallw.x18.z;
+        fp3->mv.kb.speciallw.x88[7] = *angles = angle;
         fp3->mv.kb.speciallw.x18.x = fp->mv.kb.speciallw.x18.x;
         fp3->mv.kb.speciallw.x18.y = fp->mv.kb.speciallw.x18.y;
         fp3->mv.kb.speciallw.x18.z = fp->mv.kb.speciallw.x18.z;
@@ -2633,9 +2630,10 @@ void ftKb_EatWait_IASA(Fighter_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     Fighter* fp2;
+    ftKb_DatAttrs* da;
     enum ftCo_JumpInput jump;
+    f32 absX;
     f32 stickX;
-    volatile f32 absX;
     s32 r29;
     s32 r29_2;
     s32 r29_3;
@@ -2645,14 +2643,13 @@ void ftKb_EatWait_IASA(Fighter_GObj* gobj)
     PAD_STACK(0x70);
 
     if (fp->fv.kb.xF4_b0) {
+        da = fp->dat_attrs;
         if (((fp->input.x668 & 0x200) && fp->target_item_gobj != NULL) ||
-            ((fp->input.lstick.y <
-              -((ftKb_DatAttrs*) fp->dat_attrs)->specialn_y_axis_range_jump) &&
+            ((fp->input.lstick.y < -da->specialn_y_axis_range_jump) &&
              fp->target_item_gobj != NULL))
         {
             Fighter_ChangeMotionState(gobj, 0x170, 2, 0.0f, 1.0f, 0.0f, NULL);
-            r29 = 1;
-            fp->x2222_b2 = r29;
+            fp->x2222_b2 = r29 = 1;
             ftKb_SpecialN_800F9070(gobj);
             ftAnim_8006EBA4(gobj);
             ftCommon_8007E2F4(fp, 0x1FF);
@@ -2660,12 +2657,11 @@ void ftKb_EatWait_IASA(Fighter_GObj* gobj)
             r29 = 0;
         }
         if (r29 == 0) {
-            fp2 = GET_FIGHTER(gobj);
+            fp2 = getFighter(gobj);
             if ((fp2->input.x668 & 0x100) && fp2->target_item_gobj != NULL) {
                 Fighter_ChangeMotionState(gobj, 0x172, 0x12, 0.0f, 1.0f, 0.0f,
                                           NULL);
-                r29_2 = 1;
-                fp2->x2222_b2 = r29_2;
+                fp2->x2222_b2 = r29_2 = 1;
                 ftKb_SpecialN_800F9070(gobj);
                 ftAnim_8006EBA4(gobj);
                 ftCommon_8007E2F4(fp2, 0x1FF);
@@ -2678,14 +2674,13 @@ void ftKb_EatWait_IASA(Fighter_GObj* gobj)
             goto block_26;
         }
     } else {
+        da = fp->dat_attrs;
         if (((fp->input.x668 & 0x200) && fp->victim_gobj != NULL) ||
-            ((fp->input.lstick.y <
-              -((ftKb_DatAttrs*) fp->dat_attrs)->specialn_y_axis_range_jump) &&
+            ((fp->input.lstick.y < -da->specialn_y_axis_range_jump) &&
              fp->victim_gobj != NULL))
         {
             Fighter_ChangeMotionState(gobj, 0x16F, 2, 0.0f, 1.0f, 0.0f, NULL);
-            r29_3 = 1;
-            fp->x2222_b2 = r29_3;
+            fp->x2222_b2 = r29_3 = 1;
             ftKb_SpecialN_800F9070(gobj);
             ftAnim_8006EBA4(gobj);
             ftCommon_8007E2F4(fp, 0x1FF);
@@ -2697,8 +2692,7 @@ void ftKb_EatWait_IASA(Fighter_GObj* gobj)
             if ((fp2->input.x668 & 0x100) && fp2->victim_gobj != NULL) {
                 Fighter_ChangeMotionState(gobj, 0x171, 0x12, 0.0f, 1.0f, 0.0f,
                                           NULL);
-                r29_4 = 1;
-                fp2->x2222_b2 = r29_4;
+                fp2->x2222_b2 = r29_4 = 1;
                 ftKb_SpecialN_800F9070(gobj);
                 ftAnim_8006EBA4(gobj);
                 ftCommon_8007E2F4(fp2, 0x1FF);
@@ -2707,13 +2701,16 @@ void ftKb_EatWait_IASA(Fighter_GObj* gobj)
             }
             if (r29_4 == 0) {
             block_26:
-                fp2 = GET_FIGHTER(gobj);
+                fp2 = getFighter(gobj);
                 stickX = fp2->input.lstick.x;
                 (void) stickX;
-                absX = ABS(stickX);
-                if (absX < ((ftKb_DatAttrs*) fp2->dat_attrs)
-                               ->specialn_x_axis_range_walk)
-                {
+                da = fp2->dat_attrs;
+                if (stickX < 0.0f) {
+                    absX = -stickX;
+                } else {
+                    absX = stickX;
+                }
+                if (absX < da->specialn_x_axis_range_walk) {
                     stickX = 0.0f;
                 }
                 if (((stickX < 0.0f) && (fp2->facing_dir == 1.0f)) ||
@@ -2765,7 +2762,6 @@ void ftKb_SpecialAirNCaptureWait_IASA(Fighter_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     Fighter_GObj* gobj2 = gobj;
-    Fighter* fp3;
     Fighter* fp2;
     ftKb_DatAttrs* da;
     f32 absX;
@@ -2839,6 +2835,7 @@ void ftKb_SpecialAirNCaptureWait_IASA(Fighter_GObj* gobj)
                 r29_4 = 0;
             }
             if (r29_4 == 0) {
+                Fighter* fp3;
             block_26:
                 fp3 = getFighter(gobj2);
                 stickX = fp3->input.lstick.x;

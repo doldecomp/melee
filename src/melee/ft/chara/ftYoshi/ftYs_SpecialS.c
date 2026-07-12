@@ -1240,21 +1240,44 @@ void ftYs_SpecialAirSStart_1_Coll(Fighter_GObj* gobj)
 void ftYs_SpecialAirSLoop_2_Coll(Fighter_GObj* gobj)
 {
     s32 coll_result;
+    Fighter* fp2;
     s32 wall_hit;
     Fighter* fp = GET_FIGHTER(gobj);
     ftYoshiAttributes* attributes = fp->dat_attrs;
-    u8 pad[28];
+    Vec3 pos;
+    f32 angle;
+    Vec3 pos2;
+    f32 angle2;
+    PAD_STACK(32);
 
     fp->mv.ys.specials.x30 = 0;
     coll_result = ft_800824A0(gobj, &ftYs_Unk3_803CEDA4);
 
     if (fp->facing_dir == 1.0F) {
         if ((wall_hit = fp->coll_data.env_flags & 0x3F) != 0) {
-            ftYs_SpecialS_SpawnWallBounceEffect(gobj, &fp->coll_data, true);
+            fp2 = GET_FIGHTER(gobj);
+            pos = fp2->cur_pos;
+            angle = atan2f(-fp->coll_data.left_facing_wall.normal.x,
+                           fp->coll_data.left_facing_wall.normal.y);
+            pos.x += ABS(fp2->coll_data.ecb.right.x);
+            pos.y += 0.5F * ABS(fp2->coll_data.ecb.top.y +
+                                fp2->coll_data.ecb.bottom.y);
+            efSync_Spawn(0x406, gobj, &pos, &angle);
+            Camera_80030E44(3, &pos);
+            ftCommon_8007EBAC(fp2, 0xC, 0xA);
         }
     } else {
         if ((wall_hit = fp->coll_data.env_flags & 0xFC0) != 0) {
-            ftYs_SpecialS_SpawnWallBounceEffect(gobj, &fp->coll_data, false);
+            fp2 = GET_FIGHTER(gobj);
+            pos2 = fp2->cur_pos;
+            angle2 = atan2f(-fp->coll_data.right_facing_wall.normal.x,
+                            fp->coll_data.right_facing_wall.normal.y);
+            pos2.x -= ABS(fp2->coll_data.ecb.left.x);
+            pos2.y += 0.5F * ABS(fp2->coll_data.ecb.top.y +
+                                 fp2->coll_data.ecb.bottom.y);
+            efSync_Spawn(0x406, gobj, &pos2, &angle2);
+            Camera_80030E44(3, &pos2);
+            ftCommon_8007EBAC(fp2, 0xC, 0xA);
         }
     }
 

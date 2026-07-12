@@ -462,23 +462,12 @@ void lbDvd_8001823C(void)
         preloadCache.new_scene.mode_scene_changes + 1;
 }
 
-void lbDvd_80018254(void)
+static inline void inline_preload_entries(bool* enabled)
 {
-    bool enabled;
     PreloadEntry* entry;
     int i;
 
-    PAD_STACK(0x18);
-
-    if (memcmp(&preloadCache.new_scene, &preloadCache.scene,
-               sizeof(PreloadCacheScene)) == 0)
-    {
-        return;
-    }
-
-    preloadCache.new_scene = preloadCache.scene;
-    enabled = OSDisableInterrupts();
-
+    *enabled = OSDisableInterrupts();
     for (i = 0; i < (signed) ARRAY_SIZE(preloadCache.entries); i++) {
         entry = &preloadCache.entries[i];
         if (entry->state != 0) {
@@ -487,6 +476,22 @@ void lbDvd_80018254(void)
             }
         }
     }
+}
+
+void lbDvd_80018254(void)
+{
+    bool enabled;
+
+    if (memcmp(&preloadCache.new_scene, &preloadCache.scene,
+               sizeof(PreloadCacheScene)) == 0)
+    {
+        return;
+    }
+
+    preloadCache.new_scene = preloadCache.scene;
+    inline_preload_entries(&enabled);
+
+    PAD_STACK(0x18);
 
     switch (preloadCache.persistent_heaps) {
     case 0:

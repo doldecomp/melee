@@ -54,15 +54,27 @@ typedef struct UnkX {
 
 /* 2F491C */ static void ifStatus_PercentOnDeathAnimationThink(UnkX* value,
                                                                s32, s32);
-/* 3F9628 */ Element_803F9628 ifStatus_803F9628[8] = {
-    { NULL, 0, if_802F74D0, 0x7C860U, 8, 0, { 0 }, 0, NULL, NULL, 0, 0 },
-    { NULL, 0, if_802F73C4, 0xC351U, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
-    { NULL, 0, if_802F74D0, 0x7C85EU, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
-    { NULL, 0, if_802F73C4, 0x7C85DU, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
-    { NULL, 0, if_802F73C4, 0x7C857U, 10, 0, { 0 }, 0, NULL, NULL, 0, 0 },
-    { NULL, 0, if_802F74D0, 0x7C855U, 8, 0, { 0 }, 0, NULL, NULL, 0, 0 },
-    { NULL, 0, if_802F74D0, 0x9C48U, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
-    { NULL, 0, if_802F74D0, 0x9C46U, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+/// The "ScInfCnt_scene_models" archive section name is a trailing member of
+/// this object rather than a call-site literal. Evidence: ifStatus_802F7134
+/// at 802F719C addresses the string as base+0x140 through the one lis/addi
+/// relocation it uses for the element stores (base+0x00..0x13C); MWCC only
+/// folds data accesses onto a single symbol-relocated base when they belong
+/// to one object (separate objects/literals compile to a `...data.0`
+/// section-relative base, which mismatches). The object extent also spans
+/// the full .data gap 0x803F9628..0x803F9780 (0x140 elements + 0x16 string
+/// + 2 pad = sizeof(ScInfCntModels)).
+/* 3F9628 */ ScInfCntModels ifStatus_ScInfCntModels = {
+    {
+        { NULL, 0, if_802F74D0, 0x7C860U, 8, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+        { NULL, 0, if_802F73C4, 0xC351U, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+        { NULL, 0, if_802F74D0, 0x7C85EU, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+        { NULL, 0, if_802F73C4, 0x7C85DU, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+        { NULL, 0, if_802F73C4, 0x7C857U, 10, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+        { NULL, 0, if_802F74D0, 0x7C855U, 8, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+        { NULL, 0, if_802F74D0, 0x9C48U, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+        { NULL, 0, if_802F74D0, 0x9C46U, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+    },
+    "ScInfCnt_scene_models",
 };
 /* 4D6D60 */ static u8 ifStatus_804D6D60;
 /* 4D6D61 */ static s8 ifStatus_804D6D61;
@@ -432,6 +444,8 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     /* Update colors when damage changes */
     if ((s16) state->old_damage != (s16) state->damage_percent) {
         if (Player_GetMoreFlagsBit2((s8) state->player_slot)) {
+            GXColor temp_color;
+
             /* Stamina mode: 0-100% range */
             clamped_damage = state->damage_percent;
             if (clamped_damage > 100) {
@@ -440,17 +454,20 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
                 clamped_damage = 0;
             }
             factor = 1.0F - ((f32) clamped_damage / 100.0F);
-            color.r = (s8) (factor * (f32) ((&ifStatus_804D57AC)[0] -
-                                            (&ifStatus_804D57A8)[0]) +
-                            (f32) (&ifStatus_804D57A8)[0]);
-            color.g = (s8) (factor * (f32) ((&ifStatus_804D57AC)[1] -
-                                            (&ifStatus_804D57A8)[1]) +
-                            (f32) (&ifStatus_804D57A8)[1]);
-            color.b = (s8) (factor * (f32) ((&ifStatus_804D57AC)[2] -
-                                            (&ifStatus_804D57A8)[2]) +
-                            (f32) (&ifStatus_804D57A8)[2]);
-            color.a = 255;
+            temp_color.r = (s8) (factor * (f32) ((&ifStatus_804D57AC)[0] -
+                                                 (&ifStatus_804D57A8)[0]) +
+                                 (f32) (&ifStatus_804D57A8)[0]);
+            temp_color.g = (s8) (factor * (f32) ((&ifStatus_804D57AC)[1] -
+                                                 (&ifStatus_804D57A8)[1]) +
+                                 (f32) (&ifStatus_804D57A8)[1]);
+            temp_color.b = (s8) (factor * (f32) ((&ifStatus_804D57AC)[2] -
+                                                 (&ifStatus_804D57A8)[2]) +
+                                 (f32) (&ifStatus_804D57A8)[2]);
+            temp_color.a = 255;
+            color = temp_color;
         } else {
+            GXColor temp_color;
+
             /* Normal mode: 0-300% range */
             clamped_damage = state->damage_percent;
             if (clamped_damage > 300) {
@@ -459,16 +476,17 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
                 clamped_damage = 0;
             }
             factor = (f32) clamped_damage / 300.0F;
-            color.r = (s8) (factor * (f32) ((&ifStatus_804D57AC)[0] -
-                                            (&ifStatus_804D57A8)[0]) +
-                            (f32) (&ifStatus_804D57A8)[0]);
-            color.g = (s8) (factor * (f32) ((&ifStatus_804D57AC)[1] -
-                                            (&ifStatus_804D57A8)[1]) +
-                            (f32) (&ifStatus_804D57A8)[1]);
-            color.b = (s8) (factor * (f32) ((&ifStatus_804D57AC)[2] -
-                                            (&ifStatus_804D57A8)[2]) +
-                            (f32) (&ifStatus_804D57A8)[2]);
-            color.a = 255;
+            temp_color.r = (s8) (factor * (f32) ((&ifStatus_804D57AC)[0] -
+                                                 (&ifStatus_804D57A8)[0]) +
+                                 (f32) (&ifStatus_804D57A8)[0]);
+            temp_color.g = (s8) (factor * (f32) ((&ifStatus_804D57AC)[1] -
+                                                 (&ifStatus_804D57A8)[1]) +
+                                 (f32) (&ifStatus_804D57A8)[1]);
+            temp_color.b = (s8) (factor * (f32) ((&ifStatus_804D57AC)[2] -
+                                                 (&ifStatus_804D57A8)[2]) +
+                                 (f32) (&ifStatus_804D57A8)[2]);
+            temp_color.a = 255;
+            color = temp_color;
         }
 
         /* Apply color to all digit materials */
@@ -686,8 +704,8 @@ void ifStatus_802F5EC0(IfDamageState* state, s32 player_idx)
     HSD_MatAnimJoint** anim_base;
     HSD_JObj* jobj;
     Vec3* vec;
-    s32 i;
     HSD_TObj* tobj;
+    s32 i;
     HudIndex* hud = &ifStatus_HudInfo;
 
     if (state->HUD_parent_entity == NULL) {
@@ -787,7 +805,7 @@ void ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
     HSD_MObj* mobj;
     GXColor color;
     CharacterKind chara;
-    s32 slot;
+    u8 slot;
     u8 team;
     u8 hud_color;
     HudIndex* hud = &ifStatus_HudInfo;
@@ -1172,7 +1190,7 @@ void ifStatus_802F6EA4(int arg0, int arg1, int arg2, int arg3, Event arg4,
         }
     } else {
         Element_803F9628* e;
-        e = &ifStatus_803F9628[arg0];
+        e = &ifStatus_ScInfCntModels.elements[arg0];
         e->x20 = arg1;
         e->x24 = arg2;
         e->x11 = arg3;
@@ -1251,19 +1269,20 @@ void ifStatus_802F7134(void)
     u8 _[8];
     HSD_Archive** archive;
     DynamicModelDesc** volatile models;
+    ScInfCntModels* counter;
     int i;
 
+    counter = &ifStatus_ScInfCntModels;
     for (i = 0; i < 8; i++) {
-        ifStatus_803F9628[i].x0 = NULL;
-        ifStatus_803F9628[i].x4 = 0;
+        counter->elements[i].x0 = NULL;
+        counter->elements[i].x4 = 0;
     }
 
     archive = ifAll_802F3690();
-    lbArchive_LoadSections(*archive, (void**) &models, "ScInfCnt_scene_models",
-                           0);
+    lbArchive_LoadSections(*archive, &models, counter->scene_models_name, 0);
 
     for (i = 0; i < 8; i++) {
-        ifStatus_803F9628[i].x14 = models[i];
+        counter->elements[i].x14 = models[i];
     }
 }
 
@@ -1272,9 +1291,9 @@ void ifStatus_802F7220(void)
 {
     s32 i;
     for (i = 0; i < 8; i++) {
-        if (ifStatus_803F9628[i].x0 != NULL) {
-            HSD_GObjPLink_80390228(ifStatus_803F9628[i].x0);
-            ifStatus_803F9628[i].x0 = NULL;
+        if (ifStatus_ScInfCntModels.elements[i].x0 != NULL) {
+            HSD_GObjPLink_80390228(ifStatus_ScInfCntModels.elements[i].x0);
+            ifStatus_ScInfCntModels.elements[i].x0 = NULL;
         }
     }
 }

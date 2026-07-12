@@ -193,17 +193,14 @@ int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list)
         }
 
         for (i = 0; i < 4; i++) {
-            {
-                int type = tmp->tev.a_in[i].type;
-                if (type == HSD_TE_TEV) {
-                    for (k = 0; k < num; k++) {
-                        if (sp94[k] == tmp->tev.a_in[i].exp) {
-                            break;
-                        }
+            if (tmp->tev.a_in[i].type == HSD_TE_TEV) {
+                for (k = 0; k < num; k++) {
+                    if (sp94[k] == tmp->tev.a_in[i].exp) {
+                        break;
                     }
-                    if (k >= num) {
-                        sp94[num++] = tmp->tev.a_in[i].exp;
-                    }
+                }
+                if (k >= num) {
+                    sp94[num++] = tmp->tev.a_in[i].exp;
                 }
             }
         }
@@ -244,17 +241,11 @@ int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list)
                 HSD_TExp** q = &sp94[last];
                 for (l = last; l < num; l++) {
                     if (tmp->tev.c_in[idx].exp == *q) {
-                        HSD_TExpDag** deps;
-                        u8 dep_count;
-
-                        dep_count = list[last].nb_dep;
-                        deps = list[last].depend;
                         dep_entry = &list[l];
                         for (l = 0; l < list[last].nb_dep; l++) {
-                            if (*deps == dep_entry) {
+                            if (list[last].depend[l] == dep_entry) {
                                 break;
                             }
-                            deps++;
                         }
                         if (l >= (int) list[last].nb_dep) {
                             list[last].depend[list[last].nb_dep++] = dep_entry;
@@ -273,16 +264,12 @@ int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list)
                 HSD_TExp** r2 = &sp94[last];
                 for (l = last; l < num; l++) {
                     if (tmp->tev.a_in[idx].exp == *r2) {
-                        HSD_TExpDag** deps2;
                         u8 dep_count2 = list[last].nb_dep;
-                        deps2 = list[last].depend;
                         dep_entry2 = &list[l];
-                        (void) dep_entry2;
                         for (l = 0; l < (int) dep_count2; l++) {
-                            if (*deps2 == dep_entry2) {
+                            if (list[last].depend[l] == dep_entry2) {
                                 break;
                             }
-                            deps2++;
                         }
                         if (l >= list[last].nb_dep) {
                             list[last].depend[list[last].nb_dep++] =

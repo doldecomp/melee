@@ -324,6 +324,7 @@ void grOldPupupu_80210D10(Ground_GObj* gobj)
     Ground* gp;
     f32 direction;
     f32 y;
+    f32 z;
     f32 x;
     f32 step;
     s16 timer;
@@ -367,6 +368,7 @@ void grOldPupupu_80210D10(Ground_GObj* gobj)
             y = direction *
                 (((f32) grOp_804D6A98->x4 * ((2.0F * rand) - 1.0F)) + 20.0F);
         }
+        z = -150.0F * direction;
         for (i = 0; i < count; i++) {
             HSD_GObj* spawn;
             spawn = grOldPupupu_802108B4_noinline(2);
@@ -376,7 +378,7 @@ void grOldPupupu_80210D10(Ground_GObj* gobj)
                 HSD_ASSERT(0x216, jobj);
                 HSD_JObjSetTranslateX(jobj, direction * x);
                 HSD_JObjSetTranslateY(jobj, y);
-                HSD_JObjSetTranslateZ(jobj, -150.0F * direction);
+                HSD_JObjSetTranslateZ(jobj, z);
                 grAnime_801C7FF8(spawn, 0, 7, 0, 40.0F * (f32) i, 1.0F);
                 HSD_JObjClearFlagsAll(
                     Ground_801C3FA4(spawn, grOp_803E67B0[index].x2),
@@ -526,7 +528,7 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
     Ground* gp = gobj->user_data;
     PAD_STACK(176);
 
-    if (grOp_804D6A9C == 0) {
+    if ((int) grOp_804D6A9C == 0) {
         gp->gv.oldpupupu.xE0 += 1;
         gp->gv.oldpupupu.xDC = 0;
 
@@ -568,6 +570,7 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
                             rand_range((s32) grOp_804D6A98->x30,
                                        (s32) grOp_804D6A98->x2C);
                     }
+                    gp = gobj->user_data;
                     other_gp = Ground_801C2BA4(1)->user_data;
                     other_gp->gv.oldpupupu.xC4 = gp->gv.oldpupupu.xC4;
                     other_gp->gv.oldpupupu.xC8 = gp->gv.oldpupupu.xC8;
@@ -580,6 +583,7 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
                 {
                     Ground* other_gp;
 
+                    gp = gobj->user_data;
                     gp->gv.oldpupupu.xC4 += 1;
                     if (gp->gv.oldpupupu.xC4 >= 3) {
                         gp->gv.oldpupupu.xC4 = 0;
@@ -618,6 +622,7 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
                     grAnime_801C8138(gobj, gp->map_id,
                                      grOp_804D48D0[gp->gv.oldpupupu.xCC]
                                                   [gp->gv.oldpupupu.xD8]);
+                    gp = gobj->user_data;
                     gp->gv.oldpupupu.xC4 += 1;
                     if (gp->gv.oldpupupu.xC4 >= 3) {
                         gp->gv.oldpupupu.xC4 = 0;
@@ -630,6 +635,7 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
                     other_gp->gv.oldpupupu.xCC = 0;
                     other_gp->gv.oldpupupu.xD4 = gp->gv.oldpupupu.xD8;
                     other_gp->gv.oldpupupu.xD0 = 1;
+                    gp = gobj->user_data;
                     other_gp = Ground_801C2BA4(1)->user_data;
                     other_gp->gv.oldpupupu.xC4 = gp->gv.oldpupupu.xC4;
                     other_gp->gv.oldpupupu.xC8 = gp->gv.oldpupupu.xC8;
@@ -644,6 +650,7 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
                     grAnime_801C8138(gobj, gp->map_id,
                                      grOp_804D48D8[gp->gv.oldpupupu.xCC]
                                                   [gp->gv.oldpupupu.xD8]);
+                    gp = gobj->user_data;
                     other_gp = Ground_801C2BA4(1)->user_data;
                     other_gp->gv.oldpupupu.xC4 = gp->gv.oldpupupu.xC4;
                     other_gp->gv.oldpupupu.xC8 = gp->gv.oldpupupu.xC8;
@@ -657,6 +664,7 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
             {
                 Ground* other_gp;
 
+                gp = gobj->user_data;
                 gp->gv.oldpupupu.xC4 += 1;
                 if (gp->gv.oldpupupu.xC4 >= 3) {
                     gp->gv.oldpupupu.xC4 = 0;
@@ -683,6 +691,7 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
                 grAnime_801C8138(
                     gobj, gp->map_id,
                     grOp_804D48D0[gp->gv.oldpupupu.xCC][gp->gv.oldpupupu.xD8]);
+                gp = gobj->user_data;
                 other_gp = Ground_801C2BA4(1)->user_data;
                 other_gp->gv.oldpupupu.xC4 = gp->gv.oldpupupu.xC4;
                 other_gp->gv.oldpupupu.xC8 = gp->gv.oldpupupu.xC8;
@@ -721,6 +730,7 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
             } else {
                 Ground* other_gp;
 
+                gp = gobj->user_data;
                 gp->gv.oldpupupu.xC4 += 1;
                 if (gp->gv.oldpupupu.xC4 >= 3) {
                     gp->gv.oldpupupu.xC4 = 0;

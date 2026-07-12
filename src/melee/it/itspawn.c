@@ -164,7 +164,8 @@ ItemKind it_8026C75C(ItemPickTable* arg_struct)
     bool chk1;
     u16 var_r30;
     u8 temp_r4;
-    ItemKind kind;
+    s32 selected;
+    s32 result;
     PAD_STACK(16);
 
     chk1 = false;
@@ -190,48 +191,47 @@ ItemKind it_8026C75C(ItemPickTable* arg_struct)
             arg_struct->x0 -= 1;
         }
     }
-    kind = arg_struct->x4[it_8026C530(HSD_Randi(arg_struct->x8), arg_struct, 0,
-                                      arg_struct->x0)];
+    selected = arg_struct->x4[it_8026C530(HSD_Randi(arg_struct->x8),
+                                          arg_struct, 0, arg_struct->x0)];
+    result = selected;
     if (chk1 && chk2) {
         arg_struct->x8 = var_r30;
         arg_struct->x0 += 1;
-        if (kind == It_Kind_M_Ball) {
-            kind = -1;
+        if (selected == It_Kind_M_Ball) {
+            result = -1;
         }
     }
-    return kind;
+    return result;
 }
 
-void fn_8026C88C(HSD_GObj* gobj)
+static inline void it_8026C88C_inline(RandomItemSpawner* alloc,
+                                      SpawnItem* spawn)
 {
-    RandomItemSpawner* alloc = &it_804A0E30;
     s32* alloc_x0 = &alloc->x0;
-    Item_GObj* spawn_gobj;
-    SpawnItem spawn;
-    bool chk;
     Vec3* pos;
-
+    s32 chk;
+    Item_GObj* spawn_gobj;
     if (db_AreItemSpawnsEnabled() != 0U) {
         alloc->x0--;
         if ((s32) alloc->x0 == 0) {
-            spawn.kind = it_8026C75C(&alloc->x4);
-            if ((s32) spawn.kind != -1) {
-                pos = &spawn.prev_pos;
+            spawn->kind = it_8026C75C(&alloc->x4);
+            if ((s32) spawn->kind != -1) {
+                pos = &spawn->prev_pos;
                 if (it_8026CB3C(pos)) {
-                    spawn.pos = *pos;
-                    spawn.facing_dir = it_8026B684(pos);
-                    chk = true;
-                    spawn.x3C_damage = 0;
-                    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
-                    spawn.x0_parent_gobj = NULL;
-                    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-                    spawn.x44_flag.b0 = 1;
-                    spawn.x40 = 0;
+                    spawn->pos = *pos;
+                    spawn->facing_dir = it_8026B684(pos);
+                    chk = 1;
+                    spawn->x3C_damage = 0;
+                    spawn->vel.x = spawn->vel.y = spawn->vel.z = 0.0F;
+                    spawn->x0_parent_gobj = NULL;
+                    spawn->x4_parent_gobj2 = spawn->x0_parent_gobj;
+                    spawn->x44_flag.b0 = chk;
+                    spawn->x40 = 0;
                 } else {
                     chk = false;
                 }
                 if (chk) {
-                    spawn_gobj = Item_80268B18(&spawn);
+                    spawn_gobj = Item_80268B18(spawn);
                     if (spawn_gobj != NULL) {
                         efSync_Spawn(0x420, spawn_gobj, pos);
                         it_80274ED8();
@@ -249,6 +249,13 @@ void fn_8026C88C(HSD_GObj* gobj)
             }
         }
     }
+}
+
+void fn_8026C88C(HSD_GObj* gobj)
+{
+    RandomItemSpawner* alloc = &it_804A0E30;
+    SpawnItem spawn;
+    it_8026C88C_inline(alloc, &spawn);
 }
 
 #pragma push
@@ -421,7 +428,10 @@ void it_8026CF04(void)
         xC_loc = &tables->monster.xC;
         item_common = it_804D6D28;
         idx = i = 0;
-        counts = &item_common->x128[i];
+        {
+            s32* monster_counts = &item_common->x128[i];
+            counts = monster_counts;
+        }
         (void) counts;
         cumulative = 0;
         for (; i < 4; i++, idx++) {
@@ -441,13 +451,18 @@ void it_8026D018(void)
     } ItemSpawnTables;
     ItemSpawnTables* tables = (ItemSpawnTables*) &it_804A0E30;
     bool chk;
+    u64 stage_mask;
+    s32* stage_info;
+    bool chk2;
+    f32 weight;
+    u64* stage_mask_ptr;
     if (!gm_8016B238() && (gm_8016AE80() != -1)) {
-        tables->alloc.x18 = gm_8016AEA4();
+        *(stage_mask_ptr = &tables->alloc.x18) = gm_8016AEA4();
         {
-            u64 stage_mask = tables->alloc.x18;
-            s32* stage_info = Ground_801C2AD8();
-            bool chk2 = gm_8016AE80();
-            f32 weight = gm_8016AE94();
+            stage_mask = *stage_mask_ptr;
+            stage_info = Ground_801C2AD8();
+            chk2 = gm_8016AE80();
+            weight = gm_8016AE94();
             if ((stage_mask == 0) || (stage_info == NULL) || (chk2 == -1)) {
                 chk = false;
             } else {
@@ -461,7 +476,7 @@ void it_8026D018(void)
         }
         if (chk) {
             {
-                u64 stage_mask = tables->alloc.x18;
+                u64 stage_mask = *stage_mask_ptr;
                 s32* stage_info = Ground_801C2AD8();
                 f32 weight = gm_8016AE94();
                 if ((stage_mask != 0) && (stage_info != NULL)) {
