@@ -5,6 +5,8 @@
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
 
+#include "dolphin/pad.h"
+
 #include "gm/forward.h"
 
 #include <m2c_macros.h>
@@ -1265,9 +1267,9 @@ void fn_8016CD98(lbl_8046B6A0_t* arg0)
     }
 }
 
-void fn_8016CF4C(int arg0, MatchOutcome matchResult)
+void fn_8016CF4C(int slot, MatchOutcome matchResult)
 {
-    gm_801A10FC(arg0);
+    gm_801A10FC(slot);
     lbl_8046B6A0.match_result = matchResult;
     if (matchResult != OUTCOME_RETRY && DbLevel >= 3) {
         gm_801A4674(1);
@@ -1284,9 +1286,9 @@ void fn_8016CF4C(int arg0, MatchOutcome matchResult)
     gm_801A4B60();
 }
 
-static inline void fn_8016CF4C_dontinline(int arg0, int arg1)
+static inline void fn_8016CF4C_dontinline(int slot, MatchOutcome matchResult)
 {
-    fn_8016CF4C(arg0, arg1);
+    fn_8016CF4C(slot, matchResult);
 }
 
 static inline void fn_8016CFE0_inline(void)
@@ -1314,9 +1316,9 @@ static inline void fn_8016CFE0_inline(void)
 void fn_8016CFE0(void)
 {
     lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
-    int var_r29;
-    s64 var_r29_2;
-    int var_r4;
+    int tmp_btns;
+    s64 no_contest_buttons;
+    int unpauser_slot;
     PAD_STACK(0x10);
 
     fn_8016CFE0_inline();
@@ -1324,29 +1326,31 @@ void fn_8016CFE0(void)
     fn_8016A4C8();
     fn_8016758C();
     if (gm_801A45E8(1) != 0) {
-        var_r4 = gm_GetPlayerPressingUnpause();
+        unpauser_slot = gm_GetPlayerPressingUnpause();
         if (DbLevel >= 3) {
-            var_r29 = 0x160;
+            tmp_btns = PAD_TRIGGER_L | PAD_TRIGGER_R | PAD_BUTTON_A;
         } else {
-            var_r29 = 0x1160;
+            tmp_btns = PAD_TRIGGER_L | PAD_TRIGGER_R | PAD_BUTTON_A |
+                       PAD_BUTTON_START;
         }
-        var_r29_2 = var_r29;
+        no_contest_buttons = tmp_btns;
         if (tmp->x24C8.x3_4 && tmp->pause_timer == 0 && tmp->unk_3 == 0) {
-            u64 buttons = gm_801A36A0(tmp->pauser);
-            if ((var_r29_2 & buttons) != 0) {
-                buttons = gm_801A3680(tmp->pauser);
+            u64 buttons = gm_GetButtonsTriggered(tmp->pauser);
+            if ((no_contest_buttons & buttons) != 0) {
+                buttons = gm_GetButtonsPressed(tmp->pauser);
                 {
-                    u64 tmp_p29927 = var_r29_2 & buttons;
-                    if ((tmp_p29927) == var_r29_2) {
-                        fn_8016CF4C_dontinline(var_r4, 7);
+                    u64 tmp_p29927 = no_contest_buttons & buttons;
+                    if ((tmp_p29927) == no_contest_buttons) {
+                        fn_8016CF4C_dontinline(unpauser_slot,
+                                               OUTCOME_NO_CONTEST);
                         return;
                     }
                 }
             }
         }
         if (tmp->x24C8.x3_2 && tmp->pause_timer == 0 && tmp->unk_3 == 0) {
-            if ((gm_801A36A0(tmp->pauser) & 0x10) != 0) {
-                fn_8016CF4C_dontinline(var_r4, 8);
+            if ((gm_GetButtonsTriggered(tmp->pauser) & PAD_TRIGGER_Z) != 0) {
+                fn_8016CF4C_dontinline(unpauser_slot, OUTCOME_RETRY);
                 return;
             }
         }
