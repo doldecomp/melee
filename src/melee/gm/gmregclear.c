@@ -3501,11 +3501,11 @@ bool gm_80182510(void)
 
 void gm_80182554(int arg0, int arg1)
 {
-    lbl_80472ED8.x6C8 = arg0;
-    lbl_80472ED8.x6C4 = arg1;
-    lbl_80472ED8.x6BC = 0;
-    lbl_80472ED8.x6C0 = 0;
-    lbl_80472ED8.x6BE = 0;
+    lbl_80473594.xC = arg0;
+    lbl_80473594.x8 = arg1;
+    lbl_80473594.x0 = 0;
+    lbl_80473594.x4 = 0;
+    lbl_80473594.x2 = 0;
 }
 
 typedef struct {
