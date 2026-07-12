@@ -3159,7 +3159,7 @@ HSD_GObj* Ground_801C57C8(void)
     return Player_GetEntityAtIndex(0, 1);
 }
 
-f32 Ground_801C57F0(void)
+f32 Ground_801C57F0(s32 arg0)
 {
     return stage_info.x6E0;
 }

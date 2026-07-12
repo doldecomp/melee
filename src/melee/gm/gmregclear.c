@@ -2823,7 +2823,7 @@ void fn_80180C60(HSD_GObj* gobj)
     HSD_JObj* jobj;
     u32 b76;
 
-    dist = (s32) (0.1f * Ground_801C57F0());
+    dist = (s32) (0.1f * Ground_801C57F0(0));
     jobj = gobj->hsd_obj;
     if (dist < 0) {
         dist = 0;
