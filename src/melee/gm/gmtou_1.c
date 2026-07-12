@@ -1690,12 +1690,10 @@ void fn_80199AF0(void)
     }
 }
 
-/// @todo 97.72%: whole-function register rotation — the early lbl_804799D8
-/// base/anchor webs land one register high (r30/r29 vs r29/r28) because the
-/// target allocates the later bracket-cursor walker to r31 first; mode and
-/// slot shift with it. Decl-position sweeps don't move it. The per-slot
-/// bracket loops use byte-offset walkers because GET_BRACKET_SLOT only folds
-/// +0x2C into the displacement in straight-line code, not loops.
+/// @todo 97.72%: all instructions match; the callee-saved register
+/// assignment is rotated by one against the target. The per-slot bracket
+/// loops use byte-offset walkers because GET_BRACKET_SLOT only folds +0x2C
+/// into the displacement in straight-line code, not in loops.
 void fn_8019A158(void)
 {
     TmData* td1;
