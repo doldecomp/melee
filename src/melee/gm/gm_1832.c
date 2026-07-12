@@ -4,6 +4,7 @@
 
 #include "gm_unsplit.h"
 
+#include "dolphin/pad.h"
 #include "gm/gm_1B14.h"
 #include "pl/pl_040D.h"
 
@@ -1528,7 +1529,7 @@ void fn_80187910(HSD_GObj* arg0)
     PAD_STACK(4);
     data = &lbl_804736C0;
     cobj = arg0->hsd_obj;
-    if (gm_801A36A0(data->x38) & 0x100) {
+    if (gm_GetButtonsTriggered(data->x38) & PAD_BUTTON_A) {
         data->x37.frame_counter = (s32) cobj->eyepos->aobj->curr_frame / 300;
         if (++data->x37.frame_counter >= 8U) {
             data->x37.frame_counter = 0;
@@ -1658,7 +1659,7 @@ void fn_80187CF4(HSD_GObj* gobj)
         }
         break;
     case 2:
-        if (gm_801A36A0(data->x38) & 0x1000) {
+        if (gm_GetButtonsTriggered(data->x38) & PAD_BUTTON_START) {
             lbAudioAx_80024030(1);
             data->x36.active = 1;
             data->x37.state2 = 3;

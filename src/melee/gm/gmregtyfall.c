@@ -4,6 +4,7 @@
 #include "math.h"
 
 #include "cm/camera.h"
+#include "dolphin/pad.h"
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "ft/ftdemo.h"
@@ -553,7 +554,7 @@ void gm_801A79D4_OnFrame(void)
 {
     if (gm_804D6740 != 0) {
         gm_804D6740--;
-    } else if (gm_801A36A0(gm_801BF010()) & 0x1000) {
+    } else if (gm_GetButtonsTriggered(gm_801BF010()) & PAD_BUTTON_START) {
         lbAudioAx_80023694();
         lbAudioAx_80024030(1);
         gm_801A4B60();
