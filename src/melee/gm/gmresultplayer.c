@@ -1523,8 +1523,8 @@ HSD_GObj* fn_8017A318(s32 arg0)
 Fighter_GObj* fn_8017A67C(CharacterKind kind, int arg1, int arg2)
 {
     ResultsPlayerConfig* config = &lbl_803B7B68;
-    lbl_8046E3AC_t* state = &lbl_8046E3AC;
-    MatchEnd* match_end = &state->match_end;
+    ResultsDisplayData* disp = &lbl_8046E1B0;
+    MatchEnd* match_end = &disp->state.match_end;
     HSD_GObj* gobj = NULL;
     int slot_type;
 
@@ -1583,7 +1583,7 @@ Fighter_GObj* fn_8017A67C(CharacterKind kind, int arg1, int arg2)
             }
 
             if (variant != 4) {
-                u8 override = state->costume_override[arg2];
+                u8 override = disp->state.costume_override[arg2];
                 if (override != 0) {
                     variant = override - 1;
                 }
@@ -1613,8 +1613,8 @@ Fighter_GObj* fn_8017A67C(CharacterKind kind, int arg1, int arg2)
                 Player_80032A04(arg2, &pos);
             }
 
-            state->variant[arg2] = (u8) variant;
-            state->char_kind[arg2] = (s32) kind;
+            disp->state.variant[arg2] = (u8) variant;
+            disp->state.char_kind[arg2] = (s32) kind;
             gobj = Player_GetEntity(arg2);
         }
     }
