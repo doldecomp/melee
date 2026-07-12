@@ -1690,12 +1690,12 @@ void fn_80199AF0(void)
     }
 }
 
-/// @todo 96.28%: regswap (the lbl_804799D8 base and the tail's entry/offset
-/// temps land one register off), a register collision in the x4E-clear loop,
-/// and the model-index load staying indexed (lbzx) instead of rematerializing
-/// the entry base. The per-slot bracket loops use byte-offset walkers because
-/// GET_BRACKET_SLOT only folds +0x2C into the displacement in straight-line
-/// code, not loops.
+/// @todo 97.72%: whole-function register rotation — the early lbl_804799D8
+/// base/anchor webs land one register high (r30/r29 vs r29/r28) because the
+/// target allocates the later bracket-cursor walker to r31 first; mode and
+/// slot shift with it. Decl-position sweeps don't move it. The per-slot
+/// bracket loops use byte-offset walkers because GET_BRACKET_SLOT only folds
+/// +0x2C into the displacement in straight-line code, not loops.
 void fn_8019A158(void)
 {
     TmData* td1;
@@ -1707,6 +1707,7 @@ void fn_8019A158(void)
     s32 result;
     s32 counter;
     s32 i;
+    int k;
     UNUSED u8 unused[8];
     s32 local1, local2;
     MatchEnd* me;
@@ -1746,8 +1747,8 @@ void fn_8019A158(void)
 
     bracket_idx = fn_8018F74C();
 
-    for (i = 0; i < 20; i++) {
-        lbl_804799D8.x4E[i] = 0;
+    for (k = 0; k < 20; k++) {
+        lbl_804799D8.x4E[k] = 0;
     }
 
     if (mode == 1) {
