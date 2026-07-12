@@ -2502,7 +2502,7 @@ void fn_8019B458(s32* arg0)
     s32 match;
     TmData* td2;
     s32 i;
-    PAD_STACK(0xC);
+    PAD_STACK(0x10);
 
     tm->x24++;
     fn_8019B458_UpdateRank(tm, d8);
@@ -2540,6 +2540,7 @@ void fn_8019B458(s32* arg0)
 
         {
             s32 use_random_stage;
+            struct Preload* q = &req;
 
             for (i = 0; i < 4; i++) {
                 if (tm->x4B8[i].x0 != 3) {
