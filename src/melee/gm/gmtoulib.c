@@ -1972,7 +1972,7 @@ u32 fn_8018F640(int arg0)
     if (arg0 >= 4) {
         arg0 = 4;
     }
-    return gm_GetButtonsPressedSinceLastFrame(arg0);
+    return gm_GetButtonsTriggered(arg0);
 }
 
 u32 fn_8018F674(int arg0)

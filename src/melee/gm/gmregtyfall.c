@@ -548,9 +548,7 @@ void gm_801A79D4_OnFrame(void)
 {
     if (gm_804D6740 != 0) {
         gm_804D6740--;
-    } else if (gm_GetButtonsPressedSinceLastFrame(gm_801BF010()) &
-               PAD_BUTTON_START)
-    {
+    } else if (gm_GetButtonsTriggered(gm_801BF010()) & PAD_BUTTON_START) {
         lbAudioAx_80023694();
         lbAudioAx_80024030(1);
         gm_801A4B60();

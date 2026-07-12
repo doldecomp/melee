@@ -2315,10 +2315,9 @@ void fn_8019AF50(s32* arg0, u32 arg1, u32 arg2)
     }
 
     if (lbl_804799D8.x4D != 1) {
-        buttons = (u32) gm_GetButtonsPressedSinceLastFrame(lbl_804799D8.x4C);
+        buttons = (u32) gm_GetButtonsTriggered(lbl_804799D8.x4C);
     } else {
-        buttons =
-            (u32) gm_GetButtonsPressedSinceLastFrame(PAD_ALL_CONTROLLERS);
+        buttons = (u32) gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS);
     }
 
     if (lbl_80473AB8[bracketIdx].x18 != 0) {

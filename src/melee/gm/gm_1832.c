@@ -1550,7 +1550,7 @@ void fn_80187910(HSD_GObj* arg0)
 
     PAD_STACK(4);
     cobj = arg0->hsd_obj;
-    if (gm_GetButtonsPressedSinceLastFrame(lbl_804736C0.x38) & PAD_BUTTON_A) {
+    if (gm_GetButtonsTriggered(lbl_804736C0.x38) & PAD_BUTTON_A) {
         lbl_804736C0.x37.frame_counter =
             (s32) cobj->eyepos->aobj->curr_frame / 300;
         if (++lbl_804736C0.x37.frame_counter >= 8U) {
@@ -1681,9 +1681,7 @@ void fn_80187CF4(HSD_GObj* gobj)
         }
         break;
     case 2:
-        if (gm_GetButtonsPressedSinceLastFrame(lbl_804736C0.x38) &
-            PAD_BUTTON_START)
-        {
+        if (gm_GetButtonsTriggered(lbl_804736C0.x38) & PAD_BUTTON_START) {
             lbAudioAx_80024030(1);
             lbl_804736C0.x36.active = 1;
             lbl_804736C0.x37.state2 = 3;

@@ -142,7 +142,7 @@ void fn_802FE470(HSD_GObj* gobj)
             break;
         case 1:
             un_803F9D48.x2 = 0xA;
-            if (gm_GetButtonsPressedSinceLastFrame(PAD_ALL_CONTROLLERS) &
+            if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) &
                 (PAD_BUTTON_A | PAD_BUTTON_START))
             {
                 if (un_803F9D48.x2C == NULL) {

@@ -49,7 +49,7 @@ void vi_8031CA04(HSD_GObj* gobj)
 void vi_8031CAAC(void)
 {
     u64 temp_ret;
-    temp_ret = gm_GetButtonsPressedSinceLastFrame(gm_8017E430());
+    temp_ret = gm_GetButtonsTriggered(gm_8017E430());
     if ((temp_ret & PAD_BUTTON_START) != 0) {
         lbAudioAx_800236DC();
         lbAudioAx_80023694();

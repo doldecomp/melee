@@ -260,7 +260,7 @@ HSD_Archive* gmTitle_801A1AC0(void)
 
 void gmTitle_801A1C18_OnFrame(void)
 {
-    int input = gm_GetButtonsPressedSinceLastFrame(PAD_ALL_CONTROLLERS);
+    int input = gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS);
     int* tmp;
     if (gmTitle_804D6714 != 0) {
         gmTitle_804D6714--;

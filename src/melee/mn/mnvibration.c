@@ -252,7 +252,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
     Menu_GetAllInputs();
 
     // Handle B button - exit menu
-    inputs = gm_GetButtonsPressedSinceLastFrame(PAD_ALL_CONTROLLERS);
+    inputs = gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS);
     if (inputs & PAD_CANCEL) {
         MnVibrationData* exit_data;
         lbAudioAx_80024030(0);
@@ -286,7 +286,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
     // Check A button per controller for rumble toggle
     for (i = 0; i < 4; i++) {
         if (data->x0[i + 2] == 0) {
-            inputs = gm_GetButtonsPressedSinceLastFrame(i);
+            inputs = gm_GetButtonsTriggered(i);
             if (inputs & PAD_CONFIRM) {
                 HSD_JObj* temp_jobj;
                 lbAudioAx_80024030(1);
@@ -353,7 +353,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
     {
         s32 j;
         for (j = 0; j < 4; j++) {
-            inputs = gm_GetButtonsPressedSinceLastFrame(j);
+            inputs = gm_GetButtonsTriggered(j);
             if ((inputs & PAD_ANY_LEFT) && data->x0[j + 2] == 1) {
                 u8 state;
                 lbAudioAx_80024030(2);
@@ -364,7 +364,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                 HSD_JObjReqAnimAll(panel_jobj, (f32) state);
                 HSD_JObjAnimAll(panel_jobj);
             } else {
-                inputs = gm_GetButtonsPressedSinceLastFrame(j);
+                inputs = gm_GetButtonsTriggered(j);
                 if ((inputs & PAD_ANY_RIGHT) && data->x0[j + 2] == 0) {
                     u8 state;
                     lbAudioAx_80024030(2);

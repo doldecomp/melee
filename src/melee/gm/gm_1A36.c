@@ -11,7 +11,7 @@ u64 gm_GetButtonsPressed(u8 idx)
     return controller_map.x0[idx].button;
 }
 
-u64 gm_GetButtonsPressedSinceLastFrame(u8 idx)
+u64 gm_GetButtonsTriggered(u8 idx)
 {
     return controller_map.x0[idx].trigger;
 }

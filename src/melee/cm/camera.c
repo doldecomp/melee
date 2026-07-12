@@ -1574,7 +1574,7 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
         inputs->substick_y = substick_y;
         temp_ret = gm_GetButtonsPressed(PAD_ALL_CONTROLLERS);
         inputs->buttons_pressed = temp_ret;
-        temp_ret = gm_GetButtonsPressedSinceLastFrame(PAD_ALL_CONTROLLERS);
+        temp_ret = gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS);
         inputs->buttons_pressed_since_last_frame = temp_ret;
         return;
     }
@@ -1585,7 +1585,7 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
     inputs->substick_y = pad->nml_subStickY;
     temp_ret = gm_GetButtonsPressed(slot);
     inputs->buttons_pressed = temp_ret;
-    temp_ret = gm_GetButtonsPressedSinceLastFrame(slot);
+    temp_ret = gm_GetButtonsTriggered(slot);
     inputs->buttons_pressed_since_last_frame = temp_ret;
 }
 

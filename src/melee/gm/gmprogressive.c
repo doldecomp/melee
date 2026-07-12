@@ -135,24 +135,21 @@ void gm_801AD620_OnFrame(void)
             gm_80480D70.x10 = 4;
         }
     } else {
-        if ((gm_GetButtonsPressedSinceLastFrame(PAD_ALL_CONTROLLERS) &
-             PAD_ANY_LEFT) &&
+        if ((gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) & PAD_ANY_LEFT) &&
             gm_80480D70.x10 == 2 && gm_80480D70.x14 == 0)
         {
             lbAudioAx_80024030(2);
             gm_80480D70.x10 = 1;
             gm_801AD254(gm_80480D70.x10);
         }
-        if ((gm_GetButtonsPressedSinceLastFrame(PAD_ALL_CONTROLLERS) &
-             PAD_ANY_RIGHT) &&
+        if ((gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) & PAD_ANY_RIGHT) &&
             gm_80480D70.x10 == 1 && gm_80480D70.x14 == 0)
         {
             lbAudioAx_80024030(2);
             gm_80480D70.x10 = 2;
             gm_801AD254(gm_80480D70.x10);
         }
-        if ((gm_GetButtonsPressedSinceLastFrame(PAD_ALL_CONTROLLERS) &
-             PAD_CONFIRM) &&
+        if ((gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) & PAD_CONFIRM) &&
             gm_80480D70.x14 == 0)
         {
             if (gm_80480D70.x10 == 1) {

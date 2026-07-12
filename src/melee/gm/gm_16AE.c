@@ -1336,7 +1336,7 @@ void fn_8016CFE0(void)
         }
         no_contest_buttons = tmp_btns;
         if (tmp->x24C8.x3_4 && tmp->pause_timer == 0 && tmp->unk_3 == 0) {
-            u64 buttons = gm_GetButtonsPressedSinceLastFrame(tmp->pauser);
+            u64 buttons = gm_GetButtonsTriggered(tmp->pauser);
             if ((no_contest_buttons & buttons) != 0) {
                 buttons = gm_GetButtonsPressed(tmp->pauser);
                 {
@@ -1350,9 +1350,7 @@ void fn_8016CFE0(void)
             }
         }
         if (tmp->x24C8.x3_2 && tmp->pause_timer == 0 && tmp->unk_3 == 0) {
-            if ((gm_GetButtonsPressedSinceLastFrame(tmp->pauser) &
-                 PAD_TRIGGER_Z) != 0)
-            {
+            if ((gm_GetButtonsTriggered(tmp->pauser) & PAD_TRIGGER_Z) != 0) {
                 fn_8016CF4C_dontinline(unpauser_slot, OUTCOME_RETRY);
                 return;
             }

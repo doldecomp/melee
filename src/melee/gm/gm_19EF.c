@@ -670,10 +670,9 @@ static void fn_801A0B60(HSD_GObj* gobj)
     HSD_JObjReqAnimAll(jobj, lbl_804D66F8);
     HSD_JObjAnimAll(jobj);
     if (lbl_804D66F8 == 0xBD) {
-        if (((u32) gm_GetButtonsPressedSinceLastFrame(PAD_ALL_CONTROLLERS) &
+        if (((u32) gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) &
              PAD_BUTTON_START) ||
-            ((u32) gm_GetButtonsPressedSinceLastFrame(PAD_ALL_CONTROLLERS) &
-             PAD_BUTTON_A))
+            ((u32) gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) & PAD_BUTTON_A))
         {
             lbl_804D66F8 += 1;
         }

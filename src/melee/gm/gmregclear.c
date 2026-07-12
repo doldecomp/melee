@@ -2398,8 +2398,7 @@ void fn_8017FF1C(HSD_GObj* gobj)
         }
 
         {
-            u64 buttons =
-                gm_GetButtonsPressedSinceLastFrame(Player_GetPlayerId(0));
+            u64 buttons = gm_GetButtonsTriggered(Player_GetPlayerId(0));
             u64 repeat = gm_801A36C0(Player_GetPlayerId(0));
             if (((repeat | buttons) & 0x20004) | ((repeat | buttons) & 0)) {
                 mask = fn_8017F008();
@@ -2414,8 +2413,7 @@ void fn_8017FF1C(HSD_GObj* gobj)
                     }
                 }
             } else {
-                buttons =
-                    gm_GetButtonsPressedSinceLastFrame(Player_GetPlayerId(0));
+                buttons = gm_GetButtonsTriggered(Player_GetPlayerId(0));
                 repeat = gm_801A36C0(Player_GetPlayerId(0));
                 if (((repeat | buttons) & 0x10008) | ((repeat | buttons) & 0))
                 {
@@ -3911,7 +3909,7 @@ void fn_80182F40(HSD_GObj* unused)
     int temp_r31;
     int temp_r31_2;
 
-    if (gm_GetButtonsPressedSinceLastFrame(PAD_ALL_CONTROLLERS) &
+    if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) &
         (HSD_PAD_START | HSD_PAD_A))
     {
         lbAudioAx_80024C84();

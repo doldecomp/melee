@@ -155,9 +155,7 @@ void gm_801A64A8_OnFrame(void)
         var_r30 = true;
     }
     if (gm_804D6738 >= 0x1A4 ||
-        (gm_GetButtonsPressedSinceLastFrame(gm_801BF010()) &
-         PAD_BUTTON_START) ||
-        var_r30)
+        (gm_GetButtonsTriggered(gm_801BF010()) & PAD_BUTTON_START) || var_r30)
     {
         lbAudioAx_800236DC();
         lbAudioAx_80023694();
