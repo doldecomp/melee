@@ -1712,13 +1712,10 @@ void fn_80199AF0(void)
     }
 }
 
-/// @todo 98.32%: whole-function register rotation — the early lbl_804799D8
-/// base/anchor webs land one register high because the target allocates the
-/// later bracket-cursor walker to r31 first; mode and slot shift with it.
-/// The per-slot bracket loops keep u8 cursor walkers even though
-/// bracket->slots[i].x4C produces identical walker instructions (base + disp
-/// 0x4C, +0x2C steps): dropping the cursor webs makes the allocator coalesce
-/// sel into slot (losing the target's mr) and costs ~0.9% of pure rotation.
+/// @todo 98.32%: all instructions match; the callee-saved register
+/// assignment is rotated by one against the target. The per-slot loops keep
+/// u8 cursor walkers: bracket->slots[i].x4C compiles to the same
+/// instructions but rotates more registers.
 void fn_8019A158(void)
 {
     TmData* td1;
