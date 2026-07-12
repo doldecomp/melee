@@ -2460,29 +2460,14 @@ void gm_8019B2DC_OnFrame(void)
 
 /// Transitions to results screen after a tournament match.
 /// Ranks players, preloads stage/character data, and starts audio.
-/// @todo 99.56% — all 278 instructions/shapes match; residual is a pure
-/// two-register callee-saved swap: rank colors r28 vs the target's r29,
-/// and the char/costume fill loop's two walkers trade r28<->r29 with it.
-void fn_8019B458(s32* arg0)
+static inline void fn_8019B458_UpdateRank(TmData* tm, struct Lbl804799D8_t* d8)
 {
-    struct Preload {
-        s32 stage;
-        s32 char_ids[4];
-        s32 costumes[4];
-    } req;
-    TmData* tm = (TmData*) arg0;
-    struct Lbl804799D8_t* d8 = &lbl_804799D8;
     s32 rank;
-    s32 match;
-    TmData* td2;
-    s32 i;
     s32 j;
     s32 x24;
     s32 entrants;
     TmData* td;
-    PAD_STACK(0x10);
 
-    tm->x24++;
     d8->x0 = rank = 0;
     tm->pad_x34[0] = tm->x33;
 
@@ -2501,6 +2486,29 @@ void fn_8019B458(s32* arg0)
     }
 
     tm->x33 = rank;
+}
+
+/// @todo 99.77% — all 278 instructions/shapes match; residual is one pure
+/// two-register swap: the entry-fill loop's two walkers (tm- and req-derived
+/// IVs) trade r28<->r29. Walker spellings, a user tm pointer, a q = &req
+/// pointer, and a helper-inline form of the loop all canonicalize to the
+/// same swap.
+void fn_8019B458(s32* arg0)
+{
+    struct Preload {
+        s32 stage;
+        s32 char_ids[4];
+        s32 costumes[4];
+    } req;
+    TmData* tm = (TmData*) arg0;
+    struct Lbl804799D8_t* d8 = &lbl_804799D8;
+    s32 match;
+    TmData* td2;
+    s32 i;
+    PAD_STACK(0xC);
+
+    tm->x24++;
+    fn_8019B458_UpdateRank(tm, d8);
 
     {
         match = fn_80196CF8();
@@ -2535,9 +2543,6 @@ void fn_8019B458(s32* arg0)
 
         {
             s32 use_random_stage;
-            /* declared here (not in the cache block below) to keep &req in
-             * a callee-saved register across both entry-fill loops */
-            struct Preload* q = &req;
 
             for (i = 0; i < 4; i++) {
                 if (tm->x4B8[i].x0 != 3) {
