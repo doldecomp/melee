@@ -2146,9 +2146,9 @@ bool lb_80014638(struct lb_80014638_arg0_t* arg0,
     {
         float z = sp18.z;
         if (((sp24.z - sp30.z) < 0.0F ? -(sp24.z - sp30.z) : sp24.z - sp30.z) <
-            0.00001F)
+            0.01F)
         {
-            z = 0.0F;
+            z = 1.0F;
         } else {
             z = (z - sp30.z) / (sp24.z - sp30.z);
         }

@@ -6,6 +6,7 @@
 #include "gm_1A45.h"
 #include "gm_unsplit.h"
 
+#include "dolphin/pad.h"
 #include "it/inlines.h"
 
 #include <sysdolphin/baselib/archive.h>
@@ -669,7 +670,9 @@ static void fn_801A0B60(HSD_GObj* gobj)
     HSD_JObjReqAnimAll(jobj, lbl_804D66F8);
     HSD_JObjAnimAll(jobj);
     if (lbl_804D66F8 == 0xBD) {
-        if (((u32) gm_801A36A0(4) & 0x1000) || ((u32) gm_801A36A0(4) & 0x100))
+        if (((u32) gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) &
+             PAD_BUTTON_START) ||
+            ((u32) gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) & PAD_BUTTON_A))
         {
             lbl_804D66F8 += 1;
         }

@@ -4,6 +4,9 @@
 #include "platform.h"
 
 #include "baselib/forward.h"
+
+#include "dolphin/pad.h"
+
 #include "gm/forward.h"
 
 #include <math_ppc.h>
@@ -1983,7 +1986,7 @@ s32 fn_8017F47C(HSD_Text** arg0, int arg1)
 
         if (p[8] != val) {
             if (val < 0) {
-                HSD_SisLib_803A70A0(*arg0, i, "%s%d", "\x81\x7c", -val);
+                HSD_SisLib_803A70A0(*arg0, i, "%s%d", "－", -val);
             } else {
                 HSD_SisLib_803A70A0(*arg0, i, "%d", val);
             }
@@ -2109,7 +2112,7 @@ void fn_8017F608(void* arg0)
                 p->xD4 = p->xD0;
             } else if (p->xD8 < 0x3C) {
                 p->x74->default_kerning = 1;
-                str = HSD_SisLib_803A6B98(p->x74, 0.0f, 0.0f, "%d\x82w%d",
+                str = HSD_SisLib_803A6B98(p->x74, 0.0f, 0.0f, "%dＸ%d",
                                           p->xD0 / p->x108, p->x108);
                 HSD_SisLib_803A7548(p->x74, str, 0.089999996f, 0.065f);
             } else {
@@ -2395,7 +2398,7 @@ void fn_8017FF1C(HSD_GObj* gobj)
         }
 
         {
-            u64 buttons = gm_801A36A0(Player_GetPlayerId(0));
+            u64 buttons = gm_GetButtonsTriggered(Player_GetPlayerId(0));
             u64 repeat = gm_801A36C0(Player_GetPlayerId(0));
             if (((repeat | buttons) & 0x20004) | ((repeat | buttons) & 0)) {
                 mask = fn_8017F008();
@@ -2410,7 +2413,7 @@ void fn_8017FF1C(HSD_GObj* gobj)
                     }
                 }
             } else {
-                buttons = gm_801A36A0(Player_GetPlayerId(0));
+                buttons = gm_GetButtonsTriggered(Player_GetPlayerId(0));
                 repeat = gm_801A36C0(Player_GetPlayerId(0));
                 if (((repeat | buttons) & 0x10008) | ((repeat | buttons) & 0))
                 {
@@ -3906,7 +3909,9 @@ void fn_80182F40(HSD_GObj* unused)
     int temp_r31;
     int temp_r31_2;
 
-    if (gm_801A36A0(4) & 0x1100) {
+    if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) &
+        (HSD_PAD_START | HSD_PAD_A))
+    {
         lbAudioAx_80024C84();
         lbAudioAx_80023694();
         lbAudioAx_80024030(1);

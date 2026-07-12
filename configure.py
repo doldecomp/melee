@@ -111,6 +111,13 @@ parser.add_argument(
     help="path to objdiff-cli binary or source (optional)",
 )
 parser.add_argument(
+    "--reloc-diffs",
+    type=str,
+    choices=["none", "name_address", "data_value", "all"],
+    default="data_value",
+    help="how relocation targets will be diffed in the report (default 'data_value')",
+)
+parser.add_argument(
     "--sjiswrap",
     metavar="EXE",
     type=Path,
@@ -441,7 +448,7 @@ NonMatching = False  # Object does not match and should not be linked
 Equivalent = (
     config.non_matching
 )  # Object should be linked when configured with --non-matching
-Testing = bool(args.testing) # Object is being tested for linking
+Testing = bool(args.testing)  # Object is being tested for linking
 
 
 # Object is only matching for specific versions
@@ -647,7 +654,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_0C35.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_AirCatch.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_DamageBind.c"),
-            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_WarpStar.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_WarpStar.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_HammerWait.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_HammerWalk.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_HammerTurn.c"),
@@ -668,7 +675,7 @@ config.libs = [
             Object(Matching, "melee/ft/ftCo_800C7590.c"),
             Object(Matching, "melee/ft/ftCo_800C78B0.c"),
             Object(Matching, "melee/ft/ftCo_800C7CA0.c"),
-            Object(NonMatching, "melee/ft/ftmetal.c"),
+            Object(Matching, "melee/ft/ftmetal.c"),
             Object(Matching, "melee/ft/ft_0C88.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_DownSpot.c"),
             Object(Matching, "melee/ft/ft_0C8C.c"),
@@ -1085,7 +1092,7 @@ config.libs = [
             Object(NonMatching, "melee/gr/grinishie1.c"),
             Object(Matching, "melee/gr/grinishie2.c"),
             Object(Matching, "melee/gr/grkraid.c"),
-            Object(NonMatching, "melee/gr/grrcruise.c"),
+            Object(Matching, "melee/gr/grrcruise.c"),
             Object(Matching, "melee/gr/grshrine.c"),
             Object(NonMatching, "melee/gr/gryorster.c"),
             Object(Matching, "melee/gr/grgarden.c"),
@@ -1099,7 +1106,7 @@ config.libs = [
             Object(Matching, "melee/gr/grfigure2.c"),
             Object(Matching, "melee/gr/grfigure3.c"),
             Object(Matching, "melee/gr/groldyoshi.c"),
-            Object(NonMatching, "melee/gr/groldkongo.c"),
+            Object(Matching, "melee/gr/groldkongo.c"),
             Object(NonMatching, "melee/gr/groldpupupu.c"),
             Object(NonMatching, "melee/gr/grpura.c"),
             Object(NonMatching, "melee/gr/grgreens.c"),
@@ -1816,8 +1823,7 @@ config.progress_each_module = args.verbose
 # Optional extra arguments to `objdiff-cli report generate`
 config.progress_report_args = [
     # Marks relocations as mismatching if the target value is different
-    # Default is "functionRelocDiffs=none", which is most lenient
-    "--config functionRelocDiffs=data_value",
+    f"--config functionRelocDiffs={args.reloc_diffs}",
 ]
 
 if args.mode == "configure":

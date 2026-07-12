@@ -13,7 +13,7 @@
 
 /* 1DCCFC */ void grCorneria_801DCCFC(void);
 /* 1DCE1C */ void grCorneria_801DCE1C(void);
-/* 1DD2C0 */ void grCorneria_801DD2C0(void);
+/* 1DD2C0 */ void grCorneria_801DD2C0(int);
 /* 1DD350 */ void grCorneria_801DD350(void);
 /* 1DD478 */ void grCorneria_801DD478(void);
 /* 1DD508 */ void grCorneria_801DD508(void);
@@ -37,7 +37,7 @@
 /* 1DE568 */ void grCorneria_801DE568(Ground_GObj*);
 /* 1DE8E4 */ void grCorneria_801DE8E4(Ground_GObj*);
 /* 1DEC00 */ bool grCorneria_801DEC00(Ground_GObj*);
-/* 1DEC08 */ s32 grCorneria_801DEC08(Vec3*);
+/* 1DEC08 */ bool grCorneria_801DEC08(Vec3*);
 /* 1DEC94 */ s32 grCorneria_801DEC94(Vec3*);
 /* 1DED50 */ void grCorneria_801DED50(Ground_GObj*);
 /* 1DF8D0 */ void grCorneria_801DF8D0(Ground_GObj*);
