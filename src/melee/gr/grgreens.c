@@ -994,6 +994,20 @@ void grGreens_802150C4(Ground_GObj* gobj, int arg1, int arg2)
 #undef BLOCK
 }
 
+static inline void get_block_material_params(int block_type, float* duration,
+                                             float* scale)
+{
+    int value;
+
+    if (block_type == 2) {
+        value = grGr_params->x28;
+    } else {
+        value = grGr_params->x24;
+    }
+    *duration = value * Ground_801C0498();
+    *scale = 5.0f * Ground_801C0498();
+}
+
 void grGreens_80215358(Ground_GObj* gobj, int col, int row, int arg3, int arg4)
 {
     Ground* gp = GET_GROUND(gobj);
@@ -1006,7 +1020,6 @@ void grGreens_80215358(Ground_GObj* gobj, int col, int row, int arg3, int arg4)
     HSD_JObj* jobj;
     int type;
     int num;
-    int x24_or_x28;
     float grMaterial_801C8DE0_paramA;
     float grMaterial_801C8DE0_paramB;
     Vec vec;
@@ -1042,13 +1055,8 @@ void grGreens_80215358(Ground_GObj* gobj, int col, int row, int arg3, int arg4)
     HSD_JObjClearFlags(jobj, JOBJ_HIDDEN);
     item_gobj = grMaterial_801C8CFC(8, 0, gp, jobj, fn_802159B4, fn_80215B84,
                                     fn_80215D50);
-    if (arg3 == 2) {
-        x24_or_x28 = grGr_params->x28;
-    } else {
-        x24_or_x28 = grGr_params->x24;
-    }
-    grMaterial_801C8DE0_paramB = x24_or_x28 * Ground_801C0498();
-    grMaterial_801C8DE0_paramA = 5.0f * Ground_801C0498();
+    get_block_material_params(arg3, &grMaterial_801C8DE0_paramB,
+                              &grMaterial_801C8DE0_paramA);
     grMaterial_801C8DE0(item_gobj, 0.0f, grMaterial_801C8DE0_paramA, 0.0f,
                         0.0f, grMaterial_801C8DE0_paramA, 0.0f,
                         grMaterial_801C8DE0_paramB);

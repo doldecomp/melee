@@ -89,6 +89,10 @@ static int dmg_log0_idx;
 static int dmg_log1_idx;
 static s8 ftColl_804D6560[8];
 
+/// .sdata2
+float const ftColl_804D82EC = +1;
+float const ftColl_804D8314 = 0.01;
+
 /// Combo Count Logic
 void ftColl_800763C0(Fighter_GObj* attacker, Fighter_GObj* victim,
                      enum_t attack_id)
@@ -2132,8 +2136,6 @@ float ftColl_80079AB0(Fighter* fp, HitCapsule* hit, u32 unk_count, float arg3,
     ftCommonData* ftd = p_ftCommonData;
     float decay;
     float weight_mul;
-    float damage;
-    float base;
     float result;
     PAD_STACK(8);
 
@@ -2155,7 +2157,7 @@ float ftColl_80079AB0(Fighter* fp, HitCapsule* hit, u32 unk_count, float arg3,
                (float) (u32) hit->x2C)));
     } else {
         s32 count;
-        u32 x24;
+        float base;
 
         if (fp->x2225_b7) {
             if (fp->x2224_b2) {
@@ -2168,16 +2170,18 @@ float ftColl_80079AB0(Fighter* fp, HitCapsule* hit, u32 unk_count, float arg3,
         }
 
         base = ftd->xF8;
-        x24 = hit->x24;
-        damage = (float) count + fp->dmg.x1838_percentTemp;
+        weight_mul = (weight_mul * base) / (ftColl_804D82EC + weight_mul);
         result = defense *
                  (attack *
                   (arg3 *
-                   ((0.01F * (float) (u32) x24 *
+                   ((ftColl_804D8314 * (float) (u32) hit->x24 *
                      ((ftd->x11C *
-                       ((base - ((weight_mul * base) / (1.0F + weight_mul))) *
-                        ((ftd->x110 * damage) +
-                         (ftd->x114 * ((float) (u32) unk_count * damage))))) +
+                       ((base - weight_mul) *
+                        ((ftd->x110 *
+                          ((float) count + fp->dmg.x1838_percentTemp)) +
+                         (ftd->x114 *
+                          ((float) (u32) unk_count *
+                           ((float) count + fp->dmg.x1838_percentTemp)))))) +
                       ftd->x120)) +
                     (float) (u32) hit->x2C)));
     }

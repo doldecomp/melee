@@ -4268,14 +4268,13 @@ void mpCeilingGetLeft(int line_id, Vec3* pos_out)
 
     LINEID_CHECK(4492, line_id);
 
+    if (line_id != -1) {
+    }
     new_id = line_id;
     kind = mpLineGetKindInline(line_id);
     do {
-        MapLine* line;
         line_offset = new_id * sizeof(CollLine);
-        line = ((CollLine*) (line_offset + (int) groundCollLine))->x0;
-        new_id = line->next_id1;
-        new_id = mpLineGetNextCheckInline(line, new_id);
+        new_id = mpLineGetNext(new_id);
     } while (new_id != -1 &&
              !(kind != (groundCollLine[new_id].flags & LINE_FLAG_KIND)));
 

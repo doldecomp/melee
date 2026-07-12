@@ -1876,11 +1876,9 @@ void _Toy_803075E8(s32 arg0)
             HSD_GObjObject_80390A70(td->gobj, kind, jobj);
             GObj_SetupGXLink(td->gobj, HSD_GObj_JObjCallback, 0x33, 0);
 
-            ptr = (char**) (data + arg0 * 0xC);
-            joint = HSD_ArchiveGetPublicAddress(
-                td->archive,
-                ((struct ModelNamesDesc*) (data + arg0 * 0xC + 0x290))
-                    ->animjoint);
+            arg0 = (u32) data + arg0 * 0xC;
+            ptr = ((ToyPanelLabelData*) arg0)->ptrs;
+            joint = HSD_ArchiveGetPublicAddress(td->archive, ptr[0x290 / 4]);
             data = HSD_ArchiveGetPublicAddress(td->archive, ptr[0x294 / 4]);
             shapanim =
                 HSD_ArchiveGetPublicAddress(td->archive, ptr[0x298 / 4]);
