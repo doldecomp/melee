@@ -155,7 +155,8 @@ void gm_801A9D0C_OnFrame(void)
         }
     } else {
         if (gm_GetButtonsTriggered(gm_801BF010()) &
-            (PAD_BUTTON_A | PAD_BUTTON_START)) {
+            (PAD_BUTTON_A | PAD_BUTTON_START)) 
+            {
             lbBgFlash_8002063C(0x3C);
             gmRegend_ExitTimer = 0x3C;
             lbAudioAx_80023694();
