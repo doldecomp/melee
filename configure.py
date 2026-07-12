@@ -692,7 +692,7 @@ config.libs = [
             Object(Matching, "melee/ft/ftlipstickswing.c"),
             Object(Matching, "melee/ft/ft_0CDD.c"),
             Object(Matching, "melee/ft/ft_0CDF.c"),
-            Object(NonMatching, "melee/ft/ft_0CE3.c"),
+            Object(Matching, "melee/ft/ft_0CE3.c"),
             Object(Matching, "melee/ft/ftattacks4combo.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemParasolOpen.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemParasolFall.c"),
