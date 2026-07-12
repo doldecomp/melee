@@ -369,11 +369,7 @@ void fn_8025A974(HSD_GObj* gobj, int unused)
 extern HSD_CObjDesc* MenMain_cam;
 static const Vec3 mnStageSel_803B8550 = { 0, -13, 0 };
 
-/// @todo 99.61%: remaining diffs are callee-saved recolorings only. Retail
-/// lands the short block-local webs (per-block gobj homes, GET_JOBJ temps,
-/// loop walkers) in r22/r23; ours pick r23-r25. Promoting the block vars to
-/// function scope deletes retail's per-block @c mr homes, and decl sweeps
-/// compile byte-identical.
+/// @todo Only differs by register allocation.
 void mnStageSel_8025A998_OnEnter(void* arg0)
 {
     HSD_JObj* spDC[0x13];
