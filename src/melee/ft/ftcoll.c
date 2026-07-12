@@ -2171,19 +2171,19 @@ float ftColl_80079AB0(Fighter* fp, HitCapsule* hit, u32 unk_count, float arg3,
 
         base = ftd->xF8;
         weight_mul = (weight_mul * base) / (ftColl_804D82EC + weight_mul);
-        result = defense *
-                 (attack *
-                  (arg3 *
-                   ((ftColl_804D8314 * (float) (u32) hit->x24 *
-                     ((ftd->x11C *
-                       ((base - weight_mul) *
-                        ((ftd->x110 *
-                          ((float) count + fp->dmg.x1838_percentTemp)) +
-                         (ftd->x114 *
-                          ((float) (u32) unk_count *
-                           ((float) count + fp->dmg.x1838_percentTemp)))))) +
-                      ftd->x120)) +
-                    (float) (u32) hit->x2C)));
+        result =
+            defense *
+            (attack *
+             (arg3 *
+              ((ftColl_804D8314 * (float) (u32) hit->x24 *
+                ((ftd->x11C *
+                  ((base - weight_mul) *
+                   ((ftd->x110 * ((float) count + fp->dmg.x1838_percentTemp)) +
+                    (ftd->x114 *
+                     ((float) (u32) unk_count *
+                      ((float) count + fp->dmg.x1838_percentTemp)))))) +
+                 ftd->x120)) +
+               (float) (u32) hit->x2C)));
     }
 
     if (result >= ftd->x108) {

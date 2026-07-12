@@ -266,6 +266,7 @@ void mnSnap_80253640(s32 page)
     p48 = &snap->photo_count[0];
     p4F = &snap->cur_page;
     p50 = &snap->active_slot;
+    (void) p48;
     *p4F = page;
     count = p48[*p50] - (page * 4);
     if (count > 4) {
@@ -596,7 +597,16 @@ void mnSnap_8025409C(s32 dlg_type)
 
     p5E = &mnSnap_804A0A10.btn_idx;
     *p5E = 0;
+    /// @remark Matching tactic: the self-assign keeps p5E live so MWCC
+    /// re-uses its register instead of rematerializing the address below.
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wself-assign"
+#endif
     p5E = p5E;
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
 
     if (dlg_type == 1) {
         left = *p38;

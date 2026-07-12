@@ -1279,7 +1279,8 @@ void ifStatus_802F7134(void)
     }
 
     archive = ifAll_802F3690();
-    lbArchive_LoadSections(*archive, &models, counter->scene_models_name, 0);
+    lbArchive_LoadSections(*archive, (void**) &models,
+                           counter->scene_models_name, 0);
 
     for (i = 0; i < 8; i++) {
         counter->elements[i].x14 = models[i];

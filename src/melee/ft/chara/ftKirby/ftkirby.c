@@ -2708,18 +2708,18 @@ typedef struct ftKirby_CopyName {
     char* name;
 } ftKirby_CopyName;
 
-/// @remark Matching tactic: `__declspec(weak)` on this table and on
-/// #ftKb_Init_803CB3E8 keeps MWCC from pooling the copy-ability tables
-/// through one shared .data base register in #ftKb_SpecialN_800EEC34 and
-/// #ftKb_SpecialN_800EED50. MWCC only applies pooled-data addressing when a
-/// function references at least three same-section objects whose section
+/// @remark Matching tactic: `WEAK` (`__declspec(weak)` under MWCC) on this
+/// table and on #ftKb_Init_803CB3E8 keeps MWCC from pooling the copy-ability
+/// tables through one shared .data base register in #ftKb_SpecialN_800EEC34
+/// and #ftKb_SpecialN_800EED50. MWCC only applies pooled-data addressing when
+/// a function references at least three same-section objects whose section
 /// offsets are already fixed; a weak definition may be overridden at link
 /// time, so it never qualifies. The retail code materializes each table
 /// address independently (evidence: with these two markers removed,
 /// ftKb_SpecialN_800EEC34 drops from 100% to 88.13% and
 /// ftKb_SpecialN_800EED50 from 96.75% to 80.48%, both via `...data.0`
 /// anchored pooling; no other symbol in the unit changes either way).
-__declspec(weak) ftKirby_CopyName ftKb_Init_803CA9D0[FTKIND_MAX] = {
+WEAK ftKirby_CopyName ftKb_Init_803CA9D0[FTKIND_MAX] = {
     { "PlKbCpMr.dat", "ftDataKirbyCopyMario" },
     { "PlKbCpFx.dat", "ftDataKirbyCopyFox" },
     { "PlKbCpCa.dat", "ftDataKirbyCopyCaptain" },
@@ -2880,8 +2880,8 @@ Fighter_CostumeStrings ftKb_Init_803CB3A0[] = {
     { ftKb_Init_803CB358, ftKb_Init_803CB368, ftKb_Init_803CB380 },
 };
 
-/// @remark `__declspec(weak)`: see #ftKb_Init_803CA9D0.
-__declspec(weak) Fighter_CostumeStrings* ftKb_Init_803CB3E8[] = {
+/// @remark `WEAK`: see #ftKb_Init_803CA9D0.
+WEAK Fighter_CostumeStrings* ftKb_Init_803CB3E8[] = {
     NULL,
     NULL,
     NULL,
