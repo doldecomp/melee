@@ -400,8 +400,9 @@ static inline void itLinkbomb_UnkMotion3_Anim_inline2(HSD_GObj* gobj)
     it_8029DB5C(gobj);
 }
 
-static inline void itLinkbomb_UnkMotion3_Anim_blk10932r(
-    Item_GObj* gobj, itLinkBombAttributes* attrs)
+static inline void
+itLinkbomb_UnkMotion3_Anim_blk10932r(Item_GObj* gobj,
+                                     itLinkBombAttributes* attrs)
 {
     Item* ip;
     Article* article;
