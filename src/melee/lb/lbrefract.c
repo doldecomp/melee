@@ -631,9 +631,6 @@ s32 lbRefract_PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc)
         u8* display = pobj->display;
         s32 offset = 0;
         s32 total_bytes = pobj->n_display << 5;
-        u8* src = display + pnmtx_offset;
-        u8* dst = display + last_offset;
-
         while (offset < total_bytes) {
             u8* ptr;
             s32 hi;
@@ -649,7 +646,8 @@ s32 lbRefract_PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc)
             offset += 2;
 
             for (copied = 0; copied < count; copied++) {
-                dst[offset] = src[offset];
+                display[offset + last_offset] =
+                    display[offset + pnmtx_offset];
                 offset += stride;
             }
         }

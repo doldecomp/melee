@@ -15,14 +15,14 @@
 #include <baselib/gobj.h>
 #include <melee/ft/ftcmdscript.h>
 
-#pragma force_active on
-
-float const ftCo_804D87C0 = 2;
-float const ftCo_804D87C4 = 0.5;
-float const ftCo_804D87C8 = deg_to_rad;
-float const ftCo_804D87CC = 256;
-float const ftCo_804D87D0 = 0;
-char ftDynamics_803C57B0[] = "no effect from animlist %d\n";
+static void sdata2_order(void)
+{
+    (void) 2.0f;
+    (void) 0.5f;
+    (void) 0.0174532924f;
+    (void) 256.0f;
+    (void) 0.0f;
+}
 
 struct _m2c_stack_ftCo_8009F834 {
     /* 0x00 */ char pad_0[0x7C];
@@ -52,7 +52,7 @@ destroy_on_state_change
 offset
 range
 */
-void ftCo_8009F834(Fighter_GObj* gobj, int arg1, enum Fighter_Part arg2,
+void ftCo_8009F834(Fighter_GObj* gobj, int arg1, enum Fighter_Part part,
                    int arg3, int arg4, Vec3* arg5, Vec3* arg6, f32 arg7)
 {
     Vec3 spA8;
@@ -65,12 +65,9 @@ void ftCo_8009F834(Fighter_GObj* gobj, int arg1, enum Fighter_Part arg2,
     f32 sp7C;
     int gfx_id;
     Fighter* fp;
-    Fighter* temp_r9;
-    Fighter* temp_r9_2;
-    enum Fighter_Part part;
-    f32 temp_f1;
+    f32 rand_val;
     f32 scale_y;
-    f32 temp_f2;
+    f32 z_spread;
     f32 z_range;
     f32 floor_angle;
     f32 random_or_angle;
@@ -78,7 +75,6 @@ void ftCo_8009F834(Fighter_GObj* gobj, int arg1, enum Fighter_Part arg2,
     PAD_STACK(68);
 
     gfx_id = arg1;
-    part = arg2;
     fp = gobj->user_data;
     if (arg4 == 0) {
         goto block_2;
@@ -117,14 +113,15 @@ block_9:
     }
 block_11:
     spA8 = *arg5;
-    spA8.x += 2.0f * arg6->x * (HSD_Randf() - 0.5f);
-    spA8.y += 2.0f * arg6->y * (HSD_Randf() - 0.5f);
-    temp_f1 = HSD_Randf() - 0.5f;
-    temp_f2 = 2.0f * arg6->z;
-    spA8.z += temp_f2 * temp_f1;
-    temp_r9 = gobj->user_data;
-    efAsync_Spawn(gobj, &temp_r9->x60C, 2, gfx_id, fp->parts[part].joint,
-                  &spA8);
+    rand_val = HSD_Randf();
+    spA8.x += 2.0f * arg6->x * (rand_val - 0.5f);
+    rand_val = HSD_Randf();
+    spA8.y += 2.0f * arg6->y * (rand_val - 0.5f);
+    rand_val = HSD_Randf();
+    z_spread = 2.0f * arg6->z;
+    spA8.z += z_spread * (rand_val - 0.5f);
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 2, gfx_id,
+                  fp->parts[part].joint, &spA8);
     return;
 block_12:
     switch (gfx_id) {
@@ -172,16 +169,23 @@ block_12:
         goto block_70;
     }
 block_61:
-    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 0, gfx_id,
-                  fp->parts[part].joint);
+{
+    HSD_JObj* joint = fp->parts[part].joint;
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 0, gfx_id, joint);
+}
     return;
 block_62:
-    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 7, gfx_id,
-                  fp->parts[part].joint, arg5);
+{
+    HSD_JObj* joint = fp->parts[part].joint;
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 7, gfx_id, joint, arg5);
+}
     return;
 block_63:
-    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3, gfx_id,
-                  fp->parts[part].joint, &fp->ft_data->x0->x168);
+{
+    f32* attrs = &fp->ft_data->x0->x168;
+    HSD_JObj* joint = fp->parts[part].joint;
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3, gfx_id, joint, attrs);
+}
     return;
 block_64: {
     HSD_JObj* joint = fp->parts[part].joint;
@@ -198,9 +202,8 @@ block_65:
 block_66:
     scale_y = fp->x34_scale.y;
     sp94 = scale_y * fp->co_attrs.x144;
-    temp_r9_2 = gobj->user_data;
-    efAsync_Spawn(gobj, &temp_r9_2->x60C, 3, 0x438, fp->parts[part].joint,
-                  &sp94);
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3, 0x438,
+                  fp->parts[part].joint, &sp94);
     return;
 block_67:
     sp90 = 0.0f;
@@ -211,16 +214,20 @@ block_67:
         atan2f(-fp->coll_data.floor.normal.x, fp->coll_data.floor.normal.y);
     sp90 = floor_angle;
 block_69:
-    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3, gfx_id,
-                  fp->parts[part].joint, &sp90);
+{
+    HSD_JObj* joint = fp->parts[part].joint;
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3, gfx_id, joint, &sp90);
+}
     return;
 block_70:
     sp84 = *arg5;
-    sp84.x += 2.0f * arg6->x * (HSD_Randf() - 0.5f);
-    sp84.y += 2.0f * arg6->y * (HSD_Randf() - 0.5f);
-    random_or_angle = HSD_Randf() - 0.5f;
+    random_or_angle = HSD_Randf();
+    sp84.x += 2.0f * arg6->x * (random_or_angle - 0.5f);
+    random_or_angle = HSD_Randf();
+    sp84.y += 2.0f * arg6->y * (random_or_angle - 0.5f);
+    random_or_angle = HSD_Randf();
     z_range = 2.0f * arg6->z;
-    sp84.z += random_or_angle * z_range;
+    sp84.z += z_range * (random_or_angle - 0.5f);
     if (gfx_id >= 0x412) {
         goto block_98;
     }
@@ -363,8 +370,12 @@ block_119:
     }
     goto block_128;
 block_122:
-    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, gfx_id,
-                  fp->parts[part].joint, &sp84, &p_ftCommonData->x564);
+{
+    HSD_JObj* joint = fp->parts[part].joint;
+    ftCommonData* data = p_ftCommonData;
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, gfx_id, joint, &sp84,
+                  &data->x564);
+}
     return;
 block_123: {
     HSD_JObj* joint = fp->parts[part].joint;
@@ -398,8 +409,11 @@ block_129:
                   &sp84);
     return;
 block_130:
-    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, gfx_id,
-                  fp->parts[part].joint, &sp84, &fp->facing_dir);
+{
+    HSD_JObj* joint = fp->parts[part].joint;
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, gfx_id, joint, &sp84,
+                  &fp->facing_dir);
+}
     return;
 block_131:
     sp7C = 0.0f;
@@ -410,8 +424,11 @@ block_131:
         atan2f(-fp->coll_data.floor.normal.x, fp->coll_data.floor.normal.y);
     sp7C = random_or_angle;
 block_133:
-    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 6, gfx_id,
-                  fp->parts[part].joint, &sp84, &fp->facing_dir, &sp7C);
+{
+    HSD_JObj* joint = fp->parts[part].joint;
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 6, gfx_id, joint, &sp84,
+                  &fp->facing_dir, &sp7C);
+}
     return;
 block_134:
     OSReport("no effect from animlist %d\n", gfx_id);

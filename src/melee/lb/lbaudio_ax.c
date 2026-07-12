@@ -94,6 +94,7 @@ void fn_80023254(s32 arg0)
     int* list = lbl_80433B44;
     int* init;
     int* used;
+    int* local_base = local_arr;
     s8* type;
     int* priority;
     int count;
@@ -105,7 +106,7 @@ void fn_80023254(s32 arg0)
     PAD_STACK(8);
 
     init = lbl_80433B44;
-    used = local_arr;
+    used = local_base;
     base = lbl_803BB300;
     count = 0;
     for (i = 0; i < 7; i++, init += 8, used += 8) {
@@ -128,7 +129,7 @@ void fn_80023254(s32 arg0)
     }
 
     do {
-        used = local_arr;
+        used = local_base;
         type = (s8*) (base + 0x2D0);
         priority = (int*) (base + 0x11E4);
         index = 0;
@@ -179,53 +180,55 @@ s32 lbAudioAx_800233EC(s32 arg0)
 
     if (fn_80026E58(0x21) == 1) {
         slot = lbAudioAx_800233EC_inline(arg0, base);
-        do {
-            if (slot != 0xD) {
-                if (slot < 0xD) {
-                    if (slot < 0xC) {
-                        if (slot >= 6) {
-                        } else {
-                            break;
-                        }
-                    } else {
-                        break;
-                    }
-                } else if (slot < 0x20) {
-                    if (slot >= 0xF) {
-                    } else {
-                        break;
-                    }
-                } else {
-                    break;
+        switch (slot) {
+        case 6:
+        case 7:
+        case 8:
+        case 9:
+        case 10:
+        case 11:
+        case 13:
+        case 15:
+        case 16:
+        case 17:
+        case 18:
+        case 19:
+        case 20:
+        case 21:
+        case 22:
+        case 23:
+        case 24:
+        case 25:
+        case 26:
+        case 27:
+        case 28:
+        case 29:
+        case 30:
+        case 31: {
+            int* p = (int*) (base + 0x13A4);
+            int i;
+            for (i = 0; i < 0x4A; p += 2, i++) {
+                if (arg0 == *p) {
+                    return ((int (*)[2])(base + 0x13A4))[i][1];
                 }
             }
-            {
-                int* p = (int*) (base + 0x13A4);
-                int i;
-                for (i = 0; i < 0x4A; p += 2, i++) {
-                    if (arg0 == *p) {
-                        return ((int (*)[2])(base + 0x13A4))[i][1];
-                    }
-                }
-            }
-        } while (0);
+            break;
+        }
+        }
     } else {
         slot = lbAudioAx_800233EC_inline(arg0, base);
-        do {
-            if (slot == 0x21) {
-            } else {
-                break;
-            }
-            {
-                int* p = (int*) (base + 0x13A4);
-                int i;
-                for (i = 0; i < 0x4A; p += 2, i++) {
-                    if (arg0 == p[1]) {
-                        return ((int (*)[2])(base + 0x13A4))[i][0];
-                    }
+        switch (slot) {
+        case 0x21: {
+            int* p = (int*) (base + 0x13A4);
+            int i;
+            for (i = 0; i < 0x4A; p += 2, i++) {
+                if (arg0 == p[1]) {
+                    return ((int (*)[2])(base + 0x13A4))[i][0];
                 }
             }
-        } while (0);
+            break;
+        }
+        }
     }
 
     return arg0;
@@ -1734,12 +1737,17 @@ typedef struct SoundParams {
     int x28;
 } SoundParams;
 
+static inline int fn_80025FAC_inline(lbAudioAx_UserData* ud)
+{
+    return ud->x14;
+}
+
 void fn_80025FAC(HSD_GObj* gobj, void* userdata, void* params)
 {
-    SoundParams* sp = params;
     lbAudioAx_UserData* ud = userdata;
+    SoundParams* sp = params;
 
-    if (gobj != NULL && sp != NULL && ud != NULL) {
+    if (gobj != NULL && ud != NULL && sp != NULL) {
         ud->gobj = gobj;
         ud->entity = sp->gobj;
         ud->xC = sp->x4;
@@ -1825,8 +1833,8 @@ void fn_80025FAC(HSD_GObj* gobj, void* userdata, void* params)
                         lbAudioAx_800237A8(ud->x14, ud->x20, ud->x2C.pan);
                     return;
                 }
-                ud->voice_id =
-                    lbAudioAx_80023870(ud->x14, ud->x20, ud->x2C.pan, group);
+                ud->voice_id = lbAudioAx_80023870(
+                    fn_80025FAC_inline(ud), ud->x20, ud->x2C.pan, group);
             }
             break;
         case 9:
@@ -2167,7 +2175,9 @@ void fn_800269AC(void)
             {
                 int retry;
                 for (retry = 0; retry < 0x40; retry++) {
-                    if (HSD_SynthSFXCancelLoad(lbl_80433A64[i]) == 1) {
+                    int cancelled =
+                        HSD_SynthSFXCancelLoad(lbl_80433A64[i]) == 1;
+                    if (cancelled) {
                         break;
                     }
                     total = 0;
@@ -2227,12 +2237,10 @@ s32 fn_80026C04(s32 arg0)
         slot = 0;
         {
             s8(*arr_5d0)[4] = (s8(*)[4])(base + 0x2D0);
-            int* arr_194 = lbl_804338A4;
-            int* arr_274 = lbl_80433984;
 
-            for (; slot < 0x37; slot++, arr_5d0++, arr_194++, arr_274++) {
-                if (priority == (*arr_5d0)[1] && *arr_194 == 1 &&
-                    *arr_274 == -1)
+            for (; slot < 0x37; slot++) {
+                if (priority == arr_5d0[slot][1] &&
+                    lbl_804338A4[slot] == 1 && lbl_80433984[slot] == -1)
                 {
                     goto found;
                 }
@@ -2371,7 +2379,7 @@ void lbAudioAx_80027168(void)
     {
         s8(*arr5d0)[4] = (s8(*)[4])(base + 0x2D0);
         int* arr_b4 = lbl_804337C4;
-        for (i = count; i < 55; i++) {
+        for (i = count = 0; i < 55; i++) {
             if (arr5d0[i][1] != 5 && arr_b4[i] != -1) {
                 count++;
             }
@@ -2612,24 +2620,21 @@ void lbAudioAx_80027DBC(void)
     fn_800269AC();
 }
 
-static inline int lbAudioAx_OtherVoiceVolume(int voice, int carry)
-{
-    return voice == -1 ? carry : 0x7F;
-}
-
 static inline void lbAudioAx_80027DF8_inline(void)
 {
     if (lbl_804D640C == 0) {
         s32 i;
-        s32* t = lbl_80433710.x70;
-        s32* sl = lbl_80433710.x2C;
-        for (i = 0; i < 16; i++) {
-            if (t[i] > 0) {
-                (t[i])--;
+        s32* sl;
+        s32* t;
+        t = lbl_80433710.x70;
+        sl = lbl_80433710.x2C;
+        for (i = 0; i < 16; t++, sl++, i++) {
+            if (*t > 0) {
+                (*t)--;
             }
-            if (t[i] <= 0) {
-                sl[i] = 0x83D60;
-                t[i] = 0;
+            if (*t <= 0) {
+                *sl = 0x83D60;
+                *t = 0;
             }
         }
     }
@@ -2639,7 +2644,7 @@ void lbAudioAx_80027DF8(void)
 {
     s32 carry;
 
-    PAD_STACK(8);
+    PAD_STACK(16);
     if (lbl_804D640C == 0) {
         lbl_804D6430--;
         if (lbl_804D6430 <= 0) {
@@ -2679,7 +2684,7 @@ void lbAudioAx_80027DF8(void)
             carry = 0;
             lbl_804D6428 = carry;
             lbl_804D38F0 = -1;
-            carry = lbAudioAx_OtherVoiceVolume(lbl_804D38F4, carry);
+            carry = lbl_804D38F4 == -1 ? carry : 0x7F;
             lbl_804D642C = carry;
         }
     }
@@ -2710,7 +2715,7 @@ void lbAudioAx_80027DF8(void)
             carry = 0;
             lbl_804D642C = carry;
             lbl_804D38F4 = -1;
-            carry = lbAudioAx_OtherVoiceVolume(lbl_804D38F0, carry);
+            carry = lbl_804D38F0 == -1 ? carry : 0x7F;
             lbl_804D6428 = carry;
         }
     }
@@ -2875,16 +2880,16 @@ s32 lbAudioAx_80028690(void)
     fn_80024654(1);
 
     if (lbLang_IsSavedLanguageUS()) {
-        lbAudioAx_SetAudioPath(lbl_803BB340, true);
+        strcpy(lbl_803BB340, &lbl_803BB300[0x1790]);
         lbl_804D38D0 = 10;
         var_r29 = 1;
     } else {
-        lbAudioAx_SetAudioPath(lbl_803BB340, false);
+        strcpy(lbl_803BB340, &lbl_803BB300[0x179C]);
         lbl_804D38D0 = 7;
         var_r29 = 0;
     }
 
-    lbAudioAx_SetAudioPath(lbl_803BB380, false);
+    strcpy(lbl_803BB380, &lbl_803BB300[0x179C]);
     lbl_804D38D4 = 7;
 
     if (lbl_804D3878 == -1) {

@@ -1267,10 +1267,10 @@ void grShrineRoute_8020AF38(HSD_GObj* gobj, s32 arg1)
 {
     Ground* gp = GET_GROUND(gobj);
     HSD_GObj** symbolp;
-    HSD_GObj* pgobj;
+    s32 ix = arg1 - 0xBD;
     HSD_JObj* jobj;
     f32 scale;
-    s32 ix = arg1 - 0xBD;
+    HSD_GObj* pgobj;
     PAD_STACK(4);
 
     pgobj = Ground_801C57A4();

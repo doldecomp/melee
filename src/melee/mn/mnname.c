@@ -273,10 +273,8 @@ void CreateNameAtIndex(s32 slot)
 s32 mnName_SortNames(HSD_GObj* arg0)
 {
     s32 result;
-    u8* pj;
     u8 idx2;
     char* name2;
-    u8* pi;
     s32 i;
     u8 idx1;
 
@@ -293,16 +291,14 @@ s32 mnName_SortNames(HSD_GObj* arg0)
 
     {
         i = 0;
-        pi = mnName_NameDisplayOrder;
         do {
             s32 j;
             j = i + 1;
-            pj = &mnName_NameDisplayOrder[i] + 1;
 
             while (j < 0x78) {
                 char* name1;
-                idx1 = *pi;
-                idx2 = *pj;
+                idx1 = mnName_NameDisplayOrder[i];
+                idx2 = mnName_NameDisplayOrder[j];
                 name1 = GetPersistentNameData((s32) idx1)->namedata;
                 name2 = GetPersistentNameData((s32) idx2)->namedata;
                 {
@@ -372,15 +368,13 @@ s32 mnName_SortNames(HSD_GObj* arg0)
                     }
                 }
                 if (result == 1) {
-                    u8 tmp = *pi;
-                    *pi = *pj;
-                    *pj = tmp;
+                    u8 tmp = mnName_NameDisplayOrder[i];
+                    mnName_NameDisplayOrder[i] = mnName_NameDisplayOrder[j];
+                    mnName_NameDisplayOrder[j] = tmp;
                 }
-                pj++;
                 j++;
             }
             i++;
-            pi++;
         } while (i < 0x78);
     }
     return result;
@@ -1195,7 +1189,11 @@ void mnName_80239A24(HSD_GObj* gobj)
             HSD_JObjGetTranslationY((HSD_JObj*) data->x38) - row_height;
         mnName_80239F5C(jobj, col_width * (f32) ((u8) i / 6));
         mnName_80239EBC(jobj, row_height * (f32) ((u8) i % 6));
-        HSD_JObjAddChild((HSD_JObj*) data->gobj.user_data_remove_func, jobj);
+        {
+            HSD_JObj* child = jobj;
+            HSD_JObjAddChild((HSD_JObj*) data->gobj.user_data_remove_func,
+                             child);
+        }
         i++;
     } while ((s32) i < 0x18);
 
@@ -1643,11 +1641,25 @@ extern char** AutoNamesList;
 extern char** NotAllowedNamesList;
 extern HSD_Text* mnName_804D6BFC;
 
+static inline void mnName_InitNameDisplayOrder(u8** ptr)
+{
+    u32 i;
+
+    mn_804A04F0.hovered_selection = 0x18;
+    mnName_804D6BFC = NULL;
+    for (i = 0; i < 0x78; i++) {
+        **ptr = (u8) i;
+        (*ptr)++;
+    }
+
+    mn_804A04F0.x10 = 0;
+    HSD_GObj_80390CD4(mnName_8023A59C(1U));
+}
+
 s32 mnName_8023AC40(void)
 {
     HSD_Archive* archive = mn_804D6BB8;
     u8* ptr = mnName_NameDisplayOrder;
-    u32 i;
     HSD_GObjProc* proc;
 
     lbArchive_LoadSections(
@@ -1692,15 +1704,7 @@ s32 mnName_8023AC40(void)
 
     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
     mn_804A04F0.cur_menu = 0x12;
-    mn_804A04F0.hovered_selection = 0x18;
-    mnName_804D6BFC = NULL;
-    for (i = 0; i < 0x78; i++) {
-        *ptr = (u8) i;
-        ptr++;
-    }
-
-    mn_804A04F0.x10 = 0;
-    HSD_GObj_80390CD4(mnName_8023A59C(1U));
+    mnName_InitNameDisplayOrder(&ptr);
     proc = HSD_GObj_SetupProc(GObj_Create(0U, 1U, 0x80U), fn_80238540, 0U);
     proc->flags_3 = (u16) HSD_GObj_804D783C;
     return (s32) proc;

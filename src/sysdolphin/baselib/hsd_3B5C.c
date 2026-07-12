@@ -367,40 +367,22 @@ static void fn_803B61B4(u8* arg0)
 {
     f32 scratch_f10;
     f32 scratch_f10_2;
-    f32 scratch_f10_3;
     f32 scratch_f11;
-    f32 scratch_f11_2;
     f32 scratch_f12;
     f32 scratch_f24_2;
-    f32 scratch_f12_3;
     f32 scratch_f13;
     f32 scratch_f13_2;
     f32 scratch_f13_3;
-    f32 scratch_f13_4;
-    f32 scratch_f13_5;
-    f32 scratch_f26;
-    f32 scratch_f26_2;
-    f32 scratch_f27;
-    f32 scratch_f27_2;
-    f32 scratch_f29;
-    f32 scratch_f30;
     f32 scratch_f31;
     f32 scratch_f25;
     f32 scratch_f25_2;
-    f32 scratch_f25_3;
-    f32 scratch_f25_4;
     f32 scratch_f24;
     f32 scratch_f12_2;
-    f32 scratch_f24_3;
-    f32 scratch_f24_4;
     f32 scratch_f23;
     f32 scratch_f23_2;
-    f32 scratch_f23_3;
     f32 scratch_f22;
     f32 scratch_f22_2;
     f32 scratch_f9;
-    f32 scratch_f9_2;
-    f32 scratch_f9_3;
     s32 scratch_r0;
     s32 scratch_r0_2;
     s32 scratch_r0_3;
@@ -477,45 +459,45 @@ static void fn_803B61B4(u8* arg0)
         scratch_r5_5 = work_r4_2[40];
         scratch_r11_2 = work_r4_2[0];
         scratch_r10_2 = work_r4_2[32];
-        scratch_f26 = (f32) ((0.980785f * (f64) scratch_r6_2) -
+        scratch_f22 = (f32) ((0.980785f * (f64) scratch_r6_2) -
                              (0.19509f * (f64) scratch_r5_4));
-        scratch_f9_2 = (f32) ((0.83147f * (f64) scratch_r5_5) -
-                              (0.55557f * (f64) scratch_r0_3));
-        scratch_f27 = (f32) ((0.55557f * (f64) scratch_r5_5) +
+        scratch_f31 = (f32) ((0.83147f * (f64) scratch_r5_5) -
+                             (0.55557f * (f64) scratch_r0_3));
+        scratch_f23 = (f32) ((0.55557f * (f64) scratch_r5_5) +
                              (0.83147f * (f64) scratch_r0_3));
-        scratch_f30 = (f32) ((0.19509f * (f64) scratch_r6_2) +
+        scratch_f24 = (f32) ((0.19509f * (f64) scratch_r6_2) +
                              (0.980785f * (f64) scratch_r5_4));
-        scratch_f10_3 =
+        scratch_f10 =
             (f32) (0.707107f * (f64) (scratch_r11_2 + scratch_r10_2));
-        scratch_f25_3 =
+        scratch_f11 =
             (f32) (0.707107f * (f64) (scratch_r11_2 - scratch_r10_2));
         scratch_r0_4 = work_r4_2[16];
-        scratch_f13_4 = scratch_f26 + scratch_f9_2;
+        scratch_f12 = scratch_f22 + scratch_f31;
         scratch_r5_6 = work_r4_2[48];
-        scratch_f29 = -scratch_f27 + scratch_f30;
-        scratch_f11_2 = scratch_f27 + scratch_f30;
-        scratch_f12_3 =
-            (f32) (0.707107f * (f64) (-scratch_f13_4 + scratch_f29));
-        scratch_f13_5 = (f32) ((-0.92388f * (f64) scratch_r5_6) +
-                               (0.382683f * (f64) scratch_r0_4));
-        scratch_f26_2 = (f32) ((0.382683f * (f64) scratch_r5_6) +
+        scratch_f13 = -scratch_f23 + scratch_f24;
+        scratch_f13_2 = scratch_f23 + scratch_f24;
+        scratch_f9 =
+            (f32) (0.707107f * (f64) (-scratch_f12 + scratch_f13));
+        scratch_f25 = (f32) ((-0.92388f * (f64) scratch_r5_6) +
+                             (0.382683f * (f64) scratch_r0_4));
+        scratch_f12_2 = (f32) ((0.382683f * (f64) scratch_r5_6) +
                                (0.92388f * (f64) scratch_r0_4));
-        scratch_f27_2 = scratch_f10_3 + scratch_f26_2;
-        scratch_f23_3 =
-            (f32) (0.707107f * (f64) (scratch_f13_4 + scratch_f29));
-        scratch_f24_3 = scratch_f25_3 + scratch_f13_5;
-        scratch_f25_4 = scratch_f25_3 - scratch_f13_5;
-        work_r4_2[0] = (s32) (scratch_f27_2 + scratch_f11_2);
-        work_r4_2[8] = (s32) (scratch_f24_3 + scratch_f12_3);
-        scratch_f9_3 = -scratch_f26 + scratch_f9_2;
-        scratch_f24_4 = scratch_f10_3;
-        scratch_f24_4 -= scratch_f26_2;
-        work_r4_2[16] = (s32) (scratch_f25_4 + scratch_f23_3);
-        work_r4_2[24] = (s32) (scratch_f24_4 + scratch_f9_3);
-        work_r4_2[32] = (s32) (scratch_f24_4 - scratch_f9_3);
-        work_r4_2[40] = (s32) (scratch_f25_4 - scratch_f23_3);
-        work_r4_2[48] = (s32) (scratch_f24_3 - scratch_f12_3);
-        work_r4_2[56] = (s32) (scratch_f27_2 - scratch_f11_2);
+        scratch_f23_2 = scratch_f10 + scratch_f12_2;
+        scratch_f22_2 =
+            (f32) (0.707107f * (f64) (scratch_f12 + scratch_f13));
+        scratch_f24_2 = scratch_f11 + scratch_f25;
+        scratch_f25_2 = scratch_f11 - scratch_f25;
+        work_r4_2[0] = (s32) (scratch_f23_2 + scratch_f13_2);
+        work_r4_2[8] = (s32) (scratch_f24_2 + scratch_f9);
+        scratch_f13_3 = -scratch_f22 + scratch_f31;
+        scratch_f10_2 = scratch_f10;
+        scratch_f10_2 -= scratch_f12_2;
+        work_r4_2[16] = (s32) (scratch_f25_2 + scratch_f22_2);
+        work_r4_2[24] = (s32) (scratch_f10_2 + scratch_f13_3);
+        work_r4_2[32] = (s32) (scratch_f10_2 - scratch_f13_3);
+        work_r4_2[40] = (s32) (scratch_f25_2 - scratch_f22_2);
+        work_r4_2[48] = (s32) (scratch_f24_2 - scratch_f9);
+        work_r4_2[56] = (s32) (scratch_f23_2 - scratch_f13_2);
         work_r4_2 += 1;
     }
     work_r3 = (s32*) arg0;
@@ -545,12 +527,6 @@ static void fn_803B61B4(u8* arg0)
 static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
                         s32 unused_arg4)
 {
-    f32 scratch_f0;
-    f32 scratch_f0_2;
-    f32 scratch_f0_3;
-    s32 scratch_r18;
-    s32 scratch_r19;
-    s32 scratch_r20;
     s32 scratch_r6;
     u8* base;
     s32 work_ctr;
@@ -568,13 +544,9 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
     s32 work_r7;
     s32 work_r8_2;
     u16* work_r9_2;
-    u8 work_r16;
-    u8 work_r16_2;
-    u8 work_r17;
     s32* work_r27;
     u8* work_r8;
     u8* work_r9;
-    u8* scratch_r16;
 
     PAD_STACK(0x30);
     base = hsd_804D2E70;
@@ -635,6 +607,17 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
                     work_r8_2 = 0;
                     work_r27 = (s32*) (&base[work_r31] + 0x118);
                     for (work_ctr_2 = 4; work_ctr_2 != 0; work_ctr_2--) {
+                        f32 scratch_f0;
+                        f32 scratch_f0_2;
+                        f32 scratch_f0_3;
+                        s32 scratch_r18;
+                        s32 scratch_r19;
+                        s32 scratch_r20;
+                        u8 work_r16;
+                        u8 work_r16_2;
+                        u8 work_r17;
+                        u8* scratch_r16;
+
                         scratch_r19 = *work_r27;
                         scratch_r16 =
                             base + (((work_r5 >> 1) +
@@ -755,9 +738,8 @@ s32 hsd_803B6BE4(char* arg0, s32 arg1, void* arg2)
     hsd_804D79B8 = (u8*) arg0;
     hsd_804D79BC = (u8*) arg0;
     base = base_s32->data;
-    base_s32->prev_dc[2] = 0;
-    base_s32->prev_dc[1] = 0;
-    base_s32->prev_dc[0] = 0;
+    base_s32->prev_dc[0] = base_s32->prev_dc[1] =
+        base_s32->prev_dc[2] = 0;
     hsd_804D79C4 = 0;
     if (__setjmp((__jmp_buf*) base_s32) != 0) {
         return 0;

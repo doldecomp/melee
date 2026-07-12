@@ -123,7 +123,7 @@ void HSD_SynthSFXSampleLoadCallback(int result, int length, void* addr,
                     hsd_SynthSFXBank[bankID] * 2;
                 offset += 0x40;
             }
-            nn = (struct SfxLoadStreamNode*) HSD_Synth_804D7730;
+            nn = HSD_Synth_804D7730;
             id = base + i;
             nn->x4 = id;
             bucket = &HSD_Synth_804C29E0[id & 0x1F];
@@ -967,19 +967,7 @@ s32 HSD_Synth_8038A000(void)
                 } else if ((flags & 6) == 2) {
                     node->flags = flags | 6;
                     for (i = 0; i < node->voice_count; i++) {
-                        f32 ratio;
-                        u8 flags2 = node->flags;
-                        if (flags2 & 4) {
-                            ratio = 0.0f;
-                        } else {
-                            ratio = node->x18[1] * (node->x14 * node->x18[0]);
-                        }
-                        if (!(flags2 & 8)) {
-                            int j;
-                            for (j = 0; j < node->voice_count; j++) {
-                                AXSetVoiceSrcRatio(node->voice[j], ratio);
-                            }
-                        }
+                        HSD_SynthSFXUpdatePitch(node);
                     }
                     if (driverPauseCallback != NULL && node->x27 == 1) {
                         driverPauseCallback(node->x0);

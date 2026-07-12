@@ -28,6 +28,22 @@
 #include "sysdolphin/baselib/debug.h"
 #include "ty/toy.h"
 
+static void sdata2_order(void)
+{
+    (void) S32_TO_F32;
+    (void) 1.0f;
+    (void) 0.0f;
+    (void) -9.5f;
+    (void) 9.10000038f;
+    (void) 17.0f;
+    (void) 364.683319f;
+    (void) 38.3877182f;
+    (void) 0.052099999f;
+    (void) 250.0f;
+    (void) 5.0f;
+    (void) 0.0500000007f;
+}
+
 inline f32 mnDataDel_8024E940_inline(HSD_JObj* arg0)
 {
     return mn_8022F298(arg0);
@@ -569,13 +585,30 @@ static inline void fn_8024F840_inline(u64 buttons,
     }
 }
 
+static inline void
+mnDataDel_UpdateDescription(struct MnDataDelGObjUserData** user_data)
+{
+    HSD_Text* text;
+    u16 sis_id;
+
+    *user_data = mnDataDel_804D6C68->user_data;
+    if ((*user_data)->xC != NULL) {
+        HSD_SisLib_803A5CC4((*user_data)->xC);
+    }
+    sis_id = mnDataDel_803EF8C8[(*user_data)->x0];
+    text = HSD_SisLib_803A5ACC(0, 0, -9.5f, 9.1f, 17.0f, 364.68332f,
+                               38.38772f);
+    (*user_data)->xC = text;
+    text->font_size.x = 0.0521f;
+    text->font_size.y = 0.0521f;
+    HSD_SisLib_803A6368(text, (s32) sis_id);
+}
+
 void fn_8024F840(HSD_GObj* gobj)
 {
     s32 zero;
     HSD_GObjProc* proc;
-    HSD_Text* text;
     HSD_JObj* joint;
-    u16 sis_id;
     u64 buttons;
     u8 cursor;
     struct MnDataDelGObjUserData* user_data;
@@ -626,17 +659,7 @@ void fn_8024F840(HSD_GObj* gobj)
             (struct mn_80231634_t*)
                 temp_user_data->x10[mnDataDel_803EF8AC[user_data->x0]]);
         mnDataDel_8024EBC8(joint, user_data->x0, 1U, 0U);
-        user_data = mnDataDel_804D6C68->user_data;
-        if (user_data->xC != NULL) {
-            HSD_SisLib_803A5CC4(user_data->xC);
-        }
-        sis_id = mnDataDel_803EF8C8[user_data->x0];
-        text = HSD_SisLib_803A5ACC(0, 0, -9.5f, 9.1f, 17.0f, 364.68332f,
-                                   38.38772f);
-        user_data->xC = text;
-        text->font_size.x = 0.0521f;
-        text->font_size.y = 0.0521f;
-        HSD_SisLib_803A6368(text, (s32) sis_id);
+        mnDataDel_UpdateDescription(&user_data);
         return;
     }
     fn_8024F840_inline(buttons, &user_data);

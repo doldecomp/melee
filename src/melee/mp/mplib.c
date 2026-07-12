@@ -891,7 +891,11 @@ void mpLibLoad(MapCollData* coll_data)
     CollJoint* joint_prev; // r27
     CollJoint* joint;      // r26
     int start;
-    int count;
+    int floor_count;
+    int ceiling_count;
+    int right_wall_count;
+    int left_wall_count;
+    int dynamic_count;
     int i;
 
     joint_prev = NULL;
@@ -935,45 +939,45 @@ void mpLibLoad(MapCollData* coll_data)
     jointListEnd = joint;
     mpPruneEmptyLines(coll_data);
 
-    count = coll_data->floor_count;
+    floor_count = coll_data->floor_count;
     start = coll_data->floor_start;
-    for (; count > 0; count--) {
+    for (; floor_count > 0; floor_count--) {
         groundCollLine[start].flags =
             coll_data->lines[start].hi_flags | LINE_FLAG_ENABLED;
         groundCollLine[start].x0 = &coll_data->lines[start];
         start++;
     }
 
-    count = coll_data->ceiling_count;
+    ceiling_count = coll_data->ceiling_count;
     start = coll_data->ceiling_start;
-    while (count-- > 0) {
+    for (; ceiling_count > 0; ceiling_count--) {
         groundCollLine[start].flags =
             coll_data->lines[start].hi_flags | LINE_FLAG_ENABLED;
         groundCollLine[start].x0 = &coll_data->lines[start];
         start++;
     }
 
-    count = coll_data->right_wall_count;
+    right_wall_count = coll_data->right_wall_count;
     start = coll_data->right_wall_start;
-    while (count-- > 0) {
+    for (; right_wall_count > 0; right_wall_count--) {
         groundCollLine[start].flags =
             coll_data->lines[start].hi_flags | LINE_FLAG_ENABLED;
         groundCollLine[start].x0 = &coll_data->lines[start];
         start++;
     }
 
-    count = coll_data->left_wall_count;
+    left_wall_count = coll_data->left_wall_count;
     start = coll_data->left_wall_start;
-    while (count-- > 0) {
+    for (; left_wall_count > 0; left_wall_count--) {
         groundCollLine[start].flags =
             coll_data->lines[start].hi_flags | LINE_FLAG_ENABLED;
         groundCollLine[start].x0 = &coll_data->lines[start];
         start++;
     }
 
-    count = coll_data->dynamic_count;
+    dynamic_count = coll_data->dynamic_count;
     start = coll_data->dynamic_start;
-    while (count-- > 0) {
+    for (; dynamic_count > 0; dynamic_count--) {
         groundCollLine[start].flags =
             coll_data->lines[start].hi_flags | LINE_FLAG_ENABLED;
         groundCollLine[start].x0 = &coll_data->lines[start];
@@ -4192,8 +4196,8 @@ void mpFloorGetRight(int line_id, Vec3* pos_out)
 
     {
         CollVtx* vtx =
-            &groundCollVtx[((CollLine*) (line_offset + (int) groundCollLine))
-                               ->x0->v1_idx];
+            &groundCollVtx[groundCollLine[line_offset / sizeof(CollLine)]
+                               .x0->v1_idx];
         pos_out->x = vtx->pos.x;
         pos_out->y = vtx->pos.y;
         pos_out->z = 0.0F;
@@ -4205,15 +4209,17 @@ void mpFloorGetLeft(int line_id, Vec3* pos_out)
     u32 kind;
     int new_id;
     int line_offset;
-    PAD_STACK(8);
 
     LINEID_CHECK(4474, line_id);
 
     new_id = line_id;
-    kind = groundCollLine[line_id].flags & LINE_FLAG_KIND;
+    kind = mpLineGetKindInline(line_id);
     while (true) {
+        MapLine* line;
         line_offset = new_id * sizeof(CollLine);
-        new_id = mpLineGetPrev(new_id);
+        line = ((CollLine*) (line_offset + (int) groundCollLine))->x0;
+        new_id = line->prev_id1;
+        new_id = mpLineGetPrevCheckInline(line, new_id);
         if (new_id == -1 ||
             kind != (groundCollLine[new_id].flags & LINE_FLAG_KIND))
         {
@@ -4223,8 +4229,8 @@ void mpFloorGetLeft(int line_id, Vec3* pos_out)
 
     {
         CollVtx* vtx =
-            &groundCollVtx[groundCollLine[line_offset / sizeof(CollLine)]
-                               .x0->v0_idx];
+            &groundCollVtx[((CollLine*) (line_offset + (int) groundCollLine))
+                               ->x0->v0_idx];
         pos_out->x = vtx->pos.x;
         pos_out->y = vtx->pos.y;
         pos_out->z = 0.0F;
@@ -4376,22 +4382,21 @@ void mpRightWallGetTop(int line_id, Vec3* pos_out)
 
 void mpRightWallGetBottom(int line_id, Vec3* pos_out)
 {
-    u32 kind;
-    int new_id;
     int line_offset;
+    int new_id;
+    u32 kind;
 
     LINEID_CHECK(4528, line_id);
 
+    if (line_id != -1) {
+    }
     new_id = line_id;
     kind = mpLineGetKindInline(line_id);
     do {
-        MapLine* line;
         line_offset = new_id * sizeof(CollLine);
-        line = groundCollLine[new_id].x0;
-        new_id = line->next_id1;
-        new_id = mpLineGetNextCheckInline(line, new_id);
+        new_id = mpLineGetNext(new_id);
     } while (new_id != -1 &&
-             kind == (groundCollLine[new_id].flags & LINE_FLAG_KIND));
+             !(kind != (groundCollLine[new_id].flags & LINE_FLAG_KIND)));
 
     {
         CollVtx* vtx =
@@ -5643,8 +5648,8 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
 
         pair = (struct pair*) j0_r9->inner + i;
         count = pair->count;
-        lines = line_base;
-        lines += (idx = pair->start);
+        idx = pair->start;
+        lines = &line_base[idx];
         for (j = 0; j < count; j++, idx++) {
             temp = lines[j].x0->prev_id1;
             if (temp != -1) {
@@ -5664,24 +5669,23 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
 
         pair = (struct pair*) j1_r10->inner + i;
         count = pair->count;
-        lines = line_base;
-        lines += (idx = pair->start);
+        idx = pair->start;
+        lines = &line_base[idx];
         for (j = 0; j < count; j++, idx++) {
-            temp = lines->x0->prev_id1;
+            temp = lines[j].x0->prev_id1;
             if (temp != -1) {
                 temp = line_base[temp].x0->next_id1;
                 if (temp != -1 && idx != temp) {
-                    lines->x0->prev_id1 = -1;
+                    lines[j].x0->prev_id1 = -1;
                 }
             }
-            temp = lines->x0->next_id1;
+            temp = lines[j].x0->next_id1;
             if (temp != -1) {
                 temp = line_base[temp].x0->prev_id1;
                 if (temp != -1 && idx != temp) {
-                    lines->x0->next_id1 = -1;
+                    lines[j].x0->next_id1 = -1;
                 }
             }
-            lines++;
         }
     }
 
@@ -6405,10 +6409,11 @@ void mpLib_80059554(void)
     CollLine* line_r4;
     CollVtx* v0_r6;
     CollVtx* v1_r4;
-    s16 count_r30;
     int total_r29;
+    int count_r30;
     MapCollData* coll_data_r31;
     int i;
+    UNUSED u8 pad[8];
     GXColor spB4;
     GXColor spB0;
     GXColor spAC;
@@ -6577,13 +6582,13 @@ void mpLib_80059554(void)
     }
 
     count_r30 = coll_data_r31->dynamic_count;
-    line_r4 = &groundCollLine[coll_data_r31->dynamic_start];
     total_r29 = 0;
     spB4 = mpLib_DynamicFloorColor;
     spB0 = mpLib_DynamicCeilingColor;
     spAC = mpLib_DynamicRightWallColor;
     spA8 = mpLib_DynamicLeftWallColor;
 
+    line_r4 = &groundCollLine[coll_data_r31->dynamic_start];
     for (i = 0; i < count_r30; i++) {
         if (line_r4->flags & LINE_FLAG_ENABLED &&
             line_r4->flags & CollLine_Floor &&
@@ -6748,10 +6753,17 @@ static const GXColor mpLib_804D8134 = { 0xFF, 0x40, 0x40, 0xFF };
 static const GXColor mpLib_804D8138 = { 0xFF, 0x40, 0xC0, 0xFF };
 static const GXColor mpLib_804D813C = { 0xFF, 0xFF, 0xFF, 0xFF };
 
+static inline void mpLib_SequenceMatchingLines(int arg0, int arg1, int arg2,
+                                               int arg3, GXColor unused0,
+                                               GXColor unused1, GXColor unused2,
+                                               GXColor unused3)
+{
+}
+
 void mpLib_80059E60(void)
 {
     Mtx sp104;
-    PAD_STACK(0x3C);
+    PAD_STACK(0x2C);
 
     HSD_LObjSetupInit(HSD_CObjGetCurrent());
     GXSetCullMode(GX_CULL_NONE);
@@ -6778,15 +6790,19 @@ void mpLib_80059E60(void)
         mpLib_DrawMatchingLines(mp_Terrain_Basic, 0xFF, mpLib_804D8100);
     } else if (Camera_80030B7C()) {
         // platform/ledge draw
-        mpLib_DrawMatchingLines(LINE_FLAG_LEDGE, LINE_FLAG_LEDGE,
-                                mpLib_804D80F0);
-        mpLib_DrawMatchingLines(LINE_FLAG_PLATFORM, LINE_FLAG_PLATFORM,
-                                mpLib_804D80F4);
-        mpLib_DrawMatchingLines(LINE_FLAG_LEDGE | LINE_FLAG_PLATFORM,
-                                LINE_FLAG_LEDGE | LINE_FLAG_PLATFORM,
-                                mpLib_804D80F8);
-        mpLib_DrawMatchingLines(0, LINE_FLAG_LEDGE | LINE_FLAG_PLATFORM,
-                                mpLib_804D80FC);
+        mpLib_SequenceMatchingLines(
+            mpLib_DrawMatchingLines(0,
+                                    LINE_FLAG_LEDGE | LINE_FLAG_PLATFORM,
+                                    mpLib_804D80FC),
+            mpLib_DrawMatchingLines(LINE_FLAG_LEDGE | LINE_FLAG_PLATFORM,
+                                    LINE_FLAG_LEDGE | LINE_FLAG_PLATFORM,
+                                    mpLib_804D80F8),
+            mpLib_DrawMatchingLines(LINE_FLAG_PLATFORM, LINE_FLAG_PLATFORM,
+                                    mpLib_804D80F4),
+            mpLib_DrawMatchingLines(LINE_FLAG_LEDGE, LINE_FLAG_LEDGE,
+                                    mpLib_804D80F0),
+            mpLib_804D80F0, mpLib_804D80F4, mpLib_804D80F8,
+            mpLib_804D80FC);
     } else {
         mpLib_80059554();
     }

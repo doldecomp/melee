@@ -222,12 +222,13 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
             dirx = -list->x0C * fp->x34_scale.y;
             diry = -list->x08 * fp->x34_scale.y;
         }
+        dirx *= halfRange;
+        diry *= halfRange;
         scale = fp->x34_scale.y;
         (void) scale;
         if (list->x14 * scale * halfRange > relPredY &&
             list->x10 * scale * halfRange < relPredY + x568 &&
-            dirx * halfRange < relx + rangeF &&
-            diry * halfRange > relx - rangeB)
+            dirx < relx + rangeF && diry > relx - rangeB)
         {
             if (cpu->xC8 != 0) {
                 for (j = 0; j < cpu->xC8; j++) {
@@ -293,28 +294,27 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
     f32 acc;
     f32 t;
     f32 fpPredY;
-    f32 relx;
     f32 relPredY;
     f32 v;
     f32 sq;
-    f32 scale;
     f32 diry;
-    f32 rangeF;
-    f32 rangeB;
-    f32 halfRange;
-    f32 fpTermNeg;
-    f32 tgtTermNeg;
-    f32 fpY;
-    f32 fpVy;
-    f32 tgtVx;
-    f32 tgtY;
-    f32 tgtVy;
-    f32 tgtGrav;
     f32 fpX;
+    f32 fpY;
     f32 fpVx;
-    f32 x568;
+    f32 fpVy;
+    f32 fpTermNeg;
     f32 fpGrav;
     f32 tgtX;
+    f32 tgtY;
+    f32 tgtVx;
+    f32 tgtVy;
+    f32 tgtTermNeg;
+    f32 tgtGrav;
+    f32 rangeF;
+    f32 rangeB;
+    f32 x568;
+    f32 relx;
+    f32 halfRange;
 
     PAD_STACK(0x10);
 
@@ -348,6 +348,7 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
     x568 = target->x1A88.x568;
     count = 0;
     while (list->cmd) {
+        f32 scale;
         f32 dirx;
         found = false;
         if (list->x20 > cpu->level) {
@@ -393,7 +394,7 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
         } else {
             fpPredY = fpVy * t + fpY;
         }
-        if ((u32) target->ground_or_air == GA_Air) {
+        if (target->ground_or_air == GA_Air) {
             if (tgtGrav < 0.00001f && tgtGrav > -0.00001f) {
                 nearzero = true;
             } else {
@@ -426,7 +427,7 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
             diry = list->x0C * fp->x34_scale.y + reach;
         } else {
             dirx = -list->x0C * fp->x34_scale.y - reach;
-            diry = -list->x08 * fp->x34_scale.y;
+            diry = fp->x34_scale.y * -list->x08;
         }
         scale = fp->x34_scale.y;
         (void) scale;
@@ -503,19 +504,19 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
     f32 v;
     f32 sq;
     f32 diry;
-    f32 sizeHalf;
     f32 acc;
-    f32 fpVy;
-    f32 fpY;
     f32 fpX;
-    f32 fpGrav;
+    f32 fpY;
     f32 fpVx;
-    f32 x50TermNeg;
+    f32 fpVy;
+    f32 fpGrav;
+    f32 x50X;
     f32 x50Y;
     f32 x50Vy;
     f32 x50Vx;
-    f32 x50X;
+    f32 x50TermNeg;
     f32 x50Grav;
+    f32 sizeHalf;
     f32 yBound;
 
     cpu = &fp->x1A88;
@@ -1868,14 +1869,13 @@ bool ftCo_800B8A9C(Fighter* fp)
         cpu->xA4 = 0;
         return false;
     }
-    target_pp = &fp->x1A88.x44;
     {
-        Fighter* target2 = fp->x1A88.x44;
+        Fighter* target2 = *(target_pp = &fp->x1A88.x44);
         if (target2->motion_id >= ftCo_MS_Catch &&
             target2->motion_id <= ftCo_MS_EscapeAir)
         {
-            u8* xec = &fp->x1A88.xEC;
-            if (fp->x1A88.xEC < 8U) {
+            u8* xec;
+            if (*(xec = &fp->x1A88.xEC) < 8U) {
                 cpu->xCC_array[cpu->xEC] = 0x28;
                 cpu->xEC++;
             }
@@ -1888,8 +1888,8 @@ bool ftCo_800B8A9C(Fighter* fp)
             }
         } else if (target2->x34_scale.y > fp->x34_scale.y) {
             struct Fighter_x1A88_t* tmp = &fp->x1A88;
-            u8* xec = &fp->x1A88.xEC;
-            if (fp->x1A88.xEC < 8U) {
+            u8* xec;
+            if (*(xec = &fp->x1A88.xEC) < 8U) {
                 tmp->xCC_array[tmp->xEC] = 0x28;
                 tmp->xEC++;
             }
@@ -1923,8 +1923,8 @@ bool ftCo_800B8A9C(Fighter* fp)
     }
     if (ftCo_800A3134(target) || ftCo_800A3200(target)) {
         struct Fighter_x1A88_t* tmp = &fp->x1A88;
-        u8* xc8 = &fp->x1A88.xC8;
-        if (fp->x1A88.xC8 < 8U) {
+        u8* xc8;
+        if (*(xc8 = &fp->x1A88.xC8) < 8U) {
             tmp->xA8_array[tmp->xC8] = 0xa;
             tmp->xC8++;
         }

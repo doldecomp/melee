@@ -1501,7 +1501,10 @@ static inline void grCastle_UpdateSatellite(Ground* gp)
                     HSD_GObj* entity;
 
                     PAD_STACK(52);
-                    idx = HSD_Randi(11);
+                    {
+                        s32 random_idx = HSD_Randi(11);
+                        idx = random_idx;
+                    }
                     entity = HSD_GObj_Entities->x14;
 
                     while (entity != NULL) {

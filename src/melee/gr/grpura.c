@@ -394,8 +394,8 @@ void grPura_802125F0(HSD_GObj* arg0)
     }
 }
 
-static inline void grPura_80212CD4_inline(Ground* gp, HSD_JObj* jobj,
-                                         HSD_JObj** node)
+static inline HSD_JObj* grPura_80212CD4_inline(Ground* gp,
+                                              HSD_JObj* jobj)
 {
     u32 i;
 
@@ -404,9 +404,9 @@ static inline void grPura_80212CD4_inline(Ground* gp, HSD_JObj* jobj,
         gp->gv.pura3.x128[i] = NULL;
     }
     if (jobj == NULL) {
-        *node = NULL;
+        return NULL;
     } else {
-        *node = jobj->child;
+        return jobj->child;
     }
 }
 
@@ -419,24 +419,21 @@ void grPura_80212CD4(HSD_GObj* arg0)
     HSD_JObj* node;
     Vec3 subject_pos;
 
-    grPura_80212CD4_inline(gp, jobj, &node);
+    node = grPura_80212CD4_inline(gp, jobj);
 
     if (node != NULL) {
+        HSD_JObj* child;
         if (node == NULL) {
-            node = NULL;
+            child = NULL;
         } else {
-            node = node->child;
+            child = node->child;
         }
-        for (j = 0; j < 25; j++) {
-            if (node == NULL) {
-                return;
-            }
+        node = child;
+        for (j = 0; j < 25 && node != NULL;
+             j++, node = node == NULL ? NULL : node->next) {
             if ((gp->gv.pura3.x128[j] = Camera_80029020()) != NULL) {
                 gp->gv.pura3.xC4[j] = node;
-                {
-                    HSD_JObj** nodes = gp2->gv.pura3.xC4;
-                    lb_8000B1CC(nodes[j], NULL, &subject_pos);
-                }
+                lb_8000B1CC(gp2->gv.pura3.xC4[j], NULL, &subject_pos);
                 gp->gv.pura3.x128[j]->x10 = subject_pos;
                 if (HSD_JObjGetFlags(node) & 0x10) {
                     gp->gv.pura3.x128[j]->x8 = 1;
@@ -452,11 +449,6 @@ void grPura_80212CD4(HSD_GObj* arg0)
                     subject->x2C = subject->x40;
                     subject->x34 = subject->x48;
                 }
-            }
-            if (node == NULL) {
-                node = NULL;
-            } else {
-                node = node->next;
             }
         }
     }

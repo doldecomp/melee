@@ -115,19 +115,24 @@ void* mnEvent_804A0908;
 static char mnEvent_804D5040[3] = "%d";
 static char mnEvent_804D5044[4] = { 0x81, 0x7C, 0, 0 };
 
+static inline HSD_GObj** mnEvent_GetGObjs(MnEventData* data)
+{
+    return data->gobjs;
+}
+
 void mnEvent_8024D15C(s32 idx, s32 event_id)
 {
-    HSD_JObj* jobj_0C;
-    HSD_JObj* jobj_0A;
+    HSD_JObj* volatile jobj_0C;
     Vec3 pos;
-    Vec3 icon_pos;
+    HSD_JObj* jobj_0A;
+    void** assets;
     HSD_JObj* jobj_0C_2;
     f32 icon_spacing;
     MnEventData* data;
     HSD_Text** text_slot;
     HSD_Text** icon_slot;
     HSD_JObj* icon_jobj;
-    void** assets;
+    Vec3 icon_pos;
     HSD_Text* text;
     HSD_Text* icon_text;
     f32 spacing;
@@ -148,7 +153,8 @@ void mnEvent_8024D15C(s32 idx, s32 event_id)
     pos.y = -(((f32) idx * spacing) + pos.y);
 
     if (data->gobjs[idx] != NULL) {
-        HSD_GObjPLink_80390228(data->gobjs[idx]);
+        HSD_GObj* gobj = mnEvent_GetGObjs(data)[idx];
+        HSD_GObjPLink_80390228(gobj);
         data->gobjs[idx] = NULL;
     }
 
@@ -445,7 +451,9 @@ void mnEvent_8024E524(s32 event_idx)
     HSD_JObjAnimAll(tree);
 
     user_data = HSD_MemAlloc(sizeof(MnEventData));
-    HSD_ASSERTREPORT(0x39B, user_data, "Can't get user_data.\n");
+    HSD_ASSERTREPORTFILE(mnEvent_803EF7A0 + 0x28, 0x39B, user_data,
+                         mnEvent_803EF7A0 + 0x34,
+                         mnEvent_803EF7A0 + 0x10);
     mnEvent_8024E420(user_data, event_idx);
     GObj_InitUserData(gobj, 0, HSD_Free, user_data);
 

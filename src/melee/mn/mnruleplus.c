@@ -412,9 +412,6 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
     MenuRulesPlusData* data = gobj->user_data;
     s32 i, j, vis_count;
     s32 visible;
-    HSD_JObj** root_ptr;
-    u16* map_ptr;
-    u16 map_idx;
     u16 selected;
     PAD_STACK(8);
 
@@ -434,17 +431,11 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
     jobj_map[13] = 13;
     jobj_map[14] = 14;
     jobj_map[15] = 15;
-    map_idx = 16;
-    map_ptr = &jobj_map[16];
-    while (map_idx < 17) {
-        *map_ptr = map_idx;
-        map_ptr++;
-        map_idx++;
+    for (i = 16; i < 17; i++) {
+        jobj_map[i] = i;
     }
 
-    root_ptr = option_roots;
-    i = 0;
-    while (i < (s32) num_options) {
+    for (i = 0; i < (s32) num_options; i++) {
         if (gm_801A4310() == 0x1B && (u8) i == 1) {
             visible = 0;
         } else if ((u8) i == 3) {
@@ -479,11 +470,9 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
                 } else {
                     child = root->child;
                 }
-                *root_ptr = child;
+                option_roots[i] = child;
             }
         }
-        root_ptr++;
-        i++;
     }
 
     if ((s32) arg1 != 0) {
@@ -580,9 +569,7 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
         selected = (u16) data->hovered_selection;
     }
 
-    root_ptr = option_roots;
-    i = 0;
-    while (i < (s32) num_options) {
+    for (i = 0; i < (s32) num_options; i++) {
         if (gm_801A4310() == 0x1B && (u8) i == 1) {
             visible = 0;
         } else if ((u8) i == 3) {
@@ -602,7 +589,7 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
         }
         if (visible != 0) {
             AnimLoopSettings* als;
-            lb_8001204C(*root_ptr, jobj_parts, jobj_map, 17);
+            lb_8001204C(option_roots[i], jobj_parts, jobj_map, 17);
             if (i == (s32) (u8) selected) {
                 mn_8022ED6C(jobj_parts[16], &rule_data->x4C);
             }
@@ -619,8 +606,6 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
             mn_8022ED6C(jobj_parts[8], &rule_data->x94);
             mn_80232660(gobj, data->x34[i][0], (u8) i);
         }
-        root_ptr++;
-        i++;
     }
 }
 #pragma dont_inline off
@@ -817,7 +802,7 @@ HSD_GObj* mn_80233218(MenuState state)
     HSD_JObj* value_jobj;
     StaticModelDesc* desc;
     HSD_JObj* root_jobj;
-    f32* frame_ptr;
+    f32* volatile frame_ptr;
     u16* sub_count_ptr;
     GameRules* rules;
     PAD_STACK(8);

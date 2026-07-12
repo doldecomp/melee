@@ -2718,36 +2718,37 @@ inline void resetText(HSD_Text* text)
 
 HSD_Text* fn_8018A000(void)
 {
+    TrainingModeState* state;
     u8* data;
     HSD_Text* text;
-    CssSubStruct* sub;
 
     PAD_STACK(0x10);
     data = lbl_803D9828;
-    memzero(lbl_80473700.result_cache, 0x10);
+    state = &lbl_80473700;
+    memzero(state->result_cache, 0x10);
     lbl_804D6628 =
         lbArchive_80016DBC("GmTrain", &lbl_804D662C, &data[0xA0], 0);
     fn_80189B88();
     ifAll_802F3404();
     HSD_SisLib_803A611C(0, NULL, 9, 0x14, 0, 0xE, 0, 0x12);
-    sub = &lbl_80473700.css;
     if (lbLang_IsSavedLanguageUS()) {
         HSD_SisLib_803A62A0(0, (char*) &data[0xBC], (char*) &data[0xC8]);
     } else {
         HSD_SisLib_803A62A0(0, (char*) &data[0xDC], (char*) &data[0xC8]);
     }
 
-    sub->text = HSD_SisLib_803A5ACC(
+    state->css.text = HSD_SisLib_803A5ACC(
         0, 0,
-        (12.0f * (HSD_JObjGetTranslationX(sub->jobjs[1]) + 9.798828f)) + 50.0f,
+        (12.0f * (HSD_JObjGetTranslationX(state->css.jobjs[1]) + 9.798828f)) +
+            50.0f,
         150.0f, 0.1f, 167.0f, 16.0f);
-    text = sub->text;
+    text = state->css.text;
     lbLang_IsSettingUS();
     HSD_SisLib_803A6368(text, (s32) * (s16*) &data[2]);
-    sub->text->default_fitting = 1;
-    resetText(sub->text);
-    text = sub->text;
-    sub->text->default_alignment = 2;
+    state->css.text->default_fitting = 1;
+    resetText(state->css.text);
+    text = state->css.text;
+    state->css.text->default_alignment = 2;
     return text;
 }
 

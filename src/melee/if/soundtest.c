@@ -353,9 +353,29 @@ s32 un_802FF9DC(void)
     }* d = (struct SmStData*) un_804D6DA8;
     s32 i;
 
+    i = 0;
     un_804D6DB4 = 0;
-    for (i = 0; i < un_804D6DB0; i++) {
-        un_804D6DB4 += d->x18[i];
+    if (i < un_804D6DB0) {
+        s32 count = un_804D6DB0;
+        s32 blocks = count >> 3;
+        if (blocks != 0) {
+            do {
+                un_804D6DB4 += d->x18[i++];
+                un_804D6DB4 += d->x18[i++];
+                un_804D6DB4 += d->x18[i++];
+                un_804D6DB4 += d->x18[i++];
+                un_804D6DB4 += d->x18[i++];
+                un_804D6DB4 += d->x18[i++];
+                un_804D6DB4 += d->x18[i++];
+                un_804D6DB4 += d->x18[i++];
+            } while (--blocks != 0);
+        }
+        count &= 7;
+        if (count != 0) {
+            do {
+                un_804D6DB4 += d->x18[i++];
+            } while (--count != 0);
+        }
     }
     un_803F9FA4.xF4 = (f32) un_804D6DB4;
     un_803F9FA4.xF8 = (f32) (un_804D6DB4 + d->x18[un_804D6DB0]);

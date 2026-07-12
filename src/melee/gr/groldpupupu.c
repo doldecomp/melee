@@ -605,6 +605,7 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
             if (gp->gv.oldpupupu.xD4 != 0) {
                 Vec3 pos;
                 s32 side;
+                f32 side_f;
                 Ground* other_gp;
 
                 gp->gv.oldpupupu.xCC = 0;
@@ -614,7 +615,8 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
                 } else {
                     side = 0;
                 }
-                if ((f32) side == (f32) gp->gv.oldpupupu.xD8) {
+                side_f = side;
+                if (side_f == (f32) gp->gv.oldpupupu.xD8) {
                     gp->gv.oldpupupu.xC8 = 2;
                     gp->gv.oldpupupu.xD4 = 0;
                     gp->gv.oldpupupu.xCC = 0;
@@ -643,7 +645,7 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
                     other_gp->gv.oldpupupu.xD4 = gp->gv.oldpupupu.xD8;
                     other_gp->gv.oldpupupu.xD0 = 1;
                 } else {
-                    gp->gv.oldpupupu.xD8 = (s32) (f32) side;
+                    gp->gv.oldpupupu.xD8 = side_f;
                     gp->gv.oldpupupu.xD4 = 0;
                     gp->gv.oldpupupu.xCC = 0;
                     gp->gv.oldpupupu.xD0 = 0;

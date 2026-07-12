@@ -387,7 +387,6 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
     Vec3 cross_vec, local_axis;
     s32 idx;
     Quaternion angle_quat, euler_quat, result_quat;
-    Quaternion euler_angles;
     Vec3 collision_point;
     Vec3 floor_point, floor_normal;
     int line_id;
@@ -849,6 +848,7 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                 local_axis.y >= 0.00001f || local_axis.y <= -0.00001f ||
                 local_axis.z >= 0.00001f || local_axis.z <= -0.00001f)
             {
+                Quaternion euler_angles;
                 HSD_QuatLib_8037ECE0(&local_axis, &angle_quat, angle_diff);
                 euler_angles.x = jobj->rotate.x;
                 euler_angles.y = jobj->rotate.y;

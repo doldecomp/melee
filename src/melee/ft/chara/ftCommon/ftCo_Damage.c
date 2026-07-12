@@ -265,7 +265,7 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
     float sp40;
     Vec3 pos;
     u8 _[0x2C] = { 0 };
-    float temp_f1_2;
+    float floor_angle;
     float temp_f1_3;
     float temp_f2;
     float scaled_kb;
@@ -348,8 +348,8 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
         pos.x = -x * fp->facing_dir;
         pos.y = y;
         pos.z = 0;
-        temp_f1_2 = lbVector_Angle(normal, &pos);
-        if (!(temp_f1_2 < M_PI_2)) {
+        floor_angle = lbVector_Angle(normal, &pos);
+        if (!(floor_angle < M_PI_2_F)) {
             goto block_23;
         }
         msid = ((int (*)[4][3])
@@ -365,7 +365,7 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
         ftCommon_8007D5D4(fp);
         msid = ((int (*)[4][3])
                     ftCo_803C5520)[0][kb_level][fp->dmg.x184c_damaged_hurtbox];
-        if (!(temp_f1_2 > (M_PI_2 + (double) p_ftCommonData->x1E8_radians))) {
+        if (!(floor_angle > (M_PI_2 + (double) p_ftCommonData->x1E8_radians))) {
             goto block_26;
         }
         ftCo_Damage_CalcVel(fp, pos.x, -pos.y * p_ftCommonData->x1EC);
@@ -436,7 +436,7 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
     }
 block_44:
 
-    ftCo_8008DA4C(gobj, kb_level, 0);
+    ftCo_8008DA4C(gobj, fp->dmg.x1860_element, kb_level);
     ftCo_8008DB10(gobj, (s32) fp->dmg.x1860_element, kb_applied);
     Fighter_ChangeMotionState(gobj, msid, 0x40U, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
@@ -711,9 +711,8 @@ void ftCo_8008E9D0(Fighter_GObj* gobj)
     ftCommon_800804FC(fp);
 }
 
-static bool inlineB0(Fighter_GObj* gobj)
+static bool inlineB0(Fighter* fp)
 {
-    Fighter* fp = gobj->user_data;
     float kb_applied = fp->dmg.kb_applied;
     if (kb_applied == 0) {
         return true;
@@ -890,7 +889,7 @@ void ftCo_8008EC90(Fighter_GObj* gobj)
             {
                 Fighter_GObj* other_gobj = fp->victim_gobj;
                 Fighter* other_fp = other_gobj->user_data;
-                if (inlineB0(gobj)) {
+                if (inlineB0(fp)) {
                     if (other_fp->dmg.kb_applied) {
                         if (inlineB1(other_fp)) {
                             other_fp->dmg.x183C_applied =

@@ -258,7 +258,8 @@ void grZakoGenerator_801CAC14(HSD_GObj* gobj)
     s32 kind = itGetKind(gobj);
 
     if (kind == 0x9F) {
-        grZakoGenerator_Entry* sentinel = &lbl_8049F030.x4->sentinel;
+        grZakoGenerator_Entry* sentinel = lbl_8049F030.x4->entries;
+        sentinel += 80;
         if (sentinel != NULL && sentinel->x4 == gobj) {
             sentinel->x4 = NULL;
         }

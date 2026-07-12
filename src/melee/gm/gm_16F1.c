@@ -519,23 +519,30 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
         }
 
         {
+            s32 my_score;
+            struct lbl_8046B6A0_24C_58_t* player = x58;
+            s32* score = scores;
+            u8* ranking = rankings;
             int idx;
             for (idx = 0; idx < 6; idx++) {
-                if (x58[idx].x0 != 3) {
-                    s32 my_score = scores[idx];
+                if (player->x0 != 3) {
                     int j;
+                    my_score = *score;
 
                     for (j = 0; j < 6; j++) {
                         if (x58[j].x0 != 3 && idx != j && my_score < scores[j])
                         {
-                            rankings[idx]++;
+                            (*ranking)++;
                         }
                     }
 
-                    if (rankings[6] < rankings[idx]) {
-                        rankings[6] = rankings[idx];
+                    if (rankings[6] < *ranking) {
+                        rankings[6] = *ranking;
                     }
                 }
+                player++;
+                score++;
+                ranking++;
             }
         }
     }

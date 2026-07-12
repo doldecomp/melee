@@ -173,6 +173,28 @@ extern AdventureStageEntry lbl_803D7AC0[110];
 extern AllstarStageEntry lbl_803D85F0[55];
 u16 lbl_803D8B88[] = { 0x18, 0x16, 0x12, 0x3, 0x5, 0x4, 0x6, 0x1a, 0x19, 0x7 };
 
+/// String-pool order evidence: retail's merged .data anchor for this TU sits
+/// at lbl_803D8B88 (.data+0), and fn_8017F2A4 / fn_801803FC / fn_80180630
+/// address the pooled literals below as anchor+immediate. Retail DOL bytes at
+/// 0x803D8B9C..0x803D8C43 hold exactly these literals in this order
+/// ("GmRegClr" at +0x14 ... "Error : jobj..." ending at +0x128), so the pool
+/// must be seeded in this order before any other .data emission. MWCC pools
+/// the duplicate literals used by the functions further down; "gmregclear.c"
+/// matches the retail pool entry between the gobj/jobj messages.
+static const char* const gmRegClear_PooledStrings[] = {
+    "GmRegClr",
+    "ScGamRegClear_scene_data",
+    "Error : Cannot open archive file (File Name : %s).",
+    "SdDec.usd",
+    "SIS_DecisionData",
+    "SdDec.dat",
+    "          ",
+    "               ",
+    "Error : gobj don\'t get (gmRegClearAddModel)\n",
+    "gmregclear.c",
+    "Error : jobj don\'t get (gmRegClearAddModel)\n",
+};
+
 typedef struct RegClearEv {
     /* 0x00 */ char pad_0[0x1C];
     /* 0x1C */ HSD_ImageDesc* x1C;
@@ -1915,13 +1937,6 @@ int fn_8017F294(void)
     return lbl_80472D28.x104;
 }
 
-static const char* const gmRegClear_ErrorMessages[] = {
-    "Error : Cannot open archive file (File Name : %s).",
-    "Error : gobj don\'t get (gmRegClearAddModel)\n",
-    "gmregclear.c",
-    "Error : jobj don\'t get (gmRegClearAddModel)\n",
-};
-
 s32 fn_8017F2A4(HSD_Text** arg0, f32 farg0, f32 farg1)
 {
     HSD_Text* text;
@@ -2734,8 +2749,8 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     lbAudioAx_80023F28(var_r3);
 
     Camera_8002F7AC(0);
-    lb_800121FC(&state->x30, 0x280, 0x1E0, GX_TF_RGB5A3, 0);
     state->x2C = cam_gobj;
+    lb_800121FC(&state->x30, 0x280, 0x1E0, GX_TF_RGB5A3, 0);
     lb_800138EC((s32) &state->x30, NULL, 2U, 0x32, 0.0f, 0.0f, 1.0f, 1.0f);
     lb_800138D8(state->x2C, 1);
     lb_800138CC(state->x2C, fn_8017FE54);
@@ -2820,7 +2835,7 @@ void fn_80180C60(HSD_GObj* gobj)
     HSD_JObj* jobj;
     u32 b76;
 
-    dist = (s32) (0.1f * Ground_801C57F0());
+    dist = (s32) (0.1f * Ground_801C57F0(0));
     jobj = gobj->hsd_obj;
     if (dist < 0) {
         dist = 0;

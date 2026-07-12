@@ -204,33 +204,33 @@ ItemKind it_8026C75C(ItemPickTable* arg_struct)
     return result;
 }
 
-static inline void it_8026C88C_inline(RandomItemSpawner* alloc,
-                                      SpawnItem* spawn)
+static inline void it_8026C88C_inline(RandomItemSpawner* alloc)
 {
     Vec3* pos;
     s32 chk;
     Item_GObj* spawn_gobj;
+    SpawnItem spawn;
     if (db_AreItemSpawnsEnabled() != 0U) {
         alloc->x0--;
         if ((s32) alloc->x0 == 0) {
-            spawn->kind = it_8026C75C(&alloc->x4);
-            if ((s32) spawn->kind != -1) {
-                pos = &spawn->prev_pos;
+            spawn.kind = it_8026C75C(&alloc->x4);
+            if ((s32) spawn.kind != -1) {
+                pos = &spawn.prev_pos;
                 if (it_8026CB3C(pos)) {
-                    spawn->pos = *pos;
-                    spawn->facing_dir = it_8026B684(pos);
+                    spawn.pos = *pos;
+                    spawn.facing_dir = it_8026B684(pos);
                     chk = 1;
-                    spawn->x3C_damage = 0;
-                    spawn->vel.x = spawn->vel.y = spawn->vel.z = 0.0F;
-                    spawn->x0_parent_gobj = NULL;
-                    spawn->x4_parent_gobj2 = spawn->x0_parent_gobj;
-                    spawn->x44_flag.b0 = chk;
-                    spawn->x40 = 0;
+                    spawn.x3C_damage = 0;
+                    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
+                    spawn.x0_parent_gobj = NULL;
+                    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
+                    spawn.x44_flag.b0 = chk;
+                    spawn.x40 = 0;
                 } else {
                     chk = false;
                 }
                 if (chk) {
-                    spawn_gobj = Item_80268B18(spawn);
+                    spawn_gobj = Item_80268B18(&spawn);
                     if (spawn_gobj != NULL) {
                         efSync_Spawn(0x420, spawn_gobj, pos);
                         it_80274ED8();
@@ -251,8 +251,7 @@ static inline void it_8026C88C_inline(RandomItemSpawner* alloc,
 void fn_8026C88C(HSD_GObj* gobj)
 {
     RandomItemSpawner* alloc = &it_804A0E30;
-    SpawnItem spawn;
-    it_8026C88C_inline(alloc, &spawn);
+    it_8026C88C_inline(alloc);
 }
 
 #pragma push

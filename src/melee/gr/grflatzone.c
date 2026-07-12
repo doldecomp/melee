@@ -418,9 +418,9 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
             gp->gv.unk.xD0 = 3;
             gp->gv.unk.xD4 = grFz_804D6AB0->unk3C;
             HSD_JObjGetTranslation(jobj, &pos);
-            other_x = (36.0f * gp->gv.flatzone2.xC8) + pos.x;
-            pos.x = other_x;
+            pos.x = (36.0f * gp->gv.flatzone2.xC8) + pos.x;
             pos.y -= 27.0f;
+            other_x = pos.x;
             other_z = 5.0f + pos.y;
             pos.y -= 5.0f;
             if (mpCheckMultiple(other_x, other_z, pos.x, pos.y, &pos_2, &ret,

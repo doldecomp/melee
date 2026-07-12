@@ -566,6 +566,11 @@ static void order_data_108(void)
     /* +120 */ (void) __FILE__;
 }
 
+static inline s32 tyFigupon_GetCoinCount(void)
+{
+    return gm_801623D8() / 10u;
+}
+
 void _tyFigupon_80315C44(HSD_GObj* arg0)
 {
     TyFiguponUD* ud = HSD_GObjGetUserData(arg0);
@@ -676,7 +681,7 @@ void _tyFigupon_80315C44(HSD_GObj* arg0)
         ud = HSD_MemAlloc(0x58);
         if (ud != NULL) {
             GObj_InitUserData(arg0, 0, Toy_RemoveUserData, ud);
-            total = gm_801623D8() / 10u;
+            total = tyFigupon_GetCoinCount();
             i = 0;
             ud->x18 = i;
             ud->x14 = i;
@@ -807,58 +812,6 @@ void _tyFigupon_80316420(s32 arg0)
 }
 static const Vec3 _tyFigupon_803B8968 = { 0.0f, 1.0f, 0.0f };
 
-static inline void tyFigupon_CalcCameraRot(f32* cy, f32* cx, f32* rot_y,
-                                           f32* rot_x)
-{
-    HSD_PadStatus* pad;
-    s32 i;
-    f32 dead;
-
-    if (-0.4f < *cx && *cx < 0.4f && -0.4f < *cy && *cy < 0.4f) {
-        pad = &HSD_PadCopyStatus[i = 1];
-        *cx = pad->nml_subStickX;
-        *cy = pad->nml_subStickY;
-        if (-0.4f < *cx && *cx < 0.4f && -0.4f < *cy && *cy < 0.4f) {
-            pad = &HSD_PadCopyStatus[i = 2];
-            *cx = pad->nml_subStickX;
-            *cy = pad->nml_subStickY;
-            if (-0.4f < *cx && *cx < 0.4f && -0.4f < *cy && *cy < 0.4f) {
-                pad = &HSD_PadCopyStatus[i = 3];
-                *cx = pad->nml_subStickX;
-                *cy = pad->nml_subStickY;
-                if (-0.4f < *cx && *cx < 0.4f && -0.4f < *cy && *cy < 0.4f) {
-                }
-            }
-        }
-    }
-
-    if (-0.4f < *cx && *cx < 0.4f && -0.4f < *cy && *cy < 0.4f) {
-        *rot_y = 0.0f;
-        *rot_x = 0.0f;
-    } else {
-        if (-0.4f < *cx && *cx < 0.4f) {
-            *rot_x = 0.0f;
-        } else {
-            if (*cx < 0.0f) {
-                dead = -0.4f;
-            } else {
-                dead = 0.4f;
-            }
-            *rot_x = 30.0f * ((*cx - dead) / 0.6f);
-        }
-        if (-0.4f < *cy && *cy < 0.4f) {
-            *rot_y = 0.0f;
-        } else {
-            if (*cy < 0.0f) {
-                dead = -0.4f;
-            } else {
-                dead = 0.4f;
-            }
-            *rot_y = 30.0f * ((*cy - dead) / 0.6f);
-        }
-    }
-}
-
 void _tyFigupon_803168DC(HSD_GObj* arg0)
 {
     u8 _padA[16];
@@ -878,12 +831,41 @@ void _tyFigupon_803168DC(HSD_GObj* arg0)
     s32 i;
     HSD_PadStatus* pad;
 
-    PAD_STACK(8);
+    PAD_STACK(12);
 
-    pad = &HSD_PadCopyStatus[i = 0];
-    cx = pad->nml_subStickX;
-    cy = pad->nml_subStickY;
-    tyFigupon_CalcCameraRot(&cy, &cx, &rot_y, &rot_x);
+    pad = HSD_PadCopyStatus;
+    for (i = 0; i < 4; i++) {
+        cx = pad[(u8) i].nml_subStickX;
+        cy = pad[(u8) i].nml_subStickY;
+        if (!(-0.4f < cx && cx < 0.4f && -0.4f < cy && cy < 0.4f)) {
+            break;
+        }
+    }
+    if (-0.4f < cx && cx < 0.4f && -0.4f < cy && cy < 0.4f) {
+        rot_y = 0.0f;
+        rot_x = 0.0f;
+    } else {
+        if (-0.4f < cx && cx < 0.4f) {
+            rot_x = 0.0f;
+        } else {
+            if (cx < 0.0f) {
+                dead = -0.4f;
+            } else {
+                dead = 0.4f;
+            }
+            rot_x = 30.0f * ((cx - dead) / 0.6f);
+        }
+        if (-0.4f < cy && cy < 0.4f) {
+            rot_y = 0.0f;
+        } else {
+            if (cy < 0.0f) {
+                dead = -0.4f;
+            } else {
+                dead = 0.4f;
+            }
+            rot_y = 30.0f * ((cy - dead) / 0.6f);
+        }
+    }
     HSD_CObjInit(cobj, _tyFigupon_804D6F04);
     up_copy = _tyFigupon_803B8968;
     HSD_CObjGetEyeVector(cobj, &eye_vec);
@@ -1219,9 +1201,9 @@ void _tyFigupon_8031753C(void)
     panel_joint = HSD_ArchiveGetPublicAddress(ef4->archive,
                                               "ToyFigurePonPanel_Top_joint");
     if (panel_joint != NULL) {
-        s32 total;
-        DigitInit digits_s;
         s32* digit_ptr;
+        DigitInit digits_s;
+        s32 total;
         ef4->x00 = (u32) GObj_Create(9, 9, 0);
         jobj = HSD_JObjLoadJoint(panel_joint);
         {
@@ -1379,6 +1361,7 @@ static void order_data_4A8(void)
 
 void _tyFigupon_80317A60(void)
 {
+    char* strings = "ToyFigurePonPanel_Top_joint";
     TyFiguponData* data = _tyFigupon_804D6EF0;
     HSD_CameraDescPerspective* cam_desc;
     HSD_CObj* cobj;
@@ -1399,21 +1382,23 @@ void _tyFigupon_80317A60(void)
     gobj->gxlink_prios = 0x5010000000000000ULL;
 
     data->x4 = GObj_Create(1, 2, 0);
-    cobj = lb_80013B14(
-        (HSD_CameraDescPerspective*) ((u32) "ToyFigurePonPanel_Top_joint" +
-                                      0x4EC));
+    cobj = lb_80013B14((HSD_CameraDescPerspective*) (strings + 0x4EC));
     _tyFigupon_804D6F08 =
-        (HSD_CameraDescPerspective*) ((u32) "ToyFigurePonPanel_Top_joint" +
-                                      0x4EC);
+        (HSD_CameraDescPerspective*) (strings + 0x4EC);
     HSD_GObjObject_80390A70(data->x4, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(data->x4, Toy_803068E0, 0);
     gobj = data->x4;
     gobj->gxlink_prios = 0x2680000000000000ULL;
 
-    if (lbLang_IsSavedLanguageJP() != 0) {
-        HSD_SisLib_803A62A0(0, "SdToy.dat", "SIS_ToyData");
-    } else {
-        HSD_SisLib_803A62A0(0, "SdToy.usd", "SIS_ToyData_E");
+    {
+        int is_jp = lbLang_IsSavedLanguageJP();
+        int unused = is_jp != 0;
+        (void) unused;
+        if (is_jp != 0) {
+            HSD_SisLib_803A62A0(0, "SdToy.dat", "SIS_ToyData");
+        } else {
+            HSD_SisLib_803A62A0(0, "SdToy.usd", "SIS_ToyData_E");
+        }
     }
 
     _tyFigupon_804D6EFC =

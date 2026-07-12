@@ -3212,13 +3212,11 @@ void _Toy_80309404(HSD_GObj* gobj)
                     trig2 = Toy_80305B88();
                     if (trig2 & 0x441) {
                     cycle_prev: {
-                        s16 new_idx;
                         s32 total;
 
                         lbAudioAx_80024030(2);
-                        new_idx = display->selectedIdx - 1;
-                        display->selectedIdx = new_idx;
-                        if (new_idx < 0) {
+                        display->selectedIdx = display->selectedIdx - 1;
+                        if (display->selectedIdx < 0) {
                             if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC))
                             {
                                 total = base->trophy_count;
@@ -3634,8 +3632,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
             _Toy_sbss_804D6E88 = HSD_CObjGetRight(cobj);
             _Toy_sbss_804D6E8C = HSD_CObjGetLeft(cobj);
 
-            trigger = Toy_80305B88();
-            OSReport("*** Pad = %d\n", trigger);
+            OSReport("*** Pad = %d\n", Toy_80305B88());
             state->x5C = 0;
 
             {
@@ -3743,7 +3740,8 @@ void _Toy_8030B530(HSD_GObj* arg0)
                 angle = lb_8000D008(adj_y, adj_x);
 
                 if (state->x18 < -25.0f) {
-                    f32 abs_x2 = ABS(adj_x);
+                    f32 abs_x2 = adj_x;
+                    *(u32*) &abs_x2 &= ~0x80000000;
                     if (abs_x2 > 0.8f) {
                         f32 dx = 0.01f * cosf(angle);
                         HSD_JObjAddTranslationX(jobj_next, dx);
@@ -3751,7 +3749,8 @@ void _Toy_8030B530(HSD_GObj* arg0)
                                       HSD_JObjGetTranslationX(jobj_next));
                     }
                     {
-                        f32 abs_y2 = ABS(adj_y);
+                        f32 abs_y2 = adj_y;
+                        *(u32*) &abs_y2 &= ~0x80000000;
                         if (abs_y2 > 0.8f) {
                             f32 dz = 0.01f * -sinf(angle);
                             HSD_JObjAddTranslationZ(jobj_next, dz);
@@ -3760,7 +3759,8 @@ void _Toy_8030B530(HSD_GObj* arg0)
                         }
                     }
                 } else {
-                    f32 abs_x3 = ABS(adj_x);
+                    f32 abs_x3 = adj_x;
+                    *(u32*) &abs_x3 &= ~0x80000000;
                     if (abs_x3 > 0.8f) {
                         f32 dx = 0.01f * cosf(angle);
                         HSD_JObjAddTranslationX(jobj_next, dx);
@@ -3768,7 +3768,8 @@ void _Toy_8030B530(HSD_GObj* arg0)
                                       HSD_JObjGetTranslationX(jobj_next));
                     }
                     {
-                        f32 abs_y3 = ABS(adj_y);
+                        f32 abs_y3 = adj_y;
+                        *(u32*) &abs_y3 &= ~0x80000000;
                         if (abs_y3 > 0.8f) {
                             f32 dy = 0.01f * sinf(angle);
                             HSD_JObjAddTranslationY(jobj_next, dy);
@@ -4420,7 +4421,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
             button = Toy_80305C44();
             if (button & 0x100) {
                 f32 sx = state->x30;
-                if ((sx != 0.0f) && (sx < 0.0f)) {
+                if (sx && (sx < 0.0f)) {
                     state->x50 = (f32) (0.3f * sx * (state->x20 / 38.0f));
                 }
             }
@@ -4428,7 +4429,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
             button = Toy_80305C44();
             if (button & 0x100) {
                 f32 sx = state->x30;
-                if ((sx != 0.0f) && (sx > 0.0f)) {
+                if (sx && (sx > 0.0f)) {
                     state->x50 = (f32) (0.3f * sx * (state->x20 / 38.0f));
                 }
             }
@@ -4436,7 +4437,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
             button = Toy_80305C44();
             if (button & 0x100) {
                 f32 sy = state->x34;
-                if ((sy != 0.0f) && (sy > 0.0f)) {
+                if (sy && (sy > 0.0f)) {
                     state->x54 = (f32) (0.3f * sy * (state->x20 / 38.0f));
                 }
             }
@@ -4444,12 +4445,12 @@ void _Toy_8030E110(HSD_GObj* arg0)
             button = Toy_80305C44();
             if (button & 0x100) {
                 f32 sy = state->x34;
-                if ((sy != 0.0f) && (sy < 0.0f)) {
+                if (sy && (sy < 0.0f)) {
                     state->x54 = (f32) (0.3f * sy * (state->x20 / 38.0f));
                 }
             }
 
-            if ((state->x50 == 0.0f) && (state->x54 == 0.0f)) {
+            if (!state->x50 && !state->x54) {
                 button = HSD_PadCopyStatus[0].button;
                 if (button != 0) {
                     gm_801677E8(0);
@@ -4478,7 +4479,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
                 _Toy_803102C4(0);
             }
 
-            if ((state->x50 != 0.0f) || (state->x54 != 0.0f)) {
+            if (state->x50 || state->x54) {
                 moved_x = 1.0f;
             }
 
@@ -4976,11 +4977,7 @@ void _Toy_8030FE48(void* arg0, s32 arg1)
     void* zero;
     void* sym2;
     s32 start;
-    u8* zero_entry;
-    s32 remaining;
     s32 var_r7;
-    PAD_STACK(8);
-
     ptr = &_Toy_sbss_804D6E64[(s8) toy[0x195]];
     *(s16*) (data + 0x154) = *(s16*) sel;
 
@@ -5043,25 +5040,8 @@ loop_done:
     }
 
     zero = NULL;
-    start = 8;
-    *(void**) (data + 0x14) = zero;
-    *(void**) (data + 0x2C) = zero;
-    *(void**) (data + 0x44) = zero;
-    *(void**) (data + 0x5C) = zero;
-    *(void**) (data + 0x74) = zero;
-    *(void**) (data + 0x8C) = zero;
-    *(void**) (data + 0xA4) = zero;
-    *(void**) (data + 0xBC) = zero;
-    goto clear_archive_setup;
-
-clear_archive_loop:
-    remaining = 0xD - start;
-    if (start < 0xD) {
-        do {
-            *(void**) (zero_entry + 0x14) = zero;
-            zero_entry += 0x18;
-            remaining -= 1;
-        } while (remaining != 0);
+    for (start = 0; start < 0xD; start++) {
+        ((ToyListEntry*) data)[start].archive = zero;
     }
 
     if ((s8) * (u8*) (data + 0x157) == var_r7) {
@@ -5179,10 +5159,6 @@ clear_archive_loop:
         }
     }
     return;
-
-clear_archive_setup:
-    zero_entry = data + start * 0x18;
-    goto clear_archive_loop;
 }
 
 void _Toy_803102C4(s8 arg0)
@@ -5257,7 +5233,7 @@ void Toy_80310324(void)
     if (tg->x50 == NULL) {
         tg->x50 = lbArchive_LoadSymbols(
             lbLang_IsSavedLanguageJP() ? "TyMnView.dat" : "TyMnView.usd",
-            sym, _Toy_803FDEA0[0], NULL);
+            sym + 4, _Toy_803FDEA0[0], NULL);
     }
 
     memzero(_Toy_sbss_804D6E68, 0x64);

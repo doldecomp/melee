@@ -2339,16 +2339,16 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
         /* 0x28 */ float damage;
     };
 
-    float dir;
     float angle;
+    float dir;
     float best_kb;
     int angle_int;
     u32 element;
     int sfx_severity;
-    int best_idx;
+    ftCo_DatAttrs* co;
     int i;
     Fighter* fp;
-    ftCo_DatAttrs* co;
+    int best_idx;
     DmgLogEntry* entries;
     DmgLogEntry* entry;
     DmgLogEntry* best_entry;

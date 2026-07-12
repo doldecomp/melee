@@ -1,6 +1,5 @@
 #include "gmcamera.h"
 
-#include "gm/gmcamera.static.h"
 #include <placeholder.h>
 #include <platform.h>
 
@@ -53,21 +52,20 @@ typedef struct _SisLibUnkStruct {
 /// @todo #HSD_SisLib_804D1124 is of type #SIS.
 /// extern SisLibUnkStruct HSD_SisLib_804D1124;
 
+static void sdata2_order(void)
+{
+    (void) 0.0f;
+    (void) 640.0f;
+    (void) 32.0f;
+    (void) 5.0f;
+    (void) -5.0f;
+    (void) 1.0f;
+    (void) 2.0f;
+}
+
 f32 gmCamera_803DA630[12] = {
     0.6f,   0.6f,   40.0f, 416.0f, 0.6f,  0.6f,
     340.0f, 416.0f, 0.6f,  0.6f,   40.0f, 44.0f,
-};
-
-gmCameraUnkFuncTable gmCamera_803DA6B4[9] = {
-    { { 1, 0, 0 }, gmCamera_801A26C0, gmCamera_801A2798 },
-    { { 0, 0, 4 }, gmCamera_801A2800, gmCamera_801A28AC },
-    { { 0, 0, 2 }, gmCamera_801A292C, gmCamera_801A2AAC },
-    { { 0, 0, 0x54 }, NULL, gmCamera_801A2BB0 },
-    { { 0, 0, 0x34 }, NULL, gmCamera_801A2BB0 },
-    { { 0, 0, 0x94 }, NULL, gmCamera_801A2BB0 },
-    { { 0, 0, 0x1204 }, gmCamera_801A2BF0, gmCamera_801A2D44 },
-    { { 0, 0, 0x1604 }, gmCamera_801A2FBC, gmCamera_801A2FFC },
-    { { 0, 0, 0x1A14 }, NULL, gmCamera_801A2BB0 },
 };
 
 u8* gmCamera_801A2224(u8* arg0, u32 arg1)
@@ -113,7 +111,7 @@ u8* gmCamera_801A2224(u8* arg0, u32 arg1)
 HSD_Text* gmCamera_801A2334(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4)
 {
     HSD_Text* text;
-    union _gmCameraUnkUnion* gcu = &gmCamera_80479BC8;
+    union _gmCameraUnkUnion* gcu = &gmCamera_VsCamUiState;
     s32 blocks;
     s32 result;
     s32 group;
@@ -190,15 +188,47 @@ HSD_Text* gmCamera_801A2334(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4)
     return text;
 }
 
+/// SIS data file name passed to HSD_SisLib_803A62A0 in gmCamera_801A31FC.
+/// Evidence: retail keeps a distinct 0x11-byte data:string object at
+/// 0x803DA6A0 (config/GALE01/symbols.txt), between gmCamera_801A2334's
+/// switch jump table (0x803DA660) and gmCamera_VsCamStateTable (0x803DA6B4), and
+/// gmCamera_801A31FC addresses it through the TU .data anchor
+/// (gmCamera_803DA630 + 0x70) rather than a string-literal pool entry.
+static char gmCamera_SisVsCameraDataName[] = "SIS_VsCameraData";
+
+/// Per-mode handler table of the VS camera-mode state machine: one row of
+/// { flags, on_enter, on_update } per mode index (gmCamera_VsCamUiState
+/// .gcus.xC, switched via gmCamera_801A3048/801A3098/801A30E4).
+gmCameraUnkFuncTable gmCamera_VsCamStateTable[9] = {
+    { { 1, 0, 0 }, gmCamera_801A26C0, gmCamera_801A2798 },
+    { { 0, 0, 4 }, gmCamera_801A2800, gmCamera_801A28AC },
+    { { 0, 0, 2 }, gmCamera_801A292C, gmCamera_801A2AAC },
+    { { 0, 0, 0x54 }, NULL, gmCamera_801A2BB0 },
+    { { 0, 0, 0x34 }, NULL, gmCamera_801A2BB0 },
+    { { 0, 0, 0x94 }, NULL, gmCamera_801A2BB0 },
+    { { 0, 0, 0x1204 }, gmCamera_801A2BF0, gmCamera_801A2D44 },
+    { { 0, 0, 0x1604 }, gmCamera_801A2FBC, gmCamera_801A2FFC },
+    { { 0, 0, 0x1A14 }, NULL, gmCamera_801A2BB0 },
+};
+
+/// HSD archive public-symbol names looked up from IfVsCam in
+/// gmCamera_801A31FC. Evidence: retail keeps these strings as .data
+/// objects between gmCamera_VsCamStateTable and the text layout table
+/// (config/GALE01/symbols.txt 0x803DA720/0x803DA728), addressed through
+/// the TU .data anchor (gmCamera_803DA630 + 0xF0 / + 0x10C), so they are
+/// named TU-local objects rather than string-pool literals.
+static char gmCamera_IfCameraInfoModelSetName[] = "IfCameraInfo_Top_model_set";
+static char gmCamera_IfCameraModelSetName[0x1C] = "IfCamera_Top_model_set";
+
 #pragma dont_inline on
 void gmCamera_801A253C(s32* arg0, s32* arg1)
 {
-    gmCameraUnkStruct* gcus = &gmCamera_80479BC8.gcus;
+    gmCameraUnkStruct* gcus = &gmCamera_VsCamUiState.gcus;
     s32* x30 = &gcus->x30;
     s32* x40 = &gcus->x40;
     s32* x44;
-    s32* min_a = x30;
-    s32* min_b = x40;
+    s32* min_a = x40;
+    s32* min_b = x30;
     s32 result = MIN(*min_a, *min_b);
 
     gcus->x44 = result;
@@ -225,10 +255,10 @@ void gmCamera_801A25C8(void)
 {
     s32 i;
     for (i = 0; i < 2; i++) {
-        gmCamera_80479BC8.gcus4.x24[i].x0 = lbSnap_8001D40C(i);
-        if (!gmCamera_80479BC8.gcus4.x24[i].x0) {
-            gmCamera_80479BC8.gcus4.x24[i].x4 = lbSnap_8001D3B0(i);
-            gmCamera_80479BC8.gcus4.x24[i].x8 = lbSnap_8001D3CC(i);
+        gmCamera_VsCamUiState.gcus4.x24[i].x0 = lbSnap_8001D40C(i);
+        if (!gmCamera_VsCamUiState.gcus4.x24[i].x0) {
+            gmCamera_VsCamUiState.gcus4.x24[i].x4 = lbSnap_8001D3B0(i);
+            gmCamera_VsCamUiState.gcus4.x24[i].x8 = lbSnap_8001D3CC(i);
         }
     }
 }
@@ -241,15 +271,15 @@ static inline void gmCamera_801A25C8_noinline(void)
 #pragma dont_inline on
 s32 gmCamera_801A2640(void)
 {
-    return M2C_FIELD(&gmCamera_80479BC8, s32*, 0x54);
+    return (s32) gmCamera_VsCamUiState.gcus.x54;
 }
 #pragma dont_inline reset
 
 void gmCamera_801A2650(void)
 {
-    gmCamera_80479BC8.gcus.x20 = 2;
-    HSD_SisLib_803A62A0(3, "SdVsCam", "SIS_VsCameraData");
-    gmCamera_80479BC8.gcus.x54 =
+    gmCamera_VsCamUiState.gcus.x20 = 2;
+    HSD_SisLib_803A62A0(3, "SdVsCam", gmCamera_SisVsCameraDataName);
+    gmCamera_VsCamUiState.gcus.x54 =
         HSD_SisLib_803A611C(3, 0, 9, 13, 0, 14, 0, 11);
 }
 
@@ -271,28 +301,11 @@ static void gmCamera_801A2650_noinline3(void)
     gmCamera_801A2650_noinline2();
 }
 
-void gmCamera_801A26C0(void)
+static inline void gmCamera_801A26C0_FreeTexts(gmCameraUnkStruct* unk)
 {
-    lbl_8046B6A0_t* temp_r31;
-    gmCameraUnkStruct* unk;
     s32 i;
     s32 zero;
-    PAD_STACK(4);
 
-    temp_r31 = gm_8016AE38();
-    if (gm_801A45E8(3)) {
-        gm_801A4674(3);
-        if (gm_801A45E8(1)) {
-            gm_801A0FEC(temp_r31->pauser, 1);
-        } else {
-            lbAudioAx_80024E84(0);
-            ifAll_802F33CC();
-            HSD_PadRumbleUnpauseAll();
-        }
-        temp_r31->hud_enabled = 1;
-        temp_r31->unk_3 = 0;
-    }
-    unk = &gmCamera_80479BC8.gcus;
     if (unk->x48[0] != NULL) {
         i = 0;
         zero = i;
@@ -303,12 +316,33 @@ void gmCamera_801A26C0(void)
     }
 }
 
+void gmCamera_801A26C0(void)
+{
+    lbl_8046B6A0_t* hud;
+    PAD_STACK(4);
+
+    hud = gm_8016AE38();
+    if (gm_801A45E8(3)) {
+        gm_801A4674(3);
+        if (gm_801A45E8(1)) {
+            gm_801A0FEC(hud->pauser, 1);
+        } else {
+            lbAudioAx_80024E84(0);
+            ifAll_802F33CC();
+            HSD_PadRumbleUnpauseAll();
+        }
+        hud->hud_enabled = 1;
+        hud->unk_3 = 0;
+    }
+    gmCamera_801A26C0_FreeTexts(&gmCamera_VsCamUiState.gcus);
+}
+
 void gmCamera_801A2798(void)
 {
     unsigned int new_var;
     if (HSD_PadCopyStatus[3].trigger & 0x200) {
-        new_var = gmCamera_80479BC8.gcus.x14 + 1;
-        gmCamera_80479BC8.gcus.x14 = new_var % 2;
+        new_var = gmCamera_VsCamUiState.gcus.x14 + 1;
+        gmCamera_VsCamUiState.gcus.x14 = new_var % 2;
         return;
     }
     if (HSD_PadCopyStatus[3].trigger & 0x10) {
@@ -323,8 +357,8 @@ void gmCamera_801A2800(void)
     lbl_8046B6A0_t* temp_r3;
 
     temp_r3 = gm_8016AE38();
-    gmCamera_80479BC8.gcus.x10 = 0;
-    lb_80011E24(gmCamera_80479BC8.gcus.x8, &jobj, 2, -1);
+    gmCamera_VsCamUiState.gcus.x10 = 0;
+    lb_80011E24(gmCamera_VsCamUiState.gcus.x8, &jobj, 2, -1);
     HSD_JObjReqAnimAll(jobj, 0.0f);
     gm_801A4634(3);
     if (gm_801A45E8(1) != 0) {
@@ -341,12 +375,12 @@ void gmCamera_801A2800(void)
 
 void gmCamera_801A28AC(void)
 {
-    if (++gmCamera_80479BC8.gcus.x10 > 2) {
-        void* temp_r4 = cmSnap_80031618();
-        gmCamera_80479BC8.gcus.x1C = temp_r4;
-        if (temp_r4) {
-            if (lbSnap_8001DC0C(gmCamera_80479BC8.gcus.x1C) != 0) {
-                gmCamera_80479BC8.gcus.x20 = lbSnap_8001DF20();
+    if (++gmCamera_VsCamUiState.gcus.x10 > 2) {
+        void* snap_buf = cmSnap_80031618();
+        gmCamera_VsCamUiState.gcus.x1C = snap_buf;
+        if (snap_buf) {
+            if (lbSnap_8001DC0C(gmCamera_VsCamUiState.gcus.x1C) != 0) {
+                gmCamera_VsCamUiState.gcus.x20 = lbSnap_8001DF20();
                 gmCamera_801A3048(2);
             } else {
                 gmCamera_801A3048(0);
@@ -368,15 +402,10 @@ void gmCamera_801A292C(void)
     f32* tbl = gmCamera_803DA630;
     PAD_STACK(8);
 
-    unk.gcus = &gmCamera_80479BC8.gcus;
+    unk.gcus = &gmCamera_VsCamUiState.gcus;
     texts = unk.gcus->x48;
 
-    if (unk.gcus->x48[0] != NULL) {
-        for (i = 0; i < 3; i++) {
-            HSD_SisLib_803A5CC4(unk.gcus->x48[i]);
-            unk.gcus->x48[i] = NULL;
-        }
-    }
+    gmCamera_801A26C0_FreeTexts(unk.gcus);
 
     for (i = 0; i < 2; i++) {
         unk.gcus4->x24[i].x0 = lbSnap_8001D40C(i);
@@ -403,21 +432,21 @@ void gmCamera_801A292C(void)
 
 void gmCamera_801A2AAC(void)
 {
-    s32 temp_r0;
+    s32 save_state;
 
     if ((lbSnap_8001D338(0) != 0) || (lbSnap_8001D338(1) != 0)) {
         gmCamera_801A3048(2);
     } else if (HSD_PadCopyStatus[3].trigger & 0x100) {
         lbAudioAx_80024030(1);
-        switch (gmCamera_80479BC8.gcus.x44) {
+        switch (gmCamera_VsCamUiState.gcus.x44) {
         case 0:
         case 1:
             gmCamera_801A3048(6);
             return;
         }
         lbAudioAx_80024030(3);
-        temp_r0 = gmCamera_80479BC8.gcus.x44;
-        switch (temp_r0) {
+        save_state = gmCamera_VsCamUiState.gcus.x44;
+        switch (save_state) {
         case 5:
             gmCamera_801A3048(3);
             return;
@@ -464,7 +493,7 @@ void gmCamera_801A2BF0(void)
     u32* px18;
     f32 var_f1;
     f32 translate_x;
-    gmCameraUnkStruct* gcus = &gmCamera_80479BC8.gcus;
+    gmCameraUnkStruct* gcus = &gmCamera_VsCamUiState.gcus;
 
     px8 = &gcus->x8;
     lb_80011E24(gmCamera_801A2BF0_get_jobj(px8), &jobj_a, 9, -1);
@@ -487,7 +516,7 @@ void gmCamera_801A2BF0(void)
 static inline void gmCamera_801A2D44_update_selection(HSD_JObj** jobj_b,
                                                       HSD_JObj** jobj)
 {
-    gmCameraUnkStruct* gcus = &gmCamera_80479BC8.gcus;
+    gmCameraUnkStruct* gcus = &gmCamera_VsCamUiState.gcus;
     u32* px18;
     f32 translate_x;
 
@@ -522,7 +551,7 @@ static inline void gmCamera_801A2D44_update_selection(HSD_JObj** jobj_b,
 
 void gmCamera_801A2D44(void)
 {
-    gmCameraUnkStruct* gcus = &gmCamera_80479BC8.gcus;
+    gmCameraUnkStruct* gcus = &gmCamera_VsCamUiState.gcus;
     HSD_JObj* jobj;
     HSD_JObj* jobj_b;
     PAD_STACK(16);
@@ -552,7 +581,7 @@ void gmCamera_801A2D44(void)
 void gmCamera_801A2FBC(void)
 {
     s32 chan;
-    if (gmCamera_80479BC8.gcus.x44 == 0) {
+    if (gmCamera_VsCamUiState.gcus.x44 == 0) {
         chan = 1;
     } else {
         chan = 0;
@@ -575,26 +604,26 @@ void gmCamera_801A2FFC(void)
 
 void gmCamera_801A3048(s32 i)
 {
-    gmCamera_80479BC8.gcus.xC = i;
-    if (gmCamera_803DA6B4[gmCamera_80479BC8.gcus.xC].x4 != NULL) {
-        gmCamera_803DA6B4[gmCamera_80479BC8.gcus.xC].x4();
+    gmCamera_VsCamUiState.gcus.xC = i;
+    if (gmCamera_VsCamStateTable[gmCamera_VsCamUiState.gcus.xC].x4 != NULL) {
+        gmCamera_VsCamStateTable[gmCamera_VsCamUiState.gcus.xC].x4();
     }
 }
 
 void gmCamera_801A3098(void)
 {
-    if (gmCamera_803DA6B4[gmCamera_80479BC8.gcus.xC].x8 != NULL) {
-        gmCamera_803DA6B4[gmCamera_80479BC8.gcus.xC].x8();
+    if (gmCamera_VsCamStateTable[gmCamera_VsCamUiState.gcus.xC].x8 != NULL) {
+        gmCamera_VsCamStateTable[gmCamera_VsCamUiState.gcus.xC].x8();
     }
 }
 
 void gmCamera_801A30E4(void)
 {
-    gmCameraUnkStruct* gcus = &gmCamera_80479BC8.gcus;
+    gmCameraUnkStruct* gcus = &gmCamera_VsCamUiState.gcus;
     s32* pxc = &gcus->xC;
     HSD_JObj** px8;
     s32 i;
-    if ((gmCamera_803DA6B4[*pxc].flags.x0 != 0) && (gcus->x14 != 0) &&
+    if ((gmCamera_VsCamStateTable[*pxc].flags.x0 != 0) && (gcus->x14 != 0) &&
         (gm_801A45E8(1) == 0))
     {
         HSD_JObjClearFlagsAll(gcus->x4, JOBJ_HIDDEN);
@@ -604,7 +633,7 @@ void gmCamera_801A30E4(void)
     px8 = &gcus->x8;
     HSD_JObjSetFlagsAll((0, gcus->x8), JOBJ_HIDDEN);
     for (i = 0; i < 16; i++) {
-        if ((1 << i) & gmCamera_803DA6B4[*pxc].flags.x2) {
+        if ((1 << i) & gmCamera_VsCamStateTable[*pxc].flags.x2) {
             HSD_JObj* jobj;
             lb_80011E24(*px8, &jobj, i, -1);
             HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
@@ -630,26 +659,26 @@ void gmCamera_801A31FC(void)
     HSD_Joint** joint_a;
     DynamicModelDesc* mdl_b;
     HSD_GObj* gobj_a;
-    gmCameraUnkStruct* gcus = &gmCamera_80479BC8.gcus;
+    gmCameraUnkStruct* gcus = &gmCamera_VsCamUiState.gcus;
     PAD_STACK(8);
 
     cmSnap_800316B4();
     gcus->x14 = 1;
     gcus->xC = 0;
-    entry = &gmCamera_803DA6B4[gcus->xC];
+    entry = &gmCamera_VsCamStateTable[gcus->xC];
     if (entry->x4 != NULL) {
         entry->x4();
     }
     gcus->ifvscam = lbArchive_LoadArchive("IfVsCam");
     joint_a = HSD_ArchiveGetPublicAddress(gcus->ifvscam,
-                                          "IfCameraInfo_Top_model_set");
+                                          gmCamera_IfCameraInfoModelSetName);
     gobj_a = GObj_Create(0xE, 0x10, 0);
     HSD_GObjObject_80390A70(
         gobj_a, HSD_GObj_804D7849,
         gmCamera_SetJObj(&gcus->x4, HSD_JObjLoadJoint(*joint_a)));
     GObj_SetupGXLink(gobj_a, HSD_GObj_JObjCallback, 0xB, 0);
-    mdl_b =
-        HSD_ArchiveGetPublicAddress(gcus->ifvscam, "IfCamera_Top_model_set");
+    mdl_b = HSD_ArchiveGetPublicAddress(gcus->ifvscam,
+                                        gmCamera_IfCameraModelSetName);
     gobj_a = GObj_Create(0xE, 0x10, 0);
     jobj_b = gmCamera_SetJObj(&gcus->x8, HSD_JObjLoadJoint(mdl_b->joint));
     HSD_GObjObject_80390A70(gobj_a, HSD_GObj_804D7849, jobj_b);
@@ -660,95 +689,17 @@ void gmCamera_801A31FC(void)
     HSD_JObjSetFlagsAll(jobj_b, JOBJ_HIDDEN);
     HSD_GObj_SetupProc(gobj_a, fn_801A31D8, 0);
     gcus->x20 = 2;
-    HSD_SisLib_803A62A0(3, "SdVsCam", "SIS_VsCameraData");
+    HSD_SisLib_803A62A0(3, "SdVsCam", gmCamera_SisVsCameraDataName);
     gcus->x54 = HSD_SisLib_803A611C(3, NULL, 9, 0xD, 0, 0xE, 0, 0xB);
     gcus->x48[0] = NULL;
     gcus->x48[1] = NULL;
     gcus->x48[2] = NULL;
 }
 
-void gmCamera_801A33BC(void)
-{
-    HSD_Text* text;
-    s32 sp10;
-    s32 spC;
-
-    gmCamera_801A25C8_noinline();
-    gmCamera_80479C20.slot_a =
-        gmCamera_801A2334(0, gmCamera_803DA758[2], gmCamera_803DA758[3],
-                          gmCamera_803DA758[0], gmCamera_803DA758[1]);
-    gmCamera_80479C20.slot_b =
-        gmCamera_801A2334(1, gmCamera_803DA758[6], gmCamera_803DA758[7],
-                          gmCamera_803DA758[4], gmCamera_803DA758[5]);
-    gmCamera_801A253C(&sp10, &spC);
-    text = HSD_SisLib_803A5ACC(3, gmCamera_801A2640(), gmCamera_803DA758[10],
-                               gmCamera_803DA758[11], 0.0f, 914.2857f, 64.0f);
-    gmCamera_80479C20.bottom_text = text;
-    text->default_alignment = 1;
-    text->default_kerning = 1;
-    text->default_fitting = 1;
-    {
-        f32 fy = gmCamera_803DA758[9];
-        f32 fx = gmCamera_803DA758[8];
-        text->font_size.x = fx;
-        text->font_size.y = fy;
-    }
-    HSD_SisLib_803A6368(text, 0x15);
-    switch (sp10) {
-    case 0:
-    case 1:
-        gmCamera_801A2224(HSD_SisLib_803A6530(3, 0x15, 0x11), spC);
-        HSD_SisLib_803A660C(3, 0x15, 0x12);
-        break;
-    case 2:
-        HSD_SisLib_803A6530(3, 0x15, 0x13);
-        break;
-    default:
-        HSD_SisLib_803A6530(3, 0x15, 0x14);
-    }
-}
-
-void gmCamera_801A34FC_OnFrame(void)
-{
-    CameraVsData* data;
-    s32 i;
-    u64 button;
-
-    data = &gmCamera_80479C20;
-    if ((lbSnap_8001D338(0) != 0) || (lbSnap_8001D338(1) != 0)) {
-        for (i = 0; i < 3; i++) {
-            if (data->text[i] != NULL) {
-                HSD_SisLib_803A5CC4(data->text[i]);
-                data->text[i] = NULL;
-            }
-        }
-        gmCamera_801A33BC();
-    } else if (mn_8022F218() != 0) {
-        lbAudioAx_80024030(0);
-        mn_8022F268();
-        *gmCamera_80479C20.x0 = 2;
-        gm_801A4B60();
-    } else if (button = gm_801A36A0(4), (button & 0x1100) | (button & 0)) {
-        lbAudioAx_80024030(1);
-        *gmCamera_80479C20.x0 = 0;
-        gm_801A4B60();
-    } else if (button = gm_801A36A0(4), (button & 0x200) | (button & 0)) {
-        lbAudioAx_80024030(0);
-        *gmCamera_80479C20.x0 = 1;
-        gm_801A4B60();
-    }
-}
-
-void gmCamera_801A3634_OnEnter(UNK_T arg0)
-{
-    PAD_STACK(8);
-
-    gmCamera_80479C20.x0 = (u32*) arg0;
-    gmCamera_801A2650_noinline3();
-    gmCamera_80479C20.slot_a = NULL;
-    gmCamera_80479C20.slot_b = NULL;
-    gmCamera_80479C20.bottom_text = NULL;
-    gmCamera_801A33BC();
-}
-
-void gmCamera_801A367C_OnLeave(UNK_T unused) {}
+/// Working state of the VS camera-mode UI: model JObjs and texts loaded
+/// from IfVsCam/SdVsCam, the mode index into gmCamera_VsCamStateTable, and the
+/// per-slot memory-card snapshot entries (filled from lbSnap in
+/// gmCamera_801A25C8). Defined after all users (declaration in gmcamera.h)
+/// so MWCC emits symbol-addressed @ha/@l relocation pairs, matching
+/// retail; this TU's .bss holds it at its retail address 0x80479BC8.
+union _gmCameraUnkUnion gmCamera_VsCamUiState;

@@ -75,7 +75,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
             params = it_80285300(fp->item_gobj);
             break;
         default:
-            HSD_ASSERTREPORT(0x7C, NULL, "no afterimage item!\n");
+            HSD_ASSERTREPORT(0x7C, 0, "no afterimage item!\n");
             break;
         }
     } else {
@@ -174,7 +174,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
         }
 
         {
-            Vec3 crossProd, tempDir;
+            Vec3 tempDir, crossProd;
             f32 scaleDiff = x20FC - x20F8;
             s32 curIdx2;
             f32 blendedInner = params->x0 * scaleDiff + x20F8;

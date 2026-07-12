@@ -296,7 +296,8 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
         origin_x = sobj->x10;
         origin_y = sobj->x14;
     } else {
-        center_width = sobj->x1C * (f32) obj_width;
+        center_width = (f32) obj_width;
+        center_width *= sobj->x1C;
         center_height = (f32) obj_height * sobj->x20;
         origin_x = (HSD_SObjLib_804DEA94 * center_width) + sobj->x10;
         origin_y = (center_height * HSD_SObjLib_804DEA94) + sobj->x14;

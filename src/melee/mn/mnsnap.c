@@ -190,6 +190,11 @@ static inline HSD_ImageDesc* mnSnap_GetImageDesc(HSD_JObj* jobj)
     return jobj->u.dobj->next->next->mobj->tobj->imagedesc;
 }
 
+static inline s32 mnSnap_GetLoadPhotoIdx(mnSnap_State* snap, s32* load_idx)
+{
+    return *load_idx + (snap->cur_page * 4);
+}
+
 static void mnSnap_8025329C(void)
 {
     mnSnap_State* snap = &mnSnap_804A0A10;
@@ -197,7 +202,7 @@ static void mnSnap_8025329C(void)
     s32* p51;
     s32* flags;
     s32 result;
-    PAD_STACK(24);
+    PAD_STACK(4);
 
     result = lb_8001B6F8();
     if (result == 11) {
@@ -256,8 +261,8 @@ static void mnSnap_8025329C(void)
         *p52 += 1;
         *p51 -= 1;
         if (*p51 != 0) {
-            snap->card_result = lbSnap_8001E058(snap->active_slot,
-                                                *p52 + (snap->cur_page * 4));
+            snap->card_result = lbSnap_8001E058(
+                snap->active_slot, mnSnap_GetLoadPhotoIdx(snap, p52));
             if (snap->card_result == 8) {
                 mnSnap_80254298();
                 return;
@@ -278,16 +283,21 @@ static void mnSnap_8025329C(void)
     }
 }
 
+static inline s32* mnSnap_GetCurPage(mnSnap_State* snap)
+{
+    return &snap->cur_page;
+}
+
 /// Loads a page of snapshot thumbnails and updates navigation arrows.
 void mnSnap_80253640(s32 page)
 {
     HSD_JObj* jobj;
     void* img;
     mnSnap_State* snap;
-    s32* p48;
+    s32* p52;
     s32* p4F;
     s32* p50;
-    s32* p52;
+    s32* p48;
     s32* p58;
     s32* p51;
     s32 count;
@@ -297,7 +307,7 @@ void mnSnap_80253640(s32 page)
 
     snap = &mnSnap_804A0A10;
     p48 = &snap->photo_count[0];
-    p4F = &snap->cur_page;
+    p4F = mnSnap_GetCurPage(snap);
     p50 = &snap->active_slot;
     (void) p48;
     *p4F = page;
@@ -375,6 +385,7 @@ void mnSnap_80253640(s32 page)
 void mnSnap_80253964(void)
 {
     s32 i;
+    s32 j;
     s32 page = mnSnap_804A0A10.cur_page;
     s32 base = page * 4;
 
@@ -390,10 +401,10 @@ void mnSnap_80253964(void)
         }
     }
 
-    for (i = 0; i < 2; i++) {
-        (void) mnSnap_804A0A10.card_status[i];
+    for (i = 0, j = 0; i < 2; i++, j++) {
+        (void) mnSnap_804A0A10.card_status[j];
         HSD_SisLib_803A7664(mnSnap_804A0A10.count_texts[i]);
-        if (mnSnap_804A0A10.state >= 4 && mnSnap_804A0A10.card_status[i] == 1)
+        if (mnSnap_804A0A10.state >= 4 && mnSnap_804A0A10.card_status[j] == 1)
         {
             HSD_SisLib_803A6B98(mnSnap_804A0A10.count_texts[i], 0.0F, 0.0F,
                                 "%d", mnSnap_804A0A10.photo_count[i]);
@@ -734,10 +745,12 @@ void mnSnap_80254298(void)
 
     {
         /* walk strides through card_status (s16 at byte 0x128) */
-        s32 byte_off = 4;
+        s32 byte_off;
         s16* walk = (s16*) snap;
 
-        for (i = 0; i < 2; i++, byte_off += 8, walk++) {
+        i = 0;
+        byte_off = 4;
+        for (; i < 2; i++, walk++, byte_off += 8) {
             if (walk[0x94] != 0) { /* snap->card_status[i] */
                 f32 t;
                 if (*p50 == i) {
@@ -2443,6 +2456,7 @@ void mnSnap_80257F24(void)
     HSD_JObj* pos_start;
     HSD_JObj* pos_end;
     HSD_JObj** move_jobj_ptr;
+    HSD_JObj** slot_jobj_ptr;
     HSD_JObj** thumb_root_ptr;
     HSD_GObjProc* proc;
     HSD_Text* text;
@@ -2543,6 +2557,7 @@ void mnSnap_80257F24(void)
     lb_80011E24(jobj, (HSD_JObj**) &snap->thumb_jobjs[0], 8, 9, 0xA, 0xB, 0xC,
                 0xD, 6, 2, 1, -1);
 
+    slot_jobj_ptr = &snap->slot_a_jobj;
     snap->blank_img =
         *(void**) (snap->slot_a_jobj)->u.dobj->mobj->tobj->imagedesc;
 
@@ -2573,7 +2588,7 @@ void mnSnap_80257F24(void)
                        (HSD_ShapeAnimJoint*) *arrows_shapeanim);
     HSD_JObjReqAnimAll(jobj, 0.0F);
     HSD_JObjAnimAll(jobj);
-    lb_80011E24(jobj, &snap->slot_a_jobj, 1, 2, 3, 4, -1);
+    lb_80011E24(jobj, slot_jobj_ptr, 1, 2, 3, 4, -1);
 
     /* Cursor GObj */
     gobj = GObj_Create(6, 7, 0x80);

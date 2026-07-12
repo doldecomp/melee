@@ -732,29 +732,29 @@ s32 HSD_SisLib_803A67EC(u8* data, u8* string)
     s32 out_idx;
     u8* char_ptr;
     s32 state_colon;
-    s32 has_kerning;
+    s32 has_kerning[1];
     u8* out_ptr;
     u8 cur_char;
     u8 sjis_hi;
     u8 sjis_lo;
 
+    has_kerning[0] = 0;
     str_cursor = string;
     lut_ptr = HSD_SisLib_BytePtr(lbl_8040C8C0);
     out_ptr = HSD_SisLib_BytePtr(HSD_SisLib_8040C680);
-    has_kerning = 0;
     out_idx = 0;
     for (in_idx = 0; in_idx < 0x80; in_idx++, str_cursor++) {
         char_ptr = &string[in_idx];
         cur_char = *char_ptr;
         if (cur_char == '\0') {
-            if (has_kerning != 0) {
+            if (has_kerning[0] != 0) {
                 data[out_idx] = 0xB;
                 out_idx += 1;
             }
             break;
         }
         if (cur_char == ' ') {
-            state = has_kerning;
+            state = has_kerning[0];
             if (state == 0) {
                 data[out_idx++] = 0xA;
                 data[out_idx++] = 0xF4;
@@ -763,35 +763,35 @@ s32 HSD_SisLib_803A67EC(u8* data, u8* string)
                 data[out_idx++] = 0x0;
                 data[out_idx++] = 0x0;
             }
-            has_kerning = state;
+            has_kerning[0] = state;
             sjis_hi = 0x81;
             sjis_lo = 0x40;
         } else if (cur_char == '"') {
             data[out_idx] = 0xB;
             out_idx += 1;
-            has_kerning = 0;
+            has_kerning[0] = 0;
             sjis_hi = 0x81;
             sjis_lo = 0x68;
         } else if (cur_char == '\'') {
             data[out_idx] = 0xB;
             out_idx += 1;
-            has_kerning = 0;
+            has_kerning[0] = 0;
             sjis_hi = 0x81;
             sjis_lo = 0x66;
         } else if (cur_char == ',') {
             data[out_idx] = 0xB;
             out_idx += 1;
-            has_kerning = 0;
+            has_kerning[0] = 0;
             sjis_hi = 0x81;
             sjis_lo = 0x43;
         } else if (cur_char == '-') {
             data[out_idx] = 0xB;
             out_idx += 1;
-            has_kerning = 0;
+            has_kerning[0] = 0;
             sjis_hi = 0x81;
             sjis_lo = 0x7C;
         } else if (cur_char == '.') {
-            state_dot = has_kerning;
+            state_dot = has_kerning[0];
             if (state_dot == 0) {
                 data[out_idx++] = 0xA;
                 data[out_idx++] = 0xF4;
@@ -800,11 +800,11 @@ s32 HSD_SisLib_803A67EC(u8* data, u8* string)
                 data[out_idx++] = 0x0;
                 data[out_idx++] = 0x0;
             }
-            has_kerning = state_dot;
+            has_kerning[0] = state_dot;
             sjis_hi = 0x81;
             sjis_lo = 0x44;
         } else if ((cur_char >= '0') && (cur_char <= '9')) {
-            state_digit = has_kerning;
+            state_digit = has_kerning[0];
             out_idx_digit = out_idx;
             if (state_digit == 0) {
                 data[out_idx_digit++] = 0xA;
@@ -814,12 +814,12 @@ s32 HSD_SisLib_803A67EC(u8* data, u8* string)
                 data[out_idx_digit++] = 0x0;
                 data[out_idx_digit++] = 0x0;
             }
-            has_kerning = state_digit;
+            has_kerning[0] = state_digit;
             out_idx = out_idx_digit;
             sjis_hi = 0x82;
             sjis_lo = (u8) *char_ptr + 0x1F;
         } else if (cur_char == ':') {
-            state_colon = has_kerning;
+            state_colon = has_kerning[0];
             if (state_colon == 0) {
                 data[out_idx++] = 0xA;
                 data[out_idx++] = 0xF4;
@@ -828,25 +828,25 @@ s32 HSD_SisLib_803A67EC(u8* data, u8* string)
                 data[out_idx++] = 0x0;
                 data[out_idx++] = 0x0;
             }
-            has_kerning = state_colon;
+            has_kerning[0] = state_colon;
             sjis_hi = 0x81;
             sjis_lo = 0x46;
         } else if ((cur_char >= 'A') && (cur_char <= 'Z')) {
             data[out_idx] = 0xB;
-            has_kerning = 0;
+            has_kerning[0] = 0;
             out_idx += 1;
             sjis_hi = 0x82;
             sjis_lo = (u8) *char_ptr + 0x1F;
         } else if ((cur_char >= 'a') && (cur_char <= 'z')) {
             data[out_idx] = 0xB;
-            has_kerning = 0;
+            has_kerning[0] = 0;
             out_idx += 1;
             sjis_hi = 0x82;
             sjis_lo = (u8) *char_ptr + 0x20;
         } else {
             data[out_idx] = 0xB;
             out_idx += 1;
-            has_kerning = 0;
+            has_kerning[0] = 0;
             sjis_hi = (u8) string[in_idx];
             in_idx += 1;
             sjis_lo = str_cursor[1];
@@ -871,7 +871,7 @@ static inline void HSD_SisLib_803A6B98_inline0(HSD_Text* text, u8** cur,
                                                s32* copied_bytes)
 {
     *(*cur)++ = (u8) (s32) (256.0F * text->x34.y);
-    for (*copied_bytes = 0; *copied_bytes < encoded_len; (*copied_bytes)++) {
+    for (; *copied_bytes < encoded_len; (*copied_bytes)++) {
         *(*cur)++ = encoded[*copied_bytes];
     }
     *(*cur)++ = 0xF;
@@ -1018,27 +1018,15 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
     u8 buffer[128];
     u8 encoded[128];
     s32 old_size;
-    u8* new_buf;
-    s32 shrink_diff;
-    s32 tail_len;
-    s32 copy_idx;
-    s32 i;
-    s32 remainder;
-    u32 required_size;
-    u32 cur_size;
-    u32 bulk_count;
     u8* entry;
+    SisBlock* alloc;
     u8* playhead;
     va_list args;
-    u8* copy_src;
-    u8* copy_dst;
-    u8* src;
-    u8* dst;
-    u8* tail_src;
-    SisBlock* alloc;
     s32 result;
-    SisBlock* old_end;
     s32 new_size;
+    s32 i;
+
+    result = 0;
 
     entry = fn_803A6FEC((u8*) text->sis_buffer, entry_idx, &old_size);
     if (entry != NULL) {
@@ -1053,7 +1041,12 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
             new_size = 0;
         }
         if (old_size < new_size) {
+            SisBlock* old_end;
             HSD_Text* old_buf;
+            u32 cur_size;
+            s32 tail_len;
+            u32 required_size;
+
             old_end = alloc->next;
             result = new_size - old_size;
             old_buf = alloc->data;
@@ -1061,12 +1054,17 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
             tail_len = (u8*) old_end - playhead;
             {
                 u32 new_required_size =
-                    new_size + ((HSD_SisLib_BytePtr(old_end) -
-                                 HSD_SisLib_BytePtr(old_buf)) +
-                                1);
+                    new_size + (HSD_SisLib_BytePtr(old_end) -
+                                HSD_SisLib_BytePtr(old_buf)) +
+                    1;
                 required_size = new_required_size;
             }
             if (cur_size < required_size) {
+                u8* new_buf;
+                u8* copy_src;
+                u8* copy_dst;
+                s32 copy_idx;
+
                 alloc->size =
                     cur_size +
                     ((((u32) (required_size - cur_size) >> 7U) + 1) << 7);
@@ -1084,107 +1082,32 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
                 }
                 alloc->data = (HSD_Text*) new_buf;
                 text->sis_buffer = (SIS*) new_buf;
-                alloc->next =
-                    (SisBlock*) (new_buf + ((u8*) old_end - (u8*) old_buf));
+                alloc->next = (SisBlock*)
+                    (new_buf + (HSD_SisLib_BytePtr(alloc->next) -
+                                HSD_SisLib_BytePtr(old_buf)));
                 HSD_SisLib_Free(old_buf);
                 playhead = (u8*) alloc->next - tail_len;
             }
-            dst = &playhead[result + tail_len];
-            src = &playhead[tail_len];
-            if (tail_len > 0) {
-                bulk_count = (u32) tail_len >> 3U;
-                if (bulk_count != 0) {
-                    for (; bulk_count != 0; bulk_count--) {
-                        for (i = 0; i < 8; i++) {
-                            dst[-i] = src[-i];
-                        }
-                        src -= 8;
-                        dst -= 8;
-                    }
-                    remainder = tail_len & 7;
-                    if (remainder == 0) {
-                        goto grow_done;
-                    }
-                } else {
-                    remainder = tail_len;
-                }
-                do {
-                    *dst = *src;
-                    src -= 1;
-                    dst -= 1;
-                    remainder -= 1;
-                } while (remainder != 0);
+            for (i = tail_len; i > 0; i--) {
+                playhead[result + i] = playhead[i];
             }
-        grow_done:
-            alloc->next =
-                (SisBlock*) (HSD_SisLib_BytePtr(alloc->next) + result);
+            alloc->next = (SisBlock*)
+                (HSD_SisLib_BytePtr(alloc->next) + result);
         } else if (old_size > new_size) {
-            shrink_diff = old_size - new_size;
-            i = 0;
-            tail_len = (u8*) alloc->next - playhead;
-            if (tail_len > 0) {
-                if (tail_len > 8) {
-                    bulk_count = (u32) ((tail_len - 8) + 7) >> 3U;
-                    src = &playhead[shrink_diff];
-                    if ((tail_len - 8) > 0) {
-                        do {
-                            dst = &playhead[i];
-                            i += 8;
-                            for (copy_idx = 0; copy_idx < 8; copy_idx++) {
-                                dst[copy_idx] = src[copy_idx];
-                            }
-                            src += 8;
-                            bulk_count -= 1;
-                        } while (bulk_count != 0);
-                    }
-                }
-                tail_src = &playhead[shrink_diff + i];
-                (void) tail_src;
-                remainder = tail_len - i;
-                dst = &playhead[i];
-                if (i < tail_len) {
-                    do {
-                        *dst = *tail_src;
-                        tail_src += 1;
-                        dst += 1;
-                        remainder -= 1;
-                    } while (remainder != 0);
-                }
+            s32 shrink_size = old_size - new_size;
+            s32 tail_len = HSD_SisLib_BytePtr(alloc->next) - playhead;
+
+            for (i = 0; i < tail_len; i++) {
+                playhead[i] = playhead[shrink_size + i];
             }
-            alloc->next = (SisBlock*) ((u8*) alloc->next - shrink_diff);
+            alloc->next = (SisBlock*)
+                (HSD_SisLib_BytePtr(alloc->next) - shrink_size);
         }
-        i = 0;
-        if (new_size > 0) {
-            if (new_size > 8) {
-                bulk_count = (u32) ((new_size - 8) + 7) >> 3U;
-                src = encoded;
-                if ((new_size - 8) > 0) {
-                    do {
-                        i += 8;
-                        for (copy_idx = 0; copy_idx < 8; copy_idx++) {
-                            playhead[copy_idx] = src[copy_idx];
-                        }
-                        src += 8;
-                        playhead += 8;
-                        bulk_count -= 1;
-                    } while (bulk_count != 0);
-                }
-            }
-            tail_src = encoded + i;
-            remainder = new_size - i;
-            if (i < new_size) {
-                do {
-                    *playhead = *tail_src;
-                    tail_src += 1;
-                    playhead += 1;
-                    remainder -= 1;
-                } while (remainder != 0);
-            }
+        for (i = 0; i < new_size; i++) {
+            *playhead++ = encoded[i];
         }
         *playhead = 0xF;
         result = 1;
-    } else {
-        result = 0;
     }
     return result;
 }
@@ -1466,7 +1389,7 @@ void HSD_SisLib_803A7684(HSD_Text* text, u8* cursor, u8 flags)
     s32 idx;
     u16 count;
     s32 pos;
-    u32 bulk;
+    s32 bulk;
     u8* old_buf;
     u8* src;
 
@@ -1912,11 +1835,10 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
     u8 *default_kerning = HSD_SisLib_8040CB00;
 
     if (gobj != NULL) {
-        if (pass == 2U) {
-            text = gobj->user_data;
-        } else {
+        if (pass != 2U) {
             return;
         }
+        text = gobj->user_data;
     } else {
         text = (HSD_Text*) pass;
     }

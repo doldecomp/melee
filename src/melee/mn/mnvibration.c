@@ -245,7 +245,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
     u8 rumble_setting;
     HSD_JObj* loaded_joint;
     HSD_JObj* jobj;
-    u8 sp[112];
+    u8 sp[104];
 
     if (mn_804D6BC8.cooldown != 0) {
         Menu_DecrementAnimTimer();

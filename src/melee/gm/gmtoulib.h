@@ -47,7 +47,7 @@
 /* 18F888 */ void fn_8018F888(void);
 /* 18FA24 */ void fn_8018FA24(void);
 /* 18FBD8 */ void fn_8018FBD8(UNK_T arg0, s32 arg1);
-/* 18FBE0 */ void fn_8018FBE0(s32, s32, s32, s8, s8, s16, s8);
+/* 18FBE0 */ void fn_8018FBE0(s32, s32, s32, s32, s32, s32, s32);
 /* 18FDC4 */ void fn_8018FDC4(HSD_JObj*, float x, float y, float z);
 /* 18FF9C */ void fn_8018FF9C(HSD_JObj*, float x, float y, float z);
 /* 190174 */ HSD_GObj* fn_80190174(HSD_CObjDesc*);
@@ -174,5 +174,7 @@
 /* 3D9F80 */ extern struct TmSettingTable lbl_803D9F80;
 /* 3D9D20 */ extern struct lbl_803D9D20_t lbl_803D9D20;
 /* 3B7D18 */ extern union TmAnimFrameTable lbl_803B7D18;
+/* 4DA7E0 */ extern f32 gm_TouSlotBaseX; // -19.5f: leftmost panel x, 4-wide
+/* 4DA7E4 */ extern f32 gm_TouSlotSpacingX; // 13.0f: panel x stride
 
 #endif

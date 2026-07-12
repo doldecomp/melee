@@ -498,7 +498,7 @@ void grOnett_801E43E0(Ground_GObj* gobj)
 
         switch ((s8) gp->gv.onettcar.state_a) {
         case 0: {
-            u8 old_car = gp->gv.onettcar.curr_car;
+            s8 old_car = gp->gv.onettcar.curr_car;
             while (gp->gv.onettcar.curr_car == old_car ||
                    gp->gv.onettcar.curr_car == gp->gv.onettcar.next_car)
             {

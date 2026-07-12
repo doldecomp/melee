@@ -557,7 +557,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
         ((state->damage_percent % 1000) / 100 == 1) ? 0.5069F : 0.0F;
     digit_jobj = state->jobjs[Hundreds];
     pos = state->translation_x[Hundreds] +
-          (tens_offset + digit_offset + hundreds_offset);
+          (tens_offset + hundreds_offset + digit_offset);
     if (digit_jobj == NULL) {
         __assert("jobj.h", 932, "jobj");
     }
@@ -854,27 +854,32 @@ static inline void ifStatus_SetupMark(IfDamageState* state, s32 player_idx,
                 (HSD_ShapeAnimJoint**) hud->unk274);
 }
 
-static inline void ifStatus_SetMarkPosition(s32 idx, HSD_JObj* jobj)
+static inline void ifStatus_SetupMarkDisplay(HSD_JObj* jobj, s32 idx,
+                                             u8* slot, u8* hud_color)
 {
-    Vec3* vec;
+    {
+        Vec3* vec;
 
-    vec = ifAll_802F3424(idx);
-    HSD_JObjSetTranslate(jobj, vec);
-    HSD_JObjAddTranslationX(jobj, 0.25f);
+        vec = ifAll_802F3424(idx);
+        HSD_JObjSetTranslate(jobj, vec);
+        HSD_JObjAddTranslationX(jobj, 0.25f);
+    }
+    *slot = Player_GetPlayerSlotType(idx);
+    *hud_color = gm_8016B168();
 }
 
 void ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
 {
     HSD_GObj* gobj;
     HSD_JObj* jobj;
-    HSD_TObj* tobj;
+    GXColor color;
     Vec3* vec;
     HSD_MObj* mobj;
     u8 hud_color;
     CharacterKind chara;
     u8 slot;
     u8 team;
-    GXColor color;
+    HSD_TObj* tobj;
     HudIndex* hud = &ifStatus_HudInfo;
     u8 idx = player_idx;
 
@@ -885,9 +890,7 @@ void ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
     HSD_TObjReqAnimAll(tobj, 0.5f + gm_80168B34(chara, 0, 0));
     HSD_AObjSetRate(tobj->aobj, 0.1f);
     HSD_TObjAnim(tobj);
-    ifStatus_SetMarkPosition(idx, jobj);
-    slot = Player_GetPlayerSlotType(idx);
-    hud_color = gm_8016B168();
+    ifStatus_SetupMarkDisplay(jobj, idx, &slot, &hud_color);
     team = Player_GetTeam(idx);
     color = gm_80160968(
         gm_80160854(Player_GetPlayerId(idx), team, hud_color, slot));

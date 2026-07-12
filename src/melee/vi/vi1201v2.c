@@ -241,6 +241,8 @@ void un_80320A40_OnEnter(void* arg)
     u8 char_index;
     HSD_CObj* cobj;
     HSD_GObj* gobj;
+    HSD_GObj* stand_gobj;
+    HSD_GObj* light_gobj;
     HSD_Fog* fog;
     HSD_JObj* child;
     HSD_JObj* jobj;
@@ -294,12 +296,12 @@ void un_80320A40_OnEnter(void* arg)
     lb_8000C290(jobj, un_804D7024);
     HSD_GObj_SetupProc(gobj, un_803204E4, 0x17);
 
-    gobj = GObj_Create(0xE, 0xF, 0);
-    un_804D7034 = gobj;
+    stand_gobj = GObj_Create(0xE, 0xF, 0);
+    un_804D7034 = stand_gobj;
     jobj = HSD_JObjLoadJoint(un_804D7014->models[0]->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
-    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
-    HSD_GObj_SetupProc(gobj, un_803204C0, 0x17);
+    HSD_GObjObject_80390A70(stand_gobj, HSD_GObj_804D7849, jobj);
+    GObj_SetupGXLink(stand_gobj, HSD_GObj_JObjCallback, 0xB, 0);
+    HSD_GObj_SetupProc(stand_gobj, un_803204C0, 0x17);
 
     if (jobj == NULL) {
         child = NULL;
@@ -334,10 +336,10 @@ void un_80320A40_OnEnter(void* arg)
     un_804D7028 = fog->color;
     un_804D702C = 0;
 
-    gobj = GObj_Create(0xB, 3, 0);
+    light_gobj = GObj_Create(0xB, 3, 0);
     lobj = lb_80011AC4(un_804D7010->lights);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
-    GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
+    HSD_GObjObject_80390A70(light_gobj, HSD_GObj_804D784A, lobj);
+    GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0, 0);
 
     lbAudioAx_80024E50(0);
 }

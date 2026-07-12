@@ -722,6 +722,11 @@ HSD_JObj* mnItemSw_80235020(u8 arg0, MnItemSwData* arg1)
     return jobj;
 }
 
+static inline HSD_JObj* mnItemSw_GetLeftColumn(MnItemSwData* data)
+{
+    return data->jobjs[4];
+}
+
 HSD_GObj* mnItemSw_802351A0(s32 arg0)
 {
     HSD_GObj* gobj;
@@ -778,7 +783,7 @@ HSD_GObj* mnItemSw_802351A0(s32 arg0)
     }
 
     y_spacing = HSD_JObjGetTranslationY(user_data->jobjs[5]) -
-                HSD_JObjGetTranslationY(user_data->jobjs[4]);
+                HSD_JObjGetTranslationY(mnItemSw_GetLeftColumn(user_data));
 
     for (i = 0; i < 0x1F; i++) {
         item_jobj = mnItemSw_80235020((u8) i, user_data);

@@ -769,6 +769,16 @@ void gmMainLib_8015DB80(void)
     }
 }
 
+static inline void gmMainLib_AdjustConfigNameTag(
+    int value, s32 name_tag, struct gmm_x0_528_t** config)
+{
+    if (value == (u8) name_tag) {
+        (*config)[4].c_kind = 0x78;
+    } else if (value > (u8) name_tag && value != 0x78) {
+        (*config)[4].c_kind = value - 1;
+    }
+}
+
 s32 gmMainLib_8015DBF4(s32 arg0)
 {
     extern VsModeData gm_80497618;
@@ -845,11 +855,7 @@ s32 gmMainLib_8015DBF4(s32 arg0)
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_522.x4);
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_528.x4);
     val = config[4].c_kind;
-    if (val == (u8) arg0) {
-        config[4].c_kind = 0x78;
-    } else if (val > (u8) arg0 && val != 0x78) {
-        config[4].c_kind = val - 1;
-    }
+    gmMainLib_AdjustConfigNameTag(val, arg0, &config);
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_530.unk_584.unk_586);
 
     ADJ_VMD_SINGLE(&gm_80497618);
@@ -1132,25 +1138,25 @@ GetPersistentFighterDataBase(struct gmm_x1868* data)
     return data->x1F2C;
 }
 
-static inline void ResetPersistentFighterData(void)
+static inline void ResetPersistentFighterData(s32 i)
 {
-    s32 i;
-
-    for (i = 0; i < 0x19; i++) {
-        int j = 0;
-        struct FighterData* base =
-            GetPersistentFighterDataBase(&gmMainLib_804D3EE0->thing);
-        for (; 0x19 > j; j++) {
-            base[(u8) i].fighter_kos[j] = 0;
-        }
-        gmMainLib_8015EF30(
-            (struct gmMainLib_8015EF30_s*) &base[(u8) i].sd_count);
+    int j = 0;
+    struct FighterData* base =
+        GetPersistentFighterDataBase(&gmMainLib_804D3EE0->thing);
+    for (; 0x19 > j; j++) {
+        base[(u8) i].fighter_kos[j] = 0;
     }
+    gmMainLib_8015EF30(
+        (struct gmMainLib_8015EF30_s*) &base[(u8) i].sd_count);
 }
 
 void gmMainLib_8015F150(void)
 {
-    ResetPersistentFighterData();
+    s32 i;
+
+    for (i = 0; i < 0x19; i++) {
+        ResetPersistentFighterData(i);
+    }
 }
 
 void gmMainLib_8015F260(void)
@@ -1259,23 +1265,10 @@ static s8 gmMainLib_804D3EE4[] = { 0 };
 void gmMainLib_8015F600(int arg0, int arg1)
 {
     s32 lang;
-    PAD_STACK(96);
+    PAD_STACK(88);
 
     if (arg0 == 1) {
-        s32 j = 0;
-        do {
-            s32 i;
-            u8 slot = j;
-            struct FighterData* fdata = gmMainLib_804D3EE0->thing.x1F2C;
-            for (i = 0; 25 > i; i++) {
-                fdata[slot].fighter_kos[i] = 0;
-            }
-            gmMainLib_8015EF30(
-                (struct gmMainLib_8015EF30_s*) &gmMainLib_804D3EE0->thing
-                    .x1F2C[slot]
-                    .sd_count);
-            j++;
-        } while (j < 25);
+        ResetPersistentFighterData();
 
         memzero(&gmMainLib_804D3EE0->thing.x1CD0, 0x25C);
         Toy_80311960();

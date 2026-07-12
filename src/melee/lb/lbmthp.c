@@ -454,8 +454,6 @@ void lbMthp_8001F410(const char* filename, u32* rate_table, void* buf,
                      size_t heap_size, int loop)
 {
     size_t memoryRequired;
-    OSTime start;
-    OSTime period;
 
     HSD_ASSERT(833, !MoviePlayer.power);
     MoviePlayer.power = 1;
@@ -474,12 +472,11 @@ void lbMthp_8001F410(const char* filename, u32* rate_table, void* buf,
     MoviePlayer.unk_144 = 0;
     MoviePlayer.unk_148 = 1;
     OSCreateAlarm(&MoviePlayer.alarm);
-    period = __cvt_dbl_usll(OSSecondsToTicks(1.0f / 60));
-    start = __cvt_dbl_usll(OSSecondsToTicks(1.0f / 60));
     OSSetPeriodicAlarm(
         (OSAlarm*) ((uintptr_t) &MoviePlayer +
                     offsetof(struct lbl_804333E0_t, alarm)),
-        start, period, fn_8001F2A4);
+        __cvt_dbl_usll(OSSecondsToTicks(1.0f / 60)),
+        __cvt_dbl_usll(OSSecondsToTicks(1.0f / 60)), fn_8001F2A4);
 }
 
 void lbMthp_8001F578(void)

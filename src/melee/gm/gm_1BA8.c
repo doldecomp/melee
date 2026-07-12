@@ -337,9 +337,15 @@ struct gm_random_history {
     u8 stage_usage[0x1D];
 };
 
+/// Accessor for the event data block inside gmMainLib_804D3EE0.
+static inline struct EventData* gm_GetEventData(void)
+{
+    return &gmMainLib_804D3EE0->unk_530;
+}
+
 void gm_801BAD70(GameScene* arg0)
 {
-    struct EventData* ev = &gmMainLib_804D3EE0->unk_530;
+    struct EventData* ev = gm_GetEventData();
     StartMeleeData* md = gm_801A427C(arg0);
     u8* r3b = (u8*) md;
     u8 level = ev->unk_535;
@@ -993,6 +999,17 @@ static inline void gm_801BC00C_inline(gm_801BAB40_src* event_entry)
     gm_8016A9E8(ckind, (s8) costume);
 }
 
+static inline s8 gm_801BC00C_GetCharacter(gm_801BAB40_src* event_entry)
+{
+    return Player_800325C8((CharacterKind) (s8) event_entry->c_kind, 0);
+}
+
+static inline CharacterKind
+    gm_801BC00C_GetCharacterKind(gm_801BAB40_src* event_entry)
+{
+    return (CharacterKind) (s8) event_entry->c_kind;
+}
+
 s32 gm_801BC00C(void)
 {
     struct gm_804D6900_t** event_levels;
@@ -1048,13 +1065,13 @@ s32 gm_801BC00C(void)
         } else {
             event_entry = ((void**) ((u8*) event_levels[idx]->x10 + 0x10))[4];
             ftLib_80087508(
-                Player_800325C8((CharacterKind) (s8) * (u8*) event_entry, 0),
+                Player_800325C8(gm_801BC00C_GetCharacterKind(event_entry), 0),
                 *((u8*) event_entry + 3));
         }
         break;
     case 43:
-        chr = Player_800325C8(
-            (CharacterKind) (s8) * (u8*) event_levels[idx]->x4->x4, 0);
+        chr = gm_801BC00C_GetCharacter(
+            (gm_801BAB40_src*) event_levels[idx]->x4->x4);
         ftLib_80087508(chr, ev->x50[2]);
         if ((s8) ev->x0 == 4) {
             Player_80031DA8(chr, ev->x1);
@@ -1909,16 +1926,6 @@ void gm_801BCAF0(HSD_GObj* gobj)
     }
 }
 
-/// Accessor for the event data block inside gmMainLib_804D3EE0.
-/// gm_801BCC9C needs this inline (instead of taking the address directly
-/// in its trailing block) so the compiler rematerializes the pointer in
-/// the order the reference object shows; with the direct expression the
-/// tail of the function schedules one load early and stays at 99.65%.
-static inline struct EventData* gm_GetEventData(void)
-{
-    return &gmMainLib_804D3EE0->unk_530;
-}
-
 void gm_801BCC9C(HSD_GObj* arg0)
 {
     struct gm_804D6900_t** temp_r29 = gm_804D6900[0];
@@ -2572,11 +2579,11 @@ void gm_801BDE94(HSD_GObj* arg0)
 {
     PlayerInitData sp50;
     struct gm_804D6900_t** tbl = gm_804D6900[0];
-    struct EventData* ev = &gmMainLib_804D3EE0->unk_530;
+    struct EventData* ev = gm_GetEventData();
     u8 level = ev->unk_535;
     u64 mask;
     struct gm_804D6900_x4_t* x4 = (*tbl)->x4;
-    PAD_STACK(0x44);
+    PAD_STACK(0x3C);
 
     if (!ev->xB_5) {
         ev->xB_5 = 1;
@@ -2706,7 +2713,7 @@ void gm_801BDE94(HSD_GObj* arg0)
         return;
     }
     {
-        struct EventData* ev2 = &gmMainLib_804D3EE0->unk_530;
+        struct EventData* ev2 = gm_GetEventData();
         lbl_8046B6A0_t* info = gm_8016AE38();
         int do_end;
         if (ev2->xB_0) {

@@ -636,6 +636,11 @@ void _tyList_80313774(void)
     _tyList_80312BAC(state, state_tail->x0C);
 }
 
+static inline s32 get_repeat_count(void)
+{
+    return (s8) _tyList_804A2AC0.pad_29D;
+}
+
 void _tyList_80313BD8(HSD_GObj* gobj)
 {
     TyListState* state;
@@ -658,7 +663,7 @@ void _tyList_80313BD8(HSD_GObj* gobj)
             return;
         }
         if ((s8) state->x29E != 0) {
-            s32 d = (s8) _tyList_804A2AC0.pad_29D;
+            s32 d = get_repeat_count();
             s32 half = d / 2;
             s32 r;
             if ((d % 2) != 0) {
@@ -814,7 +819,7 @@ void _tyList_80313BD8(HSD_GObj* gobj)
     g->x0C = (s8) ((f32) (s8) g->x0C + f31);
     if ((s8) g->x0C < 0) {
         g->x0C = 0;
-    } else if ((s8) g->x0C > (s8) state->entryCount - 3) {
+    } else if ((s8) g->x0C > state->entryCount - 3) {
         g->x0C = state->entryCount - 3;
     }
 

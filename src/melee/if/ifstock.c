@@ -57,10 +57,14 @@ int ifStock_802F7EFC(int arg0, int arg1)
     int stocks;
     int i, j;
     stock = &ifStock_804A1378;
-    arg0_data = stock->x204;
+    arg0_data = (struct ifStock_804A1378_x204*) stock;
     arg0_data += arg0;
-    arg1_data = (struct IfStockStealData*) stock->x204;
+    arg0_data = (struct ifStock_804A1378_x204*) ((unsigned char*) arg0_data +
+                                                 0x204);
+    arg1_data = (struct IfStockStealData*) stock;
     arg1_data += arg1;
+    arg1_data = (struct IfStockStealData*) ((unsigned char*) arg1_data +
+                                             0x204);
     if (Player_GetStocks(arg1) == 0) {
         return 1;
     }
@@ -163,7 +167,8 @@ void ifStock_802F8298(HSD_GObj* gobj)
                 }
                 if (stock->x204[user_data->player].x0[i + 5] == 0) {
                     HSD_JObjGetTranslation(jobj, &vecA);
-                    HSD_JObjGetTranslation(jobj2, &vecB);
+                    HSD_JObjGetTranslation(
+                        stock->player[user_data->player].x4[i + 1], &vecB);
                     vecB.x += vecA.x;
                     vecB.y += vecA.y;
                     vecB.z += vecA.z;
@@ -228,22 +233,32 @@ void ifStock_802F8298(HSD_GObj* gobj)
                 vecA.z -= vecB.z;
                 HSD_JObjSetTranslate(jobj2, &vecA);
                 if (stock->x204[user_data->player].x0[i + 5] == 1) {
-                    struct IfStockStealAnim* anim =
-                        (struct IfStockStealAnim*) &stock
-                            ->x204[user_data->player]
-                            .x0[0xC +
-                                (i - 5) * sizeof(struct IfStockStealAnim)];
-                    vecA.x = anim->start.x;
-                    vecA.y = anim->start.y;
+                    vecA.x = ((struct IfStockStealAnim*) &stock
+                                  ->x204[user_data->player]
+                                  .x0[0xC +
+                                      (i - 5) *
+                                          sizeof(struct IfStockStealAnim)])
+                                 ->start.x;
+                    vecA.y = ((struct IfStockStealAnim*) &stock
+                                  ->x204[user_data->player]
+                                  .x0[0xC +
+                                      (i - 5) *
+                                          sizeof(struct IfStockStealAnim)])
+                                 ->start.y;
                     efSync_Spawn(0x475, gobj, &vecA);
                 } else if (stock->x204[user_data->player].x0[i + 5] == 10) {
-                    struct IfStockStealAnim* anim =
-                        (struct IfStockStealAnim*) &stock
-                            ->x204[user_data->player]
-                            .x0[0xC +
-                                (i - 5) * sizeof(struct IfStockStealAnim)];
-                    vecA.x = anim->end.x;
-                    vecA.y = anim->end.y;
+                    vecA.x = ((struct IfStockStealAnim*) &stock
+                                  ->x204[user_data->player]
+                                  .x0[0xC +
+                                      (i - 5) *
+                                          sizeof(struct IfStockStealAnim)])
+                                 ->end.x;
+                    vecA.y = ((struct IfStockStealAnim*) &stock
+                                  ->x204[user_data->player]
+                                  .x0[0xC +
+                                      (i - 5) *
+                                          sizeof(struct IfStockStealAnim)])
+                                 ->end.y;
                     efSync_Spawn(0x476, gobj, &vecA);
                 }
                 stock->x204[user_data->player].x0[i + 5]++;
@@ -286,7 +301,8 @@ static inline void ifStock_802F89F8_inline(struct IfStockUserData* user_data,
                 JOBJ_HIDDEN);
             temp = ifStock_GetDigitCount(count, i) - 1;
             if (temp == 0) {
-                digit = coins % 10;
+                digit = coins;
+                digit %= 10;
             } else {
                 divisor = 1;
                 for (j = 0; j < temp; j++) {
@@ -322,7 +338,7 @@ void ifStock_802F89F8(HSD_GObj* gobj)
     int coins2;
     int count;
     Player_GetCoins(player);
-    PAD_STACK(32);
+    PAD_STACK(24);
     coins = ifStock_804A1378.player[user_data->player].coins =
         Player_GetCoins(user_data->player);
     if ((u32) coins > 99999U) {
@@ -544,7 +560,7 @@ void ifStock_802F98E8(unsigned char player, int b)
     if (stock->x0 != NULL) {
         HSD_GObj* gobj;
         user_data = &stock->x204[player];
-        user_data->x0[0] = player;
+        stock->x204[player].x0[0] = player;
         user_data->x0[1] = b;
         user_data->x0[2] = 1;
         {

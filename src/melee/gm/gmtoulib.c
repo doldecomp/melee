@@ -259,18 +259,18 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
 
     entry_offset = entry_idx * 0xDC;
     slot_offset = slot_idx * 0x2C;
+    sub = slot_offset + &entries->x0 + entry_offset;
     {
         u8* bytes = &entries->x0;
         entry = (BracketEntry*) (bytes + entry_offset);
     }
-    sub = slot_offset + &entries->x0 + entry_offset;
 
-    p34 = (s32*) (sub + 0x34);
+    p48 = (s32*) (sub + 0x48);
     p3C = (s32*) (sub + 0x3C);
     p44 = (s32*) (sub + 0x44);
     p38 = (s32*) (sub + 0x38);
     p40 = (s32*) (sub + 0x40);
-    p48 = (s32*) (sub + 0x48);
+    p34 = (s32*) (sub + 0x34);
 
     if (entry->x1 != 0) {
         px3 = &entry->x3;
@@ -495,6 +495,16 @@ static inline f32* GetBracketCamY(f32* cam)
     return &cam[1];
 }
 
+static inline f32* GetBracketCamTargetX(f32* cam)
+{
+    return &cam[3];
+}
+
+static inline f32 GetBracketSlideY(u8* p)
+{
+    return 0.3f * (f32) lbl_804D6630 + (f32) *(s32*) (p + 0x48);
+}
+
 void fn_8018B090(HSD_GObj* arg0)
 {
     TmData* tm = gm_8018F634();
@@ -541,9 +551,7 @@ void fn_8018B090(HSD_GObj* arg0)
                                             (f32) * (s32*) (p + 0x48)));
                             }
                         } else if (i == 0) {
-                            HSD_JObjSetTranslateY(
-                                jobj, -((0.3f * (f32) lbl_804D6630) +
-                                        (f32) * (s32*) (p + 0x48)));
+                            HSD_JObjSetTranslateY(jobj, -GetBracketSlideY(p));
                         } else {
                             HSD_JObjSetTranslateY(
                                 jobj, -((f32) * (s32*) (p + 0x48) -
@@ -593,7 +601,7 @@ void fn_8018B090(HSD_GObj* arg0)
             s32 t3 = t5 >> 0x1F;
             lbl_804D6630 += 1;
             if (mn_8022F410(&cam[0], &cam[3], cam[6]) < 0) {
-                mn_8022F410(&cam[0], &cam[3], cam[6]);
+                mn_8022F410(&cam[0], GetBracketCamTargetX(cam), cam[6]);
             } else {
                 mn_8022F410(&cam[0], &cam[3], cam[6]);
             }
@@ -952,7 +960,6 @@ void fn_8018B090(HSD_GObj* arg0)
 /* 3D9EE8 */ static char lbl_803D9EE8[] = {
     131, 81, 131, 88, 131, 103, 32, 48, 48,
 };
-char* const lbl_804DA6C4 = lbl_803D9EE8;
 /* 3D9EF4 */ static char lbl_803D9EF4[] = {
     130, 103, 130, 108, 130, 109, 32, 48, 48,
 };
@@ -975,7 +982,7 @@ void fn_8018C8D4(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
     GXColor c0, c1, c2, c3, c4, c5, c6, c7, c8, c9;
     GXColor c10, c11, c12, c13, c14, c15, c16, c17, c18, c19;
     GXColor c20, c21, c22, c23, c24, c25, c26, c27, c28, c29;
-    GXColor c30, c31, c32, c33;
+    GXColor c30, c31;
 
     c0 = lbl_804DA67C;
     thickness = data->x1C;
@@ -1238,15 +1245,15 @@ void fn_8018C8D4(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                 DrawRectangle((f32) right, (f32) arg2, thickness,
                               (f32) third_h, color);
             }
-            c32 = data->x20;
+            c2 = data->x20;
             {
-                GXColor* color = &c32;
+                GXColor* color = &c2;
                 DrawRectangle((f32) center, (f32) mid_y, (f32) half,
                               neg_thickness, color);
             }
-            c33 = data->x20;
+            c3 = data->x20;
             {
-                GXColor* color = &c33;
+                GXColor* color = &c3;
                 DrawRectangle((f32) center, (f32) mid_y, thickness,
                               (f32) ((arg4 / 6) - 1), color);
             }
@@ -1474,7 +1481,7 @@ void fn_8018DC18(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                       neg_thickness, color);
     }
 
-    if (!fn_8018DC18_inline0(arg0)) {
+    if (((BracketEntry*) arg0)->x20.g == 0) {
         if (((BracketEntry*) arg0)->x4C == 0) {
             c5 = ((BracketEntry*) arg0)->x20;
             DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4, &c5);
@@ -1509,11 +1516,11 @@ void fn_8018DF68(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
     GXColor first_color;
     GXColor line_color;
     GXColor left_third_color;
-    GXColor right_third_color;
-    GXColor slot0_horizontal_color;
-    GXColor slot0_vertical_color;
-    GXColor horizontal_color;
     GXColor slot3_vertical_color;
+    GXColor slot0_horizontal_color;
+    GXColor right_third_color;
+    GXColor horizontal_color;
+    GXColor slot0_vertical_color;
     GXColor slot3_horizontal_color;
     f32 neg_thickness;
     f32 thickness;
@@ -1545,8 +1552,11 @@ void fn_8018DF68(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
 
     right_third = right - third;
     right_third_color = line_color;
-    DrawRectangle((f32) right_third, (f32) arg2, thickness, (f32) arg4,
-                  &right_third_color);
+    {
+        GXColor* color = &right_third_color;
+        DrawRectangle((f32) right_third, (f32) arg2, thickness, (f32) arg4,
+                      color);
+    }
 
     neg_thickness = -thickness;
     horizontal_color = line_color;
@@ -1711,7 +1721,6 @@ void fn_8018E618(int arg0, f32 farg0, int arg1)
 void fn_8018E85C(DynamicModelDesc* model, s32 flag)
 {
     u8* sub;
-    BracketEntry* entry;
     TmData* td;
     HSD_JObj* jobj;
     s32 outer_idx;
@@ -1727,15 +1736,14 @@ void fn_8018E85C(DynamicModelDesc* model, s32 flag)
 
     td = gm_8018F634();
     bracket_idx = 0;
-    entry = lbl_80473AB8;
 
     for (outer_idx = 0; outer_idx < 0x40; outer_idx++) {
-        if (entry->x0 == 0) {
+        if (lbl_80473AB8[outer_idx].x0 == 0) {
             goto next_entry;
         }
         inner_idx = 0;
-        sub = (u8*) entry;
         for (; inner_idx < 4; inner_idx++) {
+            sub = &lbl_80473AB8[outer_idx].x0 + inner_idx * 0x2C;
             if (sub[0x30] == 0) {
                 goto next_sub;
             }
@@ -1792,12 +1800,14 @@ void fn_8018E85C(DynamicModelDesc* model, s32 flag)
             }
 
         next_sub:
-            sub += 0x2C;
+            ;
         }
     next_entry:
-        entry++;
+        ;
     }
 }
+
+char* const lbl_804DA6C4 = lbl_803D9EE8;
 
 #pragma push
 #pragma auto_inline off
@@ -2333,23 +2343,26 @@ void fn_8018FBD8(void* arg0, s32 arg1)
 }
 #pragma pop
 
-void fn_8018FBE0(s32 arg0, s32 arg1, s32 arg2, s8 arg3, s8 arg4, s16 arg5,
-                 s8 arg6)
+void fn_8018FBE0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
+                 s32 arg5, s32 arg6)
 {
     s32 i;
 
-    PAD_STACK(8);
-
-    gm_804771C4.cur_option = arg0;
-    gm_804771C4.x1C = arg1;
-    gm_804771C4.x20 = arg2;
+    ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->cur_option = arg0;
+    ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->x1C = arg1;
+    ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->x20 = arg2;
 
     for (i = 0; 64 > i; i++) {
-        gm_804771C4.x37[i].x2 = (u8) arg3;
-        gm_804771C4.x37[i].x1 = (u8) arg4;
-        gm_804771C4.x37[i].xD = (u8) i;
-        gm_804771C4.x37[i].x9 = (u16) arg5;
-        gm_804771C4.x37[i].x0 = (u8) arg6;
+        ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->x37[i].x2 =
+            (u8) arg3;
+        ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->x37[i].x1 =
+            (u8) arg4;
+        ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->x37[i].xD =
+            (u8) i;
+        ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->x37[i].x9 =
+            (u16) arg5;
+        ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->x37[i].x0 =
+            (u8) arg6;
     }
 }
 

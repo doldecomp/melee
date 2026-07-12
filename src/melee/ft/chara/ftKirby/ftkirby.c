@@ -3262,26 +3262,22 @@ static inline void ftKb_SpecialN_800EED50_inline(s32 arg0, s32 arg1)
                                    entry, ftKb_Init_803CA9D0[arg0].name, 0);
             }
         }
-        {
-            Fighter_CostumeStrings* costumes = ftKb_Init_803CB3E8[arg0];
-            if (costumes != NULL) {
-                typedef struct {
-                    HSD_Joint* joint;
-                    HSD_MatAnimJoint* matanim;
-                } HatCostume;
-                HatCostume* item =
-                    &((HatCostume*) ftKb_Init_803C9FC8[arg0])[arg1];
-                if (item->joint == NULL) {
-                    Fighter_CostumeStrings* cs = &costumes[arg1];
-                    if (cs->matanim_joint_name != NULL) {
-                        lbArchive_80017040(NULL, cs->dat_filename, item,
-                                           cs->joint_name, &item->matanim,
-                                           cs->matanim_joint_name, 0);
-                    } else {
-                        lbArchive_80017040(NULL, cs->dat_filename, item,
-                                           cs->joint_name, 0);
-                        item->matanim = NULL;
-                    }
+        if (ftKb_Init_803CB3E8[arg0] != NULL) {
+            u32* check =
+                (u32*) &ftKb_Init_803C9FC8[arg0]->x0 + arg1 * 2;
+            if (check[0] == 0) {
+                HSD_Archive** item = (HSD_Archive**) check;
+                Fighter_CostumeStrings* costumes =
+                    ftKb_Init_803CB3E8[arg0];
+                Fighter_CostumeStrings* cs = &costumes[arg1];
+                if (cs->matanim_joint_name != NULL) {
+                    lbArchive_80017040(NULL, costumes[arg1].dat_filename,
+                                       item, cs->joint_name, &item[1],
+                                       cs->matanim_joint_name, 0);
+                } else {
+                    lbArchive_80017040(NULL, costumes[arg1].dat_filename,
+                                       item, cs->joint_name, 0);
+                    item[1] = NULL;
                 }
             }
         }
@@ -3404,17 +3400,19 @@ void ftKb_SpecialN_800EF0E4(Fighter_GObj* gobj, int arg1, u8* arg2)
     HSD_Joint* root;
     s32 total_dobjs;
     s32 part_off;
-    s32 byte_off;
+    HSD_DObj** dst;
     s32 dst_off;
     HSD_JObj* jobj;
     HSD_DObj* dobj;
     HSD_DObj* tail;
-    HSD_DObj** dst;
+    s32 byte_off;
     HSD_MObj* mobj;
     u8* arg2_cur;
+    s32 costume_idx;
 
     ftPartsPObjSetDefaultClass();
-    root = ((HSD_Joint**) ftKb_Init_803C9FC8[arg1])[fp->x619_costume_id * 2];
+    costume_idx = fp->x619_costume_id * 2;
+    root = ((HSD_Joint**) ftKb_Init_803C9FC8[arg1])[costume_idx];
     total_dobjs = 0;
     ftKb_SpecialN_800EF0E4_insert_joint_refs(total_dobjs, root, fp, &part_off,
                                              &sp28, &sp24);
@@ -3552,7 +3550,7 @@ void ftKb_SpecialN_800EF438(Fighter_GObj* gobj, KirbyHatStruct* hat)
             dobj = HSD_DObjLoadDesc((HSD_DObjDesc*) sp24->u.dobjdesc);
             if (dobj != NULL) {
                 tail = HSD_JObjGetDObj(jobj);
-                fp->parts[(u32) part_off / sizeof(*fp->parts)].flags2_b7 =
+                ((FighterBone*) ((u32) fp->parts + part_off))->flags2_b7 =
                     true;
                 HSD_DObjResolveRefsAll(dobj, (HSD_DObjDesc*) sp24->u.dobjdesc);
                 if (tail == NULL) {
@@ -3579,7 +3577,7 @@ void ftKb_SpecialN_800EF438(Fighter_GObj* gobj, KirbyHatStruct* hat)
                                  ftKb_Init_804D3DAC);
                     }
                     dst = (HSD_DObj**) fp->fv.gw.x224C_greenhouseGObj;
-                    dst[(u32) dst_off / sizeof(*dst)] = dobj;
+                    *(HSD_DObj**) ((u32) dst + dst_off) = dobj;
                     mobj = dobj->mobj;
                     if (mobj != NULL) {
                         hsdChangeClass(mobj, &ftMObj);
@@ -3606,18 +3604,31 @@ void ftKb_SpecialN_800EF438(Fighter_GObj* gobj, KirbyHatStruct* hat)
     }
 }
 
+/// @note The inline helper and the shared `fp->parts[i]` indexing are
+/// required for register allocation: both bone accesses must share one
+/// strength-reduced offset, and the helper materializes its Fighter* directly
+/// into a saved register.
+static inline void ftKb_RemoveHatParts(Fighter_GObj* gobj, u32 mask)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    int i = Fighter_804D6540[fp->kind]->x4 - 1;
+    for (; i >= 0; i--) {
+        if ((1 << i) & mask) {
+            ftParts_800755E8(fp, &Fighter_804D6540[fp->kind]->x0[i]);
+        }
+    }
+}
+
 void ftKb_SpecialN_800EF69C(Fighter_GObj* gobj, int arg1, KirbyHatStruct* hat)
 {
-    s32 off;
     Fighter* fp;
+    u32 mask;
     if ((u32) (fp = GET_FIGHTER(gobj))->fv.gw.x2244_chefVar2 != 0U) {
         u32 i = 0;
-        off = 0;
         while (i < ftPartsTable[fp->kind]->parts_num) {
-            FighterBone* bone = fp->parts;
+            FighterBone* bone = &fp->parts[i];
             HSD_JObj* jobj;
             HSD_DObj* dobj;
-            bone = (FighterBone*) ((u8*) bone + off);
             jobj = bone->joint;
             dobj = (HSD_DObj*) jobj;
             if (jobj != NULL && (bone->flags_b6 || bone->flags2_b7)) {
@@ -3640,7 +3651,6 @@ void ftKb_SpecialN_800EF69C(Fighter_GObj* gobj, int arg1, KirbyHatStruct* hat)
                 }
                 fp->parts[i].flags_b6 = fp->parts[i].flags2_b7 = false;
             }
-            off += 0x10;
             i += 1;
         }
         HSD_ObjFree(&fighter_x2040_alloc_data,
@@ -3648,19 +3658,9 @@ void ftKb_SpecialN_800EF69C(Fighter_GObj* gobj, int arg1, KirbyHatStruct* hat)
         HSD_ObjFree(&fighter_x2040_alloc_data, fp->fv.gw.x224C_greenhouseGObj);
         fp->fv.gw.x2244_chefVar2 = 0;
     }
-    {
-        ftDynamics* dyn = hat->hat_dynamics[1];
-        u32 mask = (u32) dyn;
-        if (dyn != NULL) {
-            Fighter* fp2 = GET_FIGHTER(gobj);
-            int i = Fighter_804D6540[fp2->kind]->x4 - 1;
-            for (; i >= 0; i--) {
-                if ((1 << i) & mask) {
-                    ftParts_800755E8(
-                        fp2, (u8*) &Fighter_804D6540[fp2->kind]->x0[i]);
-                }
-            }
-        }
+    mask = (u32) hat->hat_dynamics[1];
+    if (mask != 0) {
+        ftKb_RemoveHatParts(gobj, mask);
     }
 }
 

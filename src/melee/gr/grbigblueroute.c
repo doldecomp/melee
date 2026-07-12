@@ -621,12 +621,12 @@ static inline void grBigBlueRoute_SpawnRoute(Ground* gp, Ground_GObj* gobj)
                 if (jobj != NULL) {
                     s32 i = 0;
                     while (i < route_idx && jobj != NULL) {
+                        i++;
                         if (jobj != NULL) {
                             jobj = jobj->next;
                         } else {
                             jobj = NULL;
                         }
-                        i++;
                     }
 
                     HSD_ASSERT(901, jobj);
@@ -663,6 +663,7 @@ static inline int grBigBlueRoute_DelayRoute(Ground* gp)
 void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
+    PAD_STACK(8);
 
     if (!((f32) gp->u.car.x108 < 1.0f + grBb_Route_804D6A68->x40)) {
         return;
@@ -690,7 +691,7 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
     Vec3 pos;
     Vec3 rot;
     Vec3 fighter_pos;
-    PAD_STACK(0x2C);
+    PAD_STACK(0x30);
 
     fighter = Ground_801C57A4();
     if (fighter != NULL) {

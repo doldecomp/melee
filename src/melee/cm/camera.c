@@ -61,9 +61,7 @@ static inline float vec_len(Vec3* offset)
 
 inline BOOL abs_threshold_inline(f32 value, f32 threshold)
 {
-    f32 abs_value = value;
-    abs_value = ABS(abs_value);
-    return (abs_value > threshold) ? true : false;
+    return (ABS(value) > threshold) ? true : false;
 }
 
 void Camera_80028B9C(int n_subjects)
@@ -787,9 +785,9 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
     }
     Stage_GetCamBoundsBottomOffset();
     Stage_GetCamBoundsTopOffset();
-    vert_offset = vert_frustum_dist * tanf(pan_angle);
+    unused_f31 = vert_frustum_dist * tanf(pan_angle);
     transform->target_interest.y =
-        vert_offset + (bounds->y_max - vert_frustum_dist * tan_fov_u);
+        unused_f31 + (bounds->y_max - vert_frustum_dist * tan_fov_u);
     Stage_UnkSetVec3TCam_Offset(&scroll_offset2);
     mid_x = 0.5f * (bounds->x_min + bounds->x_max);
     {
@@ -835,7 +833,7 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
         zoom_depth = Stage_GetCamMaxDepth();
     }
     transform->target_position.x = transform->target_interest.x + horiz_offset;
-    transform->target_position.y = transform->target_interest.y - vert_offset;
+    transform->target_position.y = transform->target_interest.y - unused_f31;
     transform->target_position.z = transform->target_interest.z + zoom_depth;
 }
 
@@ -1398,18 +1396,33 @@ void Camera_8002B1F8(CameraTransformState* transform)
     }
 }
 
+inline void reset_bounds_unless_fighter_near(CameraBounds* bounds,
+                                             CameraTransformState* transform)
+{
+    Vec3 fighter_pos;
+    HSD_GObj* p1_fgp;
+    if (!((Camera_80030AF8() != 0) &&
+          ((p1_fgp = Ground_801C57A4(), p1_fgp != NULL)) &&
+          (ftLib_80086644(p1_fgp, &fighter_pos),
+           abs_threshold_inline(fighter_pos.z, 30.0f))))
+    {
+        Camera_80029CF8(bounds, transform);
+        Camera_8002A768(transform, 0);
+    }
+}
+
 /// update gameplay camera
 void Camera_8002B3D4(void* arg0)
 {
     CameraBounds bounds;
     CameraBounds sp2C;
-    Vec3 distance;
-    Vec3 fighter_pos;
+    f32 dist_y;
+    f32 dist_x;
+    f32 dist_z;
     float total_dist;
-    HSD_GObj* p1_fgp;
-    f32 temp_f31;
-    f32 var_f1;
-    f32 var_f1_2;
+    f32 delta;
+    f32 y_sq;
+    f32 x_sq;
 
     Camera_80030DF8();
     Camera_800293E0();
@@ -1419,43 +1432,29 @@ void Camera_8002B3D4(void* arg0)
     total_dist = cm_80452C68.transform.target_fov - cm_80452C68.transform.fov;
     cm_80452C68.transform.fov += total_dist * cm_803BCCA0.x44;
     Camera_80029BC4(&bounds, &cm_80452C68.transform);
-    if (!((Camera_80030AF8() != 0) &&
-          ((p1_fgp = Ground_801C57A4(), p1_fgp != NULL)) &&
-          (ftLib_80086644(p1_fgp, &fighter_pos),
-           abs_threshold_inline(fighter_pos.z, 30.0f))))
-    {
-        Camera_80029CF8(&bounds, &cm_80452C68.transform);
-        Camera_8002A768(&cm_80452C68.transform, 0);
-    }
+    reset_bounds_unless_fighter_near(&bounds, &cm_80452C68.transform);
     Camera_8002958C(&sp2C, &cm_80452C68.transform_copy);
     cm_80452C68.transform_copy.target_fov = cm_803BCCA0.x40;
-    temp_f31 =
+    delta =
         cm_80452C68.transform_copy.target_fov - cm_80452C68.transform_copy.fov;
-    cm_80452C68.transform_copy.fov += temp_f31 * cm_803BCCA0.x44;
+    cm_80452C68.transform_copy.fov += delta * cm_803BCCA0.x44;
     Camera_80029BC4(&sp2C, &cm_80452C68.transform_copy);
-    if (!((Camera_80030AF8() != 0) &&
-          ((p1_fgp = Ground_801C57A4(), p1_fgp != NULL)) &&
-          (ftLib_80086644(p1_fgp, &fighter_pos),
-           abs_threshold_inline(fighter_pos.z, 30.0f))))
-    {
-        Camera_80029CF8(&sp2C, &cm_80452C68.transform_copy);
-        Camera_8002A768(&cm_80452C68.transform_copy, 0);
-    }
+    reset_bounds_unless_fighter_near(&sp2C, &cm_80452C68.transform_copy);
 
     /// @remarks permuter jank
-    distance.y = cm_80452C68.transform.target_position.y -
-                 cm_80452C68.transform.target_interest.y;
+    dist_y = cm_80452C68.transform.target_position.y -
+             cm_80452C68.transform.target_interest.y;
     if (cm_80452C68.x2BC == 1.0f) {
-        distance.x = cm_80452C68.transform.target_position.x -
-                     cm_80452C68.transform.target_interest.x;
-        distance.y = cm_80452C68.transform.target_position.y -
-                     cm_80452C68.transform.target_interest.y;
-        distance.z = cm_80452C68.transform.target_position.z -
-                     cm_80452C68.transform.target_interest.z;
-        var_f1 = distance.y * distance.y;
-        temp_f31 = distance.z * distance.z;
-        var_f1_2 = distance.x * distance.x;
-        total_dist = (var_f1_2 + var_f1) + temp_f31;
+        dist_x = cm_80452C68.transform.target_position.x -
+                 cm_80452C68.transform.target_interest.x;
+        dist_y = cm_80452C68.transform.target_position.y -
+                 cm_80452C68.transform.target_interest.y;
+        dist_z = cm_80452C68.transform.target_position.z -
+                 cm_80452C68.transform.target_interest.z;
+        y_sq = dist_y * dist_y;
+        delta = dist_z * dist_z;
+        x_sq = dist_x * dist_x;
+        total_dist = (x_sq + y_sq) + delta;
         cm_80452C68.x2C0 = sqrtf__Ff(total_dist);
     }
 
@@ -1476,8 +1475,8 @@ void Camera_8002B3D4(void* arg0)
         cm_80452C68.x2B8 = 1;
     }
 
-    temp_f31 = Stage_GetCamBoundsLeftOffset();
-    cm_80452C68.x2B4 += Stage_GetCamBoundsRightOffset() - temp_f31;
+    delta = Stage_GetCamBoundsLeftOffset();
+    cm_80452C68.x2B4 += Stage_GetCamBoundsRightOffset() - delta;
     cm_80452C68.x2B8 += 1;
     cm_80452C68.x2B0 = cm_80452C68.x2B4 / ((f32) cm_80452C68.x2B8);
 }
@@ -2453,19 +2452,19 @@ after_loop:
         Camera_8002C5B4(&cam->x2D0);
         {
             Vec3* tgt_interest;
-            Vec3* tgt_interest2;
+            Vec3* interest;
             Vec3* tgt_position;
             Vec3* position;
             CameraUnkGlobals* globals;
             f32 coeff;
 
             tgt_interest = &transform->target_interest;
-            tgt_interest2 = &cam->transform.target_interest;
+            interest = &transform->interest;
             cam->transform.target_interest = cam->x308;
             lbVector_Add(tgt_interest, &cam->x314);
 
             tgt_position = &transform->target_position;
-            cam->transform.target_position = *tgt_interest2;
+            cam->transform.target_position = *tgt_interest;
             lbVector_Add(tgt_position, &cam->pause_eye_offset);
 
             position = &transform->position;
@@ -2478,12 +2477,12 @@ after_loop:
             sp6C.z *= coeff;
             lbVector_Add(position, &sp6C);
 
-            lbVector_Diff(tgt_interest2, &transform->interest, &sp60);
+            lbVector_Diff(tgt_interest, interest, &sp60);
             coeff = globals->x84;
             sp60.x *= coeff;
             sp60.y *= coeff;
             sp60.z *= coeff;
-            lbVector_Add(&transform->interest, &sp60);
+            lbVector_Add(interest, &sp60);
 
             cam->transform.target_fov = globals->x6C;
             cam->transform.fov =
@@ -2981,7 +2980,7 @@ void Camera_8002D85C(void* unused)
         *tgt_fov_ptr = globals->x6C;
         delta = *tgt_fov_ptr - cam->transform.fov;
         smooth = globals->x70;
-        cam->transform.fov = delta * smooth + cam->transform.fov;
+        cam->transform.fov += delta * smooth;
     }
 
     slot = *slot_ptr;
@@ -3169,6 +3168,27 @@ check_done2:
     cam->x2B0 = cam->x2B4 / (f32) *count_ptr;
 }
 }
+
+static inline void smooth_fixed_camera_interest(
+    CameraTransformState* transform_copy, Camera* cam,
+    CameraUnkGlobals* globals)
+{
+    f32 dx, dy, dz;
+
+    Stage_80224CAC(&transform_copy->target_interest);
+    dx = cam->transform_copy.target_interest.x -
+         cam->transform_copy.interest.x;
+    dy = cam->transform_copy.target_interest.y -
+         cam->transform_copy.interest.y;
+    dz = cam->transform_copy.target_interest.z -
+         cam->transform_copy.interest.z;
+    cam->transform_copy.interest.x += dx * globals->x74;
+    cam->transform_copy.interest.y =
+        dy * globals->x74 + cam->transform_copy.interest.y;
+    cam->transform_copy.interest.z =
+        dz * globals->x74 + cam->transform_copy.interest.z;
+}
+
 void Camera_8002DDC4(void* arg0)
 {
     Vec3* interest;
@@ -3198,24 +3218,7 @@ void Camera_8002DDC4(void* arg0)
         cam->transform.interest.y = dy * smooth + cam->transform.interest.y;
         cam->transform.interest.z = dz * smooth + cam->transform.interest.z;
     }
-    Stage_80224CAC(&transform_copy->target_interest);
-    {
-        f32 dx, dy, dz;
-        f32 smooth;
-
-        smooth = globals->x74;
-        dx = cam->transform_copy.target_interest.x -
-             cam->transform_copy.interest.x;
-        dy = cam->transform_copy.target_interest.y -
-             cam->transform_copy.interest.y;
-        dz = cam->transform_copy.target_interest.z -
-             cam->transform_copy.interest.z;
-        cam->transform_copy.interest.x += dx * smooth;
-        cam->transform_copy.interest.y =
-            dy * smooth + cam->transform_copy.interest.y;
-        cam->transform_copy.interest.z =
-            dz * smooth + cam->transform_copy.interest.z;
-    }
+    smooth_fixed_camera_interest(transform_copy, cam, globals);
     cam->transform.target_fov = Stage_GetCamFixedFov();
     {
         f32 delta;
@@ -4620,8 +4623,14 @@ static inline void compute_edge(Vec3* forward, Vec3* eye_pos, f32 fov,
 
     s = sinf(fov);
     c = cosf(fov);
-    edge_x = (forward->x * c) + (forward->z * s);
-    edge_z = (forward->z * c) - (forward->x * s);
+    {
+        f32 x = forward->x;
+        f32 z = forward->z;
+        edge_z = x * s;
+        edge_x = z * s;
+        edge_z = (z * c) - edge_z;
+        edge_x = (x * c) + edge_x;
+    }
 
     if ((ABS(edge_z) > 0.0001) && ((forward->z * edge_z) > 0.0)) {
         *value = -((edge_x * (eye_pos->z / edge_z)) - eye_pos->x);
@@ -4640,7 +4649,7 @@ bool Camera_800307D0(f32* left, f32* center, f32* right)
     Vec3 interest_pos;
     Vec3 eye_pos;
     bool b_r30;
-    PAD_STACK(0x10);
+    PAD_STACK(8);
 
     cobj = GET_COBJ(cm_80452C68.gobj);
     half_fov =

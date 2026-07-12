@@ -160,11 +160,9 @@ void CalcDistance(HSD_TExp** tevs, int* dist, HSD_TExp* tev, int num,
 int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list)
 {
     HSD_TExp* sp94[HSD_TEXP_MAX_NUM];
-    int sp14[32];
-    HSD_TExpDag* dep_entry;
-    HSD_TExpDag* dep_entry2;
-    int num;
     int j;
+    int sp14[32];
+    int num;
     int i;
     int k;
     int l;
@@ -243,7 +241,7 @@ int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list)
             if (tmp->tev.c_in[idx].type == HSD_TE_TEV) {
                 for (l = last; l < num; l++) {
                     if (tmp->tev.c_in[idx].exp == sp94[l]) {
-                        dep_entry = &list[l];
+                        HSD_TExpDag* dep_entry = &list[l];
                         for (l = 0; l < list[last].nb_dep; l++) {
                             if (list[last].depend[l] == dep_entry) {
                                 break;
@@ -265,7 +263,7 @@ int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list)
                 for (l = last; l < num; l++) {
                     if (tmp->tev.a_in[idx].exp == sp94[l]) {
                         u8 dep_count2 = list[last].nb_dep;
-                        dep_entry2 = &list[l];
+                        HSD_TExpDag* dep_entry2 = &list[l];
                         for (l = 0; l < (int) dep_count2; l++) {
                             if (list[last].depend[l] == dep_entry2) {
                                 break;

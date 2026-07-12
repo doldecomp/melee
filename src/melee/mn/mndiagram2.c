@@ -612,11 +612,16 @@ static inline u16* mnDiagram2_GetStatRowEntry(int stat_type, char* base)
     return (u16*) (base + ((stat_type << 1) & 0x1FE));
 }
 
+static inline f32 mnDiagram2_GetStatRowIconY(char* base)
+{
+    return ((f32*) base)[10];
+}
+
 void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                               u8 row_idx, u8 entity_idx)
 {
-    u8 str[8];
     Vec3 sp20;
+    u8 str[8];
     Diagram2* data;
     HSD_JObj* jobj;
     char* base;
@@ -698,8 +703,9 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                                                     entity_idx),
                             0);
                         HSD_JObjSetTranslateX(jobj, ((f32*) base)[9]);
-                        HSD_JObjSetTranslateY(jobj, (f30 * (f32) row_idx) +
-                                                        ((f32*) base)[10]);
+                        HSD_JObjSetTranslateY(
+                            jobj, (f30 * (f32) row_idx) +
+                                      mnDiagram2_GetStatRowIconY(base));
                         HSD_JObjSetTranslateZ(jobj, ((f32*) base)[11]);
 
                         HSD_JObjAddChild(data->icon_parent, jobj);

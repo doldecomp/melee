@@ -801,7 +801,7 @@ void gmClassic_801B3500(GameScene* arg0)
 
         for (j = 0; j < 3; j++) {
             int echar = entry->xC->x02[j];
-            if ((s8) echar != 0x21) {
+            if (echar != 0x21) {
                 audio |= lbAudioAx_80026E84((s8) echar);
                 if (entry->xC->x02[j] == 4) {
                     audio |= ((u64) 2 << 32) | 0x4000;
@@ -813,7 +813,10 @@ void gmClassic_801B3500(GameScene* arg0)
     {
         InternalStageId stage_id;
         if (entry->x1 == 0x80 && entry->x2 == 1) {
-            stage_id = (u16) gm_801647F8(ad->x0.ckind);
+            {
+                u8 ckind = ad->x0.ckind;
+                stage_id = (u16) gm_801647F8(ckind);
+            }
         } else {
             stage_id = entry->xC->x00;
         }

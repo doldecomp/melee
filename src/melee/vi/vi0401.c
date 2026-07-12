@@ -39,6 +39,16 @@ static HSD_Archive* un_804D6F54;
 static HSD_JObj* un_804D6F58;
 static GXColor erase_colors_vi0401;
 
+static struct {
+    char vi0401_dat[12];
+    char visual0401_scene[16];
+    char visual0401_info_scene[20];
+    char if_all_dat[12];
+    char sc_inf_dmg_scene_data[20];
+} vi0401_strings = {
+    "Vi0401.dat", "visual0401Scene", "visual0401InfoScene", "IfAll.dat",
+    "ScInfDmg_scene_data",
+};
 u8 un_804D6F60[8]; ///< @todo #ViCharaDesc?
 
 void vi0401_8031D020(int arg0, int arg1)
@@ -148,10 +158,11 @@ void un_8031D288_OnEnter(void* data)
 
     char_index = desc->p1_char_index;
 
-    lbArchive_LoadSymbols("Vi0401.dat", &un_804D6F48, "visual0401Scene",
-                          &un_804D6F4C, "visual0401InfoScene", 0);
-    lbArchive_LoadSymbols("IfAll.dat", &un_804D6F50, "ScInfDmg_scene_data",
-                          NULL);
+    lbArchive_LoadSymbols(vi0401_strings.vi0401_dat, &un_804D6F48,
+                          vi0401_strings.visual0401_scene, &un_804D6F4C,
+                          vi0401_strings.visual0401_info_scene, 0);
+    lbArchive_LoadSymbols(vi0401_strings.if_all_dat, &un_804D6F50,
+                          vi0401_strings.sc_inf_dmg_scene_data, NULL);
     un_804D6F54 = lbArchive_LoadSymbols(viGetCharAnimByIndex(char_index), 0);
 
     fog_gobj = GObj_Create(0xB, 3, 0);

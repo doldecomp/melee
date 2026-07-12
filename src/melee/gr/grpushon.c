@@ -481,6 +481,8 @@ int grPushOn_80219230(int arg0)
     HSD_ASSERT(861, 0);
 }
 
+static inline void grPushOn_StackPad(GXColor color) {}
+
 void grPushOn_80218888(Ground_GObj* gobj)
 {
     HSD_GObj* player;
@@ -619,7 +621,6 @@ void grPushOn_80218888(Ground_GObj* gobj)
         /* Color from 2nd nearest */
         {
             f32 dist_diff;
-            PAD_STACK(4);
             dist_diff = distances[sorted[2]] - distances[sorted[1]];
             HSD_LObjGetColor(gp->u.pushon.lobjs[sorted[1]], &color);
             if (distances[sorted[2]] - distances[sorted[1]] < 50.0f) {
@@ -630,6 +631,7 @@ void grPushOn_80218888(Ground_GObj* gobj)
             }
         }
         HSD_LObjSetColor(gp->u.pushon.spot_light, color);
+        grPushOn_StackPad(color);
 
         /* Copy position from 2nd nearest */
         if (HSD_LObjGetPosition(gp->u.pushon.lobjs[sorted[1]], &temp_pos) == 0)

@@ -394,7 +394,7 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     u8* colors_ptr;
     s32 i;
     u64 audio;
-    PAD_STACK(8);
+    PAD_STACK(12);
 
     base = (u8*) gm_803DE930_Scenes;
     is_last_round = 0;
@@ -610,8 +610,9 @@ void gm_801B5ACC(GameScene* arg0)
     u8 color;
     s32 i;
     s32 next_count;
+    s32 round_offset;
 
-    PAD_STACK(24);
+    PAD_STACK(16);
     chars[0] = 0x21;
     chars[1] = 0x21;
     chars[2] = 0x21;
@@ -642,6 +643,7 @@ void gm_801B5ACC(GameScene* arg0)
 
     {
         u16 temp = gm_8017BE84(arg0->idx);
+        round_offset = temp * sizeof(AllstarRoundInfo);
         round = temp;
     }
 
@@ -676,7 +678,7 @@ void gm_801B5ACC(GameScene* arg0)
     gm_8016F088(data);
     gm_8016A92C(&data->rules);
 
-    gmAllStarPreloadRemainingFighters(round);
+    gmAllStarPreloadRemainingFighters(round_offset / sizeof(AllstarRoundInfo));
 
     gm_801B5324(allstar, round + 1);
     data->rules.x50 = (void (*)(u8))(Event) fn_801B5AA8;

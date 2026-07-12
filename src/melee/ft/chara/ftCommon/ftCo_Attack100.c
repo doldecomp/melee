@@ -540,8 +540,8 @@ void ftCo_800D74A4(Fighter_GObj* gobj)
     extern f32 ftCo_804D9018;
     Vec3 vel;
     Fighter* fp;
-    s32 msid;
     struct Fighter_x2D0_t* tmp;
+    s32 msid;
     s32 msid2;
     struct Fighter_x2D0_t* p;
     PAD_STACK(0x14);
@@ -552,11 +552,11 @@ void ftCo_800D74A4(Fighter_GObj* gobj)
     tmp = fp->x2D0;
     tmp = (struct Fighter_x2D0_t*) ((s32*) tmp + ftCo_800D7268(fp));
     msid = tmp->x2C + fp->x1968_jumpsUsed;
+    msid2 = --msid;
     vel.x = fp->input.lstick.x * p->x8;
-    msid2 = msid - 1;
     tmp = fp->x2D0;
     tmp = (struct Fighter_x2D0_t*) ((s32*) tmp + ftCo_800D7268(fp));
-    vel.y = p->x14[msid2 - tmp->x2C];
+    vel.y = p->x14[msid - tmp->x2C];
     vel.z = ftCo_804D9018;
     ftCo_800CBAC4(gobj, msid2, &vel, false);
     if ((fp->input.lstick.x * fp->facing_dir) < -p->x4) {
@@ -1426,6 +1426,11 @@ void ftCo_800D8C54(Fighter_GObj* gobj, FtMotionId msid)
     ftCommon_8007E2D0(fp, 1, fn_800D9CE8, fn_800D8BFC, fn_800DAADC);
 }
 
+static inline f32 fn_800D9558_inline(void)
+{
+    return HSD_Randf();
+}
+
 bool fn_800D9558(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -1472,7 +1477,8 @@ bool fn_800D9558(Fighter_GObj* gobj)
                             effPos.x = jobj->mtx[0][3];
                             effPos.y = jobj->mtx[1][3];
                             effPos.z = jobj->mtx[2][3];
-                            effPos.x = 4.0 * (HSD_Randf() - 0.5f) + effPos.x;
+                            effPos.x =
+                                4.0 * (fn_800D9558_inline() - 0.5f) + effPos.x;
                             effPos.y = 4.0 * (HSD_Randf() - 0.5f) + effPos.y;
                             r = HSD_Randf() - 0.5f;
                             effPos.z = 4.0 * r + effPos.z;

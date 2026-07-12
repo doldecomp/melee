@@ -1127,6 +1127,23 @@ struct gm_stats {
     /* 0x40 */ u32 unk40;
 };
 
+/* Matching evidence (matching-tactics-need-evidence): with the count loop
+ * open-coded in fn_80161C90 the function needs PAD_STACK(8) and still
+ * mismatches (99.04%); routing the count through an inline helper's return
+ * temp reproduces retail's register/stack allocation exactly. */
+static inline u32 fn_80161C90_count_players(MatchEnd* match_end)
+{
+    u32 count = 0;
+    s32 i;
+
+    for (i = 0; i < 4; i++) {
+        if (match_end->player_standings[i].slot_type != 3) {
+            count += 1;
+        }
+    }
+    return count;
+}
+
 void fn_80161C90(MatchEnd* arg0, int arg1, u16* arg2)
 {
     MatchPlayerData* p = &arg0->player_standings[arg1];
@@ -1135,7 +1152,6 @@ void fn_80161C90(MatchEnd* arg0, int arg1, u16* arg2)
     s32 flag;
     s32 i;
 
-    PAD_STACK(8);
     s->unk0 = (s->unk0 + p->self_destructs > 0xFFFF)
                   ? 0xFFFF
                   : s->unk0 + p->self_destructs;
@@ -1174,12 +1190,7 @@ void fn_80161C90(MatchEnd* arg0, int arg1, u16* arg2)
     s->unk20 = (s->unk20 + arg0->frame_count / 60 > 0xFFFFFFFFU)
                    ? 0xFFFFFFFFU
                    : s->unk20 + arg0->frame_count / 60;
-    count = 0;
-    for (i = 0; i < 4; i++) {
-        if (arg0->player_standings[i].slot_type != 3) {
-            count += 1;
-        }
-    }
+    count = fn_80161C90_count_players(arg0);
     count = s->unk24 + count;
     if (count > 0xFFFF) {
         count = 0xFFFF;
@@ -1293,7 +1304,7 @@ static inline void fn_80162170_inner(MatchEnd* arg0)
     }
 }
 
-s32 fn_80162170(MatchEnd* arg0)
+void fn_80162170(MatchEnd* arg0)
 {
     fn_80162170_inner(arg0);
 }
@@ -1301,7 +1312,7 @@ s32 fn_80162170(MatchEnd* arg0)
 s32 gm_801623A4(MatchEnd* arg0)
 {
     fn_80162068(arg0);
-    return fn_80162170(arg0);
+    fn_80162170(arg0);
 }
 
 int gm_801623D8(void)
@@ -2692,9 +2703,9 @@ f32 fn_801653E8(u8 arg0)
     return (0.1f * arg0);
 }
 
-u8 fn_80165418(MatchEnd* match_end)
+s32 fn_80165418(MatchEnd* match_end)
 {
-    u8 winner = 0;
+    s32 winner = 0;
     s32 i;
     for (i = 0; i < 4; i++) {
         if (match_end->player_standings[i].slot_type != Gm_PKind_NA &&
@@ -2706,9 +2717,9 @@ u8 fn_80165418(MatchEnd* match_end)
     return winner;
 }
 
-u8 fn_801654A0(MatchEnd* match_end)
+s32 fn_801654A0(MatchEnd* match_end)
 {
-    u8 winner = 0;
+    s32 winner = 0;
     s32 i;
     for (i = 0; i < 5; i++) {
         if (match_end->team_standings[i].active != 0 &&
@@ -2720,10 +2731,10 @@ u8 fn_801654A0(MatchEnd* match_end)
     return winner;
 }
 
-u8 fn_80165548(MatchEnd* me, s8 arg1, s32 team)
+s32 fn_80165548(MatchEnd* me, s32 arg1, s32 team)
 {
     s32 i;
-    s8 ret;
+    s32 ret;
     s32 result;
     s32 j;
 
@@ -3042,13 +3053,15 @@ s32 fn_801661E0(MatchEnd* arg0)
 
 void gm_80166378(lbl_8046B6A0_24C_t* arg0_raw)
 {
-    MatchEnd* arg0 = (MatchEnd*) arg0_raw;
-    Vec3 sp48;
     s32 i;
+    MatchEnd* arg0 = (MatchEnd*) arg0_raw;
+    u64 stack_padding;
+    f32 sp48_y;
+    f32 sp48_x;
     s32 j;
     u32 cnt;
 
-    PAD_STACK(56);
+    PAD_STACK(60);
 
     memzero(arg0->player_standings, 0x3F0);
     memzero(arg0->team_standings, 0x3C);
@@ -3078,9 +3091,9 @@ void gm_80166378(lbl_8046B6A0_24C_t* arg0_raw)
             arg0->player_standings[i].x3_7 = Player_GetMoreFlagsBit2(i);
             arg0->player_standings[i].x9 = (s8) Player_GetRemainingHP(i);
             cnt = Player_GetJoystickCountByIndex(i, 0);
-            sp48.y = 0.031f * ((f32) cnt * fn_8016B5B0());
-            fn_80166A8C((Vec3*) ((u8*) &sp48 + 4), (Vec3*) ((u8*) &sp48));
-            arg0->player_standings[i].xE = *(u16*) &sp48;
+            sp48_y = 0.031f * ((f32) cnt * fn_8016B5B0());
+            fn_80166A8C((Vec3*) &sp48_y, (Vec3*) &sp48_x);
+            arg0->player_standings[i].xE = *(u16*) &sp48_x;
             arg0->player_standings[i].x34 = (s8) (100.0f * pl_80040948(i));
             arg0->player_standings[i].x38 = pl_80040900(i);
             arg0->player_standings[i].x3C = pl_80040924(i);
@@ -3516,12 +3529,12 @@ s32 fn_80167638(s32 arg0, Vec3* arg1, Vec3* arg2)
     UNUSED u8 pad[8];
     struct lbl_803B7A44_t sp;
     s8 chr;
-    s32 ret = arg0;
     Vec3* pos = arg1;
-    Vec3* offset = arg2;
     lbl_8046B6A0_t* info;
     struct MatchInfoStride_80167638* stride;
     s32 idx;
+    s32 ret = arg0;
+    Vec3* offset = arg2;
     u8 x8;
 
     PAD_STACK(4);
@@ -4500,8 +4513,8 @@ s32 fn_801695BC(u8 arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
         }
         color_i = 0;
         {
-            u8* p = arg3;
-            for (i = 0; (s8) arg4[i] != -2; i++) {
+            u8* p;
+            for (i = 0, p = arg3; (s8) arg4[i] != -2; i++, p++) {
                 if ((s8) arg0 == (s8) *p) {
                     if (colors[color_i % ncolors_s32] == -1) {
                         color_i += 1;
@@ -4509,7 +4522,6 @@ s32 fn_801695BC(u8 arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
                     arg4[i] = colors[color_i % ncolors_s32];
                     color_i += 1;
                 }
-                p++;
             }
         }
         for (i = 1; (s8) arg4[i] != -2; i++) {
@@ -5209,7 +5221,10 @@ void fn_8016A4C8(void)
                     Player_SetFlagsAEBit0(spawn_slot, 0U);
                 }
                 Player_SetFlagsBit6(spawn_slot, (*event_flags >> 2U) & 1);
-                Player_SetModelScale(spawn_slot, gp->x1C);
+                {
+                    f32 model_scale = gp->x1C;
+                    Player_SetModelScale(spawn_slot, model_scale);
+                }
                 Player_SetAttackRatio(spawn_slot, gp->x14);
                 {
                     f32 defense_ratio = gp->x18;

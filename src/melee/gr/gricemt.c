@@ -1152,6 +1152,29 @@ void grIceMt_801F8CDC(Ground_GObj* gobj, s16* joint_indices, int block_num,
     }
 }
 
+static inline s32 grIceMt_GetRandomIndex(s32 max, s32* list)
+{
+    return list[max != 0 ? HSD_Randi(max) : 0];
+}
+
+static inline void grIceMt_GetRandomTimer(s32* out)
+{
+    s32 a;
+    s32 b;
+    s32 d;
+
+    a = ((s16*) grIm_804D69F4)[0x36 / 2];
+    b = ((s16*) grIm_804D69F4)[0x38 / 2];
+    if (a > b) {
+        d = a - b;
+        a = b + (d != 0 ? HSD_Randi(d) : 0);
+    } else if (a < b) {
+        d = b - a;
+        a = a + (d != 0 ? HSD_Randi(d) : 0);
+    }
+    *out = a;
+}
+
 s32 fn_801F8E58(Ground_GObj* arg0, s32* out)
 {
     s32 list[12];
@@ -1159,15 +1182,12 @@ s32 fn_801F8E58(Ground_GObj* arg0, s32* out)
         s16 pad[0x6E];
         s16 xDC;
     } IceMtTimerCursor;
-    s32 a;
     IceMtTimerCursor* timer;
+    IceMtTimerCursor* timer_base;
     s32* p;
     s32 i;
     s32 max;
     s32 chosen;
-    IceMtTimerCursor* timer_base;
-    s32 b;
-    s32 d;
 
     p = &list[max = 0];
     timer = arg0->user_data;
@@ -1182,7 +1202,7 @@ s32 fn_801F8E58(Ground_GObj* arg0, s32* out)
     }
 
     HSD_ASSERT(0x81D, max);
-    chosen = list[max != 0 ? HSD_Randi(max) : 0];
+    chosen = grIceMt_GetRandomIndex(max, list);
 
     timer = timer_base;
     for (i = 0; i < 12; i++) {
@@ -1193,16 +1213,7 @@ s32 fn_801F8E58(Ground_GObj* arg0, s32* out)
     }
 
     (&timer_base->xDC)[chosen] = ((s16*) grIm_804D69F4)[1];
-    a = ((s16*) grIm_804D69F4)[0x36 / 2];
-    b = ((s16*) grIm_804D69F4)[0x38 / 2];
-    if (a > b) {
-        d = a - b;
-        a = b + (d != 0 ? HSD_Randi(d) : 0);
-    } else if (a < b) {
-        d = b - a;
-        a = a + (d != 0 ? HSD_Randi(d) : 0);
-    }
-    *out = a;
+    grIceMt_GetRandomTimer(out);
     return chosen;
 }
 

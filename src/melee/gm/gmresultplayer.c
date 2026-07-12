@@ -89,7 +89,7 @@ typedef struct {
     /* 0x000 */ u8 pad[0x10];
     /* 0x010 */ CameraKindParams kind[(0x6D0 - 0x10) / 0x30];
     /* 0x6D0 */ f32 slot_off[(0xF00 - 0x6D0) / 0x30][3][4];
-    /* 0xF00 */ u8 pad_F00[0xF08 - 0xF00];
+    /* 0xEE0 */ u8 pad_EE0[0xF08 - 0xEE0];
     /* 0xF08 */ HSD_CObjDesc cobj_desc;
 } CameraKindData;
 
@@ -1148,7 +1148,7 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
     HSD_JObj* child_jobj;
     HSD_CObj* cobj;
     int lookup;
-    PAD_STACK(24);
+    PAD_STACK(16);
 
     fn_801795D4();
     fn_801796F0(arg2);
@@ -1467,13 +1467,10 @@ HSD_GObj* fn_8017A318(s32 arg0)
 
     kind_data = disp->state.char_kind[arg0];
     (void) kind_data;
-    {
-        f32* y_off = data->kind[kind_data].y_off;
-        eye.y += y_off[vi];
+    eye.y += data->kind[kind_data].y_off[vi];
 
-        vi = ((s32) variant <= 2) ? variant : 3;
-        interest.y += y_off[vi];
-    }
+    vi = ((s32) variant <= 2) ? variant : 3;
+    interest.y += data->kind[kind_data].y_off[vi];
 
     vi = ((s32) variant <= 2) ? variant : 3;
     eye.x += data->kind[kind_data].x_off[vi];
@@ -1491,8 +1488,8 @@ HSD_GObj* fn_8017A318(s32 arg0)
             eye.x += x_off;
             interest.x += x_off;
 
-            y_off = data->slot_off[kind_data][1][slot];
-            eye.y += y_off;
+            eye.y = eye.y +
+                    (y_off = data->slot_off[kind_data][1][slot]);
             interest.y += y_off;
         }
     }
@@ -1502,7 +1499,7 @@ HSD_GObj* fn_8017A318(s32 arg0)
     }
 
     vi = ((s32) variant <= 2) ? variant : 3;
-    if ((1.0f - data->kind[kind_data].z_scale[vi]) < 0.0) {
+    if ((1.0f - data->kind[kind_data].z_scale[vi]) < 0.0f) {
         vi = ((s32) variant <= 2) ? variant : 3;
         eye.z += 100.0f * (1.0f - data->kind[kind_data].z_scale[vi]);
     } else {

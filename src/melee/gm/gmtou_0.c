@@ -194,28 +194,29 @@ void fn_80190ABC(int mode)
     }
     case 4: {
         HSD_SisLib_803A7664(tm->x518[0]);
-        for (i = 0; i < 0x24; i++) {
-            fn_8018ECA8(i + state->x6 * 4, 0xFF, 0,
-                        149.0f * (f32) (i % 4) + 537.0f,
-                        47.0f * (f32) (i / 4) + 409.0f, 0);
+        for (mode = 0; mode < 0x24; mode++) {
+            fn_8018ECA8(mode + state->x6 * 4, 0xFF, 0,
+                        149.0f * (f32) (mode % 4) + 537.0f,
+                        47.0f * (f32) (mode / 4) + 409.0f, 0);
         }
         break;
     }
     case 6: {
-        u8* start = &state->x3;
+        u8* start;
         HSD_SisLib_803A7664(tm->x518[1]);
         HSD_SisLib_803A7664(tm->x518[2]);
+        start = &state->x3;
         for (i = 0; i < 12; i++) {
             s32 idx = *start + i;
             if (idx > state->x4) {
                 continue;
             }
             {
-                f32 pos_y = lbl_804DA704 * (f32) i + lbl_804DA700;
-                fn_8018ECA8(tm->x37[idx].x9, tm->x37[idx].x0, 1, lbl_804DA6FC,
+                f32 pos_y = 48.5999985f * (f32) i + 183.0f;
+                fn_8018ECA8(tm->x37[idx].x9, tm->x37[idx].x0, 1, 143.0f,
                             pos_y, 2);
                 idx = *start + i;
-                fn_8018ECA8(tm->x37[idx].x9, tm->x37[idx].x0, 1, lbl_804DA6FC,
+                fn_8018ECA8(tm->x37[idx].x9, tm->x37[idx].x0, 1, 143.0f,
                             pos_y, 2);
             }
         }
@@ -228,11 +229,9 @@ void fn_80190ABC(int mode)
         HSD_SisLib_803A7664(tm->x524[0]);
         HSD_SisLib_803A7664(tm->x524[1]);
         idx = *x2 + *x3;
-        fn_8018ECA8(tm->x37[idx].x9, tm->x37[idx].x0, 3, lbl_804DA708,
-                    lbl_804DA70C, 4);
+        fn_8018ECA8(tm->x37[idx].x9, tm->x37[idx].x0, 3, 514.0f, 87.0f, 4);
         idx = *x2 + *x3;
-        fn_8018ECA8(tm->x37[idx].x9, tm->x37[idx].x0, 3, lbl_804DA708,
-                    lbl_804DA70C, 4);
+        fn_8018ECA8(tm->x37[idx].x9, tm->x37[idx].x0, 3, 514.0f, 87.0f, 4);
         break;
     }
     }
@@ -936,9 +935,9 @@ void fn_80191FD4(HSD_GObj* gobj)
     }
 
     hud = fn_8018F6DC(fn_8018F3BC((s32) idx));
-    x2_ptr = &state->x2;
     x3_ptr = &state->x3;
-    slot = *x2_ptr + *x3_ptr;
+    x2_ptr = &state->x2;
+    slot = *x3_ptr + *x2_ptr;
     if (fn_80191FD4_is_selected(hud, slot, tm)) {
         fn_8019044C(child, (f32) (state->xA + 0xA));
     } else {
@@ -1182,7 +1181,6 @@ s32 fn_80192938(void)
     s32 j;
     s32 a, b;
     u8 tmp;
-    u8 handicap;
     PAD_STACK(8);
 
     tm = gm_8018F634();
@@ -1265,12 +1263,10 @@ s32 fn_80192938(void)
     state->x4 = 0xB;
     state->x5 = 0;
     state->x6 = 0;
-    handicap = gmMainLib_8015CC34()->handicap;
-    state->x0 = handicap;
+    state->x0 = gmMainLib_8015CC34()->handicap;
     tm->x24 = 0;
     tm->pad_x34[0] = 0xFF;
     tm->x33 = 0xFF;
-    return handicap & 0xFF;
 }
 #pragma pop
 
@@ -1831,24 +1827,27 @@ void fn_80193FCC(s32* arg0, u32 arg1, u32 arg2)
                 val = next;
             }
             clamp_expr = idx << 1;
-            if (val > (s32) min_entry[clamp_expr + (*mt != 0)]) {
-                *ptr = val - 1;
-                lbAudioAx_80024030(2);
-                state->x7 = 5;
-            } else {
-                s32 max_plus1 =
-                    (s32) table[clamp_expr + (*mt != 0) + 0x4C] + 1;
-                if (clamp_val < max_plus1) {
-                    *ptr = clamp_val;
-                } else {
-                    *ptr = max_plus1;
-                }
-                idx = arg0[0];
-                val = arg0[idx + 1];
-                clamp_expr = (*mt != 0);
-                if (val != (s32) min_entry[(idx << 1) + clamp_expr]) {
+            {
+                s32 table_idx = clamp_expr + (*mt != 0);
+                if (val > (s32) min_entry[table_idx]) {
+                    *ptr = val - 1;
                     lbAudioAx_80024030(2);
                     state->x7 = 5;
+                } else {
+                    s32 max_plus1 =
+                        (s32) table[clamp_expr + (*mt != 0) + 0x4C] + 1;
+                    if (clamp_val < max_plus1) {
+                        *ptr = clamp_val;
+                    } else {
+                        *ptr = max_plus1;
+                    }
+                    idx = arg0[0];
+                    val = arg0[idx + 1];
+                    clamp_expr = (*mt != 0);
+                    if (val != (s32) min_entry[(idx << 1) + clamp_expr]) {
+                        lbAudioAx_80024030(2);
+                        state->x7 = 5;
+                    }
                 }
             }
         } else {
@@ -2044,6 +2043,11 @@ static inline s32 fn_80194658_get_value(s32* ptr)
     return *++ptr;
 }
 
+static inline u8* fn_80194658_get_entry(u8* table, s32 idx)
+{
+    return table + (idx <<= 1);
+}
+
 void fn_80194658(s32* arg0, u32 arg1, u32 arg2)
 {
     u8* table;
@@ -2078,8 +2082,7 @@ void fn_80194658(s32* arg0, u32 arg1, u32 arg2)
     }
 
     if (arg1 & 0x40001) {
-        table += idx << 1;
-        entry = table + (dir != 0);
+        entry = fn_80194658_get_entry(table, idx) + (dir != 0);
         if (val > (s32) entry[0x40]) {
             *ptr = *ptr - 1;
         } else if (dir == 0) {
@@ -2088,8 +2091,7 @@ void fn_80194658(s32* arg0, u32 arg1, u32 arg2)
             *ptr = (s32) entry[0x4C];
         }
     } else if (arg1 & 0x80002) {
-        table += idx << 1;
-        entry = table + (dir != 0);
+        entry = fn_80194658_get_entry(table, idx) + (dir != 0);
         changed = 1;
         if (val < (s32) entry[0x4C]) {
             *ptr = *ptr + 1;
@@ -2609,9 +2611,8 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
     } else if (buttons & 0x10008) {
         s32 temp;
 
-        step = 5;
         for (i = 1; i < 5; i++) {
-            temp = cur_pos - step;
+            temp = cur_pos - i * 5;
             candidate = temp;
             if (temp < 0) {
                 candidate += 25;
@@ -2635,12 +2636,10 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
                 tm->x37[idx].x3 = adj;
                 break;
             }
-            step += 5;
         }
     } else if (buttons & 0x20004) {
-        step = cur_pos + 5;
         for (i = 1; i < 5; i++) {
-            candidate = step;
+            candidate = cur_pos + i * 5;
             if (25 <= candidate) {
                 candidate -= 25;
             }
@@ -2663,13 +2662,12 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
                 tm->x37[idx].x3 = adj;
                 break;
             }
-            step += 5;
         }
     }
 
     if (trigger & 0x100) {
         if ((fn_8018F6A8(4) & 0x40) && (fn_8018F6A8(4) & 0x20) &&
-            tm->match_type != 0)
+            gm_804771C4.match_type != 0)
         {
             idx = lbl_804799B8.x2 + lbl_804799B8.x3;
             if (lbl_803D9D20.x72[tm->x37[idx].x3] == 0) {

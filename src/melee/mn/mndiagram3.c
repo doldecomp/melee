@@ -31,6 +31,11 @@ typedef struct mnDiagram3_SortEntry {
     s32 xC;
 } mnDiagram3_SortEntry;
 
+static inline u8 mnDiagram3_GetRankIndex(int index)
+{
+    return (u8) index;
+}
+
 void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
 {
     Vec3 sp6C;
@@ -157,8 +162,8 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
                 }
 
                 if (mnDiagram2_IsIconOnlyStat(stat_type) &&
-                    (mnDiagram2_GetAggregatedFighterRank(sp48, stat_type,
-                                                         (u8) i),
+                    (mnDiagram2_GetAggregatedFighterRank(
+                         sp48, stat_type, mnDiagram3_GetRankIndex(i)),
                      sp48[0] != 0x19))
                 {
                     mnDiagram2_GetAggregatedFighterRank(sp38, stat_type,
@@ -592,7 +597,7 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
 
     if ((u32) input & 0x20) {
         lbAudioAx_80024030(0);
-        mn_804A04F0.entering_menu = 0;
+        i = mn_804A04F0.entering_menu = 0;
         gmMainLib_8015CC34()->xD =
             ((Diagram3*) mnDiagram3_804D6C20->user_data)->is_name_mode;
         mnDiagram2_ClearDetailView(mnDiagram3_804D6C20);
@@ -600,8 +605,7 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
         data = mnDiagram3_804D6C20->user_data;
         {
             HSD_Text** check_cur = data->row_labels;
-            HSD_Text** text_cur = data->row_labels;
-            i = 0;
+            HSD_Text** text_cur = &data->row_labels[i];
             do {
                 if (*check_cur != NULL) {
                     HSD_SisLib_803A5CC4(*text_cur);

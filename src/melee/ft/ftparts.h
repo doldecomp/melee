@@ -54,7 +54,7 @@ ftParts_80075240(DObjList*, int n); ///< finds the n-th TObj in a DObjList
 /* 075304 */ void ftParts_80075304(u8, HSD_JObj*, HSD_JObj*);
 /* 0753D4 */ void ftParts_800753D4(Fighter*, struct Fighter_804D6540_x0_t*,
                                    HSD_Joint*);
-/* 0755E8 */ void ftParts_800755E8(Fighter*, u8*);
+/* 0755E8 */ void ftParts_800755E8(Fighter*, struct Fighter_804D6540_x0_t*);
 /* 075650 */ void ftParts_80075650(Fighter_GObj*, HSD_JObj*, struct DObjList*);
 /* 07584C */ void ftParts_JObjSetRotation(HSD_JObj*, Quaternion*);
 /* 07592C */ void ftPartSetRotX(Fighter*, int part_idx, f32 rotate_x);

@@ -54,7 +54,7 @@ void lbShadow_8000E9F0(Vec3* p, HSD_Spline* spline, f32 u)
         f32 t2, u_1, bez1, bez0, bez2;
         cp = &spline->cv[idx * 3];
         t2 = 3.0F * (t * t);
-        bez1 = 1.0F - (4.0F * t);
+        bez1 = (-4.0F * t) + 1.0F;
         u_1 = t - 1.0F;
         bez0 = -3.0F * u_1 * u_1;
         bez1 = 3.0F * (bez1 + t2);

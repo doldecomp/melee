@@ -1237,6 +1237,17 @@ void grMuteCity_801F106C(s32 i)
     }
 }
 
+static inline f32 grMc_DistanceSquared(f32* a, f32* b)
+{
+    f32 dz = a[2] - b[2];
+    f32 dx = a[0] - b[0];
+    f32 dy = a[1] - b[1];
+    f32 dz2 = dz * dz;
+    f32 dx2 = dx * dx;
+    f32 dy2 = dy * dy;
+    return dz2 + (dy2 + dx2);
+}
+
 void grMuteCity_801F1328(void)
 {
     s32* arr = grMc_8049F440;
@@ -1291,20 +1302,11 @@ void grMuteCity_801F1328(void)
             }
             grMc_8049F4B8[arr[idx]].x20 |= 1;
 
+            if (grMc_DistanceSquared(&grMc_8049F4B8[arr[i]].x14,
+                                     &grMc_8049F4B8[arr[idx]].x14) < 900.0f)
             {
-                f32 dz =
-                    grMc_8049F4B8[arr[i]].x1C - grMc_8049F4B8[arr[idx]].x1C;
-                f32 dx =
-                    grMc_8049F4B8[arr[i]].x14 - grMc_8049F4B8[arr[idx]].x14;
-                f32 dy =
-                    grMc_8049F4B8[arr[i]].x18 - grMc_8049F4B8[arr[idx]].x18;
-                f32 dz2 = dz * dz;
-                f32 dx2 = dx * dx;
-                f32 dy2 = dy * dy;
-                if ((dz2 + (dy2 + dx2)) < 900.0f) {
-                    grMc_8049F4B8[arr[i]].x20 |= 8;
-                    grMc_8049F4B8[arr[idx]].x20 |= 8;
-                }
+                grMc_8049F4B8[arr[i]].x20 |= 8;
+                grMc_8049F4B8[arr[idx]].x20 |= 8;
             }
 
             if (grMc_8049F4B8[arr[i]].xC > grMc_8049F4B8[arr[idx]].xC) {
@@ -1503,7 +1505,7 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
     HSD_Spline* spline;
 
     Ground_801C0498();
-    PAD_STACK(16);
+    PAD_STACK(12);
     track_mid = 0.5f * (gp->gv.mutecity.xD4 + gp->gv.mutecity.xD8);
     Camera_GetTransformPosition(&spE8);
 

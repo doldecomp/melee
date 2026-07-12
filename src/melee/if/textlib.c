@@ -621,8 +621,18 @@ bool un_80303720(struct un_80304138_objalloc_t* arg0)
     }
     case 4:
     case 7: {
-        int* q = arg0->x8[arg0->x0].x10;
-        *q -= (unsigned int) arg0->x8[arg0->x0].x1C;
+        /* u32 lane of the same wraparound-guard shape as cases 5/6. For a
+         * full-width unsigned value the guard is always true and MWCC folds
+         * the else branch away, but the extra use of *q keeps q live across
+         * the f32->u32 conversion call (q in r31, ret assigned after the
+         * store), which plain `*q -= idk` does not reproduce. */
+        unsigned int* q = arg0->x8[arg0->x0].x10;
+        unsigned int idk = arg0->x8[arg0->x0].x1C;
+        if (*q - idk >= 0) {
+            *q -= idk;
+        } else {
+            *q += 0 - idk;
+        }
         ret = true;
         arg0->x1 = arg0->x1 | 1;
         lbAudioAx_80024030(2);

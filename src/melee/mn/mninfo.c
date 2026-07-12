@@ -88,19 +88,41 @@ s32 mnInfo_80251AA4(void)
 }
 #pragma pop
 
-s32 mnInfo_80251AFC(void)
+static inline bool mnInfo_IsTrophyLocked(s32 i)
+{
+    s32 unlock_state = mnInfo_80251A08(mnInfo_804A0968[i]);
+    return unlock_state == 0;
+}
+
+static inline u32 mnInfo_GetUnlockDate(u32* date)
+{
+    return *date;
+}
+
+static inline u8 mnInfo_GetTrophyId(s32 i)
+{
+    u8 id = mnInfo_804A0968[i];
+    return id;
+}
+
+static inline void mnInfo_PadSortStack(void)
+{
+    PAD_STACK(8);
+}
+
+void mnInfo_80251AFC(void)
 {
     s32 i;
     s32 j;
-    PAD_STACK(8);
+    mnInfo_PadSortStack();
 
     for (i = 0; 0x42 > i; i++) {
         mnInfo_804A0968[i] = i;
     }
     for (i = 0; i < 0x42; i++) {
         for (j = i + 1; j < 0x42; j++) {
-            if (mnInfo_80251A08(mnInfo_804A0968[i]) == 0) {
-                u8 tmp = mnInfo_804A0968[i];
+            if (mnInfo_IsTrophyLocked(i)) {
+                u8 tmp = mnInfo_GetTrophyId(i);
 
                 mnInfo_804A0968[i] = mnInfo_804A0968[j];
                 mnInfo_804A0968[j] = tmp;
@@ -109,10 +131,21 @@ s32 mnInfo_80251AFC(void)
     }
     for (i = 0; i < 0x42; i++) {
         for (j = i + 1; j < 0x42; j++) {
-            if (mnInfo_80251A08(mnInfo_804A0968[j]) != 0 &&
-                (mnInfo_80251A08(mnInfo_804A0968[i]) == 0 ||
-                 *gmMainLib_8015D804(mnInfo_804A0968[i]) >
-                     *gmMainLib_8015D804(mnInfo_804A0968[j])))
+            u32* right;
+            u32 right_count;
+            u8 left_id;
+
+            if (mnInfo_80251A08(mnInfo_804A0968[j]) == 0) {
+                continue;
+            }
+            if (mnInfo_80251A08(mnInfo_804A0968[i]) != 0) {
+                right = gmMainLib_8015D804(mnInfo_804A0968[j]);
+                left_id = mnInfo_804A0968[i];
+                right_count = mnInfo_GetUnlockDate(right);
+                if (*gmMainLib_8015D804(left_id) <= right_count) {
+                    continue;
+                }
+            }
             {
                 u8 tmp = mnInfo_804A0968[i];
 
@@ -121,7 +154,6 @@ s32 mnInfo_80251AFC(void)
             }
         }
     }
-    return 0;
 }
 
 static AnimLoopSettings mnInfo_803EFC08[0x12] = {
@@ -239,13 +271,13 @@ void fn_80251FE4(void)
     MenuInfo_GObj* gobj;
     MnInfoData* data;
     u64 buttons;
+    u8* trophy;
     s32 count;
     s32 i;
     s32 j;
     MnInfoTextCursor* right;
     MnInfoTextCursor* cursor_base;
     MnInfoTextCursor* left;
-    u8* trophy;
     PAD_STACK(0x20);
 
     data = mnInfo_804D6C78->user_data;
@@ -459,37 +491,33 @@ void fn_80252548(HSD_GObj* gobj)
 {
     HSD_GObjProc* proc;
     HSD_Text* zero_left;
-    u8 id;
-    u8* trophy;
     MnInfoData* data = gobj->user_data;
-    MnInfoTextCursor* write_cursor;
+    MnInfoData* data3;
     s32 i;
     HSD_JObj* jobj;
     PAD_STACK(16);
 
     if (mn_804A04F0.cur_menu != MENU_KIND_DATA_SPECIAL) {
         HSD_Text* zero_right;
-        MnInfoTextCursor* read_cursor;
+        MnInfoData* data2;
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         proc = HSD_GObj_SetupProc(gobj, fn_802523B8, 0);
         i = 0;
         proc->flags_3 = HSD_GObj_804D783C;
-        write_cursor = gobj->user_data;
-        read_cursor = (MnInfoTextCursor*) &((HSD_Text**) write_cursor)[i];
+        data2 = gobj->user_data;
+        data3 = data2;
         zero_left = (HSD_Text*) i;
         zero_right = (HSD_Text*) i;
         do {
-            if (write_cursor->left != NULL) {
-                HSD_SisLib_803A5CC4(read_cursor->left);
-                write_cursor->left = zero_left;
+            if (data2->left_column[i] != NULL) {
+                HSD_SisLib_803A5CC4(data3->left_column[i]);
+                data2->left_column[i] = zero_left;
             }
-            if (write_cursor->right != NULL) {
-                HSD_SisLib_803A5CC4(read_cursor->right);
-                write_cursor->right = zero_right;
+            if (data2->right_column[i] != NULL) {
+                HSD_SisLib_803A5CC4(data3->right_column[i]);
+                data2->right_column[i] = zero_right;
             }
             i += 1;
-            write_cursor = (MnInfoTextCursor*) &((HSD_Text**) write_cursor)[1];
-            read_cursor = (MnInfoTextCursor*) &((HSD_Text**) read_cursor)[1];
         } while (i < 4);
         HSD_SisLib_803A5CC4(data->description);
         return;

@@ -934,17 +934,14 @@ void grKongo_801D6AFC(void)
     f32* deltas;
     _struct_grKg_803E188C_0x18* entries;
 
-    s32 var_ctr = 3;
-    var_r5 = sp44;
-    do {
-        var_r5[0] = 0.0f;
-        var_r5[1] = 0.0f;
-        var_r5[2] = 0.0f;
-        var_r5[3] = 0.0f;
-        var_r5[4] = 0.0f;
-        var_r5 += 5;
-        var_ctr -= 1;
-    } while (var_ctr != 0);
+    {
+        f32* p = sp44;
+        s32 i = 0;
+        do {
+            *p++ = 0.0f;
+            i++;
+        } while (i < 15);
+    }
     var_r5 = sp44;
     entries = grKg_803E188C;
     {

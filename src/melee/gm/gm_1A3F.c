@@ -60,22 +60,23 @@ void gm_801A3F48(GameScene* scene)
 
 inline u8 nextScene(GameScene* scenes)
 {
+    u8 current_scene = gm_80479D30.routing.curr_scene;
     int i;
-    u8 var_r3_3;
+    u8 next_scene;
     GameScene* cur = scenes;
 
     for (i = 0; scenes[i].idx != 0xFF; i++) {
-        if (cur->idx > gm_80479D30.routing.curr_scene) {
+        if (cur->idx > current_scene) {
             return scenes[i].idx;
         }
         cur++;
     }
 
-    var_r3_3 = scenes[0].idx;
-    if (var_r3_3 == 0xFF) {
-        var_r3_3 = 0;
+    next_scene = scenes[0].idx;
+    if (next_scene == 0xFF) {
+        next_scene = 0;
     }
-    return var_r3_3;
+    return next_scene;
 }
 
 inline GameScene* findScene(GameScene* scene)

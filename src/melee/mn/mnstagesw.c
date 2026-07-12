@@ -747,7 +747,9 @@ static HSD_GObj* mnStageSw_80236CBC(s8 arg0)
             HSD_JObjAddChild(user_data->x2C, cursor_jobj);
             HSD_JObjAddTranslationY(cursor_jobj, y_spacing * (f32) i);
         } else {
-            HSD_JObjAddChild(user_data->x34, cursor_jobj);
+            HSD_JObj* parent = user_data->x34;
+
+            HSD_JObjAddChild(parent, cursor_jobj);
             HSD_JObjAddTranslationY(cursor_jobj, y_spacing * (f32) (i - 15));
         }
     }

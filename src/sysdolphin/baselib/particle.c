@@ -147,6 +147,8 @@ typedef struct MCCErrorMessages {
     char already_unlocked[0x20];
     char read_write_busy[0x1C];
     char unknown_error[0x10];
+    char report[0x18];
+    char report_no_caller[0x14];
 } MCCErrorMessages;
 
 static MCCErrorMessages mcc_error_messages = {
@@ -172,6 +174,8 @@ static MCCErrorMessages mcc_error_messages = {
     "Channel was (already) unlocked",
     "Channel (read/write) busy",
     "Unknown error",
+    "%s: MCC Error, %s (%d)\n",
+    "MCC Error, %s (%d)\n",
 };
 
 static u16 numPeakParticles;
@@ -788,10 +792,7 @@ void hsd_803922FC(void* bitmap, s32 x, s32 y, s32 parity, s32 dst, s32 w,
         y++;
         off_y++;
     }
-    max_x = x + 11;
-    if (max_x >= w) {
-        max_x = w;
-    }
+    max_x = (u32) (x + 11) < w ? x + 11 : w;
     if (x < 0) {
         off_x = -x;
         x = 0;
@@ -1281,9 +1282,9 @@ u8 fn_80392CD8(char* caller)
     }
 
     if (caller != NULL) {
-        OSReport("%s: MCC Error, %s (%d)\n", caller, msg, err);
+        OSReport(mcc_error_messages.report, caller, msg, err);
     } else {
-        OSReport("MCC Error, %s (%d)\n", msg, err);
+        OSReport(mcc_error_messages.report_no_caller, msg, err);
     }
     return err;
 }
@@ -1549,6 +1550,26 @@ static void (*lbl_8040A93C[32])(void*, void*) = {
     (void (*)(void*, void*)) hsd_80393840,
 };
 
+// Evidence: retail hsd_80393A5C loads this table's base into a register
+// (lis/addi 0x8040A9D0) and reads the messages at field displacements
+// +0x20 ("cannot open"), +0x90 ("Done"), +0xB8 ("cannot save"); the
+// remaining messages fill out the retail 0x130 object (see
+// struct ParticleUsbMessages in particle.static.h).
+/* 40A9D0 */ static struct ParticleUsbMessages psUsbMessages = {
+    "loading file (%s) from USB ...",
+    "cannot open file\n",
+    "cannot get files stat\n",
+    "too large file size\n",
+    "cannot allocate memory\n",
+    "cannot load file\n",
+    "Done %s size:%d time:%f spped:%fkbps\n",
+    "cannot save file\n",
+    "Seaching files (%s) via USB ...",
+    "cannot get dir stat\n",
+    "too large dir size\n",
+    "cannot use USB now.\n",
+};
+
 // @TODO: Currently 90.11% match - needs register allocation fix
 void hsd_80393440(void* request, void* response)
 {
@@ -1727,8 +1748,6 @@ void hsd_80393A54(int level)
     hsd_804D78C0 = level;
 }
 
-// @TODO: Currently 95.53% match - lis hoisting, extra li r0, BSS relocation
-// encoding
 static inline f32 kbps_scale(void)
 {
     return 1.0F / 1024.0F;
@@ -1736,12 +1755,17 @@ static inline f32 kbps_scale(void)
 
 int hsd_80393A5C(char* filename, int data, int size)
 {
-    u32* data_p;
     int ready;
     u32 start;
     int fd;
+    // Evidence: retail materializes the fd argument (mr r3) before the
+    // buffer argument (mr r4) at the FIOFwrite call; the fresh local copy
+    // reproduces that argument scheduling.
+    int fd_arg;
     f32 written_f;
     f32 elapsed;
+    u32* data_p;
+    struct ParticleUsbMessages* messages = &psUsbMessages;
 
     if (hsd_804D78A0 == 0) {
         ready = 0;
@@ -1763,15 +1787,16 @@ int hsd_80393A5C(char* filename, int data, int size)
     fd = FIOFopen(filename, 0xA02);
 
     if ((u32) (fd + 0x10000) == 0xFFFF) {
-        OSReport("cannot open file\n");
+        OSReport(messages->cannot_open);
         return -1;
     }
 
+    fd_arg = fd;
     data_p = (u32*) data;
-    written_f = (f32) (u32) FIOFwrite(fd, data_p, size);
+    written_f = (f32) (u32) FIOFwrite(fd_arg, data_p, size);
 
     if ((f32) (s32) size != written_f) {
-        OSReport("cannot save file\n");
+        OSReport(messages->cannot_save);
         FIOFclose(fd);
         return (s32) written_f;
     }
@@ -1780,8 +1805,8 @@ int hsd_80393A5C(char* filename, int data, int size)
     elapsed = (f32) (OSGetTick() - start) / (f32) (*(u32*) 0x800000F8 >> 2);
     {
         f32 bits = 8.0F * (f32) size;
-        OSReport("Done %s size:%d time:%f spped:%fkbps\n", filename, size,
-                 elapsed, bits / elapsed * kbps_scale());
+        OSReport(messages->done, filename, size, elapsed,
+                 bits / elapsed * kbps_scale());
     }
     return size;
 }
@@ -2255,21 +2280,16 @@ void hsd_80394668(void)
         /* Copy XFB data with brightness adjustment */
         u8* src = (u8*) sp->x2C;
         u32 size = sp->x48;
-        u32 count = (size + 1) >> 1;
-        s32 pos = 0;
+        s32 pos;
         s32* dst_base = (s32*) sp + sp->x34;
         u8* dst = 0;
         dst += dst_base[9];
 
-        if (size > 0) {
-            while (count != 0) {
-                u8* s1 = src + pos;
-                u8* d1 = dst + pos;
-                pos += 2;
-                d1[0] = (u8) (((s1[0] - 0x10) & 0xFFFFFF) + 0x10);
-                d1[1] = s1[1];
-                count--;
-            }
+        for (pos = 0; pos < size; pos += 2) {
+            u8* s1 = src + pos;
+            u8* d1 = dst + pos;
+            d1[0] = (u8) (((s1[0] - 0x10) & 0xFFFFFF) + 0x10);
+            d1[1] = s1[1];
         }
     } else {
         /* Draw console text to framebuffer */
@@ -2318,7 +2338,7 @@ void hsd_80394668(void)
 }
 #pragma pop
 
-// @TODO: Currently 96.16% match - register swap in second loop (r29/r30)
+// @TODO: Register swap in second loop (r29/r30)
 void hsd_80394950(OSContext* ctx)
 {
     OSContext tmp;
@@ -2353,6 +2373,8 @@ void hsd_80394950(OSContext* ctx)
     i = 0;
     p = (u8*) ctx;
     do {
+        u32 val0 = ((u32*) p)[0x24];
+        u32 val1 = ((u32*) p)[0x25];
         OSReport(
             "R%02d=%08X:%08X (%e, %e)\n"
             "\0\0\0- MISC ----------------------------------------------\n"
@@ -2360,8 +2382,7 @@ void hsd_80394950(OSContext* ctx)
             "\0\0\0\0CR  =%08X LR  =%08X\n"
             "\0\0\0\0CTR =%08X XER =%08X\n"
             "\0\0\0\0GQR%d=%08X GQR%d=%08X\n",
-            i, ((u32*) p)[0x24], ((u32*) p)[0x25], ((f32*) p)[0x24],
-            ((f32*) p)[0x25]);
+            i, val0, val1, ((f32*) p)[0x24], ((f32*) p)[0x25]);
         i++;
         p += 8;
     } while (i < 32);
@@ -4287,8 +4308,10 @@ void* fn_80397814(void* arg)
                 if (*(void* (**) (void*) )((u8*) disp_node + 0xC) != NULL) {
                     result = (s32) (*(void* (**) (void*) )((u8*) disp_node +
                                                            0xC))(disp_node);
-                    if (result == 0) {
-                    } else {
+                    switch (result) {
+                    case 0:
+                        break;
+                    default:
                         goto walk_done;
                     }
                 }
@@ -4706,8 +4729,7 @@ void psInitDataBankLoad(int bank, int* cmdBank, int* texBank, u32* ref,
     }
 }
 
-// @TODO: Currently 75.74% match - register allocation and branch structure
-// differences
+// @TODO: Register allocation and branch structure differences
 void psInitDataBankLocate(HSD_Archive* cmdBank, HSD_Archive* texBank,
                           int* formBank)
 {
@@ -4760,7 +4782,7 @@ done_cmd:
     {
         s32 count = num2 - num;
         ptr = base + num;
-        if (num < num2) {
+        {
             for (i = 0; i < count; i++) {
                 s32* cmd = (s32*) ptr[0];
                 if (cmd != NULL) {
@@ -4791,7 +4813,7 @@ done_cmd:
         }
 
         cur = groups;
-        if (num_groups > 0) {
+        {
             for (k = 0; k < num_groups; k++) {
                 HSD_PSTexGroup* tg = (HSD_PSTexGroup*) cur[0];
                 if (tg == NULL) {
@@ -4875,7 +4897,7 @@ done_cmd:
         if (formBank == NULL) {
             return;
         }
-        if (num_groups >= 1) {
+        {
             s32* groups = (s32*) formBank + 1;
 
             for (i = 0; i < num_groups; i++) {
@@ -5105,13 +5127,13 @@ void hsd_80398F8C(HSD_Particle* pp, f32 angle)
     f32 vy = pp->vel.y;
     f32 sin_a, cos_a;
     f32 sin_e, cos_e;
-    f32 rand_angle;
     f32 cos_rand, sin_rand;
+    f32 rand_angle;
+    f32 angle_copy;
     f32 sin_angle, cos_angle;
     f32 abs_z;
     f32 temp;
     f32 abs_temp;
-    f32 angle_copy;
     PAD_STACK(16);
 
     {
@@ -6123,8 +6145,8 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                 {
                     int idx = *pc++;
                     HSD_JObj* jobj;
-                    f32 vel_mag_sq, vel_mag;
                     f32 dx, dy, dz, dist_sq, dist;
+                    f32 vel_mag_sq, vel_mag;
 
                     jobj = hsd_804D08E8[idx + pp->pJObjOfs];
                     if (jobj == NULL) {
@@ -7529,9 +7551,15 @@ void hsd_8039D048(void* particle)
     }
 }
 
-// @TODO: Currently 95.10% match - lwzu vs lwz+addi addressing, lwzx vs add+lwz
 void hsd_8039D0A0(HSD_Generator* gen)
 {
+    typedef struct {
+        HSD_JObj* jobj[8];
+        HSD_Particle* particle[146];
+        u8 pad[0x410];
+        HSD_ObjAllocData alloc_data;
+    } ParticleData;
+    ParticleData* data = (ParticleData*) hsd_804D08E8;
     HSD_Particle* prev;
     HSD_Particle* prt;
     HSD_Particle* next;
@@ -7540,7 +7568,7 @@ void hsd_8039D0A0(HSD_Generator* gen)
 
     prev = NULL;
     idnum = gen->idnum;
-    head = (HSD_Particle**) &hsd_804D0908[gen->linkNo];
+    head = &data->particle[gen->linkNo];
     prt = *head;
 
     while (prt != NULL) {
@@ -7568,13 +7596,13 @@ void hsd_8039D0A0(HSD_Generator* gen)
 
             if (prt->kind & 0x8000) {
                 s32 jidx = (prt->kind >> 12) & 7;
-                if (hsd_804D08E8[jidx] != NULL) {
-                    HSD_JObjUnref(hsd_804D08E8[jidx]);
-                    hsd_804D08E8[jidx] = NULL;
+                if (data->jobj[jidx] != NULL) {
+                    HSD_JObjUnref(data->jobj[jidx]);
+                    data->jobj[jidx] = NULL;
                 }
             }
 
-            HSD_ObjFree(&hsd_804D0F60.alloc_data, prt);
+            HSD_ObjFree(&data->alloc_data, prt);
             hsd_804D78E2--;
         } else {
             prev = prt;
@@ -7944,11 +7972,11 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     f32 angle3;
     PAD_STACK(16);
 
+    angle1 = angle3 = 0.0F;
     if (gen->count < 1.0F) {
         return gen->count;
     }
 
-    angle3 = 0.0F;
     vel_mag_sq = angle3;
 
     /* Copy velocity */

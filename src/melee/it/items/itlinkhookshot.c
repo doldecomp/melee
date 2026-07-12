@@ -1669,6 +1669,11 @@ static void it_802A4758_no_inline(ItemLink* link_0, Vec3* arg1,
     it_802A4758(link_0, arg1, arg2, arg8);
 }
 
+static inline f32 it_802A6474_GetZDelta(ItemLink* link, Vec3* pos)
+{
+    return pos->z - link->pos.z;
+}
+
 void it_802A6474(ItemLink* link_0, ItemLink* link_1, Vec3* pos,
                  itLinkHookshotAttributes* attrs)
 {
@@ -1753,7 +1758,7 @@ void it_802A6474(ItemLink* link_0, ItemLink* link_1, Vec3* pos,
     target_dy = pos->y - cur_link->pos.y;
     target_dx = pos->x;
     target_dx -= cur_link->pos.x;
-    target_dz = pos->z - cur_link->pos.z;
+    target_dz = it_802A6474_GetZDelta(cur_link, pos);
     target_len = (target_dx * target_dx) + (target_dy * target_dy);
     target_len = (target_dz * target_dz) + target_len;
     if (target_len > 0.0f) {
@@ -1843,6 +1848,25 @@ static inline Vec3* it_802A6A78_get_pos(ItemLink* link_0)
     return &link_0->pos;
 }
 
+static inline f64 it_802A6A78_normalize_diff_rev(Vec3* b, Vec3* a, Vec3* vec)
+{
+    f64 len;
+    f32 inv;
+    vec->x = a->x - b->x;
+    vec->y = a->y - b->y;
+    vec->z = a->z - b->z;
+    len = sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
+    if (len == 0.0F) {
+        inv = 0.0F;
+    } else {
+        inv = 1.0F / len;
+    }
+    vec->x *= inv;
+    vec->y *= inv;
+    vec->z *= inv;
+    return len;
+}
+
 bool it_802A6A78(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
                  Fighter* arg3)
 {
@@ -1870,8 +1894,8 @@ bool it_802A6A78(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
     it_802A6A78_get_next(link_0, &link_1);
     while (link_1 != NULL) {
         if (link_1->x2C_b0) {
-            len = it_802A6A78_normalize_diff(
-                &link_1->pos, it_802A6A78_get_pos(link_0), &vec);
+            len = it_802A6A78_normalize_diff_rev(
+                it_802A6A78_get_pos(link_0), &link_1->pos, &vec);
             if (len > arg2->x30) {
                 link_1->pos.x = (vec.x * arg2->x30) + link_0->pos.x;
                 link_1->pos.y = (vec.y * arg2->x30) + link_0->pos.y;

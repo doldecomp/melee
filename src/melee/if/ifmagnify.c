@@ -158,6 +158,7 @@ ifMagnifyPlayer* ifMagnify_802FB73C(ifMagnifyPlayer* arg0, Vec2* arg1,
 
 void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
 {
+    u8 stack_pad[8];
     S32Vec2 screen_pos;
     Vec2 out;
     Vec2 pos;
@@ -174,8 +175,6 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
     u8 slot_type;
     u8 teams_enabled;
     u8 operand_pad[12];
-
-    PAD_STACK(8);
 
     if (arg1 != 0) {
         return;
@@ -212,8 +211,8 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
                 slot_type = Player_GetPlayerSlotType(slot);
                 teams_enabled = gm_8016B168();
                 color = gm_80160968(
-                    (u8) gm_80160854((u8) slot, Player_GetTeam(slot),
-                                     teams_enabled, slot_type));
+                    gm_80160854((u8) slot, Player_GetTeam(slot), teams_enabled,
+                                slot_type));
                 color_ptr = &color_copy;
                 color_copy = color;
                 if (player->state.unk == 2) {
@@ -233,32 +232,30 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
 
 void ifMagnify_802FBBDC(HSD_GObj* arg0)
 {
-    int i;
-    f32 mix2;
     int j;
+    f32 mix2;
+    int i;
     ifMagnify* magnify;
     HSD_CObj* cobj;
     u8* color_ids;
     ifMagnifyPlayer* player;
     f32 top;
     f32 bottom;
-    f32 left;
     HSD_GObj* fighter_gobj;
     bool should_display;
     f32 x_blend;
+    f32 mix3;
     f32 y_blend;
-    f32 x_inv;
     f32 y_inv;
     f32 scale;
-    f32 x_class;
+    f32 mix1;
     f32 y_class;
     f32 mix0;
-    f32 mix1;
-    f32 mix3;
+    f32 x_class;
+    f32 x_inv;
     GXColor result;
     f32 right;
     Vec3 interest_pos;
-    GXColor colors[4];
     bool is_outside;
 
     magnify = &ifMagnify_804A1DE0;
@@ -274,6 +271,7 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
         should_display = true;
     }
     if (should_display) {
+        f32 left;
         cobj = arg0->hsd_obj;
         HSD_CObjGetOrtho(cobj, &top, &bottom, &left, &right);
         if (HSD_CObjSetCurrent(cobj) != 0) {
@@ -282,6 +280,7 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
         }
 
         for (i = 0; i < 6; i++) {
+            GXColor colors[4];
             Vec3 world_pos;
             player = &magnify->player[i];
             fighter_gobj = Player_GetEntity(i);

@@ -194,10 +194,13 @@ void ftCo_800C0B20(Fighter_GObj* gobj)
             struct SmallerHitCapsule hit;
             Fighter* fp = GET_FIGHTER(gobj);
             float f = ftColl_800765F0(fp, NULL, unk_anim->count);
+            int hurt_idx = 0;
             fp->bury_timer_1 = p_ftCommonData->bury_timer_unk1;
             if (ftColl_80076640(fp, &f)) {
                 FighterHurtCapsule* hurt;
-                hurt = &fp->hurt_capsules[0];
+                hurt_idx *= sizeof(FighterHurtCapsule);
+                hurt = (FighterHurtCapsule*) ((intptr_t) fp + hurt_idx +
+                                              offsetof(Fighter, hurt_capsules));
                 ftColl_80076764(3, 1, 0, unk_anim, fp, hurt);
                 lbColl_80008D30((HitCapsule*) &hit,
                                 (lbColl_80008D30_arg1*) unk_anim);

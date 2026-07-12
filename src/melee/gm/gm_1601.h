@@ -39,7 +39,7 @@
 /* 161154 */ s32 fn_80161154(MatchEnd*);
 /* 161C90 */ void fn_80161C90(MatchEnd*, int, u16*);
 /* 162068 */ void fn_80162068(MatchEnd*);
-/* 162170 */ s32 fn_80162170(MatchEnd*);
+/* 162170 */ void fn_80162170(MatchEnd*);
 /* 1623A4 */ s32 gm_801623A4(MatchEnd*);
 /* 1623D8 */ int gm_801623D8(void);
 /* 1623FC */ UNK_RET gm_801623FC(int);
@@ -136,9 +136,9 @@
 /* 165388 */ HSD_GObj* gm_80165388(u16, u8, u8, s32);
 /* 1653C8 */ void gm_801653C8(HSD_GObj*);
 /* 1653E8 */ float fn_801653E8(u8);
-/* 165418 */ u8 fn_80165418(MatchEnd*);
-/* 1654A0 */ u8 fn_801654A0(MatchEnd*);
-/* 165548 */ u8 fn_80165548(MatchEnd*, s8, s32);
+/* 165418 */ s32 fn_80165418(MatchEnd*);
+/* 1654A0 */ s32 fn_801654A0(MatchEnd*);
+/* 165548 */ s32 fn_80165548(MatchEnd*, s32, s32);
 /* 1656A8 */ u32 fn_801656A8(MatchEnd*, u32);
 /* 16588C */ s32 fn_8016588C(lbl_8046B6A0_24C_t*, s32);
 /* 165AC0 */ s32 fn_80165AC0(MatchEnd*);

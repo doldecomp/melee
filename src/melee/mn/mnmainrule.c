@@ -466,6 +466,7 @@ void mn_8022FD18(u8 arg0)
     } indices;
     HSD_JObj** jobjs;
     HSD_JObj* jobj;
+    HSD_JObj* jobj2;
     struct mn_8022FB88_arg1_t* data;
     u8* ptr0;
     u8* ptr1;
@@ -517,9 +518,9 @@ void mn_8022FD18(u8 arg0)
     jobj = jobjs[7];
     HSD_JObjReqAnimAll(jobj, (f32) (u8) (data->x9 / 10));
     HSD_JObjAnimAll(jobj);
-    jobj = jobjs[8];
-    HSD_JObjReqAnimAll(jobj, (f32) (u8) (val % 10));
-    HSD_JObjAnimAll(jobj);
+    jobj2 = jobjs[8];
+    HSD_JObjReqAnimAll(jobj2, (f32) (u8) (val % 10));
+    HSD_JObjAnimAll(jobj2);
 }
 
 void mn_8022FEC8(HSD_GObj* arg0, HSD_JObj* arg1, u8 arg2, u8 arg3)
@@ -580,7 +581,6 @@ void mn_8022FEC8(HSD_GObj* arg0, HSD_JObj* arg1, u8 arg2, u8 arg3)
         return;
     }
 
-    frame = NULL;
     if ((mn_804A04F0.buttons & 4) != 0) {
         if (arg2 == 0 || arg2 == 2 || arg2 == 4) {
             u8* frame_base = base + 0x170;
@@ -598,7 +598,10 @@ void mn_8022FEC8(HSD_GObj* arg0, HSD_JObj* arg1, u8 arg2, u8 arg3)
                 frame = (f32*) (base + 0x134 + (0xC * (arg3 - 1)));
             }
         }
-        HSD_JObjReqAnimAll(arg1, *frame);
+        {
+            f32 frame_value = *frame;
+            HSD_JObjReqAnimAll(arg1, frame_value);
+        }
     }
     HSD_JObjAnimAll(arg1);
 }
@@ -653,24 +656,17 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
 {
     HSD_JObj* option_roots[7];
     HSD_JObj* roots[17];
+    s32 i, j, visible;
+    u8* base = mn_803EC600;
+    u8 count = mn_803EB6B0[13].selection_count;
+    struct mn_802307F8_t* data = arg0->user_data;
     u16 indices[17];
-    u8* base;
-    struct mn_802307F8_t* data;
-    u8* data8;
-    u8 count;
-    s32 i;
-    s32 j;
-    s32 visible;
     s32 valid;
-    u16* idx;
+    HSD_JObj** root_ptr;
+    u16* map_ptr;
     AnimLoopSettings* settings;
+    PAD_STACK(0x24);
 
-    PAD_STACK(0x20);
-
-    base = mn_803EC600;
-    count = mn_803EB6B0[13].selection_count;
-    data = arg0->user_data;
-    data8 = arg0->user_data;
     indices[0] = 0;
     indices[1] = 1;
     indices[2] = 2;
@@ -687,11 +683,15 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
     indices[13] = 13;
     indices[14] = 14;
     indices[15] = 15;
+    map_ptr = &indices[16];
     for (i = 16; i < 17; i++) {
-        indices[i] = i;
+        *map_ptr = i;
+        map_ptr++;
     }
 
-    for (i = 0; i < count; i++) {
+    root_ptr = option_roots;
+    i = 0;
+    while (i < (s32) count) {
         if (gm_801A4310() == 0x1B && (u8) i == 4) {
             valid = 0;
         } else {
@@ -699,7 +699,8 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
         }
         if (valid != 0) {
             visible = 0;
-            for (j = 0; j < i; j++) {
+            j = 0;
+            while (j < (s32) (u8) i) {
                 if (gm_801A4310() == 0x1B && (u8) j == 4) {
                     valid = 0;
                 } else {
@@ -708,15 +709,21 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
                 if (valid != 0) {
                     visible++;
                 }
+                j++;
             }
-            if (data->xC[((u16*) base)[(u8) visible]] == NULL) {
-                option_roots[i] = NULL;
-            } else {
-                option_roots[i] = ((struct mn_8022FEC8_jobj_ref_t*)
-                                       data->xC[((u16*) base)[(u8) visible]])
-                                      ->x10;
+            {
+                HSD_JObj* root = data->xC[((u16*) base)[(u8) visible]];
+                HSD_JObj* child;
+                if (root == NULL) {
+                    child = NULL;
+                } else {
+                    child = ((struct mn_8022FEC8_jobj_ref_t*) root)->x10;
+                }
+                *root_ptr = child;
             }
         }
+        root_ptr++;
+        i++;
     }
 
     if (arg1 != 0) {
@@ -1171,10 +1178,12 @@ HSD_GObj* mn_80230E38(int arg0)
             if (i == 1 &&
                 ((struct mn_8022FB88_arg1_t*) mn_804D6BD0->user_data)->x2 == 1)
             {
-                HSD_JObjReqAnim(roots[7],
-                                ((f32*) &mn_804D4B88)[(u8) (i == hovered)]);
+                HSD_JObjReqAnim(
+                    roots[7],
+                    ((f32*) &mn_804D4B88)[(u8) (hovered == i)]);
             } else {
-                HSD_JObjReqAnim(roots[7], cursor_frames[(u8) (i == hovered)]);
+                HSD_JObjReqAnim(roots[7],
+                                cursor_frames[(u8) (hovered == i)]);
             }
             HSD_JObjAnim(roots[7]);
             if (hovered != i) {

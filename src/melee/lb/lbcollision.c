@@ -666,11 +666,12 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
     Vec3 a1;
     float sum_pq = p + q;
     Vec3 a0;
-    u8 operand_pad[12];
+    u8 operand_pad[8];
 
-    PAD_STACK(72);
+    PAD_STACK(80);
 
     a0 = *a;
+    (void) a0;
     a1 = a0;
     {
         Vec3 c0;
@@ -1060,8 +1061,8 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float hit_start_min_z;
     float hurt_end_x;
     float hit_end_z;
-    float hurt_end_y;
     float segment_dot;
+    float hurt_end_y;
     float hit_param;
     float local_dist;
     float hurt_param;
@@ -1173,6 +1174,7 @@ block_39:
     hit_delta.y = hit_end->y - hit_start_copy.y;
     hit_delta.z = hit_end->z - hit_start_copy.z;
     hurt_end_y = hurt_end->y;
+    (void) hurt_end_y;
     start_delta_y = hit_start_copy.y - hurt_start_copy.y;
     hurt_delta_y = hurt_end_y - hurt_start_copy.y;
     hurt_end_x = hurt_end->x;

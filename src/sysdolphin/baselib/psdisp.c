@@ -2027,7 +2027,10 @@ void psDispParticles(s32 arg0, u32 arg1)
                                 e = 0.5 * e * (3.0 - (double) upLen * e * e);
                                 e = 0.5 * e * (3.0 - (double) upLen * e * e);
                                 e = 0.5 * e * (3.0 - (double) upLen * e * e);
-                                upLen = (f32) ((double) upLen * e);
+                                {
+                                    f32 len = (f32) ((double) upLen * e);
+                                    upLen = len;
+                                }
                             }
                             if ((f32) sp8B0 != upLen) {
                                 f32 sdx = cur_pos.x - prev_pos.x;

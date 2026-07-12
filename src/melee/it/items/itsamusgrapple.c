@@ -306,14 +306,14 @@ HSD_JObj* it_802B75FC(Item* ip, HSD_JObj* jobj_arg, s32 arg2, f32 scale)
 {
     f32 coeff;
     f32 temp;
-    HSD_JObj* result;
+    ItemLink* prev_link;
     itSamusGrappleAttributes* attrs2;
+    itSamusGrappleAttributes* attrs;
+    ItemLink* link;
+    HSD_JObj* result;
+    HSD_GObj* link_gobj;
     ItemLink* head_link;
     ItemLink* tail_link;
-    ItemLink* link;
-    HSD_GObj* link_gobj;
-    itSamusGrappleAttributes* attrs;
-    ItemLink* prev_link;
     HSD_JObj* tail_jobj;
     s32 i;
     Vec3 zero_vel;

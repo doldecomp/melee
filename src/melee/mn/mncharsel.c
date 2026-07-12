@@ -1285,8 +1285,8 @@ static struct CSSCharModel {
 void fn_8025F0E0(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    struct CSSCursorData*(*sp58)[4];
     HSD_JObj* sp54;
+    struct CSSCursorData*(*sp58)[4];
     HSD_JObj* sp4C;
     HSD_JObj* sp48;
     HSD_JObj* sp44;
@@ -1674,6 +1674,11 @@ static inline bool isDuplicateCostume2(int door, CSSData* css, u8 door_count)
     return false;
 }
 
+static inline s32 getIconOffset(unsigned long icon_idx)
+{
+    return icon_idx * sizeof(CSSIcon);
+}
+
 void mnCharSel_8025FB50(u8 door, s32 arg1)
 {
     HSD_JObj* sp18;
@@ -1687,7 +1692,7 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
     do {
         s32 temp = HSD_Randi(0x19);
         icon_idx = temp;
-        icon_offset = icon_idx * sizeof(CSSIcon);
+        icon_offset = getIconOffset(icon_idx);
     } while ((icon = &all_data->icons[icon_idx])->state == 0);
 
     if (mnCharSel_804D6CF5 == 1) {
@@ -2057,10 +2062,13 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                         (f32) (cursor->x10 - (0.8f + sp88.y));
                     cursor->x10 = (f32) (0.8f + sp88.y);
                 }
-                if ((-14.8f + sp88.y) > cursor->x10) {
-                    mnCharSel_803F0DFC.tags[cursor->x4].data->scroll_amt =
-                        (f32) (cursor->x10 - (-14.8f + sp88.y));
-                    cursor->x10 = (f32) (-14.8f + sp88.y);
+                {
+                    int is_below = (-14.8f + sp88.y) > cursor->x10;
+                    if (is_below) {
+                        mnCharSel_803F0DFC.tags[cursor->x4].data->scroll_amt =
+                            (f32) (cursor->x10 - (-14.8f + sp88.y));
+                        cursor->x10 = (f32) (-14.8f + sp88.y);
+                    }
                 }
                 if ((4.3f + sp88.x) < cursor->xC) {
                     cursor->xC = 4.3f + sp88.x;
@@ -3802,7 +3810,6 @@ void fn_802633B0(HSD_GObj* gobj)
             tag->x8 = new_pos;
             page = (s32) (scroll_pos * 0.03125f);
             new_page = (s32) (new_pos * 0.03125f);
-            (void) new_page;
             if (new_pos > 0.0f) {
                 tag->x8 = 0.0f;
             }
@@ -4161,11 +4168,11 @@ s32 mnCharSel_802640A0(void)
     GXColor spE4;
     GXColor spE0;
     GXColor spDC;
-    GXColor spD8;
+    HSD_JObj* tag_name_jobj;
     GXColor spD4;
     GXColor color;
     HSD_JObj* spA4;
-    HSD_JObj* sp9C;
+    GXColor hard_color;
     HSD_JObj* sp70;
     s32 row_b;
     HSD_GObj* gobj;
@@ -4424,7 +4431,7 @@ s32 mnCharSel_802640A0(void)
         cursor->x7 = 0;
         cursor->x6 = 0;
         cursor->x5 = 2;
-        cursor->xC = (f32) ((15.0f * (f32) i) - 31.0f);
+        cursor->xC = (f32) ((15.0f * (f32) i) + -31.0f);
         cursor->x10 = -21.5f;
     }
 
@@ -4531,16 +4538,16 @@ s32 mnCharSel_802640A0(void)
                         mnCharSel_803F0DFC.name_list_joint, -1);
         } else {
             {
-                HSD_JObj** jobj_ptr = &sp9C;
+                HSD_JObj** jobj_ptr = &tag_name_jobj;
                 lb_80011E24(mnCharSel_804D6CC0, jobj_ptr, tag->name_jointl,
                             -1);
             }
-            HSD_ForeachAnim(sp9C, JOBJ_TYPE, JOBJ_MASK, HSD_AObjReqAnim,
-                            AOBJ_ARG_AF, 2.0);
-            HSD_JObjAnimAll(sp9C);
-            HSD_ForeachAnim(sp9C, JOBJ_TYPE, JOBJ_MASK, HSD_AObjStopAnim,
-                            AOBJ_ARG_AOV, 0, 0);
-            sp108 = sp9C;
+            HSD_ForeachAnim(tag_name_jobj, JOBJ_TYPE, JOBJ_MASK,
+                            HSD_AObjReqAnim, AOBJ_ARG_AF, 2.0);
+            HSD_JObjAnimAll(tag_name_jobj);
+            HSD_ForeachAnim(tag_name_jobj, JOBJ_TYPE, JOBJ_MASK,
+                            HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+            sp108 = tag_name_jobj;
             lb_8000B1CC(sp108, NULL, &spEC);
             text->pos_x = 0.5f + spEC.x;
             text->pos_y = -0.4f - spEC.y;
@@ -4648,7 +4655,7 @@ s32 mnCharSel_802640A0(void)
             spE4 = mnCharSel_804DC584;
             spE0 = mnCharSel_804DC588;
             spDC = mnCharSel_804DC58C;
-            spD8 = mnCharSel_804DC590;
+            hard_color = mnCharSel_804DC590;
             spD4 = mnCharSel_804DC594;
             {
                 u8 cpu_level =
@@ -4687,7 +4694,7 @@ s32 mnCharSel_802640A0(void)
             HSD_SisLib_803A74F0(mnCharSel_803F0DFC.xd3, 2, &color);
             HSD_SisLib_803A6B98(mnCharSel_803F0DFC.xd3, 0.0f, 0.0f,
                                 "\x82\x67\x82\x60\x82\x71\x82\x63");
-            color = spD8;
+            color = hard_color;
             HSD_SisLib_803A74F0(mnCharSel_803F0DFC.xd3, 3, &color);
             HSD_SisLib_803A6B98(mnCharSel_803F0DFC.xd3, 0.0f, 0.0f,
                                 "\x82\x75\x82\x64\x82\x71\x82\x78\x20\x82\x67"

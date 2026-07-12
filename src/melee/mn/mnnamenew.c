@@ -494,6 +494,7 @@ s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
     f32 font_x;
     f32 col_x;
     s32 i;
+    s32 j;
     GXColor* color_ptr;
 
     FORCE_PAD_STACK(16);
@@ -593,20 +594,20 @@ s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
 
     {
         GXColor* sp44_addr = &sp44;
-        i = 0;
-        for (; i < 0x32; i++) {
+        j = 0;
+        for (; j < 0x32; j++) {
             font_x = text->font_size.x;
-            col_x = (f32) (9 - (i / 5)) * x_range;
+            col_x = (f32) (9 - (j / 5)) * x_range;
             HSD_SisLib_803A6B98(text, col_x / font_x,
-                                ((f32) (i % 5) * y_range) / text->font_size.y,
-                                str_table[i], font_x, col_x);
-            if (i == (s32) mn_804A04F0.hovered_selection) {
+                                ((f32) (j % 5) * y_range) / text->font_size.y,
+                                str_table[j], font_x, col_x);
+            if (j == (s32) mn_804A04F0.hovered_selection) {
                 color_ptr = &sp48;
             } else {
                 color_ptr = &sp4C;
             }
             sp44 = *color_ptr;
-            HSD_SisLib_803A74F0(text, i, sp44_addr);
+            HSD_SisLib_803A74F0(text, j, sp44_addr);
         }
     }
 
@@ -1379,7 +1380,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
         if (buttons & 0x20) {
             lbAudioAx_80024030(0);
             null_char = (s8) mnNameNew_NullCharacter;
-            if ((s8) name_text[0] == null_char) {
+            if (null_char == (s8) name_text[0]) {
                 occupied_slots = 1;
             }
             if (occupied_slots != 0) {
@@ -1554,24 +1555,24 @@ void fn_8023D0F8(void* arg0)
 
 s32 mnNameNew_8023D130(GlyphVariantEntry* arg0, u8 arg1, u8 arg2, s32 arg3)
 {
-    HSD_JObj* jobj14;
-    HSD_JObj* jobj1C;
-    HSD_JObj* jobj18;
-    HSD_Text* text;
-    s32 i;
+    GXColor* glyph_color_ptr;
     char* str;
-    GXColor* color_ptr;
-    f32 x_range;
+    f32 pos_z;
     f32 y_range;
-    f32 font_x;
+    s32 i;
+    MnNameNewDataLayout* layout;
+    GXColor* color_ptr;
     f32 col_x;
     f32 pos_x;
-    f32 pos_y;
-    f32 pos_z;
+    HSD_JObj* jobj14;
+    HSD_JObj* jobj18;
+    HSD_Text* text;
+    HSD_JObj* jobj1C;
+    f32 font_x;
+    f32 x_range;
     char** table_upper;
+    f32 pos_y;
     char** table_lower;
-    GXColor* glyph_color_ptr;
-    MnNameNewDataLayout* layout;
     Vec3 text_pos;
     GXColor glyph_color;
 
@@ -1729,11 +1730,6 @@ s32 mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, u8 arg2)
     return (s32) gobj;
 }
 
-static inline f32* fn_8023DAEC_inline_end_frame(MnNameNewDataLayout* layout)
-{
-    return &layout->anim[1].end_frame;
-}
-
 s32 mnNameNew_8023DA08(NameNewEntry* arg0)
 {
     AnimLoopSettings* anim;
@@ -1742,16 +1738,17 @@ s32 mnNameNew_8023DA08(NameNewEntry* arg0)
     s32 all_anims_done;
     anim = mnNameNew_803EDA58;
     all_anims_done = 1;
-    if (mn_8022ED6C(arg0->jobjs[12], &anim[2]) < anim[2].end_frame) {
+    frame = mn_8022ED6C(arg0->jobjs[12], &anim[2]);
+    end_frame = &anim[2].end_frame;
+    if (frame < mnNameNew_803EDA58[2].end_frame) {
         all_anims_done = 0;
     }
-    end_frame = &anim[2].end_frame;
     if (mn_8022ED6C(arg0->jobjs[13], &anim[2]) < *end_frame) {
         all_anims_done = 0;
     }
     frame = mn_8022EFD8(arg0->jobjs[4], anim);
     end_frame = &anim->end_frame;
-    if (frame < anim->end_frame) {
+    if (frame < mnNameNew_803EDA58->end_frame) {
         all_anims_done = 0;
     }
     if (mn_8022EFD8(arg0->jobjs[2], anim) < *end_frame) {
@@ -1774,7 +1771,6 @@ void fn_8023DAEC(HSD_GObj* arg0)
 
     data = arg0->user_data;
     layout = (MnNameNewDataLayout*) mnNameNew_803EDA58;
-    end_frame = fn_8023DAEC_inline_end_frame(layout);
     if (data->key_text != NULL) {
         HSD_SisLib_803A5CC4(data->key_text);
         data->key_text = NULL;
@@ -1789,7 +1785,7 @@ void fn_8023DAEC(HSD_GObj* arg0)
     }
     var_r30 = 1;
     if (mn_8022EFD8(data->jobjs[4], &layout->anim[1]) <
-        layout->anim[1].end_frame)
+        *(end_frame = &layout->anim[1].end_frame))
     {
         var_r30 = 0;
     }

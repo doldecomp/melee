@@ -1210,16 +1210,12 @@ void grVenom_80204F20(Ground_GObj* arg0)
     s32* base = (s32*) &grVe_CollLinks;
     Ground* gp = arg0->user_data;
     HSD_JObj* jobj = arg0->hsd_obj;
-    u32 idx = grVe_804D6A34;
     HSD_GObj* other;
-    s32* entry;
     f32 scale;
     s32 state;
     PAD_STACK(0x10);
 
-    gp->gv.venom.xC8 = idx;
-    entry = base + idx;
-    entry[8] = (s32) arg0;
+    VE_DATA->x20[gp->gv.venom.xC8 = grVe_804D6A34] = arg0;
 
     other = grVenom_80203EAC(base[base[gp->gv.venom.xC8 + 14] + 170]);
     if (other != NULL) {
@@ -1636,8 +1632,16 @@ s32 grVenom_80205E84(Vec3* pos)
 extern Vec3 grVe_803B82D0;
 extern Vec3 grVe_803B82DC;
 
+typedef struct grVe_AnimData {
+    u8 pad0[0x2FC];
+    s32 anim_args[5][2];
+    u8 pad324[0x358 - 0x324];
+    s32 anim_ids[5];
+} grVe_AnimData;
+
 void grVenom_80205F30(Ground_GObj* gobj)
 {
+    u32 padA4;
     Vec3 sp94;
     Vec3 sp88;
     u8 pad70[0x18];
@@ -1663,7 +1667,7 @@ void grVenom_80205F30(Ground_GObj* gobj)
     jobj = gobj->hsd_obj;
     sp94 = grVe_803B82D0;
     sp88 = grVe_803B82DC;
-    PAD_STACK(0x20);
+    PAD_STACK(0x1C);
 
     if (grVe_804D6A3C != 0) {
         return;
@@ -1716,10 +1720,11 @@ void grVenom_80205F30(Ground_GObj* gobj)
                         break;
                     }
                     {
+                        grVe_AnimData* anim_data = (grVe_AnimData*) base;
                         s32 idx0 = base[gp->gv.venom.xC8 + 14];
-                        s32 anim_arg =
-                            base[gp->gv.venom.xF4 * 2 + fire_kind + 0xBF];
-                        s32 anim_id = base[idx0 + 0xD6];
+                        s32 anim_arg = *(volatile s32*)
+                            &anim_data->anim_args[gp->gv.venom.xF4][fire_kind];
+                        s32 anim_id = anim_data->anim_ids[idx0];
                         grAnime_801C8098((HSD_GObj*) gobj, anim_id, 7,
                                          anim_arg, 0.0F, 1.0F);
                     }
@@ -1768,9 +1773,7 @@ void grVenom_80205F30(Ground_GObj* gobj)
             if (gp->gv.venom.linked_gobj != NULL) {
                 Ground* sub = gp->gv.venom.linked_gobj->user_data;
                 if (sub != NULL) {
-                    sub->gv.venom.xE0 = sp94.x;
-                    sub->gv.venom.xE4 = sp94.y;
-                    sub->gv.venom.xE8 = sp94.z;
+                    *(Vec3*) &sub->gv.venom.xE0 = sp94;
                 }
             }
 

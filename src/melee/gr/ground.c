@@ -1194,7 +1194,6 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lightset)
 {
     LightList** out;
     LightList** clean;
-    HSD_LightDesc* desc;
     bool found;
     LightList** walker;
     bool b6, b7, b5;
@@ -1206,8 +1205,7 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lightset)
     walker = lightset;
     matched = 0;
     while (*walker != NULL) {
-        desc = (*walker)->desc;
-        found = find_light_override(archive, desc, &b6, &b7, &b5);
+        found = find_light_override(archive, (*walker)->desc, &b6, &b7, &b5);
         if (found != 0 && (b6 != 0 || b7 != 0 || b5 != 0)) {
             matched = 1;
             break;
@@ -1221,9 +1219,8 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lightset)
 
     out = lightset;
     while (*out != NULL) {
-        u16* flags;
-        desc = get_light_desc_inline(out);
-        flags = &desc->flags;
+        HSD_LightDesc* desc = get_light_desc_inline(out);
+        u16* flags = &desc->flags;
         if (*flags & 3) {
             found = find_light_override(archive, desc, &b6, &b7, &b5);
             if (found == 0 || (b6 == 0 && b7 == 0 && b5 == 0)) {
@@ -3159,7 +3156,10 @@ HSD_GObj* Ground_801C57C8(void)
     return Player_GetEntityAtIndex(0, 1);
 }
 
-f32 Ground_801C57F0(void)
+/// @param arg0 Unused by the implementation; the game's only caller
+///              (fn_80180C60 at 0x80180C88) materializes an explicit 0
+///              argument, so the original signature takes a parameter.
+f32 Ground_801C57F0(int arg0)
 {
     return stage_info.x6E0;
 }

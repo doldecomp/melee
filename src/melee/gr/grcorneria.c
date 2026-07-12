@@ -1220,6 +1220,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Vec3 pos = grCn_803B80B4;
+    Vec3 arwing_pos;
     grCn_Data* data = (grCn_Data*) grCn_803E1D38;
 
     if (grCn_804D69AC) {
@@ -1280,15 +1281,15 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                 if (arwing != NULL) {
                     Ground* arwing_gp = GET_GROUND(arwing);
                     Ground* ship_gp = GET_GROUND(Ground_801C2BA4(3));
-                    Vec3 sp64;
-                    lb_8000B1CC(Ground_801C3FA4(arwing, 4), NULL, &sp64);
+                    lb_8000B1CC(Ground_801C3FA4(arwing, 4), NULL,
+                                &arwing_pos);
                     {
                         s32* types = data->arwing_type;
                         int atype = types[arwing_gp->gv.corneria2.xC8];
                         pos.x = ship_gp->gv.corneria.offset_x +
-                                (-sp64.z + lbl_803E2068[atype].x);
-                        pos.y = sp64.y + lbl_803E2068[atype].y;
-                        pos.z = sp64.x + lbl_803E2068[atype].z;
+                                (-arwing_pos.z + lbl_803E2068[atype].x);
+                        pos.y = arwing_pos.y + lbl_803E2068[atype].y;
+                        pos.z = arwing_pos.x + lbl_803E2068[atype].z;
                     }
                 } else {
                     pos.z = 0.0f;
@@ -1413,15 +1414,15 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                 {
                     Ground* arwing_gp = GET_GROUND(arwing);
                     Ground* ship_gp = GET_GROUND(Ground_801C2BA4(3));
-                    Vec3 sp48;
-                    lb_8000B1CC(Ground_801C3FA4(arwing, 4), NULL, &sp48);
+                    lb_8000B1CC(Ground_801C3FA4(arwing, 4), NULL,
+                                &arwing_pos);
                     {
                         s32 atype =
                             data->arwing_type[arwing_gp->gv.corneria2.xC8];
                         pos.x = ship_gp->gv.corneria.offset_x +
-                                (-sp48.z + lbl_803E2068[atype].x);
-                        pos.y = sp48.y + lbl_803E2068[atype].y;
-                        pos.z = sp48.x + lbl_803E2068[atype].z;
+                                (-arwing_pos.z + lbl_803E2068[atype].x);
+                        pos.y = arwing_pos.y + lbl_803E2068[atype].y;
+                        pos.z = arwing_pos.x + lbl_803E2068[atype].z;
                     }
                 } else {
                     pos.z = 0.0f;

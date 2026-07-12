@@ -387,9 +387,10 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
             ((EF_Effect*) ret_obj)->update = efLib_Cb_SetOffsetY_FromParamY;
             jobj_2 = jobj_1;
             while (HSD_JObjGetParent(jobj_2) != NULL) {
-                jobj_2 = HSD_JObjGetParent(jobj_2);
+                jobj_1 = HSD_JObjGetParent(jobj_2);
+                jobj_2 = jobj_1;
             }
-            HSD_JObjGetScale(jobj_2, &scale_5);
+            HSD_JObjGetScale(jobj_1, &scale_5);
             ((EF_Effect*) ret_obj)->params = *va_arg(vlist, Vec3*);
             efSync_GetEffect(ret_obj)->params.y *= scale_5.y;
         }

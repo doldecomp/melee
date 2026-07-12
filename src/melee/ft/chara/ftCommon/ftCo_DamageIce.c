@@ -49,6 +49,15 @@
 #include <baselib/mtx.h>
 #include <baselib/random.h>
 
+static void sdata2_order(void)
+{
+    (void) 0.0f;
+    (void) 1.0f;
+    (void) 3.0f;
+    (void) 0.5;
+    (void) 3.0;
+}
+
 /* 0909D0 */ static void ftCo_800909D0(Fighter* fp);
 /* 090B48 */ static void ftCo_DamageIce_OnHit(Fighter_GObj* gobj);
 /* 091274 */ static void ftCo_DamageIce_OnHit2(Fighter_GObj* gobj);
@@ -202,9 +211,10 @@ void ftCo_DamageIce_Init(Fighter_GObj* gobj)
     Mtx sp17C, sp14C, sp11C, spEC;
     Quaternion rot_y;
     Mtx rot_mtx_y;
+    UNUSED u8 pad0[4];
     Quaternion rot_x;
     Mtx rot_mtx_x;
-    PAD_STACK(24);
+    UNUSED u8 pad1[20];
 
     fp = GET_FIGHTER(gobj);
 
@@ -258,6 +268,7 @@ void ftCo_DamageIce_Init(Fighter_GObj* gobj)
 
 void ftCo_DamageIce_HitWhileFrozen(Fighter_GObj* gobj)
 {
+    u8 _[8];
     float param;
     ftHurtboxInit hurt;
     Vec3 offset;

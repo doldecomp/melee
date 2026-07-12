@@ -1396,7 +1396,7 @@ HSD_GObj* mn_8022B3A0(u8 state)
     MenuKind menu_kind;
     int temp_r31;
     HSD_JObj* temp_r16_2;
-    u8 hovered_selection;
+    AnimLoopSettings* anim_loop;
     int idx;
     u8 var_r16_2;
     AnimLoopSettings* var_r4_3;
@@ -1404,7 +1404,7 @@ HSD_GObj* mn_8022B3A0(u8 state)
     u8 cur_menu;
     HSD_GObj* gobj;
     MainMenuData* user_data;
-    AnimLoopSettings* anim_loop;
+    u8 hovered_selection;
     int i;
     AnimLoopSettings* tmp;
     u8 var_r17;

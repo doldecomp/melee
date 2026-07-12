@@ -725,10 +725,10 @@ void fn_802514D8(HSD_GObj* gobj)
 void fn_80251640(HSD_GObj* gobj)
 {
     HSD_GObjProc* proc;
-    HSD_Text* value_null;
+    HSD_Text* label_null;
     MnCountData* userdata = GET_MNCOUNT(gobj);
     StaticModelDesc* md;
-    MnCountData* userdata3;
+    MnCountData* userdata2;
     int i;
     HSD_JObj* jobj;
     PAD_STACK(24);
@@ -738,15 +738,16 @@ void fn_80251640(HSD_GObj* gobj)
         proc = HSD_GObj_SetupProc(gobj, fn_802514B8, 0);
         proc->flags_3 = HSD_GObj_804D783C;
         {
-            HSD_Text* label_null;
+            HSD_Text* value_null;
+            MnCountData* userdata3;
             // inline_free_text
 
-            MnCountData* userdata2 = GET_MNCOUNT(gobj);
-            userdata3 = userdata2;
+            userdata2 = GET_MNCOUNT(gobj);
 
             i = 0;
             label_null = (HSD_Text*) i;
             value_null = (HSD_Text*) i;
+            userdata3 = userdata2;
             do {
                 if (userdata2->labels[i] != NULL) {
                     HSD_SisLib_803A5CC4(userdata3->labels[i]);

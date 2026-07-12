@@ -205,6 +205,7 @@ void DevText_SetupCObj(void)
 
 void DevText_Draw(DevText* text)
 {
+    GXColor text_color;
     PAD_STACK(8);
     hsd_80391A04(text->scale_x, text->scale_y, text->line_width);
     if ((text->flags & DEVTEXT_FLAG_HIDEBACKGROUND) == 0) {
@@ -224,8 +225,7 @@ void DevText_Draw(DevText* text)
         }
     }
     if ((text->flags & DEVTEXT_FLAG_HIDETEXT) == 0) {
-        GXColor color;
-        GXColor* color_ptr = &color;
+        GXColor* color_ptr = &text_color;
         int col;
         int row;
         int x;
@@ -241,7 +241,7 @@ void DevText_Draw(DevText* text)
                 s8 chr = buf[0];
                 u8 color_idx = (buf[1] & 0xC0) >> 6;
                 if (chr) {
-                    color = text->text_colors[color_idx];
+                    text_color = text->text_colors[color_idx];
                     DrawASCII(chr, x, y, color_ptr);
                 }
                 x += text->scale_x;

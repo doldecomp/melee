@@ -196,12 +196,18 @@ static inline void grYorster_InitTrackElements(Ground* gp, HSD_GObj* gobj)
         gp->gv.yorster.elements[i].x1C =
             grMaterial_801C8CFC(0, 0, gp, gp->gv.yorster.elements[i].x18, NULL,
                                 grYorster_80202428, NULL);
-        grMaterial_801C8E68(gp->gv.yorster.elements[i].x1C, GA_Ground);
+        {
+            HSD_GObj* material_gobj = gp->gv.yorster.elements[i].x1C;
+            grMaterial_801C8E68(material_gobj, GA_Ground);
+        }
         mpJointSetCb2(
             Ground_801C32D4(gp->map_id, gp->gv.yorster.elements[i].x14), gp,
             grYorster_802024F0);
-        grMaterial_801C8DE0(gp->gv.yorster.elements[i].x1C, 0.0f, 0.0f, 0.0f,
-                            0.0f, 0.0f, 0.0f, 5.0f);
+        {
+            HSD_GObj* material_gobj = gp->gv.yorster.elements[i].x1C;
+            grMaterial_801C8DE0(material_gobj, 0.0f, 0.0f, 0.0f, 0.0f,
+                                0.0f, 0.0f, 5.0f);
+        }
         {
             HSD_GObj* material_gobj = gp->gv.yorster.elements[i].x1C;
             grMaterial_801C8E08(material_gobj);

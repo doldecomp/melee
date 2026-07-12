@@ -465,11 +465,11 @@ typedef struct StaffRollPoints {
 
 void fn_801AB200(HSD_GObj* gobj)
 {
-    HSD_JObj* jobj_pair[2];
+    HSD_JObj* hover_jobj;
     HSD_JObj* cursor_jobj;
+    HSD_JObj* jobj_pair[2];
     HSD_JObj* temp_jobj;
     u8 operand_pad[4];
-    HSD_JObj* hover_jobj;
     Vec3 xform_result;
     f32 proj[8];
     s32 tally_color;
