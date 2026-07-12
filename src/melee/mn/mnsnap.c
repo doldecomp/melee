@@ -1111,18 +1111,18 @@ void fn_802545C4(void)
                         }
                         HSD_JObjReqAnimAll(
                             *((HSD_JObj**) ((((u32) (&mnSnap_804A0A10)) +
-                                             byte_off2) +
+                                             byte_off) +
                                             0x98)),
                             t);
                     } else {
                         HSD_JObjReqAnimAll(
                             *((HSD_JObj**) ((((u32) (&mnSnap_804A0A10)) +
-                                             byte_off2) +
+                                             byte_off) +
                                             0x98)),
                             2.0F);
                     }
                     HSD_JObjAnimAll(*(
-                        (HSD_JObj**) ((((u32) (&mnSnap_804A0A10)) + byte_off2) +
+                        (HSD_JObj**) ((((u32) (&mnSnap_804A0A10)) + byte_off) +
                                       0x98)));
                 }
 
@@ -1142,18 +1142,18 @@ void fn_802545C4(void)
                         }
                         HSD_JObjReqAnimAll(
                             *((HSD_JObj**) ((((u32) (&mnSnap_804A0A10)) +
-                                             byte_off) +
+                                             byte_off2) +
                                             0x98)),
                             t);
                     } else {
                         HSD_JObjReqAnimAll(
                             *((HSD_JObj**) ((((u32) (&mnSnap_804A0A10)) +
-                                             byte_off) +
+                                             byte_off2) +
                                             0x98)),
                             2.0F);
                     }
                     HSD_JObjAnimAll(*(
-                        (HSD_JObj**) ((((u32) (&mnSnap_804A0A10)) + byte_off) +
+                        (HSD_JObj**) ((((u32) (&mnSnap_804A0A10)) + byte_off2) +
                                       0x98)));
                 }
 
