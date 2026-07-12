@@ -1,6 +1,8 @@
 #include "gm_1A7A.h"
 #include "gm_unsplit.h"
 
+#include "dolphin/pad.h"
+
 #include "ft/forward.h"
 
 #include "gm/gm_1BA8.h"

@@ -439,7 +439,7 @@ struct grKinokoRoute_GroundVars {
 };
 
 struct grKinokoRoute_GroundVars2 {
-    /* +00 gp+C4 */ u8 flags;
+    /* +00 gp+C4 */ u8 flags_0 : 1;
     /* +01 */ u8 pad_01[1];
     /* +02 gp+C6 */ s16 phase;
     /* +04 gp+C8 */ s16 spawn_idx;

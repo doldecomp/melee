@@ -284,8 +284,6 @@ void grBigBlueRoute_8020BC34(Ground_GObj* gobj)
     gp->u.car.xC4 = grBigBlueRoute_8020B9D4(4);
 }
 
-/// @todo Currently 99.83% match - remaining diffs are anonymous string-pool
-/// symbols (translate/reb0_jobj) vs the target's single grBb_Route_803E61D4
 void grBigBlueRoute_8020BC68(Ground_GObj* gobj)
 {
     Vec3 origin;
@@ -533,7 +531,7 @@ s32 grBigBlueRoute_8020C530(Ground_GObj* arg0)
             }
         }
     }
-    HSD_ASSERT(0X2E5, NULL);
+    HSD_ASSERT(0X2E5, 0);
 }
 
 /// @todo Currently 92.06% match - register allocation (gp in r30 vs r31)
@@ -674,14 +672,14 @@ static const Vec3 grBb_Route_803B83E0 = { 0.0f, 1.0f, 0.0f };
 void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
 {
     HSD_JObj* jobj;
-    Ground* gp = gobj->user_data;
+    Ground* gp = GET_GROUND(gobj);
     HSD_JObj* root_jobj = gobj->hsd_obj;
     HSD_GObj* fighter;
     int i;
     Vec3 pos;
     Vec3 rot;
     Vec3 fighter_pos;
-    PAD_STACK(0x44);
+    PAD_STACK(0x3C);
 
     fighter = Ground_801C57A4();
     if (fighter != NULL) {
@@ -1116,14 +1114,14 @@ void grBigBlueRoute_8020DED4(Vec3* pos)
     f32 x = pos->x;
     f32 y = pos->y;
 
-    if (x < 20.0f * Ground_801C0498()) {
-        x = 20.0f * Ground_801C0498();
+    if (x < -1140 * Ground_801C0498()) {
+        x = -1140 * Ground_801C0498();
     }
 
-    if (y < 250.0f * Ground_801C0498()) {
-        y = 250.0f * Ground_801C0498();
-    } else if (y > -3.0f * Ground_801C0498()) {
-        y = -3.0f * Ground_801C0498();
+    if (y < 20.0f * Ground_801C0498()) {
+        y = 20.0f * Ground_801C0498();
+    } else if (y > 250 * Ground_801C0498()) {
+        y = 250 * Ground_801C0498();
     }
 
     Ground_801C38BC(x, y);

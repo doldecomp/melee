@@ -1,5 +1,7 @@
 #include "gm_1A7A.h"
 
+#include "dolphin/pad.h"
+
 #include "gm/forward.h"
 
 #include "gm/gm_1A36.h"
@@ -152,7 +154,8 @@ void gm_801A9D0C_OnFrame(void)
             }
         }
     } else {
-        if (gm_801A36A0(gm_801BF010()) & 0x1100) {
+        if (gm_GetButtonsTriggered(gm_801BF010()) &
+            (PAD_BUTTON_A | PAD_BUTTON_START)) {
             lbBgFlash_8002063C(0x3C);
             gmRegend_ExitTimer = 0x3C;
             lbAudioAx_80023694();
