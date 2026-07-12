@@ -1712,14 +1712,13 @@ void fn_80199AF0(void)
     }
 }
 
-/// @todo 96.88%: all loops and shapes match; the residual is a callee-saved
-/// rotation (the lbl_804799D8 bases and the tail's entry/offset temps each
-/// colored one register off) and a zero/constant register collision in the
-/// x4E-clear remainder loop. The per-slot bracket loops keep u8 cursor
-/// walkers even though bracket->slots[i].x4C produces identical walker
-/// instructions (base + disp 0x4C, +0x2C steps): dropping the cursor webs
-/// makes the allocator coalesce sel into slot (losing the target's mr) and
-/// costs ~0.9% of pure register rotation.
+/// @todo 98.32%: whole-function register rotation — the early lbl_804799D8
+/// base/anchor webs land one register high because the target allocates the
+/// later bracket-cursor walker to r31 first; mode and slot shift with it.
+/// The per-slot bracket loops keep u8 cursor walkers even though
+/// bracket->slots[i].x4C produces identical walker instructions (base + disp
+/// 0x4C, +0x2C steps): dropping the cursor webs makes the allocator coalesce
+/// sel into slot (losing the target's mr) and costs ~0.9% of pure rotation.
 void fn_8019A158(void)
 {
     TmData* td1;
@@ -1731,6 +1730,7 @@ void fn_8019A158(void)
     s32 result;
     s32 counter;
     s32 i;
+    int k;
     UNUSED u8 unused[8];
     s32 local1, local2;
     MatchEnd* me;
@@ -1770,8 +1770,8 @@ void fn_8019A158(void)
 
     bracket_idx = fn_8018F74C();
 
-    for (i = 0; i < 20; i++) {
-        lbl_804799D8.x4E[i] = 0;
+    for (k = 0; k < 20; k++) {
+        lbl_804799D8.x4E[k] = 0;
     }
 
     if (mode == 1) {
