@@ -259,7 +259,7 @@ struct CameraInputs {
     /* +08 */ f32 substick_x;
     /* +0C */ f32 substick_y;
     /* +10 */ u64 buttons_pressed;
-    /* +18 */ u64 buttons_pressed_since_last_frame;
+    /* +18 */ u64 buttons_triggered;
 };
 
 #endif

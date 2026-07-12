@@ -1511,7 +1511,7 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
         inputs->stick_y = 0.0f;
         inputs->substick_x = 0.0f;
         inputs->substick_y = 0.0f;
-        inputs->buttons_pressed_since_last_frame = 0;
+        inputs->buttons_triggered = 0;
         inputs->buttons_pressed = 0;
         return;
     }
@@ -1575,7 +1575,7 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
         temp_ret = gm_GetButtonsPressed(PAD_ALL_CONTROLLERS);
         inputs->buttons_pressed = temp_ret;
         temp_ret = gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS);
-        inputs->buttons_pressed_since_last_frame = temp_ret;
+        inputs->buttons_triggered = temp_ret;
         return;
     }
     pad = get_slot_pad(slot);
@@ -1586,7 +1586,7 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
     temp_ret = gm_GetButtonsPressed(slot);
     inputs->buttons_pressed = temp_ret;
     temp_ret = gm_GetButtonsTriggered(slot);
-    inputs->buttons_pressed_since_last_frame = temp_ret;
+    inputs->buttons_triggered = temp_ret;
 }
 
 s32 Camera_8002BA00(s32 slot, s32 arg1)
@@ -1841,7 +1841,7 @@ void Camera_8002C1A8(void)
     zoom_dir = 0.0f;
 
     {
-        u64 x18_btns = inputs.buttons_pressed_since_last_frame;
+        u64 x18_btns = inputs.buttons_triggered;
 
         if ((x18_btns & PAD_TRIGGER_R) != 0) {
             dir = 1;
@@ -2196,7 +2196,7 @@ void Camera_8002CB0C(CameraBounds* bounds)
     stick_y = inputs.stick_y;
 
     {
-        u64 newly_pressed_btns = inputs.buttons_pressed_since_last_frame;
+        u64 newly_pressed_btns = inputs.buttons_triggered;
         u64 pressed_btns = inputs.buttons_pressed;
 
         if ((newly_pressed_btns & PAD_TRIGGER_R) != 0) {
