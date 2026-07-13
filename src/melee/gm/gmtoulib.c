@@ -390,24 +390,17 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
     HSD_JObjSetTranslateX(jobj, (f32) *p44);
     HSD_JObjSetTranslateY(jobj, -(f32) *p48);
 }
-static inline f32* GetBracketCamY(f32* cam)
-{
-    return &cam[1];
-}
+typedef struct BracketAnimData {
+    Vec3 current;
+    Vec3 target;
+    Vec3 step;
+} BracketAnimData;
 
-static inline f32* GetBracketCamTargetX(f32* cam)
-{
-    return &cam[3];
-}
+#define BRACKET_ANIM (*(BracketAnimData*) lbl_803D9DAC)
 
 static inline f32 GetBracketSlideY(u8* p)
 {
     return 0.3f * (f32) lbl_804D6630 + (f32) *(s32*) (p + 0x48);
-}
-
-static inline f32* GetBracketCamTargetZ(f32* cam)
-{
-    return &cam[5];
 }
 
 void fn_8018B090(HSD_GObj* arg0)
@@ -417,7 +410,6 @@ void fn_8018B090(HSD_GObj* arg0)
     s32 idx = fn_8018F74C();
     BracketEntry* base;
     u8* bb;
-    f32* cam;
     u8* p;
     s32 i;
 
@@ -470,57 +462,67 @@ void fn_8018B090(HSD_GObj* arg0)
         return;
     case 22:
         base = &lbl_80473AB8[idx];
-        cam = (f32*) ((u8*) &lbl_803D9D20 + 0x8C);
         if (base->x18 != 0) {
             f32 d;
-            cam[0] = 320.0f;
-            cam[1] = -240.0f;
-            cam[2] = 0.0f;
-            cam[3] = (f32) (base->xC + (base->x14 / 2));
-            cam[4] = -(f32) (base->x10 + (base->x18 / 2));
-            cam[5] = -150.0f;
-            d = 0.033333f * (cam[3] - cam[0]);
+            BRACKET_ANIM.current.x = 320.0f;
+            BRACKET_ANIM.current.y = -240.0f;
+            BRACKET_ANIM.current.z = 0.0f;
+            BRACKET_ANIM.target.x = (f32) (base->xC + (base->x14 / 2));
+            BRACKET_ANIM.target.y = -(f32) (base->x10 + (base->x18 / 2));
+            BRACKET_ANIM.target.z = -150.0f;
+            d = 0.033333f * (BRACKET_ANIM.target.x - BRACKET_ANIM.current.x);
             if (d < 0.0f) {
                 d = -d;
             }
-            cam[6] = 1.0f + d;
-            d = 0.033333f * (cam[4] - cam[1]);
+            BRACKET_ANIM.step.x = 1.0f + d;
+            d = 0.033333f * (BRACKET_ANIM.target.y - BRACKET_ANIM.current.y);
             if (d < 0.0f) {
                 d = -d;
             }
-            cam[7] = 1.0f + d;
-            d = 0.033333f * (cam[5] - cam[2]);
+            BRACKET_ANIM.step.y = 1.0f + d;
+            d = 0.033333f * (BRACKET_ANIM.target.z - BRACKET_ANIM.current.z);
             if (d < 0.0f) {
                 d = -d;
             }
-            cam[8] = 1.0f + d;
+            BRACKET_ANIM.step.z = 1.0f + d;
         }
         lbl_804D6630 = 0;
         /* fallthrough */
     case 23:
         base = &lbl_80473AB8[idx];
         bb = (u8*) base;
-        cam = (f32*) ((u8*) &lbl_803D9D20 + 0x8C);
         if (base->x18 != 0) {
             s32 t5 = lbl_804D6630 / 6;
             s32 t3 = t5 >> 0x1F;
             lbl_804D6630 += 1;
-            if (mn_8022F410(&cam[0], &cam[3], cam[6]) < 0) {
-                mn_8022F410(&cam[0], GetBracketCamTargetX(cam), cam[6]);
+            if (mn_8022F410(&BRACKET_ANIM.current.x, &BRACKET_ANIM.target.x,
+                            BRACKET_ANIM.step.x) < 0)
+            {
+                mn_8022F410(&BRACKET_ANIM.current.x, &BRACKET_ANIM.target.x,
+                            BRACKET_ANIM.step.x);
             } else {
-                mn_8022F410(&cam[0], &cam[3], cam[6]);
+                mn_8022F410(&BRACKET_ANIM.current.x, &BRACKET_ANIM.target.x,
+                            BRACKET_ANIM.step.x);
             }
-            if (mn_8022F410(GetBracketCamY(cam), &cam[4], cam[7]) < 0) {
-                mn_8022F410(&cam[1], &cam[4], cam[7]);
+            if (mn_8022F410(&BRACKET_ANIM.current.y, &BRACKET_ANIM.target.y,
+                            BRACKET_ANIM.step.y) < 0)
+            {
+                mn_8022F410(&BRACKET_ANIM.current.y, &BRACKET_ANIM.target.y,
+                            BRACKET_ANIM.step.y);
             } else {
-                mn_8022F410(&cam[1], &cam[4], cam[7]);
+                mn_8022F410(&BRACKET_ANIM.current.y, &BRACKET_ANIM.target.y,
+                            BRACKET_ANIM.step.y);
             }
-            if (mn_8022F410(&cam[2], GetBracketCamTargetZ(cam), cam[8]) < 0) {
-                mn_8022F410(&cam[2], &cam[5], cam[8]);
+            if (mn_8022F410(&BRACKET_ANIM.current.z, &BRACKET_ANIM.target.z,
+                            BRACKET_ANIM.step.z) < 0)
+            {
+                mn_8022F410(&BRACKET_ANIM.current.z, &BRACKET_ANIM.target.z,
+                            BRACKET_ANIM.step.z);
             } else {
-                mn_8022F410(&cam[2], &cam[5], cam[8]);
+                mn_8022F410(&BRACKET_ANIM.current.z, &BRACKET_ANIM.target.z,
+                            BRACKET_ANIM.step.z);
             }
-            fn_80190520(cam[0], cam[1], cam[2]);
+            fn_80190520(BRACKET_ANIM.current.x, BRACKET_ANIM.current.y, BRACKET_ANIM.current.z);
             if (base->x4 != 1) {
                 p = bb;
                 for (i = 0; i < 4; i++, p += 0x2C) {
@@ -769,46 +771,47 @@ void fn_8018B090(HSD_GObj* arg0)
         return;
     case 36:
         base = &lbl_80473AB8[idx];
-        cam = (f32*) ((u8*) &lbl_803D9D20 + 0x8C);
         if (base->x18 != 0) {
             f32 d;
-            cam[0] = (f32) (base->xC + (base->x14 / 2));
-            cam[1] = -(f32) ((base->x18 / 2) + base->x10);
-            cam[2] = -150.0f;
-            cam[3] = 320.0f;
-            cam[4] = -240.0f;
-            cam[5] = 0.0f;
-            d = 0.04f * (cam[3] - cam[0]);
+            BRACKET_ANIM.current.x = (f32) (base->xC + (base->x14 / 2));
+            BRACKET_ANIM.current.y = -(f32) ((base->x18 / 2) + base->x10);
+            BRACKET_ANIM.current.z = -150.0f;
+            BRACKET_ANIM.target.x = 320.0f;
+            BRACKET_ANIM.target.y = -240.0f;
+            BRACKET_ANIM.target.z = 0.0f;
+            d = 0.04f * (BRACKET_ANIM.target.x - BRACKET_ANIM.current.x);
             if (d < 0.0f) {
                 d = -d;
             }
-            cam[6] = d;
-            d = 0.04f * (cam[4] - cam[1]);
+            BRACKET_ANIM.step.x = d;
+            d = 0.04f * (BRACKET_ANIM.target.y - BRACKET_ANIM.current.y);
             if (d < 0.0f) {
                 d = -d;
             }
-            cam[7] = d;
-            d = 0.04f * (cam[5] - cam[2]);
+            BRACKET_ANIM.step.y = d;
+            d = 0.04f * (BRACKET_ANIM.target.z - BRACKET_ANIM.current.z);
             if (d < 0.0f) {
                 d = -d;
             }
-            cam[8] = d;
+            BRACKET_ANIM.step.z = d;
         }
         tm->cur_option = 0x25;
         return;
     case 37:
         base = &lbl_80473AB8[idx];
         (void) base;
-        cam = (f32*) ((u8*) &lbl_803D9D20 + 0x8C);
         if (base->x18 == 0) {
             lbl_804D6630 = 0x78;
         }
         if (lbl_804D6630 < 0x78) {
             lbl_804D6630 += 1;
-            mn_8022F410(&cam[0], &cam[3], cam[6]);
-            mn_8022F410(&cam[1], &cam[4], cam[7]);
-            mn_8022F410(&cam[2], &cam[5], cam[8]);
-            fn_80190520(cam[0], cam[1], cam[2]);
+            mn_8022F410(&BRACKET_ANIM.current.x, &BRACKET_ANIM.target.x,
+                        BRACKET_ANIM.step.x);
+            mn_8022F410(&BRACKET_ANIM.current.y, &BRACKET_ANIM.target.y,
+                        BRACKET_ANIM.step.y);
+            mn_8022F410(&BRACKET_ANIM.current.z, &BRACKET_ANIM.target.z,
+                        BRACKET_ANIM.step.z);
+            fn_80190520(BRACKET_ANIM.current.x, BRACKET_ANIM.current.y, BRACKET_ANIM.current.z);
             return;
         }
         lbl_804D6630 = 0;
@@ -861,6 +864,8 @@ void fn_8018B090(HSD_GObj* arg0)
     }
     PAD_STACK(0x48);
 }
+
+#undef BRACKET_ANIM
 
 /* 3D9EE8 */ static char lbl_803D9EE8[] = {
     131, 81, 131, 88, 131, 103, 32, 48, 48,

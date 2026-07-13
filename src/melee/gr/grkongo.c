@@ -929,10 +929,10 @@ static inline void grKongo_801D6AFC_apply(f32* deltas,
 void grKongo_801D6AFC(void)
 {
     f32 sp44[15];
-    f32 sp8[15];
+    _struct_grKg_803E188C_0x18* entries;
     f32* var_r5;
     f32* deltas;
-    _struct_grKg_803E188C_0x18* entries;
+    f32 sp8[15];
 
     {
         f32* p = sp44;
@@ -986,6 +986,7 @@ void grKongo_801D6AFC(void)
             var_ctr_4 -= 1;
         } while (var_ctr_4 != 0);
     }
+    deltas = sp8;
     {
         s32 var_ctr_5 = 3;
         _struct_grKg_803E188C_0x18* var_r3_5 = grKg_803E188C;
@@ -1000,7 +1001,6 @@ void grKongo_801D6AFC(void)
             var_ctr_5 -= 1;
         } while (var_ctr_5 != 0);
     }
-    deltas = sp8;
     {
         s32 var_ctr_6 = 3;
         f32* delta_init = deltas;

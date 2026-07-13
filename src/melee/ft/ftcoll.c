@@ -3207,6 +3207,8 @@ void ftColl_8007BA0C(Fighter_GObj* gobj)
 {
     if (!GET_FIGHTER(gobj)->x2219_b1) {
         int i;
+        PAD_STACK(8);
+
         for (i = 0; i < ftDevice_BuryThingCount; i++) {
             Ground_GObj* ground = ft_80459A68[i + 1].ground;
             if (ground != NULL) {

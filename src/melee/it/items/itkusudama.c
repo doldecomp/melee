@@ -309,7 +309,8 @@ void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3)
         } else {
             Vec3 vel;
             Vec3 pos;
-            count = HSD_Randi(2) + 3;
+            count = HSD_Randi(2);
+            count += 3;
             for (i = 0; i < count; i++) {
                 rand_kind = it_8026F3AC();
                 if (rand_kind != -1) {
