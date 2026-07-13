@@ -87,7 +87,7 @@ struct mpLib_803BF248_t {
 /* 4D64DC */ static s32 mpLib_804D64DC;
 /* 4D64E0 */ static s32 mpLib_804D64E0;
 /* 4D64E4 */ static s32 mpLib_804D64E4;
-/* 458888 */ Vec3 mpLib_80458888[0x200];
+/* 458888 */ Vec3 mpLib_80458888[0x80];
 
 struct mpLib_803BF248_t_x4 mpLib_803BD3D8 = {
     1.0F,         { -1, -1, -1, -1 }, { 0, -1, 0 }, { -1, -1, -1, -1 },
@@ -252,7 +252,7 @@ static struct mpLib_803BF248_t_x4* mpLib_803BDCB8[20] = {
     &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
     &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
     &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
 };
 static struct mpLib_803BF248_t_x4* mpLib_803BDD08[20] = {
     &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
@@ -6576,13 +6576,6 @@ void mpLib_80059554(void)
     }
 }
 
-static const GXColor mpLib_804D8128 = { 0x7D, 0x7D, 0xFF, 0xFF };
-static const GXColor mpLib_804D812C = { 0x7D, 0xFF, 0x80, 0xFF };
-static const GXColor mpLib_804D8130 = { 0xFF, 0xFF, 0x80, 0xFF };
-static const GXColor mpLib_804D8134 = { 0xFF, 0x40, 0x40, 0xFF };
-static const GXColor mpLib_804D8138 = { 0xFF, 0x40, 0xC0, 0xFF };
-static const GXColor mpLib_804D813C = { 0xFF, 0xFF, 0xFF, 0xFF };
-
 void mpLib_80059E60(void)
 {
     Mtx sp104;
@@ -6667,6 +6660,13 @@ void mpLib_DrawCrosses(s16* idx, int len, GXColor arg2)
     }
 }
 
+static const GXColor mpLib_804D8128 = { 0x7D, 0x7D, 0xFF, 0xFF };
+static const GXColor mpLib_804D812C = { 0x7D, 0xFF, 0x80, 0xFF };
+static const GXColor mpLib_804D8130 = { 0xFF, 0xFF, 0x80, 0xFF };
+static const GXColor mpLib_804D8134 = { 0xFF, 0x40, 0x40, 0xFF };
+static const GXColor mpLib_804D8138 = { 0xFF, 0x40, 0xC0, 0xFF };
+static const GXColor mpLib_804D813C = { 0xFF, 0xFF, 0xFF, 0xFF };
+
 enum {
     mpLib_EnemySpawnVtxIds = 0x16,
     mpLib_TrophySpawnVtxIds = 0x66,
@@ -6695,7 +6695,7 @@ char mpLib_803BF6E0[] =
     "map coll under=%d upper=%d left=%d right=%d bbox=%d\n";
 
 static s16 mpLib_SpawnVtxIds[4] = { 0, 1, 2, 3 };
-static s16 mpLib_RespawnVtxIds[4] = { 4, 5, 6, 7 };
+SDATA s16 mpLib_RespawnVtxIds[6] = { 4, 5, 6, 7, 0, 0 };
 
 void mpLib_DrawSpecialPoints(void)
 {
@@ -6726,7 +6726,7 @@ void mpLib_8005A2DC(void)
 Vec2 mpLib_803BF718[2] = { { -1.0F, -400.0F }, { 1.0F, -400.0F } };
 MapLine mpLib_803BF728 = { 0, 1, -1, -1, -1, -1, 1, 0 };
 MapJoint mpLib_803BF738 = {
-    1, 0, 0, 0, 0, -9.0F, -408.0F, 9.0F, -392.0F, 2,
+    0, 1, 0, 0, 0, 0, 0, 0, 0, 0, -9.0F, -408.0F, 9.0F, -392.0F, 0, 2,
 };
 MapCollData mpLib_803BF760 = {
     /*  +0 */ mpLib_803BF718,
@@ -6752,7 +6752,10 @@ static const GXColor mpLib_804D8140 = { 0xFF, 0xFF, 0xC0, 0xFF };
 static const GXColor mpLib_804D8144 = { 0xFF, 0xFF, 0xFF, 0x80 };
 static const GXColor mpLib_804D8148 = { 0x80, 0xC0, 0xC0, 0xFF };
 static const GXColor mpLib_804D814C = { 0xC0, 0xFF, 0xFF, 0x80 };
-static const GXColor mpLib_804D8150 = { 0x40, 0x40, 0xFF, 0x00 };
+static const GXColor mpLib_804D8150[2] = {
+    { 0x40, 0x40, 0xFF, 0x00 },
+    { 0, 0, 0, 0 },
+};
 
 /// blast zones, camera bounds, etc
 void mpLib_DrawZones(void)
@@ -6850,7 +6853,7 @@ void mpLib_DrawZones(void)
 
     GXEnd();
 
-    mpLib_SetupDraw(mpLib_804D8150);
+    mpLib_SetupDraw(mpLib_804D8150[0]);
 
     GXSetZMode(0, GX_LEQUAL, 0);
     GXSetLineWidth(0x10, GX_TO_ZERO);
