@@ -14,7 +14,7 @@
 /* 26C65C */ int it_8026C65C(ItemPickTable*);
 /* 26C704 */ bool it_8026C704(void);
 /* 26C75C */ ItemKind it_8026C75C(ItemPickTable*);
-/* 26C88C */ void fn_8026C88C(HSD_GObj*);
+/* 26C88C */ void fn_8026C88C(void);
 /* 26CA4C */ void it_8026CA4C(ItemPickTable*, s32*, u64, s32, f32);
 /* 26CB3C */ bool it_8026CB3C(Vec3*);
 /* 26CB9C */ void it_8026CB9C(s32*, u64, f32);

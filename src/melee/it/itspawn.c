@@ -248,11 +248,16 @@ static inline void it_8026C88C_inline(RandomItemSpawner* alloc,
     }
 }
 
-void fn_8026C88C(HSD_GObj* gobj)
+void fn_8026C88C(void)
 {
-    RandomItemSpawner* alloc = &it_804A0E30;
+    UNUSED u64 pad;
     SpawnItem spawn;
-    it_8026C88C_inline(alloc, &spawn);
+    RandomItemSpawner* alloc;
+
+    alloc = &it_804A0E30;
+    it_8026C88C_inline(
+        alloc,
+        &spawn);
 }
 
 #pragma push
@@ -486,7 +491,8 @@ void it_8026D018(void)
                 }
             }
             it_8026CF04();
-            HSD_GObj_SetupProc(GObj_Create(5U, 7U, 0U), fn_8026C88C, 0U);
+            HSD_GObj_SetupProc(GObj_Create(5U, 7U, 0U),
+                               (HSD_GObjEvent) fn_8026C88C, 0U);
             {
                 s32* range = &it_804D6D28->xFC[gm_8016AE80() * 2];
                 f32 randf = HSD_Randf();
