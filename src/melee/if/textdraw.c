@@ -7,6 +7,7 @@
 #include <printf.h>
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>
+#include <baselib/debug.h>
 #include <baselib/fog.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -73,6 +74,14 @@ STATIC_ASSERT(sizeof(struct DevText_Pool) == 0x6B0);
 /* 4D6E30 */ static int devtext_setup_gx_link;
 /* 4D6E34 */ static int devtext_setup_render_priority;
 /* 4D6E38 */ static DevText* devtext_poolhead;
+
+/* 4DDC88 */ extern GXColor un_804DDC88;
+/* 4DDC8C */ extern GXColor un_804DDC8C;
+/* 4DDC90 */ extern GXColor un_804DDC90;
+/* 4DDC94 */ extern GXColor un_804DDC94;
+/* 4DDC98 */ extern GXColor un_804DDC98;
+/* 4DDC9C */ extern f32 un_804DDC9C;
+/* 4DDCA0 */ extern f32 un_804DDCA0;
 
 int DevText_StrLen(char* str)
 {
@@ -356,4 +365,61 @@ void DevText_AddToList(DevText** list, DevText* text)
 void DevText_Show(HSD_GObj* gobj, DevText* text)
 {
     DevText_AddToList(&devtext_drawlist, text);
+}
+
+static inline DevText* find_by_id(char id)
+{
+    DevText* text;
+    for (text = devtext_drawlist; text != NULL; text = text->next) {
+        if (text->id == id) {
+            return text;
+        }
+    }
+    return NULL;
+}
+
+DevText* DevText_Create(char id, int x, int y, int w, int h, char* buf)
+{
+    DevText* text;
+    UNUSED u32 pad;
+    GXColor bg = un_804DDC88;
+    PAD_STACK(0x14);
+
+    if ((text = find_by_id(id))) {
+        return NULL;
+    }
+    text = devtext_poolhead;
+    if (text != NULL) {
+        devtext_poolhead = text->next;
+    } else {
+        text = NULL;
+    }
+    if (text == NULL) {
+        HSD_ASSERTREPORT(309, 0, "TW : Screen alloc Fail\n");
+    }
+    if (text != NULL) {
+        text->x = x;
+        text->y = y;
+        text->w = w;
+        text->h = h;
+        text->cursor_x = 0;
+        text->cursor_y = 0;
+        text->scale_x = un_804DDC9C;
+        text->scale_y = un_804DDCA0;
+        text->bg_color = bg;
+        text->text_colors[0] = un_804DDC8C;
+        text->text_colors[1] = un_804DDC90;
+        text->text_colors[2] = un_804DDC94;
+        text->text_colors[3] = un_804DDC98;
+        text->id = (int) id;
+        text->line_width = 10;
+        text->flags = DEVTEXT_FLAG_SHOWCURSOR;
+        text->unk = 0;
+        text->current_color = 0;
+        text->prev = NULL;
+        text->next = NULL;
+        text->buf = buf;
+        memzero(buf, h * (w * 2));
+    }
+    return text;
 }

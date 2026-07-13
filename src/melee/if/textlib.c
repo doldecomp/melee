@@ -33,17 +33,6 @@ struct unk_series {
     s16 values[26];
 };
 
-/// ?
-/* 4D6E18 */ extern DevText* devtext_drawlist;
-/* 4D6E38 */ extern DevText* devtext_poolhead;
-/* 4DDC88 */ extern GXColor un_804DDC88;
-/* 4DDC8C */ extern GXColor un_804DDC8C;
-/* 4DDC90 */ extern GXColor un_804DDC90;
-/* 4DDC94 */ extern GXColor un_804DDC94;
-/* 4DDC98 */ extern GXColor un_804DDC98;
-/* 4DDC9C */ extern f32 un_804DDC9C;
-/* 4DDCA0 */ extern f32 un_804DDCA0;
-
 struct un_80304138_objalloc_t* un_804D6E40;
 struct un_80304138_objalloc_t_x8* un_804D6E48;
 
@@ -64,63 +53,6 @@ GXColor un_804D5A08 = { 0x40, 0x50, 0x80, 0x80 };
 GXColor un_804D5A0C = { 0xE2, 0xE2, 0xE2, 0xFF };
 GXColor un_804D5A10 = { 0xFF, 0x80, 0x20, 0xFF };
 GXColor un_804D5A14 = { 0xA0, 0xA0, 0xFF, 0xFF };
-
-static inline DevText* find_by_id(char id)
-{
-    DevText* text;
-    for (text = devtext_drawlist; text != NULL; text = text->next) {
-        if (text->id == id) {
-            return text;
-        }
-    }
-    return NULL;
-}
-
-DevText* DevText_Create(char id, int x, int y, int w, int h, char* buf)
-{
-    DevText* text;
-    UNUSED u32 pad;
-    GXColor bg = un_804DDC88;
-    PAD_STACK(0x14);
-
-    if ((text = find_by_id(id))) {
-        return NULL;
-    }
-    text = devtext_poolhead;
-    if (text != NULL) {
-        devtext_poolhead = text->next;
-    } else {
-        text = NULL;
-    }
-    if (text == NULL) {
-        HSD_ASSERTREPORT(309, 0, "TW : Screen alloc Fail\n");
-    }
-    if (text != NULL) {
-        text->x = x;
-        text->y = y;
-        text->w = w;
-        text->h = h;
-        text->cursor_x = 0;
-        text->cursor_y = 0;
-        text->scale_x = un_804DDC9C;
-        text->scale_y = un_804DDCA0;
-        text->bg_color = bg;
-        text->text_colors[0] = un_804DDC8C;
-        text->text_colors[1] = un_804DDC90;
-        text->text_colors[2] = un_804DDC94;
-        text->text_colors[3] = un_804DDC98;
-        text->id = (int) id;
-        text->line_width = 10;
-        text->flags = DEVTEXT_FLAG_SHOWCURSOR;
-        text->unk = 0;
-        text->current_color = 0;
-        text->prev = NULL;
-        text->next = NULL;
-        text->buf = buf;
-        memzero(buf, h * (w * 2));
-    }
-    return text;
-}
 
 void DevText_EraseFirstLine(DevText* text)
 {
