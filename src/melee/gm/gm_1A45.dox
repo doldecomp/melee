@@ -1,9 +1,3 @@
-#ifndef MELEE_GM_1A45_H
-#define MELEE_GM_1A45_H
-
-#include <baselib/forward.h>
-#include <melee/gm/forward.h>
-
 /* 1A45E8 */ bool gm_801A45E8(int bit);
 /* 1A4624 */ int gm_801A4624(void);
 /* 1A4634 */ void gm_801A4634(int bit);
@@ -20,28 +14,24 @@
 /* 1A4B60 */ void gm_801A4B60(void);
 /* 1A4B74 */ UNK_RET gm_801A4B74(UNK_PARAMS);
 /* 1A4B88 */ void gm_801A4B88(struct GameSceneInfo*);
-
-/// @returns The @c load_data field of the active #GameScene::GameSceneInfo.
 /* 1A4B90 */ void* gm_801A4B90(void);
-
-/// @returns The @c leave_data field of the active #GameScene::GameSceneInfo.
 /* 1A4B9C */ void* gm_801A4B9C(void);
-
 /* 1A4BA8 */ u32 gm_801A4BA8(void);
 /* 1A4BB8 */ u32 gm_801A4BB8(void);
 /* 1A4BC8 */ HSD_GObj* gm_801A4BC8(void);
 /* 1A4BD0 */ void fn_801A4BD0(HSD_GObj*);
 /* 1A4BD4 */ void gm_801A4BD4(void);
 
-/// @brief Finds the #GameSceneHandler for a given scene kind.
-///
-/// Walks the global #GameSceneHandler table (from #gm_GetAllGameSceneHandlers)
-/// comparing each entry's #GameSceneHandler::class_id against @p kind until a
-/// match is found or the @c GS_COUNT value is reached.
-///
-/// @param kind The #GameSceneKind (passed as a @c u8) to look up.
-/// @returns The #GameSceneHandler whose #GameSceneHandler::class_id equals
-///          @p kind, or @c NULL if no entry matches.
+/**
+ * @brief Finds the #GameSceneHandler for a given scene kind.
+ *
+ * Walks the global #GameSceneHandler table (from #gm_GetAllGameSceneHandlers)
+ * comparing each entry's #GameSceneHandler::class_id against @p kind until a
+ * match is found or the @c GS_COUNT value is reached.
+ *
+ * @param kind The #GameSceneKind (passed as a @c u8) to look up.
+ * @returns The #GameSceneHandler whose #GameSceneHandler::class_id equals
+ */         @p kind, or @c NULL if no entry matches.
 /* 1A4CE0 */ GameSceneHandler* gm_FindGameSceneHandler(u8 kind);
 
 /**
@@ -51,5 +41,3 @@
  * frame after pad/input processing.
  */
 /* 1A4D34 */ void gm_801A4D34(void (*on_frame)(void), struct GameSceneInfo*);
-
-#endif
