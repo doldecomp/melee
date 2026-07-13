@@ -111,6 +111,13 @@ parser.add_argument(
     help="path to objdiff-cli binary or source (optional)",
 )
 parser.add_argument(
+    "--reloc-diffs",
+    type=str,
+    choices=["none", "name_address", "data_value", "all"],
+    default="data_value",
+    help="how relocation targets will be diffed in the report (default 'data_value')",
+)
+parser.add_argument(
     "--sjiswrap",
     metavar="EXE",
     type=Path,
@@ -441,7 +448,7 @@ NonMatching = False  # Object does not match and should not be linked
 Equivalent = (
     config.non_matching
 )  # Object should be linked when configured with --non-matching
-Testing = bool(args.testing) # Object is being tested for linking
+Testing = bool(args.testing)  # Object is being tested for linking
 
 
 # Object is only matching for specific versions
@@ -692,7 +699,7 @@ config.libs = [
             Object(Matching, "melee/ft/ftlipstickswing.c"),
             Object(Matching, "melee/ft/ft_0CDD.c"),
             Object(Matching, "melee/ft/ft_0CDF.c"),
-            Object(NonMatching, "melee/ft/ft_0CE3.c"),
+            Object(Matching, "melee/ft/ft_0CE3.c"),
             Object(Matching, "melee/ft/ftattacks4combo.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemParasolOpen.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemParasolFall.c"),
@@ -1816,8 +1823,7 @@ config.progress_each_module = args.verbose
 # Optional extra arguments to `objdiff-cli report generate`
 config.progress_report_args = [
     # Marks relocations as mismatching if the target value is different
-    # Default is "functionRelocDiffs=none", which is most lenient
-    "--config functionRelocDiffs=data_value",
+    f"--config functionRelocDiffs={args.reloc_diffs}",
 ]
 
 if args.mode == "configure":

@@ -303,7 +303,7 @@ void gm_801A4D34(void (*arg0)(void), GameSceneInfo* arg1)
             if (gm_80479D58.unk_10.unk_38_0) {
                 lb_80019900();
                 if (lb_80019A30(0)) {
-                    gm_801A3A74();
+                    gm_EvaluateAllControllerInputs();
                 }
                 if (lb_80019A30(0) && (arg0 != NULL)) {
                     arg0();
