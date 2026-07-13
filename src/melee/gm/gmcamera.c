@@ -54,22 +54,7 @@ typedef struct _SisLibUnkStruct {
 /// @todo #HSD_SisLib_804D1124 is of type #SIS.
 /// extern SisLibUnkStruct HSD_SisLib_804D1124;
 
-f32 gmCamera_803DA630[12] = {
-    0.6f,   0.6f,   40.0f, 416.0f, 0.6f,  0.6f,
-    340.0f, 416.0f, 0.6f,  0.6f,   40.0f, 44.0f,
-};
-
-gmCameraUnkFuncTable gmCamera_803DA6B4[9] = {
-    { { 1, 0, 0 }, gmCamera_801A26C0, gmCamera_801A2798 },
-    { { 0, 0, 4 }, gmCamera_801A2800, gmCamera_801A28AC },
-    { { 0, 0, 2 }, gmCamera_801A292C, gmCamera_801A2AAC },
-    { { 0, 0, 0x54 }, NULL, gmCamera_801A2BB0 },
-    { { 0, 0, 0x34 }, NULL, gmCamera_801A2BB0 },
-    { { 0, 0, 0x94 }, NULL, gmCamera_801A2BB0 },
-    { { 0, 0, 0x1204 }, gmCamera_801A2BF0, gmCamera_801A2D44 },
-    { { 0, 0, 0x1604 }, gmCamera_801A2FBC, gmCamera_801A2FFC },
-    { { 0, 0, 0x1A14 }, NULL, gmCamera_801A2BB0 },
-};
+extern f32 gmCamera_803DA630[12];
 
 u8* gmCamera_801A2224(u8* arg0, u32 arg1)
 {
@@ -253,6 +238,22 @@ void gmCamera_801A2650(void)
     gmCamera_80479BC8.gcus.x54 =
         HSD_SisLib_803A611C(3, 0, 9, 13, 0, 14, 0, 11);
 }
+
+gmCameraUnkFuncTable gmCamera_803DA6B4[9] = {
+    { { 1, 0, 0 }, gmCamera_801A26C0, gmCamera_801A2798 },
+    { { 0, 0, 4 }, gmCamera_801A2800, gmCamera_801A28AC },
+    { { 0, 0, 2 }, gmCamera_801A292C, gmCamera_801A2AAC },
+    { { 0, 0, 0x54 }, NULL, gmCamera_801A2BB0 },
+    { { 0, 0, 0x34 }, NULL, gmCamera_801A2BB0 },
+    { { 0, 0, 0x94 }, NULL, gmCamera_801A2BB0 },
+    { { 0, 0, 0x1204 }, gmCamera_801A2BF0, gmCamera_801A2D44 },
+    { { 0, 0, 0x1604 }, gmCamera_801A2FBC, gmCamera_801A2FFC },
+    { { 0, 0, 0x1A14 }, NULL, gmCamera_801A2BB0 },
+};
+
+DATA char lbl_803DA720[8] = { 'I', 'f', 'C', 'a', 'm', 'e', 'r', 'a' };
+char lbl_803DA728[0x30] =
+    "Info_Top_model_set\0\0IfCamera_Top_model_set";
 
 static void gmCamera_801A2650_noinline(void);
 static void gmCamera_801A2650_noinline(void)
@@ -642,15 +643,13 @@ void gmCamera_801A31FC(void)
         entry->x4();
     }
     gcus->ifvscam = lbArchive_LoadArchive("IfVsCam");
-    joint_a = HSD_ArchiveGetPublicAddress(gcus->ifvscam,
-                                          "IfCameraInfo_Top_model_set");
+    joint_a = HSD_ArchiveGetPublicAddress(gcus->ifvscam, lbl_803DA720);
     gobj_a = GObj_Create(0xE, 0x10, 0);
     HSD_GObjObject_80390A70(
         gobj_a, HSD_GObj_804D7849,
         gmCamera_SetJObj(&gcus->x4, HSD_JObjLoadJoint(*joint_a)));
     GObj_SetupGXLink(gobj_a, HSD_GObj_JObjCallback, 0xB, 0);
-    mdl_b =
-        HSD_ArchiveGetPublicAddress(gcus->ifvscam, "IfCamera_Top_model_set");
+    mdl_b = HSD_ArchiveGetPublicAddress(gcus->ifvscam, &lbl_803DA728[0x14]);
     gobj_a = GObj_Create(0xE, 0x10, 0);
     jobj_b = gmCamera_SetJObj(&gcus->x8, HSD_JObjLoadJoint(mdl_b->joint));
     HSD_GObjObject_80390A70(gobj_a, HSD_GObj_804D7849, jobj_b);
@@ -667,6 +666,11 @@ void gmCamera_801A31FC(void)
     gcus->x48[1] = NULL;
     gcus->x48[2] = NULL;
 }
+
+f32 gmCamera_803DA630[12] ATTRIBUTE_ALIGN(8) = {
+    0.6f,   0.6f,   40.0f, 416.0f, 0.6f,  0.6f,
+    340.0f, 416.0f, 0.6f,  0.6f,   40.0f, 44.0f,
+};
 
 void gmCamera_801A33BC(void)
 {
