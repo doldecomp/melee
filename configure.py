@@ -264,6 +264,7 @@ cflags_base = [
     "-str reuse",
     f"-DBUILD_VERSION={version_num}",
     f"-DVERSION_{config.version}",
+    "-sym on",
 ]
 
 # Debug flags
@@ -469,7 +470,7 @@ config.libs = [
             Object(Matching, "melee/lb/lbtime.c"),
             Object(Matching, "melee/lb/lb_00B0.c"),
             Object(Matching, "melee/lb/lb_00CE.c"),
-            Object(Matching, "melee/lb/lbvector.c"),
+            Object(Matching, "melee/lb/lbvector.c", extra_cflags=["-sym off"]),
             Object(NonMatching, "melee/lb/lbshadow.c"),
             Object(NonMatching, "melee/lb/lbspdisplay.c"),
             Object(NonMatching, "melee/lb/lbarq.c"),
@@ -1443,7 +1444,7 @@ config.libs = [
     RuntimeLib(
         "Gekko runtime",
         [
-            Object(Matching, "Runtime/__mem.c"),
+            Object(Matching, "Runtime/__mem.c", extra_cflags=["-sym off"]),
             Object(Matching, "Runtime/__va_arg.c"),
             Object(Matching, "Runtime/global_destructor_chain.c"),
             Object(Matching, "Runtime/Gecko_ExceptionPPC.c"),
@@ -1625,7 +1626,7 @@ config.libs = [
             Object(Matching, "dolphin/os/OSThread.c"),
             Object(Matching, "dolphin/os/OSTime.c"),
             Object(Matching, "dolphin/os/OSUartExi.c"),
-            Object(Matching, "dolphin/os/init/__start.c"),
+            Object(Matching, "dolphin/os/init/__start.c", extra_cflags=["-sym off"]),
             Object(Matching, "dolphin/os/init/__ppc_eabi_init.c"),
         ],
     ),
@@ -1711,7 +1712,7 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/mobj.c"),
             Object(Matching, "sysdolphin/baselib/aobj.c"),
             Object(Matching, "sysdolphin/baselib/lobj.c"),
-            Object(Matching, "sysdolphin/baselib/cobj.c"),
+            Object(Matching, "sysdolphin/baselib/cobj.c", extra_cflags=["-sym off"]),
             Object(Matching, "sysdolphin/baselib/fobj.c"),
             Object(Matching, "sysdolphin/baselib/pobj.c"),
             Object(Matching, "sysdolphin/baselib/jobj.c"),
