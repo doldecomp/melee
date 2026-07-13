@@ -2209,6 +2209,35 @@ void fn_800269AC(void)
     }
 }
 
+typedef struct fn_80026C04_Data {
+    u8 x0[0x9FC];
+    char* x9FC[0x37];
+} fn_80026C04_Data;
+
+static inline char** fn_80026C04_inline(s32 idx, char* base)
+{
+    fn_80026C04_Data* data = (fn_80026C04_Data*) base;
+    return &data->x9FC[idx];
+}
+
+static inline s32 fn_80026C04_find(char* base)
+{
+    s32 priority;
+    s32 slot;
+
+    for (priority = 4; priority >= 0; priority--) {
+        s8(*arr_5d0)[4] = (s8(*)[4])(base + 0x2D0);
+        for (slot = 0; slot < 0x37; slot++) {
+            if (priority == arr_5d0[slot][1] &&
+                lbl_804338A4[slot] == 1 && lbl_80433984[slot] == -1)
+            {
+                return slot;
+            }
+        }
+    }
+    return -1;
+}
+
 s32 fn_80026C04(s32 arg0)
 {
     char* base = lbl_803BB300;
@@ -2233,26 +2262,10 @@ s32 fn_80026C04(s32 arg0)
         }
     }
 
-    for (priority = 4; priority >= 0; priority--) {
-        slot = 0;
-        {
-            s8(*arr_5d0)[4] = (s8(*)[4])(base + 0x2D0);
-
-            for (; slot < 0x37; slot++) {
-                if (priority == arr_5d0[slot][1] &&
-                    lbl_804338A4[slot] == 1 && lbl_80433984[slot] == -1)
-                {
-                    goto found;
-                }
-            }
-        }
-    }
-    slot = -1;
-
-found:
+    slot = fn_80026C04_find(base);
     if (slot != -1) {
-        s32 idx = slot * 4;
-        strcpy(&lbl_803BB340[lbl_804D38D0], *(char**) (base + idx + 0x9FC));
+        strcpy(&lbl_803BB340[lbl_804D38D0],
+               *fn_80026C04_inline(slot, base));
         priority = HSD_SynthSFXLoad(lbl_803BB340, 2, (int) fn_80026C04, 0);
         lbl_80433A64[slot] = priority;
     }

@@ -1330,7 +1330,11 @@ void gmMainLib_8015F600(int arg0, int arg1)
             data->x1A2 = 5;
 
             bank = gmMainLib_804D3EE0->thing.x2FF8;
-            data = &bank[(u8) idx / 19].inner[(u8) idx % 19];
+            {
+                struct NameTagData* tmp =
+                    &bank[(u8) idx / 19].inner[(u8) idx % 19];
+                data = tmp;
+            }
             {
                 char* src = mnName_8023749C((s32) (u8) idx);
                 if (src != NULL) {

@@ -656,14 +656,13 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
 {
     HSD_JObj* option_roots[7];
     HSD_JObj* roots[17];
-    s32 i, j, visible;
+    u16 indices[17];
     u8* base = mn_803EC600;
     u8 count = mn_803EB6B0[13].selection_count;
     struct mn_802307F8_t* data = arg0->user_data;
-    u16 indices[17];
+    s32 i, j, visible;
     s32 valid;
-    HSD_JObj** root_ptr;
-    u16* map_ptr;
+    u16* idx;
     AnimLoopSettings* settings;
     PAD_STACK(0x24);
 
@@ -683,15 +682,15 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
     indices[13] = 13;
     indices[14] = 14;
     indices[15] = 15;
-    map_ptr = &indices[16];
-    for (i = 16; i < 17; i++) {
-        *map_ptr = i;
-        map_ptr++;
+    i = 16;
+    idx = &indices[i];
+    while (i < 17) {
+        *idx = i;
+        idx++;
+        i++;
     }
 
-    root_ptr = option_roots;
-    i = 0;
-    while (i < (s32) count) {
+    for (i = 0; i < (s32) count; i++) {
         if (gm_801A4310() == 0x1B && (u8) i == 4) {
             valid = 0;
         } else {
@@ -719,11 +718,9 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
                 } else {
                     child = ((struct mn_8022FEC8_jobj_ref_t*) root)->x10;
                 }
-                *root_ptr = child;
+                option_roots[i] = child;
             }
         }
-        root_ptr++;
-        i++;
     }
 
     if (arg1 != 0) {
