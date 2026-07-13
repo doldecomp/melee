@@ -1,5 +1,7 @@
 #include "mnmain.h"
 
+#include "dolphin/pad.h"
+
 #include "mn/forward.h"
 
 #include <math.h>
@@ -587,8 +589,8 @@ u8 mn_802295AC(void)
 {
     s32 port_idx = 0;
     while (port_idx < 4) {
-        u64 res = gm_801A36A0(port_idx);
-        if (res & 0x100000000) {
+        u64 res = gm_GetButtonsTriggered(port_idx);
+        if (res & PAD_CONFIRM) {
             return port_idx;
         }
         port_idx += 1;
@@ -602,7 +604,7 @@ u32 mn_80229624(u32 slot)
     u64 inputs_repeated;
     u64 inputs_trigger;
     inputs_repeated = gm_801A36C0(slot);
-    inputs_trigger = gm_801A36A0(slot);
+    inputs_trigger = gm_GetButtonsTriggered(slot);
     if (mn_804D6BC8.cooldown != 0) {
         Menu_DecrementAnimTimer();
         return 0;
@@ -1977,7 +1979,7 @@ static inline u8 mn_8022C7CC_inline(void)
 {
     int i;
     for (i = 0; i < 4; i++) {
-        if (gm_801A36A0(i) & (1LL << 32)) {
+        if (gm_GetButtonsTriggered(i) & PAD_CONFIRM) {
             return i;
         }
     }
@@ -2059,7 +2061,7 @@ void mn_8022CA54(HSD_GObj* gp)
         switch ((RecordsMenuSelection) mn_804A04F0.hovered_selection) {
         case SEL_RECORDS_VS:
             lbAudioAx_80024030(1);
-            mnDiagram_802437E8(1, 1);
+            mnDiagram_Init(1, 1);
             HSD_GObjPLink_80390228(gp);
             return;
         case SEL_RECORDS_BONUS:
@@ -2298,7 +2300,7 @@ void mn_8022D104(HSD_GObj* gp)
         switch (mn_804A04F0.hovered_selection) {
         case SEL_SETTINGS_RUMBLE:
             lbAudioAx_80024030(1);
-            mnVibration_80249174(1);
+            mnVibration_Init(1);
             HSD_GObjPLink_80390228(gp);
             break;
         case SEL_SETTINGS_SOUND:
@@ -3177,7 +3179,7 @@ void mn_8022F1A8(u16 arg0, u16 arg1)
 
 bool mn_8022F218(void)
 {
-    if (gm_801A36A0(4) & 0x400000000) {
+    if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) & PAD_LRAST) {
         return true;
     }
     return false;

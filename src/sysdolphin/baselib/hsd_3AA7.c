@@ -858,7 +858,7 @@ s32 fn_803AC168(s32* cmd_buf)
     state = OSDisableInterrupts();
     read_idx = hsd_804D7980;
     mode = hsd_804D799C;
-    old_entry = (s32) hsd_804D1148[hsd_804D7984][0];
+    old_entry = (s32) hsd_804D1148[hsd_804D7980][0];
     OSRestoreInterrupts(state);
 
     if (mode != 2) {

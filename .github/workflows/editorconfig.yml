@@ -17,8 +17,12 @@ jobs:
       run: |
         gh api \
           repos/${{github.repository}}/pulls/${{github.event.number}}/files --paginate \
-          | jq '.[] | select(.status != "removed") | .filename' \
-          | grep -vE '^"(extern|dump|build|expected|tools/calcprogress)/.*?"$' \
+          | jq '
+            .[]
+            | select(.status != "removed")
+            | .filename
+            | select(test("^(extern|dump|build|expected|tools/calcprogress)/") | not)
+          ' \
           > "$HOME/changed_files"
     - name: print list of changed files
       run: |
