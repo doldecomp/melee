@@ -885,8 +885,16 @@ void mpLibLoad(MapCollData* coll_data)
     float f31;
     CollJoint* joint_prev; // r27
     CollJoint* joint;      // r26
-    int start;
-    int count;
+    int floor_start;
+    int floor_count;
+    int ceiling_start;
+    int ceiling_count;
+    int right_wall_start;
+    int right_wall_count;
+    int left_wall_start;
+    int left_wall_count;
+    int dynamic_start;
+    int dynamic_count;
     int i;
 
     joint_prev = NULL;
@@ -930,49 +938,51 @@ void mpLibLoad(MapCollData* coll_data)
     jointListEnd = joint;
     mpPruneEmptyLines(coll_data);
 
-    count = coll_data->floor_count;
-    start = coll_data->floor_start;
-    for (; count > 0; count--) {
-        groundCollLine[start].flags =
-            coll_data->lines[start].hi_flags | LINE_FLAG_ENABLED;
-        groundCollLine[start].x0 = &coll_data->lines[start];
-        start++;
+    floor_count = coll_data->floor_count;
+    floor_start = coll_data->floor_start;
+    for (; floor_count > 0; floor_count--) {
+        groundCollLine[floor_start].flags =
+            coll_data->lines[floor_start].hi_flags | LINE_FLAG_ENABLED;
+        groundCollLine[floor_start].x0 = &coll_data->lines[floor_start];
+        floor_start++;
     }
 
-    count = coll_data->ceiling_count;
-    start = coll_data->ceiling_start;
-    while (count-- > 0) {
-        groundCollLine[start].flags =
-            coll_data->lines[start].hi_flags | LINE_FLAG_ENABLED;
-        groundCollLine[start].x0 = &coll_data->lines[start];
-        start++;
+    ceiling_count = coll_data->ceiling_count;
+    ceiling_start = coll_data->ceiling_start;
+    for (; ceiling_count > 0; ceiling_count--) {
+        groundCollLine[ceiling_start].flags =
+            coll_data->lines[ceiling_start].hi_flags | LINE_FLAG_ENABLED;
+        groundCollLine[ceiling_start].x0 = &coll_data->lines[ceiling_start];
+        ceiling_start++;
     }
 
-    count = coll_data->right_wall_count;
-    start = coll_data->right_wall_start;
-    while (count-- > 0) {
-        groundCollLine[start].flags =
-            coll_data->lines[start].hi_flags | LINE_FLAG_ENABLED;
-        groundCollLine[start].x0 = &coll_data->lines[start];
-        start++;
+    right_wall_count = coll_data->right_wall_count;
+    right_wall_start = coll_data->right_wall_start;
+    for (; right_wall_count > 0; right_wall_count--) {
+        groundCollLine[right_wall_start].flags =
+            coll_data->lines[right_wall_start].hi_flags | LINE_FLAG_ENABLED;
+        groundCollLine[right_wall_start].x0 =
+            &coll_data->lines[right_wall_start];
+        right_wall_start++;
     }
 
-    count = coll_data->left_wall_count;
-    start = coll_data->left_wall_start;
-    while (count-- > 0) {
-        groundCollLine[start].flags =
-            coll_data->lines[start].hi_flags | LINE_FLAG_ENABLED;
-        groundCollLine[start].x0 = &coll_data->lines[start];
-        start++;
+    left_wall_count = coll_data->left_wall_count;
+    left_wall_start = coll_data->left_wall_start;
+    for (; left_wall_count > 0; left_wall_count--) {
+        groundCollLine[left_wall_start].flags =
+            coll_data->lines[left_wall_start].hi_flags | LINE_FLAG_ENABLED;
+        groundCollLine[left_wall_start].x0 =
+            &coll_data->lines[left_wall_start];
+        left_wall_start++;
     }
 
-    count = coll_data->dynamic_count;
-    start = coll_data->dynamic_start;
-    while (count-- > 0) {
-        groundCollLine[start].flags =
-            coll_data->lines[start].hi_flags | LINE_FLAG_ENABLED;
-        groundCollLine[start].x0 = &coll_data->lines[start];
-        start++;
+    dynamic_count = coll_data->dynamic_count;
+    dynamic_start = coll_data->dynamic_start;
+    for (; dynamic_count > 0; dynamic_count--) {
+        groundCollLine[dynamic_start].flags =
+            coll_data->lines[dynamic_start].hi_flags | LINE_FLAG_ENABLED;
+        groundCollLine[dynamic_start].x0 = &coll_data->lines[dynamic_start];
+        dynamic_start++;
     }
 
     i = 0;
@@ -5885,6 +5895,8 @@ static HSD_Chan mpLib_803BF540 = {
     NULL,
 };
 
+static char lbl_803BF570[] = "B(%d,%d)-(%d,%d)\n";
+
 void mpLib_SetupDraw(GXColor color)
 {
     HSD_TevDesc spC;
@@ -6679,6 +6691,9 @@ static s16 mpLib_ItemSpawnVtxIds[] = {
     0xC1, 0xC2, 0xC3, 0xC4, 0xC5, 0xC6,
 };
 
+char mpLib_803BF6E0[] =
+    "map coll under=%d upper=%d left=%d right=%d bbox=%d\n";
+
 static s16 mpLib_SpawnVtxIds[4] = { 0, 1, 2, 3 };
 static s16 mpLib_RespawnVtxIds[4] = { 4, 5, 6, 7 };
 
@@ -6702,9 +6717,8 @@ void mpLib_8005A2DC(void)
     mpLib_80059E60();
     if (mpLib_804D64D0 == 0) {
         mpLib_804D64D0 = 1;
-        OSReport("map coll under=%d upper=%d left=%d right=%d bbox=%d\n",
-                 mpLib_804D64D4, mpLib_804D64D8, mpLib_804D64DC,
-                 mpLib_804D64E0, mpLib_804D64E4);
+        OSReport(mpLib_803BF6E0, mpLib_804D64D4, mpLib_804D64D8,
+                 mpLib_804D64DC, mpLib_804D64E0, mpLib_804D64E4);
     }
     HSD_StateInvalidate(-1);
 }
