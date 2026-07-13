@@ -5,3 +5,25 @@
 /// Optional callback installed by #gm_801A4014. When set and the return value
 /// is not #GM_COUNT, #gm_RunGameMode runs that game mode once before
 /// resuming the current mode's scene graph.
+
+/// @struct GameScene
+/// @note Colloquially known as "Minor Scene"
+///
+/// A single entry in a #GameMode's scene graph. Each scene is looked up by
+/// its #GameScene::idx during scene graph traversal. The scene graph is walked
+/// comparing each entry's @c idx against #GameRouting::curr_scene_idx, and
+/// #nextScene advances to the next scene whose @c idx is greater than the
+/// current one. An @c idx value of @c 0xFF terminates a collection of GameScene.
+
+/// @var GameScene::idx
+/// Scene graph index searched against #GameRouting::curr_scene_idx during
+/// scene graph traversal. This is the value matched when the scene graph is
+/// walked to find the current scene. Not to be confused with
+/// #GameScene::info::class_id, which is the scene's #GameSceneKind.
+
+/// @var GameScene::GameSceneInfo::class_id
+/// The #GameSceneKind associated with this scene. This is the value matched by
+/// #gm_FindGameSceneHandler to look up the corresponding #GameSceneHandler supplying the
+/// #GameSceneHandler::OnLoad, #GameSceneHandler::OnLeave, and
+/// #GameSceneHandler::OnFrame callbacks invoked for this scene. Not to be
+/// confused with #GameScene::idx, which is the scene graph traversal index.

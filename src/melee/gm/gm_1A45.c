@@ -237,11 +237,12 @@ void gm_801A4BD4(void)
     lb_80014534();
 }
 
-GameSceneHandler* gm_801A4CE0(u8 id)
+GameSceneHandler* gm_FindGameSceneHandler(u8 kind)
 {
     GameSceneHandler* cur;
-    for (cur = gm_801A50A0(); cur->class_id != GS_COUNT; cur++) {
-        if (cur->class_id == id) {
+    for (cur = gm_GetAllGameSceneHandlers(); cur->class_id != GS_COUNT; cur++)
+    {
+        if (cur->class_id == kind) {
             return cur;
         }
     }

@@ -2,7 +2,7 @@
  * @brief Runs one game-mode scene transition and invokes the run loop for a given scene
  *
  * Finds the current #GameScene in @p mode, runs its @c Prep handler, loads
- * the scene via #gm_801A4CE0 / #gm_801A4D34, then advances
+ * the scene via #gm_FindGameSceneHandler / #gm_801A4D34, then advances
  * #GameRouting::curr_scene_idx when the scene loop exits.
  */
 /* 1A4014 */ void gm_801A4014(GameMode* mode);
@@ -28,7 +28,7 @@
  *
  * See docs related to #GameScene.
  *
- * @param arg0 The scene index of the scene preceding the desired pending scene. The method adds +1 to the input. Not to be confused with the scene class_id, which is defined as a GameSceneKind.
+ * @param arg0 The scene index of the scene preceding the desired pending scene. The method adds +1 to the input. Not to be confused with the scene class_id, which is defined as a #GameSceneKind.
  */
 /* 1A42A0 */ void gm_SetPendingSceneIndex(u8 pending_scene);
 

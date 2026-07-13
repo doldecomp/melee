@@ -110,7 +110,7 @@ void gm_801A4014(GameMode* mode)
         scene->Prep(scene);
     }
     info = &scene->info;
-    handler = gm_801A4CE0(scene->info.class_id);
+    handler = gm_FindGameSceneHandler(scene->info.class_id);
     gm_801A4BD4();
     gm_801A4B88(info);
     if (handler->OnLoad != NULL) {

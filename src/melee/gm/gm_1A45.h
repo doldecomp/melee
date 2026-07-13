@@ -29,7 +29,7 @@
 /* 1A4BC8 */ HSD_GObj* gm_801A4BC8(void);
 /* 1A4BD0 */ void fn_801A4BD0(HSD_GObj*);
 /* 1A4BD4 */ void gm_801A4BD4(void);
-/* 1A4CE0 */ GameSceneHandler* gm_801A4CE0(u8 id);
+/* 1A4CE0 */ GameSceneHandler* gm_FindGameSceneHandler(u8 id);
 /* 1A4D34 */ void gm_801A4D34(void (*on_frame)(void), struct GameSceneInfo*);
 
 /* 4D6724 */ extern void (*gm_804D6724)(void);
