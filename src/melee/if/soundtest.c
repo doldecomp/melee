@@ -900,17 +900,20 @@ bool un_80300AB8(bool update_scene)
     return false;
 }
 
+#pragma push
+#pragma global_optimizer off
 bool un_80300AF4(int arg0)
 {
     if (arg0 == 1) {
-        struct un_803FA258_t* data;
         lbAudioAx_80024030(1);
-        data = &un_803FA258;
-        data->x4[1] = 0x3F;
-        data->x4[3] = 0xE;
-        data->x24[1] = 3;
-        data->x24[2] = 3;
-        data->x24[3] = 3;
+        {
+            struct un_803FA258_t* data = &un_803FA258;
+            data->x4[1] = 0x3F;
+            data->x4[3] = 0xE;
+            data->x24[1] = 3;
+            data->x24[2] = 3;
+            data->x24[3] = 3;
+        }
         gm_SetPendingScene(4);
         gm_801A4B60();
     }
@@ -918,8 +921,6 @@ bool un_80300AF4(int arg0)
 }
 
 /// @todo Find a solution without the pragma
-#pragma push
-#pragma global_optimizer off
 bool un_80300B58(int arg0)
 {
     if (arg0 == 1) {
