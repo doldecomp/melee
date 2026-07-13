@@ -391,7 +391,6 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     s32 is_last_round;
     struct GameCache* gc;
     s32 slot_idx;
-    u8* colors_ptr;
     s32 i;
     u64 audio;
     PAD_STACK(12);
@@ -414,26 +413,21 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
         chars[count_processed] = opp_data[count_processed].x3;
     }
 
-    colors_ptr = colors;
-    {
-        u8* cp = colors_ptr;
-        for (i = 0; i < 3; i++) {
-            *cp = arg0->x54(arg1, arg0->x0.cpu_level, (u8) i);
-            cp++;
-        }
+    for (i = 0; i < 3; i++) {
+        colors[i] = arg0->x54(arg1, arg0->x0.cpu_level, (u8) i);
     }
 
     gmRegSetupEnemyColorTable(arg0->x0.ckind, arg0->x0.color, chars_ptr,
-                              colors_ptr);
+                              colors);
 
     if ((s32) arg1 == 0xC) {
         chars_ptr[0] = 3;
-        colors_ptr[0] = 0;
+        colors[0] = 0;
         is_last_round = 1;
         chars_ptr[1] = 3;
-        colors_ptr[1] = 0;
+        colors[1] = 0;
         chars_ptr[2] = 3;
-        colors_ptr[2] = 0;
+        colors[2] = 0;
     }
 
     gc = &lbDvd_8001822C()->game_cache;
@@ -601,7 +595,6 @@ static inline void gmAllStarPreloadRemainingFighters(int round)
 
 void gm_801B5ACC(GameScene* arg0)
 {
-    u8 operand_pad[8];
     s8 chars[3];
     StartMeleeData* data;
     u8* base;
@@ -612,7 +605,7 @@ void gm_801B5ACC(GameScene* arg0)
     s32 next_count;
     s32 round_offset;
 
-    PAD_STACK(16);
+    PAD_STACK(24);
     chars[0] = 0x21;
     chars[1] = 0x21;
     chars[2] = 0x21;
@@ -750,12 +743,41 @@ void gm_801B607C(GameScene* unused)
     gm_801A42D4();
 }
 
+static inline void gmAllStarRandomizeStages(gm_803DEBE8_t* current)
+{
+    u32 index;
+
+    for (index = 0; index < 25; index++) {
+        current->x2 = *((&current->x0) + HSD_Randi(2));
+        current++;
+    }
+}
+
+static inline void gmAllStarRandomizeOpponents(gm_803DEBE8_t* tmp)
+{
+    u32 index;
+    gm_803DEBE8_t* table;
+    gm_803DEBE8_t* current;
+
+    table = gm_803DEBE8;
+    current = table;
+    gmAllStarRandomizeStages(current);
+
+    current = table;
+    for (index = 0; index < 0x17; index++) {
+        u32 swap_idx = index + HSD_Randi(0x18 - index);
+        gm_803DEBE8_t* swap;
+        *tmp = *table;
+        swap = &current[swap_idx];
+        *table = *swap;
+        table++;
+        *swap = *tmp;
+    }
+}
+
 void gm_801B60A4_OnLoad(void)
 {
     UnkAllstarData* data;
-    u32 var_r28;
-    gm_803DEBE8_t* var_r29;
-    gm_803DEBE8_t* var_r30;
     int temp;
     gm_803DEBE8_t tmp;
     PAD_STACK(12);
@@ -781,21 +803,7 @@ void gm_801B60A4_OnLoad(void)
     data->x58 = NULL;
     data->x64 = gm_8018A2C4;
     data->x68 = gm_8018A314;
-    var_r29 = gm_803DEBE8;
-    var_r30 = var_r29;
-    for (var_r28 = 0; var_r28 < 25; var_r28++) {
-        var_r30->x2 = *((&var_r30->x0) + HSD_Randi(2));
-        var_r30++;
-    }
-
-    var_r30 = var_r29;
-    for (var_r28 = 0; var_r28 < 0x17; var_r28++) {
-        gm_803DEBE8_t* swap = &var_r30[var_r28 + HSD_Randi(0x18 - var_r28)];
-        tmp = *var_r29;
-        *var_r29 = *swap;
-        var_r29++;
-        *swap = tmp;
-    }
+    gmAllStarRandomizeOpponents(&tmp);
 
     data->x74 = 0;
     data->x9C = 0;

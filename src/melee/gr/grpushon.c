@@ -411,6 +411,12 @@ void fn_802190A0(Ground* gp, s32 joint_id, CollData* coll, s32 unk,
     }
 }
 
+static inline GXColor
+get_light_color(struct grPushOn_LightConfig* entry)
+{
+    return entry->color;
+}
+
 void grPushOn_802190D0(HSD_GObj* gobj)
 {
     HSD_LObj* cur = gobj->hsd_obj;
@@ -425,12 +431,10 @@ void grPushOn_802190D0(HSD_GObj* gobj)
     i = 0;
 
     while (i < 9 && lobj != NULL) {
-        GXColor color;
         HSD_ASSERTMSG(698, (u32) (lobj->flags & LOBJ_TYPE_MASK) == LOBJ_POINT,
                       "HSD_LObjGetType(lobj)==LOBJ_POINT");
         lobj->flags = LOBJ_POINT | LOBJ_DIFFUSE;
-        color = entry->color;
-        HSD_LObjSetColor(lobj, color);
+        HSD_LObjSetColor(lobj, get_light_color(entry));
         pos = entry->pos;
         pos.x *= scale;
         pos.y *= scale;

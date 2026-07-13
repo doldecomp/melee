@@ -490,15 +490,18 @@ void gm_801BAD70(GameScene* arg0)
                     r3b[player_init_off + 0x60] = v;
                 }
             }
-            if ((s8) r3b[player_init_off + 0x60] == (s8) r3b[0x60]) {
-                u8 c = r3b[player_init_off + 0x63];
-                if (c == r3b[0x63]) {
-                    if (c <= 2) {
-                        c += 1;
-                    } else {
-                        c = 0;
+            {
+                s8 c_kind = r3b[player_init_off + 0x60];
+                if (c_kind == (s8) r3b[0x60]) {
+                    u8 c = r3b[player_init_off + 0x63];
+                    if (c == r3b[0x63]) {
+                        if (c <= 2) {
+                            c += 1;
+                        } else {
+                            c = 0;
+                        }
+                        r3b[player_init_off + 0x63] = c;
                     }
-                    r3b[player_init_off + 0x63] = c;
                 }
             }
             if ((s8) r3b[0x60] == 0x13 &&
@@ -3292,6 +3295,11 @@ void gm_801BF060(GameScene* arg0)
     }
 }
 
+static inline struct gm_random_history* gm_GetRandomHistory(void)
+{
+    return (struct gm_random_history*) gmMainLib_804D3EE0;
+}
+
 void gm_801BF128(void)
 {
     s32 character_pool[29];
@@ -3301,7 +3309,6 @@ void gm_801BF128(void)
     s32 i;
     s32 j;
     s32 a;
-    s32 b;
     s32 pick;
     s32 dup;
     PAD_STACK(0x38);
@@ -3318,12 +3325,13 @@ void gm_801BF128(void)
     character_pool[count] = 0x1A;
     for (i = 0; i < count; i++) {
         for (j = i + 1; j < count; j++) {
-            a = character_pool[i];
-            b = character_pool[j];
-            if ((s32) ((u8*) gmMainLib_804D3EE0)[a + 2] >
-                (s32) ((u8*) gmMainLib_804D3EE0)[b + 2])
+            if ((s32) gm_GetRandomHistory()
+                    ->character_usage[character_pool[j]] <
+                (s32) gm_GetRandomHistory()
+                    ->character_usage[character_pool[i]])
             {
-                character_pool[i] = b;
+                a = character_pool[i];
+                character_pool[i] = character_pool[j];
                 character_pool[j] = a;
             }
         }
@@ -3345,9 +3353,8 @@ void gm_801BF128(void)
         gm_801BF634(c, j);
         gm_801BF65C(c, 0);
         c += 1;
-        ((u8*) gmMainLib_804D3EE0)[j + 2] += 1;
+        gm_GetRandomHistory()->character_usage[j] += 1;
     } while (c < 4);
-    count = 0;
     gm_801BF6C8(HSD_Randi(4));
     {
         s32 prev;
@@ -3357,7 +3364,7 @@ void gm_801BF128(void)
         } while (gm_801BF6D8() == prev);
     }
 
-    c = 0;
+    c = (count = 0);
     do {
         if (gm_80164430(gm_801641CC(c)) != 0) {
             stage_pool[count] = c;
@@ -3368,12 +3375,11 @@ void gm_801BF128(void)
     stage_pool[count] = 0x1D;
     for (i = 0; i < count; i++) {
         for (j = i + 1; j < count; j++) {
-            a = stage_pool[i];
-            b = stage_pool[j];
-            if ((s32) ((u8*) gmMainLib_804D3EE0)[a + 0x1C] >
-                (s32) ((u8*) gmMainLib_804D3EE0)[b + 0x1C])
+            if ((s32) gm_GetRandomHistory()->stage_usage[stage_pool[j]] <
+                (s32) gm_GetRandomHistory()->stage_usage[stage_pool[i]])
             {
-                stage_pool[i] = b;
+                a = stage_pool[i];
+                stage_pool[i] = stage_pool[j];
                 stage_pool[j] = a;
             }
         }
@@ -3386,7 +3392,7 @@ void gm_801BF128(void)
         } while ((s32) gm_801641CC((u8) pick) == (s32) cur_id);
     }
     gm_801BF684(gm_801641CC((u8) pick));
-    ((u8*) gmMainLib_804D3EE0)[pick + 0x1C] += 1;
+    gm_GetRandomHistory()->stage_usage[pick] += 1;
     gm_801BF6A8(HSD_Randi(4));
 }
 

@@ -330,7 +330,6 @@ inline bool end(Vec3* a, Vec3* b, float unk_sum)
 bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
                      Vec3* arg4, Vec3* arg5, float arg6, float arg7)
 {
-    u8 operand_pad[8];
     {
         Vec3 arg4_offset;
         Vec3 arg5_offset;
@@ -660,10 +659,28 @@ static inline float lbColl_Dot2(float ay, float by, float bx, float ax)
     return ax * bx + by * ay;
 }
 
+static inline float lbColl_GetY(Vec3* v)
+{
+    return v->y;
+}
+
 bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                      float p, float q, float r)
 {
+    float diff_dc_x;
+    float diff_ac_x;
+    float diff_dc_y;
+    float d_y;
+    float diff_ba_y;
+    float diff_ba_x;
+    float d_x;
     Vec3 a1;
+    float sqdist2_dc;
+    float sqdist2_ba;
+    Vec3 c1;
+    float dot2_diff_dc_ac;
+    float dot2_diff_ba_ac;
+    float determinant;
     float sum_pq = p + q;
     Vec3 a0;
     u8 operand_pad[8];
@@ -680,8 +697,6 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
         (void) c0;
 
         {
-            Vec3 c1;
-
             c1 = c0;
             {
                 float b_x = b->x;
@@ -751,32 +766,34 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                     }
 
                     {
-                        float diff_ba_y = b_y - a1.y;
-                        float d_y = d->y;
-                        float diff_ac_y = a1.y - c1.y;
-                        float diff_dc_y = d_y - c1.y;
-                        float diff_ba_x = b_x - a1.x;
-                        float d_x = d->x;
-                        float diff_dc_x = d_x - c1.x;
+                        float dot2_diff_ba_dc;
+                        float diff_ac_y;
+                        diff_ba_y = b_y - a1.y;
+                        d_y = lbColl_GetY(d);
+                        diff_ac_y = a1.y - c1.y;
+                        diff_dc_y = d_y - c1.y;
+                        diff_ba_x = b_x - a1.x;
+                        d_x = d->x;
+                        diff_dc_x = d_x - c1.x;
 
-                        float dot2_diff_ba_dc =
+                        dot2_diff_ba_dc =
                             lbColl_Dot2(diff_ba_y, diff_dc_y, diff_dc_x,
                                         diff_ba_x);
 
-                        float sqdist2_dc =
+                        sqdist2_dc =
                             diff_dc_x * diff_dc_x + diff_dc_y * diff_dc_y;
-                        float sqdist2_ba =
+                        sqdist2_ba =
                             diff_ba_x * diff_ba_x + diff_ba_y * diff_ba_y;
-                        float diff_ac_x = a1.x - c1.x;
+                        diff_ac_x = a1.x - c1.x;
 
-                        float dot2_diff_dc_ac =
+                        dot2_diff_dc_ac =
                             diff_dc_x * diff_ac_x + diff_dc_y * diff_ac_y;
 
-                        float dot2_diff_ba_ac =
+                        dot2_diff_ba_ac =
                             diff_ba_x * diff_ac_x + diff_ba_y * diff_ac_y;
 
-                        float determinant = sqdist2_ba * sqdist2_dc -
-                                            dot2_diff_ba_dc * dot2_diff_ba_dc;
+                        determinant = sqdist2_ba * sqdist2_dc -
+                                      dot2_diff_ba_dc * dot2_diff_ba_dc;
 
                         {
                             float scl_e;
@@ -1009,8 +1026,8 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float hit_start_mid_x;
     float local_delta_x;
     float hurt_mid_z;
-    Vec3 hit_start_copy;
     u8 operand_pad[4];
+    Vec3 hit_start_copy;
     Vec3 hurt_start_copy;
     Vec3 hit_delta;
     float start_delta_z;
@@ -1052,7 +1069,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float hit_end_max_y;
     float hurt_len_sq;
     float hit_end_max_z;
-    float candidate_hit_param;
+    float candidate_hurt_param;
     float hit_end_x;
     float hit_len_sq;
     float hit_end_mid_x;
@@ -1326,7 +1343,7 @@ block_39:
                 (hurt_param > lbColl_804D7A00) ||
                 (hurt_param < lbColl_804D7A10))
             {
-                float candidate_hurt_param;
+                float candidate_hit_param;
                 float hit_endpoint_dist_sq;
                 float hit_endpoint_param;
                 float hurt_endpoint_param;

@@ -521,10 +521,15 @@ bool ftCo_800D72A0(Fighter* fp)
     {
         return true;
     }
-    start_alt = x2D0->x30;
+    {
+        s32 tmp = x2D0->x30;
+        start_alt = tmp;
+    }
     if (start_alt != -1 && start_alt <= (motion_id = fp->motion_id) &&
         motion_id < start_alt + x2D0->x28)
     {
+        if (fp != NULL) {
+        }
         return true;
     }
     return false;
@@ -550,8 +555,9 @@ void ftCo_800D74A4(Fighter_GObj* gobj)
     p = ftCo_800D74A4_inline(fp);
     fp->cmd_vars[0] = 0;
     tmp = fp->x2D0;
-    tmp = (struct Fighter_x2D0_t*) ((s32*) tmp + ftCo_800D7268(fp));
-    msid = tmp->x2C + fp->x1968_jumpsUsed;
+    msid =
+        fp->x1968_jumpsUsed +
+        (tmp = (struct Fighter_x2D0_t*) ((s32*) tmp + ftCo_800D7268(fp)))->x2C;
     msid2 = --msid;
     vel.x = fp->input.lstick.x * p->x8;
     tmp = fp->x2D0;
@@ -1488,7 +1494,7 @@ bool fn_800D9558(Fighter_GObj* gobj)
                 }
                 grav = fp->mv.ca.specials.grav;
                 if (grav == (f32) attrs->xA0) {
-                    jobj = fp->parts[51].joint;
+                    HSD_JObj* jobj = fp->parts[51].joint;
                     HSD_JObjSetupMatrix(jobj);
                     my = jobj->mtx[1][3];
                     if (mpCheckAllRemap(NULL, NULL, NULL, NULL, -1, -1,

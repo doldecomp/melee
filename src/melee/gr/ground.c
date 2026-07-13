@@ -1226,8 +1226,7 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lightset)
             if (found == 0 || (b6 == 0 && b7 == 0 && b5 == 0)) {
                 clean = out;
                 do {
-                    clean[0] = clean[1];
-                    if (clean[0] == NULL) {
+                    if ((clean[0] = clean[1]) == NULL) {
                         break;
                     }
                     clean++;

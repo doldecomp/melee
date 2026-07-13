@@ -2867,15 +2867,16 @@ s32 fn_8016588C(lbl_8046B6A0_24C_t* arg0, s32 arg1)
         }
     } else {
         u16 a = arg0->x58[arg1].xA;
-        result = a * (s8) arg0->xC;
-        result += arg0->x58[arg1].x20 - (arg0->x58[arg1].x24 - a);
+        v = arg0->x58[arg1].x20 - (arg0->x58[arg1].x24 - a) +
+            a * (s8) arg0->xC;
         lim = (1 << 24) - 1;
+        result = v;
         if (lim < 0) {
             lim = -lim;
         }
-        if (result > lim) {
+        if (v > lim) {
             result = lim;
-        } else if (result < -lim) {
+        } else if (v < -lim) {
             result = -lim;
         }
     }
@@ -3218,8 +3219,8 @@ s32 gm_80166A98(MatchEnd* arg0, s32 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,
 
     arg0->player_standings[0].character_kind = arg2;
     arg0->player_standings[1].character_kind = arg4;
-    arg0->player_standings[2].character_kind = arg6;
     arg0->player_standings[3].character_kind = arg_sp8;
+    arg0->player_standings[2].character_kind = arg6;
 
     // Apply player color to all 4 players?
     for (i = 0; i < 4; i++) {
@@ -4306,6 +4307,24 @@ s32 fn_80169000(void* arg0, void* arg1)
 /// #fn_80169000 done
 u8 gm_80169238(u8 ckind)
 {
+    /// @remarks Matching tactic: pad the pre-inline statement count so MWCC
+    /// keeps direct calls to this accessor instead of auto-inlining them.
+    if (0) {
+        HSD_Randi(0);
+        HSD_Randi(0);
+        HSD_Randi(0);
+        HSD_Randi(0);
+        HSD_Randi(0);
+        HSD_Randi(0);
+        HSD_Randi(0);
+        HSD_Randi(0);
+        HSD_Randi(0);
+        HSD_Randi(0);
+        HSD_Randi(0);
+        HSD_Randi(0);
+        HSD_Randi(0);
+        HSD_Randi(0);
+    }
     if (ckind >= ARRAY_SIZE(lbl_803D51A0)) {
         return 0;
     }
@@ -4665,15 +4684,18 @@ long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
             p += 1;
         } while (i < 0x1A);
 
-        count = 0;
-        for (i = 0; i < 0x1A; i++) {
-            if ((s8) *list != -1) {
-                count += 1;
-                if (count > 0x10) {
-                    *list = -1;
+        {
+            s32 j;
+            count = 0;
+            for (j = 0; j < 0x1A; j++) {
+                if ((s8) *list != -1) {
+                    count += 1;
+                    if (count > 0x10) {
+                        *list = -1;
+                    }
                 }
+                list++;
             }
-            list++;
         }
 
         dst = arg1;
@@ -4711,6 +4733,7 @@ void fn_80169C54(s8 arg0, s8 arg1)
     s8* cp;
     s32 buf[7];
     s32 n;
+    s32 i;
     s32 j;
     s32 k;
     s32 p;
@@ -4729,11 +4752,11 @@ void fn_80169C54(s8 arg0, s8 arg1)
     buf[4] = -1;
     buf[5] = -1;
     buf[6] = -1;
-    for (j = 0; j < 3; j++) {
+    for (i = 0; i < 3; i++) {
         if ((s32) *pc == 4) {
             if (st->xB == 0) {
                 s32 count;
-                count = gm_80169238_noinline(4U);
+                count = gm_80169238(4U);
                 for (k = 0; k < count; k++) {
                     bp[k] = k;
                     n += 1;
@@ -4921,25 +4944,6 @@ void gm_8016A21C(StartMeleeRules* arg0)
     arg0->x54 = (void*) &lbl_8046B488;
 }
 
-static inline s32 fn_801695BC_noinline(u8 arg0, u8 arg1, u8 arg2, u8* arg3,
-                                       u8* arg4)
-{
-    return fn_801695BC(arg0, arg1, arg2, arg3, arg4);
-}
-
-static inline void fn_801697FC_noinline(s8 character, s8 costume,
-                                        s8 new_character, s8 new_costume,
-                                        s8* buf)
-{
-    fn_801697FC(character, costume, new_character, new_costume, buf);
-}
-
-static inline void fn_80169900_noinline(u8 arg0, struct lbl_8046B488_t* arg1,
-                                        s8* arg2, s8* arg3)
-{
-    fn_80169900(arg0, arg1, arg2, arg3);
-}
-
 typedef void (*GmEventPlayerInitCallback)(s32 slot, u8 remaining_count);
 
 struct lbl_8046B488_event_player_init_cb_t {
@@ -4956,8 +4960,8 @@ gm_8016A404_event_player_init_cb(struct lbl_8046B488_t* gp)
     return &state->event_player_init_cb;
 }
 
-struct gm_8016A22C_kinds {
-    u8 kind[3];
+struct gm_8016A22C_header {
+    u8 bytes[0x20];
 };
 
 struct gm_8016A22C_buffers {
@@ -4966,10 +4970,10 @@ struct gm_8016A22C_buffers {
     /* 0x0A2 */ u8 xA2[0x124 - 0xA2];
 };
 
-static inline struct gm_8016A22C_kinds*
-gm_8016A22C_kind_array(struct lbl_8046B488_t* gp)
+static inline struct gm_8016A22C_header*
+gm_8016A22C_header(struct lbl_8046B488_t* gp)
 {
-    return (struct gm_8016A22C_kinds*) gp;
+    return (struct gm_8016A22C_header*) gp;
 }
 
 static inline struct gm_8016A22C_buffers*
@@ -4983,7 +4987,8 @@ s32 gm_8016A22C(s8 k0, s8 k1, s8 k2, u8 a3, u8 a4, int a5, int mode, int a7,
                 int flag2, int flag1, f32 f1, f32 f2)
 {
     int i;
-    struct gm_8016A22C_kinds* kinds;
+    struct lbl_8046B488_t* gp;
+    struct gm_8016A22C_header* header;
     struct gm_8016A22C_buffers* bufs;
     u8 x7_tmp;
 
@@ -5026,41 +5031,34 @@ s32 gm_8016A22C(s8 k0, s8 k1, s8 k2, u8 a3, u8 a4, int a5, int mode, int a7,
 
     lbl_8046B488.xC = a3;
 
-    x7_tmp = lbl_8046B488.x7;
-    memzero(lbl_8046B488.x20, x7_tmp);
-    {
-        s8* p = &lbl_8046B488.x20[x7_tmp];
-        *p = -2;
-    }
+    gp = &lbl_8046B488;
+    header = gm_8016A22C_header(gp);
+    bufs = gm_8016A22C_buffers(gp);
+    x7_tmp = header->bytes[7];
+    memzero(bufs->x20, x7_tmp);
+    bufs->x20[x7_tmp] = -2;
 
-    {
-        struct lbl_8046B488_t* tmp = &lbl_8046B488;
-        fn_80169900_noinline(lbl_8046B488.xD, tmp, lbl_8046B488.xA2,
-                             lbl_8046B488.x20);
-    }
+    fn_80169900(gp->xD, gp, (s8*) bufs->xA2, (s8*) bufs->x20);
 
-    kinds = gm_8016A22C_kind_array(&lbl_8046B488);
-    bufs = gm_8016A22C_buffers(&lbl_8046B488);
-
-    switch (lbl_8046B488.xB) {
+    switch (header->bytes[0xB]) {
     case 0:
         for (i = 0; i < 3; i++) {
-            fn_801695BC_noinline(kinds->kind[i], p87, p8b, bufs->xA2,
-                                 bufs->x20);
+            fn_801695BC(header->bytes[i], p87, p8b, bufs->xA2,
+                        bufs->x20);
         }
         break;
 
     case 1: {
-        u8 c = lbl_8046B488.xC;
+        u8 c = gp->xC;
         for (i = 0; i < 3; i++) {
-            fn_801697FC_noinline(kinds->kind[i], c, p87, p8b,
-                                 lbl_8046B488.x20);
+            fn_801697FC(header->bytes[i], c, p87, p8b,
+                        (s8*) bufs->x20);
         }
         break;
     }
     }
 
-    return fn_80169A84(lbl_8046B488.xE, lbl_8046B488.x124, lbl_8046B488.x20);
+    return fn_80169A84(gp->xE, gp->x124, gp->x20);
 }
 
 void gm_8016A404(s32 arg0)
@@ -5101,22 +5099,32 @@ void fn_8016A488(s32 arg0)
     }
 }
 
+static inline int fn_8016A4C8_spawn_offset(struct lbl_8046B488_t* gp)
+{
+    return gp->xA - 1;
+}
+
+static inline f32 fn_8016A4C8_attack_ratio(struct lbl_8046B488_t* gp)
+{
+    return gp->x14;
+}
+
 void fn_8016A4C8(void)
 {
     s8 chr;
-    f32 facing_dir;
+    s32 has_active_spawn;
     s32 spawn_enabled;
     s32 cpu_type;
     s32 cpu_type_roll;
     s8 controller_index;
-    s32 spawn_slot;
-    s32 has_active_spawn;
+    u8* event_flags;
+    f32 facing_dir;
     Vec3 spawn_pos;
     s8 cos;
     s32 matching_slot;
     struct lbl_8046B488_t* gp;
     u8* spawn_state;
-    u8* event_flags;
+    s32 spawn_slot;
 
     PAD_STACK(0xBC);
 
@@ -5147,7 +5155,8 @@ void fn_8016A4C8(void)
                 spawn_state[0x1A6] = (s8) gp->x7;
                 Player_SetFlagsBit1(spawn_slot);
                 Player_SetTeam(spawn_slot, 4);
-                Ground_801C2D24(spawn_slot + (gp->xA - 1), &spawn_pos);
+                Ground_801C2D24(
+                    spawn_slot + fn_8016A4C8_spawn_offset(gp), &spawn_pos);
                 spawn_pos.y = Stage_GetCamBoundsTopOffset();
                 Player_80032768(spawn_slot, &spawn_pos);
                 Player_SetSlottype(spawn_slot, Gm_PKind_Cpu);
@@ -5225,7 +5234,8 @@ void fn_8016A4C8(void)
                     f32 model_scale = gp->x1C;
                     Player_SetModelScale(spawn_slot, model_scale);
                 }
-                Player_SetAttackRatio(spawn_slot, gp->x14);
+                Player_SetAttackRatio(spawn_slot,
+                                      fn_8016A4C8_attack_ratio(gp));
                 {
                     f32 defense_ratio = gp->x18;
                     Player_SetDefenseRatio(spawn_slot, defense_ratio);

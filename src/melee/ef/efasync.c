@@ -41,6 +41,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
     f32 f32_1;
     s32 u32_2;
     s32 u32_1;
+    u32 color;
     HSD_JObj* jobj_2;
     HSD_JObj* jobj_1;
     Vec3* va_vec3;
@@ -457,10 +458,11 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
             u32_1 = va_arg(vlist, u32);
             if ((u32) (u32_1 + 0xFFA00000) == 0x6060U) {
-                u32_2 = 0x808080;
+                color = 0x808080;
             } else {
-                u32_2 = 0xFFFFFF;
+                color = 0xFFFFFF;
             }
+            u32_2 = color;
 #if 0
                 {
                     int i;

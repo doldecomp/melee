@@ -213,9 +213,18 @@ static void order_data(void)
     (void) "!(jobj->flags & JOBJ_USE_QUATERNION)";
 }
 
-static inline HSD_Fog* un_8031FD18_LoadFog(void)
+static inline void un_8031FD18_SetupFog(void)
 {
-    return HSD_FogLoadDesc(un_804D6FE0->fogs->desc);
+    HSD_GObj* gobj;
+    HSD_Fog* fog;
+
+    gobj = GObj_Create(0xB, 3, 0);
+    fog = HSD_FogLoadDesc(un_804D6FE0->fogs->desc);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848, fog);
+    GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
+    HSD_GObj_SetupProc(gobj, fn_8031FCBC, 0);
+    un_804D6FF4 = fog->color;
+    un_804D6FF8 = 0;
 }
 
 static inline void un_8031FD18_SetupCamera(void)
@@ -295,7 +304,6 @@ void un_8031FD18_OnEnter(void* arg)
 {
     u8* input = arg;
     HSD_GObj* gobj;
-    HSD_Fog* fog;
     HSD_LObj* lobj;
     PAD_STACK(8);
 
@@ -323,13 +331,7 @@ void un_8031FD18_OnEnter(void* arg)
 
     un_8031FD18_SetupStand();
 
-    gobj = GObj_Create(0xB, 3, 0);
-    fog = un_8031FD18_LoadFog();
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848, fog);
-    GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
-    HSD_GObj_SetupProc(gobj, fn_8031FCBC, 0);
-    un_804D6FF4 = fog->color;
-    un_804D6FF8 = 0;
+    un_8031FD18_SetupFog();
 
     gobj = GObj_Create(0xB, 3, 0);
     lobj = lb_80011AC4(un_804D6FE0->lights);

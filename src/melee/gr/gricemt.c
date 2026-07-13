@@ -1177,7 +1177,6 @@ static inline void grIceMt_GetRandomTimer(s32* out)
 
 s32 fn_801F8E58(Ground_GObj* arg0, s32* out)
 {
-    s32 list[12];
     typedef struct IceMtTimerCursor {
         s16 pad[0x6E];
         s16 xDC;
@@ -1187,11 +1186,11 @@ s32 fn_801F8E58(Ground_GObj* arg0, s32* out)
     s32* p;
     s32 i;
     s32 max;
+    s32 list[12];
     s32 chosen;
 
+    timer_base = timer = arg0->user_data;
     p = &list[max = 0];
-    timer = arg0->user_data;
-    timer_base = timer;
     for (i = 0; i < 12; i++) {
         if (timer->xDC == 0 && (Stage_80225194() != 0xD4 || i >= 4)) {
             *p = i;

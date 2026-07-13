@@ -127,8 +127,8 @@ static bool inline link_fighter_compare(Fighter* fp)
 static inline void it_802A2568_inline(ItemLink* link, HSD_JObj* jobj,
                                       HSD_GObj* gobj, Vec3* pos)
 {
-    link->jobj = jobj;
     link->gobj = gobj;
+    link->jobj = jobj;
     link->vel = *pos;
     link->pos = *pos;
     link->x2C_b0 = 0;
@@ -209,9 +209,7 @@ HSD_JObj* it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
     it_link_attr_math(attr, arg2, arg8);
 
     prev_link = NULL;
-    link_idx = 0;
-
-    while (link_idx < attr->x2C) {
+    for (link_idx = 0; link_idx < attr->x2C; link_idx++) {
         link_gobj = GObj_Create(HSD_GOBJ_CLASS_ITEMLINK, 0xAU, 0U);
         if (link_gobj == NULL) {
             while (prev_link != NULL) {
@@ -268,7 +266,6 @@ HSD_JObj* it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
         }
         link->x1CC = -1;
         prev_link = link;
-        link_idx += 1;
     }
     arg0->xDD4_itemVar.linkhookshot.x0 = last_link;
     arg0->xDD4_itemVar.linkhookshot.x4 = first_link;

@@ -32,12 +32,14 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 {
     Fighter* fp;
     itSword_UnkBytes* params;
+    f32* distPtr;
     u32 n4;
     s32 numSubdiv;
     f32 cumDist[3];
     AfterimageVtx vtx_buf[151];
     f32 d2;
     s32 numVerts;
+    s32 remaining;
     s32 nextIdx;
 
     if (arg1 != 2) {
@@ -182,8 +184,6 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
             f32 interpFactor = 1.0f;
             f32 innerDiff = x20F8 - blendedInner;
             f32 outerDiff = x20FC - blendedOuter;
-            s32 remaining;
-            f32* distPtr;
             AfterimageVtx* vp;
 
             numVerts = 0;

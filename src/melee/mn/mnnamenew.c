@@ -496,6 +496,7 @@ s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
     s32 i;
     s32 j;
     GXColor* color_ptr;
+    GXColor* sp44_addr = &sp44;
 
     FORCE_PAD_STACK(16);
 
@@ -592,23 +593,20 @@ s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
     base_y = HSD_JObjGetTranslationY(key_jobj);
     y_range = -(HSD_JObjGetTranslationY(ref2) - base_y);
 
-    {
-        GXColor* sp44_addr = &sp44;
-        j = 0;
-        for (; j < 0x32; j++) {
-            font_x = text->font_size.x;
-            col_x = (f32) (9 - (j / 5)) * x_range;
-            HSD_SisLib_803A6B98(text, col_x / font_x,
-                                ((f32) (j % 5) * y_range) / text->font_size.y,
-                                str_table[j], font_x, col_x);
-            if (j == (s32) mn_804A04F0.hovered_selection) {
-                color_ptr = &sp48;
-            } else {
-                color_ptr = &sp4C;
-            }
-            sp44 = *color_ptr;
-            HSD_SisLib_803A74F0(text, j, sp44_addr);
+    j = 0;
+    for (; j < 0x32; j++) {
+        font_x = text->font_size.x;
+        col_x = (f32) (9 - (j / 5)) * x_range;
+        HSD_SisLib_803A6B98(text, col_x / font_x,
+                            ((f32) (j % 5) * y_range) / text->font_size.y,
+                            str_table[j], font_x, col_x);
+        if (j == (s32) mn_804A04F0.hovered_selection) {
+            color_ptr = &sp48;
+        } else {
+            color_ptr = &sp4C;
         }
+        sp44 = *color_ptr;
+        HSD_SisLib_803A74F0(text, j, sp44_addr);
     }
 
     return (s32) text;
@@ -1043,9 +1041,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
         return;
     }
 
-    buttons = mn_80229624((u32) mnNameNew_PortInUse);
-    ((s32*) &mn_804A04F0.buttons)[1] = buttons;
-    ((s32*) &mn_804A04F0.buttons)[0] = 0;
+    buttons = (mn_804A04F0.buttons = mn_80229624((u32) mnNameNew_PortInUse));
     occupied_slots = 0;
 
     if (buttons & 0x200) {
@@ -1747,7 +1743,7 @@ s32 mnNameNew_8023DA08(NameNewEntry* arg0)
         all_anims_done = 0;
     }
     frame = mn_8022EFD8(arg0->jobjs[4], anim);
-    end_frame = &anim->end_frame;
+    end_frame = &mnNameNew_803EDA58->end_frame;
     if (frame < mnNameNew_803EDA58->end_frame) {
         all_anims_done = 0;
     }
@@ -1769,9 +1765,8 @@ void fn_8023DAEC(HSD_GObj* arg0)
 
     PAD_STACK(8);
 
-    data = arg0->user_data;
     layout = (MnNameNewDataLayout*) mnNameNew_803EDA58;
-    if (data->key_text != NULL) {
+    if ((data = arg0->user_data)->key_text != NULL) {
         HSD_SisLib_803A5CC4(data->key_text);
         data->key_text = NULL;
     }
@@ -1811,14 +1806,15 @@ void fn_8023DBE8(HSD_GObj* arg0)
     HSD_JObj* jobj;
     HSD_JObj* parent;
     HSD_GObjProc* proc;
+    char unused[4];
     f32 frame;
-    GXColor sp28;
     GXColor normal_key_color;
+    GXColor highlighted_key_color;
     u8 cursor;
     u8 sel;
     s32 i;
 
-    FORCE_PAD_STACK(32);
+    PAD_STACK(28);
 
     data = arg0->user_data;
 
@@ -1890,9 +1886,10 @@ void fn_8023DBE8(HSD_GObj* arg0)
         HSD_JObjReqAnimAll(jobj, frame);
         HSD_JObjAnimAll(jobj);
         if ((u16) mn_804A04F0.hovered_selection < 0x32U) {
-            sp28 = mnNameNew_804D4F68;
+            highlighted_key_color = mnNameNew_804D4F68;
             HSD_SisLib_803A74F0(data->key_text,
-                                (s32) mn_804A04F0.hovered_selection, &sp28);
+                                (s32) mn_804A04F0.hovered_selection,
+                                &highlighted_key_color);
         }
         mnNameNew_8023B314(data, (s32) mn_804A04F0.hovered_selection);
         data->x1 = (u8) mn_804A04F0.hovered_selection;

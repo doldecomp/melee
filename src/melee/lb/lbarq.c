@@ -75,12 +75,14 @@ void lbArq_80014AC4(lbArqHandle* handle)
 void lbArq_80014BD0(u32 source, void* dest, size_t length,
                     lbArqCallback callback, void* callback_arg)
 {
+    u32 source_tmp;
+    lbArqNode* rp_tmp;
     lbArqGlobal* global = &lbArq_804316C0;
     lbArqNode* rp;
-    lbArqNode* tmp;
     lbArqNode** tail;
     BOOL intr;
     lbArqNode** free_head;
+    lbArqNode* tmp;
 
     PAD_STACK(16);
     DCInvalidateRange(dest, length);
@@ -101,8 +103,10 @@ void lbArq_80014BD0(u32 source, void* dest, size_t length,
     rp->next = NULL;
     rp->state = LB_ARQ_STATE_PENDING;
 
-    ARQPostRequest(&rp->arq, (u32) rp, 1, 0, source, (u32) dest, length,
-                   (ARQCallback) lbArq_80014AC4);
+    rp_tmp = rp;
+    source_tmp = source;
+    ARQPostRequest(&rp->arq, (u32) rp_tmp, 1, 0, source_tmp, (u32) dest,
+                   length, (ARQCallback) lbArq_80014AC4);
 
     if (rp->callback == NULL) {
         OSRestoreInterrupts(intr);

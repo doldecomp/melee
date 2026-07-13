@@ -84,52 +84,6 @@ void ftCo_800CE620(HSD_GObj* fighter_gobj)
     }
 }
 
-inline void ftCo_800CE650_inline(HSD_GObj* gobj, int frame, int interval)
-{
-    if (interval - 1 == frame % interval) {
-        ft_800892A0(gobj);
-        ft_80089824(gobj);
-    }
-}
-
-inline void ftCo_800CE650_inline2(HSD_GObj* gobj)
-{
-    Vec3 sp24;
-    Vec3 item_pos;
-    Fighter* fp = GET_FIGHTER(gobj);
-    it_80292EF8(fp->item_gobj, &item_pos);
-    ftCo_800CDE94(fp, &item_pos, &sp24);
-    if (!it_8026B594(fp->item_gobj)) {
-        it_80292F14(fp->item_gobj, &sp24, fp->facing_dir);
-    } else {
-        ftCommon_8007ECD4(fp, 1);
-    }
-    fp->mv.co.itemthrow.x8++;
-
-    ftCo_800CE650_inline(gobj, fp->mv.co.itemthrow.x8, p_ftCommonData->x5B4);
-}
-
-inline void ftCo_800CE650_inline3(HSD_GObj* gobj)
-{
-    Vec3 joint_pos;
-    Vec3 sp94;
-    Vec3 item_pos;
-    float sp90;
-    Fighter* fp = GET_FIGHTER(gobj);
-
-    if (it_8026B594(fp->item_gobj) == 0) {
-        sp90 = 0.0F;
-        lb_8000B1CC(fp->parts->joint, NULL, &joint_pos);
-        efSync_Spawn(0x3FF, gobj, &joint_pos, &fp->facing_dir, &sp90);
-        ft_PlaySFX(fp, 0xEE, 0x7F, 0x40);
-    } else {
-        it_80292EF8(fp->item_gobj, &item_pos);
-        ftCo_800CDE94(fp, &item_pos, &sp94);
-        efSync_Spawn(0x405, gobj, &sp94);
-        ft_PlaySFX(fp, 0xEF, 0x7F, 0x40);
-    }
-}
-
 static inline bool zero_throw_flag_b0(Fighter* fp)
 {
     if (fp->throw_flags_b0) {
@@ -142,65 +96,151 @@ static inline bool zero_throw_flag_b0(Fighter* fp)
 
 void ftCo_800CE650(HSD_GObj* gobj)
 {
-    Vec3 spC4;
-    Vec3 spB8;
-    f32 spB4;
+    Vec3 effect_pos;
+    Vec3 item_pos;
+    f32 effect_scale;
+    UNUSED u8 padA[8];
+    Vec3 item_pos_start;
+    Vec3 effect_pos_start;
+    f32 effect_scale_start;
+    Vec3 joint_pos_start;
+    Vec3 shot_item_pos_start;
+    Vec3 shot_pos_start;
+    UNUSED u8 padB[8];
+    Vec3 item_pos_repeat;
+    Vec3 effect_pos_repeat;
+    f32 effect_scale_repeat;
+    Vec3 joint_pos_repeat;
+    Vec3 shot_item_pos_repeat;
+    Vec3 shot_pos_repeat;
 
-    Fighter* temp_r3;
+    Fighter* fp;
+    int frame;
+    int interval;
 
-    PAD_STACK(0x0c);
-
-    temp_r3 = GET_FIGHTER(gobj);
-    if (temp_r3->item_gobj != NULL) {
-        if (!(temp_r3->input.held_inputs & HSD_PAD_A)) {
-            temp_r3->mv.co.itemthrow.xC = 1;
+    fp = GET_FIGHTER(gobj);
+    if (fp->item_gobj != NULL) {
+        if (!(fp->input.held_inputs & HSD_PAD_A)) {
+            fp->mv.co.itemthrow.xC = 1;
         }
-        if (temp_r3->mv.co.itemthrow.x10 < p_ftCommonData->x5B0) {
-            temp_r3->mv.co.itemthrow.x10 += 1.0F;
+        if (fp->mv.co.itemthrow.x10 < p_ftCommonData->x5B0) {
+            fp->mv.co.itemthrow.x10 += 1.0F;
         }
-        if (temp_r3->mv.co.itemthrow.x10 < p_ftCommonData->x5B0 &&
-            (temp_r3->input.x668 & HSD_PAD_A))
+        if (fp->mv.co.itemthrow.x10 < p_ftCommonData->x5B0 &&
+            (fp->input.x668 & HSD_PAD_A))
         {
-            temp_r3->mv.co.itemthrow.x10 = 0.0F;
+            fp->mv.co.itemthrow.x10 = 0.0F;
         }
-        if (zero_throw_flag_b0(temp_r3)) {
-            temp_r3->mv.co.itemthrow.x14 = 1;
+        if (zero_throw_flag_b0(fp)) {
+            fp->mv.co.itemthrow.x14 = 1;
 
-            ftCo_800CE650_inline3(gobj);
+            {
+                Fighter* fp = GET_FIGHTER(gobj);
 
-            ftCo_800CE650_inline2(gobj);
+                if (it_8026B594(fp->item_gobj) == 0) {
+                    effect_scale_start = 0.0F;
+                    lb_8000B1CC(fp->parts->joint, NULL, &joint_pos_start);
+                    efSync_Spawn(0x3FF, gobj, &joint_pos_start,
+                                 &fp->facing_dir, &effect_scale_start);
+                    ft_PlaySFX(fp, 0xEE, 0x7F, 0x40);
+                } else {
+                    it_80292EF8(fp->item_gobj, &item_pos_start);
+                    ftCo_800CDE94(fp, &item_pos_start, &effect_pos_start);
+                    efSync_Spawn(0x405, gobj, &effect_pos_start);
+                    ft_PlaySFX(fp, 0xEF, 0x7F, 0x40);
+                }
+            }
 
-            if (it_8026B594(temp_r3->item_gobj) == 0) {
-                spB4 = 0.0f;
-                lb_8000B1CC(temp_r3->parts->joint, NULL, &spC4);
-                efSync_Spawn(0x3FD, gobj, &spC4, &temp_r3->facing_dir, &spB4);
-                it_80292EF8(temp_r3->item_gobj, &spB8);
-                ftCo_800CDE94(temp_r3, &spB8, &spC4);
-                efSync_Spawn(0x3F3, gobj, &spC4);
-                ftCommon_8007EBAC(temp_r3, 1, 0);
+            {
+                Fighter* fp = GET_FIGHTER(gobj);
+
+                it_80292EF8(fp->item_gobj, &shot_item_pos_start);
+                ftCo_800CDE94(fp, &shot_item_pos_start, &shot_pos_start);
+                if (!it_8026B594(fp->item_gobj)) {
+                    it_80292F14(fp->item_gobj, &shot_pos_start,
+                                fp->facing_dir);
+                } else {
+                    ftCommon_8007ECD4(fp, 1);
+                }
+                fp->mv.co.itemthrow.x8++;
+
+                frame = fp->mv.co.itemthrow.x8;
+                interval = p_ftCommonData->x5B4;
+                if (interval - 1 == frame % interval) {
+                    ft_800892A0(gobj);
+                    ft_80089824(gobj);
+                }
+            }
+
+            if (it_8026B594(fp->item_gobj) == 0) {
+                effect_scale = 0.0f;
+                lb_8000B1CC(fp->parts->joint, NULL, &effect_pos);
+                efSync_Spawn(0x3FD, gobj, &effect_pos, &fp->facing_dir,
+                             &effect_scale);
+                it_80292EF8(fp->item_gobj, &item_pos);
+                ftCo_800CDE94(fp, &item_pos, &effect_pos);
+                efSync_Spawn(0x3F3, gobj, &effect_pos);
+                ftCommon_8007EBAC(fp, 1, 0);
             }
             ftAnim_SetAnimRate(gobj, 0.0f);
         }
-        if (temp_r3->mv.co.itemthrow.x14 == 1) {
-            temp_r3->mv.co.itemthrow.x4 -= 1.0f;
-            if (temp_r3->mv.ca.specialhi.vel.x <= 0.0f) {
-                temp_r3->mv.ca.specialhi.vel.x = p_ftCommonData->x5AC;
+        if (fp->mv.co.itemthrow.x14 == 1) {
+            fp->mv.co.itemthrow.x4 -= 1.0f;
+            if (fp->mv.ca.specialhi.vel.x <= 0.0f) {
+                fp->mv.ca.specialhi.vel.x = p_ftCommonData->x5AC;
 
-                ftCo_800CE650_inline3(gobj);
-            }
-            temp_r3->mv.co.itemthrow.facing_dir -= 1.0f;
-            if (temp_r3->mv.co.itemthrow.facing_dir <= 0.0f) {
-                temp_r3->mv.co.itemthrow.facing_dir = p_ftCommonData->x5A8;
+                {
+                    Fighter* fp = GET_FIGHTER(gobj);
 
-                ftCo_800CE650_inline2(gobj);
+                    if (it_8026B594(fp->item_gobj) == 0) {
+                        effect_scale_repeat = 0.0F;
+                        lb_8000B1CC(fp->parts->joint, NULL,
+                                    &joint_pos_repeat);
+                        efSync_Spawn(0x3FF, gobj, &joint_pos_repeat,
+                                     &fp->facing_dir, &effect_scale_repeat);
+                        ft_PlaySFX(fp, 0xEE, 0x7F, 0x40);
+                    } else {
+                        it_80292EF8(fp->item_gobj, &item_pos_repeat);
+                        ftCo_800CDE94(fp, &item_pos_repeat,
+                                     &effect_pos_repeat);
+                        efSync_Spawn(0x405, gobj, &effect_pos_repeat);
+                        ft_PlaySFX(fp, 0xEF, 0x7F, 0x40);
+                    }
+                }
             }
-            if (temp_r3->mv.co.itemthrow.x8 >= p_ftCommonData->x5A4 &&
-                temp_r3->mv.co.itemthrow.xC != 0)
+            fp->mv.co.itemthrow.facing_dir -= 1.0f;
+            if (fp->mv.co.itemthrow.facing_dir <= 0.0f) {
+                fp->mv.co.itemthrow.facing_dir = p_ftCommonData->x5A8;
+
+                {
+                    Fighter* fp = GET_FIGHTER(gobj);
+
+                    it_80292EF8(fp->item_gobj, &shot_item_pos_repeat);
+                    ftCo_800CDE94(fp, &shot_item_pos_repeat,
+                                 &shot_pos_repeat);
+                    if (!it_8026B594(fp->item_gobj)) {
+                        it_80292F14(fp->item_gobj, &shot_pos_repeat,
+                                    fp->facing_dir);
+                    } else {
+                        ftCommon_8007ECD4(fp, 1);
+                    }
+                    fp->mv.co.itemthrow.x8++;
+
+                    frame = fp->mv.co.itemthrow.x8;
+                    interval = p_ftCommonData->x5B4;
+                    if (interval - 1 == frame % interval) {
+                        ft_800892A0(gobj);
+                        ft_80089824(gobj);
+                    }
+                }
+            }
+            if (fp->mv.co.itemthrow.x8 >= p_ftCommonData->x5A4 &&
+                fp->mv.co.itemthrow.xC != 0)
             {
-                if (temp_r3->mv.co.itemthrow.x10 >= p_ftCommonData->x5B0) {
-                    temp_r3->mv.co.itemthrow.x14 = 0.0f;
+                if (fp->mv.co.itemthrow.x10 >= p_ftCommonData->x5B0) {
+                    fp->mv.co.itemthrow.x14 = 0.0f;
                     ftAnim_SetAnimRate(gobj, 1.0f);
-                    ftCommon_8007ECD4(temp_r3, 1);
+                    ftCommon_8007ECD4(fp, 1);
                 }
             }
         }

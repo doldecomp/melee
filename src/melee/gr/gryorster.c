@@ -217,16 +217,15 @@ static inline void grYorster_InitTrackElements(Ground* gp, HSD_GObj* gobj)
     }
 }
 
-static inline void grYorster_GetGround(HSD_GObj* gobj, Ground** gp)
+static inline Ground* grYorster_GetGround(HSD_GObj* gobj)
 {
-    *gp = gobj->user_data;
+    return gobj->user_data;
 }
 
 void grYorster_802022A4(HSD_GObj* gobj)
 {
-    Ground* gp;
+    Ground* gp = grYorster_GetGround(gobj);
 
-    grYorster_GetGround(gobj, &gp);
     grYorster_InitTrackElements(gp, gobj);
 }
 

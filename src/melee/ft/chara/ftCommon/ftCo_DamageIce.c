@@ -166,7 +166,10 @@ static inline void ftCo_DamageIce_StartJump(Fighter* fp)
     param = fp->x34_scale.y * *ice_size /
             p_ftCommonData->damageice_ice_size;
 
-    ftCo_SpawnEffect_x415(fp->gobj, effect_joint, &param);
+    {
+        u8 _[8] = { 0 };
+        ftCo_SpawnEffect_x415(fp->gobj, effect_joint, &param);
+    }
     fp->x2219_b0 = true;
     ftColl_8007B0C0(fp->gobj, Intangible);
 
@@ -214,7 +217,7 @@ void ftCo_DamageIce_Init(Fighter_GObj* gobj)
     UNUSED u8 pad0[4];
     Quaternion rot_x;
     Mtx rot_mtx_x;
-    UNUSED u8 pad1[20];
+    UNUSED u8 pad1[12];
 
     fp = GET_FIGHTER(gobj);
 

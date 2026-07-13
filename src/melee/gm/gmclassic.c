@@ -417,10 +417,14 @@ static gmClassicMatchup* gmClassic_801B2BA4(gmClassicMatchup* arg0, u8* arg1,
     gmClassicMatchup* count_entry;
     s32 cur_char;
     s32 target_char;
+    struct gmm_x0_528_t* main_data;
+    gm_803DDEC8Struct* temp_start;
     u8* order;
 
+    temp = arg2;
+    temp_start = temp;
     result = NULL;
-    target_char = (s8) gmMainLib_8015CDC8()->c_kind;
+    target_char = (s8) (main_data = gmMainLib_8015CDC8())->c_kind;
     order = arg1;
     outer = 0;
 
@@ -443,7 +447,7 @@ loop:
             goto next;
         }
 
-        for (temp = arg2; temp->x0 != 0xD; temp++) {
+        for (temp = temp_start; temp->x0 != 0xD; temp++) {
             for (k = 0; k < 3; k++) {
                 if (temp->xC != NULL && cur_char == temp->xC->x02[k]) {
                     goto next;
@@ -451,7 +455,7 @@ loop:
             }
         }
 
-        for (temp = arg2; temp->x0 != 0xD; temp++) {
+        for (temp = temp_start; temp->x0 != 0xD; temp++) {
             if (temp->xC != NULL) {
                 if (Stage_8022519C((InternalStageId) temp->xC->x00) ==
                     Stage_8022519C((InternalStageId) entry->x00))
@@ -742,9 +746,10 @@ void gmClassic_801B3500(GameScene* arg0)
 
     gc = &lbDvd_8001822C()->game_cache;
     lbDvd_80018C6C();
-    gc->entries[0].char_id = sd->x0D[0];
-    gc->entries[0].color = ad->x0.color;
-    count = 1;
+    count = 0;
+    gc->entries[count].char_id = sd->x0D[0];
+    gc->entries[count].color = ad->x0.color;
+    count++;
     lbDvd_80018254();
     lbDvd_80018C2C(0xC7);
     lbDvd_80017700(4);

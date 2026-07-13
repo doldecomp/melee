@@ -175,7 +175,7 @@ int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list)
     sp94[num++] = root;
     {
         HSD_TExp** p = sp94;
-        for (j = 0; j < num; j++, p++) {
+        for (j = 0; j < num; p++, j++) {
             HSD_TExp* tmp;
             HSD_ASSERT(0xF6, j<HSD_TEXP_MAX_NUM);
             tmp = *p;

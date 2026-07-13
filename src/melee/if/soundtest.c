@@ -101,11 +101,20 @@ struct un_803FA128_t {
     u8 x226;
     u8 x227;
 };
-/* 3FA258 */ struct un_803FA258_t {
+struct un_803FA258_t {
     int x0;
-    int x4[4];
-    int x14[4];
+    int x4;
+    int x8;
+    int xC;
+    int x10[4];
+    int x20_pad;
     int x24[4];
+};
+/* 3FA258 */ static int sound_test_settings[] = {
+    0, 0, 0x20, 0, 6, 8, 6, 6, 8, 0, 0, 3, 3,
+};
+
+/* 3FA28C */ struct un_803FA28C_t {
     int x34_pad;
     int x38[4];
     int x48[4];
@@ -140,12 +149,36 @@ struct un_803FA128_t {
     u8 _pad13C[0x8];
     u8 x144[0x44];
     s32 x188;
-} un_803FA258 = { 0 };
+} un_803FA28C = { 0 };
+
+struct un_803FA258_view {
+    u8 _pad0[0xF8];
+    int xF8;
+    int xFC;
+    int x100;
+    int x104;
+    int x108;
+    int x10C;
+    int x110;
+    int x114;
+    int x118;
+    int x11C;
+    int x120;
+    int x124;
+    int x128;
+    int x12C;
+    int x130;
+    u8 _pad134[4];
+    void* x138;
+    u8 _pad13C[8];
+    u8 x144[0x44];
+    s32 x188;
+};
+#define UN_803FA258 \
+    (*(struct un_803FA258_view*) sound_test_settings)
+
 /// Sound test state block at 3FA128: a 0x130-byte live-state area, the
-/// initialized rule defaults (retail .data bytes at 3FA258..3FA348 hold these
-/// non-zero defaults; the block is initialized data, not bss), and the
-/// 2-byte save-block offset at 3FA348. The block ends at 3FA34C so the saved
-/// byte there stays a separate object, mirroring the retail symbol extents.
+/// initialized rule defaults, and the 2-byte save-block offset at 3FA348.
 static struct SoundTestState {
     u8 state[0x130];
     struct un_803FA128_x130_t rules;
@@ -180,9 +213,7 @@ static struct SoundTestState {
     { 0 },
 };
 /// Lone saved-settings byte at 3FA34C; DATA forces it past MWCC's small-data
-/// threshold so it lands in .data next to the state block like retail
-/// (retail bytes 3FA34D..3FA34F are unnamed pad, so it must stay a separate
-/// 1-byte object rather than a member of the block above).
+/// threshold so it lands in .data next to the settings like retail.
 /* 3FA34C */ DATA static u8 sound_test_saved_byte[1] = { 0 };
 /* 3FA32C */ static u8 un_803FA32C;
 /* 3FA658 */ static u8 un_803FA658[0x290] = { 0 };
@@ -351,34 +382,18 @@ s32 un_802FF9DC(void)
         u8 pad0[0x18];
         s32* x18;
     }* d = (struct SmStData*) un_804D6DA8;
-    s32 i;
+    u32 i;
 
-    i = 0;
     un_804D6DB4 = 0;
-    if (i < un_804D6DB0) {
-        s32 count = un_804D6DB0;
-        s32 blocks = count >> 3;
-        if (blocks != 0) {
-            do {
-                un_804D6DB4 += d->x18[i++];
-                un_804D6DB4 += d->x18[i++];
-                un_804D6DB4 += d->x18[i++];
-                un_804D6DB4 += d->x18[i++];
-                un_804D6DB4 += d->x18[i++];
-                un_804D6DB4 += d->x18[i++];
-                un_804D6DB4 += d->x18[i++];
-                un_804D6DB4 += d->x18[i++];
-            } while (--blocks != 0);
-        }
-        count &= 7;
-        if (count != 0) {
-            do {
-                un_804D6DB4 += d->x18[i++];
-            } while (--count != 0);
-        }
+    for (i = 0; (s32) i < un_804D6DB0; i++) {
+        un_804D6DB4 += d->x18[i];
     }
-    un_803F9FA4.xF4 = (f32) un_804D6DB4;
-    un_803F9FA4.xF8 = (f32) (un_804D6DB4 + d->x18[un_804D6DB0]);
+    {
+        s32 sum = un_804D6DB4;
+        PAD_STACK(8);
+        un_803F9FA4.xF4 = (f32) sum;
+        un_803F9FA4.xF8 = (f32) (sum + d->x18[un_804D6DB0]);
+    }
     return 0;
 }
 
@@ -506,11 +521,11 @@ bool un_802FFEA4(bool update_scene)
 void un_802FFEE0(s32* arg0)
 {
 #define ST_MIN(a, b) ((a) < (b) ? (a) : (b))
-    u16 val = ST_MIN((u16) un_803FA258.x12C, 0x3E);
+    u16 val = ST_MIN((u16) UN_803FA258.x12C, 0x3E);
 #undef ST_MIN
 
     ((u16*) arg0)[0] = val;
-    ((u16*) arg0)[1] = (u16) un_803FA258.x130;
+    ((u16*) arg0)[1] = (u16) UN_803FA258.x130;
     arg0[1] = 0x98967F;
     arg0[2] = 0;
 }
@@ -594,13 +609,13 @@ bool un_803001DC(bool update_scene)
 
 int un_80300218(void)
 {
-    lbLang_SetSavedLanguage(un_803FA258.x0);
+    lbLang_SetSavedLanguage(((struct un_803FA258_t*) sound_test_settings)->x0);
     return 0;
 }
 
 int un_80300248(int arg0)
 {
-    if (un_803FA258.x4[0] && arg0 == 1) {
+    if (((struct un_803FA258_t*) sound_test_settings)->x4 && arg0 == 1) {
         lbAudioAx_80024030(1);
         gmMainLib_8015FB68();
     }
@@ -790,14 +805,14 @@ int un_80300724(int arg0)
 void un_80300758(int arg0)
 {
     if (arg0 == 1) {
-        un_802FFCD0(4, (u8*) &un_803FA258 + 0x10);
+        un_802FFCD0(4, ((struct un_803FA258_t*) sound_test_settings)->x10);
     }
 }
 
 void un_80300790(int arg0)
 {
     if (arg0 == 1) {
-        un_802FFCD0(4, (u8*) &un_803FA258 + 0x24);
+        un_802FFCD0(4, ((struct un_803FA258_t*) sound_test_settings)->x24);
     }
 }
 
@@ -923,31 +938,11 @@ bool un_80300AB8(bool update_scene)
 bool un_80300AF4(int arg0)
 {
     if (arg0 == 1) {
-        struct un_803FA258_t* data;
-        lbAudioAx_80024030(1);
-        data = &un_803FA258;
-        data->x4[1] = 0x3F;
-        data->x4[3] = 0xE;
-        data->x24[1] = 3;
-        data->x24[2] = 3;
-        data->x24[3] = 3;
-        gm_SetPendingScene(4);
-        gm_801A4B60();
-    }
-    return false;
-}
-
-/// @todo Find a solution without the pragma
-#pragma push
-#pragma global_optimizer off
-bool un_80300B58(int arg0)
-{
-    if (arg0 == 1) {
         lbAudioAx_80024030(1);
         {
-            struct un_803FA258_t* data = &un_803FA258;
-            data->x4[1] = 0x3B;
-            data->x4[3] = 0x2;
+            struct un_803FA258_t* data = (struct un_803FA258_t*) sound_test_settings;
+            data->x8 = 0x3F;
+            data->x10[0] = 0xE;
             data->x24[1] = 3;
             data->x24[2] = 3;
             data->x24[3] = 3;
@@ -957,7 +952,24 @@ bool un_80300B58(int arg0)
     }
     return false;
 }
-#pragma pop
+
+bool un_80300B58(int arg0)
+{
+    if (arg0 == 1) {
+        lbAudioAx_80024030(1);
+        {
+            struct un_803FA258_t* data = (struct un_803FA258_t*) sound_test_settings;
+            data->x8 = 0x3B;
+            data->x10[0] = 0x2;
+            data->x24[1] = 3;
+            data->x24[2] = 3;
+            data->x24[3] = 3;
+        }
+        gm_SetPendingScene(4);
+        gm_801A4B60();
+    }
+    return false;
+}
 
 bool un_80300BBC(bool update_scene)
 {
@@ -1602,25 +1614,25 @@ int un_80301B48(int arg0)
 void un_80301BA8(void* arg0)
 {
     u8* out = arg0;
-    *(s32*) (out + 0x0) = un_803FA258.x104;
-    *(s32*) (out + 0x4) = un_803FA258.x108;
-    out[0xA] = (u8) un_803FA258.x100;
-    out[0xB] = (u8) un_803FA258.x10C;
-    out[0xC] = (u8) un_803FA258.x11C;
+    *(s32*) (out + 0x0) = UN_803FA258.x104;
+    *(s32*) (out + 0x4) = UN_803FA258.x108;
+    out[0xA] = (u8) UN_803FA258.x100;
+    out[0xB] = (u8) UN_803FA258.x10C;
+    out[0xC] = (u8) UN_803FA258.x11C;
     out[0x8] = 0;
     out[0x9] = 0x78;
-    out[0xD] = (u8) un_803FA258.x110;
-    out[0x19] = (u8) un_803FA258.xF8;
-    out[0xE] = (u8) un_803FA258.x114;
-    out[0x1A] = (u8) un_803FA258.xF8;
-    out[0xF] = (u8) un_803FA258.x118;
-    out[0x1B] = (u8) un_803FA258.xF8;
-    out[0x10] = (u8) un_803FA258.x120;
-    out[0x1C] = (u8) un_803FA258.xFC;
-    out[0x11] = (u8) un_803FA258.x124;
-    out[0x1D] = (u8) un_803FA258.xFC;
-    out[0x12] = (u8) un_803FA258.x128;
-    out[0x1E] = (u8) un_803FA258.xFC;
+    out[0xD] = (u8) UN_803FA258.x110;
+    out[0x19] = (u8) UN_803FA258.xF8;
+    out[0xE] = (u8) UN_803FA258.x114;
+    out[0x1A] = (u8) UN_803FA258.xF8;
+    out[0xF] = (u8) UN_803FA258.x118;
+    out[0x1B] = (u8) UN_803FA258.xF8;
+    out[0x10] = (u8) UN_803FA258.x120;
+    out[0x1C] = (u8) UN_803FA258.xFC;
+    out[0x11] = (u8) UN_803FA258.x124;
+    out[0x1D] = (u8) UN_803FA258.xFC;
+    out[0x12] = (u8) UN_803FA258.x128;
+    out[0x1E] = (u8) UN_803FA258.xFC;
     out[0x13] = 0;
     out[0x14] = 0;
     out[0x15] = 0;
@@ -1631,7 +1643,7 @@ void un_80301BA8(void* arg0)
 
 void un_80301C64(un_80301C64_t* arg0)
 {
-    arg0->x0 = un_803FA258.x138;
+    arg0->x0 = UN_803FA258.x138;
     arg0->x4 = 0;
 }
 
@@ -1660,7 +1672,7 @@ void un_80301CE0(int arg0)
         gm_801A4B60();
         break;
     case 1:
-        un_802FFCD0(4, un_803FA258.x144);
+        un_802FFCD0(4, UN_803FA258.x144);
         break;
     }
 }
@@ -1680,7 +1692,7 @@ int un_80301D7C(int arg0)
 {
     if (arg0 == 1) {
         lbAudioAx_80024030(1);
-        gm_801BEB74(un_803FA258.x188 - 1);
+        gm_801BEB74(UN_803FA258.x188 - 1);
         gm_801A42F8(0x2B);
         gm_801A4B60();
     }

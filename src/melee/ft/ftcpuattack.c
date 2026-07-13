@@ -27,6 +27,72 @@
 #include <melee/mp/mplib.h>
 #include <melee/mp/types.h>
 
+static void sdata2_order(void)
+{
+    (void) 0.0f;
+    (void) 0.5;
+    (void) 0.0;
+    (void) 9.99999975e-06f;
+    (void) -9.99999975e-06f;
+    (void) 1000.0f;
+    (void) 3.0;
+    (void) 1.0;
+    (void) S32_TO_F32;
+    (void) 40.0f;
+    (void) 35.0f;
+    (void) 30.0f;
+    (void) 25.0f;
+    (void) 20.0f;
+    (void) 15.0f;
+    (void) 10.0f;
+    (void) 5.0f;
+    (void) 0.0500000007f;
+    (void) -10.0f;
+    (void) 10.0;
+    (void) 100.0f;
+    (void) 0.5f;
+    (void) 30.0;
+    (void) 0.25;
+    (void) 0.75;
+    (void) 5.0;
+    (void) 1000.0;
+    (void) 1.30899692f;
+    (void) 4.0f;
+    (void) 0.78539815731346607;
+    (void) 0.10000000000000001;
+    (void) 40.0;
+    (void) -0.087266461923718452;
+    (void) 0.087266461923718452;
+    (void) 22.0f;
+    (void) 62.0f;
+    (void) 102.0f;
+    (void) 58.0f;
+    (void) 57.0f;
+    (void) 27.0f;
+    (void) 53.0f;
+    (void) 16.0f;
+    (void) 60.0f;
+    (void) 32.0f;
+    (void) -25.0f;
+    (void) 25.0;
+    (void) -100.0f;
+    (void) 15.0;
+    (void) -0.69813169538974762;
+    (void) -0.87266461923718452;
+    (void) 53.0;
+    (void) 1.0471975430846214;
+    (void) 80.0;
+    (void) 1.3089969288557768;
+    (void) -0.78539815731346607;
+    (void) 60.0;
+    (void) -1.3089969288557768;
+    (void) 0.26179938577115536;
+    (void) -0.26179938577115536;
+    (void) 1.0f;
+    (void) 2.0;
+    (void) 3.0f;
+}
+
 typedef struct ftCo_AttackEntry {
     /* +00 */ s32 cmd;
     /* +04 */ s32 x04;
@@ -73,7 +139,7 @@ typedef struct ftCo_CollData {
 
 int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
 {
-    u8 operand_pad[24];
+    u8 operand_pad[16];
     ftCo_AttackEntry sp3C[32];
     ftCo_AttackEntry* list = arg2;
     ftCo_AttackEntry* sel;
@@ -93,6 +159,8 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
     f32 v;
     f32 sq;
     f32 scale;
+    f32 upper;
+    f32 lower;
     f32 diry;
     f32 fpX;
     f32 fpY;
@@ -225,9 +293,9 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
         dirx *= halfRange;
         diry *= halfRange;
         scale = fp->x34_scale.y;
-        (void) scale;
-        if (list->x14 * scale * halfRange > relPredY &&
-            list->x10 * scale * halfRange < relPredY + x568 &&
+        upper = list->x14 * scale * halfRange;
+        lower = list->x10 * scale * halfRange;
+        if (upper > relPredY && lower < relPredY + x568 &&
             dirx < relx + rangeF && diry > relx - rangeB)
         {
             if (cpu->xC8 != 0) {
@@ -323,6 +391,7 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
     cpu->x6C.y = 0.0f;
     cpu->x6C.x = 0.0f;
     halfRange = (f32) (0.5 * cpu->x570 + 0.5);
+    (void) halfRange;
     if (list == NULL) {
         return 0;
     }
@@ -483,8 +552,8 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
 
 int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
 {
-    u8 operand_pad[4];
     ftCo_AttackEntry sp34[32];
+    u8 operand_pad[4];
     ftCo_x50_t* x50 = arg1;
     ftCo_x50_attr* attrs;
     ftCo_AttackEntry* list = arg2;
@@ -1304,6 +1373,7 @@ void ftCo_800B77E8(Fighter* fp)
     ftCo_CollData c10;
     Fighter* cpu_target = cpu->x44;
     Fighter* target;
+    Fighter** target_pp;
     int can_attack;
     int charge;
     f32 x;
@@ -1324,27 +1394,32 @@ void ftCo_800B77E8(Fighter* fp)
                                          target->cur_pos.x, target->cur_pos.y))
         {
             can_attack = 1;
-        } else if (fp->facing_dir > 0.0) {
-            y = fp->cur_pos.y;
-            x = fp->cur_pos.x;
-            x = 22.0f + x;
-            if (ftCo_800A0FB0(&c1.p, &c1.line, &c1.flags, &c1.n, -1, -1, -1, x,
-                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
-            {
-                can_attack = 1;
-            } else {
-                can_attack = 0;
-            }
         } else {
-            y = fp->cur_pos.y;
-            x = fp->cur_pos.x - 22.0f;
-            if (ftCo_800A0FB0(&c1.p, &c1.line, &c1.flags, &c1.n, -1, -1, -1, x,
-                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
-            {
-                can_attack = 1;
-            } else {
+            do {
+                if (fp->facing_dir > 0.0) {
+                    y = fp->cur_pos.y;
+                    x = 22.0f;
+                    x = fp->cur_pos.x + x;
+                    if (ftCo_800A0FB0(&c1.p, &c1.line, &c1.flags, &c1.n, -1,
+                                      -1, -1, x, 5.0 + y, x, y - 1000.0,
+                                      0.0f) == 0)
+                    {
+                        can_attack = 1;
+                        break;
+                    }
+                } else {
+                    y = fp->cur_pos.y;
+                    x = fp->cur_pos.x - 22.0f;
+                    if (ftCo_800A0FB0(&c1.p, &c1.line, &c1.flags, &c1.n, -1,
+                                      -1, -1, x, 5.0 + y, x, y - 1000.0,
+                                      0.0f) == 0)
+                    {
+                        can_attack = 1;
+                        break;
+                    }
+                }
                 can_attack = 0;
-            }
+            } while (0);
         }
         if (can_attack != 0) {
             struct Fighter_x1A88_t* tmp = &fp->x1A88;
@@ -1363,27 +1438,32 @@ void ftCo_800B77E8(Fighter* fp)
                                          target->cur_pos.x, target->cur_pos.y))
         {
             can_attack = 1;
-        } else if (fp->facing_dir > 0.0) {
-            y = fp->cur_pos.y;
-            x = fp->cur_pos.x;
-            x += 62.0f;
-            if (ftCo_800A0FB0(&c2.p, &c2.line, &c2.flags, &c2.n, -1, -1, -1, x,
-                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
-            {
-                can_attack = 1;
-            } else {
-                can_attack = 0;
-            }
         } else {
-            y = fp->cur_pos.y;
-            x = fp->cur_pos.x - 62.0f;
-            if (ftCo_800A0FB0(&c2.p, &c2.line, &c2.flags, &c2.n, -1, -1, -1, x,
-                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
-            {
-                can_attack = 1;
-            } else {
+            do {
+                if (fp->facing_dir > 0.0) {
+                    y = fp->cur_pos.y;
+                    x = 62.0f;
+                    x = fp->cur_pos.x + x;
+                    if (ftCo_800A0FB0(&c2.p, &c2.line, &c2.flags, &c2.n, -1,
+                                      -1, -1, x, 5.0 + y, x, y - 1000.0,
+                                      0.0f) == 0)
+                    {
+                        can_attack = 1;
+                        break;
+                    }
+                } else {
+                    y = fp->cur_pos.y;
+                    x = fp->cur_pos.x - 62.0f;
+                    if (ftCo_800A0FB0(&c2.p, &c2.line, &c2.flags, &c2.n, -1,
+                                      -1, -1, x, 5.0 + y, x, y - 1000.0,
+                                      0.0f) == 0)
+                    {
+                        can_attack = 1;
+                        break;
+                    }
+                }
                 can_attack = 0;
-            }
+            } while (0);
         }
         if (can_attack != 0) {
             struct Fighter_x1A88_t* tmp = &fp->x1A88;
@@ -1396,33 +1476,38 @@ void ftCo_800B77E8(Fighter* fp)
         break;
     case FTKIND_CAPTAIN:
     case FTKIND_GANON:
-        target = fp->x1A88.x44;
+        target = *(target_pp = &fp->x1A88.x44);
         if (target != NULL && mpCheckAll(&c3.p, &c3.line, &c3.flags, &c3.n, -1,
                                          -1, fp->cur_pos.x, fp->cur_pos.y,
                                          target->cur_pos.x, target->cur_pos.y))
         {
             can_attack = 1;
-        } else if (fp->facing_dir > 0.0) {
-            y = fp->cur_pos.y;
-            x = fp->cur_pos.x;
-            x += 102.0f;
-            if (ftCo_800A0FB0(&c3.p, &c3.line, &c3.flags, &c3.n, -1, -1, -1, x,
-                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
-            {
-                can_attack = 1;
-            } else {
-                can_attack = 0;
-            }
         } else {
-            y = fp->cur_pos.y;
-            x = fp->cur_pos.x - 102.0f;
-            if (ftCo_800A0FB0(&c3.p, &c3.line, &c3.flags, &c3.n, -1, -1, -1, x,
-                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
-            {
-                can_attack = 1;
-            } else {
+            do {
+                if (fp->facing_dir > 0.0) {
+                    y = fp->cur_pos.y;
+                    x = 102.0f;
+                    x = fp->cur_pos.x + x;
+                    if (ftCo_800A0FB0(&c3.p, &c3.line, &c3.flags, &c3.n, -1,
+                                      -1, -1, x, 5.0 + y, x, y - 1000.0,
+                                      0.0f) == 0)
+                    {
+                        can_attack = 1;
+                        break;
+                    }
+                } else {
+                    y = fp->cur_pos.y;
+                    x = fp->cur_pos.x - 102.0f;
+                    if (ftCo_800A0FB0(&c3.p, &c3.line, &c3.flags, &c3.n, -1,
+                                      -1, -1, x, 5.0 + y, x, y - 1000.0,
+                                      0.0f) == 0)
+                    {
+                        can_attack = 1;
+                        break;
+                    }
+                }
                 can_attack = 0;
-            }
+            } while (0);
         }
         if (can_attack != 0) {
             struct Fighter_x1A88_t* tmp = &fp->x1A88;
@@ -1431,52 +1516,56 @@ void ftCo_800B77E8(Fighter* fp)
                 tmp->xEC++;
             }
         }
-        target = fp->x1A88.x44;
+        target = *target_pp;
         if (target != NULL && mpCheckAll(&c4.p, &c4.line, &c4.flags, &c4.n, -1,
                                          -1, fp->cur_pos.x, fp->cur_pos.y,
                                          target->cur_pos.x, target->cur_pos.y))
         {
             can_attack = 1;
-        } else if (fp->facing_dir > 0.0) {
-            y = fp->cur_pos.y;
-            x = fp->cur_pos.x;
-            x += 58.0f;
-            if (ftCo_800A0FB0(&c4.p, &c4.line, &c4.flags, &c4.n, -1, -1, -1, x,
-                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
-            {
-                can_attack = 1;
-            } else {
-                can_attack = 0;
-            }
         } else {
-            y = fp->cur_pos.y;
-            x = fp->cur_pos.x - 58.0f;
-            if (ftCo_800A0FB0(&c4.p, &c4.line, &c4.flags, &c4.n, -1, -1, -1, x,
-                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
-            {
-                can_attack = 1;
-            } else {
+            do {
+                if (fp->facing_dir > 0.0) {
+                    y = fp->cur_pos.y;
+                    x = 58.0f;
+                    x = fp->cur_pos.x + x;
+                    if (ftCo_800A0FB0(&c4.p, &c4.line, &c4.flags, &c4.n, -1,
+                                      -1, -1, x, 5.0 + y, x, y - 1000.0,
+                                      0.0f) == 0)
+                    {
+                        can_attack = 1;
+                        break;
+                    }
+                } else {
+                    y = fp->cur_pos.y;
+                    x = fp->cur_pos.x - 58.0f;
+                    if (ftCo_800A0FB0(&c4.p, &c4.line, &c4.flags, &c4.n, -1,
+                                      -1, -1, x, 5.0 + y, x, y - 1000.0,
+                                      0.0f) == 0)
+                    {
+                        can_attack = 1;
+                        break;
+                    }
+                }
                 can_attack = 0;
-            }
+            } while (0);
         }
         if (can_attack != 0) {
-            {
-                struct Fighter_x1A88_t* tmp = &fp->x1A88;
-                if (fp->x1A88.xEC < 8U) {
-                    tmp->xCC_array[tmp->xEC] = 0x1B;
-                    tmp->xEC++;
-                }
+            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            u8* xec;
+            if (*(xec = &fp->x1A88.xEC) < 8U) {
+                tmp->xCC_array[tmp->xEC] = 0x1B;
+                tmp->xEC++;
             }
             {
                 struct Fighter_x1A88_t* tmp = &fp->x1A88;
-                if (fp->x1A88.xEC < 8U) {
+                if (*xec < 8U) {
                     tmp->xCC_array[tmp->xEC] = 0x37;
                     tmp->xEC++;
                 }
             }
             {
                 struct Fighter_x1A88_t* tmp = &fp->x1A88;
-                if (fp->x1A88.xEC < 8U) {
+                if (*xec < 8U) {
                     tmp->xCC_array[tmp->xEC] = 0x38;
                     tmp->xEC++;
                     return;
@@ -1492,27 +1581,32 @@ void ftCo_800B77E8(Fighter* fp)
                                          target->cur_pos.x, target->cur_pos.y))
         {
             can_attack = 1;
-        } else if (fp->facing_dir > 0.0) {
-            y = fp->cur_pos.y;
-            x = fp->cur_pos.x;
-            x += 57.0f;
-            if (ftCo_800A0FB0(&c5.p, &c5.line, &c5.flags, &c5.n, -1, -1, -1, x,
-                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
-            {
-                can_attack = 1;
-            } else {
-                can_attack = 0;
-            }
         } else {
-            y = fp->cur_pos.y;
-            x = fp->cur_pos.x - 57.0f;
-            if (ftCo_800A0FB0(&c5.p, &c5.line, &c5.flags, &c5.n, -1, -1, -1, x,
-                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
-            {
-                can_attack = 1;
-            } else {
+            do {
+                if (fp->facing_dir > 0.0) {
+                    y = fp->cur_pos.y;
+                    x = 57.0f;
+                    x = fp->cur_pos.x + x;
+                    if (ftCo_800A0FB0(&c5.p, &c5.line, &c5.flags, &c5.n, -1,
+                                      -1, -1, x, 5.0 + y, x, y - 1000.0,
+                                      0.0f) == 0)
+                    {
+                        can_attack = 1;
+                        break;
+                    }
+                } else {
+                    y = fp->cur_pos.y;
+                    x = fp->cur_pos.x - 57.0f;
+                    if (ftCo_800A0FB0(&c5.p, &c5.line, &c5.flags, &c5.n, -1,
+                                      -1, -1, x, 5.0 + y, x, y - 1000.0,
+                                      0.0f) == 0)
+                    {
+                        can_attack = 1;
+                        break;
+                    }
+                }
                 can_attack = 0;
-            }
+            } while (0);
         }
         if (can_attack != 0) {
             struct Fighter_x1A88_t* tmp = &fp->x1A88;
@@ -1532,27 +1626,32 @@ void ftCo_800B77E8(Fighter* fp)
                            target->cur_pos.y))
             {
                 can_attack = 1;
-            } else if (fp->facing_dir > 0.0) {
-                y = fp->cur_pos.y;
-                x = fp->cur_pos.x;
-                x += 27.0f;
-                if (ftCo_800A0FB0(&c6.p, &c6.line, &c6.flags, &c6.n, -1, -1,
-                                  -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
-                {
-                    can_attack = 1;
-                } else {
-                    can_attack = 0;
-                }
             } else {
-                y = fp->cur_pos.y;
-                x = fp->cur_pos.x - 27.0f;
-                if (ftCo_800A0FB0(&c6.p, &c6.line, &c6.flags, &c6.n, -1, -1,
-                                  -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
-                {
-                    can_attack = 1;
-                } else {
+                do {
+                    if (fp->facing_dir > 0.0) {
+                        y = fp->cur_pos.y;
+                        x = 27.0f;
+                        x = fp->cur_pos.x + x;
+                        if (ftCo_800A0FB0(&c6.p, &c6.line, &c6.flags, &c6.n,
+                                          -1, -1, -1, x, 5.0 + y, x,
+                                          y - 1000.0, 0.0f) == 0)
+                        {
+                            can_attack = 1;
+                            break;
+                        }
+                    } else {
+                        y = fp->cur_pos.y;
+                        x = fp->cur_pos.x - 27.0f;
+                        if (ftCo_800A0FB0(&c6.p, &c6.line, &c6.flags, &c6.n,
+                                          -1, -1, -1, x, 5.0 + y, x,
+                                          y - 1000.0, 0.0f) == 0)
+                        {
+                            can_attack = 1;
+                            break;
+                        }
+                    }
                     can_attack = 0;
-                }
+                } while (0);
             }
             if (can_attack != 0) {
                 struct Fighter_x1A88_t* tmp = &fp->x1A88;
@@ -1562,7 +1661,7 @@ void ftCo_800B77E8(Fighter* fp)
                     return;
                 }
             }
-        } else if (!cpu->xFA_b2) {
+        } else if (!cpu->xFA_b5) {
             struct Fighter_x1A88_t* tmp = &fp->x1A88;
             if (fp->x1A88.xEC < 8U) {
                 tmp->xCC_array[tmp->xEC] = 0x26;
@@ -1580,27 +1679,32 @@ void ftCo_800B77E8(Fighter* fp)
                            target->cur_pos.y))
             {
                 can_attack = 1;
-            } else if (fp->facing_dir > 0.0) {
-                y = fp->cur_pos.y;
-                x = fp->cur_pos.x;
-                x += 53.0f;
-                if (ftCo_800A0FB0(&c7.p, &c7.line, &c7.flags, &c7.n, -1, -1,
-                                  -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
-                {
-                    can_attack = 1;
-                } else {
-                    can_attack = 0;
-                }
             } else {
-                y = fp->cur_pos.y;
-                x = fp->cur_pos.x - 53.0f;
-                if (ftCo_800A0FB0(&c7.p, &c7.line, &c7.flags, &c7.n, -1, -1,
-                                  -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
-                {
-                    can_attack = 1;
-                } else {
+                do {
+                    if (fp->facing_dir > 0.0) {
+                        y = fp->cur_pos.y;
+                        x = 53.0f;
+                        x = fp->cur_pos.x + x;
+                        if (ftCo_800A0FB0(&c7.p, &c7.line, &c7.flags, &c7.n,
+                                          -1, -1, -1, x, 5.0 + y, x,
+                                          y - 1000.0, 0.0f) == 0)
+                        {
+                            can_attack = 1;
+                            break;
+                        }
+                    } else {
+                        y = fp->cur_pos.y;
+                        x = fp->cur_pos.x - 53.0f;
+                        if (ftCo_800A0FB0(&c7.p, &c7.line, &c7.flags, &c7.n,
+                                          -1, -1, -1, x, 5.0 + y, x,
+                                          y - 1000.0, 0.0f) == 0)
+                        {
+                            can_attack = 1;
+                            break;
+                        }
+                    }
                     can_attack = 0;
-                }
+                } while (0);
             }
             if (can_attack != 0) {
                 struct Fighter_x1A88_t* tmp = &fp->x1A88;
@@ -1610,7 +1714,7 @@ void ftCo_800B77E8(Fighter* fp)
                     return;
                 }
             }
-        } else if (!cpu->xFA_b2) {
+        } else if (!cpu->xFA_b5) {
             struct Fighter_x1A88_t* tmp = &fp->x1A88;
             if (fp->x1A88.xEC < 8U) {
                 tmp->xCC_array[tmp->xEC] = 0x26;
@@ -1628,27 +1732,32 @@ void ftCo_800B77E8(Fighter* fp)
                            target->cur_pos.y))
             {
                 can_attack = 1;
-            } else if (fp->facing_dir > 0.0) {
-                y = fp->cur_pos.y;
-                x = fp->cur_pos.x;
-                x += 16.0f;
-                if (ftCo_800A0FB0(&c8.p, &c8.line, &c8.flags, &c8.n, -1, -1,
-                                  -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
-                {
-                    can_attack = 1;
-                } else {
-                    can_attack = 0;
-                }
             } else {
-                y = fp->cur_pos.y;
-                x = fp->cur_pos.x - 16.0f;
-                if (ftCo_800A0FB0(&c8.p, &c8.line, &c8.flags, &c8.n, -1, -1,
-                                  -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
-                {
-                    can_attack = 1;
-                } else {
+                do {
+                    if (fp->facing_dir > 0.0) {
+                        y = fp->cur_pos.y;
+                        x = 16.0f;
+                        x = fp->cur_pos.x + x;
+                        if (ftCo_800A0FB0(&c8.p, &c8.line, &c8.flags, &c8.n,
+                                          -1, -1, -1, x, 5.0 + y, x,
+                                          y - 1000.0, 0.0f) == 0)
+                        {
+                            can_attack = 1;
+                            break;
+                        }
+                    } else {
+                        y = fp->cur_pos.y;
+                        x = fp->cur_pos.x - 16.0f;
+                        if (ftCo_800A0FB0(&c8.p, &c8.line, &c8.flags, &c8.n,
+                                          -1, -1, -1, x, 5.0 + y, x,
+                                          y - 1000.0, 0.0f) == 0)
+                        {
+                            can_attack = 1;
+                            break;
+                        }
+                    }
                     can_attack = 0;
-                }
+                } while (0);
             }
             if (can_attack != 0) {
                 struct Fighter_x1A88_t* tmp = &fp->x1A88;
@@ -1658,7 +1767,7 @@ void ftCo_800B77E8(Fighter* fp)
                     return;
                 }
             }
-        } else if (!cpu->xFA_b2) {
+        } else if (!cpu->xFA_b5) {
             struct Fighter_x1A88_t* tmp = &fp->x1A88;
             if (fp->x1A88.xEC < 8U) {
                 tmp->xCC_array[tmp->xEC] = 0x26;
@@ -1674,27 +1783,32 @@ void ftCo_800B77E8(Fighter* fp)
                                          target->cur_pos.x, target->cur_pos.y))
         {
             can_attack = 1;
-        } else if (fp->facing_dir > 0.0) {
-            y = fp->cur_pos.y;
-            x = fp->cur_pos.x;
-            x += 60.0f;
-            if (ftCo_800A0FB0(&c9.p, &c9.line, &c9.flags, &c9.n, -1, -1, -1, x,
-                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
-            {
-                can_attack = 1;
-            } else {
-                can_attack = 0;
-            }
         } else {
-            y = fp->cur_pos.y;
-            x = fp->cur_pos.x - 60.0f;
-            if (ftCo_800A0FB0(&c9.p, &c9.line, &c9.flags, &c9.n, -1, -1, -1, x,
-                              5.0 + y, x, y - 1000.0, 0.0f) == 0)
-            {
-                can_attack = 1;
-            } else {
+            do {
+                if (fp->facing_dir > 0.0) {
+                    y = fp->cur_pos.y;
+                    x = 60.0f;
+                    x = fp->cur_pos.x + x;
+                    if (ftCo_800A0FB0(&c9.p, &c9.line, &c9.flags, &c9.n, -1,
+                                      -1, -1, x, 5.0 + y, x, y - 1000.0,
+                                      0.0f) == 0)
+                    {
+                        can_attack = 1;
+                        break;
+                    }
+                } else {
+                    y = fp->cur_pos.y;
+                    x = fp->cur_pos.x - 60.0f;
+                    if (ftCo_800A0FB0(&c9.p, &c9.line, &c9.flags, &c9.n, -1,
+                                      -1, -1, x, 5.0 + y, x, y - 1000.0,
+                                      0.0f) == 0)
+                    {
+                        can_attack = 1;
+                        break;
+                    }
+                }
                 can_attack = 0;
-            }
+            } while (0);
         }
         if (can_attack != 0) {
             struct Fighter_x1A88_t* tmp = &fp->x1A88;
@@ -1712,27 +1826,32 @@ void ftCo_800B77E8(Fighter* fp)
                                          target->cur_pos.x, target->cur_pos.y))
         {
             can_attack = 1;
-        } else if (fp->facing_dir > 0.0) {
-            y = fp->cur_pos.y;
-            x = fp->cur_pos.x;
-            x += 32.0f;
-            if (ftCo_800A0FB0(&c10.p, &c10.line, &c10.flags, &c10.n, -1, -1,
-                              -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
-            {
-                can_attack = 1;
-            } else {
-                can_attack = 0;
-            }
         } else {
-            y = fp->cur_pos.y;
-            x = fp->cur_pos.x - 32.0f;
-            if (ftCo_800A0FB0(&c10.p, &c10.line, &c10.flags, &c10.n, -1, -1,
-                              -1, x, 5.0 + y, x, y - 1000.0, 0.0f) == 0)
-            {
-                can_attack = 1;
-            } else {
+            do {
+                if (fp->facing_dir > 0.0) {
+                    y = fp->cur_pos.y;
+                    x = 32.0f;
+                    x = fp->cur_pos.x + x;
+                    if (ftCo_800A0FB0(&c10.p, &c10.line, &c10.flags, &c10.n,
+                                      -1, -1, -1, x, 5.0 + y, x, y - 1000.0,
+                                      0.0f) == 0)
+                    {
+                        can_attack = 1;
+                        break;
+                    }
+                } else {
+                    y = fp->cur_pos.y;
+                    x = fp->cur_pos.x - 32.0f;
+                    if (ftCo_800A0FB0(&c10.p, &c10.line, &c10.flags, &c10.n,
+                                      -1, -1, -1, x, 5.0 + y, x, y - 1000.0,
+                                      0.0f) == 0)
+                    {
+                        can_attack = 1;
+                        break;
+                    }
+                }
                 can_attack = 0;
-            }
+            } while (0);
         }
         if (can_attack != 0) {
             struct Fighter_x1A88_t* tmp = &fp->x1A88;
@@ -1744,7 +1863,7 @@ void ftCo_800B77E8(Fighter* fp)
         }
         break;
     case FTKIND_KIRBY:
-        if (fp->ground_or_air == GA_Air && !cpu->xFA_b2) {
+        if (fp->ground_or_air == GA_Air && !cpu->xFA_b5) {
             struct Fighter_x1A88_t* tmp = &fp->x1A88;
             if (fp->x1A88.xEC < 8U) {
                 tmp->xCC_array[tmp->xEC] = 0x26;
@@ -1762,16 +1881,15 @@ void ftCo_800B77E8(Fighter* fp)
                 }
             }
         } else {
-            {
-                struct Fighter_x1A88_t* tmp = &fp->x1A88;
-                if (fp->x1A88.xEC < 8U) {
-                    tmp->xCC_array[tmp->xEC] = 0x12;
-                    tmp->xEC++;
-                }
+            struct Fighter_x1A88_t* tmp = &fp->x1A88;
+            u8* xec;
+            if (*(xec = &fp->x1A88.xEC) < 8U) {
+                tmp->xCC_array[tmp->xEC] = 0x12;
+                tmp->xEC++;
             }
             if (fp->x34_scale.y < cpu_target->x34_scale.y) {
                 struct Fighter_x1A88_t* tmp = &fp->x1A88;
-                if (fp->x1A88.xEC < 8U) {
+                if (*xec < 8U) {
                     tmp->xCC_array[tmp->xEC] = 0x11;
                     tmp->xEC++;
                 }

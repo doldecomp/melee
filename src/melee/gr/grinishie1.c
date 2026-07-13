@@ -76,19 +76,6 @@ static inline s32 randi_between(s32 min, s32 max)
     return max;
 }
 
-static inline s32 randi_between_f32(f32 min_f, f32 max_f)
-{
-    s32 min = min_f;
-    s32 max = max_f;
-
-    if (max > min) {
-        max = min + test_random(max - min);
-    } else if (max < min) {
-        max += test_random(min - max);
-    }
-    return max;
-}
-
 static inline f32 fabsf_inline(f32 x)
 {
     return (x < 0.0f) ? -x : x;
@@ -530,20 +517,22 @@ void grInishie1_801FAD84(HSD_GObj* gobj)
 void grInishie1_801FB0AC(HSD_GObj* gobj, u32 index)
 {
     Ground* gp = gobj->user_data;
+    PAD_STACK(8);
+
     if (gp->gv.inishie1.blocks[index].status == 1) {
         grInishie1_801FBA34(gobj, gp->gv.inishie1.blocks[index].jobj2);
         gp->gv.inishie1.blocks[index].status = 0;
         grInishie1_801FBC4C(gobj, index);
 
         INISHIE1_XC6(gp) =
-            randi_between_f32(grI1_804D69F8->unk0, grI1_804D69F8->unk4);
+            rand_range(grI1_804D69F8->unk4, grI1_804D69F8->unk0);
     } else if (gp->gv.inishie1.blocks[index].status == 2) {
         grInishie1_801FBA34(gobj, gp->gv.inishie1.blocks[index].jobj2);
         gp->gv.inishie1.blocks[index].status = 0;
         grInishie1_801FBC4C(gobj, index);
 
         INISHIE1_XC8(gp) =
-            randi_between_f32(grI1_804D69F8->unk8, grI1_804D69F8->unkC);
+            rand_range(grI1_804D69F8->unkC, grI1_804D69F8->unk8);
     } else if (gp->gv.inishie1.blocks[index].status == 3) {
         grInishie1_801FBA34(gobj, gp->gv.inishie1.blocks[index].jobj2);
         gp->gv.inishie1.blocks[index].status = 0;
@@ -557,10 +546,10 @@ void grInishie1_801FB0AC(HSD_GObj* gobj, u32 index)
                 }
             }
             if (i == 0x13) {
-                INISHIE1_XC6(gp) = randi_between_f32(grI1_804D69F8->unk0,
-                                                     grI1_804D69F8->unk4);
-                INISHIE1_XC8(gp) = randi_between_f32(grI1_804D69F8->unk8,
-                                                     grI1_804D69F8->unkC);
+                INISHIE1_XC6(gp) =
+                    rand_range(grI1_804D69F8->unk4, grI1_804D69F8->unk0);
+                INISHIE1_XC8(gp) =
+                    rand_range(grI1_804D69F8->unkC, grI1_804D69F8->unk8);
             }
         }
 
@@ -818,6 +807,7 @@ static inline Ground* GET_GROUND2(HSD_GObj* gobj)
 void grInishie1_801FBCEC(HSD_GObj* gobj, u32 index)
 {
     Ground* gp = GET_GROUND2(gobj);
+    Vec3 item_spawn_offset;
     Vec3 effect_pos;
 
     gp->gv.inishie1.blocks[index].x2 = 0;
@@ -831,7 +821,6 @@ void grInishie1_801FBCEC(HSD_GObj* gobj, u32 index)
     {
         s16 status = gp->gv.inishie1.blocks[index].status;
         if (status == 1 || (u16) (status - 2) <= 1U) {
-            Vec3 item_spawn_offset;
             Vec3 item_vel;
 
             Ground_801C4A08(gp->gv.inishie1.blocks[index].hatena_gobj);

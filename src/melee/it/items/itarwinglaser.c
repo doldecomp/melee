@@ -1,5 +1,3 @@
-#include "itarwinglaser.h"
-
 #include <placeholder.h>
 #include <platform.h>
 
@@ -26,6 +24,8 @@ typedef struct ArwingLaserAttr {
     /* +4 */ f32 x4;
     /* +8 */ f32 x8;
 } ArwingLaserAttr;
+
+void it_802E7A4C(Item_GObj*);
 
 static void itArwinglaser_UnkMotion2_Anim(Item_GObj*);
 static void itArwinglaser_UnkMotion3_Anim(Item_GObj*);
@@ -237,8 +237,8 @@ Item_GObj* it_802E72E0(Item_GObj* parent, HSD_JObj* bone, s32 type, f32 scale,
     return new_gobj;
 }
 
-void it_802E7654(Item_GObj* owner, HSD_JObj* bone, Vec3* target, s32 type,
-                 s32 arg4, f32 scale)
+Item_GObj* it_802E7654(Item_GObj* owner, HSD_JObj* bone, Vec3* target,
+                       s32 type, s32 arg4, f32 scale)
 {
     SpawnItem spawn;
     Vec3 sp28;

@@ -245,9 +245,9 @@ void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3)
     i = HSD_Randi(arg1 + arg2 + arg3);
     if (i < arg1) {
         ItemKind kind;
+        kind = (ItemKind) attr->x10;
         count = attr->x14;
         (void) count;
-        kind = (ItemKind) attr->x10;
         if (attr->x10 == It_Kind_M_Ball && it_8026C704() == true) {
             i = HSD_Randi(arg2 + arg3);
             goto food_or_random;
@@ -309,8 +309,7 @@ void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3)
         } else {
             Vec3 vel;
             Vec3 pos;
-            count = HSD_Randi(2);
-            count += 3;
+            count = HSD_Randi(2) + 3;
             for (i = 0; i < count; i++) {
                 rand_kind = it_8026F3AC();
                 if (rand_kind != -1) {

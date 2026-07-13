@@ -1822,7 +1822,6 @@ inline void mnDiagram_FormatPopupNumber(char* buf, u32 val)
 void mnDiagram_CreatePopupTexts(void* arg0, s32 arg1, s32 arg2, s32 arg3)
 {
     mnDiagram_PopupData* data = ((HSD_GObj*) arg0)->user_data;
-    mnDiagram_AnimTable* tbl = GET_DIAGRAM_ANIM_TABLE();
     float new_var;
     Point3d pos;
     char buf[8];
@@ -1832,7 +1831,7 @@ void mnDiagram_CreatePopupTexts(void* arg0, s32 arg1, s32 arg2, s32 arg3)
     HSD_Text* text = HSD_SisLib_803A6754(0, 1);
     u8 sp[24];
     data->text[0] = text;
-    lb_8000B1CC(data->jobjs[8], &tbl->points[0], &pos);
+    lb_8000B1CC(data->jobjs[8], &mnDiagram_803EE728.points[0], &pos);
     text->font_size.x = 0.0521f;
     text->font_size.y = 0.0521f;
     {
@@ -1857,7 +1856,7 @@ void mnDiagram_CreatePopupTexts(void* arg0, s32 arg1, s32 arg2, s32 arg3)
 
             label_text = HSD_SisLib_803A6754(0, 1);
             data->text[2] = label_text;
-            lb_8000B1CC(data->jobjs[10], &tbl->points[2], &pos);
+            lb_8000B1CC(data->jobjs[10], &mnDiagram_803EE728.points[2], &pos);
             label_text->font_size.x = 0.035f;
             label_text->font_size.y = 0.05f;
             {
@@ -1877,7 +1876,8 @@ void mnDiagram_CreatePopupTexts(void* arg0, s32 arg1, s32 arg2, s32 arg3)
 
             label_text = HSD_SisLib_803A6754(0, 1);
             data->text[4] = label_text;
-            lb_8000B1CC(data->jobjs[2], &tbl->points[2], &pos);
+            lb_8000B1CC(data->jobjs[2],
+                        &GET_DIAGRAM_ANIM_TABLE()->points[2], &pos);
             label_text->font_size.x = 0.035f;
             label_text->font_size.y = 0.05f;
             {
@@ -1896,7 +1896,7 @@ void mnDiagram_CreatePopupTexts(void* arg0, s32 arg1, s32 arg2, s32 arg3)
     if ((arg3 == 0) || (arg1 != arg2)) {
         text = HSD_SisLib_803A6754(0, 1);
         data->text[1] = text;
-        lb_8000B1CC(data->jobjs[11], &tbl->points[1], &pos);
+        lb_8000B1CC(data->jobjs[11], &mnDiagram_803EE728.points[1], &pos);
         text->font_size.x = 0.0521f;
         text->font_size.y = 0.0521f;
         text->default_alignment = 1;
@@ -1921,7 +1921,7 @@ void mnDiagram_CreatePopupTexts(void* arg0, s32 arg1, s32 arg2, s32 arg3)
     if (arg1 == arg2) {
         text = HSD_SisLib_803A6754(0, 1);
         data->text[3] = text;
-        lb_8000B1CC(data->jobjs[13], &tbl->points[1], &pos);
+        lb_8000B1CC(data->jobjs[13], &mnDiagram_803EE728.points[1], &pos);
         text->font_size.x = 0.0521f;
         text->font_size.y = 0.0521f;
         text->default_alignment = 1;
@@ -1943,10 +1943,7 @@ void mnDiagram_CreatePopupTexts(void* arg0, s32 arg1, s32 arg2, s32 arg3)
     } else {
         text = HSD_SisLib_803A6754(0, 1);
         data->text[3] = text;
-        {
-            Point3d* point = &tbl->points[1];
-            lb_8000B1CC(data->jobjs[3], point, &pos);
-        }
+        lb_8000B1CC(data->jobjs[3], &mnDiagram_803EE728.points[1], &pos);
         text->font_size.x = 0.0521f;
         text->font_size.y = 0.0521f;
         text->default_alignment = 1;

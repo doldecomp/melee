@@ -279,9 +279,11 @@ void fn_80174468(s32 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
         /// Mode 2: special handling for pairs
         if ((entry_idx & 1) == 1 && entry_idx < list->count) {
             struct UnkResultPlayerData* tmp = lbl_8046DBE8.x94->x44C;
-            loop_n = entry_idx / 2 + 1;
+            loop_n = entry_idx / 2;
+            loop_i = 0;
+            loop_n++;
             loop_ptr = tmp[(u8) slot].x0;
-            for (loop_i = 0; loop_i < 256; loop_i++, loop_ptr++) {
+            for (; loop_i < 256; loop_ptr++, loop_i++) {
                 if (*loop_ptr != 0 && --loop_n == 0) {
                     break;
                 }
@@ -309,7 +311,7 @@ void fn_80174468(s32 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
                     (u8) slot * sizeof(struct UnkResultPlayerData);
                 loop_n = idx + 1;
                 loop_ptr = base + player_offset;
-                for (loop_i = 0; loop_i < 256; loop_i++, loop_ptr++) {
+                for (loop_i = 0; loop_i < 256; loop_ptr++, loop_i++) {
                     if (*loop_ptr != 0 && --loop_n == 0) {
                         break;
                     }
@@ -1136,25 +1138,26 @@ static const struct {
 
 void fn_80175DC8(HSD_GObj* gobj)
 {
-    HSD_JObj* spCC;
+    u8 _[16];
     HSD_JObj* sp108;
     HSD_JObj* sp104;
     HSD_JObj* sp100;
     HSD_JObj* spFC;
-    HSD_JObj* spF4;
-    HSD_JObj* spEC;
-    HSD_JObj* spE4;
-    HSD_JObj* spDC;
-    HSD_JObj* spD4;
-    HSD_JObj* spC4;
-    HSD_JObj* spBC;
-    HSD_JObj* spB4;
-    HSD_JObj* spAC;
-    HSD_JObj* spA4;
-    HSD_JObj* sp9C;
-    HSD_JObj* sp8C;
-    HSD_JObj* sp94;
-    HSD_JObj* sp84;
+    HSD_JObj* player_jobj0[2];
+    HSD_JObj* player_jobj1[2];
+    HSD_JObj* player_jobj2[2];
+    HSD_JObj* player_jobj3[2];
+    HSD_JObj* player_jobj5[2];
+    HSD_JObj* player_jobj4[2];
+    HSD_JObj* player_jobj6[2];
+    HSD_JObj* player_jobj7[2];
+    HSD_JObj* player_jobj8[2];
+    HSD_JObj* player_jobj9[2];
+    HSD_JObj* player_jobj10[2];
+    HSD_JObj* player_jobj11[2];
+    HSD_JObj* player_jobj12[2];
+    HSD_JObj* player_jobj13[2];
+    HSD_JObj* player_jobj14[2];
     Vec3 sp78;
     Point3d sp6C;
     Vec3 sp60;
@@ -1163,24 +1166,28 @@ void fn_80175DC8(HSD_GObj* gobj)
     Point3d sp3C;
     Vec3 sp30;
     Point3d sp24;
-    ResultsData* data;
-    ResultsData* data_iter;
-    DynamicModelDesc* model;
-    HSD_JObj* jobj;
     MatchEnd* me;
+    ResultsData* data_iter;
+    ResultsData* data;
     HSD_JObj* title_jobj;
-    HSD_Text* title_text;
     s32 i;
+    HSD_JObj** jobj_iter;
+    HSD_JObj* jobj;
+    HSD_Text* title_text;
+    s32 j;
 
     PAD_STACK(24);
 
     data = &lbl_8046DBE8;
     me = data->x94;
-    model = data->pnlsce->models[0];
-    jobj = HSD_JObjLoadJoint(model->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
-    GObj_SetupGXLink(gobj, fn_80175038, 11, 0);
-    lb_8000C07C(jobj, 0, model->anims, model->matanims, model->shapeanims);
+    {
+        DynamicModelDesc* model = data->pnlsce->models[0];
+        jobj = HSD_JObjLoadJoint(model->joint);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        GObj_SetupGXLink(gobj, fn_80175038, 11, 0);
+        lb_8000C07C(jobj, 0, model->anims, model->matanims,
+                    model->shapeanims);
+    }
     HSD_JObjReqAnimAll(jobj, 0.0F);
     HSD_JObjAnimAll(jobj);
 
@@ -1193,8 +1200,10 @@ void fn_80175DC8(HSD_GObj* gobj)
     lb_80011E24(jobj, &sp100, 0x69, -1);
     data->x28 = sp100;
 
-    for (i = 0; i < 6; i++) {
-        lb_80011E24(jobj, &data->x34[i], i + 0x62, -1);
+    i = 0;
+    jobj_iter = &data->x34[i];
+    for (; i < 6; i++, jobj_iter++) {
+        lb_80011E24(jobj, jobj_iter, i + 0x62, -1);
     }
 
     spFC = jobj;
@@ -1202,233 +1211,233 @@ void fn_80175DC8(HSD_GObj* gobj)
     data->x30 = spFC;
 
     data_iter = data;
-    for (i = 0; i < 4; i++) {
+    for (j = 0; j < 4; j++) {
         data_iter->player_data[0].x0_0 = 0;
-        switch (i) {
+        switch (j) {
         case 0:
-            lb_80011E24(jobj, &spF4, 0x42, -1);
+            lb_80011E24(jobj, player_jobj0, 0x42, -1);
             break;
         case 1:
-            lb_80011E24(jobj, &spF4, 0x43, -1);
+            lb_80011E24(jobj, player_jobj0, 0x43, -1);
             break;
         case 2:
-            lb_80011E24(jobj, &spF4, 0x44, -1);
+            lb_80011E24(jobj, player_jobj0, 0x44, -1);
             break;
         case 3:
-            lb_80011E24(jobj, &spF4, 0x45, -1);
+            lb_80011E24(jobj, player_jobj0, 0x45, -1);
             break;
         }
-        data_iter->player_data[0].jobjs[0] = spF4;
-        switch (i) {
+        data_iter->player_data[0].jobjs[0] = player_jobj0[0];
+        switch (j) {
         case 0:
-            lb_80011E24(jobj, &spEC, 0x1D, -1);
+            lb_80011E24(jobj, player_jobj1, 0x1D, -1);
             break;
         case 1:
-            lb_80011E24(jobj, &spEC, 0x25, -1);
+            lb_80011E24(jobj, player_jobj1, 0x25, -1);
             break;
         case 2:
-            lb_80011E24(jobj, &spEC, 0x2D, -1);
+            lb_80011E24(jobj, player_jobj1, 0x2D, -1);
             break;
         case 3:
-            lb_80011E24(jobj, &spEC, 0x35, -1);
+            lb_80011E24(jobj, player_jobj1, 0x35, -1);
             break;
         }
-        data_iter->player_data[0].jobjs[1] = spEC;
-        switch (i) {
+        data_iter->player_data[0].jobjs[1] = player_jobj1[0];
+        switch (j) {
         case 0:
-            lb_80011E24(jobj, &spE4, 0x1E, -1);
+            lb_80011E24(jobj, player_jobj2, 0x1E, -1);
             break;
         case 1:
-            lb_80011E24(jobj, &spE4, 0x26, -1);
+            lb_80011E24(jobj, player_jobj2, 0x26, -1);
             break;
         case 2:
-            lb_80011E24(jobj, &spE4, 0x2E, -1);
+            lb_80011E24(jobj, player_jobj2, 0x2E, -1);
             break;
         case 3:
-            lb_80011E24(jobj, &spE4, 0x36, -1);
+            lb_80011E24(jobj, player_jobj2, 0x36, -1);
             break;
         }
-        data_iter->player_data[0].jobjs[2] = spE4;
-        switch (i) {
+        data_iter->player_data[0].jobjs[2] = player_jobj2[0];
+        switch (j) {
         case 0:
-            lb_80011E24(jobj, &spDC, 0x3D, -1);
+            lb_80011E24(jobj, player_jobj3, 0x3D, -1);
             break;
         case 1:
-            lb_80011E24(jobj, &spDC, 0x3E, -1);
+            lb_80011E24(jobj, player_jobj3, 0x3E, -1);
             break;
         case 2:
-            lb_80011E24(jobj, &spDC, 0x3F, -1);
+            lb_80011E24(jobj, player_jobj3, 0x3F, -1);
             break;
         case 3:
-            lb_80011E24(jobj, &spDC, 0x40, -1);
+            lb_80011E24(jobj, player_jobj3, 0x40, -1);
             break;
         }
-        data_iter->player_data[0].jobjs[3] = spDC;
-        switch (i) {
+        data_iter->player_data[0].jobjs[3] = player_jobj3[0];
+        switch (j) {
         case 0:
-            lb_80011E24(jobj, &spD4, 0x21, -1);
+            lb_80011E24(jobj, player_jobj5, 0x21, -1);
             break;
         case 1:
-            lb_80011E24(jobj, &spD4, 0x29, -1);
+            lb_80011E24(jobj, player_jobj5, 0x29, -1);
             break;
         case 2:
-            lb_80011E24(jobj, &spD4, 0x31, -1);
+            lb_80011E24(jobj, player_jobj5, 0x31, -1);
             break;
         case 3:
-            lb_80011E24(jobj, &spD4, 0x39, -1);
+            lb_80011E24(jobj, player_jobj5, 0x39, -1);
             break;
         }
-        data_iter->player_data[0].jobjs[5] = spD4;
-        switch (i) {
+        data_iter->player_data[0].jobjs[5] = player_jobj5[0];
+        switch (j) {
         case 0:
-            lb_80011E24(jobj, &spCC, 0x46, -1);
+            lb_80011E24(jobj, player_jobj4, 0x46, -1);
             break;
         case 1:
-            lb_80011E24(jobj, &spCC, 0x49, -1);
+            lb_80011E24(jobj, player_jobj4, 0x49, -1);
             break;
         case 2:
-            lb_80011E24(jobj, &spCC, 0x4C, -1);
+            lb_80011E24(jobj, player_jobj4, 0x4C, -1);
             break;
         case 3:
-            lb_80011E24(jobj, &spCC, 0x4F, -1);
+            lb_80011E24(jobj, player_jobj4, 0x4F, -1);
             break;
         }
-        data_iter->player_data[0].jobjs[4] = spCC;
-        switch (i) {
+        data_iter->player_data[0].jobjs[4] = player_jobj4[0];
+        switch (j) {
         case 0:
-            lb_80011E24(jobj, &spC4, 0x52, -1);
+            lb_80011E24(jobj, player_jobj6, 0x52, -1);
             break;
         case 1:
-            lb_80011E24(jobj, &spC4, 0x53, -1);
+            lb_80011E24(jobj, player_jobj6, 0x53, -1);
             break;
         case 2:
-            lb_80011E24(jobj, &spC4, 0x54, -1);
+            lb_80011E24(jobj, player_jobj6, 0x54, -1);
             break;
         case 3:
-            lb_80011E24(jobj, &spC4, 0x55, -1);
+            lb_80011E24(jobj, player_jobj6, 0x55, -1);
             break;
         }
-        data_iter->player_data[0].jobjs[6] = spC4;
-        switch (i) {
+        data_iter->player_data[0].jobjs[6] = player_jobj6[0];
+        switch (j) {
         case 0:
-            lb_80011E24(jobj, &spBC, 0x19, -1);
+            lb_80011E24(jobj, player_jobj7, 0x19, -1);
             break;
         case 1:
-            lb_80011E24(jobj, &spBC, 0x1A, -1);
+            lb_80011E24(jobj, player_jobj7, 0x1A, -1);
             break;
         case 2:
-            lb_80011E24(jobj, &spBC, 0x1B, -1);
+            lb_80011E24(jobj, player_jobj7, 0x1B, -1);
             break;
         case 3:
-            lb_80011E24(jobj, &spBC, 0x1C, -1);
+            lb_80011E24(jobj, player_jobj7, 0x1C, -1);
             break;
         }
-        data_iter->player_data[0].jobjs[7] = spBC;
-        switch (i) {
+        data_iter->player_data[0].jobjs[7] = player_jobj7[0];
+        switch (j) {
         case 0:
-            lb_80011E24(jobj, &spB4, 0x6C, -1);
+            lb_80011E24(jobj, player_jobj8, 0x6C, -1);
             break;
         case 1:
-            lb_80011E24(jobj, &spB4, 0x6E, -1);
+            lb_80011E24(jobj, player_jobj8, 0x6E, -1);
             break;
         case 2:
-            lb_80011E24(jobj, &spB4, 0x70, -1);
+            lb_80011E24(jobj, player_jobj8, 0x70, -1);
             break;
         case 3:
-            lb_80011E24(jobj, &spB4, 0x72, -1);
+            lb_80011E24(jobj, player_jobj8, 0x72, -1);
             break;
         }
-        data_iter->player_data[0].jobjs[8] = spB4;
-        switch (i) {
+        data_iter->player_data[0].jobjs[8] = player_jobj8[0];
+        switch (j) {
         case 0:
-            lb_80011E24(jobj, &spAC, 0x6B, -1);
+            lb_80011E24(jobj, player_jobj9, 0x6B, -1);
             break;
         case 1:
-            lb_80011E24(jobj, &spAC, 0x6D, -1);
+            lb_80011E24(jobj, player_jobj9, 0x6D, -1);
             break;
         case 2:
-            lb_80011E24(jobj, &spAC, 0x6F, -1);
+            lb_80011E24(jobj, player_jobj9, 0x6F, -1);
             break;
         case 3:
-            lb_80011E24(jobj, &spAC, 0x71, -1);
+            lb_80011E24(jobj, player_jobj9, 0x71, -1);
             break;
         }
-        data_iter->player_data[0].jobjs[9] = spAC;
-        switch (i) {
+        data_iter->player_data[0].jobjs[9] = player_jobj9[0];
+        switch (j) {
         case 0:
-            lb_80011E24(jobj, &spA4, 0x23, -1);
+            lb_80011E24(jobj, player_jobj10, 0x23, -1);
             break;
         case 1:
-            lb_80011E24(jobj, &spA4, 0x2B, -1);
+            lb_80011E24(jobj, player_jobj10, 0x2B, -1);
             break;
         case 2:
-            lb_80011E24(jobj, &spA4, 0x33, -1);
+            lb_80011E24(jobj, player_jobj10, 0x33, -1);
             break;
         case 3:
-            lb_80011E24(jobj, &spA4, 0x3B, -1);
+            lb_80011E24(jobj, player_jobj10, 0x3B, -1);
             break;
         }
-        data_iter->player_data[0].jobjs[10] = spA4;
-        switch (i) {
+        data_iter->player_data[0].jobjs[10] = player_jobj10[0];
+        switch (j) {
         case 0:
-            lb_80011E24(jobj, &sp9C, 0x24, -1);
+            lb_80011E24(jobj, player_jobj11, 0x24, -1);
             break;
         case 1:
-            lb_80011E24(jobj, &sp9C, 0x2C, -1);
+            lb_80011E24(jobj, player_jobj11, 0x2C, -1);
             break;
         case 2:
-            lb_80011E24(jobj, &sp9C, 0x34, -1);
+            lb_80011E24(jobj, player_jobj11, 0x34, -1);
             break;
         case 3:
-            lb_80011E24(jobj, &sp9C, 0x3C, -1);
+            lb_80011E24(jobj, player_jobj11, 0x3C, -1);
             break;
         }
-        data_iter->player_data[0].jobjs[11] = sp9C;
-        switch (i) {
+        data_iter->player_data[0].jobjs[11] = player_jobj11[0];
+        switch (j) {
         case 0:
-            lb_80011E24(jobj, &sp94, 0x56, -1);
+            lb_80011E24(jobj, player_jobj12, 0x56, -1);
             break;
         case 1:
-            lb_80011E24(jobj, &sp94, 0x57, -1);
+            lb_80011E24(jobj, player_jobj12, 0x57, -1);
             break;
         case 2:
-            lb_80011E24(jobj, &sp94, 0x58, -1);
+            lb_80011E24(jobj, player_jobj12, 0x58, -1);
             break;
         case 3:
-            lb_80011E24(jobj, &sp94, 0x59, -1);
+            lb_80011E24(jobj, player_jobj12, 0x59, -1);
             break;
         }
-        data_iter->player_data[0].jobjs[12] = sp94;
-        switch (i) {
+        data_iter->player_data[0].jobjs[12] = player_jobj12[0];
+        switch (j) {
         case 0:
-            lb_80011E24(jobj, &sp8C, 0x5A, -1);
+            lb_80011E24(jobj, player_jobj13, 0x5A, -1);
             break;
         case 1:
-            lb_80011E24(jobj, &sp8C, 0x5B, -1);
+            lb_80011E24(jobj, player_jobj13, 0x5B, -1);
             break;
         case 2:
-            lb_80011E24(jobj, &sp8C, 0x5C, -1);
+            lb_80011E24(jobj, player_jobj13, 0x5C, -1);
             break;
         case 3:
-            lb_80011E24(jobj, &sp8C, 0x5D, -1);
+            lb_80011E24(jobj, player_jobj13, 0x5D, -1);
             break;
         }
-        data_iter->player_data[0].jobjs[13] = sp8C;
-        switch (i) {
+        data_iter->player_data[0].jobjs[13] = player_jobj13[0];
+        switch (j) {
         case 0:
-            lb_80011E24(jobj, &sp84, 0x5E, -1);
+            lb_80011E24(jobj, player_jobj14, 0x5E, -1);
             break;
         case 1:
-            lb_80011E24(jobj, &sp84, 0x5F, -1);
+            lb_80011E24(jobj, player_jobj14, 0x5F, -1);
             break;
         case 2:
-            lb_80011E24(jobj, &sp84, 0x60, -1);
+            lb_80011E24(jobj, player_jobj14, 0x60, -1);
             break;
         case 3:
-            lb_80011E24(jobj, &sp84, 0x61, -1);
+            lb_80011E24(jobj, player_jobj14, 0x61, -1);
             break;
         }
-        data_iter->player_data[0].jobjs[14] = sp84;
+        data_iter->player_data[0].jobjs[14] = player_jobj14[0];
         lb_8000B1CC(data_iter->player_data[0].jobjs[12], NULL,
                     &data_iter->player_data[0].stats_position);
         data_iter = (ResultsData*) ((struct ResultsPlayerData*) data_iter + 1);

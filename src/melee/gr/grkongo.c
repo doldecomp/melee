@@ -958,7 +958,7 @@ void grKongo_801D6AFC(void)
         } while (var_ctr_2 != 0);
     }
     {
-        volatile s32 var_ctr_3 = 3;
+        s32 var_ctr_3 = 3;
         _struct_grKg_803E188C_0x18* var_r3_3 = grKg_803E188C;
         f32 temp_f0;
         do {

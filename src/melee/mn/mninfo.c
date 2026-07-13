@@ -24,13 +24,6 @@
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sislib.h>
 
-typedef struct MnInfoTextCursor {
-    /* +00 */ u8 pad_x0[8];
-    /* +08 */ HSD_Text* left;
-    /* +0C */ u8 pad_xC[12];
-    /* +18 */ HSD_Text* right;
-} MnInfoTextCursor;
-
 typedef struct MnInfoDataLayout {
     AnimLoopSettings anim;
     u32 sis_ids[4];
@@ -275,9 +268,8 @@ void fn_80251FE4(void)
     s32 count;
     s32 i;
     s32 j;
-    MnInfoTextCursor* right;
-    MnInfoTextCursor* cursor_base;
-    MnInfoTextCursor* left;
+    MnInfoData* data2;
+    MnInfoData* data3;
     PAD_STACK(0x20);
 
     data = mnInfo_804D6C78->user_data;
@@ -299,21 +291,18 @@ void fn_80251FE4(void)
             data->scroll_idx -= 1;
             lbAudioAx_80024030(2);
             j = 0;
-            cursor_base = mnInfo_804D6C78->user_data;
-            left = cursor_base;
-            right = (MnInfoTextCursor*) &((HSD_Text**) cursor_base)[j];
+            data2 = mnInfo_804D6C78->user_data;
+            data3 = data2;
             do {
-                if (left->left != NULL) {
-                    HSD_SisLib_803A5CC4(right->left);
-                    left->left = NULL;
+                if (data2->left_column[j] != NULL) {
+                    HSD_SisLib_803A5CC4(data3->left_column[j]);
+                    data2->left_column[j] = NULL;
                 }
-                if (left->right != NULL) {
-                    HSD_SisLib_803A5CC4(right->right);
-                    left->right = NULL;
+                if (data2->right_column[j] != NULL) {
+                    HSD_SisLib_803A5CC4(data3->right_column[j]);
+                    data2->right_column[j] = NULL;
                 }
                 j++;
-                left = (MnInfoTextCursor*) ((u8*) left + 4);
-                right = (MnInfoTextCursor*) ((u8*) right + 4);
             } while (j < 4);
             gobj = mnInfo_804D6C78;
             trophy = &mnInfo_804A0968[data->scroll_idx];
@@ -338,21 +327,18 @@ void fn_80251FE4(void)
             lbAudioAx_80024030(2);
             data->scroll_idx += 1;
             j = 0;
-            cursor_base = mnInfo_804D6C78->user_data;
-            left = cursor_base;
-            right = (MnInfoTextCursor*) &((HSD_Text**) cursor_base)[j];
+            data2 = mnInfo_804D6C78->user_data;
+            data3 = data2;
             do {
-                if (left->left != NULL) {
-                    HSD_SisLib_803A5CC4(right->left);
-                    left->left = NULL;
+                if (data2->left_column[j] != NULL) {
+                    HSD_SisLib_803A5CC4(data3->left_column[j]);
+                    data2->left_column[j] = NULL;
                 }
-                if (left->right != NULL) {
-                    HSD_SisLib_803A5CC4(right->right);
-                    left->right = NULL;
+                if (data2->right_column[j] != NULL) {
+                    HSD_SisLib_803A5CC4(data3->right_column[j]);
+                    data2->right_column[j] = NULL;
                 }
                 j++;
-                left = (MnInfoTextCursor*) ((u8*) left + 4);
-                right = (MnInfoTextCursor*) ((u8*) right + 4);
             } while (j < 4);
             gobj = mnInfo_804D6C78;
             trophy = &mnInfo_804A0968[data->scroll_idx];

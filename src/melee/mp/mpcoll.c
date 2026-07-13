@@ -2333,25 +2333,29 @@ static inline void mpCollFloorInline(CollData* coll, bool ecb_unlocked,
     }
 }
 
-bool mpColl_80046904(CollData* coll, u32 flags)
+bool mpColl_80046904(CollData* arg0, u32 arg1)
 {                          // Physics_CollisionAirCallback
     bool prev_b6;          // r31
     int squeeze_flags;     // r30
     int old_squeeze_flags; // r29
     int squeeze_flags_all; // r28
-    int left_right_flags;  // r23
-    bool touched_floor;    // r22
+    u16 flags;             // r27
+    CollData* coll;        // r26
     bool platform_pass;    // r25
     bool stay_airborne;    // r24
+    int left_right_flags;  // r23
+    bool touched_floor;    // r22
     PAD_STACK(0x8);
 
-    platform_pass = flags & CollisionFlagAir_PlatformPassCallback;
-    stay_airborne = flags & CollisionFlagAir_StayAirborne;
+    coll = arg0;
+    platform_pass = arg1 & CollisionFlagAir_PlatformPassCallback;
+    stay_airborne = arg1 & CollisionFlagAir_StayAirborne;
 
     left_right_flags = 0;
     touched_floor = false;
     squeeze_flags_all = 0;
     squeeze_flags = 0;
+    flags = arg1;
 
     do {
         bool r3;

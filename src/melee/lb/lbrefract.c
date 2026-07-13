@@ -108,6 +108,16 @@ extern float MSL_TrigF_80400770[], MSL_TrigF_80400774[];
 #define NAN MSL_TrigF_80400770[0]
 #define INF MSL_TrigF_80400774[0]
 
+static inline void lbRefract_WriteTexCoord(lbRefract_CallbackData* cb, s32 row,
+                                           u32 col, f32 y, f32 x, f32 param0)
+{
+    u32 y_tex = (u32) (127.0f * (y * param0) + 128.0f);
+    ((void (*)(lbRefract_CallbackData*, s32, s32, s32, s32, u32,
+               u32)) cb->callback0)(
+        cb, row, col, 0, 0, y_tex,
+        (u32) (127.0f * (x * param0) + 128.0f));
+}
+
 void lbRefract_80021CE8(void* arg0, s32 arg1)
 {
     lbRefract_CallbackData* cb = arg0;
@@ -171,10 +181,7 @@ void lbRefract_80021CE8(void* arg0, s32 arg1)
             if (param0 > 1.0f) {
                 param0 = 1.0f;
             }
-            ((void (*)(lbRefract_CallbackData*, s32, s32, s32, s32, u32,
-                       u32)) cb->callback0)(
-                cb, row, col, 0, 0, (u32) (127.0f * (x * param0) + 128.0f),
-                (u32) (127.0f * (y * param0) + 128.0f));
+            lbRefract_WriteTexCoord(cb, row, col, y, x, param0);
             x += x_step;
         }
         y += y_step;
@@ -535,6 +542,13 @@ static void fn_80022650(void)
 
 s32 lbRefract_PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc)
 {
+    u8* display;
+    s32 offset;
+    s32 total_bytes;
+    u8* ptr;
+    s32 hi;
+    s32 count;
+    s32 copied;
     s32 ret;
     HSD_VtxDescList* verts;
     s32 last_offset;
@@ -627,33 +641,27 @@ s32 lbRefract_PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc)
         return 0;
     }
 
-    {
-        u8* display = pobj->display;
-        s32 offset = 0;
-        s32 total_bytes = pobj->n_display << 5;
-        while (offset < total_bytes) {
-            u8* ptr;
-            s32 hi;
-            s32 count;
-            s32 copied;
-            if ((display[offset++] & 0xF8) == 0) {
-                break;
-            }
-
-            ptr = display + offset;
-            hi = ptr[0];
-            count = (hi << 8) | ptr[1];
-            offset += 2;
-
-            for (copied = 0; copied < count; copied++) {
-                display[offset + last_offset] =
-                    display[offset + pnmtx_offset];
-                offset += stride;
-            }
+    display = pobj->display;
+    offset = 0;
+    total_bytes = pobj->n_display << 5;
+    while (offset < total_bytes) {
+        if ((display[offset++] & 0xF8) == 0) {
+            break;
         }
 
-        DCFlushRange(display, total_bytes);
+        ptr = display + offset;
+        hi = ptr[0];
+        count = (hi << 8) | ptr[1];
+        offset += 2;
+
+        for (copied = 0; copied < count; copied++) {
+            display[offset + last_offset] =
+                display[offset + pnmtx_offset];
+            offset += stride;
+        }
     }
+
+    DCFlushRange(display, total_bytes);
 
     return 0;
 }

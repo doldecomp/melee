@@ -1310,6 +1310,26 @@ static void* setImageFromPreloadedArchive(HSD_ImageDesc* image_desc,
     return image_ptr;
 }
 
+struct BlurChannels {
+    char file_name[0x10];
+    char image_assertion[0x18];
+    HSD_Chan color_channel;
+    HSD_Chan alpha_channel;
+};
+
+static char blur_source_file[] = "lbspdisplay.c";
+static char blur_image_assertion[] = "!image_desc->image_ptr";
+static HSD_Chan blur_color_channel = {
+    NULL,       GX_COLOR0,  0,          { 0 },         { 0xFF, 0xFF, 0xFF },
+    false,      GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_CLAMP,
+    GX_AF_NONE,
+};
+static HSD_Chan blur_alpha_channel = {
+    NULL,       GX_ALPHA0,  0,          { 0, 0, 0, 0xFF }, { 0, 0, 0, 0xFF },
+    false,      GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL,     GX_DF_CLAMP,
+    GX_AF_NONE,
+};
+
 HSD_ImageDesc* lb_800121FC(HSD_ImageDesc* image_desc, int width, int height,
                            GXTexFmt format, s16 entry_num)
 {
@@ -1477,6 +1497,11 @@ void lb_8001285C(HSD_ImageDesc* image_desc, GXTexObj* tex_obj)
 }
 
 static inline void consume_color(GXColor color)
+{
+}
+
+static inline void consume_blur_colors(GXColor color0, GXColor color1,
+                                       GXColor color2, GXColor color3)
 {
 }
 
@@ -1697,20 +1722,15 @@ void lb_80012994(HSD_ImageDesc* img, u8 alpha, u8 blur_size, f32 x, f32 y,
 
 #undef color_slot
 }
-static struct {
-    u8 pad_0[0x28];
-    HSD_Chan chan0;
-    HSD_Chan chan1;
-} lb_803BA1C0;
 
 void fn_80013614(HSD_GObj* gobj)
 {
     struct CameraBlurData* data = gobj->user_data;
-    u8 pad4[4];
+    struct BlurChannels* channels = (struct BlurChannels*) blur_source_file;
+    u8 pad8[8];
     Mtx view_mtx;
     Mtx view_mtx2;
     GXTexObj tex_obj;
-    PAD_STACK(4);
 
     if (data->x18 != NULL) {
         data->x18(gobj);
@@ -1743,8 +1763,8 @@ void fn_80013614(HSD_GObj* gobj)
         GXLoadPosMtxImm(view_mtx, 0);
         GXSetTexCoordGen2(GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0, 0x3C, 0,
                           0x7D);
-        HSD_SetupChannel(&lb_803BA1C0.chan0);
-        HSD_SetupChannel(&lb_803BA1C0.chan1);
+        HSD_SetupChannel(&channels->color_channel);
+        HSD_SetupChannel(&channels->alpha_channel);
         HSD_StateSetNumChans(1);
 
         if (alpha != 0.0f) {
@@ -1777,8 +1797,8 @@ void fn_80013614(HSD_GObj* gobj)
         GXLoadPosMtxImm(view_mtx2, 0);
         GXSetTexCoordGen2(GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0, 0x3C, 0,
                           0x7D);
-        HSD_SetupChannel(&lb_803BA1C0.chan0);
-        HSD_SetupChannel(&lb_803BA1C0.chan1);
+        HSD_SetupChannel(&channels->color_channel);
+        HSD_SetupChannel(&channels->alpha_channel);
         HSD_StateSetNumChans(1);
 
         width = image->width;
@@ -1786,10 +1806,12 @@ void fn_80013614(HSD_GObj* gobj)
         lb_8001285C(image, &tex_obj);
 
         {
-            GXColor color;
-            PAD_STACK(8);
-            color.a = x10;
-            GXSetTevColor(GX_TEVREG0, color);
+            ((GXColor*) &tex_obj)[-2].a = x10;
+            GXSetTevColor(GX_TEVREG0, ((GXColor*) &tex_obj)[-2]);
+            consume_blur_colors(((GXColor*) &tex_obj)[-2],
+                                ((GXColor*) &tex_obj)[-2],
+                                ((GXColor*) &tex_obj)[-2],
+                                ((GXColor*) &tex_obj)[-2]);
             GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
                             GX_CA_ZERO);
             GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO,

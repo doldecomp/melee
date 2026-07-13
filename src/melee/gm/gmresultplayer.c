@@ -1100,10 +1100,11 @@ int fn_80179854(void)
     MatchEnd* match_end = &disp->state.match_end;
     GXColor color1 = { 0, 0, 0, 0 };
     GXColor color2 = { 0, 0, 0, 0x3C };
+    HSD_GObj** gobjs = disp->gobjs;
     int i;
     int lookup;
 
-    PAD_STACK(8);
+    PAD_STACK(4);
 
     lbBgFlash_800206D4(&color1, &color2, 0x1E);
 
@@ -1117,7 +1118,7 @@ int fn_80179854(void)
         }
 
         if (match_end->player_standings[i].slot_type != 3 && lookup != 0) {
-            HSD_JObjSetTranslateX(GET_JOBJ(disp->gobjs[i]), -300.0f);
+            HSD_JObjSetTranslateX(GET_JOBJ(gobjs[i]), -300.0f);
             disp->state.x0_6 = 1;
         }
     }
@@ -1212,8 +1213,9 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
                 HSD_CObjEndCurrent();
 
                 if (!disp->state.x0_4) {
+                    HSD_ImageDesc* image_desc1 = disp->player_img1;
                     child_jobj->u.dobj->mobj->tobj->imagedesc =
-                        &disp->player_img1[arg2];
+                        &image_desc1[arg2];
                 }
 
                 if (disp->state.x0_4) {
@@ -1660,6 +1662,18 @@ static s32 lbl_804D3FF4 = 0x00060000;
 static s32 lbl_804D3FF8 = 0x000E000E;
 static s32 lbl_804D3FFC = 0x00060000;
 
+static inline struct MatchTeamData* fn_8017AA78_get_team_standings(
+    ResultsDisplayData* disp)
+{
+    return disp->state.match_end.team_standings;
+}
+
+static inline PackedS16x4* fn_8017AA78_get_score_entry(
+    int i, lbl_8046E3AC_t* state)
+{
+    return &state->score_tbl[i];
+}
+
 void fn_8017AA78(u8* arg0)
 {
     ResultsDisplayData* disp = &lbl_8046E1B0;
@@ -1732,16 +1746,17 @@ void fn_8017AA78(u8* arg0)
 
     {
         int i;
+        struct MatchTeamData* team_standings;
         for (i = 0; i < 4; i++) {
             state->player_flags[i] = 0;
             state->costume_override[i] = arg0[i];
             if (disp->state.match_end.result == 7) {
                 player_standings[i].is_big_loser = 1;
-                disp->state.match_end.team_standings[player_standings[i].team]
-                    .is_big_loser = 1;
+                team_standings = fn_8017AA78_get_team_standings(disp);
+                team_standings[player_standings[i].team].is_big_loser = 1;
             }
             state->x6[i] = 0;
-            state->score_tbl[i].w[0] = p5[0 + i * 2];
+            fn_8017AA78_get_score_entry(i, state)->w[0] = p5[0 + i * 2];
             state->score_tbl[i].w[1] = p5[1 + i * 2];
             state->x22F4[i][0] = p7[i * 2];
             state->x22F4[i][1] = p7[1 + i * 2];

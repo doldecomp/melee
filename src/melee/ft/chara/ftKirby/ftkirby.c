@@ -3363,11 +3363,11 @@ void ftKb_SpecialN_800EF040(Fighter_GObj* gobj, int arg1, KirbyHatStruct* hat)
 extern char ftKb_Init_804D3DAC[2];
 
 static inline void
-ftKb_SpecialN_800EF0E4_insert_joint_refs(s32 total_dobjs, HSD_Joint* root,
+ftKb_SpecialN_800EF0E4_insert_joint_refs(s32* total_dobjs, HSD_Joint* root,
                                          Fighter* fp, s32* part_off,
                                          HSD_Joint** sp28, s32* sp24)
 {
-    *part_off = total_dobjs << 4;
+    *part_off = (*total_dobjs = 0) << 4;
     *sp28 = root;
     *sp24 = 0;
     while (*sp28 != NULL) {
@@ -3413,8 +3413,7 @@ void ftKb_SpecialN_800EF0E4(Fighter_GObj* gobj, int arg1, u8* arg2)
     ftPartsPObjSetDefaultClass();
     costume_idx = fp->x619_costume_id * 2;
     root = ((HSD_Joint**) ftKb_Init_803C9FC8[arg1])[costume_idx];
-    total_dobjs = 0;
-    ftKb_SpecialN_800EF0E4_insert_joint_refs(total_dobjs, root, fp, &part_off,
+    ftKb_SpecialN_800EF0E4_insert_joint_refs(&total_dobjs, root, fp, &part_off,
                                              &sp28, &sp24);
     sp24 = 0;
     arg2_cur = arg2;
@@ -3531,8 +3530,7 @@ void ftKb_SpecialN_800EF438(Fighter_GObj* gobj, KirbyHatStruct* hat)
     if (root != NULL) {
         s32 byte_off;
         ftPartsPObjSetDefaultClass();
-        total_dobjs = 0;
-        ftKb_SpecialN_800EF0E4_insert_joint_refs(total_dobjs, root, fp,
+        ftKb_SpecialN_800EF0E4_insert_joint_refs(&total_dobjs, root, fp,
                                                  &part_off, &sp24, &sp20);
         sp20 = 0;
         byte_off = total_dobjs << 2;

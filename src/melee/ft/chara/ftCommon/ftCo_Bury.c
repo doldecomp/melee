@@ -83,12 +83,6 @@ void ftCo_800C08A0(Fighter_GObj* gobj, Fighter_GObj* arg1, DynamicsDesc* arg2,
     case BuryType_Unk2:
         break;
     case BuryType_Unk1:
-        /// @remarks The redundant @c hurt_idx re-assignment gives the
-        /// variable a second reaching definition, which keeps MWCC's
-        /// global optimizer from folding the constant index into the
-        /// @c hurt_capsules address math (retail keeps the full
-        /// mulli/addi/add sequence at 800C0938).
-        hurt_idx = 0;
         fp->bury_timer_1 = p_ftCommonData->bury_timer_unk1;
         break;
     case BuryType_Unk3:
@@ -97,7 +91,9 @@ void ftCo_800C08A0(Fighter_GObj* gobj, Fighter_GObj* arg1, DynamicsDesc* arg2,
     }
     if (ftColl_80076640(fp, &f) != 0) {
         struct SmallerHitCapsule hit;
-        p_hurt = &fp->hurt_capsules[hurt_idx];
+        hurt_idx *= sizeof(FighterHurtCapsule);
+        p_hurt = (FighterHurtCapsule*) ((intptr_t) fp + hurt_idx +
+                                        offsetof(Fighter, hurt_capsules));
         ftColl_80076764(3, arg3, arg1, arg2, fp, p_hurt);
         lbColl_80008D30((HitCapsule*) &hit, (lbColl_80008D30_arg1*) arg2);
         ftColl_80078384(fp, p_hurt, (HitCapsule*) &hit);
@@ -170,7 +166,9 @@ void ftCo_800C0A98(Fighter_GObj* gobj)
     }
 }
 
-void ftCo_800C0B20(Fighter_GObj* gobj)
+static inline void ftCo_800C0B20_inline(Fighter_GObj* gobj,
+                                        struct SmallerHitCapsule* hit,
+                                        float* f)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     DynamicsDesc* unk_anim;
@@ -190,25 +188,32 @@ void ftCo_800C0B20(Fighter_GObj* gobj)
             unk_anim = Ground_801C5700(coll->left_facing_wall.index);
         }
         if (unk_anim != NULL) {
-            u8 _[8];
-            struct SmallerHitCapsule hit;
             Fighter* fp = GET_FIGHTER(gobj);
-            float f = ftColl_800765F0(fp, NULL, unk_anim->count);
-            int hurt_idx = 0;
+            int hurt_idx;
+            *f = ftColl_800765F0(fp, NULL, unk_anim->count);
+            hurt_idx = 0;
             fp->bury_timer_1 = p_ftCommonData->bury_timer_unk1;
-            if (ftColl_80076640(fp, &f)) {
+            if (ftColl_80076640(fp, f)) {
                 FighterHurtCapsule* hurt;
                 hurt_idx *= sizeof(FighterHurtCapsule);
                 hurt = (FighterHurtCapsule*) ((intptr_t) fp + hurt_idx +
                                               offsetof(Fighter, hurt_capsules));
                 ftColl_80076764(3, 1, 0, unk_anim, fp, hurt);
-                lbColl_80008D30((HitCapsule*) &hit,
+                lbColl_80008D30((HitCapsule*) hit,
                                 (lbColl_80008D30_arg1*) unk_anim);
-                ftColl_80078384(fp, hurt, (HitCapsule*) &hit);
+                ftColl_80078384(fp, hurt, (HitCapsule*) hit);
             }
-            pl_8003EC30(fp->player_id, fp->x221F_b4, 1, f);
+            pl_8003EC30(fp->player_id, fp->x221F_b4, 1, *f);
         }
     }
+}
+
+void ftCo_800C0B20(Fighter_GObj* gobj)
+{
+    u8 _[8];
+    struct SmallerHitCapsule hit;
+    float f;
+    ftCo_800C0B20_inline(gobj, &hit, &f);
 }
 
 bool ftCo_800C0C88(ftCommon_BuryType arg0)

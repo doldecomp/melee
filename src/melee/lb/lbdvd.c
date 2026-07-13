@@ -428,6 +428,8 @@ static inline void inline2(void)
         { 2, "ItCo." },
         { 2, "IfAll" },
     };
+    u8 pad[0x18];
+    (void) pad;
     if (preloadCache.new_scene.is_heap_persistent[1]) {
         for (i = 0; i < ARRAY_SIZE(sp28); i++) {
             int temp_r29_2 = sp28[i].x8;
@@ -490,8 +492,6 @@ void lbDvd_80018254(void)
 
     preloadCache.new_scene = preloadCache.scene;
     inline_preload_entries(&enabled);
-
-    PAD_STACK(0x18);
 
     switch (preloadCache.persistent_heaps) {
     case 0:

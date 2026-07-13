@@ -231,8 +231,7 @@ void gmCamera_801A253C(s32* arg0, s32* arg1)
     s32* min_b = x30;
     s32 result = MIN(*min_a, *min_b);
 
-    gcus->x44 = result;
-    x44 = &gcus->x44;
+    *(x44 = &gcus->x44) = result;
     if (arg0 != NULL) {
         *arg0 = *x44;
     }
@@ -394,40 +393,37 @@ void gmCamera_801A292C(void)
     HSD_Text* text;
     s32 i;
     f32 new_var;
-    union {
-        gmCameraUnkStruct* gcus;
-        gmCameraUnkStruct4Ptrs* gcus4;
-    } unk;
+    gmCameraUnkStruct* unk;
     HSD_Text** texts;
     f32* tbl = gmCamera_803DA630;
-    PAD_STACK(8);
+    PAD_STACK(16);
 
-    unk.gcus = &gmCamera_VsCamUiState.gcus;
-    texts = unk.gcus->x48;
+    unk = &gmCamera_VsCamUiState.gcus;
+    texts = unk->x48;
 
-    gmCamera_801A26C0_FreeTexts(unk.gcus);
+    gmCamera_801A26C0_FreeTexts(unk);
 
     for (i = 0; i < 2; i++) {
-        unk.gcus4->x24[i].x0 = lbSnap_8001D40C(i);
-        if (!unk.gcus4->x24[i].x0) {
-            unk.gcus4->x24[i].x4 = lbSnap_8001D3B0(i);
-            unk.gcus4->x24[i].x8 = lbSnap_8001D3CC(i);
+        ((gmCameraUnkStruct4*) &unk->x24)[i].x0 = lbSnap_8001D40C(i);
+        if (!((gmCameraUnkStruct4*) &unk->x24)[i].x0) {
+            ((gmCameraUnkStruct4*) &unk->x24)[i].x4 = lbSnap_8001D3B0(i);
+            ((gmCameraUnkStruct4*) &unk->x24)[i].x8 = lbSnap_8001D3CC(i);
         }
     }
 
-    text = HSD_SisLib_803A5ACC(3, (s32) unk.gcus->x54, tbl[10], tbl[11], 0.0f,
+    text = HSD_SisLib_803A5ACC(3, (s32) unk->x54, tbl[10], tbl[11], 0.0f,
                                640.0f, 32.0f);
     new_var = tbl[9];
     text->font_size.x = tbl[8];
     text->font_size.y = new_var;
     text->default_kerning = 1;
-    gmCamera_801A2224(HSD_SisLib_803A6530(3, 3, 4), unk.gcus->x20);
+    gmCamera_801A2224(HSD_SisLib_803A6530(3, 3, 4), unk->x20);
     HSD_SisLib_803A660C(3, 3, 5);
     HSD_SisLib_803A6368(text, 3);
-    unk.gcus->x48[2] = text;
+    unk->x48[2] = text;
     texts[0] = gmCamera_801A2334(0, tbl[2], tbl[3], tbl[0], tbl[1]);
-    unk.gcus->x48[1] = gmCamera_801A2334(1, tbl[6], tbl[7], tbl[4], tbl[5]);
-    unk.gcus->x44 = MIN(unk.gcus->x30, unk.gcus->x40);
+    unk->x48[1] = gmCamera_801A2334(1, tbl[6], tbl[7], tbl[4], tbl[5]);
+    unk->x44 = MIN(unk->x30, unk->x40);
 }
 
 void gmCamera_801A2AAC(void)

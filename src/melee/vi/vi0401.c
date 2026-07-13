@@ -181,8 +181,8 @@ void un_8031D288_OnEnter(void* data)
         lb_80013B14((HSD_CameraDescPerspective*) un_804D6F48->cameras->desc);
     HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(cam_gobj, vi0401_8031D1B0, 0x5);
-    i = 0;
-    cam_gobj->gxlink_prios = 0x2A9;
+    ((u32*) &cam_gobj->gxlink_prios)[1] = 0x2A9;
+    ((u32*) &cam_gobj->gxlink_prios)[0] = i = 0;
     HSD_CObjAddAnim(cobj, un_804D6F48->cameras->anims[0]);
     HSD_CObjReqAnim(cobj, 0.0f);
     HSD_CObjAnim(cobj);

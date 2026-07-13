@@ -290,16 +290,16 @@ s32 mnName_SortNames(HSD_GObj* arg0)
     }
 
     {
-        i = 0;
-        do {
+        for (i = 0; i < 0x78; i++) {
             s32 j;
-            j = i + 1;
 
-            while (j < 0x78) {
+            for (j = i + 1; j < 0x78; j++) {
                 char* name1;
+                s32 index1;
                 idx1 = mnName_NameDisplayOrder[i];
                 idx2 = mnName_NameDisplayOrder[j];
-                name1 = GetPersistentNameData((s32) idx1)->namedata;
+                index1 = idx1;
+                name1 = GetPersistentNameData(index1)->namedata;
                 name2 = GetPersistentNameData((s32) idx2)->namedata;
                 {
                     bool e1, e2;
@@ -368,14 +368,12 @@ s32 mnName_SortNames(HSD_GObj* arg0)
                     }
                 }
                 if (result == 1) {
-                    u8 tmp = mnName_NameDisplayOrder[i];
+                    result = mnName_NameDisplayOrder[i];
                     mnName_NameDisplayOrder[i] = mnName_NameDisplayOrder[j];
-                    mnName_NameDisplayOrder[j] = tmp;
+                    mnName_NameDisplayOrder[j] = result;
                 }
-                j++;
             }
-            i++;
-        } while (i < 0x78);
+        }
     }
     return result;
 }
@@ -526,12 +524,48 @@ void mnName_ConfirmNameDeleteInput(HSD_GObj* arg0)
     }
 }
 
+static inline u8 mnName_GetHoveredName(void)
+{
+    s32 colCount;
+    u8 sel = (u8) mn_804A04F0.hovered_selection;
+    s32 col = ((HSD_GObj*) mnName_804D6BF8->user_data)->gx_link + (sel / 6);
+    s32 idx;
+
+    colCount = mnName_GetColumnCount();
+    if (colCount > 4 && col >= colCount) {
+        col -= colCount;
+    }
+    idx = (sel % 6) + (col * 6);
+    return mnName_NameDisplayOrder[idx];
+}
+
+static inline u8 mnName_CountValid(void)
+{
+    s32 isValid;
+    s32 i;
+    u8 count = 0;
+
+    for (i = 0; i < 0x78; i++) {
+        if ((s8) mnName_StringTerminator ==
+            (s8) GetPersistentNameData((s32) (u8) i)->namedata[0])
+        {
+            isValid = 0;
+        } else {
+            isValid = 1;
+        }
+        if (isValid != 0) {
+            count += 1;
+        }
+    }
+    return count;
+}
+
 void mnName_MainInput(HSD_GObj* arg0)
 {
     MnName_GObj* gobj2 = (MnName_GObj*) mnName_804D6BF8->user_data;
     u32 buttons = mn_80229624(4U);
     s32 isFull;
-    PAD_STACK(0x20);
+    PAD_STACK(0x18);
     mn_804A04F0.buttons = buttons;
 
     if (buttons & 0x20) {
@@ -553,28 +587,12 @@ void mnName_MainInput(HSD_GObj* arg0)
         case 24:
             isFull = GetNameCount_noinline() < 0x78 ? 0 : 1;
             if (isFull == 0) {
-                s32 isValid;
-                s32 i;
                 u8 count;
                 lbAudioAx_80024030(1);
                 mnName_80239878(1U, (HSD_GObj*) gobj2);
                 mnName_80238A04((HSD_GObj*) gobj2, 0x18U, 1U);
                 HSD_SisLib_803A5CC4(gobj2->text2);
-                count = 0;
-                i = 0;
-                do {
-                    if ((s8) mnName_StringTerminator ==
-                        (s8) GetPersistentNameData((s32) (u8) i)->namedata[0])
-                    {
-                        isValid = 0;
-                    } else {
-                        isValid = 1;
-                    }
-                    if (isValid != 0) {
-                        count += 1;
-                    }
-                    i += 1;
-                } while (i < 0x78);
+                count = mnName_CountValid();
                 mnNameNew_EnterFromMnName((void*) (s32) count);
                 return;
             }
@@ -607,18 +625,7 @@ void mnName_MainInput(HSD_GObj* arg0)
         default:
             if ((u16) mn_804A04F0.hovered_selection < 0x18U) {
                 s32 isValid;
-                s32 colCount;
-                u8 sel = (u8) mn_804A04F0.hovered_selection;
-                s32 col = ((HSD_GObj*) mnName_804D6BF8->user_data)->gx_link +
-                          (sel / 6);
-                u8 nameIdx;
-                s32 idx;
-                colCount = mnName_GetColumnCount();
-                if (colCount > 4 && col >= colCount) {
-                    col -= colCount;
-                }
-                idx = (sel % 6) + (col * 6);
-                nameIdx = mnName_NameDisplayOrder[idx];
+                u8 nameIdx = mnName_GetHoveredName();
                 if ((s8) mnName_StringTerminator ==
                     (s8) GetPersistentNameData((s32) nameIdx)->namedata[0])
                 {
@@ -900,27 +907,18 @@ static inline AnimLoopSettings*
 mnName_FindAnimLoop(AnimLoopSettings** tableBase, f32 frame)
 {
     s32 i;
-    AnimLoopSettings* table[6];
-    AnimLoopSettings* temp0;
-    AnimLoopSettings* temp1;
+    struct AnimTable {
+        AnimLoopSettings* entries[6];
+    } table;
     char* msg;
 
-    temp0 = tableBase[0];
-    temp1 = tableBase[1];
-    table[0] = temp0;
-    table[1] = temp1;
-    temp0 = tableBase[2];
-    temp1 = tableBase[3];
-    table[2] = temp0;
-    table[3] = temp1;
-    temp0 = tableBase[4];
-    temp1 = tableBase[5];
-    table[4] = temp0;
-    table[5] = temp1;
+    table = *(struct AnimTable*) tableBase;
 
     for (i = 0; i < 6; i++) {
-        if (table[i]->start_frame <= frame && frame <= table[i]->end_frame) {
-            return table[i];
+        if (table.entries[i]->start_frame <= frame &&
+            frame <= table.entries[i]->end_frame)
+        {
+            return table.entries[i];
         }
     }
 
@@ -933,6 +931,20 @@ inline f32 mnName_80238C34_inline(HSD_JObj* jobj)
     return mn_8022F298(jobj);
 }
 
+static inline void mnName_UpdateSelection(u8 do_update, HSD_GObj* gobj)
+{
+    MnName_GObj* data = (MnName_GObj*) gobj->user_data;
+
+    if (do_update) {
+        u32 prev = ((MnNameUserDataState*) data)->prev_selection;
+        if (prev != 0x1A || (u16) mn_804A04F0.hovered_selection >= 0x18U) {
+            mnName_80238AE0((HSD_GObj*) data, prev, 0);
+        }
+        mnName_80238AE0((HSD_GObj*) data,
+                        (u8) mn_804A04F0.hovered_selection, 1);
+    }
+}
+
 void mnName_80238C34(HSD_GObj* arg0, u8 arg1, u8 arg2)
 {
     AnimLoopSettings** tableBase = mnName_803B8510;
@@ -940,14 +952,7 @@ void mnName_80238C34(HSD_GObj* arg0, u8 arg1, u8 arg2)
     MnName_GObj* data = (MnName_GObj*) arg0->user_data;
     AnimLoopSettings* found;
 
-    if (arg1 != 0) {
-        u32 prev = ((MnNameUserDataState*) data)->prev_selection;
-        if (prev != 0x1A || (u16) mn_804A04F0.hovered_selection >= 0x18U) {
-            mnName_80238AE0((HSD_GObj*) data, prev, 0);
-        }
-        mnName_80238AE0((HSD_GObj*) data, (u8) mn_804A04F0.hovered_selection,
-                        1);
-    }
+    mnName_UpdateSelection(arg1, arg0);
 
     {
         HSD_JObj* jobj = mnName_802388D4_noinline((HSD_GObj*) data, 0x18U);
@@ -1202,8 +1207,8 @@ void mnName_80239A24(HSD_GObj* gobj)
     text_jobj0 = mnName_802388D4_noinline(gobj, 0U);
     lb_8000B1CC(text_jobj0, mnName_803ED618, &sp6C);
     text->pos_x = sp6C.x;
-    text->pos_y = -sp6C.y;
     text->pos_z = sp6C.z;
+    text->pos_y = -sp6C.y;
     text->font_size.x = 0.03f;
     text->font_size.y = 0.03f;
     text->text_color = *(GXColor*) &mnName_804D4BE4;

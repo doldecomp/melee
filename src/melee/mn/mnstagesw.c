@@ -149,16 +149,16 @@ static void mnStageSw_802359C8(MnStageSwData* data)
 
 static s32 mnStageSw_80235C58(u8 arg0)
 {
-    u8 upper_u8;
-    s32 next;
-    s32 upper;
-    s32 idx;
-    s32 curr;
     u8 end;
-    u8 lower;
-    u8 start;
+    s32 next;
+    u8 upper_u8;
     s32 found;
     s32 i;
+    u8 lower;
+    s32 idx;
+    u8 start;
+    s32 curr;
+    s32 upper;
 
     if (arg0 < 15) {
         lower = 0;
@@ -177,9 +177,9 @@ static s32 mnStageSw_80235C58(u8 arg0)
 
     curr = start;
     while (curr <= end) {
-        u8 stage_id = mnStageSw_803ED4C4[(u8) curr];
-
-        if (gm_80164430(gm_801641CC(stage_id)) != 0) {
+        if (gm_80164430(
+                gm_801641CC(mnStageSw_803ED4C4[(u8) curr])) != 0)
+        {
             found = 0;
             goto loop_done;
         }
@@ -284,6 +284,19 @@ static void mnStageSw_80235DC8(u8* user_data, s32 buttons)
     }
 }
 
+static inline s32 mnStageSw_CountEnabled(u8* user_data)
+{
+    s32 i;
+    s32 count = 0;
+
+    for (i = 0; i < NUM_STAGES; i++) {
+        if (user_data[i + 2] != 0) {
+            count += 1;
+        }
+    }
+    return count;
+}
+
 static void fn_80235F80(HSD_GObj* gobj)
 {
     s32 i;
@@ -296,7 +309,6 @@ static void fn_80235F80(HSD_GObj* gobj)
 
     user_data = mnStageSw_804D6BF0->user_data;
     buttons = mn_804A04F0.buttons = mn_80229624(4U);
-    count = 0;
     PAD_STACK(0x28);
     if (buttons & 0x20) {
         lbAudioAx_80024030(0);
@@ -313,11 +325,7 @@ static void fn_80235F80(HSD_GObj* gobj)
             if (mn_804A04F0.hovered_selection < NUM_STAGES) {
                 if (mn_804A04F0.confirmed_selection != 0) {
                     user_data = mnStageSw_804D6BF0->user_data;
-                    for (i = 0; i < NUM_STAGES; i++) {
-                        if (user_data[i + 2] != 0) {
-                            count++;
-                        }
-                    }
+                    count = mnStageSw_CountEnabled(user_data);
                     if (count > 1) {
                         enabled = 0;
                     } else {
@@ -578,7 +586,7 @@ static void fn_80236998(HSD_GObj* gobj)
             case 3: {
                 s32 i;
 
-                data->x1F = i = 0;
+                data->x1F = i = changed_menu;
                 mnStageSw_802359C8(data);
                 gobj = gobj->user_data;
                 HSD_JObjClearFlagsAll(((MnStageSwData*) gobj)->x2C,
@@ -666,6 +674,24 @@ static inline void mnStageSw_SetCursorPosition(MnStageSwData* user_data)
     HSD_JObjSetFlagsAll(user_data->x28, JOBJ_HIDDEN);
 }
 
+static inline void mnStageSw_InitUserData(MnStageSwData* user_data, s8 state)
+{
+    s32 i = 0;
+    u8* stage_ids = mnStageSw_803ED4C4;
+
+    user_data->x0 = mn_804A04F0.cur_menu;
+    user_data->x1 = (u8) mn_804A04F0.hovered_selection;
+    user_data->x1F = state;
+    for (; (u8) i < NUM_STAGES; i++) {
+        if (gm_80164430(gm_801641CC(mnStageSw_803ED4C4[(u8) i])) != 0) {
+            user_data->x2[(u8) i] = gm_80164250(*stage_ids);
+        } else {
+            user_data->x2[(u8) i] = 0;
+        }
+        stage_ids++;
+    }
+}
+
 static HSD_GObj* mnStageSw_80236CBC(s8 arg0)
 {
     HSD_GObj* gobj;
@@ -678,7 +704,6 @@ static HSD_GObj* mnStageSw_80236CBC(s8 arg0)
     u8 hovered;
     HSD_JObj* cursor_anim_jobj;
     s32 i;
-    u8* stage_ids;
 
     gobj = GObj_Create(6, 7, 0x80);
     mnStageSw_804D6BF0 = gobj;
@@ -697,19 +722,7 @@ static HSD_GObj* mnStageSw_80236CBC(s8 arg0)
     HSD_ASSERTREPORT(0x397, user_data, "Can't get user_data.\n");
     GObj_InitUserData(gobj, 0, HSD_Free, user_data);
 
-    i = 0;
-    user_data->x0 = mn_804A04F0.cur_menu;
-    user_data->x1 = (u8) mn_804A04F0.hovered_selection;
-    user_data->x1F = arg0;
-    stage_ids = mnStageSw_803ED4C4;
-    for (; (u8) i < NUM_STAGES; i++) {
-        if (gm_80164430(gm_801641CC(mnStageSw_803ED4C4[(u8) i])) != 0) {
-            user_data->x2[(u8) i] = gm_80164250(*stage_ids);
-        } else {
-            user_data->x2[(u8) i] = 0;
-        }
-        stage_ids++;
-    }
+    mnStageSw_InitUserData(user_data, arg0);
 
     for (i = 0; i < 6; i++) {
         lb_80011E24(jobj, &user_data->x20 + i, i, -1);

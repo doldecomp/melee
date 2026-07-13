@@ -720,9 +720,9 @@ void fn_8019D1BC(void)
             text->font_size.y = 0.1f;
         }
         tmd->x534[i]->default_alignment = 1;
-        HSD_SisLib_803A6B98(tmd->x534[i],
-                            10.0f * ((5.999997f * (f32) i) - 21.5f), -172.0f,
-                            name_buf[i], 1);
+        HSD_SisLib_803A6B98(
+            tmd->x534[i], 10.0f * ((5.999997f * (f32) i) - 21.5f), -172.0f,
+            name_buf[i], tmd->x534[i]->default_alignment);
         HSD_SisLib_803A7548(tmd->x534[i], 0, 0.35f, 0.6f);
     }
 }
@@ -1008,7 +1008,6 @@ void gm_8019E634(void)
     s32 hmn_cpu;
     MatchEnd* match_end;
     s32* results_base;
-    u64 audio_mask;
     s32 i, j;
 
     tmd = gm_8018F634();
@@ -1133,14 +1132,19 @@ void gm_8019E634(void)
     }
 
     /* Debug output + audio preloading */
-    audio_mask = 8;
-    for (i = 0; i < (s32) tmd->x30; i++) {
-        audio_mask |= lbAudioAx_80026E84((CharacterKind) tmd->x4B8[i].x1);
-        OSReport(lbl_803DA3D0, (s32) tmd->x4B8[i].x1);
+    {
+        u64 audio_mask;
+        s32 k;
+        audio_mask = 8;
+        for (k = 0; k < (s32) tmd->x30; k++) {
+            audio_mask |=
+                lbAudioAx_80026E84((CharacterKind) tmd->x4B8[k].x1);
+            OSReport(lbl_803DA3D0, (s32) tmd->x4B8[k].x1);
+        }
+        lbAudioAx_80026F2C(0x16);
+        lbAudioAx_8002702C(6, audio_mask);
+        lbAudioAx_80027168();
     }
-    lbAudioAx_80026F2C(0x16);
-    lbAudioAx_8002702C(6, audio_mask);
-    lbAudioAx_80027168();
 }
 
 void gm_8019ECAC_OnEnter(void* arg0)

@@ -934,8 +934,8 @@ void grZebes_801D99E0(HSD_GObj* gobj)
         gp->gv.zebes5.xC8 = 3;
         break;
     case 3: {
-        f32 vel;
         f32 accel;
+        f32 vel;
         f32 t;
         f32 delta;
         f32 abs_delta;
@@ -1554,7 +1554,8 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
     s32 result = 0;
 
     if (entry->x00_active != 0) {
-        HSD_GObj** gobjp = &grZe_8049F170[arg1].x20_gobj;
+        HSD_GObj** gobjp =
+            &((grZe_BubbleState*) grZe_8049F140)->bubbles[arg1].x20_gobj;
         HSD_GObj* gobj = *gobjp;
 
         if (gobj != NULL) {
@@ -1572,9 +1573,12 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
                 }
 
                 {
-                    f32* targetp = &grZe_8049F170[arg1].x1C;
+                    f32* targetp =
+                        &((grZe_BubbleState*) grZe_8049F140)->bubbles[arg1].x1C;
                     f32 speed = grZe_804D6990->x68;
-                    f32* sizep = &grZe_8049F170[arg1].x18_size;
+                    f32* sizep =
+                        &((grZe_BubbleState*) grZe_8049F140)->bubbles[arg1]
+                             .x18_size;
                     f32 target = *targetp;
                     f32 current = *sizep;
                     f32 diff = target - current;
@@ -1588,7 +1592,9 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
                     }
 
                     {
-                        HSD_JObj** jobjp = &grZe_8049F170[arg1].x04;
+                        HSD_JObj** jobjp =
+                            &((grZe_BubbleState*) grZe_8049F140)->bubbles[arg1]
+                                 .x04;
 
                         if (*jobjp != NULL &&
                             grAnime_801C83D0(*gobjp, 0, 7) != 0)
@@ -2094,11 +2100,15 @@ s32 grZebes_801DBB60(HSD_GObj* yaku)
                     } else if (t > 1.0f) {
                         f32 ex = bx - x2;
                         f32 ey = by - y2;
-                        closest_dist = ex * ex + ey * ey;
+                        f32 ex2 = ex * ex;
+                        f32 ey2 = ey * ey;
+                        closest_dist = ex2 + ey2;
                     } else {
                         f32 cx = (dx * t + x1) - bx;
                         f32 cy = (dy * t + y1) - by;
-                        closest_dist = cx * cx + cy * cy;
+                        f32 cx2 = cx * cx;
+                        f32 cy2 = cy * cy;
+                        closest_dist = cx2 + cy2;
                     }
 
                     closest_dist = sqrtf(closest_dist);
@@ -2110,7 +2120,9 @@ s32 grZebes_801DBB60(HSD_GObj* yaku)
                             if (t < 0.5f) {
                                 f32 dpx2 = bp->x08_x - x1;
                                 f32 dpy2 = bp->x0C_y - y1;
-                                f32 dist2 = dpx2 * dpx2 + dpy2 * dpy2;
+                                f32 dpx_sq = dpx2 * dpx2;
+                                f32 dpy_sq = dpy2 * dpy2;
+                                f32 dist2 = dpx_sq + dpy_sq;
                                 f32 new_width;
                                 dist2 = sqrtf(dist2);
                                 {
@@ -2128,7 +2140,9 @@ s32 grZebes_801DBB60(HSD_GObj* yaku)
                                 {
                                     f32 ddy = y1 - y2;
                                     f32 ddx = x1 - x2;
-                                    f32 dist3 = ddx * ddx + ddy * ddy;
+                                    f32 ddx_sq = ddx * ddx;
+                                    f32 ddy_sq = ddy * ddy;
+                                    f32 dist3 = ddx_sq + ddy_sq;
                                     f32 expand;
                                     dist3 = sqrtf(dist3);
                                     expand = new_width - width;
@@ -2142,7 +2156,9 @@ s32 grZebes_801DBB60(HSD_GObj* yaku)
                             } else {
                                 f32 dpx2 = bp->x08_x - x2;
                                 f32 dpy2 = bp->x0C_y - y2;
-                                f32 dist2 = dpx2 * dpx2 + dpy2 * dpy2;
+                                f32 dpx_sq = dpx2 * dpx2;
+                                f32 dpy_sq = dpy2 * dpy2;
+                                f32 dist2 = dpx_sq + dpy_sq;
                                 f32 new_width;
                                 dist2 = sqrtf(dist2);
                                 {
@@ -2160,7 +2176,9 @@ s32 grZebes_801DBB60(HSD_GObj* yaku)
                                 {
                                     f32 ddy = y2 - y1;
                                     f32 ddx = x2 - x1;
-                                    f32 dist3 = ddx * ddx + ddy * ddy;
+                                    f32 ddx_sq = ddx * ddx;
+                                    f32 ddy_sq = ddy * ddy;
+                                    f32 dist3 = ddx_sq + ddy_sq;
                                     f32 expand;
                                     dist3 = sqrtf(dist3);
                                     expand = new_width - width;

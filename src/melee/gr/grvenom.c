@@ -96,9 +96,14 @@ typedef struct grVe_Data {
 /// Collision link points consumed via #StageData.x2C (see
 /// #Ground_801C2FE0): each entry is (coll line, map id, unused).
 /// Data ownership: retail .data of this TU starts here (0x803E5348);
-/// tail entries are the zero padding observed in the reference object.
-static S16Vec3 grVe_CollLinks[9] = {
-    { 0, 5, 0 }, { 1, 5, 0 }, { 2, 9, 0 }, { 4, 10, 0 }, { 3, 13, 0 },
+/// tail entries and padding are the zeroes observed in the reference object.
+static struct {
+    S16Vec3 links[9];
+    s16 padding;
+} grVe_CollLinks = {
+    {
+        { 0, 5, 0 }, { 1, 5, 0 }, { 2, 9, 0 }, { 4, 10, 0 }, { 3, 13, 0 },
+    },
 };
 
 /// Per-Arwing group indices into #grVe_ArwingJoints (cf. Corneria's
@@ -232,7 +237,7 @@ StageData grVe_StageData = {
     grVenom_80206D74,
     grVenom_80206D7C,
     0x00000001,
-    grVe_CollLinks,
+    grVe_CollLinks.links,
     5,
 };
 
@@ -284,43 +289,48 @@ static inline s32* grVe_GetArwingTypes(grVe_ExtData* ext)
     return ext->x2C;
 }
 
+static inline s32 grVe_RandRange(f32 fmin, f32 fmax)
+{
+    s32 imin = fmin;
+    s32 imax = fmax;
+    if (imax > imin) {
+        s32 range = imax - imin;
+        imax = imin + (range != 0 ? HSD_Randi(range) : 0);
+    } else if (imax < imin) {
+        s32 range = imin - imax;
+        imax += (range != 0 ? HSD_Randi(range) : 0);
+    }
+    return imax;
+}
+
 void grVenom_8020362C(void)
 {
     grVe_ExtData* ext = VE_DATA;
+    s32 group_b;
     s32 group_a;
     s32 j;
     s32 idx;
-    s32 spawn;
-    u8 ground_flags;
     s32 i;
-    s32 group_b;
     s32 mode;
-    s32 lo;
-    s32 hi;
-    s32 diff;
     s32 has_active;
     s32* x2c_ptr;
     s32* x38_ptr;
     void** x20_ptr;
     void** x20_next;
-    PAD_STACK(0x28);
+    PAD_STACK(0x20);
 
     if (grVe_804D6A40 == 0) {
         if (ext->x20[0] == NULL) {
             grVe_804D6A38 = grVe_804D6A38 - 1;
             if (grVe_804D6A38 <= 0) {
                 s32 combined;
-                {
-                    u32 flags =
-                        ((grVe_Lighting*) Ground_801C2BA4(7)->user_data)->xE0;
-                    ground_flags = flags;
-                }
-                group_a = (ground_flags >> 4) & 1;
-                group_a |= (ground_flags >> 3) & 1;
-                group_a |= (ground_flags >> 2) & 1;
-                group_b = (ground_flags >> 7) & 1;
-                group_b |= (ground_flags >> 6) & 1;
-                group_b |= (ground_flags >> 5) & 1;
+                Ground* gp = Ground_801C2BA4(7)->user_data;
+                group_a = gp->gv.venom2.xE0_state.b3 |
+                          gp->gv.venom2.xE0_state.b4;
+                group_b = gp->gv.venom2.xE0_state.b0 |
+                          gp->gv.venom2.xE0_state.b1;
+                group_b = group_b | gp->gv.venom2.xE0_state.b2;
+                group_a |= gp->gv.venom2.xE0_state.b5;
                 if (group_a != 0) {
                     group_a = 2;
                 } else {
@@ -333,88 +343,66 @@ void grVenom_8020362C(void)
                 }
                 combined = group_b | group_a;
                 if (combined != 2) {
-                    if (combined < 2) {
-                        if (combined != 0) {
+                    do {
+                        if (combined < 2) {
+                            if (combined == 0) {
+                                break;
+                            }
                             return;
                         }
-                        {
-                            s32* x2c_base = grVe_GetArwingTypes(ext);
-                            x2c_ptr = &x2c_base[0];
-                        }
-                        idx = *x2c_ptr;
-                        while (idx == *x2c_ptr) {
-                            idx = HSD_Randi(0xB) + 1;
-                        }
-                        x38_ptr = &ext->x38[0];
-                        if (*x38_ptr == 4) {
-                            mode = 1;
-                        } else {
-                            mode = (HSD_Randf() > grVe_804D6A30->x10) ? 1 : 4;
-                        }
-                        grVe_804D6A34 = 0;
-                        *x2c_ptr = idx;
-                        *x38_ptr = mode;
-                        ext->x20[grVe_804D6A34] = grVenom_80203EAC(2);
                         return;
+                    } while (false);
+                    {
+                        s32* x2c_base = grVe_GetArwingTypes(ext);
+                        x2c_ptr = &x2c_base[0];
                     }
+                    idx = *x2c_ptr;
+                    while (idx == *x2c_ptr) {
+                        idx = HSD_Randi(0xB) + 1;
+                    }
+                    if (*(x38_ptr = &ext->x38[0]) == 4) {
+                        mode = 1;
+                    } else {
+                        mode = (HSD_Randf() > grVe_804D6A30->x10) ? 1 : 4;
+                    }
+                    grVe_804D6A34 = 0;
+                    *x2c_ptr = idx;
+                    *x38_ptr = mode;
+                    ext->x20[grVe_804D6A34] = grVenom_80203EAC(2);
                     return;
                 }
-                x2c_ptr = &ext->x2C[0];
-                idx = *x2c_ptr;
-                while (idx == *x2c_ptr) {
-                    idx = HSD_Randi(4) + 1;
-                }
                 {
-                    s32* x38_base = &ext->x38[0];
-                    x38_ptr = x38_base;
+                    s32* far_x2c_ptr;
+                    s32* far_x38_ptr;
+                    idx = *(far_x2c_ptr = &ext->x2C[0]);
+                    while (idx == *far_x2c_ptr) {
+                        idx = HSD_Randi(4) + 1;
+                    }
+                    if (*(far_x38_ptr = &ext->x38[0]) == 4) {
+                        mode = 1;
+                    } else if (HSD_Randf() > grVe_804D6A30->x10) {
+                        mode = 1;
+                    } else {
+                        mode = 4;
+                    }
+                    grVe_804D6A34 = 0;
+                    *far_x2c_ptr = idx;
+                    *far_x38_ptr = mode;
+                    ext->x20[grVe_804D6A34] = grVenom_80203EAC(2);
+                    return;
                 }
-                if (*x38_ptr == 4) {
-                    mode = 1;
-                } else if (HSD_Randf() > grVe_804D6A30->x10) {
-                    mode = 1;
-                } else {
-                    mode = 4;
-                }
-                grVe_804D6A34 = 0;
-                *x2c_ptr = idx;
-                *x38_ptr = mode;
-                ext->x20[grVe_804D6A34] = grVenom_80203EAC(2);
-                return;
             }
         } else {
-            f32 lo_f = grVe_804D6A30->x8;
-            f32 hi_f = grVe_804D6A30->xC;
-
-            hi = (s32) hi_f;
-            lo = (s32) lo_f;
-            spawn = (s32) hi_f;
-            if (hi > (s32) lo_f) {
-                diff = spawn - lo;
-                if (diff != 0) {
-                    diff = HSD_Randi(diff);
-                } else {
-                    diff = 0;
-                }
-                spawn = lo + diff;
-            } else if (spawn < lo) {
-                diff = lo - spawn;
-                if (diff != 0) {
-                    diff = HSD_Randi(diff);
-                } else {
-                    diff = 0;
-                }
-                spawn += diff;
-            }
-            grVe_804D6A38 = spawn;
+            grVe_804D6A38 =
+                grVe_RandRange(grVe_804D6A30->x8, grVe_804D6A30->xC);
         }
     } else {
         x20_ptr = &ext->x20[0];
         (void) x20_ptr;
         i = 0;
         if (x20_ptr[0] != NULL) {
-            x20_next = x20_ptr + 1;
             i = 1;
-            if (x20_ptr[1] != NULL) {
+            if (*(x20_next = x20_ptr + 1) != NULL) {
                 i = 2;
                 if (x20_next[1] != NULL) {
                     i = 3;
@@ -454,14 +442,13 @@ void grVenom_8020362C(void)
                     ext->x38[i] = i + 1;
                     ext->x20[grVe_804D6A34] = grVenom_80203EAC(2);
                 } else {
-                    ground_flags =
-                        ((grVe_Lighting*) Ground_801C2BA4(7)->user_data)->xE0;
-                    group_a = (ground_flags >> 4) & 1;
-                    group_a |= (ground_flags >> 3) & 1;
-                    group_a |= (ground_flags >> 2) & 1;
-                    group_b = (ground_flags >> 7) & 1;
-                    group_b |= (ground_flags >> 6) & 1;
-                    group_b |= (ground_flags >> 5) & 1;
+                    Ground* gp = Ground_801C2BA4(7)->user_data;
+                    group_a = gp->gv.venom2.xE0_state.b3 |
+                              gp->gv.venom2.xE0_state.b4;
+                    group_b = gp->gv.venom2.xE0_state.b0 |
+                              gp->gv.venom2.xE0_state.b1;
+                    group_b = group_b | gp->gv.venom2.xE0_state.b2;
+                    group_a |= gp->gv.venom2.xE0_state.b5;
                     if (group_a != 0) {
                         group_a = 2;
                     } else {
@@ -1639,9 +1626,27 @@ typedef struct grVe_AnimData {
     s32 anim_ids[5];
 } grVe_AnimData;
 
+typedef struct grVe_AnimArg {
+    u8 pad0[0x2FC];
+    s32 value;
+} grVe_AnimArg;
+
+/// Steps the anim-arg row/column words on the stage-data base pointer and
+/// reads through the struct field so the +0x2FC displacement lands on the
+/// load itself. Evidence: the reference object computes the address with
+/// two adds on the base register and loads `lwz rD, 0x2FC(rA)`; direct 2D
+/// array indexing re-associates to an `lwzx` indexed load instead.
+static inline s32 grVe_GetAnimArg(s32 fire_kind, Ground* gp,
+                                  grVe_AnimData* anim_data)
+{
+    anim_data = (grVe_AnimData*) ((s32*) anim_data + gp->gv.venom.xF4 * 2);
+    anim_data = (grVe_AnimData*) ((s32*) anim_data + fire_kind);
+    return ((volatile grVe_AnimArg*) anim_data)->value;
+}
+
 void grVenom_80205F30(Ground_GObj* gobj)
 {
-    u32 padA4;
+    u64 padA8;
     Vec3 sp94;
     Vec3 sp88;
     u8 pad70[0x18];
@@ -1667,7 +1672,7 @@ void grVenom_80205F30(Ground_GObj* gobj)
     jobj = gobj->hsd_obj;
     sp94 = grVe_803B82D0;
     sp88 = grVe_803B82DC;
-    PAD_STACK(0x1C);
+    PAD_STACK(0x18);
 
     if (grVe_804D6A3C != 0) {
         return;
@@ -1722,8 +1727,8 @@ void grVenom_80205F30(Ground_GObj* gobj)
                     {
                         grVe_AnimData* anim_data = (grVe_AnimData*) base;
                         s32 idx0 = base[gp->gv.venom.xC8 + 14];
-                        s32 anim_arg = *(volatile s32*)
-                            &anim_data->anim_args[gp->gv.venom.xF4][fire_kind];
+                        s32 anim_arg =
+                            grVe_GetAnimArg(fire_kind, gp, anim_data);
                         s32 anim_id = anim_data->anim_ids[idx0];
                         grAnime_801C8098((HSD_GObj*) gobj, anim_id, 7,
                                          anim_arg, 0.0F, 1.0F);

@@ -410,29 +410,13 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
     mn_803ED1D0_t* rule_data = &mn_803ED1D0;
     u8 num_options = mn_803EB6B0[15].selection_count;
     MenuRulesPlusData* data = gobj->user_data;
-    s32 i, j, vis_count;
+    s32 i, vis_count, j;
     s32 visible;
     u16 selected;
     PAD_STACK(8);
 
-    jobj_map[0] = 0;
-    jobj_map[1] = 1;
-    jobj_map[2] = 2;
-    jobj_map[3] = 3;
-    jobj_map[4] = 4;
-    jobj_map[5] = 5;
-    jobj_map[6] = 6;
-    jobj_map[7] = 7;
-    jobj_map[8] = 8;
-    jobj_map[9] = 9;
-    jobj_map[10] = 10;
-    jobj_map[11] = 11;
-    jobj_map[12] = 12;
-    jobj_map[13] = 13;
-    jobj_map[14] = 14;
-    jobj_map[15] = 15;
-    for (i = 16; i < 17; i++) {
-        jobj_map[i] = i;
+    for (i = 0; 17 > i; i++) {
+        jobj_map[i] = (u16) i;
     }
 
     for (i = 0; i < (s32) num_options; i++) {
@@ -463,7 +447,7 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
                 j++;
             }
             {
-                HSD_JObj* root = data->xC[rule_data->x0[vis_count]];
+                HSD_JObj* root = data->xC[rule_data->x0[(u8) vis_count]];
                 HSD_JObj* child;
                 if (root == NULL) {
                     child = NULL;
@@ -497,8 +481,8 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
         }
         HSD_JObjSetFlagsAll(jobj_parts[8], JOBJ_HIDDEN);
         new_sel = (u8) mn_804A04F0.hovered_selection;
-        lb_8001204C(option_roots[mn_804A04F0.hovered_selection], jobj_parts,
-                    jobj_map, 17);
+        lb_8001204C(option_roots[(u8) mn_804A04F0.hovered_selection],
+                    jobj_parts, jobj_map, 17);
         {
             HSD_JObj* part = jobj_parts[16];
             HSD_JObjClearFlagsAll(part, JOBJ_HIDDEN);
@@ -532,6 +516,7 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
 
     if ((s32) arg2 != 0) {
         u16 hovered;
+        MenuRulesPlusData* data2 = gobj->user_data;
         hovered = mn_804A04F0.hovered_selection;
         {
             u8 hovered_u8 = hovered;
@@ -539,11 +524,9 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
             HSD_JObj* tree = data->x34[hovered][0];
             if ((s32) hovered_u8 != 5 && (s32) hovered_u8 < 5) {
                 switch ((s32) hovered_u8) {
-                case 0: {
-                    MenuRulesPlusData* data2 =
-                        (MenuRulesPlusData*) gobj->user_data;
+                case 0:
                     mn_802324E4(confirmed, data2);
-                } break;
+                    break;
                 default:
                     if ((s32) hovered_u8 >= 0) {
                         if (mn_804A04F0.buttons & 4) {
@@ -600,7 +583,8 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
                 AnimLoopSettings* tmp = rule_data->x7C;
                 als = &tmp[i == (s32) (u8) selected];
             } else {
-                als = &rule_data->x64[i == (s32) (u8) selected];
+                AnimLoopSettings* tmp = rule_data->x64;
+                als = &tmp[i == (s32) (u8) selected];
             }
             mn_8022ED6C(jobj_parts[2], als);
             mn_8022ED6C(jobj_parts[8], &rule_data->x94);
@@ -784,7 +768,7 @@ void fn_80232F44(HSD_GObj* gobj)
 
 HSD_GObj* mn_80233218(MenuState state)
 {
-    u8 operand_pad[4];
+    u8 operand_pad[8];
     HSD_JObj* jobj_parts[17];
     u16 jobj_map[17];
     HSD_GObj* gobj;
@@ -805,7 +789,7 @@ HSD_GObj* mn_80233218(MenuState state)
     f32* volatile frame_ptr;
     u16* sub_count_ptr;
     GameRules* rules;
-    PAD_STACK(8);
+    PAD_STACK(4);
 
     selected = (u8) mn_804A04F0.hovered_selection;
     num_options = mn_803EB6B0[15].selection_count;

@@ -1033,8 +1033,7 @@ bool grGreatBay_801F63F4(Ground_GObj* gobj)
 
     spawn = grGb_803B81D4;
     spawn.kind = selected;
-    spawn.prev_pos = pos;
-    spawn.pos = spawn.prev_pos;
+    spawn.pos = spawn.prev_pos = pos;
     Item_80268B18(&spawn);
     return true;
 }

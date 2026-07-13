@@ -225,7 +225,8 @@ void DevText_Draw(DevText* text)
         }
     }
     if ((text->flags & DEVTEXT_FLAG_HIDETEXT) == 0) {
-        GXColor* color_ptr = &text_color;
+        // @todo Fix this stack pointer arithmetic
+        GXColor* color_ptr = &text_color - 5;
         int col;
         int row;
         int x;
@@ -241,7 +242,7 @@ void DevText_Draw(DevText* text)
                 s8 chr = buf[0];
                 u8 color_idx = (buf[1] & 0xC0) >> 6;
                 if (chr) {
-                    text_color = text->text_colors[color_idx];
+                    *color_ptr = text->text_colors[color_idx];
                     DrawASCII(chr, x, y, color_ptr);
                 }
                 x += text->scale_x;

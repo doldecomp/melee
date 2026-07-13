@@ -488,8 +488,11 @@ static inline s32 mnSoundTest_GetAudioVolume(void)
 
 void fn_8024B2B0(HSD_GObj* arg0)
 {
+    u8 high_pad[0x28];
     HSD_JObj* sp54;
+    u8 stack_pad1[8];
     HSD_JObj* sp48;
+    u8 stack_pad2[8];
     HSD_JObj* sp3C;
     HSD_GObjProc* proc;
     HSD_GObj* gobj;
@@ -504,7 +507,7 @@ void fn_8024B2B0(HSD_GObj* arg0)
     s32 audio_id;
     s32 sound_kind;
 
-    PAD_STACK(0x40);
+    PAD_STACK(8);
     user_data = mnSoundTest_804D6C40->user_data;
     if ((u16) mn_804D6BC8.cooldown != 0) {
         mn_804D6BC8.cooldown -= 1;
@@ -558,7 +561,7 @@ void fn_8024B2B0(HSD_GObj* arg0)
     if ((u8) user_data->unk0 == 0) {
         if (inputs & MenuInput_AButton) {
             sound_id = user_data->unk1;
-            if ((u8) user_data->unk2 == sound_id) {
+            if ((u32) user_data->unk2 == sound_id) {
                 menu_data = mnSoundTest_804D6C40->user_data;
                 lbAudioAx_800236DC();
                 menu_data->unk2 = 0x50;

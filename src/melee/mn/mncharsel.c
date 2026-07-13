@@ -702,11 +702,9 @@ void mnCharSel_8025DB34(u8 arg0)
     f32 temp_f31;
     u8 sel_icon;
     u8 hud_idx;
-    u8 costume_var;
     u8 var_r5;
     u8 var_r23;
     int num_doors;
-    int found;
     f32 var_f1;
 
     PAD_STACK(0x40);
@@ -742,7 +740,8 @@ void mnCharSel_8025DB34(u8 arg0)
                 CSSData* css = mnCharSel_804D6CB0;
                 u8 door_count = mnCharSel_804D6CF5;
                 CSSDoor* door2 = &mnCharSel_803F0DFC.doors[arg0];
-                costume_var = 0;
+                u8 costume_var = 0;
+                int found;
                 for (;;) {
                     mnCharSel_803F0DFC.doors[arg0].costume = costume_var;
                     if ((u8) css->match_type == 0x17) {
@@ -1569,15 +1568,11 @@ void fn_8025F0E0(HSD_GObj* gobj)
             }
         }
     } else {
-        CSSDoor* door_ptr;
-        struct CSSCharModel** model_ptr;
-        door_ptr = mnCharSel_803F0DFC.doors;
         i = 0;
-        model_ptr = (struct CSSCharModel**) mnCharSel_804A0BD0;
         while (i < (s32) mnCharSel_804D6CF5) {
-            lb_80011E24(mnCharSel_804D6CC0, &sp54, door_ptr->costume_joint,
-                        -1);
-            if ((u8) (*model_ptr)->x5 != 0) {
+            lb_80011E24(mnCharSel_804D6CC0, &sp54,
+                        mnCharSel_803F0DFC.doors[i].costume_joint, -1);
+            if ((u8) mnCharSel_804A0BD0[i]->x5 != 0) {
                 dobj = HSD_JObjGetDObj(sp54);
                 if (dobj != NULL) {
                     mobj = dobj->mobj;
@@ -1594,8 +1589,6 @@ void fn_8025F0E0(HSD_GObj* gobj)
                 }
                 HSD_MObjSetAlpha(mobj, 1.0f);
             }
-            door_ptr++;
-            model_ptr += 1;
             i += 1;
         }
     }
@@ -1915,11 +1908,13 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
         cursor->x8 = 0;
 
         if ((u8) mnCharSel_804D6CF5 == 1) {
-            int port = mnCharSel_804D6CF0;
-            stick_y =
-                (f32) (s8) (u8) HSD_PadCopyStatus[(u8) port].stickY;
-            stick_x =
-                (f32) (s8) (u8) HSD_PadCopyStatus[(u8) port].stickX;
+            int port = (u8) mnCharSel_804D6CF0;
+            stick_y = (f32) (s8) (u8) HSD_PadCopyStatus[(u8) port].stickY;
+            {
+                f32 current_stick_x =
+                    (f32) (s8) (u8) HSD_PadCopyStatus[(u8) port].stickX;
+                stick_x = current_stick_x;
+            }
             mag_sq = (stick_x * stick_x) + (stick_y * stick_y);
             trigger = HSD_PadCopyStatus[port].trigger;
             buttons = HSD_PadCopyStatus[port].button;
@@ -1948,10 +1943,12 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
             }
         } else {
             int port = cursor->x4;
-            stick_y =
-                (f32) (s8) (u8) HSD_PadCopyStatus[(u8) port].stickY;
-            stick_x =
-                (f32) (s8) (u8) HSD_PadCopyStatus[(u8) port].stickX;
+            stick_y = (f32) (s8) (u8) HSD_PadCopyStatus[(u8) port].stickY;
+            {
+                f32 current_stick_x =
+                    (f32) (s8) (u8) HSD_PadCopyStatus[(u8) port].stickX;
+                stick_x = current_stick_x;
+            }
             mag_sq = (stick_x * stick_x) + (stick_y * stick_y);
             trigger = HSD_PadCopyStatus[port].trigger;
             buttons = HSD_PadCopyStatus[port].button;
@@ -2114,7 +2111,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                         mnCharSel_803F0DFC.doors[grabbed]
                                             .sel_icon = 0x19;
                                         {
-                                            s8 player_idx;
+                                            s32 player_idx;
                                             if ((u8) mnCharSel_804D6CF5 == 1) {
                                                 if ((s32) grabbed != 0) {
                                                     player_idx = (s8) (u8)
@@ -2144,14 +2141,14 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                             if ((mx > -30.0f && mx < -24.4f) ||
                                                 (mx > 24.4f && mx < 30.2f))
                                             {
-                                                s32 icon_count = 0;
-                                                s32 ic;
-                                                for (ic = 0; ic < 25; ic++) {
-                                                    if ((u8) icons[ic].state >=
-                                                        2)
+                                                s32 icon_count;
+                                                for (icon_count = 0;
+                                                     icon_count < 25;
+                                                     icon_count++)
+                                                {
+                                                    if ((u8) icons[icon_count]
+                                                            .state < 2)
                                                     {
-                                                        icon_count++;
-                                                    } else {
                                                         break;
                                                     }
                                                 }
@@ -2170,7 +2167,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                                     icons[door->sel_icon]
                                                                         .char_kind));
                                                             {
-                                                                u8 nd;
+                                                                s32 nd;
                                                                 s32 j;
                                                                 if ((u8) mnCharSel_804D6CB0
                                                                         ->match_type ==
@@ -2234,7 +2231,6 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                         struct CSSCharModel* m2 =
                                             mnCharSel_804A0BD0[grabbed];
                                         s32 i;
-                                        u8 found = 0;
                                         for (i = 0; i < 0x19; i++) {
                                             f32 mx = m2->x8;
                                             if (mx > icons[i].bound_l &&
@@ -2251,7 +2247,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                     mnCharSel_8025DB34(
                                                         grabbed);
                                                     if (trigger & 0x100) {
-                                                        s8 player_idx;
+                                                        s32 player_idx;
                                                         if ((u8)
                                                                 mnCharSel_804D6CF5 ==
                                                             1)
@@ -2343,13 +2339,12 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                         lbAudioAx_800237A8(
                                                             0xB8, 0x7F, 0x40);
                                                     }
-                                                    found = 1;
                                                     break;
                                                 }
                                             }
                                         }
 
-                                        if (!found) {
+                                        if (i == 0x19) {
                                             mnCharSel_8025D5AC((s32) grabbed,
                                                                0, 1);
                                             {
@@ -2366,7 +2361,10 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                 .sel_icon_prev = 0x19;
                                             if (trigger & 0x100) {
                                                 lbAudioAx_80024030(3);
-                                            } else if (trigger & 0x200) {
+                                            }
+                                        }
+                                        if (!(trigger & 0x100)) {
+                                            if (trigger & 0x200) {
                                                 if (mnCharSel_8025FDEC(
                                                         grabbed) == 0)
                                                 {

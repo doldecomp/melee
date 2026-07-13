@@ -1,4 +1,6 @@
+#define grHomeRun_8021E500(type) grHomeRun_8021E500(s32)
 #include "grhomerun.h"
+#undef grHomeRun_8021E500
 
 #include "placeholder.h"
 
@@ -15,6 +17,7 @@
 #include "baselib/jobj.h"
 #include "baselib/memory.h"
 #include "baselib/sislib.h"
+#include "baselib/wobj.h"
 #include "cm/camera.h"
 #include "ft/ftlib.h"
 #include "gm/gmregclear.h"
@@ -200,20 +203,27 @@ void grHomeRun_8021CB1C(Ground_GObj* arg) {}
 
 void grHomeRun_8021CB20(Ground_GObj* gobj)
 {
+    HSD_GObj* grHomeRun_8021E500(s16);
+    static HSD_WObjDesc camera_eye_desc = {
+        NULL, { 0.0F, 0.0F, 1.0F }, NULL
+    };
+    static HSD_WObjDesc camera_interest_desc = {
+        NULL, { 0.0F, 0.0F, 0.0F }, NULL
+    };
     static HSD_CameraDescPerspective cobj_desc = {
         NULL,
         0,
         1,
-        { 0, 640, 0, 480 },
-        { 0, 640, 0, 480 },
-        NULL,
-        NULL,
+        { 0, 640, 0, 640 },
+        { 0, 480, 0, 480 },
+        &camera_eye_desc,
+        &camera_interest_desc,
         0.0F,
         NULL,
         0.1F,
         32768.0F,
         30.0F,
-        1.4F,
+        1.3636F,
     };
 
     Ground* gp = GET_GROUND(gobj);
@@ -228,13 +238,15 @@ void grHomeRun_8021CB20(Ground_GObj* gobj)
     Ground_801C2ED0(jobj2, gp->map_id);
 
     ((grHomeRun_MainGroundVars*) &gp->gv.homerun)->gobjs = HSD_MemAlloc(0x100);
-    HSD_ASSERT(0x17A,
-               ((grHomeRun_MainGroundVars*) &gp->gv.homerun)->gobjs);
+    HSD_ASSERTMSG(0x17A,
+                  ((grHomeRun_MainGroundVars*) &gp->gv.homerun)->gobjs,
+                  "gp->u.map.parts");
 
     ((grHomeRun_MainGroundVars*) &gp->gv.homerun)->jobj_gobjs =
         HSD_MemAlloc(0x40);
-    HSD_ASSERT(0x17B,
-               ((grHomeRun_MainGroundVars*) &gp->gv.homerun)->jobj_gobjs);
+    HSD_ASSERTMSG(0x17B,
+                  ((grHomeRun_MainGroundVars*) &gp->gv.homerun)->jobj_gobjs,
+                  "gp->u.map.back");
 
     HSD_JObjSetScaleX(jobj2, grHr_804D6AE4 * HSD_JObjGetScaleX(jobj));
     HSD_JObjSetScaleY(jobj2, grHr_804D6AE4 * HSD_JObjGetScaleY(jobj));
@@ -257,7 +269,8 @@ void grHomeRun_8021CB20(Ground_GObj* gobj)
     HSD_SisLib_804D1124[1] =
         HSD_ArchiveGetPublicAddress(archive->unk0, "SIS_GrHomerunData");
     gobjs_num = 2.0F * (1.0F + (2400.0F / (160.0F * Ground_801C0498())));
-    HSD_ASSERT(0x1A2, gobjs_num < 64);
+    HSD_ASSERTMSG(0x1A2, gobjs_num < 64,
+                  "INIT_ADD_PARTS_RANGE*2<Gr_Homerun_Parts_Max");
 
     for (i = 0; (f32) i < 1.0F + (2400.0F / (160.0F * Ground_801C0498())); i++)
     {
@@ -272,9 +285,10 @@ void grHomeRun_8021CB20(Ground_GObj* gobj)
         HSD_JObj* child;
         ((grHomeRun_MainGroundVars*) &gp->gv.homerun)->jobj_gobjs[i] =
             grHomeRun_8021C82C_noinline(4);
-        HSD_ASSERT(0x1AB,
-                   ((grHomeRun_MainGroundVars*) &gp->gv.homerun)
-                       ->jobj_gobjs[i]);
+        HSD_ASSERTMSG(0x1AB,
+                      ((grHomeRun_MainGroundVars*) &gp->gv.homerun)
+                          ->jobj_gobjs[i],
+                      "gp->u.map.back[i]");
 
         jobj = GET_JOBJ(((grHomeRun_MainGroundVars*) &gp->gv.homerun)
                             ->jobj_gobjs[i]);
@@ -292,8 +306,8 @@ void grHomeRun_8021CB20(Ground_GObj* gobj)
     }
 
     {
-        HSD_GObj* rear_gobj = grHomeRun_8021C82C_noinline(3);
-        HSD_ASSERT(0x1BA, rear_gobj);
+        HSD_GObj* volatile rear_gobj = grHomeRun_8021C82C_noinline(3);
+        HSD_ASSERTMSG(0x1BA, rear_gobj, "gp->u.map.bg_gobj[0]");
         ((grHomeRun_MainGroundVars*) &gp->gv.homerun)->rear_gobj = rear_gobj;
         jobj = GET_JOBJ(rear_gobj);
         HSD_ASSERT(0x1BB, jobj);
@@ -302,7 +316,7 @@ void grHomeRun_8021CB20(Ground_GObj* gobj)
 
     {
         HSD_GObj* rear2_gobj = grHomeRun_8021C82C_noinline(3);
-        HSD_ASSERT(0x1BD, rear2_gobj);
+        HSD_ASSERTMSG(0x1BD, rear2_gobj, "gp->u.map.bg_gobj[1]");
         ((grHomeRun_MainGroundVars*) &gp->gv.homerun)->rear2_gobj = rear2_gobj;
         jobj = GET_JOBJ(rear2_gobj);
         HSD_ASSERT(0x1BE, jobj);
@@ -312,7 +326,7 @@ void grHomeRun_8021CB20(Ground_GObj* gobj)
 
     {
         HSD_GObj* rear3_gobj = grHomeRun_8021C82C_noinline(3);
-        HSD_ASSERT(0x1C0, rear3_gobj);
+        HSD_ASSERTMSG(0x1C0, rear3_gobj, "gp->u.map.bg_gobj[2]");
         ((grHomeRun_MainGroundVars*) &gp->gv.homerun)->rear3_gobj = rear3_gobj;
         jobj = GET_JOBJ(rear3_gobj);
         HSD_ASSERT(0x1C1, jobj);
@@ -322,7 +336,7 @@ void grHomeRun_8021CB20(Ground_GObj* gobj)
 
     {
         HSD_GObj* rear4_gobj = grHomeRun_8021C82C_noinline(3);
-        HSD_ASSERT(0x1C3, rear4_gobj);
+        HSD_ASSERTMSG(0x1C3, rear4_gobj, "gp->u.map.bg_gobj[3]");
         ((grHomeRun_MainGroundVars*) &gp->gv.homerun)->rear4_gobj = rear4_gobj;
         jobj = GET_JOBJ(rear4_gobj);
         HSD_ASSERT(0x1C4, jobj);
@@ -343,6 +357,7 @@ bool grHomeRun_8021D678(Ground_GObj* arg)
 
 void grHomeRun_8021D680(Ground_GObj* gobj)
 {
+    HSD_GObj* grHomeRun_8021E500(s16);
     Vec3 cam_interest;
     Vec3 pos0;
     CmSubject* subject;
@@ -433,8 +448,9 @@ void grHomeRun_8021D680(Ground_GObj* gobj)
     } else if (gp2->gv.homerun.xC4 > x0) {
         gobj2 = grHomeRun_8021E500(gp2->gv.homerun.xC4 - 1);
         for (i = 63; i > 0; i--) {
-            ((grHomeRun_MainGroundVars*) &gp->gv.homerun)->gobjs[i] =
-                ((grHomeRun_MainGroundVars*) &gp->gv.homerun)->gobjs[i - 1];
+            grHomeRun_MainGroundVars* vars =
+                (grHomeRun_MainGroundVars*) &gp->gv.homerun;
+            vars->gobjs[i] = vars->gobjs[i - 1];
         }
         ((grHomeRun_MainGroundVars*) &gp->gv.homerun)->gobjs[0] = gobj2;
     }
@@ -765,9 +781,8 @@ void grHomeRun_8021E4F8(Ground_GObj* arg) {}
 
 void grHomeRun_8021E4FC(Ground_GObj* arg) {}
 
-HSD_GObj* grHomeRun_8021E500(s16 arg0)
+HSD_GObj* grHomeRun_8021E500(s32 arg)
 {
-    s32 arg = arg0;
     HSD_JObj* jobj;
     s32 gobj_id;
     HSD_GObj* gobj;
@@ -776,7 +791,8 @@ HSD_GObj* grHomeRun_8021E500(s16 arg0)
     s32 idx;
     f32 offset;
 
-    idx = (arg / grHr_804D6ADC) % 4;
+    idx = arg / grHr_804D6ADC;
+    idx %= 4;
     if (idx == 0) {
         if (grHr_804D6ADC - 1 != arg % grHr_804D6ADC) {
             gobj_id = 4;
@@ -810,7 +826,7 @@ HSD_GObj* grHomeRun_8021E500(s16 arg0)
     jobj = GET_JOBJ(gobj);
     (void) jobj;
     HSD_ASSERT(0x3D6, jobj);
-    gp = GET_GROUND(gobj);
+    (void) (gp = GET_GROUND(gobj));
     HSD_ASSERT(0x3D7, gp);
 
     HSD_JObjSetScaleX(jobj, grHr_804D6AE4 * HSD_JObjGetScaleX(jobj));

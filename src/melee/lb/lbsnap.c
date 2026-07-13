@@ -183,15 +183,24 @@ static inline u16 RGB565_TO_RGB5A3(u16 pixel)
     return result | RGB5A3_MASK_A;
 }
 
+static inline int lbSnap_GetTiledRemainder(int value)
+{
+    return value % 4;
+}
+
 static inline int lbSnap_GetTiledRGBOffset(int x, int y, int tile_stride)
 {
-    return ((((x / 4) * tile_stride) + (y / 4)) << 5) + ((x % 4) * 8) +
-           ((y % 4) * 2);
+    int tile_x = x / 4;
+    int tile_base = tile_x * tile_stride;
+    return ((tile_base + (y / 4)) << 5) +
+           (lbSnap_GetTiledRemainder(x) * 8) +
+           (lbSnap_GetTiledRemainder(y) * 2);
 }
 
 static inline int lbSnap_GetTiledYOff(int tile_column, int y)
 {
-    return (((y / 4) + tile_column) << 5) + ((y % 4) * 2);
+    return (((y / 4) + tile_column) << 5) +
+           (lbSnap_GetTiledRemainder(y) * 2);
 }
 
 static inline u8* lbSnap_GetMemSnapIconData(void)

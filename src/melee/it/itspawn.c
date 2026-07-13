@@ -446,12 +446,12 @@ void it_8026D018(void)
         ItemPickTable monster;
     } ItemSpawnTables;
     ItemSpawnTables* tables = (ItemSpawnTables*) &it_804A0E30;
+    u64* stage_mask_ptr;
     bool chk;
     u64 stage_mask;
     s32* stage_info;
     bool chk2;
     f32 weight;
-    u64* stage_mask_ptr;
     if (!gm_8016B238() && (gm_8016AE80() != -1)) {
         *(stage_mask_ptr = &tables->alloc.x18) = gm_8016AEA4();
         {
@@ -459,12 +459,15 @@ void it_8026D018(void)
             stage_info = Ground_801C2AD8();
             chk2 = gm_8016AE80();
             weight = gm_8016AE94();
-            if ((stage_mask == 0) || (stage_info == NULL) || (chk2 == -1)) {
+            chk = false;
+            if ((stage_mask == chk) || (stage_info == NULL) || (chk2 == -1)) {
                 chk = false;
             } else {
                 it_8026CA4C(&tables->alloc.x4, stage_info, stage_mask, 0,
                             weight);
-                if (tables->alloc.x4.x8 != 0) {
+                if (tables->alloc.x4.x8 == 0) {
+                    chk = false;
+                } else {
                     it_8026CB9C(stage_info, stage_mask, weight);
                     chk = true;
                 }

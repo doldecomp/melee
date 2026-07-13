@@ -1121,8 +1121,6 @@ void grMuteCity_801F0F4C(Ground_GObj* gobj)
 {
     f32 pos;
     grMc_TrackInitData* src = grMc_803E3B7C;
-    grMc_CarEntry* dst = grMc_8049F4B8;
-    s32* idx = grMc_8049F440;
     int i;
 
     for (i = 0; i < 30; i++) {
@@ -1132,19 +1130,18 @@ void grMuteCity_801F0F4C(Ground_GObj* gobj)
         } else if (pos < 0.0) {
             pos++;
         }
-        dst->x0 = pos;
-        dst->x4 = pos;
-        dst->xC = src->speed;
-        dst->x8 = 0.0f;
-        dst->x10 = 0.0f;
-        dst->x20 = 0;
-        dst->x22_flags.b0 = 0;
-        dst->x22_flags.b1 = 0;
-        dst->x24 = 0;
-        dst->x28 = 0;
-        dst++;
+        grMc_8049F4B8[i].x0 = pos;
+        grMc_8049F4B8[i].x4 = pos;
+        grMc_8049F4B8[i].xC = src->speed;
+        grMc_8049F4B8[i].x8 = 0.0f;
+        grMc_8049F4B8[i].x10 = 0.0f;
+        grMc_8049F4B8[i].x20 = 0;
+        grMc_8049F4B8[i].x22_flags.b0 = 0;
+        grMc_8049F4B8[i].x22_flags.b1 = 0;
+        grMc_8049F4B8[i].x24 = 0;
+        grMc_8049F4B8[i].x28 = 0;
         src++;
-        *idx++ = i;
+        grMc_8049F440[i] = i;
     }
 }
 
@@ -1239,13 +1236,7 @@ void grMuteCity_801F106C(s32 i)
 
 static inline f32 grMc_DistanceSquared(f32* a, f32* b)
 {
-    f32 dz = a[2] - b[2];
-    f32 dx = a[0] - b[0];
-    f32 dy = a[1] - b[1];
-    f32 dz2 = dz * dz;
-    f32 dx2 = dx * dx;
-    f32 dy2 = dy * dy;
-    return dz2 + (dy2 + dx2);
+    return SQ(a[0] - b[0]) + SQ(a[1] - b[1]) + SQ(a[2] - b[2]);
 }
 
 void grMuteCity_801F1328(void)
@@ -1253,6 +1244,7 @@ void grMuteCity_801F1328(void)
     s32* arr = grMc_8049F440;
     int i;
     int j;
+    PAD_STACK(8);
 
     for (i = 1; i < 30; i++) {
         for (j = i; j >= 0; j--) {

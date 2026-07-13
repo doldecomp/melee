@@ -397,9 +397,9 @@ void grPura_802125F0(HSD_GObj* arg0)
 static inline HSD_JObj* grPura_80212CD4_inline(Ground* gp,
                                               HSD_JObj* jobj)
 {
-    u32 i;
+    s32 i;
 
-    for (i = 0; i < 25; i++) {
+    for (i = 0; 25 > i; i++) {
         gp->gv.pura3.xC4[i] = NULL;
         gp->gv.pura3.x128[i] = NULL;
     }

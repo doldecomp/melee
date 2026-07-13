@@ -273,7 +273,10 @@ void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj, s32 x18d4_int,
                 pl_80040D8C(attacker_fp->player_id, attacker_fp->x221F_b4);
             }
 
-            attack_id = ev.x2073;
+            {
+                u8 tmp_attack_id = ev.x2073;
+                attack_id = tmp_attack_id;
+            }
             if (attack_id < 0x64) {
                 struct plAttackStats* temp;
 

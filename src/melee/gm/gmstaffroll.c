@@ -600,6 +600,7 @@ void fn_801AB200(HSD_GObj* gobj)
             if (staffInfoSortBuf[i].mtx[2][3] < -1.0f) {
                 entry_idx = staffInfoSortBuf[i].index;
                 if (entry_idx != 0xB7 && entry_idx < 0xC0) {
+                    broke = 0;
                     hover_jobj = staffInfoSortBuf[i].jobj;
                     half_size =
                         0.16875f * (f32) gm_803DBFD8[entry_idx]
@@ -608,7 +609,6 @@ void fn_801AB200(HSD_GObj* gobj)
                     gm_803DD1C8.corners[0].x = -half_size;
                     gm_803DD1C8.corners[3].x = half_size;
                     gm_803DD1C8.corners[2].x = half_size;
-                    broke = 0;
                     for (j = 0; j < 4; j++) {
                         PSMTXMultVec(staffInfoSortBuf[i].mtx,
                                      &gm_803DD1C8.corners[j], &xform_result);
@@ -796,11 +796,13 @@ void fn_801AB200(HSD_GObj* gobj)
                                                 entry_data->alt_page + 3);
                         }
                     } else if (lbLang_IsSavedLanguageJP() != 0) {
-                        HSD_SisLib_803A6368(text_arr[j], jp_page + j);
+                        HSD_SisLib_803A6368(text_arr[j], jp_page);
                     } else {
-                        HSD_SisLib_803A6368(text_arr[j], en_page + j);
+                        HSD_SisLib_803A6368(text_arr[j], en_page);
                     }
                 }
+                jp_page++;
+                en_page++;
             }
 
             if (button == 0x100 && gm_804D6820 == 0) {

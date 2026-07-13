@@ -1018,7 +1018,10 @@ void mnDiagram2_Create(int arg0)
     int offset;
     Diagram2* user_data2;
 
-    gobj = GObj_Create(6, 7, 0x80);
+    {
+        HSD_GObj* created_gobj = GObj_Create(6, 7, 0x80);
+        gobj = created_gobj;
+    }
     mnDiagram2_804D6C18 = gobj;
     jobj = HSD_JObjLoadJoint(archive->x0);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
@@ -1069,7 +1072,10 @@ void mnDiagram2_Create(int arg0)
         j++;
     } while (j < 10);
 
-    is_name = user_data->is_name_mode;
+    {
+        u32 mode = user_data->is_name_mode;
+        is_name = mode;
+    }
     user_data2 = gobj->user_data;
     if (is_name) {
         HSD_JObjSetFlagsAll(user_data2->fighter_mode_header, JOBJ_HIDDEN);

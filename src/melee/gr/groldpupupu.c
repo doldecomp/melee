@@ -355,13 +355,13 @@ void grOldPupupu_80210D10(Ground_GObj* gobj)
             if (cam_right < 200.0F) {
                 cam_right = 200.0F;
             }
-            x = -(((f32) count * -10.0F) - (50.0F + cam_right));
+            x = -(((f32) count * step) - (50.0F + cam_right));
         } else {
             step = 10.0F;
             if (cam_left > -200.0F) {
                 cam_left = -200.0F;
             }
-            x = -(((f32) count * 10.0F) - (cam_left - 50.0F));
+            x = -(((f32) count * step) - (cam_left - 50.0F));
         }
         {
             f32 rand = HSD_Randf();
@@ -590,6 +590,7 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
                     }
                     gp->gv.oldpupupu.xC8 = grOp_803E67D8[gp->gv.oldpupupu.xC4];
                     gp->gv.oldpupupu.xD4 = 1;
+                    gp = gobj->user_data;
                     other_gp = Ground_801C2BA4(1)->user_data;
                     other_gp->gv.oldpupupu.xC4 = gp->gv.oldpupupu.xC4;
                     other_gp->gv.oldpupupu.xC8 = gp->gv.oldpupupu.xC8;
@@ -616,7 +617,7 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
                     side = 0;
                 }
                 side_f = side;
-                if (side_f == (f32) gp->gv.oldpupupu.xD8) {
+                if ((f32) gp->gv.oldpupupu.xD8 == side_f) {
                     gp->gv.oldpupupu.xC8 = 2;
                     gp->gv.oldpupupu.xD4 = 0;
                     gp->gv.oldpupupu.xCC = 0;
@@ -631,6 +632,7 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
                     }
                     gp->gv.oldpupupu.xC8 = grOp_803E67D8[gp->gv.oldpupupu.xC4];
                     gp->gv.oldpupupu.xD4 = 1;
+                    gp = gobj->user_data;
                     other_gp = Ground_801C2BA4(1)->user_data;
                     other_gp->gv.oldpupupu.xC4 = gp->gv.oldpupupu.xC4;
                     other_gp->gv.oldpupupu.xC8 = gp->gv.oldpupupu.xC8;
@@ -673,6 +675,7 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
                 }
                 gp->gv.oldpupupu.xC8 = grOp_803E67D8[gp->gv.oldpupupu.xC4];
                 gp->gv.oldpupupu.xD4 = 1;
+                gp = gobj->user_data;
                 other_gp = Ground_801C2BA4(1)->user_data;
                 other_gp->gv.oldpupupu.xC4 = gp->gv.oldpupupu.xC4;
                 other_gp->gv.oldpupupu.xC8 = gp->gv.oldpupupu.xC8;
@@ -715,6 +718,7 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
                     Camera_80030E44(1, NULL);
                     gp->gv.oldpupupu.xDC = gp->gv.oldpupupu.xD8 + 1;
                     if ((gp->gv.oldpupupu.xD0 % 10) == 0) {
+                        gp = gobj->user_data;
                         if (gp->gv.oldpupupu.xD8 == 0) {
                             lb_80011A50(
                                 &grOp_803E67E4[gp->gv.oldpupupu.xD8], 0xF,
@@ -741,6 +745,7 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
                 }
                 gp->gv.oldpupupu.xC8 = grOp_803E67D8[gp->gv.oldpupupu.xC4];
                 gp->gv.oldpupupu.xD4 = 1;
+                gp = gobj->user_data;
                 other_gp = Ground_801C2BA4(1)->user_data;
                 other_gp->gv.oldpupupu.xC4 = gp->gv.oldpupupu.xC4;
                 other_gp->gv.oldpupupu.xC8 = gp->gv.oldpupupu.xC8;

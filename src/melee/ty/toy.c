@@ -1781,6 +1781,13 @@ inline static void Toy_AddPanelAnims(HSD_JObj* jobj,
     HSD_JObjAddAnimAll(jobj, anim, matanim, shapanim);
 }
 
+static inline HSD_MatAnimJoint* Toy_GetPanelMatAnim(
+    s32 arg0, ToyPanelLabelData* data, ToyGlobalsS_* tg)
+{
+    return HSD_ArchiveGetPublicAddress(
+        tg->x50, (&data->ptrs[arg0 * 3])[0x228 / 4]);
+}
+
 void Toy_80307470(s32 arg0)
 {
     ToyGlobalsS_* tg;
@@ -1815,8 +1822,7 @@ void Toy_80307470(s32 arg0)
         Toy_AddPanelAnims(loaded_jobj,
                           HSD_ArchiveGetPublicAddress(
                               tg->x50, (&data->ptrs[arg0 * 3])[0x22C / 4]),
-                          HSD_ArchiveGetPublicAddress(
-                              tg->x50, (&data->ptrs[arg0 * 3])[0x228 / 4]),
+                          Toy_GetPanelMatAnim(arg0, data, tg),
                           HSD_ArchiveGetPublicAddress(
                               tg->x50, (&data->ptrs[arg0 * 3])[0x224 / 4]));
         HSD_JObjReqAnimAll(loaded_jobj, 0.0f);
@@ -3366,9 +3372,12 @@ void _Toy_80309404(HSD_GObj* gobj)
                                 entry->archive_name = md + 4;
                                 entry->symbol_name = md + 0x24;
                                 entry->trophy_id = tid;
-                                entry->archive = lbArchive_LoadSymbols(
-                                    entry->archive_name, &sp130,
-                                    entry->symbol_name, 0);
+                                {
+                                    char* symbol_name = entry->symbol_name;
+                                    entry->archive = lbArchive_LoadSymbols(
+                                        entry->archive_name, &sp130,
+                                        symbol_name, 0);
+                                }
                             } else {
                                 ToyListEntry* entry;
                                 HSD_Archive* oa;
@@ -3492,8 +3501,8 @@ void _Toy_8030B530(HSD_GObj* arg0)
     Toy26B8* base = (Toy26B8*) &_Toy_804A26B8;
     HSD_CObj* cobj = gobj->hsd_obj;
     Toy6E68* state = (Toy6E68*) _Toy_sbss_804D6E68;
-    void* ed8 = Toy_sbss_804D6ED8;
-    void* ed4 = Toy_sbss_804D6ED4;
+    ToyED8Data* ed8 = Toy_sbss_804D6ED8;
+    ToyCameraControl* ed4 = Toy_sbss_804D6ED4;
     ToyAnimState* anim = &base->anim;
 
     if (base->x3F0 != NULL) {
@@ -3507,6 +3516,8 @@ void _Toy_8030B530(HSD_GObj* arg0)
         f32 substick_y;
         f32 adj_sx;
         f32 adj_sy;
+        f32 moved_x;
+        f32 moved_y;
         u32 trigger;
         u32 button;
         f32 angle;
@@ -3927,21 +3938,24 @@ void _Toy_8030B530(HSD_GObj* arg0)
                             state->x1C = (f32) (yaw - 360.0f);
                         }
                     }
-                    M2C_FIELD(ed4, f32*, 0x18) = (f32) state->x1C;
-                    M2C_FIELD(ed4, f32*, 0x14) = (f32) state->x18;
+                    ed4->x18 = (f32) state->x1C;
+                    ed4->x14 = (f32) state->x18;
                 }
             }
         }
 
+        moved_x = 0.3f * adj_sx;
+        moved_y = 0.3f * adj_sy;
+
         trigger = Toy_80305B88();
         if (trigger & 0x1000) {
             state->x58 = 0;
-            M2C_FIELD(ed4, s32*, 0x10) = M2C_FIELD(ed4, s32*, 0x10) + 1;
-            if (M2C_FIELD(ed4, s32*, 0x10) == 6) {
-                M2C_FIELD(ed4, s32*, 0x10) = 0;
+            ed4->x10 = ed4->x10 + 1;
+            if (ed4->x10 == 6) {
+                ed4->x10 = 0;
             }
-            Toy_80306D70(M2C_FIELD(ed4, s32*, 0x10));
-            _Toy_803075E8(M2C_FIELD(ed4, s32*, 0x10));
+            Toy_80306D70(ed4->x10);
+            _Toy_803075E8(ed4->x10);
         }
 
         _Toy_80308DC8(cobj);
@@ -3949,25 +3963,23 @@ void _Toy_8030B530(HSD_GObj* arg0)
         trigger = Toy_80305B88();
 
         if (trigger & 0x60) {
-            void* display;
+            TyDisplayData* display;
             u32 trig2;
             display = Toy_sbss_804D6EE0;
 
             trig2 = Toy_80305B88();
 
             if (trig2 & 0x441) {
-                s16 new_idx;
-                s16 total;
+                s32 total;
                 lbAudioAx_80024030(2);
-                new_idx = M2C_FIELD(display, s16*, 0x154) - 1;
-                M2C_FIELD(display, s16*, 0x154) = new_idx;
-                if (new_idx < 0) {
+                display->selectedIdx = display->selectedIdx - 1;
+                if (display->selectedIdx < 0) {
                     if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC)) {
                         total = M2C_FIELD(base, s16*, 0x3EC);
                     } else {
                         total = *gmMainLib_8015CC90();
                     }
-                    M2C_FIELD(display, s16*, 0x154) = (s16) (total - 1);
+                    display->selectedIdx = (s16) (total - 1);
                 }
                 if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC)) {
                     total = M2C_FIELD(base, s16*, 0x3EC);
@@ -3975,11 +3987,10 @@ void _Toy_8030B530(HSD_GObj* arg0)
                     total = *gmMainLib_8015CC90();
                 }
                 if (total > 3) {
-                    s16 cur_idx = M2C_FIELD(display, s16*, 0x154);
-                    if ((cur_idx - 1) < 0) {
-                        s16 cnt;
+                    if ((display->selectedIdx - 1) < 0) {
+                        s32 cnt;
                         s32 lk;
-                        u8* entry;
+                        ToyListEntry* entry;
                         HSD_Archive* oa;
                         char* md;
                         if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC)) {
@@ -3987,79 +3998,66 @@ void _Toy_8030B530(HSD_GObj* arg0)
                         } else {
                             cnt = *gmMainLib_8015CC90();
                         }
-                        lk = cnt + cur_idx;
-                        entry = M2C_FIELD(display, u8**, 0x138);
+                        lk = cnt + display->selectedIdx;
+                        entry = display->first_entry;
                         {
                             s16 tid = Toy_sbss_804D6EDC[lk - 1];
-                            oa = *(HSD_Archive**) (entry + 0x14);
+                            oa = entry->archive;
                             md = Toy_8030813C(tid, lk);
                             if (oa != NULL) {
                                 lbArchive_80016EFC(oa);
-                                *(HSD_Archive**) (entry + 0x14) = NULL;
+                                entry->archive = NULL;
                             }
-                            *(char**) (entry + 0x8) = md + 4;
-                            *(char**) (entry + 0xC) = md + 0x24;
-                            *(s16*) (entry + 0x10) = tid;
-                            *(HSD_Archive**) (entry + 0x14) =
-                                lbArchive_LoadSymbols(
-                                    *(char**) (entry + 0x08), &sp190,
-                                    *(char**) (entry + 0x0C), 0);
+                            entry->archive_name = md + 4;
+                            entry->symbol_name = md + 0x24;
+                            entry->trophy_id = tid;
+                            entry->archive = lbArchive_LoadSymbols(
+                                entry->archive_name, &sp190,
+                                entry->symbol_name, 0);
                         }
                     } else {
-                        u8* entry;
+                        ToyListEntry* entry;
                         HSD_Archive* oa;
                         char* md;
                         s16 tid;
-                        entry = M2C_FIELD(display, u8**, 0x138);
-                        tid = Toy_sbss_804D6EDC[cur_idx - 1];
-                        oa = *(HSD_Archive**) (entry + 0x14);
+                        entry = display->first_entry;
+                        tid = Toy_sbss_804D6EDC[display->selectedIdx - 1];
+                        oa = entry->archive;
                         md = Toy_8030813C(
-                            tid, (enum_t) &Toy_sbss_804D6EDC[cur_idx]);
+                            tid, (enum_t) &Toy_sbss_804D6EDC
+                                      [display->selectedIdx]);
                         if (oa != NULL) {
                             lbArchive_80016EFC(oa);
-                            *(HSD_Archive**) (entry + 0x14) = NULL;
+                            entry->archive = NULL;
                         }
-                        *(char**) (entry + 0x8) = md + 4;
-                        *(char**) (entry + 0xC) = md + 0x24;
-                        *(s16*) (entry + 0x10) = tid;
-                        *(HSD_Archive**) (entry + 0x14) =
-                            lbArchive_LoadSymbols(*(char**) (entry + 0x08),
-                                                  &sp18C,
-                                                  *(char**) (entry + 0x0C), 0);
+                        entry->archive_name = md + 4;
+                        entry->symbol_name = md + 0x24;
+                        entry->trophy_id = tid;
+                        entry->archive = lbArchive_LoadSymbols(
+                            entry->archive_name, &sp18C,
+                            entry->symbol_name, 0);
                     }
-                    {
-                        HSD_Archive* ma =
-                            *(HSD_Archive**) (M2C_FIELD(display, u8**, 0x13C) +
-                                              0x14);
-                        if (ma != NULL) {
-                            lbArchive_80016EFC(ma);
-                            *(HSD_Archive**) (M2C_FIELD(display, u8**, 0x13C) +
-                                              0x14) = NULL;
-                        }
+                    if (display->last_entry->archive != NULL) {
+                        lbArchive_80016EFC(display->last_entry->archive);
+                        display->last_entry->archive = NULL;
                     }
-                    M2C_FIELD(display, void**, 0x140) =
-                        *(void**) M2C_FIELD(display, u8**, 0x140);
-                    M2C_FIELD(display, void**, 0x138) =
-                        *(void**) M2C_FIELD(display, u8**, 0x138);
-                    M2C_FIELD(display, void**, 0x13C) =
-                        *(void**) M2C_FIELD(display, u8**, 0x13C);
+                    display->selected_entry = display->selected_entry->prev;
+                    display->first_entry = display->first_entry->prev;
+                    display->last_entry = display->last_entry->prev;
                 } else {
-                    M2C_FIELD(display, void**, 0x140) =
-                        *(void**) M2C_FIELD(display, u8**, 0x140);
+                    display->selected_entry = display->selected_entry->prev;
                 }
             } else {
-                s16 total;
-                s16 cur_idx;
+                s32 total;
                 lbAudioAx_80024030(2);
-                M2C_FIELD(display, s16*, 0x154) =
-                    M2C_FIELD(display, s16*, 0x154) + 1;
+                display->selectedIdx = display->selectedIdx + 1;
                 if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC)) {
                     total = M2C_FIELD(base, s16*, 0x3EC);
                 } else {
                     total = *gmMainLib_8015CC90();
                 }
-                if (M2C_FIELD(display, s16*, 0x154) >= total) {
-                    M2C_FIELD(display, s16*, 0x154) = 0;
+                if (display->selectedIdx >= total) {
+                    display->selectedIdx = 0;
                 }
                 if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC)) {
                     total = M2C_FIELD(base, s16*, 0x3EC);
@@ -4067,16 +4065,15 @@ void _Toy_8030B530(HSD_GObj* arg0)
                     total = *gmMainLib_8015CC90();
                 }
                 if (total > 3) {
-                    s16 cnt;
+                    s32 cnt;
                     if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC)) {
                         cnt = M2C_FIELD(base, s16*, 0x3EC);
                     } else {
                         cnt = *gmMainLib_8015CC90();
                     }
-                    cur_idx = M2C_FIELD(display, s16*, 0x154);
-                    if ((s32) (cur_idx + 1) >= cnt) {
-                        s16 cnt2;
-                        u8* entry;
+                    if ((s32) (display->selectedIdx + 1) >= cnt) {
+                        s32 cnt2;
+                        ToyListEntry* entry;
                         HSD_Archive* oa;
                         char* md;
                         s16 tid;
@@ -4086,76 +4083,62 @@ void _Toy_8030B530(HSD_GObj* arg0)
                         } else {
                             cnt2 = *gmMainLib_8015CC90();
                         }
-                        entry =
-                            *(u8**) (M2C_FIELD(display, u8**, 0x13C) + 0x04);
-                        lk = cur_idx - cnt2;
-                        tid = M2C_FIELD(Toy_sbss_804D6EDC, s16*, (lk * 2) + 2);
-                        oa = *(HSD_Archive**) (entry + 0x14);
+                        entry = display->last_entry->next;
+                        lk = display->selectedIdx - cnt2;
+                        tid = Toy_sbss_804D6EDC[lk + 1];
+                        oa = entry->archive;
                         md = Toy_8030813C(tid, (enum_t) Toy_sbss_804D6EDC);
                         if (oa != NULL) {
                             lbArchive_80016EFC(oa);
-                            *(HSD_Archive**) (entry + 0x14) = NULL;
+                            entry->archive = NULL;
                         }
-                        *(char**) (entry + 0x8) = md + 4;
-                        *(char**) (entry + 0xC) = md + 0x24;
-                        *(s16*) (entry + 0x10) = tid;
-                        *(HSD_Archive**) (entry + 0x14) =
-                            lbArchive_LoadSymbols(*(char**) (entry + 0x08),
-                                                  &sp188,
-                                                  *(char**) (entry + 0x0C), 0);
+                        entry->archive_name = md + 4;
+                        entry->symbol_name = md + 0x24;
+                        entry->trophy_id = tid;
+                        entry->archive = lbArchive_LoadSymbols(
+                            entry->archive_name, &sp188,
+                            entry->symbol_name, 0);
                     } else {
-                        u8* entry;
+                        ToyListEntry* entry;
                         HSD_Archive* oa;
                         char* md;
                         s16 tid;
-                        entry =
-                            *(u8**) (M2C_FIELD(display, u8**, 0x13C) + 0x04);
-                        tid = Toy_sbss_804D6EDC[cur_idx + 1];
-                        oa = *(HSD_Archive**) (entry + 0x14);
+                        entry = display->last_entry->next;
+                        tid = Toy_sbss_804D6EDC[display->selectedIdx + 1];
+                        oa = entry->archive;
                         md = Toy_8030813C(
-                            tid, (enum_t) &Toy_sbss_804D6EDC[cur_idx]);
+                            tid, (enum_t) &Toy_sbss_804D6EDC
+                                      [display->selectedIdx]);
                         if (oa != NULL) {
                             lbArchive_80016EFC(oa);
-                            *(HSD_Archive**) (entry + 0x14) = NULL;
+                            entry->archive = NULL;
                         }
-                        *(char**) (entry + 0x8) = md + 4;
-                        *(char**) (entry + 0xC) = md + 0x24;
-                        *(s16*) (entry + 0x10) = tid;
-                        *(HSD_Archive**) (entry + 0x14) =
-                            lbArchive_LoadSymbols(*(char**) (entry + 0x08),
-                                                  &sp184,
-                                                  *(char**) (entry + 0x0C), 0);
+                        entry->archive_name = md + 4;
+                        entry->symbol_name = md + 0x24;
+                        entry->trophy_id = tid;
+                        entry->archive = lbArchive_LoadSymbols(
+                            entry->archive_name, &sp184,
+                            entry->symbol_name, 0);
                     }
-                    {
-                        HSD_Archive* ma =
-                            *(HSD_Archive**) (M2C_FIELD(display, u8**, 0x138) +
-                                              0x14);
-                        if (ma != NULL) {
-                            lbArchive_80016EFC(ma);
-                            *(HSD_Archive**) (M2C_FIELD(display, u8**, 0x138) +
-                                              0x14) = NULL;
-                        }
+                    if (display->first_entry->archive != NULL) {
+                        lbArchive_80016EFC(display->first_entry->archive);
+                        display->first_entry->archive = NULL;
                     }
-                    M2C_FIELD(display, void**, 0x140) =
-                        *(void**) (M2C_FIELD(display, u8**, 0x140) + 0x04);
-                    M2C_FIELD(display, void**, 0x138) =
-                        *(void**) (M2C_FIELD(display, u8**, 0x138) + 0x04);
-                    M2C_FIELD(display, void**, 0x13C) =
-                        *(void**) (M2C_FIELD(display, u8**, 0x13C) + 0x04);
+                    display->selected_entry = display->selected_entry->next;
+                    display->first_entry = display->first_entry->next;
+                    display->last_entry = display->last_entry->next;
                 } else {
-                    M2C_FIELD(display, void**, 0x140) =
-                        *(void**) (M2C_FIELD(display, u8**, 0x140) + 0x04);
+                    display->selected_entry = display->selected_entry->next;
                 }
             }
 
             _Toy_80307828(0);
             _Toy_8030715C(0.0f, 0.0f);
             state->x58 = 0x95E;
-            Toy_803087F4(M2C_FIELD(display, void**, 0x140));
-            _Toy_803084A0(*(s16*) (M2C_FIELD(display, u8**, 0x140) + 0x10));
-            Toy_803083D8(M2C_FIELD(ed8, HSD_JObj**, 0x30),
-                         (s32) *
-                             (s16*) (M2C_FIELD(display, u8**, 0x140) + 0x10));
+            Toy_803087F4(display->selected_entry);
+            _Toy_803084A0(display->selected_entry->trophy_id);
+            Toy_803083D8(ed8->x30,
+                         (s32) display->selected_entry->trophy_id);
         }
 
         trigger = Toy_80305B88();
@@ -4164,8 +4147,6 @@ void _Toy_8030B530(HSD_GObj* arg0)
         }
 
         {
-            f32 moved_x = 0.3f * adj_sx;
-            f32 moved_y = 0.3f * adj_sy;
             f32 top = HSD_CObjGetTop(cobj);
             f32 bottom = HSD_CObjGetBottom(cobj);
             f32 right = HSD_CObjGetRight(cobj);
@@ -4176,19 +4157,19 @@ void _Toy_8030B530(HSD_GObj* arg0)
                 return;
             }
             if (HSD_PadCopyStatus[1].button & 8) {
-                f32 nt = top + 0.001f;
-                f32 nb = bottom + 0.001f;
-                HSD_CObjSetTop(cobj, nt);
-                HSD_CObjSetBottom(cobj, nb);
-                OSReport("top = %f, bottom = %f\n", nt, nb);
+                top += 0.001f;
+                bottom += 0.001f;
+                HSD_CObjSetTop(cobj, top);
+                HSD_CObjSetBottom(cobj, bottom);
+                OSReport("top = %f, bottom = %f\n", top, bottom);
                 return;
             }
             if (HSD_PadCopyStatus[1].button & 4) {
-                f32 nt = top - 0.001f;
-                f32 nb = bottom - 0.001f;
-                HSD_CObjSetTop(cobj, nt);
-                HSD_CObjSetBottom(cobj, nb);
-                OSReport("top = %f, bottom = %f\n", nt, nb);
+                top -= 0.001f;
+                bottom -= 0.001f;
+                HSD_CObjSetTop(cobj, top);
+                HSD_CObjSetBottom(cobj, bottom);
+                OSReport("top = %f, bottom = %f\n", top, bottom);
                 return;
             }
             if (HSD_PadCopyStatus[1].button & 1) {
@@ -4976,8 +4957,8 @@ void _Toy_8030FE48(void* arg0, s32 arg1)
     void* sym;
     void* zero;
     void* sym2;
-    s32 start;
     s32 var_r7;
+    s32 start;
     ptr = &_Toy_sbss_804D6E64[(s8) toy[0x195]];
     *(s16*) (data + 0x154) = *(s16*) sel;
 
@@ -5511,15 +5492,11 @@ void _Toy_803109A0(s32 arg0, s32 arg1, s32 arg2)
     ToyTable table;
     char buf[16];
     s32 idx;
-    s32 target;
 
-    target = (u32) arg0;
-
-    /* Copy table from _Toy_803B8910 to stack */
     table = *(ToyTable*) _Toy_803B8910;
 
     for (idx = 0; idx < 9; idx++) {
-        if (target == table.entries[idx].id) {
+        if (arg0 == table.entries[idx].id) {
             break;
         }
     }
@@ -5529,12 +5506,12 @@ void _Toy_803109A0(s32 arg0, s32 arg1, s32 arg2)
         DevText_StoreColorIndex(_Toy_sbss_804D6E98, 0);
     }
 
-    if (target == 8) {
-        s32 ret = Toy_80304B94(target);
+    if (arg0 == 8) {
+        s32 ret = Toy_80304B94(arg0);
         sprintf(buf, "Rea_%c %3d/%3d", table.entries[idx].value_byte, arg1,
                 ret);
     } else {
-        s32 ret = Toy_80304B94(target);
+        s32 ret = Toy_80304B94(arg0);
         sprintf(buf, "Rea_%c %3d/%3d\n", table.entries[idx].value_byte, arg1,
                 ret);
     }

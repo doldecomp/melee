@@ -724,38 +724,41 @@ void fn_8024FC48(HSD_GObj* gobj)
     }
 }
 
-static inline void
-mnDataDel_AnimateMenuItems(struct MnDataDelGObjUserData* user_data)
+static inline AnimLoopSettings*
+mnDataDel_GetAnimSettings(struct MnDataDelData* data)
 {
-    s32 i;
-
-    for (i = 0; i < 6; i++) {
-        mn_8022EE84(user_data->x10[mnDataDel_803EF8AC[i]],
-                    &mnDataDel_803EF870.x0, (enum _HSD_TypeMask) 0x480);
-    }
+    return &data->x0;
 }
 
 void fn_8024FD40(HSD_GObj* gobj)
 {
     f32 frame;
-    struct MnDataDelGObjUserData* user_data;
+    u8* user_data;
     HSD_GObjProc* proc;
     HSD_JObj* jobj;
+    struct MnDataDelData* data;
+    s32 i;
     PAD_STACK(16);
 
     jobj = GET_JOBJ(gobj);
     user_data = gobj->user_data;
+    data = &mnDataDel_803EF870;
     if ((u8) mn_804A04F0.cur_menu != 0x18) {
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         proc = HSD_GObj_SetupProc(gobj, fn_8024FBA4, 0);
         proc->flags_3 = HSD_GObj_804D783C;
-        HSD_SisLib_803A5CC4(user_data->xC);
+        HSD_SisLib_803A5CC4(*(HSD_Text**) (user_data + 0xC));
         return;
     }
-    frame =
-        mn_8022EE84(jobj, &mnDataDel_803EF870.x0, (enum _HSD_TypeMask) 0x480);
-    mnDataDel_AnimateMenuItems(user_data);
-    if (frame == mnDataDel_803EF870.x0.end_frame) {
+    frame = mn_8022EE84(jobj, &mnDataDel_803EF870.x0,
+                        (enum _HSD_TypeMask) 0x480);
+    for (i = 0; i < 6; i++) {
+        mn_8022EE84(*(HSD_JObj**) (user_data + mnDataDel_803EF8AC[i] * 4 +
+                                   0x10),
+                    mnDataDel_GetAnimSettings(data),
+                    (enum _HSD_TypeMask) 0x480);
+    }
+    if (frame == data->x0.end_frame) {
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         proc = HSD_GObj_SetupProc(gobj, fn_8024FC48, 0);
         proc->flags_3 = HSD_GObj_804D783C;

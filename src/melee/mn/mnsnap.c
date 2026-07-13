@@ -112,6 +112,11 @@ static void* mnSnap_thumb_imgs[4];
 
 void mnSnap_80254298(void);
 
+static inline s32* mnSnap_GetCardResult(void)
+{
+    return &mnSnap_804A0A10.card_result;
+}
+
 /// Recursively loads snapshot thumbnails from memory card.
 void mnSnap_80253184(void)
 {
@@ -119,7 +124,6 @@ void mnSnap_80253184(void)
     mnSnap_State* snap = &mnSnap_804A0A10;
     s32* p52;
     s32* p4F;
-    s32* p57;
 
     p4F = &snap->cur_page;
     {
@@ -131,12 +135,11 @@ void mnSnap_80253184(void)
         s32 index = *p52 + (*p4F * 4);
         snap->card_result = lbSnap_8001E058(*p50, index);
     }
-    p57 = &snap->card_result;
-    if (*p57 == 8) {
+    if (*mnSnap_GetCardResult() == 8) {
         mnSnap_80254298();
         return;
     }
-    if (*p57 != 11) {
+    if (*mnSnap_GetCardResult() != 11) {
         s32* flags = &mnSnap_804A0A10.thumb_loaded[0];
         s32* p51;
 
@@ -145,12 +148,13 @@ void mnSnap_80253184(void)
         p51 = &snap->pending_loads;
         *p51 -= 1;
         if (*p51 != 0) {
-            *p57 = lbSnap_8001E058(*p50, *p52 + (*p4F * 4));
-            if (*p57 == 8) {
+            *mnSnap_GetCardResult() =
+                lbSnap_8001E058(*p50, *p52 + (*p4F * 4));
+            if (*mnSnap_GetCardResult() == 8) {
                 mnSnap_80254298();
                 return;
             }
-            if (*p57 != 11) {
+            if (*mnSnap_GetCardResult() != 11) {
                 flags[*p52] = 1;
                 *p52 += 1;
                 *p51 -= 1;
@@ -171,7 +175,8 @@ static inline s32* mnSnap_GetLoadIdx(mnSnap_State* snap)
 
 static inline void* mnSnap_GetThumbImage(s32* load_idx)
 {
-    return mnSnap_thumb_imgs[*load_idx % 4];
+    void* image = mnSnap_thumb_imgs[*load_idx % 4];
+    return image;
 }
 
 static inline HSD_DObj* mnSnap_GetDObj(HSD_JObj* jobj)
@@ -202,7 +207,6 @@ static void mnSnap_8025329C(void)
     s32* p51;
     s32* flags;
     s32 result;
-    PAD_STACK(4);
 
     result = lb_8001B6F8();
     if (result == 11) {
@@ -213,11 +217,16 @@ static void mnSnap_8025329C(void)
         void* img;
 
         p52 = mnSnap_GetLoadIdx(snap);
+        p52 = p52;
         if (lbSnap_8001DE8C(mnSnap_thumb_imgs[snap->load_idx % 4]) == 1) {
             img = mnSnap_GetThumbImage(p52);
             jobj = mnSnap_GetThumbJObj(p52, snap);
             HSD_ASSERT(193, jobj);
             HSD_ASSERT(194, jobj->u.dobj);
+            /* String order from the other branch of the inlined tobj chain. */
+            (void) "jobj->u.dobj->mobj";
+            (void) "jobj->u.dobj->mobj->tobj";
+            (void) "jobj->u.dobj->mobj->tobj->imagedesc";
             HSD_ASSERT(195, jobj->u.dobj->next);
             HSD_ASSERT(196, jobj->u.dobj->next->next);
             HSD_ASSERT(197, jobj->u.dobj->next->next->mobj);
@@ -694,6 +703,55 @@ void mnSnap_8025409C(s32 dlg_type)
     mnSnap_804A0A10.right_btn = right;
 }
 
+static inline void mnSnap_RefreshSlotSelection(mnSnap_State* snap, s32* p50,
+                                                s32* p51)
+{
+    s32 i;
+    PAD_STACK(24);
+
+    mnSnap_80253964();
+    mnSnap_80253E90(0);
+    mnSnap_80253E90(1);
+
+    {
+        /* walk strides through card_status (s16 at byte 0x128) */
+        s32 byte_off;
+        s16* walk = (s16*) snap;
+
+        i = 0;
+        byte_off = 4;
+        for (; i < 2; i++, walk++, byte_off += 8) {
+            if (walk[0x94] != 0) { /* snap->card_status[i] */
+                f32 t;
+                if (*p50 == i) {
+                    t = 1.0F;
+                } else {
+                    t = 0.0F;
+                }
+                HSD_JObjReqAnimAll(
+                    *(HSD_JObj**) ((u32) snap + byte_off + 0x98), t);
+            } else {
+                HSD_JObjReqAnimAll(
+                    *(HSD_JObj**) ((u32) snap + byte_off + 0x98), 2.0F);
+            }
+            HSD_JObjAnimAll(
+                *(HSD_JObj**) ((u32) snap + byte_off + 0x98));
+        }
+    }
+
+    *p51 = 0;
+}
+
+static inline void mnSnap_ShowSubmenu(mnSnap_State* snap)
+{
+    s32 i;
+
+    for (i = 0; i < 5; i++) {
+        HSD_JObjClearFlagsAll(snap->option_jobjs[i], JOBJ_HIDDEN);
+    }
+    HSD_JObjSetFlagsAll(snap->move_jobj, JOBJ_HIDDEN);
+}
+
 /// Resets to slot selection state after a card error or empty card.
 void mnSnap_80254298(void)
 {
@@ -701,9 +759,7 @@ void mnSnap_80254298(void)
     HSD_Text** text_slot;
     s32* p50 = &mnSnap_804A0A10.active_slot;
     s32* p51;
-    s32 i;
     mnSnap_State* snap = &mnSnap_804A0A10;
-    PAD_STACK(24);
 
     snap->timer = 0xB;
     *p50 = 0;
@@ -734,41 +790,8 @@ void mnSnap_80254298(void)
     HSD_JObjReqAnimAll(*jobj_slot, 0.0F);
     HSD_JObjAnimAll(*jobj_slot);
 
-    for (i = 0; i < 5; i++) {
-        HSD_JObjClearFlagsAll(snap->option_jobjs[i], JOBJ_HIDDEN);
-    }
-    HSD_JObjSetFlagsAll(snap->move_jobj, JOBJ_HIDDEN);
-
-    mnSnap_80253964();
-    mnSnap_80253E90(0);
-    mnSnap_80253E90(1);
-
-    {
-        /* walk strides through card_status (s16 at byte 0x128) */
-        s32 byte_off;
-        s16* walk = (s16*) snap;
-
-        i = 0;
-        byte_off = 4;
-        for (; i < 2; i++, walk++, byte_off += 8) {
-            if (walk[0x94] != 0) { /* snap->card_status[i] */
-                f32 t;
-                if (*p50 == i) {
-                    t = 1.0F;
-                } else {
-                    t = 0.0F;
-                }
-                HSD_JObjReqAnimAll(
-                    *(HSD_JObj**) ((u32) snap + byte_off + 0x98), t);
-            } else {
-                HSD_JObjReqAnimAll(
-                    *(HSD_JObj**) ((u32) snap + byte_off + 0x98), 2.0F);
-            }
-            HSD_JObjAnimAll(*(HSD_JObj**) ((u32) snap + byte_off + 0x98));
-        }
-    }
-
-    *p51 = 0;
+    mnSnap_ShowSubmenu(snap);
+    mnSnap_RefreshSlotSelection(snap, p50, p51);
 }
 
 /// Handles Yes/No dialog button inputs. Sets snap->dlg_result to the selection
@@ -898,7 +921,7 @@ void fn_802545C4(void)
                 mnSnap_80253E90(1);
                 mnSnap_80253F60();
                 mnSnap_804A0A10.pending_loads = 0;
-                goto end_loop;
+                return;
             } else {
                 s32 cs = mnSnap_804A0A10
                              .card_status[mnSnap_804A0A10.active_slot ^ 1];
@@ -1420,28 +1443,27 @@ void fn_802545C4(void)
                         mnSnap_80253E90(1);
                         mnSnap_80253F60();
                         mnSnap_804A0A10.pending_loads = 0;
-                    } else {
-                        mnSnap_80253640(mnSnap_804A0A10.cursor_idx / 4);
-                        if ((mnSnap_804A0A10.cursor_idx / 4) ==
-                            mnSnap_804A0A10.cur_page)
-                        {
-                            jobj = mnSnap_804A0A10.select_jobj;
-                            translate =
-                                &mnSnap_804A0A10
-                                     .thumb_jobjs[mnSnap_804A0A10.cursor_idx %
-                                                  4]
-                                     ->translate;
-                            HSD_JObjSetTranslate(jobj, translate);
-                            HSD_JObjClearFlagsAll(mnSnap_804A0A10.select_jobj,
-                                                  JOBJ_HIDDEN);
-                        } else {
-                            HSD_JObjSetFlagsAll(mnSnap_804A0A10.select_jobj,
-                                                JOBJ_HIDDEN);
-                        }
-                        mnSnap_80253964();
-                        mnSnap_804A0A10.state = 4;
+                        break;
                     }
                 }
+                mnSnap_80253640(mnSnap_804A0A10.cursor_idx / 4);
+                if ((mnSnap_804A0A10.cursor_idx / 4) ==
+                    mnSnap_804A0A10.cur_page)
+                {
+                    jobj = mnSnap_804A0A10.select_jobj;
+                    translate =
+                        &mnSnap_804A0A10
+                             .thumb_jobjs[mnSnap_804A0A10.cursor_idx % 4]
+                             ->translate;
+                    HSD_JObjSetTranslate(jobj, translate);
+                    HSD_JObjClearFlagsAll(mnSnap_804A0A10.select_jobj,
+                                          JOBJ_HIDDEN);
+                } else {
+                    HSD_JObjSetFlagsAll(mnSnap_804A0A10.select_jobj,
+                                        JOBJ_HIDDEN);
+                }
+                mnSnap_80253964();
+                mnSnap_804A0A10.state = 4;
             }
         } else if (mnSnap_804A0A10.dlg_result == 2) {
             lbAudioAx_80024030(0);
@@ -2001,8 +2023,8 @@ void fn_802545C4(void)
             p_jobj = mnSnap_804A0A10.progress_jobj;
             t = HSD_JObjGetTranslationX(p_jobj);
             if (t < 3.0F) {
-                f32 new_t = t + 3.0F;
-                HSD_JObjSetTranslateX(p_jobj, new_t);
+                t += 3.0F;
+                HSD_JObjSetTranslateX(p_jobj, t);
             }
         }
         result = lb_8001B6F8();
@@ -2370,7 +2392,6 @@ void fn_802545C4(void)
         break;
     }
 
-end_loop:
     while (mnSnap_804A0A10.pending_loads != 0) {
         mnSnap_8025329C();
     }
@@ -2532,9 +2553,7 @@ void mnSnap_80257F24(void)
         "MenMainSubSn_Top_matanim_joint", (void**) &snap->sub_shapeanim,
         "MenMainSubSn_Top_shapeanim_joint", (void**) &snap->page_joint,
         "MenMainSubSn_Top_joint", (void**) &snap->load_joint,
-        "MenMainLoadSn_Top_joint", (void**) &snap->load_animjoint,
-        "MenMainLoadSn_Top_animjoint", (void**) &snap->load_matanim,
-        "MenMainLoadSn_Top_matanim_joint", arrows_joint,
+        "MenMainLoadSn_Top_joint", arrows_joint,
         "MenMainSubSn_Top_joint", arrows_animjoint,
         "MenMainSubSn_Top_animjoint", arrows_matanim,
         "MenMainSubSn_Top_matanim_joint", arrows_shapeanim,

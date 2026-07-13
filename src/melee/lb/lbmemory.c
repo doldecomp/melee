@@ -270,30 +270,30 @@ void lbMemory_80015320(int arg0, Handle* handle, int arg2, int cancelflag)
 {
     int enabled;
     u32 size;
-    u32 old;
+    void* old;
     void** currentp;
     Handle* next;
     struct LBMgr* mgr;
     struct Allocator* alloc;
-    u32 current;
+    void* current;
 
     alloc = &g_alloc;
     currentp = &alloc->x6E4;
-    current = (u32) alloc->x6E4;
+    current = alloc->x6E4;
 
     if (cancelflag != 0) {
         __assert(lbl_803BA2C0, 0x188U, &lbl_803BA368[0xC]);
     }
 
     if (handle != NULL) {
-        if ((old = (u32) handle->x4_lo) != current) {
-            handle->x4_lo = (void*) current;
-            arg0 = old;
+        if ((old = handle->x4_lo) != current) {
+            handle->x4_lo = current;
+            arg0 = (u32) old;
             *currentp = (void*) ((u32) handle->x4_lo + (u32) handle->x8_hi);
 
             if ((u32) handle->x4_lo < 0x80000000U) {
                 HSD_DevComRequest(
-                    0, arg0, current,
+                    0, arg0, (u32) current,
                     ((u32) handle->x8_hi + 0x1F) & 0xFFFFFFE0, 0x1B, 1,
                     (HSD_DevComCallback) (Event) lbMemory_80015320,
                     handle->x0_next);
@@ -307,8 +307,8 @@ void lbMemory_80015320(int arg0, Handle* handle, int arg2, int cancelflag)
                 if (mgr->size != 0) {
                     __assert(lbl_803BA2C0, 0x14FU, lbl_803BA368);
                 }
-                mgr->src = (u8*) old;
-                mgr->dst = (u8*) current;
+                mgr->src = old;
+                mgr->dst = current;
                 mgr->size = size;
                 mgr->offset = 0;
                 mgr->cb_arg = (u32) next;

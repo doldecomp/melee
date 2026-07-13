@@ -1833,8 +1833,11 @@ void fn_80025FAC(HSD_GObj* gobj, void* userdata, void* params)
                         lbAudioAx_800237A8(ud->x14, ud->x20, ud->x2C.pan);
                     return;
                 }
+                (void) ud->x2C.pan;
+                (void) ud->x20;
+                (void) fn_80025FAC_inline(ud);
                 ud->voice_id = lbAudioAx_80023870(
-                    fn_80025FAC_inline(ud), ud->x20, ud->x2C.pan, group);
+                    ud->x14, ud->x20, ud->x2C.pan, group);
             }
             break;
         case 9:
@@ -2885,6 +2888,20 @@ void lbAudioAx_8002838C(void)
 
 s32 lbAudioAx_80028690(void)
 {
+    typedef struct lbAudioAx_Data {
+        u8 pad_0[0x9FC];
+        char* x9FC;
+        char* xA00;
+        char* xA04;
+        u8 pad_A08[0xC0];
+        char* xAC8;
+        u8 pad_ACC[8];
+        char* xAD4;
+    } lbAudioAx_Data;
+
+    char* base = lbl_803BB300;
+    char* path;
+    lbAudioAx_Data* data = (lbAudioAx_Data*) base;
     lbAudioAx_PoolAlloc* st = &lbl_80433710;
     s32 var_r29;
 
@@ -2893,25 +2910,25 @@ s32 lbAudioAx_80028690(void)
     fn_80024654(1);
 
     if (lbLang_IsSavedLanguageUS()) {
-        strcpy(lbl_803BB340, &lbl_803BB300[0x1790]);
+        strcpy(base + 0x40, base + 0x1790);
         lbl_804D38D0 = 10;
         var_r29 = 1;
     } else {
-        strcpy(lbl_803BB340, &lbl_803BB300[0x179C]);
+        strcpy(base + 0x40, base + 0x179C);
         lbl_804D38D0 = 7;
         var_r29 = 0;
     }
 
-    strcpy(lbl_803BB380, &lbl_803BB300[0x179C]);
+    strcpy(base + 0x80, base + 0x179C);
     lbl_804D38D4 = 7;
 
     if (lbl_804D3878 == -1) {
         HSD_AudioSFXKeyOffAll();
         HSD_SynthSFXUnloadBank(0);
         if (lbl_80433984[0] < 1) {
-            strcpy(&lbl_803BB340[lbl_804D38D0],
-                   *(char**) (lbl_803BB300 + 0x9FC));
-            lbl_80433A64[0] = HSD_SynthSFXLoad(lbl_803BB340, 0, 0, 0);
+            path = base + lbl_804D38D0;
+            strcpy(path + 0x40, data->x9FC);
+            lbl_80433A64[0] = HSD_SynthSFXLoad(base + 0x40, 0, 0, 0);
             HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
             lbl_80433984[0] = 2;
         }
@@ -2926,8 +2943,9 @@ s32 lbAudioAx_80028690(void)
 
         lbl_804D3878 = var_r29;
         AXDriver_8038DCFC();
-        strcpy(&lbl_803BB340[lbl_804D38D0], "smash2.sem");
-        AXDriver_8038DA70(lbl_803BB340, lb_800195D0);
+        path = base + lbl_804D38D0;
+        strcpy(path + 0x40, base + 0x17A8);
+        AXDriver_8038DA70(base + 0x40, lb_800195D0);
 
         a = lbl_80433A64;
         b = lbl_804337C4;
@@ -2946,33 +2964,33 @@ s32 lbAudioAx_80028690(void)
         HSD_SynthSFXUnloadBank(2);
 
         if (lbl_80433984[0x33] < 1) {
-            strcpy(&lbl_803BB340[lbl_804D38D0],
-                   *(char**) (lbl_803BB300 + 0xAC8));
-            lbl_80433A64[0x33] = HSD_SynthSFXLoad(lbl_803BB340, 1, 0, 0);
+            path = base + lbl_804D38D0;
+            strcpy(path + 0x40, data->xAC8);
+            lbl_80433A64[0x33] = HSD_SynthSFXLoad(base + 0x40, 1, 0, 0);
             HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
             lbl_80433984[0x33] = 2;
         }
 
         if (lbl_80433984[1] < 1) {
-            strcpy(&lbl_803BB340[lbl_804D38D0],
-                   *(char**) (lbl_803BB300 + 0xA00));
-            lbl_80433A64[1] = HSD_SynthSFXLoad(lbl_803BB340, 1, 0, 0);
+            path = base + lbl_804D38D0;
+            strcpy(path + 0x40, data->xA00);
+            lbl_80433A64[1] = HSD_SynthSFXLoad(base + 0x40, 1, 0, 0);
             HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
             lbl_80433984[1] = 2;
         }
 
         if (lbl_80433984[0x36] < 1) {
-            strcpy(&lbl_803BB340[lbl_804D38D0],
-                   *(char**) (lbl_803BB300 + 0xAD4));
-            lbl_80433A64[0x36] = HSD_SynthSFXLoad(lbl_803BB340, 1, 0, 0);
+            path = base + lbl_804D38D0;
+            strcpy(path + 0x40, data->xAD4);
+            lbl_80433A64[0x36] = HSD_SynthSFXLoad(base + 0x40, 1, 0, 0);
             HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
             lbl_80433984[0x36] = 2;
         }
 
         if (lbl_80433984[2] < 1) {
-            strcpy(&lbl_803BB340[lbl_804D38D0],
-                   *(char**) (lbl_803BB300 + 0xA04));
-            lbl_80433A64[2] = HSD_SynthSFXLoad(lbl_803BB340, 2, 0, 0);
+            path = base + lbl_804D38D0;
+            strcpy(path + 0x40, data->xA04);
+            lbl_80433A64[2] = HSD_SynthSFXLoad(base + 0x40, 2, 0, 0);
             HSD_SynthSFXWaitForLoadCompletion(lb_800195D0);
             lbl_80433984[2] = 2;
         }

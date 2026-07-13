@@ -818,7 +818,10 @@ void lbBgFlash_80021410(void* arg0)
     dx = data->pos0.x - data->pos4.x;
     dz = data->pos0.z;
     dz -= data->pos4.z;
-    dy = data->pos0.y - data->pos4.y;
+    {
+        f32 y = data->pos0.y - data->pos4.y;
+        dy = y;
+    }
     dx *= dx;
     dy *= dy;
     dz *= dz;

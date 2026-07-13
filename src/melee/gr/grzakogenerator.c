@@ -254,17 +254,22 @@ void grZakoGenerator_801CA8B4(int arg0)
 
 void grZakoGenerator_801CAC14(HSD_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    s32 kind = itGetKind(gobj);
+    union {
+        Item* item;
+        Item_GObj* gobj;
+    } ip;
+    s32 kind;
+
+    ip.item = GET_ITEM(gobj);
+    kind = itGetKind(gobj);
 
     if (kind == 0x9F) {
-        grZakoGenerator_Entry* sentinel = lbl_8049F030.x4->entries;
-        sentinel += 80;
-        if (sentinel != NULL && sentinel->x4 == gobj) {
-            sentinel->x4 = NULL;
+        ip.gobj = NULL;
+        if (lbl_8049F030.x4->sentinel.x4 == gobj) {
+            lbl_8049F030.x4->sentinel.x4 = ip.gobj;
         }
     } else {
-        s32 idx = ip->xDD4_itemVar.zako.idx;
+        s32 idx = ip.item->xDD4_itemVar.zako.idx;
         if (idx != -1) {
             lbl_8049F030.x4->entries[idx].x4 = NULL;
             lbl_8049F030.x4->entries[idx].x2 = 2;
@@ -332,7 +337,8 @@ HSD_GObj* grZakoGenerator_801CAE04(grZakoGenerator_SpawnDesc* arg0)
 
 void grZakoGenerator_801CAEB0(int arg0, int arg1)
 {
-    grZakoGenerator_Data** data_p = &lbl_8049F030.x4;
+    grZakoGenerator_Data** data_ref = &lbl_8049F030.x4;
+    grZakoGenerator_Data** data_p = data_ref;
     s16 val;
     grZakoGenerator_Entry* sentinel = &(*data_p)->sentinel;
     arg1 = (s16) arg1;
@@ -340,6 +346,8 @@ void grZakoGenerator_801CAEB0(int arg0, int arg1)
 
     if (sentinel->x0 == -1) {
         sentinel->x0 = val;
+        if (sentinel != NULL) {
+        }
         sentinel->x8 = arg0;
         (*data_p)->sentinel.x4 = NULL;
     }

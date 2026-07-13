@@ -1701,6 +1701,12 @@ void grStadium_801D3B4C(int arg0, int slot_type)
     }
 }
 
+typedef union StadiumColor {
+    GXColor color;
+    U8Vec4 vector;
+    u32 packed;
+} StadiumColor;
+
 static const U8Vec4 grPs_803B7F8C[] = {
     { 0, 0, 0, 0x50 },
     { 0, 0, 0, 0x40 },
@@ -1708,56 +1714,63 @@ static const U8Vec4 grPs_803B7F8C[] = {
     { 0, 0, 0, 0x20 },
 };
 
+static inline u8 grStadium_ScaleColor(u8 value)
+{
+    f32 scaled = 1.25F * value;
+    if (scaled > 255.0F) {
+        scaled = 255.0F;
+    }
+    return scaled;
+}
+
 void grStadium_801D3BBC(Ground_GObj* arg0)
 {
-    GXColor sp28[5];
-    HSD_GObj* temp_r3;
-    HSD_GObj* temp_r3_4;
-    HSD_Text* temp_r3_2;
-    HSD_Text* temp_r3_3;
-    f32 var_f0;
-    f32 var_f0_2;
-    f32 var_f0_3;
-    s32 temp_r29;
+    UNUSED u64 pad;
+    StadiumColor colors[5];
+    HSD_Text* dynamic_text;
+    u8 color_state;
+    HSD_GObj* player_gobj;
+    HSD_GObj* current_player_gobj;
+    s32 player_num;
+    u8 slot_type;
+    f32 scaled_color;
+    s32 vertical_offset;
+    s32 player_index;
+    s32 text_offset;
+    HSD_Text* japanese_text;
     const char* character_name;
-    s32 var_r25;
-    s32 var_r28;
-    s32 var_r30;
-    s32 var_r30_2;
-    s8 temp_r25;
-    u8 temp_r26;
     TextWrapper* gp2;
-    Ground* gp;
+    Ground* ground;
     HSD_GObj* text_gobj;
-    PAD_STACK(24);
+    PAD_STACK(4);
 
-    var_r30 = 0;
-    gp = GET_GROUND(arg0);
-    text_gobj = gp->u.display.xD4;
+    player_num = 0;
+    ground = GET_GROUND(arg0);
+    text_gobj = ground->u.display.xD4;
     gp2 = text_gobj->user_data;
     HSD_ASSERT(0x884, gp2->win_static_p);
     HSD_ASSERT(0x885, gp2->win_dynamic_p);
-    var_r25 = 0;
+    player_index = 0;
     do {
-        if ((Player_GetPlayerSlotType(var_r25) != Gm_PKind_NA) &&
-            (Player_8003219C(var_r25) == 0))
+        if ((Player_GetPlayerSlotType(player_index) != Gm_PKind_NA) &&
+            (Player_8003219C(player_index) == 0))
         {
-            temp_r3 = Player_GetEntity(var_r25);
-            if (temp_r3 != NULL && gm_8016C6C0(temp_r3) == 0) {
-                var_r30 += 1;
+            player_gobj = Player_GetEntity(player_index);
+            if (player_gobj != NULL && gm_8016C6C0(player_gobj) == 0) {
+                player_num += 1;
             }
         }
-        var_r25 += 1;
-    } while (var_r25 < 6);
+        player_index += 1;
+    } while (player_index < 6);
     HSD_SisLib_803A7664(gp2->win_dynamic_p);
 
-    if (var_r30 == 1) {
+    if (player_num == 1) {
         HSD_SisLib_803A6368(gp2->win_static_p, 0xE);
-    } else if (var_r30 == 2) {
+    } else if (player_num == 2) {
         HSD_SisLib_803A6368(gp2->win_static_p, 0xF);
-    } else if (var_r30 == 3) {
+    } else if (player_num == 3) {
         HSD_SisLib_803A6368(gp2->win_static_p, 0x10);
-    } else if (var_r30 == 4) {
+    } else if (player_num == 4) {
         HSD_SisLib_803A6368(gp2->win_static_p, 0x11);
     } else {
         HSD_SisLib_803A6368(gp2->win_static_p, 3);
@@ -1768,60 +1781,52 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
     gp2->win_dynamic_p->default_alignment = 1;
     gp2->win_dynamic_p->default_fitting = 1;
     if (lbLang_IsSavedLanguageJP() != 0) {
-        temp_r3_2 = gp2->win_dynamic_p;
-        temp_r3_2->x34.x = 1.0f;
-        temp_r3_2->x34.y = 1.0f;
+        japanese_text = gp2->win_dynamic_p;
+        japanese_text->x34.x = 1.0F;
+        japanese_text->x34.y = 1.0F;
     } else {
-        temp_r3_3 = gp2->win_dynamic_p;
-        temp_r3_3->x34.x = 0.8f;
-        temp_r3_3->x34.y = 1.0f;
+        dynamic_text = gp2->win_dynamic_p;
+        dynamic_text->x34.x = 0.8F;
+        dynamic_text->x34.y = 1.0F;
         gp2->win_dynamic_p->default_kerning = 1;
     }
-    sp28[1] = *(GXColor*) &grPs_803B7F8C[0];
-    sp28[2] = *(GXColor*) &grPs_803B7F8C[1];
-    var_r28 = 0;
-    var_r30_2 = 0;
-    sp28[3] = *(GXColor*) &grPs_803B7F8C[2];
-    sp28[4] = *(GXColor*) &grPs_803B7F8C[3];
-    temp_r29 = sp28[var_r30].r;
+    colors[1].vector = grPs_803B7F8C[0];
+    colors[2].vector = grPs_803B7F8C[1];
+    colors[3].vector = grPs_803B7F8C[2];
+    colors[4].vector = grPs_803B7F8C[3];
+    vertical_offset = colors[player_num].packed;
+    text_offset = 0;
+    player_num = 0;
     do {
-        if (Player_GetPlayerSlotType(var_r30_2) != Gm_PKind_NA &&
-            Player_8003219C(var_r30_2) == 0)
+        if (Player_GetPlayerSlotType(player_num) != Gm_PKind_NA &&
+            Player_8003219C(player_num) == 0)
         {
-            temp_r3_4 = Player_GetEntity(var_r30_2);
-            if (temp_r3_4 != NULL && gm_8016C6C0(temp_r3_4) == 0) {
-                temp_r25 = Player_GetPlayerSlotType(var_r30_2);
-                temp_r26 = gm_8016B168();
-                sp28[0] = gm_80160968(gm_80160854(
-                    var_r30_2, Player_GetTeam(var_r30_2), temp_r26, temp_r25));
-                var_f0 = 1.25f * sp28[0].r;
-                if (var_f0 > 255.0f) {
-                    var_f0 = 255.0f;
-                }
-                sp28[0].r = (s8) var_f0;
-                var_f0_2 = 1.25f * sp28[0].g;
-                if (var_f0_2 > 255.0f) {
-                    var_f0_2 = 255.0f;
-                }
-                sp28[0].r = (u8) (s32) var_f0_2;
-                var_f0_3 = 1.25f * sp28[0].b;
-                if (var_f0_3 > 255.0f) {
-                    var_f0_3 = 255.0f;
-                }
-                sp28[0].g = (u8) (s32) var_f0_3;
-                sp28[0].b = 0xFF;
-                gp2->win_dynamic_p->text_color = sp28[0];
-                character_name = gm_80160A60(var_r30_2);
+            current_player_gobj = Player_GetEntity(player_num);
+            if (current_player_gobj != NULL &&
+                gm_8016C6C0(current_player_gobj) == 0)
+            {
+                slot_type = Player_GetPlayerSlotType(player_num);
+                color_state = gm_8016B168();
+                colors[0].color = gm_80160968(gm_80160854(
+                    player_num, Player_GetTeam(player_num), color_state,
+                    slot_type));
+                colors[0].color.r = grStadium_ScaleColor(colors[0].color.r);
+                colors[0].color.g = grStadium_ScaleColor(colors[0].color.g);
+                colors[0].color.b = grStadium_ScaleColor(colors[0].color.b);
+                colors[0].color.a = 0xFF;
+                gp2->win_dynamic_p->text_color = colors[0].color;
+                character_name = gm_80160A60(player_num);
                 if (character_name != NULL) {
-                    HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF58,
-                                        (f32) (temp_r29 + var_r28), "%s",
-                                        character_name);
+                    HSD_SisLib_803A6B98(
+                        gp2->win_dynamic_p, grPs_804DAF58,
+                        (f32) (vertical_offset + text_offset), "%s",
+                        character_name);
                 }
-                var_r28 += 0x20;
+                text_offset += 0x20;
             }
         }
-        var_r30_2 += 1;
-    } while (var_r30_2 < 6);
+        player_num += 1;
+    } while (player_num < 6);
 }
 
 void grStadium_801D3F40(Ground_GObj* arg0, int arg1)

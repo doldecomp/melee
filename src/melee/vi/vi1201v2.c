@@ -235,25 +235,9 @@ void fn_80320A1C(HSD_GObj* gobj)
     HSD_FogInterpretAnim(gobj->hsd_obj);
 }
 
-void un_80320A40_OnEnter(void* arg)
+static inline void un_80320A40_LoadArchives(u8* input)
 {
-    u8* input = arg;
     u8 char_index;
-    HSD_CObj* cobj;
-    HSD_GObj* gobj;
-    HSD_GObj* stand_gobj;
-    HSD_GObj* light_gobj;
-    HSD_Fog* fog;
-    HSD_JObj* child;
-    HSD_JObj* jobj;
-    HSD_LObj* lobj;
-    f32 scale;
-    PAD_STACK(16);
-
-    efLib_Init();
-    efAsync_LoadSync(0);
-    lbAudioAx_80023F28(0x5C);
-    lbAudioAx_80024E50(1);
 
     char_index = input[0];
 
@@ -269,6 +253,12 @@ void un_80320A40_OnEnter(void* arg)
     Toy_803124BC();
     un_804D7018 =
         lbArchive_LoadSymbols(viGetCharAnimByIndex(char_index), NULL);
+}
+
+static inline void un_80320A40_SetupCamera(void)
+{
+    HSD_GObj* gobj;
+    HSD_CObj* cobj;
 
     gobj = GObj_Create(0x13, 0x14, 0);
     cobj =
@@ -280,9 +270,12 @@ void un_80320A40_OnEnter(void* arg)
     HSD_CObjReqAnim(cobj, 0.0f);
     HSD_CObjAnim(cobj);
     HSD_GObj_SetupProc(gobj, un_80320984, 0);
+}
 
-    un_803207C4();
-    un_80320508(input[0], input[1]);
+static inline void un_80320A40_SetupKoopa(void)
+{
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
 
     gobj = GObj_Create(0xE, 0xF, 0);
     un_804D7030 = gobj;
@@ -295,13 +288,21 @@ void un_80320A40_OnEnter(void* arg)
     lb_8000C1C0(jobj, un_804D7024);
     lb_8000C290(jobj, un_804D7024);
     HSD_GObj_SetupProc(gobj, un_803204E4, 0x17);
+}
 
-    stand_gobj = GObj_Create(0xE, 0xF, 0);
-    un_804D7034 = stand_gobj;
+static inline void un_80320A40_SetupStand(void)
+{
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+    HSD_JObj* child;
+    f32 scale;
+
+    gobj = GObj_Create(0xE, 0xF, 0);
+    un_804D7034 = gobj;
     jobj = HSD_JObjLoadJoint(un_804D7014->models[0]->joint);
-    HSD_GObjObject_80390A70(stand_gobj, HSD_GObj_804D7849, jobj);
-    GObj_SetupGXLink(stand_gobj, HSD_GObj_JObjCallback, 0xB, 0);
-    HSD_GObj_SetupProc(stand_gobj, un_803204C0, 0x17);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
+    HSD_GObj_SetupProc(gobj, un_803204C0, 0x17);
 
     if (jobj == NULL) {
         child = NULL;
@@ -316,7 +317,8 @@ void un_80320A40_OnEnter(void* arg)
     scale = -Toy_803060BC(0x1E, 5);
     HSD_JObjSetRotationYWithMtxDirty(child, scale);
 
-    scale = 0.55f * (Toy_803060BC(0x1E, 4) * (1.0f / Toy_803060BC(0x1E, 3)));
+    scale = 0.55f * (Toy_803060BC(0x1E, 4) *
+                     (1.0f / Toy_803060BC(0x1E, 3)));
 
     HSD_JObjSetScaleXWithMtxDirty(child, scale);
     HSD_JObjSetScaleYWithMtxDirty(child, scale);
@@ -324,6 +326,31 @@ void un_80320A40_OnEnter(void* arg)
 
     lb_8000C1C0(jobj, un_804D7024);
     lb_8000C290(jobj, un_804D7024);
+}
+
+void un_80320A40_OnEnter(void* arg)
+{
+    u8* input = arg;
+    HSD_Fog* fog;
+    HSD_GObj* gobj;
+    HSD_GObj* light_gobj;
+    HSD_LObj* lobj;
+
+    efLib_Init();
+    efAsync_LoadSync(0);
+    lbAudioAx_80023F28(0x5C);
+    lbAudioAx_80024E50(1);
+
+    un_80320A40_LoadArchives(input);
+
+    un_80320A40_SetupCamera();
+
+    un_803207C4();
+    un_80320508(input[0], input[1]);
+
+    un_80320A40_SetupKoopa();
+
+    un_80320A40_SetupStand();
 
     gobj = GObj_Create(0xB, 3, 0);
     fog = HSD_FogLoadDesc(un_804D7010->fogs->desc);

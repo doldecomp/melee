@@ -59,11 +59,6 @@ static inline float vec_len(Vec3* offset)
                  (offset->z * offset->z));
 }
 
-inline BOOL abs_threshold_inline(f32 value, f32 threshold)
-{
-    return (ABS(value) > threshold) ? true : false;
-}
-
 void Camera_80028B9C(int n_subjects)
 {
     CmSubject* cam_box;
@@ -736,6 +731,11 @@ static inline void get_pitch_angle(CameraBounds* bounds, Vec3* scroll_offset,
     }
 }
 
+static inline float get_bounds_mid_x(CameraBounds* bounds)
+{
+    return 0.5f * (bounds->x_min + bounds->x_max);
+}
+
 void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
 {
     f32 unused_f31;
@@ -789,7 +789,7 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
     transform->target_interest.y =
         unused_f31 + (bounds->y_max - vert_frustum_dist * tan_fov_u);
     Stage_UnkSetVec3TCam_Offset(&scroll_offset2);
-    mid_x = 0.5f * (bounds->x_min + bounds->x_max);
+    mid_x = get_bounds_mid_x(bounds);
     {
         f32 info_x20 = Stage_GetCamInfoX20();
         f32 x_offset = mid_x - scroll_offset2.x;
@@ -1400,12 +1400,27 @@ inline void reset_bounds_unless_fighter_near(CameraBounds* bounds,
                                              CameraTransformState* transform)
 {
     Vec3 fighter_pos;
+    BOOL fighter_near;
     HSD_GObj* p1_fgp;
-    if (!((Camera_80030AF8() != 0) &&
-          ((p1_fgp = Ground_801C57A4(), p1_fgp != NULL)) &&
-          (ftLib_80086644(p1_fgp, &fighter_pos),
-           abs_threshold_inline(fighter_pos.z, 30.0f))))
-    {
+    f32 fighter_z;
+
+    do {
+        if ((Camera_80030AF8() != 0) &&
+            ((p1_fgp = Ground_801C57A4(), p1_fgp != NULL)))
+        {
+            ftLib_80086644(p1_fgp, &fighter_pos);
+            fighter_z = fighter_pos.z;
+            if (fighter_z < 0.0f) {
+                fighter_z = -fighter_z;
+            }
+            if (fighter_z > 30.0f) {
+                fighter_near = true;
+                break;
+            }
+        }
+        fighter_near = false;
+    } while (0);
+    if (!fighter_near) {
         Camera_80029CF8(bounds, transform);
         Camera_8002A768(transform, 0);
     }
@@ -2346,7 +2361,6 @@ void Camera_8002CDDC(void* unused)
     s8* slot_ptr;
     s32 valid;
     Vec3* pos_ptr;
-    CmSubject* subject;
     f32 target_dz;
     f32 target_dy;
     f32 target_dx;
@@ -2383,6 +2397,7 @@ loop_check: {
         goto check_valid;
     }
     {
+        CmSubject* subject;
         HSD_GObj* gobj = Player_GetEntity(slot);
         if (gobj == NULL) {
             goto set_invalid;
@@ -2424,6 +2439,7 @@ after_loop:
         }
     }
     {
+        CmSubject* subject;
         HSD_GObj* gobj = Player_GetEntity(*slot_ptr);
         if (gobj == NULL) {
             goto fallback_path;
@@ -2451,20 +2467,20 @@ after_loop:
 
         Camera_8002C5B4(&cam->x2D0);
         {
-            Vec3* tgt_interest;
-            Vec3* interest;
-            Vec3* tgt_position;
             Vec3* position;
+            Vec3* tgt_interest;
+            Vec3* tgt_interest2;
+            Vec3* tgt_position;
             CameraUnkGlobals* globals;
             f32 coeff;
 
             tgt_interest = &transform->target_interest;
-            interest = &transform->interest;
-            cam->transform.target_interest = cam->x308;
+            tgt_interest2 = &cam->transform.target_interest;
+            *tgt_interest2 = cam->x308;
             lbVector_Add(tgt_interest, &cam->x314);
 
             tgt_position = &transform->target_position;
-            cam->transform.target_position = *tgt_interest;
+            cam->transform.target_position = *tgt_interest2;
             lbVector_Add(tgt_position, &cam->pause_eye_offset);
 
             position = &transform->position;
@@ -2477,12 +2493,12 @@ after_loop:
             sp6C.z *= coeff;
             lbVector_Add(position, &sp6C);
 
-            lbVector_Diff(tgt_interest, interest, &sp60);
+            lbVector_Diff(tgt_interest, &transform->interest, &sp60);
             coeff = globals->x84;
             sp60.x *= coeff;
             sp60.y *= coeff;
             sp60.z *= coeff;
-            lbVector_Add(interest, &sp60);
+            lbVector_Add(&transform->interest, &sp60);
 
             cam->transform.target_fov = globals->x6C;
             cam->transform.fov =
@@ -3129,20 +3145,16 @@ check_done2:
     }
 
     if (cam->x2BC == 1.0f) {
-        f32 dx2;
-        f32 dy2;
-        f32 dz2;
-
-        x = cam->transform.target_position.x -
-            cam->transform.target_interest.x;
-        y = cam->transform.target_position.y -
-            cam->transform.target_interest.y;
-        z = cam->transform.target_position.z -
-            cam->transform.target_interest.z;
-        dx2 = x * x;
-        dy2 = y * y;
-        dz2 = z * z;
-        cam->x2C0 = sqrtf__Ff(dz2 + (dx2 + dy2));
+        f32 dx = cam->transform.target_position.x -
+                 cam->transform.target_interest.x;
+        f32 dy = cam->transform.target_position.y -
+                 cam->transform.target_interest.y;
+        f32 dz = cam->transform.target_position.z -
+                 cam->transform.target_interest.z;
+        f32 dx2 = dx * dx;
+        f32 dy2 = dy * dy;
+        f32 dz2 = dz * dz;
+        cam->x2C0 = sqrtf__Ff(dz2 + Camera_8002D318_AddSquares(dy2, dx2));
     }
 
     Camera_8002B1F8(transform);
@@ -3158,6 +3170,7 @@ check_done2:
     Camera_8002A0C0(&bounds, transform);
 
     count_ptr = &cam->x2B8;
+    (void) count_ptr;
     if (*count_ptr > 1000) {
         cam->x2B4 = cam->x2B0;
         *count_ptr = 1;
@@ -3189,7 +3202,7 @@ static inline void smooth_fixed_camera_interest(
         dz * globals->x74 + cam->transform_copy.interest.z;
 }
 
-void Camera_8002DDC4(void* arg0)
+void Camera_8002DDC4()
 {
     Vec3* interest;
     Vec3* tgt_interest;

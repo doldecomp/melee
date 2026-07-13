@@ -811,6 +811,33 @@ static inline void mnCount_InitGObjUserData(HSD_GObj* gobj)
     GObj_InitUserData(gobj, 0, HSD_Free, userdata);
 }
 
+static inline void mnCount_LoadModel(void)
+{
+    mn_804A04F0.hovered_selection = 0;
+    lbArchive_LoadSections(
+        mn_804D6BB8, &model_desc.joint, "MenMainConCo_Top_joint",
+        &model_desc.animjoint, "MenMainConCo_Top_animjoint",
+        &model_desc.matanim_joint, "MenMainConCo_Top_matanim_joint",
+        &model_desc.shapeanim_joint, "MenMainConCo_Top_shapeanim_joint", 0);
+}
+
+static inline HSD_GObj* mnCount_CreateMenuGObj(void)
+{
+    return GObj_Create(6, 7, 0x80);
+}
+
+static inline void mnCount_SetupMenuGObj(HSD_GObj* gobj, HSD_GObjProc** proc)
+{
+    menu_gobj = gobj;
+    mnCount_InitGObjUserData(gobj);
+    *proc = HSD_GObj_SetupProc(gobj, fn_80251640, 0);
+}
+
+static inline void mnCount_SetProcFlags(HSD_GObjProc* proc)
+{
+    proc->flags_3 = HSD_GObj_804D783C;
+}
+
 void mnCount_Create(void)
 {
     HSD_GObj* gobj;
@@ -819,21 +846,11 @@ void mnCount_Create(void)
     mn_804D6BC8.cooldown = 5;
     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
     mn_804A04F0.cur_menu = MENU_KIND_RECORDS_MISC;
-    mn_804A04F0.hovered_selection = 0;
+    mnCount_LoadModel();
 
-    lbArchive_LoadSections(
-        mn_804D6BB8, (void**) &model_desc.joint, "MenMainConCo_Top_joint",
-        &model_desc.animjoint, "MenMainConCo_Top_animjoint",
-        &model_desc.matanim_joint, "MenMainConCo_Top_matanim_joint",
-        &model_desc.shapeanim_joint, "MenMainConCo_Top_shapeanim_joint", 0);
-
-    gobj = GObj_Create(6, 7, 0x80);
-    menu_gobj = gobj;
-
-    mnCount_InitGObjUserData(gobj);
-
-    proc = HSD_GObj_SetupProc(gobj, fn_80251640, 0);
-    proc->flags_3 = HSD_GObj_804D783C;
+    gobj = mnCount_CreateMenuGObj();
+    mnCount_SetupMenuGObj(gobj, &proc);
+    mnCount_SetProcFlags(proc);
     mnCount_8025186C_inline(gobj);
 
     gobj = GObj_Create(0, 1, 0x80);

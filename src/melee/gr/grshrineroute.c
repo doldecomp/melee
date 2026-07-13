@@ -906,6 +906,8 @@ bool grShrineRoute_8020A214(Ground_GObj* arg)
     return false;
 }
 
+static inline void grShrineRoute_StackPad(GXColor color) {}
+
 void grShrineRoute_8020A21C(Ground_GObj* gobj)
 {
     HSD_GObj* player;
@@ -929,7 +931,6 @@ void grShrineRoute_8020A21C(Ground_GObj* gobj)
     f32 dx;
     f32 dy;
     f32 dist_sq;
-    PAD_STACK(4);
     GET_GROUND(0);
     GET_GROUND(0);
 
@@ -1055,6 +1056,7 @@ void grShrineRoute_8020A21C(Ground_GObj* gobj)
             }
         }
         HSD_LObjSetColor(gp->gv.shrineroute2.x170, color);
+        grShrineRoute_StackPad(color);
 
         /* Copy position from 2nd nearest */
         if (HSD_LObjGetPosition(gp->gv.shrineroute2.xC8[sorted[1]],
@@ -1269,15 +1271,15 @@ void grShrineRoute_8020AF38(HSD_GObj* gobj, s32 arg1)
     HSD_GObj** symbolp;
     s32 ix = arg1 - 0xBD;
     HSD_JObj* jobj;
-    f32 scale;
     HSD_GObj* pgobj;
-    PAD_STACK(4);
 
     pgobj = Ground_801C57A4();
 
     if (gp->gv.shrineroute.symbols[ix] != NULL) {
-        symbolp = gp->gv.shrineroute.symbols;
-        symbolp += ix;
+        HSD_GObj** symbols = gp->gv.shrineroute.symbols;
+        f32 scale;
+        PAD_STACK(4);
+        symbolp = &symbols[ix];
         scale = 0.7f;
         if (((Ground*) (*symbolp)->user_data)->map_id == 1) {
             scale *= grSh_Route_804D6A58->x14;

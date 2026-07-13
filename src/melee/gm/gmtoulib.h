@@ -81,7 +81,7 @@
 /* 19249C */ void fn_8019249C(HSD_GObj*);
 /* 192690 */ void fn_80192690(HSD_GObj*);
 /* 192758 */ void fn_80192758(HSD_GObj*);
-/* 192938 */ s32 fn_80192938(void);
+/* 192938 */ void fn_80192938(void);
 /* 192BB0 */ void fn_80192BB0(void);
 /* 192E6C */ void fn_80192E6C(void);
 /* 193230 */ UNK_RET fn_80193230(UNK_PARAMS);

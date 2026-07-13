@@ -1429,6 +1429,10 @@ void grCastle_801CF7B0(Ground_GObj* gobj)
 
 static inline void grCastle_UpdateSatellite(Ground* gp)
 {
+    u8 pad[52];
+    grCastle_TargetTable targets;
+    (void) pad;
+
     if ((gp->gv.castle12.xC4[0] != 0 || gp->gv.castle12.xC4[1] != 0 ||
          gp->gv.castle12.xC4[2] != 0) &&
         (gp->gv.castle12.xD0 == -1 ||
@@ -1496,11 +1500,10 @@ static inline void grCastle_UpdateSatellite(Ground* gp)
                         ->user_data;
 
                 {
-                    grCastle_TargetTable targets = grCs_803B7EFC;
                     s32 idx;
                     HSD_GObj* entity;
 
-                    PAD_STACK(52);
+                    targets = grCs_803B7EFC;
                     {
                         s32 random_idx = HSD_Randi(11);
                         idx = random_idx;
@@ -1529,7 +1532,6 @@ static inline void grCastle_UpdateSatellite(Ground* gp)
 HSD_JObj* grCastle_801CF868(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    PAD_STACK(48);
     grCastle_UpdateSatellite(gp);
 }
 

@@ -379,6 +379,21 @@ static inline void fn_8019F9C4_LoadArchives(CharacterKind arg0)
     }
 }
 
+static inline void fn_8019F9C4_GetNext(HSD_JObj* jobj, HSD_JObj** child,
+                                       HSD_JObj** next)
+{
+    if (jobj == NULL) {
+        *child = NULL;
+    } else {
+        *child = jobj->child;
+    }
+    if (*child == NULL) {
+        *next = NULL;
+    } else {
+        *next = (*child)->next;
+    }
+}
+
 void fn_8019F9C4(u32 arg0)
 {
     HSD_CObj* cobj;
@@ -465,16 +480,7 @@ void fn_8019F9C4(u32 arg0)
 
     lbl_80479A98.x70 = lbl_80479A98.x1C;
 
-    if (jobj == NULL) {
-        child = NULL;
-    } else {
-        child = jobj->child;
-    }
-    if (child == NULL) {
-        next = NULL;
-    } else {
-        next = child->next;
-    }
+    fn_8019F9C4_GetNext(jobj, &child, &next);
 
     if (next == NULL) {
         child = NULL;

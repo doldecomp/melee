@@ -172,8 +172,6 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
     bool is_colored;
     bool should_display;
     s32 arrow_kind;
-    u8 slot_type;
-    u8 teams_enabled;
     u8 operand_pad[12];
 
     if (arg1 != 0) {
@@ -208,11 +206,9 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
 
             HSD_GObj_JObjCallback(arg0, arg1);
             if ((player->state.unk == 4) || (player->state.unk == 2)) {
-                slot_type = Player_GetPlayerSlotType(slot);
-                teams_enabled = gm_8016B168();
-                color = gm_80160968(
-                    gm_80160854((u8) slot, Player_GetTeam(slot), teams_enabled,
-                                slot_type));
+                color = gm_80160968(gm_80160854(
+                    (u8) slot, Player_GetTeam(slot), gm_8016B168(),
+                    Player_GetPlayerSlotType(slot)));
                 color_ptr = &color_copy;
                 color_copy = color;
                 if (player->state.unk == 2) {
@@ -241,6 +237,7 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
     ifMagnifyPlayer* player;
     f32 top;
     f32 bottom;
+    f32 left;
     HSD_GObj* fighter_gobj;
     bool should_display;
     f32 x_blend;
@@ -253,9 +250,9 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
     f32 mix0;
     f32 x_class;
     f32 x_inv;
-    GXColor result;
     f32 right;
     Vec3 interest_pos;
+    GXColor result;
     bool is_outside;
 
     magnify = &ifMagnify_804A1DE0;
@@ -271,7 +268,6 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
         should_display = true;
     }
     if (should_display) {
-        f32 left;
         cobj = arg0->hsd_obj;
         HSD_CObjGetOrtho(cobj, &top, &bottom, &left, &right);
         if (HSD_CObjSetCurrent(cobj) != 0) {
@@ -448,6 +444,7 @@ void ifMagnify_802FC3C0(s32 slot)
     ifMagnifyPlayer* player;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
+    ifMagnifyImageDescCopy* copy_base;
     HSD_JObj* child;
     HSD_MObj* mobj;
 
@@ -469,8 +466,7 @@ void ifMagnify_802FC3C0(s32 slot)
     if (slot == 0) {
         player->idesc = child->u.dobj->next->mobj->tobj->imagedesc;
     } else {
-        ifMagnifyImageDescCopy* copy_base =
-            (ifMagnifyImageDescCopy*) &ifMagnify_804A1DE0;
+        copy_base = (ifMagnifyImageDescCopy*) &ifMagnify_804A1DE0;
 
         copy_base->image_descs[slot] = *ifMagnify_804A1DE0.player[0].idesc;
         copy_base =

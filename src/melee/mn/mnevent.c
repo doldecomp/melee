@@ -120,29 +120,63 @@ static inline HSD_GObj** mnEvent_GetGObjs(MnEventData* data)
     return data->gobjs;
 }
 
+static inline MnEventData* mnEvent_GetData(void)
+{
+    return mnEvent_804D6C60->user_data;
+}
+
+static inline void mnEvent_CreateIcon(s32 idx, MnEventData* data,
+                                      s32 is_unlocked,
+                                      HSD_JObj** jobj_0A,
+                                      HSD_JObj** jobj_0C)
+{
+    HSD_JObj* tree;
+    void** assets;
+    f32 icon_spacing;
+    HSD_JObj* icon_jobj;
+
+    if (is_unlocked != 0) {
+        Vec3 icon_pos;
+        HSD_GObj* icon_gobj;
+
+        tree = mnEvent_804D6C60->hsd_obj;
+        assets = mnEvent_804A08F8;
+        lb_80011E24(tree, &(*jobj_0A), 0xA, -1);
+        lb_80011E24(tree, &(*jobj_0C), 0xC, -1);
+        icon_spacing = HSD_JObjGetTranslationY(*jobj_0A);
+        icon_spacing = HSD_JObjGetTranslationY(*jobj_0C) - icon_spacing;
+        HSD_JObjGetTranslation(*jobj_0A, &icon_pos);
+        icon_pos.y = icon_pos.y + (f32) idx * icon_spacing;
+        icon_gobj = GObj_Create(6, 7, 0x80);
+        icon_jobj = HSD_JObjLoadJoint((HSD_Joint*) assets[4]);
+        HSD_GObjObject_80390A70(icon_gobj, HSD_GObj_804D7849, icon_jobj);
+        GObj_SetupGXLink(icon_gobj, HSD_GObj_JObjCallback, 4, 0x80);
+        mnEvent_8024D4E0(icon_jobj, &icon_pos);
+        data->gobjs[idx] = icon_gobj;
+    }
+}
+
 void mnEvent_8024D15C(s32 idx, s32 event_id)
 {
-    HSD_JObj* volatile jobj_0C;
+    HSD_JObj* jobj_0C;
     Vec3 pos;
     HSD_JObj* jobj_0A;
-    void** assets;
     HSD_JObj* jobj_0C_2;
     f32 icon_spacing;
     MnEventData* data;
     HSD_Text** text_slot;
     HSD_Text** icon_slot;
     HSD_JObj* icon_jobj;
-    Vec3 icon_pos;
     HSD_Text* text;
     HSD_Text* icon_text;
     f32 spacing;
     HSD_JObj* jobj_0A_2;
     s32 is_unlocked;
     HSD_JObj* tree;
-    PAD_STACK(0x38);
+    PAD_STACK(0x28);
 
     tree = mnEvent_804D6C60->hsd_obj;
-    data = mnEvent_804D6C60->user_data;
+    data = mnEvent_GetData();
     lb_80011E24(tree, &jobj_0A, 0xA, -1);
     lb_80011E24(tree, &jobj_0C, 0xC, -1);
 
@@ -153,30 +187,15 @@ void mnEvent_8024D15C(s32 idx, s32 event_id)
     pos.y = -(((f32) idx * spacing) + pos.y);
 
     if (data->gobjs[idx] != NULL) {
-        HSD_GObj* gobj = mnEvent_GetGObjs(data)[idx];
+        HSD_GObj** gobjs = mnEvent_GetGObjs(data);
+        HSD_GObj* gobj = gobjs[idx];
         HSD_GObjPLink_80390228(gobj);
         data->gobjs[idx] = NULL;
     }
 
     is_unlocked = gmMainLib_8015CEFC(event_id);
-    if (is_unlocked != 0) {
-        HSD_GObj* icon_gobj;
-        tree = mnEvent_804D6C60->hsd_obj;
-        assets = mnEvent_804A08F8;
-        lb_80011E24(tree, &jobj_0A_2, 0xA, -1);
-        lb_80011E24(tree, &jobj_0C_2, 0xC, -1);
-        icon_spacing = HSD_JObjGetTranslationY(jobj_0A_2);
-        icon_spacing = HSD_JObjGetTranslationY(jobj_0C_2) - icon_spacing;
-        HSD_JObjGetTranslation(jobj_0A_2, &icon_pos);
-
-        icon_pos.y = icon_pos.y + (f32) idx * icon_spacing;
-        icon_gobj = GObj_Create(6, 7, 0x80);
-        icon_jobj = HSD_JObjLoadJoint((HSD_Joint*) assets[4]);
-        HSD_GObjObject_80390A70(icon_gobj, HSD_GObj_804D7849, icon_jobj);
-        GObj_SetupGXLink(icon_gobj, HSD_GObj_JObjCallback, 4, 0x80);
-        mnEvent_8024D4E0(icon_jobj, &icon_pos);
-        data->gobjs[idx] = icon_gobj;
-    }
+    mnEvent_CreateIcon(idx, data, is_unlocked, &jobj_0A_2, &jobj_0C_2);
+    tree = mnEvent_804D6C60->hsd_obj;
 
     {
         HSD_Text** texts = data->texts;
@@ -197,7 +216,10 @@ void mnEvent_8024D15C(s32 idx, s32 event_id)
     *(s32*) &text->text_color = mnEvent_804D5028;
     HSD_SisLib_803A6B98(text, 0.0f, 0.0f, mnEvent_803EF77C, event_id + 1);
 
-    icon_slot = &data->icons[idx];
+    {
+        HSD_Text** icons = data->icons;
+        icon_slot = &icons[idx];
+    }
     if (*icon_slot != NULL) {
         HSD_SisLib_803A5CC4(data->icons[idx]);
     }
@@ -479,7 +501,7 @@ void fn_8024D864(HSD_GObj* gobj)
     s32 selected_event;
     u8 page;
     u8 event;
-    PAD_STACK(0x48);
+    UNUSED u8 pad[0x24];
 
     if (mn_804D6BC8.cooldown != 0) {
         mn_804D6BC8.cooldown -= 1;
@@ -529,6 +551,7 @@ void fn_8024D864(HSD_GObj* gobj)
             event = mnEvent_RefreshList(data);
             {
                 HSD_JObj* selection_jobj;
+                PAD_STACK(0x24);
                 mnEvent_8024E524_inline_2(event, &selection_jobj);
             }
         }

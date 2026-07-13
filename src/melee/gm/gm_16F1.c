@@ -401,8 +401,15 @@ int fn_8016FAD4(struct lbl_8046B6A0_24C_t* rules, int kind, int flags,
         if (pr == 0) {
             return lbl_803D5648[entry->x2 - 2] * 2;
         }
-        i = (x58[1].x0 != 3) && pr == rankings[6];
-        if (i || pr == rankings[6]) {
+        {
+            int active = 0;
+            for (i = 0; i < 4; i++) {
+                if (x58[i].x0 != 3) {
+                    active++;
+                }
+            }
+        }
+        if (pr == rankings[6]) {
             return lbl_803D5648[entry->x2 - 2] / 2;
         }
     }
@@ -556,12 +563,14 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
         }
         {
             struct lbl_8046B6A0_24C_58_t* p = x58;
+            u8* ranking = rankings;
             int i;
             for (i = 0; i < 4; i++) {
-                if (p->x0 != 3 && i != arg1 && rankings[i] == 0) {
+                if (p->x0 != 3 && i != arg1 && *ranking == 0) {
                     return 0;
                 }
                 p++;
+                ranking++;
             }
         }
         if (rankings[arg1] == 0) {
@@ -575,12 +584,14 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
         }
         {
             struct lbl_8046B6A0_24C_58_t* p = x58;
+            u8* ranking = rankings;
             int i;
             for (i = 0; i < 4; i++) {
-                if (p->x0 != 3 && i != arg1 && rankings[i] == rankings[6]) {
+                if (p->x0 != 3 && i != arg1 && *ranking == rankings[6]) {
                     return 0;
                 }
                 p++;
+                ranking++;
             }
         }
         if (rankings[arg1] == rankings[6]) {
@@ -1071,12 +1082,14 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
         if (rules->x5 == 3) {
             {
                 struct lbl_8046B6A0_24C_58_t* p = x58;
+                u8* ranking = rankings;
                 int i;
                 for (i = 0; i < 4; i++) {
-                    if (p->x0 != 3 && i != arg1 && rankings[i] == 0) {
+                    if (p->x0 != 3 && i != arg1 && *ranking == 0) {
                         return 0;
                     }
                     p++;
+                    ranking++;
                 }
             }
             if (!((*(struct lbl_8046B6A0_24C_58_t(*)[6]) x58)[arg1].x3 & 1) &&

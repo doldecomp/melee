@@ -65,14 +65,16 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
     base = (char*) &mnDiagram3_803EEC10;
 
     {
-        u8 scroll = data->cursor_row;
-        u8 offset = data->scroll_offset;
+        u8 offset;
+        u8 scroll;
         u8 limit;
 
+        scroll = data->cursor_row;
+        offset = data->scroll_offset;
         limit = (data->is_name_mode != 0) ? 0x18 : 0x15;
 
         {
-            int idx = scroll + offset;
+            int idx = offset + scroll;
             int val = idx;
             if (val >= limit) {
                 val = val - limit;
@@ -582,6 +584,12 @@ void mnDiagram3_Init(void* arg0)
     }
 }
 
+static inline f32 mnDiagram3_GetRowSpacing(Diagram3* data)
+{
+    return HSD_JObjGetTranslationY(data->jobjs[9]) -
+           HSD_JObjGetTranslationY(data->jobjs[8]);
+}
+
 void mnDiagram3_HandleInput(HSD_GObj* gobj)
 {
     char* base = (char*) &mnDiagram3_803EEC10;
@@ -799,8 +807,7 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
             cur = mnDiagram3_804D6C20->user_data;
             popup = data->popup_gobj->hsd_obj;
             n = data->cursor_row;
-            spacing = HSD_JObjGetTranslationY(cur->jobjs[9]) -
-                      HSD_JObjGetTranslationY(cur->jobjs[8]);
+            spacing = mnDiagram3_GetRowSpacing(cur);
             HSD_JObjSetTranslateX(popup,
                                   HSD_JObjGetTranslationX(cur->jobjs[8]));
             HSD_JObjSetTranslateY(popup,

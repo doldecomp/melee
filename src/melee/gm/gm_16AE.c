@@ -1725,6 +1725,14 @@ static inline void getSpawnPoint(int i, Vec3* v)
     }
 }
 
+static inline void setPlayerUnk45(int i)
+{
+    bool is_teams = lbl_8046B6A0.x24C8.is_teams == true;
+    Player_SetUnk45(
+        i, fn_80160840(gm_80160854(Player_GetPlayerId(i), Player_GetTeam(i),
+                                   is_teams, Player_GetPlayerSlotType(i))));
+}
+
 void fn_8016DEEC(void)
 {
     lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
@@ -1840,12 +1848,13 @@ void fn_8016E124(void)
 void fn_8016E2BC(void)
 {
     lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
+    u8 _[4];
     Vec3 sp24;
     Vec3 sp18;
     float var_f1_2;
     bool var_r0;
     int i;
-    PAD_STACK(0x10);
+    PAD_STACK(0xC);
 
     Player_80036DA4();
     if (tmp->is_singleplayer == 1) {
@@ -2137,10 +2146,7 @@ bool gm_8016EDDC(int arg0, PlayerInitData* arg1)
     lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
     Vec3 sp18;
     float var_f1;
-    u8 temp_r29;
-    u8 temp_r30;
-    bool is_teams;
-    PAD_STACK(4);
+    PAD_STACK(8);
 
     if (lbl_8046B6A0.is_singleplayer == 0 &&
         Player_GetPlayerSlotType(arg0) == Gm_PKind_NA &&
@@ -2164,11 +2170,7 @@ bool gm_8016EDDC(int arg0, PlayerInitData* arg1)
             }
         }
         Player_80032768(arg0, &sp18);
-        is_teams = lbl_8046B6A0.x24C8.is_teams == true;
-        Player_SetUnk45(
-            arg0, fn_80160840(gm_80160854(Player_GetPlayerId(arg0),
-                                          Player_GetTeam(arg0), is_teams,
-                                          Player_GetPlayerSlotType(arg0))));
+        setPlayerUnk45(arg0);
         Player_80031AD0(arg0);
         if (lbl_8046B6A0.FighterMatchInfo[arg0].x4_b4) {
             lbAudioAx_800237A8(0x41F4E, 0x7F, 0x40);

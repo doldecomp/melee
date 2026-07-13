@@ -179,7 +179,7 @@ void ftCo_80097AF4(Fighter_GObj* gobj)
         rot1 = jobj->mtx[1][1];
     }
     if (ABS(rot0) < ABS(rot1)) {
-        if (fp->ground_or_air == GA_Air) {
+        if (GET_FIGHTER(gobj)->ground_or_air == GA_Air) {
             ftCommon_8007D7FC(fp);
         }
         {

@@ -1041,12 +1041,11 @@ s32 HSD_AudioGetAuxHeapSize(AXDriverAuxType type, void* param)
     int i;
     int k;
 
-    result = 0;
-
     if (type < 0 || type > 4 || (type != 0 && param == NULL)) {
         return 0;
     }
 
+    result = 0;
     switch (type) {
     case AXDRIVER_AUX_OFF:
         break;
@@ -1093,11 +1092,11 @@ s32 HSD_AudioGetAuxHeapSize(AXDriverAuxType type, void* param)
         struct AXFX_DELAY* delay = (struct AXFX_DELAY*) param;
         s32 ch0, ch1, ch2;
 
-        ch0 = ((delay->delay[0] - 5) * 32 + 159) / 160 * 640;
-        ch1 = ((delay->delay[1] - 5) * 32 + 159) / 160 * 640;
         ch2 = ((delay->delay[2] - 5) * 32 + 159) / 160 * 640;
-        result = ch0 + ch1 + ch2;
-        (void) result;
+        ch1 = ((delay->delay[1] - 5) * 32 + 159) / 160 * 640;
+        ch0 = ((delay->delay[0] - 5) * 32 + 159) / 160 * 640;
+        ch0 += ch1;
+        result = ch0 + ch2;
         break;
     }
     }

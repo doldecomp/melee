@@ -46,7 +46,7 @@ void HSD_SynthSFXSampleLoadCallback(int result, int length, void* addr,
     s32 i;
 
     if (HSD_Synth_804D7738 == 0) {
-        u32 header_size = hsd_SynthSFXLoadBuf[0];
+        s32 header_size = hsd_SynthSFXLoadBuf[0];
         u32 data_bytes = header_size - 0x10;
         s32 src_idx = (data_bytes >> 2) - 1;
         u32 total;
@@ -865,6 +865,16 @@ void HSD_SynthSFXSetPriority(int id, int prio)
     }
 }
 
+static inline int user_vol_dst_offset(int k)
+{
+    return k * 3;
+}
+
+static inline int user_vol_src_offset(int k)
+{
+    return k * 3;
+}
+
 s32 HSD_Synth_8038A000(void)
 {
     struct HSD_SynthSFXNode* node;
@@ -873,7 +883,6 @@ s32 HSD_Synth_8038A000(void)
     struct HSD_SynthSFXNode** pnode;
     AXPBVE ve;
 
-    PAD_STACK(8);
     intr = OSDisableInterrupts();
     if (HSD_Synth_804D7758 != 0) {
         int ch;
@@ -913,8 +922,10 @@ s32 HSD_Synth_8038A000(void)
             for (k = 0; k < USERVOL_NUM; k++) {
                 if (*(volatile int*) &node->user_vol[k].x4 != 0) {
                     int c = node->user_vol[k].x4;
-                    (&node->unk28)[k * 3] =
-                        ((&node->unk28)[k * 3] * ((f32) c - 1.0f)) / (f32) c +
+                    (&node->unk28)[user_vol_dst_offset(k)] =
+                        ((&node->unk28)[user_vol_src_offset(k)] *
+                         ((f32) c - 1.0f)) /
+                            (f32) c +
                         node->user_vol[k].volume / (f32) c;
                     node->user_vol[k].x4 -= 1;
                     if (node->user_vol[k].x4 != 0) {

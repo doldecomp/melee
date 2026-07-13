@@ -63,8 +63,7 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
     f32 rand_f32;
     f32 rand_param_x;
     f32 rand_param_y;
-    f32 scale_f32;
-    s32 cnt_1;
+    f32 rand_rot_y;
     Fighter* fp;
     s32 cnt_2;
     f32 rand_rot_x;
@@ -236,8 +235,10 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
         break;
     case 0x4CF:
     case 0x4D0: {
-        EF_Effect* eff_1;
         EF_Effect* effect;
+        EF_Effect* eff_1;
+        s32 cnt_1;
+        f32 scale_f32;
         scale_f32 = 1.0f;
         va_vec3 = va_arg(vlist, Vec3*);
         translate = *va_vec3;
@@ -259,8 +260,6 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
             effect = efLib_Create_Attach_Pos(0x1FU, gobj, &translate);
         }
         if (effect != NULL) {
-            f32 rand_rot_y;
-
             effect->update = efLib_Cb_SetOffset_FromParams;
             effect->lifetime = 0x32;
             rand_rot_y = M_TAU * HSD_Randf();
@@ -282,13 +281,15 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
             }
             effect->params.y = 2.0f * sinf(rand_rot_x);
             rand_param_y = cosf(rand_rot_y);
-            effect->params.z = 2.0f * cosf(rand_rot_x) * rand_param_y;
+            {
+                f32 tmp = 2.0f * cosf(rand_rot_x);
+                effect->params.z = tmp * rand_param_y;
+            }
             if (cnt_1 != 0) {
                 eff_1->next = effect;
                 eff_1 = (void*) eff_1->next;
             } else {
-                eff_1 = effect;
-                ret_obj = eff_1;
+                ret_obj = eff_1 = effect;
             }
             if (++cnt_1 < 0xC) {
                 goto loop_141;

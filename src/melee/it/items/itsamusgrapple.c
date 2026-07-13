@@ -306,15 +306,15 @@ HSD_JObj* it_802B75FC(Item* ip, HSD_JObj* jobj_arg, s32 arg2, f32 scale)
 {
     f32 coeff;
     f32 temp;
-    ItemLink* prev_link;
-    itSamusGrappleAttributes* attrs2;
-    itSamusGrappleAttributes* attrs;
-    ItemLink* link;
-    HSD_JObj* result;
     HSD_GObj* link_gobj;
     ItemLink* head_link;
-    ItemLink* tail_link;
+    ItemLink* prev_link;
+    itSamusGrappleAttributes* attrs;
     HSD_JObj* tail_jobj;
+    itSamusGrappleAttributes* attrs2;
+    ItemLink* tail_link;
+    ItemLink* link;
+    HSD_JObj* result;
     s32 i;
     Vec3 zero_vel;
     PAD_STACK(4);
@@ -1338,39 +1338,40 @@ void it_802B9CE8(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
 
 bool it_802B9FD4(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs)
 {
-    Vec3* pos_ptr = pos;
+    ItemLink* cur;
     Vec3 dir;
     ItemLink* next;
     Vec3* dir_ptr;
 
     it_802A4454(link);
-    next = link->next;
+    cur = link;
+    next = cur->next;
 
     while (next != NULL) {
         if (next->x2C_b0) {
             next->vel.y -= samus_grapple_calc_grav(next->vel.y);
             it_802A4420(next);
-            if (it_802A3C98(&next->pos, &link->pos, &dir) > attrs->x38) {
+            if (it_802A3C98(&next->pos, &cur->pos, &dir) > attrs->x38) {
                 dir_ptr = &dir;
-                next->pos.x = (dir_ptr->x * attrs->x38) + link->pos.x;
-                next->pos.y = (dir_ptr->y * attrs->x38) + link->pos.y;
-                next->pos.z = (dir_ptr->z * attrs->x38) + link->pos.z;
+                next->pos.x = (dir_ptr->x * attrs->x38) + cur->pos.x;
+                next->pos.y = (dir_ptr->y * attrs->x38) + cur->pos.y;
+                next->pos.z = (dir_ptr->z * attrs->x38) + cur->pos.z;
             }
             it_802A43EC(next);
         } else {
-            if (it_802A3C98(pos_ptr, &link->pos, &dir) > attrs->x38) {
+            if (it_802A3C98(pos, &cur->pos, &dir) > attrs->x38) {
                 dir_ptr = &dir;
-                next->pos.x = (dir_ptr->x * attrs->x38) + link->pos.x;
-                next->pos.y = (dir_ptr->y * attrs->x38) + link->pos.y;
-                next->pos.z = (dir_ptr->z * attrs->x38) + link->pos.z;
+                next->pos.x = (dir_ptr->x * attrs->x38) + cur->pos.x;
+                next->pos.y = (dir_ptr->y * attrs->x38) + cur->pos.y;
+                next->pos.z = (dir_ptr->z * attrs->x38) + cur->pos.z;
                 next->x2C_b0 = 1;
                 it_802A43B8(next);
             } else {
                 return false;
             }
         }
-        link = next;
-        next = link->next;
+        cur = next;
+        next = cur->next;
     }
     return true;
 }

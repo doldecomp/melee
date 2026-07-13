@@ -110,8 +110,8 @@ void hsd_803A949C(s32 chan, s32 arg1)
                     break;
                 }
                 if (CMD_PTR(0x28) != NULL) {
-                    memcpy((void*) CMD_S32(0x28), state->x0 + offset + 0x20,
-                           CMD_S32(0x30));
+                    u8* src = state->x0 + offset;
+                    memcpy(CMD_PTR(0x28), src + 0x20, CMD_S32(0x30));
                 }
             }
             result = hsd_803A949C_Close(state);

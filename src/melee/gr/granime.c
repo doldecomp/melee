@@ -276,6 +276,27 @@ HSD_AObj* grAnime_801C69FC(HSD_AObj* aobj)
     return aobj;
 }
 
+static inline HSD_AObj* grAnime_801C69FC_for_jobj(HSD_AObj* aobj)
+{
+    HSD_FObj** cur;
+    HSD_FObj* fobj;
+
+    if (aobj == NULL || aobj->fobj == NULL) {
+        return aobj;
+    }
+    cur = &aobj->fobj;
+    while ((fobj = *cur) != NULL) {
+        if (fobj->obj_type == 0xC) {
+            *cur = fobj->next;
+            fobj->next = aobj->fobj;
+            aobj->fobj = fobj;
+            break;
+        }
+        cur = &fobj->next;
+    }
+    return aobj;
+}
+
 static inline HSD_AObj* grAnime_801C69FC_inner(HSD_AObj* aobj)
 {
     return grAnime_801C69FC(aobj);
@@ -304,7 +325,7 @@ void grAnime_801C6A54(HSD_JObj* jobj, HSD_AnimJoint* animjoint,
                 HSD_AObjRemove(jobj->aobj);
             }
             jobj->aobj = HSD_AObjLoadDesc(animjoint->aobjdesc);
-            grAnime_801C69FC(grAnime_GetAObj(jobj));
+            grAnime_801C69FC_for_jobj(grAnime_GetAObj(jobj));
         }
         grAnime_801C6960(jobj->robj, animjoint->robj_anim);
     }
@@ -938,14 +959,11 @@ void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
                       int arg5, f32 farg0, f32 farg1)
 {
     u32 var_r30 = 0;
-    HSD_AnimJoint* aj_t;
     UnkArchiveStruct* archive;
     HSD_AnimJoint** ajp;
     HSD_MatAnimJoint** mjp;
     HSD_ShapeAnimJoint** sjp;
     s32 anim_flags = 0;
-    HSD_MatAnimJoint* mj_t;
-    HSD_ShapeAnimJoint* sj_t;
     HSD_AnimJoint* aj;
     HSD_AnimJoint* caj;
     HSD_ShapeAnimJoint* csj;
@@ -964,27 +982,27 @@ void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
     archive = grDatFiles_801C6330(map_id);
     HSD_ASSERT(0x4DE, archive);
     if ((arg3 & 1) && (ajp = archive->unk4->unk8[map_id].unk4, ajp != NULL) &&
-        (aj_t = ajp[arg4], aj_t != NULL))
+        ((aj = ajp[arg4]) != NULL))
     {
-        aj = &aj_t[arg2];
+        aj = &aj[arg2];
         var_r30 |= 0x81;
         anim_flags |= 0x220;
     } else {
         aj = NULL;
     }
     if ((arg3 & 2) && (mjp = archive->unk4->unk8[map_id].unk8, mjp != NULL) &&
-        (mj_t = mjp[arg4], mj_t != NULL))
+        ((mj = mjp[arg4]) != NULL))
     {
-        mj = &mj_t[arg2];
+        mj = &mj[arg2];
         var_r30 |= 0x416;
         anim_flags |= 0x7484;
     } else {
         mj = NULL;
     }
     if ((arg3 & 4) && (sjp = archive->unk4->unk8[map_id].unkC, sjp != NULL) &&
-        (sj_t = sjp[arg4], sj_t != NULL))
+        ((sj = sjp[arg4]) != NULL))
     {
-        sj = &sj_t[arg2];
+        sj = &sj[arg2];
         var_r30 |= 8;
         anim_flags |= 0x100;
     } else {

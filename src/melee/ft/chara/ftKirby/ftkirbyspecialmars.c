@@ -423,10 +423,11 @@ void ftKb_SpecialNMs_8010BC90(Fighter_GObj* gobj)
 
 void ftKb_MsSpecialNEnd_Anim(Fighter_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
     s32 i;
     struct ftKb_SpecialNMs_DatAttrs* ms_da;
     Fighter* hit_fp;
+    Fighter* fp = GET_FIGHTER(gobj);
+    u32 dmg;
     ftKb_DatAttrs* da = fp->dat_attrs;
     PAD_STACK(24);
     if ((s32) fp->fv.kb.hat.kind == FTKIND_MARS) {
@@ -439,11 +440,11 @@ void ftKb_MsSpecialNEnd_Anim(Fighter_GObj* gobj)
         i = 0;
         do {
             if ((s32) hit_fp->x914[0].state == 1) {
-                f32 dmg =
-                    (f32) (s32) (ms_da->base_damage +
-                                 (fp->mv.kb.specialn_ms.cur_frame / 30) *
-                                     ms_da->additional_damage_per_iteration);
-                ftColl_8007ABD0(hit_fp->x914, (u32) dmg, gobj);
+                dmg = (u32) (f32) (s32) (
+                    ms_da->base_damage +
+                    (fp->mv.kb.specialn_ms.cur_frame / 30) *
+                        ms_da->additional_damage_per_iteration);
+                ftColl_8007ABD0(hit_fp->x914, dmg, gobj);
             }
             i += 1;
             hit_fp = (Fighter*) ((u8*) hit_fp + sizeof(HitCapsule));
