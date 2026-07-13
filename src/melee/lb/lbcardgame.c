@@ -239,9 +239,9 @@ u8 lb_8001CE78(void)
 {
     lb_8001CAF4();
     if (lb_80433318.x8 != 0 && lb_80433318.x8 != 4) {
-        return 0x29;
+        return GM_MEMCARD;
     }
-    return 0x2D;
+    return GM_COUNT;
 }
 
 void fn_8001CEC0(HSD_GObj* gobj)

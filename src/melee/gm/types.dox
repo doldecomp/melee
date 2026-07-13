@@ -1,0 +1,7 @@
+/// @var GameSceneHandler::OnFrame
+/// Referenced from #gm_801A4014 when passed to #gm_801A4D34.
+
+/// @var GameState::game_mode_override
+/// Optional callback installed by #gm_801A4014. When set and the return value
+/// is not #GM_COUNT, #gm_RunGameMode runs that game mode once before
+/// resuming the current mode's scene graph.

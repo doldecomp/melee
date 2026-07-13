@@ -1398,7 +1398,7 @@ void gm_8016260C(u8 arg0, u8 arg1)
         *p = MIN(*p + 1, 0xFFFFFFFFU);
         return;
     }
-    if (gm_801A4310() == 0x1F) {
+    if (gm_GetCurrentGameMode() == GM_STAMINA_VS) {
         counter = gmMainLib_8015CD5C();
     } else {
         switch ((s32) arg0) {
@@ -2834,7 +2834,7 @@ s32 fn_8016588C(lbl_8046B6A0_24C_t* arg0, s32 arg1)
     s32 v;
     s32 lim;
 
-    if (gm_801A4310() == 0x1F) {
+    if (gm_GetCurrentGameMode() == GM_STAMINA_VS) {
         if (arg0->x58[arg1].x28 != 0) {
             v = (u8) (arg0->x58[arg1].x28 / 60 + 0xFF000001);
         } else {
@@ -2992,7 +2992,7 @@ void fn_80165E7C(MatchEnd* arg0)
         if ((u8) arg0->player_standings[i].slot_type != 3) {
             u8 team = arg0->player_standings[i].team;
 
-            if (gm_801A4310() == GM_STAMINA_VS || arg0->x5 == 1) {
+            if (gm_GetCurrentGameMode() == GM_STAMINA_VS || arg0->x5 == 1) {
                 int player_score = new_var = arg0->player_standings[i].score;
 
                 if (player_score < 0) {
@@ -3498,8 +3498,8 @@ void gm_80167320(int slot, bool arg1)
 
 void gm_80167470(s32 arg0, s32 arg1)
 {
-    switch ((s32) gm_801A4310()) {
-    case 0x1F:
+    switch ((s32) gm_GetCurrentGameMode()) {
+    case GM_STAMINA_VS:
         gm_801B97C4(arg0, arg1);
         break;
     }

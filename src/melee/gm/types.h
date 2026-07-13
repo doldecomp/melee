@@ -73,12 +73,12 @@ struct GameSceneHandler {
 }; // 803DA920
 
 typedef struct {
-    u8 curr_mode;
-    u8 pending_mode;
-    u8 prev_mode;
-    u8 curr_scene;
-    u8 prev_scene;
-    u8 pending_scene;
+    u8 curr_mode;         ///< GameModeKind
+    u8 pending_mode;      ///< GameModeKind
+    u8 prev_mode;         ///< GameModeKind
+    u8 curr_scene_idx;    ///< scene graph scene index for associated GameMode
+    u8 prev_scene_idx;    ///< scene graph scene index for associated GameMode
+    u8 pending_scene_idx; ///< scene graph scene index for associated GameMode
 } GameRouting;
 
 typedef struct {
@@ -88,7 +88,7 @@ typedef struct {
     u8 x0D;
     u8 x0E;
     u8 x0F;
-    u8 (*data)(void);
+    u8 (*game_mode_override)(void);
 } GameState;
 STATIC_ASSERT(sizeof(GameState) == 0x14);
 
@@ -992,7 +992,7 @@ struct lbl_8046DBD8_t {
     u8 x2; // stocks
     u8 x3;
     u8 x4; // c_kind
-    u8 x5;
+    u8 x5; ///< GameModeKind
     u8 x6;
     u16 x8;
 };

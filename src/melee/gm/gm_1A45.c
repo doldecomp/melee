@@ -240,7 +240,7 @@ void gm_801A4BD4(void)
 GameSceneHandler* gm_801A4CE0(u8 id)
 {
     GameSceneHandler* cur;
-    for (cur = gm_801A50A0(); cur->class_id != 0x2D; cur++) {
+    for (cur = gm_801A50A0(); cur->class_id != GS_COUNT; cur++) {
         if (cur->class_id == id) {
             return cur;
         }
@@ -258,7 +258,7 @@ inline u64 maybe_gm_801A48A4(u8 i)
     }
 }
 
-void gm_801A4D34(void (*arg0)(void), GameSceneInfo* arg1)
+void gm_801A4D34(void (*on_frame)(void), GameSceneInfo* arg1)
 {
     int pad_queue_count;
     int i;
@@ -305,8 +305,8 @@ void gm_801A4D34(void (*arg0)(void), GameSceneInfo* arg1)
                 if (lb_80019A30(0)) {
                     gm_EvaluateAllControllerInputs();
                 }
-                if (lb_80019A30(0) && (arg0 != NULL)) {
-                    arg0();
+                if (lb_80019A30(0) && (on_frame != NULL)) {
+                    on_frame();
                 }
             }
             if (gm_80479D58.unk_10.x0 != gm_80479D58.unk_10.x1 ||

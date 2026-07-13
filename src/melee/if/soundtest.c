@@ -370,7 +370,7 @@ bool un_802FFC6C(bool update_scene)
         lbAudioAx_800245D4(0x7F);
         lbAudioAx_800245F4(0x7F);
         lbAudioAx_80024614(0x7F);
-        gm_801A42F8(GM_TITLE);
+        gm_ChangeGameMode(GM_TITLE);
         gm_801A4B60();
     }
     return true;
@@ -807,7 +807,7 @@ bool un_80300968(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(GM_HANYU_CSS);
+        gm_ChangeGameMode(GM_HANYU_CSS);
         gm_801A4B60();
     }
 
@@ -818,7 +818,7 @@ bool un_803009A4(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(GM_HANYU_SSS);
+        gm_ChangeGameMode(GM_HANYU_SSS);
         gm_801A4B60();
     }
 
@@ -916,7 +916,7 @@ bool un_80300BBC(bool update_scene)
     if (update_scene == true) {
         Toy_803124BC();
         Toy_80311680();
-        gm_801A42F8(GM_TOY_GALLERY);
+        gm_ChangeGameMode(GM_TOY_GALLERY);
         gm_801A4B60();
     }
 
@@ -928,7 +928,7 @@ bool un_80300BF8(bool update_scene)
     if (update_scene == true) {
         Toy_803124BC();
         Toy_SetUnlockState(0xE6, true);
-        gm_801A42F8(GM_MENU);
+        gm_ChangeGameMode(GM_MENU);
         gm_801A4B60();
     }
 
@@ -940,7 +940,7 @@ bool un_80300C3C(bool update_scene)
     if (update_scene == true) {
         Toy_803124BC();
         Toy_SetUnlockState(0xC9, true);
-        gm_801A42F8(GM_MENU);
+        gm_ChangeGameMode(GM_MENU);
         gm_801A4B60();
     }
 
@@ -953,7 +953,7 @@ bool un_80300C80(int arg0)
         u32* ptr = gmMainLib_8015CCF0();
         *ptr = un_804D6DDC * 10;
         Toy_803124BC();
-        gm_801A42F8(1);
+        gm_ChangeGameMode(1);
         gm_801A4B60();
     }
     return false;
@@ -982,7 +982,7 @@ void fn_80300CC8(int arg0)
             *r31 = un_804D6DE8;
             *ptr = un_804D6DEC;
         }
-        gm_801A42F8(1);
+        gm_ChangeGameMode(1);
         gm_801A4B60();
         break;
     }
@@ -1016,7 +1016,7 @@ void fn_80300DE0(int arg0)
     case 6:
         lbAudioAx_80024030(1);
         *ptr = (u32) (un_804DDC48 * un_804D6DD0);
-        gm_801A42F8(1);
+        gm_ChangeGameMode(1);
         gm_801A4B60();
         break;
     }
@@ -1044,7 +1044,7 @@ void fn_80300ED0(int arg0)
     case 6:
         lbAudioAx_80024030(1);
         gmMainLib_8015D4E8(un_804D6DC8, un_804D6DCC);
-        gm_801A42F8(1);
+        gm_ChangeGameMode(1);
         gm_801A4B60();
         break;
     }
@@ -1070,7 +1070,7 @@ s32 un_80300F98(s32 arg0)
         temp_r31 = gmMainLib_GetKOTotal();
         lbAudioAx_80024030(1);
         *temp_r31 = un_804D6DF4;
-        gm_801A42F8(1);
+        gm_ChangeGameMode(1);
         gm_801A4B60();
     }
     return 0;
@@ -1093,7 +1093,7 @@ int un_80301028(int arg0)
         struct gmm_x0_528_t* ptr = gmMainLib_8015CDD4();
         ptr->x5 = un_804D5908 - 1;
         lbAudioAx_80024030(1);
-        gm_801A42F8(4);
+        gm_ChangeGameMode(4);
         gm_801A4B60();
     }
     return 0;
@@ -1105,7 +1105,7 @@ int un_80301074(int arg0)
         struct gmm_x0_528_t* ptr = gmMainLib_8015CDC8();
         ptr->x5 = un_804D590C - 1;
         lbAudioAx_80024030(1);
-        gm_801A42F8(3);
+        gm_ChangeGameMode(3);
         gm_801A4B60();
     }
     return 0;
@@ -1117,7 +1117,7 @@ int un_803010C0(int arg0)
         struct gmm_x0_528_t* ptr = gmMainLib_8015CDE0();
         ptr->x5 = un_804D5910 - 1;
         lbAudioAx_80024030(1);
-        gm_801A42F8(5);
+        gm_ChangeGameMode(5);
         gm_801A4B60();
     }
     return 0;
@@ -1141,15 +1141,15 @@ int fn_8030110C(int arg0)
         }
         switch (un_804D6E00) {
         case 0:
-            gm_801A42F8(0x1A);
+            gm_ChangeGameMode(0x1A);
             gm_801BF040(0x15);
             break;
         case 1:
-            gm_801A42F8(0x1A);
+            gm_ChangeGameMode(0x1A);
             gm_801BF040(0x16);
             break;
         case 2:
-            gm_801A42F8(0x1A);
+            gm_ChangeGameMode(0x1A);
             gm_801BF040(0x17);
             break;
         }
@@ -1178,7 +1178,7 @@ void fn_803011EC(int arg0)
             u8 color = (u8) un_804D6DFC;
             gm_8017EB30()->x0.color = color;
         }
-        gm_801A42F8(0x15);
+        gm_ChangeGameMode(0x15);
         gm_801A4B60();
         break;
     }
@@ -1209,7 +1209,7 @@ bool un_80301328(bool update_scene)
     if (update_scene == true) {
         lbAudioAx_80024030(1);
         gm_801BF708(0x0);
-        gm_801A42F8(GM_OPENING_MV);
+        gm_ChangeGameMode(GM_OPENING_MV);
         gm_801A4B60();
     }
 
@@ -1221,7 +1221,7 @@ bool un_8030136C(bool update_scene)
     if (update_scene == true) {
         lbAudioAx_80024030(1);
         gm_801BF708(0x5);
-        gm_801A42F8(GM_OPENING_MV);
+        gm_ChangeGameMode(GM_OPENING_MV);
         gm_801A4B60();
     }
 
@@ -1232,7 +1232,7 @@ bool un_803013B0(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(GM_DEBUG_CUTSCENE);
+        gm_ChangeGameMode(GM_DEBUG_CUTSCENE);
         gm_801A4B60();
     }
 
@@ -1257,7 +1257,7 @@ bool un_80301454(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(GM_BOOT);
+        gm_ChangeGameMode(GM_BOOT);
         gm_801A4B60();
     }
 
@@ -1323,7 +1323,7 @@ bool un_803015BC(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(GM_PROGRESSIVE_SCAN);
+        gm_ChangeGameMode(GM_PROGRESSIVE_SCAN);
         gm_801A4B60();
     }
 
@@ -1621,7 +1621,7 @@ bool un_80301D40(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(GM_FIXED_CAMERA_VS);
+        gm_ChangeGameMode(GM_FIXED_CAMERA_VS);
         gm_801A4B60();
     }
 
@@ -1633,7 +1633,7 @@ int un_80301D7C(int arg0)
     if (arg0 == 1) {
         lbAudioAx_80024030(1);
         gm_801BEB74(un_803FA258.x188 - 1);
-        gm_801A42F8(0x2B);
+        gm_ChangeGameMode(0x2B);
         gm_801A4B60();
     }
     return 0;

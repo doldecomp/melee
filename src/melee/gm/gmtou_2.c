@@ -752,7 +752,7 @@ void gm_8019DF8C_OnFrame(void)
         lbAudioAx_80024030(0);
         mn_8022F268();
         gm_801A4B60();
-        gm_801A42F8(1);
+        gm_ChangeGameMode(1);
         return;
     }
 

@@ -14,6 +14,9 @@
 #include "baselib/gobjgxlink.h"
 #include "baselib/gobjobject.h"
 #include "dolphin/pad.h"
+
+#include "gm/forward.h"
+
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbdvd.h"
@@ -2087,7 +2090,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
                 mn_8022F138(0x12, 0x15);
                 mn_8022F268();
                 gm_801A4B60();
-                gm_801A42F8(1);
+                gm_ChangeGameMode(1);
                 return;
             }
         }
@@ -2357,7 +2360,7 @@ void fn_8019AF50(s32* arg0, u32 arg1, u32 arg2)
                 if (lbl_804799D8.x0 >= 0x1C20U ||
                     (buttons & (PAD_BUTTON_A | PAD_BUTTON_START)))
                 {
-                    gm_801A42F8(1);
+                    gm_ChangeGameMode(GM_MENU);
                     gm_801A4B60();
                 }
             } else {

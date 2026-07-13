@@ -76,7 +76,7 @@ void gm_801B98E8(GameScene* scene)
     struct GameCache* game_cache;
     VsModeData* vs = &gm_80497618;
 
-    css = gm_801A427C(scene);
+    css = gm_GetGameSceneLoadDataCallback(scene);
     if (gm_804D68F9 != 0) {
         lb_8001C550();
         lb_8001D164(0);
@@ -99,9 +99,9 @@ void gm_801B999C(GameScene* scene)
     VsModeData* vs = &gm_80497618;
     CSSData* temp_r3;
 
-    temp_r3 = gm_801A4284(scene);
+    temp_r3 = gm_GetGameSceneLeaveDataCallback(scene);
     if (temp_r3->pending_scene_change == 2) {
-        gm_801A42F8(GM_MENU);
+        gm_ChangeGameMode(GM_MENU);
         return;
     }
     gm_80167A14(vs->data.players);
@@ -121,7 +121,7 @@ void gm_801B9A3C(GameScene* arg0)
     VsModeData* vs = &gm_80497618;
     int i;
 
-    data = gm_801A427C(arg0);
+    data = gm_GetGameSceneLoadDataCallback(arg0);
     gm_80167A64(&data->rules);
 
     data->rules = vs->data.rules;
@@ -169,7 +169,7 @@ void gm_801B9DD8(GameScene* arg0)
     MatchExitInfo* temp_r3;
     u16 tmp;
 
-    temp_r3 = gm_801A4284(arg0);
+    temp_r3 = gm_GetGameSceneLeaveDataCallback(arg0);
     gm_80162968(temp_r3->match_end.frame_count / 60);
     gm_8016247C(temp_r3->match_end.player_standings[0].xE);
     gm_80180BA0();

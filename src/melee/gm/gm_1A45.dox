@@ -1,8 +1,6 @@
 #ifndef MELEE_GM_1A45_H
 #define MELEE_GM_1A45_H
 
-#include <placeholder.h>
-
 #include <baselib/forward.h>
 #include <melee/gm/forward.h>
 
@@ -22,16 +20,28 @@
 /* 1A4B60 */ void gm_801A4B60(void);
 /* 1A4B74 */ UNK_RET gm_801A4B74(UNK_PARAMS);
 /* 1A4B88 */ void gm_801A4B88(struct GameSceneInfo*);
+
+/// @returns The @c load_data field of the active #GameScene::GameSceneInfo.
 /* 1A4B90 */ void* gm_801A4B90(void);
+
+/// @returns The @c leave_data field of the active #GameScene::GameSceneInfo.
 /* 1A4B9C */ void* gm_801A4B9C(void);
+
 /* 1A4BA8 */ u32 gm_801A4BA8(void);
 /* 1A4BB8 */ u32 gm_801A4BB8(void);
 /* 1A4BC8 */ HSD_GObj* gm_801A4BC8(void);
 /* 1A4BD0 */ void fn_801A4BD0(HSD_GObj*);
 /* 1A4BD4 */ void gm_801A4BD4(void);
-/* 1A4CE0 */ GameSceneHandler* gm_801A4CE0(u8 id);
-/* 1A4D34 */ void gm_801A4D34(void (*on_frame)(void), struct GameSceneInfo*);
 
-/* 4D6724 */ extern void (*gm_804D6724)(void);
+/// @returns The #GameSceneHandler whose #GameSceneHandler::class_id equals @p id.
+/* 1A4CE0 */ GameSceneHandler* gm_801A4CE0(u8 id);
+
+/**
+ * @brief Main per-scene loop invoked from #gm_801A4014.
+ *
+ * Runs until #gm_80479D58_t::unk_C becomes non-zero, calling @p on_frame each
+ * frame after pad/input processing.
+ */
+/* 1A4D34 */ void gm_801A4D34(void (*on_frame)(void), struct GameSceneInfo*);
 
 #endif

@@ -19,7 +19,7 @@ lbl_8046DBD8_t* gm_801736DC(void)
     return &lbl_8046DBD8;
 }
 
-void gm_801736E8(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5)
+void gm_801736E8(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 game_mode)
 {
     lbl_8046DBD8_t* tmp = &lbl_8046DBD8;
     memzero(tmp, sizeof(lbl_8046DBD8));
@@ -28,7 +28,7 @@ void gm_801736E8(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5)
     tmp->x2 = arg2;
     tmp->x3 = arg3;
     tmp->x4 = arg4;
-    tmp->x5 = arg5;
+    tmp->x5 = game_mode;
 }
 
 #pragma push
@@ -40,7 +40,7 @@ bool gm_80173754(u8 gameMode, u8 arg1)
         lbl_8046DBD8.x0 = CHKIND_NONE;
         lbl_8046DBD8.x2 = arg1;
         lbl_8046DBD8.x5 = gameMode;
-        gm_801A42E8(GM_CHALLENGER_APPROACH);
+        gm_SetPendingGameMode(GM_CHALLENGER_APPROACH);
         gm_801A42D4();
         return true;
     }
@@ -55,7 +55,7 @@ u8 gm_801737D8(void)
 
 void gm_801737E8_OnLoad(void)
 {
-    lbl_8046DBD8.x6 = gm_801A4320();
+    lbl_8046DBD8.x6 = gm_GetPreviousGameMode();
     if (lbl_8046DBD8.x0 == CHKIND_NONE) {
         gm_SetScene(2);
     } else {
@@ -208,20 +208,20 @@ void gm_80173BC4(s8 arg0)
 void gm_80173C70(s8 c_kind, u32 arg1, u32 arg2, int arg3)
 {
     if (arg3 != 0) {
-        if (gm_801A4310() == GM_15MIN_VS) {
+        if (gm_GetCurrentGameMode() == GM_15MIN_VS) {
             fn_80172C78(0x50);
         }
-        if (gm_801A4310() == GM_100MAN_VS && arg2 <= 0x3840) {
+        if (gm_GetCurrentGameMode() == GM_100MAN_VS && arg2 <= 0x3840) {
             fn_80172C78(0x4E);
         }
-        if (gm_801A4310() == GM_15MIN_VS) {
+        if (gm_GetCurrentGameMode() == GM_15MIN_VS) {
             fn_80172C78(0x50);
         }
     }
-    if (gm_801A4310() == GM_ENDLESS_VS && arg1 >= 100) {
+    if (gm_GetCurrentGameMode() == GM_ENDLESS_VS && arg1 >= 100) {
         fn_80172C78(0x4F);
     }
-    if (gm_801A4310() == GM_CRUEL_VS && arg1 >= 5) {
+    if (gm_GetCurrentGameMode() == GM_CRUEL_VS && arg1 >= 5) {
         fn_80172C78(0x10E);
     }
 }
