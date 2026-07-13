@@ -1268,7 +1268,12 @@ void gmMainLib_8015F600(int arg0, int arg1)
     PAD_STACK(88);
 
     if (arg0 == 1) {
-        ResetPersistentFighterData();
+        {
+            s32 i;
+            for (i = 0; i < 0x19; i++) {
+                ResetPersistentFighterData(i);
+            }
+        }
 
         memzero(&gmMainLib_804D3EE0->thing.x1CD0, 0x25C);
         Toy_80311960();
