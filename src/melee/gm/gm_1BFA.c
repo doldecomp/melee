@@ -122,7 +122,7 @@ void gm_801BFBA8(GameScene* arg0)
     gm_80172898(0x100U);
     if (gm_801721EC() == 0) {
         gm_SetPendingGameMode((s8) temp_r31->x5);
-        gm_801A42D4();
+        gm_SetNewGameModePending();
     }
 }
 
@@ -258,5 +258,5 @@ void gm_801BFCFC(GameScene* arg0)
 void gm_801BFF7C(GameScene* arg0)
 {
     gm_SetPendingGameMode((s8) gm_801736DC()->x5);
-    gm_801A42D4();
+    gm_SetNewGameModePending();
 }

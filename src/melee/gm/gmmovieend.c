@@ -44,13 +44,13 @@ void gm_801A6254(GameScene* arg0)
     gm_80173EEC();
     gm_80172898(0x100);
     if (gm_801721EC() == 0) {
-        gm_SetPendingScene(0);
+        gm_SetPendingSceneIndex(0);
     }
 }
 
 void gm_801A6308(GameScene* arg0)
 {
-    gm_SetPendingScene(0);
+    gm_SetPendingSceneIndex(0);
 }
 
 void gm_801A632C_OnEnter(void* arg0_)

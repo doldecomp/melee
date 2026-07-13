@@ -256,7 +256,7 @@ void gm_801AA28C_OnFrame(void)
         lbAudioAx_80023694();
         gm_801A4B74();
         gm_SetPendingGameMode(GM_TITLE);
-        gm_801A42D4();
+        gm_SetNewGameModePending();
     } else if (gm_804D67EC > 0x157C) {
         if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) & HSD_PAD_START) {
             gmMainLib_8015F500();
@@ -268,7 +268,7 @@ void gm_801AA28C_OnFrame(void)
             if (!gm_80173754(GM_MENU, 0)) {
                 gm_SetPendingGameMode(GM_MENU);
             }
-            gm_801A42D4();
+            gm_SetNewGameModePending();
         }
     } else {
         if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) &
@@ -280,7 +280,7 @@ void gm_801AA28C_OnFrame(void)
             lbAudioAx_80024030(1);
             gm_801A4B60();
             gm_SetPendingGameMode(GM_TITLE);
-            gm_801A42D4();
+            gm_SetNewGameModePending();
         }
     }
 }

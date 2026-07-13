@@ -503,12 +503,12 @@ void gm_801B089C(GameScene* scene)
         gm_801BF708(1);
         gm_SetPendingGameMode(GM_OPENING_MV);
     }
-    gm_801A42D4();
+    gm_SetNewGameModePending();
 }
 
 void gm_801B099C(GameScene* unused)
 {
-    gm_SetPendingScene(0);
+    gm_SetPendingSceneIndex(0);
 }
 
 struct UnkUnloadData {
@@ -531,7 +531,7 @@ int fn_801B09F8(int arg0)
 {
     if (arg0 == 0) {
         lbAudioAx_80024030(0);
-        gm_ChangeGameMode(GM_TITLE);
+        gm_ChangeGameModeAfterCurrentScene(GM_TITLE);
         gm_801A4B60();
     }
     return 0;
@@ -552,7 +552,7 @@ int fn_801B0A8C(int arg0)
 {
     if (arg0 == 0) {
         lbAudioAx_80024030(0);
-        gm_SetPendingScene(0);
+        gm_SetPendingSceneIndex(0);
         gm_801A4B60();
     }
     return 0;
@@ -572,7 +572,7 @@ void gm_801B0B00(GameScene* arg0)
 
 void gm_801B0B24(GameScene* arg0)
 {
-    gm_SetPendingScene(2);
+    gm_SetPendingSceneIndex(2);
 }
 
 void gm_801B0B48(GameScene* arg0)
@@ -594,7 +594,7 @@ void gm_801B0B8C(GameScene* arg0)
 void gm_801B0BF0(GameScene* arg0)
 {
     gm_GetGameSceneLeaveDataCallback(arg0);
-    gm_SetPendingScene(0);
+    gm_SetPendingSceneIndex(0);
 }
 
 void gm_801B0C18(GameScene* arg0)
@@ -711,9 +711,9 @@ void gm_801B0F1C(GameScene* arg0)
 {
     lbAudioAx_800236DC();
     if (HSD_PadCopyStatus->button & HSD_PAD_L) {
-        gm_SetPendingScene(0xB);
+        gm_SetPendingSceneIndex(0xB);
     } else {
-        gm_SetPendingScene(0);
+        gm_SetPendingSceneIndex(0);
     }
 }
 
@@ -729,5 +729,5 @@ void gm_801B0F60(GameScene* arg0)
 void gm_801B0F90(GameScene* arg0)
 {
     gm_GetGameSceneLeaveDataCallback(arg0);
-    gm_SetPendingScene(0);
+    gm_SetPendingSceneIndex(0);
 }

@@ -120,7 +120,7 @@ void fn_801965C4(void)
 
     if (fn_80196594(temp_r3)) {
         temp_r3->x32 = 1;
-        gm_SetPendingScene(3);
+        gm_SetPendingSceneIndex(3);
         gm_801A4B60();
         return;
     }
@@ -128,7 +128,7 @@ void fn_801965C4(void)
         temp_r3->x32 = 1;
         temp_r3->x28 = lbl_804D4190;
     }
-    gm_SetPendingScene(4);
+    gm_SetPendingSceneIndex(4);
     gm_801A4B60();
 }
 
@@ -2035,7 +2035,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
             }
             if (cond != 0) {
                 t->x32 = 1;
-                gm_SetPendingScene(3U);
+                gm_SetPendingSceneIndex(3U);
                 gm_801A4B60();
                 return;
             }
@@ -2048,7 +2048,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
                 t->x32 = 1;
                 t->x28 = (u32) lbl_804D4190;
             }
-            gm_SetPendingScene(4U);
+            gm_SetPendingSceneIndex(4U);
             gm_801A4B60();
         }
     } else {
@@ -2090,7 +2090,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
                 mn_8022F138(0x12, 0x15);
                 mn_8022F268();
                 gm_801A4B60();
-                gm_ChangeGameMode(1);
+                gm_ChangeGameModeAfterCurrentScene(GM_MENU);
                 return;
             }
         }
@@ -2152,7 +2152,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
                         }
                         if (cond2 != 0) {
                             t3->x32 = 1;
-                            gm_SetPendingScene(3U);
+                            gm_SetPendingSceneIndex(3U);
                             gm_801A4B60();
                             return;
                         }
@@ -2166,7 +2166,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
                             t3->x32 = 1;
                             t3->x28 = (u32) lbl_804D4190;
                         }
-                        gm_SetPendingScene(4U);
+                        gm_SetPendingSceneIndex(4U);
                         gm_801A4B60();
                     }
                 }
@@ -2360,7 +2360,7 @@ void fn_8019AF50(s32* arg0, u32 arg1, u32 arg2)
                 if (lbl_804799D8.x0 >= 0x1C20U ||
                     (buttons & (PAD_BUTTON_A | PAD_BUTTON_START)))
                 {
-                    gm_ChangeGameMode(GM_MENU);
+                    gm_ChangeGameModeAfterCurrentScene(GM_MENU);
                     gm_801A4B60();
                 }
             } else {

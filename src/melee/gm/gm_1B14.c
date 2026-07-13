@@ -427,18 +427,18 @@ void gm_801B1788(GameScene* arg0)
 
     sss = gm_GetGameSceneLeaveDataCallback(arg0);
     if (sss->start_game != 0) {
-        gm_SetPendingScene(4);
+        gm_SetPendingSceneIndex(4);
         stage = sss->data.data.rules.xE;
         gm_8018F634()->x28 = stage;
         return;
     }
     if (gm_804771C4.match_type == 0) {
         gm_8019A828();
-        gm_SetPendingScene(1);
+        gm_SetPendingSceneIndex(1);
         return;
     }
     gm_8018F634()->x32 = 0;
-    gm_SetPendingScene(2);
+    gm_SetPendingSceneIndex(2);
 }
 
 void gm_801B1810(GameScene* arg0)
@@ -460,10 +460,10 @@ void gm_801B1834(GameScene* arg0)
     if ((gm_80167140(&mei->match_end) != 0) &&
         (gm_8018F1B0(&mei->match_end) != 0))
     {
-        gm_SetPendingScene(5);
+        gm_SetPendingSceneIndex(5);
         return;
     }
-    gm_SetPendingScene(6);
+    gm_SetPendingSceneIndex(6);
 }
 
 #pragma dont_inline on
@@ -510,12 +510,12 @@ void gm_801B1AD4(GameScene* arg0)
 
     gm_8016247C(gm_801688AC(&rmi->match_end));
     if (gm_804771C4.match_type == 0) {
-        gm_SetPendingScene(1);
+        gm_SetPendingSceneIndex(1);
         gm_8018F634()->cur_option = 0x1F;
         return;
     }
     gm_8019E634();
-    gm_SetPendingScene(2);
+    gm_SetPendingSceneIndex(2);
 }
 
 #pragma dont_inline on
@@ -559,7 +559,7 @@ void gm_801B1C24(GameScene* arg0)
     PAD_STACK(0x10);
 
     if (css->pending_scene_change == 2) {
-        gm_ChangeGameMode(GM_MENU);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
     gm_80167A14(vs->data.players);
@@ -632,7 +632,7 @@ void gm_801B1EEC(GameScene* arg0)
     vs_data = &gmMainLib_804D3EE0->unk_D10;
     sss = gm_GetGameSceneLeaveDataCallback(arg0);
     if (sss->start_game == 0) {
-        gm_SetPendingScene(0);
+        gm_SetPendingSceneIndex(0);
         return;
     }
     stage_id = sss->data.data.rules.xE;
@@ -703,7 +703,7 @@ void gm_801B2204(GameScene* arg0)
     gm_80173BC4(temp_r3->match_end.player_standings[0].character_kind);
     gm_80173EEC();
     if (!gm_80173754(0x1C, gm_804D68C0)) {
-        gm_SetPendingScene(0);
+        gm_SetPendingSceneIndex(0);
     }
     lbAudioAx_80024030(1);
 }
@@ -758,7 +758,7 @@ void gm_801B2510(GameScene* arg0)
     int* data = gm_GetGameSceneLeaveDataCallback(arg0);
     int temp_r0 = *data;
     if (temp_r0 == 1 || temp_r0 == 2) {
-        gm_ChangeGameMode(GM_MENU);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
     }
 }
 
@@ -794,7 +794,7 @@ void gm_801B25D4(GameScene* arg0)
     temp_r31 = &gmMainLib_804D3EE0->unk_950;
     temp_r3 = gm_GetGameSceneLeaveDataCallback(arg0);
     if (temp_r3->pending_scene_change == 2) {
-        gm_ChangeGameMode(GM_MENU);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
 
@@ -834,7 +834,7 @@ void gm_801B2704(GameScene* arg0)
         lbAudioAx_80027168();
         return;
     }
-    gm_SetPendingScene(1);
+    gm_SetPendingSceneIndex(1);
 }
 
 void gm_PrepCameraModeVSScene(GameScene* arg0)
@@ -894,7 +894,7 @@ void gm_801B2AF8(GameScene* arg0)
     gm_80168710(&gm_80479D98.match_end, temp_r30);
     gm_8016247C(gm_801688AC(&gm_80479D98.match_end));
     gm_801A5258(temp_r29, &gm_80479D98.match_end);
-    gm_SetPendingScene(1);
+    gm_SetPendingSceneIndex(1);
 }
 
 void gm_801B2B7C_OnInit(void)

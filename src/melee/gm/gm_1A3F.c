@@ -153,7 +153,7 @@ void gm_801A4014(GameMode* mode)
         memzero(&gm_80479D30, 0x14);
         gm_801A3EF4();
         gmMainLib_8046B0F0.x0 = true;
-        gm_ChangeGameMode(GM_BOOT);
+        gm_ChangeGameModeAfterCurrentScene(GM_BOOT);
         HSD_VISetBlack(0);
     }
 }
@@ -168,29 +168,30 @@ void* gm_GetGameSceneLeaveDataCallback(GameScene* scene)
     return scene->info.leave_data;
 }
 
-void gm_SetScene(u8 arg0) ///< No callers?
+void gm_SetSceneIndex(u8 arg0)
 {
     gm_80479D30.routing.curr_scene_idx = arg0;
     gm_80479D30.routing.prev_scene_idx = arg0;
 }
 
-void gm_SetPendingScene(u8 pending_scene) ///< Actually sets the pending scene
-                                          ///< to the scene following the input
+void gm_SetPendingSceneIndex(
+    u8 pending_scene) ///< Actually sets the pending scene
+                      ///< to the scene following the input
 {
     gm_80479D30.routing.pending_scene_idx = pending_scene + 1;
 }
 
-u8 gm_GetPreviousScene(void)
+u8 gm_GetPreviousSceneIndex(void)
 {
     return gm_80479D30.routing.prev_scene_idx;
 }
 
-u8 gm_GetCurrentScene(void)
+u8 gm_GetCurrentSceneIndex(void)
 {
     return gm_80479D30.routing.curr_scene_idx;
 }
 
-void gm_801A42D4(void)
+void gm_SetNewGameModePending(void)
 {
     gm_80479D30.pending = 1;
 }
@@ -200,7 +201,7 @@ void gm_SetPendingGameMode(s8 pending_mode)
     gm_80479D30.routing.pending_mode = pending_mode;
 }
 
-void gm_ChangeGameMode(int pending_mode)
+void gm_ChangeGameModeAfterCurrentScene(int pending_mode)
 {
     gm_80479D30.routing.pending_mode = pending_mode;
     gm_80479D30.pending = 1;
@@ -216,12 +217,12 @@ u8 gm_GetPreviousGameMode(void)
     return gm_80479D30.routing.prev_mode;
 }
 
-void gm_801A4330(u8 (*arg0)(void))
+void gm_801A4330(u8 (*mode)(void))
 {
-    gm_80479D30.game_mode_override = arg0;
+    gm_80479D30.game_mode_override = mode;
 }
 
-bool gm_801A4340(u8 mode)
+bool gm_Is1PMode(u8 mode)
 {
     switch (mode) {
     case GM_CLASSIC:

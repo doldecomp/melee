@@ -557,18 +557,18 @@ void gm_8017CA38(DebugGameOverData* arg0, Unk1PData* arg1, gmm_x0_528_t* arg2,
         gm_80172898(0x40);
         if (temp_r31 == CHKIND_NONE) {
             if (gm_80173754(1, arg1->slot) == 0) {
-                gm_ChangeGameMode(1);
+                gm_ChangeGameModeAfterCurrentScene(GM_MENU);
             }
         } else {
             gm_801736E8(arg1->ckind, arg1->color, arg1->slot, arg1->x4,
                         temp_r31, 1U);
-            gm_ChangeGameMode(0x14);
+            gm_ChangeGameModeAfterCurrentScene(GM_CHALLENGER_APPROACH);
         }
     } else {
         arg1->xC.x18 = lbTime_8000AEC8((u32) arg0->x4, 1U);
         arg1->stocks = arg2->stocks;
         arg1->xC.xD = lbTime_8000AF74((u32) arg1->xC.xD, 1);
-        gm_SetPendingScene(arg1->x7);
+        gm_SetPendingSceneIndex(arg1->x7);
     }
 }
 
@@ -631,7 +631,7 @@ void gm_8017CBAC(UnkAdventureData* arg0, gmm_x0_528_t* arg1, u8 arg2)
     lb_8001D164(0);
     lb_8001CE00();
     gm_SetPendingGameMode(arg2);
-    gm_801A42D4();
+    gm_SetNewGameModePending();
 }
 
 u8 gm_8017CD94(UnkAdventureData* arg0, int arg1, int arg2, int arg3)
@@ -1060,7 +1060,7 @@ bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
             fn_80162FF4(arg1->ckind, arg1->xC.x18);
             break;
         }
-        gm_ChangeGameMode(1);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return 0;
     }
     fn_8017E3C8();
@@ -1070,18 +1070,18 @@ bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
             if (arg0->match_end.result == 1) {
                 arg1->stocks--;
                 if (arg1->stocks == 0) {
-                    gm_SetPendingScene(arg2);
+                    gm_SetPendingSceneIndex(arg2);
                     return 0;
                 }
                 if (!(arg1->x8 & 0x40)) {
                     arg1->xC.x10++;
-                    gm_SetPendingScene(gm_GetCurrentScene());
+                    gm_SetPendingSceneIndex(gm_GetCurrentSceneIndex());
                     return 0;
                 }
             }
         } else {
             arg1->xC.x10 = 0;
-            gm_SetPendingScene(arg2);
+            gm_SetPendingSceneIndex(arg2);
             return 0;
         }
     }
@@ -1564,10 +1564,10 @@ void gm_8017E7FC(u8 matchResult)
         struct StartMeleeRules* rules = gm_8016AE50();
         rules->x4_5 = 1;
         r31->x77 = 0;
-        gm_SetPendingScene(0x5A);
+        gm_SetPendingSceneIndex(0x5A);
     } else {
         r31->x77 = 1;
-        gm_SetPendingScene(0x5A);
+        gm_SetPendingSceneIndex(0x5A);
     }
 }
 
@@ -1580,7 +1580,7 @@ void fn_8017E8A4(int arg0_int)
 {
     MatchEnd* arg0 = (MatchEnd*) arg0_int;
     lbl_8046B6A0_t* gm = gm_8016AE38();
-    struct gm_803DE650_t* stage = gm_8017E4C4(gm_GetCurrentScene());
+    struct gm_803DE650_t* stage = gm_8017E4C4(gm_GetCurrentSceneIndex());
     UnkAdventureData* adv = &lbl_80472C30;
     u8* flags = arg0->_x448;
     gmm_x0_528_t* main_data;
@@ -3917,15 +3917,15 @@ void fn_80182F40(HSD_GObj* unused)
         lbAudioAx_80024030(1);
         gm_801A4B60();
         gm_SetPendingGameMode(GM_TITLE);
-        gm_801A42D4();
+        gm_SetNewGameModePending();
         return;
     }
     if (gm_801A4BA8() >= 0x4B0) {
         lbAudioAx_80024C84();
         lbAudioAx_80023694();
-        if (gm_GetCurrentScene() == 3 && gmMainLib_8015DB00() % 2 == 0) {
+        if (gm_GetCurrentSceneIndex() == 3 && gmMainLib_8015DB00() % 2 == 0) {
             gmMainLib_8015DB18();
-            gm_SetPendingScene(0);
+            gm_SetPendingSceneIndex(0);
         }
         gm_801A4B60();
         return;

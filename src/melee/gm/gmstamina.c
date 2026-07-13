@@ -121,7 +121,7 @@ void gm_801B927C(GameScene* arg0)
         lbAudioAx_80027168();
         return;
     }
-    gm_SetPendingScene(0);
+    gm_SetPendingSceneIndex(0);
 }
 
 void gm_801B931C(GameScene* arg0)

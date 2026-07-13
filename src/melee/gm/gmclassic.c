@@ -621,7 +621,7 @@ void gmClassic_OnLoad(void)
     data->x6C = gm_8017EC00;
     data->x70 = gm_8017EC50;
 
-    gm_SetScene(0x70U);
+    gm_SetSceneIndex(0x70U);
     gm_80172174();
     Ground_801C5A28();
 }
@@ -1005,7 +1005,7 @@ void gmClassic_801B3E44(GameScene* scene)
     if (temp_r30->pending_scene_change == 2) {
         // This only happens when, instead of pressing start to begin the game,
         // we press back to exit.
-        gm_ChangeGameMode(1);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
     gm_801B0730(temp_r30, &temp_r29->c_kind, &temp_r29->stocks,
@@ -1016,12 +1016,12 @@ void gmClassic_801B3E44(GameScene* scene)
     temp_r31->x0.stocks = temp_r29->stocks;
     temp_r31->x0.x4 = temp_r29->x4;
     gmClassic_801B2D54(r4);
-    gm_SetPendingScene(temp_r29->x5 << 3);
+    gm_SetPendingSceneIndex(temp_r29->x5 << 3);
     gm_80168F88();
 }
 
 void gmClassic_801B3F18(GameScene* scene)
 {
     gm_SetPendingGameMode(GM_MENU);
-    gm_801A42D4();
+    gm_SetNewGameModePending();
 }

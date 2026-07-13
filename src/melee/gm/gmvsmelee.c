@@ -125,7 +125,7 @@ void gm_801A5680(GameScene* scene_data, VsModeData* vs_data)
 
     css_data = gm_GetGameSceneLeaveDataCallback(scene_data);
     if (css_data->pending_scene_change == 2) {
-        gm_ChangeGameMode(GM_MENU);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
     *vs_data = css_data->data;
@@ -158,7 +158,7 @@ void gm_801A57A8(GameScene* scene_data, VsModeData* vs_data, u8 id)
                            lbAudioAx_80026EBC((u16) vs_data->data.rules.xE));
         lbAudioAx_80027168();
     } else {
-        gm_SetPendingScene(id);
+        gm_SetPendingSceneIndex(id);
     }
 }
 
@@ -222,9 +222,9 @@ void gm_801A5AF0(GameScene* scene_data, u8 id, u8 id2)
     }
 
     if (!gm_80167140(&match_exit_info->match_end)) {
-        gm_SetPendingScene(id);
+        gm_SetPendingSceneIndex(id);
     } else {
-        gm_SetPendingScene(id2);
+        gm_SetPendingSceneIndex(id2);
     }
 }
 
@@ -301,19 +301,19 @@ void gm_801A5F64(GameScene* scene_data, VsModeData* vs_data, u8 next_scene)
                 gm_801736E8(match_end->player_standings[idx].character_kind,
                             (match_end->player_standings[idx].x3), idx,
                             match_end->player_standings[idx].x4, unk, 0);
-                gm_SetPendingScene(0x80);
+                gm_SetPendingSceneIndex(0x80);
                 unk_bool = true;
             } else if ((unk = gm_80172D78()) != 0x21) {
                 gm_801736E8(match_end->player_standings[idx].character_kind,
                             (match_end->player_standings[idx].x3), idx,
                             match_end->player_standings[idx].x4, unk, 0);
-                gm_SetPendingScene(0x80);
+                gm_SetPendingSceneIndex(0x80);
                 unk_bool = true;
             } else if ((unk = gm_80172E74()) != 0x21) {
                 gm_801736E8(match_end->player_standings[idx].character_kind,
                             (match_end->player_standings[idx].x3), idx,
                             match_end->player_standings[idx].x4, unk, 0);
-                gm_SetPendingScene(0x80);
+                gm_SetPendingSceneIndex(0x80);
                 unk_bool = true;
             }
             foo = gm_80172F00(gmMainLib_8015EDB0()->x0);
@@ -325,7 +325,7 @@ void gm_801A5F64(GameScene* scene_data, VsModeData* vs_data, u8 next_scene)
             gm_80173EEC();
             if (!unk_bool && gm_801721EC()) {
                 gm_801736E8(0x21, 0, idx, 0x78, unk, 0);
-                gm_SetPendingScene(0xC0);
+                gm_SetPendingSceneIndex(0xC0);
                 unk_bool = true;
             }
             if (unk_bool) {
@@ -340,5 +340,5 @@ void gm_801A5F64(GameScene* scene_data, VsModeData* vs_data, u8 next_scene)
     lb_8001C550();
     lb_8001D164(0);
     lb_8001CE00();
-    gm_SetPendingScene(next_scene);
+    gm_SetPendingSceneIndex(next_scene);
 }

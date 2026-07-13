@@ -75,10 +75,10 @@ void gm_801ACD8C_OnFrame(void)
         {
             lbAudioAx_80024030(1);
             gm_SetPendingGameMode(GM_TITLE);
-            gm_801A42D4();
+            gm_SetNewGameModePending();
         } else if (gmMainLib_8015DB00() != 5) {
             gmMainLib_8015DB18();
-            gm_SetPendingScene(0);
+            gm_SetPendingSceneIndex(0);
         }
     }
 }

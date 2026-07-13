@@ -355,9 +355,9 @@ static float get_unk_float(void)
     }
 }
 
-bool gm_8016B498(void)
+bool gm_IsCurrently1PMode(void)
 {
-    return gm_801A4340(gm_GetCurrentGameMode());
+    return gm_Is1PMode(gm_GetCurrentGameMode());
 }
 
 bool fn_8016B4BC(void)
@@ -619,7 +619,8 @@ int gm_DefaultVSGetPauser(void)
     PAD_STACK(0x18);
 
     if (gm_8016B41C() || gm_GetCurrentGameMode() == GM_CHALLENGER_APPROACH ||
-        (gm_GetCurrentGameMode() == GM_VS && gm_GetCurrentScene() == 0x81))
+        (gm_GetCurrentGameMode() == GM_VS &&
+         gm_GetCurrentSceneIndex() == 0x81))
     {
         spPlayerId = Player_GetPlayerId(0);
         spPadStatus = &HSD_PadCopyStatus[(u8) spPlayerId];
@@ -1421,7 +1422,7 @@ bool fn_8016D538(void)
     PAD_STACK(4);
 
     if (gm_8016B3D8()) {
-        if (fn_8017DF90() == 0 && gm_GetCurrentScene() == 0x49) {
+        if (fn_8017DF90() == 0 && gm_GetCurrentSceneIndex() == 0x49) {
             result = true;
         } else {
             if (gm_8016B184() && fn_801693A8() != 0) {

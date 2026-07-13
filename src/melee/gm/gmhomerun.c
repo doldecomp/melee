@@ -101,7 +101,7 @@ void gm_801B999C(GameScene* scene)
 
     temp_r3 = gm_GetGameSceneLeaveDataCallback(scene);
     if (temp_r3->pending_scene_change == 2) {
-        gm_ChangeGameMode(GM_MENU);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
     gm_80167A14(vs->data.players);
@@ -174,7 +174,7 @@ void gm_801B9DD8(GameScene* arg0)
     gm_8016247C(temp_r3->match_end.player_standings[0].xE);
     gm_80180BA0();
     if (temp_r3->match_end.result == 8) {
-        gm_SetPendingScene(1);
+        gm_SetPendingSceneIndex(1);
         return;
     }
     temp_r30 =
@@ -191,7 +191,7 @@ void gm_801B9DD8(GameScene* arg0)
     gm_80173EEC();
     gm_80172898(8);
     if (gm_80173754(0x20, gm_804D68F8) == 0) {
-        gm_SetPendingScene(0);
+        gm_SetPendingSceneIndex(0);
     }
 }
 

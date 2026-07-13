@@ -721,7 +721,7 @@ void gm_801B5FB4(GameScene* arg0)
     UnkAllstarData* r29 = &gm_80473A18;
 
     if (temp_r31->pending_scene_change == 2) {
-        gm_ChangeGameMode(GM_MENU);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
     gm_801B0730(temp_r31, &temp_r30->c_kind, &temp_r30->stocks,
@@ -731,7 +731,7 @@ void gm_801B5FB4(GameScene* arg0)
     r29->x0.cpu_level = temp_r30->cpu_level;
     r29->x0.stocks = temp_r30->stocks;
     r29->x0.x4 = temp_r30->x4;
-    gm_SetPendingScene((temp_r30->x5 * 8) & 0xF8);
+    gm_SetPendingSceneIndex((temp_r30->x5 * 8) & 0xF8);
     gm_80168F88();
     gm_801B5324(r29, temp_r30->x5);
 }
@@ -739,7 +739,7 @@ void gm_801B5FB4(GameScene* arg0)
 void gm_801B607C(GameScene* unused)
 {
     gm_SetPendingGameMode(GM_MENU);
-    gm_801A42D4();
+    gm_SetNewGameModePending();
 }
 
 void gm_801B60A4_OnLoad(void)
@@ -837,7 +837,7 @@ void gm_801B60A4_OnLoad(void)
         p[3] = 1;
     }
 
-    gm_SetScene(0x70U);
+    gm_SetSceneIndex(0x70U);
     gm_80172174();
     Ground_801C5A28();
 }

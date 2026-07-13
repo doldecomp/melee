@@ -142,7 +142,7 @@ void gm_801BAAD0(GameScene* arg0)
     temp_r31 = &gmMainLib_804D3EE0->unk_530;
     temp_r3 = gm_GetGameSceneLeaveDataCallback(arg0);
     if (temp_r3->pending_scene_change == 2) {
-        gm_ChangeGameMode(GM_MENU);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
     gm_801B0730(temp_r3, &temp_r31->x2, NULL, &temp_r31->x3, &temp_r31->x4,
@@ -690,11 +690,11 @@ void gm_801BB758(GameScene* arg0)
             lbDvd_80018254();
             lbDvd_80017700(4);
         }
-        gm_SetPendingScene(1);
+        gm_SetPendingSceneIndex(1);
         return;
     }
     if (exit->match_end.result == 7) {
-        gm_ChangeGameMode(1);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
     ev->x3C += gm_80168940(&gm_804979D8[0].match_end);
@@ -708,7 +708,7 @@ void gm_801BB758(GameScene* arg0)
         t = ev->x20;
         ev->x20 = t + 1;
         gm_801BBB64();
-        gm_SetPendingScene(1);
+        gm_SetPendingSceneIndex(1);
         return;
     }
     if (ev->xB_1) {
@@ -754,11 +754,11 @@ void gm_801BB758(GameScene* arg0)
     gm_80172898(0x10);
     if (kind != 0x21) {
         gm_801736E8(ev->x0, ev->x1, ev->x6, ev->x4, kind, GM_MENU);
-        gm_ChangeGameMode(GM_CHALLENGER_APPROACH);
+        gm_ChangeGameModeAfterCurrentScene(GM_CHALLENGER_APPROACH);
         return;
     }
     if (gm_80173754(1, ev->x6) == 0) {
-        gm_ChangeGameMode(GM_MENU);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
     }
 }
 
@@ -979,7 +979,7 @@ void gm_801BBEA8_OnLoad(void)
     temp_r30->x40 = 0;
     gm_801BBB64();
     if (*temp_r29[temp_r28]->x14 != 0x21) {
-        gm_SetScene(1);
+        gm_SetSceneIndex(1);
     }
 }
 
@@ -3129,7 +3129,7 @@ UNK_T gm_801BEC54(void)
 void gm_801BEC80(GameScene* arg)
 {
     gm_SetPendingGameMode(GM_MENU);
-    gm_801A42D4();
+    gm_SetNewGameModePending();
 }
 
 void gm_801BECA8(GameScene* arg)
@@ -3143,14 +3143,14 @@ void gm_801BECD0(GameScene* arg)
     gm_80172898(4);
     if (!gm_80173754(1, 0)) {
         gm_SetPendingGameMode(GM_MENU);
-        gm_801A42D4();
+        gm_SetNewGameModePending();
     }
 }
 
 void gm_801BED14(GameScene* arg)
 {
     gm_SetPendingGameMode(GM_MENU);
-    gm_801A42D4();
+    gm_SetNewGameModePending();
 }
 
 void gm_801BED3C(GameScene* arg0)
@@ -3210,7 +3210,7 @@ void gm_801BEE9C(GameScene* arg0)
                     temp_r27, *game_mode);
         gm_SetPendingGameMode(GM_CHALLENGER_APPROACH);
     }
-    gm_801A42D4();
+    gm_SetNewGameModePending();
 }
 
 void gm_801BEF84(GameScene* arg)
@@ -3324,16 +3324,16 @@ void gm_801BF060(GameScene* arg0)
     if (DbLevel >= 3) {
         if (*temp_r3 & 0x100) {
             gm_SetPendingGameMode(GM_DEBUG_VS);
-            gm_801A42D4();
+            gm_SetNewGameModePending();
         } else if (*temp_r3 & 0x1000) {
             gm_SetPendingGameMode(GM_MENU);
-            gm_801A42D4();
+            gm_SetNewGameModePending();
         } else if (*temp_r3 & 0x400) {
             gm_SetPendingGameMode(GM_DEBUG_SOUND_TEST);
-            gm_801A42D4();
+            gm_SetNewGameModePending();
         } else if (*temp_r3 & 0x800) {
             gm_SetPendingGameMode(GM_DEBUG);
-            gm_801A42D4();
+            gm_SetNewGameModePending();
         }
     } else if (*temp_r3 & 0x1000) {
         gm_80173EEC();
@@ -3341,7 +3341,7 @@ void gm_801BF060(GameScene* arg0)
         if (!gm_80173754(1, 0)) {
             gm_SetPendingGameMode(GM_MENU);
         }
-        gm_801A42D4();
+        gm_SetNewGameModePending();
     }
 }
 
@@ -3606,7 +3606,7 @@ void gm_801BF728(GameScene* arg)
 void gm_801BF834(GameScene* arg)
 {
     gm_SetPendingGameMode(GM_TITLE);
-    gm_801A42D4();
+    gm_SetNewGameModePending();
 }
 
 void gm_801BF85C(GameScene* arg)
@@ -3642,5 +3642,5 @@ void gm_801BF8F8(GameScene* arg0)
 void gm_801BF920(GameScene* arg0)
 {
     gm_GetGameSceneLeaveDataCallback(arg0);
-    gm_ChangeGameMode(GM_BOOT);
+    gm_ChangeGameModeAfterCurrentScene(GM_BOOT);
 }

@@ -41,7 +41,7 @@ bool gm_80173754(u8 gameMode, u8 arg1)
         lbl_8046DBD8.x2 = arg1;
         lbl_8046DBD8.x5 = gameMode;
         gm_SetPendingGameMode(GM_CHALLENGER_APPROACH);
-        gm_801A42D4();
+        gm_SetNewGameModePending();
         return true;
     }
     return false;
@@ -57,9 +57,9 @@ void gm_801737E8_OnLoad(void)
 {
     lbl_8046DBD8.x6 = gm_GetPreviousGameMode();
     if (lbl_8046DBD8.x0 == CHKIND_NONE) {
-        gm_SetScene(2);
+        gm_SetSceneIndex(2);
     } else {
-        gm_SetScene(0);
+        gm_SetSceneIndex(0);
     }
 }
 

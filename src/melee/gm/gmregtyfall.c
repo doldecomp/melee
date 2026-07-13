@@ -8,6 +8,9 @@
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "ft/ftdemo.h"
+
+#include "gm/forward.h"
+
 #include "gr/ground.h"
 #include "gr/stage.h"
 #include "it/item.h"
@@ -90,13 +93,13 @@ bool gm_801A659C(int arg0)
 {
     switch (gm_GetCurrentGameMode()) {
     case GM_CLASSIC_GOVER:
-        return gm_80160474(arg0, 3);
+        return gm_80160474(arg0, GM_CLASSIC);
     case GM_ADVENTURE_GOVER:
-        return gm_80160474(arg0, 4);
+        return gm_80160474(arg0, GM_ADVENTURE);
     case GM_DEBUG_GOVER:
         return gm_80160474(arg0, gm_801BF050());
     default:
-        return gm_80160474(arg0, 5);
+        return gm_80160474(arg0, GM_ALLSTAR);
     }
 }
 
