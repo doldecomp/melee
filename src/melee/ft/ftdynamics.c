@@ -458,6 +458,8 @@ static inline bool inlineA0(Fighter* fp)
 
 void ftCo_8009DC54(Fighter* fp)
 {
+    DynamicsDesc* desc;
+    ssize_t i;
     ssize_t idx;
     ftData* data = fp->ft_data;
     if (fp->x619_costume_id == 2) {
@@ -472,9 +474,8 @@ void ftCo_8009DC54(Fighter* fp)
                      "fighter dynamics num over!\n");
     {
         ssize_t bone_idx = idx * 2 + 1;
-        DynamicsDesc* desc;
         ssize_t dyn_idx = 0;
-        ssize_t i = 0;
+        i = 0;
         do {
             HSD_JObj* cur = fp->fv.kb.hat.jobj;
             ftDynamics* dynamics = data->x2C;
