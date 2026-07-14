@@ -757,7 +757,7 @@ GameMode gm_803DACA4[] = {
     },
 };
 
-GameSceneHandler* gm_801A50A0(void)
+GameSceneHandler* gm_GetAllGameSceneHandlers(void)
 {
     return gm_803DA920;
 }
