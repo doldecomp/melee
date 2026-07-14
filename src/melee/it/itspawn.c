@@ -157,6 +157,7 @@ bool it_8026C704(void)
 
 /// Decides item kind for spawned items - not sure in which context (i.e from
 /// pokeballs, from capsules, thin air, etc.)
+/// @todo Two callee-saved registers are swapped.
 ItemKind it_8026C75C(ItemPickTable* arg_struct)
 {
     s32 temp_r0;
@@ -164,8 +165,8 @@ ItemKind it_8026C75C(ItemPickTable* arg_struct)
     bool chk1;
     u16 var_r30;
     u8 temp_r4;
-    s32 selected;
-    s32 result;
+    ItemKind kind;
+    ItemKind ret;
     PAD_STACK(16);
 
     chk1 = false;
@@ -191,17 +192,17 @@ ItemKind it_8026C75C(ItemPickTable* arg_struct)
             arg_struct->x0 -= 1;
         }
     }
-    selected = arg_struct->x4[it_8026C530(HSD_Randi(arg_struct->x8),
-                                          arg_struct, 0, arg_struct->x0)];
-    result = selected;
+    kind = arg_struct->x4[it_8026C530(HSD_Randi(arg_struct->x8), arg_struct, 0,
+                                      arg_struct->x0)];
+    ret = kind;
     if (chk1 && chk2) {
         arg_struct->x8 = var_r30;
         arg_struct->x0 += 1;
-        if (selected == It_Kind_M_Ball) {
-            result = -1;
+        if (kind == It_Kind_M_Ball) {
+            ret = -1;
         }
     }
-    return result;
+    return ret;
 }
 
 static inline void it_8026C88C_inline(RandomItemSpawner* alloc)
