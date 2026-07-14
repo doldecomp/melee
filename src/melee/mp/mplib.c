@@ -6633,7 +6633,8 @@ void mpLib_DrawCrosses(s16* idx, int len, GXColor arg2)
 
     out_vtx = (vtx = mpLib_80458888);
     for (idx_ptr = &idx[idx_i = 0], out_count = 0;
-         idx_i < len && out_count < 0x80; idx_i++)
+         idx_i < len && out_count < (signed) ARRAY_SIZE(mpLib_80458888);
+         idx_i++)
     {
         if (Ground_801C2D24(*idx_ptr, &sp34)) {
             out_count += 1;
