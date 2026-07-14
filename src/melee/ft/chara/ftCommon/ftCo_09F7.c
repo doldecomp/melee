@@ -168,20 +168,17 @@ block_12:
     default:
         goto block_70;
     }
-block_61:
-{
+block_61: {
     HSD_JObj* joint = fp->parts[part].joint;
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 0, gfx_id, joint);
 }
     return;
-block_62:
-{
+block_62: {
     HSD_JObj* joint = fp->parts[part].joint;
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 7, gfx_id, joint, arg5);
 }
     return;
-block_63:
-{
+block_63: {
     f32* attrs = &fp->ft_data->x0->x168;
     HSD_JObj* joint = fp->parts[part].joint;
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3, gfx_id, joint, attrs);
@@ -213,8 +210,7 @@ block_67:
     floor_angle =
         atan2f(-fp->coll_data.floor.normal.x, fp->coll_data.floor.normal.y);
     sp90 = floor_angle;
-block_69:
-{
+block_69: {
     HSD_JObj* joint = fp->parts[part].joint;
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3, gfx_id, joint, &sp90);
 }
@@ -369,8 +365,7 @@ block_119:
         goto block_134;
     }
     goto block_128;
-block_122:
-{
+block_122: {
     HSD_JObj* joint = fp->parts[part].joint;
     ftCommonData* data = p_ftCommonData;
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, gfx_id, joint, &sp84,
@@ -408,8 +403,7 @@ block_129:
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 8, 4, fp->parts[part].joint,
                   &sp84);
     return;
-block_130:
-{
+block_130: {
     HSD_JObj* joint = fp->parts[part].joint;
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, gfx_id, joint, &sp84,
                   &fp->facing_dir);
@@ -423,8 +417,7 @@ block_131:
     random_or_angle =
         atan2f(-fp->coll_data.floor.normal.x, fp->coll_data.floor.normal.y);
     sp7C = random_or_angle;
-block_133:
-{
+block_133: {
     HSD_JObj* joint = fp->parts[part].joint;
     efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 6, gfx_id, joint, &sp84,
                   &fp->facing_dir, &sp7C);

@@ -12,6 +12,9 @@
 #include "baselib/fog.h"
 #include "baselib/gobjgxlink.h"
 #include "baselib/gobjobject.h"
+
+#include "gm/forward.h"
+
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "mn/mnmain.h"
@@ -147,15 +150,13 @@ void fn_80190ABC(int mode)
 
     switch (mode) {
     case 0: {
-        HSD_SisLib_803A6368(
-            tm->x4E0,
-            (table + opt * 2)[!!gm_804771C4.match_type]);
+        HSD_SisLib_803A6368(tm->x4E0,
+                            (table + opt * 2)[!!gm_804771C4.match_type]);
         break;
     }
     case 2: {
-        HSD_SisLib_803A6368(
-            tm->x4E8[opt],
-            (table + opt * 2 + !!gm_804771C4.match_type)[0xE]);
+        HSD_SisLib_803A6368(tm->x4E8[opt],
+                            (table + opt * 2 + !!gm_804771C4.match_type)[0xE]);
         break;
     }
     case 3: {
@@ -213,11 +214,11 @@ void fn_80190ABC(int mode)
             }
             {
                 f32 pos_y = 48.5999985f * (f32) i + 183.0f;
-                fn_8018ECA8(tm->x37[idx].x9, tm->x37[idx].x0, 1, 143.0f,
-                            pos_y, 2);
+                fn_8018ECA8(tm->x37[idx].x9, tm->x37[idx].x0, 1, 143.0f, pos_y,
+                            2);
                 idx = *start + i;
-                fn_8018ECA8(tm->x37[idx].x9, tm->x37[idx].x0, 1, 143.0f,
-                            pos_y, 2);
+                fn_8018ECA8(tm->x37[idx].x9, tm->x37[idx].x0, 1, 143.0f, pos_y,
+                            2);
             }
         }
         break;
@@ -335,11 +336,11 @@ void fn_80191154(HSD_GObj* gobj)
     jobj = gobj->hsd_obj;
 
     if (tm->cur_option < 9) {
-        if ((u8) *(xE_ptr = base_ptr + 0xE) > 0x27U) {
+        if ((u8) * (xE_ptr = base_ptr + 0xE) > 0x27U) {
             *xE_ptr = 0xA;
         }
     } else {
-        if ((u8) *(xE_ptr = base_ptr + 0xE) == 0x31) {
+        if ((u8) * (xE_ptr = base_ptr + 0xE) == 0x31) {
             fn_80190ABC(6);
             fn_80190ABC(5);
             tm->cur_option = 0xA;
@@ -1597,7 +1598,7 @@ void fn_801937C4(s32* arg0, u32 arg1, u32 arg2)
         }
     } else if (arg2 & 0x200) {
         lbAudioAx_80024030(0);
-        gm_801A42F8(1);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         gm_801A4B60();
     }
 
@@ -2682,7 +2683,8 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
     } else if (trigger & 0x400) {
         if ((s32) tm->x37[lbl_804799B8.x2 + lbl_804799B8.x3].x7 <
             (s32) (u8) gm_80169238((u8) fn_8018F6FC(
-                tm->x37[lbl_804799B8.x2 + lbl_804799B8.x3].x3)) - 1)
+                tm->x37[lbl_804799B8.x2 + lbl_804799B8.x3].x3)) -
+                1)
         {
             lbAudioAx_80024030(2);
             idx = lbl_804799B8.x2 + lbl_804799B8.x3;
@@ -2809,8 +2811,7 @@ void fn_80195CCC(s32* arg, u32 buttons, u32 trigger)
 
         lbAudioAx_80024030(2);
         if (((s32) (*(right_x5 = menu + 5) % 4) < 3) &&
-            ((s32) (*right_x5 +
-                    (i = (*(x6_tmp = menu + 6) * 4) + 1)) <
+            ((s32) (*right_x5 + (i = (*(x6_tmp = menu + 6) * 4) + 1)) <
              GetNameCount()))
         {
             *right_x5 += 1;
@@ -2836,7 +2837,7 @@ void fn_80195CCC(s32* arg, u32 buttons, u32 trigger)
         }
     } else if (buttons & 0x20004) {
         lbAudioAx_80024030(2);
-        if ((s32) ((s32) *(ptr = menu + 5) / 4) < 8) {
+        if ((s32) ((s32) * (ptr = menu + 5) / 4) < 8) {
             if ((s32) (*ptr + (i = (*(x6_tmp = menu + 6) * 4) + 4)) <
                 GetNameCount())
             {
@@ -2850,9 +2851,8 @@ void fn_80195CCC(s32* arg, u32 buttons, u32 trigger)
             u8 base;
             u8* page_ptr;
 
-            if ((s32) ((base = *ptr) +
-                       (i = (*(page_ptr = menu + 6) * 4) + 4)) <
-                GetNameCount())
+            if ((s32) ((base = *ptr) + (i = (*(page_ptr = menu + 6) * 4) +
+                                            4)) < GetNameCount())
             {
                 *page_ptr += 1;
                 slot = lbl_804799B8.x2 + lbl_804799B8.x3;
@@ -2872,7 +2872,8 @@ void fn_80195CCC(s32* arg, u32 buttons, u32 trigger)
             slot = *x2_ptr + *(menu += 3);
             tm = gm_8018F634();
             count = tm->x2E;
-            unique = fn_80195CCC_IsUniqueEntry(tm, (s32) count, slot, selected);
+            unique =
+                fn_80195CCC_IsUniqueEntry(tm, (s32) count, slot, selected);
             if (unique != 0) {
                 lbAudioAx_80024030(1);
                 slot = *x2_ptr + *menu;
@@ -2923,7 +2924,7 @@ void fn_8019610C(s32* state, u32 buttons, u32 trigger)
         if (*state == 0x11) {
             lbAudioAx_80024030(i);
             if (gm_804771C4.match_type == 0) {
-                gm_SetPendingScene(1);
+                gm_SetPendingSceneIndex(1);
             } else {
                 td = gm_8018F634();
                 i = 0;
@@ -2945,7 +2946,7 @@ void fn_8019610C(s32* state, u32 buttons, u32 trigger)
                     dst_ptr += 0xA;
                     i++;
                 }
-                gm_SetPendingScene(2);
+                gm_SetPendingSceneIndex(2);
             }
             gm_801A4B60();
         } else {
@@ -2978,7 +2979,7 @@ void gm_8019628C_OnFrame(void)
         mn_8022F138(0x12, 0x15);
         mn_8022F268();
         gm_801A4B60();
-        gm_801A42F8(1);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
 

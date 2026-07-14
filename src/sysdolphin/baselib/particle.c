@@ -322,13 +322,11 @@ f32 DrawASCII(int chr, float x, float y, GXColor* color)
     }
     case ':': {
         GXBegin(0xB8, 0, 2);
-        GXPosition2f32(
-            (f32) ((f64) lbl_804D6070 * 0.3 + (f64) x),
-            (f32) ((f64) lbl_804D6074 * 0.3 + (f64) y));
+        GXPosition2f32((f32) ((f64) lbl_804D6070 * 0.3 + (f64) x),
+                       (f32) ((f64) lbl_804D6074 * 0.3 + (f64) y));
         GXColor4u8(color->r, color->g, color->b, color->a);
-        GXPosition2f32(
-            (f32) ((f64) lbl_804D6070 * 0.3 + (f64) x),
-            (f32) ((f64) lbl_804D6074 * 0.7 + (f64) y));
+        GXPosition2f32((f32) ((f64) lbl_804D6070 * 0.3 + (f64) x),
+                       (f32) ((f64) lbl_804D6074 * 0.7 + (f64) y));
         GXColor4u8(color->r, color->g, color->b, color->a);
         return lbl_804D6070;
     }
@@ -378,13 +376,11 @@ draw_glyph:
         p1 = glyph[i++];
         ptr += 2;
         GXBegin(0xA8, 0, 2);
-        GXPosition2f32(
-            lbl_804D6070 * (0.11F * (s32) (p0 >> 4)) + x,
-            lbl_804D6074 * (0.11F * (p0 & 0xF)) + y);
+        GXPosition2f32(lbl_804D6070 * (0.11F * (s32) (p0 >> 4)) + x,
+                       lbl_804D6074 * (0.11F * (p0 & 0xF)) + y);
         GXColor4u8(color->r, color->g, color->b, color->a);
-        GXPosition2f32(
-            lbl_804D6070 * (0.11F * (s32) (p1 >> 4)) + x,
-            lbl_804D6074 * (0.11F * (p1 & 0xF)) + y);
+        GXPosition2f32(lbl_804D6070 * (0.11F * (s32) (p1 >> 4)) + x,
+                       lbl_804D6074 * (0.11F * (p1 & 0xF)) + y);
         GXColor4u8(color->r, color->g, color->b, color->a);
     }
     return lbl_804D6070;
@@ -991,8 +987,7 @@ void hsd_8039254C(void)
                             bar_col =
                                 *(GXColor*) &bar_draw_ptr->content.bars[0]
                                      .color;
-                            bar_x +=
-                                (600.0F / (f32) char_count) * (f32) count;
+                            bar_x += (600.0F / (f32) char_count) * (f32) count;
                             hsd_80391F28(
                                 p_bar_col, prev_x, bar_y, bar_x, bar_y,
                                 (f32) bar_draw_ptr->content.bars[0].count);
@@ -1929,7 +1924,7 @@ void hsd_80393EF4(int col_delta, int row_delta)
 
     buf_size = sp->buf_size;
 
-    if ((u32) *(pos_ptr = &sp->x1C) >= buf_size) {
+    if ((u32) * (pos_ptr = &sp->x1C) >= buf_size) {
         hsd_80393E68(sp->x14 + col_delta, sp->x18 + row_delta);
         return;
     }
@@ -3239,7 +3234,7 @@ static inline s32 hsd_80396188_calc_col(void)
 
 // @TODO: Currently 96.11% match - needs register allocation fix
 static inline void hsd_80396188_draw_rows(char* buf, s32 col, u32** addr,
-                                           s32* i)
+                                          s32* i)
 {
     s32* x8 = &hsd_804CF810.x8;
     s32* x4 = &hsd_804CF810.x4;
@@ -3497,16 +3492,14 @@ void hsd_80396884(void)
         void* bitmap = (void*) ((u8*) hsd_804CF810.x4C + (ch & 0x7F) * 0x38);
         s32 x = hsd_804CF810.x4;
         s32 dst = (&hsd_804CF810.x24)[hsd_804CF810.x34];
-        hsd_803922FC(bitmap, x, hsd_804CF810.x8, b6, dst,
-                     hsd_804CF810.x3C, hsd_804CF810.x40,
-                     hsd_804CF810.x44, hsd_804CF810.x50);
+        hsd_803922FC(bitmap, x, hsd_804CF810.x8, b6, dst, hsd_804CF810.x3C,
+                     hsd_804CF810.x40, hsd_804CF810.x44, hsd_804CF810.x50);
     } else {
         void* bitmap = (void*) ((u8*) hsd_804CF810.x4C + (ch & 0x7F) * 0x38);
         s32 x = hsd_804CF810.x4;
         s32 dst = (&hsd_804CF810.x24)[hsd_804CF810.x34];
-        hsd_803921B8(bitmap, x, hsd_804CF810.x8, dst,
-                     hsd_804CF810.x3C, hsd_804CF810.x40, hsd_804CF810.x44,
-                     hsd_804CF810.x50);
+        hsd_803921B8(bitmap, x, hsd_804CF810.x8, dst, hsd_804CF810.x3C,
+                     hsd_804CF810.x40, hsd_804CF810.x44, hsd_804CF810.x50);
     }
     hsd_804CF810.x50 = saved;
 }
@@ -3837,10 +3830,12 @@ void hsd_80397110(void)
             if (spr_off + i >= 0x45) {
                 break;
             }
-            spr_entry = (struct SPREntry*)
-                ((unsigned char*) ((struct SPREntry*) (base + 0x2D8) +
-                                    spr_off) +
-                 offset);
+            spr_entry =
+                (struct
+                 SPREntry*) ((unsigned char*) ((struct SPREntry*) (base +
+                                                                   0x2D8) +
+                                               spr_off) +
+                             offset);
             if (i == bec4[5]) {
                 if (spr_entry->callback != 0) {
                     spr_entry->callback(spr_entry->spr);
@@ -4031,7 +4026,8 @@ void hsd_803975D4(void)
     ((struct ParticleInputState*) sp)->port = port;
     pads = ((struct ParticleInputState*) sp)->pads;
     buttons = pads[((struct ParticleInputState*) sp)->port].button;
-    changed = pads[((struct ParticleInputState*) sp)->port + 4].button ^ buttons;
+    changed =
+        pads[((struct ParticleInputState*) sp)->port + 4].button ^ buttons;
     sp->xC0 = buttons;
     new_press = (u16) (buttons & changed);
     if (new_press != 0) {
@@ -8187,8 +8183,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         default: {
             f32 rnd = HSD_Randf();
             cur_angle = (f32) (2.0 * (M_PI * (f64) rnd));
-            angle_step =
-                (f32) ((2.0 * M_PI) / (f64) (s32) gen->count);
+            angle_step = (f32) ((2.0 * M_PI) / (f64) (s32) gen->count);
             break;
         }
         }
@@ -8734,8 +8729,8 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
             gen->count = HSD_Randf();
         }
 
-        tg = ((HSD_PSTexGroup***) ((uintptr_t) cmdListArr - bank * 4 - 0x30C))
-            [bank][gen->texGroup];
+        tg = ((HSD_PSTexGroup***) ((uintptr_t) cmdListArr - bank * 4 -
+                                   0x30C))[bank][gen->texGroup];
         if (tg != NULL && tg->palflag != 0) {
             gen->kind |= 0x10;
         }

@@ -390,11 +390,10 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
 
         GXSetAlphaCompare(GX_ALWAYS, 0, GX_AOP_OR, GX_ALWAYS, 0);
 
-        GXSetTevColorS10(GX_TEVREG0,
-                          (GXColorS10) { -90, 0, -114, 135 });
-        GXSetTevKColor(GX_KCOLOR0, (GXColor) { 0, 0, 0xE2, 0x58 });
-        GXSetTevKColor(GX_KCOLOR1, (GXColor) { 0xB3, 0, 0, 0xB6 });
-        GXSetTevKColor(GX_KCOLOR2, (GXColor) { 0xFF, 0, 0xFF, 0x80 });
+        GXSetTevColorS10(GX_TEVREG0, (GXColorS10){ -90, 0, -114, 135 });
+        GXSetTevKColor(GX_KCOLOR0, (GXColor){ 0, 0, 0xE2, 0x58 });
+        GXSetTevKColor(GX_KCOLOR1, (GXColor){ 0xB3, 0, 0, 0xB6 });
+        GXSetTevKColor(GX_KCOLOR2, (GXColor){ 0xFF, 0, 0xFF, 0x80 });
 
         GXSetTevSwapModeTable(GX_TEV_SWAP0, GX_CH_RED, GX_CH_GREEN, GX_CH_BLUE,
                               GX_CH_ALPHA);

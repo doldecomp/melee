@@ -196,8 +196,9 @@ static inline void ftCo_800C0B20_inline(Fighter_GObj* gobj,
             if (ftColl_80076640(fp, f)) {
                 FighterHurtCapsule* hurt;
                 hurt_idx *= sizeof(FighterHurtCapsule);
-                hurt = (FighterHurtCapsule*) ((intptr_t) fp + hurt_idx +
-                                              offsetof(Fighter, hurt_capsules));
+                hurt =
+                    (FighterHurtCapsule*) ((intptr_t) fp + hurt_idx +
+                                           offsetof(Fighter, hurt_capsules));
                 ftColl_80076764(3, 1, 0, unk_anim, fp, hurt);
                 lbColl_80008D30((HitCapsule*) hit,
                                 (lbColl_80008D30_arg1*) unk_anim);

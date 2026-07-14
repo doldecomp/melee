@@ -5,6 +5,8 @@
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
 
+#include "dolphin/pad.h"
+
 #include "gm/forward.h"
 
 #include <m2c_macros.h>
@@ -295,7 +297,7 @@ void fn_8016B388(int arg0, s16 arg1)
 
 bool gm_8016B3A0(void)
 {
-    if (gm_801A4310() == GM_SUPER_SUDDEN_DEATH_VS) {
+    if (gm_GetCurrentGameMode() == GM_SUPER_SUDDEN_DEATH_VS) {
         return true;
     }
     return false;
@@ -303,7 +305,7 @@ bool gm_8016B3A0(void)
 
 bool gm_8016B3D8(void)
 {
-    switch (gm_801A4310()) {
+    switch (gm_GetCurrentGameMode()) {
     case GM_CLASSIC:
     case GM_ADVENTURE:
     case GM_ALLSTAR:
@@ -315,7 +317,7 @@ bool gm_8016B3D8(void)
 
 bool gm_8016B41C(void)
 {
-    switch (gm_801A4310()) {
+    switch (gm_GetCurrentGameMode()) {
     case GM_CLASSIC:
     case GM_ADVENTURE:
     case GM_ALLSTAR:
@@ -353,9 +355,9 @@ static float get_unk_float(void)
     }
 }
 
-bool gm_8016B498(void)
+bool gm_IsCurrently1PMode(void)
 {
-    return gm_801A4340(gm_801A4310());
+    return gm_Is1PMode(gm_GetCurrentGameMode());
 }
 
 bool fn_8016B4BC(void)
@@ -616,8 +618,9 @@ int gm_DefaultVSGetPauser(void)
     int spPlayerId;
     PAD_STACK(0x18);
 
-    if (gm_8016B41C() || gm_801A4310() == GM_CHALLENGER_APPROACH ||
-        (gm_801A4310() == GM_VS && gm_801A42C4() == 0x81))
+    if (gm_8016B41C() || gm_GetCurrentGameMode() == GM_CHALLENGER_APPROACH ||
+        (gm_GetCurrentGameMode() == GM_VS &&
+         gm_GetCurrentSceneIndex() == 0x81))
     {
         spPlayerId = Player_GetPlayerId(0);
         spPadStatus = &HSD_PadCopyStatus[(u8) spPlayerId];
@@ -904,7 +907,7 @@ MatchOutcome gm_GetMatchOutcome(void)
 void fn_8016C46C(int arg0)
 {
     if (lbl_8046B6A0.unk_9 != 0) {
-        switch (gm_801A4310()) {
+        switch (gm_GetCurrentGameMode()) {
         case GM_CLASSIC:
             fn_8017EE40(arg0);
             return;
@@ -1028,14 +1031,14 @@ void fn_8016C7F0(void)
         gm_80167858(Player_GetPlayerId(0), Player_GetNametagSlotID(0), 0xD, 0);
         Camera_80030E44(4, NULL);
     }
-    if (gm_801A4310() == GM_TARGET_TEST ||
-        (gm_801A4310() == GM_CLASSIC && lbl_8046B6A0.x24C8.xE >= 0x21 &&
-         lbl_8046B6A0.x24C8.xE <= 0x3A))
+    if (gm_GetCurrentGameMode() == GM_TARGET_TEST ||
+        (gm_GetCurrentGameMode() == GM_CLASSIC &&
+         lbl_8046B6A0.x24C8.xE >= 0x21 && lbl_8046B6A0.x24C8.xE <= 0x3A))
     {
         temp_r29_2 = (u8*) gm_801B6320();
         temp_r30 = gm_8017EB30();
         var_r28 = 0;
-        if (gm_801A4310() == GM_TARGET_TEST) {
+        if (gm_GetCurrentGameMode() == GM_TARGET_TEST) {
             var_r29_2 = gm_80164024(*temp_r29_2);
         } else {
             var_r29_2 = gm_80164024(temp_r30->x0.ckind);
@@ -1060,11 +1063,11 @@ void fn_8016C7F0(void)
             lbl_8046B6A0.unk_18 = 0x28;
         }
     }
-    if (gm_801A4310() == GM_EVENT && lbl_8046B6A0.unk_10 == 0x9C41) {
+    if (gm_GetCurrentGameMode() == GM_EVENT && lbl_8046B6A0.unk_10 == 0x9C41) {
         gm_80167858(Player_GetPlayerId(0), Player_GetNametagSlotID(0), 0xD,
                     0x5A);
     }
-    switch (gm_801A4310()) {
+    switch (gm_GetCurrentGameMode()) {
     case GM_10MAN_VS:
     case GM_100MAN_VS:
     case GM_3MIN_VS:
@@ -1265,9 +1268,9 @@ void fn_8016CD98(lbl_8046B6A0_t* arg0)
     }
 }
 
-void fn_8016CF4C(int arg0, MatchOutcome matchResult)
+void fn_8016CF4C(int slot, MatchOutcome matchResult)
 {
-    gm_801A10FC(arg0);
+    gm_801A10FC(slot);
     lbl_8046B6A0.match_result = matchResult;
     if (matchResult != OUTCOME_RETRY && DbLevel >= 3) {
         gm_801A4674(1);
@@ -1284,9 +1287,9 @@ void fn_8016CF4C(int arg0, MatchOutcome matchResult)
     gm_801A4B60();
 }
 
-static inline void fn_8016CF4C_dontinline(int arg0, int arg1)
+static inline void fn_8016CF4C_dontinline(int slot, MatchOutcome matchResult)
 {
-    fn_8016CF4C(arg0, arg1);
+    fn_8016CF4C(slot, matchResult);
 }
 
 static inline void fn_8016CFE0_inline(void)
@@ -1314,9 +1317,9 @@ static inline void fn_8016CFE0_inline(void)
 void fn_8016CFE0(void)
 {
     lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
-    int var_r29;
-    s64 var_r29_2;
-    int var_r4;
+    int tmp_btns;
+    s64 no_contest_buttons;
+    int unpauser_slot;
     PAD_STACK(0x18);
 
     fn_8016CFE0_inline();
@@ -1324,26 +1327,27 @@ void fn_8016CFE0(void)
     fn_8016A4C8();
     fn_8016758C();
     if (gm_801A45E8(1) != 0) {
-        var_r4 = gm_GetPlayerPressingUnpause();
+        unpauser_slot = gm_GetPlayerPressingUnpause();
         if (DbLevel >= 3) {
-            var_r29 = 0x160;
+            tmp_btns = PAD_TRIGGER_L | PAD_TRIGGER_R | PAD_BUTTON_A;
         } else {
-            var_r29 = 0x1160;
+            tmp_btns = PAD_TRIGGER_L | PAD_TRIGGER_R | PAD_BUTTON_A |
+                       PAD_BUTTON_START;
         }
-        var_r29_2 = var_r29;
+        no_contest_buttons = tmp_btns;
         if (tmp->x24C8.x3_4 && tmp->pause_timer == 0 && tmp->unk_3 == 0) {
-            u64 buttons = gm_801A36A0(tmp->pauser);
-            if ((var_r29_2 & buttons) != 0) {
-                buttons = gm_801A3680(tmp->pauser);
-                if ((var_r29_2 & buttons) == var_r29_2) {
-                    fn_8016CF4C_dontinline(var_r4, 7);
+            u64 buttons = gm_GetButtonsTriggered(tmp->pauser);
+            if ((no_contest_buttons & buttons) != 0) {
+                buttons = gm_GetButtonsPressed(tmp->pauser);
+                if ((no_contest_buttons & buttons) == no_contest_buttons) {
+                    fn_8016CF4C_dontinline(unpauser_slot, OUTCOME_NO_CONTEST);
                     return;
                 }
             }
         }
         if (tmp->x24C8.x3_2 && tmp->pause_timer == 0 && tmp->unk_3 == 0) {
-            if ((gm_801A36A0(tmp->pauser) & 0x10) != 0) {
-                fn_8016CF4C_dontinline(var_r4, 8);
+            if ((gm_GetButtonsTriggered(tmp->pauser) & PAD_TRIGGER_Z) != 0) {
+                fn_8016CF4C_dontinline(unpauser_slot, OUTCOME_RETRY);
                 return;
             }
         }
@@ -1413,7 +1417,7 @@ bool fn_8016D538(void)
     PAD_STACK(4);
 
     if (gm_8016B3D8()) {
-        if (fn_8017DF90() == 0 && gm_801A42C4() == 0x49) {
+        if (fn_8017DF90() == 0 && gm_GetCurrentSceneIndex() == 0x49) {
             result = true;
         } else {
             if (gm_8016B184() && fn_801693A8() != 0) {
@@ -1905,9 +1909,9 @@ void fn_8016E2BC(void)
                 {
                     bool is_teams = tmp->x24C8.is_teams == true;
                     Player_SetUnk45(
-                        i, fn_80160840(gm_80160854(Player_GetPlayerId(i),
-                                                   Player_GetTeam(i), is_teams,
-                                                   Player_GetPlayerSlotType(i))));
+                        i, fn_80160840(gm_80160854(
+                               Player_GetPlayerId(i), Player_GetTeam(i),
+                               is_teams, Player_GetPlayerSlotType(i))));
                 }
                 Player_80031AD0(i);
                 if (lbl_8046B6A0.FighterMatchInfo[i].x4_b4) {
@@ -2027,7 +2031,7 @@ struct EndMeleeData {
 
 static inline bool gm_8016E9C8_inline(void)
 {
-    switch (gm_801A4310()) {
+    switch (gm_GetCurrentGameMode()) {
     case GM_SUPER_SUDDEN_DEATH_VS:
     case GM_INVISIBLE_VS:
     case GM_SLOMO_VS:
@@ -2072,7 +2076,9 @@ void gm_8016E9C8(void* arg0_raw)
     arg0->x4 = lbl_8046B6A0.timer_seconds;
     arg0->x8 = Ground_801C5ABC();
 
-    if (gm_8016B3D8() || gm_8016E9C8_inline() || gm_801A4310() == GM_VS) {
+    if (gm_8016B3D8() || gm_8016E9C8_inline() ||
+        gm_GetCurrentGameMode() == GM_VS)
+    {
         if (lbl_8046B6A0.match_result != OUTCOME_NO_CONTEST &&
             lbl_8046B6A0.match_result != OUTCOME_RETRY)
         {

@@ -3,6 +3,7 @@
 #include <placeholder.h>
 
 #include "cm/camera.h"
+#include "dolphin/pad.h"
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "ft/ftdemo.h"
@@ -46,8 +47,8 @@ static struct {
     char if_all_dat[12];
     char sc_inf_dmg_scene_data[20];
 } vi0401_strings = {
-    "Vi0401.dat", "visual0401Scene", "visual0401InfoScene", "IfAll.dat",
-    "ScInfDmg_scene_data",
+    "Vi0401.dat", "visual0401Scene",     "visual0401InfoScene",
+    "IfAll.dat",  "ScInfDmg_scene_data",
 };
 u8 un_804D6F60[8]; ///< @todo #ViCharaDesc?
 
@@ -231,8 +232,8 @@ void un_8031D288_OnEnter(void* data)
 
 void un_8031D698_OnFrame(void)
 {
-    u64 result = gm_801A36A0(gm_8017E430());
-    if ((result & 0x1000) != 0) {
+    u64 result = gm_GetButtonsTriggered(gm_8017E430());
+    if ((result & PAD_BUTTON_START) != 0) {
         lb_800145F4();
         gm_801A4B60();
     }

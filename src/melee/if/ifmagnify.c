@@ -206,9 +206,9 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
 
             HSD_GObj_JObjCallback(arg0, arg1);
             if ((player->state.unk == 4) || (player->state.unk == 2)) {
-                color = gm_80160968(gm_80160854(
-                    (u8) slot, Player_GetTeam(slot), gm_8016B168(),
-                    Player_GetPlayerSlotType(slot)));
+                color = gm_80160968(
+                    gm_80160854((u8) slot, Player_GetTeam(slot), gm_8016B168(),
+                                Player_GetPlayerSlotType(slot)));
                 color_ptr = &color_copy;
                 color_copy = color;
                 if (player->state.unk == 2) {

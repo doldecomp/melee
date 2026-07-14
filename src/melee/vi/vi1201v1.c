@@ -233,11 +233,11 @@ static inline void un_8031FD18_SetupCamera(void)
     HSD_CObj* cobj;
 
     gobj = GObj_Create(0x13, 0x14, 0);
-    cobj = lb_80013B14(
-        (HSD_CameraDescPerspective*) un_804D6FE0->cameras->desc);
+    cobj =
+        lb_80013B14((HSD_CameraDescPerspective*) un_804D6FE0->cameras->desc);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
-    GObj_SetupGXLinkMax(
-        gobj, (void (*)(HSD_GObj*, int))(Event) fn_8031FB90, 8);
+    GObj_SetupGXLinkMax(gobj, (void (*)(HSD_GObj*, int))(Event) fn_8031FB90,
+                        8);
     HSD_CObjAddAnim(cobj, un_804D6FE0->cameras->anims[0]);
     HSD_CObjReqAnim(cobj, 0.0f);
     HSD_CObjAnim(cobj);
@@ -289,8 +289,7 @@ static inline void un_8031FD18_SetupStand(void)
     scale = -Toy_803060BC(0x1E, 5);
     HSD_JObjSetRotationYWithMtxDirty(child, scale);
 
-    scale = 0.55f * (Toy_803060BC(0x1E, 4) *
-                     (1.0f / Toy_803060BC(0x1E, 3)));
+    scale = 0.55f * (Toy_803060BC(0x1E, 4) * (1.0f / Toy_803060BC(0x1E, 3)));
 
     HSD_JObjSetScaleXWithMtxDirty(child, scale);
     HSD_JObjSetScaleYWithMtxDirty(child, scale);

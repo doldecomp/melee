@@ -1,5 +1,7 @@
 #include "mnvibration.h"
 
+#include "dolphin/pad.h"
+
 #include <baselib/debug.h>
 #undef HSD_ASSERT
 #define HSD_ASSERT(line, cond)                                                \
@@ -258,8 +260,8 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
     Menu_GetAllInputs();
 
     // Handle B button - exit menu
-    inputs = gm_801A36A0(4);
-    if (inputs & (2LL << 32)) {
+    inputs = gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS);
+    if (inputs & PAD_CANCEL) {
         MnVibrationData* exit_data;
         lbAudioAx_80024030(0);
         mn_804A04F0.entering_menu = 0;
@@ -292,8 +294,8 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
     // Check A button per controller for rumble toggle
     for (i = 0; i < 4; i++) {
         if (data->x0[i + 2] == 0) {
-            inputs = gm_801A36A0(i);
-            if (inputs & (1LL << 32)) {
+            inputs = gm_GetButtonsTriggered(i);
+            if (inputs & PAD_CONFIRM) {
                 HSD_JObj* temp_jobj;
                 lbAudioAx_80024030(1);
                 if (GetRumbleSettingOfPort(i) != 0) {
@@ -357,8 +359,8 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
     {
         s32 j;
         for (j = 0; j < 4; j++) {
-            inputs = gm_801A36A0(j);
-            if ((inputs & (0x40LL << 32)) && data->x0[j + 2] == 1) {
+            inputs = gm_GetButtonsTriggered(j);
+            if ((inputs & PAD_ANY_LEFT) && data->x0[j + 2] == 1) {
                 u8 state;
                 lbAudioAx_80024030(2);
                 data->x0[j + 2] = 0;
@@ -368,8 +370,8 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                 HSD_JObjReqAnimAll(panel_jobj, (f32) state);
                 HSD_JObjAnimAll(panel_jobj);
             } else {
-                inputs = gm_801A36A0(j);
-                if ((inputs & (0x80LL << 32)) && data->x0[j + 2] == 0) {
+                inputs = gm_GetButtonsTriggered(j);
+                if ((inputs & PAD_ANY_RIGHT) && data->x0[j + 2] == 0) {
                     u8 state;
                     lbAudioAx_80024030(2);
                     data->x0[j + 2] = 1;

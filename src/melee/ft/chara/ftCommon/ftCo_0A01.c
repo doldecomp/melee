@@ -2069,9 +2069,7 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
                                           &alt_floor_pos, &line_id, &flags,
                                           &alt_floor_normal, -1, -1, -1, NULL,
                                           NULL);
-                    if (result != 0 &&
-                        ftCo_800A1B38_noinline(line_id) != 0)
-                    {
+                    if (result != 0 && ftCo_800A1B38_noinline(line_id) != 0) {
                     } else {
                         valid = result;
                     }
@@ -2083,7 +2081,8 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
                                  data2->half_width ||
                         ey < data2->half_height +
                                  Stage_GetBlastZoneBottomOffset() ||
-                        ey > Stage_GetBlastZoneTopOffset() - data2->half_height)
+                        ey >
+                            Stage_GetBlastZoneTopOffset() - data2->half_height)
                     {
                         oob = 1;
                     } else {
@@ -2298,7 +2297,8 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
                                  data2->half_width ||
                         ey < data2->half_height +
                                  Stage_GetBlastZoneBottomOffset() ||
-                        ey > Stage_GetBlastZoneTopOffset() - data2->half_height)
+                        ey >
+                            Stage_GetBlastZoneTopOffset() - data2->half_height)
                     {
                         oob = 1;
                     } else {
@@ -2322,8 +2322,7 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
                             {
                                 InternalStageId stage_id =
                                     stage_info.internal_stage_id;
-                                ftCo_800A1CC4(fp,
-                                             ftCo_803C6594[stage_id]);
+                                ftCo_800A1CC4(fp, ftCo_803C6594[stage_id]);
                             }
                         }
                         ftCo_800A49B4(fp);
@@ -3860,8 +3859,7 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
                         data2->x54.y = y;
                         data2->x38 = x38;
                         ftCo_800A1CC4(
-                            fp0,
-                            ftCo_803C6594[stage_info.internal_stage_id]);
+                            fp0, ftCo_803C6594[stage_info.internal_stage_id]);
                     }
                 }
             } else {
@@ -3875,8 +3873,7 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
                         data2->x54.y = y;
                         data2->x38 = x38;
                         ftCo_800A1CC4(
-                            fp0,
-                            ftCo_803C6594[stage_info.internal_stage_id]);
+                            fp0, ftCo_803C6594[stage_info.internal_stage_id]);
                     }
                 }
             }
@@ -4061,9 +4058,7 @@ void ftCo_800A7AAC(Fighter* fp)
             }
             if (sub == 0) {
                 island = mpIsland_8005AB54(partner->coll_data.floor.index);
-                if (island != NULL &&
-                    data->x54.y - fp->cur_pos.y > 0.0)
-                {
+                if (island != NULL && data->x54.y - fp->cur_pos.y > 0.0) {
                     cx = fp->cur_pos.x;
                     if (data->x54.x - cx > 0.0) {
                         if (cx < island->x8.x) {
@@ -4076,8 +4071,8 @@ void ftCo_800A7AAC(Fighter* fp)
                                 data2->x54.y = y;
                                 data2->x38 = x38;
                                 ftCo_800A1CC4(
-                                    fp, ftCo_803C6594[
-                                            stage_info.internal_stage_id]);
+                                    fp, ftCo_803C6594[stage_info
+                                                          .internal_stage_id]);
                             }
                         }
                     } else {
@@ -4092,8 +4087,8 @@ void ftCo_800A7AAC(Fighter* fp)
                                 data2->x54.y = y;
                                 data2->x38 = x38;
                                 ftCo_800A1CC4(
-                                    fp, ftCo_803C6594[
-                                            stage_info.internal_stage_id]);
+                                    fp, ftCo_803C6594[stage_info
+                                                          .internal_stage_id]);
                             }
                         }
                     }
@@ -5839,9 +5834,8 @@ void ftCo_800ABBA8(Fighter* fp)
     } else {
         tmp = sqrtf(vf5);
         land_y =
-            fp->cur_pos.y +
-            (fp->pos_delta.y * vf5 - 0.5 * (*grav_ptr * tmp) -
-             (vf0 - vf5) * ftCo_800ABBA8_inline0(fp));
+            fp->cur_pos.y + (fp->pos_delta.y * vf5 - 0.5 * (*grav_ptr * tmp) -
+                             (vf0 - vf5) * ftCo_800ABBA8_inline0(fp));
     }
     if (vf0 < 0.0 || land_y < data->x54.y) {
         ftCo_800B46B8(fp, CpuCmd_LstickXTowardDestination, 0x7F);
@@ -6139,7 +6133,7 @@ void ftCo_800ACD5C(Fighter* fp)
             return;
         }
     }
-    if (data->x88 > 0 && gm_801A4310() != 0x1C) {
+    if (data->x88 > 0 && gm_GetCurrentGameMode() != GM_TRAINING) {
         ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
         ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
         ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
@@ -9115,9 +9109,11 @@ void ftCo_800B2790(Fighter* fp)
 
 void ftCo_800B1DA0(Fighter*); /* static */
 
-static inline bool ftCo_800B2AFC_CheckFloor(
-    Vec3* pos, int* line, u32* flags, Vec3* normal, int arg4, int arg5,
-    int arg6, float x0, float y0, float x1, float y1, float tolerance)
+static inline bool ftCo_800B2AFC_CheckFloor(Vec3* pos, int* line, u32* flags,
+                                            Vec3* normal, int arg4, int arg5,
+                                            int arg6, float x0, float y0,
+                                            float x1, float y1,
+                                            float tolerance)
 {
     int result;
     *line = -1;
@@ -9179,9 +9175,9 @@ void ftCo_800B2AFC(Fighter* fp)
             f32 above;
             below = y - 1000.0f;
             above = 10.0f + y;
-            result = ftCo_800B2AFC_CheckFloor(
-                &floor_pos0, &line0, &flags0, &floor_normal0, -1, -1, -1, x2,
-                above, x, below, 0.0f);
+            result = ftCo_800B2AFC_CheckFloor(&floor_pos0, &line0, &flags0,
+                                              &floor_normal0, -1, -1, -1, x2,
+                                              above, x, below, 0.0f);
             found = result;
             if (found != 0) {
                 f32 floor_x;
@@ -9227,9 +9223,9 @@ void ftCo_800B2AFC(Fighter* fp)
             f32 above;
             below = y - 1000.0f;
             above = 10.0f + y;
-            found = ftCo_800B2AFC_CheckFloor(
-                &floor_pos1, &line1, &flags1, &floor_normal1, -1, -1, -1, x2,
-                above, x, below, 0.0f);
+            found = ftCo_800B2AFC_CheckFloor(&floor_pos1, &line1, &flags1,
+                                             &floor_normal1, -1, -1, -1, x2,
+                                             above, x, below, 0.0f);
             if (found != 0) {
                 f32 floor_x;
                 f32 floor_y;
@@ -9284,9 +9280,9 @@ void ftCo_800B2AFC(Fighter* fp)
             f32 above;
             below = y - 1000.0f;
             above = 10.0f + y;
-            found = ftCo_800B2AFC_CheckFloor(
-                &floor_pos3, &line3, &flags3, &floor_normal3, -1, -1, -1, x2,
-                above, x, below, 0.0f);
+            found = ftCo_800B2AFC_CheckFloor(&floor_pos3, &line3, &flags3,
+                                             &floor_normal3, -1, -1, -1, x2,
+                                             above, x, below, 0.0f);
             if (found != 0) {
                 f32 floor_x;
                 f32 floor_y;
@@ -9449,9 +9445,9 @@ void ftCo_800B2AFC(Fighter* fp)
             f32 above;
             below = y - 1000.0f;
             above = 10.0f + y;
-            found = ftCo_800B2AFC_CheckFloor(
-                &floor_pos26, &line26, &flags26, &floor_normal26, -1, -1, -1,
-                x2, above, x, below, 0.0f);
+            found = ftCo_800B2AFC_CheckFloor(&floor_pos26, &line26, &flags26,
+                                             &floor_normal26, -1, -1, -1, x2,
+                                             above, x, below, 0.0f);
             if (found != 0) {
                 f32 floor_x;
                 f32 floor_y;
@@ -9616,9 +9612,8 @@ void ftCo_800B33B0(Fighter* fp)
     below = sy - 2.0;
     tmp = 2.0 + sy;
     fx = sx;
-    result = mpCheckFloor(fx, tmp, sx, below, 0.0f,
-                          &target_floor_pos, &line2, &flags2,
-                          &target_floor_normal, -1, -1, -1, NULL,
+    result = mpCheckFloor(fx, tmp, sx, below, 0.0f, &target_floor_pos, &line2,
+                          &flags2, &target_floor_normal, -1, -1, -1, NULL,
                           (Fighter_GObj*) blocked);
     if (result != 0) {
         int line = line2;

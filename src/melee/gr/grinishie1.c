@@ -772,9 +772,8 @@ void grInishie1_801FBAA0(HSD_GObj* gobj, s32 index)
 
     if (hatena != NULL) {
         hatena_gp = GET_GROUND2(hatena);
-        HSD_ASSERTMSG(
-            0x39E, !gp->gv.inishie1.blocks[index].hatena_gobj,
-            "!mapgp->u.map.block[ix].hatena_gobj");
+        HSD_ASSERTMSG(0x39E, !gp->gv.inishie1.blocks[index].hatena_gobj,
+                      "!mapgp->u.map.block[ix].hatena_gobj");
 
         gp->gv.inishie1.blocks[index].hatena_gobj = hatena;
 
@@ -782,8 +781,7 @@ void grInishie1_801FBAA0(HSD_GObj* gobj, s32 index)
         lb_8000B1CC(gp->gv.inishie1.blocks[index].jobj2, NULL, &position);
         HSD_JObjSetTranslate(hatena_jobj, &position);
 
-        hatena_gp->gv.inishie13.xC4 =
-            gp->gv.inishie1.blocks[index].jobj2;
+        hatena_gp->gv.inishie13.xC4 = gp->gv.inishie1.blocks[index].jobj2;
 
         if (gp->gv.inishie1.blocks[index].x2 == 0 ||
             gp->gv.inishie1.blocks[index].x2 == 1)

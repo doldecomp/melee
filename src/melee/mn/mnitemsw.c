@@ -1,11 +1,11 @@
 #include "mnitemsw.h"
 
+#include <platform.h>
+
 #include "baselib/gobjgxlink.h"
 #include "baselib/gobjobject.h"
 #include "mn/inlines.h"
 #include "mn/mnmain.h"
-
-#include <platform.h>
 
 #include <baselib/gobj.h>
 #include <baselib/gobjplink.h>
@@ -279,8 +279,8 @@ void fn_80233E10(HSD_GObj* gobj)
         }
     } else if (buttons & MenuInput_StartButton) {
         sfxForward();
-        switch ((s32) gm_801A4310()) {
-        case 1: {
+        switch (gm_GetCurrentGameMode()) {
+        case GM_MENU: {
             u8* order2 = mnItemSw_GetTable()->item_order;
             MnItemSwData* data2 = (MnItemSwData*) mnItemSw_804D6BE8->user_data;
             for (i = 0; i < 0x1F; i++, order2++) {
@@ -764,8 +764,7 @@ static inline HSD_JObj* mnItemSw_GetLeftColumn(MnItemSwData* data)
     return data->jobjs[4];
 }
 
-static inline void mnItemSw_SetInitialCursorPosition(
-    MnItemSwData* user_data)
+static inline void mnItemSw_SetInitialCursorPosition(MnItemSwData* user_data)
 {
     u8 cursor;
     f32 y_spacing;

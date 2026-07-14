@@ -1276,8 +1276,8 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                     HSD_JObjSetRotationZ(
                         Ground_801C3FA4(
                             gobj,
-                            grCn_803E21B0[data->arwing_group
-                                             [gp->gv.corneria2.xC8]]),
+                            grCn_803E21B0
+                                [data->arwing_group[gp->gv.corneria2.xC8]]),
                         0.0f);
                 }
                 gp->gv.corneria2.xF8 -= 1;
@@ -1297,8 +1297,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                 if ((arwing = data->arwing_gobj[gp->gv.corneria2.xC8])) {
                     arwing_gp = GET_GROUND(arwing);
                     ship_gp = GET_GROUND(Ground_801C2BA4(3));
-                    lb_8000B1CC(Ground_801C3FA4(arwing, 4), NULL,
-                                &arwing_pos);
+                    lb_8000B1CC(Ground_801C3FA4(arwing, 4), NULL, &arwing_pos);
                     {
                         s32* types = data->arwing_type;
                         int atype = types[arwing_gp->gv.corneria2.xC8];
@@ -1320,8 +1319,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
             lb_8000B1CC(
                 Ground_801C3FA4(
                     gobj,
-                    grCn_803E21B0[data->arwing_group
-                                      [gp->gv.corneria2.xC8]]),
+                    grCn_803E21B0[data->arwing_group[gp->gv.corneria2.xC8]]),
                 NULL, &pos);
             {
                 f32 rot_z;
@@ -1337,8 +1335,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                 }
                 rot_z = HSD_JObjGetRotationZ(Ground_801C3FA4(
                     gobj,
-                    grCn_803E21B0[data->arwing_group
-                                      [gp->gv.corneria2.xC8]]));
+                    grCn_803E21B0[data->arwing_group[gp->gv.corneria2.xC8]]));
                 angle = rot_z;
                 {
                     HSD_GObj* item = gp->gv.corneria2.xDC;
@@ -1418,12 +1415,10 @@ void grCorneria_801DED50(Ground_GObj* gobj)
             }
             {
                 HSD_GObj* arwing;
-                if ((arwing = data->arwing_gobj[gp->gv.corneria2.xC8]))
-                {
+                if ((arwing = data->arwing_gobj[gp->gv.corneria2.xC8])) {
                     arwing_gp = GET_GROUND(arwing);
                     ship_gp = GET_GROUND(Ground_801C2BA4(3));
-                    lb_8000B1CC(Ground_801C3FA4(arwing, 4), NULL,
-                                &arwing_pos);
+                    lb_8000B1CC(Ground_801C3FA4(arwing, 4), NULL, &arwing_pos);
                     {
                         s32 atype =
                             data->arwing_type[arwing_gp->gv.corneria2.xC8];

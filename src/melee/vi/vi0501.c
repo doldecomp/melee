@@ -119,8 +119,7 @@ void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
         jobj = GET_JOBJ(un_804A2E98[i - 1]);
         HSD_JObjReqAnimAll(jobj, 140.0f);
         HSD_JObjAnimAll(jobj);
-        HSD_JObjGetTranslation2(
-            (HSD_JObj*) un_804A2E98[i - 1]->hsd_obj, &v);
+        HSD_JObjGetTranslation2((HSD_JObj*) un_804A2E98[i - 1]->hsd_obj, &v);
         scale = getScale();
         v.x *= scale;
         v.y *= scale;

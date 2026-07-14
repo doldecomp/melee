@@ -1645,8 +1645,9 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
                     if ((s8) manager->gv.bigblue.data[i].x1 != 0) {
                         count++;
                         if (cars_avail != NULL) {
-                            cars_avail = manager->gv.bigblue.xD4[
-                                (s8) manager->gv.bigblue.data[i].index];
+                            cars_avail =
+                                manager->gv.bigblue.xD4
+                                    [(s8) manager->gv.bigblue.data[i].index];
                         }
                     }
                 }
@@ -1729,8 +1730,8 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
                         next_velocity = 140.0f * Ground_801C0498();
                         range_scale2 = Ground_801C0498();
                         range2 = (60.0f * range_scale2) + 30.0f;
-                        collided = grBigBlue_801EAB50(&pos, 1, range2,
-                                                      next_velocity);
+                        collided =
+                            grBigBlue_801EAB50(&pos, 1, range2, next_velocity);
                     }
                     if (collided != 0) {
                         *(f32*) (bp + 0xD8) = 0.0f;
@@ -3098,8 +3099,7 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
 
     for (i = 0; i < 30; i++) {
         u8 val;
-        mpJointSetCb1(lbl_803E2DFC[i], gp,
-                      (mpLib_Callback) fn_801EF60C);
+        mpJointSetCb1(lbl_803E2DFC[i], gp, (mpLib_Callback) fn_801EF60C);
         HSD_JObjSetFlagsAll(((HSD_JObj**) gp->gv.bigblue.xC8)[i], JOBJ_HIDDEN);
         val = HSD_Randi(2) ? 0 : 2;
         ((u8*) gp->gv.bigblue.xCC)[i] = val;
@@ -3413,11 +3413,9 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
                 for (i = 0; i < 4; i++, car += 0x40) {
                     u32 st = (car[0xD4] >> 2) & 0x3F;
                     if ((st == 7 &&
-                         *(f32*) (car + 0xE0) <
-                             *(f32*) (target_car + 0xE0)) ||
+                         *(f32*) (car + 0xE0) < *(f32*) (target_car + 0xE0)) ||
                         (st == 8 &&
-                         *(f32*) (car + 0xE0) >
-                             *(f32*) (target_car + 0xE0)))
+                         *(f32*) (car + 0xE0) > *(f32*) (target_car + 0xE0)))
                     {
                         byte = car[0xD4];
 #ifdef MWERKS_GEKKO
@@ -3513,8 +3511,7 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
                     }
                     for (pos = 0; pos < 30; pos++) {
                         states = gp->gv.bigblue.xCC;
-                        if (states[pos] == 0 && --pick < 0)
-                        {
+                        if (states[pos] == 0 && --pick < 0) {
                             if (grBigBlue_801EE398(ground_gobj, active_count,
                                                    5) != 0)
                             {
@@ -3548,8 +3545,7 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
                     }
                     for (pos = 0; pos < 30; pos++) {
                         states = gp->gv.bigblue.xCC;
-                        if (states[pos] == 2 && --pick < 0)
-                        {
+                        if (states[pos] == 2 && --pick < 0) {
                             if (grBigBlue_801EE398(ground_gobj, active_count,
                                                    6) != 0)
                             {
@@ -3661,8 +3657,7 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
             active = 0;
             behind = 0;
 
-            for (idx = 0, iter = gp->raw; idx < 4;
-                 idx++, iter += 0x40) {
+            for (idx = 0, iter = gp->raw; idx < 4; idx++, iter += 0x40) {
                 u32 st = (iter[0xD4] >> 2) & 0x3F;
                 if (st != 1 && st != 7 && st != 8) {
                     active++;
@@ -3724,8 +3719,8 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
         /* Position update: xDC += vel, xE0 = xD8 + xDC */
         {
             gp->data.lanes[lane].delta += gp->data.lanes[lane].velocity;
-            gp->data.lanes[lane].pos.x = gp->data.lanes[lane].target +
-                                         gp->data.lanes[lane].delta;
+            gp->data.lanes[lane].pos.x =
+                gp->data.lanes[lane].target + gp->data.lanes[lane].delta;
         }
     }
 
@@ -3757,21 +3752,19 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
         if (vel > 0.0F) {
             ground_y = grBb_804D69C8->x24 * Ground_801C0498();
             rank_factor = grBb_804D69C8->x34 * Ground_801C0498();
-            rank_factor = gp->data.lanes[lane].velocity *
-                          ((grBb_804D69C8->x38 * Ground_801C0498() -
-                            rank_factor) /
-                           ground_y);
-            heading_val =
-                grBb_804D69C8->x34 * Ground_801C0498() + rank_factor;
+            rank_factor =
+                gp->data.lanes[lane].velocity *
+                ((grBb_804D69C8->x38 * Ground_801C0498() - rank_factor) /
+                 ground_y);
+            heading_val = grBb_804D69C8->x34 * Ground_801C0498() + rank_factor;
         } else if (vel < 0.0F) {
             ground_y = grBb_804D69C8->x24 * Ground_801C0498();
             rank_factor = grBb_804D69C8->x34 * Ground_801C0498();
-            rank_factor = gp->data.lanes[lane].velocity *
-                          ((grBb_804D69C8->x30 * Ground_801C0498() -
-                            rank_factor) /
-                           ground_y);
-            heading_val =
-                grBb_804D69C8->x34 * Ground_801C0498() + rank_factor;
+            rank_factor =
+                gp->data.lanes[lane].velocity *
+                ((grBb_804D69C8->x30 * Ground_801C0498() - rank_factor) /
+                 ground_y);
+            heading_val = grBb_804D69C8->x34 * Ground_801C0498() + rank_factor;
         } else {
             heading_val = grBb_804D69C8->x34 * Ground_801C0498();
         }
@@ -3781,8 +3774,7 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
 
     /* Heading target interpolation */
     gp->data.lanes[lane].amplitude +=
-        grBb_804D69C8->x3C *
-        (heading_val - gp->data.lanes[lane].amplitude);
+        grBb_804D69C8->x3C * (heading_val - gp->data.lanes[lane].amplitude);
 
     /* Rotation angle update */
     gp->data.lanes[lane].rotation += 0.017453292F * grBb_804D69C8->x40;
@@ -3791,12 +3783,12 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
             (f32) ((f64) gp->data.lanes[lane].rotation - M_TAU);
     }
 
-    heading_osc = gp->data.lanes[lane].amplitude * sinf(gp->data.lanes[lane].rotation);
+    heading_osc =
+        gp->data.lanes[lane].amplitude * sinf(gp->data.lanes[lane].rotation);
 
     /* Compute ground reference level */
     rank_factor =
-        (gp->data.lanes[lane].pos.y -
-         grBb_804D69C8->x2C * Ground_801C0498()) -
+        (gp->data.lanes[lane].pos.y - grBb_804D69C8->x2C * Ground_801C0498()) -
         gp->data.lanes[lane].height - heading_osc;
 
     /* Collision/grounding check */
@@ -3852,7 +3844,8 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
         } else {
             ((grBb_ByteBits*) lane_flags)->b6 = 1;
             rank_factor = grBb_804D69C8->x84 * Ground_801C0498();
-            gp->data.lanes[lane].angular_velocity = sinf(f31_rot) * rank_factor;
+            gp->data.lanes[lane].angular_velocity =
+                sinf(f31_rot) * rank_factor;
         }
     }
 
@@ -3862,8 +3855,8 @@ heading_converge:
         f32 angle = atan2f(-sp_vec.x, sp_vec.y);
         f31_rot += grBb_804D69C8->x50 * (angle - f31_rot);
     } else {
-        f31_rot += grBb_804D69C8->x54 *
-                   (0.017453292F * grBb_804D69C8->x58 - f31_rot);
+        f31_rot +=
+            grBb_804D69C8->x54 * (0.017453292F * grBb_804D69C8->x58 - f31_rot);
     }
 
     /* Update jobj transform */
@@ -3901,8 +3894,7 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
 
         self = gp->raw;
         self += offset;
-        if (blast + grBb_804D69C8->x68 * scale <
-            gp->data.lanes[index].pos.x) {
+        if (blast + grBb_804D69C8->x68 * scale < gp->data.lanes[index].pos.x) {
             if (0.0F != gp->data.lanes[index].xEC) {
                 result = 9;
             } else {
@@ -3917,8 +3909,7 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
 
         self = gp->raw;
         self += offset;
-        if (blast - grBb_804D69C8->x68 * scale >
-            gp->data.lanes[index].pos.x) {
+        if (blast - grBb_804D69C8->x68 * scale > gp->data.lanes[index].pos.x) {
             if (0.0F != gp->data.lanes[index].xEC) {
                 result = 9;
             } else {
@@ -4100,16 +4091,13 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
         grBb_Car* car = &((grBb_CarGround*) gp)->typed.cars[arg1];
 
         HSD_JObjSetFlagsAll(
-            ((grBb_CarGround*) gp)
-                ->typed.jobjs[(*(u16*) car >> 4) & 0x1F],
+            ((grBb_CarGround*) gp)->typed.jobjs[(*(u16*) car >> 4) & 0x1F],
             JOBJ_HIDDEN);
 
         if (gp->gv.bigblue.car.lanes[arg1].pos.x > 0.0f) {
-            ((grBb_CarGround*) gp)
-                ->typed.ranks[(*(u16*) car >> 4) & 0x1F] = 0;
+            ((grBb_CarGround*) gp)->typed.ranks[(*(u16*) car >> 4) & 0x1F] = 0;
         } else {
-            ((grBb_CarGround*) gp)
-                ->typed.ranks[(*(u16*) car >> 4) & 0x1F] = 2;
+            ((grBb_CarGround*) gp)->typed.ranks[(*(u16*) car >> 4) & 0x1F] = 2;
         }
         {
             typedef struct grBb_StateBits {
@@ -4285,7 +4273,8 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
                         lo;
                 }
 
-                car_ec = (f32*) (((grBb_CarGround*) gp)->bytes + offset + 0xEC);
+                car_ec =
+                    (f32*) (((grBb_CarGround*) gp)->bytes + offset + 0xEC);
                 ((u8*) gp->gv.bigblue.xCC)[slot] = 1;
                 *car_ec = 0.0f;
 
@@ -4426,7 +4415,8 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
                         lo;
                 }
 
-                car_ec = (f32*) (((grBb_CarGround*) gp)->bytes + offset + 0xEC);
+                car_ec =
+                    (f32*) (((grBb_CarGround*) gp)->bytes + offset + 0xEC);
                 ((u8*) gp->gv.bigblue.xCC)[slot] = 1;
                 *car_ec = 0.0f;
 
@@ -4572,8 +4562,7 @@ bool grBigBlue_801EEF00(Ground_GObj* gobj, s32 index)
         scale = Ground_801C0498();
         norm = abs_speed / (grBb_804D69C8->x28 * scale);
         if (((void) norm, (f32) gp->typed.cars[index].threshold) > norm) {
-            if (gp->typed.cars[index].pos.x > Stage_GetCamBoundsLeftOffset())
-            {
+            if (gp->typed.cars[index].pos.x > Stage_GetCamBoundsLeftOffset()) {
                 scale = Ground_801C0498();
                 gp->typed.cars[index].accel = -(grBb_804D69C8->x28 * scale);
                 break;
@@ -4608,9 +4597,10 @@ bool grBigBlue_801EEF00(Ground_GObj* gobj, s32 index)
                 gp->typed.cars[index].accel = grBb_804D69C8->x28 * scale;
             } else {
                 scale = Ground_801C0498();
-                predicted = gp->typed.cars[index].velocity * norm +
-                            gp->typed.cars[index].pos.x -
-                            norm * (0.5F * (grBb_804D69C8->x28 * scale) * norm);
+                predicted =
+                    gp->typed.cars[index].velocity * norm +
+                    gp->typed.cars[index].pos.x -
+                    norm * (0.5F * (grBb_804D69C8->x28 * scale) * norm);
 
                 if (predicted < target) {
                     scale = Ground_801C0498();
@@ -4627,9 +4617,10 @@ bool grBigBlue_801EEF00(Ground_GObj* gobj, s32 index)
                 gp->typed.cars[index].accel = -(grBb_804D69C8->x28 * scale);
             } else {
                 scale = Ground_801C0498();
-                predicted = gp->typed.cars[index].velocity * norm +
-                            gp->typed.cars[index].pos.x -
-                            norm * (0.5F * -(grBb_804D69C8->x28 * scale) * norm);
+                predicted =
+                    gp->typed.cars[index].velocity * norm +
+                    gp->typed.cars[index].pos.x -
+                    norm * (0.5F * -(grBb_804D69C8->x28 * scale) * norm);
 
                 if (predicted < target) {
                     scale = Ground_801C0498();

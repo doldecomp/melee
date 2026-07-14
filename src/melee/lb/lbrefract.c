@@ -113,9 +113,8 @@ static inline void lbRefract_WriteTexCoord(lbRefract_CallbackData* cb, s32 row,
 {
     u32 y_tex = (u32) (127.0f * (y * param0) + 128.0f);
     ((void (*)(lbRefract_CallbackData*, s32, s32, s32, s32, u32,
-               u32)) cb->callback0)(
-        cb, row, col, 0, 0, y_tex,
-        (u32) (127.0f * (x * param0) + 128.0f));
+               u32)) cb->callback0)(cb, row, col, 0, 0, y_tex,
+                                    (u32) (127.0f * (x * param0) + 128.0f));
 }
 
 void lbRefract_80021CE8(void* arg0, s32 arg1)
@@ -656,8 +655,7 @@ s32 lbRefract_PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc)
         offset += 2;
 
         for (copied = 0; copied < count; copied++) {
-            display[offset + last_offset] =
-                display[offset + pnmtx_offset];
+            display[offset + last_offset] = display[offset + pnmtx_offset];
             offset += stride;
         }
     }

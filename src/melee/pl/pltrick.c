@@ -299,8 +299,7 @@ void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj, s32 x18d4_int,
 
                 attack_id2 = ev_reload.x2073;
                 if (attack_id2 == 0x63) {
-                    pl_8003FE40(attacker.fp->player_id,
-                                attacker.fp->x221F_b4);
+                    pl_8003FE40(attacker.fp->player_id, attacker.fp->x221F_b4);
                 }
 
                 if (!ev_data->x10_b7 &&
@@ -320,8 +319,8 @@ void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj, s32 x18d4_int,
                         }
                     }
 
-                    pl_8003DFF4(attacker.fp->player_id,
-                                attacker.fp->x221F_b4, attack_id2);
+                    pl_8003DFF4(attacker.fp->player_id, attacker.fp->x221F_b4,
+                                attack_id2);
                 }
 
                 if (attacked_from_behind) {

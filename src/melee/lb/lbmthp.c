@@ -412,8 +412,8 @@ static inline void lbMthp_GetPlayer(struct lbl_804333E0_t** streamPlayer,
     *rate_table = &(*streamPlayer)->rate_table;
 }
 
-static inline THPDecComp* lbMthp_GetDecoder(
-    struct lbl_804333E0_t* streamPlayer)
+static inline THPDecComp*
+lbMthp_GetDecoder(struct lbl_804333E0_t* streamPlayer)
 {
     return (THPDecComp*) streamPlayer;
 }
@@ -472,11 +472,11 @@ void lbMthp_8001F410(const char* filename, u32* rate_table, void* buf,
     MoviePlayer.unk_144 = 0;
     MoviePlayer.unk_148 = 1;
     OSCreateAlarm(&MoviePlayer.alarm);
-    OSSetPeriodicAlarm(
-        (OSAlarm*) ((uintptr_t) &MoviePlayer +
-                    offsetof(struct lbl_804333E0_t, alarm)),
-        __cvt_dbl_usll(OSSecondsToTicks(1.0f / 60)),
-        __cvt_dbl_usll(OSSecondsToTicks(1.0f / 60)), fn_8001F2A4);
+    OSSetPeriodicAlarm((OSAlarm*) ((uintptr_t) &MoviePlayer +
+                                   offsetof(struct lbl_804333E0_t, alarm)),
+                       __cvt_dbl_usll(OSSecondsToTicks(1.0f / 60)),
+                       __cvt_dbl_usll(OSSecondsToTicks(1.0f / 60)),
+                       fn_8001F2A4);
 }
 
 void lbMthp_8001F578(void)

@@ -12,6 +12,8 @@
 /// same instructions with displacements 0x460/0x79C/0xAB8 instead.
 #include "gm_1A7A.h"
 
+#include "dolphin/pad.h"
+
 #include "gm/forward.h"
 
 #include "gm/gm_1A36.h"
@@ -112,7 +114,7 @@ void gm_801A9B30_OnEnter(UNK_T unused)
     HSD_GObjObject_80390A70(gobj, HSD_SObjLib_804D7960, NULL);
     GObj_SetupGXLink(gobj, lbMthp8001F928, 0xB, 0);
     ckind = gm_801BEFB0();
-    gover_kind = gm_801A4310();
+    gover_kind = gm_GetCurrentGameMode();
     if (gover_kind == GM_DEBUG_GOVER) {
         gover_kind = gm_801BF050();
     }
@@ -132,7 +134,7 @@ void gm_801A9B30_OnEnter(UNK_T unused)
     thp_disp->x10 = 320.0F;
     thp_disp->x14 = 240.0F;
     thp_disp->x40 |= 2;
-    switch (gm_801A4310()) {
+    switch (gm_GetCurrentGameMode()) {
     case GM_CLASSIC_GOVER:
         level = gm_8017DFF4(1);
         break;
@@ -157,14 +159,16 @@ void gm_801A9D0C_OnFrame(void)
     } else if (gmRegend_ExitTimer != 0) {
         gmRegend_ExitTimer--;
         if (gmRegend_ExitTimer == 0) {
-            if (gm_801A4310() == GM_DEBUG_GOVER) {
+            if (gm_GetCurrentGameMode() == GM_DEBUG_GOVER) {
                 gm_801A6630(6);
             } else {
                 gm_801A6630(1);
             }
         }
     } else {
-        if (gm_801A36A0(gm_801BF010()) & 0x1100) {
+        if (gm_GetButtonsTriggered(gm_801BF010()) &
+            (PAD_BUTTON_A | PAD_BUTTON_START))
+        {
             lbBgFlash_8002063C(0x3C);
             gmRegend_ExitTimer = 0x3C;
             lbAudioAx_80023694();

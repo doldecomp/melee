@@ -723,17 +723,17 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
                     if ((gp->gv.oldpupupu.xD0 % 10) == 0) {
                         gp = gobj->user_data;
                         if (gp->gv.oldpupupu.xD8 == 0) {
-                            lb_80011A50(
-                                &grOp_803E67E4[gp->gv.oldpupupu.xD8], 0xF,
-                                0.5F, 0.0F, 0.0F, grOp_804D6A98->x20,
-                                grOp_804D6A98->x24, grOp_804D6A98->x1C,
-                                grOp_804D6A98->x28);
+                            lb_80011A50(&grOp_803E67E4[gp->gv.oldpupupu.xD8],
+                                        0xF, 0.5F, 0.0F, 0.0F,
+                                        grOp_804D6A98->x20, grOp_804D6A98->x24,
+                                        grOp_804D6A98->x1C,
+                                        grOp_804D6A98->x28);
                         } else {
-                            lb_80011A50(
-                                &grOp_803E67E4[gp->gv.oldpupupu.xD8], 0xF,
-                                0.5F, 0.0F, 0.0F, grOp_804D6A98->x14,
-                                grOp_804D6A98->x24, grOp_804D6A98->x18,
-                                grOp_804D6A98->x28);
+                            lb_80011A50(&grOp_803E67E4[gp->gv.oldpupupu.xD8],
+                                        0xF, 0.5F, 0.0F, 0.0F,
+                                        grOp_804D6A98->x14, grOp_804D6A98->x24,
+                                        grOp_804D6A98->x18,
+                                        grOp_804D6A98->x28);
                         }
                         return;
                     }

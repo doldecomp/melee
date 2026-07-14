@@ -369,7 +369,8 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
         ftCommon_8007D5D4(fp);
         msid = ((int (*)[4][3])
                     ftCo_803C5520)[0][kb_level][fp->dmg.x184c_damaged_hurtbox];
-        if (!(floor_angle > (M_PI_2 + (double) p_ftCommonData->x1E8_radians))) {
+        if (!(floor_angle > (M_PI_2 + (double) p_ftCommonData->x1E8_radians)))
+        {
             goto block_26;
         }
         ftCo_Damage_CalcVel(fp, pos.x, -pos.y * p_ftCommonData->x1EC);

@@ -1887,8 +1887,8 @@ bool it_802A6A78(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
     it_802A6A78_get_next(link_0, &link_1);
     while (link_1 != NULL) {
         if (link_1->x2C_b0) {
-            len = it_802A6A78_normalize_diff_rev(
-                it_802A6A78_get_pos(link_0), &link_1->pos, &vec);
+            len = it_802A6A78_normalize_diff_rev(it_802A6A78_get_pos(link_0),
+                                                 &link_1->pos, &vec);
             if (len > arg2->x30) {
                 link_1->pos.x = (vec.x * arg2->x30) + link_0->pos.x;
                 link_1->pos.y = (vec.y * arg2->x30) + link_0->pos.y;

@@ -15,6 +15,7 @@
 #include "baselib/jobj.h"
 #include "baselib/sislib.h"
 #include "cm/cmsnap.h"
+#include "dolphin/pad.h"
 #include "gm/gm_1601.h"
 #include "gm/gm_16AE.h"
 #include "gm/gm_1A36.h"
@@ -191,8 +192,8 @@ HSD_Text* gmCamera_801A2334(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4)
 /// SIS data file name passed to HSD_SisLib_803A62A0 in gmCamera_801A31FC.
 /// Evidence: retail keeps a distinct 0x11-byte data:string object at
 /// 0x803DA6A0 (config/GALE01/symbols.txt), between gmCamera_801A2334's
-/// switch jump table (0x803DA660) and gmCamera_VsCamStateTable (0x803DA6B4), and
-/// gmCamera_801A31FC addresses it through the TU .data anchor
+/// switch jump table (0x803DA660) and gmCamera_VsCamStateTable (0x803DA6B4),
+/// and gmCamera_801A31FC addresses it through the TU .data anchor
 /// (gmCamera_803DA630 + 0x70) rather than a string-literal pool entry.
 static char gmCamera_SisVsCameraDataName[] = "SIS_VsCameraData";
 
@@ -316,7 +317,7 @@ static inline void gmCamera_801A26C0_FreeTexts(gmCameraUnkStruct* unk)
 }
 
 static inline void gmCamera_FreeTextsWithZero(gmCameraUnkStruct* unk,
-                                               HSD_Text* zero)
+                                              HSD_Text* zero)
 {
     s32 i;
 
@@ -528,7 +529,7 @@ static inline void gmCamera_801A2D44_update_selection(HSD_JObj** jobj_b,
     f32 translate_x;
 
     if (HSD_PadCopyStatus[3].trigger & 0x40001) {
-        if ((s32) *(px18 = &gcus->x18) != 0) {
+        if ((s32) * (px18 = &gcus->x18) != 0) {
             lbAudioAx_80024030(2);
             *px18 = 0;
             lb_80011E24(gcus->x8, &(*jobj), 0xC, -1);
@@ -542,7 +543,7 @@ static inline void gmCamera_801A2D44_update_selection(HSD_JObj** jobj_b,
         }
     }
     if (HSD_PadCopyStatus[3].trigger & 0x80002) {
-        if ((s32) *(px18 = &gcus->x18) != 1) {
+        if ((s32) * (px18 = &gcus->x18) != 1) {
             lbAudioAx_80024030(2);
             *px18 = 1;
             lb_80011E24(gcus->x8, &(*jobj_b), 0xC, -1);

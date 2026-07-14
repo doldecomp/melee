@@ -253,8 +253,7 @@ void fn_8001FEC4(HSD_GObj* gobj, s32 code)
             s32* pY;
             s32 y2;
 
-            for (y2 = *(pY = &data->x38); y2 <= 0x1E0; y2 += data->x32)
-            {
+            for (y2 = *(pY = &data->x38); y2 <= 0x1E0; y2 += data->x32) {
                 if (y2 == *pY) {
                     s32 right;
                     u8 strip_h;

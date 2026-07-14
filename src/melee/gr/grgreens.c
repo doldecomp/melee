@@ -845,8 +845,7 @@ void grGreens_8021483C(Ground_GObj* gobj)
     y_scale = (left_top - left_bottom) / 4;
     for (i = 0; i < 5; i++) {
         for (j = 0; j < 3; j++) {
-            ((Vec(*)[6]) gp->gv.greens.x4)[i][j].x =
-                (x_scale * j) + left_min;
+            ((Vec(*)[6]) gp->gv.greens.x4)[i][j].x = (x_scale * j) + left_min;
             ((Vec(*)[6]) gp->gv.greens.x4)[i][j].y =
                 (y_scale * i) + left_bottom;
             ((Vec(*)[6]) gp->gv.greens.x4)[i][j].z = 0.0f;
@@ -1056,9 +1055,8 @@ void grGreens_80215358(Ground_GObj* gobj, int col, int row, int arg3, int arg4)
     block->x1_1 = (arg3 == 2) ? 1 : 0;
     block->x1_2 = 0;
     block->x1_3 = 0;
-    block->x8 = (arg4 == 1)
-                    ? Stage_GetBlastZoneTopOffset()
-                    : (gp->gv.greens.x4 + row * 6 + col)->y;
+    block->x8 = (arg4 == 1) ? Stage_GetBlastZoneTopOffset()
+                            : (gp->gv.greens.x4 + row * 6 + col)->y;
     block->x4 = 0.0f;
     block->xC = block_gobj;
     block->x10 = item_gobj;
@@ -1110,8 +1108,7 @@ void grGreens_802159B8(Ground* gp, int i, int j, int value)
 
         if ((gp->gv.greens.x8_blocks + j * 6)[i].x1_1) {
             HSD_JObjSetFlagsAll(
-                (gp->gv.greens.x8_blocks + j * 6)[i].xC->hsd_obj,
-                JOBJ_HIDDEN);
+                (gp->gv.greens.x8_blocks + j * 6)[i].xC->hsd_obj, JOBJ_HIDDEN);
             grMaterial_801C8D98(gobj, 1);
             it_80275414(gobj);
             (gp->gv.greens.x8_blocks + j * 6)[i].x1_2 = 1;
@@ -1553,36 +1550,36 @@ void grGreens_80216C20(Ground_GObj* gobj)
                                      .status == 3)
                 {
                     mpLib_800581DC(local.x18,
-                                   ((struct grGreens_BlockVars(*)[6]) gp2
-                                       ->gv.greens.x8_blocks)[i - 1][j]
-                                            .x18);
+                                   ((struct grGreens_BlockVars(*)[6])
+                                        gp2->gv.greens.x8_blocks)[i - 1][j]
+                                       .x18);
                 }
                 if (j > 0 && ((struct grGreens_BlockVars(*)[6])
                                   gp2->gv.greens.x8_blocks)[i][j - 1]
                                      .status == 3)
                 {
                     mpLib_800581DC(local.x18,
-                                   ((struct grGreens_BlockVars(*)[6]) gp2
-                                       ->gv.greens.x8_blocks)[i][j - 1]
-                                            .x18);
+                                   ((struct grGreens_BlockVars(*)[6])
+                                        gp2->gv.greens.x8_blocks)[i][j - 1]
+                                       .x18);
                 }
                 if (i < 4 && ((struct grGreens_BlockVars(*)[6])
                                   gp2->gv.greens.x8_blocks)[i + 1][j]
                                      .status == 3)
                 {
                     mpLib_800581DC(local.x18,
-                                   ((struct grGreens_BlockVars(*)[6]) gp2
-                                       ->gv.greens.x8_blocks)[i + 1][j]
-                                            .x18);
+                                   ((struct grGreens_BlockVars(*)[6])
+                                        gp2->gv.greens.x8_blocks)[i + 1][j]
+                                       .x18);
                 }
                 if (j < 5 && ((struct grGreens_BlockVars(*)[6])
                                   gp2->gv.greens.x8_blocks)[i][j + 1]
                                      .status == 3)
                 {
                     mpLib_800581DC(local.x18,
-                                   ((struct grGreens_BlockVars(*)[6]) gp2
-                                       ->gv.greens.x8_blocks)[i][j + 1]
-                                            .x18);
+                                   ((struct grGreens_BlockVars(*)[6])
+                                        gp2->gv.greens.x8_blocks)[i][j + 1]
+                                       .x18);
                 }
                 ((struct grGreens_BlockVars(*)[6])
                      gp->gv.greens.x8_blocks)[i][j]

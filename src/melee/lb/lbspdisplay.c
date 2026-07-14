@@ -1496,9 +1496,7 @@ void lb_8001285C(HSD_ImageDesc* image_desc, GXTexObj* tex_obj)
                    GX_LO_CLEAR);
 }
 
-static inline void consume_color(GXColor color)
-{
-}
+static inline void consume_color(GXColor color) {}
 
 static inline void consume_blur_colors(GXColor color0, GXColor color1,
                                        GXColor color2, GXColor color3)
@@ -1808,10 +1806,9 @@ void fn_80013614(HSD_GObj* gobj)
         {
             ((GXColor*) &tex_obj)[-2].a = x10;
             GXSetTevColor(GX_TEVREG0, ((GXColor*) &tex_obj)[-2]);
-            consume_blur_colors(((GXColor*) &tex_obj)[-2],
-                                ((GXColor*) &tex_obj)[-2],
-                                ((GXColor*) &tex_obj)[-2],
-                                ((GXColor*) &tex_obj)[-2]);
+            consume_blur_colors(
+                ((GXColor*) &tex_obj)[-2], ((GXColor*) &tex_obj)[-2],
+                ((GXColor*) &tex_obj)[-2], ((GXColor*) &tex_obj)[-2]);
             GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
                             GX_CA_ZERO);
             GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO,

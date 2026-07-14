@@ -1,11 +1,10 @@
-#define fn_80189B88(...)
 #include "gm_1832.h"
-#undef fn_80189B88
 
 #include "gm_1B03.static.h"
 
 #include "gm_unsplit.h"
 
+#include "dolphin/pad.h"
 #include "gm/gm_1B14.h"
 #include "pl/pl_040D.h"
 
@@ -1541,7 +1540,7 @@ void fn_80187910(HSD_GObj* arg0)
     PAD_STACK(4);
     data = &lbl_804736C0;
     cobj = arg0->hsd_obj;
-    if (gm_801A36A0(data->x38) & 0x100) {
+    if (gm_GetButtonsTriggered(data->x38) & PAD_BUTTON_A) {
         data->x37.frame_counter = (s32) cobj->eyepos->aobj->curr_frame / 300;
         if (++data->x37.frame_counter >= 8U) {
             data->x37.frame_counter = 0;
@@ -1671,7 +1670,7 @@ void fn_80187CF4(HSD_GObj* gobj)
         }
         break;
     case 2:
-        if (gm_801A36A0(data->x38) & 0x1000) {
+        if (gm_GetButtonsTriggered(data->x38) & PAD_BUTTON_START) {
             lbAudioAx_80024030(1);
             data->x36.active = 1;
             data->x37.state2 = 3;
@@ -1768,14 +1767,13 @@ typedef struct gm_80187F48_EnterData {
     u16 stage_id;
 } gm_80187F48_EnterData;
 
-static inline InternalStageId gm_80187F48_GetStageId(
-    gm_80187F48_EnterData* data)
+static inline InternalStageId
+gm_80187F48_GetStageId(gm_80187F48_EnterData* data)
 {
     return data->stage_id;
 }
 
-static inline void gm_80187F48_OnEnter_inline(
-    gm_80187F48_EnterData* arg0)
+static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
 {
     gm_1832_804736C0_t* data = &lbl_804736C0;
     char** table = lbl_803D9750;
@@ -1812,10 +1810,9 @@ static inline void gm_80187F48_OnEnter_inline(
                                       &data->x4, table[stage_index], NULL);
 
     lbAudioAx_80026F2C((s32) table[stage_index + 12]);
-    lbAudioAx_8002702C(
-        (s32) table[stage_index + 12],
-        lbAudioAx_80026E84(Player_GetPlayerCharacter(0)) |
-            ((u64*) &table[24])[stage_index]);
+    lbAudioAx_8002702C((s32) table[stage_index + 12],
+                       lbAudioAx_80026E84(Player_GetPlayerCharacter(0)) |
+                           ((u64*) &table[24])[stage_index]);
     lbAudioAx_80027168();
     lbAudioAx_80027648();
 
@@ -1850,11 +1847,10 @@ static inline void gm_80187F48_OnEnter_inline(
         HSD_GObj* model_gobj;
         DynamicModelDesc* model_desc;
         model_gobj = GObj_Create(0xE, 0xF, 0);
-        model_jobj = HSD_JObjLoadJoint(
-            (*data->x0)[11 - state->stage_index]->joint);
+        model_jobj =
+            HSD_JObjLoadJoint((*data->x0)[11 - state->stage_index]->joint);
         lb_80011C18(model_jobj, 0x08000000);
-        HSD_GObjObject_80390A70(model_gobj, HSD_GObj_804D7849,
-                                model_jobj);
+        HSD_GObjObject_80390A70(model_gobj, HSD_GObj_804D7849, model_jobj);
         GObj_SetupGXLink(model_gobj, fn_80187C9C, 0xB, 0xB);
 
         model_desc = (*data->x0)[11 - state->stage_index];
@@ -1871,13 +1867,11 @@ static inline void gm_80187F48_OnEnter_inline(
 
     {
         HSD_GObj* model_gobj = GObj_Create(0xE, 0xF, 0);
-        HSD_JObj* model_jobj =
-            HSD_JObjLoadJoint((*data->x0)[12]->joint);
+        HSD_JObj* model_jobj = HSD_JObjLoadJoint((*data->x0)[12]->joint);
         int model_anim_idx;
         DynamicModelDesc* model_desc;
         lb_80011C18(model_jobj, 0x08000000);
-        HSD_GObjObject_80390A70(model_gobj, HSD_GObj_804D7849,
-                                model_jobj);
+        HSD_GObjObject_80390A70(model_gobj, HSD_GObj_804D7849, model_jobj);
         GObj_SetupGXLink(model_gobj, fn_80187C9C, 0xB, 0xB);
 
         model_anim_idx = data->x37.state2;
@@ -1949,7 +1943,7 @@ check_cobj:
 
 bool gm_8018841C(void)
 {
-    if (gm_801A4310() == GM_TRAINING) {
+    if (gm_GetCurrentGameMode() == GM_TRAINING) {
         return true;
     }
     return false;

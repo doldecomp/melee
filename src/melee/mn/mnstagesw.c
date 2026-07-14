@@ -177,9 +177,7 @@ static s32 mnStageSw_80235C58(u8 arg0)
 
     curr = start;
     while (curr <= end) {
-        if (gm_80164430(
-                gm_801641CC(mnStageSw_803ED4C4[(u8) curr])) != 0)
-        {
+        if (gm_80164430(gm_801641CC(mnStageSw_803ED4C4[(u8) curr])) != 0) {
             found = 0;
             goto loop_done;
         }
@@ -359,9 +357,9 @@ static void fn_80235F80(HSD_GObj* gobj)
         }
         if (buttons & 0x100) {
             lbAudioAx_80024030(1);
-            result = gm_801A4310();
+            result = gm_GetCurrentGameMode();
             switch (result) {
-            case 1:
+            case GM_MENU:
                 mnStageSw_8023593C(mnStageSw_804D6BF0);
                 lb_8001CE00();
                 mn_80229860(2);
@@ -657,14 +655,12 @@ static inline void mnStageSw_SetCursorPosition(MnStageSwData* user_data)
     y_spacing = HSD_JObjGetTranslationY(user_data->x30) -
                 HSD_JObjGetTranslationY(user_data->x2C);
     if (hovered < 15) {
-        HSD_JObjSetTranslateX(cursor,
-                              HSD_JObjGetTranslationX(user_data->x2C));
+        HSD_JObjSetTranslateX(cursor, HSD_JObjGetTranslationX(user_data->x2C));
         HSD_JObjSetTranslateY(cursor,
                               y_spacing * (f32) hovered +
                                   HSD_JObjGetTranslationY(user_data->x2C));
     } else {
-        HSD_JObjSetTranslateX(cursor,
-                              HSD_JObjGetTranslationX(user_data->x34));
+        HSD_JObjSetTranslateX(cursor, HSD_JObjGetTranslationX(user_data->x34));
         HSD_JObjSetTranslateY(cursor,
                               y_spacing * (f32) (hovered - 15) +
                                   HSD_JObjGetTranslationY(user_data->x2C));

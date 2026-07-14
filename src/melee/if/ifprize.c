@@ -2,6 +2,7 @@
 
 #include "placeholder.h"
 
+#include "dolphin/pad.h"
 #include "gm/gm_unsplit.h"
 #include "gm/gmmain_lib.h"
 #include "lb/lbarchive.h"
@@ -141,7 +142,9 @@ void fn_802FE470(HSD_GObj* gobj)
             break;
         case 1:
             un_803F9D48.x2 = 0xA;
-            if (gm_801A36A0(4) & 0x1100) {
+            if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) &
+                (PAD_BUTTON_A | PAD_BUTTON_START))
+            {
                 if (un_803F9D48.x2C == NULL) {
                     un_802FE8CC();
                 } else {

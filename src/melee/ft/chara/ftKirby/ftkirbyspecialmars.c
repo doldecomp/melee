@@ -440,10 +440,11 @@ void ftKb_MsSpecialNEnd_Anim(Fighter_GObj* gobj)
         i = 0;
         do {
             if ((s32) hit_fp->x914[0].state == 1) {
-                dmg = (u32) (f32) (s32) (
-                    ms_da->base_damage +
-                    (fp->mv.kb.specialn_ms.cur_frame / 30) *
-                        ms_da->additional_damage_per_iteration);
+                dmg =
+                    (u32) (f32) (s32) (ms_da->base_damage +
+                                       (fp->mv.kb.specialn_ms.cur_frame / 30) *
+                                           ms_da
+                                               ->additional_damage_per_iteration);
                 ftColl_8007ABD0(hit_fp->x914, dmg, gobj);
             }
             i += 1;
@@ -474,10 +475,11 @@ void ftKb_MsSpecialAirNEnd_Anim(Fighter_GObj* gobj)
         i = 0;
         do {
             if ((s32) hit_fp->x914[0].state == 1) {
-                dmg = (u32) (f32) (s32) (
-                    ms_da->base_damage +
-                    (fp->mv.kb.specialn_ms.cur_frame / 30) *
-                        ms_da->additional_damage_per_iteration);
+                dmg =
+                    (u32) (f32) (s32) (ms_da->base_damage +
+                                       (fp->mv.kb.specialn_ms.cur_frame / 30) *
+                                           ms_da
+                                               ->additional_damage_per_iteration);
                 ftColl_8007ABD0(hit_fp->x914, dmg, gobj);
             }
             i += 1;

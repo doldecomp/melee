@@ -720,9 +720,9 @@ void fn_8019D1BC(void)
             text->font_size.y = 0.1f;
         }
         tmd->x534[i]->default_alignment = 1;
-        HSD_SisLib_803A6B98(
-            tmd->x534[i], 10.0f * ((5.999997f * (f32) i) - 21.5f), -172.0f,
-            name_buf[i], tmd->x534[i]->default_alignment);
+        HSD_SisLib_803A6B98(tmd->x534[i],
+                            10.0f * ((5.999997f * (f32) i) - 21.5f), -172.0f,
+                            name_buf[i], tmd->x534[i]->default_alignment);
         HSD_SisLib_803A7548(tmd->x534[i], 0, 0.35f, 0.6f);
     }
 }
@@ -827,7 +827,7 @@ void gm_8019DF8C_OnFrame(void)
         lbAudioAx_80024030(0);
         mn_8022F268();
         gm_801A4B60();
-        gm_801A42F8(1);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
 
@@ -860,7 +860,7 @@ void gm_8019DF8C_OnFrame(void)
                     lbl_80479A58.x18[i] = (u8) (lbl_80479A58.x18[i] + 1);
                     if ((u8) lbl_80479A58.x18[i] > 0x5AU) {
                         lbAudioAx_80024030(1);
-                        gm_SetPendingScene(0U);
+                        gm_SetPendingSceneIndex(0U);
                         gm_801A4B60();
                         return;
                     }
@@ -1135,8 +1135,7 @@ void gm_8019E634(void)
         s32 k;
         audio_mask = 8;
         for (k = 0; k < (s32) tmd->x30; k++) {
-            audio_mask |=
-                lbAudioAx_80026E84((CharacterKind) tmd->x4B8[k].x1);
+            audio_mask |= lbAudioAx_80026E84((CharacterKind) tmd->x4B8[k].x1);
             OSReport(lbl_803DA3D0, (s32) tmd->x4B8[k].x1);
         }
         lbAudioAx_80026F2C(0x16);

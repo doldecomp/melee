@@ -306,8 +306,7 @@ static inline void un_80320A40_SetupStand(void)
     scale = -Toy_803060BC(0x1E, 5);
     HSD_JObjSetRotationYWithMtxDirty(child, scale);
 
-    scale = 0.55f * (Toy_803060BC(0x1E, 4) *
-                     (1.0f / Toy_803060BC(0x1E, 3)));
+    scale = 0.55f * (Toy_803060BC(0x1E, 4) * (1.0f / Toy_803060BC(0x1E, 3)));
 
     HSD_JObjSetScaleXWithMtxDirty(child, scale);
     HSD_JObjSetScaleYWithMtxDirty(child, scale);

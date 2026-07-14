@@ -15,6 +15,7 @@
 #include "lb/lbaudio_ax.h"
 #include "lb/lbspdisplay.h"
 #include "mp/mplib.h"
+#include "MSL/math.h"
 #include "pl/player.h"
 
 #include <baselib/aobj.h>
@@ -25,7 +26,6 @@
 #include <baselib/lobj.h>
 #include <baselib/random.h>
 #include <baselib/sislib.h>
-#include "MSL/math.h"
 
 static void sdata2_order(void)
 {
@@ -102,7 +102,11 @@ static struct {
     s16 padding;
 } grVe_CollLinks = {
     {
-        { 0, 5, 0 }, { 1, 5, 0 }, { 2, 9, 0 }, { 4, 10, 0 }, { 3, 13, 0 },
+        { 0, 5, 0 },
+        { 1, 5, 0 },
+        { 2, 9, 0 },
+        { 4, 10, 0 },
+        { 3, 13, 0 },
     },
 };
 
@@ -325,10 +329,10 @@ void grVenom_8020362C(void)
             if (grVe_804D6A38 <= 0) {
                 s32 combined;
                 Ground* gp = Ground_801C2BA4(7)->user_data;
-                group_a = gp->gv.venom2.xE0_state.b3 |
-                          gp->gv.venom2.xE0_state.b4;
-                group_b = gp->gv.venom2.xE0_state.b0 |
-                          gp->gv.venom2.xE0_state.b1;
+                group_a =
+                    gp->gv.venom2.xE0_state.b3 | gp->gv.venom2.xE0_state.b4;
+                group_b =
+                    gp->gv.venom2.xE0_state.b0 | gp->gv.venom2.xE0_state.b1;
                 group_b = group_b | gp->gv.venom2.xE0_state.b2;
                 group_a |= gp->gv.venom2.xE0_state.b5;
                 if (group_a != 0) {

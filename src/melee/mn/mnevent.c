@@ -410,8 +410,7 @@ static inline u8 mnEvent_RefreshList(MnEventData* data)
 }
 
 static inline void mnEvent_SetPage(MnEventData* data, HSD_JObj** jobj_0A,
-                                   HSD_JObj** jobj_0C,
-                                   HSD_JObj** jobj_0B)
+                                   HSD_JObj** jobj_0C, HSD_JObj** jobj_0B)
 {
     u8 page;
     HSD_JObj* tree;
@@ -489,8 +488,7 @@ void mnEvent_8024E524(s32 event_idx)
 
     user_data = HSD_MemAlloc(sizeof(MnEventData));
     HSD_ASSERTREPORTFILE(mnEvent_803EF7A0 + 0x28, 0x39B, user_data,
-                         mnEvent_803EF7A0 + 0x34,
-                         mnEvent_803EF7A0 + 0x10);
+                         mnEvent_803EF7A0 + 0x34, mnEvent_803EF7A0 + 0x10);
     mnEvent_8024E420(user_data, event_idx);
     GObj_InitUserData(gobj, 0, HSD_Free, user_data);
 

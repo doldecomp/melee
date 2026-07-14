@@ -81,8 +81,7 @@ static struct {
 /// static s8 grFz_804D4920[8] = { 0x6A, 0x6F, 0x62, 0x6A, 0x2E, 0x68, 0, 0 };
 /// static s8 grFz_804D4928[8] = { 0x6A, 0x6F, 0x62, 0x6A, 0, 0, 0, 0 };
 /* The stage's zero translation vector is owned by this TU's .rodata. */
-static const Vec3
-    grFz_803B8430 = { 0 };
+static const Vec3 grFz_803B8430 = { 0 };
 
 void grFlatzone_80216E74(bool arg0)
 {
@@ -435,9 +434,9 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
             {
                 s32 checked_line_id = line_id;
                 if (line_id != -1) {
-                    gp->gv.flatzone2.xCC = grDynamicAttr_801CA0F8(
-                        0x11, &pos_2, checked_line_id, 22.0f,
-                        grFz_804D6AB0->unk3C);
+                    gp->gv.flatzone2.xCC =
+                        grDynamicAttr_801CA0F8(0x11, &pos_2, checked_line_id,
+                                               22.0f, grFz_804D6AB0->unk3C);
                 }
             }
             trigger_machine = 1;
@@ -577,13 +576,12 @@ void grFlatzone_802174EC(Ground_GObj* gobj)
             gp->gv.pad_0[6] = gp->gv.pad_0[5];
             while (1) {
                 s32 next_anim = HSD_Randi(4) + 1;
-                if ((u8) gp->gv.pad_0[6] ==
-                    (u8) (gp->gv.pad_0[5] = next_anim))
+                if ((u8) gp->gv.pad_0[6] == (u8) (gp->gv.pad_0[5] = next_anim))
                 {
                     continue;
                 }
-                row_entry = ((s16(*)[5]) grFz_803E7A68)
-                    [(u8) gp->gv.pad_0[3]][(u8) gp->gv.pad_0[5]];
+                row_entry = ((s16(*)[5]) grFz_803E7A68)[(u8) gp->gv.pad_0[3]]
+                                                       [(u8) gp->gv.pad_0[5]];
                 if (row_entry != -1) {
                     break;
                 }
@@ -729,16 +727,15 @@ void grFlatzone_80218060(s32 arg0)
                         s32 randi = HSD_Randi(4);
                         v = randi + 1;
                     }
-                } while (((s16(*)[5]) grFz_803E7A68)[gp->gv.flatzone.xC7]
-                                                      [(u8) (gp->gv.pad_0[5] =
-                                                                 v)] == -1);
+                } while (((s16(*)[5]) grFz_803E7A68)[gp->gv.flatzone.xC7][(
+                             u8) (gp->gv.pad_0[5] = v)] == -1);
             }
             gp->gv.pad_0[6] = 0;
             gp->gv.flatzone.xCC =
                 (s16) rand_int(grFz_804D6AB0->unkC, grFz_804D6AB0->unk8);
             gp->gv.flatzone.xC5 =
                 (u8) ((s16(*)[5]) grFz_803E7A68)[gp->gv.flatzone.xC7]
-                                                     [(u8) gp->gv.pad_0[5]];
+                                                [(u8) gp->gv.pad_0[5]];
             grAnime_801C8138(gobj, gp->map_id, (s32) gp->gv.flatzone.xC5);
         }
     }

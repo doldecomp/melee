@@ -2444,11 +2444,10 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
                     (attack *
                      (stage *
                       ((0.01F * (float) (u32) hit->x24 *
-                        (ftd->x11C *
-                             ((decay - ((w * decay) / (1.0F + w))) *
-                              ((x118 * ftd->x110) +
-                               (ftd->x114 *
-                                (x118 * (float) (u32) hit->x28)))) +
+                        (ftd->x11C * ((decay - ((w * decay) / (1.0F + w))) *
+                                      ((x118 * ftd->x110) +
+                                       (ftd->x114 *
+                                        (x118 * (float) (u32) hit->x28)))) +
                          ftd->x120)) +
                        (float) (u32) hit->x2C)));
             } else {
@@ -2474,9 +2473,8 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
                           ((0.01F * (float) (u32) hit->x24 *
                             (ftd->x11C *
                                  ((decay - ((w * decay) / (1.0F + w))) *
-                                  ((ftd->x110 *
-                                    ((float) count +
-                                     fp->dmg.x1838_percentTemp)) +
+                                  ((ftd->x110 * ((float) count +
+                                                 fp->dmg.x1838_percentTemp)) +
                                    (ftd->x114 *
                                     ((float) (u32) entry->size_of_xC *
                                      ((float) count +
@@ -2538,18 +2536,17 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
                 float decay = ftd->xF8;
                 float x118 = ftd->x118;
 
-                result =
-                    defense *
-                    (attack *
-                     (stage *
-                      ((0.01F * (float) (u32) stack_hit.x24 *
-                        (ftd->x11C *
-                             ((decay - ((w * decay) / (1.0F + w))) *
-                              ((x118 * ftd->x110) +
-                               (ftd->x114 *
-                                (x118 * (float) (u32) stack_hit.x28)))) +
-                         ftd->x120)) +
-                       (float) (u32) stack_hit.x2C)));
+                result = defense *
+                         (attack *
+                          (stage *
+                           ((0.01F * (float) (u32) stack_hit.x24 *
+                             (ftd->x11C *
+                                  ((decay - ((w * decay) / (1.0F + w))) *
+                                   ((x118 * ftd->x110) +
+                                    (ftd->x114 *
+                                     (x118 * (float) (u32) stack_hit.x28)))) +
+                              ftd->x120)) +
+                            (float) (u32) stack_hit.x2C)));
             } else {
                 s32 count;
 
@@ -2573,9 +2570,8 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
                           ((0.01F * (float) (u32) stack_hit.x24 *
                             (ftd->x11C *
                                  ((decay - ((w * decay) / (1.0F + w))) *
-                                  ((ftd->x110 *
-                                    ((float) count +
-                                     fp->dmg.x1838_percentTemp)) +
+                                  ((ftd->x110 * ((float) count +
+                                                 fp->dmg.x1838_percentTemp)) +
                                    (ftd->x114 *
                                     ((float) (u32) stack_hit.unk_count *
                                      ((float) count +

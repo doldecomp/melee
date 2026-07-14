@@ -387,8 +387,7 @@ HSD_JObj* it_802B75FC(Item* ip, HSD_JObj* jobj_arg, s32 arg2, f32 scale)
             tail_link = link;
             link->next = prev_link;
             samus_grapple_init_link(link, jobj_arg, link_gobj, &zero_vel);
-            mpColl_SetECBSource_Fixed(last_coll, NULL, 1.5f, 1.5f, 1.5f,
-                                      1.5f);
+            mpColl_SetECBSource_Fixed(last_coll, NULL, 1.5f, 1.5f, 1.5f, 1.5f);
             attrs2 = ip->xC4_article_data->x4_specialAttributes;
             tail_jobj = HSD_JObjLoadJoint(attrs2->x70);
             HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849, tail_jobj);
@@ -404,8 +403,7 @@ HSD_JObj* it_802B75FC(Item* ip, HSD_JObj* jobj_arg, s32 arg2, f32 scale)
             link_coll = &link->coll_data;
             link->next = prev_link;
             samus_grapple_init_link(link, jobj_arg, link_gobj, &zero_vel);
-            mpColl_SetECBSource_Fixed(link_coll, NULL, 1.0f, 1.0f, 1.0f,
-                                      1.0f);
+            mpColl_SetECBSource_Fixed(link_coll, NULL, 1.0f, 1.0f, 1.0f, 1.0f);
             it_802B743C(link_gobj, ip, i % 3);
         }
         link->x1CC = -1;
@@ -620,7 +618,8 @@ void fn_802B805C(Item_GObj* gobj)
     samus_grapple_setup_pos(link, samus_grapple_vec2_as_vec3(&pos), m);
 
     switch (it_802B9328(link, samus_grapple_vec2_as_vec3(&pos), attrs,
-                        ip->owner->user_data)) {
+                        ip->owner->user_data))
+    {
     case 1:
         if (fp->motion_id == 0x165) {
             ftCo_800C3CC0(ip->owner);

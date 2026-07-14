@@ -1055,14 +1055,12 @@ void tyList_803147C4(void)
 void _tyList_803148E4(s32 arg0)
 {
     TyListState* state = (TyListState*) &_tyList_804A2AC0;
-    TyListGobjEntryInner* entry =
-        (TyListGobjEntryInner*) &_tyList_804A2D6C;
+    TyListGobjEntryInner* entry = (TyListGobjEntryInner*) &_tyList_804A2D6C;
     TyArchiveData* archive;
     HSD_GObj** gobj_2C4;
     PAD_STACK(8);
 
-    gobj_2C4 =
-        &((TyListGobjEntryInner*) &_tyList_804A2D6C)->x18;
+    gobj_2C4 = &((TyListGobjEntryInner*) &_tyList_804A2D6C)->x18;
     archive = (TyArchiveData*) Toy_sbss_804D6ED8;
 
     if (Toy_GetTrophyTotal() != 0) {

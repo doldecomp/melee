@@ -1834,8 +1834,8 @@ void fn_80025FAC(HSD_GObj* gobj, void* userdata, void* params)
                 (void) ud->x2C.pan;
                 (void) ud->x20;
                 (void) fn_80025FAC_inline(ud);
-                ud->voice_id = lbAudioAx_80023870(
-                    ud->x14, ud->x20, ud->x2C.pan, group);
+                ud->voice_id =
+                    lbAudioAx_80023870(ud->x14, ud->x20, ud->x2C.pan, group);
             }
             break;
         case 9:
@@ -2186,8 +2186,8 @@ void fn_800269AC(void)
 
     if (HSD_SynthSFXGetPendingLoadCount() != 0) {
         for (i = 0; i < 0x37; i++) {
-            if (s32_arr_803BB5D0[i][1] != 5 &&
-                lbl_80433A64[i] != -1 && lbl_80433984[i] == -1)
+            if (s32_arr_803BB5D0[i][1] != 5 && lbl_80433A64[i] != -1 &&
+                lbl_80433984[i] == -1)
             {
                 int retry;
                 for (retry = 0; retry < 0x40; retry++) {
@@ -2232,8 +2232,8 @@ static inline s32 fn_80026C04_find(char* base)
     for (priority = 4; priority >= 0; priority--) {
         s8(*arr_5d0)[4] = (s8(*)[4])(base + 0x2D0);
         for (slot = 0; slot < 0x37; slot++) {
-            if (priority == arr_5d0[slot][1] &&
-                lbl_804338A4[slot] == 1 && lbl_80433984[slot] == -1)
+            if (priority == arr_5d0[slot][1] && lbl_804338A4[slot] == 1 &&
+                lbl_80433984[slot] == -1)
             {
                 return slot;
             }

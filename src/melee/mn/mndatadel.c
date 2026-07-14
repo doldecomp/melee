@@ -596,8 +596,8 @@ mnDataDel_UpdateDescription(struct MnDataDelGObjUserData** user_data)
         HSD_SisLib_803A5CC4((*user_data)->xC);
     }
     sis_id = mnDataDel_803EF8C8[(*user_data)->x0];
-    text = HSD_SisLib_803A5ACC(0, 0, -9.5f, 9.1f, 17.0f, 364.68332f,
-                               38.38772f);
+    text =
+        HSD_SisLib_803A5ACC(0, 0, -9.5f, 9.1f, 17.0f, 364.68332f, 38.38772f);
     (*user_data)->xC = text;
     text->font_size.x = 0.0521f;
     text->font_size.y = 0.0521f;
@@ -750,13 +750,12 @@ void fn_8024FD40(HSD_GObj* gobj)
         HSD_SisLib_803A5CC4(*(HSD_Text**) (user_data + 0xC));
         return;
     }
-    frame = mn_8022EE84(jobj, &mnDataDel_803EF870.x0,
-                        (enum _HSD_TypeMask) 0x480);
+    frame =
+        mn_8022EE84(jobj, &mnDataDel_803EF870.x0, (enum _HSD_TypeMask) 0x480);
     for (i = 0; i < 6; i++) {
-        mn_8022EE84(*(HSD_JObj**) (user_data + mnDataDel_803EF8AC[i] * 4 +
-                                   0x10),
-                    mnDataDel_GetAnimSettings(data),
-                    (enum _HSD_TypeMask) 0x480);
+        mn_8022EE84(
+            *(HSD_JObj**) (user_data + mnDataDel_803EF8AC[i] * 4 + 0x10),
+            mnDataDel_GetAnimSettings(data), (enum _HSD_TypeMask) 0x480);
     }
     if (frame == data->x0.end_frame) {
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);

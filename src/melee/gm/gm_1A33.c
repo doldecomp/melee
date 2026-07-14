@@ -15,6 +15,7 @@
 #include <platform.h>
 
 #include "baselib/sislib.h"
+#include "dolphin/pad.h"
 #include "gm/gm_1A36.h"
 #include "gm/gm_1A45.h"
 #include "gm/types.h"
@@ -49,10 +50,9 @@ void gmCamera_801A33BC(void)
         1, gmCamera_VsCameraTextLayout[6], gmCamera_VsCameraTextLayout[7],
         gmCamera_VsCameraTextLayout[4], gmCamera_VsCameraTextLayout[5]);
     gmCamera_801A253C(&state, &blocks);
-    text = HSD_SisLib_803A5ACC(3, gmCamera_801A2640(),
-                               gmCamera_VsCameraTextLayout[10],
-                               gmCamera_VsCameraTextLayout[11], 0.0f,
-                               914.2857f, 64.0f);
+    text = HSD_SisLib_803A5ACC(
+        3, gmCamera_801A2640(), gmCamera_VsCameraTextLayout[10],
+        gmCamera_VsCameraTextLayout[11], 0.0f, 914.2857f, 64.0f);
     gmCamera_VsCameraData.bottom_text = text;
     text->default_alignment = 1;
     text->default_kerning = 1;
@@ -98,11 +98,15 @@ void gmCamera_801A34FC_OnFrame(void)
         mn_8022F268();
         *gmCamera_VsCameraData.x0 = 2;
         gm_801A4B60();
-    } else if (button = gm_801A36A0(4), (button & 0x1100) | (button & 0)) {
+    } else if (button = gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS),
+               (button & (HSD_PAD_START | HSD_PAD_A)) | (button & 0))
+    {
         lbAudioAx_80024030(1);
         *gmCamera_VsCameraData.x0 = 0;
         gm_801A4B60();
-    } else if (button = gm_801A36A0(4), (button & 0x200) | (button & 0)) {
+    } else if (button = gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS),
+               (button & PAD_BUTTON_B) | (button & 0))
+    {
         lbAudioAx_80024030(0);
         *gmCamera_VsCameraData.x0 = 1;
         gm_801A4B60();

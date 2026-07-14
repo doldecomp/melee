@@ -1176,9 +1176,8 @@ void _tyFigupon_80316C24(HSD_GObj* arg0)
     }
 }
 
-/* 3B8974 */ static const TyFiguponDigitInit tyFigupon_DigitInit = {
-    { 0, 0, 0, 0 }
-};
+/* 3B8974 */ static const TyFiguponDigitInit tyFigupon_DigitInit = { { 0, 0, 0,
+                                                                       0 } };
 /* 3FEB88 */ static u16 _tyFigupon_803FEB88[] = {
     4, 2, 3, 5, 6, 7, 8, 9, 13, 10, 11, 12, 14,
 };
@@ -1225,15 +1224,15 @@ void _tyFigupon_8031753C(void)
         HSD_GObjPLink_80390228((HSD_GObj*) ef4->x00);
         ef4->x00 = 0;
     }
-    panel.joint = HSD_ArchiveGetPublicAddress(
-        ef4->archive, "ToyFigurePonPanel_Top_joint");
+    panel.joint = HSD_ArchiveGetPublicAddress(ef4->archive,
+                                              "ToyFigurePonPanel_Top_joint");
     if (panel.joint != NULL) {
         TyFiguponDigitInit digits_s;
         s32 total;
         ef4->x00 = (u32) GObj_Create(9, 9, 0);
         jobj = HSD_JObjLoadJoint(panel.joint);
-        HSD_GObjObject_80390A70((HSD_GObj*) ef4->x00,
-                                 temp = HSD_GObj_804D7849, jobj);
+        HSD_GObjObject_80390A70((HSD_GObj*) ef4->x00, temp = HSD_GObj_804D7849,
+                                jobj);
         panel.render_cb = HSD_GObj_JObjCallback;
         GObj_SetupGXLink((HSD_GObj*) ef4->x00, panel.render_cb, 0x3C, 1);
         lb_8001204C(jobj, ef4->jobjs, _tyFigupon_803FEB88, 0xD);
@@ -1277,8 +1276,7 @@ void _tyFigupon_8031753C(void)
                                 "ToyFigurePonNm_Top_matanim_joint",
                                 "ToyFigurePonNm_Top_shapeanim_joint");
             if (digits_s.digits[i] != 0) {
-                HSD_JObjReqAnimAll(
-                    jobj, (f32) (50 - digits_s.digits[i] * 5));
+                HSD_JObjReqAnimAll(jobj, (f32) (50 - digits_s.digits[i] * 5));
             } else {
                 HSD_JObjReqAnimAll(jobj, 0.0f);
             }
@@ -1304,8 +1302,8 @@ void _tyFigupon_8031753C(void)
                                             "ToyFigurePonLever_Top_joint");
         ef4->x08 = (u32) GObj_Create(9, 9, 0);
         jobj = HSD_JObjLoadJoint(joint);
-        HSD_GObjObject_80390A70((HSD_GObj*) ef4->x08,
-                                 temp = HSD_GObj_804D7849, jobj);
+        HSD_GObjObject_80390A70((HSD_GObj*) ef4->x08, temp = HSD_GObj_804D7849,
+                                jobj);
         GObj_SetupGXLink((HSD_GObj*) ef4->x08, HSD_GObj_JObjCallback, 0x3C, 0);
         _tyFigupon_80314AA8(jobj, "ToyFigurePonLever_Top_animjoint",
                             "ToyFigurePonLever_Top_matanim_joint",
@@ -1396,8 +1394,7 @@ void _tyFigupon_80317A60(void)
 
     data->x4 = GObj_Create(1, 2, 0);
     cobj = lb_80013B14((HSD_CameraDescPerspective*) (strings + 0x4EC));
-    _tyFigupon_804D6F08 =
-        (HSD_CameraDescPerspective*) (strings + 0x4EC);
+    _tyFigupon_804D6F08 = (HSD_CameraDescPerspective*) (strings + 0x4EC);
     HSD_GObjObject_80390A70(data->x4, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(data->x4, Toy_803068E0, 0);
     gobj = data->x4;
@@ -1487,8 +1484,7 @@ static inline void tyFigupon_UpdateRemainingCount(struct un_804D6EF4_t* ef4)
     ef4->x54 = count - total_b54;
 }
 
-static inline TyFiguponED4* tyFigupon_InitScene(
-    struct un_804D6EF4_t** ef4_2)
+static inline TyFiguponED4* tyFigupon_InitScene(struct un_804D6EF4_t** ef4_2)
 {
     TyFiguponED4* ed4;
 
@@ -1551,7 +1547,7 @@ void tyFigupon_OnEnter_80317D80(void* arg0)
             ed4->x0 = (u32) GObj_Create(2, 3, 0);
             lobj = Toy_LoadLObjList(temp, 0);
             HSD_GObjObject_80390A70((HSD_GObj*) ed4->x0,
-                                     kind = HSD_GObj_804D784A, lobj);
+                                    kind = HSD_GObj_804D784A, lobj);
             {
                 HSD_GObj* gobj = (HSD_GObj*) ed4->x0;
                 GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0x34, 0);

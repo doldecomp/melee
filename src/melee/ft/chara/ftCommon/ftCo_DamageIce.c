@@ -163,8 +163,7 @@ static inline void ftCo_DamageIce_StartJump(Fighter* fp)
 
     effect_joint = fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint;
     ice_size = &fp->co_attrs.damageice_ice_size;
-    param = fp->x34_scale.y * *ice_size /
-            p_ftCommonData->damageice_ice_size;
+    param = fp->x34_scale.y * *ice_size / p_ftCommonData->damageice_ice_size;
 
     {
         u8 _[8] = { 0 };

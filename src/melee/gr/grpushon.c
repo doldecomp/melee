@@ -411,8 +411,7 @@ void fn_802190A0(Ground* gp, s32 joint_id, CollData* coll, s32 unk,
     }
 }
 
-static inline GXColor
-get_light_color(struct grPushOn_LightConfig* entry)
+static inline GXColor get_light_color(struct grPushOn_LightConfig* entry)
 {
     return entry->color;
 }

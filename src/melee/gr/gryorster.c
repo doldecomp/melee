@@ -206,8 +206,8 @@ void grYorster_802022A4(HSD_GObj* gobj)
         mpJointSetCb2(
             Ground_801C32D4(gp->map_id, gp->gv.yorster.elements[i].x14), gp,
             grYorster_802024F0);
-        grMaterial_801C8DE0(gp->gv.yorster.elements[i].x1C, 0.0f, 0.0f,
-                            0.0f, 0.0f, 0.0f, 0.0f, 5.0f);
+        grMaterial_801C8DE0(gp->gv.yorster.elements[i].x1C, 0.0f, 0.0f, 0.0f,
+                            0.0f, 0.0f, 0.0f, 5.0f);
         grMaterial_801C8E08(gp->gv.yorster.elements[i].x1C);
         grAnime_801C7FF8(gobj, gp->gv.yorster.elements[i].x14, 7, 1, 0.0f,
                          0.0f);

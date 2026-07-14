@@ -369,6 +369,7 @@ void fn_8025A974(HSD_GObj* gobj, int unused)
 extern HSD_CObjDesc* MenMain_cam;
 static const Vec3 mnStageSel_803B8550 = { 0, -13, 0 };
 
+/// @todo Only differs by register allocation.
 void mnStageSel_8025A998_OnEnter(void* arg0)
 {
     HSD_JObj* spDC[0x13];
@@ -507,7 +508,8 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
                                mnStageSel_804D6C98->x40.matanim_joint,
                                mnStageSel_804D6C98->x40.shapeanim_joint);
             temp_r22_6 = GET_JOBJ(gobj);
-            lb_8000C1C0(temp_r22_6, spDC[i]);
+            jobj = temp_r22_6;
+            lb_8000C1C0(jobj, spDC[i]);
             mnStageSel_803F06D0[i * 2].x0 = temp_r22_6->child->next;
             switch (mnStageSel_803F06D0[i * 2].x8) {
             case 0:
@@ -539,8 +541,8 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
                     mnStageSel_803F06D0[i * 2 + 1].x9 / 2 + 2);
                 break;
             }
-            HSD_JObjAnimAll(temp_r22_6);
-            HSD_ForeachAnim(temp_r22_6, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
+            HSD_JObjAnimAll(jobj);
+            HSD_ForeachAnim(jobj, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
                             AOBJ_ARG_AOV, 0, 0);
         }
 
@@ -766,7 +768,7 @@ void mnStageSel_8025B850_OnFrame(void)
         lb_800145F4();
         HSD_GObjPLink_80390228(mnStageSel_804D6C9C);
         mn_8022F268();
-        gm_801A42F8(GM_MENU);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         gm_801A4B60();
         return;
     }

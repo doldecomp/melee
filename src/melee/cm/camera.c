@@ -15,6 +15,7 @@
 
 #include "cm/types.h"
 #include "dolphin/mtx.h"
+#include "dolphin/pad.h"
 #include "dolphin/types.h"
 
 #include "ft/forward.h"
@@ -1429,8 +1430,9 @@ inline void reset_bounds_unless_fighter_near(CameraBounds* bounds,
     }
 }
 
-inline void reset_copy_bounds_unless_fighter_near(
-    CameraBounds* bounds, CameraTransformState* transform)
+inline void
+reset_copy_bounds_unless_fighter_near(CameraBounds* bounds,
+                                      CameraTransformState* transform)
 {
     Vec3 fighter_pos;
     BOOL fighter_near;
@@ -1554,7 +1556,7 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
     f32 substick_y;
     f32 temp_x;
     f32 temp_y;
-    s32 idx;
+    s32 current_slot;
     u64 temp_ret;
     PAD_STACK(8);
 
@@ -1563,14 +1565,16 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
         inputs->stick_y = 0.0f;
         inputs->substick_x = 0.0f;
         inputs->substick_y = 0.0f;
-        inputs->x18._u64 = 0;
-        inputs->x10._u64 = 0;
+        inputs->buttons_triggered = 0;
+        inputs->buttons_pressed = 0;
         return;
     }
     if (slot == 4) {
         /// @todo there is probably a bigger inline
-        for (idx = 0; idx < 4; idx++) {
-            pad = get_slot_pad(idx);
+        for (current_slot = 0; current_slot < PAD_MAX_CONTROLLERS;
+             current_slot++)
+        {
+            pad = get_slot_pad(current_slot);
             temp_x = get_stick_x(pad);
             temp_y = get_stick_y(pad);
             stick_x = temp_x;
@@ -1589,13 +1593,13 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
             }
         }
 
-        if (idx == 4) {
+        if (current_slot == 4) {
             stick_y = 0.0f;
             stick_x = 0.0f;
         }
 
-        for (idx = 0; idx < 4; idx++) {
-            pad = get_slot_pad(idx);
+        for (current_slot = 0; current_slot < 4; current_slot++) {
+            pad = get_slot_pad(current_slot);
             temp_x = pad->nml_subStickX;
             temp_y = pad->nml_subStickY;
             substick_x = temp_x;
@@ -1614,7 +1618,7 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
             }
         }
 
-        if (idx == 4) {
+        if (current_slot == 4) {
             substick_y = 0.0f;
             substick_x = 0.0f;
         }
@@ -1622,10 +1626,10 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
         inputs->stick_y = stick_y;
         inputs->substick_x = substick_x;
         inputs->substick_y = substick_y;
-        temp_ret = gm_801A3680(4U);
-        inputs->x10._u64 = temp_ret;
-        temp_ret = gm_801A36A0(4U);
-        inputs->x18._u64 = temp_ret;
+        temp_ret = gm_GetButtonsPressed(PAD_ALL_CONTROLLERS);
+        inputs->buttons_pressed = temp_ret;
+        temp_ret = gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS);
+        inputs->buttons_triggered = temp_ret;
         return;
     }
     pad = get_slot_pad(slot);
@@ -1633,10 +1637,10 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
     inputs->stick_y = pad->nml_stickY;
     inputs->substick_x = pad->nml_subStickX;
     inputs->substick_y = pad->nml_subStickY;
-    temp_ret = gm_801A3680(slot);
-    inputs->x10._u64 = temp_ret;
-    temp_ret = gm_801A36A0(slot);
-    inputs->x18._u64 = temp_ret;
+    temp_ret = gm_GetButtonsPressed(slot);
+    inputs->buttons_pressed = temp_ret;
+    temp_ret = gm_GetButtonsTriggered(slot);
+    inputs->buttons_triggered = temp_ret;
 }
 
 s32 Camera_8002BA00(s32 slot, s32 arg1)
@@ -1891,8 +1895,8 @@ void Camera_8002C1A8(void)
     dir = 0;
 
     {
-        u64 x18_btns = inputs.x18._u64;
-        u64 x10_btns = inputs.x10._u64;
+        u64 x18_btns = inputs.buttons_triggered;
+        u64 x10_btns = inputs.buttons_pressed;
 
         if ((x18_btns & PAD_TRIGGER_R) != 0) {
             dir = 1;
@@ -1951,8 +1955,7 @@ void Camera_8002C1A8(void)
         cm_80452C68.x304 = Camera_8002BA00(cm_80452C68.x304, dir);
         slot = cm_80452C68.x304;
         abs_f1 = 0.0f;
-        cm_80452C68.x314.x = cm_80452C68.x314.y = cm_80452C68.x314.z =
-            abs_f1;
+        cm_80452C68.x314.x = cm_80452C68.x314.y = cm_80452C68.x314.z = abs_f1;
         cm_80452C68.pause_eye_offset.x = abs_f1;
         cm_80452C68.pause_eye_offset.y = 5.0f;
         cm_80452C68.pause_eye_offset.z = 20.0f;
@@ -2108,9 +2111,9 @@ void Camera_8002C5B4(Camera_x2D0* arg0)
             (eye_offset->x * eye_offset->x + *eye_offset_y * *eye_offset_y),
         &sqrt_tmp[0]);
 
-    xz_dist = Camera_sqrtf_store(
-        eye_offset->x * eye_offset->x + *eye_offset_z * *eye_offset_z,
-        &sqrt_tmp[2]);
+    xz_dist = Camera_sqrtf_store(eye_offset->x * eye_offset->x +
+                                     *eye_offset_z * *eye_offset_z,
+                                 &sqrt_tmp[2]);
 
     PSVECCrossProduct(eye_offset, &cam->pause_up, &cross1);
     lbVector_Normalize(&cross1);
@@ -2286,18 +2289,18 @@ void Camera_8002CB0C(CameraBounds* bounds)
     stick_y = inputs.stick_y;
 
     {
-        u64 x18_btns = inputs.x18._u64;
-        u64 x10_btns = inputs.x10._u64;
+        u64 newly_pressed_btns = inputs.buttons_triggered;
+        u64 pressed_btns = inputs.buttons_pressed;
 
-        if ((x18_btns & PAD_TRIGGER_R) != 0) {
+        if ((newly_pressed_btns & PAD_TRIGGER_R) != 0) {
             dir = 1;
-        } else if ((x18_btns & PAD_TRIGGER_L) != 0) {
+        } else if ((newly_pressed_btns & PAD_TRIGGER_L) != 0) {
             dir = -1;
         }
 
-        if ((x10_btns & PAD_BUTTON_X) != 0) {
+        if ((pressed_btns & PAD_BUTTON_X) != 0) {
             zoom_dir = 1.0f;
-        } else if ((x10_btns & PAD_BUTTON_Y) != 0) {
+        } else if ((pressed_btns & PAD_BUTTON_Y) != 0) {
             zoom_dir = -1.0f;
         }
     }
@@ -2546,7 +2549,8 @@ after_loop:
             position_offset.z *= coeff;
             lbVector_Add(position, &position_offset);
 
-            lbVector_Diff(tgt_interest, &transform->interest, &interest_offset);
+            lbVector_Diff(tgt_interest, &transform->interest,
+                          &interest_offset);
             coeff = globals->x84;
             interest_offset.x *= coeff;
             interest_offset.y *= coeff;
@@ -2610,8 +2614,7 @@ check_done:
     Camera_8002958C(&bounds2, transform_copy);
     cam->transform_copy.target_fov = *fov_ptr;
     value = Camera_8002CDDC_GetFovDeltaCopy(cam);
-    cam->transform_copy.fov =
-        value * *smooth_ptr + cam->transform_copy.fov;
+    cam->transform_copy.fov = value * *smooth_ptr + cam->transform_copy.fov;
     Camera_80029BC4(&bounds2, transform_copy);
 
     if (Camera_80030AF8()) {
@@ -2762,8 +2765,7 @@ void Camera_8002D318(void* unused)
             smooth = globals->x64;
             dx = *target_x - cam->transform.interest.x;
             dy = *target_y - cam->transform.interest.y;
-            dz = cam->transform.target_interest.z -
-                 cam->transform.interest.z;
+            dz = cam->transform.target_interest.z - cam->transform.interest.z;
             cam->transform.interest.x += dx * smooth;
             cam->transform.interest.y += dy * smooth;
             cam->transform.interest.z += dz * smooth;
@@ -2875,8 +2877,8 @@ fallback: {
     smooth_ptr = &globals->x44;
     fov_ptr = &globals->x40;
     cam->transform.target_fov = *fov_ptr;
-    cam->transform.fov = cam->transform.fov +
-                         Camera_8002D318_GetFovDelta(cam) * *smooth_ptr;
+    cam->transform.fov =
+        cam->transform.fov + Camera_8002D318_GetFovDelta(cam) * *smooth_ptr;
     Camera_80029BC4(&bounds, transform);
 
     if (Camera_80030AF8()) {
@@ -3265,19 +3267,19 @@ check_done2:
 }
 }
 
-static inline void smooth_fixed_camera_interest(
-    CameraTransformState* transform_copy, Camera* cam,
-    CameraUnkGlobals* globals)
+static inline void
+smooth_fixed_camera_interest(CameraTransformState* transform_copy, Camera* cam,
+                             CameraUnkGlobals* globals)
 {
     f32 dx, dy, dz;
 
     Stage_80224CAC(&transform_copy->target_interest);
-    dx = cam->transform_copy.target_interest.x -
-         cam->transform_copy.interest.x;
-    dy = cam->transform_copy.target_interest.y -
-         cam->transform_copy.interest.y;
-    dz = cam->transform_copy.target_interest.z -
-         cam->transform_copy.interest.z;
+    dx =
+        cam->transform_copy.target_interest.x - cam->transform_copy.interest.x;
+    dy =
+        cam->transform_copy.target_interest.y - cam->transform_copy.interest.y;
+    dz =
+        cam->transform_copy.target_interest.z - cam->transform_copy.interest.z;
     cam->transform_copy.interest.x += dx * globals->x74;
     cam->transform_copy.interest.y =
         dy * globals->x74 + cam->transform_copy.interest.y;
@@ -3285,7 +3287,11 @@ static inline void smooth_fixed_camera_interest(
         dz * globals->x74 + cam->transform_copy.interest.z;
 }
 
+#ifdef __MWERKS__
 void Camera_8002DDC4()
+#else
+void Camera_8002DDC4(void* unused)
+#endif
 {
     Vec3* interest;
     CameraBounds bounds;

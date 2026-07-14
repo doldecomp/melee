@@ -69,12 +69,12 @@ int ifStock_802F7EFC(int arg0, int arg1)
     stock = &ifStock_804A1378;
     arg0_data = (struct ifStock_804A1378_x204*) stock;
     arg0_data += arg0;
-    arg0_data = (struct ifStock_804A1378_x204*) ((unsigned char*) arg0_data +
-                                                 0x204);
+    arg0_data =
+        (struct ifStock_804A1378_x204*) ((unsigned char*) arg0_data + 0x204);
     arg1_data = (struct IfStockStealData*) stock;
     arg1_data += arg1;
-    arg1_data = (struct IfStockStealData*) ((unsigned char*) arg1_data +
-                                             0x204);
+    arg1_data =
+        (struct IfStockStealData*) ((unsigned char*) arg1_data + 0x204);
     if (Player_GetStocks(arg1) == 0) {
         return 1;
     }
@@ -242,9 +242,8 @@ void ifStock_802F8298(HSD_GObj* gobj)
             HSD_JObjClearFlagsAll(jobj2, JOBJ_HIDDEN);
             if (stock->x204[user_data->player].x0[i + 5] <= 10) {
                 struct IfStockStealData* data =
-                    (struct IfStockStealData*) &stock
-                        ->x204[user_data->player];
-                lbVector_8000DE38((float (*)[4]) &data->anim[i - 5], &vecA,
+                    (struct IfStockStealData*) &stock->x204[user_data->player];
+                lbVector_8000DE38((float (*)[4]) & data->anim[i - 5], &vecA,
                                   0.1f * data->x0[i + 5]);
                 HSD_JObjGetTranslation(stock->player[user_data->player].x4[0],
                                        &vecB);
@@ -972,8 +971,7 @@ static inline void ifStock_CreateMain(int i)
         }
         ifStock_804A1ACC.x10C[i] = ifStock_802F96D0(
             ifStock_804A1ACC.x1[i], ifStock_804A1ACC.x83[i],
-            2.45f * (i % 5) + -21.0f,
-            -(2.45f * (int) (i / 5) - 11.0f));
+            2.45f * (i % 5) + -21.0f, -(2.45f * (int) (i / 5) - 11.0f));
         if (i == 0) {
             HSD_GObj_SetupProc(ifStock_804A1ACC.x10C[i], fn_802FA8C0, 17);
         }
@@ -1081,7 +1079,7 @@ void ifStock_802FAEC4(void)
         ifStock_802FA5BC(1); // not inlined
     }
     ifStock_CreatePlayers();
-    if (gm_80182510()) {
+    if (gm_IsMultimanSmashMode()) {
         ifStock_CreateCoin();
     }
 }

@@ -424,7 +424,8 @@ void grPura_80212CD4(HSD_GObj* arg0)
         }
         node = child;
         for (j = 0; j < 25 && node != NULL;
-             j++, node = node == NULL ? NULL : node->next) {
+             j++, node = node == NULL ? NULL : node->next)
+        {
             if ((gp->gv.pura3.x128[j] = Camera_80029020()) != NULL) {
                 gp->gv.pura3.xC4[j] = node;
                 lb_8000B1CC(gp2->gv.pura3.xC4[j], NULL, &subject_pos);

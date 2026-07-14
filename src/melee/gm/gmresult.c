@@ -1,5 +1,5 @@
-#define fn_80174468(a, b, c, d, e, f)                                      \
-    fn_80174468(s32 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3, \
+#define fn_80174468(a, b, c, d, e, f)                                         \
+    fn_80174468(s32 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,  \
                 struct StatsList* list, s32 entry_idx)
 #include "gmresult.h"
 #undef fn_80174468
@@ -316,8 +316,7 @@ void fn_80174468(s32 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
                         break;
                     }
                 }
-                stat_value =
-                    *(s32*) &base[player_offset + loop_i * 4 + 0x104];
+                stat_value = *(s32*) &base[player_offset + loop_i * 4 + 0x104];
                 if (stat_value < 0) {
                     value_id = HSD_SisLib_803A6B98(text3, const_zero,
                                                    const_neg30, "%s%d",
@@ -340,9 +339,9 @@ void fn_80174468(s32 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
         }
     } else if (list->mode != 2) {
         if (entry->get != NULL) {
-            label_id =
-                HSD_SisLib_803A6B98(text2, const_zero, const_neg30, "%s",
-                                    ((u8 * (*) (s32))(Event) entry->get)(slot));
+            label_id = HSD_SisLib_803A6B98(
+                text2, const_zero, const_neg30, "%s",
+                ((u8 * (*) (s32))(Event) entry->get)(slot));
         }
     }
 
@@ -1185,8 +1184,7 @@ void fn_80175DC8(HSD_GObj* gobj)
         jobj = HSD_JObjLoadJoint(model->joint);
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
         GObj_SetupGXLink(gobj, fn_80175038, 11, 0);
-        lb_8000C07C(jobj, 0, model->anims, model->matanims,
-                    model->shapeanims);
+        lb_8000C07C(jobj, 0, model->anims, model->matanims, model->shapeanims);
     }
     HSD_JObjReqAnimAll(jobj, 0.0F);
     HSD_JObjAnimAll(jobj);

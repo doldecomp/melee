@@ -432,9 +432,8 @@ void grBigBlueRoute_8020BF38(Ground_GObj* gobj)
 void grBigBlueRoute_8020C13C(Ground_GObj* arg) {}
 
 static s16 grBb_Route_carJObjIds[30] = {
-    4,  5,  6,  8,  9,  10, 11, 12, 13, 14, 3,
-    15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
-    26, 27, 28, 29, 34, 35, 36, 37,
+    4,  5,  6,  8,  9,  10, 11, 12, 13, 14, 3,  15, 16, 17, 18,
+    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 34, 35, 36, 37,
 };
 
 void grBigBlueRoute_8020C140(Ground_GObj* gobj)
@@ -566,7 +565,7 @@ s32 grBigBlueRoute_8020C530(Ground_GObj* arg0)
 /// @todo Register allocation and addressing-mode choices for RouteEntry
 /// stores.
 static inline void grBigBlueRoute_SpawnRoute(s32 route_idx, Ground* gp,
-                                              Ground_GObj* gobj)
+                                             Ground_GObj* gobj)
 {
     PAD_STACK(8);
 

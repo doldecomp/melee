@@ -442,8 +442,7 @@ static inline void inline2(void)
             effect_index = sp28[i].x8;
             type = sp28[i].x0;
             entry_num = DVDConvertPathToEntrynum(lbFile_80016204(filename));
-            lbDvd_80017740(type, entry_num, 3, 3, 0, 1, 8, 0x40,
-                           effect_index);
+            lbDvd_80017740(type, entry_num, 3, 3, 0, 1, 8, 0x40, effect_index);
         }
     }
 }

@@ -192,15 +192,13 @@ static inline int lbSnap_GetTiledRGBOffset(int x, int y, int tile_stride)
 {
     int tile_x = x / 4;
     int tile_base = tile_x * tile_stride;
-    return ((tile_base + (y / 4)) << 5) +
-           (lbSnap_GetTiledRemainder(x) * 8) +
+    return ((tile_base + (y / 4)) << 5) + (lbSnap_GetTiledRemainder(x) * 8) +
            (lbSnap_GetTiledRemainder(y) * 2);
 }
 
 static inline int lbSnap_GetTiledYOff(int tile_column, int y)
 {
-    return (((y / 4) + tile_column) << 5) +
-           (lbSnap_GetTiledRemainder(y) * 2);
+    return (((y / 4) + tile_column) << 5) + (lbSnap_GetTiledRemainder(y) * 2);
 }
 
 static inline u8* lbSnap_GetMemSnapIconData(void)

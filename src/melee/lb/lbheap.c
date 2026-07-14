@@ -106,9 +106,8 @@ void lbHeap_80015900(void)
     destroy_i = 2;
     destroy_cursor = (u32) &lbHeap_80431FA0.heap_array[destroy_i] - 0x10;
     heap_offset = 0x38;
-    for (; destroy_i < 6;
-         destroy_i++, destroy_cursor += sizeof(struct Heap),
-        heap_offset += sizeof(struct Heap))
+    for (; destroy_i < 6; destroy_i++, destroy_cursor += sizeof(struct Heap),
+                          heap_offset += sizeof(struct Heap))
     {
         if (((struct Heap*) (destroy_cursor + 0x10))->transient == 1) {
             destroy_view = lbHeap_GetHeapOffsetView(heap_offset);

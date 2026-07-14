@@ -203,6 +203,7 @@ static void sdata2_order(void)
     (void) S32_TO_F32;
 }
 
+/// @todo Only differs by register allocation.
 void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3)
 {
     ItemKind prev_kind;

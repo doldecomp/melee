@@ -278,11 +278,11 @@ static inline bool scrollDown(int slot, float amount)
     ResultsData* data = &lbl_8046DBE8;
     amount *= scroll_speed;
 
-    scroll_max = fn_80174A60(fn_801748EC(&lbl_803D6878,
-                                         data->player_data[slot].page,
-                                         slot | arg),
-                             slot) -
-                 10;
+    scroll_max =
+        fn_80174A60(fn_801748EC(&lbl_803D6878, data->player_data[slot].page,
+                                slot | arg),
+                    slot) -
+        10;
     if (data->player_data[slot].scroll_offset < scroll_max) {
         data->player_data[slot].scroll_offset += amount;
         if (data->player_data[slot].scroll_offset > scroll_max) {
@@ -1490,8 +1490,7 @@ HSD_GObj* fn_8017A318(s32 arg0)
             eye.x += x_off;
             interest.x += x_off;
 
-            eye.y = eye.y +
-                    (y_off = data->slot_off[kind_data][1][slot]);
+            eye.y = eye.y + (y_off = data->slot_off[kind_data][1][slot]);
             interest.y += y_off;
         }
     }
@@ -1662,14 +1661,14 @@ static s32 lbl_804D3FF4 = 0x00060000;
 static s32 lbl_804D3FF8 = 0x000E000E;
 static s32 lbl_804D3FFC = 0x00060000;
 
-static inline struct MatchTeamData* fn_8017AA78_get_team_standings(
-    ResultsDisplayData* disp)
+static inline struct MatchTeamData*
+fn_8017AA78_get_team_standings(ResultsDisplayData* disp)
 {
     return disp->state.match_end.team_standings;
 }
 
-static inline PackedS16x4* fn_8017AA78_get_score_entry(
-    int i, lbl_8046E3AC_t* state)
+static inline PackedS16x4* fn_8017AA78_get_score_entry(int i,
+                                                       lbl_8046E3AC_t* state)
 {
     return &state->score_tbl[i];
 }

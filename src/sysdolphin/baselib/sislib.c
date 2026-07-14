@@ -1030,8 +1030,8 @@ static inline SisBlock* HSD_SisLib_SisBlockPtr(void* ptr)
 
 static inline void HSD_SisLib_AdjustNext(SisBlock* alloc, s32 amount)
 {
-    alloc->next = HSD_SisLib_SisBlockPtr(
-        HSD_SisLib_BytePtr(alloc->next) + amount);
+    alloc->next =
+        HSD_SisLib_SisBlockPtr(HSD_SisLib_BytePtr(alloc->next) + amount);
 }
 
 s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)

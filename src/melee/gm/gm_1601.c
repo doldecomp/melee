@@ -495,9 +495,9 @@ char* gm_80160438(s32 ckind)
     }
 }
 
-bool gm_80160474(CharacterKind ckind, GameModeKind scene)
+bool gm_80160474(CharacterKind ckind, GameModeKind mode)
 {
-    switch (scene) {
+    switch (mode) {
     case GM_CLASSIC_GOVER:
     case GM_CLASSIC:
         return lbl_803B7978[ckind];
@@ -509,11 +509,11 @@ bool gm_80160474(CharacterKind ckind, GameModeKind scene)
     }
 }
 
-char* gm_801604DC(CharacterKind ckind, GameModeKind scene)
+char* gm_801604DC(CharacterKind ckind, GameModeKind mode)
 {
     s32 trophy_id;
 
-    switch (scene) {
+    switch (mode) {
     case GM_CLASSIC_GOVER:
     case GM_CLASSIC:
         trophy_id = lbl_803B7978[ckind];
@@ -526,14 +526,14 @@ char* gm_801604DC(CharacterKind ckind, GameModeKind scene)
         trophy_id = lbl_803B7A00[ckind];
         break;
     }
-    return Toy_8030813C(trophy_id, scene) + 4;
+    return Toy_8030813C(trophy_id, mode) + 4;
 }
 
-char* gm_80160564(CharacterKind ckind, GameModeKind scene)
+char* gm_80160564(CharacterKind ckind, GameModeKind mode)
 {
     s32 toy_id;
 
-    switch (scene) {
+    switch (mode) {
     case GM_CLASSIC_GOVER:
     case GM_CLASSIC:
         toy_id = lbl_803B7978[ckind];
@@ -546,7 +546,7 @@ char* gm_80160564(CharacterKind ckind, GameModeKind scene)
         toy_id = lbl_803B7A00[ckind];
         break;
     }
-    return Toy_8030813C(toy_id, scene) + 0x24;
+    return Toy_8030813C(toy_id, mode) + 0x24;
 }
 
 u8 fn_801605EC(s32 arg0)
@@ -1427,7 +1427,7 @@ void gm_8016260C(u8 arg0, u8 arg1)
         *p = (*p + 1 > 0xFFFFFFFFU) ? 0xFFFFFFFFU : *p + 1;
         return;
     }
-    if (gm_801A4310() == 0x1F) {
+    if (gm_GetCurrentGameMode() == GM_STAMINA_VS) {
         counter = gmMainLib_8015CD5C();
     } else {
         switch ((s32) arg0) {
@@ -2811,7 +2811,7 @@ s32 fn_8016588C(lbl_8046B6A0_24C_t* arg0, s32 arg1)
 
     PAD_STACK(0x18);
 
-    if (gm_801A4310() == 0x1F) {
+    if (gm_GetCurrentGameMode() == GM_STAMINA_VS) {
         if (arg0->x58[arg1].x28 != 0) {
             v = arg0->x58[arg1].x28 / 60 + 0xFF000001;
         } else {
@@ -2959,7 +2959,7 @@ void fn_80165E7C(MatchEnd* arg0)
         if ((u8) arg0->player_standings[i].slot_type != 3) {
             u8 team = arg0->player_standings[i].team;
 
-            if (gm_801A4310() == GM_STAMINA_VS || arg0->x5 == 1) {
+            if (gm_GetCurrentGameMode() == GM_STAMINA_VS || arg0->x5 == 1) {
                 int player_score = new_var = arg0->player_standings[i].score;
 
                 if (player_score < 0) {
@@ -3467,8 +3467,8 @@ void gm_80167320(int slot, bool arg1)
 
 void gm_80167470(s32 arg0, s32 arg1)
 {
-    switch ((s32) gm_801A4310()) {
-    case 0x1F:
+    switch ((s32) gm_GetCurrentGameMode()) {
+    case GM_STAMINA_VS:
         gm_801B97C4(arg0, arg1);
         break;
     }
@@ -5058,16 +5058,14 @@ s32 gm_8016A22C(s8 k0, s8 k1, s8 k2, u8 a3, u8 a4, int a5, int mode, int a7,
     switch (header->bytes[0xB]) {
     case 0:
         for (i = 0; i < 3; i++) {
-            fn_801695BC(header->bytes[i], p87, p8b, bufs->xA2,
-                        bufs->x20);
+            fn_801695BC(header->bytes[i], p87, p8b, bufs->xA2, bufs->x20);
         }
         break;
 
     case 1: {
         u8 c = gp->xC;
         for (i = 0; i < 3; i++) {
-            fn_801697FC(header->bytes[i], c, p87, p8b,
-                        (s8*) bufs->x20);
+            fn_801697FC(header->bytes[i], c, p87, p8b, (s8*) bufs->x20);
         }
         break;
     }
@@ -5175,14 +5173,13 @@ void fn_8016A4C8(void)
                 }
                 Player_SetFlagsBit1(spawn_slot);
                 Player_SetTeam(spawn_slot, 4);
-                Ground_801C2D24(
-                    spawn_slot + fn_8016A4C8_spawn_offset(gp), &spawn_pos);
+                Ground_801C2D24(spawn_slot + fn_8016A4C8_spawn_offset(gp),
+                                &spawn_pos);
                 spawn_pos.y = Stage_GetCamBoundsTopOffset();
                 Player_80032768(spawn_slot, &spawn_pos);
                 Player_SetSlottype(spawn_slot, Gm_PKind_Cpu);
                 Player_SetPlayerCharacter(
-                    spawn_slot,
-                    (CharacterKind) (s8) (u8) gp->xA2[*remaining]);
+                    spawn_slot, (CharacterKind) (s8) (u8) gp->xA2[*remaining]);
                 Player_SetStocks(spawn_slot, 1);
                 cos = gp->x20[*remaining];
                 Player_SetCostumeId(spawn_slot, cos);
@@ -5269,9 +5266,8 @@ void fn_8016A4C8(void)
                 if (Player_GetPlayerCharacter(spawn_slot) == CKIND_KIRBY &&
                     (u8) gp->xE != 0)
                 {
-                    Player_SetUnk4D(
-                        spawn_slot,
-                        (s32) (s8) (u8) gp->x124[*remaining]);
+                    Player_SetUnk4D(spawn_slot,
+                                    (s32) (s8) (u8) gp->x124[*remaining]);
                     Player_SetFlagsAEBit1(spawn_slot, 1U);
                 }
                 if (((struct lbl_8046B488_event_player_init_cb_t*) gp)

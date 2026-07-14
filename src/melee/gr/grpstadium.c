@@ -1807,9 +1807,9 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
             {
                 slot_type = Player_GetPlayerSlotType(player_num);
                 color_state = gm_8016B168();
-                colors[0].color = gm_80160968(gm_80160854(
-                    player_num, Player_GetTeam(player_num), color_state,
-                    slot_type));
+                colors[0].color = gm_80160968(
+                    gm_80160854(player_num, Player_GetTeam(player_num),
+                                color_state, slot_type));
                 colors[0].color.r = grStadium_ScaleColor(colors[0].color.r);
                 colors[0].color.g = grStadium_ScaleColor(colors[0].color.g);
                 colors[0].color.b = grStadium_ScaleColor(colors[0].color.b);
@@ -1817,10 +1817,9 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
                 gp2->win_dynamic_p->text_color = colors[0].color;
                 character_name = gm_80160A60(player_num);
                 if (character_name != NULL) {
-                    HSD_SisLib_803A6B98(
-                        gp2->win_dynamic_p, grPs_804DAF58,
-                        (f32) (vertical_offset + text_offset), "%s",
-                        character_name);
+                    HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF58,
+                                        (f32) (vertical_offset + text_offset),
+                                        "%s", character_name);
                 }
                 text_offset += 0x20;
             }
@@ -2007,7 +2006,7 @@ void grStadium_801D435C(Ground_GObj* arg0)
         int i;
         cur = lbl_803E1630;
         for (i = 0; i < ARRAY_SIZE(lbl_803E1630); i++) {
-            gp->u.stadium.xD4 = cur++->scalar + gp->u.stadium.xD4;
+            gp->u.stadium.xD4 += cur++->scalar;
         }
     }
     var_r28 = 0;

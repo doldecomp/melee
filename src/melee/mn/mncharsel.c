@@ -3901,10 +3901,9 @@ void fn_802633B0(HSD_GObj* gobj)
                     }
                 }
                 trunc = (s32) tag->x8;
-                HSD_SisLib_803A746C(
-                    (HSD_Text*) tag->name_ls, j + 2, 10.0f,
-                    (32.0f * (f32) (j + 1)) +
-                        (f32) ((trunc % 32) - 0x20));
+                HSD_SisLib_803A746C((HSD_Text*) tag->name_ls, j + 2, 10.0f,
+                                    (32.0f * (f32) (j + 1)) +
+                                        (f32) ((trunc % 32) - 0x20));
                 j += 1;
             } while (j < 9);
         }
@@ -5185,7 +5184,7 @@ void mnCharSel_802669F4_OnFrame(void)
         mn_8022F138(1, 8);
         HSD_SisLib_803A5E70();
         mn_8022F268();
-        gm_801A42F8(GM_MENU);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         gm_801A4B60();
         return;
     }

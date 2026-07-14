@@ -96,57 +96,56 @@ static inline bool zero_throw_flag_b0(Fighter* fp)
 
 void ftCo_800CE650(HSD_GObj* gobj)
 {
-    Vec3 effect_pos;
-    Vec3 item_pos;
-    f32 effect_scale;
+    Vec3 spC4;
+    Vec3 spB8;
+    f32 spB4;
     UNUSED u8 padA[8];
-    Vec3 item_pos_start;
-    Vec3 effect_pos_start;
-    f32 effect_scale_start;
-    Vec3 joint_pos_start;
-    Vec3 shot_item_pos_start;
-    Vec3 shot_pos_start;
+    Vec3 spA0;
+    Vec3 sp94;
+    f32 sp90;
+    Vec3 sp84;
+    Vec3 sp78;
+    Vec3 sp6C;
     UNUSED u8 padB[8];
-    Vec3 item_pos_repeat;
-    Vec3 effect_pos_repeat;
-    f32 effect_scale_repeat;
-    Vec3 joint_pos_repeat;
-    Vec3 shot_item_pos_repeat;
-    Vec3 shot_pos_repeat;
+    Vec3 sp58;
+    Vec3 sp4C;
+    f32 sp48;
+    Vec3 sp3C;
+    Vec3 sp30;
+    Vec3 sp24;
 
-    Fighter* fp;
+    Fighter* temp_r3;
     int frame;
     int interval;
 
-    fp = GET_FIGHTER(gobj);
-    if (fp->item_gobj != NULL) {
-        if (!(fp->input.held_inputs & HSD_PAD_A)) {
-            fp->mv.co.itemthrow.xC = 1;
+    temp_r3 = GET_FIGHTER(gobj);
+    if (temp_r3->item_gobj != NULL) {
+        if (!(temp_r3->input.held_inputs & HSD_PAD_A)) {
+            temp_r3->mv.co.itemthrow.xC = 1;
         }
-        if (fp->mv.co.itemthrow.x10 < p_ftCommonData->x5B0) {
-            fp->mv.co.itemthrow.x10 += 1.0F;
+        if (temp_r3->mv.co.itemthrow.x10 < p_ftCommonData->x5B0) {
+            temp_r3->mv.co.itemthrow.x10 += 1.0F;
         }
-        if (fp->mv.co.itemthrow.x10 < p_ftCommonData->x5B0 &&
-            (fp->input.x668 & HSD_PAD_A))
+        if (temp_r3->mv.co.itemthrow.x10 < p_ftCommonData->x5B0 &&
+            (temp_r3->input.x668 & HSD_PAD_A))
         {
-            fp->mv.co.itemthrow.x10 = 0.0F;
+            temp_r3->mv.co.itemthrow.x10 = 0.0F;
         }
-        if (zero_throw_flag_b0(fp)) {
-            fp->mv.co.itemthrow.x14 = 1;
+        if (zero_throw_flag_b0(temp_r3)) {
+            temp_r3->mv.co.itemthrow.x14 = 1;
 
             {
                 Fighter* fp = GET_FIGHTER(gobj);
 
                 if (it_8026B594(fp->item_gobj) == 0) {
-                    effect_scale_start = 0.0F;
-                    lb_8000B1CC(fp->parts->joint, NULL, &joint_pos_start);
-                    efSync_Spawn(0x3FF, gobj, &joint_pos_start,
-                                 &fp->facing_dir, &effect_scale_start);
+                    sp90 = 0.0F;
+                    lb_8000B1CC(fp->parts->joint, NULL, &sp84);
+                    efSync_Spawn(0x3FF, gobj, &sp84, &fp->facing_dir, &sp90);
                     ft_PlaySFX(fp, 0xEE, 0x7F, 0x40);
                 } else {
-                    it_80292EF8(fp->item_gobj, &item_pos_start);
-                    ftCo_800CDE94(fp, &item_pos_start, &effect_pos_start);
-                    efSync_Spawn(0x405, gobj, &effect_pos_start);
+                    it_80292EF8(fp->item_gobj, &spA0);
+                    ftCo_800CDE94(fp, &spA0, &sp94);
+                    efSync_Spawn(0x405, gobj, &sp94);
                     ft_PlaySFX(fp, 0xEF, 0x7F, 0x40);
                 }
             }
@@ -154,11 +153,10 @@ void ftCo_800CE650(HSD_GObj* gobj)
             {
                 Fighter* fp = GET_FIGHTER(gobj);
 
-                it_80292EF8(fp->item_gobj, &shot_item_pos_start);
-                ftCo_800CDE94(fp, &shot_item_pos_start, &shot_pos_start);
+                it_80292EF8(fp->item_gobj, &sp78);
+                ftCo_800CDE94(fp, &sp78, &sp6C);
                 if (!it_8026B594(fp->item_gobj)) {
-                    it_80292F14(fp->item_gobj, &shot_pos_start,
-                                fp->facing_dir);
+                    it_80292F14(fp->item_gobj, &sp6C, fp->facing_dir);
                 } else {
                     ftCommon_8007ECD4(fp, 1);
                 }
@@ -172,55 +170,50 @@ void ftCo_800CE650(HSD_GObj* gobj)
                 }
             }
 
-            if (it_8026B594(fp->item_gobj) == 0) {
-                effect_scale = 0.0f;
-                lb_8000B1CC(fp->parts->joint, NULL, &effect_pos);
-                efSync_Spawn(0x3FD, gobj, &effect_pos, &fp->facing_dir,
-                             &effect_scale);
-                it_80292EF8(fp->item_gobj, &item_pos);
-                ftCo_800CDE94(fp, &item_pos, &effect_pos);
-                efSync_Spawn(0x3F3, gobj, &effect_pos);
-                ftCommon_8007EBAC(fp, 1, 0);
+            if (it_8026B594(temp_r3->item_gobj) == 0) {
+                spB4 = 0.0f;
+                lb_8000B1CC(temp_r3->parts->joint, NULL, &spC4);
+                efSync_Spawn(0x3FD, gobj, &spC4, &temp_r3->facing_dir, &spB4);
+                it_80292EF8(temp_r3->item_gobj, &spB8);
+                ftCo_800CDE94(temp_r3, &spB8, &spC4);
+                efSync_Spawn(0x3F3, gobj, &spC4);
+                ftCommon_8007EBAC(temp_r3, 1, 0);
             }
             ftAnim_SetAnimRate(gobj, 0.0f);
         }
-        if (fp->mv.co.itemthrow.x14 == 1) {
-            fp->mv.co.itemthrow.x4 -= 1.0f;
-            if (fp->mv.ca.specialhi.vel.x <= 0.0f) {
-                fp->mv.ca.specialhi.vel.x = p_ftCommonData->x5AC;
+        if (temp_r3->mv.co.itemthrow.x14 == 1) {
+            temp_r3->mv.co.itemthrow.x4 -= 1.0f;
+            if (temp_r3->mv.ca.specialhi.vel.x <= 0.0f) {
+                temp_r3->mv.ca.specialhi.vel.x = p_ftCommonData->x5AC;
 
                 {
                     Fighter* fp = GET_FIGHTER(gobj);
 
                     if (it_8026B594(fp->item_gobj) == 0) {
-                        effect_scale_repeat = 0.0F;
-                        lb_8000B1CC(fp->parts->joint, NULL,
-                                    &joint_pos_repeat);
-                        efSync_Spawn(0x3FF, gobj, &joint_pos_repeat,
-                                     &fp->facing_dir, &effect_scale_repeat);
+                        sp48 = 0.0F;
+                        lb_8000B1CC(fp->parts->joint, NULL, &sp3C);
+                        efSync_Spawn(0x3FF, gobj, &sp3C, &fp->facing_dir,
+                                     &sp48);
                         ft_PlaySFX(fp, 0xEE, 0x7F, 0x40);
                     } else {
-                        it_80292EF8(fp->item_gobj, &item_pos_repeat);
-                        ftCo_800CDE94(fp, &item_pos_repeat,
-                                     &effect_pos_repeat);
-                        efSync_Spawn(0x405, gobj, &effect_pos_repeat);
+                        it_80292EF8(fp->item_gobj, &sp58);
+                        ftCo_800CDE94(fp, &sp58, &sp4C);
+                        efSync_Spawn(0x405, gobj, &sp4C);
                         ft_PlaySFX(fp, 0xEF, 0x7F, 0x40);
                     }
                 }
             }
-            fp->mv.co.itemthrow.facing_dir -= 1.0f;
-            if (fp->mv.co.itemthrow.facing_dir <= 0.0f) {
-                fp->mv.co.itemthrow.facing_dir = p_ftCommonData->x5A8;
+            temp_r3->mv.co.itemthrow.facing_dir -= 1.0f;
+            if (temp_r3->mv.co.itemthrow.facing_dir <= 0.0f) {
+                temp_r3->mv.co.itemthrow.facing_dir = p_ftCommonData->x5A8;
 
                 {
                     Fighter* fp = GET_FIGHTER(gobj);
 
-                    it_80292EF8(fp->item_gobj, &shot_item_pos_repeat);
-                    ftCo_800CDE94(fp, &shot_item_pos_repeat,
-                                 &shot_pos_repeat);
+                    it_80292EF8(fp->item_gobj, &sp30);
+                    ftCo_800CDE94(fp, &sp30, &sp24);
                     if (!it_8026B594(fp->item_gobj)) {
-                        it_80292F14(fp->item_gobj, &shot_pos_repeat,
-                                    fp->facing_dir);
+                        it_80292F14(fp->item_gobj, &sp24, fp->facing_dir);
                     } else {
                         ftCommon_8007ECD4(fp, 1);
                     }
@@ -234,13 +227,13 @@ void ftCo_800CE650(HSD_GObj* gobj)
                     }
                 }
             }
-            if (fp->mv.co.itemthrow.x8 >= p_ftCommonData->x5A4 &&
-                fp->mv.co.itemthrow.xC != 0)
+            if (temp_r3->mv.co.itemthrow.x8 >= p_ftCommonData->x5A4 &&
+                temp_r3->mv.co.itemthrow.xC != 0)
             {
-                if (fp->mv.co.itemthrow.x10 >= p_ftCommonData->x5B0) {
-                    fp->mv.co.itemthrow.x14 = 0.0f;
+                if (temp_r3->mv.co.itemthrow.x10 >= p_ftCommonData->x5B0) {
+                    temp_r3->mv.co.itemthrow.x14 = 0.0f;
                     ftAnim_SetAnimRate(gobj, 1.0f);
-                    ftCommon_8007ECD4(fp, 1);
+                    ftCommon_8007ECD4(temp_r3, 1);
                 }
             }
         }

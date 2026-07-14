@@ -3261,10 +3261,9 @@ void ftKb_SpecialN_800EED50(s32 arg0, s32 arg1)
     if (arg0 != -1 && arg0 != 4) {
         if (ftKb_Init_803CA9D0[arg0].filename != NULL) {
             if (((HSD_Archive**) &ft_80459B88)[arg0] == NULL) {
-                lbArchive_80017040(
-                    NULL, ftKb_Init_803CA9D0[arg0].filename,
-                    &((HSD_Archive**) &ft_80459B88)[arg0],
-                    ftKb_Init_803CA9D0[arg0].name, 0);
+                lbArchive_80017040(NULL, ftKb_Init_803CA9D0[arg0].filename,
+                                   &((HSD_Archive**) &ft_80459B88)[arg0],
+                                   ftKb_Init_803CA9D0[arg0].name, 0);
             }
         }
         if (ftKb_Init_803CB3E8[arg0] != NULL) {
@@ -3274,12 +3273,12 @@ void ftKb_SpecialN_800EED50(s32 arg0, s32 arg1)
                 costumes = ftKb_Init_803CB3E8[arg0];
                 cs = &costumes[arg1];
                 if (cs->matanim_joint_name != NULL) {
-                    lbArchive_80017040(NULL, costumes[arg1].dat_filename,
-                                       item, cs->joint_name, &item[1],
+                    lbArchive_80017040(NULL, costumes[arg1].dat_filename, item,
+                                       cs->joint_name, &item[1],
                                        cs->matanim_joint_name, 0);
                 } else {
-                    lbArchive_80017040(NULL, costumes[arg1].dat_filename,
-                                       item, cs->joint_name, 0);
+                    lbArchive_80017040(NULL, costumes[arg1].dat_filename, item,
+                                       cs->joint_name, 0);
                     item[1] = NULL;
                 }
             }
@@ -3411,9 +3410,9 @@ void ftKb_SpecialN_800EF0E4(Fighter_GObj* gobj, int arg1, u8* arg2)
     ftPartsPObjSetDefaultClass();
     costume_idx = fp->x619_costume_id * 2;
     root = ((HSD_Joint**) ftKb_Init_803C9FC8[arg1])[costume_idx];
-    ftKb_SpecialN_800EF0E4_insert_joint_refs(
-        &total_dobjs, root, fp, &part_off, &current_joint, &joint_idx,
-        &byte_base);
+    ftKb_SpecialN_800EF0E4_insert_joint_refs(&total_dobjs, root, fp, &part_off,
+                                             &current_joint, &joint_idx,
+                                             &byte_base);
     joint_idx = 0;
     arg2_cur = arg2;
     byte_off = byte_base << 2;
@@ -3559,8 +3558,7 @@ void ftKb_SpecialN_800EF438(Fighter_GObj* gobj, KirbyHatStruct* hat)
                     HSD_JObjAddDObj(jobj, dobj);
                 } else {
                     while (tail != NULL) {
-                        HSD_DObj* nxt =
-                            (tail != NULL) ? tail->next : NULL;
+                        HSD_DObj* nxt = (tail != NULL) ? tail->next : NULL;
                         if (nxt == NULL) {
                             break;
                         }

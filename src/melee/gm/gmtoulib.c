@@ -400,7 +400,7 @@ typedef struct BracketAnimData {
 
 static inline f32 GetBracketSlideY(u8* p)
 {
-    return 0.3f * (f32) lbl_804D6630 + (f32) *(s32*) (p + 0x48);
+    return 0.3f * (f32) lbl_804D6630 + (f32) * (s32*) (p + 0x48);
 }
 
 void fn_8018B090(HSD_GObj* arg0)
@@ -522,7 +522,8 @@ void fn_8018B090(HSD_GObj* arg0)
                 mn_8022F410(&BRACKET_ANIM.current.z, &BRACKET_ANIM.target.z,
                             BRACKET_ANIM.step.z);
             }
-            fn_80190520(BRACKET_ANIM.current.x, BRACKET_ANIM.current.y, BRACKET_ANIM.current.z);
+            fn_80190520(BRACKET_ANIM.current.x, BRACKET_ANIM.current.y,
+                        BRACKET_ANIM.current.z);
             if (base->x4 != 1) {
                 p = bb;
                 for (i = 0; i < 4; i++, p += 0x2C) {
@@ -811,7 +812,8 @@ void fn_8018B090(HSD_GObj* arg0)
                         BRACKET_ANIM.step.y);
             mn_8022F410(&BRACKET_ANIM.current.z, &BRACKET_ANIM.target.z,
                         BRACKET_ANIM.step.z);
-            fn_80190520(BRACKET_ANIM.current.x, BRACKET_ANIM.current.y, BRACKET_ANIM.current.z);
+            fn_80190520(BRACKET_ANIM.current.x, BRACKET_ANIM.current.y,
+                        BRACKET_ANIM.current.z);
             return;
         }
         lbl_804D6630 = 0;
@@ -1710,11 +1712,9 @@ void fn_8018E85C(DynamicModelDesc* model, s32 flag)
                             -(f32) * (s32*) (sub + 0x48), 666.0f);
             }
 
-        next_sub:
-            ;
+        next_sub:;
         }
-    next_entry:
-        ;
+    next_entry:;
     }
 }
 
@@ -2066,7 +2066,7 @@ u32 fn_8018F640(int arg0)
     if (arg0 >= 4) {
         arg0 = 4;
     }
-    return gm_801A36A0(arg0);
+    return gm_GetButtonsTriggered(arg0);
 }
 
 u32 fn_8018F674(int arg0)
@@ -2085,7 +2085,7 @@ u32 fn_8018F6A8(int arg0)
     if (arg0 >= 4) {
         arg0 = 4;
     }
-    return gm_801A3680((u8) arg0);
+    return gm_GetButtonsPressed((u8) arg0);
 }
 #pragma pop
 
@@ -2254,8 +2254,8 @@ void fn_8018FBD8(void* arg0, s32 arg1)
 }
 #pragma pop
 
-void fn_8018FBE0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
-                 s32 arg5, s32 arg6)
+void fn_8018FBE0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
+                 s32 arg6)
 {
     s32 i;
 

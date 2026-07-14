@@ -1876,8 +1876,8 @@ void mnDiagram_CreatePopupTexts(void* arg0, s32 arg1, s32 arg2, s32 arg3)
 
             label_text = HSD_SisLib_803A6754(0, 1);
             data->text[4] = label_text;
-            lb_8000B1CC(data->jobjs[2],
-                        &GET_DIAGRAM_ANIM_TABLE()->points[2], &pos);
+            lb_8000B1CC(data->jobjs[2], &GET_DIAGRAM_ANIM_TABLE()->points[2],
+                        &pos);
             label_text->font_size.x = 0.035f;
             label_text->font_size.y = 0.05f;
             {
@@ -2501,24 +2501,23 @@ void mnDiagram_DrawGridValues(void* arg0, s32 arg1, s32 arg2, u8 arg3)
                 name_col = 0;
                 do {
                     sorted = (u8*) assets;
-                    if ((name_col == 7) ||
-                        (entry_count = GetNameCount(),
-                         (entry_count > name_col)))
+                    if ((name_col == 7) || (entry_count = GetNameCount(),
+                                            (entry_count > name_col)))
                     {
                         row_name = mnDiagram_GetVisibleNameCursorFrom(
                             sorted, row_start, row);
                         if (name_col == 7) {
                             name_kos = mnDiagram_GetNameTotalKOs(row_name);
-                            mnDiagram_DrawCellValue(
-                                arg0, (u8) name_col, (u8) row, name_kos);
+                            mnDiagram_DrawCellValue(arg0, (u8) name_col,
+                                                    (u8) row, name_kos);
                         } else {
                             int ko_count;
                             col_name = mnDiagram_GetVisibleNameCursorFrom(
                                 sorted, col_start, name_col);
                             ko_count = GetPersistentNameData(row_name)
                                            ->vs_kos[col_name];
-                            mnDiagram_DrawCellValue(
-                                arg0, (u8) name_col, (u8) row, ko_count);
+                            mnDiagram_DrawCellValue(arg0, (u8) name_col,
+                                                    (u8) row, ko_count);
                         }
                     }
                     name_col += 1;

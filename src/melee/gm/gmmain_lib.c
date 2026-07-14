@@ -769,8 +769,8 @@ void gmMainLib_8015DB80(void)
     }
 }
 
-static inline void gmMainLib_AdjustConfigNameTag(
-    int value, s32 name_tag, struct gmm_x0_528_t** config)
+static inline void gmMainLib_AdjustConfigNameTag(int value, s32 name_tag,
+                                                 struct gmm_x0_528_t** config)
 {
     if (value == (u8) name_tag) {
         (*config)[4].c_kind = 0x78;
@@ -852,8 +852,8 @@ s32 gmMainLib_8015DBF4(s32 arg0)
     config_all = (struct gmMainLib_8015DBF4_config*) config;
     ptr = &config->x4;
     val = *ptr;
-    base = (struct gmMainLib_8015DBF4_base*)
-        &gmMainLib_804D3EE0->unk_530.unk_588[0];
+    base = (struct gmMainLib_8015DBF4_base*) &gmMainLib_804D3EE0->unk_530
+               .unk_588[0];
     if (val == (u8) arg0) {
         *ptr = 0x78;
     } else if (val > (u8) arg0 && val != 0x78) {
@@ -1150,8 +1150,7 @@ static inline void ResetPersistentFighterData(s32 i)
     for (; 0x19 > j; j++) {
         base[(u8) i].fighter_kos[j] = 0;
     }
-    gmMainLib_8015EF30(
-        (struct gmMainLib_8015EF30_s*) &base[(u8) i].sd_count);
+    gmMainLib_8015EF30((struct gmMainLib_8015EF30_s*) &base[(u8) i].sd_count);
 }
 
 void gmMainLib_8015F150(void)

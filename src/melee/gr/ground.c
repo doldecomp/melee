@@ -1244,8 +1244,8 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lightset)
         HSD_LightDesc* desc = get_light_desc_inline(out);
         u16* flags = &desc->flags;
         if (*flags & 3) {
-            found = find_light_override_in_dat(archive->unk4, desc, &b6, &b7,
-                                               &b5);
+            found =
+                find_light_override_in_dat(archive->unk4, desc, &b6, &b7, &b5);
             if (found == 0 || (b6 == 0 && b7 == 0 && b5 == 0)) {
                 clean = out;
                 do {
@@ -3210,7 +3210,7 @@ void Ground_801C5878(void)
 {
     PAD_STACK(8);
     tyDisplay_8031C2CC();
-    if (gm_8016B498() != 0) {
+    if (gm_IsCurrently1PMode() != 0) {
         StageInfo* stageinfo = &stage_info;
         int display_id;
         display_id = tyDisplay_8031C2EC();

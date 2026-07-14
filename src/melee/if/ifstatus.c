@@ -296,13 +296,11 @@ void ifStatus_802F4B84(IfDamageState* state, s32 is_stamina)
 extern u8 ifStatus_804D57A8; /* Start color (low damage) */
 extern u8 ifStatus_804D57AC; /* End color (high damage) */
 
-static inline void ifStatus_UpdateDamageDisplay(IfDamageState* state,
-                                                HSD_JObj* jobj,
-                                                HSD_JObj** digit_jobj,
-                                                f32* ones_offset,
-                                                GXColor* color,
-                                                GXColor* stamina_color,
-                                                GXColor* normal_color)
+static inline void
+ifStatus_UpdateDamageDisplay(IfDamageState* state, HSD_JObj* jobj,
+                             HSD_JObj** digit_jobj, f32* ones_offset,
+                             GXColor* color, GXColor* stamina_color,
+                             GXColor* normal_color)
 {
     s16 clamped_damage;
     f32 factor;
@@ -325,18 +323,15 @@ static inline void ifStatus_UpdateDamageDisplay(IfDamageState* state,
                 clamped_damage = 0;
             }
             factor = 1.0F - ((f32) clamped_damage / 100.0F);
-            stamina_color->r =
-                (s8) (factor * (f32) ((&ifStatus_804D57AC)[0] -
-                                      (&ifStatus_804D57A8)[0]) +
-                      (f32) (&ifStatus_804D57A8)[0]);
-            stamina_color->g =
-                (s8) (factor * (f32) ((&ifStatus_804D57AC)[1] -
-                                      (&ifStatus_804D57A8)[1]) +
-                      (f32) (&ifStatus_804D57A8)[1]);
-            stamina_color->b =
-                (s8) (factor * (f32) ((&ifStatus_804D57AC)[2] -
-                                      (&ifStatus_804D57A8)[2]) +
-                      (f32) (&ifStatus_804D57A8)[2]);
+            stamina_color->r = (s8) (factor * (f32) ((&ifStatus_804D57AC)[0] -
+                                                     (&ifStatus_804D57A8)[0]) +
+                                     (f32) (&ifStatus_804D57A8)[0]);
+            stamina_color->g = (s8) (factor * (f32) ((&ifStatus_804D57AC)[1] -
+                                                     (&ifStatus_804D57A8)[1]) +
+                                     (f32) (&ifStatus_804D57A8)[1]);
+            stamina_color->b = (s8) (factor * (f32) ((&ifStatus_804D57AC)[2] -
+                                                     (&ifStatus_804D57A8)[2]) +
+                                     (f32) (&ifStatus_804D57A8)[2]);
             stamina_color->a = 255;
             *color = *stamina_color;
         } else {
@@ -347,18 +342,15 @@ static inline void ifStatus_UpdateDamageDisplay(IfDamageState* state,
                 clamped_damage = 0;
             }
             factor = (f32) clamped_damage / 300.0F;
-            normal_color->r =
-                (s8) (factor * (f32) ((&ifStatus_804D57AC)[0] -
-                                      (&ifStatus_804D57A8)[0]) +
-                      (f32) (&ifStatus_804D57A8)[0]);
-            normal_color->g =
-                (s8) (factor * (f32) ((&ifStatus_804D57AC)[1] -
-                                      (&ifStatus_804D57A8)[1]) +
-                      (f32) (&ifStatus_804D57A8)[1]);
-            normal_color->b =
-                (s8) (factor * (f32) ((&ifStatus_804D57AC)[2] -
-                                      (&ifStatus_804D57A8)[2]) +
-                      (f32) (&ifStatus_804D57A8)[2]);
+            normal_color->r = (s8) (factor * (f32) ((&ifStatus_804D57AC)[0] -
+                                                    (&ifStatus_804D57A8)[0]) +
+                                    (f32) (&ifStatus_804D57A8)[0]);
+            normal_color->g = (s8) (factor * (f32) ((&ifStatus_804D57AC)[1] -
+                                                    (&ifStatus_804D57A8)[1]) +
+                                    (f32) (&ifStatus_804D57A8)[1]);
+            normal_color->b = (s8) (factor * (f32) ((&ifStatus_804D57AC)[2] -
+                                                    (&ifStatus_804D57A8)[2]) +
+                                    (f32) (&ifStatus_804D57A8)[2]);
             normal_color->a = 255;
             *color = *normal_color;
         }
@@ -396,13 +388,13 @@ static inline void ifStatus_UpdateDamageDisplay(IfDamageState* state,
         }
     }
 
-    *ones_offset =
-        (state->damage_percent % 10 == 1) ? 0.5069F : 0.0F;
+    *ones_offset = (state->damage_percent % 10 == 1) ? 0.5069F : 0.0F;
 }
 
-static inline void ifStatus_UpdateTensDigit(
-    HSD_MatAnimJoint** digit_anim_base, HSD_JObj* digit_jobj,
-    f32 tens_digit, IfDamageState* state)
+static inline void ifStatus_UpdateTensDigit(HSD_MatAnimJoint** digit_anim_base,
+                                            HSD_JObj* digit_jobj,
+                                            f32 tens_digit,
+                                            IfDamageState* state)
 {
     HSD_TObjAddAnimAll(digit_jobj->u.dobj->mobj->tobj,
                        (HSD_TexAnim*) ((HSD_AnimJoint*) digit_anim_base[0])
@@ -538,8 +530,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
 
     HSD_JObjAnimAll(jobj);
 
-    digit_anim_base =
-        (HSD_MatAnimJoint**) &hud->janim_selection_joints;
+    digit_anim_base = (HSD_MatAnimJoint**) &hud->janim_selection_joints;
     digit_jobj = state->jobjs[Ones];
     ones_digit = state->damage_percent % 10;
     HSD_TObjAddAnimAll(digit_jobj->u.dobj->mobj->tobj,

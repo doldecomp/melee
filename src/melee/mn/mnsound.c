@@ -100,9 +100,8 @@ static inline void mnSound_InitChannelAnim(HSD_JObj* jobj, s32 channel,
     HSD_JObjAnimAll(*jobj_anim_2);
 }
 
-static inline void mnSound_InitVolumeAnim(HSD_JObj* jobj,
-                                          s32 sound_music_mix, Vec3* pos_0,
-                                          Vec3* pos_1,
+static inline void mnSound_InitVolumeAnim(HSD_JObj* jobj, s32 sound_music_mix,
+                                          Vec3* pos_0, Vec3* pos_1,
                                           HSD_JObj** jobj_anim_0,
                                           HSD_JObj** jobj_anim_1,
                                           HSD_JObj** jobj_anim_2)
@@ -112,11 +111,10 @@ static inline void mnSound_InitVolumeAnim(HSD_JObj* jobj,
     lb_80011E24(jobj, jobj_anim_2, 4, -1);
     HSD_JObjGetTranslation(*jobj_anim_1, pos_0);
     HSD_JObjGetTranslation(*jobj_anim_2, pos_1);
-    HSD_JObjSetTranslateX(
-        *jobj_anim_0,
-        (((f32) ((s8) sound_music_mix + 100) / 200.0f) *
-         (pos_1->x - pos_0->x)) +
-            pos_0->x);
+    HSD_JObjSetTranslateX(*jobj_anim_0,
+                          (((f32) ((s8) sound_music_mix + 100) / 200.0f) *
+                           (pos_1->x - pos_0->x)) +
+                              pos_0->x);
 }
 
 static inline void mnSound_InitCenterText(Menu* menu, s32 val)
@@ -336,8 +334,8 @@ void mnSound_80249C08(int unused)
         HSD_JObj* jobj_anim_2;
         HSD_JObj* jobj_anim_1;
         HSD_JObj* jobj_anim_0;
-        mnSound_InitChannelAnim(GET_JOBJ(gobj), user_data->unk1,
-                                &jobj_anim_0, &jobj_anim_1, &jobj_anim_2);
+        mnSound_InitChannelAnim(GET_JOBJ(gobj), user_data->unk1, &jobj_anim_0,
+                                &jobj_anim_1, &jobj_anim_2);
     }
 
     {
@@ -353,9 +351,8 @@ void mnSound_80249C08(int unused)
         HSD_JObj* jobj_anim_2;
         HSD_JObj* jobj_anim_1;
         HSD_JObj* jobj_anim_0;
-        mnSound_InitVolumeAnim(GET_JOBJ(gobj), user_data->unk3, &pos_0,
-                               &pos_1, &jobj_anim_0, &jobj_anim_1,
-                               &jobj_anim_2);
+        mnSound_InitVolumeAnim(GET_JOBJ(gobj), user_data->unk3, &pos_0, &pos_1,
+                               &jobj_anim_0, &jobj_anim_1, &jobj_anim_2);
     }
 
     {

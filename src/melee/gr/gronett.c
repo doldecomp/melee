@@ -698,8 +698,7 @@ void grOnett_801E43E0(Ground_GObj* gobj)
                 }
                 gp->gv.onettcar.timer_b = grOt_804D69C0->x48;
                 gp->gv.onettcar.speed_b =
-                    grOt_804D69C0->x58 * grOnett_Randf() +
-                    grOt_804D69C0->x54;
+                    grOt_804D69C0->x58 * grOnett_Randf() + grOt_804D69C0->x54;
                 gp->gv.onettcar.state_b = 2;
                 return;
             }

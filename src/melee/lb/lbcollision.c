@@ -777,9 +777,8 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                         d_x = d->x;
                         diff_dc_x = d_x - c1.x;
 
-                        dot2_diff_ba_dc =
-                            lbColl_Dot2(diff_ba_x, diff_ba_y, diff_dc_x,
-                                        diff_dc_y);
+                        dot2_diff_ba_dc = lbColl_Dot2(diff_ba_x, diff_ba_y,
+                                                      diff_dc_x, diff_dc_y);
 
                         sqdist2_dc =
                             diff_dc_x * diff_dc_x + diff_dc_y * diff_dc_y;

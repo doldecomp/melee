@@ -1450,9 +1450,8 @@ void mnName_8023A290(void)
 
 /// @todo Strings at base offsets are in rodata near mnName_803ED538
 
-static inline void mnName_SetupScrollbarAndText(s32 count,
-                                                 HSD_JObj* scrollbar,
-                                                 MnName_GObj* user_data)
+static inline void mnName_SetupScrollbarAndText(s32 count, HSD_JObj* scrollbar,
+                                                MnName_GObj* user_data)
 {
     s32 extra;
     f32 rows;

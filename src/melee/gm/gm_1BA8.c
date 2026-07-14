@@ -133,7 +133,7 @@ void gm_801BA938(struct EventData* arg0, int lo, int hi, bool arg3)
 void gm_801BAA60(GameScene* arg0)
 {
     struct EventData* temp_r31 = &gmMainLib_804D3EE0->unk_530;
-    CSSData* css = gm_801A427C(arg0);
+    CSSData* css = gm_GetGameSceneLoadDataCallback(arg0);
     PAD_STACK(8);
 
     gm_801B06B0(css, 0xE, temp_r31->x2, 0, temp_r31->x3, temp_r31->x4, 0,
@@ -149,9 +149,9 @@ void gm_801BAAD0(GameScene* arg0)
     struct EventData* temp_r31;
 
     temp_r31 = &gmMainLib_804D3EE0->unk_530;
-    temp_r3 = gm_801A4284(arg0);
+    temp_r3 = gm_GetGameSceneLeaveDataCallback(arg0);
     if (temp_r3->pending_scene_change == 2) {
-        gm_801A42F8(GM_MENU);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
     gm_801B0730(temp_r3, &temp_r31->x2, NULL, &temp_r31->x3, &temp_r31->x4,
@@ -225,7 +225,7 @@ s32 gm_801BAC9C(GameScene* arg0, s32 arg1)
     UNUSED u8 _[8];
     u8 chars[33];
     struct EventData* ev = &gmMainLib_804D3EE0->unk_530;
-    StartMeleeData* data = gm_801A427C(arg0);
+    StartMeleeData* data = gm_GetGameSceneLoadDataCallback(arg0);
     s32 i;
     s32 found;
     s32 count = 0;
@@ -346,7 +346,7 @@ static inline struct EventData* gm_GetEventData(void)
 void gm_801BAD70(GameScene* arg0)
 {
     struct EventData* ev = gm_GetEventData();
-    StartMeleeData* md = gm_801A427C(arg0);
+    StartMeleeData* md = gm_GetGameSceneLoadDataCallback(arg0);
     u8* r3b = (u8*) md;
     u8 level = ev->unk_535;
     s32 player_idx;
@@ -677,7 +677,7 @@ void gm_801BAD70(GameScene* arg0)
 void gm_801BB758(GameScene* arg0)
 {
     struct EventData* ev = &gmMainLib_804D3EE0->unk_530;
-    MatchExitInfo* exit = gm_801A4284(arg0);
+    MatchExitInfo* exit = gm_GetGameSceneLeaveDataCallback(arg0);
     u8 stage = ev->unk_535;
     u8 b;
     u8 kind;
@@ -711,11 +711,11 @@ void gm_801BB758(GameScene* arg0)
             lbDvd_80018254();
             lbDvd_80017700(4);
         }
-        gm_SetPendingScene(1);
+        gm_SetPendingSceneIndex(1);
         return;
     }
     if (exit->match_end.result == 7) {
-        gm_801A42F8(1);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
     ev->x3C += gm_80168940(&gm_804979D8[0].match_end);
@@ -729,7 +729,7 @@ void gm_801BB758(GameScene* arg0)
         t = ev->x20;
         ev->x20 = t + 1;
         gm_801BBB64();
-        gm_SetPendingScene(1);
+        gm_SetPendingSceneIndex(1);
         return;
     }
     if (ev->xB_1) {
@@ -774,12 +774,12 @@ void gm_801BB758(GameScene* arg0)
     gm_80173EEC();
     gm_80172898(0x10);
     if (kind != 0x21) {
-        gm_801736E8(ev->x0, ev->x1, ev->x6, ev->x4, kind, 1);
-        gm_801A42F8(0x14);
+        gm_801736E8(ev->x0, ev->x1, ev->x6, ev->x4, kind, GM_MENU);
+        gm_ChangeGameModeAfterCurrentScene(GM_CHALLENGER_APPROACH);
         return;
     }
     if (gm_80173754(1, ev->x6) == 0) {
-        gm_801A42F8(1);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
     }
 }
 
@@ -972,7 +972,7 @@ void gm_801BBEA8_OnLoad(void)
     temp_r30->x40 = 0;
     gm_801BBB64();
     if (*temp_r29[temp_r28]->x14 != 0x21) {
-        gm_SetScene(1);
+        gm_SetSceneIndex(1);
     }
 }
 
@@ -980,7 +980,7 @@ void gm_801BBFE4_OnUnload(void) {}
 
 void fn_801BBFE8(void)
 {
-    gm_801A4310();
+    gm_GetCurrentGameMode();
     gm_801BC00C();
 }
 
@@ -1012,7 +1012,7 @@ static inline s8 gm_801BC00C_GetCharacter(gm_801BAB40_src* event_entry)
 }
 
 static inline CharacterKind
-    gm_801BC00C_GetCharacterKind(gm_801BAB40_src* event_entry)
+gm_801BC00C_GetCharacterKind(gm_801BAB40_src* event_entry)
 {
     return (CharacterKind) (s8) event_entry->c_kind;
 }
@@ -3082,8 +3082,8 @@ UNK_T gm_801BEC54(void)
 
 void gm_801BEC80(GameScene* arg)
 {
-    gm_801A42E8(GM_MENU);
-    gm_801A42D4();
+    gm_SetPendingGameMode(GM_MENU);
+    gm_SetNewGameModePending();
 }
 
 void gm_801BECA8(GameScene* arg)
@@ -3096,20 +3096,20 @@ void gm_801BECD0(GameScene* arg)
 {
     gm_80172898(4);
     if (!gm_80173754(1, 0)) {
-        gm_801A42E8(GM_MENU);
-        gm_801A42D4();
+        gm_SetPendingGameMode(GM_MENU);
+        gm_SetNewGameModePending();
     }
 }
 
 void gm_801BED14(GameScene* arg)
 {
-    gm_801A42E8(GM_MENU);
-    gm_801A42D4();
+    gm_SetPendingGameMode(GM_MENU);
+    gm_SetNewGameModePending();
 }
 
 void gm_801BED3C(GameScene* arg0)
 {
-    CSSData* temp_r31 = gm_801A427C(arg0);
+    CSSData* temp_r31 = gm_GetGameSceneLoadDataCallback(arg0);
     temp_r31->data = *gm_801A5244();
 
     gm_80164F18();
@@ -3120,7 +3120,7 @@ void gm_801BED3C(GameScene* arg0)
 
 void gm_801BEDA8(GameScene* arg0)
 {
-    CSSData* css = gm_801A427C(arg0);
+    CSSData* css = gm_GetGameSceneLoadDataCallback(arg0);
     VsModeData* vs = gm_801A5244();
 
     if (css->pending_scene_change == 2) {
@@ -3138,16 +3138,16 @@ void gm_801BEDA8(GameScene* arg0)
 
 void gm_801BEE58(GameScene* arg0)
 {
-    SSSData* var_r3 = gm_801A427C(arg0);
+    SSSData* var_r3 = gm_GetGameSceneLoadDataCallback(arg0);
     var_r3->data = gmMainLib_804D3EE0->unk_590;
 }
 
 void gm_801BEE9C(GameScene* arg0)
 {
-    s8* temp_r28;
+    s8* game_mode;
     u8 temp_r27; ///< maybe CharacterKind?
 
-    temp_r28 = arg0->info.leave_data;
+    game_mode = arg0->info.leave_data;
     temp_r27 = gm_80173224(gm_801BF030(), 1);
     if (gm_801BEFB0() == CKIND_GAMEWATCH && !gm_80164430(0x1B)) {
         gm_80164504(0x1B);
@@ -3157,14 +3157,14 @@ void gm_801BEE9C(GameScene* arg0)
     gm_80172898(0x40);
     if (temp_r27 == 0x21) {
         if (!gm_80173754(1, gm_801BEFD0())) {
-            gm_801A42E8(*temp_r28);
+            gm_SetPendingGameMode(*game_mode);
         }
     } else {
         gm_801736E8(gm_801BEFB0(), gm_801BEFD0(), gm_801BF010(), gm_801BEFF0(),
-                    temp_r27, *temp_r28);
-        gm_801A42E8(GM_CHALLENGER_APPROACH);
+                    temp_r27, *game_mode);
+        gm_SetPendingGameMode(GM_CHALLENGER_APPROACH);
     }
-    gm_801A42D4();
+    gm_SetNewGameModePending();
 }
 
 void gm_801BEF84(GameScene* arg)
@@ -3274,28 +3274,28 @@ int gm_801BF050(void)
 
 void gm_801BF060(GameScene* arg0)
 {
-    int* temp_r3 = gm_801A4284(arg0);
+    int* temp_r3 = gm_GetGameSceneLeaveDataCallback(arg0);
     if (DbLevel >= 3) {
         if (*temp_r3 & 0x100) {
-            gm_801A42E8(GM_DEBUG_VS);
-            gm_801A42D4();
+            gm_SetPendingGameMode(GM_DEBUG_VS);
+            gm_SetNewGameModePending();
         } else if (*temp_r3 & 0x1000) {
-            gm_801A42E8(GM_MENU);
-            gm_801A42D4();
+            gm_SetPendingGameMode(GM_MENU);
+            gm_SetNewGameModePending();
         } else if (*temp_r3 & 0x400) {
-            gm_801A42E8(GM_DEBUG_SOUND_TEST);
-            gm_801A42D4();
+            gm_SetPendingGameMode(GM_DEBUG_SOUND_TEST);
+            gm_SetNewGameModePending();
         } else if (*temp_r3 & 0x800) {
-            gm_801A42E8(GM_DEBUG);
-            gm_801A42D4();
+            gm_SetPendingGameMode(GM_DEBUG);
+            gm_SetNewGameModePending();
         }
     } else if (*temp_r3 & 0x1000) {
         gm_80173EEC();
         gm_80172898(0x100);
         if (!gm_80173754(1, 0)) {
-            gm_801A42E8(GM_MENU);
+            gm_SetPendingGameMode(GM_MENU);
         }
-        gm_801A42D4();
+        gm_SetNewGameModePending();
     }
 }
 
@@ -3306,10 +3306,12 @@ static inline struct gm_random_history* gm_GetRandomHistory(void)
 
 void gm_801BF128(void)
 {
+#ifdef __MWERKS__
     void gm_801BF634();
     void gm_801BF6A8();
     void gm_801BF6C8();
     void gm_801BF6E8();
+#endif
     s32 character_pool[29];
     s32 stage_pool[30];
     s32 c;
@@ -3442,7 +3444,7 @@ void gm_801BF4DC(GameScene* arg0)
     int i;
 
     temp_r30 = &gmMainLib_804D3EE0->unk_1710;
-    md = gm_801A427C(arg0);
+    md = gm_GetGameSceneLoadDataCallback(arg0);
     gm_80167BC8(temp_r30);
     gm_8016F088(md);
     gm_80168FC4();
@@ -3580,8 +3582,8 @@ void gm_801BF728(GameScene* arg)
 
 void gm_801BF834(GameScene* arg)
 {
-    gm_801A42E8(GM_TITLE);
-    gm_801A42D4();
+    gm_SetPendingGameMode(GM_TITLE);
+    gm_SetNewGameModePending();
 }
 
 void gm_801BF85C(GameScene* arg)
@@ -3610,12 +3612,12 @@ void gm_801BF8D8(GameScene* arg)
 
 void gm_801BF8F8(GameScene* arg0)
 {
-    int* val = gm_801A427C(arg0);
+    int* val = gm_GetGameSceneLoadDataCallback(arg0);
     *val = 1;
 }
 
 void gm_801BF920(GameScene* arg0)
 {
-    gm_801A4284(arg0);
-    gm_801A42F8(GM_BOOT);
+    gm_GetGameSceneLeaveDataCallback(arg0);
+    gm_ChangeGameModeAfterCurrentScene(GM_BOOT);
 }

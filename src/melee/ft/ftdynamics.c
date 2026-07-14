@@ -487,8 +487,7 @@ void ftCo_8009DC54(Fighter* fp)
             }
             {
                 desc = &fp->dynamic_bone_sets[i + 1].dyn_desc;
-                lb_8000FD48(cur, desc,
-                            bones->array[bone_idx].dyn_desc.count);
+                lb_8000FD48(cur, desc, bones->array[bone_idx].dyn_desc.count);
                 fp->dynamic_bone_sets[dyn_idx + 1].bone_id = FtPart_TopN;
                 lb_80011710(
                     &data->x2C->ftDynamicBones->array[bone_idx].dyn_desc,

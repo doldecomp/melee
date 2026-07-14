@@ -547,9 +547,8 @@ void mnCount_CreateRow(HSD_GObj* gobj, int visible_row, mnCount_row data_row)
         HSD_SisLib_803A5CC4(userdata->labels[visible_row]);
         *label_text = NULL;
     }
-    text = HSD_SisLib_803A5ACC(0, 1, -13.0f,
-                               y = (1.4f * visible_row) + -6.4f, 17.0f,
-                               500.0f, 38.38772f);
+    text = HSD_SisLib_803A5ACC(0, 1, -13.0f, y = (1.4f * visible_row) + -6.4f,
+                               17.0f, 500.0f, 38.38772f);
     *label_text = text;
     text->font_size.x = 0.03f;
     text->font_size.y = 0.03f;
@@ -575,9 +574,9 @@ void mnCount_CreateRow(HSD_GObj* gobj, int visible_row, mnCount_row data_row)
         text->font_size.y = 0.03f;
         row_value = mnCount_GetRowValue_Number(data_row);
         mn_8022EA78(buf, 2, row_value / 60 / 60);
-        mn_8022EA78(&buf[-4], 2, row_value / 60 % 60);
+        mn_8022EA78(buf - 4, 2, row_value / 60 % 60);
         HSD_SisLib_803A6B98(text, 0.0f, 0.0f, "%u:%s", row_value / 60 / 60,
-                            *(char (*)[4]) &buf - 4);
+                            *(char (*)[4]) & buf - 4);
     } else if (inline_is_row_char(data_row)) {
         text->font_size.x = 0.03f;
         text->font_size.y = 0.03f;
@@ -822,7 +821,7 @@ static inline void mnCount_LoadModel(void)
 {
     mn_804A04F0.hovered_selection = 0;
     lbArchive_LoadSections(
-        mn_804D6BB8, &model_desc.joint, "MenMainConCo_Top_joint",
+        mn_804D6BB8, (void**) &model_desc.joint, "MenMainConCo_Top_joint",
         &model_desc.animjoint, "MenMainConCo_Top_animjoint",
         &model_desc.matanim_joint, "MenMainConCo_Top_matanim_joint",
         &model_desc.shapeanim_joint, "MenMainConCo_Top_shapeanim_joint", 0);

@@ -293,8 +293,7 @@ static inline s32 fn_802F7994_find_slot(HSD_GObj* gobj)
     return -1;
 }
 
-static inline void fn_802F7994_create_model(void** base, s32 slot,
-                                             f32 frame)
+static inline void fn_802F7994_create_model(void** base, s32 slot, f32 frame)
 {
     s32 idx;
     void** entry;
@@ -357,11 +356,11 @@ void if_802F7AF8(s32 slot)
     idx2 = (slot2 << 3) & 0x7F8;
     idx = (uintptr_t) base + idx2;
     result = fn_802F77F8(*(HSD_GObj**) (idx += 4), (u8) slot2, 2);
-    dst2 = (HSD_GObj**) ((uintptr_t) dst + idx2);
+    dst2 = (void**) ((uintptr_t) dst + idx2);
     *dst2 = result;
     if (*dst2 != NULL) {
-        HSD_GObj_SetupProc(*(HSD_GObj**) idx,
-                           (HSD_GObjEvent) fn_802F75D4, 0x11);
+        HSD_GObj_SetupProc(*(HSD_GObj**) idx, (HSD_GObjEvent) fn_802F75D4,
+                           0x11);
     }
 }
 
@@ -391,8 +390,7 @@ static inline void if_802F7C30_other(s32 slot, void** base)
     void** entry;
 
     entry = base + ((u8) slot << 1);
-    base[((u8) slot << 1) + 1] =
-        fn_802F77F8(*++entry, (u8) slot, 1);
+    base[((u8) slot << 1) + 1] = fn_802F77F8(*++entry, (u8) slot, 1);
     if (base[((u8) slot << 1) + 1] != NULL) {
         HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F75D4, 0x11);
     }
