@@ -14,8 +14,9 @@
 
 import argparse
 import sys
+from collections.abc import Iterator
 from pathlib import Path
-from typing import Iterator, List, Optional
+from typing import cast
 
 from tools.project import (
     Library,
@@ -90,6 +91,12 @@ parser.add_argument(
     "--testing",
     action="store_true",
     help="enable units being tested for linking",
+)
+parser.add_argument(
+    "--sym",
+    choices=["on", "off", "auto"],
+    default="auto",
+    help="whether to enable \"-sym on\" (default 'auto', on for non-matching units)",
 )
 if not is_windows():
     parser.add_argument(
@@ -174,7 +181,7 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
-if any({args.debug, args.bugfix, args.asm, args.testing}):
+if any({args.debug, args.bugfix, args.asm, args.testing}) or args.sym == "on":
     args.non_matching = True
 
 
@@ -264,13 +271,11 @@ cflags_base = [
     "-str reuse",
     f"-DBUILD_VERSION={version_num}",
     f"-DVERSION_{config.version}",
-    "-sym on",
 ]
 
-# Debug flags
-if args.debug:
-    # Or -sym dwarf-2 for Wii compilers
-    cflags_base.append("-sym on")
+
+if args.sym in {"on", "off"}:
+    cflags_base.append(f"-sym {args.sym}")
 if args.bugfix:
     cflags_base.append("-DBUGFIX")
 
@@ -326,7 +331,7 @@ cflags_melee = [
 
 config.linker_version = "GC/1.3.2"
 
-Objects = List[Object]
+Objects = list[Object]
 
 
 def Lib(
@@ -335,12 +340,17 @@ def Lib(
     cflags=cflags_base,
     fix_epilogue=True,
     fix_trk=False,
-    includes: List[str] = includes_base,
-    src_dir: Optional[str] = None,
-    category: Optional[str] = None,
+    includes: list[str] = includes_base,
+    src_dir: str | None = None,
+    category: str | None = None,
 ) -> Library:
-    def make_includes(includes: List[str]) -> Iterator[str]:
+    def make_includes(includes: list[str]) -> Iterator[str]:
         return map(lambda s: f"-i {s}", includes)
+
+    if args.sym == "auto":
+        for obj in objects:
+            extra_cflags = cast(list[str], obj.options["extra_cflags"])
+            extra_cflags.append(f"-sym {'off' if obj.completed else 'on'}")
 
     lib = {
         "lib": lib_name,
@@ -470,7 +480,7 @@ config.libs = [
             Object(Matching, "melee/lb/lbtime.c"),
             Object(Matching, "melee/lb/lb_00B0.c"),
             Object(Matching, "melee/lb/lb_00CE.c"),
-            Object(Matching, "melee/lb/lbvector.c", extra_cflags=["-sym off"]),
+            Object(Matching, "melee/lb/lbvector.c"),
             Object(NonMatching, "melee/lb/lbshadow.c"),
             Object(NonMatching, "melee/lb/lbspdisplay.c"),
             Object(NonMatching, "melee/lb/lbarq.c"),
@@ -1444,7 +1454,7 @@ config.libs = [
     RuntimeLib(
         "Gekko runtime",
         [
-            Object(Matching, "Runtime/__mem.c", extra_cflags=["-sym off"]),
+            Object(Matching, "Runtime/__mem.c"),
             Object(Matching, "Runtime/__va_arg.c"),
             Object(Matching, "Runtime/global_destructor_chain.c"),
             Object(Matching, "Runtime/Gecko_ExceptionPPC.c"),
@@ -1626,7 +1636,7 @@ config.libs = [
             Object(Matching, "dolphin/os/OSThread.c"),
             Object(Matching, "dolphin/os/OSTime.c"),
             Object(Matching, "dolphin/os/OSUartExi.c"),
-            Object(Matching, "dolphin/os/init/__start.c", extra_cflags=["-sym off"]),
+            Object(Matching, "dolphin/os/init/__start.c"),
             Object(Matching, "dolphin/os/init/__ppc_eabi_init.c"),
         ],
     ),
@@ -1712,7 +1722,7 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/mobj.c"),
             Object(Matching, "sysdolphin/baselib/aobj.c"),
             Object(Matching, "sysdolphin/baselib/lobj.c"),
-            Object(Matching, "sysdolphin/baselib/cobj.c", extra_cflags=["-sym off"]),
+            Object(Matching, "sysdolphin/baselib/cobj.c"),
             Object(Matching, "sysdolphin/baselib/fobj.c"),
             Object(Matching, "sysdolphin/baselib/pobj.c"),
             Object(Matching, "sysdolphin/baselib/jobj.c"),
@@ -1799,7 +1809,7 @@ config.libs = [
 #
 # For example, this adds "dummy.c" to the end of the DOL link order if configured with --non-matching.
 # "dummy.c" *must* be configured as a Matching (or Equivalent) object in order to be linked.
-def link_order_callback(module_id: int, objects: List[str]) -> List[str]:
+def link_order_callback(module_id: int, objects: list[str]) -> list[str]:
     # Don't modify the link order for matching builds
     if not config.non_matching:
         return objects
