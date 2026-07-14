@@ -353,7 +353,7 @@ static void fn_80235F80(HSD_GObj* gobj)
         }
         if (buttons & 0x100) {
             lbAudioAx_80024030(1);
-            result = gm_801A4310();
+            result = gm_GetCurrentGameMode();
             switch (result) {
             case 1:
                 mnStageSw_8023593C(mnStageSw_804D6BF0);

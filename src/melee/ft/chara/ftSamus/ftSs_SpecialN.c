@@ -121,7 +121,7 @@ static void ftSs_SpecialN_801293BC(HSD_GObj* gobj)
         x2230 = fp->fv.ss.x2230;
         it_802B56E4(fp->fv.ss.x222C, &vec1, var_f0, x2230, samus_attr->x18);
         if ((fp->motion_id == 348) || (fp->ground_or_air == GA_Air)) {
-            u8 unused1[28];
+            u8 orig[28];
             ftSamus_801293BC_inner(gobj);
         }
         fp->fv.ss.x2230 = 0U;
@@ -202,7 +202,7 @@ void ftSs_SpecialNHold_Anim(HSD_GObj* gobj)
     ftSs_DatAttrs* samus_attr;
     ftSs_DatAttrs* samus_attr2;
 
-    u8 unused1[40];
+    u8 orig[40];
 
     fp = fighter2 = getFighter(gobj);
     samus_attr = samus_attr2 = fp->dat_attrs;

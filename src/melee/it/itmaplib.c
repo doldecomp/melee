@@ -254,7 +254,7 @@ void it_80276100(Item_GObj* item_gobj, Vec3* pos)
 
 void it_80276174(Item_GObj* item_gobj, Vec3* pos)
 {
-    f32 unused1;
+    f32 orig;
     f32 unused2;
     Vec3 temp_pos;
     Item* item;

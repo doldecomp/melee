@@ -4221,7 +4221,7 @@ bool it_8027AB64(Item_GObj* item_gobj)
     } else if (gm_8018841C()) {
         spawn.kind = (&it_803F2ED0 == NULL) ? Pokemon_Sonans
                                             : it_8027A780(item, &it_803F2ED0);
-    } else if (gm_801A4310() == 0x18) {
+    } else if (gm_GetCurrentGameMode() == 0x18) {
         spawn.kind = it_8027AB64_SelectKind(item);
     } else {
         spawn.kind = db_GetCurrentlySelectedPokemon();

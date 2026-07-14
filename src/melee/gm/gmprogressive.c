@@ -133,21 +133,22 @@ void gm_801AD620_OnFrame(void)
             gm_80480D70.x10 = 4;
         }
     } else {
-        if ((gm_801A36A0(4) & 0x4000000000) && gm_80480D70.x10 == 2 &&
-            gm_80480D70.x14 == 0)
+        if ((gm_GetButtonsTriggered(4) & 0x4000000000) &&
+            gm_80480D70.x10 == 2 && gm_80480D70.x14 == 0)
         {
             lbAudioAx_80024030(2);
             gm_80480D70.x10 = 1;
             gm_801AD254(gm_80480D70.x10);
         }
-        if ((gm_801A36A0(4) & 0x8000000000) && gm_80480D70.x10 == 1 &&
-            gm_80480D70.x14 == 0)
+        if ((gm_GetButtonsTriggered(4) & 0x8000000000) &&
+            gm_80480D70.x10 == 1 && gm_80480D70.x14 == 0)
         {
             lbAudioAx_80024030(2);
             gm_80480D70.x10 = 2;
             gm_801AD254(gm_80480D70.x10);
         }
-        if ((gm_801A36A0(4) & 0x100000000) && gm_80480D70.x14 == 0) {
+        if ((gm_GetButtonsTriggered(4) & 0x100000000) && gm_80480D70.x14 == 0)
+        {
             if (gm_80480D70.x10 == 1) {
                 lbAudioAx_80024030(1);
                 gm_80480D70.x10 = 3;

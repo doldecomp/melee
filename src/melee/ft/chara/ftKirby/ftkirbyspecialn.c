@@ -2338,7 +2338,7 @@ static inline void ftKb_SpecialNSpit_Anim_inline(Fighter_GObj* gobj,
 
 void ftKb_SpecialNSpit0_Anim(Fighter_GObj* gobj)
 {
-    UNUSED u32 unused1;
+    UNUSED u32 orig;
     Fighter* fp = getFighter(gobj);
     Item_GObj* item_gobj;
     ftKb_DatAttrs* da;
@@ -2398,7 +2398,7 @@ void ftKb_SpecialAirNSpit_Anim(Fighter_GObj* gobj)
 
 void ftKb_SpecialNSpit1_Anim(Fighter_GObj* gobj)
 {
-    UNUSED u32 unused1;
+    UNUSED u32 orig;
     Fighter* fp = getFighter(gobj);
     Item_GObj* item_gobj;
     ftKb_DatAttrs* da;

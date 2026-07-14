@@ -37,6 +37,6 @@ typedef struct mnDiagram3_StatTable {
 /* 4DC010 */ extern f32 mnDiagram3_804DC010;
 /* 4DC014 */ extern f32 mnDiagram3_804DC014;
 
-/* 2461BC */ void fn_802461BC(HSD_GObj* gobj);
+/* 2461BC */ void mnDiagram3_HandleInput(HSD_GObj* gobj);
 
 #endif

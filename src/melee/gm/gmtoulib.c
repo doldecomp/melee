@@ -1972,7 +1972,7 @@ u32 fn_8018F640(int arg0)
     if (arg0 >= 4) {
         arg0 = 4;
     }
-    return gm_801A36A0(arg0);
+    return gm_GetButtonsTriggered(arg0);
 }
 
 u32 fn_8018F674(int arg0)
@@ -1991,7 +1991,7 @@ u32 fn_8018F6A8(int arg0)
     if (arg0 >= 4) {
         arg0 = 4;
     }
-    return gm_801A3680((u8) arg0);
+    return gm_GetButtonsPressed((u8) arg0);
 }
 #pragma pop
 

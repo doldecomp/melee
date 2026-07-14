@@ -748,7 +748,7 @@ void ftCommon_8007DD7C(HSD_GObj* gobj, Vec3* v)
     bool phi_r28;
     Vec2* vtmp;
 
-    u8 unused1[20];
+    u8 orig[20];
 
     arg_ft = gobj->user_data;
     phi_r28 = false;
@@ -815,7 +815,7 @@ void ftCommon_8007DFD0(HSD_GObj* gobj, Vec3* arg1)
     s32 temp_r0;
     s32 temp_r30;
     Vec2* tmp;
-    u8 unused1[12];
+    u8 orig[12];
     fp = gobj->user_data;
     temp_r31 = &fp->x2C4;
     new_var = Player_GetEntity(fp->player_id);

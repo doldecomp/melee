@@ -1796,7 +1796,7 @@ void grVenom_80206BC4(Ground_GObj* gobj)
 
 void grVenom_80206BEC(Ground_GObj* arg) {}
 
-extern char grVe_803E5524[];
+extern char lbl_803E5524[];
 
 bool grVenom_80206BF0(int arg0)
 {

@@ -80,7 +80,7 @@ typedef struct _gmCameraUnkFuncTable {
     /*0x08*/ void (*x8)(void);
 } gmCameraUnkFuncTable;
 
-/* 479BC8 */ extern union _gmCameraUnkUnion gmCamera_80479BC8;
+/* 479BC8 */ extern union _gmCameraUnkUnion gmCamera_VsCamUiState;
 /* 4DA9B8 */ extern float gmCamera_804DA9B8;
 /* 4DA9BC */ extern float gmCamera_804DA9BC;
 /* 4DA9C0 */ extern float gmCamera_804DA9C0;
@@ -112,6 +112,6 @@ typedef struct _gmCameraUnkFuncTable {
 /* 1A3634 */ void gmCamera_801A3634_OnEnter(UNK_T);
 /* 1A367C */ void gmCamera_801A367C_OnLeave(UNK_T);
 
-/* 3DA6B4 */ extern gmCameraUnkFuncTable gmCamera_803DA6B4[];
+/* 3DA6B4 */ extern gmCameraUnkFuncTable gmCamera_VsCamStateTable[];
 
 #endif

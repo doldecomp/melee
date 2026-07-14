@@ -18,9 +18,9 @@
 
 #include <math.h>
 
-/* 0x802910B8 */ void itFlipper_Logic20_Thrown(Item_GObj* gobj);
+/* 0x802910B8 */ void itFlipper_Thrown(Item_GObj* gobj);
 
-HSD_GObj* it_80290938(HSD_JObj* jobj)
+HSD_GObj* itFlipper_Spawn(HSD_JObj* jobj)
 {
     u8 _pad[8];
     SpawnItem spawn;
@@ -44,13 +44,13 @@ HSD_GObj* it_80290938(HSD_JObj* jobj)
             Item* ip = GET_ITEM(gobj);
             ip->xDD4_itemVar.flipper.xDE8 = 1;
             ip->xDD4_itemVar.flipper.xDEC = jobj;
-            it_80291254(gobj);
+            itFlipper_Settle(gobj);
         }
     }
     return gobj;
 }
 
-void itFlipper_Logic20_Spawned(Item_GObj* gobj)
+void itFlipper_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(8);
@@ -62,10 +62,10 @@ void itFlipper_Logic20_Spawned(Item_GObj* gobj)
     ip->xDD4_itemVar.flipper.xDE8 = 0;
     ip->xDD4_itemVar.flipper.xDEC = 0;
     it_802756D0(gobj);
-    it_80290F00(gobj);
+    itFlipper_EnterFalling(gobj);
 }
 
-void it_80290A7C(Item_GObj* gobj)
+void itFlipper_UpdateSpin(Item_GObj* gobj)
 {
     HSD_JObj* child;
     Item* ip2;
@@ -107,7 +107,7 @@ void it_80290A7C(Item_GObj* gobj)
     HSD_JObjSetRotationX(jobj, ip2->xDD4_itemVar.flipper.xDE0);
 }
 
-void it_80290C38(Item_GObj* gobj, Vec3* pos, f32 angle)
+void itFlipper_AddSpinImpulse(Item_GObj* gobj, Vec3* pos, f32 angle)
 {
     Item* ip = GET_ITEM(gobj);
     itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
@@ -164,10 +164,10 @@ static inline void it_80290CE8_inline(Item_GObj* gobj, Vec3* vel, Vec3* pos,
         }
         ip->xCF4_fighterGObjUnk = NULL;
     }
-    it_80290C38(gobj, pos, deg_to_rad * speed);
+    itFlipper_AddSpinImpulse(gobj, pos, deg_to_rad * speed);
 }
 
-void it_80290CE8(Item_GObj* gobj)
+void itFlipper_SpinFromFighter(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     f32 speed = 10.0f;
@@ -190,7 +190,7 @@ void it_80290CE8(Item_GObj* gobj)
         }
         ip->xCF4_fighterGObjUnk = NULL;
     }
-    it_80290C38(gobj, &pos, deg_to_rad * speed);
+    itFlipper_AddSpinImpulse(gobj, &pos, deg_to_rad * speed);
 }
 
 static inline void it_80290DD4_inline(Item_GObj* gobj, s32 kind, Vec3* pos,
@@ -212,13 +212,13 @@ static inline void it_80290DD4_inline(Item_GObj* gobj, s32 kind, Vec3* pos,
     }
 }
 
-void it_80290DD4(Item_GObj* gobj, s32 kind, Vec3* pos)
+void itFlipper_Repel(Item_GObj* gobj, s32 kind, Vec3* pos)
 {
     Vec3 vec;
     it_80290DD4_inline(gobj, kind, pos, &vec);
 }
 
-void it_80290E78(Item_GObj* gobj)
+void itFlipper_EnterResting(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itResetVelocity(ip);
@@ -226,60 +226,60 @@ void it_80290E78(Item_GObj* gobj)
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-bool itFlipper_UnkMotion0_Anim(Item_GObj* gobj)
+bool itFlipper_Resting_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void itFlipper_UnkMotion0_Phys(Item_GObj* gobj) {}
+void itFlipper_Resting_Phys(Item_GObj* gobj) {}
 
-bool itFlipper_UnkMotion0_Coll(Item_GObj* gobj)
+bool itFlipper_Resting_Coll(Item_GObj* gobj)
 {
-    it_8026D62C(gobj, it_80290F00);
+    it_8026D62C(gobj, itFlipper_EnterFalling);
     return false;
 }
 
-void it_80290F00(Item_GObj* gobj)
+void itFlipper_EnterFalling(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
 }
 
-bool itFlipper_UnkMotion1_Anim(Item_GObj* gobj)
+bool itFlipper_Falling_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void itFlipper_UnkMotion1_Phys(Item_GObj* gobj)
+void itFlipper_Falling_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     ItemAttr* attrs = ip->xCC_item_attr;
     it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
 }
 
-bool itFlipper_UnkMotion1_Coll(Item_GObj* gobj)
+bool itFlipper_Falling_Coll(Item_GObj* gobj)
 {
-    it_8026E15C(gobj, it_80290E78);
+    it_8026E15C(gobj, itFlipper_EnterResting);
     return false;
 }
 
-void itFlipper_Logic20_PickedUp(Item_GObj* gobj)
+void itFlipper_PickedUp(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
 }
 
-bool itFlipper_UnkMotion2_Anim(Item_GObj* gobj)
+bool itFlipper_Held_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void itFlipper_UnkMotion2_Phys(Item_GObj* gobj) {}
+void itFlipper_Held_Phys(Item_GObj* gobj) {}
 
-void itFlipper_Logic20_Dropped(Item_GObj* gobj)
+void itFlipper_Dropped(Item_GObj* gobj)
 {
-    itFlipper_Logic20_Thrown(gobj);
+    itFlipper_Thrown(gobj);
 }
 
-void itFlipper_Logic20_Thrown(Item_GObj* gobj)
+void itFlipper_Thrown(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
@@ -294,20 +294,20 @@ void itFlipper_Logic20_Thrown(Item_GObj* gobj)
     Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE | ITEM_DROP_UPDATE);
 }
 
-bool itFlipper_UnkMotion3_Anim(Item_GObj* gobj)
+bool itFlipper_Inflight_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
 
     ip->xDD4_itemVar.flipper.xDD4--;
     if (ip->xDD4_itemVar.flipper.xDD4 <= 0) {
-        it_80291254(gobj);
+        itFlipper_Settle(gobj);
     }
     return false;
 }
 
-/// #itFlipper_UnkMotion3_Anim
+/// #itFlipper_Inflight_Anim
 
-void itFlipper_UnkMotion3_Phys(Item_GObj* gobj)
+void itFlipper_Inflight_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     ItemAttr* item_attr = ip->xCC_item_attr;
@@ -322,7 +322,7 @@ void itFlipper_UnkMotion3_Phys(Item_GObj* gobj)
     it_80274658(gobj, it_804D6D28->x68_float);
 }
 
-bool itFlipper_UnkMotion3_Coll(Item_GObj* gobj)
+bool itFlipper_Inflight_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
@@ -344,7 +344,7 @@ bool itFlipper_UnkMotion3_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_80291254(Item_GObj* gobj)
+void itFlipper_Settle(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
@@ -361,10 +361,10 @@ void it_80291254(Item_GObj* gobj)
     ip->xD44_lifeTimer = (f32) attrs->x8;
     it_8026B3A8(gobj);
     it_802756E0(gobj);
-    it_8029131C(gobj);
+    itFlipper_EnterActive(gobj);
 }
 
-void it_8029131C(Item_GObj* gobj)
+void itFlipper_EnterActive(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 5, 0x12);
 }
@@ -379,11 +379,11 @@ static inline void it_80291344_inline(Item_GObj* gobj)
     it_802756E0(gobj);
 }
 
-bool it_80291344(Item_GObj* gobj)
+bool itFlipper_UpdateActive(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
 
-    it_80290A7C(gobj);
+    itFlipper_UpdateSpin(gobj);
 
     if (ABS(ip->x40_vel.x) >= 0.01f) {
         ip->x40_vel.x *= 0.9f;
@@ -419,25 +419,25 @@ bool it_80291344(Item_GObj* gobj)
     return false;
 }
 
-bool itFlipper_UnkMotion5_Anim(Item_GObj* gobj)
+bool itFlipper_Active_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->xDD4_itemVar.flipper.xDE4 != 0.0f) {
         Item_80268E5C(gobj, 6, 0x12);
     }
-    return it_80291344(gobj);
+    return itFlipper_UpdateActive(gobj);
 }
 
-bool itFlipper_UnkMotion6_Anim(Item_GObj* gobj)
+bool itFlipper_Spinning_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->xDD4_itemVar.flipper.xDE4 == 0.0F) {
         Item_80268E5C(gobj, 5, 0x12);
     }
-    return it_80291344(gobj);
+    return itFlipper_UpdateActive(gobj);
 }
 
-void itFlipper_UnkMotion6_Phys(Item_GObj* gobj)
+void itFlipper_Spinning_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->xDD4_itemVar.flipper.xDE8 != 0) {
@@ -447,7 +447,7 @@ void itFlipper_UnkMotion6_Phys(Item_GObj* gobj)
     }
 }
 
-bool itFlipper_UnkMotion6_Coll(Item_GObj* gobj)
+bool itFlipper_Spinning_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->xDD4_itemVar.flipper.xDE8 == 0) {
@@ -456,7 +456,7 @@ bool itFlipper_UnkMotion6_Coll(Item_GObj* gobj)
     return false;
 }
 
-bool it_3F14_Logic20_DmgDealt(Item_GObj* gobj)
+bool itFlipper_DmgDealt(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
@@ -486,7 +486,7 @@ bool it_3F14_Logic20_DmgDealt(Item_GObj* gobj)
 }
 
 #pragma dont_inline on
-bool it_3F14_Logic20_Clanked(Item_GObj* gobj)
+bool itFlipper_Clanked(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
     itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
@@ -500,18 +500,18 @@ bool it_3F14_Logic20_Clanked(Item_GObj* gobj)
         }
     } else {
         ip->xDD4_itemVar.flipper.xDDC = attrs->x14;
-        it_80290CE8(gobj);
+        itFlipper_SpinFromFighter(gobj);
         it_80272560(gobj, 0);
         it_80272560(gobj, 1);
         it_802756D0(gobj);
         if (ip->xDD4_itemVar.flipper.xDE8 == 0) {
-            it_80290DD4(gobj, ip->xC38, &ip->xCD4);
+            itFlipper_Repel(gobj, ip->xC38, &ip->xCD4);
         }
     }
     return false;
 }
 
-bool it_3F14_Logic20_HitShield(Item_GObj* gobj)
+bool itFlipper_HitShield(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
     itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
@@ -525,24 +525,24 @@ bool it_3F14_Logic20_HitShield(Item_GObj* gobj)
         }
     } else {
         ip->xDD4_itemVar.flipper.xDDC = attrs->x14;
-        it_80290CE8(gobj);
+        itFlipper_SpinFromFighter(gobj);
         it_80272560(gobj, 0);
         it_80272560(gobj, 1);
         it_802756D0(gobj);
         if (ip->xDD4_itemVar.flipper.xDE8 == 0) {
-            it_80290DD4(gobj, ip->xC38, &ip->xCD4);
+            itFlipper_Repel(gobj, ip->xC38, &ip->xCD4);
         }
     }
     return false;
 }
 
 #pragma dont_inline reset
-bool itFlipper_Logic20_Reflected(Item_GObj* gobj)
+bool itFlipper_Reflected(Item_GObj* gobj)
 {
     return it_80273030(gobj);
 }
 
-bool itFlipper_Logic20_ShieldBounced(Item_GObj* gobj)
+bool itFlipper_ShieldBounced(Item_GObj* gobj)
 {
     return itColl_BounceOffShield(gobj);
 }
@@ -560,10 +560,10 @@ static inline void it_3F14_DmgRecv_CE8(Item_GObj* gobj, Vec3* vel, Vec3* pos,
         }
         ip->xCEC_fighterGObj = NULL;
     }
-    it_80290C38(gobj, pos, deg_to_rad * speed);
+    itFlipper_AddSpinImpulse(gobj, pos, deg_to_rad * speed);
 }
 
-bool it_3F14_Logic20_DmgReceived(Item_GObj* gobj)
+bool itFlipper_DmgReceived(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
@@ -585,25 +585,25 @@ bool it_3F14_Logic20_DmgReceived(Item_GObj* gobj)
     return false;
 }
 
-void itFlipper_Logic20_EnteredAir(Item_GObj* gobj)
+void itFlipper_EnteredAir(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
 }
 
-bool itFlipper_UnkMotion4_Anim(Item_GObj* gobj)
+bool itFlipper_Airborne_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void itFlipper_UnkMotion4_Phys(Item_GObj* gobj) {}
+void itFlipper_Airborne_Phys(Item_GObj* gobj) {}
 
-bool itFlipper_UnkMotion4_Coll(Item_GObj* gobj)
+bool itFlipper_Airborne_Coll(Item_GObj* gobj)
 {
-    it_8026E8C4(gobj, it_80290E78, it_80290F00);
+    it_8026E8C4(gobj, itFlipper_EnterResting, itFlipper_EnterFalling);
     return false;
 }
 
-void itFlipper_Logic20_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itFlipper_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

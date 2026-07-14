@@ -30,7 +30,7 @@
 
 void ftCo_8009C5A4(Fighter_GObj* gobj, FtMotionId msid)
 {
-    u32 unused1;
+    u32 orig;
     u32 unused2;
     Fighter* fp = gobj->user_data;
     if (fp->motion_id != msid || msid != ftCo_MS_ShoulderedWait) {
@@ -92,7 +92,7 @@ void ftCo_Shouldered_Anim(Fighter_GObj* gobj)
     Fighter* fp2;
     Fighter* fp1;
     Fighter_GObj* gobj1;
-    u32 unused1;
+    u32 orig;
     u32 unused2;
     Vec3 pos;
     Fighter* fp = gobj->user_data;

@@ -184,7 +184,7 @@ void mnSoundTest_8024A790(HSD_GObj* arg0)
 
 void mnSoundTest_8024A958(Soundtest_GObj* arg0)
 {
-    f32 unused1;
+    f32 orig;
     f32 unused2;
     soundtest_user_data* new_var;
     f32 unused3;

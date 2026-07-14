@@ -217,7 +217,7 @@ void un_8031D288_OnEnter(void* data)
 
 void un_8031D698_OnFrame(void)
 {
-    u64 result = gm_801A36A0(gm_8017E430());
+    u64 result = gm_GetButtonsTriggered(gm_8017E430());
     if ((result & 0x1000) != 0) {
         lb_800145F4();
         gm_801A4B60();

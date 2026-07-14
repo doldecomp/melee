@@ -1550,7 +1550,7 @@ void fn_80187910(HSD_GObj* arg0)
 
     PAD_STACK(4);
     cobj = arg0->hsd_obj;
-    if (gm_801A36A0(lbl_804736C0.x38) & 0x100) {
+    if (gm_GetButtonsTriggered(lbl_804736C0.x38) & 0x100) {
         lbl_804736C0.x37.frame_counter =
             (s32) cobj->eyepos->aobj->curr_frame / 300;
         if (++lbl_804736C0.x37.frame_counter >= 8U) {
@@ -1681,7 +1681,7 @@ void fn_80187CF4(HSD_GObj* gobj)
         }
         break;
     case 2:
-        if (gm_801A36A0(lbl_804736C0.x38) & 0x1000) {
+        if (gm_GetButtonsTriggered(lbl_804736C0.x38) & 0x1000) {
             lbAudioAx_80024030(1);
             lbl_804736C0.x36.active = 1;
             lbl_804736C0.x37.state2 = 3;
@@ -1933,7 +1933,7 @@ check_cobj:
 
 bool gm_8018841C(void)
 {
-    if (gm_801A4310() == GM_TRAINING) {
+    if (gm_GetCurrentGameMode() == GM_TRAINING) {
         return true;
     }
     return false;

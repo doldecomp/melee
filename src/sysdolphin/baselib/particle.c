@@ -592,7 +592,7 @@ void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
     }
 }
 
-void hsd_80392194(u8* dst, s32 flags, void* unused1, void* unused2, u8* src)
+void hsd_80392194(u8* dst, s32 flags, void* orig, void* unused2, u8* src)
 {
     u8 b;
     dst[0] = src[0];
@@ -7722,7 +7722,7 @@ void hsd_8039D5DC(HSD_JObj* jobj)
     }
 }
 
-void hsd_8039D688(HSD_JObj* jobj, f32** unused1, s32 unused2)
+void hsd_8039D688(HSD_JObj* jobj, f32** orig, s32 unused2)
 {
     HSD_Generator* next;
     HSD_Generator* gen;

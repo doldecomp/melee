@@ -369,7 +369,7 @@ static void fn_8019F810(void)
 
 static inline s32 fn_8019F9C4_GetCharIdx(CharacterKind arg0)
 {
-    switch (gm_801A4310()) {
+    switch (gm_GetCurrentGameMode()) {
     case 3:
         return gm_80160474(arg0, GM_CLASSIC);
     case 4:
@@ -405,7 +405,7 @@ void fn_8019F9C4(u32 arg0)
     Toy_803124BC();
     Toy_803102D0();
     {
-        u8 game_mode = gm_801A4310();
+        u8 game_mode = gm_GetCurrentGameMode();
         char* model_name = gm_80160564(arg0, game_mode);
         char* scene_name = gm_801604DC(arg0, game_mode);
         lbArchive_LoadSymbols(scene_name, &lbl_804D66AC, model_name, 0);
@@ -669,7 +669,8 @@ static void fn_801A0B60(HSD_GObj* gobj)
     HSD_JObjReqAnimAll(jobj, lbl_804D66F8);
     HSD_JObjAnimAll(jobj);
     if (lbl_804D66F8 == 0xBD) {
-        if (((u32) gm_801A36A0(4) & 0x1000) || ((u32) gm_801A36A0(4) & 0x100))
+        if (((u32) gm_GetButtonsTriggered(4) & 0x1000) ||
+            ((u32) gm_GetButtonsTriggered(4) & 0x100))
         {
             lbl_804D66F8 += 1;
         }

@@ -285,7 +285,7 @@ void grBigBlueRoute_8020BC34(Ground_GObj* gobj)
 }
 
 /// @todo Currently 99.83% match - remaining diffs are anonymous string-pool
-/// symbols (translate/reb0_jobj) vs the target's single grBb_Route_803E61D4
+/// symbols (translate/reb0_jobj) vs the target's single lbl_803E61D4
 void grBigBlueRoute_8020BC68(Ground_GObj* gobj)
 {
     Vec3 origin;

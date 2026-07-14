@@ -3193,12 +3193,12 @@ f32 Ground_801C57F0(void)
     return stage_info.x6E0;
 }
 
-void Ground_801C5800(void)
+void Ground_EnableMatchCamera(void)
 {
     if (stage_info.param->x4C_fixed_cam) {
-        Camera_8002F8F4();
+        Camera_SetModeToFixed();
     } else {
-        Camera_8002F474();
+        Camera_SetModeToStandard();
     }
 }
 
@@ -3215,7 +3215,7 @@ void Ground_801C5878(void)
 {
     PAD_STACK(8);
     tyDisplay_8031C2CC();
-    if (gm_8016B498() != 0) {
+    if (gm_IsCurrently1PMode() != 0) {
         StageInfo* stageinfo = &stage_info;
         int display_id;
         display_id = tyDisplay_8031C2EC();

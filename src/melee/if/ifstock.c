@@ -932,7 +932,7 @@ void ifStock_802FAEC4(void)
             ifStock_804A1A8C[i] = ifStock_802FA118(i);
         }
     }
-    if (gm_80182510()) {
+    if (gm_IsMultimanSmashMode()) {
         // ifStock_802FA5BC(0); // inlined
         HSD_GObj* gobj2 = GObj_Create(14, 15, 0);
         HSD_JObj* jobj = HSD_JObjLoadJoint(stock->x4->joint);

@@ -1569,9 +1569,9 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
         inputs->stick_y = stick_y;
         inputs->substick_x = substick_x;
         inputs->substick_y = substick_y;
-        temp_ret = gm_801A3680(4U);
+        temp_ret = gm_GetButtonsPressed(4U);
         inputs->x10._u64 = temp_ret;
-        temp_ret = gm_801A36A0(4U);
+        temp_ret = gm_GetButtonsTriggered(4U);
         inputs->x18._u64 = temp_ret;
         return;
     }
@@ -1580,9 +1580,9 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
     inputs->stick_y = pad->nml_stickY;
     inputs->substick_x = pad->nml_subStickX;
     inputs->substick_y = pad->nml_subStickY;
-    temp_ret = gm_801A3680(slot);
+    temp_ret = gm_GetButtonsPressed(slot);
     inputs->x10._u64 = temp_ret;
-    temp_ret = gm_801A36A0(slot);
+    temp_ret = gm_GetButtonsTriggered(slot);
     inputs->x18._u64 = temp_ret;
 }
 
@@ -3849,12 +3849,12 @@ void Camera_8002F3AC(void)
     cm_80452C68.transform_copy.fov = cm_80452C68.transform_copy.target_fov;
 }
 
-void Camera_8002F474(void)
+void Camera_SetModeToStandard(void)
 {
     cm_80452C68.mode = CAMERA_STANDARD;
 }
 
-s32 fn_8002F488(Vec4* arg0)
+s32 Camera_SetBounds(Vec4* arg0)
 {
     arg0->z = Stage_GetCamBoundsLeftOffset();
     arg0->w = Stage_GetCamBoundsRightOffset();
@@ -3863,7 +3863,7 @@ s32 fn_8002F488(Vec4* arg0)
     return 1;
 }
 
-void Camera_8002F4D4(s8 arg0, s8 arg1, s32 arg2)
+void Camera_SetUpPauseCamera(s8 arg0, s8 arg1, s32 arg2)
 {
     Vec3* target_interest;
     Vec3* pause_eye_offset;
@@ -3893,7 +3893,8 @@ void Camera_8002F4D4(s8 arg0, s8 arg1, s32 arg2)
     cm_80452C68.x2D0.angle_left = Stage_GetCamAngleRadiansLeft();
     cm_80452C68.x2D0.unk28 = Stage_GetPauseCamZPosMin();
     cm_80452C68.x2D0.unk2C = Stage_GetPauseCamZPosMax();
-    cm_80452C68.x2D0.callback = (void (*)(Camera_x2D0*))(Event) fn_8002F488;
+    cm_80452C68.x2D0.callback =
+        (void (*)(Camera_x2D0*))(Event) Camera_SetBounds;
 
     switch (arg2) {
     case 0:
@@ -3952,14 +3953,14 @@ void Camera_8002F4D4(s8 arg0, s8 arg1, s32 arg2)
     }
 }
 
-void Camera_8002F73C(s8 arg0, s8 arg1)
+void Camera_SetUpPauseCameraWithDefaultZoom(s8 arg0, s8 arg1)
 {
-    Camera_8002F4D4(arg0, arg1, 0);
+    Camera_SetUpPauseCamera(arg0, arg1, 0);
 }
 
 void Camera_8002F760(s8 arg0, s8 arg1)
 {
-    Camera_8002F4D4(arg0, arg1, 1);
+    Camera_SetUpPauseCamera(arg0, arg1, 1);
 }
 
 /// Camera_SetModeTraining
@@ -4027,7 +4028,7 @@ void Camera_8002F7AC(s8 slot)
     cm_80452C68.yaw_offset = ((cm_804D7ED8 * randf) - cm_804D7EE0);
 }
 
-void Camera_8002F8F4(void)
+void Camera_SetModeToFixed(void)
 {
     cm_80452C68.mode = CAMERA_FIXED;
 }

@@ -132,7 +132,7 @@ void mnNameNew_8023B224(u8 arg0)
     if (arg0 != 0) {
         lb_8001CE00();
     }
-    if (gm_801A4310() == 0x1B) {
+    if (gm_GetCurrentGameMode() == 0x1B) {
         HSD_SisLib_803A5E70();
         mn_8022EBDC();
         if (arg0 != 0) {
@@ -142,7 +142,7 @@ void mnNameNew_8023B224(u8 arg0)
         gm_80190FE4(0x78);
         return;
     }
-    if (gm_801A4310() == 1) {
+    if (gm_GetCurrentGameMode() == 1) {
         mn_804D6BC8.cooldown = 5;
         if (arg0 != 0 && GetNameCount() > 0x18) {
             mnName_8023A9B4((u8) (temp_r31->name_index / 6));

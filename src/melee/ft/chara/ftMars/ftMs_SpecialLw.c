@@ -373,7 +373,7 @@ void ftMs_SpecialLw_80139140(HSD_GObj* gobj)
     u8 unused0[4];
     Vec3 sp18;
 
-    u8 unused1[4];
+    u8 orig[4];
 
     {
         Fighter* fp = GET_FIGHTER(gobj);

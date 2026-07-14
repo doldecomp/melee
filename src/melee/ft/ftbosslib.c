@@ -451,5 +451,5 @@ void ftBossLib_8015CB9C(s32 arg0)
 
 void ftBossLib_8015CC14(void)
 {
-    Camera_8002F474();
+    Camera_SetModeToStandard();
 }

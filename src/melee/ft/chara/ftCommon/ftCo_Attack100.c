@@ -445,7 +445,7 @@ void ftCo_800D71D8(Fighter_GObj* gobj)
 bool ftCo_800D730C(Fighter_GObj* gobj, bool arg1)
 {
     extern f32 ftCo_804D9018;
-    s32 unused1;
+    s32 orig;
     struct Fighter_x2D0_t* x2d0;
     s32 canJump;
     s32 r29;
@@ -1515,7 +1515,7 @@ bool fn_800D8EC8(Fighter_GObj* gobj)
     Vec3 vel;
     f32 var_f3;
     f32 mtxY;
-    UNUSED u32 unused1;
+    UNUSED u32 orig;
     UNUSED u32 unused2;
     UNUSED u32 unused3;
     UNUSED u32 unused4;

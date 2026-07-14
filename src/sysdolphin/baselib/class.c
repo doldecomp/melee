@@ -66,7 +66,7 @@ void OSReport_PrintSpaces(s32 count)
 #ifndef BUGFIX
 #pragma push
 #pragma force_active on
-static char unused1[] = "entry %d <null>\n";
+static char orig[] = "entry %d <null>\n";
 static char unused2[] = "entry %d - %d <null>\n";
 static char unused3[] = "entry %d(%d)";
 static char unused4[] = "  nb_alloc %d nb_free %d\n";

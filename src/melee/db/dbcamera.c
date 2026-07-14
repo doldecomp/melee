@@ -267,7 +267,7 @@ static void fn_80227188(void)
 void fn_CheckCameraInfo(int player, int buttons_down, int buttons_pressed,
                         f32 cstick_x, f32 cstick_y)
 {
-    if (gm_8018841C() == 0 && gm_801A4310() != 0xA) {
+    if (gm_8018841C() == 0 && gm_GetCurrentGameMode() != 0xA) {
         if (Camera_80030178() == 0 && Camera_80030154() == 0 &&
             (ABS(cstick_x) > 0.6F || ABS(cstick_y) > 0.6F))
         {

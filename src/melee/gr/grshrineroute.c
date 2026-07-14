@@ -257,7 +257,7 @@ void fn_80208A38(HSD_GObj* gobj)
     HSD_GObj* effect;
     HSD_JObj* ejobj;
     int i;
-    float unused1;
+    float orig;
     PAD_STACK(16);
 
     flags[0] = 0;
@@ -380,7 +380,7 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
 {
     Vec3 sp88;
     Vec3 sp7C;
-    f32 unused1;
+    f32 orig;
     f32 unused2;
     Vec3 sp68;
     Vec3 sp5C;
@@ -1271,7 +1271,7 @@ s32 grShrineRoute_8020AE08(HSD_GObj* gobj, HSD_GObj* player_gobj, s32* out)
     Vec3 hi;
     Ground* gp = gobj->user_data;
     f32 scale;
-    float unused1;
+    float orig;
     float unused2;
     float unused3;
     Vec3 pos;

@@ -153,7 +153,7 @@ void fn_8015B2C0(HSD_GObj* gobj)
     }
     case 9: {
         if (--fp->mv.ch.unk4.x8 == 0) {
-            Camera_8002F474();
+            Camera_SetModeToStandard();
             fp->mv.ch.unk4.x0 = 10;
         }
         return;

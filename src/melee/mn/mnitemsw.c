@@ -262,7 +262,7 @@ void fn_80233E10(HSD_GObj* gobj)
         }
     } else if (buttons & MenuInput_StartButton) {
         sfxForward();
-        switch ((s32) gm_801A4310()) {
+        switch ((s32) gm_GetCurrentGameMode()) {
         case 1:
             order = mnItemSw_803ED340.item_order;
             data = (MnItemSwData*) mnItemSw_804D6BE8->user_data;

@@ -91,7 +91,7 @@ inline void setupStartAccessory(HSD_GObj* gobj, Vec3* scale)
 
 void ftKb_SpecialNMs_8010B2FC(HSD_GObj* gobj)
 {
-    u32 unused1;
+    u32 orig;
     u32 unused2;
     Vec3 scale;
     PAD_STACK(4 * 3);

@@ -1398,7 +1398,7 @@ void gm_8016260C(u8 arg0, u8 arg1)
         *p = MIN(*p + 1, 0xFFFFFFFFU);
         return;
     }
-    if (gm_801A4310() == 0x1F) {
+    if (gm_GetCurrentGameMode() == 0x1F) {
         counter = gmMainLib_8015CD5C();
     } else {
         switch ((s32) arg0) {
@@ -2629,20 +2629,20 @@ bool gm_80165084(void)
 
 void fn_801650E8(void)
 {
-    Ground_801C5800();
+    Ground_EnableMatchCamera();
 }
 
-void fn_80165108(int slot, int arg1)
+void gm_EnablePlayerPauseCamera(int slot, int arg1)
 {
     if (slot == -1) {
-        Camera_8002F73C(0xB, 5);
+        Camera_SetUpPauseCameraWithDefaultZoom(0xB, 5);
         return;
     }
     if (((Player_GetPlayerSlotType(slot) == Gm_PKind_Human) ||
          (Player_GetPlayerSlotType(slot) == Gm_PKind_Cpu)) &&
         (Player_GetEntity(slot) != NULL))
     {
-        Camera_8002F73C(slot, arg1);
+        Camera_SetUpPauseCameraWithDefaultZoom(slot, arg1);
     }
 }
 
@@ -2673,7 +2673,7 @@ void gm_80165268(int unused)
 
 void gm_80165290(int x)
 {
-    Camera_8002F8F4();
+    Camera_SetModeToFixed();
 }
 
 void fn_801652B0(s32 arg0, s32 arg1)
@@ -2833,7 +2833,7 @@ s32 fn_8016588C(lbl_8046B6A0_24C_t* arg0, s32 arg1)
     s32 v;
     s32 lim;
 
-    if (gm_801A4310() == 0x1F) {
+    if (gm_GetCurrentGameMode() == 0x1F) {
         if (arg0->x58[arg1].x28 != 0) {
             v = (u8) (arg0->x58[arg1].x28 / 60 + 0xFF000001);
         } else {
@@ -2991,7 +2991,7 @@ void fn_80165E7C(MatchEnd* arg0)
         if ((u8) arg0->player_standings[i].slot_type != 3) {
             u8 team = arg0->player_standings[i].team;
 
-            if (gm_801A4310() == GM_STAMINA_VS || arg0->x5 == 1) {
+            if (gm_GetCurrentGameMode() == GM_STAMINA_VS || arg0->x5 == 1) {
                 int player_score = new_var = arg0->player_standings[i].score;
 
                 if (player_score < 0) {
@@ -3497,7 +3497,7 @@ void gm_80167320(int slot, bool arg1)
 
 void gm_80167470(s32 arg0, s32 arg1)
 {
-    switch ((s32) gm_801A4310()) {
+    switch ((s32) gm_GetCurrentGameMode()) {
     case 0x1F:
         gm_801B97C4(arg0, arg1);
         break;

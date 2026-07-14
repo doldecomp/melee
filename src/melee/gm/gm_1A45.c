@@ -237,10 +237,10 @@ void gm_801A4BD4(void)
     lb_80014534();
 }
 
-GameSceneHandler* gm_801A4CE0(u8 id)
+GameSceneHandler* gm_FindGameSceneHandler(u8 id)
 {
     GameSceneHandler* cur;
-    for (cur = gm_801A50A0(); cur->class_id != 0x2D; cur++) {
+    for (cur = gm_GetAllGameSceneHandlers(); cur->class_id != 0x2D; cur++) {
         if (cur->class_id == id) {
             return cur;
         }
@@ -303,7 +303,7 @@ void gm_801A4D34(void (*arg0)(void), GameSceneInfo* arg1)
             if (gm_80479D58.unk_10.unk_38_0) {
                 lb_80019900();
                 if (lb_80019A30(0)) {
-                    gm_801A3A74();
+                    gm_EvaluateAllControllerInputs();
                 }
                 if (lb_80019A30(0) && (arg0 != NULL)) {
                     arg0();

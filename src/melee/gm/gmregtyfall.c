@@ -87,7 +87,7 @@ static void order_sdata2(void)
 #pragma dont_inline on
 bool gm_801A659C(int arg0)
 {
-    switch (gm_801A4310()) {
+    switch (gm_GetCurrentGameMode()) {
     case GM_CLASSIC_GOVER:
         return gm_80160474(arg0, 3);
     case GM_ADVENTURE_GOVER:
@@ -359,7 +359,7 @@ void gm_801A6EE4(void)
     gm_801A4B90();
     Toy_803124BC();
     Toy_803102D0();
-    switch (gm_801A4310()) {
+    switch (gm_GetCurrentGameMode()) {
     case GM_CLASSIC_GOVER:
         var_r29 = GM_CLASSIC;
         break;
@@ -547,7 +547,7 @@ void gm_801A79D4_OnFrame(void)
 {
     if (gm_804D6740 != 0) {
         gm_804D6740--;
-    } else if (gm_801A36A0(gm_801BF010()) & 0x1000) {
+    } else if (gm_GetButtonsTriggered(gm_801BF010()) & 0x1000) {
         lbAudioAx_80023694();
         lbAudioAx_80024030(1);
         gm_801A4B60();

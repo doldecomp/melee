@@ -378,7 +378,7 @@ void HSD_MObjCompileTev(HSD_MObj* mobj)
 #ifndef BUGFIX
 #pragma push
 #pragma force_active on
-static char unused1[] = "hsdIsDescendantOf(info, &hsdMObj)";
+static char orig[] = "hsdIsDescendantOf(info, &hsdMObj)";
 #pragma pop
 #endif
 

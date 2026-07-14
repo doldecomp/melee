@@ -110,7 +110,7 @@ void gm_801A4014(GameMode* mode)
         scene->Prep(scene);
     }
     info = &scene->info;
-    handler = gm_801A4CE0(scene->info.class_id);
+    handler = gm_FindGameSceneHandler(scene->info.class_id);
     gm_801A4BD4();
     gm_801A4B88(info);
     if (handler->OnLoad != NULL) {
@@ -153,64 +153,64 @@ void gm_801A4014(GameMode* mode)
         memzero(&gm_80479D30, 0x14);
         gm_801A3EF4();
         gmMainLib_8046B0F0.x0 = true;
-        gm_801A42F8(GM_BOOT);
+        gm_ChangeGameModeAfterCurrentScene(GM_BOOT);
         HSD_VISetBlack(0);
     }
 }
 
-void* gm_801A427C(GameScene* scene)
+void* gm_GetGameSceneLoadDataCallback(GameScene* scene)
 {
     return scene->info.load_data;
 }
 
-void* gm_801A4284(GameScene* scene)
+void* gm_GetGameSceneLeaveDataCallback(GameScene* scene)
 {
     return scene->info.leave_data;
 }
 
-void gm_SetScene(u8 arg0)
+void gm_SetSceneIndex(u8 arg0)
 {
     gm_80479D30.routing.curr_scene = arg0;
     gm_80479D30.routing.prev_scene = arg0;
 }
 
-void gm_SetPendingScene(u8 pending_scene)
+void gm_SetPendingSceneIndex(u8 pending_scene)
 {
     gm_80479D30.routing.pending_scene = pending_scene + 1;
 }
 
-u8 gm_801A42B4(void)
+u8 gm_GetPreviousSceneIndex(void)
 {
     return gm_80479D30.routing.prev_scene;
 }
 
-u8 gm_801A42C4(void)
+u8 gm_GetCurrentSceneIndex(void)
 {
     return gm_80479D30.routing.curr_scene;
 }
 
-void gm_801A42D4(void)
+void gm_SetNewGameModePending(void)
 {
     gm_80479D30.pending = 1;
 }
 
-void gm_801A42E8(s8 pending_mode)
+void gm_SetPendingGameMode(s8 pending_mode)
 {
     gm_80479D30.routing.pending_mode = pending_mode;
 }
 
-void gm_801A42F8(int pending_mode)
+void gm_ChangeGameModeAfterCurrentScene(int pending_mode)
 {
     gm_80479D30.routing.pending_mode = pending_mode;
     gm_80479D30.pending = 1;
 }
 
-u8 gm_801A4310(void)
+u8 gm_GetCurrentGameMode(void)
 {
     return gm_80479D30.routing.curr_mode;
 }
 
-u8 gm_801A4320(void)
+u8 gm_GetPreviousGameMode(void)
 {
     return gm_80479D30.routing.prev_mode;
 }
@@ -220,7 +220,7 @@ void gm_801A4330(u8 (*arg0)(void))
     gm_80479D30.data = arg0;
 }
 
-bool gm_801A4340(u8 mode)
+bool gm_Is1PMode(u8 mode)
 {
     switch (mode) {
     case GM_CLASSIC:
@@ -252,7 +252,7 @@ inline GameMode* findMode(u8 idx)
     return NULL;
 }
 
-u8 gm_801A43A0(u8 mode_kind)
+u8 gm_RunGameMode(u8 mode_kind)
 {
     u8 temp_r3;
     GameMode* mode;
@@ -322,7 +322,7 @@ void gm_801A4510(void)
     gm_80479D30.routing.prev_mode = GM_COUNT;
 
     while (true) {
-        u8 major = gm_801A43A0(gm_80479D30.routing.curr_mode);
+        u8 major = gm_RunGameMode(gm_80479D30.routing.curr_mode);
         if (gmMainLib_8046B0F0.resetting) {
             gmMainLib_8046B0F0.resetting = false;
         }

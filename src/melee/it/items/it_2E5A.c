@@ -179,7 +179,7 @@ void it_802E5F00(Item_GObj* item_gobj, Vec3* pos, Vec3* vel, s32 arg3)
 {
     it_802E5FXX_struct vars;
     SpawnItem sp1C;
-    f32 unused1;
+    f32 orig;
 
     it_802E614C(NULL, item_gobj, &sp1C, pos, vel);
     vars.x0 = item_gobj;

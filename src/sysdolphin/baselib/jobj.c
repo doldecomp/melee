@@ -678,7 +678,7 @@ HSD_JObj* HSD_JObjLoadJoint(HSD_Joint* arg0)
 #ifndef BUGFIX
 #pragma push
 #pragma force_active on
-static char unused1[] = "jobj_root";
+static char orig[] = "jobj_root";
 static char unused2[] = "jobj_root == NULL";
 #pragma pop
 #endif

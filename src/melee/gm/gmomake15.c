@@ -45,7 +45,9 @@ void gm_801ACF8C_OnFrame(void)
     if (gmMainLib_8046B0F0.xC && lbMthp_8001F604() == 0) {
         var_r31 = true;
     }
-    if (lbMthp_8001F604() != 0 || (gm_801A36A0(4) & 0x1100) || var_r31) {
+    if (lbMthp_8001F604() != 0 || (gm_GetButtonsTriggered(4) & 0x1100) ||
+        var_r31)
+    {
         lbAudioAx_800236DC();
         if (var_r31 != 0) {
             gm_801A4B74();
@@ -53,12 +55,12 @@ void gm_801ACF8C_OnFrame(void)
             gm_801A4B60();
         }
         gmMainLib_8015DB0C(0);
-        if ((gm_801A36A0(4) & 0x1100) || var_r31) {
+        if ((gm_GetButtonsTriggered(4) & 0x1100) || var_r31) {
             if (var_r31 == 0) {
                 lbAudioAx_80024030(1);
             }
-            gm_801A42E8(GM_TITLE);
-            gm_801A42D4();
+            gm_SetPendingGameMode(GM_TITLE);
+            gm_SetNewGameModePending();
         }
     }
 }

@@ -143,7 +143,7 @@ struct lbl_8046B488_t;
 /* 16505C */ void gm_8016505C(void);
 /* 165084 */ bool gm_80165084(void);
 /* 1650E8 */ void fn_801650E8(void);
-/* 165108 */ void fn_80165108(int, int);
+/* 165108 */ void gm_EnablePlayerPauseCamera(int, int);
 /* 165190 */ void fn_80165190(s32, s32);
 /* 1651FC */ void fn_801651FC(s32, s32);
 /* 165268 */ void gm_80165268(int);
