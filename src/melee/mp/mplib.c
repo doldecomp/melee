@@ -6275,7 +6275,7 @@ void mpLib_DrawSnapping(void)
     }
 }
 
-void mpLib_DrawMatchingLines(int value, int flag, GXColor color)
+int mpLib_DrawMatchingLines(int value, int flag, const GXColor* color)
 {
     CollLine* line_r31;
     int count_r28;
@@ -6301,7 +6301,7 @@ void mpLib_DrawMatchingLines(int value, int flag, GXColor color)
     }
 
     line_r31 = groundCollLine;
-    mpLib_SetupDraw(color);
+    mpLib_SetupDraw(*color);
     GXBegin(GX_QUADS, GX_VTXFMT0, count_r28 * 4);
     for (i = 0; i < total_r27; i++) {
         if (line_r31->flags & LINE_FLAG_ENABLED &&
@@ -6349,10 +6349,11 @@ void mpLib_80059554(void)
     CollLine* line_r4;
     CollVtx* v0_r6;
     CollVtx* v1_r4;
-    s16 count_r30;
     int total_r29;
+    int count_r30;
     MapCollData* coll_data_r31;
     int i;
+    UNUSED u8 pad[8];
     GXColor spB4;
     GXColor spB0;
     GXColor spAC;
@@ -6521,12 +6522,12 @@ void mpLib_80059554(void)
     }
 
     count_r30 = coll_data_r31->dynamic_count;
-    line_r4 = &groundCollLine[coll_data_r31->dynamic_start];
     total_r29 = 0;
     spB4 = mpLib_DynamicFloorColor;
     spB0 = mpLib_DynamicCeilingColor;
     spAC = mpLib_DynamicRightWallColor;
     spA8 = mpLib_DynamicLeftWallColor;
+    line_r4 = &groundCollLine[coll_data_r31->dynamic_start];
 
     for (i = 0; i < count_r30; i++) {
         if (line_r4->flags & LINE_FLAG_ENABLED &&
@@ -6688,7 +6689,7 @@ void mpLib_80059554(void)
 void mpLib_80059E60(void)
 {
     Mtx sp104;
-    PAD_STACK(0x3C);
+    PAD_STACK(0x30);
 
     HSD_LObjSetupInit(HSD_CObjGetCurrent());
     GXSetCullMode(GX_CULL_NONE);
@@ -6700,30 +6701,49 @@ void mpLib_80059E60(void)
     GXLoadPosMtxImm(sp104, 0U);
     if (Camera_80030B50()) {
         // terrain draw
-        mpIsland_Palette sp28;
-        mpIsland_PaletteEntry* var_r30;
-        PAD_STACK(0x8);
-        sp28 = mpIsland_TerrainPalette;
+        struct {
+            mpIsland_Palette palette;
+            u8 pad[4];
+            GXColor line_color;
+            GXColor basic_color;
+        } sp28;
+        GXColor* line_color;
+        mpIsland_PaletteEntry* entry;
+        sp28.palette = mpIsland_TerrainPalette;
 
-        var_r30 = sp28.x0;
+        entry = sp28.palette.x0;
+        line_color = &sp28.line_color;
 
-        while (var_r30->kind != -1) {
-            mpLib_DrawMatchingLines(var_r30->kind, 0xFF, var_r30->color);
-            var_r30++;
+        while (entry->kind != -1) {
+            *line_color = entry->color;
+            mpLib_DrawMatchingLines(entry->kind, 0xFF, line_color);
+            entry++;
         }
 
-        mpLib_DrawMatchingLines(mp_Terrain_Basic, 0xFF, mpLib_804D8100);
+        sp28.basic_color = mpLib_804D8100;
+        mpLib_DrawMatchingLines(mp_Terrain_Basic, 0xFF, &sp28.basic_color);
     } else if (Camera_80030B7C()) {
         // platform/ledge draw
+        struct {
+            u8 pad[0x10];
+            GXColor ledge;
+            GXColor platform;
+            GXColor ledge_platform;
+            GXColor none;
+        } colors;
+        colors.ledge = mpLib_804D80F0;
         mpLib_DrawMatchingLines(LINE_FLAG_LEDGE, LINE_FLAG_LEDGE,
-                                mpLib_804D80F0);
+                                &colors.ledge);
+        colors.platform = mpLib_804D80F4;
         mpLib_DrawMatchingLines(LINE_FLAG_PLATFORM, LINE_FLAG_PLATFORM,
-                                mpLib_804D80F4);
+                                &colors.platform);
+        colors.ledge_platform = mpLib_804D80F8;
         mpLib_DrawMatchingLines(LINE_FLAG_LEDGE | LINE_FLAG_PLATFORM,
                                 LINE_FLAG_LEDGE | LINE_FLAG_PLATFORM,
-                                mpLib_804D80F8);
+                                &colors.ledge_platform);
+        colors.none = mpLib_804D80FC;
         mpLib_DrawMatchingLines(0, LINE_FLAG_LEDGE | LINE_FLAG_PLATFORM,
-                                mpLib_804D80FC);
+                                &colors.none);
     } else {
         mpLib_80059554();
     }
