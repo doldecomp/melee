@@ -87,7 +87,7 @@ struct mpLib_803BF248_t {
 /* 4D64DC */ static s32 mpLib_804D64DC;
 /* 4D64E0 */ static s32 mpLib_804D64E0;
 /* 4D64E4 */ static s32 mpLib_804D64E4;
-/* 458888 */ Vec3 mpLib_80458888[0x200];
+/* 458888 */ Vec3 mpLib_80458888[0x80];
 
 struct mpLib_803BF248_t_x4 mpLib_803BD3D8 = {
     1.0F,         { -1, -1, -1, -1 }, { 0, -1, 0 }, { -1, -1, -1, -1 },
@@ -252,7 +252,7 @@ static struct mpLib_803BF248_t_x4* mpLib_803BDCB8[20] = {
     &mpLib_803BD538, &mpLib_803BD590, &mpLib_803BD5E8, &mpLib_803BD640,
     &mpLib_803BD698, &mpLib_803BD6F0, &mpLib_803BD748, &mpLib_803BD8A8,
     &mpLib_803BD900, &mpLib_803BD958, &mpLib_803BD9B0, &mpLib_803BDA60,
-    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68,
+    &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
 };
 static struct mpLib_803BF248_t_x4* mpLib_803BDD08[20] = {
     &mpLib_803BD3D8, &mpLib_803BD430, &mpLib_803BD488, &mpLib_803BD4E0,
@@ -885,8 +885,16 @@ void mpLibLoad(MapCollData* coll_data)
     float f31;
     CollJoint* joint_prev; // r27
     CollJoint* joint;      // r26
-    int start;
-    int count;
+    int floor_start;
+    int floor_count;
+    int ceiling_start;
+    int ceiling_count;
+    int right_wall_start;
+    int right_wall_count;
+    int left_wall_start;
+    int left_wall_count;
+    int dynamic_start;
+    int dynamic_count;
     int i;
 
     joint_prev = NULL;
@@ -930,49 +938,51 @@ void mpLibLoad(MapCollData* coll_data)
     jointListEnd = joint;
     mpPruneEmptyLines(coll_data);
 
-    count = coll_data->floor_count;
-    start = coll_data->floor_start;
-    for (; count > 0; count--) {
-        groundCollLine[start].flags =
-            coll_data->lines[start].hi_flags | LINE_FLAG_ENABLED;
-        groundCollLine[start].x0 = &coll_data->lines[start];
-        start++;
+    floor_count = coll_data->floor_count;
+    floor_start = coll_data->floor_start;
+    for (; floor_count > 0; floor_count--) {
+        groundCollLine[floor_start].flags =
+            coll_data->lines[floor_start].hi_flags | LINE_FLAG_ENABLED;
+        groundCollLine[floor_start].x0 = &coll_data->lines[floor_start];
+        floor_start++;
     }
 
-    count = coll_data->ceiling_count;
-    start = coll_data->ceiling_start;
-    while (count-- > 0) {
-        groundCollLine[start].flags =
-            coll_data->lines[start].hi_flags | LINE_FLAG_ENABLED;
-        groundCollLine[start].x0 = &coll_data->lines[start];
-        start++;
+    ceiling_count = coll_data->ceiling_count;
+    ceiling_start = coll_data->ceiling_start;
+    for (; ceiling_count > 0; ceiling_count--) {
+        groundCollLine[ceiling_start].flags =
+            coll_data->lines[ceiling_start].hi_flags | LINE_FLAG_ENABLED;
+        groundCollLine[ceiling_start].x0 = &coll_data->lines[ceiling_start];
+        ceiling_start++;
     }
 
-    count = coll_data->right_wall_count;
-    start = coll_data->right_wall_start;
-    while (count-- > 0) {
-        groundCollLine[start].flags =
-            coll_data->lines[start].hi_flags | LINE_FLAG_ENABLED;
-        groundCollLine[start].x0 = &coll_data->lines[start];
-        start++;
+    right_wall_count = coll_data->right_wall_count;
+    right_wall_start = coll_data->right_wall_start;
+    for (; right_wall_count > 0; right_wall_count--) {
+        groundCollLine[right_wall_start].flags =
+            coll_data->lines[right_wall_start].hi_flags | LINE_FLAG_ENABLED;
+        groundCollLine[right_wall_start].x0 =
+            &coll_data->lines[right_wall_start];
+        right_wall_start++;
     }
 
-    count = coll_data->left_wall_count;
-    start = coll_data->left_wall_start;
-    while (count-- > 0) {
-        groundCollLine[start].flags =
-            coll_data->lines[start].hi_flags | LINE_FLAG_ENABLED;
-        groundCollLine[start].x0 = &coll_data->lines[start];
-        start++;
+    left_wall_count = coll_data->left_wall_count;
+    left_wall_start = coll_data->left_wall_start;
+    for (; left_wall_count > 0; left_wall_count--) {
+        groundCollLine[left_wall_start].flags =
+            coll_data->lines[left_wall_start].hi_flags | LINE_FLAG_ENABLED;
+        groundCollLine[left_wall_start].x0 =
+            &coll_data->lines[left_wall_start];
+        left_wall_start++;
     }
 
-    count = coll_data->dynamic_count;
-    start = coll_data->dynamic_start;
-    while (count-- > 0) {
-        groundCollLine[start].flags =
-            coll_data->lines[start].hi_flags | LINE_FLAG_ENABLED;
-        groundCollLine[start].x0 = &coll_data->lines[start];
-        start++;
+    dynamic_count = coll_data->dynamic_count;
+    dynamic_start = coll_data->dynamic_start;
+    for (; dynamic_count > 0; dynamic_count--) {
+        groundCollLine[dynamic_start].flags =
+            coll_data->lines[dynamic_start].hi_flags | LINE_FLAG_ENABLED;
+        groundCollLine[dynamic_start].x0 = &coll_data->lines[dynamic_start];
+        dynamic_start++;
     }
 
     i = 0;
@@ -3605,7 +3615,7 @@ static inline int mpLineGetPrevCheckInline(MapLine* line, int result)
     return line->prev_id0;
 }
 
-static inline int mpLineGetPrevCheckInlineVtx(MapLine* line, int result,
+static inline int mpLineGetPrevCheckInlineVtx(MapLine* line, s16 result,
                                               CollVtx* vtx)
 {
     if (result != -1) {
@@ -3621,7 +3631,8 @@ static inline int mpLineGetPrevCheckInlineVtx(MapLine* line, int result,
         }
     }
 
-    return line->prev_id0;
+    result = line->prev_id0;
+    return result;
 }
 
 static inline int mpLineGetNextCheckInlineVtx(MapLine* line, s16 result,
@@ -3646,20 +3657,19 @@ static inline int mpLineGetNextCheckInlineVtx(MapLine* line, s16 result,
 
 int mpLineNextNonFloor(int line_id)
 {
+    MapLine* first_line;
     MapLine* line;
     int new_id;
     bool valid_id;
-
     LINEID_CHECK(4139, line_id);
-    line = groundCollLine[line_id].x0;
-    new_id = line->next_id1;
-    new_id = mpLineGetNextCheckInline(line, new_id);
+    first_line = groundCollLine[line_id].x0;
+    new_id = mpLineGetNextCheckInline(first_line, first_line->next_id1);
     while (new_id != -1 && new_id != line_id &&
            groundCollLine[new_id].flags & CollLine_Floor)
     {
         line = groundCollLine[new_id].x0;
         new_id = line->next_id1;
-        new_id = mpLineGetNextCheckInline(line, new_id);
+        new_id = mpLineGetNextCheckInlineVtx(line, new_id, groundCollVtx);
     }
     valid_id = false;
     if ((new_id != -1) && (new_id != line_id)) {
@@ -3673,20 +3683,19 @@ int mpLineNextNonFloor(int line_id)
 
 int mpLinePrevNonFloor(int line_id)
 {
+    MapLine* first_line;
     MapLine* line;
     int new_id;
     bool valid_id;
-
     LINEID_CHECK(4148, line_id);
-    line = groundCollLine[line_id].x0;
-    new_id = line->prev_id1;
-    new_id = mpLineGetPrevCheckInline(line, new_id);
+    first_line = groundCollLine[line_id].x0;
+    new_id = mpLineGetPrevCheckInline(first_line, first_line->prev_id1);
     while (new_id != -1 && new_id != line_id &&
            groundCollLine[new_id].flags & CollLine_Floor)
     {
         line = groundCollLine[new_id].x0;
         new_id = line->prev_id1;
-        new_id = mpLineGetPrevCheckInline(line, new_id);
+        new_id = mpLineGetPrevCheckInlineVtx(line, new_id, groundCollVtx);
     }
     valid_id = false;
     if ((new_id != -1) && (new_id != line_id)) {
@@ -3700,20 +3709,19 @@ int mpLinePrevNonFloor(int line_id)
 
 int mpLinePrevNonCeiling(int line_id)
 {
+    MapLine* first_line;
     MapLine* line;
-    CollVtx* vtx;
     int new_id;
     bool valid_id;
     LINEID_CHECK(4157, line_id);
-    line = groundCollLine[line_id].x0;
-    new_id = mpLineGetPrevCheckInline(line, line->prev_id1);
-    vtx = groundCollVtx;
+    first_line = groundCollLine[line_id].x0;
+    new_id = mpLineGetPrevCheckInline(first_line, first_line->prev_id1);
     while (new_id != -1 && new_id != line_id &&
            groundCollLine[new_id].flags & CollLine_Ceiling)
     {
         line = groundCollLine[new_id].x0;
         new_id = line->prev_id1;
-        new_id = mpLineGetPrevCheckInlineVtx(line, new_id, vtx);
+        new_id = mpLineGetPrevCheckInlineVtx(line, new_id, groundCollVtx);
     }
     valid_id = false;
     if ((new_id != -1) && (new_id != line_id)) {
@@ -3727,19 +3735,19 @@ int mpLinePrevNonCeiling(int line_id)
 
 int mpLineNextNonCeiling(int line_id)
 {
+    MapLine* first_line;
     MapLine* line;
     int new_id;
     bool valid_id;
     LINEID_CHECK(4166, line_id);
-    line = groundCollLine[line_id].x0;
-    new_id = line->next_id1;
-    new_id = mpLineGetNextCheckInline(line, new_id);
+    first_line = groundCollLine[line_id].x0;
+    new_id = mpLineGetNextCheckInline(first_line, first_line->next_id1);
     while (new_id != -1 && new_id != line_id &&
            groundCollLine[new_id].flags & CollLine_Ceiling)
     {
         line = groundCollLine[new_id].x0;
         new_id = line->next_id1;
-        new_id = mpLineGetNextCheckInline(line, new_id);
+        new_id = mpLineGetNextCheckInlineVtx(line, new_id, groundCollVtx);
     }
     valid_id = false;
     if (new_id != -1 && new_id != line_id) {
@@ -3753,19 +3761,19 @@ int mpLineNextNonCeiling(int line_id)
 
 int mpLineNextNonLeftWall(int line_id)
 {
+    MapLine* first_line;
     MapLine* line;
     int new_id;
     bool valid_id;
-
     LINEID_CHECK(4175, line_id);
-    line = groundCollLine[line_id].x0;
-    new_id = mpLineGetNextCheckInline(line, line->next_id1);
+    first_line = groundCollLine[line_id].x0;
+    new_id = mpLineGetNextCheckInline(first_line, first_line->next_id1);
     while (new_id != -1 && new_id != line_id &&
            groundCollLine[new_id].flags & CollLine_LeftWall)
     {
         line = groundCollLine[new_id].x0;
         new_id = line->next_id1;
-        new_id = mpLineGetNextCheckInline(line, new_id);
+        new_id = mpLineGetNextCheckInlineVtx(line, new_id, groundCollVtx);
     }
     valid_id = false;
     if ((new_id != -1) && (new_id != line_id)) {
@@ -3779,20 +3787,19 @@ int mpLineNextNonLeftWall(int line_id)
 
 int mpLinePrevNonLeftWall(int line_id)
 {
+    MapLine* first_line;
     MapLine* line;
-    CollVtx* vtx;
     int new_id;
     bool valid_id;
     LINEID_CHECK(4184, line_id);
-    line = groundCollLine[line_id].x0;
-    new_id = mpLineGetPrevCheckInline(line, line->prev_id1);
-    vtx = groundCollVtx;
+    first_line = groundCollLine[line_id].x0;
+    new_id = mpLineGetPrevCheckInline(first_line, first_line->prev_id1);
     while (new_id != -1 && new_id != line_id &&
-           !!(groundCollLine[new_id].flags & CollLine_LeftWall))
+           groundCollLine[new_id].flags & CollLine_LeftWall)
     {
         line = groundCollLine[new_id].x0;
         new_id = line->prev_id1;
-        new_id = mpLineGetPrevCheckInlineVtx(line, new_id, vtx);
+        new_id = mpLineGetPrevCheckInlineVtx(line, new_id, groundCollVtx);
     }
     valid_id = false;
     if ((new_id != -1) && (new_id != line_id)) {
@@ -3806,23 +3813,22 @@ int mpLinePrevNonLeftWall(int line_id)
 
 int mpLinePrevNonRightWall(int line_id)
 {
+    MapLine* first_line;
     MapLine* line;
-    CollVtx* vtx;
     int new_id;
     bool valid_id;
     LINEID_CHECK(4193, line_id);
-    line = groundCollLine[line_id].x0;
-    new_id = mpLineGetPrevCheckInline(line, line->prev_id1);
-    vtx = groundCollVtx;
+    first_line = groundCollLine[line_id].x0;
+    new_id = mpLineGetPrevCheckInline(first_line, first_line->prev_id1);
     while (new_id != -1 && new_id != line_id &&
            groundCollLine[new_id].flags & CollLine_RightWall)
     {
         line = groundCollLine[new_id].x0;
         new_id = line->prev_id1;
-        new_id = mpLineGetPrevCheckInlineVtx(line, new_id, vtx);
+        new_id = mpLineGetPrevCheckInlineVtx(line, new_id, groundCollVtx);
     }
     valid_id = false;
-    if (new_id != -1 && new_id != line_id) {
+    if ((new_id != -1) && (new_id != line_id)) {
         valid_id = true;
     }
     if (valid_id) {
@@ -3887,9 +3893,47 @@ int mpLib_80053448_Floor(int line_id)
 
 static inline int mpLineGetNextInline(int line_id)
 {
-    MapLine* line = groundCollLine[line_id].x0;
-    int result = line->next_id1;
+    s32 result = groundCollLine[line_id].x0->next_id1;
 
+    if (result != -1) {
+        u32 flags = groundCollLine[result].flags;
+
+        if ((flags & LINE_FLAG_ENABLED) && !(flags & LINE_FLAG_HIDDEN)) {
+            CollVtx* v1 = &groundCollVtx[groundCollLine[line_id].x0->v1_idx];
+            CollVtx* v0 = &groundCollVtx[groundCollLine[result].x0->v0_idx];
+
+            if (SQ(v1->pos.x - v0->pos.x) + SQ(v1->pos.y - v0->pos.y) < 4.0) {
+                return result;
+            }
+        }
+    }
+
+    return groundCollLine[line_id].x0->next_id0;
+}
+
+static inline int mpLineGetNextCachedInline(int line_id)
+{
+    MapLine* line;
+    int result = (line = groundCollLine[line_id].x0)->next_id1;
+
+    if (result != -1) {
+        u32 flags = groundCollLine[result].flags;
+
+        if ((flags & LINE_FLAG_ENABLED) && !(flags & LINE_FLAG_HIDDEN)) {
+            CollVtx* v1 = &groundCollVtx[line->v1_idx];
+            CollVtx* v0 = &groundCollVtx[groundCollLine[result].x0->v0_idx];
+
+            if (SQ(v1->pos.x - v0->pos.x) + SQ(v1->pos.y - v0->pos.y) < 4.0) {
+                return result;
+            }
+        }
+    }
+
+    return line->next_id0;
+}
+
+static inline int mpLineGetNextCheckResultFirst(int result, MapLine* line)
+{
     if (result != -1) {
         u32 flags = groundCollLine[result].flags;
 
@@ -3908,37 +3952,83 @@ static inline int mpLineGetNextInline(int line_id)
 
 int mpLib_800534FC_Floor(int line_id)
 {
+    MapLine* line;
+    int result;
     int new_id;
     LINEID_CHECK(4272, line_id);
-    new_id = mpLineGetNextInline(line_id);
+    new_id = mpLineGetNextCachedInline(line_id);
     while (new_id != -1) {
         if (!(groundCollLine[new_id].flags & CollLine_Floor)) {
             new_id = -1;
         } else if (new_id != groundCollLine[line_id].x0->next_id1) {
             line_id = new_id;
-            new_id = mpLineGetNextInline(new_id);
+            new_id = mpLineGetNextCheckResultFirst(
+                (line = groundCollLine[new_id].x0)->next_id1, line);
             continue;
         }
         break;
     }
     if (new_id != -1) {
-        return new_id;
+        result = new_id;
+    } else {
+        result = -1;
     }
-    return -1;
+    return result;
+}
+
+static inline int mpLineGetPrevInline(int line_id)
+{
+    MapLine* line;
+    int result = (line = groundCollLine[line_id].x0)->prev_id1;
+
+    if (result != -1) {
+        u32 flags = groundCollLine[result].flags;
+
+        if ((flags & LINE_FLAG_ENABLED) && !(flags & LINE_FLAG_HIDDEN)) {
+            CollVtx* v0 = &groundCollVtx[line->v0_idx];
+            CollVtx* v1 = &groundCollVtx[groundCollLine[result].x0->v1_idx];
+
+            if (SQ(v0->pos.x - v1->pos.x) + SQ(v0->pos.y - v1->pos.y) < 4.0) {
+                return result;
+            }
+        }
+    }
+
+    return line->prev_id0;
+}
+
+static inline int mpLineGetPrevCheckResultFirst(int result, MapLine* line)
+{
+    if (result != -1) {
+        u32 flags = groundCollLine[result].flags;
+
+        if ((flags & LINE_FLAG_ENABLED) && !(flags & LINE_FLAG_HIDDEN)) {
+            CollVtx* v0 = &groundCollVtx[line->v0_idx];
+            CollVtx* v1 = &groundCollVtx[groundCollLine[result].x0->v1_idx];
+
+            if (SQ(v0->pos.x - v1->pos.x) + SQ(v0->pos.y - v1->pos.y) < 4.0) {
+                return result;
+            }
+        }
+    }
+
+    return line->prev_id0;
 }
 
 int mpLib_800536CC_Floor(int line_id)
 {
+    MapLine* line;
     int new_id;
     int result;
     LINEID_CHECK(4293, line_id);
-    new_id = mpLineGetPrev(line_id);
+    new_id = mpLineGetPrevInline(line_id);
     while (new_id != -1) {
         if (!(groundCollLine[new_id].flags & CollLine_Floor)) {
             new_id = -1;
         } else if (new_id != groundCollLine[line_id].x0->prev_id1) {
             line_id = new_id;
-            new_id = mpLineGetPrev(new_id);
+            new_id = mpLineGetPrevCheckResultFirst(
+                (line = groundCollLine[new_id].x0)->prev_id1, line);
             continue;
         }
         break;
@@ -3981,23 +4071,28 @@ int mpLib_80053950_Ceiling(int line_id)
 
 int mpLib_80053A04_Ceiling(int line_id)
 {
+    MapLine* line;
+    int result;
     int new_id;
     LINEID_CHECK(4334, line_id);
-    new_id = mpLineGetPrev(line_id);
+    new_id = mpLineGetPrevInline(line_id);
     while (new_id != -1) {
         if (!(groundCollLine[new_id].flags & CollLine_Ceiling)) {
             new_id = -1;
         } else if (new_id != groundCollLine[line_id].x0->prev_id1) {
             line_id = new_id;
-            new_id = mpLineGetPrev(new_id);
+            new_id = mpLineGetPrevCheckResultFirst(
+                (line = groundCollLine[new_id].x0)->prev_id1, line);
             continue;
         }
         break;
     }
     if (new_id != -1) {
-        return new_id;
+        result = new_id;
+    } else {
+        result = -1;
     }
-    return -1;
+    return result;
 }
 
 int mpLib_80053BD4_Ceiling(int line_id)
@@ -4005,13 +4100,13 @@ int mpLib_80053BD4_Ceiling(int line_id)
     int result;
     int new_id;
     LINEID_CHECK(4355, line_id);
-    new_id = mpLineGetNext(line_id);
+    new_id = mpLineGetNextInline(line_id);
     while (new_id != -1) {
         if (!(groundCollLine[new_id].flags & CollLine_Ceiling)) {
             new_id = -1;
         } else if (new_id != groundCollLine[line_id].x0->next_id1) {
             line_id = new_id;
-            new_id = mpLineGetNext(new_id);
+            new_id = mpLineGetNextInline(new_id);
             continue;
         }
         break;
@@ -4026,26 +4121,25 @@ int mpLib_80053BD4_Ceiling(int line_id)
 
 void mpLib_80053DA4_Floor(int line_id, Vec3* pos_out)
 {
-    int r29 = line_id;
-    s16 r5;
-    CollVtx* temp_r3;
+    s16 next_id;
+    CollVtx* vtx;
 
-    LINEID_CHECK(4428, r29);
+    LINEID_CHECK(4428, line_id);
 
     goto skip;
 loop:
-    r29 = r5;
+    line_id = next_id;
 skip:
-    r5 = groundCollLine[r29].x0->next_id0;
-    if (r5 != -1 && (groundCollLine[r5].flags & CollLine_Floor)) {
+    next_id = groundCollLine[line_id].x0->next_id0;
+    if (next_id != -1 && (groundCollLine[next_id].flags & CollLine_Floor)) {
         goto loop;
     }
 
-    LINEID_CHECK(4433, r29);
+    LINEID_CHECK(4433, line_id);
 
-    temp_r3 = &groundCollVtx[groundCollLine[r29].x0->v1_idx];
-    pos_out->x = temp_r3->pos.x;
-    pos_out->y = temp_r3->pos.y;
+    vtx = &groundCollVtx[groundCollLine[line_id].x0->v1_idx];
+    pos_out->x = vtx->pos.x;
+    pos_out->y = vtx->pos.y;
     pos_out->z = 0.0F;
 }
 
@@ -5905,6 +5999,8 @@ static HSD_Chan mpLib_803BF540 = {
     NULL,
 };
 
+static char lbl_803BF570[] = "B(%d,%d)-(%d,%d)\n";
+
 void mpLib_SetupDraw(GXColor color)
 {
     HSD_TevDesc spC;
@@ -6064,6 +6160,11 @@ void mpLib_DrawEcbs(CollData* cd)
     GXEnd();
 }
 
+static inline GXColor mpLib_CopyColor(GXColor color)
+{
+    return color;
+}
+
 static const GXColor mpLib_804D80E0 = { 0xFF, 0x37, 0x37, 0x80 };
 static const GXColor mpLib_804D80E4 = { 0x37, 0x37, 0xFF, 0x80 };
 
@@ -6121,7 +6222,7 @@ void mpLib_DrawSnapping(void)
 
                 pos_y = cd->cur_pos.y;
                 inner_x = cd->cur_pos.x + cd->ecb.left.x;
-                mpLib_SetupDraw(left_snap_color);
+                mpLib_SetupDraw(mpLib_CopyColor(left_snap_color));
                 GXBegin(GX_LINESTRIP, GX_VTXFMT0, 5);
 
                 GXPosition3f32(inner_x - cd->ledge_snap_x,
@@ -6146,7 +6247,7 @@ void mpLib_DrawSnapping(void)
     if ((item_r28 = HSD_GObj_Entities->items) != NULL) {
         if (!var_r31) {
             Mtx sp7C;
-            PAD_STACK(0x40);
+            PAD_STACK(0x34);
             GXSetCullMode(GX_CULL_NONE);
             GXClearVtxDesc();
             GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
@@ -6174,7 +6275,7 @@ void mpLib_DrawSnapping(void)
     }
 }
 
-void mpLib_DrawMatchingLines(int value, int flag, GXColor color)
+int mpLib_DrawMatchingLines(int value, int flag, const GXColor* color)
 {
     CollLine* line_r31;
     int count_r28;
@@ -6200,7 +6301,7 @@ void mpLib_DrawMatchingLines(int value, int flag, GXColor color)
     }
 
     line_r31 = groundCollLine;
-    mpLib_SetupDraw(color);
+    mpLib_SetupDraw(*color);
     GXBegin(GX_QUADS, GX_VTXFMT0, count_r28 * 4);
     for (i = 0; i < total_r27; i++) {
         if (line_r31->flags & LINE_FLAG_ENABLED &&
@@ -6248,10 +6349,11 @@ void mpLib_80059554(void)
     CollLine* line_r4;
     CollVtx* v0_r6;
     CollVtx* v1_r4;
-    s16 count_r30;
     int total_r29;
+    int count_r30;
     MapCollData* coll_data_r31;
     int i;
+    UNUSED u8 pad[8];
     GXColor spB4;
     GXColor spB0;
     GXColor spAC;
@@ -6420,12 +6522,12 @@ void mpLib_80059554(void)
     }
 
     count_r30 = coll_data_r31->dynamic_count;
-    line_r4 = &groundCollLine[coll_data_r31->dynamic_start];
     total_r29 = 0;
     spB4 = mpLib_DynamicFloorColor;
     spB0 = mpLib_DynamicCeilingColor;
     spAC = mpLib_DynamicRightWallColor;
     spA8 = mpLib_DynamicLeftWallColor;
+    line_r4 = &groundCollLine[coll_data_r31->dynamic_start];
 
     for (i = 0; i < count_r30; i++) {
         if (line_r4->flags & LINE_FLAG_ENABLED &&
@@ -6584,17 +6686,10 @@ void mpLib_80059554(void)
     }
 }
 
-static const GXColor mpLib_804D8128 = { 0x7D, 0x7D, 0xFF, 0xFF };
-static const GXColor mpLib_804D812C = { 0x7D, 0xFF, 0x80, 0xFF };
-static const GXColor mpLib_804D8130 = { 0xFF, 0xFF, 0x80, 0xFF };
-static const GXColor mpLib_804D8134 = { 0xFF, 0x40, 0x40, 0xFF };
-static const GXColor mpLib_804D8138 = { 0xFF, 0x40, 0xC0, 0xFF };
-static const GXColor mpLib_804D813C = { 0xFF, 0xFF, 0xFF, 0xFF };
-
 void mpLib_80059E60(void)
 {
     Mtx sp104;
-    PAD_STACK(0x3C);
+    PAD_STACK(0x30);
 
     HSD_LObjSetupInit(HSD_CObjGetCurrent());
     GXSetCullMode(GX_CULL_NONE);
@@ -6606,30 +6701,49 @@ void mpLib_80059E60(void)
     GXLoadPosMtxImm(sp104, 0U);
     if (Camera_80030B50()) {
         // terrain draw
-        mpIsland_Palette sp28;
-        mpIsland_PaletteEntry* var_r30;
-        PAD_STACK(0x8);
-        sp28 = mpIsland_TerrainPalette;
+        struct {
+            mpIsland_Palette palette;
+            u8 pad[4];
+            GXColor line_color;
+            GXColor basic_color;
+        } sp28;
+        GXColor* line_color;
+        mpIsland_PaletteEntry* entry;
+        sp28.palette = mpIsland_TerrainPalette;
 
-        var_r30 = sp28.x0;
+        entry = sp28.palette.x0;
+        line_color = &sp28.line_color;
 
-        while (var_r30->kind != -1) {
-            mpLib_DrawMatchingLines(var_r30->kind, 0xFF, var_r30->color);
-            var_r30++;
+        while (entry->kind != -1) {
+            *line_color = entry->color;
+            mpLib_DrawMatchingLines(entry->kind, 0xFF, line_color);
+            entry++;
         }
 
-        mpLib_DrawMatchingLines(mp_Terrain_Basic, 0xFF, mpLib_804D8100);
+        sp28.basic_color = mpLib_804D8100;
+        mpLib_DrawMatchingLines(mp_Terrain_Basic, 0xFF, &sp28.basic_color);
     } else if (Camera_80030B7C()) {
         // platform/ledge draw
+        struct {
+            u8 pad[0x10];
+            GXColor ledge;
+            GXColor platform;
+            GXColor ledge_platform;
+            GXColor none;
+        } colors;
+        colors.ledge = mpLib_804D80F0;
         mpLib_DrawMatchingLines(LINE_FLAG_LEDGE, LINE_FLAG_LEDGE,
-                                mpLib_804D80F0);
+                                &colors.ledge);
+        colors.platform = mpLib_804D80F4;
         mpLib_DrawMatchingLines(LINE_FLAG_PLATFORM, LINE_FLAG_PLATFORM,
-                                mpLib_804D80F4);
+                                &colors.platform);
+        colors.ledge_platform = mpLib_804D80F8;
         mpLib_DrawMatchingLines(LINE_FLAG_LEDGE | LINE_FLAG_PLATFORM,
                                 LINE_FLAG_LEDGE | LINE_FLAG_PLATFORM,
-                                mpLib_804D80F8);
+                                &colors.ledge_platform);
+        colors.none = mpLib_804D80FC;
         mpLib_DrawMatchingLines(0, LINE_FLAG_LEDGE | LINE_FLAG_PLATFORM,
-                                mpLib_804D80FC);
+                                &colors.none);
     } else {
         mpLib_80059554();
     }
@@ -6648,7 +6762,8 @@ void mpLib_DrawCrosses(s16* idx, int len, GXColor arg2)
 
     out_vtx = (vtx = mpLib_80458888);
     for (idx_ptr = &idx[idx_i = 0], out_count = 0;
-         idx_i < len && out_count < 0x80; idx_i++)
+         idx_i < len && out_count < (signed) ARRAY_SIZE(mpLib_80458888);
+         idx_i++)
     {
         if (Ground_801C2D24(*idx_ptr, &sp34)) {
             out_count += 1;
@@ -6675,6 +6790,13 @@ void mpLib_DrawCrosses(s16* idx, int len, GXColor arg2)
     }
 }
 
+static const GXColor mpLib_804D8128 = { 0x7D, 0x7D, 0xFF, 0xFF };
+static const GXColor mpLib_804D812C = { 0x7D, 0xFF, 0x80, 0xFF };
+static const GXColor mpLib_804D8130 = { 0xFF, 0xFF, 0x80, 0xFF };
+static const GXColor mpLib_804D8134 = { 0xFF, 0x40, 0x40, 0xFF };
+static const GXColor mpLib_804D8138 = { 0xFF, 0x40, 0xC0, 0xFF };
+static const GXColor mpLib_804D813C = { 0xFF, 0xFF, 0xFF, 0xFF };
+
 enum {
     mpLib_EnemySpawnVtxIds = 0x16,
     mpLib_TrophySpawnVtxIds = 0x66,
@@ -6699,8 +6821,11 @@ static s16 mpLib_ItemSpawnVtxIds[] = {
     0xC1, 0xC2, 0xC3, 0xC4, 0xC5, 0xC6,
 };
 
+char mpLib_803BF6E0[] =
+    "map coll under=%d upper=%d left=%d right=%d bbox=%d\n";
+
 static s16 mpLib_SpawnVtxIds[4] = { 0, 1, 2, 3 };
-static s16 mpLib_RespawnVtxIds[4] = { 4, 5, 6, 7 };
+SDATA s16 mpLib_RespawnVtxIds[6] = { 4, 5, 6, 7, 0, 0 };
 
 void mpLib_DrawSpecialPoints(void)
 {
@@ -6722,9 +6847,8 @@ void mpLib_8005A2DC(void)
     mpLib_80059E60();
     if (mpLib_804D64D0 == 0) {
         mpLib_804D64D0 = 1;
-        OSReport("map coll under=%d upper=%d left=%d right=%d bbox=%d\n",
-                 mpLib_804D64D4, mpLib_804D64D8, mpLib_804D64DC,
-                 mpLib_804D64E0, mpLib_804D64E4);
+        OSReport(mpLib_803BF6E0, mpLib_804D64D4, mpLib_804D64D8,
+                 mpLib_804D64DC, mpLib_804D64E0, mpLib_804D64E4);
     }
     HSD_StateInvalidate(-1);
 }
@@ -6732,7 +6856,7 @@ void mpLib_8005A2DC(void)
 Vec2 mpLib_803BF718[2] = { { -1.0F, -400.0F }, { 1.0F, -400.0F } };
 MapLine mpLib_803BF728 = { 0, 1, -1, -1, -1, -1, 1, 0 };
 MapJoint mpLib_803BF738 = {
-    1, 0, 0, 0, 0, -9.0F, -408.0F, 9.0F, -392.0F, 2,
+    0, 1, 0, 0, 0, 0, 0, 0, 0, 0, -9.0F, -408.0F, 9.0F, -392.0F, 0, 2,
 };
 MapCollData mpLib_803BF760 = {
     /*  +0 */ mpLib_803BF718,
@@ -6758,7 +6882,10 @@ static const GXColor mpLib_804D8140 = { 0xFF, 0xFF, 0xC0, 0xFF };
 static const GXColor mpLib_804D8144 = { 0xFF, 0xFF, 0xFF, 0x80 };
 static const GXColor mpLib_804D8148 = { 0x80, 0xC0, 0xC0, 0xFF };
 static const GXColor mpLib_804D814C = { 0xC0, 0xFF, 0xFF, 0x80 };
-static const GXColor mpLib_804D8150 = { 0x40, 0x40, 0xFF, 0x00 };
+static const GXColor mpLib_804D8150[2] = {
+    { 0x40, 0x40, 0xFF, 0x00 },
+    { 0, 0, 0, 0 },
+};
 
 /// blast zones, camera bounds, etc
 void mpLib_DrawZones(void)
@@ -6856,7 +6983,7 @@ void mpLib_DrawZones(void)
 
     GXEnd();
 
-    mpLib_SetupDraw(mpLib_804D8150);
+    mpLib_SetupDraw(mpLib_804D8150[0]);
 
     GXSetZMode(0, GX_LEQUAL, 0);
     GXSetLineWidth(0x10, GX_TO_ZERO);

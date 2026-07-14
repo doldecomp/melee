@@ -3,6 +3,8 @@
 #include "gm_unsplit.h"
 #include "gmopening.h"
 
+#include "dolphin/pad.h"
+
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/sobjlib.h>
@@ -56,7 +58,11 @@ void gm_801ACD8C_OnFrame(void)
     if (gmMainLib_8046B0F0.xC && lbMthp_8001F604() == 0) {
         var_r31 = true;
     }
-    if (lbMthp_8001F604() != 0 || (gm_801A36A0(4) & 0x1100) || var_r31) {
+    if (lbMthp_8001F604() != 0 ||
+        (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) &
+         (HSD_PAD_START | HSD_PAD_A)) ||
+        var_r31)
+    {
         lbAudioAx_800236DC();
         lbAudioAx_80023694();
         if (var_r31 != 0) {
@@ -64,13 +70,15 @@ void gm_801ACD8C_OnFrame(void)
         } else {
             gm_801A4B60();
         }
-        if (gm_801A36A0(4) & 0x1100) {
+        if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) &
+            (HSD_PAD_START | HSD_PAD_A))
+        {
             lbAudioAx_80024030(1);
-            gm_801A42E8(GM_TITLE);
-            gm_801A42D4();
+            gm_SetPendingGameMode(GM_TITLE);
+            gm_SetNewGameModePending();
         } else if (gmMainLib_8015DB00() != 5) {
             gmMainLib_8015DB18();
-            gm_SetPendingScene(0);
+            gm_SetPendingSceneIndex(0);
         }
     }
 }

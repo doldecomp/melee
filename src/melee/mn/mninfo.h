@@ -18,6 +18,8 @@ typedef struct MnInfoData {
     /* +28 */ HSD_Text* description;
 } MnInfoData;
 
+#define GET_MNINFO(gobj) ((MnInfoData*) HSD_GObjGetUserData(gobj))
+
 /// was using this to try and fix some matches, unsuccessfully
 #ifdef M2C
 typedef struct MenuInfo_GObj MenuInfo_GObj;

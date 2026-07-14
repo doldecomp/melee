@@ -2,6 +2,8 @@
 
 #include "gm_unsplit.h"
 
+#include "dolphin/pad.h"
+
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/fog.h>
@@ -67,8 +69,9 @@ static void gmTitle_801A146C(HSD_GObj* gobj)
 
 static inline bool isActiveTitle(void)
 {
-    if (gm_801A4310() == GM_TITLE ||
-        (gm_801A4310() == GM_OPENING_MV && gm_801A42C4() == GS_VS))
+    if (gm_GetCurrentGameMode() == GM_TITLE ||
+        (gm_GetCurrentGameMode() == GM_OPENING_MV &&
+         gm_GetCurrentSceneIndex() == 0x02))
     {
         return false;
     }
@@ -135,8 +138,9 @@ HSD_GObj* gmTitle_801A165C(void)
                        gmTitle_80479B28.matanim_joint,
                        gmTitle_80479B28.shapeanim_joint);
 
-    if (gm_801A4310() == GM_TITLE ||
-        (gm_801A4310() == GM_OPENING_MV && gm_801A42C4() == GS_VS))
+    if (gm_GetCurrentGameMode() == GM_TITLE ||
+        (gm_GetCurrentGameMode() == GM_OPENING_MV &&
+         gm_GetCurrentSceneIndex() == 0x02))
     {
         var_r0 = false;
     } else {
@@ -258,7 +262,7 @@ HSD_Archive* gmTitle_801A1AC0(void)
 
 void gmTitle_801A1C18_OnFrame(void)
 {
-    int input = gm_801A36A0(4);
+    int input = gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS);
     int* tmp;
     if (gmTitle_804D6714 != 0) {
         gmTitle_804D6714--;
