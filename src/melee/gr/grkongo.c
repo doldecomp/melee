@@ -638,7 +638,7 @@ void grKongo_801D828C(HSD_GObj* gobj)
     if (gp->gv.kongo3.xC6 != 1) {
         return;
     }
-    HSD_ASSERTMSG(1719, gp->gv.kongo.u.taru.keep, grKg_803E1A00);
+    HSD_ASSERTMSG(1719, gp->gv.kongo.u.taru.keep, "gp->u.taru.keep");
     if (((u8*) gp->gv.kongo.u.taru.keep)[2] == 8) {
         gp->gv.kongo3.xC6 = 0;
         gp->gv.kongo.u.taru.keep = NULL;
