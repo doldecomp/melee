@@ -28,7 +28,7 @@ void gm_801A6254(GameScene* arg0)
     MatchExitInfo* temp_r30;
     lbl_8046DBD8_t* temp_r31;
 
-    temp_r30 = gm_801A4284(arg0);
+    temp_r30 = gm_GetGameSceneLeaveDataCallback(arg0);
     temp_r31 = gm_801736DC();
     gm_80162968(temp_r30->match_end.frame_count / 60);
     gm_8016247C(temp_r30->match_end.player_standings[0].xE);
@@ -44,13 +44,13 @@ void gm_801A6254(GameScene* arg0)
     gm_80173EEC();
     gm_80172898(0x100);
     if (gm_801721EC() == 0) {
-        gm_SetPendingScene(0);
+        gm_SetPendingSceneIndex(0);
     }
 }
 
 void gm_801A6308(GameScene* arg0)
 {
-    gm_SetPendingScene(0);
+    gm_SetPendingSceneIndex(0);
 }
 
 void gm_801A632C_OnEnter(void* arg0_)
