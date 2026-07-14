@@ -13,6 +13,10 @@
 #include "baselib/fog.h"
 #include "baselib/gobjgxlink.h"
 #include "baselib/gobjobject.h"
+#include "dolphin/pad.h"
+
+#include "gm/forward.h"
+
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbdvd.h"
@@ -116,7 +120,7 @@ void fn_801965C4(void)
 
     if (fn_80196594(temp_r3)) {
         temp_r3->x32 = 1;
-        gm_SetPendingScene(3);
+        gm_SetPendingSceneIndex(3);
         gm_801A4B60();
         return;
     }
@@ -124,7 +128,7 @@ void fn_801965C4(void)
         temp_r3->x32 = 1;
         temp_r3->x28 = lbl_804D4190;
     }
-    gm_SetPendingScene(4);
+    gm_SetPendingSceneIndex(4);
     gm_801A4B60();
 }
 
@@ -708,9 +712,6 @@ void fn_801976D4(HSD_GObj* gobj)
     }
 }
 
-/// @todo 98.85%: all 261 instructions match except one adjacent schedule
-/// swap (the jobj load and the pnum save trade places after the
-/// fn_8018F62C call); the rest is anonymous literal-pool reloc naming.
 void fn_801977AC(HSD_GObj* gobj)
 {
     TmData* tm;
@@ -721,8 +722,7 @@ void fn_801977AC(HSD_GObj* gobj)
     u8 players;
 
     tm = gm_8018F634();
-    pnum = fn_8018F62C(gobj);
-    jobj = GET_JOBJ(gobj);
+    jobj = (pnum = fn_8018F62C(gobj), GET_JOBJ(gobj));
 
     if (gm_8018F634()->cur_option >= 0x1B && gm_8018F634()->cur_option <= 0x1E)
     {
@@ -1534,9 +1534,6 @@ void fn_80198EBC(void)
                 (void (*)(HSD_GObj*)) fn_80198584, lbl_804DA808);
 }
 
-/// @todo 99.82%: all 511 instructions match in count and shape; the residual
-/// is a two-register callee-saved swap (the biased selections pointer colors
-/// r29 vs the target's r30, and the second walk loop's counter r30 vs r29).
 void fn_80199AF0(void)
 {
     TmData* td1;
@@ -1545,6 +1542,7 @@ void fn_80199AF0(void)
     HSD_JObj* next;
     HSD_GObj* gobj;
     s32 slot;
+    s32 j;
     s32 mode;
     s32 bracket_idx;
     s32 result;
@@ -1637,7 +1635,7 @@ void fn_80199AF0(void)
             HSD_JObjSetTranslateZ(jobj, 10000.0f);
         }
     } else {
-        for (i = 1; i <= 12; i++) {
+        for (j = 1; j <= 12; j++) {
             if (jobj == NULL) {
                 next = NULL;
             } else {
@@ -1646,9 +1644,9 @@ void fn_80199AF0(void)
             jobj = next;
             HSD_JObjSetTranslateZ(jobj, 10000.0f);
 
-            if ((s32) lbl_803DA0D0.icon_model_map[td1->x4B8[slot].x1] == i) {
+            if ((s32) lbl_803DA0D0.icon_model_map[td1->x4B8[slot].x1] == j) {
                 HSD_JObjSetTranslateZ(jobj, 0.0f);
-                for (slot = i + 1; slot <= 12; slot++) {
+                for (slot = j + 1; slot <= 12; slot++) {
                     if (jobj == NULL) {
                         next = NULL;
                     } else {
@@ -1995,22 +1993,27 @@ void gm_8019A828(void)
     gm_8018F634()->cur_option = 0x1B;
 }
 
-void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
+/// @todo 99.86%: all instruction shapes and callee-saved registers match;
+/// two scratch-register tie-breaks remain (the ready loop's err/state temps
+/// trade r7/r3, and the bracket-entry fill's address/value temps trade
+/// r0/r4). Decl orders, block-scope promotion, split counters, and comma
+/// expressions all compile to identical instructions with the same colors.
+void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
 {
     s32 ready_count = 0;
     s32 pad_err = 0;
-    TmData* tm = (TmData*) arg0;
-    struct Lbl804799D8_t* d8 = &lbl_804799D8;
     s32 i;
     PAD_STACK(0x28);
 
-    if (tm->cur_option == 0x1B) {
-        fn_8019B81C(arg0);
+    switch (tm->cur_option) {
+    case 0x1B:
+        fn_8019B81C((s32*) tm);
+        break;
     }
 
     if (tm->cur_option == 0x1D) {
-        d8->x0 += 1;
-        if ((arg2 & 0x600) || (d8->x0 >= 0x12CU)) {
+        lbl_804799D8.x0 += 1;
+        if ((arg2 & 0x600) || (lbl_804799D8.x0 >= 0x12CU)) {
             lbAudioAx_80024030(0);
             fn_8018EC48();
             tm->x2D = 0;
@@ -2032,7 +2035,7 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
             }
             if (cond != 0) {
                 t->x32 = 1;
-                gm_SetPendingScene(3U);
+                gm_SetPendingSceneIndex(3U);
                 gm_801A4B60();
                 return;
             }
@@ -2045,7 +2048,7 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                 t->x32 = 1;
                 t->x28 = (u32) lbl_804D4190;
             }
-            gm_SetPendingScene(4U);
+            gm_SetPendingSceneIndex(4U);
             gm_801A4B60();
         }
     } else {
@@ -2058,9 +2061,11 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                     pad_err = 1;
                 }
                 {
-                    u8 state = d8->x2A[i].state;
-                    if (((state == 2 && (u8) d8->x2A[i].cur >= 0x3CU) ||
-                         (state == 4 && (u8) d8->x2A[i].cur == 0x82)) &&
+                    u8 state = lbl_804799D8.x2A[i].state;
+                    if (((state == 2 &&
+                          (u8) lbl_804799D8.x2A[i].cur >= 0x3CU) ||
+                         (state == 4 &&
+                          (u8) lbl_804799D8.x2A[i].cur == 0x82)) &&
                         (s8) err == 0)
                     {
                         ready_count += 1;
@@ -2085,16 +2090,17 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                 mn_8022F138(0x12, 0x15);
                 mn_8022F268();
                 gm_801A4B60();
-                gm_801A42F8(1);
+                gm_ChangeGameModeAfterCurrentScene(GM_MENU);
                 return;
             }
         }
 
         if (ready_count == (s32) tm->x30) {
-            d8->x0 += 1;
-            if (d8->x0 >= 0x1EU) {
+            lbl_804799D8.x0 += 1;
+            if (lbl_804799D8.x0 >= 0x1EU) {
                 for (i = 0; i < (s32) tm->x30; i++) {
-                    if (tm->x4B8[i].x0 == 0 && d8->x2A[i].state == 4) {
+                    if (tm->x4B8[i].x0 == 0 && lbl_804799D8.x2A[i].state == 4)
+                    {
                         tm->x4B8[i].x0 = 3;
                     }
                 }
@@ -2110,39 +2116,12 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                     ent->xA6 = t2->x4B8[2].x0;
                     ent->xD2 = t2->x4B8[3].x0;
 
-                    {
-                        u8 s0 = tm->x4B8[0].x0;
-                        if (s0 == 0) {
+                    for (i = 0; i < 4; i++) {
+                        u8 st = tm->x4B8[i].x0;
+                        if (st == 0) {
                             hmn_count += 1;
                         }
-                        if (s0 != 3) {
-                            active_count += 1;
-                        }
-                    }
-                    {
-                        u8 s1 = tm->x4B8[1].x0;
-                        if (s1 == 0) {
-                            hmn_count += 1;
-                        }
-                        if (s1 != 3) {
-                            active_count += 1;
-                        }
-                    }
-                    {
-                        u8 s2 = tm->x4B8[2].x0;
-                        if (s2 == 0) {
-                            hmn_count += 1;
-                        }
-                        if (s2 != 3) {
-                            active_count += 1;
-                        }
-                    }
-                    {
-                        u8 s3 = tm->x4B8[3].x0;
-                        if (s3 == 0) {
-                            hmn_count += 1;
-                        }
-                        if (s3 != 3) {
+                        if (st != 3) {
                             active_count += 1;
                         }
                     }
@@ -2160,10 +2139,11 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
 
                     {
                         TmData* t3 = gm_8018F634();
-                        s32 stype2 = t3->stage_selection_type;
+                        s32 stype2;
                         s32 cond2;
 
                         t3->x2D = 1;
+                        stype2 = t3->stage_selection_type;
                         if ((stype2 == 2 && (u8) t3->x32 == 0) || stype2 == 3)
                         {
                             cond2 = 1;
@@ -2172,7 +2152,7 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                         }
                         if (cond2 != 0) {
                             t3->x32 = 1;
-                            gm_SetPendingScene(3U);
+                            gm_SetPendingSceneIndex(3U);
                             gm_801A4B60();
                             return;
                         }
@@ -2186,42 +2166,42 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                             t3->x32 = 1;
                             t3->x28 = (u32) lbl_804D4190;
                         }
-                        gm_SetPendingScene(4U);
+                        gm_SetPendingSceneIndex(4U);
                         gm_801A4B60();
                     }
                 }
             }
         } else {
-            d8->x0 = 0;
+            lbl_804799D8.x0 = 0;
 
-            for (i = 0; i < (s32) tm->x30;) {
+            for (i = 0; i < (s32) tm->x30; i++) {
                 if ((s8) (u8) HSD_PadMasterStatus[(u8) i].err == 0 &&
                     tm->x4B8[i].x0 == 0)
                 {
                     u32 buttons = fn_8018F640(i);
 
-                    if (buttons & 0x1100) {
+                    if (buttons & (PAD_BUTTON_A | PAD_BUTTON_START)) {
                         lbAudioAx_80024030(1);
-                        if (d8->x44[i] == 7) {
-                            d8->x44[i] = 6;
-                        } else if (d8->x44[i] == 8) {
+                        if (lbl_804799D8.x44[i] == 7) {
+                            lbl_804799D8.x44[i] = 6;
+                        } else if (lbl_804799D8.x44[i] == 8) {
                             u8 np = gm_8018F634()->x30;
                             s32 count4 = 0;
                             s32 j;
 
                             for (j = 0; j < (s32) np; j++) {
-                                if (d8->x2A[j].state == 4) {
+                                if (lbl_804799D8.x2A[j].state == 4) {
                                     count4 += 1;
                                 }
                             }
                             if (count4 < (s32) (tm->x30 - 1)) {
-                                d8->x44[i] = 6;
-                                d8->x2A[i].state = 4;
+                                lbl_804799D8.x44[i] = 6;
+                                lbl_804799D8.x2A[i].state = 4;
                             }
                         } else {
-                            u8 pstate = d8->x2A[i].state;
+                            u8 pstate = lbl_804799D8.x2A[i].state;
                             if (pstate == 4) {
-                                d8->x2A[i].state = 5;
+                                lbl_804799D8.x2A[i].state = 5;
                             } else if (pstate == 0 || pstate == 3 ||
                                        pstate == 5)
                             {
@@ -2231,48 +2211,50 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                                 } else {
                                     gm_80167858(i, 0x78, 0xB, 0x14);
                                 }
-                                d8->x2A[i].state = 1;
+                                lbl_804799D8.x2A[i].state = 1;
                             }
                         }
-                    } else if (buttons & 0x400) {
-                        if (d8->x44[i] != 6) {
+                    } else if (buttons & PAD_BUTTON_X) {
+                        if (lbl_804799D8.x44[i] != 6) {
                             lbAudioAx_80024030(0);
-                            d8->x44[i] = 6;
+                            lbl_804799D8.x44[i] = 6;
                         } else {
-                            u8 pstate2 = d8->x2A[i].state;
+                            u8 pstate2 = lbl_804799D8.x2A[i].state;
                             if (pstate2 == 0 || pstate2 == 3 || pstate2 == 5) {
                                 u8 np2 = gm_8018F634()->x30;
                                 s32 count5 = 0;
                                 s32 k;
 
                                 for (k = 0; k < (s32) np2; k++) {
-                                    if (d8->x2A[k].state == 4) {
+                                    if (lbl_804799D8.x2A[k].state == 4) {
                                         count5 += 1;
                                     }
                                 }
                                 if (count5 < (s32) (tm->x30 - 1)) {
                                     lbAudioAx_80024030(0);
-                                    d8->x44[i] = 7;
+                                    lbl_804799D8.x44[i] = 7;
                                 }
                             } else if (pstate2 == 2) {
                                 lbAudioAx_80024030(0);
-                                d8->x2A[i].state = 3;
-                                d8->x2A[i].done = 0;
+                                lbl_804799D8.x2A[i].state = 3;
+                                lbl_804799D8.x2A[i].done = 0;
                             }
                         }
-                    } else if ((buttons & 0x10000) || (buttons & 8)) {
-                        if (d8->x44[i] == 8) {
+                    } else if ((buttons & PAD_STICK_UP) ||
+                               (buttons & PAD_BUTTON_UP))
+                    {
+                        if (lbl_804799D8.x44[i] == 8) {
                             lbAudioAx_80024030(2);
-                            d8->x44[i] = 7;
+                            lbl_804799D8.x44[i] = 7;
                         }
-                    } else if (((buttons & 0x20000) || (buttons & 4)) &&
-                               d8->x44[i] == 7)
+                    } else if (((buttons & PAD_STICK_DOWN) ||
+                                (buttons & PAD_BUTTON_DOWN)) &&
+                               lbl_804799D8.x44[i] == 7)
                     {
                         lbAudioAx_80024030(2);
-                        d8->x44[i] = 8;
+                        lbl_804799D8.x44[i] = 8;
                     }
                 }
-                i++;
             }
         }
     }
@@ -2336,9 +2318,9 @@ void fn_8019AF50(s32* arg0, u32 arg1, u32 arg2)
     }
 
     if (lbl_804799D8.x4D != 1) {
-        buttons = (u32) gm_801A36A0(lbl_804799D8.x4C);
+        buttons = (u32) gm_GetButtonsTriggered(lbl_804799D8.x4C);
     } else {
-        buttons = (u32) gm_801A36A0(4);
+        buttons = (u32) gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS);
     }
 
     if (lbl_80473AB8[bracketIdx].x18 != 0) {
@@ -2375,8 +2357,10 @@ void fn_8019AF50(s32* arg0, u32 arg1, u32 arg2)
     if (*arg0 == 0x27) {
         if (lbl_804799D8.x0 >= 0xFAU) {
             if (tm->x33 == 6) {
-                if (lbl_804799D8.x0 >= 0x1C20U || (buttons & 0x1100)) {
-                    gm_801A42F8(1);
+                if (lbl_804799D8.x0 >= 0x1C20U ||
+                    (buttons & (PAD_BUTTON_A | PAD_BUTTON_START)))
+                {
+                    gm_ChangeGameModeAfterCurrentScene(GM_MENU);
                     gm_801A4B60();
                 }
             } else {
@@ -2424,7 +2408,7 @@ void gm_8019B2DC_OnFrame(void)
             cond = 0;
         }
         if (cond != 0) {
-            fn_8019A86C((s32*) data, arg1, arg2);
+            fn_8019A86C(data, arg1, arg2);
         } else {
             fn_8019AF50((s32*) data, arg1, arg2);
         }
@@ -2460,27 +2444,14 @@ void gm_8019B2DC_OnFrame(void)
 
 /// Transitions to results screen after a tournament match.
 /// Ranks players, preloads stage/character data, and starts audio.
-/// @todo ~99% — all 278 instructions/shapes match; residual is a pure
-/// callee-saved register rotation (rank/match colored r28/r27 vs target
-/// r29/r28, and the char/costume fill loop's two walkers swapped r28<->r29).
-void fn_8019B458(s32* arg0)
+static inline void fn_8019B458_UpdateRank(TmData* tm, struct Lbl804799D8_t* d8)
 {
-    struct Preload {
-        s32 stage;
-        s32 char_ids[4];
-        s32 costumes[4];
-    } req;
-    TmData* tm = (TmData*) arg0;
-    struct Lbl804799D8_t* d8 = &lbl_804799D8;
     s32 rank;
-    s32 i;
     s32 j;
     s32 x24;
     s32 entrants;
     TmData* td;
-    PAD_STACK(0x10);
 
-    tm->x24++;
     d8->x0 = rank = 0;
     tm->pad_x34[0] = tm->x33;
 
@@ -2499,11 +2470,28 @@ void fn_8019B458(s32* arg0)
     }
 
     tm->x33 = rank;
+}
+
+/// @todo 99.77%: all instructions match; the entry-fill loop's two pointer
+/// walkers have r28 and r29 swapped.
+void fn_8019B458(s32* arg0)
+{
+    struct Preload {
+        s32 stage;
+        s32 char_ids[4];
+        s32 costumes[4];
+    } req;
+    TmData* tm = (TmData*) arg0;
+    struct Lbl804799D8_t* d8 = &lbl_804799D8;
+    s32 match;
+    TmData* td2;
+    s32 i;
+    PAD_STACK(0x10);
+
+    tm->x24++;
+    fn_8019B458_UpdateRank(tm, d8);
 
     {
-        s32 match;
-        TmData* td2;
-
         match = fn_80196CF8();
         td2 = gm_8018F634();
         fn_80198D18();
@@ -2536,8 +2524,6 @@ void fn_8019B458(s32* arg0)
 
         {
             s32 use_random_stage;
-            /* declared here (not in the cache block below) to keep &req in
-             * a callee-saved register across both entry-fill loops */
             struct Preload* q = &req;
 
             for (i = 0; i < 4; i++) {

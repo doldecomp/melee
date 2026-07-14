@@ -309,58 +309,48 @@ void fn_8001FEC4(HSD_GObj* gobj, s32 code)
 
 void fn_800204C8(void)
 {
-    f64 temp;
     BgFlashData* data = &lbl_80433658;
     s32 mode = data->state.mode;
 
-    if (mode == 5) {
-        return;
-    }
-    if (mode >= 5) {
-        return;
-    }
-    if (mode >= 3) {
-        goto case_3_4;
-    }
     switch (mode) {
     case 0:
     case 1:
     case 2:
-        goto case_0_1_2;
-    }
-    return;
+        fn_8001FC08();
+        data->xC.r = data->x10[0];
+        data->xC.g = data->x10[1];
+        data->xC.b = data->x10[2];
+        data->xC.a = data->x10[3];
+        return;
+    case 3:
+    case 4:
+        switch ((s32) data->x30) {
+        case 0: {
+            s32* pX;
+            s32* pY;
+            s32 i;
 
-case_0_1_2:
-    fn_8001FC08();
-    data->xC.r = data->x10[0];
-    data->xC.g = data->x10[1];
-    data->xC.b = data->x10[2];
-    data->xC.a = data->x10[3];
-    return;
+            pY = &data->x38;
+            pX = &data->x34;
 
-case_3_4:
-    switch ((s32) data->x30) {
-    case 0: {
-        s32* pX;
-        s32* pY;
-        s32 i;
-
-        pY = &data->x38;
-        pX = &data->x34;
-
-        for (i = 0; i < data->x3C; i++) {
-            if (*pX < 0x280) {
-                *pX = *pX + data->x31;
-            } else if (*pY < 0x1E0) {
-                *pY = *pY + data->x32;
-                *pX = 0;
-            } else {
-                data->x33 = 1;
-                return;
+            for (i = 0; i < data->x3C; i++) {
+                if (*pX < 0x280) {
+                    *pX = *pX + data->x31;
+                } else if (*pY < 0x1E0) {
+                    *pY = *pY + data->x32;
+                    *pX = 0;
+                } else {
+                    data->x33 = 1;
+                    return;
+                }
             }
+            break;
+        }
         }
         break;
-    }
+    case 5:
+    default:
+        return;
     }
 }
 

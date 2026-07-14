@@ -14,8 +14,9 @@
 
 import argparse
 import sys
+from collections.abc import Iterator
 from pathlib import Path
-from typing import Iterator, List, Optional
+from typing import cast
 
 from tools.project import (
     Library,
@@ -91,6 +92,12 @@ parser.add_argument(
     action="store_true",
     help="enable units being tested for linking",
 )
+parser.add_argument(
+    "--sym",
+    choices=["on", "off", "auto"],
+    default="auto",
+    help="whether to enable \"-sym on\" (default 'auto', on for non-matching units)",
+)
 if not is_windows():
     parser.add_argument(
         "--wrapper",
@@ -109,6 +116,13 @@ parser.add_argument(
     metavar="BINARY | DIR",
     type=Path,
     help="path to objdiff-cli binary or source (optional)",
+)
+parser.add_argument(
+    "--reloc-diffs",
+    type=str,
+    choices=["none", "name_address", "data_value", "all"],
+    default="data_value",
+    help="how relocation targets will be diffed in the report (default 'data_value')",
 )
 parser.add_argument(
     "--sjiswrap",
@@ -167,7 +181,7 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
-if any({args.debug, args.bugfix, args.asm, args.testing}):
+if any({args.debug, args.bugfix, args.asm, args.testing}) or args.sym == "on":
     args.non_matching = True
 
 
@@ -259,10 +273,9 @@ cflags_base = [
     f"-DVERSION_{config.version}",
 ]
 
-# Debug flags
-if args.debug:
-    # Or -sym dwarf-2 for Wii compilers
-    cflags_base.append("-sym on")
+
+if args.sym in {"on", "off"}:
+    cflags_base.append(f"-sym {args.sym}")
 if args.bugfix:
     cflags_base.append("-DBUGFIX")
 
@@ -318,7 +331,7 @@ cflags_melee = [
 
 config.linker_version = "GC/1.3.2"
 
-Objects = List[Object]
+Objects = list[Object]
 
 
 def Lib(
@@ -327,12 +340,17 @@ def Lib(
     cflags=cflags_base,
     fix_epilogue=True,
     fix_trk=False,
-    includes: List[str] = includes_base,
-    src_dir: Optional[str] = None,
-    category: Optional[str] = None,
+    includes: list[str] = includes_base,
+    src_dir: str | None = None,
+    category: str | None = None,
 ) -> Library:
-    def make_includes(includes: List[str]) -> Iterator[str]:
+    def make_includes(includes: list[str]) -> Iterator[str]:
         return map(lambda s: f"-i {s}", includes)
+
+    if args.sym == "auto":
+        for obj in objects:
+            extra_cflags = cast(list[str], obj.options["extra_cflags"])
+            extra_cflags.append(f"-sym {'off' if obj.completed else 'on'}")
 
     lib = {
         "lib": lib_name,
@@ -441,7 +459,7 @@ NonMatching = False  # Object does not match and should not be linked
 Equivalent = (
     config.non_matching
 )  # Object should be linked when configured with --non-matching
-Testing = bool(args.testing) # Object is being tested for linking
+Testing = bool(args.testing)  # Object is being tested for linking
 
 
 # Object is only matching for specific versions
@@ -472,8 +490,8 @@ config.libs = [
             Object(Matching, "melee/lb/lbarchive.c"),
             Object(Equivalent, "melee/lb/lbdvd.c"),
             Object(Matching, "melee/lb/lb_0192.c"),
-            Object(NonMatching, "melee/lb/lb_0195.c"),
-            Object(NonMatching, "melee/lb/lbcardnew.c"),
+            Object(Matching, "melee/lb/lb_0195.c"),
+            Object(Matching, "melee/lb/lbcardnew.c"),
             Object(Matching, "melee/lb/lbcardgame.c"),
             Object(NonMatching, "melee/lb/lbsnap.c"),
             Object(Matching, "melee/lb/lbgx.c"),
@@ -647,7 +665,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_0C35.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_AirCatch.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_DamageBind.c"),
-            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_WarpStar.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_WarpStar.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_HammerWait.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_HammerWalk.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_HammerTurn.c"),
@@ -668,7 +686,7 @@ config.libs = [
             Object(Matching, "melee/ft/ftCo_800C7590.c"),
             Object(Matching, "melee/ft/ftCo_800C78B0.c"),
             Object(Matching, "melee/ft/ftCo_800C7CA0.c"),
-            Object(NonMatching, "melee/ft/ftmetal.c"),
+            Object(Matching, "melee/ft/ftmetal.c"),
             Object(Matching, "melee/ft/ft_0C88.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_DownSpot.c"),
             Object(Matching, "melee/ft/ft_0C8C.c"),
@@ -692,7 +710,7 @@ config.libs = [
             Object(Matching, "melee/ft/ftlipstickswing.c"),
             Object(Matching, "melee/ft/ft_0CDD.c"),
             Object(Matching, "melee/ft/ft_0CDF.c"),
-            Object(NonMatching, "melee/ft/ft_0CE3.c"),
+            Object(Matching, "melee/ft/ft_0CE3.c"),
             Object(Matching, "melee/ft/ftattacks4combo.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemParasolOpen.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemParasolFall.c"),
@@ -1024,6 +1042,7 @@ config.libs = [
             Object(NonMatching, "melee/gm/gmregtyfall.c"),
             Object(NonMatching, "melee/gm/gm_1A7A.c"),
             Object(NonMatching, "melee/gm/gmregenddisp.c"),
+            Object(Matching, "melee/gm/gm_1A9B.c"),
             Object(Matching, "melee/gm/gmopening.c"),
             Object(NonMatching, "melee/gm/gmstaffroll.c"),
             Object(Matching, "melee/gm/gmhowto.c"),
@@ -1035,7 +1054,7 @@ config.libs = [
             Object(Matching, "melee/gm/gm_1B03.c"),
             Object(Matching, "melee/gm/gm_1B0FB.c"),
             Object(Matching, "melee/gm/gm_1B0FF.c"),
-            Object(NonMatching, "melee/gm/gm_1B14.c"),
+            Object(Matching, "melee/gm/gm_1B14.c"),
             Object(NonMatching, "melee/gm/gmclassic.c"),
             Object(Matching, "melee/gm/gmadventure.c"),
             Object(NonMatching, "melee/gm/gmallstar.c"),
@@ -1085,7 +1104,7 @@ config.libs = [
             Object(NonMatching, "melee/gr/grinishie1.c"),
             Object(Matching, "melee/gr/grinishie2.c"),
             Object(Matching, "melee/gr/grkraid.c"),
-            Object(NonMatching, "melee/gr/grrcruise.c"),
+            Object(Matching, "melee/gr/grrcruise.c"),
             Object(Matching, "melee/gr/grshrine.c"),
             Object(NonMatching, "melee/gr/gryorster.c"),
             Object(Matching, "melee/gr/grgarden.c"),
@@ -1099,7 +1118,7 @@ config.libs = [
             Object(Matching, "melee/gr/grfigure2.c"),
             Object(Matching, "melee/gr/grfigure3.c"),
             Object(Matching, "melee/gr/groldyoshi.c"),
-            Object(NonMatching, "melee/gr/groldkongo.c"),
+            Object(Matching, "melee/gr/groldkongo.c"),
             Object(NonMatching, "melee/gr/groldpupupu.c"),
             Object(NonMatching, "melee/gr/grpura.c"),
             Object(NonMatching, "melee/gr/grgreens.c"),
@@ -1256,7 +1275,7 @@ config.libs = [
             Object(Matching, "melee/it/items/itkirbycutterbeam.c"),
             Object(Matching, "melee/it/items/itfoxlaser.c"),
             Object(Matching, "melee/it/items/itfoxillusion.c"),
-            Object(NonMatching, "melee/it/items/itlinkbomb.c"),
+            Object(Matching, "melee/it/items/itlinkbomb.c"),
             Object(Matching, "melee/it/items/itlinkboomerang.c"),
             Object(NonMatching, "melee/it/items/itlinkhookshot.c"),
             Object(Matching, "melee/it/items/itlinkarrow.c"),
@@ -1392,7 +1411,7 @@ config.libs = [
             Object(Matching, "melee/if/ifnametag.c"),
             Object(Matching, "melee/if/ifhazard.c"),
             Object(Matching, "melee/if/if_2FC93.c"),
-            Object(NonMatching, "melee/if/ifprize.c"),
+            Object(Matching, "melee/if/ifprize.c"),
             Object(NonMatching, "melee/if/ifcoget.c"),
             Object(NonMatching, "melee/if/soundtest.c"),
             Object(NonMatching, "melee/if/textdraw.c"),
@@ -1703,7 +1722,7 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/mobj.c"),
             Object(Matching, "sysdolphin/baselib/aobj.c"),
             Object(Matching, "sysdolphin/baselib/lobj.c"),
-            Object(NonMatching, "sysdolphin/baselib/cobj.c"),
+            Object(Matching, "sysdolphin/baselib/cobj.c"),
             Object(Matching, "sysdolphin/baselib/fobj.c"),
             Object(Matching, "sysdolphin/baselib/pobj.c"),
             Object(Matching, "sysdolphin/baselib/jobj.c"),
@@ -1772,7 +1791,7 @@ config.libs = [
             Object(NonMatching, "sysdolphin/baselib/hsd_3AA7.c"),
             Object(Matching, "sysdolphin/baselib/hsd_3B27.c"),
             Object(Matching, "sysdolphin/baselib/hsd_3B2B.c"),
-            Object(NonMatching, "sysdolphin/baselib/hsd_3B2E.c"),
+            Object(Matching, "sysdolphin/baselib/hsd_3B2E.c"),
             Object(
                 Matching,
                 "sysdolphin/baselib/hsd_3B33.c",
@@ -1790,7 +1809,7 @@ config.libs = [
 #
 # For example, this adds "dummy.c" to the end of the DOL link order if configured with --non-matching.
 # "dummy.c" *must* be configured as a Matching (or Equivalent) object in order to be linked.
-def link_order_callback(module_id: int, objects: List[str]) -> List[str]:
+def link_order_callback(module_id: int, objects: list[str]) -> list[str]:
     # Don't modify the link order for matching builds
     if not config.non_matching:
         return objects
@@ -1816,8 +1835,7 @@ config.progress_each_module = args.verbose
 # Optional extra arguments to `objdiff-cli report generate`
 config.progress_report_args = [
     # Marks relocations as mismatching if the target value is different
-    # Default is "functionRelocDiffs=none", which is most lenient
-    "--config functionRelocDiffs=data_value",
+    f"--config functionRelocDiffs={args.reloc_diffs}",
 ]
 
 if args.mode == "configure":
