@@ -3891,18 +3891,79 @@ int mpLib_80053448_Floor(int line_id)
     return -1;
 }
 
+static inline int mpLineGetNextInline(int line_id)
+{
+    s32 result = groundCollLine[line_id].x0->next_id1;
+
+    if (result != -1) {
+        u32 flags = groundCollLine[result].flags;
+
+        if ((flags & LINE_FLAG_ENABLED) && !(flags & LINE_FLAG_HIDDEN)) {
+            CollVtx* v1 = &groundCollVtx[groundCollLine[line_id].x0->v1_idx];
+            CollVtx* v0 = &groundCollVtx[groundCollLine[result].x0->v0_idx];
+
+            if (SQ(v1->pos.x - v0->pos.x) + SQ(v1->pos.y - v0->pos.y) < 4.0) {
+                return result;
+            }
+        }
+    }
+
+    return groundCollLine[line_id].x0->next_id0;
+}
+
+static inline int mpLineGetNextCachedInline(int line_id)
+{
+    MapLine* line;
+    int result = (line = groundCollLine[line_id].x0)->next_id1;
+
+    if (result != -1) {
+        u32 flags = groundCollLine[result].flags;
+
+        if ((flags & LINE_FLAG_ENABLED) && !(flags & LINE_FLAG_HIDDEN)) {
+            CollVtx* v1 = &groundCollVtx[line->v1_idx];
+            CollVtx* v0 = &groundCollVtx[groundCollLine[result].x0->v0_idx];
+
+            if (SQ(v1->pos.x - v0->pos.x) + SQ(v1->pos.y - v0->pos.y) < 4.0) {
+                return result;
+            }
+        }
+    }
+
+    return line->next_id0;
+}
+
+static inline int mpLineGetNextCheckResultFirst(int result, MapLine* line)
+{
+    if (result != -1) {
+        u32 flags = groundCollLine[result].flags;
+
+        if ((flags & LINE_FLAG_ENABLED) && !(flags & LINE_FLAG_HIDDEN)) {
+            CollVtx* v1 = &groundCollVtx[line->v1_idx];
+            CollVtx* v0 = &groundCollVtx[groundCollLine[result].x0->v0_idx];
+
+            if (SQ(v1->pos.x - v0->pos.x) + SQ(v1->pos.y - v0->pos.y) < 4.0) {
+                return result;
+            }
+        }
+    }
+
+    return line->next_id0;
+}
+
 int mpLib_800534FC_Floor(int line_id)
 {
+    MapLine* line;
     int result;
     int new_id;
     LINEID_CHECK(4272, line_id);
-    new_id = mpLineGetNext(line_id);
+    new_id = mpLineGetNextCachedInline(line_id);
     while (new_id != -1) {
         if (!(groundCollLine[new_id].flags & CollLine_Floor)) {
             new_id = -1;
         } else if (new_id != groundCollLine[line_id].x0->next_id1) {
             line_id = new_id;
-            new_id = mpLineGetNext(new_id);
+            new_id = mpLineGetNextCheckResultFirst(
+                (line = groundCollLine[new_id].x0)->next_id1, line);
             continue;
         }
         break;
@@ -3915,18 +3976,59 @@ int mpLib_800534FC_Floor(int line_id)
     return result;
 }
 
+static inline int mpLineGetPrevInline(int line_id)
+{
+    MapLine* line;
+    int result = (line = groundCollLine[line_id].x0)->prev_id1;
+
+    if (result != -1) {
+        u32 flags = groundCollLine[result].flags;
+
+        if ((flags & LINE_FLAG_ENABLED) && !(flags & LINE_FLAG_HIDDEN)) {
+            CollVtx* v0 = &groundCollVtx[line->v0_idx];
+            CollVtx* v1 = &groundCollVtx[groundCollLine[result].x0->v1_idx];
+
+            if (SQ(v0->pos.x - v1->pos.x) + SQ(v0->pos.y - v1->pos.y) < 4.0) {
+                return result;
+            }
+        }
+    }
+
+    return line->prev_id0;
+}
+
+static inline int mpLineGetPrevCheckResultFirst(int result, MapLine* line)
+{
+    if (result != -1) {
+        u32 flags = groundCollLine[result].flags;
+
+        if ((flags & LINE_FLAG_ENABLED) && !(flags & LINE_FLAG_HIDDEN)) {
+            CollVtx* v0 = &groundCollVtx[line->v0_idx];
+            CollVtx* v1 = &groundCollVtx[groundCollLine[result].x0->v1_idx];
+
+            if (SQ(v0->pos.x - v1->pos.x) + SQ(v0->pos.y - v1->pos.y) < 4.0) {
+                return result;
+            }
+        }
+    }
+
+    return line->prev_id0;
+}
+
 int mpLib_800536CC_Floor(int line_id)
 {
+    MapLine* line;
     int new_id;
     int result;
     LINEID_CHECK(4293, line_id);
-    new_id = mpLineGetPrev(line_id);
+    new_id = mpLineGetPrevInline(line_id);
     while (new_id != -1) {
         if (!(groundCollLine[new_id].flags & CollLine_Floor)) {
             new_id = -1;
         } else if (new_id != groundCollLine[line_id].x0->prev_id1) {
             line_id = new_id;
-            new_id = mpLineGetPrev(new_id);
+            new_id = mpLineGetPrevCheckResultFirst(
+                (line = groundCollLine[new_id].x0)->prev_id1, line);
             continue;
         }
         break;
@@ -3969,16 +4071,18 @@ int mpLib_80053950_Ceiling(int line_id)
 
 int mpLib_80053A04_Ceiling(int line_id)
 {
+    MapLine* line;
     int result;
     int new_id;
     LINEID_CHECK(4334, line_id);
-    new_id = mpLineGetPrev(line_id);
+    new_id = mpLineGetPrevInline(line_id);
     while (new_id != -1) {
         if (!(groundCollLine[new_id].flags & CollLine_Ceiling)) {
             new_id = -1;
         } else if (new_id != groundCollLine[line_id].x0->prev_id1) {
             line_id = new_id;
-            new_id = mpLineGetPrev(new_id);
+            new_id = mpLineGetPrevCheckResultFirst(
+                (line = groundCollLine[new_id].x0)->prev_id1, line);
             continue;
         }
         break;
@@ -3996,13 +4100,13 @@ int mpLib_80053BD4_Ceiling(int line_id)
     int result;
     int new_id;
     LINEID_CHECK(4355, line_id);
-    new_id = mpLineGetNext(line_id);
+    new_id = mpLineGetNextInline(line_id);
     while (new_id != -1) {
         if (!(groundCollLine[new_id].flags & CollLine_Ceiling)) {
             new_id = -1;
         } else if (new_id != groundCollLine[line_id].x0->next_id1) {
             line_id = new_id;
-            new_id = mpLineGetNext(new_id);
+            new_id = mpLineGetNextInline(new_id);
             continue;
         }
         break;
@@ -6056,6 +6160,11 @@ void mpLib_DrawEcbs(CollData* cd)
     GXEnd();
 }
 
+static inline GXColor mpLib_CopyColor(GXColor color)
+{
+    return color;
+}
+
 static const GXColor mpLib_804D80E0 = { 0xFF, 0x37, 0x37, 0x80 };
 static const GXColor mpLib_804D80E4 = { 0x37, 0x37, 0xFF, 0x80 };
 
@@ -6113,7 +6222,7 @@ void mpLib_DrawSnapping(void)
 
                 pos_y = cd->cur_pos.y;
                 inner_x = cd->cur_pos.x + cd->ecb.left.x;
-                mpLib_SetupDraw(left_snap_color);
+                mpLib_SetupDraw(mpLib_CopyColor(left_snap_color));
                 GXBegin(GX_LINESTRIP, GX_VTXFMT0, 5);
 
                 GXPosition3f32(inner_x - cd->ledge_snap_x,
@@ -6138,7 +6247,7 @@ void mpLib_DrawSnapping(void)
     if ((item_r28 = HSD_GObj_Entities->items) != NULL) {
         if (!var_r31) {
             Mtx sp7C;
-            PAD_STACK(0x40);
+            PAD_STACK(0x34);
             GXSetCullMode(GX_CULL_NONE);
             GXClearVtxDesc();
             GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
