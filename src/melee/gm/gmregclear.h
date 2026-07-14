@@ -116,7 +116,7 @@
 /* 181C80 */ s32 fn_80181C80(s32 arg0);
 /* 181E18 */ UNK_RET fn_80181E18(UNK_PARAMS);
 /* 182174 */ UNK_RET gm_80182174(UNK_PARAMS);
-/* 182510 */ bool gm_80182510(void);
+/* 182510 */ bool gm_IsMultimanSmashMode(void);
 /* 182554 */ void gm_80182554(int, int);
 /* 182578 */ s32 gm_80182578(void);
 /* 182B5C */ UNK_RET fn_80182B5C(UNK_PARAMS);
