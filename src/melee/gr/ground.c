@@ -3215,7 +3215,7 @@ void Ground_801C5878(void)
 {
     PAD_STACK(8);
     tyDisplay_8031C2CC();
-    if (gm_8016B498() != 0) {
+    if (gm_IsCurrently1PMode() != 0) {
         StageInfo* stageinfo = &stage_info;
         int display_id;
         display_id = tyDisplay_8031C2EC();

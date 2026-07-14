@@ -61,5 +61,5 @@ void gm_801A51A8_OnLoad(void)
 
 void gm_801A5220_OnLoad(void)
 {
-    gm_SetScene(gm_801BF718());
+    gm_SetSceneIndex(gm_801BF718());
 }

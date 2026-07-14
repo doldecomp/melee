@@ -2317,11 +2317,17 @@ melee/gm/gm_1A7A.c:
 	.sdata2     start:0x804DAA18 end:0x804DAA28
 
 melee/gm/gmregenddisp.c:
-	.text       start:0x801A7FB4 end:0x801A9DD0
-	.data       start:0x803DB458 end:0x803DBF78
+	.text       start:0x801A7FB4 end:0x801A9B30
+	.data       start:0x803DB458 end:0x803DB640
 	.bss        start:0x80480A00 end:0x80480B38
 	.sdata      start:0x804D42A0 end:0x804D42B8
-	.sdata2     start:0x804DAA28 end:0x804DAAA8
+	.sdata2     start:0x804DAA28 end:0x804DAAA0
+
+melee/gm/gm_1A9B.c:
+	.text       start:0x801A9B30 end:0x801A9DD0
+	.data       start:0x803DB640 end:0x803DBF78
+	.sbss       start:0x804D67C8 end:0x804D67CA
+	.sdata2     start:0x804DAAA0 end:0x804DAAA8
 
 melee/gm/gmopening.c:
 	.text       start:0x801A9DD0 end:0x801AA644
@@ -4371,7 +4377,9 @@ melee/if/textdraw.c:
 melee/if/textlib.c:
 	.text       start:0x803029B4 end:0x80304870
 	.rodata     start:0x803B87A8 end:0x803B8844
+	.data       start:0x803FDC80 end:0x803FDD18
 	.bss        start:0x804A2688 end:0x804A26B8
+	.sdata2     start:0x804DDC88 end:0x804DDCC8
 
 melee/ty/toy.c:
 	.text       start:0x80304870 end:0x80312834

@@ -13,6 +13,10 @@
 #include "baselib/fog.h"
 #include "baselib/gobjgxlink.h"
 #include "baselib/gobjobject.h"
+#include "dolphin/pad.h"
+
+#include "gm/forward.h"
+
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbdvd.h"
@@ -59,6 +63,39 @@
 /* 4D4194 */ static s32 lbl_804D4194 = -1;
 
 /* 4D663C */ HSD_GObj* lbl_804D663C;
+
+/// Repeating per-slot unit of BracketEntry starting at x2C (mirrors the
+/// definition in gmtoulib.c).
+typedef struct BracketEntrySlot {
+    /* 0x00 */ HSD_GObj* x2C;
+    /* 0x04 */ u8 x30;
+    /* 0x05 */ u8 pad31;
+    /* 0x06 */ u8 x32;
+    /* 0x07 */ u8 pad33;
+    /* 0x08 */ s32 x34;
+    /* 0x0C */ s32 x38;
+    /* 0x10 */ s32 x3C;
+    /* 0x14 */ s32 x40;
+    /* 0x18 */ s32 x44;
+    /* 0x1C */ s32 x48;
+    /* 0x20 */ u8 x4C;
+    /* 0x21 */ u8 x4D;
+    /* 0x22 */ u8 x4E;
+    /* 0x23 */ u8 x4F;
+    /* 0x24 */ u8 x50;
+    /* 0x25 */ u8 x51;
+    /* 0x26 */ u8 x52;
+    /* 0x27 */ u8 pad53;
+    /* 0x28 */ u16 x54;
+    /* 0x2A */ u8 pad56[0x2C - 0x2A];
+} BracketEntrySlot;
+STATIC_ASSERT(sizeof(BracketEntrySlot) == 0x2C);
+
+/// A macro rather than an inline function (like gmtoulib.c's
+/// BracketEntry_GetSlot): MWCC reserves 8 bytes of stack per inlined call,
+/// which would break the frame size of fn_8019A158.
+#define GET_BRACKET_SLOT(entry, slot_idx)                                     \
+    (&((BracketEntrySlot*) &(entry)->x2C)[slot_idx])
 
 void fn_80196510(void)
 {
@@ -116,7 +153,7 @@ void fn_801965C4(void)
 
     if (fn_80196594(temp_r3)) {
         temp_r3->x32 = 1;
-        gm_SetPendingScene(3);
+        gm_SetPendingSceneIndex(3);
         gm_801A4B60();
         return;
     }
@@ -124,7 +161,7 @@ void fn_801965C4(void)
         temp_r3->x32 = 1;
         temp_r3->x28 = lbl_804D4190;
     }
-    gm_SetPendingScene(4);
+    gm_SetPendingSceneIndex(4);
     gm_801A4B60();
 }
 
@@ -708,9 +745,6 @@ void fn_801976D4(HSD_GObj* gobj)
     }
 }
 
-/// @todo 98.85%: all 261 instructions match except one adjacent schedule
-/// swap (the jobj load and the pnum save trade places after the
-/// fn_8018F62C call); the rest is anonymous literal-pool reloc naming.
 void fn_801977AC(HSD_GObj* gobj)
 {
     TmData* tm;
@@ -721,8 +755,7 @@ void fn_801977AC(HSD_GObj* gobj)
     u8 players;
 
     tm = gm_8018F634();
-    pnum = fn_8018F62C(gobj);
-    jobj = GET_JOBJ(gobj);
+    jobj = (pnum = fn_8018F62C(gobj), GET_JOBJ(gobj));
 
     if (gm_8018F634()->cur_option >= 0x1B && gm_8018F634()->cur_option <= 0x1E)
     {
@@ -1534,9 +1567,6 @@ void fn_80198EBC(void)
                 (void (*)(HSD_GObj*)) fn_80198584, lbl_804DA808);
 }
 
-/// @todo 99.82%: all 511 instructions match in count and shape; the residual
-/// is a two-register callee-saved swap (the biased selections pointer colors
-/// r29 vs the target's r30, and the second walk loop's counter r30 vs r29).
 void fn_80199AF0(void)
 {
     TmData* td1;
@@ -1545,6 +1575,7 @@ void fn_80199AF0(void)
     HSD_JObj* next;
     HSD_GObj* gobj;
     s32 slot;
+    s32 j;
     s32 mode;
     s32 bracket_idx;
     s32 result;
@@ -1637,7 +1668,7 @@ void fn_80199AF0(void)
             HSD_JObjSetTranslateZ(jobj, 10000.0f);
         }
     } else {
-        for (i = 1; i <= 12; i++) {
+        for (j = 1; j <= 12; j++) {
             if (jobj == NULL) {
                 next = NULL;
             } else {
@@ -1646,9 +1677,9 @@ void fn_80199AF0(void)
             jobj = next;
             HSD_JObjSetTranslateZ(jobj, 10000.0f);
 
-            if ((s32) lbl_803DA0D0.icon_model_map[td1->x4B8[slot].x1] == i) {
+            if ((s32) lbl_803DA0D0.icon_model_map[td1->x4B8[slot].x1] == j) {
                 HSD_JObjSetTranslateZ(jobj, 0.0f);
-                for (slot = i + 1; slot <= 12; slot++) {
+                for (slot = j + 1; slot <= 12; slot++) {
                     if (jobj == NULL) {
                         next = NULL;
                     } else {
@@ -1663,25 +1694,31 @@ void fn_80199AF0(void)
     }
 }
 
+/// @todo 97.72%: all instructions match; the callee-saved register
+/// assignment is rotated by one against the target. The per-slot bracket
+/// loops use byte-offset walkers because GET_BRACKET_SLOT only folds +0x2C
+/// into the displacement in straight-line code, not in loops.
 void fn_8019A158(void)
 {
     TmData* td1;
     TmData* td2;
     s32 mode;
     s32 slot;
+    s32 sel;
     s32 bracket_idx;
     s32 result;
-    s32 local1, local2;
-    s32 i;
     s32 counter;
-    u8* me;
+    s32 i;
+    int k;
+    UNUSED u8 unused[8];
+    s32 local1, local2;
+    MatchEnd* me;
     u8* cursor;
-    PAD_STACK(16);
+    PAD_STACK(4);
 
     td1 = gm_8018F634();
-    lbl_804799D8.x48 = (u8*) &gm_80477738;
-    mode = 0;
-    lbl_804799D8.x0 = 0;
+    lbl_804799D8.x48 = &gm_80477738;
+    lbl_804799D8.x0 = mode = 0;
 
     td2 = gm_8018F634();
 
@@ -1696,174 +1733,82 @@ void fn_8019A158(void)
     result = fn_8018F508(&local2);
     if (result == 1) {
         slot = local2;
-    } else if (me[0x58] != 3 && me[0x5E] == 0) {
-        slot = 0;
     } else {
-        cursor = me + 0xA8;
-        if (me[0x100] != 3 && cursor[0x5E] == 0) {
-            slot = 1;
-        } else {
-            me = cursor + 0xA8;
-            if (cursor[0x100] != 3 && me[0x5E] == 0) {
-                slot = 2;
-            } else {
-                cursor = me + 0xA8;
-                if (me[0x100] != 3 && cursor[0x5E] == 0) {
-                    slot = 3;
-                } else {
-                    slot = -1;
-                }
+        for (i = 0; i < 4; i++) {
+            if (me->player_standings[i].slot_type != 3 &&
+                me->player_standings[i].is_small_loser == 0)
+            {
+                slot = i;
+                goto found;
             }
         }
+        slot = -1;
+    found:;
     }
+    sel = slot;
 
     bracket_idx = fn_8018F74C();
 
-    for (i = 0; 20 > i; i++) {
-        lbl_804799D8.x4E[i] = 0;
+    for (k = 0; k < 20; k++) {
+        lbl_804799D8.x4E[k] = 0;
     }
 
     if (mode == 1) {
         BracketEntry* bracket = &lbl_80473AB8[bracket_idx];
-        u8* bp = (u8*) bracket;
-        u8* matched = bp + slot * 0x2C;
-
+        cursor = (u8*) bracket;
         for (i = 0; i < 4; i++) {
             if (i == slot) {
-                matched[0x4C] = 0;
+                ((u8*) bracket)[slot * 0x2C + 0x4C] = 0;
             } else {
-                bp[0x4C] = 3;
+                cursor[0x4C] = 3;
             }
-            bp += 0x2C;
+            cursor += 0x2C;
         }
     } else if (td1->x2D == 1) {
         BracketEntry* bracket = &lbl_80473AB8[bracket_idx];
         cursor = (u8*) bracket;
-
-        if (bracket->x4E == 3) {
-            bracket->x4C = 3;
-        } else {
-            me = lbl_804799D8.x48;
-            {
-                u8 v = me[0x5E];
-                me[0x5D] = v;
-                bracket->x4C = v;
-            }
-            me = lbl_804799D8.x48;
-            if (me[0x5E] == 0) {
-                slot = 0;
-            }
-        }
-
-        {
-            u8 check = bracket->x7A;
-            cursor += 0x2C;
-            if (check == 3) {
+        for (i = 0; i < 4; i++) {
+            if (cursor[0x4E] == 3) {
                 cursor[0x4C] = 3;
             } else {
-                me = lbl_804799D8.x48;
-                me += 0xA8;
+                u8 v;
+                /// @todo byte-offset walker: player_standings[i] is biased
+                /// +0x58 from the MatchEnd base the original walks from.
+                u8* p = (u8*) lbl_804799D8.x48 + i * 0xA8;
+                v = p[0x5E];
+                p[0x5D] = v;
+                cursor[0x4C] = v;
+                if (lbl_804799D8.x48->player_standings[i].is_small_loser == 0)
                 {
-                    u8 v = me[0x5E];
-                    me[0x5D] = v;
-                    cursor[0x4C] = v;
-                }
-                me = lbl_804799D8.x48;
-                if (me[0x106] == 0) {
-                    slot = 1;
+                    sel = i;
                 }
             }
-        }
-
-        {
-            u8 check = cursor[0x7A];
             cursor += 0x2C;
-            if (check == 3) {
-                cursor[0x4C] = 3;
-            } else {
-                me = lbl_804799D8.x48;
-                me += 0x150;
-                {
-                    u8 v = me[0x5E];
-                    me[0x5D] = v;
-                    cursor[0x4C] = v;
-                }
-                me = lbl_804799D8.x48;
-                if (me[0x1AE] == 0) {
-                    slot = 2;
-                }
-            }
-        }
-
-        {
-            u8 check = cursor[0x7A];
-            cursor += 0x2C;
-            if (check == 3) {
-                cursor[0x4C] = 3;
-            } else {
-                me = lbl_804799D8.x48;
-                me += 0x1F8;
-                {
-                    u8 v = me[0x5E];
-                    me[0x5D] = v;
-                    cursor[0x4C] = v;
-                }
-                me = lbl_804799D8.x48;
-                if (me[0x256] == 0) {
-                    slot = 3;
-                }
-            }
         }
     } else {
         BracketEntry* bracket = &lbl_80473AB8[bracket_idx];
         counter = 0;
-
-        if (bracket->x4E == 3) {
-            bracket->x4C = 4;
-        } else {
-            bracket->x4C = 0;
-            counter = 1;
-        }
-
-        cursor = (u8*) bracket + 0x2C;
-        if (bracket->x7A == 3) {
-            cursor[0x4C] = 4;
-        } else {
-            cursor[0x4C] = counter;
-            counter++;
-        }
-
-        {
-            u8 check = cursor[0x7A];
-            cursor += 0x2C;
-            if (check == 3) {
+        cursor = (u8*) bracket;
+        for (i = 0; i < 4; i++) {
+            if (cursor[0x4E] == 3) {
                 cursor[0x4C] = 4;
             } else {
                 cursor[0x4C] = counter;
                 counter++;
             }
-        }
-
-        {
-            u8 check = cursor[0x7A];
             cursor += 0x2C;
-            if (check == 3) {
-                cursor[0x4C] = 4;
-            } else {
-                cursor[0x4C] = counter;
-                counter++;
-            }
         }
 
         switch (counter) {
         case 2: {
-            s32 rand_val = HSD_Randi(bracket->x51 + bracket->x7D);
-            if (rand_val < bracket->x51) {
-                bracket->x4C = 0;
-                bracket->x78 = 1;
+            s32 rand_val = HSD_Randi(lbl_80473AB8[bracket_idx].x51 +
+                                     lbl_80473AB8[bracket_idx].x7D);
+            if (rand_val < lbl_80473AB8[bracket_idx].x51) {
+                lbl_80473AB8[bracket_idx].x4C = 0;
+                lbl_80473AB8[bracket_idx].x78 = 1;
             } else {
-                bracket->x4C = 1;
-                bracket->x78 = 0;
+                lbl_80473AB8[bracket_idx].x4C = 1;
+                lbl_80473AB8[bracket_idx].x78 = 0;
             }
             break;
         }
@@ -1875,52 +1820,36 @@ void fn_8019A158(void)
             break;
         }
 
-        me = lbl_804799D8.x48;
-        cursor = (u8*) &lbl_80473AB8[bracket_idx];
         {
-            u8 v = cursor[0x4C];
-            me[0x5D] = v;
-            me = lbl_804799D8.x48;
-            me[0x5E] = v;
-            v = cursor[0x78];
-            me[0x105] = v;
-            me = lbl_804799D8.x48;
-            me[0x106] = v;
-            v = cursor[0xA4];
-            me[0x1AD] = v;
-            me = lbl_804799D8.x48;
-            me[0x1AE] = v;
-            v = cursor[0xD0];
-            me[0x255] = v;
-            me = lbl_804799D8.x48;
-            me[0x256] = v;
+            u8 v = lbl_80473AB8[bracket_idx].x4C;
+            lbl_804799D8.x48->player_standings[0].is_big_loser = v;
+            lbl_804799D8.x48->player_standings[0].is_small_loser = v;
+            v = lbl_80473AB8[bracket_idx].x78;
+            lbl_804799D8.x48->player_standings[1].is_big_loser = v;
+            lbl_804799D8.x48->player_standings[1].is_small_loser = v;
+            v = lbl_80473AB8[bracket_idx].xA4;
+            lbl_804799D8.x48->player_standings[2].is_big_loser = v;
+            lbl_804799D8.x48->player_standings[2].is_small_loser = v;
+            v = lbl_80473AB8[bracket_idx].xD0;
+            lbl_804799D8.x48->player_standings[3].is_big_loser = v;
+            lbl_804799D8.x48->player_standings[3].is_small_loser = v;
         }
 
-        if (bracket->x4C == 0) {
-            slot = 0;
-        }
-        if (bracket->x78 == 0) {
-            slot = 1;
-        }
-        cursor = (u8*) bracket + 0x2C;
-        if (cursor[0x78] == 0) {
+        cursor = (u8*) bracket;
+        for (i = 0; i < 4; i++) {
+            if (cursor[0x4C] == 0) {
+                sel = i;
+            }
             cursor += 0x2C;
-            slot = 2;
-        } else {
-            cursor += 0x2C;
-        }
-        if (cursor[0x78] == 0) {
-            slot = 3;
         }
     }
 
     {
-        BracketEntry* bracket = &lbl_80473AB8[bracket_idx];
-        lbl_804799D8.x4C = slot;
-        cursor = (u8*) bracket + slot * 0x2C;
-        lbl_804799D8.x4D = cursor[0x4E];
+        lbl_804799D8.x4C = sel;
+        lbl_804799D8.x4D =
+            GET_BRACKET_SLOT(&lbl_80473AB8[bracket_idx], sel)->x4E;
 
-        if (lbl_804799D8.x4D == 0 && bracket->x18 != 0) {
+        if (lbl_804799D8.x4D == 0 && lbl_80473AB8[bracket_idx].x18 != 0) {
             u8 s = lbl_804799D8.x4C;
             u16 val = td1->x4B8[s].x6;
             if (val <= 0x78) {
@@ -1930,7 +1859,7 @@ void fn_8019A158(void)
             }
         }
 
-        cursor = (u8*) &lbl_80473AB8[bracket_idx] + slot * 0x2C;
+        cursor = (u8*) &lbl_80473AB8[bracket_idx] + sel * 0x2C;
         {
             u8 model_idx = cursor[0x50];
             struct TmUnkMenuData* entries = td1->x37;
@@ -1995,22 +1924,27 @@ void gm_8019A828(void)
     gm_8018F634()->cur_option = 0x1B;
 }
 
-void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
+/// @todo 99.86%: all instruction shapes and callee-saved registers match;
+/// two scratch-register tie-breaks remain (the ready loop's err/state temps
+/// trade r7/r3, and the bracket-entry fill's address/value temps trade
+/// r0/r4). Decl orders, block-scope promotion, split counters, and comma
+/// expressions all compile to identical instructions with the same colors.
+void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
 {
     s32 ready_count = 0;
     s32 pad_err = 0;
-    TmData* tm = (TmData*) arg0;
-    struct Lbl804799D8_t* d8 = &lbl_804799D8;
     s32 i;
     PAD_STACK(0x28);
 
-    if (tm->cur_option == 0x1B) {
-        fn_8019B81C(arg0);
+    switch (tm->cur_option) {
+    case 0x1B:
+        fn_8019B81C((s32*) tm);
+        break;
     }
 
     if (tm->cur_option == 0x1D) {
-        d8->x0 += 1;
-        if ((arg2 & 0x600) || (d8->x0 >= 0x12CU)) {
+        lbl_804799D8.x0 += 1;
+        if ((arg2 & 0x600) || (lbl_804799D8.x0 >= 0x12CU)) {
             lbAudioAx_80024030(0);
             fn_8018EC48();
             tm->x2D = 0;
@@ -2032,7 +1966,7 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
             }
             if (cond != 0) {
                 t->x32 = 1;
-                gm_SetPendingScene(3U);
+                gm_SetPendingSceneIndex(3U);
                 gm_801A4B60();
                 return;
             }
@@ -2045,7 +1979,7 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                 t->x32 = 1;
                 t->x28 = (u32) lbl_804D4190;
             }
-            gm_SetPendingScene(4U);
+            gm_SetPendingSceneIndex(4U);
             gm_801A4B60();
         }
     } else {
@@ -2058,9 +1992,11 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                     pad_err = 1;
                 }
                 {
-                    u8 state = d8->x2A[i].state;
-                    if (((state == 2 && (u8) d8->x2A[i].cur >= 0x3CU) ||
-                         (state == 4 && (u8) d8->x2A[i].cur == 0x82)) &&
+                    u8 state = lbl_804799D8.x2A[i].state;
+                    if (((state == 2 &&
+                          (u8) lbl_804799D8.x2A[i].cur >= 0x3CU) ||
+                         (state == 4 &&
+                          (u8) lbl_804799D8.x2A[i].cur == 0x82)) &&
                         (s8) err == 0)
                     {
                         ready_count += 1;
@@ -2085,16 +2021,17 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                 mn_8022F138(0x12, 0x15);
                 mn_8022F268();
                 gm_801A4B60();
-                gm_801A42F8(1);
+                gm_ChangeGameModeAfterCurrentScene(GM_MENU);
                 return;
             }
         }
 
         if (ready_count == (s32) tm->x30) {
-            d8->x0 += 1;
-            if (d8->x0 >= 0x1EU) {
+            lbl_804799D8.x0 += 1;
+            if (lbl_804799D8.x0 >= 0x1EU) {
                 for (i = 0; i < (s32) tm->x30; i++) {
-                    if (tm->x4B8[i].x0 == 0 && d8->x2A[i].state == 4) {
+                    if (tm->x4B8[i].x0 == 0 && lbl_804799D8.x2A[i].state == 4)
+                    {
                         tm->x4B8[i].x0 = 3;
                     }
                 }
@@ -2110,39 +2047,12 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                     ent->xA6 = t2->x4B8[2].x0;
                     ent->xD2 = t2->x4B8[3].x0;
 
-                    {
-                        u8 s0 = tm->x4B8[0].x0;
-                        if (s0 == 0) {
+                    for (i = 0; i < 4; i++) {
+                        u8 st = tm->x4B8[i].x0;
+                        if (st == 0) {
                             hmn_count += 1;
                         }
-                        if (s0 != 3) {
-                            active_count += 1;
-                        }
-                    }
-                    {
-                        u8 s1 = tm->x4B8[1].x0;
-                        if (s1 == 0) {
-                            hmn_count += 1;
-                        }
-                        if (s1 != 3) {
-                            active_count += 1;
-                        }
-                    }
-                    {
-                        u8 s2 = tm->x4B8[2].x0;
-                        if (s2 == 0) {
-                            hmn_count += 1;
-                        }
-                        if (s2 != 3) {
-                            active_count += 1;
-                        }
-                    }
-                    {
-                        u8 s3 = tm->x4B8[3].x0;
-                        if (s3 == 0) {
-                            hmn_count += 1;
-                        }
-                        if (s3 != 3) {
+                        if (st != 3) {
                             active_count += 1;
                         }
                     }
@@ -2160,10 +2070,11 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
 
                     {
                         TmData* t3 = gm_8018F634();
-                        s32 stype2 = t3->stage_selection_type;
+                        s32 stype2;
                         s32 cond2;
 
                         t3->x2D = 1;
+                        stype2 = t3->stage_selection_type;
                         if ((stype2 == 2 && (u8) t3->x32 == 0) || stype2 == 3)
                         {
                             cond2 = 1;
@@ -2172,7 +2083,7 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                         }
                         if (cond2 != 0) {
                             t3->x32 = 1;
-                            gm_SetPendingScene(3U);
+                            gm_SetPendingSceneIndex(3U);
                             gm_801A4B60();
                             return;
                         }
@@ -2186,42 +2097,42 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                             t3->x32 = 1;
                             t3->x28 = (u32) lbl_804D4190;
                         }
-                        gm_SetPendingScene(4U);
+                        gm_SetPendingSceneIndex(4U);
                         gm_801A4B60();
                     }
                 }
             }
         } else {
-            d8->x0 = 0;
+            lbl_804799D8.x0 = 0;
 
-            for (i = 0; i < (s32) tm->x30;) {
+            for (i = 0; i < (s32) tm->x30; i++) {
                 if ((s8) (u8) HSD_PadMasterStatus[(u8) i].err == 0 &&
                     tm->x4B8[i].x0 == 0)
                 {
                     u32 buttons = fn_8018F640(i);
 
-                    if (buttons & 0x1100) {
+                    if (buttons & (PAD_BUTTON_A | PAD_BUTTON_START)) {
                         lbAudioAx_80024030(1);
-                        if (d8->x44[i] == 7) {
-                            d8->x44[i] = 6;
-                        } else if (d8->x44[i] == 8) {
+                        if (lbl_804799D8.x44[i] == 7) {
+                            lbl_804799D8.x44[i] = 6;
+                        } else if (lbl_804799D8.x44[i] == 8) {
                             u8 np = gm_8018F634()->x30;
                             s32 count4 = 0;
                             s32 j;
 
                             for (j = 0; j < (s32) np; j++) {
-                                if (d8->x2A[j].state == 4) {
+                                if (lbl_804799D8.x2A[j].state == 4) {
                                     count4 += 1;
                                 }
                             }
                             if (count4 < (s32) (tm->x30 - 1)) {
-                                d8->x44[i] = 6;
-                                d8->x2A[i].state = 4;
+                                lbl_804799D8.x44[i] = 6;
+                                lbl_804799D8.x2A[i].state = 4;
                             }
                         } else {
-                            u8 pstate = d8->x2A[i].state;
+                            u8 pstate = lbl_804799D8.x2A[i].state;
                             if (pstate == 4) {
-                                d8->x2A[i].state = 5;
+                                lbl_804799D8.x2A[i].state = 5;
                             } else if (pstate == 0 || pstate == 3 ||
                                        pstate == 5)
                             {
@@ -2231,48 +2142,50 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                                 } else {
                                     gm_80167858(i, 0x78, 0xB, 0x14);
                                 }
-                                d8->x2A[i].state = 1;
+                                lbl_804799D8.x2A[i].state = 1;
                             }
                         }
-                    } else if (buttons & 0x400) {
-                        if (d8->x44[i] != 6) {
+                    } else if (buttons & PAD_BUTTON_X) {
+                        if (lbl_804799D8.x44[i] != 6) {
                             lbAudioAx_80024030(0);
-                            d8->x44[i] = 6;
+                            lbl_804799D8.x44[i] = 6;
                         } else {
-                            u8 pstate2 = d8->x2A[i].state;
+                            u8 pstate2 = lbl_804799D8.x2A[i].state;
                             if (pstate2 == 0 || pstate2 == 3 || pstate2 == 5) {
                                 u8 np2 = gm_8018F634()->x30;
                                 s32 count5 = 0;
                                 s32 k;
 
                                 for (k = 0; k < (s32) np2; k++) {
-                                    if (d8->x2A[k].state == 4) {
+                                    if (lbl_804799D8.x2A[k].state == 4) {
                                         count5 += 1;
                                     }
                                 }
                                 if (count5 < (s32) (tm->x30 - 1)) {
                                     lbAudioAx_80024030(0);
-                                    d8->x44[i] = 7;
+                                    lbl_804799D8.x44[i] = 7;
                                 }
                             } else if (pstate2 == 2) {
                                 lbAudioAx_80024030(0);
-                                d8->x2A[i].state = 3;
-                                d8->x2A[i].done = 0;
+                                lbl_804799D8.x2A[i].state = 3;
+                                lbl_804799D8.x2A[i].done = 0;
                             }
                         }
-                    } else if ((buttons & 0x10000) || (buttons & 8)) {
-                        if (d8->x44[i] == 8) {
+                    } else if ((buttons & PAD_STICK_UP) ||
+                               (buttons & PAD_BUTTON_UP))
+                    {
+                        if (lbl_804799D8.x44[i] == 8) {
                             lbAudioAx_80024030(2);
-                            d8->x44[i] = 7;
+                            lbl_804799D8.x44[i] = 7;
                         }
-                    } else if (((buttons & 0x20000) || (buttons & 4)) &&
-                               d8->x44[i] == 7)
+                    } else if (((buttons & PAD_STICK_DOWN) ||
+                                (buttons & PAD_BUTTON_DOWN)) &&
+                               lbl_804799D8.x44[i] == 7)
                     {
                         lbAudioAx_80024030(2);
-                        d8->x44[i] = 8;
+                        lbl_804799D8.x44[i] = 8;
                     }
                 }
-                i++;
             }
         }
     }
@@ -2336,9 +2249,9 @@ void fn_8019AF50(s32* arg0, u32 arg1, u32 arg2)
     }
 
     if (lbl_804799D8.x4D != 1) {
-        buttons = (u32) gm_801A36A0(lbl_804799D8.x4C);
+        buttons = (u32) gm_GetButtonsTriggered(lbl_804799D8.x4C);
     } else {
-        buttons = (u32) gm_801A36A0(4);
+        buttons = (u32) gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS);
     }
 
     if (lbl_80473AB8[bracketIdx].x18 != 0) {
@@ -2375,8 +2288,10 @@ void fn_8019AF50(s32* arg0, u32 arg1, u32 arg2)
     if (*arg0 == 0x27) {
         if (lbl_804799D8.x0 >= 0xFAU) {
             if (tm->x33 == 6) {
-                if (lbl_804799D8.x0 >= 0x1C20U || (buttons & 0x1100)) {
-                    gm_801A42F8(1);
+                if (lbl_804799D8.x0 >= 0x1C20U ||
+                    (buttons & (PAD_BUTTON_A | PAD_BUTTON_START)))
+                {
+                    gm_ChangeGameModeAfterCurrentScene(GM_MENU);
                     gm_801A4B60();
                 }
             } else {
@@ -2424,7 +2339,7 @@ void gm_8019B2DC_OnFrame(void)
             cond = 0;
         }
         if (cond != 0) {
-            fn_8019A86C((s32*) data, arg1, arg2);
+            fn_8019A86C(data, arg1, arg2);
         } else {
             fn_8019AF50((s32*) data, arg1, arg2);
         }
@@ -2460,27 +2375,14 @@ void gm_8019B2DC_OnFrame(void)
 
 /// Transitions to results screen after a tournament match.
 /// Ranks players, preloads stage/character data, and starts audio.
-/// @todo ~99% — all 278 instructions/shapes match; residual is a pure
-/// callee-saved register rotation (rank/match colored r28/r27 vs target
-/// r29/r28, and the char/costume fill loop's two walkers swapped r28<->r29).
-void fn_8019B458(s32* arg0)
+static inline void fn_8019B458_UpdateRank(TmData* tm, struct Lbl804799D8_t* d8)
 {
-    struct Preload {
-        s32 stage;
-        s32 char_ids[4];
-        s32 costumes[4];
-    } req;
-    TmData* tm = (TmData*) arg0;
-    struct Lbl804799D8_t* d8 = &lbl_804799D8;
     s32 rank;
-    s32 i;
     s32 j;
     s32 x24;
     s32 entrants;
     TmData* td;
-    PAD_STACK(0x10);
 
-    tm->x24++;
     d8->x0 = rank = 0;
     tm->pad_x34[0] = tm->x33;
 
@@ -2499,11 +2401,28 @@ void fn_8019B458(s32* arg0)
     }
 
     tm->x33 = rank;
+}
+
+/// @todo 99.77%: all instructions match; the entry-fill loop's two pointer
+/// walkers have r28 and r29 swapped.
+void fn_8019B458(s32* arg0)
+{
+    struct Preload {
+        s32 stage;
+        s32 char_ids[4];
+        s32 costumes[4];
+    } req;
+    TmData* tm = (TmData*) arg0;
+    struct Lbl804799D8_t* d8 = &lbl_804799D8;
+    s32 match;
+    TmData* td2;
+    s32 i;
+    PAD_STACK(0x10);
+
+    tm->x24++;
+    fn_8019B458_UpdateRank(tm, d8);
 
     {
-        s32 match;
-        TmData* td2;
-
         match = fn_80196CF8();
         td2 = gm_8018F634();
         fn_80198D18();
@@ -2536,8 +2455,6 @@ void fn_8019B458(s32* arg0)
 
         {
             s32 use_random_stage;
-            /* declared here (not in the cache block below) to keep &req in
-             * a callee-saved register across both entry-fill loops */
             struct Preload* q = &req;
 
             for (i = 0; i < 4; i++) {

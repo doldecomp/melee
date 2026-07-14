@@ -100,6 +100,8 @@ struct EventPriority {
     int priority;
 };
 
+static u16 numPeakParticles;
+
 void DrawRectangle(f32 x_min, f32 y_min, f32 w, f32 h, GXColor* color)
 {
     f32 x_max;

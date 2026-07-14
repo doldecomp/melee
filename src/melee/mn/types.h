@@ -518,7 +518,7 @@ struct Diagram2 {
 /// Total size: 0x78 bytes
 struct Diagram3 {
     /* 0x00 */ u8 saved_menu;
-    /* 0x01 */ u8 saved_selection;
+    /* 0x01 */ u8 cursor_row;
     /* 0x02 */ u8 pad_2[2];
     /* 0x04 */ u8 scroll_offset;
     /* 0x05 */ u8 anim_state;
