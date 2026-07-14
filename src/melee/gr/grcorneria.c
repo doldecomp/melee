@@ -379,7 +379,6 @@ static inline u32 grCn_PickUniqueType(s32 slot, int range, int base)
 void grCorneria_801DCE1C(void)
 {
     Vec3 pos;
-    Vec3 pos2;
     int far;
     int type_id;
 
@@ -458,6 +457,7 @@ void grCorneria_801DCE1C(void)
                             type_id = grCn_PickUniqueType(count, 13, 1);
                             grCn_SpawnArwing(count, type_id, count + 1);
                         } else {
+                            Vec3 pos2;
                             grCorneria_801DDD4C(&pos2);
                             if (grCn_CheckFar(&pos2) == 0) {
                                 type_id = grCn_PickUniqueType(count, 4, 10);
@@ -1242,15 +1242,31 @@ void grCorneria_801DED50(Ground_GObj* gobj)
             case 0:
                 if (gp->gv.corneria2.xF8 <= 0) {
                     s32 new_state = HSD_Randi(5) + 1;
-                    s32 grp_off;
+                    s32 grp_off = -1;
+                    s32 anim_id;
                     gp->gv.corneria2.xF4 = new_state;
+                    {
+                        s32 g = data->arwing_group[GET_GROUND(gobj)
+                                                       ->gv.corneria2.xC8];
+                        switch (g) {
+                        case 0:
+                            break;
+                        case 1:
+                        case 2:
+                        case 3:
+                            grp_off = 0;
+                            break;
+                        case 4:
+                            grp_off = 1;
+                            break;
+                        }
+                    }
+                    anim_id =
+                        (&data->x3D8[gp->gv.corneria2.xF4 * 2 + 15])[grp_off];
                     grAnime_801C8098(
                         gobj,
-                        grCn_803E214C[data->arwing_group[gp->gv.corneria2.xC8]],
-                        7,
-                        (&grCn_803E21B0[gp->gv.corneria2.xF4 * 2])[get_grp_off(
-                            gobj)],
-                        0.0f, 1.0f);
+                        data->x478[data->arwing_group[gp->gv.corneria2.xC8]],
+                        7, anim_id, 0.0f, 1.0f);
                 } else {
                     HSD_JObjSetRotationZ(
                         Ground_801C3FA4(
@@ -2596,9 +2612,10 @@ void grCorneria_801E25C4(HSD_GObj* gobj, void* gv, int line, int arg3,
     s16 joint0;
     int i;
     s16* joints;
+    int anim_joint1;
     HSD_GObj* loop_gobj;
     HSD_GObj* anim_gobj;
-    PAD_STACK(8);
+    PAD_STACK(4);
 
     v->line = line;
     v->sis_data_idx = arg3;
@@ -2606,6 +2623,7 @@ void grCorneria_801E25C4(HSD_GObj* gobj, void* gv, int line, int arg3,
     joint0 = grCn_803E1D38.dialog_joints[v->line].joint0;
     joint1 = grCn_803E1D38.dialog_joints[v->line].joint1;
     joints = &grCn_803E1D38.dialog_joints[i = 0].joint0;
+    anim_joint1 = joint1;
     loop_gobj = gobj;
     do {
         if (i != 0 && v->line != i) {
@@ -2625,15 +2643,15 @@ void grCorneria_801E25C4(HSD_GObj* gobj, void* gv, int line, int arg3,
     } while (i < 5);
     anim_gobj = gobj;
     v->jobj0 = Ground_801C3FA4(anim_gobj, joint0);
-    v->jobj1 = Ground_801C3FA4(anim_gobj, joint1);
+    v->jobj1 = Ground_801C3FA4(anim_gobj, anim_joint1);
     v->jobj2 = Ground_801C3FA4(anim_gobj, 5);
     v->joint_idx0 = joint0;
-    v->joint_idx1 = joint1;
+    v->joint_idx1 = anim_joint1;
     v->joint_idx2 = 5;
     v->state = 0;
     v->timer = 0xA;
     grAnime_801C8098(anim_gobj, joint0, 7, 0, 0.0f, 1.0f);
-    grAnime_801C8098(anim_gobj, joint1, 7, 0, 0.0f, 1.0f);
+    grAnime_801C8098(anim_gobj, anim_joint1, 7, 0, 0.0f, 1.0f);
     grAnime_801C8098(anim_gobj, 5, 7, 0, 0.0f, 1.0f);
     HSD_JObjAnimAll(anim_gobj->hsd_obj);
 }

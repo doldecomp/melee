@@ -357,7 +357,7 @@ bool grInishie1_801FAC50(Ground_GObj* gobj)
 void grInishie1_801FAC58(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
+    HSD_JObj* jobj = gobj->hsd_obj;
     HSD_JObj* jobj2 = jobj;
     Vec3 vec;
 
@@ -714,7 +714,7 @@ void grInishie1_801FB3F0(HSD_GObj* gobj)
     grInishie1_801FB3F0_Vars* vars = gobj->user_data;
     u32 i;
     Vec3 pos;
-    PAD_STACK(52);
+    PAD_STACK(48);
 
     if (vars->xD8 > 0) {
         vars->xD8--;
@@ -756,17 +756,22 @@ void grInishie1_801FBA34(HSD_GObj* gobj, HSD_JObj* jobj)
 }
 
 /// creates a hatena block
+static inline Ground* GET_GROUND2(HSD_GObj* gobj)
+{
+    return gobj->user_data;
+}
+
 void grInishie1_801FBAA0(HSD_GObj* gobj, s32 index)
 {
     HSD_JObj* hatena_jobj;
     Vec3 position;
-    Ground* gp = gobj->user_data;
+    Ground* gp = GET_GROUND2(gobj);
     Ground* hatena_gp;
     HSD_GObj* hatena = grInishie1_801FA9B4(2);
-    PAD_STACK(8);
+    PAD_STACK(4);
 
     if (hatena != NULL) {
-        hatena_gp = hatena->user_data;
+        hatena_gp = GET_GROUND2(hatena);
         HSD_ASSERTMSG(
             0x39E, !gp->gv.inishie1.blocks[index].hatena_gobj,
             "!mapgp->u.map.block[ix].hatena_gobj");
@@ -799,15 +804,9 @@ void grInishie1_801FBC4C(HSD_GObj* gobj, u32 index)
     gp->gv.inishie1.blocks[index].hatena_gobj = NULL;
 }
 
-static inline Ground* GET_GROUND2(HSD_GObj* gobj)
-{
-    return gobj->user_data;
-}
-
 void grInishie1_801FBCEC(HSD_GObj* gobj, u32 index)
 {
     Ground* gp = GET_GROUND2(gobj);
-    Vec3 item_spawn_offset;
     Vec3 effect_pos;
 
     gp->gv.inishie1.blocks[index].x2 = 0;
@@ -827,12 +826,12 @@ void grInishie1_801FBCEC(HSD_GObj* gobj, u32 index)
             gp->gv.inishie1.blocks[index].hatena_gobj = NULL;
 
             lb_8000B1CC(gp->gv.inishie1.blocks[index].jobj2, NULL,
-                        &item_spawn_offset);
+                        &item_vel - 1);
 
             item_vel = grInishie1_HatenaItemSpawnVel;
-            item_spawn_offset.y += 5.0f;
+            (&effect_pos - 2)->y += 5.0f;
 
-            it_8026F7C8(&item_spawn_offset, &item_vel, 0);
+            it_8026F7C8(&effect_pos - 2, &item_vel, 0);
         }
     }
 

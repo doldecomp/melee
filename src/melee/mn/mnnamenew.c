@@ -496,7 +496,6 @@ s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
     s32 i;
     s32 j;
     GXColor* color_ptr;
-    GXColor* sp44_addr = &sp44;
 
     FORCE_PAD_STACK(16);
 
@@ -606,7 +605,8 @@ s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
             color_ptr = &sp4C;
         }
         sp44 = *color_ptr;
-        HSD_SisLib_803A74F0(text, j, sp44_addr);
+        color_ptr = &sp44;
+        HSD_SisLib_803A74F0(text, j, color_ptr);
     }
 
     return (s32) text;
@@ -1991,7 +1991,8 @@ s32 InitNameEntryUIState(NameNewEntry* arg0, s32 arg1)
     return result;
 }
 
-static inline void mnNameNew_InitKeyJobjs(NameNewEntry* user_data)
+static inline void mnNameNew_InitKeyJobjs(NameNewEntry* user_data,
+                                          HSD_JObj** child_out)
 {
     s32 k;
     HSD_JObj* key_jobj;
@@ -2010,7 +2011,8 @@ static inline void mnNameNew_InitKeyJobjs(NameNewEntry* user_data)
                   HSD_JObjGetTranslationY(user_data->jobjs[16]);
         mnName_80239F5C(key_jobj, x_range * (f32) ((u8) k / 5));
         mnName_80239EBC(key_jobj, y_range * (f32) ((u8) k % 5));
-        HSD_JObjAddChild(user_data->jobjs[16], key_jobj);
+        *child_out = key_jobj;
+        HSD_JObjAddChild(user_data->jobjs[16], *child_out);
     }
 }
 
@@ -2042,7 +2044,10 @@ void mnNameNew_8023E32C(s32 arg0)
         lb_80011E24(root_jobj, &user_data->jobjs[i], i, -1);
     }
     mnNameNew_8023E0D8(user_data);
-    mnNameNew_InitKeyJobjs(user_data);
+    {
+        HSD_JObj* child;
+        mnNameNew_InitKeyJobjs(user_data, &child);
+    }
     user_data->key_text =
         (HSD_Text*) mnNameNew_KeySetup(user_data, user_data->mode);
     mnNameNew_8023B314(user_data, (s32) user_data->x1);

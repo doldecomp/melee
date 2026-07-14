@@ -722,46 +722,63 @@ void fn_802514D8(HSD_GObj* gobj)
     fn_802514D8_inline(userdata, gobj);
 }
 
+static inline void fn_80251640_FreeText(HSD_GObj* gobj, MnCountData* userdata,
+                                        s32 i)
+{
+    HSD_Text* label_null;
+    HSD_Text* value_null;
+    MnCountData* userdata2;
+    MnCountData* userdata3;
+
+    userdata2 = GET_MNCOUNT(gobj);
+    userdata3 = userdata2;
+    label_null = (HSD_Text*) i;
+    value_null = (HSD_Text*) i;
+    do {
+        if (userdata2->labels[i] != NULL) {
+            HSD_SisLib_803A5CC4(userdata3->labels[i]);
+            userdata2->labels[i] = label_null;
+        }
+        if (userdata2->values[i] != NULL) {
+            HSD_SisLib_803A5CC4(userdata3->values[i]);
+            userdata2->values[i] = value_null;
+        }
+        i += 1;
+    } while (i < MNCOUNT_VISIBLE_ROWS);
+    HSD_SisLib_803A5CC4(userdata->title);
+}
+
+static inline void fn_80251640_InitModel(HSD_GObj* gobj, MnCountData* userdata,
+                                         s32 i)
+{
+    StaticModelDesc* md;
+    HSD_JObj* jobj;
+
+    for (; i < MNCOUNT_VISIBLE_ROWS; i++) {
+        mnCount_CreateRow(gobj, i, userdata->scroll_pos + i);
+    }
+    md = &model_desc;
+    jobj = HSD_JObjLoadJoint(md->joint);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
+    HSD_JObjAddAnimAll(jobj, md->animjoint, md->matanim_joint,
+                       md->shapeanim_joint);
+    HSD_JObjReqAnimAll(jobj, 0.0f);
+}
+
 void fn_80251640(HSD_GObj* gobj)
 {
     HSD_GObjProc* proc;
-    HSD_Text* label_null;
     MnCountData* userdata = GET_MNCOUNT(gobj);
-    StaticModelDesc* md;
-    MnCountData* userdata2;
-    int i;
-    HSD_JObj* jobj;
+    s32 i;
     PAD_STACK(24);
 
     if (mn_804A04F0.cur_menu != MENU_KIND_RECORDS_MISC) {
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         proc = HSD_GObj_SetupProc(gobj, fn_802514B8, 0);
+        i = 0;
         proc->flags_3 = HSD_GObj_804D783C;
-        {
-            HSD_Text* value_null;
-            MnCountData* userdata3;
-            // inline_free_text
-
-            userdata2 = GET_MNCOUNT(gobj);
-
-            i = 0;
-            label_null = (HSD_Text*) i;
-            value_null = (HSD_Text*) i;
-            userdata3 = userdata2;
-            do {
-                if (userdata2->labels[i] != NULL) {
-                    HSD_SisLib_803A5CC4(userdata3->labels[i]);
-                    userdata2->labels[i] = label_null;
-                }
-                if (userdata2->values[i] != NULL) {
-                    HSD_SisLib_803A5CC4(userdata3->values[i]);
-                    userdata2->values[i] = value_null;
-                }
-                i += 1;
-            } while (i < MNCOUNT_VISIBLE_ROWS);
-
-            HSD_SisLib_803A5CC4(userdata->title);
-        }
+        fn_80251640_FreeText(gobj, userdata, i);
         return;
     }
 
@@ -770,17 +787,7 @@ void fn_80251640(HSD_GObj* gobj)
         return;
     }
 
-    for (i = 0; i < MNCOUNT_VISIBLE_ROWS; i++) {
-        mnCount_CreateRow(gobj, i, userdata->scroll_pos + i);
-    }
-
-    md = &model_desc;
-    jobj = HSD_JObjLoadJoint(md->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
-    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
-    HSD_JObjAddAnimAll(jobj, md->animjoint, md->matanim_joint,
-                       md->shapeanim_joint);
-    HSD_JObjReqAnimAll(jobj, 0.0f);
+    fn_80251640_InitModel(gobj, userdata, 0);
     mnCount_UpdateArrowIndicators_noinline(gobj);
     HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
     proc = HSD_GObj_SetupProc(gobj, fn_802514D8, 0);

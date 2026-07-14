@@ -137,9 +137,14 @@ typedef struct ftCo_CollData {
     /* +20 */ u32 flags;
 } ftCo_CollData;
 
+static inline f32 get_scale(Fighter* fp)
+{
+    return fp->x34_scale.y;
+}
+
 int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
 {
-    u8 operand_pad[16];
+    u8 operand_pad[8];
     ftCo_AttackEntry sp3C[32];
     ftCo_AttackEntry* list = arg2;
     ftCo_AttackEntry* sel;
@@ -161,7 +166,6 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
     f32 scale;
     f32 upper;
     f32 lower;
-    f32 diry;
     f32 fpX;
     f32 fpY;
     f32 fpVx;
@@ -211,6 +215,7 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
     count = 0;
     while (list->cmd) {
         f32 dirx;
+        f32 diry;
         found = false;
         if (list->x20 > cpu->level) {
             list++;
@@ -292,7 +297,7 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
         }
         dirx *= halfRange;
         diry *= halfRange;
-        scale = fp->x34_scale.y;
+        scale = get_scale(fp);
         upper = list->x14 * scale * halfRange;
         lower = list->x10 * scale * halfRange;
         if (upper > relPredY && lower < relPredY + x568 &&
@@ -330,8 +335,7 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
     }
     inv = 1.0 / sum;
     acc = 0.0f;
-    sel = sp3C;
-    for (i = 0; i < count; i++) {
+    for (i = 0, sel = sp3C; i < count; i++, sel++) {
         acc += sel->weight;
         if (acc * inv >= r) {
             cpu->x6C.x = fp->x34_scale.y * sp3C[i].x08;
@@ -340,7 +344,6 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
             cpu->x74.y = fp->x34_scale.y * sp3C[i].x14;
             return sp3C[i].cmd;
         }
-        sel++;
     }
     HSD_ASSERT(0xFA, NULL);
 }
@@ -498,12 +501,13 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
             dirx = -list->x0C * fp->x34_scale.y - reach;
             diry = fp->x34_scale.y * -list->x08;
         }
+        dirx *= halfRange;
+        diry *= halfRange;
         scale = fp->x34_scale.y;
         (void) scale;
         if ((scale * list->x14 + reach) * halfRange > relPredY &&
             list->x10 * scale * halfRange < relPredY + x568 &&
-            dirx * halfRange < relx + rangeF &&
-            diry * halfRange > relx - rangeB)
+            dirx < relx + rangeF && diry > relx - rangeB)
         {
             if (cpu->xC8 != 0) {
                 for (j = 0; j < cpu->xC8; j++) {
@@ -2113,7 +2117,8 @@ bool ftCo_800B8A9C(Fighter* fp)
         } else if (ftCo_800A3200(target3)) {
             var_r0 = 0;
         } else {
-            if (ftCo_800A0FB0(&sp1C, &sp34, &sp38, &sp28, -1, -1, -1,
+            if (ftCo_800A0FB0((Vec3*) (&sp1C.x - 1), &sp34 - 16, &sp38,
+                              (Vec3*) (&sp28.x - 1), -1, -1, -1,
                               target3->cur_pos.x, 5.0 + target3->cur_pos.y,
                               target3->cur_pos.x, target3->cur_pos.y - 1000.0,
                               0.0f) != 0)

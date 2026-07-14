@@ -33,6 +33,12 @@
 #include <melee/lb/lbspdisplay.h>
 #include <melee/mp/mplib.h>
 
+static void sdata2_order(void)
+{
+    (void) 1.0f;
+    (void) 0.0f;
+}
+
 #define Gr_Greens_Block_Status_None 0
 /// "Colum" (sic): the retail assert strings at 0x803E7908/0x803E7924 spell
 /// "ix<Gr_Greens_Block_Colum*2" / "ix<Gr_Greens_Block_Colum", so the original
@@ -787,6 +793,7 @@ void grGreens_80214804(Ground_GObj* gobj)
 
 void grGreens_8021483C(Ground_GObj* gobj)
 {
+    int j;
     Vec vec;
     float left_max = -3.4028235e38f;
     float left_min = 3.4028235e38f;
@@ -798,8 +805,8 @@ void grGreens_8021483C(Ground_GObj* gobj)
     float right_bottom = 3.4028235e38f;
     Ground* gp = GET_GROUND(gobj);
     int i;
-    float y;
-    PAD_STACK(4);
+    float x_scale;
+    float y_scale;
 
     for (i = 0; i < 30; i++) {
         HSD_JObj* jobj = Ground_801C3FA4(gobj, grGr_blockJObjIds[i]);
@@ -834,47 +841,26 @@ void grGreens_8021483C(Ground_GObj* gobj)
             }
         }
     }
-    {
-        float x0;
-        float x1;
-        float x2;
-
-        x0 = 0.0f;
-        x1 = 1.0f;
-        x2 = 2.0f;
-        left_max = (left_max - left_min) * 0.5f;
-        for (i = 0; i < 5; i++) {
-            y = ((left_top - left_bottom) * 0.25f * i) + left_bottom;
-
-            ((Vec(*)[6]) gp->gv.greens.x4)[i][0].x =
-                (left_max * x0) + left_min;
-            ((Vec(*)[6]) gp->gv.greens.x4)[i][0].y = y;
-            ((Vec(*)[6]) gp->gv.greens.x4)[i][0].z = 0.0f;
-            ((Vec(*)[6]) gp->gv.greens.x4)[i][1].x =
-                (left_max * x1) + left_min;
-            ((Vec(*)[6]) gp->gv.greens.x4)[i][1].y = y;
-            ((Vec(*)[6]) gp->gv.greens.x4)[i][1].z = 0.0f;
-            ((Vec(*)[6]) gp->gv.greens.x4)[i][2].x =
-                (left_max * x2) + left_min;
-            ((Vec(*)[6]) gp->gv.greens.x4)[i][2].y = y;
-            ((Vec(*)[6]) gp->gv.greens.x4)[i][2].z = 0.0f;
+    x_scale = (left_max - left_min) / 2;
+    y_scale = (left_top - left_bottom) / 4;
+    for (i = 0; i < 5; i++) {
+        for (j = 0; j < 3; j++) {
+            ((Vec(*)[6]) gp->gv.greens.x4)[i][j].x =
+                (x_scale * j) + left_min;
+            ((Vec(*)[6]) gp->gv.greens.x4)[i][j].y =
+                (y_scale * i) + left_bottom;
+            ((Vec(*)[6]) gp->gv.greens.x4)[i][j].z = 0.0f;
         }
-        right_max = (right_max - right_min) * 0.5f;
-        for (i = 0; i < 5; i++) {
-            y = ((right_top - right_bottom) * 0.25f * i) + right_bottom;
-
-            ((Vec(*)[6]) gp->gv.greens.x4)[i][3].x =
-                (right_max * x0) + right_min;
-            ((Vec(*)[6]) gp->gv.greens.x4)[i][3].y = y;
-            ((Vec(*)[6]) gp->gv.greens.x4)[i][3].z = 0.0f;
-            ((Vec(*)[6]) gp->gv.greens.x4)[i][4].x =
-                (right_max * x1) + right_min;
-            ((Vec(*)[6]) gp->gv.greens.x4)[i][4].y = y;
-            ((Vec(*)[6]) gp->gv.greens.x4)[i][4].z = 0.0f;
-            ((Vec(*)[6]) gp->gv.greens.x4)[i][5].x =
-                (right_max * x2) + right_min;
-            ((Vec(*)[6]) gp->gv.greens.x4)[i][5].y = y;
-            ((Vec(*)[6]) gp->gv.greens.x4)[i][5].z = 0.0f;
+    }
+    x_scale = (right_max - right_min) / 2;
+    y_scale = (right_top - right_bottom) / 4;
+    for (i = 0; i < 5; i++) {
+        for (j = 3; j < 6; j++) {
+            ((Vec(*)[6]) gp->gv.greens.x4)[i][j].x =
+                (x_scale * (j - 3)) + right_min;
+            ((Vec(*)[6]) gp->gv.greens.x4)[i][j].y =
+                (y_scale * i) + right_bottom;
+            ((Vec(*)[6]) gp->gv.greens.x4)[i][j].z = 0.0f;
         }
     }
 }
@@ -1070,8 +1056,9 @@ void grGreens_80215358(Ground_GObj* gobj, int col, int row, int arg3, int arg4)
     block->x1_1 = (arg3 == 2) ? 1 : 0;
     block->x1_2 = 0;
     block->x1_3 = 0;
-    block->x8 =
-        (arg4 == 1) ? Stage_GetBlastZoneTopOffset() : getVec(gp, row, col)->y;
+    block->x8 = (arg4 == 1)
+                    ? Stage_GetBlastZoneTopOffset()
+                    : (gp->gv.greens.x4 + row * 6 + col)->y;
     block->x4 = 0.0f;
     block->xC = block_gobj;
     block->x10 = item_gobj;
@@ -1111,9 +1098,10 @@ static inline Item_GObj* getBlockItemGObj(Ground* gp, int i, int j)
 void grGreens_802159B8(Ground* gp, int i, int j, int value)
 {
     HSD_GObj* gobj = getBlockItemGObj(gp, i, j);
-    float f;
+    UNUSED u8 pad[8];
     Vec vec;
-    UNUSED u8 pad[0x14];
+    float f;
+    PAD_STACK(0x10);
 
     if (gobj != NULL && !(gp->gv.greens.x8_blocks + j * 6)[i].x1_7) {
         (gp->gv.greens.x8_blocks + j * 6)[i].x1_7 = 1;
@@ -1225,7 +1213,7 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
     Vec pos;
     float scale;
     int next_row;
-    PAD_STACK(8);
+    PAD_STACK(0x1C);
 
     if (BLOCK(gp, row, col).status == Gr_Greens_Block_Status_None) {
         return;
@@ -1255,16 +1243,13 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
                 BLOCK(gp, row, col).x4 = grGr_params->x2C;
             }
             BLOCK(gp, row, col).x8 -= BLOCK(gp, row, col).x4;
-            if (row > 0 &&
-                (BLOCK(gp, row - 1, col).status == 1 ||
-                 BLOCK(gp, row - 1, col).status == 2))
+            if (row > 0 && (BLOCK(gp, row - 1, col).status == 1 ||
+                            BLOCK(gp, row - 1, col).status == 2))
             {
-                float spacing =
-                    VEC(gp, row, col).y - VEC(gp, row - 1, col).y;
+                float spacing;
 
-                if (BLOCK(gp, row, col).x8 -
-                        BLOCK(gp, row - 1, col).x8 <
-                    spacing)
+                if (BLOCK(gp, row, col).x8 - BLOCK(gp, row - 1, col).x8 <
+                    (spacing = VEC(gp, row, col).y - VEC(gp, row - 1, col).y))
                 {
                     BLOCK(gp, row, col).status = 2;
                     BLOCK(gp, row, col).x8 =
@@ -1300,13 +1285,12 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
                 if (BLOCK(gp, next_row, col).status != 2) {
                     break;
                 }
-                BLOCK(gp, next_row, col).x8 =
-                    VEC(gp, next_row, col).y -
-                    VEC(gp, next_row - 1, col).y +
-                    BLOCK(gp, next_row - 1, col).x8;
                 pos.x = VEC(gp, next_row, col).x;
-                pos.y = BLOCK(gp, next_row, col).x8;
+                pos.y = VEC(gp, next_row, col).y -
+                        VEC(gp, next_row - 1, col).y +
+                        BLOCK(gp, next_row - 1, col).x8;
                 pos.z = 0.0f;
+                BLOCK(gp, next_row, col).x8 = pos.y;
                 HSD_JObjSetTranslate(BLOCK(gp, next_row, col).xC->hsd_obj,
                                      &pos);
                 scale = 1.0f / Ground_801C0498();
@@ -1329,7 +1313,7 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
     pos.x *= scale;
     pos.y *= scale;
     pos.z *= scale;
-    HSD_JObjSetTranslate(BLOCK(gp, row, col).x14, &pos);
+    HSD_JObjSetTranslate(gp->gv.greens.x8_blocks[row * 6 + col].x14, &pos);
 }
 
 #undef BLOCK

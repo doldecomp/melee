@@ -295,11 +295,13 @@ extern u8 ifStatus_804D57AC; /* End color (high damage) */
 static inline void ifStatus_UpdateDamageDisplay(IfDamageState* state,
                                                 HSD_JObj* jobj,
                                                 HSD_JObj** digit_jobj,
-                                                f32* ones_offset)
+                                                f32* ones_offset,
+                                                GXColor* color,
+                                                GXColor* stamina_color,
+                                                GXColor* normal_color)
 {
     s16 clamped_damage;
     f32 factor;
-    GXColor color;
     HSD_MObj* mobj;
     s32 i;
 
@@ -313,28 +315,24 @@ static inline void ifStatus_UpdateDamageDisplay(IfDamageState* state,
 
     if ((s16) state->old_damage != (s16) state->damage_percent) {
         if (Player_GetMoreFlagsBit2((s8) state->player_slot)) {
-            GXColor temp_color;
-
             if ((clamped_damage = state->damage_percent) > 100) {
                 clamped_damage = 100;
             } else if (clamped_damage < 0) {
                 clamped_damage = 0;
             }
             factor = 1.0F - ((f32) clamped_damage / 100.0F);
-            temp_color.r = (s8) (factor * (f32) ((&ifStatus_804D57AC)[0] -
-                                                 (&ifStatus_804D57A8)[0]) +
-                                 (f32) (&ifStatus_804D57A8)[0]);
-            temp_color.g = (s8) (factor * (f32) ((&ifStatus_804D57AC)[1] -
-                                                 (&ifStatus_804D57A8)[1]) +
-                                 (f32) (&ifStatus_804D57A8)[1]);
-            temp_color.b = (s8) (factor * (f32) ((&ifStatus_804D57AC)[2] -
-                                                 (&ifStatus_804D57A8)[2]) +
-                                 (f32) (&ifStatus_804D57A8)[2]);
-            temp_color.a = 255;
-            color = temp_color;
+            stamina_color->r = (s8) (factor * (f32) ((&ifStatus_804D57AC)[0] -
+                                                   (&ifStatus_804D57A8)[0]) +
+                                   (f32) (&ifStatus_804D57A8)[0]);
+            stamina_color->g = (s8) (factor * (f32) ((&ifStatus_804D57AC)[1] -
+                                                   (&ifStatus_804D57A8)[1]) +
+                                   (f32) (&ifStatus_804D57A8)[1]);
+            stamina_color->b = (s8) (factor * (f32) ((&ifStatus_804D57AC)[2] -
+                                                   (&ifStatus_804D57A8)[2]) +
+                                   (f32) (&ifStatus_804D57A8)[2]);
+            stamina_color->a = 255;
+            *color = *stamina_color;
         } else {
-            GXColor temp_color;
-
             clamped_damage = state->damage_percent;
             if (clamped_damage > 300) {
                 clamped_damage = 300;
@@ -342,38 +340,38 @@ static inline void ifStatus_UpdateDamageDisplay(IfDamageState* state,
                 clamped_damage = 0;
             }
             factor = (f32) clamped_damage / 300.0F;
-            temp_color.r = (s8) (factor * (f32) ((&ifStatus_804D57AC)[0] -
-                                                 (&ifStatus_804D57A8)[0]) +
-                                 (f32) (&ifStatus_804D57A8)[0]);
-            temp_color.g = (s8) (factor * (f32) ((&ifStatus_804D57AC)[1] -
-                                                 (&ifStatus_804D57A8)[1]) +
-                                 (f32) (&ifStatus_804D57A8)[1]);
-            temp_color.b = (s8) (factor * (f32) ((&ifStatus_804D57AC)[2] -
-                                                 (&ifStatus_804D57A8)[2]) +
-                                 (f32) (&ifStatus_804D57A8)[2]);
-            temp_color.a = 255;
-            color = temp_color;
+            normal_color->r = (s8) (factor * (f32) ((&ifStatus_804D57AC)[0] -
+                                                   (&ifStatus_804D57A8)[0]) +
+                                   (f32) (&ifStatus_804D57A8)[0]);
+            normal_color->g = (s8) (factor * (f32) ((&ifStatus_804D57AC)[1] -
+                                                   (&ifStatus_804D57A8)[1]) +
+                                   (f32) (&ifStatus_804D57A8)[1]);
+            normal_color->b = (s8) (factor * (f32) ((&ifStatus_804D57AC)[2] -
+                                                   (&ifStatus_804D57A8)[2]) +
+                                   (f32) (&ifStatus_804D57A8)[2]);
+            normal_color->a = 255;
+            *color = *normal_color;
         }
 
         mobj = state->jobjs[Hundreds]->u.dobj->mobj;
-        mobj->mat->diffuse.r = color.r;
-        mobj->mat->diffuse.g = color.g;
-        mobj->mat->diffuse.b = color.b;
+        mobj->mat->diffuse.r = color->r;
+        mobj->mat->diffuse.g = color->g;
+        mobj->mat->diffuse.b = color->b;
 
         mobj = state->jobjs[Tens]->u.dobj->mobj;
-        mobj->mat->diffuse.r = color.r;
-        mobj->mat->diffuse.g = color.g;
-        mobj->mat->diffuse.b = color.b;
+        mobj->mat->diffuse.r = color->r;
+        mobj->mat->diffuse.g = color->g;
+        mobj->mat->diffuse.b = color->b;
 
         mobj = state->jobjs[Ones]->u.dobj->mobj;
-        mobj->mat->diffuse.r = color.r;
-        mobj->mat->diffuse.g = color.g;
-        mobj->mat->diffuse.b = color.b;
+        mobj->mat->diffuse.r = color->r;
+        mobj->mat->diffuse.g = color->g;
+        mobj->mat->diffuse.b = color->b;
 
         mobj = state->jobjs[Percent]->u.dobj->mobj;
-        mobj->mat->diffuse.r = color.r;
-        mobj->mat->diffuse.g = color.g;
-        mobj->mat->diffuse.b = color.b;
+        mobj->mat->diffuse.r = color->r;
+        mobj->mat->diffuse.g = color->g;
+        mobj->mat->diffuse.b = color->b;
     }
 
     if (lb_8000B09C(jobj)) {
@@ -434,8 +432,11 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     s16 clamped_damage;
     f32 factor;
     GXColor color;
+    GXColor stamina_color;
+    UNUSED u8 color_pad[4];
+    GXColor normal_color;
 
-    PAD_STACK(48);
+    PAD_STACK(44);
     hud = &ifStatus_HudInfo;
 
     {
@@ -547,7 +548,8 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
                        (HSD_TexAnim*) hud->janim_selection_joints->child->child
                            ->aobjdesc->fobjdesc);
     HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * hundreds_digit);
-    ifStatus_UpdateDamageDisplay(state, jobj, &digit_jobj, &ones_offset);
+    ifStatus_UpdateDamageDisplay(state, jobj, &digit_jobj, &ones_offset,
+                                 &color, &stamina_color, &normal_color);
     tens_offset = ((state->damage_percent % 100) / 10 == 1) ? 0.5069F : 0.0F;
 
     /* Position percent sign */
@@ -872,6 +874,14 @@ static inline void ifStatus_SetupMark(IfDamageState* state, s32 player_idx,
                 (HSD_ShapeAnimJoint**) hud->unk274);
 }
 
+static inline void ifStatus_SetupMarkDisplay(Vec3* vec, HSD_JObj* jobj,
+                                             s32 idx, u8* slot)
+{
+    HSD_JObjSetTranslate(jobj, vec);
+    HSD_JObjAddTranslationX(jobj, 0.25f);
+    *slot = Player_GetPlayerSlotType(idx);
+}
+
 void ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
 {
     HSD_GObj* gobj;
@@ -896,9 +906,7 @@ void ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
     HSD_AObjSetRate(tobj->aobj, 0.1f);
     HSD_TObjAnim(tobj);
     vec = ifAll_802F3424(idx);
-    HSD_JObjSetTranslate(jobj, vec);
-    HSD_JObjAddTranslationX(jobj, 0.25f);
-    slot = Player_GetPlayerSlotType(idx);
+    ifStatus_SetupMarkDisplay(vec, jobj, idx, &slot);
     hud_color = gm_8016B168();
     team = Player_GetTeam(idx);
     color = gm_80160968(

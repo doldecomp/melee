@@ -2422,7 +2422,11 @@ static inline void fn_8019B458_UpdateRank(TmData* tm, struct Lbl804799D8_t* d8)
     tm->x33 = rank;
 }
 
-/// @todo The entry-fill loop's two pointer walkers have r28 and r29 swapped.
+static inline s32 fn_8019B458_GetRank(void)
+{
+    return fn_80196CF8();
+}
+
 void fn_8019B458(s32* arg0)
 {
     struct Preload {
@@ -2441,7 +2445,7 @@ void fn_8019B458(s32* arg0)
     fn_8019B458_UpdateRank(tm, d8);
 
     {
-        match = fn_80196CF8();
+        match = fn_8019B458_GetRank();
         td2 = gm_8018F634();
         fn_80198D18();
 

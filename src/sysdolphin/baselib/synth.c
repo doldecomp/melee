@@ -922,8 +922,10 @@ s32 HSD_Synth_8038A000(void)
             for (k = 0; k < USERVOL_NUM; k++) {
                 if (*(volatile int*) &node->user_vol[k].x4 != 0) {
                     int c = node->user_vol[k].x4;
-                    (&node->unk28)[user_vol_dst_offset(k)] =
-                        ((&node->unk28)[user_vol_src_offset(k)] *
+                    (&node->user_vol[k]
+                          .volume)[user_vol_dst_offset(k) - k * 3 - 1] =
+                        ((&node->user_vol[k]
+                               .volume)[user_vol_src_offset(k) - k * 3 - 1] *
                          ((f32) c - 1.0f)) /
                             (f32) c +
                         node->user_vol[k].volume / (f32) c;

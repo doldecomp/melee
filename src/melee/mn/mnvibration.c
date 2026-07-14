@@ -828,7 +828,6 @@ void mnVibration_IntroProc(HSD_GObj* arg0)
     f32 base_y;
     f32 spacing;
     f32 temp_x;
-    f32 temp_y;
     f32 temp_z;
     u8 cursor_row;
     PAD_STACK(64);
@@ -947,9 +946,9 @@ void mnVibration_IntroProc(HSD_GObj* arg0)
             temp_x = mnVibration_JObjGetTranslationX(jobj17);
             mnVibration_JObjSetTranslateX(cursor_jobj, temp_x);
             jobj17 = data3->jobjs[17];
-            temp_y = (spacing * (f32) cursor_row) +
-                     mnVibration_JObjGetTranslationY(jobj17);
-            mnVibration_JObjSetTranslateY(cursor_jobj, temp_y);
+            mnVibration_JObjSetTranslateY(
+                cursor_jobj, (spacing * (f32) cursor_row) +
+                                 mnVibration_JObjGetTranslationY(jobj17));
             jobj17 = data3->jobjs[17];
             temp_z = mnVibration_JObjGetTranslationZ(jobj17);
             mnVibration_JObjSetTranslateZ(cursor_jobj, temp_z);

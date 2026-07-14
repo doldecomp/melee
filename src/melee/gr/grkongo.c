@@ -271,41 +271,6 @@ bool grKongo_801D5774(Ground_GObj* arg)
 #define DegToRad(a) ((a) * 0.017453292F)
 #define M_TAU 6.283185307179586
 
-static inline void grKongo_801D577C_inline(Ground* gp, f32 angular_vel_2,
-                                           bool sign)
-{
-    f32 limit = DegToRad(grKg_804D6980->unk34);
-    bool compare = sign ? (angular_vel_2 < limit) : (angular_vel_2 > -limit);
-    if (compare) {
-        gp->gv.kongo3.xE0 = 0.0f;
-        gp->gv.kongo3.xD8 = gp->gv.kongo3.xD4;
-    } else {
-        gp->gv.kongo3.xE0 = angular_vel_2 - (sign ? limit : -limit);
-    }
-}
-
-static inline void compare(f32 a, f32 b, f32* c)
-{
-    if (a > b) {
-        *c = b;
-    } else {
-        b = -b;
-        if (a < b) {
-            *c = b;
-        }
-    }
-}
-
-static inline void tau_range(f32* a)
-{
-    f32 temp = *a;
-    if (temp > M_TAU) {
-        *a = (f64) temp - M_TAU;
-    } else if (temp < -M_TAU) {
-        *a = (f64) temp + M_TAU;
-    }
-}
-
 void grKongo_801D577C(Ground_GObj* arg0)
 {
     Ground* gp = arg0->user_data;
@@ -345,9 +310,19 @@ void grKongo_801D577C(Ground_GObj* arg0)
     }
     case 0:
         if (gp->gv.kongo3.xE0 > 0.0f) {
-            grKongo_801D577C_inline(gp, gp->gv.kongo3.xE0, 1);
+            if (gp->gv.kongo3.xE0 < DegToRad(grKg_804D6980->unk34)) {
+                gp->gv.kongo3.xE0 = 0.0f;
+                gp->gv.kongo3.xD8 = gp->gv.kongo3.xD4;
+            } else {
+                gp->gv.kongo3.xE0 -= DegToRad(grKg_804D6980->unk34);
+            }
         } else if (gp->gv.kongo3.xE0 < 0.0f) {
-            grKongo_801D577C_inline(gp, gp->gv.kongo3.xE0, 0);
+            if (gp->gv.kongo3.xE0 > -DegToRad(grKg_804D6980->unk34)) {
+                gp->gv.kongo3.xE0 = 0.0f;
+                gp->gv.kongo3.xD8 = gp->gv.kongo3.xD4;
+            } else {
+                gp->gv.kongo3.xE0 += DegToRad(grKg_804D6980->unk34);
+            }
         }
         gp->gv.kongo2.xCC -= 1;
         if ((s16) gp->gv.kongo2.xCC < 0) {
@@ -365,8 +340,13 @@ void grKongo_801D577C(Ground_GObj* arg0)
         break;
     case 1:
         gp->gv.kongo3.xE0 += gp->gv.kongo3.xDC;
-        compare(gp->gv.kongo3.xE0, DegToRad(grKg_804D6980->unk38),
-                &gp->gv.kongo3.xE0);
+        if (gp->gv.kongo3.xE0 > DegToRad(grKg_804D6980->unk38)) {
+            gp->gv.kongo3.xE0 = DegToRad(grKg_804D6980->unk38);
+        } else {
+            if (gp->gv.kongo3.xE0 < -DegToRad(grKg_804D6980->unk38)) {
+                gp->gv.kongo3.xE0 = -DegToRad(grKg_804D6980->unk38);
+            }
+        }
         {
             s16 val2 = gp->gv.kongo2.xCC;
             gp->gv.kongo2.xCC = val2 - 1;
@@ -454,6 +434,7 @@ void grKongo_801D577C(Ground_GObj* arg0)
         f32 angle;
         HSD_GObj* kept_gobj;
         lbColl_80008D30_arg1 hit = grKg_803B7FB0;
+        PAD_STACK(4);
         hit.state = 1;
         hit.damage = *(u32*) &grKg_804D6980->unk6C;
         hit.kb_angle = *(u32*) &grKg_804D6980->unk70;
@@ -463,7 +444,7 @@ void grKongo_801D577C(Ground_GObj* arg0)
         hit.element = *(u32*) &grKg_804D6980->unk80;
         angle = (f32) (1.5707963267948966 + (f64) gp->gv.kongo3.xD8);
         if (angle < 0.0f) {
-            angle = (f32) ((f64) angle + M_TAU);
+            angle += M_TAU;
         } else if (angle > M_TAU) {
             angle = (f32) ((f64) angle - M_TAU);
         }
@@ -854,14 +835,14 @@ struct _struct_grKg_804D6984 grKg_804D6984;
 void grKongo_801D69B0(HSD_GObj* gobj)
 {
     f32 rot_x;
-    struct _struct_grKg_803E188C_0x18* entry;
     u32 i;
 
-    for (entry = &grKg_803E188C[i = 0U]; i < 0xFU; i += 1, entry += 1) {
-        entry->unk4 = Ground_801C3FA4(gobj, (s32) entry->unk0);
-        entry->unkC = entry->unk8;
-        rot_x = entry->unkC;
-        HSD_JObjSetRotationX(entry->unk4, rot_x);
+    for (i = 0U; i < 0xFU; i += 1) {
+        grKg_803E188C[i].unk4 =
+            Ground_801C3FA4(gobj, (s32) grKg_803E188C[i].unk0);
+        grKg_803E188C[i].unkC = grKg_803E188C[i].unk8;
+        rot_x = grKg_803E188C[i].unkC;
+        HSD_JObjSetRotationX(grKg_803E188C[i].unk4, rot_x);
     }
     grKg_804D6984.unk0 = Ground_801C3FA4(gobj, 0xB);
     grKg_804D6984.unk4 = Ground_801C3FA4(gobj, 0x21);
@@ -1101,7 +1082,6 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
     HSD_JObj* jobj;
     f32 angle;
     f32 old_angle;
-    f32 angular_vel;
     f32 temp;
     f32 displacement;
     u32 i;
@@ -1132,9 +1112,8 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
     HSD_JObjSetRotationX(grKg_804D6984.unk0, displacement);
     old_angle = HSD_JObjGetRotationZ(grKg_804D6984.unk0);
     HSD_JObjSetRotationZ(grKg_804D6984.unk0, angle);
-    angular_vel = angle - old_angle;
-    if (ABS(angular_vel) > (deg_to_rad * grKg_804D6980->unkB0)) {
-        gp->gv.kongo.xC8 = -angular_vel;
+    if (ABS(angle - old_angle) > (deg_to_rad * grKg_804D6980->unkB0)) {
+        gp->gv.kongo.xC8 = -(angle - old_angle);
     }
 
     displacement =
@@ -1156,9 +1135,8 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
     HSD_JObjSetRotationX(grKg_804D6984.unk4, displacement);
     old_angle = HSD_JObjGetRotationZ(grKg_804D6984.unk4);
     HSD_JObjSetRotationZ(grKg_804D6984.unk4, angle);
-    angular_vel = angle - old_angle;
-    if (ABS(angular_vel) > (deg_to_rad * grKg_804D6980->unkB0)) {
-        gp->gv.kongo.xD8 = -angular_vel;
+    if (ABS(angle - old_angle) > (deg_to_rad * grKg_804D6980->unkB0)) {
+        gp->gv.kongo.xD8 = -(angle - old_angle);
     }
 
     entry = (_struct_grKg_803E188C_0x18*) ((u8*) grKg_803E16E0 + 0x1AC);

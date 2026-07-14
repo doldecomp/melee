@@ -4329,19 +4329,18 @@ void mpLeftWallGetTop(int line_id, Vec3* pos_out)
 void mpLeftWallGetBottom(int line_id, Vec3* pos_out)
 {
     u32 kind;
-    int line_offset;
     int new_id;
+    int line_offset;
 
     LINEID_CHECK(4510, line_id);
 
+    if (line_id != -1) {
+    }
     kind = mpLineGetKindInline(line_id);
     new_id = line_id;
     do {
-        MapLine* line;
         line_offset = new_id * sizeof(CollLine);
-        line = ((CollLine*) (line_offset + (int) groundCollLine))->x0;
-        new_id = line->prev_id1;
-        new_id = mpLineGetPrevCheckInline(line, new_id);
+        new_id = mpLineGetPrev(new_id);
     } while (new_id != -1 &&
              !(kind != (groundCollLine[new_id].flags & LINE_FLAG_KIND)));
 

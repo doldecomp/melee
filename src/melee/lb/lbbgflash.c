@@ -769,7 +769,7 @@ void lbBgFlash_80021410(void* arg0)
         f32 x = data->pos4.x;
 
         dot = -((nz * data->pos1.z) +
-                ((nx * data->pos1.x) + (ny * data->pos1.y)));
+                ((nx * data->pos1.x) + (data->pos1.y * ny)));
 
         d = -(dot + ((data->pos4.z * nz) + ((x * nx) + (data->pos4.y * ny))));
         data->pos4.x = (d * nx) + x;

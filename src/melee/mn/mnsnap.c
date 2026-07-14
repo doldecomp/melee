@@ -306,10 +306,10 @@ void mnSnap_80253640(s32 page)
     s32* p52;
     s32* p4F;
     s32* p50;
-    s32* p48;
+    s32 count;
     s32* p58;
     s32* p51;
-    s32 count;
+    s32* p48;
     s32 i;
     f32 t;
     PAD_STACK(28);
@@ -707,7 +707,6 @@ static inline void mnSnap_RefreshSlotSelection(mnSnap_State* snap, s32* p50,
                                                 s32* p51)
 {
     s32 i;
-    PAD_STACK(24);
 
     mnSnap_80253964();
     mnSnap_80253E90(0);
@@ -760,6 +759,7 @@ void mnSnap_80254298(void)
     s32* p50 = &mnSnap_804A0A10.active_slot;
     s32* p51;
     mnSnap_State* snap = &mnSnap_804A0A10;
+    PAD_STACK(24);
 
     snap->timer = 0xB;
     *p50 = 0;

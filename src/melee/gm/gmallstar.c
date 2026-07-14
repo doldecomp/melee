@@ -386,11 +386,11 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     s8* chars_ptr;
     u8* base;
     s32 count;
+    s32 is_last_round;
     gm_803DEBE8_t* opp_data;
     s32 count_processed;
-    s32 is_last_round;
-    struct GameCache* gc;
     s32 slot_idx;
+    struct GameCache* gc;
     s32 i;
     u64 audio;
     PAD_STACK(12);
@@ -476,27 +476,22 @@ void gm_801B5624(GameScene* arg0)
     UnkAllstarData* allstar;
     gm_803DEBE8_t* opp_data;
     s32 i;
-    s32 count;
     u16 round;
     u8 color;
-    PAD_STACK(16);
+    PAD_STACK(24);
 
     base = (u8*) gm_803DE930_Scenes;
     data = gm_801A427C(arg0);
     allstar = &gm_80473A18;
     round = gm_8017BE84(arg0->idx);
 
-    {
-        u32 start = ((AllstarRoundInfo*) (base + 0x31C))[round].start;
-        opp_data = (gm_803DEBE8_t*) (base + 0x2B8) + start;
-    }
+    opp_data = &gm_803DEBE8[gm_803DEC4C[round].start];
 
     chars[0] = 0x21;
     chars[1] = 0x21;
     chars[2] = 0x21;
 
-    count = ((AllstarRoundInfo*) (base + 0x31C))[round].count;
-    for (i = 0; i < count; i++) {
+    for (i = 0; i < (s32) gm_803DEC4C[round].count; i++) {
         chars[i] = opp_data[i].x3;
     }
 
@@ -644,10 +639,14 @@ void gm_801B5ACC(GameScene* arg0)
         AllstarRoundInfo* ri = &gm_803DEC4C[round];
         for (i = 0; i < (s32) ri->count; i++) {
             s32 slot;
+            u8* slot_base;
+            u8* slot_ptr;
             do {
                 slot = HSD_Randi(0x1A);
-            } while ((s32) allstar->x76[slot] != 0x21);
-            allstar->x76[slot] = gm_803DEBE8[ri->start + i].x3;
+                slot_base = &allstar->x76[slot] - 0x76;
+                slot_ptr = slot_base + 0x76;
+            } while ((s32) slot_base[0x76] != 0x21);
+            *slot_ptr = gm_803DEBE8[ri->start + i].x3;
         }
     }
 
@@ -743,27 +742,19 @@ void gm_801B607C(GameScene* unused)
     gm_801A42D4();
 }
 
-static inline void gmAllStarRandomizeStages(gm_803DEBE8_t* current)
-{
-    u32 index;
-
-    for (index = 0; index < 25; index++) {
-        current->x2 = *((&current->x0) + HSD_Randi(2));
-        current++;
-    }
-}
-
 static inline void gmAllStarRandomizeOpponents(gm_803DEBE8_t* tmp)
 {
     u32 index;
     gm_803DEBE8_t* table;
     gm_803DEBE8_t* current;
 
-    table = gm_803DEBE8;
-    current = table;
-    gmAllStarRandomizeStages(current);
+    current = table = gm_803DEBE8;
+    for (index = 0; index < 25; index++) {
+        current->x2 = *((&current->x0) + HSD_Randi(2));
+        current++;
+    }
 
-    current = table;
+    current = gm_803DEBE8;
     for (index = 0; index < 0x17; index++) {
         u32 swap_idx = index + HSD_Randi(0x18 - index);
         gm_803DEBE8_t* swap;

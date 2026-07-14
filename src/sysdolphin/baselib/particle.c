@@ -850,12 +850,6 @@ static const u32 lbl_804DE8E0 = 0xFFFFFFFF;
 // @TODO: Currently 89.78% match - needs minor control flow and register fixes
 void hsd_8039254C(void)
 {
-    s32 type;
-    s32 char_count;
-    s32 total_ticks;
-    s32 count;
-    DispItem* bar_ptr;
-    DispItem* bar_draw_ptr;
     f32 line;
     f32 bar_y;
     f32 bar_x;
@@ -867,6 +861,8 @@ void hsd_8039254C(void)
     GXColor bg_col2;
     GXColor bg_col3;
     GXColor bar_col;
+    s32 char_count;
+    s32 count;
     GXColor* p_bg_col0;
     GXColor* p_bg_col1;
     GXColor* p_txt_col;
@@ -904,16 +900,16 @@ void hsd_8039254C(void)
                 }
                 first = 0;
             }
-            type = item->type;
-            switch (type) {
+            switch (item->type) {
             case 0:
                 if ((&item->content) == NULL) {
                     char_count = 0;
                 } else {
                     char_count = 0;
                     {
-                        s32 len = strlen(item->content.text);
                         s32 j = 0;
+                        s32 len = strlen(item->content.text);
+                        char_count = j;
                         while (j < len) {
                             if ((s8) item->content.text[j] != '\\') {
                                 char_count++;
@@ -962,16 +958,19 @@ void hsd_8039254C(void)
                 hsd_80391E18(item->content.gradient, 0.0F, t2, 600.0F, t2);
                 col_pos = 60;
                 break;
-            case 1:
+            case 1: {
+                DispItem* bar_ptr;
+                DispItem* bar_draw_ptr;
+
                 bar_ptr = item;
-                total_ticks = 0;
+                char_count = 0;
                 {
                     while ((count = bar_ptr->content.bars[0].count) > 0) {
-                        total_ticks += count;
+                        char_count += count;
                         bar_ptr = (DispItem*) ((DispBar*) bar_ptr + 1);
                     }
                 }
-                if (total_ticks > 0) {
+                if (char_count > 0) {
                     if (col_pos != 0) {
                         line = (f32) ((f64) line - 0.5);
                         if (lbl_804D6080.a != 0) {
@@ -994,7 +993,7 @@ void hsd_8039254C(void)
                                 *(GXColor*) &bar_draw_ptr->content.bars[0]
                                      .color;
                             bar_x +=
-                                (600.0F / (f32) total_ticks) * (f32) count;
+                                (600.0F / (f32) char_count) * (f32) count;
                             hsd_80391F28(
                                 p_bar_col, prev_x, bar_y, bar_x, bar_y,
                                 (f32) bar_draw_ptr->content.bars[0].count);
@@ -1005,6 +1004,7 @@ void hsd_8039254C(void)
                     col_pos = 60;
                 }
                 break;
+            }
             }
             item = item->next;
         }
@@ -2020,26 +2020,28 @@ u8 hsd_80394068(void)
 #pragma dont_inline on
 u8 hsd_80394128(s32 col, s32 row)
 {
-    u8 result;
+    struct {
+        u8 value;
+    } result;
 
     hsd_80393E68(col, row);
     if (!hsd_804CF7E8.x0_b0) {
-        result = 0;
+        result.value = 0;
     } else if ((u32) hsd_804CF7E8.x1C > hsd_804CF7E8.buf_size) {
-        result = 0;
+        result.value = 0;
     } else if ((u32) hsd_804CF7E8.x14 < (u32) hsd_804CF7E8.x20) {
-        result =
+        result.value =
             hsd_804CF7E8.out_buf[(hsd_804CF7E8.x14 +
                                   (hsd_804CF7E8.xC + hsd_804CF7E8.buf_size -
                                    hsd_804CF7E8.x1C)) %
                                  hsd_804CF7E8.buf_size];
         hsd_804CF7E8.x14++;
     } else {
-        result = 0;
+        result.value = 0;
         hsd_80393EF4(0, -1);
-        hsd_804CF7E8.x14 = 0;
+        hsd_804CF7E8.x14 = result.value;
     }
-    return result;
+    return result.value;
 }
 #pragma pop
 
@@ -2965,59 +2967,71 @@ s32 hsd_80395A78(void)
     s32 new_col;
     s32 new_scroll;
     s32 sum;
+    void* sp = &hsd_804CF810;
     PAD_STACK(8);
 
     bit = 1;
-    while (bit <= hsd_804CF810.xBC) {
-        switch (hsd_804CF810.xBC & bit) {
+    while (bit <= ((struct ParticleScreenState*) sp)->xBC) {
+        switch (((struct ParticleScreenState*) sp)->xBC & bit) {
         case 0x8:
-            if (hsd_804CF810.x10 < hsd_804CF810.x1C - 1) {
-                hsd_804CF810.x10 = hsd_804CF810.x10 + 1;
+            if (((struct ParticleScreenState*) sp)->x10 <
+                ((struct ParticleScreenState*) sp)->x1C - 1)
+            {
+                ((struct ParticleScreenState*) sp)->x10 =
+                    ((struct ParticleScreenState*) sp)->x10 + 1;
             } else {
-                hsd_804CF810.x14 += 1;
+                ((struct ParticleScreenState*) sp)->x14 += 1;
             }
             return 1;
         case 0x4:
-            if (hsd_804CF810.x10 > 0) {
-                hsd_804CF810.x10 -= 1;
-            } else if (hsd_804CF810.x14 > 0) {
-                hsd_804CF810.x14 -= 1;
+            if (((struct ParticleScreenState*) sp)->x10 > 0) {
+                ((struct ParticleScreenState*) sp)->x10 -= 1;
+            } else if (((struct ParticleScreenState*) sp)->x14 > 0) {
+                ((struct ParticleScreenState*) sp)->x14 -= 1;
             } else {
                 break;
             }
             return 1;
         case 0x1:
-            if (hsd_804CF810.x0C > 0) {
-                hsd_804CF810.x0C -= 1;
-            } else if (hsd_804CF810.x18 > 0) {
-                hsd_804CF810.x18 -= 1;
+            if (((struct ParticleScreenState*) sp)->x0C > 0) {
+                ((struct ParticleScreenState*) sp)->x0C -= 1;
+            } else if (((struct ParticleScreenState*) sp)->x18 > 0) {
+                ((struct ParticleScreenState*) sp)->x18 -= 1;
             } else {
                 break;
             }
-            while (!(u8) hsd_80394128(hsd_804CF810.x0C + hsd_804CF810.x18,
-                                      hsd_804CF810.x10 + hsd_804CF810.x14))
+            while (!(u8) hsd_80394128(
+                ((struct ParticleScreenState*) sp)->x0C +
+                    ((struct ParticleScreenState*) sp)->x18,
+                ((struct ParticleScreenState*) sp)->x10 +
+                    ((struct ParticleScreenState*) sp)->x14))
             {
-                if (hsd_804CF810.x0C > 0) {
-                    hsd_804CF810.x0C -= 1;
-                } else if (hsd_804CF810.x18 > 0) {
-                    hsd_804CF810.x18 -= 1;
+                if (((struct ParticleScreenState*) sp)->x0C > 0) {
+                    ((struct ParticleScreenState*) sp)->x0C -= 1;
+                } else if (((struct ParticleScreenState*) sp)->x18 > 0) {
+                    ((struct ParticleScreenState*) sp)->x18 -= 1;
                 } else {
                     break;
                 }
             }
             return 1;
         case 0x2:
-            new_col = hsd_804CF810.x0C;
-            new_scroll = hsd_804CF810.x18;
-            if ((u32) new_col < (u32) (hsd_804CF810.x20 - 1)) {
+            new_col = ((struct ParticleScreenState*) sp)->x0C;
+            new_scroll = ((struct ParticleScreenState*) sp)->x18;
+            if ((u32) new_col <
+                (u32) (((struct ParticleScreenState*) sp)->x20 - 1))
+            {
                 new_col += 1;
             } else {
                 new_scroll += 1;
             }
             sum = new_col + new_scroll;
-            if ((u8) hsd_80394128(sum, hsd_804CF810.x10 + hsd_804CF810.x14)) {
-                hsd_804CF810.x0C = new_col;
-                hsd_804CF810.x18 = new_scroll;
+            if ((u8) hsd_80394128(sum,
+                                  ((struct ParticleScreenState*) sp)->x10 +
+                                      ((struct ParticleScreenState*) sp)->x14))
+            {
+                ((struct ParticleScreenState*) sp)->x0C = new_col;
+                ((struct ParticleScreenState*) sp)->x18 = new_scroll;
                 return 1;
             }
             break;
@@ -3027,13 +3041,13 @@ s32 hsd_80395A78(void)
             if ((ExcptNode*) &lbl_8040BC3C != NULL) {
                 fn_80394DF4((ExcptNode*) &lbl_8040BC3C);
                 ((ExcptNode*) &lbl_8040BC3C)->next =
-                    (ExcptNode*) hsd_804CF810.xD0;
-                hsd_804CF810.xD0 = &lbl_8040BC3C;
+                    (ExcptNode*) ((struct ParticleScreenState*) sp)->xD0;
+                ((struct ParticleScreenState*) sp)->xD0 = &lbl_8040BC3C;
                 if (((ExcptNode*) &lbl_8040BC3C)->callback != NULL) {
                     ((ExcptNode*) &lbl_8040BC3C)
                         ->callback((ExcptNode*) &lbl_8040BC3C);
                 }
-                hsd_804CF810.x0_b5 = 1;
+                ((struct ParticleScreenState*) sp)->x0_b5 = 1;
             }
             return 1;
         case 0x400:
@@ -3041,26 +3055,26 @@ s32 hsd_80395A78(void)
             if ((ExcptNode*) &lbl_8040BC3C != NULL) {
                 fn_80394DF4((ExcptNode*) &lbl_8040BC3C);
                 ((ExcptNode*) &lbl_8040BC3C)->next =
-                    (ExcptNode*) hsd_804CF810.xD0;
-                hsd_804CF810.xD0 = &lbl_8040BC3C;
+                    (ExcptNode*) ((struct ParticleScreenState*) sp)->xD0;
+                ((struct ParticleScreenState*) sp)->xD0 = &lbl_8040BC3C;
                 if (((ExcptNode*) &lbl_8040BC3C)->callback != NULL) {
                     ((ExcptNode*) &lbl_8040BC3C)
                         ->callback((ExcptNode*) &lbl_8040BC3C);
                 }
-                hsd_804CF810.x0_b5 = 1;
+                ((struct ParticleScreenState*) sp)->x0_b5 = 1;
             }
             return 1;
         case 0x1000:
             if ((ExcptNode*) lbl_8040BA5C != NULL) {
                 fn_80394DF4((ExcptNode*) lbl_8040BA5C);
                 ((ExcptNode*) lbl_8040BA5C)->next =
-                    (ExcptNode*) hsd_804CF810.xD0;
-                hsd_804CF810.xD0 = lbl_8040BA5C;
+                    (ExcptNode*) ((struct ParticleScreenState*) sp)->xD0;
+                ((struct ParticleScreenState*) sp)->xD0 = lbl_8040BA5C;
                 if (((ExcptNode*) lbl_8040BA5C)->callback != NULL) {
                     ((ExcptNode*) lbl_8040BA5C)
                         ->callback((ExcptNode*) lbl_8040BA5C);
                 }
-                hsd_804CF810.x0_b5 = 1;
+                ((struct ParticleScreenState*) sp)->x0_b5 = 1;
             }
             return 1;
         default:
@@ -3786,7 +3800,12 @@ void hsd_80397110(void)
     extern u8 lbl_8040BEC4[];
     u8* base = lbl_8040AB00;
     void* saved;
-    s32 offset;
+    struct SPREntry {
+        u32 spr;
+        char* name;
+        u32 unused;
+        void (*callback)(u32);
+    };
     void** px50 = &sp->x50;
     s32* px4 = &sp->x4;
     s32* px40 = &sp->x40;
@@ -3794,7 +3813,7 @@ void hsd_80397110(void)
     char buf[32];
     s32 row;
     u32 i;
-    u32* spr_entry;
+    struct SPREntry* spr_entry;
     char* padding;
     PAD_STACK(32);
 
@@ -3810,17 +3829,16 @@ void hsd_80397110(void)
     {
         u32* bec4 = (u32*) lbl_8040BEC4;
         i = 0;
-        offset = 0;
         while (row > 0) {
             u32 spr_off = bec4[4];
             if (spr_off + i >= 0x45) {
                 break;
             }
-            spr_entry = (u32*) (base + spr_off * 16 + offset);
-            spr_entry += 0xB6;
+            spr_entry =
+                (struct SPREntry*) (base + 0x2D8) + spr_off + i;
             if (i == bec4[5]) {
-                if (spr_entry[3] != 0) {
-                    ((void (*)(u32)) spr_entry[3])(spr_entry[0]);
+                if (spr_entry->callback != 0) {
+                    spr_entry->callback(spr_entry->spr);
                 }
                 *px50 = base + 0x20;
             } else {
@@ -3828,10 +3846,10 @@ void hsd_80397110(void)
             }
             *px4 = 20;
             *px8 = (*px40 - 0x28) - (row-- + 1) * 14;
-            if (spr_entry[0] == 0) {
+            if (spr_entry->spr == 0) {
                 hsd_80394434(SPR_GEKKO_ONLY());
             } else {
-                s32 name_len = strlen((char*) spr_entry[1]);
+                s32 name_len = strlen(spr_entry->name);
                 switch (name_len) {
                 case 1:
                     padding = lbl_804D6334;
@@ -3852,12 +3870,10 @@ void hsd_80397110(void)
                     padding = lbl_804D6350;
                     break;
                 }
-                sprintf(buf, SPR_VALUE_FMT(), spr_entry[0],
-                        (char*) spr_entry[1], padding,
-                        baselib_mfspr(spr_entry[0]));
+                sprintf(buf, SPR_VALUE_FMT(), spr_entry->spr, spr_entry->name,
+                        padding, baselib_mfspr(spr_entry->spr));
                 hsd_80394434(buf);
             }
-            offset += 16;
             i++;
         }
     }

@@ -2,6 +2,9 @@
 
 #include "mnmain.h"
 #include "mnmainrule.h"
+
+#include "mnname.static.h"
+
 #include "mnnamenew.h"
 #include "placeholder.h"
 
@@ -24,13 +27,8 @@
 #include <baselib/memory.h>
 #include <melee/gm/gmmain_lib.h>
 
-extern AnimLoopSettings mnName_803ED538[];
-extern f32 mnName_803ED600[];
-
 extern char mnName_StringTerminator;
 extern char mnName_804D4BF0;
-
-static u8 mnName_NameDisplayOrder[0x78];
 
 extern f32 mnName_804D4BD0[2];
 extern f32 mnName_804D4BD8[2];
@@ -41,25 +39,12 @@ extern u8 mnName_804D4BE8[3];
 extern char* mnNameNew_803EE720[];
 extern char* mnNameNew_803EE724[];
 
-extern AnimLoopSettings* mnName_803B8510[];
 extern char mnName_804D4C04[8];
-
-typedef struct {
-    HSD_Joint* joint;
-    HSD_AnimJoint* anim_joint;
-    HSD_MatAnimJoint* matanim_joint;
-    HSD_ShapeAnimJoint* shapeanim_joint;
-} MnNameArchive;
 
 typedef struct {
     u8 cur_menu;
     u8 prev_selection;
 } MnNameUserDataState;
-
-extern MnNameArchive mnName_804A06C0;
-extern MnNameArchive mnName_804A06D0;
-extern MnNameArchive mnName_804A06E0;
-extern Vec3 mnName_803ED618[];
 
 void fn_80249A1C(HSD_GObj* arg0);
 
@@ -904,13 +889,12 @@ void mnName_80238AE0(HSD_GObj* gobj, u8 index, u8 arg2)
 }
 
 static inline AnimLoopSettings*
-mnName_FindAnimLoop(AnimLoopSettings** tableBase, f32 frame)
+mnName_FindAnimLoop(AnimLoopSettings* const* tableBase, f32 frame)
 {
     s32 i;
     struct AnimTable {
         AnimLoopSettings* entries[6];
     } table;
-    char* msg;
 
     table = *(struct AnimTable*) tableBase;
 
@@ -922,8 +906,7 @@ mnName_FindAnimLoop(AnimLoopSettings** tableBase, f32 frame)
         }
     }
 
-    msg = "But AnimFrame!!!\n";
-    HSD_ASSERTREPORT(0x3DC, NULL, msg);
+    HSD_ASSERTREPORT(0x3DC, NULL, "But AnimFrame!!!\n");
 }
 
 inline f32 mnName_80238C34_inline(HSD_JObj* jobj)
@@ -931,28 +914,25 @@ inline f32 mnName_80238C34_inline(HSD_JObj* jobj)
     return mn_8022F298(jobj);
 }
 
-static inline void mnName_UpdateSelection(u8 do_update, HSD_GObj* gobj)
+static inline void mnName_UpdateSelection(u8 do_update, MnName_GObj* data)
 {
-    MnName_GObj* data = (MnName_GObj*) gobj->user_data;
-
     if (do_update) {
         u32 prev = ((MnNameUserDataState*) data)->prev_selection;
         if (prev != 0x1A || (u16) mn_804A04F0.hovered_selection >= 0x18U) {
             mnName_80238AE0((HSD_GObj*) data, prev, 0);
         }
-        mnName_80238AE0((HSD_GObj*) data,
-                        (u8) mn_804A04F0.hovered_selection, 1);
+        mnName_80238AE0((HSD_GObj*) data, (u8) mn_804A04F0.hovered_selection,
+                        1);
     }
 }
 
 void mnName_80238C34(HSD_GObj* arg0, u8 arg1, u8 arg2)
 {
-    AnimLoopSettings** tableBase = mnName_803B8510;
-    AnimLoopSettings* base = mnName_803ED538;
+    AnimLoopSettings* const* tableBase = mnName_803B8510;
     MnName_GObj* data = (MnName_GObj*) arg0->user_data;
     AnimLoopSettings* found;
 
-    mnName_UpdateSelection(arg1, arg0);
+    mnName_UpdateSelection(arg1, data);
 
     {
         HSD_JObj* jobj = mnName_802388D4_noinline((HSD_GObj*) data, 0x18U);
@@ -974,6 +954,7 @@ void mnName_80238C34(HSD_GObj* arg0, u8 arg1, u8 arg2)
 
     {
         HSD_JObj* jobj = (HSD_JObj*) data->gobj.prev_gx;
+        AnimLoopSettings* base = mnName_803ED538;
         f32 result;
 
         found = mnName_FindAnimLoop(tableBase, mnName_80238C34_inline(jobj));
@@ -1413,16 +1394,31 @@ void fn_8023A0BC(HSD_GObj* gobj)
     }
 }
 
+static inline void mnName_SetupDeleteCursor(s32 sel, HSD_JObj* jobj)
+{
+    HSD_JObj* yes;
+    HSD_JObj* no;
+
+    lb_80011E24(jobj, &yes, 6, -1);
+    lb_80011E24(jobj, &no, 7, -1);
+    if (sel != 0) {
+        HSD_JObjReqAnimAll(yes, 1.0f);
+        HSD_JObjReqAnimAll(no, 0.0f);
+    } else {
+        HSD_JObjReqAnimAll(yes, 0.0f);
+        HSD_JObjReqAnimAll(no, 1.0f);
+    }
+    HSD_JObjAnimAll(yes);
+    HSD_JObjAnimAll(no);
+}
+
 void mnName_8023A290(void)
 {
     HSD_JObj* sp28;
     HSD_JObj* sp24;
     HSD_JObj* sp20;
-    HSD_JObj* sp14;
-    HSD_JObj* sp18;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
-    u8 sel;
     MnNameArchive* archive = &mnName_804A06D0;
 
     gobj = GObj_Create(6U, 7U, 0x80U);
@@ -1438,18 +1434,7 @@ void mnName_8023A290(void)
     HSD_JObjSetFlagsAll(sp28, JOBJ_HIDDEN);
     lb_80011E24(jobj, &sp28, 0xB, -1);
     HSD_JObjSetFlagsAll(sp28, JOBJ_HIDDEN);
-    sel = mn_804A04F0.confirmed_selection;
-    lb_80011E24(jobj, &sp14, 6, -1);
-    lb_80011E24(jobj, &sp18, 7, -1);
-    if ((s32) sel != 0) {
-        HSD_JObjReqAnimAll(sp14, 1.0f);
-        HSD_JObjReqAnimAll(sp18, 0.0f);
-    } else {
-        HSD_JObjReqAnimAll(sp14, 0.0f);
-        HSD_JObjReqAnimAll(sp18, 1.0f);
-    }
-    HSD_JObjAnimAll(sp14);
-    HSD_JObjAnimAll(sp18);
+    mnName_SetupDeleteCursor((u8) mn_804A04F0.confirmed_selection, jobj);
     if (lbLang_IsSavedLanguageUS()) {
         lb_80011E24(jobj, &sp24, 6, -1);
         lb_80011E24(jobj, &sp20, 7, -1);
@@ -1464,24 +1449,56 @@ void mnName_8023A290(void)
 
 /// @todo Strings at base offsets are in rodata near mnName_803ED538
 
+static inline void mnName_SetupScrollbarAndText(s32 count,
+                                                 HSD_JObj* scrollbar,
+                                                 MnName_GObj* user_data)
+{
+    s32 extra;
+    f32 rows;
+    f32 pos;
+    HSD_Text* txt;
+
+    if ((count % 6) != 0) {
+        extra = 1;
+    } else {
+        extra = 0;
+    }
+    rows = (count / 6) + extra;
+    if (rows > 4.0f) {
+        HSD_JObjClearFlagsAll(scrollbar, JOBJ_HIDDEN);
+        pos = ((f32) user_data->gobj.gx_link) * (14.0f / (rows - 1.0f));
+        HSD_JObjSetTranslateX((HSD_JObj*) user_data->gobj.user_data, pos);
+    } else {
+        HSD_JObjSetFlagsAll(scrollbar, JOBJ_HIDDEN);
+    }
+    {
+        s32 sel = mn_804A04F0.hovered_selection - 0x18;
+        if (user_data->text2 != NULL) {
+            HSD_SisLib_803A5CC4(user_data->text2);
+        }
+        txt = HSD_SisLib_803A5ACC(0, 0, -9.5f, 9.1f, 17.0f, 364.68332f,
+                                  38.38772f);
+        user_data->text2 = txt;
+        txt->font_size.x = 0.0521f;
+        txt->font_size.y = 0.0521f;
+        HSD_SisLib_803A6368(txt, mnName_804D4BE8[sel]);
+    }
+}
+
 HSD_GObj* mnName_8023A59C(u8 arg0)
 {
     s32 count;
     HSD_JObj* jobj5;
     HSD_JObj* root_jobj;
-    s32 extra;
-    f32 pos;
-    f32 rows;
     HSD_JObj* jobj7;
     MnNameArchive* archive = &mnName_804A06E0;
     HSD_JObj* slider;
     HSD_JObj* scrollbar_container;
     HSD_JObj* jobj4;
-    HSD_Text* txt;
     MnName_GObj* user_data;
     HSD_GObj* gobj;
     s32 i;
-    PAD_STACK(24);
+    PAD_STACK(16);
 
     gobj = GObj_Create(6U, 7U, 0x80U);
     mnName_804D6BF8 = gobj;
@@ -1547,31 +1564,7 @@ HSD_GObj* mnName_8023A59C(u8 arg0)
     HSD_JObjAnimAll(jobj5);
     scrollbar_container = (HSD_JObj*) user_data->gobj.hsd_obj;
     count = GetNameCount_noinline();
-    if ((count % 6) != 0) {
-        extra = 1;
-    } else {
-        extra = 0;
-    }
-    rows = (count / 6) + extra;
-    if (rows > 4.0f) {
-        HSD_JObjClearFlagsAll(scrollbar_container, JOBJ_HIDDEN);
-        pos = ((f32) user_data->gobj.gx_link) * (14.0f / (rows - 1.0f));
-        HSD_JObjSetTranslateX((HSD_JObj*) user_data->gobj.user_data, pos);
-    } else {
-        HSD_JObjSetFlagsAll(scrollbar_container, JOBJ_HIDDEN);
-    }
-    {
-        s32 sel = mn_804A04F0.hovered_selection - 0x18;
-        if (user_data->text2 != NULL) {
-            HSD_SisLib_803A5CC4(user_data->text2);
-        }
-        txt = HSD_SisLib_803A5ACC(0, 0, -9.5f, 9.1f, 17.0f, 364.68332f,
-                                  38.38772f);
-        user_data->text2 = txt;
-        txt->font_size.x = 0.0521f;
-        txt->font_size.y = 0.0521f;
-        HSD_SisLib_803A6368(txt, mnName_804D4BE8[sel]);
-    }
+    mnName_SetupScrollbarAndText(count, scrollbar_container, user_data);
     return gobj;
 }
 
@@ -1646,15 +1639,14 @@ extern char** AutoNamesList;
 extern char** NotAllowedNamesList;
 extern HSD_Text* mnName_804D6BFC;
 
-static inline void mnName_InitNameDisplayOrder(u8** ptr)
+static inline void mnName_InitNameDisplayOrder(void)
 {
     u32 i;
 
     mn_804A04F0.hovered_selection = 0x18;
     mnName_804D6BFC = NULL;
     for (i = 0; i < 0x78; i++) {
-        **ptr = (u8) i;
-        (*ptr)++;
+        mnName_NameDisplayOrder[i] = (u8) i;
     }
 
     mn_804A04F0.x10 = 0;
@@ -1664,38 +1656,49 @@ static inline void mnName_InitNameDisplayOrder(u8** ptr)
 s32 mnName_8023AC40(void)
 {
     HSD_Archive* archive = mn_804D6BB8;
-    u8* ptr = mnName_NameDisplayOrder;
     HSD_GObjProc* proc;
 
+    /// @remarks The retail caller fills all seven name-entry archive slots
+    /// through one .bss anchor: the three archives owned by this translation
+    /// unit followed by the four "EtNw" slots that now belong to mnnamenew.c
+    /// (mnNameNew_804A06F0..mnNameNew_804A0720, loaded again by
+    /// mnNameNew_8023D8AC-era code from the same section names). The
+    /// past-the-end archive indices below reproduce that contiguous layout;
+    /// see symbols.txt 0x804A0648..0x804A0750.
     lbArchive_LoadSections(
-        archive, (void**) (ptr + 0x98), (char*) mnName_803ED538 + 0x13C,
-        (void**) (ptr + 0x9C), (char*) mnName_803ED538 + 0x158,
-        (void**) (ptr + 0xA0), (char*) mnName_803ED538 + 0x178,
-        (void**) (ptr + 0xA4), (char*) mnName_803ED538 + 0x19C,
-        (void**) (ptr + 0x78), (char*) mnName_803ED538 + 0x1C0,
-        (void**) (ptr + 0x7C), (char*) mnName_803ED538 + 0x1DC,
-        (void**) (ptr + 0x80), (char*) mnName_803ED538 + 0x1FC,
-        (void**) (ptr + 0x84), (char*) mnName_803ED538 + 0x220,
-        (void**) (ptr + 0x88), (char*) mnName_803ED538 + 0x244,
-        (void**) (ptr + 0x8C), (char*) mnName_803ED538 + 0x25C,
-        (void**) (ptr + 0x90), (char*) mnName_803ED538 + 0x278,
-        (void**) (ptr + 0x94), (char*) mnName_803ED538 + 0x298,
-        (void**) (ptr + 0xA8), (char*) mnName_803ED538 + 0x2BC,
-        (void**) (ptr + 0xAC), (char*) mnName_803ED538 + 0x2D8,
-        (void**) (ptr + 0xB0), (char*) mnName_803ED538 + 0x2F8,
-        (void**) (ptr + 0xB4), (char*) mnName_803ED538 + 0x31C,
-        (void**) (ptr + 0xB8), (char*) mnName_803ED538 + 0x340,
-        (void**) (ptr + 0xBC), (char*) mnName_803ED538 + 0x35C,
-        (void**) (ptr + 0xC0), (char*) mnName_803ED538 + 0x37C,
-        (void**) (ptr + 0xC4), (char*) mnName_803ED538 + 0x3A0,
-        (void**) (ptr + 0xC8), (char*) mnName_803ED538 + 0x3C4,
-        (void**) (ptr + 0xCC), (char*) mnName_803ED538 + 0x3E0,
-        (void**) (ptr + 0xD0), (char*) mnName_803ED538 + 0x400,
-        (void**) (ptr + 0xD4), (char*) mnName_803ED538 + 0x424,
-        (void**) (ptr + 0xD8), (char*) mnName_803ED538 + 0x448,
-        (void**) (ptr + 0xDC), (char*) mnName_803ED538 + 0x464,
-        (void**) (ptr + 0xE0), (char*) mnName_803ED538 + 0x484,
-        (void**) (ptr + 0xE4), (char*) mnName_803ED538 + 0x4A8, 0);
+        archive, &mnName_804A06E0.joint, "MenMainConNmTp_Top_joint",
+        &mnName_804A06E0.anim_joint, "MenMainConNmTp_Top_animjoint",
+        &mnName_804A06E0.matanim_joint, "MenMainConNmTp_Top_matanim_joint",
+        &mnName_804A06E0.shapeanim_joint, "MenMainConNmTp_Top_shapeanim_joint",
+        &mnName_804A06C0.joint, "MenMainBaseNmTp_Top_joint",
+        &mnName_804A06C0.anim_joint, "MenMainBaseNmTp_Top_animjoint",
+        &mnName_804A06C0.matanim_joint, "MenMainBaseNmTp_Top_matanim_joint",
+        &mnName_804A06C0.shapeanim_joint,
+        "MenMainBaseNmTp_Top_shapeanim_joint", &mnName_804A06D0.joint,
+        "MenMainWarCmn_Top_joint", &mnName_804A06D0.anim_joint,
+        "MenMainWarCmn_Top_animjoint", &mnName_804A06D0.matanim_joint,
+        "MenMainWarCmn_Top_matanim_joint", &mnName_804A06D0.shapeanim_joint,
+        "MenMainWarCmn_Top_shapeanim_joint", &(&mnName_804A06E0)[1].joint,
+        "MenMainConEtNw_Top_joint", &(&mnName_804A06E0)[1].anim_joint,
+        "MenMainConEtNw_Top_animjoint", &(&mnName_804A06E0)[1].matanim_joint,
+        "MenMainConEtNw_Top_matanim_joint",
+        &(&mnName_804A06E0)[1].shapeanim_joint,
+        "MenMainConEtNw_Top_shapeanim_joint", &(&mnName_804A06E0)[2].joint,
+        "MenMainBaseEtNw_Top_joint", &(&mnName_804A06E0)[2].anim_joint,
+        "MenMainBaseEtNw_Top_animjoint", &(&mnName_804A06E0)[2].matanim_joint,
+        "MenMainBaseEtNw_Top_matanim_joint",
+        &(&mnName_804A06E0)[2].shapeanim_joint,
+        "MenMainBaseEtNw_Top_shapeanim_joint", &(&mnName_804A06E0)[3].joint,
+        "MenMainSubEtNw_Top_joint", &(&mnName_804A06E0)[3].anim_joint,
+        "MenMainSubEtNw_Top_animjoint", &(&mnName_804A06E0)[3].matanim_joint,
+        "MenMainSubEtNw_Top_matanim_joint",
+        &(&mnName_804A06E0)[3].shapeanim_joint,
+        "MenMainSubEtNw_Top_shapeanim_joint", &(&mnName_804A06E0)[4].joint,
+        "MenMainSbaseEtNw_Top_joint", &(&mnName_804A06E0)[4].anim_joint,
+        "MenMainSbaseEtNw_Top_animjoint", &(&mnName_804A06E0)[4].matanim_joint,
+        "MenMainSbaseEtNw_Top_matanim_joint",
+        &(&mnName_804A06E0)[4].shapeanim_joint,
+        "MenMainSbaseEtNw_Top_shapeanim_joint", 0);
 
     if (lbLang_IsSavedLanguageUS()) {
         lbArchive_LoadSections(
@@ -1709,11 +1712,20 @@ s32 mnName_8023AC40(void)
 
     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
     mn_804A04F0.cur_menu = 0x12;
-    mnName_InitNameDisplayOrder(&ptr);
+    mnName_InitNameDisplayOrder();
     proc = HSD_GObj_SetupProc(GObj_Create(0U, 1U, 0x80U), fn_80238540, 0U);
     proc->flags_3 = (u16) HSD_GObj_804D783C;
     return (s32) proc;
 }
+
+/// Auto/refused name-list section names owned by this translation unit
+/// (retail .data 0x803EDA08..0x803EDA51; see the symbols.txt entries). They
+/// sit after the pooled archive-name literals of mnName_8023AC40, which
+/// addresses them relative to the unit's .data anchor (mnName_803ED538).
+static char mnName_AutoNameUsName[] = "mnNameAutoNameUs";
+static char mnName_RefuseNameUsName[] = "mnNameRefuseNameUs";
+static char mnName_AutoNameName[] = "mnNameAutoName";
+static char mnName_RefuseNameName[] = "mnNameRefuseName";
 
 extern char** NotAllowedNamesList;
 extern char mnNameNew_NullCharacter;

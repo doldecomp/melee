@@ -785,7 +785,6 @@ HSD_GObj* grHomeRun_8021E500(s32 arg)
 {
     HSD_JObj* jobj;
     s32 gobj_id;
-    HSD_GObj* gobj;
     HSD_JObj* child;
     Ground* gp;
     s32 idx;
@@ -821,30 +820,32 @@ HSD_GObj* grHomeRun_8021E500(s32 arg)
         HSD_ASSERT(0x3D2, 0);
     }
 
-    gobj = grHomeRun_8021C82C_noinline(gobj_id);
-    HSD_ASSERT(0x3D5, gobj);
-    jobj = GET_JOBJ(gobj);
-    (void) jobj;
-    HSD_ASSERT(0x3D6, jobj);
-    (void) (gp = GET_GROUND(gobj));
-    HSD_ASSERT(0x3D7, gp);
+    {
+        HSD_GObj* gobj = grHomeRun_8021C82C_noinline(gobj_id);
+        HSD_ASSERT(0x3D5, gobj);
+        jobj = GET_JOBJ(gobj);
+        (void) jobj;
+        HSD_ASSERT(0x3D6, jobj);
+        (void) (gp = GET_GROUND(gobj));
+        HSD_ASSERT(0x3D7, gp);
 
-    HSD_JObjSetScaleX(jobj, grHr_804D6AE4 * HSD_JObjGetScaleX(jobj));
-    HSD_JObjSetScaleY(jobj, grHr_804D6AE4 * HSD_JObjGetScaleY(jobj));
-    HSD_JObjSetScaleZ(jobj, grHr_804D6AE4 * HSD_JObjGetScaleZ(jobj));
+        HSD_JObjSetScaleX(jobj, grHr_804D6AE4 * HSD_JObjGetScaleX(jobj));
+        HSD_JObjSetScaleY(jobj, grHr_804D6AE4 * HSD_JObjGetScaleY(jobj));
+        HSD_JObjSetScaleZ(jobj, grHr_804D6AE4 * HSD_JObjGetScaleZ(jobj));
 
-    child = HSD_JObjGetChild(jobj);
-    HSD_JObjSetTranslateX(child, 0.0F);
+        child = HSD_JObjGetChild(jobj);
+        HSD_JObjSetTranslateX(child, 0.0F);
 
-    offset = grHr_804D6AE4 * ((f32) arg * (160.0F * Ground_801C0498()));
-    gp->gv.homerun.xD0 =
-        (160.0F * (grHr_804D6AE4 * Ground_801C0498())) + offset;
-    HSD_JObjSetTranslateX(jobj, gp->gv.homerun.xD0);
+        offset = grHr_804D6AE4 * ((f32) arg * (160.0F * Ground_801C0498()));
+        gp->gv.homerun.xD0 =
+            (160.0F * (grHr_804D6AE4 * Ground_801C0498())) + offset;
+        HSD_JObjSetTranslateX(jobj, gp->gv.homerun.xD0);
 
-    gp->gv.homerun.xC6 =
-        (s16) ((s32) grHr_804D6AE0 * ((arg + 1) / grHr_804D6ADC));
-    gp->gv.homerun.xC4 = arg;
-    return gobj;
+        gp->gv.homerun.xC6 =
+            (s16) ((s32) grHr_804D6AE0 * ((arg + 1) / grHr_804D6ADC));
+        gp->gv.homerun.xC4 = arg;
+        return gobj;
+    }
 }
 
 void fn_8021E994(Ground* arg0, s32 arg1, CollData* arg2, s32 arg3,

@@ -3575,9 +3575,9 @@ s32 fn_80167638(s32 arg0, Vec3* arg1, Vec3* arg2)
             }
         }
     }
-    chr = Player_GetPlayerCharacter(ret);
+    chr = Player_GetPlayerCharacter(arg0);
     if (stage_info.unk8C.b4) {
-        Stage_80224E38(pos, ret);
+        Stage_80224E38(pos, arg0);
         offset->z = 0.0f;
         offset->y = 0.0f;
         offset->x = 0.0f;
@@ -4505,6 +4505,14 @@ static inline s32 fn_801695BC_get_color(s32 i, u8* colors)
     return (s8) colors[i];
 }
 
+static inline void fn_801695BC_init_colors(u8 ncolors, s8* colors)
+{
+    s32 i;
+    for (i = 0; i < ncolors; i++) {
+        colors[i] = (s8) i;
+    }
+}
+
 s32 fn_801695BC(u8 arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
 {
     s32 tmp2;
@@ -4518,9 +4526,7 @@ s32 fn_801695BC(u8 arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
     ncolors = gm_80169238_noinline(arg0);
     if ((s8) arg0 != 0x21) {
         ncolors_s32 = ncolors;
-        for (i = 0; i < ncolors; i++) {
-            colors[i] = (s8) i;
-        }
+        fn_801695BC_init_colors(ncolors, colors);
         if ((s8) arg1 == (s8) arg0) {
             colors[(s8) arg2] = -1;
         }
@@ -4591,8 +4597,10 @@ void fn_80169900(u8 arg0, struct lbl_8046B488_t* arg1, s8* arg2, s8* arg3)
 
     switch ((s32) arg0) {
     case 0: {
-        s8* src = arg3;
-        s8* dst = arg2;
+        s8* src;
+        s8* dst;
+        dst = arg2;
+        src = arg3;
         while (*src != -2) {
             *dst = (s8) arg1->x0;
             src += 1;
@@ -4602,14 +4610,14 @@ void fn_80169900(u8 arg0, struct lbl_8046B488_t* arg1, s8* arg2, s8* arg3)
     }
     case 1: {
         s8* dst = arg2;
-        s8* src = arg3;
-        while (*src != -2) {
+        arg2 = arg3;
+        while (*arg2 != -2) {
             if (HSD_Randi(2) != 0) {
                 *dst = arg1->x0;
             } else {
                 *dst = arg1->x1;
             }
-            src += 1;
+            arg2 += 1;
             dst += 1;
         }
         break;
@@ -5126,7 +5134,7 @@ void fn_8016A4C8(void)
     u8* spawn_state;
     s32 spawn_slot;
 
-    PAD_STACK(0xBC);
+    PAD_STACK(0xB8);
 
     gp = &lbl_8046B488;
     event_flags = (u8*) gp + 0x10;
@@ -5152,7 +5160,10 @@ void fn_8016A4C8(void)
                 }
                 fn_8016B738(1);
                 Player_80036D24(spawn_slot);
-                spawn_state[0x1A6] = (s8) gp->x7;
+                {
+                    s32 remaining_count_signed = (s8) gp->x7;
+                    spawn_state[0x1A6] = remaining_count_signed;
+                }
                 Player_SetFlagsBit1(spawn_slot);
                 Player_SetTeam(spawn_slot, 4);
                 Ground_801C2D24(

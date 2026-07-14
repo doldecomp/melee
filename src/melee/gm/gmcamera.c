@@ -315,6 +315,20 @@ static inline void gmCamera_801A26C0_FreeTexts(gmCameraUnkStruct* unk)
     }
 }
 
+static inline void gmCamera_FreeTextsWithZero(gmCameraUnkStruct* unk,
+                                               HSD_Text* zero)
+{
+    s32 i;
+
+    if (unk->x48[0] != NULL) {
+        i = 0;
+        for (; i < 3; i++) {
+            HSD_SisLib_803A5CC4(unk->x48[i]);
+            unk->x48[i] = zero;
+        }
+    }
+}
+
 void gmCamera_801A26C0(void)
 {
     lbl_8046B6A0_t* hud;
@@ -393,15 +407,12 @@ void gmCamera_801A292C(void)
     HSD_Text* text;
     s32 i;
     f32 new_var;
-    gmCameraUnkStruct* unk;
-    HSD_Text** texts;
+    gmCameraUnkStruct* unk = &gmCamera_VsCamUiState.gcus;
+    HSD_Text** texts = unk->x48;
     f32* tbl = gmCamera_803DA630;
     PAD_STACK(16);
 
-    unk = &gmCamera_VsCamUiState.gcus;
-    texts = unk->x48;
-
-    gmCamera_801A26C0_FreeTexts(unk);
+    gmCamera_FreeTextsWithZero(unk, NULL);
 
     for (i = 0; i < 2; i++) {
         ((gmCameraUnkStruct4*) &unk->x24)[i].x0 = lbSnap_8001D40C(i);

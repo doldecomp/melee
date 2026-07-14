@@ -3311,7 +3311,7 @@ void gm_801BF128(void)
     s32 a;
     s32 pick;
     s32 dup;
-    PAD_STACK(0x38);
+    PAD_STACK(0x1C);
 
     count = 0;
     c = 0;

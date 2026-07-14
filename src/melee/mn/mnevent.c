@@ -126,26 +126,26 @@ static inline MnEventData* mnEvent_GetData(void)
 }
 
 static inline void mnEvent_CreateIcon(s32 idx, MnEventData* data,
-                                      s32 is_unlocked,
-                                      HSD_JObj** jobj_0A,
-                                      HSD_JObj** jobj_0C)
+                                      s32 is_unlocked)
 {
+    HSD_JObj* jobj_0A;
+    HSD_JObj* jobj_0C;
+    Vec3 icon_pos;
+    HSD_JObj* icon_jobj;
     HSD_JObj* tree;
     void** assets;
     f32 icon_spacing;
-    HSD_JObj* icon_jobj;
 
     if (is_unlocked != 0) {
-        Vec3 icon_pos;
         HSD_GObj* icon_gobj;
 
         tree = mnEvent_804D6C60->hsd_obj;
         assets = mnEvent_804A08F8;
-        lb_80011E24(tree, &(*jobj_0A), 0xA, -1);
-        lb_80011E24(tree, &(*jobj_0C), 0xC, -1);
-        icon_spacing = HSD_JObjGetTranslationY(*jobj_0A);
-        icon_spacing = HSD_JObjGetTranslationY(*jobj_0C) - icon_spacing;
-        HSD_JObjGetTranslation(*jobj_0A, &icon_pos);
+        lb_80011E24(tree, &jobj_0A, 0xA, -1);
+        lb_80011E24(tree, &jobj_0C, 0xC, -1);
+        icon_spacing = HSD_JObjGetTranslationY(jobj_0A);
+        icon_spacing = HSD_JObjGetTranslationY(jobj_0C) - icon_spacing;
+        HSD_JObjGetTranslation(jobj_0A, &icon_pos);
         icon_pos.y = icon_pos.y + (f32) idx * icon_spacing;
         icon_gobj = GObj_Create(6, 7, 0x80);
         icon_jobj = HSD_JObjLoadJoint((HSD_Joint*) assets[4]);
@@ -158,10 +158,9 @@ static inline void mnEvent_CreateIcon(s32 idx, MnEventData* data,
 
 void mnEvent_8024D15C(s32 idx, s32 event_id)
 {
+    HSD_JObj* jobj_0A;
     HSD_JObj* jobj_0C;
     Vec3 pos;
-    HSD_JObj* jobj_0A;
-    HSD_JObj* jobj_0C_2;
     f32 icon_spacing;
     MnEventData* data;
     HSD_Text** text_slot;
@@ -170,10 +169,9 @@ void mnEvent_8024D15C(s32 idx, s32 event_id)
     HSD_Text* text;
     HSD_Text* icon_text;
     f32 spacing;
-    HSD_JObj* jobj_0A_2;
     s32 is_unlocked;
     HSD_JObj* tree;
-    PAD_STACK(0x28);
+    PAD_STACK(0x24);
 
     tree = mnEvent_804D6C60->hsd_obj;
     data = mnEvent_GetData();
@@ -194,7 +192,7 @@ void mnEvent_8024D15C(s32 idx, s32 event_id)
     }
 
     is_unlocked = gmMainLib_8015CEFC(event_id);
-    mnEvent_CreateIcon(idx, data, is_unlocked, &jobj_0A_2, &jobj_0C_2);
+    mnEvent_CreateIcon(idx, data, is_unlocked);
     tree = mnEvent_804D6C60->hsd_obj;
 
     {
@@ -209,8 +207,12 @@ void mnEvent_8024D15C(s32 idx, s32 event_id)
     *text_slot = text;
     text->font_size.x = 0.035f;
     text->font_size.y = 0.035f;
-    text->pos_x = pos.x + mnEvent_803EF764.x;
-    text->pos_y = pos.y + mnEvent_803EF764.y;
+    {
+        f32 pos_x = pos.x + mnEvent_803EF764.x;
+        f32 pos_y = pos.y + mnEvent_803EF764.y;
+        text->pos_x = pos_x;
+        text->pos_y = pos_y;
+    }
     text->pos_z = 17.0f;
     text->default_kerning = 1;
     *(s32*) &text->text_color = mnEvent_804D5028;
@@ -407,11 +409,10 @@ static inline u8 mnEvent_RefreshList(MnEventData* data)
     return gm_801BEBA8((u32) (data->first_event + data->page) & 0xFF);
 }
 
-static inline void mnEvent_SetPage(MnEventData* data)
+static inline void mnEvent_SetPage(MnEventData* data, HSD_JObj** jobj_0A,
+                                   HSD_JObj** jobj_0C,
+                                   HSD_JObj** jobj_0B)
 {
-    HSD_JObj* jobj_0C;
-    HSD_JObj* jobj_0A;
-    HSD_JObj* jobj_0B;
     u8 page;
     HSD_JObj* tree;
     f32 y_a;
@@ -419,12 +420,30 @@ static inline void mnEvent_SetPage(MnEventData* data)
 
     tree = mnEvent_804D6C60->hsd_obj;
     page = data->page;
-    lb_80011E24(tree, &jobj_0A, 0xA, -1);
-    lb_80011E24(tree, &jobj_0C, 0xC, -1);
-    y_a = HSD_JObjGetTranslationY(jobj_0A);
-    y_b = HSD_JObjGetTranslationY(jobj_0C);
-    lb_80011E24(tree, &jobj_0B, 0xB, -1);
-    HSD_JObjSetTranslateY(jobj_0B, (f32) page * (y_b - y_a));
+    lb_80011E24(tree, jobj_0A, 0xA, -1);
+    lb_80011E24(tree, jobj_0C, 0xC, -1);
+    y_a = HSD_JObjGetTranslationY(*jobj_0A);
+    y_b = HSD_JObjGetTranslationY(*jobj_0C);
+    lb_80011E24(tree, jobj_0B, 0xB, -1);
+    HSD_JObjSetTranslateY(*jobj_0B, (f32) page * (y_b - y_a));
+}
+
+static inline void mnEvent_SetInitialPage(HSD_JObj* tree, MnEventData* data,
+                                          HSD_JObj** jobj_0A,
+                                          HSD_JObj** jobj_0C,
+                                          HSD_JObj** jobj_0B)
+{
+    u8 page;
+    f32 y_a;
+    f32 y_b;
+
+    page = data->page;
+    lb_80011E24(tree, jobj_0A, 0xA, -1);
+    lb_80011E24(tree, jobj_0C, 0xC, -1);
+    y_a = HSD_JObjGetTranslationY(*jobj_0A);
+    y_b = HSD_JObjGetTranslationY(*jobj_0C);
+    lb_80011E24(tree, jobj_0B, 0xB, -1);
+    HSD_JObjSetTranslateY(*jobj_0B, (f32) page * (y_b - y_a));
 }
 
 static inline void mnEvent_8024E524_inline_2(u8 event, HSD_JObj** jobj)
@@ -446,7 +465,6 @@ static inline void mnEvent_8024E524_inline_2(u8 event, HSD_JObj** jobj)
 
 void mnEvent_8024E524(s32 event_idx)
 {
-    u8 page;
     HSD_JObj* jobj_0B;
     HSD_JObj* jobj_0C;
     HSD_JObj* jobj_0A;
@@ -457,9 +475,6 @@ void mnEvent_8024E524(s32 event_idx)
     MnEventData* user_data;
     u8 event;
     void** assets;
-    f32 y_a;
-    f32 y_b;
-    f32 y;
 
     assets = mnEvent_804A08F8;
 
@@ -479,15 +494,7 @@ void mnEvent_8024E524(s32 event_idx)
     mnEvent_8024E420(user_data, event_idx);
     GObj_InitUserData(gobj, 0, HSD_Free, user_data);
 
-    page = user_data->page;
-    (void) page;
-    lb_80011E24(tree, &jobj_0A, 0xA, -1);
-    lb_80011E24(tree, &jobj_0C, 0xC, -1);
-    y_a = HSD_JObjGetTranslationY(jobj_0A);
-    y_b = HSD_JObjGetTranslationY(jobj_0C);
-    lb_80011E24(tree, &jobj_0B, 0xB, -1);
-    y = (f32) page * (y_b - y_a);
-    HSD_JObjSetTranslateY(jobj_0B, y);
+    mnEvent_SetInitialPage(tree, user_data, &jobj_0A, &jobj_0C, &jobj_0B);
 
     proc = HSD_GObj_SetupProc(gobj, fn_8024E34C, 0);
     event = mnEvent_8024E524_inline(proc, user_data);
@@ -500,7 +507,22 @@ void fn_8024D864(HSD_GObj* gobj)
     u64 inputs;
     s32 selected_event;
     u8 page;
-    u8 event;
+    UNUSED u32 conversion_gap;
+    HSD_JObj* page_up_b;
+    HSD_JObj* page_up_c;
+    HSD_JObj* page_up_a;
+    UNUSED HSD_JObj* page_gap;
+    HSD_JObj* page_down_b;
+    HSD_JObj* page_down_c;
+    HSD_JObj* page_down_a;
+    HSD_JObj* selection_x;
+    HSD_JObj* selection_y;
+    UNUSED HSD_JObj* selection_gap_up;
+    HSD_JObj* selection_up;
+    HSD_JObj* selection_up_scroll;
+    UNUSED HSD_JObj* selection_gap_down;
+    HSD_JObj* selection_down;
+    HSD_JObj* selection_down_scroll;
     UNUSED u8 pad[0x24];
 
     if (mn_804D6BC8.cooldown != 0) {
@@ -538,6 +560,7 @@ void fn_8024D864(HSD_GObj* gobj)
     }
 
     if (inputs & MenuInput_XButton) {
+        u8 event;
         s32 max_events = mnEvent_8024CE74();
         if (data->first_event + 9 < max_events ||
             data->first_event != max_events)
@@ -549,13 +572,11 @@ void fn_8024D864(HSD_GObj* gobj)
                 data->first_event = max_events;
             }
             event = mnEvent_RefreshList(data);
-            {
-                HSD_JObj* selection_jobj;
-                PAD_STACK(0x24);
-                mnEvent_8024E524_inline_2(event, &selection_jobj);
-            }
+            PAD_STACK(0x10);
+            mnEvent_8024E524_inline_2(event, &selection_x);
         }
     } else if (inputs & MenuInput_YButton) {
+        u8 event;
         if (data->first_event - 9 >= 0 || data->first_event != 0) {
             lbAudioAx_80024030(2);
             if (data->first_event - 9 >= 0) {
@@ -564,56 +585,45 @@ void fn_8024D864(HSD_GObj* gobj)
                 data->first_event = 0;
             }
             event = mnEvent_RefreshList(data);
-            {
-                HSD_JObj* selection_jobj;
-                mnEvent_8024E524_inline_2(event, &selection_jobj);
-            }
+            mnEvent_8024E524_inline_2(event, &selection_y);
         }
     } else if (inputs & MenuInput_Up) {
         page = data->page;
         if (page != 0) {
+            u8 event;
             lbAudioAx_80024030(2);
             data->page -= 1;
-            mnEvent_SetPage(data);
+            mnEvent_SetPage(data, &page_up_a, &page_up_c, &page_up_b);
             selected_event = data->first_event + data->page;
             event = gm_801BEBA8((u8) selected_event);
-            {
-                HSD_JObj* selection_jobj;
-                mnEvent_8024E524_inline_2(event, &selection_jobj);
-            }
+            mnEvent_8024E524_inline_2(event, &selection_up);
             return;
         }
         if (data->first_event != 0) {
+            u8 event;
             lbAudioAx_80024030(2);
             data->first_event -= 1;
             event = mnEvent_RefreshList(data);
-            {
-                HSD_JObj* selection_jobj;
-                mnEvent_8024E524_inline_2(event, &selection_jobj);
-            }
+            mnEvent_8024E524_inline_2(event, &selection_up_scroll);
         }
     } else if (inputs & MenuInput_Down) {
         page = data->page;
         if (page < 8) {
+            u8 event;
             lbAudioAx_80024030(2);
             data->page += 1;
-            mnEvent_SetPage(data);
+            mnEvent_SetPage(data, &page_down_a, &page_down_c, &page_down_b);
             selected_event = data->first_event + data->page;
             event = gm_801BEBA8((u8) selected_event);
-            {
-                HSD_JObj* selection_jobj;
-                mnEvent_8024E524_inline_2(event, &selection_jobj);
-            }
+            mnEvent_8024E524_inline_2(event, &selection_down);
             return;
         }
         if (data->first_event < mnEvent_8024CE74()) {
+            u8 event;
             lbAudioAx_80024030(2);
             data->first_event += 1;
             event = mnEvent_RefreshList(data);
-            {
-                HSD_JObj* selection_jobj;
-                mnEvent_8024E524_inline_2(event, &selection_jobj);
-            }
+            mnEvent_8024E524_inline_2(event, &selection_down_scroll);
         }
     }
 }

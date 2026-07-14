@@ -37,17 +37,6 @@
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 
-typedef struct un_80400304_t {
-    Vec3 player_spawn;
-    char use_quaternion_assert[0x28];
-    char vi1201v2_dat[0x10];
-    char visual1201v2_scene[0x14];
-    char tykoopa_dat[0x0C];
-    char toykoopa_model_topn_joint[0x1C];
-    char gmrgstnd_dat[0x10];
-    char stand_scene[0x0C];
-} un_80400304_t;
-
 /// @todo .sdata2 order hack
 static void order_sdata2(void)
 {
@@ -56,12 +45,7 @@ static void order_sdata2(void)
 }
 
 Vec3 un_804002F8 = { 0.0f, 0.0f, 0.0f };
-un_80400304_t un_80400304 = {
-    { 0.0f, 0.0f, 0.0f }, "!(jobj->flags & JOBJ_USE_QUATERNION)",
-    "Vi1201v2.dat",       "visual1201v2Scene",
-    "TyKoopa.dat",        "ToyKoopaModel_TopN_joint",
-    "GmRgStnd.dat",       "standScene",
-};
+static Vec3 spawn_pos = { 0.0f, 0.0f, 0.0f };
 
 static SceneDesc* un_804D7010;
 static SceneDesc* un_804D7014;
@@ -137,7 +121,7 @@ void un_803205F4(void)
     Player_SetPlayerId(1, 0);
     Player_SetSlottype(1, 2);
     Player_SetFacingDirection(1, -1.0f);
-    Player_80032768(1, &un_80400304.player_spawn);
+    Player_80032768(1, &spawn_pos);
     Player_80036F34(1, 0xF);
     Player_SetScale(1, 1.0f / Player_80032BB0(1));
 
@@ -241,18 +225,23 @@ static inline void un_80320A40_LoadArchives(u8* input)
 
     char_index = input[0];
 
-    un_804D701C = lbArchive_LoadSymbols(un_80400304.vi1201v2_dat, &un_804D7010,
-                                        un_80400304.visual1201v2_scene, NULL);
-    lbArchive_LoadSymbols(un_80400304.tykoopa_dat, &un_804D7020,
-                          un_80400304.toykoopa_model_topn_joint, NULL);
+    un_804D701C = lbArchive_LoadSymbols("Vi1201v2.dat", &un_804D7010,
+                                        "visual1201v2Scene", NULL);
+    lbArchive_LoadSymbols("TyKoopa.dat", &un_804D7020,
+                          "ToyKoopaModel_TopN_joint", NULL);
     {
-        char* gmrgstnd_dat = un_80400304.gmrgstnd_dat;
-        lbArchive_LoadSymbols(gmrgstnd_dat, &un_804D7014,
-                              un_80400304.stand_scene, NULL);
+        char* gmrgstnd_dat = "GmRgStnd.dat";
+        lbArchive_LoadSymbols(gmrgstnd_dat, &un_804D7014, "standScene", NULL);
     }
     Toy_803124BC();
     un_804D7018 =
         lbArchive_LoadSymbols(viGetCharAnimByIndex(char_index), NULL);
+}
+
+/// @todo .data order hack
+static void order_data(void)
+{
+    (void) "!(jobj->flags & JOBJ_USE_QUATERNION)";
 }
 
 static inline void un_80320A40_SetupCamera(void)

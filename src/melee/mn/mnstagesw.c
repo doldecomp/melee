@@ -517,6 +517,7 @@ static void fn_80236998(HSD_GObj* gobj)
     s32 changed_menu;
     s32 changed_hovered;
     u64 pad3;
+    s32 i;
     HSD_JObj* child;
     s32 changed_confirmed;
     u8 state;
@@ -584,18 +585,17 @@ static void fn_80236998(HSD_GObj* gobj)
             switch ((s32) data->x1F) {
             case 1:
             case 3: {
-                s32 i;
-
-                data->x1F = i = changed_menu;
+                data->x1F = changed_menu = 0;
                 mnStageSw_802359C8(data);
                 gobj = gobj->user_data;
                 HSD_JObjClearFlagsAll(((MnStageSwData*) gobj)->x2C,
                                       JOBJ_HIDDEN);
                 HSD_JObjClearFlagsAll(((MnStageSwData*) gobj)->x34,
                                       JOBJ_HIDDEN);
-                for (; i < NUM_STAGES; i++) {
-                    jobj = mnStageSw_802364A0((MnStageSwData*) gobj, i);
-                    if (i != ((MnStageSwData*) gobj)->x1) {
+                for (; changed_menu < NUM_STAGES; changed_menu++) {
+                    jobj = mnStageSw_802364A0((MnStageSwData*) gobj,
+                                              changed_menu);
+                    if (changed_menu != ((MnStageSwData*) gobj)->x1) {
                         lb_80011E24(jobj, &child, 3, -1);
                         HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
                     }
@@ -607,8 +607,6 @@ static void fn_80236998(HSD_GObj* gobj)
             }
             case 2:
             case 4: {
-                s32 i;
-
                 for (i = 0; i < NUM_STAGES; i++) {
                     HSD_SisLib_803A5CC4(data->x40[i]);
                 }

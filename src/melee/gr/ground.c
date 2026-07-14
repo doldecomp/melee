@@ -1190,6 +1190,28 @@ static inline bool find_light_override(UnkArchiveStruct* archive,
     return false;
 }
 
+static inline bool find_light_override_in_dat(UnkStageDat* dat,
+                                              HSD_LightDesc* desc, bool* b6,
+                                              bool* b7, bool* b5)
+{
+    s32 count = dat->unk1C;
+    s32 i;
+
+    (void) dat;
+    if (count != 0) {
+        for (i = 0; i < count; i++) {
+            LightOverrideEntry* arr = dat->unk18;
+            if (arr[i].desc == desc) {
+                *b6 = arr[i].b;
+                *b7 = arr[i].a;
+                *b5 = arr[i].c;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lightset)
 {
     LightList** out;
@@ -1222,7 +1244,8 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lightset)
         HSD_LightDesc* desc = get_light_desc_inline(out);
         u16* flags = &desc->flags;
         if (*flags & 3) {
-            found = find_light_override(archive, desc, &b6, &b7, &b5);
+            found = find_light_override_in_dat(archive->unk4, desc, &b6, &b7,
+                                               &b5);
             if (found == 0 || (b6 == 0 && b7 == 0 && b5 == 0)) {
                 clean = out;
                 do {
@@ -2555,20 +2578,22 @@ static void Ground_801C4640(HSD_GObj* gobj, int unused)
 
 static LightList** Ground_801C466C_inline(void)
 {
-    StageCallbacks* var_r26;
+    StageCallbacks* callbacks;
+    UnkArchiveStruct* archive;
     int i;
-    int temp_r28;
+    int count;
 
-    temp_r28 = grDatFiles_801C6324()->unk4->unkC;
-    var_r26 = Ground_803DFEDC[stage_info.internal_stage_id]->callbacks;
-    grDatFiles_801C6324();
+    archive = grDatFiles_801C6324();
+    callbacks = Ground_803DFEDC[stage_info.internal_stage_id]->callbacks;
+    count = archive->unk4->unkC;
+    archive = grDatFiles_801C6324();
 
-    for (i = 0; i < temp_r28; i++) {
-        if (var_r26->flags_b0 == 1) {
-            UnkArchiveStruct* archive = grDatFiles_801C6330(i);
+    for (i = 0; i < count; i++) {
+        if (callbacks->flags_b0 == 1) {
+            archive = grDatFiles_801C6330(i);
             return Ground_801C20E0(archive, archive->unk4->unk8[i].x18);
         }
-        var_r26++;
+        callbacks++;
     }
     return NULL;
 }

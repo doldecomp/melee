@@ -47,7 +47,13 @@
 #include <melee/gm/gmregcommon.h>
 #include <melee/gm/gmtoulib.h>
 #include <melee/gm/types.h>
-#include <melee/gr/ground.h>
+u32 Ground_801C1DAC(void);
+u32 Ground_801C1DC0(void);
+s32 Ground_801C1DD4(void);
+void Ground_801C1DE4(s32*, s32*);
+f32 Ground_801C57F0(int);
+void Ground_801C5A60(void);
+u32 Ground_801C5AD0(s32);
 #include <melee/gr/grpushon.h>
 #include <melee/gr/stage.h>
 #include <melee/if/ifcoget.h>
@@ -2714,11 +2720,13 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
         state->xE8 = fn_8017F1B8();
     }
 
-    state->xF0 = state->xDC + (state->xE8 + state->xD0 + special_score);
+    state->xF0 = state->xE8 + (state->xDC + state->xD0 + special_score);
     state->xFC = arg0 + arg1;
     state->xCC = arg1;
 
-    total = arg0 + (state->xCC + state->xF0);
+    total = state->xF0;
+    total += state->xCC;
+    total = arg0 + total;
     var_r4 = total;
     if (total > 999999999) {
         var_r4 = 999999999;
@@ -2741,8 +2749,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_804D784B,
                             HSD_CObjLoadDesc(state->x60));
     GObj_SetupGXLinkMax(cam_gobj, HSD_GObj_803910D8, 8U);
-    ((u32*) &cam_gobj->gxlink_prios)[1] = 0x4C00;
-    ((u32*) &cam_gobj->gxlink_prios)[0] = 0;
+    cam_gobj->gxlink_prios = 0x4C00;
 
     HSD_SisLib_803A611C(0, cam_gobj, 9U, 0xDU, 0U, 0xEU, 0U, 0x13U);
     if (lbLang_IsSavedLanguageUS() != 0) {
@@ -2762,7 +2769,6 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     lbAudioAx_80023F28(var_r3);
 
     Camera_8002F7AC(0);
-    state->x2C = cam_gobj;
     lb_800121FC(&state->x30, 0x280, 0x1E0, GX_TF_RGB5A3, 0);
     lb_800138EC((s32) &state->x30, NULL, 2U, 0x32, 0.0f, 0.0f, 1.0f, 1.0f);
     lb_800138D8(state->x2C, 1);
@@ -3337,12 +3343,12 @@ static inline s32 fn_80181E18_ComputeRemaining100(s32 count)
 
 void fn_80181E18(void)
 {
-    s32 mode;
-    s32 i;
-    s32 next;
     s32 entry_idx;
-
-    mode = gm_801A4310();
+    s32 next;
+    s32 temp;
+    s32 count;
+    s32 i;
+    s32 mode = gm_801A4310();
 
     if (lbl_80472ED8.x8 <= 0x5A) {
         lbl_80472ED8.x8 += 1;
@@ -3371,7 +3377,6 @@ void fn_80181E18(void)
     }
 
     for (entry_idx = 0; entry_idx < 101; entry_idx++) {
-        s32 temp;
         if (lbl_80472ED8.x54[entry_idx].x0 == -2) {
             continue;
         }
@@ -3421,7 +3426,6 @@ void fn_80181E18(void)
         }
 
         if (next == 0x3E7) {
-            s32 count;
             count = 0;
             for (i = 1; i < 6; i++) {
                 if (Player_GetFalls(i) == 0 &&

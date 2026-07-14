@@ -28,6 +28,11 @@ ATTRIBUTE_NORETURN void HSD_Panic(char*, u32, char*);
 /// data, so they are taken as explicit arguments (see @todo above).
 #define HSD_ASSERTREPORTFILE(file, line, cond, msg, ...)                      \
     ((cond) ? (void) 0 : (OSReport(__VA_ARGS__), __assert(file, line, msg)))
+/// HSD_ASSERTMSG with the retail __FILE__ string and message taken as
+/// explicit arguments, for asserts whose strings live in the TU's own
+/// not-yet-decompiled merged .data (see HSD_ASSERTREPORTFILE above).
+#define HSD_ASSERTMSGFILE(file, line, cond, msg)                              \
+    ((cond) ? ((void) 0) : __assert(file, line, msg))
 #else
 #define HSD_ASSERT(line, cond)                                                \
     ((cond) ? ((void) 0) : __assert(__FILE__, __LINE__, #cond))
@@ -39,6 +44,8 @@ ATTRIBUTE_NORETURN void HSD_Panic(char*, u32, char*);
 #define HSD_ASSERTREPORTFILE(file, line, cond, msg, ...)                      \
     ((cond) ? (void) 0                                                        \
             : (OSReport(__VA_ARGS__), __assert(__FILE__, __LINE__, #cond)))
+#define HSD_ASSERTMSGFILE(file, line, cond, msg)                              \
+    ((cond) ? ((void) 0) : __assert(__FILE__, __LINE__, #cond))
 #endif
 
 int report_func(__file_handle arg0, unsigned char* arg1, size_t* arg2,

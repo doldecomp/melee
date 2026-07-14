@@ -1674,19 +1674,18 @@ static inline s32 getIconOffset(unsigned long icon_idx)
 
 void mnCharSel_8025FB50(u8 door, s32 arg1)
 {
-    HSD_JObj* sp18;
     s32 icon_idx;
     s32 icon_offset;
     int player;
     CSSAllData* all_data = (CSSAllData*) &mnCharSel_803F0A48;
     u8* char_kinds;
-    CSSIcon* icon;
+    HSD_JObj* icon_jobj;
 
     do {
         s32 temp = HSD_Randi(0x19);
         icon_idx = temp;
         icon_offset = getIconOffset(icon_idx);
-    } while ((icon = &all_data->icons[icon_idx])->state == 0);
+    } while (icons[icon_idx].state == 0);
 
     if (mnCharSel_804D6CF5 == 1) {
         if (door != 0) {
@@ -1729,14 +1728,14 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
                             mnCharSel_804A0BC0[mnCharSel_804D6CF5 - 1]->gobj);
 
     if (mnCharSel_804D6CF5 == 1) {
-        lb_80011E24(mnCharSel_804D6CC0, &sp18,
+        lb_80011E24(mnCharSel_804D6CC0, &icon_jobj,
                     all_data->icons[icon_idx].joint_id_1p, -1);
     } else {
-        lb_80011E24(mnCharSel_804D6CC0, &sp18,
+        lb_80011E24(mnCharSel_804D6CC0, &icon_jobj,
                     all_data->icons[icon_idx].joint_id_vs, -1);
     }
-    HSD_ForeachAnim(sp18, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim, AOBJ_ARG_AF,
-                    10.0);
+    HSD_ForeachAnim(icon_jobj, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
+                    AOBJ_ARG_AF, 10.0);
 
     all_data->icons[icon_idx].anim_timer = 0xC;
 
@@ -3433,7 +3432,7 @@ void fn_80262648(HSD_GObj* gobj)
                             icons[mnCharSel_803F0DFC.doors[model->x4].sel_icon]
                                 .bound_l)
                     {
-                        model->x8 = x + 0.02f;
+                        model->x8 += 0.02f;
                         if (model->x8 <
                             icons[mnCharSel_803F0DFC.doors[model->x4].sel_icon]
                                 .bound_l)
@@ -3485,7 +3484,7 @@ void fn_80262648(HSD_GObj* gobj)
                             icons[mnCharSel_803F0DFC.doors[model->x4].sel_icon]
                                 .bound_d)
                     {
-                        model->xC = x + 0.02f;
+                        model->xC += 0.02f;
                         if (model->xC <
                             icons[mnCharSel_803F0DFC.doors[model->x4].sel_icon]
                                 .bound_d)
@@ -3805,10 +3804,10 @@ void fn_802633B0(HSD_GObj* gobj)
         if (tag->scroll_force != 0.0f) {
             scroll_pos = tag->x8;
             new_pos = scroll_pos + tag->scroll_force;
-            tag->x8 = new_pos;
             page = (s32) (scroll_pos * 0.03125f);
-            new_page = (s32) (new_pos * 0.03125f);
-            if (new_pos > 0.0f) {
+            tag->x8 = new_pos;
+            new_page = (s32) (tag->x8 * 0.03125f);
+            if (tag->x8 > 0.0f) {
                 tag->x8 = 0.0f;
             }
             if ((u8) tag->next_tag > 7U) {
@@ -3905,7 +3904,7 @@ void fn_802633B0(HSD_GObj* gobj)
                 HSD_SisLib_803A746C(
                     (HSD_Text*) tag->name_ls, j + 2, 10.0f,
                     (32.0f * (f32) (j + 1)) +
-                        (f32) ((trunc - ((trunc / 32) << 5)) - 0x20));
+                        (f32) ((trunc % 32) - 0x20));
                 j += 1;
             } while (j < 9);
         }
