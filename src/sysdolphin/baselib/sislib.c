@@ -848,8 +848,14 @@ s32 HSD_SisLib_803A67EC(u8* data, u8* string)
             if ((sjis_hi == lut_ptr[lut_idx * 2]) &&
                 (sjis_lo == lut_ptr[lut_idx * 2 + 1]))
             {
-                data[out_idx++] = out_ptr[lut_idx * 2];
-                data[out_idx++] = out_ptr[lut_idx * 2 + 1];
+                s32 write_idx;
+
+                write_idx = out_idx;
+                out_idx += 1;
+                data[write_idx] = out_ptr[lut_idx * 2];
+                write_idx = out_idx;
+                out_idx += 1;
+                data[write_idx] = out_ptr[lut_idx * 2 + 1];
                 break;
             }
         }

@@ -250,9 +250,9 @@ static s32 find_nth_nonzero(u8* arr, s32 n)
 void fn_80174468(s32 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
                  StatsList* list, s32 entry_idx)
 {
+    s32 value_id;
     StatsEntry* entry;
     s32 label_id;
-    s32 value_id;
     s32 result;
     s32 idx;
     s32 stat_value;

@@ -547,8 +547,8 @@ s32 lbRefract_PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc)
     s32 total_bytes;
     u8* ptr;
     s32 hi;
-    s32 count;
     s32 copied;
+    s32 count;
     s32 ret;
     HSD_VtxDescList* verts;
     s32 last_offset;
@@ -651,7 +651,8 @@ s32 lbRefract_PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc)
 
         ptr = display + offset;
         hi = ptr[0];
-        count = (hi << 8) | ptr[1];
+        count = hi << 8;
+        count |= ptr[1];
         offset += 2;
 
         for (copied = 0; copied < count; copied++) {

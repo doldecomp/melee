@@ -573,7 +573,7 @@ void gm_801BAD70(GameScene* arg0)
     }
     if (level == 0x2B) {
         u8 c = ev->x50[2];
-        if ((s8) (u8) ev->x4C[2] == (s8) (u8) ev->x4C[0] &&
+        if ((s8) (u8) ev->x4C[0] == (s8) (u8) ev->x4C[2] &&
             (u8) ev->x50[0] == c)
         {
             if (c <= 2) {
@@ -619,7 +619,11 @@ void gm_801BAD70(GameScene* arg0)
         {
             struct gm_evbonus* bonus = ((struct gm_evlevel*) *lvlpp)->xC;
             k = bonus->c_kind;
-            sp8 = (k == 4) ? bonus->x17 : 0;
+            if (k == 4) {
+                sp8 = bonus->x17;
+            } else {
+                sp8 = 0;
+            }
             gm_8016A22C(k, 0x21, 0x21, ev->x50[1], 0, 0, x5_flag, 0, sp8,
                         ev->x0, ev->x1, bonus->x1, bonus->x2, bonus->x3,
                         bonus->x4, 0, 1, bonus->x8, bonus->xC);
@@ -3302,6 +3306,10 @@ static inline struct gm_random_history* gm_GetRandomHistory(void)
 
 void gm_801BF128(void)
 {
+    void gm_801BF634();
+    void gm_801BF6A8();
+    void gm_801BF6C8();
+    void gm_801BF6E8();
     s32 character_pool[29];
     s32 stage_pool[30];
     s32 c;

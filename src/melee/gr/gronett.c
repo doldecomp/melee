@@ -483,6 +483,68 @@ static inline HSD_JObj* grOnett_GetJObjChild(HSD_JObj* jobj)
     return jobj->child;
 }
 
+static inline void grOnett_StartCar(Ground* gp)
+{
+    HSD_JObj* car_jobj;
+    s8 old_car = gp->gv.onettcar.curr_car;
+
+    while (gp->gv.onettcar.curr_car == old_car ||
+           gp->gv.onettcar.curr_car == gp->gv.onettcar.next_car)
+    {
+        gp->gv.onettcar.curr_car = HSD_Randi(4);
+    }
+
+    car_jobj = gp->gv.onettcar.car_jobjs[gp->gv.onettcar.curr_car];
+    HSD_JObjSetTranslateX(car_jobj, 726.0f);
+    HSD_JObjSetTranslateZ(car_jobj, 30.0f);
+    HSD_JObjSetRotationY(car_jobj->child, 0.0f);
+    gp->gv.onettcar.state_a = 1;
+    gp->gv.onettcar.x108 = grOt_804D69C0->x44;
+    Ground_801C5784(0);
+}
+
+static inline void grOnett_StartNextCar(Ground* gp)
+{
+    HSD_JObj* jobj;
+    s8 next = gp->gv.onettcar.next_car;
+
+    while (gp->gv.onettcar.next_car == next ||
+           gp->gv.onettcar.next_car == gp->gv.onettcar.curr_car)
+    {
+        gp->gv.onettcar.next_car = HSD_Randi(4);
+    }
+
+    jobj = gp->gv.onettcar.car_jobjs[gp->gv.onettcar.next_car];
+    HSD_JObjSetTranslateX(jobj, -642.0f);
+    HSD_JObjSetTranslateZ(jobj, 56.0f);
+    HSD_JObjSetRotationY(grOnett_GetJObjChild(jobj), M_PI);
+    gp->gv.onettcar.state_b = 1;
+    gp->gv.onettcar.timer_b = grOt_804D69C0->x44;
+}
+
+static inline void grOnett_WaitCar(Ground* gp, s8 saved_car)
+{
+    s32 t = gp->gv.onettcar.x108;
+
+    if (t != 0) {
+        gp->gv.onettcar.x108 = t - 1;
+    } else {
+        s32 car = gp->gv.onettcar.curr_car;
+        gp->gv.onettcar.x108 = grOt_804D69C0->x48;
+        {
+            f32 rand = HSD_Randf();
+            gp->gv.onettcar.car_speed =
+                grOt_804D69C0->x58 * rand + grOt_804D69C0->x54;
+        }
+        if (gp->gv.onettcar.car_speed > 0.0f) {
+            gp->gv.onettcar.car_speed *= -1.0f;
+        }
+        gp->gv.onettcar.state_a = 2;
+        Item_80268E5C(gp->gv.onettcar.car_items[car], saved_car + 2,
+                      ITEM_ANIM_UPDATE);
+    }
+}
+
 void grOnett_801E43E0(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
@@ -490,7 +552,7 @@ void grOnett_801E43E0(Ground_GObj* gobj)
     Vec3 pos = { 0.0f, 0.0f, 0.0f };
     u8 pad[4];
     f32 cam_x, cam_y, cam_z;
-    PAD_STACK(32);
+    PAD_STACK(24);
 
     if (!gp->gv.onettcar.x0_b0) {
         HSD_JObj* car_jobj;
@@ -502,44 +564,12 @@ void grOnett_801E43E0(Ground_GObj* gobj)
         car_jobj2 = gp->gv.onettcar.car_jobjs2[saved_car];
 
         switch ((s8) gp->gv.onettcar.state_a) {
-        case 0: {
-            s8 old_car = gp->gv.onettcar.curr_car;
-            while (gp->gv.onettcar.curr_car == old_car ||
-                   gp->gv.onettcar.curr_car == gp->gv.onettcar.next_car)
-            {
-                gp->gv.onettcar.curr_car = HSD_Randi(4);
-            }
-
-            car_jobj = gp->gv.onettcar.car_jobjs[gp->gv.onettcar.curr_car];
-            HSD_JObjSetTranslateX(car_jobj, 726.0f);
-            HSD_JObjSetTranslateZ(car_jobj, 30.0f);
-            HSD_JObjSetRotationY(car_jobj->child, 0.0f);
-            gp->gv.onettcar.state_a = 1;
-            gp->gv.onettcar.x108 = grOt_804D69C0->x44;
-            Ground_801C5784(0);
+        case 0:
+            grOnett_StartCar(gp);
             break;
-        }
-        case 1: {
-            s32 t = gp->gv.onettcar.x108;
-            if (t != 0) {
-                gp->gv.onettcar.x108 = t - 1;
-            } else {
-                s32 car = gp->gv.onettcar.curr_car;
-                gp->gv.onettcar.x108 = grOt_804D69C0->x48;
-                {
-                    f32 rand = HSD_Randf();
-                    gp->gv.onettcar.car_speed =
-                        grOt_804D69C0->x58 * rand + grOt_804D69C0->x54;
-                }
-                if (gp->gv.onettcar.car_speed > 0.0f) {
-                    gp->gv.onettcar.car_speed *= -1.0f;
-                }
-                gp->gv.onettcar.state_a = 2;
-                Item_80268E5C(gp->gv.onettcar.car_items[car], saved_car + 2,
-                              ITEM_ANIM_UPDATE);
-            }
+        case 1:
+            grOnett_WaitCar(gp, saved_car);
             break;
-        }
         case 2:
             if (gp->gv.onettcar.x108 != 0) {
                 int fighter_count = 0;
@@ -657,21 +687,9 @@ void grOnett_801E43E0(Ground_GObj* gobj)
             HSD_JObj* b_jobj = gp->gv.onettcar.car_jobjs[next];
 
             switch (state_b) {
-            case 0: {
-                while (gp->gv.onettcar.next_car == next ||
-                       gp->gv.onettcar.next_car == gp->gv.onettcar.curr_car)
-                {
-                    gp->gv.onettcar.next_car = HSD_Randi(4);
-                }
-
-                b_jobj = gp->gv.onettcar.car_jobjs[gp->gv.onettcar.next_car];
-                HSD_JObjSetTranslateX(b_jobj, -642.0f);
-                HSD_JObjSetTranslateZ(b_jobj, 56.0f);
-                HSD_JObjSetRotationY(grOnett_GetJObjChild(b_jobj), M_PI);
-                gp->gv.onettcar.state_b = 1;
-                gp->gv.onettcar.timer_b = grOt_804D69C0->x44;
+            case 0:
+                grOnett_StartNextCar(gp);
                 return;
-            }
             case 1: {
                 s32 t = gp->gv.onettcar.timer_b;
                 if (t != 0) {

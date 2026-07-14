@@ -322,13 +322,13 @@ void hsd_803B5EA0(s32 arg0)
 static void fn_803B61B4(u8* arg0)
 {
     f32 scratch_f9;
-    f32 scratch_f10_2;
+    f32 scratch_f10;
     f32 scratch_f11;
-    f32 scratch_f12;
+    s32 scratch_r5_5;
     f32 scratch_f22;
-    f32 scratch_f13;
-    f32 scratch_f13_2;
     f32 scratch_f13_3;
+    f32 scratch_f12;
+    f32 scratch_f13;
     f32 scratch_f31;
     f32 scratch_f25;
     f32 scratch_f25_2;
@@ -338,7 +338,7 @@ static void fn_803B61B4(u8* arg0)
     f32 scratch_f23_2;
     f32 scratch_f24_2;
     f32 scratch_f22_2;
-    f32 scratch_f10;
+    f32 scratch_f10_2;
     s32 scratch_r0;
     s32 scratch_r0_2;
     s32 scratch_r0_3;
@@ -351,7 +351,7 @@ static void fn_803B61B4(u8* arg0)
     s32 scratch_r5_2;
     s32 scratch_r5_3;
     s32 scratch_r5_4;
-    s32 scratch_r5_5;
+    f32 scratch_f13_2;
     s32 scratch_r5_6;
     s32 scratch_r6;
     s32 scratch_r6_2;
@@ -403,7 +403,7 @@ static void fn_803B61B4(u8* arg0)
         work_r4[1] = (s32) (scratch_f24_2 + scratch_f9);
         scratch_f13_3 = -scratch_f22 + scratch_f31;
         scratch_f10_2 = scratch_f10 - scratch_f12_2;
-        work_r4[2] = (s32) (scratch_f25_2 + scratch_f22_2);
+        work_r4[2] = (s32) (scratch_f22_2 + scratch_f25_2);
         work_r4[3] = (s32) (scratch_f10_2 + scratch_f13_3);
         work_r4[4] = (s32) (scratch_f10_2 - scratch_f13_3);
         work_r4[5] = (s32) (scratch_f25_2 - scratch_f22_2);

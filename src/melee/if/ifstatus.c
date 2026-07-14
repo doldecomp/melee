@@ -4,7 +4,7 @@
 #include "m2c_macros.h"
 #include "placeholder.h"
 
-#include "gm/gm_unsplit.h"
+#include "gm/gm_16AE.h"
 #include "gm/types.h"
 #include "if/if_2F72.h"
 #include "if/ifcoget.h"
@@ -30,6 +30,10 @@
 #include <baselib/mtx.h>
 #include <baselib/random.h>
 #include <baselib/tobj.h>
+
+u32 gm_80160854(u8, u8, u8, u8);
+GXColor gm_80160968(u32);
+float gm_80168B34(CharacterKind, int, int);
 
 typedef struct FlagsX {
     u32 b80 : 1;
@@ -321,15 +325,18 @@ static inline void ifStatus_UpdateDamageDisplay(IfDamageState* state,
                 clamped_damage = 0;
             }
             factor = 1.0F - ((f32) clamped_damage / 100.0F);
-            stamina_color->r = (s8) (factor * (f32) ((&ifStatus_804D57AC)[0] -
-                                                   (&ifStatus_804D57A8)[0]) +
-                                   (f32) (&ifStatus_804D57A8)[0]);
-            stamina_color->g = (s8) (factor * (f32) ((&ifStatus_804D57AC)[1] -
-                                                   (&ifStatus_804D57A8)[1]) +
-                                   (f32) (&ifStatus_804D57A8)[1]);
-            stamina_color->b = (s8) (factor * (f32) ((&ifStatus_804D57AC)[2] -
-                                                   (&ifStatus_804D57A8)[2]) +
-                                   (f32) (&ifStatus_804D57A8)[2]);
+            stamina_color->r =
+                (s8) (factor * (f32) ((&ifStatus_804D57AC)[0] -
+                                      (&ifStatus_804D57A8)[0]) +
+                      (f32) (&ifStatus_804D57A8)[0]);
+            stamina_color->g =
+                (s8) (factor * (f32) ((&ifStatus_804D57AC)[1] -
+                                      (&ifStatus_804D57A8)[1]) +
+                      (f32) (&ifStatus_804D57A8)[1]);
+            stamina_color->b =
+                (s8) (factor * (f32) ((&ifStatus_804D57AC)[2] -
+                                      (&ifStatus_804D57A8)[2]) +
+                      (f32) (&ifStatus_804D57A8)[2]);
             stamina_color->a = 255;
             *color = *stamina_color;
         } else {
@@ -340,15 +347,18 @@ static inline void ifStatus_UpdateDamageDisplay(IfDamageState* state,
                 clamped_damage = 0;
             }
             factor = (f32) clamped_damage / 300.0F;
-            normal_color->r = (s8) (factor * (f32) ((&ifStatus_804D57AC)[0] -
-                                                   (&ifStatus_804D57A8)[0]) +
-                                   (f32) (&ifStatus_804D57A8)[0]);
-            normal_color->g = (s8) (factor * (f32) ((&ifStatus_804D57AC)[1] -
-                                                   (&ifStatus_804D57A8)[1]) +
-                                   (f32) (&ifStatus_804D57A8)[1]);
-            normal_color->b = (s8) (factor * (f32) ((&ifStatus_804D57AC)[2] -
-                                                   (&ifStatus_804D57A8)[2]) +
-                                   (f32) (&ifStatus_804D57A8)[2]);
+            normal_color->r =
+                (s8) (factor * (f32) ((&ifStatus_804D57AC)[0] -
+                                      (&ifStatus_804D57A8)[0]) +
+                      (f32) (&ifStatus_804D57A8)[0]);
+            normal_color->g =
+                (s8) (factor * (f32) ((&ifStatus_804D57AC)[1] -
+                                      (&ifStatus_804D57A8)[1]) +
+                      (f32) (&ifStatus_804D57A8)[1]);
+            normal_color->b =
+                (s8) (factor * (f32) ((&ifStatus_804D57AC)[2] -
+                                      (&ifStatus_804D57A8)[2]) +
+                      (f32) (&ifStatus_804D57A8)[2]);
             normal_color->a = 255;
             *color = *normal_color;
         }
@@ -413,15 +423,15 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     HudIndex* hud;
     IfDamageState* state;
     HSD_JObj* jobj;
+    u8 ones_digit;
     HSD_JObj* digit_jobj;
     s32 is_stamina;
-    HSD_TObj* tobj;
+    GXColor color;
     HSD_MObj* mobj;
     HSD_MatAnimJoint** anim_base;
     HSD_MatAnimJoint** digit_anim_base;
     s32 i;
     s32 var_ctr;
-    u8 ones_digit;
     u8 tens_digit;
     u8 hundreds_digit;
     f32 digit_offset;
@@ -431,7 +441,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     f32 pos;
     s16 clamped_damage;
     f32 factor;
-    GXColor color;
+    HSD_TObj* tobj;
     GXColor stamina_color;
     UNUSED u8 color_pad[4];
     GXColor normal_color;
@@ -889,9 +899,9 @@ void ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
     GXColor color;
     Vec3* vec;
     HSD_MObj* mobj;
-    u8 hud_color;
     CharacterKind chara;
     u8 slot;
+    u8 hud_color;
     u8 team;
     HSD_TObj* tobj;
     HudIndex* hud = &ifStatus_HudInfo;

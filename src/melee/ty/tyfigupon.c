@@ -585,8 +585,9 @@ void _tyFigupon_80315C44(HSD_GObj* arg0)
     s32 count;
     s32 anim;
     s32 i;
+    s32 idx;
 
-    PAD_STACK(24);
+    PAD_STACK(16);
 
     if ((ud = arg0->user_data) != NULL) {
         if (ud->x8 != 0) {
@@ -691,7 +692,8 @@ void _tyFigupon_80315C44(HSD_GObj* arg0)
             ud->x14 = i;
             ud->x10 = i;
             do {
-                ((s32*) ud)[i + 4] = total % 10;
+                idx = i + 4;
+                ((s32*) ud)[idx] = total % 10;
                 total /= 10;
                 i++;
             } while (total > 0);

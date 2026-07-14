@@ -1133,8 +1133,8 @@ void mnName_80239878(u8 arg0, HSD_GObj* gobj)
 
 void mnName_80239A24(HSD_GObj* gobj)
 {
-    Vec3 sp6C;
-    GXColor sp60;
+    GXColor text_color;
+    Vec3 text_position;
     HSD_JObj* jobj;
     HSD_JObj* ref_jobj;
     HSD_JObj* ref_jobj2;
@@ -1147,6 +1147,7 @@ void mnName_80239A24(HSD_GObj* gobj)
     f32 row_height;
     f32 text_col_width;
     f32 text_row_height;
+    s32 j;
     s32 i;
     MnNameArchive* archive = &mnName_804A06C0;
     MenuFlow* flow = &mn_804A04F0;
@@ -1186,10 +1187,10 @@ void mnName_80239A24(HSD_GObj* gobj)
     text = HSD_SisLib_803A6754(0, 0);
     data->text = text;
     text_jobj0 = mnName_802388D4_noinline(gobj, 0U);
-    lb_8000B1CC(text_jobj0, mnName_803ED618, &sp6C);
-    text->pos_x = sp6C.x;
-    text->pos_z = sp6C.z;
-    text->pos_y = -sp6C.y;
+    lb_8000B1CC(text_jobj0, mnName_803ED618, &text_position);
+    text->pos_x = text_position.x;
+    text->pos_z = text_position.z;
+    text->pos_y = -text_position.y;
     text->font_size.x = 0.03f;
     text->font_size.y = 0.03f;
     text->text_color = *(GXColor*) &mnName_804D4BE4;
@@ -1201,11 +1202,11 @@ void mnName_80239A24(HSD_GObj* gobj)
     text_row_height = HSD_JObjGetTranslationY(text_jobj0);
     text_row_height = -(HSD_JObjGetTranslationY(text_jobj1) - text_row_height);
 
-    i = 0;
+    j = 0;
     do {
         MnName_GObj* global_data =
             (MnName_GObj*) ((HSD_GObj*) mnName_804D6BF8)->user_data;
-        row = global_data->gobj.gx_link + ((u8) i / 6);
+        row = global_data->gobj.gx_link + ((u8) j / 6);
         count = GetNameCount_noinline();
         if ((count % 6) != 0) {
             extra = 1;
@@ -1216,7 +1217,7 @@ void mnName_80239A24(HSD_GObj* gobj)
         if ((total_rows > 4) && (row >= total_rows)) {
             row -= total_rows;
         }
-        name_idx = mnName_NameDisplayOrder[((u8) i % 6) + (row * 6)];
+        name_idx = mnName_NameDisplayOrder[((u8) j % 6) + (row * 6)];
         {
             s32 is_valid;
             if ((s8) (u8) mnName_StringTerminator ==
@@ -1244,23 +1245,23 @@ void mnName_80239A24(HSD_GObj* gobj)
                 }
                 {
                     f32 font_x = text->font_size.x;
-                    f32 x = (f32) (i / 6) * text_col_width;
+                    f32 x = (f32) (j / 6) * text_col_width;
                     HSD_SisLib_803A6B98(text, x / font_x,
-                                        ((f32) (i % 6) * text_row_height) /
+                                        ((f32) (j % 6) * text_row_height) /
                                             text->font_size.y,
                                         namedata);
                 }
                 {
                     GXColor* color;
-                    if ((s32) i == (s32) mn_804A04F0.hovered_selection) {
+                    if ((s32) j == (s32) mn_804A04F0.hovered_selection) {
                         color = &mnName_804D4BE0;
                     } else {
                         color = &mnName_804D4BE4;
                     }
-                    sp60 = *color;
+                    text_color = *color;
                     {
-                        GXColor* color_dst = &sp60;
-                        HSD_SisLib_803A74F0(text, (s32) i, color_dst);
+                        GXColor* color_dst = &text_color;
+                        HSD_SisLib_803A74F0(text, (s32) j, color_dst);
                     }
                 }
             } else {
@@ -1268,8 +1269,8 @@ void mnName_80239A24(HSD_GObj* gobj)
                                     &mnName_StringTerminator);
             }
         }
-        i++;
-    } while ((s32) i < 0x18);
+        j++;
+    } while ((s32) j < 0x18);
 }
 
 void mnName_80239EBC(HSD_JObj* jobj, f32 y)

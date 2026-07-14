@@ -654,9 +654,9 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
     }
 }
 
-static inline float lbColl_Dot2(float ay, float by, float bx, float ax)
+static inline float lbColl_Dot2(float ax, float ay, float bx, float by)
 {
-    return ax * bx + by * ay;
+    return ax * bx + ay * by;
 }
 
 static inline float lbColl_GetY(Vec3* v)
@@ -777,8 +777,8 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                         diff_dc_x = d_x - c1.x;
 
                         dot2_diff_ba_dc =
-                            lbColl_Dot2(diff_ba_y, diff_dc_y, diff_dc_x,
-                                        diff_ba_x);
+                            lbColl_Dot2(diff_ba_x, diff_ba_y, diff_dc_x,
+                                        diff_dc_y);
 
                         sqdist2_dc =
                             diff_dc_x * diff_dc_x + diff_dc_y * diff_dc_y;
@@ -1043,7 +1043,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float allowed_distance;
     float hurt_closest_x;
     float hurt_closest_y;
-    float hurt_closest_z;
+    float hurt_end_x;
     float hit_start_mid_y;
     float hit_param_candidate;
     float closest_delta_y;
@@ -1076,7 +1076,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float hit_end_y;
     float hit_start_max_z;
     float hit_start_min_z;
-    float hurt_end_x;
+    float hurt_closest_z;
     float hit_end_z;
     float segment_dot;
     float hurt_end_y;
@@ -1204,8 +1204,8 @@ block_39:
     hurt_end_z = hurt_end->z;
     (void) hurt_end_z;
     start_delta_x = hit_start_copy.x - hurt_start_copy.x;
-    hurt_delta_z = hurt_end_z - hurt_start_copy.z;
     segment_dot = (hit_delta.x * hurt_delta_x) + segment_dot;
+    hurt_delta_z = hurt_end_z - hurt_start_copy.z;
     /* Cache 1.0 constant in a callee-save to avoid reloading it across the
      * several `hit_param = 1.0` / `hurt_param = 1.0` branches below. The
      * variable name is a borrow from the unused-after-broadphase-rejection

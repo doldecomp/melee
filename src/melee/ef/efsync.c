@@ -222,8 +222,7 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
             jobj_1 = gobj->hsd_obj;
             (void) jobj_1;
             HSD_JObjGetScale(jobj_1, &scale);
-            jobj_2 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            HSD_JObjSetScale(jobj_2, &scale);
+            HSD_JObjSetScale(GET_JOBJ(((EF_Effect*) ret_obj)->gobj), &scale);
             ((EF_Effect*) ret_obj)->update = efLib_Cb_SetRotY_FromFighterDir;
         }
         break;
@@ -342,7 +341,8 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
             }
             va_f32_1 = half_pi;
             ret_eff = ret_obj;
-            HSD_JObjSetRotationY(GET_JOBJ(ret_eff->gobj), va_f32_1);
+            jobj_2 = GET_JOBJ(ret_eff->gobj);
+            HSD_JObjSetRotationY(jobj_2, va_f32_1);
             jobj_2 = GET_JOBJ(gobj);
             HSD_JObjGetScale(jobj_2, &scale_6);
             jobj_1 = GET_JOBJ(ret_eff->gobj);

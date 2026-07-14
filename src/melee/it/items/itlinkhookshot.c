@@ -1755,13 +1755,9 @@ void it_802A6474(ItemLink* link_0, ItemLink* link_1, Vec3* pos,
     target_dy = pos->y - cur_link->pos.y;
     target_dx = pos->x;
     target_dx -= cur_link->pos.x;
-    target_dz = it_802A6474_GetZDelta(cur_link, pos);
-    target_len = (target_dx * target_dx) + (target_dy * target_dy);
-    target_len = (target_dz * target_dz) + target_len;
-    if (target_len > 0.0f) {
-        target_len_tmp = my_sqrt(target_len);
-        target_len = target_len_tmp;
-    }
+    target_dz = pos->z - cur_link->pos.z;
+    target_len = sqrtf(target_dx * target_dx + target_dy * target_dy +
+                       target_dz * target_dz);
     if (0.0 == target_len) {
         inv_target_len = 0.0f;
     } else {
@@ -1773,7 +1769,7 @@ void it_802A6474(ItemLink* link_0, ItemLink* link_1, Vec3* pos,
     target_dz *= inv_target_len;
     if (target_len > max_len) {
         pos->x = (target_dx * max_len) + cur_link->pos.x;
-        pos->y = (attrs->x30 * target_dy) + cur_link->pos.y;
+        pos->y = (target_dy * attrs->x30) + cur_link->pos.y;
         pos->z = (target_dz * attrs->x30) + cur_link->pos.z;
     }
 }

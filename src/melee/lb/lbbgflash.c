@@ -715,6 +715,11 @@ typedef struct IKChainData {
     /* 0x4C */ f32 len1;
 } IKChainData;
 
+static inline f32 calc_acos(f32 value)
+{
+    return acosf(value);
+}
+
 void lbBgFlash_80021410(void* arg0)
 {
     IKChainData* data = arg0;
@@ -919,8 +924,8 @@ void lbBgFlash_80021410(void* arg0)
         cos2 = -1.0f;
     }
 
-    acos1 = acosf(cos1);
-    acos2 = acosf(cos2);
+    acos1 = calc_acos(cos1);
+    acos2 = calc_acos(cos2);
     rem = 3.141592653589793 - (f64) acos2;
     if (rem < 0.1745329201221466) {
         acos2 =

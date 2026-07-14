@@ -144,8 +144,8 @@ static inline f32 get_scale(Fighter* fp)
 
 int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
 {
-    u8 operand_pad[8];
     ftCo_AttackEntry sp3C[32];
+    u8 operand_pad[8];
     ftCo_AttackEntry* list = arg2;
     ftCo_AttackEntry* sel;
     struct Fighter_x1A88_t* cpu = &fp->x1A88;
@@ -498,7 +498,7 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
             dirx = list->x08 * fp->x34_scale.y;
             diry = list->x0C * fp->x34_scale.y + reach;
         } else {
-            dirx = -list->x0C * fp->x34_scale.y - reach;
+            dirx = fp->x34_scale.y * -list->x0C - reach;
             diry = fp->x34_scale.y * -list->x08;
         }
         dirx *= halfRange;
@@ -588,8 +588,8 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
     f32 x50Vy;
     f32 x50Vx;
     f32 x50TermNeg;
-    f32 x50Grav;
     f32 sizeHalf;
+    f32 x50Grav;
     f32 yBound;
 
     cpu = &fp->x1A88;

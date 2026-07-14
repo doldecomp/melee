@@ -167,10 +167,11 @@ void ftCo_80097AF4(Fighter_GObj* gobj)
     Fighter* fp = gobj->user_data;
     float rot0;
     float rot1;
+    float param_else;
+    float param_then;
 
     jobj = fp->parts[ftParts_GetBoneIndex(fp, FtPart_HipN)].joint;
     HSD_JObjSetupMatrix(jobj);
-    PAD_STACK(56);
     if (fp->x2226_b0) {
         rot0 = jobj->mtx[0][2];
         rot1 = jobj->mtx[1][2];
@@ -192,14 +193,14 @@ void ftCo_80097AF4(Fighter_GObj* gobj)
                 gobj, b ? ftCo_MS_DownBoundU : ftCo_MS_DownBoundD,
                 Ft_MF_SkipNametagVis | Ft_MF_KeepColAnimPartHitStatus, 0, 1,
                 0, NULL);
-            ftCo_800978D4(gobj);
+            ftCo_800978D4_inline(gobj, &param_then);
             fp->x67C = 255;
             fp->x67D = 255;
             ftCommon_8007E2F4(fp, 511);
         }
         ftCommon_8007CCE8(fp);
     } else {
-        ftCo_800978D4(gobj);
+        ftCo_800978D4_inline(gobj, &param_else);
         Camera_80030E44(4, &fp->cur_pos);
         if (fp->facing_dir * rot0 > 0) {
             ft_8008A2BC(gobj);
@@ -208,6 +209,7 @@ void ftCo_80097AF4(Fighter_GObj* gobj)
         }
         ftCommon_8007CCE8(fp);
     }
+    PAD_STACK(52);
 }
 
 static void inlineA1(Fighter_GObj* gobj)

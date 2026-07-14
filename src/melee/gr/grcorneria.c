@@ -378,6 +378,7 @@ static inline u32 grCn_PickUniqueType(s32 slot, int range, int base)
 
 void grCorneria_801DCE1C(void)
 {
+    grCn_Data* data = (grCn_Data*) grCn_803E1D38;
     Vec3 pos;
     int far;
     int type_id;
@@ -432,12 +433,14 @@ void grCorneria_801DCE1C(void)
                     grCn_804D69A8--;
                     if (grCn_804D69A8 <= 0) {
                         bool has_near = false;
+                        s32* arwing_type = data->arwing_type;
+                        int i;
 
-                        for (far = 0; far < 3; far++) {
-                            if (far == count) {
+                        for (i = 0; i < 3; i++, arwing_type++) {
+                            if (i == count) {
                                 continue;
                             }
-                            switch (grCn_803E1D68.arwing_type[far]) {
+                            switch (*arwing_type) {
                             case 1:
                             case 2:
                             case 3:
@@ -447,7 +450,7 @@ void grCorneria_801DCE1C(void)
                             case 7:
                             case 8:
                             case 9:
-                                if (grCn_803E1D68.arwing_gobj[far] != NULL) {
+                                if (grCn_803E1D68.arwing_gobj[i] != NULL) {
                                     has_near = true;
                                 }
                             }
@@ -1216,8 +1219,10 @@ void grCorneria_801DED50(Ground_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Vec3 pos = grCn_803B80B4;
     Vec3 arwing_pos;
+    Ground* ship_gp;
+    Ground* arwing_gp;
     grCn_Data* data = (grCn_Data*) grCn_803E1D38;
-    PAD_STACK(8);
+    PAD_STACK(12);
 
     if (grCn_804D69AC) {
         return;
@@ -1290,8 +1295,8 @@ void grCorneria_801DED50(Ground_GObj* gobj)
             {
                 HSD_GObj* arwing;
                 if ((arwing = data->arwing_gobj[gp->gv.corneria2.xC8])) {
-                    Ground* arwing_gp = GET_GROUND(arwing);
-                    Ground* ship_gp = GET_GROUND(Ground_801C2BA4(3));
+                    arwing_gp = GET_GROUND(arwing);
+                    ship_gp = GET_GROUND(Ground_801C2BA4(3));
                     lb_8000B1CC(Ground_801C3FA4(arwing, 4), NULL,
                                 &arwing_pos);
                     {
@@ -1415,8 +1420,8 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                 HSD_GObj* arwing;
                 if ((arwing = data->arwing_gobj[gp->gv.corneria2.xC8]))
                 {
-                    Ground* arwing_gp = GET_GROUND(arwing);
-                    Ground* ship_gp = GET_GROUND(Ground_801C2BA4(3));
+                    arwing_gp = GET_GROUND(arwing);
+                    ship_gp = GET_GROUND(Ground_801C2BA4(3));
                     lb_8000B1CC(Ground_801C3FA4(arwing, 4), NULL,
                                 &arwing_pos);
                     {

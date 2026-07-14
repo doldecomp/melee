@@ -3691,8 +3691,9 @@ static GXColor mnCharSel_804DC564 = { 100, 100, 100, 255 };
 
 void fn_802633B0(HSD_GObj* gobj)
 {
-    HSD_JObj* arrow_jobj;
     HSD_JObj* list_jobj;
+    HSD_JObj* arrow_jobj;
+    HSD_JObj* handicap_slider_jobj;
     GXColor white;
     GXColor gray;
     HSD_JObj* list_origin_jobj;
@@ -3701,7 +3702,6 @@ void fn_802633B0(HSD_GObj* gobj)
     GXColor row_color;
     GXColor used_row_color;
     GXColor white_copy;
-    HSD_JObj* handicap_slider_jobj;
     CSSTagData* tag;
     int port;
     s32 num_entries;
@@ -3981,8 +3981,8 @@ void fn_802633B0(HSD_GObj* gobj)
                     }
                     mnCharSel_804D6CF6 = 4;
                     {
-                        struct CSSCursorData** cursor_ptr;
                         s32 k;
+                        struct CSSCursorData** cursor_ptr;
                         cursor_ptr = mnCharSel_804A0BC0;
                         for (k = 0; k < (s32) mnCharSel_804D6CF5; k++) {
                             if (((u8) (*cursor_ptr)->x5 == 1) &&
@@ -4067,7 +4067,7 @@ void fn_802633B0(HSD_GObj* gobj)
         {
             {
                 u8 port2;
-                s32 hval;
+                u8 hval;
                 f32 hval_f;
                 port2 = tag->port;
                 if ((u8) gmMainLib_8015CC34()->handicap == 1) {
@@ -4078,10 +4078,7 @@ void fn_802633B0(HSD_GObj* gobj)
                     hval = (u8) mnCharSel_804D6CB0->data.data.players[port2]
                                .handicap;
                 }
-                if ((s32) hval != 0) {
-                } else {
-                    hval = 1;
-                }
+                hval = hval != 0 ? hval : 1;
                 hval_f = (f32) hval;
                 lb_80011E24(mnCharSel_804D6CC0, &handicap_slider_jobj,
                             mnCharSel_803F0DFC.doors[port].cpuslider_joint,
@@ -4106,10 +4103,7 @@ void fn_802633B0(HSD_GObj* gobj)
                             (u8) mnCharSel_804D6CB0->data.data.players[port3]
                                 .handicap;
                     }
-                    if ((s32) hval2 != 0) {
-                    } else {
-                        hval2 = 1;
-                    }
+                    hval2 = hval2 != 0 ? hval2 : 1;
                     hval_f = 1.25f * (f32) (hval2 - 1);
                     HSD_JObjSetTranslateX(list_jobj, hval_f);
                 }

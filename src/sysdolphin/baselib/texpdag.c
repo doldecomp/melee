@@ -162,6 +162,7 @@ int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list)
     HSD_TExp* sp94[HSD_TEXP_MAX_NUM];
     int j;
     int sp14[32];
+    HSD_TExp** base;
     int num;
     int i;
     int k;
@@ -171,10 +172,11 @@ int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list)
 
     HSD_ASSERT(0xEE, HSD_TExpGetType(root) == HSD_TE_TEV);
 
+    base = sp94;
     num = 0;
-    sp94[num++] = root;
+    base[num++] = root;
     {
-        HSD_TExp** p = sp94;
+        HSD_TExp** p = base;
         for (j = 0; j < num; p++, j++) {
             HSD_TExp* tmp;
             HSD_ASSERT(0xF6, j<HSD_TEXP_MAX_NUM);
@@ -182,12 +184,12 @@ int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list)
             for (i = 0; i < 4; i++) {
                 if (tmp->tev.c_in[i].type == HSD_TE_TEV) {
                     for (k = 0; k < num; k++) {
-                        if (sp94[k] == tmp->tev.c_in[i].exp) {
+                        if (base[k] == tmp->tev.c_in[i].exp) {
                             break;
                         }
                     }
                     if (k >= num) {
-                        sp94[num++] = tmp->tev.c_in[i].exp;
+                        base[num++] = tmp->tev.c_in[i].exp;
                     }
                 }
             }
@@ -195,12 +197,12 @@ int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list)
             for (i = 0; i < 4; i++) {
                 if (tmp->tev.a_in[i].type == HSD_TE_TEV) {
                     for (k = 0; k < num; k++) {
-                        if (sp94[k] == tmp->tev.a_in[i].exp) {
+                        if (base[k] == tmp->tev.a_in[i].exp) {
                             break;
                         }
                     }
                     if (k >= num) {
-                        sp94[num++] = tmp->tev.a_in[i].exp;
+                        base[num++] = tmp->tev.a_in[i].exp;
                     }
                 }
             }

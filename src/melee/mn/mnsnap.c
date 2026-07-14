@@ -306,9 +306,9 @@ void mnSnap_80253640(s32 page)
     s32* p52;
     s32* p4F;
     s32* p50;
-    s32 count;
     s32* p58;
     s32* p51;
+    s32 count;
     s32* p48;
     s32 i;
     f32 t;
@@ -318,7 +318,7 @@ void mnSnap_80253640(s32 page)
     p48 = &snap->photo_count[0];
     p4F = mnSnap_GetCurPage(snap);
     p50 = &snap->active_slot;
-    (void) p48;
+    (void) p50;
     *p4F = page;
     count = p48[*p50] - (page * 4);
     if (count > 4) {
@@ -706,17 +706,17 @@ void mnSnap_8025409C(s32 dlg_type)
 static inline void mnSnap_RefreshSlotSelection(mnSnap_State* snap, s32* p50,
                                                 s32* p51)
 {
-    s32 i;
-
     mnSnap_80253964();
     mnSnap_80253E90(0);
     mnSnap_80253E90(1);
 
     {
         /* walk strides through card_status (s16 at byte 0x128) */
+        s32 i;
+        s16* walk;
         s32 byte_off;
-        s16* walk = (s16*) snap;
 
+        walk = (s16*) snap;
         i = 0;
         byte_off = 4;
         for (; i < 2; i++, walk++, byte_off += 8) {

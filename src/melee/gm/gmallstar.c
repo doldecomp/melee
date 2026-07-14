@@ -748,6 +748,8 @@ static inline void gmAllStarRandomizeOpponents(gm_803DEBE8_t* tmp)
     gm_803DEBE8_t* table;
     gm_803DEBE8_t* current;
 
+    if (tmp == NULL) {
+    }
     current = table = gm_803DEBE8;
     for (index = 0; index < 25; index++) {
         current->x2 = *((&current->x0) + HSD_Randi(2));

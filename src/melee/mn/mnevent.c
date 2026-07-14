@@ -139,8 +139,8 @@ static inline void mnEvent_CreateIcon(s32 idx, MnEventData* data,
     if (is_unlocked != 0) {
         HSD_GObj* icon_gobj;
 
-        tree = mnEvent_804D6C60->hsd_obj;
         assets = mnEvent_804A08F8;
+        tree = mnEvent_804D6C60->hsd_obj;
         lb_80011E24(tree, &jobj_0A, 0xA, -1);
         lb_80011E24(tree, &jobj_0C, 0xC, -1);
         icon_spacing = HSD_JObjGetTranslationY(jobj_0A);

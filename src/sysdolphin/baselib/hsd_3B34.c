@@ -313,7 +313,7 @@ static void fn_803B376C(u8* arg0)
 {
     f32 scratch_f4;
     f32 scratch_f11_2;
-    f32 scratch_f11_3;
+    f32 scratch_f8_2;
     f32 scratch_f11_4;
     f32 scratch_f11_5;
     f32 scratch_f11_6;
@@ -325,7 +325,7 @@ static void fn_803B376C(u8* arg0)
     f32 scratch_f27_6;
     f32 scratch_f30_4;
     f32 scratch_f28;
-    f32 scratch_f28_2;
+    f32 scratch_f11_3;
     f32 scratch_f28_3;
     f32 scratch_f28_4;
     f32 scratch_f28_5;
@@ -342,7 +342,7 @@ static void fn_803B376C(u8* arg0)
     f32 scratch_f27_2;
     f32 scratch_f6_2;
     f32 scratch_f8;
-    f32 scratch_f8_2;
+    f32 scratch_f28_2;
     f32 scratch_f8_3;
     f32 scratch_f27_5;
     f32 scratch_f27_4;
@@ -400,7 +400,7 @@ static void fn_803B376C(u8* arg0)
                             (0.92388 * (f64) scratch_f26));
         scratch_f11_3 = (f32) (0.707107 * (f64) (scratch_f8 + scratch_f11_2));
         scratch_f8_2 = (f32) (0.707107 * (f64) (scratch_f8 - scratch_f11_2));
-        scratch_f30_2 = scratch_f28_2 + scratch_f11_3;
+        scratch_f30_2 = scratch_f11_3 + scratch_f28_2;
         scratch_f26_2 = -scratch_f27_3 + scratch_f8_2;
         scratch_f28_3 = -scratch_f11_3 + scratch_f28_2;
         scratch_f27_4 = scratch_f8_2 + scratch_f27_3;
@@ -486,6 +486,16 @@ static void fn_803B376C(u8* arg0)
     } while (work_ctr_3 != 0);
 }
 
+static inline s32 hsd_803B3CD8_dec(s32 value)
+{
+    return value - 1;
+}
+
+static inline void hsd_803B3CD8_select_dc_table(s32 component, u16** table)
+{
+    *table = component == 0 ? lbl_80431678 : lbl_8043169C;
+}
+
 void hsd_803B3CD8(s32 arg0)
 {
     typedef union JpegWork {
@@ -568,7 +578,7 @@ void hsd_803B3CD8(s32 arg0)
     u16* work_r27;
 
     PAD_STACK(0x20);
-    work_r6 = (arg0 == 0) ? lbl_80431678 : lbl_8043169C;
+    hsd_803B3CD8_select_dc_table(arg0, &work_r6);
     work = (JpegWork*) &hsd_804D2648;
     work_r7 = (arg0 == 0) ? lbl_80431690 : lbl_804316B4;
     work_r27 =
@@ -814,7 +824,7 @@ loop_13:
                     work_r28_4 = scratch_r4_18 + 1;
                     goto loop_112;
                 }
-                scratch_r4_19 = scratch_r4_18 - 1;
+                scratch_r4_19 = hsd_803B3CD8_dec(scratch_r4_18);
                 if (scratch_r5_9 & (1 << scratch_r4_19)) {
                     work_r28_4 = scratch_r4_19 + 1;
                     goto loop_112;

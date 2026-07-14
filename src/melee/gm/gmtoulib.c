@@ -886,10 +886,10 @@ void fn_8018C8D4(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
     BracketEntry* data = (BracketEntry*) arg0;
     f32 thickness;
     f32 neg_thickness;
-    s32 half, center, right, left;
+    GXColor c0, c1, c2, c3, c4, c5, c6, c7, c8, c9;
     s32 half_h, third_h;
     s32 mid_y, bot_y, two_third_y;
-    GXColor c0, c1, c2, c3, c4, c5, c6, c7, c8, c9;
+    s32 half, center, right, left;
     GXColor c10, c11, c12, c13, c14, c15, c16, c17, c18, c19;
     GXColor c20, c21, c22, c23, c24, c25, c26, c27, c28, c29;
     GXColor c30, c31;
@@ -954,8 +954,8 @@ void fn_8018C8D4(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
         }
 
         neg_thickness = -thickness;
-        mid_y = arg2 + half_h;
         left = arg1 + 0x2B;
+        mid_y = arg2 + half_h;
         c7 = c0;
         {
             GXColor* color = &c7;
@@ -1420,9 +1420,9 @@ void fn_8018DF68(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                  s32 arg6, f32 farg0)
 {
     GXColor right_color;
-    GXColor first_color;
-    GXColor line_color;
     GXColor left_third_color;
+    GXColor line_color;
+    GXColor first_color;
     GXColor slot3_vertical_color;
     GXColor slot0_horizontal_color;
     GXColor right_third_color;
@@ -1521,8 +1521,9 @@ void fn_8018DF68(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
         slot3_horizontal_color = ((BracketEntry*) arg0)->x20;
         {
             f32 y = (f32) arg5;
+            GXColor* color = &slot3_horizontal_color;
             DrawRectangle((f32) (arg1 + half), y, (f32) half + thickness,
-                          neg_thickness, &slot3_horizontal_color);
+                          neg_thickness, color);
         }
     }
 }

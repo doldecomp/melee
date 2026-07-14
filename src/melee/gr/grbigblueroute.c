@@ -32,6 +32,31 @@
 #include <baselib/random.h>
 #include <baselib/spline.h>
 
+static void sdata2_order(void)
+{
+    (void) 30.0f;
+    (void) 4000.0f;
+    (void) 0.0f;
+    (void) 1.0f;
+    (void) 0.5f;
+    (void) 5.23598766f;
+    (void) 2.61799383f;
+    (void) S32_TO_F32;
+    (void) 1.57079637f;
+    (void) 45.0f;
+    (void) 0.00999999978f;
+    (void) 0.966000021f;
+    (void) 0.0174532924f;
+    (void) 0.967000008f;
+    (void) 260.0f;
+    (void) 100.0f;
+    (void) -1.0f;
+    (void) -1140.0f;
+    (void) 20.0f;
+    (void) 250.0f;
+    (void) -3.0f;
+}
+
 void grBigBlue_801E8D04(Ground_GObj*);
 
 StageCallbacks grBb_Route_803E5E78[38] = {
@@ -288,7 +313,7 @@ void grBigBlueRoute_8020BC68(Ground_GObj* gobj)
 {
     Vec3 origin;
     Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj;
+    HSD_JObj* reb0_jobj;
 
     grAnime_801C8138(gobj, gp->map_id, 0);
     gp->x8_callback = NULL;
@@ -297,38 +322,38 @@ void grBigBlueRoute_8020BC68(Ground_GObj* gobj)
     gp->gv.bigblueroute2.xC8 = 0;
 
     if (Ground_801C2D24(148, &origin)) {
-        jobj = Ground_801C2CF4(127);
-        gp->gv.bigblueroute2.tracks[0].jobj = jobj;
-        if (jobj != NULL) {
-            jobj = gp->gv.bigblueroute2.tracks[0].jobj;
-            HSD_JObjGetTranslation(jobj,
+        reb0_jobj = Ground_801C2CF4(127);
+        gp->gv.bigblueroute2.tracks[0].jobj = reb0_jobj;
+        if (reb0_jobj != NULL) {
+            reb0_jobj = gp->gv.bigblueroute2.tracks[0].jobj;
+            HSD_JObjGetTranslation(reb0_jobj,
                                    &gp->gv.bigblueroute2.tracks[0].offset);
             lbVector_Sub(&gp->gv.bigblueroute2.tracks[0].offset, &origin);
         }
 
-        jobj = Ground_801C2CF4(128);
-        gp->gv.bigblueroute2.tracks[1].jobj = jobj;
-        if (jobj != NULL) {
-            jobj = gp->gv.bigblueroute2.tracks[1].jobj;
-            HSD_JObjGetTranslation(jobj,
+        reb0_jobj = Ground_801C2CF4(128);
+        gp->gv.bigblueroute2.tracks[1].jobj = reb0_jobj;
+        if (reb0_jobj != NULL) {
+            reb0_jobj = gp->gv.bigblueroute2.tracks[1].jobj;
+            HSD_JObjGetTranslation(reb0_jobj,
                                    &gp->gv.bigblueroute2.tracks[1].offset);
             lbVector_Sub(&gp->gv.bigblueroute2.tracks[1].offset, &origin);
         }
 
-        jobj = Ground_801C2CF4(129);
-        gp->gv.bigblueroute2.tracks[2].jobj = jobj;
-        if (jobj != NULL) {
-            jobj = gp->gv.bigblueroute2.tracks[2].jobj;
-            HSD_JObjGetTranslation(jobj,
+        reb0_jobj = Ground_801C2CF4(129);
+        gp->gv.bigblueroute2.tracks[2].jobj = reb0_jobj;
+        if (reb0_jobj != NULL) {
+            reb0_jobj = gp->gv.bigblueroute2.tracks[2].jobj;
+            HSD_JObjGetTranslation(reb0_jobj,
                                    &gp->gv.bigblueroute2.tracks[2].offset);
             lbVector_Sub(&gp->gv.bigblueroute2.tracks[2].offset, &origin);
         }
 
-        jobj = Ground_801C2CF4(130);
-        gp->gv.bigblueroute2.tracks[3].jobj = jobj;
-        if (jobj != NULL) {
-            jobj = gp->gv.bigblueroute2.tracks[3].jobj;
-            HSD_JObjGetTranslation(jobj,
+        reb0_jobj = Ground_801C2CF4(130);
+        gp->gv.bigblueroute2.tracks[3].jobj = reb0_jobj;
+        if (reb0_jobj != NULL) {
+            reb0_jobj = gp->gv.bigblueroute2.tracks[3].jobj;
+            HSD_JObjGetTranslation(reb0_jobj,
                                    &gp->gv.bigblueroute2.tracks[3].offset);
             lbVector_Sub(&gp->gv.bigblueroute2.tracks[3].offset, &origin);
         }
@@ -339,9 +364,9 @@ void grBigBlueRoute_8020BC68(Ground_GObj* gobj)
         gp->gv.bigblueroute2.tracks[3].jobj = NULL;
     }
 
-    jobj = Ground_801C2CF4(4);
-    HSD_ASSERT(452, jobj != NULL);
-    HSD_JObjGetTranslation(jobj, &gp->gv.bigblueroute2.xCC);
+    reb0_jobj = Ground_801C2CF4(4);
+    HSD_ASSERT(452, reb0_jobj);
+    HSD_JObjGetTranslation(reb0_jobj, &gp->gv.bigblueroute2.xCC);
     Ground_801C10B8(gobj, grBigBlueRoute_8020BC34);
 }
 
@@ -406,13 +431,17 @@ void grBigBlueRoute_8020BF38(Ground_GObj* gobj)
 
 void grBigBlueRoute_8020C13C(Ground_GObj* arg) {}
 
-extern u8 grBb_Route_803E6200[0x3C];
+static s16 grBb_Route_carJObjIds[30] = {
+    4,  5,  6,  8,  9,  10, 11, 12, 13, 14, 3,
+    15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+    26, 27, 28, 29, 34, 35, 36, 37,
+};
 
 void grBigBlueRoute_8020C140(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
 
-    grFZeroCar_801CAFBC(gobj, grBb_Route_803E6200, 30, 0);
+    grFZeroCar_801CAFBC(gobj, grBb_Route_carJObjIds, 30, 0);
     gp->u.car.xCC = (HSD_Spline*) Ground_801C247C(33, 1);
     gp->u.car.xD0 = (HSD_Spline*) Ground_801C247C(33, 0);
     gp->u.car.xD4 = (HSD_Spline*) Ground_801C247C(33, 2);
@@ -536,18 +565,18 @@ s32 grBigBlueRoute_8020C530(Ground_GObj* arg0)
 
 /// @todo Register allocation and addressing-mode choices for RouteEntry
 /// stores.
-static inline void grBigBlueRoute_SpawnRoute(Ground* gp, Ground_GObj* gobj)
+static inline void grBigBlueRoute_SpawnRoute(s32 route_idx, Ground* gp,
+                                              Ground_GObj* gobj)
 {
-    s32 route_idx;
     PAD_STACK(8);
 
-    if (gp->u.car.x108 == 0) {
+    if (route_idx == 0) {
         route_idx = 30;
         ((RouteEntry*) gp->u.car.car_info)[30].flags.b1 = 1;
         gp->u.car.x10A = grBb_Route_804D6A68->x4C;
     } else {
-        s32 min_val;
         s32 max_val;
+        s32 min_val;
         s32 new_timer;
 
         route_idx = grBigBlueRoute_8020C530(gobj);
@@ -605,6 +634,7 @@ static inline void grBigBlueRoute_SpawnRoute(Ground* gp, Ground_GObj* gobj)
         {
             f32 rand = HSD_Randf();
             re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
+            (void) re;
             re->x20 = 5.2359877f * rand - 2.6179938f;
         }
 
@@ -612,10 +642,10 @@ static inline void grBigBlueRoute_SpawnRoute(Ground* gp, Ground_GObj* gobj)
             HSD_JObj* root = gobj->hsd_obj;
             if (root != NULL) {
                 HSD_JObj* jobj;
-                if (root != NULL) {
-                    jobj = root->child;
-                } else {
+                if (root == NULL) {
                     jobj = NULL;
+                } else {
+                    jobj = root->child;
                 }
 
                 if (jobj != NULL) {
@@ -673,12 +703,11 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
         return;
     }
 
-    grBigBlueRoute_SpawnRoute(gp, gobj);
+    grBigBlueRoute_SpawnRoute(gp->u.car.x108, gp, gobj);
 }
 
 static const Vec3 grBb_Route_803B83E0 = { 0.0f, 1.0f, 0.0f };
 
-/// @todo FPR allocation differs in case 3.
 #define RE_ENTRY (&((RouteEntry*) gp->u.car.car_info)[i])
 void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
 {
@@ -720,6 +749,8 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
     Vec3 c3_road_tan;
     Vec3 c3_p1;
     Vec3 c3_p0;
+    f32 t;
+    f32 frac;
     UNUSED u8 pad3[20];
 
     fighter = Ground_801C57A4();
@@ -898,8 +929,7 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
             case 3: {
                 f32 prog;
                 f32 angle;
-                f32 t;
-                f32 frac;
+                f32 road_t;
 
                 (void) t;
                 prog = ((t = RE_ENTRY->x14) - RE_ENTRY->x24) /
@@ -924,11 +954,11 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
                 }
                 lbVector_Add(&c3_air, &c3_up);
 
-                t = RE_ENTRY->x4;
+                road_t = RE_ENTRY->x4;
                 frac = RE_ENTRY->xC;
-                splGetSplinePoint(&c3_p0, gp->u.car.xD0, t);
-                splGetSplinePoint(&c3_p1, gp->u.car.xD4, t);
-                lbShadow_8000E9F0(&c3_road_tan, gp->u.car.xD0, t);
+                splGetSplinePoint(&c3_p0, gp->u.car.xD0, road_t);
+                splGetSplinePoint(&c3_p1, gp->u.car.xD4, road_t);
+                lbShadow_8000E9F0(&c3_road_tan, gp->u.car.xD0, road_t);
                 lbVector_Diff(&c3_p1, &c3_p0, &c3_road);
                 c3_road.x *= frac;
                 c3_road.y *= frac;

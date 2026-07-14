@@ -782,7 +782,6 @@ static inline void gmMainLib_AdjustConfigNameTag(
 s32 gmMainLib_8015DBF4(s32 arg0)
 {
     extern VsModeData gm_80497618;
-    struct gmm_x0* load_gmm;
     struct gmm_x0_528_t* config;
     struct gmMainLib_8015DBF4_config {
         struct gmm_x0_528_t unk_51C;
@@ -790,9 +789,24 @@ s32 gmMainLib_8015DBF4(s32 arg0)
         struct gmm_x0_528_t unk_528;
         struct EventData unk_530;
     }* config_all;
+    struct gmMainLib_8015DBF4_base {
+        u8 pad_0[8];
+        VsModeData unk_590;
+        VsModeData unk_6D0;
+        VsModeData unk_810;
+        VsModeData unk_950;
+        VsModeData unk_A90;
+        VsModeData unk_BD0;
+        VsModeData unk_D10;
+        VsModeData unk_E50;
+        VsModeData unk_F90;
+        VsModeData unk_10D0;
+        VsModeData unk_1210;
+        VsModeData unk_1350;
+        VsModeData unk_1490;
+    }* base;
     GameRules* gr;
     s32 j;
-    s8* base;
     u8 val;
     u8* ptr;
 
@@ -816,27 +830,6 @@ s32 gmMainLib_8015DBF4(s32 arg0)
         }                                                                     \
     } while (0)
 
-#define ADJ_NAMETAG_STANDALONE_PAIR(field, store_field)                       \
-    do {                                                                      \
-        ptr = &(store_field);                                                 \
-        val = (field);                                                        \
-        if (val == (u8) arg0) {                                               \
-            *ptr = 0x78;                                                      \
-        } else if (val > (u8) arg0 && val != 0x78) {                          \
-            *ptr = val - 1;                                                   \
-        }                                                                     \
-    } while (0)
-
-#define ADJ_NAMETAG_PRELOADED(store_field)                                    \
-    do {                                                                      \
-        ptr = &(store_field);                                                 \
-        if (val == (u8) arg0) {                                               \
-            *ptr = 0x78;                                                      \
-        } else if (val > (u8) arg0 && val != 0x78) {                          \
-            *ptr = val - 1;                                                   \
-        }                                                                     \
-    } while (0)
-
 #define ADJ_VMD(load_vmd_expr, store_vmd_expr)                                \
     do {                                                                      \
         VsModeData* store_vmd = (store_vmd_expr);                             \
@@ -855,12 +848,17 @@ s32 gmMainLib_8015DBF4(s32 arg0)
         }                                                                     \
     } while (0)
 
-    val = gmMainLib_804D3EE0->unk_51C.x4;
-    load_gmm = gmMainLib_804D3EE0;
-    config = &load_gmm->unk_51C;
+    config = &gmMainLib_804D3EE0->unk_51C;
     config_all = (struct gmMainLib_8015DBF4_config*) config;
-    base = &load_gmm->unk_530.unk_588[0];
-    ADJ_NAMETAG_PRELOADED(config->x4);
+    ptr = &config->x4;
+    val = *ptr;
+    base = (struct gmMainLib_8015DBF4_base*)
+        &gmMainLib_804D3EE0->unk_530.unk_588[0];
+    if (val == (u8) arg0) {
+        *ptr = 0x78;
+    } else if (val > (u8) arg0 && val != 0x78) {
+        *ptr = val - 1;
+    }
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_522.x4);
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_528.x4);
     ADJ_NAMETAG_78(config_all->unk_530.x4);
@@ -868,20 +866,20 @@ s32 gmMainLib_8015DBF4(s32 arg0)
 
     ADJ_VMD_SINGLE(&gm_80497618);
 
-    ADJ_VMD(&load_gmm->unk_1490, (VsModeData*) (base + 0xF08));
-    ADJ_VMD(&load_gmm->unk_D10, (VsModeData*) (base + 0x788));
-    ADJ_VMD(&load_gmm->unk_590, (VsModeData*) (base + 8));
-    ADJ_VMD(&load_gmm->unk_6D0, (VsModeData*) (base + 0x148));
-    ADJ_VMD(&load_gmm->unk_810, (VsModeData*) (base + 0x288));
-    ADJ_VMD(&load_gmm->unk_950, (VsModeData*) (base + 0x3C8));
-    ADJ_VMD(&load_gmm->unk_A90, (VsModeData*) (base + 0x508));
-    ADJ_VMD(&load_gmm->unk_BD0, (VsModeData*) (base + 0x648));
-    ADJ_VMD(&load_gmm->unk_E50, (VsModeData*) (base + 0x8C8));
-    ADJ_VMD(&load_gmm->unk_F90, (VsModeData*) (base + 0xA08));
-    ADJ_VMD(&load_gmm->unk_10D0, (VsModeData*) (base + 0xB48));
-    ADJ_VMD(&load_gmm->unk_1210, (VsModeData*) (base + 0xC88));
-    ADJ_VMD(&load_gmm->unk_1350, (VsModeData*) (base + 0xDC8));
-    ADJ_VMD(&load_gmm->unk_1490, (VsModeData*) (base + 0xF08));
+    ADJ_VMD(&base->unk_1490, (VsModeData*) ((s8*) base + 0xF08));
+    ADJ_VMD(&base->unk_D10, (VsModeData*) ((s8*) base + 0x788));
+    ADJ_VMD(&base->unk_590, (VsModeData*) ((s8*) base + 8));
+    ADJ_VMD(&base->unk_6D0, (VsModeData*) ((s8*) base + 0x148));
+    ADJ_VMD(&base->unk_810, (VsModeData*) ((s8*) base + 0x288));
+    ADJ_VMD(&base->unk_950, (VsModeData*) ((s8*) base + 0x3C8));
+    ADJ_VMD(&base->unk_A90, (VsModeData*) ((s8*) base + 0x508));
+    ADJ_VMD(&base->unk_BD0, (VsModeData*) ((s8*) base + 0x648));
+    ADJ_VMD(&base->unk_E50, (VsModeData*) ((s8*) base + 0x8C8));
+    ADJ_VMD(&base->unk_F90, (VsModeData*) ((s8*) base + 0xA08));
+    ADJ_VMD(&base->unk_10D0, (VsModeData*) ((s8*) base + 0xB48));
+    ADJ_VMD(&base->unk_1210, (VsModeData*) ((s8*) base + 0xC88));
+    ADJ_VMD(&base->unk_1350, (VsModeData*) ((s8*) base + 0xDC8));
+    ADJ_VMD(&base->unk_1490, (VsModeData*) ((s8*) base + 0xF08));
 
     {
         gr = &gmMainLib_804D3EE0->x1850;
@@ -912,8 +910,6 @@ s32 gmMainLib_8015DBF4(s32 arg0)
 #undef ADJ_VMD
 #undef ADJ_VMD_SINGLE
 #undef ADJ_NAMETAG_PAIR
-#undef ADJ_NAMETAG_STANDALONE_PAIR
-#undef ADJ_NAMETAG_PRELOADED
 #undef ADJ_NAMETAG_78
 
     return arg0;

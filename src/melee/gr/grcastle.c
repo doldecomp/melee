@@ -1472,18 +1472,18 @@ static inline void grCastle_UpdateSatellite(Ground* gp)
                     weights.w[cur_slot] /= grCs_804D6970->x6;
                 }
 
+                wp = weights.w;
                 total = weights.w[0] + weights.w[1] + weights.w[2];
                 rand = total != 0 ? HSD_Randi(total) : 0;
 
-                wp = weights.w;
                 slot = 0;
-                rand -= wp[0];
+                rand -= *wp;
                 if (rand >= 0) {
                     slot = 1;
-                    rand -= wp[1];
+                    rand -= *++wp;
                     if (rand >= 0) {
                         slot = 2;
-                        rand -= wp[2];
+                        rand -= *++wp;
                         if (rand >= 0) {
                             slot = 3;
                         }

@@ -972,8 +972,9 @@ void fn_80191FD4(HSD_GObj* gobj)
 
     hud = fn_8018F6DC(fn_8018F3BC((s32) idx));
     if (lbl_803D9D20.x72[hud] != 0) {
-        slot = *x2_ptr + *x3_ptr;
-        if ((s32) tm->x37[slot].x3 == fn_8018F6DC(fn_8018F3BC((s32) idx))) {
+        if ((s32) tm->x37[*x2_ptr + *x3_ptr].x3 ==
+            fn_8018F6DC(fn_8018F3BC((s32) idx)))
+        {
             fn_8019044C(sibling,
                         (f32) ((tm->x37[*x2_ptr + *x3_ptr].x7 * 0x1E) +
                                fn_8018F6DC(fn_8018F3BC((s32) idx))));
@@ -1619,6 +1620,7 @@ void fn_80193B58(s32* arg0, u32 arg1, u32 arg2)
     struct Lbl804799B8_t* state = &lbl_804799B8;
     TmSettingTable* table = &lbl_803D9F80;
     s32 idx;
+    s32 table_idx;
     s32* ptr;
     s32 val;
     s32 clamp_val;
@@ -1644,9 +1646,10 @@ void fn_80193B58(s32* arg0, u32 arg1, u32 arg2)
         if (*mt == 0) {
             u8* min_entry = &table->min[0][0];
             idx = arg0[0];
+            table_idx = (idx << 1) + !!*mt;
             ptr = arg0 + idx;
             val = *++ptr;
-            if (val > (s32) min_entry[(idx << 1) + !!*mt]) {
+            if (val > (s32) min_entry[table_idx]) {
                 *ptr = val - 1;
                 lbAudioAx_80024030(2);
                 state->x7 = 5;
@@ -1680,9 +1683,10 @@ void fn_80193B58(s32* arg0, u32 arg1, u32 arg2)
         if (*mt == 0) {
             u8* max_entry = &table->max[0][0];
             idx = arg0[0];
+            table_idx = (idx << 1) + !!*mt;
             ptr = arg0 + idx;
             val = *++ptr;
-            if (val < (s32) max_entry[(idx << 1) + !!*mt]) {
+            if (val < (s32) max_entry[table_idx]) {
                 if (val + 1 <= clamp_val) {
                     *ptr = val + 1;
                     lbAudioAx_80024030(2);

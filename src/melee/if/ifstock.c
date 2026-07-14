@@ -109,8 +109,11 @@ int ifStock_802F7EFC(int arg0, int arg1)
         HSD_JObj* jobj = stock->player[arg1].x4[0];
         HSD_JObjGetTranslation(jobj, &pos);
     }
-    HSD_JObjReqAnimAll(stock->player[arg1].x4[j], 0.0f);
-    HSD_JObjAnimAll(stock->player[arg1].x4[j]);
+    {
+        int anim_index = j;
+        HSD_JObjReqAnimAll(stock->player[arg1].x4[anim_index], 0.0f);
+        HSD_JObjAnimAll(stock->player[arg1].x4[anim_index]);
+    }
     HSD_JObjGetTranslation(stock->player[arg1].x4[j],
                            &arg1_data->anim[slot - 5].start);
     arg1_data->anim[slot - 5].start.x += pos.x;
@@ -296,6 +299,7 @@ static inline void ifStock_802F89F8_inline(struct IfStockUserData* user_data,
 {
     int i;
     int j;
+    int k;
     int temp;
     int temp2;
     int digit;
@@ -317,7 +321,7 @@ static inline void ifStock_802F89F8_inline(struct IfStockUserData* user_data,
                 digit = coins;
                 digit %= 10;
             } else {
-                for (j = 0; j < temp2; j++) {
+                for (k = 0; k < temp2; k++) {
                     divisor *= 10;
                 }
                 digit = (coins / divisor) % 10;

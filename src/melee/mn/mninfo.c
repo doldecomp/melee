@@ -447,79 +447,80 @@ void fn_802523D8(HSD_GObj* gobj)
     fn_802523D8_inline(data, gobj, &child);
 }
 
-static inline void mnInfo_80252548_StopCurrentProc(void)
+static inline void mnInfo_80252548_FreeText(HSD_GObj* gobj, MnInfoData* data,
+                                            s32 i)
 {
-    HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+    HSD_Text* left_null;
+    HSD_Text* right_null;
+    MnInfoData* data2;
+    MnInfoData* data3;
+
+    data2 = gobj->user_data;
+    data3 = data2;
+    left_null = (HSD_Text*) i;
+    right_null = (HSD_Text*) i;
+    do {
+        if (data2->left_column[i] != NULL) {
+            HSD_SisLib_803A5CC4(data3->left_column[i]);
+            data2->left_column[i] = left_null;
+        }
+        if (data2->right_column[i] != NULL) {
+            HSD_SisLib_803A5CC4(data3->right_column[i]);
+            data2->right_column[i] = right_null;
+        }
+        i += 1;
+    } while (i < 4);
+    HSD_SisLib_803A5CC4(data->description);
 }
 
-static inline void mnInfo_80252548_InitRowsAndObject(HSD_GObj* gobj,
-                                                     HSD_JObj** jobj)
+static inline void mnInfo_80252548_InitModel(HSD_GObj* gobj)
 {
-    u8* trophy;
+    StaticModelDesc* md;
+    HSD_JObj* jobj;
+    u8* trophy = mnInfo_804A0968;
     s32 i;
-    u8 id;
 
-    trophy = mnInfo_804A0968;
     for (i = 0; i < 4; i++) {
         if (mnInfo_80251A08(*trophy) != 0) {
-            id = *trophy;
+            u8 id = *trophy;
+
             mnInfo_80251D58((MenuInfo_GObj*) gobj, i, id,
                             *gmMainLib_8015D804(id));
             mnInfo_80251F04((MenuInfo_GObj*) gobj, i, id);
         }
         trophy++;
     }
-    *jobj = HSD_JObjLoadJoint(mnInfo_804A0958.joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, *jobj);
+    md = &mnInfo_804A0958;
+    jobj = HSD_JObjLoadJoint(md->joint);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
+    HSD_JObjAddAnimAll(jobj, md->animjoint, md->matanim_joint,
+                       md->shapeanim_joint);
+    HSD_JObjReqAnimAll(jobj, 0.0f);
+    mnInfo_802522B8(gobj);
 }
 
 void fn_80252548(HSD_GObj* gobj)
 {
     HSD_GObjProc* proc;
-    HSD_Text* zero_left;
     MnInfoData* data = gobj->user_data;
-    MnInfoData* data3;
     s32 i;
-    HSD_JObj* jobj;
-    PAD_STACK(16);
+    PAD_STACK(24);
 
     if (mn_804A04F0.cur_menu != MENU_KIND_DATA_SPECIAL) {
-        HSD_Text* zero_right;
-        MnInfoData* data2;
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         proc = HSD_GObj_SetupProc(gobj, fn_802523B8, 0);
         i = 0;
         proc->flags_3 = HSD_GObj_804D783C;
-        data2 = gobj->user_data;
-        data3 = data2;
-        zero_left = (HSD_Text*) i;
-        zero_right = (HSD_Text*) i;
-        do {
-            if (data2->left_column[i] != NULL) {
-                HSD_SisLib_803A5CC4(data3->left_column[i]);
-                data2->left_column[i] = zero_left;
-            }
-            if (data2->right_column[i] != NULL) {
-                HSD_SisLib_803A5CC4(data3->right_column[i]);
-                data2->right_column[i] = zero_right;
-            }
-            i += 1;
-        } while (i < 4);
-        HSD_SisLib_803A5CC4(data->description);
+        mnInfo_80252548_FreeText(gobj, data, i);
         return;
     }
     if ((s32) data->anim_timer != 0) {
         data->anim_timer--;
         return;
     }
-    mnInfo_80252548_InitRowsAndObject(gobj, &jobj);
-    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
-    HSD_JObjAddAnimAll(jobj, mnInfo_804A0958.animjoint,
-                       mnInfo_804A0958.matanim_joint,
-                       mnInfo_804A0958.shapeanim_joint);
-    HSD_JObjReqAnimAll(jobj, 0.0f);
-    mnInfo_802522B8(gobj);
-    mnInfo_80252548_StopCurrentProc();
+    mnInfo_80252548_InitModel(gobj);
+    HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
     proc = HSD_GObj_SetupProc(gobj, fn_802523D8, 0);
     proc->flags_3 = HSD_GObj_804D783C;
 }

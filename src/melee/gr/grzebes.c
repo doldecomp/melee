@@ -873,7 +873,6 @@ void grZebes_801D99E0(HSD_GObj* gobj)
 {
     Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);
     s32 state = gp->gv.zebes5.xC8;
-    PAD_STACK(8);
 
     switch (state) {
     case 0:
@@ -902,11 +901,7 @@ void grZebes_801D99E0(HSD_GObj* gobj)
             gp->gv.zebes5.xC8 = 2;
             gp->gv.zebes5.xC6 = 0;
 
-            diff = gp->gv.zebes5.xD4;
-            diff -= gp->gv.zebes5.xD8;
-            if (0.0f > diff) {
-                diff = -diff;
-            }
+            diff = ABS(gp->gv.zebes5.xD4 - gp->gv.zebes5.xD8);
 
             discriminant = (grZe_804D6990->x98 * grZe_804D6990->x98) -
                            (4.0f * diff) / grZe_804D6990->x9C;
@@ -957,13 +952,9 @@ void grZebes_801D99E0(HSD_GObj* gobj)
         delta = gp->gv.zebes5.xD4;
         delta -= gp->gv.zebes5.xD8;
 
-        if (delta < 0.0f) {
-            abs_delta = -delta;
-        } else {
-            abs_delta = delta;
-        }
+        abs_delta = ABS(delta);
 
-        if (abs_delta < threshold || ((delta < 0.0f) ? -delta : delta) < accel)
+        if (abs_delta < threshold || ABS(delta) < accel)
         {
             gp->gv.zebes5.xC8 = 4;
         } else {
@@ -2126,9 +2117,8 @@ s32 grZebes_801DBB60(HSD_GObj* yaku)
                             if (t < 0.5f) {
                                 f32 dpx2 = bp->x08_x - x1;
                                 f32 dpy2 = bp->x0C_y - y1;
-                                f32 dpx_sq = dpx2 * dpx2;
-                                f32 dpy_sq = dpy2 * dpy2;
-                                f32 dist2 = dpx_sq + dpy_sq;
+                                f32 dist2 =
+                                    grZebes_801DB3CC_dist2(dpy2, dpx2);
                                 f32 new_width;
                                 dist2 = sqrtf(dist2);
                                 {
@@ -2160,9 +2150,8 @@ s32 grZebes_801DBB60(HSD_GObj* yaku)
                             } else {
                                 f32 dpx2 = bp->x08_x - x2;
                                 f32 dpy2 = bp->x0C_y - y2;
-                                f32 dpx_sq = dpx2 * dpx2;
-                                f32 dpy_sq = dpy2 * dpy2;
-                                f32 dist2 = dpx_sq + dpy_sq;
+                                f32 dist2 =
+                                    grZebes_801DB3CC_dist2(dpy2, dpx2);
                                 f32 new_width;
                                 dist2 = sqrtf(dist2);
                                 {

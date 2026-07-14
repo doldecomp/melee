@@ -526,7 +526,6 @@ bool fn_802112F4(Ground_GObj* gobj, HSD_GObj* fighter_gobj, Vec3* vel)
 void grOldPupupu_802113E0(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
-    PAD_STACK(160);
 
     if ((int) grOp_804D6A9C == 0) {
         gp->gv.oldpupupu.xE0 += 1;
@@ -604,14 +603,18 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
 
         case 1:
             if (gp->gv.oldpupupu.xD4 != 0) {
-                Vec3 pos;
+                struct {
+                    u8 pad[148];
+                    Vec3 pos;
+                    u8 tail[16];
+                } stack;
                 s32 side;
                 f32 side_f;
                 Ground* other_gp;
 
                 gp->gv.oldpupupu.xCC = 0;
-                HSD_JObjGetTranslation(gobj->hsd_obj, &pos);
-                if (ftLib_800864A8(&pos, NULL) == 1.0F) {
+                HSD_JObjGetTranslation(gobj->hsd_obj, &stack.pos);
+                if (ftLib_800864A8(&stack.pos, NULL) == 1.0F) {
                     side = 1;
                 } else {
                     side = 0;

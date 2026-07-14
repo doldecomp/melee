@@ -181,8 +181,14 @@ void grYorster_80202254(Ground_GObj* gobj)
 
 void grYorster_802022A0(HSD_GObj* gobj) {}
 
-static inline void grYorster_InitTrackElements(Ground* gp, HSD_GObj* gobj)
+static inline Ground* grYorster_GetGround(HSD_GObj* gobj)
 {
+    return gobj->user_data;
+}
+
+void grYorster_802022A4(HSD_GObj* gobj)
+{
+    Ground* gp = grYorster_GetGround(gobj);
     s32 joints[9] = { 0xA, 0xB, 0xC, 0xD, 0xE, 0xF, 0x10, 0x11, 0x12 };
     int i;
 
@@ -196,37 +202,16 @@ static inline void grYorster_InitTrackElements(Ground* gp, HSD_GObj* gobj)
         gp->gv.yorster.elements[i].x1C =
             grMaterial_801C8CFC(0, 0, gp, gp->gv.yorster.elements[i].x18, NULL,
                                 grYorster_80202428, NULL);
-        {
-            HSD_GObj* material_gobj = gp->gv.yorster.elements[i].x1C;
-            grMaterial_801C8E68(material_gobj, GA_Ground);
-        }
+        grMaterial_801C8E68(gp->gv.yorster.elements[i].x1C, GA_Ground);
         mpJointSetCb2(
             Ground_801C32D4(gp->map_id, gp->gv.yorster.elements[i].x14), gp,
             grYorster_802024F0);
-        {
-            HSD_GObj* material_gobj = gp->gv.yorster.elements[i].x1C;
-            grMaterial_801C8DE0(material_gobj, 0.0f, 0.0f, 0.0f, 0.0f,
-                                0.0f, 0.0f, 5.0f);
-        }
-        {
-            HSD_GObj* material_gobj = gp->gv.yorster.elements[i].x1C;
-            grMaterial_801C8E08(material_gobj);
-        }
+        grMaterial_801C8DE0(gp->gv.yorster.elements[i].x1C, 0.0f, 0.0f,
+                            0.0f, 0.0f, 0.0f, 0.0f, 5.0f);
+        grMaterial_801C8E08(gp->gv.yorster.elements[i].x1C);
         grAnime_801C7FF8(gobj, gp->gv.yorster.elements[i].x14, 7, 1, 0.0f,
                          0.0f);
     }
-}
-
-static inline Ground* grYorster_GetGround(HSD_GObj* gobj)
-{
-    return gobj->user_data;
-}
-
-void grYorster_802022A4(HSD_GObj* gobj)
-{
-    Ground* gp = grYorster_GetGround(gobj);
-
-    grYorster_InitTrackElements(gp, gobj);
 }
 
 void grYorster_80202428(HSD_GObj* item_gobj, Ground* gp, Vec3* pos,

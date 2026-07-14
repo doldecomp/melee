@@ -448,13 +448,11 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
             }
             {
                 HSD_JObj* root = data->xC[rule_data->x0[(u8) vis_count]];
-                HSD_JObj* child;
                 if (root == NULL) {
-                    child = NULL;
+                    option_roots[i] = NULL;
                 } else {
-                    child = root->child;
+                    option_roots[i] = root->child;
                 }
-                option_roots[i] = child;
             }
         }
     }

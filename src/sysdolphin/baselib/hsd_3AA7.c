@@ -2869,9 +2869,7 @@ s32 fn_803AF3F0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         if (arg1x >= 0) {
             s32 logical = arg1x - blocks_before;
             if (logical >= 0 && logical < file_blocks) {
-                if (current_seq < 0 ||
-                    fn_803ACB74(current_seq, state->x270[i]) < 0)
-                {
+                if (fn_803ACB74(current_seq, state->x270[i]) < 0) {
                     current_seq = state->x270[i];
                 }
                 block_map[0][logical] = i;
@@ -2902,7 +2900,8 @@ s32 fn_803AF3F0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         remaining = file_size;
         data = (u8*) arg2;
         for (i = 0; i < file_blocks && remaining > 0; i++) {
-            if (remaining > fn_803AF3F0_chunk_size(state)) {
+            if ((u32) remaining >
+                (u32) fn_803AF3F0_chunk_size(state)) {
                 if (arg3 != 0) {
                     if (fn_803AF3F0_chunk_size(state) != 0) {
                         s32 cmd[9];
@@ -3099,7 +3098,7 @@ s32 fn_803AF3F0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     for (i = 0; i < file_blocks && remaining > 0; i++) {
         s32 chunk = state->x8 - 0x20;
 
-        if (remaining > chunk) {
+        if ((u32) remaining > (u32) chunk) {
             if (arg3 != 0) {
                 s32 ofs = fn_803ACBE8(state, block_map[1][i]);
                 if (block_map[1][i] == 0 && blocks_before + i != 0) {
@@ -4243,10 +4242,11 @@ s32 fn_803B1338(CardState* state, s32 arg1)
     }
 
     for (file_id = 1; file_id < 9; file_id++) {
+        s32 j;
         file_blocks = fn_803AC634(state, file_id);
         offset = 0;
         if (file_blocks > 0) {
-            for (i = 0; i < file_blocks; i++) {
+            for (j = 0; j < file_blocks; j++) {
                 if (arg1 != 0) {
                     fdata = state->x70[file_id].ptr;
                     if (fdata == NULL) {
@@ -4403,12 +4403,13 @@ s32 fn_803B1338(CardState* state, s32 arg1)
         phys = fn_803AC634(state, 0);
     }
     for (file_id = 1; file_id < 9; file_id++) {
+        s32 k;
         file_blocks = fn_803AC634(state, file_id);
         offset = 0;
         if (file_blocks > 0) {
             switch (state->x28[file_id]) {
             case 0:
-                for (i = 0; i < file_blocks; i++) {
+                for (k = 0; k < file_blocks; k++) {
                     if (arg1 != 0) {
                         fdata = state->x70[file_id].ptr;
                         if (fdata == NULL) {

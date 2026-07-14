@@ -4706,19 +4706,21 @@ long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
             }
         }
 
-        dst = arg1;
-        src = arg2;
-        i = 0;
-        while ((s8) *src != -2) {
-            while ((s8) lbl_8046B488.x1C0[i] == -1) {
-                i = (i + 1) % 27;
+        {
+            s32 idx = 0;
+            s8* dst2 = arg1;
+            s8* src2 = arg2;
+            while ((s8) *src2 != -2) {
+                while ((s8) lbl_8046B488.x1C0[idx] == -1) {
+                    idx = (idx + 1) % 27;
+                }
+                result = Player_800325C8(
+                    (CharacterKind) (s8) lbl_8046B488.x1C0[idx], 0);
+                *dst2 = result;
+                idx += 1;
+                src2 += 1;
+                dst2 += 1;
             }
-            result = Player_800325C8(
-                (CharacterKind) (s8) lbl_8046B488.x1C0[i], 0);
-            *dst = result;
-            i += 1;
-            src += 1;
-            dst += 1;
         }
         break;
     case 0:
@@ -5119,22 +5121,23 @@ static inline f32 fn_8016A4C8_attack_ratio(struct lbl_8046B488_t* gp)
 
 void fn_8016A4C8(void)
 {
-    s8 chr;
+    struct lbl_8046B488_t* gp;
+    u8* spawn_state;
+    u8* event_flags;
+    u8* remaining;
     s32 has_active_spawn;
+    s8 chr;
     s32 spawn_enabled;
     s32 cpu_type;
     s32 cpu_type_roll;
     s8 controller_index;
-    u8* event_flags;
     f32 facing_dir;
     Vec3 spawn_pos;
     s8 cos;
     s32 matching_slot;
-    struct lbl_8046B488_t* gp;
-    u8* spawn_state;
     s32 spawn_slot;
 
-    PAD_STACK(0xB8);
+    PAD_STACK(0xD0);
 
     gp = &lbl_8046B488;
     event_flags = (u8*) gp + 0x10;
@@ -5149,11 +5152,12 @@ void fn_8016A4C8(void)
     }
 
     spawn_state = (u8*) gp;
+    remaining = &gp->x7;
     for (spawn_slot = 0; spawn_slot < 6; spawn_slot++, spawn_state++) {
         if (Player_GetFlagsBit1(spawn_slot) != 0 &&
             Player_GetPlayerState(spawn_slot) == 0)
         {
-            u8 remaining_count = gp->x7;
+            u8 remaining_count = *remaining;
             if ((s32) remaining_count > 0) {
                 if (remaining_count != 0) {
                     gp->x7 -= 1;
@@ -5161,7 +5165,7 @@ void fn_8016A4C8(void)
                 fn_8016B738(1);
                 Player_80036D24(spawn_slot);
                 {
-                    s32 remaining_count_signed = (s8) gp->x7;
+                    s32 remaining_count_signed = (s8) *remaining;
                     spawn_state[0x1A6] = remaining_count_signed;
                 }
                 Player_SetFlagsBit1(spawn_slot);
@@ -5172,9 +5176,10 @@ void fn_8016A4C8(void)
                 Player_80032768(spawn_slot, &spawn_pos);
                 Player_SetSlottype(spawn_slot, Gm_PKind_Cpu);
                 Player_SetPlayerCharacter(
-                    spawn_slot, (CharacterKind) (s8) (u8) gp->xA2[gp->x7]);
+                    spawn_slot,
+                    (CharacterKind) (s8) (u8) gp->xA2[*remaining]);
                 Player_SetStocks(spawn_slot, 1);
-                cos = gp->x20[gp->x7];
+                cos = gp->x20[*remaining];
                 Player_SetCostumeId(spawn_slot, cos);
                 chr = Player_GetPlayerCharacter(spawn_slot);
                 matching_slot = 0;
@@ -5215,7 +5220,7 @@ void fn_8016A4C8(void)
                                                       (s32) cpu_level);
                 }
                 cpu_type = 0x17;
-                if ((s32) gp->x7 != 1) {
+                if ((s32) *remaining != 1) {
                     cpu_type_roll = HSD_Randi(4);
                     switch (cpu_type_roll) {
                     case 0:
@@ -5259,13 +5264,16 @@ void fn_8016A4C8(void)
                 if (Player_GetPlayerCharacter(spawn_slot) == CKIND_KIRBY &&
                     (u8) gp->xE != 0)
                 {
-                    Player_SetUnk4D(spawn_slot,
-                                    (s32) (s8) (u8) gp->x124[gp->x7]);
+                    Player_SetUnk4D(
+                        spawn_slot,
+                        (s32) (s8) (u8) gp->x124[*remaining]);
                     Player_SetFlagsAEBit1(spawn_slot, 1U);
                 }
-                if (*gm_8016A404_event_player_init_cb(gp) != NULL) {
-                    (*gm_8016A404_event_player_init_cb(gp))(spawn_slot,
-                                                            gp->x7);
+                if (((struct lbl_8046B488_event_player_init_cb_t*) gp)
+                        ->event_player_init_cb != NULL)
+                {
+                    ((struct lbl_8046B488_event_player_init_cb_t*) gp)
+                        ->event_player_init_cb(spawn_slot, *remaining);
                 }
                 Player_SetStructFunc(spawn_slot, fn_8016A488);
                 Player_80031AD0(spawn_slot);

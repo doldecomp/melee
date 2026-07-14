@@ -1203,9 +1203,8 @@ s32 grGreens_80215D54(Ground_GObj* gobj, int arg1, int arg2)
 
 #undef BLOCK
 
-#define BLOCK(gp, i, j)                                                       \
-    (((struct grGreens_BlockVars(*)[6]) (gp)->gv.greens.x8_blocks)[i][j])
-#define VEC(gp, i, j) (((Vec(*)[6]) (gp)->gv.greens.x4)[i][j])
+#define BLOCK(gp, i, j) ((gp)->gv.greens.x8_blocks + (j))[(i) * 6]
+#define VEC(gp, i, j) ((gp)->gv.greens.x4 + (j))[(i) * 6]
 
 void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
 {
@@ -1230,8 +1229,6 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
     }
 
     switch (BLOCK(gp, row, col).status) {
-    case 2:
-        return;
     case 1:
         if (BLOCK(gp, row, col).x1_4) {
             BLOCK(gp, row, col).x4 = 0.0f;
@@ -1301,6 +1298,8 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
             }
         }
         break;
+    case 2:
+        return;
     case 3:
         return;
     }

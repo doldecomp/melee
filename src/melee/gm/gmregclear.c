@@ -756,7 +756,7 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
                 u8 arg3, u8 arg4, u8 arg5, s32 arg6, InternalStageId arg7,
                 s32 count, s32 arg9)
 {
-    u8 colors[3];
+    u8 colors[16];
     u8 enemy_level;
     s32 boss_count;
     u8 enemy_cpu_type;
@@ -773,7 +773,7 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     s32 sp8;
     u8* color_iter;
 
-    PAD_STACK(16);
+    PAD_STACK(4);
 
     boss_count = 0;
     enemy_level = 0;

@@ -1006,9 +1006,9 @@ void gm_8019E634(void)
     s32 results[4];
     TmData* tmd;
     s32 hmn_cpu;
+    s32 i, j;
     MatchEnd* match_end;
     s32* results_base;
-    s32 i, j;
 
     tmd = gm_8018F634();
     hmn_cpu = tmd->hmn_cpu_count;
@@ -1049,29 +1049,27 @@ void gm_8019E634(void)
         union {
             u32 word;
             u8 bytes[4];
-        } hbuf_data;
-        u8* hbuf;
+        } hbuf;
 
-        hbuf_data.word = *(u32*) &lbl_804DA948;
-        hbuf = hbuf_data.bytes;
+        hbuf.word = *(volatile u32 const*) &lbl_804DA948;
 
         /* Read handicap from x37 entries */
         for (i = 0; i < 4; i++) {
             if (i < (s32) tmd->x30) {
                 s32 id = results_base[i];
                 j = get_match_player_index_xF(id);
-                hbuf[i] = (u8) tmd->x37[j].x2;
+                hbuf.bytes[i] = (u8) tmd->x37[j].x2;
             }
         }
 
-        fn_80169000(&gm_80477738, hbuf);
+        fn_80169000(&gm_80477738, hbuf.bytes);
 
         /* Write back adjusted handicap */
         for (i = 0; i < 4; i++) {
             if (i < (s32) tmd->x30) {
                 s32 id = results_base[i];
                 j = get_match_player_index_xF(id);
-                tmd->x37[j].x2 = hbuf[i];
+                tmd->x37[j].x2 = hbuf.bytes[i];
             }
         }
     }

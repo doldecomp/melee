@@ -1602,7 +1602,7 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
     Ground* gp = gobj->user_data;
     u8* bp = (u8*) gp;
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    PAD_STACK(64);
+    PAD_STACK(56);
 
     HSD_JObjGetTranslation2(jobj, &pos);
 
@@ -1658,6 +1658,9 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
                     pos.x = Stage_GetBlastZoneLeftOffset() - 50.0f;
                     height = grBigBlue_801EC58C(&pos, NULL, 500.0f);
                     if (height != -3.4028235e38f) {
+                        f32 cam_right;
+                        f32 cam_left;
+                        f32 cam_bot;
                         f32 speed;
                         s32 collided;
 
@@ -1672,9 +1675,9 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
                                 25.0f);
                         }
                         if (collided == 0) {
-                            f32 cam_right = Stage_GetCamBoundsRightOffset();
-                            f32 cam_left = Stage_GetCamBoundsLeftOffset();
-                            f32 cam_bot = Stage_GetCamBoundsBottomOffset();
+                            cam_right = Stage_GetCamBoundsRightOffset();
+                            cam_left = Stage_GetCamBoundsLeftOffset();
+                            cam_bot = Stage_GetCamBoundsBottomOffset();
                             if (pos.y <= grBigBlue_801E8B84_noinline(
                                              Stage_GetCamBoundsTopOffset(),
                                              cam_bot, cam_left, cam_right))
@@ -1708,14 +1711,28 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
                     *(s32*) (bp + 0xC8) = (s32) grBb_804D69C8->xD8;
                     bp[0xC4] = 2;
                 } else {
-                    f32 speed2 = 140.0f * Ground_801C0498();
-                    if (grBigBlue_801E8794(jobj, &pos, 1,
-                                           (60.0f * Ground_801C0498()) + 30.0f,
-                                           speed2) != 0 ||
-                        grBigBlue_801EAB50(&pos, 1,
-                                           (60.0f * Ground_801C0498()) + 30.0f,
-                                           140.0f * Ground_801C0498()) != 0)
-                    {
+                    f32 range_scale;
+                    f32 range;
+                    f32 velocity;
+                    s32 collided;
+
+                    velocity = 140.0f * Ground_801C0498();
+                    range_scale = Ground_801C0498();
+                    range = (60.0f * range_scale) + 30.0f;
+                    collided =
+                        grBigBlue_801E8794(jobj, &pos, 1, range, velocity);
+                    if (collided == 0) {
+                        f32 range_scale2;
+                        f32 range2;
+                        f32 next_velocity;
+
+                        next_velocity = 140.0f * Ground_801C0498();
+                        range_scale2 = Ground_801C0498();
+                        range2 = (60.0f * range_scale2) + 30.0f;
+                        collided = grBigBlue_801EAB50(&pos, 1, range2,
+                                                      next_velocity);
+                    }
+                    if (collided != 0) {
                         *(f32*) (bp + 0xD8) = 0.0f;
                     } else {
                         *(f32*) (bp + 0xD8) = grBb_804D69C8->xD0;
@@ -1725,13 +1742,16 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
             case 2: {
                 s32 timer = *(s32*) (bp + 0xC8);
                 if (timer <= 0) {
-                    u8* mgp = (u8*) Ground_801C2BA4(32)->user_data;
+                    s32 idx;
+                    u8* p;
+                    u8* mgp;
                     s32 ctr = 3;
-                    s32 idx = 0;
-                    u8* p = mgp;
 
                     *(f32*) (bp + 0xD8) = grBb_804D69C8->xD0;
                     bp[0xC4] = 3;
+                    mgp = Ground_801C2BA4(32)->user_data;
+                    idx = 0;
+                    p = mgp;
 
                     while (ctr != 0) {
                         if ((s8) p[0xE5] == 0) {
@@ -1753,7 +1773,11 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
                 if (pos.x > (50.0f + Stage_GetBlastZoneRightOffset())) {
                     HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
                     *(f32*) (bp + 0xD8) = 0.0f;
-                    *(s32*) ((u8*) Ground_801C2BA4(32)->user_data + 0xCC) = 0;
+                    {
+                        grBb_GroundStateFlag* manager =
+                            Ground_801C2BA4(32)->user_data;
+                        manager->xCC = 0;
+                    }
                     {
                         u8* mgp2 = (u8*) Ground_801C2BA4(32)->user_data;
                         if (jobj != NULL) {
@@ -1769,8 +1793,6 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
             }
             {
                 f32 target_z;
-                f32 cur_z;
-                f32 delta;
                 f32 target_y;
                 f32 diff_y;
                 f32 vy;
@@ -1779,16 +1801,17 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
 
                 target_z = euler.z;
                 *(f32*) (bp + 0xCC) = target_z;
-                cur_z = HSD_JObjGetRotationZ(jobj);
-                if (cur_z < *(f32*) (bp + 0xCC)) {
-                    delta = 0.017453292f * (grBb_804D69C8->xD4 *
-                                            (*(f32*) (bp + 0xCC) - cur_z));
+                if (HSD_JObjGetRotationZ(jobj) < *(f32*) (bp + 0xCC)) {
+                    f32 delta =
+                        0.017453292f *
+                        (grBb_804D69C8->xD4 *
+                         (*(f32*) (bp + 0xCC) - HSD_JObjGetRotationZ(jobj)));
                     HSD_JObjAddRotationZ(jobj, delta);
                     if (HSD_JObjGetRotationZ(jobj) >= *(f32*) (bp + 0xCC)) {
                         HSD_JObjSetRotationZ(jobj, *(f32*) (bp + 0xCC));
                     }
                 } else {
-                    delta =
+                    f32 delta =
                         0.017453292f *
                         (grBb_804D69C8->xD4 *
                          (*(f32*) (bp + 0xCC) - HSD_JObjGetRotationZ(jobj)));
@@ -3871,20 +3894,20 @@ heading_converge:
 /// (4 NV regs) instead of keeping them separate (5 NV regs, stmw r27)
 s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
 {
-    u8* gp;
+    grBigBlue_CarPhysics* gp;
     u8* self;
     s32 result;
     s32 offset;
 
     offset = index << 6;
     result = 0;
-    gp = (u8*) gobj->user_data;
+    gp = gobj->user_data;
 
-    switch ((*(volatile u8*) (gp + offset + 0xD4) >> 2) & 0x3F) {
+    switch ((*(volatile u8*) (gp->raw + offset + 0xD4) >> 2) & 0x3F) {
     case 1:
         break;
     case 9:
-        self = gp;
+        self = gp->raw;
         self += offset;
         if (0.0F == *(f32*) (self + 0xEC)) {
             result = 1;
@@ -3894,11 +3917,11 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
         f32 blast = Stage_GetBlastZoneRightOffset();
         f32 scale = Ground_801C0498();
 
-        self = gp;
+        self = gp->raw;
         self += offset;
         if (blast + grBb_804D69C8->x68 * scale <
-            *(f32*) (self + 0xE0)) {
-            if (0.0F != *(f32*) (self + 0xEC)) {
+            gp->data.lanes[index].pos.x) {
+            if (0.0F != gp->data.lanes[index].xEC) {
                 result = 9;
             } else {
                 result = 1;
@@ -3910,11 +3933,11 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
         f32 blast = Stage_GetBlastZoneLeftOffset();
         f32 scale = Ground_801C0498();
 
-        self = gp;
+        self = gp->raw;
         self += offset;
         if (blast - grBb_804D69C8->x68 * scale >
-            *(f32*) (self + 0xE0)) {
-            if (0.0F != *(f32*) (self + 0xEC)) {
+            gp->data.lanes[index].pos.x) {
+            if (0.0F != gp->data.lanes[index].xEC) {
                 result = 9;
             } else {
                 result = 1;
@@ -3931,7 +3954,7 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
         s32 counter;
         s32 j;
 
-        self = gp;
+        self = gp->raw;
         self += offset;
         counter = *(s32*) (self + 0xF0);
         *(s32*) (self + 0xF0) = counter - 1;
@@ -3947,7 +3970,7 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
                     result = 4;
                     break;
                 case 3: {
-                    u8* p = gp;
+                    u8* p = gp->raw;
                     s32 i;
                     s32 right_cnt = 0;
                     s32 left_cnt = 0;
@@ -4014,7 +4037,7 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
         }
 
         /* Override: check other platforms heading toward self */
-        self = gp;
+        self = gp->raw;
         self += offset;
         for (j = 0; j < 4; j++) {
             u32 st;
@@ -4024,7 +4047,7 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
                 continue;
             }
 
-            p = gp + j * 0x40;
+            p = gp->raw + j * 0x40;
             st = (p[0xD4] >> 2) & 0x3F;
 
             if (st == 7) {
@@ -4041,7 +4064,7 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
         }
 
         /* Final threshold check */
-        if (*(f32*) (gp + offset + 0xE4) < -2000.0F) {
+        if (*(f32*) (gp->raw + offset + 0xE4) < -2000.0F) {
             result = 1;
         }
         break;
@@ -4088,6 +4111,8 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
     Ground* gp = gobj->user_data;
     Vec3 pos;
 
+    PAD_STACK(4);
+
     switch (arg2) {
     case 1: {
         grBb_Car* car = &((grBb_CarGround*) gp)->typed.cars[arg1];
@@ -4097,7 +4122,7 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
                 ->typed.jobjs[(*(u16*) car >> 4) & 0x1F],
             JOBJ_HIDDEN);
 
-        if (car->pos.x > 0.0f) {
+        if (gp->gv.bigblue.car.lanes[arg1].pos.x > 0.0f) {
             ((grBb_CarGround*) gp)
                 ->typed.ranks[(*(u16*) car >> 4) & 0x1F] = 0;
         } else {
@@ -4180,10 +4205,10 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
         pos.y = grBigBlue_801EC58C(&pos, NULL, 1000.0f);
 
         if (grBb_804DB310 != pos.y) {
-            s32 count = 0;
+            s32 count;
             s32 j;
 
-            for (j = 0; j < 30; j++) {
+            for (j = 0, count = 0; j < 30; j++) {
                 if (((u8*) gp->gv.bigblue.xCC)[j] == 0) {
                     count++;
                 }
@@ -4203,7 +4228,7 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
                     pick = slot;
                 }
 
-                for (slot = 0; slot < 30; slot++) {
+                for (; slot < 30; slot++) {
                     if (((u8*) gp->gv.bigblue.xCC)[slot] == 0) {
                         if (--pick < 0) {
                             break;
@@ -4274,10 +4299,11 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
                         }
                         lo += rand_val;
                     }
-                    *(s32*) (car + 0xF0) = lo;
+                    *(s32*) (((grBb_CarGround*) gp)->bytes + offset + 0xF0) =
+                        lo;
                 }
 
-                car_ec = (f32*) (car_e0 + 1);
+                car_ec = (f32*) (((grBb_CarGround*) gp)->bytes + offset + 0xEC);
                 ((u8*) gp->gv.bigblue.xCC)[slot] = 1;
                 *car_ec = 0.0f;
 
@@ -4319,10 +4345,10 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
         pos.y = grBigBlue_801EC58C(&pos, NULL, 1000.0f);
 
         if (grBb_804DB310 != pos.y) {
-            s32 count = 0;
+            s32 count;
             s32 j;
 
-            for (j = 0; j < 30; j++) {
+            for (j = 0, count = 0; j < 30; j++) {
                 if (((u8*) gp->gv.bigblue.xCC)[j] == 0) {
                     count++;
                 }
@@ -4343,7 +4369,7 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
                     pick = slot;
                 }
 
-                for (slot = 0; slot < 30; slot++) {
+                for (; slot < 30; slot++) {
                     if (((u8*) gp->gv.bigblue.xCC)[slot] == 0) {
                         if (--pick < 0) {
                             break;
@@ -4414,10 +4440,11 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
                         }
                         lo += rand_val;
                     }
-                    *(s32*) (car + 0xF0) = lo;
+                    *(s32*) (((grBb_CarGround*) gp)->bytes + offset + 0xF0) =
+                        lo;
                 }
 
-                car_ec = (f32*) (car_e0 + 1);
+                car_ec = (f32*) (((grBb_CarGround*) gp)->bytes + offset + 0xEC);
                 ((u8*) gp->gv.bigblue.xCC)[slot] = 1;
                 *car_ec = 0.0f;
 

@@ -39,6 +39,11 @@ struct SfxLoadStreamNode {
     /* 0x14 */ s32 x14;
 };
 
+static inline s32 SfxLoadStreamDataSize(s32 size)
+{
+    return size + 8;
+}
+
 void HSD_SynthSFXSampleLoadCallback(int result, int length, void* addr,
                                     int cancelflag)
 {
@@ -107,7 +112,7 @@ void HSD_SynthSFXSampleLoadCallback(int result, int length, void* addr,
             n = *HSD_Synth_804D7734;
             (void) n;
             nshift = n << 6;
-            nbytes = nshift + 8;
+            nbytes = SfxLoadStreamDataSize(nshift);
             memcpy((u8*) HSD_Synth_804D7730 + 8, HSD_Synth_804D7734, nbytes);
             offset = 0;
             for (k = 0; k < n; k++) {

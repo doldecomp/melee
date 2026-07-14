@@ -2344,19 +2344,19 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
     float best_kb;
     int angle_int;
     u32 element;
-    int sfx_severity;
     ftCo_DatAttrs* co;
-    int i;
-    Fighter* fp;
-    int best_idx;
     DmgLogEntry* entries;
+    struct DmgResult* out;
+    Fighter* fp;
+    int i;
+    int best_idx;
     DmgLogEntry* entry;
     DmgLogEntry* best_entry;
-    struct DmgResult* out;
+    int sfx_severity;
     ftCommonData* ftd;
     HitCapsule stack_hit;
 
-    PAD_STACK(0x98);
+    PAD_STACK(0xA8);
 
     if (idx == 0) {
         return;
@@ -2374,9 +2374,9 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
 
         switch (entry->x0) {
         case 1: {
-            Fighter* attacker_fp = (Fighter*) entry->gobj->user_data;
-            int unk_count = entry->size_of_xC;
             HitCapsule* hit = entry->hit0;
+            int unk_count = entry->size_of_xC;
+            Fighter* attacker_fp = (Fighter*) entry->gobj->user_data;
             float defense;
             float stage;
             defense = Player_GetDefenseRatio(fp->player_id);
@@ -2719,11 +2719,13 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
 
     case 2: {
         Item* volatile item_sub = (Item*) best_entry->gobj->user_data;
-        Item* ip = (Item*) item_sub->entity->user_data;
+        HSD_GObj* entity = item_sub->entity;
+        Item* ip = (Item*) entity->user_data;
         HSD_GObj* owner_gobj;
 
         if (ip->kind == 6) {
-            pl_80041B08(fp->player_id, (UNK_T) (uintptr_t) fp->x221F_b4,
+            int player_id = fp->player_id;
+            pl_80041B08(player_id, (UNK_T) (uintptr_t) fp->x221F_b4,
                         (u16) ip->x1C);
         }
 

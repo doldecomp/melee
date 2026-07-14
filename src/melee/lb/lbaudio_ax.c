@@ -2951,8 +2951,6 @@ s32 lbAudioAx_80028690(void)
         int idx;
         int* a;
         int* b;
-        int* c;
-        int* d;
 
         lbl_804D3878 = var_r29;
         AXDriver_8038DCFC();
@@ -2962,14 +2960,12 @@ s32 lbAudioAx_80028690(void)
 
         a = lbl_80433A64;
         b = lbl_804337C4;
-        c = lbl_804338A4;
-        d = lbl_80433984;
         for (idx = 0; idx < 55; idx++) {
             if (idx != 0) {
                 a[idx] = -1;
                 b[idx] = -1;
-                c[idx] = -1;
-                d[idx] = -1;
+                lbl_804338A4[idx] = -1;
+                lbl_80433984[idx] = -1;
             }
         }
 
