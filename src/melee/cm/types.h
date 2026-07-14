@@ -258,15 +258,8 @@ struct CameraInputs {
     /* +04 */ f32 stick_y;
     /* +08 */ f32 substick_x;
     /* +0C */ f32 substick_y;
-    /// @todo sus unions
-    /* +10 */ union {
-        u32 _u32[2];
-        u64 _u64;
-    } x10;
-    /* +18 */ union {
-        u32 _u32[2];
-        u64 _u64;
-    } x18;
+    /* +10 */ u64 buttons_pressed;
+    /* +18 */ u64 buttons_triggered;
 };
 
 #endif

@@ -70,7 +70,7 @@ void gm_801B0FB8(GameScene* arg0)
 {
     struct DebugSoundTestData* data;
 
-    data = gm_801A427C(arg0);
+    data = gm_GetGameSceneLoadDataCallback(arg0);
     data->x0 = &un_803F9FA4;
     data->x4 = 0;
     un_802FF7DC();
