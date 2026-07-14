@@ -746,14 +746,13 @@ void hsd_803922FC(void* bitmap, s32 x, s32 y, s32 parity, s32 dst, s32 w,
     u8* bmp;
     GlyphEntry* entry;
 
-    PAD_STACK(4);
-    v_stride = stride;
     bmp = bitmap;
     off_y = 0;
     off_x = 0;
     if (tbl == NULL) {
         tbl = lbl_80408898;
     }
+    v_stride = stride;
     if (y < 0) {
         off_y = -y;
         y = 0;
@@ -2234,77 +2233,85 @@ void hsd_80394544(s32 col, s32 row, u32 num_cols, u32 num_rows, s32 x, s32 y,
 
 extern u8 lbl_8040AB40[];
 
-// @TODO: Currently 88.35% match - register allocation/loop counter
-// differences remain
+struct ParticleScreenBuffer {
+    u8 data[1];
+};
+
 #pragma push
 #pragma global_optimizer off
 void hsd_80394668(void)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
+    s32 pos;
     PAD_STACK(24);
 
-    if ((u32) sp->x2C != 0) {
-        /* Copy XFB data with brightness adjustment */
-        u8* src = (u8*) sp->x2C;
-        u32 size = sp->x48;
-        s32 pos;
-        s32* dst_base = (s32*) sp + sp->x34;
-        u8* dst = 0;
-        dst += dst_base[9];
+    {
+        s32* dst_base;
+        struct ParticleScreenBuffer* dst;
+        u32 size;
+        struct ParticleScreenBuffer* src;
 
-        for (pos = 0; pos < size; pos += 2) {
-            u8* s1 = src + pos;
-            u8* d1 = dst + pos;
-            d1[0] = (u8) (((s1[0] - 0x10) & 0xFFFFFF) + 0x10);
-            d1[1] = s1[1];
-        }
-    } else {
-        /* Draw console text to framebuffer */
-        void* saved_color;
-        s32 cur_x;
-        s32 y_off;
-        void** x50_ptr;
-        s32* x40_ptr;
-        s32* x8_ptr;
-        s32* x4_ptr;
-        s32 row;
-        s32 col;
+        src = (struct ParticleScreenBuffer*) sp->x2C;
+        if ((u32) src != 0) {
+            /* Copy XFB data with brightness adjustment */
+            dst_base = (s32*) sp + sp->x34;
+            dst = (struct ParticleScreenBuffer*) dst_base[9];
+            size = sp->x48;
 
-        x50_ptr = &sp->x50;
-        saved_color = *x50_ptr;
-        *x50_ptr = lbl_8040AB40;
-        x4_ptr = &sp->x4;
-        x40_ptr = &sp->x40;
-        x8_ptr = &sp->x8;
-        row = 0;
-
-        while (row <= sp->x1C) {
-            y_off = (row + 1) * 14;
-            col = 0;
-            cur_x = 0x14;
-
-            while (col < sp->x20) {
-                *x4_ptr = cur_x;
-                *x8_ptr = (*x40_ptr - 0x28) - y_off;
-                {
-                    s32 interlace = sp->x0_b6;
-                    if (sp->x0_b7 != 0) {
-                        hsd_803922FC(((ParticleFontData*) sp->x4C)->x700,
-                                     *x4_ptr, *x8_ptr, interlace,
-                                     (&sp->x24)[sp->x34], sp->x3C, *x40_ptr,
-                                     sp->x44, *x50_ptr);
-                    } else {
-                        hsd_803921B8(((ParticleFontData*) sp->x4C)->x700,
-                                     *x4_ptr, *x8_ptr, (&sp->x24)[sp->x34],
-                                     sp->x3C, *x40_ptr, sp->x44, *x50_ptr);
-                    }
-                }
-                cur_x += 11;
-                col++;
+            for (pos = 0; pos < size; pos += 2) {
+                u8* s1 = src->data + pos;
+                u8* d1 = dst->data + pos;
+                d1[0] = (u8) (((s1[0] - 0x10) & 0xFFFFFF) + 0x10);
+                d1[1] = s1[1];
             }
-            row++;
+        } else {
+            /* Draw console text to framebuffer */
+            void* saved_color;
+            s32 cur_x;
+            s32 y_off;
+            void** x50_ptr;
+            s32* x40_ptr;
+            s32* x8_ptr;
+            s32* x4_ptr;
+            s32 row;
+            s32 col;
+
+            x50_ptr = &sp->x50;
+            saved_color = *x50_ptr;
+            *x50_ptr = lbl_8040AB40;
+            x4_ptr = &sp->x4;
+            x40_ptr = &sp->x40;
+            x8_ptr = &sp->x8;
+            row = 0;
+
+            while (row <= sp->x1C) {
+                y_off = (row + 1) * 14;
+                col = 0;
+                cur_x = 0x14;
+
+                while (col < sp->x20) {
+                    *x4_ptr = cur_x;
+                    *x8_ptr = (*x40_ptr - 0x28) - y_off;
+                    {
+                        s32 interlace = sp->x0_b6;
+                        if (sp->x0_b7 != 0) {
+                            hsd_803922FC(((ParticleFontData*) sp->x4C)->x700,
+                                         *x4_ptr, *x8_ptr, interlace,
+                                         (&sp->x24)[sp->x34], sp->x3C,
+                                         *x40_ptr, sp->x44, *x50_ptr);
+                        } else {
+                            hsd_803921B8(((ParticleFontData*) sp->x4C)->x700,
+                                         *x4_ptr, *x8_ptr, (&sp->x24)[sp->x34],
+                                         sp->x3C, *x40_ptr, sp->x44, *x50_ptr);
+                        }
+                    }
+                    cur_x += 11;
+                    col++;
+                }
+                row++;
+            }
+            *x50_ptr = saved_color;
         }
-        *x50_ptr = saved_color;
     }
 }
 #pragma pop
@@ -2579,7 +2586,6 @@ void hsd_80394F48(void* data)
     s32 row_start;
     void* hi_color;
     s32 x_base;
-    s32 entry_idx;
     s32 cur_row;
     s32 i;
     s32 b6;
@@ -2634,12 +2640,11 @@ void hsd_80394F48(void* data)
     }
 
     *px4 += 11;
-    entry_idx = 0;
     x_base = col_start * 11 + 0x14;
     hi_color = base_color + 0x20;
     cur_row = row_start - 1;
 
-    while (dp->entries[entry_idx] != 0) {
+    for (i = 0; dp->entries[i] != 0; i++) {
         *px4 = x_base;
         *px8 = (*px40 - 0x28) - (cur_row-- + 1) * 14;
 
@@ -2652,16 +2657,16 @@ void hsd_80394F48(void* data)
                          (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
         }
 
-        if (entry_idx == dp->index) {
+        if (i == dp->index) {
             *px50 = hi_color;
         } else {
             *px50 = base_color;
         }
 
         *px4 += 11;
-        hsd_80394434(dp->entries[entry_idx]);
+        hsd_80394434(dp->entries[i]);
 
-        *px4 += strlen(dp->entries[entry_idx]) * 11;
+        *px4 += strlen(dp->entries[i]) * 11;
         *px50 = base_color;
 
         b6 = sp->x0_b6;
@@ -2672,7 +2677,6 @@ void hsd_80394F48(void* data)
             hsd_803921B8(((ParticleFontData*) sp->x4C)->x1B20, *px4, *px8,
                          (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
         }
-        entry_idx++;
     }
 
     *px50 = base_color;
@@ -2827,14 +2831,12 @@ s32 hsd_803956D8(void* disp_ptr)
 
 static inline void get_screen_data(void** data)
 {
-    struct ParticleScreenState* sp = &hsd_804CF810;
-    *data = sp->x50;
+    *data = hsd_804CF810.x50;
 }
 
 static inline void set_default_screen_data(void)
 {
-    struct ParticleScreenState* sp = &hsd_804CF810;
-    sp->x50 = lbl_8040AB20;
+    hsd_804CF810.x50 = lbl_8040AB20;
 }
 
 // @TODO: BSS relocation and register allocation differences remain
@@ -3793,13 +3795,13 @@ static char lbl_804D6348[] = "  ";
 static char lbl_804D634C[] = " ";
 static char lbl_804D6350[8] = "";
 
-// @TODO: .bss.0 relocation causes register shift
 void hsd_80397110(void)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
     extern u8 lbl_8040BEC4[];
     u8* base = lbl_8040AB00;
     void* saved;
+    u32 offset;
     struct SPREntry {
         u32 spr;
         char* name;
@@ -3829,13 +3831,16 @@ void hsd_80397110(void)
     {
         u32* bec4 = (u32*) lbl_8040BEC4;
         i = 0;
+        offset = 0;
         while (row > 0) {
             u32 spr_off = bec4[4];
             if (spr_off + i >= 0x45) {
                 break;
             }
-            spr_entry =
-                (struct SPREntry*) (base + 0x2D8) + spr_off + i;
+            spr_entry = (struct SPREntry*)
+                ((unsigned char*) ((struct SPREntry*) (base + 0x2D8) +
+                                    spr_off) +
+                 offset);
             if (i == bec4[5]) {
                 if (spr_entry->callback != 0) {
                     spr_entry->callback(spr_entry->spr);
@@ -3874,6 +3879,7 @@ void hsd_80397110(void)
                         padding, baselib_mfspr(spr_entry->spr));
                 hsd_80394434(buf);
             }
+            offset += sizeof(*spr_entry);
             i++;
         }
     }
@@ -4737,10 +4743,10 @@ void psInitDataBankLocate(HSD_Archive* cmdBank, HSD_Archive* texBank,
                           int* formBank)
 {
     s32 num;
+    s32 i;
     s32 num2;
     s32* ptr;
     s32* base;
-    s32 i;
     s32 version;
 
     version = *(u16*) cmdBank;
@@ -4759,17 +4765,15 @@ version0:
     num2 = ((s32*) cmdBank)[1];
     base = (s32*) ((u8*) cmdBank + 8);
     num = 0;
-    if (num2 > 0) {
-        for (i = 0; i < num2; i++) {
-            ((s32*) cmdBank)[i + 2] += (s32) cmdBank;
-        }
+    for (i = 0; i < num2; i++) {
+        ((s32*) cmdBank)[i + 2] += (s32) cmdBank;
     }
     goto done_cmd;
 
 version40:
     num = ((s32*) cmdBank)[1];
-    base = (s32*) ((u8*) cmdBank + 12) - num;
     num2 = ((s32*) cmdBank)[2] + num;
+    base = (s32*) cmdBank + 3 - num;
     ptr = (s32*) cmdBank;
     i = 0;
     while (i < (s32) cmdBank->header.nb_reloc) {
@@ -4782,20 +4786,15 @@ version40:
 
 done_cmd:
     /* Phase 2: Fix cmdList kind bits */
-    {
-        s32 count = num2 - num;
-        ptr = base + num;
-        {
-            for (i = 0; i < count; i++) {
-                s32* cmd = (s32*) ptr[0];
-                if (cmd != NULL) {
-                    cmd[2] = cmd[2] & 0xF1FFFFFF;
-                    cmd = (s32*) ptr[0];
-                    cmd[2] = cmd[2] | 0x08000000;
-                }
-                ptr++;
-            }
+    ptr = base + num;
+    for (i = num; i < num2; i++) {
+        s32* cmd = (s32*) ptr[0];
+        if (cmd != NULL) {
+            cmd[2] = cmd[2] & 0xF1FFFFFF;
+            cmd = (s32*) ptr[0];
+            cmd[2] = cmd[2] | 0x08000000;
         }
+        ptr++;
     }
 
     /* Phase 3: texBank relocation */
@@ -7952,7 +7951,7 @@ HSD_Generator* hsd_8039D9C8(void)
     return gen;
 }
 
-// @TODO: Currently 91.10% match - register allocation, shape/velocity
+// @TODO: Currently 97.23% match - register allocation, shape/velocity
 // switch case logic, Newton-Raphson sqrt inlining, trig matrix layout
 f32 hsd_8039DAD4(HSD_Generator* gen)
 {
@@ -7980,7 +7979,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     f32 elevation;
     f32 tmp;
     f32 angle3;
-    PAD_STACK(16);
+    PAD_STACK(8);
 
     angle1 = angle3 = 0.0F;
     if (gen->count < 1.0F) {
@@ -7995,14 +7994,15 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     vel_copy.z = gen->vel.z;
 
     /* Compute velocity magnitude */
-    vel_mag_sq = vel_copy.x * vel_copy.x + vel_copy.y * vel_copy.y;
-    vel_mag_sq += vel_copy.z * vel_copy.z;
+    vel_mag_sq = vel_copy.z * vel_copy.z;
+    vel_mag_sq += vel_copy.x * vel_copy.x + vel_copy.y * vel_copy.y;
     if (vel_mag_sq > 0.0F) {
         f64 e = __frsqrte(vel_mag_sq);
         e = 0.5 * e * -(vel_mag_sq * (e * e) - 3.0);
         e = 0.5 * e * -(vel_mag_sq * (e * e) - 3.0);
         e = 0.5 * e * -(vel_mag_sq * (e * e) - 3.0);
-        vel_mag_sq = (f32) (vel_mag_sq * e);
+        tmp = (f32) (vel_mag_sq * e);
+        vel_mag_sq = tmp;
     }
 
     /* Initialize rotation matrix */
@@ -8097,18 +8097,18 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
 
         {
             f32 projected_z = vel_norm.z * sin_az;
-            tmp = projected_z + vel_norm.y * cos_az;
-        }
-        *(s32*) &tmp &= 0x7FFFFFFF;
-        if (tmp < 1.1754944e-38F) {
-            if (vel_norm.x >= 0.0F) {
-                elevation = 1.5707964F;
+            projected_z += vel_norm.y * cos_az;
+            tmp = projected_z;
+            *(s32*) &tmp &= 0x7FFFFFFF;
+            if (tmp < 1.1754944e-38F) {
+                if (vel_norm.x >= 0.0F) {
+                    elevation = 1.5707964F;
+                } else {
+                    elevation = -1.5707964F;
+                }
             } else {
-                elevation = -1.5707964F;
+                elevation = atan2f(vel_norm.x, projected_z);
             }
-        } else {
-            elevation =
-                atan2f(vel_norm.x, vel_norm.z * sin_az + vel_norm.y * cos_az);
         }
         sin_el = sinf(elevation);
         {
@@ -8146,19 +8146,18 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             angle1 = atan2f(rot_mtx[1][2], rot_mtx[2][2]);
         }
         {
-            f32 c1 = cosf(angle1);
-            f32 s1 = sinf(angle1);
-            f32 comb = rot_mtx[2][2] * c1 + rot_mtx[1][2] * s1;
-            *(s32*) &comb &= 0x7FFFFFFF;
-            if (comb < 1.1754944e-38F) {
+            f32 comb = rot_mtx[2][2] * cosf(angle1);
+            comb += rot_mtx[1][2] * sinf(angle1);
+            tmp = comb;
+            *(s32*) &tmp &= 0x7FFFFFFF;
+            if (tmp < 1.1754944e-38F) {
                 if (rot_mtx[0][2] >= 0.0F) {
                     angle3 = 1.5707964F;
                 } else {
                     angle3 = -1.5707964F;
                 }
             } else {
-                angle3 = atan2f(rot_mtx[0][2],
-                                rot_mtx[2][2] * c1 + rot_mtx[1][2] * s1);
+                angle3 = atan2f(rot_mtx[0][2], comb);
             }
         }
     }
@@ -8187,16 +8186,16 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         }
         default: {
             f32 rnd = HSD_Randf();
-            cur_angle = (f32) ((f64) 6.2831855F * (f64) rnd);
+            cur_angle = (f32) (2.0 * (M_PI * (f64) rnd));
             angle_step =
-                (f32) ((f64) 6.2831855F / (f64) (f32) (s32) gen->count);
+                (f32) ((2.0 * M_PI) / (f64) (s32) gen->count);
             break;
         }
         }
     }
 
     /* Main particle emission loop */
-    eps = 1e-10;
+    eps = 0.001F;
     while (gen->count >= 1.0F) {
         switch (gen->type & 0xF) {
         case 0: /* point, disc, cone, sphere, etc. */
@@ -8217,8 +8216,8 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             }
 
             /* Compute emission angle per shape */
-            if ((gen->type & 0xF) == 6) {
-                /* Cone/sphere shape 6 */
+            switch (gen->type & 0xF) {
+            case 6:
                 if (gen->angle < 0.0F) {
                     emit_pos.z = sin_az;
                     cur_angle += angle_step;
@@ -8258,8 +8257,8 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                                                           sin_az));
                     }
                 }
-            } else if ((gen->type & 0xF) == 7) {
-                /* Shape 7 */
+                break;
+            case 7:
                 if (gen->angle < 0.0F) {
                     cone_angle = (f32) (M_PI - gen->angle);
                     cur_angle += angle_step;
@@ -8272,8 +8271,8 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                         cur_angle = range * rnd + cur_angle;
                     }
                 }
-            } else {
-                /* Shapes 0, 3, 4 */
+                break;
+            default:
                 if (gen->angle < 0.0F) {
                     cone_angle = -gen->angle;
                     cur_angle += angle_step;
@@ -8287,23 +8286,19 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                         cur_angle = range * rnd + cur_angle;
                     }
                 }
+                break;
             }
 
             /* Compute emission position and velocity from angle */
-            {
-                f32 cos_a = cosf(cur_angle);
-                f32 sin_a = sinf(cur_angle);
-                emit_pos.x = sin_az * cos_a;
-                emit_pos.y = sin_az * sin_a;
-            }
+            emit_pos.x = sin_az * cosf(cur_angle);
+            emit_pos.y = sin_az * sinf(cur_angle);
 
             /* Shape 6,7: z from random, scale by height */
             if ((gen->type & 0xF) == 6 || (gen->type & 0xF) == 7) {
-                f32 rnd = HSD_Randf();
-                emit_pos.z = rnd;
+                emit_pos.z = HSD_Randf();
                 if ((gen->type & 0xF) == 6) {
-                    emit_pos.x *= (1.0F - rnd);
-                    emit_pos.y *= (1.0F - rnd);
+                    emit_pos.x *= (1.0F - emit_pos.z);
+                    emit_pos.y *= (1.0F - emit_pos.z);
                 }
                 emit_pos.z *= gen->aux.cone.height;
             } else {
@@ -8376,7 +8371,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                 cur_angle += angle_step;
             } else {
                 f32 rnd = HSD_Randf();
-                cur_angle = (f32) (M_TAU * (f64) rnd);
+                cur_angle = (f32) (2.0 * (M_PI * (f64) rnd));
             }
             gen->aux.line.x2 = vel_mag_sq;
             hsd_80398F0C(gen->linkNo, gen->bank, gen->kind | 4, gen->texGroup,
@@ -8389,74 +8384,43 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         case 5: /* rect */
         {
             Vec3 vel_temp;
-            f32 rx = HSD_Randf();
-            f32 ry = HSD_Randf();
-            f32 rz = HSD_Randf();
-            emit_pos.x = rx;
-            emit_pos.y = ry;
-            emit_pos.z = rz;
+            emit_pos.x = HSD_Randf();
+            emit_pos.y = HSD_Randf();
+            emit_pos.z = HSD_Randf();
 
             switch (gen->aux.rect.flag) {
             case 0: /* default: no modification */
                 break;
             case 1: /* +x */
-                if (emit_pos.x > 0.5F) {
-                    emit_pos.x = 1.0F;
-                } else {
-                    emit_pos.x = 0.0F;
-                }
+                emit_pos.x = emit_pos.x > 0.5F ? 1.0F : 0.0F;
                 break;
             case 2: /* +y */
-                if (emit_pos.y > 0.5F) {
-                    emit_pos.y = 1.0F;
-                } else {
-                    emit_pos.y = 0.0F;
-                }
+                emit_pos.y = emit_pos.y > 0.5F ? 1.0F : 0.0F;
                 break;
             case 3: /* xy split */
             {
                 f32 rnd = HSD_Randf();
                 f32 a2 = gen->aux.rect.x;
                 f32 b2 = gen->aux.rect.y;
-                if (rnd < a2 / (a2 + b2)) {
-                    if (emit_pos.y > 0.5F) {
-                        emit_pos.y = 1.0F;
-                    } else {
-                        emit_pos.y = 0.0F;
-                    }
+                if (rnd > a2 / (a2 + b2)) {
+                    emit_pos.y = emit_pos.y > 0.5F ? 1.0F : 0.0F;
                 } else {
-                    if (emit_pos.x > 0.5F) {
-                        emit_pos.x = 1.0F;
-                    } else {
-                        emit_pos.x = 0.0F;
-                    }
+                    emit_pos.x = emit_pos.x > 0.5F ? 1.0F : 0.0F;
                 }
                 break;
             }
             case 4: /* +z */
-                if (emit_pos.z > 0.5F) {
-                    emit_pos.z = 1.0F;
-                } else {
-                    emit_pos.z = 0.0F;
-                }
+                emit_pos.z = emit_pos.z > 0.5F ? 1.0F : 0.0F;
                 break;
             case 5: /* xz split */
             {
                 f32 rnd = HSD_Randf();
                 f32 a2 = gen->aux.rect.x;
                 f32 b2 = gen->aux.rect.z;
-                if (rnd < a2 / (a2 + b2)) {
-                    if (emit_pos.z > 0.5F) {
-                        emit_pos.z = 1.0F;
-                    } else {
-                        emit_pos.z = 0.0F;
-                    }
+                if (rnd > a2 / (a2 + b2)) {
+                    emit_pos.z = emit_pos.z > 0.5F ? 1.0F : 0.0F;
                 } else {
-                    if (emit_pos.x > 0.5F) {
-                        emit_pos.x = 1.0F;
-                    } else {
-                        emit_pos.x = 0.0F;
-                    }
+                    emit_pos.x = emit_pos.x > 0.5F ? 1.0F : 0.0F;
                 }
                 break;
             }
@@ -8465,18 +8429,10 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                 f32 rnd = HSD_Randf();
                 f32 a2 = gen->aux.rect.y;
                 f32 b2 = gen->aux.rect.z;
-                if (rnd < a2 / (a2 + b2)) {
-                    if (emit_pos.z > 0.5F) {
-                        emit_pos.z = 1.0F;
-                    } else {
-                        emit_pos.z = 0.0F;
-                    }
+                if (rnd > a2 / (a2 + b2)) {
+                    emit_pos.z = emit_pos.z > 0.5F ? 1.0F : 0.0F;
                 } else {
-                    if (emit_pos.y > 0.5F) {
-                        emit_pos.y = 1.0F;
-                    } else {
-                        emit_pos.y = 0.0F;
-                    }
+                    emit_pos.y = emit_pos.y > 0.5F ? 1.0F : 0.0F;
                 }
                 break;
             }
@@ -8492,26 +8448,13 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                 f32 r0 = 1.0F / total;
                 f32 t1 = r0 * ca;
                 if (rnd < t1) {
-                    if (emit_pos.z > 0.5F) {
-                        emit_pos.z = 1.0F;
-                    } else {
-                        emit_pos.z = 0.0F;
-                    }
+                    emit_pos.z = emit_pos.z > 0.5F ? 1.0F : 0.0F;
                 } else {
-                    f32 t2 = r0 * c2 * a2;
-                    t2 = 1.0F - t2;
-                    if (rnd < t2) {
-                        if (emit_pos.y > 0.5F) {
-                            emit_pos.y = 1.0F;
-                        } else {
-                            emit_pos.y = 0.0F;
-                        }
+                    f32 t2 = 1.0F - r0 * c2 * a2;
+                    if (rnd > t2) {
+                        emit_pos.y = emit_pos.y > 0.5F ? 1.0F : 0.0F;
                     } else {
-                        if (emit_pos.x > 0.5F) {
-                            emit_pos.x = 1.0F;
-                        } else {
-                            emit_pos.x = 0.0F;
-                        }
+                        emit_pos.x = emit_pos.x > 0.5F ? 1.0F : 0.0F;
                     }
                 }
                 break;
@@ -8521,22 +8464,20 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             }
 
             /* Common rect post-processing */
-            {
-                f32 px = emit_pos.x - 0.5F;
-                f32 py = emit_pos.y - 0.5F;
-                f32 pz = emit_pos.z - 0.5F;
-                emit_pos.x = px;
-                emit_pos.y = py;
-                emit_pos.z = pz;
+            emit_pos.x -= 0.5F;
+            emit_pos.y -= 0.5F;
+            emit_pos.z -= 0.5F;
 
-                /* Multiply by rect's 3x3 matrix */
-                vel_temp.x = gen->aux.rect.yx * py + gen->aux.rect.xx * px +
-                             gen->aux.rect.zx * pz;
-                vel_temp.y = gen->aux.rect.yy * py + gen->aux.rect.xy * px +
-                             gen->aux.rect.zy * pz;
-                vel_temp.z = gen->aux.rect.yz * py + gen->aux.rect.xz * px +
-                             gen->aux.rect.zz * pz;
-            }
+            /* Multiply by rect's 3x3 matrix */
+            vel_temp.x = gen->aux.rect.yx * emit_pos.y +
+                         gen->aux.rect.xx * emit_pos.x +
+                         gen->aux.rect.zx * emit_pos.z;
+            vel_temp.y = gen->aux.rect.yy * emit_pos.y +
+                         gen->aux.rect.xy * emit_pos.x +
+                         gen->aux.rect.zy * emit_pos.z;
+            vel_temp.z = gen->aux.rect.yz * emit_pos.y +
+                         gen->aux.rect.xz * emit_pos.x +
+                         gen->aux.rect.zz * emit_pos.z;
 
             PSMTXMultVec(rot_mtx, &vel_temp, &emit_pos);
             emit_pos.x += gen->pos.x;
@@ -8570,18 +8511,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         case 8: /* sphere emission */
         {
             f32 r0 = gen->aux.cone.height;
-            if (0.0F == r0) {
-                goto sphere_random;
-            }
-            {
-                f32 diff = r0 - (f32) M_PI;
-                f32 absdiff = __fabsf(diff);
-                if (absdiff < (f32) eps) {
-                    goto sphere_random;
-                }
-            }
-            /* Non-random sphere emission */
-            {
+            if (r0 == 0.0F || __fabs(r0 - M_PI) < eps) {
                 f32 rnd = sqrtf(HSD_Randf());
                 radius = (f32) (M_PI * rnd);
                 {
@@ -8590,26 +8520,24 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                         radius = (f32) (M_PI - radius);
                     }
                 }
-                goto sphere_common;
-            }
-        sphere_random: {
-            f32 rnd = sqrtf(HSD_Randf());
-            radius = gen->aux.cone.height * rnd;
-        }
-        sphere_common: {
-            f32 rnd = HSD_Randf();
-            f32 az_angle;
-            f32 r2 = gen->radius;
-            az_angle = (f32) ((f64) M_TAU * (f64) rnd);
-            cone_angle = az_angle;
-
-            if (r2 < 0.0F) {
-                sin_az = -r2;
             } else {
-                rnd = sqrtf(HSD_Randf());
-                sin_az = r2 * rnd;
+                f32 rnd = sqrtf(HSD_Randf());
+                radius = gen->aux.cone.height * rnd;
             }
-        }
+            {
+                f32 rnd = HSD_Randf();
+                f32 az_angle;
+                f32 r2 = gen->radius;
+                az_angle = (f32) (2.0 * (M_PI * (f64) rnd));
+                cone_angle = az_angle;
+
+                if (r2 < 0.0F) {
+                    sin_az = -r2;
+                } else {
+                    rnd = sqrtf(HSD_Randf());
+                    sin_az = r2 * rnd;
+                }
+            }
             {
                 f32 cos_r;
                 f32 sin_r;
@@ -8650,14 +8578,10 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         }
 
         default: /* shape > 8 */
-        {
-            void (*callback)(HSD_Generator*, Mtx);
-            callback = (void (*)(HSD_Generator*, Mtx))(Event) gen->callback;
-            if (callback != NULL) {
-                callback(gen, rot_mtx);
+            if ((void (*)(HSD_Generator*, Mtx)) hsd_804D78E8 != NULL) {
+                ((void (*)(HSD_Generator*, Mtx)) hsd_804D78E8)(gen, rot_mtx);
             }
             break;
-        }
         }
 
         gen->count -= 1.0F;
@@ -8741,17 +8665,15 @@ HSD_Generator* hsd_8039EFAC(s32 linkNo, s32 bank, s32 gfx_id, HSD_JObj* jobj)
     return gen;
 }
 
-// @TODO: Currently 94.12% match - .bss.0 section anchor hoist causes
-// register-allocation cascade (extra saved reg + frame shift)
+// @TODO: Currently 96.66% match - command-array register swap and stack
+// frame differences remain
 HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
 {
     HSD_PSCmdList*** cmdListArr;
     HSD_PSTexGroup* tg;
     HSD_Generator* gen;
     s32 ofs;
-    f32 abs_vx;
     f32 mag;
-    u8 operand_pad[4];
     f32 f0, f1, f3;
     u32 shape;
 
@@ -8780,9 +8702,9 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
         gen->texGroup = (*cmdListArr)[idx]->texGroup;
         gen->life = (*cmdListArr)[idx]->life;
         gen->genLife = (*cmdListArr)[idx]->genLife;
-        gen->pos.x = 0.0F;
-        gen->pos.y = 0.0F;
         gen->pos.z = 0.0F;
+        gen->pos.y = 0.0F;
+        gen->pos.x = 0.0F;
         gen->vel.x = (*cmdListArr)[idx]->vx;
         gen->vel.y = (*cmdListArr)[idx]->vy;
         gen->vel.z = (*cmdListArr)[idx]->vz;
@@ -8812,8 +8734,9 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
             gen->count = HSD_Randf();
         }
 
-        tg = psTexGroupArray[bank][gen->texGroup];
-        if (tg != NULL && tg->palnum != 0) {
+        tg = ((HSD_PSTexGroup***) ((uintptr_t) cmdListArr - bank * 4 - 0x30C))
+            [bank][gen->texGroup];
+        if (tg != NULL && tg->palflag != 0) {
             gen->kind |= 0x10;
         }
 
@@ -8911,9 +8834,7 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
                 gen->aux.sphere.latMid = atan2f(gen->vel.y, mag);
             }
 
-            abs_vx = gen->vel.x;
-            *(s32*) &abs_vx &= 0x7FFFFFFF;
-            if (abs_vx < 1.1754944e-38F) {
+            if (fabsf_bitwise(gen->vel.x) < 1.1754944e-38F) {
                 if (gen->vel.z >= 0.0F) {
                     gen->aux.sphere.lonMid = 1.5707964F;
                 } else {

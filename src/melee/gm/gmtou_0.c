@@ -2680,10 +2680,10 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
         tm->x37[idx].x5 = tm->x37[idx].x6;
         *state_ptr -= 1;
     } else if (trigger & 0x400) {
-        idx = lbl_804799B8.x2 + lbl_804799B8.x3;
-        adj = (u8) gm_80169238((u8) fn_8018F6FC(tm->x37[idx].x3));
-        idx = lbl_804799B8.x2 + lbl_804799B8.x3;
-        if (adj - 1 > (s32) tm->x37[idx].x7) {
+        if ((s32) tm->x37[lbl_804799B8.x2 + lbl_804799B8.x3].x7 <
+            (s32) (u8) gm_80169238((u8) fn_8018F6FC(
+                tm->x37[lbl_804799B8.x2 + lbl_804799B8.x3].x3)) - 1)
+        {
             lbAudioAx_80024030(2);
             idx = lbl_804799B8.x2 + lbl_804799B8.x3;
             tm->x37[idx].x7++;

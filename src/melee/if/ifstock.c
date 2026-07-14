@@ -241,13 +241,11 @@ void ifStock_802F8298(HSD_GObj* gobj)
         } else {
             HSD_JObjClearFlagsAll(jobj2, JOBJ_HIDDEN);
             if (stock->x204[user_data->player].x0[i + 5] <= 10) {
-                struct ifStock_804A1378_x204* data =
-                    &stock->x204[user_data->player];
-                lbVector_8000DE38(
-                    (float (*)[4]) &
-                        data->x0[0xC +
-                                 (i - 5) * sizeof(struct IfStockStealAnim)],
-                    &vecA, 0.1f * data->x0[i + 5]);
+                struct IfStockStealData* data =
+                    (struct IfStockStealData*) &stock
+                        ->x204[user_data->player];
+                lbVector_8000DE38((float (*)[4]) &data->anim[i - 5], &vecA,
+                                  0.1f * data->x0[i + 5]);
                 HSD_JObjGetTranslation(stock->player[user_data->player].x4[0],
                                        &vecB);
                 vecA.x -= vecB.x;

@@ -2261,6 +2261,35 @@ s32 fn_803ADF90(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     return callback_seq;
 }
 
+static inline void fn_803AE7F8_calc_file_blocks(
+    s32 file_size, s32 file_idx, CardState* state, s32* file_blocks,
+    s32* total_blocks)
+{
+    if (file_size <= 0) {
+        *file_blocks = 0;
+    } else if (file_idx == 0) {
+        u32 sector_size = state->x8;
+        u32 usable;
+        s32 rem;
+
+        rem = state->x4C[0];
+        usable = sector_size - 0x20;
+        rem = rem - (s32) (usable - (state->x24 + 0x30) % sector_size);
+        if (rem <= 0) {
+            *file_blocks = 1;
+        } else {
+            *file_blocks =
+                (u32) (rem + sector_size - 0x21) / (sector_size - 0x20) + 1;
+        }
+    } else {
+        u32 sector_size = state->x8;
+        *file_blocks =
+            (u32) (file_size + sector_size - 0x21) / (sector_size - 0x20);
+    }
+
+    *total_blocks = fn_803AC7DC(state);
+}
+
 s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 {
     CardState* state = arg0;
@@ -2268,6 +2297,7 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     s32 saved;
     s32 snap;
     s32 block_map[3][64];
+    s32* block_map_ptr;
     s32 blocks_before;
     s32 current_seq;
     s32 file_blocks;
@@ -2281,7 +2311,7 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     s32 verify_failed;
     s32 retries;
     u8* data;
-    PAD_STACK(80);
+    PAD_STACK(64);
 
     repair_result = 0;
     verify_failed = 0;
@@ -2301,30 +2331,9 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 
     blocks_before = fn_803AC6B8_blocks_before(arg0, arg1);
 
-    {
-        s32 loaded_size = state->x4C[arg1];
-        file_size = loaded_size;
-    }
-    if (file_size <= 0) {
-        file_blocks = 0;
-    } else if (arg1 == 0) {
-        u32 sector_size = state->x8;
-        s32 rem = state->x4C[0] - (s32) ((sector_size - 0x20) -
-                                         (state->x24 + 0x30) % sector_size);
-        if (rem <= 0) {
-            file_blocks = 1;
-        } else {
-            u32 blocks =
-                (u32) (rem + sector_size - 0x21) / (sector_size - 0x20);
-            file_blocks = blocks + 1;
-        }
-    } else {
-        u32 sector_size = state->x8;
-        file_blocks =
-            (u32) (file_size + sector_size - 0x21) / (sector_size - 0x20);
-    }
-
-    total_blocks = fn_803AC7DC(arg0);
+    file_size = state->x4C[arg1];
+    fn_803AE7F8_calc_file_blocks(file_size, arg1, arg0, &file_blocks,
+                                 &total_blocks);
 
     for (i = 0; i < file_blocks; i++) {
         block_map[0][i] = -1;
@@ -2357,13 +2366,16 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         }
     }
 
+    block_map_ptr = block_map[0];
     for (i = 0; i < file_blocks; i++) {
-        if (block_map[0][i] < 0 || state->x270[block_map[0][i]] != current_seq)
+        if (block_map_ptr[i] < 0 ||
+            state->x270[block_map_ptr[i]] != current_seq)
         {
             verify_failed = 1;
             break;
         }
-        if (block_map[1][i] < 0 || state->x270[block_map[1][i]] != current_seq)
+        if (block_map_ptr[64 + i] < 0 ||
+            state->x270[block_map_ptr[64 + i]] != current_seq)
         {
             verify_failed = 1;
             break;
@@ -2371,16 +2383,16 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     }
 
     for (i = 0; i < file_blocks; i++) {
-        if (block_map[0][i] < 0) {
+        if (block_map_ptr[i] < 0) {
             if (free_count > 0) {
-                block_map[0][i] = block_map[2][--free_count];
+                block_map_ptr[i] = block_map[2][--free_count];
             } else {
                 return -257;
             }
         }
-        if (block_map[1][i] < 0) {
+        if (block_map_ptr[64 + i] < 0) {
             if (free_count > 0) {
-                block_map[1][i] = block_map[2][--free_count];
+                block_map_ptr[64 + i] = block_map[2][--free_count];
             } else {
                 repair_result = -258;
             }
@@ -2407,17 +2419,21 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 
     if (verify_failed == 0) {
         s32 pass;
-        s32* map = block_map[0];
+        s32* map;
 
-        for (pass = 0; pass < 2; pass++, map += 64) {
+        pass = 0;
+        map = block_map_ptr;
+        result = 0;
+        for (; pass < 2 && result <= 0; pass++, map += 64) {
             s32 remaining = file_size;
 
             data = (u8*) arg2;
             for (i = 0; i < file_blocks && remaining > 0; i++) {
-                s32 phys = map[i];
+                s32 phys;
                 s32 chunk = state->x8 - 0x20;
 
-                if (remaining > chunk) {
+                if ((u32) remaining > (u32) chunk) {
+                    phys = map[i];
                     if (phys >= 0) {
                         if (arg3 != 0) {
                             s32 cmd_result;
@@ -2425,19 +2441,19 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                                 cmd_result = 0;
                             } else {
                                 s32 cmd[9];
+                                s32 ofs = fn_803ACBE8(arg0, phys);
 
                                 cmd[0] = 5;
                                 cmd[1] = (s32) arg0;
                                 cmd[4] = blocks_before + i;
                                 cmd[5] = current_seq;
                                 cmd[6] = (s32) data;
-                                cmd[7] = fn_803ACBE8(arg0, phys);
+                                cmd[7] = ofs;
                                 cmd[8] = chunk;
                                 cmd_result = fn_803AC168(cmd);
                             }
                             if (cmd_result < 0) {
                                 snap = hsd_804D7998;
-                                (void) snap;
                                 if (snap >= 0) {
                                     saved = snap;
                                     while (saved != hsd_804D7984) {
@@ -2460,15 +2476,15 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                                 return result;
                             }
                             if (result > 0) {
-                                verify_failed = 1;
                                 break;
                             }
                         }
                     }
 
-                    remaining -= chunk;
-                    data += chunk;
+                    remaining -= state->x8 - 0x20;
+                    data += state->x8 - 0x20;
                 } else {
+                    phys = map[i];
                     if (phys >= 0) {
                         if (arg3 != 0) {
                             s32 cmd_result;
@@ -2476,13 +2492,14 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                                 cmd_result = 0;
                             } else {
                                 s32 cmd[9];
+                                s32 ofs = fn_803ACBE8(arg0, phys);
 
                                 cmd[0] = 5;
                                 cmd[1] = (s32) arg0;
                                 cmd[4] = blocks_before + i;
                                 cmd[5] = current_seq;
                                 cmd[6] = (s32) data;
-                                cmd[7] = fn_803ACBE8(arg0, phys);
+                                cmd[7] = ofs;
                                 cmd[8] = remaining;
                                 cmd_result = fn_803AC168(cmd);
                             }
@@ -2510,7 +2527,6 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                                 return result;
                             }
                             if (result > 0) {
-                                verify_failed = 1;
                                 break;
                             }
                         }
@@ -2521,14 +2537,15 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
             }
         }
 
-        if (verify_failed == 0) {
+        if (result <= 0) {
             if (arg3 != 0) {
                 s32 cmd[9];
+                s32 cmd_result;
 
                 cmd[0] = 6;
                 cmd[1] = (s32) arg0;
-                result = fn_803AC168(cmd);
-                if (result < 0) {
+                cmd_result = fn_803AC168(cmd);
+                if (cmd_result < 0) {
                     snap = hsd_804D7998;
                     if (snap >= 0) {
                         saved = snap;
@@ -2538,7 +2555,7 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                         }
                         hsd_804D7984 = snap;
                     }
-                    return result;
+                    return cmd_result;
                 }
             } else {
                 for (retries = 0; retries < 10; retries++) {
@@ -2559,17 +2576,18 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     current_seq = (u8) (current_seq + 1);
     {
         s32 pass;
-        s32* map = block_map[0];
+        s32* map = block_map_ptr;
 
         for (pass = 0; pass < 2; pass++, map += 64) {
             s32 remaining = file_size;
 
             data = (u8*) arg2;
             for (i = 0; i < file_blocks && remaining > 0; i++) {
-                s32 phys = map[i];
+                s32 phys;
                 s32 chunk = state->x8 - 0x20;
 
-                if (remaining > chunk) {
+                if ((u32) remaining > (u32) chunk) {
+                    phys = map[i];
                     if (phys >= 0) {
                         if (arg3 != 0) {
                             s32 ofs = fn_803ACBE8(arg0, phys);
@@ -2625,7 +2643,8 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                                 state->x170[block_map[pass][i]] = -0x7FFF;
                                 state->x270[block_map[pass][i]] = 0;
                                 {
-                                    for (retries = 0; retries < 10; retries++) {
+                                    for (retries = 0; retries < 10; retries++)
+                                    {
                                         if (CARDClose(&state->file_info) != -1)
                                         {
                                             break;
@@ -2640,9 +2659,10 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                         state->x270[map[i]] = current_seq;
                     }
 
-                    remaining -= chunk;
-                    data += chunk;
+                    remaining -= state->x8 - 0x20;
+                    data += state->x8 - 0x20;
                 } else {
+                    phys = map[i];
                     if (phys >= 0) {
                         if (arg3 != 0) {
                             s32 ofs = fn_803ACBE8(arg0, phys);
@@ -2698,7 +2718,8 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                                 state->x170[block_map[pass][i]] = -0x7FFF;
                                 state->x270[block_map[pass][i]] = 0;
                                 {
-                                    for (retries = 0; retries < 10; retries++) {
+                                    for (retries = 0; retries < 10; retries++)
+                                    {
                                         if (CARDClose(&state->file_info) != -1)
                                         {
                                             break;
@@ -3253,15 +3274,6 @@ s32 fn_803AF3F0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     return 0;
 }
 
-static inline void fn_803B0120_blk97637(s32 arg1, CardState* state,
-                                        s32* file_size)
-{
-    {
-        s32 size = state->x4C[arg1];
-        (*file_size) = size;
-    }
-}
-
 static inline u32 fn_803B0120_block_count(u32 sector_size, u32 file_size)
 {
     return (file_size + sector_size - 0x21) / (sector_size - 0x20);
@@ -3289,7 +3301,7 @@ s32 fn_803B0120(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     s32 result;
     s32 retries;
     u8* data;
-    PAD_STACK(80);
+    PAD_STACK(64);
 
     needs_rewrite = 0;
     if (arg3 == 0) {
@@ -3308,7 +3320,10 @@ s32 fn_803B0120(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 
     blocks_before = fn_803AC6B8_blocks_before(state, arg1);
 
-    fn_803B0120_blk97637(arg1, state, &file_size);
+    {
+        s32 size = state->x4C[arg1];
+        file_size = size;
+    }
     if (file_size <= 0) {
         file_blocks = 0;
     } else if (arg1 == 0) {
@@ -3377,10 +3392,9 @@ s32 fn_803B0120(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                 block_map[1][secondary_count] = i;
                 secondary_count++;
             } else if (logical >= 0 && logical < file_blocks) {
-                if (current_seq < 0 ||
-                    fn_803ACB74(current_seq, state->x270[i]) < 0)
-                {
-                    current_seq = state->x270[i];
+                s32 seq = state->x270[i];
+                if (current_seq < 0 || fn_803ACB74(current_seq, seq) < 0) {
+                    current_seq = seq;
                 }
                 block_map[0][logical] = i;
             }
@@ -3450,7 +3464,10 @@ s32 fn_803B0120(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 
             if (remaining > chunk) {
                 if (arg3 != 0) {
-                    if (chunk != 0) {
+                    s32 cmd_result;
+                    if (chunk == 0) {
+                        cmd_result = 0;
+                    } else {
                         s32 cmd[9];
                         s32 ofs = fn_803ACBE8(state, block_map[0][i]);
                         cmd[0] = 5;
@@ -3460,19 +3477,20 @@ s32 fn_803B0120(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                         cmd[6] = (s32) data;
                         cmd[7] = ofs;
                         cmd[8] = chunk;
-                        result = fn_803AC168(cmd);
+                        cmd_result = fn_803AC168(cmd);
                     }
-                    if (result < 0) {
+                    if (cmd_result < 0) {
                         snap = hsd_804D7998;
                         if (snap >= 0) {
                             saved = snap;
                             while (saved != hsd_804D7984) {
-                                entries[saved].x10 = 0;
+                                CardBufEntry* entry = &entries[saved];
+                                entry->x10 = 0;
                                 saved = (saved + 1) % 128;
                             }
                             hsd_804D7984 = snap;
                         }
-                        return result;
+                        return cmd_result;
                     }
                 } else {
                     result =
@@ -3494,7 +3512,10 @@ s32 fn_803B0120(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                 data += chunk;
             } else {
                 if (arg3 != 0) {
-                    if (remaining != 0) {
+                    s32 cmd_result;
+                    if (remaining == 0) {
+                        cmd_result = 0;
+                    } else {
                         s32 cmd[9];
                         s32 ofs = fn_803ACBE8(state, block_map[0][i]);
                         cmd[0] = 5;
@@ -3504,19 +3525,20 @@ s32 fn_803B0120(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                         cmd[6] = (s32) data;
                         cmd[7] = ofs;
                         cmd[8] = remaining;
-                        result = fn_803AC168(cmd);
+                        cmd_result = fn_803AC168(cmd);
                     }
-                    if (result < 0) {
+                    if (cmd_result < 0) {
                         snap = hsd_804D7998;
                         if (snap >= 0) {
                             saved = snap;
                             while (saved != hsd_804D7984) {
-                                entries[saved].x10 = 0;
+                                CardBufEntry* entry = &entries[saved];
+                                entry->x10 = 0;
                                 saved = (saved + 1) % 128;
                             }
                             hsd_804D7984 = snap;
                         }
-                        return result;
+                        return cmd_result;
                     }
                 } else {
                     result =
@@ -3541,20 +3563,22 @@ s32 fn_803B0120(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         if (i >= file_blocks || remaining <= 0) {
             if (arg3 != 0) {
                 s32 cmd[9];
+                s32 cmd_result;
                 cmd[0] = 6;
                 cmd[1] = (s32) state;
-                result = fn_803AC168(cmd);
-                if (result < 0) {
+                cmd_result = fn_803AC168(cmd);
+                if (cmd_result < 0) {
                     snap = hsd_804D7998;
                     if (snap >= 0) {
                         saved = snap;
                         while (saved != hsd_804D7984) {
-                            entries[saved].x10 = 0;
+                            CardBufEntry* entry = &entries[saved];
+                            entry->x10 = 0;
                             saved = (saved + 1) % 128;
                         }
                         hsd_804D7984 = snap;
                     }
-                    return result;
+                    return cmd_result;
                 }
             } else {
                 for (retries = 0; retries < 10; retries++) {
@@ -3573,9 +3597,12 @@ s32 fn_803B0120(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     while (secondary_count > 0) {
         secondary_count--;
         if (arg3 != 0) {
-            if (block_map[1][secondary_count] != 0) {
+            s32 cmd_result;
+            s32 ofs = fn_803ACBE8(state, block_map[1][secondary_count]);
+            if (block_map[1][secondary_count] == 0) {
+                cmd_result = -257;
+            } else {
                 s32 cmd[9];
-                s32 ofs = fn_803ACBE8(state, block_map[1][secondary_count]);
                 cmd[0] = 1;
                 cmd[1] = (s32) state;
                 cmd[2] = arg1;
@@ -3585,21 +3612,20 @@ s32 fn_803B0120(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                 cmd[6] = 0;
                 cmd[7] = ofs;
                 cmd[8] = 0;
-                result = fn_803AC168(cmd);
-            } else {
-                result = -257;
+                cmd_result = fn_803AC168(cmd);
             }
-            if (result < 0) {
+            if (cmd_result < 0) {
                 snap = hsd_804D7998;
                 if (snap >= 0) {
                     saved = snap;
                     while (saved != hsd_804D7984) {
-                        entries[saved].x10 = 0;
+                        CardBufEntry* entry = &entries[saved];
+                        entry->x10 = 0;
                         saved = (saved + 1) % 128;
                     }
                     hsd_804D7984 = snap;
                 }
-                return result;
+                return cmd_result;
             }
         } else {
             result = fn_803ACFC0(state, block_map[1][secondary_count], 0xFFFF,
@@ -3632,19 +3658,23 @@ s32 fn_803B0120(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         if (remaining > chunk) {
             if (arg3 != 0) {
                 s32 ofs = fn_803ACBE8(state, block_map[0][i]);
-                if (block_map[0][i] == 0 && logical != 0) {
-                    result = -0x101;
-                } else {
+                s32 cmd_result;
+                do {
                     if (block_map[0][i] == 0) {
-                        s32 cmd[9];
-                        cmd[0] = 2;
-                        cmd[1] = (s32) state;
-                        cmd[4] = 0;
-                        cmd[5] = 0;
-                        cmd[6] = 0;
-                        cmd[7] = ofs;
-                        cmd[8] = 0;
-                        fn_803AC168(cmd);
+                        if (logical != 0) {
+                            cmd_result = -0x101;
+                            break;
+                        } else {
+                            s32 cmd[9];
+                            cmd[0] = 2;
+                            cmd[1] = (s32) state;
+                            cmd[4] = 0;
+                            cmd[5] = 0;
+                            cmd[6] = 0;
+                            cmd[7] = ofs;
+                            cmd[8] = 0;
+                            fn_803AC168(cmd);
+                        }
                     }
                     {
                         s32 cmd[9];
@@ -3657,20 +3687,21 @@ s32 fn_803B0120(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                         cmd[6] = (s32) data;
                         cmd[7] = ofs;
                         cmd[8] = chunk;
-                        result = fn_803AC168(cmd);
+                        cmd_result = fn_803AC168(cmd);
                     }
-                }
-                if (result < 0) {
+                } while (0);
+                if (cmd_result < 0) {
                     snap = hsd_804D7998;
                     if (snap >= 0) {
                         saved = snap;
                         while (saved != hsd_804D7984) {
-                            entries[saved].x10 = 0;
+                            CardBufEntry* entry = &entries[saved];
+                            entry->x10 = 0;
                             saved = (saved + 1) % 128;
                         }
                         hsd_804D7984 = snap;
                     }
-                    return result;
+                    return cmd_result;
                 }
             } else {
                 {
@@ -3697,20 +3728,25 @@ s32 fn_803B0120(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
             data += chunk;
         } else {
             if (arg3 != 0) {
-                s32 ofs = fn_803ACBE8(state, block_map[0][i]);
-                if (block_map[0][i] == 0 && logical != 0) {
-                    result = -0x101;
-                } else {
-                    if (!block_map[0][i]) {
-                        s32 cmd[9];
-                        cmd[0] = 2;
-                        cmd[1] = (s32) state;
-                        cmd[4] = 0;
-                        cmd[5] = 0;
-                        cmd[6] = 0;
-                        cmd[7] = ofs;
-                        cmd[8] = 0;
-                        fn_803AC168(cmd);
+                s32 block = block_map[0][i];
+                s32 ofs = fn_803ACBE8(state, block);
+                s32 cmd_result;
+                do {
+                    if (block_map[0][i] == 0) {
+                        if (logical != 0) {
+                            cmd_result = -0x101;
+                            break;
+                        } else {
+                            s32 cmd[9];
+                            cmd[0] = 2;
+                            cmd[1] = (s32) state;
+                            cmd[4] = 0;
+                            cmd[5] = 0;
+                            cmd[6] = 0;
+                            cmd[7] = ofs;
+                            cmd[8] = 0;
+                            fn_803AC168(cmd);
+                        }
                     }
                     {
                         s32 cmd[9];
@@ -3723,20 +3759,21 @@ s32 fn_803B0120(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                         cmd[6] = (s32) data;
                         cmd[7] = ofs;
                         cmd[8] = remaining;
-                        result = fn_803AC168(cmd);
+                        cmd_result = fn_803AC168(cmd);
                     }
-                }
-                if (result < 0) {
+                } while (0);
+                if (cmd_result < 0) {
                     snap = hsd_804D7998;
                     if (snap >= 0) {
                         saved = snap;
                         while (saved != hsd_804D7984) {
-                            entries[saved].x10 = 0;
+                            CardBufEntry* entry = &entries[saved];
+                            entry->x10 = 0;
                             saved = (saved + 1) % 128;
                         }
                         hsd_804D7984 = snap;
                     }
-                    return result;
+                    return cmd_result;
                 }
             } else {
                 result = fn_803ACFC0(state, block_map[0][i], blocks_before + i,

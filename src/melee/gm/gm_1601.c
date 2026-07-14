@@ -3205,22 +3205,27 @@ float fn_80166A8C(register Vec3* src, register Vec3* dst)
 s32 gm_80166A98(MatchEnd* arg0, s32 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,
                 s8 arg6, u8 arg7, u8 arg_sp8, u8 arg_spC)
 {
-    s32 score0 = 0xA - arg3;
-    s32 score1 = 0xA - arg5;
-    s32 score2 = 0xA - arg7;
-    s32 score3 = 0xA - arg_spC;
+    s32 score0;
+    s32 score1;
+    s32 score2;
+    s32 score3;
     u32 i;
 
+    arg1 &= 0x3F;
     memzero(arg0, 0x227C);
 
     arg0->result = 1;
     arg0->x5 = 0;
     arg0->is_teams = 0;
 
+    score0 = 0xA - arg3;
     arg0->player_standings[0].character_kind = arg2;
+    score1 = 0xA - arg5;
     arg0->player_standings[1].character_kind = arg4;
-    arg0->player_standings[3].character_kind = arg_sp8;
+    score2 = 0xA - arg7;
     arg0->player_standings[2].character_kind = arg6;
+    score3 = 0xA - arg_spC;
+    arg0->player_standings[3].character_kind = arg_sp8;
 
     // Apply player color to all 4 players?
     for (i = 0; i < 4; i++) {
@@ -3229,8 +3234,8 @@ s32 gm_80166A98(MatchEnd* arg0, s32 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,
 
     arg0->player_standings[0].score = score0;
     arg0->player_standings[1].score = score1;
-    arg0->player_standings[2].score = 0xA - arg7;
-    arg0->player_standings[3].score = 0xA - arg_spC;
+    arg0->player_standings[2].score = score2;
+    arg0->player_standings[3].score = score3;
     arg0->player_standings[0].x30 = score0;
     arg0->player_standings[1].x30 = score1;
     arg0->player_standings[2].x30 = score2;

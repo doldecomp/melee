@@ -4346,7 +4346,8 @@ void _Toy_8030E110(HSD_GObj* arg0)
             trigger = Toy_80305B88();
 
             tmp = state->x44 + (state->x40 + (state->x30 + state->x34));
-            if ((tmp + (f32) trigger) == 0.0f) {
+            tmp += (f32) trigger;
+            if (tmp == 0.0f) {
                 state->x5C = state->x5C + 1;
             } else {
                 state->x5C = 0;

@@ -500,7 +500,7 @@ void _tyDisplay_80318CB4(s32 arg0)
     s32 pivot;
     s32 n;
 
-    PAD_STACK(0x48);
+    PAD_STACK(0x3C);
 
     memzero(grid, 0x12E4);
     grid->x08_min_z = -3.5f;
@@ -624,6 +624,7 @@ void _tyDisplay_80318CB4(s32 arg0)
         if (n2 > 0) {
             TyDspPos tmp;
             s32 j;
+            PAD_STACK(12);
             mid = n2 / 2;
 
             if (mid != 0) {
@@ -729,35 +730,46 @@ static inline void _tyDisplay_80319540_sort_and_place(TyDspConfig* cfg,
     if (cfg->x08 > 1) {
         n2 = (cfg->x08 / 3) * 2;
         if (n2 > 0) {
-            TySortElem tmp2, tmp1, tmp0;
+            struct {
+                u8 pad0[4];
+                TySortElem tmp2;
+                u8 pad1[4];
+                TySortElem tmp1, tmp0;
+            } temps;
             s32 mid = n2 / 2;
+            TyDspGrid* cur;
             s32 pivot, n, j;
 
             if (mid != 0) {
-                tmp0 = grid->sort[0];
+                temps.tmp0 = grid->sort[0];
                 grid->sort[0] = grid->sort[mid];
-                grid->sort[mid] = tmp0;
+                grid->sort[mid] = temps.tmp0;
             }
 
             pivot = 0;
             j = 0;
-            for (n = 1; n2 >= n; n++) {
-                if (*(s32*) &grid->sort[n].val > *(s32*) &grid->sort[0].val) {
+            cur = (TyDspGrid*) ((size_t) grid + sizeof(TySortElem));
+            for (n = 1; n2 >= n; n++,
+                cur = (TyDspGrid*) ((size_t) cur + sizeof(TySortElem)))
+            {
+                if (*(s32*) &cur->sort[0].val >
+                    *(s32*) &grid->sort[0].val)
+                {
                     pivot += 1;
                     j += 8;
                     if (pivot != n) {
                         TySortElem* s = tyDisplay_GetGridSortElem(j, grid);
-                        tmp1 = *s;
-                        *s = grid->sort[n];
-                        grid->sort[n] = tmp1;
+                        temps.tmp1 = *s;
+                        *s = cur->sort[0];
+                        cur->sort[0] = temps.tmp1;
                     }
                 }
             }
 
             if (pivot != 0) {
-                tmp2 = grid->sort[0];
+                temps.tmp2 = grid->sort[0];
                 grid->sort[0] = grid->sort[pivot];
-                grid->sort[pivot] = tmp2;
+                grid->sort[pivot] = temps.tmp2;
             }
 
             _tyDisplay_80318714(grid->sort, 0, pivot - 1);
@@ -790,7 +802,7 @@ void _tyDisplay_80319540(s32 arg0)
     s32 col;
     s32 row;
     TyDspGrid* grid = _tyDisplay_804D6F14;
-    PAD_STACK(0x20);
+    PAD_STACK(0x18);
 
     memzero(grid, 0x12E4);
 

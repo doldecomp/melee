@@ -341,6 +341,7 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
         {
             Vec3 arg2_copy;
             arg2_copy = *arg2;
+            (void) arg2_copy;
             arg5_offset = arg2_copy;
         }
 
@@ -647,7 +648,7 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
                 arg5->z = d2_z * arg5_scl + arg5_offset.z;
             }
         }
-            PAD_STACK(72);
+            PAD_STACK(84);
             return end(arg4, arg5, unk_sum);
         }
         }

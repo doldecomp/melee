@@ -690,6 +690,11 @@ static inline void mnStageSw_InitUserData(MnStageSwData* user_data, s8 state)
     }
 }
 
+static inline HSD_JObj* mnStageSw_LoadCursor(void)
+{
+    return HSD_JObjLoadJoint(MenMainCursorSs_Top.joint);
+}
+
 static HSD_GObj* mnStageSw_80236CBC(s8 arg0)
 {
     HSD_GObj* gobj;
@@ -735,7 +740,7 @@ static HSD_GObj* mnStageSw_80236CBC(s8 arg0)
         u8 idx;
 
         hovered = mn_804A04F0.hovered_selection;
-        cursor_jobj = HSD_JObjLoadJoint(MenMainCursorSs_Top.joint);
+        cursor_jobj = mnStageSw_LoadCursor();
         HSD_JObjAddAnimAll(cursor_jobj, MenMainCursorSs_Top.animjoint,
                            MenMainCursorSs_Top.matanim_joint,
                            MenMainCursorSs_Top.shapeanim_joint);

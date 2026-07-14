@@ -1926,14 +1926,14 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
     struct Fighter_x1A88_t* data2;
     struct Fighter_x1A88_t* data = &fp->x1A88;
     s32 t;
+    u32 flags;
+    int line_id;
     Vec3 island_pos;
-    Vec3 floor_pos;
     Vec3 floor_normal;
     Vec3 alt_floor_pos;
     Vec3 alt_floor_normal;
-    int line_id;
-    u32 flags;
     f32 dist;
+    Vec3 floor_pos;
     f32 ey;
     f32 ez;
     f32 grav;
@@ -3286,7 +3286,6 @@ bool ftCo_800A6700(Fighter* fp, Vec3* arg1, Vec3* arg2)
     Vec3 floor_pos;
     Vec3 floor_normal;
     f32 px;
-    f32 dx;
     f32 dy;
     f32 dist;
     s32 result;
@@ -3312,9 +3311,9 @@ bool ftCo_800A6700(Fighter* fp, Vec3* arg1, Vec3* arg2)
             }
             if (result != 0) {
                 if (!ftCo_800A6700_inline0(fp, px, ay)) {
-                    dx = px - arg1->x;
+                    px = px - arg1->x;
                     dy = ay - arg1->y;
-                    dist = dx * dx + dy * dy;
+                    dist = px * px + dy * dy;
                     if (dist > best) {
                         best = dist;
                         arg2->x = ax + 5.0;
@@ -3336,9 +3335,9 @@ bool ftCo_800A6700(Fighter* fp, Vec3* arg1, Vec3* arg2)
             }
             if (result != 0) {
                 if (!ftCo_800A6700_inline0(fp, px, ay)) {
-                    dx = px - arg1->x;
+                    px = px - arg1->x;
                     dy = ay - arg1->y;
-                    dist = dx * dx + dy * dy;
+                    dist = px * px + dy * dy;
                     if (dist > best) {
                         best = dist;
                         arg2->x = ax - 5.0;
@@ -9116,38 +9115,42 @@ void ftCo_800B2790(Fighter* fp)
 
 void ftCo_800B1DA0(Fighter*); /* static */
 
+static inline bool ftCo_800B2AFC_CheckFloor(
+    Vec3* pos, int* line, u32* flags, Vec3* normal, int arg4, int arg5,
+    int arg6, float x0, float y0, float x1, float y1, float tolerance)
+{
+    int result;
+    *line = -1;
+    result = mpCheckFloor(x0, y0, x1, y1, tolerance, pos, line, flags, normal,
+                          arg4, arg5, arg6, NULL, NULL);
+    if (result != 0 && ftCo_800A1B38_noinline(*line) != 0) {
+        return false;
+    }
+    return result;
+}
+
 void ftCo_800B2AFC(Fighter* fp)
 {
-    UNUSED u8 pad_high[8];
+    UNUSED u8 pad_high[4];
     u32 flags0;
-    int line0;
+    Vec3 floor_pos26;
     Vec3 floor_normal0;
     Vec3 floor_pos0;
-    UNUSED u8 pad_01[4];
     u32 flags1;
-    int line1;
     Vec3 floor_normal1;
-    Vec3 floor_pos1;
-    u32 flags3;
+    int line1;
     int line3;
+    Vec3 floor_pos1;
     Vec3 floor_normal3;
     Vec3 floor_pos3;
-    UNUSED u8 pad_326[4];
-    u32 flags26;
-    int line26;
-    Vec3 floor_normal26;
-    Vec3 floor_pos26;
+    int line0;
 
     switch (fp->x1A88.xC) {
     case 0: {
         struct Fighter_x1A88_t* data = &fp->x1A88;
-        s32 found;
         s32 result;
+        s32 found;
         s32 do_act;
-        f32 px;
-        f32 py;
-        f32 above;
-        f32 below;
         s32 x18;
 
         data->xF8_b0 = false;
@@ -9169,21 +9172,23 @@ void ftCo_800B2AFC(Fighter* fp)
             do_act = 1;
         }
         if (do_act != 0) {
-            px = fp->cur_pos.x;
-            py = fp->cur_pos.y;
-            found = 0;
-            line0 = -1;
-            above = 10.0f + py;
-            below = py - 1000.0f;
-            result =
-                mpCheckFloor(px, above, px, below, 0.0f, &floor_pos0, &line0,
-                             &flags0, &floor_normal0, -1, -1, -1, NULL, NULL);
-            if (result != 0 && ftCo_800A1B38_noinline(line0) != 0) {
-            } else {
-                found = result;
-            }
+            f32 x = fp->cur_pos.x;
+            f32 x2 = x;
+            f32 y = fp->cur_pos.y;
+            f32 below;
+            f32 above;
+            below = y - 1000.0f;
+            above = 10.0f + y;
+            result = ftCo_800B2AFC_CheckFloor(
+                &floor_pos0, &line0, &flags0, &floor_normal0, -1, -1, -1, x2,
+                above, x, below, 0.0f);
+            found = result;
             if (found != 0) {
-                ftCo_800A1F3C_noinline2(fp, floor_pos0.x, floor_pos0.y, 5.0f);
+                f32 floor_x;
+                f32 floor_y;
+                floor_x = floor_pos0.x;
+                floor_y = floor_pos0.y;
+                ftCo_800A1F3C_noinline2(fp, floor_x, floor_y, 5.0f);
             }
         }
         ftCo_800ADE48(fp);
@@ -9194,10 +9199,6 @@ void ftCo_800B2AFC(Fighter* fp)
         s32 found;
         s32 result;
         s32 do_act;
-        f32 px;
-        f32 py;
-        f32 above;
-        f32 below;
         s32 x18;
 
         data->xF8_b0 = false;
@@ -9219,24 +9220,28 @@ void ftCo_800B2AFC(Fighter* fp)
             do_act = 1;
         }
         if (do_act != 0) {
-            px = fp->x1A88.x98.x;
-            py = fp->x1A88.x98.y;
-            found = 0;
-            line1 = -1;
-            above = 10.0f + py;
-            below = py - 1000.0f;
-            result =
-                mpCheckFloor(px, above, px, below, 0.0f, &floor_pos1, &line1,
-                             &flags1, &floor_normal1, -1, -1, -1, NULL, NULL);
-            if (result != 0 && ftCo_800A1B38_noinline(line1) != 0) {
-            } else {
-                found = result;
-            }
+            f32 x = fp->x1A88.x98.x;
+            f32 x2 = x;
+            f32 y = fp->x1A88.x98.y;
+            f32 below;
+            f32 above;
+            below = y - 1000.0f;
+            above = 10.0f + y;
+            found = ftCo_800B2AFC_CheckFloor(
+                &floor_pos1, &line1, &flags1, &floor_normal1, -1, -1, -1, x2,
+                above, x, below, 0.0f);
             if (found != 0) {
-                ftCo_800A1F3C_noinline2(fp, floor_pos1.x, floor_pos1.y, 5.0f);
+                f32 floor_x;
+                f32 floor_y;
+                floor_x = floor_pos1.x;
+                floor_y = floor_pos1.y;
+                ftCo_800A1F3C_noinline2(fp, floor_x, floor_y, 5.0f);
             } else {
-                ftCo_800A1F3C_noinline2(fp, fp->cur_pos.x, fp->cur_pos.y,
-                                        5.0f);
+                f32 cur_x;
+                f32 cur_y;
+                cur_x = fp->cur_pos.x;
+                cur_y = fp->cur_pos.y;
+                ftCo_800A1F3C_noinline2(fp, cur_x, cur_y, 5.0f);
             }
         }
         ftCo_800ADE48(fp);
@@ -9247,13 +9252,9 @@ void ftCo_800B2AFC(Fighter* fp)
         return;
     case 3: {
         struct Fighter_x1A88_t* data = &fp->x1A88;
-        s32 found;
         s32 result;
+        s32 found;
         s32 do_act;
-        f32 px;
-        f32 py;
-        f32 above;
-        f32 below;
         s32 x18;
 
         data->xF8_b0 = false;
@@ -9275,21 +9276,23 @@ void ftCo_800B2AFC(Fighter* fp)
             do_act = 1;
         }
         if (do_act != 0) {
-            px = fp->cur_pos.x;
-            py = fp->cur_pos.y;
-            found = 0;
-            line3 = -1;
-            above = 10.0f + py;
-            below = py - 1000.0f;
-            result =
-                mpCheckFloor(px, above, px, below, 0.0f, &floor_pos3, &line3,
-                             &flags3, &floor_normal3, -1, -1, -1, NULL, NULL);
-            if (result != 0 && ftCo_800A1B38_noinline(line3) != 0) {
-            } else {
-                found = result;
-            }
+            u32 flags3;
+            f32 x = fp->cur_pos.x;
+            f32 x2 = x;
+            f32 y = fp->cur_pos.y;
+            f32 below;
+            f32 above;
+            below = y - 1000.0f;
+            above = 10.0f + y;
+            found = ftCo_800B2AFC_CheckFloor(
+                &floor_pos3, &line3, &flags3, &floor_normal3, -1, -1, -1, x2,
+                above, x, below, 0.0f);
             if (found != 0) {
-                ftCo_800A1F3C_noinline2(fp, floor_pos3.x, floor_pos3.y, 5.0f);
+                f32 floor_x;
+                f32 floor_y;
+                floor_x = floor_pos3.x;
+                floor_y = floor_pos3.y;
+                ftCo_800A1F3C_noinline2(fp, floor_x, floor_y, 5.0f);
             }
         }
         ftCo_800ADE48(fp);
@@ -9411,13 +9414,9 @@ void ftCo_800B2AFC(Fighter* fp)
     }
     case 26: {
         struct Fighter_x1A88_t* data = &fp->x1A88;
-        s32 found;
         s32 result;
+        s32 found;
         s32 do_act;
-        f32 px;
-        f32 py;
-        f32 above;
-        f32 below;
         s32 x18;
 
         data->xF8_b0 = false;
@@ -9440,22 +9439,25 @@ void ftCo_800B2AFC(Fighter* fp)
             do_act = 1;
         }
         if (do_act != 0) {
-            px = fp->cur_pos.x;
-            py = fp->cur_pos.y;
-            found = 0;
-            line26 = -1;
-            above = 10.0f + py;
-            below = py - 1000.0f;
-            result = mpCheckFloor(px, above, px, below, 0.0f, &floor_pos26,
-                                  &line26, &flags26, &floor_normal26, -1, -1,
-                                  -1, NULL, NULL);
-            if (result != 0 && ftCo_800A1B38_noinline(line26) != 0) {
-            } else {
-                found = result;
-            }
+            u32 flags26;
+            int line26;
+            Vec3 floor_normal26;
+            f32 x = fp->cur_pos.x;
+            f32 x2 = x;
+            f32 y = fp->cur_pos.y;
+            f32 below;
+            f32 above;
+            below = y - 1000.0f;
+            above = 10.0f + y;
+            found = ftCo_800B2AFC_CheckFloor(
+                &floor_pos26, &line26, &flags26, &floor_normal26, -1, -1, -1,
+                x2, above, x, below, 0.0f);
             if (found != 0) {
-                ftCo_800A1F3C_noinline2(fp, floor_pos26.x, floor_pos26.y,
-                                        5.0f);
+                f32 floor_x;
+                f32 floor_y;
+                floor_x = floor_pos26.x;
+                floor_y = floor_pos26.y;
+                ftCo_800A1F3C_noinline2(fp, floor_x, floor_y, 5.0f);
             }
         }
         ftCo_800ADE48(fp);
