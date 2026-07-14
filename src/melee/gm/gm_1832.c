@@ -1265,7 +1265,6 @@ typedef struct gm_804736B0_t {
 } gm_804736B0_t;
 
 gm_804736B0_t lbl_804736B0;
-extern f32 lbl_804DA5C8;
 
 /// Classic Mode intro scene enter data (0x20 bytes)
 typedef struct ClassicModeEnterData {
@@ -1311,7 +1310,7 @@ void fn_80186EFC(HSD_GObj* gobj)
     gm_804736B0_t* state = &lbl_804736B0;
     int* counter;
     PAD_STACK(8);
-    HSD_JObjReqAnimAll(state->xC, lbl_804DA5C8);
+    HSD_JObjReqAnimAll(state->xC, 0.0f);
     HSD_JObjAnimAll(jobj);
     counter = &state->x4;
     if (*counter < 0x8C) {
