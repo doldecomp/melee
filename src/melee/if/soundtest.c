@@ -140,7 +140,8 @@ struct un_803FA128_x130_t {
     u8 _pad13C[0x8];
     u8 x144[0x44];
     s32 x188;
-} un_803FA258 = { 0 };
+};
+extern struct un_803FA258_t un_803FA258;
 /* 3FA348 */ static u16 un_803FA348;
 /* 3FA34C */ static u8 un_803FA34C;
 /* 3FA32C */ static u8 un_803FA32C;
@@ -889,27 +890,22 @@ bool un_80300AF4(int arg0)
     return false;
 }
 
-/// @todo Find a solution without the pragma
-#pragma push
-#pragma global_optimizer off
 bool un_80300B58(int arg0)
 {
     if (arg0 == 1) {
+        struct un_803FA258_t* data;
         lbAudioAx_80024030(1);
-        {
-            struct un_803FA258_t* data = &un_803FA258;
-            data->x4[1] = 0x3B;
-            data->x4[3] = 0x2;
-            data->x24[1] = 3;
-            data->x24[2] = 3;
-            data->x24[3] = 3;
-        }
+        data = &un_803FA258;
+        data->x4[1] = 0x3B;
+        data->x4[3] = 0x2;
+        data->x24[1] = 3;
+        data->x24[2] = 3;
+        data->x24[3] = 3;
         gm_SetPendingSceneIndex(4);
         gm_801A4B60();
     }
     return false;
 }
-#pragma pop
 
 bool un_80300BBC(bool update_scene)
 {
@@ -1660,3 +1656,7 @@ bool un_80301E08(bool update_scene)
 
     return false;
 }
+
+/// Defined after the functions: MWCC only keeps the address
+/// materialization un-hoisted for globals it has not yet seen defined.
+struct un_803FA258_t un_803FA258 = { 0 };
