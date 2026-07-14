@@ -39,6 +39,21 @@
 #include <MSL/math_ppc.h>
 #include <MSL/trigf.h>
 
+static void sdata2_order(void)
+{
+    (void) 0.4f;         // 3e cc cc cd
+    (void) 0.0f;         // 00 00 00 00
+    (void) 1.0471976f;   // 3f 86 0a 92
+    (void) -10000.0f;    // c6 1c 40 00
+    (void) 10000.0f;     // 46 1c 40 00
+    (void) 0.017453292f; // 3c 8e fa 35
+    (void) 10.0f;        // 41 20 00 00
+    (void) -1.0f;        // bf 80 00 00
+    (void) -350.0f;      // c3 af 00 00
+    (void) 1.0f;         // 3f 80 00 00
+    (void) 1000.0f;      // 44 7a 00 00
+}
+
 S16Vec3 grRc_803E4DA8[] = {
     { 0, 1, 1 },   { 1, 1, 1 },   { 2, 1, 1 },   { 3, 1, 1 },   { 4, 1, 1 },
     { 11, 1, 7 },  { 10, 1, 17 }, { 6, 1, 7 },   { 7, 1, 7 },   { 8, 1, 7 },

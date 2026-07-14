@@ -1933,7 +1933,7 @@ check_cobj:
 
 bool gm_8018841C(void)
 {
-    if (gm_801A4310() == GM_TRAINING) {
+    if (gm_GetCurrentGameMode() == GM_TRAINING) {
         return true;
     }
     return false;

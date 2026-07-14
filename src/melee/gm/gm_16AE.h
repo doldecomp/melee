@@ -53,7 +53,7 @@
 /* 16B3A0 */ bool gm_8016B3A0(void);
 /* 16B3D8 */ bool gm_8016B3D8(void);
 /* 16B41C */ bool gm_8016B41C(void);
-/* 16B498 */ bool gm_8016B498(void);
+/* 16B498 */ bool gm_IsCurrently1PMode(void);
 /* 16B4BC */ bool fn_8016B4BC(void);
 /* 16B510 */ bool fn_8016B510(void);
 /* 16B558 */ int gm_8016B558(void);
