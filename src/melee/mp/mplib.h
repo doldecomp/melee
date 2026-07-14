@@ -196,7 +196,7 @@
 /* 058ACC */ void mpLib_SetupDraw(GXColor);
 /* 058B5C */ void mpLib_DrawEcbs(CollData*);
 /* 0590F4 */ void mpLib_DrawSnapping(void);
-/* 059404 */ void mpLib_DrawMatchingLines(int, int, GXColor);
+/* 059404 */ int mpLib_DrawMatchingLines(int, int, const GXColor*);
 /* 059554 */ void mpLib_80059554(void);
 /* 059E60 */ void mpLib_80059E60(void);
 /* 059FE0 */ void mpLib_DrawCrosses(s16* idx, int len, GXColor);
