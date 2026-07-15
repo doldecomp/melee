@@ -2255,11 +2255,17 @@ melee/gm/gmtitle.c:
 	.sdata2     start:0x804DA998 end:0x804DA9B8
 
 melee/gm/gmcamera.c:
-	.text       start:0x801A2224 end:0x801A3680
-	.data       start:0x803DA630 end:0x803DA788
-	.bss        start:0x80479BC8 end:0x80479C30
+	.text       start:0x801A2224 end:0x801A33BC
+	.data       start:0x803DA630 end:0x803DA758
+	.bss        start:0x80479BC8 end:0x80479C20
 	.sdata      start:0x804D4248 end:0x804D4268
-	.sdata2     start:0x804DA9B8 end:0x804DA9E8
+	.sdata2     start:0x804DA9B8 end:0x804DA9D8
+
+melee/gm/gm_1A33.c:
+	.text       start:0x801A33BC end:0x801A3680
+	.data       start:0x803DA758 end:0x803DA788
+	.bss        start:0x80479C20 end:0x80479C30
+	.sdata2     start:0x804DA9D8 end:0x804DA9E8
 
 melee/gm/gm_1A36.c:
 	.text       start:0x801A3680 end:0x801A3F48
