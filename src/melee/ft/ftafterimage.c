@@ -34,7 +34,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
     itSword_UnkBytes* params;
     AfterimageVtx vtx_buf[151];
     f32 cumDist[3];
-    Vec3 delta, prevPos, crossProd, tempDir;
+    Vec3 delta, prevPos;
     s32 numVerts;
     s32 nextIdx;
 
@@ -70,7 +70,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
             params = it_80285300(fp->item_gobj);
             break;
         default:
-            HSD_ASSERTREPORT(0x7C, NULL, "no afterimage item!\n");
+            HSD_ASSERTREPORT(0x7C, 0, "no afterimage item!\n");
             break;
         }
     } else {
@@ -169,6 +169,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
         }
 
         {
+            Vec3 tempDir, crossProd;
             f32 scaleDiff = x20FC - x20F8;
             s32 curIdx2;
             f32 blendedInner = params->x0 * scaleDiff + x20F8;
@@ -248,7 +249,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                         s32 numSubdiv = (s32) subdivAngle;
                         interpFactor = 1.0f - (*distPtr / totalDist);
 
-                        if (numSubdiv != 0) {
+                        if (numSubdiv) {
                             f32 frac;
                             s32 j;
                             f32 cumAngle = 0.0f;
