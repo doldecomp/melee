@@ -2091,55 +2091,53 @@ float ftColl_80079AB0(Fighter* fp, HitCapsule* hit, u32 unk_count, float arg3,
                       float attack, float defense, float weight)
 {
     ftCommonData* ftd = p_ftCommonData;
-    float w = weight * ftd->xF4;
     float decay;
     float result;
+    float w = weight;
+    PAD_STACK(8);
+    w *= ftd->xF4;
 
     if (hit->x28 != 0) {
-        float x24_f;
+        float x118;
 
         decay = ftd->xF8;
-        result = (w * decay) / (1.0F + w);
-        decay -= result;
+        x118 = ftd->x118;
 
-        result = ftd->x118 * (float) (u32) hit->x28;
-        result = ftd->x118 * ftd->x110 + ftd->x114 * result;
-        result = decay * result;
-        result = ftd->x11C * result + ftd->x120;
-        x24_f = 0.01F * (float) (u32) hit->x24;
-        result = x24_f * result + (float) (u32) hit->x2C;
-        result = arg3 * result;
-        result = attack * result;
-        result = defense * result;
+        result =
+            defense *
+            (attack *
+             (arg3 *
+              ((0.01F * hit->x24 *
+                (ftd->x11C *
+                     ((ftd->xF8 - ((w * ftd->xF8) / (1.0F + w))) *
+                      (x118 * ftd->x110 + ftd->x114 * (x118 * hit->x28))) +
+                 ftd->x120)) +
+               hit->x2C)));
     } else {
         s32 count;
-        float damage;
-        float x24_f;
 
         if (fp->x2225_b7) {
             if (fp->x2224_b2) {
                 count = (s32) ftd->x6D8[0];
             } else {
-                count = (s32) ftd->x6D4;
+                count = ftd->x6D4;
             }
         } else {
             count = (s32) fp->dmg.x1830_percent;
         }
 
-        decay = ftd->xF8;
-        result = (w * decay) / (1.0F + w);
-        decay -= result;
-        damage = (float) count + fp->dmg.x1838_percentTemp;
-        result = (float) (u32) unk_count * damage;
-        result = ftd->x110 * damage + ftd->x114 * result;
-        result = decay * result;
-        result = ftd->x11C * result + ftd->x120;
-        x24_f = 0.01F * (float) (u32) hit->x24;
-        (void) x24_f;
-        result = x24_f * result + (float) (u32) hit->x2C;
-        result = arg3 * result;
-        result = attack * result;
-        result = defense * result;
+        result =
+            defense *
+            (attack *
+             (arg3 *
+              ((0.01F * hit->x24 *
+                (ftd->x11C *
+                     ((ftd->xF8 - ((w * ftd->xF8) / (1.0F + w))) *
+                      (ftd->x110 * (count + fp->dmg.x1838_percentTemp) +
+                       ftd->x114 * (unk_count *
+                                    (count + fp->dmg.x1838_percentTemp)))) +
+                 ftd->x120)) +
+               hit->x2C)));
     }
 
     if (result >= ftd->x108) {
