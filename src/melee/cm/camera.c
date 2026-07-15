@@ -125,54 +125,6 @@
 /* 4D6468 */ CmSubject* cm_804D6468;
 
 /// sdata2
-/* 4D7E00 */ float const cm_804D7E00 = -3.4028235E+38f;
-/* 4D7E04 */ float const cm_804D7E04 = 1.0f;
-/* 4D7E08 */ float const cm_804D7E08 = 0.1f;     // near clip
-/* 4D7E10 */ float const cm_804D7E0C = 16384.0f; // far clip
-/* 4D7E10 */ float const cm_804D7E10 = -1.0f;
-/* 4D7E18 */ double const cm_804D7E18 = 1.0f;
-/* 4D7E20 */ double const cm_804D7E20 = 4503601774854144.0f;
-/* 4D7E28 */ float const cm_804D7E28 = 0.64999998f;
-/* 4D7E2C */ float const cm_804D7E2C = 0.34999999f;
-/* 4D7E34 */ float const cm_804D7E34 = -0.5f;
-/* 4D7E38 */ float const cm_804D7E38 = 3.4028235E+38f;
-/* 4D7E3C */ float const cm_804D7E3C = 40.0f;
-/* 4D7E40 */ float const cm_804D7E40 = 80.0f;
-/* 4D7E44 */ float const cm_804D7E44 = 5000.0f;
-/* 4D7E48 */ float const cm_804D7E48 = 4920.0f;
-/* 4D7E4C */ float const cm_804D7E4C = 10.0f;
-/* 4D7E50 */ float const cm_804D7E50 = 390.0f;
-/* 4D7E54 */ float const cm_804D7E54 = 99999.0f;
-/* 4D7E58 */ float const cm_804D7E58 = 0.000099999997f;
-/* 4D7E5C */ float const cm_804D7E5C = 1000.0f;
-/* 4D7E68 */ float const cm_804D7E68 = 0.001f;
-/* 4D7E6C */ float const cm_804D7E6C = -0.001f;
-/* 4D7E70 */ float const cm_804D7E70 = 30.0f;
-/* 4D7E74 */ float const cm_804D7E74 = 0.85f;
-/* 4D7E78 */ double const cm_804D7E78 = 0.5f;
-/* 4D7E80 */ double const cm_804D7E80 = 3.0f;
-/* 4D7E88 */ float const cm_804D7E88 = 0.999f;
-/* 4D7E8C */ float const cm_804D7E8C = -0.999f;
-/* 4D7E90 */ float const cm_804D7E90 = 5.0f;
-/* 4D7E94 */ float const cm_804D7E94 = 20.0f;
-/* 4D7E98 */ float const cm_804D7E98 = 3.0f;
-/* 4D7EA0 */ double const cm_804D7EA0 = 0.125f;
-/* 4D7EA8 */ float const cm_804D7EA8 = 2.0f;
-/* 4D7EAC */ float const cm_804D7EAC = 2000.0f;
-/* 4D7EB0 */ float const cm_804D7EB0 = -2000.0f;
-/* 4D7EB8 */ double const cm_804D7EB8 = -1.0f;
-/* 4D7EC0 */ float const cm_804D7EC0 = 4.0f;
-/* 4D7EC8 */ f64 const cm_804D7EC8 = M_PI / 8;
-/* 4D7ED0 */ f64 const cm_804D7ED0 = M_PI / 16;
-/* 4D7ED8 */ f64 const cm_804D7ED8 = M_TAU;
-/* 4D7EE0 */ f64 const cm_804D7EE0 = M_PI;
-/* 4D7EE8 */ f64 const cm_804D7EE8 = 0.0001f;
-/* 4D7EF0 */ double const cm_804D7EF0 = 0.0f;
-/* 4D7EF8 */ float const cm_804D7EF8 = 8.5070587E+37f;
-/* 4D7EFC */ float const cm_804D7EFC = -8.5070587E+37f;
-/* 4D7F00 */ float const cm_804D7F00 = 2.1474836E+9f;
-/* 4D7F04 */ float const cm_804D7F04 = -2.1474836E+9f;
-/* 4D7F08 */ float const cm_804D7F08 = 10000.0f;
 
 static inline float vec_len(Vec3* offset)
 {
@@ -1444,7 +1396,7 @@ void Camera_8002B1F8(CameraTransformState* transform)
     float* temp_r31;
 
     temp_r31 = &cm_80452C68.x2BC;
-    if (cm_804D7E04 == *temp_r31) {
+    if (1.0f == *temp_r31) {
         return;
     }
     if ((((temp_r3 = Player_GetEntity(0), temp_r3 != NULL) &&
@@ -2799,7 +2751,7 @@ void Camera_8002D318(void* unused)
     distance = (2.0f * subject->x34.z) / tanf(MTXDegToRad(*tgt_fov_ptr));
     goto fov_done;
 skip_fov_calc:
-    distance = cm_804D7E5C;
+    distance = 1000.0f;
 fov_done:
 
 {
@@ -3055,7 +3007,7 @@ void Camera_8002D85C(void* unused)
     distance = (2.0f * subject->x34.z) / tanf(MTXDegToRad(*tgt_fov_ptr));
     goto fov_done;
 skip_fov_calc:
-    distance = cm_804D7E5C;
+    distance = 1000.0f;
 fov_done:
 
     pitch_ptr = &cam->pitch_offset;
@@ -4122,14 +4074,14 @@ void Camera_8002F7AC(s8 slot)
             randf = HSD_Randf();
             // pitch between +-pi/16
             // (M_PI_8 * randf) - M_PI_16
-            cm_80452C68.pitch_offset = ((cm_804D7EC8 * randf) - cm_804D7ED0);
+            cm_80452C68.pitch_offset = (((M_PI / 8) * randf) - (M_PI / 16));
             return;
         }
     }
     // random pitch and yaw if no player or cambox
-    cm_80452C68.pitch_offset = ((cm_804D7EC8 * HSD_Randf()) - cm_804D7ED0);
+    cm_80452C68.pitch_offset = (((M_PI / 8) * HSD_Randf()) - (M_PI / 16));
     randf = HSD_Randf();
-    cm_80452C68.yaw_offset = ((cm_804D7ED8 * randf) - cm_804D7EE0);
+    cm_80452C68.yaw_offset = ((M_TAU * randf) - M_PI);
 }
 
 void Camera_SetModeToFixed(void)
