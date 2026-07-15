@@ -1472,7 +1472,8 @@ void Camera_8002B3D4(void* arg0)
     }
 
     temp_f31 = Stage_GetCamBoundsLeftOffset();
-    cm_80452C68.x2B4 += Stage_GetCamBoundsRightOffset() - temp_f31;
+    var_f1 = Stage_GetCamBoundsRightOffset() - temp_f31;
+    cm_80452C68.x2B4 += var_f1;
     cm_80452C68.x2B8 += 1;
     cm_80452C68.x2B0 = cm_80452C68.x2B4 / ((f32) cm_80452C68.x2B8);
 }
