@@ -17,6 +17,18 @@ typedef struct CardBufEntry {
     s32 x14, x18, x1C, x20;
 } CardBufEntry;
 
+typedef struct CardCmd {
+    /* 0x00 */ s32 type;
+    /* 0x04 */ CardState* state;
+    /* 0x08 */ s32 x8;
+    /* 0x0C */ s32 xC;
+    /* 0x10 */ s32 x10;
+    /* 0x14 */ s32 x14;
+    /* 0x18 */ void* x18;
+    /* 0x1C */ s32 x1C;
+    /* 0x20 */ s32 x20;
+} CardCmd;
+
 typedef struct CardBlock {
     /* 0x00 */ u8 pad_00[0x10];
     /* 0x10 */ u8 x10;
@@ -26,11 +38,7 @@ typedef struct CardBlock {
     /* 0x20 */ u8 x20[1];
 } CardBlock;
 
-#define CMD_S32(off)                                                          \
-    (((CardBufEntry*) (hsd_804D1138 + (off)))[hsd_804D7980].x0)
-#define CMD_STATE ((CardState*) CMD_S32(0x14))
-#define CMD_PTR(off) ((void*) CMD_S32(off))
-#define CMD_TYPE (((CardBufEntry*) hsd_804D1138)[hsd_804D7980].x10)
+#define CMD ((CardCmd*) &((CardBufEntry*) hsd_804D1138)[hsd_804D7980].x10)
 
 static inline s32 hsd_803A949C_Close(CardState* state)
 {
@@ -83,9 +91,9 @@ void hsd_803A949C(s32 chan, s32 arg1)
         return;
     }
 
-    state = ((CardState*) CMD_S32(0x14));
+    state = CMD->state;
 
-    switch (CMD_TYPE) {
+    switch (CMD->type) {
     case 2:
         if (arg1 != 0) {
             hsd_803A949C_Close(state);
@@ -93,24 +101,24 @@ void hsd_803A949C(s32 chan, s32 arg1)
             break;
         }
 
-        if (CMD_S32(0x20) < 0) {
+        if (CMD->x10 < 0) {
             if (hsd_803A949C_Close(state) < 0) {
                 hsd_804D7988 = arg1;
             }
             break;
         }
 
-        if (CMD_S32(0x20) == 0) {
+        if (CMD->x10 == 0) {
             offset = (state->x24 + 0x30) % state->x8;
-            if (CMD_S32(0x30) > 0) {
+            if (CMD->x20 > 0) {
                 if (hsd_803B31CC(state->x0 + offset, state->x8 - offset) < 0) {
                     hsd_803A949C_Close(state);
                     hsd_804D7988 = -0x105;
                     break;
                 }
-                if (CMD_PTR(0x28) != NULL) {
-                    memcpy((void*) CMD_S32(0x28), state->x0 + offset + 0x20,
-                           CMD_S32(0x30));
+                if (CMD->x18 != NULL) {
+                    u8* src = state->x0 + offset;
+                    memcpy(CMD->x18, src + 0x20, CMD->x20);
                 }
             }
             result = hsd_803A949C_Close(state);
@@ -120,8 +128,8 @@ void hsd_803A949C(s32 chan, s32 arg1)
                 hsd_804D7988 = -0x105;
                 break;
             }
-            if (CMD_S32(0x30) > 0 && CMD_PTR(0x28) != NULL) {
-                memcpy((void*) CMD_S32(0x28), state->x0 + 0x20, CMD_S32(0x30));
+            if (CMD->x20 > 0 && CMD->x18 != NULL) {
+                memcpy(CMD->x18, state->x0 + 0x20, CMD->x20);
             }
             result = hsd_803A949C_Close(state);
         }
@@ -152,8 +160,8 @@ void hsd_803A949C(s32 chan, s32 arg1)
             break;
         }
 
-        if (CMD_S32(0x20) == 0) {
-            if (CMD_S32(0x30) <= 0) {
+        if (CMD->x10 == 0) {
+            if (CMD->x20 <= 0) {
                 result = hsd_803A949C_Close(state);
                 if (result < 0) {
                     hsd_804D7988 = result;
@@ -173,13 +181,12 @@ void hsd_803A949C(s32 chan, s32 arg1)
                 break;
             }
             block = (CardBlock*) (state->x0 + offset);
-            if (hsd_803A949C_FileId(block) != CMD_S32(0x20)) {
+            if (hsd_803A949C_FileId(block) != CMD->x10) {
                 hsd_804D7988 = 2;
-            } else if ((s32) block->x12 != CMD_S32(0x24)) {
+            } else if ((s32) block->x12 != CMD->x14) {
                 hsd_804D7988 = 2;
-            } else if (CMD_S32(0x30) > 0 &&
-                       memcmp((void*) CMD_S32(0x28), block->x20,
-                              CMD_S32(0x30)) != 0)
+            } else if (CMD->x20 > 0 &&
+                       memcmp(CMD->x18, block->x20, CMD->x20) != 0)
             {
                 hsd_804D7988 = 2;
             }
@@ -195,13 +202,12 @@ void hsd_803A949C(s32 chan, s32 arg1)
                 break;
             }
             block = (CardBlock*) state->x0;
-            if (hsd_803A949C_FileId(block) != CMD_S32(0x20)) {
+            if (hsd_803A949C_FileId(block) != CMD->x10) {
                 hsd_804D7988 = 2;
-            } else if ((s32) block->x12 != CMD_S32(0x24)) {
+            } else if ((s32) block->x12 != CMD->x14) {
                 hsd_804D7988 = 2;
-            } else if (CMD_S32(0x30) > 0 &&
-                       memcmp((void*) CMD_S32(0x28), block->x20,
-                              CMD_S32(0x30)) != 0)
+            } else if (CMD->x20 > 0 &&
+                       memcmp(CMD->x18, block->x20, CMD->x20) != 0)
             {
                 hsd_804D7988 = 2;
             }
@@ -223,60 +229,60 @@ void hsd_803A949C(s32 chan, s32 arg1)
 
         icon_size = hsd_803A949C_IconSize(state);
 
-        if (CMD_S32(0x18) == 0) {
+        if (CMD->x8 == 0) {
             if (memcmp(state->x0, state->x370, 0x40) != 0) {
                 hsd_804D7988 = 2;
                 break;
             }
-            if (icon_size > 0 && memcmp(state->x0 + 0x40,
-                                        (void*) CMD_S32(0x1c), icon_size) != 0)
+            if (icon_size > 0 &&
+                memcmp(state->x0 + 0x40, (void*) CMD->xC, icon_size) != 0)
             {
                 hsd_804D7988 = 2;
                 break;
             }
             hdr_plus_icon = icon_size + 0x40;
             if (state->x24 > state->x8) {
-                if (memcmp(state->x0 + hdr_plus_icon, (void*) CMD_S32(0x20),
+                if (memcmp(state->x0 + hdr_plus_icon, (void*) CMD->x10,
                            state->x8 - hdr_plus_icon) != 0)
                 {
                     hsd_804D7988 = 2;
                     break;
                 }
-                hsd_803B2B20(CMD_STATE->x0, CMD_STATE->x8,
-                             &CMD_STATE->digest[CMD_S32(0x18) * 0x10]);
-            } else if (memcmp(state->x0 + hdr_plus_icon, (void*) CMD_S32(0x20),
+                hsd_803B2B20(CMD->state->x0, CMD->state->x8,
+                             &CMD->state->digest[CMD->x8 * 0x10]);
+            } else if (memcmp(state->x0 + hdr_plus_icon, (void*) CMD->x10,
                               state->x24 - hdr_plus_icon) != 0)
             {
                 hsd_804D7988 = 2;
             } else {
-                hsd_803B2B20(CMD_STATE->x0, CMD_STATE->x24,
-                             &CMD_STATE->digest[CMD_S32(0x18) * 0x10]);
-                if (memcmp(state->x0 + state->x24, CMD_STATE->digest, 0x30) !=
+                hsd_803B2B20(CMD->state->x0, CMD->state->x24,
+                             &CMD->state->digest[CMD->x8 * 0x10]);
+                if (memcmp(state->x0 + state->x24, CMD->state->digest, 0x30) !=
                     0)
                 {
                     hsd_804D7988 = 2;
                 }
             }
         } else {
-            remaining = state->x24 - state->x8 * CMD_S32(0x18);
-            data_offset = (state->x8 * CMD_S32(0x18)) - 0x40 - icon_size;
+            remaining = state->x24 - state->x8 * CMD->x8;
+            data_offset = (state->x8 * CMD->x8) - 0x40 - icon_size;
             if ((u32) remaining > state->x8) {
-                if (memcmp(state->x0, (u8*) CMD_S32(0x20) + data_offset,
+                if (memcmp(state->x0, (u8*) CMD->x10 + data_offset,
                            state->x8) != 0)
                 {
                     hsd_804D7988 = 2;
                     break;
                 }
-                hsd_803B2B20(CMD_STATE->x0, CMD_STATE->x8,
-                             &CMD_STATE->digest[CMD_S32(0x18) * 0x10]);
-            } else if (memcmp(state->x0, (u8*) CMD_S32(0x20) + data_offset,
+                hsd_803B2B20(CMD->state->x0, CMD->state->x8,
+                             &CMD->state->digest[CMD->x8 * 0x10]);
+            } else if (memcmp(state->x0, (u8*) CMD->x10 + data_offset,
                               remaining) != 0)
             {
                 hsd_804D7988 = 2;
             } else {
-                hsd_803B2B20(CMD_STATE->x0, remaining,
-                             &CMD_STATE->digest[CMD_S32(0x18) * 0x10]);
-                if (memcmp(state->x0 + remaining, CMD_STATE->digest, 0x30) !=
+                hsd_803B2B20(CMD->state->x0, remaining,
+                             &CMD->state->digest[CMD->x8 * 0x10]);
+                if (memcmp(state->x0 + remaining, CMD->state->digest, 0x30) !=
                     0)
                 {
                     hsd_804D7988 = 2;
@@ -300,52 +306,50 @@ void hsd_803A949C(s32 chan, s32 arg1)
 
         icon_size = hsd_803A949C_IconSize(state);
 
-        if (CMD_S32(0x18) == 0) {
-            if (CMD_PTR(0x1c) != NULL) {
-                memcpy((void*) CMD_S32(0x1c), state->x0, 0x40);
+        if (CMD->x8 == 0) {
+            if (((void*) CMD->xC) != NULL) {
+                memcpy((void*) CMD->xC, state->x0, 0x40);
             }
-            if (icon_size > 0 && CMD_PTR(0x20) != NULL) {
-                memcpy((void*) CMD_S32(0x20), state->x0 + 0x40, icon_size);
+            if (icon_size > 0 && ((void*) CMD->x10) != NULL) {
+                memcpy((void*) CMD->x10, state->x0 + 0x40, icon_size);
             }
             hdr_plus_icon = icon_size + 0x40;
             if (state->x24 > state->x8) {
-                if (CMD_PTR(0x24) != NULL) {
-                    memcpy((void*) CMD_S32(0x24), state->x0 + hdr_plus_icon,
+                if (((void*) CMD->x14) != NULL) {
+                    memcpy((void*) CMD->x14, state->x0 + hdr_plus_icon,
                            state->x8 - hdr_plus_icon);
                 }
-                hsd_803B2B20(CMD_STATE->x0, CMD_STATE->x8,
-                             &CMD_STATE->digest[CMD_S32(0x18) * 0x10]);
+                hsd_803B2B20(CMD->state->x0, CMD->state->x8,
+                             &CMD->state->digest[CMD->x8 * 0x10]);
             } else {
-                if (CMD_PTR(0x24) != NULL) {
-                    memcpy((void*) CMD_S32(0x24), state->x0 + hdr_plus_icon,
+                if (((void*) CMD->x14) != NULL) {
+                    memcpy((void*) CMD->x14, state->x0 + hdr_plus_icon,
                            state->x24 - hdr_plus_icon);
                 }
-                hsd_803B2B20(CMD_STATE->x0, CMD_STATE->x24,
-                             &CMD_STATE->digest[CMD_S32(0x18) * 0x10]);
-                if (memcmp(state->x0 + state->x24, CMD_STATE->digest, 0x30) !=
+                hsd_803B2B20(CMD->state->x0, CMD->state->x24,
+                             &CMD->state->digest[CMD->x8 * 0x10]);
+                if (memcmp(state->x0 + state->x24, CMD->state->digest, 0x30) !=
                     0)
                 {
                     hsd_804D7988 = -0x107;
                 }
             }
         } else {
-            remaining = state->x24 - state->x8 * CMD_S32(0x18);
-            data_offset = (state->x8 * CMD_S32(0x18)) - 0x40 - icon_size;
+            remaining = state->x24 - state->x8 * CMD->x8;
+            data_offset = (state->x8 * CMD->x8) - 0x40 - icon_size;
             if ((u32) remaining > state->x8) {
-                if (CMD_PTR(0x24) != NULL) {
-                    memcpy((u8*) CMD_S32(0x24) + data_offset, state->x0,
-                           state->x8);
+                if (((void*) CMD->x14) != NULL) {
+                    memcpy((u8*) CMD->x14 + data_offset, state->x0, state->x8);
                 }
-                hsd_803B2B20(CMD_STATE->x0, CMD_STATE->x8,
-                             &CMD_STATE->digest[CMD_S32(0x18) * 0x10]);
+                hsd_803B2B20(CMD->state->x0, CMD->state->x8,
+                             &CMD->state->digest[CMD->x8 * 0x10]);
             } else {
-                if (CMD_PTR(0x24) != NULL) {
-                    memcpy((u8*) CMD_S32(0x24) + data_offset, state->x0,
-                           remaining);
+                if (((void*) CMD->x14) != NULL) {
+                    memcpy((u8*) CMD->x14 + data_offset, state->x0, remaining);
                 }
-                hsd_803B2B20(CMD_STATE->x0, remaining,
-                             &CMD_STATE->digest[CMD_S32(0x18) * 0x10]);
-                if (memcmp(state->x0 + remaining, CMD_STATE->digest, 0x30) !=
+                hsd_803B2B20(CMD->state->x0, remaining,
+                             &CMD->state->digest[CMD->x8 * 0x10]);
+                if (memcmp(state->x0 + remaining, CMD->state->digest, 0x30) !=
                     0)
                 {
                     hsd_804D7988 = -0x107;
@@ -356,18 +360,18 @@ void hsd_803A949C(s32 chan, s32 arg1)
 
     case 1:
         if (arg1 != 0) {
-            state->x170[CMD_S32(0x1c)] = -0x7FFF;
-            state->x270[CMD_S32(0x1c)] = 0;
+            state->x170[CMD->xC] = -0x7FFF;
+            state->x270[CMD->xC] = 0;
             hsd_803A949C_Close(state);
             hsd_804D7988 = arg1;
             break;
         }
-        if (CMD_S32(0x20) != 0xFFFF) {
-            state->x170[CMD_S32(0x1c)] = CMD_S32(0x20);
-            state->x270[CMD_S32(0x1c)] = CMD_S32(0x24);
+        if (CMD->x10 != 0xFFFF) {
+            state->x170[CMD->xC] = CMD->x10;
+            state->x270[CMD->xC] = CMD->x14;
         } else {
-            state->x170[CMD_S32(0x1c)] = -0x7FFF;
-            state->x270[CMD_S32(0x1c)] = 0;
+            state->x170[CMD->xC] = -0x7FFF;
+            state->x270[CMD->xC] = 0;
         }
         result = hsd_803A949C_Close(state);
         if (result < 0) {
@@ -377,18 +381,18 @@ void hsd_803A949C(s32 chan, s32 arg1)
 
     case 16:
         if (arg1 != 0) {
-            state->x170[CMD_S32(0x1c)] = -0x7FFF;
-            state->x270[CMD_S32(0x1c)] = 0;
+            state->x170[CMD->xC] = -0x7FFF;
+            state->x270[CMD->xC] = 0;
             hsd_803A949C_Close(state);
             hsd_804D7988 = arg1;
             break;
         }
-        if (CMD_S32(0x20) != 0xFFFF) {
-            state->x170[CMD_S32(0x1c)] = CMD_S32(0x20);
-            state->x270[CMD_S32(0x1c)] = CMD_S32(0x24);
+        if (CMD->x10 != 0xFFFF) {
+            state->x170[CMD->xC] = CMD->x10;
+            state->x270[CMD->xC] = CMD->x14;
         } else {
-            state->x170[CMD_S32(0x1c)] = -0x7FFF;
-            state->x270[CMD_S32(0x1c)] = 0;
+            state->x170[CMD->xC] = -0x7FFF;
+            state->x270[CMD->xC] = 0;
         }
         result = hsd_803A949C_Close(state);
         if (result < 0) {
@@ -439,7 +443,7 @@ void hsd_803A949C(s32 chan, s32 arg1)
         break;
 
     case 13:
-        slot = CMD_S32(0x20);
+        slot = CMD->x10;
         hsd_803A949C_Close(state);
         if (arg1 != 0) {
             state->x170[slot] = -0x7FFF;
@@ -481,7 +485,7 @@ void hsd_803A949C(s32 chan, s32 arg1)
         break;
     }
 
-    CMD_TYPE = 0;
+    CMD->type = 0;
     hsd_804D799C = 0;
     hsd_804D7980 = (hsd_804D7980 + 1) % 128;
 }
