@@ -3655,240 +3655,99 @@ static inline int mpLineGetNextCheckInlineVtx(MapLine* line, s16 result,
     return result;
 }
 
+/// Body of the mpLine{Next,Prev}Non* family: step along the linked line
+/// list, skipping lines whose flags include @p kind.
+#define MP_LINE_ITER_NON(assert_line, line_id, kind, Dir, dir_id)             \
+    {                                                                         \
+        MapLine* first_line;                                                  \
+        MapLine* line;                                                        \
+        int new_id;                                                           \
+        bool valid_id;                                                        \
+        LINEID_CHECK(assert_line, line_id);                                   \
+        first_line = groundCollLine[line_id].x0;                              \
+        new_id = mpLineGet##Dir##CheckInline(first_line, first_line->dir_id); \
+        while (new_id != -1 && new_id != line_id &&                           \
+               groundCollLine[new_id].flags & kind)                           \
+        {                                                                     \
+            line = groundCollLine[new_id].x0;                                 \
+            new_id = line->dir_id;                                            \
+            new_id =                                                          \
+                mpLineGet##Dir##CheckInlineVtx(line, new_id, groundCollVtx);  \
+        }                                                                     \
+        valid_id = false;                                                     \
+        if ((new_id != -1) && (new_id != line_id)) {                          \
+            valid_id = true;                                                  \
+        }                                                                     \
+        if (valid_id) {                                                       \
+            return new_id;                                                    \
+        }                                                                     \
+        return -1;                                                            \
+    }
+
 int mpLineNextNonFloor(int line_id)
 {
-    MapLine* first_line;
-    MapLine* line;
-    int new_id;
-    bool valid_id;
-    LINEID_CHECK(4139, line_id);
-    first_line = groundCollLine[line_id].x0;
-    new_id = mpLineGetNextCheckInline(first_line, first_line->next_id1);
-    while (new_id != -1 && new_id != line_id &&
-           groundCollLine[new_id].flags & CollLine_Floor)
-    {
-        line = groundCollLine[new_id].x0;
-        new_id = line->next_id1;
-        new_id = mpLineGetNextCheckInlineVtx(line, new_id, groundCollVtx);
-    }
-    valid_id = false;
-    if ((new_id != -1) && (new_id != line_id)) {
-        valid_id = true;
-    }
-    if (valid_id) {
-        return new_id;
-    }
-    return -1;
+    MP_LINE_ITER_NON(4139, line_id, CollLine_Floor, Next, next_id1);
 }
 
 int mpLinePrevNonFloor(int line_id)
 {
-    MapLine* first_line;
-    MapLine* line;
-    int new_id;
-    bool valid_id;
-    LINEID_CHECK(4148, line_id);
-    first_line = groundCollLine[line_id].x0;
-    new_id = mpLineGetPrevCheckInline(first_line, first_line->prev_id1);
-    while (new_id != -1 && new_id != line_id &&
-           groundCollLine[new_id].flags & CollLine_Floor)
-    {
-        line = groundCollLine[new_id].x0;
-        new_id = line->prev_id1;
-        new_id = mpLineGetPrevCheckInlineVtx(line, new_id, groundCollVtx);
-    }
-    valid_id = false;
-    if ((new_id != -1) && (new_id != line_id)) {
-        valid_id = true;
-    }
-    if (valid_id) {
-        return new_id;
-    }
-    return -1;
+    MP_LINE_ITER_NON(4148, line_id, CollLine_Floor, Prev, prev_id1);
 }
 
 int mpLinePrevNonCeiling(int line_id)
 {
-    MapLine* first_line;
-    MapLine* line;
-    int new_id;
-    bool valid_id;
-    LINEID_CHECK(4157, line_id);
-    first_line = groundCollLine[line_id].x0;
-    new_id = mpLineGetPrevCheckInline(first_line, first_line->prev_id1);
-    while (new_id != -1 && new_id != line_id &&
-           groundCollLine[new_id].flags & CollLine_Ceiling)
-    {
-        line = groundCollLine[new_id].x0;
-        new_id = line->prev_id1;
-        new_id = mpLineGetPrevCheckInlineVtx(line, new_id, groundCollVtx);
-    }
-    valid_id = false;
-    if ((new_id != -1) && (new_id != line_id)) {
-        valid_id = true;
-    }
-    if (valid_id) {
-        return new_id;
-    }
-    return -1;
+    MP_LINE_ITER_NON(4157, line_id, CollLine_Ceiling, Prev, prev_id1);
 }
 
 int mpLineNextNonCeiling(int line_id)
 {
-    MapLine* first_line;
-    MapLine* line;
-    int new_id;
-    bool valid_id;
-    LINEID_CHECK(4166, line_id);
-    first_line = groundCollLine[line_id].x0;
-    new_id = mpLineGetNextCheckInline(first_line, first_line->next_id1);
-    while (new_id != -1 && new_id != line_id &&
-           groundCollLine[new_id].flags & CollLine_Ceiling)
-    {
-        line = groundCollLine[new_id].x0;
-        new_id = line->next_id1;
-        new_id = mpLineGetNextCheckInlineVtx(line, new_id, groundCollVtx);
-    }
-    valid_id = false;
-    if (new_id != -1 && new_id != line_id) {
-        valid_id = true;
-    }
-    if (valid_id) {
-        return new_id;
-    }
-    return -1;
+    MP_LINE_ITER_NON(4166, line_id, CollLine_Ceiling, Next, next_id1);
 }
 
 int mpLineNextNonLeftWall(int line_id)
 {
-    MapLine* first_line;
-    MapLine* line;
-    int new_id;
-    bool valid_id;
-    LINEID_CHECK(4175, line_id);
-    first_line = groundCollLine[line_id].x0;
-    new_id = mpLineGetNextCheckInline(first_line, first_line->next_id1);
-    while (new_id != -1 && new_id != line_id &&
-           groundCollLine[new_id].flags & CollLine_LeftWall)
-    {
-        line = groundCollLine[new_id].x0;
-        new_id = line->next_id1;
-        new_id = mpLineGetNextCheckInlineVtx(line, new_id, groundCollVtx);
-    }
-    valid_id = false;
-    if ((new_id != -1) && (new_id != line_id)) {
-        valid_id = true;
-    }
-    if (valid_id) {
-        return new_id;
-    }
-    return -1;
+    MP_LINE_ITER_NON(4175, line_id, CollLine_LeftWall, Next, next_id1);
 }
 
 int mpLinePrevNonLeftWall(int line_id)
 {
-    MapLine* first_line;
-    MapLine* line;
-    int new_id;
-    bool valid_id;
-    LINEID_CHECK(4184, line_id);
-    first_line = groundCollLine[line_id].x0;
-    new_id = mpLineGetPrevCheckInline(first_line, first_line->prev_id1);
-    while (new_id != -1 && new_id != line_id &&
-           groundCollLine[new_id].flags & CollLine_LeftWall)
-    {
-        line = groundCollLine[new_id].x0;
-        new_id = line->prev_id1;
-        new_id = mpLineGetPrevCheckInlineVtx(line, new_id, groundCollVtx);
-    }
-    valid_id = false;
-    if ((new_id != -1) && (new_id != line_id)) {
-        valid_id = true;
-    }
-    if (valid_id) {
-        return new_id;
-    }
-    return -1;
+    MP_LINE_ITER_NON(4184, line_id, CollLine_LeftWall, Prev, prev_id1);
 }
 
 int mpLinePrevNonRightWall(int line_id)
 {
-    MapLine* first_line;
-    MapLine* line;
-    int new_id;
-    bool valid_id;
-    LINEID_CHECK(4193, line_id);
-    first_line = groundCollLine[line_id].x0;
-    new_id = mpLineGetPrevCheckInline(first_line, first_line->prev_id1);
-    while (new_id != -1 && new_id != line_id &&
-           groundCollLine[new_id].flags & CollLine_RightWall)
-    {
-        line = groundCollLine[new_id].x0;
-        new_id = line->prev_id1;
-        new_id = mpLineGetPrevCheckInlineVtx(line, new_id, groundCollVtx);
-    }
-    valid_id = false;
-    if ((new_id != -1) && (new_id != line_id)) {
-        valid_id = true;
-    }
-    if (valid_id) {
-        return new_id;
-    }
-    return -1;
+    MP_LINE_ITER_NON(4193, line_id, CollLine_RightWall, Prev, prev_id1);
 }
 
 int mpLineNextNonRightWall(int line_id)
 {
-    MapLine* first_line;
-    MapLine* line;
-    int new_id;
-    bool valid_id;
-    LINEID_CHECK(4202, line_id);
-    first_line = groundCollLine[line_id].x0;
-    new_id = mpLineGetNextCheckInline(first_line, first_line->next_id1);
-    while (new_id != -1 && new_id != line_id &&
-           groundCollLine[new_id].flags & CollLine_RightWall)
-    {
-        line = groundCollLine[new_id].x0;
-        new_id = line->next_id1;
-        new_id = mpLineGetNextCheckInlineVtx(line, new_id, groundCollVtx);
-    }
-    valid_id = false;
-    if ((new_id != -1) && (new_id != line_id)) {
-        valid_id = true;
-    }
-    if (valid_id) {
-        return new_id;
-    }
-    return -1;
+    MP_LINE_ITER_NON(4202, line_id, CollLine_RightWall, Next, next_id1);
 }
+
+/// Body of the mpLib_800533*/800538* family: walk the @p dir_id chain while
+/// lines still have @p kind set; return the first line without it, or -1.
+#define MP_LINE_WALK_NON(assert_line, line_id, kind, dir_id)                  \
+    {                                                                         \
+        int new_id;                                                           \
+        LINEID_CHECK(assert_line, line_id);                                   \
+        new_id = groundCollLine[line_id].x0->dir_id;                          \
+        while (new_id != -1 && groundCollLine[new_id].flags & kind) {         \
+            new_id = groundCollLine[new_id].x0->dir_id;                       \
+        }                                                                     \
+        if (new_id != -1) {                                                   \
+            return new_id;                                                    \
+        }                                                                     \
+        return -1;                                                            \
+    }
 
 int mpLib_80053394_Floor(int line_id)
 {
-    int new_id;
-    LINEID_CHECK(4252, line_id);
-    new_id = groundCollLine[line_id].x0->next_id0;
-    while (new_id != -1 && groundCollLine[new_id].flags & CollLine_Floor) {
-        new_id = groundCollLine[new_id].x0->next_id0;
-    }
-    if (new_id != -1) {
-        return new_id;
-    }
-    return -1;
+    MP_LINE_WALK_NON(4252, line_id, CollLine_Floor, next_id0);
 }
 
 int mpLib_80053448_Floor(int line_id)
 {
-    int new_id;
-    LINEID_CHECK(4261, line_id);
-    new_id = groundCollLine[line_id].x0->prev_id0;
-    while (new_id != -1 && groundCollLine[new_id].flags & CollLine_Floor) {
-        new_id = groundCollLine[new_id].x0->prev_id0;
-    }
-    if (new_id != -1) {
-        return new_id;
-    }
-    return -1;
+    MP_LINE_WALK_NON(4261, line_id, CollLine_Floor, prev_id0);
 }
 
 static inline int mpLineGetNextInline(int line_id)
@@ -4043,30 +3902,12 @@ int mpLib_800536CC_Floor(int line_id)
 
 int mpLib_8005389C_Ceiling(int line_id)
 {
-    int new_id;
-    LINEID_CHECK(4314, line_id);
-    new_id = groundCollLine[line_id].x0->prev_id0;
-    while (new_id != -1 && (groundCollLine[new_id].flags & CollLine_Ceiling)) {
-        new_id = groundCollLine[new_id].x0->prev_id0;
-    }
-    if (new_id != -1) {
-        return new_id;
-    }
-    return -1;
+    MP_LINE_WALK_NON(4314, line_id, CollLine_Ceiling, prev_id0);
 }
 
 int mpLib_80053950_Ceiling(int line_id)
 {
-    int new_id;
-    LINEID_CHECK(4323, line_id);
-    new_id = groundCollLine[line_id].x0->next_id0;
-    while (new_id != -1 && (groundCollLine[new_id].flags & CollLine_Ceiling)) {
-        new_id = groundCollLine[new_id].x0->next_id0;
-    }
-    if (new_id != -1) {
-        return new_id;
-    }
-    return -1;
+    MP_LINE_WALK_NON(4323, line_id, CollLine_Ceiling, next_id0);
 }
 
 int mpLib_80053A04_Ceiling(int line_id)
