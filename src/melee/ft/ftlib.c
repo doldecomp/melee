@@ -3,6 +3,9 @@
 #include "cm/camera.h"
 #include "ef/efasync.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0852.h"
 #include "ft/ft_0877.h"
@@ -25,6 +28,7 @@
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbspdisplay.h"
+#include "mn/types.h"
 #include "pl/player.h"
 #include "pl/plbonuslib.h"
 
@@ -984,7 +988,7 @@ void ftLib_80087610(u8 arg0)
 {
     u8 i;
     for (i = 0; i <= CKIND_PLAYABLE_COUNT - 1; i++) {
-        if (gm_80164840(i)) {
+        if (gm_IsCKindUnlocked(i)) {
             ftKb_SpecialN_800EED50(Player_800325C8(i, 0), arg0);
             if (i == CKIND_ZELDA || i == CKIND_SEAK) {
                 ftKb_SpecialN_800EED50(Player_800325C8(i, 1), arg0);

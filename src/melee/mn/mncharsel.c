@@ -5,6 +5,7 @@
 #include "types.h"
 
 #include "baselib/forward.h"
+#include "ft/forward.h"
 
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/cobj.h>
@@ -4225,7 +4226,7 @@ s32 mnCharSel_802640A0(void)
     HSD_ForeachAnim(mnCharSel_804D6CC0, JOBJ_TYPE, ALL_TYPE_MASK,
                     HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
 
-    if (gm_80164840(7) == 0) {
+    if (gm_IsCKindUnlocked(CKIND_LUIGI) == 0) {
         row_a = 2;
         row_b = 0x13;
     } else {
@@ -4250,7 +4251,7 @@ s32 mnCharSel_802640A0(void)
     icons[row_b].bound_d = ICONROWHT_MID_TOP;
 
     for (i = 0; i < 0x19; i++) {
-        icons[i].state = gm_80164840(icons[i].char_kind);
+        icons[i].state = gm_IsCKindUnlocked(icons[i].char_kind);
         icons[i].anim_timer = 0;
         if ((u8) mnCharSel_804D6CF5 == 1) {
             lb_80011E24(mnCharSel_804D6CC0, &sp108, icons[i].joint_id_1p, -1);
@@ -4316,7 +4317,7 @@ s32 mnCharSel_802640A0(void)
         HSD_ForeachAnim(mnCharSel_804D6CC4, JOBJ_TYPE, ALL_TYPE_MASK,
                         HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
         ck = mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF1].c_kind;
-        if ((s8) ck >= 0x1A || gm_80164840(ck) == 0) {
+        if ((s8) ck >= CKIND_PLAYABLE_COUNT || gm_IsCKindUnlocked(ck) == 0) {
             do {
                 i = HSD_Randi(0x19);
             } while ((u8) icons[i].state == 0);
@@ -4398,7 +4399,8 @@ s32 mnCharSel_802640A0(void)
         }
         for (found = 0; found < 0x19; found++) {
             u8 ck = mnCharSel_804D6CB0->data.data.players[player].c_kind;
-            if ((s8) ck == (s8) icons[found].char_kind && gm_80164840(ck) != 0)
+            if ((s8) ck == (s8) icons[found].char_kind &&
+                gm_IsCKindUnlocked(ck) != 0)
             {
                 break;
             }

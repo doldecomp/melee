@@ -4,6 +4,8 @@
 
 #include "gm_unsplit.h"
 
+#include "ft/forward.h"
+
 #include "vi/vi1201v1.h"
 
 #include <sysdolphin/baselib/controller.h>
@@ -225,9 +227,9 @@ s32 gm_801BAC9C(GameScene* arg0, s32 arg1)
         (struct gm_event_char_list*) (*gm_804D6900)[ev->unk_535]->x4;
     PAD_STACK(8);
 
-    for (i = 0; i < 0x21; i++) {
+    for (i = 0; i < CHKIND_MAX; i++) {
         u8 c = src->c_kind[i];
-        if ((s32) c == 0x21) {
+        if ((s32) c == CHKIND_MAX) {
             break;
         }
         {
@@ -3109,7 +3111,7 @@ u8 gm_801BEBF8(u8 arg0)
 
     entry = array[i];
     if (entry == NULL) {
-        return 0x21;
+        return CHKIND_NONE;
     }
 
     ptr = *(u8**) ((u8*) entry + 0x14);
@@ -3191,23 +3193,23 @@ void gm_801BEE58(GameScene* arg0)
 void gm_801BEE9C(GameScene* arg0)
 {
     s8* game_mode;
-    u8 temp_r27; ///< maybe CharacterKind?
+    u8 ckind;
 
     game_mode = arg0->info.leave_data;
-    temp_r27 = gm_80173224(gm_801BF030(), 1);
+    ckind = gm_80173224(gm_801BF030(), 1);
     if (gm_801BEFB0() == CKIND_GAMEWATCH && !gm_80164430(0x1B)) {
         gm_80164504(0x1B);
     }
     gm_8017390C(gm_801BF030(), 1);
     gm_80173EEC();
     gm_80172898(0x40);
-    if (temp_r27 == 0x21) {
+    if (ckind == CHKIND_NONE) {
         if (!gm_80173754(1, gm_801BEFD0())) {
             gm_SetPendingGameMode(*game_mode);
         }
     } else {
         gm_801736E8(gm_801BEFB0(), gm_801BEFD0(), gm_801BF010(), gm_801BEFF0(),
-                    temp_r27, *game_mode);
+                    ckind, *game_mode);
         gm_SetPendingGameMode(GM_CHALLENGER_APPROACH);
     }
     gm_SetNewGameModePending();
@@ -3364,7 +3366,7 @@ void gm_801BF128(void)
     count = 0;
     c = 0;
     do {
-        if (gm_80164840(c) != 0) {
+        if (gm_IsCKindUnlocked(c) != 0) {
             character_pool[count] = c;
             count += 1;
         }

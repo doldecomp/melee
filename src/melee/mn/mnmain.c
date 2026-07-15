@@ -4,6 +4,8 @@
 
 #include "mn/forward.h"
 
+#include "mn/types.h"
+
 #include <math.h>
 #include <trigf.h>
 #include <sysdolphin/baselib/controller.h>
@@ -2941,9 +2943,9 @@ void mn_8022DDA8_OnEnter(MenuEnterData* data)
 
 char null_terminator[1] = "\0";
 
-bool mn_IsFighterUnlocked(int arg0)
+bool mn_IsFighterUnlocked(SelectableCharacterKind selkind)
 {
-    return gm_80164840(gm_8016400C(arg0));
+    return gm_IsCKindUnlocked(gm_SelKindToCKind(selkind));
 }
 
 void mn_8022E978(u8 item_idx, u8 enable)

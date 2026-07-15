@@ -4,6 +4,8 @@
 
 #include "gm_unsplit.h"
 
+#include "mn/types.h"
+
 #include <melee/gm/gm_16AE.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/if/textlib.h>
@@ -1760,7 +1762,7 @@ void gm_801729EC(void)
     }
 
     for (i = 0; i < 11; i++) {
-        if (gm_80164840(fn_801606A8(i)) == 0) {
+        if (gm_IsCKindUnlocked(gm_GetCKindByUnlockIndex(i)) == 0) {
             gmMainLib_8015D924(fn_80160710(i));
         }
     }
@@ -1873,7 +1875,7 @@ u8 gm_80172CC0(u8 arg0, u8 arg1)
 u8 gm_80172D78(void)
 {
     u32* temp_r31 = &gmMainLib_8015ED98()->x4;
-    if (!gm_80164840(CKIND_MEWTWO) && *temp_r31 >= 0x11940) {
+    if (!gm_IsCKindUnlocked(CKIND_MEWTWO) && *temp_r31 >= 0x11940) {
         return CKIND_MEWTWO;
     }
     return CHKIND_NONE;
@@ -1886,7 +1888,7 @@ static inline const struct lbl_803B7AD0_t* inline1(u32 arg0)
     int i;
     for (i = 0; i < 0xB; i++) {
         if (lbl_803B7AD0[i].x4 <= arg0 &&
-            !gm_80164840(fn_801606A8(lbl_803B7AD0[i].x0)))
+            !gm_IsCKindUnlocked(gm_GetCKindByUnlockIndex(lbl_803B7AD0[i].x0)))
         {
             if (lbl_803B7AD0[i].x4 < var_r30) {
                 var_r30 = lbl_803B7AD0[i].x4;
@@ -1902,7 +1904,7 @@ u8 gm_80172DD4(u32 arg0)
     const struct lbl_803B7AD0_t* var_r29 = inline1(arg0);
     PAD_STACK(8);
     if (var_r29 != NULL) {
-        return fn_801606A8(var_r29->x0);
+        return gm_GetCKindByUnlockIndex(var_r29->x0);
     }
     return CHKIND_NONE;
 }
@@ -1912,12 +1914,14 @@ u8 gm_80172E74(void)
     int i;
     int count = 0;
 
-    for (i = 0; i < 0x19; i++) {
-        if (fn_801605EC(i) == 0xB && gmMainLib_8015CFCC(i)) {
+    for (i = 0; i < SELKIND_COUNT; i++) {
+        if (gm_SelKindToUnlockIndex(i) == NUM_UNLOCKABLE_CHARACTERS &&
+            gmMainLib_8015CFCC(i))
+        {
             count += 1;
         }
     }
-    if (count >= 0xE && !gm_80164840(CKIND_MARS)) {
+    if (count >= 0xE && !gm_IsCKindUnlocked(CKIND_MARS)) {
         return CKIND_MARS;
     }
     return CHKIND_NONE;
@@ -2003,30 +2007,33 @@ u8 fn_80173098(int arg0)
 
     temp_r3 = fn_8017DEC8(arg0);
     if (temp_r3->xC.xD == 0) {
-        if (temp_r3->ckind == CKIND_MARS && !gm_80164840(CKIND_EMBLEM)) {
+        if (temp_r3->ckind == CKIND_MARS && !gm_IsCKindUnlocked(CKIND_EMBLEM))
+        {
             return CKIND_EMBLEM;
         }
-        if (temp_r3->ckind == CKIND_MARIO && !gm_80164840(CKIND_DRMARIO)) {
+        if (temp_r3->ckind == CKIND_MARIO &&
+            !gm_IsCKindUnlocked(CKIND_DRMARIO))
+        {
             return CKIND_DRMARIO;
         }
     }
     var_r31 = fn_80173098_CountUnlocked();
     (void) var_r31;
-    if (var_r31 >= 10 && !gm_80164840(CKIND_CLINK)) {
+    if (var_r31 >= 10 && !gm_IsCKindUnlocked(CKIND_CLINK)) {
         return CKIND_CLINK;
     }
-    if (fn_80172FAC() && !gm_80164840(CKIND_GAMEWATCH)) {
+    if (fn_80172FAC() && !gm_IsCKindUnlocked(CKIND_GAMEWATCH)) {
         return CKIND_GAMEWATCH;
     }
     if (arg0 == 0) {
         temp_r31 = gm_8017E424();
-        if (!gm_80164840(CKIND_LUIGI) && temp_r31->x74 != 0 &&
+        if (!gm_IsCKindUnlocked(CKIND_LUIGI) && temp_r31->x74 != 0 &&
             temp_r31->x75 != 0)
         {
             return CKIND_LUIGI;
         }
     }
-    if (!gm_80164840(CKIND_PURIN)) {
+    if (!gm_IsCKindUnlocked(CKIND_PURIN)) {
         return CKIND_PURIN;
     }
     return CHKIND_NONE;
@@ -2034,23 +2041,23 @@ u8 fn_80173098(int arg0)
 
 u8 gm_80173224(int arg0, int arg1)
 {
-    u8 var_r4 = CHKIND_NONE;
+    u8 ckind = CHKIND_NONE;
     if (arg1 != 0) {
-        var_r4 = fn_80173098(arg0);
+        ckind = fn_80173098(arg0);
     }
-    if (var_r4 == CHKIND_NONE) {
-        var_r4 = gm_80172E74();
+    if (ckind == CHKIND_NONE) {
+        ckind = gm_80172E74();
     }
-    return var_r4;
+    return ckind;
 }
 
 /// check for event character unlocks?
 CharacterKind gm_801732D8(u8 arg0)
 {
-    if (!gm_80164840(CKIND_GANON) && gm_801BEBC0(arg0) == 0x1C) {
+    if (!gm_IsCKindUnlocked(CKIND_GANON) && gm_801BEBC0(arg0) == 0x1C) {
         return CKIND_GANON;
     }
-    if (!gm_80164840(CKIND_PICHU) && gm_801BEBC0(arg0) == 0xE) {
+    if (!gm_IsCKindUnlocked(CKIND_PICHU) && gm_801BEBC0(arg0) == 0xE) {
         return CKIND_PICHU;
     }
     return CHKIND_NONE;
@@ -2074,7 +2081,7 @@ int gm_8017335C(void)
 
 u8 gm_801733D8(void)
 {
-    if (!gm_80164840(CKIND_GAMEWATCH) && fn_80172FAC()) {
+    if (!gm_IsCKindUnlocked(CKIND_GAMEWATCH) && fn_80172FAC()) {
         return CKIND_GAMEWATCH;
     }
     return CHKIND_NONE;
@@ -2090,7 +2097,7 @@ u16 gm_8017341C(void)
 
 u8 gm_80173460(s8 arg0)
 {
-    if (!gm_80164840(CKIND_FALCO)) {
+    if (!gm_IsCKindUnlocked(CKIND_FALCO)) {
         return CKIND_FALCO;
     }
     return CHKIND_NONE;

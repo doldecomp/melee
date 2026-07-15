@@ -1,5 +1,7 @@
 #include "placeholder.h"
 
+#include "ft/forward.h"
+
 #include "ty/toy.h"
 
 #include <baselib/gobj.h>
@@ -28,7 +30,6 @@
 
 // DATA / MELEE RECORDS / MISC RECORDS
 #define NUM_STAGES 29
-#define NUM_CHARACTERS 25
 #define MAX_SCROLL 20
 
 AnimLoopSettings mnCount_803EFA88[2] = {
@@ -125,7 +126,7 @@ static inline void mnCount_8025186C_inline(HSD_GObj* gobj)
 static inline bool mnCount_8025035C_inline(void)
 {
     s32 i;
-    for (i = 0; i < 25; i++) {
+    for (i = 0; i < SELKIND_COUNT; i++) {
         if (GetPersistentFighterData(i)->play_time != 0) {
             return false;
         }
@@ -133,51 +134,52 @@ static inline bool mnCount_8025035C_inline(void)
     return true;
 }
 
-u32 mnCount_GetMatchTime(s32 arg0)
+u32 mnCount_GetMatchTime(SelectableCharacterKind selkind)
 {
-    return GetPersistentFighterData(arg0)->play_time;
+    return GetPersistentFighterData(selkind)->play_time;
 }
 
-u32 mnCount_GetKOKingpin(s32 arg0)
+u32 mnCount_GetKOKingpin(SelectableCharacterKind selkind)
 {
-    return mnDiagram_GetFighterTotalKOs(arg0);
+    return mnDiagram_GetFighterTotalKOs(selkind);
 }
 
-u32 mnCount_GetNoDefenseNelly(s32 arg0)
+u32 mnCount_GetNoDefenseNelly(SelectableCharacterKind selkind)
 {
-    return mnDiagram_GetFighterTotalFalls(arg0);
+    return mnDiagram_GetFighterTotalFalls(selkind);
 }
 
-u32 mnCount_GetDisasterMaster(s32 arg0)
+u32 mnCount_GetDisasterMaster(SelectableCharacterKind selkind)
 {
-    return GetPersistentFighterData(arg0)->sd_count;
+    return GetPersistentFighterData(selkind)->sd_count;
 }
 
-int mnCount_8025035C(s32 skip_count, u32 (*get_val_func)(s32))
+int mnCount_8025035C(s32 skip_count,
+                     u32 (*get_val_func)(SelectableCharacterKind))
 {
     PAD_STACK(4);
     {
         int i;
         int j;
         int best_idx;
-        CountEntry sp18[25];
+        CountEntry sp18[SELKIND_COUNT];
         CountEntry temp;
-        ssize_t const arr_size = ARRAY_SIZE(sp18);
+        ssize_t const num_selectable_chars = SELKIND_COUNT;
 
         if (mnCount_8025035C_inline()) {
-            return arr_size;
+            return num_selectable_chars;
         }
 
-        for (i = 0; i < arr_size; i++) {
-            sp18[i].id = i;
-            sp18[i].val = get_val_func(i);
+        for (i = 0; i < num_selectable_chars; i++) {
+            sp18[i].selkind = i;
+            sp18[i].stat_value = get_val_func(i);
         }
 
-        for (i = 0; i < arr_size; i++) {
+        for (i = 0; i < num_selectable_chars; i++) {
             best_idx = i;
 
-            for (j = i + 1; j < arr_size; j++) {
-                if (sp18[best_idx].val < sp18[j].val) {
+            for (j = i + 1; j < num_selectable_chars; j++) {
+                if (sp18[best_idx].stat_value < sp18[j].stat_value) {
                     best_idx = j;
                 }
             }
@@ -191,74 +193,80 @@ int mnCount_8025035C(s32 skip_count, u32 (*get_val_func)(s32))
             }
         }
 
-        for (i = 0; i < arr_size; i++) {
-            if (gm_80164840(gm_8016400C(sp18[i].id)) == 0) {
+        for (i = 0; i < num_selectable_chars; i++) {
+            if (gm_IsCKindUnlocked(gm_SelKindToCKind(sp18[i].selkind)) == 0) {
                 continue;
             }
 
             if (skip_count != 0) {
                 skip_count--;
                 j = i + 1;
-                while (j < arr_size) {
-                    if (gm_80164840(gm_8016400C(sp18[j].id)) != 0 &&
-                        get_val_func(sp18[i].id) == get_val_func(sp18[j].id))
+                while (j < num_selectable_chars) {
+                    if (gm_IsCKindUnlocked(
+                            gm_SelKindToCKind(sp18[j].selkind)) != 0 &&
+                        get_val_func(sp18[i].selkind) ==
+                            get_val_func(sp18[j].selkind))
                     {
                         i++;
                         if (skip_count != 0) {
                             skip_count--;
                         } else {
-                            return arr_size;
+                            return num_selectable_chars;
                         }
                     }
                     j++;
                 }
             } else {
-                for (j = i + 1; j < arr_size; j++) {
-                    if (gm_80164840(gm_8016400C(sp18[j].id)) == 0) {
+                for (j = i + 1; j < num_selectable_chars; j++) {
+                    if (gm_IsCKindUnlocked(
+                            gm_SelKindToCKind(sp18[j].selkind)) == 0)
+                    {
                         continue;
                     }
 
-                    if (get_val_func(sp18[i].id) == get_val_func(sp18[j].id)) {
-                        return arr_size;
+                    if (get_val_func(sp18[i].selkind) ==
+                        get_val_func(sp18[j].selkind))
+                    {
+                        return num_selectable_chars;
                     }
                 }
-                return sp18[i].id;
+                return sp18[i].selkind;
             }
         }
 
-        return arr_size;
+        return num_selectable_chars;
     }
 }
 
-u32 mnCount_GetSmashChamp(s32 arg0)
+u32 mnCount_GetSmashChamp(SelectableCharacterKind selkind)
 {
-    return GetPersistentFighterData(arg0)->victories;
+    return GetPersistentFighterData(selkind)->victories;
 }
 
-u32 mnCount_GetSmashSap(s32 arg0)
+u32 mnCount_GetSmashSap(SelectableCharacterKind selkind)
 {
-    return GetPersistentFighterData(arg0)->losses;
+    return GetPersistentFighterData(selkind)->losses;
 }
 
-u32 mnCount_GetSlugMeister(s32 arg0)
+u32 mnCount_GetSlugMeister(SelectableCharacterKind selkind)
 {
-    return GetPersistentFighterData(arg0)->damage_dealt;
+    return GetPersistentFighterData(selkind)->damage_dealt;
 }
 
-u32 mnCount_GetPunchingBag(s32 arg0)
+u32 mnCount_GetPunchingBag(SelectableCharacterKind selkind)
 {
-    return GetPersistentFighterData(arg0)->damage_taken;
+    return GetPersistentFighterData(selkind)->damage_taken;
 }
 
-#define GET_KOS(i) mnCount_GetKOKingpin(entries[i].id)
-#define GET_FALLS(i) mnCount_GetNoDefenseNelly(entries[i].id)
+#define GET_KOS(i) mnCount_GetKOKingpin(entries[i].selkind)
+#define GET_FALLS(i) mnCount_GetNoDefenseNelly(entries[i].selkind)
 s32 mnCount_8025072C(CountEntry* entries, s32 start_idx, bool mode)
 {
     int idx, best_idx;
     bool tie = false;
     best_idx = start_idx;
-    for (idx = start_idx + 1; idx < NUM_CHARACTERS; idx++) {
-        if (entries[start_idx].val == entries[idx].val) {
+    for (idx = start_idx + 1; idx < SELKIND_COUNT; idx++) {
+        if (entries[start_idx].stat_value == entries[idx].stat_value) {
             if (mode) {
                 if (GET_KOS(best_idx) > GET_KOS(idx)) {
                     best_idx = idx;
@@ -275,14 +283,14 @@ s32 mnCount_8025072C(CountEntry* entries, s32 start_idx, bool mode)
         }
     }
     if (!tie) {
-        return entries[best_idx].id;
+        return entries[best_idx].selkind;
     }
     tie = false;
-    for (idx = start_idx + 1; idx < NUM_CHARACTERS; idx++) {
+    for (idx = start_idx + 1; idx < SELKIND_COUNT; idx++) {
         if (idx == best_idx) {
             continue;
         }
-        if (entries[start_idx].val == entries[idx].val) {
+        if (entries[start_idx].stat_value == entries[idx].stat_value) {
             if (GET_KOS(start_idx) == GET_KOS(idx)) {
                 if (GET_FALLS(best_idx) == GET_FALLS(idx)) {
                     tie = true;
@@ -301,9 +309,9 @@ s32 mnCount_8025072C(CountEntry* entries, s32 start_idx, bool mode)
         }
     }
     if (tie) {
-        return NUM_CHARACTERS;
+        return SELKIND_COUNT;
     } else {
-        return entries[best_idx].id;
+        return entries[best_idx].selkind;
     }
 }
 #undef GET_KOS
@@ -311,7 +319,7 @@ s32 mnCount_8025072C(CountEntry* entries, s32 start_idx, bool mode)
 
 static inline bool mnCount_8025092C_inline(int i)
 {
-    for (i = 0; i < NUM_CHARACTERS; i++) {
+    for (i = 0; i < SELKIND_COUNT; i++) {
         if (mnCount_GetMatchTime(i) != 0) {
             return false;
         }
@@ -319,24 +327,25 @@ static inline bool mnCount_8025092C_inline(int i)
     return true;
 }
 
-s32 mnCount_8025092C(s32 rank, u32 (*getVal)(s32), bool mode)
+s32 mnCount_8025092C(s32 rank, u32 (*getVal)(SelectableCharacterKind),
+                     bool mode)
 {
     PAD_STACK(12);
     {
-        CountEntry entries[NUM_CHARACTERS];
+        CountEntry entries[SELKIND_COUNT];
         CountEntry tmp;
         int i, j, min;
         if (mnCount_8025092C_inline(0)) {
-            return NUM_CHARACTERS;
+            return SELKIND_COUNT;
         }
-        for (i = 0; i < NUM_CHARACTERS; i++) {
-            entries[i].id = i;
-            entries[i].val = getVal(i);
+        for (i = 0; i < SELKIND_COUNT; i++) {
+            entries[i].selkind = i;
+            entries[i].stat_value = getVal(i);
         }
-        for (i = 0; i < NUM_CHARACTERS; i++) {
+        for (i = 0; i < SELKIND_COUNT; i++) {
             min = i;
-            for (j = i + 1; j < NUM_CHARACTERS; j++) {
-                if (entries[min].val < entries[j].val) {
+            for (j = i + 1; j < SELKIND_COUNT; j++) {
+                if (entries[min].stat_value < entries[j].stat_value) {
                     min = j;
                 }
             }
@@ -348,38 +357,46 @@ s32 mnCount_8025092C(s32 rank, u32 (*getVal)(s32), bool mode)
                 entries[i] = tmp;
             }
         }
-        for (i = 0; i < NUM_CHARACTERS; i++) {
-            if (!gm_80164840(gm_8016400C(entries[i].id))) {
+        for (i = 0; i < SELKIND_COUNT; i++) {
+            if (!gm_IsCKindUnlocked(gm_SelKindToCKind(entries[i].selkind))) {
                 continue;
             }
             if (rank != 0) {
                 rank--;
-                for (j = i + 1; j < NUM_CHARACTERS; j++) {
-                    if (!gm_80164840(gm_8016400C(entries[j].id))) {
+                for (j = i + 1; j < SELKIND_COUNT; j++) {
+                    if (!gm_IsCKindUnlocked(
+                            gm_SelKindToCKind(entries[j].selkind)))
+                    {
                         continue;
                     }
-                    if (getVal(entries[i].id) == getVal(entries[j].id)) {
+                    if (getVal(entries[i].selkind) ==
+                        getVal(entries[j].selkind))
+                    {
                         i++;
                         if (rank != 0) {
                             rank--;
                         } else {
-                            return NUM_CHARACTERS;
+                            return SELKIND_COUNT;
                         }
                     }
                 }
             } else {
-                for (j = i + 1; j < NUM_CHARACTERS; j++) {
-                    if (!gm_80164840(gm_8016400C(entries[j].id))) {
+                for (j = i + 1; j < SELKIND_COUNT; j++) {
+                    if (!gm_IsCKindUnlocked(
+                            gm_SelKindToCKind(entries[j].selkind)))
+                    {
                         continue;
                     }
-                    if (getVal(entries[i].id) == getVal(entries[j].id)) {
+                    if (getVal(entries[i].selkind) ==
+                        getVal(entries[j].selkind))
+                    {
                         return mnCount_8025072C(entries, i, mode);
                     }
                 }
-                return entries[i].id;
+                return entries[i].selkind;
             }
         }
-        return NUM_CHARACTERS;
+        return SELKIND_COUNT;
     }
 }
 
@@ -387,8 +404,8 @@ static inline int mnCount_CountUnlockedChars(void)
 {
     int i;
     int c = 0;
-    for (i = 0; i < NUM_CHARACTERS; i++) {
-        if (gm_80164840(gm_8016400C((u8) i))) {
+    for (i = 0; i < SELKIND_COUNT; i++) {
+        if (gm_IsCKindUnlocked(gm_SelKindToCKind((u8) i))) {
             c += 1;
         }
     }
@@ -407,7 +424,7 @@ static inline int mnCount_CountUnlockedMaps(void)
     return c;
 }
 
-int mnCount_GetRowValue_Character(mnCount_row row)
+SelectableCharacterKind mnCount_GetRowValue_Character(mnCount_row row)
 {
     int c;
     switch (row) {
@@ -418,7 +435,7 @@ int mnCount_GetRowValue_Character(mnCount_row row)
     case SHORTEST_TIME:
         c = mnCount_CountUnlockedChars();
         if (c < 3) {
-            return NUM_CHARACTERS;
+            return SELKIND_COUNT;
         }
         return mnCount_8025035C(c - 1, mnCount_GetMatchTime);
     case SMASH_CHAMP:
@@ -436,7 +453,7 @@ int mnCount_GetRowValue_Character(mnCount_row row)
     case DISASTER_MASTER:
         return mnCount_8025035C(0, mnCount_GetDisasterMaster);
     default:
-        return NUM_CHARACTERS;
+        return SELKIND_COUNT;
     }
 }
 
@@ -533,7 +550,7 @@ void mnCount_CreateRow(HSD_GObj* gobj, int visible_row, mnCount_row data_row)
     MnCountData* userdata = GET_MNCOUNT(gobj);
     HSD_Text* text;
     unsigned int row_value;
-    int row_value_2;
+    SelectableCharacterKind selkind;
     float y;
     char buf2[8];
     static GXColor text_color = { 0xAA, 0xAA, 0xAA, 0xFF };
@@ -574,11 +591,11 @@ void mnCount_CreateRow(HSD_GObj* gobj, int visible_row, mnCount_row data_row)
     } else if (inline_is_row_char(data_row)) {
         text->font_size.x = 0.03f;
         text->font_size.y = 0.03f;
-        row_value_2 = mnCount_GetRowValue_Character(data_row);
-        if (row_value_2 == NUM_CHARACTERS) {
+        selkind = mnCount_GetRowValue_Character(data_row);
+        if (selkind == SELKIND_COUNT) {
             HSD_SisLib_803A6B98(text, 0.0f, 0.0f, "\201| ");
         } else {
-            gm_80160B40(text, gm_8016400C(row_value_2), 0);
+            gm_80160B40(text, gm_SelKindToCKind(selkind), 0);
         }
     } else {
         text->font_size.x = 0.03f;

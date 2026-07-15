@@ -1,3 +1,7 @@
+#include "ft/forward.h"
+
+#include "gm/gm_1A36.h"
+#include "mn/types.h"
 #define MNDIAGRAM_SOURCE
 #include "mndiagram.static.h"
 #include "mndiagram2.static.h"
@@ -30,7 +34,7 @@
 
 /// Sorted fighter indices array (25 fighters + padding)
 typedef struct mnDiagram_804A0750_t {
-    u8 sorted_fighters[0x19];
+    u8 sorted_fighters[SELKIND_COUNT];
     u8 pad_19[3];
 } mnDiagram_804A0750_t;
 STATIC_ASSERT(sizeof(mnDiagram_804A0750_t) == 0x1C);
@@ -324,11 +328,11 @@ int mnDiagram_GetNameTotalFalls(u8 field_index)
 int mnDiagram_GetFighterTotalKOs(u8 field_index)
 {
     int total = 0;
-    int i;
-    for (i = 0; i < 25; i++) {
-        if (mn_IsFighterUnlocked(i) != 0) {
-            total +=
-                GetPersistentFighterData(field_index)->fighter_kos[(u8) i];
+    int selkind;
+    for (selkind = 0; selkind < SELKIND_COUNT; selkind++) {
+        if (mn_IsFighterUnlocked(selkind) != 0) {
+            total += GetPersistentFighterData(field_index)
+                         ->fighter_kos[(u8) selkind];
         }
     }
     return total;
@@ -338,7 +342,7 @@ static inline int mnDiagram_SumFighterKOs(u8 field_index)
 {
     int total = 0;
     int i;
-    for (i = 0; i < 25; i++) {
+    for (i = 0; i < SELKIND_COUNT; i++) {
         if (mn_IsFighterUnlocked(i) != 0) {
             total +=
                 GetPersistentFighterData(field_index)->fighter_kos[(u8) i];
@@ -373,7 +377,7 @@ static inline int mnDiagram_SumFighterFalls(u8 field_index)
 {
     int total = 0;
     int i;
-    for (i = 0; i < 25; i++) {
+    for (i = 0; i < SELKIND_COUNT; i++) {
         if (mn_IsFighterUnlocked(i)) {
             total +=
                 GetPersistentFighterData(i & 0xFF)->fighter_kos[field_index];
@@ -394,7 +398,7 @@ static inline int mnDiagram_CountUnlockedFightersInline(void)
 {
     int count = 0;
     int i;
-    for (i = 0; i < 0x19; i++) {
+    for (i = 0; i < SELKIND_COUNT; i++) {
         if (mn_IsFighterUnlocked(i)) {
             count++;
         }
@@ -534,7 +538,7 @@ u8 mnDiagram_GetNextFighterIndex(s32 idx)
     do {
         idx++;
         ptr++;
-        if (idx >= 0x19) {
+        if (idx >= SELKIND_COUNT) {
             return original;
         }
     } while (mn_IsFighterUnlocked(*ptr) == 0);
@@ -546,13 +550,14 @@ u8 mnDiagram_GetNextFighterIndex(s32 idx)
 /// @param name_idx Name tag index.
 /// @param fighter_idx Fighter index (0-24).
 /// @return Play time in seconds for this fighter under this name.
-u32 mnDiagram_GetNamePlayTimeByFighter(int name_idx, int fighter_idx)
+u32 mnDiagram_GetNamePlayTimeByFighter(int name_idx,
+                                       SelectableCharacterKind selkind)
 {
-    return GetPersistentNameData(name_idx)->play_time_by_fighter[fighter_idx];
+    return GetPersistentNameData(name_idx)->play_time_by_fighter[selkind];
 }
 
 typedef struct RankEntry {
-    u8 fighter_id;
+    u8 selkind; ///< SelectableCharacterKind
     u32 value;
 } RankEntry;
 
@@ -571,7 +576,7 @@ static inline int CountTiedFighters(int name, int min_fighter, u32 min_time)
         }
         i++;
         offset += 4;
-    } while (i < 0x19);
+    } while (i < SELKIND_COUNT);
     return tie_count;
 }
 
@@ -585,7 +590,7 @@ static inline int CheckAllZeroPlayTime(int name_idx)
         }
         i++;
         offset += 4;
-        if (i >= 0x19) {
+        if (i >= SELKIND_COUNT) {
             return 1;
         }
     }
@@ -595,25 +600,25 @@ int mnDiagram_GetRankedFighterForName(int rank, int name_idx,
                                       u32 (*func)(int, int))
 {
     int _pad[2];
-    RankEntry entries[25];
+    RankEntry entries[SELKIND_COUNT];
     int i, j;
 
     (void) _pad;
 
     if (CheckAllZeroPlayTime(name_idx) != 0) {
-        return 0x19;
+        return SELKIND_COUNT;
     }
 
     // Fill entries array with fighter id and value from func
-    for (i = 0; i < 0x19; i++) {
-        entries[i].fighter_id = i;
+    for (i = 0; i < SELKIND_COUNT; i++) {
+        entries[i].selkind = i;
         entries[i].value = func(name_idx, i);
     }
 
     // Selection sort by value (descending)
-    for (i = 0; i < 0x19; i++) {
+    for (i = 0; i < SELKIND_COUNT; i++) {
         int max_idx = i;
-        for (j = i + 1; j < 0x19; j++) {
+        for (j = i + 1; j < SELKIND_COUNT; j++) {
             if (entries[max_idx].value < entries[j].value) {
                 max_idx = j;
             }
@@ -629,40 +634,40 @@ int mnDiagram_GetRankedFighterForName(int rank, int name_idx,
     }
 
     // Find the rank-th unlocked fighter
-    for (i = 0; i < 0x19; i++) {
-        if (gm_80164840(gm_8016400C(entries[i].fighter_id)) != 0) {
+    for (i = 0; i < SELKIND_COUNT; i++) {
+        if (gm_IsCKindUnlocked(gm_SelKindToCKind(entries[i].selkind)) != 0) {
             if (rank != 0) {
                 rank--;
                 // Check for ties - skip fighters with same value
-                for (j = i + 1; j < 0x19; j++) {
-                    if (func(name_idx, entries[i].fighter_id) ==
-                        func(name_idx, entries[j].fighter_id))
+                for (j = i + 1; j < SELKIND_COUNT; j++) {
+                    if (func(name_idx, entries[i].selkind) ==
+                        func(name_idx, entries[j].selkind))
                     {
                         i++;
                         if (rank != 0) {
                             rank--;
                         } else {
-                            return 0x19;
+                            return SELKIND_COUNT;
                         }
                     }
                 }
             } else {
                 // rank == 0, check if value is non-zero and no tie
-                if (func(name_idx, entries[i].fighter_id) != 0U) {
-                    if (i + 1 < 0x19) {
-                        if (func(name_idx, entries[i].fighter_id) ==
-                            func(name_idx, entries[i + 1].fighter_id))
+                if (func(name_idx, entries[i].selkind) != 0U) {
+                    if (i + 1 < SELKIND_COUNT) {
+                        if (func(name_idx, entries[i].selkind) ==
+                            func(name_idx, entries[i + 1].selkind))
                         {
-                            return 0x19;
+                            return SELKIND_COUNT;
                         }
                     }
-                    return entries[i].fighter_id;
+                    return entries[i].selkind;
                 }
-                return 0x19;
+                return SELKIND_COUNT;
             }
         }
     }
-    return 0x19;
+    return SELKIND_COUNT;
 }
 
 static inline int mnDiagram_AllPlayTimesZero(u8 name)
@@ -691,12 +696,12 @@ u8 mnDiagram_GetLeastPlayedFighter(u8 name_idx)
     s32 count;
 
     if (mnDiagram_AllPlayTimesZero(name_idx)) {
-        return 0x19;
+        return SELKIND_COUNT;
     }
 
     // Find fighter with minimum play time
     min_fighter = 0;
-    for (i = 1; i < 0x19; i++) {
+    for (i = 1; i < SELKIND_COUNT; i++) {
         if (mn_IsFighterUnlocked(i) != 0) {
             if (GetPersistentNameData(name_idx)
                     ->play_time_by_fighter[min_fighter] >
@@ -709,7 +714,7 @@ u8 mnDiagram_GetLeastPlayedFighter(u8 name_idx)
 
     // Count unlocked fighters with zero play time
     count = 0;
-    for (i = 0; i < 0x19; i++) {
+    for (i = 0; i < SELKIND_COUNT; i++) {
         if (mn_IsFighterUnlocked(i) != 0 &&
             GetPersistentNameData(name_idx)->play_time_by_fighter[i] == 0U)
         {
@@ -722,7 +727,7 @@ u8 mnDiagram_GetLeastPlayedFighter(u8 name_idx)
 
     // Check for ties
     count = 0;
-    for (i = 0; i < 0x19; i++) {
+    for (i = 0; i < SELKIND_COUNT; i++) {
         if (mn_IsFighterUnlocked(i) != 0 && i != min_fighter) {
             if (GetPersistentNameData(name_idx)->play_time_by_fighter[i] ==
                 GetPersistentNameData(name_idx)
@@ -741,7 +746,7 @@ u8 mnDiagram_GetLeastPlayedFighter(u8 name_idx)
 
 void mnDiagram_SortFightersByKOs(void)
 {
-    u32 totals[0x19];
+    u32 totals[SELKIND_COUNT];
     u8* dst = mnDiagram_804A0750.sorted_fighters;
     u8* dst_iter;
     u8* candidate;
@@ -749,7 +754,7 @@ void mnDiagram_SortFightersByKOs(void)
     u8 sp[12];
 
     dst_iter = dst;
-    for (i = 0; i < 0x19; i++, dst_iter++) {
+    for (i = 0; i < SELKIND_COUNT; i++, dst_iter++) {
         u8 fighter;
         *dst_iter = mnDiagram_DefaultFighterOrder[i];
         fighter = mnDiagram_DefaultFighterOrder[i];
@@ -757,12 +762,12 @@ void mnDiagram_SortFightersByKOs(void)
             mnDiagram_SumFighterKOs(fighter);
     }
 
-    for (i = 0; i < 0x19; i++) {
+    for (i = 0; i < SELKIND_COUNT; i++) {
         int max_idx;
         j = i;
         candidate = &dst[++j];
         max_idx = i;
-        for (; j < 0x19; candidate++, j++) {
+        for (; j < SELKIND_COUNT; candidate++, j++) {
             if (mn_IsFighterUnlocked(*candidate) != 0) {
                 if ((totals[mnDiagram_804A0750.sorted_fighters[max_idx]] <
                      totals[*candidate]) ||
@@ -858,7 +863,7 @@ int mnDiagram_CountUnlockedFighters(void)
     s32 count;
     i = 0;
     count = 0;
-    for (; i < 0x19; i++) {
+    for (; i < SELKIND_COUNT; i++) {
         if (mn_IsFighterUnlocked(i) != 0) {
             count++;
         }
@@ -962,8 +967,8 @@ static inline u8 mnDiagram_GetVisibleFighterFrom(u8* sorted, int start,
         idx++;
         p2++;
         p++;
-        if (idx >= 0x19) {
-            return 0x19;
+        if (idx >= SELKIND_COUNT) {
+            return SELKIND_COUNT;
         }
         if (mn_IsFighterUnlocked(*p2) == 0) {
             goto loop;
@@ -973,10 +978,11 @@ static inline u8 mnDiagram_GetVisibleFighterFrom(u8* sorted, int start,
     return sorted[idx];
 }
 
-static inline s32 mnDiagram_FindPrevFighter(u8* sorted, s32 cur)
+static inline s32 mnDiagram_FindPrevFighter(u8* sorted,
+                                            SelectableCharacterKind cur)
 {
     u8* p = sorted + cur;
-    s32 found = cur;
+    SelectableCharacterKind found = cur;
 loop:
     found--;
     p--;
@@ -989,14 +995,15 @@ loop:
     return (u8) found;
 }
 
-static inline u8 mnDiagram_FindNextFighter(u8* sorted, s32 cur)
+static inline u8 mnDiagram_FindNextFighter(u8* sorted,
+                                           SelectableCharacterKind cur)
 {
     u8* p = sorted + cur;
-    s32 found = cur;
+    SelectableCharacterKind found = cur;
 loop:
     found++;
     p++;
-    if (found >= 0x19) {
+    if (found >= SELKIND_COUNT) {
         return cur;
     }
     if (mn_IsFighterUnlocked(*p) == 0) {
@@ -1819,7 +1826,8 @@ inline void mnDiagram_FormatPopupNumber(char* buf, u32 val)
     buf[digit_count] = mnDiagram_804D4FA4;
 }
 
-void mnDiagram_CreatePopupTexts(void* arg0, s32 arg1, s32 arg2, s32 arg3)
+void mnDiagram_CreatePopupTexts(void* arg0, s32 selkind_or_nametag_slot_id,
+                                s32 arg2, s32 use_nametag)
 {
     mnDiagram_PopupData* data = ((HSD_GObj*) arg0)->user_data;
     mnDiagram_AnimTable* tbl = GET_DIAGRAM_ANIM_TABLE();
@@ -1845,13 +1853,15 @@ void mnDiagram_CreatePopupTexts(void* arg0, s32 arg1, s32 arg2, s32 arg3)
     text->default_alignment = 0;
     *(s32*) &text->text_color = mnDiagram_PopupTextColor;
 
-    if (arg3 != 0) {
-        HSD_SisLib_803A6B98(text, 0.0f, 0.0f, GetNameText((u8) arg1));
+    if (use_nametag != 0) {
+        HSD_SisLib_803A6B98(text, 0.0f, 0.0f,
+                            GetNameText((u8) selkind_or_nametag_slot_id));
     } else {
-        gm_80160C90(text, gm_8016400C((u8) arg1), 0);
+        gm_80160C90(text, gm_SelKindToCKind((u8) selkind_or_nametag_slot_id),
+                    0);
     }
 
-    if ((arg3 != 0) && (arg1 != arg2)) {
+    if ((use_nametag != 0) && (selkind_or_nametag_slot_id != arg2)) {
         {
             HSD_Text* label_text;
 
@@ -1893,7 +1903,7 @@ void mnDiagram_CreatePopupTexts(void* arg0, s32 arg1, s32 arg2, s32 arg3)
         }
     }
 
-    if ((arg3 == 0) || (arg1 != arg2)) {
+    if ((use_nametag == 0) || (selkind_or_nametag_slot_id != arg2)) {
         text = HSD_SisLib_803A6754(0, 1);
         data->text[1] = text;
         lb_8000B1CC(data->jobjs[11], &tbl->points[1], &pos);
@@ -1908,17 +1918,19 @@ void mnDiagram_CreatePopupTexts(void* arg0, s32 arg1, s32 arg2, s32 arg3)
             text->pos_z = z;
         }
 
-        if (arg3 != 0) {
-            kos = GetPersistentNameData((u8) arg1)->vs_kos[(u8) arg2];
+        if (use_nametag != 0) {
+            kos = GetPersistentNameData((u8) selkind_or_nametag_slot_id)
+                      ->vs_kos[(u8) arg2];
             mnDiagram_FormatPopupNumber(buf, kos);
         } else {
-            kos = GetPersistentFighterData((u8) arg1)->fighter_kos[(u8) arg2];
+            kos = GetPersistentFighterData((u8) selkind_or_nametag_slot_id)
+                      ->fighter_kos[(u8) arg2];
             mnDiagram_FormatPopupNumber(buf, kos);
         }
         HSD_SisLib_803A6B98(text, 0.0f, 0.0f, buf);
     }
 
-    if (arg1 == arg2) {
+    if (selkind_or_nametag_slot_id == arg2) {
         text = HSD_SisLib_803A6754(0, 1);
         data->text[3] = text;
         lb_8000B1CC(data->jobjs[13], &tbl->points[1], &pos);
@@ -1932,11 +1944,14 @@ void mnDiagram_CreatePopupTexts(void* arg0, s32 arg1, s32 arg2, s32 arg3)
             text->pos_y = (new_var = -y);
             text->pos_z = z;
         }
-        if (arg3 != 0) {
-            sd_count = GetPersistentNameData((u8) arg1)->sd_count;
+        if (use_nametag != 0) {
+            sd_count = GetPersistentNameData((u8) selkind_or_nametag_slot_id)
+                           ->sd_count;
             mnDiagram_FormatPopupNumber(buf, sd_count);
         } else {
-            sd_count = GetPersistentFighterData((u8) arg1)->sd_count;
+            sd_count =
+                GetPersistentFighterData((u8) selkind_or_nametag_slot_id)
+                    ->sd_count;
             mnDiagram_FormatPopupNumber(buf, sd_count);
         }
         HSD_SisLib_803A6B98(text, 0.0f, 0.0f, buf);
@@ -1957,12 +1972,13 @@ void mnDiagram_CreatePopupTexts(void* arg0, s32 arg1, s32 arg2, s32 arg3)
             text->pos_y = (new_var = -y);
             text->pos_z = z;
         }
-        if (arg3 != 0) {
-            u32 count = GetPersistentNameData((u8) arg2)->vs_kos[(u8) arg1];
+        if (use_nametag != 0) {
+            u32 count = GetPersistentNameData((u8) arg2)
+                            ->vs_kos[(u8) selkind_or_nametag_slot_id];
             mnDiagram_FormatPopupNumber(buf, count);
         } else {
-            u32 count =
-                GetPersistentFighterData((u8) arg2)->fighter_kos[(u8) arg1];
+            u32 count = GetPersistentFighterData((u8) arg2)
+                            ->fighter_kos[(u8) selkind_or_nametag_slot_id];
             mnDiagram_FormatPopupNumber(buf, count);
         }
         HSD_SisLib_803A6B98(text, 0.0f, 0.0f, buf);
@@ -1976,7 +1992,7 @@ static void order_sdata2(void)
     (void) S32_TO_F32;
 }
 
-void mnDiagram_CreatePopup(s32 arg0, s32 arg1, s32 arg2)
+void mnDiagram_CreatePopup(s32 arg0, s32 arg1, s32 use_nametag)
 {
     int i;
     mnDiagram_AnimTable* tbl;
@@ -2017,9 +2033,9 @@ void mnDiagram_CreatePopup(s32 arg0, s32 arg1, s32 arg2)
     }
 
     HSD_GObj_SetupProc(gobj, (void (*)(HSD_GObj*)) mnDiagram_PopupAnimProc, 0);
-    mnDiagram_CreatePopupTexts(gobj, arg0, arg1, arg2);
+    mnDiagram_CreatePopupTexts(gobj, arg0, arg1, use_nametag);
 
-    if (arg2 != 0) {
+    if (use_nametag != 0) {
         if (arg0 == arg1) {
             HSD_JObjSetFlagsAll(user_data->jobjs[9], JOBJ_HIDDEN);
         }
@@ -2686,7 +2702,7 @@ void mnDiagram_DrawFighterHeaders(void* arg0, int arg1, int arg2)
     u8* pr2;
     f32 x_spacing;
     f32 y_spacing;
-    int fighter_idr;
+    int selkind;
     int i;
 
     (void) &stack_obj;
@@ -2697,7 +2713,7 @@ void mnDiagram_DrawFighterHeaders(void* arg0, int arg1, int arg2)
     joint_data = assets->FaceB;
     for (i = 0; i < 7; i++) {
         sorted = mnDiagram_804A0750.sorted_fighters;
-        for (count = k = 0; k < 0x19; k++) {
+        for (count = k = 0; k < SELKIND_COUNT; k++) {
             if (mn_IsFighterUnlocked(k) != 0) {
                 count++;
             }
@@ -2716,8 +2732,8 @@ void mnDiagram_DrawFighterHeaders(void* arg0, int arg1, int arg2)
                 idx++;
                 p2++;
                 p++;
-                if (idx >= 0x19) {
-                    fighter_id = 0x19;
+                if (idx >= SELKIND_COUNT) {
+                    fighter_id = SELKIND_COUNT;
                     goto col_found;
                 }
                 if (mn_IsFighterUnlocked(*p2) == 0) {
@@ -2746,7 +2762,7 @@ void mnDiagram_DrawFighterHeaders(void* arg0, int arg1, int arg2)
     for (i = 0; i < 0xA; i++) {
         sorted = mnDiagram_804A0750.sorted_fighters;
         count = 0;
-        for (k = 0; k < 0x19; k++) {
+        for (k = 0; k < SELKIND_COUNT; k++) {
             if (mn_IsFighterUnlocked(k) != 0) {
                 count++;
             }
@@ -2757,7 +2773,7 @@ void mnDiagram_DrawFighterHeaders(void* arg0, int arg1, int arg2)
             pr = sorted + idx;
             while (remr >= 0) {
                 if (remr == 0) {
-                    fighter_idr = sorted[idx];
+                    selkind = sorted[idx];
                     goto row_found;
                 }
                 pr2 = pr;
@@ -2765,8 +2781,8 @@ void mnDiagram_DrawFighterHeaders(void* arg0, int arg1, int arg2)
                 idx++;
                 pr2++;
                 pr++;
-                if (idx >= 0x19) {
-                    fighter_idr = 0x19;
+                if (idx >= SELKIND_COUNT) {
+                    selkind = SELKIND_COUNT;
                     goto row_found;
                 }
                 if (mn_IsFighterUnlocked(*pr2) == 0) {
@@ -2781,7 +2797,7 @@ void mnDiagram_DrawFighterHeaders(void* arg0, int arg1, int arg2)
             HSD_JObjReqAnimAll(jobj, mnDiagram_804DBF84);
             HSD_JObjAnimAll(jobj);
             lb_80011E24(jobj, &sp_jobj2, 2, -1);
-            HSD_JObjReqAnimAll(sp_jobj2, (f32) (fighter_idr & 0xFF));
+            HSD_JObjReqAnimAll(sp_jobj2, (f32) (selkind & 0xFF));
             HSD_JObjAnimAll(sp_jobj2);
             y_spacing = HSD_JObjGetTranslationY(data->jobjs[10]) -
                         HSD_JObjGetTranslationY(data->jobjs[9]);

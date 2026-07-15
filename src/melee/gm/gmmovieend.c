@@ -36,7 +36,7 @@ void gm_801A6254(GameScene* arg0)
     if (temp_r0 != 7 && temp_r0 != 8 &&
         temp_r30->match_end.player_standings[0].stocks != 0)
     {
-        gm_80164910(temp_r31->x4);
+        gm_UnlockCharacter(temp_r31->x4);
     } else {
         temp_ret = gm_80160638(temp_r31->x4);
         gmMainLib_8015DB2C(temp_ret);

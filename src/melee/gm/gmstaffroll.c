@@ -139,13 +139,13 @@ bool gm_801AA644(void)
 
 bool gm_801AA664(CharacterKind arg0)
 {
-    return gm_80164840(arg0);
+    return gm_IsCKindUnlocked(arg0);
 }
 
 bool gm_801AA688(void)
 {
     PAD_STACK(4);
-    return gm_80164840(CKIND_MARS) || gm_80164840(CKIND_EMBLEM);
+    return gm_IsCKindUnlocked(CKIND_MARS) || gm_IsCKindUnlocked(CKIND_EMBLEM);
 }
 
 void gm_801AA6D8(s16 arg0)
@@ -770,9 +770,10 @@ void fn_801AB200(HSD_GObj* gobj)
                     text_arr[j]->text_color.g = 0xB4;
                     text_arr[j]->text_color.b = 0;
                     if (selected == 0x4B && j == 2) {
-                        line_num = gm_80164840(0x16U) * 2;
-                        HSD_SisLib_803A6368(
-                            text_arr[j], 0xBEC + gm_80164840(7U) + line_num);
+                        line_num = gm_IsCKindUnlocked(0x16U) * 2;
+                        HSD_SisLib_803A6368(text_arr[j],
+                                            0xBEC + gm_IsCKindUnlocked(7U) +
+                                                line_num);
                     } else if (j == 2 && check_failed == 1) {
                         if (lbLang_IsSavedLanguageJP() != 0) {
                             HSD_SisLib_803A6368(text_arr[j],
