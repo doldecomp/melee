@@ -31,7 +31,15 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
     u8 sp58[0x10];
     u8 sp48[0x10];
     u8 sp38[0x10];
-    u8 sp28[0x10];
+    union {
+        u8 bytes[0x10];
+        struct {
+            u8 x0;
+            u8 pad_x1[7];
+            s32 x8;
+            s32 xC;
+        } fields;
+    } sp28;
     Diagram3* data;
     char* base;
     HSD_JObj* row0;
@@ -162,11 +170,11 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
 
                     {
                         u8 ii = (u8) i;
-                        mnDiagram2_GetAggregatedFighterRank(sp28, stat_type,
-                                                            ii);
+                        mnDiagram2_GetAggregatedFighterRank(
+                            sp28.bytes, stat_type, ii);
                     }
                     {
-                        int val = M2C_FIELD(sp28, int*, 0xC);
+                        int val = sp28.fields.xC;
                         mnDiagram_FormatDecimalNumber((char*) sp58, val, 0);
                     }
                     {
@@ -754,7 +762,6 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
                 i_u8 = i;
                 limit = (data->is_name_mode != 0) ? 0x18 : 0x15;
                 v = base_idx_u8 + i_u8;
-                (void) v;
                 if (v >= limit) {
                     v = v - limit;
                 } else {
@@ -832,8 +839,7 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
                 data->row_labels[i] = t;
                 i_u8 = i;
                 limit = (data->is_name_mode != 0) ? 0x18 : 0x15;
-                v = base_idx_u8;
-                v += i_u8;
+                v = base_idx_u8 + i_u8;
                 if (v >= limit) {
                     v = v - limit;
                 } else {

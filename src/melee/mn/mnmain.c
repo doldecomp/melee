@@ -1343,8 +1343,8 @@ void fn_8022AFEC(HSD_GObj* gp)
                 MenuKind cur_menu = mn_804A04F0.cur_menu;
                 mn_8022A440(gp,
                             sp20[mn_80229A04_dontinline(
-                                cur_menu, data->hovered_selection)],
-                            data->hovered_selection);
+                                cur_menu, data2->hovered_selection)],
+                            data2->hovered_selection);
             }
         }
         if ((u8) selection_changed != false) {
@@ -1477,10 +1477,10 @@ HSD_GObj* mn_8022B3A0(u8 state)
                                top->shapeanim_joint);
             lb_8001204C(cursor_jobj, sp2C, mn_803EAE7C, 7);
             HSD_JObjReqAnim(sp2C[0],
-                            mn_803EB360[hovered_selection == i].start_frame);
+                            mn_803EB360[i == hovered_selection].start_frame);
             HSD_JObjAnim(sp2C[0]);
             jobj = sp2C[1];
-            HSD_JObjReqAnimAll(jobj, hovered_selection == i);
+            HSD_JObjReqAnimAll(jobj, i == hovered_selection);
             HSD_JObjAnimAll(jobj);
             HSD_JObjReqAnim(
                 jobj, mn_803EB6B0[mn_804A04F0.cur_menu].start_frame + 2 * i);
@@ -1495,10 +1495,10 @@ HSD_GObj* mn_8022B3A0(u8 state)
             HSD_JObjAnim(jobj);
             if (i == hovered_selection) {
                 HSD_JObjReqAnimAll(
-                    sp2C[2], mn_803EB378[hovered_selection == i].start_frame);
+                    sp2C[2], mn_803EB378[i == hovered_selection].start_frame);
             } else {
                 HSD_JObjReqAnimAll(
-                    sp2C[2], mn_803EB378[hovered_selection == i].end_frame);
+                    sp2C[2], mn_803EB378[i == hovered_selection].end_frame);
             }
             HSD_JObjAnimAll(sp2C[2]);
             if (i == hovered_selection) {
