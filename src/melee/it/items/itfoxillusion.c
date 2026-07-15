@@ -157,7 +157,7 @@ bool itFoxillusion_UnkMotion0_Anim(Item_GObj* item_gobj)
     return false;
 }
 
-void itFoxillusion_UnkMotion0_Phys(Item_GObj* item_gobj)
+static inline void itFoxillusion_Phys(Item_GObj* item_gobj, Vec3* ghost_pos)
 {
     Item* item = GET_ITEM(item_gobj);
     HSD_JObj* jobj = GET_JOBJ(item_gobj);
@@ -167,14 +167,19 @@ void itFoxillusion_UnkMotion0_Phys(Item_GObj* item_gobj)
         HSD_JObjSetRotationX(
             jobj, ftFx_SpecialS_ReturnFloatVarIndexed(item->owner, 1));
         if (ghost_jobj != NULL) {
-            Vec3 ghost_pos;
-            ftFx_SpecialS_CopyGhostPosIndexed(item->owner, 3, &ghost_pos);
-            HSD_JObjSetTranslate(ghost_jobj, &ghost_pos);
+            ftFx_SpecialS_CopyGhostPosIndexed(item->owner, 3, ghost_pos);
+            HSD_JObjSetTranslate(ghost_jobj, ghost_pos);
             HSD_JObjSetRotationX(
                 ghost_jobj,
                 ftFx_SpecialS_ReturnFloatVarIndexed(item->owner, 3));
         }
     }
+}
+
+void itFoxillusion_UnkMotion0_Phys(Item_GObj* item_gobj)
+{
+    Vec3 ghost_pos;
+    itFoxillusion_Phys(item_gobj, &ghost_pos);
 }
 
 bool itFoxillusion_UnkMotion0_Coll(Item_GObj* arg0)
@@ -189,23 +194,9 @@ bool itFoxillusion_UnkMotion1_Anim(Item_GObj* item_gobj)
 
 void itFoxillusion_UnkMotion1_Phys(Item_GObj* item_gobj)
 {
-    Item* item = GET_ITEM(item_gobj);
-    HSD_JObj* jobj = GET_JOBJ(item_gobj);
-    HSD_JObj* ghost_jobj = item->xDD4_itemVar.foxillusion.xDDC;
-    if (item->owner != NULL) {
-        ftFx_SpecialS_CopyGhostPosIndexed(item->owner, 1, &item->pos);
-        HSD_JObjSetRotationX(
-            jobj, ftFx_SpecialS_ReturnFloatVarIndexed(item->owner, 1));
-        if (ghost_jobj != NULL) {
-            Vec3 ghost_pos;
-            u8 _[8] = { 0 };
-            ftFx_SpecialS_CopyGhostPosIndexed(item->owner, 3, &ghost_pos);
-            HSD_JObjSetTranslate(ghost_jobj, &ghost_pos);
-            HSD_JObjSetRotationX(
-                ghost_jobj,
-                ftFx_SpecialS_ReturnFloatVarIndexed(item->owner, 3));
-        }
-    }
+    Vec3 ghost_pos;
+    FORCE_PAD_STACK(8);
+    itFoxillusion_Phys(item_gobj, &ghost_pos);
 }
 
 bool itFoxillusion_UnkMotion1_Coll(Item_GObj* arg0)
