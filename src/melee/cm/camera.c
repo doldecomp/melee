@@ -124,7 +124,6 @@
 /* 4D6464 */ static HSD_CObj* cm_804D6464;
 /* 4D6468 */ CmSubject* cm_804D6468;
 
-
 /// sdata2
 /* 4D7E00 */ float const cm_804D7E00 = -3.4028235E+38f;
 /* 4D7E04 */ float const cm_804D7E04 = 1.0f;
@@ -924,7 +923,6 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
     transform->target_position.y = transform->target_interest.y - y_off;
     transform->target_position.z = transform->target_interest.z + cam_dist;
 }
-
 
 void Camera_8002A0C0(CameraBounds* bounds, CameraTransformState* state)
 {
