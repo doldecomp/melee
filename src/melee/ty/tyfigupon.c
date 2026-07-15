@@ -768,7 +768,7 @@ void _tyFigupon_80316420(s16 arg0)
     HSD_JObj* jobj;
     f32 angle;
 
-    PAD_STACK(32);
+    PAD_STACK(6 * 4);
 
     temp_r31 = Toy_803048C0(arg0);
     Toy_80308250((void*) _tyFigupon_804D6EF8, arg0, 0);
