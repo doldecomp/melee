@@ -1297,9 +1297,8 @@ HSD_GObj* mn_80230E38(int arg0)
                 case 0:
                 case 2:
                 case 4: {
-                    u8 value =
-                        ((union mn_802307F8_value_view*) user_data)
-                            ->indexed.values[i];
+                    u8 value = ((union mn_802307F8_value_view*) user_data)
+                                   ->indexed.values[i];
                     u8 default_value;
                     AnimLoopSettings* value_als;
 

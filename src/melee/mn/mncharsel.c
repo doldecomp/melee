@@ -1867,8 +1867,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
         if ((u8) mnCharSel_804D6CF5 == 1) {
             int port = (u8) mnCharSel_804D6CF0;
             stick_y = (f32) (s8) (u8) HSD_PadCopyStatus[(u8) port].stickY;
-            stick_x =
-                (f32) (s8) (u8) HSD_PadCopyStatus[(u8) port].stickX;
+            stick_x = (f32) (s8) (u8) HSD_PadCopyStatus[(u8) port].stickX;
             mag_sq = (stick_x * stick_x) + (stick_y * stick_y);
             trigger = HSD_PadCopyStatus[port].trigger;
             buttons = HSD_PadCopyStatus[port].button;
@@ -1898,8 +1897,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
         } else {
             int port = cursor->x4;
             stick_y = (f32) (s8) (u8) HSD_PadCopyStatus[(u8) port].stickY;
-            stick_x =
-                (f32) (s8) (u8) HSD_PadCopyStatus[(u8) port].stickX;
+            stick_x = (f32) (s8) (u8) HSD_PadCopyStatus[(u8) port].stickX;
             mag_sq = (stick_x * stick_x) + (stick_y * stick_y);
             trigger = HSD_PadCopyStatus[port].trigger;
             buttons = HSD_PadCopyStatus[port].button;

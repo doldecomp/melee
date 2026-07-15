@@ -170,8 +170,8 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
 
                     {
                         u8 ii = (u8) i;
-                        mnDiagram2_GetAggregatedFighterRank(
-                            sp28.bytes, stat_type, ii);
+                        mnDiagram2_GetAggregatedFighterRank(sp28.bytes,
+                                                            stat_type, ii);
                     }
                     {
                         int val = sp28.fields.xC;
