@@ -4232,28 +4232,26 @@ void ftKb_SpecialN_800F10A4(Fighter_GObj* gobj)
     ftKb_SpecialN_800EF69C(gobj, 3, ft_80459B88.hats[FTKIND_CAPTAIN]);
 }
 
-static void ftKb_SpecialN_800EF040_noinline(Fighter_GObj* gobj, int arg1,
-                                            KirbyHatStruct* hat)
-{
-    ftKb_SpecialN_800EF040(gobj, arg1, hat);
-}
-
+/// Load Yoshi's hat for Kirby copy ability.
+/// @note The split Fighter* locals are required for register allocation.
+#pragma push
+#pragma dont_inline on
 void ftKb_SpecialN_800F10D4(Fighter_GObj* gobj)
 {
-    u8 sp14[0x90];
+    u8 part_dobj_indices[0x88];
     Fighter* fp = gobj->user_data;
     Fighter* fp2 = gobj->user_data;
     KirbyHatStruct* temp_r28;
-    PAD_STACK(4);
-    if (fp->fv.kb.hat.x14.data != NULL) {
+    PAD_STACK(8);
+    if (fp2->fv.kb.hat.x14.data != NULL) {
         return;
     }
     temp_r28 = ft_80459B88.hats[14];
-    ftKb_SpecialN_800EF040_noinline(gobj, 0xF, temp_r28);
-    fp->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
-    fp->fv.kb.hat.x1C.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
-    ftKb_SpecialN_800EF0E4(gobj, 0xF, sp14);
-    ftKb_SpecialN_800EF35C(gobj, 0xF, sp14);
+    ftKb_SpecialN_800EF040(gobj, 0xF, temp_r28);
+    fp2->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
+    fp2->fv.kb.hat.x1C.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
+    ftKb_SpecialN_800EF0E4(gobj, 0xF, part_dobj_indices);
+    ftKb_SpecialN_800EF35C(gobj, 0xF, part_dobj_indices);
     ftKb_SpecialN_800EF438(gobj, temp_r28);
     ftParts_8007487C((FtPartsDesc*) temp_r28, &fp->fv.kb.hat.x24,
                      fp->x619_costume_id, &fp->fv.kb.hat.x14,
@@ -4262,6 +4260,7 @@ void ftKb_SpecialN_800F10D4(Fighter_GObj* gobj)
                     &fp->fv.kb.x44, &fp->fv.kb.hat.x14);
     ftCo_8009D81C(fp2);
 }
+#pragma pop
 
 void ftKb_SpecialN_800F11AC(Fighter_GObj* gobj)
 {
