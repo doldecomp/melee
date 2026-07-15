@@ -4203,7 +4203,8 @@ void ftKb_SpecialN_800F0F5C(Fighter_GObj* gobj)
 }
 /// Shared body of the Kirby hat loaders: load the hat model/parts for
 /// @p kind and start its animation.
-/// @remarks Using an @c inline function shifts register allocation.
+/// @todo Should be an inline function (which would also allow removing the
+/// callers' @c dont_inline pragmas), but that shifts register allocation.
 #define LOAD_HAT(gobj, fp, fp2, kind, hat, part_dobj_indices)                 \
     do {                                                                      \
         (hat) = ft_80459B88.hats[kind];                                       \
