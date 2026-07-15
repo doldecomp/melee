@@ -706,27 +706,6 @@ void itLinkhookshot_UnkMotion5_Phys(Item_GObj* arg0)
     item->xDD4_itemVar.linkhookshot.x10 = it_802A3500;
 }
 
-static inline bool it_802A3630_inline(Item* item, Fighter* fp, Vec3* pos)
-{
-    ItemLink* item_link;
-    Vec3* item_link_pos;
-    item_link = item->xDD4_itemVar.linkhookshot.x0;
-    item_link_pos = &item_link->pos;
-
-    if (mpCheckAllRemap(0, 0, 0, 0, -1, -1, pos->x, pos->y, item_link->pos.x,
-                        item_link->pos.y) != 0)
-    {
-        return 1;
-    } else if (mpCheckAllRemap(0, 0, 0, 0, -1, -1, fp->cur_pos.x,
-                               fp->cur_pos.y, item_link_pos->x,
-                               item_link_pos->y) != 0)
-    {
-        return 1;
-    } else {
-        return 0;
-    }
-}
-
 void it_802A3630(Item_GObj* arg0)
 {
     Vec3 pos;
@@ -741,7 +720,8 @@ void it_802A3630(Item_GObj* arg0)
     fp2 = fp;
     it_802A2EE4_inline_alt(item_link, &pos);
 
-    if (it_802A3630_inline(item, fp2, &pos) != 0) {
+    if (itGrappleCheckCollision(item->xDD4_itemVar.linkhookshot.x0, fp2, &pos))
+    {
         ftCo_80090780(item->owner);
         it_802A2B10(arg0);
         return;

@@ -4201,29 +4201,37 @@ void ftKb_SpecialN_800F0F5C(Fighter_GObj* gobj)
     ftKb_SpecialN_800EFAF0_inline(gobj);
     ftCo_UnloadDynamicBones(fp);
 }
+/// Shared body of the Kirby hat loaders: load the hat model/parts for
+/// @p kind and start its animation.
+/// @remarks Using an @c inline function shifts register allocation.
+#define LOAD_HAT(gobj, fp, fp2, kind, hat, part_dobj_indices)                 \
+    do {                                                                      \
+        (hat) = ft_80459B88.hats[kind];                                       \
+        ftKb_SpecialN_800EF040(gobj, (kind) + 1, hat);                        \
+        (fp2)->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);  \
+        (fp2)->fv.kb.hat.x1C.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);  \
+        ftKb_SpecialN_800EF0E4(gobj, (kind) + 1, part_dobj_indices);          \
+        ftKb_SpecialN_800EF35C(gobj, (kind) + 1, part_dobj_indices);          \
+        ftKb_SpecialN_800EF438(gobj, hat);                                    \
+        ftParts_8007487C((FtPartsDesc*) (hat), &(fp)->fv.kb.hat.x24,          \
+                         (fp)->x619_costume_id, &(fp)->fv.kb.hat.x14,         \
+                         &(fp)->fv.kb.hat.x1C);                               \
+        ftAnim_80070200(fp, (ftData_x8_x8*) &(hat)->desc.vis_table,           \
+                        &(fp)->fv.kb.x44, &(fp)->fv.kb.hat.x14);              \
+    } while (0)
+
 #pragma push
 #pragma dont_inline on
 void ftKb_SpecialN_800F0FC0(Fighter_GObj* gobj)
 {
-    u8 sp14[0x90];
+    u8 part_dobj_indices[0x90];
     Fighter* fp = fp = gobj->user_data;
-    KirbyHatStruct* temp_r29;
+    KirbyHatStruct* hat;
     PAD_STACK(8);
     if (fp->fv.kb.hat.x14.data != NULL) {
         return;
     }
-    temp_r29 = ft_80459B88.hats[FTKIND_CAPTAIN];
-    ftKb_SpecialN_800EF040(gobj, 3, temp_r29);
-    fp->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
-    fp->fv.kb.hat.x1C.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
-    ftKb_SpecialN_800EF0E4(gobj, 3, sp14);
-    ftKb_SpecialN_800EF35C(gobj, 3, sp14);
-    ftKb_SpecialN_800EF438(gobj, temp_r29);
-    ftParts_8007487C((FtPartsDesc*) temp_r29, &fp->fv.kb.hat.x24,
-                     fp->x619_costume_id, &fp->fv.kb.hat.x14,
-                     &fp->fv.kb.hat.x1C);
-    ftAnim_80070200(fp, (ftData_x8_x8*) &temp_r29->desc.vis_table,
-                    &fp->fv.kb.x44, &fp->fv.kb.hat.x14);
+    LOAD_HAT(gobj, fp, fp, FTKIND_CAPTAIN, hat, part_dobj_indices);
 }
 #pragma pop
 
@@ -4241,23 +4249,12 @@ void ftKb_SpecialN_800F10D4(Fighter_GObj* gobj)
     u8 part_dobj_indices[0x88];
     Fighter* fp = gobj->user_data;
     Fighter* fp2 = gobj->user_data;
-    KirbyHatStruct* temp_r28;
+    KirbyHatStruct* hat;
     PAD_STACK(8);
     if (fp2->fv.kb.hat.x14.data != NULL) {
         return;
     }
-    temp_r28 = ft_80459B88.hats[14];
-    ftKb_SpecialN_800EF040(gobj, 0xF, temp_r28);
-    fp2->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
-    fp2->fv.kb.hat.x1C.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
-    ftKb_SpecialN_800EF0E4(gobj, 0xF, part_dobj_indices);
-    ftKb_SpecialN_800EF35C(gobj, 0xF, part_dobj_indices);
-    ftKb_SpecialN_800EF438(gobj, temp_r28);
-    ftParts_8007487C((FtPartsDesc*) temp_r28, &fp->fv.kb.hat.x24,
-                     fp->x619_costume_id, &fp->fv.kb.hat.x14,
-                     &fp->fv.kb.hat.x1C);
-    ftAnim_80070200(fp, (ftData_x8_x8*) &temp_r28->desc.vis_table,
-                    &fp->fv.kb.x44, &fp->fv.kb.hat.x14);
+    LOAD_HAT(gobj, fp, fp2, FTKIND_YOSHI, hat, part_dobj_indices);
     ftCo_8009D81C(fp2);
 }
 #pragma pop
@@ -4278,23 +4275,12 @@ void ftKb_SpecialN_800F11F0(Fighter_GObj* gobj)
     u8 part_dobj_indices[0x88];
     Fighter* fp = gobj->user_data;
     Fighter* fp2 = gobj->user_data;
-    KirbyHatStruct* temp_r28;
+    KirbyHatStruct* hat;
     PAD_STACK(8);
     if (fp2->fv.kb.hat.x14.data != NULL) {
         return;
     }
-    temp_r28 = ft_80459B88.hats[15];
-    ftKb_SpecialN_800EF040(gobj, 0x10, temp_r28);
-    fp2->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
-    fp2->fv.kb.hat.x1C.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
-    ftKb_SpecialN_800EF0E4(gobj, 0x10, part_dobj_indices);
-    ftKb_SpecialN_800EF35C(gobj, 0x10, part_dobj_indices);
-    ftKb_SpecialN_800EF438(gobj, temp_r28);
-    ftParts_8007487C((FtPartsDesc*) temp_r28, &fp->fv.kb.hat.x24,
-                     fp->x619_costume_id, &fp->fv.kb.hat.x14,
-                     &fp->fv.kb.hat.x1C);
-    ftAnim_80070200(fp, (ftData_x8_x8*) &temp_r28->desc.vis_table,
-                    &fp->fv.kb.x44, &fp->fv.kb.hat.x14);
+    LOAD_HAT(gobj, fp, fp2, FTKIND_PURIN, hat, part_dobj_indices);
     ftCo_8009DB50(fp2);
 }
 #pragma pop
@@ -4312,25 +4298,14 @@ void ftKb_SpecialN_800F12C8(Fighter_GObj* gobj)
 #pragma dont_inline on
 void ftKb_SpecialN_800F130C(Fighter_GObj* gobj)
 {
-    u8 sp14[0x90];
+    u8 part_dobj_indices[0x90];
     Fighter* fp = fp = gobj->user_data;
-    KirbyHatStruct* temp_r29;
+    KirbyHatStruct* hat;
     PAD_STACK(8);
     if (fp->fv.kb.hat.x14.data != NULL) {
         return;
     }
-    temp_r29 = ft_80459B88.hats[FTKIND_DRMARIO];
-    ftKb_SpecialN_800EF040(gobj, 0x16, temp_r29);
-    fp->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
-    fp->fv.kb.hat.x1C.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
-    ftKb_SpecialN_800EF0E4(gobj, 0x16, sp14);
-    ftKb_SpecialN_800EF35C(gobj, 0x16, sp14);
-    ftKb_SpecialN_800EF438(gobj, temp_r29);
-    ftParts_8007487C((FtPartsDesc*) temp_r29, &fp->fv.kb.hat.x24,
-                     fp->x619_costume_id, &fp->fv.kb.hat.x14,
-                     &fp->fv.kb.hat.x1C);
-    ftAnim_80070200(fp, (ftData_x8_x8*) &temp_r29->desc.vis_table,
-                    &fp->fv.kb.x44, &fp->fv.kb.hat.x14);
+    LOAD_HAT(gobj, fp, fp, FTKIND_DRMARIO, hat, part_dobj_indices);
 }
 #pragma pop
 
@@ -4375,33 +4350,21 @@ u8* ftKb_SpecialN_800F1420(Fighter_GObj* gobj, u32* arg1)
 #pragma dont_inline on
 void ftKb_SpecialN_800F14B4(Fighter_GObj* gobj)
 {
-    u8 sp14[0x88];
+    u8 part_dobj_indices[0x88];
     Fighter* fp = fp = gobj->user_data;
-    KirbyHatStruct* new_var;
-    FtPartsVisLookup* temp;
+    KirbyHatStruct* hat;
+    FtPartsVisLookup* lookup;
     PAD_STACK(8);
     if (fp->fv.kb.hat.x14.data != NULL) {
         return;
     }
-    new_var = ft_80459B88.hats[FTKIND_PICHU];
-    ftKb_SpecialN_800EF040(gobj, 0x18, new_var);
-    fp->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
-    fp->fv.kb.hat.x1C.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
-    ftKb_SpecialN_800EF0E4(gobj, 0x18, sp14);
-    ftKb_SpecialN_800EF35C(gobj, 0x18, sp14);
-    ftKb_SpecialN_800EF438(gobj, new_var);
-    ftParts_8007487C((FtPartsDesc*) new_var, &fp->fv.kb.hat.x24,
-                     fp->x619_costume_id, &fp->fv.kb.hat.x14,
-                     &fp->fv.kb.hat.x1C);
-    ftAnim_80070200(fp, (ftData_x8_x8*) &new_var->desc.vis_table,
-                    &fp->fv.kb.x44, &fp->fv.kb.hat.x14);
-    temp = (FtPartsVisLookup*) new_var->hat_dynamics[3];
-    fp->fv.kb.hat.x24.xC[4] = temp;
-    fp->x5AC.xC[4] = temp;
+    LOAD_HAT(gobj, fp, fp, FTKIND_PICHU, hat, part_dobj_indices);
+    lookup = (FtPartsVisLookup*) hat->hat_dynamics[3];
+    fp->fv.kb.hat.x24.xC[4] = lookup;
+    fp->x5AC.xC[4] = lookup;
     ftParts_80074D7C(&fp->fv.kb.hat.x24, 4, &fp->fv.kb.hat.x14);
-    ftKb_SpecialN_800F1420(gobj, (u32*) ((u8*) new_var->hat_dynamics[4] + 4));
-    *(u32*) &fp->x610_color_rgba[1] =
-        *(u32*) ((u8*) new_var->hat_dynamics[4] + 8);
+    ftKb_SpecialN_800F1420(gobj, (u32*) ((u8*) hat->hat_dynamics[4] + 4));
+    *(u32*) &fp->x610_color_rgba[1] = *(u32*) ((u8*) hat->hat_dynamics[4] + 8);
     Fighter_UpdateModelScale(gobj);
 }
 #pragma pop
