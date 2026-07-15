@@ -149,8 +149,7 @@ block_12:
     case 0x42A: {
         f32* attrs = &fp->ft_data->x0->x168;
         HSD_JObj* joint = fp->parts[part].joint;
-        efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3, gfx_id, joint,
-                      attrs);
+        efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3, gfx_id, joint, attrs);
         return;
     }
     case 0x495:
@@ -191,14 +190,13 @@ block_66:
 block_67:
     sp90 = 0.0f;
     if (fp->ground_or_air == GA_Ground) {
-        floor_angle =
-            atan2f(-fp->coll_data.floor.normal.x, fp->coll_data.floor.normal.y);
+        floor_angle = atan2f(-fp->coll_data.floor.normal.x,
+                             fp->coll_data.floor.normal.y);
         sp90 = floor_angle;
     }
     {
         HSD_JObj* joint = fp->parts[part].joint;
-        efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3, gfx_id, joint,
-                      &sp90);
+        efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3, gfx_id, joint, &sp90);
     }
     return;
 block_70:
@@ -214,8 +212,8 @@ block_70:
     case 0x3E8: {
         HSD_JObj* joint = fp->parts[part].joint;
         ftCommonData* data = p_ftCommonData;
-        efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, gfx_id, joint,
-                      &sp84, &data->x564);
+        efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, gfx_id, joint, &sp84,
+                      &data->x564);
         return;
     }
     case 0x3E9:
@@ -248,8 +246,7 @@ block_70:
     case 0x4E3:
     case 0x4E4: {
         HSD_JObj* joint = fp->parts[part].joint;
-        efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 2, gfx_id, joint,
-                      &sp84);
+        efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 2, gfx_id, joint, &sp84);
         return;
     }
     case 0x404:
@@ -290,8 +287,8 @@ block_70:
     case 0x401:
     case 0x4D9: {
         HSD_JObj* joint = fp->parts[part].joint;
-        efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, gfx_id, joint,
-                      &sp84, &fp->facing_dir);
+        efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, gfx_id, joint, &sp84,
+                      &fp->facing_dir);
         return;
     }
     case 0x3F7:
