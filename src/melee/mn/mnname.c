@@ -41,6 +41,11 @@ extern char* mnNameNew_803EE724[];
 
 extern char mnName_804D4C04[8];
 
+typedef struct {
+    u8 cur_menu;
+    u8 prev_selection;
+} MnNameUserDataState;
+
 void fn_80249A1C(HSD_GObj* arg0);
 
 char* mnName_8023749C(int slot)
@@ -302,21 +307,47 @@ s32 mnName_SortNames(HSD_GObj* arg0)
                         if (e2 != 0) {
                             result = CompareNameStrings(name1, name2);
                         } else {
-                            result = 2;
+                            goto block_15;
                         }
                     } else {
+                    block_15:
                         if ((s8) mnName_StringTerminator ==
-                            (s8) GetPersistentNameData((s32) idx2)
+                            (s8) GetPersistentNameData((s32) idx1)
                                 ->namedata[0])
                         {
-                            e2 = 0;
+                            e1 = 0;
                         } else {
-                            e2 = 1;
+                            e1 = 1;
                         }
-                        if (e2 == 0) {
-                            result = 0;
+                        if (e1 == 0) {
+                            if ((s8) mnName_StringTerminator ==
+                                (s8) GetPersistentNameData((s32) idx2)
+                                    ->namedata[0])
+                            {
+                                e2 = 0;
+                            } else {
+                                e2 = 1;
+                            }
+                            if (e2 == 0) {
+                                result = 0;
+                            } else {
+                                goto block_24;
+                            }
                         } else {
-                            result = 1;
+                        block_24:
+                            if ((s8) mnName_StringTerminator ==
+                                (s8) GetPersistentNameData((s32) idx1)
+                                    ->namedata[0])
+                            {
+                                e1 = 0;
+                            } else {
+                                e1 = 1;
+                            }
+                            if (e1 == 0) {
+                                result = 1;
+                            } else {
+                                result = 2;
+                            }
                         }
                     }
                 }
@@ -857,13 +888,20 @@ void mnName_80238AE0(HSD_GObj* gobj, u8 index, u8 arg2)
 }
 
 static inline AnimLoopSettings*
-mnName_FindAnimLoop(AnimLoopSettings* const* table, f32 frame)
+mnName_FindAnimLoop(AnimLoopSettings* const* tableBase, f32 frame)
 {
     s32 i;
+    struct AnimTable {
+        AnimLoopSettings* entries[6];
+    } table;
+
+    table = *(struct AnimTable*) tableBase;
 
     for (i = 0; i < 6; i++) {
-        if (table[i]->start_frame <= frame && frame <= table[i]->end_frame) {
-            return table[i];
+        if (table.entries[i]->start_frame <= frame &&
+            frame <= table.entries[i]->end_frame)
+        {
+            return table.entries[i];
         }
     }
 
@@ -878,7 +916,7 @@ inline f32 mnName_80238C34_inline(HSD_JObj* jobj)
 static inline void mnName_UpdateSelection(u8 do_update, MnName_GObj* data)
 {
     if (do_update) {
-        u8 prev = (u8) data->gobj.classifier;
+        u32 prev = ((MnNameUserDataState*) data)->prev_selection;
         if (prev != 0x1A || (u16) mn_804A04F0.hovered_selection >= 0x18U) {
             mnName_80238AE0((HSD_GObj*) data, prev, 0);
         }
@@ -1459,7 +1497,7 @@ HSD_GObj* mnName_8023A59C(u8 arg0)
     MnName_GObj* user_data;
     HSD_GObj* gobj;
     s32 i;
-    PAD_STACK(24);
+    PAD_STACK(16);
 
     gobj = GObj_Create(6U, 7U, 0x80U);
     mnName_804D6BF8 = gobj;

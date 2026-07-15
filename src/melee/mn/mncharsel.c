@@ -1637,15 +1637,49 @@ static inline bool isDuplicateCostume(int door)
     return false;
 }
 
+static inline bool isDuplicateCostume2(int door, CSSData* css, u8 door_count)
+{
+    int num_doors;
+    int j;
+    CSSDoor* base_door = &mnCharSel_803F0DFC.doors[door];
+
+    if (css->match_type == TRAINING_MODE) {
+        num_doors = 2;
+    } else {
+        num_doors = door_count;
+    }
+
+    for (j = 0; j < num_doors; j++) {
+        CSSDoor* other_door = &mnCharSel_803F0DFC.doors[j];
+        if (door != j && other_door->p_kind != 3 &&
+            other_door->sel_icon < 0x19 &&
+            other_door->sel_icon == base_door->sel_icon &&
+            base_door->costume == other_door->costume)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+static inline s32 getIconOffset(unsigned long icon_idx)
+{
+    return icon_idx * sizeof(CSSIcon);
+}
+
 void mnCharSel_8025FB50(u8 door, s32 arg1)
 {
     s32 icon_idx;
+    s32 icon_offset;
     int player;
     CSSAllData* all_data = (CSSAllData*) &mnCharSel_803F0A48;
+    u8* char_kinds;
     HSD_JObj* icon_jobj;
 
     do {
-        icon_idx = HSD_Randi(0x19);
+        s32 temp = HSD_Randi(0x19);
+        icon_idx = temp;
+        icon_offset = getIconOffset(icon_idx);
     } while (icons[icon_idx].state == 0);
 
     if (mnCharSel_804D6CF5 == 1) {
@@ -1658,17 +1692,20 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
         player = door;
     }
 
+    char_kinds = &all_data->icons[0].char_kind;
     mnCharSel_804D6CB0->data.data.players[player].c_kind =
-        all_data->icons[icon_idx].char_kind;
+        char_kinds[icon_offset];
 
     mnCharSel_803F0DFC.doors[door].sel_icon = (u8) icon_idx;
     if (mnCharSel_803F0DFC.doors[door].sel_icon !=
         mnCharSel_803F0DFC.doors[door].sel_icon_prev)
     {
+        CSSData* css = mnCharSel_804D6CB0;
+        u8 door_count = mnCharSel_804D6CF5;
         u8 costume = 0;
         while (1) {
             mnCharSel_803F0DFC.doors[door].costume = costume;
-            if (!isDuplicateCostume(door)) {
+            if (!isDuplicateCostume2(door, css, door_count)) {
                 break;
             }
             costume++;
@@ -1700,7 +1737,7 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
     {
         u8 sel = mnCharSel_803F0DFC.doors[door].sel_icon;
         lbAudioAx_80023870(all_data->icons[sel].sfx, 0x7F, 0x40, sel + 0x8A);
-        gm_80168C5C((u32) all_data->icons[sel].char_kind);
+        gm_80168C5C((u32) char_kinds[sel * sizeof(CSSIcon)]);
     }
 }
 

@@ -240,6 +240,8 @@ void fn_80251FE4(void)
     s32 count;
     s32 i;
     s32 j;
+    MnInfoData* data2;
+    MnInfoData* data3;
     PAD_STACK(0x20);
 
     data = mnInfo_804D6C78->user_data;
@@ -260,16 +262,20 @@ void fn_80251FE4(void)
         if (data->scroll_idx != 0) {
             data->scroll_idx -= 1;
             lbAudioAx_80024030(2);
-            for (j = 0; j < 4; j++) {
-                if (data->left_column[j] != NULL) {
-                    HSD_SisLib_803A5CC4(data->left_column[j]);
-                    data->left_column[j] = NULL;
+            j = 0;
+            data2 = mnInfo_804D6C78->user_data;
+            data3 = data2;
+            do {
+                if (data2->left_column[j] != NULL) {
+                    HSD_SisLib_803A5CC4(data3->left_column[j]);
+                    data2->left_column[j] = NULL;
                 }
-                if (data->right_column[j] != NULL) {
-                    HSD_SisLib_803A5CC4(data->right_column[j]);
-                    data->right_column[j] = NULL;
+                if (data2->right_column[j] != NULL) {
+                    HSD_SisLib_803A5CC4(data3->right_column[j]);
+                    data2->right_column[j] = NULL;
                 }
-            }
+                j++;
+            } while (j < 4);
             gobj = mnInfo_804D6C78;
             trophy = &mnInfo_804A0968[data->scroll_idx];
             for (i = 0; i < 4; i++) {
@@ -292,16 +298,20 @@ void fn_80251FE4(void)
         if ((data->scroll_idx + 4) < count) {
             lbAudioAx_80024030(2);
             data->scroll_idx += 1;
-            for (j = 0; j < 4; j++) {
-                if (data->left_column[j] != NULL) {
-                    HSD_SisLib_803A5CC4(data->left_column[j]);
-                    data->left_column[j] = NULL;
+            j = 0;
+            data2 = mnInfo_804D6C78->user_data;
+            data3 = data2;
+            do {
+                if (data2->left_column[j] != NULL) {
+                    HSD_SisLib_803A5CC4(data3->left_column[j]);
+                    data2->left_column[j] = NULL;
                 }
-                if (data->right_column[j] != NULL) {
-                    HSD_SisLib_803A5CC4(data->right_column[j]);
-                    data->right_column[j] = NULL;
+                if (data2->right_column[j] != NULL) {
+                    HSD_SisLib_803A5CC4(data3->right_column[j]);
+                    data2->right_column[j] = NULL;
                 }
-            }
+                j++;
+            } while (j < 4);
             gobj = mnInfo_804D6C78;
             trophy = &mnInfo_804A0968[data->scroll_idx];
             for (i = 0; i < 4; i++) {

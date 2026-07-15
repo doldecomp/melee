@@ -1218,14 +1218,15 @@ void fn_8022AF10(HSD_GObj* gp)
 void fn_8022AFEC(HSD_GObj* gp)
 {
     /// @todo figure out the inlines
-    AnimLoopSettings* anim_loop;
-    HSD_JObj* jobj;
-    MainMenuData* data;
-    MainMenuData* data2;
     HSD_GObjProc* think;
-    bool selection_changed;
+    HSD_JObj* jobj;
+    MainMenuData* data2;
     HSD_JObj* temp_jobj;
+    AnimLoopSettings* anim_loop;
+    MainMenuData* data;
     u8 var_r26;
+    bool selection_changed;
+    MainMenuData* final_data;
     MainMenuSelection hovered_selection;
     u8 state;
     u8 option_count;
@@ -1355,30 +1356,31 @@ void fn_8022AFEC(HSD_GObj* gp)
         mn_8022A5D0(gp, (u8) hovered_selection);
     }
     mn_8022ADD8(gp, selection_changed);
-    data = gp->user_data;
+    final_data = gp->user_data;
     if ((u8) selection_changed != false) {
         hovered_selection = mn_804A04F0.hovered_selection;
     } else {
-        hovered_selection = data->hovered_selection;
+        hovered_selection = final_data->hovered_selection;
     }
-    switch (data->state) {
+    switch (final_data->state) {
     case MENU_STATE_ENTER_TO:
     case MENU_STATE_EXIT_TO:
     case MENU_STATE_5:
         break;
     case MENU_STATE_EXIT_FROM:
     case MENU_STATE_ENTER_FROM:
-        if (data->description != NULL) {
-            data = gp->user_data;
-            HSD_SisLib_803A5CC4(data->description);
-            data->description = NULL;
+        if (final_data->description != NULL) {
+            final_data = gp->user_data;
+            HSD_SisLib_803A5CC4(final_data->description);
+            final_data->description = NULL;
         }
         break;
     case MENU_STATE_IDLE:
         if (selection_changed != false) {
-            mn_80229A7C_dontinline(data, data->menu_kind, hovered_selection);
+            mn_80229A7C_dontinline(final_data, final_data->menu_kind,
+                                   hovered_selection);
         }
-        data->description->hidden = 0;
+        final_data->description->hidden = 0;
         break;
     }
     if (var_r26 != 0) {

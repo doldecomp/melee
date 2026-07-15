@@ -578,6 +578,12 @@ void mnDiagram3_Init(void* arg0)
     }
 }
 
+static inline f32 mnDiagram3_GetRowSpacing(Diagram3* data)
+{
+    return HSD_JObjGetTranslationY(data->jobjs[9]) -
+           HSD_JObjGetTranslationY(data->jobjs[8]);
+}
+
 void mnDiagram3_HandleInput(HSD_GObj* gobj)
 {
     char* base = (char*) &mnDiagram3_803EEC10;
@@ -593,7 +599,7 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
 
     if ((u32) input & 0x20) {
         lbAudioAx_80024030(0);
-        mn_804A04F0.entering_menu = 0;
+        i = mn_804A04F0.entering_menu = 0;
         gmMainLib_8015CC34()->xD =
             ((Diagram3*) mnDiagram3_804D6C20->user_data)->is_name_mode;
         mnDiagram2_ClearDetailView(mnDiagram3_804D6C20);
@@ -601,8 +607,7 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
         data = mnDiagram3_804D6C20->user_data;
         {
             HSD_Text** check_cur = data->row_labels;
-            HSD_Text** text_cur = data->row_labels;
-            i = 0;
+            HSD_Text** text_cur = &data->row_labels[i];
             do {
                 if (*check_cur != NULL) {
                     HSD_SisLib_803A5CC4(*text_cur);
@@ -683,7 +688,10 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
                 data->row_labels[i] = t;
                 i_u8 = i;
                 limit = (data->is_name_mode != 0) ? 0x18 : 0x15;
-                v = base_idx_u8 + i_u8;
+                {
+                    int tmp = base_idx_u8 + i_u8;
+                    v = tmp;
+                }
                 if (v >= limit) {
                     v = v - limit;
                 } else {
@@ -761,7 +769,10 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
                 data->row_labels[i] = t;
                 i_u8 = i;
                 limit = (data->is_name_mode != 0) ? 0x18 : 0x15;
-                v = base_idx_u8 + i_u8;
+                {
+                    int tmp = base_idx_u8 + i_u8;
+                    v = tmp;
+                }
                 if (v >= limit) {
                     v = v - limit;
                 } else {
@@ -790,8 +801,7 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
             cur = mnDiagram3_804D6C20->user_data;
             popup = data->popup_gobj->hsd_obj;
             n = data->cursor_row;
-            spacing = HSD_JObjGetTranslationY(cur->jobjs[9]) -
-                      HSD_JObjGetTranslationY(cur->jobjs[8]);
+            spacing = mnDiagram3_GetRowSpacing(cur);
             HSD_JObjSetTranslateX(popup,
                                   HSD_JObjGetTranslationX(cur->jobjs[8]));
             HSD_JObjSetTranslateY(popup,
@@ -839,7 +849,10 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
                 data->row_labels[i] = t;
                 i_u8 = i;
                 limit = (data->is_name_mode != 0) ? 0x18 : 0x15;
-                v = base_idx_u8 + i_u8;
+                {
+                    int tmp = base_idx_u8 + i_u8;
+                    v = tmp;
+                }
                 if (v >= limit) {
                     v = v - limit;
                 } else {
