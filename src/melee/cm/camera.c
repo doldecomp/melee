@@ -807,7 +807,7 @@ void Camera_80029C88(CameraBounds* unused, CameraTransformState* transform,
 }
 #pragma dont_inline reset
 
-static inline f32 Camera_80029CF8_get_t(f32 spread)
+static inline f32 get_y_bias(f32 spread)
 {
     if (spread > cm_803BCCA0.x28) {
         return cm_803BCCA0.x20;
@@ -820,15 +820,18 @@ static inline f32 Camera_80029CF8_get_t(f32 spread)
                cm_803BCCA0.x1C;
     }
 }
+
 void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
 {
     f32 x_center;
-    f32 t;
+    f32 y_angle;
     f32 angle;
     f32 tan_r;
     f32 dx;
     f32 dy;
     f32 spread;
+    /// @todo another inline probably resolves this stack issue
+    UNUSED u8 _pad[12];
     f32 y_off;
     f32 base;
     f32 fov_r;
@@ -843,40 +846,39 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
     f32 dist_x;
     Vec3 sp24;
     f32 fov_l;
-    f32 y_angle;
+    f32 t;
     Vec3 sp14;
+    f32 y_sum;
+    f32 scaled_tan;
 
     Stage_UnkSetVec3TCam_Offset(&sp24);
     dx = bounds->x_max - bounds->x_min;
     dy = bounds->y_max - bounds->y_min;
+
     if (dx > dy) {
         spread = dx;
     } else {
         spread = dy;
     }
-    t = Camera_80029CF8_get_t(spread);
-    {
-        float tmp_p27738 = (bounds->y_min - sp24.y) + (bounds->y_max - sp24.y);
-        base = (tmp_p27738) *
-               (0.5f - t) +
-           sp24.y;
+
+    t = get_y_bias(spread);
+    y_sum = (bounds->y_min - sp24.y) + (bounds->y_max - sp24.y);
+    base = y_sum * (0.5f - t) + sp24.y;
+    angle = -MTXDegToRad((base + cm_803BCCA0.x8) * Stage_GetCamInfoX24());
+
+    if (angle > MTXDegToRad(cm_803BCCA0.xC)) {
+        angle = MTXDegToRad(cm_803BCCA0.xC);
     }
-    angle = -(0.017453292f *
-              ((base + cm_803BCCA0.x8) * Stage_GetCamInfoX24()));
-    if (angle > 0.017453292f * cm_803BCCA0.xC) {
-        angle = 0.017453292f * cm_803BCCA0.xC;
+    if (angle < MTXDegToRad(cm_803BCCA0.x10)) {
+        angle = MTXDegToRad(cm_803BCCA0.x10);
     }
-    if (angle < 0.017453292f * cm_803BCCA0.x10) {
-        angle = 0.017453292f * cm_803BCCA0.x10;
-    }
+
     angle += Stage_GetCamPanAngleRadians();
     y_angle = angle;
-
-    fov_u = 0.5f * (0.017453292f * transform->fov) + angle;
+    fov_u = 0.5f * MTXDegToRad(transform->fov) + angle;
     HSD_ASSERT(1274, fov_u<MTXDegToRad(90.0F));
-    fov_d = 0.5f * (0.017453292f * transform->fov) - angle;
+    fov_d = 0.5f * MTXDegToRad(transform->fov) - angle;
     HSD_ASSERT(1275, fov_d<MTXDegToRad(90.0F));
-
     tan_u = tanf(fov_u);
     tan_d = tanf(fov_d);
     dist_y = (bounds->y_max - bounds->y_min) / (tan_u + tan_d);
@@ -884,23 +886,23 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
     Stage_GetCamBoundsTopOffset();
     y_off = dist_y * tanf(y_angle);
     transform->target_interest.y = y_off + (bounds->y_max - dist_y * tan_u);
-
     Stage_UnkSetVec3TCam_Offset(&sp14);
     x_center = 0.5f * (bounds->x_min + bounds->x_max);
-    angle = -(0.017453292f * ((x_center - sp14.x) * Stage_GetCamInfoX20()));
-    if (angle > 0.017453292f * cm_803BCCA0.x14) {
-        angle = 0.017453292f * cm_803BCCA0.x14;
+    angle = -MTXDegToRad((x_center - sp14.x) * Stage_GetCamInfoX20());
+
+    if (angle > MTXDegToRad(cm_803BCCA0.x14)) {
+        angle = MTXDegToRad(cm_803BCCA0.x14);
     }
-    if (angle < 0.017453292f * cm_803BCCA0.x18) {
-        angle = 0.017453292f * cm_803BCCA0.x18;
+    if (angle < MTXDegToRad(cm_803BCCA0.x18)) {
+        angle = MTXDegToRad(cm_803BCCA0.x18);
     }
 
-    fov_r = 0.5f * (0.017453292f * transform->fov) - angle;
+    fov_r = 0.5f * MTXDegToRad(transform->fov) - angle;
     HSD_ASSERT(1288, fov_r<MTXDegToRad(90.0F));
-    fov_l = 0.5f * (0.017453292f * transform->fov) + angle;
+    fov_l = 0.5f * MTXDegToRad(transform->fov) + angle;
     HSD_ASSERT(1289, fov_l<MTXDegToRad(90.0F));
-
-    tan_r = cm_803BCB64.aspect * tanf(fov_r);
+    scaled_tan = cm_803BCB64.aspect * tanf(fov_r);
+    tan_r = scaled_tan;
     tan_l = cm_803BCB64.aspect * tanf(fov_l);
     dist_x = (bounds->x_max - bounds->x_min) / (tan_r + tan_l);
     Stage_GetCamBoundsLeftOffset();
@@ -908,15 +910,16 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
     x_off = cm_803BCB64.aspect * (dist_x * tanf(angle));
     transform->target_interest.x = (bounds->x_max - dist_x * tan_r) - x_off;
     transform->target_interest.z = 0.0f;
-
     dist_y = (dist_y > dist_x) ? dist_y : dist_x;
     cam_dist = dist_y;
+
     if (dist_y < Stage_GetCamZoomRate()) {
         cam_dist = Stage_GetCamZoomRate();
     }
     if (cam_dist > Stage_GetCamMaxDepth()) {
         cam_dist = Stage_GetCamMaxDepth();
     }
+
     transform->target_position.x = transform->target_interest.x + x_off;
     transform->target_position.y = transform->target_interest.y - y_off;
     transform->target_position.z = transform->target_interest.z + cam_dist;
