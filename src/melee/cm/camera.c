@@ -851,37 +851,38 @@ static inline void get_pitch_angle(CameraBounds* bounds, Vec3* scroll_offset,
                    scroll_offset->y;
     {
         f32 info_x24 = Stage_GetCamInfoX24();
-        *pitch_angle += cm_803BCCA0.x8;
-        *pitch_angle = -(deg_to_rad * (*pitch_angle * info_x24));
+        *pitch_angle =
+            -(deg_to_rad * ((*pitch_angle + cm_803BCCA0.x8) * info_x24));
     }
 }
 
 void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
 {
-    f32 unused_f31;
-    u8 _padA[8];
+    f32 pan_angle;
     Vec3 scroll_offset;
     f32 pitch_angle;
-    f32 min_v;
+    f32 max_v;
+    float temp_pan;
+    f32 mid_x;
     f32 horiz_frustum_dist;
     f32 fov_u;
     f32 fov_d;
     f32 fov_r;
     f32 zoom_depth;
     f32 tan_fov_u;
+    f32 max_h;
     f32 min_h;
-    f32 pan_angle;
-    f32 mid_x;
+    f32 min_v;
     f32 horiz_offset;
     f32 fov_l;
     f32 tan_fov_r_aspect;
     f32 vert_frustum_dist;
-    Vec3 scroll_offset2;
     f32 vert_offset;
+    Vec3 scroll_offset2;
 
     get_pitch_angle(bounds, &scroll_offset, &pitch_angle);
-    if (pitch_angle > (vert_offset = deg_to_rad * cm_803BCCA0.xC)) {
-        pitch_angle = vert_offset;
+    if (pitch_angle > (max_v = deg_to_rad * cm_803BCCA0.xC)) {
+        pitch_angle = max_v;
     }
 
     min_v = deg_to_rad * cm_803BCCA0.x10;
@@ -898,8 +899,12 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
     HSD_ASSERTMSG(0x4FB, fov_d < (f32) M_PI_2, "fov_d<MTXDegToRad(90.0F)");
 
     tan_fov_u = tanf(fov_u);
-    vert_frustum_dist =
-        (bounds->y_max - bounds->y_min) / (tan_fov_u + tanf(fov_d));
+    max_h = tanf(fov_d);
+    {
+        float tmp_p29208 = (bounds->y_max - bounds->y_min) / (tan_fov_u + max_h);
+        vert_frustum_dist =
+        tmp_p29208;
+    }
     Stage_GetCamBoundsBottomOffset();
     Stage_GetCamBoundsTopOffset();
     vert_offset = vert_frustum_dist * tanf(pan_angle);
@@ -908,12 +913,15 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
     Stage_UnkSetVec3TCam_Offset(&scroll_offset2);
     mid_x = 0.5f * (bounds->x_min + bounds->x_max);
     {
-        f32 info_x20 = Stage_GetCamInfoX20();
-        vert_offset = deg_to_rad * cm_803BCCA0.x14;
-        pan_angle = -(deg_to_rad * ((mid_x - scroll_offset2.x) * info_x20));
+        f32 info_x20_tmp = Stage_GetCamInfoX20();
+        f32 info_x20 = info_x20_tmp;
+        temp_pan = mid_x;
+        temp_pan = temp_pan - scroll_offset2.x;
+        pan_angle = -(deg_to_rad * (temp_pan * info_x20));
+        max_h = deg_to_rad * cm_803BCCA0.x14;
     }
-    if (pan_angle > vert_offset) {
-        pan_angle = vert_offset;
+    if (pan_angle > max_h) {
+        pan_angle = max_h;
     }
 
     min_h = deg_to_rad * cm_803BCCA0.x18;
