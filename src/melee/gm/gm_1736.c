@@ -19,7 +19,7 @@ lbl_8046DBD8_t* gm_801736DC(void)
     return &lbl_8046DBD8;
 }
 
-void gm_801736E8(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5)
+void gm_801736E8(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 game_mode)
 {
     lbl_8046DBD8_t* tmp = &lbl_8046DBD8;
     memzero(tmp, sizeof(lbl_8046DBD8));
@@ -28,18 +28,18 @@ void gm_801736E8(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5)
     tmp->x2 = arg2;
     tmp->x3 = arg3;
     tmp->x4 = arg4;
-    tmp->x5 = arg5;
+    tmp->x5 = game_mode;
 }
 
 #pragma push
 #pragma dont_inline on
-bool gm_80173754(s8 arg0, u8 arg1)
+bool gm_80173754(u8 gameMode, u8 arg1)
 {
     if (gm_801721EC()) {
         memzero(&lbl_8046DBD8, sizeof(lbl_8046DBD8));
         lbl_8046DBD8.x0 = CHKIND_NONE;
         lbl_8046DBD8.x2 = arg1;
-        lbl_8046DBD8.x5 = arg0;
+        lbl_8046DBD8.x5 = gameMode;
         gm_SetPendingGameMode(GM_CHALLENGER_APPROACH);
         gm_SetNewGameModePending();
         return true;

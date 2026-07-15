@@ -495,9 +495,9 @@ char* gm_80160438(s32 ckind)
     }
 }
 
-bool gm_80160474(CharacterKind ckind, GameModeKind scene)
+bool gm_80160474(CharacterKind ckind, GameModeKind mode)
 {
-    switch (scene) {
+    switch (mode) {
     case GM_CLASSIC_GOVER:
     case GM_CLASSIC:
         return lbl_803B7978[ckind];
@@ -509,11 +509,11 @@ bool gm_80160474(CharacterKind ckind, GameModeKind scene)
     }
 }
 
-char* gm_801604DC(CharacterKind ckind, GameModeKind scene)
+char* gm_801604DC(CharacterKind ckind, GameModeKind mode)
 {
     s16 var_r3;
 
-    switch (scene) {
+    switch (mode) {
     case GM_CLASSIC_GOVER:
     case GM_CLASSIC:
         var_r3 = lbl_803B7978[ckind];
@@ -526,14 +526,14 @@ char* gm_801604DC(CharacterKind ckind, GameModeKind scene)
         var_r3 = lbl_803B7A00[ckind];
         break;
     }
-    return Toy_8030813C(var_r3, scene) + 4;
+    return Toy_8030813C(var_r3, mode) + 4;
 }
 
-char* gm_80160564(CharacterKind ckind, GameModeKind scene)
+char* gm_80160564(CharacterKind ckind, GameModeKind mode)
 {
     s16 var_r3;
 
-    switch (scene) {
+    switch (mode) {
     case GM_CLASSIC_GOVER:
     case GM_CLASSIC:
         var_r3 = lbl_803B7978[ckind];
@@ -546,7 +546,7 @@ char* gm_80160564(CharacterKind ckind, GameModeKind scene)
         var_r3 = lbl_803B7A00[ckind];
         break;
     }
-    return Toy_8030813C(var_r3, scene) + 0x24;
+    return Toy_8030813C(var_r3, mode) + 0x24;
 }
 
 u8 fn_801605EC(s32 arg0)
@@ -1398,7 +1398,7 @@ void gm_8016260C(u8 arg0, u8 arg1)
         *p = MIN(*p + 1, 0xFFFFFFFFU);
         return;
     }
-    if (gm_GetCurrentGameMode() == 0x1F) {
+    if (gm_GetCurrentGameMode() == GM_STAMINA_VS) {
         counter = gmMainLib_8015CD5C();
     } else {
         switch ((s32) arg0) {
@@ -2632,17 +2632,17 @@ void fn_801650E8(void)
     Ground_EnableMatchCamera();
 }
 
-void gm_EnablePlayerPauseCamera(int slot, int arg1)
+void gm_EnablePlayerPauseCamera(int playerSlot, int playerId)
 {
-    if (slot == -1) {
+    if (playerSlot == -1) {
         Camera_SetUpPauseCameraWithDefaultZoom(0xB, 5);
         return;
     }
-    if (((Player_GetPlayerSlotType(slot) == Gm_PKind_Human) ||
-         (Player_GetPlayerSlotType(slot) == Gm_PKind_Cpu)) &&
-        (Player_GetEntity(slot) != NULL))
+    if (((Player_GetPlayerSlotType(playerSlot) == Gm_PKind_Human) ||
+         (Player_GetPlayerSlotType(playerSlot) == Gm_PKind_Cpu)) &&
+        (Player_GetEntity(playerSlot) != NULL))
     {
-        Camera_SetUpPauseCameraWithDefaultZoom(slot, arg1);
+        Camera_SetUpPauseCameraWithDefaultZoom(playerSlot, playerId);
     }
 }
 
@@ -2833,7 +2833,7 @@ s32 fn_8016588C(lbl_8046B6A0_24C_t* arg0, s32 arg1)
     s32 v;
     s32 lim;
 
-    if (gm_GetCurrentGameMode() == 0x1F) {
+    if (gm_GetCurrentGameMode() == GM_STAMINA_VS) {
         if (arg0->x58[arg1].x28 != 0) {
             v = (u8) (arg0->x58[arg1].x28 / 60 + 0xFF000001);
         } else {
@@ -3498,7 +3498,7 @@ void gm_80167320(int slot, bool arg1)
 void gm_80167470(s32 arg0, s32 arg1)
 {
     switch ((s32) gm_GetCurrentGameMode()) {
-    case 0x1F:
+    case GM_STAMINA_VS:
         gm_801B97C4(arg0, arg1);
         break;
     }
@@ -3620,7 +3620,7 @@ bool gm_801677F8(int port, int arg1)
         if (GetRumbleSettingOfPort(port) != 0) {
             result = true;
         }
-    } else if (GetPersistentNameData(arg1)->x1A1 != 0) {
+    } else if (GetPersistentNameData(arg1)->rumble_toggle != 0) {
         result = true;
     }
     return result;
@@ -3843,9 +3843,9 @@ void gm_80167BC8(VsModeData* vs_data)
     }
 
     if (rules->pause != 0) {
-        vs_data->data.rules.x2_4 = 0;
+        vs_data->data.rules.disable_pausing = 0;
     } else {
-        vs_data->data.rules.x2_4 = 1;
+        vs_data->data.rules.disable_pausing = 1;
     }
     if ((rules->score_display != 0) && (rules->mode == 0)) {
         vs_data->data.rules.x3_0 = 1;

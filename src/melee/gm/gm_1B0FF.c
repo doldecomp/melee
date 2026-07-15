@@ -40,11 +40,11 @@ GameScene gm_803DD8B8_Scenes[] = {
     { -1 },
 };
 
-void gm_801B0FF8(GameScene* scene)
+void gm_801B0FF8(GameScene* scene) ///< Return to menu?
 {
     GameRules* rules;
     MenuEnterData* data;
-    GameModeKind var_r0;
+    GameModeKind previous_mode;
 
     data = scene->info.load_data;
     lb_8001C550();
@@ -71,11 +71,11 @@ void gm_801B0FF8(GameScene* scene)
         return;
     }
     data->load_assets = 1;
-    var_r0 = gm_GetPreviousGameMode();
-    if (var_r0 == GM_CHALLENGER_APPROACH) {
-        var_r0 = gm_801737D8();
+    previous_mode = gm_GetPreviousGameMode();
+    if (previous_mode == GM_CHALLENGER_APPROACH) {
+        previous_mode = gm_801737D8();
     }
-    switch (var_r0) {
+    switch (previous_mode) {
     case GM_CLASSIC:
         data->menu_kind = MENU_KIND_REG;
         data->hovered_selection = SEL_REG_CLASSIC;

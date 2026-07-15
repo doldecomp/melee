@@ -5,6 +5,10 @@
 
 #include "baselib/forward.h"
 
+#include "dolphin/pad.h"
+
+#include "gm/forward.h"
+
 #include <math_ppc.h>
 #include <dolphin/gx.h>
 #include <sysdolphin/baselib/aobj.h>
@@ -269,7 +273,7 @@ void fn_8017C1A4(HSD_GObj* unused)
     case 0:
         if (tmp->x8 == 0) {
             temp_r3_2 = gm_8016AE38();
-            temp_r3_2->x24C8.x2_4 = false;
+            temp_r3_2->x24C8.disable_pausing = false;
             temp_r3_2->hud_enabled = 0;
             lbAudioAx_800237A8(0x81650, 0x7F, 0x40);
             ftLib_80086824();
@@ -537,13 +541,13 @@ void gm_8017CA38(DebugGameOverData* arg0, Unk1PData* arg1, gmm_x0_528_t* arg2,
     if (arg0->xC == 0) {
         temp_r31 = gm_80173224(arg3, 0);
         switch (gm_GetCurrentGameMode()) {
-        case 3:
+        case GM_CLASSIC:
             fn_80162BFC(arg1->ckind, arg0->x4);
             break;
-        case 4:
+        case GM_ADVENTURE:
             fn_80162DF8(arg1->ckind, arg0->x4);
             break;
-        case 5:
+        case GM_ALLSTAR:
             fn_80162FF4(arg1->ckind, arg0->x4);
             break;
         }
@@ -553,12 +557,12 @@ void gm_8017CA38(DebugGameOverData* arg0, Unk1PData* arg1, gmm_x0_528_t* arg2,
         gm_80172898(0x40);
         if (temp_r31 == CHKIND_NONE) {
             if (gm_80173754(1, arg1->slot) == 0) {
-                gm_ChangeGameModeAfterCurrentScene(1);
+                gm_ChangeGameModeAfterCurrentScene(GM_MENU);
             }
         } else {
             gm_801736E8(arg1->ckind, arg1->color, arg1->slot, arg1->x4,
                         temp_r31, 1U);
-            gm_ChangeGameModeAfterCurrentScene(0x14);
+            gm_ChangeGameModeAfterCurrentScene(GM_CHALLENGER_APPROACH);
         }
     } else {
         arg1->xC.x18 = lbTime_8000AEC8((u32) arg0->x4, 1U);
@@ -741,7 +745,7 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
         arg1->x0.xC.xC = 5;
         switch ((s32) arg1->x0.x9) {
         case 1:
-            arg0->rules.x3C = gm_80165290;
+            arg0->rules.on_pause_override = gm_80165290;
             arg0->rules.x9 = 1;
             arg0->rules.x3_1 = 0;
             arg0->players[0].xC_b1 = 0;
@@ -1007,7 +1011,7 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
         arg0->rules.x1_3 = 1;
         arg0->rules.x1_4 = 1;
         arg0->rules.x0_3 = 3;
-        arg0->rules.x2_4 = 1;
+        arg0->rules.disable_pausing = 1;
         arg0->rules.x7 = 0;
         arg0->rules.x44 = (void (*)(void)) fn_8017C71C;
         arg1->x0.xC.xC = 6;
@@ -1046,17 +1050,17 @@ bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
     temp_r0 = arg0->match_end.result;
     if ((temp_r0 == 7 || temp_r0 == 8) && DbLevel <= 2) {
         switch (gm_GetCurrentGameMode()) {
-        case 3:
+        case GM_CLASSIC:
             fn_80162BFC(arg1->ckind, arg1->xC.x18);
             break;
-        case 4:
+        case GM_ADVENTURE:
             fn_80162DF8(arg1->ckind, arg1->xC.x18);
             break;
-        case 5:
+        case GM_ALLSTAR:
             fn_80162FF4(arg1->ckind, arg1->xC.x18);
             break;
         }
-        gm_ChangeGameModeAfterCurrentScene(1);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return 0;
     }
     fn_8017E3C8();
@@ -1453,7 +1457,7 @@ u8 gm_8017E48C(GameScene* scene)
     u8 count = 0;
     int i;
     for (i = 0; scene->idx != gm_803DE1B8_Scenes[i].idx; i++) {
-        if (gm_803DE1B8_Scenes[i].info.class_id == 2) {
+        if (gm_803DE1B8_Scenes[i].info.class_id == GS_VS) {
             count++;
         }
     }
@@ -1529,9 +1533,9 @@ u8 gm_8017E76C(u8 difficulty, u8 stage_slot, u8 arg2)
     return lbl_803D7AC0[stage_slot + difficulty * 5].pad_6[0x10 + (arg2 * 3)];
 }
 
-void gm_8017E7A0(u8 arg0)
+void gm_8017E7A0(u8 matchResult)
 {
-    if (arg0 == 1) {
+    if (matchResult == OUTCOME_TIMEOUT) {
         Player_LoseStock(0);
         ifStatus_802F6948(0);
         ifStatus_802F6E3C(0);
@@ -1543,12 +1547,12 @@ bool gm_8017E7E0(void)
     return lbl_80472C30.x7C == 0x14;
 }
 
-void gm_8017E7FC(u8 arg0)
+void gm_8017E7FC(u8 matchResult)
 {
     UnkAdventureData* r31 = &lbl_80472C30;
     bool cond;
 
-    if (gm_GetCurrentGameMode() == 4 && r31->x0.cpu_level >= 2 &&
+    if (gm_GetCurrentGameMode() == GM_ADVENTURE && r31->x0.cpu_level >= 2 &&
         r31->x0.xC.x20 + gm_8016AEDC() < 0xFD20U)
     {
         cond = true;
@@ -1982,7 +1986,7 @@ s32 fn_8017F47C(HSD_Text** arg0, int arg1)
 
         if (p[8] != val) {
             if (val < 0) {
-                HSD_SisLib_803A70A0(*arg0, i, "%s%d", "\x81\x7c", -val);
+                HSD_SisLib_803A70A0(*arg0, i, "%s%d", "－", -val);
             } else {
                 HSD_SisLib_803A70A0(*arg0, i, "%d", val);
             }
@@ -2108,7 +2112,7 @@ void fn_8017F608(void* arg0)
                 p->xD4 = p->xD0;
             } else if (p->xD8 < 0x3C) {
                 p->x74->default_kerning = 1;
-                str = HSD_SisLib_803A6B98(p->x74, 0.0f, 0.0f, "%d\x82w%d",
+                str = HSD_SisLib_803A6B98(p->x74, 0.0f, 0.0f, "%dＸ%d",
                                           p->xD0 / p->x108, p->x108);
                 HSD_SisLib_803A7548(p->x74, str, 0.089999996f, 0.065f);
             } else {
@@ -2603,7 +2607,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     case 3:
         temp = gm_8016AE38();
         state->x118 = 1;
-        if ((u8) temp->match_result == 6) {
+        if ((u8) temp->match_result == OUTCOME_UNK_1P_BONUS_STAGE_END) {
             grPushOn_80219204(Ground_801C1DD4(), (int*) &sp5C, (int*) &sp58);
             var_r27 = sp5C;
             var_r28 = (u16) sp58;
@@ -3486,12 +3490,12 @@ void gm_80182174(void)
 bool gm_IsMultimanSmashMode(void)
 {
     switch (gm_GetCurrentGameMode()) {
-    case 0x21:
-    case 0x22:
-    case 0x23:
-    case 0x24:
-    case 0x25:
-    case 0x26:
+    case GM_10MAN_VS:
+    case GM_100MAN_VS:
+    case GM_3MIN_VS:
+    case GM_15MIN_VS:
+    case GM_ENDLESS_VS:
+    case GM_CRUEL_VS:
         return true;
     }
     return false;
@@ -3904,7 +3908,9 @@ void fn_80182F40(HSD_GObj* unused)
     int temp_r31;
     int temp_r31_2;
 
-    if (gm_GetButtonsTriggered(4) & 0x1100) {
+    if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) &
+        (HSD_PAD_START | HSD_PAD_A))
+    {
         lbAudioAx_80024C84();
         lbAudioAx_80023694();
         lbAudioAx_80024030(1);

@@ -1,4 +1,5 @@
-/// @file Seems to deal with the challenger approaching functions.
+/// @file
+/// @brief Seems to deal with the challenger approaching functions.
 #include "gm_1BFA.h"
 
 #include "gm_unsplit.h"

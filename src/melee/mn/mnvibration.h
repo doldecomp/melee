@@ -10,6 +10,11 @@
 
 extern f32 mnVibration_804DC020;
 extern f32 mnVibration_804DC030;
+extern f32 mnVibration_804DC050; ///< intro-reveal frame, port panel 1
+extern f32 mnVibration_804DC054; ///< intro-reveal frame, port panel 2
+extern f32 mnVibration_804DC058; ///< intro-reveal frame, port panel 3
+extern f32 mnVibration_804DC05C; ///< intro-reveal frame, port panel 4
+extern f32 mnVibration_804DC060; ///< intro-reveal frame, name list
 extern SDATA char mnVibration_804D4FF4[];
 extern SDATA char mnVibration_804D4FFC[];
 

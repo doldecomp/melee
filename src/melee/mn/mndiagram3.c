@@ -27,7 +27,8 @@
 void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
 {
     Vec3 sp6C;
-    u8 sp58[0x14];
+    u32 max_distance;
+    u8 sp58[0x10];
     u8 sp48[0x10];
     u8 sp38[0x10];
     u8 sp28[0x10];
@@ -45,7 +46,6 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
     HSD_Text* value_text;
     HSD_JObj* icon;
     s32 entity;
-    u32 max_distance;
     u32 max_time;
     u32 max_percentage;
 
@@ -53,7 +53,7 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
     base = (char*) &mnDiagram3_803EEC10;
 
     {
-        u8 scroll = data->saved_selection;
+        u8 scroll = data->cursor_row;
         u8 offset = data->scroll_offset;
         u8 limit;
 
@@ -77,7 +77,10 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
 
         {
             u16* stat_table;
-            stat_table = (u16*) (base + ((int) stat_type << 1));
+            char* stat_ptr;
+            stat_ptr = base;
+            stat_ptr += (int) stat_type << 1;
+            stat_table = (u16*) stat_ptr;
             icon_x_offset = mnDiagram3_804DC010;
             row_spacing = row1_y;
             (void) row_spacing;
@@ -87,7 +90,8 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
             divider = mnDiagram3_804DC008;
             max_time = 0x5B8D7F;
             neg_spacing = -row_spacing;
-            stat_table += 0x36;
+            stat_ptr += 0x6C;
+            stat_table = (u16*) stat_ptr;
 
             for (i = 0; i < 5; i++) {
                 if (data->is_name_mode != 0) {
@@ -262,12 +266,12 @@ mnDiagram3_PosTable mnDiagram3_803EEC28 = {
     { 8.0F, 0.57F, 0.0F },
 };
 
-mnDiagram3_StatTable mnDiagram3_803EEC4C = { {
-    0x62, 0x63, 0x64, 0x65, 0x66, 0x67, 0x68, 0x69, 0x6A, 0x6B, 0x6C, 0x6D,
-    0x6E, 0x6F, 0x70, 0x71, 0x72, 0x73, 0x74, 0x75, 0x76, 0x77, 0x78, 0x79,
-    0x7A, 0x7A, 0x7A, 0x7C, 0x7C, 0x7C, 0x7C, 0x7C, 0x7A, 0x7A, 0x7A, 0xFFFF,
-    0x7C, 0x7B, 0x7E, 0x7E, 0x7E, 0x7E, 0x7D, 0x7D, 0x7D, 0x7B, 0x7B, 0x7B,
-} };
+mnDiagram3_StatTable mnDiagram3_803EEC4C = {
+    { 0x62, 0x63, 0x64, 0x65, 0x66, 0x67, 0x68, 0x69, 0x6A, 0x6B, 0x6C, 0x6D,
+      0x6E, 0x6F, 0x70, 0x71, 0x72, 0x73, 0x74, 0x75, 0x76, 0x77, 0x78, 0x79 },
+    { 0x7A, 0x7A, 0x7A, 0x7C, 0x7C, 0x7C, 0x7C, 0x7C, 0x7A, 0x7A, 0x7A, 0xFFFF,
+      0x7C, 0x7B, 0x7E, 0x7E, 0x7E, 0x7E, 0x7D, 0x7D, 0x7D, 0x7B, 0x7B, 0x7B },
+};
 
 void mnDiagram3_UpdateScrollArrows(HSD_GObj* gobj)
 {
@@ -359,7 +363,7 @@ void mnDiagram3_InitUserData(Diagram3* data, int arg1)
 
     src = (u8*) &mn_804A04F0;
     data->saved_menu = src[0];
-    data->saved_selection = (u8) * (u16*) (src + 2);
+    data->cursor_row = (u8) * (u16*) (src + 2);
     data->anim_state = 1;
     data->scroll_offset = 0;
     data->is_name_mode = gmMainLib_8015CC34()->xD;
@@ -381,7 +385,7 @@ void mnDiagram3_InitUserData(Diagram3* data, int arg1)
 void mnDiagram3_Create(int arg0)
 {
     mnDiagram_ArchiveData* archive = &mnDiagram_804A0844;
-    HSD_GObj* gobj;
+    register HSD_GObj* gobj;
     HSD_JObj* jobj;
     Diagram3* user_data;
     int i;
@@ -455,6 +459,9 @@ void mnDiagram3_Init(void* arg0)
 
     {
         MenuFlow* flow = &mn_804A04F0;
+        /* MenuFlow.x10 is a shared per-menu sub-state slot reused across
+         * screens (e.g. mnname.c uses 0/1/2 for a different input mode);
+         * within the VS Records flow, 0 = grid, 1 = details, 2 = rankings. */
         flow->x10 = 2;
         flow->hovered_selection = 0;
     }
@@ -488,9 +495,9 @@ void mnDiagram3_Init(void* arg0)
         HSD_JObjSetTranslateX_Fake(popup_jobj, HSD_JObjGetTranslationX(row0));
 
         row0 = data->jobjs[8];
-        HSD_JObjSetTranslateY_Fake(popup_jobj,
-                                   row_spacing * mnDiagram3_804DC00C +
-                                       HSD_JObjGetTranslationY(row0));
+        row_spacing =
+            row_spacing * mnDiagram3_804DC00C + HSD_JObjGetTranslationY(row0);
+        HSD_JObjSetTranslateY_Fake(popup_jobj, row_spacing);
 
         row0 = data->jobjs[8];
         HSD_JObjSetTranslateZ_Fake(popup_jobj, HSD_JObjGetTranslationZ(row0));
@@ -508,10 +515,12 @@ void mnDiagram3_Init(void* arg0)
 
         row_spacing = HSD_JObjGetTranslationY(d->jobjs[9]) -
                       HSD_JObjGetTranslationY(row0);
-        neg_spacing = -row_spacing;
+
+        neg_spacing = row_spacing;
 
         lb_8000B1CC(d->jobjs[8], &mnDiagram3_803EEC28.x0, &sp48);
 
+        neg_spacing = -neg_spacing;
         row_spacing = mnDiagram3_804DBFF8;
         stat_idx = (u8) scroll;
         i = 0;
@@ -543,7 +552,7 @@ void mnDiagram3_Init(void* arg0)
                 }
 
                 {
-                    u16* entry = &mnDiagram3_803EEC4C.indices[(u8) val];
+                    u16* entry = &mnDiagram3_803EEC4C.label_ids[(u8) val];
                     HSD_SisLib_803A6368(text, *entry);
                 }
             }
@@ -686,16 +695,16 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
         return;
     }
     if (input & 1) {
-        if (data->saved_selection != 0) {
+        if (data->cursor_row != 0) {
             HSD_JObj* popup;
             Diagram3* cur;
             u8 n;
             f32 spacing;
             lbAudioAx_80024030(2);
-            data->saved_selection = data->saved_selection - 1;
+            data->cursor_row = data->cursor_row - 1;
             cur = mnDiagram3_804D6C20->user_data;
             popup = data->popup_gobj->hsd_obj;
-            n = data->saved_selection;
+            n = data->cursor_row;
             spacing = HSD_JObjGetTranslationY(cur->jobjs[9]) -
                       HSD_JObjGetTranslationY(cur->jobjs[8]);
             HSD_JObjSetTranslateX(popup,
@@ -764,16 +773,16 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
         }
     } else if (input & 2) {
         u32 down_limit;
-        if (data->saved_selection < 9) {
+        if (data->cursor_row < 9) {
             HSD_JObj* popup;
             Diagram3* cur;
             u8 n;
             f32 spacing;
             lbAudioAx_80024030(2);
-            data->saved_selection = data->saved_selection + 1;
+            data->cursor_row = data->cursor_row + 1;
             cur = mnDiagram3_804D6C20->user_data;
             popup = data->popup_gobj->hsd_obj;
-            n = data->saved_selection;
+            n = data->cursor_row;
             spacing = HSD_JObjGetTranslationY(cur->jobjs[9]) -
                       HSD_JObjGetTranslationY(cur->jobjs[8]);
             HSD_JObjSetTranslateX(popup,

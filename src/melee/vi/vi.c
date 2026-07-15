@@ -1,6 +1,7 @@
 #include "vi.h"
 
 #include "cm/camera.h"
+#include "dolphin/pad.h"
 #include "gm/gm_1A36.h"
 #include "gm/gm_unsplit.h"
 #include "lb/lbaudio_ax.h"
@@ -49,7 +50,7 @@ void vi_8031CAAC(void)
 {
     u64 temp_ret;
     temp_ret = gm_GetButtonsTriggered(gm_8017E430());
-    if ((temp_ret & 0x1000) != 0) {
+    if ((temp_ret & PAD_BUTTON_START) != 0) {
         lbAudioAx_800236DC();
         lbAudioAx_80023694();
         lb_800145F4();

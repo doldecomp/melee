@@ -108,8 +108,8 @@ struct Camera {
     /* 0x2BA */ s16 x2BA;
     /* 0x2BC */ f32 x2BC;
     /* 0x2C0 */ f32 x2C0;
-    /* 0x2C4 */ s8 x2C4; ///< unk player slot
-    /* 0x2C5 */ s8 x2C5; ///< pauser slot
+    /* 0x2C4 */ s8 x2C4; ///< pauser slot
+    /* 0x2C5 */ s8 x2C5; ///< pauser id
     /* 0x2C6 */ char pad_2C6[0x2C8 - 0x2C6];
     /* 0x2C8 */ float pitch_offset;
     /* 0x2CC */ float yaw_offset;
@@ -258,15 +258,8 @@ struct CameraInputs {
     /* +04 */ f32 stick_y;
     /* +08 */ f32 substick_x;
     /* +0C */ f32 substick_y;
-    /// @todo sus unions
-    /* +10 */ union {
-        u32 _u32[2];
-        u64 _u64;
-    } x10;
-    /* +18 */ union {
-        u32 _u32[2];
-        u64 _u64;
-    } x18;
+    /* +10 */ u64 buttons_pressed;
+    /* +18 */ u64 buttons_triggered;
 };
 
 #endif

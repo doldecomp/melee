@@ -1,5 +1,6 @@
 #include "gmscdata.h"
 
+#include "gm_1A33.h"
 #include "gm_1B14.h"
 #include "gm_unsplit.h"
 #include "gmadventure.h"

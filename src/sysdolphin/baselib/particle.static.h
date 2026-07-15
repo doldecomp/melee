@@ -65,7 +65,6 @@ STATIC_ASSERT(sizeof(struct ParticleConsoleState) == 0x28);
 // .sbss
 
 static int (**psCallback)(HSD_Particle* part);
-extern u16 numPeakParticles;
 extern u16 numActiveParticles;
 /* 4D7850 */ static HSD_SList* hsd_804D7850;
 

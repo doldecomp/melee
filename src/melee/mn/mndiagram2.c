@@ -70,23 +70,6 @@ typedef union {
     };
 } mnDiagram2_SortEntry;
 
-/// Container struct with JObj at offset 0x10.
-/// @todo Identify the actual type - may be archive-related.
-typedef struct {
-    /* 0x00 */ char x0[0x10];
-    /* 0x10 */ HSD_JObj* jobj;
-} JObjContainer;
-
-/// User data for detail view GObj (used in mnDiagram2_ClearDetailView).
-typedef struct {
-    /* 0x00 */ char x0[0x20];
-    /* 0x20 */ JObjContainer* jobj_container; ///< Container for removable JObj
-    /* 0x24 */ char x24[0x34];
-    /* 0x58 */ HSD_Text* title_text; ///< Title text object
-    /* 0x5C */ HSD_Text* x5C;
-    /* 0x60 */ HSD_Text* detail_texts[5]; ///< Detail value text objects
-} Diagram2DetailView;
-
 /* Diagram2 struct is defined in mn/types.h */
 
 /* mnDiagram_ArchiveData, mnDiagram2_804D6C18, mnDiagram_804A0834 defined in
@@ -231,9 +214,9 @@ void mnDiagram2_UpdateHeader(HSD_GObj* gobj, u8 is_name_mode, u8 entity_idx)
     data->header_text = text;
 
     if (is_name_mode != 0) {
-        lb_8000B1CC(data->x24, (Vec3*) &mnDiagram2_803EEAD0, &sp18);
+        lb_8000B1CC(data->x24, &mnDiagram2_803EEAD0.header_pos, &sp18);
     } else {
-        lb_8000B1CC(data->x1C, (Vec3*) &mnDiagram2_803EEAD0, &sp18);
+        lb_8000B1CC(data->x1C, &mnDiagram2_803EEAD0.header_pos, &sp18);
     }
 
     {
@@ -300,13 +283,16 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
     HSD_GObj* d2;
     PAD_STACK(40);
 
-    data = mnDiagram2_804D6C18->user_data;
+    {
+        Diagram2* initial_data = mnDiagram2_804D6C18->user_data;
+        data = initial_data;
+    }
     result = mn_804A04F0.buttons = mn_80229624(4);
 
     if (result & 0x20) {
         lbAudioAx_80024030(0);
         mn_804A04F0.entering_menu = 0;
-        data2 = mnDiagram2_804D6C18->user_data;
+        data2 = (d2 = mnDiagram2_804D6C18)->user_data;
         x46 = data2->selected_fighter_idx;
         gmMainLib_8015CC34()->x12 = x46;
         x47 = data2->selected_name_idx;
@@ -624,8 +610,8 @@ int mnDiagram2_GetStatValue(int is_name_mode, u8 stat_type, u8 entity_idx)
 void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                               u8 row_idx, u8 entity_idx)
 {
-    Vec3 sp20;
     u8 str[8];
+    Vec3 sp20;
     Diagram2* data;
     HSD_JObj* jobj;
     char* base;
@@ -634,8 +620,9 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
     f32 f31;
     f32 f30;
     int mode = is_name_mode;
+    Diagram2* user_data = gobj->user_data;
 
-    data = gobj->user_data;
+    data = user_data;
     base = (char*) &mnDiagram2_803EEAD0;
 
     jobj = data->row0_ref;
@@ -771,7 +758,7 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                                     str[2] = mnDiagram2_804D4FD0[2];
                                 } else {
                                     int val = mnDiagram2_GetStatValue(
-                                        mode, stat_type, entity_idx);
+                                        is_name_mode, stat_type, entity_idx);
                                     if ((u32) val > 0x98967F) {
                                         val = 0x98967F;
                                     }
@@ -1005,12 +992,12 @@ void mnDiagram2_InitUserData(void* arg, int unused)
 /// @param arg0 Unused parameter
 void mnDiagram2_Create(int arg0)
 {
+    int entity_val;
     Diagram2* user_data;
     mnDiagram_ArchiveData* archive = &mnDiagram_804A0834;
     HSD_GObj* gobj;
     Diagram2* new_var;
     int j;
-    int entity_val;
     u32 is_name;
     u8 entity_idx;
     int scroll;
@@ -1041,9 +1028,8 @@ void mnDiagram2_Create(int arg0)
 
     HSD_GObj_SetupProc(gobj, mnDiagram2_Think, 0);
 
-    is_name = user_data->is_name_mode;
     new_var = user_data;
-    if (is_name) {
+    if ((is_name = user_data->is_name_mode) != 0) {
         entity_idx = new_var->selected_name_idx;
     } else {
         entity_idx = new_var->selected_fighter_idx;
@@ -1111,13 +1097,12 @@ void mnDiagram2_Init(void)
 /// @return Fighter ID at the given rank, or 25 if no data
 u8 mnDiagram2_GetRankedFighter(u8 stat_type, u8 rank)
 {
-    int zero;
+    mnDiagram2_SortEntry* base;
+    int j;
+    mnDiagram2_SortEntry* ptr;
     mnDiagram2_SortEntry entries[25];
     mnDiagram2_SortEntry temp;
-    mnDiagram2_SortEntry* base;
-    mnDiagram2_SortEntry* ptr;
     int i;
-    int j;
     int k;
     int maxIdx;
     int neg1;
@@ -1126,7 +1111,6 @@ u8 mnDiagram2_GetRankedFighter(u8 stat_type, u8 rank)
     ptr = entries;
     base = ptr;
     i = 0;
-    zero = 0;
     neg1 = -1;
 
     for (i = 0; i < 25; i++) {
@@ -1134,7 +1118,7 @@ u8 mnDiagram2_GetRankedFighter(u8 stat_type, u8 rank)
         ptr->name = name;
         if (mn_IsFighterUnlocked(name) != 0) {
             ptr->xC = mnDiagram2_GetStatValue(0, stat_type, name);
-            ptr->x8 = zero;
+            ptr->x8 = 0;
         } else {
             ptr->xC = neg1;
             ptr->x8 = neg1;
@@ -1169,7 +1153,6 @@ u8 mnDiagram2_GetRankedFighter(u8 stat_type, u8 rank)
             }
             *base = temp;
         }
-        base++;
     }
 
     // Return
@@ -1331,12 +1314,13 @@ void mnDiagram2_GetAggregatedFighterRank(u8* out, u8 type, u8 idx)
     }
 }
 
-/// @brief Clears the detail view by freeing text objects and removing JObj.
-/// @param gobj The GObj containing the detail view data
+/// @brief Clears the detail view (Diagram3 popup) by freeing text objects and
+/// removing the ranking-popup JObj's children.
+/// @param gobj The GObj holding the Diagram3 user data (mnDiagram3_804D6C20)
 void mnDiagram2_ClearDetailView(HSD_GObj* gobj)
 {
-    Diagram2DetailView* data;
-    Diagram2DetailView* ptr;
+    Diagram3* data;
+    Diagram3* ptr;
     int i;
     void* tmp;
     HSD_JObj* jobj;
@@ -1349,22 +1333,22 @@ void mnDiagram2_ClearDetailView(HSD_GObj* gobj)
     }
 
     for (i = 0; i < 5; i++) {
-        if (data->detail_texts[i] != NULL) {
-            HSD_SisLib_803A5CC4(ptr->detail_texts[i]);
-            data->detail_texts[i] = NULL;
+        if (data->row_icons[i] != NULL) {
+            HSD_SisLib_803A5CC4(ptr->row_icons[i]);
+            data->row_icons[i] = NULL;
         }
     }
 
-    if (data->x5C != NULL) {
-        HSD_SisLib_803A5CC4(data->x5C);
-        data->x5C = NULL;
+    if (data->value_text != NULL) {
+        HSD_SisLib_803A5CC4(data->value_text);
+        data->value_text = NULL;
     }
 
-    tmp = data->jobj_container;
+    tmp = data->jobjs[6];
     if (tmp == NULL) {
         tmp = NULL;
     } else {
-        tmp = data->jobj_container->jobj;
+        tmp = data->jobjs[6]->child;
     }
     jobj = tmp;
     if (jobj != NULL) {

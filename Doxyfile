@@ -276,6 +276,7 @@ ALIASES                = offset{1}="\xrefitem offset \"Offset\" \"Member Offsets
                          sizebit="\xrefitem size \"Size\" \"Member Sizes\" <tt>1</tt> bit." \
                          szb1="\sizebit" \
                          was{1}="\xrefitem origname \"Original Name\" \"Original Names\" <tt>\1</tt>." \
+                         alias{1}="\xrefitem alias \"Alias\" \"Aliased Names\" <tt>\1</tt>." \
                          glossary{1}="\glossary{\1,\1}" \
                          glossary{2}="[\1](\ref glossary_\2)" \
                          g{1}="\glossary{\1}" \

@@ -576,7 +576,22 @@ void ftKb_SpecialLwEnd_IASA(Fighter_GObj* gobj) {}
 
 void ftKb_SpecialAirLwStart_IASA(Fighter_GObj* gobj) {}
 
-/// #ftKb_SpecialAirLw_IASA
+void ftKb_SpecialAirLw_IASA(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    s32 temp_r28;
+    HSD_JObj* temp_r31 = fp->parts[FtPart_YRotN].joint;
+    PAD_STACK(16);
+
+    if (fbKb_SpecialLw_IASA_Inline(gobj)) {
+        temp_r28 = fp->x221C_b4;
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirLwEnd, 0x04440012U,
+                                  0.0f, 1.0f, 0.0f, NULL);
+        fp->x221C_b4 = temp_r28;
+        ftKb_SpecialN_set_cbs2(gobj);
+        efSync_Spawn(0x49C, gobj, temp_r31);
+    }
+}
 
 void ftKb_SpecialAirLwEnd_IASA(Fighter_GObj* gobj) {}
 

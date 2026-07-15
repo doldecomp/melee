@@ -15,6 +15,7 @@
 
 #include "cm/types.h"
 #include "dolphin/mtx.h"
+#include "dolphin/pad.h"
 #include "dolphin/types.h"
 
 #include "ft/forward.h"
@@ -33,8 +34,7 @@
 #include "pl/player.h"
 
 #include <math.h>
-#include <math_ppc.h>
-#include <trigf.h>
+#include <math_ppc.h> // IWYU pragma: keep
 #include <baselib/controller.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
@@ -952,6 +952,8 @@ inline float get_stage_floor_height(InternalStageId stage_id)
     case HOMERUN:
         height = grHomeRun_8021EF10();
         break;
+    default:
+        break;
     }
     return height;
 }
@@ -1303,6 +1305,8 @@ void Camera_8002AF68(HSD_CObj* cobj, CameraTransformState* transform)
     case HOMERUN:
         eye_y_bound = grHomeRun_8021EF10();
         break;
+    default:
+        break;
     }
     if (vec.y < eye_y_bound) {
         vec.y = eye_y_bound;
@@ -1500,7 +1504,7 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
     f32 substick_y;
     f32 temp_x;
     f32 temp_y;
-    s32 var_r4;
+    s32 current_slot;
     s32 var_r5;
     u64 temp_ret;
     PAD_STACK(8);
@@ -1510,14 +1514,16 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
         inputs->stick_y = 0.0f;
         inputs->substick_x = 0.0f;
         inputs->substick_y = 0.0f;
-        inputs->x18._u64 = 0;
-        inputs->x10._u64 = 0;
+        inputs->buttons_triggered = 0;
+        inputs->buttons_pressed = 0;
         return;
     }
     if (slot == 4) {
         /// @todo there is probably a bigger inline
-        for (var_r4 = 0; var_r4 < 4; var_r4++) {
-            pad = get_slot_pad(var_r4);
+        for (current_slot = 0; current_slot < PAD_MAX_CONTROLLERS;
+             current_slot++)
+        {
+            pad = get_slot_pad(current_slot);
             temp_x = get_stick_x(pad);
             temp_y = get_stick_y(pad);
             stick_x = temp_x;
@@ -1536,7 +1542,7 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
             }
         }
 
-        if (var_r4 == 4) {
+        if (current_slot == 4) {
             stick_y = 0.0f;
             stick_x = 0.0f;
         }
@@ -1569,10 +1575,10 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
         inputs->stick_y = stick_y;
         inputs->substick_x = substick_x;
         inputs->substick_y = substick_y;
-        temp_ret = gm_GetButtonsPressed(4U);
-        inputs->x10._u64 = temp_ret;
-        temp_ret = gm_GetButtonsTriggered(4U);
-        inputs->x18._u64 = temp_ret;
+        temp_ret = gm_GetButtonsPressed(PAD_ALL_CONTROLLERS);
+        inputs->buttons_pressed = temp_ret;
+        temp_ret = gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS);
+        inputs->buttons_triggered = temp_ret;
         return;
     }
     pad = get_slot_pad(slot);
@@ -1581,9 +1587,9 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
     inputs->substick_x = pad->nml_subStickX;
     inputs->substick_y = pad->nml_subStickY;
     temp_ret = gm_GetButtonsPressed(slot);
-    inputs->x10._u64 = temp_ret;
+    inputs->buttons_pressed = temp_ret;
     temp_ret = gm_GetButtonsTriggered(slot);
-    inputs->x18._u64 = temp_ret;
+    inputs->buttons_triggered = temp_ret;
 }
 
 s32 Camera_8002BA00(s32 slot, s32 arg1)
@@ -1838,7 +1844,7 @@ void Camera_8002C1A8(void)
     zoom_dir = 0.0f;
 
     {
-        u64 x18_btns = inputs.x18._u64;
+        u64 x18_btns = inputs.buttons_triggered;
 
         if ((x18_btns & PAD_TRIGGER_R) != 0) {
             dir = 1;
@@ -1846,25 +1852,25 @@ void Camera_8002C1A8(void)
             dir = -1;
         }
 
-        if ((inputs.x10._u64 & PAD_BUTTON_UP) != 0) {
+        if ((inputs.buttons_pressed & PAD_BUTTON_UP) != 0) {
             y_move = 1.0f;
-        } else if ((inputs.x10._u64 & PAD_BUTTON_DOWN) != 0) {
+        } else if ((inputs.buttons_pressed & PAD_BUTTON_DOWN) != 0) {
             y_move = -1.0f;
         }
 
-        if ((inputs.x10._u64 & PAD_BUTTON_LEFT) != 0) {
+        if ((inputs.buttons_pressed & PAD_BUTTON_LEFT) != 0) {
             x_move = -1.0f;
-        } else if ((inputs.x10._u64 & PAD_BUTTON_RIGHT) != 0) {
+        } else if ((inputs.buttons_pressed & PAD_BUTTON_RIGHT) != 0) {
             x_move = 1.0f;
         }
 
-        if ((inputs.x10._u64 & PAD_BUTTON_X) != 0) {
+        if ((inputs.buttons_pressed & PAD_BUTTON_X) != 0) {
             zoom_dir = 1.0f;
-        } else if ((inputs.x10._u64 & PAD_BUTTON_Y) != 0) {
+        } else if ((inputs.buttons_pressed & PAD_BUTTON_Y) != 0) {
             zoom_dir = -1.0f;
         }
 
-        if ((inputs.x10._u64 & PAD_BUTTON_A) != 0) {
+        if ((inputs.buttons_pressed & PAD_BUTTON_A) != 0) {
             abs_f1 = ABS(stick_x);
             if (abs_f1 > 0.125) {
                 x_move = stick_x;
@@ -2193,18 +2199,18 @@ void Camera_8002CB0C(CameraBounds* bounds)
     stick_y = inputs.stick_y;
 
     {
-        u64 x18_btns = inputs.x18._u64;
-        u64 x10_btns = inputs.x10._u64;
+        u64 newly_pressed_btns = inputs.buttons_triggered;
+        u64 pressed_btns = inputs.buttons_pressed;
 
-        if ((x18_btns & PAD_TRIGGER_R) != 0) {
+        if ((newly_pressed_btns & PAD_TRIGGER_R) != 0) {
             dir = 1;
-        } else if ((x18_btns & PAD_TRIGGER_L) != 0) {
+        } else if ((newly_pressed_btns & PAD_TRIGGER_L) != 0) {
             dir = -1;
         }
 
-        if ((x10_btns & PAD_BUTTON_X) != 0) {
+        if ((pressed_btns & PAD_BUTTON_X) != 0) {
             zoom_dir = 1.0f;
-        } else if ((x10_btns & PAD_BUTTON_Y) != 0) {
+        } else if ((pressed_btns & PAD_BUTTON_Y) != 0) {
             zoom_dir = -1.0f;
         }
     }
@@ -3863,7 +3869,7 @@ s32 Camera_SetBounds(Vec4* arg0)
     return 1;
 }
 
-void Camera_SetUpPauseCamera(s8 arg0, s8 arg1, s32 arg2)
+void Camera_SetUpPauseCamera(s8 pauserSlot, s8 pauserId, s32 arg2)
 {
     Vec3* target_interest;
     Vec3* pause_eye_offset;
@@ -3871,16 +3877,16 @@ void Camera_SetUpPauseCamera(s8 arg0, s8 arg1, s32 arg2)
     f32 var_f31;
     PAD_STACK(32);
 
-    if ((arg0 < 0 || arg0 >= 6) && (u8) (arg0 - 10) > 1) {
-        arg0 = 0;
+    if ((pauserSlot < 0 || pauserSlot >= 6) && (u8) (pauserSlot - 10) > 1) {
+        pauserSlot = 0;
     }
-    if ((arg1 < 0 || arg1 >= 4) && (u8) (arg1 - 4) > 1) {
-        arg1 = 4;
+    if ((pauserId < 0 || pauserId >= 4) && (u8) (pauserId - 4) > 1) {
+        pauserId = 4;
     }
 
     cm_80452C68.mode = CAMERA_PAUSE;
-    cm_80452C68.x2C4 = arg0;
-    cm_80452C68.x2C5 = arg1;
+    cm_80452C68.x2C4 = pauserSlot;
+    cm_80452C68.x2C5 = pauserId;
     cm_80452C68.x2D0.x_min = Stage_GetCamBoundsLeftOffset();
     cm_80452C68.x2D0.x_max = Stage_GetCamBoundsRightOffset();
     cm_80452C68.x2D0.y_max = Stage_GetCamBoundsTopOffset();
@@ -3904,7 +3910,7 @@ void Camera_SetUpPauseCamera(s8 arg0, s8 arg1, s32 arg2)
         var_f31 = cm_80452C68.x2D0.unk28;
         break;
     default:
-        __assert(cm_803BCBD0, 0xEDF, cm_804D3938);
+        __assert(cm_803BCBD0, 0xEDF, "0");
         break;
     }
 
@@ -3953,9 +3959,9 @@ void Camera_SetUpPauseCamera(s8 arg0, s8 arg1, s32 arg2)
     }
 }
 
-void Camera_SetUpPauseCameraWithDefaultZoom(s8 arg0, s8 arg1)
+void Camera_SetUpPauseCameraWithDefaultZoom(s8 pauserSlot, s8 pauserId)
 {
-    Camera_SetUpPauseCamera(arg0, arg1, 0);
+    Camera_SetUpPauseCamera(pauserSlot, pauserId, 0);
 }
 
 void Camera_8002F760(s8 arg0, s8 arg1)

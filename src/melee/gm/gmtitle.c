@@ -2,6 +2,8 @@
 
 #include "gm_unsplit.h"
 
+#include "dolphin/pad.h"
+
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/fog.h>
@@ -260,7 +262,7 @@ HSD_Archive* gmTitle_801A1AC0(void)
 
 void gmTitle_801A1C18_OnFrame(void)
 {
-    int input = gm_GetButtonsTriggered(4);
+    int input = gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS);
     int* tmp;
     if (gmTitle_804D6714 != 0) {
         gmTitle_804D6714--;

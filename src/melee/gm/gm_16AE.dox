@@ -1,0 +1,38 @@
+#ifndef MELEE_GM_16AE_H
+#define MELEE_GM_16AE_H
+
+#include <placeholder.h>
+
+#include <melee/gm/forward.h>
+#include <melee/it/forward.h>
+#include <melee/mn/forward.h>
+
+/**
+ * @brief Checks for pause input and runs the pause routine when unpaused.
+ *
+ * Runs when the match is not paused. Skipped while
+ * #lbl_8046B6A0_t::unpause_timer is non-zero, the HUD is disabled, or
+ * #StartMeleeRules::disable_pausing is set. On a successful pause, sets
+ * #lbl_8046B6A0_t::pause_timer to @c 0xA and optionally invokes
+ * #StartMeleeRules::on_pause_override or #gm_EnablePlayerPauseCamera.
+ *
+ * @param[in] arg0 Match state (#lbl_8046B6A0_t).
+ * @param[in] arg1 Pause context id passed to #gm_801A4634.
+ */
+/* 16CA68 */ void gm_DoPauseChecksAndRoutine(lbl_8046B6A0_t*, int);
+
+/**
+ * @brief Checks for unpause input and runs the unpause routine when paused.
+ *
+ * Runs when the match is paused. Skipped while #lbl_8046B6A0_t::pause_timer
+ * is non-zero, the HUD is disabled, or #StartMeleeRules::disable_pausing is
+ * set. Only the original pauser may unpause. On success, sets
+ * #lbl_8046B6A0_t::unpause_timer to @c 0xA and optionally invokes
+ * #StartMeleeRules::on_unpause_override or #Ground_EnableMatchCamera.
+ *
+ * @param[in] arg0 Match state (#lbl_8046B6A0_t).
+ * @param[in] arg1 Unpause context id passed to #gm_801A4674.
+ */
+/* 16CBE8 */ void gm_DoUnpauseChecksAndRoutine(lbl_8046B6A0_t*, int);
+
+#endif

@@ -5,6 +5,7 @@
 #include "gmvsdata.h"
 
 #include "gm/gm_1A3F.h"
+#include "gm/gm_1BA8.h"
 #include "gm/gmmovieend.h"
 #include "melee/gm/gm_unsplit.h"
 #include "melee/gm/gmcamera.h"
@@ -28,7 +29,7 @@
 
 /* 4D68C0 */ static u8 gm_804D68C0;
 /* 4D68C1 */ static u8 gm_804D68C1;
-/* 4D68C8 */ static UNK_T gm_804D68C8[1];
+/* 4D68C8 */ static s64 gm_804D68C8;
 
 GameScene gm_803DD9A0_Scenes[] = {
     {
@@ -295,8 +296,8 @@ GameScene gm_CameraModeScenes[] = {
         gm_801B2510,
         {
             GS_CAMERA_VS,
-            gm_804D68C8,
-            gm_804D68C8,
+            &gm_804D68C8,
+            &gm_804D68C8,
         },
     },
     {
@@ -469,16 +470,17 @@ void gm_801B1834(GameScene* arg0)
 void gm_801B18D4(GameScene* arg0)
 {
     StartMeleeData* smd;
+    StartMeleeData* src = &gm_804876D8;
     s32 i;
 
     smd = gm_GetGameSceneLoadDataCallback(arg0);
 
     for (i = 0; i < 4; i++) {
-        smd->players[i] = gm_804876D8.players[i];
+        smd->players[i] = src->players[i];
     }
 
     /// @todo :: figure out how to call this not inlined
-    gm_801B0474(smd, &gm_80487810.match_end);
+    gm_801B0474(smd, &((MatchExitInfo*) (src + 1))->match_end);
 }
 #pragma dont_inline reset
 
@@ -552,7 +554,6 @@ void gm_801B1C24(GameScene* arg0)
     VsModeData* vs = &gmMainLib_804D3EE0->unk_D10;
     CSSData* css = gm_GetGameSceneLeaveDataCallback(arg0);
     s32 i;
-    u64 mask;
     struct GameCache* cache;
     s32 j;
     PAD_STACK(0x10);
@@ -585,11 +586,11 @@ void gm_801B1C24(GameScene* arg0)
         vs->data.players[2].slot = 0;
         vs->data.players[3].slot = 0;
     } else {
-        j = 1;
+        s32 k = 1;
         for (i = 0; i < 4; i++) {
             if (gm_804D68C0 != i) {
-                vs->data.players[j].slot = i + 1;
-                j++;
+                vs->data.players[k].slot = i + 1;
+                k++;
             }
         }
     }
@@ -599,13 +600,17 @@ void gm_801B1C24(GameScene* arg0)
     cache->entries[3].char_id = (s8) vs->data.players[3].c_kind;
     cache->entries[3].color = vs->data.players[3].color;
     lbDvd_80018254();
-    mask = 0;
-    for (i = 0; i < 4; i++) {
-        mask |= lbAudioAx_80026E84(vs->data.players[i].c_kind);
+    {
+        u64 mask;
+        s32 k;
+        mask = 0;
+        for (k = 0; k < 4; k++) {
+            mask |= lbAudioAx_80026E84(vs->data.players[k].c_kind);
+        }
+        lbAudioAx_80026F2C(0x14);
+        lbAudioAx_8002702C(4, mask);
+        lbAudioAx_80027168();
     }
-    lbAudioAx_80026F2C(0x14);
-    lbAudioAx_8002702C(4, mask);
-    lbAudioAx_80027168();
 }
 
 void gm_801B1EB8(GameScene* arg0)
@@ -654,7 +659,7 @@ void gm_801B1F70(GameScene* arg0)
     gm_80167A64(&data->rules);
 
     data->rules = vs->data.rules;
-    data->rules.x3C = fn_801B1F6C;
+    data->rules.on_pause_override = fn_801B1F6C;
 
     data->rules.x3_6 = true;
     data->rules.x2_5 = false;
@@ -855,15 +860,15 @@ void gm_PrepCameraModeVSScene(GameScene* arg0)
     start->rules.x3_1 = false;
     start->rules.x4_0 = false;
 
-    start->rules.x38 = gm_80165268;
-    start->rules.x3C = gm_80165268;
-    start->rules.x40 = gm_CameraModeVSGetPauser;
+    start->rules.on_unpause_override = gm_80165268;
+    start->rules.on_pause_override = gm_80165268;
+    start->rules.check_for_pauser_override = gm_CameraModeVSGetPauser;
     start->rules.x44 = gmCamera_801A31FC;
     start->rules.x48 = gmCamera_801A3098;
     start->rules.x4C = gmCamera_801A30E4;
 
     start->rules.xD = 1;
-    start->rules.x2_4 = false;
+    start->rules.disable_pausing = false;
 
     for (i = 0; i < 6; i++) {
         start->players[i] = vs->data.players[i];

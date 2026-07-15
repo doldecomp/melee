@@ -2417,9 +2417,9 @@ void gm_801905F0(StartMeleeData* arg0)
         break;
     }
     if (temp_r31->pause != 0) {
-        arg0->rules.x2_4 = false;
+        arg0->rules.disable_pausing = false;
     } else {
-        arg0->rules.x2_4 = true;
+        arg0->rules.disable_pausing = true;
     }
     if (temp_r31->score_display != 0 && !arg0->rules.x0_0) {
         arg0->rules.x3_0 = true;

@@ -82,7 +82,7 @@ void fn_80174380(void)
 
 bool gm_801743A4(u8 outcome)
 {
-    if (outcome == OUTCOME_LRASTART || outcome == OUTCOME_RETRY) {
+    if (outcome == OUTCOME_NO_CONTEST || outcome == OUTCOME_RETRY) {
         return true;
     }
     return false;

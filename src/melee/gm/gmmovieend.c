@@ -8,6 +8,7 @@
 #include "gm_unsplit.h"
 #include "gmopening.h"
 
+#include "dolphin/pad.h"
 #include "gm/gmmain_lib.h"
 #include "gm/types.h"
 #include "if/ifcoget.h"
@@ -154,7 +155,7 @@ void gm_801A64A8_OnFrame(void)
         var_r30 = true;
     }
     if (gm_804D6738 >= 0x1A4 ||
-        (gm_GetButtonsTriggered(gm_801BF010()) & 0x1000) || var_r30)
+        (gm_GetButtonsTriggered(gm_801BF010()) & PAD_BUTTON_START) || var_r30)
     {
         lbAudioAx_800236DC();
         lbAudioAx_80023694();

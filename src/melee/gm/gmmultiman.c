@@ -254,7 +254,7 @@ void gm_801B63C4(GameScene* arg0)
     CSSData* temp_r3 = gm_GetGameSceneLeaveDataCallback(arg0);
 
     if (temp_r3->pending_scene_change == 2) {
-        gm_ChangeGameModeAfterCurrentScene(1);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
 
@@ -294,7 +294,7 @@ void gm_801B6428(GameScene* arg0)
     temp_r3->rules.x3_7 = true;
     temp_r3->rules.x9 = 1;
     temp_r3->rules.xB = -1;
-    temp_r3->rules.x3C = gm_80165290;
+    temp_r3->rules.on_pause_override = gm_80165290;
     gm_80167A14(temp_r3->players);
     if (temp_r31->unk_584 == 0xE) {
         var_r4_2 = 0x20;
@@ -390,7 +390,7 @@ void gm_801B65D4(GameScene* arg0)
         if (temp_r25_2 != CHKIND_NONE) {
             gm_801736E8(temp_r28->unk_584, temp_r28->unk_585, gm_804D68E8,
                         temp_r28->unk_586, temp_r25_2, 0xF);
-            gm_SetPendingGameMode(0x14);
+            gm_SetPendingGameMode(GM_CHALLENGER_APPROACH);
             gm_SetNewGameModePending();
             return;
         }

@@ -3,6 +3,8 @@
 #include "gm_unsplit.h"
 #include "gmtitle.h"
 
+#include "dolphin/pad.h"
+
 #include <stdio.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
@@ -256,20 +258,22 @@ void gm_801AA28C_OnFrame(void)
         gm_SetPendingGameMode(GM_TITLE);
         gm_SetNewGameModePending();
     } else if (gm_804D67EC > 0x157C) {
-        if (gm_GetButtonsTriggered(4) & 0x1000) {
+        if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) & HSD_PAD_START) {
             gmMainLib_8015F500();
             lbAudioAx_800236DC();
             lbAudioAx_80024030(1);
             gm_801A4B60();
             gm_80173EEC();
             gm_80172898(0x100);
-            if (!gm_80173754(1, 0)) {
+            if (!gm_80173754(GM_MENU, 0)) {
                 gm_SetPendingGameMode(GM_MENU);
             }
             gm_SetNewGameModePending();
         }
     } else {
-        if (gm_GetButtonsTriggered(4) & 0x1100) {
+        if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) &
+            (HSD_PAD_START | HSD_PAD_A))
+        {
             gmMainLib_8015F500();
             lbAudioAx_800236DC();
             lbAudioAx_80023694();

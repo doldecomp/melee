@@ -363,7 +363,7 @@ void gm_801BAD70(GameScene* arg0)
     md->rules.x1_7 = (*lvlpp)->x8->x1_1;
     md->rules.x2_2 = 0;
     md->rules.x2_3 = 0;
-    md->rules.x2_4 = 0;
+    md->rules.disable_pausing = 0;
     md->rules.x2_5 = (*lvlpp)->x8->x1_2;
     md->rules.x3_1 = 1;
     md->rules.x3_2 = 1;
@@ -694,7 +694,7 @@ void gm_801BB758(GameScene* arg0)
         return;
     }
     if (exit->match_end.result == 7) {
-        gm_ChangeGameModeAfterCurrentScene(1);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
     ev->x3C += gm_80168940(&gm_804979D8[0].match_end);
@@ -753,12 +753,12 @@ void gm_801BB758(GameScene* arg0)
     gm_80173EEC();
     gm_80172898(0x10);
     if (kind != 0x21) {
-        gm_801736E8(ev->x0, ev->x1, ev->x6, ev->x4, kind, 1);
-        gm_ChangeGameModeAfterCurrentScene(0x14);
+        gm_801736E8(ev->x0, ev->x1, ev->x6, ev->x4, kind, GM_MENU);
+        gm_ChangeGameModeAfterCurrentScene(GM_CHALLENGER_APPROACH);
         return;
     }
     if (gm_80173754(1, ev->x6) == 0) {
-        gm_ChangeGameModeAfterCurrentScene(1);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
     }
 }
 
@@ -3189,10 +3189,10 @@ void gm_801BEE58(GameScene* arg0)
 
 void gm_801BEE9C(GameScene* arg0)
 {
-    s8* temp_r28;
+    s8* game_mode;
     u8 temp_r27; ///< maybe CharacterKind?
 
-    temp_r28 = arg0->info.leave_data;
+    game_mode = arg0->info.leave_data;
     temp_r27 = gm_80173224(gm_801BF030(), 1);
     if (gm_801BEFB0() == CKIND_GAMEWATCH && !gm_80164430(0x1B)) {
         gm_80164504(0x1B);
@@ -3202,11 +3202,11 @@ void gm_801BEE9C(GameScene* arg0)
     gm_80172898(0x40);
     if (temp_r27 == 0x21) {
         if (!gm_80173754(1, gm_801BEFD0())) {
-            gm_SetPendingGameMode(*temp_r28);
+            gm_SetPendingGameMode(*game_mode);
         }
     } else {
         gm_801736E8(gm_801BEFB0(), gm_801BEFD0(), gm_801BF010(), gm_801BEFF0(),
-                    temp_r27, *temp_r28);
+                    temp_r27, *game_mode);
         gm_SetPendingGameMode(GM_CHALLENGER_APPROACH);
     }
     gm_SetNewGameModePending();
@@ -3487,7 +3487,7 @@ void gm_801BF4DC(GameScene* arg0)
     temp_r31->rules.x1_0 = false;
     temp_r31->rules.x1_2 = true;
     temp_r31->rules.x1_3 = true;
-    temp_r31->rules.x2_4 = true;
+    temp_r31->rules.disable_pausing = true;
     temp_r31->rules.x7 = 0;
     temp_r31->rules.x44 = gm_80183218;
     temp_r31->rules.x34 = 1.0F;

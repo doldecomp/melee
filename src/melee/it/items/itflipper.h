@@ -7,6 +7,16 @@
 
 #include "it/items/types.h"
 
+typedef enum itFlipper_MotionState {
+    FLIPPER_MS_RESTING,
+    FLIPPER_MS_FALLING,
+    FLIPPER_MS_HELD,
+    FLIPPER_MS_INFLIGHT,
+    FLIPPER_MS_AIRBORNE,
+    FLIPPER_MS_ACTIVE,
+    FLIPPER_MS_SPINNING,
+} itFlipper_MotionState;
+
 /* 290938 */ HSD_GObj* itFlipper_Spawn(HSD_JObj*);
 /* 290A20 */ void itFlipper_Spawned(Item_GObj*);
 /* 290A7C */ void itFlipper_UpdateSpin(Item_GObj*);

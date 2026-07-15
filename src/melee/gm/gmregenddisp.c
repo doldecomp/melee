@@ -1,6 +1,8 @@
 #include "gm_1A7A.h"
 #include "gm_unsplit.h"
 
+#include "dolphin/pad.h"
+
 #include "ft/forward.h"
 
 #include "gm/gm_1BA8.h"
@@ -260,6 +262,21 @@ void gm_801A8D54(s32* arg0)
     }
 }
 
+static inline s32 gm_801A9094_get_entry(s32* entries, s32 i)
+{
+    return entries[i];
+}
+
+static inline HSD_Joint* gm_801A9094_get_bg(void)
+{
+    return HSD_ArchiveGetPublicAddress(gm_804D679C, "ToyDspStand_Top_joint");
+}
+
+static inline HSD_GObj* gm_801A9094_create_gobj(void)
+{
+    return GObj_Create(0xE, 0xF, 0);
+}
+
 void gm_801A9094(void)
 {
     s32 sp8C[0x1A];
@@ -277,15 +294,14 @@ void gm_801A9094(void)
     i = 0x19;
     do {
         if (sp8C[i] != 0x1A) {
-            dsp = tyDisplay_8031B9DC(gm_801A659C(sp8C[i]));
+            dsp = tyDisplay_8031B9DC(
+                gm_801A659C(gm_801A9094_get_entry(sp8C, i)));
             joint = HSD_ArchiveGetPublicAddress(
                 gm_804D679C, (const char*) tyDisplay_8031BB34((s8) dsp->x04));
             matanim = HSD_ArchiveGetPublicAddress(
                 gm_804D679C, tyDisplay_8031BB94((s8) dsp->x04));
-            bg_joint = HSD_ArchiveGetPublicAddress(gm_804D679C,
-                                                   "ToyDspStand_Top_joint");
-            gobj = GObj_Create(0xE, 0xF, 0);
-            gm_80480A00[sp8C[i]] = gobj;
+            bg_joint = gm_801A9094_get_bg();
+            gm_80480A00[sp8C[i]] = gobj = gm_801A9094_create_gobj();
             root = HSD_JObjAlloc();
             HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, root);
             GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
@@ -359,17 +375,9 @@ void gm_801A8114_inline(HSD_JObj* arg0, int arg1)
     gm_801A8114(arg0, arg1);
 }
 
-void gm_801A9630(void)
+static inline void gm_801A9630_init(void)
 {
     int i;
-    HSD_CObj* cobj;
-    HSD_Fog* fog;
-    HSD_GObj* cam_gobj;
-    HSD_GObj* gobj;
-    HSD_JObj* jobj;
-    HSD_JObj* child;
-    HSD_JObj* target;
-    HSD_LObj* lobj;
     PAD_STACK(8);
 
     for (i = 0; i < 0x1A; i++) {
@@ -386,8 +394,13 @@ void gm_801A9630(void)
             gm_80480AD0[i] = 0;
         }
     }
+}
 
-    // Fog GObj
+static inline void gm_801A9630_fog(void)
+{
+    HSD_GObj* gobj;
+    HSD_Fog* fog;
+
     gobj = GObj_Create(0xE, 3, 0);
     fog = HSD_FogLoadDesc(gm_804D67A4->fogs->desc);
     HSD_GObjObject_80390A70(gobj, (u8) HSD_GObj_804D7848, fog);
@@ -396,8 +409,13 @@ void gm_801A9630(void)
     HSD_FogReqAnim(fog, 0.0f);
     HSD_FogInterpretAnim(fog);
     HSD_GObj_SetupProc(gobj, fn_801A7FB4, 0x17);
+}
 
-    // Light GObj
+static inline void gm_801A9630_light(void)
+{
+    HSD_GObj* gobj;
+    HSD_LObj* lobj;
+
     gobj = GObj_Create(0xB, 3, 0);
     lobj = lb_80011AC4(gm_804D67A4->lights);
     HSD_GObjObject_80390A70(gobj, (u8) HSD_GObj_804D784A, lobj);
@@ -406,6 +424,25 @@ void gm_801A9630(void)
     HSD_LObjReqAnimAll(lobj, 0.0f);
     HSD_LObjAnimAll(lobj);
     HSD_GObj_SetupProc(gobj, fn_801A80CC, 0x17);
+}
+
+void gm_801A9630(void)
+{
+    int i;
+    HSD_CObj* cobj;
+    HSD_GObj* cam_gobj;
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+    HSD_JObj* child;
+    HSD_JObj* target;
+
+    gm_801A9630_init();
+
+    // Fog GObj
+    gm_801A9630_fog();
+
+    // Light GObj
+    gm_801A9630_light();
 
     // Camera GObj
     cam_gobj = GObj_Create(0x13, 0x14, 0);
@@ -434,7 +471,10 @@ void gm_801A9630(void)
     // Background JObj GObj 2
     gobj = GObj_Create(0xE, 0xF, 0);
     gm_804D67BC = gobj;
-    jobj = HSD_JObjLoadJoint(gm_804D67AC->models[0]->joint);
+    {
+        HSD_JObj* tmp = HSD_JObjLoadJoint(gm_804D67AC->models[0]->joint);
+        jobj = tmp;
+    }
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
     gm_8016895C(jobj, gm_804D67A4->models[0], 0);

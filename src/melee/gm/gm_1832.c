@@ -4,6 +4,7 @@
 
 #include "gm_unsplit.h"
 
+#include "dolphin/pad.h"
 #include "gm/gm_1B14.h"
 #include "pl/pl_040D.h"
 
@@ -1258,11 +1259,13 @@ static struct enterdata {
     int x0, x4;
 } lbl_804D6618;
 
-static struct {
+typedef struct gm_804736B0_t {
     int x0, x4;
     HSD_JObj* x8;
     HSD_JObj* xC;
-} lbl_804736B0;
+} gm_804736B0_t;
+
+gm_804736B0_t lbl_804736B0;
 
 /// Classic Mode intro scene enter data (0x20 bytes)
 typedef struct ClassicModeEnterData {
@@ -1305,13 +1308,16 @@ void gm_80186E30_OnEnter(void* arg0_)
 void fn_80186EFC(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
+    gm_804736B0_t* state = &lbl_804736B0;
+    int* counter;
     PAD_STACK(8);
-    HSD_JObjReqAnimAll(lbl_804736B0.xC, 0.0F);
+    HSD_JObjReqAnimAll(state->xC, 0.0f);
     HSD_JObjAnimAll(jobj);
-    if (lbl_804736B0.x4 < 0x8C) {
-        lbl_804736B0.x4++;
+    counter = &state->x4;
+    if (*counter < 0x8C) {
+        (*counter)++;
     } else {
-        lbl_804736B0.x0 = 1;
+        state->x0 = 1;
     }
 }
 
@@ -1550,7 +1556,7 @@ void fn_80187910(HSD_GObj* arg0)
 
     PAD_STACK(4);
     cobj = arg0->hsd_obj;
-    if (gm_GetButtonsTriggered(lbl_804736C0.x38) & 0x100) {
+    if (gm_GetButtonsTriggered(lbl_804736C0.x38) & PAD_BUTTON_A) {
         lbl_804736C0.x37.frame_counter =
             (s32) cobj->eyepos->aobj->curr_frame / 300;
         if (++lbl_804736C0.x37.frame_counter >= 8U) {
@@ -1681,7 +1687,7 @@ void fn_80187CF4(HSD_GObj* gobj)
         }
         break;
     case 2:
-        if (gm_GetButtonsTriggered(lbl_804736C0.x38) & 0x1000) {
+        if (gm_GetButtonsTriggered(lbl_804736C0.x38) & PAD_BUTTON_START) {
             lbAudioAx_80024030(1);
             lbl_804736C0.x36.active = 1;
             lbl_804736C0.x37.state2 = 3;

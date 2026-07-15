@@ -670,17 +670,12 @@ int lb_8001B14C(void)
             node++;
         }
     }
-    {
-        struct SnapshotNode** copy_scan;
-        int j;
-
-        copy_scan = &head;
-        for (j = 0; j < count; j++) {
-            lb_80432A68.snapshot_entries[j].time = (*copy_scan)->time;
-            lb_80432A68.snapshot_entries[j].file_no = (*copy_scan)->file_no;
-            lb_80432A68.snapshot_entries[j].blocks = (*copy_scan)->blocks;
-            copy_scan = &(*copy_scan)->next;
-        }
+    scan = &head;
+    for (file_no = 0; file_no < count; file_no++) {
+        lb_80432A68.snapshot_entries[file_no].time = (*scan)->time;
+        lb_80432A68.snapshot_entries[file_no].file_no = (*scan)->file_no;
+        lb_80432A68.snapshot_entries[file_no].blocks = (*scan)->blocks;
+        scan = &(*scan)->next;
     }
     for (i = count; i < 0x7F; i++) {
         lb_80432A68.snapshot_entries[i].file_no = -1;

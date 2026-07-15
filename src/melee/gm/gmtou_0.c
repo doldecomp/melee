@@ -12,6 +12,9 @@
 #include "baselib/fog.h"
 #include "baselib/gobjgxlink.h"
 #include "baselib/gobjobject.h"
+
+#include "gm/forward.h"
+
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "mn/mnmain.h"
@@ -1519,7 +1522,7 @@ void fn_801937C4(s32* arg0, u32 arg1, u32 arg2)
         }
     } else if (arg2 & 0x200) {
         lbAudioAx_80024030(0);
-        gm_ChangeGameModeAfterCurrentScene(1);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         gm_801A4B60();
     }
 
@@ -2875,7 +2878,7 @@ void gm_8019628C_OnFrame(void)
         mn_8022F138(0x12, 0x15);
         mn_8022F268();
         gm_801A4B60();
-        gm_ChangeGameModeAfterCurrentScene(1);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
 

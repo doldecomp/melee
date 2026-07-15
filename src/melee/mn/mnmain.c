@@ -1,5 +1,7 @@
 #include "mnmain.h"
 
+#include "dolphin/pad.h"
+
 #include "mn/forward.h"
 
 #include <math.h>
@@ -588,7 +590,7 @@ u8 mn_802295AC(void)
     s32 port_idx = 0;
     while (port_idx < 4) {
         u64 res = gm_GetButtonsTriggered(port_idx);
-        if (res & 0x100000000) {
+        if (res & PAD_CONFIRM) {
             return port_idx;
         }
         port_idx += 1;
@@ -1977,7 +1979,7 @@ static inline u8 mn_8022C7CC_inline(void)
 {
     int i;
     for (i = 0; i < 4; i++) {
-        if (gm_GetButtonsTriggered(i) & (1LL << 32)) {
+        if (gm_GetButtonsTriggered(i) & PAD_CONFIRM) {
             return i;
         }
     }
@@ -3177,7 +3179,7 @@ void mn_8022F1A8(u16 arg0, u16 arg1)
 
 bool mn_8022F218(void)
 {
-    if (gm_GetButtonsTriggered(4) & 0x400000000) {
+    if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) & PAD_LRAST) {
         return true;
     }
     return false;

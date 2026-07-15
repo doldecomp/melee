@@ -54,7 +54,7 @@ struct GameScene {
 /// @note Colloquially known as "Major Scene"
 struct GameMode {
     u8 preload;
-    u8 idx;
+    u8 idx; ///< GameModeKind
 
     void (*Load)(void);
     void (*Unload)(void);
@@ -73,12 +73,12 @@ struct GameSceneHandler {
 }; // 803DA920
 
 typedef struct {
-    u8 curr_mode;
-    u8 pending_mode;
-    u8 prev_mode;
-    u8 curr_scene;
-    u8 prev_scene;
-    u8 pending_scene;
+    u8 curr_mode;         ///< GameModeKind
+    u8 pending_mode;      ///< GameModeKind
+    u8 prev_mode;         ///< GameModeKind
+    u8 curr_scene_idx;    ///< scene graph scene index for associated GameMode
+    u8 prev_scene_idx;    ///< scene graph scene index for associated GameMode
+    u8 pending_scene_idx; ///< scene graph scene index for associated GameMode
 } GameRouting;
 
 typedef struct {
@@ -88,7 +88,7 @@ typedef struct {
     u8 x0D;
     u8 x0E;
     u8 x0F;
-    u8 (*data)(void);
+    u8 (*game_mode_override)(void);
 } GameState;
 STATIC_ASSERT(sizeof(GameState) == 0x14);
 
@@ -191,7 +191,7 @@ struct NameTagData {
     /* 0x134 */ u32 play_time_by_fighter[25];
     /* 0x198 */ char namedata[8];
     /* 0x1A0 */ s8 x1A0;
-    /* 0x1A1 */ u8 x1A1;
+    /* 0x1A1 */ u8 rumble_toggle;
     /* 0x1A2 */ s8 x1A2;
     /* 0x1A3 */ u8 padding_x1A2;
 };
@@ -405,7 +405,7 @@ STATIC_ASSERT(sizeof(struct gmm_x0) == 0x8518);
 
 struct lbl_8046B6A0_24C_t {
     UNK_T x0;
-    u8 x4;
+    u8 x4; ///< MatchOutcome
     u8 x5; ///< match mode
     u8 is_teams;
     u8 x7;
@@ -479,16 +479,29 @@ struct Placeholder_8016AE38_flags_2 {
 };
 
 struct lbl_8046B6A0_t {
-    /* 0x0000 */ u8 unk_0;
+    /* 0x0000 */ u8 unk_0; ///< 0 During a match
+                           ///< 1 While GAME! or "TIMEOUT!" is displayed/match
+                           ///< is frozen on final frame 2 While in 1p and
+                           ///< scores are shown calculating 3 When match is
+                           ///< finished. Stays 0 when LRA+Start ends a match
     /* 0x0001 */ s8 pauser;
-    /* 0x0002 */ u8 pause_timer;
+    /* 0x0002 */ u8
+        pause_timer; ///< Frames remaining before unpause input is accepted
+                     ///< after pausing. Set to @c 0xA on pause and decremented
+                     ///< each frame while paused.
     /* 0x0003 */ u8 unk_3;
-    /* 0x0004 */ u8 unk_4;
+    /* 0x0004 */ u8
+        unpause_timer; ///< Frames remaining before pause input is accepted
+                       ///< after unpausing. Set to @c 0xA on unpause and
+                       ///< decremented each frame while unpaused. Mirrors
+                       ///< #lbl_8046B6A0_t::pause_timer semantics.
     /* 0x0005 */ u8 hud_enabled;
     /* 0x0006 */ u8 terminate_match;
     /* 0x0007 */ u8 is_singleplayer;
-    /* 0x0008 */ u8 match_result;
-    /* 0x0009 */ u8 unk_9;
+    /* 0x0008 */ u8 match_result; ///< MatchOutcome
+                                  ///< Sticky, stays until a new match starts
+    /* 0x0009 */ u8 unk_9; //< 1 during classic mode stage-clear points screen
+                           // and between stages
     /* 0x000A */ u8 unk_A;
     /* 0x000B */ u8 unk_B; // end graphic / SFX type
     /* 0x000C */ u8 unk_C;
@@ -979,8 +992,8 @@ struct lbl_8046DBD8_t {
     u8 x2; // stocks
     u8 x3;
     u8 x4; // c_kind
-    u8 x5;
-    u8 x6;
+    u8 x5; ///< GameModeKind
+    u8 x6; ///< Previous GameModeKind
     u16 x8;
 };
 
@@ -1125,16 +1138,16 @@ struct Lbl804799D8_t {
         u8 done;  // +4
         u8 loop;  // +5
     } x2A[4];
-    u8 _pad0[2]; // 0x42-0x43
-    u8 x44[4];   // 0x44 per-player state
-    u8* x48;     // 0x48
-    u8 x4C;      // 0x4C
-    u8 x4D;      // 0x4D
-    u8 x4E[20];  // 0x4E
-    u8 _pad1[2]; // 0x62-0x63
-    Vec3 x64;    // 0x64
-    Vec3 x70;    // 0x70
-    u8 _pad2[4]; // 0x7C-0x7F
+    u8 _pad0[2];          // 0x42-0x43
+    u8 x44[4];            // 0x44 per-player state
+    struct MatchEnd* x48; // 0x48 current tournament match results
+    u8 x4C;               // 0x4C
+    u8 x4D;               // 0x4D
+    u8 x4E[20];           // 0x4E
+    u8 _pad1[2];          // 0x62-0x63
+    Vec3 x64;             // 0x64
+    Vec3 x70;             // 0x70
+    u8 _pad2[4];          // 0x7C-0x7F
 };
 
 /// @todo :: this isnt exactly right
