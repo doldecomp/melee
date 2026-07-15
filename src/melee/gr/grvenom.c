@@ -136,7 +136,7 @@ StageCallbacks grVe_803E538C[] = {
     {
         grVenom_80204DD4,
         grVenom_80204EF4,
-        (void (*)(Ground_GObj*)) grVenom_80204EFC,
+        grVenom_80204EFC,
         grVenom_80204F1C,
         0x00000000,
     },
@@ -1034,9 +1034,9 @@ bool grVenom_80204EF4(Ground_GObj* arg)
     return false;
 }
 
-bool grVenom_80204EFC(Ground_GObj* arg)
+void grVenom_80204EFC(Ground_GObj* arg)
 {
-    return Ground_801C2FE0(arg);
+    Ground_801C2FE0(arg);
 }
 
 void grVenom_80204F1C(Ground_GObj* arg) {}
