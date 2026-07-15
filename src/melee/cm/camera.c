@@ -2335,6 +2335,7 @@ void Camera_8002CDDC(void* unused)
     f32 target_dy;
     f32 target_dx;
     f32 temp_f31;
+    PAD_STACK(4);
 
     cam = &cm_80452C68;
     Camera_80030DF8();
@@ -3369,6 +3370,7 @@ void Camera_8002E490(void* unused)
     Vec3 sp1C;
     Vec3 sp10;
     s32 var_r29;
+    PAD_STACK(4);
 
     Camera_80030DF8();
 
@@ -4710,6 +4712,7 @@ bool Camera_80030BBC(Vec3* arg0, S32Vec2* arg1)
     Scissor scissor;
     s32 px;
     s32 py;
+    PAD_STACK(4);
 
     cobj = GET_COBJ(cm_80452C68.gobj);
     if (lbVector_WorldToScreen(cobj, arg0, &point, 1) == NULL) {
