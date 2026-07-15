@@ -130,12 +130,10 @@
 /* 4D7E08 */ float const cm_804D7E08 = 0.1f;     // near clip
 /* 4D7E10 */ float const cm_804D7E0C = 16384.0f; // far clip
 /* 4D7E10 */ float const cm_804D7E10 = -1.0f;
-/* 4D7E14 */ float const cm_804D7E14 = 0.0f;
 /* 4D7E18 */ double const cm_804D7E18 = 1.0f;
 /* 4D7E20 */ double const cm_804D7E20 = 4503601774854144.0f;
 /* 4D7E28 */ float const cm_804D7E28 = 0.64999998f;
 /* 4D7E2C */ float const cm_804D7E2C = 0.34999999f;
-/* 4D7E30 */ float const cm_804D7E30 = 0.5f;
 /* 4D7E34 */ float const cm_804D7E34 = -0.5f;
 /* 4D7E38 */ float const cm_804D7E38 = 3.4028235E+38f;
 /* 4D7E3C */ float const cm_804D7E3C = 40.0f;
@@ -147,8 +145,6 @@
 /* 4D7E54 */ float const cm_804D7E54 = 99999.0f;
 /* 4D7E58 */ float const cm_804D7E58 = 0.000099999997f;
 /* 4D7E5C */ float const cm_804D7E5C = 1000.0f;
-/* 4D7E60 */ float const cm_804D7E60 = 0.017453292f; // deg2rad
-/* 4D7E64 */ float const cm_804D7E64 = 1.5707964f;   // rad2deg
 /* 4D7E68 */ float const cm_804D7E68 = 0.001f;
 /* 4D7E6C */ float const cm_804D7E6C = -0.001f;
 /* 4D7E70 */ float const cm_804D7E70 = 30.0f;
@@ -768,10 +764,10 @@ void Camera_80029AAC(CameraBounds* bounds, CameraTransformState* transform,
 void Camera_80029BC4(CameraBounds* bounds, CameraTransformState* transform)
 {
     float cam_dist = (bounds->y_max - bounds->y_min) /
-                     tanf(cm_804D7E60 * transform->target_fov);
+                     tanf(MTXDegToRad(transform->target_fov));
     float x_dist =
         (bounds->x_max - bounds->x_min) /
-        (cm_803BCB64.aspect * tanf(cm_804D7E60 * transform->target_fov));
+        (cm_803BCB64.aspect * tanf(MTXDegToRad(transform->target_fov)));
     if (x_dist > cam_dist) {
         cam_dist = x_dist;
     }
@@ -2800,7 +2796,7 @@ void Camera_8002D318(void* unused)
     if (subject == NULL) {
         goto skip_fov_calc;
     }
-    distance = (2.0f * subject->x34.z) / tanf(cm_804D7E60 * *tgt_fov_ptr);
+    distance = (2.0f * subject->x34.z) / tanf(MTXDegToRad(*tgt_fov_ptr));
     goto fov_done;
 skip_fov_calc:
     distance = cm_804D7E5C;
@@ -3056,7 +3052,7 @@ void Camera_8002D85C(void* unused)
     if (subject == NULL) {
         goto skip_fov_calc;
     }
-    distance = (2.0f * subject->x34.z) / tanf(cm_804D7E60 * *tgt_fov_ptr);
+    distance = (2.0f * subject->x34.z) / tanf(MTXDegToRad(*tgt_fov_ptr));
     goto fov_done;
 skip_fov_calc:
     distance = cm_804D7E5C;
