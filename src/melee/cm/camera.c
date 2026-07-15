@@ -1396,15 +1396,15 @@ void Camera_8002B1F8(CameraTransformState* transform)
 /// update gameplay camera
 void Camera_8002B3D4(void* arg0)
 {
-    CameraBounds bounds;
-    CameraBounds sp2C;
-    Vec3 distance;
-    Vec3 fighter_pos;
     float total_dist;
-    HSD_GObj* p1_fgp;
     f32 temp_f31;
     f32 var_f1;
     f32 var_f1_2;
+    CameraBounds bounds;
+    CameraBounds sp2C;
+    Vec3 distance;
+    HSD_GObj* p1_fgp;
+    Vec3 fighter_pos;
 
     Camera_80030DF8();
     Camera_800293E0();
