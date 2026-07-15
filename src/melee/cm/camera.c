@@ -1400,11 +1400,18 @@ void Camera_8002B3D4(void* arg0)
     f32 temp_f31;
     f32 var_f1;
     f32 var_f1_2;
+    f32 target_dz;
+    f32 target_dy;
+    f32 target_dx;
+    f32 _padA[1];
     CameraBounds bounds;
     CameraBounds sp2C;
-    Vec3 distance;
-    HSD_GObj* p1_fgp;
-    Vec3 fighter_pos;
+    f32 _padB[1];
+    Vec3 sp1C;
+    f32 _padC[1];
+    Vec3 spC;
+    s32 check;
+    HSD_GObj* gobj;
 
     Camera_80030DF8();
     Camera_800293E0();
@@ -1414,42 +1421,66 @@ void Camera_8002B3D4(void* arg0)
     total_dist = cm_80452C68.transform.target_fov - cm_80452C68.transform.fov;
     cm_80452C68.transform.fov += total_dist * cm_803BCCA0.x44;
     Camera_80029BC4(&bounds, &cm_80452C68.transform);
-    if (!((Camera_80030AF8() != false) &&
-          ((p1_fgp = Ground_801C57A4(), p1_fgp != NULL)) &&
-          (ftLib_80086644(p1_fgp, &fighter_pos),
-           abs_threshold_inline(fighter_pos.z, 30.0f))))
-    {
+
+    if (Camera_80030AF8()) {
+        gobj = Ground_801C57A4();
+        if (gobj != NULL) {
+            ftLib_80086644(gobj, &sp1C);
+            temp_f31 = sp1C.z;
+            if (temp_f31 < 0.0f) {
+                temp_f31 = -temp_f31;
+            }
+            if (temp_f31 > 30.0f) {
+                check = 1;
+                goto check_done;
+            }
+        }
+    }
+    check = 0;
+check_done:
+    if (check == 0) {
         Camera_80029CF8(&bounds, &cm_80452C68.transform);
         Camera_8002A768(&cm_80452C68.transform, 0);
     }
+
     Camera_8002958C(&sp2C, &cm_80452C68.transform_copy);
     cm_80452C68.transform_copy.target_fov = cm_803BCCA0.x40;
     temp_f31 =
         cm_80452C68.transform_copy.target_fov - cm_80452C68.transform_copy.fov;
     cm_80452C68.transform_copy.fov += temp_f31 * cm_803BCCA0.x44;
     Camera_80029BC4(&sp2C, &cm_80452C68.transform_copy);
-    if (!((Camera_80030AF8() != 0) &&
-          ((p1_fgp = Ground_801C57A4(), p1_fgp != NULL)) &&
-          (ftLib_80086644(p1_fgp, &fighter_pos),
-           abs_threshold_inline(fighter_pos.z, 30.0f))))
-    {
+
+    if (Camera_80030AF8()) {
+        gobj = Ground_801C57A4();
+        if (gobj != NULL) {
+            ftLib_80086644(gobj, &spC);
+            temp_f31 = spC.z;
+            if (temp_f31 < 0.0f) {
+                temp_f31 = -temp_f31;
+            }
+            if (temp_f31 > 30.0f) {
+                check = 1;
+                goto check_done2;
+            }
+        }
+    }
+    check = 0;
+check_done2:
+    if (check == 0) {
         Camera_80029CF8(&sp2C, &cm_80452C68.transform_copy);
         Camera_8002A768(&cm_80452C68.transform_copy, 0);
     }
 
-    /// @remarks permuter jank
-    distance.y = cm_80452C68.transform.target_position.y -
-                 cm_80452C68.transform.target_interest.y;
     if (cm_80452C68.x2BC == 1.0f) {
-        distance.x = cm_80452C68.transform.target_position.x -
-                     cm_80452C68.transform.target_interest.x;
-        distance.y = cm_80452C68.transform.target_position.y -
-                     cm_80452C68.transform.target_interest.y;
-        distance.z = cm_80452C68.transform.target_position.z -
-                     cm_80452C68.transform.target_interest.z;
-        var_f1 = distance.y * distance.y;
-        temp_f31 = distance.z * distance.z;
-        var_f1_2 = distance.x * distance.x;
+        target_dx = cm_80452C68.transform.target_position.x -
+                    cm_80452C68.transform.target_interest.x;
+        target_dy = cm_80452C68.transform.target_position.y -
+                    cm_80452C68.transform.target_interest.y;
+        target_dz = cm_80452C68.transform.target_position.z -
+                    cm_80452C68.transform.target_interest.z;
+        var_f1 = target_dy * target_dy;
+        temp_f31 = target_dz * target_dz;
+        var_f1_2 = target_dx * target_dx;
         total_dist = (var_f1_2 + var_f1) + temp_f31;
         cm_80452C68.x2C0 = sqrtf__Ff(total_dist);
     }
@@ -1472,8 +1503,8 @@ void Camera_8002B3D4(void* arg0)
     }
 
     temp_f31 = Stage_GetCamBoundsLeftOffset();
-    var_f1 = Stage_GetCamBoundsRightOffset() - temp_f31;
-    cm_80452C68.x2B4 += var_f1;
+    total_dist = Stage_GetCamBoundsRightOffset() - temp_f31;
+    cm_80452C68.x2B4 += total_dist;
     cm_80452C68.x2B8 += 1;
     cm_80452C68.x2B0 = cm_80452C68.x2B4 / ((f32) cm_80452C68.x2B8);
 }
