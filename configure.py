@@ -1031,7 +1031,7 @@ config.libs = [
             Object(Matching, "melee/gm/gmpause.c"),
             Object(Matching, "melee/gm/gmtitle.c"),
             Object(Matching, "melee/gm/gmcamera.c"),
-            Object(NonMatching, "melee/gm/gm_1A33.c"),
+            Object(Matching, "melee/gm/gm_1A33.c"),
             Object(Matching, "melee/gm/gm_1A36.c"),
             Object(NonMatching, "melee/gm/gm_1A3F.c"),
             Object(Matching, "melee/gm/gm_1A45.c"),
