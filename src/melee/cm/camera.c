@@ -1414,7 +1414,7 @@ void Camera_8002B3D4(void* arg0)
     total_dist = cm_80452C68.transform.target_fov - cm_80452C68.transform.fov;
     cm_80452C68.transform.fov += total_dist * cm_803BCCA0.x44;
     Camera_80029BC4(&bounds, &cm_80452C68.transform);
-    if (!((Camera_80030AF8() != 0) &&
+    if (!((Camera_80030AF8() != false) &&
           ((p1_fgp = Ground_801C57A4(), p1_fgp != NULL)) &&
           (ftLib_80086644(p1_fgp, &fighter_pos),
            abs_threshold_inline(fighter_pos.z, 30.0f))))
