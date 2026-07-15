@@ -214,6 +214,7 @@ typedef struct grVe_GroundData {
 
 void grVenom_8020362C(void)
 {
+    grVe_Data* data = &grVe_803E5348;
     s32 group_a;
     s32 j;
     s32 idx;
@@ -233,7 +234,7 @@ void grVenom_8020362C(void)
     PAD_STACK(0x28);
 
     if (grVe_804D6A40 == 0) {
-        if (grVe_ArwingData.arwing_gobj[0] == NULL) {
+        if (data->arwing.arwing_gobj[0] == NULL) {
             grVe_804D6A38 = grVe_804D6A38 - 1;
             if (grVe_804D6A38 <= 0) {
                 s32 combined;
@@ -261,8 +262,8 @@ void grVenom_8020362C(void)
                 combined = group_b | group_a;
                 switch (combined) {
                 case 0:
-                    x2c_ptr = &grVe_ArwingData.arwing_type[0];
-                    idx = grVe_ArwingData.arwing_type[0];
+                    x2c_ptr = &data->arwing.arwing_type[0];
+                    idx = data->arwing.arwing_type[0];
                     while (idx == *x2c_ptr) {
                         idx = HSD_Randi(0xB) + 1;
                     }
@@ -275,12 +276,12 @@ void grVenom_8020362C(void)
                     grVe_804D6A34 = 0;
                     *x2c_ptr = idx;
                     *x38_ptr = mode;
-                    grVe_ArwingData.arwing_gobj[grVe_804D6A34] =
+                    data->arwing.arwing_gobj[grVe_804D6A34] =
                         grVenom_80203EAC(2);
                     break;
                 case 2:
-                    x2c_ptr = &grVe_ArwingData.arwing_type[0];
-                    idx = grVe_ArwingData.arwing_type[0];
+                    x2c_ptr = &data->arwing.arwing_type[0];
+                    idx = data->arwing.arwing_type[0];
                     while (idx == *x2c_ptr) {
                         idx = HSD_Randi(4) + 1;
                     }
@@ -295,7 +296,7 @@ void grVenom_8020362C(void)
                     grVe_804D6A34 = 0;
                     *x2c_ptr = idx;
                     *x38_ptr = mode;
-                    grVe_ArwingData.arwing_gobj[grVe_804D6A34] =
+                    data->arwing.arwing_gobj[grVe_804D6A34] =
                         grVenom_80203EAC(2);
                     break;
                 }
@@ -328,7 +329,7 @@ void grVenom_8020362C(void)
             grVe_804D6A38 = spawn;
         }
     } else {
-        x20_ptr = &grVe_ArwingData.arwing_gobj[0];
+        x20_ptr = &data->arwing.arwing_gobj[0];
         (void) x20_ptr;
         i = 0;
         if (x20_ptr[0] != NULL) {
@@ -345,8 +346,8 @@ void grVenom_8020362C(void)
             grVe_804D6A38 = grVe_804D6A38 - 1;
             if (grVe_804D6A38 <= 0) {
                 has_active = 0;
-                x2c_ptr = &grVe_ArwingData.arwing_type[0];
-                x20_ptr = &grVe_ArwingData.arwing_gobj[0];
+                x2c_ptr = &data->arwing.arwing_type[0];
+                x20_ptr = &data->arwing.arwing_gobj[0];
                 for (j = 0; j < 3; j++) {
                     if (j != i) {
                         if (x2c_ptr[j] < 8) {
@@ -358,17 +359,17 @@ void grVenom_8020362C(void)
                     }
                 }
                 if (has_active == 0) {
-                    idx = grVe_ArwingData.arwing_type[i];
-                    while (idx == grVe_ArwingData.arwing_type[0] ||
-                           idx == grVe_ArwingData.arwing_type[1] ||
-                           idx == grVe_ArwingData.arwing_type[2])
+                    idx = data->arwing.arwing_type[i];
+                    while (idx == data->arwing.arwing_type[0] ||
+                           idx == data->arwing.arwing_type[1] ||
+                           idx == data->arwing.arwing_type[2])
                     {
                         idx = HSD_Randi(0xB) + 1;
                     }
                     grVe_804D6A34 = i;
-                    grVe_ArwingData.arwing_type[i] = idx;
+                    data->arwing.arwing_type[i] = idx;
                     grVe_803E5380[i] = i + 1;
-                    grVe_ArwingData.arwing_gobj[grVe_804D6A34] =
+                    data->arwing.arwing_gobj[grVe_804D6A34] =
                         grVenom_80203EAC(2);
                 } else {
                     ground_flags =
@@ -390,17 +391,17 @@ void grVenom_8020362C(void)
                         group_b = 0;
                     }
                     if ((group_b | group_a) == 0) {
-                        idx = grVe_ArwingData.arwing_type[i];
-                        while (idx == grVe_ArwingData.arwing_type[0] ||
-                               idx == grVe_ArwingData.arwing_type[1] ||
-                               idx == grVe_ArwingData.arwing_type[2])
+                        idx = data->arwing.arwing_type[i];
+                        while (idx == data->arwing.arwing_type[0] ||
+                               idx == data->arwing.arwing_type[1] ||
+                               idx == data->arwing.arwing_type[2])
                         {
                             idx = HSD_Randi(4) + 8;
                         }
                         grVe_804D6A34 = i;
-                        grVe_ArwingData.arwing_type[i] = idx;
+                        data->arwing.arwing_type[i] = idx;
                         grVe_803E5380[i] = i + 1;
-                        grVe_ArwingData.arwing_gobj[grVe_804D6A34] =
+                        data->arwing.arwing_gobj[grVe_804D6A34] =
                             grVenom_80203EAC(2);
                     }
                 }
