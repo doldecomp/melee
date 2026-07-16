@@ -28,6 +28,15 @@ static inline void Item_ApplyFallingPhysics(Item_GObj* gobj)
     it_80274658(gobj, it_804D6D28->x68_float);
 }
 
+static inline bool Item_TickLifetime(Item* ip)
+{
+    if (ip->xD44_lifeTimer <= 0.0f) {
+        return true;
+    }
+    ip->xD44_lifeTimer -= 1.0f;
+    return false;
+}
+
 /// Check whether the grapple chain from @p head to the tip @p pos or to its
 /// owner @p fp collides with terrain (shared by Link's hookshot and Samus's
 /// grapple beam).
