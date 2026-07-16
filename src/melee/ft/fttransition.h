@@ -15,8 +15,8 @@ static inline void ftCommon_GroundToAirStateChange(Fighter_GObj* gobj,
 }
 
 static inline void ftCommon_AirToGroundStateChange(Fighter_GObj* gobj,
-                                                    Fighter* fp,
-                                                    FtMotionId msid,
+                                                   Fighter* fp,
+                                                   FtMotionId msid,
                                                    MotionFlags flags)
 {
     ftCommon_8007D7FC(fp);
