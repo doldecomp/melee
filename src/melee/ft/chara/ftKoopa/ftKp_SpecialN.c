@@ -351,7 +351,7 @@ void ftKp_SpecialNStart_Coll(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == GA_Ground) {
         ftCommon_GroundToAirStateChange(gobj, fp, ftKp_MS_SpecialAirNStart,
-                                        0x0C4C5080);
+                                        ftCommon_GroundAirColl_MF);
     }
 }
 
@@ -359,7 +359,8 @@ void ftKp_SpecialN_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == GA_Ground) {
-        ftCommon_GroundToAirStateChange(gobj, fp, 0x159, 0x0C4C5880);
+        ftCommon_GroundToAirStateChange(
+            gobj, fp, 0x159, ftCommon_GroundAirColl_MF | Ft_MF_SkipRumble);
     }
 }
 
@@ -367,7 +368,8 @@ void ftKp_SpecialNEnd_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == GA_Ground) {
-        ftCommon_GroundToAirStateChange(gobj, fp, 0x15A, 0x0C4C5080U);
+        ftCommon_GroundToAirStateChange(gobj, fp, 0x15A,
+                                        ftCommon_GroundAirColl_MF);
     }
 }
 
@@ -375,7 +377,8 @@ void ftKp_SpecialAirNStart_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != GA_Ground) {
-        ftCommon_AirToGroundStateChange(gobj, fp, 0x155, 0x0C4C5080U);
+        ftCommon_AirToGroundStateChange(gobj, fp, 0x155,
+                                        ftCommon_GroundAirColl_MF);
     }
 }
 
@@ -383,7 +386,8 @@ void ftKp_SpecialAirN_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != GA_Ground) {
-        ftCommon_AirToGroundStateChange(gobj, fp, 0x156, 0x0C4C5880U);
+        ftCommon_AirToGroundStateChange(
+            gobj, fp, 0x156, ftCommon_GroundAirColl_MF | Ft_MF_SkipRumble);
     }
 }
 
@@ -391,7 +395,8 @@ void ftKp_SpecialAirNEnd_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != GA_Ground) {
-        ftCommon_AirToGroundStateChange(gobj, fp, 0x157, 0x0C4C5080U);
+        ftCommon_AirToGroundStateChange(gobj, fp, 0x157,
+                                        ftCommon_GroundAirColl_MF);
     }
 }
 

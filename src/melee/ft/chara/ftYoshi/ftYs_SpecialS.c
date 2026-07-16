@@ -1082,7 +1082,9 @@ void ftYs_SpecialAirSStart_0_Coll(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (ft_80082708(gobj) == 0) {
-        ftCommon_GroundToAirStateChange(gobj, fp, 360, 0x0C4C5092U);
+        ftCommon_GroundToAirStateChange(gobj, fp, 360,
+                                        ftCommon_GroundAirColl_MF |
+                                            Ft_MF_KeepGfx | Ft_MF_SkipModel);
         ftYoshi_SpecialS_SetCall(gobj);
     }
 }
@@ -1198,7 +1200,9 @@ void ftYs_SpecialAirSStart_1_Coll(Fighter_GObj* gobj)
     fp->mv.ys.specials.x30 = 0;
 
     if (ft_80081D0C(gobj) != GA_Ground) {
-        ftCommon_AirToGroundStateChange(gobj, fp, 356, 0x0C4C5092U);
+        ftCommon_AirToGroundStateChange(gobj, fp, 356,
+                                        ftCommon_GroundAirColl_MF |
+                                            Ft_MF_KeepGfx | Ft_MF_SkipModel);
         ftYoshi_SpecialS_SetCall(gobj);
     }
 }

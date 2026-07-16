@@ -263,7 +263,8 @@ void fn_8010984C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_GroundToAirStateChange(gobj, fp, ftKb_MS_YsSpecialAirNCapture2,
-                                    0x0C4C509A);
+                                    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx |
+                                        Ft_MF_SkipHit | Ft_MF_SkipModel);
     ftCommon_8007E2D0(GET_FIGHTER(gobj), 4, fn_801097B8, fn_80109714,
                       fn_8010A930);
     fp = GET_FIGHTER(gobj);
@@ -274,7 +275,9 @@ void fn_8010984C(HSD_GObj* gobj)
 void fn_801098EC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_AirToGroundStateChange(gobj, fp, ftKb_MS_YsSpecialN1, 0x0C4C509A);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftKb_MS_YsSpecialN1,
+                                    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx |
+                                        Ft_MF_SkipHit | Ft_MF_SkipModel);
     ftCommon_8007E2D0(GET_FIGHTER(gobj), 4, fn_80109680, fn_801095DC,
                       fn_8010A930);
     fp = GET_FIGHTER(gobj);
@@ -287,7 +290,8 @@ void fn_8010998C(HSD_GObj* gobj)
     Fighter* new_var;
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_GroundToAirStateChange(gobj, fp, ftKb_MS_YsSpecialAirNCapture1_1,
-                                    0x0C4C5092);
+                                    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx |
+                                        Ft_MF_SkipModel);
     /// FAKE MATCH: comma operator required for regalloc
     fp = (0, GET_FIGHTER(gobj));
     new_var = fp;
@@ -299,7 +303,8 @@ void fn_80109A08(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_GroundToAirStateChange(gobj, fp, ftKb_MS_YsSpecialAirNCapture1_0,
-                                    0x0C4C5092);
+                                    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx |
+                                        Ft_MF_SkipModel);
     fp = GET_FIGHTER(gobj);
     fp->death2_cb = ftKb_Init_800EE74C;
     fp->take_dmg_cb = ftKb_Init_800EE7B8;
@@ -325,7 +330,8 @@ void fn_80109B00(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_AirToGroundStateChange(gobj, fp, ftKb_MS_YsSpecialNCapture1_0,
-                                    0x0C4C5092);
+                                    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx |
+                                        Ft_MF_SkipModel);
     fp = GET_FIGHTER(gobj);
     fp->death2_cb = ftKb_Init_800EE74C;
     fp->take_dmg_cb = ftKb_Init_800EE7B8;
@@ -351,7 +357,8 @@ void fn_80109BF8(HSD_GObj* gobj)
     Fighter* new_var;
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_GroundToAirStateChange(gobj, fp, ftKb_MS_YsSpecialAirN2_0,
-                                    0x0C4C5092);
+                                    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx |
+                                        Ft_MF_SkipModel);
     fp = (new_var = GET_FIGHTER(gobj));
     fp->death2_cb = ftKb_Init_800EE74C;
     if (gobj) {
@@ -364,7 +371,8 @@ void fn_80109C74(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_AirToGroundStateChange(gobj, fp, ftKb_MS_YsSpecialNCapture2_1,
-                                    0x0C4C5092);
+                                    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx |
+                                        Ft_MF_SkipModel);
     fp = GET_FIGHTER(gobj);
     fp->death2_cb = ftKb_Init_800EE74C;
     fp->take_dmg_cb = ftKb_Init_800EE7B8;
@@ -375,7 +383,8 @@ void fn_80109CF0(HSD_GObj* gobj)
     HSD_GObj* new_var;
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_AirToGroundStateChange(gobj, fp, ftKb_MS_YsSpecialNCapture2_0,
-                                    0x0C4C5092);
+                                    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx |
+                                        Ft_MF_SkipModel);
     new_var = gobj;
     fp = new_var->user_data;
     /// FAKE MATCH: comma operator required for regalloc

@@ -225,7 +225,10 @@ void ftSk_SpecialHi_80113390(Fighter_GObj* arg0)
     Fighter* temp_r31;
 
     temp_r31 = arg0->user_data;
-    ftCommon_AirToGroundStateChange(arg0, temp_r31, 0x163, 0x0C4C508EU);
+    ftCommon_AirToGroundStateChange(arg0, temp_r31, 0x163,
+                                    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx |
+                                        Ft_MF_KeepColAnimHitStatus |
+                                        Ft_MF_SkipHit);
     temp_r31->accessory4_cb = fn_80112ED8;
 }
 

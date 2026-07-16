@@ -356,7 +356,9 @@ void ftKb_SpecialHi1_Coll(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == GA_Ground) {
         ftCommon_GroundToAirStateChange(gobj, fp, ftKb_MS_SpecialAirHi1,
-                                        0xC1082U);
+                                        Ft_MF_KeepGfx | Ft_MF_SkipMatAnim |
+                                            Ft_MF_SkipColAnim |
+                                            Ft_MF_SkipItemVis | Ft_MF_Unk19);
         ftKb_SpecialN_set_cbs(gobj);
         fp->self_vel.z = 0.0f;
         fp->self_vel.y = 0.0f;
@@ -437,7 +439,9 @@ void ftKb_SpecialHi4_Coll(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == GA_Ground) {
         ftCommon_GroundToAirStateChange(gobj, fp, ftKb_MS_SpecialAirHi4,
-                                        0xC1082U);
+                                        Ft_MF_KeepGfx | Ft_MF_SkipMatAnim |
+                                            Ft_MF_SkipColAnim |
+                                            Ft_MF_SkipItemVis | Ft_MF_Unk19);
         ftKb_SpecialN_set_cbs(gobj);
         fp->accessory4_cb = fn_800F21E8;
         fp->self_vel.z = 0.0f;
@@ -456,7 +460,9 @@ void ftKb_SpecialAirHi1_Coll(Fighter_GObj* gobj)
 
     if (ft_80081D0C(gobj) != GA_Ground) {
         ftCommon_AirToGroundStateChange(gobj, fp, ftKb_MS_SpecialHi1,
-                                        0xC1082U);
+                                        Ft_MF_KeepGfx | Ft_MF_SkipMatAnim |
+                                            Ft_MF_SkipColAnim |
+                                            Ft_MF_SkipItemVis | Ft_MF_Unk19);
         ftKb_SpecialN_set_cbs(gobj);
         fp->self_vel.z = 0.0f;
         fp->self_vel.y = 0.0f;
@@ -535,7 +541,9 @@ void ftKb_SpecialAirHiEnd_Coll(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != GA_Ground) {
         ftCommon_AirToGroundStateChange(gobj, fp, ftKb_MS_SpecialHi4,
-                                        0xC1082U);
+                                        Ft_MF_KeepGfx | Ft_MF_SkipMatAnim |
+                                            Ft_MF_SkipColAnim |
+                                            Ft_MF_SkipItemVis | Ft_MF_Unk19);
         ftKb_SpecialN_set_cbs(gobj);
         fp->accessory4_cb = fn_800F21E8;
         fp->self_vel.z = 0.0f;

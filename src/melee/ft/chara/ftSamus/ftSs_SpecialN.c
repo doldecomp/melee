@@ -351,7 +351,8 @@ void ftSs_SpecialNStart_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (!ft_80082708(gobj)) {
-        ftCommon_GroundToAirStateChange(gobj, fp, 347, 0x0C4C5080);
+        ftCommon_GroundToAirStateChange(gobj, fp, 347,
+                                        ftCommon_GroundAirColl_MF);
         ftSamus_updateDamageDeathCBs(gobj);
     }
 }
@@ -361,7 +362,8 @@ void ftSs_SpecialNHold_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (!ft_80082708(gobj)) {
-        ftCommon_GroundToAirStateChange(gobj, fp, 348, 0x0C4C5080);
+        ftCommon_GroundToAirStateChange(gobj, fp, 348,
+                                        ftCommon_GroundAirColl_MF);
         ftSamus_updateDamageDeathCBs(gobj);
         ft_PlaySFX(fp, 260021, 127, 64);
         fp->cmd_vars[1] = 1;
@@ -372,7 +374,8 @@ void ftSs_SpecialNCancel_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!ft_80082708(gobj)) {
-        ftCommon_GroundToAirStateChange(gobj, fp, 348, 0x0C4C5080);
+        ftCommon_GroundToAirStateChange(gobj, fp, 348,
+                                        ftCommon_GroundAirColl_MF);
         ftSamus_updateDamageDeathCBs(gobj);
     }
 }
@@ -381,7 +384,8 @@ void ftSs_SpecialN_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!ft_80082708(gobj)) {
-        ftCommon_GroundToAirStateChange(gobj, fp, 348, 0x0C4C5080);
+        ftCommon_GroundToAirStateChange(gobj, fp, 348,
+                                        ftCommon_GroundAirColl_MF);
         ftSamus_updateDamageDeathCBs(gobj);
     }
 }
@@ -390,7 +394,8 @@ void ftSs_SpecialAirNStart_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) == 1) {
-        ftCommon_AirToGroundStateChange(gobj, fp, 343, 0x0C4C5080);
+        ftCommon_AirToGroundStateChange(gobj, fp, 343,
+                                        ftCommon_GroundAirColl_MF);
         ftSamus_updateDamageDeathCBs(gobj);
     }
 }
@@ -399,7 +404,8 @@ void ftSs_SpecialAirN_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) == 1) {
-        ftCommon_AirToGroundStateChange(gobj, fp, 346, 0x0C4C5080);
+        ftCommon_AirToGroundStateChange(gobj, fp, 346,
+                                        ftCommon_GroundAirColl_MF);
         ftSamus_updateDamageDeathCBs(gobj);
     }
 }

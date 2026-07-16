@@ -256,7 +256,9 @@ void ftNn_Init_80123720(Fighter_GObj* gobj)
 void ftNn_Init_8012378C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_AirToGroundStateChange(gobj, fp, 362, 0x0C4C508A);
+    ftCommon_AirToGroundStateChange(gobj, fp, 362,
+                                    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx |
+                                        Ft_MF_SkipHit);
     fp->accessory4_cb = fn_80123218;
 }
 

@@ -612,7 +612,9 @@ static inline void inline4(Fighter_GObj* gobj, int msid)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftIceClimberAttributes* da = fp->dat_attrs;
-    ftCommon_AirToGroundStateChange(gobj, fp, msid, 0xC4C528A);
+    ftCommon_AirToGroundStateChange(gobj, fp, msid,
+                                    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx |
+                                        Ft_MF_SkipHit | Ft_MF_KeepSfx);
     inlineA0(gobj);
     fp->x74_anim_vel.y = 0.0F;
     fp->self_vel.y = 0.0F;

@@ -206,7 +206,10 @@ void ftZd_SpecialN_8013AC88(HSD_GObj* gobj)
     u8 _[12];
 
     fp = GET_FIGHTER(gobj);
-    ftCommon_GroundToAirStateChange(gobj, fp, 342, 0x0C4C508E);
+    ftCommon_GroundToAirStateChange(gobj, fp, 342,
+                                    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx |
+                                        Ft_MF_KeepColAnimHitStatus |
+                                        Ft_MF_SkipHit);
 
     fighter2 = GET_FIGHTER(gobj);
     attributes = fighter2->dat_attrs;
@@ -227,7 +230,10 @@ void ftZd_SpecialN_8013AD1C(HSD_GObj* gobj)
     u8 _[12];
 
     fp = GET_FIGHTER(gobj);
-    ftCommon_AirToGroundStateChange(gobj, fp, 341, 0x0C4C508E);
+    ftCommon_AirToGroundStateChange(gobj, fp, 341,
+                                    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx |
+                                        Ft_MF_KeepColAnimHitStatus |
+                                        Ft_MF_SkipHit);
 
     fighter2 = GET_FIGHTER(gobj);
     attributes = fighter2->dat_attrs;

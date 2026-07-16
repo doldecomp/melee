@@ -210,7 +210,9 @@ void ftKb_SpecialNSk_80105E8C(Fighter_GObj* gobj)
     void* new_var; // Permuter slop
     PAD_STACK(8);
     ftCommon_GroundToAirStateChange(gobj, fp, ftKb_MS_ZdSpecialAirN,
-                                    0x0C4C508E);
+                                    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx |
+                                        Ft_MF_KeepColAnimHitStatus |
+                                        Ft_MF_SkipHit);
     fp = (Fighter*) (new_var = HSD_GObjGetUserData(gobj));
     da = fp->dat_attrs;
     if (fp->x2219_b0 == true) {
@@ -229,7 +231,10 @@ void ftKb_SpecialNSk_80105F3C(Fighter_GObj* gobj)
     ftKb_DatAttrs* da;
     void* new_var; // Permuter slop
     PAD_STACK(8);
-    ftCommon_AirToGroundStateChange(gobj, fp, ftKb_MS_ZdSpecialN, 0x0C4C508E);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftKb_MS_ZdSpecialN,
+                                    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx |
+                                        Ft_MF_KeepColAnimHitStatus |
+                                        Ft_MF_SkipHit);
     fp = (Fighter*) (new_var = HSD_GObjGetUserData(gobj));
     da = fp->dat_attrs;
     if (fp->x2219_b0 == true) {
