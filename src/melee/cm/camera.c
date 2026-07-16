@@ -1991,25 +1991,32 @@ void Camera_8002C1A8(void)
     }
 }
 
+static inline float eye_offset_len(Vec3* offset)
+{
+    return sqrtf((offset->z * offset->z) +
+                 (offset->x * offset->x + offset->y * offset->y));
+}
+
 void Camera_8002C5B4(Camera_x2D0* arg0)
 {
+    f64 len;
+    Vec3 temp_pos;
     Vec3 cross1;
     Vec3 cross2;
-    Vec3 temp_pos;
     Camera* cam;
     Camera_x2D0* params;
     Vec3* cam_pos;
     Vec3* cam_offset;
+    f32* eye_offset_z;
     Vec3* eye_offset;
     f32* eye_offset_y;
-    f32* eye_offset_z;
-    f32 len_3d;
+    f32* y_ptr;
+    f32* z_ptr;
     f32 xz_dist;
     f32 pitch;
     f32 yaw;
+    f32 pos;
     f32 limit;
-    u8 operand_pad[8];
-    PAD_STACK(16);
 
     cam = &cm_80452C68;
     params = arg0;
@@ -2018,40 +2025,40 @@ void Camera_8002C5B4(Camera_x2D0* arg0)
         params->callback(arg0);
     }
 
-    cam_pos = &cam->x308;
     limit = params->x_max;
-    if (cam_pos->x > limit) {
+    pos = (cam_pos = &cam->x308)->x;
+    if (pos > limit) {
         cam_pos->x = limit;
     } else {
         limit = params->x_min;
-        if (cam_pos->x < limit) {
+        if (pos < limit) {
             cam_pos->x = limit;
         }
     }
 
     limit = params->y_max;
-    if (cam_pos->y > limit) {
-        cam_pos->y = limit;
+    pos = *(y_ptr = &cam->x308.y);
+    if (pos > limit) {
+        *y_ptr = limit;
     } else {
         limit = params->y_min;
-        if (cam_pos->y < limit) {
-            cam_pos->y = limit;
+        if (pos < limit) {
+            *y_ptr = limit;
         }
     }
 
     limit = params->z_max;
-    if (cam_pos->z > limit) {
-        cam_pos->z = limit;
+    pos = *(z_ptr = &cam->x308.z);
+    if (pos > limit) {
+        *z_ptr = limit;
     } else {
         limit = params->z_min;
-        if (cam_pos->z < limit) {
-            cam_pos->z = limit;
+        if (pos < limit) {
+            *z_ptr = limit;
         }
     }
 
-    cam_offset = &cam->x314;
-    (void) cam_offset;
-    temp_pos = *cam_offset;
+    temp_pos = *(cam_offset = &cam->x314);
     lbVector_Add(&temp_pos, cam_pos);
 
     if (temp_pos.x > params->x_max) {
@@ -2076,12 +2083,10 @@ void Camera_8002C5B4(Camera_x2D0* arg0)
     *cam_offset = temp_pos;
 
     eye_offset = &cam->pause_eye_offset;
-    eye_offset_y = &eye_offset->y;
-    eye_offset_z = &eye_offset->z;
+    eye_offset_y = &cam->pause_eye_offset.y;
+    eye_offset_z = &cam->pause_eye_offset.z;
 
-    len_3d =
-        sqrtf((*eye_offset_z * *eye_offset_z) +
-              (eye_offset->x * eye_offset->x + *eye_offset_y * *eye_offset_y));
+    len = eye_offset_len(eye_offset);
 
     xz_dist =
         sqrtf(eye_offset->x * eye_offset->x + *eye_offset_z * *eye_offset_z);
@@ -2095,22 +2100,18 @@ void Camera_8002C5B4(Camera_x2D0* arg0)
     if (pitch > params->angle_down) {
         lbVector_RotateAboutUnitAxis(eye_offset, &cross1,
                                      params->angle_down - pitch);
-    } else {
-        limit = -params->angle_up;
-        if (pitch < limit) {
-            lbVector_RotateAboutUnitAxis(eye_offset, &cross1, limit - pitch);
-        }
+    } else if (pitch < -params->angle_up) {
+        lbVector_RotateAboutUnitAxis(eye_offset, &cross1,
+                                     -params->angle_up - pitch);
     }
 
     yaw = atan2f(eye_offset->x, *eye_offset_z);
     if (yaw > params->angle_right) {
         lbVector_RotateAboutUnitAxis(eye_offset, &cross2,
                                      params->angle_right - yaw);
-        return;
-    }
-    limit = -params->angle_left;
-    if (yaw < limit) {
-        lbVector_RotateAboutUnitAxis(eye_offset, &cross2, limit - yaw);
+    } else if (yaw < -params->angle_left) {
+        lbVector_RotateAboutUnitAxis(eye_offset, &cross2,
+                                     -params->angle_left - yaw);
     }
 }
 
