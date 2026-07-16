@@ -72,7 +72,7 @@ int Toy_GetTrophyTotal(void)
     if (gm_IsCurrently1PMode() || gm_GetCurrentGameMode() == GM_TOY_LOTTERY) {
         return (short) Toy_804A284C[0x258 / 2];
     } else {
-        return *gmMainLib_8015CC90();
+        return *gmMainLib_GetTrophyCount();
     }
 }
 
@@ -81,7 +81,7 @@ inline static u16* idk(void)
     if (gm_IsCurrently1PMode() || gm_GetCurrentGameMode() == GM_TOY_LOTTERY) {
         return &Toy_804A284C[5];
     } else {
-        return gmMainLib_8015CC78();
+        return gmMainLib_GetTrophyFlags();
     }
 }
 
@@ -122,7 +122,7 @@ bool Toy_80304B0C(int arg0)
         s = Toy_804A284C[3] | Toy_804A284C[4];
         v = &s;
     } else {
-        v = gmMainLib_8015CC84();
+        v = gmMainLib_GetTrophyCategoryFlags();
     }
     if (*v & (1 << arg0)) {
         return 1;
@@ -225,7 +225,7 @@ inline static unsigned short* Toy_80304D30_idk(void)
     if (gm_IsCurrently1PMode() || gm_GetCurrentGameMode() == GM_TOY_LOTTERY) {
         return M2C_FIELD(&_Toy_804A26B8, unsigned short**, 0xCF);
     } else {
-        return gmMainLib_8015CC78();
+        return gmMainLib_GetTrophyFlags();
     }
 }
 
@@ -243,7 +243,7 @@ inline static bool Toy_80304D30_4B0C(int arg0)
             M2C_FIELD(&_Toy_804A26B8, unsigned short*, 0xCE);
         v = &s;
     } else {
-        v = gmMainLib_8015CC84();
+        v = gmMainLib_GetTrophyCategoryFlags();
     }
     if (*v & (1 << arg0)) {
         return 1;
@@ -364,7 +364,7 @@ s32 Toy_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
                 {
                     flags = default_flags;
                 } else {
-                    flags = gmMainLib_8015CC78();
+                    flags = gmMainLib_GetTrophyFlags();
                 }
                 if (!(M2C_FIELD(flags, u16*, byte_off) & 0x4000)) {
                     if (arg1 == 0x63) {
@@ -378,7 +378,7 @@ s32 Toy_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
                             {
                                 flags = default_flags;
                             } else {
-                                flags = gmMainLib_8015CC78();
+                                flags = gmMainLib_GetTrophyFlags();
                             }
                             if (M2C_FIELD(flags, u16*, byte_off) & 0x4000) {
                                 goto add_obtained;
@@ -398,7 +398,7 @@ s32 Toy_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
                         {
                             flags = default_flags;
                         } else {
-                            flags = gmMainLib_8015CC78();
+                            flags = gmMainLib_GetTrophyFlags();
                         }
                         if (M2C_FIELD(flags, u16*, byte_off) & 0x4000) {
                             goto add_obtained;
@@ -413,7 +413,7 @@ s32 Toy_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
                 {
                     flags = default_flags;
                 } else {
-                    flags = gmMainLib_8015CC78();
+                    flags = gmMainLib_GetTrophyFlags();
                 }
                 if (M2C_FIELD(flags, u16*, byte_off) & 0x4000) {
                     goto add_obtained;
@@ -425,7 +425,7 @@ s32 Toy_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
                 {
                     flags = default_flags;
                 } else {
-                    flags = gmMainLib_8015CC78();
+                    flags = gmMainLib_GetTrophyFlags();
                 }
                 if ((u8) * (u16*) ((u8*) flags + byte_off) != 0) {
                     obtained_arr[obtained_count++] = trophy;
@@ -509,7 +509,7 @@ void _Toy_803053C4(s32 targetValue, s32 count, s32 flag)
                             {
                                 ptr = default_flags;
                             } else {
-                                ptr = gmMainLib_8015CC78();
+                                ptr = gmMainLib_GetTrophyFlags();
                             }
 
                             if ((u8) * (u16*) ((u8*) ptr + i) == 0) {
@@ -521,7 +521,7 @@ void _Toy_803053C4(s32 targetValue, s32 count, s32 flag)
                                 {
                                     ptr = default_flags;
                                 } else {
-                                    ptr = gmMainLib_8015CC78();
+                                    ptr = gmMainLib_GetTrophyFlags();
                                 }
 
                                 ptr = (u16*) ((u8*) ptr + i);
@@ -568,7 +568,7 @@ void _Toy_803053C4(s32 targetValue, s32 count, s32 flag)
                     {
                         ptr = default_flags;
                     } else {
-                        ptr = gmMainLib_8015CC78();
+                        ptr = gmMainLib_GetTrophyFlags();
                     }
 
                     ptr = (u16*) ((u8*) ptr + i);
@@ -610,7 +610,7 @@ void Toy_SetUnlockState(enum_t trophyId, bool addValue)
     if (gm_IsCurrently1PMode() || gm_GetCurrentGameMode() == GM_TOY_LOTTERY) {
         table = toy->trophyTable;
     } else {
-        table = gmMainLib_8015CC78();
+        table = gmMainLib_GetTrophyFlags();
     }
 
     idx = (s16) trophyId;
@@ -622,7 +622,7 @@ void Toy_SetUnlockState(enum_t trophyId, bool addValue)
         {
             table = toy->trophyTable;
         } else {
-            table = gmMainLib_8015CC78();
+            table = gmMainLib_GetTrophyFlags();
         }
         table = (u16*) ((u8*) table + byteOffset);
         temp = *table;
@@ -634,7 +634,7 @@ void Toy_SetUnlockState(enum_t trophyId, bool addValue)
         {
             oldCount = toy->trophyCount;
         } else {
-            oldCount = *gmMainLib_8015CC90();
+            oldCount = *gmMainLib_GetTrophyCount();
         }
         newCount = oldCount + 1;
         if (gm_IsCurrently1PMode() ||
@@ -642,14 +642,14 @@ void Toy_SetUnlockState(enum_t trophyId, bool addValue)
         {
             toy->trophyCount = (s16) newCount;
         } else {
-            *gmMainLib_8015CC90() = (s16) newCount;
+            *gmMainLib_GetTrophyCount() = (s16) newCount;
         }
     }
 
     if (gm_IsCurrently1PMode() || gm_GetCurrentGameMode() == GM_TOY_LOTTERY) {
         table = toy->trophyTable;
     } else {
-        table = gmMainLib_8015CC78();
+        table = gmMainLib_GetTrophyFlags();
     }
 
     if ((s32) (addValue + (u8) * (u16*) ((u8*) table + byteOffset)) <= 0xFF) {
@@ -658,7 +658,7 @@ void Toy_SetUnlockState(enum_t trophyId, bool addValue)
         {
             table = toy->trophyTable;
         } else {
-            table = gmMainLib_8015CC78();
+            table = gmMainLib_GetTrophyFlags();
         }
         newVal = addValue + (u8) * (u16*) ((u8*) table + byteOffset);
         if (gm_IsCurrently1PMode() ||
@@ -666,7 +666,7 @@ void Toy_SetUnlockState(enum_t trophyId, bool addValue)
         {
             table = toy->trophyTable;
         } else {
-            table = gmMainLib_8015CC78();
+            table = gmMainLib_GetTrophyFlags();
         }
         ptr = (u16*) ((u8*) table + byteOffset);
         *ptr = newVal + (*ptr & 0xFF00);
@@ -676,7 +676,7 @@ void Toy_SetUnlockState(enum_t trophyId, bool addValue)
         {
             table = toy->trophyTable;
         } else {
-            table = gmMainLib_8015CC78();
+            table = gmMainLib_GetTrophyFlags();
         }
         ptr = (u16*) ((u8*) table + byteOffset);
         *ptr = (*ptr & 0xFF00) + 0xFF;
@@ -686,7 +686,7 @@ void Toy_SetUnlockState(enum_t trophyId, bool addValue)
         state[2] = toy->x19A | toy->x19C;
         statePtr = &state[2];
     } else {
-        statePtr = gmMainLib_8015CC84();
+        statePtr = gmMainLib_GetTrophyCategoryFlags();
     }
 
     if (*statePtr & 0x80) {
@@ -700,7 +700,7 @@ void Toy_SetUnlockState(enum_t trophyId, bool addValue)
         {
             count = toy->trophyCount;
         } else {
-            count = *gmMainLib_8015CC90();
+            count = *gmMainLib_GetTrophyCount();
         }
         if (count >= 0xFA) {
             *(u8*) &toy->x194 = 2;
@@ -781,14 +781,14 @@ void Toy_80305918(s8 arg0, s32 arg1, s32 arg2)
             {
                 var_r22_2 = temp_r26;
             } else {
-                var_r22_2 = gmMainLib_8015CC78();
+                var_r22_2 = gmMainLib_GetTrophyFlags();
             }
             if (gm_IsCurrently1PMode() != 0 ||
                 gm_GetCurrentGameMode() == GM_TOY_LOTTERY)
             {
                 var_r3 = temp_r26;
             } else {
-                var_r3 = gmMainLib_8015CC78();
+                var_r3 = gmMainLib_GetTrophyFlags();
             }
             if (*(u16*) (var_r3 + var_r27) & 0x4000) {
                 u16* temp_ptr;
@@ -803,7 +803,7 @@ void Toy_80305918(s8 arg0, s32 arg1, s32 arg2)
             {
                 var_r3 = temp_r26;
             } else {
-                var_r3 = gmMainLib_8015CC78();
+                var_r3 = gmMainLib_GetTrophyFlags();
             }
             *(u16*) (var_r3 + var_r27) |= 0x4000;
         }
@@ -824,7 +824,7 @@ void Toy_80305918(s8 arg0, s32 arg1, s32 arg2)
             {
                 ptr = (u16*) ((u8*) base + 0x19A);
             } else {
-                ptr = gmMainLib_8015CC84();
+                ptr = gmMainLib_GetTrophyCategoryFlags();
             }
             temp_val = *ptr;
             mask = 1 << arg0;
@@ -842,7 +842,7 @@ void Toy_80305918(s8 arg0, s32 arg1, s32 arg2)
             {
                 ptr = (u16*) ((u8*) base + 0x19A);
             } else {
-                ptr = gmMainLib_8015CC84();
+                ptr = gmMainLib_GetTrophyCategoryFlags();
             }
             *ptr |= 1 << arg0;
         }
@@ -1256,7 +1256,7 @@ void _Toy_8030663C(void)
         {
             src = var_r29;
         } else {
-            src = gmMainLib_8015CC78();
+            src = gmMainLib_GetTrophyFlags();
         }
         if ((u8) * (u16*) ((u8*) src + var_r30) != 0) {
             *var_r28 = _Toy_803064B8(var_r27, 0);
@@ -1349,7 +1349,7 @@ void Toy_803067BC(s32 arg0, s32 arg1)
         src = base + arg0;
         i = 0;
         offset = 0;
-        while (i < *gmMainLib_8015CC90()) {
+        while (i < *gmMainLib_GetTrophyCount()) {
             M2C_FIELD(Toy_sbss_804D6EDC, s16*, offset) = *src;
             src += 3;
             i++;
@@ -1358,7 +1358,7 @@ void Toy_803067BC(s32 arg0, s32 arg1)
         return;
     }
 
-    count = *gmMainLib_8015CC90();
+    count = *gmMainLib_GetTrophyCount();
     src = base + arg0;
     dest = Toy_sbss_804D6EDC + count;
     if (count != 0) {
@@ -2934,7 +2934,7 @@ void _Toy_80309404(HSD_GObj* gobj)
             {
                 trophy_count = base->trophy_count;
             } else {
-                trophy_count = *gmMainLib_8015CC90();
+                trophy_count = *gmMainLib_GetTrophyCount();
             }
             if (trophy_count == 0) {
                 return;
@@ -2976,7 +2976,7 @@ void _Toy_80309404(HSD_GObj* gobj)
             {
                 trophy_count = base->trophy_count;
             } else {
-                trophy_count = *gmMainLib_8015CC90();
+                trophy_count = *gmMainLib_GetTrophyCount();
             }
             if (trophy_count == 1) {
                 if ((state->x30 + state->x34) != 0.0f) {
@@ -3203,7 +3203,7 @@ void _Toy_80309404(HSD_GObj* gobj)
             {
                 trophy_count = base->trophy_count;
             } else {
-                trophy_count = *gmMainLib_8015CC90();
+                trophy_count = *gmMainLib_GetTrophyCount();
             }
             if (trophy_count > 1) {
                 tmp = state->x30;
@@ -3239,7 +3239,7 @@ void _Toy_80309404(HSD_GObj* gobj)
                             {
                                 total = base->trophy_count;
                             } else {
-                                total = *gmMainLib_8015CC90();
+                                total = *gmMainLib_GetTrophyCount();
                             }
                             display->selectedIdx = (s16) (total - 1);
                         }
@@ -3248,7 +3248,7 @@ void _Toy_80309404(HSD_GObj* gobj)
                         {
                             total = base->trophy_count;
                         } else {
-                            total = *gmMainLib_8015CC90();
+                            total = *gmMainLib_GetTrophyCount();
                         }
                         if (total > 3) {
                             s16 cur_idx = display->selectedIdx;
@@ -3265,7 +3265,7 @@ void _Toy_80309404(HSD_GObj* gobj)
                                 {
                                     cnt = base->trophy_count;
                                 } else {
-                                    cnt = *gmMainLib_8015CC90();
+                                    cnt = *gmMainLib_GetTrophyCount();
                                 }
                                 lk = cnt + cur_idx;
                                 entry = display->first_entry;
@@ -3340,7 +3340,7 @@ void _Toy_80309404(HSD_GObj* gobj)
                         {
                             total = base->trophy_count;
                         } else {
-                            total = *gmMainLib_8015CC90();
+                            total = *gmMainLib_GetTrophyCount();
                         }
                         if (display->selectedIdx >= total) {
                             display->selectedIdx = 0;
@@ -3350,7 +3350,7 @@ void _Toy_80309404(HSD_GObj* gobj)
                         {
                             total = base->trophy_count;
                         } else {
-                            total = *gmMainLib_8015CC90();
+                            total = *gmMainLib_GetTrophyCount();
                         }
                         if (total > 3) {
                             s32 cnt;
@@ -3360,7 +3360,7 @@ void _Toy_80309404(HSD_GObj* gobj)
                             {
                                 cnt = base->trophy_count;
                             } else {
-                                cnt = *gmMainLib_8015CC90();
+                                cnt = *gmMainLib_GetTrophyCount();
                             }
                             cur_idx = display->selectedIdx;
                             if ((s32) (cur_idx + 1) >= cnt) {
@@ -3377,7 +3377,7 @@ void _Toy_80309404(HSD_GObj* gobj)
                                 {
                                     cnt2 = base->trophy_count;
                                 } else {
-                                    cnt2 = *gmMainLib_8015CC90();
+                                    cnt2 = *gmMainLib_GetTrophyCount();
                                 }
                                 entry = display->last_entry->next;
                                 lk = cur_idx - cnt2;
@@ -3448,7 +3448,7 @@ void _Toy_80309404(HSD_GObj* gobj)
                         {
                             flags = base->trophy_flags;
                         } else {
-                            flags = gmMainLib_8015CC78();
+                            flags = gmMainLib_GetTrophyFlags();
                         }
 
                         if (flags[idx] & 0x8000) {
@@ -3458,7 +3458,7 @@ void _Toy_80309404(HSD_GObj* gobj)
                             {
                                 flags = base->trophy_flags;
                             } else {
-                                flags = gmMainLib_8015CC78();
+                                flags = gmMainLib_GetTrophyFlags();
                             }
                             flags += idx;
                             *flags ^= 0x8000;
@@ -3981,7 +3981,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
                     {
                         total = M2C_FIELD(base, s16*, 0x3EC);
                     } else {
-                        total = *gmMainLib_8015CC90();
+                        total = *gmMainLib_GetTrophyCount();
                     }
                     M2C_FIELD(display, s16*, 0x154) = (s16) (total - 1);
                 }
@@ -3990,7 +3990,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
                 {
                     total = M2C_FIELD(base, s16*, 0x3EC);
                 } else {
-                    total = *gmMainLib_8015CC90();
+                    total = *gmMainLib_GetTrophyCount();
                 }
                 if (total > 3) {
                     s16 cur_idx = M2C_FIELD(display, s16*, 0x154);
@@ -4005,7 +4005,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
                         {
                             cnt = M2C_FIELD(base, s16*, 0x3EC);
                         } else {
-                            cnt = *gmMainLib_8015CC90();
+                            cnt = *gmMainLib_GetTrophyCount();
                         }
                         lk = cnt;
                         lk += cur_idx;
@@ -4078,7 +4078,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
                 {
                     total = M2C_FIELD(base, s16*, 0x3EC);
                 } else {
-                    total = *gmMainLib_8015CC90();
+                    total = *gmMainLib_GetTrophyCount();
                 }
                 if (M2C_FIELD(display, s16*, 0x154) >= total) {
                     M2C_FIELD(display, s16*, 0x154) = 0;
@@ -4088,7 +4088,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
                 {
                     total = M2C_FIELD(base, s16*, 0x3EC);
                 } else {
-                    total = *gmMainLib_8015CC90();
+                    total = *gmMainLib_GetTrophyCount();
                 }
                 if (total > 3) {
                     s16 cnt;
@@ -4097,7 +4097,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
                     {
                         cnt = M2C_FIELD(base, s16*, 0x3EC);
                     } else {
-                        cnt = *gmMainLib_8015CC90();
+                        cnt = *gmMainLib_GetTrophyCount();
                     }
                     cur_idx = M2C_FIELD(display, s16*, 0x154);
                     if ((s32) (cur_idx + 1) >= cnt) {
@@ -4112,7 +4112,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
                         {
                             cnt2 = M2C_FIELD(base, s16*, 0x3EC);
                         } else {
-                            cnt2 = *gmMainLib_8015CC90();
+                            cnt2 = *gmMainLib_GetTrophyCount();
                         }
                         entry =
                             *(u8**) (M2C_FIELD(display, u8**, 0x13C) + 0x04);
@@ -4374,7 +4374,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
                 {
                     tc = base->trophy_count;
                 } else {
-                    tc = *gmMainLib_8015CC90();
+                    tc = *gmMainLib_GetTrophyCount();
                 }
                 if (tc == 0) {
                     return;
@@ -4564,7 +4564,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
                         {
                             tc = base->trophy_count;
                         } else {
-                            tc = *gmMainLib_8015CC90();
+                            tc = *gmMainLib_GetTrophyCount();
                         }
                         if (tc == 1) {
                             state->x58 = 0x961;
@@ -4594,7 +4594,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
                                 {
                                     tc2 = base->trophy_count;
                                 } else {
-                                    tc2 = *gmMainLib_8015CC90();
+                                    tc2 = *gmMainLib_GetTrophyCount();
                                 }
                                 if (display->selectedIdx >= tc2) {
                                     display->selectedIdx = 0;
@@ -4608,7 +4608,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
                                 {
                                     tc3 = base->trophy_count;
                                 } else {
-                                    tc3 = *gmMainLib_8015CC90();
+                                    tc3 = *gmMainLib_GetTrophyCount();
                                 }
                                 if (tc3 > 3) {
                                     s32 tc4;
@@ -4620,7 +4620,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
                                     {
                                         tc4 = base->trophy_count;
                                     } else {
-                                        tc4 = *gmMainLib_8015CC90();
+                                        tc4 = *gmMainLib_GetTrophyCount();
                                     }
                                     cur_trophy = display->selectedIdx;
                                     next_idx = (s32) (cur_trophy + 1);
@@ -4632,7 +4632,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
                                         {
                                             tc5 = base->trophy_count;
                                         } else {
-                                            tc5 = *gmMainLib_8015CC90();
+                                            tc5 = *gmMainLib_GetTrophyCount();
                                         }
                                         entry = display->last_entry->next;
                                         trophy_id = Toy_sbss_804D6EDC
@@ -4695,7 +4695,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
                             {
                                 tc6 = base->trophy_count;
                             } else {
-                                tc6 = *gmMainLib_8015CC90();
+                                tc6 = *gmMainLib_GetTrophyCount();
                             }
                             display->selectedIdx = (s16) (tc6 - 1);
                         }
@@ -4706,7 +4706,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
                             {
                                 tc7 = base->trophy_count;
                             } else {
-                                tc7 = *gmMainLib_8015CC90();
+                                tc7 = *gmMainLib_GetTrophyCount();
                             }
                             if (tc7 > 3) {
                                 s16 prev_trophy = display->selectedIdx;
@@ -4719,7 +4719,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
                                     {
                                         tc8 = base->trophy_count;
                                     } else {
-                                        tc8 = *gmMainLib_8015CC90();
+                                        tc8 = *gmMainLib_GetTrophyCount();
                                     }
                                     calc_idx = tc8 + display->selectedIdx;
                                     entry = display->first_entry->prev;
@@ -5047,7 +5047,7 @@ loop_check:
     {
         count = *(s16*) (toy + 0x3EC);
     } else {
-        count = *gmMainLib_8015CC90();
+        count = *gmMainLib_GetTrophyCount();
     }
 
     if (var_r26 < count) {
@@ -5060,7 +5060,7 @@ loop_done:
     {
         count = *(s16*) (toy + 0x3EC);
     } else {
-        count = *gmMainLib_8015CC90();
+        count = *gmMainLib_GetTrophyCount();
     }
 
     var_r7 = count;
@@ -5171,7 +5171,7 @@ clear_archive_loop:
             {
                 tcount = *(s16*) (toy + 0x3EC);
             } else {
-                tcount = *gmMainLib_8015CC90();
+                tcount = *gmMainLib_GetTrophyCount();
             }
             startIdx = tcount + *(s16*) (data + 0x154);
             startIdx -= 1;
@@ -5193,7 +5193,7 @@ clear_archive_loop:
             {
                 tcount2 = *(s16*) (toy + 0x3EC);
             } else {
-                tcount2 = *gmMainLib_8015CC90();
+                tcount2 = *gmMainLib_GetTrophyCount();
             }
 
             if (startIdx >= tcount2) {
@@ -5354,7 +5354,7 @@ void Toy_80310324(void)
     {
         var_r0 = toy->trophy_count;
     } else {
-        var_r0 = *gmMainLib_8015CC90();
+        var_r0 = *gmMainLib_GetTrophyCount();
     }
 
     if (var_r0 != 0) {
@@ -5371,7 +5371,7 @@ void Toy_80310324(void)
         {
             flags = toy->trophy_flags;
         } else {
-            flags = gmMainLib_8015CC78();
+            flags = gmMainLib_GetTrophyFlags();
         }
 
         if (flags[idx] & 0x8000) {
@@ -5383,7 +5383,7 @@ void Toy_80310324(void)
             {
                 flags = toy->trophy_flags;
             } else {
-                flags = gmMainLib_8015CC78();
+                flags = gmMainLib_GetTrophyFlags();
             }
 
             flags += idx;
@@ -5444,7 +5444,7 @@ void Toy_80310660(s32 arg0)
     {
         idx = *(s16*) (state + 0x3EC);
     } else {
-        idx = *gmMainLib_8015CC90();
+        idx = *gmMainLib_GetTrophyCount();
     }
 
     if (idx != 0) {
@@ -5456,7 +5456,7 @@ void Toy_80310660(s32 arg0)
         {
             ptr = (u16*) (state + 0x19E);
         } else {
-            ptr = gmMainLib_8015CC78();
+            ptr = gmMainLib_GetTrophyFlags();
         }
 
         if (ptr[idx] & 0x8000) {
@@ -5467,7 +5467,7 @@ void Toy_80310660(s32 arg0)
             {
                 ptr = (u16*) (state + 0x19E);
             } else {
-                ptr = gmMainLib_8015CC78();
+                ptr = gmMainLib_GetTrophyFlags();
             }
             ptr += idx;
             *ptr ^= 0x8000;
@@ -5492,7 +5492,7 @@ void Toy_80310660(s32 arg0)
         {
             idx = *(s16*) (state + 0x3EC);
         } else {
-            idx = *gmMainLib_8015CC90();
+            idx = *gmMainLib_GetTrophyCount();
         }
 
         if (idx != 0) {
@@ -5916,8 +5916,8 @@ void Toy_80311680(void)
     s16 temp_r5;
     s32 temp_r0_2;
 
-    var_r29 = gmMainLib_8015CC78();
-    temp_r31 = gmMainLib_8015CC84();
+    var_r29 = gmMainLib_GetTrophyFlags();
+    temp_r31 = gmMainLib_GetTrophyCategoryFlags();
     Toy_80311960();
     var_r28 = 0;
     do {
@@ -5934,7 +5934,7 @@ void Toy_80311680(void)
         var_r0 = 1;
     check_var:
         if (var_r0 != 0) {
-            temp_r3 = gmMainLib_8015CC90();
+            temp_r3 = gmMainLib_GetTrophyCount();
             temp_r5 = *temp_r3;
             temp_r5 = temp_r5 + 1;
             *temp_r3 = temp_r5;
@@ -6002,8 +6002,8 @@ void Toy_80311960(void)
     int i;
 
     base = (u8*) &_Toy_804A26B8;
-    save_data = gmMainLib_8015CC78();
-    save_data2 = gmMainLib_8015CC84();
+    save_data = gmMainLib_GetTrophyFlags();
+    save_data2 = gmMainLib_GetTrophyCategoryFlags();
 
     for (i = 0; i < 0x125; i++) {
         save_data[i] = 0;
@@ -6016,7 +6016,7 @@ void Toy_80311960(void)
     ((u16*) base)[0x1F4] = 0;
     ((u16*) base)[0x1F5] = 0;
     ((Toy26B8*) base)->x197 = 0;
-    *gmMainLib_8015CC90() = 0;
+    *gmMainLib_GetTrophyCount() = 0;
     ((u16*) base)[0x1F6] = 0;
 }
 
@@ -6091,7 +6091,7 @@ void Toy_OnEnter_80311AB0(void* arg0)
     {
         count = *(s16*) (base + 0x3EC);
     } else {
-        count = *gmMainLib_8015CC90();
+        count = *gmMainLib_GetTrophyCount();
     }
     if (*selp > count) {
     reset_selection:
@@ -6245,7 +6245,7 @@ void Toy_OnInit_803122D0(void)
     if (gm_IsCurrently1PMode() || gm_GetCurrentGameMode() == GM_TOY_LOTTERY) {
         targetPtr = &userData->x19A;
     } else {
-        targetPtr = gmMainLib_8015CC84();
+        targetPtr = gmMainLib_GetTrophyCategoryFlags();
     }
 
     *(u16*) targetPtr |= 4;
@@ -6264,8 +6264,8 @@ void Toy_8031234C(s32 arg0)
     u16* ptr;
     s32 j;
 
-    saveData = gmMainLib_8015CC78();
-    stateData = gmMainLib_8015CC84();
+    saveData = gmMainLib_GetTrophyFlags();
+    stateData = gmMainLib_GetTrophyCategoryFlags();
 
     if (arg0 != 0) {
         s32 category;
@@ -6298,12 +6298,12 @@ void Toy_8031234C(s32 arg0)
             }
         }
 
-        *gmMainLib_8015CC90() = *(s16*) (toy + 0x3EC);
+        *gmMainLib_GetTrophyCount() = *(s16*) (toy + 0x3EC);
     } else {
         *(u16*) (toy + 0x19A) = *stateData;
         *(u16*) (toy + 0x19C) = 0;
         memcpy(toy + 0x19E, saveData, 0x24A);
-        *(s16*) (toy + 0x3EC) = *gmMainLib_8015CC90();
+        *(s16*) (toy + 0x3EC) = *gmMainLib_GetTrophyCount();
     }
 }
 
@@ -6314,8 +6314,8 @@ void Toy_803124BC(void)
     u16* table2;
     s32 i;
 
-    table1 = gmMainLib_8015CC78();
-    table2 = gmMainLib_8015CC84();
+    table1 = gmMainLib_GetTrophyFlags();
+    table2 = gmMainLib_GetTrophyCategoryFlags();
 
     if (_Toy_sbss_804D6ED0 == NULL) {
         _Toy_sbss_804D6ED0 = lbArchive_LoadSymbols(
@@ -6365,8 +6365,8 @@ void Toy_8031263C(void)
     u16* table2;
 
     ((TyModeState*) Toy_804A284C)->x4 = 0;
-    table1 = gmMainLib_8015CC78();
-    table2 = gmMainLib_8015CC84();
+    table1 = gmMainLib_GetTrophyFlags();
+    table2 = gmMainLib_GetTrophyCategoryFlags();
 
     if (_Toy_sbss_804D6ED0 == NULL) {
         _Toy_sbss_804D6ED0 = lbArchive_LoadSymbols(

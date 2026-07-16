@@ -484,7 +484,7 @@ void gm_801A9630(void)
 
     // Character display setup
     gm_801A9094();
-    gm_801A4B90();
+    gm_GetCurrentSceneEnterData();
 
     // Character JObj GObj 3
     gobj = GObj_Create(0xE, 0xF, 0);

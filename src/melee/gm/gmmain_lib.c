@@ -103,19 +103,19 @@ struct FighterData* GetPersistentFighterData(s32 arg0)
     return &base[arg0];
 }
 
-void* gmMainLib_8015CC78(void)
+void* gmMainLib_GetTrophyFlags(void)
 {
-    return &gmMainLib_8015CC40()->x1CD4;
+    return gmMainLib_8015CC40()->trophy_flags;
 }
 
-void* gmMainLib_8015CC84(void)
+void* gmMainLib_GetTrophyCategoryFlags(void)
 {
-    return &gmMainLib_8015CC40()->x1CD2;
+    return &gmMainLib_8015CC40()->trophy_category_flags;
 }
 
-short* gmMainLib_8015CC90(void)
+s16* gmMainLib_GetTrophyCount(void)
 {
-    return &gmMainLib_8015CC40()->x1CD0;
+    return &gmMainLib_8015CC40()->trophy_count;
 }
 
 struct NameTagData* GetPersistentNameData(s32 arg0)
@@ -175,7 +175,7 @@ void* gmMainLib_GetBonusMatchTotal(void)
     return &gmMainLib_8015CC40()->x1A24;
 }
 
-void* gmMainLib_8015CD5C(void)
+void* gmMainLib_GetStaminaMatchTotal(void)
 {
     return &gmMainLib_8015CC40()->x1A28;
 }
@@ -1235,7 +1235,7 @@ void gmMainLib_8015F600(int arg0, int arg1)
             j++;
         } while (j < 25);
 
-        memzero(&gmMainLib_804D3EE0->thing.x1CD0, 0x25C);
+        memzero(&gmMainLib_804D3EE0->thing.trophy_count, 0x25C);
         Toy_80311960();
 
         if (arg1 == 0) {

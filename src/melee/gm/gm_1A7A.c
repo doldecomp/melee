@@ -92,7 +92,7 @@ void gm_801A7B00(void)
     HSD_JObjAnimAll(jobj);
     HSD_GObj_SetupProc(gobj, fn_801A7A44, 0x17);
 
-    gm_801A4B90();
+    gm_GetCurrentSceneEnterData();
 
     // Character display GObj
     gobj = GObj_Create(0xE, 0xF, 0);

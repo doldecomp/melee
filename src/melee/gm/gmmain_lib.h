@@ -13,9 +13,9 @@
 /* 15CC4C */ void* gmMainLib_8015CC4C(void);
 /* 15CC58 */ struct gmm_x1CB0* gmMainLib_8015CC58(void);
 /* 15CC64 */ struct FighterData* GetPersistentFighterData(s32);
-/* 15CC78 */ void* gmMainLib_8015CC78(void);
-/* 15CC84 */ void* gmMainLib_8015CC84(void);
-/* 15CC90 */ short* gmMainLib_8015CC90(void);
+/* 15CC78 */ void* gmMainLib_GetTrophyFlags(void);
+/* 15CC84 */ void* gmMainLib_GetTrophyCategoryFlags(void);
+/* 15CC90 */ s16* gmMainLib_GetTrophyCount(void);
 /* 15CC9C */ struct NameTagData* GetPersistentNameData(s32);
 /* 15CCE4 */ void* gmMainLib_8015CCE4(void);
 /* 15CCF0 */ u32* gmMainLib_8015CCF0(void);
@@ -27,7 +27,7 @@
 /* 15CD38 */ void* gmMainLib_GetStockMatchTotal(void);
 /* 15CD44 */ void* gmMainLib_GetCoinMatchTotal(void);
 /* 15CD50 */ void* gmMainLib_GetBonusMatchTotal(void);
-/* 15CD5C */ void* gmMainLib_8015CD5C(void);
+/* 15CD5C */ void* gmMainLib_GetStaminaMatchTotal(void);
 /* 15CD68 */ void* gmMainLib_GetMatchResetCounter(void);
 /* 15CD74 */ void* gmMainLib_GetSingleplayerTime(void);
 /* 15CD80 */ void* gmMainLib_8015CD80(void);

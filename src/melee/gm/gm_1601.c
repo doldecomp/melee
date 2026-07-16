@@ -1399,7 +1399,7 @@ void gm_8016260C(u8 arg0, u8 arg1)
         return;
     }
     if (gm_GetCurrentGameMode() == GM_STAMINA_VS) {
-        counter = gmMainLib_8015CD5C();
+        counter = gmMainLib_GetStaminaMatchTotal();
     } else {
         switch ((s32) arg0) {
         case 0:
@@ -1441,7 +1441,7 @@ u32 gm_GetVsPlayMatchTotal(void)
               *(u32*) gmMainLib_GetStockMatchTotal() +
               *(u32*) gmMainLib_GetCoinMatchTotal() +
               *(u32*) gmMainLib_GetBonusMatchTotal() +
-              *(u32*) gmMainLib_8015CD5C();
+              *(u32*) gmMainLib_GetStaminaMatchTotal();
     return tmp;
 }
 
