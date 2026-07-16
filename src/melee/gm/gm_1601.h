@@ -21,8 +21,8 @@
 /* 160474 */ bool gm_80160474(CharacterKind, GameModeKind);
 /* 1604DC */ char* gm_801604DC(CharacterKind, GameModeKind);
 /* 160564 */ char* gm_80160564(CharacterKind, GameModeKind);
-/* 1605EC */ u8 gm_SelKindToUnlockIndex(s32);
-/* 160638 */ s8 gm_80160638(s32);
+/* 1605EC */ u8 gm_SelKindToUnlockIndex(SelectableCharacterKind);
+/* 160638 */ s8 gm_CKindToUnlockIndex(CharacterKind);
 /* 1606A8 */ u8 gm_GetCKindByUnlockIndex(int);
 /* 160710 */ u8 fn_80160710(int);
 /* 16075C */ int gm_8016075C(SelectableCharacterKind);

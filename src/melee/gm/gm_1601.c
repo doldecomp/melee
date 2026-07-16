@@ -551,7 +551,7 @@ char* gm_80160564(CharacterKind ckind, GameModeKind mode)
     return Toy_8030813C(var_r3, mode) + 0x24;
 }
 
-u8 gm_SelKindToUnlockIndex(s32 selkind)
+u8 gm_SelKindToUnlockIndex(SelectableCharacterKind selkind)
 {
     int i;
     for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
@@ -562,7 +562,7 @@ u8 gm_SelKindToUnlockIndex(s32 selkind)
     return NUM_UNLOCKABLE_CHARACTERS;
 }
 
-s8 gm_80160638(s32 ckind)
+s8 gm_CKindToUnlockIndex(CharacterKind ckind)
 {
     return gm_SelKindToUnlockIndex(gm_CKindToSelKind(ckind));
 }
@@ -2381,8 +2381,8 @@ int gm_801647F8(u8 arg0)
 bool gm_IsCKindUnlocked(u8 ckind)
 {
     u16* unlocked_chars_bitmask = gmMainLib_GetUnlockedCharactersBitmaskPtr();
-    u8 var = ckind_to_selkind_map[ckind];
-    u8 unlock_bit = gm_SelKindToUnlockIndex(var);
+    u8 selkind = ckind_to_selkind_map[ckind];
+    u8 unlock_bit = gm_SelKindToUnlockIndex(selkind);
 
     if (unlock_bit == NUM_UNLOCKABLE_CHARACTERS ||
         (*unlocked_chars_bitmask & (1LL << unlock_bit)))

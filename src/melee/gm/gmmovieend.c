@@ -38,7 +38,7 @@ void gm_801A6254(GameScene* arg0)
     {
         gm_UnlockCharacter(temp_r31->x4);
     } else {
-        temp_ret = gm_80160638(temp_r31->x4);
+        temp_ret = gm_CKindToUnlockIndex(temp_r31->x4);
         gmMainLib_8015DB2C(temp_ret);
     }
     gm_80173EEC();

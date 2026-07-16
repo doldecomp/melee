@@ -116,7 +116,7 @@ void gm_801BFBA8(GameScene* arg0)
     {
         gm_UnlockCharacter((s32) temp_r31->x4);
     } else {
-        gmMainLib_8015DB2C(gm_80160638((s32) temp_r31->x4));
+        gmMainLib_8015DB2C(gm_CKindToUnlockIndex((s32) temp_r31->x4));
     }
     gm_80173EEC();
     gm_80172898(0x100U);

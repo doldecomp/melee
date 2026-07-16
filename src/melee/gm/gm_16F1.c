@@ -1849,7 +1849,7 @@ static const struct lbl_803B7AD0_t {
 static inline const struct lbl_803B7AD0_t* inline2(u8 arg0)
 {
     int i;
-    u8 temp_r3 = gm_80160638(arg0);
+    u8 temp_r3 = gm_CKindToUnlockIndex(arg0);
     const struct lbl_803B7AD0_t* tmp = lbl_803B7AD0;
     for (i = 0; i < 0xB; i++) {
         if (temp_r3 == tmp[i].x0) {
@@ -1864,7 +1864,8 @@ u8 gm_80172CC0(u8 arg0, u8 arg1)
     int var_r0;
     const struct lbl_803B7AD0_t* var_r31 = inline2(arg0);
 
-    var_r0 = var_r31->x1 - var_r31->x2 * gmMainLib_8015DB6C(gm_80160638(arg0));
+    var_r0 = var_r31->x1 -
+             var_r31->x2 * gmMainLib_8015DB6C(gm_CKindToUnlockIndex(arg0));
     if (var_r0 < 0) {
         var_r0 = 0;
     } else if (var_r0 > 9) {
