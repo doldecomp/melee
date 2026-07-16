@@ -255,9 +255,7 @@ void itSScope_Logic21_Thrown(Item_GObj* gobj)
 
 void itSscope_UnkMotion3_Phys(Item_GObj* gobj)
 {
-    ItemAttr* temp_r4 = (GET_ITEM(gobj))->xCC_item_attr;
-    it_80272860(gobj, temp_r4->x10_fall_speed, temp_r4->x14_fall_speed_max);
-    it_80274658(gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
 }
 
 bool itSScope_Logic21_DmgDealt(Item_GObj* gobj)

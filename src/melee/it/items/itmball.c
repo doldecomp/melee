@@ -136,10 +136,7 @@ void itMball_Thrown(Item_GObj* arg0)
 
 void itMball_Motion3_Phys(Item_GObj* arg0)
 {
-    Item* item = GET_ITEM(arg0);
-    it_80272860(arg0, item->xCC_item_attr->x10_fall_speed,
-                item->xCC_item_attr->x14_fall_speed_max);
-    it_80274658(arg0, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(arg0);
 }
 
 bool itMball_Motion3_Coll(Item_GObj* arg0)
