@@ -8,7 +8,6 @@
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
-#include "ft/ftlib_inline.h"
 #include "ft/inlines.h"
 
 void ftCo_800CD140(Fighter_GObj* gobj, int arg1, int arg2, int arg3,

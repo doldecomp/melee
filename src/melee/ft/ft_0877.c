@@ -2,7 +2,7 @@
 
 #include "ftcommon.h"
 #include "ftdevice.h"
-#include "ftlib_inline.h"
+#include "inlines.h"
 
 #include "ft/fighter.h"
 #include "ft/types.h"

@@ -60,7 +60,7 @@ u8 ftLib_80086BE0(HSD_GObj*);
 void ftLib_80086BEC(HSD_GObj*, Vec3*);
 
 /// @returns A fighter action state ID.
-enum_t ftLib_80086C0C(HSD_GObj*);
+enum_t ftLib_GetMotionId(HSD_GObj*);
 
 void ftLib_80086C18(HSD_GObj*, s32, s32);
 void ftLib_80086C9C(s32, s32);

@@ -52,7 +52,7 @@
 /* 086BB4 */ bool ftLib_80086BB4(HSD_GObj*);
 /* 086BE0 */ u8 ftLib_80086BE0(HSD_GObj*);
 /* 086BEC */ void ftLib_80086BEC(HSD_GObj*, Vec3*);
-/* 086C0C */ enum_t ftLib_80086C0C(HSD_GObj*);
+/* 086C0C */ enum_t ftLib_GetMotionId(HSD_GObj*);
 /* 086C18 */ void ftLib_80086C18(HSD_GObj*, s32, s32);
 /* 086C9C */ void ftLib_80086C9C(s32, s32);
 /* 086D40 */ void ftLib_80086D40(HSD_GObj*, s32, s32);

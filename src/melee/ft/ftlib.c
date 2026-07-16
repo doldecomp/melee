@@ -1,3 +1,5 @@
+#define MELEE_FT_FTLIB_C
+
 #include "ftlib.h"
 
 #include "cm/camera.h"
@@ -576,7 +578,7 @@ void ftLib_80086BEC(HSD_GObj* gobj, Vec3* v)
     *v = fp->pos_delta;
 }
 
-enum_t ftLib_80086C0C(HSD_GObj* gobj)
+enum_t ftLib_GetMotionId(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->motion_id;
@@ -681,7 +683,7 @@ float ftLib_80086F80(HSD_GObj* gobj)
 
 bool ftLib_80086FA8(HSD_GObj* gobj)
 {
-    switch (ftLib_80086C0C(gobj)) {
+    switch (ftLib_GetMotionId(gobj)) {
     case ftCo_MS_SwordSwing1:
     case ftCo_MS_SwordSwing3:
     case ftCo_MS_SwordSwing4:
@@ -787,7 +789,7 @@ void ftLib_800871A8(Fighter_GObj* gobj, Item_GObj* item_gobj)
 
 bool ftLib_80087284(HSD_GObj* gobj)
 {
-    if (ftLib_80086C0C(gobj) >= ftCo_MS_LightThrowF4) {
+    if (ftLib_GetMotionId(gobj) >= ftCo_MS_LightThrowF4) {
         return true;
     }
 
@@ -831,7 +833,7 @@ s32 ftLib_8008731C(HSD_GObj* gobj)
 
 bool ftLib_8008732C(HSD_GObj* gobj)
 {
-    FtMotionId msid = ftLib_80086C0C(gobj);
+    FtMotionId msid = ftLib_GetMotionId(gobj);
     if (msid >= ftCo_MS_DeadDown && msid <= ftCo_MS_DeadUpFallHitCameraIce) {
         return true;
     }
@@ -841,7 +843,7 @@ bool ftLib_8008732C(HSD_GObj* gobj)
 
 bool ftLib_80087354(HSD_GObj* gobj)
 {
-    FtMotionId msid = ftLib_80086C0C(gobj);
+    FtMotionId msid = ftLib_GetMotionId(gobj);
     if (msid >= ftCo_MS_DeadUp && msid <= ftCo_MS_DeadUpFallHitCameraIce) {
         return true;
     }
@@ -851,7 +853,7 @@ bool ftLib_80087354(HSD_GObj* gobj)
 
 bool ftLib_8008737C(HSD_GObj* gobj)
 {
-    FtMotionId msid = ftLib_80086C0C(gobj);
+    FtMotionId msid = ftLib_GetMotionId(gobj);
     if (msid >= ftCo_MS_DeadUpStar && msid <= ftCo_MS_DeadUpStarIce) {
         return true;
     }
@@ -861,7 +863,7 @@ bool ftLib_8008737C(HSD_GObj* gobj)
 
 bool ftLib_800873A4(HSD_GObj* gobj)
 {
-    FtMotionId msid = ftLib_80086C0C(gobj);
+    FtMotionId msid = ftLib_GetMotionId(gobj);
     if (msid >= ftCo_MS_DeadUpFall && msid <= ftCo_MS_DeadUpFallHitCameraIce) {
         return true;
     }
@@ -871,7 +873,7 @@ bool ftLib_800873A4(HSD_GObj* gobj)
 
 bool ftLib_800873CC(HSD_GObj* gobj)
 {
-    FtMotionId msid = ftLib_80086C0C(gobj);
+    FtMotionId msid = ftLib_GetMotionId(gobj);
     if (msid >= ftCo_MS_Rebirth && msid <= ftCo_MS_RebirthWait) {
         return true;
     }
@@ -881,7 +883,7 @@ bool ftLib_800873CC(HSD_GObj* gobj)
 
 bool ftLib_800873F4(HSD_GObj* gobj)
 {
-    FtMotionId msid = ftLib_80086C0C(gobj);
+    FtMotionId msid = ftLib_GetMotionId(gobj);
     if (msid >= ftCo_MS_Entry && msid <= ftCo_MS_EntryEnd) {
         return true;
     }

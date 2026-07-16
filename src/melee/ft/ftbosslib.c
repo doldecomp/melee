@@ -246,7 +246,7 @@ enum_t ftBossLib_8015C44C(FighterKind kind)
 
     if (gobj != NULL) {
         // DataOffset_MotionStateLoad
-        return ftLib_80086C0C(gobj);
+        return ftLib_GetMotionId(gobj);
     } else {
         return ftCo_MS_DeadDown;
     }

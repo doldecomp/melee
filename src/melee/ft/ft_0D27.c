@@ -39,7 +39,6 @@
 #include <melee/ft/ft_0CDD.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftchangeparam.h>
-#include <melee/ft/ftlib_inline.h>
 #include <melee/ft/ftmaterial.h>
 #include <melee/ft/ftmetal.h>
 #include <melee/gm/gm_unsplit.h>
