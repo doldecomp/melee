@@ -143,10 +143,7 @@ void it_802CFAFC(Item_GObj* gobj)
 
 void it_802CFB78(Item_GObj* gobj)
 {
-    Item* it = gobj->user_data;
-    it_802762BC(it);
-    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-    Item_SetEffectHitlagCallbacks(it);
+    Item_EnterStateWithEffectHitlag(gobj, 1);
 }
 
 bool itRaikou_UnkMotion1_Anim(Item_GObj* gobj)

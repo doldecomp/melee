@@ -199,10 +199,7 @@ bool itKamex_UnkMotion2_Coll(Item_GObj* gobj)
 
 void it_802CAA40(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    it_802762BC(ip);
-    Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
-    Item_SetEffectHitlagCallbacks(ip);
+    Item_EnterStateWithEffectHitlag(gobj, 3);
 }
 
 bool itKamex_UnkMotion3_Anim(Item_GObj* gobj)

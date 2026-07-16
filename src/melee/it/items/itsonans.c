@@ -189,10 +189,7 @@ bool itSonans_UnkMotion1_Coll(Item_GObj* gobj)
 
 void it_802CDAA8(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    it_802762BC(ip);
-    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
-    Item_SetEffectHitlagCallbacks(ip);
+    Item_EnterStateWithEffectHitlag(gobj, 2);
 }
 
 bool itSonans_UnkMotion2_Anim(Item_GObj* gobj)

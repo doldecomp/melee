@@ -133,10 +133,7 @@ void itMaril_Logic28_Spawned(Item_GObj* gobj)
 
 void it_802D68FC(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    it_802762BC(ip);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    Item_SetEffectHitlagCallbacks(ip);
+    Item_EnterStateWithEffectHitlag(gobj, 0);
     it_80273670(gobj, 0, 0.0f);
     it_8026BDB4(gobj);
 }

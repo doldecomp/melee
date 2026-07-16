@@ -107,12 +107,7 @@ bool itFire_UnkMotion2_Coll(Item_GObj* gobj)
 
 void it_802CC944(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-
-    it_802762BC(ip);
-    Item_80268E5C(gobj, 0, 2);
-
-    Item_SetEffectHitlagCallbacks(ip);
+    Item_EnterStateWithEffectHitlag(gobj, 0);
     it_80273670(gobj, 0, 0.0f);
 }
 

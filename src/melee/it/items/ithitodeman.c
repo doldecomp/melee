@@ -336,10 +336,7 @@ void it_802D4B50(Item_GObj* gobj) {}
 
 void it_802D4B54(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    it_802762BC(ip);
-    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
-    Item_SetEffectHitlagCallbacks(ip);
+    Item_EnterStateWithEffectHitlag(gobj, 2);
 }
 
 bool itHitodeman_UnkMotion2_Anim(Item_GObj* gobj)

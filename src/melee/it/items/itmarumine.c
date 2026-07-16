@@ -369,11 +369,7 @@ bool itMarumine_UnkMotion6_Coll(Item_GObj* gobj)
 
 void it_802D1320(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-
-    it_802762BC(ip);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    Item_SetEffectHitlagCallbacks(ip);
+    Item_EnterStateWithEffectHitlag(gobj, 0);
 }
 
 bool itMarumine_UnkMotion0_Anim(Item_GObj* gobj)
