@@ -144,10 +144,7 @@ void itEvYoshiEgg_Logic42_Thrown(Item_GObj* gobj)
 
 void itEvyoshiegg_UnkMotion3_Phys(Item_GObj* gobj)
 {
-    ItemAttr* attrs = GET_ITEM(gobj)->xCC_item_attr;
-
-    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
-    it_80274658(gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
 }
 
 bool itEvyoshiegg_UnkMotion3_Coll(Item_GObj* gobj)

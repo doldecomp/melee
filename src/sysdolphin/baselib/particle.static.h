@@ -62,6 +62,26 @@ struct ParticleConsoleState {
 };
 STATIC_ASSERT(sizeof(struct ParticleConsoleState) == 0x28);
 
+/// Host-IO USB file transfer messages, kept in one table (retail data object
+/// at 0x8040A9D0, size 0x130): the code addresses individual messages as
+/// field offsets from the table base (e.g. +0x20/+0x90/+0xB8 in
+/// #hsd_80393A5C), which independent string literals cannot produce.
+struct ParticleUsbMessages {
+    /* 0x00 */ char loading[0x20];
+    /* 0x20 */ char cannot_open[0x14];
+    /* 0x34 */ char cannot_get_files_stat[0x18];
+    /* 0x4C */ char file_too_large[0x18];
+    /* 0x64 */ char cannot_allocate[0x18];
+    /* 0x7C */ char cannot_load[0x14];
+    /* 0x90 */ char done[0x28];
+    /* 0xB8 */ char cannot_save[0x14];
+    /* 0xCC */ char searching[0x20];
+    /* 0xEC */ char cannot_get_dir_stat[0x18];
+    /* 0x104 */ char dir_too_large[0x14];
+    /* 0x118 */ char cannot_use_usb[0x18];
+};
+STATIC_ASSERT(sizeof(struct ParticleUsbMessages) == 0x130);
+
 // .sbss
 
 static int (**psCallback)(HSD_Particle* part);
