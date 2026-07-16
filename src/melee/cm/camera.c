@@ -1295,9 +1295,10 @@ void Camera_8002A768(CameraTransformState* transform, s32 arg1)
         } else if (var_r31 & 2) {
             cam_correction.y = bottom_overlap;
         }
-        cam_correction.x *= -1.0f;
-        cam_correction.y *= -1.0f;
-        cam_correction.z *= -1.0f;
+        temp_f1 = 1.0f;
+        cam_correction.x *= temp_f1;
+        cam_correction.y *= temp_f1;
+        cam_correction.z *= temp_f1;
         lbVector_Add(&transform->target_position, &cam_correction);
         lbVector_Add(&transform->target_interest, &cam_correction);
     }
