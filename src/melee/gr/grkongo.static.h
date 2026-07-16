@@ -30,7 +30,7 @@ typedef struct grKg_SplineChoiceList {
     s32 terminator;
 } grKg_SplineChoiceList;
 
-extern const grKg_SplineChoiceList grKg_SplineChoices;
+extern const grKg_SplineChoiceList grKg_803B7FD4;
 
 static struct {
     f32 unk0;

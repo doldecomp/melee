@@ -205,7 +205,7 @@ typedef struct grBb_StageData {
 
 static const Vec3 grBb_803B8108 = { -1.0F, 0.0F, 0.0F };
 static const Vec3 grBb_803B8114 = { 56.0F, 40.0F, 24.0F };
-/* 3B8120 */ static const grBb_ItemKindList grBb_CarItemKinds = {
+/* 3B8120 */ static const grBb_ItemKindList grBb_803B8120 = {
     { It_Kind_Sword, It_Kind_S_Scope, It_Kind_RabbitC, It_Kind_F_Flower,
       It_Kind_Kusudama }
 };
@@ -1383,7 +1383,7 @@ void grBigBlue_801E8A1C(int idx)
     ItemKind valid[5];
     HSD_JObj* platform = gp->gv.bigblue.xD4[idx];
 
-    candidates = grBb_CarItemKinds;
+    candidates = grBb_803B8120;
     spawn.x0 = NULL;
     spawn.x4 = NULL;
 

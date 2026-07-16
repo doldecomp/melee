@@ -238,7 +238,7 @@ typedef struct grCastle_CallbackTable2 {
 /// struct so grCastle_801CFBD4 copies them with a struct assignment, which
 /// reproduces the original inline block-copy codegen (exact match; verified
 /// no regression in any other symbol of this unit).
-static const grCastle_CallbackTable grCastle_DmgReceivedCallbacks = { {
+static const grCastle_CallbackTable grCs_803B7F28 = { {
     grCastle_801D0550,
     grCastle_801D059C,
     grCastle_801D05E8,
@@ -248,7 +248,7 @@ static const grCastle_CallbackTable grCastle_DmgReceivedCallbacks = { {
 
 /// Per-object touched callbacks, dispatched through the yaku item's x1C slot
 /// (it_802E6AEC -> it_802E7054 with item->toucher).
-static const grCastle_CallbackTable2 grCastle_TouchedCallbacks = { {
+static const grCastle_CallbackTable2 grCs_803B7F3C = { {
     grCastle_801D06CC,
     grCastle_801D0744,
     grCastle_801D07BC,
@@ -1385,6 +1385,7 @@ void grCastle_801CF308(Ground_GObj* gobj)
 }
 
 /// Preserve the original .sdata2 placement of the double-precision 0.5.
+/// @todo Remove this ordering anchor.
 static void grCastle_ForceSdata2Order(void)
 {
     (void) 0.5;
@@ -1628,8 +1629,8 @@ s32 grCastle_801CFBD4(Ground_GObj* gobj, s32 arg1)
                             if (eff_a != NULL &&
                                 !(HSD_JObjGetFlags(eff_a) & 0x10))
                             {
-                                cb1 = grCastle_DmgReceivedCallbacks;
-                                cb2 = grCastle_TouchedCallbacks;
+                                cb1 = grCs_803B7F28;
+                                cb2 = grCs_803B7F3C;
                                 gp->gv.castle10.x10C[i] =
                                     (u32) grMaterial_801C8CFC(
                                         0, 2, gp, target, NULL,

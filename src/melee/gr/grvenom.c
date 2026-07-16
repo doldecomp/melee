@@ -46,7 +46,7 @@ typedef struct grVe_Data {
 static struct {
     S16Vec3 links[9];
     s16 padding;
-} grVe_CollLinks = {
+} grVe_803E5348 = {
     {
         { 0, 5, 0 },
         { 1, 5, 0 },
@@ -56,11 +56,11 @@ static struct {
     },
 };
 
-/// Per-Arwing group indices into #grVe_ArwingJoints (cf. Corneria's
+/// Per-Arwing group indices into #grVe_803E5680 (cf. Corneria's
 /// grCn_803E1D68.arwing_group).
-static int grVe_ArwingGroups[3] = { 0 };
+static int grVe_803E5380[3] = { 0 };
 
-StageCallbacks grVe_Callbacks[16] = {
+StageCallbacks grVe_803E538C[16] = {
     {
         grVenom_80203F98,
         grVenom_80203FC4,
@@ -175,9 +175,9 @@ StageCallbacks grVe_Callbacks[16] = {
     },
 };
 
-StageData grVe_StageData = {
+StageData grVe_803E54CC = {
     VENOM,
-    grVe_Callbacks,
+    grVe_803E538C,
     "/GrVe",
     grVenom_80203B18,
     grVenom_80203B14,
@@ -187,7 +187,7 @@ StageData grVe_StageData = {
     grVenom_80206D74,
     grVenom_80206D7C,
     0x00000001,
-    grVe_CollLinks.links,
+    grVe_803E5348.links,
     5,
 };
 
@@ -201,7 +201,7 @@ typedef struct grVe_ExtData {
     s32 x338[5];
 } grVe_ExtData;
 
-#define VE_DATA ((grVe_ExtData*) &grVe_CollLinks)
+#define VE_DATA ((grVe_ExtData*) &grVe_803E5348)
 
 typedef struct grVe_TimingData {
     f32 x0;
@@ -453,7 +453,7 @@ void grVenom_80203B18(void)
     HSD_LObj* next;
     PAD_STACK(0xC);
 
-    data = (s32*) &grVe_CollLinks;
+    data = (s32*) &grVe_803E5348;
     grVe_804D6A30 = Ground_801C49F8();
     grVenom_80203EAC(4);
     stage_info.unk8C.b4 = 0;
@@ -578,7 +578,7 @@ Ground_GObj* grVenom_80203EAC(int gobj_id)
 {
     Ground_GObj* gobj;
     Ground* gp;
-    grVe_Data* base = (grVe_Data*) &grVe_CollLinks;
+    grVe_Data* base = (grVe_Data*) &grVe_803E5348;
     StageCallbacks* callbacks =
         &((StageCallbacks*) ((char*) base + 0x44))[gobj_id];
 
@@ -609,7 +609,7 @@ Ground_GObj* grVenom_80203EAC(int gobj_id)
 /// Per-state map animation ids, read via the stage data base pointer
 /// (`base[state + 0x7A]`, see #grVenom_802053B0); trailing entries are
 /// the zero/3/6 words observed in the reference object.
-static int grVe_AnimIds[53] = {
+static int grVe_803E5530[53] = {
     -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0, 0, 0, 0, 0, 0,
     0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0,
     0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  3, 3, 3, 3, 6,
@@ -1086,13 +1086,13 @@ void grVenom_80204EFC(Ground_GObj* arg)
 void grVenom_80204F1C(Ground_GObj* arg) {}
 
 /// Error message read through the stage data base pointer in
-/// #grVenom_80204F20 (`base + 0x2BC`); sits between #grVe_AnimIds and
+/// #grVenom_80204F20 (`base + 0x2BC`); sits between #grVe_803E5530 and
 /// the TU's pooled assert strings in the reference object.
-static char grVe_UserDataErrorMsg[] = "arwin:user data error\n";
+static char grVe_803E5604[] = "arwin:user data error\n";
 
 void grVenom_80204F20(Ground_GObj* arg0)
 {
-    s32* base = (s32*) &grVe_CollLinks;
+    s32* base = (s32*) &grVe_803E5348;
     Ground* gp = arg0->user_data;
     HSD_JObj* jobj = arg0->hsd_obj;
     HSD_GObj* other;
@@ -1165,7 +1165,7 @@ void grVenom_802052E0(Ground_GObj* gobj, Vec3* pos)
 {
     u8* new_var2;
     Vec3 jobj_pos;
-    s32* spawn_table = (s32*) &grVe_CollLinks;
+    s32* spawn_table = (s32*) &grVe_803E5348;
     Ground* gp;
     HSD_JObj* jobj;
     s32* new_var;
@@ -1210,7 +1210,7 @@ void grVenom_802053B0(Ground_GObj* gobj)
     PAD_STACK(0x10);
 
     gp = gobj->user_data;
-    base = (s32*) &grVe_CollLinks;
+    base = (s32*) &grVe_803E5348;
     jobj = gobj->hsd_obj;
     ptr = base + gp->gv.venom.xC8;
 
@@ -1300,13 +1300,13 @@ void grVenom_802053B0(Ground_GObj* gobj)
 void grVenom_802056AC(Ground_GObj* arg) {}
 
 /// Per-state animation ids (cf. Corneria's grCn_803E214C).
-static int grVe_StateAnims[10] = { -1, -1, 1, 0, 2, 2, 4, 4, 5, 5 };
+static int grVe_803E5644[10] = { -1, -1, 1, 0, 2, 2, 4, 4, 5, 5 };
 
 /// Per-group map animation ids (cf. Corneria's grCn_803E217C).
-static int grVe_MapAnims[5] = { 0x0A, 0x0A, 0x0B, 0x0C, 0x0D };
+static int grVe_803E566C[5] = { 0x0A, 0x0A, 0x0B, 0x0C, 0x0D };
 
 /// Joint id per Arwing group (cf. Corneria's grCn_803E2190).
-static int grVe_ArwingJoints[5] = { 4, 4, 4, 4, 3 };
+static int grVe_803E5680[5] = { 4, 4, 4, 4, 3 };
 
 /// grVenom_802056B0
 
@@ -1321,8 +1321,8 @@ void grVenom_802056B0(Ground_GObj* gobj)
 
     Ground_801C2ED0(jobj, gp->map_id);
     gp->gv.venom.xC8 = grVe_804D6A34;
-    joint_idx = grVe_ArwingGroups;
-    joints = grVe_ArwingJoints;
+    joint_idx = grVe_803E5380;
+    joints = grVe_803E5680;
     gp->gv.venom.xD0 = 0;
     gp->gv.venom.xDC = 0.0F;
     gp->gv.venom.xE8 = 0.0F;
@@ -1391,14 +1391,14 @@ void grVenom_80205758(Ground_GObj* gobj)
 
 /// Per-group animation flags (cf. Corneria's grCn_803E21B0); the
 /// trailing zero word is present in the reference object.
-static int grVe_AnimFlags[6] = { 1, 1, 1, 1, 1, 0 };
+static int grVe_803E56A0[6] = { 1, 1, 1, 1, 1, 0 };
 
 void grVenom_80205AD0(Ground_GObj* arg) {}
 
 /// grVenom_80205AD4
 void grVenom_80205AD4(Ground_GObj* gobj)
 {
-    s32* data = (s32*) &grVe_CollLinks;
+    s32* data = (s32*) &grVe_803E5348;
     Ground* gp = gobj->user_data;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     f32 scale;
@@ -1558,7 +1558,7 @@ void grVenom_80205F30(Ground_GObj* gobj)
     s32 type_idx;
     HSD_JObj* helper;
 
-    base = (s32*) &grVe_CollLinks;
+    base = (s32*) &grVe_803E5348;
     gp = gobj->user_data;
     jobj = gobj->hsd_obj;
     sp94 = grVe_803B82D0;
@@ -1827,7 +1827,7 @@ void grVenom_80206870(Ground_GObj* arg) {}
 /// @todo Currently 99.60% match - needs register allocation fixes
 void grVenom_80206874(Ground_GObj* gobj)
 {
-    s32* data = (s32*) &grVe_CollLinks;
+    s32* data = (s32*) &grVe_803E5348;
     Ground* gp = gobj->user_data;
     HSD_JObj* jobj = gobj->hsd_obj;
     f32 scale;

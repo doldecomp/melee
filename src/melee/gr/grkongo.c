@@ -668,9 +668,9 @@ void grKongo_801D651C(Ground_GObj* gobj)
 
     gp = gobj->user_data;
     jobj = gobj->hsd_obj;
-    list[0] = grKg_SplineChoices.pairs[0];
-    list[1] = grKg_SplineChoices.pairs[1];
-    list[2] = grKg_SplineChoices.pairs[2];
+    list[0] = grKg_803B7FD4.pairs[0];
+    list[1] = grKg_803B7FD4.pairs[1];
+    list[2] = grKg_803B7FD4.pairs[2];
     i = HSD_Randi(3);
     gp->gv.kongo2.xC4 = Ground_801C247C(list[i].file, list[i].spline);
     gp->gv.kongo2.xC8 = grKg_804DAFA0;
@@ -692,7 +692,7 @@ void grKongo_801D651C(Ground_GObj* gobj)
 /// is not yet defined at the point of use. Verified against the
 /// section-anchored form (lwz offsets 0x24..0x38 off the .rodata
 /// base) produced when the definition precedes the function.
-const grKg_SplineChoiceList grKg_SplineChoices = {
+const grKg_SplineChoiceList grKg_803B7FD4 = {
     {
         { 7, 4 },
         { 8, 5 },

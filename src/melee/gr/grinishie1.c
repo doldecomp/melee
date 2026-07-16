@@ -118,7 +118,7 @@ typedef struct {
 grInishie1_stuff* grI1_804D69F8;
 
 /// initial velocity for items spawned from hatena blocks
-const Vec3 grInishie1_HatenaItemSpawnVel = { 0.0f, 5.0f, 0.0f };
+const Vec3 grI1_803B8268 = { 0.0f, 5.0f, 0.0f };
 
 #define DOBJ_LOOP(jobj)                                                       \
     {                                                                         \
@@ -210,7 +210,7 @@ struct block_table_struct {
     s16 jobj_idx;
 };
 
-extern struct block_table_struct block_idx_table[BLOCK_COUNT];
+extern struct block_table_struct grI1_803E49B8[BLOCK_COUNT];
 
 void grInishie1_801FA90C(void)
 {
@@ -272,7 +272,7 @@ HSD_GObj* grInishie1_801FA9B4(s32 arg0)
     return gobj;
 }
 
-struct block_table_struct block_idx_table[BLOCK_COUNT] = {
+struct block_table_struct grI1_803E49B8[BLOCK_COUNT] = {
     { 13, 3 },  { 14, 14 }, { 15, 15 }, { 16, 16 }, { 17, 17 },
     { 18, 18 }, { 19, 19 }, { 11, 20 }, { 12, 21 }, { 1, 4 },
     { 2, 5 },   { 3, 6 },   { 4, 7 },   { 5, 8 },   { 6, 9 },
@@ -425,7 +425,7 @@ void grInishie1_801FAD84(HSD_GObj* gobj)
     gp->blocks = (grInishie1_InitBlock*) HSD_MemAlloc(
         sizeof(grInishie1_InitBlock) * BLOCK_COUNT);
 
-    block_table = block_idx_table;
+    block_table = grI1_803E49B8;
 
     i = 0;
     while ((u32) i < BLOCK_COUNT) {
@@ -447,7 +447,7 @@ void grInishie1_801FAD84(HSD_GObj* gobj)
             invalid_state(0x217);
         }
 
-        jobj = Ground_801C3FA4(gobj, block_idx_table[j].jobj_idx);
+        jobj = Ground_801C3FA4(gobj, grI1_803E49B8[j].jobj_idx);
         if (jobj == NULL) {
             invalid_state(0x21D);
         }
@@ -750,7 +750,7 @@ void grInishie1_801FBA34(HSD_GObj* gobj, HSD_JObj* jobj)
     Vec3 sp1C;
     Vec3 vec;
     lb_8000B1CC(jobj, NULL, &sp1C);
-    vec = grInishie1_HatenaItemSpawnVel;
+    vec = grI1_803B8268;
     sp1C.y += 5.0f;
     it_8026F7C8(&sp1C, &vec, 0);
 }
@@ -826,7 +826,7 @@ void grInishie1_801FBCEC(HSD_GObj* gobj, u32 index)
             lb_8000B1CC(gp->gv.inishie1.blocks[index].jobj2, NULL,
                         &item_vel - 1);
 
-            item_vel = grInishie1_HatenaItemSpawnVel;
+            item_vel = grI1_803B8268;
             (&effect_pos - 2)->y += 5.0f;
 
             it_8026F7C8(&effect_pos - 2, &item_vel, 0);
@@ -1002,7 +1002,7 @@ static inline s32 get_block_id(s32 block_id)
     int i = BLOCK_COUNT;
     s32 idx = 0;
     while (i != 0) {
-        if (block_id == block_idx_table[idx].idx) {
+        if (block_id == grI1_803E49B8[idx].idx) {
             return idx;
         }
         idx += 1;
