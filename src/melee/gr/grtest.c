@@ -119,11 +119,7 @@ void grTest_80207168(Ground_GObj* gobj) {}
 
 void grTest_8020716C(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTest_802071BC(Ground_GObj* gobj)

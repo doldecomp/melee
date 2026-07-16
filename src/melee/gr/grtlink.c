@@ -25,7 +25,7 @@ void grTLink_80221930(void);                  /* static */
 void grTlink_UnkStage0_OnLoad(void);          /* static */
 void grTlink_UnkStage0_OnStart(void);         /* static */
 bool grTLink_802219C8(void);                  /* static */
-HSD_GObj* grTLink_802219D0(s32 arg0);         /* static */
+HSD_GObj* grTLink_802219D0(int arg0);         /* static */
 void grTLink_80221AB8(Ground_GObj*);          /* static */
 bool grTLink_80221AE4(Ground_GObj*);          /* static */
 void grTLink_80221AEC(Ground_GObj*);          /* static */
@@ -69,16 +69,7 @@ void grTLink_8022192C(bool unk0) {}
 
 void grTLink_80221930(void)
 {
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-
-    grTLink_802219D0(0);
-    grTLink_802219D0(1);
-    grTLink_802219D0(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTLink_802219D0);
 }
 
 void grTlink_UnkStage0_OnLoad(void) {}
@@ -93,7 +84,7 @@ bool grTLink_802219C8(void)
     return 0;
 }
 
-HSD_GObj* grTLink_802219D0(s32 arg0)
+HSD_GObj* grTLink_802219D0(int arg0)
 {
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grTLk_803E8D30[arg0];
