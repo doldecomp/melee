@@ -124,60 +124,6 @@ struct EventPriority {
     int priority;
 };
 
-typedef struct MCCErrorMessages {
-    char no_initialize[0x18];
-    char no_response[0xC];
-    char ping_error[0xC];
-    char initialize_hio[0x1C];
-    char read_hio_mailbox[0x1C];
-    char write_hio_mailbox[0x1C];
-    char read_hio_memory[0x1C];
-    char write_hio_memory[0x1C];
-    char read_hio_status[0x1C];
-    char flush_channel_info[0x1C];
-    char load_channel_info[0x1C];
-    char not_enough_memory[0x18];
-    char invalid_function_parameter[0x1C];
-    char invalid_channel_parameter[0x1C];
-    char invalid_data_size[0x14];
-    char invalid_offset_parameter[0x1C];
-    char already_opened[0x20];
-    char already_closed[0x20];
-    char already_locked[0x20];
-    char already_unlocked[0x20];
-    char read_write_busy[0x1C];
-    char unknown_error[0x10];
-    char report[0x18];
-    char report_no_caller[0x14];
-} MCCErrorMessages;
-
-static MCCErrorMessages mcc_error_messages = {
-    "MCC is no initialize",
-    "No responce",
-    "PING error",
-    "Could not initialize HIO",
-    "Could not read HIO mailbox",
-    "Could not write HIO mailbox",
-    "Could not read HIO memory",
-    "Could not write HIO memory",
-    "Could not read HIO status",
-    "Could not flush channelInfo",
-    "Could not load channelInfo",
-    "Not enough memory block",
-    "Invalid function parameter",
-    "Invalid channel parameter",
-    "Invalid data size",
-    "Invalid offset parameter",
-    "Channel was (already) opened",
-    "Channel was (already) closed",
-    "Channel was (already) locked",
-    "Channel was (already) unlocked",
-    "Channel (read/write) busy",
-    "Unknown error",
-    "%s: MCC Error, %s (%d)\n",
-    "MCC Error, %s (%d)\n",
-};
-
 static u16 numPeakParticles;
 
 void DrawRectangle(f32 x_min, f32 y_min, f32 w, f32 h, GXColor* color)
@@ -1178,77 +1124,77 @@ u8 fn_80392CD8(char* caller)
     case 0:
         return err;
     case 1:
-        msg = mcc_error_messages.no_initialize;
+        msg = "MCC is no initialize";
         break;
     case 2:
-        msg = mcc_error_messages.no_response;
+        msg = "No responce";
         break;
     case 3:
-        msg = mcc_error_messages.ping_error;
+        msg = "PING error";
         break;
     case 4:
-        msg = mcc_error_messages.initialize_hio;
+        msg = "Could not initialize HIO";
         break;
     case 5:
-        msg = mcc_error_messages.read_hio_mailbox;
+        msg = "Could not read HIO mailbox";
         break;
     case 6:
-        msg = mcc_error_messages.write_hio_mailbox;
+        msg = "Could not write HIO mailbox";
         break;
     case 7:
-        msg = mcc_error_messages.read_hio_memory;
+        msg = "Could not read HIO memory";
         break;
     case 8:
-        msg = mcc_error_messages.write_hio_memory;
+        msg = "Could not write HIO memory";
         break;
     case 9:
-        msg = mcc_error_messages.read_hio_status;
+        msg = "Could not read HIO status";
         break;
     case 10:
-        msg = mcc_error_messages.flush_channel_info;
+        msg = "Could not flush channelInfo";
         break;
     case 11:
-        msg = mcc_error_messages.load_channel_info;
+        msg = "Could not load channelInfo";
         break;
     case 12:
-        msg = mcc_error_messages.not_enough_memory;
+        msg = "Not enough memory block";
         break;
     case 13:
-        msg = mcc_error_messages.invalid_function_parameter;
+        msg = "Invalid function parameter";
         break;
     case 14:
-        msg = mcc_error_messages.invalid_channel_parameter;
+        msg = "Invalid channel parameter";
         break;
     case 15:
-        msg = mcc_error_messages.invalid_data_size;
+        msg = "Invalid data size";
         break;
     case 16:
-        msg = mcc_error_messages.invalid_offset_parameter;
+        msg = "Invalid offset parameter";
         break;
     case 17:
-        msg = mcc_error_messages.already_opened;
+        msg = "Channel was (already) opened";
         break;
     case 18:
-        msg = mcc_error_messages.already_closed;
+        msg = "Channel was (already) closed";
         break;
     case 19:
-        msg = mcc_error_messages.already_locked;
+        msg = "Channel was (already) locked";
         break;
     case 20:
-        msg = mcc_error_messages.already_unlocked;
+        msg = "Channel was (already) unlocked";
         break;
     case 21:
-        msg = mcc_error_messages.read_write_busy;
+        msg = "Channel (read/write) busy";
         break;
     default:
-        msg = mcc_error_messages.unknown_error;
+        msg = "Unknown error";
         break;
     }
 
     if (caller != NULL) {
-        OSReport(mcc_error_messages.report, caller, msg, err);
+        OSReport("%s: MCC Error, %s (%d)\n", caller, msg, err);
     } else {
-        OSReport(mcc_error_messages.report_no_caller, msg, err);
+        OSReport("MCC Error, %s (%d)\n", msg, err);
     }
     return err;
 }
@@ -2348,14 +2294,8 @@ void hsd_80394950(OSContext* ctx)
     do {
         u32 val0 = ((u32*) p)[0x24];
         u32 val1 = ((u32*) p)[0x25];
-        OSReport(
-            "R%02d=%08X:%08X (%e, %e)\n"
-            "\0\0\0- MISC ----------------------------------------------\n"
-            "\0\0SRR0=%08X SRR1=%08X\n"
-            "\0\0\0\0CR  =%08X LR  =%08X\n"
-            "\0\0\0\0CTR =%08X XER =%08X\n"
-            "\0\0\0\0GQR%d=%08X GQR%d=%08X\n",
-            i, val0, val1, ((f32*) p)[0x24], ((f32*) p)[0x25]);
+        OSReport("R%02d=%08X:%08X (%e, %e)\n", i, val0, val1, ((f32*) p)[0x24],
+                 ((f32*) p)[0x25]);
         i++;
         p += 8;
     } while (i < 32);
@@ -2363,6 +2303,17 @@ void hsd_80394950(OSContext* ctx)
     OSClearContext(&tmp);
     OSSetCurrentContext(saved);
     OSRestoreInterrupts(irq);
+}
+
+/// unused function to force data ordering for these report strings
+static void unused(OSContext* ctx)
+{
+    OSReport("- MISC ----------------------------------------------\n");
+    OSReport("SRR0=%08X SRR1=%08X\n", ctx->srr0, ctx->srr1);
+    OSReport("CR  =%08X LR  =%08X\n", ctx->cr, ctx->lr);
+    OSReport("CTR =%08X XER =%08X\n", ctx->ctr, ctx->xer);
+    OSReport("FPSCR=%08X\n", ctx->fpscr);
+    OSReport("GQR%d=%08X GQR%d=%08X\n", 0, ctx->gqr[0], 1, ctx->gqr[1]);
 }
 
 // @TODO: Currently 99.94% match - minor relocation difference
@@ -4696,12 +4647,11 @@ void psInitDataBankLoad(int bank, int* cmdBank, int* texBank, u32* ref,
                         int* formBank)
 {
     s32* base = (s32*) hsd_804D08E8;
-    char* data =
-        "particle.c\0\0illigal form data (strange number of group)\n\0\0\0\0"
-        "psInitDataBanks: unknown version\n\0\0";
     u16 version;
+
     if (formBank != NULL && *formBank != *texBank) {
-        OSPanic(data, 177, data + 0xC);
+        OSPanic("particle.c", 177,
+                "illigal form data (strange number of group)\n");
     }
 
     (base + bank)[0x60 / 4] = (s32) ref;
@@ -4730,7 +4680,7 @@ void psInitDataBankLoad(int bank, int* cmdBank, int* texBank, u32* ref,
         break;
     }
     default:
-        OSPanic(data, 207, data + 0x3C);
+        OSPanic("particle.c", 207, "psInitDataBanks: unknown version\n");
     }
 }
 
