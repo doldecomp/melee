@@ -36,6 +36,11 @@ static void order_data(void)
 /* @todo Currently ~98.4% match - register allocation differences
  * remain: r28/r29 swap (scan/cap_ptr) and loop/local register swaps
  * in the allocation table scan and report indentation loops. */
+static inline u32* HSD_LeakGetCapacityPtr(HSD_LeakChecker* lc)
+{
+    return &lc->capacity;
+}
+
 static inline void HSD_LeakReportSpaces(u32 count)
 {
     u32 i;
@@ -52,13 +57,11 @@ int HSD_Leak_80387DF8(int indent)
     u32* scan;
     u32* heap_start_phys;
     u32* cap_ptr;
-    u32* table_start;
-    u32* table_end;
     u32 heap_start_align;
     int leak_count;
     u32 i;
     u32 j;
-    u32 table_idx;
+    u32 ofs;
 
     scan = (u32*) lbCommand_803B9840;
     lc = &HSD_Leak_80407B58;
@@ -80,7 +83,7 @@ int HSD_Leak_80387DF8(int indent)
     OSReport("Begin memory leak check ...\n");
 
     HSD_LeakReportSpaces(indent + 2);
-    cap_ptr = &lc->capacity;
+    cap_ptr = HSD_LeakGetCapacityPtr(lc);
     OSReport("number of registered ptr: %d / %d (peak %d)\n", lc->used,
              *cap_ptr, lc->peak);
 
@@ -117,23 +120,25 @@ int HSD_Leak_80387DF8(int indent)
     /* Check allocation table for leaks */
     i = indent;
     i += 2;
-    table_start = lc->table;
-    table_end = table_start + *cap_ptr;
-    for (table_idx = 0; table_idx < *cap_ptr; table_idx++) {
-        u32* table_entry = &lc->table[table_idx];
-        heap_start_phys = (u32*) *table_entry;
+    scan = lc->table;
+    ofs = 0;
+    val = (u32) (scan + *cap_ptr);
+    heap_start_align = 0;
+    for (; ofs < *cap_ptr; ofs++) {
+        u32* ep = (u32*) ((u32) lc->table + heap_start_align);
+        heap_start_phys = (u32*) *ep;
         if ((u32) heap_start_phys & 1) {
-            *table_entry = (u32) heap_start_phys & ~1u;
-        } else if (table_start <= heap_start_phys &&
-                   heap_start_phys < table_end)
-        {
+            *ep = (u32) heap_start_phys & ~1u;
+        } else if (scan <= heap_start_phys && heap_start_phys < (u32*) val) {
         } else if (heap_start_phys != NULL) {
             u32* block = (u32*) heap_start_phys;
             if (block[0] == HEAP_MAGIC) {
                 u32 reg_idx = block[1];
                 if ((u32) (reg_idx + 0x10000) != 0xFFFF && reg_idx < *cap_ptr)
                 {
-                    if ((u32) heap_start_phys == lc->table[reg_idx]) {
+                    if ((u32) heap_start_phys ==
+                        *(u32*) ((u32) lc->table + (reg_idx << 2)))
+                    {
                         for (j = 0; j < i; j++) {
                             OSReport(" ");
                         }
@@ -153,6 +158,7 @@ int HSD_Leak_80387DF8(int indent)
         next_leak:
             leak_count++;
         }
+        heap_start_align += 4;
     }
 
     if (leak_count > 0) {

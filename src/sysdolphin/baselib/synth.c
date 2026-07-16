@@ -39,12 +39,10 @@ struct SfxLoadStreamNode {
     /* 0x14 */ s32 x14;
 };
 
-struct SfxLoadStreamWords {
-    /* 0x00 */ u32 x0;
-    /* 0x04 */ u32 x4;
-    /* 0x08 */ u32 x8;
-    /* 0x0C */ u32 xC;
-};
+static inline s32 SfxLoadStreamDataSize(s32 size)
+{
+    return size + 8;
+}
 
 void HSD_SynthSFXSampleLoadCallback(int result, int length, void* addr,
                                     int cancelflag)
@@ -72,15 +70,15 @@ void HSD_SynthSFXSampleLoadCallback(int result, int length, void* addr,
                 ((u32*) HSD_Synth_804D7730)[i];
         }
         dnw = total - header_size;
-        HSD_Synth_804D7734 = (u32*) ((u8*) HSD_Synth_804D7730 + (dnw & ~3));
-        ((struct SfxLoadStreamWords*) HSD_Synth_804D7734)->x0 =
+        *(u32*) ((u8*) HSD_Synth_804D7730 + (dnw & ~3)) =
             hsd_SynthSFXLoadBuf[4];
-        ((struct SfxLoadStreamWords*) HSD_Synth_804D7734)->x4 =
+        ((u32*) HSD_Synth_804D7730)[((dnw & ~3) >> 2) + 1] =
             hsd_SynthSFXLoadBuf[5];
-        ((struct SfxLoadStreamWords*) HSD_Synth_804D7734)->x8 =
+        ((u32*) HSD_Synth_804D7730)[((dnw & ~3) >> 2) + 2] =
             hsd_SynthSFXLoadBuf[6];
-        ((struct SfxLoadStreamWords*) HSD_Synth_804D7734)->xC =
+        ((u32*) HSD_Synth_804D7730)[((dnw & ~3) >> 2) + 3] =
             hsd_SynthSFXLoadBuf[7];
+        HSD_Synth_804D7734 = (u32*) ((u8*) HSD_Synth_804D7730 + (dnw & ~3));
 
         bankID = HSD_Synth_804C2A60[0].bankID;
         pp = &HSD_Synth_804C2AE0[bankID];
@@ -114,7 +112,7 @@ void HSD_SynthSFXSampleLoadCallback(int result, int length, void* addr,
             n = *HSD_Synth_804D7734;
             (void) n;
             nshift = n << 6;
-            nbytes = nshift + 8;
+            nbytes = SfxLoadStreamDataSize(nshift);
             memcpy((u8*) HSD_Synth_804D7730 + 8, HSD_Synth_804D7734, nbytes);
             offset = 0;
             for (k = 0; k < n; k++) {
