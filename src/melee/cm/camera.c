@@ -1878,45 +1878,42 @@ void Camera_8002C1A8(void)
 
     Camera_8002B694(&inputs, cm_80452C68.x305);
 
-    substick_y_val = 0.0f;
-    substick_x_val = 0.0f;
+    zoom_dir = x_move = y_move = substick_x_val = substick_y_val = 0.0f;
     stick_x = inputs.stick_x;
-    y_move = 0.0f;
     stick_y = inputs.stick_y;
-    x_move = 0.0f;
     substick_x = inputs.substick_x;
     substick_y = inputs.substick_y;
     dir = 0;
-    zoom_dir = 0.0f;
 
     {
-        u64 x18_btns = inputs.buttons_triggered;
+        u64 triggered = inputs.buttons_triggered;
+        u64 pressed = inputs.buttons_pressed;
 
-        if ((x18_btns & PAD_TRIGGER_R) != 0) {
+        if ((triggered & PAD_TRIGGER_R) != 0) {
             dir = 1;
-        } else if ((x18_btns & PAD_TRIGGER_L) != 0) {
+        } else if ((triggered & PAD_TRIGGER_L) != 0) {
             dir = -1;
         }
 
-        if ((inputs.buttons_pressed & PAD_BUTTON_UP) != 0) {
+        if ((pressed & PAD_BUTTON_UP) != 0) {
             y_move = 1.0f;
-        } else if ((inputs.buttons_pressed & PAD_BUTTON_DOWN) != 0) {
+        } else if ((pressed & PAD_BUTTON_DOWN) != 0) {
             y_move = -1.0f;
         }
 
-        if ((inputs.buttons_pressed & PAD_BUTTON_LEFT) != 0) {
+        if ((pressed & PAD_BUTTON_LEFT) != 0) {
             x_move = -1.0f;
-        } else if ((inputs.buttons_pressed & PAD_BUTTON_RIGHT) != 0) {
+        } else if ((pressed & PAD_BUTTON_RIGHT) != 0) {
             x_move = 1.0f;
         }
 
-        if ((inputs.buttons_pressed & PAD_BUTTON_X) != 0) {
+        if ((pressed & PAD_BUTTON_X) != 0) {
             zoom_dir = 1.0f;
-        } else if ((inputs.buttons_pressed & PAD_BUTTON_Y) != 0) {
+        } else if ((pressed & PAD_BUTTON_Y) != 0) {
             zoom_dir = -1.0f;
         }
 
-        if ((inputs.buttons_pressed & PAD_BUTTON_A) != 0) {
+        if ((pressed & PAD_BUTTON_A) != 0) {
             abs_f1 = ABS(stick_x);
             if (abs_f1 > 0.125) {
                 x_move = stick_x;
