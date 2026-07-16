@@ -224,11 +224,7 @@ bool itPeachturnip_UnkMotion3_Anim(Item_GObj* item_gobj)
 /// ProjectilePhysics_TurnipVelocity
 void itPeachturnip_UnkMotion3_Phys(Item_GObj* item_gobj)
 {
-    ItemAttr* attr;
-
-    attr = GET_ITEM(item_gobj)->xCC_item_attr;
-    it_80272860(item_gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
-    it_80274658(item_gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(item_gobj);
 }
 
 bool itPeachturnip_UnkMotion3_Coll(Item_GObj* item_gobj)

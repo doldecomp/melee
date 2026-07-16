@@ -261,9 +261,11 @@ static inline void ftFox_SpecialS_CreateGhostItem(HSD_GObj* gobj)
     if (fp->cmd_vars[2] == 1) {
         fp->cmd_vars[2] = 0;
         if (fp->kind == FTKIND_FOX) {
-            ghostGObj = it_8029CEB4(gobj, &fp->cur_pos, 0x38, fp->facing_dir);
+            ghostGObj = it_8029CEB4(gobj, &fp->cur_pos, It_Kind_Fox_Illusion,
+                                    fp->facing_dir);
         } else {
-            ghostGObj = it_8029CEB4(gobj, &fp->cur_pos, 0x39, fp->facing_dir);
+            ghostGObj = it_8029CEB4(gobj, &fp->cur_pos, It_Kind_Falco_Phantasm,
+                                    fp->facing_dir);
         }
         if (ghostGObj != NULL) {
             fp->mv.fx.SpecialS.ghostGObj = ghostGObj;

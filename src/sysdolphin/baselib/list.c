@@ -29,7 +29,7 @@ HSD_SList* HSD_SListAlloc(void)
 {
     HSD_SList* list;
 
-    list = HSD_ObjAlloc(&slist_alloc_data);
+    list = HSD_ObjAlloc(HSD_SListGetAllocData());
     HSD_ASSERT(76, list);
 
     memset(list, 0, sizeof(HSD_SList));
@@ -83,7 +83,7 @@ HSD_SList* HSD_SListRemove(HSD_SList* list)
 
     if (list != NULL) {
         next = list->next;
-        HSD_ObjFree(&slist_alloc_data, list);
+        HSD_ObjFree(HSD_SListGetAllocData(), list);
         return next;
     }
 

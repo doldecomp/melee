@@ -427,13 +427,13 @@ loop:
     for (j = 0; j < 3; j++) {
         cur_char = entry->x02[j];
 
-        if (cur_char == 0x21) {
+        if (cur_char == CHKIND_NONE) {
             continue;
         }
         if (gm_80164430(entry->x00) == 0) {
             goto next;
         }
-        if (gm_80164840(cur_char) == 0) {
+        if (gm_IsCKindUnlocked(cur_char) == 0) {
             goto next;
         }
         if (cur_char == target_char) {
@@ -933,7 +933,7 @@ void gmClassic_801B3B40(GameScene* arg0)
     }
 
     if (entry->x1 == 0x80 && entry->x2 == 1) {
-        char_id = gm_80164024((u8) asd->x0.ckind);
+        char_id = gm_CKindToSelKind((u8) asd->x0.ckind);
         time_ptr = gmMainLib_8015D438(char_id);
         best_ptr = gmMainLib_8015D450(char_id);
         Ground_801C1DE4(&sp18, &sp14);

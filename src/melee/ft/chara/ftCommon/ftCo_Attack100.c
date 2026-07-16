@@ -445,7 +445,7 @@ void ftCo_800D71D8(Fighter_GObj* gobj)
 bool ftCo_800D730C(Fighter_GObj* gobj, bool arg1)
 {
     extern f32 ftCo_804D9018;
-    s32 orig;
+    s32 unused1;
     struct Fighter_x2D0_t* x2d0;
     s32 canJump;
     s32 r29;
@@ -526,29 +526,36 @@ bool ftCo_800D72A0(Fighter* fp)
     return false;
 }
 
+static inline struct Fighter_x2D0_t* ftCo_800D74A4_inline(Fighter* fp)
+{
+    return fp->x2D0;
+}
+
 void ftCo_800D74A4(Fighter_GObj* gobj)
 {
-    struct Fighter_x2D0_t* p;
     extern f32 ftCo_804D9018;
     Vec3 vel;
     Fighter* fp;
-    s32 msid;
     struct Fighter_x2D0_t* tmp;
+    s32 msid;
+    s32 msid2;
+    struct Fighter_x2D0_t* p;
     PAD_STACK(0x14);
+
     fp = gobj->user_data;
-    p = fp->x2D0;
+    p = ftCo_800D74A4_inline(fp);
     fp->cmd_vars[0] = 0;
     tmp = fp->x2D0;
-    msid = fp->x1968_jumpsUsed +
-           ((struct Fighter_x2D0_t*) ((s32*) tmp + ftCo_800D7268(fp)))->x2C;
+    msid =
+        fp->x1968_jumpsUsed +
+        (tmp = (struct Fighter_x2D0_t*) ((s32*) tmp + ftCo_800D7268(fp)))->x2C;
+    msid2 = --msid;
     vel.x = fp->input.lstick.x * p->x8;
-    msid -= 1;
     tmp = fp->x2D0;
-    vel.y = p->x14[msid -
-                   ((struct Fighter_x2D0_t*) ((s32*) tmp + ftCo_800D7268(fp)))
-                       ->x2C];
+    tmp = (struct Fighter_x2D0_t*) ((s32*) tmp + ftCo_800D7268(fp));
+    vel.y = p->x14[msid - tmp->x2C];
     vel.z = ftCo_804D9018;
-    ftCo_800CBAC4(gobj, msid, &vel, false);
+    ftCo_800CBAC4(gobj, msid2, &vel, false);
     if ((fp->input.lstick.x * fp->facing_dir) < -p->x4) {
         *(s32*) &fp->mv.ca.specials.grav = p->x0;
     } else {
@@ -1466,7 +1473,7 @@ bool fn_800D9558(Fighter_GObj* gobj)
                             effPos.y = 4.0 * (HSD_Randf() - 0.5f) + effPos.y;
                             r = HSD_Randf() - 0.5f;
                             effPos.z = 4.0 * r + effPos.z;
-                            efSync_Spawn(0x3F3, segGobj, &effPos, r);
+                            efSync_Spawn(0x3F3, segGobj, &effPos);
                         }
                     }
                 }
@@ -1515,7 +1522,7 @@ bool fn_800D8EC8(Fighter_GObj* gobj)
     Vec3 vel;
     f32 var_f3;
     f32 mtxY;
-    UNUSED u32 orig;
+    UNUSED u32 unused1;
     UNUSED u32 unused2;
     UNUSED u32 unused3;
     UNUSED u32 unused4;
@@ -1801,7 +1808,7 @@ bool fn_800D9930(Fighter_GObj* gobj)
                             effPos.y = 4.0 * (HSD_Randf() - 0.5f) + effPos.y;
                             r = HSD_Randf() - 0.5f;
                             effPos.z = 4.0 * r + effPos.z;
-                            efSync_Spawn(0x3F3, segGobj, &effPos, r);
+                            efSync_Spawn(0x3F3, segGobj, &effPos);
                         }
                     }
                 }

@@ -120,12 +120,7 @@ void grTPurin_8022332C(Ground_GObj* gobj)
 
 void grTPurin_80223330(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* joint = (HSD_JObj*) gobj->hsd_obj;
-    PAD_STACK(8);
-
-    Ground_801C2ED0(joint, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTPurin_80223380(Ground_GObj* gobj)
@@ -167,12 +162,7 @@ void grTPurin_80223478(Ground_GObj* gobj)
 
 void grTPurin_8022347C(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* joint = (HSD_JObj*) gobj->hsd_obj;
-    PAD_STACK(8);
-
-    Ground_801C2ED0(joint, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTPurin_802234CC(Ground_GObj* gobj)

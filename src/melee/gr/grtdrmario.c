@@ -23,7 +23,7 @@ void grtDrMario_80220510(void);                  /* static */
 void grTdrmario_UnkStage0_OnLoad(void);          /* static */
 void grTdrmario_UnkStage0_OnStart(void);         /* static */
 bool grtDrMario_802205A8(void);                  /* static */
-HSD_GObj* grtDrMario_802205B0(s32);              /* static */
+HSD_GObj* grtDrMario_802205B0(int);              /* static */
 void grtDrMario_80220698(Ground_GObj*);          /* static */
 bool grtDrMario_802206C4(Ground_GObj*);          /* static */
 void grtDrMario_802206CC(Ground_GObj*);          /* static */
@@ -67,16 +67,7 @@ void grtDrMario_8022050C(bool unk0) {}
 
 void grtDrMario_80220510(void)
 {
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-
-    grtDrMario_802205B0(0);
-    grtDrMario_802205B0(1);
-    grtDrMario_802205B0(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grtDrMario_802205B0);
 }
 
 void grTdrmario_UnkStage0_OnLoad(void) {}
@@ -91,7 +82,7 @@ bool grtDrMario_802205A8(void)
     return false;
 }
 
-HSD_GObj* grtDrMario_802205B0(s32 arg0)
+HSD_GObj* grtDrMario_802205B0(int arg0)
 {
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grTDr_803E8850[arg0];

@@ -787,23 +787,6 @@ void itSamusgrapple_UnkMotion5_Phys(Item_GObj* gobj)
     GET_ITEM(gobj)->xDD4_itemVar.samusgrapple.unk_10 = fn_802B8814;
 }
 
-static inline bool fn_802B895C_inline(Item* ip, Fighter* fp, Vec3* pos)
-{
-    ItemLink* head = ip->xDD4_itemVar.samusgrapple.x0;
-    Vec3* head_pos = &head->pos;
-    if (mpCheckAllRemap(NULL, NULL, NULL, NULL, -1, -1, pos->x, pos->y,
-                        head->pos.x, head->pos.y))
-    {
-        return true;
-    } else if (mpCheckAllRemap(NULL, NULL, NULL, NULL, -1, -1, fp->cur_pos.x,
-                               fp->cur_pos.y, head_pos->x, head_pos->y))
-    {
-        return true;
-    } else {
-        return false;
-    }
-}
-
 void fn_802B895C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -820,7 +803,7 @@ void fn_802B895C(Item_GObj* gobj)
     fp2 = fp;
     samus_grapple_setup_pos(link, &pos, m);
 
-    if (fn_802B895C_inline(ip, fp2, &pos)) {
+    if (itGrappleCheckCollision(ip->xDD4_itemVar.samusgrapple.x0, fp2, &pos)) {
         ftCo_80090780(ip->owner);
         it_802B7B84(gobj);
         return;
@@ -916,7 +899,7 @@ void fn_802B8D38(Item_GObj* gobj)
     fp2 = fp;
     samus_grapple_setup_pos(link, &pos, m);
 
-    if (fn_802B895C_inline(ip, fp2, &pos)) {
+    if (itGrappleCheckCollision(ip->xDD4_itemVar.samusgrapple.x0, fp2, &pos)) {
         ftCo_80090780(ip->owner);
         it_802B7B84(gobj);
         return;

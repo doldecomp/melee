@@ -1870,7 +1870,7 @@ void fn_8019A158(void)
 
 /// #fn_8019A158_end
 
-void fn_8019A71C(s32* state, u32 orig, u32 unused2)
+void fn_8019A71C(s32* state, u32 unused1, u32 unused2)
 {
     u32* counter = &lbl_804799D8.x0;
 
@@ -2198,7 +2198,6 @@ extern u8 lbl_803B7D04[20];
 /// Handles match countdown, audio transitions, and end conditions.
 void fn_8019AF50(s32* arg0, u32 arg1, u32 arg2)
 {
-    u8* entry;
     typedef struct {
         s32 d[5];
     } TimerFmt;
