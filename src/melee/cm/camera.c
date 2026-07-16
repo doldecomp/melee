@@ -1556,9 +1556,10 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
     f32 temp_x;
     f32 temp_y;
     s32 current_slot;
-    s32 var_r5;
+    s32 i;
+    s32 idx;
     u64 temp_ret;
-    PAD_STACK(8);
+    PAD_STACK(16);
 
     if (slot == 5) {
         inputs->stick_x = 0.0f;
@@ -1569,8 +1570,12 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
         inputs->buttons_pressed = 0;
         return;
     }
+
+    /// @remark Slot 4 reads all ports at once: the stick and substick each come
+    /// from the first controller deflected past 0.85 on either axis (zero
+    /// if none), and the buttons are merged across all controllers.
+    /// @note, there is probably an inline for the stick comparisons that would fix PAD_STACK
     if (slot == 4) {
-        /// @todo there is probably a bigger inline
         for (current_slot = 0; current_slot < PAD_MAX_CONTROLLERS;
              current_slot++)
         {
@@ -1598,8 +1603,9 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
             stick_x = 0.0f;
         }
 
-        for (var_r5 = 0; var_r5 < 4; var_r5++) {
-            pad = get_slot_pad(var_r5);
+        idx = 0;
+        for (i = 0; i < PAD_MAX_CONTROLLERS; i++, idx = (u8) i) {
+            pad = &HSD_PadCopyStatus[idx];
             temp_x = pad->nml_subStickX;
             temp_y = pad->nml_subStickY;
             substick_x = temp_x;
@@ -1618,10 +1624,11 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
             }
         }
 
-        if (var_r5 == 4) {
+        if (idx == 4) {
             substick_y = 0.0f;
             substick_x = 0.0f;
         }
+
         inputs->stick_x = stick_x;
         inputs->stick_y = stick_y;
         inputs->substick_x = substick_x;
@@ -1632,6 +1639,7 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
         inputs->buttons_triggered = temp_ret;
         return;
     }
+
     pad = get_slot_pad(slot);
     inputs->stick_x = pad->nml_stickX;
     inputs->stick_y = pad->nml_stickY;
