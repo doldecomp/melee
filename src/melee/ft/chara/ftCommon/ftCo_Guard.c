@@ -741,13 +741,14 @@ static inline void ftCo_80091D58_inline(Fighter* fp)
     HSD_JObjSetScale(fp->parts[fp->ft_data->x8->x11].joint, &scl);
 }
 
+#pragma push
 #pragma force_active off
 static inline void ftCo_80091D58_inline_arg(Fighter* fp, Vec3* scl)
 {
     scl->x = scl->y = scl->z = inlineB0(fp);
     HSD_JObjSetScale(fp->parts[fp->ft_data->x8->x11].joint, scl);
 }
-#pragma force_active on
+#pragma pop
 
 static inline void ftCo_80092C54_inline(Fighter_GObj* gobj)
 {
@@ -802,6 +803,7 @@ static inline void ftCo_800928CC_inline(Fighter_GObj* gobj)
     }
 }
 
+#pragma push
 #pragma force_active off
 static inline void ftCo_800928CC_inline_arg(Fighter_GObj* gobj,
                                             AbsorbDesc* absorb)
@@ -832,7 +834,7 @@ static inline void ftCo_800928CC_inline_arg(Fighter_GObj* gobj,
         return;
     }
 }
-#pragma force_active on
+#pragma pop
 
 void ftCo_GuardSetOff_Anim(Fighter_GObj* gobj)
 {
