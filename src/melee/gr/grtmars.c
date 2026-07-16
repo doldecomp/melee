@@ -80,15 +80,7 @@ static void grTMars_80221EF4(bool arg0) {}
 
 static void grTMars_80221EF8(void)
 {
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-    grTMars_80221F98(0);
-    grTMars_80221F98(1);
-    grTMars_80221F98(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTMars_80221F98);
 }
 
 static void grTmars_UnkStage0_OnLoad(void)
@@ -145,12 +137,7 @@ static void grTMars_802220B8(Ground_GObj* arg0)
 
 static void grTMars_802220BC(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
-
-    u8 _[8];
-
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 static bool grTMars_8022210C(Ground_GObj* arg0)
@@ -168,12 +155,7 @@ static void grTMars_80222148(Ground_GObj* arg0) {}
 
 static void grTMars_8022214C(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
-
-    u8 _[8];
-
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 static bool grTMars_8022219C(Ground_GObj* arg0)
