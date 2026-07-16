@@ -119,75 +119,116 @@ void ftCo_8009CF84(Fighter* fp)
     }
 }
 
-/// Shared body of the Kirby hat dynamics setup family below (a macro rather
-/// than an inline function so the compiled bytes stay identical).
-#define SETUP_HAT_DYNAMICS(fp, kind, dyn_idx, assert_line)                    \
-    {                                                                         \
-        KirbyHatStruct* hat = ft_80459B88.hats[kind];                         \
-        fp->dynamics_num = hat->hat_dynamics[dyn_idx]->dynamicsNum;           \
-        HSD_ASSERTREPORT(assert_line, fp->dynamics_num < Ft_Dynamics_NumMax,  \
-                         "fighter dynamics num over!\n");                     \
-        {                                                                     \
-            ssize_t i;                                                        \
-            for (i = 0; i < fp->dynamics_num; i++) {                          \
-                BoneDynamicsDesc* article =                                   \
-                    &hat->hat_dynamics[dyn_idx]->ftDynamicBones->array[i];    \
-                HSD_JObj* cur = fp->fv.kb.hat.jobj;                           \
-                ssize_t j;                                                    \
-                for (j = 0; j < (signed) article->bone_id; j++) {             \
-                    if (cur->child != NULL) {                                 \
-                        cur = cur->child;                                     \
-                        continue;                                             \
-                    }                                                         \
-                    while (cur->next == NULL) {                               \
-                        cur = cur->parent;                                    \
-                    }                                                         \
-                    cur = cur->next;                                          \
-                }                                                             \
-                lb_8000FD48(cur, &fp->dynamic_bone_sets[i].dyn_desc,          \
-                            article->dyn_desc.count);                         \
-                fp->dynamic_bone_sets[i].bone_id = 0;                         \
-                lb_80011710(&hat->hat_dynamics[dyn_idx]                       \
-                                 ->ftDynamicBones->array[i]                   \
-                                 .dyn_desc,                                   \
-                            &fp->dynamic_bone_sets[i].dyn_desc);              \
-            }                                                                 \
-        }                                                                     \
+/// Attach the hat's bone dynamics descriptors to @p fp's dynamic bone sets.
+/// @todo The nine setters below only differ from the target by register
+/// allocation.
+static inline void ftCo_SetupKirbyHatBones(Fighter* fp, KirbyHatStruct* hat,
+                                           int dyn_idx)
+{
+    ssize_t i;
+    for (i = 0; i < fp->dynamics_num; i++) {
+        BoneDynamicsDesc* article =
+            &hat->hat_dynamics[dyn_idx]->ftDynamicBones->array[i];
+        HSD_JObj* cur = fp->fv.kb.hat.jobj;
+        ssize_t j;
+        for (j = 0; j < (signed) article->bone_id; j++) {
+            if (cur->child != NULL) {
+                cur = cur->child;
+                continue;
+            }
+            while (cur->next == NULL) {
+                cur = cur->parent;
+            }
+            cur = cur->next;
+        }
+        lb_8000FD48(cur, &fp->dynamic_bone_sets[i].dyn_desc,
+                    article->dyn_desc.count);
+        fp->dynamic_bone_sets[i].bone_id = 0;
+        lb_80011710(
+            &hat->hat_dynamics[dyn_idx]->ftDynamicBones->array[i].dyn_desc,
+            &fp->dynamic_bone_sets[i].dyn_desc);
     }
+}
 
 void ftCo_8009D074(Fighter* fp)
 {
-    SETUP_HAT_DYNAMICS(fp, FTKIND_KOOPA, 2, 135);
+    KirbyHatStruct* hat = ft_80459B88.hats[FTKIND_KOOPA];
+    fp->dynamics_num = hat->hat_dynamics[2]->dynamicsNum;
+    HSD_ASSERTREPORT(135, fp->dynamics_num < Ft_Dynamics_NumMax,
+                     "fighter dynamics num over!\n");
+    ftCo_SetupKirbyHatBones(fp, hat, 2);
 }
 
 void ftCo_8009D18C(Fighter* fp)
 {
-    SETUP_HAT_DYNAMICS(fp, FTKIND_ZELDA, 2, 167);
+    KirbyHatStruct* hat = ft_80459B88.hats[FTKIND_ZELDA];
+    fp->dynamics_num = hat->hat_dynamics[2]->dynamicsNum;
+    HSD_ASSERTREPORT(167, fp->dynamics_num < Ft_Dynamics_NumMax,
+                     "fighter dynamics num over!\n");
+    ftCo_SetupKirbyHatBones(fp, hat, 2);
 }
 
 void ftCo_8009D2A4(Fighter* fp)
 {
-    SETUP_HAT_DYNAMICS(fp, FTKIND_NANA, 2, 199);
+    KirbyHatStruct* hat = ft_80459B88.hats[FTKIND_NANA];
+    fp->dynamics_num = hat->hat_dynamics[2]->dynamicsNum;
+    HSD_ASSERTREPORT(199, fp->dynamics_num < Ft_Dynamics_NumMax,
+                     "fighter dynamics num over!\n");
+    ftCo_SetupKirbyHatBones(fp, hat, 2);
 }
 
 void ftCo_8009D3BC(Fighter* fp)
 {
-    SETUP_HAT_DYNAMICS(fp, FTKIND_FALCO, 2, 232);
+    KirbyHatStruct* hat = ft_80459B88.hats[FTKIND_FALCO];
+    fp->dynamics_num = hat->hat_dynamics[2]->dynamicsNum;
+    HSD_ASSERTREPORT(232, fp->dynamics_num < Ft_Dynamics_NumMax,
+                     "fighter dynamics num over!\n");
+    ftCo_SetupKirbyHatBones(fp, hat, 2);
 }
 
 void ftCo_8009D4D4(Fighter* fp)
 {
-    SETUP_HAT_DYNAMICS(fp, FTKIND_KIRBY, 1, 265);
+    KirbyHatStruct* hat = ft_80459B88.hats[FTKIND_KIRBY];
+    fp->dynamics_num = hat->hat_dynamics[1]->dynamicsNum;
+    HSD_ASSERTREPORT(265, fp->dynamics_num < Ft_Dynamics_NumMax,
+                     "fighter dynamics num over!\n");
+    ftCo_SetupKirbyHatBones(fp, hat, 1);
 }
 
 void ftCo_8009D5EC(Fighter* fp)
 {
-    SETUP_HAT_DYNAMICS(fp, FTKIND_MARS, 0, 298);
+    KirbyHatStruct* hat = ft_80459B88.hats[FTKIND_MARS];
+    fp->dynamics_num = hat->hat_dynamics[0]->dynamicsNum;
+    HSD_ASSERTREPORT(298, fp->dynamics_num < Ft_Dynamics_NumMax,
+                     "fighter dynamics num over!\n");
+    ftCo_SetupKirbyHatBones(fp, hat, 0);
 }
 
 void ftCo_8009D704(Fighter* fp)
 {
-    SETUP_HAT_DYNAMICS(fp, FTKIND_LINK, 2, 331);
+    KirbyHatStruct* hat = ft_80459B88.hats[FTKIND_LINK];
+    fp->dynamics_num = hat->hat_dynamics[2]->dynamicsNum;
+    HSD_ASSERTREPORT(331, fp->dynamics_num < Ft_Dynamics_NumMax,
+                     "fighter dynamics num over!\n");
+    ftCo_SetupKirbyHatBones(fp, hat, 2);
+}
+
+void ftCo_8009D920(Fighter* fp)
+{
+    KirbyHatStruct* hat = ft_80459B88.hats[FTKIND_LUIGI];
+    fp->dynamics_num = hat->hat_dynamics[1]->dynamicsNum;
+    HSD_ASSERTREPORT(388, fp->dynamics_num < Ft_Dynamics_NumMax,
+                     "fighter dynamics num over!\n");
+    ftCo_SetupKirbyHatBones(fp, hat, 1);
+}
+
+void ftCo_8009DA38(Fighter* fp)
+{
+    KirbyHatStruct* hat = ft_80459B88.hats[FTKIND_GANON];
+    fp->dynamics_num = hat->hat_dynamics[1]->dynamicsNum;
+    HSD_ASSERTREPORT(421, fp->dynamics_num < Ft_Dynamics_NumMax,
+                     "fighter dynamics num over!\n");
+    ftCo_SetupKirbyHatBones(fp, hat, 1);
 }
 
 void ftCo_8009D81C(Fighter* fp)
@@ -212,16 +253,6 @@ void ftCo_8009D81C(Fighter* fp)
                 &fp->dynamic_bone_sets[i].dyn_desc);
         }
     }
-}
-
-void ftCo_8009D920(Fighter* fp)
-{
-    SETUP_HAT_DYNAMICS(fp, FTKIND_LUIGI, 1, 388);
-}
-
-void ftCo_8009DA38(Fighter* fp)
-{
-    SETUP_HAT_DYNAMICS(fp, FTKIND_GANON, 1, 421);
 }
 
 /// #ftCo_8009DB50
