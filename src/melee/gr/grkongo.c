@@ -271,47 +271,11 @@ bool grKongo_801D5774(Ground_GObj* arg)
 #define DegToRad(a) ((a) * 0.017453292F)
 #define M_TAU 6.283185307179586
 
-static inline void grKongo_801D577C_inline(Ground* gp, f32 angular_vel_2,
-                                           bool sign)
-{
-    f32 limit = DegToRad(grKg_804D6980->unk34);
-    bool compare = sign ? (angular_vel_2 < limit) : (angular_vel_2 > -limit);
-    if (compare) {
-        gp->gv.kongo3.xE0 = 0.0f;
-        gp->gv.kongo3.xD8 = gp->gv.kongo3.xD4;
-    } else {
-        gp->gv.kongo3.xE0 = angular_vel_2 - (sign ? limit : -limit);
-    }
-}
-
-static inline void compare(f32 a, f32 b, f32* c)
-{
-    if (a > b) {
-        *c = b;
-    } else {
-        b = -b;
-        if (a < b) {
-            *c = b;
-        }
-    }
-}
-
-static inline void tau_range(f32* a)
-{
-    f32 temp = *a;
-    if (temp > M_TAU) {
-        *a = (f64) temp - M_TAU;
-    } else if (temp < -M_TAU) {
-        *a = (f64) temp + M_TAU;
-    }
-}
-
 void grKongo_801D577C(Ground_GObj* arg0)
 {
     Ground* gp = arg0->user_data;
     HSD_JObj* jobj = Ground_801C3FA4(arg0, 1);
     Vec3 vec;
-    lbColl_80008D30_arg1 hit;
     f32 limit_angle;
     f32 angle_delta;
 
@@ -332,29 +296,33 @@ void grKongo_801D577C(Ground_GObj* arg0)
         if (angle_delta < 0.0f) {
             angle_delta += M_TAU;
         }
-        if (!(angle_delta < limit_angle)) {
-            f32 abs_vel;
-            abs_vel = gp->gv.kongo3.xE0;
-            if (abs_vel < 0.0f) {
-                abs_vel = -abs_vel;
+        if (angle_delta < limit_angle || angle_delta < ABS(gp->gv.kongo3.xE0))
+        {
+            if ((s16) gp->gv.kongo3.xC4 == 3) {
+                gp->gv.kongo3.xC4 = 0;
             }
-            if (!(angle_delta < abs_vel)) {
-                if ((s16) gp->gv.kongo3.xC4 == 2) {
-                    gp->gv.kongo3.xC4 = 3;
-                }
-                break;
-            }
+            break;
         }
-        if ((s16) gp->gv.kongo3.xC4 == 3) {
-            gp->gv.kongo3.xC4 = 0;
+        if ((s16) gp->gv.kongo3.xC4 == 2) {
+            gp->gv.kongo3.xC4 = 3;
         }
         break;
     }
     case 0:
         if (gp->gv.kongo3.xE0 > 0.0f) {
-            grKongo_801D577C_inline(gp, gp->gv.kongo3.xE0, 1);
+            if (gp->gv.kongo3.xE0 < DegToRad(grKg_804D6980->unk34)) {
+                gp->gv.kongo3.xE0 = 0.0f;
+                gp->gv.kongo3.xD8 = gp->gv.kongo3.xD4;
+            } else {
+                gp->gv.kongo3.xE0 -= DegToRad(grKg_804D6980->unk34);
+            }
         } else if (gp->gv.kongo3.xE0 < 0.0f) {
-            grKongo_801D577C_inline(gp, gp->gv.kongo3.xE0, 0);
+            if (gp->gv.kongo3.xE0 > -DegToRad(grKg_804D6980->unk34)) {
+                gp->gv.kongo3.xE0 = 0.0f;
+                gp->gv.kongo3.xD8 = gp->gv.kongo3.xD4;
+            } else {
+                gp->gv.kongo3.xE0 += DegToRad(grKg_804D6980->unk34);
+            }
         }
         gp->gv.kongo2.xCC -= 1;
         if ((s16) gp->gv.kongo2.xCC < 0) {
@@ -366,28 +334,37 @@ void grKongo_801D577C(Ground_GObj* arg0)
                 spin_step = -DegToRad(grKg_804D6980->unk34);
             }
             gp->gv.kongo3.xDC = spin_step;
-            gp->gv.kongo2.xCC =
-                random_adder_f(grKg_804D6980->unk3C, grKg_804D6980->unk40);
+            gp->gv.kongo2.xCC = rand_range((s32) grKg_804D6980->unk40,
+                                           (s32) grKg_804D6980->unk3C);
         }
         break;
     case 1:
         gp->gv.kongo3.xE0 += gp->gv.kongo3.xDC;
-        compare(gp->gv.kongo3.xE0, DegToRad(grKg_804D6980->unk38),
-                &gp->gv.kongo3.xE0);
+        if (gp->gv.kongo3.xE0 > DegToRad(grKg_804D6980->unk38)) {
+            gp->gv.kongo3.xE0 = DegToRad(grKg_804D6980->unk38);
+        } else {
+            if (gp->gv.kongo3.xE0 < -DegToRad(grKg_804D6980->unk38)) {
+                gp->gv.kongo3.xE0 = -DegToRad(grKg_804D6980->unk38);
+            }
+        }
         {
             s16 val2 = gp->gv.kongo2.xCC;
             gp->gv.kongo2.xCC = val2 - 1;
             if (val2 < 0) {
                 gp->gv.kongo3.xC4 = 2;
-                gp->gv.kongo2.xCC =
-                    random_adder_f(grKg_804D6980->unk2C, grKg_804D6980->unk30);
+                gp->gv.kongo2.xCC = rand_range((s32) grKg_804D6980->unk30,
+                                               (s32) grKg_804D6980->unk2C);
                 gp->gv.kongo3.xD4 = grKongo_801D8314();
             }
         }
         break;
     }
     gp->gv.kongo3.xD8 += gp->gv.kongo3.xE0;
-    tau_range(&gp->gv.kongo3.xD8);
+    if (gp->gv.kongo3.xD8 > M_TAU) {
+        gp->gv.kongo3.xD8 -= M_TAU;
+    } else if (gp->gv.kongo3.xD8 < -M_TAU) {
+        gp->gv.kongo3.xD8 += M_TAU;
+    }
     HSD_JObjSetRotationZ(jobj, gp->gv.kongo.xD8);
     lb_8000B1CC(jobj, NULL, &vec);
     Ground_801C4D70(arg0, &vec, gp->gv.kongo3.xD8);
@@ -404,7 +381,7 @@ void grKongo_801D577C(Ground_GObj* arg0)
         if (gp->gv.kongo2.xE8 > grKg_804D6980->unk60) {
             gp->gv.kongo2.xE8 = grKg_804D6980->unk60;
             gp->gv.kongo2.xCE =
-                random_adder(grKg_804D6980->unk68, grKg_804D6980->unk64);
+                rand_range(grKg_804D6980->unk68, grKg_804D6980->unk64);
             gp->gv.kongo3.xC8 = 2;
         }
         break;
@@ -419,8 +396,8 @@ void grKongo_801D577C(Ground_GObj* arg0)
         gp->gv.kongo2.xE8 -= grKg_804D6980->unk5C;
         if (gp->gv.kongo2.xE8 < 0.0f) {
             gp->gv.kongo2.xE8 = 0.0f;
-            gp->gv.kongo2.xCE = random_adder(*(s32*) &grKg_804D6980->unk58,
-                                             *(s32*) &grKg_804D6980->unk54);
+            gp->gv.kongo2.xCE = rand_range(*(s32*) &grKg_804D6980->unk58,
+                                           *(s32*) &grKg_804D6980->unk54);
             gp->gv.kongo3.xC8 = 0;
         }
         break;
@@ -441,28 +418,23 @@ void grKongo_801D577C(Ground_GObj* arg0)
             gp->gv.kongo3.xC6 = 1;
             Ground_801C5440(gp, 0, 0x129U);
             grMaterial_801C9604(arg0, grKg_804D6980->unk84, 0);
-            return;
         }
         return;
     }
-    case 1: {
-        s16 val2;
+    case 1:
         if (gp->gv.kongo.u.taru.keep == NULL) {
             gp->gv.kongo3.xC6 = 0;
-            goto block_124;
+        } else {
+            if (gp->gv.kongo3.xCA-- >= 0) {
+                break;
+            }
+            gp->gv.kongo3.xC6 = 2;
         }
-        val2 = gp->gv.kongo3.xCA;
-        gp->gv.kongo3.xCA = val2 - 1;
-        if (val2 >= 0) {
-            break;
-        }
-        gp->gv.kongo3.xC6 = 2;
-    }
     case 2: { /* switch 2 */
         f32 angle;
         HSD_GObj* kept_gobj;
-    block_124:;
-        hit = grKg_803B7FB0;
+        lbColl_80008D30_arg1 hit = grKg_803B7FB0;
+        PAD_STACK(4);
         hit.state = 1;
         hit.damage = *(u32*) &grKg_804D6980->unk6C;
         hit.kb_angle = *(u32*) &grKg_804D6980->unk70;
@@ -472,7 +444,7 @@ void grKongo_801D577C(Ground_GObj* arg0)
         hit.element = *(u32*) &grKg_804D6980->unk80;
         angle = (f32) (1.5707963267948966 + (f64) gp->gv.kongo3.xD8);
         if (angle < 0.0f) {
-            angle = (f32) ((f64) angle + M_TAU);
+            angle += M_TAU;
         } else if (angle > M_TAU) {
             angle = (f32) ((f64) angle - M_TAU);
         }
@@ -685,41 +657,22 @@ void grKongo_801D6518(Ground_GObj* arg)
     return;
 }
 
-typedef struct grKg_801D651C_pair {
-    s32 a;
-    s32 b;
-} grKg_801D651C_pair;
-
-typedef struct grKg_801D651C_pair_list {
-    grKg_801D651C_pair pairs[3];
-    s32 terminator;
-} grKg_801D651C_pair_list;
-
-static const grKg_801D651C_pair_list grKg_803B7FD4 = {
-    {
-        { 7, 4 },
-        { 8, 5 },
-        { 9, 6 },
-    },
-    0,
-};
-
 void grKongo_801D651C(Ground_GObj* gobj)
 {
     Ground* gp;
     HSD_JObj* jobj;
     Vec3 sp2C;
-    grKg_801D651C_pair list[3];
+    grKg_SplineChoice list[3];
     int i;
     PAD_STACK(8);
 
     gp = gobj->user_data;
     jobj = gobj->hsd_obj;
-    list[0] = grKg_803B7FD4.pairs[0];
-    list[1] = grKg_803B7FD4.pairs[1];
-    list[2] = grKg_803B7FD4.pairs[2];
+    list[0] = grKg_SplineChoices.pairs[0];
+    list[1] = grKg_SplineChoices.pairs[1];
+    list[2] = grKg_SplineChoices.pairs[2];
     i = HSD_Randi(3);
-    gp->gv.kongo2.xC4 = Ground_801C247C(list[i].a, list[i].b);
+    gp->gv.kongo2.xC4 = Ground_801C247C(list[i].file, list[i].spline);
     gp->gv.kongo2.xC8 = grKg_804DAFA0;
     gp->gv.kongo2.xD0 = grKg_804DAFA0;
     gp->gv.kongo.xCC = grKg_804DAFA0;
@@ -728,6 +681,25 @@ void grKongo_801D651C(Ground_GObj* gobj)
     splArcLengthPoint(&sp2C, gp->gv.kongo2.xC4, gp->gv.kongo.xCC);
     HSD_JObjSetTranslate(jobj, &sp2C);
 }
+
+/// Args for #Ground_801C247C: a dat file index and the index of the
+/// spline to take from that file's spline table.
+///
+/// Defined after #grKongo_801D651C (declared in grkongo.static.h) to
+/// match: at the reference's code for that function, the compiler
+/// addresses this object through the symbol itself rather than a
+/// .rodata section anchor, which MWCC only produces when the object
+/// is not yet defined at the point of use. Verified against the
+/// section-anchored form (lwz offsets 0x24..0x38 off the .rodata
+/// base) produced when the definition precedes the function.
+const grKg_SplineChoiceList grKg_SplineChoices = {
+    {
+        { 7, 4 },
+        { 8, 5 },
+        { 9, 6 },
+    },
+    0,
+};
 
 bool grKongo_801D6660(Ground_GObj* arg)
 {
@@ -863,14 +835,14 @@ struct _struct_grKg_804D6984 grKg_804D6984;
 void grKongo_801D69B0(HSD_GObj* gobj)
 {
     f32 rot_x;
-    struct _struct_grKg_803E188C_0x18* entry;
     u32 i;
 
-    for (entry = &grKg_803E188C[i = 0U]; i < 0xFU; i += 1, entry += 1) {
-        entry->unk4 = Ground_801C3FA4(gobj, (s32) entry->unk0);
-        entry->unkC = entry->unk8;
-        rot_x = entry->unkC;
-        HSD_JObjSetRotationX(entry->unk4, rot_x);
+    for (i = 0U; i < 0xFU; i += 1) {
+        grKg_803E188C[i].unk4 =
+            Ground_801C3FA4(gobj, (s32) grKg_803E188C[i].unk0);
+        grKg_803E188C[i].unkC = grKg_803E188C[i].unk8;
+        rot_x = grKg_803E188C[i].unkC;
+        HSD_JObjSetRotationX(grKg_803E188C[i].unk4, rot_x);
     }
     grKg_804D6984.unk0 = Ground_801C3FA4(gobj, 0xB);
     grKg_804D6984.unk4 = Ground_801C3FA4(gobj, 0x21);
@@ -938,22 +910,19 @@ static inline void grKongo_801D6AFC_apply(f32* deltas,
 void grKongo_801D6AFC(void)
 {
     f32 sp44[15];
-    f32 sp8[15];
+    _struct_grKg_803E188C_0x18* entries;
     f32* var_r5;
     f32* deltas;
-    _struct_grKg_803E188C_0x18* entries;
+    f32 sp8[15];
 
-    s32 var_ctr = 3;
-    var_r5 = sp44;
-    do {
-        var_r5[0] = 0.0f;
-        var_r5[1] = 0.0f;
-        var_r5[2] = 0.0f;
-        var_r5[3] = 0.0f;
-        var_r5[4] = 0.0f;
-        var_r5 += 5;
-        var_ctr -= 1;
-    } while (var_ctr != 0);
+    {
+        f32* p = sp44;
+        s32 i = 0;
+        do {
+            *p++ = 0.0f;
+            i++;
+        } while (i < 15);
+    }
     var_r5 = sp44;
     entries = grKg_803E188C;
     {
@@ -970,7 +939,7 @@ void grKongo_801D6AFC(void)
         } while (var_ctr_2 != 0);
     }
     {
-        volatile s32 var_ctr_3 = 3;
+        s32 var_ctr_3 = 3;
         _struct_grKg_803E188C_0x18* var_r3_3 = grKg_803E188C;
         f32 temp_f0;
         do {
@@ -1113,7 +1082,6 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
     HSD_JObj* jobj;
     f32 angle;
     f32 old_angle;
-    f32 angular_vel;
     f32 temp;
     f32 displacement;
     u32 i;
@@ -1144,9 +1112,8 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
     HSD_JObjSetRotationX(grKg_804D6984.unk0, displacement);
     old_angle = HSD_JObjGetRotationZ(grKg_804D6984.unk0);
     HSD_JObjSetRotationZ(grKg_804D6984.unk0, angle);
-    angular_vel = angle - old_angle;
-    if (ABS(angular_vel) > (deg_to_rad * grKg_804D6980->unkB0)) {
-        gp->gv.kongo.xC8 = -angular_vel;
+    if (ABS(angle - old_angle) > (deg_to_rad * grKg_804D6980->unkB0)) {
+        gp->gv.kongo.xC8 = -(angle - old_angle);
     }
 
     displacement =
@@ -1168,9 +1135,8 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
     HSD_JObjSetRotationX(grKg_804D6984.unk4, displacement);
     old_angle = HSD_JObjGetRotationZ(grKg_804D6984.unk4);
     HSD_JObjSetRotationZ(grKg_804D6984.unk4, angle);
-    angular_vel = angle - old_angle;
-    if (ABS(angular_vel) > (deg_to_rad * grKg_804D6980->unkB0)) {
-        gp->gv.kongo.xD8 = -angular_vel;
+    if (ABS(angle - old_angle) > (deg_to_rad * grKg_804D6980->unkB0)) {
+        gp->gv.kongo.xD8 = -(angle - old_angle);
     }
 
     entry = (_struct_grKg_803E188C_0x18*) ((u8*) grKg_803E16E0 + 0x1AC);
@@ -1450,9 +1416,9 @@ void grKongo_801D77E0(HSD_GObj* gobj, s32 arg1)
 {
     Ground* gp = gobj->user_data;
     s32 i;
-    f32 v;
     f32 limit;
     f32 step;
+    PAD_STACK(8);
 
     if (arg1 != 0) {
         gp->gv.kongo.xC4 = 0.0f;
@@ -1466,36 +1432,33 @@ void grKongo_801D77E0(HSD_GObj* gobj, s32 arg1)
                 if (q->gv.kongo.xC8 > 0.0f) {
                     step = 0.017453292f * grKg_804D6980->unkB4;
                 } else {
-                    step = 0.017453292f * grKg_804D6980->unkB4 * 0.5f;
+                    step = (0.017453292f * grKg_804D6980->unkB4) / 2.0f;
                 }
                 q->gv.kongo.xC8 -= step;
             } else if (q->gv.kongo.xC4 < 0.0f) {
                 if (q->gv.kongo.xC8 < 0.0f) {
                     step = 0.017453292f * grKg_804D6980->unkB4;
                 } else {
-                    step = 0.017453292f * grKg_804D6980->unkB4 * 0.5f;
+                    step = (0.017453292f * grKg_804D6980->unkB4) / 2.0f;
                 }
                 q->gv.kongo.xC8 += step;
             }
             q->gv.kongo.xC4 += q->gv.kongo.xC8;
-            v = q->gv.kongo.xC4;
             limit = 0.017453292f * (grKg_804D6980->unkB8 -
                                     0.017453292f * grKg_804D6980->unkAC);
-            if (v > limit) {
+            if (q->gv.kongo.xC4 > limit) {
                 q->gv.kongo.xC4 = limit;
                 q->gv.kongo.xC8 = 0.0f;
-            } else if (v < -limit) {
+            } else if (q->gv.kongo.xC4 < -limit) {
                 q->gv.kongo.xC4 = -limit;
                 q->gv.kongo.xC8 = 0.0f;
-            } else {
-                f32 av = (v < 0.0f) ? -v : v;
-                if (av < 0.017453292f * grKg_804D6980->unkB4) {
-                    f32 av2 = (q->gv.kongo.xC8 < 0.0f) ? -q->gv.kongo.xC8
-                                                       : q->gv.kongo.xC8;
-                    if (av2 < 0.017453292f * grKg_804D6980->unkB4) {
-                        q->gv.kongo.xC4 = 0.0f;
-                        q->gv.kongo.xC8 = 0.0f;
-                    }
+            } else if (ABS(q->gv.kongo.xC4) <
+                       0.017453292f * grKg_804D6980->unkB4)
+            {
+                if (ABS(q->gv.kongo.xC8) < 0.017453292f * grKg_804D6980->unkB4)
+                {
+                    q->gv.kongo.xC4 = 0.0f;
+                    q->gv.kongo.xC8 = 0.0f;
                 }
             }
             q = (Ground*) ((u8*) q + 0x10);
