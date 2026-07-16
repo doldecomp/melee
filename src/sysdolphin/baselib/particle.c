@@ -4650,7 +4650,7 @@ void psInitDataBankLoad(int bank, int* cmdBank, int* texBank, u32* ref,
     u16 version;
 
     if (formBank != NULL && *formBank != *texBank) {
-        OSPanic("particle.c", 177,
+        OSPanic(__FILE__, 177,
                 "illigal form data (strange number of group)\n");
     }
 
@@ -4680,7 +4680,7 @@ void psInitDataBankLoad(int bank, int* cmdBank, int* texBank, u32* ref,
         break;
     }
     default:
-        OSPanic("particle.c", 207, "psInitDataBanks: unknown version\n");
+        OSPanic(__FILE__, 207, "psInitDataBanks: unknown version\n");
     }
 }
 
