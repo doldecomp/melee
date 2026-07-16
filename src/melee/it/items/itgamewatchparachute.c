@@ -1,5 +1,7 @@
 #include "itgamewatchparachute.h"
 
+#include "itgamewatch.h"
+
 #include "db/db.h"
 #include "ftGameWatch/ftGw_AttackAir.h"
 
@@ -33,17 +35,7 @@ HSD_GObj* it_802C6C38(Item_GObj* parent, Vec3* pos, enum_t part,
     PAD_STACK(4);
 
     spawn.kind = 0x75;
-    spawn.prev_pos = *pos;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = facing_dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.z = 0.0f;
-    spawn.vel.y = 0.0f;
-    spawn.vel.x = 0.0f;
-    spawn.x0_parent_gobj = parent;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
+    itGamewatch_InitSpawnItem(&spawn, parent, pos, facing_dir);
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
         itGamewatchparachuteAttributes* attrs =

@@ -1,5 +1,7 @@
 #include "itgamewatchmanhole.h"
 
+#include "itgamewatch.h"
+
 #include "db/db.h"
 #include "ft/chara/ftGameWatch/ftGw_AttackLw3.h"
 
@@ -24,15 +26,7 @@ HSD_GObj* it_802C65E4(Item_GObj* gobj, Vec* vec, enum Fighter_Part arg2,
     SpawnItem si;
     PAD_STACK(4);
     si.kind = It_Kind_GameWatch_Manhole;
-    si.prev_pos = *vec;
-    si.pos = si.prev_pos;
-    si.facing_dir = arg3;
-    si.x3C_damage = 0;
-    si.vel.x = si.vel.y = si.vel.z = 0.0f;
-    si.x0_parent_gobj = gobj;
-    si.x4_parent_gobj2 = si.x0_parent_gobj;
-    si.x44_flag.b0 = 1;
-    si.x40 = 0;
+    itGamewatch_InitSpawnItem(&si, gobj, vec, arg3);
     n = Item_80268B18(&si);
     if (n != NULL) {
         void** x = GET_ITEM(n)->xC4_article_data->x4_specialAttributes;

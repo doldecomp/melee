@@ -1,5 +1,7 @@
 #include "itgamewatchfire.h"
 
+#include "itgamewatch.h"
+
 #include "db/db.h"
 #include "ft/ftlib.h"
 #include "it/inlines.h"
@@ -24,15 +26,7 @@ HSD_GObj* itGamewatchFire_Spawn(HSD_GObj* parent, Vec3* pos, Fighter_Part part,
     Item_GObj* result;
 
     spawn.kind = It_Kind_GameWatch_Fire;
-    spawn.prev_pos = *pos;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
-    spawn.x0_parent_gobj = parent;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
+    itGamewatch_InitSpawnItem(&spawn, parent, pos, dir);
 
     result = Item_80268B18(&spawn);
     if (result != NULL) {
