@@ -43,9 +43,9 @@ pre-commit run --all-files # Run the hook once on existing code
 ## <a name="functions"></a>Functions
 
 - Avoid naming a function that you are not matching. If you have not matched to understand the functionality, don't expect that someone else did just because they named it.
-- Prefix functions within Melee related code with the file's name. While asserts may indicate this was not the case for your function, this is to make the code easier to read.
-- Exported methods (the majority of cases)
+- Naming exported methods (the majority of cases)
     - Applies to any method that is defined in a .h file, with a .c implementation.
+    - Prefix functions within Melee related code with the file's name. While asserts may indicate this was not the case for your function, this is to make the code easier to read.
     - Use lowerCamelCasing for the function's filename if it is made up of multiple words.
     - Use UpperCamelCasing for the function's name itself, unless it is a standard library reimplementation.
     - Examples:
@@ -57,7 +57,7 @@ pre-commit run --all-files # Run the hook once on existing code
         Stage_GetLeftBlastZone
         ftFox_LaserOnDeath
     ```
-- Non-exported/local static inlines
+- Naming non-exported/local static inlines
     - Applies only to methods that have no accomanying .h definition. These are local and only used in the .c file where
       they are created.
     - Use lowerCamelCasing for the function name
