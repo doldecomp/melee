@@ -4,6 +4,7 @@
 
 #include "gm_unsplit.h"
 
+#include "gm/gm_1601.h"
 #include "mn/types.h"
 
 #include <melee/gm/gm_16AE.h>
@@ -1886,7 +1887,7 @@ static inline const struct lbl_803B7AD0_t* inline1(u32 arg0)
     const struct lbl_803B7AD0_t* var_r29 = NULL;
     u16 var_r30 = -1;
     int i;
-    for (i = 0; i < 0xB; i++) {
+    for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
         if (lbl_803B7AD0[i].x4 <= arg0 &&
             !gm_IsCKindUnlocked(gm_GetCKindByUnlockIndex(lbl_803B7AD0[i].x0)))
         {
@@ -2003,7 +2004,7 @@ u8 fn_80173098(int arg0)
 {
     Unk1PData* temp_r3;
     UnkAdventureData* temp_r31;
-    int var_r31;
+    int unlocked_chars_count;
 
     temp_r3 = fn_8017DEC8(arg0);
     if (temp_r3->xC.xD == 0) {
@@ -2017,9 +2018,9 @@ u8 fn_80173098(int arg0)
             return CKIND_DRMARIO;
         }
     }
-    var_r31 = fn_80173098_CountUnlocked();
-    (void) var_r31;
-    if (var_r31 >= 10 && !gm_IsCKindUnlocked(CKIND_CLINK)) {
+    unlocked_chars_count = fn_80173098_CountUnlocked();
+    (void) unlocked_chars_count;
+    if (unlocked_chars_count >= 10 && !gm_IsCKindUnlocked(CKIND_CLINK)) {
         return CKIND_CLINK;
     }
     if (fn_80172FAC() && !gm_IsCKindUnlocked(CKIND_GAMEWATCH)) {

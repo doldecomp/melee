@@ -2380,11 +2380,13 @@ int gm_801647F8(u8 arg0)
 /// Is a specific character unlocked?
 bool gm_IsCKindUnlocked(u8 ckind)
 {
-    u16* temp_r31 = gmMainLib_GetUnlockedCharactersBitmaskPtr();
+    u16* unlocked_chars_bitmask = gmMainLib_GetUnlockedCharactersBitmaskPtr();
     u8 var = ckind_to_selkind_map[ckind];
-    u8 var_r0 = gm_SelKindToUnlockIndex(var);
+    u8 unlock_bit = gm_SelKindToUnlockIndex(var);
 
-    if (var_r0 == NUM_UNLOCKABLE_CHARACTERS || (*temp_r31 & (1LL << var_r0))) {
+    if (unlock_bit == NUM_UNLOCKABLE_CHARACTERS ||
+        (*unlocked_chars_bitmask & (1LL << unlock_bit)))
+    {
         return true;
     }
     return false;
@@ -4616,14 +4618,16 @@ void fn_80169900(u8 arg0, struct lbl_8046B488_t* arg1, s8* arg2, s8* arg3)
             } else {
                 var_r27 = 5;
                 if (HSD_Randi(2) != 0) {
-                    if ((s32) arg1->x1 != 0x21 && gm_IsCKindUnlocked(arg1->x1))
+                    if ((s32) arg1->x1 != CHKIND_NONE &&
+                        gm_IsCKindUnlocked(arg1->x1))
                     {
                         arg2[var_r28] = arg1->x1;
                     } else {
                         arg2[var_r28] = arg1->x0;
                     }
                 } else {
-                    if ((s32) arg1->x2 != 0x21 && gm_IsCKindUnlocked(arg1->x2))
+                    if ((s32) arg1->x2 != CHKIND_NONE &&
+                        gm_IsCKindUnlocked(arg1->x2))
                     {
                         arg2[var_r28] = arg1->x2;
                     } else {

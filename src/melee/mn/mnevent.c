@@ -38,7 +38,8 @@ static inline s32 mnEvent_CountUnlocked(void)
     return count;
 }
 
-s32 mnEvent_8024CE74(void)
+s32 mnEvent_8024CE74(
+    void) ///< Clac Event match starting selection when list is opened?
 {
     s32 count;
 
@@ -67,13 +68,16 @@ s32 mnEvent_8024CE74(void)
         }
         return 0x29;
     }
-    if (gm_IsCKindUnlocked(0x14) && gm_IsCKindUnlocked(7) &&
-        gm_IsCKindUnlocked(0xF) && gm_IsCKindUnlocked(0x15))
+    if (gm_IsCKindUnlocked(CKIND_FALCO) && gm_IsCKindUnlocked(CKIND_LUIGI) &&
+        gm_IsCKindUnlocked(CKIND_PURIN) && gm_IsCKindUnlocked(CKIND_CLINK))
     {
-        if (gm_IsCKindUnlocked(0xA) && gm_IsCKindUnlocked(9) &&
-            gm_IsCKindUnlocked(3) && gm_IsCKindUnlocked(0x18) &&
-            gm_IsCKindUnlocked(0x19) && gm_IsCKindUnlocked(0x16) &&
-            gm_IsCKindUnlocked(0x17))
+        if (gm_IsCKindUnlocked(CKIND_MEWTWO) &&
+            gm_IsCKindUnlocked(CKIND_MARS) &&
+            gm_IsCKindUnlocked(CKIND_GAMEWATCH) &&
+            gm_IsCKindUnlocked(CKIND_PICHU) &&
+            gm_IsCKindUnlocked(CKIND_GANON) &&
+            gm_IsCKindUnlocked(CKIND_DRMARIO) &&
+            gm_IsCKindUnlocked(CKIND_EMBLEM))
         {
             return 0x29;
         }
