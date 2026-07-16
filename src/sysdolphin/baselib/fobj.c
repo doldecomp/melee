@@ -14,7 +14,7 @@ HSD_ObjAllocData* HSD_FObjGetAllocData(void)
 
 void HSD_FObjInitAllocData(void)
 {
-    HSD_ObjAllocInit(&fobj_alloc_data, sizeof(HSD_FObj), 4);
+    HSD_ObjAllocInit(HSD_FObjGetAllocData(), sizeof(HSD_FObj), 4);
 }
 
 void HSD_FObjRemove(HSD_FObj* fobj)
@@ -472,7 +472,7 @@ HSD_FObj* HSD_FObjLoadDesc(HSD_FObjDesc* desc)
 
 HSD_FObj* HSD_FObjAlloc(void)
 {
-    HSD_FObj* new = HSD_ObjAlloc(&fobj_alloc_data);
+    HSD_FObj* new = HSD_ObjAlloc(HSD_FObjGetAllocData());
     HSD_ASSERT(0x2F3, new);
     memset(new, 0, sizeof(HSD_FObj));
     return new;
@@ -480,5 +480,5 @@ HSD_FObj* HSD_FObjAlloc(void)
 
 void HSD_FObjFree(HSD_FObj* fobj)
 {
-    HSD_ObjFree(&fobj_alloc_data, fobj);
+    HSD_ObjFree(HSD_FObjGetAllocData(), fobj);
 }

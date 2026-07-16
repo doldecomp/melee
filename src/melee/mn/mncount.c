@@ -531,46 +531,53 @@ unsigned int mnCount_GetRowValue_Number(int row)
 void mnCount_CreateRow(HSD_GObj* gobj, int visible_row, mnCount_row data_row)
 {
     MnCountData* userdata = GET_MNCOUNT(gobj);
+    HSD_Text** label_base;
+    HSD_Text** label_slot;
+    HSD_Text** label_text;
     HSD_Text* text;
-    unsigned int row_value;
     int row_value_2;
+    HSD_Text** value_base;
+    HSD_Text** value_text;
     float y;
-    char buf2[8];
     static GXColor text_color = { 0xAA, 0xAA, 0xAA, 0xFF };
-    if (userdata->labels[visible_row] != NULL) {
+
+    label_base = userdata->labels;
+    label_slot = label_base + visible_row;
+    label_text = label_slot;
+    if (*label_text != NULL) {
         HSD_SisLib_803A5CC4(userdata->labels[visible_row]);
-        userdata->labels[visible_row] = NULL;
+        *label_text = NULL;
     }
-    y = (1.4f * visible_row) + -6.4f;
-    text = HSD_SisLib_803A5ACC(0, 1, -13.0f, y, 17.0f, 500.0f, 38.38772f);
-    userdata->labels[visible_row] = text;
+    text = HSD_SisLib_803A5ACC(0, 1, -13.0f, y = (1.4f * visible_row) + -6.4f,
+                               17.0f, 500.0f, 38.38772f);
+    *label_text = text;
     text->font_size.x = 0.03f;
     text->font_size.y = 0.03f;
     text->text_color = text_color;
     HSD_SisLib_803A6368(text, mnCount_sis_idx[data_row]);
-    if (userdata->values[visible_row] != NULL) {
-        {
-            HSD_Text* volatile value_text = userdata->values[visible_row];
-            HSD_SisLib_803A5CC4(value_text);
-        }
-        userdata->values[visible_row] = NULL;
+    value_base = userdata->values;
+    value_text = value_base + visible_row;
+    if (*value_text != NULL) {
+        HSD_SisLib_803A5CC4(userdata->values[visible_row]);
+        *value_text = NULL;
     }
     text = HSD_SisLib_803A6754(0, 1);
-    userdata->values[visible_row] = text;
+    *value_text = text;
     text->pos_x = 13.0f;
     text->pos_y = y;
     text->pos_z = 17.0f;
     text->text_color = mn_804D4B64;
     text->default_alignment = 2;
     if (inline_is_row_time(data_row)) {
-        char buf1[8];
+        unsigned int row_value;
+        char buf[4];
         text->font_size.x = 0.03f;
         text->font_size.y = 0.03f;
         row_value = mnCount_GetRowValue_Number(data_row);
-        mn_8022EA78(buf1, 2, row_value / 60 / 60);
-        mn_8022EA78(buf2, 2, row_value / 60 % 60);
+        mn_8022EA78(buf, 2, row_value / 60 / 60);
+        mn_8022EA78(buf - 4, 2, row_value / 60 % 60);
         HSD_SisLib_803A6B98(text, 0.0f, 0.0f, "%u:%s", row_value / 60 / 60,
-                            buf2);
+                            *(char (*)[4]) & buf - 4);
     } else if (inline_is_row_char(data_row)) {
         text->font_size.x = 0.03f;
         text->font_size.y = 0.03f;
@@ -715,39 +722,59 @@ void fn_802514D8(HSD_GObj* gobj)
     fn_802514D8_inline(userdata, gobj);
 }
 
+static inline void fn_80251640_FreeText(HSD_GObj* gobj, MnCountData* userdata,
+                                        s32 i)
+{
+    MnCountData* userdata2;
+    MnCountData* userdata3;
+
+    userdata2 = GET_MNCOUNT(gobj);
+    userdata3 = userdata2;
+    do {
+        if (userdata2->labels[i] != NULL) {
+            HSD_SisLib_803A5CC4(userdata3->labels[i]);
+            userdata2->labels[i] = NULL;
+        }
+        if (userdata2->values[i] != NULL) {
+            HSD_SisLib_803A5CC4(userdata3->values[i]);
+            userdata2->values[i] = NULL;
+        }
+        i += 1;
+    } while (i < MNCOUNT_VISIBLE_ROWS);
+    HSD_SisLib_803A5CC4(userdata->title);
+}
+
+static inline void fn_80251640_InitModel(HSD_GObj* gobj, MnCountData* userdata,
+                                         s32 i)
+{
+    StaticModelDesc* md;
+    HSD_JObj* jobj;
+
+    for (; i < MNCOUNT_VISIBLE_ROWS; i++) {
+        mnCount_CreateRow(gobj, i, userdata->scroll_pos + i);
+    }
+    md = &model_desc;
+    jobj = HSD_JObjLoadJoint(md->joint);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
+    HSD_JObjAddAnimAll(jobj, md->animjoint, md->matanim_joint,
+                       md->shapeanim_joint);
+    HSD_JObjReqAnimAll(jobj, 0.0f);
+}
+
 void fn_80251640(HSD_GObj* gobj)
 {
     HSD_GObjProc* proc;
-    int i;
-    HSD_JObj* jobj;
-    StaticModelDesc* md;
     MnCountData* userdata = GET_MNCOUNT(gobj);
+    s32 i;
     PAD_STACK(24);
 
     if (mn_804A04F0.cur_menu != MENU_KIND_RECORDS_MISC) {
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         proc = HSD_GObj_SetupProc(gobj, fn_802514B8, 0);
+        i = 0;
         proc->flags_3 = HSD_GObj_804D783C;
-        {
-            // inline_free_text
-
-            MnCountData* userdata2 = GET_MNCOUNT(gobj);
-            MnCountData* userdata3 = userdata2;
-            int i;
-
-            for (i = 0; i < MNCOUNT_VISIBLE_ROWS; i++) {
-                if (userdata2->labels[i] != NULL) {
-                    HSD_SisLib_803A5CC4(userdata3->labels[i]);
-                    userdata2->labels[i] = NULL;
-                }
-                if (userdata2->values[i] != NULL) {
-                    HSD_SisLib_803A5CC4(userdata3->values[i]);
-                    userdata2->values[i] = NULL;
-                }
-            }
-
-            HSD_SisLib_803A5CC4(userdata->title);
-        }
+        fn_80251640_FreeText(gobj, userdata, i);
         return;
     }
 
@@ -756,17 +783,7 @@ void fn_80251640(HSD_GObj* gobj)
         return;
     }
 
-    for (i = 0; i < MNCOUNT_VISIBLE_ROWS; i++) {
-        mnCount_CreateRow(gobj, i, userdata->scroll_pos + i);
-    }
-
-    md = &model_desc;
-    jobj = HSD_JObjLoadJoint(md->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
-    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
-    HSD_JObjAddAnimAll(jobj, md->animjoint, md->matanim_joint,
-                       md->shapeanim_joint);
-    HSD_JObjReqAnimAll(jobj, 0.0f);
+    fn_80251640_InitModel(gobj, userdata, 0);
     mnCount_UpdateArrowIndicators_noinline(gobj);
     HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
     proc = HSD_GObj_SetupProc(gobj, fn_802514D8, 0);
