@@ -140,11 +140,7 @@ static void grTYoshi_80223D0C(Ground_GObj* arg0) {}
 
 static void grTYoshi_80223D10(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 static bool grTYoshi_80223D60(Ground_GObj* arg0)
@@ -162,11 +158,7 @@ static void grTYoshi_80223D9C(Ground_GObj* arg0) {}
 
 static void grTYoshi_80223DA0(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 static bool grTYoshi_80223DF0(Ground_GObj* arg0)

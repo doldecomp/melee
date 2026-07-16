@@ -131,12 +131,7 @@ void grTCLink_80220108(Ground_GObj* gobj)
 
 void grTCLink_8022010C(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* joint = (HSD_JObj*) gobj->hsd_obj;
-    PAD_STACK(8);
-
-    Ground_801C2ED0(joint, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTCLink_8022015C(Ground_GObj* gobj)
@@ -157,12 +152,7 @@ void grTCLink_80220198(Ground_GObj* gobj)
 
 void grTCLink_8022019C(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* joint = (HSD_JObj*) gobj->hsd_obj;
-    PAD_STACK(8);
-
-    Ground_801C2ED0(joint, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTCLink_802201EC(Ground_GObj* gobj)

@@ -110,12 +110,7 @@ void grTPikachu_80223040(Ground_GObj* gobj)
 
 void grTPikachu_80223044(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* joint = (HSD_JObj*) gobj->hsd_obj;
-    PAD_STACK(8);
-
-    Ground_801C2ED0(joint, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTPikachu_80223094(Ground_GObj* gobj)
@@ -136,12 +131,7 @@ void grTPikachu_802230D0(Ground_GObj* gobj)
 
 void grTPikachu_802230D4(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* joint = (HSD_JObj*) gobj->hsd_obj;
-    PAD_STACK(8);
-
-    Ground_801C2ED0(joint, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTPikachu_80223124(Ground_GObj* gobj)

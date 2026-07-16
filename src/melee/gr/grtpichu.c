@@ -142,11 +142,7 @@ static void grTPichu_80222D5C(Ground_GObj* arg0) {}
 
 static void grTPichu_80222D60(Ground_GObj* gobj)
 {
-    u8 _[4];
-
-    Ground* gp = GET_GROUND(gobj);
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 static bool grTPichu_80222DB0(Ground_GObj* arg0)
@@ -164,11 +160,7 @@ static void grTPichu_80222DEC(Ground_GObj* arg0) {}
 
 static void grTPichu_80222DF0(Ground_GObj* gobj)
 {
-    u8 _[4];
-
-    Ground* gp = GET_GROUND(gobj);
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 static bool grTPichu_80222E40(Ground_GObj* arg0)

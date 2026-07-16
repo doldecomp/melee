@@ -148,10 +148,7 @@ void grTPeach_80222A78(Ground_GObj* gobj) {}
 
 void grTPeach_80222A7C(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTPeach_80222ACC(Ground_GObj* gobj)
@@ -169,10 +166,7 @@ void grTPeach_80222B08(Ground_GObj* gobj) {}
 
 void grTPeach_80222B0C(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTPeach_80222B5C(Ground_GObj* gobj)
