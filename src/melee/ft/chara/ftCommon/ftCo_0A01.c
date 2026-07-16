@@ -6772,116 +6772,119 @@ void ftCo_800AECF0(Fighter* fp)
     ftCo_800ADE48(fp);
 }
 
-/// Shared body of the three CPU update functions below (a macro rather
-/// than an inline function so the compiled bytes stay identical).
-#define FTCO_CPU_UPDATE(fp, fear_flag)                                        \
-    {                                                                         \
-        struct Fighter_x1A88_t* data2 = &fp->x1A88;                           \
-        struct Fighter_x1A88_t* data = &fp->x1A88;                            \
-        Vec3 sp28;                                                            \
-        s32 cmd;                                                              \
-        Fighter* target;                                                      \
-        Fighter* attack_target;                                               \
-        s32 do_act;                                                           \
-        s32 is_food;                                                          \
-        Item_GObj* item_gobj;                                                 \
-        ItemKind kind;                                                        \
-        PAD_STACK(0x18);                                                      \
-                                                                              \
-        cmd = ftCo_800A229C(fp, &sp28);                                       \
-        if (cmd != 0) {                                                       \
-            ftCo_800AE7AC(fp, &sp28, cmd);                                    \
-            return;                                                           \
-        }                                                                     \
-        target = ftCo_800A5CE0(fp);                                           \
-        data->x44 = target;                                                   \
-        if (target != NULL) {                                                 \
-            data->xF8_b0 = true;                                              \
-            data->xF9_b2 = false;                                             \
-            data->xF9_b4 = false;                                             \
-            data->xF9_b3 = false;                                             \
-            data->xF9_b5 = false;                                             \
-            data->xF9_b6 = false;                                             \
-            data->xF9_b7 = false;                                             \
-            data->xF9_b1 = true;                                              \
-            ftCo_800A20A0_dontinline(fp);                                     \
-            if (data->x18 != data->x20 && data->x18 != data->x1C) {           \
-                data->x60 = 0;                                                \
-            }                                                                 \
-            if (data->x18 == 4) {                                             \
-                do_act = 0;                                                   \
-            } else {                                                          \
-                data->xFA_b2 = false;                                         \
-                do_act = 1;                                                   \
-            }                                                                 \
-            if (do_act != 0) {                                                \
-                ftCo_800A80E4_dontinline(fp);                                 \
-            }                                                                 \
-            ftCo_800ADE48(fp);                                                \
-            return;                                                           \
-        }                                                                     \
-        data->xF8_b0 = false;                                                 \
-        data->xF9_b2 = (is_food = 1);                                         \
-        data->xF9_b4 = true;                                                  \
-        data->xF9_b3 = fear_flag;                                             \
-        data->xF9_b5 = true;                                                  \
-        data->xF9_b6 = fear_flag;                                             \
-        data->xF9_b7 = true;                                                  \
-        data->xF9_b1 = false;                                                 \
-        fp->x1A88.x44 = ftCo_800A4BEC(fp);                                    \
-        item_gobj = fp->item_gobj;                                            \
-        if (item_gobj != NULL) {                                              \
-            kind = GET_ITEM(item_gobj)->kind;                                 \
-            if (kind == It_Kind_Heart) {                                      \
-                is_food = 1;                                                  \
-            } else if (kind == It_Kind_Tomato) {                              \
-                is_food = 1;                                                  \
-            } else if (kind == It_Kind_Foods) {                               \
-                is_food = 1;                                                  \
-            } else {                                                          \
-                is_food = 0;                                                  \
-            }                                                                 \
-            if (is_food == 0) {                                               \
-                data->x4C = NULL;                                             \
-            } else {                                                          \
-                goto block_22;                                                \
-            }                                                                 \
-        } else {                                                              \
-        block_22:                                                             \
-            if (fp->x2168 != 0) {                                             \
-                data->x4C = NULL;                                             \
-            } else {                                                          \
-                data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);             \
-            }                                                                 \
-        }                                                                     \
-        fp->x1A88.x50 = ftCo_800A648C(fp);                                    \
-        data2 = &fp->x1A88;                                                   \
-        if (data2->x18 != data2->x20 && data2->x18 != data2->x1C) {           \
-            data2->x60 = 0;                                                   \
-        }                                                                     \
-        if (data2->x18 == 4) {                                                \
-            do_act = 0;                                                       \
-        } else {                                                              \
-            data2->xFA_b2 = false;                                            \
-            do_act = 1;                                                       \
-        }                                                                     \
-        if (do_act != 0) {                                                    \
-            if (data->x4C != NULL) {                                          \
-                ftCo_800A866C(fp);                                            \
-            } else {                                                          \
-                attack_target = ftCo_800A53DC(fp);                            \
-                if (attack_target == NULL) {                                  \
-                    attack_target = data->x44;                                \
-                }                                                             \
-                ftCo_800A75DC(fp, attack_target);                             \
-            }                                                                 \
-        }                                                                     \
-        ftCo_800ADE48(fp);                                                    \
+/// Shared no-fight-target half of ftCo_800AEFB8/ftCo_800B1EF0/ftCo_800B24B8:
+/// look for items to grab and threats to dodge, then act on them. The common
+/// head and with-target half of those functions stay open-coded: making them
+/// smaller lets MWCC inline them into their callers, breaking the match.
+static inline void ftCo_CpuUpdateNoTarget(Fighter* fp, bool fear_flag)
+{
+    struct Fighter_x1A88_t* data2 = &fp->x1A88;
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    Fighter* attack_target;
+    s32 do_act;
+    s32 is_food;
+    Item_GObj* item_gobj;
+    ItemKind kind;
+
+    data->xF8_b0 = false;
+    data->xF9_b2 = (is_food = 1);
+    data->xF9_b4 = true;
+    data->xF9_b3 = fear_flag;
+    data->xF9_b5 = true;
+    data->xF9_b6 = fear_flag;
+    data->xF9_b7 = true;
+    data->xF9_b1 = false;
+    fp->x1A88.x44 = ftCo_800A4BEC(fp);
+    item_gobj = fp->item_gobj;
+    if (item_gobj != NULL) {
+        kind = GET_ITEM(item_gobj)->kind;
+        if (kind == It_Kind_Heart) {
+            is_food = 1;
+        } else if (kind == It_Kind_Tomato) {
+            is_food = 1;
+        } else if (kind == It_Kind_Foods) {
+            is_food = 1;
+        } else {
+            is_food = 0;
+        }
+        if (is_food == 0) {
+            data->x4C = NULL;
+            goto skip_search;
+        }
     }
+    if (fp->x2168 != 0) {
+        data->x4C = NULL;
+    } else {
+        data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
+    }
+skip_search:
+    fp->x1A88.x50 = ftCo_800A648C(fp);
+    data2 = &fp->x1A88;
+    if (data2->x18 != data2->x20 && data2->x18 != data2->x1C) {
+        data2->x60 = 0;
+    }
+    if (data2->x18 == 4) {
+        do_act = 0;
+    } else {
+        data2->xFA_b2 = false;
+        do_act = 1;
+    }
+    if (do_act != 0) {
+        if (data->x4C != NULL) {
+            ftCo_800A866C(fp);
+        } else {
+            attack_target = ftCo_800A53DC(fp);
+            if (attack_target == NULL) {
+                attack_target = data->x44;
+            }
+            ftCo_800A75DC(fp, attack_target);
+        }
+    }
+    ftCo_800ADE48(fp);
+}
 
 void ftCo_800AEFB8(Fighter* fp)
 {
-    FTCO_CPU_UPDATE(fp, true);
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    Vec3 sp28;
+    s32 cmd;
+    Fighter* target;
+    s32 do_act;
+    PAD_STACK(0x10);
+
+    cmd = ftCo_800A229C(fp, &sp28);
+    if (cmd != 0) {
+        ftCo_800AE7AC(fp, &sp28, cmd);
+        return;
+    }
+    target = ftCo_800A5CE0(fp);
+    data->x44 = target;
+    if (target != NULL) {
+        data->xF8_b0 = true;
+        data->xF9_b2 = false;
+        data->xF9_b4 = false;
+        data->xF9_b3 = false;
+        data->xF9_b5 = false;
+        data->xF9_b6 = false;
+        data->xF9_b7 = false;
+        data->xF9_b1 = true;
+        ftCo_800A20A0_dontinline(fp);
+        if (data->x18 != data->x20 && data->x18 != data->x1C) {
+            data->x60 = 0;
+        }
+        if (data->x18 == 4) {
+            do_act = 0;
+        } else {
+            data->xFA_b2 = false;
+            do_act = 1;
+        }
+        if (do_act != 0) {
+            ftCo_800A80E4_dontinline(fp);
+        }
+        ftCo_800ADE48(fp);
+        return;
+    }
+    ftCo_CpuUpdateNoTarget(fp, true);
 }
 
 void ftCo_800AF290(Fighter* fp)
@@ -8294,7 +8297,46 @@ void ftCo_800B1DA0(Fighter* fp)
 
 void ftCo_800B1EF0(Fighter* fp)
 {
-    FTCO_CPU_UPDATE(fp, false);
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    Vec3 sp28;
+    s32 cmd;
+    Fighter* target;
+    s32 do_act;
+    PAD_STACK(0x10);
+
+    cmd = ftCo_800A229C(fp, &sp28);
+    if (cmd != 0) {
+        ftCo_800AE7AC(fp, &sp28, cmd);
+        return;
+    }
+    target = ftCo_800A5CE0(fp);
+    data->x44 = target;
+    if (target != NULL) {
+        data->xF8_b0 = true;
+        data->xF9_b2 = false;
+        data->xF9_b4 = false;
+        data->xF9_b3 = false;
+        data->xF9_b5 = false;
+        data->xF9_b6 = false;
+        data->xF9_b7 = false;
+        data->xF9_b1 = true;
+        ftCo_800A20A0_dontinline(fp);
+        if (data->x18 != data->x20 && data->x18 != data->x1C) {
+            data->x60 = 0;
+        }
+        if (data->x18 == 4) {
+            do_act = 0;
+        } else {
+            data->xFA_b2 = false;
+            do_act = 1;
+        }
+        if (do_act != 0) {
+            ftCo_800A80E4_dontinline(fp);
+        }
+        ftCo_800ADE48(fp);
+        return;
+    }
+    ftCo_CpuUpdateNoTarget(fp, false);
 }
 
 void ftCo_800B21C8(Fighter* fp)
@@ -8393,7 +8435,46 @@ void ftCo_800B21C8(Fighter* fp)
 
 void ftCo_800B24B8(Fighter* fp)
 {
-    FTCO_CPU_UPDATE(fp, true);
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    Vec3 sp28;
+    s32 cmd;
+    Fighter* target;
+    s32 do_act;
+    PAD_STACK(0x10);
+
+    cmd = ftCo_800A229C(fp, &sp28);
+    if (cmd != 0) {
+        ftCo_800AE7AC(fp, &sp28, cmd);
+        return;
+    }
+    target = ftCo_800A5CE0(fp);
+    data->x44 = target;
+    if (target != NULL) {
+        data->xF8_b0 = true;
+        data->xF9_b2 = false;
+        data->xF9_b4 = false;
+        data->xF9_b3 = false;
+        data->xF9_b5 = false;
+        data->xF9_b6 = false;
+        data->xF9_b7 = false;
+        data->xF9_b1 = true;
+        ftCo_800A20A0_dontinline(fp);
+        if (data->x18 != data->x20 && data->x18 != data->x1C) {
+            data->x60 = 0;
+        }
+        if (data->x18 == 4) {
+            do_act = 0;
+        } else {
+            data->xFA_b2 = false;
+            do_act = 1;
+        }
+        if (do_act != 0) {
+            ftCo_800A80E4_dontinline(fp);
+        }
+        ftCo_800ADE48(fp);
+        return;
+    }
+    ftCo_CpuUpdateNoTarget(fp, true);
 }
 
 void ftCo_800B2790(Fighter* fp)
