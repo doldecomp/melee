@@ -3655,112 +3655,162 @@ static inline int mpLineGetNextCheckInlineVtx(MapLine* line, s16 result,
     return result;
 }
 
-/// Step along the next_id1 chain from @p line_id, skipping lines whose flags
-/// include @p kind; return -1 if the walk dead-ends or loops back.
-static inline int mpLineIterNonNext(int line_id, int kind)
+/// Return @p new_id unless the line walk dead-ended or looped back.
+static inline int mpLineIterNonResult(int new_id, int line_id)
 {
+    bool valid_id = false;
+    if ((new_id != -1) && (new_id != line_id)) {
+        valid_id = true;
+    }
+    if (valid_id) {
+        return new_id;
+    }
+    return -1;
+}
+
+int mpLineNextNonFloor(int line_id)
+{
+    MapLine* first_line;
     MapLine* line;
     int new_id;
-    bool valid_id;
-    line = groundCollLine[line_id].x0;
-    new_id = mpLineGetNextCheckInline(line, line->next_id1);
+    LINEID_CHECK(4139, line_id);
+    first_line = groundCollLine[line_id].x0;
+    new_id = mpLineGetNextCheckInline(first_line, first_line->next_id1);
     while (new_id != -1 && new_id != line_id &&
-           groundCollLine[new_id].flags & kind)
+           groundCollLine[new_id].flags & CollLine_Floor)
     {
         line = groundCollLine[new_id].x0;
         new_id = line->next_id1;
         new_id = mpLineGetNextCheckInlineVtx(line, new_id, groundCollVtx);
     }
-    valid_id = false;
-    if ((new_id != -1) && (new_id != line_id)) {
-        valid_id = true;
-    }
-    if (valid_id) {
-        return new_id;
-    }
-    return -1;
+    return mpLineIterNonResult(new_id, line_id);
 }
 
-/// Step along the prev_id1 chain from @p line_id, skipping lines whose flags
-/// include @p kind; return -1 if the walk dead-ends or loops back.
-static inline int mpLineIterNonPrev(int line_id, int kind)
+int mpLinePrevNonFloor(int line_id)
 {
+    MapLine* first_line;
     MapLine* line;
     int new_id;
-    bool valid_id;
-    line = groundCollLine[line_id].x0;
-    new_id = mpLineGetPrevCheckInline(line, line->prev_id1);
+    LINEID_CHECK(4148, line_id);
+    first_line = groundCollLine[line_id].x0;
+    new_id = mpLineGetPrevCheckInline(first_line, first_line->prev_id1);
     while (new_id != -1 && new_id != line_id &&
-           groundCollLine[new_id].flags & kind)
+           groundCollLine[new_id].flags & CollLine_Floor)
     {
         line = groundCollLine[new_id].x0;
         new_id = line->prev_id1;
         new_id = mpLineGetPrevCheckInlineVtx(line, new_id, groundCollVtx);
     }
-    valid_id = false;
-    if ((new_id != -1) && (new_id != line_id)) {
-        valid_id = true;
-    }
-    if (valid_id) {
-        return new_id;
-    }
-    return -1;
-}
-
-/* The default inline depth (2) is too shallow to expand the
- * mpLineGet*CheckInline calls nested inside mpLineIterNon*. */
-#pragma push
-#pragma inline_depth(8)
-/// @todo Frames of the eight functions below are 8 bytes larger than the
-/// target (inline call-site slot).
-int mpLineNextNonFloor(int line_id)
-{
-    LINEID_CHECK(4139, line_id);
-    return mpLineIterNonNext(line_id, CollLine_Floor);
-}
-
-int mpLinePrevNonFloor(int line_id)
-{
-    LINEID_CHECK(4148, line_id);
-    return mpLineIterNonPrev(line_id, CollLine_Floor);
+    return mpLineIterNonResult(new_id, line_id);
 }
 
 int mpLinePrevNonCeiling(int line_id)
 {
+    MapLine* first_line;
+    MapLine* line;
+    int new_id;
     LINEID_CHECK(4157, line_id);
-    return mpLineIterNonPrev(line_id, CollLine_Ceiling);
+    first_line = groundCollLine[line_id].x0;
+    new_id = mpLineGetPrevCheckInline(first_line, first_line->prev_id1);
+    while (new_id != -1 && new_id != line_id &&
+           groundCollLine[new_id].flags & CollLine_Ceiling)
+    {
+        line = groundCollLine[new_id].x0;
+        new_id = line->prev_id1;
+        new_id = mpLineGetPrevCheckInlineVtx(line, new_id, groundCollVtx);
+    }
+    return mpLineIterNonResult(new_id, line_id);
 }
 
 int mpLineNextNonCeiling(int line_id)
 {
+    MapLine* first_line;
+    MapLine* line;
+    int new_id;
     LINEID_CHECK(4166, line_id);
-    return mpLineIterNonNext(line_id, CollLine_Ceiling);
+    first_line = groundCollLine[line_id].x0;
+    new_id = mpLineGetNextCheckInline(first_line, first_line->next_id1);
+    while (new_id != -1 && new_id != line_id &&
+           groundCollLine[new_id].flags & CollLine_Ceiling)
+    {
+        line = groundCollLine[new_id].x0;
+        new_id = line->next_id1;
+        new_id = mpLineGetNextCheckInlineVtx(line, new_id, groundCollVtx);
+    }
+    return mpLineIterNonResult(new_id, line_id);
 }
 
 int mpLineNextNonLeftWall(int line_id)
 {
+    MapLine* first_line;
+    MapLine* line;
+    int new_id;
     LINEID_CHECK(4175, line_id);
-    return mpLineIterNonNext(line_id, CollLine_LeftWall);
+    first_line = groundCollLine[line_id].x0;
+    new_id = mpLineGetNextCheckInline(first_line, first_line->next_id1);
+    while (new_id != -1 && new_id != line_id &&
+           groundCollLine[new_id].flags & CollLine_LeftWall)
+    {
+        line = groundCollLine[new_id].x0;
+        new_id = line->next_id1;
+        new_id = mpLineGetNextCheckInlineVtx(line, new_id, groundCollVtx);
+    }
+    return mpLineIterNonResult(new_id, line_id);
 }
 
 int mpLinePrevNonLeftWall(int line_id)
 {
+    MapLine* first_line;
+    MapLine* line;
+    int new_id;
     LINEID_CHECK(4184, line_id);
-    return mpLineIterNonPrev(line_id, CollLine_LeftWall);
+    first_line = groundCollLine[line_id].x0;
+    new_id = mpLineGetPrevCheckInline(first_line, first_line->prev_id1);
+    while (new_id != -1 && new_id != line_id &&
+           groundCollLine[new_id].flags & CollLine_LeftWall)
+    {
+        line = groundCollLine[new_id].x0;
+        new_id = line->prev_id1;
+        new_id = mpLineGetPrevCheckInlineVtx(line, new_id, groundCollVtx);
+    }
+    return mpLineIterNonResult(new_id, line_id);
 }
 
 int mpLinePrevNonRightWall(int line_id)
 {
+    MapLine* first_line;
+    MapLine* line;
+    int new_id;
     LINEID_CHECK(4193, line_id);
-    return mpLineIterNonPrev(line_id, CollLine_RightWall);
+    first_line = groundCollLine[line_id].x0;
+    new_id = mpLineGetPrevCheckInline(first_line, first_line->prev_id1);
+    while (new_id != -1 && new_id != line_id &&
+           groundCollLine[new_id].flags & CollLine_RightWall)
+    {
+        line = groundCollLine[new_id].x0;
+        new_id = line->prev_id1;
+        new_id = mpLineGetPrevCheckInlineVtx(line, new_id, groundCollVtx);
+    }
+    return mpLineIterNonResult(new_id, line_id);
 }
 
 int mpLineNextNonRightWall(int line_id)
 {
+    MapLine* first_line;
+    MapLine* line;
+    int new_id;
     LINEID_CHECK(4202, line_id);
-    return mpLineIterNonNext(line_id, CollLine_RightWall);
+    first_line = groundCollLine[line_id].x0;
+    new_id = mpLineGetNextCheckInline(first_line, first_line->next_id1);
+    while (new_id != -1 && new_id != line_id &&
+           groundCollLine[new_id].flags & CollLine_RightWall)
+    {
+        line = groundCollLine[new_id].x0;
+        new_id = line->next_id1;
+        new_id = mpLineGetNextCheckInlineVtx(line, new_id, groundCollVtx);
+    }
+    return mpLineIterNonResult(new_id, line_id);
 }
-#pragma pop
 
 /// Walk the next/prev chain from @p line_id while lines still have @p kind
 /// set; return the first line without it, or -1.
