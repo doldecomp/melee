@@ -61,7 +61,7 @@ void ftPk_SpecialN_Anim(HSD_GObj* gobj)
             sp14.y = (pika_attr->x4 * fp->x34_scale.y) + fp->cur_pos.y;
             sp14.z = 0.0f;
             it_802B338C(gobj, &sp14, fp->facing_dir, pika_attr->x14);
-            switch (ftLib_800872A4(gobj)) {
+            switch (ftLib_GetKind(gobj)) {
             case 12:
                 ft_PlaySFX(fp, 240076, 127, 64);
                 break;
@@ -95,7 +95,7 @@ void ftPk_SpecialAirN_Anim(HSD_GObj* gobj)
             sp14.y = (pika_attr->xC * fp->x34_scale.y) + fp->cur_pos.y;
             sp14.z = 0.0f;
             it_802B338C(gobj, &sp14, fp->facing_dir, pika_attr->x14);
-            switch (ftLib_800872A4(gobj)) {
+            switch (ftLib_GetKind(gobj)) {
             case 12:
                 ft_PlaySFX(fp, 240076, 127, 64);
                 break;

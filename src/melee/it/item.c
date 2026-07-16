@@ -930,7 +930,7 @@ static void foobar2(HSD_GObj* gobj)
         ftLib_80086960(it->owner))
     {
         it->xDC8_word.flags.xE = 1;
-        it->ecb_lock = ftLib_800872A4(it->owner);
+        it->ecb_lock = ftLib_GetKind(it->owner);
         ftLib_8008702C(it->ecb_lock);
     }
 }

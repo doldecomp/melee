@@ -230,7 +230,7 @@ HSD_GObj* ftBossLib_8015C3E8(FighterKind kind)
     u8 _[8];
 
     for (cur = HSD_GObj_Entities->fighters; cur; cur = cur->next) {
-        if (kind == ftLib_800872A4(cur)) {
+        if (kind == ftLib_GetKind(cur)) {
             return cur;
         }
     }

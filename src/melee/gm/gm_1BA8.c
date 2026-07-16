@@ -1925,7 +1925,7 @@ void gm_801BCAF0(HSD_GObj* gobj)
         if ((Player_GetStocks(var_r30) <= 0) &&
             (temp_r3 = Player_GetEntity(var_r30), ((temp_r3 == NULL) == 0)))
         {
-            if (ftLib_800872A4(temp_r3) == FTKIND_SEAK) {
+            if (ftLib_GetKind(temp_r3) == FTKIND_SEAK) {
                 var_r0 = 1;
             } else {
                 Player_SetStocks(var_r30, 1);

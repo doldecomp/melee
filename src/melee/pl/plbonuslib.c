@@ -844,7 +844,7 @@ void fn_8003EE2C(int arg0, int arg1)
     }
 
     {
-        Item_GObj* item_gobj = ftLib_80086794(temp_r30);
+        Item_GObj* item_gobj = ftLib_GetItem(temp_r30);
         if (item_gobj != NULL) {
             if (match_item_kind(itGetKind(item_gobj)) != -1 &&
                 it_8026B30C(item_gobj) != 5)

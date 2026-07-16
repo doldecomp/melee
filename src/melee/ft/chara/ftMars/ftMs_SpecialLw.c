@@ -207,7 +207,7 @@ void ftMs_SpecialLwHit_Anim(HSD_GObj* gobj)
     /// @todo required for some reason
     fp->mv.ms.speciallw.x0;
 
-    if (sv1 > 0 && ftLib_800872A4(gobj) == FTKIND_EMBLEM) {
+    if (sv1 > 0 && ftLib_GetKind(gobj) == FTKIND_EMBLEM) {
 /// @todo register swap:
 #if SOLUTION == 0
         for (idx = 0; idx < 4; idx++) {
@@ -252,7 +252,7 @@ void ftMs_SpecialAirLwHit_Anim(HSD_GObj* gobj)
     /// @todo required for some reason
     fp->mv.ms.speciallw.x0;
 
-    if (sv1 > 0 && ftLib_800872A4(gobj) == FTKIND_EMBLEM) {
+    if (sv1 > 0 && ftLib_GetKind(gobj) == FTKIND_EMBLEM) {
 /// @todo register swap:
 #if SOLUTION == 0
         for (idx = 0; idx < 4; idx++) {
@@ -344,7 +344,7 @@ static inline void ftMs_SpecialLw_80139140_inline(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2219_b0) {
-        switch (ftLib_800872A4(gobj)) {
+        switch (ftLib_GetKind(gobj)) {
         case 18:
             efSync_Spawn(
                 1265, gobj,

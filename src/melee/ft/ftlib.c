@@ -52,7 +52,7 @@ bool ftLib_IsMasterHandPresent(void)
 
     HSD_GObj* cur;
     for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
-        if (ftLib_800872A4(cur) == FTKIND_MASTERH) {
+        if (ftLib_GetKind(cur) == FTKIND_MASTERH) {
             return true;
         }
     }
@@ -66,7 +66,7 @@ bool ftLib_IsCrazyHandPresent(void)
 
     HSD_GObj* cur;
     for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
-        if (ftLib_800872A4(cur) == FTKIND_CREZYH) {
+        if (ftLib_GetKind(cur) == FTKIND_CREZYH) {
             return true;
         }
     }
@@ -351,7 +351,7 @@ void ftLib_80086764(HSD_GObj* gobj)
     }
 }
 
-HSD_GObj* ftLib_80086794(HSD_GObj* gobj)
+HSD_GObj* ftLib_GetItem(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->item_gobj;
@@ -360,7 +360,7 @@ HSD_GObj* ftLib_80086794(HSD_GObj* gobj)
 bool ftLib_800867A0(HSD_GObj* gobj, HSD_GObj* arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (ftLib_80086794(gobj) == arg1 || fp->x1978 == arg1) {
+    if (ftLib_GetItem(gobj) == arg1 || fp->x1978 == arg1) {
         return true;
     } else {
         return false;
@@ -794,7 +794,7 @@ bool ftLib_80087284(HSD_GObj* gobj)
     return false;
 }
 
-FighterKind ftLib_800872A4(HSD_GObj* gobj)
+FighterKind ftLib_GetKind(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->kind;
@@ -1005,7 +1005,7 @@ s32 ftLib_80087700(HSD_GObj* gobj)
 
 void ftLib_8008770C(HSD_GObj* gobj, void* dst)
 {
-    if (ftLib_800872A4(gobj) == FTKIND_GAMEWATCH) {
+    if (ftLib_GetKind(gobj) == FTKIND_GAMEWATCH) {
         ftGw_Init_8014A7F4(gobj, dst);
     } else {
         ftKb_Init_800EEB00(gobj, dst);
@@ -1014,7 +1014,7 @@ void ftLib_8008770C(HSD_GObj* gobj, void* dst)
 
 void ftLib_80087744(HSD_GObj* gobj, void* dst)
 {
-    if (ftLib_800872A4(gobj) == FTKIND_GAMEWATCH) {
+    if (ftLib_GetKind(gobj) == FTKIND_GAMEWATCH) {
         ftGw_Init_8014A814(gobj, dst);
     } else {
         ftKb_Init_800EEB1C(gobj, dst);
