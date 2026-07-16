@@ -464,7 +464,8 @@ void fn_80196EEC(HSD_GObj* gobj)
     tmdata = gm_GetTournamentData();
     jobj = gobj->hsd_obj;
 
-    if (gm_GetTournamentData()->cur_option >= 0x13 && gm_GetTournamentData()->cur_option <= 0x1A)
+    if (gm_GetTournamentData()->cur_option >= 0x13 &&
+        gm_GetTournamentData()->cur_option <= 0x1A)
     {
         in_range = 1;
     } else {
@@ -642,7 +643,8 @@ void fn_801973F8(HSD_GObj* gobj)
     pnum = fn_8018F62C(gobj);
     jobj = gobj->hsd_obj;
 
-    if (gm_GetTournamentData()->cur_option >= 0x1B && gm_GetTournamentData()->cur_option <= 0x1E)
+    if (gm_GetTournamentData()->cur_option >= 0x1B &&
+        gm_GetTournamentData()->cur_option <= 0x1E)
     {
         cond = 1;
     } else {
@@ -692,7 +694,8 @@ void fn_801975C8(HSD_GObj* gobj)
     idx = fn_8018F62C(gobj);
     jobj = gobj->hsd_obj;
 
-    if (gm_GetTournamentData()->cur_option >= 0x1B && gm_GetTournamentData()->cur_option <= 0x1E)
+    if (gm_GetTournamentData()->cur_option >= 0x1B &&
+        gm_GetTournamentData()->cur_option <= 0x1E)
     {
         in_range = 1;
     } else {
@@ -726,7 +729,8 @@ void fn_801976D4(HSD_GObj* gobj)
 
     gm_GetTournamentData();
     jobj = gobj->hsd_obj;
-    if (gm_GetTournamentData()->cur_option >= 0x1B && gm_GetTournamentData()->cur_option <= 0x1E)
+    if (gm_GetTournamentData()->cur_option >= 0x1B &&
+        gm_GetTournamentData()->cur_option <= 0x1E)
     {
         is_in_range = 1;
     } else {
@@ -757,7 +761,8 @@ void fn_801977AC(HSD_GObj* gobj)
     tm = gm_GetTournamentData();
     jobj = (pnum = fn_8018F62C(gobj), GET_JOBJ(gobj));
 
-    if (gm_GetTournamentData()->cur_option >= 0x1B && gm_GetTournamentData()->cur_option <= 0x1E)
+    if (gm_GetTournamentData()->cur_option >= 0x1B &&
+        gm_GetTournamentData()->cur_option <= 0x1E)
     {
         in_range = 1;
     } else {
@@ -888,7 +893,8 @@ void fn_80197D4C(HSD_GObj* gobj)
 
     gm_GetTournamentData();
     jobj = gobj->hsd_obj;
-    if (gm_GetTournamentData()->cur_option >= 0x1B && gm_GetTournamentData()->cur_option <= 0x1E)
+    if (gm_GetTournamentData()->cur_option >= 0x1B &&
+        gm_GetTournamentData()->cur_option <= 0x1E)
     {
         cond = 1;
     } else {
@@ -920,7 +926,8 @@ void fn_80197E18(HSD_GObj* gobj)
     pnum = fn_8018F62C(gobj);
     jobj = gobj->hsd_obj;
 
-    if (gm_GetTournamentData()->cur_option >= 0x1B && gm_GetTournamentData()->cur_option <= 0x1E)
+    if (gm_GetTournamentData()->cur_option >= 0x1B &&
+        gm_GetTournamentData()->cur_option <= 0x1E)
     {
         in_range = 1;
     } else {
@@ -968,7 +975,8 @@ void fn_80197FD8(HSD_GObj* gobj)
     port = fn_8018F62C(gobj);
     jobj = (HSD_JObj*) gobj->hsd_obj;
 
-    if (gm_GetTournamentData()->cur_option >= 0x1B && gm_GetTournamentData()->cur_option <= 0x1E)
+    if (gm_GetTournamentData()->cur_option >= 0x1B &&
+        gm_GetTournamentData()->cur_option <= 0x1E)
     {
         option_in_range = 1;
     } else {
@@ -1032,7 +1040,8 @@ void fn_801981A0(HSD_GObj* gobj)
     pnum = fn_8018F62C(gobj);
     jobj = gobj->hsd_obj;
 
-    if (gm_GetTournamentData()->cur_option >= 0x1B && gm_GetTournamentData()->cur_option <= 0x1E)
+    if (gm_GetTournamentData()->cur_option >= 0x1B &&
+        gm_GetTournamentData()->cur_option <= 0x1E)
     {
         in_range = 1;
     } else {
@@ -1094,7 +1103,8 @@ void fn_801983E4(HSD_GObj* gobj)
     pnum = fn_8018F62C(gobj);
     jobj = gobj->hsd_obj;
 
-    if (gm_GetTournamentData()->cur_option >= 0x1B && gm_GetTournamentData()->cur_option <= 0x1E)
+    if (gm_GetTournamentData()->cur_option >= 0x1B &&
+        gm_GetTournamentData()->cur_option <= 0x1E)
     {
         cond = 1;
     } else {
@@ -2322,7 +2332,8 @@ void gm_8019B2DC_OnFrame(void)
     arg1 = fn_8018F674(4);
     arg2 = fn_8018F640(4);
 
-    if (gm_GetTournamentData()->cur_option >= 0x13 && gm_GetTournamentData()->cur_option <= 0x1A)
+    if (gm_GetTournamentData()->cur_option >= 0x13 &&
+        gm_GetTournamentData()->cur_option <= 0x1A)
     {
         cond = 1;
     } else {

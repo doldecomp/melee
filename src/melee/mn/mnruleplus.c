@@ -730,8 +730,10 @@ void fn_80232F44(HSD_GObj* gobj)
         data->rule_values.values[data->hovered_selection] =
             (u8) mn_804A04F0.confirmed_selection;
         data2 = gobj->user_data;
-        gmMainLib_GetGameRules()->stock_time_limit = data2->rule_values.time_limit;
-        gmMainLib_GetGameRules()->friendly_fire = data2->rule_values.friendly_fire;
+        gmMainLib_GetGameRules()->stock_time_limit =
+            data2->rule_values.time_limit;
+        gmMainLib_GetGameRules()->friendly_fire =
+            data2->rule_values.friendly_fire;
         gmMainLib_GetGameRules()->pause = data2->rule_values.pause;
         gmMainLib_GetGameRules()->score_display = data2->rule_values.score;
         gmMainLib_GetGameRules()->unk_xc = data2->rule_values.sd_penalty;
@@ -788,8 +790,10 @@ HSD_GObj* mn_80233218(MenuState state)
     GObj_InitUserData(gobj, 0, HSD_Free, user_data);
     user_data->menu_kind = mn_804A04F0.cur_menu;
     user_data->hovered_selection = (u8) mn_804A04F0.hovered_selection;
-    user_data->rule_values.time_limit = gmMainLib_GetGameRules()->stock_time_limit;
-    user_data->rule_values.friendly_fire = gmMainLib_GetGameRules()->friendly_fire;
+    user_data->rule_values.time_limit =
+        gmMainLib_GetGameRules()->stock_time_limit;
+    user_data->rule_values.friendly_fire =
+        gmMainLib_GetGameRules()->friendly_fire;
     user_data->rule_values.pause = gmMainLib_GetGameRules()->pause;
     user_data->rule_values.score = gmMainLib_GetGameRules()->score_display;
     rules = gmMainLib_GetGameRules();

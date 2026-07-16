@@ -992,7 +992,8 @@ void gmClassic_801B3DD8(GameScene* scene)
     CSSData* css = gm_GetGameSceneLoadDataCallback(scene);
     struct gmm_x0_528_t* temp_r31 = gmMainLib_8015CDC8();
     gm_801B06B0(css, 0xB, temp_r31->c_kind, temp_r31->stocks, temp_r31->color,
-                temp_r31->x4, temp_r31->cpu_level, gm_GetAllStarData()->x0.slot);
+                temp_r31->x4, temp_r31->cpu_level,
+                gm_GetAllStarData()->x0.slot);
     lbDvd_800174BC();
 }
 

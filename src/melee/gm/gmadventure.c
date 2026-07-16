@@ -1301,7 +1301,8 @@ void gm_801B42E8(GameScene* scene)
     CSSData* css = gm_GetGameSceneLoadDataCallback(scene);
     struct gmm_x0_528_t* temp_r31 = gmMainLib_8015CDD4();
     gm_801B06B0(css, 0xC, temp_r31->c_kind, temp_r31->stocks, temp_r31->color,
-                temp_r31->x4, temp_r31->cpu_level, gm_GetAdventureData()->x0.slot);
+                temp_r31->x4, temp_r31->cpu_level,
+                gm_GetAdventureData()->x0.slot);
 }
 
 void gm_801B4350(GameScene* scene)
