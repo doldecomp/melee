@@ -2,10 +2,10 @@
 #define MELEE_IT_INLINES_H
 
 #include "ef/eflib.h"
-#include "it/item.h"
-#include "it/itmaplib.h"
 #include "it/it_2725.h"
 #include "it/it_3F14.h"
+#include "it/item.h"
+#include "it/itmaplib.h"
 #include "it/types.h"
 #include "mp/mplib.h"
 
