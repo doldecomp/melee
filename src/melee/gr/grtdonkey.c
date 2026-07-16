@@ -73,15 +73,7 @@ static void grTDonkey_80220228(bool arg0) {}
 
 static void grTDonkey_8022022C(void)
 {
-    stage_info.unk8C.b4 = 0;
-    stage_info.unk8C.b5 = 1;
-    grTDonkey_802202CC(0);
-    grTDonkey_802202CC(1);
-    grTDonkey_802202CC(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTDonkey_802202CC);
 }
 
 static void grTdonkey_UnkStage0_OnLoad(void) {}

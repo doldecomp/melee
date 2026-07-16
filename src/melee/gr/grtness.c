@@ -82,15 +82,7 @@ static void grTNess_802225D0(bool arg0)
 
 static void grTNess_802225D4(void)
 {
-    stage_info.unk8C.b4 = 0;
-    stage_info.unk8C.b5 = 1;
-    grTNess_80222674(0);
-    grTNess_80222674(1);
-    grTNess_80222674(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTNess_80222674);
 }
 
 static void grTness_UnkStage0_OnLoad(void)

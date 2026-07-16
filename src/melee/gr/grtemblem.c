@@ -25,7 +25,7 @@ static void grTRoy_802243F8(void);
 static void grTemblem_UnkStage0_OnLoad(void);
 static void grTemblem_UnkStage0_OnStart(void);
 static bool grTRoy_80224490(void);
-static HSD_GObj* grTRoy_80224498(s32 gobj_id);
+static HSD_GObj* grTRoy_80224498(int gobj_id);
 static void grTRoy_80224580(Ground_GObj* gobj);
 static bool grTRoy_802245AC(Ground_GObj*);
 static void grTRoy_802245B4(Ground_GObj*);
@@ -83,15 +83,7 @@ static void grTRoy_802243F4(bool arg0) {}
 
 static void grTRoy_802243F8(void)
 {
-    stage_info.unk8C.b4 = 0;
-    stage_info.unk8C.b5 = 1;
-    grTRoy_80224498(0);
-    grTRoy_80224498(1);
-    grTRoy_80224498(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTRoy_80224498);
 }
 
 static void grTemblem_UnkStage0_OnLoad(void) {}
@@ -106,7 +98,7 @@ static bool grTRoy_80224490(void)
     return false;
 }
 
-static HSD_GObj* grTRoy_80224498(s32 gobj_id)
+static HSD_GObj* grTRoy_80224498(int gobj_id)
 {
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grTFe_803E97C0[gobj_id];

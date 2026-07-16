@@ -72,15 +72,7 @@ static void grTCaptain_OnDemoInit(int unused) {}
 
 static void grTCaptain_OnInit(void)
 {
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-    grTCaptain_8021FD04(0);
-    grTCaptain_8021FD04(1);
-    grTCaptain_8021FD04(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTCaptain_8021FD04);
 }
 static void grTCaptain_OnLoad(void) {}
 
