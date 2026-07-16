@@ -509,7 +509,7 @@ bool grIceMt_801F7720(Ground_GObj* arg0)
 /// #grIceMt_801F7728
 void grIceMt_801F7728(Ground_GObj* gobj)
 {
-    u32 orig;
+    u32 unused1;
     float y;
     u32 unused2;
     Ground* gp = gobj->user_data;

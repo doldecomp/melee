@@ -248,7 +248,7 @@ void it_802AE200(Item_GObj* item_gobj)
     HSD_JObj* child_jobj_2;
     HSD_JObj* child_jobj_3;
     HSD_JObj* child_jobj_4;
-    f32 orig;
+    f32 unused1;
     f32 unused2;
     f32 unused3;
     f32 unused4;
@@ -702,7 +702,7 @@ bool itFoxblaster_UnkMotion8_Anim(HSD_GObj* item_gobj)
     bool blaster_removed;
     bool blaster_not_needed;
     Item* item;
-    f32 orig;
+    f32 unused1;
     f32 unused2;
     f32 unused3;
     f32 unused4;

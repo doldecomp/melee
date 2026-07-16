@@ -1784,7 +1784,7 @@ void grCorneria_801E0678(void)
 
 int grCorneria_801E08CC(void)
 {
-    f32 orig;
+    f32 unused1;
     f32 unused2;
     Vec3 pos;
     HSD_GObj* gobj;

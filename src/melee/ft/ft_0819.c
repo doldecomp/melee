@@ -16,7 +16,7 @@ void ft_80081938(HSD_GObj* gobj)
 {
     f32 lx, rx;
     ftECB* new_var;
-    u8 orig[36];
+    u8 unused1[36];
     Vec3 sp44;
     u8 unused2[56];
     Fighter* fp = gobj->user_data;
@@ -34,7 +34,7 @@ void ft_800819A8(HSD_GObj* gobj)
 {
     f32 lx, rx;
     ftECB* p_var;
-    u8 orig[36];
+    u8 unused1[36];
     Vec3 sp44;
     u8 unused2[56];
     Fighter* fp = gobj->user_data;

@@ -219,7 +219,7 @@ void Player_80031AD0(int slot)
 
     struct plAllocInfo second_struct;
 
-    u8 orig[12];
+    u8 unused1[12];
 
     Player_CheckSlot(slot);
     player = &player_slots[slot];

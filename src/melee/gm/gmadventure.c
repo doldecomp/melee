@@ -1522,7 +1522,7 @@ static inline void inline0(GameScene* scene)
 {
     UnkAdventureData* adv_data = gm_8017E424();
     if (adv_data->x0.xC.x11 != 1) {
-        UNK_T orig = gm_80169520();
+        UNK_T unused1 = gm_80169520();
         UNK_T unused2 = gm_80169540();
         gm_8016A22C_inline(scene, adv_data);
     }

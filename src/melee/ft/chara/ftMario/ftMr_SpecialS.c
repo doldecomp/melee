@@ -186,10 +186,10 @@ void ftMr_SpecialS_Phys(HSD_GObj* gobj)
     u8 unused0[4];
 
     {
-        /// @todo Cannot be moved above @c unused0 or below @c orig.
+        /// @todo Cannot be moved above @c unused0 or below @c unused1.
         Vec3 coords;
 
-        u8 orig[16];
+        u8 unused1[16];
 
         Fighter* fp = GET_FIGHTER(gobj);
 
@@ -218,7 +218,7 @@ void ftMr_SpecialAirS_Phys(HSD_GObj* gobj)
 
     Vec3 coords;
 
-    u8 orig[24];
+    u8 unused1[24];
 
     fp = gobj->user_data;
 

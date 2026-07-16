@@ -1703,7 +1703,7 @@ void grKongo_801D8058(Ground_GObj* arg)
 
 HSD_GObj* grKongo_801D8078(HSD_GObj* gobj)
 {
-    s32 orig;
+    s32 unused1;
     Vec3 pos;
     f32 unk;
     Vec3 item_pos;

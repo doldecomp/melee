@@ -86,7 +86,7 @@ static void grShrine_80201C64(void)
     {
         Vec3 v = { 0.5F, 0.0F, 0.0F };
 
-        u8 orig[4];
+        u8 unused1[4];
 
         lb_80011A50(&v, -1, 0.5f, 0.0f, M_PI / 3, -10000.0f, 10000.0f,
                     10000.0f, -10000.0f);

@@ -187,7 +187,7 @@ bool ftNs_SpecialHi_ItemPKThunder_CheckNessCollide(HSD_GObj* gobj)
     Vec3 pair;
     Vec3 pos;
 
-    u8 orig[8];
+    u8 unused1[8];
 
     Vec3 pair2;
     Vec3 pos2;
@@ -1628,7 +1628,7 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
     Vec3 spB8;
     Vec3 spAC;
 
-    u8 orig[140];
+    u8 unused1[140];
 
     s32 ledgeGrabDir;
     float temp_f0_2;

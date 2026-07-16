@@ -106,7 +106,7 @@ void grPura_80211CFC(bool num) {}
 
 void grPura_80211D00(void)
 {
-    UNUSED u32 orig;
+    UNUSED u32 unused1;
     UNUSED u32 unused2;
     UNUSED u32 unused3;
     Vec3 cam_offset;
@@ -487,7 +487,7 @@ void grPura_80212FC0(HSD_GObj* arg0)
 
 void grPura_80213030(Ground_GObj* arg0)
 {
-    UNUSED u32 orig;
+    UNUSED u32 unused1;
     Point3d spC;
     u32 var_r30;
 

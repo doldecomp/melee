@@ -227,7 +227,7 @@ void ftCo_ThrownKirbyStar_Coll(Fighter_GObj* gobj)
 void ftCo_800BE000(Fighter_GObj* gobj, Fighter_GObj* thrower_gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    u32 orig;
+    u32 unused1;
     u32 unused2;
     Vec3 scale;
     PAD_STACK(12);
@@ -276,7 +276,7 @@ void ftCo_ThrownCopyStar_Coll(Fighter_GObj* gobj)
 
 void ftCo_800BE494(Fighter_GObj* gobj)
 {
-    u32 orig;
+    u32 unused1;
     u32 unused2;
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftCo_MS_ThrownKirby, Ft_MF_Unk06, 0, 1, 0,

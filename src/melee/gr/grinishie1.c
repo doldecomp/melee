@@ -973,7 +973,7 @@ void grInishie1_801FC664(HSD_GObj* gobj)
     Ground* gp = gobj->user_data;
     f32 t;
     f32 bottom;
-    UNUSED u32 orig;
+    UNUSED u32 unused1;
     Vec3 sp24;
     Vec3 sp18;
     UNUSED u32 unused2;
