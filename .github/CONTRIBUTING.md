@@ -86,6 +86,7 @@ pre-commit run --all-files # Run the hook once on existing code
 - Struct member names should be snake_case.
 - Examples:
         - Yes:
+
         ```c
           typedef struct Player {
               /* 0x00 */ u32 x0;
@@ -96,6 +97,7 @@ pre-commit run --all-files # Run the hook once on existing code
           ```
 
         - No:
+
           ```c
           typedef struct Player {
               u8 thing;
