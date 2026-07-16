@@ -306,10 +306,7 @@ bool itClimbersice_UnkMotion3_Anim(Item_GObj* gobj)
 
 void itClimbersice_UnkMotion3_Phys(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    ItemAttr* attrs = ip->xCC_item_attr;
-    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
-    it_80274658(gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
     itClimbersice_Phys_inline(gobj);
 }
 
