@@ -144,7 +144,7 @@ struct lbl_8046B488_t;
 /* 1647D0 */ void gm_801647D0(void);
 /* 1647F8 */ int gm_801647F8(u8);
 /* 164840 */ bool gm_IsCKindUnlocked(u8 ckind); ///< character unlocked check
-/* 164910 */ void gm_UnlockCharacter(int);
+/* 164910 */ void gm_UnlockCKind(CharacterKind);
 /* 164A0C */ void gm_80164A0C(u8);
 /* 164ABC */ bool gm_80164ABC(void);
 /* 164B48 */ bool fn_80164B48(void);

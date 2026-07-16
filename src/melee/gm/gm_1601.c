@@ -2402,7 +2402,7 @@ static inline bool is_ckind_unlocked_noinline(u8 ckind)
     return is_ckind_unlocked_inner(ckind);
 }
 
-void gm_UnlockCharacter(CharacterKind ckind)
+void gm_UnlockCKind(CharacterKind ckind)
 {
     u16* char_unlock_mask;
     u8 selkind;

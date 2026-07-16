@@ -114,7 +114,7 @@ void gm_801BFBA8(GameScene* arg0)
     if ((temp_r0 != 7) && (temp_r0 != 8) &&
         ((s8) mei->match_end.player_standings[0].stocks != 0))
     {
-        gm_UnlockCharacter((s32) temp_r31->x4);
+        gm_UnlockCKind((s32) temp_r31->x4);
     } else {
         gmMainLib_8015DB2C(gm_CKindToUnlockIndex((s32) temp_r31->x4));
     }
