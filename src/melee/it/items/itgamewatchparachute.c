@@ -1,6 +1,6 @@
 #include "itgamewatchparachute.h"
 
-#include "itgamewatch.h"
+#include "inlines.h"
 
 #include "db/db.h"
 #include "ftGameWatch/ftGw_AttackAir.h"

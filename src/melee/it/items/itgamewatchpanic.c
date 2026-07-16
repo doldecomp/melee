@@ -1,6 +1,6 @@
 #include "itgamewatchpanic.h"
 
-#include "itgamewatch.h"
+#include "inlines.h"
 
 #include "db/db.h"
 #include "ft/chara/ftGameWatch/ftGw_SpecialLw.h"

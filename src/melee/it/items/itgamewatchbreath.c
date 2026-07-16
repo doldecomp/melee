@@ -1,6 +1,6 @@
 #include "itgamewatchbreath.h"
 
-#include "itgamewatch.h"
+#include "inlines.h"
 
 #include "ftGameWatch/ftGw_AttackAir.h"
 

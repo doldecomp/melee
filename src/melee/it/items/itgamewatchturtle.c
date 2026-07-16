@@ -1,6 +1,6 @@
 #include "itgamewatchturtle.h"
 
-#include "itgamewatch.h"
+#include "inlines.h"
 
 #include "it/itzako.h"
 

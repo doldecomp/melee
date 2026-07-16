@@ -1,6 +1,6 @@
 #include "itgamewatchmanhole.h"
 
-#include "itgamewatch.h"
+#include "inlines.h"
 
 #include "db/db.h"
 #include "ft/chara/ftGameWatch/ftGw_AttackLw3.h"

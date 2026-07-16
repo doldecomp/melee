@@ -1,6 +1,6 @@
 #include "itgamewatchfire.h"
 
-#include "itgamewatch.h"
+#include "inlines.h"
 
 #include "db/db.h"
 #include "ft/ftlib.h"

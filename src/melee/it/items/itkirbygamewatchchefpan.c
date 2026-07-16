@@ -1,6 +1,6 @@
 #include "itkirbygamewatchchefpan.h"
 
-#include "itgamewatch.h"
+#include "inlines.h"
 
 #include "ftKirby/ftkirbyspecialgamewatch.h"
 #include "it/itzako.h"

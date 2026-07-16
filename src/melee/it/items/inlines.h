@@ -1,5 +1,5 @@
-#ifndef MELEE_IT_ITEMS_ITGAMEWATCH_H
-#define MELEE_IT_ITEMS_ITGAMEWATCH_H
+#ifndef MELEE_IT_ITEMS_INLINES_H
+#define MELEE_IT_ITEMS_INLINES_H
 
 #include "it/types.h"
 
