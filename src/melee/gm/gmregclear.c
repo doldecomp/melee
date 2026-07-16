@@ -2675,9 +2675,6 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
         temp = gm_8016AE38();
         state->x118 = 1;
         if ((u8) temp->match_result == OUTCOME_UNK_1P_BONUS_STAGE_END) {
-            /// @todo The reference passes this result unextended (no extsh),
-            /// which needs an s32 return type for Ground_801C1DD4; ground.h
-            /// declares it s16, so this call cannot match as-is.
             grPushOn_80219204(Ground_801C1DD4(), (int*) &sp5C, (int*) &sp58);
             special_score = sp5C;
             coins = (u16) sp58;
@@ -2853,10 +2850,7 @@ void fn_80180C60(HSD_GObj* gobj)
     HSD_JObj* jobj;
     u32 b76;
 
-    /// @todo The reference passes an argument here (li r3, 0 before the
-    /// call), which needs Ground_801C57F0 to take an int parameter;
-    /// ground.h declares it (void), so this call cannot match as-is.
-    dist = (s32) (0.1f * Ground_801C57F0());
+    dist = (s32) (0.1f * Ground_801C57F0(0));
     jobj = gobj->hsd_obj;
     if (dist < 0) {
         dist = 0;
