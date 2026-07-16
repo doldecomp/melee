@@ -554,7 +554,7 @@ void mnCount_CreateRow(HSD_GObj* gobj, int visible_row, mnCount_row data_row)
     HSD_Text* text;
     unsigned int row_value;
     int row_value_2;
-  
+
     SelectableCharacterKind selkind;
 
     HSD_Text** value_base;
