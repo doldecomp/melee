@@ -3187,7 +3187,7 @@ bool mn_8022F218(void)
 
 void mn_8022F268(void)
 {
-    gmMainLib_8015CC34()->force_main_menu = 1;
+    gmMainLib_GetGameRules()->force_main_menu = 1;
 }
 
 /// @brief returns the current frame of jobjs animation

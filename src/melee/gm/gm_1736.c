@@ -14,7 +14,7 @@
 
 static lbl_8046DBD8_t lbl_8046DBD8;
 
-lbl_8046DBD8_t* gm_801736DC(void)
+lbl_8046DBD8_t* gm_GetChallengerData(void)
 {
     return &lbl_8046DBD8;
 }
@@ -98,7 +98,7 @@ void gm_8017390C(int arg0, int arg1)
 
     switch (arg0) { /* irregular */
     case 0:
-        temp_r3 = gm_8017E424();
+        temp_r3 = gm_GetAdventureData();
         if (temp_r3->x76 != 0) {
             fn_80172C78(0xE7);
         }

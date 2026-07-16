@@ -2019,7 +2019,7 @@ u8 fn_80173098(int arg0)
         return CKIND_GAMEWATCH;
     }
     if (arg0 == 0) {
-        temp_r31 = gm_8017E424();
+        temp_r31 = gm_GetAdventureData();
         if (!gm_80164840(CKIND_LUIGI) && temp_r31->x74 != 0 &&
             temp_r31->x75 != 0)
         {

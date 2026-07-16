@@ -1168,11 +1168,11 @@ void fn_803011EC(int arg0)
         gm_801BEFC0(un_804D6DFC);
         {
             s8 c_kind = (s8) un_804D6DF8;
-            gm_8017EB30()->x0.ckind = c_kind;
+            gm_GetAllStarData()->x0.ckind = c_kind;
         }
         {
             u8 color = (u8) un_804D6DFC;
-            gm_8017EB30()->x0.color = color;
+            gm_GetAllStarData()->x0.color = color;
         }
         gm_ChangeGameModeAfterCurrentScene(GM_CLASSIC_GOVER);
         gm_801A4B60();

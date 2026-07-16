@@ -462,7 +462,7 @@ void gm_8017C838(void)
 
     PAD_STACK(8);
 
-    temp_r30 = gm_8017E424();
+    temp_r30 = gm_GetAdventureData();
     temp_r3 = gm_8016AE38();
     var_r31 = sp10;
     sp10[0] = FTKIND_NONE;
@@ -1298,9 +1298,9 @@ Unk1PData* fn_8017DEC8(int arg0)
 {
     switch (arg0) {
     case 0:
-        return &gm_8017E424()->x0;
+        return &gm_GetAdventureData()->x0;
     case 1:
-        return &gm_8017EB30()->x0;
+        return &gm_GetAllStarData()->x0;
     case 2:
         return &gm_80473A18.x0;
     default:
@@ -1312,9 +1312,9 @@ Unk1PData* fn_8017DF28(void)
 {
     switch (gm_GetCurrentGameMode()) {
     case GM_CLASSIC:
-        return &gm_8017EB30()->x0;
+        return &gm_GetAllStarData()->x0;
     case GM_ADVENTURE:
-        return &gm_8017E424()->x0;
+        return &gm_GetAdventureData()->x0;
     case GM_ALLSTAR:
         return &gm_80473A18.x0;
     default:
@@ -1433,19 +1433,19 @@ void fn_8017E3C8(void)
     }
 }
 
-UnkAdventureData* gm_8017E424(void)
+UnkAdventureData* gm_GetAdventureData(void)
 {
     return &lbl_80472C30;
 }
 
 u8 gm_8017E430(void)
 {
-    return gm_8017E424()->x0.slot;
+    return gm_GetAdventureData()->x0.slot;
 }
 
 u8 gm_8017E440(void)
 {
-    UnkAdventureData* r31 = gm_8017E424();
+    UnkAdventureData* r31 = gm_GetAdventureData();
     if (gm_801677F8(r31->x0.slot, r31->x0.x4) == false) {
         return 4;
     }
@@ -1544,12 +1544,12 @@ void gm_8017E7A0(u8 matchResult)
 
 bool gm_8017E7E0(void)
 {
-    return gm_8017E424()->x7C == 0x14;
+    return gm_GetAdventureData()->x7C == 0x14;
 }
 
 void gm_8017E7FC(u8 matchResult)
 {
-    UnkAdventureData* r31 = gm_8017E424();
+    UnkAdventureData* r31 = gm_GetAdventureData();
     bool cond;
 
     if (gm_GetCurrentGameMode() == GM_ADVENTURE && r31->x0.cpu_level >= 2 &&
@@ -1669,7 +1669,7 @@ void fn_8017E8A4(int arg0_int)
 }
 #pragma dont_inline reset
 
-UnkAllstarData* gm_8017EB30(void)
+UnkAllstarData* gm_GetAllStarData(void)
 {
     return &lbl_80472CB0;
 }
@@ -1736,7 +1736,7 @@ bool fn_8017EDDC(void)
     UnkAllstarData* p;
 
     if (gm_GetCurrentGameMode() == GM_CLASSIC) {
-        p = gm_8017EB30();
+        p = gm_GetAllStarData();
         if (p->x0.xC.xD == 0 && p->x0.cpu_level >= 2 && p->x0.xC.x20 < 0x5208)
         {
             return true;

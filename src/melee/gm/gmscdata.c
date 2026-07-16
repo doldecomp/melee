@@ -763,7 +763,7 @@ GameSceneHandler* gm_GetAllGameSceneHandlers(void)
     return gm_803DA920;
 }
 
-GameMode* gm_801A50AC(void)
+GameMode* gm_GetAllGameModes(void)
 {
     return gm_803DACA4;
 }

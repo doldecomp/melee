@@ -1166,11 +1166,11 @@ static inline u8 mnDiagram_GetVisibleFighterCursorFrom2(u8* sorted, int start,
 ///        the shared GameRules block on menu exit / page change.
 static inline void mnDiagram_SaveCursorToGameRules(Diagram* d)
 {
-    gmMainLib_8015CC34()->xE = (u8) (d->fighter_cursor_pos >> 8);
-    gmMainLib_8015CC34()->xF = (u8) d->fighter_cursor_pos;
-    gmMainLib_8015CC34()->unk_x10 = (u8) (d->name_cursor_pos >> 8);
-    gmMainLib_8015CC34()->x11 = (u8) d->name_cursor_pos;
-    gmMainLib_8015CC34()->xD = d->is_name_mode;
+    gmMainLib_GetGameRules()->xE = (u8) (d->fighter_cursor_pos >> 8);
+    gmMainLib_GetGameRules()->xF = (u8) d->fighter_cursor_pos;
+    gmMainLib_GetGameRules()->unk_x10 = (u8) (d->name_cursor_pos >> 8);
+    gmMainLib_GetGameRules()->x11 = (u8) d->name_cursor_pos;
+    gmMainLib_GetGameRules()->xD = d->is_name_mode;
 }
 
 /// @brief Per-frame input handler for the VS Records "diagram" grid screen.
@@ -1311,11 +1311,11 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         mn_804A04F0.entering_menu = count2;
         {
             Diagram* d = mnDiagram_804D6C10->user_data;
-            gmMainLib_8015CC34()->xE = (u8) (d->fighter_cursor_pos >> 8);
-            gmMainLib_8015CC34()->xF = (u8) d->fighter_cursor_pos;
-            gmMainLib_8015CC34()->unk_x10 = (u8) (d->name_cursor_pos >> 8);
-            gmMainLib_8015CC34()->x11 = (u8) d->name_cursor_pos;
-            gmMainLib_8015CC34()->xD = d->is_name_mode;
+            gmMainLib_GetGameRules()->xE = (u8) (d->fighter_cursor_pos >> 8);
+            gmMainLib_GetGameRules()->xF = (u8) d->fighter_cursor_pos;
+            gmMainLib_GetGameRules()->unk_x10 = (u8) (d->name_cursor_pos >> 8);
+            gmMainLib_GetGameRules()->x11 = (u8) d->name_cursor_pos;
+            gmMainLib_GetGameRules()->xD = d->is_name_mode;
             mn_80229894(0x1C, 0, 3);
         }
         return;
@@ -1324,11 +1324,11 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         lbAudioAx_80024030(1);
         {
             Diagram* d = mnDiagram_804D6C10->user_data;
-            gmMainLib_8015CC34()->xE = (u8) (d->fighter_cursor_pos >> 8);
-            gmMainLib_8015CC34()->xF = (u8) d->fighter_cursor_pos;
-            gmMainLib_8015CC34()->unk_x10 = (u8) (d->name_cursor_pos >> 8);
-            gmMainLib_8015CC34()->x11 = (u8) d->name_cursor_pos;
-            gmMainLib_8015CC34()->xD = d->is_name_mode;
+            gmMainLib_GetGameRules()->xE = (u8) (d->fighter_cursor_pos >> 8);
+            gmMainLib_GetGameRules()->xF = (u8) d->fighter_cursor_pos;
+            gmMainLib_GetGameRules()->unk_x10 = (u8) (d->name_cursor_pos >> 8);
+            gmMainLib_GetGameRules()->x11 = (u8) d->name_cursor_pos;
+            gmMainLib_GetGameRules()->xD = d->is_name_mode;
             HSD_GObjPLink_80390228(gobj);
             if (input & 0x40) {
                 mnDiagram3_Init(0L);
@@ -2891,10 +2891,10 @@ void mnDiagram_CreateScreen(u8 arg0)
     user_data->col_header_text = NULL;
 
     if (GetNameCount() != 0) {
-        user_data->is_name_mode = gmMainLib_8015CC34()->xD;
+        user_data->is_name_mode = gmMainLib_GetGameRules()->xD;
     } else {
-        gmMainLib_8015CC34()->xD = 0;
-        user_data->is_name_mode = gmMainLib_8015CC34()->xD;
+        gmMainLib_GetGameRules()->xD = 0;
+        user_data->is_name_mode = gmMainLib_GetGameRules()->xD;
     }
 
     GObj_InitUserData(gobj, 0, HSD_Free, user_data);

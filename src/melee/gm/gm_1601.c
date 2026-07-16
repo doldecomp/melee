@@ -3721,7 +3721,7 @@ void gm_80167BC8(VsModeData* vs_data)
     s8* handicap;
     PAD_STACK(56);
 
-    rules = gmMainLib_8015CC34();
+    rules = gmMainLib_GetGameRules();
     prefs = gmMainLib_8015CC58();
     vs_data->data.rules.x0_6 = 0;
 
@@ -3901,7 +3901,7 @@ void gm_80167FC4(SSSData* arg0)
 
     PAD_STACK(8);
 
-    temp_r3 = gmMainLib_8015CC34();
+    temp_r3 = gmMainLib_GetGameRules();
     if (temp_r3->unk_x7 == 1) {
         arg0->force_stage_id = mnStageSel_8025BBD4();
         return;
@@ -3948,7 +3948,7 @@ s8 gm_801685D4(u8 arg0, u8 arg1)
 {
     s8* temp_r3;
 
-    if (gmMainLib_8015CC34()->handicap == 1) {
+    if (gmMainLib_GetGameRules()->handicap == 1) {
         temp_r3 = gmMainLib_8015CE44(arg0, arg1);
         if (temp_r3 != NULL) {
             return *temp_r3;
@@ -3962,7 +3962,7 @@ void gm_80168638(MatchEnd* arg0)
     u8 spC[4];
     s32 i;
     s8* temp_r3;
-    if ((u8) gmMainLib_8015CC34()->handicap == 1) {
+    if ((u8) gmMainLib_GetGameRules()->handicap == 1) {
         for (i = 0; i < 4; i++) {
             temp_r3 = gmMainLib_8015CE44(i, arg0->player_standings[i].x4);
             if (temp_r3 != NULL) {

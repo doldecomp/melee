@@ -118,11 +118,11 @@ static inline u8 mnRulePlus_GetDescIdx(u8 sel, u8 confirmed)
 static inline void mnRulePlus_SaveRules(void)
 {
     MenuRulesPlusData* data = mn_804D6BE0->user_data;
-    gmMainLib_8015CC34()->stock_time_limit = data->rule_values.time_limit;
-    gmMainLib_8015CC34()->friendly_fire = data->rule_values.friendly_fire;
-    gmMainLib_8015CC34()->pause = data->rule_values.pause;
-    gmMainLib_8015CC34()->score_display = data->rule_values.score;
-    gmMainLib_8015CC34()->unk_xc = data->rule_values.sd_penalty;
+    gmMainLib_GetGameRules()->stock_time_limit = data->rule_values.time_limit;
+    gmMainLib_GetGameRules()->friendly_fire = data->rule_values.friendly_fire;
+    gmMainLib_GetGameRules()->pause = data->rule_values.pause;
+    gmMainLib_GetGameRules()->score_display = data->rule_values.score;
+    gmMainLib_GetGameRules()->unk_xc = data->rule_values.sd_penalty;
 }
 
 /// @brief Check if a given option is visible (not hidden by game mode).
@@ -730,11 +730,11 @@ void fn_80232F44(HSD_GObj* gobj)
         data->rule_values.values[data->hovered_selection] =
             (u8) mn_804A04F0.confirmed_selection;
         data2 = gobj->user_data;
-        gmMainLib_8015CC34()->stock_time_limit = data2->rule_values.time_limit;
-        gmMainLib_8015CC34()->friendly_fire = data2->rule_values.friendly_fire;
-        gmMainLib_8015CC34()->pause = data2->rule_values.pause;
-        gmMainLib_8015CC34()->score_display = data2->rule_values.score;
-        gmMainLib_8015CC34()->unk_xc = data2->rule_values.sd_penalty;
+        gmMainLib_GetGameRules()->stock_time_limit = data2->rule_values.time_limit;
+        gmMainLib_GetGameRules()->friendly_fire = data2->rule_values.friendly_fire;
+        gmMainLib_GetGameRules()->pause = data2->rule_values.pause;
+        gmMainLib_GetGameRules()->score_display = data2->rule_values.score;
+        gmMainLib_GetGameRules()->unk_xc = data2->rule_values.sd_penalty;
     }
 }
 
@@ -788,11 +788,11 @@ HSD_GObj* mn_80233218(MenuState state)
     GObj_InitUserData(gobj, 0, HSD_Free, user_data);
     user_data->menu_kind = mn_804A04F0.cur_menu;
     user_data->hovered_selection = (u8) mn_804A04F0.hovered_selection;
-    user_data->rule_values.time_limit = gmMainLib_8015CC34()->stock_time_limit;
-    user_data->rule_values.friendly_fire = gmMainLib_8015CC34()->friendly_fire;
-    user_data->rule_values.pause = gmMainLib_8015CC34()->pause;
-    user_data->rule_values.score = gmMainLib_8015CC34()->score_display;
-    rules = gmMainLib_8015CC34();
+    user_data->rule_values.time_limit = gmMainLib_GetGameRules()->stock_time_limit;
+    user_data->rule_values.friendly_fire = gmMainLib_GetGameRules()->friendly_fire;
+    user_data->rule_values.pause = gmMainLib_GetGameRules()->pause;
+    user_data->rule_values.score = gmMainLib_GetGameRules()->score_display;
+    rules = gmMainLib_GetGameRules();
     user_data->rule_values.sd_penalty = rules->unk_xc;
     user_data->state = (u8) state;
     user_data->description = NULL;

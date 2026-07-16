@@ -8,7 +8,7 @@
 
 #include <melee/gm/types.h>
 
-/* 15CC34 */ GameRules* gmMainLib_8015CC34(void);
+/* 15CC34 */ GameRules* gmMainLib_GetGameRules(void);
 /* 15CC40 */ struct gmm_x1868* gmMainLib_8015CC40(void);
 /* 15CC4C */ void* gmMainLib_8015CC4C(void);
 /* 15CC58 */ struct gmm_x1CB0* gmMainLib_8015CC58(void);

@@ -366,7 +366,7 @@ void mnDiagram3_InitUserData(Diagram3* data, int arg1)
     data->cursor_row = (u8) * (u16*) (src + 2);
     data->anim_state = 1;
     data->scroll_offset = 0;
-    data->is_name_mode = gmMainLib_8015CC34()->xD;
+    data->is_name_mode = gmMainLib_GetGameRules()->xD;
 
     for (i = 0; i < 10; i++) {
         data->row_labels[i] = NULL;
@@ -586,7 +586,7 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
     if ((u32) input & 0x20) {
         lbAudioAx_80024030(0);
         mn_804A04F0.entering_menu = 0;
-        gmMainLib_8015CC34()->xD =
+        gmMainLib_GetGameRules()->xD =
             ((Diagram3*) mnDiagram3_804D6C20->user_data)->is_name_mode;
         mnDiagram2_ClearDetailView(mnDiagram3_804D6C20);
         HSD_GObjPLink_80390228(data->popup_gobj);
@@ -609,7 +609,7 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
     }
     if (input & 0xC0) {
         lbAudioAx_80024030(1);
-        gmMainLib_8015CC34()->xD =
+        gmMainLib_GetGameRules()->xD =
             ((Diagram3*) mnDiagram3_804D6C20->user_data)->is_name_mode;
         mnDiagram2_ClearDetailView(mnDiagram3_804D6C20);
         HSD_GObjPLink_80390228(data->popup_gobj);

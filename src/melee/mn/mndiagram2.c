@@ -294,10 +294,10 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
         mn_804A04F0.entering_menu = 0;
         data2 = (d2 = mnDiagram2_804D6C18)->user_data;
         x46 = data2->selected_fighter_idx;
-        gmMainLib_8015CC34()->x12 = x46;
+        gmMainLib_GetGameRules()->x12 = x46;
         x47 = data2->selected_name_idx;
-        gmMainLib_8015CC34()->x13 = x47;
-        gmMainLib_8015CC34()->xD = (x48 = data2->is_name_mode);
+        gmMainLib_GetGameRules()->x13 = x47;
+        gmMainLib_GetGameRules()->xD = (x48 = data2->is_name_mode);
         mn_80229894(0x1C, 0, 3);
         mnDiagram2_ClearStatRows(mnDiagram2_804D6C18);
         return;
@@ -307,11 +307,11 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
         lbAudioAx_80024030(1);
         data2 = mnDiagram2_804D6C18->user_data;
         x46 = data2->selected_fighter_idx;
-        gmMainLib_8015CC34()->x12 = x46;
+        gmMainLib_GetGameRules()->x12 = x46;
         x47 = data2->selected_name_idx;
-        gmMainLib_8015CC34()->x13 = x47;
+        gmMainLib_GetGameRules()->x13 = x47;
         x48 = data2->is_name_mode;
-        gmMainLib_8015CC34()->xD = x48;
+        gmMainLib_GetGameRules()->xD = x48;
         mnDiagram2_ClearStatRows(mnDiagram2_804D6C18);
         HSD_GObjPLink_80390228(gobj);
         if (result & 0x40) {
@@ -977,7 +977,7 @@ void mnDiagram2_InitUserData(void* arg, int unused)
     data->scroll_offset = 0;
     data->selected_fighter_idx = 0;
     data->selected_name_idx = 0;
-    data->is_name_mode = gmMainLib_8015CC34()->xD;
+    data->is_name_mode = gmMainLib_GetGameRules()->xD;
 
     for (i = 0; i < 10; i++) {
         data->row_labels[i] = NULL;
