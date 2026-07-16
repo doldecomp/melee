@@ -16,12 +16,6 @@
 #include <math.h>
 #include <dolphin/os.h>
 
-/* 004DB670 */ extern const s32 HSD_SObjLib_804DEA90;
-/* 004DB66C */ extern const s32 HSD_SObjLib_804DEA8C;
-/* 004DB668 */ extern const s32 HSD_SObjLib_804DEA88;
-/* 004DB664 */ extern const s32 HSD_SObjLib_804DEA84;
-/* 004DB660 */ extern const s32 HSD_SObjLib_804DEA80;
-/* 004DB674 */ extern const f32 HSD_SObjLib_804DEA94;
 /* 004DB678 */ extern const f32 HSD_SObjLib_804DEA98;
 /* 004D4540 */ u8 HSD_SObjLib_804D7960;
 /* 004CDCC0 */ extern HSD_ObjAllocData HSD_SObjLib_804D10E0;
@@ -279,8 +273,6 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
     u16 obj_width;
     u16 obj_height;
     u8 tex_fmt;
-    GXColorS10 tev_color;
-    GXColor k_color;
 
     PAD_STACK(0x20);
 
@@ -298,8 +290,8 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
     } else {
         center_width = (f32) obj_width * sobj->x1C;
         center_height = (f32) obj_height * sobj->x20;
-        origin_x = (center_width * HSD_SObjLib_804DEA94) + sobj->x10;
-        origin_y = (center_height * HSD_SObjLib_804DEA94) + sobj->x14;
+        origin_x = (center_width / 2.0F) + sobj->x10;
+        origin_y = (center_height / 2.0F) + sobj->x14;
     }
 
     GXClearVtxDesc();
@@ -397,16 +389,10 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
 
         GXSetAlphaCompare(GX_ALWAYS, 0, GX_AOP_OR, GX_ALWAYS, 0);
 
-        ((u32*) &tev_color)[0] = HSD_SObjLib_804DEA80;
-        ((u32*) &tev_color)[1] = HSD_SObjLib_804DEA84;
-        GXSetTevColorS10(GX_TEVREG0, tev_color);
-
-        *(u32*) &k_color = HSD_SObjLib_804DEA88;
-        GXSetTevKColor(GX_KCOLOR0, k_color);
-        *(u32*) &k_color = HSD_SObjLib_804DEA8C;
-        GXSetTevKColor(GX_KCOLOR1, k_color);
-        *(u32*) &k_color = HSD_SObjLib_804DEA90;
-        GXSetTevKColor(GX_KCOLOR2, k_color);
+        GXSetTevColorS10(GX_TEVREG0, (GXColorS10){ -90, 0, -114, 135 });
+        GXSetTevKColor(GX_KCOLOR0, (GXColor){ 0, 0, 0xE2, 0x58 });
+        GXSetTevKColor(GX_KCOLOR1, (GXColor){ 0xB3, 0, 0, 0xB6 });
+        GXSetTevKColor(GX_KCOLOR2, (GXColor){ 0xFF, 0, 0xFF, 0x80 });
 
         GXSetTevSwapModeTable(GX_TEV_SWAP0, GX_CH_RED, GX_CH_GREEN, GX_CH_BLUE,
                               GX_CH_ALPHA);
@@ -502,10 +488,10 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
         }
     }
 
-    sin_half = HSD_SObjLib_804DEA94 * sinf(sobj->x18);
+    sin_half = 0.5F * sinf(sobj->x18);
     angle = sobj->x18;
     cos_val = cosf(angle);
-    cos_half = HSD_SObjLib_804DEA94 * -cos_val;
+    cos_half = 0.5F * -cos_val;
     width = (f32) obj_width * sobj->x1C;
     height = (f32) obj_height * sobj->x20;
     x_sin = sin_half * width;
@@ -544,12 +530,6 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
     HSD_StateSetZMode(1, GX_LEQUAL, 1);
 }
 
-const s32 HSD_SObjLib_804DEA80 = 0xFFA60000;
-const s32 HSD_SObjLib_804DEA84 = 0xFF8E0087;
-const s32 HSD_SObjLib_804DEA88 = 0xE258;
-const s32 HSD_SObjLib_804DEA8C = 0xB30000B6;
-const s32 HSD_SObjLib_804DEA90 = 0xFF00FF80;
-const f32 HSD_SObjLib_804DEA94 = 0.5F;
 const f32 HSD_SObjLib_804DEA98 = 2.0F;
 
 static HSD_Chan lbl_8040C418 = {

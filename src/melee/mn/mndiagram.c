@@ -1255,7 +1255,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             return;
         }
         i = (u8) data->fighter_cursor_pos;
-        col = (u8) mn_804A04F0.hovered_selection;
+        col = mn_804A04F0.hovered_selection;
         ptr = sorted + i;
         goto fc_test;
     fc_outer:
@@ -1830,7 +1830,6 @@ void mnDiagram_CreatePopupTexts(void* arg0, s32 selkind_or_nametag_slot_id,
                                 s32 arg2, s32 use_nametag)
 {
     mnDiagram_PopupData* data = ((HSD_GObj*) arg0)->user_data;
-    mnDiagram_AnimTable* tbl = GET_DIAGRAM_ANIM_TABLE();
     float new_var;
     Point3d pos;
     char buf[8];
@@ -1840,7 +1839,7 @@ void mnDiagram_CreatePopupTexts(void* arg0, s32 selkind_or_nametag_slot_id,
     HSD_Text* text = HSD_SisLib_803A6754(0, 1);
     u8 sp[24];
     data->text[0] = text;
-    lb_8000B1CC(data->jobjs[8], &tbl->points[0], &pos);
+    lb_8000B1CC(data->jobjs[8], &mnDiagram_803EE728.points[0], &pos);
     text->font_size.x = 0.0521f;
     text->font_size.y = 0.0521f;
     {
@@ -1867,7 +1866,7 @@ void mnDiagram_CreatePopupTexts(void* arg0, s32 selkind_or_nametag_slot_id,
 
             label_text = HSD_SisLib_803A6754(0, 1);
             data->text[2] = label_text;
-            lb_8000B1CC(data->jobjs[10], &tbl->points[2], &pos);
+            lb_8000B1CC(data->jobjs[10], &mnDiagram_803EE728.points[2], &pos);
             label_text->font_size.x = 0.035f;
             label_text->font_size.y = 0.05f;
             {
@@ -1887,7 +1886,8 @@ void mnDiagram_CreatePopupTexts(void* arg0, s32 selkind_or_nametag_slot_id,
 
             label_text = HSD_SisLib_803A6754(0, 1);
             data->text[4] = label_text;
-            lb_8000B1CC(data->jobjs[2], &tbl->points[2], &pos);
+            lb_8000B1CC(data->jobjs[2], &GET_DIAGRAM_ANIM_TABLE()->points[2],
+                        &pos);
             label_text->font_size.x = 0.035f;
             label_text->font_size.y = 0.05f;
             {
@@ -1906,7 +1906,7 @@ void mnDiagram_CreatePopupTexts(void* arg0, s32 selkind_or_nametag_slot_id,
     if ((use_nametag == 0) || (selkind_or_nametag_slot_id != arg2)) {
         text = HSD_SisLib_803A6754(0, 1);
         data->text[1] = text;
-        lb_8000B1CC(data->jobjs[11], &tbl->points[1], &pos);
+        lb_8000B1CC(data->jobjs[11], &mnDiagram_803EE728.points[1], &pos);
         text->font_size.x = 0.0521f;
         text->font_size.y = 0.0521f;
         text->default_alignment = 1;
@@ -1933,7 +1933,7 @@ void mnDiagram_CreatePopupTexts(void* arg0, s32 selkind_or_nametag_slot_id,
     if (selkind_or_nametag_slot_id == arg2) {
         text = HSD_SisLib_803A6754(0, 1);
         data->text[3] = text;
-        lb_8000B1CC(data->jobjs[13], &tbl->points[1], &pos);
+        lb_8000B1CC(data->jobjs[13], &mnDiagram_803EE728.points[1], &pos);
         text->font_size.x = 0.0521f;
         text->font_size.y = 0.0521f;
         text->default_alignment = 1;
@@ -1958,10 +1958,7 @@ void mnDiagram_CreatePopupTexts(void* arg0, s32 selkind_or_nametag_slot_id,
     } else {
         text = HSD_SisLib_803A6754(0, 1);
         data->text[3] = text;
-        {
-            Point3d* point = &tbl->points[1];
-            lb_8000B1CC(data->jobjs[3], point, &pos);
-        }
+        lb_8000B1CC(data->jobjs[3], &mnDiagram_803EE728.points[1], &pos);
         text->font_size.x = 0.0521f;
         text->font_size.y = 0.0521f;
         text->default_alignment = 1;
@@ -2464,117 +2461,117 @@ void mnDiagram_DrawCellValue(void* arg0, u8 arg1, u8 arg2, int arg3)
 
 void mnDiagram_DrawGridValues(void* arg0, s32 arg1, s32 arg2, u8 arg3)
 {
-    s32 var_r22_2;
-    s32 arg1_r = arg1;
-    s32 arg2_r = arg2;
-    u8 is_name = arg3;
+    s32 name_col;
+    s32 row_start = arg1;
+    s32 col_start = arg2;
+    u8 is_name_mode = arg3;
     mnDiagram_Assets* assets = (mnDiagram_Assets*) &mnDiagram_804A0750;
-    s32 cap = 0xF423F;
-    s32 var_r16_6;
-    s32 var_r17_7;
-    s32 var_r17_8;
-    s32 var_r18_3;
-    s32 var_r19_2;
-    s32 var_r22;
-    s32 var_r22_3;
-    s32 var_r30;
-    s32 var_r3;
-    s32 var_r17_4;
-    s32 var_r19_5;
-    unsigned long long var_r0_2;
-    s32 var_r17_6;
-    s32 var_r23;
-    u8 var_r24;
+    s32 max_value = 0xF423F;
+    s32 unlocked_count;
+    s32 col_unlocked_count;
+    s32 bottom_unlocked_count;
+    s32 name_falls;
+    s32 bottom_col;
+    s32 fighter_col;
+    s32 row;
+    s32 entry_count;
+    s32 name_kos;
+    s32 fighter_falls;
+    u8 row_name;
+    s32 col_name;
+    s32 row_fighter;
+    u8 col_fighter;
     u8* sorted;
 
-    var_r30 = 0;
+    row = 0;
     do {
-        if (var_r30 == 0xA) {
-            var_r22 = 0;
+        if (row == 0xA) {
+            bottom_col = 0;
             do {
                 sorted = (u8*) assets;
-                if (is_name != 0) {
-                    var_r3 = GetNameCount();
-                    if (var_r3 > var_r22) {
-                        var_r19_2 = mnDiagram_SumNameFalls(
-                            mnDiagram_GetVisibleNameCursorFrom(sorted, arg2_r,
-                                                               var_r22));
-                        mnDiagram_DrawCellValue(arg0, (u8) var_r22,
-                                                (u8) var_r30, var_r19_2);
+                if (is_name_mode != 0) {
+                    entry_count = GetNameCount();
+                    if (entry_count > bottom_col) {
+                        name_falls = mnDiagram_SumNameFalls(
+                            mnDiagram_GetVisibleNameCursorFrom(
+                                sorted, col_start, bottom_col));
+                        mnDiagram_DrawCellValue(arg0, (u8) bottom_col,
+                                                (u8) row, name_falls);
                     }
                 } else {
-                    var_r18_3 = mnDiagram_CountUnlockedFightersInline();
-                    if (var_r18_3 > var_r22) {
-                        var_r19_5 = mnDiagram_SumFighterFalls(
+                    bottom_unlocked_count =
+                        mnDiagram_CountUnlockedFightersInline();
+                    if (bottom_unlocked_count > bottom_col) {
+                        fighter_falls = mnDiagram_SumFighterFalls(
                             mnDiagram_GetVisibleFighterCursorFrom2(
-                                sorted, arg2_r, var_r22));
-                        mnDiagram_DrawCellValue(arg0, (u8) var_r22,
-                                                (u8) var_r30, var_r19_5);
+                                sorted, col_start, bottom_col));
+                        mnDiagram_DrawCellValue(arg0, (u8) bottom_col,
+                                                (u8) row, fighter_falls);
                     }
                 }
-                var_r22 += 1;
-            } while (var_r22 < 7);
-        } else if (is_name != 0) {
-            var_r3 = GetNameCount();
-            if (var_r3 > var_r30) {
-                var_r22_2 = 0;
+                bottom_col += 1;
+            } while (bottom_col < 7);
+        } else if (is_name_mode != 0) {
+            entry_count = GetNameCount();
+            if (entry_count > row) {
+                name_col = 0;
                 do {
                     sorted = (u8*) assets;
-                    if ((var_r22_2 == 7) ||
-                        (var_r3 = GetNameCount(), (var_r3 > var_r22_2)))
+                    if ((name_col == 7) || (entry_count = GetNameCount(),
+                                            (entry_count > name_col)))
                     {
-                        var_r0_2 = (u8) mnDiagram_GetVisibleNameCursorFrom(
-                            sorted, arg1_r, var_r30);
-                        if (var_r22_2 == 7) {
-                            var_r17_4 = mnDiagram_GetNameTotalKOs(var_r0_2);
-                            mnDiagram_DrawCellValue(arg0, (u8) var_r22_2,
-                                                    (u8) var_r30, var_r17_4);
+                        row_name = mnDiagram_GetVisibleNameCursorFrom(
+                            sorted, row_start, row);
+                        if (name_col == 7) {
+                            name_kos = mnDiagram_GetNameTotalKOs(row_name);
+                            mnDiagram_DrawCellValue(arg0, (u8) name_col,
+                                                    (u8) row, name_kos);
                         } else {
-                            var_r17_6 = mnDiagram_GetVisibleNameCursorFrom(
-                                sorted, arg2_r, var_r22_2);
-                            mnDiagram_DrawCellValue(
-                                arg0, (u8) var_r22_2, (u8) var_r30,
-                                GetPersistentNameData((u8) var_r0_2)
-                                    ->vs_kos[(u8) var_r17_6]);
+                            int ko_count;
+                            col_name = mnDiagram_GetVisibleNameCursorFrom(
+                                sorted, col_start, name_col);
+                            ko_count = GetPersistentNameData(row_name)
+                                           ->vs_kos[col_name];
+                            mnDiagram_DrawCellValue(arg0, (u8) name_col,
+                                                    (u8) row, ko_count);
                         }
                     }
-                    var_r22_2 += 1;
-                } while (var_r22_2 <= 7);
+                    name_col += 1;
+                } while (name_col <= 7);
             }
         } else {
-            var_r17_7 = mnDiagram_CountUnlockedFightersInline();
-            if (var_r17_7 > var_r30) {
-                var_r22_3 = 0;
+            unlocked_count = mnDiagram_CountUnlockedFightersInline();
+            if (unlocked_count > row) {
+                fighter_col = 0;
                 do {
                     sorted = (u8*) assets;
-                    if (var_r22_3 != 7) {
-                        var_r17_8 = mnDiagram_CountUnlockedFightersInline();
-                        if (var_r17_8 > var_r22_3) {
-                            goto block_83;
-                        }
-                    } else {
-                    block_83:
-                        var_r23 = mnDiagram_GetVisibleFighterCursorFrom2(
-                            sorted, arg1_r, var_r30);
-                        if (var_r22_3 == 7) {
+                    if ((fighter_col == 7) ||
+                        (col_unlocked_count =
+                             mnDiagram_CountUnlockedFightersInline(),
+                         (col_unlocked_count > fighter_col)))
+                    {
+                        row_fighter = mnDiagram_GetVisibleFighterCursorFrom2(
+                            sorted, row_start, row);
+                        if (fighter_col == 7) {
                             mnDiagram_DrawCellValue(
-                                arg0, (u8) var_r22_3, (u8) var_r30,
-                                mnDiagram_SumFighterKOsClamped(var_r23));
+                                arg0, (u8) fighter_col, (u8) row,
+                                mnDiagram_SumFighterKOsClamped(row_fighter));
                         } else {
-                            var_r24 = mnDiagram_GetVisibleFighterCursorFrom2(
-                                sorted, arg2_r, var_r22_3);
+                            col_fighter =
+                                mnDiagram_GetVisibleFighterCursorFrom2(
+                                    sorted, col_start, fighter_col);
                             mnDiagram_DrawCellValue(
-                                arg0, (u8) var_r22_3, (u8) var_r30,
-                                GetPersistentFighterData((u8) var_r23)
-                                    ->fighter_kos[var_r24]);
+                                arg0, (u8) fighter_col, (u8) row,
+                                GetPersistentFighterData((u8) row_fighter)
+                                    ->fighter_kos[col_fighter]);
                         }
                     }
-                    var_r22_3 += 1;
-                } while (var_r22_3 <= 7);
+                    fighter_col += 1;
+                } while (fighter_col <= 7);
             }
         }
-        var_r30 += 1;
-    } while (var_r30 <= 0xA);
+        row += 1;
+    } while (row <= 0xA);
 }
 
 static inline void mnDiagram_TextSetPos(HSD_Text* text, f32 x, f32 y, f32 z)

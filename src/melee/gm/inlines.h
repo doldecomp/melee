@@ -4,6 +4,16 @@
 #include "gm/gmregtyfall.h"
 #include "ty/toy.h"
 
+static inline s32 gmClampResultStat(s32 value)
+{
+    if (value > 999999) {
+        value = 999999;
+    } else if (value < -999999) {
+        value = -999999;
+    }
+    return value;
+}
+
 /// @todo Figure out where this goes
 inline s32 fn_801A7FB4_inline(void)
 {

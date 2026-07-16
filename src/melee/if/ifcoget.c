@@ -213,7 +213,7 @@ void un_802FF364(int slot)
     struct un_804A1F58_t* base = &un_804A1F58;
     PAD_STACK(0x10);
     thing = &base->x8[slot];
-    ifAll = ifAll_802F3424(slot);
+    ifAll = ifAll_GetPlayerHUDPosition(slot);
     gobj = thing->x0;
     if ((thing && thing) && thing) {
     }
@@ -244,7 +244,7 @@ void un_802FF498(void)
     PAD_STACK(8);
     memzero(&un_804A1F58, sizeof(un_804A1F58));
     un_804A1F58.x0 =
-        HSD_SisLib_803A611C(2, ifAll_802F3404(), 14, 15, 0, 11, 0, 19);
+        HSD_SisLib_803A611C(2, ifAll_GetHUDGObj(), 14, 15, 0, 11, 0, 19);
 }
 
 void un_802FF4FC(void)
