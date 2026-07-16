@@ -220,11 +220,7 @@ void itMball_OnAccessory(Item_GObj* arg0)
 bool itMball_Motion5_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    if (ip->xD44_lifeTimer <= 0.0f) {
-        return true;
-    }
-    ip->xD44_lifeTimer -= 1.0f;
-    return false;
+    return Item_TickLifetime(ip);
 }
 
 void itMball_Motion5_Phys(Item_GObj* gobj) {}
@@ -262,11 +258,7 @@ void itMball_80297E8C(Item_GObj* gobj)
 bool itMball_Motion6_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    if (ip->xD44_lifeTimer <= 0.0f) {
-        return true;
-    }
-    ip->xD44_lifeTimer -= 1.0f;
-    return false;
+    return Item_TickLifetime(ip);
 }
 
 void itMball_Motion6_Phys(Item_GObj* arg0)

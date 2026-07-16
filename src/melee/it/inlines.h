@@ -19,6 +19,15 @@ static inline void itResetVelocity(Item* ip)
     ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0F;
 }
 
+static inline bool Item_TickLifetime(Item* ip)
+{
+    if (ip->xD44_lifeTimer <= 0.0f) {
+        return true;
+    }
+    ip->xD44_lifeTimer -= 1.0f;
+    return false;
+}
+
 /// Check whether the grapple chain from @p head to the tip @p pos or to its
 /// owner @p fp collides with terrain (shared by Link's hookshot and Samus's
 /// grapple beam).
