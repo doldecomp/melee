@@ -3,6 +3,16 @@
 
 #include <placeholder.h>
 
+static inline s32 gmClampResultStat(s32 value)
+{
+    if (value > 999999) {
+        value = 999999;
+    } else if (value < -999999) {
+        value = -999999;
+    }
+    return value;
+}
+
 /* 17AD04 */ s32 fn_8017AD04(s32, s32);
 /* 17AD28 */ s32 fn_8017AD28(s32);
 /* 17AD48 */ s32 fn_8017AD48(s32);
