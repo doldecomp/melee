@@ -58,9 +58,7 @@ void fn_80105A34(Fighter_GObj* gobj)
         fp->x2219_b0 = true;
     }
 
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
-    fp->accessory4_cb = NULL;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 void fn_80105AB0(Fighter_GObj* gobj)
@@ -70,9 +68,7 @@ void fn_80105AB0(Fighter_GObj* gobj)
         efSync_Spawn(0x4B7, gobj, fp->parts[1].joint);
         fp->x2219_b0 = true;
     }
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
-    fp->accessory4_cb = NULL;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 void ftKb_SpecialNZd_80105B2C(Fighter_GObj* gobj)

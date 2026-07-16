@@ -10,6 +10,7 @@
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftZelda/types.h"
@@ -24,9 +25,7 @@ void ftZd_SpecialN_8013A830(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
 
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
-    fp->accessory4_cb = NULL;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 void ftZd_SpecialN_8013A8AC(HSD_GObj* gobj)
@@ -38,9 +37,7 @@ void ftZd_SpecialN_8013A8AC(HSD_GObj* gobj)
         efSync_Spawn(1269, gobj, fp->parts[FtPart_TransN].joint);
         fp->x2219_b0 = true;
     }
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
-    fp->accessory4_cb = NULL;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 inline void startActionHelper(HSD_GObj* gobj)
