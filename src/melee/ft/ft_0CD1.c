@@ -8,6 +8,7 @@
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
+#include "ft/ftlib_inline.h"
 #include "ft/inlines.h"
 
 void ftCo_800CD140(Fighter_GObj* gobj, int arg1, int arg2, int arg3,
@@ -70,8 +71,7 @@ void ftCo_800CD2C4(Fighter_GObj* gobj, void (*cb)(Fighter_GObj*))
 
 void ft_800CD31C(Fighter_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->item_gobj != NULL) {
+    if (ftLib_GetItem(gobj) != NULL) {
         ftCommon_8007E7E4(gobj, 1);
     }
 }

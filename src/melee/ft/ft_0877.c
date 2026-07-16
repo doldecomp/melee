@@ -2,6 +2,7 @@
 
 #include "ftcommon.h"
 #include "ftdevice.h"
+#include "ftlib_inline.h"
 
 #include "ft/fighter.h"
 #include "ft/types.h"
@@ -54,9 +55,9 @@ bool ft_80087878(HSD_GObj* gobj, s32 arg1)
 
 bool ft_800878BC(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-
-    if ((fp->item_gobj != NULL) && (it_8026B2B4(fp->item_gobj) == 1)) {
+    if ((ftLib_GetItem(gobj) != NULL) &&
+        (it_8026B2B4(ftLib_GetItem(gobj)) == 1))
+    {
         return true;
     }
 
@@ -65,9 +66,9 @@ bool ft_800878BC(HSD_GObj* gobj)
 
 bool ft_80087900(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-
-    if (fp->item_gobj != NULL && itGetKind(fp->item_gobj) == It_Kind_ScBall) {
+    if (ftLib_GetItem(gobj) != NULL &&
+        itGetKind(ftLib_GetItem(gobj)) == It_Kind_ScBall)
+    {
         return true;
     }
 
@@ -76,9 +77,9 @@ bool ft_80087900(HSD_GObj* gobj)
 
 bool ft_80087944(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-
-    if (fp->item_gobj != NULL && itGetKind(fp->item_gobj) == It_Kind_Dosei) {
+    if (ftLib_GetItem(gobj) != NULL &&
+        itGetKind(ftLib_GetItem(gobj)) == It_Kind_Dosei)
+    {
         return true;
     }
 

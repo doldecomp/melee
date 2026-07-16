@@ -39,7 +39,7 @@
 #include <melee/ft/ft_0CDD.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftchangeparam.h>
-#include <melee/ft/ftlib.h>
+#include <melee/ft/ftlib_inline.h>
 #include <melee/ft/ftmaterial.h>
 #include <melee/ft/ftmetal.h>
 #include <melee/gm/gm_unsplit.h>
@@ -234,8 +234,9 @@ void fn_800D2CD4(Fighter* fp)
 
 bool ft_800D2D0C(Fighter_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->item_gobj != NULL && itGetKind(fp->item_gobj) == It_Kind_ScBall) {
+    if (ftLib_GetItem(gobj) != NULL &&
+        itGetKind(ftLib_GetItem(gobj)) == It_Kind_ScBall)
+    {
         return true;
     }
     return false;
