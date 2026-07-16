@@ -41,6 +41,19 @@ static inline void Ground_SetupStageCallbacks(HSD_GObj* gobj,
     }
 }
 
+static inline void Ground_InitTargetStage(HSD_GObj* (*create_gobj)(int) )
+{
+    stage_info.unk8C.b4 = false;
+    stage_info.unk8C.b5 = true;
+    create_gobj(0);
+    create_gobj(1);
+    create_gobj(2);
+    Ground_801C39C0();
+    Ground_801C3BB4();
+    Ground_801C4210();
+    Ground_801C42AC();
+}
+
 #define ZRANDI(n) ((n) != 0 ? HSD_Randi(n) : 0)
 
 static inline int rand_range(int a, int b)

@@ -490,8 +490,7 @@ void ftCo_80095D5C(Fighter* fp, Vec3* arg1)
     vel *= fp->co_attrs.item_throw_velocity_multiplier *
            *(float*) (array_element - 0x468);
     if (cmd_var0 != 0) {
-        s16 s16_var1 = ((s16*) &fp->cmd_vars)[1];
-        int int_angle = (s16_var1 << 20) >> 20;
+        int int_angle = (s32) (cmd_var0 << 20) >> 20;
         if (int_angle == 361) {
             angle = *(float*) (array_element - 0x464);
         } else {
@@ -551,13 +550,12 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                         vec2.x = fsm * (fp->mv.co.itemthrow4.x8.x - vec0.x) +
                                  vec0.x;
                         {
-                            float vec1_y =
+                            vec2.y =
                                 fsm * (fp->mv.co.itemthrow4.x8.y - vec0.y) +
                                 vec0.y;
-                            vec2.y = vec1_y;
                             vec2.z = 0;
                             pl_8003E978(fp->player_id, fp->x221F_b4,
-                                        fp->item_gobj, vec1_y,
+                                        fp->item_gobj, vec2.y,
                                         base_throw_speed, cd_xB4, throw_speed,
                                         vec0.x, vec0.y, fsm);
                         }
