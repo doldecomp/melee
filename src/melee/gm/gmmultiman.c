@@ -525,23 +525,27 @@ void gm_801B6AD8(GameScene* scene)
     gm_801B6AD8_inline(scene, 0x11);
 }
 
+static void gmMultiman_LeaveFinish(VsModeData* data, CSSData* css_data)
+{
+    gm_80167A14(data->data.players);
+    gm_801B0730(css_data, &data->data.players[0].c_kind, NULL,
+                &data->data.players[0].color, &data->data.players[0].xA, NULL);
+}
+
 void gm_801B6B70(GameScene* scene)
 {
-    VsModeData* temp_r31;
-    CSSData* temp_r3;
+    VsModeData* data;
+    CSSData* css_data;
 
     PAD_STACK(8);
 
-    temp_r31 = &gmMainLib_804D3EE0->unk_1490;
-    temp_r3 = gm_GetGameSceneLeaveDataCallback(scene);
-    if (temp_r3->pending_scene_change == 2) {
+    data = &gmMainLib_804D3EE0->unk_1490;
+    css_data = gm_GetGameSceneLeaveDataCallback(scene);
+    if (css_data->pending_scene_change == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
-    gm_80167A14(temp_r31->data.players);
-    gm_801B0730(temp_r3, &temp_r31->data.players[0].c_kind, NULL,
-                &temp_r31->data.players[0].color,
-                &temp_r31->data.players[0].xA, NULL);
+    gmMultiman_LeaveFinish(data, css_data);
 }
 
 void gm_801B6BE8(GameScene* scene)
@@ -631,21 +635,18 @@ void gm_801B7044(GameScene* scene)
 
 void gm_801B70DC(GameScene* scene)
 {
-    VsModeData* temp_r31;
-    CSSData* temp_r3;
+    VsModeData* data;
+    CSSData* css_data;
 
     PAD_STACK(8);
 
-    temp_r31 = &gmMainLib_804D3EE0->unk_1490;
-    temp_r3 = gm_GetGameSceneLeaveDataCallback(scene);
-    if (temp_r3->pending_scene_change == 2) {
+    data = &gmMainLib_804D3EE0->unk_1490;
+    css_data = gm_GetGameSceneLeaveDataCallback(scene);
+    if (css_data->pending_scene_change == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
-    gm_80167A14(temp_r31->data.players);
-    gm_801B0730(temp_r3, &temp_r31->data.players[0].c_kind, NULL,
-                &temp_r31->data.players[0].color,
-                &temp_r31->data.players[0].xA, NULL);
+    gmMultiman_LeaveFinish(data, css_data);
 }
 
 void gm_801B7154(GameScene* scene)
@@ -735,20 +736,18 @@ void gm_801B75F0(GameScene* scene)
 
 void gm_801B7688(GameScene* scene)
 {
-    VsModeData* temp_r31;
-    CSSData* temp_r3;
+    VsModeData* data;
+    CSSData* css_data;
+
     PAD_STACK(8);
 
-    temp_r31 = &gmMainLib_804D3EE0->unk_1490;
-    temp_r3 = gm_GetGameSceneLeaveDataCallback(scene);
-    if (temp_r3->pending_scene_change == 2) {
+    data = &gmMainLib_804D3EE0->unk_1490;
+    css_data = gm_GetGameSceneLeaveDataCallback(scene);
+    if (css_data->pending_scene_change == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
-    gm_80167A14(temp_r31->data.players);
-    gm_801B0730(temp_r3, &temp_r31->data.players[0].c_kind, NULL,
-                &temp_r31->data.players[0].color,
-                &temp_r31->data.players[0].xA, NULL);
+    gmMultiman_LeaveFinish(data, css_data);
 }
 
 static inline VsModeData* getMultimanData(void)
@@ -840,20 +839,18 @@ void gm_801B7B74(GameScene* scene)
 
 void gm_801B7C0C(GameScene* scene)
 {
-    VsModeData* temp_r31;
-    CSSData* temp_r3;
+    VsModeData* data;
+    CSSData* css_data;
+
     PAD_STACK(8);
 
-    temp_r31 = &gmMainLib_804D3EE0->unk_1490;
-    temp_r3 = gm_GetGameSceneLeaveDataCallback(scene);
-    if (temp_r3->pending_scene_change == 2) {
+    data = &gmMainLib_804D3EE0->unk_1490;
+    css_data = gm_GetGameSceneLeaveDataCallback(scene);
+    if (css_data->pending_scene_change == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
-    gm_80167A14(temp_r31->data.players);
-    gm_801B0730(temp_r3, &temp_r31->data.players[0].c_kind, NULL,
-                &temp_r31->data.players[0].color,
-                &temp_r31->data.players[0].xA, NULL);
+    gmMultiman_LeaveFinish(data, css_data);
 }
 
 void gm_801B7C84(GameScene* scene)
@@ -943,20 +940,18 @@ void gm_801B8110(GameScene* scene)
 
 void gm_801B81A8(GameScene* scene)
 {
-    VsModeData* temp_r31;
-    CSSData* temp_r3;
+    VsModeData* data;
+    CSSData* css_data;
+
     PAD_STACK(8);
 
-    temp_r31 = &gmMainLib_804D3EE0->unk_1490;
-    temp_r3 = gm_GetGameSceneLeaveDataCallback(scene);
-    if (temp_r3->pending_scene_change == 2) {
+    data = &gmMainLib_804D3EE0->unk_1490;
+    css_data = gm_GetGameSceneLeaveDataCallback(scene);
+    if (css_data->pending_scene_change == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
-    gm_80167A14(temp_r31->data.players);
-    gm_801B0730(temp_r3, &temp_r31->data.players[0].c_kind, NULL,
-                &temp_r31->data.players[0].color,
-                &temp_r31->data.players[0].xA, NULL);
+    gmMultiman_LeaveFinish(data, css_data);
 }
 
 void gm_801B8220(GameScene* scene)
@@ -1032,20 +1027,18 @@ void gm_801B863C(GameScene* scene)
 
 void gm_801B86D4(GameScene* scene)
 {
-    VsModeData* temp_r31;
-    CSSData* temp_r3;
+    VsModeData* data;
+    CSSData* css_data;
+
     PAD_STACK(8);
 
-    temp_r31 = &gmMainLib_804D3EE0->unk_1490;
-    temp_r3 = gm_GetGameSceneLeaveDataCallback(scene);
-    if (temp_r3->pending_scene_change == 2) {
+    data = &gmMainLib_804D3EE0->unk_1490;
+    css_data = gm_GetGameSceneLeaveDataCallback(scene);
+    if (css_data->pending_scene_change == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
-    gm_80167A14(temp_r31->data.players);
-    gm_801B0730(temp_r3, &temp_r31->data.players[0].c_kind, NULL,
-                &temp_r31->data.players[0].color,
-                &temp_r31->data.players[0].xA, NULL);
+    gmMultiman_LeaveFinish(data, css_data);
 }
 
 void gm_801B874C(GameScene* scene)
