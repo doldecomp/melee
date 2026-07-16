@@ -681,7 +681,7 @@ void HSD_RObjRemoveAll(HSD_RObj* robj)
 
 HSD_RObj* HSD_RObjAlloc(void)
 {
-    HSD_RObj* new = HSD_ObjAlloc(&robj_alloc_data);
+    HSD_RObj* new = HSD_ObjAlloc(HSD_RObjGetAllocData());
     HSD_ASSERT(1032, new);
     memset(new, 0, 0x1C);
     return new;
@@ -689,7 +689,7 @@ HSD_RObj* HSD_RObjAlloc(void)
 
 void HSD_RObjFree(HSD_RObj* robj)
 {
-    HSD_ObjFree(&robj_alloc_data, robj);
+    HSD_ObjFree(HSD_RObjGetAllocData(), robj);
 }
 
 static char HSD_RObj_80406F14[] = "(ptr && nitems) || !ptr";
@@ -825,7 +825,7 @@ static f32 dummy_func(void* unused)
 
 HSD_Rvalue* HSD_RvalueAlloc(void)
 {
-    HSD_Rvalue* rvalue = HSD_ObjAlloc(&rvalue_alloc_data);
+    HSD_Rvalue* rvalue = HSD_ObjAlloc(HSD_RvalueObjGetAllocData());
     HSD_ASSERT(1224, rvalue);
     memset(rvalue, 0, sizeof(HSD_Rvalue));
     return rvalue;
@@ -835,7 +835,7 @@ void HSD_RvalueRemove(HSD_Rvalue* rvalue)
 {
     if (rvalue != NULL) {
         HSD_JObjUnrefThis(rvalue->jobj);
-        HSD_ObjFree(&rvalue_alloc_data, rvalue);
+        HSD_ObjFree(HSD_RvalueObjGetAllocData(), rvalue);
     }
 }
 

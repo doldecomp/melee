@@ -33,7 +33,7 @@ HSD_ObjAllocData* HSD_ShadowGetAllocData(void)
 
 void HSD_ShadowInitAllocData(void)
 {
-    HSD_ObjAllocInit(&shadow_alloc_data, sizeof(HSD_Shadow), 4);
+    HSD_ObjAllocInit(HSD_ShadowGetAllocData(), sizeof(HSD_Shadow), 4);
 }
 
 HSD_TObj* makeShadowTObj(void)
@@ -52,7 +52,7 @@ HSD_Shadow* HSD_ShadowAlloc(void)
 {
     HSD_Shadow* shadow;
 
-    shadow = HSD_ObjAlloc(&shadow_alloc_data);
+    shadow = HSD_ObjAlloc(HSD_ShadowGetAllocData());
     memset(shadow, 0, sizeof(HSD_Shadow));
     shadow->camera = HSD_CObjAlloc();
     shadow->texture = makeShadowTObj();
@@ -96,7 +96,7 @@ void HSD_ShadowRemove(HSD_Shadow* shadow)
     tobj = shadow->texture;
     HSD_ImageDescFree(tobj->imagedesc);
     HSD_TObjFree(tobj);
-    HSD_ObjFree(&shadow_alloc_data, shadow);
+    HSD_ObjFree(HSD_ShadowGetAllocData(), shadow);
 }
 
 void HSD_ShadowInit(HSD_Shadow* shadow)
