@@ -4,6 +4,8 @@
 #include "ef/eflib.h"
 #include "it/item.h"
 #include "it/itmaplib.h"
+#include "it/it_2725.h"
+#include "it/it_3F14.h"
 #include "it/types.h"
 #include "mp/mplib.h"
 
@@ -35,6 +37,22 @@ static inline void Item_EnterStateWithEffectHitlag(Item_GObj* gobj, s32 msid)
     Item_80268E5C(gobj, msid, ITEM_ANIM_UPDATE);
     ip->entered_hitlag = efLib_PauseAll;
     ip->exited_hitlag = efLib_ResumeAll;
+}
+
+static inline void Item_ApplyFallingPhysics(Item_GObj* gobj)
+{
+    ItemAttr* attrs = GET_ITEM(gobj)->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+    it_80274658(gobj, it_804D6D28->x68_float);
+}
+
+static inline bool Item_TickLifetime(Item* ip)
+{
+    if (ip->xD44_lifeTimer <= 0.0f) {
+        return true;
+    }
+    ip->xD44_lifeTimer -= 1.0f;
+    return false;
 }
 
 /// Check whether the grapple chain from @p head to the tip @p pos or to its

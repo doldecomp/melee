@@ -520,11 +520,7 @@ void it_802D23F4(Item_GObj* gobj)
 bool it_802D246C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    if (ip->xD44_lifeTimer <= 0.0f) {
-        return true;
-    }
-    ip->xD44_lifeTimer -= 1.0f;
-    return false;
+    return Item_TickLifetime(ip);
 }
 
 void it_802D24A0(Item_GObj* gobj)
