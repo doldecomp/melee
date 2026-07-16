@@ -84,15 +84,7 @@ static void grTYoshi_OnDemoInit(bool arg0) {}
 
 static void grTYoshi_OnInit(void)
 {
-    stage_info.unk8C.b4 = 0;
-    stage_info.unk8C.b5 = 1;
-    grTYoshi_80223BEC(0);
-    grTYoshi_80223BEC(1);
-    grTYoshi_80223BEC(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTYoshi_80223BEC);
 }
 
 static void grTYoshi_OnLoad(void) {}

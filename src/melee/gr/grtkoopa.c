@@ -72,15 +72,7 @@ static void grTKoopa_80221648(bool arg0) {}
 
 static void grTKoopa_8022164C(void)
 {
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-    grTKoopa_802216EC(0);
-    grTKoopa_802216EC(1);
-    grTKoopa_802216EC(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTKoopa_802216EC);
 }
 static void grTkoopa_UnkStage0_OnLoad(void) {}
 

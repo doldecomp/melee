@@ -45,16 +45,7 @@ void grTGameWatch_80224110(bool unused)
 
 void grTGameWatch_80224114(void)
 {
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-
-    grTGameWatch_802241B4(0);
-    grTGameWatch_802241B4(1);
-    grTGameWatch_802241B4(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTGameWatch_802241B4);
 }
 
 void grTgamewatch_UnkStage0_OnLoad(void)
