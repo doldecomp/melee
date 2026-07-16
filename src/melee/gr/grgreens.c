@@ -255,7 +255,19 @@ Ground_GObj* grGreens_80213524(int id)
     StageCallbacks* cbs = &grGr_callbacks[id];
     gobj = Ground_GetStageGObj(id);
     if (gobj != NULL) {
-        Ground_SetupStageCallbacks(gobj, cbs);
+        Ground* gp = GET_GROUND(gobj);
+        gp->x8_callback = NULL;
+        gp->xC_callback = NULL;
+        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
+        if (cbs->callback3 != NULL) {
+            gp->x1C_callback = cbs->callback3;
+        }
+        if (cbs->callback0 != NULL) {
+            cbs->callback0(gobj);
+        }
+        if (cbs->callback2 != NULL) {
+            HSD_GObj_SetupProc(gobj, cbs->callback2, 4);
+        }
     } else {
         OSReport((char*) grGr_callbacks + 0xCC, grGr_803E7728, 281, id);
     }

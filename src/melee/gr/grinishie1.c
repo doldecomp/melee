@@ -234,7 +234,24 @@ HSD_GObj* grInishie1_801FA9B4(s32 arg0)
     gobj = Ground_GetStageGObj(arg0);
 
     if (gobj != NULL) {
-        Ground_SetupStageCallbacks(gobj, cb);
+        Ground* gp = gobj->user_data;
+
+        gp->x8_callback = NULL;
+        gp->xC_callback = NULL;
+
+        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3U, 0U);
+
+        if (cb->callback3 != NULL) {
+            gp->x1C_callback = cb->callback3;
+        }
+
+        if (cb->callback0 != NULL) {
+            cb->callback0(gobj);
+        }
+
+        if (cb->callback2 != NULL) {
+            HSD_GObj_SetupProc(gobj, cb->callback2, 4U);
+        }
     } else {
         OSReport(grI1_803E4950.report_fmt_get_gobj, "grinishie1.c", 0xE7,
                  arg0);
