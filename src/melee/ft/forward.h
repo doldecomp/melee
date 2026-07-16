@@ -160,7 +160,7 @@ typedef enum CharacterKind {
     /* 1F */ CHKIND_SANDBAG,                       // Sandbag
     /* 20 */ CHKIND_POPO,                          // Popo
     /* 21 */ CHKIND_NONE,                          // None
-    /* 22 */ CHKIND_MAX = CHKIND_NONE
+    CHKIND_MAX = CHKIND_NONE
 } CharacterKind;
 
 static MotionFlags const Ft_MF_None = 0;

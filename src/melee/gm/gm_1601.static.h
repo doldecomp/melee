@@ -95,48 +95,45 @@ static const u8 lbl_803B7844[] = {
     CKIND_CLINK,   CKIND_DRMARIO, CKIND_EMBLEM,   CKIND_PICHU,
     CKIND_GANON,
 };
-/* 3B78A4 */ static const u8
-    ckind_to_selkind_map[0x24] = { ///< CKind to selkind? Maybe misnamed on
-                                   ///< account of the
-                                   ///< extra mario entries. Seems like they're
-                                   ///< there for fallback.
-        SELKIND_CAPTAIN,
-        SELKIND_DONKEY,
-        SELKIND_FOX,
-        SELKIND_GAMEWATCH,
-        SELKIND_KIRBY,
-        SELKIND_KOOPA,
-        SELKIND_LINK,
-        SELKIND_LUIGI,
-        SELKIND_MARIO,
-        SELKIND_MARS,
-        SELKIND_MEWTWO,
-        SELKIND_NESS,
-        SELKIND_PEACH,
-        SELKIND_PIKACHU,
-        SELKIND_POPONANA,
-        SELKIND_PURIN,
-        SELKIND_SAMUS,
-        SELKIND_YOSHI,
-        SELKIND_ZELDA_SEAK,
-        SELKIND_ZELDA_SEAK,
-        SELKIND_FALCO,
-        SELKIND_CLINK,
-        SELKIND_DRMARIO,
-        SELKIND_EMBLEM,
-        SELKIND_PICHU,
-        SELKIND_GANON,
-        SELKIND_MARIO,
-        SELKIND_MARIO,
-        SELKIND_MARIO,
-        SELKIND_COUNT,
-        SELKIND_MARIO,
-        SELKIND_MARIO,
-        0x00,
-        0x00,
-        0x00,
-        0x00
-    };
+
+/* 3B78A4 */ static const u8 ckind_to_selkind_map[0x24] = {
+    /* 00 */ SELKIND_CAPTAIN,
+    /* 01 */ SELKIND_DONKEY,
+    /* 02 */ SELKIND_FOX,
+    /* 03 */ SELKIND_GAMEWATCH,
+    /* 04 */ SELKIND_KIRBY,
+    /* 05 */ SELKIND_KOOPA,
+    /* 06 */ SELKIND_LINK,
+    /* 07 */ SELKIND_LUIGI,
+    /* 08 */ SELKIND_MARIO,
+    /* 09 */ SELKIND_MARS,
+    /* 0A */ SELKIND_MEWTWO,
+    /* 0B */ SELKIND_NESS,
+    /* 0C */ SELKIND_PEACH,
+    /* 0D */ SELKIND_PIKACHU,
+    /* 0E */ SELKIND_POPONANA,
+    /* 0F */ SELKIND_PURIN,
+    /* 10 */ SELKIND_SAMUS,
+    /* 11 */ SELKIND_YOSHI,
+    /* 12 */ SELKIND_ZELDA_SEAK,
+    /* 13 */ SELKIND_ZELDA_SEAK,
+    /* 14 */ SELKIND_FALCO,
+    /* 15 */ SELKIND_CLINK,
+    /* 16 */ SELKIND_DRMARIO,
+    /* 17 */ SELKIND_EMBLEM,
+    /* 18 */ SELKIND_PICHU,
+    /* 19 */ SELKIND_GANON,
+    /* 1A */ SELKIND_MARIO,
+    /* 1B */ SELKIND_MARIO,
+    /* 1C */ SELKIND_MARIO,
+    /* 1D */ SELKIND_COUNT,
+    /* 1E */ SELKIND_MARIO,
+    /* 1F */ SELKIND_MARIO,
+    /* 20 */ SELKIND_CAPTAIN,
+    /* 21 */ 0x00, ///< Likely extra unncessary bytes
+    0x00,
+    0x00
+};
 
 /* 3B78C8 */ static const struct UnlockableCharacterData
     lbl_803B78C8[NUM_UNLOCKABLE_CHARACTERS] = {

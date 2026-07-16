@@ -1,27 +1,4 @@
-#ifndef GALE01_1601C4
-#define GALE01_1601C4
-
-#include <placeholder.h>
-#include <platform.h>
-
-#include "dolphin/gx/GXStruct.h"
-#include "dolphin/mtx.h"
-#include "dolphin/types.h"
-
-#include "ft/forward.h"
-#include "gm/forward.h"
-#include "mn/forward.h"
-
-#include "mn/types.h"
-
-#include "sc/forward.h"
-
-#include <printf.h>
-#include <melee/gm/gmregclear.h>
-
 struct lbl_8046B488_t;
-
-#include <melee/gm/gmregclear.h>
 
 /* 1601C4 */ int gm_801601C4(s8);
 /* 160244 */ int gm_80160244(s8);
@@ -117,7 +94,33 @@ struct lbl_8046B488_t;
 /* 163F2C */ int gm_GetCruelHighscore(u8);
 /* 163F50 */ int gm_GetCruelTotalHighscore(void);
 /* 163FA4 */ int fn_80163FA4(u8);
-/* 16400C */ u8 gm_SelKindToCKind(u8 ckind);
+/**
+ * @brief Convert a #SelectableCharacterKind into its #CharacterKind.
+ *
+ * Indexes #selkind_to_ckind_map with @p selkind. #SELKIND_ZELDA_SEAK resolves
+ * to #CharacterKind::CKIND_ZELDA; the Sheik half is dropped because
+ * #SelectableCharacterKind collapses Zelda/Sheik into a single slot.
+ *
+ * @param[in] selkind A #SelectableCharacterKind (e.g. the CSS slot index).
+ * @return The #CharacterKind backing the requested selectable character.
+ * @see #gm_CKindToSelKind for the inverse (lossy) mapping.
+ * @see #selkind_to_ckind_map
+ */
+/* 16400C */ u8 gm_SelKindToCKind(u8 selkind);
+
+/**
+ * @brief Convert a #CharacterKind into its #SelectableCharacterKind.
+ *
+ * Indexes #ckind_to_selkind_map with @p ckind. Both #CharacterKind::CKIND_ZELDA
+ * and #CharacterKind::CKIND_SEAK collapse onto #SELKIND_ZELDA_SEAK, so this
+ * direction is lossy with respect to the Zelda/Sheik split, not to mention all
+ * the non-playable characters.
+ *
+ * @param[in] ckind A #CharacterKind.
+ * @return The #SelectableCharacterKind representing the CSS slot for @p ckind.
+ * @see #gm_SelKindToCKind for the inverse mapping.
+ * @see #ckind_to_selkind_map
+ */
 /* 164024 */ u8 gm_CKindToSelKind(u8 ckind);
 /* 16403C */ bool gm_8016403C(u8 item);
 /* 1640B0 */ void fn_801640B0(u64* item_mask);
@@ -264,5 +267,3 @@ gm_80167BC8(struct VsModeData*); // inits VsModeData from game rules
 /* 16A998 */ int gm_8016A998(s8, s8);
 /* 16A9E8 */ int gm_8016A9E8(u8 arg0, s8 arg1);
 /* 16AC44 */ bool gm_8016AC44(s8 ckind, s8 costume_id);
-
-#endif
