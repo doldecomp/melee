@@ -3431,6 +3431,8 @@ void gm_801BF3F8(void)
     lbAudioAx_80027168();
 }
 
+extern const f32 gm_804DAC88;
+
 void gm_801BF4DC(GameScene* arg0)
 {
     StartMeleeData* md;
@@ -3471,10 +3473,8 @@ void gm_801BF4DC(GameScene* arg0)
     }
 }
 
-/// Default game speed (StartMeleeRules::x34) used by gm_801BF4DC. The
-/// 1.0F object lives at .sdata2:0x804DAC88, outside this unit's split
-/// (it is named gm_804DAC88 in symbols.txt and declared extern in
-/// gm_1BA8.h), separate from the pooled 1.0F literal at 0x804DAC78.
+/// @todo .sdata2 order hack (must follow first use to avoid pooling)
+const f32 gm_804DAC88 = 1.0F;
 
 void gm_801BF634(s32 arg0, s8 character_kind)
 {

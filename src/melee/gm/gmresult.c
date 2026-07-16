@@ -2,6 +2,16 @@
 
 #include "gm/types.h"
 
+/// @todo .sdata2 order hack
+static void order_sdata(void)
+{
+    (void) "P";
+    (void) "%";
+    (void) "GmRst";
+    (void) "pnlsce";
+    (void) "flmsce";
+}
+
 static struct ResultsData lbl_8046DBE8;
 static u32 lbl_804D3F8C[2] = { 0x817C817C, 0x817C0000 };
 u32 lbl_804D3FA0 = 0x817C0000;
@@ -10,7 +20,6 @@ union {
     u32 words[2];
     char text[8];
 } lbl_804D3FA8 = { { 0x817C8146, 0x817C0000 } };
-static char lbl_804D3FB0[] = "0";
 
 extern HSD_Archive* lbl_804D65B8;
 
@@ -430,21 +439,15 @@ s32 fn_80174A60(StatsList* list, s32 slot)
 }
 
 /// Static data for stats lists
-static char lbl_804D3F68[] = "P";
-static char lbl_804D3F6C[] = "%";
-static char lbl_804D3F70[] = "GmRst";
-static char lbl_804D3F78[] = "pnlsce";
-static char lbl_804D3F80[] = "flmsce";
-
 static StatsEntry lbl_803D6488[] = {
     { 0x08, { 0 }, NULL, NULL, NULL },
     { 0x08, { 0 }, NULL, NULL, NULL },
-    { -1, { 0 }, fn_8017AE70, fn_8017BB94, lbl_804D3F68 },
+    { -1, { 0 }, fn_8017AE70, fn_8017BB94, "P" },
     { -1, { 0 }, fn_8017AED8, fn_8017BC50, NULL },
     { -1, { 0 }, fn_8017AF40, fn_8017BD0C, NULL },
     { -1, { 0 }, fn_8017AFA8, fn_8017BDC8, NULL },
     { 0x09, { 0 }, NULL, NULL, NULL },
-    { -1, { 0 }, fn_8017B07C, fn_8017BB94, lbl_804D3F6C },
+    { -1, { 0 }, fn_8017B07C, fn_8017BB94, "%" },
     { -1, { 0 }, fn_8017B0E4, fn_8017BC50, NULL },
     { -1, { 0 }, fn_8017B14C, fn_8017BD0C, NULL },
     { -1, { 0 }, fn_8017B1B4, fn_8017BDC8, NULL },
@@ -515,21 +518,22 @@ static StatsList lbl_803D6878[] = {
     { 3, 0x00, { 0 }, NULL },
 };
 
-static char lbl_803D6898[] =
-    "Error : Cannot read archive file (File Name : %s).";
-static char lbl_803D68CC[] = "%d\x81\x46%02d";
-static char lbl_803D68D8[] = "SdRst.usd";
-static char lbl_803D68E4[] = "SIS_ResultData";
-static char lbl_803D68F4[] = "SdRst.dat";
-static char lbl_803D6900[] =
-    "Error : gobj dont't get (gmResultAddPanelCamera)\n";
-static char lbl_803D6934[] = "gmresult.c";
-static char lbl_803D6940[] =
-    "Error : cobj dont't get (gmResultAddPanelCamera)\n";
-static char lbl_803D6974[] = "Error : gobj dont't get (gmResultAddLight)\n";
-static char lbl_803D69A0[] = "Error : lobj dont't get (gmResultAddLight)\n";
-static char lbl_803D69CC[] = "Error : gobj dont't get (gmResultAddModel)\n";
-static char lbl_803D69F8[] = "translate";
+/// @todo .sdata2 order hack
+static void order_data(void)
+{
+    (void) "Error : Cannot read archive file (File Name : %s).";
+    (void) "%d\x81\x46%02d";
+    (void) "SdRst.usd";
+    (void) "SIS_ResultData";
+    (void) "SdRst.dat";
+    (void) "Error : gobj dont't get (gmResultAddPanelCamera)\n";
+    (void) "gmresult.c";
+    (void) "Error : cobj dont't get (gmResultAddPanelCamera)\n";
+    (void) "Error : gobj dont't get (gmResultAddLight)\n";
+    (void) "Error : lobj dont't get (gmResultAddLight)\n";
+    (void) "Error : gobj dont't get (gmResultAddModel)\n";
+    (void) "translate";
+}
 
 static inline void fn_80174B4C_blk14829(ResultsData* data, s32 slot,
                                         struct ResultsPlayerData** pdata,
@@ -970,7 +974,7 @@ void fn_80175880(s32 slot)
             minutes = display_seconds / 60;
             line_num = HSD_SisLib_803A6B98(
                 lbl_8046DBE8.player_data[slot].ko_time, 0.0F, -30.0F,
-                lbl_803D68CC, minutes, display_seconds % 60);
+                "%d\x81\x46%02d", minutes, display_seconds % 60);
         }
     } else {
         color.r = 0xA0;
@@ -1483,14 +1487,14 @@ void fn_80176A6C(void)
 
     gobj = GObj_Create(0x13U, 0x14U, 0U);
     if (gobj == NULL) {
-        (OSReport)(lbl_803D6900);
-        __assert(lbl_803D6934, 0x662, lbl_804D3FB0);
+        OSReport("Error : gobj dont't get (gmResultAddPanelCamera)\n");
+        HSD_ASSERT(0x662, 0);
     }
 
     cobj = HSD_CObjLoadDesc(lbl_8046DBE8.pnlsce->cameras->desc);
     if (cobj == NULL) {
-        (OSReport)(lbl_803D6940);
-        __assert(lbl_803D6934, 0x668, lbl_804D3FB0);
+        OSReport("Error : cobj dont't get (gmResultAddPanelCamera)\n");
+        HSD_ASSERT(0x668, 0);
     }
 
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
@@ -1503,9 +1507,9 @@ void fn_80176A6C(void)
 
     HSD_SisLib_803A611C(0, gobj, 9U, 0xDU, 0U, 0xEU, 0U, 0x13U);
     if (lbLang_IsSavedLanguageUS() != 0) {
-        HSD_SisLib_803A62A0(0, lbl_803D68D8, lbl_803D68E4);
+        HSD_SisLib_803A62A0(0, "SdRst.usd", "SIS_ResultData");
     } else {
-        HSD_SisLib_803A62A0(0, lbl_803D68F4, lbl_803D68E4);
+        HSD_SisLib_803A62A0(0, "SdRst.dat", "SIS_ResultData");
     }
     lbl_8046DBE8.cobj = cobj;
 }
@@ -1725,33 +1729,34 @@ void fn_801771C0(ResultsData* data)
 
 static inline void gmResultLoadArchive(ResultsData* data)
 {
-    lbl_804D65B8 =
-        lbArchive_80016DBC(lbl_804D3F70, &data->pnlsce, lbl_804D3F78,
-                           &data->flmsce, lbl_804D3F80, 0);
+    lbl_804D65B8 = lbArchive_80016DBC("GmRst", &data->pnlsce, "pnlsce",
+                                      &data->flmsce, "flmsce", 0);
     if (data->pnlsce == NULL) {
-        (OSReport)(lbl_803D6898, lbl_804D3F70);
+        OSReport("Error : Cannot read archive file (File Name : %s).",
+                 "GmRst");
     }
     if (data->flmsce == NULL) {
-        (OSReport)(lbl_803D6898, lbl_804D3F70);
+        OSReport("Error : Cannot read archive file (File Name : %s).",
+                 "GmRst");
     }
 }
 
 static inline void gmResultReportLightGObj(void)
 {
-    (OSReport)(lbl_803D6974);
-    __assert(lbl_803D6934, 0x68C, lbl_804D3FB0);
+    OSReport("Error : gobj dont't get (gmResultAddLight)\n");
+    HSD_ASSERT(0x68C, 0);
 }
 
 static inline void gmResultReportLightLObj(void)
 {
-    (OSReport)(lbl_803D69A0);
-    __assert(lbl_803D6934, 0x68F, lbl_804D3FB0);
+    OSReport("Error : lobj dont't get (gmResultAddLight)\n");
+    HSD_ASSERT(0x68F, 0);
 }
 
 static inline void gmResultReportModelGObj(void)
 {
-    (OSReport)(lbl_803D69CC);
-    __assert(lbl_803D6934, 0x6A2, lbl_804D3FB0);
+    OSReport("Error : gobj dont't get (gmResultAddModel)\n");
+    HSD_ASSERT(0x6A2, 0);
 }
 
 void gm_80177368_OnEnter(void* arg0_)

@@ -43,6 +43,7 @@
 #include <melee/gm/gm_1A7A.h>
 #include <melee/gm/gm_1ADD.h>
 #include <melee/gm/gm_1AED.h>
+#include <melee/gm/gm_1B03.h>
 #include <melee/gm/gm_1BA8.h>
 #include <melee/gm/gm_1BFA.h>
 #include <melee/gm/gmadventure.h>
@@ -72,8 +73,6 @@
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
 #include <melee/ty/toy.h>
-
-void gm_801B0620(PlayerInitData*, s32 c_kind, u8 color, u8 stocks, u8);
 
 typedef struct lbl_804706D8_t {
     s16 x0;
@@ -177,12 +176,7 @@ extern AdventureStageEntry lbl_803D7AC0[110];
 extern AllstarStageEntry lbl_803D85F0[55];
 u16 lbl_803D8B88[] = { 0x18, 0x16, 0x12, 0x3, 0x5, 0x4, 0x6, 0x1a, 0x19, 0x7 };
 
-/// @todo String-pool order anchor. Retail DOL bytes at 0x803D8B9C..0x803D8C43
-/// hold exactly these literals in this order ("GmRegClr" at .data+0x14 ...
-/// "Error : jobj..." ending at +0x128), so the pool must be seeded in this
-/// order before any other .data emission; fn_8017F2A4 / fn_801803FC /
-/// fn_80180630 address them as anchor+immediate. Remove once the literals'
-/// first uses naturally occur in this order.
+/// @todo .sdata2 order hack
 static void order_data(void)
 {
     (void) "GmRegClr";
@@ -758,7 +752,7 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     s32 player_idx;
     f32 attack_ratio;
     u8 player_stocks;
-    s32 player_ckind;
+    u8 player_ckind;
     u8 flags;
     s8* enemy_kind;
     f32 defense_ratio;
@@ -3120,32 +3114,16 @@ void fn_80181708(void)
     gm_80168F88();
 }
 
-/// Archive/symbol name strings owned by this TU at 0x803D8CD8..0x803D8D04.
-/// The reference code in gm_80181998 addresses all three strings off the
-/// first string's symbol (base+0x0 / base+0xC / base+0x24), so the calls
-/// below reference gmRegClear_str_IfHrNoCn (declared in gmregclear.h)
-/// plus the fixed offsets of the two strings that follow it in the binary.
-/// Two details are load-bearing for the reference encoding: the definitions
-/// must FOLLOW this function (defining the data before use makes MWCC anchor
-/// at the section base instead of the symbol), and the third argument of the
-/// first call must be an integer expression (spelling both
-/// "ScInfCnt_scene_models" arguments as the same pointer expression makes
-/// MWCC CSE the address into a saved register; the reference recomputes it).
 void gm_80181998(void)
 {
-    lbl_804D65C8 = lbArchive_80016DBC(gmRegClear_str_IfHrNoCn, &lbl_804D65CC,
-                                      (u32) gmRegClear_str_IfHrNoCn + 0xC, 0);
-    lbl_804D65C8 =
-        lbArchive_80016DBC(gmRegClear_str_IfHrNoCn + 0x24, &lbl_804D65D0,
-                           gmRegClear_str_IfHrNoCn + 0xC, 0);
+    lbl_804D65C8 = lbArchive_80016DBC("IfHrNoCn", &lbl_804D65CC,
+                                      "ScInfCnt_scene_models", 0);
+    lbl_804D65C8 = lbArchive_80016DBC("IfHrReco", &lbl_804D65D0,
+                                      "ScInfCnt_scene_models", 0);
     fn_80181708();
     // Keep lbl_80472ED8 before lbl_80473594 in .bss.
     (void) &lbl_80472ED8;
 }
-
-char gmRegClear_str_IfHrNoCn[] = "IfHrNoCn";
-char gmRegClear_str_ScInfCnt_scene_models[] = "ScInfCnt_scene_models";
-char gmRegClear_str_IfHrReco[] = "IfHrReco";
 
 void gm_80181A00(s32 arg0, s32 arg1)
 {

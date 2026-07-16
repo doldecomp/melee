@@ -10,8 +10,6 @@
 #include <melee/mn/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-/* 3D8CD8 */ extern char gmRegClear_str_IfHrNoCn[];
-
 /* 17C0C8 */ void fn_8017C0C8(void);
 /* 17C1A4 */ void fn_8017C1A4(HSD_GObj*);
 /* 17C71C */ void fn_8017C71C(void);
