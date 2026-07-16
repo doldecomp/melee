@@ -88,7 +88,7 @@ void gm_801BFABC(GameScene* arg0)
     temp_r30->rules.x0_6 = false;
     temp_r30->rules.x0_0 = 1;
     temp_r30->rules.x0_3 = 2;
-    temp_r30->rules.xE = gm_8016075C(gm_80164024(temp_r31->x4));
+    temp_r30->rules.xE = gm_8016075C(gm_CKindToSelKind(temp_r31->x4));
     gm_801B0620(&temp_r30->players[0], temp_r31->x0, temp_r31->x1, 1,
                 temp_r31->x2);
     gm_801B0664(&temp_r30->players[1], temp_r31->x4, 0, 1, 1);
@@ -114,9 +114,9 @@ void gm_801BFBA8(GameScene* arg0)
     if ((temp_r0 != 7) && (temp_r0 != 8) &&
         ((s8) mei->match_end.player_standings[0].stocks != 0))
     {
-        gm_80164910((s32) temp_r31->x4);
+        gm_UnlockCKind((s32) temp_r31->x4);
     } else {
-        gmMainLib_8015DB2C(gm_80160638((s32) temp_r31->x4));
+        gmMainLib_8015DB2C(gm_CKindToUnlockIndex((s32) temp_r31->x4));
     }
     gm_80173EEC();
     gm_80172898(0x100U);
