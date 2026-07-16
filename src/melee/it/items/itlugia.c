@@ -127,8 +127,7 @@ void it_802D1580(Item_GObj* gobj)
     itLugiaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
     ip->xDD4_itemVar.lugia.xE50.x = -attrs->x4;
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 bool itLugia_UnkMotion2_Anim(Item_GObj* gobj)
@@ -226,8 +225,7 @@ void it_802D1830(Item_GObj* gobj)
     PAD_STACK(16);
 
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
     disc = ip->pos.y - ip->xDD4_itemVar.lugia.x64.y;
     x18 = attrs->x18;
     prod = 8.0f * x18;
@@ -251,8 +249,7 @@ bool itLugia_UnkMotion4_Anim(Item_GObj* gobj)
 
     if (!it_80272C6C(gobj)) {
         Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
-        ip->entered_hitlag = efLib_PauseAll;
-        ip->exited_hitlag = efLib_ResumeAll;
+        Item_SetEffectHitlagCallbacks(ip);
     }
 
     return false;
@@ -284,8 +281,7 @@ void it_802D1A44(Item_GObj* gobj)
     Vec3 pos;
 
     Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
     ip->xDD4_itemVar.lugia.xE50.y = 1.0f;
     ip->xDD4_itemVar.lugia.xE50.z = 0.7f;
     ip->xDD4_itemVar.lugia.x88 = 0.4f;
@@ -370,8 +366,7 @@ void it_802D1D40(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     it_802762BC(ip);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
     it_80273670(gobj, 0, 0.0f);
 }
 
@@ -389,8 +384,7 @@ void it_802D1DD8(Item_GObj* gobj)
         it_80273454(gobj);
         ip = GET_ITEM(gobj);
         Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-        ip->entered_hitlag = efLib_PauseAll;
-        ip->exited_hitlag = efLib_ResumeAll;
+        Item_SetEffectHitlagCallbacks(ip);
         old_ip->xDD1_flag.b1 = 1;
     }
 }
@@ -522,8 +516,7 @@ void it_802D23F4(Item_GObj* gobj)
     ip->xD44_lifeTimer = attrs->x0;
     it_80274740(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
     it_8026B3A8(gobj);
 }
 

@@ -94,8 +94,7 @@ void it_802D2668(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     ip->xDD4_itemVar.houou.vel_accum = 0.0f;
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 bool itHouou_UnkMotion2_Anim(Item_GObj* gobj)
@@ -144,8 +143,7 @@ void it_802D27B0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 bool itHouou_UnkMotion3_Anim(Item_GObj* gobj)
@@ -165,8 +163,7 @@ bool itHouou_UnkMotion3_Anim(Item_GObj* gobj)
     if (!it_80272C6C(gobj)) {
         Item* ip2 = GET_ITEM(gobj);
         Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
-        ip2->entered_hitlag = efLib_PauseAll;
-        ip2->exited_hitlag = efLib_ResumeAll;
+        Item_SetEffectHitlagCallbacks(ip2);
     }
 
     return false;
@@ -202,8 +199,7 @@ void it_802D290C(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     itHououAttr* attr = ip->xC4_article_data->x4_specialAttributes;
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
     ip->xDD4_itemVar.houou.vel_accum = attr->x18;
 }
 
@@ -252,8 +248,7 @@ void it_802D2A58(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
     ip->on_accessory = (HSD_GObjEvent) it_802D2B4C;
     ip->xDCC_flag.b3 = true;
 }
@@ -306,8 +301,7 @@ void it_802D2BE0(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     it_802762BC(ip);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
     it_80273670(gobj, 0, 0.0f);
 }
 
@@ -325,8 +319,7 @@ void it_802D2C78(Item_GObj* gobj)
         it_80273454(gobj);
         ip2 = GET_ITEM(gobj);
         Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-        ip2->entered_hitlag = efLib_PauseAll;
-        ip2->exited_hitlag = efLib_ResumeAll;
+        Item_SetEffectHitlagCallbacks(ip2);
         ip->xDD1_flag.b1 = true;
     }
 }
@@ -393,8 +386,7 @@ void it_802D2EF0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 bool it_802D2F3C(Item_GObj* gobj)

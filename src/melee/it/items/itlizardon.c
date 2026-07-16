@@ -84,8 +84,7 @@ void it_802CB994(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 bool itLizardon_UnkMotion1_Anim(Item_GObj* gobj)
@@ -141,15 +140,13 @@ void it_802CBAA8(Item_GObj* gobj)
     ip->xDD4_itemVar.lizardon.x74[1] = attrs->x18[1];
     ip->xDD4_itemVar.lizardon.x74[2] = attrs->x18[2];
     ip->xDD4_itemVar.lizardon.x74[3] = attrs->x18[3];
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
     ip->on_accessory = it_802CBD24;
 }
 
 bool itLizardon_UnkMotion2_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    PAD_STACK(8);
     if (!it_80272C6C(gobj)) {
         if (ip->xDD4_itemVar.lizardon.x60 <= 0) {
             ip->xDD4_itemVar.lizardon.x60 = 0;
@@ -273,8 +270,7 @@ void it_802CBFE4(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 bool itLizardon_UnkMotion3_Anim(Item_GObj* gobj)
@@ -300,8 +296,7 @@ void it_802CC0EC(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     it_802762BC(ip);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
     it_80273670(gobj, 0, 0.0f);
 }
 
@@ -448,8 +443,7 @@ void it_802CC5D4(Item_GObj* gobj)
     it_80275158(gobj, attrs->x0);
     it_80274740(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
     it_8026B3A8(gobj);
 }
 

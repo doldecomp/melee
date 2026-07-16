@@ -156,8 +156,7 @@ void it_802CE8D0(Item_GObj* gobj)
     } else {
         Item_8026AE84(ip, 0x271B, 127, 64);
     }
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 bool itUnknown_UnkMotion1_Anim(Item_GObj* gobj)
@@ -188,8 +187,7 @@ void it_802CEC24(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     it_802762BC(ip);
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 bool itUnknown_UnkMotion2_Anim(Item_GObj* gobj)
@@ -208,8 +206,7 @@ void itUnknown_UnkMotion2_Phys(Item_GObj* gobj)
                 ip->xC4_article_data->x4_specialAttributes;
             ip->x40_vel.y = attr->x8;
             Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-            ip->entered_hitlag = efLib_PauseAll;
-            ip->exited_hitlag = efLib_ResumeAll;
+            Item_SetEffectHitlagCallbacks(ip);
         }
     }
 }
@@ -293,8 +290,7 @@ void it_802CF0D4(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 bool it_802CF120(Item_GObj* gobj)

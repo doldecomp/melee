@@ -66,8 +66,7 @@ void it_802CC7D8(Item_GObj* gobj)
     it_8027ADEC(0x463, gobj, gobj->hsd_obj, 1.1f);
     ip->x40_vel.y = attrs->x8;
     Item_80268E5C(gobj, 2, 2);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 static void itFire_UnkMotion2_Anim_inline(Item_GObj* gobj)
@@ -77,8 +76,7 @@ static void itFire_UnkMotion2_Anim_inline(Item_GObj* gobj)
     it_8027ADEC(0x463, gobj, gobj->hsd_obj, 1.1f);
     ip->x40_vel.y = attrs->x8;
     Item_80268E5C(gobj, 2, 2);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 bool itFire_UnkMotion2_Anim(Item_GObj* gobj)
@@ -114,8 +112,7 @@ void it_802CC944(Item_GObj* gobj)
     it_802762BC(ip);
     Item_80268E5C(gobj, 0, 2);
 
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
     it_80273670(gobj, 0, 0.0f);
 }
 
@@ -129,8 +126,7 @@ static void itFire_UnkMotion0_Phys_inline(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     Item_80268E5C(gobj, 1, 2);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 void itFire_UnkMotion0_Phys(Item_GObj* gobj)
