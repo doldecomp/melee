@@ -1,5 +1,7 @@
 #include "gm_17AD.h"
 
+#include "gm/inlines.h"
+
 #include <melee/pl/forward.h>
 
 #include <melee/gm/gmresult.h>

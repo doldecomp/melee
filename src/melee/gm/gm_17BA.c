@@ -3,6 +3,8 @@
 #include "gm_17AD.h"
 #include "gm_unsplit.h"
 
+#include "gm/inlines.h"
+
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/gmresult.h>
 #include <melee/gm/types.h>
