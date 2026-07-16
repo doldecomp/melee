@@ -11,8 +11,8 @@
 #include "ft/ft_0892.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcommon.h"
-#include "ft/fttransition.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/inlines.h"
 #include "it/items/itsamuschargeshot.h"
 #include "lb/lb_00B0.h"
 

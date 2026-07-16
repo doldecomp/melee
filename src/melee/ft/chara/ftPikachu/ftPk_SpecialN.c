@@ -14,10 +14,10 @@
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
 #include "ft/ftparts.h"
-#include "ft/fttransition.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
+#include "ftCommon/inlines.h"
 #include "it/items/itpikachutjoltground.h"
 
 #include <dolphin/mtx.h>

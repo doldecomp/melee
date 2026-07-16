@@ -69,4 +69,24 @@ static inline void ftCo_ItemParasol_Phys(Fighter_GObj* gobj)
     ftCo_ItemParasolOpen_Phys(gobj);
 }
 
+static inline void ftCommon_GroundToAirStateChange(Fighter_GObj* gobj,
+                                                   Fighter* fp,
+                                                   FtMotionId msid,
+                                                   MotionFlags flags)
+{
+    ftCommon_8007D5D4(fp);
+    Fighter_ChangeMotionState(gobj, msid, flags, fp->cur_anim_frame, 1.0f,
+                              0.0f, NULL);
+}
+
+static inline void ftCommon_AirToGroundStateChange(Fighter_GObj* gobj,
+                                                   Fighter* fp,
+                                                   FtMotionId msid,
+                                                   MotionFlags flags)
+{
+    ftCommon_8007D7FC(fp);
+    Fighter_ChangeMotionState(gobj, msid, flags, fp->cur_anim_frame, 1.0f,
+                              0.0f, NULL);
+}
+
 #endif

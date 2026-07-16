@@ -11,10 +11,10 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
 #include "ft/ftcommon.h"
-#include "ft/fttransition.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/inlines.h"
 
 #include "ftYoshi/forward.h"
 

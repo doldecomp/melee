@@ -10,7 +10,6 @@
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
-#include "ft/fttransition.h"
 #include "ft/types.h"
 
 #include "ftCommon/forward.h"
@@ -18,6 +17,7 @@
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftpickupitem.h"
+#include "ftCommon/inlines.h"
 #include "ftPeach/types.h"
 
 #include "it/forward.h"

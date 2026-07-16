@@ -13,9 +13,9 @@
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
-#include "ft/fttransition.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/inlines.h"
 #include "lb/lbspdisplay.h"
 
 #include <dolphin/mtx.h>

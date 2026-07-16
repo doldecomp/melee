@@ -16,7 +16,6 @@
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ft/fttransition.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 
@@ -29,6 +28,7 @@
 #include "ftCommon/ftCo_Throw.h"
 #include "ftCommon/ftCo_Thrown.h"
 #include "ftCommon/ftCo_ThrownKoopa.h"
+#include "ftCommon/inlines.h"
 
 #include "ftKoopa/forward.h"
 
@@ -155,7 +155,8 @@ static u32 const transition_flags1 =
 void ftKp_SpecialS_8013319C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_GroundToAirStateChange(gobj, fp, 353, transition_flags1);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftKp_MS_SpecialAirSStart,
+                                    transition_flags1);
 
     {
         Fighter* fp = GET_FIGHTER(gobj);

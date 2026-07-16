@@ -14,12 +14,12 @@
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
-#include "ft/fttransition.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Landing.h"
 #include "ftCommon/ftCo_Pass.h"
+#include "ftCommon/inlines.h"
 
 #include "ftSeak/forward.h"
 

@@ -28,7 +28,6 @@
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
 #include "ft/ftparts.h"
-#include "ft/fttransition.h"
 #include "ft/ftwalkcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
@@ -36,6 +35,7 @@
 #include "ftCommon/ftCo_CaptureWaitKirby.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_Landing.h"
+#include "ftCommon/inlines.h"
 
 #include "ftKirby/forward.h"
 

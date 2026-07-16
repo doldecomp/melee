@@ -18,11 +18,11 @@
 #include "ft/ftanim.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcommon.h"
-#include "ft/fttransition.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Escape.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
+#include "ftCommon/inlines.h"
 #include "ftMewtwo/ftMt_Init.h"
 #include "ftMewtwo/types.h"
 

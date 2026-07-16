@@ -16,7 +16,6 @@
 #include "ft/ft_0892.h"
 #include "ft/ft_0D27.h"
 #include "ft/ftcommon.h"
-#include "ft/fttransition.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 
@@ -26,6 +25,7 @@
 #include "ftCommon/ftCo_ItemScrew.h"
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_Throw.h"
+#include "ftCommon/inlines.h"
 #include "ftCommon/types.h"
 #include "it/inlines.h"
 #include "it/items/itlinkhookshot.h"

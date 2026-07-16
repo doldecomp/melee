@@ -10,7 +10,6 @@
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
-#include "ft/fttransition.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_CaptureCut.h"
@@ -18,6 +17,7 @@
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_Throw.h"
+#include "ftCommon/inlines.h"
 #include "ftMewtwo/types.h"
 
 #include <dolphin/mtx.h>

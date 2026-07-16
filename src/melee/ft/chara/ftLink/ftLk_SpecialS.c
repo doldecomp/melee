@@ -10,7 +10,6 @@
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ft/fttransition.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_Dash.h"
@@ -21,6 +20,7 @@
 #include "ftCommon/ftCo_Landing.h"
 #include "ftCommon/ftCo_SpecialAir.h"
 #include "ftCommon/ftCo_SpecialS.h"
+#include "ftCommon/inlines.h"
 
 #include "ftLink/forward.h"
 

@@ -8,7 +8,7 @@
 #include "ft/ft_0892.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ft/fttransition.h"
+#include "ftCommon/inlines.h"
 #include "ftNana/ftNn_Init.h"
 #include "ftPopo/ftPp_Init.h"
 #include "pl/player.h"

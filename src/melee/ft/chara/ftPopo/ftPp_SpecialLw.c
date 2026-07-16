@@ -10,7 +10,7 @@
 #include "ft/ft_0892.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ft/fttransition.h"
+#include "ftCommon/inlines.h"
 #include "ftPopo/ftPp_Init.h"
 #include "ftPopo/ftPp_SpecialHi.h"
 #include "it/items/itclimbersblizzard.h"
