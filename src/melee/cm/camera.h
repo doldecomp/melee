@@ -138,6 +138,5 @@
 
 extern CmSubject* cm_804D6468;
 extern CameraDebugMode cm_80453004;
-extern CameraUnkGlobals cm_803BCCA0;
 
 #endif

@@ -100,16 +100,9 @@
 ///     (void*)0x8002a700,
 ///     (void*)0x8002a728,
 /// };
-
-// /* 3BCCA0 */ static CameraUnkGlobals cm_803BCCA0 = {
-//     83.0f,  1000.0f, -30.0f,  5.0f,  -7.0f,  17.5f,  -17.5f, 0.0f,  0.0682f,
-//     60.0f,  120.0f,  0.05f,   0.1f,  120.0f, 900.0f, 0.15f,  38.0f, 0.1f,
-//     0.1f,   0.001f,  0.1f,    1.0f,  1.0f,   0.6f,   0.6f,   0.05f, 0.1f,
-//     29.0f,  0.1f,    0.1f,    0.1f,  0.1f,   0.5f,   0.5f,   0.4f,  -11.0f,
-//     400.0f, 0.2f,    4.0f,    0.05f, 1.0f,   -7.0f,  7.0f,   0.5f,  0.5f,
-//     0.004f, 0.2f,    0.025f,  0.2f,  0.003f, 0.2f,   0.025f, 0.2f,  0.02f,
-//     1.0f,   0.14f,   1200.0f, -0.2f, 1.2f,   0.0f,
-// };
+/// Defined at the bottom of this file so that references use full
+/// symbol-relative addressing (matching the original); see cm_803BCCA0 there.
+/* 3BCCA0 */ extern CameraUnkGlobals cm_803BCCA0;
 
 /// .rodata
 /* 3B73B8 */ static Vec3 const cm_WorldForward = { 0.0f, 0.0f, -1.0f };
@@ -1792,16 +1785,10 @@ void Camera_8002BD88(f32 x, f32 y)
     }
 
     OrthonormalizeBasis(&forward, &up, &right);
-    // PSVECCrossProduct(&up, &forward, &right);
-    // lbVector_Normalize(&right);
-    // PSVECCrossProduct(&forward, &right, &up);
-    // lbVector_Normalize(&up);
     cm_80452C68.pause_up = up;
 
     if (y != 0.0F) {
         scale = y * ((view_dir * cm_803BCCA0.xBC) + cm_803BCCA0.xC0);
-        // scale = y * ((view_dir * cm_803BCCA0._44[0x1E]) +
-        // cm_803BCCA0._44[0x1F]);
         up.x *= scale;
         up.y *= scale;
         up.z *= scale;
@@ -1809,7 +1796,7 @@ void Camera_8002BD88(f32 x, f32 y)
     }
 
     if (x != 0.0F) {
-        scale = x * ((view_dir * 0.025F) + 0.2F);
+        scale = x * ((view_dir * cm_803BCCA0.xBC) + cm_803BCCA0.xC0);
         right.x *= -scale;
         right.y *= -scale;
         right.z *= -scale;
@@ -5060,3 +5047,16 @@ void Camera_800313E0(HSD_GObj* gobj, u64 prios)
     }
     HSD_GObj_80390ED0(gobj, 4);
 }
+
+/* 3BCC70 */ static char lbl_803BCC70[0x17] = "rate>0.0F&&rate<=1.0F";
+/* 3BCC88 */ static char lbl_803BCC88[0x17] = "snapshot! ptr=%08x\n";
+
+// /* 3BCCA0 */ static CameraUnkGlobals cm_803BCCA0 = {
+//     83.0f,  1000.0f, -30.0f,  5.0f,  -7.0f,  17.5f,  -17.5f, 0.0f,  0.0682f,
+//     60.0f,  120.0f,  0.05f,   0.1f,  120.0f, 900.0f, 0.15f,  38.0f, 0.1f,
+//     0.1f,   0.001f,  0.1f,    1.0f,  1.0f,   0.6f,   0.6f,   0.05f, 0.1f,
+//     29.0f,  0.1f,    0.1f,    0.1f,  0.1f,   0.5f,   0.5f,   0.4f,  -11.0f,
+//     400.0f, 0.2f,    4.0f,    0.05f, 1.0f,   -7.0f,  7.0f,   0.5f,  0.5f,
+//     0.004f, 0.2f,    0.025f,  0.2f,  0.003f, 0.2f,   0.025f, 0.2f,  0.02f,
+//     1.0f,   0.14f,   1200.0f, -0.2f, 1.2f,   0.0f,
+// };
