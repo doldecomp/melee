@@ -194,25 +194,12 @@ static bool grLast_8021A7EC(void)
 static Ground_GObj* grLast_8021A7F4(int id)
 {
     Ground_GObj* gobj;
-    Ground* gp;
     StageCallbacks* cb;
 
     cb = &grLast_803E7EBC[id];
     gobj = Ground_GetStageGObj(id);
     if (gobj != NULL) {
-        gp = GET_GROUND(gobj);
-        gp->x8_callback = NULL;
-        gp->xC_callback = NULL;
-        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
-        if (cb->callback3 != NULL) {
-            gp->x1C_callback = cb->callback3;
-        }
-        if (cb->callback0 != NULL) {
-            cb->callback0(gobj);
-        }
-        if (cb->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, cb->callback2, 4);
-        }
+        Ground_SetupStageCallbacks(gobj, cb);
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 255, id);
     }

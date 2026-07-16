@@ -163,23 +163,7 @@ Ground_GObj* grHeal_8021EFEC(u32 idx)
     gobj = Ground_GetStageGObj(idx);
 
     if (gobj != NULL) {
-        Ground* gp = gobj->user_data;
-        gp->x8_callback = NULL;
-        gp->xC_callback = NULL;
-        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
-
-        if (callbacks->callback3 != NULL) {
-            gp->x1C_callback = callbacks->callback3;
-        }
-
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
-        }
-
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
-        }
-
+        Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
         OSReport(grHeal_803E84C4.report_fmt_get_gobj, grHeal_803E851C, 273,
                  idx);

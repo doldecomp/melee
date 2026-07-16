@@ -1302,21 +1302,7 @@ HSD_GObj* grKongo_801D5340(s32 gobj_id)
     gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
-        Ground* gp = gobj->user_data;
-        gp->x8_callback = NULL;
-        gp->xC_callback = NULL;
-        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
-        if (callbacks->callback3 != NULL) {
-            gp->x1C_callback = callbacks->callback3;
-        }
-        // 0x80
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
-        }
-        // 0x94
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
-        }
+        Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
         OSReport((char*) grKg_803E16E0 + 0x154, grKg_803E1858, 0x10E, gobj_id);
     }
