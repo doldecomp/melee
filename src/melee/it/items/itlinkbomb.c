@@ -340,11 +340,7 @@ bool itLinkbomb_UnkMotion2_Anim(HSD_GObj* gobj)
 
 void itLinkbomb_UnkMotion2_Phys(Item_GObj* gobj)
 {
-    ItemAttr* temp_r4;
-
-    temp_r4 = GET_ITEM(gobj)->xCC_item_attr;
-    it_80272860(gobj, temp_r4->x10_fall_speed, temp_r4->x14_fall_speed_max);
-    it_80274658(gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
 }
 
 static inline int it_LinkBomb_Inline_VelocityCompare(HSD_GObj* gobj, Vec3* vel)
@@ -432,10 +428,7 @@ bool itLinkbomb_UnkMotion3_Anim(Item_GObj* gobj)
 
 void itLinkbomb_UnkMotion3_Phys(Item_GObj* gobj)
 {
-    ItemAttr* temp_r4;
-    temp_r4 = GET_ITEM(gobj)->xCC_item_attr;
-    it_80272860(gobj, temp_r4->x10_fall_speed, temp_r4->x14_fall_speed_max);
-    it_80274658(gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
 }
 
 bool itLinkbomb_UnkMotion3_Coll(HSD_GObj* gobj)

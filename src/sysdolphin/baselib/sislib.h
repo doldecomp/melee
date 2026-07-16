@@ -103,7 +103,6 @@ struct sislib_UnkAlloc3 {
     u8 xF;
 };
 
-extern s8 HSD_SisLib_804D6390[4];
 extern SIS* HSD_SisLib_804D1124[5];
 extern u32 lbl_8040C8C0[144];
 extern u32 HSD_SisLib_8040C680[144];
