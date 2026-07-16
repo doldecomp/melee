@@ -4393,22 +4393,22 @@ struct lbl_8046B488_t* fn_80169364(void)
 
 u8 gm_80169370(s32 arg0)
 {
-    return ((u8*) &lbl_8046B488)[arg0];
+    return ((u8*) fn_80169364())[arg0];
 }
 
 int gm_80169384(void)
 {
-    return lbl_8046B488.x7;
+    return fn_80169364()->x7;
 }
 
 s32 gm_80169394(void)
 {
-    return lbl_8046B488.unk_10_b3;
+    return fn_80169364()->unk_10_b3;
 }
 
 s32 fn_801693A8(void)
 {
-    return lbl_8046B488.unk_10_b2;
+    return fn_80169364()->unk_10_b2;
 }
 
 static inline bool gm_801693BC_inline(u8 ckind)
@@ -4424,7 +4424,7 @@ bool gm_801693BC(int arg0)
 {
     u8 ckind;
     PAD_STACK(8);
-    if (Player_GetFlagsBit1(arg0) && (int) lbl_8046B488.x8 > 1) {
+    if (Player_GetFlagsBit1(arg0) && (int) fn_80169364()->x8 > 1) {
         return true;
     }
     ckind = Player_GetPlayerCharacter(arg0);
@@ -4437,12 +4437,12 @@ bool gm_801693BC(int arg0)
 
 void fn_80169434(GmRouteCallback fn)
 {
-    lbl_8046B488.x1B8 = fn;
+    fn_80169364()->x1B8 = fn;
 }
 
 bool fn_80169444(bool arg0)
 {
-    struct lbl_8046B488_t* gp = &lbl_8046B488;
+    struct lbl_8046B488_t* gp = fn_80169364();
 
     if (gp->x1B8 != NULL) {
         if (gp->x1B8(arg0) == 1) {
@@ -4455,7 +4455,7 @@ bool fn_80169444(bool arg0)
 int gm_801694A0(HSD_GObj* arg0)
 {
     int i;
-    int count = lbl_8046B488.x7;
+    int count = fn_80169364()->x7;
     PAD_STACK(8);
     for (i = 0; i < 6; i++) {
         if (Player_GetPlayerSlotType(i) != Gm_PKind_NA &&
@@ -4469,23 +4469,24 @@ int gm_801694A0(HSD_GObj* arg0)
 
 UNK_T gm_80169520(void)
 {
-    return lbl_8046B488.x20;
+    return fn_80169364()->x20;
 }
 
 UNK_T gm_80169530(void)
 {
-    return lbl_8046B488.xA2;
+    return fn_80169364()->xA2;
 }
 
 UNK_T gm_80169540(void)
 {
-    return lbl_8046B488.x124;
+    return fn_80169364()->x124;
 }
 
 void fn_80169550(int slot)
 {
-    s8 idx = lbl_8046B488.x1A6[slot];
-    lbl_8046B488.x20[idx] = -1;
+    struct lbl_8046B488_t* gp = fn_80169364();
+    s8 idx = gp->x1A6[slot];
+    gp->x20[idx] = -1;
 }
 
 void fn_80169574(ssize_t size, s8* buf)
@@ -4883,7 +4884,7 @@ void fn_8016A09C(void)
 void gm_8016A164(void)
 {
     int i;
-    struct lbl_8046B488_t* gp = &lbl_8046B488;
+    struct lbl_8046B488_t* gp = fn_80169364();
     lbl_8046B6A0_t* match_info = gm_8016AE44();
     PAD_STACK(4);
     if (gp == 0) {
@@ -4906,12 +4907,12 @@ void gm_8016A164(void)
 
 s32 fn_8016A1E4(void)
 {
-    return lbl_8046B488.unk_10_b0;
+    return fn_80169364()->unk_10_b0;
 }
 
 bool gm_8016A1F8(void)
 {
-    if (lbl_8046B488.unk_10_b1) {
+    if (fn_80169364()->unk_10_b1) {
         return true;
     }
     return false;
@@ -4919,7 +4920,7 @@ bool gm_8016A1F8(void)
 
 void gm_8016A21C(StartMeleeRules* arg0)
 {
-    arg0->x54 = (void*) &lbl_8046B488;
+    arg0->x54 = (void*) fn_80169364();
 }
 
 static inline s32 fn_801695BC_noinline(u8 arg0, u8 arg1, u8 arg2, u8* arg3,
@@ -5272,7 +5273,7 @@ struct lbl_8046B668_t* gm_8016A98C(void)
 int gm_8016A998(s8 arg0, s8 arg1)
 {
     int i;
-    struct lbl_8046B668_t* ptr = &lbl_8046B668;
+    struct lbl_8046B668_t* ptr = gm_8016A98C();
     for (i = 0; i < 27; i++) {
         if (ptr->arr2[i] == -2) {
             ptr->arr2[i + 1] = -2;
@@ -5288,7 +5289,7 @@ int gm_8016A9E8(u8 arg0, s8 arg1)
 {
     int i;
     int found;
-    struct lbl_8046B668_t* ptr = &lbl_8046B668;
+    struct lbl_8046B668_t* ptr = gm_8016A98C();
 
     found = -1;
     for (i = 0; i < 27; i++) {
