@@ -218,7 +218,7 @@ pre-commit run --all-files # Run the hook once on existing code
         /* 0x5 */ FOO_WOZZLE,
         /* 0x6 */ FOO_MAX,
     } CharacterKind;
-    ```c
+    ```
     - Bad:
     ```c
     typedef enum FooKind {
@@ -231,7 +231,7 @@ pre-commit run --all-files # Run the hook once on existing code
         /* 0x1A */ FOO_WOZZLE,
         /* 0x1B */ FOO_MAX,
     } CharacterKind;
-    ```c
+    ```
 
 
 
