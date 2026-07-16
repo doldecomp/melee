@@ -119,6 +119,31 @@ void ftCo_8009CF84(Fighter* fp)
     }
 }
 
+/// Attach one hat bone dynamics descriptor to @p fp's dynamic bone sets.
+static inline void ftCo_SetupKirbyHatBone(Fighter* fp, KirbyHatStruct* hat,
+                                          int dyn_idx, ssize_t i)
+{
+    BoneDynamicsDesc* article =
+        &hat->hat_dynamics[dyn_idx]->ftDynamicBones->array[i];
+    HSD_JObj* cur = fp->fv.kb.hat.jobj;
+    ssize_t j;
+    for (j = 0; j < (signed) article->bone_id; j++) {
+        if (cur->child != NULL) {
+            cur = cur->child;
+            continue;
+        }
+        while (cur->next == NULL) {
+            cur = cur->parent;
+        }
+        cur = cur->next;
+    }
+    lb_8000FD48(cur, &fp->dynamic_bone_sets[i].dyn_desc,
+                article->dyn_desc.count);
+    fp->dynamic_bone_sets[i].bone_id = 0;
+    lb_80011710(&hat->hat_dynamics[dyn_idx]->ftDynamicBones->array[i].dyn_desc,
+                &fp->dynamic_bone_sets[i].dyn_desc);
+}
+
 void ftCo_8009D074(Fighter* fp)
 {
     KirbyHatStruct* hat = ft_80459B88.hats[FTKIND_KOOPA];
@@ -128,26 +153,7 @@ void ftCo_8009D074(Fighter* fp)
     {
         ssize_t i;
         for (i = 0; i < fp->dynamics_num; i++) {
-            BoneDynamicsDesc* article =
-                &hat->hat_dynamics[2]->ftDynamicBones->array[i];
-            HSD_JObj* cur = fp->fv.kb.hat.jobj;
-            ssize_t j;
-            for (j = 0; j < (signed) article->bone_id; j++) {
-                if (cur->child != NULL) {
-                    cur = cur->child;
-                    continue;
-                }
-                while (cur->next == NULL) {
-                    cur = cur->parent;
-                }
-                cur = cur->next;
-            }
-            lb_8000FD48(cur, &fp->dynamic_bone_sets[i].dyn_desc,
-                        article->dyn_desc.count);
-            fp->dynamic_bone_sets[i].bone_id = 0;
-            lb_80011710(
-                &hat->hat_dynamics[2]->ftDynamicBones->array[i].dyn_desc,
-                &fp->dynamic_bone_sets[i].dyn_desc);
+            ftCo_SetupKirbyHatBone(fp, hat, 2, i);
         }
     }
 }
@@ -161,26 +167,7 @@ void ftCo_8009D18C(Fighter* fp)
     {
         ssize_t i;
         for (i = 0; i < fp->dynamics_num; i++) {
-            BoneDynamicsDesc* article =
-                &hat->hat_dynamics[2]->ftDynamicBones->array[i];
-            HSD_JObj* cur = fp->fv.kb.hat.jobj;
-            ssize_t j;
-            for (j = 0; j < (signed) article->bone_id; j++) {
-                if (cur->child != NULL) {
-                    cur = cur->child;
-                    continue;
-                }
-                while (cur->next == NULL) {
-                    cur = cur->parent;
-                }
-                cur = cur->next;
-            }
-            lb_8000FD48(cur, &fp->dynamic_bone_sets[i].dyn_desc,
-                        article->dyn_desc.count);
-            fp->dynamic_bone_sets[i].bone_id = 0;
-            lb_80011710(
-                &hat->hat_dynamics[2]->ftDynamicBones->array[i].dyn_desc,
-                &fp->dynamic_bone_sets[i].dyn_desc);
+            ftCo_SetupKirbyHatBone(fp, hat, 2, i);
         }
     }
 }
@@ -194,26 +181,7 @@ void ftCo_8009D2A4(Fighter* fp)
     {
         ssize_t i;
         for (i = 0; i < fp->dynamics_num; i++) {
-            BoneDynamicsDesc* article =
-                &hat->hat_dynamics[2]->ftDynamicBones->array[i];
-            HSD_JObj* cur = fp->fv.kb.hat.jobj;
-            ssize_t j;
-            for (j = 0; j < (signed) article->bone_id; j++) {
-                if (cur->child != NULL) {
-                    cur = cur->child;
-                    continue;
-                }
-                while (cur->next == NULL) {
-                    cur = cur->parent;
-                }
-                cur = cur->next;
-            }
-            lb_8000FD48(cur, &fp->dynamic_bone_sets[i].dyn_desc,
-                        article->dyn_desc.count);
-            fp->dynamic_bone_sets[i].bone_id = 0;
-            lb_80011710(
-                &hat->hat_dynamics[2]->ftDynamicBones->array[i].dyn_desc,
-                &fp->dynamic_bone_sets[i].dyn_desc);
+            ftCo_SetupKirbyHatBone(fp, hat, 2, i);
         }
     }
 }
@@ -227,26 +195,7 @@ void ftCo_8009D3BC(Fighter* fp)
     {
         ssize_t i;
         for (i = 0; i < fp->dynamics_num; i++) {
-            BoneDynamicsDesc* article =
-                &hat->hat_dynamics[2]->ftDynamicBones->array[i];
-            HSD_JObj* cur = fp->fv.kb.hat.jobj;
-            ssize_t j;
-            for (j = 0; j < (signed) article->bone_id; j++) {
-                if (cur->child != NULL) {
-                    cur = cur->child;
-                    continue;
-                }
-                while (cur->next == NULL) {
-                    cur = cur->parent;
-                }
-                cur = cur->next;
-            }
-            lb_8000FD48(cur, &fp->dynamic_bone_sets[i].dyn_desc,
-                        article->dyn_desc.count);
-            fp->dynamic_bone_sets[i].bone_id = 0;
-            lb_80011710(
-                &hat->hat_dynamics[2]->ftDynamicBones->array[i].dyn_desc,
-                &fp->dynamic_bone_sets[i].dyn_desc);
+            ftCo_SetupKirbyHatBone(fp, hat, 2, i);
         }
     }
 }
@@ -260,26 +209,7 @@ void ftCo_8009D4D4(Fighter* fp)
     {
         ssize_t i;
         for (i = 0; i < fp->dynamics_num; i++) {
-            BoneDynamicsDesc* article =
-                &hat->hat_dynamics[1]->ftDynamicBones->array[i];
-            HSD_JObj* cur = fp->fv.kb.hat.jobj;
-            ssize_t j;
-            for (j = 0; j < (signed) article->bone_id; j++) {
-                if (cur->child != NULL) {
-                    cur = cur->child;
-                    continue;
-                }
-                while (cur->next == NULL) {
-                    cur = cur->parent;
-                }
-                cur = cur->next;
-            }
-            lb_8000FD48(cur, &fp->dynamic_bone_sets[i].dyn_desc,
-                        article->dyn_desc.count);
-            fp->dynamic_bone_sets[i].bone_id = 0;
-            lb_80011710(
-                &hat->hat_dynamics[1]->ftDynamicBones->array[i].dyn_desc,
-                &fp->dynamic_bone_sets[i].dyn_desc);
+            ftCo_SetupKirbyHatBone(fp, hat, 1, i);
         }
     }
 }
@@ -293,26 +223,7 @@ void ftCo_8009D5EC(Fighter* fp)
     {
         ssize_t i;
         for (i = 0; i < fp->dynamics_num; i++) {
-            BoneDynamicsDesc* article =
-                &hat->hat_dynamics[0]->ftDynamicBones->array[i];
-            HSD_JObj* cur = fp->fv.kb.hat.jobj;
-            ssize_t j;
-            for (j = 0; j < (signed) article->bone_id; j++) {
-                if (cur->child != NULL) {
-                    cur = cur->child;
-                    continue;
-                }
-                while (cur->next == NULL) {
-                    cur = cur->parent;
-                }
-                cur = cur->next;
-            }
-            lb_8000FD48(cur, &fp->dynamic_bone_sets[i].dyn_desc,
-                        article->dyn_desc.count);
-            fp->dynamic_bone_sets[i].bone_id = FtPart_TopN;
-            lb_80011710(
-                &hat->hat_dynamics[0]->ftDynamicBones->array[i].dyn_desc,
-                &fp->dynamic_bone_sets[i].dyn_desc);
+            ftCo_SetupKirbyHatBone(fp, hat, 0, i);
         }
     }
 }
@@ -326,26 +237,7 @@ void ftCo_8009D704(Fighter* fp)
     {
         ssize_t i;
         for (i = 0; i < fp->dynamics_num; i++) {
-            BoneDynamicsDesc* article =
-                &hat->hat_dynamics[2]->ftDynamicBones->array[i];
-            HSD_JObj* cur = fp->fv.kb.hat.jobj;
-            ssize_t j;
-            for (j = 0; j < (signed) article->bone_id; j++) {
-                if (cur->child != NULL) {
-                    cur = cur->child;
-                    continue;
-                }
-                while (cur->next == NULL) {
-                    cur = cur->parent;
-                }
-                cur = cur->next;
-            }
-            lb_8000FD48(cur, &fp->dynamic_bone_sets[i].dyn_desc,
-                        article->dyn_desc.count);
-            fp->dynamic_bone_sets[i].bone_id = FtPart_TopN;
-            lb_80011710(
-                &hat->hat_dynamics[2]->ftDynamicBones->array[i].dyn_desc,
-                &fp->dynamic_bone_sets[i].dyn_desc);
+            ftCo_SetupKirbyHatBone(fp, hat, 2, i);
         }
     }
 }
@@ -383,28 +275,7 @@ void ftCo_8009D920(Fighter* fp)
     {
         ssize_t i;
         for (i = 0; i < fp->dynamics_num; i++) {
-            BoneDynamicsDesc* article =
-                &hat->hat_dynamics[1]->ftDynamicBones->array[i];
-            HSD_JObj* cur = fp->fv.kb.hat.jobj;
-            {
-                ssize_t j;
-                for (j = article->bone_id; j > 0; j--) {
-                    if (cur->child != NULL) {
-                        cur = cur->child;
-                        continue;
-                    }
-                    while (cur->next == NULL) {
-                        cur = cur->parent;
-                    }
-                    cur = cur->next;
-                }
-            }
-            lb_8000FD48(cur, &fp->dynamic_bone_sets[i].dyn_desc,
-                        article->dyn_desc.count);
-            fp->dynamic_bone_sets[i].bone_id = FtPart_TopN;
-            lb_80011710(
-                &hat->hat_dynamics[1]->ftDynamicBones->array[i].dyn_desc,
-                &fp->dynamic_bone_sets[i].dyn_desc);
+            ftCo_SetupKirbyHatBone(fp, hat, 1, i);
         }
     }
 }
@@ -418,26 +289,7 @@ void ftCo_8009DA38(Fighter* fp)
     {
         ssize_t i;
         for (i = 0; i < fp->dynamics_num; i++) {
-            BoneDynamicsDesc* article =
-                &hat->hat_dynamics[1]->ftDynamicBones->array[i];
-            HSD_JObj* cur = fp->fv.kb.hat.jobj;
-            ssize_t j;
-            for (j = article->bone_id; j > 0; j--) {
-                if (cur->child != NULL) {
-                    cur = cur->child;
-                    continue;
-                }
-                while (cur->next == NULL) {
-                    cur = cur->parent;
-                }
-                cur = cur->next;
-            }
-            lb_8000FD48(cur, &fp->dynamic_bone_sets[i].dyn_desc,
-                        article->dyn_desc.count);
-            fp->dynamic_bone_sets[i].bone_id = FtPart_TopN;
-            lb_80011710(
-                &hat->hat_dynamics[1]->ftDynamicBones->array[i].dyn_desc,
-                &fp->dynamic_bone_sets[i].dyn_desc);
+            ftCo_SetupKirbyHatBone(fp, hat, 1, i);
         }
     }
 }
