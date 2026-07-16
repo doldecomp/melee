@@ -96,7 +96,7 @@ static const u8 lbl_803B7844[] = {
     CKIND_GANON,
 };
 
-/* 3B78A4 */ static const u8 ckind_to_selkind_map[0x24] = {
+/* 3B78A4 */ static const u8 ckind_to_selkind_map[CHKIND_MAX] = {
     /* 00 */ SELKIND_CAPTAIN,
     /* 01 */ SELKIND_DONKEY,
     /* 02 */ SELKIND_FOX,
@@ -129,10 +129,7 @@ static const u8 lbl_803B7844[] = {
     /* 1D */ SELKIND_COUNT,
     /* 1E */ SELKIND_MARIO,
     /* 1F */ SELKIND_MARIO,
-    /* 20 */ SELKIND_CAPTAIN,
-    /* 21 */ 0x00, ///< Likely extra unncessary bytes
-    0x00,
-    0x00
+    /* 20 */ SELKIND_CAPTAIN
 };
 
 /* 3B78C8 */ static const struct UnlockableCharacterData

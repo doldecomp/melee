@@ -2392,14 +2392,14 @@ bool gm_IsCKindUnlocked(u8 ckind)
     return false;
 }
 
-static inline bool is_ckind_unlocked_inner(u8 ckind)
+static inline bool isCKindUnlocked_inner(u8 ckind)
 {
     return gm_IsCKindUnlocked(ckind);
 }
 
-static inline bool is_ckind_unlocked_noinline(u8 ckind)
+static inline bool isCKindUnlocked(u8 ckind)
 {
-    return is_ckind_unlocked_inner(ckind);
+    return isCKindUnlocked_inner(ckind);
 }
 
 void gm_UnlockCKind(CharacterKind ckind)
@@ -2430,7 +2430,8 @@ void gm_UnlockCKind(CharacterKind ckind)
     }
 }
 
-void gm_80164A0C(u8 ckind) ///< Lock character?
+/// Lock character?
+void gm_80164A0C(u8 ckind)
 {
     u16* unlockable_character_bitfield =
         gmMainLib_GetUnlockedCharactersBitmaskPtr();
@@ -4660,14 +4661,14 @@ long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
         list = lbl_8046B488.x1C0;
         p = list;
         do {
-            if (i != 4 && is_ckind_unlocked_noinline((u8) i) != 0) {
+            if (i != 4 && isCKindUnlocked((u8) i) != 0) {
                 *p = i;
             } else {
                 *p = -1;
             }
             i += 1;
             p += 1;
-        } while (i < 0x1A);
+        } while (i < CKIND_PLAYABLE_COUNT);
 
         i = 0;
         p = list;
@@ -4679,7 +4680,7 @@ long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
             *q = (u8) *p;
             *p = tmp;
             p += 1;
-        } while (i < 0x1A);
+        } while (i < CKIND_PLAYABLE_COUNT);
 
         count = 0;
         for (i = 0; i < 0xD; i++) {

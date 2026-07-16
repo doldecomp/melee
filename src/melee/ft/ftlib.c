@@ -987,7 +987,7 @@ void ftLib_80087574(s8 ft_kind)
 void ftLib_80087610(u8 arg0)
 {
     u8 i;
-    for (i = 0; i <= CKIND_PLAYABLE_COUNT - 1; i++) {
+    for (i = 0; i <= SELKIND_COUNT; i++) {
         if (gm_IsCKindUnlocked(i)) {
             ftKb_SpecialN_800EED50(Player_800325C8(i, 0), arg0);
             if (i == CKIND_ZELDA || i == CKIND_SEAK) {

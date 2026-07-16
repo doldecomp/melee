@@ -6,9 +6,6 @@
 #include "dolphin/gx/GXStruct.h"
 #include "ef/efasync.h"
 #include "ef/eflib.h"
-
-#include "ft/forward.h"
-
 #include "ft/ftdemo.h"
 #include "gm/gm_1601.h"
 #include "gm/gm_1A45.h"
