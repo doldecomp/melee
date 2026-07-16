@@ -64,16 +64,7 @@ void grTIceClimber_80220F10(bool unused) {}
 
 void grTIceClimber_80220F14(void)
 {
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-
-    grTIceClimber_80220FB4(0);
-    grTIceClimber_80220FB4(1);
-    grTIceClimber_80220FB4(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTIceClimber_80220FB4);
 }
 
 void grTiceclimber_UnkStage0_OnLoad(void) {}
