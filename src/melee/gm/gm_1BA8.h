@@ -110,6 +110,6 @@
 /* 1BF920 */ void gm_801BF920(GameScene*);
 /* 3DDBE0 */ extern GameScene gm_CameraModeScenes[5];
 /* 3DF94C */ extern gm_803DF94C_t* gm_803DF94C[];
-/* 4DAC88 */ extern const f32 gm_DefaultGameSpeed;
+/* 4DAC88 */ extern const f32 gm_804DAC88;
 
 #endif

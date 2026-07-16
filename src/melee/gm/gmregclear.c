@@ -50,13 +50,7 @@
 #include <melee/gm/gmregcommon.h>
 #include <melee/gm/gmtoulib.h>
 #include <melee/gm/types.h>
-u32 Ground_801C1DAC(void);
-u32 Ground_801C1DC0(void);
-s32 Ground_801C1DD4(void);
-void Ground_801C1DE4(s32*, s32*);
-f32 Ground_801C57F0(int);
-void Ground_801C5A60(void);
-u32 Ground_801C5AD0(s32);
+#include <melee/gr/ground.h>
 #include <melee/gr/grpushon.h>
 #include <melee/gr/stage.h>
 #include <melee/if/ifcoget.h>
@@ -183,27 +177,26 @@ extern AdventureStageEntry lbl_803D7AC0[110];
 extern AllstarStageEntry lbl_803D85F0[55];
 u16 lbl_803D8B88[] = { 0x18, 0x16, 0x12, 0x3, 0x5, 0x4, 0x6, 0x1a, 0x19, 0x7 };
 
-/// String-pool order evidence: retail's merged .data anchor for this TU sits
-/// at lbl_803D8B88 (.data+0), and fn_8017F2A4 / fn_801803FC / fn_80180630
-/// address the pooled literals below as anchor+immediate. Retail DOL bytes at
-/// 0x803D8B9C..0x803D8C43 hold exactly these literals in this order
-/// ("GmRegClr" at +0x14 ... "Error : jobj..." ending at +0x128), so the pool
-/// must be seeded in this order before any other .data emission. MWCC pools
-/// the duplicate literals used by the functions further down; "gmregclear.c"
-/// matches the retail pool entry between the gobj/jobj messages.
-static const char* const gmRegClear_PooledStrings[] = {
-    "GmRegClr",
-    "ScGamRegClear_scene_data",
-    "Error : Cannot open archive file (File Name : %s).",
-    "SdDec.usd",
-    "SIS_DecisionData",
-    "SdDec.dat",
-    "          ",
-    "               ",
-    "Error : gobj don\'t get (gmRegClearAddModel)\n",
-    "gmregclear.c",
-    "Error : jobj don\'t get (gmRegClearAddModel)\n",
-};
+/// @todo String-pool order anchor. Retail DOL bytes at 0x803D8B9C..0x803D8C43
+/// hold exactly these literals in this order ("GmRegClr" at .data+0x14 ...
+/// "Error : jobj..." ending at +0x128), so the pool must be seeded in this
+/// order before any other .data emission; fn_8017F2A4 / fn_801803FC /
+/// fn_80180630 address them as anchor+immediate. Remove once the literals'
+/// first uses naturally occur in this order.
+static void order_data(void)
+{
+    (void) "GmRegClr";
+    (void) "ScGamRegClear_scene_data";
+    (void) "Error : Cannot open archive file (File Name : %s).";
+    (void) "SdDec.usd";
+    (void) "SIS_DecisionData";
+    (void) "SdDec.dat";
+    (void) "          ";
+    (void) "               ";
+    (void) "Error : gobj don\'t get (gmRegClearAddModel)\n";
+    (void) "gmregclear.c";
+    (void) "Error : jobj don\'t get (gmRegClearAddModel)\n";
+}
 
 typedef struct RegClearEv {
     /* 0x00 */ char pad_0[0x1C];
@@ -2682,6 +2675,9 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
         temp = gm_8016AE38();
         state->x118 = 1;
         if ((u8) temp->match_result == OUTCOME_UNK_1P_BONUS_STAGE_END) {
+            /// @todo The reference passes this result unextended (no extsh),
+            /// which needs an s32 return type for Ground_801C1DD4; ground.h
+            /// declares it s16, so this call cannot match as-is.
             grPushOn_80219204(Ground_801C1DD4(), (int*) &sp5C, (int*) &sp58);
             special_score = sp5C;
             coins = (u16) sp58;
@@ -2857,7 +2853,10 @@ void fn_80180C60(HSD_GObj* gobj)
     HSD_JObj* jobj;
     u32 b76;
 
-    dist = (s32) (0.1f * Ground_801C57F0(0));
+    /// @todo The reference passes an argument here (li r3, 0 before the
+    /// call), which needs Ground_801C57F0 to take an int parameter;
+    /// ground.h declares it (void), so this call cannot match as-is.
+    dist = (s32) (0.1f * Ground_801C57F0());
     jobj = gobj->hsd_obj;
     if (dist < 0) {
         dist = 0;
@@ -3130,7 +3129,7 @@ void fn_80181708(void)
 /// Archive/symbol name strings owned by this TU at 0x803D8CD8..0x803D8D04.
 /// The reference code in gm_80181998 addresses all three strings off the
 /// first string's symbol (base+0x0 / base+0xC / base+0x24), so the calls
-/// below reference gmRegClear_ArchiveNoContinue (declared in gmregclear.h)
+/// below reference gmRegClear_str_IfHrNoCn (declared in gmregclear.h)
 /// plus the fixed offsets of the two strings that follow it in the binary.
 /// Two details are load-bearing for the reference encoding: the definitions
 /// must FOLLOW this function (defining the data before use makes MWCC anchor
@@ -3140,20 +3139,19 @@ void fn_80181708(void)
 /// MWCC CSE the address into a saved register; the reference recomputes it).
 void gm_80181998(void)
 {
+    lbl_804D65C8 = lbArchive_80016DBC(gmRegClear_str_IfHrNoCn, &lbl_804D65CC,
+                                      (u32) gmRegClear_str_IfHrNoCn + 0xC, 0);
     lbl_804D65C8 =
-        lbArchive_80016DBC(gmRegClear_ArchiveNoContinue, &lbl_804D65CC,
-                           (u32) gmRegClear_ArchiveNoContinue + 0xC, 0);
-    lbl_804D65C8 =
-        lbArchive_80016DBC(gmRegClear_ArchiveNoContinue + 0x24, &lbl_804D65D0,
-                           gmRegClear_ArchiveNoContinue + 0xC, 0);
+        lbArchive_80016DBC(gmRegClear_str_IfHrNoCn + 0x24, &lbl_804D65D0,
+                           gmRegClear_str_IfHrNoCn + 0xC, 0);
     fn_80181708();
     // Keep lbl_80472ED8 before lbl_80473594 in .bss.
     (void) &lbl_80472ED8;
 }
 
-char gmRegClear_ArchiveNoContinue[] = "IfHrNoCn";
-char gmRegClear_SceneModelsSymbol[] = "ScInfCnt_scene_models";
-char gmRegClear_ArchiveRecord[] = "IfHrReco";
+char gmRegClear_str_IfHrNoCn[] = "IfHrNoCn";
+char gmRegClear_str_ScInfCnt_scene_models[] = "ScInfCnt_scene_models";
+char gmRegClear_str_IfHrReco[] = "IfHrReco";
 
 void gm_80181A00(s32 arg0, s32 arg1)
 {

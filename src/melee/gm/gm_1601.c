@@ -2204,12 +2204,12 @@ void fn_801640B0(u64* item_mask)
 
 float fn_8016419C(u8 arg0)
 {
-    return gm_HandicapDamageRatios[arg0 - 1].x;
+    return lbl_803B7930[arg0 - 1].x;
 }
 
 float fn_801641B4(u8 arg0)
 {
-    return gm_HandicapDamageRatios[arg0 - 1].y;
+    return lbl_803B7930[arg0 - 1].y;
 }
 
 u16 gm_801641CC(u8 arg0)
@@ -3784,24 +3784,20 @@ void gm_80167BC8(VsModeData* vs_data)
             if (handicap != NULL) {
                 vs_data->data.players[i].handicap = *handicap;
                 vs_data->data.players[i].x18 =
-                    gm_HandicapDamageRatios[(u8) *handicap - 1].x;
+                    lbl_803B7930[(u8) *handicap - 1].x;
                 vs_data->data.players[i].x1C =
-                    gm_HandicapDamageRatios[(u8) *handicap - 1].y;
+                    lbl_803B7930[(u8) *handicap - 1].y;
             } else {
                 vs_data->data.players[i].handicap = 5;
-                vs_data->data.players[i].x18 = gm_HandicapDamageRatios[4].x;
-                vs_data->data.players[i].x1C = gm_HandicapDamageRatios[4].y;
+                vs_data->data.players[i].x18 = lbl_803B7930[4].x;
+                vs_data->data.players[i].x1C = lbl_803B7930[4].y;
             }
             break;
         case 2:
             vs_data->data.players[i].x18 =
-                gm_HandicapDamageRatios
-                    [(u8) vs_data->data.players[i].handicap - 1]
-                        .x;
+                lbl_803B7930[(u8) vs_data->data.players[i].handicap - 1].x;
             vs_data->data.players[i].x1C =
-                gm_HandicapDamageRatios
-                    [(u8) vs_data->data.players[i].handicap - 1]
-                        .y;
+                lbl_803B7930[(u8) vs_data->data.players[i].handicap - 1].y;
             break;
         }
     }

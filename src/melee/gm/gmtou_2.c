@@ -42,9 +42,10 @@
 #include <baselib/random.h>
 #include <baselib/sislib.h>
 
-/* .sdata2 literal-order anchor: removal was measured to regress 15
+/** @todo .sdata2 literal-order anchor: removal was measured to regress 15
  * previously-exact functions via shifted .sdata2 relocations (see
- * pr-session-review repair artifacts for src-melee-gm-gmtou-2). */
+ * pr-session-review repair artifacts for src-melee-gm-gmtou-2). Remove once
+ * the literals' first uses naturally occur in this order. */
 static void sdata2_order(void)
 {
     (void) -19.5f;

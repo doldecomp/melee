@@ -2,11 +2,7 @@
 
 #include "gm_1BA8.static.h"
 
-#define gm_801732D8 gm_801732D8_wide
-#define gm_8017335C gm_8017335C_wide
 #include "gm_unsplit.h"
-#undef gm_801732D8
-#undef gm_8017335C
 
 #include "ft/forward.h"
 
@@ -88,9 +84,6 @@ GameScene gm_803DF618_Scenes[] = {
 
 extern u8 gm_804D68F8;
 extern u8 gm_804D68F9;
-
-u8 gm_801732D8(u8);
-u16 gm_8017335C(void);
 
 void gm_801BA8FC(void)
 {
@@ -3306,14 +3299,13 @@ static inline struct gm_random_history* gm_GetRandomHistory(void)
     return (struct gm_random_history*) gmMainLib_804D3EE0;
 }
 
+/// @todo The reference calls gm_801BF634 / gm_801BF6A8 / gm_801BF6C8 /
+/// gm_801BF6E8 without sign-extending the argument, which their s8
+/// signatures force here (extsb at each call site). Matching this function
+/// needs int-argument signatures for those setters, but that breaks the
+/// setters' own 100% matches, so the s8 signatures are kept.
 void gm_801BF128(void)
 {
-#ifdef __MWERKS__
-    void gm_801BF634();
-    void gm_801BF6A8();
-    void gm_801BF6C8();
-    void gm_801BF6E8();
-#endif
     s32 character_pool[29];
     s32 stage_pool[30];
     s32 c;
@@ -3461,7 +3453,7 @@ void gm_801BF4DC(GameScene* arg0)
     md->rules.disable_pausing = true;
     md->rules.x7 = 0;
     md->rules.x44 = gm_80183218;
-    md->rules.x34 = gm_DefaultGameSpeed;
+    md->rules.x34 = gm_804DAC88;
     md->rules.xE = (u16) gm_801BF694();
     gm_80167A14(md->players);
 
@@ -3481,7 +3473,7 @@ void gm_801BF4DC(GameScene* arg0)
 
 /// Default game speed (StartMeleeRules::x34) used by gm_801BF4DC. The
 /// 1.0F object lives at .sdata2:0x804DAC88, outside this unit's split
-/// (it is named gm_DefaultGameSpeed in symbols.txt and declared extern in
+/// (it is named gm_804DAC88 in symbols.txt and declared extern in
 /// gm_1BA8.h), separate from the pooled 1.0F literal at 0x804DAC78.
 
 void gm_801BF634(s32 arg0, s8 character_kind)

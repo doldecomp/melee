@@ -390,14 +390,6 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
     HSD_JObjSetTranslateX(jobj, (f32) *p44);
     HSD_JObjSetTranslateY(jobj, -(f32) *p48);
 }
-typedef struct BracketAnimData {
-    Vec3 current;
-    Vec3 target;
-    Vec3 step;
-} BracketAnimData;
-
-#define BRACKET_ANIM (*(BracketAnimData*) lbl_803D9DAC)
-
 static inline f32 GetBracketSlideY(u8* p)
 {
     return 0.3f * (f32) lbl_804D6630 + (f32) * (s32*) (p + 0x48);
@@ -464,27 +456,27 @@ void fn_8018B090(HSD_GObj* arg0)
         base = &lbl_80473AB8[idx];
         if (base->x18 != 0) {
             f32 d;
-            BRACKET_ANIM.current.x = 320.0f;
-            BRACKET_ANIM.current.y = -240.0f;
-            BRACKET_ANIM.current.z = 0.0f;
-            BRACKET_ANIM.target.x = (f32) (base->xC + (base->x14 / 2));
-            BRACKET_ANIM.target.y = -(f32) (base->x10 + (base->x18 / 2));
-            BRACKET_ANIM.target.z = -150.0f;
-            d = 0.033333f * (BRACKET_ANIM.target.x - BRACKET_ANIM.current.x);
+            lbl_803D9DAC.current.x = 320.0f;
+            lbl_803D9DAC.current.y = -240.0f;
+            lbl_803D9DAC.current.z = 0.0f;
+            lbl_803D9DAC.target.x = (f32) (base->xC + (base->x14 / 2));
+            lbl_803D9DAC.target.y = -(f32) (base->x10 + (base->x18 / 2));
+            lbl_803D9DAC.target.z = -150.0f;
+            d = 0.033333f * (lbl_803D9DAC.target.x - lbl_803D9DAC.current.x);
             if (d < 0.0f) {
                 d = -d;
             }
-            BRACKET_ANIM.step.x = 1.0f + d;
-            d = 0.033333f * (BRACKET_ANIM.target.y - BRACKET_ANIM.current.y);
+            lbl_803D9DAC.step.x = 1.0f + d;
+            d = 0.033333f * (lbl_803D9DAC.target.y - lbl_803D9DAC.current.y);
             if (d < 0.0f) {
                 d = -d;
             }
-            BRACKET_ANIM.step.y = 1.0f + d;
-            d = 0.033333f * (BRACKET_ANIM.target.z - BRACKET_ANIM.current.z);
+            lbl_803D9DAC.step.y = 1.0f + d;
+            d = 0.033333f * (lbl_803D9DAC.target.z - lbl_803D9DAC.current.z);
             if (d < 0.0f) {
                 d = -d;
             }
-            BRACKET_ANIM.step.z = 1.0f + d;
+            lbl_803D9DAC.step.z = 1.0f + d;
         }
         lbl_804D6630 = 0;
         /* fallthrough */
@@ -495,35 +487,35 @@ void fn_8018B090(HSD_GObj* arg0)
             s32 t5 = lbl_804D6630 / 6;
             s32 t3 = t5 >> 0x1F;
             lbl_804D6630 += 1;
-            if (mn_8022F410(&BRACKET_ANIM.current.x, &BRACKET_ANIM.target.x,
-                            BRACKET_ANIM.step.x) < 0)
+            if (mn_8022F410(&lbl_803D9DAC.current.x, &lbl_803D9DAC.target.x,
+                            lbl_803D9DAC.step.x) < 0)
             {
-                mn_8022F410(&BRACKET_ANIM.current.x, &BRACKET_ANIM.target.x,
-                            BRACKET_ANIM.step.x);
+                mn_8022F410(&lbl_803D9DAC.current.x, &lbl_803D9DAC.target.x,
+                            lbl_803D9DAC.step.x);
             } else {
-                mn_8022F410(&BRACKET_ANIM.current.x, &BRACKET_ANIM.target.x,
-                            BRACKET_ANIM.step.x);
+                mn_8022F410(&lbl_803D9DAC.current.x, &lbl_803D9DAC.target.x,
+                            lbl_803D9DAC.step.x);
             }
-            if (mn_8022F410(&BRACKET_ANIM.current.y, &BRACKET_ANIM.target.y,
-                            BRACKET_ANIM.step.y) < 0)
+            if (mn_8022F410(&lbl_803D9DAC.current.y, &lbl_803D9DAC.target.y,
+                            lbl_803D9DAC.step.y) < 0)
             {
-                mn_8022F410(&BRACKET_ANIM.current.y, &BRACKET_ANIM.target.y,
-                            BRACKET_ANIM.step.y);
+                mn_8022F410(&lbl_803D9DAC.current.y, &lbl_803D9DAC.target.y,
+                            lbl_803D9DAC.step.y);
             } else {
-                mn_8022F410(&BRACKET_ANIM.current.y, &BRACKET_ANIM.target.y,
-                            BRACKET_ANIM.step.y);
+                mn_8022F410(&lbl_803D9DAC.current.y, &lbl_803D9DAC.target.y,
+                            lbl_803D9DAC.step.y);
             }
-            if (mn_8022F410(&BRACKET_ANIM.current.z, &BRACKET_ANIM.target.z,
-                            BRACKET_ANIM.step.z) < 0)
+            if (mn_8022F410(&lbl_803D9DAC.current.z, &lbl_803D9DAC.target.z,
+                            lbl_803D9DAC.step.z) < 0)
             {
-                mn_8022F410(&BRACKET_ANIM.current.z, &BRACKET_ANIM.target.z,
-                            BRACKET_ANIM.step.z);
+                mn_8022F410(&lbl_803D9DAC.current.z, &lbl_803D9DAC.target.z,
+                            lbl_803D9DAC.step.z);
             } else {
-                mn_8022F410(&BRACKET_ANIM.current.z, &BRACKET_ANIM.target.z,
-                            BRACKET_ANIM.step.z);
+                mn_8022F410(&lbl_803D9DAC.current.z, &lbl_803D9DAC.target.z,
+                            lbl_803D9DAC.step.z);
             }
-            fn_80190520(BRACKET_ANIM.current.x, BRACKET_ANIM.current.y,
-                        BRACKET_ANIM.current.z);
+            fn_80190520(lbl_803D9DAC.current.x, lbl_803D9DAC.current.y,
+                        lbl_803D9DAC.current.z);
             if (base->x4 != 1) {
                 p = bb;
                 for (i = 0; i < 4; i++, p += 0x2C) {
@@ -774,27 +766,27 @@ void fn_8018B090(HSD_GObj* arg0)
         base = &lbl_80473AB8[idx];
         if (base->x18 != 0) {
             f32 d;
-            BRACKET_ANIM.current.x = (f32) (base->xC + (base->x14 / 2));
-            BRACKET_ANIM.current.y = -(f32) ((base->x18 / 2) + base->x10);
-            BRACKET_ANIM.current.z = -150.0f;
-            BRACKET_ANIM.target.x = 320.0f;
-            BRACKET_ANIM.target.y = -240.0f;
-            BRACKET_ANIM.target.z = 0.0f;
-            d = 0.04f * (BRACKET_ANIM.target.x - BRACKET_ANIM.current.x);
+            lbl_803D9DAC.current.x = (f32) (base->xC + (base->x14 / 2));
+            lbl_803D9DAC.current.y = -(f32) ((base->x18 / 2) + base->x10);
+            lbl_803D9DAC.current.z = -150.0f;
+            lbl_803D9DAC.target.x = 320.0f;
+            lbl_803D9DAC.target.y = -240.0f;
+            lbl_803D9DAC.target.z = 0.0f;
+            d = 0.04f * (lbl_803D9DAC.target.x - lbl_803D9DAC.current.x);
             if (d < 0.0f) {
                 d = -d;
             }
-            BRACKET_ANIM.step.x = d;
-            d = 0.04f * (BRACKET_ANIM.target.y - BRACKET_ANIM.current.y);
+            lbl_803D9DAC.step.x = d;
+            d = 0.04f * (lbl_803D9DAC.target.y - lbl_803D9DAC.current.y);
             if (d < 0.0f) {
                 d = -d;
             }
-            BRACKET_ANIM.step.y = d;
-            d = 0.04f * (BRACKET_ANIM.target.z - BRACKET_ANIM.current.z);
+            lbl_803D9DAC.step.y = d;
+            d = 0.04f * (lbl_803D9DAC.target.z - lbl_803D9DAC.current.z);
             if (d < 0.0f) {
                 d = -d;
             }
-            BRACKET_ANIM.step.z = d;
+            lbl_803D9DAC.step.z = d;
         }
         tm->cur_option = 0x25;
         return;
@@ -806,14 +798,14 @@ void fn_8018B090(HSD_GObj* arg0)
         }
         if (lbl_804D6630 < 0x78) {
             lbl_804D6630 += 1;
-            mn_8022F410(&BRACKET_ANIM.current.x, &BRACKET_ANIM.target.x,
-                        BRACKET_ANIM.step.x);
-            mn_8022F410(&BRACKET_ANIM.current.y, &BRACKET_ANIM.target.y,
-                        BRACKET_ANIM.step.y);
-            mn_8022F410(&BRACKET_ANIM.current.z, &BRACKET_ANIM.target.z,
-                        BRACKET_ANIM.step.z);
-            fn_80190520(BRACKET_ANIM.current.x, BRACKET_ANIM.current.y,
-                        BRACKET_ANIM.current.z);
+            mn_8022F410(&lbl_803D9DAC.current.x, &lbl_803D9DAC.target.x,
+                        lbl_803D9DAC.step.x);
+            mn_8022F410(&lbl_803D9DAC.current.y, &lbl_803D9DAC.target.y,
+                        lbl_803D9DAC.step.y);
+            mn_8022F410(&lbl_803D9DAC.current.z, &lbl_803D9DAC.target.z,
+                        lbl_803D9DAC.step.z);
+            fn_80190520(lbl_803D9DAC.current.x, lbl_803D9DAC.current.y,
+                        lbl_803D9DAC.current.z);
             return;
         }
         lbl_804D6630 = 0;
@@ -866,8 +858,6 @@ void fn_8018B090(HSD_GObj* arg0)
     }
     PAD_STACK(0x48);
 }
-
-#undef BRACKET_ANIM
 
 /* 3D9EE8 */ static char lbl_803D9EE8[] = {
     131, 81, 131, 88, 131, 103, 32, 48, 48,
@@ -1613,7 +1603,7 @@ void fn_8018E618(int arg0, f32 farg0, int arg1)
             struct lbl_803D9DD0_t cobj_data;
         } CObjData;
         HSD_CObj* cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) &cam);
-        CObjData* cobj_data = (CObjData*) lbl_803D9DAC;
+        CObjData* cobj_data = (CObjData*) &lbl_803D9DAC;
         cobj_data->cobj_data.cobj = cobj;
         {
             HSD_CObj** cobj_ptr = &cobj_data->cobj_data.cobj;

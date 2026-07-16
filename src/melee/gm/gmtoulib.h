@@ -174,7 +174,5 @@
 /* 3D9F80 */ extern struct TmSettingTable lbl_803D9F80;
 /* 3D9D20 */ extern struct lbl_803D9D20_t lbl_803D9D20;
 /* 3B7D18 */ extern union TmAnimFrameTable lbl_803B7D18;
-/* 4DA7E0 */ extern f32 gm_TouSlotBaseX;    // -19.5f: leftmost panel x, 4-wide
-/* 4DA7E4 */ extern f32 gm_TouSlotSpacingX; // 13.0f: panel x stride
 
 #endif

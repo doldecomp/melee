@@ -2047,7 +2047,7 @@ u8 gm_80173224(int arg0, int arg1)
 }
 
 /// check for event character unlocks?
-CharacterKind gm_801732D8(u8 arg0)
+u8 gm_801732D8(u8 arg0)
 {
     if (!gm_IsCKindUnlocked(CKIND_GANON) && gm_801BEBC0(arg0) == 0x1C) {
         return CKIND_GANON;
@@ -2058,7 +2058,7 @@ CharacterKind gm_801732D8(u8 arg0)
     return CHKIND_NONE;
 }
 
-int gm_8017335C(void)
+u16 gm_8017335C(void)
 {
     int var_r31 = 1;
     int i;
