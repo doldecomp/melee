@@ -1320,7 +1320,6 @@ void fn_8016CFE0(void)
     int tmp_btns;
     s64 no_contest_buttons;
     int unpauser_slot;
-    u8 operand_pad[8];
     PAD_STACK(0x10);
 
     fn_8016CFE0_inline();

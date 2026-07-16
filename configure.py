@@ -858,7 +858,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftYoshi/ftYs_SpecialN.c"),
             Object(Matching, "melee/ft/chara/ftYoshi/ftYs_SpecialHi.c"),
             Object(Matching, "melee/ft/chara/ftYoshi/ftYs_SpecialLw.c"),
-            Object(NonMatching, "melee/ft/chara/ftYoshi/ftYs_SpecialS.c"),
+            Object(Matching, "melee/ft/chara/ftYoshi/ftYs_SpecialS.c"),
             # Bowser
             Object(Matching, "melee/ft/chara/ftKoopa/ftKp_Init.c"),
             Object(Matching, "melee/ft/chara/ftKoopa/ftKp_SpecialS.c"),
@@ -1030,7 +1030,8 @@ config.libs = [
             Object(NonMatching, "melee/gm/gm_19EF.c"),
             Object(Matching, "melee/gm/gmpause.c"),
             Object(Matching, "melee/gm/gmtitle.c"),
-            Object(NonMatching, "melee/gm/gmcamera.c"),
+            Object(Matching, "melee/gm/gmcamera.c"),
+            Object(Matching, "melee/gm/gm_1A33.c"),
             Object(Matching, "melee/gm/gm_1A36.c"),
             Object(NonMatching, "melee/gm/gm_1A3F.c"),
             Object(Matching, "melee/gm/gm_1A45.c"),

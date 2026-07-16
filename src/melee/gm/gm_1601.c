@@ -513,7 +513,7 @@ bool gm_80160474(CharacterKind ckind, GameModeKind mode)
 
 char* gm_801604DC(CharacterKind ckind, GameModeKind mode)
 {
-    s16 var_r3;
+    int var_r3;
 
     switch (mode) {
     case GM_CLASSIC_GOVER:
@@ -528,12 +528,12 @@ char* gm_801604DC(CharacterKind ckind, GameModeKind mode)
         var_r3 = lbl_803B7A00[ckind];
         break;
     }
-    return Toy_8030813C(var_r3, mode) + 4;
+    return Toy_8030813C(var_r3) + 4;
 }
 
 char* gm_80160564(CharacterKind ckind, GameModeKind mode)
 {
-    s16 var_r3;
+    int var_r3;
 
     switch (mode) {
     case GM_CLASSIC_GOVER:
@@ -548,7 +548,7 @@ char* gm_80160564(CharacterKind ckind, GameModeKind mode)
         var_r3 = lbl_803B7A00[ckind];
         break;
     }
-    return Toy_8030813C(var_r3, mode) + 0x24;
+    return Toy_8030813C(var_r3) + 0x24;
 }
 
 u8 gm_SelKindToUnlockIndex(SelectableCharacterKind selkind)
