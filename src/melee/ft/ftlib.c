@@ -360,7 +360,7 @@ HSD_GObj* ftLib_80086794(HSD_GObj* gobj)
 bool ftLib_800867A0(HSD_GObj* gobj, HSD_GObj* arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->item_gobj == arg1 || fp->x1978 == arg1) {
+    if (ftLib_80086794(gobj) == arg1 || fp->x1978 == arg1) {
         return true;
     } else {
         return false;
@@ -549,21 +549,18 @@ CmSubject* ftLib_80086B74(HSD_GObj* gobj)
 
 float ftLib_80086B80(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-    return fp->x890_cameraBox->x48.z;
+    return ftLib_80086B74(gobj)->x48.z;
 }
 
 void ftLib_80086B90(HSD_GObj* gobj, Vec3* v)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-    CmSubject* cam = fp->x890_cameraBox;
+    CmSubject* cam = ftLib_80086B74(gobj);
     *v = cam->x1C;
 }
 
 bool ftLib_80086BB4(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-    CmSubject* cam = fp->x890_cameraBox;
+    CmSubject* cam = ftLib_80086B74(gobj);
     return Camera_80031154(&cam->x10);
 }
 
@@ -684,9 +681,7 @@ float ftLib_80086F80(HSD_GObj* gobj)
 
 bool ftLib_80086FA8(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-
-    switch (fp->motion_id) {
+    switch (ftLib_80086C0C(gobj)) {
     case ftCo_MS_SwordSwing1:
     case ftCo_MS_SwordSwing3:
     case ftCo_MS_SwordSwing4:
@@ -792,8 +787,7 @@ void ftLib_800871A8(Fighter_GObj* gobj, Item_GObj* item_gobj)
 
 bool ftLib_80087284(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->motion_id >= ftCo_MS_LightThrowF4) {
+    if (ftLib_80086C0C(gobj) >= ftCo_MS_LightThrowF4) {
         return true;
     }
 
@@ -832,16 +826,13 @@ s32 ftLib_8008730C(HSD_GObj* gobj)
 
 s32 ftLib_8008731C(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-    return fp->x221F_b3;
+    return ftLib_8008701C(gobj);
 }
 
 bool ftLib_8008732C(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->motion_id >= ftCo_MS_DeadDown &&
-        fp->motion_id <= ftCo_MS_DeadUpFallHitCameraIce)
-    {
+    FtMotionId msid = ftLib_80086C0C(gobj);
+    if (msid >= ftCo_MS_DeadDown && msid <= ftCo_MS_DeadUpFallHitCameraIce) {
         return true;
     }
 
@@ -850,10 +841,8 @@ bool ftLib_8008732C(HSD_GObj* gobj)
 
 bool ftLib_80087354(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->motion_id >= ftCo_MS_DeadUp &&
-        fp->motion_id <= ftCo_MS_DeadUpFallHitCameraIce)
-    {
+    FtMotionId msid = ftLib_80086C0C(gobj);
+    if (msid >= ftCo_MS_DeadUp && msid <= ftCo_MS_DeadUpFallHitCameraIce) {
         return true;
     }
 
@@ -862,10 +851,8 @@ bool ftLib_80087354(HSD_GObj* gobj)
 
 bool ftLib_8008737C(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->motion_id >= ftCo_MS_DeadUpStar &&
-        fp->motion_id <= ftCo_MS_DeadUpStarIce)
-    {
+    FtMotionId msid = ftLib_80086C0C(gobj);
+    if (msid >= ftCo_MS_DeadUpStar && msid <= ftCo_MS_DeadUpStarIce) {
         return true;
     }
 
@@ -874,10 +861,8 @@ bool ftLib_8008737C(HSD_GObj* gobj)
 
 bool ftLib_800873A4(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->motion_id >= ftCo_MS_DeadUpFall &&
-        fp->motion_id <= ftCo_MS_DeadUpFallHitCameraIce)
-    {
+    FtMotionId msid = ftLib_80086C0C(gobj);
+    if (msid >= ftCo_MS_DeadUpFall && msid <= ftCo_MS_DeadUpFallHitCameraIce) {
         return true;
     }
 
@@ -886,10 +871,8 @@ bool ftLib_800873A4(HSD_GObj* gobj)
 
 bool ftLib_800873CC(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->motion_id >= ftCo_MS_Rebirth &&
-        fp->motion_id <= ftCo_MS_RebirthWait)
-    {
+    FtMotionId msid = ftLib_80086C0C(gobj);
+    if (msid >= ftCo_MS_Rebirth && msid <= ftCo_MS_RebirthWait) {
         return true;
     }
 
@@ -898,8 +881,8 @@ bool ftLib_800873CC(HSD_GObj* gobj)
 
 bool ftLib_800873F4(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->motion_id >= ftCo_MS_Entry && fp->motion_id <= ftCo_MS_EntryEnd) {
+    FtMotionId msid = ftLib_80086C0C(gobj);
+    if (msid >= ftCo_MS_Entry && msid <= ftCo_MS_EntryEnd) {
         return true;
     }
 
@@ -1022,8 +1005,7 @@ s32 ftLib_80087700(HSD_GObj* gobj)
 
 void ftLib_8008770C(HSD_GObj* gobj, void* dst)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->kind == FTKIND_GAMEWATCH) {
+    if (ftLib_800872A4(gobj) == FTKIND_GAMEWATCH) {
         ftGw_Init_8014A7F4(gobj, dst);
     } else {
         ftKb_Init_800EEB00(gobj, dst);
@@ -1032,8 +1014,7 @@ void ftLib_8008770C(HSD_GObj* gobj, void* dst)
 
 void ftLib_80087744(HSD_GObj* gobj, void* dst)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->kind == FTKIND_GAMEWATCH) {
+    if (ftLib_800872A4(gobj) == FTKIND_GAMEWATCH) {
         ftGw_Init_8014A814(gobj, dst);
     } else {
         ftKb_Init_800EEB1C(gobj, dst);
