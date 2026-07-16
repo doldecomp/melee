@@ -650,14 +650,7 @@ void mnSnap_8025409C(s32 dlg_type)
     *p5E = 0;
     /// @remark Matching tactic: the self-assign keeps p5E live so MWCC
     /// re-uses its register instead of rematerializing the address below.
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wself-assign"
-#endif
     p5E = p5E;
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
 
     if (dlg_type == 1) {
         left = *p38;
