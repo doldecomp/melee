@@ -8,6 +8,7 @@
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/fttransition.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "it/items/itgamewatchchef.h"
@@ -261,9 +262,8 @@ void ftGw_SpecialN_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirN, transition_flags,
-                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftGw_MS_SpecialAirN,
+                                    transition_flags);
     GET_FIGHTER(gobj)->accessory4_cb = &ftGw_SpecialN_CreateSausage;
 }
 
@@ -274,9 +274,8 @@ void ftGw_SpecialAirN_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialN, transition_flags,
-                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftGw_MS_SpecialN,
+                                    transition_flags);
     GET_FIGHTER(gobj)->accessory4_cb = &ftGw_SpecialN_CreateSausage;
 }
 

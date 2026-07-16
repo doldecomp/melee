@@ -25,6 +25,7 @@
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/fttransition.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 
@@ -1081,9 +1082,7 @@ void ftYs_SpecialAirSStart_0_Coll(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (ft_80082708(gobj) == 0) {
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, 360, 0x0C4C5092U, fp->cur_anim_frame,
-                                  1.0F, 0.0F, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, 360, 0x0C4C5092U);
         ftYoshi_SpecialS_SetCall(gobj);
     }
 }
@@ -1199,9 +1198,7 @@ void ftYs_SpecialAirSStart_1_Coll(Fighter_GObj* gobj)
     fp->mv.ys.specials.x30 = 0;
 
     if (ft_80081D0C(gobj) != GA_Ground) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, 356, 0x0C4C5092U, fp->cur_anim_frame,
-                                  1.0F, 0.0F, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, 356, 0x0C4C5092U);
         ftYoshi_SpecialS_SetCall(gobj);
     }
 }

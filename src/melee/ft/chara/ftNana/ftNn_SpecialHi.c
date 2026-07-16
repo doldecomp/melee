@@ -13,6 +13,7 @@
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/fttransition.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftPopo/types.h"
@@ -255,9 +256,7 @@ void ftNn_Init_80123720(Fighter_GObj* gobj)
 void ftNn_Init_8012378C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 362, 0x0C4C508A, fp->cur_anim_frame, 1.0f,
-                              0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, 362, 0x0C4C508A);
     fp->accessory4_cb = fn_80123218;
 }
 

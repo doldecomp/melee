@@ -13,6 +13,7 @@
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/fttransition.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_DownBound.h"
 #include "ftCommon/ftCo_Fall.h"
@@ -1577,10 +1578,8 @@ void ftNs_SpecialAirHiStart_Coll(
 
     fp = gobj->user_data;
     if (ft_80081D0C(gobj) != false) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialHiStart,
-                                  FTNESS_SPECIALHI_COLL_FLAG,
-                                  fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, ftNs_MS_SpecialHiStart,
+                                        FTNESS_SPECIALHI_COLL_FLAG);
     }
 }
 
@@ -1594,10 +1593,8 @@ void ftNs_SpecialAirHiHold_Coll(
 
     fp = gobj->user_data;
     if (ft_80081D0C(gobj) != false) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialHiHold,
-                                  FTNESS_SPECIALHI_COLL_FLAG,
-                                  fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, ftNs_MS_SpecialHiHold,
+                                        FTNESS_SPECIALHI_COLL_FLAG);
     }
 }
 
@@ -1610,10 +1607,8 @@ void ftNs_SpecialAirHiEnd_Coll(
 
     fp = gobj->user_data;
     if (ft_80081D0C(gobj) != false) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialHiEnd,
-                                  FTNESS_SPECIALHI_COLL_FLAG,
-                                  fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, ftNs_MS_SpecialHiEnd,
+                                        FTNESS_SPECIALHI_COLL_FLAG);
     }
 }
 
@@ -1698,10 +1693,8 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
             return;
         }
 
-        ftCommon_8007D7FC(fighter_r31);
-        Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialHi,
-                                  FTNESS_JIBAKU_COLL_FLAG,
-                                  fighter_r31->cur_anim_frame, 1, 0, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fighter_r31, ftNs_MS_SpecialHi,
+                                        FTNESS_JIBAKU_COLL_FLAG);
         return;
     }
 

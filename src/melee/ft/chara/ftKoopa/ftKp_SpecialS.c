@@ -16,6 +16,7 @@
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/fttransition.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 
@@ -154,10 +155,7 @@ static u32 const transition_flags1 =
 void ftKp_SpecialS_8013319C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-
-    Fighter_ChangeMotionState(gobj, 353, transition_flags1, fp->cur_anim_frame,
-                              1.0F, 0.0F, 0);
+    ftCommon_GroundToAirStateChange(gobj, fp, 353, transition_flags1);
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -174,10 +172,7 @@ void ftKp_SpecialS_8013322C(HSD_GObj* gobj)
     Fighter* fp0;
     Fighter* fp1 = GET_FIGHTER(gobj);
 
-    ftCommon_8007D7FC(fp1);
-
-    Fighter_ChangeMotionState(gobj, 347, transition_flags1,
-                              fp1->cur_anim_frame, 1.0F, 0.0F, 0);
+    ftCommon_AirToGroundStateChange(gobj, fp1, 347, transition_flags1);
 
     {
         fp0 = GET_FIGHTER(gobj);
@@ -209,10 +204,7 @@ void ftKp_SpecialS_80133324(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D7FC(fp);
-
-    Fighter_ChangeMotionState(gobj, 348, transition_flags1, fp->cur_anim_frame,
-                              1.0F, 0.0F, 0);
+    ftCommon_AirToGroundStateChange(gobj, fp, 348, transition_flags1);
 
     ftCommon_8007E2F4(fp, 511);
     ftCommon_8007E2FC(gobj);
@@ -241,10 +233,7 @@ void ftKp_SpecialS_801333F8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D7FC(fp);
-
-    Fighter_ChangeMotionState(gobj, 350, transition_flags2, fp->cur_anim_frame,
-                              1.0F, 0.0F, 0);
+    ftCommon_AirToGroundStateChange(gobj, fp, 350, transition_flags2);
 
     ftCommon_8007E2F4(fp, 511);
     ftCommon_8007E2FC(gobj);

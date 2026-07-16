@@ -12,6 +12,7 @@
 #include "ft/ft_0892.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
+#include "ft/fttransition.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
@@ -235,9 +236,7 @@ void ftKb_SpecialNPe_8010C8D8(HSD_GObj* gobj)
                           (1 << 26) | (1 << 27);
     Fighter* fp = GET_FIGHTER(gobj);
     PAD_STACK(4 * 2);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftKb_MS_PeSpecialAirLw, mf,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftKb_MS_PeSpecialAirLw, mf);
     if (fp->cmd_vars[0] == 1) {
         fp->cmd_vars[0] = 2;
     }
@@ -271,9 +270,7 @@ void ftKb_SpecialNPe_8010C9CC(HSD_GObj* gobj)
                           (1 << 26) | (1 << 27);
     Fighter* fp = GET_FIGHTER(gobj);
     fp->fv.kb.xCC = false;
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftKb_MS_PeSpecialLw, mf,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftKb_MS_PeSpecialLw, mf);
     {
         /// @todo @c da can't move below @c fp
         ftKb_DatAttrs* da;
@@ -358,9 +355,7 @@ void ftKb_SpecialNGw_8010CC6C(HSD_GObj* gobj)
                           (1 << 14) | (1 << 18) | (1 << 19) | (1 << 22) |
                           (1 << 26) | (1 << 27);
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftKb_MS_PeSpecialAirLwHit, mf,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftKb_MS_PeSpecialAirLwHit, mf);
     ftKb_SpecialNGw_8010CD44(gobj);
 }
 
@@ -372,9 +367,7 @@ void ftKb_SpecialNGw_8010CCD4(HSD_GObj* gobj)
                           (1 << 26) | (1 << 27);
     Fighter* fp = GET_FIGHTER(gobj);
     fp->fv.kb.xCC = false;
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftKb_MS_PeSpecialLwHit, mf,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftKb_MS_PeSpecialLwHit, mf);
     ftKb_SpecialNGw_8010CD44(gobj);
 }
 

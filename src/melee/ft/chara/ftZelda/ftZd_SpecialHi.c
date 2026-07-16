@@ -12,6 +12,7 @@
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/fttransition.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Landing.h"
@@ -230,10 +231,7 @@ void ftZd_SpecialHi_80139B44(HSD_GObj* gobj)
 void ftZd_SpecialHi_80139BB0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-
-    Fighter_ChangeMotionState(gobj, 349, transition_flags1, fp->cur_anim_frame,
-                              1, 0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, 349, transition_flags1);
 
     fp->accessory4_cb = &ftZd_SpecialHi_801396AC;
 }

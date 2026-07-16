@@ -8,6 +8,7 @@
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/fttransition.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
@@ -628,11 +629,8 @@ void ftNs_SpecialNStart_Coll(HSD_GObj* gobj)
         return;
     }
 
-    ftCommon_8007D5D4(fp);
-
-    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirNStart,
-                              FTNESS_SPECIALN_COLL_FLAG, fp->cur_anim_frame, 1,
-                              0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftNs_MS_SpecialAirNStart,
+                                    FTNESS_SPECIALN_COLL_FLAG);
 }
 
 /// Ness's grounded PK Flash Charge Collision callback
@@ -644,11 +642,8 @@ void ftNs_SpecialNRelease_Coll(HSD_GObj* gobj)
         return;
     }
 
-    ftCommon_8007D5D4(fp);
-
-    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirNHold,
-                              FTNESS_SPECIALN_COLL_FLAG, fp->cur_anim_frame, 1,
-                              0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftNs_MS_SpecialAirNHold,
+                                    FTNESS_SPECIALN_COLL_FLAG);
 }
 
 /// Ness's grounded PK Flash Release Collision callback
@@ -660,11 +655,8 @@ void ftNs_SpecialNEnd_Coll(HSD_GObj* gobj)
         return;
     }
 
-    ftCommon_8007D5D4(fp);
-
-    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialAirNEnd,
-                              FTNESS_SPECIALN_COLL_FLAG, fp->cur_anim_frame, 1,
-                              0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftNs_MS_SpecialAirNEnd,
+                                    FTNESS_SPECIALN_COLL_FLAG);
 }
 
 /// Ness's aerial PK Flash Start Collision callback
@@ -676,11 +668,8 @@ void ftNs_SpecialAirNStart_Coll(HSD_GObj* gobj)
         return;
     }
 
-    ftCommon_8007D7FC(fp);
-
-    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialNStart,
-                              FTNESS_SPECIALN_COLL_FLAG, fp->cur_anim_frame, 1,
-                              0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftNs_MS_SpecialNStart,
+                                    FTNESS_SPECIALN_COLL_FLAG);
 }
 
 /// Ness's aerial PK Flash Charge Collision callback
@@ -692,11 +681,8 @@ void ftNs_SpecialAirNRelease_Coll(HSD_GObj* gobj)
         return;
     }
 
-    ftCommon_8007D7FC(fp);
-
-    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialNHold,
-                              FTNESS_SPECIALN_COLL_FLAG, fp->cur_anim_frame, 1,
-                              0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftNs_MS_SpecialNHold,
+                                    FTNESS_SPECIALN_COLL_FLAG);
 }
 
 /// Ness's aerial PK Flash Release Collision callback
@@ -708,9 +694,6 @@ void ftNs_SpecialAirNEnd_Coll(HSD_GObj* gobj)
         return;
     }
 
-    ftCommon_8007D7FC(fp);
-
-    Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialNEnd,
-                              FTNESS_SPECIALN_COLL_FLAG, fp->cur_anim_frame, 1,
-                              0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftNs_MS_SpecialNEnd,
+                                    FTNESS_SPECIALN_COLL_FLAG);
 }

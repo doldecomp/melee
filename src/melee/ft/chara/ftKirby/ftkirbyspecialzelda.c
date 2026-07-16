@@ -13,6 +13,7 @@
 #include "ft/ft_0892.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
+#include "ft/fttransition.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
@@ -208,9 +209,8 @@ void ftKb_SpecialNSk_80105E8C(Fighter_GObj* gobj)
     ftKb_DatAttrs* da;
     void* new_var; // Permuter slop
     PAD_STACK(8);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftKb_MS_ZdSpecialAirN, 0x0C4C508E,
-                              fp->cur_anim_frame, 1.0F, 0.0F, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftKb_MS_ZdSpecialAirN,
+                                    0x0C4C508E);
     fp = (Fighter*) (new_var = HSD_GObjGetUserData(gobj));
     da = fp->dat_attrs;
     if (fp->x2219_b0 == true) {
@@ -229,9 +229,7 @@ void ftKb_SpecialNSk_80105F3C(Fighter_GObj* gobj)
     ftKb_DatAttrs* da;
     void* new_var; // Permuter slop
     PAD_STACK(8);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftKb_MS_ZdSpecialN, 0x0C4C508E,
-                              fp->cur_anim_frame, 1.0F, 0.0F, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftKb_MS_ZdSpecialN, 0x0C4C508E);
     fp = (Fighter*) (new_var = HSD_GObjGetUserData(gobj));
     da = fp->dat_attrs;
     if (fp->x2219_b0 == true) {

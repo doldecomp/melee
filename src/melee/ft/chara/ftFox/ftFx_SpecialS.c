@@ -9,6 +9,7 @@
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/fttransition.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_Fall.h"
@@ -247,10 +248,8 @@ void ftFx_SpecialAirSStart_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialSStart,
-                              FTFOX_SPECIALS_COLL_FLAG, fp->cur_anim_frame,
-                              1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftFx_MS_SpecialSStart,
+                                    FTFOX_SPECIALS_COLL_FLAG);
 }
 
 static inline void ftFox_SpecialS_CreateGhostItem(HSD_GObj* gobj)
@@ -429,11 +428,9 @@ void ftFx_SpecialAirS_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(
-        gobj, ftFx_MS_SpecialS,
-        (Ft_MF_KeepColAnimHitStatus | FTFOX_SPECIALS_COLL_FLAG),
-        fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(
+        gobj, fp, ftFx_MS_SpecialS,
+        (Ft_MF_KeepColAnimHitStatus | FTFOX_SPECIALS_COLL_FLAG));
     fp->cmd_vars[2] = 0;
 }
 

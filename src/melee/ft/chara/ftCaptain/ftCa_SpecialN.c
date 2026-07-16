@@ -13,6 +13,7 @@
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
+#include "ft/fttransition.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "lb/lbspdisplay.h"
@@ -201,9 +202,8 @@ void ftCa_SpecialN_Coll(HSD_GObj* gobj)
 {
     if (!ft_800827A0(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirN, transition_flags,
-                                  fp->cur_anim_frame, 1, 0, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, ftCa_MS_SpecialAirN,
+                                        transition_flags);
         fp->pre_hitlag_cb = efLib_PauseAll;
         fp->post_hitlag_cb = efLib_ResumeAll;
         ftCommon_ClampAirDrift(fp);
@@ -214,9 +214,8 @@ void ftCa_SpecialAirN_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialN, transition_flags,
-                                  fp->cur_anim_frame, 1, 0, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, ftCa_MS_SpecialN,
+                                        transition_flags);
         fp->pre_hitlag_cb = efLib_PauseAll;
         fp->post_hitlag_cb = efLib_ResumeAll;
     }

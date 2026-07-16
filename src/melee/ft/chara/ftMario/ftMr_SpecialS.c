@@ -16,6 +16,7 @@
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/fttransition.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "it/items/itmariocape.h"
@@ -280,9 +281,8 @@ static usize_t const transition_flags =
 void ftMr_SpecialS_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirS, transition_flags,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftMr_MS_SpecialAirS,
+                                    transition_flags);
     if ((s32) fp->cmd_vars[0] == 1U) {
         fp->cmd_vars[0] = 2U;
     }
@@ -298,9 +298,8 @@ void ftMr_SpecialAirS_AirToGround(HSD_GObj* gobj)
 
     fp = gobj->user_data;
     fp->fv.mr.x2238_isCapeBoost = false;
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialS, transition_flags,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftMr_MS_SpecialS,
+                                    transition_flags);
 
     collUpdateVars(gobj);
 }

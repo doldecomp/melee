@@ -14,6 +14,7 @@
 #include "ft/ft_0892.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/fttransition.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_CaptureYoshi.h"
@@ -226,9 +227,8 @@ void fn_8012D128(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialAirN1_0, motion_flags4,
-                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftYs_MS_SpecialAirN1_0,
+                                    motion_flags4);
     setupCallbacks(gobj, fn_8012D0A0, fn_8012D004, ftCo_800BBB8C);
 }
 
@@ -236,9 +236,8 @@ void fn_8012D1AC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialN1, motion_flags4,
-                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftYs_MS_SpecialN1,
+                                    motion_flags4);
     setupCallbacks(gobj, fn_8012CF7C, fn_8012CEE0, ftCo_800BBB8C);
 }
 
@@ -246,9 +245,8 @@ void fn_8012D230(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialAirN1_2, motion_flags3,
-                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftYs_MS_SpecialAirN1_2,
+                                    motion_flags3);
     ftYs_SpecialS_8012DF00(gobj);
 }
 
@@ -256,18 +254,16 @@ void fn_8012D298(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialAirN1_1, motion_flags3,
-                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftYs_MS_SpecialAirN1_1,
+                                    motion_flags3);
 }
 
 void fn_8012D2F8(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialN1_1, motion_flags3,
-                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftYs_MS_SpecialN1_1,
+                                    motion_flags3);
     ftYs_SpecialS_8012DF00(gobj);
 }
 
@@ -275,45 +271,40 @@ void fn_8012D360(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialN1_0, motion_flags3,
-                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftYs_MS_SpecialN1_0,
+                                    motion_flags3);
 }
 
 void fn_8012D3C0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialAirN2_1, motion_flags3,
-                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftYs_MS_SpecialAirN2_1,
+                                    motion_flags3);
     ftYs_SpecialS_8012DF00(gobj);
 }
 
 void fn_8012D428(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialAirN2_0, motion_flags3,
-                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftYs_MS_SpecialAirN2_0,
+                                    motion_flags3);
 }
 
 void fn_8012D488(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialN2_1, motion_flags3,
-                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftYs_MS_SpecialN2_1,
+                                    motion_flags3);
     ftYs_SpecialS_8012DF00(gobj);
 }
 
 void fn_8012D4F0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialN2_0, motion_flags3,
-                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftYs_MS_SpecialN2_0,
+                                    motion_flags3);
 }
 
 static void checkAnimEnd(Fighter_GObj* gobj, HSD_GObjEvent cb)

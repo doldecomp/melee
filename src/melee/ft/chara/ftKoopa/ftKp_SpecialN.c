@@ -17,6 +17,7 @@
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
+#include <melee/ft/fttransition.h>
 #include <melee/ft/inlines.h>
 #include <melee/it/item.h>
 #include <melee/it/items/itkoopaflame.h>
@@ -349,9 +350,8 @@ void ftKp_SpecialNStart_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == GA_Ground) {
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, ftKp_MS_SpecialAirNStart, 0x0C4C5080,
-                                  fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, ftKp_MS_SpecialAirNStart,
+                                        0x0C4C5080);
     }
 }
 
@@ -359,9 +359,7 @@ void ftKp_SpecialN_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == GA_Ground) {
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, 0x159, 0x0C4C5880, fp->cur_anim_frame,
-                                  1.0f, 0.0f, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, 0x159, 0x0C4C5880);
     }
 }
 
@@ -369,9 +367,7 @@ void ftKp_SpecialNEnd_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == GA_Ground) {
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, 0x15A, 0x0C4C5080U, fp->cur_anim_frame,
-                                  1.0f, 0.0f, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, 0x15A, 0x0C4C5080U);
     }
 }
 
@@ -379,9 +375,7 @@ void ftKp_SpecialAirNStart_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != GA_Ground) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, 0x155, 0x0C4C5080U, fp->cur_anim_frame,
-                                  1.0f, 0.0f, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, 0x155, 0x0C4C5080U);
     }
 }
 
@@ -389,9 +383,7 @@ void ftKp_SpecialAirN_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != GA_Ground) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, 0x156, 0x0C4C5880U, fp->cur_anim_frame,
-                                  1.0f, 0.0f, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, 0x156, 0x0C4C5880U);
     }
 }
 
@@ -399,9 +391,7 @@ void ftKp_SpecialAirNEnd_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != GA_Ground) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, 0x157, 0x0C4C5080U, fp->cur_anim_frame,
-                                  1.0f, 0.0f, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, 0x157, 0x0C4C5080U);
     }
 }
 

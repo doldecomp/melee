@@ -10,6 +10,7 @@
 #include "ft/ft_0892.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/fttransition.h"
 #include "ftPopo/ftPp_Init.h"
 #include "ftPopo/ftPp_SpecialHi.h"
 #include "it/items/itclimbersblizzard.h"
@@ -148,9 +149,8 @@ void fn_80122B54(Fighter_GObj* gobj)
 static inline void ftPp_SpecialLw_Coll_Land(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialAirLw, 0x0C4C5282,
-                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftPp_MS_SpecialAirLw,
+                                    0x0C4C5282);
     ftPp_set_cbs(gobj);
     fp->accessory4_cb = fn_80122D2C;
     ftCommon_ClampAirDrift(fp);

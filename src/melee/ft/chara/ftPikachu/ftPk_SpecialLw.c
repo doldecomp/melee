@@ -12,6 +12,7 @@
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
+#include "ft/fttransition.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftPikachu/types.h"
@@ -162,17 +163,13 @@ void ftPk_SpecialLw_ChangeMotion_Unk00(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 359, 206327942, fp->cur_anim_frame, 1.0f,
-                              0.0f, 0);
+    ftCommon_AirToGroundStateChange(gobj, fp, 359, 206327942);
 }
 
 void ftPk_SpecialLw_ChangeMotion_Unk01(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 363, 206327942, fp->cur_anim_frame, 1.0f,
-                              0.0f, 0);
+    ftCommon_GroundToAirStateChange(gobj, fp, 363, 206327942);
     ftCommon_ClampAirDrift(fp);
 }
 
@@ -180,9 +177,7 @@ void ftPk_SpecialLw_ChangeMotion_Unk02(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 360, 206329998, fp->cur_anim_frame, 1.0f,
-                              0.0f, 0);
+    ftCommon_AirToGroundStateChange(gobj, fp, 360, 206329998);
     fp->take_dmg_cb = &ftPk_SpecialLw_SetState_Unk1;
     fp->accessory4_cb = &ftPk_SpecialLw_SpawnEffect;
 }
@@ -190,9 +185,7 @@ void ftPk_SpecialLw_ChangeMotion_Unk02(HSD_GObj* gobj)
 void ftPk_SpecialLw_ChangeMotion_Unk03(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 364, 206329998, fp->cur_anim_frame, 1.0f,
-                              0.0f, 0);
+    ftCommon_GroundToAirStateChange(gobj, fp, 364, 206329998);
     fp->take_dmg_cb = &ftPk_SpecialLw_SetState_Unk1;
     fp->accessory4_cb = &ftPk_SpecialLw_SpawnEffect;
     ftCommon_ClampAirDrift(fp);
@@ -202,17 +195,13 @@ void ftPk_SpecialLw_ChangeMotion_Unk04(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 361, 206327950, fp->cur_anim_frame, 1.0f,
-                              0.0f, 0);
+    ftCommon_AirToGroundStateChange(gobj, fp, 361, 206327950);
 }
 
 void ftPk_SpecialLw_ChangeMotion_Unk05(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 365, 206327950, fp->cur_anim_frame, 1.0f,
-                              0.0f, 0);
+    ftCommon_GroundToAirStateChange(gobj, fp, 365, 206327950);
     ftCommon_ClampAirDrift(fp);
 }
 
@@ -220,17 +209,13 @@ void ftPk_SpecialLw_ChangeMotion_Unk06(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 362, 206327942, fp->cur_anim_frame, 1.0f,
-                              0.0f, 0);
+    ftCommon_AirToGroundStateChange(gobj, fp, 362, 206327942);
 }
 
 void ftPk_SpecialLw_ChangeMotion_Unk07(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 366, 206327942, fp->cur_anim_frame, 1.0f,
-                              0.0f, 0);
+    ftCommon_GroundToAirStateChange(gobj, fp, 366, 206327942);
     ftCommon_ClampAirDrift(fp);
 }
 

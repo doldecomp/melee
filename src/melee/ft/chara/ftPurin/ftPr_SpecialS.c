@@ -12,6 +12,7 @@
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
+#include "ft/fttransition.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
@@ -155,16 +156,13 @@ void ftPr_SpecialAirS_Coll(Fighter_GObj* gobj)
 void ftPr_SpecialS_8013D590(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialAirS, 0x0C4C508AU,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftPr_MS_SpecialAirS,
+                                    0x0C4C508AU);
 }
 
 void ftPr_SpecialS_8013D5F0(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialS, 0x0C4C508AU,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftPr_MS_SpecialS, 0x0C4C508AU);
     ftCommon_ClampAirDrift(fp);
 }

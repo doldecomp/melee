@@ -10,6 +10,7 @@
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
+#include "ft/fttransition.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftZelda/types.h"
@@ -205,9 +206,7 @@ void ftZd_SpecialN_8013AC88(HSD_GObj* gobj)
     u8 _[12];
 
     fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 342, 0x0C4C508E, fp->cur_anim_frame, 1.0,
-                              0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, 342, 0x0C4C508E);
 
     fighter2 = GET_FIGHTER(gobj);
     attributes = fighter2->dat_attrs;
@@ -228,9 +227,7 @@ void ftZd_SpecialN_8013AD1C(HSD_GObj* gobj)
     u8 _[12];
 
     fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 341, 0x0C4C508E, fp->cur_anim_frame, 1.0,
-                              0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, 341, 0x0C4C508E);
 
     fighter2 = GET_FIGHTER(gobj);
     attributes = fighter2->dat_attrs;

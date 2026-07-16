@@ -11,6 +11,7 @@
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
+#include "ft/fttransition.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftMewtwo/types.h"
@@ -183,11 +184,8 @@ void ftMt_SpecialAirLw_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D7FC(fp);
-
-    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialLw,
-                              FTMEWTWO_SPECIALLW_COLL_FLAG, fp->cur_anim_frame,
-                              1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftMt_MS_SpecialLw,
+                                    FTMEWTWO_SPECIALLW_COLL_FLAG);
 
     fp->accessory4_cb = ftMt_SpecialLw_CreateDisable;
 

@@ -8,6 +8,7 @@
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
+#include "ft/fttransition.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftMars/types.h"
@@ -154,10 +155,7 @@ void ftMs_SpecialS_801376E8(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
-    ftCommon_8007D5D4(fp);
-
-    Fighter_ChangeMotionState(gobj, 358, transition_flags, fp->cur_anim_frame,
-                              1, 0, 0);
+    ftCommon_GroundToAirStateChange(gobj, fp, 358, transition_flags);
 }
 
 void ftMs_SpecialS_80137748(HSD_GObj* gobj)
@@ -166,10 +164,7 @@ void ftMs_SpecialS_80137748(HSD_GObj* gobj)
     fp->fv.ms.x222C = 0;
 
     // Air_SetAsGrounded2
-    ftCommon_8007D7FC(fp);
-
-    Fighter_ChangeMotionState(gobj, 349, transition_flags, fp->cur_anim_frame,
-                              1, 0, 0);
+    ftCommon_AirToGroundStateChange(gobj, fp, 349, transition_flags);
 }
 
 void ftMs_SpecialS2_Anim(HSD_GObj* gobj)

@@ -11,6 +11,7 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
 #include "ft/ftcommon.h"
+#include "ft/fttransition.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
@@ -193,9 +194,8 @@ void fn_8012E3B4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialAirHi, motion_flags,
-                              fp->cur_anim_frame, 1.0F, 0.0F, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftYs_MS_SpecialAirHi,
+                                    motion_flags);
     setDamageCallbacks(gobj);
     setAccessory4Callback(gobj);
     ftCommon_ClampAirDrift(fp);
@@ -205,9 +205,7 @@ void fn_8012E44C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 0x16C, motion_flags, fp->cur_anim_frame, 1,
-                              0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, 0x16C, motion_flags);
     setDamageCallbacks(gobj);
     setAccessory4Callback(gobj);
 }

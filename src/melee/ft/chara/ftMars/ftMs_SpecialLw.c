@@ -13,6 +13,7 @@
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
 #include "ft/ftparts.h"
+#include "ft/fttransition.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftMars/types.h"
@@ -153,9 +154,7 @@ void ftMs_SpecialLw_80138D38(HSD_GObj* gobj)
 
     {
         Fighter* fp = gobj->user_data;
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, 371, 0x0C4C508C, fp->cur_anim_frame, 1,
-                                  0, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, 371, 0x0C4C508C);
     }
 
     {
@@ -176,9 +175,7 @@ void ftMs_SpecialLw_80138DD0(HSD_GObj* gobj)
 
     {
         Fighter* fp0 = gobj->user_data;
-        ftCommon_8007D7FC(fp0);
-        Fighter_ChangeMotionState(gobj, 369, 0x0C4C508C, fp0->cur_anim_frame,
-                                  1, 0, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp0, 369, 0x0C4C508C);
     }
 
     {
@@ -325,9 +322,7 @@ void ftMs_SpecialAirLwHit_Coll(HSD_GObj* gobj)
 void ftMs_SpecialLw_80139080(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 372, 0x0C4C508E, fp->cur_anim_frame, 1, 0,
-                              NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, 372, 0x0C4C508E);
 }
 
 /// 801390E0 00135CC0
@@ -335,9 +330,7 @@ void ftMs_SpecialLw_80139080(HSD_GObj* gobj)
 void ftMs_SpecialLw_801390E0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 370, 0x0C4C508E, fp->cur_anim_frame, 1, 0,
-                              NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, 370, 0x0C4C508E);
 }
 
 static inline void ftMs_SpecialLw_80139140_inline(HSD_GObj* gobj)

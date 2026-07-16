@@ -11,6 +11,7 @@
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/fttransition.h"
 #include "ftNana/ftNn_Init.h"
 #include "ftPopo/ftPp_Init.h"
 #include "it/items/itclimbersstring.h"
@@ -380,9 +381,7 @@ void ftPp_SpecialHi_8012184C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 0x15B, 0x0C4C508AU, fp->cur_anim_frame,
-                              1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, 0x15B, 0x0C4C508AU);
 }
 
 void ftPp_SpecialHi_801218AC(Fighter_GObj* gobj)
@@ -575,9 +574,7 @@ void ftPp_SpecialHi_80121CE0(Fighter_GObj* gobj)
 void ftPp_SpecialHi_80121D40(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 0x15C, 0x0C4C508A, fp->cur_anim_frame,
-                              1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, 0x15C, 0x0C4C508A);
 }
 
 void ftPp_SpecialHi_80121DA0(Fighter_GObj* gobj)
@@ -670,9 +667,7 @@ void ftPp_SpecialHi_80121FD8(Fighter_GObj* gobj)
 void ftPp_SpecialHi_80122038(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 0x15E, 0x0C4C508A, fp->cur_anim_frame,
-                              1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, 0x15E, 0x0C4C508A);
 }
 
 void ftPp_SpecialHi_80122098(Fighter_GObj* gobj)

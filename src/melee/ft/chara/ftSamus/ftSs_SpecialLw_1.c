@@ -8,6 +8,7 @@
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
+#include "ft/fttransition.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_Fall.h"
@@ -229,9 +230,7 @@ static void ftSamus_UnkSetStateAndCb(HSD_GObj* gobj)
 void ftSs_SpecialLw_8012B570(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 0x164, 0x0C4C509C, fp->cur_anim_frame,
-                              1.0f, 0.0f, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, 0x164, 0x0C4C509C);
     ftSamus_UnkSetStateAndCb(gobj);
 }
 
@@ -240,17 +239,13 @@ void ftSs_SpecialLw_8012B5F0(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = getFtSpecialAttrs(fp);
     fp->self_vel.y = samus_attr->x54;
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 0x164, 0x0C4C509C, fp->cur_anim_frame,
-                              1.0f, 0.0f, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, 0x164, 0x0C4C509C);
     fp->accessory4_cb = ftSs_SpecialLw_8012ADF0;
 }
 
 void ftSs_SpecialLw_8012B668(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 0x163, 0x0C4C509C, fp->cur_anim_frame,
-                              1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, 0x163, 0x0C4C509C);
     ftSamus_UnkSetStateAndCb(gobj);
 }

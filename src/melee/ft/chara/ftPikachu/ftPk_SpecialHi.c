@@ -11,6 +11,7 @@
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/fttransition.h"
 #include "ft/types.h"
 
 #include "ftCommon/forward.h"
@@ -164,9 +165,7 @@ void ftPk_SpecialHi_ChangeMotion_Unk00(HSD_GObj* gobj)
 void ftPk_SpecialHi_ChangeMotion_Unk01(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 353, 206327940, fp->cur_anim_frame, 1.0f,
-                              0.0f, 0);
+    ftCommon_AirToGroundStateChange(gobj, fp, 353, 206327940);
 }
 
 void ftPk_SpecialHiStart1_Anim(HSD_GObj* gobj)

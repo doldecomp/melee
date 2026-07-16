@@ -12,6 +12,7 @@
 #include "ft/ft_0892.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/fttransition.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
@@ -287,9 +288,8 @@ void ftKb_GwSpecialAirN_Coll(Fighter_GObj* gobj)
 void ftKb_SpecialNGw_8010D580(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftKb_MS_GwSpecialAirN, 0x0C4C508C,
-                              fp->cur_anim_frame, 1.0F, 0.0F, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftKb_MS_GwSpecialAirN,
+                                    0x0C4C508C);
 
     fp = GET_FIGHTER(gobj);
     fp->accessory4_cb = fn_8010CE5C;
@@ -298,9 +298,7 @@ void ftKb_SpecialNGw_8010D580(Fighter_GObj* gobj)
 void ftKb_SpecialNGw_8010D5F0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftKb_MS_GwSpecialN, 0x0C4C508C,
-                              fp->cur_anim_frame, 1.0F, 0.0F, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftKb_MS_GwSpecialN, 0x0C4C508C);
 
     fp = GET_FIGHTER(gobj);
     fp->accessory4_cb = fn_8010CE5C;

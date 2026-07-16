@@ -14,6 +14,7 @@
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
+#include "ft/fttransition.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
@@ -224,9 +225,7 @@ void ftSk_SpecialHi_80113390(Fighter_GObj* arg0)
     Fighter* temp_r31;
 
     temp_r31 = arg0->user_data;
-    ftCommon_8007D7FC(temp_r31);
-    Fighter_ChangeMotionState(arg0, 0x163, 0x0C4C508EU,
-                              temp_r31->cur_anim_frame, 1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(arg0, temp_r31, 0x163, 0x0C4C508EU);
     temp_r31->accessory4_cb = fn_80112ED8;
 }
 

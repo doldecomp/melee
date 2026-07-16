@@ -11,6 +11,7 @@
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/fttransition.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
@@ -519,9 +520,7 @@ void ftZd_SpecialSStart_Coll(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == 0) {
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, 346, 0x0C4C5082, fp->cur_anim_frame,
-                                  1.0, 0, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, 346, 0x0C4C5082);
     }
 }
 
@@ -533,9 +532,7 @@ void ftZd_SpecialSLoop_Coll(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == 0) {
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, 347, 0x0C4C5080, fp->cur_anim_frame,
-                                  1.0, 0, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, 347, 0x0C4C5080);
     }
 }
 
@@ -546,9 +543,7 @@ void ftZd_SpecialSEnd_Coll(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == 0) {
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, 348, 0x0C4C5080, fp->cur_anim_frame,
-                                  1.0, 0, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, 348, 0x0C4C5080);
     }
 }
 
@@ -559,9 +554,7 @@ void ftZd_SpecialAirSStart_Coll(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != 0) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, 343, 0x0C4C5082, fp->cur_anim_frame,
-                                  1.0, 0, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, 343, 0x0C4C5082);
     }
 }
 
@@ -572,9 +565,7 @@ void ftZd_SpecialAirSLoop_Coll(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != 0) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, 344, 0x0C4C5080, fp->cur_anim_frame,
-                                  1.0, 0, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, 344, 0x0C4C5080);
     }
 }
 
@@ -585,8 +576,6 @@ void ftZd_SpecialAirSEnd_Coll(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != 0) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, 345, 0x0C4C5080, fp->cur_anim_frame,
-                                  1.0, 0, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, 345, 0x0C4C5080);
     }
 }

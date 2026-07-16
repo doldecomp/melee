@@ -9,6 +9,7 @@
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/fttransition.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_Wait.h"
@@ -166,10 +167,8 @@ void ftMr_SpecialAirN_Coll(HSD_GObj* gobj)
 void ftMr_SpecialN_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirN,
-                              (Ft_MF_UpdateCmd | Ft_MF_SkipColAnim),
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftMr_MS_SpecialAirN,
+                                    (Ft_MF_UpdateCmd | Ft_MF_SkipColAnim));
 
     fp->accessory4_cb = ftMr_SpecialN_ItemFireSpawn;
 }
@@ -177,10 +176,8 @@ void ftMr_SpecialN_GroundToAir(HSD_GObj* gobj)
 void ftMr_SpecialAirN_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialN,
-                              (Ft_MF_UpdateCmd | Ft_MF_SkipColAnim),
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftMr_MS_SpecialN,
+                                    (Ft_MF_UpdateCmd | Ft_MF_SkipColAnim));
 
     fp->accessory4_cb = ftMr_SpecialN_ItemFireSpawn;
 }

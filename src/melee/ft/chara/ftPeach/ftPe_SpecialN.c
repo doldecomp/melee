@@ -10,6 +10,7 @@
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
+#include "ft/fttransition.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftPeach/types.h"
@@ -277,9 +278,7 @@ static void doColl(HSD_GObj* gobj)
 {
     u8 _[8];
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirN, coll_mf,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftPe_MS_SpecialAirN, coll_mf);
     if (fp->cmd_vars[cmd_phys_state] == phys_state_1) {
         fp->cmd_vars[cmd_phys_state] = phys_state_2;
     }
@@ -291,9 +290,7 @@ static void doAirColl(HSD_GObj* gobj)
     u8 _[8];
     Fighter* fp = GET_FIGHTER(gobj);
     fp->fv.pe.specialairn_used = false;
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialN, coll_mf,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftPe_MS_SpecialN, coll_mf);
     setupColl(gobj);
 }
 
@@ -354,9 +351,7 @@ void ftPe_SpecialAirNHit_Coll(HSD_GObj* gobj)
 static void doHitColl(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirNHit, coll_mf,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftPe_MS_SpecialAirNHit, coll_mf);
     setupHitColl(gobj);
 }
 
@@ -365,9 +360,7 @@ void doAirHitColl(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->fv.pe.specialairn_used = false;
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialNHit, coll_mf,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftPe_MS_SpecialNHit, coll_mf);
     setupHitColl(gobj);
 }
 

@@ -14,6 +14,7 @@
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
 #include "ft/ftparts.h"
+#include "ft/fttransition.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
@@ -134,9 +135,7 @@ void ftPk_SpecialN_Coll(HSD_GObj* gobj)
     Fighter* fp;
     if (!ft_80082708(gobj)) {
         fp = GET_FIGHTER(gobj);
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, 342, 206327938, fp->cur_anim_frame,
-                                  1.0f, 0.0f, 0);
+        ftCommon_GroundToAirStateChange(gobj, fp, 342, 206327938);
     }
 }
 

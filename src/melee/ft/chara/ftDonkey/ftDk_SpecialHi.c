@@ -15,6 +15,7 @@
 #include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
+#include "ft/fttransition.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
@@ -137,18 +138,16 @@ void ftDk_SpecialAirHi_Coll(HSD_GObj* gobj)
     u8 _[8];
     if (fp->self_vel.y >= 0) {
         if (ft_80081D0C(gobj)) {
-            ftCommon_8007D7FC(fp);
-            Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialHi, 0x0C4C5080,
-                                      fp->cur_anim_frame, 1, 0, NULL);
+            ftCommon_AirToGroundStateChange(gobj, fp, ftDk_MS_SpecialHi,
+                                            0x0C4C5080);
             setCallbacks(gobj);
             ftCommon_ClampGrVel(
                 fp, donkey_attr->SpecialHi.x54_GROUNDED_HORIZONTAL_VELOCITY);
         }
     } else {
         if (ft_CheckGroundAndLedge(gobj, 0)) {
-            ftCommon_8007D7FC(fp);
-            Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialHi, 0x0C4C5080,
-                                      fp->cur_anim_frame, 1, 0, NULL);
+            ftCommon_AirToGroundStateChange(gobj, fp, ftDk_MS_SpecialHi,
+                                            0x0C4C5080);
             setCallbacks(gobj);
             ftCommon_ClampGrVel(
                 fp, donkey_attr->SpecialHi.x54_GROUNDED_HORIZONTAL_VELOCITY);
