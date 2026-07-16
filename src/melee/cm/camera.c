@@ -2026,6 +2026,7 @@ void Camera_8002C5B4(Camera_x2D0* arg0)
     }
 
     limit = params->x_max;
+    /// @todo figure out how to get rid of this gross hack
     pos = (cam_pos = &cam->x308)->x;
     if (pos > limit) {
         cam_pos->x = limit;
@@ -2115,94 +2116,95 @@ void Camera_8002C5B4(Camera_x2D0* arg0)
     }
 }
 
-void Camera_8002C908(void* arg0)
+static inline bool get_subject_pos(Vec3* pos, s8* slot_ptr)
 {
-    CameraBounds bounds;
-    volatile u8 _padA[24];
-    Vec3 sp1C;
-    Vec3 sp10;
-    Camera* cam;
-    CameraTransformState* transform;
-    s8* slot_ptr;
-    s32 valid;
-    Vec3* pos_ptr;
-
-    cam = &cm_80452C68;
-    Camera_80030DF8();
-    Camera_800293E0();
-    transform = &cam->transform;
-    Camera_8002958C(&bounds, transform);
-    Camera_8002C1A8();
-    pos_ptr = &cam->x308;
-    slot_ptr = &cam->x304;
-
-    goto loop_check;
-
-loop_next:
-    *slot_ptr = Camera_8002BA00(*slot_ptr, 1);
-
-loop_check: {
     CmSubject* subject;
     HSD_GObj* gobj;
     s32 slot;
+    bool valid;
 
     slot = *slot_ptr;
-    valid = 1;
+    valid = true;
     if (slot == 0xB) {
-        valid = 0;
+        valid = false;
     } else if (slot == 0xA) {
-        Stage_UnkSetVec3TCam_Offset(pos_ptr);
+        Stage_UnkSetVec3TCam_Offset(pos);
     } else {
         gobj = Player_GetEntity(slot);
         if (gobj != NULL && (subject = ftLib_80086B74(gobj)) != NULL) {
-            *pos_ptr = subject->x1C;
+            *pos = subject->x1C;
         } else {
-            valid = 0;
+            valid = false;
         }
     }
+    return valid;
 }
-    if (valid == 0) {
-        goto loop_next;
+
+void Camera_8002C908(void* arg0)
+{
+    CameraBounds bounds;
+    u8 _pad[24];
+    Vec3 sp1C;
+    Vec3 sp10;
+    CameraTransformState* transform;
+    Vec3* pos_ptr;
+    s8* slot_ptr;
+    Vec3* target_interest;
+    Vec3* copy_src;
+    f32 coeff;
+    CameraUnkGlobals* globals;
+
+    Camera_80030DF8();
+    Camera_800293E0();
+    transform = &cm_80452C68.transform;
+    Camera_8002958C(&bounds, transform);
+    Camera_8002C1A8();
+    pos_ptr = &cm_80452C68.x308;
+    slot_ptr = &cm_80452C68.x304;
+
+    while (!get_subject_pos(pos_ptr, slot_ptr)) {
+        s32 slot = *slot_ptr;
+        *slot_ptr = Camera_8002BA00(slot, 1);
     }
 
-    Camera_8002C5B4(&cam->x2D0);
+    Camera_8002C5B4(&cm_80452C68.x2D0);
+
+    target_interest = &transform->target_interest;
+    copy_src = &cm_80452C68.transform.target_interest;
+    *copy_src = *pos_ptr;
+    lbVector_Add(target_interest, &cm_80452C68.x314);
+
+    cm_80452C68.transform.target_position = *copy_src;
+    pos_ptr = &transform->target_position;
+    lbVector_Add(pos_ptr, &cm_80452C68.pause_eye_offset);
+
+    copy_src = &transform->position;
+    lbVector_Diff(pos_ptr, copy_src, &sp1C);
+
+    globals = &cm_803BCCA0;
+    coeff = globals->x84;
+    sp1C.x *= coeff;
+    sp1C.y *= coeff;
+    sp1C.z *= coeff;
+    lbVector_Add(copy_src, &sp1C);
+
+    lbVector_Diff(target_interest, &transform->interest, &sp10);
+    coeff = globals->x84;
+    sp10.x *= coeff;
+    sp10.y *= coeff;
+    sp10.z *= coeff;
+    lbVector_Add(&transform->interest, &sp10);
+
+    cm_80452C68.transform.target_fov = cm_80452C68.x32C;
     {
-        Vec3* position;
-        Vec3* tgt_interest;
-        Vec3* tgt_position;
-        CameraUnkGlobals* globals;
-        f32 coeff;
+        f32 delta;
 
-        tgt_interest = &transform->target_interest;
-        transform->target_interest = *pos_ptr;
-        lbVector_Add(tgt_interest, &cam->x314);
-
-        tgt_position = &transform->target_position;
-        transform->target_position = *tgt_interest;
-        lbVector_Add(tgt_position, &cam->pause_eye_offset);
-
-        position = &transform->position;
-        lbVector_Diff(tgt_position, position, &sp1C);
-
-        globals = &cm_803BCCA0;
-        coeff = globals->x84;
-        sp1C.x *= coeff;
-        sp1C.y *= coeff;
-        sp1C.z *= coeff;
-        lbVector_Add(position, &sp1C);
-
-        lbVector_Diff(tgt_interest, &transform->interest, &sp10);
-        coeff = globals->x84;
-        sp10.x *= coeff;
-        sp10.y *= coeff;
-        sp10.z *= coeff;
-        lbVector_Add(&transform->interest, &sp10);
-
-        transform->target_fov = cam->x32C;
-        transform->fov =
-            (transform->target_fov - transform->fov) * globals->x88 +
-            transform->fov;
+        delta = cm_80452C68.transform.target_fov - cm_80452C68.transform.fov;
+        (void) delta;
+        cm_80452C68.transform.fov =
+            delta * globals->x88 + cm_80452C68.transform.fov;
     }
+
     Camera_8002A28C(&bounds);
     Camera_8002A0C0(&bounds, transform);
 }
