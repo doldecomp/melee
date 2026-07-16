@@ -1440,12 +1440,12 @@ UnkAdventureData* gm_8017E424(void)
 
 u8 gm_8017E430(void)
 {
-    return lbl_80472C30.x0.slot;
+    return gm_8017E424()->x0.slot;
 }
 
 u8 gm_8017E440(void)
 {
-    UnkAdventureData* r31 = &lbl_80472C30;
+    UnkAdventureData* r31 = gm_8017E424();
     if (gm_801677F8(r31->x0.slot, r31->x0.x4) == false) {
         return 4;
     }
@@ -1544,12 +1544,12 @@ void gm_8017E7A0(u8 matchResult)
 
 bool gm_8017E7E0(void)
 {
-    return lbl_80472C30.x7C == 0x14;
+    return gm_8017E424()->x7C == 0x14;
 }
 
 void gm_8017E7FC(u8 matchResult)
 {
-    UnkAdventureData* r31 = &lbl_80472C30;
+    UnkAdventureData* r31 = gm_8017E424();
     bool cond;
 
     if (gm_GetCurrentGameMode() == GM_ADVENTURE && r31->x0.cpu_level >= 2 &&
@@ -1736,7 +1736,7 @@ bool fn_8017EDDC(void)
     UnkAllstarData* p;
 
     if (gm_GetCurrentGameMode() == GM_CLASSIC) {
-        p = &lbl_80472CB0;
+        p = gm_8017EB30();
         if (p->x0.xC.xD == 0 && p->x0.cpu_level >= 2 && p->x0.xC.x20 < 0x5208)
         {
             return true;
