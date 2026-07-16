@@ -1974,6 +1974,21 @@ void Camera_8002C1A8(void)
     }
 }
 
+static inline float Camera_sqrtf_store(float x, volatile float* y)
+{
+    if (x > *(volatile const float*) &cm_804D7E14) {
+        double guess = __frsqrte((double) x);
+        double half = *(volatile const double*) &cm_804D7E78;
+        double three = *(volatile const double*) &cm_804D7E80;
+        guess = half * guess * (three - guess * guess * x);
+        guess = half * guess * (three - guess * guess * x);
+        guess = half * guess * (three - guess * guess * x);
+        *y = (float) (x * guess);
+        return *(volatile float*) y;
+    }
+    return x;
+}
+
 void Camera_8002C5B4(Camera_x2D0* arg0)
 {
     f32 len_3d;
@@ -1989,7 +2004,7 @@ void Camera_8002C5B4(Camera_x2D0* arg0)
     f32 pitch;
     f32 yaw;
     f32 limit;
-    PAD_STACK(4);
+    f32 sqrt_tmp[3];
 
     cam = &cm_80452C68;
     params = arg0;
@@ -2056,12 +2071,14 @@ void Camera_8002C5B4(Camera_x2D0* arg0)
     eye_offset_y = &cam->pause_eye_offset.y;
     eye_offset_z = &cam->pause_eye_offset.z;
 
-    len_3d =
-        sqrtf((*eye_offset_z * *eye_offset_z) +
-              (eye_offset->x * eye_offset->x + *eye_offset_y * *eye_offset_y));
+    len_3d = Camera_sqrtf_store(
+        (*eye_offset_z * *eye_offset_z) +
+            (eye_offset->x * eye_offset->x + *eye_offset_y * *eye_offset_y),
+        &sqrt_tmp[0]);
 
-    xz_dist =
-        sqrtf(eye_offset->x * eye_offset->x + *eye_offset_z * *eye_offset_z);
+    xz_dist = Camera_sqrtf_store(eye_offset->x * eye_offset->x +
+                                     *eye_offset_z * *eye_offset_z,
+                                 &sqrt_tmp[2]);
 
     PSVECCrossProduct(eye_offset, &cam->pause_up, &cross1);
     lbVector_Normalize(&cross1);
