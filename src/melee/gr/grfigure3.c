@@ -147,11 +147,7 @@ static void grFigure3_8020E724(Ground_GObj* arg0) {}
 
 static void grFigure3_8020E728(Ground_GObj* gobj)
 {
-    u8 _[8];
-
-    Ground* gp = gobj->user_data;
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 static bool grFigure3_8020E778(Ground_GObj* arg0)

@@ -119,11 +119,7 @@ static void grTCaptain_8021FE24(Ground_GObj* arg0) {}
 
 static void grTCaptain_8021FE28(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 static bool grTCaptain_8021FE78(Ground_GObj* arg0)
@@ -141,11 +137,7 @@ static void grTCaptain_8021FEB4(Ground_GObj* arg0) {}
 
 static void grTCaptain_8021FEB8(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 static bool grTCaptain_8021FF08(Ground_GObj* arg0)

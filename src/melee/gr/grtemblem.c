@@ -131,10 +131,7 @@ static void grTRoy_802245B8(Ground_GObj* gobj) {}
 
 static void grTRoy_802245BC(Ground_GObj* gobj)
 {
-    u8 _[8];
-    Ground* gp = GET_GROUND(gobj);
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 static bool grTRoy_8022460C(Ground_GObj* gobj)
@@ -152,10 +149,7 @@ static void grTRoy_80224648(Ground_GObj* gobj) {}
 
 static void grTRoy_8022464C(Ground_GObj* gobj)
 {
-    u8 _[8];
-    Ground* gp = GET_GROUND(gobj);
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 static bool grTRoy_8022469C(Ground_GObj* gobj)

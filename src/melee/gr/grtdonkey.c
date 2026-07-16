@@ -120,11 +120,7 @@ static void grTDonkey_802203EC(Ground_GObj* arg0) {}
 
 static void grTDonkey_802203F0(Ground_GObj* gobj)
 {
-    u8 _[8];
-
-    Ground* gp = GET_GROUND(gobj);
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 static bool grTDonkey_80220440(Ground_GObj* arg0)
@@ -142,11 +138,7 @@ static void grTDonkey_8022047C(Ground_GObj* arg0) {}
 
 static void grTDonkey_80220480(Ground_GObj* gobj)
 {
-    u8 _[8];
-
-    Ground* gp = GET_GROUND(gobj);
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 static bool grTDonkey_802204D0(Ground_GObj* arg0)

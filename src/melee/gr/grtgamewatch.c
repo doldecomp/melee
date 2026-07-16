@@ -102,12 +102,7 @@ void grTGameWatch_802242D4(Ground_GObj* gobj)
 
 void grTGameWatch_802242D8(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* joint = (HSD_JObj*) gobj->hsd_obj;
-    PAD_STACK(8);
-
-    Ground_801C2ED0(joint, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTGameWatch_80224328(Ground_GObj* gobj)
@@ -128,12 +123,7 @@ void grTGameWatch_80224364(Ground_GObj* gobj)
 
 void grTGameWatch_80224368(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* joint = (HSD_JObj*) gobj->hsd_obj;
-    PAD_STACK(8);
-
-    Ground_801C2ED0(joint, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTGameWatch_802243B8(Ground_GObj* gobj)
