@@ -2,6 +2,7 @@
 #define MELEE_IT_INLINES_H
 
 #include "it/types.h"
+#include "mp/mplib.h"
 
 #include <baselib/gobj.h>
 
@@ -16,6 +17,27 @@ static inline Item* GetItemData(HSD_GObj* gobj)
 static inline void itResetVelocity(Item* ip)
 {
     ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0F;
+}
+
+/// Check whether the grapple chain from @p head to the tip @p pos or to its
+/// owner @p fp collides with terrain (shared by Link's hookshot and Samus's
+/// grapple beam).
+static inline bool itGrappleCheckCollision(ItemLink* head, Fighter* fp,
+                                           Vec3* pos)
+{
+    Vec3* head_pos = &head->pos;
+
+    if (mpCheckAllRemap(NULL, NULL, NULL, NULL, -1, -1, pos->x, pos->y,
+                        head->pos.x, head->pos.y))
+    {
+        return true;
+    } else if (mpCheckAllRemap(NULL, NULL, NULL, NULL, -1, -1, fp->cur_pos.x,
+                               fp->cur_pos.y, head_pos->x, head_pos->y))
+    {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 /// @todo Rename; probably gets a specific joint for items
