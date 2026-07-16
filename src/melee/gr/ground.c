@@ -3180,9 +3180,6 @@ HSD_GObj* Ground_801C57C8(void)
     return Player_GetEntityAtIndex(0, 1);
 }
 
-/// @param arg0 Unused by the implementation; the game's only caller
-///              (fn_80180C60 at 0x80180C88) materializes an explicit 0
-///              argument, so the original signature takes a parameter.
 f32 Ground_801C57F0(void)
 {
     return stage_info.x6E0;
