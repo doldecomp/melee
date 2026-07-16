@@ -191,9 +191,7 @@ void itEgg_Logic3_Thrown(Item_GObj* gobj)
 
 void itEgg_UnkMotion3_Phys(Item_GObj* gobj)
 {
-    ItemAttr* attr = GET_ITEM(gobj)->xCC_item_attr;
-    it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
-    it_80274658(gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
 }
 
 bool itEgg_UnkMotion3_Coll(Item_GObj* gobj)
