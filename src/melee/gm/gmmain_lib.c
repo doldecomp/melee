@@ -927,7 +927,7 @@ int GetRumbleSettingOfPort(s32 arg0)
 
 void gmMainLib_8015ED4C(s32 arg0, s8 arg1)
 {
-    gmMainLib_804D3EE0->thing.x1CB0.rumble[arg0] = arg1;
+    gmMainLib_8015CC58()->rumble[arg0] = arg1;
 }
 
 s32 gmMainLib_8015ED5C(void)
@@ -942,103 +942,103 @@ void gmMainLib_8015ED68(s32 arg0)
 
 u8 gmMainLib_8015ED74(void)
 {
-    return gmMainLib_804D3EE0->thing.x1CB0.sound_balance;
+    return gmMainLib_8015CC58()->sound_balance;
 }
 
 void gmMainLib_8015ED80(u8 arg0)
 {
-    gmMainLib_804D3EE0->thing.x1CB0.sound_balance = arg0;
+    gmMainLib_8015CC58()->sound_balance = arg0;
 }
 
 u16* gmMainLib_8015ED8C(void)
 {
-    return &gmMainLib_804D3EE0->thing.x1868;
+    return &gmMainLib_8015CC40()->x1868;
 }
 
 struct gmm_retval_ED98* gmMainLib_8015ED98(void)
 {
-    return &gmMainLib_804D3EE0->thing.unk_8;
+    return &gmMainLib_8015CC40()->unk_8;
 }
 
 u16* gmMainLib_8015EDA4(void)
 {
-    return &gmMainLib_804D3EE0->thing.x186A;
+    return &gmMainLib_8015CC40()->x186A;
 }
 
 struct gmm_retval_EDB0* gmMainLib_8015EDB0(void)
 {
-    return &gmMainLib_804D3EE0->thing.unk_28;
+    return &gmMainLib_8015CC40()->unk_28;
 }
 
 struct gmm_retval_EDBC* gmMainLib_8015EDBC(void)
 {
-    return &gmMainLib_804D3EE0->thing.unk_30;
+    return &gmMainLib_8015CC40()->unk_30;
 }
 
 struct gmm_x1868_1A8_t* gmMainLib_8015EDC8(void)
 {
-    return &gmMainLib_804D3EE0->thing.unk_1A8;
+    return &gmMainLib_8015CC40()->unk_1A8;
 }
 
 s32 gmMainLib_8015EDD4(void)
 {
-    return gmMainLib_804D3EE0->thing.x186C & 4;
+    return gmMainLib_8015CC40()->x186C & 4;
 }
 
 void gmMainLib_8015EDE4(void)
 {
-    gmMainLib_804D3EE0->thing.x186C |= 4;
+    gmMainLib_8015CC40()->x186C |= 4;
 }
 
 void gmMainLib_8015EDF8(void)
 {
-    gmMainLib_804D3EE0->thing.x186C &= 0xFFFFFFFB;
+    gmMainLib_8015CC40()->x186C &= 0xFFFFFFFB;
 }
 
 s32 gmMainLib_8015EE0C(void)
 {
-    return gmMainLib_804D3EE0->thing.x186C & 1;
+    return gmMainLib_8015CC40()->x186C & 1;
 }
 
 void gmMainLib_8015EE1C(void)
 {
-    gmMainLib_804D3EE0->thing.x186C |= 1;
+    gmMainLib_8015CC40()->x186C |= 1;
 }
 
 void gmMainLib_8015EE30(void)
 {
-    gmMainLib_804D3EE0->thing.x186C &= 0xFFFFFFFE;
+    gmMainLib_8015CC40()->x186C &= 0xFFFFFFFE;
 }
 
 s32 gmMainLib_8015EE44(void)
 {
-    return gmMainLib_804D3EE0->thing.x186C & 2;
+    return gmMainLib_8015CC40()->x186C & 2;
 }
 
 void gmMainLib_8015EE54(void)
 {
-    gmMainLib_804D3EE0->thing.x186C |= 2;
+    gmMainLib_8015CC40()->x186C |= 2;
 }
 
 void gmMainLib_8015EE68(void)
 {
-    gmMainLib_804D3EE0->thing.x186C &= 0xFFFFFFFD;
-    gmMainLib_804D3EE0->thing.x1CB0.stage_mask = gmMainLib_803D4A60[6];
+    gmMainLib_8015CC40()->x186C &= 0xFFFFFFFD;
+    gmMainLib_8015CC58()->stage_mask = gmMainLib_803D4A60[6];
 }
 
 s32 gmMainLib_8015EE90(void)
 {
-    return gmMainLib_804D3EE0->thing.x186C & 8;
+    return gmMainLib_8015CC40()->x186C & 8;
 }
 
 void gmMainLib_8015EEA0(void)
 {
-    gmMainLib_804D3EE0->thing.x186C |= 8;
+    gmMainLib_8015CC40()->x186C |= 8;
 }
 
 void gmMainLib_8015EEB4(void)
 {
-    gmMainLib_804D3EE0->thing.x186C &= 0xFFFFFFF7;
+    gmMainLib_8015CC40()->x186C &= 0xFFFFFFF7;
 }
 
 void gmMainLib_8015EEC8(void)
@@ -1050,7 +1050,7 @@ void gmMainLib_8015EEC8(void)
         struct FighterData* data = GetPersistentFighterData(i);
         memzero(&data->x7C, sizeof(data->x7C));
     }
-    memzero(&gmMainLib_804D3EE0->thing.x1A68, 0xD8);
+    memzero(&gmMainLib_8015CC40()->x1A68, 0xD8);
 }
 
 void gmMainLib_8015EF30(struct gmMainLib_8015EF30_s* arg0)
@@ -1142,20 +1142,17 @@ void gmMainLib_8015F260(void)
 
 void gmMainLib_8015F464(void)
 {
-    memzero(&gmMainLib_804D3EE0->thing.unk_8,
-            sizeof(gmMainLib_804D3EE0->thing.unk_8));
+    memzero(gmMainLib_8015ED98(), sizeof(*gmMainLib_8015ED98()));
 }
 
 void gmMainLib_8015F490(void)
 {
-    memzero(&gmMainLib_804D3EE0->thing.unk_28,
-            sizeof(gmMainLib_804D3EE0->thing.unk_28));
+    memzero(gmMainLib_8015EDB0(), sizeof(*gmMainLib_8015EDB0()));
 }
 
 void gmMainLib_8015F4BC(void)
 {
-    memzero(&gmMainLib_804D3EE0->thing.unk_30,
-            sizeof(gmMainLib_804D3EE0->thing.unk_30));
+    memzero(gmMainLib_8015EDBC(), sizeof(*gmMainLib_8015EDBC()));
 }
 
 u32 gmMainLib_8015F4E8(void)
