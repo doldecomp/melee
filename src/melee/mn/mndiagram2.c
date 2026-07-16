@@ -614,8 +614,7 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
     Vec3 sp20;
     Diagram2* data;
     HSD_JObj* jobj;
-    char* base;
-    u16* table;
+    MnDiagram2RowLayout* base;
     HSD_Text* text;
     f32 f31;
     f32 f30;
@@ -623,7 +622,7 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
     Diagram2* user_data = gobj->user_data;
 
     data = user_data;
-    base = (char*) &mnDiagram2_803EEAD0;
+    base = &mnDiagram2_803EEAD0;
 
     jobj = data->row0_ref;
     HSD_ASSERT(0x3EE, jobj);
@@ -633,10 +632,10 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
     HSD_ASSERT(0x3EE, jobj);
     f30 = jobj->translate.y - f31;
 
-    lb_8000B1CC(data->row0_ref, (Vec3*) (base + 0xC), &sp20);
+    lb_8000B1CC(data->row0_ref, &base->label_pos, &sp20);
 
     {
-        u32 r22 = (u8) row_idx;
+        u32 r22 = row_idx;
         f32 ny = -sp20.y;
         f32 temp_f31 = -f30 * (f32) r22;
         text = HSD_SisLib_803A5ACC(0, 1, sp20.x, ny + temp_f31, sp20.z,
@@ -645,17 +644,15 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
         {
             data->row_labels[row_idx] = text;
 
-            table = (u16*) (base + ((stat_type << 1) & 0x1FE));
             {
-                HSD_SisLib_803A6368(text, table[0x18]);
+                HSD_SisLib_803A6368(text, base->label_ids[stat_type]);
 
                 {
-                    int r21 = table[0x30];
+                    int r21 = base->unit_glyph_ids[stat_type];
                     if (r21 != 0xFFFF) {
                         HSD_Text* text2;
                         int var_r3;
-                        lb_8000B1CC(data->row0_ref, (Vec3*) (base + 0xC),
-                                    &sp20);
+                        lb_8000B1CC(data->row0_ref, &base->label_pos, &sp20);
                         {
                             f32 py2 = -sp20.y + temp_f31;
                             text2 = HSD_SisLib_803A5ACC(
@@ -692,10 +689,10 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                             mnDiagram2_GetStatValue(mode, stat_type,
                                                     entity_idx),
                             0);
-                        HSD_JObjSetTranslateX(jobj, ((f32*) base)[9]);
+                        HSD_JObjSetTranslateX(jobj, base->icon_pos.x);
                         HSD_JObjSetTranslateY(jobj, (f30 * (f32) row_idx) +
-                                                        ((f32*) base)[10]);
-                        HSD_JObjSetTranslateZ(jobj, ((f32*) base)[11]);
+                                                        base->icon_pos.y);
+                        HSD_JObjSetTranslateZ(jobj, base->icon_pos.z);
 
                         HSD_JObjAddChild(data->icon_parent, jobj);
                         return;
@@ -707,8 +704,7 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                     data->row_values[row_idx] = text3;
                     text3->font_size.x = mnDiagram2_804DBFE0;
                     text3->font_size.y = mnDiagram2_804DBFE4;
-                    lb_8000B1CC(data->icon_parent, (Vec3*) (base + 0x18),
-                                &sp20);
+                    lb_8000B1CC(data->icon_parent, &base->value_pos, &sp20);
                     {
                         f32 py = -sp20.y + temp_f31;
                         text3->pos_x = sp20.x;

@@ -87,10 +87,7 @@ void itKyasarinEgg_Logic28_Thrown(Item_GObj* gobj)
 
 void itKyasarinegg_UnkMotion3_Phys(Item_GObj* gobj)
 {
-    ItemAttr* attrs = GET_ITEM(gobj)->xCC_item_attr;
-
-    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
-    it_80274658(gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
 }
 
 int itKyasarinegg_UnkMotion3_Coll(Item_GObj* gobj)
@@ -112,10 +109,7 @@ void it_802EFCC0(Item_GObj* gobj)
 
 void itKyasarinegg_UnkMotion1_Phys(Item_GObj* gobj)
 {
-    ItemAttr* attrs = GET_ITEM(gobj)->xCC_item_attr;
-
-    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
-    it_80274658(gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
 }
 
 int itKyasarinegg_UnkMotion1_Coll(Item_GObj* gobj)
