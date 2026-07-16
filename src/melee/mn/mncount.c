@@ -552,14 +552,9 @@ void mnCount_CreateRow(HSD_GObj* gobj, int visible_row, mnCount_row data_row)
     HSD_Text** label_slot;
     HSD_Text** label_text;
     HSD_Text* text;
-    unsigned int row_value;
-    int row_value_2;
-
     SelectableCharacterKind selkind;
-
     HSD_Text** value_base;
     HSD_Text** value_text;
-
     float y;
     static GXColor text_color = { 0xAA, 0xAA, 0xAA, 0xFF };
 
