@@ -24,20 +24,6 @@
 #include <melee/mn/mnmainrule.h>
 #include <melee/sc/types.h>
 
-static void sdata2_order(void)
-{
-    (void) -14.9526997f;
-    (void) -4.63689995f;
-    (void) 17.5f;
-    (void) 200.0f;
-    (void) 300.0f;
-    (void) 0.052099999f;
-    (void) -0.520999968f;
-    (void) U32_TO_F32;
-    (void) S32_TO_F32;
-    (void) 0.0f;
-}
-
 extern StaticModelDesc MenMainCursorIs_Top;
 extern StaticModelDesc MenMainConIs_Top;
 extern HSD_GObj* mnItemSw_804D6BE8;
@@ -386,6 +372,17 @@ void mnItemSw_80234104(HSD_GObj* gobj)
     HSD_JObj* item_jobj;
     MnItemSwData* tmp = gobj->user_data;
     MnItemSwData* data = tmp;
+
+    /// @remark Emits fn_80234C24's literals ahead of this function's
+    /// int-to-float conversion constants so .sdata2 keeps its layout.
+    (void) -14.9527f;
+    (void) -4.6369f;
+    (void) 17.5f;
+    (void) 200.0f;
+    (void) 300.0f;
+    (void) 0.0521f;
+    (void) -0.52099997f;
+    (void) U32_TO_F32;
 
     HSD_JObjClearFlagsAll(data->jobjs[4], JOBJ_HIDDEN);
     HSD_JObjClearFlagsAll(data->jobjs[6], JOBJ_HIDDEN);
