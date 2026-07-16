@@ -85,29 +85,29 @@ pre-commit run --all-files # Run the hook once on existing code
 - When a section of a struct is only functioning as padding, it should be written as `x<Hex-Offset>_pad` and use a u8 array.
 - Struct member names should be snake_case.
 - Examples:
-        - Yes:
+    - Yes:
 
-        ```c
-          typedef struct Player {
-              /* 0x00 */ u32 x0;
-              /* 0x04 */ u8 x4_pad[12];
-              /* 0x10 */ u8 well_known_something;
-              /* 0x11 */ u8 some_bitmask
-          };
-          ```
+      ```c
+      typedef struct Player {
+          /* 0x00 */ u32 x0;
+          /* 0x04 */ u8 x4_pad[12];
+          /* 0x10 */ u8 well_known_something;
+          /* 0x11 */ u8 some_bitmask
+      };
+      ```
 
-        - No:
+    - No:
 
-          ```c
-          typedef struct Player {
-              u8 thing;
-              u32 something;
-              u32 something2;
-              u32 something3;
-              u8 well_known_something;
-              u8 bits
-          };
-          ```
+      ```c
+      typedef struct Player {
+          u8 thing;
+          u32 something;
+          u32 something2;
+          u32 something3;
+          u8 well_known_something;
+          u8 bits
+      };
+      ```
 
 - If you copy structs from another project
   - remove any members from the struct which are not part of your code or existing code
