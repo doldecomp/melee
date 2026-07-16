@@ -2,6 +2,7 @@
 
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
+#include "ftCommon/inlines.h"
 #include "ftKoopa/ftKp_Init.h"
 
 #include <trigf.h>
@@ -17,7 +18,6 @@
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
-#include <melee/ft/fttransition.h>
 #include <melee/ft/inlines.h>
 #include <melee/it/item.h>
 #include <melee/it/items/itkoopaflame.h>
