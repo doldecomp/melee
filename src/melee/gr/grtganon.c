@@ -123,12 +123,7 @@ void grTGanon_802248A4(Ground_GObj* gobj)
 
 void grTGanon_802248A8(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* joint = (HSD_JObj*) gobj->hsd_obj;
-    PAD_STACK(8);
-
-    Ground_801C2ED0(joint, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTGanon_802248F8(Ground_GObj* gobj)
@@ -149,12 +144,7 @@ void grTGanon_80224934(Ground_GObj* gobj)
 
 void grTGanon_80224938(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* joint = (HSD_JObj*) gobj->hsd_obj;
-    PAD_STACK(8);
-
-    Ground_801C2ED0(joint, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTGanon_80224988(Ground_GObj* gobj)
