@@ -246,7 +246,7 @@ void grHomeRun_8021CB20(Ground_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, false);
     mpJointSetCb1(0, gp, (mpLib_Callback) fn_8021E994);
 
-    archive = grDatFiles_801C6324();
+    archive = grDatFiles_GetArchive();
     vars->xD4 = GObj_Create(0x11, 0x13, 0);
     cobj = lb_80013B14(&cobj_desc);
     HSD_CObjSetPerspective(cobj, 30.0F, 1.4F);

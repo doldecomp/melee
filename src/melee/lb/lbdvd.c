@@ -451,14 +451,14 @@ HSD_Archive* lbDvd_8001819C(const char* basename)
     return archive;
 }
 
-PreloadCacheScene* lbDvd_8001822C(void)
+PreloadCacheScene* lbDvd_GetPreloadCacheScene(void)
 {
     return &preloadCache.scene;
 }
 
 void lbDvd_8001823C(void)
 {
-    preloadCache.scene.mode_scene_changes =
+    lbDvd_GetPreloadCacheScene()->mode_scene_changes =
         preloadCache.new_scene.mode_scene_changes + 1;
 }
 
@@ -470,13 +470,13 @@ void lbDvd_80018254(void)
 
     PAD_STACK(0x18);
 
-    if (memcmp(&preloadCache.new_scene, &preloadCache.scene,
+    if (memcmp(&preloadCache.new_scene, lbDvd_GetPreloadCacheScene(),
                sizeof(PreloadCacheScene)) == 0)
     {
         return;
     }
 
-    preloadCache.new_scene = preloadCache.scene;
+    preloadCache.new_scene = *lbDvd_GetPreloadCacheScene();
     enabled = OSDisableInterrupts();
 
     for (i = 0; i < (signed) ARRAY_SIZE(preloadCache.entries); i++) {
@@ -704,16 +704,16 @@ void lbDvd_80018C6C(void)
 {
     switch (preloadCache.persistent_heaps) {
     case 1:
-        preloadCache.scene.is_heap_persistent[0] = true;
+        lbDvd_GetPreloadCacheScene()->is_heap_persistent[0] = true;
         break;
     case 2:
-        preloadCache.scene.is_heap_persistent[0] = true;
-        preloadCache.scene.is_heap_persistent[1] = true;
+        lbDvd_GetPreloadCacheScene()->is_heap_persistent[0] = true;
+        lbDvd_GetPreloadCacheScene()->is_heap_persistent[1] = true;
         break;
     case 3:
-        preloadCache.scene.is_heap_persistent[0] = true;
-        preloadCache.scene.is_heap_persistent[1] = true;
-        preloadCache.scene.game_cache = lbDvd_803BA638.game_cache;
+        lbDvd_GetPreloadCacheScene()->is_heap_persistent[0] = true;
+        lbDvd_GetPreloadCacheScene()->is_heap_persistent[1] = true;
+        lbDvd_GetPreloadCacheScene()->game_cache = lbDvd_803BA638.game_cache;
     case 0:
         break;
     }
@@ -740,7 +740,7 @@ void lbDvd_80018CF4(int arg0)
     int i;
 
     if (preloadCache.persistent_heaps != arg0) {
-        preloadCache.scene.mode_scene_changes =
+        lbDvd_GetPreloadCacheScene()->mode_scene_changes =
             preloadCache.new_scene.mode_scene_changes + 1;
     }
     preloadCache.persistent_heaps = arg0;
@@ -752,22 +752,22 @@ void lbDvd_80018CF4(int arg0)
     }
     switch (preloadCache.persistent_heaps) {
     case 0:
-        preloadCache.scene.is_heap_persistent[0] =
+        lbDvd_GetPreloadCacheScene()->is_heap_persistent[0] =
             lbDvd_803BA638.is_heap_persistent[0];
-        preloadCache.scene.is_heap_persistent[1] =
+        lbDvd_GetPreloadCacheScene()->is_heap_persistent[1] =
             lbDvd_803BA638.is_heap_persistent[1];
-        preloadCache.scene.game_cache = lbDvd_803BA638.game_cache;
+        lbDvd_GetPreloadCacheScene()->game_cache = lbDvd_803BA638.game_cache;
         break;
     case 1:
         lbHeap_800158D0(2, 0);
-        preloadCache.scene.is_heap_persistent[1] =
+        lbDvd_GetPreloadCacheScene()->is_heap_persistent[1] =
             lbDvd_803BA638.is_heap_persistent[1];
-        preloadCache.scene.game_cache = lbDvd_803BA638.game_cache;
+        lbDvd_GetPreloadCacheScene()->game_cache = lbDvd_803BA638.game_cache;
         break;
     case 2:
         lbHeap_800158D0(2, 0);
         lbHeap_800158D0(3, 0);
-        preloadCache.scene.game_cache = lbDvd_803BA638.game_cache;
+        lbDvd_GetPreloadCacheScene()->game_cache = lbDvd_803BA638.game_cache;
         break;
     case 3:
         lbHeap_800158D0(2, 0);
@@ -800,7 +800,7 @@ void lbDvd_80018F68(void)
 {
     int i;
     preloadCache.persistent_heaps = 0;
-    preloadCache.scene = lbDvd_803BA638;
+    *lbDvd_GetPreloadCacheScene() = lbDvd_803BA638;
     preloadCache.new_scene = lbDvd_803BA638;
     for (i = 0; i < (signed) ARRAY_SIZE(preloadCache.entries); i++) {
         preloadCache.entries[i] = lbDvd_803BA68C;

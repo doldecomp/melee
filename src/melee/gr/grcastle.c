@@ -392,7 +392,7 @@ void grCastle_801CD658(Ground_GObj* gobj)
         gp->gv.castle9.dynamics[i].data = NULL;
     }
 
-    archive = grDatFiles_801C6324();
+    archive = grDatFiles_GetArchive();
     if (archive != NULL) {
         flag3 =
             HSD_ArchiveGetPublicAddress(archive->unk0, "dynamicsdata_flag3");

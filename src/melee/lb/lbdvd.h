@@ -25,7 +25,7 @@ typedef void (*lbDvd_Callback)(int, int index, int, int);
 /* 017E64 */ void lbDvd_80017E64(int, int, void*, bool);
 /* 017EBC */ void* lbDvd_GetPreloadedArchive(ssize_t entry_num);
 /* 01819C */ HSD_Archive* lbDvd_8001819C(const char* basename);
-/* 01822C */ PreloadCacheScene* lbDvd_8001822C(void);
+/* 01822C */ PreloadCacheScene* lbDvd_GetPreloadCacheScene(void);
 /* 01823C */ void lbDvd_8001823C(void);
 /* 018254 */ void lbDvd_80018254(void);
 /* 0187F4 */ int lbDvd_800187F4(int);

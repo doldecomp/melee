@@ -5066,7 +5066,7 @@ void mnCharSel_802669F4_OnFrame(void)
 
     mnCharSel_804D6CEC += 1;
     if (mnCharSel_804D6CF6 <= 1) {
-        temp_r3 = &lbDvd_8001822C()->game_cache;
+        temp_r3 = &lbDvd_GetPreloadCacheScene()->game_cache;
         if (mnCharSel_804D6CF5 == 1) {
             CSSData* css = mnCharSel_804D6CB0;
             temp_r0 = css->data.data.players[mnCharSel_804D6CF0].slot_type;

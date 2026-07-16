@@ -2615,7 +2615,7 @@ void grCorneria_801E277C(Ground_GObj* gobj, struct grSmashTaunt_GroundVars* gv)
             grAnime_801C787C(gobj, gv->joint_idx0, 7);
             grAnime_801C787C(gobj, gv->joint_idx1, 7);
             grAnime_801C787C(gobj, gv->joint_idx2, 7);
-            archive = grDatFiles_801C6324();
+            archive = grDatFiles_GetArchive();
             sp18 = grCn_804DB24C;
             HSD_SisLib_803A611C(1, NULL, 9, 0xD, 0, 1, 0, 7);
             HSD_SisLib_804D1124[1] = HSD_ArchiveGetPublicAddress(

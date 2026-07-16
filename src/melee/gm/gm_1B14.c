@@ -594,7 +594,7 @@ void gm_801B1C24(GameScene* arg0)
             }
         }
     }
-    cache = &lbDvd_8001822C()->game_cache;
+    cache = &lbDvd_GetPreloadCacheScene()->game_cache;
     cache->entries[2].char_id = (s8) vs->data.players[2].c_kind;
     cache->entries[2].color = vs->data.players[2].color;
     cache->entries[3].char_id = (s8) vs->data.players[3].c_kind;
@@ -744,7 +744,7 @@ void gm_801B24B4(GameScene* arg0)
     Unk80433380_48* temp_r31_2;
     struct GameCache* temp_r31;
 
-    temp_r31 = &lbDvd_8001822C()->game_cache;
+    temp_r31 = &lbDvd_GetPreloadCacheScene()->game_cache;
     lbDvd_800174BC();
     temp_r31->mode_id = GM_CAMERA_MODE;
     lbDvd_80018254();
@@ -778,7 +778,7 @@ void gm_801B254C(GameScene* arg0)
 
     temp_r30->data = *temp_r31;
 
-    temp_r30_2 = &lbDvd_8001822C()->game_cache;
+    temp_r30_2 = &lbDvd_GetPreloadCacheScene()->game_cache;
     lbDvd_800174BC();
     temp_r30_2->mode_id = GM_CAMERA_MODE;
     lbDvd_80018254();

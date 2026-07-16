@@ -85,7 +85,7 @@ void gm_801B98E8(GameScene* scene)
     gm_801B06B0(css, 0x10, vs->data.players[0].c_kind, 1,
                 vs->data.players[0].color, vs->data.players[0].xA, 0,
                 gm_804D68F8);
-    game_cache = &lbDvd_8001822C()->game_cache;
+    game_cache = &lbDvd_GetPreloadCacheScene()->game_cache;
     lbDvd_800174BC();
     game_cache->entries[1].char_id = CHKIND_SANDBAG;
     game_cache->entries[1].color = 0;

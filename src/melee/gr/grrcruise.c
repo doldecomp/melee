@@ -328,7 +328,7 @@ void grRCruise_801FF7A4(Ground_GObj* gobj)
     Ground_801C2ED0(jobj, gp->map_id);
     grAnime_801C8138(stage_gobj, gp->map_id, 0);
     grAnime_801C752C(jobj, 1, 30628, HSD_AObjSetFlags, 3, AOBJ_LOOP);
-    archive = grDatFiles_801C6324();
+    archive = grDatFiles_GetArchive();
     if (archive != NULL && (data = HSD_ArchiveGetPublicAddress(
                                 archive->unk0, "dynamicsdata_shipflag"),
                             data != NULL))

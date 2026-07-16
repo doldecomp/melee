@@ -1317,7 +1317,7 @@ void fn_8019EE80(TmVsData* arg0)
     struct GameCache* game_cache;
     s32 i;
 
-    game_cache = &lbDvd_8001822C()->game_cache;
+    game_cache = &lbDvd_GetPreloadCacheScene()->game_cache;
     for (i = 0; i < gm_8018F634()->x30; i++) {
         game_cache->entries[i].char_id = arg0->char_id[i];
         game_cache->entries[i].color = arg0->color[i];
@@ -1335,7 +1335,7 @@ void fn_8019EF08(TmVsData* arg0)
     struct GameCache* game_cache;
     s32 i;
 
-    game_cache = &lbDvd_8001822C()->game_cache;
+    game_cache = &lbDvd_GetPreloadCacheScene()->game_cache;
     for (i = 0; i < 4; i++) {
         if (arg0->slot_type[i] != Gm_PKind_NA) {
             game_cache->entries[i].char_id = arg0->char_id[i];
