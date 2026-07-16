@@ -3,6 +3,7 @@
 #include "gr/ground.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_26B1_inline.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "it/itgroundcoll.h"
@@ -130,7 +131,7 @@ bool itTincle_Logic13_DmgReceived(Item_GObj* gobj)
 
 bool itTincle_Logic13_DmgDealt(Item_GObj* gobj)
 {
-    if (GET_ITEM(gobj)->msid != 7) {
+    if (itGetMotionId(gobj) != 7) {
         it_802EC1F4(gobj);
     }
     return false;

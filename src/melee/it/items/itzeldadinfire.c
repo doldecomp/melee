@@ -14,6 +14,7 @@
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
+#include "it/it_26B1_inline.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "it/items/itzeldadinfireexplode.h"
@@ -46,7 +47,7 @@ typedef struct {
 
 Fighter_GObj* it_802C3AF0(Item_GObj* gobj)
 {
-    return GET_ITEM(gobj)->owner;
+    return itGetOwner(gobj);
 }
 
 bool it_802C3AFC(Item_GObj* gobj, CollData* cd)

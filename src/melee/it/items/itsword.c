@@ -11,6 +11,7 @@
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
+#include "it/it_26B1_inline.h"
 #include "it/it_2725.h"
 #include "it/it_3F14.h"
 #include "it/itCommonItems.h"
@@ -510,7 +511,7 @@ bool itSword_UnkMotion4_Coll(Item_GObj* gobj)
 
 bool itSword_Logic12_DmgDealt(Item_GObj* gobj)
 {
-    if (GET_ITEM(gobj)->msid == 3) {
+    if (itGetMotionId(gobj) == 3) {
         itColl_BounceOffVictim(gobj);
     }
     return false;

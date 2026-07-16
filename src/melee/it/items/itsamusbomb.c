@@ -14,6 +14,7 @@
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
+#include "it/it_26B1_inline.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "lb/lb_00B0.h"
@@ -200,8 +201,7 @@ bool itSamusbomb_UnkMotion2_Coll(Item_GObj* gobj)
 
 bool itSamusBomb_Logic50_DmgDealt(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    if (ip->msid != 3) {
+    if (itGetMotionId(gobj) != 3) {
         it_802B53CC(gobj);
     }
     return false;
@@ -209,8 +209,7 @@ bool itSamusBomb_Logic50_DmgDealt(Item_GObj* gobj)
 
 bool itSamusBomb_Logic50_Clanked(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    if (ip->msid != 3) {
+    if (itGetMotionId(gobj) != 3) {
         it_802B53CC(gobj);
     }
     return false;
@@ -218,8 +217,7 @@ bool itSamusBomb_Logic50_Clanked(Item_GObj* gobj)
 
 bool itSamusBomb_Logic50_HitShield(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    if (ip->msid != 3) {
+    if (itGetMotionId(gobj) != 3) {
         it_802B53CC(gobj);
     }
     return false;

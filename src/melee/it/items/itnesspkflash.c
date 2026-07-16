@@ -13,6 +13,7 @@
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
+#include "it/it_26B1_inline.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "it/items/itnesspkflashexplode.h"
@@ -47,13 +48,12 @@ static inline void itNesspkflash_SetScale(HSD_JObj* jobj, Item* ip,
 
 Fighter_GObj* it_802AA7E4(Item_GObj* gobj)
 {
-    return GET_ITEM(gobj)->owner;
+    return itGetOwner(gobj);
 }
 
 bool it_802AA7F0(Item_GObj* gobj)
 {
-    Item* it = GET_ITEM(gobj);
-    if (it->msid == 0x2) {
+    if (itGetMotionId(gobj) == 0x2) {
         return 1;
     }
     return 0;

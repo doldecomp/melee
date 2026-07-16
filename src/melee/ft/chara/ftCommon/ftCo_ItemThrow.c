@@ -327,7 +327,7 @@ inline float getAnimSpeed(Fighter_GObj* gobj, int msid)
     if (msid >= ftCo_MS_LightThrowF4) {
         speed *= p_ftCommonData->x400;
     }
-    speed *= (1 / it_8026B334(fp->item_gobj));
+    speed *= (1 / itGetDamageMultiplier(fp->item_gobj));
     return speed;
 }
 
@@ -568,7 +568,7 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                                               throw_speed);
                             } else if (msid >= (FtMoveId) ftCo_MS_LightThrowF4)
                             {
-                                if (it_8026B2B4(fp->item_gobj) == 1) {
+                                if (itIsHeavy(fp->item_gobj) == 1) {
                                     ftCommon_8007EBAC(fp, 29, 0);
                                 } else {
                                     ftCommon_8007EBAC(fp, 27, 0);
@@ -576,7 +576,7 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                                 Item_8026AD20(fp->item_gobj, &vec2, &vec1,
                                               throw_speed);
                             } else {
-                                if (it_8026B2B4(fp->item_gobj) == 1) {
+                                if (itIsHeavy(fp->item_gobj) == 1) {
                                     ftCommon_8007EBAC(fp, 28, 0);
                                 } else {
                                     ftCommon_8007EBAC(fp, 26, 0);

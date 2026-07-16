@@ -8,6 +8,7 @@
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
+#include "it/it_26B1_inline.h"
 #include "it/it_2725.h"
 #include "it/it_3F14.h"
 #include "it/item.h"
@@ -153,8 +154,7 @@ bool itStarrod_UnkMotion3_Coll(Item_GObj* gobj)
 
 bool itStarRod_Logic22_DmgDealt(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    if (ip->msid == 3 || ip->msid == 4) {
+    if (itGetMotionId(gobj) == 3 || itGetMotionId(gobj) == 4) {
         itColl_BounceOffVictim(gobj);
     }
     return false;
@@ -183,8 +183,7 @@ bool itStarrod_UnkMotion5_Coll(Item_GObj* gobj)
 
 bool itStarRod_Logic22_Clanked(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    if (ip->msid == 3 || ip->msid == 4) {
+    if (itGetMotionId(gobj) == 3 || itGetMotionId(gobj) == 4) {
         itColl_BounceOffVictim(gobj);
     }
     return false;
@@ -197,8 +196,7 @@ bool itStarRod_Logic22_Reflected(Item_GObj* gobj)
 
 bool itStarRod_Logic22_HitShield(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    if (ip->msid == 3 || ip->msid == 4) {
+    if (itGetMotionId(gobj) == 3 || itGetMotionId(gobj) == 4) {
         itColl_BounceOffVictim(gobj);
     }
     return false;

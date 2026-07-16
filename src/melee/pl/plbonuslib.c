@@ -580,7 +580,7 @@ void pl_8003E70C(Item_GObj* igobj)
     pl_StaleMoveTableExt_t* temp_r31;
     s32 temp_r3;
 
-    HSD_GObj* temp_r30 = it_8026BC78(igobj);
+    HSD_GObj* temp_r30 = itGetOwner(igobj);
 
     HSD_ASSERTMSG(634, 0xA1 <= itGetKind(igobj) && itGetKind(igobj) < 0xBF,
                   "It_PKind_Start <= itGetKind(igobj) && itGetKind(igobj) < "
@@ -604,7 +604,7 @@ u32 pl_8003E7D4(int arg0, int kind)
 void pl_8003E854(int arg0, int arg1, Item_GObj* arg2)
 {
     HSD_GObj* temp_r31 = Player_GetEntityAtIndex(arg0, arg1);
-    HSD_GObj* temp_r3 = it_8026BC78(arg2);
+    HSD_GObj* temp_r3 = itGetOwner(arg2);
     u8 temp_r31_2;
 
     if ((temp_r31 != temp_r3) && (it_8026B7BC(arg2) != 0)) {

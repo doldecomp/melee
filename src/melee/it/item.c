@@ -726,7 +726,7 @@ static void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
     } else if (ftLib_80086960(spawnItem->x0_parent_gobj)) {
         item_data->x20_team_id = ftLib_80086EB4(spawnItem->x0_parent_gobj);
     } else if (it_80272D1C(spawnItem->x0_parent_gobj)) {
-        item_data->x20_team_id = it_8026B7B0(spawnItem->x0_parent_gobj);
+        item_data->x20_team_id = itGetTeamId(spawnItem->x0_parent_gobj);
     } else {
         item_data->x20_team_id = -1;
     }

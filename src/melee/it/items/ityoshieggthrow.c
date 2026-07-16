@@ -4,6 +4,7 @@
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
+#include "it/it_26B1_inline.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 
@@ -121,7 +122,7 @@ bool itYoshieggthrow_UnkMotion1_Coll(Item_GObj* gobj)
 
 bool it_802B2C04(Item_GObj* gobj)
 {
-    if (((Item*) gobj->user_data)->msid != 2) {
+    if (itGetMotionId(gobj) != 2) {
         it_802B2C38(gobj);
     }
     return false;
@@ -166,8 +167,7 @@ bool itYoshieggthrow_UnkMotion2_Anim(Item_GObj* gobj)
 
 bool it_2725_Logic43_Clanked(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    if (ip->msid != 2) {
+    if (itGetMotionId(gobj) != 2) {
         it_802B2C38(gobj);
     }
     return false;

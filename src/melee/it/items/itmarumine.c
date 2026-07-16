@@ -5,6 +5,7 @@
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
+#include "it/it_26B1_inline.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
 #include "it/item.h"
@@ -102,9 +103,7 @@ void it_802D0AB0(Item_GObj* gobj, Item_GObj* ref)
 
 bool it_802D0AD0(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-
-    if (ip->msid == 4) {
+    if (itGetMotionId(gobj) == 4) {
         it_802D1204(gobj);
     }
     return false;

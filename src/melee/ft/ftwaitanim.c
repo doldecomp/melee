@@ -13,7 +13,7 @@
 
 bool ftCo_8008A698(Fighter* fp)
 {
-    if (fp->item_gobj != NULL && it_8026B320(fp->item_gobj) != 2) {
+    if (fp->item_gobj != NULL && itGetHoldKind(fp->item_gobj) != 2) {
         return true;
     }
     return false;

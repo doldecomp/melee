@@ -9,6 +9,7 @@
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
+#include "it/it_26B1_inline.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
 #include "it/it_3F14.h"
@@ -245,8 +246,7 @@ bool itMsbomb_UnkMotion6_Anim(Item_GObj* gobj)
 
 bool itMSBomb_Logic19_DmgDealt(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    if (ip->msid == 3) {
+    if (itGetMotionId(gobj) == 3) {
         itColl_BounceOffVictim(gobj);
         it_8026B3A8(gobj);
         it_802725D4(gobj);
@@ -296,8 +296,7 @@ bool itMSBomb_Logic19_Reflected(Item_GObj* gobj)
 
 bool itMSBomb_Logic19_HitShield(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    if (ip->msid == 3) {
+    if (itGetMotionId(gobj) == 3) {
         itColl_BounceOffVictim(gobj);
         it_8026B3A8(gobj);
         it_802725D4(gobj);
@@ -307,8 +306,7 @@ bool itMSBomb_Logic19_HitShield(Item_GObj* gobj)
 
 bool itMSBomb_Logic19_ShieldBounced(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    if (ip->msid == 3) {
+    if (itGetMotionId(gobj) == 3) {
         itColl_BounceOffShield(gobj);
     }
     return false;
