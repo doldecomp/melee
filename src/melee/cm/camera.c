@@ -1455,27 +1455,27 @@ static inline void update_transforms(CameraBounds* bounds,
                                      CameraBounds* bounds_copy,
                                      Vec3* fighter_pos)
 {
-    HSD_GObj* gobj;
     bool out_of_range;
     f32 delta;
 
     Camera_80030DF8();
     Camera_800293E0();
     Camera_8002B0E0();
+
     Camera_8002958C(bounds, &cm_80452C68.transform);
     cm_80452C68.transform.target_fov = cm_803BCCA0.x40;
     delta = cm_80452C68.transform.target_fov - cm_80452C68.transform.fov;
     cm_80452C68.transform.fov += delta * cm_803BCCA0.x44;
     Camera_80029BC4(bounds, &cm_80452C68.transform);
 
-    if (Camera_80030AF8() != false && (gobj = Ground_801C57A4()) != NULL &&
-        (ftLib_80086644(gobj, fighter_pos), ABS(fighter_pos->z) > 30.0f))
-    {
-        out_of_range = true;
-    } else {
-        out_of_range = false;
-    }
-    if (out_of_range == 0) {
+    // if (Camera_80030AF8() != false && (gobj = Ground_801C57A4()) != NULL &&
+    //     (ftLib_80086644(gobj, fighter_pos), ABS(fighter_pos->z) > 30.0f))
+    // {
+    //     out_of_range = true;
+    // } else {
+    //     out_of_range = false;
+    // }
+    if (!fighter_z_out_of_range(fighter_pos)) {
         Camera_80029CF8(bounds, &cm_80452C68.transform);
         Camera_8002A768(&cm_80452C68.transform, 0);
     }
@@ -1487,14 +1487,14 @@ static inline void update_transforms(CameraBounds* bounds,
     cm_80452C68.transform_copy.fov += delta * cm_803BCCA0.x44;
     Camera_80029BC4(bounds_copy, &cm_80452C68.transform_copy);
 
-    if (Camera_80030AF8() != 0 && (gobj = Ground_801C57A4()) != NULL &&
-        (ftLib_80086644(gobj, fighter_pos), ABS(fighter_pos->z) > 30.0f))
-    {
-        out_of_range = true;
-    } else {
-        out_of_range = false;
-    }
-    if (out_of_range == false) {
+    // if (Camera_80030AF8() != 0 && (gobj = Ground_801C57A4()) != NULL &&
+    //     (ftLib_80086644(gobj, fighter_pos), ABS(fighter_pos->z) > 30.0f))
+    // {
+    //     out_of_range = true;
+    // } else {
+    //     out_of_range = false;
+    // }
+    if (!fighter_z_out_of_range(fighter_pos)) {
         Camera_80029CF8(bounds_copy, &cm_80452C68.transform_copy);
         Camera_8002A768(&cm_80452C68.transform_copy, 0);
     }
