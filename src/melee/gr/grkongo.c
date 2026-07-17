@@ -682,17 +682,7 @@ void grKongo_801D651C(Ground_GObj* gobj)
     HSD_JObjSetTranslate(jobj, &sp2C);
 }
 
-/// Args for #Ground_801C247C: a dat file index and the index of the
-/// spline to take from that file's spline table.
-///
-/// Defined after #grKongo_801D651C (declared in grkongo.static.h) to
-/// match: at the reference's code for that function, the compiler
-/// addresses this object through the symbol itself rather than a
-/// .rodata section anchor, which MWCC only produces when the object
-/// is not yet defined at the point of use. Verified against the
-/// section-anchored form (lwz offsets 0x24..0x38 off the .rodata
-/// base) produced when the definition precedes the function.
-const grKg_SplineChoiceList grKg_803B7FD4 = {
+/* 3B7FD4 */ const grKg_SplineChoiceList grKg_803B7FD4 = {
     {
         { 7, 4 },
         { 8, 5 },

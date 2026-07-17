@@ -33,6 +33,7 @@
 #include <melee/lb/lbspdisplay.h>
 #include <melee/mp/mplib.h>
 
+/// @todo Emitted only to lay out the .sdata2 literal pool in retail order.
 static void sdata2_order(void)
 {
     (void) 1.0f;
@@ -161,9 +162,6 @@ grGr_StageData grGr_803E76D0 = {
 };
 
 char grGr_803E7728[] = "grgreens.c";
-
-#undef __FILE__
-#define __FILE__ (&grGr_803E7728[0])
 
 static s32 grGr_803E7734[] = {
     0, 1, 0, 1, 0, 2, 0, 1, 0, 2,

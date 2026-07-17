@@ -32,6 +32,7 @@
 #include <baselib/random.h>
 #include <baselib/spline.h>
 
+/// @todo Emitted only to lay out the .sdata2 literal pool in retail order.
 static void sdata2_order(void)
 {
     (void) 30.0f;

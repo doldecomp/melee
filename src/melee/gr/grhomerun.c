@@ -769,77 +769,69 @@ void grHomeRun_8021E4F8(Ground_GObj* arg) {}
 
 void grHomeRun_8021E4FC(Ground_GObj* arg) {}
 
-HSD_GObj* grHomeRun_8021E500(s16 arg)
+HSD_GObj* grHomeRun_8021E500(s16 arg0)
 {
     HSD_JObj* jobj;
     s32 gobj_id;
+    HSD_GObj* gobj;
     HSD_JObj* child;
     Ground* gp;
     s32 idx;
     f32 offset;
 
-    idx = arg / grHr_804D6ADC;
-    idx %= 4;
+    idx = (arg0 / grHr_804D6ADC) % 4;
     if (idx == 0) {
-        if (grHr_804D6ADC - 1 != arg % grHr_804D6ADC) {
+        if (grHr_804D6ADC - 1 != arg0 % grHr_804D6ADC) {
             gobj_id = 4;
         } else {
             gobj_id = 5;
         }
     } else if (idx == 1) {
-        if (grHr_804D6ADC - 1 != arg % grHr_804D6ADC) {
+        if (grHr_804D6ADC - 1 != arg0 % grHr_804D6ADC) {
             gobj_id = 1;
         } else {
             gobj_id = 2;
         }
     } else if (idx == 2) {
-        if (grHr_804D6ADC - 1 != arg % grHr_804D6ADC) {
+        if (grHr_804D6ADC - 1 != arg0 % grHr_804D6ADC) {
             gobj_id = 6;
         } else {
             gobj_id = 7;
         }
     } else if (idx == 3) {
-        if (grHr_804D6ADC - 1 != arg % grHr_804D6ADC) {
+        if (grHr_804D6ADC - 1 != arg0 % grHr_804D6ADC) {
             gobj_id = 8;
         } else {
             gobj_id = 9;
         }
     } else {
-        __assert(grHr_803E821C.filename, 0x3D2, "0");
+        HSD_ASSERT(0x3D2, 0);
     }
 
-    {
-        HSD_GObj* gobj = grHomeRun_8021C82C_noinline(gobj_id);
-        if (!gobj) {
-            __assert(grHr_803E821C.filename, 0x3D5, "gobj");
-        }
-        jobj = GET_JOBJ(gobj);
-        (void) jobj;
-        if (!jobj) {
-            __assert(grHr_803E821C.filename, 0x3D6, "jobj");
-        }
-        (void) (gp = GET_GROUND(gobj));
-        if (!gp) {
-            __assert(grHr_803E821C.filename, 0x3D7, "gp");
-        }
+    gobj = grHomeRun_8021C82C_noinline(gobj_id);
+    HSD_ASSERT(0x3D5, gobj);
+    jobj = GET_JOBJ(gobj);
+    (void) jobj;
+    HSD_ASSERT(0x3D6, jobj);
+    gp = GET_GROUND(gobj);
+    HSD_ASSERT(0x3D7, gp);
 
-        HSD_JObjSetScaleX(jobj, grHr_804D6AE4 * HSD_JObjGetScaleX(jobj));
-        HSD_JObjSetScaleY(jobj, grHr_804D6AE4 * HSD_JObjGetScaleY(jobj));
-        HSD_JObjSetScaleZ(jobj, grHr_804D6AE4 * HSD_JObjGetScaleZ(jobj));
+    HSD_JObjSetScaleX(jobj, grHr_804D6AE4 * HSD_JObjGetScaleX(jobj));
+    HSD_JObjSetScaleY(jobj, grHr_804D6AE4 * HSD_JObjGetScaleY(jobj));
+    HSD_JObjSetScaleZ(jobj, grHr_804D6AE4 * HSD_JObjGetScaleZ(jobj));
 
-        child = HSD_JObjGetChild(jobj);
-        HSD_JObjSetTranslateX(child, 0.0F);
+    child = HSD_JObjGetChild(jobj);
+    HSD_JObjSetTranslateX(child, 0.0F);
 
-        offset = grHr_804D6AE4 * ((f32) arg * (160.0F * Ground_801C0498()));
-        gp->gv.homerun.xD0 =
-            (160.0F * (grHr_804D6AE4 * Ground_801C0498())) + offset;
-        HSD_JObjSetTranslateX(jobj, gp->gv.homerun.xD0);
+    offset = grHr_804D6AE4 * ((f32) arg0 * (160.0F * Ground_801C0498()));
+    gp->gv.homerun.xD0 =
+        (160.0F * (grHr_804D6AE4 * Ground_801C0498())) + offset;
+    HSD_JObjSetTranslateX(jobj, gp->gv.homerun.xD0);
 
-        gp->gv.homerun.xC6 =
-            (s16) ((s32) grHr_804D6AE0 * ((arg + 1) / grHr_804D6ADC));
-        gp->gv.homerun.xC4 = arg;
-        return gobj;
-    }
+    gp->gv.homerun.xC6 =
+        (s16) ((s32) grHr_804D6AE0 * ((arg0 + 1) / grHr_804D6ADC));
+    gp->gv.homerun.xC4 = arg0;
+    return gobj;
 }
 
 void fn_8021E994(Ground* arg0, s32 arg1, CollData* arg2, s32 arg3,

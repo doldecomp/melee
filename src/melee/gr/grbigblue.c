@@ -34,6 +34,7 @@
 #include <baselib/memory.h>
 #include <baselib/random.h>
 
+/// @todo Emitted only to lay out the .sdata2 literal pool in retail order.
 static void sdata2_order(void)
 {
     (void) 1.0f;

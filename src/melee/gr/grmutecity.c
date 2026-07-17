@@ -1827,6 +1827,7 @@ typedef struct grMc_StackPadArg {
     u32 x[4];
 } grMc_StackPadArg;
 
+/// @todo Fake function: exists only to reproduce the retail stack layout.
 static inline void grMc_StackPad(grMc_StackPadArg arg) {}
 
 void grMuteCity_801F290C(Ground_GObj* gobj)

@@ -1593,7 +1593,7 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
                             HSD_JObjRemoveAll(*jobjp);
                             *jobjp = NULL;
                             {
-                                HSD_JObj* jobj = (HSD_JObj*) (*gobjp)->hsd_obj;
+                                HSD_JObj* jobj = GET_JOBJ(*gobjp);
                                 if (jobj != NULL) {
                                     HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
                                 }
@@ -1696,17 +1696,6 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
     return result;
 }
 
-static inline f32 grZebes_801DB3CC_sqrt(f32 x)
-{
-    f32 y;
-    f64 guess = __frsqrte((f64) x);
-    guess = 0.5 * guess * (3.0 - guess * guess * x);
-    guess = 0.5 * guess * (3.0 - guess * guess * x);
-    guess = 0.5 * guess * (3.0 - guess * guess * x);
-    y = (f32) (x * guess);
-    return y;
-}
-
 static inline f32 grZebes_801DB3CC_dist2(f32 dy, f32 dx)
 {
     return dx * dx + dy * dy;
@@ -1766,7 +1755,7 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                         dx -= cur->x08_x;
                         dist = dx * dx + dy * dy;
                         if (dist > zero) {
-                            dist = grZebes_801DB3CC_sqrt(dist);
+                            dist = sqrtf(dist);
                         }
                         {
                             f32 col_r = grZe_804D6990->x74;
@@ -1794,7 +1783,7 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                             dx2 -= cur->x08_x;
                             dist2 = dx2 * dx2 + dy2 * dy2;
                             if (dist2 > zero) {
-                                dist2 = grZebes_801DB3CC_sqrt(dist2);
+                                dist2 = sqrtf(dist2);
                             }
                             {
                                 f32 col_r2 = grZe_804D6990->x74;
@@ -1840,7 +1829,7 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                             f32 dist_sq = grZebes_801DB3CC_dist2(dy, dx);
                             f32 dist = dist_sq;
                             if (dist_sq > 0.0f) {
-                                dist = grZebes_801DB3CC_sqrt(dist_sq);
+                                dist = sqrtf(dist_sq);
                             }
                             {
                                 f32 effective_dist = dist;

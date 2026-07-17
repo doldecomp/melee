@@ -36,6 +36,7 @@
 
 #include <baselib/gobj.h>
 
+/// @todo Emitted only to lay out the .sdata2 literal pool in retail order.
 static void sdata2_order(void)
 {
     (void) 1.0f;
@@ -54,11 +55,6 @@ static void sdata2_order(void)
     (void) -30.0f;
     (void) S32_TO_F32;
 }
-
-#define invalid_state(line)                                                   \
-    OSReport("%s:%d: oioi..\n", "grinishie1.c", line);                        \
-    while (true) {                                                            \
-    }
 
 /// these inlines are probably shared in other places
 static inline s32 test_random(s32 val)
@@ -430,7 +426,9 @@ void grInishie1_801FAD84(HSD_GObj* gobj)
     i = 0;
     while ((u32) i < BLOCK_COUNT) {
         if (i < 0 || (u32) i >= BLOCK_COUNT) {
-            invalid_state(0x1F9);
+            OSReport("%s:%d: oioi..\n", "grinishie1.c", 0x1F9);
+            while (true) {
+            }
         }
         {
             s16 check = block_table[i].idx;
@@ -444,12 +442,16 @@ void grInishie1_801FAD84(HSD_GObj* gobj)
         }
 
         if (j == BLOCK_COUNT) {
-            invalid_state(0x217);
+            OSReport("%s:%d: oioi..\n", "grinishie1.c", 0x217);
+            while (true) {
+            }
         }
 
         jobj = Ground_801C3FA4(gobj, grI1_803E49B8[j].jobj_idx);
         if (jobj == NULL) {
-            invalid_state(0x21D);
+            OSReport("%s:%d: oioi..\n", "grinishie1.c", 0x21D);
+            while (true) {
+            }
         }
 
         gp->blocks[i].x2 = 2;
@@ -1008,7 +1010,9 @@ static inline s32 get_block_id(s32 block_id)
         idx += 1;
         i -= 1;
     }
-    invalid_state(0x1F0);
+    OSReport("%s:%d: oioi..\n", "grinishie1.c", 0x1F0);
+    while (true) {
+    }
     return idx;
 }
 
