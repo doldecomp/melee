@@ -46,7 +46,7 @@ pre-commit run --all-files # Run the hook once on existing code
 - Naming exported methods (the majority of cases)
     - Applies to any method that is defined in a .h file, with a .c implementation.
     - Prefix functions within Melee related code with the file's name. While asserts may indicate this was not the case for your function, this is to make the code easier to read.
-    - Use lowerCamelCasing for the function's filename if it is made up of multiple words.
+    - Use lowerCamelCasing for the function's filename.
     - Use UpperCamelCasing for the function's name itself, unless it is a standard library reimplementation.
     - Examples:
 
