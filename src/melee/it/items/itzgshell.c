@@ -1,8 +1,7 @@
 #include "itzgshell.h"
 
 #include "dolphin.h"
-
-#include "it/items/itshell.static.h"
+#include "inlines.h"
 
 #include "baselib/random.h"
 #include "cm/camera.h"

@@ -1,7 +1,6 @@
 #include "itrshell.h"
 
-#include "it/items/itshell.static.h"
-
+#include "inlines.h"
 #include "m2c_macros.h"
 
 #include <placeholder.h>

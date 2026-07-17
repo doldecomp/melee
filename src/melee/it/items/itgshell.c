@@ -1,8 +1,8 @@
 #include "itgshell.h"
 
 #include "common_structs.h"
+#include "inlines.h"
 
-#include "it/items/itshell.static.h"
 #include <placeholder.h>
 #include <platform.h>
 
