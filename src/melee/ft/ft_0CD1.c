@@ -70,7 +70,8 @@ void ftCo_800CD2C4(Fighter_GObj* gobj, void (*cb)(Fighter_GObj*))
 
 void ft_800CD31C(Fighter_GObj* gobj)
 {
-    if (ftLib_GetItem(gobj) != NULL) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->item_gobj != NULL) {
         ftCommon_8007E7E4(gobj, 1);
     }
 }

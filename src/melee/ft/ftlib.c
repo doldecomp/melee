@@ -1,5 +1,3 @@
-#define FTLIB_SOURCE
-
 #include "ftlib.h"
 
 #include "cm/camera.h"

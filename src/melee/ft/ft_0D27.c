@@ -234,9 +234,8 @@ void fn_800D2CD4(Fighter* fp)
 
 bool ft_800D2D0C(Fighter_GObj* gobj)
 {
-    if (ftLib_GetItem(gobj) != NULL &&
-        itGetKind(ftLib_GetItem(gobj)) == It_Kind_ScBall)
-    {
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->item_gobj != NULL && itGetKind(fp->item_gobj) == It_Kind_ScBall) {
         return true;
     }
     return false;

@@ -44,14 +44,6 @@
 #define GET_FIGHTER(gobj) ((Fighter*) HSD_GObjGetUserData(gobj))
 #endif
 
-#ifndef FTLIB_SOURCE
-extern inline HSD_GObj* ftLib_GetItem(HSD_GObj* gobj)
-{
-    Fighter* fp = HSD_GObjGetUserData(gobj);
-    return fp->item_gobj;
-}
-#endif
-
 /// @deprecated Use #GET_FIGHTER instead.
 static inline Fighter* getFighter(Fighter_GObj* gobj)
 {
