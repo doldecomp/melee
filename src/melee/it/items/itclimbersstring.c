@@ -273,7 +273,7 @@ bool itClimbersstring_UnkMotion3_Anim(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
 
     if (ip->owner != NULL) {
-        enum_t action = ftLib_80086C0C(ip->owner);
+        enum_t action = ftLib_GetMotionId(ip->owner);
         if (action >= 0x15B && action <= 0x164) {
             should_cleanup = 0;
         } else {

@@ -162,9 +162,9 @@ void Item_80266FCC(void)
     it_804A0E60.x8 = 0;
     it_804A0E50.x8 = 0;
     it_804A0E30.x4.x8 = 0;
-    it_804A0E60.x0 = 0;
-    it_804A0E50.x0 = 0;
-    it_804A0E30.x4.x0 = 0;
+    it_804A0E60.size = 0;
+    it_804A0E50.size = 0;
+    it_804A0E30.x4.size = 0;
 }
 
 static void ItUnkHoldKind(HSD_GObj* gobj)
@@ -930,7 +930,7 @@ static void foobar2(HSD_GObj* gobj)
         ftLib_80086960(it->owner))
     {
         it->xDC8_word.flags.xE = 1;
-        it->ecb_lock = ftLib_800872A4(it->owner);
+        it->ecb_lock = ftLib_GetKind(it->owner);
         ftLib_8008702C(it->ecb_lock);
     }
 }

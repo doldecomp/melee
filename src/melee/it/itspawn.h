@@ -3,15 +3,14 @@
 
 #include <platform.h>
 
-#include "it/types.h"
-
-#include <baselib/forward.h>
+#include <melee/it/forward.h>
 
 #include <dolphin/mtx.h>
 
+struct it_8026C47C_arg0_t;
+
 /* 26C47C */ void it_8026C47C(struct it_8026C47C_arg0_t*);
-/* 26C530 */ s32 it_8026C530(s32, ItemPickTable*, s32, s32);
-/* 26C65C */ int it_8026C65C(ItemPickTable*);
+/* 26C65C */ ItemKind it_8026C65C(ItemPickTable*);
 /* 26C704 */ bool it_8026C704(void);
 /* 26C75C */ ItemKind it_8026C75C(ItemPickTable*);
 /* 26C88C */ void fn_8026C88C(HSD_GObj*);

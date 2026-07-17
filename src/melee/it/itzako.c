@@ -566,10 +566,10 @@ bool it_8027CA7C(HSD_GObj* gobj)
     bool chk;
 
     chk = false;
-    if (ftLib_80086C0C(gobj) == 0x14E) {
+    if (ftLib_GetMotionId(gobj) == 0x14E) {
         chk = true;
     }
-    if (ftLib_80086C0C(gobj) == 0x14D) {
+    if (ftLib_GetMotionId(gobj) == 0x14D) {
         chk = true;
     }
     return chk;

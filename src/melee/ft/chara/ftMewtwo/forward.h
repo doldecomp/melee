@@ -38,6 +38,11 @@ static MotionFlags const ftMt_MF_SpecialN =
 static MotionFlags const ftMt_MF_SpecialAirN =
     ftMt_MF_SpecialN | Ft_MF_SkipParasol;
 
+static MotionFlags const ftMt_MF_SpecialN_Coll = ftCommon_GroundAirColl_MF;
+
+static MotionFlags const ftMt_MF_SpecialNLoop_Coll =
+    ftMt_MF_SpecialN_Coll | Ft_MF_KeepSfx;
+
 typedef enum ftMewtwo_MotionState {
     ftMt_MS_SpecialNStart = ftCo_MS_Count,
     ftMt_MS_SpecialNLoop,

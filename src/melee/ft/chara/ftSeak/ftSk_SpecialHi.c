@@ -19,6 +19,7 @@
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Landing.h"
 #include "ftCommon/ftCo_Pass.h"
+#include "ftCommon/inlines.h"
 
 #include "ftSeak/forward.h"
 
@@ -29,6 +30,10 @@
 #include <math.h>
 #include <trigf.h>
 #include <baselib/gobj.h>
+
+static MotionFlags const ftSk_MF_SpecialHi_Coll =
+    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx | Ft_MF_KeepColAnimHitStatus |
+    Ft_MF_SkipHit;
 
 /* 112ED8 */ static void fn_80112ED8(Fighter_GObj* gobj);
 /* 112F48 */ static void ftSk_SpecialHi_80112F48(Fighter_GObj* gobj);
@@ -224,9 +229,8 @@ void ftSk_SpecialHi_80113390(Fighter_GObj* arg0)
     Fighter* temp_r31;
 
     temp_r31 = arg0->user_data;
-    ftCommon_8007D7FC(temp_r31);
-    Fighter_ChangeMotionState(arg0, 0x163, 0x0C4C508EU,
-                              temp_r31->cur_anim_frame, 1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(arg0, temp_r31, 0x163,
+                                    ftSk_MF_SpecialHi_Coll);
     temp_r31->accessory4_cb = fn_80112ED8;
 }
 
