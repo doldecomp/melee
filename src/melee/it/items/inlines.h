@@ -1,10 +1,12 @@
 #ifndef MELEE_IT_ITEMS_INLINES_H
 #define MELEE_IT_ITEMS_INLINES_H
 
+#include "it/it_2725.h"
 #include "it/itmaplib.h"
 #include "it/types.h"
 
 #include <math.h>
+#include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <MSL/math.h>
 
@@ -67,6 +69,17 @@ static inline void itUpdateVelocityFromBone(HSD_JObj* jobj, Item* ip,
         *previous_pos = pos;
         HSD_JObjSetTranslate(jobj, &zero);
     }
+}
+
+static inline bool itReflectItemAndUpdateRotation(Item_GObj* gobj)
+{
+    const f32 PI_2 = M_PI / 2;
+    Item* ip = (Item*) HSD_GObjGetUserData(gobj);
+    HSD_JObj* jobj = (HSD_JObj*) HSD_GObjGetHSDObj(gobj);
+
+    it_80273030(gobj);
+    HSD_JObjSetRotationY(jobj, PI_2 * ip->facing_dir);
+    return false;
 }
 
 #endif
