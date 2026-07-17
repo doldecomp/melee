@@ -345,9 +345,7 @@ void it_802EED00(Item_GObj* gobj)
     it_8026BD24(gobj);
     it_80275158(gobj, 20.0f);
     it_8026BDB4(gobj);
-    ip->x40_vel.z = 0.0f;
-    ip->x40_vel.y = 0.0f;
-    ip->x40_vel.x = 0.0f;
+    itResetVelocity(ip);
     it_80272C08(gobj);
     it_802756D0(gobj);
     it_80275444(gobj);

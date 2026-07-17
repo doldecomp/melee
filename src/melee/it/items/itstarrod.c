@@ -60,7 +60,7 @@ void it_802923F8(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     it_8026B390(gobj);
-    ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0f;
+    itResetVelocity(ip);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 

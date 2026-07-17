@@ -48,7 +48,7 @@ void it_80294AD0(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
 
-    item->x40_vel.x = item->x40_vel.y = item->x40_vel.z = 0.0F;
+    itResetVelocity(item);
     it_8026B390(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
