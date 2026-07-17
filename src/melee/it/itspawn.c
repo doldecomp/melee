@@ -20,6 +20,14 @@ ItemPickTable monster;
 ItemPickTable it_804A0E50;
 RandomItemSpawner it_804A0E30;
 
+/// @todo .sdata2 order hack
+static void sdata2_order(void)
+{
+    (void) 4503601774854144.0;
+    (void) 0.0F;
+    (void) 0.99F;
+}
+
 void it_8026C47C(struct it_8026C47C_arg0_t* arg_struct)
 {
     u32 it_kind;
@@ -137,38 +145,35 @@ ItemKind it_8026C75C(ItemPickTable* table)
     return ret;
 }
 
-static inline bool initSpawnItem(SpawnItem* spawn)
+static inline void it_8026C88C_inline(RandomItemSpawner* alloc)
 {
-    if (it_8026CB3C(&spawn->prev_pos)) {
-        spawn->pos = spawn->prev_pos;
-        spawn->facing_dir = it_8026B684(&spawn->prev_pos);
-        spawn->x3C_damage = 0;
-        spawn->vel.x = spawn->vel.y = spawn->vel.z = 0.0F;
-        spawn->x0_parent_gobj = NULL;
-        spawn->x4_parent_gobj2 = spawn->x0_parent_gobj;
-        spawn->x44_flag.b0 = true;
-        spawn->x40 = 0;
-        return true;
-    } else {
-        return false;
-    }
-}
-
-void fn_8026C88C(HSD_GObj* gobj)
-{
+    Vec3* pos;
+    s32 chk;
     Item_GObj* spawn_gobj;
-    u8 pad[4];
     SpawnItem spawn;
-
-    if (db_AreItemSpawnsEnabled()) {
-        it_804A0E30.x0--;
-        if (it_804A0E30.x0 == 0) {
-            spawn.kind = it_8026C75C(&it_804A0E30.x4);
-            if (spawn.kind != -1) {
-                if (initSpawnItem(&spawn)) {
+    if (db_AreItemSpawnsEnabled() != 0U) {
+        alloc->x0--;
+        if ((s32) alloc->x0 == 0) {
+            spawn.kind = it_8026C75C(&alloc->x4);
+            if ((s32) spawn.kind != -1) {
+                pos = &spawn.prev_pos;
+                if (it_8026CB3C(pos)) {
+                    spawn.pos = *pos;
+                    spawn.facing_dir = it_8026B684(pos);
+                    chk = 1;
+                    spawn.x3C_damage = 0;
+                    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
+                    spawn.x0_parent_gobj = NULL;
+                    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
+                    spawn.x44_flag.b0 = chk;
+                    spawn.x40 = 0;
+                } else {
+                    chk = false;
+                }
+                if (chk) {
                     spawn_gobj = Item_80268B18(&spawn);
                     if (spawn_gobj != NULL) {
-                        efSync_Spawn(0x420, spawn_gobj, &spawn.prev_pos);
+                        efSync_Spawn(0x420, spawn_gobj, pos);
                         it_80274ED8();
                     }
                 }
@@ -176,11 +181,18 @@ void fn_8026C88C(HSD_GObj* gobj)
             {
                 s32* range = &it_804D6D28->xFC[gm_8016AE80() * 2];
                 f32 randf = HSD_Randf();
-                it_804A0E30.x0 = range[0] + (range[1] - range[0]) * randf;
-                it_804A0E30.x0 *= Ground_801C2AE8(Stage_80225194());
+                f32 diff = range[1] - range[0];
+                alloc->x0 = diff * randf + range[0];
+                alloc->x0 *= Ground_801C2AE8(Stage_80225194());
             }
         }
     }
+}
+
+void fn_8026C88C(HSD_GObj* gobj)
+{
+    RandomItemSpawner* alloc = &it_804A0E30;
+    it_8026C88C_inline(alloc);
 }
 
 #pragma push
@@ -219,6 +231,9 @@ bool it_8026CB3C(Vec3* vec)
 /// Builds some structs for items
 void it_8026CB9C(s32* counts, u64 mask, f32 weight)
 {
+    RandomItemSpawner* spawner = &it_804A0E30;
+    u8** item_kinds;
+    u16** weights;
     s32* p;
     s32 cnt;
     ItemKind it_kind;
@@ -241,23 +256,22 @@ void it_8026CB9C(s32* counts, u64 mask, f32 weight)
         it_kind++;
         mask >>= 1;
     }
-    it_804A0E30.x4.size = cnt;
-    it_804A0E30.x4.x4 = HSD_MemAlloc(cnt * 4);
-    it_804A0E30.x4.xC = HSD_MemAlloc(cnt * 4);
+    spawner->x4.size = cnt;
+    *(item_kinds = &spawner->x4.x4) = HSD_MemAlloc(cnt * 4);
+    *(weights = &spawner->x4.xC) = HSD_MemAlloc(cnt * 4);
 
-    cnt2 = 0;
-    p2 = counts;
+    idx = (cnt2 = 0);
     mask = backup;
-    idx = cnt2;
+    p2 = counts;
     it_kind2 = 0;
     cumulative = 0;
     while (it_kind2 < It_Kind_L_Gun_Ray) {
         if ((mask & 1) && *p2 != 0) {
-            it_804A0E30.x4.x4[cnt2] = it_kind2;
-            it_804A0E30.x4.xC[idx] = cumulative;
+            (*item_kinds)[cnt2] = it_kind2;
+            (*weights)[idx] = cumulative;
             cnt2++;
             idx++;
-            cumulative += weight * *p2 + 0.99f;
+            cumulative = (cumulative + ((weight * *p2) + 0.99f));
         }
         p2++;
         it_kind2++;
@@ -267,10 +281,16 @@ void it_8026CB9C(s32* counts, u64 mask, f32 weight)
 
 void it_8026CD50(s32* counts, u64 mask, f32 weight)
 {
-    s32 cnt;
+    ItemPickTable* table = &it_804A0E50;
     s32* p;
+    s32 cnt;
     ItemKind it_kind;
     ItemKind it_kind2;
+    s32 cnt2;
+    s32* p2;
+    u8** item_kinds;
+    s32 idx;
+    u16** weights;
     s32 cumulative;
     u64 backup;
 
@@ -286,23 +306,24 @@ void it_8026CD50(s32* counts, u64 mask, f32 weight)
         it_kind++;
         mask >>= 1;
     }
-    it_804A0E50.size = cnt;
-    it_804A0E50.x4 = HSD_MemAlloc(cnt * 4);
-    it_804A0E50.xC = HSD_MemAlloc(cnt * 4);
+    table->size = cnt;
+    *(item_kinds = &table->x4) = HSD_MemAlloc(cnt * 4);
+    *(weights = &table->xC) = HSD_MemAlloc(cnt * 4);
 
+    idx = (cnt2 = 0);
     mask = backup;
-    p = &counts[It_Kind_BombHei];
+    p2 = counts + It_Kind_BombHei;
     cumulative = 0;
-    cnt = 0;
     it_kind2 = It_Kind_BombHei;
     while (it_kind2 < It_Kind_L_Gun_Ray) {
-        if ((mask & 1) && *p != 0) {
-            it_804A0E50.x4[cnt] = it_kind2;
-            it_804A0E50.xC[cnt] = cumulative;
-            cumulative += weight * *p + 0.99f;
-            cnt++;
+        if ((mask & 1) && *p2 != 0) {
+            (*item_kinds)[cnt2] = it_kind2;
+            (*weights)[idx] = cumulative;
+            cnt2++;
+            idx++;
+            cumulative = (cumulative + ((weight * *p2) + 0.99f));
         }
-        p++;
+        p2++;
         it_kind2++;
         mask >>= 1;
     }
