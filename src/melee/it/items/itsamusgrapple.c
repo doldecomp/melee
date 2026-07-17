@@ -5,6 +5,8 @@
 
 #include "baselib/forward.h"
 
+#include "baselib/gobjgxlink.h"
+#include "baselib/gobjuserdata.h"
 #include "dolphin/types.h"
 #include "ef/efsync.h"
 #include "ft/chara/ftCommon/ftCo_0A01.h"
@@ -28,10 +30,10 @@
 #include "it/it_26B1.h"
 #include "it/itCharItems.h"
 #include "it/item.h"
+#include "it/items/inlines.h"
 #include "lb/lbvector.h"
 #include "lb/types.h"
 #include "mp/mpcoll.h"
-#include "mp/mplib.h"
 
 #include <baselib/gobj.h>
 #include <baselib/gobjobject.h>
@@ -1405,32 +1407,11 @@ bool it_802BA2D8(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
 {
     ItemLink* next;
     ItemLink* cur;
-    f32 d, remaining, max_dist;
+    f32 remaining;
     u8 _pad[8];
-    Vec3 dir;
 
-    cur = link;
-    next = link->prev;
-
-    while (next != NULL && !cur->x2C_b0) {
-        cur = next;
-        next = next->prev;
-    }
-
-    d = it_802A3C98(&cur->pos, pos, &dir);
-
-    while (next != NULL && target_dist > d) {
-        cur->x2C_b0 = 0;
-        d = it_802A3C98(&next->pos, pos, &dir);
-        cur = next;
-        next = next->prev;
-    }
-
-    remaining = d - target_dist;
-    max_dist = attrs->x38;
-    if (remaining > max_dist) {
-        remaining = max_dist;
-    }
+    Item_RetractChain(link, pos, target_dist, &attrs->x38, &next, &cur,
+                      &remaining);
     it_802B900C(cur, pos, attrs, remaining);
 
     if (next != NULL) {

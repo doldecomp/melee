@@ -1,5 +1,7 @@
 #include "itcerebi.h"
 
+#include "inlines.h"
+
 #include "baselib/random.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
@@ -124,13 +126,7 @@ bool itCerebi_UnkMotion2_Coll(Item_GObj* gobj)
 
 void it_802D4168(Item_GObj* gobj)
 {
-    Item* item = GET_ITEM(gobj);
-
-    it_802762BC(item);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    item->entered_hitlag = efLib_PauseAll;
-    item->exited_hitlag = efLib_ResumeAll;
-    it_80273670(gobj, 0, 0.0f);
+    Item_EnterAirStateWithHitlagAndStateDesc(gobj);
 }
 
 bool itCerebi_UnkMotion0_Anim(Item_GObj* gobj)

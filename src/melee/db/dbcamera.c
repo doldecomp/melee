@@ -1,3 +1,4 @@
+#include "baselib/controller.h"
 #include "cm/camera.h"
 #include "db/db.h"
 #include "ft/inlines.h"
@@ -9,7 +10,7 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <trigf.h>
+#include <trigf.h> // IWYU pragma: keep
 
 /* 4A03C0 */ static char db_CameraInfoDisplay_buf[0xC0];
 

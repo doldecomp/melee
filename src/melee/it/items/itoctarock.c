@@ -1,5 +1,6 @@
 #include "itoctarock.h"
 
+#include "inlines.h"
 #include "math.h"
 #include "placeholder.h"
 
@@ -492,18 +493,7 @@ void it_802E5944(Item_GObj* gobj)
 
 void it_802E595C(HSD_JObj* jobj, Item* ip)
 {
-    if (jobj != NULL) {
-        Vec3 zero;
-        Vec3 pos;
-        zero.x = zero.y = zero.z = 0.0f;
-        HSD_JObjGetTranslation(jobj, &pos);
-        ip->x40_vel.x =
-            ip->facing_dir * (pos.z - ip->xDD4_itemVar.octarock.x20.z);
-        ip->x40_vel.y = pos.y - ip->xDD4_itemVar.octarock.x20.y;
-        ip->x40_vel.z = pos.x - ip->xDD4_itemVar.octarock.x20.x;
-        ip->xDD4_itemVar.octarock.x20 = pos;
-        HSD_JObjSetTranslate(jobj, &zero);
-    }
+    itUpdateVelocityFromBone(jobj, ip, &ip->xDD4_itemVar.octarock.x20);
 }
 
 void it_802E5AA4(Item_GObj* gobj, Item_GObj* ref_gobj)
