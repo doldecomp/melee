@@ -354,13 +354,7 @@ void ftPp_SpecialHiStart_0_Coll(Fighter_GObj* gobj)
 void ftPp_SpecialAirHiStart_0_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 facingDir;
-    if (fp->facing_dir < 0.0f) {
-        facingDir = -1;
-    } else {
-        facingDir = 1;
-    }
-    if (ft_CheckGroundAndLedge(gobj, facingDir)) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         ftPp_SpecialHi_8012184C(gobj);
         return;
     }
@@ -545,15 +539,8 @@ void ftPp_SpecialHiThrow_0_Coll(Fighter_GObj* gobj)
 void ftPp_SpecialAirHiThrow_0_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 facingDir;
 
-    if (fp->facing_dir < 0.0f) {
-        facingDir = -1;
-    } else {
-        facingDir = 1;
-    }
-
-    if (ft_CheckGroundAndLedge(gobj, facingDir)) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         ftPp_SpecialHi_80121D40(gobj);
         return;
     }
@@ -638,15 +625,8 @@ void ftPp_SpecialHiStart_1_Coll(Fighter_GObj* gobj)
 void ftPp_SpecialAirHiStart_1_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 facingDir;
 
-    if (fp->facing_dir < 0.0f) {
-        facingDir = -1;
-    } else {
-        facingDir = 1;
-    }
-
-    if (ft_CheckGroundAndLedge(gobj, facingDir)) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         ftPp_SpecialHi_80122038(gobj);
         return;
     }
@@ -731,7 +711,7 @@ void ftPp_SpecialAirHiThrow_1_Coll(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftIceClimberAttributes* da = fp->dat_attrs;
     PAD_STACK(4);
-    if (ftCommon_CheckGroundAndLedgeFromFacingDir(gobj, fp)) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         ftCo_LandingFallSpecial_Enter(gobj, false, da->x78);
         return;
     }
@@ -881,7 +861,7 @@ void ftPp_SpecialAirHiThrow2_Coll(Fighter_GObj* gobj)
     ftIceClimberAttributes* da = fp->dat_attrs;
     CollData* cd = &fp->coll_data;
     PAD_STACK(8);
-    if (ft_CheckGroundAndLedge(gobj, (fp->facing_dir < 0) ? -1 : 1)) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         ftCo_LandingFallSpecial_Enter(gobj, false, da->x78);
     } else if (!ftCliffCommon_80081298(gobj)) {
         if ((cd->env_flags & 0x3F) && fp->self_vel.x > 0.0f) {

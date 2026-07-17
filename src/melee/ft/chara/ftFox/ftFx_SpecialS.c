@@ -210,15 +210,8 @@ void ftFx_SpecialSStart_Coll(HSD_GObj* gobj)
 void ftFx_SpecialAirSStart_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 cliffCatchDir;
 
-    if (fp->facing_dir < 0.0f) {
-        cliffCatchDir = -1;
-    } else {
-        cliffCatchDir = 1;
-    }
-
-    if (ft_CheckGroundAndLedge(gobj, cliffCatchDir)) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         ftFx_SpecialAirSStart_AirToGround(gobj);
         return;
     }
@@ -390,14 +383,7 @@ void ftFx_SpecialS_Coll(HSD_GObj* gobj)
 void ftFx_SpecialAirS_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 cliffCatchDir;
-
-    if (fp->facing_dir < 0.0f) {
-        cliffCatchDir = -1;
-    } else {
-        cliffCatchDir = 1;
-    }
-    if (ft_CheckGroundAndLedge(gobj, cliffCatchDir)) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         ftFx_SpecialAirS_AirToGround(gobj);
         return;
     }
@@ -573,7 +559,7 @@ void ftFx_SpecialAirSEnd_Coll(HSD_GObj* gobj)
 
     u8 _[4];
 
-    if (ftCommon_CheckGroundAndLedgeFromFacingDir(gobj, fp)) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         ftCo_LandingFallSpecial_Enter(gobj, false,
                                       da->x50_FOX_ILLUSION_LANDING_LAG);
         return;

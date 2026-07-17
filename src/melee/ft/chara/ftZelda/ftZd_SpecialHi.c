@@ -194,16 +194,8 @@ void ftZd_SpecialHiStart_0_Coll(HSD_GObj* gobj)
 void ftZd_SpecialAirHiStart_0_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    float facing_dir = fp->facing_dir;
-    int ledge_grab_dir;
 
-    if (facing_dir < 0) {
-        ledge_grab_dir = -1;
-    } else {
-        ledge_grab_dir = +1;
-    }
-
-    if (ft_CheckGroundAndLedge(gobj, ledge_grab_dir)) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         ftZd_SpecialHi_80139BB0(gobj);
     } else if (!ftCliffCommon_80081298(gobj)) {
         return;
@@ -329,20 +321,10 @@ void ftZd_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
 
     fp->mv.zd.specialhi.xC++;
 
-    {
-        int ledge_grab_dir;
-
-        if (fp->facing_dir < 0) {
-            ledge_grab_dir = -1;
-        } else {
-            ledge_grab_dir = +1;
-        }
-
-        if (ft_CheckGroundAndLedge(gobj, ledge_grab_dir)) {
-            if (ftZelda_80139D60_Helper(gobj)) {
-                ftZd_SpecialHi_80139FE8(gobj);
-                return;
-            }
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
+        if (ftZelda_80139D60_Helper(gobj)) {
+            ftZd_SpecialHi_80139FE8(gobj);
+            return;
         }
     }
 
@@ -623,7 +605,7 @@ void ftZd_SpecialAirHi_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftZelda_DatAttrs* attributes = fp->dat_attrs;
 
-    if (ftCommon_CheckGroundAndLedgeFromFacingDir(gobj, fp)) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         ftCo_LandingFallSpecial_Enter(gobj, false, attributes->x6C);
         return;
     }

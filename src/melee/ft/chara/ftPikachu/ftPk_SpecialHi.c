@@ -150,7 +150,7 @@ void ftPk_SpecialAirHiStart0_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (ft_CheckGroundAndLedge(gobj, fp->facing_dir < 0 ? -1 : +1)) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         ftPk_SpecialHi_ChangeMotion_Unk01(gobj);
     } else if (!ftCliffCommon_80081298(gobj)) {
         /// @todo Fix weird control flow.
@@ -382,7 +382,7 @@ void ftPk_SpecialAirHiStart1_Coll(HSD_GObj* gobj)
     u8 _[12];
 
     fp->mv.pk.specialhi.x18++;
-    if (ft_CheckGroundAndLedge(gobj, fp->facing_dir < 0.0f ? -1 : 1)) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         bool0 = ftPikachu_GetBool(gobj);
 
         if (bool0) {

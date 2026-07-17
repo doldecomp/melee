@@ -5,7 +5,6 @@
 
 #include "ft/forward.h"
 
-#include "ft/ft_081B.h"
 #include "ft/ftanim.h"
 #include "ft/types.h"
 #include "gm/gm_16AE.h"
@@ -238,19 +237,6 @@ static inline void ftCommon_HandleTeleportCollisions(Fighter_GObj* gobj,
     {
         on_collide(gobj);
     }
-}
-
-static inline bool
-ftCommon_CheckGroundAndLedgeFromFacingDir(Fighter_GObj* gobj, Fighter* fp)
-{
-    int ledge_grab_dir;
-
-    if (fp->facing_dir < 0.0f) {
-        ledge_grab_dir = -1;
-    } else {
-        ledge_grab_dir = 1;
-    }
-    return ft_CheckGroundAndLedge(gobj, ledge_grab_dir);
 }
 
 /// @todo This and #ftCheckThrowB3, etc. are probably one macro or something.

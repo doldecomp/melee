@@ -193,16 +193,10 @@ void ftSk_SpecialHiStart_0_Coll(HSD_GObj* gobj)
 void ftSk_SpecialAirHiStart_0_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 direction; // r4
     s32 groundOrLedge;
 
-    if (fp->facing_dir < 0.0f) {
-        direction = -1;
-    } else {
-        direction = +1;
-    }
-
-    groundOrLedge = ft_CheckGroundAndLedge((Fighter_GObj*) gobj, direction);
+    groundOrLedge =
+        ft_CheckGroundAndLedge((Fighter_GObj*) gobj, ftGetFacingDirInt(fp));
 
     if (groundOrLedge != 0) {
         ftSk_SpecialHi_80113390(gobj);
@@ -311,7 +305,6 @@ void ftSk_SpecialHiStart_1_Coll(HSD_GObj* gobj)
 void ftSk_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
 {
     s32 var_r0;
-    s32 direction;
     Fighter* fp;             // r31
     Fighter* fp2;            // r3
     ftSeakAttributes* attr;  // r30
@@ -324,13 +317,9 @@ void ftSk_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
     attr = fp->dat_attrs;
     fp->mv.sk.specialhi.xC = (s32) (fp->mv.sk.specialhi.xC + 1);
 
-    if (fp->facing_dir < 0.0f) {
-        direction = -1;
-    } else {
-        direction = 1;
-    }
-
-    if (ft_CheckGroundAndLedge((Fighter_GObj*) gobj, direction) != 0) {
+    if (ft_CheckGroundAndLedge((Fighter_GObj*) gobj, ftGetFacingDirInt(fp)) !=
+        0)
+    {
         fp2 = gobj->user_data;
         attr2 = fp2->dat_attrs;
         if ((f32) fp2->mv.sk.specialhi.xC >= attr2->x3C) {
@@ -633,7 +622,7 @@ void ftSk_SpecialAirHi_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSeakAttributes* attributes = fp->dat_attrs;
 
-    if (ftCommon_CheckGroundAndLedgeFromFacingDir((Fighter_GObj*) gobj, fp)) {
+    if (ft_CheckGroundAndLedge((Fighter_GObj*) gobj, ftGetFacingDirInt(fp))) {
         ftCo_LandingFallSpecial_Enter((Fighter_GObj*) gobj, false,
                                       attributes->x5C);
         return;
