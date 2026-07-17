@@ -805,17 +805,23 @@ HSD_GObj* grHomeRun_8021E500(s16 arg)
             gobj_id = 9;
         }
     } else {
-        HSD_ASSERTMSGFILE(grHr_803E821C.filename, 0x3D2, 0, "0");
+        __assert(grHr_803E821C.filename, 0x3D2, "0");
     }
 
     {
         HSD_GObj* gobj = grHomeRun_8021C82C_noinline(gobj_id);
-        HSD_ASSERTMSGFILE(grHr_803E821C.filename, 0x3D5, gobj, "gobj");
+        if (!gobj) {
+            __assert(grHr_803E821C.filename, 0x3D5, "gobj");
+        }
         jobj = GET_JOBJ(gobj);
         (void) jobj;
-        HSD_ASSERTMSGFILE(grHr_803E821C.filename, 0x3D6, jobj, "jobj");
+        if (!jobj) {
+            __assert(grHr_803E821C.filename, 0x3D6, "jobj");
+        }
         (void) (gp = GET_GROUND(gobj));
-        HSD_ASSERTMSGFILE(grHr_803E821C.filename, 0x3D7, gp, "gp");
+        if (!gp) {
+            __assert(grHr_803E821C.filename, 0x3D7, "gp");
+        }
 
         HSD_JObjSetScaleX(jobj, grHr_804D6AE4 * HSD_JObjGetScaleX(jobj));
         HSD_JObjSetScaleY(jobj, grHr_804D6AE4 * HSD_JObjGetScaleY(jobj));
