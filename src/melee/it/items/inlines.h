@@ -4,8 +4,8 @@
 #include "it/itmaplib.h"
 #include "it/types.h"
 
-#include <baselib/jobj.h>
 #include <math.h>
+#include <baselib/jobj.h>
 #include <MSL/math.h>
 
 static inline void itGamewatch_InitSpawnItem(SpawnItem* spawn,
@@ -49,6 +49,23 @@ static inline void Item_ClampAngleReverse(f32* angle)
     }
     while (*angle < -M_PI) {
         *angle += M_TAU;
+    }
+}
+
+static inline void itUpdateVelocityFromBone(HSD_JObj* jobj, Item* ip,
+                                            Vec3* previous_pos)
+{
+    Vec3 pos;
+    Vec3 zero;
+
+    if (jobj != NULL) {
+        zero.x = zero.y = zero.z = 0.0F;
+        HSD_JObjGetTranslation(jobj, &pos);
+        ip->x40_vel.x = ip->facing_dir * (pos.z - previous_pos->z);
+        ip->x40_vel.y = pos.y - previous_pos->y;
+        ip->x40_vel.z = pos.x - previous_pos->x;
+        *previous_pos = pos;
+        HSD_JObjSetTranslate(jobj, &zero);
     }
 }
 
