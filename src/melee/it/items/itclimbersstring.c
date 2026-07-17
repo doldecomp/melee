@@ -6,6 +6,7 @@
 #include "it/inlines.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/items/inlines.h"
 #include "it/items/itlinkhookshot.h"
 #include "lb/lbvector.h"
 
@@ -452,32 +453,14 @@ s32 it_802C30E8(ItemLink* link, Vec3* target,
 bool it_802C32D4(ItemLink* link, Vec3* pos, itClimbersStringAttributes* attrs,
                  Item* ip, f32 dist)
 {
-    u8 _pad[16];
-    Vec3 dir;
+    u8 _pad[8];
     ItemLink* prev;
-    ItemLink* cur = link;
-    f32 len;
+    ItemLink* cur;
     f32 step;
-    f32 foo;
 
-    prev = link->prev;
-    while (prev != NULL && !cur->x2C_b0) {
-        cur = prev;
-        prev = prev->prev;
-    }
-    len = it_802A3C98(&cur->pos, pos, &dir);
-    while (prev != NULL && dist > len) {
-        cur->x2C_b0 = false;
-        len = it_802A3C98(&prev->pos, pos, &dir);
-        cur = prev;
-        prev = prev->prev;
-    }
-    foo = attrs->x8;
-    step = len - dist;
-    if (step > foo) {
-        step = foo;
-    }
+    Item_RetractChain(link, pos, dist, &attrs->x8, &prev, &cur, &step);
     it_802C2DB0(cur, pos, attrs, step);
+
     if (prev != NULL) {
         return false;
     }
