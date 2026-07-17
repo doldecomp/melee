@@ -3,9 +3,8 @@
 
 #include "it/types.h"
 
-static inline void itGamewatch_InitSpawnItem(SpawnItem* spawn,
-                                             HSD_GObj* parent, Vec3* pos,
-                                             f32 dir)
+static inline void Item_InitSpawn(SpawnItem* spawn, HSD_GObj* parent,
+                                  Vec3* pos, f32 dir)
 {
     spawn->prev_pos = *pos;
     spawn->pos = spawn->prev_pos;
