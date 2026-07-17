@@ -155,9 +155,7 @@ void it_80292FF0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
 
-    ip->x40_vel.z = 0.0F;
-    ip->x40_vel.y = 0.0F;
-    ip->x40_vel.x = 0.0F;
+    itResetVelocity(ip);
     it_8026B390(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }

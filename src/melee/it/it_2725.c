@@ -552,7 +552,7 @@ void it_80273454(Item_GObj* item_gobj)
 {
     Item* item = item_gobj->user_data;
 
-    item->x40_vel.x = item->x40_vel.y = item->x40_vel.z = 0.0f;
+    itResetVelocity(item);
 }
 
 void it_8027346C(Item_GObj* item_gobj)

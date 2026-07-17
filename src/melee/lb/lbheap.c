@@ -84,11 +84,6 @@ int lbHeap_800158E8(int arg0)
     return lbHeap_80431FA0.heap_array[arg0].transient;
 }
 
-/// @todo 99.77%: one two-register color swap in the destroy loop — the
-///       compiler walker for heap_array[destroy_i].transient and heap_offset
-///       trade r28/r27. Exhausted: full decl-position sweep, split offset
-///       vars, init/increment orders and spellings, view-macro check forms,
-///       view-local elimination and block scoping.
 void lbHeap_80015900(void)
 {
     s32 temp_r0;
@@ -105,12 +100,16 @@ void lbHeap_80015900(void)
     struct Heap* main_heap;
     s32 destroy_i;
     struct Heap* aram_heap;
+    u32 destroy_cursor;
 
     /// @remarks 0 and 1 are reserved for HSD and ARAM
-    for (destroy_i = 2, heap_offset = 0x38; destroy_i < 6;
-         destroy_i++, heap_offset += sizeof(struct Heap))
+    destroy_i = 2;
+    destroy_cursor = (u32) &lbHeap_80431FA0.heap_array[destroy_i] - 0x10;
+    heap_offset = 0x38;
+    for (; destroy_i < 6; destroy_i++, destroy_cursor += sizeof(struct Heap),
+                          heap_offset += sizeof(struct Heap))
     {
-        if (lbHeap_80431FA0.heap_array[destroy_i].transient == 1) {
+        if (((struct Heap*) (destroy_cursor + 0x10))->transient == 1) {
             destroy_view = lbHeap_GetHeapOffsetView(heap_offset);
             lbHeap_DestroyOffsetViewIfCreated(destroy_view);
         }
