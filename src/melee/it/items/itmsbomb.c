@@ -245,6 +245,7 @@ bool itMsbomb_UnkMotion6_Anim(Item_GObj* gobj)
 
 bool itMSBomb_Logic19_DmgDealt(Item_GObj* gobj)
 {
+    /// @todo Use itGetMotionId if it can be made to inline here.
     Item* ip = GET_ITEM(gobj);
     if (ip->msid == 3) {
         itColl_BounceOffVictim(gobj);
@@ -262,6 +263,7 @@ static inline void itMSBomb_Logic19_DmgReceived_inline(Item_GObj* gobj)
 
 bool itMSBomb_Logic19_DmgReceived(Item_GObj* gobj)
 {
+    /// @todo Use itGetMotionId if its extra inline depth can be made to match.
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(0x10);
     if (ip->msid == 4 || ip->msid == 5) {
@@ -296,6 +298,7 @@ bool itMSBomb_Logic19_Reflected(Item_GObj* gobj)
 
 bool itMSBomb_Logic19_HitShield(Item_GObj* gobj)
 {
+    /// @todo Use itGetMotionId if it can be made to inline here.
     Item* ip = GET_ITEM(gobj);
     if (ip->msid == 3) {
         itColl_BounceOffVictim(gobj);
@@ -307,6 +310,7 @@ bool itMSBomb_Logic19_HitShield(Item_GObj* gobj)
 
 bool itMSBomb_Logic19_ShieldBounced(Item_GObj* gobj)
 {
+    /// @todo Use itGetMotionId if it can be made to inline here.
     Item* ip = GET_ITEM(gobj);
     if (ip->msid == 3) {
         itColl_BounceOffShield(gobj);

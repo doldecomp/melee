@@ -47,11 +47,13 @@ static inline void itNesspkflash_SetScale(HSD_JObj* jobj, Item* ip,
 
 Fighter_GObj* it_802AA7E4(Item_GObj* gobj)
 {
+    /// @todo Use itGetOwner if it can be made to inline here.
     return GET_ITEM(gobj)->owner;
 }
 
 bool it_802AA7F0(Item_GObj* gobj)
 {
+    /// @todo Use itGetMotionId if it can be made to inline here.
     Item* it = GET_ITEM(gobj);
     if (it->msid == 0x2) {
         return 1;

@@ -46,6 +46,7 @@ typedef struct {
 
 Fighter_GObj* itZeldaDinFire_GetOwner(Item_GObj* gobj)
 {
+    /// @todo Use itGetOwner if it can be made to inline here.
     return GET_ITEM(gobj)->owner;
 }
 
