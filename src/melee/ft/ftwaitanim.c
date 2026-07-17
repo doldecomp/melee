@@ -2,14 +2,13 @@
 
 #include "ftdynamics.h"
 
+#include "baselib/random.h"
 #include "ft/ftanim.h"
 #include "ft/ftdata.h"
 #include "ft/inlines.h"
 #include "it/it_26B1.h"
 
-#include <dolphin/mtx.h>
 #include <baselib/debug.h>
-#include <baselib/gobj.h>
 
 bool ftCo_8008A698(Fighter* fp)
 {

@@ -1,5 +1,7 @@
 #include "itclimbersstring.h"
 
+#include "baselib/gobjgxlink.h"
+#include "baselib/gobjuserdata.h"
 #include "ft/chara/ftPopo/ftPp_SpecialS.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
