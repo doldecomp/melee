@@ -1,5 +1,6 @@
 #include "itgamewatchjudge.h"
 
+#include "inlines.h"
 #include "math.h"
 #include "placeholder.h"
 
@@ -28,15 +29,7 @@ HSD_GObj* it_802C7774(float facing_dir, HSD_GObj* parent_gobj, Vec3* pos,
     PAD_STACK(4);
 
     si.kind = It_Kind_GameWatch_Judge;
-    si.prev_pos = *pos;
-    si.pos = si.prev_pos;
-    si.facing_dir = facing_dir;
-    si.x3C_damage = 0;
-    si.vel.x = si.vel.y = si.vel.z = 0.0f;
-    si.x0_parent_gobj = parent_gobj;
-    si.x4_parent_gobj2 = si.x0_parent_gobj;
-    si.x44_flag.b0 = 1;
-    si.x40 = 0;
+    Item_InitSpawn(&si, parent_gobj, pos, facing_dir);
 
     new_gobj = Item_80268B18(&si);
     if (new_gobj != NULL) {

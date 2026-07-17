@@ -1,5 +1,7 @@
 #include "itseakchain.h"
 
+#include "inlines.h"
+
 #include "it/items/itseakchain.static.h"
 
 #include "platform.h"
@@ -24,6 +26,7 @@
 #include "it/it_2725.h"
 #include "it/itCharItems.h"
 #include "it/item.h"
+#include "it/items/inlines.h"
 #include "it/items/itlinkhookshot.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbvector.h"
@@ -189,15 +192,7 @@ Item_GObj* itSeakChain_Spawn(Fighter_GObj* parent_gobj, Point3d* arg1,
 
     fp = GET_FIGHTER(parent_gobj);
     spawn.kind = It_Kind_Seak_Chain;
-    spawn.prev_pos = *arg1;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = facing_dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    spawn.x0_parent_gobj = parent_gobj;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
+    Item_InitSpawn(&spawn, parent_gobj, arg1, facing_dir);
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
         ip = GET_ITEM(gobj);
@@ -759,27 +754,11 @@ int it_802BC94C(ItemLink* arg0, Vec3* arg1, itSeakChain_Attrs* sa, f32 farg0)
 {
     u8 _padA[8];
     ItemLink *var_r30, *var_r29;
-    Vec3 sp18;
     float var_f1;
 
-    for (var_r29 = arg0, var_r30 = arg0->prev;
-         var_r30 != NULL && !var_r29->x2C_b0;)
-    {
-        var_r29 = var_r30;
-        var_r30 = var_r30->prev;
-    }
-    var_f1 = it_802A3C98(&var_r29->pos, arg1, &sp18);
-    while (var_r30 != NULL && farg0 > var_f1) {
-        var_r29->x2C_b0 = false;
-        var_f1 = it_802A3C98(&var_r30->pos, arg1, &sp18);
-        var_r29 = var_r30;
-        var_r30 = var_r30->prev;
-    }
-    var_f1 -= farg0;
-    if (var_f1 > sa->x4) {
-        var_f1 = sa->x4;
-    }
+    Item_RetractChain(arg0, arg1, farg0, &sa->x4, &var_r30, &var_r29, &var_f1);
     it_802BBC38(var_r29, arg1, sa, var_f1);
+
     if (var_r30 != NULL) {
         return false;
     }

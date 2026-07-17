@@ -35,7 +35,7 @@ HSD_GObj* it_802C6C38(Item_GObj* parent, Vec3* pos, enum_t part,
     PAD_STACK(4);
 
     spawn.kind = 0x75;
-    itGamewatch_InitSpawnItem(&spawn, parent, pos, facing_dir);
+    Item_InitSpawn(&spawn, parent, pos, facing_dir);
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
         itGamewatchparachuteAttributes* attrs =
