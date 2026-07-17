@@ -730,14 +730,8 @@ void ftPp_SpecialAirHiThrow_1_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftIceClimberAttributes* da = fp->dat_attrs;
-    s32 cliffCatchDir;
     PAD_STACK(4);
-    if (fp->facing_dir < 0.0f) {
-        cliffCatchDir = -1;
-    } else {
-        cliffCatchDir = 1;
-    }
-    if (ft_CheckGroundAndLedge(gobj, cliffCatchDir)) {
+    if (ftCommon_CheckGroundAndLedgeFromFacingDir(gobj, fp)) {
         ftCo_LandingFallSpecial_Enter(gobj, false, da->x78);
         return;
     }

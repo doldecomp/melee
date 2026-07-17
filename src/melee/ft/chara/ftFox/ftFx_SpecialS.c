@@ -573,14 +573,7 @@ void ftFx_SpecialAirSEnd_Coll(HSD_GObj* gobj)
 
     u8 _[4];
 
-    int cliffCatchDir;
-
-    if (fp->facing_dir < 0.0f) {
-        cliffCatchDir = -1;
-    } else {
-        cliffCatchDir = 1;
-    }
-    if (ft_CheckGroundAndLedge(gobj, cliffCatchDir)) {
+    if (ftCommon_CheckGroundAndLedgeFromFacingDir(gobj, fp)) {
         ftCo_LandingFallSpecial_Enter(gobj, false,
                                       da->x50_FOX_ILLUSION_LANDING_LAG);
         return;

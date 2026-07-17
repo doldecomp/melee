@@ -584,12 +584,11 @@ void ftMt_SpecialAirHi_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
 
-    if (ft_CheckGroundAndLedge(gobj, CLIFFCATCH_O(fp))) {
+    if (ftCommon_CheckGroundAndLedgeFromFacingDir(gobj, fp)) {
         ftCo_LandingFallSpecial_Enter(
             gobj, false, mewtwoAttrs->x74_MEWTWO_TELEPORT_LANDING_LAG);
         return;
     }
-
     if (ftCliffCommon_80081298(gobj)) {
         return;
     }

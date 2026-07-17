@@ -623,21 +623,10 @@ void ftZd_SpecialAirHi_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftZelda_DatAttrs* attributes = fp->dat_attrs;
 
-    {
-        int ledge_grab_dir;
-
-        if (fp->facing_dir < 0) {
-            ledge_grab_dir = -1;
-        } else {
-            ledge_grab_dir = +1;
-        }
-
-        if (ft_CheckGroundAndLedge(gobj, ledge_grab_dir) != 0) {
-            ftCo_LandingFallSpecial_Enter(gobj, false, attributes->x6C);
-            return;
-        }
+    if (ftCommon_CheckGroundAndLedgeFromFacingDir(gobj, fp)) {
+        ftCo_LandingFallSpecial_Enter(gobj, false, attributes->x6C);
+        return;
     }
-
     if (!ftCliffCommon_80081298(gobj)) {
         return;
     }

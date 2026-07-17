@@ -630,16 +630,10 @@ void ftSk_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     u8 _[8];
 
-    int ledge_grab_dir;
     Fighter* fp = GET_FIGHTER(gobj);
     ftSeakAttributes* attributes = fp->dat_attrs;
 
-    if (fp->facing_dir < 0.0f) {
-        ledge_grab_dir = -1;
-    } else {
-        ledge_grab_dir = 1;
-    }
-    if (ft_CheckGroundAndLedge((Fighter_GObj*) gobj, ledge_grab_dir) != 0) {
+    if (ftCommon_CheckGroundAndLedgeFromFacingDir((Fighter_GObj*) gobj, fp)) {
         ftCo_LandingFallSpecial_Enter((Fighter_GObj*) gobj, false,
                                       attributes->x5C);
         return;
