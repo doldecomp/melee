@@ -1,5 +1,6 @@
 #include "itnessyoyo.h"
 
+#include "inlines.h"
 #include "math.h"
 
 #include "ft/chara/ftNess/ftNs_AttackHi4.h"
@@ -183,15 +184,7 @@ HSD_GObj* it_802BE9D8(HSD_GObj* owner, f32 facing_dir, Vec3* pos, s32 action)
     PAD_STACK(0x14);
 
     spawn.kind = It_Kind_Ness_Yoyo;
-    spawn.prev_pos = *pos;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = facing_dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    spawn.x0_parent_gobj = owner;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
+    Item_InitSpawn(&spawn, owner, pos, facing_dir);
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
         Item* ip = GET_ITEM(gobj);
