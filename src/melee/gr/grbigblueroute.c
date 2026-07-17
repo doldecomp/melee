@@ -685,11 +685,6 @@ static inline void grBigBlueRoute_SpawnRoute(s32 route_idx, Ground* gp,
     gp->u.car.x108++;
 }
 
-static inline int grBigBlueRoute_DelayRoute(Ground* gp)
-{
-    return gp->u.car.x10A-- >= 0;
-}
-
 void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
@@ -699,7 +694,7 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
         return;
     }
 
-    if (grBigBlueRoute_DelayRoute(gp)) {
+    if (gp->u.car.x10A-- >= 0) {
         return;
     }
 

@@ -86,9 +86,6 @@ static inline f32 fclamp0(f32 x)
     return ret;
 }
 
-#define INISHIE1_XC6(gp) ((s16*) &(gp)->gv.inishie1.xC4)[1]
-#define INISHIE1_XC8(gp) ((s16*) &(gp)->gv.inishie1.xC4)[2]
-
 typedef struct {
     f32 unk0;
     f32 unk4;
@@ -526,14 +523,14 @@ void grInishie1_801FB0AC(HSD_GObj* gobj, u32 index)
         gp->gv.inishie1.blocks[index].status = 0;
         grInishie1_801FBC4C(gobj, index);
 
-        INISHIE1_XC6(gp) =
+        ((s16*) &gp->gv.inishie1.xC4)[1] =
             rand_range(grI1_804D69F8->unk4, grI1_804D69F8->unk0);
     } else if (gp->gv.inishie1.blocks[index].status == 2) {
         grInishie1_801FBA34(gobj, gp->gv.inishie1.blocks[index].jobj2);
         gp->gv.inishie1.blocks[index].status = 0;
         grInishie1_801FBC4C(gobj, index);
 
-        INISHIE1_XC8(gp) =
+        ((s16*) &gp->gv.inishie1.xC4)[2] =
             rand_range(grI1_804D69F8->unkC, grI1_804D69F8->unk8);
     } else if (gp->gv.inishie1.blocks[index].status == 3) {
         grInishie1_801FBA34(gobj, gp->gv.inishie1.blocks[index].jobj2);
@@ -548,9 +545,9 @@ void grInishie1_801FB0AC(HSD_GObj* gobj, u32 index)
                 }
             }
             if (i == 0x13) {
-                INISHIE1_XC6(gp) =
+                ((s16*) &gp->gv.inishie1.xC4)[1] =
                     rand_range(grI1_804D69F8->unk4, grI1_804D69F8->unk0);
-                INISHIE1_XC8(gp) =
+                ((s16*) &gp->gv.inishie1.xC4)[2] =
                     rand_range(grI1_804D69F8->unkC, grI1_804D69F8->unk8);
             }
         }

@@ -6,6 +6,7 @@
 #include "grfzerocar.h"
 #include "grmaterial.h"
 #include "ground.h"
+#include "m2c_macros.h"
 #include "placeholder.h"
 
 #include <platform.h>
@@ -1437,7 +1438,7 @@ f32 grBigBlue_801E8B84(f32 right, f32 left, f32 bottom, f32 top)
     f32 result = grBb_804DB310;
     PAD_STACK(8);
 
-    if ((unsigned) (gp->gv.bigblue.car.lanes[i].state >> 2 & 0x3F) != 1U) {
+    if ((unsigned) gp->gv.bigblue.car.lanes[i].state != 1U) {
         if (gp->gv.bigblue.car.lanes[i].pos.y < right &&
             gp->gv.bigblue.car.lanes[i].pos.y > left)
         {
@@ -1453,7 +1454,7 @@ f32 grBigBlue_801E8B84(f32 right, f32 left, f32 bottom, f32 top)
 
     state = gp->gv.bigblue.car.lanes[i + 1].state;
     gp = (Ground*) &gp->x20[8];
-    if ((unsigned) (state >> 2 & 0x3F) != 1U) {
+    if ((unsigned) state != 1U) {
         if (gp->gv.bigblue.car.lanes[0].pos.y < right &&
             gp->gv.bigblue.car.lanes[0].pos.y > left)
         {
@@ -1470,7 +1471,7 @@ f32 grBigBlue_801E8B84(f32 right, f32 left, f32 bottom, f32 top)
 
     state = gp->gv.bigblue.car.lanes[1].state;
     gp = (Ground*) &gp->x20[8];
-    if ((unsigned) (state >> 2 & 0x3F) != 1U) {
+    if ((unsigned) state != 1U) {
         if (gp->gv.bigblue.car.lanes[0].pos.y < right &&
             gp->gv.bigblue.car.lanes[0].pos.y > left)
         {
@@ -1486,7 +1487,7 @@ f32 grBigBlue_801E8B84(f32 right, f32 left, f32 bottom, f32 top)
 
     state = gp->gv.bigblue.car.lanes[1].state;
     gp = (Ground*) &gp->x20[8];
-    if ((unsigned) (state >> 2 & 0x3F) != 1U) {
+    if ((unsigned) state != 1U) {
         if (gp->gv.bigblue.car.lanes[0].pos.y < right &&
             gp->gv.bigblue.car.lanes[0].pos.y > left)
         {
@@ -1691,8 +1692,8 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
                             pos.y = 30.0f + Stage_GetCamBoundsTopOffset();
                         }
                         if (pos.y == -3.4028235e38f) {
-                            OSReport("*** Not Set Position!(FFlyer)\n");
-                            HSD_ASSERT(1739, 0);
+                            HSD_ASSERTREPORT(
+                                1739, 0, "*** Not Set Position!(FFlyer)\n");
                         }
                         HSD_JObjSetTranslate(jobj, &pos);
                         *(f32*) (bp + 0xD0) = pos.y;
@@ -2408,7 +2409,7 @@ void grBigBlue_801EB004(Ground_GObj* gobj)
         u8 lo : 4;
     } grBb_InitNibbleBits;
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    u8* gp = gobj->user_data;
+    Ground* gp = gobj->user_data;
     HSD_JObj* child;
     Vec3 pos;
     Vec3 end_pos;
@@ -2463,32 +2464,32 @@ void grBigBlue_801EB004(Ground_GObj* gobj)
         HSD_ASSERT(2330, end_jobj);
     }
 
-    ((grBb_InitC4HalfBits*) (gp + 0xC4))->lane = 0xFFFF;
+    ((grBb_InitC4HalfBits*) &gp->gv.bigblue.x0_w)->lane = 0xFFFF;
 
-    ((grBb_InitC4WordBits*) (gp + 0xC4))->lane = 4;
+    ((grBb_InitC4WordBits*) &gp->gv.bigblue.x0_w)->lane = 4;
 
-    ((grBb_InitByteLo7*) (gp + 0xC6))->lo7 = 0;
+    ((grBb_InitByteLo7*) &gp->gv.bigblue.x2)->lo7 = 0;
 
-    *(f32*) (gp + 0xC8) = -1000.0F * Ground_801C0498();
-    *(f32*) (gp + 0xCC) = 10.0F * Ground_801C0498();
+    M2C_FIELD(gp, f32*, 0xC8) = -1000.0F * Ground_801C0498();
+    M2C_FIELD(gp, f32*, 0xCC) = 10.0F * Ground_801C0498();
 
     {
         f32 fval = 0.0F * Ground_801C0498();
 
-        *(f32*) (gp + 0xD0) = fval;
-        *(f32*) (gp + 0xD4) = fval;
-        *(f32*) (gp + 0xD8) = fval;
-        *(f32*) (gp + 0xDC) = fval;
-        *(s16*) (gp + 0xF0) = 0;
-        *(f32*) (gp + 0xF8) = fval;
+        M2C_FIELD(gp, f32*, 0xD0) = fval;
+        M2C_FIELD(gp, f32*, 0xD4) = fval;
+        M2C_FIELD(gp, f32*, 0xD8) = fval;
+        M2C_FIELD(gp, f32*, 0xDC) = fval;
+        M2C_FIELD(gp, s16*, 0xF0) = 0;
+        M2C_FIELD(gp, f32*, 0xF8) = fval;
 
-        ((grBb_InitNibbleBits*) (gp + 0xC7))->hi = 0;
-        ((grBb_InitByteBits*) (gp + 0xC4))->b1 = 0;
-        ((grBb_InitByteBits*) (gp + 0xC4))->b2 = 0;
+        ((grBb_InitNibbleBits*) &gp->gv.bigblue.x3)->hi = 0;
+        ((grBb_InitByteBits*) &gp->gv.bigblue.x0_w)->b1 = 0;
+        ((grBb_InitByteBits*) &gp->gv.bigblue.x0_w)->b2 = 0;
     }
 
     {
-        u32 idx = (*(u32*) (gp + 0xC4) >> 15) & 0x7F;
+        u32 idx = ((grBb_InitC4WordBits*) &gp->gv.bigblue.x0_w)->lane;
         HSD_JObj* active =
             Ground_801C3FA4(gobj, grBb_TrackEntries[idx].jobj_index);
 
@@ -2502,14 +2503,14 @@ void grBigBlue_801EB004(Ground_GObj* gobj)
     }
 
     {
-        u32 idx2 = *(s8*) (gp + 0xC6) & 0x7F;
+        u32 idx2 = M2C_FIELD(gp, s8*, 0xC6) & 0x7F;
         HSD_JObj* next =
             Ground_801C3FA4(gobj, grBb_TrackEntries[idx2].jobj_index);
         u32 active_idx;
 
         HSD_JObjClearFlagsAll(next, JOBJ_HIDDEN);
 
-        active_idx = (*(u32*) (gp + 0xC4) >> 15) & 0x7F;
+        active_idx = ((grBb_InitC4WordBits*) &gp->gv.bigblue.x0_w)->lane;
         pos.x += grBb_TrackEntries[active_idx].delta.x;
         pos.y += grBb_TrackEntries[active_idx].delta.y;
         pos.z += grBb_TrackEntries[active_idx].delta.z;
@@ -3396,16 +3397,11 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
 
         if (found_ten == 0 && closest_lane != -1) {
             register s32 st_val;
-            register u8 byte;
             u8* car;
             u8* target_car = bp + (closest_lane << 6);
 
             st_val = 10;
-            byte = target_car[0xD4];
-#ifdef MWERKS_GEKKO
-            asm { rlwimi byte, st_val, 2, 24, 29 }
-#endif
-            target_car[0xD4] = byte;
+            ((struct grBigBlue_CarLane*) (target_car + 0xD4))->state = st_val;
 
             st_val = 4;
             {
@@ -3418,11 +3414,8 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
                         (st == 8 &&
                          *(f32*) (car + 0xE0) > *(f32*) (target_car + 0xE0)))
                     {
-                        byte = car[0xD4];
-#ifdef MWERKS_GEKKO
-                        asm { rlwimi byte, st_val, 2, 24, 29 }
-#endif
-                        car[0xD4] = byte;
+                        ((struct grBigBlue_CarLane*) (car + 0xD4))->state =
+                            st_val;
                     }
                 }
             }

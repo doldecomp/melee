@@ -1092,7 +1092,7 @@ struct grGreens_GroundVars {
         int whole_thing;
     } x0_flags;
     /*  +4 gp+C8 */ Vec* x4;
-    /*  +8 gp+CC */ struct grGreens_BlockVars* x8_blocks;
+    /*  +8 gp+CC */ struct grGreens_BlockVars (*x8_blocks)[6];
     /*  +C gp+D0 */ int xC;
     /* +10 gp+D4 */ int x10;
     /* +14 gp+D8 */ int x14;
@@ -1270,7 +1270,8 @@ struct grBigBlue_PlatformVars {
 /// Per-lane data for the Big Blue car gobj (ID 33), 0x40-byte stride from
 /// gp+D4. Only the fields read by the game logic are named here.
 struct grBigBlue_CarLane {
-    /* +00 gp+D4 */ u8 state;
+    /* +00 gp+D4 */ u8 state : 6;
+    /* +00 gp+D4 */ u8 state_lo : 2;
     /* +01 gp+D5 */ u8 x1;
     /* +02 gp+D6 */ s8 x2;
     /* +03 gp+D7 */ u8 x3;
@@ -1564,25 +1565,52 @@ struct ScrollVars {
     /* +44 gp+108 */ HSD_JObj* x44;
 };
 
+struct grHomeRun_MainGroundVars {
+    /* +00 gp+C4 */ HSD_GObj** gobjs;
+    /* +04 gp+C8 */ HSD_GObj** jobj_gobjs;
+    /* +08 gp+CC */ HSD_Text* xCC;
+    /* +0C gp+D0 */ HSD_JObj* xD0;
+    /* +10 gp+D4 */ HSD_GObj* xD4;
+    /* +14 gp+D8 */ HSD_GObj* rear_gobj;
+    /* +18 gp+DC */ HSD_GObj* rear2_gobj;
+    /* +1C gp+E0 */ HSD_GObj* rear3_gobj;
+    /* +20 gp+E4 */ HSD_GObj* rear4_gobj;
+    /* +24 gp+E8 */ struct {
+        u8 b0 : 1;
+        u8 b1 : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    } xE8_flags;
+};
+
 struct grHomeRun_GroundVars {
-    /* +00 gp+C4 */ u16 xC4;
-    /* +02 gp+C6 */ u16 xC6;
-    /* +04 gp+C8 */ int xC8;
-    /* +08 gp+CC */ int xCC;
-    /* +0C gp+D0 */ float xD0;
-    /* +0C gp+D4 */ u8 pad_D4[0x14];
-    /* +24 gp+E8 */ union {
-        u8 xE8;
+    union {
         struct {
-            u8 xE8_b0 : 1;
-            u8 xE8_b1 : 1;
-            u8 xE8_b2 : 1;
-            u8 xE8_b3 : 1;
-            u8 xE8_b4 : 1;
-            u8 xE8_b5 : 1;
-            u8 xE8_b6 : 1;
-            u8 xE8_b7 : 1;
+            /* +00 gp+C4 */ u16 xC4;
+            /* +02 gp+C6 */ u16 xC6;
+            /* +04 gp+C8 */ int xC8;
+            /* +08 gp+CC */ int xCC;
+            /* +0C gp+D0 */ float xD0;
+            /* +0C gp+D4 */ u8 pad_D4[0x14];
+            /* +24 gp+E8 */ union {
+                u8 xE8;
+                struct {
+                    u8 xE8_b0 : 1;
+                    u8 xE8_b1 : 1;
+                    u8 xE8_b2 : 1;
+                    u8 xE8_b3 : 1;
+                    u8 xE8_b4 : 1;
+                    u8 xE8_b5 : 1;
+                    u8 xE8_b6 : 1;
+                    u8 xE8_b7 : 1;
+                };
+            };
         };
+        struct grHomeRun_MainGroundVars main;
     };
 };
 
