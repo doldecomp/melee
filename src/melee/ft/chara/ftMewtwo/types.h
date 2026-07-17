@@ -80,7 +80,7 @@ typedef struct _ftMewtwoAttributes {
     float x5C_MEWTWO_TELEPORT_MOMENTUM;
     float x60_MEWTWO_TELEPORT_MOMENTUM_ADD;
     float x64_MEWTWO_TELEPORT_DRIFT;
-    s32 x68_MEWTWO_TELEPORT_ANGLE_CLAMP; // Clamp teleport travel if surface
+    int x68_MEWTWO_TELEPORT_ANGLE_CLAMP; // Clamp teleport travel if surface
                                          // angle is greater than this value
     float x6C_MEWTWO_TELEPORT_MOMENTUM_END_MUL;
     float x70_MEWTWO_TELEPORT_FREEFALL_MOBILITY;

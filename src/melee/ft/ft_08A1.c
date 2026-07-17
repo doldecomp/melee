@@ -59,9 +59,9 @@ bool ft_8008A244(Fighter_GObj* gobj)
 /// Seems to be called to end many actions if no frames are remaining
 void ft_8008A2BC(HSD_GObj* gobj)
 {
-    if (ftLib_800872A4(gobj) == FTKIND_MASTERH) {
+    if (ftLib_GetKind(gobj) == FTKIND_MASTERH) {
         ftMh_MS_389_80151018(gobj);
-    } else if (ftLib_800872A4(gobj) == FTKIND_CREZYH) {
+    } else if (ftLib_GetKind(gobj) == FTKIND_CREZYH) {
         ftCh_GrabUnk1_8015BC88(gobj);
     } else {
         ft_8008A348(gobj, 0);

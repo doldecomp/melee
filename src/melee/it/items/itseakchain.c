@@ -1,5 +1,7 @@
 #include "itseakchain.h"
 
+#include "inlines.h"
+
 #include "it/items/itseakchain.static.h"
 
 #include "platform.h"
@@ -189,15 +191,7 @@ Item_GObj* itSeakChain_Spawn(Fighter_GObj* parent_gobj, Point3d* arg1,
 
     fp = GET_FIGHTER(parent_gobj);
     spawn.kind = It_Kind_Seak_Chain;
-    spawn.prev_pos = *arg1;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = facing_dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    spawn.x0_parent_gobj = parent_gobj;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
+    Item_InitSpawn(&spawn, parent_gobj, arg1, facing_dir);
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
         ip = GET_ITEM(gobj);
@@ -330,7 +324,7 @@ void fn_802BB784(Item_GObj* gobj)
 static bool notInSpecialS(Fighter_GObj* gobj)
 {
     if (gobj != NULL) {
-        enum_t msid = ftLib_80086C0C(gobj);
+        enum_t msid = ftLib_GetMotionId(gobj);
         if ((msid >= ftSk_MS_SpecialSStart) &&
             (msid <= ftSk_MS_SpecialAirSEnd))
         {

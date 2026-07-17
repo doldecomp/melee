@@ -19,6 +19,7 @@
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Landing.h"
 #include "ftCommon/ftCo_Pass.h"
+#include "ftCommon/inlines.h"
 
 #include "ftSeak/forward.h"
 
@@ -27,8 +28,12 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <trigf.h>
+#include <trigf.h> // IWYU pragma: keep
 #include <baselib/gobj.h>
+
+static MotionFlags const ftSk_MF_SpecialHi_Coll =
+    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx | Ft_MF_KeepColAnimHitStatus |
+    Ft_MF_SkipHit;
 
 /* 112ED8 */ static void fn_80112ED8(Fighter_GObj* gobj);
 /* 112F48 */ static void ftSk_SpecialHi_80112F48(Fighter_GObj* gobj);
@@ -132,19 +137,16 @@ void ftSk_SpecialAirHi_Enter(HSD_GObj* gobj)
 
 /// #ftSk_SpecialAirHi_Enter
 
-/// Gelatart's scratch at https://decomp.me/scratch/ysptk
 void ftSk_SpecialHiStart_0_Anim(HSD_GObj* gobj)
 {
-    if (ftAnim_IsFramesRemaining((Fighter_GObj*) gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ftSk_SpecialHi_80113838(gobj);
     }
 }
 
-/// Gelatart's scratch at https://decomp.me/scratch/Ws01S, forked from a
-/// kipcode66 scratch
 void ftSk_SpecialAirHiStart_0_Anim(HSD_GObj* gobj)
 {
-    if (ftAnim_IsFramesRemaining((Fighter_GObj*) gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
         ftSk_SpecialHi_80113A30(gobj);
     }
 }
@@ -154,13 +156,11 @@ void ftSk_SpecialHiStart_0_IASA(HSD_GObj* gobj) {}
 /// Interrupt_SheikUpBStartAir
 void ftSk_SpecialAirHiStart_0_IASA(HSD_GObj* gobj) {}
 
-/// Kipcode66's scratch at https://decomp.me/scratch/ANgXI seems to match this
 void ftSk_SpecialHiStart_0_Phys(HSD_GObj* gobj)
 {
-    ft_80084F3C((Fighter_GObj*) gobj);
+    ft_80084F3C(gobj);
 }
 
-/// Gelatart's scratch at https://decomp.me/scratch/8aRxF
 void ftSk_SpecialAirHiStart_0_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -175,38 +175,25 @@ void ftSk_SpecialAirHiStart_0_Phys(HSD_GObj* gobj)
     ftCommon_8007D268(fp);
 }
 
-/// Gelatart's scratch at https://decomp.me/scratch/xhYaR, forked from a
-/// kipcode66 scratch
 void ftSk_SpecialHiStart_0_Coll(HSD_GObj* gobj)
 {
-    if (ft_80082708((Fighter_GObj*) gobj) == GA_Ground) {
+    if (ft_80082708(gobj) == GA_Ground) {
         ftSk_SpecialHi_80113324(gobj);
     }
 }
 
-/// Ribbanya's scratch at https://decomp.me/scratch/JHPTX seems to match this
-void ftSk_SpecialAirHiStart_0_Coll(HSD_GObj* gobj)
+void ftSk_SpecialAirHiStart_0_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 direction; // r4
-    s32 groundOrLedge;
+    bool groundOrLedge = ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp));
 
-    if (fp->facing_dir < 0.0f) {
-        direction = -1;
-    } else {
-        direction = +1;
-    }
-
-    groundOrLedge = ft_CheckGroundAndLedge((Fighter_GObj*) gobj, direction);
-
-    if (groundOrLedge != 0) {
+    if (groundOrLedge) {
         ftSk_SpecialHi_80113390(gobj);
     } else {
-        RETURN_IF(ftCliffCommon_80081298((Fighter_GObj*) gobj));
+        RETURN_IF(ftCliffCommon_80081298(gobj));
     }
 }
 
-/// Kipcode66's scratch at https://decomp.me/scratch/eQhs5 seems to match this
 void ftSk_SpecialHi_80113324(Fighter_GObj* arg0)
 {
     Fighter* temp_r31;
@@ -218,19 +205,16 @@ void ftSk_SpecialHi_80113324(Fighter_GObj* arg0)
     temp_r31->accessory4_cb = fn_80112ED8;
 }
 
-/// Kipcode66's scratch at https://decomp.me/scratch/Lda2E seems to match this
 void ftSk_SpecialHi_80113390(Fighter_GObj* arg0)
 {
     Fighter* temp_r31;
 
     temp_r31 = arg0->user_data;
-    ftCommon_8007D7FC(temp_r31);
-    Fighter_ChangeMotionState(arg0, 0x163, 0x0C4C508EU,
-                              temp_r31->cur_anim_frame, 1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(arg0, temp_r31, 0x163,
+                                    ftSk_MF_SpecialHi_Coll);
     temp_r31->accessory4_cb = fn_80112ED8;
 }
 
-/// Kipcode66's scratch at https://decomp.me/scratch/6l76B seems to match this
 void ftSk_SpecialHiStart_1_Anim(HSD_GObj* gobj)
 {
     Fighter* fp;
@@ -245,8 +229,6 @@ void ftSk_SpecialHiStart_1_Anim(HSD_GObj* gobj)
 
 /// Animation_SheikUpBTravel
 
-/// Gelatart's scratch at https://decomp.me/scratch/tHxCH, forked from a
-/// kipcode66 scratch
 void ftSk_SpecialAirHiStart_1_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -266,12 +248,11 @@ void ftSk_SpecialAirHiStart_1_IASA(HSD_GObj* gobj) {}
 
 void ftSk_SpecialHiStart_1_Phys(HSD_GObj* gobj)
 {
-    ftCommon_ApplyGroundMovement((Fighter_GObj*) gobj);
+    ftCommon_ApplyGroundMovement(gobj);
 }
 
 void ftSk_SpecialAirHiStart_1_Phys(HSD_GObj* gobj) {}
 
-/// Kipcode66's scratch at https://decomp.me/scratch/dULMS seems to match this
 void ftSk_SpecialHiStart_1_Coll(HSD_GObj* gobj)
 {
     s32 temp_r3;
@@ -282,7 +263,7 @@ void ftSk_SpecialHiStart_1_Coll(HSD_GObj* gobj)
     fp = gobj->user_data;
     collData = &fp->coll_data;
 
-    if (ft_80082708((Fighter_GObj*) gobj) == GA_Ground) {
+    if (ft_80082708(gobj) == GA_Ground) {
         temp_r3 = collData->env_flags;
 
         if (temp_r3 & Collide_LeftWallMask || temp_r3 & Collide_RightWallMask)
@@ -307,7 +288,6 @@ void ftSk_SpecialHiStart_1_Coll(HSD_GObj* gobj)
 void ftSk_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
 {
     s32 var_r0;
-    s32 direction;
     Fighter* fp;             // r31
     Fighter* fp2;            // r3
     ftSeakAttributes* attr;  // r30
@@ -318,20 +298,14 @@ void ftSk_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
     fp = gobj->user_data;
     collData = &fp->coll_data;
     attr = fp->dat_attrs;
-    fp->mv.sk.specialhi.xC = (s32) (fp->mv.sk.specialhi.xC + 1);
+    ++fp->mv.sk.specialhi.xC;
 
-    if (fp->facing_dir < 0.0f) {
-        direction = -1;
-    } else {
-        direction = 1;
-    }
-
-    if (ft_CheckGroundAndLedge((Fighter_GObj*) gobj, direction) != 0) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp)) != 0) {
         fp2 = gobj->user_data;
         attr2 = fp2->dat_attrs;
         if ((f32) fp2->mv.sk.specialhi.xC >= attr2->x3C) {
             var_r0 = 1;
-        } else if (ftCo_8009A134((Fighter_GObj*) gobj) != 0) {
+        } else if (ftCo_8009A134(gobj) != 0) {
             var_r0 = 0;
         } else {
             var_r0 = 1;
@@ -348,32 +322,12 @@ void ftSk_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
         (void) 1.0f;
         (void) S32_TO_F32;
         (void) deg_to_rad;
-        if ((collData->env_flags & Collide_CeilingMask) &&
-            (lbVector_AngleXY(&collData->ceiling.normal, &fp->self_vel) >
-             (deg_to_rad * (90.0f + (f32) attr->x50))))
-        {
-            ftSk_SpecialHi_80113F68(gobj);
-        }
-        if ((collData->env_flags & Collide_LeftWallMask) &&
-            (lbVector_AngleXY(&collData->left_facing_wall.normal,
-                              &fp->self_vel) >
-             (deg_to_rad * (90.0f + (f32) attr->x50))))
-        {
-            ftSk_SpecialHi_80113F68(gobj);
-        }
-        if ((collData->env_flags & Collide_RightWallMask) &&
-            (lbVector_AngleXY(&collData->right_facing_wall.normal,
-                              &fp->self_vel) >
-             (deg_to_rad * (90.0f + (f32) attr->x50))))
-        {
-            ftSk_SpecialHi_80113F68(gobj);
-        }
+        ftCommon_HandleTeleportCollisions(gobj, fp, collData, &attr->x50,
+                                          ftSk_SpecialHi_80113F68);
     }
 }
 
 /// AS_SheikUpBGroundtoAirFall?
-/// PsiLupan's scratch at https://decomp.me/scratch/HAj21 seems to match this
-/// Scratch has a comment defining static MotionFlags const coll_mf
 void ftSk_SpecialHi_8011374C(Fighter_GObj* gobj)
 {
     u32 fighterFlags;
@@ -574,28 +528,25 @@ void ftSk_SpecialHi_80113A30(Fighter_GObj* gobj)
     inlineA0(gobj);
 }
 
-/// Grumpy Zebra (anon)'s fork at https://decomp.me/scratch/eGfdU of Gelatart's
-/// scratch
 void ftSk_SpecialHi_Anim(HSD_GObj* gobj)
 {
     FORCE_PAD_STACK_8;
 
-    if (ftAnim_IsFramesRemaining((Fighter_GObj*) gobj) == 0) {
-        ft_8008A2BC((Fighter_GObj*) gobj);
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+        ft_8008A2BC(gobj);
     }
 }
 
-/// Gelatart's scratch at https://decomp.me/scratch/2S6Ll
 void ftSk_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSeakAttributes* attributes = fp->dat_attrs;
 
-    if (ftAnim_IsFramesRemaining((Fighter_GObj*) gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
         float x, y;
         x = attributes->x58;
         y = attributes->x5C;
-        ftCo_80096900((Fighter_GObj*) gobj, 1, 0, 1, x, y);
+        ftCo_80096900(gobj, 1, 0, 1, x, y);
     }
 }
 
@@ -604,13 +555,11 @@ void ftSk_SpecialHi_IASA(HSD_GObj* gobj) {}
 /// Interrupt_SheikUpBEndAir
 void ftSk_SpecialAirHi_IASA(HSD_GObj* gobj) {}
 
-/// Gelatart's scratch at https://decomp.me/scratch/dKeEf
 void ftSk_SpecialHi_Phys(HSD_GObj* gobj)
 {
-    ft_80084F3C((Fighter_GObj*) gobj);
+    ft_80084F3C(gobj);
 }
 
-/// Gelatart's scratch at https://decomp.me/scratch/rQtEW
 void ftSk_SpecialAirHi_Phys(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -631,39 +580,29 @@ void ftSk_SpecialAirHi_Phys(HSD_GObj* gobj)
     ftCommon_8007CEF4(fp);
 }
 
-/// Gelatart's scratch at https://decomp.me/scratch/AWQjm
 void ftSk_SpecialHi_Coll(HSD_GObj* gobj)
 {
-    if (ft_800827A0((Fighter_GObj*) gobj) == 0) {
+    if (ft_800827A0(gobj) == 0) {
         ftSk_SpecialHi_80113E40(gobj);
     }
 }
 
-/// Gelatart's scratch at https://decomp.me/scratch/58XJm
 void ftSk_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     u8 _[8];
 
-    int ledge_grab_dir;
     Fighter* fp = GET_FIGHTER(gobj);
     ftSeakAttributes* attributes = fp->dat_attrs;
 
-    if (fp->facing_dir < 0.0f) {
-        ledge_grab_dir = -1;
-    } else {
-        ledge_grab_dir = 1;
-    }
-    if (ft_CheckGroundAndLedge((Fighter_GObj*) gobj, ledge_grab_dir) != 0) {
-        ftCo_LandingFallSpecial_Enter((Fighter_GObj*) gobj, false,
-                                      attributes->x5C);
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
+        ftCo_LandingFallSpecial_Enter(gobj, false, attributes->x5C);
         return;
     }
-    if (!ftCliffCommon_80081298((Fighter_GObj*) gobj)) {
+    if (!ftCliffCommon_80081298(gobj)) {
         return;
     }
 }
 
-/// Gelatart's scratch at https://decomp.me/scratch/QTuAS
 void ftSk_SpecialHi_80113E40(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

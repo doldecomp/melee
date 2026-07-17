@@ -3276,6 +3276,7 @@ melee/it/it_26B1.c:
 
 melee/it/itspawn.c:
 	.text       start:0x8026C47C end:0x8026D564
+	.bss        start:0x804A0E30 end:0x804A0E70
 	.sdata2     start:0x804DC698 end:0x804DC6A8
 
 melee/it/itgroundcoll.c:
@@ -3300,7 +3301,7 @@ melee/it/itcoll.c:
 
 melee/it/it_3F14.c:
 	.data       start:0x803F1418 end:0x803F1F00
-	.bss        start:0x804A0E30 end:0x804A0FD8
+	.bss        start:0x804A0E70 end:0x804A0FD8
 	.sbss       start:0x804D6D00 end:0x804D6D48
 
 melee/it/it_2725.c:

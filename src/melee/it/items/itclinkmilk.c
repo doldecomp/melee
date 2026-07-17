@@ -1,5 +1,7 @@
 #include "itclinkmilk.h"
 
+#include "inlines.h"
+
 #include "ft/chara/ftCLink/ftCl_Init.h"
 #include "ft/ftlib.h"
 #include "it/inlines.h"
@@ -20,16 +22,8 @@ HSD_GObj* it_802C8B28(Item_GObj* parent, Vec3* pos, u32 bone, float facing_dir)
     PAD_STACK(4);
     if (parent != NULL) {
         spawn.kind = 0x7B;
-        spawn.prev_pos = *pos;
-        spawn.prev_pos.z = 0.0f;
-        spawn.pos = spawn.prev_pos;
-        spawn.facing_dir = facing_dir;
-        spawn.x3C_damage = 0;
-        spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-        spawn.x0_parent_gobj = parent;
-        spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-        spawn.x44_flag.b0 = false;
-        spawn.x40 = 0;
+        Item_InitSpawnOnPlaneNoInitialCollision(&spawn, parent, pos,
+                                                facing_dir);
         item_gobj = Item_80268B18(&spawn);
         if (item_gobj != NULL) {
             Item* ip = GET_ITEM(item_gobj);
