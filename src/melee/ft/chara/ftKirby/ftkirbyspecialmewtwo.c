@@ -260,7 +260,7 @@ void ftKb_SpecialNMt_801071FC(Fighter_GObj* gobj)
     }
 }
 
-extern u32 ftKb_Init_803CB828[];
+u32 ftKb_Init_803CB828[] = { 0x00030DB9, 0x00030DBC, 0x00030DBF, 0x00030DC2 };
 
 void ftKb_SpecialNMt_80107410(Fighter_GObj* gobj)
 {

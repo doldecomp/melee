@@ -1268,8 +1268,8 @@ melee/ft/chara/ftLink/ftLk_SpecialN.c:
 melee/ft/chara/ftKirby/ftkirby.c:
 	.text       start:0x800EE528 end:0x800F1F68
 	.rodata     start:0x803B7548 end:0x803B7570
-	.data       start:0x803C8368 end:0x803CB6D8
-	.sdata      start:0x804D3D98 end:0x804D3DAC
+	.data       start:0x803C8368 end:0x803CA5FC
+	.sdata      start:0x804D3D98 end:0x804D3DB0
 	.sdata2     start:0x804D9350 end:0x804D9364
 
 melee/ft/chara/ftKirby/ftkirbyattackdash.c:
@@ -1282,6 +1282,8 @@ melee/ft/chara/ftKirby/ftkirbyspecialhi.c:
 
 melee/ft/chara/ftKirby/ftkirbyspecialn.c:
 	.text       start:0x800F331C end:0x800F9FD4
+	.data       start:0x803CA5FC end:0x803CB540 align:4
+	.sdata      start:0x804D3DB0 end:0x804D3DB8
 	.sdata2     start:0x804D9388 end:0x804D93E4
 
 melee/ft/chara/ftKirby/ftkirbyspecialpikachu.c:
@@ -1290,6 +1292,7 @@ melee/ft/chara/ftKirby/ftkirbyspecialpikachu.c:
 
 melee/ft/chara/ftKirby/ftkirbyspecialkoopa.c:
 	.text       start:0x800FA588 end:0x800FB394
+	.data       start:0x803CB540 end:0x803CB6C0
 	.sdata2     start:0x804D93F0 end:0x804D9408
 
 melee/ft/chara/ftKirby/ftkirbyspeciallink.c:
@@ -1298,6 +1301,7 @@ melee/ft/chara/ftKirby/ftkirbyspeciallink.c:
 
 melee/ft/chara/ftKirby/ftkirbyspecialsamus.c:
 	.text       start:0x800FCC14 end:0x800FDC00
+	.data       start:0x803CB6C0 end:0x803CB6D8
 	.sdata2     start:0x804D9418 end:0x804D944C
 
 melee/ft/chara/ftKirby/ftkirbyspecialfox.c:
@@ -1332,6 +1336,7 @@ melee/ft/chara/ftKirby/ftkirbyspecialseak.c:
 melee/ft/chara/ftKirby/ftkirbyspecialmewtwo.c:
 	.text       start:0x80106F44 end:0x80108CE8
 	.rodata     start:0x803B7570 end:0x803B7588
+	.data       start:0x803CB828 end:0x803CB838
 	.sdata2     start:0x804D9508 end:0x804D9548
 
 melee/ft/chara/ftKirby/ftkirbyspecialiceclimber.c:
