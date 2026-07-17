@@ -15,6 +15,7 @@
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_FallSpecial.h"
@@ -330,31 +331,9 @@ void ftMt_SpecialAirHiLost_Coll(HSD_GObj* gobj)
             return;
         }
 
-        if ((collData->env_flags & Collide_CeilingMask) &&
-            (lbVector_AngleXY(&collData->ceiling.normal, &fp1->self_vel) >
-             deg_to_rad *
-                 (90.0f + mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP)))
-        {
-            ftMt_SpecialAirHiLost_Enter(gobj);
-        }
-
-        if (collData->env_flags & Collide_LeftWallMask &&
-            (lbVector_AngleXY(&collData->left_facing_wall.normal,
-                              &fp1->self_vel) >
-             deg_to_rad *
-                 (90.0f + mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP)))
-        {
-            ftMt_SpecialAirHiLost_Enter(gobj);
-        }
-
-        if (collData->env_flags & Collide_RightWallMask &&
-            lbVector_AngleXY(&collData->right_facing_wall.normal,
-                             &fp1->self_vel) >
-                deg_to_rad *
-                    (90.0f + mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP))
-        {
-            ftMt_SpecialAirHiLost_Enter(gobj);
-        }
+        ftCommon_HandleTeleportCollisions(
+            gobj, fp1, collData, &mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP,
+            ftMt_SpecialAirHiLost_Enter);
     }
 }
 

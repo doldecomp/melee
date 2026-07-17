@@ -14,6 +14,7 @@
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 
 #include "ftCommon/forward.h"
@@ -398,29 +399,9 @@ void ftPk_SpecialAirHiStart1_Coll(HSD_GObj* gobj)
     }
 
     if (!ftCliffCommon_80081298(gobj)) {
-        if (collData->env_flags & Collide_CeilingMask) {
-            float angle =
-                lbVector_AngleXY(&collData->ceiling.normal, &fp->self_vel);
-            if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
-                ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(gobj);
-            }
-        }
-
-        if (collData->env_flags & Collide_LeftWallMask) {
-            float angle = lbVector_AngleXY(&collData->left_facing_wall.normal,
-                                           &fp->self_vel);
-            if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
-                ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(gobj);
-            }
-        }
-
-        if (collData->env_flags & Collide_RightWallMask) {
-            float angle = lbVector_AngleXY(&collData->right_facing_wall.normal,
-                                           &fp->self_vel);
-            if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
-                ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(gobj);
-            }
-        }
+        ftCommon_HandleTeleportCollisions(
+            gobj, fp, collData, &pika_attr->xA0,
+            ftPk_SpecialHi_MotionChangeUpdateVel_Unk1);
     }
 }
 

@@ -9,8 +9,10 @@
 #include "ft/types.h"
 #include "gm/gm_16AE.h"
 #include "it/it_26B1.h"
+#include "lb/lbvector.h"
 
 #include <common_structs.h>
+#include <math.h>
 #include <dolphin/mtx.h>
 #include <baselib/archive.h>
 #include <baselib/controller.h>
@@ -209,6 +211,32 @@ static inline void Fighter_UnsetCmdVar0(Fighter_GObj* gobj)
 static inline CollData* Fighter_GetCollData(Fighter* fp)
 {
     return &fp->coll_data;
+}
+
+static inline void ftCommon_HandleTeleportCollisions(Fighter_GObj* gobj,
+                                                     Fighter* fp,
+                                                     CollData* coll,
+                                                     const s32* angle_clamp,
+                                                     HSD_GObjEvent on_collide)
+{
+    if ((coll->env_flags & Collide_CeilingMask) &&
+        lbVector_AngleXY(&coll->ceiling.normal, &fp->self_vel) >
+            deg_to_rad * (90.0f + *angle_clamp))
+    {
+        on_collide(gobj);
+    }
+    if ((coll->env_flags & Collide_LeftWallMask) &&
+        lbVector_AngleXY(&coll->left_facing_wall.normal, &fp->self_vel) >
+            deg_to_rad * (90.0f + *angle_clamp))
+    {
+        on_collide(gobj);
+    }
+    if ((coll->env_flags & Collide_RightWallMask) &&
+        lbVector_AngleXY(&coll->right_facing_wall.normal, &fp->self_vel) >
+            deg_to_rad * (90.0f + *angle_clamp))
+    {
+        on_collide(gobj);
+    }
 }
 
 /// @todo This and #ftCheckThrowB3, etc. are probably one macro or something.

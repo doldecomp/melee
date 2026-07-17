@@ -12,6 +12,7 @@
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Landing.h"
@@ -346,28 +347,8 @@ void ftZd_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
     }
 
     if (!ftCliffCommon_80081298(gobj)) {
-        if ((coll_data->env_flags & Collide_CeilingMask) != 0) {
-            float angle =
-                lbVector_AngleXY(&coll_data->ceiling.normal, &fp->self_vel);
-            if (angle > deg_to_rad * (90.0F + sa->x60)) {
-                ftZd_SpecialHi_8013A764(gobj);
-            }
-        }
-
-        if ((coll_data->env_flags & Collide_LeftWallMask) != 0) {
-            float angle = lbVector_AngleXY(&coll_data->left_facing_wall.normal,
-                                           &fp->self_vel);
-            if (angle > (deg_to_rad * (90.0F + sa->x60))) {
-                ftZd_SpecialHi_8013A764(gobj);
-            }
-        }
-        if ((coll_data->env_flags & Collide_RightWallMask) != 0) {
-            float angle = lbVector_AngleXY(
-                &coll_data->right_facing_wall.normal, &fp->self_vel);
-            if (angle > (deg_to_rad * (90.0F + sa->x60))) {
-                ftZd_SpecialHi_8013A764(gobj);
-            }
-        }
+        ftCommon_HandleTeleportCollisions(gobj, fp, coll_data, &sa->x60,
+                                          ftZd_SpecialHi_8013A764);
     }
 }
 

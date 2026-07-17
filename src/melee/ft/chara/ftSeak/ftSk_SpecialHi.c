@@ -352,26 +352,8 @@ void ftSk_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
         (void) 1.0f;
         (void) S32_TO_F32;
         (void) deg_to_rad;
-        if ((collData->env_flags & Collide_CeilingMask) &&
-            (lbVector_AngleXY(&collData->ceiling.normal, &fp->self_vel) >
-             (deg_to_rad * (90.0f + (f32) attr->x50))))
-        {
-            ftSk_SpecialHi_80113F68(gobj);
-        }
-        if ((collData->env_flags & Collide_LeftWallMask) &&
-            (lbVector_AngleXY(&collData->left_facing_wall.normal,
-                              &fp->self_vel) >
-             (deg_to_rad * (90.0f + (f32) attr->x50))))
-        {
-            ftSk_SpecialHi_80113F68(gobj);
-        }
-        if ((collData->env_flags & Collide_RightWallMask) &&
-            (lbVector_AngleXY(&collData->right_facing_wall.normal,
-                              &fp->self_vel) >
-             (deg_to_rad * (90.0f + (f32) attr->x50))))
-        {
-            ftSk_SpecialHi_80113F68(gobj);
-        }
+        ftCommon_HandleTeleportCollisions(gobj, fp, collData, &attr->x50,
+                                          ftSk_SpecialHi_80113F68);
     }
 }
 
