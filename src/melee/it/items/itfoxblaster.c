@@ -1,5 +1,7 @@
 #include "itfoxblaster.h"
 
+#include "inlines.h"
+
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/ft_0BF0.h"
@@ -519,16 +521,8 @@ Item_GObj* it_802AE8A8(f32 facing_dir, Fighter_GObj* fighter_gobj, Vec3* arg2,
 
     if (fighter_gobj != NULL) {
         spawn.kind = it_kind;
-        spawn.prev_pos = *arg2;
-        spawn.prev_pos.z = 0.0F;
-        spawn.pos = spawn.prev_pos;
-        spawn.facing_dir = facing_dir;
-        spawn.x3C_damage = 0;
-        spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
-        spawn.x0_parent_gobj = (HSD_GObj*) fighter_gobj;
-        spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-        spawn.x44_flag.b0 = false;
-        spawn.x40 = 0; // 1 = correct initial position?
+        Item_InitSpawnOnPlaneNoInitialCollision(
+            &spawn, (HSD_GObj*) fighter_gobj, arg2, facing_dir);
 
         item_gobj = Item_80268B18(
             &spawn); // Item spawn prefunction - spawn airborne [sets

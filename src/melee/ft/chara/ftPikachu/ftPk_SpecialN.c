@@ -6,6 +6,9 @@
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+
+#include "forward.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
@@ -17,6 +20,7 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
+#include "ftCommon/inlines.h"
 #include "it/items/itpikachutjoltground.h"
 
 #include <dolphin/mtx.h>
@@ -61,7 +65,7 @@ void ftPk_SpecialN_Anim(HSD_GObj* gobj)
             sp14.y = (pika_attr->x4 * fp->x34_scale.y) + fp->cur_pos.y;
             sp14.z = 0.0f;
             it_802B338C(gobj, &sp14, fp->facing_dir, pika_attr->x14);
-            switch (ftLib_800872A4(gobj)) {
+            switch (ftLib_GetKind(gobj)) {
             case 12:
                 ft_PlaySFX(fp, 240076, 127, 64);
                 break;
@@ -95,7 +99,7 @@ void ftPk_SpecialAirN_Anim(HSD_GObj* gobj)
             sp14.y = (pika_attr->xC * fp->x34_scale.y) + fp->cur_pos.y;
             sp14.z = 0.0f;
             it_802B338C(gobj, &sp14, fp->facing_dir, pika_attr->x14);
-            switch (ftLib_800872A4(gobj)) {
+            switch (ftLib_GetKind(gobj)) {
             case 12:
                 ft_PlaySFX(fp, 240076, 127, 64);
                 break;
@@ -134,9 +138,7 @@ void ftPk_SpecialN_Coll(HSD_GObj* gobj)
     Fighter* fp;
     if (!ft_80082708(gobj)) {
         fp = GET_FIGHTER(gobj);
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, 342, 206327938, fp->cur_anim_frame,
-                                  1.0f, 0.0f, 0);
+        ftCommon_GroundToAirStateChange(gobj, fp, 342, ftPk_MF_SpecialN_Coll);
     }
 }
 
@@ -147,8 +149,8 @@ void ftPk_SpecialAirN_Coll(HSD_GObj* gobj)
         fp = GET_FIGHTER(gobj);
         ftCommon_8007D7FC(fp);
         fp->self_vel.y = 0.0f;
-        Fighter_ChangeMotionState(gobj, 341, 206327938, fp->cur_anim_frame,
-                                  1.0f, 0.0f, 0);
+        Fighter_ChangeMotionState(gobj, 341, ftPk_MF_SpecialN_Coll,
+                                  fp->cur_anim_frame, 1.0f, 0.0f, 0);
     }
 }
 

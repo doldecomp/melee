@@ -116,9 +116,7 @@ void itMSBomb_Logic19_Thrown(Item_GObj* gobj)
 
 void itMsbomb_UnkMotion3_Phys(Item_GObj* gobj)
 {
-    ItemAttr* attr = GET_ITEM(gobj)->xCC_item_attr;
-    it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
-    it_80274658(gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
 }
 
 bool itMsbomb_UnkMotion3_Coll(Item_GObj* gobj)
@@ -202,9 +200,7 @@ void it_8029047C(Item_GObj* gobj)
 
 void itMsbomb_UnkMotion5_Phys(Item_GObj* gobj)
 {
-    ItemAttr* attr = GET_ITEM(gobj)->xCC_item_attr;
-    it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
-    it_80274658(gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
 }
 
 bool itMsbomb_UnkMotion5_Coll(Item_GObj* gobj)

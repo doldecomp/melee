@@ -440,6 +440,7 @@ void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
     int loop;
     u32 type_flag;
     s16 link;
+    int cycle_start;
     float min_x;
     float max_x;
     int i;
@@ -526,7 +527,7 @@ void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
             min_x = -F32_MAX;
             i = start_idx;
             max_x = F32_MAX;
-            link = i;
+            cycle_start = i;
 
             do {
                 if (max_x > vtx[lines[i].x0->v0_idx].pos.x) {
@@ -540,12 +541,10 @@ void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
                     }
                 }
                 i = lines[i].x0->prev_id0;
-            } while (i != link);
+            } while (i != cycle_start);
         }
 
-        mpisp = *arg1;
-        (void) mpisp;
-        if (mpisp != NULL) {
+        if ((mpisp = *arg1) != NULL) {
             *arg1 = mpisp->next;
         } else {
             mpisp = HSD_MemAlloc(0x2C);
@@ -554,10 +553,10 @@ void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
 
         mpisp->x20 = arg6 ? 0 : 2;
         mpisp->next = NULL;
-        mpisp->x24 = (short) end_idx;
         mpisp->x26 = (short) start_idx;
-        mpisp->x4 = lines[end_idx].x0->v0_idx;
+        mpisp->x24 = (short) end_idx;
         mpisp->x6 = lines[start_idx].x0->v1_idx;
+        mpisp->x4 = lines[end_idx].x0->v0_idx;
         mpisp->x8.x = vtx[mpisp->x4].pos.x;
         mpisp->x8.y = vtx[mpisp->x4].pos.y;
         mpisp->x8.z = z_val;

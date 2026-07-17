@@ -9,18 +9,16 @@
 #include "ft/types.h"
 #include "gm/gm_16AE.h"
 #include "it/it_26B1.h"
+#include "lb/lbvector.h"
 
 #include <common_structs.h>
+#include <math.h>
 #include <dolphin/mtx.h>
 #include <baselib/archive.h>
-#include <baselib/controller.h>
 #include <baselib/dobj.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjuserdata.h>
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
-#include <baselib/random.h>
 
 #define PUSH_ATTRS(fp, attributeName)                                         \
     do {                                                                      \
@@ -211,6 +209,32 @@ static inline CollData* Fighter_GetCollData(Fighter* fp)
     return &fp->coll_data;
 }
 
+static inline void ftCommon_HandleTeleportCollisions(Fighter_GObj* gobj,
+                                                     Fighter* fp,
+                                                     CollData* coll,
+                                                     const int* angle_clamp,
+                                                     HSD_GObjEvent on_collide)
+{
+    if ((coll->env_flags & Collide_CeilingMask) &&
+        lbVector_AngleXY(&coll->ceiling.normal, &fp->self_vel) >
+            deg_to_rad * (90.0f + *angle_clamp))
+    {
+        on_collide(gobj);
+    }
+    if ((coll->env_flags & Collide_LeftWallMask) &&
+        lbVector_AngleXY(&coll->left_facing_wall.normal, &fp->self_vel) >
+            deg_to_rad * (90.0f + *angle_clamp))
+    {
+        on_collide(gobj);
+    }
+    if ((coll->env_flags & Collide_RightWallMask) &&
+        lbVector_AngleXY(&coll->right_facing_wall.normal, &fp->self_vel) >
+            deg_to_rad * (90.0f + *angle_clamp))
+    {
+        on_collide(gobj);
+    }
+}
+
 /// @todo This and #ftCheckThrowB3, etc. are probably one macro or something.
 static inline bool ftCheckThrowB0(Fighter* fp)
 {
@@ -260,14 +284,6 @@ static inline int ftGetFacingDirInt2(Fighter_GObj* gobj)
 {
     return ftGetFacingDirInt(GET_FIGHTER(gobj));
 }
-
-/// Ternary macro for fcmpo-based facing direction check
-#define CLIFFCATCH_O(fp)                                                      \
-    ((fp)->facing_dir < 0.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT
-
-/// Ternary macro for fcmpu-based facing direction check
-#define CLIFFCATCH_U(fp)                                                      \
-    ((fp)->facing_dir != 1.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT
 
 /// @todo Fix naming.
 #define gmScriptEventCast(p_event, type) ((type*) p_event)

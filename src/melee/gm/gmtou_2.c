@@ -836,8 +836,8 @@ void gm_8019DF8C_OnFrame(void)
                             } else {
                                 chr = fn_8018F6DC(0x19);
                             }
-                        } while (gm_80164840(fn_8018F6FC((CSSIconHud) chr)) ==
-                                 0);
+                        } while (gm_IsCKindUnlocked(
+                                     fn_8018F6FC((CSSIconHud) chr)) == 0);
                         tmd->x4B8[i].x1 = chr;
 
                         {
@@ -893,8 +893,8 @@ void gm_8019DF8C_OnFrame(void)
                             } else {
                                 chr = fn_8018F6DC(0);
                             }
-                        } while (gm_80164840(fn_8018F6FC((CSSIconHud) chr)) ==
-                                 0);
+                        } while (gm_IsCKindUnlocked(
+                                     fn_8018F6FC((CSSIconHud) chr)) == 0);
                         tmd->x4B8[i].x1 = chr;
 
                         {

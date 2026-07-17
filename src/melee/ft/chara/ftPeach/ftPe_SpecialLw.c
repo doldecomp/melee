@@ -17,6 +17,7 @@
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftpickupitem.h"
+#include "ftCommon/inlines.h"
 #include "ftPeach/types.h"
 
 #include "it/forward.h"
@@ -165,9 +166,7 @@ static MotionFlags const coll_mf = Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim |
 static void handleAirColl(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirLw, coll_mf,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftPe_MS_SpecialAirLw, coll_mf);
     fp->accessory4_cb = spawnVeg;
 }
 
@@ -175,9 +174,7 @@ static void handleColl(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialLw, coll_mf,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftPe_MS_SpecialLw, coll_mf);
     fp->accessory4_cb = spawnVeg;
 }
 

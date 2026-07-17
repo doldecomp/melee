@@ -20,6 +20,7 @@
 #include "ftCommon/ftCo_Landing.h"
 #include "ftCommon/ftCo_SpecialAir.h"
 #include "ftCommon/ftCo_SpecialS.h"
+#include "ftCommon/inlines.h"
 
 #include "ftLink/forward.h"
 
@@ -403,9 +404,8 @@ void ftLk_SpecialS1_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirS1, coll_mf,
-                                  fp->cur_anim_frame, 1, 0, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, ftLk_MS_SpecialAirS1,
+                                        coll_mf);
         fp->accessory4_cb = onAccessory4;
     }
 }
@@ -426,9 +426,8 @@ void ftLk_SpecialS1Empty_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirS1Empty, coll_mf,
-                                  fp->cur_anim_frame, 1, 0, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, ftLk_MS_SpecialAirS1Empty,
+                                        coll_mf);
     }
 }
 
@@ -436,9 +435,7 @@ void ftLk_SpecialAirS1_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialS1, coll_mf,
-                                  fp->cur_anim_frame, 1, 0, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, ftLk_MS_SpecialS1, coll_mf);
         fp->accessory4_cb = onAccessory4;
     }
 }
@@ -458,8 +455,7 @@ void ftLk_SpecialAirS1Empty_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialS1Empty, coll_mf,
-                                  fp->cur_anim_frame, 1, 0, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, ftLk_MS_SpecialS1Empty,
+                                        coll_mf);
     }
 }

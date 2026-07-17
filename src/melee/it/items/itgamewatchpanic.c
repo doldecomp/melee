@@ -1,5 +1,7 @@
 #include "itgamewatchpanic.h"
 
+#include "inlines.h"
+
 #include "db/db.h"
 #include "ft/chara/ftGameWatch/ftGw_SpecialLw.h"
 #include "ft/ftlib.h"
@@ -22,16 +24,7 @@ HSD_GObj* it_802C7D60(Item_GObj* parent, Vec3* pos, Fighter_Part arg2, f32 dir)
     void** attr;
 
     spawn_item.kind = It_Kind_GameWatch_Panic;
-    spawn_item.prev_pos = *pos;
-    spawn_item.pos = spawn_item.prev_pos;
-    spawn_item.facing_dir = dir;
-    spawn_item.x3C_damage = 0;
-    spawn_item.vel.x = spawn_item.vel.y = spawn_item.vel.z = 0.0F;
-    spawn_item.x0_parent_gobj = parent;
-
-    spawn_item.x4_parent_gobj2 = spawn_item.x0_parent_gobj;
-    spawn_item.x44_flag.b0 = true;
-    spawn_item.x40 = 0;
+    Item_InitSpawn(&spawn_item, parent, pos, dir);
     gobj = Item_80268B18(&spawn_item);
     if (gobj != NULL) {
         Item* ip = GET_ITEM(gobj);

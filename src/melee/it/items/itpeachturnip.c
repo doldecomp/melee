@@ -1,5 +1,7 @@
 #include "itpeachturnip.h"
 
+#include "inlines.h"
+
 #include "ft/chara/ftPeach/ftPe_SpecialLw.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
@@ -112,15 +114,7 @@ Item_GObj* it_802BD4AC(Item_GObj* item_gobj, Vec3* pos, Fighter_Part part,
     itPeachTurnipAttributes* attr;
 
     spawn.kind = kind;
-    spawn.prev_pos = *pos;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = fdir;
-    spawn.x3C_damage = 0.0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
-    spawn.x0_parent_gobj = item_gobj;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = 1;
-    spawn.x40 = 0;
+    Item_InitSpawn(&spawn, item_gobj, pos, fdir);
 
     spawn_gobj = Item_80268B18(&spawn);
     if (spawn_gobj != NULL) {
@@ -224,11 +218,7 @@ bool itPeachturnip_UnkMotion3_Anim(Item_GObj* item_gobj)
 /// ProjectilePhysics_TurnipVelocity
 void itPeachturnip_UnkMotion3_Phys(Item_GObj* item_gobj)
 {
-    ItemAttr* attr;
-
-    attr = GET_ITEM(item_gobj)->xCC_item_attr;
-    it_80272860(item_gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
-    it_80274658(item_gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(item_gobj);
 }
 
 bool itPeachturnip_UnkMotion3_Coll(Item_GObj* item_gobj)

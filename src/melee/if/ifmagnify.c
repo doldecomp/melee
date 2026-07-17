@@ -592,7 +592,7 @@ void ifMagnify_802FC870(void)
 
     memzero(&ifMagnify_804A1DE0, 0x74);
     ifMagnify_802FC7C0(&ifMagnify_804A1DE0);
-    archive = ifAll_802F3690();
+    archive = ifAll_GetArchive();
     lbArchive_LoadSections(*archive, (void**) &ifMagnify_804A1DE0, "lupe", 0);
     i = 0;
     do {

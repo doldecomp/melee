@@ -54,16 +54,7 @@ void grTLuigi_80221C10(bool arg0) {}
 
 void grTLuigi_80221C14(void)
 {
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-
-    grTLuigi_80221CB4(0);
-    grTLuigi_80221CB4(1);
-    grTLuigi_80221CB4(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTLuigi_80221CB4);
 }
 
 void grTluigi_UnkStage0_OnLoad(void) {}

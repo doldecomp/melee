@@ -2730,7 +2730,7 @@ HSD_Text* fn_8018A000(void)
     lbl_804D6628 =
         lbArchive_80016DBC("GmTrain", &lbl_804D662C, &data[0xA0], 0);
     fn_80189B88();
-    ifAll_802F3404();
+    ifAll_GetHUDGObj();
     HSD_SisLib_803A611C(0, NULL, 9, 0x14, 0, 0xE, 0, 0x12);
     sub = &lbl_80473700.css;
     if (lbLang_IsSavedLanguageUS()) {

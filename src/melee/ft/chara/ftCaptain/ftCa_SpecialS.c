@@ -63,7 +63,7 @@ void ftCa_SpecialS_Enter(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialSStart, 0, 0, 1, 0, NULL);
     setCallbacks(gobj);
     ftAnim_8006EBA4(gobj);
-    switch (ftLib_800872A4(gobj)) {
+    switch (ftLib_GetKind(gobj)) {
     case FTKIND_CAPTAIN: {
         efSync_Spawn(1169, gobj, fp->parts[FtPart_HeadN].joint);
         fp->fv.ca.during_specials_start = true;
@@ -95,7 +95,7 @@ static inline void setupAirStart(HSD_GObj* gobj)
                               NULL);
     setCallbacks(gobj);
     ftAnim_8006EBA4(gobj);
-    switch (ftLib_800872A4(gobj)) {
+    switch (ftLib_GetKind(gobj)) {
     case FTKIND_CAPTAIN: {
         efSync_Spawn(1169, gobj, fp->parts[FtPart_HeadN].joint);
         fp->fv.ca.during_specials_start = true;
@@ -216,7 +216,7 @@ void ftCa_SpecialS_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->fv.ca.during_specials) {
-        switch (ftLib_800872A4(gobj)) {
+        switch (ftLib_GetKind(gobj)) {
         case FTKIND_CAPTAIN: {
             efSync_Spawn(1170, gobj, fp->parts[FtPart_TransN].joint,
                          &fp->facing_dir);
@@ -258,7 +258,7 @@ void ftCa_SpecialAirS_Anim(HSD_GObj* gobj)
     ftCaptain_DatAttrs* captainAttrs = fp->dat_attrs;
     u8 _[8];
     if (!fp->fv.ca.during_specials) {
-        switch (ftLib_800872A4(gobj)) {
+        switch (ftLib_GetKind(gobj)) {
         case FTKIND_CAPTAIN: {
             efSync_Spawn(1171, gobj, fp->parts[FtPart_TransN].joint,
                          &fp->facing_dir);

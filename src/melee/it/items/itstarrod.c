@@ -136,9 +136,7 @@ void itStarRod_Logic22_Thrown(Item_GObj* gobj)
 
 void itStarrod_UnkMotion4_Phys(Item_GObj* gobj)
 {
-    ItemAttr* x = GET_ITEM(gobj)->xCC_item_attr;
-    it_80272860(gobj, x->x10_fall_speed, x->x14_fall_speed_max);
-    it_80274658(gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
 }
 
 bool itStarrod_UnkMotion3_Coll(Item_GObj* gobj)

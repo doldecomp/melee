@@ -1559,7 +1559,7 @@ void gm_801B4D34(GameScene* scene)
      * If Falco is unlocked,
      * the player will fight him instead about 1/3 of the time.
      */
-    if (gm_80164840(CKIND_FALCO) && HSD_Randi(100) <= 33) {
+    if (gm_IsCKindUnlocked(CKIND_FALCO) && HSD_Randi(100) <= 33) {
         temp_r30->x7C = CKIND_FALCO;
     } else {
         temp_r30->x7C = temp_r31->xA[0];
@@ -1599,7 +1599,7 @@ void gm_801B4EB8(GameScene* scene)
     gm_801B4064(scene);
 
     /// If Luigi isn't unlocked, don't spawn him for this match.
-    if (!gm_80164840(CKIND_LUIGI)) {
+    if (!gm_IsCKindUnlocked(CKIND_LUIGI)) {
         for (i = 0; i < 3; i++) {
             if (data->players[i + 1].c_kind == CKIND_LUIGI) {
                 data->players[i + 1].slot_type = Gm_PKind_NA;
