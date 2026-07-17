@@ -14,7 +14,6 @@
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
-#include "it/it_26B1_inline.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "lb/lb_00B0.h"

@@ -14,7 +14,6 @@
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
-#include "it/it_26B1_inline.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "it/items/itzeldadinfireexplode.h"
@@ -45,7 +44,7 @@ typedef struct {
     float x2C;
 } ItZeldaDinFire_ItemVars;
 
-Fighter_GObj* it_802C3AF0(Item_GObj* gobj)
+Fighter_GObj* itZeldaDinFire_GetOwner(Item_GObj* gobj)
 {
     return itGetOwner(gobj);
 }

@@ -14,6 +14,20 @@ static inline Item* GetItemData(HSD_GObj* gobj)
     return item_data;
 }
 
+#ifndef IT_26B1_SOURCE
+extern inline HSD_GObj* itGetOwner(Item_GObj* gobj)
+{
+    Item* ip = HSD_GObjGetUserData(gobj);
+    return ip->owner;
+}
+
+extern inline s32 itGetMotionId(Item_GObj* gobj)
+{
+    Item* ip = HSD_GObjGetUserData(gobj);
+    return ip->msid;
+}
+#endif
+
 static inline void itResetVelocity(Item* ip)
 {
     ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0F;
