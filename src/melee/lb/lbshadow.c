@@ -22,8 +22,6 @@
 #include <melee/lb/types.h>
 #include <MSL/math_ppc.h>
 
-/// @todo 98.16%: case 1 emits the fp ops as {fmuls t2; lwz; fnmsubs bez1};
-///       target is {fnmsubs bez1; lwz; fmuls t2}.
 void lbShadow_8000E9F0(Vec3* p, HSD_Spline* spline, f32 u)
 {
     Vec3* cp;
@@ -56,7 +54,7 @@ void lbShadow_8000E9F0(Vec3* p, HSD_Spline* spline, f32 u)
         f32 t2, u_1, bez1, bez0, bez2;
         cp = &spline->cv[idx * 3];
         t2 = 3.0F * (t * t);
-        bez1 = 1.0F - (4.0F * t);
+        bez1 = (-4.0F * t) + 1.0F;
         u_1 = t - 1.0F;
         bez0 = -3.0F * u_1 * u_1;
         bez1 = 3.0F * (bez1 + t2);
