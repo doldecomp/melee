@@ -6,7 +6,7 @@
 #include "grfzerocar.h"
 #include "grmaterial.h"
 #include "ground.h"
-#include "m2c_macros.h"
+#include <placeholder.h>
 #include "placeholder.h"
 
 #include <platform.h>
