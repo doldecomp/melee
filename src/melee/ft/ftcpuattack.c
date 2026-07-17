@@ -3,6 +3,7 @@
 #include "ftcmdscript.h"
 
 #include "baselib/debug.h"
+#include "baselib/random.h"
 #include "ft/ftlib.h"
 
 #include <melee/ft/chara/ftDonkey/forward.h>
@@ -12,7 +13,7 @@
 #include <melee/ft/chara/ftZelda/forward.h>
 
 #include <math.h>
-#include <math_ppc.h>
+#include <math_ppc.h> // IWYU pragma: keep
 #include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/chara/ftCommon/ftCo_09F7.h>
 #include <melee/ft/chara/ftCommon/ftCo_0A01.h>
@@ -1774,6 +1775,8 @@ void ftCo_800B77E8(Fighter* fp)
             }
         }
         break;
+    default:
+        break;
     }
 }
 
@@ -3026,6 +3029,8 @@ bool ftCo_800BB768(Fighter* fp, Fighter* arg1)
         {
             return true;
         }
+        break;
+    default:
         break;
     }
     return false;

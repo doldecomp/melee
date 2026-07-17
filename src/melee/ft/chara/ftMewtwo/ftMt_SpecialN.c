@@ -32,7 +32,7 @@
 #include "lb/lb_00B0.h"
 
 #include <common_structs.h>
-#include <trigf.h>
+#include <trigf.h> // IWYU pragma: keep
 #include <dolphin/mtx.h>
 
 /// SpecialN/SpecialAirN

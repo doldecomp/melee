@@ -1,5 +1,7 @@
 #include "itnessbat.h"
 
+#include "inlines.h"
+
 #include <placeholder.h>
 #include <platform.h>
 
@@ -53,16 +55,7 @@ HSD_GObj* it_802AD478(Item_GObj* gobj, Vec3* pos, Fighter_Part part,
 
     if (gobj != NULL) {
         spawn.kind = It_Kind_Ness_Bat;
-        spawn.prev_pos = *pos;
-        spawn.prev_pos.z = 0.0f;
-        spawn.pos = spawn.prev_pos;
-        spawn.facing_dir = facing_dir;
-        spawn.x3C_damage = 0;
-        spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-        spawn.x0_parent_gobj = gobj;
-        spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-        spawn.x44_flag.b0 = false;
-        spawn.x40 = 0;
+        Item_InitSpawnOnPlaneNoInitialCollision(&spawn, gobj, pos, facing_dir);
 
         bat = Item_80268B18(&spawn);
         if (bat != NULL) {

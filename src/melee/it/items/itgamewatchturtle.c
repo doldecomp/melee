@@ -35,7 +35,7 @@ Item_GObj* it_802C6F40(HSD_GObj* parent, Vec3* pos, Fighter_Part arg2, f32 dir)
     void** temp_r30;
 
     spawn_item.kind = It_Kind_GameWatch_Turtle;
-    itGamewatch_InitSpawnItem(&spawn_item, parent, pos, dir);
+    Item_InitSpawn(&spawn_item, parent, pos, dir);
     item_gobj = Item_80268B18(&spawn_item);
     if (item_gobj != NULL) {
         Item* it = GET_ITEM(item_gobj);
