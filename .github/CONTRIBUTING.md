@@ -109,10 +109,7 @@ pre-commit run --all-files # Run the hook once on existing code
       };
       ```
 
-- If you copy structs from another project
-  - remove any members from the struct which are not part of your code or existing code
-  - replace unused members with padding
-  - Double check that the struct values are correct. Do not just assume they are correct
+- **Do not copy structs from another project**
 
 ### <a name="conditionals"></a>Conditionals
 - Make NULL checks explicit
