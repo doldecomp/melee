@@ -116,15 +116,21 @@ static inline void inlineA0(Fighter_GObj* gobj, enum_t arg1, enum_t arg2,
     efAsync_Spawn(gobj, fp_x60C, arg1, arg2, jobj, &param);
 }
 
-void ftCo_800978D4(Fighter_GObj* gobj)
+static inline void ftCo_800978D4_inline(Fighter_GObj* gobj, float* param)
 {
     Fighter* fp = gobj->user_data;
-    float param =
+    *param =
         atan2f(-fp->coll_data.floor.normal.x, fp->coll_data.floor.normal.y);
-    PAD_STACK(12);
-    efAsync_Spawn(gobj, (u8*) gobj->user_data + 0x60c, 4, 0x406,
-                  fp->parts[FtPart_TopN].joint, &param);
+    efAsync_Spawn(gobj, &((Fighter*) gobj->user_data)->x60C, 4, 0x406,
+                  fp->parts[FtPart_TopN].joint, param);
     ftCo_800976A4(gobj);
+}
+
+void ftCo_800978D4(Fighter_GObj* gobj)
+{
+    float param;
+    ftCo_800978D4_inline(gobj, &param);
+    PAD_STACK(12);
 }
 
 void ftCo_8009794C(Fighter_GObj* gobj)
@@ -143,7 +149,10 @@ void ftCo_8009794C(Fighter_GObj* gobj)
         Fighter_ChangeMotionState(
             gobj, msid, Ft_MF_SkipNametagVis | Ft_MF_KeepColAnimPartHitStatus,
             0, 1, 0, NULL);
-        ftCo_800978D4(gobj);
+        {
+            float param;
+            ftCo_800978D4_inline(gobj, &param);
+        }
         PAD_STACK(24);
         fp->x67C = 255;
         fp->x67D = 255;
@@ -170,8 +179,7 @@ void ftCo_80097AF4(Fighter_GObj* gobj)
         rot1 = jobj->mtx[1][1];
     }
     if (ABS(rot0) < ABS(rot1)) {
-        Fighter* fp = gobj->user_data;
-        if (fp->ground_or_air == GA_Air) {
+        if (GET_FIGHTER(gobj)->ground_or_air == GA_Air) {
             ftCommon_8007D7FC(fp);
         }
         {
@@ -188,8 +196,8 @@ void ftCo_80097AF4(Fighter_GObj* gobj)
             fp->x67C = 255;
             fp->x67D = 255;
             ftCommon_8007E2F4(fp, 511);
-            ftCommon_8007CCE8(fp);
         }
+        ftCommon_8007CCE8(fp);
     } else {
         ftCo_800978D4(gobj);
         Camera_80030E44(4, &fp->cur_pos);

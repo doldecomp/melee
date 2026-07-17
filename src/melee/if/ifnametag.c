@@ -190,7 +190,7 @@ void un_802FCBA0(void)
     HSD_Archive** archive;
     DynamicModelDesc** x;
 
-    archive = ifAll_802F3690();
+    archive = ifAll_GetArchive();
     lbArchive_LoadSections(*archive, (void**) &x, "ScInfPnm_scene_models", 0);
     un_804A1ED0.joint = x[0]->joint;
     if (x[0]->anims) {

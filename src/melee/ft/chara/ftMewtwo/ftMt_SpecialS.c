@@ -17,6 +17,7 @@
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_Throw.h"
+#include "ftCommon/inlines.h"
 #include "ftMewtwo/types.h"
 
 #include <dolphin/mtx.h>
@@ -212,11 +213,8 @@ void ftMt_SpecialS_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D5D4(fp);
-
-    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirS,
-                              FTMEWTWO_SPECIALS_COLL_FLAG, fp->cur_anim_frame,
-                              1.0f, 0.0f, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftMt_MS_SpecialAirS,
+                                    FTMEWTWO_SPECIALS_COLL_FLAG);
 
     ftCommon_ClampAirDrift(fp);
 
@@ -235,11 +233,8 @@ void ftMt_SpecialAirS_AirToGround(HSD_GObj* gobj)
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
 
-    ftCommon_8007D7FC(fp);
-
-    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialS,
-                              FTMEWTWO_SPECIALS_COLL_FLAG, fp->cur_anim_frame,
-                              1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftMt_MS_SpecialS,
+                                    FTMEWTWO_SPECIALS_COLL_FLAG);
 
     ftMewtwo_SpecialS_SetGrab(gobj);
 

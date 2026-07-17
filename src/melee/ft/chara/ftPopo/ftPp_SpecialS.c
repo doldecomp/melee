@@ -8,6 +8,7 @@
 #include "ft/ft_0892.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ftCommon/inlines.h"
 #include "ftNana/ftNn_Init.h"
 #include "ftPopo/ftPp_Init.h"
 #include "pl/player.h"
@@ -611,9 +612,7 @@ static inline void inline4(Fighter_GObj* gobj, int msid)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftIceClimberAttributes* da = fp->dat_attrs;
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, msid, 0xC4C528A, fp->cur_anim_frame, 1.0F,
-                              0.0F, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, msid, ftPp_MF_SpecialS_Coll);
     inlineA0(gobj);
     fp->x74_anim_vel.y = 0.0F;
     fp->self_vel.y = 0.0F;

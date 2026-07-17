@@ -155,7 +155,7 @@ HSD_GObj* gmTitle_801A165C(void)
         HSD_GObj_SetupProc(gobj, gmTitle_801A1630, 0);
     }
     HSD_JObjAnimAll(jobj);
-    if (gm_80164840(CKIND_MARS) || gm_80164840(CKIND_EMBLEM)) {
+    if (gm_IsCKindUnlocked(CKIND_MARS) || gm_IsCKindUnlocked(CKIND_EMBLEM)) {
         var_r0 = true;
     } else {
         var_r0 = false;

@@ -1,5 +1,7 @@
 #include "itgamewatchturtle.h"
 
+#include "inlines.h"
+
 #include "it/itzako.h"
 
 #include <sysdolphin/baselib/gobj.h>
@@ -33,16 +35,7 @@ Item_GObj* it_802C6F40(HSD_GObj* parent, Vec3* pos, Fighter_Part arg2, f32 dir)
     void** temp_r30;
 
     spawn_item.kind = It_Kind_GameWatch_Turtle;
-    spawn_item.prev_pos = *pos;
-    spawn_item.pos = spawn_item.prev_pos;
-    spawn_item.facing_dir = dir;
-    spawn_item.x3C_damage = 0;
-    spawn_item.vel.x = spawn_item.vel.y = spawn_item.vel.z = 0.0f;
-    spawn_item.x0_parent_gobj = parent;
-
-    spawn_item.x4_parent_gobj2 = spawn_item.x0_parent_gobj;
-    spawn_item.x44_flag.b0 = true;
-    spawn_item.x40 = 0;
+    itGamewatch_InitSpawnItem(&spawn_item, parent, pos, dir);
     item_gobj = Item_80268B18(&spawn_item);
     if (item_gobj != NULL) {
         Item* it = GET_ITEM(item_gobj);

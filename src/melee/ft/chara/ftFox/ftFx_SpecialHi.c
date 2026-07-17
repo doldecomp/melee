@@ -16,6 +16,7 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Pass.h"
+#include "ftCommon/inlines.h"
 #include "ftFox/types.h"
 #include "lb/lbrefract.h"
 #include "lb/lbvector.h"
@@ -212,10 +213,8 @@ void ftFx_SpecialHiHoldAir_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialHiHold,
-                              FTFOX_SPECIALHI_COLL_FLAG, fp->cur_anim_frame,
-                              1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftFx_MS_SpecialHiHold,
+                                    FTFOX_SPECIALHI_COLL_FLAG);
 
     fp->accessory4_cb = ftFx_SpecialHi_CreateChargeGFX;
 

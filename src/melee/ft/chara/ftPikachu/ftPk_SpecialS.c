@@ -12,6 +12,7 @@
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/inlines.h"
 #include "ftPikachu/types.h"
 
 #include "lb/forward.h"
@@ -121,17 +122,13 @@ static const u32 transition_flags0 =
 void ftPk_SpecialS_ChangeMotion_Unk00(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 348, transition_flags0, fp->cur_anim_frame,
-                              1, 0, 0);
+    ftCommon_GroundToAirStateChange(gobj, fp, 348, transition_flags0);
 }
 
 void ftPk_SpecialS_ChangeMotion_Unk01(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 343, transition_flags0, fp->cur_anim_frame,
-                              1.0f, 0.0f, 0);
+    ftCommon_AirToGroundStateChange(gobj, fp, 343, transition_flags0);
 }
 
 void ftPk_SpecialSHold_Anim(HSD_GObj* gobj)
@@ -220,17 +217,13 @@ static u32 const transition_flags1 =
 void ftPk_SpecialS_ChangeMotion_Unk02(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 349, transition_flags1, fp->cur_anim_frame,
-                              1, 0, 0);
+    ftCommon_GroundToAirStateChange(gobj, fp, 349, transition_flags1);
 }
 
 void ftPk_SpecialS_ChangeMotion_Unk03(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 344, transition_flags1, fp->cur_anim_frame,
-                              1, 0, 0);
+    ftCommon_AirToGroundStateChange(gobj, fp, 344, transition_flags1);
 }
 
 void ftPk_SpecialS_ChangeMotion_Unk04(HSD_GObj* gobj)
@@ -328,17 +321,13 @@ static u32 const transition_flags2 =
 void ftPk_SpecialS_ChangeMotion_Unk06(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 352, transition_flags2, fp->cur_anim_frame,
-                              1, 0, 0);
+    ftCommon_GroundToAirStateChange(gobj, fp, 352, transition_flags2);
 }
 
 void ftPk_SpecialS_ChangeMotion_Unk07(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 347, transition_flags2, fp->cur_anim_frame,
-                              1, 0, 0);
+    ftCommon_AirToGroundStateChange(gobj, fp, 347, transition_flags2);
 }
 
 void ftPk_SpecialS_ChangeMotion_Unk08(HSD_GObj* gobj)
