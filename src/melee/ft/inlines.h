@@ -289,14 +289,6 @@ static inline int ftGetFacingDirInt2(Fighter_GObj* gobj)
     return ftGetFacingDirInt(GET_FIGHTER(gobj));
 }
 
-/// Ternary macro for fcmpo-based facing direction check
-#define CLIFFCATCH_O(fp)                                                      \
-    ((fp)->facing_dir < 0.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT
-
-/// Ternary macro for fcmpu-based facing direction check
-#define CLIFFCATCH_U(fp)                                                      \
-    ((fp)->facing_dir != 1.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT
-
 /// @todo Fix naming.
 #define gmScriptEventCast(p_event, type) ((type*) p_event)
 #define gmScriptEventUpdatePtr(event, type)                                   \
