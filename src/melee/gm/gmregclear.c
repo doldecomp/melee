@@ -486,10 +486,10 @@ void gm_8017C838(void)
         break;
     case 0x48:
         sp10[0] = 0xC;
-        if (gm_80164840(CKIND_PICHU) != 0) {
+        if (gm_IsCKindUnlocked(CKIND_PICHU) != 0) {
             sp10[1] = FTKIND_PICHU;
         }
-        if (gm_80164840(CKIND_PURIN) != 0) {
+        if (gm_IsCKindUnlocked(CKIND_PURIN) != 0) {
             sp10[2] = FTKIND_PURIN;
         }
         break;
@@ -578,7 +578,7 @@ void gm_8017CBAC(UnkAdventureData* arg0, gmm_x0_528_t* arg1, u8 arg2)
     u8 temp_r31;
     u8* temp_r3;
 
-    temp_r31 = gm_80164024(arg0->x0.ckind);
+    temp_r31 = gm_CKindToSelKind(arg0->x0.ckind);
     Ground_801C5A60();
     switch (arg2) {
     case 21:
@@ -1121,7 +1121,7 @@ s32 fn_8017D9C0(u8* arg0, u8* arg1)
 
     p = base;
     for (i = 0; i < len; i++) {
-        if (gm_80164840(*p) != 0) {
+        if (gm_IsCKindUnlocked(*p) != 0) {
             ch = *p;
             if ((s8) ch == (s8) arg0[0]) {
                 var_r0 = -1;
@@ -2739,8 +2739,8 @@ void gm_80180B18(void)
     int i;
 
     for (i = 0; i < 0x1B; i++) {
-        u8 idx = gm_80164024((u8) i);
-        lbl_80472E48.x14[gm_80164024((u8) i)] =
+        u8 idx = gm_CKindToSelKind((u8) i);
+        lbl_80472E48.x14[gm_CKindToSelKind((u8) i)] =
             (u32) *gmMainLib_8015D06C(idx) / 10;
     }
 }
@@ -2750,8 +2750,9 @@ void gm_80180BA0(void)
     int i;
 
     for (i = 0; i < 0x1B; i++) {
-        u8 idx = gm_80164024((u8) i);
-        *gmMainLib_8015D06C(gm_80164024((u8) i)) = lbl_80472E48.x14[idx] * 0xA;
+        u8 idx = gm_CKindToSelKind((u8) i);
+        *gmMainLib_8015D06C(gm_CKindToSelKind((u8) i)) =
+            lbl_80472E48.x14[idx] * 0xA;
     }
 }
 
@@ -2836,7 +2837,9 @@ void fn_80180C60(HSD_GObj* gobj)
         HSD_JObjReqAnimAll(jobj, 0.0f);
     } else if (lbl_80472E48.x0 & 3) {
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-    } else if (dist > lbl_80472E48.x14[gm_80164024((u8) lbl_80472E48.unk_4)]) {
+    } else if (dist >
+               lbl_80472E48.x14[gm_CKindToSelKind((u8) lbl_80472E48.unk_4)])
+    {
         if (lbl_804D65D4 == 0) {
             lbAudioAx_800237A8(0x9C40, 0x7F, 0x40);
             lbAudioAx_800237A8(0x144, 0x7F, 0x40);
@@ -2962,9 +2965,9 @@ void fn_80181598(void)
              (HSD_PadCopyStatus[lbl_80472E48.x10].trigger & 0x100)))
         {
             if (lbl_80472EC8[0] >
-                lbl_80472E48.x14[gm_80164024((u8) lbl_80472E48.unk_4)])
+                lbl_80472E48.x14[gm_CKindToSelKind((u8) lbl_80472E48.unk_4)])
             {
-                lbl_80472E48.x14[gm_80164024((u8) lbl_80472E48.unk_4)] =
+                lbl_80472E48.x14[gm_CKindToSelKind((u8) lbl_80472E48.unk_4)] =
                     lbl_80472EC8[0];
             }
             gm_8016B328();
@@ -3579,9 +3582,9 @@ s32 gm_80182578(void)
                 return mode;
             }
             if (mode == 0x21) {
-                mode = gmMainLib_8015D6BC(gm_80164024((u8) idx));
+                mode = gmMainLib_8015D6BC(gm_CKindToSelKind((u8) idx));
             } else {
-                mode = gmMainLib_8015D710(gm_80164024((u8) idx));
+                mode = gmMainLib_8015D710(gm_CKindToSelKind((u8) idx));
             }
             if ((u8) lbl_80472ED8.x6BC != 0) {
                 u32 score_store = (u32) lbl_80472ED8.x6C0;
@@ -3822,10 +3825,10 @@ void fn_80182B5C(void)
 
     switch (mode) {
     case 33:
-        gmMainLib_8015D6BC(gm_80164024((u8) idx));
+        gmMainLib_8015D6BC(gm_CKindToSelKind((u8) idx));
         goto func;
     case 34:
-        gmMainLib_8015D710(gm_80164024((u8) idx));
+        gmMainLib_8015D710(gm_CKindToSelKind((u8) idx));
     func:
         if (lbl_80472ED8.x6BC != 0) {
             if ((u32) lbl_80472ED8.x6C0 < var_r30) {

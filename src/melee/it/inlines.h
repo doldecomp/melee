@@ -1,6 +1,8 @@
 #ifndef MELEE_IT_INLINES_H
 #define MELEE_IT_INLINES_H
 
+#include "it/it_2725.h"
+#include "it/it_3F14.h"
 #include "it/types.h"
 #include "mp/mplib.h"
 
@@ -17,6 +19,22 @@ static inline Item* GetItemData(HSD_GObj* gobj)
 static inline void itResetVelocity(Item* ip)
 {
     ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0F;
+}
+
+static inline void Item_ApplyFallingPhysics(Item_GObj* gobj)
+{
+    ItemAttr* attrs = GET_ITEM(gobj)->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+    it_80274658(gobj, it_804D6D28->x68_float);
+}
+
+static inline bool Item_TickLifetime(Item* ip)
+{
+    if (ip->xD44_lifeTimer <= 0.0f) {
+        return true;
+    }
+    ip->xD44_lifeTimer -= 1.0f;
+    return false;
 }
 
 /// Check whether the grapple chain from @p head to the tip @p pos or to its

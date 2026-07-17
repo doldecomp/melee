@@ -6,6 +6,8 @@
 #include "gmregclear.h"
 #include "types.h"
 
+#include "ft/forward.h"
+
 #include <melee/if/textlib.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lblanguage.h>
@@ -182,17 +184,17 @@ void gm_80173B30(u32 arg0)
     }
 }
 
-void gm_80173BC4(s8 arg0)
+void gm_80173BC4(s8 ckind)
 {
     u8 temp_r31;
-    int i;
+    int selkind;
     int var_r29;
     int temp_r28;
 
     var_r29 = 0;
-    temp_r28 = gmMainLib_8015EDBC()->x114[gm_80164024(arg0)];
-    for (i = 0; i < 0x19; i++) {
-        var_r29 += gmMainLib_8015EDBC()->x114[i];
+    temp_r28 = gmMainLib_8015EDBC()->x114[gm_CKindToSelKind(ckind)];
+    for (selkind = 0; selkind < SELKIND_COUNT; selkind++) {
+        var_r29 += gmMainLib_8015EDBC()->x114[selkind];
     }
     if (temp_r28 >= 0xA) {
         fn_80172C78(0x6D);
@@ -305,14 +307,14 @@ static inline bool gm_80173EEC_inline(u8 arg0, int arg1)
 
 void gm_80173EEC(void)
 {
-    int i;
+    int selkind;
     u8 ckind;
     u16* temp_r29;
 
-    for (i = 0; i < 0x19; i++) {
-        temp_r29 = &gmMainLib_8015EDBC()->x18[(u32) i];
+    for (selkind = 0; selkind < SELKIND_COUNT; selkind++) {
+        temp_r29 = &gmMainLib_8015EDBC()->x18[(u32) selkind];
         if (*temp_r29 >= 100) {
-            ckind = gm_8016400C(i);
+            ckind = gm_SelKindToCKind(selkind);
             fn_80172C78(gm_80173EEC_inline(ckind, GM_CLASSIC));
             if (ckind == CKIND_ZELDA) {
                 fn_80172C78(gm_80173EEC_inline(CKIND_SEAK, GM_CLASSIC));
@@ -322,7 +324,7 @@ void gm_80173EEC(void)
             }
         }
         if (*temp_r29 >= 200) {
-            ckind = gm_8016400C(i);
+            ckind = gm_SelKindToCKind(selkind);
             fn_80172C78(gm_80173EEC_inline(ckind, GM_ADVENTURE));
             if (ckind == CKIND_ZELDA) {
                 fn_80172C78(gm_80173EEC_inline(CKIND_SEAK, GM_ADVENTURE));
@@ -332,7 +334,7 @@ void gm_80173EEC(void)
             }
         }
         if (*temp_r29 >= 300) {
-            ckind = gm_8016400C(i);
+            ckind = gm_SelKindToCKind(selkind);
             fn_80172C78(gm_80173EEC_inline(ckind, GM_ALLSTAR));
             if (ckind == CKIND_ZELDA) {
                 fn_80172C78(gm_80173EEC_inline(CKIND_SEAK, GM_ALLSTAR));

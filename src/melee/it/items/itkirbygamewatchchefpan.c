@@ -1,5 +1,7 @@
 #include "itkirbygamewatchchefpan.h"
 
+#include "inlines.h"
+
 #include "ftKirby/ftkirbyspecialgamewatch.h"
 #include "it/itzako.h"
 
@@ -21,15 +23,7 @@ Item_GObj* it_802C74D8(HSD_GObj* parent, Vec3* pos, Fighter_Part part,
     Item_GObj* result;
 
     spawn.kind = It_Kind_Kirby_GameWatchChefPan;
-    spawn.prev_pos = *pos;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
-    spawn.x0_parent_gobj = parent;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
+    itGamewatch_InitSpawnItem(&spawn, parent, pos, dir);
     result = Item_80268B18(&spawn);
     if (result != NULL) {
         Item* item = GET_ITEM(result);

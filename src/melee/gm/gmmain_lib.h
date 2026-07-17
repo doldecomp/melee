@@ -4,6 +4,7 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "ft/forward.h"
 #include <melee/gm/forward.h>
 
 #include <melee/gm/types.h>
@@ -12,7 +13,8 @@
 /* 15CC40 */ struct gmm_x1868* gmMainLib_8015CC40(void);
 /* 15CC4C */ void* gmMainLib_8015CC4C(void);
 /* 15CC58 */ struct gmm_x1CB0* gmMainLib_8015CC58(void);
-/* 15CC64 */ struct FighterData* GetPersistentFighterData(s32);
+/* 15CC64 */ struct FighterData*
+    GetPersistentFighterData(SelectableCharacterKind);
 /* 15CC78 */ void* gmMainLib_GetTrophyFlags(void);
 /* 15CC84 */ void* gmMainLib_GetTrophyCategoryFlags(void);
 /* 15CC90 */ s16* gmMainLib_GetTrophyCount(void);
@@ -128,7 +130,7 @@
 /* 15ED68 */ void gmMainLib_8015ED68(s32 arg0);
 /* 15ED74 */ u8 gmMainLib_8015ED74(void);
 /* 15ED80 */ void gmMainLib_8015ED80(u8);
-/* 15ED8C */ u16* gmMainLib_8015ED8C(void);
+/* 15ED8C */ u16* gmMainLib_GetUnlockedCharactersBitmaskPtr(void);
 /* 15ED98 */ struct gmm_retval_ED98* gmMainLib_8015ED98(void);
 /* 15EDA4 */ u16* gmMainLib_8015EDA4(void);
 /* 15EDB0 */ struct gmm_retval_EDB0* gmMainLib_8015EDB0(void);
