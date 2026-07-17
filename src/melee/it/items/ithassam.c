@@ -1,5 +1,6 @@
 #include "ithassam.h"
 
+#include "inlines.h"
 #include "math.h"
 
 #include "cm/camera.h"
@@ -361,12 +362,7 @@ bool itHassam_UnkMotion2_Coll(Item_GObj* gobj)
 
 void it_802CE640(Item_GObj* gobj)
 {
-    Item* ip = gobj->user_data;
-
-    it_802762BC(ip);
-    Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_EnterAirStateWithHitlag(gobj, 3);
 }
 
 bool itHassam_UnkMotion3_Anim(Item_GObj* gobj)
