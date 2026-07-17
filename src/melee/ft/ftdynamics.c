@@ -19,6 +19,17 @@
 
 #pragma force_active on
 
+static inline void ftCo_8009CB40_inline(struct DynamicsData* data)
+{
+    data->desc.lb_unk0.unk_2C.x = data->desc.lb_unk0.jobj->mtx[0][3];
+    data->desc.lb_unk0.unk_2C.y = data->desc.lb_unk0.jobj->mtx[1][3];
+    data->desc.lb_unk0.unk_2C.z = data->desc.lb_unk0.jobj->mtx[2][3];
+    data->desc.lb_unk0.unk_44 = 0.0f;
+    HSD_JObjSetTranslate(data->desc.lb_unk0.jobj,
+                         &data->desc.lb_unk0.translate);
+    HSD_JObjSetScale(data->desc.lb_unk0.jobj, &data->desc.lb_unk0.scale);
+}
+
 void ftCo_8009CB40(Fighter* fp, ssize_t bone_idx, bool arg2, FigaTree* arg3)
 {
     ftDynamics* dyn = fp->ft_data->x2C;
@@ -30,13 +41,8 @@ void ftCo_8009CB40(Fighter* fp, ssize_t bone_idx, bool arg2, FigaTree* arg3)
         s32 var_r29;
         struct DynamicsData* data;
         s32 inverse_flag;
-        HSD_JObj* temp_jobj;
         bone_id = dyn->ftDynamicBones->array[bone_idx].bone_id;
-        if (arg2 == 0) {
-            flag = 0;
-        } else {
-            flag = 1;
-        }
+        flag = arg2 == 0 ? 0 : 1;
         var_r30 = fp->parts[bone_id].joint;
         var_r29 = 0;
         if (arg2 == 1) {
@@ -52,37 +58,12 @@ void ftCo_8009CB40(Fighter* fp, ssize_t bone_idx, bool arg2, FigaTree* arg3)
         while (data != NULL) {
             if (var_r29 < (s32) arg3) {
                 if (inverse_flag != 0 && !(fp->parts[bone_id].flags_b0)) {
-                    data->desc.lb_unk0.unk_2C.x =
-                        data->desc.lb_unk0.jobj->mtx[0][3];
-                    data->desc.lb_unk0.unk_2C.y =
-                        data->desc.lb_unk0.jobj->mtx[1][3];
-                    data->desc.lb_unk0.unk_2C.z =
-                        data->desc.lb_unk0.jobj->mtx[2][3];
-                    data->desc.lb_unk0.unk_44 = 0.0f;
-                    {
-                        HSD_JObj* tmp_jobj = data->desc.lb_unk0.jobj;
-                        temp_jobj = tmp_jobj;
-                    }
-                    HSD_JObjSetTranslate(temp_jobj,
-                                         &data->desc.lb_unk0.translate);
-                    temp_jobj = data->desc.lb_unk0.jobj;
-                    HSD_JObjSetScale(temp_jobj, &data->desc.lb_unk0.scale);
+                    ftCo_8009CB40_inline(data);
                 }
                 fp->parts[bone_id].flags_b0 = inverse_flag;
             } else {
                 if (flag != 0 && !(fp->parts[bone_id].flags_b0)) {
-                    data->desc.lb_unk0.unk_2C.x =
-                        data->desc.lb_unk0.jobj->mtx[0][3];
-                    data->desc.lb_unk0.unk_2C.y =
-                        data->desc.lb_unk0.jobj->mtx[1][3];
-                    data->desc.lb_unk0.unk_2C.z =
-                        data->desc.lb_unk0.jobj->mtx[2][3];
-                    data->desc.lb_unk0.unk_44 = 0.0f;
-                    temp_jobj = data->desc.lb_unk0.jobj;
-                    HSD_JObjSetTranslate(temp_jobj,
-                                         &data->desc.lb_unk0.translate);
-                    temp_jobj = data->desc.lb_unk0.jobj;
-                    HSD_JObjSetScale(temp_jobj, &data->desc.lb_unk0.scale);
+                    ftCo_8009CB40_inline(data);
                 }
                 fp->parts[bone_id].flags_b0 = flag;
             }
@@ -310,6 +291,8 @@ static inline bool inlineA0(Fighter* fp)
 
 void ftCo_8009DC54(Fighter* fp)
 {
+    DynamicsDesc* desc;
+    ssize_t i;
     ssize_t idx;
     ftData* data = fp->ft_data;
     if (fp->x619_costume_id == 2) {
@@ -324,11 +307,12 @@ void ftCo_8009DC54(Fighter* fp)
                      "fighter dynamics num over!\n");
     {
         ssize_t bone_idx = idx * 2 + 1;
-        BoneDynamicsDesc* dyn = fp->dynamic_bone_sets;
-        ssize_t i = 0;
+        ssize_t dyn_idx = 0;
+        i = 0;
         do {
             HSD_JObj* cur = fp->fv.kb.hat.jobj;
             ftDynamics* dynamics = data->x2C;
+            ArticleDynamicBones* bones = dynamics->ftDynamicBones;
             ssize_t j;
             for (j = 0;
                  j <
@@ -345,18 +329,16 @@ void ftCo_8009DC54(Fighter* fp)
                 cur = cur->next;
             }
             {
-                DynamicsDesc* desc = &fp->dynamic_bone_sets[i + 1].dyn_desc;
-                lb_8000FD48(
-                    cur, desc,
-                    data->x2C->ftDynamicBones->array[bone_idx].dyn_desc.count);
-                dyn[1].bone_id = FtPart_TopN;
+                desc = &fp->dynamic_bone_sets[i + 1].dyn_desc;
+                lb_8000FD48(cur, desc, bones->array[bone_idx].dyn_desc.count);
+                fp->dynamic_bone_sets[dyn_idx + 1].bone_id = FtPart_TopN;
                 lb_80011710(
                     &data->x2C->ftDynamicBones->array[bone_idx].dyn_desc,
                     desc);
             }
             i++;
             bone_idx++;
-            dyn++;
+            dyn_idx++;
         } while (i < 2);
     }
 }
@@ -631,6 +613,7 @@ bool ftCo_8009E714(Fighter_GObj* gobj, Fighter_Part bone_id, int arg2, float x,
 
 void ftCo_8009E7B4(Fighter* fp, u8 (*arg1)[2])
 {
+    s32 i;
     if (fp->anim_id != -1) {
         if (fp->x2227_b6) {
             if (fp->kind != FTKIND_KIRBY) {
@@ -638,11 +621,8 @@ void ftCo_8009E7B4(Fighter* fp, u8 (*arg1)[2])
                     ftCo_8009CB40(fp, 0, 0, NULL);
                     return;
                 }
-                {
-                    s32 i;
-                    for (i = 0; i < fp->dynamics_num; i++) {
-                        ftCo_8009CB40(fp, i, 0, NULL);
-                    }
+                for (i = 0; i < fp->dynamics_num; i++) {
+                    ftCo_8009CB40(fp, i, 0, NULL);
                 }
             }
         } else {
@@ -660,60 +640,56 @@ void ftCo_8009E7B4(Fighter* fp, u8 (*arg1)[2])
                         ftCo_8009CB40(fp, 0, 1, NULL);
                         return;
                     }
-                    {
-                        s32 i;
-                        for (i = 0; i < fp->dynamics_num; i++) {
-                            ftCo_8009CB40(fp, i, 1, NULL);
-                        }
-                    }
-                }
-            } else if (fp->x594_b4) {
-                FigaTree*** dyn;
-                FigaTree** tree;
-                u8 blend_slot = arg1[0][1];
-                dyn = fp->ft_data->x2C->x10;
-                if (dyn == NULL) {
-                    s32 i;
                     for (i = 0; i < fp->dynamics_num; i++) {
-                        ftCo_8009CB40(fp, i, 0, NULL);
-                    }
-                    return;
-                }
-                tree = dyn[blend_slot];
-                if (tree == NULL) {
-                    s32 i;
-                    for (i = 0; i < fp->dynamics_num; i++) {
-                        ftCo_8009CB40(fp, i, 0, NULL);
-                    }
-                    return;
-                }
-                {
-                    s32 i;
-                    for (i = 0; i < fp->dynamics_num; i++) {
-                        ftCo_8009CB40(fp, i, 1, tree[i]);
+                        ftCo_8009CB40(fp, i, 1, NULL);
                     }
                 }
-                return;
             } else {
-                s32 i;
-                if (fp->x594_b3) {
-                    if (fp->kind != FTKIND_KIRBY) {
-                        if (fp->kind == FTKIND_PURIN) {
-                            ftCo_8009CB40(fp, 0, 0, NULL);
-                            return;
-                        }
+                if (fp->x594_b4) {
+                    FigaTree*** dyn;
+                    FigaTree** tree;
+                    u8 blend_slot = arg1[0][1];
+                    dyn = fp->ft_data->x2C->x10;
+                    if (dyn == NULL) {
                         for (i = 0; i < fp->dynamics_num; i++) {
                             ftCo_8009CB40(fp, i, 0, NULL);
                         }
+                        return;
                     }
-                } else {
-                    if (fp->kind != FTKIND_KIRBY) {
-                        if (fp->kind == FTKIND_PURIN) {
-                            ftCo_8009CB40(fp, 0, 1, NULL);
-                            return;
-                        }
+                    tree = dyn[blend_slot];
+                    if (tree == NULL) {
                         for (i = 0; i < fp->dynamics_num; i++) {
-                            ftCo_8009CB40(fp, i, 1, NULL);
+                            ftCo_8009CB40(fp, i, 0, NULL);
+                        }
+                        return;
+                    }
+                    {
+                        s32 j;
+                        for (j = 0; j < fp->dynamics_num; j++) {
+                            ftCo_8009CB40(fp, j, 1, tree[j]);
+                        }
+                    }
+                    return;
+                } else {
+                    if (fp->x594_b3) {
+                        if (fp->kind != FTKIND_KIRBY) {
+                            if (fp->kind == FTKIND_PURIN) {
+                                ftCo_8009CB40(fp, 0, 0, NULL);
+                                return;
+                            }
+                            for (i = 0; i < fp->dynamics_num; i++) {
+                                ftCo_8009CB40(fp, i, 0, NULL);
+                            }
+                        }
+                    } else {
+                        if (fp->kind != FTKIND_KIRBY) {
+                            if (fp->kind == FTKIND_PURIN) {
+                                ftCo_8009CB40(fp, 0, 1, NULL);
+                                return;
+                            }
+                            for (i = 0; i < fp->dynamics_num; i++) {
+                                ftCo_8009CB40(fp, i, 1, NULL);
+                            }
                         }
                     }
                 }
@@ -724,11 +700,8 @@ void ftCo_8009E7B4(Fighter* fp, u8 (*arg1)[2])
             ftCo_8009CB40(fp, 0, 0, NULL);
             return;
         }
-        {
-            s32 i;
-            for (i = 0; i < fp->dynamics_num; i++) {
-                ftCo_8009CB40(fp, i, 0, NULL);
-            }
+        for (i = 0; i < fp->dynamics_num; i++) {
+            ftCo_8009CB40(fp, i, 0, NULL);
         }
     }
 }

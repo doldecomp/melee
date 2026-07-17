@@ -204,7 +204,7 @@ static void fn_80037F00(HSD_GObj** gp, Fighter* fp, ft_800898B4_t* ev,
 }
 
 void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj, s32 x18d4_int,
-                 ft_800898B4_t* ev_data, u16 attack_instance, s32 arg5,
+                 ft_800898B4_t* ev_data, int attack_instance, s32 arg5,
                  s32 source_ply)
 {
     Fighter* attacker_fp2;
@@ -256,8 +256,8 @@ void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj, s32 x18d4_int,
                     victim_fp->player_id, victim_fp->x221F_b4, ev.x2073);
     }
 
-    if (attack_instance == 0 ||
-        victim_fp->dmg.x18ec_instancehitby != attack_instance)
+    if ((u16) attack_instance == 0 ||
+        victim_fp->dmg.x18ec_instancehitby != (u16) attack_instance)
     {
         *(s32*) &victim_fp->dmg.x18d4 = ev.x2070_int;
         victim_fp->dmg.x18ec_instancehitby = attack_instance;

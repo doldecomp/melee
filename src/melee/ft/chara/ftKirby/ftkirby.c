@@ -3645,8 +3645,7 @@ void ftKb_SpecialN_800EF69C(Fighter_GObj* gobj, int arg1, KirbyHatStruct* hat)
             int i = Fighter_804D6540[fp2->kind]->x4 - 1;
             for (; i >= 0; i--) {
                 if ((1 << i) & mask) {
-                    ftParts_800755E8(
-                        fp2, (u8*) &Fighter_804D6540[fp2->kind]->x0[i]);
+                    ftParts_800755E8(fp2, &Fighter_804D6540[fp2->kind]->x0[i]);
                 }
             }
         }
