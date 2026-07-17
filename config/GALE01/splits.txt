@@ -1269,6 +1269,7 @@ melee/ft/chara/ftKirby/ftkirby.c:
 	.text       start:0x800EE528 end:0x800F1F68
 	.rodata     start:0x803B7548 end:0x803B7570
 	.data       start:0x803C8368 end:0x803CB6D8
+	.sdata      start:0x804D3D98 end:0x804D3DAC
 	.sdata2     start:0x804D9350 end:0x804D9364
 
 melee/ft/chara/ftKirby/ftkirbyattackdash.c:
@@ -1352,6 +1353,7 @@ melee/ft/chara/ftKirby/ftkirbyyoshiegg.c:
 
 melee/ft/chara/ftKirby/ftkirbyspecialmars.c:
 	.text       start:0x8010B1F4 end:0x8010C288
+	.sdata      start:0x804D3E00 end:0x804D3E10
 	.sdata2     start:0x804D9570 end:0x804D9580
 
 melee/ft/chara/ftKirby/ftkirbyspecialpeach.c:
