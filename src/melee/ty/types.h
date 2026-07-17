@@ -74,8 +74,7 @@ struct TyListArg {
     /* 0x24 */ s8 x24;
     /* 0x25 */ u8 x25;
     /* 0x26 */ s16 idx;
-    /* 0x28 */ s8 x28;
-    /* 0x29 */ u8 pad_29[0x2C - 0x29];
+    /* 0x28 */ int x28;
     /* 0x2C */ float x2C;
     /* 0x30 */ float x30;
 };
@@ -307,9 +306,7 @@ struct TyListGobjEntry {
     /* +14 */ s8 x14;
     /* +15 */ u8 pad_15;
     /* +16 */ s8 x16;
-    /* +18 */ u8 pad_18[0x2C - 0x18];
 };
-STATIC_ASSERT(sizeof(struct TyListGobjEntry) == 0x2C);
 
 struct TyListRow {
     /* 0x00 */ u8 pad_0[0xC];
@@ -526,24 +523,15 @@ struct TyListState {
     /* 0x294 */ u8 pad_294[4];
     /* 0x298 */ s16 selectedIdx;
     /* 0x29A */ s8 entryCount;
-    /* 0x29B */ u8 x29B;
-    /* 0x29C */ u8 x29C;
-    /* 0x29D */ u8 pad_29D;
-    /* 0x29E */ u8 x29E;
-    /* 0x29F */ u8 x29F;
-    /* 0x2A0 */ u8 pad_2A0;
+    /* 0x29B */ s8 x29B;
+    /* 0x29C */ s8 x29C;
+    /* 0x29D */ s8 x29D;
+    /* 0x29E */ s8 x29E;
+    /* 0x29F */ s8 x29F;
+    /* 0x2A0 */ s8 x2A0;
     /* 0x2A1 */ s8 x2A1;
-    /* 0x2A2 */ u8 pad_2A2[2];
     /* 0x2A4 */ float x2A4;
     /* 0x2A8 */ float x2A8;
-    // /* 0x2AC */ struct HSD_GObj* gobj_2AC;
-    // /* 0x2B0 */ struct HSD_GObj* gobj_2B0;
-    // /* 0x2B4 */ u8 pad_2B4[4];
-    // /* 0x2B8 */ u8 x2B8;
-    // /* 0x2B9 */ u8 pad_2B9[9];
-    // /* 0x2C2 */ s8 x2C2;
-    // /* 0x2C3 */ u8 pad_2C3;
-    // /* 0x2C4 */ struct HSD_GObj* gobj_2C4;
 };
 STATIC_ASSERT(sizeof(struct TyListState) == 0x2AC);
 

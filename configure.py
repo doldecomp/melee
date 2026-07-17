@@ -1423,7 +1423,7 @@ config.libs = [
         "ty (Toy, trophies)",
         [
             Object(Testing, "melee/ty/toy.c"),
-            Object(Testing, "melee/ty/tylist.c"),
+            Object(Matching, "melee/ty/tylist.c"),
             Object(Testing, "melee/ty/tyfigupon.c"),
             Object(Testing, "melee/ty/tydisplay.c"),
         ],
