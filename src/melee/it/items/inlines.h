@@ -3,6 +3,7 @@
 
 #include "ef/eflib.h"
 #include "it/inlines.h"
+#include "it/it_2725.h"
 #include "it/item.h"
 #include "it/itmaplib.h"
 #include "it/types.h"
@@ -29,6 +30,16 @@ static inline void Item_EnterAirStateWithHitlag(Item_GObj* gobj, enum_t msid)
     Item_80268E5C(gobj, msid, ITEM_ANIM_UPDATE);
     item->entered_hitlag = efLib_PauseAll;
     item->exited_hitlag = efLib_ResumeAll;
+}
+
+static inline void Item_EnterAirStateWithHitlagAndStateDesc(Item_GObj* gobj)
+{
+    Item* item = GET_ITEM(gobj);
+    it_802762BC(item);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    item->entered_hitlag = efLib_PauseAll;
+    item->exited_hitlag = efLib_ResumeAll;
+    it_80273670(gobj, 0, 0.0F);
 }
 
 #endif
