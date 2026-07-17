@@ -16,6 +16,9 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/inlines.h"
+
+#include "ftPopo/forward.h"
+
 #include "ftPopo/types.h"
 #include "lb/lb_00B0.h"
 #include "pl/player.h"
@@ -256,9 +259,7 @@ void ftNn_Init_80123720(Fighter_GObj* gobj)
 void ftNn_Init_8012378C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_AirToGroundStateChange(gobj, fp, 362,
-                                    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx |
-                                        Ft_MF_SkipHit);
+    ftCommon_AirToGroundStateChange(gobj, fp, 362, ftPp_MF_SpecialHi_Coll);
     fp->accessory4_cb = fn_80123218;
 }
 

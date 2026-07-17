@@ -197,10 +197,7 @@ void ftZd_SpecialLw_8013B1CC(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    ftCommon_GroundToAirStateChange(gobj, fp, 357,
-                                    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx |
-                                        Ft_MF_KeepColAnimHitStatus |
-                                        Ft_MF_SkipHit);
+    ftCommon_GroundToAirStateChange(gobj, fp, 357, ftZd_MF_SpecialLw_Coll);
     fp->accessory4_cb = &ftZd_SpecialLw_8013ADB4;
 }
 
@@ -210,10 +207,7 @@ void ftZd_SpecialLw_8013B238(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    ftCommon_AirToGroundStateChange(gobj, fp, 355,
-                                    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx |
-                                        Ft_MF_KeepColAnimHitStatus |
-                                        Ft_MF_SkipHit);
+    ftCommon_AirToGroundStateChange(gobj, fp, 355, ftZd_MF_SpecialLw_Coll);
     fp->accessory4_cb = &ftZd_SpecialLw_8013ADB4;
 }
 
@@ -289,10 +283,7 @@ void ftZd_SpecialLw_8013B400(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    ftCommon_GroundToAirStateChange(gobj, fp, 358,
-                                    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx |
-                                        Ft_MF_KeepColAnimHitStatus |
-                                        Ft_MF_SkipHit);
+    ftCommon_GroundToAirStateChange(gobj, fp, 358, ftZd_MF_SpecialLw_Coll);
     fp->accessory4_cb = &ftZd_SpecialLw_8013AE30;
 }
 
@@ -303,10 +294,7 @@ void ftZd_SpecialLw_8013B46C(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    ftCommon_AirToGroundStateChange(gobj, fp, 356,
-                                    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx |
-                                        Ft_MF_KeepColAnimHitStatus |
-                                        Ft_MF_SkipHit);
+    ftCommon_AirToGroundStateChange(gobj, fp, 356, ftZd_MF_SpecialLw_Coll);
     fp->accessory4_cb = &ftZd_SpecialLw_8013AE30;
 }
 

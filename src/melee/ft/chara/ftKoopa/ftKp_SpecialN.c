@@ -23,6 +23,9 @@
 #include <melee/it/items/itkoopaflame.h>
 #include <melee/lb/lb_00B0.h>
 
+static MotionFlags const ftKp_MF_SpecialN_Coll =
+    ftCommon_GroundAirColl_MF | Ft_MF_SkipRumble;
+
 enum_t ftKp_Init_803CF2A0[] = {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1,
     1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3,
@@ -359,8 +362,8 @@ void ftKp_SpecialN_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == GA_Ground) {
-        ftCommon_GroundToAirStateChange(
-            gobj, fp, 0x159, ftCommon_GroundAirColl_MF | Ft_MF_SkipRumble);
+        ftCommon_GroundToAirStateChange(gobj, fp, 0x159,
+                                        ftKp_MF_SpecialN_Coll);
     }
 }
 
@@ -386,8 +389,8 @@ void ftKp_SpecialAirN_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != GA_Ground) {
-        ftCommon_AirToGroundStateChange(
-            gobj, fp, 0x156, ftCommon_GroundAirColl_MF | Ft_MF_SkipRumble);
+        ftCommon_AirToGroundStateChange(gobj, fp, 0x156,
+                                        ftKp_MF_SpecialN_Coll);
     }
 }
 

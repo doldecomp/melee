@@ -20,6 +20,10 @@
 
 #include <dolphin/mtx.h>
 
+static MotionFlags const ftSs_MF_SpecialLw_Coll =
+    ftCommon_GroundAirColl_MF | Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipHit |
+    Ft_MF_SkipModel;
+
 void ftSs_SpecialLw_8012ADF0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -230,10 +234,7 @@ static void ftSamus_UnkSetStateAndCb(HSD_GObj* gobj)
 void ftSs_SpecialLw_8012B570(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
-    ftCommon_GroundToAirStateChange(gobj, fp, 0x164,
-                                    ftCommon_GroundAirColl_MF |
-                                        Ft_MF_KeepColAnimHitStatus |
-                                        Ft_MF_SkipHit | Ft_MF_SkipModel);
+    ftCommon_GroundToAirStateChange(gobj, fp, 0x164, ftSs_MF_SpecialLw_Coll);
     ftSamus_UnkSetStateAndCb(gobj);
 }
 
@@ -242,19 +243,13 @@ void ftSs_SpecialLw_8012B5F0(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = getFtSpecialAttrs(fp);
     fp->self_vel.y = samus_attr->x54;
-    ftCommon_GroundToAirStateChange(gobj, fp, 0x164,
-                                    ftCommon_GroundAirColl_MF |
-                                        Ft_MF_KeepColAnimHitStatus |
-                                        Ft_MF_SkipHit | Ft_MF_SkipModel);
+    ftCommon_GroundToAirStateChange(gobj, fp, 0x164, ftSs_MF_SpecialLw_Coll);
     fp->accessory4_cb = ftSs_SpecialLw_8012ADF0;
 }
 
 void ftSs_SpecialLw_8012B668(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
-    ftCommon_AirToGroundStateChange(gobj, fp, 0x163,
-                                    ftCommon_GroundAirColl_MF |
-                                        Ft_MF_KeepColAnimHitStatus |
-                                        Ft_MF_SkipHit | Ft_MF_SkipModel);
+    ftCommon_AirToGroundStateChange(gobj, fp, 0x163, ftSs_MF_SpecialLw_Coll);
     ftSamus_UnkSetStateAndCb(gobj);
 }

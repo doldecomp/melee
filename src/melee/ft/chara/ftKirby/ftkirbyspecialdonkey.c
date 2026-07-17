@@ -25,6 +25,7 @@
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/inlines.h"
 
+#include "ftDonkey/forward.h"
 #include "ftKirby/forward.h"
 
 #include <common_structs.h>
@@ -553,11 +554,8 @@ void ftKb_DkSpecialN_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_800827A0(gobj) == GA_Ground) {
-        ftCommon_GroundToAirStateChange(
-            gobj, fp, ftKb_MS_DkSpecialAirN,
-            ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx |
-                Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipHit |
-                Ft_MF_KeepColAnimPartHitStatus);
+        ftCommon_GroundToAirStateChange(gobj, fp, ftKb_MS_DkSpecialAirN,
+                                        ftDk_MF_SpecialN_Coll);
         ftKb_DkSpecialNStart_Coll_inline(gobj);
     }
 }
@@ -566,11 +564,8 @@ void ftKb_DkSpecialNFull_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_800827A0(gobj) == GA_Ground) {
-        ftCommon_GroundToAirStateChange(
-            gobj, fp, ftKb_MS_DkSpecialAirNFull,
-            ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx |
-                Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipHit |
-                Ft_MF_KeepColAnimPartHitStatus);
+        ftCommon_GroundToAirStateChange(gobj, fp, ftKb_MS_DkSpecialAirNFull,
+                                        ftDk_MF_SpecialN_Coll);
         ftKb_DkSpecialNStart_Coll_inline(gobj);
     }
 }
@@ -609,11 +604,8 @@ void ftKb_DkSpecialAirN_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != GA_Ground) {
-        ftCommon_AirToGroundStateChange(
-            gobj, fp, ftKb_MS_DkSpecialN,
-            ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx |
-                Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipHit |
-                Ft_MF_KeepColAnimPartHitStatus);
+        ftCommon_AirToGroundStateChange(gobj, fp, ftKb_MS_DkSpecialN,
+                                        ftDk_MF_SpecialN_Coll);
         ftKb_DkSpecialNStart_Coll_inline(gobj);
     }
 }
@@ -622,11 +614,8 @@ void ftKb_DkSpecialAirNFull_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != GA_Ground) {
-        ftCommon_AirToGroundStateChange(
-            gobj, fp, ftKb_MS_DkSpecialNFull,
-            ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx |
-                Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipHit |
-                Ft_MF_KeepColAnimPartHitStatus);
+        ftCommon_AirToGroundStateChange(gobj, fp, ftKb_MS_DkSpecialNFull,
+                                        ftDk_MF_SpecialN_Coll);
         ftKb_DkSpecialNStart_Coll_inline(gobj);
     }
 }

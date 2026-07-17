@@ -41,11 +41,6 @@
     Ft_MF_SkipMatAnim | Ft_MF_KeepSfx | Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | \
         Ft_MF_Unk19
 
-#define FTMEWTWO_SPECIALN_COLL_FLAG                                           \
-    Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_UpdateCmd |                 \
-        Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |            \
-        Ft_MF_SkipModelFlags | Ft_MF_Unk27
-
 /// 0x80146CCC
 /// https://decomp.me/scratch/qxdYd
 s32 ftMt_SpecialN_GetChargeLevel(HSD_GObj* gobj, s32* chargeLevel,
@@ -1005,7 +1000,7 @@ void ftMt_SpecialNStart_Coll(HSD_GObj* gobj)
 
     if (ft_80082708(gobj) == false) {
         ftCommon_GroundToAirStateChange(gobj, fp, ftMt_MS_SpecialAirNStart,
-                                        FTMEWTWO_SPECIALN_COLL_FLAG);
+                                        ftMt_MF_SpecialN_Coll);
         ftMewtwo_SpecialN_SetCall(gobj);
     }
 }
@@ -1019,8 +1014,7 @@ void ftMt_SpecialNLoop_Coll(HSD_GObj* gobj)
 
     if (ft_80082708(gobj) == false) {
         ftCommon_GroundToAirStateChange(gobj, fp, ftMt_MS_SpecialAirNLoop,
-                                        Ft_MF_KeepSfx |
-                                            FTMEWTWO_SPECIALN_COLL_FLAG);
+                                        ftMt_MF_SpecialNLoop_Coll);
         ftMewtwo_SpecialN_SetCall(gobj);
     }
 }
@@ -1034,8 +1028,7 @@ void ftMt_SpecialNLoopFull_Coll(HSD_GObj* gobj)
 
     if (ft_80082708(gobj) == false) {
         ftCommon_GroundToAirStateChange(gobj, fp, ftMt_MS_SpecialAirNLoopFull,
-                                        Ft_MF_KeepSfx |
-                                            FTMEWTWO_SPECIALN_COLL_FLAG);
+                                        ftMt_MF_SpecialNLoop_Coll);
         ftMewtwo_SpecialN_SetCall(gobj);
     }
 }
@@ -1049,7 +1042,7 @@ void ftMt_SpecialNCancel_Coll(HSD_GObj* gobj)
 
     if (ft_80082708(gobj) == false) {
         ftCommon_GroundToAirStateChange(gobj, fp, ftMt_MS_SpecialAirNCancel,
-                                        FTMEWTWO_SPECIALN_COLL_FLAG);
+                                        ftMt_MF_SpecialN_Coll);
         ftMewtwo_SpecialN_SetCall(gobj);
     }
 }
@@ -1063,7 +1056,7 @@ void ftMt_SpecialNEnd_Coll(HSD_GObj* gobj)
 
     if (ft_80082708(gobj) == false) {
         ftCommon_GroundToAirStateChange(gobj, fp, ftMt_MS_SpecialAirNEnd,
-                                        FTMEWTWO_SPECIALN_COLL_FLAG);
+                                        ftMt_MF_SpecialN_Coll);
         ftMewtwo_SpecialN_SetCall(gobj);
     }
 }
@@ -1077,7 +1070,7 @@ void ftMt_SpecialAirNStart_Coll(HSD_GObj* gobj)
 
     if (ft_80081D0C(gobj) == true) {
         ftCommon_AirToGroundStateChange(gobj, fp, ftMt_MS_SpecialNStart,
-                                        FTMEWTWO_SPECIALN_COLL_FLAG);
+                                        ftMt_MF_SpecialN_Coll);
         ftMewtwo_SpecialN_SetCall(gobj);
     }
 }
@@ -1091,8 +1084,7 @@ void ftMt_SpecialAirNLoop_Coll(HSD_GObj* gobj)
 
     if (ft_80081D0C(gobj) == true) {
         ftCommon_AirToGroundStateChange(gobj, fp, ftMt_MS_SpecialNLoop,
-                                        Ft_MF_KeepSfx |
-                                            FTMEWTWO_SPECIALN_COLL_FLAG);
+                                        ftMt_MF_SpecialNLoop_Coll);
         ftMewtwo_SpecialN_SetCall(gobj);
     }
 }
@@ -1106,8 +1098,7 @@ void ftMt_SpecialAirNLoopFull_Coll(HSD_GObj* gobj)
 
     if (ft_80081D0C(gobj) == true) {
         ftCommon_AirToGroundStateChange(gobj, fp, ftMt_MS_SpecialNLoopFull,
-                                        Ft_MF_KeepSfx |
-                                            FTMEWTWO_SPECIALN_COLL_FLAG);
+                                        ftMt_MF_SpecialNLoop_Coll);
         ftMewtwo_SpecialN_SetCall(gobj);
     }
 }
@@ -1121,7 +1112,7 @@ void ftMt_SpecialAirNCancel_Coll(HSD_GObj* gobj)
 
     if (ft_80081D0C(gobj) == true) {
         ftCommon_AirToGroundStateChange(gobj, fp, ftMt_MS_SpecialNCancel,
-                                        FTMEWTWO_SPECIALN_COLL_FLAG);
+                                        ftMt_MF_SpecialN_Coll);
         ftMewtwo_SpecialN_SetCall(gobj);
     }
 }
@@ -1135,7 +1126,7 @@ void ftMt_SpecialAirNEnd_Coll(HSD_GObj* gobj)
 
     if (ft_80081D0C(gobj) == true) {
         ftCommon_AirToGroundStateChange(gobj, fp, ftMt_MS_SpecialNEnd,
-                                        FTMEWTWO_SPECIALN_COLL_FLAG);
+                                        ftMt_MF_SpecialN_Coll);
         ftMewtwo_SpecialN_SetCall(gobj);
     }
 }

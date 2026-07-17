@@ -42,6 +42,9 @@
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 
+static MotionFlags const ftYs_MF_SpecialS_Coll =
+    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx | Ft_MF_SkipModel;
+
 /* 3CED84 */ static f32 ftYs_Unk3_803CED84[] = { 0.65, 0.7, 0.8, 1 };
 /* 3CED94 */ static f32 ftYs_Unk3_803CED94[] = { 1.1, 1.35, 1.3, 1.2 };
 /* 3CEDA4 */ static ftCollisionBox ftYs_Unk3_803CEDA4 = {
@@ -1082,9 +1085,7 @@ void ftYs_SpecialAirSStart_0_Coll(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (ft_80082708(gobj) == 0) {
-        ftCommon_GroundToAirStateChange(gobj, fp, 360,
-                                        ftCommon_GroundAirColl_MF |
-                                            Ft_MF_KeepGfx | Ft_MF_SkipModel);
+        ftCommon_GroundToAirStateChange(gobj, fp, 360, ftYs_MF_SpecialS_Coll);
         ftYoshi_SpecialS_SetCall(gobj);
     }
 }
@@ -1200,9 +1201,7 @@ void ftYs_SpecialAirSStart_1_Coll(Fighter_GObj* gobj)
     fp->mv.ys.specials.x30 = 0;
 
     if (ft_80081D0C(gobj) != GA_Ground) {
-        ftCommon_AirToGroundStateChange(gobj, fp, 356,
-                                        ftCommon_GroundAirColl_MF |
-                                            Ft_MF_KeepGfx | Ft_MF_SkipModel);
+        ftCommon_AirToGroundStateChange(gobj, fp, 356, ftYs_MF_SpecialS_Coll);
         ftYoshi_SpecialS_SetCall(gobj);
     }
 }

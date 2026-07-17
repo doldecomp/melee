@@ -31,6 +31,10 @@
 #include <trigf.h>
 #include <baselib/gobj.h>
 
+static MotionFlags const ftSk_MF_SpecialHi_Coll =
+    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx | Ft_MF_KeepColAnimHitStatus |
+    Ft_MF_SkipHit;
+
 /* 112ED8 */ static void fn_80112ED8(Fighter_GObj* gobj);
 /* 112F48 */ static void ftSk_SpecialHi_80112F48(Fighter_GObj* gobj);
 /* 112FA8 */ static void ftSk_SpecialHi_80112FA8(Fighter_GObj* gobj);
@@ -226,9 +230,7 @@ void ftSk_SpecialHi_80113390(Fighter_GObj* arg0)
 
     temp_r31 = arg0->user_data;
     ftCommon_AirToGroundStateChange(arg0, temp_r31, 0x163,
-                                    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx |
-                                        Ft_MF_KeepColAnimHitStatus |
-                                        Ft_MF_SkipHit);
+                                    ftSk_MF_SpecialHi_Coll);
     temp_r31->accessory4_cb = fn_80112ED8;
 }
 

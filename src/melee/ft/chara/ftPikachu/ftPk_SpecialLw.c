@@ -163,13 +163,13 @@ void ftPk_SpecialLw_ChangeMotion_Unk00(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
-    ftCommon_AirToGroundStateChange(gobj, fp, 359, 206327942);
+    ftCommon_AirToGroundStateChange(gobj, fp, 359, ftPk_MF_SpecialLw_Coll);
 }
 
 void ftPk_SpecialLw_ChangeMotion_Unk01(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_GroundToAirStateChange(gobj, fp, 363, 206327942);
+    ftCommon_GroundToAirStateChange(gobj, fp, 363, ftPk_MF_SpecialLw_Coll);
     ftCommon_ClampAirDrift(fp);
 }
 
@@ -177,7 +177,8 @@ void ftPk_SpecialLw_ChangeMotion_Unk02(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
-    ftCommon_AirToGroundStateChange(gobj, fp, 360, 206329998);
+    ftCommon_AirToGroundStateChange(gobj, fp, 360,
+                                    ftPk_MF_SpecialLwHitRumble_Coll);
     fp->take_dmg_cb = &ftPk_SpecialLw_SetState_Unk1;
     fp->accessory4_cb = &ftPk_SpecialLw_SpawnEffect;
 }
@@ -185,7 +186,8 @@ void ftPk_SpecialLw_ChangeMotion_Unk02(HSD_GObj* gobj)
 void ftPk_SpecialLw_ChangeMotion_Unk03(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_GroundToAirStateChange(gobj, fp, 364, 206329998);
+    ftCommon_GroundToAirStateChange(gobj, fp, 364,
+                                    ftPk_MF_SpecialLwHitRumble_Coll);
     fp->take_dmg_cb = &ftPk_SpecialLw_SetState_Unk1;
     fp->accessory4_cb = &ftPk_SpecialLw_SpawnEffect;
     ftCommon_ClampAirDrift(fp);
@@ -195,13 +197,13 @@ void ftPk_SpecialLw_ChangeMotion_Unk04(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
-    ftCommon_AirToGroundStateChange(gobj, fp, 361, 206327950);
+    ftCommon_AirToGroundStateChange(gobj, fp, 361, ftPk_MF_SpecialLwHit_Coll);
 }
 
 void ftPk_SpecialLw_ChangeMotion_Unk05(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_GroundToAirStateChange(gobj, fp, 365, 206327950);
+    ftCommon_GroundToAirStateChange(gobj, fp, 365, ftPk_MF_SpecialLwHit_Coll);
     ftCommon_ClampAirDrift(fp);
 }
 
@@ -209,13 +211,13 @@ void ftPk_SpecialLw_ChangeMotion_Unk06(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
-    ftCommon_AirToGroundStateChange(gobj, fp, 362, 206327942);
+    ftCommon_AirToGroundStateChange(gobj, fp, 362, ftPk_MF_SpecialLw_Coll);
 }
 
 void ftPk_SpecialLw_ChangeMotion_Unk07(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_GroundToAirStateChange(gobj, fp, 366, 206327942);
+    ftCommon_GroundToAirStateChange(gobj, fp, 366, ftPk_MF_SpecialLw_Coll);
     ftCommon_ClampAirDrift(fp);
 }
 

@@ -24,9 +24,6 @@
 
 #include <dolphin/mtx.h>
 
-/// SpecialN/SpecialAirN (Fireball)
-#define FTLUIGI_SPECIALN_COLL_FLAG Ft_MF_UpdateCmd | Ft_MF_SkipColAnim
-
 /// 0x8014267C
 /// https://decomp.me/scratch/dB9mj // Luigi's grounded Fireball Motion State
 /// handler
@@ -112,7 +109,7 @@ void ftLg_SpecialN_Coll(HSD_GObj* gobj)
     if (ft_80082708(gobj) == false) {
         fp = GET_FIGHTER(gobj);
         ftCommon_GroundToAirStateChange(gobj, fp, ftLg_MS_SpecialAirN,
-                                        FTLUIGI_SPECIALN_COLL_FLAG);
+                                        ftLg_MF_SpecialN_Coll);
         fp->accessory4_cb = &ftLg_SpecialN_FireSpawn;
     }
 }
@@ -125,7 +122,7 @@ void ftLg_SpecialAirN_Coll(HSD_GObj* gobj)
     if (ft_80081D0C(gobj) != false) {
         fp = GET_FIGHTER(gobj);
         ftCommon_AirToGroundStateChange(gobj, fp, ftLg_MS_SpecialN,
-                                        FTLUIGI_SPECIALN_COLL_FLAG);
+                                        ftLg_MF_SpecialN_Coll);
         fp->accessory4_cb = &ftLg_SpecialN_FireSpawn;
     }
 }

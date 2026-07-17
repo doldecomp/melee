@@ -30,6 +30,13 @@ static MotionFlags const ftDk_MF_SpecialAirS =
 static MotionFlags const ftDk_MF_SpecialAirHi =
     ftDk_MF_Special | Ft_MF_KeepFastFall | Ft_MF_KeepGfx | Ft_MF_SkipParasol;
 
+static MotionFlags const ftDk_MF_SpecialN_CollCancel =
+    ftCommon_GroundAirColl_MF;
+
+static MotionFlags const ftDk_MF_SpecialN_Coll =
+    ftDk_MF_SpecialN_CollCancel | Ft_MF_KeepGfx | Ft_MF_KeepColAnimHitStatus |
+    Ft_MF_KeepColAnimPartHitStatus | Ft_MF_SkipHit;
+
 static MotionFlags const ftDk_MF_MS_386 =
     ftDk_MF_Special | Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipParasol;
 

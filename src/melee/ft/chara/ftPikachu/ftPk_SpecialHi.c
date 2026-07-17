@@ -158,14 +158,15 @@ void ftPk_SpecialHi_ChangeMotion_Unk00(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D60C(fp);
-    Fighter_ChangeMotionState(gobj, 356, 206327940, fp->cur_anim_frame, 1.0f,
-                              0.0f, 0);
+    Fighter_ChangeMotionState(gobj, 356, ftPk_MF_SpecialHiStart_Coll,
+                              fp->cur_anim_frame, 1.0f, 0.0f, 0);
 }
 
 void ftPk_SpecialHi_ChangeMotion_Unk01(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_AirToGroundStateChange(gobj, fp, 353, 206327940);
+    ftCommon_AirToGroundStateChange(gobj, fp, 353,
+                                    ftPk_MF_SpecialHiStart_Coll);
 }
 
 void ftPk_SpecialHiStart1_Anim(HSD_GObj* gobj)
@@ -429,8 +430,8 @@ void ftPk_SpecialHi_ChangeMotion_Unk02(HSD_GObj* gobj)
     u8 _[8];
 
     ftCommon_8007D60C(fp);
-    Fighter_ChangeMotionState(gobj, 357, 206327946, fp->cur_anim_frame, 0.0f,
-                              0.0f, 0);
+    Fighter_ChangeMotionState(gobj, 357, ftPk_MF_SpecialHiMove_Coll,
+                              fp->cur_anim_frame, 0.0f, 0.0f, 0);
     fp->x2223_b4 = true;
     ftPk_SpecialHi_8012642C(gobj);
 }
@@ -452,8 +453,8 @@ void ftPk_SpecialHi_ChangeMotion_Unk03(HSD_GObj* gobj)
 
     fighter2 = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fighter2);
-    Fighter_ChangeMotionState(gobj, 354, 206327946, fighter2->cur_anim_frame,
-                              0.0f, 0.0f, 0);
+    Fighter_ChangeMotionState(gobj, 354, ftPk_MF_SpecialHiMove_Coll,
+                              fighter2->cur_anim_frame, 0.0f, 0.0f, 0);
 
     fp = GET_FIGHTER(gobj);
     collData = &fp->coll_data;
@@ -788,8 +789,8 @@ void ftPk_SpecialHi_ChangeMotion_Unk04(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D60C(fp);
-    Fighter_ChangeMotionState(gobj, 358, 206327946, fp->cur_anim_frame, 1.0f,
-                              0.0f, 0);
+    Fighter_ChangeMotionState(gobj, 358, ftPk_MF_SpecialHiMove_Coll,
+                              fp->cur_anim_frame, 1.0f, 0.0f, 0);
 }
 
 void ftPk_SpecialHi_MotionChangeUpdateVel_Unk0(HSD_GObj* gobj)

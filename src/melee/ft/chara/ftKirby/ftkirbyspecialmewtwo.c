@@ -25,6 +25,7 @@
 #include "ftCommon/inlines.h"
 
 #include "ftKirby/forward.h"
+#include "ftMewtwo/forward.h"
 
 #include "it/items/itmewtwoshadowball.h"
 #include "lb/lb_00B0.h"
@@ -905,8 +906,7 @@ void ftKb_MtSpecialNLoop_Coll(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == GA_Ground) {
         ftCommon_GroundToAirStateChange(gobj, fp, ftKb_MS_MtSpecialAirNLoop,
-                                        ftCommon_GroundAirColl_MF |
-                                            Ft_MF_KeepSfx);
+                                        ftMt_MF_SpecialNLoop_Coll);
         ftKb_SpecialN_set_cbs(gobj);
     }
 }
@@ -915,9 +915,9 @@ void ftKb_MtSpecialNLoopFull_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == GA_Ground) {
-        ftCommon_GroundToAirStateChange(
-            gobj, fp, ftKb_MS_MtSpecialAirNLoopFull,
-            ftCommon_GroundAirColl_MF | Ft_MF_KeepSfx);
+        ftCommon_GroundToAirStateChange(gobj, fp,
+                                        ftKb_MS_MtSpecialAirNLoopFull,
+                                        ftMt_MF_SpecialNLoop_Coll);
         ftKb_SpecialN_set_cbs(gobj);
     }
 }
@@ -957,8 +957,7 @@ void ftKb_MtSpecialAirNLoop_Coll(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) == GA_Air) {
         ftCommon_AirToGroundStateChange(gobj, fp, ftKb_MS_MtSpecialNLoop,
-                                        ftCommon_GroundAirColl_MF |
-                                            Ft_MF_KeepSfx);
+                                        ftMt_MF_SpecialNLoop_Coll);
         ftKb_SpecialN_set_cbs(gobj);
     }
 }
@@ -968,8 +967,7 @@ void ftKb_MtSpecialAirNLoopFull_Coll(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) == GA_Air) {
         ftCommon_AirToGroundStateChange(gobj, fp, ftKb_MS_MtSpecialNLoopFull,
-                                        ftCommon_GroundAirColl_MF |
-                                            Ft_MF_KeepSfx);
+                                        ftMt_MF_SpecialNLoop_Coll);
         ftKb_SpecialN_set_cbs(gobj);
     }
 }

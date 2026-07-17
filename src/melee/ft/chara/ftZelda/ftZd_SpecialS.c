@@ -21,6 +21,9 @@
 
 #include <dolphin/mtx.h>
 
+static MotionFlags const ftZd_MF_SpecialSStart_Coll =
+    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx;
+
 /// 8013B638 - 8013B6D8 (160 bytes)
 /// https://decomp.me/scratch/QnXK1
 void ftZd_SpecialS_Enter(HSD_GObj* gobj)
@@ -520,8 +523,8 @@ void ftZd_SpecialSStart_Coll(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == 0) {
-        ftCommon_GroundToAirStateChange(
-            gobj, fp, 346, ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx);
+        ftCommon_GroundToAirStateChange(gobj, fp, 346,
+                                        ftZd_MF_SpecialSStart_Coll);
     }
 }
 
@@ -557,8 +560,8 @@ void ftZd_SpecialAirSStart_Coll(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != 0) {
-        ftCommon_AirToGroundStateChange(
-            gobj, fp, 343, ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx);
+        ftCommon_AirToGroundStateChange(gobj, fp, 343,
+                                        ftZd_MF_SpecialSStart_Coll);
     }
 }
 

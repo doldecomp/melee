@@ -21,6 +21,9 @@
 #include <dolphin/mtx.h>
 #include <baselib/random.h>
 
+static MotionFlags const ftMr_MF_SpecialN_Coll =
+    Ft_MF_SkipColAnim | Ft_MF_UpdateCmd;
+
 static int pickMegavitamin(Fighter* fp, int* arr, int outpos)
 {
     int result = arr[HSD_Randi(outpos)];
@@ -168,7 +171,7 @@ void ftMr_SpecialN_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_GroundToAirStateChange(gobj, fp, ftMr_MS_SpecialAirN,
-                                    (Ft_MF_UpdateCmd | Ft_MF_SkipColAnim));
+                                    ftMr_MF_SpecialN_Coll);
 
     fp->accessory4_cb = ftMr_SpecialN_ItemFireSpawn;
 }
@@ -177,7 +180,7 @@ void ftMr_SpecialAirN_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_AirToGroundStateChange(gobj, fp, ftMr_MS_SpecialN,
-                                    (Ft_MF_UpdateCmd | Ft_MF_SkipColAnim));
+                                    ftMr_MF_SpecialN_Coll);
 
     fp->accessory4_cb = ftMr_SpecialN_ItemFireSpawn;
 }

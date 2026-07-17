@@ -135,7 +135,7 @@ void ftPk_SpecialN_Coll(HSD_GObj* gobj)
     Fighter* fp;
     if (!ft_80082708(gobj)) {
         fp = GET_FIGHTER(gobj);
-        ftCommon_GroundToAirStateChange(gobj, fp, 342, 206327938);
+        ftCommon_GroundToAirStateChange(gobj, fp, 342, ftPk_MF_SpecialN_Coll);
     }
 }
 
@@ -146,8 +146,8 @@ void ftPk_SpecialAirN_Coll(HSD_GObj* gobj)
         fp = GET_FIGHTER(gobj);
         ftCommon_8007D7FC(fp);
         fp->self_vel.y = 0.0f;
-        Fighter_ChangeMotionState(gobj, 341, 206327938, fp->cur_anim_frame,
-                                  1.0f, 0.0f, 0);
+        Fighter_ChangeMotionState(gobj, 341, ftPk_MF_SpecialN_Coll,
+                                  fp->cur_anim_frame, 1.0f, 0.0f, 0);
     }
 }
 

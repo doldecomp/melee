@@ -150,8 +150,7 @@ static inline void ftPp_SpecialLw_Coll_Land(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_GroundToAirStateChange(gobj, fp, ftPp_MS_SpecialAirLw,
-                                    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx |
-                                        Ft_MF_KeepSfx);
+                                    ftPp_MF_SpecialLw_Coll);
     ftPp_set_cbs(gobj);
     fp->accessory4_cb = fn_80122D2C;
     ftCommon_ClampAirDrift(fp);

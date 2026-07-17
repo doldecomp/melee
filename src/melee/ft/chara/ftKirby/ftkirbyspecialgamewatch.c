@@ -30,6 +30,9 @@
 #include <baselib/random.h>
 #include <MSL/math.h>
 
+static MotionFlags const ftKb_MF_GwSpecialN_Coll =
+    ftCommon_GroundAirColl_MF | Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipHit;
+
 /* 10CE5C */ static void fn_8010CE5C(Fighter_GObj* gobj);
 /* 10CFB0 */ static void fn_8010CFB0(Fighter_GObj* gobj);
 
@@ -289,9 +292,7 @@ void ftKb_SpecialNGw_8010D580(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_GroundToAirStateChange(gobj, fp, ftKb_MS_GwSpecialAirN,
-                                    ftCommon_GroundAirColl_MF |
-                                        Ft_MF_KeepColAnimHitStatus |
-                                        Ft_MF_SkipHit);
+                                    ftKb_MF_GwSpecialN_Coll);
 
     fp = GET_FIGHTER(gobj);
     fp->accessory4_cb = fn_8010CE5C;
@@ -301,9 +302,7 @@ void ftKb_SpecialNGw_8010D5F0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_AirToGroundStateChange(gobj, fp, ftKb_MS_GwSpecialN,
-                                    ftCommon_GroundAirColl_MF |
-                                        Ft_MF_KeepColAnimHitStatus |
-                                        Ft_MF_SkipHit);
+                                    ftKb_MF_GwSpecialN_Coll);
 
     fp = GET_FIGHTER(gobj);
     fp->accessory4_cb = fn_8010CE5C;

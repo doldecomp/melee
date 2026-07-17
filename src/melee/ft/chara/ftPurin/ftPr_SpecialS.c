@@ -25,6 +25,9 @@
 #include <baselib/jobj.h>
 #include <baselib/objalloc.h>
 
+static MotionFlags const ftPr_MF_SpecialS_Coll =
+    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx | Ft_MF_SkipHit;
+
 /// @todo Float order hack.
 static float forceFloatOrder0(void)
 {
@@ -157,15 +160,13 @@ void ftPr_SpecialS_8013D590(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftCommon_GroundToAirStateChange(gobj, fp, ftPr_MS_SpecialAirS,
-                                    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx |
-                                        Ft_MF_SkipHit);
+                                    ftPr_MF_SpecialS_Coll);
 }
 
 void ftPr_SpecialS_8013D5F0(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftCommon_AirToGroundStateChange(gobj, fp, ftPr_MS_SpecialS,
-                                    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx |
-                                        Ft_MF_SkipHit);
+                                    ftPr_MF_SpecialS_Coll);
     ftCommon_ClampAirDrift(fp);
 }

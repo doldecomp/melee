@@ -10,6 +10,9 @@
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_ItemParasolOpen.h"
 #include "ftCommon/ftCo_Thrown.h"
 #include "ftCommon/types.h"
@@ -68,11 +71,6 @@ static inline void ftCo_ItemParasol_Phys(Fighter_GObj* gobj)
 {
     ftCo_ItemParasolOpen_Phys(gobj);
 }
-
-static MotionFlags const ftCommon_GroundAirColl_MF =
-    Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_UpdateCmd |
-    Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |
-    Ft_MF_SkipModelFlags | Ft_MF_Unk27;
 
 static inline void ftCommon_GroundToAirStateChange(Fighter_GObj* gobj,
                                                    Fighter* fp,
