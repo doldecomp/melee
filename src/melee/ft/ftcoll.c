@@ -1197,10 +1197,7 @@ bool ftColl_80077C60(Item* item, HitCapsule* hit, Fighter* fp,
                     return true;
                 }
             }
-            goto retfalse;
-        }
-
-        {
+        } else {
             DmgLogEntry* entry;
             bool inner_ret;
             bool should_log;
@@ -1314,7 +1311,6 @@ bool ftColl_80077C60(Item* item, HitCapsule* hit, Fighter* fp,
             return true;
         }
     }
-retfalse:
     return false;
 }
 
@@ -2210,6 +2206,8 @@ float ftColl_80079C70(Fighter* fp, Fighter* attacker, HitCapsule* hit,
     } else {
         s32 count;
 
+        /// @todo Expanded inline of #ftColl_GetDamageCount; re-inline when
+        /// the call form matches.
         if (fp->x2225_b7) {
             if (fp->x2224_b2) {
                 count = (s32) ftd->x6D8[0];
