@@ -14,11 +14,11 @@
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 
 #include "ftCommon/forward.h"
 
-#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Landing.h"
 #include "ftCommon/ftCo_Pass.h"
@@ -28,8 +28,8 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <math_ppc.h>
-#include <trigf.h>
+#include <math_ppc.h> // IWYU pragma: keep
+#include <trigf.h>    // IWYU pragma: keep
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
@@ -149,7 +149,7 @@ void ftPk_SpecialAirHiStart0_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (ft_CheckGroundAndLedge(gobj, fp->facing_dir < 0 ? -1 : +1)) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         ftPk_SpecialHi_ChangeMotion_Unk01(gobj);
     } else if (!ftCliffCommon_80081298(gobj)) {
         /// @todo Fix weird control flow.
@@ -381,7 +381,7 @@ void ftPk_SpecialAirHiStart1_Coll(HSD_GObj* gobj)
     u8 _[12];
 
     fp->mv.pk.specialhi.x18++;
-    if (ft_CheckGroundAndLedge(gobj, fp->facing_dir < 0.0f ? -1 : 1)) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         bool0 = ftPikachu_GetBool(gobj);
 
         if (bool0) {
@@ -398,29 +398,9 @@ void ftPk_SpecialAirHiStart1_Coll(HSD_GObj* gobj)
     }
 
     if (!ftCliffCommon_80081298(gobj)) {
-        if (collData->env_flags & Collide_CeilingMask) {
-            float angle =
-                lbVector_AngleXY(&collData->ceiling.normal, &fp->self_vel);
-            if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
-                ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(gobj);
-            }
-        }
-
-        if (collData->env_flags & Collide_LeftWallMask) {
-            float angle = lbVector_AngleXY(&collData->left_facing_wall.normal,
-                                           &fp->self_vel);
-            if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
-                ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(gobj);
-            }
-        }
-
-        if (collData->env_flags & Collide_RightWallMask) {
-            float angle = lbVector_AngleXY(&collData->right_facing_wall.normal,
-                                           &fp->self_vel);
-            if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
-                ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(gobj);
-            }
-        }
+        ftCommon_HandleTeleportCollisions(
+            gobj, fp, collData, &pika_attr->xA0,
+            ftPk_SpecialHi_MotionChangeUpdateVel_Unk1);
     }
 }
 

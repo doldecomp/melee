@@ -3,6 +3,8 @@
 #include "inlines.h"
 #include "math.h"
 
+#include "baselib/gobjgxlink.h"
+#include "baselib/gobjuserdata.h"
 #include "ft/chara/ftNess/ftNs_AttackHi4.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
@@ -296,7 +298,7 @@ void itNessyoyo_UnkMotion3_Phys(Item_GObj* gobj)
 static inline bool itNessyoyo_UnkMotion3_Anim_inline(Item_GObj* gobj)
 {
     if (GET_ITEM(gobj)->owner) {
-        enum_t action = ftLib_80086C0C(GET_ITEM(gobj)->owner);
+        enum_t action = ftLib_GetMotionId(GET_ITEM(gobj)->owner);
         if (action >= 0x156 && action <= 0x15B) {
             return false;
         } else {
