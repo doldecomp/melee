@@ -1297,6 +1297,16 @@ struct grBigBlue_GroundVars {
                     u8 x0_b1 : 1;
                     u8 pad[3];
                 };
+                struct {
+                    /* +0 gp+C4:0 */ u32 b0 : 1;
+                    /* +0 gp+C4:1 */ u32 b1 : 1;
+                    /* +0 gp+C4:2 */ u32 b2 : 1;
+                    /* +0 gp+C4:3 */ u32 prev_lane : 7;
+                    /* +1 gp+C5:2 */ u32 cur_lane : 7;
+                    /* +2 gp+C6:1 */ u32 next_lane : 7;
+                    /* +3 gp+C7:0 */ u32 nibble_hi : 4;
+                    /* +3 gp+C7:4 */ u32 nibble_lo : 4;
+                };
             };
             /*  +4 gp+C8 */ void* xC8;
             /*  +8 gp+CC */ void* xCC;
@@ -1565,7 +1575,7 @@ struct ScrollVars {
     /* +44 gp+108 */ HSD_JObj* x44;
 };
 
-struct grHomeRun_MainGroundVars {
+struct grHomeRun_GroundVars {
     /* +00 gp+C4 */ HSD_GObj** gobjs;
     /* +04 gp+C8 */ HSD_GObj** jobj_gobjs;
     /* +08 gp+CC */ HSD_Text* xCC;
@@ -1587,31 +1597,13 @@ struct grHomeRun_MainGroundVars {
     } xE8_flags;
 };
 
-struct grHomeRun_GroundVars {
-    union {
-        struct {
-            /* +00 gp+C4 */ u16 xC4;
-            /* +02 gp+C6 */ u16 xC6;
-            /* +04 gp+C8 */ int xC8;
-            /* +08 gp+CC */ int xCC;
-            /* +0C gp+D0 */ float xD0;
-            /* +0C gp+D4 */ u8 pad_D4[0x14];
-            /* +24 gp+E8 */ union {
-                u8 xE8;
-                struct {
-                    u8 xE8_b0 : 1;
-                    u8 xE8_b1 : 1;
-                    u8 xE8_b2 : 1;
-                    u8 xE8_b3 : 1;
-                    u8 xE8_b4 : 1;
-                    u8 xE8_b5 : 1;
-                    u8 xE8_b6 : 1;
-                    u8 xE8_b7 : 1;
-                };
-            };
-        };
-        struct grHomeRun_MainGroundVars main;
-    };
+/// View used by the per-target Ground gobjs created by #grHomeRun_8021E500.
+struct grHomeRun_GroundVars2 {
+    /* +00 gp+C4 */ u16 xC4;
+    /* +02 gp+C6 */ u16 xC6;
+    /* +04 gp+C8 */ int xC8;
+    /* +08 gp+CC */ int xCC;
+    /* +0C gp+D0 */ float xD0;
 };
 
 struct Map_GroundVars {
@@ -1774,6 +1766,7 @@ struct Ground {
             struct grSmashTaunt_GroundVars smashtaunt;
             struct GroundVars_unk unk;
             struct grHomeRun_GroundVars homerun;
+            struct grHomeRun_GroundVars2 homerun2;
             struct grVenom_GroundVars venom;
             struct grVenom_GroundVars2 venom2;
             struct grYorster_GroundVars yorster;

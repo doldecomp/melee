@@ -2380,34 +2380,6 @@ static grBb_TrackEntry grBb_TrackEntries[12] = {
 
 void grBigBlue_801EB004(Ground_GObj* gobj)
 {
-    typedef struct grBb_InitC4HalfBits {
-        u16 pad0 : 3;
-        u16 lane : 7;
-        u16 pad1 : 6;
-    } grBb_InitC4HalfBits;
-    typedef struct grBb_InitC4WordBits {
-        u32 pad0 : 10;
-        u32 lane : 7;
-        u32 pad1 : 15;
-    } grBb_InitC4WordBits;
-    typedef struct grBb_InitByteLo7 {
-        u8 pad0 : 1;
-        u8 lo7 : 7;
-    } grBb_InitByteLo7;
-    typedef struct grBb_InitByteBits {
-        u8 b0 : 1;
-        u8 b1 : 1;
-        u8 b2 : 1;
-        u8 b3 : 1;
-        u8 b4 : 1;
-        u8 b5 : 1;
-        u8 b6 : 1;
-        u8 b7 : 1;
-    } grBb_InitByteBits;
-    typedef struct grBb_InitNibbleBits {
-        u8 hi : 4;
-        u8 lo : 4;
-    } grBb_InitNibbleBits;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Ground* gp = gobj->user_data;
     HSD_JObj* child;
@@ -2464,11 +2436,11 @@ void grBigBlue_801EB004(Ground_GObj* gobj)
         HSD_ASSERT(2330, end_jobj);
     }
 
-    ((grBb_InitC4HalfBits*) &gp->gv.bigblue.x0_w)->lane = 0xFFFF;
+    gp->gv.bigblue.prev_lane = 0x7F;
 
-    ((grBb_InitC4WordBits*) &gp->gv.bigblue.x0_w)->lane = 4;
+    gp->gv.bigblue.cur_lane = 4;
 
-    ((grBb_InitByteLo7*) &gp->gv.bigblue.x2)->lo7 = 0;
+    gp->gv.bigblue.next_lane = 0;
 
     M2C_FIELD(gp, f32*, 0xC8) = -1000.0F * Ground_801C0498();
     M2C_FIELD(gp, f32*, 0xCC) = 10.0F * Ground_801C0498();
@@ -2483,13 +2455,13 @@ void grBigBlue_801EB004(Ground_GObj* gobj)
         M2C_FIELD(gp, s16*, 0xF0) = 0;
         M2C_FIELD(gp, f32*, 0xF8) = fval;
 
-        ((grBb_InitNibbleBits*) &gp->gv.bigblue.x3)->hi = 0;
-        ((grBb_InitByteBits*) &gp->gv.bigblue.x0_w)->b1 = 0;
-        ((grBb_InitByteBits*) &gp->gv.bigblue.x0_w)->b2 = 0;
+        gp->gv.bigblue.nibble_hi = 0;
+        gp->gv.bigblue.b1 = 0;
+        gp->gv.bigblue.b2 = 0;
     }
 
     {
-        u32 idx = ((grBb_InitC4WordBits*) &gp->gv.bigblue.x0_w)->lane;
+        u32 idx = gp->gv.bigblue.cur_lane;
         HSD_JObj* active =
             Ground_801C3FA4(gobj, grBb_TrackEntries[idx].jobj_index);
 
@@ -2503,14 +2475,14 @@ void grBigBlue_801EB004(Ground_GObj* gobj)
     }
 
     {
-        u32 idx2 = M2C_FIELD(gp, s8*, 0xC6) & 0x7F;
+        u32 idx2 = gp->gv.bigblue.next_lane;
         HSD_JObj* next =
             Ground_801C3FA4(gobj, grBb_TrackEntries[idx2].jobj_index);
         u32 active_idx;
 
         HSD_JObjClearFlagsAll(next, JOBJ_HIDDEN);
 
-        active_idx = ((grBb_InitC4WordBits*) &gp->gv.bigblue.x0_w)->lane;
+        active_idx = gp->gv.bigblue.cur_lane;
         pos.x += grBb_TrackEntries[active_idx].delta.x;
         pos.y += grBb_TrackEntries[active_idx].delta.y;
         pos.z += grBb_TrackEntries[active_idx].delta.z;
@@ -3298,62 +3270,60 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
 
     /* Count active cars (not in state 1, 7, or 8) */
     {
-        u8* bp = (u8*) gp;
-        u8* p;
+        struct grBigBlue_CarLane* p;
         u32 st;
-        st = (bp[0xD4] >> 2) & 0x3F;
+        st = gp->gv.bigblue.car.lanes[0].state;
         if (st != 1 && st != 7 && st != 8) {
             active_count = 1;
         }
-        p = bp + 0x40;
-        st = (p[0xD4] >> 2) & 0x3F;
+        p = &gp->gv.bigblue.car.lanes[1];
+        st = p[0].state;
         if (st != 1 && st != 7 && st != 8) {
             active_count++;
         }
-        st = (p[0x114] >> 2) & 0x3F;
-        p += 0x40;
+        st = p[1].state;
+        p += 1;
         if (st != 1 && st != 7 && st != 8) {
             active_count++;
         }
-        st = (p[0x114] >> 2) & 0x3F;
+        st = p[1].state;
         if (st != 1 && st != 7 && st != 8) {
             active_count++;
         }
     }
 
     if (active_count == 1) {
-        *(s16*) ((u8*) gp + 0xD0) -= 1;
+        M2C_FIELD(gp, s16*, 0xD0) -= 1;
     }
 
     /* Find closest car */
     {
-        u8* bp = (u8*) gp;
         f32 threshold;
         f32 zero;
         f32 dist;
         s32 ctr = 2;
         f32 closest_dist = 3.4028235e38f;
-        u8* car_p;
+        struct grBigBlue_CarLane* car_p;
         s32 car_idx;
         s32 found_ten;
         s32 closest_lane;
 
         zero = 0.0f;
         threshold = 60.0f;
-        car_p = bp;
+        car_p = gp->gv.bigblue.car.lanes;
         found_ten = 0;
         closest_lane = -1;
         car_idx = 0;
         do {
             u32 st;
 
-            st = (car_p[0xD4] >> 2) & 0x3F;
+            st = car_p[0].state;
             if (st == 10) {
                 found_ten = 1;
                 break;
             }
             if (st != 1 && st != 7 && st != 8) {
-                dist = *(f32*) (car_p + 0xE0);
+                dist = car_p[0].pos.x;
                 if (dist < zero) {
                     dist = -dist;
                 }
@@ -3368,15 +3338,15 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
                 }
             }
 
-            st = (car_p[0x114] >> 2) & 0x3F;
-            car_p += 0x40;
+            st = car_p[1].state;
+            car_p += 1;
             car_idx++;
             if (st == 10) {
                 found_ten = 1;
                 break;
             }
             if (st != 1 && st != 7 && st != 8) {
-                dist = *(f32*) (car_p + 0xE0);
+                dist = car_p[0].pos.x;
                 if (dist < zero) {
                     dist = -dist;
                 }
@@ -3390,32 +3360,30 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
                     break;
                 }
             }
-            car_p += 0x40;
+            car_p += 1;
             car_idx++;
             ctr--;
         } while (ctr != 0);
 
         if (found_ten == 0 && closest_lane != -1) {
             register s32 st_val;
-            u8* car;
-            u8* target_car = bp + (closest_lane << 6);
+            struct grBigBlue_CarLane* car;
+            struct grBigBlue_CarLane* target_car =
+                &gp->gv.bigblue.car.lanes[closest_lane];
 
             st_val = 10;
-            ((struct grBigBlue_CarLane*) (target_car + 0xD4))->state = st_val;
+            target_car->state = st_val;
 
             st_val = 4;
             {
-                car = bp;
+                car = gp->gv.bigblue.car.lanes;
 
-                for (i = 0; i < 4; i++, car += 0x40) {
-                    u32 st = (car[0xD4] >> 2) & 0x3F;
-                    if ((st == 7 &&
-                         *(f32*) (car + 0xE0) < *(f32*) (target_car + 0xE0)) ||
-                        (st == 8 &&
-                         *(f32*) (car + 0xE0) > *(f32*) (target_car + 0xE0)))
+                for (i = 0; i < 4; i++, car++) {
+                    u32 st = car->state;
+                    if ((st == 7 && car->pos.x < target_car->pos.x) ||
+                        (st == 8 && car->pos.x > target_car->pos.x))
                     {
-                        ((struct grBigBlue_CarLane*) (car + 0xD4))->state =
-                            st_val;
+                        car->state = st_val;
                     }
                 }
             }
@@ -3424,56 +3392,55 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
 
     /* Timer-based car spawn */
     {
-        u8* bp = (u8*) gp;
-        s16 timer = *(s16*) (bp + 0xD0);
-        *(s16*) (bp + 0xD0) = timer - 1;
+        s16 timer = M2C_FIELD(gp, s16*, 0xD0);
+        M2C_FIELD(gp, s16*, 0xD0) = timer - 1;
         if (timer < 0) {
             active_count = -1;
-            if ((u32) ((bp[0xD4] >> 2) & 0x3F) == 1) {
+            if ((u32) gp->gv.bigblue.car.lanes[0].state == 1) {
                 active_count = 0;
             } else {
-                u8* p = bp + 0x40;
-                if ((u32) ((p[0xD4] >> 2) & 0x3F) == 1) {
+                struct grBigBlue_CarLane* p = &gp->gv.bigblue.car.lanes[1];
+                if ((u32) p[0].state == 1) {
                     active_count = 1;
                 } else {
-                    u32 st = (p[0x114] >> 2) & 0x3F;
-                    p += 0x40;
+                    u32 st = p[1].state;
+                    p += 1;
                     if (st == 1) {
                         active_count = 2;
-                    } else if ((u32) ((p[0x114] >> 2) & 0x3F) == 1) {
+                    } else if ((u32) p[1].state == 1) {
                         active_count = 3;
                     }
                 }
             }
 
             if (active_count != -1) {
-                u8* p;
+                struct grBigBlue_CarLane* p;
                 s32 right_count = 0;
                 s32 left_count = 0;
                 s32 direction;
                 u32 st;
 
-                st = (bp[0xD4] >> 2) & 0x3F;
+                st = gp->gv.bigblue.car.lanes[0].state;
                 if (st == 7) {
                     right_count = 1;
                 } else if (st == 8) {
                     left_count = 1;
                 }
-                p = bp + 0x40;
-                st = (p[0xD4] >> 2) & 0x3F;
+                p = &gp->gv.bigblue.car.lanes[1];
+                st = p[0].state;
                 if (st == 7) {
                     right_count++;
                 } else if (st == 8) {
                     left_count++;
                 }
-                st = (p[0x114] >> 2) & 0x3F;
-                p += 0x40;
+                st = p[1].state;
+                p += 1;
                 if (st == 7) {
                     right_count++;
                 } else if (st == 8) {
                     left_count++;
                 }
-                st = (p[0x114] >> 2) & 0x3F;
+                st = p[1].state;
                 if (st == 7) {
                     right_count++;
                 } else if (st == 8) {
@@ -3523,7 +3490,7 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
                                     max_val +=
                                         range != 0 ? HSD_Randi(range) : 0;
                                 }
-                                *(s16*) (bp + 0xD0) = (s16) max_val;
+                                M2C_FIELD(gp, s16*, 0xD0) = (s16) max_val;
                             }
                             return;
                         }
@@ -3557,7 +3524,7 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
                                     max_val +=
                                         range != 0 ? HSD_Randi(range) : 0;
                                 }
-                                *(s16*) (bp + 0xD0) = (s16) max_val;
+                                M2C_FIELD(gp, s16*, 0xD0) = (s16) max_val;
                             }
                             return;
                         }
