@@ -1,19 +1,19 @@
 #ifndef __GALE01_1601C4
 #define __GALE01_1601C4
 
-#include "gm_unsplit.h" // IWYU pragma: export
 #include "platform.h"
 
 #include <placeholder.h>
 
+#include "ft/forward.h"
+
+#include "gm/gm_1601.h"
 #include "gm/types.h"
+#include "mn/types.h"
 
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
-
-#define NUM_UNLOCKABLE_CHARACTERS 11
-#define NUM_UNLOCKABLE_STAGES 11
 
 /// struct ResultsData {
 ///     /*  +0 */ char pad_0[0x94];
@@ -27,10 +27,10 @@ struct lbl_80473700_t {
 };
 STATIC_ASSERT(sizeof(struct lbl_80473700_t) == 0x114);
 
-struct lbl_803B78C8_0x6 {
+struct UnlockableCharacterData {
     /* 0x0 */ u8 idx;
-    /* 0x1 */ u8 ckind;
-    /* 0x2 */ u8 x2;
+    /* 0x1 */ u8 selkind;
+    /* 0x2 */ u8 notification_id;
     /* 0x3 */ u8 x3;
     /* 0x4 */ u16 x4;
 }; /* size = 0x6 */
@@ -86,7 +86,7 @@ static const u8 lbl_803B7844[] = {
     { 0x4D, 0x4D, 0x66, 0xFF }, { 0x66, 0x59, 0x33, 0xFF },
     { 0x4D, 0x66, 0x4D, 0xFF },
 };
-/* 3B7888 */ static const u8 lbl_803B7888[0x1C] = {
+/* 3B7888 */ static const u8 selkind_to_ckind_map[0x1C] = {
     CKIND_CAPTAIN, CKIND_DONKEY,  CKIND_FOX,      CKIND_GAMEWATCH,
     CKIND_KIRBY,   CKIND_KOOPA,   CKIND_LINK,     CKIND_LUIGI,
     CKIND_MARIO,   CKIND_MARS,    CKIND_MEWTWO,   CKIND_NESS,
@@ -95,87 +95,118 @@ static const u8 lbl_803B7844[] = {
     CKIND_CLINK,   CKIND_DRMARIO, CKIND_EMBLEM,   CKIND_PICHU,
     CKIND_GANON,
 };
-/* 3B78A4 */ static const u8 lbl_803B78A4[0x24] = {
-    0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B,
-    0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x12, 0x13, 0x14, 0x15, 0x16,
-    0x17, 0x18, 0x08, 0x08, 0x08, 0x19, 0x08, 0x08, 0x00, 0x00, 0x00, 0x00
+
+/* 3B78A4 */ static const u8 ckind_to_selkind_map[CHKIND_MAX] = {
+    /* 00 */ SELKIND_CAPTAIN,
+    /* 01 */ SELKIND_DONKEY,
+    /* 02 */ SELKIND_FOX,
+    /* 03 */ SELKIND_GAMEWATCH,
+    /* 04 */ SELKIND_KIRBY,
+    /* 05 */ SELKIND_KOOPA,
+    /* 06 */ SELKIND_LINK,
+    /* 07 */ SELKIND_LUIGI,
+    /* 08 */ SELKIND_MARIO,
+    /* 09 */ SELKIND_MARS,
+    /* 0A */ SELKIND_MEWTWO,
+    /* 0B */ SELKIND_NESS,
+    /* 0C */ SELKIND_PEACH,
+    /* 0D */ SELKIND_PIKACHU,
+    /* 0E */ SELKIND_POPONANA,
+    /* 0F */ SELKIND_PURIN,
+    /* 10 */ SELKIND_SAMUS,
+    /* 11 */ SELKIND_YOSHI,
+    /* 12 */ SELKIND_ZELDA_SEAK,
+    /* 13 */ SELKIND_ZELDA_SEAK,
+    /* 14 */ SELKIND_FALCO,
+    /* 15 */ SELKIND_CLINK,
+    /* 16 */ SELKIND_DRMARIO,
+    /* 17 */ SELKIND_EMBLEM,
+    /* 18 */ SELKIND_PICHU,
+    /* 19 */ SELKIND_GANON,
+    /* 1A */ SELKIND_MARIO,
+    /* 1B */ SELKIND_MARIO,
+    /* 1C */ SELKIND_MARIO,
+    /* 1D */ SELKIND_COUNT,
+    /* 1E */ SELKIND_MARIO,
+    /* 1F */ SELKIND_MARIO,
+    /* 20 */ SELKIND_CAPTAIN
 };
 
-/* 3B78C8 */ static const struct lbl_803B78C8_0x6
+/* 3B78C8 */ static const struct UnlockableCharacterData
     lbl_803B78C8[NUM_UNLOCKABLE_CHARACTERS] = {
         {
             0,
-            3,
+            SELKIND_GAMEWATCH,
             4,
             0,
             0x116,
         },
         {
             1,
-            7,
+            SELKIND_LUIGI,
             2,
             0,
             0x114,
         },
         {
             2,
-            9,
+            SELKIND_MARS,
             3,
             0,
             0x115,
         },
         {
             3,
-            0xA,
+            SELKIND_MEWTWO,
             1,
             0,
             0x113,
         },
         {
             4,
-            0xF,
+            SELKIND_PURIN,
             0,
             0,
             0x112,
         },
         {
             5,
-            0x13,
+            SELKIND_FALCO,
             8,
             0,
             0x11A,
         },
         {
             6,
-            0x14,
+            SELKIND_CLINK,
             7,
             0,
             0x119,
         },
         {
             7,
-            0x15,
+            SELKIND_DRMARIO,
             5,
             0,
             0x117,
         },
         {
             8,
-            0x16,
+            SELKIND_EMBLEM,
             0xA,
             0,
             0x11C,
         },
         {
             9,
-            0x17,
+            SELKIND_PICHU,
             9,
             0,
             0x11B,
         },
         {
             0xA,
-            0x18,
+            SELKIND_GANON,
             6,
             0,
             0x118,

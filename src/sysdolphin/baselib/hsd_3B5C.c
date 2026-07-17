@@ -4,14 +4,20 @@
 
 #include <Gecko_setjmp.h>
 
-#define HSD_COEFF(code) M2C_FIELD((hsd_804D2E70 + ((code) * 4)), s32*, 0x718)
-
 extern u8 hsd_804D2E70[2084];
 extern u8* hsd_804D79B8;
 extern u8* hsd_804D79BC;
 extern s32 hsd_804D79C0;
 extern s32 hsd_804D79C4;
 extern u8 hsd_804D79C8;
+
+typedef struct JpegWorkData {
+    s32 luma[0x100];
+    s32 cb[0x40];
+    s32 cr[0x40];
+    s32 coeff[0x40];
+    s32 prev_dc[3];
+} JpegWorkData;
 
 u8 lbl_80431090[0x5A8] = {
     0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
@@ -263,26 +269,17 @@ read_huffman_code:
 #pragma dont_inline on
 void hsd_803B5EA0(s32 arg0)
 {
-    s32 scratch_r29;
-    s32 scratch_r29_2;
-    s32 scratch_r29_3;
-    s32 scratch_r29_4;
-    s32 scratch_r29_5;
-    s32 scratch_r29_6;
+    u8* base;
     s32 scratch_r3_2;
     s32 work_r29;
     s32 work_r3;
     s32 work_r3_4;
-    u32 scratch_r0_4;
     u32 scratch_r8;
-    u32 work_ctr_3;
-    u32 work_ctr_4;
     u32 work_r3_3;
-    u8 scratch_r0_5;
     u8 scratch_r0_6;
     s32 scratch_r27;
-    s32* scratch_r5;
 
+    base = hsd_804D2E70;
     scratch_r27 = hsd_803B5D70(0, arg0);
     if (scratch_r27 > 0) {
         work_r3 = hsd_803B5C4C(scratch_r27);
@@ -292,65 +289,33 @@ void hsd_803B5EA0(s32 arg0)
     } else {
         work_r3 = 0;
     }
-    scratch_r5 = (s32*) (hsd_804D2E70 + (arg0 * 4));
-    scratch_r5[0x206] = (s32) (scratch_r5[0x206] + work_r3);
+    ((JpegWorkData*) &base[0x118])->prev_dc[arg0] += work_r3;
     work_r29 = 1;
-    HSD_COEFF(0) = (s32) scratch_r5[0x206];
+    ((JpegWorkData*) &base[0x118])->coeff[0] =
+        ((JpegWorkData*) &base[0x118])->prev_dc[arg0];
     while (work_r29 < 0x40) {
         if ((scratch_r3_2 = hsd_803B5D70(1, arg0)) == 0) {
             while (work_r29 < 0x40) {
-                HSD_COEFF(lbl_80431638[work_r29]) = 0;
+                ((JpegWorkData*) &base[0x118])->coeff[lbl_80431638[work_r29]] =
+                    0;
                 work_r29 += 1;
             }
             return;
         } else {
             scratch_r8 = hsd_803B5C4C(scratch_r3_2) - 1;
             work_r3_3 = scratch_r8;
-            if (scratch_r8 != 0) {
-                scratch_r0_4 = work_r3_3 >> 3U;
-                work_ctr_3 = scratch_r0_4;
-                if (scratch_r0_4 != 0) {
-                    do {
-                        scratch_r29 = work_r29 + 1;
-                        HSD_COEFF(lbl_80431638[work_r29]) = 0;
-                        scratch_r29_2 = scratch_r29 + 1;
-                        HSD_COEFF(lbl_80431638[scratch_r29]) = 0;
-                        scratch_r29_3 = scratch_r29_2 + 1;
-                        scratch_r29_4 = scratch_r29_3 + 1;
-                        HSD_COEFF(lbl_80431638[scratch_r29_2]) = 0;
-                        scratch_r29_5 = scratch_r29_4 + 1;
-                        HSD_COEFF(lbl_80431638[scratch_r29_3]) = 0;
-                        scratch_r29_6 = scratch_r29_5 + 1;
-                        HSD_COEFF(lbl_80431638[scratch_r29_4]) = 0;
-                        HSD_COEFF(lbl_80431638[scratch_r29_5]) = 0;
-                        work_r29 = scratch_r29_6 + 1 + 1;
-                        HSD_COEFF(lbl_80431638[scratch_r29_6]) = 0;
-                        HSD_COEFF(lbl_80431638[work_r29 - 1]) = 0;
-                        work_ctr_3 -= 1;
-                    } while (work_ctr_3 != 0);
-                    work_r3_3 &= 7;
-                    if (work_r3_3 != 0) {
-                        goto emit_zero_tail;
-                    }
-                } else {
-                emit_zero_tail:
-                    work_ctr_4 = work_r3_3;
-                    do {
-                        scratch_r0_5 = lbl_80431638[work_r29];
-                        work_r29 += 1;
-                        HSD_COEFF(scratch_r0_5) = 0;
-                        work_ctr_4 -= 1;
-                    } while (work_ctr_4 != 0);
-                }
+            while (work_r3_3 != 0) {
+                ((JpegWorkData*) &base[0x118])
+                    ->coeff[lbl_80431638[work_r29++]] = 0;
+                work_r3_3 -= 1;
             }
             scratch_r27 = hsd_803B5D70(1, arg0);
             work_r3_4 = hsd_803B5C4C(scratch_r27);
             if (!(work_r3_4 & (1 << (scratch_r27 - 1)))) {
                 work_r3_4 -= (1 << scratch_r27) - 1;
             }
-            scratch_r0_6 = lbl_80431638[work_r29];
-            work_r29 += 1;
-            HSD_COEFF(scratch_r0_6) = work_r3_4;
+            scratch_r0_6 = lbl_80431638[work_r29++];
+            ((JpegWorkData*) &base[0x118])->coeff[scratch_r0_6] = work_r3_4;
         }
     }
 }
@@ -358,42 +323,24 @@ void hsd_803B5EA0(s32 arg0)
 
 static void fn_803B61B4(u8* arg0)
 {
+    f32 scratch_f9;
     f32 scratch_f10;
-    f32 scratch_f10_2;
-    f32 scratch_f10_3;
     f32 scratch_f11;
-    f32 scratch_f11_2;
-    f32 scratch_f12;
-    f32 scratch_f12_2;
-    f32 scratch_f12_3;
-    f32 scratch_f13;
-    f32 scratch_f13_2;
-    f32 scratch_f13_3;
-    f32 scratch_f13_4;
-    f32 scratch_f13_5;
+    s32 scratch_r5_5;
     f32 scratch_f22;
-    f32 scratch_f22_2;
-    f32 scratch_f23;
-    f32 scratch_f23_2;
-    f32 scratch_f23_3;
-    f32 scratch_f24;
-    f32 scratch_f24_2;
-    f32 scratch_f24_3;
-    f32 scratch_f24_4;
+    f32 scratch_f13_3;
+    f32 scratch_f12;
+    f32 scratch_f13;
+    f32 scratch_f31;
     f32 scratch_f25;
     f32 scratch_f25_2;
-    f32 scratch_f25_3;
-    f32 scratch_f25_4;
-    f32 scratch_f26;
-    f32 scratch_f26_2;
-    f32 scratch_f27;
-    f32 scratch_f27_2;
-    f32 scratch_f29;
-    f32 scratch_f30;
-    f32 scratch_f31;
-    f32 scratch_f9;
-    f32 scratch_f9_2;
-    f32 scratch_f9_3;
+    f32 scratch_f23;
+    f32 scratch_f12_2;
+    f32 scratch_f24;
+    f32 scratch_f23_2;
+    f32 scratch_f24_2;
+    f32 scratch_f22_2;
+    f32 scratch_f10_2;
     s32 scratch_r0;
     s32 scratch_r0_2;
     s32 scratch_r0_3;
@@ -406,7 +353,7 @@ static void fn_803B61B4(u8* arg0)
     s32 scratch_r5_2;
     s32 scratch_r5_3;
     s32 scratch_r5_4;
-    s32 scratch_r5_5;
+    f32 scratch_f13_2;
     s32 scratch_r5_6;
     s32 scratch_r6;
     s32 scratch_r6_2;
@@ -425,35 +372,35 @@ static void fn_803B61B4(u8* arg0)
         scratch_r5_2 = work_r4[5];
         scratch_r11 = work_r4[0];
         scratch_r10 = work_r4[4];
-        scratch_f22 = (f32) ((0.980785f * (f64) scratch_r6) -
-                             (0.19509f * (f64) scratch_r5));
-        scratch_f31 = (f32) ((0.83147f * (f64) scratch_r5_2) -
-                             (0.55557f * (f64) scratch_r0));
-        scratch_f23 = (f32) ((0.55557f * (f64) scratch_r5_2) +
-                             (0.83147f * (f64) scratch_r0));
-        scratch_f24 = (f32) ((0.19509f * (f64) scratch_r6) +
-                             (0.980785f * (f64) scratch_r5));
-        scratch_f10 = (f32) (0.707107f * (f64) (scratch_r11 + scratch_r10));
-        scratch_f11 = (f32) (0.707107f * (f64) (scratch_r11 - scratch_r10));
+        scratch_f22 = (f32) ((0.980785 * (f64) scratch_r6) -
+                             (0.19509 * (f64) scratch_r5));
+        scratch_f31 = (f32) ((0.83147 * (f64) scratch_r5_2) -
+                             (0.55557 * (f64) scratch_r0));
+        scratch_f23 = (f32) ((0.55557 * (f64) scratch_r5_2) +
+                             (0.83147 * (f64) scratch_r0));
+        scratch_f24 = (f32) ((0.19509 * (f64) scratch_r6) +
+                             (0.980785 * (f64) scratch_r5));
+        scratch_f10 = (f32) (0.707107 * (f64) (scratch_r11 + scratch_r10));
+        scratch_f11 = (f32) (0.707107 * (f64) (scratch_r11 - scratch_r10));
         scratch_r0_2 = work_r4[2];
         scratch_f12 = scratch_f22 + scratch_f31;
         scratch_r5_3 = work_r4[6];
         scratch_f13 = -scratch_f23 + scratch_f24;
         scratch_f13_2 = scratch_f23 + scratch_f24;
-        scratch_f9 = (f32) (0.707107f * (f64) (-scratch_f12 + scratch_f13));
-        scratch_f25 = (f32) ((-0.92388f * (f64) scratch_r5_3) +
-                             (0.382683f * (f64) scratch_r0_2));
-        scratch_f12_2 = (f32) ((0.382683f * (f64) scratch_r5_3) +
-                               (0.92388f * (f64) scratch_r0_2));
+        scratch_f9 = (f32) (0.707107 * (f64) (-scratch_f12 + scratch_f13));
+        scratch_f25 = (f32) ((-0.92388 * (f64) scratch_r5_3) +
+                             (0.382683 * (f64) scratch_r0_2));
+        scratch_f12_2 = (f32) ((0.382683 * (f64) scratch_r5_3) +
+                               (0.92388 * (f64) scratch_r0_2));
         scratch_f23_2 = scratch_f10 + scratch_f12_2;
-        scratch_f22_2 = (f32) (0.707107f * (f64) (scratch_f12 + scratch_f13));
+        scratch_f22_2 = (f32) (0.707107 * (f64) (scratch_f12 + scratch_f13));
         scratch_f24_2 = scratch_f11 + scratch_f25;
         scratch_f25_2 = scratch_f11 - scratch_f25;
         work_r4[0] = (s32) (scratch_f23_2 + scratch_f13_2);
         work_r4[1] = (s32) (scratch_f24_2 + scratch_f9);
         scratch_f13_3 = -scratch_f22 + scratch_f31;
         scratch_f10_2 = scratch_f10 - scratch_f12_2;
-        work_r4[2] = (s32) (scratch_f25_2 + scratch_f22_2);
+        work_r4[2] = (s32) (scratch_f22_2 + scratch_f25_2);
         work_r4[3] = (s32) (scratch_f10_2 + scratch_f13_3);
         work_r4[4] = (s32) (scratch_f10_2 - scratch_f13_3);
         work_r4[5] = (s32) (scratch_f25_2 - scratch_f22_2);
@@ -469,45 +416,41 @@ static void fn_803B61B4(u8* arg0)
         scratch_r5_5 = work_r4_2[40];
         scratch_r11_2 = work_r4_2[0];
         scratch_r10_2 = work_r4_2[32];
-        scratch_f26 = (f32) ((0.980785f * (f64) scratch_r6_2) -
-                             (0.19509f * (f64) scratch_r5_4));
-        scratch_f9_2 = (f32) ((0.83147f * (f64) scratch_r5_5) -
-                              (0.55557f * (f64) scratch_r0_3));
-        scratch_f27 = (f32) ((0.55557f * (f64) scratch_r5_5) +
-                             (0.83147f * (f64) scratch_r0_3));
-        scratch_f30 = (f32) ((0.19509f * (f64) scratch_r6_2) +
-                             (0.980785f * (f64) scratch_r5_4));
-        scratch_f10_3 =
-            (f32) (0.707107f * (f64) (scratch_r11_2 + scratch_r10_2));
-        scratch_f25_3 =
-            (f32) (0.707107f * (f64) (scratch_r11_2 - scratch_r10_2));
+        scratch_f22 = (f32) ((0.980785 * (f64) scratch_r6_2) -
+                             (0.19509 * (f64) scratch_r5_4));
+        scratch_f31 = (f32) ((0.83147 * (f64) scratch_r5_5) -
+                             (0.55557 * (f64) scratch_r0_3));
+        scratch_f23 = (f32) ((0.55557 * (f64) scratch_r5_5) +
+                             (0.83147 * (f64) scratch_r0_3));
+        scratch_f24 = (f32) ((0.19509 * (f64) scratch_r6_2) +
+                             (0.980785 * (f64) scratch_r5_4));
+        scratch_f10 = (f32) (0.707107 * (f64) (scratch_r11_2 + scratch_r10_2));
+        scratch_f11 = (f32) (0.707107 * (f64) (scratch_r11_2 - scratch_r10_2));
         scratch_r0_4 = work_r4_2[16];
-        scratch_f13_4 = scratch_f26 + scratch_f9_2;
+        scratch_f12 = scratch_f22 + scratch_f31;
         scratch_r5_6 = work_r4_2[48];
-        scratch_f29 = -scratch_f27 + scratch_f30;
-        scratch_f11_2 = scratch_f27 + scratch_f30;
-        scratch_f12_3 =
-            (f32) (0.707107f * (f64) (-scratch_f13_4 + scratch_f29));
-        scratch_f13_5 = (f32) ((-0.92388f * (f64) scratch_r5_6) +
-                               (0.382683f * (f64) scratch_r0_4));
-        scratch_f26_2 = (f32) ((0.382683f * (f64) scratch_r5_6) +
-                               (0.92388f * (f64) scratch_r0_4));
-        scratch_f27_2 = scratch_f10_3 + scratch_f26_2;
-        scratch_f23_3 =
-            (f32) (0.707107f * (f64) (scratch_f13_4 + scratch_f29));
-        scratch_f24_3 = scratch_f25_3 + scratch_f13_5;
-        scratch_f25_4 = scratch_f25_3 - scratch_f13_5;
-        work_r4_2[0] = (s32) (scratch_f27_2 + scratch_f11_2);
-        work_r4_2[8] = (s32) (scratch_f24_3 + scratch_f12_3);
-        scratch_f9_3 = -scratch_f26 + scratch_f9_2;
-        scratch_f24_4 = scratch_f10_3;
-        scratch_f24_4 -= scratch_f26_2;
-        work_r4_2[16] = (s32) (scratch_f25_4 + scratch_f23_3);
-        work_r4_2[24] = (s32) (scratch_f24_4 + scratch_f9_3);
-        work_r4_2[32] = (s32) (scratch_f24_4 - scratch_f9_3);
-        work_r4_2[40] = (s32) (scratch_f25_4 - scratch_f23_3);
-        work_r4_2[48] = (s32) (scratch_f24_3 - scratch_f12_3);
-        work_r4_2[56] = (s32) (scratch_f27_2 - scratch_f11_2);
+        scratch_f13 = -scratch_f23 + scratch_f24;
+        scratch_f13_2 = scratch_f23 + scratch_f24;
+        scratch_f9 = (f32) (0.707107 * (f64) (-scratch_f12 + scratch_f13));
+        scratch_f25 = (f32) ((-0.92388 * (f64) scratch_r5_6) +
+                             (0.382683 * (f64) scratch_r0_4));
+        scratch_f12_2 = (f32) ((0.382683 * (f64) scratch_r5_6) +
+                               (0.92388 * (f64) scratch_r0_4));
+        scratch_f23_2 = scratch_f10 + scratch_f12_2;
+        scratch_f22_2 = (f32) (0.707107 * (f64) (scratch_f12 + scratch_f13));
+        scratch_f24_2 = scratch_f11 + scratch_f25;
+        scratch_f25_2 = scratch_f11 - scratch_f25;
+        work_r4_2[0] = (s32) (scratch_f23_2 + scratch_f13_2);
+        work_r4_2[8] = (s32) (scratch_f24_2 + scratch_f9);
+        scratch_f13_3 = -scratch_f22 + scratch_f31;
+        scratch_f10_2 = scratch_f10;
+        scratch_f10_2 -= scratch_f12_2;
+        work_r4_2[16] = (s32) (scratch_f25_2 + scratch_f22_2);
+        work_r4_2[24] = (s32) (scratch_f10_2 + scratch_f13_3);
+        work_r4_2[32] = (s32) (scratch_f10_2 - scratch_f13_3);
+        work_r4_2[40] = (s32) (scratch_f25_2 - scratch_f22_2);
+        work_r4_2[48] = (s32) (scratch_f24_2 - scratch_f9);
+        work_r4_2[56] = (s32) (scratch_f23_2 - scratch_f13_2);
         work_r4_2 += 1;
     }
     work_r3 = (s32*) arg0;
@@ -537,12 +480,6 @@ static void fn_803B61B4(u8* arg0)
 static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
                         s32 unused_arg4)
 {
-    f32 scratch_f0;
-    f32 scratch_f0_2;
-    f32 scratch_f0_3;
-    s32 scratch_r18;
-    s32 scratch_r19;
-    s32 scratch_r20;
     s32 scratch_r6;
     u8* base;
     s32 work_ctr;
@@ -551,7 +488,6 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
     s32 work_r12;
     s32 work_r21;
     s32 work_r22;
-    s32 work_r23;
     s32 work_r24;
     s32 work_r25;
     s32 work_r31;
@@ -561,13 +497,9 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
     s32 work_r7;
     s32 work_r8_2;
     u16* work_r9_2;
-    u8 work_r16;
-    u8 work_r16_2;
-    u8 work_r17;
-    u8* work_r27;
+    s32* work_r27;
     u8* work_r8;
     u8* work_r9;
-    u8* scratch_r16;
 
     PAD_STACK(0x30);
     base = hsd_804D2E70;
@@ -612,13 +544,12 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
         work_r9 += 0x100;
     }
     scratch_r6 = (s32) (arg3 + 0xF) / 16;
-    work_r23 = arg2 / 4;
-    work_r22 = 0;
-    work_r21 = 0;
+    work_r21 = work_r22 = 0;
     for (work_r6 = 0; work_r6 < 2; work_r6++) {
         work_r25 = work_r22;
-        work_r9_2 = (u16*) arg0 +
-                    (((arg1 / 4) * 0x10) + ((scratch_r6 << 6) * work_r23));
+        work_r9_2 =
+            (u16*) arg0 + (((arg1 / 4) * 0x10) +
+                           ((scratch_r6 << 6) * ((arg2 / 4) + work_r6)));
         work_r24 = 0;
         for (work_r7 = 0; work_r7 < 2; work_r7++) {
             work_r12 = work_r21 * 8;
@@ -626,8 +557,20 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
                 work_r31 = (work_r24 + work_r12) * 4;
                 for (work_r5 = 0; work_r5 < 4; work_r5++) {
                     work_r8_2 = 0;
-                    work_r27 = &base[work_r31] + 0x118;
+                    work_r27 =
+                        &((JpegWorkData*) &base[0x118])->luma[work_r31 / 4];
                     for (work_ctr_2 = 4; work_ctr_2 != 0; work_ctr_2--) {
+                        f32 scratch_f0;
+                        f32 scratch_f0_2;
+                        f32 scratch_f0_3;
+                        s32 scratch_r18;
+                        s32 scratch_r19;
+                        s32 scratch_r20;
+                        u8 work_r16;
+                        u8 work_r16_2;
+                        u8 work_r17;
+                        u8* scratch_r16;
+
                         scratch_r19 = *work_r27;
                         scratch_r16 =
                             base + (((work_r5 >> 1) +
@@ -672,7 +615,7 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
                                    ((work_r8_2 << 2) & 8))] =
                             ((work_r16 << 8) & 0xF800) |
                             ((work_r17 << 3) & 0x7E0) | (work_r16_2 >> 3U);
-                        work_r27 += 0x100;
+                        work_r27 += 0x40;
                         work_r8_2 += 1;
                     }
                     work_r9_2 += 1;
@@ -683,7 +626,6 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
             work_r25 += 2;
             work_r24 += 4;
         }
-        work_r23 += 1;
         work_r22 += 0x10;
         work_r21 += 4;
     }
@@ -691,6 +633,10 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
 
 s32 hsd_803B6BE4(char* arg0, s32 arg1, void* arg2)
 {
+    u8* base;
+    u8* quant_table;
+    s32 work_r28;
+    s32 work_r29;
     s32 scratch_r6_4;
     s32 scratch_r7;
     s32 scratch_r7_3;
@@ -719,7 +665,6 @@ s32 hsd_803B6BE4(char* arg0, s32 arg1, void* arg2)
     u8* scratch_r5_14;
     u8* scratch_r5_15;
     u8* scratch_r5_16;
-    u8* scratch_r5_17;
     u8* scratch_r5_2;
     u8* scratch_r5_3;
     u8* scratch_r5_4;
@@ -728,12 +673,6 @@ s32 hsd_803B6BE4(char* arg0, s32 arg1, void* arg2)
     u8* scratch_r5_7;
     u8* scratch_r5_8;
     u8* scratch_r5_9;
-    u8* scratch_r6;
-    u8* scratch_r6_2;
-    u8* quant_table;
-    u8* base;
-    s32 work_r28;
-    s32 work_r29;
     u8* work_r24;
     u8* work_r24_2;
     u8* work_r4;
@@ -745,18 +684,19 @@ s32 hsd_803B6BE4(char* arg0, s32 arg1, void* arg2)
     u8* work_r5_2;
 
     PAD_STACK(0x48);
-    quant_table = lbl_80431090;
     base = hsd_804D2E70;
     hsd_804D79C0 = arg1;
+    quant_table = lbl_80431090;
     hsd_804D79B8 = (u8*) arg0;
     hsd_804D79BC = (u8*) arg0;
-    M2C_FIELD(base, s32*, 0x820) = 0;
-    M2C_FIELD(base, s32*, 0x81C) = 0;
-    M2C_FIELD(base, s32*, 0x818) = 0;
+    ((JpegWorkData*) &base[0x118])->prev_dc[0] =
+        ((JpegWorkData*) &base[0x118])->prev_dc[1] =
+            ((JpegWorkData*) &base[0x118])->prev_dc[2] = 0;
     hsd_804D79C4 = 0;
     if (__setjmp((__jmp_buf*) base) != 0) {
         return 0;
     }
+    scratch_r5 = &hsd_804D79BC[hsd_804D79C0];
 loop_3:
     if (*(u16*) hsd_804D79B8 == 0xFFDB) {
         work_r4 = lbl_80431638;
@@ -792,12 +732,13 @@ loop_3:
     } else {
         scratch_r0_2 = hsd_804D79B8 + 1;
         hsd_804D79B8 = scratch_r0_2;
-        if (scratch_r0_2 >= &hsd_804D79BC[hsd_804D79C0]) {
+        if (scratch_r0_2 >= scratch_r5) {
             longjmp((__jmp_buf*) base, 1);
         } else {
             goto loop_3;
         }
     }
+    scratch_r5 = &hsd_804D79BC[hsd_804D79C0];
 loop_11:
     if (*(u16*) hsd_804D79B8 == 0xFFDB) {
         work_r4_2 = lbl_80431638;
@@ -841,12 +782,13 @@ loop_11:
     } else {
         scratch_r0_4 = hsd_804D79B8 + 1;
         hsd_804D79B8 = scratch_r0_4;
-        if (scratch_r0_4 >= &hsd_804D79BC[hsd_804D79C0]) {
+        if (scratch_r0_4 >= scratch_r5) {
             longjmp((__jmp_buf*) base, 1);
         } else {
             goto loop_11;
         }
     }
+    scratch_r5 = &hsd_804D79BC[hsd_804D79C0];
 loop_19:
     if (*(u16*) hsd_804D79B8 == 0xFFC0) {
         hsd_804D79B8 += 5;
@@ -857,12 +799,13 @@ loop_19:
     } else {
         scratch_r0_5 = hsd_804D79B8 + 1;
         hsd_804D79B8 = scratch_r0_5;
-        if (scratch_r0_5 >= &hsd_804D79BC[hsd_804D79C0]) {
+        if (scratch_r0_5 >= scratch_r5) {
             longjmp((__jmp_buf*) base, 1);
         } else {
             goto loop_19;
         }
     }
+    scratch_r5 = &hsd_804D79BC[hsd_804D79C0];
 loop_24:
     if (*(u16*) hsd_804D79B8 == 0xFFDA) {
         hsd_804D79B8 += 2;
@@ -870,7 +813,7 @@ loop_24:
     } else {
         scratch_r0_6 = hsd_804D79B8 + 1;
         hsd_804D79B8 = scratch_r0_6;
-        if (scratch_r0_6 >= &hsd_804D79BC[hsd_804D79C0]) {
+        if (scratch_r0_6 >= scratch_r5) {
             longjmp((__jmp_buf*) base, 1);
         } else {
             goto loop_24;
@@ -884,7 +827,7 @@ loop_24:
                 work_r5 = work_r24;
                 work_r4_3 = &base[0x718];
                 for (work_r3_3 = 0; work_r3_3 < 0x40; work_r3_3 += 8) {
-                    scratch_r6 = quant_table + work_r3_3;
+                    u8* scratch_r6 = quant_table + work_r3_3;
                     scratch_r0_7 = M2C_FIELD(scratch_r6, u8*, 0);
                     M2C_FIELD(work_r5, s32*, 0) =
                         (s32) (M2C_FIELD(work_r4_3, s32*, 0) * scratch_r0_7);
@@ -920,7 +863,7 @@ loop_24:
             work_r4_4 = work_r24_2;
             work_r5_2 = &base[0x518];
             for (work_r3_4 = 0; work_r3_4 < 0x40; work_r3_4 += 8) {
-                scratch_r6_2 = quant_table + 0x40 + work_r3_4;
+                u8* scratch_r6_2 = quant_table + 0x40 + work_r3_4;
                 scratch_r7_2 = M2C_FIELD(scratch_r6_2, u8*, 0);
                 M2C_FIELD(work_r5_2, s32*, 0) =
                     (s32) (M2C_FIELD(work_r4_4, s32*, 0) * scratch_r7_2);
@@ -952,7 +895,7 @@ loop_24:
             hsd_803B5EA0(2);
             work_r4_5 = &base[0x618];
             for (work_r3_5 = 0; work_r3_5 < 0x40; work_r3_5 += 8) {
-                scratch_r5_17 = quant_table + 0x40 + work_r3_5;
+                u8* scratch_r5_17 = quant_table + 0x40 + work_r3_5;
                 scratch_r6_3 = M2C_FIELD(scratch_r5_17, u8*, 0);
                 M2C_FIELD(work_r4_5, s32*, 0) =
                     (s32) (M2C_FIELD(work_r24_2, s32*, 0) * scratch_r6_3);

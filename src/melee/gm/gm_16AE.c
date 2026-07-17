@@ -1039,9 +1039,9 @@ void fn_8016C7F0(void)
         temp_r30 = gm_8017EB30();
         var_r28 = 0;
         if (gm_GetCurrentGameMode() == GM_TARGET_TEST) {
-            var_r29_2 = gm_80164024(*temp_r29_2);
+            var_r29_2 = gm_CKindToSelKind(*temp_r29_2);
         } else {
-            var_r29_2 = gm_80164024(temp_r30->x0.ckind);
+            var_r29_2 = gm_CKindToSelKind(temp_r30->x0.ckind);
         }
         temp_r30_2 = gmMainLib_8015D438(var_r29_2);
         gmMainLib_8015D450(var_r29_2);
@@ -2077,7 +2077,7 @@ void gm_8016E9C8(void* arg0_raw)
             for (i = 0; i < 6; i++) {
                 if (Player_GetPlayerSlotType(i) == Gm_PKind_Human) {
                     gmMainLib_8015D00C(
-                        gm_80164024(Player_GetPlayerCharacter(i)));
+                        gm_CKindToSelKind(Player_GetPlayerCharacter(i)));
                 }
             }
         }

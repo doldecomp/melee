@@ -852,12 +852,12 @@ struct HSD_ObjAllocUnk {
 // the first N are populated; the rest are unused over-allocation).
 //
 // Built by it_8026CA4C / it_8026CB9C / it_8026CD50 / it_8026CF04;
-// queried by it_8026C530 (binary search) and it_8026C75C (full pick).
+// queried by it_8026C75C
 struct ItemPickTable {
-    u8 x0; // entry count N (incremented/decremented as items get added/picked)
-    u8* x4; // ItemKind values, length N
-    u16 x8; // total weight, used as the upper bound of HSD_Randi
-    u8 pad_xA[2];
+    u8 size; // entry count N (incremented/decremented as items get
+             // added/picked)
+    u8* x4;  // ItemKind values, length N
+    u16 x8;  // total weight, used as the upper bound of HSD_Randi
     u16* xC; // cumulative weight thresholds, length N
 };
 

@@ -4,6 +4,8 @@
 
 #include <platform.h>
 
+#include "ft/forward.h"
+
 #include <dolphin/os/OSReset.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/video.h>
@@ -97,10 +99,10 @@ struct gmm_x1CB0* gmMainLib_8015CC58(void)
     return &gmMainLib_8015CC40()->x1CB0;
 }
 
-struct FighterData* GetPersistentFighterData(s32 arg0)
+struct FighterData* GetPersistentFighterData(SelectableCharacterKind selkind)
 {
     struct FighterData* base = gmMainLib_804D3EE0->thing.x1F2C;
-    return &base[arg0];
+    return &base[selkind];
 }
 
 void* gmMainLib_8015CC78(void)
@@ -323,9 +325,9 @@ s32* gmMainLib_8015D06C(u8 arg0)
     return &base[arg0].x7C.x84;
 }
 
-s32* gmMainLib_8015D084(u8 arg0)
+s32* gmMainLib_8015D084(u8 selkind)
 {
-    return &gmMainLib_8015EDBC()->xB0[arg0];
+    return &gmMainLib_8015EDBC()->xB0[selkind];
 }
 
 s32* gmMainLib_8015D0C0(u8 arg0)
@@ -983,9 +985,9 @@ void gmMainLib_8015ED80(u8 arg0)
     gmMainLib_804D3EE0->thing.x1CB0.sound_balance = arg0;
 }
 
-u16* gmMainLib_8015ED8C(void)
+u16* gmMainLib_GetUnlockedCharactersBitmaskPtr(void)
 {
-    return &gmMainLib_804D3EE0->thing.x1868;
+    return &gmMainLib_804D3EE0->thing.unlocked_characers_bitmask;
 }
 
 struct gmm_retval_ED98* gmMainLib_8015ED98(void)
@@ -1079,7 +1081,7 @@ void gmMainLib_8015EEC8(void)
     int i;
     PAD_STACK(0x10);
 
-    for (i = 0; i < 0x19; i++) {
+    for (i = 0; i < SELKIND_COUNT; i++) {
         struct FighterData* data = GetPersistentFighterData(i);
         memzero(&data->x7C, sizeof(data->x7C));
     }

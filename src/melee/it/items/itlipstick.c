@@ -132,9 +132,7 @@ void itLipstick_Logic23_Thrown(Item_GObj* gobj)
 
 void itLipstick_UnkMotion4_Phys(Item_GObj* gobj)
 {
-    ItemAttr* attr = ((Item*) gobj->user_data)->xCC_item_attr;
-    it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
-    it_80274658(gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
 }
 
 bool itLipstick_UnkMotion3_Coll(Item_GObj* gobj)

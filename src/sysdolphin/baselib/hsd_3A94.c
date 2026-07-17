@@ -27,10 +27,10 @@ typedef struct CardBlock {
 } CardBlock;
 
 #define CMD_S32(off)                                                          \
-    (((CardBufEntry*) (hsd_804D1138 + (off)))[hsd_804D7980].x0)
+    (((CardBufEntry*) ((unsigned char*) op + (off)))[hsd_804D7980].x0)
 #define CMD_STATE ((CardState*) CMD_S32(0x14))
 #define CMD_PTR(off) ((void*) CMD_S32(off))
-#define CMD_TYPE (((CardBufEntry*) hsd_804D1138)[hsd_804D7980].x10)
+#define CMD_TYPE (op[hsd_804D7980].x10)
 
 static inline s32 hsd_803A949C_Close(CardState* state)
 {
@@ -68,6 +68,7 @@ static inline s32 hsd_803A949C_FileId(CardBlock* block)
 
 void hsd_803A949C(s32 chan, s32 arg1)
 {
+    CardBufEntry* op = (CardBufEntry*) hsd_804D1138;
     CardState* state;
     CardBlock* block;
     s32 result;
@@ -109,8 +110,8 @@ void hsd_803A949C(s32 chan, s32 arg1)
                     break;
                 }
                 if (CMD_PTR(0x28) != NULL) {
-                    memcpy((void*) CMD_S32(0x28), state->x0 + offset + 0x20,
-                           CMD_S32(0x30));
+                    u8* src = state->x0 + offset;
+                    memcpy(CMD_PTR(0x28), src + 0x20, CMD_S32(0x30));
                 }
             }
             result = hsd_803A949C_Close(state);
