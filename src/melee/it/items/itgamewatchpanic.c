@@ -24,7 +24,7 @@ HSD_GObj* it_802C7D60(Item_GObj* parent, Vec3* pos, Fighter_Part arg2, f32 dir)
     void** attr;
 
     spawn_item.kind = It_Kind_GameWatch_Panic;
-    itGamewatch_InitSpawnItem(&spawn_item, parent, pos, dir);
+    Item_InitSpawn(&spawn_item, parent, pos, dir);
     gobj = Item_80268B18(&spawn_item);
     if (gobj != NULL) {
         Item* ip = GET_ITEM(gobj);

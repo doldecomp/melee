@@ -1,6 +1,7 @@
 #include "itzgshell.h"
 
 #include "dolphin.h"
+#include "inlines.h"
 
 #include "baselib/random.h"
 #include "cm/camera.h"
@@ -289,9 +290,7 @@ bool itZrshell_UnkMotion0_Coll(Item_GObj* gobj)
     jobj = GET_JOBJ(gobj);
     attrs = ip->xC4_article_data->x4_specialAttributes;
     if (ip->ground_or_air == GA_Ground) {
-        it_80276CB8(gobj);
-        jobj = HSD_JObjGetChild(jobj);
-        HSD_JObjAddRotationY(jobj, attrs->x20 * ABS(ip->x40_vel.x));
+        Item_UpdateRollingShellRotation(gobj, ip, jobj, &attrs->x20);
     }
     return false;
 }
@@ -530,9 +529,7 @@ bool itZrshell_UnkMotion6_Coll(Item_GObj* gobj)
     jobj = GET_JOBJ(gobj);
     attrs = ip->xC4_article_data->x4_specialAttributes;
     if (ip->ground_or_air == GA_Ground) {
-        it_80276CB8(gobj);
-        jobj = HSD_JObjGetChild(jobj);
-        HSD_JObjAddRotationY(jobj, attrs->x20 * ABS(ip->x40_vel.x));
+        Item_UpdateRollingShellRotation(gobj, ip, jobj, &attrs->x20);
     }
     if (it_8027770C(gobj)) {
         it_80272980(gobj);
@@ -960,18 +957,7 @@ void it_802DFFA0(Item_GObj* gobj)
 
 void it_802DFFB8(HSD_JObj* jobj, Item* ip)
 {
-    Vec3 vec;
-    Vec3 vec2;
-    if (jobj != NULL) {
-        vec.x = vec.y = vec.z = 0.0F;
-        HSD_JObjGetTranslation(jobj, &vec2);
-        ip->x40_vel.x =
-            ip->facing_dir * (vec2.z - ip->xDD4_itemVar.zgshell.vel.z);
-        ip->x40_vel.y = vec2.y - ip->xDD4_itemVar.zgshell.vel.y;
-        ip->x40_vel.z = vec2.x - ip->xDD4_itemVar.zgshell.vel.x;
-        ip->xDD4_itemVar.zgshell.vel = vec2;
-        HSD_JObjSetTranslate(jobj, &vec);
-    }
+    itUpdateVelocityFromBone(jobj, ip, &ip->xDD4_itemVar.zgshell.vel);
 }
 
 const Vec3 it_803B86E8 = { 0.0f, 0.0f, 0.0f };

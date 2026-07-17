@@ -25,6 +25,7 @@
 #include "ftCommon/ftCo_ItemScrew.h"
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_Throw.h"
+#include "ftCommon/inlines.h"
 #include "ftCommon/types.h"
 #include "it/inlines.h"
 #include "it/items/itlinkhookshot.h"
@@ -2469,10 +2470,8 @@ void fn_800DAEEC(Fighter_GObj* gobj)
     temp_r30 = gobj;
     temp_r31 = GET_FIGHTER(temp_r30);
 
-    ftCommon_8007D7FC(temp_r31);
-    Fighter_ChangeMotionState(temp_r30, ftCo_MS_CapturePulledLw,
-                              Ft_MF_UpdateCmd, temp_r31->cur_anim_frame, 1.0F,
-                              0.0F, NULL);
+    ftCommon_AirToGroundStateChange(temp_r30, temp_r31,
+                                    ftCo_MS_CapturePulledLw, Ft_MF_UpdateCmd);
 
     fp = GET_FIGHTER(temp_r30);
     victim_fp = GET_FIGHTER(temp_r31->victim_gobj);

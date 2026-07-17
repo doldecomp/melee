@@ -13,6 +13,7 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/inlines.h"
 #include "it/items/itgamewatchpanic.h"
 
 #include "lb/forward.h"
@@ -388,9 +389,8 @@ void ftGw_SpecialLw_GroundToAir(HSD_GObj* gobj)
 
     u8 _[8];
 
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLw, transition_flags0,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftGw_MS_SpecialAirLw,
+                                    transition_flags0);
 
     ftGameWatch_SpecialLw_UpdateVarsColl(gobj);
 }
@@ -401,10 +401,8 @@ void ftGw_SpecialAirLw_AirToGround(HSD_GObj* gobj)
 
     u8 _[8];
 
-    ftCommon_8007D7FC(fp);
-
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLw, transition_flags0,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftGw_MS_SpecialLw,
+                                    transition_flags0);
 
     ftGameWatch_SpecialLw_UpdateVarsColl(gobj);
 }
@@ -529,21 +527,16 @@ void ftGw_SpecialAirLwCatch_Coll(HSD_GObj* gobj)
 void ftGw_SpecialLwCatch_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLwCatch,
-                              transition_flags0, fp->cur_anim_frame, 1, 0,
-                              NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftGw_MS_SpecialAirLwCatch,
+                                    transition_flags0);
 }
 
 /// Mr. Game & Watch's air -> ground Oil Panic Fill Motion State handler
 void ftGw_SpecialAirLwCatch_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLwCatch, transition_flags0,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftGw_MS_SpecialLwCatch,
+                                    transition_flags0);
 }
 
 /// Check to enter grounded or aerial Oil Panic Fill
@@ -647,11 +640,8 @@ void ftGw_SpecialLwShoot_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D5D4(fp);
-
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLwShoot,
-                              transition_flags0, fp->cur_anim_frame, 1, 0,
-                              NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftGw_MS_SpecialAirLwShoot,
+                                    transition_flags0);
 
     ftGw_SpecialLw_UpdateBucketModel(gobj);
     fp->accessory4_cb = ftGw_SpecialLw_ItemPanicSetup;
@@ -662,10 +652,8 @@ void ftGw_SpecialAirLwShoot_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D7FC(fp);
-
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLwShoot, transition_flags0,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftGw_MS_SpecialLwShoot,
+                                    transition_flags0);
 
     ftGw_SpecialLw_UpdateBucketModel(gobj);
     fp->accessory4_cb = ftGw_SpecialLw_ItemPanicSetup;
