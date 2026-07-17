@@ -2361,32 +2361,15 @@ void Camera_8002CDDC(void* unused)
     Camera* cam;
     CameraTransformState* transform;
     s8* slot_ptr;
-    Vec3* pos_ptr;
     CmSubject* subject;
     HSD_GObj* gobj;
-    s8 slot;
-    Vec3* target_interest2;
     Vec3* target_position;
     Vec3* position;
-    CameraUnkGlobals* globals;
-    f32* coeff_ptr;
-    f32* smooth_ptr;
-    f32* fov_ptr;
-    CameraTransformState* transform_copy;
-    f32 target_dz;
-    f32 target_dy;
-    f32 target_dx;
     CameraBounds bounds;
     Vec3 sp6C;
     Vec3 sp60;
-    f32 coeff;
-    CameraBounds bounds2;
-    CameraBounds bounds3;
     f32 temp;
-    Vec3 sp1C;
-    f32 dy2;
-    Vec3 spC;
-    f32 dx2;
+    f32 coeff;
 
     cam = &cm_80452C68;
     Camera_80030DF8();
@@ -2395,82 +2378,86 @@ void Camera_8002CDDC(void* unused)
     Camera_8002958C(&bounds, transform);
     slot_ptr = &cam->x2C4;
     if (*slot_ptr != 11) {
+        Vec3* pos_ptr;
         pos_ptr = &cam->x308;
         while (*slot_ptr == 10 || !get_subject_pos(pos_ptr, slot_ptr) ||
                (gobj = Player_GetEntity(*slot_ptr)) == NULL ||
                ftLib_8008701C(gobj))
         {
-            s32 cur = *slot_ptr;
-            *slot_ptr = Camera_8002BA00(cur, 1);
+            *slot_ptr = Camera_8002BA00(*slot_ptr, 1);
         }
     }
 
     Camera_8002CB0C(&bounds);
-    slot = *slot_ptr;
-    if (slot != 10 && slot != 11 &&
+    if (*slot_ptr != 10 && *slot_ptr != 11 &&
         (gobj = Player_GetEntity(*slot_ptr)) != NULL &&
         (subject = ftLib_80086B74(gobj)) != NULL &&
         Camera_8002928C(subject) && !subject->x8 &&
         (u32) Camera_80029124(&subject->x1C, 0) == 0 &&
         ABS(subject->x1C.z) < 30.0f)
     {
+        Vec3* target_interest2;
+        Vec3* tgt_interest;
+        f32 delta;
         Camera_8002C5B4(&cam->x2D0);
-        {
-            Vec3* tgt_interest;
-            tgt_interest = &transform->target_interest;
-            target_interest2 = &cam->transform.target_interest;
-            *target_interest2 = cam->x308;
-            lbVector_Add(tgt_interest, &cam->x314);
 
-            target_position = &transform->target_position;
-            cam->transform.target_position = *target_interest2;
-            lbVector_Add(target_position, &cam->pause_eye_offset);
+        tgt_interest = &transform->target_interest;
+        target_interest2 = &cam->transform.target_interest;
+        *target_interest2 = cam->x308;
+        lbVector_Add(tgt_interest, &cam->x314);
 
-            position = &transform->position;
-            lbVector_Diff(target_position, position, &sp6C);
+        target_position = &transform->target_position;
+        cam->transform.target_position = *target_interest2;
+        lbVector_Add(target_position, &cam->pause_eye_offset);
 
-            globals = &cm_803BCCA0;
-            coeff_ptr = &globals->x84;
-            coeff = *coeff_ptr;
-            sp6C.x *= coeff;
-            sp6C.y *= coeff;
-            sp6C.z *= coeff;
-            lbVector_Add(position, &sp6C);
+        position = &transform->position;
+        lbVector_Diff(target_position, position, &sp6C);
 
-            lbVector_Diff(tgt_interest, &transform->interest, &sp60);
-            coeff = *coeff_ptr;
-            sp60.x *= coeff;
-            sp60.y *= coeff;
-            sp60.z *= coeff;
-            lbVector_Add(&transform->interest, &sp60);
+        coeff = cm_803BCCA0.x84;
+        sp6C.x *= coeff;
+        sp6C.y *= coeff;
+        sp6C.z *= coeff;
+        lbVector_Add(position, &sp6C);
 
-            cam->transform.target_fov = globals->x6C;
-            {
-                f32 delta;
-                delta =
-                    cam->transform.target_fov - cam->transform.fov;
-                (void) delta;
-                cam->transform.fov =
-                    delta * globals->x70 + cam->transform.fov;
-            }
-        }
+        lbVector_Diff(tgt_interest, &transform->interest, &sp60);
+        coeff = cm_803BCCA0.x84;
+        sp60.x *= coeff;
+        sp60.y *= coeff;
+        sp60.z *= coeff;
+        lbVector_Add(&transform->interest, &sp60);
+
+        cam->transform.target_fov = cm_803BCCA0.x6C;
+        delta = cam->transform.target_fov - cam->transform.fov;
+        (void) delta;
+        cam->transform.fov = delta * cm_803BCCA0.x70 + cam->transform.fov;
         return;
     }
 
     {
+        CameraTransformState* transform_copy;
+        f32 target_dz;
+        f32 target_dy;
+        f32 target_dx;
         s16* count_ptr;
+        f32 temp2;
+        CameraBounds bounds2;
+        CameraBounds bounds3;
+        f32 dy2;
+        Vec3 sp1C;
+        f32 dx2;
+        Vec3 spC;
         Camera_80030DF8();
         Camera_800293E0();
         Camera_8002B0E0();
         Camera_8002958C(&bounds3, transform);
 
-        globals = &cm_803BCCA0;
-        smooth_ptr = &globals->x44;
-        fov_ptr = &globals->x40;
-        cam->transform.target_fov = *fov_ptr;
+        cam->transform.target_fov = cm_803BCCA0.x40;
         temp = cam->transform.target_fov - cam->transform.fov;
-        cam->transform.fov += temp * *smooth_ptr;
-        Camera_80029BC4(&bounds3, transform);
+        cam->transform.fov += temp * cm_803BCCA0.x44;
+        {
+            CameraTransformState* transform_ptr = transform;
+            Camera_80029BC4(&bounds3, transform_ptr);
+        }
 
         if (!fighter_z_out_of_range(&sp1C)) {
             Camera_80029CF8(&bounds3, transform);
@@ -2479,9 +2466,9 @@ void Camera_8002CDDC(void* unused)
 
         transform_copy = &cam->transform_copy;
         Camera_8002958C(&bounds2, transform_copy);
-        cam->transform_copy.target_fov = *fov_ptr;
-        temp = cam->transform_copy.target_fov - cam->transform_copy.fov;
-        cam->transform_copy.fov += temp * *smooth_ptr;
+        cam->transform_copy.target_fov = cm_803BCCA0.x40;
+        temp2 = cam->transform_copy.target_fov - cam->transform_copy.fov;
+        cam->transform_copy.fov += temp2 * cm_803BCCA0.x44;
         Camera_80029BC4(&bounds2, transform_copy);
 
         if (!fighter_z_out_of_range(&spC)) {
@@ -2497,9 +2484,9 @@ void Camera_8002CDDC(void* unused)
             target_dz = cam->transform.target_position.z -
                         cam->transform.target_interest.z;
             dy2 = target_dy * target_dy;
-            temp = target_dz * target_dz;
+            temp2 = target_dz * target_dz;
             dx2 = target_dx * target_dx;
-            temp = (dx2 + dy2) + temp;
+            temp = (dx2 + dy2) + temp2;
             cam->x2C0 = sqrtf__Ff(temp);
         }
 
