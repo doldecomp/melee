@@ -2430,36 +2430,22 @@ HSD_GObjEvent ftKb_Init_803C9E54[] = {
     NULL,
 };
 
-typedef struct ftKirby_UnkArrayThing {
-    /*  +0 */ int x0;
-    /*  +4 */ int x4;
-    /*  +8 */ int x8;
-    /*  +C */ int xC;
-    /* +10 */ int x10;
-    /* +14 */ int x14;
-    /* +18 */ int x18;
-    /* +1C */ int x1C;
-    /* +20 */ int x20;
-    /* +24 */ int x24;
-    /* +28 */ int x28;
-    /* +2C */ int x2C;
-} ftKirby_UnkArrayThing;
+typedef struct ftKirby_CostumeArchive {
+    /* +0 */ HSD_Joint* joint;
+    /* +4 */ HSD_MatAnimJoint* matanim;
+} ftKirby_CostumeArchive;
 
-ftKirby_UnkArrayThing ftKb_Init_803C9ED8 = { 0 };
-ftKirby_UnkArrayThing ftKb_Init_803C9F08 = { 0 };
-ftKirby_UnkArrayThing ftKb_Init_803C9F38 = { 0 };
-ftKirby_UnkArrayThing ftKb_Init_803C9F68 = { 0 };
-ftKirby_UnkArrayThing ftKb_Init_803C9F98 = { 0 };
+ftKirby_CostumeArchive ftKb_Init_803C9ED8[6] = { 0 };
+ftKirby_CostumeArchive ftKb_Init_803C9F08[6] = { 0 };
+ftKirby_CostumeArchive ftKb_Init_803C9F38[6] = { 0 };
+ftKirby_CostumeArchive ftKb_Init_803C9F68[6] = { 0 };
+ftKirby_CostumeArchive ftKb_Init_803C9F98[6] = { 0 };
 
-ftKirby_UnkArrayThing* ftKb_Init_803C9FC8[FTKIND_MAX] = {
+ftKirby_CostumeArchive* ftKb_Init_803C9FC8[FTKIND_MAX] = {
     NULL,
     NULL,
     NULL,
-    &ftKb_Init_803C9ED8,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
+    ftKb_Init_803C9ED8,
     NULL,
     NULL,
     NULL,
@@ -2467,16 +2453,20 @@ ftKirby_UnkArrayThing* ftKb_Init_803C9FC8[FTKIND_MAX] = {
     NULL,
     NULL,
     NULL,
-    &ftKb_Init_803C9F08,
-    &ftKb_Init_803C9F38,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    ftKb_Init_803C9F08,
+    ftKb_Init_803C9F38,
     NULL,
     NULL,
     NULL,
     NULL,
     NULL,
-    &ftKb_Init_803C9F68,
+    ftKb_Init_803C9F68,
     NULL,
-    &ftKb_Init_803C9F98,
+    ftKb_Init_803C9F98,
     NULL,
     NULL,
     NULL,
@@ -2711,6 +2701,8 @@ typedef struct ftKirby_CopyName {
 /// @todo `WEAK` matching hack (with #ftKb_Init_803CB3E8): keeps MWCC from
 /// pooling the copy-ability tables through one shared .data base register;
 /// retail materializes each table address independently.
+/// Likely resolvable by splitting `ftkirby` further so these tables live in
+/// a different TU than their users.
 WEAK ftKirby_CopyName ftKb_Init_803CA9D0[FTKIND_MAX] = {
     { "PlKbCpMr.dat", "ftDataKirbyCopyMario" },
     { "PlKbCpFx.dat", "ftDataKirbyCopyFox" },
@@ -2993,37 +2985,37 @@ void ftKb_Init_800EE528(void)
 {
     /// @todo Bad cast.
     s32* number_list = (s32*) &ft_80459B88.x0;
-    ftKirby_UnkArrayThing** struct_list = ftKb_Init_803C9FC8;
+    ftKirby_CostumeArchive** struct_list = ftKb_Init_803C9FC8;
 
     s32 i;
     for (i = 0; i < FTKIND_MAX; i++) {
-        ftKirby_UnkArrayThing* unk_struct;
+        ftKirby_CostumeArchive* unk_struct;
         number_list[i] = 0;
         unk_struct = struct_list[i];
         if (unk_struct) {
-            unk_struct->x0 = 0;
+            unk_struct[0].joint = NULL;
             unk_struct = struct_list[i];
-            unk_struct->x4 = 0;
+            unk_struct[0].matanim = NULL;
             unk_struct = struct_list[i];
-            unk_struct->x8 = 0;
+            unk_struct[1].joint = NULL;
             unk_struct = struct_list[i];
-            unk_struct->xC = 0;
+            unk_struct[1].matanim = NULL;
             unk_struct = struct_list[i];
-            unk_struct->x10 = 0;
+            unk_struct[2].joint = NULL;
             unk_struct = struct_list[i];
-            unk_struct->x14 = 0;
+            unk_struct[2].matanim = NULL;
             unk_struct = struct_list[i];
-            unk_struct->x18 = 0;
+            unk_struct[3].joint = NULL;
             unk_struct = struct_list[i];
-            unk_struct->x1C = 0;
+            unk_struct[3].matanim = NULL;
             unk_struct = struct_list[i];
-            unk_struct->x20 = 0;
+            unk_struct[4].joint = NULL;
             unk_struct = struct_list[i];
-            unk_struct->x24 = 0;
+            unk_struct[4].matanim = NULL;
             unk_struct = struct_list[i];
-            unk_struct->x28 = 0;
+            unk_struct[5].joint = NULL;
             unk_struct = struct_list[i];
-            unk_struct->x2C = 0;
+            unk_struct[5].matanim = NULL;
         }
     }
 }
@@ -3246,10 +3238,7 @@ void ftKb_SpecialN_800EEC34(int arg0, int arg1, int arg2)
 
 void ftKb_SpecialN_800EED50(s32 arg0, s32 arg1)
 {
-    struct ftKirby_CostumeArchive {
-        HSD_Joint* joint;
-        HSD_MatAnimJoint* matanim;
-    }* item;
+    ftKirby_CostumeArchive* item;
     Fighter_CostumeStrings* costumes;
     Fighter_CostumeStrings* cs;
 
@@ -3262,8 +3251,7 @@ void ftKb_SpecialN_800EED50(s32 arg0, s32 arg1)
             }
         }
         if (ftKb_Init_803CB3E8[arg0] != NULL) {
-            item = &((struct ftKirby_CostumeArchive*)
-                         ftKb_Init_803C9FC8[arg0])[arg1];
+            item = &ftKb_Init_803C9FC8[arg0][arg1];
             if (item->joint == NULL) {
                 costumes = ftKb_Init_803CB3E8[arg0];
                 cs = &costumes[arg1];
@@ -3340,8 +3328,7 @@ void ftKb_SpecialN_800EF040(Fighter_GObj* gobj, int arg1, KirbyHatStruct* hat)
         Fighter* fp = GET_FIGHTER(gobj);
         struct Fighter_804D6540_t* ft_data = Fighter_804D6540[fp->kind];
         int count = ft_data->x4;
-        HSD_Joint* joint =
-            ((HSD_Joint**) ftKb_Init_803C9FC8[arg1])[fp->x619_costume_id * 2];
+        HSD_Joint* joint = ftKb_Init_803C9FC8[arg1][fp->x619_costume_id].joint;
         struct Fighter_804D6540_x0_t* parts = ft_data->x0;
         int i;
         for (i = 0; i < count; i++, parts++) {
@@ -3354,6 +3341,9 @@ void ftKb_SpecialN_800EF040(Fighter_GObj* gobj, int arg1, KirbyHatStruct* hat)
 
 extern char ftKb_Init_804D3DAC[2];
 
+/// @todo `byte_base` is always zero; it reproduces retail's shift-derived
+/// offset initialization, suggesting the original code indexed bones by
+/// element index rather than byte offset.
 static inline void ftKb_SpecialN_800EF0E4_insert_joint_refs(
     s32* total_dobjs, HSD_Joint* root, Fighter* fp, s32* part_off,
     HSD_Joint** joint, s32* joint_idx, s32* byte_base)
@@ -3400,11 +3390,9 @@ void ftKb_SpecialN_800EF0E4(Fighter_GObj* gobj, int arg1, u8* arg2)
     s32 byte_off;
     HSD_MObj* mobj;
     u8* arg2_cur;
-    s32 costume_idx;
 
     ftPartsPObjSetDefaultClass();
-    costume_idx = fp->x619_costume_id * 2;
-    root = ((HSD_Joint**) ftKb_Init_803C9FC8[arg1])[costume_idx];
+    root = ftKb_Init_803C9FC8[arg1][fp->x619_costume_id].joint;
     ftKb_SpecialN_800EF0E4_insert_joint_refs(&total_dobjs, root, fp, &part_off,
                                              &current_joint, &joint_idx,
                                              &byte_base);
@@ -3480,10 +3468,7 @@ void ftKb_SpecialN_800EF0E4(Fighter_GObj* gobj, int arg1, u8* arg2)
 void ftKb_SpecialN_800EF35C(Fighter_GObj* gobj, int arg1, u8* arg2)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    struct {
-        HSD_Joint* joint;
-        HSD_MatAnimJoint* matanim;
-    }* costume_data = (void*) ftKb_Init_803C9FC8[arg1];
+    ftKirby_CostumeArchive* costume_data = ftKb_Init_803C9FC8[arg1];
     HSD_MatAnimJoint* matanimjoint = costume_data[fp->x619_costume_id].matanim;
     int idx = 0;
     arg1 = 0;
@@ -3542,13 +3527,12 @@ void ftKb_SpecialN_800EF438(Fighter_GObj* gobj, KirbyHatStruct* hat)
                 part_off += 0x10;
             }
             jobj = ((FighterBone*) ((u8*) parts + part_off))->joint;
-            dobj = HSD_DObjLoadDesc((HSD_DObjDesc*) joint->u.dobjdesc);
+            dobj = HSD_DObjLoadDesc(joint->u.dobjdesc);
             if (dobj != NULL) {
                 tail = HSD_JObjGetDObj(jobj);
                 ((FighterBone*) ((u8*) fp->parts + part_off))->flags2_b7 =
                     true;
-                HSD_DObjResolveRefsAll(
-                    dobj, (HSD_DObjDesc*) current_joint->u.dobjdesc);
+                HSD_DObjResolveRefsAll(dobj, current_joint->u.dobjdesc);
                 if (tail == NULL) {
                     HSD_JObjAddDObj(jobj, dobj);
                 } else {
