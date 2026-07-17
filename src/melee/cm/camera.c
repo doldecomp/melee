@@ -2397,14 +2397,14 @@ void Camera_8002CDDC(void* unused)
         ABS(subject->x1C.z) < 30.0f)
     {
         Vec3* target_interest2;
-        Vec3* tgt_interest;
+        Vec3* target_interest;
         f32 delta;
         Camera_8002C5B4(&cam->x2D0);
 
-        tgt_interest = &transform->target_interest;
+        target_interest = &transform->target_interest;
         target_interest2 = &cam->transform.target_interest;
         *target_interest2 = cam->x308;
-        lbVector_Add(tgt_interest, &cam->x314);
+        lbVector_Add(target_interest, &cam->x314);
 
         target_position = &transform->target_position;
         cam->transform.target_position = *target_interest2;
@@ -2419,7 +2419,7 @@ void Camera_8002CDDC(void* unused)
         sp6C.z *= coeff;
         lbVector_Add(position, &sp6C);
 
-        lbVector_Diff(tgt_interest, &transform->interest, &sp60);
+        lbVector_Diff(target_interest, &transform->interest, &sp60);
         coeff = cm_803BCCA0.x84;
         sp60.x *= coeff;
         sp60.y *= coeff;
