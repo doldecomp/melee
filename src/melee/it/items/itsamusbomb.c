@@ -200,7 +200,7 @@ bool itSamusbomb_UnkMotion2_Coll(Item_GObj* gobj)
 
 bool itSamusBomb_Logic50_DmgDealt(Item_GObj* gobj)
 {
-    /// @todo Use itGetMotionId if it can be made to inline here.
+    /// @todo Use #itGetMotionId if it can be made to inline here.
     Item* ip = GET_ITEM(gobj);
     if (ip->msid != 3) {
         it_802B53CC(gobj);
@@ -210,7 +210,7 @@ bool itSamusBomb_Logic50_DmgDealt(Item_GObj* gobj)
 
 bool itSamusBomb_Logic50_Clanked(Item_GObj* gobj)
 {
-    /// @todo Use itGetMotionId if it can be made to inline here.
+    /// @todo Use #itGetMotionId if it can be made to inline here.
     Item* ip = GET_ITEM(gobj);
     if (ip->msid != 3) {
         it_802B53CC(gobj);
@@ -220,7 +220,7 @@ bool itSamusBomb_Logic50_Clanked(Item_GObj* gobj)
 
 bool itSamusBomb_Logic50_HitShield(Item_GObj* gobj)
 {
-    /// @todo Use itGetMotionId if it can be made to inline here.
+    /// @todo Use #itGetMotionId if it can be made to inline here.
     Item* ip = GET_ITEM(gobj);
     if (ip->msid != 3) {
         it_802B53CC(gobj);

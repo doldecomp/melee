@@ -121,7 +121,7 @@ bool itYoshieggthrow_UnkMotion1_Coll(Item_GObj* gobj)
 
 bool it_802B2C04(Item_GObj* gobj)
 {
-    /// @todo Use itGetMotionId if it can be made to inline here.
+    /// @todo Use #itGetMotionId if it can be made to inline here.
     if (((Item*) gobj->user_data)->msid != 2) {
         it_802B2C38(gobj);
     }
@@ -167,7 +167,7 @@ bool itYoshieggthrow_UnkMotion2_Anim(Item_GObj* gobj)
 
 bool it_2725_Logic43_Clanked(Item_GObj* gobj)
 {
-    /// @todo Use itGetMotionId if it can be made to inline here.
+    /// @todo Use #itGetMotionId if it can be made to inline here.
     Item* ip = GET_ITEM(gobj);
     if (ip->msid != 2) {
         it_802B2C38(gobj);
@@ -182,7 +182,7 @@ bool it_802B2E5C(Item_GObj* gobj)
 
 bool it_802B2E7C(Item_GObj* gobj)
 {
-    /// @todo Use itGetMotionId if it can be made to inline here.
+    /// @todo Use #itGetMotionId if it can be made to inline here.
     Item* ip = GET_ITEM(gobj);
     if (ip->msid != 2) {
         it_802B2C38(gobj);
