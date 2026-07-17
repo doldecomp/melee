@@ -13,6 +13,7 @@
 #include "it/it_3F14.h"
 #include "it/itcoll.h"
 #include "it/item.h"
+#include "it/items/inlines.h"
 #include "it/items/itnokonoko.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
@@ -79,15 +80,11 @@ void it_802DDB38(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itZGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
-    Vec v;
-    HSD_JObj* jobj;
+    Vec3 pos;
     PAD_STACK(4);
     if (ip->xDD4_itemVar.zgshell.xDF8 <= 0.0f) {
-        jobj = GET_JOBJ(gobj);
-        v = attrs->x3C;
-        v.x *= -ip->facing_dir;
-        efAsync_Spawn(gobj, &GET_ITEM(gobj)->xBC0, 2, 1029, jobj, &v);
-        ip->xDD4_itemVar.zgshell.xDF8 = attrs->x38;
+        Item_SpawnShellSpinEffect(gobj, &attrs->x38, &attrs->x3C, ip,
+                                  &ip->xDD4_itemVar.zgshell.xDF8, &pos);
     } else {
         ip->xDD4_itemVar.zgshell.xDF8 -= 1.0f;
     }
@@ -457,12 +454,11 @@ static inline void it_802DDB38_inline(Item_GObj* gobj, Vec* v)
     Item* ip = GET_ITEM(gobj);
     itZGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
     HSD_JObj* jobj;
+
     if (ip->xDD4_itemVar.zgshell.xDF8 <= 0.0f) {
-        jobj = GET_JOBJ(gobj);
-        *v = attrs->x3C;
-        v->x *= -ip->facing_dir;
-        efAsync_Spawn(gobj, &GET_ITEM(gobj)->xBC0, 2, 1029, jobj, v);
-        ip->xDD4_itemVar.zgshell.xDF8 = attrs->x38;
+        ITEM_SPAWN_SHELL_SPIN_EFFECT(gobj, attrs->x38, attrs->x3C,
+                                     ip->xDD4_itemVar.zgshell.xDF8, *v, jobj,
+                                     (void) 0, -ip->facing_dir);
     } else {
         ip->xDD4_itemVar.zgshell.xDF8 -= 1.0f;
     }

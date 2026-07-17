@@ -17,6 +17,7 @@
 #include "it/it_3F14.h"
 #include "it/itcoll.h"
 #include "it/item.h"
+#include "it/items/inlines.h"
 #include "it/items/itgshell.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
@@ -74,12 +75,9 @@ void it_8028B8D8(Item_GObj* gobj)
     PAD_STACK(4);
 
     if (ip->xDD4_itemVar.gshell.xDDC <= 0.0f) {
-        jobj = GET_JOBJ(gobj);
-        v = attrs->x34;
-        temp = -ip->facing_dir;
-        v.x *= temp;
-        efAsync_Spawn(gobj, &GET_ITEM(gobj)->xBC0, 2, 1029, jobj, &v);
-        ip->xDD4_itemVar.gshell.xDDC = attrs->x30;
+        ITEM_SPAWN_SHELL_SPIN_EFFECT(gobj, attrs->x30, attrs->x34,
+                                     ip->xDD4_itemVar.gshell.xDDC, v, jobj,
+                                     temp = -ip->facing_dir, temp);
     } else {
         ip->xDD4_itemVar.gshell.xDDC -= 1.0f;
     }
