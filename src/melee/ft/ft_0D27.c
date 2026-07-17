@@ -9,6 +9,7 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ftcommon.h"
+#include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 
