@@ -1373,7 +1373,6 @@ static void order_data_4A8(void)
 
 void _tyFigupon_80317A60(void)
 {
-    char* strings = "ToyFigurePonPanel_Top_joint";
     TyFiguponData* data = _tyFigupon_804D6EF0;
     HSD_CameraDescPerspective* cam_desc;
     HSD_CObj* cobj;
@@ -1394,8 +1393,8 @@ void _tyFigupon_80317A60(void)
     gobj->gxlink_prios = 0x5010000000000000ULL;
 
     data->x4 = GObj_Create(1, 2, 0);
-    cobj = lb_80013B14((HSD_CameraDescPerspective*) (strings + 0x4EC));
-    _tyFigupon_804D6F08 = (HSD_CameraDescPerspective*) (strings + 0x4EC);
+    cobj = lb_80013B14(&_tyFigupon_803FEEFC);
+    _tyFigupon_804D6F08 = &_tyFigupon_803FEEFC;
     HSD_GObjObject_80390A70(data->x4, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(data->x4, Toy_803068E0, 0);
     gobj = data->x4;

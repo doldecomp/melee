@@ -40,6 +40,29 @@
 #include "ty/toy.h"
 #include "ty/types.h"
 
+typedef struct TyListGobjEntryInner {
+    /* 0x00 */ HSD_GObj* x0;
+    /* 0x04 */ HSD_GObj* x4;
+    /* 0x08 */ u8 pad_8[0x0C - 0x08];
+    /* 0x0C */ s8 x0C;
+    /* 0x0D */ s8 x0D;
+    /* 0x0E */ u8 pad_E;
+    /* 0x0F */ s8 x0F;
+    /* 0x10 */ s8 x10;
+    /* 0x11 */ s8 x11;
+    /* 0x12 */ s8 x12;
+    /* 0x13 */ s8 x13;
+    /* 0x14 */ s8 x14;
+    /* 0x15 */ u8 pad_15[3];
+    /* 0x18 */ HSD_GObj* x18;
+} TyListGobjEntryInner;
+
+typedef struct TyListAuxState {
+    /* 0x00 */ u8 pad_0[0x18];
+    /* 0x18 */ HSD_GObj* gobj;
+    /* 0x1C */ u8 pad_1C[0x10];
+} TyListAuxState;
+
 /* 312834 */ static char* _tyList_80312834(char* buf, u32 num);
 /* 312904 */ static void _tyList_80312904(void*, s8);
 /* 312BAC */ static void _tyList_80312BAC(TyListState* state, s8 arg1);
@@ -57,27 +80,6 @@
 /* 314504 */ static void _tyList_80314504(HSD_GObj* gobj, int);
 /* 31457C */ static void _tyList_8031457C(void);
 /* 3148E4 */ static void _tyList_803148E4(s32 arg0);
-typedef struct TyListGobjEntryInner {
-    /* 0x00 */ HSD_GObj* x0;
-    /* 0x04 */ HSD_GObj* x4;
-    /* 0x08 */ u8 pad_8[0x0C - 0x08];
-    /* 0x0C */ s8 x0C;
-    /* 0x0D */ s8 x0D;
-    /* 0x0E */ u8 pad_E;
-    /* 0x0F */ s8 x0F;
-    /* 0x10 */ s8 x10;
-    /* 0x11 */ s8 x11;
-    /* 0x12 */ s8 x12;
-    /* 0x13 */ s8 x13;
-    /* 0x14 */ s8 x14;
-    /* 0x15 */ u8 pad_15[3];
-    /* 0x18 */ HSD_GObj* x18;
-} TyListGobjEntryInner;
-typedef struct TyListAuxState {
-    /* 0x00 */ u8 pad_0[0x18];
-    /* 0x18 */ HSD_GObj* gobj;
-    /* 0x1C */ u8 pad_1C[0x10];
-} TyListAuxState;
 /* 4A2AC0 */ static TyListState _tyList_804A2AC0;
 /* 4A2D6C */ static TyListGobjEntry _tyList_804A2D6C;
 /* 4D6EE8 */ static s32 _tyList_804D6EE8;

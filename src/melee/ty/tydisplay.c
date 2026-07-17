@@ -81,9 +81,6 @@
 /* 4D6F28 */ static s32 _tyDisplay_804D6F28;
 /* 4D6F2C */ static HSD_GObj* _tyDisplay_804D6F2C;
 
-extern TyDspNameTables _tyDisplay_803B8988;
-extern TyDspArchNames _tyDisplay_803B8A34;
-
 STATIC_ASSERT(sizeof(_tyDisplay_devtext_buf) == 0x36);
 STATIC_ASSERT(sizeof(_tyDisplay_804A2DD0) == 0x18);
 
@@ -1991,9 +1988,12 @@ void _tyDisplay_8031BA78(s32 arg0, s32 arg1, f32 farg0)
     }
 }
 
-s32 tyDisplay_8031BB34(s8 idx)
-{
-    char* table[] = {
+/// The three name tables below are emitted back-to-back;
+/// #tyDisplay_8031C454 and #tyDisplay_8031C5E4 address them as a single
+/// #TyDspNameTables block, matching how the retail code indexes across
+/// the adjacent tables from the first one.
+/* 3B8988 */ static TyDspArchNames const _tyDisplay_803B8988 = {
+    {
         "ToyDspQues_Top_joint",       "ToyDspMycharaCmA_Top_joint",
         "ToyDspMycharaCmB_Top_joint", "ToyDspMycharaCmC_Top_joint",
         "ToyDspMycharaCmD_Top_joint", "ToyDspMycharaCmE_Top_joint",
@@ -2015,20 +2015,12 @@ s32 tyDisplay_8031BB34(s8 idx)
         "ToyDspItemA_Top_joint",      "ToyDspItemB_Top_joint",
         "ToyDspItemC_Top_joint",      "ToyDspItemD_Top_joint",
         "ToyDspItemE_Top_joint",      "ToyDspStand_Top_joint",
+        "ToyDspQues_Top_joint",
+    },
+};
 
-        "ToyDspQues_Top_joint"
-    };
-
-    if (idx == -1) {
-        idx = 0;
-    }
-
-    return (s32) table[idx];
-}
-
-char* tyDisplay_8031BB94(s8 idx)
-{
-    char* table[] = {
+/* 3B8A34 */ static TyDspArchNames const _tyDisplay_803B8A34 = {
+    {
         "",
         "ToyDspMycharaCmA_Top_matanim_joint",
         "ToyDspMycharaCmB_Top_matanim_joint",
@@ -2072,18 +2064,11 @@ char* tyDisplay_8031BB94(s8 idx)
         "ToyDspItemE_Top_matanim_joint",
         "",
         "",
-    };
+    },
+};
 
-    if (idx == -1) {
-        idx = 0;
-    }
-
-    return table[idx];
-}
-
-s32 _tyDisplay_8031BBF4(s8 arg0)
-{
-    char* table[] = {
+/* 3B8AE0 */ static TyDspArchNames const _tyDisplay_803B8AE0 = {
+    {
         "TyQuesD.dat",  "TyMycCmA.dat", "TyMycCmB.dat", "TyMycCmC.dat",
         "TyMycCmD.dat", "TyMycCmE.dat", "TyMycR1A.dat", "TyMycR1B.dat",
         "TyMycR1C.dat", "TyMycR1D.dat", "TyMycR1E.dat", "TyMycR2A.dat",
@@ -2095,11 +2080,38 @@ s32 _tyDisplay_8031BBF4(s8 arg0)
         "TyPokeB.dat",  "TyPokeC.dat",  "TyPokeD.dat",  "TyPokeE.dat",
         "TyItemA.dat",  "TyItemB.dat",  "TyItemC.dat",  "TyItemD.dat",
         "TyItemE.dat",  "TyStandD.dat", "TyQuesD.dat",
-    };
+    },
+};
+
+s32 tyDisplay_8031BB34(s8 idx)
+{
+    TyDspArchNames table = _tyDisplay_803B8988;
+
+    if (idx == -1) {
+        idx = 0;
+    }
+
+    return (s32) table.entries[idx];
+}
+
+char* tyDisplay_8031BB94(s8 idx)
+{
+    TyDspArchNames table = _tyDisplay_803B8A34;
+
+    if (idx == -1) {
+        idx = 0;
+    }
+
+    return (char*) table.entries[idx];
+}
+
+s32 _tyDisplay_8031BBF4(s8 arg0)
+{
+    TyDspArchNames table = _tyDisplay_803B8AE0;
     if (arg0 == -1) {
         arg0 = 0;
     }
-    return (s32) table[arg0];
+    return (s32) table.entries[arg0];
 }
 
 HSD_GObj* _tyDisplay_8031BC54(s32 arg0)
@@ -2123,7 +2135,7 @@ HSD_GObj* _tyDisplay_8031BC54(s32 arg0)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, root);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0x3C, 0);
     cat = (c = entry->x04);
-    jobj_names = *(TyDspArchNames*) _tyDisplay_803B8988.jobj_names;
+    jobj_names = _tyDisplay_803B8988;
     if ((s8) c == -1) {
         cat = 0;
     }
@@ -2176,9 +2188,6 @@ static inline HSD_JObj* un_8031BF34_inline(void)
 
 void _tyDisplay_8031BF34(s32 arg0)
 {
-#ifdef __MWERKS__
-    void Toy_80308250(TyDspArchiveHolder*, s16, s32);
-#endif
     ToyAnimState* anim = &Toy_804A2AA8;
     HSD_JObj* jobj;
 
@@ -2314,7 +2323,7 @@ s32 tyDisplay_8031C454(s32 arg0)
     const TyDspNameTables* tables;
 
     PAD_STACK(0x4);
-    tables = &_tyDisplay_803B8988;
+    tables = (TyDspNameTables const*) &_tyDisplay_803B8988;
     result = 0;
     archArr = _tyDisplay_804A2DE8;
 
@@ -2373,7 +2382,8 @@ HSD_JObj* tyDisplay_8031C5E4(s32 arg0)
     HSD_JObj* root;
     HSD_JObj* child;
     u8 cat;
-    const TyDspNameTables* tables = &_tyDisplay_803B8988;
+    const TyDspNameTables* tables =
+        (TyDspNameTables const*) &_tyDisplay_803B8988;
 
     HSD_Archive** archives = _tyDisplay_804A2DE8;
     u8 _3[4];
