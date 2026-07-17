@@ -7,6 +7,9 @@
 #include "cm/camera.h"
 #include "ef/efasync.h"
 #include "ef/efsync.h"
+
+#include "forward.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
