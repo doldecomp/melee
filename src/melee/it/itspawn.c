@@ -1,5 +1,7 @@
 #include "it/itspawn.h"
 
+#include "placeholder.h"
+
 #include "db/db.h"
 #include "ef/efsync.h"
 #include "gm/gm_unsplit.h"
@@ -23,7 +25,7 @@ RandomItemSpawner it_804A0E30;
 /// @todo .sdata2 order hack
 static void sdata2_order(void)
 {
-    (void) 4503601774854144.0;
+    (void) S32_TO_F32;
     (void) 0.0F;
     (void) 0.99F;
 }
