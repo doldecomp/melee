@@ -500,6 +500,7 @@ bool itSword_UnkMotion4_Coll(Item_GObj* gobj)
 
 bool itSword_Logic12_DmgDealt(Item_GObj* gobj)
 {
+    /// @todo Use #itGetMotionId if it can be made to inline here.
     if (GET_ITEM(gobj)->msid == 3) {
         itColl_BounceOffVictim(gobj);
     }

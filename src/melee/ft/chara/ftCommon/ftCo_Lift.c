@@ -203,7 +203,7 @@ void ftCo_8009750C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     Item_GObj* item_gobj = fp->item_gobj;
-    if (item_gobj && it_8026B2B4(item_gobj) == 1) {
+    if (item_gobj && itIsHeavy(item_gobj) == 1) {
         Vec3 vec;
         u8 _[4] = { 0 };
         vec.x = vec.y = vec.z = 0;

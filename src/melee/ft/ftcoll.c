@@ -103,8 +103,8 @@ void ftColl_80076444(Fighter_GObj* attacker, Fighter_GObj* victim)
 /// Combo Count Logic w/ Item Owner
 void ftColl_8007646C(Item_GObj* attackItem, Fighter_GObj* victim)
 {
-    Fighter_GObj* owner = it_8026BC78(attackItem);
-    enum_t msid = it_8026BC84(attackItem);
+    Fighter_GObj* owner = itGetOwner(attackItem);
+    enum_t msid = itGetAttackId(attackItem);
 
     if (ftLib_80086960(owner)) {
         ftColl_800763C0(owner, victim, msid);

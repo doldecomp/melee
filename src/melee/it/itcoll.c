@@ -1343,7 +1343,7 @@ void it_80271F78(Item_GObj* gobj)
         item = GET_ITEM(item_gobj);
         if ((gobj != item_gobj) && !item->xDC8_word.flags.x13 &&
             (item->ground_or_air == GA_Ground) && !item->xDD1_flag.b0 &&
-            (it_8026B2B4(item_gobj) == 1))
+            (itIsHeavy(item_gobj) == 1))
         {
             HSD_JObjGetTranslation(item_jobj, &sp28);
             if (itColl_chkECBOverlap(sp28.x, sp28.y, &arg_item->xBEC,
@@ -1397,7 +1397,7 @@ void it_802721B8(Item_GObj* item_gobj)
         }
     }
     if (!item->xDC8_word.flags.x13 && (item->ground_or_air == GA_Ground) &&
-        (it_8026B2B4(item_gobj) == 1))
+        (itIsHeavy(item_gobj) == 1))
     {
         it_80271F78(item_gobj);
     }

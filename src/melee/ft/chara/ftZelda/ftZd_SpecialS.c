@@ -179,7 +179,7 @@ void ftZd_SpecialSLoop_Anim(HSD_GObj* gobj)
                                       NULL);
         }
     } else {
-        temp_r3 = it_802C3AF0(fp->fv.zd.x222C);
+        temp_r3 = itZeldaDinFire_GetOwner(fp->fv.zd.x222C);
 
         if (temp_r3 != gobj) {
             fp->fv.zd.x222C = NULL;
@@ -305,7 +305,7 @@ void ftZd_SpecialAirSLoop_Anim(HSD_GObj* gobj)
                                       NULL);
         }
     } else {
-        temp_r3 = it_802C3AF0(fp->fv.zd.x222C);
+        temp_r3 = itZeldaDinFire_GetOwner(fp->fv.zd.x222C);
 
         if (temp_r3 != gobj) {
             fp->fv.zd.x222C = NULL;

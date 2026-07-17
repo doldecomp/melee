@@ -59,12 +59,12 @@ bool ftpickupitem_80094150(Fighter_GObj* gobj, Item_GObj* item_gobj)
             offset0 = &pickup->air_light_offset;
         }
         {
-            bool b = it_8026B2B4(item_gobj);
+            bool b = itIsHeavy(item_gobj);
             Vec3 it_pos;
             it_8026B344(item_gobj, &it_pos);
             {
-                float x_range = it_8026B378(item_gobj);
-                float y_range = it_8026B384(item_gobj);
+                float x_range = itGetGrabRangeX(item_gobj);
+                float y_range = itGetGrabRangeY(item_gobj);
                 Vec4* offset1 = !b ? offset0 : &pickup->gr_heavy_offset;
                 float x1 = offset1->z;
                 float x0 = (fp->facing_dir * offset1->x) + fp->cur_pos.x;
@@ -108,7 +108,7 @@ Item_GObj* ftpickupitem_800942A0(Fighter_GObj* gobj, u32 flags)
         Item_GObj* result = NULL;
         while (cur != NULL) {
             if (Item_IsGrabbable(cur)) {
-                enum_t unk_enum = it_8026B2B4(cur);
+                enum_t unk_enum = itIsHeavy(cur);
                 if ((!fp->x2222_b4 || !it_8026B47C(cur)) &&
                     (fp->item_gobj == NULL || it_8026B4F0(cur)))
                 {
@@ -121,8 +121,8 @@ Item_GObj* ftpickupitem_800942A0(Fighter_GObj* gobj, u32 flags)
 
                         it_8026B344(cur, &it_pos);
                         {
-                            float x_range = it_8026B378(cur);
-                            float y_range = it_8026B384(cur);
+                            float x_range = itGetGrabRangeX(cur);
+                            float y_range = itGetGrabRangeY(cur);
                             vec = unk_enum == 0 ? offset0
                                                 : &pickup->gr_heavy_offset;
                             {
@@ -244,7 +244,7 @@ bool ftpickupitem_80094790(Fighter_GObj* gobj)
     if (GET_FIGHTER(gobj)->x1978 == NULL) {
         Item_GObj* unk_gobj = ftpickupitem_800942A0(gobj, 3);
         if (unk_gobj != NULL) {
-            if (!it_8026B2B4(unk_gobj)) {
+            if (!itIsHeavy(unk_gobj)) {
                 ftpickupitem_80094694(gobj, ftCo_MS_LightGet, 0);
             } else {
                 ftpickupitem_80094694(gobj, ftCo_MS_HeavyGet, 0);
@@ -281,7 +281,7 @@ void ftpickupitem_800948A8(Fighter_GObj* gobj, Item_GObj* item_gobj)
     ftpickupitem_80094818(gobj, true);
     {
         Fighter_Part ret_part;
-        if (it_8026B2B4(item_gobj) == false) {
+        if (itIsHeavy(item_gobj) == false) {
             if (itGetKind(item_gobj) == It_Kind_WStar) {
                 ret_part = FtPart_TopN;
             } else {
@@ -292,7 +292,7 @@ void ftpickupitem_800948A8(Fighter_GObj* gobj, Item_GObj* item_gobj)
         }
         pl_8003E854(fp->player_id, fp->x221F_b4, item_gobj);
         Item_8026AB54(item_gobj, gobj, ret_part);
-        if (it_8026B2B4(item_gobj) == 1) {
+        if (itIsHeavy(item_gobj) == 1) {
             ft_800881D8(fp, fp->ft_data->x4C_sfx->x2C, 127, 64);
         }
     }
