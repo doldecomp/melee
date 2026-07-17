@@ -2,6 +2,8 @@
 
 #include "dolphin.h"
 
+#include "it/items/itshell.static.h"
+
 #include "baselib/random.h"
 #include "cm/camera.h"
 #include "ef/efasync.h"
@@ -289,9 +291,7 @@ bool itZrshell_UnkMotion0_Coll(Item_GObj* gobj)
     jobj = GET_JOBJ(gobj);
     attrs = ip->xC4_article_data->x4_specialAttributes;
     if (ip->ground_or_air == GA_Ground) {
-        it_80276CB8(gobj);
-        jobj = HSD_JObjGetChild(jobj);
-        HSD_JObjAddRotationY(jobj, attrs->x20 * ABS(ip->x40_vel.x));
+        Item_UpdateRollingShellRotation(gobj, ip, jobj, &attrs->x20);
     }
     return false;
 }
@@ -530,9 +530,7 @@ bool itZrshell_UnkMotion6_Coll(Item_GObj* gobj)
     jobj = GET_JOBJ(gobj);
     attrs = ip->xC4_article_data->x4_specialAttributes;
     if (ip->ground_or_air == GA_Ground) {
-        it_80276CB8(gobj);
-        jobj = HSD_JObjGetChild(jobj);
-        HSD_JObjAddRotationY(jobj, attrs->x20 * ABS(ip->x40_vel.x));
+        Item_UpdateRollingShellRotation(gobj, ip, jobj, &attrs->x20);
     }
     if (it_8027770C(gobj)) {
         it_80272980(gobj);
