@@ -15,6 +15,7 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/inlines.h"
 #include "ftMars/types.h"
 
 #include "lb/forward.h"
@@ -24,6 +25,11 @@
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>
+
+static MotionFlags const ftMs_MF_SpecialLw_Coll =
+    ftCommon_GroundAirColl_MF | Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipHit;
+static MotionFlags const ftMs_MF_SpecialLwHit_Coll =
+    ftMs_MF_SpecialLw_Coll | Ft_MF_KeepGfx;
 
 void ftMs_SpecialLw_Enter(HSD_GObj* gobj)
 {
@@ -153,9 +159,7 @@ void ftMs_SpecialLw_80138D38(HSD_GObj* gobj)
 
     {
         Fighter* fp = gobj->user_data;
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, 371, 0x0C4C508C, fp->cur_anim_frame, 1,
-                                  0, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, 371, ftMs_MF_SpecialLw_Coll);
     }
 
     {
@@ -176,9 +180,8 @@ void ftMs_SpecialLw_80138DD0(HSD_GObj* gobj)
 
     {
         Fighter* fp0 = gobj->user_data;
-        ftCommon_8007D7FC(fp0);
-        Fighter_ChangeMotionState(gobj, 369, 0x0C4C508C, fp0->cur_anim_frame,
-                                  1, 0, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp0, 369,
+                                        ftMs_MF_SpecialLw_Coll);
     }
 
     {
@@ -325,9 +328,7 @@ void ftMs_SpecialAirLwHit_Coll(HSD_GObj* gobj)
 void ftMs_SpecialLw_80139080(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 372, 0x0C4C508E, fp->cur_anim_frame, 1, 0,
-                              NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, 372, ftMs_MF_SpecialLwHit_Coll);
 }
 
 /// 801390E0 00135CC0
@@ -335,9 +336,7 @@ void ftMs_SpecialLw_80139080(HSD_GObj* gobj)
 void ftMs_SpecialLw_801390E0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 370, 0x0C4C508E, fp->cur_anim_frame, 1, 0,
-                              NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, 370, ftMs_MF_SpecialLwHit_Coll);
 }
 
 static inline void ftMs_SpecialLw_80139140_inline(HSD_GObj* gobj)

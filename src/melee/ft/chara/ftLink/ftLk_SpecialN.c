@@ -16,6 +16,7 @@
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftpickupitem.h"
+#include "ftCommon/inlines.h"
 
 #include "ftLink/forward.h"
 
@@ -536,9 +537,7 @@ static void doColl(Fighter_GObj* gobj, FtMotionId msid)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!ft_80082708(gobj)) {
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, msid, coll_mf, fp->cur_anim_frame,
-                                  1.0f, 0.0f, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, msid, coll_mf);
         setCallbacks(gobj);
         ftAnim_8006EBA4(gobj);
     }
@@ -548,9 +547,7 @@ static void doAirColl(Fighter_GObj* gobj, FtMotionId msid)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) == GA_Air) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, msid, coll_mf, fp->cur_anim_frame,
-                                  1.0f, 0.0f, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, msid, coll_mf);
         setCallbacks(gobj);
         ftAnim_8006EBA4(gobj);
     }
@@ -571,9 +568,8 @@ void ftLk_SpecialNEnd_Coll(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     doEndColl(gobj);
     if (ft_80082708(gobj) == GA_Ground) {
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirNEnd, coll_mf,
-                                  fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, ftLk_MS_SpecialAirNEnd,
+                                        coll_mf);
         setCallbacks(gobj);
         ftAnim_8006EBA4(gobj);
     }
@@ -594,9 +590,8 @@ void ftLk_SpecialAirNEnd_Coll(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     doEndColl(gobj);
     if (ft_80081D0C(gobj) == GA_Air) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialNEnd, coll_mf,
-                                  fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, ftLk_MS_SpecialNEnd,
+                                        coll_mf);
         setCallbacks(gobj);
         ftAnim_8006EBA4(gobj);
     }
