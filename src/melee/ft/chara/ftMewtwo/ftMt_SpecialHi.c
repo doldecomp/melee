@@ -17,20 +17,19 @@
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Landing.h"
 #include "ftCommon/ftCo_Pass.h"
 #include "ftCommon/inlines.h"
 #include "ftMewtwo/types.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbrefract.h"
 #include "lb/lbvector.h"
 
 #include <common_structs.h>
+#include <trigf.h> // IWYU pragma: keep
 #include <dolphin/mtx.h>
 #include <MSL/math.h>
-#include <MSL/math_ppc.h>
+#include <MSL/math_ppc.h> // IWYU pragma: keep
 
 /// Create Teleport Start GFX
 void ftMt_SpecialHi_CreateGFX(HSD_GObj* gobj)

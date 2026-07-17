@@ -40,7 +40,7 @@ typedef struct _ftSeakAttributes { // x2D4 (fp->dat_attrs)
     f32 x44;
     f32 x48;
     f32 x4C;
-    s32 x50;
+    int x50;
     f32 x54;
     f32 x58;
     f32 x5C;

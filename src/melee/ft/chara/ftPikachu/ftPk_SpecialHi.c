@@ -19,7 +19,6 @@
 
 #include "ftCommon/forward.h"
 
-#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Landing.h"
 #include "ftCommon/ftCo_Pass.h"
@@ -29,8 +28,8 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <math_ppc.h>
-#include <trigf.h>
+#include <math_ppc.h> // IWYU pragma: keep
+#include <trigf.h>    // IWYU pragma: keep
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>

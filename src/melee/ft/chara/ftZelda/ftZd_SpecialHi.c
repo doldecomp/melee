@@ -25,7 +25,7 @@
 
 #include <common_structs.h>
 #include <math.h>
-#include <trigf.h>
+#include <trigf.h> // IWYU pragma: keep
 #include <dolphin/mtx.h>
 #include <MetroTRK/intrinsics.h>
 

@@ -15,14 +15,10 @@
 #include <math.h>
 #include <dolphin/mtx.h>
 #include <baselib/archive.h>
-#include <baselib/controller.h>
 #include <baselib/dobj.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjuserdata.h>
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
-#include <baselib/random.h>
 
 #define PUSH_ATTRS(fp, attributeName)                                         \
     do {                                                                      \
@@ -216,7 +212,7 @@ static inline CollData* Fighter_GetCollData(Fighter* fp)
 static inline void ftCommon_HandleTeleportCollisions(Fighter_GObj* gobj,
                                                      Fighter* fp,
                                                      CollData* coll,
-                                                     const s32* angle_clamp,
+                                                     const int* angle_clamp,
                                                      HSD_GObjEvent on_collide)
 {
     if ((coll->env_flags & Collide_CeilingMask) &&

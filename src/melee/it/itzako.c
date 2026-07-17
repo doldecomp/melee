@@ -1,6 +1,5 @@
 #include "itzako.h"
 
-#include "it_266F.h"
 #include "it_2725.h"
 #include "it_3F14.h"
 #include "ithitbox.h"
@@ -8,6 +7,7 @@
 #include "itmaterial.h"
 
 #include "baselib/jobj.h"
+#include "baselib/random.h"
 #include "cm/camera.h"
 #include "ft/fighter.h"
 #include "ft/ftlib.h"
@@ -17,6 +17,7 @@
 #include "gr/grzakogenerator.h"
 #include "it/inlines.h"
 #include "it/items/itheiho.h"
+#include "it/itgroundcoll.h"
 #include "items/itcoin.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
