@@ -2805,7 +2805,7 @@ void fn_8018A364(int arg0_int)
     UnkAllstarData* data;
     u32 total_time;
 
-    rules = gm_8016AE50();
+    rules = gm_GetRules();
     data = &gm_80473A18;
 
     if (fn_8017E318() > 0) {

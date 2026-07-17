@@ -179,7 +179,7 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
     player = arg0->user_data;
     slot = player - ifMagnify_804A1DE0.player;
     is_colored = false;
-    if ((gm_8016AE38()->hud_enabled == 0) || ifAll_IsHUDHidden() ||
+    if ((gm_16AE_GetUnkData_0()->hud_enabled == 0) || ifAll_IsHUDHidden() ||
         Camera_80030130())
     {
         should_display = false;
@@ -261,7 +261,7 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
         magnify->player[i].state.is_offscreen = 0;
     }
 
-    if ((gm_8016AE38()->hud_enabled == 0) || ifAll_IsHUDHidden() ||
+    if ((gm_16AE_GetUnkData_0()->hud_enabled == 0) || ifAll_IsHUDHidden() ||
         Camera_80030130())
     {
         should_display = false;

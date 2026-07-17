@@ -264,7 +264,7 @@ void gmCamera_801A26C0(void)
     lbl_8046B6A0_t* hud;
     PAD_STACK(4);
 
-    hud = gm_8016AE38();
+    hud = gm_16AE_GetUnkData_0();
     if (gm_801A45E8(3)) {
         gm_801A4674(3);
         if (gm_801A45E8(1)) {
@@ -299,7 +299,7 @@ void gmCamera_801A2800(void)
     HSD_JObj* jobj;
     lbl_8046B6A0_t* temp_r3;
 
-    temp_r3 = gm_8016AE38();
+    temp_r3 = gm_16AE_GetUnkData_0();
     gmCamera_VsCamUiState.x10 = 0;
     lb_80011E24(gmCamera_VsCamUiState.x8, &jobj, 2, -1);
     HSD_JObjReqAnimAll(jobj, 0.0f);
