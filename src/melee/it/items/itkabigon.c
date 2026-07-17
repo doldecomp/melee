@@ -1,5 +1,7 @@
 #include "itkabigon.h"
 
+#include "inlines.h"
+
 #include "cm/camera.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
@@ -194,11 +196,7 @@ bool itKabigon_UnkMotion1_Coll(Item_GObj* gobj)
 
 void it_802CA324(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    it_802762BC(ip);
-    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_EnterAirStateWithHitlag(gobj, 2);
 }
 
 bool itKabigon_UnkMotion2_Anim(Item_GObj* gobj)

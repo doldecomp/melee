@@ -1,5 +1,7 @@
 #include "itfire.h"
 
+#include "inlines.h"
+
 #include <placeholder.h>
 #include <platform.h>
 
@@ -109,14 +111,7 @@ bool itFire_UnkMotion2_Coll(Item_GObj* gobj)
 
 void it_802CC944(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-
-    it_802762BC(ip);
-    Item_80268E5C(gobj, 0, 2);
-
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
-    it_80273670(gobj, 0, 0.0f);
+    Item_EnterAirStateWithHitlagAndStateDesc(gobj);
 }
 
 bool itFire_UnkMotion0_Anim(Item_GObj* gobj)

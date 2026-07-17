@@ -2,6 +2,8 @@
 
 #include "placeholder.h"
 
+#include "baselib/gobjgxlink.h"
+#include "baselib/gobjuserdata.h"
 #include "dolphin/mtx.h"
 #include "dolphin/types.h"
 #include "ef/efsync.h"

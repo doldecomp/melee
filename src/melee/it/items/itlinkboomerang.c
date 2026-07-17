@@ -71,6 +71,7 @@ static inline void remove_boomerang(Item_GObj* gobj)
 
 bool it_8029FDBC(Item_GObj* gobj)
 {
+    /// @todo Use #itGetMotionId if it can be made to inline here.
     return (GET_ITEM(gobj)->msid != 0) ? false : true;
 }
 
@@ -177,7 +178,7 @@ HSD_GObj* it_802A013C(f32 facing_dir, Fighter_GObj* owner_gobj, Vec3* pos,
         ip->xDD4_itemVar.linkboomerang.xF8C = 0.0f;
         ip->xDD4_itemVar.linkboomerang.xF70 = attrs->x3C;
         ip->xDD4_itemVar.linkboomerang.xDEC =
-            ftLib_800872A4(ip->xDD4_itemVar.linkboomerang.xF98);
+            ftLib_GetKind(ip->xDD4_itemVar.linkboomerang.xF98);
         for (i = 0; i < 16; i++) {
             ip->xDD4_itemVar.linkboomerang.xDF0[i].x = 0.0f;
             ip->xDD4_itemVar.linkboomerang.xDF0[i].y = 0.0f;

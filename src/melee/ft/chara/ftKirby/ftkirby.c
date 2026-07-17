@@ -3117,8 +3117,8 @@ void ftKb_Init_UnkMotionStates4(HSD_GObj* gobj)
 void ftKb_Init_OnItemPickup(HSD_GObj* gobj, bool arg1)
 {
     Fighter* fp = getFighter(gobj);
-    if (!it_8026B2B4(fp->item_gobj)) {
-        switch (it_8026B320(fp->item_gobj)) {
+    if (!itIsHeavy(fp->item_gobj)) {
+        switch (itGetHoldKind(fp->item_gobj)) {
         case 1:
             ftAnim_80070FB4(gobj, 1, 0);
             break;
@@ -3138,7 +3138,7 @@ void ftKb_Init_OnItemPickup(HSD_GObj* gobj, bool arg1)
 void ftKb_Init_OnItemInvisible(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (it_8026B2B4(fp->item_gobj) == 0) {
+    if (itIsHeavy(fp->item_gobj) == 0) {
         ftAnim_80070CC4(gobj, 1);
     }
 }

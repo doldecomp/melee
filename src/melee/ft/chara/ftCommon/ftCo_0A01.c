@@ -5,8 +5,8 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "baselib/random.h"
 #include "cm/camera.h"
-#include "ft/chara/ftPopo/ftPp_SpecialHi.h"
 #include "ft/chara/ftPopo/ftPp_SpecialLw.h"
 #include "ft/fighter.h"
 #include "ft/ft_0877.h"
@@ -33,7 +33,6 @@
 #include "gr/grrcruise.h"
 #include "gr/grvenom.h"
 #include "gr/stage.h"
-#include "gr/types.h"
 #include "it/inlines.h"
 #include "it/item.h"
 #include "it/types.h"

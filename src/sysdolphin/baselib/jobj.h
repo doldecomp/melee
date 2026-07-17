@@ -351,10 +351,11 @@ static inline void HSD_JObjSetRotationZWithMtxDirty(HSD_JObj* jobj, f32 z)
     }
 }
 
-static inline void HSD_JObjGetRotation(HSD_JObj* jobj, Quaternion* quat)
+static inline void HSD_JObjGetRotation(HSD_JObj* jobj, Quaternion* rotate)
 {
     HSD_ASSERT(699, jobj);
-    *quat = jobj->rotate;
+    HSD_ASSERT(700, rotate);
+    *rotate = jobj->rotate;
 }
 
 static inline f32 HSD_JObjGetRotationX(HSD_JObj* jobj)
