@@ -1,4 +1,4 @@
-#define MELEE_FT_FTLIB_C
+#define FTLIB_SOURCE
 
 #include "ftlib.h"
 

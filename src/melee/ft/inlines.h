@@ -44,7 +44,7 @@
 #define GET_FIGHTER(gobj) ((Fighter*) HSD_GObjGetUserData(gobj))
 #endif
 
-#ifndef MELEE_FT_FTLIB_C
+#ifndef FTLIB_SOURCE
 extern inline HSD_GObj* ftLib_GetItem(HSD_GObj* gobj)
 {
     Fighter* fp = HSD_GObjGetUserData(gobj);
