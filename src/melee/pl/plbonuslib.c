@@ -129,7 +129,7 @@ void pl_8003D644(int arg0, int arg1, int arg2, int arg3)
 
     temp_r26 = Player_GetStaleMoveTableIndexPtr2(arg0);
     temp_r3 = Player_GetEntityAtIndex(arg0, arg1);
-    temp_r27 = ftLib_80086C0C(temp_r3);
+    temp_r27 = ftLib_GetMotionId(temp_r3);
     temp_r28 = ftLib_800876F4(temp_r3);
     temp_r29 = ftLib_80087700(temp_r3);
     temp_r30 = ft_80089890(temp_r3);
@@ -844,7 +844,7 @@ void fn_8003EE2C(int arg0, int arg1)
     }
 
     {
-        Item_GObj* item_gobj = ftLib_80086794(temp_r30);
+        Item_GObj* item_gobj = ftLib_GetItem(temp_r30);
         if (item_gobj != NULL) {
             if (match_item_kind(itGetKind(item_gobj)) != -1 &&
                 it_8026B30C(item_gobj) != 5)

@@ -1,11 +1,14 @@
 #include "itclimbersstring.h"
 
+#include "baselib/gobjgxlink.h"
+#include "baselib/gobjuserdata.h"
 #include "ft/chara/ftPopo/ftPp_SpecialS.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "it/inlines.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/items/inlines.h"
 #include "it/items/itlinkhookshot.h"
 #include "lb/lbvector.h"
 
@@ -273,7 +276,7 @@ bool itClimbersstring_UnkMotion3_Anim(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
 
     if (ip->owner != NULL) {
-        enum_t action = ftLib_80086C0C(ip->owner);
+        enum_t action = ftLib_GetMotionId(ip->owner);
         if (action >= 0x15B && action <= 0x164) {
             should_cleanup = 0;
         } else {
@@ -452,32 +455,14 @@ s32 it_802C30E8(ItemLink* link, Vec3* target,
 bool it_802C32D4(ItemLink* link, Vec3* pos, itClimbersStringAttributes* attrs,
                  Item* ip, f32 dist)
 {
-    u8 _pad[16];
-    Vec3 dir;
+    u8 _pad[8];
     ItemLink* prev;
-    ItemLink* cur = link;
-    f32 len;
+    ItemLink* cur;
     f32 step;
-    f32 foo;
 
-    prev = link->prev;
-    while (prev != NULL && !cur->x2C_b0) {
-        cur = prev;
-        prev = prev->prev;
-    }
-    len = it_802A3C98(&cur->pos, pos, &dir);
-    while (prev != NULL && dist > len) {
-        cur->x2C_b0 = false;
-        len = it_802A3C98(&prev->pos, pos, &dir);
-        cur = prev;
-        prev = prev->prev;
-    }
-    foo = attrs->x8;
-    step = len - dist;
-    if (step > foo) {
-        step = foo;
-    }
+    Item_RetractChain(link, pos, dist, &attrs->x8, &prev, &cur, &step);
     it_802C2DB0(cur, pos, attrs, step);
+
     if (prev != NULL) {
         return false;
     }

@@ -2,6 +2,7 @@
 /// @todo A lot of duplicate code here, can maybe be cleaned up with inlines.
 #include "itsword.h"
 
+#include "inlines.h"
 #include "types.h" // IWYU pragma: keep
 
 #include <placeholder.h>
@@ -60,16 +61,7 @@ Item_GObj* itSword_Spawn(Vec3* pos)
 {
     SpawnItem spawn;
     spawn.kind = It_Kind_Sword;
-    spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = -1.0f;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0;
-    spawn.x0_parent_gobj = NULL;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
+    Item_InitSpawnOnPlane(&spawn, NULL, pos, -1.0f);
     {
         Item_GObj* gobj = Item_80268B5C(&spawn);
         if (gobj != NULL) {
