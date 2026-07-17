@@ -26,7 +26,7 @@ HSD_GObj* it_802C65E4(Item_GObj* gobj, Vec* vec, enum Fighter_Part arg2,
     SpawnItem si;
     PAD_STACK(4);
     si.kind = It_Kind_GameWatch_Manhole;
-    itGamewatch_InitSpawnItem(&si, gobj, vec, arg3);
+    Item_InitSpawn(&si, gobj, vec, arg3);
     n = Item_80268B18(&si);
     if (n != NULL) {
         void** x = GET_ITEM(n)->xC4_article_data->x4_specialAttributes;

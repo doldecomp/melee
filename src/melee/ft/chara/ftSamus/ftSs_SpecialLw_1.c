@@ -12,12 +12,17 @@
 #include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_SquatWait.h"
+#include "ftCommon/inlines.h"
 #include "ftCommon/types.h"
 #include "ftSamus/types.h"
 #include "it/items/itsamusbomb.h"
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx.h>
+
+static MotionFlags const ftSs_MF_SpecialLw_Coll =
+    ftCommon_GroundAirColl_MF | Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipHit |
+    Ft_MF_SkipModel;
 
 void ftSs_SpecialLw_8012ADF0(Fighter_GObj* gobj)
 {
@@ -229,9 +234,7 @@ static void ftSamus_UnkSetStateAndCb(HSD_GObj* gobj)
 void ftSs_SpecialLw_8012B570(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 0x164, 0x0C4C509C, fp->cur_anim_frame,
-                              1.0f, 0.0f, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, 0x164, ftSs_MF_SpecialLw_Coll);
     ftSamus_UnkSetStateAndCb(gobj);
 }
 
@@ -240,17 +243,13 @@ void ftSs_SpecialLw_8012B5F0(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = getFtSpecialAttrs(fp);
     fp->self_vel.y = samus_attr->x54;
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 0x164, 0x0C4C509C, fp->cur_anim_frame,
-                              1.0f, 0.0f, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, 0x164, ftSs_MF_SpecialLw_Coll);
     fp->accessory4_cb = ftSs_SpecialLw_8012ADF0;
 }
 
 void ftSs_SpecialLw_8012B668(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 0x163, 0x0C4C509C, fp->cur_anim_frame,
-                              1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, 0x163, ftSs_MF_SpecialLw_Coll);
     ftSamus_UnkSetStateAndCb(gobj);
 }

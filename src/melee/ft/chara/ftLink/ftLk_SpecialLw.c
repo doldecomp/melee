@@ -12,6 +12,7 @@
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftpickupitem.h"
+#include "ftCommon/inlines.h"
 
 #include "ftLink/forward.h"
 #include "it/forward.h"
@@ -122,9 +123,8 @@ void ftLk_SpecialLw_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!ft_80082708(gobj)) {
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirLw, coll_mf,
-                                  fp->cur_anim_frame, 1, 0, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, ftLk_MS_SpecialAirLw,
+                                        coll_mf);
         fp->accessory4_cb = spawnBomb;
     }
 }
@@ -134,9 +134,7 @@ void ftLk_SpecialAirLw_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj)) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialLw, coll_mf,
-                                  fp->cur_anim_frame, 1, 0, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, ftLk_MS_SpecialLw, coll_mf);
         fp->accessory4_cb = spawnBomb;
     }
 }

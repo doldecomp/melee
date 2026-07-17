@@ -15,20 +15,21 @@
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Landing.h"
 #include "ftCommon/ftCo_Pass.h"
+#include "ftCommon/inlines.h"
 #include "ftMewtwo/types.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbrefract.h"
 #include "lb/lbvector.h"
 
 #include <common_structs.h>
+#include <trigf.h> // IWYU pragma: keep
 #include <dolphin/mtx.h>
 #include <MSL/math.h>
-#include <MSL/math_ppc.h>
+#include <MSL/math_ppc.h> // IWYU pragma: keep
 
 /// Create Teleport Start GFX
 void ftMt_SpecialHi_CreateGFX(HSD_GObj* gobj)
@@ -177,7 +178,7 @@ void ftMt_SpecialAirHiStart_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (ft_CheckGroundAndLedge(gobj, CLIFFCATCH_O(fp))) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         ftMt_SpecialAirHiStart_AirToGround(gobj);
         return;
     }
@@ -212,10 +213,8 @@ void ftMt_SpecialHiStart_GroundToAir(HSD_GObj* gobj)
 void ftMt_SpecialAirHiStart_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-
-    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialHiStart, transition_flags1,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftMt_MS_SpecialHiStart,
+                                    transition_flags1);
 
     fp->accessory4_cb = ftMt_SpecialHi_CreateGFX;
 }
@@ -320,7 +319,7 @@ void ftMt_SpecialAirHiLost_Coll(HSD_GObj* gobj)
         CollData* collData = collData = getFtColl(fp1);
         fp0->mv.mt.SpecialHi.unk4++;
 
-        if (ft_CheckGroundAndLedge(gobj, CLIFFCATCH_O(fp0))) {
+        if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp0))) {
             if (ftMewtwo_SpecialHi_CheckTimer(gobj)) {
                 ftMt_SpecialAirHi_AirToGround(gobj);
                 return;
@@ -331,31 +330,9 @@ void ftMt_SpecialAirHiLost_Coll(HSD_GObj* gobj)
             return;
         }
 
-        if ((collData->env_flags & Collide_CeilingMask) &&
-            (lbVector_AngleXY(&collData->ceiling.normal, &fp1->self_vel) >
-             deg_to_rad *
-                 (90.0f + mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP)))
-        {
-            ftMt_SpecialAirHiLost_Enter(gobj);
-        }
-
-        if (collData->env_flags & Collide_LeftWallMask &&
-            (lbVector_AngleXY(&collData->left_facing_wall.normal,
-                              &fp1->self_vel) >
-             deg_to_rad *
-                 (90.0f + mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP)))
-        {
-            ftMt_SpecialAirHiLost_Enter(gobj);
-        }
-
-        if (collData->env_flags & Collide_RightWallMask &&
-            lbVector_AngleXY(&collData->right_facing_wall.normal,
-                             &fp1->self_vel) >
-                deg_to_rad *
-                    (90.0f + mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP))
-        {
-            ftMt_SpecialAirHiLost_Enter(gobj);
-        }
+        ftCommon_HandleTeleportCollisions(
+            gobj, fp1, collData, &mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP,
+            ftMt_SpecialAirHiLost_Enter);
     }
 }
 
@@ -606,12 +583,11 @@ void ftMt_SpecialAirHi_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
 
-    if (ft_CheckGroundAndLedge(gobj, CLIFFCATCH_O(fp))) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         ftCo_LandingFallSpecial_Enter(
             gobj, false, mewtwoAttrs->x74_MEWTWO_TELEPORT_LANDING_LAG);
         return;
     }
-
     if (ftCliffCommon_80081298(gobj)) {
         return;
     }

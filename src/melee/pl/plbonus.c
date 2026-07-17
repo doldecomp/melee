@@ -1162,7 +1162,7 @@ void fn_8003CC84(int player)
         pl_80041BFC(player);
         pl_800418F4(player);
         if (Player_8003221C(player) != 0) {
-            switch (ftLib_80086C0C(temp_r29)) {
+            switch (ftLib_GetMotionId(temp_r29)) {
             case 0xC:
             case 0xD:
                 setFlag(player, 0x89);
