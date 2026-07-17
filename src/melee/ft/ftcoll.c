@@ -262,6 +262,26 @@ void ftColl_80076764(int arg0, enum_t arg1, Fighter_GObj* arg2,
     }
 }
 
+static void tiplog(int kind, HSD_GObj* gobj, HitCapsule* hit0,
+                   HitCapsule* hit1, int len, float temp_dmg)
+{
+    if (dmg_log1_idx < ARRAY_SIZE(dmg_log1)) {
+        DmgLogEntry* entry = &dmg_log1[dmg_log1_idx];
+        entry->x0 = 1;
+        entry->kind = kind;
+        entry->gobj = gobj;
+        entry->hit0 = hit0;
+        entry->hit1 = hit1;
+        entry->pos = hit0->hurt_coll_pos;
+        entry->x20 = temp_dmg;
+        entry->size_of_xC = len;
+        ++dmg_log1_idx;
+    } else {
+        HSD_ASSERTREPORT(0x110, 0, "tip log over %d!!\n",
+                         ARRAY_SIZE(dmg_log1));
+    }
+}
+
 void ftColl_80076808(Fighter* fp, HitCapsule* hit, int arg2, void* victim,
                      bool arg4)
 {
@@ -535,7 +555,6 @@ static inline bool inlineB1(HitCapsule* hit0)
 
 static inline bool inlineB2(Fighter* fp1, float dmg, int var_r24_3)
 {
-    int var_r0_3;
     if (fp1->x221C_b4 == 0) {
         if (dmg > 500.0f) {
             HSD_ASSERTREPORT(0xB7, 0, "attack power over 500!! %f\n", dmg);
@@ -545,11 +564,9 @@ static inline bool inlineB2(Fighter* fp1, float dmg, int var_r24_3)
         if (var_r24_3 > (int) fp1->dmg.x183C_applied) {
             fp1->dmg.x183C_applied = var_r24_3;
         }
-        var_r0_3 = 1;
-    } else {
-        var_r0_3 = 0;
+        return true;
     }
-    return var_r0_3;
+    return false;
 }
 
 static inline float inlineB3(Fighter* fp0, HitCapsule* hit0, Fighter* fp1)
@@ -589,8 +606,6 @@ bool ftColl_80076ED8(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
                 {
                     u32 count = hit0->unk_count;
                     Fighter* fp = fp0;
-                    FighterKind kind;
-                    HSD_GObj* gobj;
                     u32 len = count >> 1;
                     if (len == 0 && count != 0) {
                         len = 1;
@@ -605,25 +620,7 @@ bool ftColl_80076ED8(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
                     if (fp0->x1064_thrownHitbox.owner != NULL) {
                         fp = GET_FIGHTER(fp0->x1064_thrownHitbox.owner);
                     }
-                    {
-                        gobj = fp->gobj;
-                        kind = fp->kind;
-                        if (dmg_log1_idx < ARRAY_SIZE(dmg_log1)) {
-                            DmgLogEntry* entry = &dmg_log1[dmg_log1_idx];
-                            entry->x0 = 1;
-                            entry->kind = kind;
-                            entry->gobj = gobj;
-                            entry->hit0 = hit0;
-                            entry->hit1 = hit1;
-                            entry->pos = hit0->hurt_coll_pos;
-                            entry->x20 = temp_dmg;
-                            entry->size_of_xC = len;
-                            ++dmg_log1_idx;
-                        } else {
-                            HSD_ASSERTREPORT(0x110, 0, "tip log over %d!!\n",
-                                             ARRAY_SIZE(dmg_log1));
-                        }
-                    }
+                    tiplog(fp->kind, fp->gobj, hit0, hit1, len, temp_dmg);
                 }
 
                 ftColl_80078488(fp1);
@@ -1388,14 +1385,14 @@ void ftColl_80078538(Fighter_GObj* gobj, Vec3* pos, u32 dmg, float ignored,
 }
 
 void ftColl_8007861C(Fighter_GObj* arg0, Fighter_GObj* gobj, int arg2,
-                     int arg3, int arg4, UNK_T arg5, int arg6, UNK_T arg7,
+                     int arg3, int arg4, UNK_T arg5, u16 arg6, UNK_T arg7,
                      int arg8)
 {
     Fighter* victim;
     Fighter* attacker;
     s32 grounded;
     s32 prev_source_ply;
-    int attack_instance = arg6;
+    u16 attack_instance = arg6;
 
     attacker = arg0 != NULL ? GET_FIGHTER(arg0) : NULL;
 
@@ -2199,6 +2196,7 @@ float ftColl_80079C70(Fighter* fp, Fighter* attacker, HitCapsule* hit,
     if (x28 != 0) {
         float decay = ftd->xF8;
         float x118 = ftd->x118;
+        /// @todo Restore expanded inline.
         result =
             defense *
             (attack *
@@ -2224,6 +2222,7 @@ float ftColl_80079C70(Fighter* fp, Fighter* attacker, HitCapsule* hit,
 
         {
             float decay = ftd->xF8;
+            /// @todo Restore expanded inline.
             result =
                 defense *
                 (attack *
