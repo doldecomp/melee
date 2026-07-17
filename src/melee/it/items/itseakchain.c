@@ -330,7 +330,7 @@ void fn_802BB784(Item_GObj* gobj)
 static bool notInSpecialS(Fighter_GObj* gobj)
 {
     if (gobj != NULL) {
-        enum_t msid = ftLib_80086C0C(gobj);
+        enum_t msid = ftLib_GetMotionId(gobj);
         if ((msid >= ftSk_MS_SpecialSStart) &&
             (msid <= ftSk_MS_SpecialAirSEnd))
         {
