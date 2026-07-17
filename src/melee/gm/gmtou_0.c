@@ -107,8 +107,6 @@ static void sdata2_order(void)
     (void) 0.550000012f;
     (void) 0.850000024f;
     (void) 1.35000002f;
-    (void) -19.5f;
-    (void) 13.0f;
 }
 
 /* 4D664C */ extern SceneDesc* lbl_804D664C;
