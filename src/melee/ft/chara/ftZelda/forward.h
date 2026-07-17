@@ -32,6 +32,14 @@ static MotionFlags const ftZd_MF_SpecialAirLw =
 static MotionFlags const ftZd_MF_SpecialAirS =
     ftZd_MF_SpecialS | Ft_MF_SkipParasol;
 
+static MotionFlags const ftZd_MF_SpecialN_Coll =
+    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx | Ft_MF_KeepColAnimHitStatus |
+    Ft_MF_SkipHit;
+
+static MotionFlags const ftZd_MF_SpecialLw_Coll =
+    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx | Ft_MF_KeepColAnimHitStatus |
+    Ft_MF_SkipHit;
+
 typedef enum ftZd_MotionState {
     ftZd_MS_SpecialN = ftCo_MS_Count,
     ftZd_MS_SpecialAirN,

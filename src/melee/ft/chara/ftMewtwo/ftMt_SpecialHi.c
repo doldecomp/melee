@@ -20,6 +20,7 @@
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Landing.h"
 #include "ftCommon/ftCo_Pass.h"
+#include "ftCommon/inlines.h"
 #include "ftMewtwo/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbrefract.h"
@@ -212,10 +213,8 @@ void ftMt_SpecialHiStart_GroundToAir(HSD_GObj* gobj)
 void ftMt_SpecialAirHiStart_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-
-    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialHiStart, transition_flags1,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftMt_MS_SpecialHiStart,
+                                    transition_flags1);
 
     fp->accessory4_cb = ftMt_SpecialHi_CreateGFX;
 }
