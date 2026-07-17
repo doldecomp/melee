@@ -9,6 +9,7 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ftcommon.h"
+#include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 
@@ -39,7 +40,6 @@
 #include <melee/ft/ft_0CDD.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftchangeparam.h>
-#include <melee/ft/ftlib.h>
 #include <melee/ft/ftmaterial.h>
 #include <melee/ft/ftmetal.h>
 #include <melee/gm/gm_unsplit.h>

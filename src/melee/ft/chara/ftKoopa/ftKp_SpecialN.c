@@ -1,20 +1,17 @@
 #include "ftKp_SpecialN.h"
 
+#include "baselib/random.h"
 #include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/inlines.h"
-#include "ftKoopa/ftKp_Init.h"
 
-#include <trigf.h>
+#include "ftKoopa/forward.h"
+
 #include <melee/cm/camera.h>
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ft_0881.h>
 #include <melee/ft/ft_0892.h>
-#include <melee/ft/ftcliffcommon.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>

@@ -141,13 +141,13 @@ void _tyList_80312904(void* arg0, s8 arg1)
 
     if (arg1 != 0x63) {
         if ((s8) row->x24 == arg1) {
-            row->text0->text_color = lb_804D3764;
-            row->text1->text_color = lb_804D3764;
-            row->text2->text_color = lb_804D3764;
+            row->text0->text_color = lb_ColorBlack;
+            row->text1->text_color = lb_ColorBlack;
+            row->text2->text_color = lb_ColorBlack;
         } else {
-            row->text0->text_color = lb_804D3760;
-            row->text1->text_color = lb_804D3760;
-            row->text2->text_color = lb_804D3760;
+            row->text0->text_color = lb_ColorWhite;
+            row->text1->text_color = lb_ColorWhite;
+            row->text2->text_color = lb_ColorWhite;
         }
     }
 

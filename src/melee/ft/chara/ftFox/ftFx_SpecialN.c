@@ -212,7 +212,7 @@ void ftFx_SpecialN_CreateBlasterShot(HSD_GObj* gobj)
                     da->x1C_FOX_BLASTER_SHOT_ITKIND);
 
         it_802AE1D0(fp->fv.fx.x222C_blasterGObj);
-        ftKind = ftLib_800872A4(gobj);
+        ftKind = ftLib_GetKind(gobj);
 
         switch (ftKind) {
         case FTKIND_FOX:
@@ -397,7 +397,7 @@ void ftFx_SpecialNLoop_Anim(HSD_GObj* gobj)
             it_8029C6A4(launchAngle, da->x14_FOX_BLASTER_VEL, gobj, &sp2C,
                         da->x1C_FOX_BLASTER_SHOT_ITKIND);
             it_802AE1D0(fp->fv.fx.x222C_blasterGObj);
-            ftKind = ftLib_800872A4(gobj);
+            ftKind = ftLib_GetKind(gobj);
             switch (ftKind) {
             case FTKIND_FOX:
                 ft_PlaySFX(fp, foxSFX[fp->facing_dir == -1], SFX_VOLUME_MAX,
@@ -540,7 +540,7 @@ void ftFx_SpecialAirNLoop_Anim(HSD_GObj* gobj)
                         da->x1C_FOX_BLASTER_SHOT_ITKIND);
             it_802AE1D0(fp->fv.fx.x222C_blasterGObj);
 
-            ftKind = ftLib_800872A4(gobj);
+            ftKind = ftLib_GetKind(gobj);
             switch (ftKind) {
             case FTKIND_FOX:
                 ft_PlaySFX(fp, foxSFX[-1 == fp->facing_dir], SFX_VOLUME_MAX,
@@ -794,7 +794,7 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
                     switch (ftGetAction(fp)) {
                     case ftCo_MS_ThrowHi:
                     case ftCo_MS_ThrowLw: {
-                        switch (ftLib_800872A4(gobj)) {
+                        switch (ftLib_GetKind(gobj)) {
                         case FTKIND_FOX:
                             ft_PlaySFX(fp, 110109, SFX_VOLUME_MAX,
                                        SFX_PAN_MID);
@@ -808,7 +808,7 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
                         break;
                     }
                     case ftCo_MS_ThrowB:
-                        switch (ftLib_800872A4(gobj)) {
+                        switch (ftLib_GetKind(gobj)) {
                         case FTKIND_FOX:
                             ft_PlaySFX(fp, foxSFX[1 == fp->facing_dir],
                                        SFX_VOLUME_MAX, SFX_PAN_MID);
@@ -829,7 +829,7 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
             if (fp->fv.fx.x222C_blasterGObj != NULL) {
                 fp->fv.fx.x222C_blasterGObj = NULL;
                 ftFox_SpecialN_SetNULL(gobj);
-                switch (ftLib_800872A4(gobj)) {
+                switch (ftLib_GetKind(gobj)) {
                 case FTKIND_FOX:
                     ft_PlaySFX(fp, 110100, SFX_VOLUME_MAX, SFX_PAN_MID);
                     return;
