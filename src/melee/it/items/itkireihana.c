@@ -1,5 +1,7 @@
 #include "itkireihana.h"
 
+#include "inlines.h"
+
 #include <placeholder.h>
 #include <platform.h>
 
@@ -279,12 +281,7 @@ bool itKireihana_UnkMotion4_Coll(Item_GObj* gobj)
 
 void it_802D08F0(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    it_802762BC(ip);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
-    it_80273670(gobj, 0, 0.0f);
+    Item_EnterAirStateWithHitlagAndStateDesc(gobj);
 }
 
 bool itKireihana_UnkMotion0_Anim(Item_GObj* gobj)

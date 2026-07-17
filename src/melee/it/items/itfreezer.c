@@ -1,5 +1,7 @@
 #include "itfreezer.h"
 
+#include "inlines.h"
+
 #include <placeholder.h>
 #include <platform.h>
 
@@ -144,12 +146,7 @@ void itFreezer_802CD290(Item_GObj* gobj)
 
 void itFreezer_802CD2EC(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    it_802762BC(ip);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
-    it_80273670(gobj, 0, 0.0f);
+    Item_EnterAirStateWithHitlagAndStateDesc(gobj);
 }
 
 bool itFreezer_UnkMotion0_Anim(Item_GObj* gobj)
