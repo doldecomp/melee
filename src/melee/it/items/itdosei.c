@@ -549,9 +549,7 @@ bool itDosei_UnkMotion8_Coll(Item_GObj* gobj)
 void itDosei_80282CD4(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->x40_vel.z = 0.0f;
-    ip->x40_vel.y = 0.0f;
-    ip->x40_vel.x = 0.0f;
+    itResetVelocity(ip);
     it_802762B0(ip);
     Item_80268E5C(gobj, 7, 3);
     {

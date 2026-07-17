@@ -13,15 +13,15 @@
 
 /* 26B1D4 */ float it_8026B1D4(Item_GObj* gobj, HitCapsule* itemHitboxUnk);
 /* 26B294 */ void it_8026B294(Item_GObj* gobj, Vec3* pos);
-/* 26B2B4 */ enum_t it_8026B2B4(Item_GObj* gobj);
+/* 26B2B4 */ bool itIsHeavy(Item_GObj* gobj);
 /* 26B2D8 */ bool it_8026B2D8(Item_GObj* gobj);
 /* 26B300 */ s32 itGetKind(Item_GObj* gobj);
 /* 26B30C */ enum_t it_8026B30C(Item_GObj* gobj);
-/* 26B320 */ enum_t it_8026B320(Item_GObj* gobj);
-/* 26B334 */ float it_8026B334(Item_GObj* gobj);
+/* 26B320 */ enum_t itGetHoldKind(Item_GObj* gobj);
+/* 26B334 */ float itGetDamageMultiplier(Item_GObj* gobj);
 /* 26B344 */ void it_8026B344(Item_GObj* gobj, Vec3* pos);
-/* 26B378 */ float it_8026B378(Item_GObj* gobj);
-/* 26B384 */ float it_8026B384(Item_GObj* gobj);
+/* 26B378 */ float itGetGrabRangeX(Item_GObj* gobj);
+/* 26B384 */ float itGetGrabRangeY(Item_GObj* gobj);
 /* 26B390 */ void it_8026B390(Item_GObj* gobj);
 /* 26B3A8 */ void it_8026B3A8(Item_GObj* gobj);
 /* 26B3C0 */ int it_8026B3C0(ItemKind kind);
@@ -45,8 +45,8 @@
 /* 26B724 */ void it_8026B724(Item_GObj* gobj);
 /* 26B73C */ void it_8026B73C(Item_GObj* gobj);
 /* 26B774 */ bool it_8026B774(Item_GObj* gobj, u8 arg1);
-/* 26B7A4 */ s32 it_8026B7A4(Item_GObj* gobj);
-/* 26B7B0 */ u8 it_8026B7B0(Item_GObj* gobj);
+/* 26B7A4 */ s32 itGetMotionId(Item_GObj* gobj);
+/* 26B7B0 */ u8 itGetTeamId(Item_GObj* gobj);
 /* 26B7BC */ s32 it_8026B7BC(Item_GObj* gobj);
 /* 26B7CC */ s32 it_8026B7CC(Item_GObj* gobj);
 /* 26B7D8 */ s32 it_8026B7D8(void);
@@ -66,8 +66,8 @@
 /* 26BBCC */ void it_8026BBCC(Item_GObj* gobj, Vec3* pos);
 /* 26BC14 */ void it_8026BC14(Item_GObj* gobj);
 /* 26BC68 */ bool it_8026BC68(Item_GObj* gobj);
-/* 26BC78 */ HSD_GObj* it_8026BC78(Item_GObj* gobj);
-/* 26BC84 */ bool it_8026BC84(Item_GObj* gobj);
+/* 26BC78 */ HSD_GObj* itGetOwner(Item_GObj* gobj);
+/* 26BC84 */ s32 itGetAttackId(Item_GObj* gobj);
 /* 26BC90 */ void it_8026BC90(Item_GObj* gobj, Vec3* pos);
 /* 26BCF4 */ void it_8026BCF4(Item_GObj* gobj);
 /* 26BD0C */ void it_8026BD0C(Item_GObj* gobj);

@@ -1,5 +1,7 @@
 #include "ithinoarashi.h"
 
+#include "inlines.h"
+
 #include "baselib/random.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
@@ -232,12 +234,7 @@ void it_802D6310(Item_GObj* gobj, s32 coll)
                     target_angle;
         f32 angle_factor;
 
-        while (delta > M_PI) {
-            delta -= 2 * M_PI;
-        }
-        while (delta < -M_PI) {
-            delta += 2 * M_PI;
-        }
+        Item_ClampAngleReverse(&delta);
 
         if (delta == 0.0f) {
             angle_factor = 0.0f;
@@ -265,12 +262,7 @@ void it_802D6310(Item_GObj* gobj, s32 coll)
 
         ip->xDD4_itemVar.hinoarashi.x78 -= angle_factor;
 
-        while (ip->xDD4_itemVar.hinoarashi.x78 < -M_PI) {
-            ip->xDD4_itemVar.hinoarashi.x78 += 2 * M_PI;
-        }
-        while (ip->xDD4_itemVar.hinoarashi.x78 > M_PI) {
-            ip->xDD4_itemVar.hinoarashi.x78 -= 2 * M_PI;
-        }
+        Item_ClampAngle(&ip->xDD4_itemVar.hinoarashi.x78);
     }
 }
 

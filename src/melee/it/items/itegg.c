@@ -127,7 +127,7 @@ void it_80288E6C(Item_GObj* gobj)
     PAD_STACK(8);
 
     it_8026B390(gobj);
-    item->x40_vel.x = item->x40_vel.y = item->x40_vel.z = 0.0F;
+    itResetVelocity(item);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
