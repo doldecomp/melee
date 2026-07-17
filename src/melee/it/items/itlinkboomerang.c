@@ -71,6 +71,7 @@ static inline void remove_boomerang(Item_GObj* gobj)
 
 bool it_8029FDBC(Item_GObj* gobj)
 {
+    /// @todo Use #itGetMotionId if it can be made to inline here.
     return (GET_ITEM(gobj)->msid != 0) ? false : true;
 }
 
