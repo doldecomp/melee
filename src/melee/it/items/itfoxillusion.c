@@ -1,5 +1,7 @@
 #include "itfoxillusion.h"
 
+#include "inlines.h"
+
 #include "db/db.h"
 #include "ft/chara/ftFox/ftFx_SpecialS.h"
 #include "ft/ftlib.h"
@@ -74,15 +76,7 @@ Item_GObj* it_8029CEB4(HSD_GObj* parent, Vec3* pos, ItemKind kind, f32 dir)
     Item_GObj* item_gobj;
 
     spawn.kind = kind;
-    spawn.prev_pos = *pos;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
-    spawn.x0_parent_gobj = parent;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = 1;
-    spawn.x40 = 0;
+    Item_InitSpawn(&spawn, parent, pos, dir);
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {
         it_8029CFF0(item_gobj);

@@ -1786,7 +1786,7 @@ FighterKind Player_80036394(s32 slot)
     entity = player->player_entity[player->transformed[0]];
 
     if (entity) {
-        return ftLib_800872A4(entity);
+        return ftLib_GetKind(entity);
     }
     return -1;
 }
