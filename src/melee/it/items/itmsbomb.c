@@ -245,7 +245,8 @@ bool itMsbomb_UnkMotion6_Anim(Item_GObj* gobj)
 
 bool itMSBomb_Logic19_DmgDealt(Item_GObj* gobj)
 {
-    if (itGetMotionId(gobj) == 3) {
+    Item* ip = GET_ITEM(gobj);
+    if (ip->msid == 3) {
         itColl_BounceOffVictim(gobj);
         it_8026B3A8(gobj);
         it_802725D4(gobj);
@@ -295,7 +296,8 @@ bool itMSBomb_Logic19_Reflected(Item_GObj* gobj)
 
 bool itMSBomb_Logic19_HitShield(Item_GObj* gobj)
 {
-    if (itGetMotionId(gobj) == 3) {
+    Item* ip = GET_ITEM(gobj);
+    if (ip->msid == 3) {
         itColl_BounceOffVictim(gobj);
         it_8026B3A8(gobj);
         it_802725D4(gobj);
@@ -305,7 +307,8 @@ bool itMSBomb_Logic19_HitShield(Item_GObj* gobj)
 
 bool itMSBomb_Logic19_ShieldBounced(Item_GObj* gobj)
 {
-    if (itGetMotionId(gobj) == 3) {
+    Item* ip = GET_ITEM(gobj);
+    if (ip->msid == 3) {
         itColl_BounceOffShield(gobj);
     }
     return false;

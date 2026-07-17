@@ -47,12 +47,13 @@ static inline void itNesspkflash_SetScale(HSD_JObj* jobj, Item* ip,
 
 Fighter_GObj* it_802AA7E4(Item_GObj* gobj)
 {
-    return itGetOwner(gobj);
+    return GET_ITEM(gobj)->owner;
 }
 
 bool it_802AA7F0(Item_GObj* gobj)
 {
-    if (itGetMotionId(gobj) == 0x2) {
+    Item* it = GET_ITEM(gobj);
+    if (it->msid == 0x2) {
         return 1;
     }
     return 0;

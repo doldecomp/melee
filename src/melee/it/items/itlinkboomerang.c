@@ -71,7 +71,7 @@ static inline void remove_boomerang(Item_GObj* gobj)
 
 bool it_8029FDBC(Item_GObj* gobj)
 {
-    return (itGetMotionId(gobj) != 0) ? false : true;
+    return (GET_ITEM(gobj)->msid != 0) ? false : true;
 }
 
 void it_8029FDDC(Item_GObj* gobj, int arg1)

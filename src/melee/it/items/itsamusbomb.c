@@ -200,7 +200,8 @@ bool itSamusbomb_UnkMotion2_Coll(Item_GObj* gobj)
 
 bool itSamusBomb_Logic50_DmgDealt(Item_GObj* gobj)
 {
-    if (itGetMotionId(gobj) != 3) {
+    Item* ip = GET_ITEM(gobj);
+    if (ip->msid != 3) {
         it_802B53CC(gobj);
     }
     return false;
@@ -208,7 +209,8 @@ bool itSamusBomb_Logic50_DmgDealt(Item_GObj* gobj)
 
 bool itSamusBomb_Logic50_Clanked(Item_GObj* gobj)
 {
-    if (itGetMotionId(gobj) != 3) {
+    Item* ip = GET_ITEM(gobj);
+    if (ip->msid != 3) {
         it_802B53CC(gobj);
     }
     return false;
@@ -216,7 +218,8 @@ bool itSamusBomb_Logic50_Clanked(Item_GObj* gobj)
 
 bool itSamusBomb_Logic50_HitShield(Item_GObj* gobj)
 {
-    if (itGetMotionId(gobj) != 3) {
+    Item* ip = GET_ITEM(gobj);
+    if (ip->msid != 3) {
         it_802B53CC(gobj);
     }
     return false;

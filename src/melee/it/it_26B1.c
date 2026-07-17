@@ -1,4 +1,3 @@
-#define IT_26B1_SOURCE
 #include "it_26B1.h"
 
 #include "it_2725.h"

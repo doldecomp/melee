@@ -102,7 +102,9 @@ void it_802D0AB0(Item_GObj* gobj, Item_GObj* ref)
 
 bool it_802D0AD0(Item_GObj* gobj)
 {
-    if (itGetMotionId(gobj) == 4) {
+    Item* ip = GET_ITEM(gobj);
+
+    if (ip->msid == 4) {
         it_802D1204(gobj);
     }
     return false;

@@ -46,7 +46,7 @@ typedef struct {
 
 Fighter_GObj* itZeldaDinFire_GetOwner(Item_GObj* gobj)
 {
-    return itGetOwner(gobj);
+    return GET_ITEM(gobj)->owner;
 }
 
 bool it_802C3AFC(Item_GObj* gobj, CollData* cd)

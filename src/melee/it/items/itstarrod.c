@@ -153,7 +153,8 @@ bool itStarrod_UnkMotion3_Coll(Item_GObj* gobj)
 
 bool itStarRod_Logic22_DmgDealt(Item_GObj* gobj)
 {
-    if (itGetMotionId(gobj) == 3 || itGetMotionId(gobj) == 4) {
+    Item* ip = GET_ITEM(gobj);
+    if (ip->msid == 3 || ip->msid == 4) {
         itColl_BounceOffVictim(gobj);
     }
     return false;
@@ -182,7 +183,8 @@ bool itStarrod_UnkMotion5_Coll(Item_GObj* gobj)
 
 bool itStarRod_Logic22_Clanked(Item_GObj* gobj)
 {
-    if (itGetMotionId(gobj) == 3 || itGetMotionId(gobj) == 4) {
+    Item* ip = GET_ITEM(gobj);
+    if (ip->msid == 3 || ip->msid == 4) {
         itColl_BounceOffVictim(gobj);
     }
     return false;
@@ -195,7 +197,8 @@ bool itStarRod_Logic22_Reflected(Item_GObj* gobj)
 
 bool itStarRod_Logic22_HitShield(Item_GObj* gobj)
 {
-    if (itGetMotionId(gobj) == 3 || itGetMotionId(gobj) == 4) {
+    Item* ip = GET_ITEM(gobj);
+    if (ip->msid == 3 || ip->msid == 4) {
         itColl_BounceOffVictim(gobj);
     }
     return false;

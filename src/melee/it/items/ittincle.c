@@ -130,7 +130,7 @@ bool itTincle_Logic13_DmgReceived(Item_GObj* gobj)
 
 bool itTincle_Logic13_DmgDealt(Item_GObj* gobj)
 {
-    if (itGetMotionId(gobj) != 7) {
+    if (GET_ITEM(gobj)->msid != 7) {
         it_802EC1F4(gobj);
     }
     return false;
