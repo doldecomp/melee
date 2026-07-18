@@ -243,9 +243,7 @@ techinical quirks surrounding various integer types.
 - Enum value names should contain their offset when not well understood.
 - Enum value names should be in SCREAMING_SNAKE_CASE
   clearly in doxygen. See the [#enum-types](enum types) docs for more info
-- Enum definitions should be defined in `types.h` for a given module.
-- Typedefs associated with a given enum should be in the sibling `forward.h`
-  file in the same module.
+- Enum definitions should be defined in `forward.h` for a given module.
 - Examples:
     - Good:
     ```c
