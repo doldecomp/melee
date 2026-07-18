@@ -601,6 +601,7 @@ struct Item {
         itLGun_ItemVars lgun;
         itLGunBeam_ItemVars lgunbeam;
         itLGunRay_ItemVars lgunray;
+        itRay_ItemVars ray;
         itLikelike_ItemVars likelike;
         itLinkArrow_ItemVars linkarrow;
         itLinkBomb_ItemVars linkbomb;

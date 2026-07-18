@@ -10,6 +10,7 @@
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftFox/inlines.h"
 #include "it/items/itfoxblaster.h"
 #include "it/items/itfoxlaser.h"
 #include "it/items/itnesspkflash.h"
@@ -636,36 +637,24 @@ void ftKb_FxSpecialAirNEnd_Anim(Fighter_GObj* gobj)
 
 void ftKb_FxSpecialNStart_IASA(Fighter_GObj* gobj)
 {
-    Fighter* ft = GET_FIGHTER(gobj);
-    if ((ft->cmd_vars[0] != 0) && (ft->input.x668 & HSD_PAD_B)) {
-        ft->mv.kb.specialhi.x0 = 1;
-    }
+    ftFox_SpecialN_CheckLoopInput(gobj);
 }
 
 void ftKb_FxSpecialNLoop_IASA(Fighter_GObj* gobj)
 {
-    Fighter* ft = GET_FIGHTER(gobj);
-    if ((ft->cmd_vars[0] != 0) && (ft->input.x668 & HSD_PAD_B)) {
-        ft->mv.kb.specialhi.x0 = 1;
-    }
+    ftFox_SpecialN_CheckLoopInput(gobj);
 }
 
 void ftKb_FxSpecialNEnd_IASA(Fighter_GObj* gobj) {}
 
 void ftKb_FxSpecialAirNStart_IASA(Fighter_GObj* gobj)
 {
-    Fighter* ft = GET_FIGHTER(gobj);
-    if ((ft->cmd_vars[0] != 0) && (ft->input.x668 & HSD_PAD_B)) {
-        ft->mv.kb.specialhi.x0 = 1;
-    }
+    ftFox_SpecialN_CheckLoopInput(gobj);
 }
 
 void ftKb_FxSpecialAirNLoop_IASA(Fighter_GObj* gobj)
 {
-    Fighter* ft = GET_FIGHTER(gobj);
-    if ((ft->cmd_vars[0] != 0) && (ft->input.x668 & HSD_PAD_B)) {
-        ft->mv.kb.specialhi.x0 = 1;
-    }
+    ftFox_SpecialN_CheckLoopInput(gobj);
 }
 
 void ftKb_FxSpecialAirNEnd_IASA(Fighter_GObj* gobj) {}
