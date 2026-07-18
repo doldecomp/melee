@@ -2144,9 +2144,6 @@ static inline bool get_subject_pos(Vec3* pos, s8* slot_ptr)
     return valid;
 }
 
-/// Aim the camera at the subject standing at @p pos_ptr: snap the target
-/// interest/position from it, then ease the live interest and eye positions
-/// toward those targets.
 static inline void track_subject(CameraTransformState* transform,
                                  Vec3* pos_ptr, f32* target_fov, f32* fov_rate)
 {
@@ -2408,16 +2405,6 @@ void Camera_8002CDDC(void* unused)
     update_avg_bounds_width();
 }
 
-static inline void approach_vec3_blk77551(f32 iy, f32 y, f32* dy)
-{
-    (*dy) = y - iy;
-}
-static inline void approach_vec3_blk77515(Vec3* target, Vec3* cur, f32* y,
-                                          f32* iy)
-{
-    (*y) = target->y;
-    (*iy) = cur->y;
-}
 static inline void approach_vec3(Vec3* target, Vec3* cur, f32 smooth)
 {
     f32 y, z;
@@ -2429,15 +2416,16 @@ static inline void approach_vec3(Vec3* target, Vec3* cur, f32 smooth)
     x = target->x;
     ix = cur->x;
     x -= ix;
-    approach_vec3_blk77515(target, cur, &y, &iy);
-    approach_vec3_blk77551(iy, y, &dy);
+    y = target->y;
+    iy = cur->y;
+    dy = y - iy;
     {
-        f32 tmp_p77833 = target->z;
-        z = tmp_p77833;
+        f32 tmp = target->z;
+        z = tmp;
     }
     {
-        f32 tmp_p77906 = cur->z;
-        iz = tmp_p77906;
+        f32 tmp = cur->z;
+        iz = tmp;
     }
     cur->x = x * smooth + ix;
     ix = z - iz;
@@ -2445,123 +2433,79 @@ static inline void approach_vec3(Vec3* target, Vec3* cur, f32 smooth)
     cur->z = ix * smooth + cur->z;
 }
 
-static inline HSD_GObj* Camera_8002D318_pi78538(s8* slot_ptr)
-{
-    return Player_GetEntity(*slot_ptr);
-}
-static inline CmSubject* Camera_8002D318_pi78633(HSD_GObj* gobj)
-{
-    return ftLib_80086B74(gobj);
-}
-static inline Vec3* Camera_8002D318_pi78728(CmSubject* subject)
-{
-    return &subject->x1C;
-}
-static inline void Camera_8002D318_blk78072(s8* slot_ptr, HSD_GObj** gobj)
-{
-    (*gobj) = Player_GetEntity(*slot_ptr);
-}
-static inline void Camera_8002D318_blk78572(s8** slot_ptr)
-{
-    (*slot_ptr) = &cm_80452C68.x2C4;
-}
-static inline float Camera_8002D318_pi81130(f32 distance)
-{
-    return distance * cosf(cm_80452C68.pitch_offset);
-}
-static inline float Camera_8002D318_pi80063(Vec3* pos, f32 half_z) {}
-static inline float Camera_8002D318_pi80300(void)
-{
-    return cm_803BCCA0.x64;
-}
 void Camera_8002D318(void* unused)
 {
-    Vec3 _perm_pad358955;
     Vec3* pos;
     f32 delta;
     CmSubject* subject;
     HSD_GObj* gobj;
-    Vec3 _perm_pad26388;
-    CameraBounds sp44;
-    s8* slot_ptr;
-    CameraBounds sp2C;
-    s32 slot;
-    f32 z_val;
     f32 half_z;
     f32 horiz_dist;
     f32 distance;
 
-    Camera_8002D318_blk78572(&slot_ptr);
-    Camera_8002D318_blk78072(slot_ptr, &gobj);
-    if (gobj != NULL && ftLib_8008701C(gobj) == 0) {
-        subject = ftLib_80086B74(gobj);
-        if (subject != NULL && Camera_8002928C(subject) != 0 &&
-            (u32) Camera_80029124(&subject->x1C, 0) == 0)
+    gobj = Player_GetEntity(cm_80452C68.x2C4);
+    if (gobj != NULL && ftLib_8008701C(gobj) == 0 &&
+        (subject = ftLib_80086B74(gobj)) != NULL && Camera_8002928C(subject) &&
+        (u32) Camera_80029124(&subject->x1C, 0) == 0 &&
+        ABS(subject->x1C.z) < 10.0f)
+    {
+        Camera_80030DF8();
+        if ((gobj = Player_GetEntity(cm_80452C68.x2C4)) != NULL &&
+            (subject = ftLib_80086B74(gobj)) != NULL)
         {
-            z_val = subject->x1C.z;
-            if (z_val < 0.0f) {
-                z_val = -z_val;
-            }
-            if (z_val < 10.0f) {
-                Camera_80030DF8();
-                gobj = Camera_8002D318_pi78538(slot_ptr);
-                if (gobj != NULL) {
-                    subject = Camera_8002D318_pi78633(gobj);
-                    if (subject != NULL) {
-                        pos = Camera_8002D318_pi78728(subject);
-                        half_z = 0.5f * subject->x34.z;
-                        cm_80452C68.transform.target_interest.x = -(
-                            (half_z * cosf(cm_80452C68.yaw_offset)) - pos->x);
-                        cm_80452C68.transform.target_interest.y = pos->y;
-                        cm_80452C68.transform.target_interest.z =
-                            (half_z * sinf(cm_80452C68.yaw_offset)) + pos->z;
-                        approach_vec3(&cm_80452C68.transform.target_interest,
-                                      &cm_80452C68.transform.interest,
-                                      Camera_8002D318_pi80300());
-                    }
-                }
-                cm_80452C68.transform.target_fov = cm_803BCCA0.x6C;
-                delta = cm_80452C68.transform.target_fov -
-                        cm_80452C68.transform.fov;
-                cm_80452C68.transform.fov += delta * cm_803BCCA0.x70;
-                slot = *slot_ptr;
-                if (slot != 0xA && slot != 0xB && slot >= 0 && slot < 6 &&
-                    (gobj = Player_GetEntity(slot)) != NULL &&
-                    (subject = ftLib_80086B74(gobj)) != NULL)
-                {
-                    distance =
-                        (2.0f * subject->x34.z) /
-                        tanf(0.017453292f * cm_80452C68.transform.target_fov);
-                } else {
-                    distance = 1000.0f;
-                }
-                horiz_dist = Camera_8002D318_pi81130(distance);
-                cm_80452C68.transform.target_position.x =
-                    (horiz_dist * sinf(cm_80452C68.yaw_offset)) +
-                    cm_80452C68.transform.target_interest.x;
-                cm_80452C68.transform.target_position.y =
-                    (distance * sinf(cm_80452C68.pitch_offset)) +
-                    cm_80452C68.transform.target_interest.y;
-                cm_80452C68.transform.target_position.z =
-                    (horiz_dist * cosf(cm_80452C68.yaw_offset)) +
-                    cm_80452C68.transform.target_interest.z;
-                approach_vec3(&cm_80452C68.transform.target_position,
-                              &cm_80452C68.transform.position,
-                              cm_803BCCA0.x68);
-                return;
-            }
-            goto block_20;
+            pos = &subject->x1C;
+            half_z = 0.5f * subject->x34.z;
+            cm_80452C68.transform.target_interest.x =
+                -((half_z * cosf(cm_80452C68.yaw_offset)) - pos->x);
+            cm_80452C68.transform.target_interest.y = pos->y;
+            cm_80452C68.transform.target_interest.z =
+                (half_z * sinf(cm_80452C68.yaw_offset)) + pos->z;
+            approach_vec3(&cm_80452C68.transform.target_interest,
+                          &cm_80452C68.transform.interest, cm_803BCCA0.x64);
         }
+
+        cm_80452C68.transform.target_fov = cm_803BCCA0.x6C;
+        delta = cm_80452C68.transform.target_fov - cm_80452C68.transform.fov;
+        cm_80452C68.transform.fov += delta * cm_803BCCA0.x70;
+
+        if (cm_80452C68.x2C4 != 0xA && cm_80452C68.x2C4 != 0xB && cm_80452C68.x2C4 >= 0 && cm_80452C68.x2C4 < 6 &&
+            (gobj = Player_GetEntity(cm_80452C68.x2C4)) != NULL &&
+            (subject = ftLib_80086B74(gobj)) != NULL)
+        {
+            distance = (2.0f * subject->x34.z) /
+                       tanf(0.017453292f * cm_80452C68.transform.target_fov);
+        } else {
+            distance = 1000.0f;
+        }
+
+        horiz_dist = distance * cosf(cm_80452C68.pitch_offset);
+        cm_80452C68.transform.target_position.x =
+            (horiz_dist * sinf(cm_80452C68.yaw_offset)) +
+            cm_80452C68.transform.target_interest.x;
+        cm_80452C68.transform.target_position.y =
+            (distance * sinf(cm_80452C68.pitch_offset)) +
+            cm_80452C68.transform.target_interest.y;
+        cm_80452C68.transform.target_position.z =
+            (horiz_dist * cosf(cm_80452C68.yaw_offset)) +
+            cm_80452C68.transform.target_interest.z;
+        approach_vec3(&cm_80452C68.transform.target_position,
+                      &cm_80452C68.transform.position, cm_803BCCA0.x68);
+        return;
     }
-block_20:
-    Camera_80030DF8();
-    Camera_800293E0();
-    Camera_8002B0E0();
-    update_transform(&sp2C, &cm_80452C68.transform);
-    update_transform(&sp44, &cm_80452C68.transform_copy);
-    update_zoom_distance();
-    update_bounds(&sp2C, &sp44);
-    update_avg_bounds_width();
+
+    {
+        CameraBounds bounds_copy;
+        CameraBounds bounds;
+
+        Camera_80030DF8();
+        Camera_800293E0();
+        Camera_8002B0E0();
+        update_transform(&bounds, &cm_80452C68.transform);
+        update_transform(&bounds_copy, &cm_80452C68.transform_copy);
+        update_zoom_distance();
+        update_bounds(&bounds, &bounds_copy);
+        update_avg_bounds_width();
+    }
 }
 
 static inline void Camera_8002D85C_blk83687(f32* yaw_ptr, Camera* cam,
