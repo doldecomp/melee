@@ -19,7 +19,10 @@ extern UNK_T gmClassic_804D68D0;
 
 typedef struct gmClassicMatchup {
     /* 0x00 */ u16 x00;
-    /* 0x02 */ s8 x02[3];
+    /* 0x02 */ union {
+        s8 x02[3];
+        u8 x02_u8[3];
+    };
     /* 0x05 */ u8 x05;
 } gmClassicMatchup;
 STATIC_ASSERT(sizeof(gmClassicMatchup) == 6);
@@ -427,13 +430,13 @@ loop:
     for (j = 0; j < 3; j++) {
         cur_char = entry->x02[j];
 
-        if (cur_char == 0x21) {
+        if (cur_char == CHKIND_NONE) {
             continue;
         }
         if (gm_80164430(entry->x00) == 0) {
             goto next;
         }
-        if (gm_80164840(cur_char) == 0) {
+        if (gm_IsCKindUnlocked(cur_char) == 0) {
             goto next;
         }
         if (cur_char == target_char) {
@@ -596,7 +599,7 @@ void gmClassic_OnLoad(void)
     gmClassic_InitMatchupOrder(scene_data->matchups.x0CC,
                                gmClassic_80490880.x2C);
 
-    data = gm_8017EB30();
+    data = gm_GetAllStarData();
     gmMainLib_8015CDC8();
     gm_8017C984(data);
 
@@ -621,7 +624,7 @@ void gmClassic_OnLoad(void)
     data->x6C = gm_8017EC00;
     data->x70 = gm_8017EC50;
 
-    gm_SetScene(0x70U);
+    gm_SetSceneIndex(0x70U);
     gm_80172174();
     Ground_801C5A28();
 }
@@ -649,11 +652,10 @@ void gmClassic_801B3500(GameScene* arg0)
     int count;
     u64 audio;
     s8 ckind;
-    PreloadCacheSceneEntry* ep;
 
-    sd = gm_801A427C(arg0);
+    sd = gm_GetGameSceneLoadDataCallback(arg0);
     entry = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->idx)];
-    ad = gm_8017EB30();
+    ad = gm_GetAllStarData();
     enemy_count = 0;
     ad->x0.x7 = arg0->idx;
     sd->x0A = entry->x0 + 1;
@@ -717,7 +719,7 @@ void gmClassic_801B3500(GameScene* arg0)
     sd->x13[0] = ad->x0.color;
 
     gm_8017DB88(ad->x0.xC.x24, entry->x1, ad->x0.cpu_level,
-                (u8) gm_8017BE84(arg0->idx), sd->x10, sd->x0D[0],
+                (u8) gm_8017BE84(arg0->idx), entry->xC->x02_u8, sd->x0D[0],
                 (u8 (*)(s32, s32, u8))(Event) ad->x58,
                 (u8 (*)(s32, s32, u8))(Event) ad->x5C,
                 (u8 (*)(s32, s32, u8))(Event) ad->x60,
@@ -734,83 +736,35 @@ void gmClassic_801B3500(GameScene* arg0)
     sd->x0B = ally_count;
     sd->x09 = ad->x0.x4;
 
-    gc = &lbDvd_8001822C()->game_cache;
+    gc = &lbDvd_GetPreloadCacheScene()->game_cache;
     lbDvd_80018C6C();
-    gc->entries[0].char_id = sd->x0D[0];
-    gc->entries[0].color = ad->x0.color;
-    count = 1;
+    count = 0;
+    gc->entries[count].char_id = sd->x0D[0];
+    gc->entries[count].color = ad->x0.color;
+    count++;
     lbDvd_80018254();
     lbDvd_80018C2C(0xC7);
     lbDvd_80017700(4);
 
-    {
-        s8 echar;
-
-        ep = &gc->entries[count];
-
-        echar = entry->xC->x02[0];
+    for (i = 0; i < 3; i++) {
+        s8 echar = entry->xC->x02[i];
         if (echar != 0x21) {
-            ep->char_id = echar;
+            gc->entries[count].char_id = echar;
             if (entry->x1 & 8) {
-                ep->color = 0xFF;
+                gc->entries[count].color = 0xFF;
             } else {
-                ep->color = sd->x16[0];
-            }
-            count++;
-            ep++;
-        }
-
-        echar = entry->xC->x02[1];
-        if (echar != 0x21) {
-            ep->char_id = echar;
-            if (entry->x1 & 8) {
-                ep->color = 0xFF;
-            } else {
-                ep->color = sd->x16[1];
-            }
-            count++;
-            ep++;
-        }
-
-        echar = entry->xC->x02[2];
-        if (echar != 0x21) {
-            ep->char_id = echar;
-            if (entry->x1 & 8) {
-                ep->color = 0xFF;
-            } else {
-                ep->color = sd->x16[2];
+                gc->entries[count].color = sd->x16[i];
             }
             count++;
         }
     }
 
-    {
-        s8 achar;
-        Unk1PData_x24* ap;
-
-        ep = &gc->entries[count];
-        ap = ad->x0.xC.x24;
-
-        achar = ap->ckind;
+    for (i = 0; i < 3; i++) {
+        s8 achar = ad->x0.xC.x24[i].ckind;
         if (achar != 0x21) {
-            ep->char_id = achar;
-            ep->color = ap->x1;
-            ep++;
-        }
-        ap++;
-
-        achar = ap->ckind;
-        if (achar != 0x21) {
-            ep->char_id = achar;
-            ep->color = ap->x1;
-            ep++;
-        }
-        ap++;
-
-        achar = ap->ckind;
-        if (achar != 0x21) {
-            ep->char_id = achar;
-            ep->color = ap->x1;
+            gc->entries[count].char_id = achar;
+            gc->entries[count].color = ad->x0.xC.x24[i].x1;
+            count++;
         }
     }
 
@@ -875,9 +829,9 @@ void gmClassic_801B3A34(GameScene* arg0)
 
     PAD_STACK(8);
 
-    temp_r30 = gm_801A427C(arg0);
+    temp_r30 = gm_GetGameSceneLoadDataCallback(arg0);
     temp_r31 = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->idx)];
-    temp_r29 = gm_8017EB30();
+    temp_r29 = gm_GetAllStarData();
     new_var = temp_r30;
     var_r27 = temp_r31->xC->x00;
     if (temp_r31->x1 == 0x80 && temp_r31->x2 == 1) {
@@ -916,8 +870,8 @@ void gmClassic_801B3B40(GameScene* arg0)
     s32 mask;
     PAD_STACK(4);
 
-    mei = (MatchExitInfo*) gm_801A4284(arg0);
-    asd = gm_8017EB30();
+    mei = (MatchExitInfo*) gm_GetGameSceneLeaveDataCallback(arg0);
+    asd = gm_GetAllStarData();
     entry = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->idx)];
     exit_result = mei->x8;
     id = arg0->idx;
@@ -933,7 +887,7 @@ void gmClassic_801B3B40(GameScene* arg0)
     }
 
     if (entry->x1 == 0x80 && entry->x2 == 1) {
-        char_id = gm_80164024((u8) asd->x0.ckind);
+        char_id = gm_CKindToSelKind((u8) asd->x0.ckind);
         time_ptr = gmMainLib_8015D438(char_id);
         best_ptr = gmMainLib_8015D450(char_id);
         Ground_801C1DE4(&sp18, &sp14);
@@ -976,35 +930,37 @@ void gmClassic_801B3B40(GameScene* arg0)
 
 void gmClassic_801B3D44(GameScene* scene)
 {
-    struct DebugGameOverData* temp_r31 = gm_801A427C(scene);
-    gm_8017C9A8(temp_r31, &gm_8017EB30()->x0, 1);
+    struct DebugGameOverData* temp_r31 =
+        gm_GetGameSceneLoadDataCallback(scene);
+    gm_8017C9A8(temp_r31, &gm_GetAllStarData()->x0, 1);
 }
 
 void gmClassic_801B3D84(GameScene* scene)
 {
-    DebugGameOverData* temp_r30 = gm_801A4284(scene);
-    gm_8017CA38(temp_r30, &gm_8017EB30()->x0, gmMainLib_8015CDC8(), 1);
+    DebugGameOverData* temp_r30 = gm_GetGameSceneLeaveDataCallback(scene);
+    gm_8017CA38(temp_r30, &gm_GetAllStarData()->x0, gmMainLib_8015CDC8(), 1);
 }
 
 void gmClassic_801B3DD8(GameScene* scene)
 {
-    CSSData* css = gm_801A427C(scene);
+    CSSData* css = gm_GetGameSceneLoadDataCallback(scene);
     struct gmm_x0_528_t* temp_r31 = gmMainLib_8015CDC8();
     gm_801B06B0(css, 0xB, temp_r31->c_kind, temp_r31->stocks, temp_r31->color,
-                temp_r31->x4, temp_r31->cpu_level, gm_8017EB30()->x0.slot);
+                temp_r31->x4, temp_r31->cpu_level,
+                gm_GetAllStarData()->x0.slot);
     lbDvd_800174BC();
 }
 
 void gmClassic_801B3E44(GameScene* scene)
 {
-    CSSData* temp_r30 = gm_801A4284(scene);
+    CSSData* temp_r30 = gm_GetGameSceneLeaveDataCallback(scene);
     gmm_x0_528_t* temp_r29 = gmMainLib_8015CDC8();
-    UnkAllstarData* temp_r31 = gm_8017EB30();
+    UnkAllstarData* temp_r31 = gm_GetAllStarData();
     gm_803DDEC8Struct* r4 = gmClassic_803DDEC8.x00;
     if (temp_r30->pending_scene_change == 2) {
         // This only happens when, instead of pressing start to begin the game,
         // we press back to exit.
-        gm_801A42F8(1);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
     gm_801B0730(temp_r30, &temp_r29->c_kind, &temp_r29->stocks,
@@ -1015,12 +971,12 @@ void gmClassic_801B3E44(GameScene* scene)
     temp_r31->x0.stocks = temp_r29->stocks;
     temp_r31->x0.x4 = temp_r29->x4;
     gmClassic_801B2D54(r4);
-    gm_SetPendingScene(temp_r29->x5 << 3);
+    gm_SetPendingSceneIndex(temp_r29->x5 << 3);
     gm_80168F88();
 }
 
 void gmClassic_801B3F18(GameScene* scene)
 {
-    gm_801A42E8(GM_MENU);
-    gm_801A42D4();
+    gm_SetPendingGameMode(GM_MENU);
+    gm_SetNewGameModePending();
 }

@@ -1,5 +1,7 @@
 #include "itfreezer.h"
 
+#include "inlines.h"
+
 #include <placeholder.h>
 #include <platform.h>
 
@@ -78,8 +80,7 @@ void itFreezer_802CD12C(HSD_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
-    item->entered_hitlag = efLib_PauseAll;
-    item->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(item);
     item->on_accessory = itFreezer_802CD290;
     item->xDB0_itcmd_var1 = 0;
 }
@@ -88,8 +89,7 @@ static void itFreezer_UnkMotion2_Anim_Inline(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
-    item->entered_hitlag = efLib_PauseAll;
-    item->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(item);
     item->on_accessory = itFreezer_802CD290;
     item->xDB0_itcmd_var1 = 0;
 }
@@ -144,12 +144,7 @@ void itFreezer_802CD290(Item_GObj* gobj)
 
 void itFreezer_802CD2EC(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    it_802762BC(ip);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
-    it_80273670(gobj, 0, 0.0f);
+    Item_EnterAirStateWithHitlagAndStateDesc(gobj);
 }
 
 bool itFreezer_UnkMotion0_Anim(Item_GObj* gobj)
@@ -164,8 +159,7 @@ static void itFreezer_UnkMotion0_Phys_inline2(Item_GObj* gobj)
 
     item->xDD4_itemVar.freezer.x60 = -1;
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-    item->entered_hitlag = efLib_PauseAll;
-    item->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(item);
     item->on_accessory = itFreezer_802CD090;
 }
 

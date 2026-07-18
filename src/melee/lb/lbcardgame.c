@@ -239,9 +239,9 @@ u8 lb_8001CE78(void)
 {
     lb_8001CAF4();
     if (lb_80433318.x8 != 0 && lb_80433318.x8 != 4) {
-        return 0x29;
+        return GM_MEMCARD;
     }
-    return 0x2D;
+    return GM_COUNT;
 }
 
 void fn_8001CEC0(HSD_GObj* gobj)
@@ -322,7 +322,7 @@ void lb_8001D21C(void)
     lb_80433318.xC = 0;
     lb_80433318.x10 = 0;
     lb_80433318.x14 = 0;
-    lb_803BAB74.x14 = gmMainLib_8015CC40();
+    lb_803BAB74.x14 = gmMainLib_GetSaveData();
 
     for (i = 0; i < 7; i++) {
         struct unk* tmp = gmMainLib_8015CC4C();

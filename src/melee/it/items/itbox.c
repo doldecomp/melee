@@ -210,7 +210,7 @@ void fn_80286480(Item_GObj* gobj)
     Item* it = GET_ITEM(gobj);
     PAD_STACK(12);
     it_8026B390(gobj);
-    it->x40_vel.x = it->x40_vel.y = it->x40_vel.z = 0.0F;
+    itResetVelocity(it);
     Item_80268E5C(gobj, 0, 2);
 }
 
@@ -305,9 +305,7 @@ void itBox_Logic1_Thrown(Item_GObj* gobj)
 
 void itBox_UnkMotion4_Phys(Item_GObj* gobj)
 {
-    ItemAttr* attr = ((Item*) gobj->user_data)->xCC_item_attr;
-    it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
-    it_80274658(gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
 }
 
 /// Inline helper: spawn break effect and roll for item spawn.
@@ -368,9 +366,7 @@ bool itBox_UnkMotion4_Coll(Item_GObj* gobj)
             it_802762B0(ip);
             ip = GET_ITEM(gobj);
             it_8026B390(gobj);
-            ip->x40_vel.z = 0.0F;
-            ip->x40_vel.y = 0.0F;
-            ip->x40_vel.x = 0.0F;
+            itResetVelocity(ip);
             Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
         }
     }
@@ -536,9 +532,7 @@ void itBox_Logic1_EnteredAir(Item_GObj* gobj)
     if (it_802863BC(gobj) != 0) {
         ip = GET_ITEM(gobj);
         it_8026B390(gobj);
-        ip->x40_vel.z = 0.0F;
-        ip->x40_vel.y = 0.0F;
-        ip->x40_vel.x = 0.0F;
+        itResetVelocity(ip);
         Item_80268E5C(gobj, 0, 2);
     } else {
         Item_80268E5C(gobj, 5, 2);

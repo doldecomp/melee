@@ -54,7 +54,7 @@
 /* 1C1D98 */ u32 Ground_801C1D98(void);
 /* 1C1DAC */ u32 Ground_801C1DAC(void);
 /* 1C1DC0 */ u32 Ground_801C1DC0(void);
-/* 1C1DD4 */ s16 Ground_801C1DD4(void);
+/* 1C1DD4 */ int Ground_801C1DD4(void);
 /* 1C1DE4 */ void Ground_801C1DE4(s32*, s32*);
 /* 1C1E00 */ void Ground_801C1E00(s32);
 /* 1C1E18 */ s32 Ground_801C1E18(void);
@@ -144,7 +144,7 @@
 /* 1C5794 */ s32 Ground_801C5794(void);
 /* 1C57A4 */ HSD_GObj* Ground_801C57A4(void);
 /* 1C57C8 */ HSD_GObj* Ground_801C57C8(void);
-/* 1C57F0 */ f32 Ground_801C57F0(void);
+/* 1C57F0 */ f32 Ground_801C57F0(int);
 /* 1C5800 */ void Ground_EnableMatchCamera(void);
 /* 1C5840 */ s32 Ground_801C5840(void);
 /* 1C58E0 */ Item_GObj* Ground_801C58E0(s32, s32);

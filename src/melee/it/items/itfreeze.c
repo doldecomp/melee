@@ -344,9 +344,7 @@ void it_8028F434(Item_GObj* gobj, f32 vel, Item_GObj* ref_gobj)
 {
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(8);
-    ip->x40_vel.z = 0.0f;
-    ip->x40_vel.y = 0.0f;
-    ip->x40_vel.x = 0.0f;
+    itResetVelocity(ip);
     if (vel < 0.0f) {
         vel = -vel;
     }
@@ -456,9 +454,7 @@ void it_8028F7C8(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(8);
-    ip->x40_vel.z = 0.0f;
-    ip->x40_vel.y = 0.0f;
-    ip->x40_vel.x = 0.0f;
+    itResetVelocity(ip);
     it_8026B390(gobj);
     ip->xDD4_itemVar.freeze.x18 = 90;
     Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);

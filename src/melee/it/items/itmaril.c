@@ -133,11 +133,7 @@ void itMaril_Logic28_Spawned(Item_GObj* gobj)
 
 void it_802D68FC(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    it_802762BC(ip);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_EnterStateWithEffectHitlag(gobj, 0);
     it_80273670(gobj, 0, 0.0f);
     it_8026BDB4(gobj);
 }
@@ -180,8 +176,7 @@ void it_802D69E4(Item_GObj* gobj)
     it_802762BC(ip);
     it_802D6A54(gobj);
     ip->xDAC_itcmd_var0 = 0;
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
     ip->xDD4_itemVar.maril.x68 = 8.0f;
 }
 
@@ -224,7 +219,7 @@ void itMaril_UnkMotion1_Phys(Item_GObj* gobj)
 bool itMaril_UnkMotion1_Coll(Item_GObj* gobj)
 {
     s32 coll;
-    PAD_STACK(16);
+    PAD_STACK(8);
     coll = it_8026DB40(gobj);
     if (it_80272C6C(gobj) == false) {
         if (coll & 1) {

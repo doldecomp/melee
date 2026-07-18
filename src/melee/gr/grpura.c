@@ -261,8 +261,8 @@ void grPura_802120E0(Ground_GObj* arg0)
         spilC = grPu_803E6AA0[gp->gv.pura.xC6];
         sp18 = grPu_803E6AA0[gp->gv.pura.xC4];
         cur = gp->gv.pura.xC8;
-        gp->gv.pura.xC8 = cur + 1;
         t = (f32) cur / 3600.0f;
+        gp->gv.pura.xC8 = cur + 1;
         sp18.r =
             (s8) (t * (f32) ((u8) spilC.r - (u8) sp18.r) + (f32) (u8) sp18.r);
         sp18.g =
@@ -398,31 +398,21 @@ void grPura_80212CD4(HSD_GObj* arg0)
 {
     Ground* gp = arg0->user_data;
     Ground* gp2 = gp;
-    HSD_JObj* jobj = arg0->hsd_obj;
-    u32 i;
+    HSD_JObj* jobj = HSD_GObjGetHSDObj(arg0);
+    s32 i;
     HSD_JObj* node;
     Vec3 subject_pos;
 
-    for (i = 0; i < 25; i++) {
+    for (i = 0; 25 > i; i++) {
         gp->gv.pura3.xC4[i] = NULL;
         gp->gv.pura3.x128[i] = NULL;
     }
+    node = HSD_JObjGetChild(jobj);
 
-    if (jobj == NULL) {
-        node = NULL;
-    } else {
-        node = jobj->child;
-    }
     if (node != NULL) {
-        if (node == NULL) {
-            node = NULL;
-        } else {
-            node = node->child;
-        }
-        for (i = 0; i < 25; i++) {
-            if (node == NULL) {
-                return;
-            }
+        node = HSD_JObjGetChild(node);
+        for (i = 0; i < 25 && node != NULL; i++, node = HSD_JObjGetNext(node))
+        {
             if ((gp->gv.pura3.x128[i] = Camera_80029020()) != NULL) {
                 gp->gv.pura3.xC4[i] = node;
                 lb_8000B1CC(gp2->gv.pura3.xC4[i], NULL, &subject_pos);
@@ -441,11 +431,6 @@ void grPura_80212CD4(HSD_GObj* arg0)
                     subject->x2C = subject->x40;
                     subject->x34 = subject->x48;
                 }
-            }
-            if (node == NULL) {
-                node = NULL;
-            } else {
-                node = node->next;
             }
         }
     }

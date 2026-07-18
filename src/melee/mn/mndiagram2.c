@@ -6,6 +6,8 @@
 
 #include "baselib/forward.h"
 
+#include "mn/types.h"
+
 #include <stdbool.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -55,7 +57,7 @@ static inline u8 mnDiagram_GetEntityByIndex(u8 is_name_mode, u8 idx)
 /* Union for 64-bit sorting operations */
 typedef union {
     struct {
-        u8 name;
+        u8 idx; ///< SelectableCharacterKind or a nametag slot id
         char pad1[7];
         s32 x8;
         s32 xC;
@@ -182,14 +184,14 @@ void mnDiagram2_UpdateHeader(HSD_GObj* gobj, u8 is_name_mode, u8 entity_idx)
     HSD_Text* text;
     void* tmp;
     HSD_JObj* jobj;
-    u8 name;
+    u8 nametag_slot_or_selkind;
     PAD_STACK(8);
 
     data = gobj->user_data;
     if (is_name_mode != 0) {
-        name = mnDiagram_GetNameByIndex(entity_idx);
+        nametag_slot_or_selkind = mnDiagram_GetNameByIndex(entity_idx);
     } else {
-        name = mnDiagram_GetFighterByIndex(entity_idx);
+        nametag_slot_or_selkind = mnDiagram_GetFighterByIndex(entity_idx);
     }
 
     if (is_name_mode == 0) {
@@ -203,7 +205,8 @@ void mnDiagram2_UpdateHeader(HSD_GObj* gobj, u8 is_name_mode, u8 entity_idx)
         if (jobj != NULL) {
             HSD_JObjRemoveAll(jobj);
         }
-        HSD_JObjAddChild(data->x18, mnDiagram_CreateFighterIcon((u8) name, 0));
+        HSD_JObjAddChild(data->x18, mnDiagram_CreateFighterIcon(
+                                        (u8) nametag_slot_or_selkind, 0));
     }
 
     if (data->header_text != NULL) {
@@ -235,9 +238,10 @@ void mnDiagram2_UpdateHeader(HSD_GObj* gobj, u8 is_name_mode, u8 entity_idx)
     text->default_alignment = 1;
 
     if (is_name_mode != 0) {
-        HSD_SisLib_803A6B98(text, 0.0f, 0.0f, GetNameText(name));
+        HSD_SisLib_803A6B98(text, 0.0f, 0.0f,
+                            GetNameText(nametag_slot_or_selkind));
     } else {
-        gm_80160B40(text, gm_8016400C(name), 0);
+        gm_80160B40(text, gm_SelKindToCKind(nametag_slot_or_selkind), 0);
     }
 }
 
@@ -294,10 +298,10 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
         mn_804A04F0.entering_menu = 0;
         data2 = (d2 = mnDiagram2_804D6C18)->user_data;
         x46 = data2->selected_fighter_idx;
-        gmMainLib_8015CC34()->x12 = x46;
+        gmMainLib_GetGameRules()->x12 = x46;
         x47 = data2->selected_name_idx;
-        gmMainLib_8015CC34()->x13 = x47;
-        gmMainLib_8015CC34()->xD = (x48 = data2->is_name_mode);
+        gmMainLib_GetGameRules()->x13 = x47;
+        gmMainLib_GetGameRules()->xD = (x48 = data2->is_name_mode);
         mn_80229894(0x1C, 0, 3);
         mnDiagram2_ClearStatRows(mnDiagram2_804D6C18);
         return;
@@ -307,11 +311,11 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
         lbAudioAx_80024030(1);
         data2 = mnDiagram2_804D6C18->user_data;
         x46 = data2->selected_fighter_idx;
-        gmMainLib_8015CC34()->x12 = x46;
+        gmMainLib_GetGameRules()->x12 = x46;
         x47 = data2->selected_name_idx;
-        gmMainLib_8015CC34()->x13 = x47;
+        gmMainLib_GetGameRules()->x13 = x47;
         x48 = data2->is_name_mode;
-        gmMainLib_8015CC34()->xD = x48;
+        gmMainLib_GetGameRules()->xD = x48;
         mnDiagram2_ClearStatRows(mnDiagram2_804D6C18);
         HSD_GObjPLink_80390228(gobj);
         if (result & 0x40) {
@@ -614,8 +618,7 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
     Vec3 sp20;
     Diagram2* data;
     HSD_JObj* jobj;
-    char* base;
-    u16* table;
+    MnDiagram2RowLayout* base;
     HSD_Text* text;
     f32 f31;
     f32 f30;
@@ -623,7 +626,7 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
     Diagram2* user_data = gobj->user_data;
 
     data = user_data;
-    base = (char*) &mnDiagram2_803EEAD0;
+    base = &mnDiagram2_803EEAD0;
 
     jobj = data->row0_ref;
     HSD_ASSERT(0x3EE, jobj);
@@ -633,10 +636,10 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
     HSD_ASSERT(0x3EE, jobj);
     f30 = jobj->translate.y - f31;
 
-    lb_8000B1CC(data->row0_ref, (Vec3*) (base + 0xC), &sp20);
+    lb_8000B1CC(data->row0_ref, &base->label_pos, &sp20);
 
     {
-        u32 r22 = (u8) row_idx;
+        u32 r22 = row_idx;
         f32 ny = -sp20.y;
         f32 temp_f31 = -f30 * (f32) r22;
         text = HSD_SisLib_803A5ACC(0, 1, sp20.x, ny + temp_f31, sp20.z,
@@ -645,17 +648,15 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
         {
             data->row_labels[row_idx] = text;
 
-            table = (u16*) (base + ((stat_type << 1) & 0x1FE));
             {
-                HSD_SisLib_803A6368(text, table[0x18]);
+                HSD_SisLib_803A6368(text, base->label_ids[stat_type]);
 
                 {
-                    int r21 = table[0x30];
+                    int r21 = base->unit_glyph_ids[stat_type];
                     if (r21 != 0xFFFF) {
                         HSD_Text* text2;
                         int var_r3;
-                        lb_8000B1CC(data->row0_ref, (Vec3*) (base + 0xC),
-                                    &sp20);
+                        lb_8000B1CC(data->row0_ref, &base->label_pos, &sp20);
                         {
                             f32 py2 = -sp20.y + temp_f31;
                             text2 = HSD_SisLib_803A5ACC(
@@ -685,17 +686,18 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                 {
                     int var_r0 = mnDiagram2_IsIconOnlyStat(stat_type);
 
-                    if (var_r0 != 0 && (u32) mnDiagram2_GetStatValue(
-                                           mode, stat_type, entity_idx) < 0x19)
+                    if (var_r0 != 0 &&
+                        (u32) mnDiagram2_GetStatValue(
+                            mode, stat_type, entity_idx) < SELKIND_COUNT)
                     {
                         HSD_JObj* jobj = mnDiagram_CreateFighterIcon(
                             mnDiagram2_GetStatValue(mode, stat_type,
                                                     entity_idx),
                             0);
-                        HSD_JObjSetTranslateX(jobj, ((f32*) base)[9]);
+                        HSD_JObjSetTranslateX(jobj, base->icon_pos.x);
                         HSD_JObjSetTranslateY(jobj, (f30 * (f32) row_idx) +
-                                                        ((f32*) base)[10]);
-                        HSD_JObjSetTranslateZ(jobj, ((f32*) base)[11]);
+                                                        base->icon_pos.y);
+                        HSD_JObjSetTranslateZ(jobj, base->icon_pos.z);
 
                         HSD_JObjAddChild(data->icon_parent, jobj);
                         return;
@@ -707,8 +709,7 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                     data->row_values[row_idx] = text3;
                     text3->font_size.x = mnDiagram2_804DBFE0;
                     text3->font_size.y = mnDiagram2_804DBFE4;
-                    lb_8000B1CC(data->icon_parent, (Vec3*) (base + 0x18),
-                                &sp20);
+                    lb_8000B1CC(data->icon_parent, &base->value_pos, &sp20);
                     {
                         f32 py = -sp20.y + temp_f31;
                         text3->pos_x = sp20.x;
@@ -977,7 +978,7 @@ void mnDiagram2_InitUserData(void* arg, int unused)
     data->scroll_offset = 0;
     data->selected_fighter_idx = 0;
     data->selected_name_idx = 0;
-    data->is_name_mode = gmMainLib_8015CC34()->xD;
+    data->is_name_mode = gmMainLib_GetGameRules()->xD;
 
     for (i = 0; i < 10; i++) {
         data->row_labels[i] = NULL;
@@ -1094,30 +1095,30 @@ void mnDiagram2_Init(void)
 /// @brief Returns the fighter at rank N for a given stat type.
 /// @param stat_type The stat type to rank by
 /// @param rank The rank to retrieve (0 = highest, 1 = second highest, etc.)
-/// @return Fighter ID at the given rank, or 25 if no data
+/// @return Fighter ID at the given rank, or SELKIND_COUNT if no data
 u8 mnDiagram2_GetRankedFighter(u8 stat_type, u8 rank)
 {
     mnDiagram2_SortEntry* base;
     int j;
     mnDiagram2_SortEntry* ptr;
-    mnDiagram2_SortEntry entries[25];
+    mnDiagram2_SortEntry entries[SELKIND_COUNT];
     mnDiagram2_SortEntry temp;
     int i;
     int k;
     int maxIdx;
     int neg1;
-    int name;
+    SelectableCharacterKind selkind;
 
     ptr = entries;
     base = ptr;
     i = 0;
     neg1 = -1;
 
-    for (i = 0; i < 25; i++) {
-        name = (u8) mnDiagram_GetFighterByIndex(i);
-        ptr->name = name;
-        if (mn_IsFighterUnlocked(name) != 0) {
-            ptr->xC = mnDiagram2_GetStatValue(0, stat_type, name);
+    for (i = 0; i < SELKIND_COUNT; i++) {
+        selkind = (u8) mnDiagram_GetFighterByIndex(i);
+        ptr->idx = selkind;
+        if (mn_IsFighterUnlocked(selkind) != 0) {
+            ptr->xC = mnDiagram2_GetStatValue(0, stat_type, selkind);
             ptr->x8 = 0;
         } else {
             ptr->xC = neg1;
@@ -1127,10 +1128,10 @@ u8 mnDiagram2_GetRankedFighter(u8 stat_type, u8 rank)
     }
 
     // Selection sort with insertion shift
-    for (i = 0; i < 25; i++) {
+    for (i = 0; i < SELKIND_COUNT; i++) {
         k = i + 1;
         maxIdx = i;
-        while (k < 25) {
+        while (k < SELKIND_COUNT) {
             // Skip entries with -1 value
             if (entries[k].value != (u64) neg1) {
                 // Update if entries[k] > entries[maxIdx] OR entries[i] == -1
@@ -1157,9 +1158,9 @@ u8 mnDiagram2_GetRankedFighter(u8 stat_type, u8 rank)
 
     // Return
     if (entries[rank].value == (u64) -1) {
-        return 25;
+        return SELKIND_COUNT;
     }
-    return entries[rank].name;
+    return entries[rank].idx;
 }
 
 /// @brief Returns the name entry at rank N for a given stat type.
@@ -1188,7 +1189,7 @@ u8 mnDiagram2_GetRankedName(u8 stat_type, u8 rank)
     i = 0;
     zero = 0;
     while (i < count) {
-        ptr->name = mnDiagram_GetNameByIndex(i);
+        ptr->idx = mnDiagram_GetNameByIndex(i);
         ptr->xC =
             mnDiagram2_GetStatValue(1, stat_type, mnDiagram_GetNameByIndex(i));
         i++;
@@ -1221,7 +1222,7 @@ u8 mnDiagram2_GetRankedName(u8 stat_type, u8 rank)
         i++;
     }
 
-    return entries[rank].name;
+    return entries[rank].idx;
 }
 
 /// @brief Computes aggregated fighter ranking across all saved names for icon
@@ -1231,7 +1232,7 @@ u8 mnDiagram2_GetRankedName(u8 stat_type, u8 rank)
 /// @param idx Rank index to retrieve
 void mnDiagram2_GetAggregatedFighterRank(u8* out, u8 type, u8 idx)
 {
-    mnDiagram2_SortEntry entries[25];
+    mnDiagram2_SortEntry entries[SELKIND_COUNT];
     mnDiagram2_SortEntry temp;
     mnDiagram2_SortEntry* base;
     mnDiagram2_SortEntry* curr;
@@ -1251,12 +1252,12 @@ void mnDiagram2_GetAggregatedFighterRank(u8* out, u8 type, u8 idx)
     zero = 0;
 
     do {
-        ptr->name = mnDiagram_GetFighterByIndex(n);
+        ptr->idx = mnDiagram_GetFighterByIndex(n);
         n++;
         ptr->xC = zero;
         ptr->x8 = zero;
         ptr++;
-    } while (n < 25);
+    } while (n < SELKIND_COUNT);
 
     count = GetNameCount();
 
@@ -1275,12 +1276,12 @@ void mnDiagram2_GetAggregatedFighterRank(u8* out, u8 type, u8 idx)
             break;
         }
 
-        if (res != 25) {
+        if (res != SELKIND_COUNT) {
             ptr = base;
             k = 0;
-            for (m = 25; m > 0; m--) {
-                if (res == ptr->name) {
-                    ((s32) type, entries)[k].value += 1;
+            for (m = SELKIND_COUNT; m > 0; m--) {
+                if (res == ptr->idx) {
+                    entries[k].value += 1;
                     break;
                 }
                 ptr++;
@@ -1290,10 +1291,10 @@ void mnDiagram2_GetAggregatedFighterRank(u8* out, u8 type, u8 idx)
     }
 
     // Bubble sort
-    for (j = 0; j < 25; j++) {
+    for (j = 0; j < SELKIND_COUNT; j++) {
         k = j + 1;
         curr = &entries[k];
-        while (k < 25) {
+        while (k < SELKIND_COUNT) {
             if (base->value < curr->value) {
                 temp = *base;
                 *base = *curr;
@@ -1309,7 +1310,7 @@ void mnDiagram2_GetAggregatedFighterRank(u8* out, u8 type, u8 idx)
     if (entries[idx].value != 0) {
         *(mnDiagram2_SortEntry*) out = entries[idx];
     } else {
-        entries[idx].name = 25;
+        entries[idx].idx = SELKIND_COUNT;
         *(mnDiagram2_SortEntry*) out = entries[idx];
     }
 }

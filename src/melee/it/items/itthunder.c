@@ -1,5 +1,7 @@
 #include "itthunder.h"
 
+#include "inlines.h"
+
 #include <placeholder.h>
 #include <platform.h>
 
@@ -94,8 +96,7 @@ void it_802CCC68(HSD_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
-    item->entered_hitlag = efLib_PauseAll;
-    item->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(item);
     item->xDD4_itemVar.thunder.x68 = 0.0f;
     item->xDB0_itcmd_var1 = 0;
 }
@@ -149,12 +150,7 @@ bool itThunder_UnkMotion2_Coll(Item_GObj* gobj)
 
 void it_802CCE28(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    it_802762BC(ip);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
-    it_80273670(gobj, 0, 0.0f);
+    Item_EnterAirStateWithHitlagAndStateDesc(gobj);
 }
 
 bool itThunder_UnkMotion0_Anim(Item_GObj* gobj)

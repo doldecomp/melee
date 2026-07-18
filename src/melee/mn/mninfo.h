@@ -18,6 +18,8 @@ typedef struct MnInfoData {
     /* +28 */ HSD_Text* description;
 } MnInfoData;
 
+#define GET_MNINFO(gobj) ((MnInfoData*) HSD_GObjGetUserData(gobj))
+
 /// was using this to try and fix some matches, unsuccessfully
 #ifdef M2C
 typedef struct MenuInfo_GObj MenuInfo_GObj;
@@ -50,7 +52,7 @@ extern u8 mnInfo_804A0968[0x48];
 
 /* 251A08 */ s32 mnInfo_80251A08(s32);
 /* 251AA4 */ s32 mnInfo_80251AA4(void);
-/* 251AFC */ s32 mnInfo_80251AFC(void);
+/* 251AFC */ void mnInfo_80251AFC(void);
 /* 251D58 */ s32 mnInfo_80251D58(MenuInfo_GObj*, s32, u32, u32);
 /* 251F04 */ void mnInfo_80251F04(MenuInfo_GObj*, s32, u32);
 /* 251FE4 */ void fn_80251FE4(void);

@@ -39,6 +39,21 @@
 #include <MSL/math_ppc.h>
 #include <MSL/trigf.h>
 
+static void sdata2_order(void)
+{
+    (void) 0.4f;         // 3e cc cc cd
+    (void) 0.0f;         // 00 00 00 00
+    (void) 1.0471976f;   // 3f 86 0a 92
+    (void) -10000.0f;    // c6 1c 40 00
+    (void) 10000.0f;     // 46 1c 40 00
+    (void) 0.017453292f; // 3c 8e fa 35
+    (void) 10.0f;        // 41 20 00 00
+    (void) -1.0f;        // bf 80 00 00
+    (void) -350.0f;      // c3 af 00 00
+    (void) 1.0f;         // 3f 80 00 00
+    (void) 1000.0f;      // 44 7a 00 00
+}
+
 S16Vec3 grRc_803E4DA8[] = {
     { 0, 1, 1 },   { 1, 1, 1 },   { 2, 1, 1 },   { 3, 1, 1 },   { 4, 1, 1 },
     { 11, 1, 7 },  { 10, 1, 17 }, { 6, 1, 7 },   { 7, 1, 7 },   { 8, 1, 7 },
@@ -163,19 +178,7 @@ HSD_GObj* grRCruise_801FF2C8(int gobj_id)
     gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
-        Ground* gp = gobj->user_data;
-        gp->x8_callback = NULL;
-        gp->xC_callback = NULL;
-        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
-        if (callbacks->callback3 != NULL) {
-            gp->x1C_callback = callbacks->callback3;
-        }
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
-        }
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
-        }
+        Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0x122,
                  gobj_id);
@@ -313,7 +316,7 @@ void grRCruise_801FF7A4(Ground_GObj* gobj)
     Ground_801C2ED0(jobj, gp->map_id);
     grAnime_801C8138(stage_gobj, gp->map_id, 0);
     grAnime_801C752C(jobj, 1, 30628, HSD_AObjSetFlags, 3, AOBJ_LOOP);
-    archive = grDatFiles_801C6324();
+    archive = grDatFiles_GetArchive();
     if (archive != NULL && (data = HSD_ArchiveGetPublicAddress(
                                 archive->unk0, "dynamicsdata_shipflag"),
                             data != NULL))

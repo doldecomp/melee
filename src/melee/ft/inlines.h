@@ -3,24 +3,24 @@
 
 #include <platform.h>
 
+#include "ef/eflib.h"
+
 #include "ft/forward.h"
 
 #include "ft/ftanim.h"
 #include "ft/types.h"
 #include "gm/gm_16AE.h"
 #include "it/it_26B1.h"
+#include "lb/lbvector.h"
 
 #include <common_structs.h>
+#include <math.h>
 #include <dolphin/mtx.h>
 #include <baselib/archive.h>
-#include <baselib/controller.h>
 #include <baselib/dobj.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjuserdata.h>
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
-#include <baselib/random.h>
 
 #define PUSH_ATTRS(fp, attributeName)                                         \
     do {                                                                      \
@@ -43,6 +43,13 @@
 #else
 #define GET_FIGHTER(gobj) ((Fighter*) HSD_GObjGetUserData(gobj))
 #endif
+
+static inline void Fighter_SetEffectHitlagCallbacks(Fighter* fp)
+{
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = NULL;
+}
 
 /// @deprecated Use #GET_FIGHTER instead.
 static inline Fighter* getFighter(Fighter_GObj* gobj)
@@ -142,8 +149,8 @@ static inline void Fighter_OnItemPickup(Fighter_GObj* gobj, bool catchItemFlag,
                                         bool bool2, bool bool3)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!it_8026B2B4(fp->item_gobj)) {
-        switch (it_8026B320(fp->item_gobj)) {
+    if (!itIsHeavy(fp->item_gobj)) {
+        switch (itGetHoldKind(fp->item_gobj)) {
         case 1:
             ftAnim_80070FB4(gobj, bool2, 1);
             break;
@@ -166,7 +173,7 @@ static inline void Fighter_OnItemPickup(Fighter_GObj* gobj, bool catchItemFlag,
 static inline void Fighter_OnItemInvisible(Fighter_GObj* gobj, bool flag)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!it_8026B2B4(fp->item_gobj)) {
+    if (!itIsHeavy(fp->item_gobj)) {
         ftAnim_80070CC4(gobj, flag);
     }
 }
@@ -174,7 +181,7 @@ static inline void Fighter_OnItemInvisible(Fighter_GObj* gobj, bool flag)
 static inline void Fighter_OnItemVisible(Fighter_GObj* gobj, bool flag)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!it_8026B2B4(fp->item_gobj)) {
+    if (!itIsHeavy(fp->item_gobj)) {
         ftAnim_80070C48(gobj, flag);
     }
 }
@@ -209,6 +216,32 @@ static inline void Fighter_UnsetCmdVar0(Fighter_GObj* gobj)
 static inline CollData* Fighter_GetCollData(Fighter* fp)
 {
     return &fp->coll_data;
+}
+
+static inline void ftCommon_HandleTeleportCollisions(Fighter_GObj* gobj,
+                                                     Fighter* fp,
+                                                     CollData* coll,
+                                                     const int* angle_clamp,
+                                                     HSD_GObjEvent on_collide)
+{
+    if ((coll->env_flags & Collide_CeilingMask) &&
+        lbVector_AngleXY(&coll->ceiling.normal, &fp->self_vel) >
+            deg_to_rad * (90.0f + *angle_clamp))
+    {
+        on_collide(gobj);
+    }
+    if ((coll->env_flags & Collide_LeftWallMask) &&
+        lbVector_AngleXY(&coll->left_facing_wall.normal, &fp->self_vel) >
+            deg_to_rad * (90.0f + *angle_clamp))
+    {
+        on_collide(gobj);
+    }
+    if ((coll->env_flags & Collide_RightWallMask) &&
+        lbVector_AngleXY(&coll->right_facing_wall.normal, &fp->self_vel) >
+            deg_to_rad * (90.0f + *angle_clamp))
+    {
+        on_collide(gobj);
+    }
 }
 
 /// @todo This and #ftCheckThrowB3, etc. are probably one macro or something.
@@ -260,14 +293,6 @@ static inline int ftGetFacingDirInt2(Fighter_GObj* gobj)
 {
     return ftGetFacingDirInt(GET_FIGHTER(gobj));
 }
-
-/// Ternary macro for fcmpo-based facing direction check
-#define CLIFFCATCH_O(fp)                                                      \
-    ((fp)->facing_dir < 0.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT
-
-/// Ternary macro for fcmpu-based facing direction check
-#define CLIFFCATCH_U(fp)                                                      \
-    ((fp)->facing_dir != 1.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT
 
 /// @todo Fix naming.
 #define gmScriptEventCast(p_event, type) ((type*) p_event)

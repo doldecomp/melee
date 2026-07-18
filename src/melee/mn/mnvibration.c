@@ -1,5 +1,7 @@
 #include "mnvibration.h"
 
+#include "dolphin/pad.h"
+
 #include <baselib/debug.h>
 #undef HSD_ASSERT
 #define HSD_ASSERT(line, cond)                                                \
@@ -250,8 +252,8 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
     Menu_GetAllInputs();
 
     // Handle B button - exit menu
-    inputs = gm_801A36A0(4);
-    if (inputs & (2LL << 32)) {
+    inputs = gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS);
+    if (inputs & PAD_CANCEL) {
         MnVibrationData* exit_data;
         lbAudioAx_80024030(0);
         mn_804A04F0.entering_menu = 0;
@@ -284,8 +286,8 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
     // Check A button per controller for rumble toggle
     for (i = 0; i < 4; i++) {
         if (data->x0[i + 2] == 0) {
-            inputs = gm_801A36A0(i);
-            if (inputs & (1LL << 32)) {
+            inputs = gm_GetButtonsTriggered(i);
+            if (inputs & PAD_CONFIRM) {
                 HSD_JObj* temp_jobj;
                 lbAudioAx_80024030(1);
                 if (GetRumbleSettingOfPort(i) != 0) {
@@ -351,8 +353,8 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
     {
         s32 j;
         for (j = 0; j < 4; j++) {
-            inputs = gm_801A36A0(j);
-            if ((inputs & (0x40LL << 32)) && data->x0[j + 2] == 1) {
+            inputs = gm_GetButtonsTriggered(j);
+            if ((inputs & PAD_ANY_LEFT) && data->x0[j + 2] == 1) {
                 u8 state;
                 lbAudioAx_80024030(2);
                 data->x0[j + 2] = 0;
@@ -362,8 +364,8 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                 HSD_JObjReqAnimAll(panel_jobj, (f32) state);
                 HSD_JObjAnimAll(panel_jobj);
             } else {
-                inputs = gm_801A36A0(j);
-                if ((inputs & (0x80LL << 32)) && data->x0[j + 2] == 0) {
+                inputs = gm_GetButtonsTriggered(j);
+                if ((inputs & PAD_ANY_RIGHT) && data->x0[j + 2] == 0) {
                     u8 state;
                     lbAudioAx_80024030(2);
                     data->x0[j + 2] = 1;
@@ -409,7 +411,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
     if (inputs_repeat & (0x10LL << 32)) {
         cursor_row = data->x0[1];
         if (cursor_row != 0) {
-            u8 name_row = cursor_row - 1;
+            s32 name_row = cursor_row - 1;
             name_idx = mnVibration_GetNameSlot(data, name_row);
             if (name_idx != 0xFF) {
                 MnVibrationData* data2;
@@ -825,7 +827,6 @@ void mnVibration_IntroProc(HSD_GObj* arg0)
     f32 base_y;
     f32 spacing;
     f32 temp_x;
-    f32 temp_y;
     f32 temp_z;
     u8 cursor_row;
     PAD_STACK(64);
@@ -944,9 +945,9 @@ void mnVibration_IntroProc(HSD_GObj* arg0)
             temp_x = mnVibration_JObjGetTranslationX(jobj17);
             mnVibration_JObjSetTranslateX(cursor_jobj, temp_x);
             jobj17 = data3->jobjs[17];
-            temp_y = (spacing * (f32) cursor_row) +
-                     mnVibration_JObjGetTranslationY(jobj17);
-            mnVibration_JObjSetTranslateY(cursor_jobj, temp_y);
+            mnVibration_JObjSetTranslateY(
+                cursor_jobj, (spacing * (f32) cursor_row) +
+                                 mnVibration_JObjGetTranslationY(jobj17));
             jobj17 = data3->jobjs[17];
             temp_z = mnVibration_JObjGetTranslationZ(jobj17);
             mnVibration_JObjSetTranslateZ(cursor_jobj, temp_z);

@@ -1,6 +1,5 @@
 #include "itzako.h"
 
-#include "it_266F.h"
 #include "it_2725.h"
 #include "it_3F14.h"
 #include "ithitbox.h"
@@ -8,6 +7,7 @@
 #include "itmaterial.h"
 
 #include "baselib/jobj.h"
+#include "baselib/random.h"
 #include "cm/camera.h"
 #include "ft/fighter.h"
 #include "ft/ftlib.h"
@@ -17,6 +17,7 @@
 #include "gr/grzakogenerator.h"
 #include "it/inlines.h"
 #include "it/items/itheiho.h"
+#include "it/itgroundcoll.h"
 #include "items/itcoin.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
@@ -566,10 +567,10 @@ bool it_8027CA7C(HSD_GObj* gobj)
     bool chk;
 
     chk = false;
-    if (ftLib_80086C0C(gobj) == 0x14E) {
+    if (ftLib_GetMotionId(gobj) == 0x14E) {
         chk = true;
     }
-    if (ftLib_80086C0C(gobj) == 0x14D) {
+    if (ftLib_GetMotionId(gobj) == 0x14D) {
         chk = true;
     }
     return chk;
@@ -659,7 +660,7 @@ Item_GObj* it_8027CC88(Item_GObj* item_gobj_arg)
     u32 pad2[4];
 
     item_gobj_var = NULL;
-    if ((gm_8016B498() != 0) && (HSD_Randi(it_804D6D40->x14) == 0)) {
+    if ((gm_IsCurrently1PMode() != 0) && (HSD_Randi(it_804D6D40->x14) == 0)) {
         if (grLib_801C9E40() == 0) {
             var_r30 = Ground_801C5840();
             if (var_r30 != -1) {

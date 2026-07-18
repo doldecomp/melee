@@ -180,13 +180,13 @@ void gm_801A4B88(struct GameSceneInfo* info)
 }
 
 /// @brief returns a pointer to the current scenes enter data
-void* gm_801A4B90(void)
+void* gm_GetCurrentSceneEnterData(void)
 {
     return gm_804D6720->load_data;
 }
 
 /// @brief returns a pointer to the current scenes exit data
-void* gm_801A4B9C(void)
+void* gm_GetCurrentSceneExitData(void)
 {
     return gm_804D6720->leave_data;
 }
@@ -237,11 +237,12 @@ void gm_801A4BD4(void)
     lb_80014534();
 }
 
-GameSceneHandler* gm_801A4CE0(u8 id)
+GameSceneHandler* gm_FindGameSceneHandler(u8 kind)
 {
     GameSceneHandler* cur;
-    for (cur = gm_801A50A0(); cur->class_id != 0x2D; cur++) {
-        if (cur->class_id == id) {
+    for (cur = gm_GetAllGameSceneHandlers(); cur->class_id != GS_COUNT; cur++)
+    {
+        if (cur->class_id == kind) {
             return cur;
         }
     }
@@ -258,7 +259,7 @@ inline u64 maybe_gm_801A48A4(u8 i)
     }
 }
 
-void gm_801A4D34(void (*arg0)(void), GameSceneInfo* arg1)
+void gm_801A4D34(void (*on_frame)(void), GameSceneInfo* arg1)
 {
     int pad_queue_count;
     int i;
@@ -303,10 +304,10 @@ void gm_801A4D34(void (*arg0)(void), GameSceneInfo* arg1)
             if (gm_80479D58.unk_10.unk_38_0) {
                 lb_80019900();
                 if (lb_80019A30(0)) {
-                    gm_801A3A74();
+                    gm_EvaluateAllControllerInputs();
                 }
-                if (lb_80019A30(0) && (arg0 != NULL)) {
-                    arg0();
+                if (lb_80019A30(0) && (on_frame != NULL)) {
+                    on_frame();
                 }
             }
             if (gm_80479D58.unk_10.x0 != gm_80479D58.unk_10.x1 ||
