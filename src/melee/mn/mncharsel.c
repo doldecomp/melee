@@ -102,15 +102,15 @@ void mnCharSel_8025BD30(void)
         return;
     }
     if (lbLang_IsSavedLanguageJP()) {
-        if (gmMainLib_8015CC34()->mode == 1) {
-            mnCharSel_8025BC20(kerning, gmMainLib_8015CC34()->stock_count);
-        } else if (gmMainLib_8015CC34()->time_limit != 0) {
-            mnCharSel_8025BC20(kerning, gmMainLib_8015CC34()->time_limit);
+        if (gmMainLib_GetGameRules()->mode == 1) {
+            mnCharSel_8025BC20(kerning, gmMainLib_GetGameRules()->stock_count);
+        } else if (gmMainLib_GetGameRules()->time_limit != 0) {
+            mnCharSel_8025BC20(kerning, gmMainLib_GetGameRules()->time_limit);
             HSD_SisLib_803A660C(0, 0x4A, 0x53);
         } else {
             HSD_SisLib_803A6530(0, 0x4A, 0x51);
         }
-        switch (gmMainLib_8015CC34()->mode) {
+        switch (gmMainLib_GetGameRules()->mode) {
         case Mode_Time:
             HSD_SisLib_803A660C(0, 0x4A, 0x4B);
             return;
@@ -125,10 +125,11 @@ void mnCharSel_8025BD30(void)
             return;
         }
     } else {
-        switch (gmMainLib_8015CC34()->mode) {
+        switch (gmMainLib_GetGameRules()->mode) {
         case Mode_Time:
-            if (gmMainLib_8015CC34()->time_limit != 0) {
-                mnCharSel_8025BC20(kerning, gmMainLib_8015CC34()->time_limit);
+            if (gmMainLib_GetGameRules()->time_limit != 0) {
+                mnCharSel_8025BC20(kerning,
+                                   gmMainLib_GetGameRules()->time_limit);
                 HSD_SisLib_803A660C(0, 0x4A, 0x53);
             } else {
                 HSD_SisLib_803A6530(0, 0x4A, 0x51);
@@ -136,8 +137,8 @@ void mnCharSel_8025BD30(void)
             HSD_SisLib_803A660C(0, 0x4A, 0x4B);
             return;
         case Mode_Stock:
-            mnCharSel_8025BC20(kerning, gmMainLib_8015CC34()->stock_count);
-            if (gmMainLib_8015CC34()->stock_count < 2U) {
+            mnCharSel_8025BC20(kerning, gmMainLib_GetGameRules()->stock_count);
+            if (gmMainLib_GetGameRules()->stock_count < 2U) {
                 HSD_SisLib_803A660C(0, 0x4A, 0x55);
             } else {
                 HSD_SisLib_803A660C(0, 0x4A, 0x54);
@@ -145,8 +146,9 @@ void mnCharSel_8025BD30(void)
             HSD_SisLib_803A660C(0, 0x4A, 0x4C);
             return;
         case Mode_Coin:
-            if (gmMainLib_8015CC34()->time_limit != 0) {
-                mnCharSel_8025BC20(kerning, gmMainLib_8015CC34()->time_limit);
+            if (gmMainLib_GetGameRules()->time_limit != 0) {
+                mnCharSel_8025BC20(kerning,
+                                   gmMainLib_GetGameRules()->time_limit);
                 HSD_SisLib_803A660C(0, 0x4A, 0x53);
             } else {
                 HSD_SisLib_803A6530(0, 0x4A, 0x51);
@@ -154,8 +156,9 @@ void mnCharSel_8025BD30(void)
             HSD_SisLib_803A660C(0, 0x4A, 0x4D);
             return;
         case Mode_Bonus:
-            if (gmMainLib_8015CC34()->time_limit != 0) {
-                mnCharSel_8025BC20(kerning, gmMainLib_8015CC34()->time_limit);
+            if (gmMainLib_GetGameRules()->time_limit != 0) {
+                mnCharSel_8025BC20(kerning,
+                                   gmMainLib_GetGameRules()->time_limit);
                 HSD_SisLib_803A660C(0, 0x4A, 0x53);
             } else {
                 HSD_SisLib_803A6530(0, 0x4A, 0x51);
@@ -874,8 +877,8 @@ void mnCharSel_8025DB34(u8 arg0)
             case 2:
                 break;
             case 0:
-                if (gmMainLib_8015CC34()->handicap != 0) {
-                    if (gmMainLib_8015CC34()->handicap == 2) {
+                if (gmMainLib_GetGameRules()->handicap != 0) {
+                    if (gmMainLib_GetGameRules()->handicap == 2) {
                         var_f1 = 0.0f;
                     } else {
                         var_f1 = 60.0f;
@@ -896,18 +899,18 @@ void mnCharSel_8025DB34(u8 arg0)
                 }
                 break;
             case 1: {
-                if (gmMainLib_8015CC34()->handicap != 0) {
+                if (gmMainLib_GetGameRules()->handicap != 0) {
                     s32 hval;
                     s32 hval2;
 
-                    if (gmMainLib_8015CC34()->handicap == 2) {
+                    if (gmMainLib_GetGameRules()->handicap == 2) {
                         var_f1 = 20.0f;
                     } else {
                         var_f1 = 80.0f;
                     }
                     HSD_ForeachAnim(sp90, JOBJ_TYPE, ALL_TYPE_MASK,
                                     HSD_AObjReqAnim, AOBJ_ARG_AF, var_f1);
-                    if (gmMainLib_8015CC34()->handicap == 1) {
+                    if (gmMainLib_GetGameRules()->handicap == 1) {
                         hval = (u8) gm_801685D4(
                             arg0,
                             mnCharSel_804D6CB0->data.data.players[arg0].xA);
@@ -929,7 +932,7 @@ void mnCharSel_8025DB34(u8 arg0)
                     HSD_ForeachAnim(sp68, JOBJ_TYPE, TOBJ_MASK,
                                     HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
                     sp90 = sp68;
-                    if (gmMainLib_8015CC34()->handicap == 1) {
+                    if (gmMainLib_GetGameRules()->handicap == 1) {
                         hval2 = (u8) gm_801685D4(
                             arg0,
                             mnCharSel_804D6CB0->data.data.players[arg0].xA);
@@ -973,14 +976,14 @@ void mnCharSel_8025DB34(u8 arg0)
                 break;
             }
             case 3: {
-                if (gmMainLib_8015CC34()->handicap != 0) {
+                if (gmMainLib_GetGameRules()->handicap != 0) {
                     s32 hval3;
                     s32 hval4;
 
                     if (mnCharSel_803F0DFC.doors[arg0].p_kind !=
                         mnCharSel_803F0DFC.doors[arg0].p_kind_prev)
                     {
-                        if (gmMainLib_8015CC34()->handicap == 2) {
+                        if (gmMainLib_GetGameRules()->handicap == 2) {
                             var_f1 = 30.0f;
                         } else {
                             var_f1 = 90.0f;
@@ -988,7 +991,7 @@ void mnCharSel_8025DB34(u8 arg0)
                         HSD_ForeachAnim(sp90, JOBJ_TYPE, ALL_TYPE_MASK,
                                         HSD_AObjReqAnim, AOBJ_ARG_AF, var_f1);
                     }
-                    if (gmMainLib_8015CC34()->handicap == 1) {
+                    if (gmMainLib_GetGameRules()->handicap == 1) {
                         hval3 = (u8) gm_801685D4(
                             arg0,
                             mnCharSel_804D6CB0->data.data.players[arg0].xA);
@@ -1011,7 +1014,7 @@ void mnCharSel_8025DB34(u8 arg0)
                     HSD_ForeachAnim(sp58, JOBJ_TYPE, TOBJ_MASK,
                                     HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
                     sp90 = sp58;
-                    if (gmMainLib_8015CC34()->handicap == 1) {
+                    if (gmMainLib_GetGameRules()->handicap == 1) {
                         hval4 = (u8) gm_801685D4(
                             arg0,
                             mnCharSel_804D6CB0->data.data.players[arg0].xA);
@@ -1360,10 +1363,10 @@ void fn_8025F0E0(HSD_GObj* gobj)
                 timer = timer - 1;
                 doors->slideranim_timer = timer;
                 if (timer == 0) {
-                    rules = gmMainLib_8015CC34();
+                    rules = gmMainLib_GetGameRules();
                     if ((u8) rules->handicap != 0) {
                         if ((u8) doors->p_kind == 1) {
-                            rules = gmMainLib_8015CC34();
+                            rules = gmMainLib_GetGameRules();
                             if ((u8) rules->handicap == 1) {
                                 anim = 0x5A;
                             } else {
@@ -1383,7 +1386,7 @@ void fn_8025F0E0(HSD_GObj* gobj)
                                             HSD_AObjStopAnim, AOBJ_ARG_AOV, 0,
                                             0);
                         } else {
-                            rules = gmMainLib_8015CC34();
+                            rules = gmMainLib_GetGameRules();
                             if ((u8) rules->handicap == 1) {
                                 anim = 0x50;
                             } else {
@@ -1404,7 +1407,7 @@ void fn_8025F0E0(HSD_GObj* gobj)
                                             0);
                         }
 
-                        rules = gmMainLib_8015CC34();
+                        rules = gmMainLib_GetGameRules();
                         if ((u8) rules->handicap == 1) {
                             val = (u8) gm_801685D4(
                                 (u8) i,
@@ -2363,7 +2366,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                             }
                         } else {
                             s32 slider_door = grabbed - 4;
-                            GameRules* rules = gmMainLib_8015CC34();
+                            GameRules* rules = gmMainLib_GetGameRules();
                             if ((u8) rules->handicap != 0) {
                                 lb_80011E24(
                                     mnCharSel_804D6CC0, &sp98,
@@ -2857,7 +2860,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                     (u8) dp->p_kind == 1)
                                                 {
                                                     GameRules* rules2 =
-                                                        gmMainLib_8015CC34();
+                                                        gmMainLib_GetGameRules();
                                                     if ((u8) rules2
                                                             ->handicap != 0)
                                                     {
@@ -2909,7 +2912,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                     0)
                                                 {
                                                     GameRules* rules3 =
-                                                        gmMainLib_8015CC34();
+                                                        gmMainLib_GetGameRules();
                                                     if ((u8) rules3
                                                             ->handicap == 2)
                                                     {
@@ -4043,7 +4046,7 @@ void fn_802633B0(HSD_GObj* gobj)
         HSD_ForeachAnim(list_jobj, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjReqAnim,
                         AOBJ_ARG_AF, 20.0f);
         ((HSD_Text*) tag->name_ls)->hidden = 1;
-        if ((u8) gmMainLib_8015CC34()->handicap != 0 &&
+        if ((u8) gmMainLib_GetGameRules()->handicap != 0 &&
             (u8) mnCharSel_804D6CF5 == 4)
         {
             {
@@ -4051,7 +4054,7 @@ void fn_802633B0(HSD_GObj* gobj)
                 u8 hval;
                 f32 hval_f;
                 port2 = tag->port;
-                if ((u8) gmMainLib_8015CC34()->handicap == 1) {
+                if ((u8) gmMainLib_GetGameRules()->handicap == 1) {
                     hval = (u8) gm_801685D4(
                         port2,
                         mnCharSel_804D6CB0->data.data.players[port2].xA);
@@ -4075,7 +4078,7 @@ void fn_802633B0(HSD_GObj* gobj)
                     s32 hval2;
                     f32 hval_f;
                     port3 = tag->port;
-                    if ((u8) gmMainLib_8015CC34()->handicap == 1) {
+                    if ((u8) gmMainLib_GetGameRules()->handicap == 1) {
                         hval2 = (u8) gm_801685D4(
                             port3,
                             mnCharSel_804D6CB0->data.data.players[port3].xA);
@@ -4161,7 +4164,7 @@ s32 mnCharSel_802640A0(void)
         lbAudioAx_800237A8(mnCharSel_803F0A48.mode_info[match_type].enter_sfx,
                            0x7F, 0x40);
     } else {
-        switch (gmMainLib_8015CC34()->mode) {
+        switch (gmMainLib_GetGameRules()->mode) {
         case 0:
             lbAudioAx_800237A8(0x7535, 0x7F, 0x40);
             break;
@@ -5005,12 +5008,12 @@ s32 mnCharSel_802640A0(void)
             door->is_hold_handicap_slider = 0;
             door->is_hold_cpu_slider = 0;
             door->sel_icon_prev = door->sel_icon;
-            rules = gmMainLib_8015CC34();
+            rules = gmMainLib_GetGameRules();
             if ((u8) rules->handicap != 0) {
                 u8 hval;
                 lb_80011E24(mnCharSel_804D6CC0, &sp108, door->cpuslider_joint,
                             -1);
-                if ((u8) gmMainLib_8015CC34()->handicap == 1) {
+                if ((u8) gmMainLib_GetGameRules()->handicap == 1) {
                     hval = gm_801685D4(
                         (u8) i, mnCharSel_804D6CB0->data.data.players[i].xA);
                 } else {
@@ -5108,7 +5111,7 @@ void mnCharSel_802669F4_OnFrame(void)
 
     mnCharSel_804D6CEC += 1;
     if (mnCharSel_804D6CF6 <= 1) {
-        temp_r3 = &lbDvd_8001822C()->game_cache;
+        temp_r3 = &lbDvd_GetPreloadCacheScene()->game_cache;
         if (mnCharSel_804D6CF5 == 1) {
             CSSData* css = mnCharSel_804D6CB0;
             temp_r0 = css->data.data.players[mnCharSel_804D6CF0].slot_type;

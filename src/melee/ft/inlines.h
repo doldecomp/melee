@@ -3,6 +3,8 @@
 
 #include <platform.h>
 
+#include "ef/eflib.h"
+
 #include "ft/forward.h"
 
 #include "ft/ftanim.h"
@@ -41,6 +43,13 @@
 #else
 #define GET_FIGHTER(gobj) ((Fighter*) HSD_GObjGetUserData(gobj))
 #endif
+
+static inline void Fighter_SetEffectHitlagCallbacks(Fighter* fp)
+{
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = NULL;
+}
 
 /// @deprecated Use #GET_FIGHTER instead.
 static inline Fighter* getFighter(Fighter_GObj* gobj)
@@ -140,8 +149,8 @@ static inline void Fighter_OnItemPickup(Fighter_GObj* gobj, bool catchItemFlag,
                                         bool bool2, bool bool3)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!it_8026B2B4(fp->item_gobj)) {
-        switch (it_8026B320(fp->item_gobj)) {
+    if (!itIsHeavy(fp->item_gobj)) {
+        switch (itGetHoldKind(fp->item_gobj)) {
         case 1:
             ftAnim_80070FB4(gobj, bool2, 1);
             break;
@@ -164,7 +173,7 @@ static inline void Fighter_OnItemPickup(Fighter_GObj* gobj, bool catchItemFlag,
 static inline void Fighter_OnItemInvisible(Fighter_GObj* gobj, bool flag)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!it_8026B2B4(fp->item_gobj)) {
+    if (!itIsHeavy(fp->item_gobj)) {
         ftAnim_80070CC4(gobj, flag);
     }
 }
@@ -172,7 +181,7 @@ static inline void Fighter_OnItemInvisible(Fighter_GObj* gobj, bool flag)
 static inline void Fighter_OnItemVisible(Fighter_GObj* gobj, bool flag)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!it_8026B2B4(fp->item_gobj)) {
+    if (!itIsHeavy(fp->item_gobj)) {
         ftAnim_80070C48(gobj, flag);
     }
 }

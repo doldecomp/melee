@@ -270,28 +270,26 @@ bool grFourside_801F326C(Ground_GObj* arg)
     return false;
 }
 
-/// #grFourside_801F3274
-void grFourside_801F3274(Ground_GObj* gobj)
+static inline void grFourside_UpdateCrane(Ground* gp, HSD_GObj* hsd_gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = gobj->hsd_obj;
-    HSD_JObj* crane_iron = Ground_801C3FA4(gobj, 4);
     float fVar1;
+    s32 rand_max2;
+    s32 rand_max;
     float temp_fVar1;
-    PAD_STACK(0x1C);
+    PAD_STACK(0x14);
     // Ground_801C2ED0(jobj,gp->map_id);
     // grAnime_801C7FF8(gobj,0,7,0,0.0f,0.0f);
     switch (gp->gv.foursideCrane.x0) {
     case 0:
         if (gp->gv.foursideCrane.x4 <= 0) {
             if (gp->gv.foursideCrane.x1.b0 == 0u) {
-                grAnime_801C7B24(gobj, 0, 7, 0.0f);
-                grAnime_801C7A04(gobj, 0, 7, 1.0f);
+                grAnime_801C7B24(hsd_gobj, 0, 7, 0.0f);
+                grAnime_801C7A04(hsd_gobj, 0, 7, 1.0f);
                 gp->gv.foursideCrane.x4 = 0;
                 gp->gv.foursideCrane.x0 = 1;
             } else {
-                grAnime_801C7B24(gobj, 0, 7, 400.0f);
-                grAnime_801C7A04(gobj, 0, 7, 1.0f);
+                grAnime_801C7B24(hsd_gobj, 0, 7, 400.0f);
+                grAnime_801C7A04(hsd_gobj, 0, 7, 1.0f);
                 gp->gv.foursideCrane.x4 = 0;
                 gp->gv.foursideCrane.x0 = 2;
             }
@@ -301,7 +299,7 @@ void grFourside_801F3274(Ground_GObj* gobj)
         break;
     case 1:
         if (gp->gv.foursideCrane.x4 >= 300) {
-            grAnime_801C7A04(gobj, 0, 7, 0.0);
+            grAnime_801C7A04(hsd_gobj, 0, 7, 0.0);
             gp->gv.foursideCrane.x1.b0 = 1;
             gp->gv.foursideCrane.x0 = 3;
         } else {
@@ -310,7 +308,7 @@ void grFourside_801F3274(Ground_GObj* gobj)
         break;
     case 2:
         if (gp->gv.foursideCrane.x4 >= 300) {
-            grAnime_801C7A04(gobj, 0, 7, 0.0);
+            grAnime_801C7A04(hsd_gobj, 0, 7, 0.0);
             gp->gv.foursideCrane.x1.b0 = 0;
             gp->gv.foursideCrane.x0 = 3;
         } else {
@@ -334,10 +332,15 @@ void grFourside_801F3274(Ground_GObj* gobj)
                 if (fVar1 < 0.0f) {
                     fVar1 = -fVar1;
                 }
+                rand_max2 = (s32) fVar1;
+                rand_max = (s32) fVar1;
+                fVar1 = rand_max != 0 ? HSD_Randi(rand_max2) : 0;
                 temp_fVar1 = grFs_804D69D8->crane_iron_down_min;
+                if (temp_fVar1 < 0.0f) {
+                    temp_fVar1 = -temp_fVar1;
+                }
                 gp->gv.foursideCrane.x10 =
-                    gp->gv.foursideCrane.x10 -
-                    (((s32) fVar1 != 0 ? HSD_Randi(fVar1) : 0) + temp_fVar1);
+                    gp->gv.foursideCrane.x10 - (fVar1 + temp_fVar1);
                 gp->gv.foursideCrane.x1.b1 = 1;
                 OSReport("pos = %f : tgrpos = %f\n", gp->gv.foursideCrane.xC,
                          gp->gv.foursideCrane.x10);
@@ -348,10 +351,15 @@ void grFourside_801F3274(Ground_GObj* gobj)
                 if (fVar1 < 0.0f) {
                     fVar1 = -fVar1;
                 }
-                temp_fVar1 = grFs_804D69D8->crane_iron_down_min;
+                rand_max2 = (s32) fVar1;
+                rand_max = (s32) fVar1;
+                fVar1 = rand_max != 0 ? HSD_Randi(rand_max2) : 0;
+                temp_fVar1 = grFs_804D69D8->crane_iron_up_min;
+                if (temp_fVar1 < 0.0f) {
+                    temp_fVar1 = -temp_fVar1;
+                }
                 gp->gv.foursideCrane.x10 =
-                    gp->gv.foursideCrane.x10 +
-                    ((s32) fVar1 != 0 ? HSD_Randi(fVar1) : 0) + temp_fVar1;
+                    gp->gv.foursideCrane.x10 + (fVar1 + temp_fVar1);
                 gp->gv.foursideCrane.x1.b1 = 0;
                 OSReport("pos = %f : tgrpos = %f\n", gp->gv.foursideCrane.xC,
                          gp->gv.foursideCrane.x10);
@@ -383,13 +391,13 @@ void grFourside_801F3274(Ground_GObj* gobj)
         }
         break;
     case 7:
-        fVar1 = gp->gv.foursideCrane.x1C;
-        if (fVar1 < 0.0f) {
-            temp_fVar1 = -fVar1;
+        temp_fVar1 = gp->gv.foursideCrane.x1C;
+        if (temp_fVar1 < 0.0f) {
+            fVar1 = -temp_fVar1;
         } else {
-            temp_fVar1 = fVar1;
+            fVar1 = temp_fVar1;
         }
-        if (temp_fVar1 > gp->gv.foursideCrane.x14) {
+        if (fVar1 > gp->gv.foursideCrane.x14) {
             gp->gv.foursideCrane.xC = gp->gv.foursideCrane.x10;
             gp->gv.foursideCrane.x4 =
                 grFs_804D69D8->crane_wait +
@@ -398,7 +406,7 @@ void grFourside_801F3274(Ground_GObj* gobj)
                      : 0);
             gp->gv.foursideCrane.x0 = 0;
         } else {
-            gp->gv.foursideCrane.x18 += fVar1;
+            gp->gv.foursideCrane.x18 += temp_fVar1;
             gp->gv.foursideCrane.xC += gp->gv.foursideCrane.x18;
             if ((gp->gv.foursideCrane.x1C < 0.0f) &&
                 (gp->gv.foursideCrane.xC < gp->gv.foursideCrane.x10))
@@ -413,8 +421,32 @@ void grFourside_801F3274(Ground_GObj* gobj)
         }
         break;
     }
-    HSD_JObjSetTranslateY(crane_iron, gp->gv.foursideCrane.xC);
-    Ground_801C2FE0(gobj);
+}
+
+static inline float grFourside_GetCraneY(Ground* gp)
+{
+    return gp->gv.foursideCrane.xC;
+}
+
+static inline HSD_JObj* grFourside_GetCraneIron(HSD_GObj* gobj)
+{
+    return Ground_801C3FA4(gobj, 4);
+}
+
+/// #grFourside_801F3274
+void grFourside_801F3274(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    HSD_GObj* hsd_gobj = gobj;
+    HSD_JObj* crane_iron = grFourside_GetCraneIron(hsd_gobj);
+    float fVar1;
+    float temp_fVar1;
+    s32 rand_max;
+    s32 rand_max2;
+
+    grFourside_UpdateCrane(gp, hsd_gobj);
+    HSD_JObjSetTranslateY(crane_iron, grFourside_GetCraneY(gp));
+    Ground_801C2FE0(hsd_gobj);
 }
 
 void grFourside_801F37F8(Ground_GObj* arg) {}

@@ -57,9 +57,7 @@ void itBat_Logic11_Spawned(Item_GObj* gobj)
 void it_80284974(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
-    item->x40_vel.z = 0.0f;
-    item->x40_vel.y = 0.0f;
-    item->x40_vel.x = 0.0f;
+    itResetVelocity(item);
     item->xD50_landNum = 0;
 
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);

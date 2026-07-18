@@ -159,9 +159,7 @@ void it_802F1630(Item_GObj* gobj)
     PAD_STACK(16);
 
     ip = GET_ITEM(gobj);
-    ip->x40_vel.z = 0.0F;
-    ip->x40_vel.y = 0.0F;
-    ip->x40_vel.x = 0.0F;
+    itResetVelocity(ip);
 
     itCoin_ResetRotation(gobj);
 

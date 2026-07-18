@@ -1,5 +1,7 @@
 #include "itkireihana.h"
 
+#include "inlines.h"
+
 #include <placeholder.h>
 #include <platform.h>
 
@@ -53,8 +55,7 @@ void it_802D0138(HSD_GObj* gobj)
     Item* item = GET_ITEM(gobj);
     it_80273454(gobj);
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-    item->entered_hitlag = efLib_PauseAll;
-    item->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(item);
     item->xDD4_itemVar.kireihana.fall_speed = 0.0f;
 }
 
@@ -62,8 +63,7 @@ void it_802D01A0(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     Item_80268E5C(gobj, 1, ITEM_UNK_0x1 | ITEM_HIT_PRESERVE);
-    item->entered_hitlag = efLib_PauseAll;
-    item->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(item);
     it_8027A160(item->xBBC_dynamicBoneTable->bones[1], item);
     item->xDD4_itemVar.kireihana.fall_speed = 0.0f;
 }
@@ -73,8 +73,7 @@ static void itKireihana_UnkMotion1_Anim_inline(Item_GObj* gobj)
     Item* item = GET_ITEM(gobj);
     it_80273454(gobj);
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-    item->entered_hitlag = efLib_PauseAll;
-    item->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(item);
     item->xDD4_itemVar.kireihana.fall_speed = 0.0f;
 }
 
@@ -129,8 +128,7 @@ void it_802D03F8(HSD_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     Item_80268E5C(gobj, 2, ITEM_UNK_0x1 | ITEM_HIT_PRESERVE);
-    item->entered_hitlag = efLib_PauseAll;
-    item->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(item);
     it_8027A160(item->xBBC_dynamicBoneTable->bones[1], item);
 }
 
@@ -138,8 +136,7 @@ static void itKireihana_UnkMotion2_Anim_inline(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-    item->entered_hitlag = efLib_PauseAll;
-    item->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(item);
 }
 
 bool itKireihana_UnkMotion2_Anim(Item_GObj* gobj)
@@ -188,8 +185,7 @@ void it_802D05D8(HSD_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
-    item->entered_hitlag = efLib_PauseAll;
-    item->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(item);
     item->xDD4_itemVar.kireihana.fall_speed = 0.0f;
 }
 
@@ -197,8 +193,7 @@ void it_802D062C(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     Item_80268E5C(gobj, 3, ITEM_UNK_0x1 | ITEM_HIT_PRESERVE);
-    item->entered_hitlag = efLib_PauseAll;
-    item->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(item);
     it_8027A160(item->xBBC_dynamicBoneTable->bones[1], item);
     item->xDD4_itemVar.kireihana.fall_speed = 0.0f;
 }
@@ -234,16 +229,14 @@ void it_802D0774(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 void it_802D07C0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     Item_80268E5C(gobj, 4, ITEM_UNK_0x1 | ITEM_HIT_PRESERVE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 bool itKireihana_UnkMotion4_Anim(Item_GObj* gobj)
@@ -279,12 +272,7 @@ bool itKireihana_UnkMotion4_Coll(Item_GObj* gobj)
 
 void it_802D08F0(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    it_802762BC(ip);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
-    it_80273670(gobj, 0, 0.0f);
+    Item_EnterAirStateWithHitlagAndStateDesc(gobj);
 }
 
 bool itKireihana_UnkMotion0_Anim(Item_GObj* gobj)

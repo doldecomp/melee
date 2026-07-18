@@ -123,20 +123,11 @@ void fn_8031FAA8(HSD_GObj* gobj)
 }
 void fn_8031FB90(HSD_GObj* gobj)
 {
-    GXColor* colors;
     char pad[8];
     if (un_804D7000 != NULL) {
         lbShadow_8000F38C(0);
     }
-    if (HSD_CObjSetCurrent(GET_COBJ(gobj)) != 0) {
-        colors = (GXColor*) &un_804D6FF4;
-        HSD_SetEraseColor(colors->r, colors->g, colors->b, colors->a);
-        HSD_CObjEraseScreen(GET_COBJ(gobj), 1, 0, 1);
-        vi_8031CA04(gobj);
-        gobj->gxlink_prios = 0x881;
-        HSD_GObj_80390ED0(gobj, 7);
-        HSD_CObjEndCurrent();
-    }
+    vi_RunCamera(gobj, (u8*) &un_804D6FF4, 0x881);
 }
 
 void fn_8031FC30(HSD_GObj* gobj)

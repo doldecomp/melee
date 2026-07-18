@@ -1,5 +1,6 @@
 #include "ittools.h"
 
+#include "inlines.h"
 #include "math.h"
 #include "placeholder.h"
 
@@ -279,12 +280,7 @@ bool itTools_Logic22_ShieldBounced(Item_GObj* gobj)
 
 bool itTools_Logic22_Reflected(Item_GObj* gobj)
 {
-    const f32 PI_2 = M_PI / 2;
-    Item* ip = GET_ITEM(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-    it_80273030(gobj);
-    HSD_JObjSetRotationY(jobj, PI_2 * ip->facing_dir);
-    return false;
+    return itReflectItemAndUpdateRotation(gobj);
 }
 
 void it_802EFA24(Item_GObj* gobj, Item_GObj* ref_gobj)

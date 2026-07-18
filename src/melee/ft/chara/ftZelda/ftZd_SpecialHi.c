@@ -71,9 +71,7 @@ void ftZd_SpecialHi_8013979C(HSD_GObj* gobj)
         }
     }
 
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
-    fp->accessory4_cb = NULL;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 static void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp)
