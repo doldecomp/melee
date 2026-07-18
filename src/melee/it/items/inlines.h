@@ -10,6 +10,7 @@
 #include "it/itmaplib.h"
 #include "it/types.h"
 #include "lb/lbrefract.h"
+#include "lb/lbvector.h"
 
 #include <math.h>
 #include <baselib/gobj.h>
@@ -153,6 +154,54 @@ static inline bool Item_UpdateRayAnimation(Item_GObj* gobj, Item* ip,
     }
     HSD_JObjSetScaleZ(jobj, ip->xDD4_itemVar.ray.scale);
     return it_80273130(gobj);
+}
+
+static inline bool Item_BounceRayOffShield(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    lbVector_Mirror(&ip->x40_vel, &ip->xC58);
+    ip->xDD4_itemVar.ray.scale = 1e-3F;
+    ip->xDD4_itemVar.ray.angle = atan2f(ip->x40_vel.y, ip->x40_vel.x);
+    while (ip->xDD4_itemVar.ray.angle < 0.0F) {
+        ip->xDD4_itemVar.ray.angle += M_TAU;
+    }
+    while (ip->xDD4_itemVar.ray.angle > M_TAU) {
+        ip->xDD4_itemVar.ray.angle -= M_TAU;
+    }
+    return false;
+}
+
+static inline void Item_ResetRayAfterReflection(Item* ip, HSD_JObj* jobj)
+{
+    HSD_JObjSetScaleZ(jobj, ip->xDD4_itemVar.ray.scale = 1e-3F);
+    ip->xDD4_itemVar.ray.angle += M_PI;
+    while (ip->xDD4_itemVar.ray.angle < 0.0F) {
+        ip->xDD4_itemVar.ray.angle += M_TAU;
+    }
+    while (ip->xDD4_itemVar.ray.angle > M_TAU) {
+        ip->xDD4_itemVar.ray.angle -= M_TAU;
+    }
+}
+
+static inline void Item_InitRaySpawnFields(SpawnItem* spawn, HSD_GObj* parent,
+                                           f32 facing_dir)
+{
+    spawn->facing_dir = facing_dir;
+    spawn->x3C_damage = 0;
+    spawn->vel.x = spawn->vel.y = spawn->vel.z = 0.0F;
+    spawn->x0_parent_gobj = parent;
+    spawn->x4_parent_gobj2 = spawn->x0_parent_gobj;
+    spawn->x44_flag.b0 = true;
+    spawn->x40 = 0;
+}
+
+static inline void Item_InitRaySpawnPosition(SpawnItem* spawn,
+                                             HSD_GObj* parent, Vec3* pos)
+{
+    spawn->prev_pos = *pos;
+    spawn->prev_pos.z = 0.0F;
+    it_8026BB68(parent, &spawn->pos);
 }
 
 static inline void itUpdateVelocityFromBone(HSD_JObj* jobj, Item* ip,

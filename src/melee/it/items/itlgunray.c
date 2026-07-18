@@ -33,16 +33,8 @@ void it_80298168(HSD_GObj* owner_gobj, Vec3* pos, f32 facing_dir)
 {
     SpawnItem spawn;
     spawn.kind = It_Kind_L_Gun_Ray;
-    spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0f;
-    it_8026BB68(owner_gobj, &spawn.pos);
-    spawn.facing_dir = facing_dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    spawn.x0_parent_gobj = owner_gobj;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
+    Item_InitRaySpawnPosition(&spawn, owner_gobj, pos);
+    Item_InitRaySpawnFields(&spawn, owner_gobj, facing_dir);
     {
         Item_GObj* gobj = Item_80268B18(&spawn);
         if (gobj != NULL) {
@@ -121,33 +113,15 @@ bool itLGunRay_Logic35_Reflected(Item_GObj* gobj)
     ip->facing_dir = -ip->facing_dir;
     HSD_JObjSetRotationY(jobj, M_PI_2 * ip->facing_dir);
     ip->xDD4_itemVar.lgunray.speed *= ip->xC70;
-    HSD_JObjSetScaleZ(jobj, ip->xDD4_itemVar.lgunray.scale = scale);
-    ip->xDD4_itemVar.lgunray.angle += M_PI;
-
-    while (ip->xDD4_itemVar.lgunray.angle < 0.0f) {
-        ip->xDD4_itemVar.lgunray.angle += M_TAU;
-    }
-    while (ip->xDD4_itemVar.lgunray.angle > M_TAU) {
-        ip->xDD4_itemVar.lgunray.angle -= M_TAU;
-    }
+    Item_ResetRayAfterReflection(ip, jobj);
 
     return false;
 }
 
 bool itLGunRay_Logic35_ShieldBounced(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
     PAD_STACK(4);
-    lbVector_Mirror(&ip->x40_vel, &ip->xC58);
-    ip->xDD4_itemVar.lgunray.scale = scale;
-    ip->xDD4_itemVar.lgunray.angle = atan2f(ip->x40_vel.y, ip->x40_vel.x);
-    while (ip->xDD4_itemVar.lgunray.angle < 0.0f) {
-        ip->xDD4_itemVar.lgunray.angle += M_TAU;
-    }
-    while (ip->xDD4_itemVar.lgunray.angle > M_TAU) {
-        ip->xDD4_itemVar.lgunray.angle -= M_TAU;
-    }
-    return false;
+    return Item_BounceRayOffShield(gobj);
 }
 
 void itLGunRay_Logic35_EvtUnk(Item_GObj* gobj, HSD_GObj* ref_gobj)
