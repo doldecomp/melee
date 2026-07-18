@@ -2144,19 +2144,58 @@ static inline bool get_subject_pos(Vec3* pos, s8* slot_ptr)
     return valid;
 }
 
+/// Aim the camera at the subject standing at @p pos_ptr: snap the target
+/// interest/position from it, then ease the live interest and eye positions
+/// toward those targets.
+static inline void track_subject(CameraTransformState* transform, Vec3* pos_ptr,
+                                 f32* target_fov, f32* fov_rate)
+{
+    f32 coeff;
+    f32 delta;
+    Vec3 interest_diff;
+    Vec3 eye_diff;
+    Vec3* target_interest;
+    Vec3* copy_src;
+
+    Camera_8002C5B4(&cm_80452C68.x2D0);
+
+    target_interest = &transform->target_interest;
+    copy_src = &cm_80452C68.transform.target_interest;
+    *copy_src = *pos_ptr;
+    lbVector_Add(target_interest, &cm_80452C68.x314);
+
+    cm_80452C68.transform.target_position = *copy_src;
+    pos_ptr = &transform->target_position;
+    lbVector_Add(pos_ptr, &cm_80452C68.pause_eye_offset);
+
+    copy_src = &transform->position;
+    lbVector_Diff(pos_ptr, copy_src, &eye_diff);
+
+    coeff = cm_803BCCA0.x84;
+    eye_diff.x *= coeff;
+    eye_diff.y *= coeff;
+    eye_diff.z *= coeff;
+    lbVector_Add(copy_src, &eye_diff);
+
+    lbVector_Diff(target_interest, &transform->interest, &interest_diff);
+    coeff = cm_803BCCA0.x84;
+    interest_diff.x *= coeff;
+    interest_diff.y *= coeff;
+    interest_diff.z *= coeff;
+    lbVector_Add(&transform->interest, &interest_diff);
+
+    cm_80452C68.transform.target_fov = *target_fov;
+    delta = cm_80452C68.transform.target_fov - cm_80452C68.transform.fov;
+    cm_80452C68.transform.fov += delta * *fov_rate;
+}
+
 void Camera_8002C908(void* arg0)
 {
     CameraBounds bounds;
     u8 _pad[24];
-    Vec3 sp1C;
-    Vec3 sp10;
     CameraTransformState* transform;
     Vec3* pos_ptr;
     s8* slot_ptr;
-    Vec3* target_interest;
-    Vec3* copy_src;
-    f32 coeff;
-    CameraUnkGlobals* globals;
 
     Camera_80030DF8();
     Camera_800293E0();
@@ -2171,43 +2210,7 @@ void Camera_8002C908(void* arg0)
         *slot_ptr = Camera_8002BA00(slot, 1);
     }
 
-    Camera_8002C5B4(&cm_80452C68.x2D0);
-
-    target_interest = &transform->target_interest;
-    copy_src = &cm_80452C68.transform.target_interest;
-    *copy_src = *pos_ptr;
-    lbVector_Add(target_interest, &cm_80452C68.x314);
-
-    cm_80452C68.transform.target_position = *copy_src;
-    pos_ptr = &transform->target_position;
-    lbVector_Add(pos_ptr, &cm_80452C68.pause_eye_offset);
-
-    copy_src = &transform->position;
-    lbVector_Diff(pos_ptr, copy_src, &sp1C);
-
-    globals = &cm_803BCCA0;
-    coeff = globals->x84;
-    sp1C.x *= coeff;
-    sp1C.y *= coeff;
-    sp1C.z *= coeff;
-    lbVector_Add(copy_src, &sp1C);
-
-    lbVector_Diff(target_interest, &transform->interest, &sp10);
-    coeff = globals->x84;
-    sp10.x *= coeff;
-    sp10.y *= coeff;
-    sp10.z *= coeff;
-    lbVector_Add(&transform->interest, &sp10);
-
-    cm_80452C68.transform.target_fov = cm_80452C68.x32C;
-    {
-        f32 delta;
-
-        delta = cm_80452C68.transform.target_fov - cm_80452C68.transform.fov;
-        (void) delta;
-        cm_80452C68.transform.fov =
-            delta * globals->x88 + cm_80452C68.transform.fov;
-    }
+    track_subject(transform, pos_ptr, &cm_80452C68.x32C, &cm_803BCCA0.x88);
 
     Camera_8002A28C(&bounds);
     Camera_8002A0C0(&bounds, transform);
@@ -2362,25 +2365,17 @@ void Camera_8002CB0C(CameraBounds* bounds)
 
 void Camera_8002CDDC(void* unused)
 {
-    CameraTransformState* transform;
     s8* slot_ptr;
     Vec3* pos_ptr;
     HSD_GObj* gobj;
-    f32 coeff;
-    Vec3* target_interest;
-    Vec3* copy_src;
-    CameraBounds bounds;
-    Vec3 sp6C;
-    Vec3 sp60;
     CmSubject* subject;
-    f32 delta;
+    CameraBounds bounds;
+    CameraBounds bounds_copy;
     CameraBounds bounds2;
-    CameraBounds bounds3;
 
     Camera_80030DF8();
     Camera_800293E0();
-    transform = &cm_80452C68.transform;
-    Camera_8002958C(&bounds, transform);
+    Camera_8002958C(&bounds, &cm_80452C68.transform);
     slot_ptr = &cm_80452C68.x2C4;
     if (*slot_ptr != 11) {
         pos_ptr = &cm_80452C68.x308;
@@ -2399,47 +2394,19 @@ void Camera_8002CDDC(void* unused)
         !subject->x8 && (u32) Camera_80029124(&subject->x1C, 0) == 0 &&
         ABS(subject->x1C.z) < 30.0f)
     {
-        Camera_8002C5B4(&cm_80452C68.x2D0);
-
-        target_interest = &transform->target_interest;
-        copy_src = &cm_80452C68.transform.target_interest;
-        *copy_src = *pos_ptr;
-        lbVector_Add(target_interest, &cm_80452C68.x314);
-
-        cm_80452C68.transform.target_position = *copy_src;
-        pos_ptr = &transform->target_position;
-        lbVector_Add(pos_ptr, &cm_80452C68.pause_eye_offset);
-
-        copy_src = &transform->position;
-        lbVector_Diff(pos_ptr, copy_src, &sp6C);
-
-        coeff = cm_803BCCA0.x84;
-        sp6C.x *= coeff;
-        sp6C.y *= coeff;
-        sp6C.z *= coeff;
-        lbVector_Add(copy_src, &sp6C);
-
-        lbVector_Diff(target_interest, &transform->interest, &sp60);
-        coeff = cm_803BCCA0.x84;
-        sp60.x *= coeff;
-        sp60.y *= coeff;
-        sp60.z *= coeff;
-        lbVector_Add(&transform->interest, &sp60);
-
-        cm_80452C68.transform.target_fov = cm_803BCCA0.x6C;
-        delta = cm_80452C68.transform.target_fov - cm_80452C68.transform.fov;
-        cm_80452C68.transform.fov += delta * cm_803BCCA0.x70;
+        track_subject(&cm_80452C68.transform, pos_ptr, &cm_803BCCA0.x6C,
+                      &cm_803BCCA0.x70);
         return;
     }
 
-    Camera_80030DF8();
-    Camera_800293E0();
-    Camera_8002B0E0();
-    update_transform(&bounds3, &cm_80452C68.transform);
-    update_transform(&bounds2, &cm_80452C68.transform_copy);
-    update_zoom_distance();
-    update_bounds(&bounds3, &bounds2);
-    update_avg_bounds_width();
+        Camera_80030DF8();
+        Camera_800293E0();
+        Camera_8002B0E0();
+        update_transform(&bounds2, &cm_80452C68.transform);
+        update_transform(&bounds_copy, &cm_80452C68.transform_copy);
+        update_zoom_distance();
+        update_bounds(&bounds2, &bounds_copy);
+        update_avg_bounds_width();
 }
 
 static inline void approach_vec3_blk77551(f32 iy, f32 y, f32 *dy)
