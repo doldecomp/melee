@@ -15,6 +15,7 @@
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftDonkey/types.h"
@@ -171,9 +172,7 @@ void ftDk_SpecialLw_8010E0CC(HSD_GObj* gobj)
         efSync_Spawn(1222, gobj, fp->parts[FtPart_TransN].joint);
         fp->x2219_b0 = true;
     }
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
-    fp->accessory4_cb = NULL;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 void ftDk_SpecialLw_8010E148(HSD_GObj* gobj)
@@ -183,7 +182,5 @@ void ftDk_SpecialLw_8010E148(HSD_GObj* gobj)
         efSync_Spawn(1223, gobj, fp->parts[FtPart_TransN].joint);
         fp->x2219_b0 = true;
     }
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
-    fp->accessory4_cb = NULL;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }

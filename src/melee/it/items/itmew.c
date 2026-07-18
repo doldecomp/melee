@@ -65,8 +65,7 @@ void it_802D3BE0(Item_GObj* gobj)
 
     it_8027ADEC(0x46B, gobj, jobj, 2.8F);
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 bool itMew_UnkMotion1_Anim(Item_GObj* gobj)
@@ -90,8 +89,7 @@ void it_802D3C9C(Item_GObj* gobj)
     MewVars* attr = ip->xC4_article_data->x4_specialAttributes;
 
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
     if (HSD_Randi(2) != 0) {
         ip->x40_vel.x = attr->x4;
     } else {
@@ -144,8 +142,7 @@ void itMew_UnkMotion0_Phys(Item_GObj* gobj)
         ip = GET_ITEM(gobj);
         it_8027ADEC(0x46B, gobj, HSD_GObjGetHSDObj(gobj), 2.8F);
         Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-        ip->entered_hitlag = efLib_PauseAll;
-        ip->exited_hitlag = efLib_ResumeAll;
+        Item_SetEffectHitlagCallbacks(ip);
         Item_8026AE84(ip_arg, 0x2729, 0x7F, 0x40);
     }
 }

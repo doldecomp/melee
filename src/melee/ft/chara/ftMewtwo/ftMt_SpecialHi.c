@@ -74,9 +74,7 @@ void ftMt_SpecialHi_SetEndGFX(HSD_GObj* gobj)
         }
     }
 
-    fp0->pre_hitlag_cb = efLib_PauseAll;
-    fp0->post_hitlag_cb = efLib_ResumeAll;
-    fp0->accessory4_cb = NULL;
+    Fighter_SetEffectHitlagCallbacks(fp0);
 }
 
 /// Mewtwo's grounded Teleport Start Motion State handler
