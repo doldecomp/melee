@@ -3473,7 +3473,7 @@ void gm_801BF4DC(GameScene* arg0)
     }
 }
 
-/// @todo .sdata2 order hack (must follow first use to avoid pooling)
+/// @todo .sdata2 order hack
 const f32 gm_804DAC88 = 1.0F;
 
 void gm_801BF634(s32 arg0, s8 character_kind)

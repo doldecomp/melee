@@ -39,9 +39,7 @@
 #include <baselib/random.h>
 #include <baselib/sislib.h>
 
-/* Generated from build/GALE01/obj/melee/gm/gmtou_0.o with the review-lint
- * sdata2-order helper. Removing it regresses 23 exact functions through
- * changed .sdata2 relocations in the whole-TU checkdiff summary. */
+/// @todo .sdata2 order hack
 static void sdata2_order(void)
 {
     (void) 4.5f;
@@ -858,9 +856,9 @@ void fn_80191E9C(HSD_GObj* gobj)
     fn_8019044C(jobj, (f32) tm->x37[idx].x2);
 }
 
-static inline int fn_80191FD4_is_selected(u32 hud, s32 slot, TmData* tm)
+static inline bool fn_80191FD4_is_selected(u32 hud, s32 slot, TmData* tm)
 {
-    return (s32) tm->x37[slot].x3 == hud;
+    return tm->x37[slot].x3 == hud;
 }
 
 void fn_80191FD4(HSD_GObj* gobj)
@@ -3003,25 +3001,21 @@ void gm_8019628C_OnFrame(void)
 void gm_801963B4_OnEnter(void* arg0)
 {
     const char* filename;
-    union {
-        u8* bytes;
-        char* text;
-    } data;
-    data.bytes = lbl_803D9F80.pad_0;
     lbAudioAx_80026F2C(0x12);
     lbAudioAx_8002702C(2, 8);
     lbAudioAx_80027168();
     lbAudioAx_80027648();
-    lbl_804D6640 =
-        lbArchive_80016DBC("GmTou1p", &lbl_804D664C, data.text + 0xC0, 0);
-    lbl_804D6644 =
-        lbArchive_80016DBC("GmTou2p", &lbl_804D6650, data.text + 0xC0, 0);
-    lbl_804D6648 = lbArchive_LoadArchive(data.text + 0xD8);
-    filename = data.text + 0xE4;
+    lbl_804D6640 = lbArchive_80016DBC("GmTou1p", &lbl_804D664C,
+                                      "ScGamTour_scene_data", 0);
+    lbl_804D6644 = lbArchive_80016DBC("GmTou2p", &lbl_804D6650,
+                                      "ScGamTour_scene_data", 0);
+    lbl_804D6648 = lbArchive_LoadArchive("MnExtAll");
+    filename = "TmBox.dat";
     lbl_804D6638 = lbArchive_80016DBC(
-        filename, &lbl_804771B8.box2, data.text + 0xF0, &lbl_804771B8.box3,
-        data.text + 0x108, &lbl_804771B8.box4, data.text + 0x120, 0);
-    HSD_SisLib_803A62A0(0, fn_8018F5F0(), data.text + 0x138);
+        filename, &lbl_804771B8.box2, "tournament_box2_array",
+        &lbl_804771B8.box3, "tournament_box3_array", &lbl_804771B8.box4,
+        "tournament_box4_array", 0);
+    HSD_SisLib_803A62A0(0, fn_8018F5F0(), "SIS_TournamentData");
     fn_801935B8();
     lbAudioAx_800237A8(0x7539, 0x7F, 0x40);
     lbAudioAx_80023F28(gmMainLib_8015ECB0());

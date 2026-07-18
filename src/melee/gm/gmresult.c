@@ -2,7 +2,7 @@
 
 #include "gm/types.h"
 
-/// @todo .sdata2 order hack
+/// @todo .sdata order hack
 static void order_sdata(void)
 {
     (void) "P";
@@ -518,7 +518,7 @@ static StatsList lbl_803D6878[] = {
     { 3, 0x00, { 0 }, NULL },
 };
 
-/// @todo .sdata2 order hack
+/// @todo .data order hack
 static void order_data(void)
 {
     (void) "Error : Cannot read archive file (File Name : %s).";

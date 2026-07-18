@@ -964,10 +964,10 @@ void fn_8018B090(HSD_GObj* arg0)
 static GXColor const lbl_804DA67C = { 0xFF, 0xFF, 0, 0xFF };
 
 /// Draws tournament bracket lines for different bracket types (0-3).
-void fn_8018C8D4(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
-                 s32 arg6, f32 farg0)
+void fn_8018C8D4(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
+                 s32 arg5, s32 arg6, f32 farg0)
 {
-    BracketEntry* data = (BracketEntry*) arg0;
+    BracketEntry* data = arg0;
     f32 thickness;
     f32 neg_thickness;
     GXColor c0, c1, c2, c3, c4, c5, c6, c7, c8, c9;
@@ -1257,11 +1257,11 @@ void fn_8018C8D4(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
 static GXColor const lbl_804DA684 = { 255, 255, 0, 255 };
 
 /// Draws tournament bracket connector lines with optional tail segments.
-void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
-                 s32 arg6, f32 farg0)
+void fn_8018D50C(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
+                 s32 arg5, s32 arg6, f32 farg0)
 {
     TmData* tm;
-    BracketEntry* data = (BracketEntry*) arg0;
+    BracketEntry* data = arg0;
     f32 thickness;
     f32 neg_thickness;
     s32 right;
@@ -1430,10 +1430,10 @@ static inline int fn_8018DC18_inline0(BracketEntry* data)
     return data->x20.g;
 }
 
-void fn_8018DC18(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
-                 s32 arg6, f32 farg0)
+void fn_8018DC18(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
+                 s32 arg5, s32 arg6, f32 farg0)
 {
-    // TODO: Make arg0 BracketEntry (forward.h? idk how that works)
+    BracketEntry* data = arg0;
     f32 thickness;
     f32 neg_thickness;
     s32 right;
@@ -1442,7 +1442,7 @@ void fn_8018DC18(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
     GXColor c0, c1, c2, c3, c4, c5, c6, c7;
 
     c0 = col;
-    thickness = ((BracketEntry*) arg0)->x1C;
+    thickness = data->x1C;
     c1 = c0;
     {
         GXColor* color = &c1;
@@ -1472,17 +1472,17 @@ void fn_8018DC18(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                       neg_thickness, color);
     }
 
-    if (((BracketEntry*) arg0)->x20.g == 0) {
-        if (((BracketEntry*) arg0)->x4C == 0) {
-            c5 = ((BracketEntry*) arg0)->x20;
+    if (data->x20.g == 0) {
+        if (data->x4C == 0) {
+            c5 = data->x20;
             DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4, &c5);
-            c6 = ((BracketEntry*) arg0)->x20;
+            c6 = data->x20;
             DrawRectangle((f32) arg1, (f32) arg5, (f32) half + thickness,
                           neg_thickness, &c6);
             return;
         }
-        if (((BracketEntry*) arg0)->x78 == 0) {
-            c7 = ((BracketEntry*) arg0)->x20;
+        if (data->x78 == 0) {
+            c7 = data->x20;
             {
                 GXColor* color = &c7;
                 DrawRectangle((f32) center, (f32) arg2, thickness, (f32) arg4,
@@ -1490,9 +1490,9 @@ void fn_8018DC18(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
             }
             return;
         }
-        c7 = ((BracketEntry*) arg0)->x20;
+        c7 = data->x20;
         DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4, &c7);
-        c7 = ((BracketEntry*) arg0)->x20;
+        c7 = data->x20;
         DrawRectangle((f32) center, (f32) arg5, (f32) half + thickness,
                       neg_thickness, &c7);
     }
@@ -1500,9 +1500,10 @@ void fn_8018DC18(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
 
 static const GXColor lbl_804DA69C = { 255, 255, 0, 255 };
 
-void fn_8018DF68(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
-                 s32 arg6, f32 farg0)
+void fn_8018DF68(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
+                 s32 arg5, s32 arg6, f32 farg0)
 {
+    BracketEntry* data = arg0;
     GXColor right_color;
     GXColor left_third_color;
     GXColor line_color;
@@ -1522,7 +1523,7 @@ void fn_8018DF68(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
     s32 half;
 
     line_color = lbl_804DA69C;
-    thickness = ((BracketEntry*) arg0)->x1C;
+    thickness = data->x1C;
     first_color = line_color;
     {
         GXColor* color = &first_color;
@@ -1557,23 +1558,23 @@ void fn_8018DF68(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
     DrawRectangle((f32) arg1, (f32) arg5, (f32) arg3 + thickness,
                   neg_thickness, &horizontal_color);
 
-    if (((BracketEntry*) arg0)->x20.g == 0) {
-        if (((BracketEntry*) arg0)->x4C == 0) {
-            slot0_vertical_color = ((BracketEntry*) arg0)->x20;
+    if (data->x20.g == 0) {
+        if (data->x4C == 0) {
+            slot0_vertical_color = data->x20;
             DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
                           &slot0_vertical_color);
-            slot0_horizontal_color = ((BracketEntry*) arg0)->x20;
+            slot0_horizontal_color = data->x20;
             DrawRectangle((f32) arg1, (f32) arg5, (f32) (arg3 / 2) + thickness,
                           neg_thickness, &slot0_horizontal_color);
             return;
         }
-        if (((BracketEntry*) arg0)->x78 == 0) {
+        if (data->x78 == 0) {
             GXColor slot1_vertical_color;
             GXColor slot1_horizontal_color;
-            slot1_vertical_color = ((BracketEntry*) arg0)->x20;
+            slot1_vertical_color = data->x20;
             DrawRectangle((f32) left_third, (f32) arg2, thickness, (f32) arg4,
                           &slot1_vertical_color);
-            slot1_horizontal_color = ((BracketEntry*) arg0)->x20;
+            slot1_horizontal_color = data->x20;
             {
                 GXColor* color = &slot1_horizontal_color;
                 DrawRectangle((f32) left_third, (f32) arg5,
@@ -1582,14 +1583,14 @@ void fn_8018DF68(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
             }
             return;
         }
-        if (((BracketEntry*) arg0)->xA4 == 0) {
+        if (data->xA4 == 0) {
             GXColor slot2_horizontal_color;
             GXColor slot2_vertical_color;
-            slot2_vertical_color = ((BracketEntry*) arg0)->x20;
+            slot2_vertical_color = data->x20;
             DrawRectangle((f32) right_third, (f32) arg2, thickness, (f32) arg4,
                           &slot2_vertical_color);
             half = arg3 / 2;
-            slot2_horizontal_color = ((BracketEntry*) arg0)->x20;
+            slot2_horizontal_color = data->x20;
             {
                 f32 y = (f32) arg5;
                 DrawRectangle((f32) (arg1 + half), y,
@@ -1598,11 +1599,11 @@ void fn_8018DF68(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
             }
             return;
         }
-        slot3_vertical_color = ((BracketEntry*) arg0)->x20;
+        slot3_vertical_color = data->x20;
         DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4,
                       &slot3_vertical_color);
         half = arg3 / 2;
-        slot3_horizontal_color = ((BracketEntry*) arg0)->x20;
+        slot3_horizontal_color = data->x20;
         {
             f32 y = (f32) arg5;
             GXColor* color = &slot3_horizontal_color;
@@ -2060,16 +2061,15 @@ int fn_8018F410(void)
 #pragma auto_inline off
 int fn_8018F4A0(void)
 {
-    int stage_id = mnStageSel_8025BBD4();
-    if (!gm_80164430(stage_id)) {
+    int temp_r3 = mnStageSel_8025BBD4();
+    if (!gm_80164430(temp_r3)) {
         printf("This is impossible stage num from mnSelStageRandom() -> stage "
                "%d \n",
-               stage_id);
-        /// @todo No byte-matching HSD assert macro form is known: the
-        /// failure path prints via printf and asserts the literal "0".
-        __assert(__FILE__, 0x53D, "0");
+               temp_r3);
+        /// @todo No byte-matching HSD assert macro form.
+        __assert("gmtoulib.c", 0x53D, "0");
     }
-    return stage_id;
+    return temp_r3;
 }
 #pragma pop
 
@@ -2343,21 +2343,16 @@ void fn_8018FBE0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
 {
     s32 i;
 
-    ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->cur_option = arg0;
-    ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->x1C = arg1;
-    ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->x20 = arg2;
+    gm_804771C4.cur_option = arg0;
+    gm_804771C4.x1C = arg1;
+    gm_804771C4.x20 = arg2;
 
     for (i = 0; 64 > i; i++) {
-        ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->x37[i].x2 =
-            (u8) arg3;
-        ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->x37[i].x1 =
-            (u8) arg4;
-        ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->x37[i].xD =
-            (u8) i;
-        ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->x37[i].x9 =
-            (u16) arg5;
-        ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->x37[i].x0 =
-            (u8) arg6;
+        gm_804771C4.x37[i].x2 = (u8) arg3;
+        gm_804771C4.x37[i].x1 = (u8) arg4;
+        gm_804771C4.x37[i].xD = (u8) i;
+        gm_804771C4.x37[i].x9 = (u16) arg5;
+        gm_804771C4.x37[i].x0 = (u8) arg6;
     }
 }
 

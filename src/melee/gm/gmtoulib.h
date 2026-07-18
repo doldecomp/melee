@@ -15,10 +15,14 @@
 /* 18A970 */ void fn_8018A970(int);
 /* 18AA74 */ void fn_8018AA74(HSD_JObj*, s32, s32);
 /* 18B090 */ void fn_8018B090(HSD_GObj*);
-/* 18C8D4 */ void fn_8018C8D4(void*, s32, s32, s32, s32, s32, s32, f32);
-/* 18D50C */ void fn_8018D50C(void*, s32, s32, s32, s32, s32, s32, f32);
-/* 18DC18 */ void fn_8018DC18(void*, s32, s32, s32, s32, s32, s32, f32);
-/* 18DF68 */ void fn_8018DF68(void*, s32, s32, s32, s32, s32, s32, f32);
+/* 18C8D4 */ void fn_8018C8D4(BracketEntry*, s32, s32, s32, s32, s32, s32,
+                              f32);
+/* 18D50C */ void fn_8018D50C(BracketEntry*, s32, s32, s32, s32, s32, s32,
+                              f32);
+/* 18DC18 */ void fn_8018DC18(BracketEntry*, s32, s32, s32, s32, s32, s32,
+                              f32);
+/* 18DF68 */ void fn_8018DF68(BracketEntry*, s32, s32, s32, s32, s32, s32,
+                              f32);
 /* 18E46C */ void fn_8018E46C(HSD_GObj*, int);
 /* 18E618 */ void fn_8018E618(int, float, int);
 /* 18E85C */ void fn_8018E85C(DynamicModelDesc*, s32);
