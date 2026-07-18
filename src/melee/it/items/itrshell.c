@@ -15,7 +15,6 @@
 #include "it/it_3F14.h"
 #include "it/itcoll.h"
 #include "it/item.h"
-#include "it/items/inlines.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 #include "MSL/math.h"
@@ -67,11 +66,14 @@ void it_8028CFE0(Item_GObj* gobj)
     Vec v;
     HSD_JObj* jobj;
     PAD_STACK(4);
-
+    /// @todo Shared code with #it_8028B8D8.
     if (ip->xDD4_itemVar.rshell.xDDC <= 0.0f) {
-        ITEM_SPAWN_SHELL_SPIN_EFFECT(gobj, attrs->x44, attrs->x48,
-                                     ip->xDD4_itemVar.rshell.xDDC, v, jobj,
-                                     temp = -ip->facing_dir, temp);
+        jobj = GET_JOBJ(gobj);
+        v = attrs->x48;
+        temp = -ip->facing_dir;
+        v.x *= temp;
+        efAsync_Spawn(gobj, &GET_ITEM(gobj)->xBC0, 2, 1029, jobj, &v);
+        ip->xDD4_itemVar.rshell.xDDC = attrs->x44;
     } else {
         ip->xDD4_itemVar.rshell.xDDC -= 1.0f;
     }
