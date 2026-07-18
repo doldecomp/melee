@@ -1237,6 +1237,21 @@ STATIC_ASSERT(offsetof(struct TmSettingTable, min) == 0x40);
 STATIC_ASSERT(offsetof(struct TmSettingTable, max) == 0x4C);
 STATIC_ASSERT(sizeof(struct TmSettingTable) == 0x58);
 
+/// Start/end/loop anim frame triplet for one tournament model anim state.
+typedef struct TmAnimFrames {
+    /* 0x0 */ u16 start;
+    /* 0x2 */ u16 end;
+    /* 0x4 */ u16 loop;
+} TmAnimFrames;
+STATIC_ASSERT(sizeof(struct TmAnimFrames) == 0x6);
+
+/// Table of anim frame triplets (raw s32 words in ROM), see fn_8019C048.
+typedef union TmAnimFrameTable {
+    s32 words[9];
+    TmAnimFrames states[6];
+} TmAnimFrameTable;
+STATIC_ASSERT(sizeof(union TmAnimFrameTable) == 0x24);
+
 typedef struct BracketEntry {
     /* 0x00 */ u8 x0;
     /* 0x01 */ u8 x1;

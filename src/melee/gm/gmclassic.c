@@ -19,7 +19,10 @@ extern UNK_T gmClassic_804D68D0;
 
 typedef struct gmClassicMatchup {
     /* 0x00 */ u16 x00;
-    /* 0x02 */ s8 x02[3];
+    /* 0x02 */ union {
+        s8 x02[3];
+        u8 x02_u8[3];
+    };
     /* 0x05 */ u8 x05;
 } gmClassicMatchup;
 STATIC_ASSERT(sizeof(gmClassicMatchup) == 6);
@@ -649,7 +652,6 @@ void gmClassic_801B3500(GameScene* arg0)
     int count;
     u64 audio;
     s8 ckind;
-    PreloadCacheSceneEntry* ep;
 
     sd = gm_GetGameSceneLoadDataCallback(arg0);
     entry = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->idx)];
@@ -717,7 +719,7 @@ void gmClassic_801B3500(GameScene* arg0)
     sd->x13[0] = ad->x0.color;
 
     gm_8017DB88(ad->x0.xC.x24, entry->x1, ad->x0.cpu_level,
-                (u8) gm_8017BE84(arg0->idx), sd->x10, sd->x0D[0],
+                (u8) gm_8017BE84(arg0->idx), entry->xC->x02_u8, sd->x0D[0],
                 (u8 (*)(s32, s32, u8))(Event) ad->x58,
                 (u8 (*)(s32, s32, u8))(Event) ad->x5C,
                 (u8 (*)(s32, s32, u8))(Event) ad->x60,
@@ -736,81 +738,33 @@ void gmClassic_801B3500(GameScene* arg0)
 
     gc = &lbDvd_GetPreloadCacheScene()->game_cache;
     lbDvd_80018C6C();
-    gc->entries[0].char_id = sd->x0D[0];
-    gc->entries[0].color = ad->x0.color;
-    count = 1;
+    count = 0;
+    gc->entries[count].char_id = sd->x0D[0];
+    gc->entries[count].color = ad->x0.color;
+    count++;
     lbDvd_80018254();
     lbDvd_80018C2C(0xC7);
     lbDvd_80017700(4);
 
-    {
-        s8 echar;
-
-        ep = &gc->entries[count];
-
-        echar = entry->xC->x02[0];
+    for (i = 0; i < 3; i++) {
+        s8 echar = entry->xC->x02[i];
         if (echar != 0x21) {
-            ep->char_id = echar;
+            gc->entries[count].char_id = echar;
             if (entry->x1 & 8) {
-                ep->color = 0xFF;
+                gc->entries[count].color = 0xFF;
             } else {
-                ep->color = sd->x16[0];
-            }
-            count++;
-            ep++;
-        }
-
-        echar = entry->xC->x02[1];
-        if (echar != 0x21) {
-            ep->char_id = echar;
-            if (entry->x1 & 8) {
-                ep->color = 0xFF;
-            } else {
-                ep->color = sd->x16[1];
-            }
-            count++;
-            ep++;
-        }
-
-        echar = entry->xC->x02[2];
-        if (echar != 0x21) {
-            ep->char_id = echar;
-            if (entry->x1 & 8) {
-                ep->color = 0xFF;
-            } else {
-                ep->color = sd->x16[2];
+                gc->entries[count].color = sd->x16[i];
             }
             count++;
         }
     }
 
-    {
-        s8 achar;
-        Unk1PData_x24* ap;
-
-        ep = &gc->entries[count];
-        ap = ad->x0.xC.x24;
-
-        achar = ap->ckind;
+    for (i = 0; i < 3; i++) {
+        s8 achar = ad->x0.xC.x24[i].ckind;
         if (achar != 0x21) {
-            ep->char_id = achar;
-            ep->color = ap->x1;
-            ep++;
-        }
-        ap++;
-
-        achar = ap->ckind;
-        if (achar != 0x21) {
-            ep->char_id = achar;
-            ep->color = ap->x1;
-            ep++;
-        }
-        ap++;
-
-        achar = ap->ckind;
-        if (achar != 0x21) {
-            ep->char_id = achar;
-            ep->color = ap->x1;
+            gc->entries[count].char_id = achar;
+            gc->entries[count].color = ad->x0.xC.x24[i].x1;
+            count++;
         }
     }
 

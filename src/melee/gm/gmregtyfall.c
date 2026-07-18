@@ -79,6 +79,7 @@ static struct {
     u8 x0, x1, x2, x3;
 } gm_804D4278 = { 0xAA, 0xAA, 0xFF, 0xFF };
 
+/// @todo .sdata2 order hack
 static void order_sdata2(void)
 {
     (void) 60.0f;
@@ -246,6 +247,7 @@ void fn_801A6A48(HSD_GObj* gobj, int arg1)
     }
 }
 
+/// @todo .data order hack
 static void order_data(void)
 {
     (void) "!(jobj->flags & JOBJ_USE_QUATERNION)";
@@ -401,31 +403,23 @@ void gm_801A6EE4(void)
 
 void gm_801A7070_OnEnter(void* unused)
 {
-    s32 temp_r29;
-    HSD_JObj* temp_r27_4;
-    HSD_GObj* temp_r27;
-    HSD_GObj* temp_r27_2;
-    HSD_GObj* temp_r27_3;
-    HSD_GObj* temp_r3;
-    HSD_GObj* temp_r3_2;
-    HSD_GObj* temp_r3_3;
-    HSD_JObj* var_r27_2;
-    HSD_GObj* temp_r3_4;
-    HSD_GObj* temp_r3_6;
-    HSD_JObj* temp_r3_5;
-    HSD_JObj* temp_r3_7;
-
-    f32 temp_f31;
-    f32 temp_f31_2;
-    f32 temp_f31_3;
-    f32 temp_f31_4;
-    f32 temp_f31_5;
-    f32 temp_f31_6;
-    f32 temp_f31_7;
-    f32 temp_f31_8;
-
-    HSD_JObj* temp_r3_8;
+    s32 trophy;
     int i;
+    HSD_JObj* player_jobj;
+    HSD_JObj* trophy_jobj;
+    HSD_JObj* main_jobj;
+    HSD_JObj* trophy_root;
+
+    f32 main_scale;
+    f32 translate_x;
+    f32 translate_y;
+    f32 translate_z;
+    f32 rotation_y;
+    f32 inverse_scale;
+    f32 trophy_scale;
+    f32 root_scale;
+
+    HSD_JObj* constraint_target;
     HSD_GObj* gobj;
     HSD_LObj* lobj;
     PAD_STACK(108);
@@ -451,99 +445,99 @@ void gm_801A7070_OnEnter(void* unused)
     /// archive loads
     gm_801A6EE4();
     /// create lights
-    temp_r27 = GObj_Create(0xB, 3, 0);
+    gobj = GObj_Create(0xB, 3, 0);
     lobj = lb_80011AC4(gm_804D6748->lights);
-    HSD_GObjObject_80390A70(temp_r27, HSD_GObj_804D784A, lobj);
-    GObj_SetupGXLink(temp_r27, HSD_GObj_LObjCallback, 0, 0);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
+    GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
     /// the rest of the gobj spawns creates/handles multiple cameras or deal
     /// with sobjs
     gm_801A6C54();
     gm_801A6DC0();
-    temp_r27_2 = GObj_Create(0x13, 0x14, 0);
-    HSD_SObjLib_803A55DC(temp_r27_2, 0x280, 0x1E0, 0xC);
-    HSD_GObjGXLink_8039084C(temp_r27_2);
-    GObj_SetupGXLinkMax(temp_r27_2, fn_801A6A48, 0xC);
-    temp_r27_2->gxlink_prios = 0x40000;
-    temp_r27_3 = GObj_Create(0x13, 0x14, 0);
-    HSD_SObjLib_803A55DC(temp_r27_3, 0x280, 0x1E0, 9);
-    HSD_GObjGXLink_8039084C(temp_r27_3);
-    GObj_SetupGXLinkMax(temp_r27_3, HSD_SObjLib_803A54EC, 9);
-    temp_r27_3->gxlink_prios = 0x200;
+    gobj = GObj_Create(0x13, 0x14, 0);
+    HSD_SObjLib_803A55DC(gobj, 0x280, 0x1E0, 0xC);
+    HSD_GObjGXLink_8039084C(gobj);
+    GObj_SetupGXLinkMax(gobj, fn_801A6A48, 0xC);
+    gobj->gxlink_prios = 0x40000;
+    gobj = GObj_Create(0x13, 0x14, 0);
+    HSD_SObjLib_803A55DC(gobj, 0x280, 0x1E0, 9);
+    HSD_GObjGXLink_8039084C(gobj);
+    GObj_SetupGXLinkMax(gobj, HSD_SObjLib_803A54EC, 9);
+    gobj->gxlink_prios = 0x200;
 
     for (i = 0; i < 2; i++) {
         gm_804809D0[i].image_ptr = NULL;
         lb_800121FC(&gm_804809D0[i], 0x1EA, 0x1E0, 5, 0);
     }
 
-    temp_r3 = GObj_Create(0xE, 0xD, 0);
-    gm_804D677C = temp_r3;
-    HSD_GObjObject_80390A70(temp_r3, HSD_SObjLib_804D7960, NULL);
-    GObj_SetupGXLink(temp_r3, HSD_SObjLib_803A49E0, 9, 0);
-    temp_r3_2 = GObj_Create(0xE, 0x18, 0);
-    gm_804D676C = temp_r3_2;
-    HSD_GObjObject_80390A70(temp_r3_2, HSD_SObjLib_804D7960, NULL);
-    GObj_SetupGXLink(temp_r3_2, HSD_SObjLib_803A49E0, 0x12, 0);
-    temp_r3_3 = GObj_Create(0xE, 0x18, 0);
-    gm_804D6754 = temp_r3_3;
-    HSD_GObjObject_80390A70(temp_r3_3, HSD_SObjLib_804D7960, NULL);
-    GObj_SetupGXLink(temp_r3_3, HSD_SObjLib_803A49E0, 0x12, 0);
+    gobj = GObj_Create(0xE, 0xD, 0);
+    gm_804D677C = gobj;
+    HSD_GObjObject_80390A70(gobj, HSD_SObjLib_804D7960, NULL);
+    GObj_SetupGXLink(gobj, HSD_SObjLib_803A49E0, 9, 0);
+    gobj = GObj_Create(0xE, 0x18, 0);
+    gm_804D676C = gobj;
+    HSD_GObjObject_80390A70(gobj, HSD_SObjLib_804D7960, NULL);
+    GObj_SetupGXLink(gobj, HSD_SObjLib_803A49E0, 0x12, 0);
+    gobj = GObj_Create(0xE, 0x18, 0);
+    gm_804D6754 = gobj;
+    HSD_GObjObject_80390A70(gobj, HSD_SObjLib_804D7960, NULL);
+    GObj_SetupGXLink(gobj, HSD_SObjLib_803A49E0, 0x12, 0);
     gm_801A68D8();
     gm_GetCurrentSceneEnterData();
 
     // create jobj
-    temp_r3_4 = GObj_Create(0xE, 0xF, 0);
-    gm_804D6768 = temp_r3_4;
-    temp_r3_5 = HSD_JObjLoadJoint(gm_804D6798);
-    HSD_GObjObject_80390A70(temp_r3_4, HSD_GObj_804D7849, temp_r3_5);
-    GObj_SetupGXLink(temp_r3_4, HSD_GObj_JObjCallback, 0xB, 0);
-    temp_f31 = gm_803DB2EC[gm_801BEFB0()];
-    HSD_JObjSetScaleX(temp_r3_5, temp_f31);
-    HSD_JObjSetScaleY(temp_r3_5, temp_f31);
-    HSD_JObjSetScaleZ(temp_r3_5, temp_f31);
+    gm_804D6768 = gobj = GObj_Create(0xE, 0xF, 0);
+    main_jobj = HSD_JObjLoadJoint(gm_804D6798);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, main_jobj);
+    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
+    main_scale = gm_803DB2EC[gm_801BEFB0()];
+    HSD_JObjSetScaleX(main_jobj, main_scale);
+    HSD_JObjSetScaleY(main_jobj, main_scale);
+    HSD_JObjSetScaleZ(main_jobj, main_scale);
 
-    HSD_GObj_SetupProc(temp_r3_4, fn_801A6664, 0x17);
-    temp_r27_4 = Player_80036EA0(0);
+    HSD_GObj_SetupProc(gobj, fn_801A6664, 0x17);
+    player_jobj = Player_80036EA0(0);
     lb_8000C1C0(HSD_JObjGetChild(HSD_JObjGetChild(
-                    HSD_JObjGetChild(HSD_JObjGetChild(temp_r3_5)))),
-                temp_r27_4);
+                    HSD_JObjGetChild(HSD_JObjGetChild(main_jobj)))),
+                player_jobj);
     lb_8000C290(HSD_JObjGetChild(HSD_JObjGetChild(
-                    HSD_JObjGetChild(HSD_JObjGetChild(temp_r3_5)))),
-                temp_r27_4);
+                    HSD_JObjGetChild(HSD_JObjGetChild(main_jobj)))),
+                player_jobj);
     gm_GetCurrentSceneEnterData();
-    temp_r3_6 = GObj_Create(0xE, 0xF, 0);
-    gm_804D6778 = temp_r3_6;
-    temp_r3_7 = HSD_JObjLoadJoint(gm_804D67AC->models[0]->joint);
-    HSD_GObjObject_80390A70(temp_r3_6, HSD_GObj_804D7849, temp_r3_7);
-    GObj_SetupGXLink(temp_r3_6, HSD_GObj_JObjCallback, 0xB, 0);
+    gobj = GObj_Create(0xE, 0xF, 0);
+    gm_804D6778 = gobj;
+    trophy_root = HSD_JObjLoadJoint(gm_804D67AC->models[0]->joint);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, trophy_root);
+    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
 
-    temp_r29 = gm_801A659C(gm_801BEFB0());
-    var_r27_2 = HSD_JObjGetChild(temp_r3_7);
-    temp_f31_2 = -Toy_803060BC(temp_r29, 0);
-    HSD_JObjSetTranslateXWithMtxDirty(var_r27_2, temp_f31_2);
-    temp_f31_3 = -Toy_803060BC(temp_r29, 1);
-    HSD_JObjSetTranslateYWithMtxDirty(var_r27_2, temp_f31_3);
-    temp_f31_4 = -Toy_803060BC(temp_r29, 2);
-    HSD_JObjSetTranslateZWithMtxDirty(var_r27_2, temp_f31_4);
+    trophy = gm_801A659C(gm_801BEFB0());
+    trophy_jobj = HSD_JObjGetChild(trophy_root);
+    translate_x = -Toy_803060BC(trophy, 0);
+    HSD_JObjSetTranslateXWithMtxDirty(trophy_jobj, translate_x);
+    translate_y = -Toy_803060BC(trophy, 1);
+    HSD_JObjSetTranslateYWithMtxDirty(trophy_jobj, translate_y);
+    translate_z = -Toy_803060BC(trophy, 2);
+    HSD_JObjSetTranslateZWithMtxDirty(trophy_jobj, translate_z);
 
-    temp_f31_5 = -(0.017453292f * Toy_803060BC(temp_r29, 5));
-    HSD_JObjSetRotationYWithMtxDirty(var_r27_2, temp_f31_5);
-    temp_f31_6 = 1.0f / Toy_803060BC(temp_r29, 3);
-    temp_f31_7 = Toy_803060BC(temp_r29, 4);
-    temp_f31_7 = temp_f31_7 * temp_f31_6;
-    HSD_JObjSetScaleXWithMtxDirty(var_r27_2, temp_f31_7);
-    HSD_JObjSetScaleYWithMtxDirty(var_r27_2, temp_f31_7);
-    HSD_JObjSetScaleZWithMtxDirty(var_r27_2, temp_f31_7);
-    temp_f31_8 = gm_803DB2EC[gm_801BEFB0()];
-    HSD_JObjSetScaleX(temp_r3_7, temp_f31_8);
-    HSD_JObjSetScaleY(temp_r3_7, temp_f31_8);
-    HSD_JObjSetScaleZ(temp_r3_7, temp_f31_8);
+    rotation_y = -(0.017453292f * Toy_803060BC(trophy, 5));
+    HSD_JObjSetRotationYWithMtxDirty(trophy_jobj, rotation_y);
+    inverse_scale = 1.0f / Toy_803060BC(trophy, 3);
+    trophy_scale = Toy_803060BC(trophy, 4);
+    trophy_scale = trophy_scale * inverse_scale;
+    HSD_JObjSetScaleXWithMtxDirty(trophy_jobj, trophy_scale);
+    HSD_JObjSetScaleYWithMtxDirty(trophy_jobj, trophy_scale);
+    HSD_JObjSetScaleZWithMtxDirty(trophy_jobj, trophy_scale);
+    root_scale = gm_803DB2EC[gm_801BEFB0()];
+    HSD_JObjSetScaleX(trophy_root, root_scale);
+    HSD_JObjSetScaleY(trophy_root, root_scale);
+    HSD_JObjSetScaleZ(trophy_root, root_scale);
 
-    HSD_GObj_SetupProc(temp_r3_6, fn_801A6844, 0x17);
-    temp_r3_8 = gm_804D6768->hsd_obj;
-    temp_r3_8 = HSD_JObjGetNext(HSD_JObjGetChild(HSD_JObjGetChild(
-        HSD_JObjGetChild(HSD_JObjGetChild(HSD_JObjGetChild(temp_r3_8))))));
-    lb_8000C1C0(temp_r3_6->hsd_obj, temp_r3_8);
-    lb_8000C290(temp_r3_6->hsd_obj, temp_r3_8);
+    HSD_GObj_SetupProc(gobj, fn_801A6844, 0x17);
+    constraint_target = gm_804D6768->hsd_obj;
+    constraint_target =
+        HSD_JObjGetNext(HSD_JObjGetChild(HSD_JObjGetChild(HSD_JObjGetChild(
+            HSD_JObjGetChild(HSD_JObjGetChild(constraint_target))))));
+    lb_8000C1C0(gobj->hsd_obj, constraint_target);
+    lb_8000C290(gobj->hsd_obj, constraint_target);
     lbAudioAx_800237A8(0x7EF40, 0x7FU, 0x40U);
 }
 

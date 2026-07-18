@@ -152,15 +152,34 @@ void fn_8016F344(struct lbl_8046B6A0_24C_t* arg0)
     }
 }
 
+/// Same table lookup as #gm_8016F208, but with a u16 result.
+/// fn_8016F39C passes the looked-up id straight to HSD_SisLib_803A6368 and
+/// the original code keeps it in a u16: the u16 -> int promotion is emitted
+/// during argument setup (clrlwi after the arg0[count] load). Reusing the
+/// int-returning gm_8016F208 (or changing its return type) instead moves or
+/// drops that zero-extension and regresses gm_8016F208/fn_8016F280.
+static inline u16 fn_8016F39C_GetSisTextId(int kind)
+{
+    struct lbl_803D5A4C_t* curr = lbl_803D5A4C;
+    while (curr->kind != kind) {
+        if (curr->kind == 0x29A) {
+            return 0;
+        }
+        curr++;
+    }
+    if (curr->x2 == 0xDE && lbLang_IsSettingUS()) {
+        return 0x102;
+    }
+    return curr->x2;
+}
+
 int fn_8016F39C(HSD_Text** arg0, void* arg1, u8 arg2, u16 arg3, u8 arg4,
                 u8 arg5)
 {
-    struct lbl_803D5A4C_t* curr;
     int idx;
     int count = 0;
     int matched;
     u8 flags;
-    u16 item_id;
 
     if (arg3 >= 0x101U) {
         return -1;
@@ -186,22 +205,7 @@ int fn_8016F39C(HSD_Text** arg0, void* arg1, u8 arg2, u16 arg3, u8 arg4,
         }
 
         if (matched != 0) {
-            curr = lbl_803D5A4C;
-            item_id = 0;
-            while (curr->kind != idx) {
-                if (curr->kind == 0x29A) {
-                    break;
-                }
-                curr++;
-            }
-            if (curr->kind == idx) {
-                if ((u16) curr->x2 == 0xDE && lbLang_IsSettingUS() != 0) {
-                    item_id = 0x102;
-                } else {
-                    item_id = curr->x2;
-                }
-            }
-            HSD_SisLib_803A6368(arg0[count], item_id);
+            HSD_SisLib_803A6368(arg0[count], fn_8016F39C_GetSisTextId(idx));
             count++;
             if (count == (int) arg2) {
                 break;
@@ -439,13 +443,13 @@ int fn_8016FFD4(struct lbl_8046B6A0_24C_t* arg0, int arg1, u8 arg2)
 
     for (i = 0; (u32) i < 0x101U; i++) {
         if ((s16) lbl_803D5A4C[i].kind < 0xD7) {
-            if ((u8) arg1 & (u8) fn_8016F180(i) &&
+            if ((arg1 & 0xFF) & (u8) fn_8016F180(i) &&
                 pl_80039418((u8) arg2, i) != 0)
             {
                 count += fn_8016FAD4(arg0, i, arg1, arg2);
             }
         } else {
-            if ((u8) arg1 & (u8) fn_8016F180(i)) {
+            if ((arg1 & 0xFF) & (u8) fn_8016F180(i)) {
                 if ((unsigned) fn_801701C0(arg0, (u8) arg2, i) != 0) {
                     count += fn_8016FAD4(arg0, i, arg1, arg2);
                 }
@@ -495,16 +499,10 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
     struct lbl_8046B6A0_24C_58_t* x58 = rules->x58;
     s32 player_net;
     s32 scores[6];
-    u8 rankings[7];
+    u8 rankings[7] = { 0 };
 
-    {
-        u8 is_teams = (u8) lbl_804D65A0;
-        *(s32*) &rankings[0] = lbl_804DA2F0;
-        *(u16*) &rankings[4] = lbl_804DA2F4;
-        rankings[6] = lbl_804DA2F6;
-        if (is_teams != 0) {
-            return 0;
-        }
+    if (lbl_804D65A0 != 0) {
+        return 0;
     }
     if (rules == NULL || x58 == NULL) {
         return 0;
@@ -641,9 +639,9 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 s32* p = base;
                 for (i = j; i > 0; i--) {
                     if (p[0] < p[1]) {
-                        s32 tmp = p[0];
-                        p[0] = p[1];
-                        p[1] = tmp;
+                        s32 tmp = p[1];
+                        p[1] = p[0];
+                        p[0] = tmp;
                     }
                     p++;
                 }
@@ -703,9 +701,9 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 s32* p = base;
                 for (i = j; i > 0; i--) {
                     if (p[0] < p[1]) {
-                        s32 tmp = p[0];
-                        p[0] = p[1];
-                        p[1] = tmp;
+                        s32 tmp = p[1];
+                        p[1] = p[0];
+                        p[0] = tmp;
                     }
                     p++;
                 }
@@ -766,9 +764,9 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 s32* p = base;
                 for (i = j; i > 0; i--) {
                     if (p[0] < p[1]) {
-                        s32 tmp = p[0];
-                        p[0] = p[1];
-                        p[1] = tmp;
+                        s32 tmp = p[1];
+                        p[1] = p[0];
+                        p[0] = tmp;
                     }
                     p++;
                 }
@@ -831,9 +829,9 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 s32* p = base;
                 for (i = j; i > 0; i--) {
                     if (p[0] < p[1]) {
-                        s32 tmp = p[0];
-                        p[0] = p[1];
-                        p[1] = tmp;
+                        s32 tmp = p[1];
+                        p[1] = p[0];
+                        p[0] = tmp;
                     }
                     p++;
                 }
@@ -1020,9 +1018,9 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
             f32* p = base;
             for (i = j; i > 0; i--) {
                 if (p[0] < p[1]) {
-                    f32 tmp = p[0];
-                    p[0] = p[1];
-                    p[1] = tmp;
+                    f32 tmp = p[1];
+                    p[1] = p[0];
+                    p[0] = tmp;
                 }
                 p++;
             }
@@ -1153,9 +1151,9 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                     u32* p = vals;
                     for (i = j; (u32) i > 0; i--) {
                         if (p[0] > p[1]) {
-                            u32 tmp = p[0];
-                            p[0] = p[1];
-                            p[1] = tmp;
+                            u32 tmp = p[1];
+                            p[1] = p[0];
+                            p[0] = tmp;
                         }
                         p++;
                     }
@@ -1198,9 +1196,9 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                     u32* p = vals;
                     for (i = j; (u32) i > 0; i--) {
                         if (p[0] < p[1]) {
-                            u32 tmp = p[0];
-                            p[0] = p[1];
-                            p[1] = tmp;
+                            u32 tmp = p[1];
+                            p[1] = p[0];
+                            p[0] = tmp;
                         }
                         p++;
                     }
@@ -1319,26 +1317,21 @@ int fn_80171BA4(void* arg0)
         player++;
     } while (player < 6);
 
-    player = 0;
-    do {
+    for (player = 0; player < 6; player++) {
         result = Player_GetPlayerSlotType(player);
         if (result != Gm_PKind_NA) {
-            j = 0;
-            do {
+            for (j = 0; j < 6; j++) {
                 if (Player_GetPlayerSlotType(j) != Gm_PKind_NA &&
                     player != j && scores[player] < scores[j])
                 {
                     lbl_804D65A8[player] += 1;
                 }
-                j++;
-            } while (j < 6);
-            result = lbl_804D65A8[player];
-            if (lbl_804D65B0 < result) {
+            }
+            if (lbl_804D65B0 < (result = lbl_804D65A8[player])) {
                 lbl_804D65B0 = result;
             }
         }
-        player++;
-    } while (player < 6);
+    }
     return result;
 }
 
@@ -2055,7 +2048,7 @@ u8 gm_80173224(int arg0, int arg1)
 }
 
 /// check for event character unlocks?
-CharacterKind gm_801732D8(u8 arg0)
+u8 gm_801732D8(u8 arg0)
 {
     if (!gm_IsCKindUnlocked(CKIND_GANON) && gm_801BEBC0(arg0) == 0x1C) {
         return CKIND_GANON;
@@ -2066,7 +2059,7 @@ CharacterKind gm_801732D8(u8 arg0)
     return CHKIND_NONE;
 }
 
-int gm_8017335C(void)
+u16 gm_8017335C(void)
 {
     int var_r31 = 1;
     int i;
