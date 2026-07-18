@@ -1706,10 +1706,8 @@ void fn_80199AF0(void)
     }
 }
 
-/// @todo 98.32%: all instructions match; the callee-saved register
-/// assignment is rotated by one against the target. The per-slot loops keep
-/// u8 cursor walkers: bracket->slots[i].x4C compiles to the same
-/// instructions but rotates more registers.
+/// @todo All instructions match; only the callee-saved register assignment
+/// is permuted against the target.
 void fn_8019A158(void)
 {
     TmData* td1;
@@ -1873,8 +1871,7 @@ void fn_8019A158(void)
         cursor = (u8*) &lbl_80473AB8[bracket_idx] + sel * 0x2C;
         {
             u8 model_idx = cursor[0x50];
-            struct TmUnkMenuData* entries = td1->x37;
-            fn_8018F00C((char*) lbl_804799D8.x4E, entries[model_idx].x9);
+            fn_8018F00C((char*) lbl_804799D8.x4E, td1->x37[model_idx].x9);
         }
     }
 }
