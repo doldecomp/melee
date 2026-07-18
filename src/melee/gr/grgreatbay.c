@@ -980,7 +980,7 @@ bool grGreatBay_801F63F4(Ground_GObj* gobj)
     s32 padding;
     SpawnItem spawn;
     HSD_JObj* jobj;
-    s32 total, rand, i, offset;
+    s32 total, i, rand;
     s32 selected;
     PAD_STACK(4);
 
@@ -999,13 +999,11 @@ bool grGreatBay_801F63F4(Ground_GObj* gobj)
     }
 
     total = 0;
-    offset = 0;
     for (i = 0; i < 10; i++) {
-        s16 item_id = grGb_804D69E0.x0->items[offset / 4].kind;
+        s16 item_id = grGb_804D69E0.x0->items[i].kind;
         if (item_id != -1 && it_8026D324(item_id)) {
-            total += grGb_804D69E0.x0->items[offset / 4].weight;
+            total += grGb_804D69E0.x0->items[i].weight;
         }
-        offset += 4;
     }
 
     if (total == 0) {
@@ -1015,17 +1013,15 @@ bool grGreatBay_801F63F4(Ground_GObj* gobj)
     selected = -1;
     rand = ZRANDI(total);
 
-    offset = 0;
     for (i = 0; i < 10; i++) {
-        s16 item_id = grGb_804D69E0.x0->items[offset / 4].kind;
+        s16 item_id = grGb_804D69E0.x0->items[i].kind;
         if (item_id != -1 && it_8026D324(item_id)) {
-            rand -= grGb_804D69E0.x0->items[offset / 4].weight;
+            rand -= grGb_804D69E0.x0->items[i].weight;
             if (rand < 0) {
                 selected = grGb_804D69E0.x0->items[i].kind;
                 break;
             }
         }
-        offset += 4;
     }
     if (selected == -1) {
         return true;
@@ -1033,8 +1029,7 @@ bool grGreatBay_801F63F4(Ground_GObj* gobj)
 
     spawn = grGb_803B81D4;
     spawn.kind = selected;
-    spawn.prev_pos = pos;
-    spawn.pos = spawn.prev_pos;
+    spawn.pos = spawn.prev_pos = pos;
     Item_80268B18(&spawn);
     return true;
 }

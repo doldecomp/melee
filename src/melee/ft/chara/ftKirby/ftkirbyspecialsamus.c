@@ -308,7 +308,7 @@ void ftKb_SsSpecialNStart_Anim(Fighter_GObj* gobj)
     }
 }
 
-extern u32 ftKb_Init_803CB6C0[];
+u32 ftKb_Init_803CB6C0[] = { 260006, 260009, 260012, 260015, 260018, 0 };
 void ftKb_SsSpecialNHold_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp3;
