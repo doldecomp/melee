@@ -83,8 +83,6 @@ struct lbRefract_DataLayout {
     /* 0x21C */ char pobj_name[16];
 };
 
-extern struct lbRefract_DataLayout lbl_803BB0B0;
-
 struct lbl_804336D0_t {
     int refractionUserCount;
     void* image_ptr;
@@ -368,6 +366,60 @@ s32 lbRefract_8002219C(lbRefract_CallbackData* data, s32 buffer, s32 format,
     return 0;
 }
 
+static struct lbRefract_DataLayout lbl_803BB0B0 = {
+    { { 0.5F, 0.0F, 0.0F, 0.5F },
+      { 0.0F, -0.5F, 0.0F, 0.5F },
+      { 0.0F, 0.0F, 0.0F, 1.0F } },
+    { -0.5F, 0.0F, 0.0F, 0.0F, -0.5F, 0.0F },
+    { NULL, 0, 0, 4, 0, 0.0F, 0.0F },
+    { 1, 0.0F, 1, 1, 0 },
+    { NULL,
+      NULL,
+      0,
+      0,
+      { 0.0F, 0.0F, 0.0F },
+      { 1.0F, 1.0F, 1.0F },
+      { 0.0F, 0.0F, 0.0F },
+      0,
+      0,
+      1,
+      1,
+      0x83,
+      1.0F,
+      1,
+      &lbl_803BB0B0.imagedesc0,
+      NULL,
+      &lbl_803BB0B0.lod0,
+      NULL },
+    { NULL, 0, 0, 3, 0, 0.0F, 0.0F },
+    { 1, 0.0F, 1, 1, 0 },
+    { NULL,
+      &lbl_803BB0B0.tobj0,
+      1,
+      1,
+      { 0.0F, 0.0F, 0.0F },
+      { 1.0F, 1.0F, 1.0F },
+      { 0.0F, 0.0F, 0.0F },
+      0,
+      0,
+      1,
+      1,
+      0x81,
+      1.0F,
+      1,
+      &lbl_803BB0B0.imagedesc1,
+      NULL,
+      &lbl_803BB0B0.lod1,
+      NULL },
+    "LbRf.dat",
+    "lbRefData",
+    { fn_80022650 },
+    { fn_80022940 },
+    "refract_class_library",
+    "refract_dobj",
+    "refract_pobj",
+};
+
 void lbRefract_800222A4(void)
 {
     lbRefract_CallbackData cb;
@@ -471,64 +523,6 @@ static void lbRefract_DObjDispReset(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx,
     GXSetNumIndStages(0);
     HSD_StateInvalidate(-1);
 }
-
-/* Initializer values mirror the retail .data image of this block
- * (803BB0B0..803BB2F8): texture/half matrices, the two image descriptors
- * (RGB565 640x240 source, IA8 32x32 tiles), their shared LOD settings, and
- * the TObj pair chained tobj1 -> tobj0, plus the LbRf.dat archive names. */
-struct lbRefract_DataLayout lbl_803BB0B0 = {
-    { { 0.5F, 0.0F, 0.0F, 0.5F },
-      { 0.0F, -0.5F, 0.0F, 0.5F },
-      { 0.0F, 0.0F, 0.0F, 1.0F } },
-    { -0.5F, 0.0F, 0.0F, 0.0F, -0.5F, 0.0F },
-    { NULL, 0, 0, 4, 0, 0.0F, 0.0F },
-    { 1, 0.0F, 1, 1, 0 },
-    { NULL,
-      NULL,
-      0,
-      0,
-      { 0.0F, 0.0F, 0.0F },
-      { 1.0F, 1.0F, 1.0F },
-      { 0.0F, 0.0F, 0.0F },
-      0,
-      0,
-      1,
-      1,
-      0x83,
-      1.0F,
-      1,
-      &lbl_803BB0B0.imagedesc0,
-      NULL,
-      &lbl_803BB0B0.lod0,
-      NULL },
-    { NULL, 0, 0, 3, 0, 0.0F, 0.0F },
-    { 1, 0.0F, 1, 1, 0 },
-    { NULL,
-      &lbl_803BB0B0.tobj0,
-      1,
-      1,
-      { 0.0F, 0.0F, 0.0F },
-      { 1.0F, 1.0F, 1.0F },
-      { 0.0F, 0.0F, 0.0F },
-      0,
-      0,
-      1,
-      1,
-      0x81,
-      1.0F,
-      1,
-      &lbl_803BB0B0.imagedesc1,
-      NULL,
-      &lbl_803BB0B0.lod1,
-      NULL },
-    "LbRf.dat",
-    "lbRefData",
-    { fn_80022650 },
-    { fn_80022940 },
-    "refract_class_library",
-    "refract_dobj",
-    "refract_pobj",
-};
 
 static void fn_80022650(void)
 {
