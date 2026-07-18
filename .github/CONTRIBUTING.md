@@ -306,28 +306,12 @@ techinical quirks surrounding various integer types.
 
 ## <a name="headers"></a>Headers
 
-- Every TU header (meaning things that actually appear in splits.txt) must
-  contain its own symbols according to the split, and only those members. Extra
-  inlines, types, etc. are not allowed. Symbols must appear in address order.
-  static symbols should appear at the top of the C file, not the header.
-- A TU may define a *.static.h file. This is a temporary file to aid in m2c
-  decompilation runs, so it should be considered as part of the C file, and
-  entirely private. It should be deleted when the TU is linked (marked as
-  Matching).
-- types.h for each module contains relevant types primary to that module. It's
-  difficult to discern where a type truly belongs, so we're not very strict
-  about that. Types should be only struct X and/or union X definitions, not
-  typedefs.
-- One forward.h corresponds to each types.h and is responsible for providing a
-  typedef for each struct and union, and typedefs of function pointers. It is
-  also the place to define enums, global const simple types like integers that
-  don't get emitted as symbols, and #define constants. The purpose of this
-  separation is to avoid circular inclusions.
-- If an inline function is shared by multiple TUs but its function body isn't a
-  real symbol, it goes in inlines.h for the most relevant module. An exception
-  is made if that inline function contains an assert which proves its source file.
-- Documentation belongs in *.dox and should be kept out of the C and H files
-  with minimal exceptions. @todo comments are allowed anywhere.
+- Every TU header (meaning things that actually appear in `splits.txt`) **must** contain its own symbols according to the split, and **only** those members. Extra inlines, types, etc. are not allowed. Symbols must appear in address order. `static` symbols should appear at the top of the C file, not the header.
+- A TU may define a `*.static.h` file. This is a temporary file to aid in m2c decompilation runs, so it should be considered as part of the C file, and entirely private. It should be deleted when the TU is linked (marked as `Matching`).
+- `types.h` for each module contains relevant types primary to that module. It's difficult to discern where a type truly belongs, so we're not very strict about that. Types should be only `struct X` and/or `union X` definitions, not `typedef`s.
+- One `forward.h` corresponds to each `types.h` and is responsible for providing a `typedef` for each struct and union, and typedefs of function pointers. It is also the place to define `enum`s, global `const` simple types like integers that don't get emitted as symbols, and `#define` constants. The purpose of this separation is to avoid circular inclusions.
+- If an `inline` function is shared by multiple TUs but its function body isn't a real symbol, it goes in `inlines.h` for the most relevant module. An exception is made if that inline function contains an assert which proves its source file.
+- Documentation belongs in `*.dox` and should be kept out of the C and H files with minimal exceptions. `@todo` comments are allowed anywhere.
 
 # <a name="compiler-notes"></a>Compiler Notes
 
