@@ -756,7 +756,7 @@ static inline VsModeData* getMultimanData(void)
 }
 
 static inline void gmMultiman_InitPlayers(StartMeleeData* match,
-                                           VsModeData* multiman)
+                                          VsModeData* multiman)
 {
     int i;
 
@@ -778,7 +778,7 @@ static inline void gmMultiman_InitPlayers(StartMeleeData* match,
 }
 
 static inline void gmMultiman_InitRecord(VsModeData* multiman, u16* record,
-                                          int mode)
+                                         int mode)
 {
     UnkMultimanData* data =
         gm_80182DF0(multiman->data.players[0].c_kind, mode);
