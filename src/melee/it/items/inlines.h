@@ -9,6 +9,7 @@
 #include "it/items/itlinkhookshot.h"
 #include "it/itmaplib.h"
 #include "it/types.h"
+#include "lb/lbrefract.h"
 
 #include <math.h>
 #include <baselib/gobj.h>
@@ -114,6 +115,44 @@ static inline void Item_ClampAngleReverse(f32* angle)
     while (*angle < -M_PI) {
         *angle += M_TAU;
     }
+}
+
+static inline bool Item_UpdateRayAnimation(Item_GObj* gobj, Item* ip,
+                                           HSD_JObj* jobj,
+                                           const f32* max_scale,
+                                           f32 scale_divisor)
+{
+    f32 dir;
+    f32 vel_x;
+
+    ip->x40_vel.x =
+        ip->xDD4_itemVar.ray.speed * cosf(ip->xDD4_itemVar.ray.angle);
+    ip->x40_vel.y =
+        ip->xDD4_itemVar.ray.speed * sinf(ip->xDD4_itemVar.ray.angle);
+    ip->x40_vel.z = 0.0F;
+    if (ip->x40_vel.x > 0.0F) {
+        dir = +1.0F;
+    } else {
+        dir = -1.0F;
+    }
+    ip->facing_dir = dir;
+    HSD_JObjSetRotationY(jobj, M_PI_2 * ip->facing_dir);
+    if (ip->facing_dir == 1.0F) {
+        vel_x = -ip->x40_vel.x;
+    } else {
+        vel_x = +ip->x40_vel.x;
+    }
+    HSD_JObjSetRotationX(jobj, M_PI + atan2f(ip->x40_vel.y, vel_x));
+    ip->xDD4_itemVar.ray.scale +=
+        ABS(ip->xDD4_itemVar.ray.speed) / scale_divisor;
+    if (ip->xDD4_itemVar.ray.scale > *max_scale) {
+        ip->xDD4_itemVar.ray.scale = *max_scale;
+    }
+    if (ip->xDD4_itemVar.ray.scale < 1e-5F) {
+        ip->xDD4_itemVar.ray.scale = 1e-3F;
+    }
+    HSD_JObjSetScaleZ(jobj, ip->xDD4_itemVar.ray.scale);
+    return it_80273130(gobj);
 }
 
 static inline void itUpdateVelocityFromBone(HSD_JObj* jobj, Item* ip,

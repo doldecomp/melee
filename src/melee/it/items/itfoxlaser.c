@@ -16,6 +16,7 @@
 #include <melee/it/it_266F.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>
+#include <melee/it/items/inlines.h>
 #include <melee/lb/lbrefract.h>
 #include <melee/lb/lbvector.h>
 #include <MSL/math.h>
@@ -107,45 +108,11 @@ static inline f32 fabsf(f32 x)
 
 bool itFoxlaser_UnkMotion1_Anim(Item_GObj* item_gobj)
 {
-    Article* article;
-    Item* item;
-    FoxLaserAttr* attr;
-    HSD_JObj* jobj;
-    f32 dir;
-    f32 vel_x;
+    Item* ip = GET_ITEM(item_gobj);
+    FoxLaserAttr* attr = ip->xC4_article_data->x4_specialAttributes;
+    HSD_JObj* jobj = GET_JOBJ(item_gobj);
 
-    item = GET_ITEM(item_gobj);
-    jobj = GET_JOBJ(item_gobj);
-    article = item->xC4_article_data;
-    attr = article->x4_specialAttributes;
-    item->x40_vel.x = item->xDD4_itemVar.foxlaser.speed *
-                      cosf(item->xDD4_itemVar.foxlaser.angle);
-    item->x40_vel.y = item->xDD4_itemVar.foxlaser.speed *
-                      sinf(item->xDD4_itemVar.foxlaser.angle);
-    item->x40_vel.z = 0.0F;
-    if (item->x40_vel.x > 0.0F) {
-        dir = +1.0F;
-    } else {
-        dir = -1.0F;
-    }
-    item->facing_dir = dir;
-    HSD_JObjSetRotationY(jobj, (M_PI / 2) * item->facing_dir);
-    if (item->facing_dir == 1.0F) {
-        vel_x = -item->x40_vel.x;
-    } else {
-        vel_x = +item->x40_vel.x;
-    }
-    HSD_JObjSetRotationX(jobj, M_PI + atan2f(item->x40_vel.y, vel_x));
-    item->xDD4_itemVar.foxlaser.scale +=
-        fabsf(item->xDD4_itemVar.foxlaser.speed) / 11.25F;
-    if (item->xDD4_itemVar.foxlaser.scale > attr->scale) {
-        item->xDD4_itemVar.foxlaser.scale = attr->scale;
-    }
-    if (item->xDD4_itemVar.foxlaser.scale < 1e-5F) {
-        item->xDD4_itemVar.foxlaser.scale = 1e-3;
-    }
-    HSD_JObjSetScaleZ(jobj, item->xDD4_itemVar.foxlaser.scale);
-    return it_80273130(item_gobj);
+    return Item_UpdateRayAnimation(item_gobj, ip, jobj, &attr->scale, 11.25F);
 }
 
 void itFoxlaser_UnkMotion1_Phys(Item_GObj* item_gobj)

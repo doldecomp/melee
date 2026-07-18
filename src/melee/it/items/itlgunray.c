@@ -6,6 +6,7 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/items/inlines.h"
 #include "it/items/itfoxlaser.h"
 #include "it/types.h"
 #include "lb/lbvector.h"
@@ -74,31 +75,8 @@ bool itLgunray_UnkMotion0_Anim(Item_GObj* gobj)
     ItLGunRayAttr* item_spec_attr = ip->xC4_article_data->x4_specialAttributes;
     HSD_JObj* jobj = GET_JOBJ(gobj);
 
-    ip->x40_vel.x =
-        ip->xDD4_itemVar.lgunray.speed * cosf(ip->xDD4_itemVar.lgunray.angle);
-    ip->x40_vel.y =
-        ip->xDD4_itemVar.lgunray.speed * sinf(ip->xDD4_itemVar.lgunray.angle);
-    ip->x40_vel.z = 0.0f;
-    ip->facing_dir = ip->x40_vel.x > 0.0f ? +1.0F : -1.0F;
-
-    HSD_JObjSetRotationY(jobj, M_PI_2 * ip->facing_dir);
-
-    HSD_JObjSetRotationX(jobj,
-                         M_PI + atan2f(ip->x40_vel.y, ip->facing_dir == 1.0f
-                                                          ? -ip->x40_vel.x
-                                                          : +ip->x40_vel.x));
-
-    ip->xDD4_itemVar.lgunray.scale +=
-        ABS(ip->xDD4_itemVar.lgunray.speed) / 7.0f;
-    if (ip->xDD4_itemVar.lgunray.scale > item_spec_attr->max_scale) {
-        ip->xDD4_itemVar.lgunray.scale = item_spec_attr->max_scale;
-    }
-    if (ip->xDD4_itemVar.lgunray.scale < 1e-5f) {
-        ip->xDD4_itemVar.lgunray.scale = scale;
-    }
-    HSD_JObjSetScaleZ(jobj, ip->xDD4_itemVar.lgunray.scale);
-
-    return it_80273130(gobj);
+    return Item_UpdateRayAnimation(gobj, ip, jobj, &item_spec_attr->max_scale,
+                                   7.0F);
 }
 
 void itLgunray_UnkMotion0_Phys(HSD_GObj* gobj)
