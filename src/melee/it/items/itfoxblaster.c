@@ -75,6 +75,20 @@ static inline HSD_JObj* jobj_child(HSD_JObj* node)
     return node->child;
 }
 
+static inline void itFoxBlaster_PlaySFX(Item* item, u32 fox_sfx, u32 falco_sfx)
+{
+    switch (item->kind) {
+    case It_Kind_Kirby_FoxBlaster:
+    case It_Kind_Fox_Blaster:
+        Item_8026AE84(item, fox_sfx, 0x7F, 0x40);
+        break;
+    case It_Kind_Kirby_FalcoBlaster:
+    case It_Kind_Falco_Blaster:
+        Item_8026AE84(item, falco_sfx, 0x7F, 0x40);
+        break;
+    }
+}
+
 /// @brief Sets sfx and jobj flags based on if the blaster model is visible
 /// (and fox vs falco)
 /// @param item_gobj
@@ -102,17 +116,7 @@ void it_802ADDD0(Item_GObj* item_gobj, s32 visibility)
     if (item->xDD4_itemVar.foxblaster.set_sfx_var2 != visibility) {
         item->xDD4_itemVar.foxblaster.set_sfx_var2 = visibility;
         if (visibility == 2) {
-            switch (item->kind) {
-            case It_Kind_Kirby_FoxBlaster:
-            case It_Kind_Fox_Blaster:
-                Item_8026AE84(item, 0x1AE14, 0x7F, 0x40);
-                break;
-            case It_Kind_Kirby_FalcoBlaster:
-            case It_Kind_Falco_Blaster:
-                Item_8026AE84(item, 0x18700, 0x7F, 0x40);
-                // Item_8026AE84(item, 0x1AE05, 0x7F, 0x40);
-                break;
-            }
+            itFoxBlaster_PlaySFX(item, 0x1AE14, 0x18700);
         }
     }
     switch (item->xDD4_itemVar.foxblaster.set_sfx_var2) {
@@ -339,16 +343,7 @@ void it_802AE538(Item_GObj* item_gobj)
         item->xDD4_itemVar.foxblaster.xDD8 = 1;
         item->xDD4_itemVar.foxblaster.xDDC = 1;
         if (!item->xDD4_itemVar.foxblaster.xDE0) {
-            switch (item->kind) { /* irregular */
-            case It_Kind_Kirby_FoxBlaster:
-            case It_Kind_Fox_Blaster:
-                Item_8026AE84(item, 0x1AE05, 0x7F, 0x40);
-                break;
-            case It_Kind_Kirby_FalcoBlaster:
-            case It_Kind_Falco_Blaster:
-                Item_8026AE84(item, 0x186F1, 0x7F, 0x40);
-                break;
-            }
+            itFoxBlaster_PlaySFX(item, 0x1AE05, 0x186F1);
             item->xDD4_itemVar.foxblaster.xDE0 = true;
         }
     }
@@ -433,6 +428,14 @@ void it_802AE63C(Item_GObj* item_gobj)
 
 /// @brief Resets all blaster and cmd vars
 /// @param item_gobj
+static inline void itFoxBlaster_SetCommandVars(Item* item, int value)
+{
+    item->xDB8_itcmd_var3 = value;
+    item->xDB4_itcmd_var2 = value;
+    item->xDB0_itcmd_var1 = value;
+    item->xDAC_itcmd_var0 = value;
+}
+
 static inline void itFoxBlaster_ClearShot(Item_GObj* item_gobj, int index)
 {
     Item* item = GET_ITEM(item_gobj);
@@ -451,10 +454,7 @@ void it_802AE7B8(Item_GObj* item_gobj)
 
     item = GET_ITEM(item_gobj);
 
-    item->xDB8_itcmd_var3 = 0;
-    item->xDB4_itcmd_var2 = 0;
-    item->xDB0_itcmd_var1 = 0;
-    item->xDAC_itcmd_var0 = 0;
+    itFoxBlaster_SetCommandVars(item, 0);
     item->xDCC_flag.b3 = 0;
     item->xDD4_itemVar.foxblaster.xDD4 = 0;
     item->xDD4_itemVar.foxblaster.xDD8 = 0;
@@ -545,10 +545,7 @@ Item_GObj* it_802AE994(Fighter_GObj* owner_gobj, Fighter_Part ft_part,
             Item* item = GET_ITEM(item_gobj);
             item->xDD4_itemVar.foxblaster.owner = owner_gobj;
             it_802AE7B8(item_gobj); // Clears all item vars and item cmd vars
-            item->xDB8_itcmd_var3 = 1;
-            item->xDB4_itcmd_var2 = 1;
-            item->xDB0_itcmd_var1 = 1;
-            item->xDAC_itcmd_var0 = 1;
+            itFoxBlaster_SetCommandVars(item, 1);
             Item_8026AB54(item_gobj, owner_gobj, ft_part);
         }
     } else {
