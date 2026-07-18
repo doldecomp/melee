@@ -176,19 +176,48 @@ void ftFx_SpecialN_RemoveBlaster(HSD_GObj* gobj)
 u32 foxSFX[2] = { 110103, 110106 };
 u32 falcoSFX[2] = { 100099, 100102 };
 
+static inline f64 ftFox_SpecialN_PrepareBlasterShot(HSD_GObj* gobj,
+                                                    Fighter* fp,
+                                                    ftFox_DatAttrs* da,
+                                                    Vec3* pos)
+{
+    ftFx_SpecialN_FtGetHoldJoint(gobj, pos);
+    pos->z = 0.0F;
+    if (fp->facing_dir == 1.0F) {
+        return da->x10_FOX_BLASTER_ANGLE;
+    }
+    return M_PI - da->x10_FOX_BLASTER_ANGLE;
+}
+
+static inline void ftFox_SpecialN_FireBlasterShot(HSD_GObj* gobj, Fighter* fp,
+                                                  ftFox_DatAttrs* da,
+                                                  Vec3* pos, f64 launch_angle)
+{
+    it_8029C6A4(launch_angle, da->x14_FOX_BLASTER_VEL, gobj, pos,
+                da->x1C_FOX_BLASTER_SHOT_ITKIND);
+    it_802AE1D0(fp->fv.fx.x222C_blasterGObj);
+
+    switch (ftLib_GetKind(gobj)) {
+    case FTKIND_FOX:
+        ft_PlaySFX(fp, foxSFX[fp->facing_dir == -1], SFX_VOLUME_MAX,
+                   SFX_PAN_MID);
+        return;
+    case FTKIND_FALCO:
+        ft_PlaySFX(fp, falcoSFX[fp->facing_dir == -1], SFX_VOLUME_MAX,
+                   SFX_PAN_MID);
+        return;
+    }
+}
+
 /// 0x800E5F28
 /// https://decomp.me/scratch/iPgDc // Create Blaster Shot Item
 void ftFx_SpecialN_CreateBlasterShot(HSD_GObj* gobj)
 {
-    /** @todo Shared @c inline with #ftFx_SpecialNLoop_Anim and
-     * #ftFx_SpecialAirNLoop_Anim.
-     */
     Vec3 sp2C;
 
     ftFox_DatAttrs* da;
     Fighter* fp;
     f64 launchAngle;
-    s32 ftKind;
 
     PAD_STACK(4);
 
@@ -199,32 +228,8 @@ void ftFx_SpecialN_CreateBlasterShot(HSD_GObj* gobj)
 
     if (fp->cmd_vars[2] != 0) {
         fp->cmd_vars[2] = 0;
-        ftFx_SpecialN_FtGetHoldJoint(gobj, &sp2C);
-        sp2C.z = 0;
-
-        if (1 == fp->facing_dir) {
-            launchAngle = da->x10_FOX_BLASTER_ANGLE;
-        } else {
-            launchAngle = M_PI - da->x10_FOX_BLASTER_ANGLE;
-        }
-
-        it_8029C6A4(launchAngle, da->x14_FOX_BLASTER_VEL, gobj, &sp2C,
-                    da->x1C_FOX_BLASTER_SHOT_ITKIND);
-
-        it_802AE1D0(fp->fv.fx.x222C_blasterGObj);
-        ftKind = ftLib_GetKind(gobj);
-
-        switch (ftKind) {
-        case FTKIND_FOX:
-            ft_PlaySFX(fp, foxSFX[-1 == fp->facing_dir], SFX_VOLUME_MAX,
-                       SFX_PAN_MID);
-            return;
-
-        case FTKIND_FALCO:
-            ft_PlaySFX(fp, falcoSFX[-1 == fp->facing_dir], SFX_VOLUME_MAX,
-                       SFX_PAN_MID);
-            return;
-        }
+        launchAngle = ftFox_SpecialN_PrepareBlasterShot(gobj, fp, da, &sp2C);
+        ftFox_SpecialN_FireBlasterShot(gobj, fp, da, &sp2C, launchAngle);
     }
 }
 
@@ -372,7 +377,6 @@ void ftFx_SpecialNLoop_Anim(HSD_GObj* gobj)
         ftFox_DatAttrs* da;
         Fighter* fp;
         f64 launchAngle;
-        FighterKind ftKind;
 
         /// @todo Fake assignment.
         fp = fp = GET_FIGHTER(gobj);
@@ -385,30 +389,9 @@ void ftFx_SpecialNLoop_Anim(HSD_GObj* gobj)
 
         if (fp->cmd_vars[2] != 0) {
             fp->cmd_vars[2] = 0;
-            ftFx_SpecialN_FtGetHoldJoint(gobj, &sp2C);
-            sp2C.z = 0;
-
-            if (fp->facing_dir == +1) {
-                launchAngle = da->x10_FOX_BLASTER_ANGLE;
-            } else {
-                launchAngle = M_PI - da->x10_FOX_BLASTER_ANGLE;
-            }
-
-            it_8029C6A4(launchAngle, da->x14_FOX_BLASTER_VEL, gobj, &sp2C,
-                        da->x1C_FOX_BLASTER_SHOT_ITKIND);
-            it_802AE1D0(fp->fv.fx.x222C_blasterGObj);
-            ftKind = ftLib_GetKind(gobj);
-            switch (ftKind) {
-            case FTKIND_FOX:
-                ft_PlaySFX(fp, foxSFX[fp->facing_dir == -1], SFX_VOLUME_MAX,
-                           SFX_PAN_MID);
-                return;
-
-            case FTKIND_FALCO:
-                ft_PlaySFX(fp, falcoSFX[fp->facing_dir == -1], SFX_VOLUME_MAX,
-                           SFX_PAN_MID);
-                return;
-            }
+            launchAngle =
+                ftFox_SpecialN_PrepareBlasterShot(gobj, fp, da, &sp2C);
+            ftFox_SpecialN_FireBlasterShot(gobj, fp, da, &sp2C, launchAngle);
         }
     }
 }
@@ -522,36 +505,11 @@ void ftFx_SpecialAirNLoop_Anim(HSD_GObj* gobj)
 
         if (fp->cmd_vars[2] != 0) {
             f64 launchAngle;
-            s32 ftKind;
 
             fp->cmd_vars[2] = 0;
-            ftFx_SpecialN_FtGetHoldJoint(gobj, &sp2C);
-            sp2C.z = 0;
-
-            if (1 == fp->facing_dir) {
-                launchAngle = da->x10_FOX_BLASTER_ANGLE;
-            }
-
-            else {
-                launchAngle = M_PI - da->x10_FOX_BLASTER_ANGLE;
-            }
-
-            it_8029C6A4(launchAngle, da->x14_FOX_BLASTER_VEL, gobj, &sp2C,
-                        da->x1C_FOX_BLASTER_SHOT_ITKIND);
-            it_802AE1D0(fp->fv.fx.x222C_blasterGObj);
-
-            ftKind = ftLib_GetKind(gobj);
-            switch (ftKind) {
-            case FTKIND_FOX:
-                ft_PlaySFX(fp, foxSFX[-1 == fp->facing_dir], SFX_VOLUME_MAX,
-                           SFX_PAN_MID);
-                return;
-
-            case FTKIND_FALCO:
-                ft_PlaySFX(fp, falcoSFX[-1 == fp->facing_dir], SFX_VOLUME_MAX,
-                           SFX_PAN_MID);
-                return;
-            }
+            launchAngle =
+                ftFox_SpecialN_PrepareBlasterShot(gobj, fp, da, &sp2C);
+            ftFox_SpecialN_FireBlasterShot(gobj, fp, da, &sp2C, launchAngle);
         }
     }
 }
