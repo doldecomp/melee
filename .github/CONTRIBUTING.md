@@ -128,18 +128,18 @@ pre-commit run --all-files # Run the hook once on existing code
 
       ```c
       struct Player {
-          /*    +0 */ u32 x0;
-          /*    +4 */ u8 x4_pad[10];
-          /*   +1E */ short x1E;
-          /*   +10 */ u8 well_known_something;
-          /* +11:0 */ bool enable_rumble: 1
-          /* +11:1 */ bool x13_1: 1
-          /* +11:2 */ bool x13_2: 1
-          /* +11:3 */ bool is_invisible: 1
-          /* +11:4 */ bool x13_4: 1
-          /* +11:5 */ bool is_metal: 1
-          /* +11:6 */ bool x13_6: 1
-          /* +11:7 */ bool x13_7: 1
+          /*  +0   */ u32 x0;
+          /*  +4   */ u8 x4_pad[0xC];
+          /* +10   */ short x10;
+          /* +12   */ u8 well_known_something;
+          /* +13:0 */ bool enable_rumble: 1
+          /* +13:1 */ bool x13_1: 1
+          /* +13:2 */ bool x13_2: 1
+          /* +13:3 */ bool is_invisible: 1
+          /* +13:4 */ bool x13_4: 1
+          /* +13:5 */ bool is_metal: 1
+          /* +13:6 */ bool x13_6: 1
+          /* +13:7 */ bool x13_7: 1
       };
       ```
 
