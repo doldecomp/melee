@@ -557,6 +557,23 @@ static inline void gmMultiman_InitPlayers(StartMeleeData* match,
     gm_8016F088(match);
 }
 
+static inline void gmMultiman_InitTimedRules(StartMeleeData* match,
+                                             u32 time_limit)
+{
+    match->rules.x0_6 = true;
+    match->rules.x0_7 = false;
+    match->rules.x10 = time_limit;
+}
+
+static inline void gmMultiman_InitScoreRules(StartMeleeData* match)
+{
+    match->rules.x0_6 = false;
+    match->rules.x0_7 = false;
+    match->rules.x10 = 0;
+    match->rules.x5_0 = true;
+    match->rules.x5_1 = false;
+}
+
 void gm_801B6B70(GameScene* scene)
 {
     VsModeData* data;
@@ -831,9 +848,7 @@ void gm_801B7700(GameScene* scene)
 
     temp_r3->rules = temp_r30->data.rules;
     gm_801B69C0(temp_r3);
-    temp_r3->rules.x0_6 = true;
-    temp_r3->rules.x0_7 = false;
-    temp_r3->rules.x10 = 0xB4;
+    gmMultiman_InitTimedRules(temp_r3, 0xB4);
     gmMultiman_InitPlayers(temp_r3, temp_r30, true);
     gm_80182554(temp_r3->players[0].c_kind, 0x23);
     temp_r27 = gmMainLib_8015D74C(
@@ -896,9 +911,7 @@ void gm_801B7C84(GameScene* scene)
 
     temp_r3->rules = temp_r30->data.rules;
     gm_801B69C0(temp_r3);
-    temp_r3->rules.x0_6 = true;
-    temp_r3->rules.x0_7 = false;
-    temp_r3->rules.x10 = 0x384;
+    gmMultiman_InitTimedRules(temp_r3, 0x384);
     gmMultiman_InitPlayers(temp_r3, temp_r30, true);
     gm_80182554(temp_r3->players[0].c_kind, 0x24);
     temp_r27 = gmMainLib_8015D7A4(
@@ -958,11 +971,7 @@ void gm_801B8220(GameScene* scene)
 
     temp_r3->rules = temp_r30->data.rules;
     gm_801B69C0(temp_r3);
-    temp_r3->rules.x0_6 = false;
-    temp_r3->rules.x0_7 = false;
-    temp_r3->rules.x10 = 0;
-    temp_r3->rules.x5_0 = true;
-    temp_r3->rules.x5_1 = false;
+    gmMultiman_InitScoreRules(temp_r3);
     gmMultiman_InitPlayers(temp_r3, temp_r30, true);
     gm_80182554(temp_r3->players[0].c_kind, 0x25);
     temp_r29 = gmMainLib_8015D7BC(
@@ -1024,11 +1033,7 @@ void gm_801B874C(GameScene* scene)
     temp_r3->rules = temp_r29->data.rules;
     gm_801B69C0(temp_r3);
     temp_r3->rules.xB = -1;
-    temp_r3->rules.x0_6 = false;
-    temp_r3->rules.x0_7 = false;
-    temp_r3->rules.x10 = 0;
-    temp_r3->rules.x5_0 = true;
-    temp_r3->rules.x5_1 = false;
+    gmMultiman_InitScoreRules(temp_r3);
     gm_80167A14(temp_r3->players);
 
     for (i = 0; i < 6; i++) {
