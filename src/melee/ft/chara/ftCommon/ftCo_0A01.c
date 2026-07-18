@@ -6922,18 +6922,31 @@ static inline void ftCo_CpuTargetAct(Fighter* fp)
     }
 }
 
-static inline void ftCo_CpuSetTargetFlags(Fighter* fp)
+static inline void ftCo_CpuSetTargetActive(struct Fighter_x1A88_t* data)
 {
-    struct Fighter_x1A88_t* data = &fp->x1A88;
-
     data->xF8_b0 = true;
+}
+
+static inline void ftCo_CpuClearTargetModes(struct Fighter_x1A88_t* data)
+{
     data->xF9_b2 = false;
     data->xF9_b4 = false;
     data->xF9_b3 = false;
     data->xF9_b5 = false;
     data->xF9_b6 = false;
     data->xF9_b7 = false;
+}
+
+static inline void ftCo_CpuSetTargetReady(struct Fighter_x1A88_t* data)
+{
     data->xF9_b1 = true;
+}
+
+static inline void ftCo_CpuSetTargetFlags(struct Fighter_x1A88_t* data)
+{
+    ftCo_CpuSetTargetActive(data);
+    ftCo_CpuClearTargetModes(data);
+    ftCo_CpuSetTargetReady(data);
 }
 
 void ftCo_800AECF0(Fighter* fp)
@@ -6957,7 +6970,7 @@ void ftCo_800AECF0(Fighter* fp)
     target = ftCo_800A5CE0(fp);
     data->x44 = target;
     if (target != NULL) {
-        ftCo_CpuSetTargetFlags(fp);
+        ftCo_CpuSetTargetFlags(data);
         ftCo_CpuTargetAct(fp);
         ftCo_800ADE48(fp);
         return;
@@ -7104,14 +7117,9 @@ void ftCo_800AEFB8(Fighter* fp)
     target = ftCo_800A5CE0(fp);
     data->x44 = target;
     if (target != NULL) {
-        data->xF8_b0 = true;
-        data->xF9_b2 = false;
-        data->xF9_b4 = false;
-        data->xF9_b3 = false;
-        data->xF9_b5 = false;
-        data->xF9_b6 = false;
-        data->xF9_b7 = false;
-        data->xF9_b1 = true;
+        ftCo_CpuSetTargetActive(data);
+        ftCo_CpuClearTargetModes(data);
+        ftCo_CpuSetTargetReady(data);
         ftCo_CpuTargetAct(fp);
         ftCo_800ADE48(fp);
         return;
@@ -7198,7 +7206,7 @@ void ftCo_800AF290(Fighter* fp)
     target = ftCo_800A5CE0(fp);
     data->x44 = target;
     if (target != NULL) {
-        ftCo_CpuSetTargetFlags(fp);
+        ftCo_CpuSetTargetFlags(data);
         ftCo_CpuTargetAct(fp);
         ftCo_800ADE48(fp);
         return;
@@ -7342,7 +7350,7 @@ void ftCo_800AF78C(Fighter* fp)
     target = ftCo_800A5CE0(fp);
     data->x44 = target;
     if (target != NULL) {
-        ftCo_CpuSetTargetFlags(fp);
+        ftCo_CpuSetTargetFlags(data);
         ftCo_CpuTargetAct(fp);
         ftCo_800ADE48(fp);
         return;
@@ -7474,7 +7482,7 @@ void ftCo_800AFE3C(Fighter* fp, int arg1)
     temp_r3_2 = ftCo_800A5CE0(fp);
     temp_r31->x44 = temp_r3_2;
     if (temp_r3_2 != NULL) {
-        ftCo_CpuSetTargetFlags(fp);
+        ftCo_CpuSetTargetFlags(temp_r31);
         ftCo_CpuTargetAct(fp);
         ftCo_800ADE48(fp);
         return;
@@ -7537,7 +7545,7 @@ void ftCo_800B00F8(Fighter* fp)
     temp_r3 = ftCo_800A5CE0(fp);
     temp_r31->x44 = temp_r3;
     if (temp_r3 != NULL) {
-        ftCo_CpuSetTargetFlags(fp);
+        ftCo_CpuSetTargetFlags(temp_r31);
         ftCo_CpuTargetAct(fp);
         ftCo_800ADE48(fp);
         return;
@@ -8117,7 +8125,7 @@ void ftCo_800B1478(Fighter* fp)
     *(target_slot = &fp->x1A88.x44) = target;
 
     if (target != NULL) {
-        ftCo_CpuSetTargetFlags(fp);
+        ftCo_CpuSetTargetFlags(data);
         ftCo_CpuTargetAct(fp);
         ftCo_800ADE48(fp);
         return;
@@ -8198,7 +8206,7 @@ void ftCo_800B17D0(Fighter* fp)
     target = ftCo_800A5CE0(fp);
     data->x44 = target;
     if (target != NULL) {
-        ftCo_CpuSetTargetFlags(fp);
+        ftCo_CpuSetTargetFlags(data);
         ftCo_CpuTargetAct(fp);
         ftCo_800ADE48(fp);
         return;
@@ -8285,7 +8293,7 @@ void ftCo_800B1AB8(Fighter* fp)
     target = ftCo_800A5CE0(fp);
     data->x44 = target;
     if (target != NULL) {
-        ftCo_CpuSetTargetFlags(fp);
+        ftCo_CpuSetTargetFlags(data);
         ftCo_CpuTargetAct(fp);
         ftCo_800ADE48(fp);
         return;
@@ -8389,14 +8397,9 @@ void ftCo_800B1EF0(Fighter* fp)
     target = ftCo_800A5CE0(fp);
     data->x44 = target;
     if (target != NULL) {
-        data->xF8_b0 = true;
-        data->xF9_b2 = false;
-        data->xF9_b4 = false;
-        data->xF9_b3 = false;
-        data->xF9_b5 = false;
-        data->xF9_b6 = false;
-        data->xF9_b7 = false;
-        data->xF9_b1 = true;
+        ftCo_CpuSetTargetActive(data);
+        ftCo_CpuClearTargetModes(data);
+        ftCo_CpuSetTargetReady(data);
         ftCo_CpuTargetAct(fp);
         ftCo_800ADE48(fp);
         return;
@@ -8423,7 +8426,7 @@ void ftCo_800B21C8(Fighter* fp)
     target = ftCo_800A5CE0(fp);
     data->x44 = target;
     if (target != NULL) {
-        ftCo_CpuSetTargetFlags(fp);
+        ftCo_CpuSetTargetFlags(data);
         ftCo_CpuTargetAct(fp);
         ftCo_800ADE48(fp);
         return;
@@ -8476,14 +8479,9 @@ void ftCo_800B24B8(Fighter* fp)
     target = ftCo_800A5CE0(fp);
     data->x44 = target;
     if (target != NULL) {
-        data->xF8_b0 = true;
-        data->xF9_b2 = false;
-        data->xF9_b4 = false;
-        data->xF9_b3 = false;
-        data->xF9_b5 = false;
-        data->xF9_b6 = false;
-        data->xF9_b7 = false;
-        data->xF9_b1 = true;
+        ftCo_CpuSetTargetActive(data);
+        ftCo_CpuClearTargetModes(data);
+        ftCo_CpuSetTargetReady(data);
         ftCo_CpuTargetAct(fp);
         ftCo_800ADE48(fp);
         return;
