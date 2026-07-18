@@ -74,6 +74,7 @@ void it_8028B8D8(Item_GObj* gobj)
     HSD_JObj* jobj;
     PAD_STACK(4);
 
+    /// @todo Shared code used by #it_8028CFE0 and #it_802DDB38.
     if (ip->xDD4_itemVar.gshell.xDDC <= 0.0f) {
         jobj = GET_JOBJ(gobj);
         v = attrs->x34;

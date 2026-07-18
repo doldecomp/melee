@@ -66,6 +66,7 @@ void it_8028CFE0(Item_GObj* gobj)
     Vec v;
     HSD_JObj* jobj;
     PAD_STACK(4);
+    /// @todo Shared code with #it_8028B8D8.
     if (ip->xDD4_itemVar.rshell.xDDC <= 0.0f) {
         jobj = GET_JOBJ(gobj);
         v = attrs->x48;
