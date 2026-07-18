@@ -2147,8 +2147,8 @@ static inline bool get_subject_pos(Vec3* pos, s8* slot_ptr)
 /// Aim the camera at the subject standing at @p pos_ptr: snap the target
 /// interest/position from it, then ease the live interest and eye positions
 /// toward those targets.
-static inline void track_subject(CameraTransformState* transform, Vec3* pos_ptr,
-                                 f32* target_fov, f32* fov_rate)
+static inline void track_subject(CameraTransformState* transform,
+                                 Vec3* pos_ptr, f32* target_fov, f32* fov_rate)
 {
     f32 coeff;
     f32 delta;
@@ -2365,7 +2365,6 @@ void Camera_8002CB0C(CameraBounds* bounds)
 
 void Camera_8002CDDC(void* unused)
 {
-    s8* slot_ptr;
     Vec3* pos_ptr;
     HSD_GObj* gobj;
     CmSubject* subject;
@@ -2376,20 +2375,20 @@ void Camera_8002CDDC(void* unused)
     Camera_80030DF8();
     Camera_800293E0();
     Camera_8002958C(&bounds, &cm_80452C68.transform);
-    slot_ptr = &cm_80452C68.x2C4;
-    if (*slot_ptr != 11) {
+    if (cm_80452C68.x2C4 != 11) {
         pos_ptr = &cm_80452C68.x308;
-        while (*slot_ptr == 10 || !get_subject_pos(pos_ptr, slot_ptr) ||
-               (gobj = Player_GetEntity(*slot_ptr)) == NULL ||
+        while (cm_80452C68.x2C4 == 10 ||
+               !get_subject_pos(pos_ptr, &cm_80452C68.x2C4) ||
+               (gobj = Player_GetEntity(cm_80452C68.x2C4)) == NULL ||
                ftLib_8008701C(gobj))
         {
-            *slot_ptr = Camera_8002BA00(*slot_ptr, 1);
+            cm_80452C68.x2C4 = Camera_8002BA00(cm_80452C68.x2C4, 1);
         }
     }
 
     Camera_8002CB0C(&bounds);
-    if (*slot_ptr != 10 && *slot_ptr != 11 &&
-        (gobj = Player_GetEntity(*slot_ptr)) != NULL &&
+    if (cm_80452C68.x2C4 != 10 && cm_80452C68.x2C4 != 11 &&
+        (gobj = Player_GetEntity(cm_80452C68.x2C4)) != NULL &&
         (subject = ftLib_80086B74(gobj)) != NULL && Camera_8002928C(subject) &&
         !subject->x8 && (u32) Camera_80029124(&subject->x1C, 0) == 0 &&
         ABS(subject->x1C.z) < 30.0f)
@@ -2399,21 +2398,22 @@ void Camera_8002CDDC(void* unused)
         return;
     }
 
-        Camera_80030DF8();
-        Camera_800293E0();
-        Camera_8002B0E0();
-        update_transform(&bounds2, &cm_80452C68.transform);
-        update_transform(&bounds_copy, &cm_80452C68.transform_copy);
-        update_zoom_distance();
-        update_bounds(&bounds2, &bounds_copy);
-        update_avg_bounds_width();
+    Camera_80030DF8();
+    Camera_800293E0();
+    Camera_8002B0E0();
+    update_transform(&bounds2, &cm_80452C68.transform);
+    update_transform(&bounds_copy, &cm_80452C68.transform_copy);
+    update_zoom_distance();
+    update_bounds(&bounds2, &bounds_copy);
+    update_avg_bounds_width();
 }
 
-static inline void approach_vec3_blk77551(f32 iy, f32 y, f32 *dy)
+static inline void approach_vec3_blk77551(f32 iy, f32 y, f32* dy)
 {
     (*dy) = y - iy;
 }
-static inline void approach_vec3_blk77515(Vec3 * target, Vec3 * cur, f32 *y, f32 *iy)
+static inline void approach_vec3_blk77515(Vec3* target, Vec3* cur, f32* y,
+                                          f32* iy)
 {
     (*y) = target->y;
     (*iy) = cur->y;
@@ -2445,23 +2445,23 @@ static inline void approach_vec3(Vec3* target, Vec3* cur, f32 smooth)
     cur->z = ix * smooth + cur->z;
 }
 
-static inline HSD_GObj * Camera_8002D318_pi78538(s8 * slot_ptr)
+static inline HSD_GObj* Camera_8002D318_pi78538(s8* slot_ptr)
 {
     return Player_GetEntity(*slot_ptr);
 }
-static inline CmSubject * Camera_8002D318_pi78633(HSD_GObj * gobj)
+static inline CmSubject* Camera_8002D318_pi78633(HSD_GObj* gobj)
 {
     return ftLib_80086B74(gobj);
 }
-static inline Vec3 * Camera_8002D318_pi78728(CmSubject * subject)
+static inline Vec3* Camera_8002D318_pi78728(CmSubject* subject)
 {
     return &subject->x1C;
 }
-static inline void Camera_8002D318_blk78072(s8 * slot_ptr, HSD_GObj * *gobj)
+static inline void Camera_8002D318_blk78072(s8* slot_ptr, HSD_GObj** gobj)
 {
     (*gobj) = Player_GetEntity(*slot_ptr);
 }
-static inline void Camera_8002D318_blk78572(s8 * *slot_ptr)
+static inline void Camera_8002D318_blk78572(s8** slot_ptr)
 {
     (*slot_ptr) = &cm_80452C68.x2C4;
 }
@@ -2469,9 +2469,7 @@ static inline float Camera_8002D318_pi81130(f32 distance)
 {
     return distance * cosf(cm_80452C68.pitch_offset);
 }
-static inline float Camera_8002D318_pi80063(Vec3 * pos, f32 half_z)
-{
-}
+static inline float Camera_8002D318_pi80063(Vec3* pos, f32 half_z) {}
 static inline float Camera_8002D318_pi80300(void)
 {
     return cm_803BCCA0.x64;
@@ -2566,7 +2564,8 @@ block_20:
     update_avg_bounds_width();
 }
 
-static inline void Camera_8002D85C_blk83687(f32 * yaw_ptr, Camera * cam, f32 * pitch_ptr, f32 distance)
+static inline void Camera_8002D85C_blk83687(f32* yaw_ptr, Camera* cam,
+                                            f32* pitch_ptr, f32 distance)
 {
     {
         f32 horiz_dist;
@@ -2696,7 +2695,6 @@ fov_done:
 
     Camera_8002D85C_blk83687(yaw_ptr, cam, pitch_ptr, distance);
 
-
     {
         CameraUnkGlobals* globals;
         f32 smooth;
@@ -2710,16 +2708,15 @@ fov_done:
         smooth = globals->x68;
         {
             f32 tmp_p84448 = x - cam->transform.position.x;
-            cam->transform.position.x = (tmp_p84448) * smooth +
-                                    cam->transform.position.x;
+            cam->transform.position.x =
+                (tmp_p84448) *smooth + cam->transform.position.x;
         }
         cam->transform.position.y = (y - cam->transform.position.y) * smooth +
                                     cam->transform.position.y;
         cam->transform.position.z = (z - cam->transform.position.z) * smooth +
                                     cam->transform.position.z;
     }
-    fallback: {
-
+fallback: {
     CameraBounds bounds2;
     CameraBounds bounds;
 
