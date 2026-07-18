@@ -2218,7 +2218,7 @@ void Camera_8002CB0C(CameraBounds* bounds)
 {
     Camera* camera;
     CameraInputs inputs;
-    s32 valid;
+    HSD_GObj* entity;
     s32 selected_slot;
     s8* slot;
     s32 dir;
@@ -2279,59 +2279,15 @@ void Camera_8002CB0C(CameraBounds* bounds)
         slot = &camera->x2C4;
         *slot = Camera_8002BA00(*slot, dir);
         x308_ptr = &camera->x308;
-        /// @todo remove gotos
-        goto loop_check;
 
-    loop_next:
-        *slot = Camera_8002BA00(*slot, dir);
-
-    loop_check: {
-        s8 s = *slot;
-        if (s == 0xA) {
-            goto loop_next;
-        }
-        valid = 1;
-        if (s == 0xB) {
-            valid = 0;
-            goto check_valid;
-        }
-        if (s == 0xA) {
-            Stage_UnkSetVec3TCam_Offset(x308_ptr);
-            goto check_valid;
-        }
+        while (*slot == 10 || !get_subject_pos(x308_ptr, slot) ||
+               (entity = Player_GetEntity(*slot)) == NULL ||
+               ftLib_8008701C(entity))
         {
-            HSD_GObj* entity = Player_GetEntity(s);
-            if (entity == NULL) {
-                goto set_invalid;
-            }
-            {
-                CmSubject* subject = ftLib_80086B74(entity);
-                if (subject == NULL) {
-                    goto set_invalid;
-                }
-                *x308_ptr = subject->x1C;
-                goto check_valid;
-            }
-        }
-    }
-    set_invalid:
-        valid = 0;
-
-    check_valid:
-        if (valid == 0) {
-            goto loop_next;
-        }
-        {
-            HSD_GObj* entity2 = Player_GetEntity((s8) *slot);
-            if (entity2 == NULL) {
-                goto loop_next;
-            }
-            if (ftLib_8008701C(entity2)) {
-                goto loop_next;
-            }
+            *slot = Camera_8002BA00(*slot, dir);
         }
 
-        selected_slot = (s8) *slot;
+        selected_slot = *slot;
         z_init = Stage_GetPauseCamZPosInit();
 
         camera->x314.x = camera->x314.y = camera->x314.z = 0.0f;
