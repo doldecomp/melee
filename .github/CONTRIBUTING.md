@@ -117,7 +117,7 @@ pre-commit run --all-files # Run the hook once on existing code
 - Struct offsets should contain bit offsets when applicable
 - Bitmasks should be defined via union
 - When a section of a struct is understood to be padding, it should be
-  written as `x<Hex-Offset>_pad` and use a u8 array.
+  written as `pad_<Hex-Offset>` and use a u8 array.
 - Struct member names should be snake_case.
 - Struct definitions should be defined in `types.h` for a given module.
 - Typedefs associated with a given struct should be in the sibling `forward.h`
@@ -129,7 +129,7 @@ pre-commit run --all-files # Run the hook once on existing code
       ```c
       struct Player {
           /*  +0   */ u32 x0;
-          /*  +4   */ u8 x4_pad[0xC];
+          /*  +4   */ u8 pad_4[0xC];
           /* +10   */ short x10;
           /* +12   */ u8 well_known_something;
           /* +13:0 */ bool enable_rumble: 1
