@@ -17,10 +17,8 @@
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>
-#include <baselib/debug.h>
 #include <baselib/jobj.h>
 #include <baselib/mtx.h>
-#include <baselib/particle.h>
 #include <baselib/state.h>
 #include <baselib/tev.h>
 #include <MetroTRK/intrinsics.h>

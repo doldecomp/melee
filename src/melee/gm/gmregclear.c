@@ -3221,14 +3221,13 @@ s32 fn_80181C80(s32 arg0)
 
 void fn_80181E18(void)
 {
-    s32 mode;
     s32 var_r29;
     s32 next;
     s32 temp;
     s32 count;
     s32 i;
 
-    mode = gm_GetCurrentGameMode();
+    s32 mode = gm_GetCurrentGameMode();
 
     if (lbl_80472ED8.x8 <= 0x5A) {
         lbl_80472ED8.x8 += 1;

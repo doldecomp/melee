@@ -1,4 +1,5 @@
 #include "lbaudio_ax.static.h"
+#include <placeholder.h>
 
 #include "baselib/forward.h"
 
@@ -6,7 +7,6 @@
 
 #include <melee/ft/forward.h>
 
-#include <m2c_macros.h>
 #include <dolphin/ai.h>
 #include <dolphin/ar.h>
 #include <dolphin/axfx.h>

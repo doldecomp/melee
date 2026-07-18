@@ -9,7 +9,8 @@
 
 #include "gm/forward.h"
 
-#include <m2c_macros.h>
+#include "it/itspawn.h"
+
 #include <math.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobjproc.h>
@@ -30,7 +31,6 @@
 #include <melee/if/ifstatus.h>
 #include <melee/if/ifstock.h>
 #include <melee/if/iftime.h>
-#include <melee/it/it_266F.h>
 #include <melee/it/item.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_0195.h>
@@ -1387,6 +1387,31 @@ void fn_8016CFE0(void)
     }
 }
 
+static inline int fn_8016CBE8_inline(void)
+{
+    HSD_PadStatus* pad;
+    bool var_r0;
+    int i;
+    for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
+        pad = &HSD_PadCopyStatus[(u8) i];
+        if (pad->err == 0) {
+            if (DbLevel >= 3) {
+                if ((pad->trigger & 8) && (pad->button & HSD_PAD_X)) {
+                    var_r0 = true;
+                } else {
+                    var_r0 = false;
+                }
+            } else {
+                var_r0 = pad->trigger & 0x1000;
+            }
+            if (var_r0) {
+                return i;
+            }
+        }
+    }
+    return -1;
+}
+
 void gm_8016D32C_OnFrame(void)
 {
     int i;
@@ -1397,7 +1422,7 @@ void gm_8016D32C_OnFrame(void)
 
     fn_8016758C();
     if (gm_801A45E8(2) != 0) {
-        gm_GetPlayerPressingUnpause();
+        fn_8016CBE8_inline();
         gm_DoUnpauseChecksAndRoutine(tmp, 2);
         if (tmp->pause_timer != 0) {
             tmp->pause_timer--;

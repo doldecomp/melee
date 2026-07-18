@@ -6,6 +6,7 @@
 
 #include "baselib/debug.h"
 
+#include <math_ppc.h> // IWYU pragma: keep
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>
@@ -15,11 +16,9 @@
 #include <melee/ft/chara/ftMars/types.h>
 #include <melee/ft/inlines.h>
 #include <melee/it/it_26B1.h>
-#include <melee/it/item.h>
 #include <melee/it/items/itsword.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
-#include <MSL/math_ppc.h>
 
 typedef struct AfterimageVtx {
     f32 x, y, z;
@@ -112,6 +111,8 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
             params = (itSword_UnkBytes*) &da->x78;
             break;
         }
+        default:
+            break;
         }
     }
 
@@ -451,6 +452,8 @@ void ftCo_800C2FD8(Fighter_GObj* gobj)
             var_r5 = &da->x78;
             break;
         }
+        default:
+            break;
         }
         var_r29 = 0;
         fp->x20F8 = var_r5->x18;

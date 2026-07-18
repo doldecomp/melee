@@ -20,10 +20,8 @@
 #include "lb/lbshadow.h"
 #include "lb/lbspdisplay.h"
 #include "lb/lbvector.h"
-#include "mp/mpcoll.h"
-#include "mp/mplib.h"
 
-#include <trigf.h>
+#include <trigf.h> // IWYU pragma: keep
 #include <dolphin/os.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>

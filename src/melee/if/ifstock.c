@@ -119,9 +119,9 @@ void ifStock_802F8298(HSD_GObj* gobj)
     struct IfStockUserData* user_data;
     HSD_JObj* jobj;
     struct ifStock_804A1378* stock;
-    HSD_JObj* jobj2;
     HSD_JObj* jobj_anim;
     int i;
+    HSD_JObj* jobj2;
     Vec3 vecA, vecB;
     PAD_STACK(24);
     user_data = GET_IFSTOCK(gobj);

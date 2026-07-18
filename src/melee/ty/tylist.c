@@ -1,44 +1,40 @@
 #include "tylist.h"
 
-#include "m2c_macros.h"
-#include "math_ppc.h" // IWYU pragma: keep
-#include "placeholder.h"
-#include "platform.h"
-#include "stddef.h"
 #include "toy.h"
-#include "trigf.h" // IWYU pragma: keep
 #include "types.h"
 
 #include <placeholder.h>
+#include <platform.h>
 
-#include "baselib/archive.h"
-#include "baselib/cobj.h"
-#include "baselib/controller.h"
-#include "baselib/debug.h"
-#include "baselib/displayfunc.h"
-#include "baselib/dobj.h"
-#include "baselib/fog.h"
-#include "baselib/gobj.h"
-#include "baselib/gobjgxlink.h"
-#include "baselib/gobjobject.h"
-#include "baselib/gobjplink.h"
-#include "baselib/gobjproc.h"
-#include "baselib/jobj.h"
-#include "baselib/lobj.h"
-#include "baselib/mobj.h"
-#include "baselib/sislib.h"
-#include "baselib/tobj.h"
-#include "baselib/wobj.h"
-#include "dolphin/mtx.h"
-#include "dolphin/os.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbspdisplay.h"
 #include "mn/mnmain.h"
 #include "mn/mnsoundtest.h"
-#include "MSL/math_ppc.h"
 #include "ty/toy.h"
 #include "ty/types.h"
+
+#include <math_ppc.h> // IWYU pragma: keep
+#include <trigf.h>    // IWYU pragma: keep
+#include <dolphin/mtx.h>
+#include <dolphin/os.h>
+#include <baselib/archive.h>
+#include <baselib/cobj.h>
+#include <baselib/controller.h>
+#include <baselib/displayfunc.h>
+#include <baselib/dobj.h>
+#include <baselib/fog.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjobject.h>
+#include <baselib/gobjplink.h>
+#include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
+#include <baselib/lobj.h>
+#include <baselib/mobj.h>
+#include <baselib/sislib.h>
+#include <baselib/tobj.h>
+#include <baselib/wobj.h>
 
 /* 312834 */ static char* _tyList_80312834(char* buf, u32 num);
 /* 312904 */ static void _tyList_80312904(void*, s8);

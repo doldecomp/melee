@@ -2,13 +2,12 @@
 
 #include "gr/grdisplay.h"
 #include "gr/grdynamicattr.h"
-#include "gr/grlib.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
 #include "gr/inlines.h"
 #include "gr/stage.h"
 #include "gr/types.h"
-#include "it/inlines.h"
+#include "it/types.h"
 #include "lb/lbspdisplay.h"
 #include "mp/mplib.h"
 

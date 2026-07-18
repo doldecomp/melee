@@ -26,7 +26,6 @@
 
 #include "sc/types.h"
 
-#include <printf.h>
 #include <dolphin/os.h>
 #include <baselib/controller.h>
 #include <baselib/dobj.h>
@@ -34,12 +33,9 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 #include <baselib/mobj.h>
-#include <baselib/particle.h>
-#include <baselib/random.h>
 #include <baselib/sislib.h>
 
 /* 4D6688 */ extern HSD_Archive* lbl_804D6688;
@@ -507,9 +503,9 @@ void fn_8019D074(HSD_GObj* gobj)
 
 void fn_8019D1BC(void)
 {
+    HSD_JObj* jobj;
     TmData* tmd;
     HSD_GObj* gobj;
-    HSD_JObj* jobj;
     HSD_JObj* c;
     s32 i;
     f32 pos;
@@ -1053,11 +1049,9 @@ void gm_8019E634(void)
 
     /* Handicap adjustment */
     if ((u8) gmMainLib_GetGameRules()->handicap == 1) {
-        u32 hbuf_init;
         u8* hbuf;
 
-        hbuf_init = lbl_804DA948;
-        hbuf = (u8*) &hbuf_init;
+        hbuf = (u8*) &lbl_804DA948;
 
         /* Read handicap from x37 entries */
         for (i = 0; i < 4; i++) {
