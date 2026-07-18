@@ -1,5 +1,7 @@
 #include "itunknown.h"
 
+#include "inlines.h"
+
 #include "cm/camera.h"
 #include "ef/eflib.h"
 #include "gr/stage.h"
@@ -184,7 +186,7 @@ bool itUnknown_UnkMotion1_Coll(Item_GObj* gobj)
 
 void it_802CEC24(Item_GObj* gobj)
 {
-    Item_EnterStateWithEffectHitlag(gobj, 2);
+    Item_EnterAirStateWithHitlag(gobj, 2);
 }
 
 bool itUnknown_UnkMotion2_Anim(Item_GObj* gobj)

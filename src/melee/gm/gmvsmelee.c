@@ -297,19 +297,19 @@ void gm_801A5F64(GameScene* scene_data, VsModeData* vs_data, u8 next_scene)
             unk_bool = false;
             idx = gm_801A5360(match_end);
             unk = gm_80172DD4(gmMainLib_8015ED98()->x0);
-            if (unk != 0x21) {
+            if (unk != CHKIND_NONE) {
                 gm_801736E8(match_end->player_standings[idx].character_kind,
                             (match_end->player_standings[idx].x3), idx,
                             match_end->player_standings[idx].x4, unk, 0);
                 gm_SetPendingSceneIndex(0x80);
                 unk_bool = true;
-            } else if ((unk = gm_80172D78()) != 0x21) {
+            } else if ((unk = gm_80172D78()) != CHKIND_NONE) {
                 gm_801736E8(match_end->player_standings[idx].character_kind,
                             (match_end->player_standings[idx].x3), idx,
                             match_end->player_standings[idx].x4, unk, 0);
                 gm_SetPendingSceneIndex(0x80);
                 unk_bool = true;
-            } else if ((unk = gm_80172E74()) != 0x21) {
+            } else if ((unk = gm_80172E74()) != CHKIND_NONE) {
                 gm_801736E8(match_end->player_standings[idx].character_kind,
                             (match_end->player_standings[idx].x3), idx,
                             match_end->player_standings[idx].x4, unk, 0);

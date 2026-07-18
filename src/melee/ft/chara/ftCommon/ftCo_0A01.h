@@ -83,7 +83,6 @@ struct _m2c_stack_ftCo_800A3554 {
 /* 09DDFC */ static bool ftCo_800A0F00(Fighter_GObj* gobj);
 /* 09E094 */ static void ftCo_800AD7FC(Fighter*);
 /* 09E4C0 */ static void ftCo_800ADC28(Fighter*);
-/* 09E6E0 */ static void ftCo_800ADE48(Fighter* fp);
 /* 09EE38 */ static void ftCo_800A1F3C(Fighter* fp, float arg1, float arg2,
                                        float arg3);
 /* 09EE94 */ static bool ftCo_800A1F98(int x, float y);

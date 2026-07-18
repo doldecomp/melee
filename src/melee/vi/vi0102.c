@@ -89,20 +89,9 @@ void vi0102_JObjCallback(HSD_GObj* gobj)
 
 void vi0102_CameraCallback(HSD_GObj* gobj, int unused)
 {
-    HSD_CObj* cobj;
     PAD_STACK(8);
     lbShadow_8000F38C(0);
-    cobj = gobj->hsd_obj;
-    if (HSD_CObjSetCurrent(cobj)) {
-        HSD_SetEraseColor(erase_colors_vi0102.r, erase_colors_vi0102.g,
-                          erase_colors_vi0102.b, erase_colors_vi0102.a);
-        cobj = gobj->hsd_obj;
-        HSD_CObjEraseScreen(cobj, 1, 0, 1);
-        vi_8031CA04(gobj);
-        gobj->gxlink_prios = 0x881;
-        HSD_GObj_80390ED0(gobj, 7);
-        HSD_CObjEndCurrent();
-    }
+    vi_RunCamera(gobj, (u8*) &erase_colors_vi0102, 0x881);
 }
 
 /// Used to force float ordering of file

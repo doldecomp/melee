@@ -2,18 +2,17 @@
 
 #include "ftdynamics.h"
 
+#include "baselib/random.h"
 #include "ft/ftanim.h"
 #include "ft/ftdata.h"
 #include "ft/inlines.h"
 #include "it/it_26B1.h"
 
-#include <dolphin/mtx.h>
 #include <baselib/debug.h>
-#include <baselib/gobj.h>
 
 bool ftCo_8008A698(Fighter* fp)
 {
-    if (fp->item_gobj != NULL && it_8026B320(fp->item_gobj) != 2) {
+    if (fp->item_gobj != NULL && itGetHoldKind(fp->item_gobj) != 2) {
         return true;
     }
     return false;

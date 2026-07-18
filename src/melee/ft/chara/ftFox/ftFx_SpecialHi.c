@@ -17,6 +17,7 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Pass.h"
+#include "ftCommon/inlines.h"
 #include "ftFox/types.h"
 #include "lb/lbrefract.h"
 #include "lb/lbvector.h"
@@ -174,16 +175,8 @@ void ftFx_SpecialHiHold_Coll(HSD_GObj* gobj)
 void ftFx_SpecialHiHoldAir_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 facingDir;
 
-    /// @todo Ternary operator should be possible here somehow.
-    if (fp->facing_dir < 0.0f) {
-        facingDir = -1;
-    } else {
-        facingDir = 1;
-    }
-
-    if (ft_CheckGroundAndLedge(gobj, facingDir)) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         ftFx_SpecialHiHoldAir_AirToGround(gobj);
         return;
     }
@@ -209,10 +202,8 @@ void ftFx_SpecialHiHoldAir_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialHiHold,
-                              FTFOX_SPECIALHI_COLL_FLAG, fp->cur_anim_frame,
-                              1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftFx_MS_SpecialHiHold,
+                                    FTFOX_SPECIALHI_COLL_FLAG);
 
     fp->accessory4_cb = ftFx_SpecialHi_CreateChargeGFX;
 
@@ -728,16 +719,9 @@ void ftFx_SpecialHiBound_Phys(HSD_GObj* gobj)
 void ftFx_SpecialHiBound_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 cliffCatchDir;
 
     if (fp->ground_or_air == GA_Air) {
-        if (fp->facing_dir < 0.0f) {
-            cliffCatchDir = -1;
-        } else {
-            cliffCatchDir = 1;
-        }
-
-        if (ft_CheckGroundAndLedge(gobj, cliffCatchDir)) {
+        if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
             ftCommon_8007D7FC(fp);
             return;
         }

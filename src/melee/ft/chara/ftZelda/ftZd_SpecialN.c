@@ -4,6 +4,9 @@
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+
+#include "forward.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
@@ -13,6 +16,7 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/inlines.h"
 #include "ftZelda/types.h"
 
 #include <dolphin/mtx.h>
@@ -202,9 +206,7 @@ void ftZd_SpecialN_8013AC88(HSD_GObj* gobj)
     u8 _[12];
 
     fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 342, 0x0C4C508E, fp->cur_anim_frame, 1.0,
-                              0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, 342, ftZd_MF_SpecialN_Coll);
 
     fighter2 = GET_FIGHTER(gobj);
     attributes = fighter2->dat_attrs;
@@ -225,9 +227,7 @@ void ftZd_SpecialN_8013AD1C(HSD_GObj* gobj)
     u8 _[12];
 
     fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 341, 0x0C4C508E, fp->cur_anim_frame, 1.0,
-                              0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, 341, ftZd_MF_SpecialN_Coll);
 
     fighter2 = GET_FIGHTER(gobj);
     attributes = fighter2->dat_attrs;

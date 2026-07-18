@@ -1,5 +1,6 @@
 #include "itlugia.h"
 
+#include "inlines.h"
 #include "placeholder.h"
 
 #include "ef/eflib.h"
@@ -363,8 +364,7 @@ void it_802D1BBC(Item_GObj* gobj)
 
 void it_802D1D40(Item_GObj* gobj)
 {
-    Item_EnterStateWithEffectHitlag(gobj, 0);
-    it_80273670(gobj, 0, 0.0f);
+    Item_EnterAirStateWithHitlagAndStateDesc(gobj);
 }
 
 bool it_802D1DB4(Item_GObj* gobj)

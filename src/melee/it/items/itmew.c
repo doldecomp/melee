@@ -1,5 +1,7 @@
 #include "itmew.h"
 
+#include "inlines.h"
+
 #include "ef/eflib.h"
 #include "gr/stage.h"
 #include "it/inlines.h"
@@ -120,8 +122,7 @@ bool itMew_UnkMotion2_Coll(Item_GObj* gobj)
 
 void it_802D3D94(Item_GObj* gobj)
 {
-    Item_EnterStateWithEffectHitlag(gobj, 0);
-    it_80273670(gobj, 0, 0.0F);
+    Item_EnterAirStateWithHitlagAndStateDesc(gobj);
 }
 
 bool itMew_UnkMotion0_Anim(Item_GObj* gobj)

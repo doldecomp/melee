@@ -1,5 +1,7 @@
 #include "itkamex.h"
 
+#include "inlines.h"
+
 #include "ef/eflib.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
@@ -199,7 +201,7 @@ bool itKamex_UnkMotion2_Coll(Item_GObj* gobj)
 
 void it_802CAA40(Item_GObj* gobj)
 {
-    Item_EnterStateWithEffectHitlag(gobj, 3);
+    Item_EnterAirStateWithHitlag(gobj, 3);
 }
 
 bool itKamex_UnkMotion3_Anim(Item_GObj* gobj)

@@ -1,5 +1,7 @@
 #include "ithitodeman.h"
 
+#include "inlines.h"
+
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/ftlib.h"
@@ -336,7 +338,7 @@ void it_802D4B50(Item_GObj* gobj) {}
 
 void it_802D4B54(Item_GObj* gobj)
 {
-    Item_EnterStateWithEffectHitlag(gobj, 2);
+    Item_EnterAirStateWithHitlag(gobj, 2);
 }
 
 bool itHitodeman_UnkMotion2_Anim(Item_GObj* gobj)

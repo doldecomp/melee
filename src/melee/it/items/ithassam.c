@@ -1,5 +1,6 @@
 #include "ithassam.h"
 
+#include "inlines.h"
 #include "math.h"
 
 #include "cm/camera.h"
@@ -358,7 +359,7 @@ bool itHassam_UnkMotion2_Coll(Item_GObj* gobj)
 
 void it_802CE640(Item_GObj* gobj)
 {
-    Item_EnterStateWithEffectHitlag(gobj, 3);
+    Item_EnterAirStateWithHitlag(gobj, 3);
 }
 
 bool itHassam_UnkMotion3_Anim(Item_GObj* gobj)

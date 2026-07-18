@@ -1,5 +1,7 @@
 #include "itraikou.h"
 
+#include "inlines.h"
+
 #include "cm/camera.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
@@ -143,7 +145,7 @@ void it_802CFAFC(Item_GObj* gobj)
 
 void it_802CFB78(Item_GObj* gobj)
 {
-    Item_EnterStateWithEffectHitlag(gobj, 1);
+    Item_EnterAirStateWithHitlag(gobj, 1);
 }
 
 bool itRaikou_UnkMotion1_Anim(Item_GObj* gobj)

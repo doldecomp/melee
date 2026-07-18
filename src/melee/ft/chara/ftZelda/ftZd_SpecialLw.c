@@ -6,6 +6,9 @@
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+
+#include "forward.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
@@ -14,6 +17,7 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/inlines.h"
 #include "ftSeak/ftSk_SpecialLw.h"
 #include "ftZelda/types.h"
 #include "it/items/itzeldadinfire.h"
@@ -193,9 +197,7 @@ void ftZd_SpecialLw_8013B1CC(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 357, 0x0C4C508E, fp->cur_anim_frame, 1.0,
-                              0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, 357, ftZd_MF_SpecialLw_Coll);
     fp->accessory4_cb = &ftZd_SpecialLw_8013ADB4;
 }
 
@@ -205,9 +207,7 @@ void ftZd_SpecialLw_8013B238(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 355, 0x0C4C508E, fp->cur_anim_frame, 1.0,
-                              0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, 355, ftZd_MF_SpecialLw_Coll);
     fp->accessory4_cb = &ftZd_SpecialLw_8013ADB4;
 }
 
@@ -283,9 +283,7 @@ void ftZd_SpecialLw_8013B400(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 358, 0x0C4C508E, fp->cur_anim_frame, 1.0,
-                              0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, 358, ftZd_MF_SpecialLw_Coll);
     fp->accessory4_cb = &ftZd_SpecialLw_8013AE30;
 }
 
@@ -296,9 +294,7 @@ void ftZd_SpecialLw_8013B46C(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 356, 0x0C4C508E, fp->cur_anim_frame, 1.0,
-                              0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, 356, ftZd_MF_SpecialLw_Coll);
     fp->accessory4_cb = &ftZd_SpecialLw_8013AE30;
 }
 

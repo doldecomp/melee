@@ -1,5 +1,7 @@
 #include "itthunder.h"
 
+#include "inlines.h"
+
 #include <placeholder.h>
 #include <platform.h>
 
@@ -148,8 +150,7 @@ bool itThunder_UnkMotion2_Coll(Item_GObj* gobj)
 
 void it_802CCE28(Item_GObj* gobj)
 {
-    Item_EnterStateWithEffectHitlag(gobj, 0);
-    it_80273670(gobj, 0, 0.0f);
+    Item_EnterAirStateWithHitlagAndStateDesc(gobj);
 }
 
 bool itThunder_UnkMotion0_Anim(Item_GObj* gobj)

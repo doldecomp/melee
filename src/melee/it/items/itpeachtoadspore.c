@@ -1,6 +1,7 @@
 #include "itpeachtoadspore.h"
 
 #include "common_structs.h"
+#include "inlines.h"
 
 #include "baselib/forward.h"
 
@@ -32,15 +33,7 @@ Item_GObj* it_802BE214(Item_GObj* item_gobj, Vec3* pos, ItemKind kind,
     Item_GObj* spawn_gobj;
 
     spawn.kind = kind;
-    spawn.prev_pos = *pos;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = facing_dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
-    spawn.x0_parent_gobj = item_gobj;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = 1;
-    spawn.x40 = 0;
+    Item_InitSpawn(&spawn, item_gobj, pos, facing_dir);
 
     spawn_gobj = Item_80268B18(&spawn);
     if (spawn_gobj != NULL) {

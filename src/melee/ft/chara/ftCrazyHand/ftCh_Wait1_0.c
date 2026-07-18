@@ -4,11 +4,13 @@
 #include "ftCh_TagCancel.h"
 #include "types.h"
 
-#include <placeholder.h>
 #include <platform.h>
+
+#include "baselib/controller.h"
 
 #include "baselib/forward.h"
 
+#include "baselib/random.h"
 #include "ft/fighter.h"
 #include "ft/ft_084E.h"
 #include "ft/ftbosslib.h"
@@ -37,7 +39,6 @@
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>
-#include <MetroTRK/intrinsics.h>
 
 static void ftCh_Init_80156310(HSD_GObj* gobj);
 static void ftCh_Init_80156AD8(HSD_GObj* gobj);

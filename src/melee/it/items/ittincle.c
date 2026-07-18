@@ -130,6 +130,7 @@ bool itTincle_Logic13_DmgReceived(Item_GObj* gobj)
 
 bool itTincle_Logic13_DmgDealt(Item_GObj* gobj)
 {
+    /// @todo Use #itGetMotionId if it can be made to inline here.
     if (GET_ITEM(gobj)->msid != 7) {
         it_802EC1F4(gobj);
     }
@@ -151,7 +152,7 @@ void it_802EB6DC(Item_GObj* gobj)
     ip->pos.y = sa->x14;
     ip->pos.z = 2.0f;
     it_802762BC(ip);
-    ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0f;
+    itResetVelocity(ip);
     range_i = sa->x4 - sa->x8;
     if (range_i < 0) {
         range_i = -range_i;
@@ -234,9 +235,7 @@ void it_802EBA00(Item_GObj* gobj)
     f32 dur_f = (f32) sa->x28;
     f32 height = sa->x24;
 
-    ip->x40_vel.z = 0.0f;
-    ip->x40_vel.y = 0.0f;
-    ip->x40_vel.x = 0.0f;
+    itResetVelocity(ip);
 
     ip->xDD4_itemVar.tincle.x20 = sa->x2C;
     ip->x40_vel.y = 0.0f;
@@ -391,9 +390,7 @@ void it_802EBE5C(Item_GObj* gobj)
     ip->xDD4_itemVar.tincle.x48 = ip->xDD4_itemVar.tincle.x38;
     ip->xDD4_itemVar.tincle.x40 = (f32) ip->xDD4_itemVar.tincle.x2C;
 
-    ip->x40_vel.z = 0.0f;
-    ip->x40_vel.y = 0.0f;
-    ip->x40_vel.x = 0.0f;
+    itResetVelocity(ip);
 
     ip->xDD4_itemVar.tincle.x20 = data->x40;
     ip->xDD4_itemVar.tincle.x4C = ip->pos.y;
@@ -481,9 +478,7 @@ void itTincle_UnkMotion5_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->x40_vel.y <= 0.0f) {
-        ip->x40_vel.z = 0.0f;
-        ip->x40_vel.y = 0.0f;
-        ip->x40_vel.x = 0.0f;
+        itResetVelocity(ip);
         ip->xDD4_itemVar.tincle.x38 = 0.0f;
         ip->xDD4_itemVar.tincle.x2C = 0;
         ip->xDD4_itemVar.tincle.x20 = 0;
@@ -503,9 +498,7 @@ void it_802EC18C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(8);
-    ip->x40_vel.z = 0.0f;
-    ip->x40_vel.y = 0.0f;
-    ip->x40_vel.x = 0.0f;
+    itResetVelocity(ip);
     it_802756D0(gobj);
     ip->xDD4_itemVar.tincle.x20 = 3;
     Item_80268E5C(gobj, 6, 0x12);
@@ -516,9 +509,7 @@ void it_802EC1F4(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(8);
-    ip->x40_vel.z = 0.0f;
-    ip->x40_vel.y = 0.0f;
-    ip->x40_vel.x = 0.0f;
+    itResetVelocity(ip);
     it_802756D0(gobj);
     ip->xDD4_itemVar.tincle.x20 = 0;
     Item_80268E5C(gobj, 7, 0x12);
@@ -590,9 +581,7 @@ bool itTincle_UnkMotion8_Coll(Item_GObj* gobj)
 void it_802EC3F4(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
-    ip->x40_vel.z = 0.0f;
-    ip->x40_vel.y = 0.0f;
-    ip->x40_vel.x = 0.0f;
+    itResetVelocity(ip);
     ip->xDC8_word.flags.x1A = 0;
     ip->x70_nudge.z = 0.0f;
     ip->x70_nudge.y = 0.0f;
@@ -720,9 +709,7 @@ void itTincle_UnkMotion12_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->x40_vel.y <= 0.0f) {
-        ip->x40_vel.z = 0.0f;
-        ip->x40_vel.y = 0.0f;
-        ip->x40_vel.x = 0.0f;
+        itResetVelocity(ip);
         ip->xDD4_itemVar.tincle.x38 = 0.0f;
         ip->xDD4_itemVar.tincle.x2C = 0;
         ip->xDD4_itemVar.tincle.x20 = 0;

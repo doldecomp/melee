@@ -1,5 +1,7 @@
 #include "ithouou.h"
 
+#include "inlines.h"
+
 #include <placeholder.h>
 #include <platform.h>
 
@@ -298,8 +300,7 @@ void it_802D2B4C(Item_GObj* gobj)
 
 void it_802D2BE0(Item_GObj* gobj)
 {
-    Item_EnterStateWithEffectHitlag(gobj, 0);
-    it_80273670(gobj, 0, 0.0f);
+    Item_EnterAirStateWithHitlagAndStateDesc(gobj);
 }
 
 bool it_802D2C54(Item_GObj* gobj)

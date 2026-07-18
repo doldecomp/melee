@@ -1,5 +1,7 @@
 #include "itmatadogas.h"
 
+#include "inlines.h"
+
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/ft_0C31.h"
@@ -106,7 +108,7 @@ void it_802CB2B0(Item_GObj* gobj)
 
 void it_802CB350(Item_GObj* gobj)
 {
-    Item_EnterStateWithEffectHitlag(gobj, 2);
+    Item_EnterAirStateWithHitlag(gobj, 2);
 }
 
 bool itMatadogas_UnkMotion2_Anim(Item_GObj* gobj)

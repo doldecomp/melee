@@ -1,5 +1,7 @@
 #include "itsuikun.h"
 
+#include "inlines.h"
+
 #include "cm/camera.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
@@ -142,7 +144,7 @@ void it_802CFF30(Item_GObj* gobj)
 
 void it_802CFFAC(Item_GObj* gobj)
 {
-    Item_EnterStateWithEffectHitlag(gobj, 1);
+    Item_EnterAirStateWithHitlag(gobj, 1);
 }
 
 bool itSuikun_UnkMotion1_Anim(Item_GObj* gobj)

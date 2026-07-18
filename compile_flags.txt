@@ -33,6 +33,7 @@
 -Wno-missing-braces
 -Wno-missing-field-initializers
 -Wno-return-type
+-Wno-self-assign
 -Wno-sign-compare
 -Wno-sometimes-uninitialized
 -Wno-switch

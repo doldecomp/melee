@@ -1,5 +1,7 @@
 #include "itpikachutjoltair.h"
 
+#include "inlines.h"
+
 #include <placeholder.h>
 #include <platform.h>
 
@@ -90,16 +92,7 @@ Item_GObj* it_802B4224(HSD_GObj* owner, Item_GObj* gobj, Vec3* pos, s32 kind,
     PAD_STACK(8);
 
     spawn.kind = kind;
-    spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0f;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = facing_dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    spawn.x0_parent_gobj = owner;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
+    Item_InitSpawnOnPlane(&spawn, owner, pos, facing_dir);
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {
         Item* ip = GET_ITEM(item_gobj);
