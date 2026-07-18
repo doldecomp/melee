@@ -649,13 +649,34 @@ void gm_801B70DC(GameScene* scene)
     gmMultiman_LeaveFinish(data, css_data);
 }
 
+static inline void gmMultiman_InitPlayers(StartMeleeData* match,
+                                          VsModeData* multiman)
+{
+    int i;
+
+    gm_80167A14(match->players);
+
+    for (i = 0; i < 6; i++) {
+        match->players[i] = multiman->data.players[i];
+    }
+
+    gm_801B0620(match->players, multiman->data.players[0].c_kind,
+                multiman->data.players[0].color, 1, gm_804D68F0);
+
+    for (i = 1; i < 6; i++) {
+        match->players[i].team = !match->players[0].team;
+        match->players[i].xC_b1 = false;
+    }
+
+    gm_8016F088(match);
+}
+
 void gm_801B7154(GameScene* scene)
 {
     VsModeData* temp_r31;
     UnkMultimanData* temp_r30;
     s32* temp_r29;
     StartMeleeData* temp_r3;
-    int i;
 
     PAD_STACK(8);
 
@@ -664,20 +685,7 @@ void gm_801B7154(GameScene* scene)
 
     temp_r3->rules = temp_r31->data.rules;
     gm_801B69C0(temp_r3);
-    gm_80167A14(temp_r3->players);
-
-    for (i = 0; i < 6; i++) {
-        temp_r3->players[i] = temp_r31->data.players[i];
-    }
-
-    gm_801B0620(temp_r3->players, temp_r31->data.players[0].c_kind,
-                temp_r31->data.players[0].color, 1, gm_804D68F0);
-
-    for (i = 1; i < 6; i++) {
-        temp_r3->players[i].team = !temp_r3->players[0].team;
-        temp_r3->players[i].xC_b1 = false;
-    }
-    gm_8016F088(temp_r3);
+    gmMultiman_InitPlayers(temp_r3, temp_r31);
     gm_80182554(temp_r3->players[0].c_kind, 0x22);
     temp_r29 = gmMainLib_8015D6F8(
         gm_CKindToSelKind(temp_r31->data.players[0].c_kind));
@@ -753,28 +761,6 @@ void gm_801B7688(GameScene* scene)
 static inline VsModeData* getMultimanData(void)
 {
     return &gmMainLib_804D3EE0->unk_1490;
-}
-
-static inline void gmMultiman_InitPlayers(StartMeleeData* match,
-                                          VsModeData* multiman)
-{
-    int i;
-
-    gm_80167A14(match->players);
-
-    for (i = 0; i < 6; i++) {
-        match->players[i] = multiman->data.players[i];
-    }
-
-    gm_801B0620(match->players, multiman->data.players[0].c_kind,
-                multiman->data.players[0].color, 1, gm_804D68F0);
-
-    for (i = 1; i < 6; i++) {
-        match->players[i].team = !match->players[0].team;
-        match->players[i].xC_b1 = false;
-    }
-
-    gm_8016F088(match);
 }
 
 static inline void gmMultiman_InitRecord(VsModeData* multiman, u16* record,
