@@ -218,7 +218,7 @@ decompilation dictates.
 ### Specialized types
 - Single character: `char`
 - Strings: `char*`
-- Unknown 32 bit pointer: `UNK_T`.
+- Unknown 32-bit pointer: `UNK_T`.
 - Enums: `enum_t` as a placeholder until the actual enum is defined.
 - OS Timestamps: `OSTime`
 - Struct padding: `char`
